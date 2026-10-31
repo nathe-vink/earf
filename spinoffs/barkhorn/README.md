@@ -114,6 +114,10 @@ brand"). Not live: main needs the owner's yes.
 - **Press kit PDF** (`viewer/presskit.mjs`): the press page printed with its own print styles, four A4 pages.
 - **Header and home:** Journal in the header's pages; "Notes from the bench" on the home page above the enquiries.
 - **Footer:** Journal and Press (and Privacy once the waitlist is on).
+- **For the owner's deploy decision:** `launch/r47-what-changes.pdf`, before and after at 1440 and 390 px, page by page.
+- **Campaign slots** (`CAMPAIGN` in `web.py`, empty): one entry per picture (product, source render, per colour or
+  shared, where it sits in the gallery, its label, caption and alt) and `web.py --images` puts the product sessions'
+  finals into the galleries; tested with a stand-in on a scratch copy. Nothing goes in before the owner picks.
 
 ## Round 31: every picture final, the amplifier's plate as it is, and pictures for a launch (the owner's notes of 2026-10-18; in progress)
 

@@ -525,6 +525,7 @@ def image_meta():
             mid = f'spin/{k}-{SPIN_HOME:02d}.webp'
             w, h = size(mid)
             views['spin'] = dict(src=f'img/{mid}', w=w, h=h, n=SPIN_N, home=SPIN_HOME, base=f'img/spin/{k}-', **ground(mid))
+        views.update(campaign_views('speaker', k))
         w, h = size(f'turn-{k}.jpg')
         views['turn'] = dict(src=f'img/turn-{k}.jpg', w=w // 6, h=h // 4, **ground(f'turn-{k}.jpg', (0, 0, w // 6, h // 4)))
         meta[k] = views
@@ -551,6 +552,7 @@ def product_meta():
             views = {'hero': dict(hero, bg=ground(hero['src'][4:])['bg'], **({'shown': shown} if shown else {}))}   # the stage
             # carries the picture's own ground on past its sides (round 35: the page's paper beside a 4:5 lamp drew its edges)
             views.update({v: pic(n) for v, n in shared if pic(n)})
+            views.update(campaign_views(lamp, k))
             cols[k] = dict(views=views, card=dict(card or hero, **({'shown': shown} if shown else {})))
         out[lamp] = cols
     tt = {}
@@ -808,7 +810,8 @@ def body():
                 for k, num, name, icon, tint, line, cover in CLOUDS],
         hues=E.HUES, care=CARE[1],
         lamps={k_: dict(name=name, kind=kind, line=line, facts=facts, colours=pm[k_], route=SLUG[k_]) for k_, name, kind, line, alt, facts in LAMPS} if lighting else {},
-        tt=dict(TT, colours=tt) if tt else None, view3d=view3d())
+        tt=dict(TT, colours=tt) if tt else None, view3d=view3d(),
+        campaign=[{x: c[x] for x in ('product', 'view', 'after', 'label', 'caption', 'alt')} for c in CAMPAIGN])
     # a phone frame of the hero or the room, where one was made (re-framed, not cropped); with the hero's, its links
     # give way on phones to the names under it, the boxes being the landscape frame's
     tall = lambda f: os.path.exists(os.path.join(IMG, f))
@@ -973,6 +976,47 @@ SPIN_SRC = os.path.join(ROOT, 'renders', '2026-10-31', 'barkhorn', 'spin47')
 SPIN_ARC, SPIN_W = [i % 36 for i in range(-2, 7)], 600     # spin47's file numbers, from -20 to +60 degrees of turn
 SPIN_N, SPIN_HOME = len(SPIN_ARC), 2                        # it opens on frame 2, the stills' own angle
 SPIN_NAME = {'red': 'ember', 'orange': 'dust', 'amber': 'acid', 'green': 'poison', 'blue': 'ice', 'violet': 'haze', 'ice': 'fog', 'black': 'smoke'}
+
+
+# round 47: slots for the campaign finals (the product sessions', 2026-10-31), empty until the owner picks. Each entry
+# adds one picture to a product's gallery: `product` the page's id ('speaker', 'dome' for Hemisphere, 'orb' for Core),
+# `view` its key, `src` the render under the repository ({name} for each colour's name, e.g. ember, when the picture is
+# per colour; without it the one picture shows on every colour's page), `after` the view it follows ('' to lead),
+# `label` the thumbnail's name, `caption` and `alt` (with {name} for the colour). To swap one in: add the entry, then
+# `python3 web.py --images`. Example (not live):
+#   dict(product='speaker', view='campaign', src='renders/2026-10-31/barkhorn/tropos-campaign/{name}.png', after='habitat',
+#        label='Campaign', caption='{name}, ...', alt='Tropos in {name} ...')
+CAMPAIGN = []
+
+
+def make_campaign():
+    """The campaign slots' pictures: site/img/campaign/<product>-<view>-<key>.jpg (2400 wide) and -1200.jpg, or
+    <product>-<view>.jpg for one shared picture; a source not to hand keeps what is there."""
+    made = []
+    os.makedirs(os.path.join(IMG, 'campaign'), exist_ok=True)
+    for c in CAMPAIGN:
+        for k, name in (SPIN_NAME.items() if '{name}' in c['src'] else [(None, None)]):
+            p = os.path.join(ROOT, c['src'].format(name=name))
+            if not os.path.exists(p):
+                continue
+            base = f"campaign/{c['product']}-{c['view']}" + (f'-{k}' if k else '')
+            im = Image.open(p)
+            made += [save(im, base + '.jpg', 2400, q=84), save(im, base + '-1200.jpg', 1200, q=82)]
+    return made
+
+
+def campaign_views(product, k):
+    """The campaign pictures in site/img for a product's page in colour `k`, as gallery views."""
+    out = {}
+    for c in CAMPAIGN:
+        if c['product'] != product:
+            continue
+        for f in (f"campaign/{product}-{c['view']}-{k}.jpg", f"campaign/{product}-{c['view']}.jpg"):
+            if os.path.exists(os.path.join(IMG, f)):
+                w, h = Image.open(os.path.join(IMG, f)).size
+                out[c['view']] = dict(src=f'img/{f}', w=w, h=h, fill=True)
+                break
+    return out
 
 
 def make_spin():
@@ -2198,6 +2242,12 @@ const TT_VIEWS = [['studio', 'In the studio', c => `${D.tt.name} in ${c.name}, i
                   ['dusk', 'At dusk', c => `${D.tt.name} in ${c.name} at dusk, its base glowing.`],
                   ['open', 'Cover open', () => 'Its cover open.'], ['detail', 'Arm and platter', () => 'The arm and the platter.'],
                   ['pod', 'The motor apart', () => 'The motor in its own pod, standing clear of the plinth.']];
+// the campaign slots (CAMPAIGN in web.py): each one's view placed in its product's list, after the view it names
+for (const c of D.campaign || []) {
+  const list = c.product === 'speaker' ? SPEAKER_VIEWS : LAMP_VIEWS[c.product]; if (!list) continue;
+  const row = [c.view, c.label, x => c.alt.replace('{name}', x.name), x => c.caption.replace('{name}', x.name)];
+  const at = c.after ? list.findIndex(v => v[0] === c.after) + 1 : 0; list.splice(at > 0 || !c.after ? at : list.length, 0, row);
+}
 const PRODUCTS = [
   { id: 'speaker', line: 'speakers', lineName: 'Speakers', route: 'speaker', kind: 'Horn loudspeaker', name: c => c.name,
     num: c => `Tropos ${c.num}`, copy: c => c.line, views: k => BY[k].views, VIEWS: SPEAKER_VIEWS,
@@ -2639,7 +2689,7 @@ def main():
     ap.add_argument('--sources', metavar='DIR', help="the working notes' folder, for the photographs, room, drawings and coins")
     a = ap.parse_args()
     if a.images:
-        print('pictures made:', len(make_images(a.sources)) + len(make_spin()))
+        print('pictures made:', len(make_images(a.sources)) + len(make_spin()) + len(make_campaign()))
     print(build())
 
 
