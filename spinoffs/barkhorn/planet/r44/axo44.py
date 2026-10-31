@@ -66,9 +66,9 @@ def scene(out, scale, samples):
     gm.node_tree.nodes['Principled BSDF'].inputs['Base Color'].default_value = lin('#efebe4')
     bpy.ops.mesh.primitive_plane_add(size=120, location=(P.L / 2, P.W / 2, -0.12))
     bpy.context.active_object.data.materials.append(gm)
-    cam = bpy.data.cameras.new('cam'); cam.type = 'ORTHO'; cam.ortho_scale = 22.0
+    cam = bpy.data.cameras.new('cam'); cam.type = 'ORTHO'; cam.ortho_scale = 29.0
     co = bpy.data.objects.new('cam', cam); sc.collection.objects.link(co); sc.camera = co
-    cx, cy, cz = P.L / 2 + 0.2, P.W / 2 + 0.2, 0.8
+    cx, cy, cz = P.L / 2 + 0.6, P.W / 2 + 0.2, 1.0
     az, el, dist = math.radians(-128), math.radians(42), 60.0
     co.location = (cx + dist * math.cos(el) * math.cos(az), cy + dist * math.cos(el) * math.sin(az), cz + dist * math.sin(el))
     d = (cx - co.location.x, cy - co.location.y, cz - co.location.z)
@@ -107,4 +107,10 @@ if __name__ == '__main__':
         if ob.name.startswith(KEEP):
             continue
         cut(ob, CUT)
+    # the box's top, as the lid's gypsum seen from above (mid gray, not the felt black of the cavity)
+    lm = bpy.data.materials.new('axo-lid'); lm.use_nodes = True
+    lm.node_tree.nodes['Principled BSDF'].inputs['Base Color'].default_value = lin('#77736c')
+    bpy.ops.mesh.primitive_plane_add(size=1.0, location=((P.LANT['x0'] + P.LANT['x1']) / 2, (P.LANT['y0'] + P.LANT['y1']) / 2, P.LANT['h'] + 0.002))
+    o = bpy.context.active_object; o.scale = (P.LANT['x1'] - P.LANT['x0'] - 0.04, P.LANT['y1'] - P.LANT['y0'] - 0.04, 1.0)
+    o.data.materials.append(lm)
     scene(out, scale, samples)
