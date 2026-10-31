@@ -41,8 +41,10 @@ VIEWS = {
     # p0 look: too dark, the left stack out of frame: the camera back by the drape's opening, both stacks in; the
     # stacks' spots, the seats' light and the exposure up
     'listening': dict(camera={'position': [9.85, 2.2, 1.25], 'target': [13.3, 3.8, 0.85], 'lens_mm': 20, 'level': True,
-                              'fstop': 4.0, 'focus': [12.6, 3.6, 0.8]}, exposure=5.0,
-                      lights={'stack': {'power_w': 90.0}, 'seats': {'power_w': 30.0}}),
+                              'fstop': 4.0, 'focus': [12.6, 3.6, 0.8]}, exposure=3.6,
+                      # p1 proof, seen before judging: overexposed (median 111, the seats and rug blown): exposure 5.0 to
+                      # 3.6, the seats' light and the back felt's wash halved
+                      lights={'stack': {'power_w': 90.0}, 'seats': {'power_w': 15.0}, 'drape': {'irradiance': 0.8}}),
 }
 
 
