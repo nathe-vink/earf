@@ -1,0 +1,313 @@
+{
+ "stage1": {
+  "impression": "A terraced acrylic ball glows saturated red on a near-black wood desk with books at left, but the glow puts almost no light on the desk, books or wall, so it reads as a lit object pasted into a dark room. The black base disappears into the table, the faces of the rings are flat in tone, and hard white rectangular highlights on the ring edges look CG.",
+  "score": 5.5
+ },
+ "blocking_9": [
+  "The lamp's centre is not pinned at the red channel: r_median in [520,330,680,460] is now 249 and must be 235 or lower, so the amber tint is not pushed to red",
+  "A visible pool of coloured light on the table next to the base: lum_median 22 or higher in [300,600,450,660] and [750,600,900,660] (now about 10), falling off away from the lamp",
+  "The black base is separated from the table by a rim or edge light: crush_pct below 40 in [450,570,750,650] (now 82.8)",
+  "Cool dusk against the warm lamp: the wall's b_median at or above about 0.7 \u00d7 its r_median (now 11 vs 30, all one brown)",
+  "Something near the lamp catches its light so the 'coloured light on the table' can be read, not just inferred",
+  "No hard rectangular specular cards on the ring edges (now lum_p95 161 in a 50 \u00d7 30 tick at [750,355,800,385])"
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "post",
+   "problem": "The lamp's red channel is at clipping, which pushes the amber acrylic to a flat red with no tonal shape.",
+   "evidence": {
+    "region": [
+     520,
+     330,
+     680,
+     460
+    ],
+    "measured": "r_median 249, g 94, b 77, lum_range 14.8; delta-E2000 24.6 against #FF9A2E; profile across the ball 122, 127, 127, 123: flat"
+   },
+   "change": {
+    "setting": "exposure (EV)",
+    "from": "as set",
+    "to": "-0.5"
+   },
+   "expected": "The ball's red comes off the ceiling, the amber hue and the ring terraces gain tonal separation, and the range inside the ball widens to at least 25 levels.",
+   "accept": {
+    "region": [
+     520,
+     330,
+     680,
+     460
+    ],
+    "metric": "r_median",
+    "op": "between",
+    "value": [
+     200,
+     235
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "set",
+   "problem": "The dark veneer absorbs the lamp's light, so the table beside the base is no brighter than the table a metre away and the shot loses its point.",
+   "evidence": {
+    "region": [
+     300,
+     600,
+     900,
+     640
+    ],
+    "measured": "x profile 9.0, 9.3, 9.9, (base), 10.7, 9.6, 9.2: no falloff from the lamp; under the lamp [380,640,820,720] lum_median 12.2"
+   },
+   "change": {
+    "setting": "table veneer",
+    "from": "walnut",
+    "to": "oak"
+   },
+   "expected": "A warm pool on the table around the base, about 2.5\u00d7 brighter next to the base than at the frame edges, after the exposure drop in c1.",
+   "accept": {
+    "region": [
+     750,
+     600,
+     900,
+     660
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     22,
+     50
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The black anodised base is crushed and merges with the table, so the lamp has no foot.",
+   "evidence": {
+    "region": [
+     450,
+     570,
+     750,
+     650
+    ],
+    "measured": "crush_pct 82.8, lum_median 0.0; base-to-table edge step 1.8 levels"
+   },
+   "change": {
+    "setting": "room fill watts",
+    "from": "as set",
+    "to": "+80%"
+   },
+   "expected": "A readable grazing highlight along the base's edge and the knurled knob, with the base's body still near black.",
+   "accept": {
+    "region": [
+     450,
+     570,
+     750,
+     650
+    ],
+    "metric": "crush_pct",
+    "op": "between",
+    "value": [
+     10,
+     40
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The fill is the same warm brown as the lamp's spill, so the room and the lamp share one hue and the glow does not separate.",
+   "evidence": {
+    "region": [
+     850,
+     50,
+     1180,
+     400
+    ],
+    "measured": "wall r/g/b median 30/14/11, lum_range 4.6"
+   },
+   "change": {
+    "setting": "room fill colour",
+    "from": "as set",
+    "to": "#A8BCDD"
+   },
+   "expected": "A cool blue-grey wall and book faces against the amber ball, a complementary split that reads as dusk.",
+   "accept": {
+    "region": [
+     850,
+     50,
+     1180,
+     400
+    ],
+    "metric": "b_median",
+    "op": "between",
+    "value": [
+     18,
+     40
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The dusk world is too weak to give the room a sky-blue ambient level, so the background is a muddy brown-black.",
+   "evidence": {
+    "region": [
+     20,
+     100,
+     300,
+     330
+    ],
+    "measured": "lum_median 27, b_median 20 vs r 36"
+   },
+   "change": {
+    "setting": "dusk world strength",
+    "from": 0.05,
+    "to": 0.12
+   },
+   "expected": "The upper left of the wall picks up a cool gradient and stays at least 60 levels darker than the ball.",
+   "accept": {
+    "region": [
+     20,
+     100,
+     300,
+     330
+    ],
+    "metric": "b_median",
+    "op": "between",
+    "value": [
+     24,
+     48
+    ]
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "set",
+   "problem": "Nothing near the lamp catches its light, and the right half of the table is empty and black.",
+   "evidence": {
+    "region": [
+     850,
+     500,
+     1150,
+     650
+    ],
+    "measured": "lum_median 8.3, lum_range 5.7"
+   },
+   "change": {
+    "setting": "props",
+    "from": "books",
+    "to": [
+     "books",
+     "plate with two pears, 80 to 140 mm right of the base, front edge level with the base's front"
+    ]
+   },
+   "expected": "The pears' faces toward the lamp go amber and fall off to cool shadow on their far sides, which shows the lamp's light spilling onto real objects.",
+   "accept": {
+    "region": [
+     830,
+     540,
+     1000,
+     660
+    ],
+    "metric": "lum_p95",
+    "op": "between",
+    "value": [
+     40,
+     110
+    ]
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "camera",
+   "problem": "The camera's high angle does not catch the glow's reflection in the table, which would double the coloured light on the table.",
+   "evidence": {
+    "region": [
+     380,
+     660,
+     820,
+     760
+    ],
+    "measured": "lum_median 12.2, crush_pct 24.9 below the base: no reflection"
+   },
+   "change": {
+    "setting": "camera position (elevation above table)",
+    "from": "as set",
+    "to": "-40 mm, target unchanged"
+   },
+   "expected": "A soft amber reflection streak in the veneer under the ball, and the ball sitting slightly higher against the wall.",
+   "accept": {
+    "region": "part:table",
+    "metric": "lum_p95",
+    "op": "between",
+    "value": [
+     30,
+     90
+    ]
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "asset",
+   "problem": "The ring edges carry small hard-edged white rectangles, reflections of a small light source, that read as CG rather than as cast acrylic.",
+   "evidence": {
+    "region": [
+     750,
+     355,
+     800,
+     385
+    ],
+    "measured": "lum_p95 160.7 against a surround of about 97; a rectangle with a hard edge, also at [380,290,420,360] with p95 138.7"
+   },
+   "change": {
+    "setting": "room fill (size)",
+    "from": "current area light",
+    "to": "area light at least 1200 \u00d7 900 mm, same position and watts per c3, with a soft falloff"
+   },
+   "expected": "The highlights on the ring edges become long soft gradients with no hard rectangle edges.",
+   "accept": {
+    "region": [
+     750,
+     355,
+     800,
+     385
+    ],
+    "metric": "lum_p95",
+    "op": "between",
+    "value": [
+     100,
+     140
+    ]
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Lighten the acrylic tint, or thin the thick centre, so the ball reads as amber rather than red",
+   "why": "Even off the clip, the centre's g/r ratio (94/249) is far from amber. The tint is calibrated to the maker's published transmission, so if the hue still reads red after c1, the calibration should be checked, not changed for a picture."
+  },
+  {
+   "request": "Give the inside of the ball more tonal variation from the opal globe",
+   "why": "Inside the ball the light is flat (range 14.8). The globe's position and the lamp's design are fixed, and this is the main thing keeping the hero from looking like glass."
+  }
+ ],
+ "score_if_fixed": 7.0,
+ "duel": {
+  "against": "the current Core's lit hero",
+  "winner": "current hero",
+  "proposal_score": 5.6,
+  "hero_score": 6.8,
+  "distinctive_proposal": 6,
+  "distinctive_hero": 3
+ }
+}

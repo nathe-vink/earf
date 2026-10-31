@@ -557,11 +557,11 @@ def shot_core_sample(lit, stackmix=None, out=None, scale=1.0, samples=512, tag='
         world(hdri='kiara_9_dusk', strength=0.09 if contour else 0.12, rotation=200)      # r3 c7 / r4 c5
         if True:
             # r3 c5: a 600 x 80 strip behind and 40 deg right at the base's height, for its edges
-            rimb = area('base-rim', (0.55, 0.30, tz + 0.03), (0, 0, 0), (0.6, 0.08), 2.5, '#FFF1E2')     # in front of the wall
+            rimb = area('base-rim', (0.55, 0.12, tz + 0.03), (0, 0, 0), (0.6, 0.08), 2.5, '#FFF1E2')     # off the wall
             aim(rimb, tz + 0.015)
         area('room-fill', (-1.2, -1.0, 1.9), (55, 0, -40), (1.0, 1.0), 2.1 if contour else 0.7,
              '#9EB8FF' if contour else '#9FB0CC')                                          # r3 c3
-        kick = area('kicker', (-0.45, 0.30, tz + 0.08), (0, 0, 0), (0.6, 0.10), 0.8, '#FFF4E8'); aim(kick, tz + 0.01)
+        kick = area('kicker', (-0.45, 0.12, tz + 0.08), (0, 0, 0), (0.6, 0.10), 0.8, '#FFF4E8'); aim(kick, tz + 0.01)
         sheen = area('sheen', (0.87, -0.5, tz + 0.12), (0, 0, 0), (0.15, 1.2), 0.5, '#FFF4E8'); aim(sheen, tz + 0.09)
         render_settings(1600, 1067, samples, scale, exposure=-2.2 if contour else 1.3, look='AgX - Medium High Contrast')
     else:
