@@ -58,7 +58,10 @@ The `stock-ember-trucast` flavour renders that dark ruby box, if the owner wants
 - **Formed:** stock tints exist at 3/8 in (9.5 mm): 2423 (10 in stock at AC Plastics), 2064 and 2074. The formed horn
   is drawn in 10 mm, and 9.5 mm stays above the 4 mm floor in the corners (about 4.6 estimated, against 4.9 at 10). The
   quarter trial tells. So a formed horn in stock tint is possible. Its colour is the 3/8 in sheet's, through 5 to 8.5 mm
-  walls: about half as deep as the laminated horn's 10 to 30 mm.
+  walls: about half as deep as the laminated horn's 10 to 30 mm. **The render shows this matters for Smoke.** A formed
+  horn in stock 2074 is nearly clear, and the black throat, pod and driver show through as a hard shape
+  (`renders/2026-10-31/barkhorn/horn-choice/choice-formed-smoke.png`). A formed Smoke horn needs the custom deep lot. A
+  formed Ember horn in stock 2423 reads as a pale glassy red.
 - **Laminated:** stock 1/2 in through 10 to 30 mm reads as deep as the site's horn lot for Ember (`laminated-horn.md`).
 - **Do not form the first horn in clear and tint later.** The trial's first shot is clear on purpose (`forming-trial.md`),
   but the shown horn should carry its colour. Keep the custom deep lot for the matched production casts.

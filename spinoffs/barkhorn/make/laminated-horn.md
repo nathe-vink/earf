@@ -57,6 +57,12 @@ That is what a maker does that dilutes the dye in thick sheet so the code keeps 
 - **If the vendor holds the dye per mm** (R1's "deep" case), 1/2 in 2423 is about three times deeper and 2074 is near
   black. The horn would then read deeper than the site, which suits Smoke and still reads as red for Ember.
 
+**The renders** (`renders/2026-10-31/barkhorn/horn-choice/`, NOTES.md) bear this out:
+- The stepped horn is the deepest stock colour in both Ember and Smoke. In Smoke its terrace edges read as bright silver
+  lines.
+- The smooth horn is paler than the stepped one.
+- The formed horn in stock sheet is pale, and in 2074 nearly clear.
+
 ## The air path
 
 - The air path is machined through the bonded stack on 5 axes, from the same CAD surface as the formed horn's plug,
