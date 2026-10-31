@@ -123,8 +123,12 @@ while lanes run. Deck: https://claude.ai/artifact/3sihYaT4ckNTF6WE7SWR7x (v29). 
 
 ## Owner questions, in order (one at a time)
 1. Tagline A-D (asked, waiting).
-2. Mantle: A Strata Float / B Outcrop / Outcrop's cover on Strata's float (show the dusk frame and Outcrop in custom
-   Ember side by side).
+2. Color depth (affects every picture): A the site's lighter tints (Ember, Poison and Haze cabinets need a custom cast
+   lot or lighter codes) / B stock sheet's deeper tints (buyable today: a deep red, a bottle green). Picture:
+   r33-speaker-horn asset/link_example_strata.png (site) over link_example_strata_trucast.png (stock). Sub-question:
+   does the horn match the cabinet's depth or go deeper (TINTS.md)? Thick parts (Mantle laminae, Core, stepped horns)
+   go near-black in stock at full loading: a lighter custom pour is likely needed for those either way.
+3. Mantle: A Strata Float (v2, after its fix pass) / B Outcrop / Outcrop's cover on Strata's float.
 Not questions (FYI with pictures when there's a natural moment): Core's contact dock; the line slide; editions finals.
 
 ## After check-in 4 (23:00-23:30 UTC)
@@ -150,3 +154,21 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
   stacked trays; double-sheet seams; screws visible in the posts; dust in the gap. Both: the bold white top-corner EARF
   mark "cheapens" (line-wide lesson: small etched marks). Mantle lane restarted for one short fix pass on Strata Float
   (Ice studio + dusk Ember, max 2 critic rounds), so the owner's A is at its best when asked.
+
+## Check-in 5 (23:47 UTC)
+- Lamps: cordless set 4 of 10 (Ember, Dust, Acid, Poison; ~15 min a frame; done ~01:15).
+- Editions 60c8806c: path-traced heroes: Firn 5.0 (stopped at 3), Iron 5.5, Stamper 4.5 (black coves make clear acrylic
+  read black). Told: Iron in the lamps lane's pass-4 Core rig (matches the product shots, cordless); Firn and Stamper
+  bright-field; CC0 textures; count restarts, Iron first; owner sees editions at about 6.5+.
+- Biomes bda14e11: panorama round 3 = 3.5, duel lost 3.0 vs the Fog headland 6.5; master 4800 x 888 exists but fails the
+  gate (protocol limit reached). Told: one seam-frame TEST with photographed CC0 HDRI plates + rendered speakers on shadow
+  catchers + a physical divider at the seam; critic + duel; 6.0+ -> decide panorama vs four seam frames; else stop.
+- Speaker: Strata studio hero rendering (30b0baf4); tints reconciled (209c97b9, TINTS.md: the owner's color-depth
+  question above); the Tropos RFQ texts in American English with no starting color (e0a5fa5e).
+- Bar 831de995: look 2 r3 with photographed CC0 oak, plaster, leather; no people; a record, a glass, a coat.
+- Brand: Moho look 2 r1 = 5.5 (textures alone didn't lift it yet); Relief look 2 rendering.
+- Four-pieces: r4 critic 6, lost both duels to the golden room 6-7 (frontal "one idea" beats a room tour); r6 re-laid
+  for the ruling (frontal symmetric pair on plaster, Mantle between, Core forward-left, Hemisphere forward-right; Core
+  109 px, Hemisphere 127 px, Tropos 333 px tall); day and dusk rendering, then 3840 finals.
+- Mantle e777dee6: Strata Float v2 (one grid, subordinate base, one-slab tiers, bonded posts, etched edge mark), $3,784;
+  critic pending.
