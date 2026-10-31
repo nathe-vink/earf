@@ -1,0 +1,18 @@
+{
+ "image": "proofs/room-p3-post.png",
+ "stage1": {"impression": "A convincing golden-hour living room: low sun from the left glazing rakes the plaster, throws the horns' silhouettes onto the wall and puts a green stain of light through the cabinet onto the walnut credenza, so the pair is lit by the room's light. What gives it away is the foreground: a pale, flat, neutral-grey rug slab and a near-white sheer bar at the left edge both outshine the speakers, and the left speaker sits in the dim side of the light, so the pair read unevenly and the green is less luminous than it could be.", "score": 7.0},
+ "verdict": "iterate",
+ "blocking_9": ["the rug a warm mid-tone (lum 100-130 in [400,720,1200,800]), not a flat neutral slab", "both cabinets carry sun through the acrylic (left disc within about 8 lum of the right; now 98 vs 117)", "the left sheer under lum 200", "the upper wall one calm field for the heading", "the feet seated with a soft darker contact shadow"],
+ "changes": [
+  {"id": "c1", "change": {"setting": "prop 3 rug", "from": "value 0.6, tint #8A7A64, pile 0.016", "to": "value 0.32, tint #7E6C56, pile 0.022, displace 0.009"}, "accept": {"region": [400, 720, 1200, 800], "metric": "lum_median", "op": "between", "value": [95, 135]}},
+  {"id": "c2", "change": {"setting": "sun azimuth / elevation", "from": "-68 / 17", "to": "-60 / 15"}, "accept": {"region": [360, 470, 460, 570], "metric": "lum_median", "op": ">=", "value": 110}},
+  {"id": "c3", "change": {"setting": "prop 11 sheer", "from": "#F3EEE4, open 0.15", "to": "#DDD3C4, open 0.45, folds 3"}, "accept": {"region": [20, 0, 75, 750], "metric": "lum_median", "op": "<=", "value": 200}},
+  {"id": "c4", "change": {"setting": "prop 0 floor coat", "from": "coat 0.15, coat_rough 0.35", "to": "coat 0.25, coat_rough 0.22"}, "accept": {"region": [345, 690, 495, 705], "metric": "lum_median", "op": "<=", "value": 105}},
+  {"id": "c5", "change": {"setting": "lamp north irradiance", "from": "0.45", "to": "0.8"}, "accept": {"region": [1150, 150, 1430, 260], "metric": "lum_median", "op": "between", "value": [100, 140]}},
+  {"id": "c6", "change": {"setting": "prop 9 vase", "from": "rotate 20", "to": "rotate 200, or an all-ivory or terracotta vase"}, "accept": null},
+  {"id": "c7", "change": {"setting": "lamp bounce", "from": "[-0.6, -3.6, 1.35], 0.4", "to": "[0.4, -3.6, 1.0], 0.55"}, "accept": {"region": [1300, 650, 1440, 800], "metric": "lum_median", "op": "between", "value": [72, 100]}}
+ ],
+ "out_of_scope": [{"request": "the cover disc lighter than #2E4A2C", "why": "a fixed part; mostly sun on the fabric"}, {"request": "the right horn's specular streak", "why": "the horn's surface; only the light can move it"}],
+ "score_if_fixed": 8.1,
+ "note": "Condensed. Round 3 of 3 for this look: not applied (the protocol's limit)."
+}

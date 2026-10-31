@@ -11,7 +11,7 @@ stills are therefore not finished.
 
 | shot | state |
 |---|---|
-| room (a pair at home at golden hour, Poison) | three critic rounds (below) |
+| room (a pair at home at golden hour, Poison) | three critic rounds (below): 6.5, 6.0, **7.0**; the round-3 proof is the best, at proof size |
 | above (the horn from above, Ember) | proofs `above-p1`, `above-p2`; p2 crops the cabinet at the bottom; no critic yet |
 | night, inside, corner | not proofed on the new horn yet |
 
@@ -21,12 +21,17 @@ stills are therefore not finished.
 |---|---|---|---|---|
 | 1 | `proofs/room-p1-post.png` | 6.5 | front fill too strong (the covers wash out, the interiors look self-lit); the floor bounce lamp; exposure and sun lower; camera left so the window explains the light; the vase lit flat; a rug for the foreground | c1 to c4, c6, c7 applied (`critic/room-r1.json`) |
 | 2 | `proofs/room-p2-post.png` | 6.0 | the horn's grey shadow centre-wall (sun up to 17°); the north fill halved; the rug a cool slab; the sheer clipping at the left; the right speaker crowding the edge; a softer sun | c1 to c7 applied; no other rug texture is in the local CC0 cache, so the same one is tinted (`critic/room-r2.json`) |
-| 3 | `proofs/room-p3-post.png` | — | — | — |
+| 3 | `proofs/room-p3-post.png` | **7.0** | the rug still a pale neutral slab (its tint does not take: lum 180); the left cabinet in the dim side of the sun (sun azimuth −60, elevation 15); the sheer a white bar; the feet's contact; lift the shaded upper wall for the heading; the vase's green glaze; the right floor corner | **not applied**: three rounds is the protocol's limit for this look (`critic/room-r3.json`, score if fixed 8.1) |
 
-The room rig plateaued at about 6.5 in round 31 too (`spinoffs/barkhorn/room31/NOTES.md`). Two of round 2's changes
-undo round 1's: sun elevation 14 → 11 → 17, and the camera −0.45 → −0.25. That is the protocol's sign that the concept,
-not the settings, is the limit. The likely limits:
-- the pair's bright lime interiors under any daylight;
-- a set too clean to read as photographed.
+**Where the room stands.** Three rounds took it from 6.5 to 6.0 to 7.0. The round-3 critic thinks 8.1 is in reach
+with its seven changes. The protocol stops this look at three rounds. Two of round 2's changes undid round 1's (sun
+elevation 14 → 11 → 17; the camera −0.45 → −0.25), but round 3 then gained a full point.
 
-For a campaign room, the next step is a different room or a different hour, not a fourth round on this one.
+The next session should:
+1. **Fix the rug's tint first.** This is a bug, not a critic note: the rug renders neutral grey (lum 180) at tint
+   #8A7A64, value 0.6 and tint_mix 1.0. The set kit's rug function is probably not applying `tint` to the
+   poly_wool_herringbone texture.
+2. **Count round 3's changes as a new look:** a new sun (azimuth −60, so the shaft crosses the left cabinet), a darker
+   rug and the sheer changed. Start the count again with a fresh critic.
+3. **Render the final** at about 2400 px and 256 samples (the round-31 rig took 2.3 h at 2880 px and 512, so this is
+   about 1 h). Then apply `room31/post.py`.
