@@ -18,7 +18,7 @@ VIEWS = {
     # along the counter from its far end: the zinc, the Hemispheres, the back bar and the record wall, the decks
     # p2 (both p1 critics 5.0, converged): Mother EARF into the frame (28 mm, aimed into the room), exposure down, the
     # zinc darker and rougher, the pendants' downlights softer, the record wall in pools, the Cores up a little
-    'counter': dict(camera={'position': [10.35, 2.55, 1.42], 'target': [4.6, 3.6, 1.55], 'lens_mm': 28, 'level': True,
+    'counter': dict(camera={'position': [10.35, 2.55, 1.42], 'target': [4.6, 3.3, 1.55], 'lens_mm': 24, 'level': True,
                             'fstop': 4.0, 'focus': [7.3, 4.0, 1.15]}, exposure=3.6,
                     lights={'pend': {'power_w': 20.0, 'cone_deg': 24.0}, 'rw': {'power_w': 8.0, 'cone_deg': 16.0, 'color': 2700},
                             'street': {'radius_m': 0.6}},
