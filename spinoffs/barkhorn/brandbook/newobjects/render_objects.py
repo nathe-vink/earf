@@ -267,32 +267,49 @@ def camera(loc, target, lens=50, fstop=0.0, focus=None):
     return o
 
 # ---------------------------------------------------------------------------------------------------------- the shots
+def ph(aid, scale=None, tint=None, tint_mix=0.0, rough_mul=1.0, bump=1.0):
+    """A photographed CC0 texture set from Poly Haven (TEXTURES.md; fetch_textures.py), laid at its real size."""
+    sys.path.insert(0, os.path.join(HERE, '..', '..', '..', '..', 'studio', 'engine')); import assets
+    return assets.pbr(bpy, aid, '2k', scale=scale, tint=tint, tint_mix=tint_mix, rough_mul=rough_mul, bump=bump)
+
+def vinyl():
+    """Black vinyl: concentric grooves at about 0.1 mm as a faint bump and a sheen drawn round the disc (anisotropic,
+    tangent round the spindle), a smooth lead-in band at the rim and a run-out band at the label."""
+    m = basic('vinyl', '#0B0A0C', 0.3); nt = m.node_tree; p = nt.nodes['Principled BSDF']
+    p.inputs['Anisotropic'].default_value = 0.85
+    tg = nt.nodes.new('ShaderNodeTangent'); tg.direction_type = 'RADIAL'; tg.axis = 'Z'; nt.links.new(tg.outputs[0], p.inputs['Tangent'])
+    tc = nt.nodes.new('ShaderNodeTexCoord')
+    wv = nt.nodes.new('ShaderNodeTexWave'); wv.wave_type = 'RINGS'; wv.inputs['Scale'].default_value = 600; wv.inputs['Distortion'].default_value = 0.0
+    nt.links.new(tc.outputs['Object'], wv.inputs['Vector'])
+    bp = nt.nodes.new('ShaderNodeBump'); bp.inputs['Strength'].default_value = 0.02; bp.inputs['Distance'].default_value = 0.00005
+    nt.links.new(wv.outputs['Fac'], bp.inputs['Height']); nt.links.new(bp.outputs['Normal'], p.inputs['Normal'])
+    return m
+
 def shot_moho(sc):
-    sweep('#8F887D', 0.85, z0=-0.075, y_wall=0.9, R=0.4)   # r2 c8: a stop darker   # critic r1 c5: darker, so the clear top separates
-    sc.view_settings.look = 'AgX - Base Contrast'           # critic r1 c6
-    # Mantle, as far as the frame needs it: the plinth and platter in Dust (2422), the record, the spindle
+    # look 2 (2026-10-31, the coordinator: photographed textures; a hard key so the caustics throw tinted light):
+    # Mantle on an oak table against a lime-plaster wall; a small hard sun from behind-left through the puck
+    slab('table', -1.2, -0.9, -0.115, 1.2, 0.6, -0.075, ph('oak_wood_planks'))
+    slab('wall', -2.0, 0.6, -0.115, 2.0, 0.65, 1.5, ph('beige_wall_001', tint='#CFC6B8', tint_mix=0.3))
+    sc.view_settings.look = 'AgX - Medium High Contrast'
     slab('plinth', -0.235, -0.19, -0.075, 0.235, 0.19, -0.049, acrylic('dust-pour'))
     ring('platter', 0.155, 0, -0.047, 0.025, acrylic('dust-pour'))
-    rec = basic('vinyl', '#0C0B0E', 0.14)   # critic r1 c4 (grooves as bump, anisotropic sheen) tried: at this distance it greyed the whole disc, so not kept
-    ring('record', 0.1524, 0.0036, -0.0021, 0.0020, rec)
-    ring('label', 0.0505, 0.0036, -0.00009, 0.00012,   # proud of the record (it sat inside it, flush, and rendered black)
-         basic('label', '#A9744F', 0.85, noise=0.02))   # r2 c2: an uncoated paper label, mid-tone (a white one reads as a mat)
-    ring('label-ring', 0.040, 0.0385, 0.000031, 0.00001, basic('label-ink', '#E8DFCF', 0.7))
+    ring('record', 0.1524, 0.0036, -0.0021, 0.0020, vinyl())
+    ring('label', 0.0505, 0.0036, -0.00009, 0.00012, basic('label', '#8E8577', 0.85, noise=0.03))   # uncoated paper, mid-tone so the colored light reads on it
+    for r0, r1, c in ((0.046, 0.0455, '#3E3A36'), (0.040, 0.0385, '#7A3E2A'), (0.026, 0.0255, '#3E3A36')):   # printed rings
+        ring(f'ink{r0}', r0, r1, 0.000031, 0.00001, basic(f'ink{r0}', c, 0.7))
     ring('spindle', 0.0036, 0, -0.047, 0.060, basic('steel', '#C9CCCF', 0.15, 1.0))
-    t = ['dust-pour', 'acid-pour', 'ice-pour', 'clear']
-    for i, tn in enumerate(t):
+    for i, tn in enumerate(['dust-pour', 'acid-pour', 'ice-pour', 'clear']):
         ring(f'moho{i}', 0.033, 0.0125, i * 0.0127 + GAP / 2, 0.0127 - GAP, acrylic(tn),
              bond_top=acrylic(tn, 'bond') if i < 3 else None, bond_bottom=acrylic(tn, 'bond') if i > 0 else None)
-    ring('brass', 0.01245, 0.0039, 0.0002, 4 * 0.0127 - 0.0006, basic('brass', '#B8923F', 0.22, 1.0))
+    ring('brass', 0.01245, 0.0039, 0.0002, 4 * 0.0127 - 0.0006, basic('brass', '#C49A45', 0.18, 1.0))
     sc.render.resolution_x, sc.render.resolution_y = 1800, 1200
-    win = area('window', (-0.9, 1.3, 0.35), (0, 0, 0.02), 0.9, 1400, '#FFF4E6'); win.visible_glossy = False   # flagged off the record's mirror   # daylight from behind left: edges glow, shadows fall forward
-    area('key', (0.75, -0.6, 0.45), (0, 0, 0.025), 1.2, 70, '#EEF2F8')   # r2 c7     # critic r1 c3: lower, stronger
-    flag = slab('flag', -1.0, 0.30, -0.07, 1.0, 0.32, 0.6, basic('flag', '#0A0A0B', 0.9))   # c5: a black flag that only the record and polished tops mirror
+    spot('sun', (-0.42, 0.30, 0.20), (0.0, 0.0, 0.02), 140, 14, 0.002, '#FFF1DE')     # the hard key: the tints thrown forward-right onto the label and record
+    win = area('window', (-1.2, 0.5, 0.9), (0, 0, 0.0), 1.0, 200, '#F4F6FA'); win.visible_glossy = False   # soft daylight, the fill side
+    area('key', (0.8, -0.7, 0.6), (0, 0, 0.02), 0.6, 18, '#EEF2F8')                     # a small front key: the grooves' sheen
+    flag = slab('flag', -1.0, 0.30, -0.07, 1.0, 0.32, 0.6, basic('flag', '#0A0A0B', 0.9))   # mirrored only: black behind the puck's sides
     for v in ('visible_camera', 'visible_shadow', 'visible_diffuse', 'visible_transmission'): setattr(flag, v, False)
-    card = slab('fillcard', -0.62, -0.30, -0.002, -0.60, -0.10, 0.12, basic('card', '#F4F1EC', 0.9)); card.visible_camera = False; card.visible_glossy = False   # r2 c3: out of the puck's faces
-    rim = area('rim', (-0.17, 0.30, 0.07), (0, 0, 0.025), 0.12, 120, '#FFE8D0'); rim.visible_glossy = False
-    sun = area('sun', (-0.20, 0.12, 0.14), (0, 0, 0.02), 0.04, 60, '#FFF1DE'); sun.visible_glossy = False   # r2 c1: small, behind-left, 30 deg: the tints thrown forward-right onto the label   # its mirror image on the record greyed the vinyl   # critic r1 c1: straight through the layers at camera
-    camera((0.28, -0.50, 0.24), (0.0, 0.0, 0.022), lens=100, fstop=5.6)   # r2 c5: the top face and the cast light       # critic r1 c2: the puck on the lower third
+    sc.view_settings.exposure = -0.3
+    camera((0.28, -0.50, 0.24), (0.0, 0.0, 0.022), lens=100, fstop=5.6)
 
 def shot_lithos(sc):
     # a room corner: oak floor, two plaster walls, a stack of books for scale, window light from the left
@@ -456,7 +473,8 @@ def shot_bedrock(sc):
 
 def shot_relief(sc):
     from contours import layers
-    wall = slab('wall', -2, 0.025, -1, 2, 0.075, 2.5, basic('plaster', '#D9D3C8', 0.9, noise=0.2))   # critic r1 c5: the panel stands 25 mm off on a hidden cleat
+    # look 2: photographed plaster and oak; a hard key raking from upper left, so each step throws a tinted, crisp shadow
+    wall = slab('wall', -2, 0.025, -1, 2, 0.075, 2.5, ph('beige_wall_001', tint='#D9D3C8', tint_mix=0.3, bump=0.25))   # the panel 25 mm off on a hidden cleat
     caustic(wall, False, True)
     k = 0.001; th = 0.0056
     slab('backing', -0.3, -0.006, 0.9, 0.3, 0.0, 1.5, basic('white-back', '#F2F0EC', 0.6))
@@ -473,16 +491,16 @@ def shot_relief(sc):
             o.location = (0, -0.006 - th - (lev - 1) * th + 0.0, 1.2)
     sc.render.resolution_x, sc.render.resolution_y = 1800, 1200
     area('bar', (0.0, -0.075, 1.53), (0.0, -0.01, 0.95), 0.6, 120, '#FFEEDC', size_y=0.015)   # its LED bar: a line of light just above the top edge, washing down
-    room = area('room', (-1.2, -2.0, 1.75), (0, 0, 1.05), 2.0, 70, '#E8EEF6'); room.visible_glossy = False   # r2 c1: front-left, onto the lower half (not level: level lit the backing in a band)
+    room = area('room', (-1.2, -2.0, 1.75), (0, 0, 1.05), 2.0, 35, '#E8EEF6'); room.visible_glossy = False   # front-left fill (not level: level lit the backing in a band)
+    spot('sun', (-1.1, -0.55, 2.1), (0.0, -0.03, 1.15), 380, 22, 0.003, '#FFF1DE')       # the hard key
     rimr = area('rimR', (0.6, 0.3, 0.7), (0.25, -0.03, 1.1), 0.1, 15, '#F4FFF8'); rimr.visible_glossy = False; rimr.visible_camera = False   # r2 c4
-    sys.path.insert(0, os.path.join(HERE, '..', '..', '..', '..', 'studio', 'engine')); import materials as SM
-    slab('sideboard', -1.1, -0.48, 0.0, 0.45, 0.02, 0.76, SM.make(bpy, 'oak-r', 'oak'))      # r2 c7: a sideboard under it, for scale
+    slab('sideboard', -1.1, -0.48, 0.0, 0.45, 0.02, 0.76, ph('oak_wood_planks'))      # a sideboard under it, for scale
     sc.view_settings.exposure = -1.0                                                   # r2 c3
     camera((1.55, -2.30, 1.05), (0.20, -0.03, 1.16), lens=85, fstop=5.6, focus=2.7)     # r2 c6: the panel left, air below, the right third for type
 
 def shot_meridian(sc):
     sys.path.insert(0, os.path.join(HERE, '..', '..', '..', '..', 'studio', 'engine')); import materials as SM
-    wall = slab('wall', -2, 0.0, -1, 2, 0.05, 3.0, SM.make(bpy, 'plaster', 'plaster', {'color': '#CFC6B8', 'bump': 0.06}))   # critic r1 c5
+    wall = slab('wall', -2, 0.0, -1, 2, 0.05, 3.0, ph('beige_wall_001', tint='#CFC6B8', tint_mix=0.3, bump=0.25))   # critic r1 c5
     cz = 1.45
     def disc(name, r, depth, h, mat, x=0.0, z=cz, r_in=0.0):
         o = ring(name, r, r_in, 0, h, mat)
@@ -509,7 +527,7 @@ def shot_meridian(sc):
     for nm, zz, w in (('graze', cz + 0.30, 12), ('grazeL', cz - 0.30, 6)):                    # r2 c1: into the face's edge, above and below
         g = area(nm, (0.0, -0.06, zz), (0.0, -0.033, cz + (0.18 if zz > cz else -0.18)), 0.6, w, '#FFF4E8', size_y=0.05)
         g.visible_glossy = False
-    r = spot('rake', (-0.35, -1.25, 1.95), (0.05, -0.03, cz), 220, 20, 0.02, '#FFF1E0')          # r2 c3: nearer the lens, the ring hugs the rim
+    r = spot('rake', (-0.35, -1.25, 1.95), (0.05, -0.03, cz), 220, 20, 0.003, '#FFF1E0')          # r2 c3: nearer the lens, the ring hugs the rim
     r.data.spot_blend = 0.6
     br = area('brasscard', (0.9, -1.2, 1.9), (0, -0.04, cz), 0.3, 20, '#FFF2DC')               # r2 c4: seen in the brass
     br.visible_diffuse = False
