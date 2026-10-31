@@ -9,8 +9,10 @@ is internal: remove it before sending). Values marked est. are the funding resea
 97ca003e, `R2-funding.md` §4.8). Contact routes were seen on each organisation's own site on 31 October 2026.
 
 The facts every email rests on: the debut night, **Tuesday 19 January 2027**, is the firm thing. The eight-week pop-up after it
-is planned, not funded: the bar lane shows it paid for by the Vacant to Vibrant grant and free rent, partners like
-these, and deposits (`planet/r42/POPUP.md`); the investor deck's $50,000 covers the prototypes and a $4,000 debut night
+is planned, not funded, and now follows in February and March: Vacant to Vibrant's matching takes 2 to 6 months, so
+the debut itself moves to a hired or lent room at or near Fort Mason in FOG week (venue not yet named). The bar lane's
+plan pays for the pop-up with the Vacant to Vibrant grant and free rent, partners like these, and deposits
+(`planet/r42/POPUP.md`); the investor deck's $50,000 covers the prototypes and a $4,000 debut night
 only. So the emails promise the night, describe the room as planned, and say plainly that a partner helps make it happen; SF Art Week
 runs **16–24 January**, FOG Design+Art **21–24 January** at Fort Mason; the guests are the 48 organisations in
 `../launch/INVITE-LIST.md` and the press in `../launch/MEDIA-PLAN.md`.
@@ -34,7 +36,8 @@ runs **16–24 January**, FOG Design+Art **21–24 January** at Fort Mason; the 
 
 **Drinks and the law.** California's tied-house rules bar alcohol makers and wholesalers from furnishing money or things
 of value to on-sale licensees, with narrow exceptions (B&P §25500). Structure any spirits partnership with counsel; serve
-through a licensed caterer (the pop-up plans Type 58 caterer nights). A non-alcoholic partner avoids the question.
+through a licensed caterer (the pop-up plans Type 58 caterer nights). A non-alcoholic partner avoids the question; and if alcohol at or near Fort Mason needs a
+Park Police or other permit, the zero-proof partners (Ghia, The New Bar) are the easy path.
 
 ---
 
@@ -45,17 +48,17 @@ through a licensed caterer (the pop-up plans Type 58 caterer nights). A non-alco
 Dear [Name / team at the hotel],
 
 I'm [Your name], and I make EARF: hi-fi and light in cast acrylic, tinted all the way through, in eight colours, here in
-San Francisco. On Tuesday 19 January our first pair of Tropos, a horn loudspeaker, plays for the first time, in a
-debut night, in a listening room we plan to keep open for eight weeks after it.
+San Francisco. On Tuesday 19 January our first pair of Tropos, a horn loudspeaker, plays for the first time, at a
+debut night near Fort Mason in FOG week. After it comes a listening room we plan to open in February and March.
 
 It's FOG week, and SF Art Week. The guests are the design galleries in town for the fair, the city's studios and
 showrooms, its hi-fi shops and listening bars, record labels, and the design and hi-fi press.
 
-We're looking for one hotel to make the week theirs. You would be named on the invitation, host the night's Session
-(one album, start to finish, under your name), and have its photographs. Your support is also part of what would let
-the room stay open after the night. What we'd ask is rooms for a few
-visiting guests and press, or a room for the after-hours Session, or a contribution of $5,000 to $15,000. Later, if it
-suits you, a listening suite fitted by EARF.
+We're looking for one hotel to make the night theirs, and our first ask is the room itself: an event room for the
+evening of 19 January, or a lent space we can fill with sound and light for a night. In return you would be named on
+the invitation, host the night's Session (one album, start to finish, under your name), and have its photographs.
+Beyond the room, rooms for a few visiting guests and press, or a contribution of $5,000 to $15,000, would also help
+make the February room happen. Later, if it suits you, a listening suite fitted by EARF.
 
 The brief is attached: two pages. Could we talk for twenty minutes in the next fortnight?
 
@@ -73,9 +76,9 @@ Dear [Name / partnerships team at the brand],
 
 I'm [Your name], and I make EARF: hi-fi and light in cast acrylic, coloured all the way through, in eight tints from
 Ember to Smoke. On Tuesday 19 January, in FOG Design+Art week, the first pair of our horn loudspeaker plays for the first
-time, at a debut night in San Francisco; after it, we plan to keep a listening room open for eight weeks.
+time, at a debut night near Fort Mason in FOG week; after it, a listening room we plan to open in February and March.
 
-We'd like one drinks partner for the night, and for the room's Fridays if it goes ahead: your drinks named on the invitation, a drink for
+We'd like one drinks partner for the night, and for the room's Fridays in February and March if it goes ahead: your drinks named on the invitation, a drink for
 each tint, your bottles on the bar, and a Session in your name, with the guests a room of collectors, designers, hi-fi
 people and press. We'd ask for product and bartending in kind, through a licensed caterer, or a cash contribution,
 structured properly for California's rules.
@@ -97,13 +100,13 @@ EARF · earf.world · [contact line]
 Dear [Name / team at the label or shop],
 
 I'm [Your name], and I make EARF in San Francisco: a horn loudspeaker, lamps and a record player in cast acrylic,
-tinted all the way through. On Tuesday 19 January the first pair of the speaker plays for the first time, opening an
-debut night in the week of FOG Design+Art, with a listening room we plan to keep open for eight weeks after it.
+tinted all the way through. On Tuesday 19 January the first pair of the speaker plays for the first time, at a
+debut night near Fort Mason in the week of FOG Design+Art, with a listening room we plan to open in February and March after it.
 
 The room runs on records, and we'd like them to be yours: crates chosen with you, a selector or artist set on the night,
 and the first Session, one album start to finish in front of six listeners, perhaps recorded and pressed in the tint of
-the night. You'd be named on the invitation and in the spring press, and your support is part of what would let the room stay
-open after the night. We'd ask for the records, the set and the Session in kind, or a contribution toward the pressing.
+the night. You'd be named on the invitation and in the spring press, and your support is part of what would let the
+February room happen. We'd ask for the records, the set and the Session in kind, or a contribution toward the pressing.
 
 The brief is attached. Could we meet at your shop, or ours, before Christmas?
 
