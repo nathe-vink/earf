@@ -8,8 +8,8 @@ date, and check them again before relying on them.
 |---|---|
 | R1-stock-colours.md | Stock cell-cast colours nearest the eight tints, for prototypes without a custom-colour minimum |
 | R2-funding.md | Paths to $50,000 in 90 days and to a seed in 12 months, ranked for EARF |
+| R3-compliance.md | US certification and compliance for all four products: what's mandatory, labs, costs, the cheapest path |
 | R4-market-pricing.md | Comparables, recommended prices, channels and market facts for the deck |
 | R5-events-press.md | Fairs, shows, awards and press, with 2026–27 deadlines |
 | R6-manufacturing-geography.md | The US, Mexico or Asia for the acrylic, with partners and tariffs |
 
-R3 (certification and compliance) follows when it is finished.
