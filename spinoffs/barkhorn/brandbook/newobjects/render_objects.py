@@ -397,10 +397,10 @@ def shot_cairn(sc):
 
 def shot_bedrock(sc):
     sc.world.node_tree.nodes['Background'].inputs['Color'].default_value = lin('#D9D3CA')
-    sc.world.node_tree.nodes['Background'].inputs['Strength'].default_value = 0.4
-    sweep('#C9C2B6', 0.85, w=10.0, depth=6.0)
+    sc.world.node_tree.nodes['Background'].inputs['Strength'].default_value = 0.2   # critic r1 c6
+    sweep('#A39B8F', 0.85, w=30.0, depth=15.0, y_wall=2.0, height=6.0)                             # c4, c5: wider, further, a stop darker
     prof = [(0, 0), (0.30, 0), (0.30, 0.15), (0.25, 0.15), (0.25, 0.185), (0.18, 0.185), (0.18, 0.215), (0.09, 0.215), (0.09, 0.23), (0, 0.23)]
-    tn = 'dust'
+    tn = 'dust-pour'   # critic r1: stock 2422 at an inch reads red; a lighter custom pour reads amber (captioned)
     for xi in (-0.235, 0.235 - 0.0254):
         for l in range(2):
             x0 = xi + l * 0.0127 + GAP / 2
@@ -415,14 +415,15 @@ def shot_bedrock(sc):
     cols = ['#D8D2C6', '#2B2B30', '#B23A2A', '#E4C36A', '#3E5A78', '#ECE8E1', '#6B5A4A', '#1F3B2F', '#C9C3B6', '#8E8A84']
     x = -0.19
     while x < 0.19:
-        th = 0.0034; lean = float(rng.uniform(-0.05, 0.05))
-        o = slab(f'lp{x:.3f}', -th / 2, -0.1575, 0.0, th / 2, 0.1575, 0.315, basic(f'sl{x:.3f}', cols[int(rng.integers(len(cols)))], 0.8))
-        o.location = (x, 0.0, 0.02); o.rotation_euler = (0, lean, 0)
-        x += th + 0.0015
+        th = 0.0034; lean = float(rng.uniform(-0.012, 0.012))   # sleeves stand nearly upright, so none cut into its neighbour
+        o = slab(f'lp{x:.3f}', -th / 2, -0.1575, 0.0, th / 2, 0.1575, 0.315, basic(f'sl{x:.3f}', cols[int(rng.integers(len(cols)))], 0.9, noise=0.03))
+        o.location = (x, float(rng.uniform(-0.004, 0.004)), 0.02); o.rotation_euler = (0, lean, 0)
+        x += th + 0.0025
     sc.render.resolution_x, sc.render.resolution_y = 1800, 1200
-    area('key', (-1.2, -1.0, 1.3), (0, 0, 0.15), 1.4, 120)
-    spot('sun', (-1.1, 0.9, 0.55), (-0.2, -0.1, 0.05), 900, 26, 0.004, '#FFF0DA')   # low daylight from behind: the plates throw amber forward
-    area('fill', (1.0, -1.4, 0.6), (0, 0, 0.15), 1.2, 40, '#E6ECF5')
+    area('key', (-1.75, -0.3, 1.6), (0, 0, 0.15), 2.0, 60)                                  # c1: bigger, softer, off the sleeve's mirror angle
+    spot('sun', (-1.3, 1.1, 0.30), (-0.2, -0.1, 0.05), 600, 25, 0.004, '#FFF0DA')           # c3: lower, rakes through the front plate
+    rim = area('rim', (0.6, 0.9, 0.5), (-0.1, 0, 0.12), 1.0, 60, '#FFE8D0', size_y=0.1); rim.visible_glossy = False   # c2: through the plates' edges
+    area('fill', (1.4, -1.6, 0.6), (0, 0, 0.15), 1.2, 25, '#E6ECF5')                         # c4, c6
     camera((-0.95, -0.75, 0.42), (0.05, 0, 0.14), lens=50, fstop=0)
 
 def shot_relief(sc):
