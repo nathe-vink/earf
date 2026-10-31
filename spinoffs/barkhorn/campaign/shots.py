@@ -168,12 +168,47 @@ def lineup():
     return s
 
 
+HORN_PARTS = ['waveguide', 'horn-throat', 'horn-pads']
+OPTIONS = 'studio/products/barkhorn-horn-options.json'
+VARIANTS = 'studio/products/barkhorn-variants.json'
+
+
+def proposal(design, base='studio/shots/barkhorn/lookbook31/look-red-off-tall.json', flavour='cloud-red'):
+    """A design-pass proposal (spinoffs/barkhorn/variants) in a shot that already shows the whole speaker, cover off
+    (the owner, 2026-10-31): 'current' (the baseline), 'strata' (the stepped laminated horn and the woofer's caldera)
+    or 'topo' (the Topo horn). The Cloud stays the cabinet; the proposals' parts come from their own product files,
+    in the Cloud's frame, with the parts they replace hidden."""
+    s = load(base)
+    s['title'] = f'Tropos, {design} (design pass), {flavour}'
+    blk = s.pop('product') if 'product' in s else s.pop('products')[0]
+    blk['flavour'] = flavour
+    inst = [{**i, 'flavour': flavour} for i in blk['instances']]
+    for i in inst:
+        i['hide'] = sorted(set(i.get('hide', [])) | {'cloth-disc'})
+    blk['instances'] = inst
+    prods = [blk]
+    if design in ('strata', 'topo'):
+        for i in inst:
+            i['hide'] = sorted(set(i['hide']) | set(HORN_PARTS) | ({'woofer-ring'} if design == 'strata' else set()))
+        keep = lambda i: {k: v for k, v in i.items() if k not in ('hide', 'options')}
+        if design == 'strata':
+            prods.append({'def': OPTIONS, 'flavour': flavour,
+                          'instances': [{**keep(i), 'hide': ['horn-trial-plug', 'horn-trial-base', 'horn-plan-b-smooth']} for i in inst]})
+            prods.append({'def': VARIANTS, 'flavour': flavour, 'instances': [{**keep(i), 'hide': ['horn-topo']} for i in inst]})
+        else:
+            prods.append({'def': VARIANTS, 'flavour': flavour, 'instances': [{**keep(i), 'hide': ['caldera-*']} for i in inst]})
+    s['products'] = prods
+    return s
+
+
 SHOTS = {'room': room, 'room-final': lambda: room(critic_round=3),   # round 3's look (7.0): the final 'night': night, 'inside': inside, 'corner': corner, 'above': above,
          'horn-formed': lambda: horn_pair(False), 'horn-laminated': lambda: horn_pair(True), 'lineup-stock': lineup}
 for _c in ('ember', 'smoke'):
     for _r in ('formed', 'stepped', 'smooth'):
         SHOTS[f'choice-{_r}-{_c}'] = (lambda r=_r, c=_c: horn_choice(r, c))
 SHOTS['choice-terraces-ember'] = lambda: horn_choice('stepped', 'ember', macro=True)
+for _d in ('current', 'strata', 'topo'):
+    SHOTS[f'design-{_d}'] = (lambda d=_d: proposal(d))
 
 if __name__ == '__main__':
     os.makedirs(OUT, exist_ok=True)
