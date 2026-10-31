@@ -151,7 +151,7 @@ current heroes. The rounds are logged in `critic/LOG.md`.
 |---|---|---|---|
 | **Terrace** | lit 5.5, 5.0, 5.5 (three rounds: closed); day 5.0 | **won 4 of 4**: 7.0–5.5, 6.5–5.5 (sides swapped), 6.8–6.0 against `dining-hero`; 7.0–5.5 against `macro-hemisphere` (daylight) | **met** (duels) |
 | **Halo** | lit 5.5 | **won**: 6.5–5.5 against `dining-hero` | **met** (duel) |
-| **Contour Core** | lit 5.0, 5.0, 5.5 (look 1 closed; look 2 rendering); day 5.5 | lit: lost 3 (about 5.5–7.0, the last 6.2–6.8); **day: won** 6.5–5.0 against `macro-core` | **met** (day duel) |
+| **Contour Core** | lit 5.0, 5.0, 5.5 (look 1 closed); look 2: 5.5; day 5.5 | lit: lost 4 (about 5.5–7.0; look 2 5.6–6.8); **day: won** 6.5–5.0 against `macro-core` | **met** (day duel) |
 | **Core Sample** | lit 5.0, 5.5 (look 1); 5.0 (look 2) | lost 3 (about 5.0–5.5 against 7.0) | **not met** |
 
 In every duel, won or lost, the critic rated the proposal the more distinctive object: **6 to 7 out of 10, against
@@ -189,8 +189,21 @@ The pictures: `renders/2026-10-31/barkhorn/strata/` (`NAME-lit.png`, `NAME-day.p
    - Light inside a polished bore reached the table only through the lamp's own emitters, path-traced.
    - The daylight frames use a window's skylight and a hard low sun for the coloured shadows.
 
+## Cordless (the owner, 2026-10-31: Core stays cordless)
+
+The owner ruled that Core recharges with no cord in sight (`../CORE-RECHARGE.md`). That note recommends a contact
+dock: a polished black cast-acrylic disc with two concentric stainless rings, which meet two spring pins in the base,
+so the lamp charges at any rotation. The two table proposals take the same dock:
+- **Contour Core:** its base (Ø120 × 30) is the same size as Core's. It takes the same 150 × 8 dock and the same two
+  pins at r 30 and r 44, through two holes in its underside. The adapter, sealed jack and v1 plug-in cord in
+  `contour_core.py` give way to the battery base of Core (three LiFePO4 18650 cells or, if the owner takes option 1 in
+  `CORE-RECHARGE.md`, a listed Li-ion pack).
+- **Core Sample:** its foot (Ø96) takes a Ø126 dock with rings at r 24 and r 36. The spine's heat (about 64 °C at the
+  top, above) is the bigger question for a battery foot, which can't sink heat as well as a solid one.
+- Neither is in the CAD yet: the owner picks a route, and a proposal is chosen, first.
+
 ## For the owner to decide
 
 1. A family (Strata or Contour), or one lamp from each.
 2. Tints for laminations: the light stock tints now (Dust, Clear, Fog, Ice), or a custom lighter Ember.
-3. Core's power: the v1 plug-in in every proposal; the battery stays an option in each base.
+3. Core's power: cordless, on the contact dock (`../CORE-RECHARGE.md`, superseding the v1 plug-in drawn here).
