@@ -55,4 +55,52 @@ San Francisco galleries first.
 | fuseproject | 1401 16th St | info@; press@fuseproject.com | fuseproject.com/contact | Product-design peers, and press pull | [verified] |
 | March | 3075 Sacramento St | Phone from a third-party listing; its site returned 404 | afar.com listing | A design-led store beside The Future Perfect | [unverified] |
 
-Not verified and left out: DEN Los Angeles (no own site found), Hedge Gallery (domain parked), Arkitektura (site 503).
+## C. Listening bars and hi-fi shops
+
+| Organisation | Where | Contact route | Source | Why in the room | Status |
+|---|---|---|---|---|---|
+| Audio Vision SF | 1628 California St | info@audiovisionsf.com | audiovisionsf.com/pages/contact | The city's best-known high-end hi-fi shop, with its own listening events: Tropos's buyers | [verified] |
+| Music Lovers Audio | 2295 Bush St; Berkeley | info@musicloversaudio.com | musicloversaudio.com/contact | A long-running dealer with two showrooms; a first stockist conversation | [verified] |
+| Bar Shiru | Uptown Oakland | info@barshiru.com | barshiru.com/contact-1 | The Bay Area's first hi-fi listening bar (2019): the model for the room | [verified] |
+| Side A | 2814 19th St, Mission | hello@sideasf.com; events@sideasf.com | sideasf.com | A café by day, a vinyl listening lounge by night: the request ritual's audience | [verified] |
+| Harlan Records | 18 Harlan Pl, Union Square | info@harlanrecords.com | harlanrecords.com/contact-reservations | A Japanese-style listening bar with album sessions: the closest match to the pop-up | [verified] |
+| Bar Crenn | 3131 Fillmore St | info@barcrenn.com | barcrenn.com/contact | Rebuilt as a hi-fi room (7x7, 2023); design- and food-led guests | [verified] |
+
+## D. Records: labels and shops
+
+| Organisation | Where | Contact route | Source | Why in the room | Status |
+|---|---|---|---|---|---|
+| Stranded Records | 1055 Valencia St; Oakland | info@strandedrecords.com | strandedrecords.com/pages/contact | A serious curated shop in both cities; a partner for the room's crates | [verified] |
+| Superior Viaduct | San Francisco | press@; info@superiorviaduct.com | superiorviaduct.com/pages/contact | A reissue label with a new slate: a Session built on a release | [verified] |
+| Dark Entries Records | San Francisco | Contact form on its Bandcamp page | darkentriesrecords.bandcamp.com | The city's defining archival label, with a local DJ following | [verified] (Bandcamp) |
+| Originals Vinyl | 701 Fillmore St | Contact page; published phone | originalsvinyl.com/contact | Used vinyl and ultrasonic cleaning: customers who care how records play | [verified] |
+| 1-2-3-4 Go! Records | Oakland | Store info page; published phone | 1234gorecords.com/info | Oakland's largest selection of new records | [verified] |
+| Light in the Attic | Seattle / LA | press@lightintheattic.net | lightintheattic.net/pages/about-us | A reissue label whose catalogue suits a listening session | [verified] |
+| Craft Recordings | (Concord) | info@craftrecordings.com | craftrecordings.com/pages/contact-us | Fantasy, the Bay Area jazz catalogue, and audiophile reissues | [verified] |
+
+## E. Hotels and hospitality
+
+| Organisation | Where | Contact route | Source | Why in the room | Status |
+|---|---|---|---|---|---|
+| San Francisco Proper | 1100 Market St | Press through its agency, proper@autumncommunications.com; events page | properhotel.com/san-francisco | A design-led hotel; its group's press notes a piece on hotels for music lovers | [verified] |
+| Palihotel San Francisco (Palisociety) | 417 Stockton St | events@palihotelsf.com; info@palisociety.com | palisociety.com/contact-us | A design-driven group: lamps in a lobby, a listening corner | [verified] |
+| The Battery | 717 Battery St | press@thebatterysf.com | thebatterysf.com/press | A members' club and hotel whose members are Planet EARF's buyers | [verified] |
+| Hotel Emblem | 562 Sutter St | sales@hotelemblem.com; contact page | hotelemblem.com | A Beat-generation hotel with an arts programme that suits records | [verified] |
+| FW Hospitality (Flour + Water; partner in Trick Dog) | Mission | events@fwhospitality.com | fwhospitality.com | Design-heavy bars and dinners: collaborations around the room | [verified] |
+
+## Not verified, closed or left out
+
+- **Yokai (SoMa) appears to be permanently closed** (The Infatuation, OpenTable). The investor deck's "why now" slide
+  names it among the Bay Area's listening bars; that line may want updating.
+- No own site or contact route confirmed: LEBRETON, Crèvecœur (site 503), DEN Los Angeles, March (site 404), Kissakeko
+  (no website), Amoeba Music (site refused access).
+- Not confirmed as operating: Bar Part Time, Tone of Music Audio, Audio Federation, Hedge Coffee, Vinyl Dreams; Hedge
+  Gallery (domain parked); Arkitektura (site 503).
+- Sites that refused access, not retried: Kimpton, Hotel Kabuki, Hotel Zeppelin, Hotel Spero.
+- Not in San Francisco: Ace Hotel; The LINE's site no longer lists SF; Rosewood SF's opening unconfirmed; Mississippi
+  Records (Portland, Chicago).
+
+## Count
+
+48 organisations with a route: 20 galleries (18 verified), 12 studios and bodies (11 verified), 6 listening bars and
+hi-fi shops, 7 record labels and shops, 5 hotel and hospitality groups. The press is in `MEDIA-PLAN.md`.
