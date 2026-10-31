@@ -357,7 +357,8 @@ def lantern(bpy, p, objs):
     objs.append(diff.object(bpy, emitter(bpy, 'h44-band-led', '#FF8A30', p.get('band_glow', 1.1))))
     objs.append(cap.object(bpy, K.blackened_steel(bpy)))
     # the lit foot: a 100 mm recess with a warm line washing the floor
-    ft = Mesh('h44-lant-foot'); ft.box(x0 + 0.04, y0 + 0.04, 0.0, x1, y1, 0.10)
+    # (a strip along the two seen faces only: a slab across the footprint covered the room's floor, the p2 look)
+    ft = Mesh('h44-lant-foot'); ft.box(x0 + 0.04, y0 + 0.04, 0.0, x0 + 0.10, y1, 0.10); ft.box(x0 + 0.04, y0 + 0.04, 0.0, x1, y0 + 0.10, 0.10)
     objs.append(ft.object(bpy, blk))
     fl = Mesh('h44-lant-footled'); fl.box(x0 + 0.045, y0 + 0.045, 0.085, x0 + 0.055, y1, 0.095)
     fl.box(x0 + 0.045, y0 + 0.045, 0.085, x1, y0 + 0.055, 0.095)
