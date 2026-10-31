@@ -2877,13 +2877,13 @@ def dark_pages():
     if DEBUT:
         routes.append('debut')
         facts = ''.join(f'<dt>{a}</dt><dd>{b}</dd>' for a, b in DEBUT_FACTS)
-        w_, h_ = Image.open(os.path.join(IMG, 'red-studio.jpg')).size
-        webp('img/red-studio.jpg')
+        w_, h_ = Image.open(os.path.join(IMG, 'hero.jpg')).size     # the eight, so no one color reads as the first pair's
+        webp('img/hero.jpg')
         html += f"""
 <main id="debut" hidden>
   <section class="debut-top">
-    <img src="img/red-studio.webp" srcset="img/red-studio-1200.jpg 1200w, img/red-studio.webp 2400w" sizes="100vw" width="{w_}" height="{h_}"
-      alt="Tropos in Ember in the dark, lit from above, its reflection in a black floor" loading="lazy">
+    <img src="img/hero.webp" srcset="img/hero-1200.webp 1200w, img/hero.webp 2400w" sizes="100vw" width="{w_}" height="{h_}"
+      alt="The eight Tropos speakers on a curve, their covers off, Ember to Smoke, each throwing its color on the floor" loading="lazy">
     <div class="wrap debut-words"><p class="eyebrow">You are invited</p><h1>Something in the air.</h1>
       <p class="lede">The first pair of Tropos, heard for the first time. Hi-fi and light in cast acrylic, in eight colors.</p>
       <p class="debut-when">Spring 2027, in San Francisco<br>Date to come</p>
@@ -2896,7 +2896,7 @@ def dark_pages():
 </main>"""
         css += """
 .debut-top { position: relative; color: #F2EFEA; background: #0B0C10; overflow: hidden }
-.debut-top img { display: block; width: 100%; height: auto; max-height: 72vh; object-fit: cover; object-position: 50% 40% }
+.debut-top img { display: block; width: 100%; height: auto; max-height: 72vh; object-fit: cover; object-position: 50% 55% }
 .debut-words { position: relative; padding-block: 8px 48px } .debut-words .eyebrow { color: #A7A39B }
 .debut-words h1 { font-size: clamp(44px, 7vw, 96px) } .debut-words .lede { color: #CFCBC4; max-width: 40ch }
 .debut-when { margin: 22px 0 18px; font: 500 15px/1.6 var(--mono); letter-spacing: 0.1em; text-transform: uppercase }
@@ -3065,9 +3065,9 @@ def share_pages():
         made.append(page(f'color-{low}', f'{name} · EARF', desc, img, f'Tropos in {name} in the studio', col, 'website',
                          {'@context': 'https://schema.org', '@type': 'WebPage', 'name': f'{name} · EARF', 'description': desc}))
     if DEBUT:
-        img = card('red-studio-1200.jpg', 'debut.jpg')
+        img = card('hero-1200.jpg', 'debut.jpg')
         d = 'The first pair of Tropos, heard for the first time. Spring 2027, in San Francisco. Date to come.'
-        made.append(page('debut', 'The EARF debut · Something in the air', d, img, 'Tropos in Ember in the dark', '#0B0C10', 'website',
+        made.append(page('debut', 'The EARF debut · Something in the air', d, img, 'The eight Tropos speakers on a curve, Ember to Smoke', '#0B0C10', 'website',
                          # a WebPage, not an Event, until there is a date: an Event needs a startDate
                          {'@context': 'https://schema.org', '@type': 'WebPage', 'name': 'The EARF debut', 'description': d,
                           'publisher': {'@type': 'Organization', 'name': 'EARF', 'url': URL}, 'image': f'{URL}/{img}'}))
