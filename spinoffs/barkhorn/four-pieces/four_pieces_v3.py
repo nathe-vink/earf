@@ -1,0 +1,143 @@
+"""Four pieces, round 6 on: re-laid for the owner's ruling of 2026-10-31 (r46-owner-notes 6a93885f): "Not lines and dots
+to things. Everything spaced far enough out against a neutral enough background that text next to each object is
+enough. Also should it have a version with the lights on?"
+
+So the frame is built around its labels (layout.py solves them before anything renders):
+- frontal, as the speaker team's golden room that won both blind duels against round 5's three-quarter view (7 to 6
+  twice): the Tropos pair either side of a walnut credenza with Mantle on it, against plain plaster;
+- the room 8.4 m wide so neither side wall shows; the windows are on the left wall, out of frame, and their light comes
+  in from the side;
+- Core on a side table at the left and Hemisphere over a reading chair at the right, both 3 m from the lens, so Core is
+  about 110 px and Hemisphere about 140 px across at 1920 (the coordinator: at least 70 and 90);
+- label zones (380 x 130 at 1920) on plain wall: Tropos's above the left speaker, Mantle's above Mantle between the
+  horns, Core's above it, Hemisphere's to its left (above the right speaker); the header (900 x 160) at the top left.
+
+Two versions, same camera and layout: `day` (golden hour) and `dusk` (lights on).
+
+    python3 spinoffs/barkhorn/four-pieces/four_pieces_v3.py                # writes shots/v3-*.json
+    python3 spinoffs/barkhorn/four-pieces/layout.py shots/v3-day.json      # the label check
+"""
+import copy, json, os, sys
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
+import four_pieces as F                                             # noqa: E402
+
+SHOTS = os.path.join(HERE, 'shots')
+HALF = 4.2                                    # the room's half width (x from -4.2 to 4.2), the back wall at y = 0.95
+
+P = {
+    'spk': 1.25, 'spk_y': 0.53,               # each Tropos 1.25 either side of centre, 0.29 m off the wall
+    'cred': [1.62, 0.44, 0.56],
+    'core': [-1.45, -2.3],                    # the side table's centre (side_table_01, 0.551 tall)
+    'hemi': [1.25, -2.25, 1.55],              # the rim, over the reading chair's inner arm
+    'chair_r': [1.62, -2.2, -62.0],           # the reading chair, turned toward the room and the music
+    'camera': {'position': [0.0, -5.5, 1.1], 'target': [0.0, 0.3, 1.0], 'lens_mm': 28, 'level': True,
+               'fstop': 5.6, 'focus': [0.0, 0.3, 0.8]},
+}
+LABELS = {'tropos': {'of': 'tropos0', 'side': 'above'},
+          'mantle': {'of': 'mantle', 'side': 'above', 'gap': 40},
+          'core': {'of': 'core', 'side': 'above-right', 'dx': -60},
+          'hemisphere': {'of': 'hemisphere', 'side': 'left'},
+          'header': [100, 70]}
+CEILING = 3.2                                 # high enough that its line stays out of the frame
+
+
+def props(pal):
+    out = []
+    for p in F.BASE['set']['props']:
+        fn = p.get('fn')
+        if fn in ('socket', 'recolour', 'rug') or p.get('kind') == 'cable':
+            continue
+        if p.get('shape') == 'asset' and p.get('model') == 'ceramic_vase_02':
+            continue                          # the wall between the horns is Mantle's label's
+        p = copy.deepcopy(p)
+        if fn == 'credenza':
+            p.update({'position': [0.0, 0.718], 'size': P['cred']})
+        if fn == 'books':
+            p['position'] = [-0.6, 0.73, 0.56]
+        if fn == 'floor':
+            p['rect'] = [-HALF, p['rect'][1], HALF, p['rect'][3]]
+        if fn == 'sheer':
+            if p['position'][1] > -1.0:
+                continue                      # the narrow sheer beside the window that is gone
+            p['position'] = [-HALF + 0.1] + p['position'][1:]
+        if fn == 'exterior':
+            p['centre'] = [-HALF - 1.0] + p['centre'][1:]
+        out.append(p)
+    cr = P['chair_r']
+    out += [
+        {'kind': 'kit', 'shape': 'asset', 'model': 'modern_arm_chair_01', 'position': [cr[0], cr[1], 0.0],
+         'rotate': [0, 0, cr[2]], 'scale': 1.0},
+        {'kind': 'kit', 'shape': 'asset', 'model': 'side_table_01', 'position': [P['core'][0], P['core'][1], 0.0],
+         'rotate': [0, 0, 0.0], 'scale': 1.0},
+        {'kind': 'kit', 'shape': 'ext', 'module': 'earf_moon', 'fn': 'orb', 'flavour': pal['lamps'],
+         'spots': [{'position': [P['core'][0], P['core'][1], F.SIDE_H], 'rotate_z': -20}], 'cable': False,
+         'cartridge': 'in'},
+        {'kind': 'kit', 'shape': 'ext', 'module': 'earf_moon', 'fn': 'dome', 'flavour': pal['lamps'],
+         'spots': [{'position': P['hemi']}], 'ceiling': CEILING},
+        {'kind': 'kit', 'shape': 'asset', 'model': 'potted_plant_01', 'position': [-3.6, 0.3, 0.0],
+         'rotate': [0, 0, 30.0], 'scale': 0.95},
+    ]
+    return out
+
+
+def shot(version, palette='p1'):
+    pal = F.PALETTES[palette]
+    s = copy.deepcopy(F.BASE)
+    s.pop('products', None)
+    s['title'] = f'Four pieces, round 6 layout, {version}: Tropos pair, Mantle, Hemisphere, Core'
+    s['products'] = [{'def': 'studio/products/barkhorn-turntable-float.json', 'flavour': pal['hifi'],
+                      'hide': ['lid-*', 'hinges'],
+                      'instances': [{'flavour': pal['hifi'], 'position': [0.0, 0.70, 0.56], 'rotate_z': 0.0}]}]
+    s['tropos'] = [{'tint': F.TINT[pal['hifi']], 'position': [-P['spk'], P['spk_y']], 'rotate_z': 4.0},
+                   {'tint': F.TINT[pal['hifi']], 'position': [P['spk'], P['spk_y']], 'rotate_z': -4.0}]
+    s['set']['props'] = props(pal)
+    s['set']['size'] = [2 * HALF, 7.0, CEILING]; s['set']['center'] = [0.0, -2.55]
+    # the window nearest the back wall threw the sun's band across the header's wall: gone; the sun comes in by the
+    # two forward windows, onto the speakers and the floor, and reaches the back wall only below 0.4 m
+    s['set']['windows'] = [w for w in s['set']['windows'] if w['along'] < 2.0]
+    s['size'] = [3840, 2160]
+    s['camera'] = copy.deepcopy(P['camera'])
+    s['render'] = {**s['render'], 'caustics_refractive': True, 'samples': 128, 'white_balance_k': 5600}
+    s['materials'] = {'glow': {'strength': 1.5}}      # Mantle's base loop, soft by day
+    L = s['lights']
+    L['floorbounce'] = {'off': True}
+    L['north'].update({'irradiance': 0.75, 'position': [0.0, -4.6, 2.2], 'target': [0.0, 0.3, 0.9], 'color': '#CFDDF0'})
+    L['bounce'].update({'irradiance': 0.3, 'position': [0.0, -5.0, 2.2], 'target': [0.0, 0.3, 1.0]})
+    # Mantle's deck caught by a soft card above the camera (round 4's critic, c2)
+    L['mantle_kick'] = {'type': 'area', 'size_m': [0.8, 0.5], 'position': [0.3, -1.4, 1.9],
+                        'target': [0.0, 0.70, 0.66], 'irradiance': 1.2, 'color': '#FFF0DE', 'camera': False}
+    if version == 'day':
+        s['sun'].update({'azimuth_deg': -64.0, 'elevation_deg': 28.0})
+        F.lamps(s['set']['props'], 0.35)
+        s['render']['exposure'] = -0.9
+    else:                                                       # dusk, lights on
+        s['sun'] = {'azimuth_deg': -80.0, 'elevation_deg': 2.0, 'irradiance': 0.0}
+        s['sky'] = {'kind': 'gradient', 'zenith': '#2E3E66', 'horizon': '#6A7BA6', 'ground': '#1E2230', 'strength': 0.8}
+        L['north'].update({'irradiance': 0.30, 'color': '#9FB0D8'})      # the last blue from the windows
+        L['bounce'].update({'irradiance': 0.18, 'color': '#FFD9B0'})     # the room's warm light off the ceiling
+        L['mantle_kick'].update({'irradiance': 0.5, 'color': '#FFD9B0'})
+        s['materials']['glow'] = {'strength': 3.0}
+        for q in s['set']['props']:
+            if q.get('fn') == 'exterior':
+                q['strength'] = 1.0; q['tint'] = '#6F8BD6'
+        F.lamps(s['set']['props'], 1.0)
+        s['render'].update({'exposure': 0.2, 'white_balance_k': 4300})
+    s['labels'] = copy.deepcopy(LABELS)
+    sp = P['spk']; h = P['hemi']; c = P['core']
+    s['anchors'] = {'tropos': [-sp, P['spk_y'] - 0.2, 1.10], 'tropos_right': [sp, P['spk_y'] - 0.2, 1.10],
+                    'mantle': [0.08, 0.70, 0.68], 'hemisphere': [h[0], h[1], h[2] + 0.06],
+                    'core': [c[0], c[1] + 0.02, F.SIDE_H + 0.11]}
+    return s
+
+
+def main():
+    os.makedirs(SHOTS, exist_ok=True)
+    for v in ('day', 'dusk'):
+        json.dump(shot(v), open(os.path.join(SHOTS, f'v3-{v}.json'), 'w'), indent=1)
+        print(f'v3-{v}')
+
+
+if __name__ == '__main__':
+    main()
