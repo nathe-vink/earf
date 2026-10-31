@@ -134,7 +134,7 @@ def popup(bpy, name, p, kit):
     objs = []
     # --- the shell -------------------------------------------------------------------------------------------------
     fl = Mesh('popup-floor'); fl.box(-0.2, 0.0, -0.1, L, W, 0.0)
-    objs.append(fl.object(bpy, LK.floor_mat(bpy, {'floor_tint': p.get('floor_tint', '#6A645D'), 'floor_mix': 0.75,
+    objs.append(fl.object(bpy, LK.floor_mat(bpy, {'floor_tint': p.get('floor_tint', '#6A645D'), 'floor_mix': p.get('floor_mix', 0.75),
                                                   'floor_coat': p.get('floor_coat', 0.3)})))
     wl = Mesh('popup-walls')
     wl.box(-0.2, -T, 0.0, L + T, 0.0, H)                               # the right wall
