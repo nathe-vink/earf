@@ -3,8 +3,8 @@
 Drafts only: nobody has been contacted. The coordinator turns them into Gmail drafts. Each file has a short version
 for a web form (614 characters) and a longer email version. `[Your name]` and `[contact line]` are placeholders.
 
-The risks slide promises "FCC testing is booked with the first build", and Tropos's schedule books the lab in the week
-of 16 November, for testing from late January 2027 (Tropos's pre-scan about 25 January; the lamps follow).
+The risks slide promises "FCC testing is booked with the first build", and the letters ask to book for testing in
+February or March 2027, starting with Tropos; the lamps follow (re-dated 2026-10-31: the debut moved to spring 2027).
 Each letter asks for all four products at once, so one lab can bundle them.
 
 Sources:
