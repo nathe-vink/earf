@@ -39,7 +39,7 @@ VIEWS = {
     # the shop wall by the door: everything in the room is on sale, and this is where it waits
     # p2 (critics 5.0/4.5, converged): night exposure (4.2 to 2.9), the Tropos lit to stay the hero, the Domes and the
     # shelf strips down, the Cores grouped over two shelves (two unlit), the cards bigger, seated camera at 32 mm
-    'shop': dict(camera={'position': [1.0, 1.65, 1.28], 'target': [2.5, 5.9, 1.18], 'lens_mm': 32, 'level': True,
+    'shop': dict(camera={'position': [0.82, 1.84, 1.28], 'target': [2.5, 5.9, 1.18], 'lens_mm': 32, 'level': True,
                          'fstop': 4.0, 'focus': [2.2, 5.7, 1.1]}, exposure=2.9, shop=True,
                  lights={'pend': {'power_w': 20.0, 'cone_deg': 24.0}, 'shop_key': {'irradiance': 0.5}},
                  props=[{'kind': 'kit', 'shape': 'ext', 'path': KIT42, 'fn': 'flatten', 'match': 'Concrete044A', 'contrast': -0.45, 'mean': 0.15}]),
