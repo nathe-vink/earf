@@ -1,0 +1,360 @@
+<title>Planet EARF House Book</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400..700&display=swap">
+<style>
+/* a house book for a listening bar: the room at night (smoked glass, zinc, oak, a brass bowl of coins), dark first */
+:root {
+  --page: #0F0E0D; --paper: #191816; --raise: #211F1C; --ink: #EDE7DD; --muted: #A79F93; --rule: #2E2B27;
+  --brass: #C9A564; --brass-ink: #0F0E0D; --loss: #D9826B; --sheet: #FFFFFF;
+  --sans: 'Instrument Sans', 'Helvetica Neue', Arial, sans-serif; --mono: 'IBM Plex Mono', 'Courier New', monospace;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) {
+  --page: #F3EFE8; --paper: #EAE5DC; --raise: #E2DCD1; --ink: #1B1916; --muted: #5F5950; --rule: #D3CCC0;
+  --brass: #8A6A2E; --brass-ink: #F3EFE8; --loss: #A4432C; --sheet: #FFFFFF; color-scheme: light } }
+:root[data-theme="light"] {
+  --page: #F3EFE8; --paper: #EAE5DC; --raise: #E2DCD1; --ink: #1B1916; --muted: #5F5950; --rule: #D3CCC0;
+  --brass: #8A6A2E; --brass-ink: #F3EFE8; --loss: #A4432C; --sheet: #FFFFFF; color-scheme: light }
+
+* { box-sizing: border-box }
+body { margin: 0; background: var(--page); color: var(--ink); font: 400 17px/1.6 var(--sans) }
+.wrap { max-width: 1080px; margin: 0 auto; padding-block: 0 80px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)) }
+h1, h2, h3 { margin: 0; font-weight: 600; text-wrap: balance }
+h1 { font-size: clamp(36px, 6vw, 68px); line-height: 1.0; letter-spacing: -0.03em }
+h2 { font-size: clamp(26px, 3.4vw, 38px); line-height: 1.08; letter-spacing: -0.02em }
+h3 { font-size: 18px; line-height: 1.3 }
+p { margin: 0 }
+a { color: var(--brass) }
+.eyebrow { font: 500 12.5px/1.3 var(--mono); letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted) }
+.lede { font-size: clamp(18px, 2vw, 21px); line-height: 1.5; color: var(--muted); max-width: 60ch }
+.est { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; color: var(--muted); border: 1px solid var(--rule); border-radius: 3px; padding: 2px 5px; white-space: nowrap }
+code { font: 400 14px/1.4 var(--mono); color: var(--muted) }
+
+.hero { position: relative; margin: 0 calc(-1 * max(16px, env(safe-area-inset-left, 0px))) 0; }
+.hero img { width: 100%; max-width: 100%; height: auto; display: block; aspect-ratio: 3 / 2; object-fit: cover }
+.hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 55%, var(--page)); pointer-events: none }
+header.top { display: grid; gap: 18px; margin-top: -120px; position: relative; padding-bottom: 36px; border-bottom: 1px solid var(--rule) }
+@media (max-width: 700px) { header.top { margin-top: -40px } }
+
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 8px 0 0; padding: 0 }
+.facts div { background: var(--paper); border-radius: 6px; padding: 14px 16px; min-width: 0 }
+.facts dt { font: 500 11.5px/1.3 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted) }
+.facts dd { margin: 6px 0 0; font-size: 22px; font-weight: 600; letter-spacing: -0.01em; font-variant-numeric: tabular-nums }
+.facts dd small { display: block; margin-top: 2px; font-size: 14px; font-weight: 400; letter-spacing: 0; color: var(--muted) }
+
+nav.toc { display: flex; flex-wrap: wrap; gap: 6px 18px; padding: 18px 0 0; font: 500 12.5px/1.6 var(--mono); letter-spacing: 0.08em; text-transform: uppercase }
+nav.toc a { color: var(--muted); text-decoration: none }
+nav.toc a:hover, nav.toc a:focus-visible { color: var(--brass) }
+
+section { display: grid; gap: 22px; padding-block: 52px; border-bottom: 1px solid var(--rule); scroll-margin-top: 12px }
+.head { display: grid; gap: 10px; max-width: 64ch }
+.prose { display: grid; gap: 14px; max-width: 66ch }
+
+.night { list-style: none; margin: 0; padding: 0; display: grid; gap: 0 }
+.night li { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 20px; padding: 18px 0; border-top: 1px solid var(--rule) }
+.night li:first-child { border-top: 0 }
+.night .when { font: 500 12.5px/1.5 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--brass) }
+.night p { max-width: 62ch }
+@media (max-width: 640px) { .night li { grid-template-columns: minmax(0, 1fr); gap: 6px } }
+
+.figs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px }
+.figs .wide { grid-column: 1 / -1 }
+@media (max-width: 720px) { .figs { grid-template-columns: minmax(0, 1fr) } }
+figure { margin: 0; display: grid; gap: 8px; min-width: 0 }
+figure img { width: 100%; height: auto; display: block; border-radius: 6px; background: var(--paper); max-width: 100% }
+figure.sheet img { background: var(--sheet); border: 1px solid var(--rule) }
+figcaption { font-size: 14px; color: var(--muted); line-height: 1.45 }
+
+.scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--rule); border-radius: 8px }
+table { border-collapse: collapse; width: 100%; min-width: 620px; font-size: 15.5px }
+th, td { text-align: left; vertical-align: top; padding: 12px 14px; border-bottom: 1px solid var(--rule) }
+th { font: 500 11.5px/1.3 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); background: var(--paper) }
+tr:last-child td { border-bottom: 0 }
+td b { font-weight: 600 }
+td.num, th.num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums }
+td.neg { color: var(--loss) }
+tr.total td { background: var(--paper); font-weight: 600 }
+@media (max-width: 640px) {
+  table.budget { min-width: 0; font-size: 14.5px }
+  table.budget th, table.budget td { padding: 10px }
+  table.stack { min-width: 0 }
+  table.stack thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0) }
+  table.stack, table.stack tbody, table.stack tr, table.stack td { display: block }
+  table.stack tr { display: grid; gap: 6px; padding: 14px; border-bottom: 1px solid var(--rule) }
+  table.stack tr:last-child { border-bottom: 0 }
+  table.stack td { padding: 0; border: 0 }
+  table.stack td:first-child { font-size: 17px }
+  table.stack td[data-label]::before { content: attr(data-label); display: block; font: 500 11px/1.4 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted) }
+  table.stack td:empty { display: none }
+}
+
+.menu { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; margin: 0; padding: 0 }
+.menu div { display: grid; grid-template-columns: minmax(0, 150px) minmax(0, 1fr); gap: 14px; padding: 12px 0; border-bottom: 1px dotted var(--rule) }
+.menu dt { font-weight: 600 }
+.menu dd { margin: 0; color: var(--muted) }
+@media (max-width: 720px) { .menu { grid-template-columns: minmax(0, 1fr) } }
+
+.coin { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none }
+.coin li { background: var(--paper); border-radius: 8px; padding: 16px; display: grid; gap: 8px; align-content: start; min-width: 0 }
+.coin .n { width: 30px; height: 30px; border-radius: 50%; background: var(--brass); color: var(--brass-ink); display: grid; place-items: center; font: 500 13px/1 var(--mono) }
+@media (max-width: 860px) { .coin { grid-template-columns: repeat(2, minmax(0, 1fr)) } }
+@media (max-width: 480px) { .coin { grid-template-columns: minmax(0, 1fr) } }
+
+.split { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px }
+.split.two { grid-template-columns: repeat(2, minmax(0, 1fr)) }
+.split.four { grid-template-columns: repeat(2, minmax(0, 1fr)) }
+.split > div { background: var(--paper); border-radius: 8px; padding: 18px; display: grid; gap: 8px; align-content: start; min-width: 0 }
+.split .rent { font: 500 13px/1.4 var(--mono); color: var(--brass); letter-spacing: 0.04em }
+.split ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; color: var(--muted); font-size: 15.5px }
+@media (max-width: 860px) { .split, .split.two, .split.four { grid-template-columns: minmax(0, 1fr) } }
+
+.verdict { background: var(--paper); border-left: 3px solid var(--brass); border-radius: 0 8px 8px 0; padding: 18px 20px; max-width: 70ch; display: grid; gap: 8px }
+
+footer { padding-top: 36px; color: var(--muted); font-size: 14.5px; display: grid; gap: 8px; max-width: 70ch }
+</style>
+
+<div class="wrap">
+  <figure class="hero"><img src="img/door-hero.jpg" width="2000" height="1333" alt="The room from the door at night: the record wall and long counter on the left, the banquette on the right, and Mother EARF hung above in the site&rsquo;s multicolour, its coloured shadow on the concrete wall"></figure>
+  <header class="top">
+    <p class="eyebrow">Planet EARF &middot; San Francisco &middot; a proposal &middot; round 42</p>
+    <h1>A showroom that pours drinks.</h1>
+    <p class="lede">One ground floor of 2,800&nbsp;sq&nbsp;ft. The shop is at the street, the bar room sits under Mother EARF, and the selector stands in a wall of records. Behind it is an eleven-seat listening room with the Tropos stacks. Everything in the house is for sale, and everything swaps tint, so on any night the room is one configuration of EARF&rsquo;s catalogue. The house configuration is Smoke.</p>
+    <dl class="facts">
+      <div><dt>The house</dt><dd>2,800 sq ft <small>35 &times; 80 ft, 15&prime;9&Prime; to the joists</small></dd></div>
+      <div><dt>Seats</dt><dd>55 <small>occupant load 133, or 87 as an option</small></dd></div>
+      <div><dt>Records</dt><dd>~9,000 <small>wall capacity; 3,000 to open</small></dd></div>
+      <div><dt>To open</dt><dd>$2.0M <small>base; $1.4M to $2.8M</small></dd></div>
+      <div><dt>Break-even</dt><dd>87 a night <small>guests, with the shop</small></dd></div>
+      <div><dt>First step</dt><dd>19 Jan 2027 <small>an 8-week pop-up, $22k&ndash;36k</small></dd></div>
+    </dl>
+    <nav class="toc" aria-label="Sections">
+      <a href="#steps">Three steps</a><a href="#night">The night</a><a href="#plan">The plan</a><a href="#programme">Programme</a><a href="#coin">The coin</a><a href="#menu">Menu</a><a href="#room">Capacity</a><a href="#licences">Licences</a><a href="#money">Money</a><a href="#comparables">Comparables</a><a href="#where">Where</a><a href="#mother">Mother EARF</a>
+    </nav>
+  </header>
+
+
+  <section id="steps">
+    <div class="head"><p class="eyebrow">How it happens</p><h2>Three steps, each paid for by the one before.</h2>
+      <p class="lede">The house works as a showroom that pours drinks. One more Tropos pair sold a month is worth about $119,000 a year, more than ten more guests a night. So the first job is to prove the room sells pieces, in rooms that cost little, before signing a lease for the flagship.</p></div>
+    <div class="scroll"><table class="stack">
+      <thead><tr><th></th><th>When</th><th class="num">Cost</th><th>What it is</th><th>What it has to prove</th></tr></thead>
+      <tbody>
+        <tr><td><b>1. The lean pop-up</b></td><td data-label="When">19 Jan to mid-March 2027, 8 weeks</td><td class="num" data-label="Cost">$22k&ndash;36k</td><td data-label="What it is">A vacant downtown storefront in Vacant to Vibrant&rsquo;s free-rent months: felt drapes, one run of the shop wall, the Tropos pair, a borrowed counter, the founder and one host. Drinks on catered nights only.</td><td data-label="What it has to prove">3 Tropos pairs on deposit, 30 lamps, 1,500 people through the door, 1,000 emails, FOG-week press</td></tr>
+        <tr><td><b>2. The pop-up</b></td><td data-label="When">to mid-June 2027, 5 months</td><td class="num" data-label="Cost">$130k&ndash;210k</td><td data-label="What it is">The same room in full: the shop on both walls, a pair in the window, ten seats behind the felt, sessions on the hour, a catered night every week</td><td data-label="What it has to prove">6 pairs sold (it then pays for itself), sessions 70% full, the spend a guest, the sound at the property line, $500k soft-circled</td></tr>
+        <tr><td><b>3. The flagship</b></td><td data-label="When">lease spring 2027; open late 2027 or early 2028</td><td class="num" data-label="Cost">about $2.0M</td><td data-label="What it is">The 2,800&nbsp;sq&nbsp;ft house drawn below</td><td data-label="What it has to prove">Break-even at 87 guests a night with the shop, 114 without</td></tr>
+      </tbody>
+    </table></div>
+    <div class="figs">
+      <figure class="sheet"><img src="img/popaxo.jpg" width="2000" height="1333" alt="Axonometric of the pop-up: a narrow storefront with a Tropos pair in the window, shelves of coloured lamps on both walls, a portable bar and standing tables, and a listening room behind dark red felt drapes with ten chairs facing two speakers" loading="lazy"><figcaption>The pop-up: 1,250&nbsp;sq&nbsp;ft, 36 people at most, everything brought in and taken away.</figcaption></figure>
+      <figure class="sheet"><img src="img/popup-plan.png" width="1600" height="859" alt="Plan of the pop-up: the shop at the street, the catered bar, the listening room behind felt, the existing WC at the back" loading="lazy"><figcaption>A-401: the shop, the bar a partner pours, ten seats behind felt.</figcaption></figure>
+    </div>
+    <div class="split">
+      <div><h3>The drinks</h3><p>A downtown bar with a full licence and a catering permit (Type 58) pours on its own licence: $100 a night, filed online 5 to 90 days ahead, up to 36 nights a year at one address. EARF never sells alcohol and takes a flat fee. Daily licences are for nonprofits only, so this is the real route.</p></div>
+      <div><h3>The rules</h3><p>Pop-Up Retail in a vacant space is allowed for up to 3 years (Ordinance 116-25), by the Planning Director&rsquo;s sign-off, $644. Records with no performer need no permit. A guest selector needs a $586 one-time permit, at most 12 a year. Under 50 people, so no Place of Assembly permit.</p></div>
+      <div><h3>The debut</h3><p><b>Tuesday 19 January 2027</b>, during SF Art Week, the evening before FOG Design+Art&rsquo;s Preview Gala (20 January at Fort Mason). Then catered nights on 21 to 23 January, while the design galleries are in town. The Tropos pair has to exist by then. Mantle is likely and Core possible; where a piece isn&rsquo;t ready, samples and orders take its place.</p></div>
+    </div>
+  </section>
+
+  <section id="night">
+    <div class="head"><p class="eyebrow">The night</p><h2>From the door to last call.</h2></div>
+    <ol class="night">
+      <li><p class="when">The door</p><p>A plain blackened-steel door, recessed, with a small etched disc for the name and no queue rope. Two doors eight feet apart make a sound lock, so the music stays in. Inside is the host stand: a dark-oak top on a steel post, and on it a bowl of EARFcoins. The host finds you a seat and puts one coin in your hand: &ldquo;That&rsquo;s your song.&rdquo;</p></li>
+      <li><p class="when">The shop</p><p>On the right, by the glass, is the shop wall: oiled oak on blackened steel. It holds the eight Cores in their tints, a Mantle on its shelf, records, and three Hemispheres hung low in front, with a Tropos playing on its plinth beside it. Every piece carries a card, and every piece in the house is for sale, starting here. Low chairs by the window face the street.</p></li>
+      <li><p class="when">The bar</p><p>Ten seats at a zinc-topped racetrack counter with a fluted oak front. Its first five feet drop to table height, so a wheelchair user sits at the bar too. Six Hemispheres hang low over the zinc. At the far end, the selector&rsquo;s booth is set into a floor-to-ceiling wall of records, with the request column on its desk.</p></li>
+      <li><p class="when">The tables</p><p>On the right is a banquette with six two-tops. In the middle is a long communal table, and Mother EARF hangs over it. Each table has a Core.</p></li>
+      <li><p class="when">The listening room</p><p>Through a lobby with two doors is a room within the room, with its own walls and ceiling. Eleven low tub chairs face the altar, with a Tropos stack on each side of it, toed in to the one seat that is exactly right. Quiet is the rule here, and a card on each table says so, once. This is where the sessions happen.</p></li>
+      <li><p class="when">Last call</p><p>Called by the record, not by a bell. The selector plays the house&rsquo;s closing side, the same track every night and announced nowhere. The pendants come down a stop over its length. Any coins left in the column are played, or handed back with the bill.</p></li>
+    </ol>
+    <div class="figs">
+      <figure class="wide"><img src="img/r42-night.jpg" width="1800" height="1200" alt="The whole room at night from the back of the listening room: tub chairs in the foreground, the banquette with glowing Core lamps on the left, Mother EARF hanging in colour, the zinc counter under its pendants and the record wall on the right, the shopfront glass at the far end" loading="lazy"><figcaption>The room at night from the back, the line playing. A render (round 42).</figcaption></figure>
+      <figure><img src="img/r42-counter.jpg" width="1800" height="1200" alt="Along the zinc counter from its far end: Hemisphere pendants over the zinc, counter chairs, the record wall and the decks, the street beyond the glass" loading="lazy"><figcaption>The counter, from the booth&rsquo;s end. A render (round 42).</figcaption></figure>
+      <figure><img src="img/r42-shop.jpg" width="1800" height="1200" alt="The shop wall by the door: oak shelves on black steel with the eight Core lamps glowing in their tints, a Mantle record player, records, three Hemisphere pendants hung low, an Ember-red Tropos speaker on an oak plinth" loading="lazy"><figcaption>The shop wall: everything in the room waits here. A render (round 42).</figcaption></figure>
+      <figure class="wide"><img src="img/street.jpg" width="2400" height="1600" alt="Planet EARF&rsquo;s shopfront at blue hour: a warm room behind tall glass, EARF on the window, a street tree in front" loading="lazy"><figcaption>The shopfront at blue hour. A render (round 39). The listening room is shown in the axonometric below.</figcaption></figure>
+    </div>
+    <p class="lede" style="font-size:15px">The renders show the room as modelled since round 36, which is 20&nbsp;ft wide: its materials, its light and the products. The plan below is the bigger house, and the axonometric is built from that plan.</p>
+  </section>
+
+  <section id="plan">
+    <div class="head"><p class="eyebrow">The plan</p><h2>The house, drawn to scale.</h2>
+      <p class="lede">A 35 &times; 80&nbsp;ft ground floor: a lot and a half of San Francisco&rsquo;s 25&nbsp;ft grain, the kind of old garage or workshop that has become a shop. Every number is a working assumption, and no site has been chosen.</p></div>
+    <figure class="sheet"><img src="img/axo.jpg" width="2400" height="1600" alt="Axonometric of the house with the walls cut away: the shop and window lounge at the street, the long zinc counter and lit back bar, the communal table under the coloured globe, the banquette, the record wall and booth, the listening room with eleven red tub chairs and two speakers, and three WCs along the back" loading="lazy"><figcaption>Axonometric from the street corner, the walls cut away. Built from the plan in Blender.</figcaption></figure>
+    <figure class="sheet"><img src="img/plan.png" width="2400" height="1000" alt="Floor plan at 1/4 inch to the foot: the vestibule, shop wall and lounge at the street; the bar room with the counter, banquette and communal table; the record wall and booth; the listening room through a lobby; the corridor, three WCs, stock and the rear exit" loading="lazy"><figcaption>A-101, the floor plan: seats, the accessible route in blue, the exit paths in green.</figcaption></figure>
+    <div class="figs">
+      <figure class="sheet"><img src="img/rcp.png" width="1600" height="700" alt="Reflected ceiling plan: fir beams across the room, six Hemispheres over the counter, Mother EARF over the communal table, spots, acoustic clouds in the listening room" loading="lazy"><figcaption>A-102, the ceiling: 11 Hemispheres, Mother EARF, 16 spots, five dimming zones.</figcaption></figure>
+      <figure class="sheet"><img src="img/sections.png" width="1600" height="700" alt="Section across the bar room: the back bar and counter on the left, the communal table with the globe above, the banquette on the right, the record wall beyond" loading="lazy"><figcaption>A-201, section B across the bar room: counter 3&prime;6&Prime;, globe centre 8&prime;4&Prime;, beams 14&prime;9&Prime;.</figcaption></figure>
+    </div>
+    <div class="scroll"><table class="stack">
+      <thead><tr><th>Room</th><th class="num">Area</th><th>Seats</th><th>What is in it</th></tr></thead>
+      <tbody>
+        <tr><td><b>Shop and window lounge</b></td><td class="num" data-label="Area">790 sq ft</td><td data-label="Seats">4</td><td data-label="What is in it">The vestibule (a sound lock), the coats, the host stand, the shop wall (Tropos, Hemisphere, Core, Mantle), the shop table and till, two low tables by the glass</td></tr>
+        <tr><td><b>Bar room</b></td><td class="num" data-label="Area">990 sq ft</td><td data-label="Seats">40</td><td data-label="What is in it">The counter (8 high seats and 2 at the 34&nbsp;in low end), the back bar, a banquette with six two-tops, the communal table for 12 under Mother EARF, the booth</td></tr>
+        <tr><td><b>Listening room</b></td><td class="num" data-label="Area">530 sq ft</td><td data-label="Seats">11</td><td data-label="What is in it">A lobby with two doors; double-stud walls and its own ceiling at 12&nbsp;ft; the Tropos stacks on 16&nbsp;in plinths either side of the end-grain altar; absorbers and a slotted diffuser</td></tr>
+        <tr><td><b>Back of house</b></td><td class="num" data-label="Area">415 sq ft</td><td data-label="Seats">&ndash;</td><td data-label="What is in it">A 46&nbsp;in corridor to the rear exit, three single-user all-gender WCs (each accessible), stock and office, the mop sink and the panels</td></tr>
+      </tbody>
+    </table></div>
+    <p style="color:var(--muted);font-size:15px">The drawing set (ARCH D sheets, as SVG and one PDF) and the model it comes from are in the repository under <code>spinoffs/barkhorn/planet/r42/</code>.</p>
+  </section>
+
+  <section id="programme">
+    <div class="head"><p class="eyebrow">The listening programme</p><h2>Four kinds of evening.</h2>
+      <p class="lede">About 3,000 records to open, vinyl only, bought for the room: jazz, soul, ambient, Japanese city pop, dub, minimal and the West Coast. The wall holds about 9,000, and a shelf a month goes to the guest selectors&rsquo; picks.</p></div>
+    <div class="scroll"><table class="stack">
+      <thead><tr><th></th><th>When</th><th>Who plays</th><th>What it is</th></tr></thead>
+      <tbody>
+        <tr><td><b>Opening hours</b></td><td data-label="When">5 to 8 pm</td><td data-label="Who plays">The bar staff</td><td data-label="What it is">Records from the house shelves, side by side; the coins start at 6</td></tr>
+        <tr><td><b>The Session</b></td><td data-label="When">Two a night, about 50 min each</td><td data-label="Who plays">The house</td><td data-label="What it is">One album, start to finish, in the listening room, with no talking. Tickets <span class="est">est. $20&ndash;25</span>, announced a week ahead. Eight of the eleven chairs are booked and three kept for the door</td></tr>
+        <tr><td><b>Selectors</b></td><td data-label="When">Fri and Sat, 9 pm to close</td><td data-label="Who plays">A guest selector in the booth</td><td data-label="What it is">Vinyl only, at bar level. The coins still play, and the selector fits them in</td></tr>
+        <tr><td><b>Mother EARF Sunday</b></td><td data-label="When">Sun, 3 to 7 pm</td><td data-label="Who plays">A different guest each week</td><td data-label="What it is">An afternoon of one person&rsquo;s records and why they own them; the one session with talking</td></tr>
+        <tr><td><b>Demos</b></td><td data-label="When">Wed to Sun, noon to 5 pm</td><td data-label="Who plays">The shop</td><td data-label="What it is">The listening room booked by the hour to hear Tropos at full scale, before buying a pair</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section id="coin">
+    <div class="head"><p class="eyebrow">The coin</p><h2>One coin, one song.</h2></div>
+    <ol class="coin">
+      <li><span class="n">1</span><h3>One a guest</h3><p>Handed over at the door: an EARFcoin, cast acrylic in one of the eight tints, the EARF globe engraved on its face. The colour is random; nobody chooses.</p></li>
+      <li><span class="n">2</span><h3>A coin is a request</h3><p>Write the song on the house&rsquo;s small card and hand both to the bartender. The card goes on the rail at the decks, in turn, and the coin into the clear column.</p></li>
+      <li><span class="n">3</span><h3>The column is the queue</h3><p>The selector plays the oldest card on the rail and takes the coin at the bottom, so anyone can see how long the wait is.</p></li>
+      <li><span class="n">4</span><h3>Back to the bowl</h3><p>Once its song has played. A guest who keeps one keeps it, at cost on the bill <span class="est">est. $6&ndash;9</span>. One request a guest a night, and none in the listening room during the Session.</p></li>
+    </ol>
+    <figure style="max-width:720px"><img src="img/decks.jpg" width="1200" height="800" alt="The decks: a record player under its lid beside the clear request column stacked with coins in the eight tints" loading="lazy"><figcaption>The decks and the request column. A render.</figcaption></figure>
+  </section>
+
+  <section id="menu">
+    <div class="head"><p class="eyebrow">The menu, a concept</p><h2>Named in the house&rsquo;s own words.</h2>
+      <p class="lede">About twelve cocktails, a short natural wine list, two beers on tap, and two non-alcoholic drinks made with as much care as the rest. Snacks only, bought in ready to serve: olives, rice crackers, and a Japanese-style sando from a bakery nearby.</p></div>
+    <dl class="menu">
+      <div><dt>Smoke</dt><dd>The house drink: mezcal and rye, stirred, over one clear cube</dd></div>
+      <div><dt>Ember</dt><dd>Campari, blood orange and sparkling wine, in a coupe</dd></div>
+      <div><dt>Ice</dt><dd>Gin, dry vermouth and a drop of eucalyptus, very cold, up</dd></div>
+      <div><dt>Fog</dt><dd>A milk-clarified punch, as water-clear as its tint</dd></div>
+      <div><dt>Acid</dt><dd>Yuzu, shochu and soda, long</dd></div>
+      <div><dt>Haze</dt><dd>A violet highball: blanco tequila, butterfly pea, tonic</dd></div>
+      <div><dt>Side A / Side B</dt><dd>Two small pours of one spirit at two ages, side by side</dd></div>
+      <div><dt>Needle Drop</dt><dd>The bartender&rsquo;s choice for the record playing now</dd></div>
+      <div><dt>Mother</dt><dd>A punch for four, from the bowl, Sundays only</dd></div>
+      <div><dt>Run-out Groove</dt><dd>The closing drink: an amaro and a short espresso</dd></div>
+    </dl>
+  </section>
+
+  <section id="room">
+    <div class="head"><p class="eyebrow">Capacity, hours and sound</p><h2>Loud enough to listen, quiet enough to talk.</h2></div>
+    <div class="split">
+      <div><h3>133 by the code, or 87</h3><p>The building code counts 133 people by floor area, at 15&nbsp;sq&nbsp;ft a person at tables. That makes the house an A-2 assembly: two exits with panic hardware, a Fire Department Place of Assembly permit, and sprinklers. Many SF shells have sprinklers already.</p><p>There is an option to stay at 87 and drop the sprinkler requirement. Count the front room as the shop it is, and fix the listening chairs to the floor. That is a question for the building official before the lease.</p></div>
+      <div><h3>Hours</h3><p>Tuesday to Thursday, 5 pm to midnight. Friday and Saturday, 5 pm to 1:30 am. Sunday, 3 to 10 pm. Closed Monday. The shop and the demos run Wednesday to Sunday, noon to 5.</p></div>
+      <div><h3>Sound <span class="est">targets, est.</span></h3><p>In the bar, 60 to 65 dBA while records play, so two people at a table can talk in an ordinary voice. In the listening room, 78 to 82 during a Session, where nobody talks. Outside, the Police Code&rsquo;s limits apply: 8 dBA over the ambient at the property line, and 8 dBC in the bass. The vestibule&rsquo;s two doors, the room within the room, and stacks that fire away from the party walls are what keep it there.</p></div>
+    </div>
+  </section>
+
+  <section id="licences">
+    <div class="head"><p class="eyebrow">What San Francisco asks</p><h2>About eight months from a signed lease.</h2>
+      <p class="lede">Buy a Type 48 licence on the market and find a site where the Planning Code allows the use outright. Add a Place of Entertainment permit for the selector. The rest is an ordinary tenant fit-out. Fees are as published for 2025 to 2027, and a land-use attorney confirms all of it before a lease.</p></div>
+    <div class="scroll"><table class="stack">
+      <thead><tr><th>Licence or permit</th><th>Who</th><th>Cost</th><th>Time and notes</th></tr></thead>
+      <tbody>
+        <tr><td><b>Type 48, on-sale general</b></td><td data-label="Who">California ABC</td><td data-label="Cost">about $100,000 <span class="est">deals $70k&ndash;150k</span>; transfer fee $1,565; about $1,545 a year</td><td data-label="Time and notes">SF is closed to new licences, so one is bought, down from about $250,000 in 2022. A 30-day posting and mailed notice within 500&nbsp;ft. <span class="est">to confirm</span> with ABC&rsquo;s San Francisco office: whether the chosen tract is over-licensed, and the transfer&rsquo;s real timing. In an over-licensed tract, the Board of Supervisors must find public convenience or necessity, within 90 days. 3 to 5 months. A Type 47 costs the same but needs a real kitchen.</td></tr>
+        <tr><td><b>Place of Entertainment</b></td><td data-label="Who">SF Entertainment Commission</td><td data-label="Cost">$2,708 (waived under First Year Free)</td><td data-label="Time and notes">For a selector to closing. 30-day notice, a hearing, a sound test: 2 to 3 months. Records with no performer need no permit.</td></tr>
+        <tr><td><b>or Limited Live Performance</b></td><td data-label="Who">SF Entertainment Commission</td><td data-label="Cost">$612</td><td data-label="Time and notes">Music ends by 10 or 11 pm, on at most 200&nbsp;sq&nbsp;ft. The use then stays a Bar in the Planning Code.</td></tr>
+        <tr><td><b>Planning: the use</b></td><td data-label="Who">SF Planning</td><td data-label="Cost">within the building permit; Conditional Use $3,147 ($15k&ndash;40k with counsel)</td><td data-label="Time and notes">A bar that presents POE entertainment is Nighttime Entertainment (Planning Code 102). NC-3 corridors allow Bar and Nighttime Entertainment outright. Hayes-Gough allows a Bar, but late selectors need Conditional Use. SoMa NCT, Valencia and North Beach need Conditional Use for any bar. The Mission&rsquo;s alcohol district requires the licence to come from a bar inside it. Conditional Use hearings are now guaranteed within 90 days: 4 to 6 months in all.</td></tr>
+        <tr><td><b>Building permit</b></td><td data-label="Who">DBI</td><td data-label="Cost">about 2 to 2.5% of the job; 3 to 4% for all city fees</td><td data-label="Time and notes">2 to 4 months of review. The frosted screens, as light-transmitting plastics, need a CC1 or CC2 rating. Mother EARF goes to the Fire Department as a hanging decoration, with a flame test.</td></tr>
+        <tr><td><b>Health</b></td><td data-label="Who">SFDPH</td><td data-label="Cost">plan check $1,241; permit to operate $470; annual licence $0</td><td data-label="Time and notes">20 working days. Snacks bought in ready to serve keep it a bar.</td></tr>
+        <tr><td><b>Place of Assembly</b></td><td data-label="Who">SF Fire Department</td><td data-label="Cost">$446</td><td data-label="Time and notes">For 50 or more, with the load posted at the door.</td></tr>
+        <tr><td><b>Music licences</b></td><td data-label="Who">ASCAP, BMI, SESAC, GMR</td><td data-label="Cost">about $2,500 to $6,000 a year <span class="est">est.</span></td><td data-label="Time and notes">Needed even where no permit is.</td></tr>
+        <tr><td><b>Registration, seller&rsquo;s permit</b></td><td data-label="Who">Treasurer, CDTFA</td><td data-label="Cost">$0 in year one</td><td data-label="Time and notes">First Year Free runs to 30 June 2027: no first-year city permit, licence or inspection fees. State fees still apply. Gross receipts tax is $0 under $5M.</td></tr>
+      </tbody>
+    </table></div>
+    <div class="verdict"><h3>Five facts to know before a lease</h3><p>1. Does the zoning allow the use outright? 2. Is the tract over-licensed? 3. Who lives above and beside the space? 4. Is the building sprinklered? 5. Is there a second exit? Those five move the budget and the calendar more than any design choice. Where a Conditional Use is needed, opening takes 11 to 12 months.</p></div>
+  </section>
+
+  <section id="money">
+    <div class="head"><p class="eyebrow">The money</p><h2>A showroom that pours drinks.</h2>
+      <p class="lede">The base case opens for about $2.0M and runs close to break-even. The bar and the door alone don&rsquo;t pay for a 2,800&nbsp;sq&nbsp;ft San Francisco lease. The shop is what makes it work: one more Tropos pair a month is worth more than ten more guests a night. Every figure is an estimate; the model and its sources are in the repository.</p></div>
+    <div class="scroll"><table class="budget">
+      <thead><tr><th>What it costs to open</th><th class="num">Low</th><th class="num">Base</th><th class="num">High</th></tr></thead>
+      <tbody>
+        <tr><td>Construction: the fit-out, the room within the room, the sound isolation <span class="est">$200&ndash;450/sq ft</span></td><td class="num">$560,000</td><td class="num">$840,000</td><td class="num">$1,260,000</td></tr>
+        <tr><td>Landlord&rsquo;s improvement allowance</td><td class="num">$0</td><td class="num neg">&minus;$84,000</td><td class="num neg">&minus;$168,000</td></tr>
+        <tr><td>Design, engineering, the acoustician, permits and fees</td><td class="num">$56,000</td><td class="num">$109,000</td><td class="num">$189,000</td></tr>
+        <tr><td>Bar equipment: ice, glasswasher, reach-ins, the keg box, sinks</td><td class="num">$40,000</td><td class="num">$80,000</td><td class="num">$120,000</td></tr>
+        <tr><td>Millwork: the zinc counter, the record wall, the shop wall, the booth</td><td class="num">$90,000</td><td class="num">$140,000</td><td class="num">$200,000</td></tr>
+        <tr><td>Furniture: 55 seats, the banquette, the tables</td><td class="num">$60,000</td><td class="num">$95,000</td><td class="num">$140,000</td></tr>
+        <tr><td>Sound: three Tropos pairs at EARF&rsquo;s cost, amplifiers, decks, the booth</td><td class="num">$45,000</td><td class="num">$70,000</td><td class="num">$110,000</td></tr>
+        <tr><td>Light: 11 Hemispheres, 15 Cores and Mother EARF at cost; spots and controls</td><td class="num">$35,000</td><td class="num">$50,000</td><td class="num">$70,000</td></tr>
+        <tr><td>Records: 3,000 to open</td><td class="num">$18,000</td><td class="num">$30,000</td><td class="num">$45,000</td></tr>
+        <tr><td>Type 48 licence, with escrow and ABC fees</td><td class="num">$75,000</td><td class="num">$115,000</td><td class="num">$165,000</td></tr>
+        <tr><td>Legal, the lease, the entity</td><td class="num">$15,000</td><td class="num">$25,000</td><td class="num">$40,000</td></tr>
+        <tr><td>Pre-opening: hiring, training, opening stock, launch</td><td class="num">$50,000</td><td class="num">$80,000</td><td class="num">$120,000</td></tr>
+        <tr><td>Deposits</td><td class="num">$46,000</td><td class="num">$46,000</td><td class="num">$46,000</td></tr>
+        <tr><td>Contingency</td><td class="num">$71,000</td><td class="num">$108,000</td><td class="num">$192,000</td></tr>
+        <tr><td>Working capital: three months of fixed costs</td><td class="num">$261,000</td><td class="num">$261,000</td><td class="num">$261,000</td></tr>
+        <tr class="total"><td>To open</td><td class="num">$1.42M</td><td class="num">$1.97M</td><td class="num">$2.79M</td></tr>
+      </tbody>
+    </table></div>
+    <div class="scroll"><table class="budget">
+      <thead><tr><th>A year, once open</th><th class="num">Low</th><th class="num">Base</th><th class="num">High</th></tr></thead>
+      <tbody>
+        <tr><td>Guests a night &middot; spend each</td><td class="num">60 &middot; $30</td><td class="num">90 &middot; $36</td><td class="num">130 &middot; $40</td></tr>
+        <tr><td>Bar: drinks and snacks</td><td class="num">$561,600</td><td class="num">$1,010,880</td><td class="num">$1,622,400</td></tr>
+        <tr><td>Door and programming: Sessions, private hire</td><td class="num">$91,776</td><td class="num">$195,706</td><td class="num">$354,440</td></tr>
+        <tr><td>Shop: Tropos pairs a year &middot; lamps &middot; Mantles</td><td class="num">4 &middot; 60 &middot; 3</td><td class="num">12 &middot; 150 &middot; 10</td><td class="num">25 &middot; 300 &middot; 20</td></tr>
+        <tr><td>Shop sales</td><td class="num">$158,000</td><td class="num">$443,000</td><td class="num">$895,000</td></tr>
+        <tr class="total"><td>Revenue</td><td class="num">$811,376</td><td class="num">$1,649,586</td><td class="num">$2,871,840</td></tr>
+        <tr><td>Cost of goods (pour cost 20 to 24%; the shop at a 55% margin)</td><td class="num neg">&minus;$210,384</td><td class="num neg">&minus;$435,244</td><td class="num neg">&minus;$757,230</td></tr>
+        <tr><td>Labour, with payroll costs (SF minimum $19.61/h)</td><td class="num neg">&minus;$574,083</td><td class="num neg">&minus;$629,910</td><td class="num neg">&minus;$685,738</td></tr>
+        <tr><td>Rent and NNN, at $57/sq ft</td><td class="num neg">&minus;$159,600</td><td class="num neg">&minus;$159,600</td><td class="num neg">&minus;$159,600</td></tr>
+        <tr><td>Everything else: utilities, insurance, licences, card fees, selectors</td><td class="num neg">&minus;$276,941</td><td class="num neg">&minus;$302,088</td><td class="num neg">&minus;$338,755</td></tr>
+        <tr class="total"><td>EBITDA</td><td class="num neg">&minus;$409,632</td><td class="num">$122,744</td><td class="num">$930,517</td></tr>
+        <tr><td>SBA 7(a) payments ($620,000, 10 years, 10%)</td><td class="num neg">&minus;$98,320</td><td class="num neg">&minus;$98,320</td><td class="num neg">&minus;$98,320</td></tr>
+        <tr class="total"><td>Cash after the loan</td><td class="num neg">&minus;$507,953</td><td class="num">$24,424</td><td class="num">$832,197</td></tr>
+      </tbody>
+    </table></div>
+    <div class="split">
+      <div><h3>Break-even</h3><p><b>87 guests a night</b> with the base shop and door, about 1.6 a seat. Without any shop sales it is 114. At the low case&rsquo;s 60 guests, the shop would have to sell about 46 Tropos pairs a year.</p></div>
+      <div><h3>What moves it</h3><ul><li>One more Tropos pair a month: +$119k</li><li>Ten more guests a night, or $4 more each: +$84k</li><li>Forty fewer staff hours a week: +$56k</li><li>Two more private hires a month: +$49k</li><li>$10/sq ft less rent: +$28k</li></ul></div>
+      <div><h3>Funding the base</h3><ul><li>SBA 7(a): ~$0.6M (sized so profit covers the payments 1.25&times;)</li><li>Investors: ~$0.9M</li><li>A community round: ~$0.4M (Rikki&rsquo;s raised $425k on Wefunder: 5% of revenue until 1.5&times;)</li><li>Landlord: $0&ndash;60/sq ft allowance and 3&ndash;6 months free</li><li>EARF: the pieces at cost, the shop wall as its showroom</li></ul></div>
+    </div>
+  </section>
+
+  <section id="comparables">
+    <div class="head"><p class="eyebrow">The comparables</p><h2>What other listening bars show.</h2></div>
+    <div class="scroll"><table class="stack">
+      <thead><tr><th>Bar</th><th>What it is</th><th>What it shows</th></tr></thead>
+      <tbody>
+        <tr><td><b>Bar Shiru</b>, Oakland, 2019</td><td data-label="What it is">Analog only, horns on tube amps, parties of six at most, $13 ticketed sessions</td><td data-label="What it shows">Seven years in, its owner told KALW (May 2026) it has never made a profit. Listening alone does not pay the rent.</td></tr>
+        <tr><td><b>Public Records</b>, Brooklyn, 2019</td><td data-label="What it is">6,000&nbsp;sq&nbsp;ft: a 200-capacity Sound Room on an OJAS system, a caf&eacute; by day, ticketed shows</td><td data-label="What it shows">Daytime use: the same rooms earn from coffee to the last show.</td></tr>
+        <tr><td><b>Eavesdrop</b>, Brooklyn, 2022</td><td data-label="What it is">1,000&nbsp;sq&nbsp;ft, 36 seats, horns built into a lit cabinet</td><td data-label="What it shows">Reserved time slots work as the cover charge.</td></tr>
+        <tr><td><b>Gold Line</b>, Los Angeles, 2018</td><td data-label="What it is">Stones Throw&rsquo;s bar under the label&rsquo;s offices, 7,500 records from its founder</td><td data-label="What it shows">A brand can run a bar. The team has since opened a second.</td></tr>
+        <tr><td><b>Jazz kissa</b>, Tokyo</td><td data-label="What it is">JBS and Bar Martha: one owner, 6,000 to 10,000 records, no cover or about &yen;800</td><td data-label="What it shows">The model works only at a tiny cost base. About 600 kissa at the 1970s peak, perhaps 100 to 500 now.</td></tr>
+        <tr><td><b>Closed in 2026</b></td><td data-label="What it is">Sounds Good, Toronto (about 2 years); kwia, Berlin (about 5)</td><td data-label="What it shows">&ldquo;Licensing and capacity&rdquo;, and rent.</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section id="where">
+    <div class="head"><p class="eyebrow">Where</p><h2>Three San Francisco neighbourhoods and one in Oakland.</h2>
+      <p class="lede">Rents are asking rents from public listings, 2025 to 2026. Nobody was contacted. In the base case, each $10 a sq ft of rent is about $28,000 a year.</p></div>
+    <div class="split four">
+      <div><p class="rent">$27&ndash;48 /sq ft/yr</p><h3>SoMa, Folsom Street</h3><p>The entertainment zone between 7th and 8th: old industrial buildings, height, few homes above, and a night street. 1539 Folsom, the former Wish Lounge, has 2,200&nbsp;sq&nbsp;ft at $27.25. Its building is for sale at $2.5M, so an SBA 504 purchase could fix the rent for good. A bar needs Conditional Use here.</p></div>
+      <div><p class="rent">$48&ndash;60 + ~$12 NNN</p><h3>Hayes Valley</h3><p>The city&rsquo;s hi-fi bars are already here, and design buyers walk past all day: the shop&rsquo;s customers. A Bar is permitted, but late selectors need Conditional Use. About 2% vacancy and homes above most storefronts, so a smaller house is likelier.</p></div>
+      <div><p class="rent">~$48 /sq ft/yr</p><h3>Dogpatch</h3><p>Warehouse shells by The Pearl, and a maker&rsquo;s neighbourhood. 2245 3rd St is a second-generation taproom of 2,876&nbsp;sq&nbsp;ft, and second-generation space costs 30 to 50% less to build out. Its zoning for a bar (Planning Code sec. 843) is <span class="est">to confirm</span>.</p></div>
+      <div><p class="rent">$26&ndash;30 /sq ft/yr</p><h3>Oakland, Uptown</h3><p>About half the rent, by the Fox and the galleries. 1735 Telegraph is a second-generation bar of 1,966&nbsp;sq&nbsp;ft at $27. Bar Shiru proves the audience and warns about the money. The one alternative to San Francisco; its permits are not researched.</p></div>
+    </div>
+    <div class="verdict"><h3>The recommendation</h3><p>Folsom Street, if a Conditional Use is acceptable: it gives the room the plan wants for a third less rent, and a chance to own the building. Otherwise, Hayes Valley at a smaller size, with selectors ending at 10 or 11 pm for a quicker opening. Oakland is the fallback that makes the money easiest. The brief is San Francisco first, so Oakland stays the one alternative.</p></div>
+  </section>
+
+  <section id="mother">
+    <div class="head"><p class="eyebrow">Mother EARF</p><h2>The globe, at room scale.</h2></div>
+    <div class="prose">
+      <p>EARF&rsquo;s globe made as an object: six slotted discs, three meridians and three parallels with the axis leaning 23.4&deg;, cut from 25&nbsp;mm cast acrylic, 1.25&nbsp;m across. Each disc is cast in its own tint, as on the globe at earf.world, and each rim glows its colour. In the house it hangs over the communal table under one hard spot, its centre 8&nbsp;ft 4&nbsp;in up. Its shadow draws the globe a second time on the table and the floor, ring inside ring, in colour. It is the one place in the room where the tints meet.</p>
+      <p>It costs about $9,000 to $12,000 one-off <span class="est">est.</span> At about 190&nbsp;kg of acrylic it hangs from the structure on an engineered fixing, over a table and never over the aisle. Cast acrylic burns, and the Fire Code may class the globe as a hanging decoration that must pass a flame test, so it is the first question for the Fire Department. Its name also belongs to the one afternoon with talking: <b>Mother EARF Sunday</b>, and a punch for four called Mother.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>A proposal for EARF. First drafted 22 October 2026; the multicolour Mother EARF added 23 October; round 42 (31 October) added the 2,800&nbsp;sq&nbsp;ft plan, the licences and permit path, the money, the comparables, the sites and new pictures. Figures marked est. are estimates, and every choice is the owner&rsquo;s. The pictures are renders, not photographs. An earlier version of this book proposed a smaller room of 1,116&nbsp;sq&nbsp;ft for 49 people. It stays an option where no larger space can be found, at about $1.0M to $1.6M to open.</p>
+  </footer>
+</div>
