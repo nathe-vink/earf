@@ -124,7 +124,7 @@ def ionos():
     return d
 
 def cairn():
-    d = D('Cairn', 'bookends · five layers 1/2" · two tints · satin sawn sides', '04'); k = 2.6
+    d = D('Cairn', 'bookends · five layers 1/2" · two tints · polished sides', '04'); k = 2.6
     x0, y0 = 160, 600
     slabs = [(160, 0, 'fog'), (140, 8, 'fog'), (120, -6, 'ember'), (100, 9, 'fog'), (80, -4, 'fog')]
     for i, (sw_, off, t) in enumerate(slabs):
@@ -192,9 +192,41 @@ def relief():
     d.text(sx, sy - 120 * sk, 'grazing LED bar in the top of the frame ↓', 11, 'start', MUTED)
     return d
 
+def meridian():
+    d = D('Meridian', 'wall clock · Acid and Ice discs · 3030 face', '07'); k = 1.15
+    cx, cy = 360, 450
+    d.circle(cx, cy, 180 * k, fill=TINT['fog'], op=0.35)
+    for i in range(12):
+        a = math.radians(90 - i * 30); r1, r2 = 160 * k, 172 * k
+        d.line(cx + r1 * math.cos(a), cy - r1 * math.sin(a), cx + r2 * math.cos(a), cy - r2 * math.sin(a), 2)
+    ah, am = math.radians(90 - (2 + 10 / 60) * 30), math.radians(90 - 10 * 6)   # ten past two
+    hx, hy = cx + 70 * k * math.cos(ah), cy - 70 * k * math.sin(ah)
+    mx, my = cx + 115 * k * math.cos(am), cy - 115 * k * math.sin(am)
+    d.line(cx, cy, hx, hy, 3, MUTED); d.line(cx, cy, mx, my, 3, MUTED)
+    d.circle(hx, hy, 55 * k, fill=TINT['acid'], op=0.55); d.circle(mx, my, 55 * k, fill=TINT['ice'], op=0.45)
+    d.circle(cx - 30 * k * math.cos(ah), cy + 30 * k * math.sin(ah), 9 * k, fill='#B08D57', op=0.8)
+    d.circle(cx - 30 * k * math.cos(am), cy + 30 * k * math.sin(am), 11 * k, fill='#B08D57', op=0.8)
+    d.circle(cx, cy, 6, fill=INK)
+    d.dimh(cx - 180 * k, cx + 180 * k, cy + 180 * k + 36, 'Ø 360 face', ext_from=cy)
+    d.text(cx + 200 * k, cy - 120, 'Acid hour disc Ø 110, at r 70', 11, 'start', MUTED)
+    d.text(cx + 200 * k, cy - 100, 'Ice minute disc Ø 110, at r 115', 11, 'start', MUTED)
+    d.text(cx + 200 * k, cy - 80, 'where they cross: green', 11, 'start', MUTED)
+    d.text(cx + 200 * k, cy - 60, 'brass counterweights across the center', 11, 'start', MUTED)
+    d.label(cx, cy + 180 * k + 90, 'Front, shown at ten past two')
+    sx, sy, sk = 1000, 450, 2.2
+    d.rect(sx, sy - 180 * sk * 0.5, 5.6 * sk, 180 * sk, fill=TINT['fog'], op=0.6)
+    d.rect(sx - 40 * sk, sy - 20 * sk, 30 * sk, 40 * sk, fill=INK, op=0.85)
+    d.rect(sx + 9 * sk, sy - 80 * sk, 3.2 * sk, 55 * sk * 2 * 0.5, fill=TINT['ice'], op=0.6)
+    d.rect(sx + 15 * sk, sy + 10 * sk, 3.2 * sk, 55 * sk, fill=TINT['acid'], op=0.6)
+    d.line(sx - 45 * sk, sy - 180 * sk * 0.5, sx - 45 * sk, sy + 180 * sk * 0.5, 2, INK)
+    d.text(sx - 48 * sk, sy - 180 * sk * 0.5 - 10, 'wall', 11, 'end', MUTED)
+    d.dimh(sx - 45 * sk, sx + 18.2 * sk, sy + 180 * sk * 0.5 + 34, '≈ 45 from the wall')
+    d.label(sx, sy + 180 * sk * 0.5 + 90, 'Side (half scale vertically)')
+    return d
+
 if __name__ == '__main__':
     os.makedirs('drawings', exist_ok=True)
-    for f in (moho, lithos, ionos, cairn, bedrock, relief):
+    for f in (moho, lithos, ionos, cairn, bedrock, relief, meridian):
         d = f()
         open(f'drawings/{f.__name__}.svg', 'w').write(d.svg())
         print('drew', f.__name__)

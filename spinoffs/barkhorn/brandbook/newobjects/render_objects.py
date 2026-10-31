@@ -3,7 +3,7 @@
 Tints are volumes calibrated from TruCast's published light transmission (LT) at 1/8" (3.175 mm), R1 (r46-owner-notes,
 read 2026-10-31): Beer-Lambert per channel, keeping each tint's hue, with about 8% lost at the two surfaces. IOR 1.49.
 Polished faces are smooth; sawn faces satin. Bonded layers sit 0.15 mm apart, as a bond line does (and coplanar faces
-of two solids render black in Cycles). Caustics on. Units: metres."""
+of two solids render black in Cycles). Path-traced caustics (not MNEE, which ignores the tint). Units: meters."""
 import argparse, math, os, sys
 import bpy, bmesh
 import numpy as np
@@ -121,7 +121,12 @@ def mesh_obj(name, bm, mats):
     for poly in o.data.polygons: poly.use_smooth = False
     return o
 
+USE_MNEE = False   # Cycles' MNEE shadow caustics ignore volume absorption (a tinted disc throws a white caustic; the
+                   # lamps lane, 2026-10-31). Path-traced caustics (caustics_refractive) carry the tint, so they are used instead.
+
 def caustic(o, caster=True, receiver=False):
+    if not USE_MNEE:
+        return
     for a, v in (('is_caustics_caster', caster), ('is_caustics_receiver', receiver)):
         try: setattr(o, a, v)
         except Exception: pass
@@ -203,7 +208,7 @@ def area(name, loc, target, size, power, color='#FFF3E6', shape='RECTANGLE', siz
     L = bpy.data.lights.new(name, 'AREA'); L.energy = power; L.color = lin(color)[:3]
     L.shape = shape; L.size = size
     if size_y: L.size_y = size_y
-    try: L.cycles.is_caustics_light = caustics
+    try: L.cycles.is_caustics_light = caustics and USE_MNEE
     except Exception: pass
     o = bpy.data.objects.new(name, L); bpy.context.scene.collection.objects.link(o)
     o.location = loc
@@ -215,7 +220,7 @@ def area(name, loc, target, size, power, color='#FFF3E6', shape='RECTANGLE', siz
 def spot(name, loc, target, power, angle=25, radius=0.004, color='#FFF1E0'):
     L = bpy.data.lights.new(name, 'SPOT'); L.energy = power; L.color = lin(color)[:3]
     L.spot_size = math.radians(angle); L.spot_blend = 0.3; L.shadow_soft_size = radius
-    try: L.cycles.is_caustics_light = True
+    try: L.cycles.is_caustics_light = USE_MNEE
     except Exception: pass
     o = bpy.data.objects.new(name, L); bpy.context.scene.collection.objects.link(o)
     o.location = loc; d = Vector(target) - Vector(loc); o.rotation_euler = d.to_track_quat('-Z', 'Y').to_euler()
@@ -309,25 +314,26 @@ def shot_ionos(sc):
 def shot_cairn(sc):
     sweep('#ECE8E1', 0.9)
     slabs = [(0.16, 0.12, 0.0, 'fog'), (0.14, 0.11, 0.008, 'fog'), (0.12, 0.10, -0.006, 'ember'), (0.10, 0.09, 0.009, 'fog'), (0.08, 0.08, -0.004, 'fog')]
-    for side, cx in (('L', -0.21), ('R', 0.21)):
-        s = 1 if side == 'L' else -1
+    cols = ['#3A3634', '#5C5650', '#C8BBA4', '#2F3B4A', '#8A7F70', '#1E1E22']
+    rng = np.random.default_rng(3)
+    books = [(float(rng.uniform(0.024, 0.038)), float(rng.uniform(0.2, 0.245)), float(rng.uniform(0.13, 0.155))) for _ in cols]
+    span = sum(b[0] + 0.001 for b in books)
+    for side, sgn in (('L', -1), ('R', 1)):
+        cx = sgn * (span / 2 + 0.08)   # each stack's inner edge meets the books
         for i, (w, d, off, tn) in enumerate(slabs):
             z0 = i * 0.0127 + GAP / 2
-            x = cx + s * off
-            slab(f'c{side}{i}', x - w / 2, -d / 2, z0, x + w / 2, d / 2, (i + 1) * 0.0127 - GAP / 2, acrylic(tn), acrylic(tn, 'saw'),
+            x = cx - sgn * off
+            slab(f'c{side}{i}', x - w / 2, -d / 2, z0, x + w / 2, d / 2, (i + 1) * 0.0127 - GAP / 2, acrylic(tn), None,
                  bond_top=acrylic(tn, 'bond') if i < 4 else None, bond_bottom=acrylic(tn, 'bond') if i > 0 else None)
-    cols = ['#3A3634', '#5C5650', '#C8BBA4', '#2F3B4A', '#8A7F70', '#1E1E22']
-    x = -0.10
-    rng = np.random.default_rng(3)
-    for i, c in enumerate(cols):
-        th = float(rng.uniform(0.022, 0.04)); hgt = float(rng.uniform(0.2, 0.25)); dp = float(rng.uniform(0.13, 0.16))
-        slab(f'book{i}', x, -dp / 2, 0.0, x + th, dp / 2, hgt, basic(f'cloth{i}', c, 0.75))
+    x = -span / 2
+    for (th, hgt, dp), c in zip(books, cols):
+        slab(f'book{c}', x, -dp / 2, 0.0, x + th, dp / 2, hgt, basic(f'cloth{c}', c, 0.75))
         x += th + 0.001
     sc.render.resolution_x, sc.render.resolution_y = 1800, 1200
-    area('key', (-0.9, -0.8, 1.0), (0, 0, 0.05), 1.0, 160)
-    spot('sun', (0.7, 0.55, 0.32), (0.21, 0, 0.03), 140, 18, 0.004, '#FFF0DA')
-    spot('sun2', (-0.75, 0.5, 0.3), (-0.21, 0, 0.03), 120, 18, 0.004, '#FFF0DA')
-    camera((0.30, -0.95, 0.30), (0.0, 0, 0.06), lens=55, fstop=5.6)
+    area('key', (-0.9, -0.8, 1.0), (0, 0, 0.05), 1.0, 90)
+    spot('back', (-0.55, 0.65, 0.28), (-span / 2 - 0.08, 0, 0.02), 220, 16, 0.004, '#FFF0DA')
+    area('fill', (0.6, -0.9, 0.3), (-0.2, 0, 0.04), 0.8, 25, '#E6ECF5')
+    camera((-0.02, -0.46, 0.13), (-span / 2 - 0.07, 0, 0.035), lens=65, fstop=5.6)
 
 def shot_bedrock(sc):
     sweep('#C9C2B6', 0.85)
@@ -379,7 +385,36 @@ def shot_relief(sc):
     area('room', (1.2, -2.2, 1.3), (0, 0, 1.2), 2.0, 60, '#E8EEF6')
     camera((0.55, -1.55, 1.25), (0.0, -0.03, 1.2), lens=50, fstop=0)
 
-SHOTS = dict(moho=shot_moho, lithos=shot_lithos, ionos=shot_ionos, cairn=shot_cairn, bedrock=shot_bedrock, relief=shot_relief)
+def shot_meridian(sc):
+    wall = slab('wall', -2, 0.0, -1, 2, 0.05, 3.0, basic('plaster', '#E4DED4', 0.9, noise=0.15))
+    cz = 1.45
+    def disc(name, r, depth, h, mat, x=0.0, z=cz, r_in=0.0):
+        o = ring(name, r, r_in, 0, h, mat)
+        o.rotation_euler = (math.pi / 2, 0, 0); o.location = (x, -depth, z)   # thickness runs toward the room
+        return o
+    disc('face', 0.18, 0.030, 0.0056, acrylic('fog'))
+    for i in range(12):   # the marks, cut into the face: thin clear bars standing proud
+        a = math.radians(90 - i * 30)
+        o = slab(f'mark{i}', -0.0015, -0.0006, -0.006, 0.0015, 0.0, 0.006, acrylic('fog'))
+        o.rotation_euler = (0, -a + math.pi / 2, 0)   # radial bars
+        o.location = (0.166 * math.cos(a), -0.0356, cz + 0.166 * math.sin(a))
+    disc('housing', 0.028, 0.004, 0.024, basic('black-alu', '#18171A', 0.4, 0.7))
+    ah, am = math.radians(90 - (2 + 10 / 60) * 30), math.radians(90 - 10 * 6)   # ten past two
+    brass = basic('brass', '#B8923F', 0.25, 1.0)
+    for nm, ang, rr, depth, tn, cw in (('hour', ah, 0.070, 0.040, 'acid', 0.009), ('minute', am, 0.115, 0.046, 'ice', 0.011)):
+        disc(nm, 0.055, depth, 0.0032, acrylic(tn), x=rr * math.cos(ang), z=cz + rr * math.sin(ang))
+        L = rr + 0.03
+        arm = slab(f'{nm}-arm', -0.03, -0.0028, -0.006, L, 0.0, 0.006, acrylic('fog'))
+        arm.rotation_euler = (0, -ang, 0); arm.location = (0, -depth + 0.0028 + 0.0002, cz)
+        disc(f'{nm}-weight', cw, depth - 0.0002, 0.006, brass, x=-0.03 * math.cos(ang), z=cz - 0.03 * math.sin(ang))
+    disc('hub', 0.006, 0.052, 0.008, brass)
+    sc.render.resolution_x, sc.render.resolution_y = 1800, 1200
+    area('key', (-1.2, -1.6, 2.0), (0, 0, cz), 1.2, 35)
+    spot('rake', (-0.9, -0.55, 2.0), (0.05, -0.03, cz), 380, 20, 0.006, '#FFF1E0')
+    area('fill', (1.2, -1.6, 1.3), (0, 0, cz), 1.2, 14, '#E6ECF5')
+    camera((0.42, -1.45, 1.33), (0.02, -0.03, cz - 0.01), lens=55, fstop=0)
+
+SHOTS = dict(moho=shot_moho, lithos=shot_lithos, ionos=shot_ionos, cairn=shot_cairn, bedrock=shot_bedrock, relief=shot_relief, meridian=shot_meridian)
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument('--shot', required=True); ap.add_argument('--scale', type=float, default=1.0)

@@ -19,8 +19,9 @@ CAP = {
  'cairn': 'Render. Cairn in Fog with one layer of Ember; sawn sides satin, faces polished.',
  'bedrock': 'Render. Bedrock in Dust, the inch-thick end-plates stepped, three steel rails.',
  'relief': 'Render. Relief in Fog on a white backing: the green deepens with each layer, like a sea chart in glass.',
+ 'meridian': 'Render. Meridian at ten past two: the Acid hour disc and the Ice minute disc cross, and where they overlap the light is green.',
 }
-TINT_OF = {'moho': 'ember', 'lithos': 'smoke', 'ionos': 'ice', 'cairn': 'fog', 'bedrock': 'dust', 'relief': 'fog'}
+TINT_OF = {'meridian': 'poison', 'moho': 'ember', 'lithos': 'smoke', 'ionos': 'ice', 'cairn': 'fog', 'bedrock': 'dust', 'relief': 'fog'}
 
 def images():
     for o in six.OBJECTS:
@@ -129,7 +130,7 @@ footer {{ padding-block: 24px 48px; font-family: var(--mono); font-size: 12px; c
 <header>
   <p class="eyebrow">EARF · proposals for the owner · 31 October 2026</p>
   <h1>New objects</h1>
-  <p class="lede">Six new things in the line's tinted cast acrylic, chosen from twenty-nine. Each is built by laminating stock sheet, so its layers show at every cut edge, and each treats light as part of the material. None touches Tropos, Hemisphere, Core, Mantle or the bar. Every picture is a render; every price and cost is an estimate.</p>
+  <p class="lede">Six new things in the line's tinted cast acrylic, chosen from twenty-nine, and a seventh as a wildcard. Each is built by laminating stock sheet, so its layers show at every cut edge, and each treats light as part of the material. None touches Tropos, Hemisphere, Core, Mantle or the bar. Every picture is a render; every price and cost is an estimate.</p>
   <div class="band"><i style="background:var(--t-ember)"></i><i style="background:var(--t-dust)"></i><i style="background:var(--t-acid)"></i><i style="background:var(--t-poison)"></i><i style="background:var(--t-ice)"></i><i style="background:var(--t-haze)"></i><i style="background:var(--t-fog)"></i><i style="background:var(--t-smoke)"></i></div>
 </header>
 <section class="summary" aria-label="The six at a glance">
@@ -140,13 +141,13 @@ footer {{ padding-block: 24px 48px; font-family: var(--mono); font-size: 12px; c
 <section class="method">
   <div>
     <h3>How the tints are rendered</h3>
-    <p>Each tint is a volume that absorbs light by the Beer–Lambert law, calibrated so that 3.2 mm of it passes the light that AC Plastics' TruCast stock publishes for the nearest code, in the tint's own hue, with about 8% lost at the two faces. Index 1.49; polished faces clear, sawn faces satin; bonded layers meet at index-matched joints; caustics on. That is why the deep tints read deep: 2423 Red passes 14% through 3.2 mm, so a thick Ember part is nearly black except where light runs through an edge, and why Lithos lights its clear layers rather than its colours.</p>
+    <p>Each tint is a volume that absorbs light by the Beer–Lambert law, calibrated so that 3.2 mm of it passes the light that AC Plastics' TruCast stock publishes for the nearest code, in the tint's own hue, with about 8% lost at the two faces. Index 1.49; polished faces clear, sawn faces satin; bonded layers meet at index-matched joints; caustics on. That is why the deep tints read deep: 2423 Red passes 14% through 3.2 mm, so a thick Ember part is nearly black except where light runs through an edge, and why Lithos lights its clear layers rather than its colors.</p>
     <p class="note">Prior art set the rules: thin countable layers with bond lines, no polished monoliths, no ombré, no neon, nothing embedded, and names clear of Strata, Skyline, Totem and Voie. The long list, the prior art, the costing and the scene files are in the repository under spinoffs/barkhorn/brandbook/newobjects/.</p>
   </div>
   <div>
     <p class="eyebrow">Stock code and published transmission at 3.2 mm</p>
     <ul class="tints">{tints}</ul>
-    <p class="note">TruCast figures from the stock-colour research (31 October 2026); Acid's is an estimate, since TruCast doesn't publish 2208.</p>
+    <p class="note">TruCast figures from the stock-color research (31 October 2026); Acid's is an estimate, since TruCast doesn't publish 2208.</p>
   </div>
 </section>
 <footer>EARF · New objects · drafts for the owner, nothing ordered or tested · renders are renders</footer>
