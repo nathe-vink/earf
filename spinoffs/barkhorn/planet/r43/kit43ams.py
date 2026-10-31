@@ -32,7 +32,7 @@ def _water(bpy, p):
     mp.inputs['Scale'].default_value = (1.0, 3.5, 1.0)                # ripples stretched along the canal
     nz = nt.nodes.new('ShaderNodeTexNoise'); nz.inputs['Scale'].default_value = 2.2; nz.inputs['Detail'].default_value = 6.0
     nt.links.new(tc.outputs['Object'], mp.inputs['Vector']); nt.links.new(mp.outputs['Vector'], nz.inputs['Vector'])
-    bp = nt.nodes.new('ShaderNodeBump'); bp.inputs['Strength'].default_value = p.get('ripple', 0.25)
+    bp = nt.nodes.new('ShaderNodeBump'); bp.inputs['Strength'].default_value = p.get('ripple', 0.5)
     bp.inputs['Distance'].default_value = 0.02
     nt.links.new(nz.outputs['Fac'], bp.inputs['Height']); nt.links.new(bp.outputs['Normal'], b.inputs['Normal'])
     R._M['ams-water'] = m
@@ -64,9 +64,12 @@ def canal(bpy, name, p, kit):
         w = rnd.choice([4.8, 5.4, 6.0, 7.2]); h = rnd.choice([11.0, 12.5, 14.0, 15.5])
         brick.box(x + 0.05, yf, 0.0, x + w - 0.05, yf + 10.0, h)
         # a stepped or neck gable on top
-        gw = w * 0.55; gh = rnd.choice([2.2, 2.8, 3.4])
-        brick.box(x + (w - gw) / 2, yf, h, x + (w + gw) / 2, yf + 0.4, h + gh)
-        trim.box(x + (w - gw) / 2 - 0.05, yf - 0.06, h + gh, x + (w + gw) / 2 + 0.05, yf + 0.4, h + gh + 0.12)
+        # a stepped gable: three narrowing tiers, a white coping on each step (p2 critics: "chimney stacks on a block")
+        gh = rnd.choice([0.9, 1.1, 1.3])
+        for k, f in enumerate((0.92, 0.66, 0.38)):
+            gw = w * f; z0 = h + k * gh
+            brick.box(x + (w - gw) / 2, yf, z0, x + (w + gw) / 2, yf + 0.5, z0 + gh)
+            trim.box(x + (w - gw) / 2 - 0.05, yf - 0.05, z0 + gh, x + (w + gw) / 2 + 0.05, yf + 0.5, z0 + gh + 0.1)
         cols = max(2, int(w / 1.6))
         for fl in range(int(h / 3.1)):
             z0 = 0.9 + fl * 3.1
