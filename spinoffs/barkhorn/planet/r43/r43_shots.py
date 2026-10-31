@@ -68,15 +68,18 @@ VIEWS = {
     # the corner; no practical, no life): 2700 K, tint +1; a plain dark wool rug; the pair's spots 110 W at 24 deg aimed at
     # the cabinets; the seats' light 2 W; the fill 0.05; the felt washed up from the floor behind the plinths; a lit Core
     # on the decks table; haze; 24 mm from behind the back row
-    # (p2a, seen before judging: at 24 mm both stacks fell off the frame's edges, median 18: 22 mm on the room's axis,
-    # exposure 4.2; the room is symmetric, so the frame is)
-    'listening': dict(camera={'position': [9.8, 3.81, 1.2], 'target': [12.8, 3.81, 1.05], 'lens_mm': 22, 'level': True,
-                              'fstop': 4.0, 'focus': [12.6, 3.6, 0.9]}, exposure=4.2, haze=0.0015,
-                      # p1 proof, seen before judging: overexposed (median 111, the seats and rug blown): exposure 5.0 to
-                      # 3.6, the seats' light and the back felt's wash halved
-                      lights={'stack': {'power_w': 110.0, 'cone_deg': 24.0}, 'seats': {'power_w': 2.0},
-                              'fill': {'irradiance': 0.05},
-                              'drape': {'position': [13.15, Q.W / 2, 0.25], 'target': [13.35, Q.W / 2, 1.3], 'irradiance': 0.5}},
+    # p3, the last round (p2 judged 4.5/4.5, converged: the 22 mm axis view symmetric, both speakers cut by the edges,
+    # chair backs as slabs; the batts clipping flat pink under the spots, the horns crushed; the drape an even grey with a
+    # stray hotspot at its hem (the floor wash); red-stained oak; no atmosphere): seated off axis in the second row at
+    # 32 mm, one speaker large; the spots 80 W at 32 deg aimed 0.4 m higher, at the horns; the felt washed from the
+    # track at 1.2, warmer felt; natural oak; the fill 0.15, haze 0.004
+    'listening': dict(camera={'position': [10.25, 5.3, 1.15], 'target': [12.9, 3.2, 0.95], 'lens_mm': 32, 'level': True,
+                              'fstop': 2.8, 'focus': [12.8, 5.87, 1.2]}, exposure=4.0, haze=0.004,
+                      lights={'stack': {'power_w': 80.0, 'cone_deg': 32.0}, 'seats': {'power_w': 4.0},
+                              'fill': {'irradiance': 0.15},
+                              'drape': {'position': [12.9, Q.W / 2 + 0.6, Q.CEIL - 0.35], 'target': [13.3, Q.W / 2 + 0.6, 1.2],
+                                        'irradiance': 1.2}},
+                      room={'felt': '#2C2925', 'oak_chairs': '#8A6E52'},
                       pair='listening'),
 }
 
@@ -157,7 +160,7 @@ def scene(pair='window'):
     lights['table'] = spot([3.6, 3.75, zc], [3.6, 3.75, 0.9], 8.0, 30.0)
     lights['bar'] = spot([8.0, W - 1.2, zc], [8.0, W - 1.7, 1.07], 16.0, 30.0)
     for i, (x, y) in enumerate(Q.STACKS):                            # the listening pair
-        lights[f'stack{i}'] = spot([11.6, y + (0.4 if y < W / 2 else -0.4), zc], [x, y, 1.15], 34.0, 18.0, k=2600)
+        lights[f'stack{i}'] = spot([11.6, y + (0.4 if y < W / 2 else -0.4), zc], [x, y, 1.55], 34.0, 18.0, k=2600)
     lights['seats'] = spot([10.9, W / 2, zc], [10.8, W / 2, 0.4], 10.0, 60.0, k=2600, blend=1.0)
     lights['drape'] = {'type': 'area', 'position': [12.9, W / 2 + 0.6, H - 0.35], 'target': [13.3, W / 2 + 0.6, 1.2],
                        'size_m': [0.3, 4.6], 'irradiance': 1.6, 'color': 2600, 'camera': False}

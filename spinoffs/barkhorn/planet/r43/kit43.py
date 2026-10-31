@@ -263,7 +263,9 @@ def popup(bpy, name, p, kit):
     for (x, y) in Q.SEATS:
         _chair(stl, wood, uph, x, y, 0.0)
     objs.append(stl.object(bpy, K.blackened_steel(bpy), smooth=True))
-    objs.append(wood.object(bpy, K.dark_oak(bpy, name='oak-popup-chair'), bevel=0.004))
+    oakc = (D.walnut(bpy, coat=0.2, tint=p['oak_chairs'], mix=0.6, name='-popup-chair-oak') if p.get('oak_chairs')
+            else K.dark_oak(bpy, name='oak-popup-chair'))
+    objs.append(wood.object(bpy, oakc, bevel=0.004))
     objs.append(uph.object(bpy, principled(bpy, 'popup-chair-wool', p.get('chair_wool', '#2E2C2A'), rough=0.95, spec=0.1),
                            bevel=0.01))
     pk = Mesh('popup-stack-plinths')
