@@ -107,6 +107,9 @@ asked; the draftsperson adds the labels.
   - the posts' sockets and sleeves;
   - the feet, the back's and the ports' screws;
   - the rating plate and the EARF mark.
+- **On the back (FIG. 3),** the amplifier plate and the screw heads fill openings in the claimed back panel, so their
+  outlines come out solid: they are the openings' edges. This claims the openings' shape and placement, not the plate
+  or the screws. To claim the back free of them, the draftsperson draws those outlines broken [Atty].
 - **The cable is not in the drawings.** The model has no mains or link cable as a solid (only a parts-list line), so
   there is nothing to draw. The draftsperson adds a short broken stub at the amplifier plate if the attorney wants one.
 - **Left out:** the parts inside (braces, ribs, lining, the amplifier's box, the leads), the horn's tooling and the
