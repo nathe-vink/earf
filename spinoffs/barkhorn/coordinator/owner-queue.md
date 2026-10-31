@@ -172,3 +172,9 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
   109 px, Hemisphere 127 px, Tropos 333 px tall); day and dusk rendering, then 3840 finals.
 - Mantle e777dee6: Strata Float v2 (one grid, subordinate base, one-slab tiers, bonded posts, etched edge mark), $3,784;
   critic pending.
+- Bar DONE (30211ff1, stopped): look 2's three rounds; no view beat a hero outright (street p4 took one duel from the
+  r41 door, 1-1); House Book stays v11. Plan changes (proposals, DESIGN.md + A-sheets): porch in line with the box, two
+  0.80 m door pairs (48 in clear between), the pair facing the door with a 600 mm trap, 18 seats in the lantern (load
+  ~52), the counter shortened to four stools + the low end. Critics' standing notes for any look 3: speakers lit from
+  outside, not glowing like signage; deeper amber fins; the porch head falls to black. LATER OWNER QUESTION: Mother EARF's
+  multicolored rims break "one color" in every frame (keep the globe multicolor, or one tint per room?).
