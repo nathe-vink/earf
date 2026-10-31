@@ -267,10 +267,22 @@ def camera(loc, target, lens=50, fstop=0.0, focus=None):
     return o
 
 # ---------------------------------------------------------------------------------------------------------- the shots
-def ph(aid, scale=None, tint=None, tint_mix=0.0, rough_mul=1.0, bump=1.0):
-    """A photographed CC0 texture set from Poly Haven (TEXTURES.md; fetch_textures.py), laid at its real size."""
+def ph(aid, scale=None, tint=None, tint_mix=0.0, rough_mul=1.0, bump=1.0, dye=None):
+    """A photographed CC0 texture set from Poly Haven (TEXTURES.md; fetch_textures.py), laid at its real size.
+    dye: a hex the texture is multiplied by (its weave and wear kept, its color replaced), e.g. a book's cloth."""
     sys.path.insert(0, os.path.join(HERE, '..', '..', '..', '..', 'studio', 'engine')); import assets
-    return assets.pbr(bpy, aid, '2k', scale=scale, tint=tint, tint_mix=tint_mix, rough_mul=rough_mul, bump=bump)
+    m = assets.pbr(bpy, aid, '2k', scale=scale, tint=tint, tint_mix=tint_mix, rough_mul=rough_mul, bump=bump,
+                   name=f'pbr-{aid}-{dye}' if dye else None)
+    if dye:
+        nt = m.node_tree; bs = [n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED'][0]
+        if not bs.inputs['Base Color'].links:   # a set without a color map (book_pattern): the weave is in its normal map
+            bs.inputs['Base Color'].default_value = tuple(srgb_lin(dye)) + (1.0,)
+            return m
+        src = bs.inputs['Base Color'].links[0].from_socket
+        mx = nt.nodes.new('ShaderNodeMix'); mx.data_type = 'RGBA'; mx.blend_type = 'MULTIPLY'; mx.inputs['Factor'].default_value = 1.0
+        mx.inputs['B'].default_value = tuple(min(1.0, 1.6 * v) for v in srgb_lin(dye)) + (1.0,)
+        nt.links.new(src, mx.inputs['A']); nt.links.new(mx.outputs['Result'], bs.inputs['Base Color'])
+    return m
 
 def vinyl():
     """Black vinyl: concentric grooves at about 0.1 mm as a faint bump and a sheen drawn round the disc (anisotropic,
@@ -315,8 +327,8 @@ def shot_lithos(sc):
     # a room corner: oak floor, two plaster walls, a stack of books for scale, window light from the left
     # critic r1: oak planks and lime plaster from the studio engine; the corner behind and right of the lamp; skirting
     sys.path.insert(0, os.path.join(HERE, '..', '..', '..', '..', 'studio', 'engine')); import materials as SM
-    slab('floor', -3.0, -3.0, -0.03, 0.95, 0.8, 0.0, SM.make(bpy, 'oak', 'oak'))
-    plaster = SM.make(bpy, 'plaster', 'plaster', {'color': '#DCD5CA'})
+    slab('floor', -3.0, -3.0, -0.03, 0.95, 0.8, 0.0, ph('oak_wood_planks'))   # look 2: photographed oak
+    plaster = ph('beige_wall_001', tint='#DCD5CA', tint_mix=0.3, bump=0.25)
     slab('wallB', -3.0, 0.8, 0, 0.95, 0.85, 3, plaster)
     slab('wallR', 0.9, -3.0, 0, 0.95, 0.85, 3, plaster)
     skirt = basic('skirting', '#E9E5DD', 0.35)
@@ -345,14 +357,15 @@ def shot_lithos(sc):
     pages = basic('pages', '#EDE6D6', 0.85, noise=0.02)
     books = [(0.24, 0.17, 0.035, '#3E4A5A'), (0.22, 0.16, 0.03, '#C8BBA4'), (0.2, 0.15, 0.028, '#7A2E25'), (0.19, 0.13, 0.025, '#2E2B28')]
     for i, (w, d, h, c) in enumerate(books):   # hardbacks: two boards and a spine in cloth, the page block set back 3 mm
-        zb = sum(x[2] for x in books[:i]); cl = basic(f'bk{i}', c, 0.8, noise=0.03); t = 0.0025
+        zb = sum(x[2] for x in books[:i]); cl = ph('book_pattern', dye=c); t = 0.0025
         parts = [slab(f'b{i}lo', -w / 2, -d / 2, zb, w / 2, d / 2, zb + t, cl), slab(f'b{i}hi', -w / 2, -d / 2, zb + h - t, w / 2, d / 2, zb + h, cl),
                  slab(f'b{i}sp', -w / 2, -d / 2, zb + t, -w / 2 + t, d / 2, zb + h - t, cl),
                  slab(f'b{i}pg', -w / 2 + t, -d / 2 + 0.003, zb + t + 0.0003, w / 2 - 0.003, d / 2 - 0.003, zb + h - t - 0.0003, pages)]
         for o in parts:
             o.location = (0.34, -0.12, 0); o.rotation_euler = (0, 0, 0.3 + 0.08 * i)
     sc.render.resolution_x, sc.render.resolution_y = 1200, 1800
-    area('window', (-1.77, -0.31, 1.0), (0.0, 0.0, 0.6), 1.0, 450, '#FFF1E2', size_y=1.6)  # r2 c1: camera-left, 70 deg off the lens axis, raking
+    area('window', (-1.77, -0.31, 1.0), (0.0, 0.0, 0.6), 1.0, 250, '#FFF1E2', size_y=1.6)  # soft daylight, camera-left
+    spot('sun', (-2.0, -0.2, 0.95), (0.0, 0.05, 0.5), 900, 12, 0.004, '#FFF1DE')   # look 2: the hard key, low through the column: a tinted shadow across floor and wall
     area('fill', (0.6, -2.4, 1.0), (0, 0, 0.6), 1.2, 5, '#DDE6F2')                           # r2 c1, c4
     back = area('back', (0.12, 0.7, 1.05), (0, 0, 1.0), 0.5, 40, '#FFF0E0', size_y=1.5)     # r2 c3: weaker, raised, off the floor
     back.visible_glossy = False
@@ -365,7 +378,7 @@ def shot_ionos(sc):
     sweep('#BDB5A9', 0.85, z0=-0.04, y_wall=3.0, R=0.8)                                  # r2 c3: 3 m back
     sw = area('sweeplight', (0.0, -1.0, 2.2), (0.0, 3.0, 0.8), 1.5, 40, '#F2EEE8', size_y=1.0); sw.visible_glossy = False   # r2 c3: grazes the sweep top, falls off to the floor
     sys.path.insert(0, os.path.join(HERE, '..', '..', '..', '..', 'studio', 'engine')); import materials as SM
-    slab('sideboard', -0.9, -0.6, -0.04, 0.9, 0.35, 0.0, SM.make(bpy, 'limestone', 'plaster', {'color': '#58534C', 'bump': 0.04}))   # c8: honed stone with a tooth
+    slab('sideboard', -0.9, -0.6, -0.04, 0.9, 0.35, 0.0, ph('marble_01', tint='#7A746B', tint_mix=0.5))   # c8: honed stone with a tooth
     bounce = slab('bounce', -0.62, -0.42, 0.0, -0.32, -0.41, 0.30, basic('card', '#F4F1EC', 0.9)); bounce.visible_camera = False   # r2 c4: a bounce card into the front face
     bounce.rotation_euler = (0, 0, -0.6)
     over = slab('overcard', -0.4, -0.35, 0.60, 0.4, 0.15, 0.61, basic('card2', '#F4F1EC', 0.9)); over.rotation_euler = (-0.35, 0, 0)   # r2 c6: the disc top mirrors it
@@ -391,14 +404,16 @@ def shot_ionos(sc):
     # the machined pocket, honestly: the electronics in a black anodized tray, in the bottom two layers, seen through the block
     slab('tray', -0.06, -0.035, 0.003, 0.06, 0.045, 0.024, basic('tray', '#1C1B1E', 0.4, 0.6))
     sc.render.resolution_x, sc.render.resolution_y = 1800, 1200
-    area('window', (-0.49, 0.49, 1.04), (0, 0, 0.06), 0.5, 40, '#FFF4E6', shape='DISK')   # r2 c2: higher, bigger: an attached shadow   # c2: small, hard, back-left: a crisp shadow forward-right
+    spot('sun', (-0.55, 0.45, 0.42), (0, 0, 0.05), 60, 14, 0.002, '#FFF1DE')   # look 2: the hard key through the block: a blue cast forward-right
+    area('window', (-0.49, 0.49, 1.04), (0, 0, 0.06), 0.5, 25, '#FFF4E6', shape='DISK')   # r2 c2: higher, bigger: an attached shadow   # c2: small, hard, back-left: a crisp shadow forward-right
     rim = area('rim', (0.45, 0.55, 0.40), (0, 0, 0.12), 0.3, 45, '#FFE8D0'); rim.visible_glossy = False   # c5
     area('key', (0.5, -0.9, 1.05), (0, 0, 0.06), 0.8, 14, '#EEF2F8')                          # c7: higher, off the disc's edge
     sc.view_settings.exposure = -0.3   # r2 c1: the stone at its gray (with the window at 40 W: 150 W at a meter overlit it)
     camera((0.50, -1.10, 0.30), (0.02, -0.02, 0.075), lens=85, fstop=4.0)                      # c1: air around it, ground in front
 
 def shot_cairn(sc):
-    sweep('#C9C2B6', 0.9)
+    slab('table', -1.2, -0.8, -0.04, 1.2, 0.5, 0.0, ph('oak_wood_planks'))   # look 2: an oak table and a plaster wall
+    slab('wall', -2.0, 0.5, -0.04, 2.0, 0.55, 1.5, ph('beige_wall_001', tint='#D6CFC4', tint_mix=0.3, bump=0.25))
     slabs = [(0.16, 0.12, 0.0, 'fog'), (0.14, 0.11, 0.008, 'fog'), (0.12, 0.10, -0.006, 'dust-pour'), (0.10, 0.09, 0.009, 'fog'), (0.08, 0.08, -0.004, 'fog')]   # Dust as a lighter pour: stock reads brick red edge-on
     cols = ['#C8BBA4', '#5C5650', '#8A7F70', '#2F3B4A', '#3A3634', '#1E1E22']   # critic r1: no near-black book against the bookend
     rng = np.random.default_rng(3)
@@ -419,7 +434,7 @@ def shot_cairn(sc):
     x = -span / 2
     pages = basic('pages', '#EDE6D6', 0.85, noise=0.02)
     for (th, hgt, dp), c in zip(books, cols):   # critic r1 c3: hardbacks, cloth boards and spine, the page block set in
-        cl = basic(f'cloth{c}', c, 0.8, noise=0.06); t = 0.0022
+        cl = ph('book_pattern', dye=c); t = 0.0022
         slab(f'bk{c}a', x, -dp / 2, 0.0, x + t, dp / 2, hgt, cl); slab(f'bk{c}b', x + th - t, -dp / 2, 0.0, x + th, dp / 2, hgt, cl)
         slab(f'bk{c}s', x + t, -dp / 2, 0.0, x + th - t, -dp / 2 + t, hgt, cl)
         slab(f'bk{c}p', x + t + 0.0002, -dp / 2 + t, 0.003, x + th - t - 0.0002, dp / 2 - 0.003, hgt - 0.003, pages)
@@ -430,7 +445,7 @@ def shot_cairn(sc):
     cx = -(span / 2 + 0.08)
     area('window', (-1.25, 1.0, 0.75), (cx - 0.2, 0, 0.02), 0.7, 90, '#FFF4E6')                 # r2 c3
     strip = area('strip', (cx, 0.35, 0.035), (cx, -0.5, 0.035), 0.6, 60, '#FFF1DE', size_y=0.05); strip.visible_glossy = False   # r2 c4: through the stack at the lens
-    sp = spot('hard', (cx + 0.45, 0.55, 0.32), (cx, 0, 0.03), 25, 25, 0.015, '#FFF1DE')        # r2 c5: through the Dust layer, a shaped pool in front
+    sp = spot('hard', (cx - 0.40, 0.42, 0.26), (cx, 0, 0.03), 60, 18, 0.002, '#FFF1DE')   # look 2: harder, behind-left: the Dust layer thrown forward        # r2 c5: through the Dust layer, a shaped pool in front
     area('key', (cx + 0.75, -0.85, 0.75), (cx, 0, 0.04), 0.5, 35, '#EEF2F8')                    # r2 c2: weight, a contact shadow
     sc.view_settings.exposure = -0.3                                                              # r2 c7
     flag = slab('flagL', cx - 0.45, -0.45, 0.0, cx - 0.15, -0.44, 0.3, basic('flag', '#0A0A0B', 0.9))   # c7: dark faces, bright edges
@@ -440,7 +455,8 @@ def shot_cairn(sc):
 def shot_bedrock(sc):
     sc.world.node_tree.nodes['Background'].inputs['Color'].default_value = lin('#D9D3CA')
     sc.world.node_tree.nodes['Background'].inputs['Strength'].default_value = 0.12   # r2 c3
-    sweep('#6E665D', 0.75, w=30.0, depth=15.0, y_wall=2.0, height=6.0)               # r2 c3: darker, so the amber reads                             # c4, c5: wider, further, a stop darker
+    slab('floor', -4.0, -4.0, -0.03, 4.0, 1.2, 0.0, ph('oak_wood_planks'))   # look 2: an oak floor and a plaster wall
+    slab('wall', -4.0, 1.2, -0.03, 4.0, 1.25, 3.0, ph('beige_wall_001', tint='#8A8278', tint_mix=0.4, bump=0.25))               # r2 c3: darker, so the amber reads                             # c4, c5: wider, further, a stop darker
     prof = [(0, 0), (0.30, 0), (0.30, 0.15), (0.25, 0.15), (0.25, 0.185), (0.18, 0.185), (0.18, 0.215), (0.09, 0.215), (0.09, 0.23), (0, 0.23)]
     tn = 'dust-pour'   # critic r1: stock 2422 at an inch reads red; a lighter custom pour reads amber (captioned)
     for xi in (-0.235, 0.235 - 0.0254):
