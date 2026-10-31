@@ -119,6 +119,17 @@ brand"). Not live: main needs the owner's yes.
   (Open Graph and Twitter, a 1200 x 630 picture in that colour from `site/img/og/`, the colour as theme-color),
   schema.org data (a Product with no offer, or an Article), and a forward to the view. "Copy link" on a product's page
   copies it.
+- **Mobile speed** (the coordinator's ask; Lighthouse mobile, median of three, Vercel-like gzip): home 80 to **95**
+  (LCP 5.2 to 2.9 s), Tropos 74 to **94** (LCP 9.8 to 3.1 s); CLS 0 throughout; desktop 99 on both; the other pages
+  96 to 100. No change to the look. What did it: the gallery's thumbnails are small pictures of their own
+  (`site/img/thumb/`, they had fetched every full-size picture, 1.5 MB on Tropos); each view's first picture is
+  preloaded from a map in the head, and the home hero is fetched on home only; the gallery's pictures and the hero as
+  WebP (half the bytes; the JPEGs stay for downloads and cards); the type self-hosted (`webfonts/`, Instrument Sans and
+  IBM Plex Mono, SIL OFL), so no third-party stylesheet blocks the first paint; the header globe's 165 KB sprite after
+  the page's load, its still frame until then; the eight "Lit from below" pictures and the colour cards loaded within a
+  screen of view (Chrome's own lazy distance fetched 1.8 MB of them up front); the gallery's neighbours after load;
+  the dark icons, never shown in a one-theme site, gone.
+- **Tropos's CAD kept off the site:** `viewer/dist` (git-ignored) goes into `site/3d` only while `VIEW3D` is on.
 - **For the owner's deploy decision:** `launch/r47-what-changes.pdf` (11 pages), before and after at 1440 and 390 px,
   page by page, on the final branch; Fog's faint horn noted (as in its still); the link previews.
 - **Campaign slots** (`CAMPAIGN` in `web.py`, empty): one entry per picture (product, source render, per colour or

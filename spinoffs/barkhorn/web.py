@@ -570,6 +570,58 @@ def product_meta():
     return out
 
 
+def webp(rel):
+    """A WebP copy of a site picture (img/<name>.jpg -> img/<name>.webp, quality 84), made when missing or older; its
+    path, or the JPEG's if it can't be made. About half the bytes (round 47, mobile speed); the JPEGs stay for downloads."""
+    if not rel.endswith('.jpg'):
+        return rel
+    src, out = os.path.join(SITE, rel), os.path.join(SITE, rel[:-4] + '.webp')
+    if not os.path.exists(src):
+        return rel
+    if not os.path.exists(out) or os.path.getmtime(out) < os.path.getmtime(src):
+        Image.open(src).convert('RGB').save(out, 'WEBP', quality=84, method=4)
+    return rel[:-4] + '.webp'
+
+
+def thumbs(data):
+    """Round 47 (mobile speed): each gallery view's thumbnail as a small picture of its own (site/img/thumb/, 168 px
+    square, cover-cropped; a turning horn's first frame), set as the view's `th`, so the strip under a product's
+    pictures no longer fetches every full-size picture (1.5 MB on Tropos's page). Made when missing or older than its
+    picture."""
+    os.makedirs(os.path.join(IMG, 'thumb'), exist_ok=True)
+    def one(v):
+        if not isinstance(v, dict) or 'src' not in v or not v['src'].startswith('img/'):
+            return
+        src = os.path.join(SITE, v['src'])
+        name = v['src'][4:].replace('/', '-').rsplit('.', 1)[0] + '.webp'
+        out = os.path.join(IMG, 'thumb', name)
+        if not os.path.exists(out) or os.path.getmtime(out) < os.path.getmtime(src):
+            im = Image.open(src).convert('RGB')
+            if v['src'].startswith('img/turn-'):
+                im = im.crop((0, 0, v['w'], v['h']))
+            s = 168 / min(im.size)
+            im = im.resize((max(168, round(im.width * s)), max(168, round(im.height * s))), Image.LANCZOS)
+            x, y = (im.width - 168) // 2, (im.height - 168) // 2
+            im.crop((x, y, x + 168, y + 168)).save(out, 'WEBP', quality=72, method=6)
+        v['th'] = f'img/thumb/{name}'
+        if not v['src'].startswith('img/turn-'):        # the gallery's pictures as WebP (the turning horn stays a sprite)
+            v['src'] = webp(v['src'])
+            for t in ('tall', 'card'):
+                if isinstance(v.get(t), dict) and 'src' in v[t]:
+                    v[t]['src'] = webp(v[t]['src'])
+    for c in data['clouds']:
+        for v in c['views'].values():
+            one(v)
+    for L in data['lamps'].values():
+        for col in L['colours'].values():
+            for v in col['views'].values():
+                one(v)
+    if data['tt']:
+        for col in data['tt']['colours'].values():
+            for v in col['views'].values():
+                one(v)
+
+
 def body():
     """The page's head (fonts and style) and body, its pictures as they stand in site/img."""
     meta, panel = image_meta()
@@ -584,7 +636,7 @@ def body():
     word = E.word_svg('currentColor').replace('role="img" aria-label="EARF"', 'aria-hidden="true"').replace('<title>EARF</title>', '')
     coin = {k: i for i, k in enumerate(KEYS)}                 # the coins' sheet is in the speakers' order
     icon_img = lambda icon, name, cls='': (f'<img class="ic only-light {cls}" src="img/icon-{icon}-light.webp" alt="" width="256" height="256">'
-                                           f'<img class="ic only-dark {cls}" src="img/icon-{icon}-dark.webp" alt="" width="256" height="256">')
+                                           '')     # one theme by choice: the dark icons were fetched and never shown
     icon_paper = lambda icon: f'<img class="ic" src="img/icon-{icon}-light.webp" alt="" width="256" height="256">'   # on a pale pill in either theme
     rank = lambda boxes: {i: 2 + r for r, i in enumerate(sorted(range(len(boxes)), key=lambda i: boxes[i]['t'] + boxes[i]['h']))}
     zs = rank(spots)                                    # in number order for the keyboard, the front rank's boxes over the back's
@@ -676,8 +728,8 @@ def body():
                 '      <div class="light-stage">\n'
                 '        <div class="light-glow" aria-hidden="true"></div>\n'
                 '        <figure class="light-pic">' + ''.join(
-                    f'<img src="img/{k}-reel.jpg" width="{rw}" height="{rh}" alt="{name} standing on a light, its colour thrown up the wall behind it"'
-                    f'{" class=on" if i == 0 else ""} loading="lazy" decoding="async">' for i, (k, num, name, *_) in enumerate(CLOUDS)) + '</figure>\n'
+                    f'<img data-src="img/{k}-reel.jpg" width="{rw}" height="{rh}" alt="{name} standing on a light, its colour thrown up the wall behind it"'
+                    f'{" class=on" if i == 0 else ""} decoding="async">' for i, (k, num, name, *_) in enumerate(CLOUDS)) + '</figure>\n'
                 f'        <div class="light-text"><div class="light-intro">{intro}</div>\n'
                 f'          <div class="light-colour"><p class="num" id="light-num">Tropos {first_[1]}</p>'
                 f'<p class="light-name" id="light-name">{first_[2]}</p><p class="light-line" id="light-line">{first_[5]}</p>\n'
@@ -812,10 +864,13 @@ def body():
         lamps={k_: dict(name=name, kind=kind, line=line, facts=facts, colours=pm[k_], route=SLUG[k_]) for k_, name, kind, line, alt, facts in LAMPS} if lighting else {},
         tt=dict(TT, colours=tt) if tt else None, view3d=view3d(),
         campaign=[{x: c[x] for x in ('product', 'view', 'after', 'label', 'caption', 'alt')} for c in CAMPAIGN])
+    thumbs(data)
     # a phone frame of the hero or the room, where one was made (re-framed, not cropped); with the hero's, its links
     # give way on phones to the names under it, the boxes being the landscape frame's
     tall = lambda f: os.path.exists(os.path.join(IMG, f))
-    hero_tall = ('<source media="(max-width: 700px)" srcset="img/hero-portrait.jpg">' if tall('hero-portrait.jpg') else '')
+    hero_tall = ('<source media="(max-width: 700px)" data-srcset="img/hero-portrait.webp">' if tall('hero-portrait.jpg') else '')
+    for f in ('hero.jpg', 'hero-1200.jpg', 'hero-portrait.jpg'):
+        webp('img/' + f)
     room_tall = ('<source media="(max-width: 700px)" srcset="img/room-portrait.jpg">' if tall('room-portrait.jpg') else '')
     if hero_tall:
         hotspots = hotspots.replace('class="spot"', 'class="spot wide-only"')
@@ -827,6 +882,17 @@ def body():
             f'<a class="spot tall-only" href="#speaker-{name.lower()}" style="left:{s["l"]}%;top:{s["t"]}%;width:{s["w"]}%;height:{s["h"]}%;z-index:{zp[i]}">'
             f'<span class="sr">{name}, Tropos {num}</span></a>'
             for i, ((k, num, name, *_), s) in enumerate(zip(CLOUDS, ps)))
+    lead = {}                                           # each product page's first picture: wide, and its phone frame
+    for c in data['clouds']:
+        v = c['views'].get('habitat') or c['views'].get('on')
+        lead[f"speaker-{c['name'].lower()}"] = [v['src'], (v.get('tall') or {}).get('src')]
+        for L in data['lamps'].values():
+            col = L['colours'].get(c['k'])
+            if col:
+                lead[f"{L['route']}-{c['name'].lower()}"] = [col['views']['hero']['src'], None]
+        if data['tt'] and c['k'] in data['tt']['colours']:
+            v = data['tt']['colours'][c['k']]['views']['studio']
+            lead[f"mantle-{c['name'].lower()}"] = [v['src'], (v.get('tall') or {}).get('src')]
     wl_form, wl_page = waitlist_html()
     page = (PAGE.replace('__WORD__', word).replace('__HOTSPOTS__', hotspots).replace('__NAMES__', names)
                 .replace('__HERO_TALL__', hero_tall).replace('__ROOM_TALL__', room_tall)
@@ -837,7 +903,8 @@ def body():
                 .replace('__PRESS__', press_html()).replace('__JOURNAL__', journal_html()).replace('__JOURNAL_BAND__', journal_band())
                 .replace('__WAITLIST__', wl_form).replace('__PRIVACY__', wl_page)
                 .replace('__FOOT_PRIVACY__', '<a href="#privacy">Privacy</a>' if WAITLIST else '')
-                .replace('__STILL__', still).replace('__POSTER__', poster).replace('__POSTER_NIGHT__', poster_night).replace('__DATA__', json.dumps(data, separators=(',', ':'))))
+                .replace('__FONTS__', open(os.path.join(HERE, 'webfonts', 'fonts.css')).read().strip())
+                .replace('__LEAD__', json.dumps(lead, separators=(',', ':'))).replace('__STILL__', still).replace('__POSTER__', poster).replace('__POSTER_NIGHT__', poster_night).replace('__DATA__', json.dumps(data, separators=(',', ':'))))
     if not VIEW3D:      # the 3D view's markup and script stay out of the page entirely while it is off
         page = re.sub(r'\n *<!--3D-->.*?<!--/3D-->', '', page, flags=re.S)
         page = re.sub(r'/\*3D\*/.*?/\*/3D\*/', '', page, flags=re.S)
@@ -1268,14 +1335,26 @@ def make_editorial():
 
 
 PAGE = r"""
+<script>function heroIn() {     // the hero's sources, set on home only, so another view's first load doesn't fetch it
+  document.querySelectorAll('.hero-photo [data-srcset]').forEach(e => { e.srcset = e.dataset.srcset; delete e.dataset.srcset; });
+  document.querySelectorAll('.hero-photo img[data-src]').forEach(e => { e.src = e.dataset.src; delete e.dataset.src; }); }</script>
+<script>(function (d, h) {                               // round 47: the view's first picture, fetched first (the hero on home only)
+  const L = __LEAD__, m = /^#([a-z]+-[a-z]+)$/.exec(h), add = (href, set, media) => { const l = d.ownerDocument.createElement('link');
+    l.rel = 'preload'; l.as = 'image'; l.fetchPriority = 'high'; if (href) l.href = href; if (set) { l.imageSrcset = set; l.imageSizes = '100vw'; }
+    if (media) l.media = media; d.ownerDocument.head.appendChild(l); };
+  const home = !h || h === '#' || !/^#(speaker|hemisphere|core|mantle|dome|orb|turntable|colour|journal|press|privacy|speakers|lighting|turntable|tropos|atmosphere|turn|spec|lamps|record|closer)\b/.test(h);
+  d.dataset.home = home ? '1' : '';
+  if (home) { add('img/hero-portrait.webp', null, '(max-width: 700px)'); add(null, 'img/hero-1200.webp 1200w, img/hero.webp 2400w', '(min-width: 701px)'); }
+  else if (m && L[m[1]]) { const [wide, tall] = L[m[1]]; if (tall) { add(tall, null, '(max-width: 700px)'); add(wide, null, '(min-width: 701px)'); } else add(wide); }
+})(document.documentElement, location.hash)</script>
 <script>(function (d) { d.classList.add('opening');      // the opening's choice, made before anything paints: whether it plays, and by day or night
   if (/^#(speaker|dome|orb|turntable|colour)-|^#(speakers|lighting|turntable|tropos|atmosphere|turn|spec|lamps|record|press|journal|privacy)$|^#journal-/.test(location.hash)
       || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   d.classList.add('intro');
   if (matchMedia('(prefers-color-scheme: dark)').matches) { d.classList.add('night'); document.querySelector('meta[name="theme-color"]').content = '#100F12'; }
 })(document.documentElement)</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400..700&display=swap">
+<link rel="preload" href="fonts/instrument-sans-400-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>__FONTS__</style>
 <style>
 /* layout: a showroom in one column of bands; the speakers themselves carry the colour, the page stays paper and ink */
 :root {
@@ -1305,7 +1384,8 @@ header.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; b
   backdrop-filter: blur(8px); border-bottom: 1px solid var(--rule) }
 header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: var(--header) }
 .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none }
-.brand .globe { width: 42px; height: 42px; flex: none; background-size: 1000% 600%; background-position: 0 0;
+.brand .globe { width: 42px; height: 42px; flex: none; background: url(__STILL__) center / 100% 100% no-repeat }
+html.globe-live .brand .globe { background-size: 1000% 600%; background-position: 0 0;    /* the turning sprite, after load */
   background-image: url(img/globe-spin-light.webp);
   background-image: image-set(url(img/globe-spin-light.avif) type("image/avif"), url(img/globe-spin-light.webp) type("image/webp")) }
 .brand svg { display: block; height: 22px; width: auto }
@@ -1510,7 +1590,7 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weigh
 header.top { transition: background-color .3s ease, border-color .3s ease }
 header.top.on-dark { background: rgb(11 12 16 / .92); backdrop-filter: blur(20px); border-bottom-color: rgb(255 255 255 / .06) }
 header.top.on-dark .brand, header.top.on-dark nav a { color: #ECE8E1 }
-header.top.on-dark .brand .globe { background-image: url(img/globe-spin-dark.webp);
+html.globe-live header.top.on-dark .brand .globe { background-image: url(img/globe-spin-dark.webp);
   background-image: image-set(url(img/globe-spin-dark.avif) type("image/avif"), url(img/globe-spin-dark.webp) type("image/webp")) }
 /* the habitats: one campaign picture at a time, snapping along a strip (the portraits on phones) */
 #habitats { overflow-x: clip }
@@ -1906,10 +1986,11 @@ html.cursor, html.cursor * { cursor: none !important }
     <div class="hero-pic">
       <div class="hero-title"><div class="wrap"><p class="eyebrow">EARF &middot; Tropos</p><h1>Something in the air.</h1></div></div>
       <div class="hero-photo__HERO_CLASS__">
-        <picture>__HERO_TALL__<img src="img/hero.jpg" fetchpriority="high" srcset="img/hero-1200.jpg 1200w, img/hero.jpg 2400w" sizes="100vw" width="2400" height="1200"
+        <picture>__HERO_TALL__<img data-src="img/hero.jpg" fetchpriority="high" data-srcset="img/hero-1200.webp 1200w, img/hero.webp 2400w" sizes="100vw" width="2400" height="1200"
           alt="The eight Tropos speakers on a curve, their covers off: red through violet, then the clear Fog and the smoked Smoke, each throwing its colour on the floor"></picture>
         __HOTSPOTS__
       </div>
+      <script>if (document.documentElement.dataset.home) heroIn()</script>
     </div>
     <div class="wrap hero-foot">
       <p class="lede">Tropos is a horn loudspeaker cast in tinted acrylic, in eight colours from Ember to Smoke.</p>
@@ -2059,6 +2140,13 @@ __PRIVACY__
 const D = __DATA__, BY = Object.fromEntries(D.clouds.map(c => [c.k, c]));
 const SLUG = Object.fromEntries(D.clouds.map(c => [c.name.toLowerCase(), c.k])), keyOf = w => SLUG[w] || (BY[w] ? w : null);
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches, TAU = Math.PI * 2;
+// round 47 (mobile speed): pictures well below the fold load as they come within a screen of view, not on the browser's
+// own (generous) lazy distance; anything that can wait for the page waits for its load event
+const afterLoad = f => { if (document.readyState === 'complete') f(); else addEventListener('load', f, { once: true }); };
+const lateIO = 'IntersectionObserver' in window && new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { lateIO.unobserve(e.target); show_(e.target); } }), { rootMargin: '600px 0px' });
+const show_ = img => { if (img.dataset.src) { img.src = img.dataset.src; delete img.dataset.src; } };
+const later = img => { if (lateIO) lateIO.observe(img); else show_(img); };
+document.querySelectorAll('img[data-src]:not(.hero-photo img)').forEach(later);
 // lit from below: scrolling picks the colour (a quarter of a screen each) and time plays the change; the coins are a
 // radio group that switch the lamp and move the run to that colour; the header darkens over the band
 const run = document.getElementById('light-run');
@@ -2151,6 +2239,9 @@ const el = (tag, attrs = {}, html = '') => { const e = document.createElement(ta
 const GLOBES = [...document.querySelectorAll('.brand .globe')], GLOBE_TURN = 4000;
 let turn0 = performance.now(), globeAt = -1;
 const setTurn = sec => { turn0 = performance.now() - (sec * 1000) % GLOBE_TURN; };
+// round 47: the sprite (165 KB) comes after the page has loaded; until then the globe is its still first frame
+const globeLive = () => document.documentElement.classList.add('globe-live');
+if (document.readyState === 'complete') setTimeout(globeLive, 300); else addEventListener('load', () => setTimeout(globeLive, 300), { once: true });
 if (!reduce) (function globeTurn(now) {
   const i = Math.floor((((now - turn0) % GLOBE_TURN) + GLOBE_TURN) % GLOBE_TURN / GLOBE_TURN * 60) % 60;
   if (i !== globeAt) { globeAt = i; GLOBES.forEach(g => { g.style.backgroundPosition = `${(i % 10) * 100 / 9}% ${Math.floor(i / 10) * 100 / 5}%`; }); }
@@ -2275,7 +2366,7 @@ const PRODUCTS = [
     title: c => `${D.tt.name} in ${c.name}` }] : []),
 ];
 const PBY = Object.fromEntries(PRODUCTS.map(p => [p.route, p]));
-const icons = c => `<img class="ic only-light" src="img/icon-${c.icon}-light.webp" alt="" width="256" height="256"><img class="ic only-dark" src="img/icon-${c.icon}-dark.webp" alt="" width="256" height="256">`;
+const icons = c => `<img class="ic only-light" src="img/icon-${c.icon}-light.webp" alt="" width="256" height="256">`;
 const stage = document.getElementById('stage'), thumbs = document.getElementById('thumbs'), phone = matchMedia('(max-width: 700px)');
 let P = PRODUCTS[0], cur = null, view = 'habitat', turnFrame = 0, autoTurn = null;
 const vw = () => P.views(cur) || {};
@@ -2338,8 +2429,8 @@ function showView(v, focus) {
     stage.setAttribute('aria-labelledby', b.id);
     thumbs.scrollTo({ left: b.offsetLeft - (thumbs.clientWidth - b.offsetWidth) / 2, behavior: reduce ? 'auto' : 'smooth' });
     if (focus) b.focus({ preventScroll: true }); });
-  for (const n of [list[(i + 1) % list.length], list[(i + list.length - 1) % list.length]]) {   // the neighbours load while this one is looked at
-    const t = src(c, n); if (n !== 'turn' && n !== 'spin') new Image().src = (phone.matches && t.tall ? t.tall : t).src; }
+  afterLoad(() => { for (const n of [list[(i + 1) % list.length], list[(i + list.length - 1) % list.length]]) {   // the neighbours load
+    const t = src(c, n); if (t && n !== 'turn' && n !== 'spin') new Image().src = (phone.matches && t.tall ? t.tall : t).src; } });   // once the page has
 }
 function go(d, focus) { const list = shown(BY[cur]); showView(list[(list.indexOf(view) + d + list.length) % list.length], focus); }
 const MORE = {
@@ -2367,7 +2458,8 @@ function renderProduct(Pr, k) {
       `<span class="coin-dot" style="--i:${o.coin}"></span>`)); return li; }));
   thumbs.replaceChildren(...shown(c).map((v, i) => { const s = src(c, v), label = P.VIEWS.find(x => x[0] === v)[1];
     const b = el('button', { type: 'button', role: 'tab', id: `thumb-${i}`, 'data-v': v, 'aria-label': label, 'aria-controls': 'stage',
-      class: 'thumb' + (v === 'turn' ? ' turn' : ''), style: `background:url(${s.src}) ${v === 'turn' ? '0 0 / 600% 400%' : 'center / cover'} no-repeat` });
+      class: 'thumb' + (v === 'turn' ? ' turn' : ''), style: s.th ? `background:url(${s.th}) center / cover no-repeat`
+        : `background:url(${s.src}) ${v === 'turn' ? '0 0 / 600% 400%' : 'center / cover'} no-repeat` });
     b.addEventListener('click', () => showView(v)); return b; }));
   showView(shown(c)[0]);                              // Tropos opens on its photograph in its element, the rest on their hero
   company(document.getElementById('p-company'), k, P.id, true);
@@ -2442,10 +2534,10 @@ function relations(k) {
 function pcard(Pr, k) {
   const c = BY[k], im = Pr.card(k);
   const a = el('a', { class: 'pcard', href: `#${Pr.route}-${c.name.toLowerCase()}` },
-    `<img src="${im.src}" width="${im.w}" height="${im.h}" alt="" loading="lazy">` + (im.shown ? `<span class="tag">Shown in ${BY[im.shown].name}</span>` : '') +
+    `<img data-src="${im.src}" width="${im.w}" height="${im.h}" alt="">` + (im.shown ? `<span class="tag">Shown in ${BY[im.shown].name}</span>` : '') +
     `<b>${Pr.id === 'speaker' ? `Tropos, ${c.name}` : Pr.name(c)}</b>` +
     `<span class="pc-col"><span class="coin-dot" style="--i:${c.coin}"></span>${Pr.id === 'speaker' ? Pr.kind : `${Pr.kind} in ${c.name}`}</span>`);
-  a.querySelector('img').alt = Pr.title(c);
+  a.querySelector('img').alt = Pr.title(c); later(a.querySelector('img'));
   return a;
 }
 // a row's cards for some colours: this product in each first, then the other lines' in each, as many as a row holds
@@ -2543,7 +2635,7 @@ function route() {
     if (target && !LINE_NAME[h] && !/^(turntable|mantle)-/.test(h)) target.scrollIntoView(); else scrollTo(0, 0);
     navAt(L); ask();
   } else {
-    page = 'home'; showMain('home'); document.title = TITLE0;
+    page = 'home'; showMain('home'); document.title = TITLE0; heroIn();
     const target = h && document.getElementById(h);
     if (target && h !== 'top') target.scrollIntoView(); else if (last !== 'home' || h === 'top') scrollTo(0, 0);
     navAt(h === 'colours' ? 'colours' : null); ask();
@@ -2788,6 +2880,10 @@ def build():
     """The whole site into site/: the page as a document, the favicons, robots.txt and vercel.json."""
     # the 3D view's files (viewer/dist, from viewer/build.mjs: three.js and Tropos's compressed CAD) go into site/3d only
     # while VIEW3D is on; off, there is no site/3d, so the CAD is never deployed (the coordinator, 2026-10-31)
+    # the type, self-hosted since round 47 (Instrument Sans and IBM Plex Mono, both SIL OFL; webfonts/, Google Fonts'
+    # latin and latin-ext cuts): no third-party stylesheet in the way of the first paint
+    shutil.copytree(os.path.join(HERE, 'webfonts'), os.path.join(SITE, 'fonts'), dirs_exist_ok=True,
+                    ignore=shutil.ignore_patterns('fonts.css'))
     d3, src3 = os.path.join(SITE, '3d'), os.path.join(HERE, 'viewer', 'dist')
     if os.path.exists(d3):
         shutil.rmtree(d3)
