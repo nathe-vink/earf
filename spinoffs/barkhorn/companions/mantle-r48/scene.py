@@ -39,8 +39,17 @@ def lin(h):
     return [x / 12.92 if x <= 0.04045 else ((x + 0.055) / 1.055) ** 2.4 for x in c]
 
 
+# custom pours (round 48's color pass): EARF's own colors at a lighter dye loading, set so the light a 25 mm path
+# passes is the color's `deep` (the speakers' flavours, ../common.py), so a full 12.7 stratum can be tinted and still pass
+# light. A caster pours these to order (round 17's partners); they are not stock.
+CUSTOM = {'ember-custom': '#F2A29C', 'ice-custom': '#B5D9EE', 'haze-custom': '#BEADD8', 'dust-custom': '#F2B184'}
+
+
 def sigma_tint(key):
-    """Absorption per metre, each channel: the chip's internal transmission over 3.175 mm."""
+    """Absorption per metre, each channel: the chip's internal transmission over 3.175 mm (stock), or a custom pour's
+    `deep` after 25 mm."""
+    if key in CUSTOM:
+        return [-math.log(max(x, 0.002)) / 0.025 for x in lin(CUSTOM[key])]
     t = TINTS[key]
     c = lin(t['hue'])
     y = 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]
@@ -646,8 +655,28 @@ def build(args):
     for k, t in pl:
         bands_platter.append((z, z + t * mm, k)); z += t * mm
 
+    def remap(bands):
+        # --tint-mode wide: each stock tinted lamina 5.6 thicker, eating into the clear stratum above (1/4 in tinted +
+        # 1/4 in clear in place of a 1/2 in clear); custom: every stratum tinted at the custom pour's density, no rings
+        if args.tint_mode == 'custom':
+            return [(b_[0], b_[1], 'tint') + tuple(b_[3:]) for b_ in bands]
+        if args.tint_mode == 'wide':
+            out, srt = [], sorted(bands)
+            for i, b_ in enumerate(srt):
+                z0_, z1_, k = b_[0], b_[1], b_[2]
+                if k == 'clear' and i > 0 and srt[i - 1][2] == 'tint':
+                    z0_ = min(z0_ + 0.0056, z1_)
+                if k == 'tint' and i + 1 < len(srt) and srt[i + 1][2] == 'clear':
+                    z1_ = min(z1_ + 0.0056, srt[i + 1][1])
+                out.append((z0_, z1_, k) + tuple(b_[3:]))
+            return out
+        return bands
+    bands_deck, bands_cover, bands_platter = remap(bands_deck), remap(bands_cover), remap(bands_platter)
+
     M = {}
     rw = meta['P'].get('tint_ring')
+    if args.tint_mode == 'custom':
+        rw = None
     if 'deck-L1-stack' in objs:
         M['deck'] = acrylic('deck', bands_deck, tint, ring=(0.0, 0.0, meta['W1'] * mm, meta['D1'] * mm, rw * mm) if rw else None)
         M['cover'] = acrylic('cover', bands_cover, tint)
@@ -676,12 +705,12 @@ def build(args):
               'dowels': 'steel', 'mark': 'etch'}
     # proposal A's parts (mantle_strata.py)
     if 'plinth-L1-stack' in objs:
-        bands_pl = [(l['z0'] * mm, l['z1'] * mm, l['kind'], l['inset'] * mm) for l in meta['lams']]
+        bands_pl = remap([(l['z0'] * mm, l['z1'] * mm, l['kind'], l['inset'] * mm) for l in meta['lams']])
         o0 = meta['P']['margin'] * mm
-        M['plinth'] = acrylic('plinth', bands_pl, tint, ring=(o0, o0, o0 + (meta['W0']) * mm, o0 + meta['D0'] * mm, rw * mm))
-        bands_b = [(l['z0'] * mm, l['z1'] * mm, l['kind'], 0.0) for l in meta['base']]
-        M['base'] = acrylic('base', bands_b, tint, ring=(0.0, 0.0, meta['Wb'] * mm, meta['Db'] * mm, rw * mm))
-        M['lid'] = acrylic('lid', [(0.0, 0.5, 'tint')], tint, rough=0.004)
+        M['plinth'] = acrylic('plinth', bands_pl, tint, ring=(o0, o0, o0 + (meta['W0']) * mm, o0 + meta['D0'] * mm, rw * mm) if rw else None)
+        bands_b = remap([(l['z0'] * mm, l['z1'] * mm, l['kind'], 0.0) for l in meta['base']])
+        M['base'] = acrylic('base', bands_b, tint, ring=(0.0, 0.0, meta['Wb'] * mm, meta['Db'] * mm, rw * mm) if rw else None)
+        M['lid'] = acrylic('lid', [(0.0, 0.5, 'tint')], tint if args.tint_mode != 'custom' else tint, rough=0.004)
         M['post'] = acrylic('post', [(0.0, 0.5, 'clear')], tint, wear_on=False)
         M['strip'], nt_, out_ = node_tree('strip')
         em = nt_.nodes.new('ShaderNodeEmission'); em.inputs['Color'].default_value = (1.0, 0.62, 0.30, 1); em.inputs['Strength'].default_value = args.strip
@@ -715,7 +744,7 @@ def build(args):
             o.data.materials.append(M[f])
     # the cover: on, off (hidden), or stood on its back edge beside the deck (the frame for the sleeve)
     cov = objs.get('cover-C1-stack') or bpy.data.objects.new('nocover', None)
-    if args.shot in ('hero', 'macro', 'macro-stylus', 'use') and cov.type == 'MESH':
+    if args.shot in ('hero', 'macro', 'macro-stylus', 'use', 'dusk') and cov.type == 'MESH':
         cov.hide_render = args.shot != 'use'
     if args.shot in ('use', 'stand') and cov.type == 'MESH':
         # stand it on its back long edge to the left of the deck, its open side forward
@@ -827,7 +856,7 @@ def setup_world(args, meta):
         return o
 
     T = (cx, cy, 0.06)
-    if args.shot in ('hero', 'macro', 'closed', 'stand'):
+    if args.shot in ('hero', 'macro', 'macro-stylus', 'closed', 'stand', 'dusk'):
         bg.inputs['Color'].default_value = (0.02, 0.02, 0.022, 1); bg.inputs['Strength'].default_value = 1.0
         # key: a large softbox high front-left, a 40 deg grid so it shapes rather than floods
         area('key', (1.2, 0.9), (cx - 1.1, cy - 0.9, 1.25), T, 140, spread=32)
@@ -874,6 +903,12 @@ def setup_world(args, meta):
         wall = boxo('wall', (5.0, 0.05, 3.0), (cx, cy + 0.42, 1.0), PH.pbr(bpy, 'beige_wall_001', '2k', bump=0.25, name='plaster'), bev=0)
         floor = boxo('floor', (6.0, 6.0, 0.02), (cx, cy, -0.75), dielectric('floorc', '#5A4A3C', 0.6), bev=0)
 
+    if args.shot == 'dusk':
+        # dusk: the room's light down to a blue evening, the base's loop the brightest thing
+        for o in bpy.data.objects:
+            if o.type == 'LIGHT':
+                o.data.energy *= 0.05; o.data.color = (0.70, 0.78, 1.0)
+        bg.inputs['Color'].default_value = (0.010, 0.013, 0.025, 1)
     # mark casters and receivers for MNEE
     for o in bpy.data.objects:
         if o.type == 'MESH':
@@ -887,6 +922,7 @@ def setup_world(args, meta):
     cam = bpy.data.cameras.new('cam'); co = bpy.data.objects.new('cam', cam); bpy.context.collection.objects.link(co)
     sc.camera = co
     shots = {
+        'dusk': dict(pos=(cx + 0.78, cy - 1.32, 0.48), tgt=(cx - 0.005, cy + 0.01, 0.07), lens=85, f=5.6, focus=(cx + 0.06, cy - 0.10, 0.06)),
         'hero': dict(pos=(cx + 0.78, cy - 1.32, 0.62), tgt=(cx - 0.005, cy + 0.01, 0.075), lens=85, f=8.0, focus=(cx + 0.06, cy - 0.10, 0.08)),
         'closed': dict(pos=(cx + 0.78, cy - 1.32, 0.52), tgt=(cx, cy + 0.01, 0.085), lens=85, f=8.0, focus=(cx + 0.05, cy - 0.15, 0.09)),
         'macro': dict(pos=(meta['A'][0] * mm + 0.27, meta['A'][1] * mm - 0.50, meta['top'] * mm + 0.15),
@@ -986,6 +1022,7 @@ if __name__ == '__main__':
     ap.add_argument('--paper', default='#2A2826'); ap.add_argument('--exposure', type=float, default=0.0)
     ap.add_argument('--spot', type=float, default=12.0); ap.add_argument('--label-deg', type=float, default=35.0)
     ap.add_argument('--blend', default=None); ap.add_argument('--strip', type=float, default=0.0)
+    ap.add_argument('--tint-mode', default='stock', choices=('stock', 'wide', 'custom'))
     a = ap.parse_args(argv)
     build(a)
     if a.blend:

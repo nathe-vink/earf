@@ -202,6 +202,45 @@ stopped at the protocol's three rounds. What still holds the scores down, in the
 "reads generic" (it is generic), and the parts inside the clear strata read as debris. The color reads as a red
 pinstripe, which is the honest look of thin stock tint (`critic/LOG.md`, the end).
 
+## 7. The color pass (the coordinator: more color)
+
+The owner's brand is color, and the critics read stock Ember's thin rings as "a red pinstripe". There were two
+routes to more color, rendered with the same calibrated model (`render_color.sh`):
+
+| frame | tint | what it shows |
+|---|---|---|
+| `outcrop-ember-wide-stock.png` | **stock** TruCast 2423, each tinted lamina 5.6 thicker (1/4 in tinted + 1/4 in clear in place of 1/2 in clear) | wider stock rings read **darker, not redder**: a 2423 path more than a few mm long goes near black. Stock tint gives a dark line, never a glow |
+| `outcrop-ember-custom.png` | **custom pour**: EARF's Ember at a lighter dye loading, 25 mm passing Ember's `deep` (#F2A29C) | every stratum tinted through and still passing light: the color is the whole object |
+| `outcrop-ice-custom.png` | **custom pour**, Ice (#B5D9EE after 25 mm) | the cool tint: a blue deck, the brass bearing seen through it |
+| `strata-ice-custom.png` | **custom pour**, Ice | Strata Float in color |
+| `strata-dusk-ember-custom.png` | **custom pour**, Ember, at dusk | Strata Float's base loop lit (40 x the day's strip), the room down to blue evening |
+
+**What this says:** color like the speakers' needs the caster's own pour at a lighter dye loading. Stock sheet can only
+draw lines. That is round 17's casting-partner question again, now with a number: the custom laminae are drawn to pass
+Ember's `deep` after 25 mm: about 48 % of the light through 25 mm, about two thirds through 12.7. The stock frames stay the honest prototype look.
+
+## 8. An EARF tonearm: concept only (`out-outcrop/drawings/arm-concept.png`, `arm_concept.py`)
+
+The critics' "cooler" lists all ask for an arm that is EARF's own. This is drawing level, for the owner to weigh:
+
+- **Not an acrylic wand.** PMMA's modulus is about a twentieth of aluminum's. A tube of the same mass and diameter is
+  about ten times less stiff, so its bending modes fall about 3.3 times lower, deep in the audio band. The tube and
+  bearing stay bought metal.
+- **Route 1 (recommended): EARF's parts on a bought RB330.**
+  - EARF makes a counterweight sleeve of strata around a tungsten core, a tinted finger lift, a rest column of strata
+    and a strata arm board.
+  - About $150-250 a set at 10-50 sets, plus the RB330 (estimates, not quotes).
+  - Rega supplies OEM arms to other makers (NAD, Rotel). Whether its terms allow a changed counterweight is the first
+    question to ask.
+- **Route 2: a private-label arm.**
+  - Ortofon has built arms for AudioQuest and Sumiko; Origin Live supplies some makers.
+  - No terms are published. Plan on about $400-900 an arm at 50-100 a year (estimate).
+- **Route 3: our own arm.** About $20,000-50,000 of development and a year of testing (estimate). Not for the first
+  Mantle. SME left OEM arms in 2019 and Jelco closed in 2020, so OEM supply is thin.
+
+Sources: Rega's OEM work (Wikipedia, Rega Research); Ortofon's OEM arms (The Absolute Sound, AS-212R review); SME's exit
+(Stereonet, 2019); Jelco's closure (Stereonet forum, HiFi News "A call to arms"); Origin Live's OEM supply (Stereophile).
+
 ## Open questions for the owner
 
 1. **A or B,** or B's cover on A's float.
@@ -211,3 +250,6 @@ pinstripe, which is the honest look of thin stock tint (`critic/LOG.md`, the end
 4. **Outcrop has no light.** If the owner wants the glow, A's lit base can go under Outcrop's deck on four short clear
    posts, at A's cost.
 5. **Cartridge:** the 2M Black ($750), or the 2M Blue ($220) for the first build (round 43).
+6. **Color:** stock sheet only draws dark lines. Do we ask the caster for EARF's tints at a lighter dye loading, in 3 and
+   12.7 mm (section 7)?
+7. **The arm:** keep the RB330, or ask Rega about EARF's own counterweight, finger lift and rest on it (section 8)?
