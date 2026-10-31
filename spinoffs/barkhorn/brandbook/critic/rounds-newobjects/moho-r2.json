@@ -1,0 +1,3 @@
+{"stage1": {"score": 5.5}, "verdict": "iterate", "score_if_fixed": 7.2,
+ "changes": ["c1 a small hard source behind-left for a tinted shadow on the label", "c2 a paper label, not black", "c3 the fill card out of the puck's faces", "c4 vinyl grooves", "c5 camera higher", "c6 more samples, no sharpening", "c7 key bigger and higher", "c8 sweep a stop darker"],
+ "accept": [{"id":"c2","region":[480,860,560,900],"metric":"lum_median","op":"between","value":[90,190]},{"id":"c3","region":[620,820,1180,930],"metric":"clip_pct","op":"<","value":0.5},{"id":"c8","region":[0,0,400,400],"metric":"lum_median","op":"between","value":[110,150]}]}
