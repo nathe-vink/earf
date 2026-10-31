@@ -109,7 +109,7 @@ def _slab(m, pts, t, normal=None):
 def street(bpy, kit, p, objs):
     """Outside the glass: the sidewalk, the kerb and the road, and the building opposite with a few lit windows."""
     sw = Mesh('popup-sidewalk'); sw.box(-3.6, -30.0, -0.15, -0.20, Q.W + 30.0, 0.0)
-    objs.append(sw.object(bpy, R._pbr(bpy, kit, 'concrete_pavement', res='2k', tint=p.get('pavement', '#45423E'), tint_mix=0.5)))
+    objs.append(sw.object(bpy, R._pbr(bpy, kit, 'concrete_pavement', res='2k', tint=p.get('pavement', '#2E2C29'), tint_mix=0.7)))
     rd = Mesh('popup-road'); rd.box(-16.0, -30.0, -0.30, -3.6, Q.W + 30.0, -0.15)
     objs.append(rd.object(bpy, principled(bpy, 'popup-asphalt', '#1C1C1D', rough=0.55, bump=(0.004, 0.3, 0.0004))))
     fa = Mesh('popup-opposite'); fa.box(-17.0, -30.0, -0.30, -16.0, Q.W + 30.0, 14.0)
@@ -123,8 +123,9 @@ def street(bpy, kit, p, objs):
                 wins.box(-16.02, y, zf, -16.0, y + 1.4, zf + 1.6)
     if p.get('windows_lit', 0.35) > 0:
         objs.append(wins.object(bpy, emitter(bpy, 'popup-opp-lit', '#FFC890', p.get('window_glow', 1.2))))
-    shop = Mesh('popup-opp-shop'); shop.box(-16.02, -4.0, 0.2, -16.0, 6.0, 2.8)
-    objs.append(shop.object(bpy, emitter(bpy, 'popup-opp-shop', '#E8D8C0', p.get('opp_shop_glow', 0.25))))
+    if p.get('opp_shop_glow', 0.0) > 0:          # (round 43 p1: its reflection read as a hard blue rectangle on the glass)
+        shop = Mesh('popup-opp-shop'); shop.box(-16.02, -4.0, 0.2, -16.0, 6.0, 2.8)
+        objs.append(shop.object(bpy, emitter(bpy, 'popup-opp-shop', '#FFB070', p['opp_shop_glow'])))
 
 
 def popup(bpy, name, p, kit):
@@ -199,6 +200,14 @@ def popup(bpy, name, p, kit):
         xc = Q.WALL_L['x0'] + 0.25 + i * 0.66
         m = Mesh(f'popup-cover{i}'); m.box(xc, W - 0.07, SHELF[-1], xc + 0.315, W - 0.064, SHELF[-1] + 0.315)
         ob = m.object(bpy, principled(bpy, f'popup-cover-{cc[i]}', cc[i], rough=0.6)); ob.rotation_euler[0] = math.radians(6)
+        objs.append(ob)
+    # sleeves face out on the upper shelves of both walls (round 43 p1: "nearly empty, an unopened fit-out")
+    fo = [(x, z, 'right') for (x, z) in p.get('faceout_r', [])] + [(x, z, 'left') for (x, z) in p.get('faceout_l', [])]
+    for i, (x, z, side) in enumerate(fo):
+        c = cc[i % len(cc)] if i % 3 else '#2a2622'
+        y0, y1 = (0.10, 0.106) if side == 'right' else (W - 0.106, W - 0.10)
+        m = Mesh(f'popup-fo{i}'); m.box(x, y0, z, x + 0.315, y1, z + 0.315)
+        ob = m.object(bpy, principled(bpy, f'popup-cover-{c}', c, rough=0.6))
         objs.append(ob)
     # the price cards, leaning at the shelf fronts
     card = Mesh('popup-cards')

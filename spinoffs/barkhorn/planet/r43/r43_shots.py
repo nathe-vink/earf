@@ -34,10 +34,14 @@ VIEWS = {
                  lights={'win': {'power_w': 10.0}, 'street': {'irradiance': 0.6}}),
     # p0 look: the opposite building's windows and lit shop mirrored in the glass as white squares and a blue band, the
     # sidewalk hot, a mullion down the middle: the facade dimmed, the glass a softer reflector, one pane, the street lamp down
-    'window': dict(camera={'position': [-5.6, 1.9, 1.50], 'target': [2.4, 3.1, 1.45], 'lens_mm': 35, 'level': True,
-                           'fstop': 5.6, 'focus': [0.7, 2.9, 1.0]}, exposure=4.0,
-                   room={'windows_lit': 0.0, 'opp_shop_glow': 0.03, 'glass_gloss': 0.35},
-                   lights={'street': {'irradiance': 0.15}, 'fill': {'irradiance': 0.0}}),
+    # p2 (p1 judged 4.5/4.0, converged: a hard blue rectangle on the glass, which was the placeholder shop opposite
+    # reflected; the pavement the brightest thing (172); the pair underlit (19); the back crushed; the shelves bare; too
+    # far back): the shop opposite gone, the pavement dark and the street lamp down, the room's fill back, the pair's
+    # spots 26 to 60 W at 26 deg, sleeves face out on the upper shelves, haze, closer at 40 mm
+    'window': dict(camera={'position': [-3.8, 2.3, 1.35], 'target': [2.4, 3.3, 1.2], 'lens_mm': 40, 'level': True,
+                           'fstop': 5.6, 'focus': [0.7, 2.9, 1.0]}, exposure=4.0, haze=0.002,
+                   room={'windows_lit': 0.0, 'opp_shop_glow': 0.0, 'glass_gloss': 0.35},
+                   lights={'street': {'irradiance': 0.05}, 'fill': {'irradiance': 0.2}, 'win': {'power_w': 60.0, 'cone_deg': 26.0}}),
     # p0 look: too dark, the left stack out of frame: the camera back by the drape's opening, both stacks in; the
     # stacks' spots, the seats' light and the exposure up
     'listening': dict(camera={'position': [9.85, 2.2, 1.25], 'target': [13.3, 3.8, 0.85], 'lens_mm': 20, 'level': True,
@@ -64,7 +68,11 @@ def scene():
     cards = [(x, SHELF[k], 'right') for x in (1.3, 2.5, 3.7, 4.9) for k in (1, 2)] + \
             [(x, SHELF[2], 'left') for x in (2.0, 3.4, 4.8)]
     props = [{'kind': 'kit', 'shape': 'ext', 'path': KIT43, 'fn': 'popup', 'cards': cards, 'led': 3.0,
-              'felt': '#26272A', 'ceiling': '#2E2C2A', 'floor_tint': '#4E4943', 'floor_coat': 0.45}]
+              'felt': '#26272A', 'ceiling': '#2E2C2A', 'floor_tint': '#4E4943', 'floor_coat': 0.45,
+              'faceout_r': [(2.20, SHELF[1]), (2.60, SHELF[1]), (3.00, SHELF[1]), (4.30, SHELF[2]), (4.70, SHELF[2]),
+                            (2.05, SHELF[3]), (5.20, SHELF[3]), (1.10, SHELF[4]), (1.80, SHELF[4]), (3.40, SHELF[4])],
+              'faceout_l': [(1.60, SHELF[2]), (2.40, SHELF[2]), (3.80, SHELF[2]), (4.60, SHELF[2]),
+                            (1.90, SHELF[3]), (3.10, SHELF[3]), (4.30, SHELF[3])]}]
     # signs of life (p1's critics): a round on the bar, a glass on two ledges
     by = (Q.BAR['y0'] + Q.BAR['y1']) / 2
     props.append({'kind': 'kit', 'shape': 'ext', 'path': 'spinoffs/barkhorn/planet/r39/kit39.py', 'fn': 'life',
