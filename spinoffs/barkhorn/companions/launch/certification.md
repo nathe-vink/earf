@@ -127,3 +127,54 @@ fire-enclosure and material-flammability evaluation.
 
 Cost and timeline: the other researcher is pricing labs. Public figures found here are forum anecdotes ($5k to $20k
 for a luminaire), so not quoted.
+
+## Additions from the compliance research (R3, `r46-owner-notes` 66b1e262), where they change a design
+
+### Core's charger is a regulated battery-charger system
+
+The federal battery-charger standard (10 CFR 430.32(z), tested to Appendix Y) and DOE certification apply. So does a
+listing in California's appliance efficiency database (MAEDbS, 20 CCR 1606) **before any California sale**. The unit
+tested is **the system**: the USB-C adapter in the box plus Core's charge circuit and cells.
+
+**What Appendix Y's test needs**, and the design that makes it simple:
+1. **The battery's energy measured on discharge.** The lab must discharge the cells at a set rate, so give it access to
+   the cell terminals without cutting anything. The hatch and holders already allow this: add two **test pads** on the
+   board, behind the hatch, at the cells' + and −.
+2. **Charge energy, then maintenance mode** (charged, still plugged in) **and no-battery mode** (the cells out). The
+   power in each mode counts, so:
+   - **no trickle at rest:** the LTC4162 terminates and only tops up below a threshold, which is right;
+   - **the touch circuit and the fuel gauge asleep** when the lamp is off and full;
+   - **under 0.1 W at the wall in no-battery mode,** with the adapter's own no-load (Level VI) included. Measure this on
+     the first articles.
+3. **A test mode in the firmware:** a long press (10 s) on the ring with the cells charging disables the LED load. The
+   lab can then measure charging alone; the lamp still runs while it charges for the user.
+4. **One adapter, named:** the system is certified with the adapter in the box. Name it on the label and the manual,
+   and don't change it without a re-test.
+
+**Who:** BACL (Sunnyvale) offers DOE and California charger testing and can list all four products with an NRTL
+(R3). The test runs on the first articles (`first-articles.md`). DOE certification and the MAEDbS listing are filed
+by EARF as the manufacturer.
+
+### Removable cells: battery stewardship (AB 2440)
+
+User-removable cells keep Core out of SB 1215's fee on products with embedded batteries. But they bring it under
+**AB 2440 battery stewardship**: a producer must join an approved scheme (Call2Recycle is the one in place) **by
+1 April 2027**. Design and paperwork follow:
+- the hatch label adds the recycling mark and "Recycle the cells: do not throw away";
+- the box and manual say where;
+- EARF joins before the first California sale.
+
+### A small hardwired Hemisphere run: UL's Limited Production Certification
+
+For a small batch of the hardwired version (the trade and bars, after the plug-in swag), UL's **Limited Production
+Certification** fits better than a field evaluation of each unit (R3). The UL 1598 design notes above stand.
+
+### Lead-free brass
+
+Prop 65 applies only from 10 employees, but **lead-free brass is the right default**. That changes **Mantle's**
+brass parts:
+- the platter hub, the bearing housing and the motor pod's core are drawn in **C360**, a leaded free-machining brass;
+- **change them to a lead-free machining brass: C69300 (Eco Brass), or C27450.** Both machine nearly as freely; ask
+  RFQ 04's shop which it stocks.
+
+Hemisphere and Core have no brass. Their threaded inserts are to be specified lead-free too.
