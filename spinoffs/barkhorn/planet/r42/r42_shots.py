@@ -16,8 +16,13 @@ KIT42 = 'spinoffs/barkhorn/planet/r42/kit42.py'
 
 VIEWS = {
     # along the counter from its far end: the zinc, the Hemispheres, the back bar and the record wall, the decks
-    'counter': dict(camera={'position': [10.35, 2.55, 1.42], 'target': [4.6, 4.55, 1.30], 'lens_mm': 32, 'level': True,
-                            'fstop': 4.0, 'focus': [7.3, 4.1, 1.15]}, exposure=4.0),
+    # p2 (both p1 critics 5.0, converged): Mother EARF into the frame (28 mm, aimed into the room), exposure down, the
+    # zinc darker and rougher, the pendants' downlights softer, the record wall in pools, the Cores up a little
+    'counter': dict(camera={'position': [10.35, 2.55, 1.42], 'target': [4.6, 3.6, 1.55], 'lens_mm': 28, 'level': True,
+                            'fstop': 4.0, 'focus': [7.3, 4.0, 1.15]}, exposure=3.6,
+                    lights={'pend': {'power_w': 20.0, 'cone_deg': 24.0}, 'rw': {'power_w': 8.0, 'cone_deg': 16.0, 'color': 2700},
+                            'street': {'radius_m': 0.6}},
+                    retouch={'darken': {'zinc': 0.25}, 'zinc_rough': [0.30, 0.60]}, orb={'lamp_w': 0.6, 'shade_glow': 0.012}),
     # the listening corner: the altar, the pair, the tub chairs and their Cores
     'listening': dict(camera={'position': [11.25, 2.70, 1.30], 'target': [16.5, 3.05, 1.00], 'lens_mm': 26, 'level': True,
                               'fstop': 4.0, 'focus': [16.0, 3.0, 1.0]}, exposure=4.8),
@@ -67,6 +72,15 @@ def shot(view):
     s['render']['exposure'] = v.get('exposure', s['render']['exposure'])
     s['title'] = f'Planet EARF, round 42: {view}'
     s['set']['props'] += v.get('props', [])
+    for pre, kv in v.get('lights', {}).items():
+        for name, L in s['lights'].items():
+            if name.startswith(pre):
+                L.update(kv)
+    for q in s['set']['props']:
+        if q.get('fn') == 'retouch' and v.get('retouch'):
+            q.update(v['retouch'])
+        if q.get('fn') == 'orb' and q.get('module') == 'earf_moon' and v.get('orb'):
+            q.update(v['orb'])
     if v.get('shop'):
         props, products, lights = shop_props()
         s['set']['props'] += props
