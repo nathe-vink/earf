@@ -75,7 +75,7 @@ LANT = dict(x0=13.00, x1=20.90, y0=ROUTE_Y[1], y1=W - 0.06)      # the box's out
 LEAF = 0.30                      # each wall: oak skin 20 + fin cavity 60 + outer leaf (2 x 15.9 gypsum on 89 studs) +
                                  # 50 air + inner leaf (2 x 15.9 gypsum on 64 studs, 50 mineral wool) + 25 oak inner
 LANT['h'] = 3.90                 # its outer height: a 60 mm shadow gap to the ceiling at 3.96
-BAND = dict(z0=3.45, z1=3.90, fins=0.020, pitch=0.060)            # the lit acrylic fins, 20 mm on a 60 mm pitch,
+BAND = dict(z0=3.45, z1=3.90, fins=0.020, pitch=0.028)            # the lit acrylic fins, 20 mm on a 28 mm pitch,
                                                                   # in the outer cavity only (outside the seal)
 BAFFLE_SLOTS = dict(w=0.012, pitch=0.072)                         # the front's slotted oak: 12 mm slots on 72 mm
 INNER = dict(x0=LANT['x0'] + LEAF, x1=LANT['x1'] - LEAF, y0=LANT['y0'] + LEAF, y1=LANT['y1'] - LEAF)
