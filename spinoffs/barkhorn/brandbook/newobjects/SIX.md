@@ -45,7 +45,7 @@ Four discs of half-inch cast sheet, bonded into one puck 66 mm across and 51 mm 
 
 *Rock, in layers: a drill core stood on end.*
 
-A column 110 mm across and 1.12 m tall, made of 87 rings of half-inch cast sheet in eight bands of the line's tints, in uneven thicknesses like a real core. Between every band sits a quarter-inch layer of near-clear 3030 sheet. A warm LED line in the bore lights those clear layers from inside, and their polished outer edges glow: **the boundaries between the strata are lines of light**, while the tinted bands stay deep. An LED uplight in the top of the bore washes the ceiling, which is the light you read by. The column stands on a blackened steel disc.
+A column 110 mm across and 1.12 m tall, made of 87 rings of half-inch cast sheet in eight bands of the line's tints, in uneven thicknesses like a real core. Between every band sits a quarter-inch layer of near-clear 3030 sheet. A warm LED line runs inside a white tube in the bore, slotted only where the clear layers are, so light enters the clear layers and nothing else; their polished outer edges glow: **the boundaries between the strata are lines of light**, while the tinted bands stay deep (a deep tint lit from inside through 17 mm would barely glow: TruCast's 2423 passes 14% at 3.2 mm). An LED uplight in the top of the bore washes the ceiling, which is the light you read by. The column stands on a blackened steel disc.
 
 | Dimension | |
 |---|---|
@@ -53,7 +53,7 @@ A column 110 mm across and 1.12 m tall, made of 87 rings of half-inch cast sheet
 | Height overall | about 1,120 mm |
 | Base | blackened steel, Ø 320 × 20 mm |
 | Bands | eight tints, 6 to 16 rings each (87 rings of 12.7 mm), with nine 5.6 mm clear light-guide layers |
-| Light | uplight about 900 lm, 2700 K, CRI 90 (est.); glow line about 6 W; two channels, dimmable |
+| Light | uplight about 900 lm, 2700 K, CRI 90 (est.); a glow line about 6 W inside a white tube slotted at each clear guide; two channels, dimmable |
 | Weight | about 21 kg (acrylic 7 kg, base 12.6 kg; est.) |
 | Listing | UL 153 (a portable lamp), with its own Class 2 driver |
 
@@ -115,7 +115,7 @@ A block of nine bonded layers of one tint, 200 × 110 × 115 mm, with a near-cle
 
 *Stones stacked to mark a way.*
 
-Five slabs of half-inch sheet, each smaller than the one below and set a little off its centre, bonded into a stepped stack like stones on a trail. Two tints to a pair, never a rainbow: Smoke with one layer of Ember, say. The slabs' faces are the sheet's own polish; their sawn sides are left satin, so the strata read as matte lines between bright faces. A stainless tongue under the bottom slab goes under the books and holds them.
+Five slabs of half-inch sheet, each smaller than the one below and set a little off its centre, bonded into a stepped stack like stones on a trail. Two tints to a pair, never a rainbow: Fog with one layer of Ember, say, or Smoke with one of Acid. The slabs' faces are the sheet's own polish; their sawn sides are left satin, so the strata read as matte lines between bright faces. A stainless tongue under the bottom slab goes under the books and holds them.
 
 | Dimension | |
 |---|---|

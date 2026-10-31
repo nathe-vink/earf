@@ -25,13 +25,14 @@ OBJECTS = [
   price=135, role='The entry price: a gift, a Kickstarter add-on, a thing for every record shop counter.'),
  dict(key='lithos', name='Lithos', what='A floor lamp, a core sample', tag='Rock, in layers: a drill core stood on end.',
   concept=("A column 110 mm across and 1.12 m tall, made of 87 rings of half-inch cast sheet in eight bands of the line's tints, in "
-           "uneven thicknesses like a real core. Between every band sits a quarter-inch layer of near-clear 3030 sheet. A warm LED line in "
-           "the bore lights those clear layers from inside, and their polished outer edges glow: **the boundaries between the strata are lines "
-           "of light**, while the tinted bands stay deep. An LED uplight in the top of the bore washes the ceiling, which is the light you "
+           "uneven thicknesses like a real core. Between every band sits a quarter-inch layer of near-clear 3030 sheet. A warm LED line runs "
+           "inside a white tube in the bore, slotted only where the clear layers are, so light enters the clear layers and nothing else; their "
+           "polished outer edges glow: **the boundaries between the strata are lines of light**, while the tinted bands stay deep (a deep tint "
+           "lit from inside through 17 mm would barely glow: TruCast's 2423 passes 14% at 3.2 mm). An LED uplight in the top of the bore washes the ceiling, which is the light you "
            "read by. The column stands on a blackened steel disc."),
   dims=[('Column', 'Ø 110 mm outside, Ø 76 mm bore, 1,100 mm of acrylic'), ('Height overall', 'about 1,120 mm'), ('Base', 'blackened steel, Ø 320 × 20 mm'),
         ('Bands', 'eight tints, 6 to 16 rings each (87 rings of 12.7 mm), with nine 5.6 mm clear light-guide layers'),
-        ('Light', 'uplight about 900 lm, 2700 K, CRI 90 (est.); glow line about 6 W; two channels, dimmable'), ('Weight', 'about 21 kg (acrylic 7 kg, base 12.6 kg; est.)'),
+        ('Light', 'uplight about 900 lm, 2700 K, CRI 90 (est.); a glow line about 6 W inside a white tube slotted at each clear guide; two channels, dimmable'), ('Weight', 'about 21 kg (acrylic 7 kg, base 12.6 kg; est.)'),
         ('Listing', 'UL 153 (a portable lamp), with its own Class 2 driver')],
   process='Rings laser- or CNC-cut from sheet (their cores become Moho); bonded in eight bands with the clear guides between, annealed; bored and turned true; the outside polished; stacked on a threaded aluminium tube through the base.',
   bom=[('Sheet: 87 rings from 115 mm squares of 1/2"', lambda: sheet('1/2', 87 * 0.115**2)), ('Clear 3030 guides: nine from 1/4"', lambda: sheet('1/4', 9 * 0.115**2)),
@@ -57,7 +58,7 @@ OBJECTS = [
   price=1450, role='A listening object below Tropos\'s price: a gift for the hi-fi crowd, a hotel room\'s radio, the add-on that makes a pair complete.'),
  dict(key='cairn', name='Cairn', what='Bookends', tag='Stones stacked to mark a way.',
   concept=("Five slabs of half-inch sheet, each smaller than the one below and set a little off its centre, bonded into a stepped stack "
-           "like stones on a trail. Two tints to a pair, never a rainbow: Smoke with one layer of Ember, say. The slabs' faces are the sheet's "
+           "like stones on a trail. Two tints to a pair, never a rainbow: Fog with one layer of Ember, say, or Smoke with one of Acid. The slabs' faces are the sheet's "
            "own polish; their sawn sides are left satin, so the strata read as matte lines between bright faces. A stainless tongue under the "
            "bottom slab goes under the books and holds them."),
   dims=[('Each', 'about 160 W × 120 D × 64 H mm (five layers of 12.7 mm)'), ('Slabs', '160×120, 140×110, 120×100, 100×90, 80×80 mm, offset ±8 mm'),

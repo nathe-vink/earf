@@ -53,7 +53,7 @@ class D:
 def moho():
     d = D('Moho', 'record weight · four layers 1/2" · brass core', '01'); k = 5.5
     x0, y0 = 220, 560; w, h = 66 * k, 50.8 * k
-    tints = ['ember', 'acid', 'ice', 'smoke']
+    tints = ['ember', 'dust', 'acid', 'fog']
     for i, t in enumerate(tints):
         d.rect(x0, y0 - (i + 1) * 12.7 * k, w, 12.7 * k, fill=TINT[t], op=0.35, sw=1.2)
     d.rect(x0 + (66 - 25) / 2 * k, y0 - h, 25 * k, h, fill='#B08D57', op=0.35, sw=1, dash='6 4')
@@ -105,16 +105,16 @@ def ionos():
     d = D('Ionos', 'radio and streamer · nine layers 1/2" · a turning top', '03'); k = 2.6
     x0, y0 = 120, 640; w = 200 * k
     for i in range(9):
-        t = 'fog' if i == 4 else 'smoke'
+        t = 'fog' if i == 4 else 'ice'
         d.rect(x0, y0 - (i + 1) * 12.7 * k, w, 12.7 * k, fill=TINT[t], op=0.9 if i == 4 else 0.45, sw=1.1)
-    d.rect(x0 + (200 - 100) / 2 * k, y0 - 9 * 12.7 * k, 100 * k, 12.7 * k, fill=TINT['smoke'], op=0.25, sw=1.4, dash='5 3')
+    d.rect(x0 + (200 - 100) / 2 * k, y0 - 9 * 12.7 * k, 100 * k, 12.7 * k, fill=TINT['ice'], op=0.25, sw=1.4, dash='5 3')
     d.dimh(x0, x0 + w, y0 + 50, '200', ext_from=y0 + 2)
     d.dimv(y0 - 9 * 12.7 * k, y0, x0 - 38, '115 (9 × 12.7)', ext_from=x0 - 2)
     d.dimh(x0 + 50 * k, x0 + 150 * k, y0 - 9 * 12.7 * k - 28, 'Ø 100 top disc turns', ext_from=y0 - 9 * 12.7 * k - 2)
     d.text(x0 + w + 16, y0 - 4.5 * 12.7 * k + 4, '← clear layer, lit: the line', 11, 'start', MUTED)
     d.label(x0 + w / 2, y0 + 110, 'Front')
     sx = 860; sk = 2.6
-    d.rect(sx, y0 - 115 * sk, 110 * sk, 115 * sk, fill=TINT['smoke'], op=0.35)
+    d.rect(sx, y0 - 115 * sk, 110 * sk, 115 * sk, fill=TINT['ice'], op=0.35)
     d.rect(sx + 110 * sk - 4, y0 - 100 * sk, 4, 85 * sk, fill='#9AA0A6', sw=0.8)
     d.rect(sx + 12 * sk, y0 - 100 * sk, 80 * sk, 70 * sk, sw=0.9, dash='6 4')
     d.text(sx + 52 * sk, y0 - 62 * sk, 'pocket: computer, DAC, sensor', 10, c=MUTED)
@@ -126,7 +126,7 @@ def ionos():
 def cairn():
     d = D('Cairn', 'bookends · five layers 1/2" · two tints · satin sawn sides', '04'); k = 2.6
     x0, y0 = 160, 600
-    slabs = [(160, 0, 'smoke'), (140, 8, 'smoke'), (120, -6, 'ember'), (100, 9, 'smoke'), (80, -4, 'smoke')]
+    slabs = [(160, 0, 'fog'), (140, 8, 'fog'), (120, -6, 'ember'), (100, 9, 'fog'), (80, -4, 'fog')]
     for i, (sw_, off, t) in enumerate(slabs):
         cx = x0 + 80 * k + off * k
         d.rect(cx - sw_ / 2 * k, y0 - (i + 1) * 12.7 * k, sw_ * k, 12.7 * k, fill=TINT[t], op=0.45, sw=1.2)
@@ -147,7 +147,7 @@ def bedrock():
     d = D('Bedrock', 'record stand · end-plates 2 × 1/2" · three steel rails', '05'); k = 1.3
     x0, y0 = 120, 640
     prof = [(0, 0), (300, 0), (300, 150), (250, 150), (250, 185), (180, 185), (180, 215), (90, 215), (90, 230), (0, 230)]
-    d.poly([(x0 + x * k, y0 - y * k) for x, y in prof], fill=TINT['haze'], op=0.35, sw=1.4)
+    d.poly([(x0 + x * k, y0 - y * k) for x, y in prof], fill=TINT['dust'], op=0.35, sw=1.4)
     for rx, ry in [(40, 30), (260, 30), (150, 120)]:
         d.circle(x0 + rx * k, y0 - ry * k, 10 * k, fill='#9AA0A6', op=0.8, sw=1)
     d.rect(x0 + 18 * k, y0 - 315 * k - 5, 270 * k, 315 * k, sw=0.7, dash='6 5')
@@ -157,7 +157,7 @@ def bedrock():
     d.label(x0 + 150 * k, y0 + 100, 'End elevation (rails Ø 20)')
     fx, fk = 760, 1.1
     for px in (0, 470 - 25.4):
-        d.rect(fx + px * fk, y0 - 230 * fk, 25.4 * fk, 230 * fk, fill=TINT['haze'], op=0.45)
+        d.rect(fx + px * fk, y0 - 230 * fk, 25.4 * fk, 230 * fk, fill=TINT['dust'], op=0.45)
         d.line(fx + (px + 12.7) * fk, y0 - 230 * fk, fx + (px + 12.7) * fk, y0, 0.8, INK)
     for ry in (30, 120):
         d.rect(fx + 25.4 * fk, y0 - (ry + 10) * fk, 419.2 * fk, 20 * fk, fill='#9AA0A6', op=0.6, sw=0.9)
@@ -169,10 +169,10 @@ def bedrock():
 def relief():
     d = D('Relief', 'lit relief · twelve contour layers 1/4" · 600 square', '06'); k = 1.15
     cx, cy = 400, 450
-    d.rect(cx - 300 * k, cy - 300 * k, 600 * k, 600 * k, fill=TINT['ice'], op=0.08, sw=1.4)
+    d.rect(cx - 300 * k, cy - 300 * k, 600 * k, 600 * k, fill=TINT['fog'], op=0.3, sw=1.4)
     for lev, loops in layers():
         for l in loops:
-            d.poly([(cx + x * k, cy - y * k) for x, y in l[::3]], fill=TINT['ice'], op=0.05, sw=0.9)
+            d.poly([(cx + x * k, cy - y * k) for x, y in l[::3]], fill=TINT['fog'], op=0.25, sw=0.9)
     d.dimh(cx - 300 * k, cx + 300 * k, cy + 300 * k + 36, '600', ext_from=cy + 300 * k)
     d.dimv(cy - 300 * k, cy + 300 * k, cx - 300 * k - 34, '600', ext_from=cx - 300 * k)
     d.label(cx, cy - 300 * k - 24, 'Front: the twelve contours')
