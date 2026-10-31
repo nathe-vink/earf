@@ -44,3 +44,9 @@ counter Hemispheres at 6 W) has a clean floor. `night.png` (p2, the Hemispheres 
 dappled pools on the floor in the middle distance; the cause is not the counter Hemispheres, and with three rounds
 spent it ships as the duel chose it, the defect named here for the next look. The listening view stays a proof
 (`proofs/listening-p1.png`): in the House Book the axonometric shows that room.
+
+**The night final's floor, fixed (round 43, 31 October):** the soft rings on the floor were the stools' and tables'
+shadows thrown by the counter's four Hemisphere lamps (`earf_moon` dome) even at 6 W: their point lamps light in every
+direction from 1.72 m. Ruled out first, at quarter size: the counter's candles, their flames, the host stand's spot. With
+the four lamps off the rings vanished (`night-nodome`); at 1 W with the exposure 4.8 to 5.0 they are gone and the
+counter still reads. `night.png` was re-rendered at 2400 x 1600 with that change only.
