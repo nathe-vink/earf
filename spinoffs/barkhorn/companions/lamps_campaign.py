@@ -134,12 +134,12 @@ def core_bedside():
         asset('side_table_01', (-0.62, 2.82, 0.0), 0.0),
         box('paper', '#2B3A4A', (0.15, 0.21, 0.022), (-0.44, 2.74, 0.55), rotate_z=14),
         box('paper', '#B8873C', (0.14, 0.20, 0.018), (-0.44, 2.74, 0.572), rotate_z=4),
-        LF.core_piece(-0.64, 2.86, 0.55, 'ember', glow=0.06, rotate_z=-30),
+        LF.core_piece(-0.64, 2.86, 0.55, 'ember', glow=0.04, rotate_z=-30),
         {'kind': 'frame', 'position': [bx, 3.15], 'z': 1.55, 'size': [0.9, 0.6], 'art': '#2E3C52'},
     ]
     st['windows'] = [{'wall': 'left', 'along': -0.4, 'sill': 0.75, 'size': [1.1, 1.5], 'mullions': [1, 1],
                       'frame': '#1E2024'}]
-    s['sky'] = {'kind': 'gradient', 'zenith': '#1A2A48', 'horizon': '#3A4A6A', 'ground': '#141820', 'strength': 0.05}
+    s['sky'] = {'kind': 'gradient', 'zenith': '#1A2A48', 'horizon': '#3E4650', 'ground': '#141820', 'strength': 0.05}
     core_pool(s, -0.64, 2.86, 0.55)
     s['render']['exposure'] = round(s['render']['exposure'] + 0.4, 3)
     s['render']['white_balance_k'] = 3500
@@ -152,7 +152,7 @@ def core_bedside():
     # reflection-only card on the base; c6 a cool rim on the clear shell. c4 (modelled books) and c5 (a glass) are
     # props this set lacks: the glass was taken out after it rendered as a blur
     s['lights']['basecard'] = {'type': 'panel', 'size_m': [0.25, 0.1], 'position': [-0.95, 2.35, 0.6],
-                               'target': [-0.64, 2.86, 0.565], 'strength': 0.8, 'color': '#FFB08A',
+                               'target': [-0.64, 2.86, 0.565], 'strength': 3.0, 'color': '#FFB08A',
                                'ramp': {'axis': 'x', 'at_m': [-1.07, -0.83], 'values': [0, 1]}}
     s['lights']['rimcard'] = {'type': 'panel', 'size_m': [0.15, 0.5], 'position': [-0.95, 3.15, 0.75],
                               'target': [-0.64, 2.86, 0.66], 'strength': 0.3, 'color': '#C8D4F0',
@@ -160,6 +160,10 @@ def core_bedside():
     # critic r2 (5.8): c1/c2 the up-light behind the ball and compact, so the wall takes a halo (the ball lit nothing);
     # c3 the base's card 0.2 to 0.8. c4 a glass, c5 modelled books: props the set lacks
     s['lights']['coreup'].update(position=[-0.64, 3.0, 0.7], radius_m=0.035)
+    # critic r3 (5.5, the last round): c1 glow 0.04 (the centre pink); c2 the base's card 3.0 (a black hole); c3/c5 the
+    # moonlight greyer (the pillow magenta; at 0.1 by proof it threw a hard shaft across the wall, so 0.05 kept); c4 a warm rim for the shell's right edge
+    # tried and dropped (by proof the panel showed on the wall as a pale shard). Not applied: c6 a glass (a prop the set lacks), c7 the liner's scatter (the product's material)
+
     return s
 
 
