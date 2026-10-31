@@ -175,7 +175,8 @@ the words in a band round the front face, both edges rounded and the edge reeded
    - Curved parts are drawn from meshes. Check the silhouettes for faceting and short stray segments, especially:
      - the cable's segment marks (Core);
      - the cord (Hemisphere);
-   - the coin's reeds and engraved strokes, drawn from a fine mesh.
+   - the coin's reeds, drawn from a fine mesh (its engravings are exact outlines, projected);
+   - Tropos's ports, whose flared lips come out as a band of close lines: draw each as one or two clean circles.
    - Make the broken lines even and consistent.
    - Tropos (b)'s 22 terraces must stay crisp and evenly spaced; they are its design.
    - **Check every line's type against the claim.** A line counts as solid when it lies on a claimed part's own
