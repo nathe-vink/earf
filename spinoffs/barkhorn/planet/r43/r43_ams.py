@@ -57,8 +57,8 @@ def shot(view):
                 'irradiance': 0.15, 'color': 2400, 'camera': False},
     }
     s['sky'] = {'kind': 'gradient', 'zenith': '#03050B', 'horizon': '#1A1E2C', 'ground': '#08080A',
-                'strength': v.get('sky', 0.6)}
-    s['haze'] = {'box_m': [-20.0, -14.0, -1.1, 20.0, 22.0, 8.0], 'density': v.get('haze', 0.004), 'anisotropy': 0.4,
+                'strength': v.get('sky', 0.25)}
+    s['haze'] = {'box_m': [-20.0, -14.0, -1.1, 20.0, 22.0, 8.0], 'density': v.get('haze', 0.0025), 'anisotropy': 0.4,
                  'color': '#FFFFFF'}
     s['render']['exposure'] = v.get('exposure', 3.6)
     s['render']['white_balance_k'] = v.get('wb', 3600)
