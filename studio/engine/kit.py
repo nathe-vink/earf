@@ -193,6 +193,27 @@ def material(bpy, kind, color, opts=None):
         _set(b, 'Alpha', o['alpha'])
     if 'emit' in o and kind != 'glow':                    # anything can glow a little: a lit paper sun, a hot coal
         _set(b, 'Emission Color', M.hex_lin(o.get('emit_color', color))); _set(b, 'Emission Strength', o['emit'])
+    if o.get('image'):
+        # a printed face (a record sleeve's art): the image on the base colour, mapped across the piece's box, x along
+        # its width and z up it (a sleeve stands in the x-z plane)
+        tex = nt.nodes.new('ShaderNodeTexImage'); tex.image = bpy.data.images.load(str(o['image']), check_existing=True)
+        tex.image.colorspace_settings.name = 'sRGB'
+        tc = nt.nodes.new('ShaderNodeTexCoord'); sep = nt.nodes.new('ShaderNodeSeparateXYZ')
+        comb = nt.nodes.new('ShaderNodeCombineXYZ')
+        nt.links.new(tc.outputs['Generated'], sep.inputs['Vector'])
+        nt.links.new(sep.outputs['X'], comb.inputs['X']); nt.links.new(sep.outputs['Z'], comb.inputs['Y'])
+        nt.links.new(comb.outputs['Vector'], tex.inputs['Vector'])
+        nt.links.new(tex.outputs['Color'], b.inputs['Base Color'])
+    if kind == 'glass' and o.get('clear_shadow') is not None:
+        # a glass's shadow, caustic-free: Cycles carries no light through a refracting surface to a diffuse one (that
+        # takes caustics), so a clear tumbler throws a black shadow; shadow rays see a transparent BSDF instead, passing
+        # `clear_shadow` of the light (0.7 a light shadow as real glass gives, 0 the black one)
+        lp = nt.nodes.new('ShaderNodeLightPath'); tr = nt.nodes.new('ShaderNodeBsdfTransparent')
+        v = float(o['clear_shadow']); tr.inputs['Color'].default_value = (v, v, v, 1.0)
+        mx = nt.nodes.new('ShaderNodeMixShader'); out = nt.nodes['Material Output']
+        nt.links.new(lp.outputs['Is Shadow Ray'], mx.inputs['Fac'])
+        nt.links.new(b.outputs['BSDF'], mx.inputs[1]); nt.links.new(tr.outputs['BSDF'], mx.inputs[2])
+        nt.links.new(mx.outputs['Shader'], out.inputs['Surface'])
     _MATS[key] = m
     return m
 
@@ -396,7 +417,7 @@ def piece_material(bpy, p):
         return assets.pbr(bpy, p['texture'], res, scale=p.get('tex_scale'), displace=p.get('displace', 0.0),
                           tint=p.get('tint'), tint_mix=p.get('tint_mix', 0.0), rough_mul=p.get('rough_mul', 1.0),
                           bump=p.get('bump', 1.0), coords=p.get('coords', 'object'), emit=p.get('emit_map', 0.0))
-    opts = {k: p[k] for k in ('roughness', 'alpha', 'emit', 'emit_color', 'tint2', 'grain', 'rib') if k in p}
+    opts = {k: p[k] for k in ('roughness', 'alpha', 'emit', 'emit_color', 'tint2', 'grain', 'rib', 'clear_shadow', 'image') if k in p}
     return material(bpy, p.get('material', 'felt'), p.get('color', '#D9D4CB'), opts)
 
 

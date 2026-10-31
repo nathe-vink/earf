@@ -40,9 +40,12 @@ if ! "$BPY_PY" -c "import numpy, sys; sys.exit(0 if numpy.__version__.startswith
   log "restoring numpy 1 for bpy (something installed numpy 2 on $BPY_PY)"
   "${BPIP[@]}" "numpy>=1.26,<2.0"
 fi
-if ! "$BPY_PY" -c "import PIL, scipy" >/dev/null 2>&1; then
+# Image, not bare PIL: Debian's python3-pil sits on 3.11's path but its _imaging is built for the system python3, so
+# `import PIL` passes and `from PIL import Image` fails (the finish pass broke this way, 2026-10-31); --user puts a
+# working wheel ahead of it
+if ! "$BPY_PY" -c "from PIL import Image; import scipy" >/dev/null 2>&1; then
   log "pip install Pillow and SciPy on $BPY_PY (the renderer's finish)"
-  "${BPIP[@]}" "pillow" "scipy>=1.11,<1.14" "numpy>=1.26,<2.0"
+  "${BPIP[@]}" --user "pillow" "scipy>=1.11,<1.14" "numpy>=1.26,<2.0"
 fi
 
 # 3. The CAD venv.

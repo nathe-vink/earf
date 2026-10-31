@@ -81,10 +81,10 @@ def _templates(bpy, which):
     return _CACHE[key]
 
 
-def _lamp(bpy, name, pos, watts, kelvin):
+def _lamp(bpy, name, pos, watts, kelvin, radius=0.02):
     import lights as L
     d = bpy.data.lights.new(name, 'POINT')
-    d.energy = watts; d.shadow_soft_size = 0.02; d.specular_factor = 0.0
+    d.energy = watts; d.shadow_soft_size = radius; d.specular_factor = 0.0
     L.set_color(d, kelvin)
     ob = bpy.data.objects.new(name, d); bpy.context.scene.collection.objects.link(ob)
     ob.location = pos
@@ -154,7 +154,8 @@ def _place(bpy, which, name, p, kit):
         if s.get('lamp', p.get('lamp', True)) is False:
             continue
         pos = T @ (Vector(LIGHT_MM[which]) / 1000)
-        objs.append(_lamp(bpy, f'{name}-lamp#{i}', pos, p.get('lamp_w', LAMP_W[which]), p.get('lamp_k', 2700)))
+        objs.append(_lamp(bpy, f'{name}-lamp#{i}', pos, p.get('lamp_w', LAMP_W[which]), p.get('lamp_k', 2700),
+                              p.get('lamp_r', 0.02)))   # lamp_r: a larger lamp spreads its hot spot behind a frost
     return objs
 
 

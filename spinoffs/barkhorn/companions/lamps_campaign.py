@@ -7,6 +7,7 @@ light is 683 lm, EV100 6, so a frame shows the light the fitting would give), an
     python3 spinoffs/barkhorn/companions/lamps_campaign.py                       # the shots
     python3 spinoffs/barkhorn/companions/lamps_campaign.py --render NAME [...] [--scale 0.3 --samples 32 --out DIR]
 """
+from pathlib import Path
 import copy, json, os, subprocess, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -132,9 +133,10 @@ def core_bedside():
             tex_scale=0.5, tint='#E4DDD0', tint_mix=0.5),
         box('gloss', '#3A2A1E', (1.84, 0.06, 1.05), (bx, 3.10, 0.0), roughness=0.55),
         asset('side_table_01', (-0.62, 2.82, 0.0), 0.0),
-        box('paper', '#2B3A4A', (0.15, 0.21, 0.022), (-0.44, 2.74, 0.55), rotate_z=14),
-        box('paper', '#B8873C', (0.14, 0.20, 0.018), (-0.44, 2.74, 0.572), rotate_z=4),
-        LF.core_piece(-0.64, 2.86, 0.55, 'ember', glow=0.04, rotate_z=-30),
+        *book(-0.44, 2.74, 0.55, 0.15, 0.21, 0.024, '#2B3A4A', rot=14),       # the fourth look: hardbacks, a glass
+        *book(-0.44, 2.74, 0.574, 0.14, 0.20, 0.020, '#8A6A3A', rot=4),
+        kit('lathe', 'glass', '#F4F2EE', (-0.47, 3.0, 0.55), profile=TUMBLER, clear_shadow=0.7),
+        LF.core_piece(-0.64, 2.86, 0.55, 'ember', glow=0.04, rotate_z=-30, hide='led|chassis', lamp_r=0.05),
         {'kind': 'frame', 'position': [bx, 3.15], 'z': 1.55, 'size': [0.9, 0.6], 'art': '#2E3C52'},
     ]
     st['windows'] = [{'wall': 'left', 'along': -0.4, 'sill': 0.75, 'size': [1.1, 1.5], 'mullions': [1, 1],
@@ -153,7 +155,8 @@ def core_bedside():
     # props this set lacks: the glass was taken out after it rendered as a blur
     s['lights']['basecard'] = {'type': 'panel', 'size_m': [0.25, 0.1], 'position': [-0.95, 2.35, 0.6],
                                'target': [-0.64, 2.86, 0.565], 'strength': 3.0, 'color': '#FFB08A',
-                               'ramp': {'axis': 'x', 'at_m': [-1.07, -0.83], 'values': [0, 1]}}
+                               'ramp': {'axis': 'x', 'at_m': [-1.07, -0.83], 'values': [0, 1]},
+                               'receivers': ['base', 'ring']}   # the fourth look: the shell mirrored it as a bar
     s['lights']['rimcard'] = {'type': 'panel', 'size_m': [0.15, 0.5], 'position': [-0.95, 3.15, 0.75],
                               'target': [-0.64, 2.86, 0.66], 'strength': 0.3, 'color': '#C8D4F0',
                               'ramp': {'axis': 'z', 'at_m': [0.55, 0.95], 'values': [0.2, 1.0]}}
@@ -164,6 +167,8 @@ def core_bedside():
     # moonlight greyer (the pillow magenta; at 0.1 by proof it threw a hard shaft across the wall, so 0.05 kept); c4 a warm rim for the shell's right edge
     # tried and dropped (by proof the panel showed on the wall as a pale shard). Not applied: c6 a glass (a prop the set lacks), c7 the liner's scatter (the product's material)
 
+    # the fourth look: the finish pass (Pillow fixed for the render Python); no white gain, a little contrast and clarity
+    s['finish'] = FINISH
     return s
 
 
@@ -178,14 +183,63 @@ def record(x, y, z):
             kit('cylinder', 'paper', '#C8402A', (x - 0.025, y - 0.012, z + 0.1148), radius=0.05, height=0.0003)]
 
 
+ART = 'spinoffs/barkhorn/companions/art'
+
+
+def sleeve_art(name='sleeve-rings', size=1024):
+    """Our own sleeve art (round 43, the coordinator: abstract, never a real cover): a contour field like the laminated
+    horn's rings, thin cream lines round two off-centre foci on a charcoal ground, a muted ochre field in one corner, a
+    paper grain. No red, so nothing competes with Ember. Written once, repo-relative."""
+    import numpy as np
+    from PIL import Image
+    path = Path(ART) / f'{name}.png'
+    if path.exists():
+        return str(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    yy, xx = np.mgrid[0:size, 0:size] / size
+    f = np.hypot(xx - 0.36, yy - 0.58) * 1.0 + 0.55 * np.hypot(xx - 0.74, yy - 0.30)
+    lines = np.abs(((f * 26.0) % 1.0) - 0.5) < 0.045
+    img = np.zeros((size, size, 3)) + np.array([42, 45, 50], float)
+    field = (xx > 0.62) & (yy > 0.70)
+    img[field] = [150, 122, 70]
+    img[lines] = img[lines] * 0.25 + np.array([226, 216, 196]) * 0.75
+    img += np.random.default_rng(7).normal(0, 4.0, (size, size, 1))
+    Image.fromarray(img.clip(0, 255).astype(np.uint8)).save(path, optimize=True)
+    return str(path)
+
+
+def book(x, y, z, w, d, h, cover, rot=0.0, pages='#E9E1CF'):
+    """A hardback lying flat (the critic: boxes read as packaging): cloth boards 2.5 mm, top and bottom, overhanging the
+    page block 3 mm on three sides, the spine down its -x edge, a cream page block; footprint w x d centred on (x, y),
+    turned rot degrees."""
+    import math
+    b, o = 0.0025, 0.003
+    c, s_ = math.cos(math.radians(rot)), math.sin(math.radians(rot))
+    def at(dx, dy):
+        return (x + dx * c - dy * s_, y + dx * s_ + dy * c)
+    cloth = dict(roughness=0.75, rotate_z=rot, ease=0.0008)       # card: cotton's sheen washed the boards white
+    return [
+        box('card', cover, (w, d, b), (*at(0, 0), z), **cloth),
+        box('card', cover, (w, d, b), (*at(0, 0), z + h - b), **cloth),
+        box('card', cover, (b, d, h - 2 * b), (*at(-w / 2 + b / 2, 0), z + b), **cloth),
+        box('paper', pages, (w - b - o, d - 2 * o, h - 2 * b), (*at((b - o) / 2, 0), z + b), rotate_z=rot),
+    ]
+
+
+FINISH = {'enabled': True, 'white_in': 236, 'white_out': 236, 'contrast': 0.1, 'clarity': 0.1, 'sharpen': 0.3}
+
+TUMBLER = [[0, 0], [0.036, 0], [0.036, 0.095], [0.0335, 0.095], [0.0335, 0.006], [0.0, 0.006]]
+
+
 def sleeves(x, y, z, n=9, seed=3):
     import random
     rnd = random.Random(seed)
     cols = ['#CFC4AE', '#B23A28', '#D8D2C4', '#2C4A6A', '#E0B040', '#5A6E4A', '#E8E4DC', '#7A3A5A', '#3A3A3A']
     out = [box('gloss', '#3A2A1E', (0.34, 0.36, 0.012), (x, y, z), roughness=0.5)]
     for i in range(n):
+        art = {'image': sleeve_art()} if i == 0 else {}         # round 43's fourth look: the front sleeve has art
         out.append(box('card', cols[i % len(cols)], (0.315, 0.004, 0.315), (x, y - 0.15 + i * 0.033, z + 0.012),
-                       rotate_x=rnd.uniform(-7, -2)))
+                       rotate_x=rnd.uniform(-7, -2), **art))
     return out
 
 
@@ -239,6 +293,8 @@ def mantle_credenza():
     s['size'] = [2400, 1600]
     s['camera'] = {'position': [mx + 0.85, cy - 1.65, 1.25], 'target': [mx + 0.43, cy, cz + 0.12], 'lens_mm': 32,
                    'level': True, 'fstop': 4.0, 'focus': [mx, cy, cz + 0.1]}
+    # the fourth look: the finish pass (Pillow fixed for the render Python); no white gain, a little contrast and clarity
+    s['finish'] = FINISH
     return s
 
 
@@ -361,7 +417,7 @@ def dining_hero():
         kit('box', 'pbr', '#B8AD9B', (tx, ty, top_z), size=[1.7, 0.38, 0.003], texture='rough_linen', tex_scale=0.5,
             tint='#A99E8C', tint_mix=0.7),
         kit('lathe', 'gloss', '#E4DED3', (tx - 0.22, ty - 0.02, top_z + 0.003), profile=PLATE, roughness=0.35),
-        kit('lathe', 'glass', '#F4F2EE', (tx + 0.02, ty + 0.16, top_z + 0.003), profile=GLASS),
+        kit('lathe', 'glass', '#F4F2EE', (tx + 0.02, ty + 0.16, top_z + 0.003), profile=GLASS, clear_shadow=0.7),
         asset('food_pears_asian_01', (tx - 0.20, ty - 0.02, top_z + 0.008), 30.0),
     ]
     st['wall'] = {'color': '#8A8276'}
@@ -392,6 +448,8 @@ def dining_hero():
     s['size'] = [1600, 2000]
     s['camera'] = {'position': [tx + 0.85, ty - 1.25, 1.62], 'target': [tx - 0.04, ty + 0.05, 1.12], 'lens_mm': 66,
                    'level': False, 'fstop': 5.6, 'focus': [tx, ty, 1.45]}
+    # the fourth look: the finish pass (Pillow fixed for the render Python); no white gain, a little contrast and clarity
+    s['finish'] = FINISH
     return s
 
 

@@ -300,7 +300,8 @@
       0.0,
       0.104
      ]
-    ]
+    ],
+    "clear_shadow": 0.7
    },
    {
     "kind": "kit",
@@ -445,5 +446,13 @@
    0.95,
    1.45
   ]
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 236,
+  "white_out": 236,
+  "contrast": 0.1,
+  "clarity": 0.1,
+  "sharpen": 0.3
  }
 }
