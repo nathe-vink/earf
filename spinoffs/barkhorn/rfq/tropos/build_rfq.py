@@ -12,6 +12,11 @@ import csv, os, subprocess, tempfile
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.normpath(os.path.join(HERE, '..', '..', 'out-cloud'))
 SHEETS_PDF = os.path.join(OUT, 'drawings', 'barkhorn-cloud-sheets.pdf')
+# the laminated horn (2026-10-31, later) is built apart, in horn_options.py: its parts list and its own drawing set (BHH)
+OUT_HO = os.path.normpath(os.path.join(HERE, '..', '..', 'out-horn-options'))
+SHEETS_HO = os.path.join(OUT_HO, 'drawings', 'barkhorn-horn-options-sheets.pdf')
+HO_SHEET = {'horn-plan-b': 'BHH-005', 'horn-plan-b-smooth': 'BHH-005'}
+HO_PAGES = [1, 5, 6]               # its general arrangement, the laminated horns, its notes
 SIGN = '[Your name], EARF · earf.world'
 
 # where each part is drawn in the set of 2026-10-25 (40 sheets, BHC-001 to BHC-040); 'DXF' is a cut file only
@@ -34,6 +39,10 @@ CAB_TINT = 'the speaker\'s colour, cabinet lot: Ember (red) and Smoke (black) fo
 HORN_TINT = ('the speaker\'s colour, the horn\'s own heavier lot per colour (about 6 to 10 x the cabinet\'s dye; Ember about 10, '
              'Smoke about 7), matched to a chip we approve: Ember and Smoke')
 POLISH = 'edges milled square; show edges polished; annealed before cementing'
+# the first pair in stock sheet (make/stock-pair.md): Smoke, from TruCast 2064 3/4 in; the horn from 2074 1/2 in
+STOCK_CAB = 'Smoke: TruCast 2064 Gray 3/4 in (19 mm) cell-cast, stock (AC Plastics); we buy it or you source it'
+STOCK_THIN = 'Smoke: TruCast 2064 Gray cell-cast, stock, in the nearest stock thickness to the one listed'
+STOCK_HORN = 'Smoke: TruCast 2074 Dark Gray 1/2 in cell-cast, stock; an Ember horn in 2423 Red 1/2 in as an option'
 
 # kind -> [(bom item prefix, part, material, thickness, tint, finish, tolerance)]; quantities come from the parts list
 KINDS = {
@@ -87,6 +96,39 @@ KINDS = {
         ('post-sleeves', 'post sleeves (a set of 4)', 'polyurethane, Shore A 90', 'ø12 x 10 x 13', 'black', 'cast or cut', '±0.1'),
     ],
 }
+
+# (e) one shop for the whole first pair in stock sheet (2026-10-31, later; research R7): the cabinet as in (a), in stock
+# 3/4 in Smoke, and the laminated horn with the horn's small parts (as in (b), from the stock 1/2 in sheet); 'ho:' marks
+# a part from the horn options' parts list
+def _stock(pre, part, mat, th, tint, fin, tol):
+    """Letter (a)'s cabinet line in the stock Smoke sheet: 20 mm becomes 3/4 in; the thinner parts the nearest stock
+    thickness; the bosses bonded from two 3/4 in layers; the tube rolled from sheet if tinted tube cannot be had."""
+    if pre == 'back-boss-':
+        return pre, part, 'stock cell-cast sheet, two 3/4 in layers bonded, then milled', th, STOCK_CAB, fin, tol
+    if pre == 'port-left':
+        return pre, part, mat, th, 'Smoke, 2064, if tinted tube can be had; otherwise rolled from 1/8 in 2064 sheet', fin, tol
+    if tint == CAB_TINT:
+        return pre, part, mat, '19 (stock 3/4 in)' if th == '20' else th, STOCK_CAB if th == '20' else STOCK_THIN, fin, tol
+    return pre, part, mat, th, tint, fin, tol
+
+
+KINDS['e-laminated-horn'] = [
+    _stock(*line) for line in KINDS['a-cast-acrylic'] if line[0] not in ('ir-window',)
+] + [
+    ('ho:horn-plan-b', 'laminated horn, stepped (2 a pair)', 'stock cell-cast sheet 1/2 in, 22 layers and a boss',
+     '22 x 12.64 pitch (layer + bond line)', STOCK_HORN,
+     'layers CNC-cut from our DXF (outline and a rough bore); edges polished before bonding; bonded in sub-stacks with a '
+     'polymerising cement, no visible bubble; annealed; the air path cut through on 5 axes from our STEP and polished',
+     'air path ±0.1 to the STEP; outline ±0.5; stack 278 ±1 to the mouth'),
+    ('ho:horn-plan-b-smooth', 'OPTION: the same horn, outside machined smooth', 'as above', 'as above', STOCK_HORN,
+     'as above, then the outside cut on 5 axes to our STEP (outside-smooth.step) and polished; quote as the extra over the stepped',
+     'outside ±0.3'),
+] + [(pre, part, mat, '25 (two 1/2 in layers)' if th == '30' else th, STOCK_HORN, fin, tol)
+     for pre, part, mat, th, tint, fin, tol in KINDS['b-horn-forming'] if pre in ('waveguide-cap', 'horn-pads', 'horn-saddle')] + [
+    ('horn-pod', 'pod', 'stock cast sheet, horn colour', '6 (1/4 in)', STOCK_HORN,
+     'rolled to ø200 over a heated mandrel, seam scarfed and cemented, annealed, bore turned true, 3 L-slots milled; or turned from a '
+     'bonded stack of 1/2 in rings if you would rather', 'bore ±0.1'),
+]
 
 INTRO = {
     'a-cast-acrylic': ('cast acrylic fabrication', """I'm writing from EARF, a new hi-fi and lighting maker in San Francisco, for a quote on the acrylic parts of a loudspeaker we are prototyping. Tropos is a horn loudspeaker
@@ -148,6 +190,36 @@ tinted acrylic, so these parts are seen and have to be neat: acoustic polyester 
 white voile sleeve; a speaker cloth stretched over a frame; our wordmark laser-etched into the back panel and filled in
 the speaker's colour; and a few seals (an EPDM cord loop with a vulcanised joint, a die-cut sponge gasket, small
 polyurethane sleeves). Please quote whichever of these you do."""),
+    'e-laminated-horn': ('a laminated acrylic horn and its cabinet', """I'm writing from EARF, a new hi-fi and lighting maker in San Francisco, for a quote on the acrylic of a loudspeaker we are prototyping: the cabinet, and a horn laminated from
+stock sheet. Your site's "museum-grade acrylic bonding", "controlled lamination process to reduce bubbles and distortion"
+and "we bond one-off prototypes", with a 5-axis router and diamond and buff polishing, are exactly what it needs, so we
+would like to give you the whole job.
+
+Tropos is a horn loudspeaker in clear tinted cell-cast acrylic, so you see into it. The first pair is in Smoke, from
+stock sheet: the cabinet in TruCast 2064 Gray 3/4 in (19 mm; our drawings say 20, and every cut is to the sheet as
+measured), the horn in 2074 Dark Gray 1/2 in. We can buy the sheet and have it delivered to you, or you can source it;
+please say which you prefer.
+
+**The cabinet** is as our drawings show: panels CNC-cut from our DXF files, edges milled square, the edges that show
+polished, annealed before cementing; then corners, front panel, braces, ribs and land strips cemented with a two-part
+polymerising cement (ACRIFIX 2R 0190 or Weld-On 40, no solvent cement) with no visible bubble in any joint; the box
+annealed again; and the lands' faces, the bosses' faces and the back's seal groove milled in one setup.
+
+**The horn** is 630 x 366 at its mouth and 278 deep, laminated from 22 layers of 1/2 in sheet and a boss (sheet BHH-005):
+- each layer cut flat from our DXF (`dxf/layer-01.dxf` to `layer-22.dxf`: its outline, and a rough bore 3 mm inside
+  the final air path), faced to the pitch less the bond line, and its outside edge polished before bonding (the
+  stepped outside is a terrace a layer, and each edge shows);
+- bonded with a polymerising cement in three sub-stacks, then the sub-stacks joined, with no bubble within 5 mm of the
+  air path and none visible through the tint;
+- annealed, and the air path cut through the stack on 5 axes to our STEP (`step/air-path.step`, the horn's inside as a
+  solid, from the throat at z = 0), then polished. Its shape is acoustically set and must follow the STEP; the bond lines
+  cross it flush.
+
+As an option, the same horn with its outside machined smooth to `step/outside-smooth.step` and polished, the bond lines
+running round it as fine rings. Please price it as the extra over the stepped horn. The horn's small parts (pod, cap,
+pads, saddle) are from the same sheet.
+
+The pair is for a debut on 21 January, so the dates matter as much as the price: we would order in mid-November."""),
 }
 
 Q_BASE = {
@@ -172,6 +244,10 @@ Q_KIND = {
                        7: 'Packing: how the plug and the plate are protected and shipped (any mark on the plug\'s face shows on every '
                           'horn formed over it).'},
     'c-metal': {3: 'Minimum order quantities, and any minimum lot for anodising.', 5: None, 6: None},
+    'e-laminated-horn': {3: 'Whether you would source the stock sheet (TruCast 2064 3/4 in, 2074 1/2 in) or take ours, and any '
+                            'handling charge.', 5: None,
+                         6: 'Both speakers\' parts from one sheet of each code, so the pair matches: is that how you would '
+                            'nest them?'},
 }
 
 EXTRA_Q = {
@@ -190,6 +266,18 @@ EXTRA_Q = {
     'c-metal': ['Whether the box can be folded from one blank with welded corners, and how you keep the black anodise the same '
                 'on the box, the ring and the plate, and from lot to lot.'],
     'd-other': ['Your minimum for a custom-sewn sleeve run, and whether you can cut the batts too.'],
+    'e-laminated-horn': [
+        'The bond line you can hold on 1/2 in layers (we design to the pitch less your bond line), and whether you would '
+        'face each layer or the stack after bonding.',
+        'How you anneal the bonded horn: by the stack\'s height (about 290 mm) or by its thickest wall (about 30 mm, 60 at '
+        'the boss), how long a cycle takes, and whether annealing the three sub-stacks apart shortens it.',
+        'Whether the cement may make the tint bleed at a joint, and whether you would bond two off-cuts of each colour first '
+        '(we would pay for that test).',
+        'Your 5-axis router\'s reach for a part 630 x 366 x 292, and how you hold the stack while cutting the air path.',
+        'The edge finish of the layers: polished, or frosted as an option; and the price difference.',
+        'The earliest date you could deliver the first horn and the cabinet pair, ordering in mid-November, and whether '
+        'a delivery by early January for both speakers is realistic.',
+    ],
 }
 
 
@@ -228,7 +316,16 @@ def qty(r, item):
 def table(kind):
     out = []
     bom = rows()
+    bom_ho = list(csv.DictReader(open(os.path.join(OUT_HO, 'bom.csv'))))
     for i, (pre, part, mat, th, tint, fin, tol) in enumerate(KINDS[kind], 1):
+        if isinstance(pre, str) and pre.startswith('ho:'):
+            match = [r for r in bom_ho if r['item'] == pre[3:]]
+            if match:
+                q = float(match[0]['qty'])
+                out.append(dict(no=f'{kind[0].upper()}{i:02d}', part=part, items=pre[3:], sheets=HO_SHEET[pre[3:]],
+                                material=mat, thickness_mm=th, tint=tint, qty_1_pair=f'{q:g}', qty_10_pairs=f'{q * 10:g}',
+                                qty_50_pairs=f'{q * 50:g}', finish=fin, tolerance_mm=tol))
+            continue
         pres = pre if isinstance(pre, tuple) else (pre,)
         match = [r for r in bom if any(named(it.strip(), p) for it in r['item'].split(',') for p in pres)]
         if not match:
@@ -249,7 +346,7 @@ def pdf_pages(kind, tab):
     pages = set(COMMON)
     for t in tab:
         pages |= {int(s) for s in t['sheets'].split(', ') if s.isdigit()}
-    if kind == 'a-cast-acrylic':
+    if kind in ('a-cast-acrylic', 'e-laminated-horn'):
         pages |= set(range(4, 22))
     if kind == 'd-other':
         pages |= {4, 10, 16, 22, 23, 24, 25}
@@ -268,7 +365,12 @@ def write(kind):
     with tempfile.TemporaryDirectory() as tmp:
         for p in pages:
             subprocess.run(['pdfseparate', '-f', str(p), '-l', str(p), SHEETS_PDF, os.path.join(tmp, f'{p:03d}.pdf')], check=True)
-        subprocess.run(['pdfunite'] + [os.path.join(tmp, f'{p:03d}.pdf') for p in pages] + [os.path.join(d, 'drawings.pdf')], check=True)
+        extra = []
+        if kind == 'e-laminated-horn':             # the laminated horn's own sheets, after the Cloud's
+            for p in HO_PAGES:
+                subprocess.run(['pdfseparate', '-f', str(p), '-l', str(p), SHEETS_HO, os.path.join(tmp, f'ho{p:03d}.pdf')], check=True)
+                extra.append(os.path.join(tmp, f'ho{p:03d}.pdf'))
+        subprocess.run(['pdfunite'] + [os.path.join(tmp, f'{p:03d}.pdf') for p in pages] + extra + [os.path.join(d, 'drawings.pdf')], check=True)
     title, body = INTRO[kind]
     md = [f'# Request for quotation: {title}', '', 'To: [vendor]  ', 'From: ' + SIGN + '  ', 'Date: [date]  ',
           'Re: Tropos loudspeaker, prototype pair, then 10 and 50 pairs', '', 'Hello,', '', body, '',
@@ -279,7 +381,10 @@ def write(kind):
           'the exploded view and the notes are attached to every request). Dimensions in mm.' +
           (' The DXF cut files and the nested sheets come with this letter (`dxf/`), and STEP files of every part too '
            '(`step/`: the bosses, the tubes, the cups and the IR parts have no DXF).' if kind == 'a-cast-acrylic' else
-           ' STEP files of every part come with this letter (`step/`).'), '',
+           ' The laminated horn is drawn on our sheet BHH-005 (issue 2026-10-31, attached after the cabinet\'s sheets). Its '
+           'layers come as DXF (`dxf/layer-01.dxf` to `layer-22.dxf`, with `layers.csv`), and its air path and smooth outside '
+           'as STEP (`step/`); the cabinet\'s DXF cut files and STEP files come with this letter as well.'
+           if kind == 'e-laminated-horn' else ' STEP files of every part come with this letter (`step/`).'), '',
           '| no. | part | our part names | sheet | material | thickness | tint | 1 pair | 10 pairs | 50 pairs | finish | tolerance |',
           '|---|---|---|---|---|---|---|---|---|---|---|---|']
     for t in tab:
@@ -287,8 +392,10 @@ def write(kind):
     md += ['', '## What I would like to know', '', questions(kind)] + [
         '', 'If any of this is outside what you do, a word to say so is just as useful, and the name of someone who does it '
         'would be very welcome.', '', 'Thank you,', '', SIGN, '',
-        '---', '', f'*Attach: `drawings.pdf` (sheets {", ".join(str(p) for p in pages)}), `parts.csv`'
-        + (', the DXF and STEP files of the parts listed' if kind == 'a-cast-acrylic' else ', the STEP files of the parts listed') + '.*', '']
+        '---', '', f'*Attach: `drawings.pdf` (sheets {", ".join(str(p) for p in pages)}'
+        + (', then BHH-' + ', BHH-'.join(f'{p:03d}' for p in HO_PAGES) if kind == 'e-laminated-horn' else '') + '), `parts.csv`'
+        + (', the DXF and STEP files of the parts listed' if kind in ('a-cast-acrylic', 'e-laminated-horn')
+           else ', the STEP files of the parts listed') + '.*', '']
     open(os.path.join(d, 'letter.md'), 'w').write('\n'.join(md))
     return len(tab), pages
 

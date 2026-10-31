@@ -44,7 +44,7 @@ showed 14 layers of 20 mm in the horn lot.
 
 **Since then (2026-10-31, later), route A is drawn from stock 1/2 in sheet.** The stock-colour research found no
 tinted stock cast sheet thicker than 1/2 in (R1), so the layers are:
-- 22 layers of 1/2 in, faced to 12.44;
+- 22 layers of 1/2 in, faced to their 12.64 pitch less the bond line;
 - stepped (`horn-plan-b`) or machined smooth outside (`horn-plan-b-smooth`).
 
 The kit prices them at about $1,570 and $1,790 a horn. Its colour, cost, schedule, bond lines and mass are in

@@ -20,7 +20,7 @@ The owner chooses between formed, laminated stepped and laminated smooth from th
 `out-horn-options/`, and the geometry comes from `product.formed_horn`'s `laminated`.
 
 - **22 layers** of 1/2 in sheet, plus the boss.
-  - The horn is 273.6 mm deep, so the pitch is 12.44 mm.
+  - The horn is 278 mm deep, so the pitch is 12.64 mm, each layer and its bond line.
   - Each layer is faced to that pitch from nominal 12.7 sheet. Cast sheet runs about ±10 % on thickness, so the facing
     is needed anyway.
 - **Stepped:** each layer's outline sits 10 mm outside the air path at its front face. Each layer is a terrace, 22
@@ -106,6 +106,25 @@ Each joint is polymerising cement (ACRIFIX 2R 0190 or Weld-On 40), the cabinet's
   bonded, so reject freely.
 - Anneal after bonding (80 °C, slow cool), before machining, and again after polishing.
 - Machine with an air blast, not coolant, near fresh joints (crazing, A1).
+
+**Three more risks from research R7** (bonding and annealing guidance from Röhm's *Joining PLEXIGLAS*, 311-3):
+- **The anneal's length.** Röhm's rule for cast sheet at 80 °C is the thickness in mm ÷ 3 hours of soak, ÷ 4 of cooling,
+  with ramps of 10 °C an hour or less. If a shop treats the 292 mm stack as solid, one cycle takes about **7 days**. By
+  the thickest wall (about 30 mm, 60 at the boss) it takes about 2. There are two or three cycles: after bonding, after
+  machining, and perhaps before bonding if the cut layers show stress.
+  - Mitigation: anneal the three sub-stacks apart (each about 95 mm, about 2 to 3 days).
+  - Ask the shop which rule it uses. A week per cycle would eat the December float (`schedule.md`).
+- **The bond lines' height.** A spacer-controlled bond line is 0.5 to 1.5 mm. Over 21 joints that adds about 10 to 30 mm
+  to the stack. The CAD allows 0.2 mm a joint.
+  - Mitigation: design to the bond line the shop can hold. Face each layer to the pitch less the bond line: 12.64 − 0.5
+    = 12.14 from 1/2 in sheet, which leaves about 0.5 mm on nominal 12.7 sheet. Where 1/2 in comes thin (Canal's is
+    0.472 in, 12.0 mm), take a thicker bond line or face the stack's mouth and boss after bonding.
+  - The air path is machined after bonding anyway, so its shape does not depend on the stack height. Only the mouth's
+    position on the posts does, and the pads take ±2 mm.
+- **Colour bleed.** Röhm warns that adhesives can draw the colourant out of tinted sheet at a joint, and that highly
+  pigmented sheet can bond weaker.
+  - Mitigation: bond two off-cuts of each stock colour (2423, 2074) with the chosen cement first. Check the line for a
+    halo, then break-test it. Add this to the 5-layer test stack.
 
 **Likelihood:** medium on the first horn, low after it. These are the same process and inspection as the cabinet's
 joints, done by the same shop.

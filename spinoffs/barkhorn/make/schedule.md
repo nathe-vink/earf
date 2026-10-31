@@ -31,8 +31,8 @@ and two to Christmas and New Year.
 |---|---|---|---|
 | **2 Nov** (week 1) | Order the chips and the 1/2 in off-cuts (R1 §5, about $100). Send the RFQs (`rfq/tropos/`, once the owner releases them). Order 2 x FA122, the remote kit and the drivers. Book the EMC pre-scan and the FCC lab slot for early February. | the owner's go | **The start date.** Every week lost here is a week lost at the end. |
 | 9 Nov | Chips and off-cuts in hand. Settle what 1/2 in looks like against the 3 mm chip (R1 §1.2) and pick the sheet (`stock-pair.md`). | the chips | A vendor whose 1/2 in is far deeper than expected means a thinner or lighter code. That costs a week at most. |
-| 16 Nov | Quotes back. Purchase orders: cabinet shop, horn layers (the same shop), sheet. | quotes | **The cement.** No Bay Area shop says publicly that it does polymerising joints (vendors.md). If none will, E&F cuts and polishes, and EARF bonds in-house with ACRIFIX 2R 0190 (a jig and a week of practice). |
-| 23 Nov | Stock sheet delivered (LTL, 1 to 2 weeks). Amplifiers and drivers delivered (1 to 3 weeks if stocked). | the orders | **The FA122's lead time.** Hypex sells through dealers. A backorder of 6 to 8 weeks would push the pair to mid-February. Order on day one; ask two dealers. |
+| 16 Nov | Quotes back. Purchase orders: cabinet shop, horn layers (the same shop), sheet. | quotes | **The cement.** R7 found one Bay Area shop that says publicly that it does it: Architectural Plastics, Petaluma ("Museum-Grade Acrylic Bonding", "We bond one-off prototypes", a 5-axis router, prototypes in 1 to 2 weeks). Crystal Craft (La Verne) is the second. If neither will, E&F cuts and polishes and EARF bonds in-house with ACRIFIX 2R 0190 (a jig, a degassing chamber, about $2,000 to $5,000 of kit without an oven, R7). |
+| 23 Nov | Stock sheet delivered (LTL, 1 to 2 weeks). Amplifiers and drivers delivered. | the orders | The FA122 is no longer a risk: Parts Express (a Hypex reseller) lists it at $422.40, in stock, shipping the same day (R7, 2026-10-31); the FA252 ($567, in stock) is the backup. |
 | 30 Nov | Cut: the cabinet's panels and the horn's 22 layers, nested. | sheet | — |
 | 7 Dec | Bond the horn's stack in three sub-stacks, then join them. Bond the cabinets. | jigs | **Bond lines** (C2 x 22, `laminated-horn.md`): reject and re-cut a layer rather than fill a void. |
 | 14 Dec | Anneal both. 5-axis the horn's air path; polish. First horn about **18 December**. | the 5-axis shop | 5-axis time before Christmas. Book it in November. |
@@ -68,14 +68,14 @@ Everything from 16 November waits for quotes.
 
 | week of | item | supplier type | amount | if we stop |
 |---|---|---|---|---|
-| **2 Nov (week 1: pay now)** | 2 x Hypex FA122 plate amplifiers | Hypex dealer (EU, e.g. soundimports.eu) | $844.80 | returnable unopened on the dealer's terms, return freight ours (est.); they resell easily |
+| **2 Nov (week 1: pay now)** | 2 x Hypex FA122 plate amplifiers | Parts Express (US, Hypex reseller; in stock, R7) | $844.80 | returnable unopened on Parts Express's terms (to check), return freight ours (est.); they resell easily |
 | | 2 x FaitalPRO 15PR400 woofers | pro-audio distributor (US) | $388.00 | usually returnable unopened (est.); resellable |
 | | 2 x B&C DE1085TN compression drivers | pro-audio distributor (US) | $1,024.00 | usually returnable unopened (est.); resellable |
-| | Hypex remote kit, a programmable AAA remote (in place of the coin-cell one, `compliance.md`), the link cable | Hypex dealer, any | $67 (the remote est. $30) | the kit as above; the remote returnable |
+| | Hypex remote kit, a programmable AAA remote (in place of the coin-cell one, `compliance.md`), the link cable | Parts Express or a Hypex dealer, any | $67 (the remote est. $30) | the kit as above; the remote returnable |
 | | HF L-pads, film capacitors, leads, terminals | electronics distributor | about $100 | returnable, small |
 | | Chips and 1/2 in off-cuts (R1 §5) | Canal, eStreet, ePlastics, Delvie's | about $103 | **no** |
-| | Freight and import on the electronics | — | about $150 (est.) | **no** |
-| | **week 1** | | **about $2,680** | about $250 is sunk; the rest returnable or resellable |
+| | Freight on the electronics (US now, so no import) | — | about $100 (est.) | **no** |
+| | **week 1** | | **about $2,630** | about $200 is sunk; the rest returnable or resellable |
 | **9 Nov** (after the chips) | TruCast 2064 3/4 in, 3 sheets (the cabinets; buy all three, 2 needed) | AC Plastics | $3,009.60 | uncut full sheets only by agreement, a restocking fee likely (est. 15 to 25 %) |
 | | TruCast 2064 1/2 in and .220, one sheet each (rings, frames, grips, disc frames) | AC Plastics | $800.80 | as above |
 | | TruCast 2074 1/2 in, 1 sheet (the two horns' 22 layers, nested) | AC Plastics | $569.80 | as above |
@@ -89,19 +89,19 @@ Everything from 16 November waits for quotes.
 | | Hardware, seals, inserts, brass glands, batts, voile, cement, VHB, rating plates, the back's etching, the IR bracket and window | online, any | about $870 | mostly returnable, small |
 | | Book the EMC and FCC lab for late January and February | test lab | $0 (no deposit expected, est.) | — |
 | | **week of 16 Nov** | | **about $5,670** | |
-| **by 16 November** | | | **about $13,180** | |
+| **by 16 November** | | | **about $13,130** | |
 | 23 Nov to 30 Nov | Deliveries: sheet, electronics | — | — | — |
 | 7 Dec | Metal parts delivered: balance | metal shop | $300 | — |
 | 14 Dec | First horn: a progress payment | horn shop | $1,000 (est.) | — |
-| **by 15 December** | | | **about $14,480** | |
+| **by 15 December** | | | **about $14,430** | |
 | 4 Jan | Cabinets delivered: balance | cabinet shop | $1,875 | — |
 | | Second horn: horn shop balance | horn shop | $1,000 (est.) | — |
 | | Small acrylic parts: balances | acrylic shops | $621 | — |
 | 11 Jan | A measurement microphone for voicing (UMIK-1 class) | any | about $100 (est.) | returnable |
 | 18 Jan | Crates or padded covers, and a van to the venue in San Francisco | any | about $500 (est.) | — |
-| **total, 2 Nov to 18 Jan** | | | **about $18,600** | |
-| a contingency, 15 % | | | about $2,800 | |
-| **with the contingency** | | | **about $21,400** | |
+| **total, 2 Nov to 18 Jan** | | | **about $18,520** | |
+| a contingency, 15 % | | | about $2,780 | |
+| **with the contingency** | | | **about $21,300** | |
 
 **Not in the table:**
 - **The assembly** (about 15 hours a pair, `assembly.md`) is EARF's own time, not cash.
@@ -115,9 +115,9 @@ Everything from 16 November waits for quotes.
 - **The formed horn's route in parallel** (for mid-February): the quarter trial's $3,450 from 16 November, then the full
   plug's $7,100 in mid-December.
 
-**What it means for January.** About **$13,200 must be spent by 16 November** and about $14,500 by 15 December. All of
+**What it means for January.** About **$13,100 must be spent by 16 November** and about $14,400 by 15 December. All of
 it is the owner's own money, since a Kiva loan takes 9 to 11 weeks and a community lender 2 to 6. Of the week-1 spend,
-only about $250 is sunk if the project stops: the electronics and drivers return or resell. The sheet and the shops'
+only about $200 is sunk if the project stops: the electronics and drivers return or resell. The sheet and the shops'
 deposits are the real commitment, and they start in the week of 9 November.
 
 ## Compliance in the schedule (`compliance.md`, R3)
@@ -141,7 +141,10 @@ deposits and pre-orders with the lab or counsel.
 
 - **Earlier:** order the sheet and the FA122s from stock on day one, before the chips settle the colour. 2423 and 2064
   at 1/2 in cost about $836 and $570 a sheet, so the risk of buying a wrong sheet is small against a week.
-- **Later:** no shop for polymerising cement; an FA122 backorder; a 5-axis shop booked through December.
+- **Later:** a long anneal of the bonded stack (up to about 7 days a cycle if the shop treats the stack as solid, R7;
+  `laminated-horn.md`); a 5-axis shop booked through December. The cement and 5-axis shop is no longer unknown:
+  Architectural Plastics in Petaluma bonds one-off prototypes and runs a 7 x 12 ft 5-axis router (R7; the request is
+  `rfq/tropos/e-laminated-horn/`).
 - **April and May:** Milan wants the owner's chosen horn in the chosen colour. A custom deep lot ordered by mid-January
   (a 2 to 5 week colour match, then a pallet pour of 4 to 6 weeks) reaches a formed or laminated horn by late March.
   That is tight for Milan and comfortable for Vienna.
