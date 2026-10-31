@@ -11,7 +11,7 @@ stills are therefore not finished.
 
 | shot | state |
 |---|---|
-| room (a pair at home at golden hour, Poison) | **final: `tropos-room-golden-hour.png`** (2400 x 1350), round 3's look, blind 7.0; look 2 scored 6.5 and was dropped |
+| room (a pair at home at golden hour, Poison) | **final: `tropos-room-golden-hour.png`** (2304 x 1296, 4.6 MB; rendered at 2400 x 1350, 160 samples, scaled 4 % to stay under 5 MB), round 3's look, blind 7.0; look 2 scored 6.5 and was dropped |
 | above (the horn from above, Ember) | proofs `above-p1`, `above-p2`; p2 crops the cabinet at the bottom; no critic yet |
 | night, inside, corner | not proofed on the new horn yet |
 
@@ -29,7 +29,7 @@ the rug darker and warmer, the sheer, the floor's coat, the fills, the vase. One
 - the left speaker fell into the shadow of the pier between the windows;
 - the rug still read cool grey.
 
-As the coordinator set out, a proof under 7 means round 3's look is the final. The final is rendered at 2400 x 1350,
+As the coordinator set out, a proof under 7 means round 3's look is the final. The final is rendered at 2400 x 1350 (scaled to 2304 x 1296 to stay under 5 MB),
 160 samples, finished with `room31/post.py`, from the shot `room-final` (`shots.py`, `room(critic_round=3)`).
 
 **The rug.** Its tint does reach the shader: Blender's socket lookup takes the enabled colour sockets (checked), and the
