@@ -111,19 +111,29 @@ def shot(version, palette='p1'):
     if version == 'day':
         s['sun'].update({'azimuth_deg': -64.0, 'elevation_deg': 28.0})
         F.lamps(s['set']['props'], 0.35)
-        s['render']['exposure'] = -0.9
+        s['render']['exposure'] = -0.65
     else:                                                       # dusk, lights on
         s['sun'] = {'azimuth_deg': -80.0, 'elevation_deg': 2.0, 'irradiance': 0.0}
         s['sky'] = {'kind': 'gradient', 'zenith': '#2E3E66', 'horizon': '#6A7BA6', 'ground': '#1E2230', 'strength': 0.8}
         L['north'].update({'irradiance': 0.30, 'color': '#9FB0D8'})      # the last blue from the windows
-        L['bounce'].update({'irradiance': 0.18, 'color': '#FFD9B0'})     # the room's warm light off the ceiling
+        L['bounce'].update({'irradiance': 0.22, 'color': '#FFD2A0'})     # the room's warm light off the ceiling
+        # the room's other lamps, out of frame: a warm wash from the left (a floor lamp by the windows) and the right
+        L['warm_l'] = {'type': 'area', 'size_m': [1.0, 1.0], 'position': [-3.6, -3.0, 1.6], 'target': [-1.0, 0.6, 0.8],
+                       'irradiance': 0.14, 'color': 2700, 'camera': False}
+        L['warm_r'] = {'type': 'area', 'size_m': [1.0, 1.0], 'position': [3.6, -3.4, 1.8], 'target': [1.0, 0.6, 0.9],
+                       'irradiance': 0.08, 'color': 2700, 'camera': False}
         L['mantle_kick'].update({'irradiance': 0.5, 'color': '#FFD9B0'})
         s['materials']['glow'] = {'strength': 3.0}
         for q in s['set']['props']:
             if q.get('fn') == 'exterior':
                 q['strength'] = 1.0; q['tint'] = '#6F8BD6'
         F.lamps(s['set']['props'], 1.0)
-        s['render'].update({'exposure': 0.2, 'white_balance_k': 4300})
+        for q in s['set']['props']:              # lit for the evening: Hemisphere's pool on the chair, Core's on its table
+            if q.get('fn') == 'dome':
+                q['lamp_w'] = 16.0; q['shade_glow'] = 0.4
+            if q.get('fn') == 'orb':
+                q['lamp_w'] = 5.0; q['shade_glow'] = 0.3
+        s['render'].update({'exposure': 0.7, 'white_balance_k': 3900})
     s['labels'] = copy.deepcopy(LABELS)
     sp = P['spk']; h = P['hemi']; c = P['core']
     s['anchors'] = {'tropos': [-sp, P['spk_y'] - 0.2, 1.10], 'tropos_right': [sp, P['spk_y'] - 0.2, 1.10],

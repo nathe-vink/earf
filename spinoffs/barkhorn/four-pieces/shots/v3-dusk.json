@@ -275,8 +275,8 @@
     ],
     "cable": false,
     "cartridge": "in",
-    "lamp_w": 3.0,
-    "shade_glow": 0.25
+    "lamp_w": 5.0,
+    "shade_glow": 0.3
    },
    {
     "kind": "kit",
@@ -294,8 +294,8 @@
      }
     ],
     "ceiling": 3.2,
-    "lamp_w": 9.0,
-    "shade_glow": 0.25
+    "lamp_w": 16.0,
+    "shade_glow": 0.4
    },
    {
     "kind": "kit",
@@ -372,8 +372,8 @@
     0.3,
     1.0
    ],
-   "irradiance": 0.18,
-   "color": "#FFD9B0"
+   "irradiance": 0.22,
+   "color": "#FFD2A0"
   },
   "floorbounce": {
    "off": true
@@ -397,6 +397,46 @@
    "irradiance": 0.5,
    "color": "#FFD9B0",
    "camera": false
+  },
+  "warm_l": {
+   "type": "area",
+   "size_m": [
+    1.0,
+    1.0
+   ],
+   "position": [
+    -3.6,
+    -3.0,
+    1.6
+   ],
+   "target": [
+    -1.0,
+    0.6,
+    0.8
+   ],
+   "irradiance": 0.14,
+   "color": 2700,
+   "camera": false
+  },
+  "warm_r": {
+   "type": "area",
+   "size_m": [
+    1.0,
+    1.0
+   ],
+   "position": [
+    3.6,
+    -3.4,
+    1.8
+   ],
+   "target": [
+    1.0,
+    0.6,
+    0.9
+   ],
+   "irradiance": 0.08,
+   "color": 2700,
+   "camera": false
   }
  },
  "render": {
@@ -406,8 +446,8 @@
   "clamp": 10,
   "bounces": 12,
   "view": "Khronos PBR Neutral",
-  "exposure": 0.2,
-  "white_balance_k": 4300,
+  "exposure": 0.7,
+  "white_balance_k": 3900,
   "white_balance_tint": 0.0,
   "caustics_refractive": true
  },
