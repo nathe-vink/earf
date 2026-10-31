@@ -1,6 +1,6 @@
 # The debut night: lighting a hired gallery room with Hemisphere and Core (round 43, revised 2026-10-31)
 
-The debut has moved from a bar of our own to a hired or lent room at or near Fort Mason in FOG week (21 January). The
+The debut has moved from a bar of our own to a hired or lent room at or near Fort Mason: **Tuesday 19 January 2027**, just before FOG Design+Art (21–24 January). The
 bar lane is pricing rooms such as the Firehouse. Until the room is chosen, this plan assumes a **generic gallery-type
 room for about 120 people standing**:
 - about 150–200 m² of open floor;
@@ -94,7 +94,8 @@ heads. Keep the line over the table, not over a walkway. Each pendant hangs on i
   - one power strip at the goalpost's foot, on one ordinary 15 A outlet;
   - each cord's in-line low-voltage dimmer sets the line by eye.
   - Run the one supply lead along the wall or under a cable ramp; nothing loose on the floor where 120 people walk.
-- **Core:** cordless on the night. The hours are FOG week's evening, about 4–5 hours:
+- **Core:** cordless on the night. The event runs 6:30 to 10:00 pm (the brand lane's run-of-show), 3.5 hours, plus
+  the afternoon's setting up:
   - about 4.7 h at full brightness (cells at the 90 % limit), about 5.8 h at the event setting (2 W);
   - so **charge full that afternoon and run at the event setting**;
   - keep **one spare set of cells per four lamps** charged behind the table (twelve spare cells and a four-bay LiFePO4
@@ -103,16 +104,31 @@ heads. Keep the line over the table, not over a walkway. Each pendant hangs on i
 - **Total draw** for the lamps: under 100 W including the chargers. Lighting asks nothing of the room's power beyond
   two outlets.
 
-## Timeline back from 21 January
+## Timeline back from 19 January
 
 | When | What |
 |---|---|
 | By 16 Nov | Moulds ordered (already on the critical path in `first-articles.md`) |
 | **By 7 Dec** | **Choose Full, Middle or None.** The extra lamps' machined and bought parts are ordered with the first articles' |
 | Mid-Dec | First formed shades and balls; the closed-shade temperature test |
+| 22 Dec | The floor plan and timeline to the venue, 4 weeks ahead (the bar lane; the rig's place on the plan) |
 | Early Jan | The extra lamps assembled; the rig bought or booked; the room's rigging rules in hand |
 | About 14 Jan | Everything hung and run for an evening (in the workshop if not in the room); cells charged |
-| 21 Jan | The night |
+| 19 Jan | The night: load in from 1 pm (the goalpost rig, or the single stand), doors 6:30, **"Lights" at 8:45 pm** |
+
+## "Lights" at 8:45 pm
+
+The run-of-show (`r47-brand`, `brandbook/photo/RUN-OF-SHOW.md`, 93132fda) turns every house light off for ten minutes
+at 8:45, so only the lamps light the room and the pair is lit from below. It's the picture of the night. For the
+lamps:
+- **Full:** the line of shades and the high-top Cores carry the room.
+- **Middle:** the table carries it.
+- **None:** the island alone, in the dark. It's intimate, not a room shot.
+
+**Before 8:45:**
+- every Core at the event setting with at least half its charge (they have run 2.25 h by then, of about 5.8);
+- the pendants' in-line dimmers at full for those ten minutes;
+- the room's technician knows which circuits are the house lights and which strip feeds the rig, so the rig stays on.
 
 ## Photographs on the night
 
