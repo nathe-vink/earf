@@ -14,10 +14,11 @@ ROOT = Path(__file__).resolve().parents[4]
 sys.path.insert(0, str(ROOT / 'critic'))
 
 CARDS = {
-    'core-sample': """A table lamp on a side table: a column of fourteen bonded discs of tinted cast acrylic (two smoke at
-the foot, seven amber, one deep red, four clear bead-blasted at the top), 110 across, 178 tall, bored up its middle and
-lit by a filament of warm LED inside an opal tube. Its strata differ in finish (some discs buffed clear, some
-bead-blasted satin). It stands on a black anodised aluminium foot set in under it, a knurled stainless dimmer knob.""",
+    'core-sample': """A table lamp on a side table: a column of fourteen bonded discs of tinted cast acrylic, 110 across,
+178 tall (from the foot: two smoke, then amber and clear discs in turn, one deep red, and a cap of four clear discs
+bead-blasted so it glows), bored up its middle and lit by a filament of warm LED inside an opal tube. Its strata differ
+in finish (some discs buffed clear, some bead-blasted satin). It stands on a black anodised aluminium foot set in under
+it, a knurled stainless dimmer knob.""",
     'contour-core': """A table lamp on a side table: a ball 160 across built from thirteen stacked rings of amber tinted
 cast acrylic (each ring the sphere's section at its height, so its outside is terraced), lit by an opal globe inside, on
 a black anodised aluminium base with a knurled stainless dimmer knob.""",

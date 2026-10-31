@@ -514,7 +514,18 @@ def shot_core_sample(lit, stackmix=None, out=None, scale=1.0, samples=512, tag='
     if which == 'contour':
         contour_core(lit=lit, tint=tint, base=(0.0, 0.0, tz), glow=3.7 if lit else 1.0)     # r3 c2: x1.6
     else:
-        core_sample(stackmix=stackmix, lit=lit, base=(0.0, 0.0, tz), glow=1.8 if lit else 1.0)
+        core_sample(stackmix=stackmix, lit=lit, base=(0.0, 0.0, tz), glow=1.1 if lit else 1.0)    # r4 c1: x0.6
+        # r4 c7: two pears on a small dark plate to the right, to catch the lamp's coloured light
+        if lit:
+            stone = principled('stoneware', '#3B3834', 0.55, bump=(1500.0, 0.25))
+            bpy.ops.mesh.primitive_cylinder_add(radius=0.08, depth=0.012, vertices=96, location=(0.24, 0.06, tz + 0.006))
+            po = bpy.context.object; po.data.materials.append(stone); po.cycles.is_caustics_receiver = True
+            bpy.ops.object.shade_smooth()
+            import assets
+            try:
+                assets.place(bpy, 'food_pears_asian_01', '2k', location=(0.24, 0.06, tz + 0.012), rotation_deg=(0, 0, 10), scale=1.8)
+            except Exception as e:
+                print('pears skipped', e)
     import assets
     # critic r1 c6 / r2 c7: no vase, no plate cut by the frame
     # critic r1 c5: a white card low and to the front left, out of frame, for one highlight on the foot's edge
@@ -530,7 +541,7 @@ def shot_core_sample(lit, stackmix=None, out=None, scale=1.0, samples=512, tag='
         box_ob(name + '-spine', x0, y0 + d - 0.004, z0, x0 + w, y0 + d, z0 + h, cover, bevel=0.001)
         box_ob(name + '-pages', x0 + 0.002, y0 + 0.002, z0 + 0.003, x0 + w - 0.002, y0 + d - 0.004, z0 + h - 0.003, pages)
     book('book', -0.31, 0.05, tz, 0.21, 0.15, 0.032, '#3E4A3F')
-    book('book2', -0.29, 0.07, tz + 0.032, 0.17, 0.12, 0.024, '#8A2F2A')
+    book('book2', -0.29, 0.07, tz + 0.032, 0.17, 0.12, 0.024, '#B9B4AA')          # day r1 c5: a neutral cover
     if lit:
         world(hdri='kiara_9_dusk', strength=0.05, rotation=200)
         # critic r1: c1 the fill down 70 %, c7 cool (#9FB0CC), c4 a 15 x 60 strip rim light behind at 120 deg camera
@@ -543,24 +554,26 @@ def shot_core_sample(lit, stackmix=None, out=None, scale=1.0, samples=512, tag='
             ob.rotation_euler = (Vector((0, 0, z)) - Vector(ob.location)).to_track_quat('-Z', 'Y').to_euler()
         contour = which == 'contour'
         # Contour Core r2: c1 exposure -1.3, c2 the fill +200 %, c3 cooler, c4 the dusk 0.15, c7 the glow x1.3
-        if contour:
-            world(hdri='kiara_9_dusk', strength=0.09, rotation=200)                       # r3 c7
+        world(hdri='kiara_9_dusk', strength=0.09 if contour else 0.12, rotation=200)      # r3 c7 / r4 c5
+        if True:
             # r3 c5: a 600 x 80 strip behind and 40 deg right at the base's height, for its edges
-            rimb = area('base-rim', (0.77, 0.92, tz + 0.03), (0, 0, 0), (0.6, 0.08), 4.0, '#FFF1E2')
+            rimb = area('base-rim', (0.55, 0.30, tz + 0.03), (0, 0, 0), (0.6, 0.08), 2.5, '#FFF1E2')     # in front of the wall
             aim(rimb, tz + 0.015)
         area('room-fill', (-1.2, -1.0, 1.9), (55, 0, -40), (1.0, 1.0), 2.1 if contour else 0.7,
              '#9EB8FF' if contour else '#9FB0CC')                                          # r3 c3
-        kick = area('kicker', (-0.40, 1.2, tz + 0.08), (0, 0, 0), (0.6, 0.10), 1.2, '#FFF4E8'); aim(kick, tz + 0.01)
+        kick = area('kicker', (-0.45, 0.30, tz + 0.08), (0, 0, 0), (0.6, 0.10), 0.8, '#FFF4E8'); aim(kick, tz + 0.01)
         sheen = area('sheen', (0.87, -0.5, tz + 0.12), (0, 0, 0), (0.15, 1.2), 0.5, '#FFF4E8'); aim(sheen, tz + 0.09)
-        render_settings(1600, 1067, samples, scale, exposure=-2.2 if contour else 0.8, look='AgX - Medium High Contrast')
+        render_settings(1600, 1067, samples, scale, exposure=-2.2 if contour else 1.3, look='AgX - Medium High Contrast')
     else:
-        world(hdri='kiara_9_dusk', strength=0.6, rotation=200)
-        window_gobo(-1.3, -1.3, 0.9, 0.75, 2.4)
-        # daylight: the window's sky as a large soft source (its coloured shadows converge as refractive caustics), and a
-        # weak low sun for the sun patches
-        win = area('window-sky', (-1.25, -0.2, 1.55), (0, -90, 0), (1.5, 2.0), 260.0, '#DCE6F5')
-        sun_lamp('sun', (0.80, -0.35, -0.42), strength=1.2, color='#FFE7C8', angle=1.0)
-        render_settings(1600, 1067, samples, scale, exposure=-0.3)
+        # Contour Core day r1: c4 the sky down (0.35 and the window's sky 60 %), c3 a strong low sun (5) from the left and
+        # a little behind, so the lamp throws a hard shadow toward the camera's right and the window's bars cross the
+        # wall (c2); c7 a bounce card for the base
+        world(hdri='kiara_9_dusk', strength=0.35, rotation=200)
+        window_gobo(-1.3, -1.3, 0.9, 0.75, 2.4, panes=(2, 2))
+        win = area('window-sky', (-1.25, -0.2, 1.55), (0, -90, 0), (1.5, 2.0), 80.0, '#DCE6F5')
+        sun_lamp('sun', (0.86, -0.25, -0.34), strength=12.0, color='#FFE7C8', angle=1.5)
+        box_ob('bounce', 0.40, -0.25, tz, 0.70, -0.24, tz + 0.20, principled('bounce', '#F4F2EE', 0.9))
+        render_settings(1600, 1067, samples, scale, exposure=0.0)
     camera((0.22, -0.98, tz + 0.30), (0.0, 0.0, tz + 0.085), lens=85, fstop=2.8 if lit else 4.0)
     bpy.context.scene.render.filepath = out
     bpy.ops.render.render(write_still=True)
@@ -646,7 +659,8 @@ def shot_terrace(lit, tint=None, out=None, scale=1.0, samples=512, kind='terrace
     bpy.ops.object.shade_smooth()
     md = po.modifiers.new('b', 'BEVEL'); md.width = 0.004; md.segments = 4
     try:
-        assets.place(bpy, 'food_pears_asian_01', '2k', location=(-0.03, -0.03, tz + 0.014), rotation_deg=(0, 0, 40))
+        # Halo r1 c6: the scan's pears are about 38 mm; scaled to a real pear's 70
+        assets.place(bpy, 'food_pears_asian_01', '2k', location=(-0.03, -0.03, tz + 0.014), rotation_deg=(0, 0, 40), scale=1.8)
     except Exception as e:
         print('pears skipped', e)
     if lit:

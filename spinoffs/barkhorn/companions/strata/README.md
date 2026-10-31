@@ -145,7 +145,49 @@ Renders go to `renders/2026-10-31/barkhorn/strata/`, each lit at dusk and unlit 
 `critic/PROMPT.md`, verbatim, given to a fresh subagent per frame (`critic_stage.py`). The duels are blind, against the
 current heroes. The rounds are logged in `critic/LOG.md`.
 
-(Scores follow below as the rounds come in.)
+### Results (2026-10-31)
+
+| Proposal | Blind scores (rounds) | Blind duels against the current hero | Gate |
+|---|---|---|---|
+| **Terrace** | lit 5.5, 5.0, 5.5 (three rounds: closed); day 5.0 | **won 4 of 4**: 7.0–5.5, 6.5–5.5 (sides swapped), 6.8–6.0 against `dining-hero`; 7.0–5.5 against `macro-hemisphere` (daylight) | **met** (duels) |
+| **Halo** | lit 5.5 | **won**: 6.5–5.5 against `dining-hero` | **met** (duel) |
+| **Contour Core** | lit 5.0, 5.0, 5.5 (look 1 closed; look 2 rendering); day 5.5 | lit: lost 3 (about 5.5–7.0, the last 6.2–6.8); **day: won** 6.5–5.0 against `macro-core` | **met** (day duel) |
+| **Core Sample** | lit 5.0, 5.5 (look 1); 5.0 (look 2) | lost 3 (about 5.0–5.5 against 7.0) | **not met** |
+
+In every duel, won or lost, the critic rated the proposal the more distinctive object: **6 to 7 out of 10, against
+3 to 4** for the current Hemisphere and Core. The current Core's lit hero still wins on picture polish (40-odd
+rounds of lighting), not on the object. In the critics' words:
+- Terrace: "the stepped ribbing gives the object its own identity … the lamp's light is the subject".
+- Halo: "its own object, and the warm pool it throws on the table is the lamp actually lighting the scene".
+- Contour Core: "the stacked, stepped glass reads as a real, well-made thing with its own silhouette".
+
+No frame reached a blind 7.0; the critics' estimates once their changes are made run 7.0 to 7.8.
+
+The pictures: `renders/2026-10-31/barkhorn/strata/` (`NAME-lit.png`, `NAME-day.png`). Each critic round's reply is in
+`critic/rounds/2026-10-31/strata-*.json`, with the duel beside it, and logged in `critic/LOG.md`.
+
+### What the rounds taught (for the owner)
+
+1. **Thick acrylic reads red, not amber.** Every critic flagged "amber" reading tomato red.
+   - That is the calibration working: through 11 to 39 mm, TruCast 2422 passes almost only red.
+   - Either the copy says red-orange for laminations, or the laminated parts take a custom pour at a lighter dye
+     loading.
+2. **The pendants' pool is white, by design.** The COB fires straight down through the louvre, not through the
+   acrylic.
+   - Over a dining table that is right: food and faces want white light, and the colour lives in the shade.
+   - Two critics wanted a coloured pool. A tinted lens disc in the reflector (6 mm of the shade's tint) is the
+     option for bars.
+3. **Core Sample's lesson.**
+   - The current design (a polished bore, a bright filament, discs in finish and tint) reads as a striped tube with a
+     hot bar in it.
+   - Its strata show best by day.
+   - It needs either a stronger diffuser (an opal tube twice as dense) or fewer, thicker strata before it can win a
+     lit hero.
+   - Of the four, it is the one to drop or rethink.
+4. **Rendering notes:**
+   - Cycles' MNEE shadow caustics would not converge on an upright cylinder or ball here.
+   - Light inside a polished bore reached the table only through the lamp's own emitters, path-traced.
+   - The daylight frames use a window's skylight and a hard low sun for the coloured shadows.
 
 ## For the owner to decide
 
