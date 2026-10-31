@@ -33,10 +33,10 @@ VIEWS = {
     # in the window and moves to the listening room for sessions; the shop's single Tropos and its plinth are gone.)
     # So the shop is seen from the bar end toward the street: both walls of shelves, the table, the pair in the window
     # against the street, at 28 mm
-    'shop': dict(camera={'position': [8.2, 2.1, 1.45], 'target': [0.6, 3.6, 1.10], 'lens_mm': 28, 'level': True,
+    'shop': dict(camera={'position': [8.0, 1.95, 1.45], 'target': [0.6, 2.9, 1.10], 'lens_mm': 28, 'level': True,
                          'fstop': 4.0, 'focus': [3.6, 3.5, 0.9]}, exposure=4.2, haze=0.0012, pair='window',
                  lights={'win': {'power_w': 40.0, 'cone_deg': 26.0}, 'street': {'irradiance': 0.05}},
-                 room={'windows_lit': 0.15, 'window_glow': 0.6}),
+                 room={'windows_lit': 0.12, 'window_glow': 0.18, 'glass_gloss': 0.35}),
     # p0 look: the opposite building's windows and lit shop mirrored in the glass as white squares and a blue band, the
     # sidewalk hot, a mullion down the middle: the facade dimmed, the glass a softer reflector, one pane, the street lamp down
     # p2 (p1 judged 4.5/4.0, converged: a hard blue rectangle on the glass, which was the placeholder shop opposite
@@ -51,10 +51,10 @@ VIEWS = {
     # p0 look: too dark, the left stack out of frame: the camera back by the drape's opening, both stacks in; the
     # stacks' spots, the seats' light and the exposure up
     'listening': dict(camera={'position': [9.85, 2.2, 1.25], 'target': [13.3, 3.8, 0.85], 'lens_mm': 20, 'level': True,
-                              'fstop': 4.0, 'focus': [12.6, 3.6, 0.8]}, exposure=3.6,
+                              'fstop': 4.0, 'focus': [12.6, 3.6, 0.8]}, exposure=3.3,
                       # p1 proof, seen before judging: overexposed (median 111, the seats and rug blown): exposure 5.0 to
                       # 3.6, the seats' light and the back felt's wash halved
-                      lights={'stack': {'power_w': 90.0}, 'seats': {'power_w': 15.0}, 'drape': {'irradiance': 0.8}},
+                      lights={'stack': {'power_w': 90.0}, 'seats': {'power_w': 6.0}, 'drape': {'irradiance': 0.8}},
                       pair='listening'),
 }
 

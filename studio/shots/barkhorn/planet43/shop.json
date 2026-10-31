@@ -6,13 +6,13 @@
  ],
  "camera": {
   "position": [
-   8.2,
-   2.1,
+   8.0,
+   1.95,
    1.45
   ],
   "target": [
    0.6,
-   3.6,
+   2.9,
    1.1
   ],
   "lens_mm": 28,
@@ -227,8 +227,9 @@
       1.7
      ]
     ],
-    "windows_lit": 0.15,
-    "window_glow": 0.6
+    "windows_lit": 0.12,
+    "window_glow": 0.18,
+    "glass_gloss": 0.35
    },
    {
     "kind": "kit",

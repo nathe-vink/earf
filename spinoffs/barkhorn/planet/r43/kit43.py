@@ -122,7 +122,7 @@ def street(bpy, kit, p, objs):
             if rnd.random() < p.get('windows_lit', 0.35):
                 wins.box(-16.02, y, zf, -16.0, y + 1.4, zf + 1.6)
     if p.get('windows_lit', 0.35) > 0:
-        objs.append(wins.object(bpy, emitter(bpy, 'popup-opp-lit', '#FFC890', p.get('window_glow', 1.2))))
+        objs.append(wins.object(bpy, emitter(bpy, 'popup-opp-lit', '#FF9A48', p.get('window_glow', 1.2))))
     if p.get('opp_shop_glow', 0.0) > 0:          # (round 43 p1: its reflection read as a hard blue rectangle on the glass)
         shop = Mesh('popup-opp-shop'); shop.box(-16.02, -4.0, 0.2, -16.0, 6.0, 2.8)
         objs.append(shop.object(bpy, emitter(bpy, 'popup-opp-shop', '#FFB070', p['opp_shop_glow'])))
