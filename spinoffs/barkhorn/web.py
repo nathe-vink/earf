@@ -1192,7 +1192,7 @@ JOURNAL_STACKED = ('stacked-horn', '2026-10-31', 'Stacked like contour lines',
     ('fig', 'journal-stack-smoke.jpg', 'A Smoke horn built in layers, on its cabinet: dark acrylic between the bright edges of its terraces',
      'Smoke: dark between the bright edges of its layers.'),
     ('p', 'No mould means no wait for one. A formed horn needs a tool cut and proved before its first shot; a stacked one '
-          'needs sheet, a cutter and a bench. That is why the first pair can play in January.'),
+          'needs sheet, a cutter and a bench. That is why the first pair can play this spring.'),
     ('p', 'And the stack is honest about how it was made. From the front, the terraces read as strata, or as the contour '
           'lines of a map: the Earth again, though nobody drew it on. It comes from the building.'),
     ('fig', 'journal-stack-lineup.jpg', 'Four Tropos speakers in a row: Ember as on this site, Ember in stock sheet with the '
@@ -2838,10 +2838,10 @@ def favicons():
 # (r47-brand: brandbook/launch/invite-card.html and reserve.html; the terms in money/out/, for counsel). Off, neither
 # leaves a trace: no markup, style, route, link, /s/ page or card picture. No price is shown on either: the site's is
 # "Priced at launch", and the mockup's [PAIR PRICE] and [RESERVATION] wait for the owner and counsel.
-DEBUT = False            # the debut: Tue 19 January 2027, the week of FOG Design+Art, the venue to be announced
+DEBUT = False            # the debut: spring 2027, in San Francisco, its date and venue to come (the owner, 2026-10-31: "C")
 FOUNDING = False         # the Founding Hundred: register interest only; no payment anywhere
 FOUNDING_REVIEW = True   # its words are counsel's to approve: a bar across the page says so until this is False
-DEBUT_FACTS = [('When', 'Tuesday 19 January 2027, the week of FOG Design+Art'), ('Where', 'San Francisco; the venue to be announced'),
+DEBUT_FACTS = [('When', 'Spring 2027. Date to come.'), ('Where', 'San Francisco; the venue to be announced'),
                ('Hear', 'Tropos, the horn loudspeaker, its first pair'),
                ('See', 'Mantle, the record player, and the lamps or their cast samples in the eight tints'),
                ('At the door', 'One coin, one song')]
@@ -2884,11 +2884,11 @@ def dark_pages():
       alt="Tropos in Ember in the dark, lit from above, its reflection in a black floor" loading="lazy">
     <div class="wrap debut-words"><p class="eyebrow">You are invited</p><h1>Something in the air.</h1>
       <p class="lede">The first pair of Tropos, heard for the first time. Hi-fi and light in cast acrylic, in eight colours.</p>
-      <p class="debut-when">Tuesday 19 January 2027<br>San Francisco &middot; venue to be announced</p>
+      <p class="debut-when">Spring 2027, in San Francisco<br>Date to come</p>
       {interest_form('debut', 'Ask for an invitation', 'Invitations by request')}</div>
     <div class="tint-bar" aria-hidden="true">{tints}</div>
   </section>
-  <div class="debut-more"><div class="wrap"><p class="eyebrow">The EARF debut &middot; the week of FOG Design+Art</p>
+  <div class="debut-more"><div class="wrap"><p class="eyebrow">The EARF debut &middot; spring 2027</p>
     <h2>One night, and the first time it plays.</h2><dl class="debut-facts">{facts}</dl>
     <p class="ed-note">Everything in the room is made to order. Until the night, every picture here is a render: no Tropos has been built yet.</p></div></div>
 </main>"""
@@ -3064,12 +3064,11 @@ def share_pages():
                          {'@context': 'https://schema.org', '@type': 'WebPage', 'name': f'{name} · EARF', 'description': desc}))
     if DEBUT:
         img = card('red-studio-1200.jpg', 'debut.jpg')
-        d = 'The first pair of Tropos, heard for the first time. Tuesday 19 January 2027, San Francisco, the week of FOG Design+Art.'
+        d = 'The first pair of Tropos, heard for the first time. Spring 2027, in San Francisco. Date to come.'
         made.append(page('debut', 'The EARF debut · Something in the air', d, img, 'Tropos in Ember in the dark', '#0B0C10', 'website',
-                         {'@context': 'https://schema.org', '@type': 'Event', 'name': 'The EARF debut', 'startDate': '2027-01-19',
-                          'eventStatus': 'https://schema.org/EventScheduled', 'description': d,
-                          'location': {'@type': 'Place', 'name': 'To be announced', 'address': 'San Francisco, CA'},
-                          'organizer': {'@type': 'Organization', 'name': 'EARF', 'url': URL}, 'image': f'{URL}/{img}'}))
+                         # a WebPage, not an Event, until there is a date: an Event needs a startDate
+                         {'@context': 'https://schema.org', '@type': 'WebPage', 'name': 'The EARF debut', 'description': d,
+                          'publisher': {'@type': 'Organization', 'name': 'EARF', 'url': URL}, 'image': f'{URL}/{img}'}))
     if FOUNDING:
         img = card('hero-1200.jpg', 'founding-hundred.jpg')
         d = 'The first hundred pairs of Tropos, numbered on both rating plates. Register interest; no payment is taken.'

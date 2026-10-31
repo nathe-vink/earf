@@ -130,13 +130,13 @@ brand"). Not live: main needs the owner's yes.
   screen of view (Chrome's own lazy distance fetched 1.8 MB of them up front); the gallery's neighbours after load;
   the dark icons, never shown in a one-theme site, gone.
 - **Two pages built dark** (`DEBUT`, `FOUNDING`, both False; from the brand lane's mockups on `r47-brand`): `#debut`, the
-  invitation (Tuesday 19 January 2027, the week of FOG Design+Art, the venue to be announced; Ember in the dark studio,
+  invitation (spring 2027, in San Francisco, date and venue to come: the owner moved it from January on 2026-10-31; Ember in the dark studio,
   the eight tints in a bar) and `#founding-hundred` (the first hundred pairs, numbered; the FCC's words for an
   unauthorised device; "Register interest" only, no payment, no price; a "Draft for counsel" bar while
   `FOUNDING_REVIEW`). Each asks through the waitlist's form once it has a provider, else by one button to the press
   address (the enquiries until that is filled). Off, nothing of either is in `site/`: no markup, style, route name,
   link, `/s/` page or card picture (checked by search); on, both swept at 1440 and 390, with and without forms, their
-  `/s/` cards (an Event for the debut) landing where they should.
+  `/s/` cards landing where they should (the debut's a WebPage until it has a date).
 - **A fourth post built dark** (`STACKED_HORN`, False): "Stacked like contour lines", the horn as 22 layers of stock
   half-inch cast sheet, bonded, annealed and machined through on five axes, with no mould (from `make/laminated-horn.md`
   and the horn-choice renders on `r33-speaker-horn`, brought here under the same paths; no supplier names or prices).
