@@ -73,3 +73,8 @@ while lanes run. Deck: https://claude.ai/artifact/3sihYaT4ckNTF6WE7SWR7x (v26). 
   Also later: a bespoke arm (product decision); cover weight 2.9 kg (3+3 top -> 2.4).
 - Asked for a short last pass: more color (wider or lighter custom laminae; Ember + a cool tint), a Strata Float dusk
   frame, a bespoke-arm concept with OEM costs.
+
+## Four-pieces milestone 1 (22:22 UTC, d6c97492)
+- Proofs: golden hour all-Poison 6/6 (picked); golden Ice+Dust 6/6 (read as a two-color accessory set); morning 5/5;
+  blue hour 4-5. Round 2: reading nook by the window (chair, Hemisphere over its arm, Core on a side table), hi-fi right
+  of center, three-quarter from the right. Next: refine, critic rounds, duel vs the 7.0 golden room, 3840x2160 final.
