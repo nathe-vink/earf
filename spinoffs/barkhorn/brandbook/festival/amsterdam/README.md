@@ -27,10 +27,12 @@ A shared job:
      the bar lane's render.
    - One question remains: six discs carry six colours, while the bar lane's render brief says "the eight tints". The
      owner decides; the text says six.
-3. **Size and weight.**
-   - The 1.25 m piece weighs about 190 kg.
-   - The 2 m version is a proposal under study: about 245–485 kg depending on thickness, before ballast (House Book v8,
-     "figures to confirm").
-   - R10's closed-sphere figures are not used. Every figure in the concept is in brackets for the bar lane's sheet.
+3. **Size, weight, wind and money**, now from the bar lane's technical sheet (`r33-planet-world` 2866f79f,
+   `planet/r43/amsterdam/TECH.md`, all est.):
+   - the 1.25 m piece weighs about 190 kg; the 2 m proposal about 485 kg in 25 mm sheet;
+   - flat discs catch **more** wind than a sphere, not less, so the plinth carries about 1.0–1.8 t of ballast;
+   - the light is a rim-lit 24 V strip, about 0.4–0.6 kW;
+   - three crates, a crew of four, one day to install;
+   - about €28,000–60,000 to produce, which the festival covers.
 4. **No logos, and the title.** The work is entered as the owner's own. "Mother EARF" carries the company's name, so the
    text offers "Mother" or "Mother Earth, in Six Colours", or asking the festival first.
