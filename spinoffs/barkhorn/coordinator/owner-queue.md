@@ -2,7 +2,7 @@
 
 Ask the owner ONE question at a time, examples first, choices also in plain text. Save every owner answer to the
 owner-notes table in spinoffs/barkhorn/README.md immediately (this branch), then act. Don't block on AskUserQuestion
-while lanes run. Deck: https://claude.ai/artifact/3sihYaT4ckNTF6WE7SWR7x (v27). Nothing outward without the owner's yes.
+while lanes run. Deck: https://claude.ai/artifact/3sihYaT4ckNTF6WE7SWR7x (v29). Nothing outward without the owner's yes.
 
 ## Owner rulings today (all saved in the README owner-notes table on this branch)
 - Debut moves to spring ("C"), then DATES AND LOGISTICS PARKED (design first). Date question withdrawn.
@@ -126,3 +126,21 @@ while lanes run. Deck: https://claude.ai/artifact/3sihYaT4ckNTF6WE7SWR7x (v27). 
 2. Mantle: A Strata Float / B Outcrop / Outcrop's cover on Strata's float (show the dusk frame and Outcrop in custom
    Ember side by side).
 Not questions (FYI with pictures when there's a natural moment): Core's contact dock; the line slide; editions finals.
+
+## After check-in 4 (23:00-23:30 UTC)
+- OWNER RULING (saved 6a93885f): the line slide has NO leader lines or dots; the pieces spaced apart, each on an even,
+  neutral ground with its label beside it; and a LIGHTS-ON version of the same room (coordinator said yes: two of the
+  four are lights). Four-pieces lane re-briefed (label zones, nothing in front of the window, two versions, same camera,
+  anchors.json with label zones and tones). Builder: leaders off (27159dd0).
+- Deck v28-v29: light.html and line.html now show the cordless Core in Ember (/_blob/b95e91c11752211a9cb838c1b62f1dc5,
+  from the lamps lane's c55594f5) and say "cordless: about five hours a charge"; light's notes say it charges in 2-3 h.
+  The site waits for the whole set (2 of 10 frames done at 23:09; about 15 min a frame).
+- Brand: none of the seven new objects reached 7.0 in 3 rounds (best Moho 6.0, Relief 6.0). Ruled (b): look 4 with CC0
+  photographed textures (Poly Haven / ambientCG, fetch script + manifest, binaries out of git), a hard key for colored
+  caustic shadows (no MNEE), Moho/Relief/Meridian first; publish "EARF New Objects" after, with honest captions.
+- Bar: look 2 round 2 at 4.0-5.5. Told: take the mannequin people out (signs of life instead), CC0 textures allowed;
+  last round, House Book only if a view beats the r41/r39 heroes.
+- Speaker: Strata round two (4d9db424: 20 mm polished lip, bronze posts, caldera step); the horn assembly is about
+  10.2 kg, just over the tipping check's 10 kg allowance (0f43215b): watch this in the finals' design note.
+- Mantle: a blind head-to-head duel (Strata Float vs Outcrop, both custom Ice, same light, both orders) is running
+  locally, to back the recommendation in the owner's Mantle question.
