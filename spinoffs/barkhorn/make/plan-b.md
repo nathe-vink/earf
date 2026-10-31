@@ -12,7 +12,7 @@ formed horn's own figures (round 36) are the baseline.
 | route | how | tooling | a horn (prototype) | risk | look | acoustics |
 |---|---|---|---|---|---|---|
 | **The baseline: formed** | 10 mm sheet pressure-formed over a male plug, trimmed; a turned throat piece | ~$7,100 (board plug and base) | ~$1,500 | F1, F2, F4: corners, webbing, the dark lot in the oven | one clear shell, glossy outside, no seam; deep tint pale where thin, deep at the rim | air path exact (the tool's face); walls 5 to 8.5 mm, stiffer than the resin's |
-| **A. Laminated layers** (recommended) | 14 layers of the horn lot's 20 mm sheet, each CNC-cut to its outline, bonded in a jig with polymerising cement, annealed; the air path machined through on 5 axes and polished; the outside left stepped | ~$1,500 (a bonding jig) | ~$1,900: sheet ~$530 (about 1.4 m² of 20 mm), cutting $240, bonding $160, 5-axis air path $750, polish $200 | **Bond lines**: 14 bonded rings must be free of bubbles (C2, 14 times over). Mitigation: the same cement and process as the cabinet's joints, vacuum-mixed, each layer pressed flat. Machining a 278 mm deep bore: the mouth is wide, so ordinary long tools reach | **terraced**: a contour-line horn, each 20 mm layer a step, the bond lines fine dark lines through the tint. Deeper and heavier-looking (a thick wall reads darker); unmistakably made, a sculpture | air path exact (machined); walls 10 to 30 mm, massive and inert, the best of all routes; 5.6 kg a horn against 4.1 |
+| **A. Laminated layers** (recommended; since redrawn from stock 1/2 in sheet, `laminated-horn.md`) | 14 layers of the horn lot's 20 mm sheet, each CNC-cut to its outline, bonded in a jig with polymerising cement, annealed; the air path machined through on 5 axes and polished; the outside left stepped | ~$1,500 (a bonding jig) | ~$1,900: sheet ~$530 (about 1.4 m² of 20 mm), cutting $240, bonding $160, 5-axis air path $750, polish $200 | **Bond lines**: 14 bonded rings must be free of bubbles (C2, 14 times over). Mitigation: the same cement and process as the cabinet's joints, vacuum-mixed, each layer pressed flat. Machining a 278 mm deep bore: the mouth is wide, so ordinary long tools reach | **terraced**: a contour-line horn, each 20 mm layer a step, the bond lines fine dark lines through the tint. Deeper and heavier-looking (a thick wall reads darker); unmistakably made, a sculpture | air path exact (machined); walls 10 to 30 mm, massive and inert, the best of all routes; 5.6 kg a horn against 4.1 |
 | **B. Two formed halves** | the horn split on its horizontal centre plane; each half formed over a half plug (a draw of about 180 mm, not 240), trimmed, the halves bonded edge to edge | ~$8,500 (two half plugs and bases) | ~$1,700 (two formings, a long bonded seam, seam polishing) | **The seam**: two 600 mm bonded seams on the air face, each a possible step and a line of bubbles; the halves must meet within 0.1 | **a seam** along each side wall, through the tint | air path exact if the seam is flush; a step at the seam scatters only above about 10 kHz if under 0.3 mm |
 | **C. Cast resin in the deep tint** (round 35's horn) | polyurethane or epoxy cast in a two-part silicone mould from a CNC-cut plug | ~$900 (mould) | ~$820 (the kit's figure) | **Material**: a different material from the cabinet, so its colour must be matched across two chemistries and it ages differently in UV (the reason for round 36). Low process risk | **exactly the site's look**: a deep horn with a solid dark neck | as simulated and approved; a solid neck |
 | **D. 8 mm sheet, formed** | as the baseline, from 8 mm sheet | as the baseline | ~$1,400 | **Too thin**: the CAD's estimate puts the mouth's corners at 3.9 mm, under the 4 mm floor. Only with plug assist and a proven trial | as the baseline, a little paler | as the baseline, walls 20 % less stiff |
@@ -35,8 +35,18 @@ formed horn's own figures (round 36) are the baseline.
 
 ## The model and the render
 
-Route A is in the CAD as `horn-plan-b` in `horn_options.py` (built apart from the Cloud, with its drawings and parts
-list in `out-horn-options/`; the geometry is `product.formed_horn`'s `laminated`). It has 14 layers of 20 mm, each its
-outline 10 mm outside the air path at its front, and the boss as the last layer. It takes the formed flare's and the
-throat piece's place, on the same pod, cap, pads and posts. It is 4.7 L of acrylic, about 5.6 kg. The kit prices it at
-about $2,150 a horn, its blank the 1.4 m² of 20 mm sheet its layers are cut from, against the $1,900 built up above. The render beside the formed horn is `renders/2026-10-31/barkhorn/horn-plan-b/compare-formed-vs-laminated.png`.
+Route A is in the CAD as `horn-plan-b` in `horn_options.py`. It is built apart from the Cloud, with its drawings and
+parts list in `out-horn-options/`; the geometry is `product.formed_horn`'s `laminated`. It takes the formed flare's and
+the throat piece's place, on the same pod, cap, pads and posts.
+
+The first render beside the formed horn is `renders/2026-10-31/barkhorn/horn-plan-b/compare-formed-vs-laminated.png`. It
+showed 14 layers of 20 mm in the horn lot.
+
+**Since then (2026-10-31, later), route A is drawn from stock 1/2 in sheet.** The stock-colour research found no
+tinted stock cast sheet thicker than 1/2 in (R1), so the layers are:
+- 22 layers of 1/2 in, faced to 12.44;
+- stepped (`horn-plan-b`) or machined smooth outside (`horn-plan-b-smooth`).
+
+The kit prices them at about $1,570 and $1,790 a horn. Its colour, cost, schedule, bond lines and mass are in
+`make/laminated-horn.md`, which supersedes the route A row above where they differ. The owner's choice between formed,
+laminated stepped and laminated smooth is rendered in `renders/2026-10-31/barkhorn/horn-choice/`.

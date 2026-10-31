@@ -20,7 +20,7 @@ def load(path):
     return json.load(open(os.path.join(ROOT, path)))
 
 
-def room():
+def room(critic_round=2):
     s = load('studio/shots/barkhorn/room31/room.json')
     s['title'] = 'Tropos, a pair at home at golden hour (Poison), round 36 horn'
     s['products'] = [p for p in s['products'] if 'turntable' not in p['def']]
@@ -29,6 +29,19 @@ def room():
             p['position'] = [-0.4] + p['position'][1:]
         if p.get('model') == 'ceramic_vase_02':
             p['position'] = [0.42] + p['position'][1:]
+    if critic_round >= 2:                    # the critic's round 1 (tropos-campaign/critic/room-r1.json): c1 to c4, c6, c7
+        L = s['lights']
+        L['north'].update(irradiance=0.9, position=[-0.4] + L['north']['position'][1:])
+        L['bounce']['irradiance'] = 0.25
+        L['floorbounce']['irradiance'] = 0.0
+        s['render']['exposure'] = -1.2
+        s['sun']['elevation_deg'] = 11.0
+        s['camera'].update(position=[-0.45] + s['camera']['position'][1:], target=[-0.45] + s['camera']['target'][1:])
+        for p in s['set']['props']:
+            if p.get('model') == 'ceramic_vase_02':
+                p['position'] = [0.55, 0.78, 0.56]
+            if p.get('fn') == 'rug':
+                p.update(off=False, position=[0.0, -0.9], size=[2.4, 1.5])
     return s
 
 
@@ -77,8 +90,65 @@ def horn_pair(laminated):
     return s
 
 
+def horn_choice(route, colour, macro=False):
+    """The owner's choice of horn (2026-10-31, later): formed, laminated stepped or laminated smooth, in the stock colours
+    (stock_colours.json), each in studio31's horn macro rig and light, the speaker turned so the camera sees the mouth
+    from the front three-quarter. `macro`: the terraces close up, the speaker side-on as in the first comparison."""
+    s = load('studio/shots/barkhorn/studio31/macro-horn-acid.json')
+    fl = 'stock-' + colour
+    s['title'] = f'Tropos, the horn {route} in stock {colour}' + (', the terraces close' if macro else ', front three-quarter')
+    cab = s.pop('product')
+    cab['flavour'] = fl
+    for i in cab['instances']:
+        i['flavour'] = fl
+        i['rotate_z'] = 80.0 if macro else 57.0
+    if route != 'formed':
+        for i in cab['instances']:
+            i['hide'] = list(i.get('hide', [])) + ['waveguide', 'horn-throat', 'horn-pads']
+        other = 'horn-plan-b' if route == 'smooth' else 'horn-plan-b-smooth'
+        lam = {'def': 'studio/products/barkhorn-horn-options.json', 'flavour': fl,
+               'instances': [{**{k: v for k, v in i.items() if k not in ('hide', 'options')},
+                              'hide': ['horn-trial-plug', 'horn-trial-base', other]} for i in cab['instances']]}
+        s['products'] = [cab, lam]
+    else:
+        s['products'] = [cab]
+    if macro:                          # closer, on the flank where the terraces step, a longer lens
+        s['camera'] = {'position': [0.62, -1.15, 1.30], 'target': [0.06, 0.0, 1.10], 'lens_mm': 135.0, 'level': False}
+    return s
+
+
+def lineup():
+    """The site's tints beside the stock pair's (2026-10-31): Ember as on the site, Ember in stock sheet, Smoke as on the
+    site, Smoke in stock sheet; the stock two with the laminated horn (the January pair), the site's with the formed one.
+    studio31's line-up rig, the camera brought in for four."""
+    s = load('studio/shots/barkhorn/studio31/lineup.json')
+    s['title'] = 'Tropos: the site\'s Ember and Smoke beside the stock-sheet pair\'s (laminated horn)'
+    s['size'] = [2400, 1350]
+    s['camera'] = {'position': [0.0, -8.4, 0.95], 'target': [0.0, 0.0, 0.66], 'lens_mm': 58.0, 'level': True}
+    cab = s.pop('product')
+    xs = [-1.5, -0.5, 0.5, 1.5]; fls = ['cloud-red', 'stock-ember', 'cloud-black', 'stock-smoke']
+    base = cab['instances'][0]
+    cab['instances'] = []
+    lam = {'def': 'studio/products/barkhorn-horn-options.json', 'flavour': 'stock-ember', 'instances': []}
+    for x, fl in zip(xs, fls):
+        i = {**{k: v for k, v in base.items() if k not in ('position', 'flavour', 'hide')}, 'position': [x, 0, 0], 'flavour': fl}
+        if fl.startswith('stock'):
+            i['hide'] = list(base.get('hide', [])) + ['waveguide', 'horn-throat', 'horn-pads']
+            lam['instances'].append({**{k: v for k, v in i.items() if k not in ('hide', 'options')},
+                                     'hide': ['horn-trial-plug', 'horn-trial-base', 'horn-plan-b-smooth']})
+        elif base.get('hide'):
+            i['hide'] = list(base['hide'])
+        cab['instances'].append(i)
+    s['products'] = [cab, lam]
+    return s
+
+
 SHOTS = {'room': room, 'night': night, 'inside': inside, 'corner': corner, 'above': above,
-         'horn-formed': lambda: horn_pair(False), 'horn-laminated': lambda: horn_pair(True)}
+         'horn-formed': lambda: horn_pair(False), 'horn-laminated': lambda: horn_pair(True), 'lineup-stock': lineup}
+for _c in ('ember', 'smoke'):
+    for _r in ('formed', 'stepped', 'smooth'):
+        SHOTS[f'choice-{_r}-{_c}'] = (lambda r=_r, c=_c: horn_choice(r, c))
+SHOTS['choice-terraces-ember'] = lambda: horn_choice('stepped', 'ember', macro=True)
 
 if __name__ == '__main__':
     os.makedirs(OUT, exist_ok=True)

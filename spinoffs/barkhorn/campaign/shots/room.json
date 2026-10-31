@@ -156,14 +156,14 @@
     "shape": "ext",
     "path": "spinoffs/barkhorn/room31/pieces.py",
     "fn": "rug",
-    "off": true,
+    "off": false,
     "position": [
-     0.45,
-     -1.25
+     0.0,
+     -0.9
     ],
     "size": [
-     2.6,
-     1.6
+     2.4,
+     1.5
     ],
     "pile": 0.016,
     "texture": "poly_wool_herringbone",
@@ -392,8 +392,8 @@
     "shape": "asset",
     "model": "ceramic_vase_02",
     "position": [
-     0.42,
-     0.75,
+     0.55,
+     0.78,
      0.56
     ],
     "rotate": [
@@ -531,7 +531,7 @@
  },
  "sun": {
   "azimuth_deg": -68.0,
-  "elevation_deg": 14.0,
+  "elevation_deg": 11.0,
   "irradiance": 48.0,
   "angle_deg": 0.5,
   "color": "#FFE4C8"
@@ -559,7 +559,7 @@
     2.4
    ],
    "position": [
-    1.6,
+    -0.4,
     -3.6,
     2.2
    ],
@@ -568,7 +568,7 @@
     0.2,
     0.9
    ],
-   "irradiance": 2.2,
+   "irradiance": 0.9,
    "color": "#DCE4EE"
   },
   "bounce": {
@@ -587,7 +587,7 @@
     0.3,
     1.15
    ],
-   "irradiance": 0.7,
+   "irradiance": 0.25,
    "color": "#FFF0DE"
   },
   "floorbounce": {
@@ -606,7 +606,7 @@
     0.8,
     0.04
    ],
-   "irradiance": 0.55,
+   "irradiance": 0.0,
    "color": "#FFE8CC"
   }
  },
@@ -617,7 +617,7 @@
   "clamp": 10,
   "bounces": 12,
   "view": "Khronos PBR Neutral",
-  "exposure": -1.0,
+  "exposure": -1.2,
   "white_balance_k": 5200,
   "white_balance_tint": 0.0
  },
@@ -627,12 +627,12 @@
  ],
  "camera": {
   "position": [
-   0.0,
+   -0.45,
    -4.76,
    1.05
   ],
   "target": [
-   0.0,
+   -0.45,
    0.3,
    0.855
   ],

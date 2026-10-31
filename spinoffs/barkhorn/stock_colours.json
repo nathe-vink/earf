@@ -1,3 +1,25 @@
 {
- "_how": "Measured stock cast acrylic for a first pair in stock colours (product.stock_flavour). One entry a colour, keyed by the flavour name to render with (e.g. 'stock-ember'): base (the flavour it starts from: cloud-red, cloud-orange, cloud-amber, eucalyptus-y2k-green, cloud-blue, cloud-violet, birch-fog-clear, cloud-black), cabinet ['#hex', mm] (the sheet's colour seen through mm of it, on white, in daylight), horn ['#hex', mm] or null, ring '#hex' (optional), source (maker, product, colour code, where measured), note. Rebuild cloud.py to put them in the engine's product file."
+ "_how": "Measured stock cast acrylic for a first pair in stock colours (product.stock_flavour). One entry a colour, keyed by the flavour name to render with (e.g. 'stock-ember'): base (the flavour it starts from: cloud-red, cloud-orange, cloud-amber, eucalyptus-y2k-green, cloud-blue, cloud-violet, birch-fog-clear, cloud-black), cabinet ['#hex', mm] (the sheet's colour seen through mm of it, on white, in daylight), horn ['#hex', mm] or null, ring '#hex' (optional), source (maker, product, colour code, where measured), note. Rebuild cloud.py to put them in the engine's product file.",
+ "_status": "2026-10-31: estimated from published light transmission (research R1), not yet measured: make/stock_tints.py, the 'held' case (the seller's LT held at the sheet's own thickness). Replace each hex with a measurement of the sheet itself once the chips and off-cuts arrive.",
+ "stock-smoke": {
+  "base": "cloud-black",
+  "cabinet": ["#959595", 20.0],
+  "horn": ["#787B7E", 10.0],
+  "source": "cabinet: TruCast 2064 Gray 3/4 in (19 mm), AC Plastics, 3 sheets in stock 2026-10-31, LT 29.3 % held at 19 mm; horn: TruCast 2074 Dark Gray 1/2 in, laminated, LT 11.7 % held at 12.7 mm",
+  "note": "estimate; the cabinet within 3 % of the site's Smoke at 20 mm, the horn much lighter than the site's deep Smoke lot"
+ },
+ "stock-ember": {
+  "base": "cloud-red",
+  "cabinet": ["#F8AFBA", 20.0],
+  "horn": ["#E02B3A", 10.0],
+  "source": "cabinet: Chemcast 2423 Red at 20 mm, a standard-colour mill run (8 to 10 sheets), LT 49.85 % held at 20 mm; horn: TruCast 2423 Red 1/2 in, AC Plastics, 19 in stock, laminated, LT 14.1 % held at 12.7 mm",
+  "note": "estimate; both within a few % of the site's Ember cabinet and deep horn; the cabinet is not a stock item at 20 mm"
+ },
+ "stock-ember-trucast": {
+  "base": "cloud-red",
+  "cabinet": ["#C40206", 20.0],
+  "horn": ["#E02B3A", 10.0],
+  "source": "cabinet and horn both TruCast 2423 Red 1/2 in (LT 14.1 % held at 12.7 mm): what an Ember cabinet from stock 1/2 in sheet, two layers or a thinner wall, would look like",
+  "note": "estimate; shown to say why the Ember cabinet is not built from stock sheet: it reads as deep as the horn"
+ }
 }

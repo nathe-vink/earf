@@ -1,0 +1,29 @@
+{
+ "image": "proofs/room-p1-post.png",
+ "stage1": {"impression": "A calm, warm golden-hour room with a convincing plaster wall, real oak floor and coherent window-mullion shadows; the two green horn speakers read clearly and the horn shadows on the wall agree with the low sun from the left. But the speakers' fronts are filled flat from the camera side so the woofer covers wash out to pale sage and the cabinet interiors glow like emissive neon, the dead-centred symmetric framing reads as a catalogue plate, and a sliver of window plus a hard grey jamb at the left edge distracts.", "score": 6.5},
+ "verdict": "iterate",
+ "blocking_9": [
+  "Woofer cover discs read as the dark #2E4A2C cover, not pale sage (disc lum_median under ~90, delta_e to #2E4A2C under 10)",
+  "Cabinet fronts modelled by the sun, with a lit side and a shadowed side, not filled evenly from the camera; the interior green reads as transmitted sun, not self-lit",
+  "No camera-side fill visible as studio light on the vase, credenza top or speaker fronts",
+  "The left edge resolves into either a readable window that explains the light or clean wall, not a 100 px sliver plus a hard jamb",
+  "No visible texture repetition (credenza veneer) and no denoiser smear on wood grain at delivery size"
+ ],
+ "changes": [
+  {"id": "c1", "rank": 1, "kind": "light", "change": {"setting": "lamp north and lamp bounce irradiance", "from": "north 2.2, bounce 0.7", "to": "north 0.9, bounce 0.25 (north moved to x -0.4)"},
+   "accept": {"region": [270, 470, 390, 590], "metric": "lum_median", "op": "between", "value": [65, 92]}},
+  {"id": "c2", "rank": 2, "kind": "light", "change": {"setting": "lamp floorbounce irradiance", "from": "0.55", "to": "0.0 (sky 1.0 to 1.15 if the shadows go too dark)"},
+   "accept": {"region": [250, 610, 410, 670], "metric": "lum_p95", "op": "<", "value": 190}},
+  {"id": "c3", "rank": 3, "kind": "light", "change": {"setting": "render exposure and sun elevation", "from": "exposure -1.0, sun elevation 14", "to": "exposure -1.2, sun elevation 11"},
+   "accept": {"region": [1030, 410, 1180, 450], "metric": "lum_median", "op": "between", "value": [120, 160]}},
+  {"id": "c4", "rank": 4, "kind": "camera", "change": {"setting": "camera x (squared, shift lens)", "from": "[0.0, -4.76, 1.05] aim [0.0, 0.3, 0.855]", "to": "[-0.45, -4.76, 1.05] aim [-0.45, 0.3, 0.855]"}, "accept": null},
+  {"id": "c5", "rank": 5, "kind": "material", "change": {"setting": "credenza veneer mapping", "from": "one UV for all doors", "to": "a UV offset per door (0, 0.33, 0.66)"}, "accept": null},
+  {"id": "c6", "rank": 6, "kind": "set", "change": {"setting": "prop 9 vase", "from": "ceramic_vase_02 at [0.42, 0.75, 0.56]", "to": "matte warm grey stoneware #B8AFA2 r0.6 at [0.55, 0.78, 0.56]"},
+   "accept": {"region": [870, 400, 930, 485], "metric": "lum_median", "op": "<", "value": 200}},
+  {"id": "c7", "rank": 7, "kind": "set", "change": {"setting": "prop 3 rug", "from": "off", "to": "on at [0.0, -0.9], size [2.4, 1.5]"}, "accept": null},
+  {"id": "c8", "rank": 8, "kind": "post", "change": {"setting": "render samples / adaptive", "from": "128, 0.02", "to": "384, 0.01 at delivery"}, "accept": null}
+ ],
+ "out_of_scope": [{"request": "none on the speaker; the horn measures delta_e 4.1 to #4C6A36", "why": "the speaker is fixed"}],
+ "score_if_fixed": 8.0,
+ "note": "Condensed from the critic's reply: the problem and evidence text of each change and the defects list are summarised in ../NOTES.md."
+}

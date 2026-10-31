@@ -1,0 +1,348 @@
+{
+ "title": "Tropos: the site's Ember and Smoke beside the stock-sheet pair's (laminated horn)",
+ "size": [
+  2400,
+  1350
+ ],
+ "set": {
+  "kind": "sweep",
+  "color": "#F3F1EE",
+  "width": 52.0,
+  "front": 20.0,
+  "depth": 11.0,
+  "radius": 9.0,
+  "height": 9.0,
+  "contact": {
+   "strength": 0.8,
+   "distance_m": 0.45,
+   "core_strength": 1.0,
+   "core_distance_m": 0.03
+  },
+  "flags": [],
+  "bounces": [
+   {
+    "center_m": [
+     0.0,
+     -2.6,
+     0.6
+    ],
+    "size_m": [
+     9.0,
+     1.0
+    ],
+    "normal": [
+     0.0,
+     0.95,
+     0.15
+    ],
+    "reflect_only": true
+   },
+   {
+    "center_m": [
+     0.0,
+     -1.6,
+     2.6
+    ],
+    "size_m": [
+     9.0,
+     1.4
+    ],
+    "normal": [
+     0.0,
+     0.55,
+     -0.83
+    ],
+    "reflect_only": true
+   }
+  ]
+ },
+ "camera": {
+  "position": [
+   0.0,
+   -8.4,
+   0.95
+  ],
+  "target": [
+   0.0,
+   0.0,
+   0.66
+  ],
+  "lens_mm": 58.0,
+  "level": true
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#F2F1EF",
+  "horizon": "#EEEDEB",
+  "ground": "#CFCCC8",
+  "strength": 0.6,
+  "visible": false
+ },
+ "render": {
+  "samples": 128,
+  "adaptive": 0.01,
+  "denoise": true,
+  "clamp": 4,
+  "bounces": 16,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.0,
+  "white_balance_k": 5900,
+  "white_balance_tint": 7.0
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 235,
+  "white_out": 238,
+  "contrast": 0.1,
+  "clarity": 0.03,
+  "sharpen": 0.12,
+  "sharpen_px": 0.7
+ },
+ "materials": {
+  "sweep": {
+   "roughness": 0.32
+  }
+ },
+ "lights": {
+  "bg-left": {
+   "type": "area",
+   "size_m": [
+    8.0,
+    3.0
+   ],
+   "position": [
+    -4.5,
+    3.2,
+    3.4
+   ],
+   "target": [
+    -3.0,
+    6.0,
+    0.4
+   ],
+   "irradiance": 3.6,
+   "color": "#FFF4E8",
+   "camera": false,
+   "specular": 0.0
+  },
+  "bg-right": {
+   "type": "area",
+   "size_m": [
+    8.0,
+    3.0
+   ],
+   "position": [
+    4.5,
+    3.2,
+    3.4
+   ],
+   "target": [
+    3.0,
+    6.0,
+    0.4
+   ],
+   "irradiance": 3.6,
+   "color": "#FFF4E8",
+   "camera": false,
+   "specular": 0.0
+  },
+  "scrim": {
+   "type": "area",
+   "size_m": [
+    9.0,
+    1.6
+   ],
+   "position": [
+    0.0,
+    0.4,
+    2.8
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.8
+   ],
+   "irradiance": 1.6,
+   "color": "#FFFAF4",
+   "camera": false
+  },
+  "key": {
+   "type": "area",
+   "size_m": [
+    6.0,
+    1.6
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.6
+   ],
+   "irradiance": 4.0,
+   "color": "#FFFAF4",
+   "camera": false,
+   "specular": 1.0,
+   "position": [
+    -1.6,
+    -3.4,
+    3.0
+   ]
+  },
+  "front-strip": {
+   "type": "panel",
+   "size_m": [
+    9.0,
+    0.5
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.6
+   ],
+   "strength": 4.0,
+   "diffuse": 0.0,
+   "specular": 1.0,
+   "receivers": [
+    "*#0",
+    "*#1",
+    "*#2",
+    "*#3",
+    "*#4",
+    "*#5",
+    "*#6",
+    "*#7"
+   ],
+   "ramp": {
+    "axis": "z",
+    "at_m": [
+     1.65,
+     2.15
+    ],
+    "values": [
+     0.0,
+     1.0
+    ]
+   },
+   "position": [
+    0.0,
+    -3.0,
+    1.9
+   ]
+  },
+  "back-top": {
+   "type": "area",
+   "size_m": [
+    9.0,
+    1.2
+   ],
+   "target": [
+    0.0,
+    -0.6,
+    0.0
+   ],
+   "irradiance": 16.0,
+   "color": "#FFF8F0",
+   "camera": false,
+   "position": [
+    0.0,
+    3.0,
+    2.0
+   ]
+  }
+ },
+ "products": [
+  {
+   "def": "studio/products/barkhorn-cloud.json",
+   "flavour": "cloud-red",
+   "instances": [
+    {
+     "rotate_z": -24.0,
+     "position": [
+      -1.5,
+      0,
+      0
+     ],
+     "flavour": "cloud-red",
+     "hide": [
+      "cloth-disc"
+     ]
+    },
+    {
+     "rotate_z": -24.0,
+     "position": [
+      -0.5,
+      0,
+      0
+     ],
+     "flavour": "stock-ember",
+     "hide": [
+      "cloth-disc",
+      "waveguide",
+      "horn-throat",
+      "horn-pads"
+     ]
+    },
+    {
+     "rotate_z": -24.0,
+     "position": [
+      0.5,
+      0,
+      0
+     ],
+     "flavour": "cloud-black",
+     "hide": [
+      "cloth-disc"
+     ]
+    },
+    {
+     "rotate_z": -24.0,
+     "position": [
+      1.5,
+      0,
+      0
+     ],
+     "flavour": "stock-smoke",
+     "hide": [
+      "cloth-disc",
+      "waveguide",
+      "horn-throat",
+      "horn-pads"
+     ]
+    }
+   ]
+  },
+  {
+   "def": "studio/products/barkhorn-horn-options.json",
+   "flavour": "stock-ember",
+   "instances": [
+    {
+     "rotate_z": -24.0,
+     "position": [
+      -0.5,
+      0,
+      0
+     ],
+     "flavour": "stock-ember",
+     "hide": [
+      "horn-trial-plug",
+      "horn-trial-base",
+      "horn-plan-b-smooth"
+     ]
+    },
+    {
+     "rotate_z": -24.0,
+     "position": [
+      1.5,
+      0,
+      0
+     ],
+     "flavour": "stock-smoke",
+     "hide": [
+      "horn-trial-plug",
+      "horn-trial-base",
+      "horn-plan-b-smooth"
+     ]
+    }
+   ]
+  }
+ ]
+}

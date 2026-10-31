@@ -1724,7 +1724,8 @@ def waveguide(P):
                                plug=tool_at * pl(r['plug']), base=tool_at * pl(r['base']), nums=r['nums'], floor=zc + r['saddle_top'],
                                trial=(_Pos(c['formed']['tool']['beside'] + 900.0, 0, 0) * pl(r['trial'])) if r['trial'] is not None else None,
                                trial_base=(_Pos(c['formed']['tool']['beside'] + 900.0, 0, 0) * pl(r['trial_base'])) if r['trial_base'] is not None else None,
-                               laminated=[pl(l_) for l_ in r['laminated']] if r['laminated'] else None))
+                               laminated=[pl(l_) for l_ in r['laminated']] if r['laminated'] else None,
+                               laminated_smooth=[pl(l_) for l_ in r['laminated_smooth']] if r['laminated_smooth'] else None))
         out['formed']['support'] = _Compound(children=out['formed']['pads'])
         return out
     if f == 'cast':
@@ -1812,6 +1813,10 @@ SOLIDS.setdefault('clear-cast-acrylic', dict(title='Cast acrylic, water-clear (u
 SOLIDS.setdefault('cast-acrylic-horn-lot', dict(
     title='Cast acrylic, tinted through in the horn\'s own heavier dye lot (about 6 to 10 times the cabinet\'s dye; 6, 30 and 75 mm), turned '
           'and milled', density=1.19, usd_per_cm3=0.05))
+SOLIDS.setdefault('stock-cast-sheet', dict(
+    title='Stock cell-cast acrylic sheet, 1/2 in (12.7 mm), tinted through in a standard colour (2423 Red for Ember; 2064 or 2074 '
+          'Gray for Smoke), bought by the 48 x 96 sheet with no minimum (AC Plastics, 2423 at $835.80 a sheet, 2026-10-31; research '
+          'R1), CNC-cut to outlines (the rate carries the sheet and its nesting waste)', density=1.19, usd_per_cm3=0.03))
 SOLIDS.setdefault('cast-acrylic-block', dict(
     title='Cast acrylic, tinted through, of the cabinet\'s own batch (sheet or block, 6 to 70 mm), turned and milled',
     density=1.19, usd_per_cm3=0.05))
@@ -2021,23 +2026,27 @@ def formed_horn(P):
     # Plan B (2026-10-31): the flare and the neck laminated from the horn lot's 20 mm sheet, each layer CNC-cut to its
     # outline (the air path pushed out by `wall` at the layer's front), bonded, and the air path machined through on 5
     # axes; the outside left stepped, a terrace a layer, its edges chamfered; the boss its last layer
-    lam = None
+    # (2026-10-31, later: from stock 1/2 in sheet, the layers' pitch d / round(d / layer), each layer faced to it; `smooth`
+    # adds the same stack with its outside machined to follow the flare, each layer a taper from its back to its front)
+    lam = lam_smooth = None
     if F.get('laminated'):
-        L_ = F['laminated']; t_, wl = L_['layer'], L_['wall']
-        layers = []
-        zz = d
-        while zz > 0.01:
-            za = max(zz - t_, 0.0)
-            w_, h_, n_ = flare_section(c, zz)
-            if zz >= d - 0.01:
-                w_, h_ = hw, hh
-            lay = _loft([_se_pts(w_ + wl, h_ + wl, max(n_, 2.0), za + 0.1), _se_pts(w_ + wl, h_ + wl, max(n_, 2.0), zz - 0.1)])
-            layers.append(lay)
-            zz = za
-        boss = Pos(0, 0, -c['boss']['t']) * Cylinder(c['pod_r'], c['boss']['t'] - 0.1, align=(Align.CENTER, Align.CENTER, Align.MIN))
-        layers.append(boss)
+        L_ = F['laminated']; wl = L_['wall']
+        nl = max(1, round(d / L_['layer'])); t_ = d / nl
+
+        def stack(smooth):
+            layers = []
+            for i in range(nl):
+                zz = d - i * t_; za = d - (i + 1) * t_
+                w_, h_, n_ = flare_section(c, zz)
+                if i == 0:
+                    w_, h_ = hw, hh
+                wb, hb, nb = flare_section(c, za) if smooth else (w_, h_, n_)
+                layers.append(_loft([_se_pts(wb + wl, hb + wl, max(nb, 2.0), za + 0.1), _se_pts(w_ + wl, h_ + wl, max(n_, 2.0), zz - 0.1)]))
+            layers.append(Pos(0, 0, -c['boss']['t']) * Cylinder(c['pod_r'], c['boss']['t'] - 0.1, align=(Align.CENTER, Align.CENTER, Align.MIN)))
+            return [l_ - cut for l_ in layers]
         cut = _loft([_se_pts(c['r0'], c['r0'], 2.0, -c['boss']['t'] - 2.0)] + air_sections(c, 0.0, d))
-        lam = [l_ - cut for l_ in layers]
+        lam = stack(False)
+        lam_smooth = stack(True) if L_.get('smooth') else None
     # the numbers for the notes and the README
     ts = [formed_wall(c, z, t) for z in zw for t in (0.0, math.pi / 4, math.pi / 2)]
     nums = dict(trim=formed_wall(c, zt, 0.0), mouth=formed_wall(c, d, 0.0), corner=formed_wall(c, d, math.pi / 4), thinnest=min(ts + [tf * (1 - F['thin']['corner'])]),
@@ -2045,7 +2054,8 @@ def formed_horn(P):
                 cap_cm3=cap.volume / 1000, pads_cm3=sum(p.volume for p in pads) / 1000)
     nums['mass_kg'] = 1.19 * (nums['flare_cm3'] + nums['piece_cm3'] + nums['pod_cm3'] + nums['cap_cm3'] + nums['pads_cm3'] + saddle.volume / 1000) / 1000
     return dict(flare=flare, piece=piece, pod=pod, cap=cap, ring=ring, pads=pads, saddle=saddle, tool=tool, plug=plug,
-                base=base, outer=outer, nums=nums, saddle_top=stop, trial=trial, trial_base=trial_base, laminated=lam)
+                base=base, outer=outer, nums=nums, saddle_top=stop, trial=trial, trial_base=trial_base, laminated=lam,
+                laminated_smooth=lam_smooth)
 
 
 def formed_parts(P, wg):
@@ -2132,14 +2142,39 @@ def formed_later(P, wg):
              finish='driver-frame', option='tooling, the forming trial', render=False,
              notes=['the trial plug\'s base, in board, bolted to the forming machine\'s table; the clamp frame sized to it']),
     ] if fm.get('trial') is not None else []) + ([
-        Part('horn-plan-b', Compound(children=fm['laminated']), Machined('cast-acrylic-horn-lot', 'cnc-mill', stock=(640.0, 376.0, 116.0), setup_usd=F['laminated']['setup_usd']),
+        Part('horn-plan-b', Compound(children=fm['laminated']), _lam_stock(F, fm['laminated'], False),
              finish='horn-lot', group='horn', option='horn, Plan B: laminated',
-             notes=[f'Plan B (make/plan-b.md): the flare and the neck laminated from {len(fm["laminated"]) - 1} layers of the horn lot\'s '
-                    f'{F["laminated"]["layer"]:g} mm sheet and the boss, each layer CNC-cut to its outline ({F["laminated"]["wall"]:g} outside the '
-                    'air path at its front), its edges chamfered, bonded with polymerising cement in a jig, annealed, and the air path '
-                    'machined through on 5 axes and polished; the outside stepped, a terrace a layer; in place of the formed flare and '
-                    'the throat piece, on the same pod, cap, pads and posts; its blank priced as the 20 mm sheet its layers are cut from, about 1.4 m2']),
-    ] if fm.get('laminated') else [])
+             notes=[_lam_note(F, fm['laminated'], 'stepped, a terrace a layer, each layer\'s edge polished')]),
+    ] if fm.get('laminated') else []) + ([
+        Part('horn-plan-b-smooth', Compound(children=fm['laminated_smooth']), _lam_stock(F, fm['laminated_smooth'], True),
+             finish='horn-lot', group='horn', option='horn, Plan B: laminated, smooth',
+             notes=[_lam_note(F, fm['laminated_smooth'], 'machined smooth on 5 axes to follow the flare, then polished; the bond '
+                                                          'lines run round it as fine rings')]),
+    ] if fm.get('laminated_smooth') else [])
+
+
+def _lam_stock(F, layers, smooth):
+    """The laminated horn's material: stock 1/2 in sheet (2026-10-31, later) or the horn lot; its blank the sum of each
+    layer's bounding rectangle (each cut from a nested sheet), at the layer's thickness."""
+    L_ = F['laminated']
+    if not L_.get('stock'):
+        return Machined('cast-acrylic-horn-lot', 'cnc-mill', stock=(640.0, 376.0, 116.0), setup_usd=L_['setup_usd'])
+    bb = [l_.bounding_box() for l_ in layers[:-1]]
+    area = sum(sorted((b.size.X * b.size.Y, b.size.X * b.size.Z, b.size.Y * b.size.Z))[-1] for b in bb)
+    L_['sheet_m2'] = area / 1e6
+    return Machined('stock-cast-sheet', 'cnc-mill', stock=(1000.0, area / 1000.0, L_['layer']),
+                    setup_usd=L_['setup_usd'] + (L_.get('smooth_usd', 0.0) if smooth else 0.0))
+
+
+def _lam_note(F, layers, outside):
+    L_ = F['laminated']
+    sheet = (f'stock {L_["layer"]:g} mm (1/2 in) tinted cell-cast sheet, each layer faced to its pitch' if L_.get('stock')
+             else f'the horn lot\'s {L_["layer"]:g} mm sheet')
+    return (f'Plan B (make/plan-b.md, make/laminated-horn.md): the flare and the neck laminated from {len(layers) - 1} layers of '
+            f'{sheet}, and the boss; each layer CNC-cut to its outline ({L_["wall"]:g} outside the air path), bonded with '
+            'polymerising cement in a jig, annealed, and the air path machined through on 5 axes and polished smooth (the bond '
+            f'lines cross it flush); the outside {outside}; in place of the formed flare and the throat piece, on the same pod, '
+            'cap, pads and posts')
 
 
 def adaptor_ring(P, wg, hf):
