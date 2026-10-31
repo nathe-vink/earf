@@ -25,6 +25,19 @@ The coordinator's brief after round 3: beat the r41 and r39 heroes in blind duel
 - **The model.** A yellower band source (#FFB040) behind lighter fins; 90 mm black downlight trims with lenses; oak varied board by board; a street (brick facades with lit windows, a café, a lamp post, a parked car) for the glass to reflect.
 - **The pictures.** Motion-blurred guests and a bartender (r40's figures; faces always a smear); the counter's pools at 38 W; the new porch view; the lantern seen from the listeners' side.
 
+### Look 2 finals
+
+In `renders/2026-10-31/barkhorn/planet44/look2/finals/`, 1200 × 800 proofs, after three critic rounds per view:
+
+| View | Critics | Against the hero |
+|---|---|---|
+| street p4 | 5.5 / 5.5 | r41 door: 1–1 (one win in each order) |
+| bar p4 | 5.0 / 5.0 | not dueled |
+| porch p4 | 4.5 / 4.5 | r39 door wins 2–0 |
+| lantern p3 | 4.5 / 5.0 | r39 door wins 2–0 |
+
+No view beat a hero outright, so the House Book keeps its hero. The last round followed the coordinator's two notes: no people (every critic read the figures as mannequins), with records, a glass and coats instead; photographed CC0 oak, plaster and leather (`TEXTURES.md`, `fetch_textures44.sh`).
+
 ## Finals (look 1)
 
 The finals are in `renders/2026-10-31/barkhorn/planet44/finals/`, as 1200 × 800 proofs:
