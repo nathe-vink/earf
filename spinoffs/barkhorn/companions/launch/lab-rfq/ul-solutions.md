@@ -9,21 +9,22 @@ A comparison quote, and the route for a small hardwired Hemisphere batch.
 Nothing has been sent: these are drafts for the coordinator to turn into Gmail drafts. Our own figures are estimates (R3,
 `r46-owner-notes` 97ca003e7b22bb01f250a855ba9f29c0504b71eb); none came from this lab.
 
-## Short version (for a web form, 593 characters)
+## Short version (for a web form, 614 characters)
 
 ```
-EARF (Bay Area) asks for a quote; samples ready the week of 16 Nov 2026. Four products, no radios. (1) Tropos powered speaker (Hypex FA122): EMC pre-scan, FCC 15B Class B SDoC, 62368-1 pre-check. (2) Core battery lamp (LiFePO4 18650, USB-C charger): FCC 15B, DOE Appendix Y charger test, CEC MAEDbS. (3) Hemisphere LED pendant: plug-in swag (UL 153) or hardwired (UL 1598/8750), both priced; FCC 15B. (4) Mantle turntable on listed external supplies: does it need its own test? Please give prices, lead times, samples needed, and the NRTL listing costs that follow. [Your name], [contact line]
+EARF (Bay Area) asks for a quote, to book in mid-November for testing from late January 2027. Four products, no radios. (1) Tropos powered speaker (Hypex FA122): EMC pre-scan, FCC 15B Class B SDoC, 62368-1 pre-check. (2) Core battery lamp (LiFePO4 18650, USB-C charger): FCC 15B, DOE Appendix Y charger test, CEC MAEDbS. (3) Hemisphere LED pendant: plug-in swag (UL 153) or hardwired (UL 1598/8750), both priced; FCC 15B. (4) Mantle turntable on listed external supplies: does it need its own test? Please give prices, lead times, samples needed, and the NRTL listing costs that follow. [Your name], [contact line]
 ```
 
 ## Email version
 
 ```
-Subject: Quote request: EMC, FCC Part 15B, DOE/CEC charger and NRTL safety for four products (samples 16 Nov)
+Subject: Quote request: EMC, FCC Part 15B, DOE/CEC charger and NRTL safety for four products (testing from late January)
 
 Hello,
 
 We are EARF, a small product company in the Bay Area, preparing four products for their first build. We would
-like a quote for the testing below, with the first samples ready in the week of 16 November 2026.
+like a quote for the testing below. We hope to book in mid-November, for testing from late January 2027, starting
+with Tropos; the lamps would follow.
 
 1. Tropos, a powered loudspeaker pair: a Hypex FusionAmp FA122 class-D plate amplifier (100-120 / 200-240 V AC,
    Class I, earthed) in a sealed, earthed aluminium compartment inside a cast-acrylic cabinet; an infrared remote
@@ -62,7 +63,7 @@ Could you tell us, for each item:
 Specifically for you:
 - Limited Production Certification for Hemisphere’s hardwired version: is there a quantity cap, does it apply under UL 1598 (and UL 153 for the plug-in), and what would a batch of about 20 cost?
 - Which UL site would run the DOE Appendix Y test for Core, and do you file the CEC MAEDbS listing?
-- Can the Fremont EMC lab take Tropos’s pre-scan and Part 15B in the week of 16 November?
+- Can the Fremont EMC lab take Tropos’s pre-scan and Part 15B from late January, booked in mid-November?
 
 We can send drawings, schematics, parts lists and the bought parts' certificates (Hypex FA122, the Class 2 and LPS
 supplies, the LiFePO4 cells' UL 1642 and UN 38.3 summaries) under NDA.

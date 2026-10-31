@@ -1,10 +1,11 @@
 # Test-lab quote requests (round 43, 2026-10-31)
 
 Drafts only: nobody has been contacted. The coordinator turns them into Gmail drafts. Each file has a short version
-for a web form (593 characters) and a longer email version. `[Your name]` and `[contact line]` are placeholders.
+for a web form (614 characters) and a longer email version. `[Your name]` and `[contact line]` are placeholders.
 
 The risks slide promises "FCC testing is booked with the first build", and Tropos's schedule books the lab in the week
-of 16 November. Each letter asks for all four products at once, so one lab can bundle them.
+of 16 November, for testing from late January 2027 (Tropos's pre-scan about 25 January; the lamps follow).
+Each letter asks for all four products at once, so one lab can bundle them.
 
 Sources:
 - labs: public pages read on 2026-10-31 (the OSHA NRTL pages and each lab's own site; no site refused access);
