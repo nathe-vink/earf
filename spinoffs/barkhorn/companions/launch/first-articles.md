@@ -84,13 +84,14 @@ plinth while the acrylic is made.
 ## The dates (added 2026-10-31)
 
 **The targets, from the research:**
-- the San Francisco debut night in FOG Design+Art week, 21 to 24 January 2027;
+- the San Francisco debut night, **Tuesday 19 January 2027**, just before FOG Design+Art (21 to 24 January);
 - prototypes photographed by mid-February 2027;
 - Milan Design Week, 12 to 18 April;
 - High End Vienna, 6 to 9 May.
 
 **Assumptions:** today is 31 October 2026, and the owner sends the RFQs in the week of 2 November. Most shops close
-from about 21 December to 3 January, which takes two of the eleven and a half weeks to 21 January. The lead times
+from about 21 December to 3 January, which takes two of the eleven weeks to 19 January. The lamps are to be hung and run for an evening about 14 January
+(`debut-night-lighting.md`), so the build has about ten and a half weeks, eight and a half of them working. The lead times
 below are typical for small shops, not quotes: the RFQs ask for the real ones.
 
 | Week of | Hemisphere | Core | Mantle |
@@ -104,9 +105,16 @@ below are typical for small shops, not quotes: the RFQs ask for the real ones.
 | 21 Dec – 3 Jan | shutdown | shutdown | shutdown (bench tests at home continue) |
 | 4 Jan | Shades formed, bonded, polished | Balls joined and polished; **boards in**, firmware | A working player |
 | 11 Jan | **Closed-shade temperature test** (4 h); cord and catch | Runtime and charge on the real board; wrong-cell test; IP44 | Lid and light; the 100 h bearing run starts |
-| 18 Jan | Hung for an evening in the room | An evening's runtime in the room | Played for an evening in the room |
-| **21 Jan** | **Possible** (about even odds): only if the moulds are in before the shutdown | **Possible as a working prototype**: the ball's joint finish may not be final | **Likely**: no moulds, bought drive |
+| About 14 Jan | Hung and run for an evening (in the room, or the workshop) | An evening's runtime | Played for an evening |
+| **19 Jan** | **Possible** (about even odds): only if the moulds are in before the shutdown | **Possible as a working prototype**: the ball's joint finish may not be final | **Likely**: no moulds, bought drive |
 | mid-Feb | **Photographed** | **Photographed** | **Photographed** |
+
+**The float (recounted for 19 January, round 43):**
+- **Hemisphere: none before the test evening.** The closed-shade test runs in the week of 11 January, and the test
+  evening is 14 January. A late mould pushes it past the test evening, but not past the debut: there are five days
+  from 14 to 19 January.
+- **Core: about a week.** The ball and board are in by 4 January.
+- **Mantle: about three weeks.** It plays in the week of 4 January.
 
 **The critical path, in order of risk:**
 1. **The moulds:** the three shade moulds and the ball mould. Ordered by 16 November they land about 14 December,
@@ -127,9 +135,9 @@ below are typical for small shops, not quotes: the RFQs ask for the real ones.
 - **12 to 18 April:** Milan with matched tints;
 - **6 to 9 May:** High End Vienna with Mantle.
 
-## Cash out by week for 21 January (added 2026-10-31)
+## Cash out by week for the 19 January debut (added 2026-10-31)
 
-This covers one working Hemisphere, one Core and one Mantle in **stock Ember** (2423), from 2 November to 18 January.
+This covers one working Hemisphere, one Core and one Mantle in **stock Ember** (2423), from 2 November to 14 January (the test evening).
 
 **Sources:**
 - the BOMs: Hemisphere $4,572, Core $2,027, Mantle (turntable-float) $3,815;
@@ -172,7 +180,7 @@ not returnable.
 | Finishing: polishing, anodise re-runs, bonding, the forming of the shades and ball on the moulds | in the made-part figures above, if quoted so; else about $500 [E] |
 | Shipping and couriers | about $300 [E] |
 | Contingency, 15 % of the made parts and moulds | about $1,100 [E] |
-| **Total to 18 January** | **about $15,500** [E] |
+| **Total to 14 January** | **about $15,500** [E] |
 
 ### Option, not in the total: the debut night's lighting
 

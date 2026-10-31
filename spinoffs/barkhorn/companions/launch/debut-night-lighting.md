@@ -27,7 +27,7 @@ and each extra Core about **$527**.
 | **Total for the night** | **about $9,650–10,250** [E] | **about $4,950–5,450** [E] | **about $150–300** [E] |
 
 The rig line is the goalpost rented or bought, the hooks, tape and ramp, and the spare cells and charger (each priced
-below). None of these includes the room, the first articles themselves (already in the $15,500 to 18 January), Mantle, or
+below). None of these includes the room, the first articles themselves (already in the $15,500 to 14 January), Mantle, or
 Tropos.
 
 ### Full: the room lit by the lamps

@@ -24,7 +24,7 @@ design figures. The file names stay as they were (`dome_pendant.py`, `orb_table.
 | Dimming | Phase-cut, forward (TRIAC) or reverse (ELV), 100 % to 1 %, or 0-10 V, with the driver in the canopy: the ERP Power ESS010W-0180-42 (180 mA, 24-42 V, Class 2, FCC Part 15 Class B at 120 V; round 42). One driver serves homes and bars **[UNCONFIRMED: the COB's voltage sits about 0.6 V over the driver's 24 V floor: to bench-test warm and across bins; the alternate is EPtronics LD6W120-36-C0170-TL, which dims only to about 15 %]**. **575 lm only:** 1,100 lm is not supported on the low top |
 | California (JA8) | CRI 90, R9 50 or more (Bridgelux's 90 CRI minimum, ±3), 2700 K, about 87 to 96 lm/W out of the fitting: met by design. Dimming to 10 %, flicker under 30 % and power factor 0.90 or more: to test **[UNCONFIRMED]** |
 | Heat | No fins: the black anodised crown and cap above the shade are the heat sink (round 41). A PEEK ring separates the hub from the shade's collar. Estimated at 575 lm in a 35 °C room: hub 49 °C, LED case 50 °C, LED junction 52 °C, collar and the acrylic next to it 41 °C **[UNCONFIRMED: estimate; thermocouple test planned]** |
-| Mains | 120 V reaches the driver in the canopy and stops there. The cord carries the LED's 26 V DC (Class 2): a listed 18 AWG 2-conductor in a black textile braid, its grips tested with the fixture's weight. To be listed to UL 1598 (or ETL) **[NOT YET LISTED]** |
+| Mains | 120 V reaches the driver in the canopy and stops there. The cord carries the LED's 26 V DC (Class 2): a listed 18 AWG 2-conductor in a black textile braid, its grips tested with the fixture's weight. To be listed to **UL 153 (plug-in) or UL 1598 (hardwired), as the owner chooses** (`launch/certification.md`: the plug-in swag first, with a steel suspension cable carrying the weight; the cord and canopy above describe the hardwired version) **[NOT YET LISTED]** |
 | Shades | Swap by hand, no tools, with a quarter-turn bayonet and a detent. The shade carries no electrical parts. It is clamped between the collar's flange and a ring on silicone, so a failed bond can't drop it |
 | Materials | Shade: three formed layers of cast acrylic (a 9 mm tinted shell, a 3 mm opal liner, a 3 mm tinted skin), polished, vented at the rim, with a black anodised aluminium collar and clamp ring. Hub, crown, cap and pins: black anodised aluminium (the cap polished). PEEK ring. Canopy: black cast acrylic, polished. Black textile cord |
 | Tints | Ember, Dust, Acid, Poison, Ice, Haze, Fog, Smoke, each cast to match its speaker's colour when lit (README, round 32f) |
@@ -41,7 +41,7 @@ design figures. The file names stay as they were (`dome_pendant.py`, `orb_table.
 | Power | One product, plugged in or not. USB-C (5 V 3 A; a 20 W adapter and a 2 m black fabric cable in the box, the cable out of a notch underneath). It runs while it charges and charges in about 2 hours **[UNCONFIRMED: estimate]** |
 | Battery | Three LiFePO4 18650 cells, Power Sonic PSL-FP-IFR18650EC (1.5 Ah, 4.8 Wh each; **14.4 Wh**), standard cells in holders round the LED, behind a hatch under the base: four captive screws, a common screwdriver, the user's to replace. About **4.7 hours at full brightness** (2.5 W) and 5.8 at the bar setting (2 W) at the default 90 % charge limit; about 5.2 and 6.5 at a full charge; 2,000 cycles at full depth (the datasheet) **[UNCONFIRMED: computed from the datasheet's rated capacity, at 90 % conversion]** |
 | Protection | IP44 by design: O-rings at the window, the chassis and the hatch, and a sealed USB-C receptacle, with the ball on or off. No exposed contacts **[UNTESTED]** |
-| Safety | One product, certified to IEC/UL 62368-1 with its battery annex; the cells to IEC 62133-2 and UN 38.3. User-replaceable, as EU Regulation 2023/1542 requires of portable batteries in appliances from February 2027 **[NOT YET CERTIFIED]** |
+| Safety | One product, to be listed to **UL 153 with Supplement SA** (battery-operated portable luminaires; `launch/certification.md`, round 43; earlier drafts said IEC/UL 62368-1); the cells to IEC 62133-2 and UN 38.3. User-replaceable, as EU Regulation 2023/1542 requires of portable batteries in appliances from February 2027 **[NOT YET CERTIFIED]** |
 | Shipping | Each cell 4.8 Wh (at most 20 Wh), the set 14.4 Wh (at most 100 Wh); the cells carry UN 38.3, IEC 62133 and UL 1642 on their datasheet: it ships under the small-battery exception (49 CFR 173.185(c)) as UN3481, contained in equipment, not as fully regulated Class 9 |
 | Charger | A switching LiFePO4 charger with power path (Analog Devices LTC4162-F) and a DOE Level VI adapter: a battery charger system to the DOE standard and California Title 20, to be listed in the CEC's MAEDbS under Core's model number **[NOT YET TESTED]** |
 | Materials | The ball: one tinted cast acrylic shell, two formed halves joined at the equator, frosted inside, polished outside, its port lined in black anodised aluminium. The base: black cast acrylic, polished, over an aluminium chassis and a steel ballast. Touch ring and hatch: black anodised aluminium. Silicone seat and foot ring |
@@ -50,6 +50,9 @@ design figures. The file names stay as they were (`dome_pendant.py`, `orb_table.
 
 ## Prices
 
-The owner sets the prices; the coordinator set Core's on the owner's "For everything else make your call" (2026-10-25). The suggestions (README, round 35):
-- Hemisphere: $795 to $895 with one shade; shades $295 to $345.
-- Core: **$650** with its cells (set 2026-10-25; was $545 to $645 plug-in, plus $95 to $125 for the cartridge).
+**All prices: owner to set.** Two sources disagree, so neither is a price yet (the brand lane's contradiction sweep,
+2026-10-31):
+- Hemisphere: **owner to set.** README round 35 suggested $795 to $895 with one shade (shades $295 to $345); the research
+  (R4) suggests about $1,200.
+- Core: **owner to set.** $650 with its cells was set by the coordinator on 2026-10-25 (was $545 to $645 plug-in, plus
+  $95 to $125 for the cartridge); R4 suggests about $750.
