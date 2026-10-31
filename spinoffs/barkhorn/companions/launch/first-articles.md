@@ -126,3 +126,59 @@ below are typical for small shops, not quotes: the RFQs ask for the real ones.
 - **March:** the tints cast to match, if the owner orders them in January;
 - **12 to 18 April:** Milan with matched tints;
 - **6 to 9 May:** High End Vienna with Mantle.
+
+## Cash out by week for 21 January (added 2026-10-31)
+
+This covers one working Hemisphere, one Core and one Mantle in **stock Ember** (2423), from 2 November to 18 January.
+
+**Sources:**
+- the BOMs: Hemisphere $4,572, Core $2,027, Mantle (turntable-float) $3,815;
+- R1's sheet prices;
+- `mantle-drive.md`'s retail prices.
+
+**[E]** marks an estimate. Quotes replace every made-part figure. "Returnable" means unopened stock from a distributor
+or retailer, usually within 30 days, sometimes with a restocking fee. Anything cut, turned or tooled to our drawing is
+not returnable.
+
+### Paid early: the critical path (by 16 November)
+
+| Week of | Item | Supplier type | Amount | If we stop |
+|---|---|---|---|---|
+| 2 Nov | Colour chips, and a 1/2" off-cut each of 2423, 2064, 2074 | sheet retailers (Canal, eStreet, AC) | $150 [E] | spent |
+| 2 Nov | Hemisphere bench: 3 Vero SE 10 COBs, 2 ERP ESS010W-0180-42, 1 EPtronics LD6W, 3 wall dimmers | electronics distributors | $170 [E] | returnable unopened; most will be opened for the test |
+| 2 Nov | Core bench: 12 PSL-FP-IFR18650EC cells, an LTC4162 evaluation kit, 2 Li-ion cells for the misuse test | electronics distributors | $200 [E] | mostly returnable unopened |
+| 2 Nov | Bench equipment: thermocouple logger, lux and flicker meter, USB-C power meter, test LP | instrument retailers | $600 [E] | returnable 30 days; keeps its value |
+| 2 Nov | **Mantle's bought drive:** Rega 24 V motor kit $265, Neo PSU $445, RB330 $675, 2M Blue $220, Phono Box S2 $269 | hi-fi retailers (Audio Advisor, Upscale) | **$1,874** | returnable unopened, 30 days (check each store) |
+| 9 Nov | **Mantle's bearing and pulley,** turned: spindle, housing, bushes, ball, thrust plate, platter hub, pulley | CNC turning shop (RFQ 04) | **$374** BOM, $400–600 a one-off [E] | not returnable once cut |
+| 16 Nov | **The moulds:** Hemisphere's shell, liner and skin ($3,900), Core's ball ($1,500) | acrylic former (RFQ 01, 02) | **$5,400** | not refundable once cut; often a 50 % deposit at order, the rest on first articles |
+| | **Subtotal by 16 November** | | **about $8,800** [E] | about $2,800 of it returnable; the moulds and the turned parts are not |
+
+### Waits for quotes (23 November to 15 December)
+
+| Week of | Item | Supplier type | Amount | If we stop |
+|---|---|---|---|---|
+| 23 Nov | Stock Ember sheet: 3/8" and 1/2" 48×96, 1/8" and 1/4" | AC Plastics (TruCast) | $1,800 [E] + LTL freight about $200 [E] | full sheets returnable with a fee before cutting |
+| 23 Nov | Core's board: fab and assembly, 5 boards | PCB assembler | $400 [E] | not returnable |
+| 7 Dec | Hemisphere's machined parts and the rest of its bought parts (collar, clamp, hub, crown, cap, PEEK ring, rim, canopy, cord, driver, reflector) | CNC and anodise shop (RFQ 04); distributors | $672 (BOM, less moulds) | made parts not returnable |
+| 7 Dec | Core's made and bought parts (base, ring, chassis, ballast, hatch, window, cable, adapter, seals) | acrylic and CNC shops (RFQ 03, 04); distributors | $527 (BOM, less the mould) | made parts not returnable |
+| 7 Dec | Mantle's acrylic and remaining parts: plinth (laminated), base, lid, posts, platter, pod rings, belt, feet, hinges, fixings | acrylic fabricator (RFQ 05); retailers | $567 made + $600 bought (BOM) | made parts not returnable |
+| | **Subtotal, 23 November to 15 December** | | **about $4,800** [E] | |
+| | **Subtotal by 15 December** | | **about $13,600** [E] | |
+
+### After 15 December
+
+| Item | Amount |
+|---|---|
+| Finishing: polishing, anodise re-runs, bonding, the forming of the shades and ball on the moulds | in the made-part figures above, if quoted so; else about $500 [E] |
+| Shipping and couriers | about $300 [E] |
+| Contingency, 15 % of the made parts and moulds | about $1,100 [E] |
+| **Total to 18 January** | **about $15,500** [E] |
+
+### Option, not in the total: the debut night's lighting
+
+Six more Hemispheres and ten more Cores (`debut-night-lighting.md`), on the moulds already paid for: 6 × $672 +
+10 × $527 + $80 spare cells, so **about $9,400** [E], paid in December.
+
+**Notes:**
+- The total uses Mantle's 2M Blue; the 2M Black for the show unit adds $530.
+- In Smoke, the sheet is about $600 less.
