@@ -29,7 +29,19 @@ VIEWS = {
                            'fstop': 5.6, 'focus': [0.0, -2.6, 0.5]}, exposure=3.6),
     'water': dict(camera={'position': [-6.5, 9.0, -0.55], 'target': [0.0, -3.0, 1.2], 'lens_mm': 35, 'level': True,
                           'fstop': 5.6, 'focus': [0.0, -3.2, 1.4]}, exposure=3.6),
+    # look 2, the set pass (the coordinator, 31 Oct, from the p3 critics): modelled canal houses with varied lit rooms,
+    # a night-blue grade, a cooler, tighter spot so the shadow's six colours separate, Amsterdammertjes, a bicycle and a
+    # few figures at the barrier ring TECH.md assumes; the shadow camera higher so the whole shadow clears the plinth
+    'quay2': dict(camera={'position': [5.5, -7.0, 1.60], 'target': [-1.0, 0.5, 1.6], 'lens_mm': 32, 'level': True,
+                          'fstop': 4.0, 'focus': [0.0, -3.2, 1.5]}, exposure=3.6, look=2),
+    'shadow2': dict(camera={'position': [4.5, -8.0, 4.2], 'target': [0.4, -2.0, 0.2], 'lens_mm': 28, 'level': True,
+                            'fstop': 5.6, 'focus': [0.2, -2.4, 0.4]}, exposure=3.6, look=2),
 }
+STREET = {'bollards': [(-6.6, -0.6), (-3.4, -0.6), (3.9, -0.6), (7.1, -0.6), (10.3, -0.6), (-9.8, -0.6)],
+          'bike': (5.5, -0.95, 0.0),
+          'figures': [(-2.7, -2.7, -20.0, 1.72), (2.3, -5.0, 150.0, 1.62), (-6.0, 20.6, 0.0, 1.75),
+                      (3.8, 20.9, 180.0, 1.70), (9.2, 21.1, 10.0, 1.66)],
+          'ring_at': G, 'ring_r': 1.7}
 
 
 def spot(pos, tgt, w, cone, k=3000, blend=0.15, radius=0.02):
@@ -51,6 +63,12 @@ def shot(view):
         {'kind': 'kit', 'shape': 'asset', 'model': 'street_lamp_01', 'res': '1k', 'position': [12.0, -1.0, 0.0],
          'rotate': [0, 0, 90.0]},
     ]}
+    if v.get('look') == 2:
+        s['set']['props'][0].update(old_houses=False, old_street=False)
+        s['set']['props'][1:1] = [
+            {'kind': 'kit', 'shape': 'ext', 'path': KIT, 'fn': 'houses', 'width': 18.0, 'lit': v.get('lit', 0.32),
+             'window_glow': v.get('glow', 0.10)},
+            {'kind': 'kit', 'shape': 'ext', 'path': KIT, 'fn': 'street', **copy.deepcopy(STREET)}]
     s['products'] = []
     # the hard spot: on a mast on the land side, high, throwing the globe's coloured shadow across the paving toward
     # the kerb and the water; the street lamps along the quay, sodium-warm
@@ -61,12 +79,17 @@ def shot(view):
         'far': {'type': 'area', 'position': [0.0, 20.0, 6.0], 'target': [0.0, 23.0, 3.0], 'size_m': [30.0, 1.0],
                 'irradiance': 0.4, 'color': 2400, 'camera': False},
     }
+    if v.get('look') == 2:
+        s['lights']['hard'] = spot([-2.0, -9.0, 8.5], [0.5, -1.7, 0.0], v.get('hard_w', 800.0), v.get('cone', 16.0),
+                                   k=v.get('hard_k', 4500), blend=0.2)
     s['sky'] = {'kind': 'gradient', 'zenith': '#040508', 'horizon': '#2A2620', 'ground': '#08080A',
                 'strength': v.get('sky', 0.05)}
     s['haze'] = {'box_m': [-20.0, -14.0, -1.1, 20.0, 22.0, 8.0], 'density': v.get('haze', 0.004), 'anisotropy': 0.4,
                  'color': '#FFFFFF'}
+    if v.get('look') == 2:
+        s['sky'].update(zenith='#0A1430', horizon='#22304A', strength=v.get('sky', 0.12))
     s['render']['exposure'] = v.get('exposure', 3.6)
-    s['render']['white_balance_k'] = v.get('wb', 3400)
+    s['render']['white_balance_k'] = v.get('wb', 4200 if v.get('look') == 2 else 3400)
     return s
 
 

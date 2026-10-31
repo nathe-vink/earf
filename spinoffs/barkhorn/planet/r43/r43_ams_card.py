@@ -38,7 +38,9 @@ gloss, the brick), and small props of the street (bollards, a bicycle, a bench, 
 
 
 def settings(sh, scale):
-    canal = next(p for p in sh['set']['props'] if p.get('fn') == 'canal')
+    canal = next((p for p in sh['set']['props'] if p.get('fn') == 'houses'), None) or \
+        next(p for p in sh['set']['props'] if p.get('fn') == 'canal')
+    st = next((p for p in sh['set']['props'] if p.get('fn') == 'street'), None)
     g = next(p for p in sh['set']['props'] if p.get('fn') == 'globe')
     cam = sh['camera']; L = sh['lights']; hz = sh.get('haze') or {}
     hard = L.get('hard', {})
@@ -54,12 +56,15 @@ def settings(sh, scale):
         f"- the street lamps: 2 x point, {L.get('lamp-a', {}).get('power_w')} W, 2200 K; the far quay's fill "
         f"{L.get('far', {}).get('irradiance')} W/m2 at 2400 K",
         f"- the houses across: {canal.get('lit')} of the windows lit, their glow {canal.get('window_glow')}",
+        (f"- the street: {len(st['bollards'])} cast-iron bollards along the kerb, a bicycle, a low barrier ring "
+         f"(r {st['ring_r']} m, rope at 0.72 m) round the plinth, {len(st['figures'])} figures (two on this quay, the "
+         f"rest across the water)\n" if st else '') +
         f"- sky: a night gradient at strength {sh['sky'].get('strength')}; haze {hz.get('density', 0)} per metre",
         f"- render: {json.dumps(sh['render'])}"])
 
 
 def main():
-    view, out = sys.argv[1].replace('ams-', ''), sys.argv[2]
+    view, out = sys.argv[1].replace('ams-', '').rstrip('0123456789'), sys.argv[2]
     sh = json.load(open(sys.argv[sys.argv.index('--shot') + 1]))
     scale = float(sys.argv[sys.argv.index('--scale') + 1]) if '--scale' in sys.argv else 0.5
     txt = (f"# Card: {sh['title']}\n\n**What the frame is for:** {FOR[view]}\n\n{CONTEXT}\n\n{FIXED}\n\n{MAY}\n\n"
