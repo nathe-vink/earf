@@ -183,6 +183,10 @@ def popup(bpy, name, p, kit):
     pl = Mesh('popup-plinths')
     pl.box(Pw['x'] - Pw['d'] / 2, Pw['y'] - Pw['w'] / 2, 0.0, Pw['x'] + Pw['d'] / 2, Pw['y'] + Pw['w'] / 2, Pw['h'])
     objs.append(pl.object(bpy, principled(bpy, 'popup-plinth', '#1E1D1B', rough=0.55), bevel=0.004))
+    # the shop's own Tropos, on a low oak plinth at the end of the right wall's shelves
+    if p.get('shop_plinth', True):
+        sp = Mesh('popup-shop-plinth'); sp.box(5.58, 0.45, 0.0, 6.22, 1.05, 0.26)
+        objs.append(sp.object(bpy, K.dark_oak(bpy, name='oak-popup-shop-plinth'), bevel=0.005))
     # --- the shop ----------------------------------------------------------------------------------------------------
     _shelving(bpy, p, objs, 'popup-shelf-r', Q.WALL_R['x0'], Q.WALL_R['x1'], 'right', SHELF)
     _shelving(bpy, p, objs, 'popup-shelf-l', Q.WALL_L['x0'], Q.WALL_L['x1'], 'left', SHELF[:1] + SHELF[2:])
@@ -232,7 +236,9 @@ def popup(bpy, name, p, kit):
     o0, o1 = Q.DRAPE_OPEN
     LK.D._curtain(cv, xl, 0.0, o0, H - 0.08, folds=0.05, n=20, seed=0.4)
     LK.D._curtain(cv, xl, o1, W, H - 0.08, folds=0.05, n=110, seed=1.1)
-    objs.append(cv.object(bpy, LK.wool(bpy, p.get('felt', '#2E2B29'), name='popup-felt'), smooth=True))
+    # a plain dense wool felt (the velour scan's sheen read the charcoal as lilac grey in the p0 look)
+    objs.append(cv.object(bpy, principled(bpy, 'popup-felt', p.get('felt', '#1F1E1D'), rough=0.97, spec=0.15,
+                                          sheen=0.25), smooth=True))
     tk = Mesh('popup-track'); tk.box(xl - 0.03, 0.0, H - 0.08, xl + 0.03, W, H - 0.04)
     objs.append(tk.object(bpy, K.blackened_steel(bpy)))
     rg = Mesh('popup-rug'); rg.box(xl + 0.25, 0.6, 0.0, Q.LISTEN['x1'] - 0.15, W - 0.4, 0.012)

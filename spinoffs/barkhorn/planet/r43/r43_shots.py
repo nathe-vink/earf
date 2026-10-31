@@ -54,9 +54,13 @@ def scene():
               'felt': '#1B1C1E', 'ceiling': '#2E2C2A'}]
     # the Cores: eight tints on the right wall's shelves, grouped, two unlit; two on the shop table; the Smoke ones on
     # the standing ledges
-    xs = [(1.05, 2), (1.30, 2), (1.55, 2), (2.45, 2), (2.70, 2), (3.70, 3), (3.95, 3), (4.95, 2)]
-    cores = [{'position': [x, 0.20, SHELF[k]], 'flavour': f, 'rotate_z': 0.0, **({'lamp': False} if i in (2, 6) else {})}
-             for i, ((x, k), f) in enumerate(zip(xs, FLAVOURS))]
+    # p0 look: the shelves read empty, so the line runs along them: all eight tints on the third shelf in two groups,
+    # a second set (lit and unlit) on the second and fourth
+    xs = [(1.00, 2), (1.25, 2), (1.50, 2), (1.75, 2), (2.85, 2), (3.10, 2), (3.35, 2), (3.60, 2)]
+    cores = [{'position': [x, 0.20, SHELF[k]], 'flavour': f, 'rotate_z': 0.0} for (x, k), f in zip(xs, FLAVOURS)]
+    cores += [{'position': [x, 0.20, SHELF[k]], 'flavour': f, 'rotate_z': 0.0, **({'lamp': False} if i % 2 else {})}
+              for i, ((x, k), f) in enumerate(zip([(4.40, 1), (4.65, 1), (4.90, 1), (1.20, 3), (1.45, 3), (2.95, 3), (3.20, 3), (4.70, 3)],
+                                                  ['smoke', 'fog', 'ember', 'ice', 'acid', 'haze', 'dust', 'poison']))]
     cores += [{'position': [3.05, 3.55, 0.90], 'flavour': 'ice'}, {'position': [3.35, 3.95, 0.90], 'flavour': 'ember'}]
     cores += [{'position': [x + 0.08, y - 0.05, 1.065], 'flavour': 'smoke'} for (x, y) in Q.STAND]
     props.append({'kind': 'kit', 'shape': 'ext', 'module': 'earf_moon', 'fn': 'orb', 'spots': cores, 'cable': False,
@@ -71,7 +75,7 @@ def scene():
                   'lamp_k': 2700, 'shade_glow': 0.02, 'noshadow': 'shell|liner|skin', 'spots': domes})
     props.append({'kind': 'kit', 'shape': 'ext', 'module': 'earf_coin', 'fn': 'fan', 'spots': [[4.15, 3.55, 0.90]],
                   'flavours': ['ember', 'ice', 'acid', 'fog', 'poison'], 'heading': 20.0})
-    props.append({'kind': 'kit', 'shape': 'ext', 'module': 'earf_coin', 'fn': 'bowl', 'spots': [[4.40, 3.95, 0.90]],
+    props.append({'kind': 'kit', 'shape': 'ext', 'module': 'earf_coin', 'fn': 'bowl', 'spots': [[2.90, 3.95, 0.90]],
                   'n': 30, 'bowl': 'brass', 'd': 200})
     Pw = Q.WINDOW_PLINTH
     sweet = (10.4, W / 2)
@@ -81,7 +85,10 @@ def scene():
             for dy, t in ((-0.48, 6.0), (0.48, -6.0))]},
         {'def': CLOUD, 'flavour': 'cloud-black', 'instances': [
             {'position': [x, y, 0.40], 'rotate_z': _face(x, y, *sweet), 'hide': ['cloth-disc']} for (x, y) in Q.STACKS]},
+        {'def': CLOUD, 'flavour': 'cloud-blue', 'instances': [
+            {'position': [5.90, 0.75, 0.26], 'rotate_z': _face(5.9, 0.75, 3.0, 4.0), 'hide': ['cloth-disc']}]},
         {'def': MANTLE, 'flavour': 'smoke', 'instances': [{'position': [1.85, 0.21, SHELF[1]], 'rotate_z': 180.0},
+                                                          {'position': [4.15, 3.95, 0.90], 'rotate_z': 90.0},
                                                           {'position': [10.30, Q.DECKS['y0'] + 0.35, 0.86], 'rotate_z': 90.0}]},
     ]
     lights = {}
