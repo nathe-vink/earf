@@ -81,7 +81,7 @@ def lithos():
     g = 5.6
     for i, (n, t) in enumerate(zip(counts, tints)):
         d.rect(x0 - 55 * k, y - g * k, 110 * k, g * k, fill='#FFFFFF', op=0.9, sw=0.8); y -= g * k
-        hh = n * 12.65 * k
+        hh = n * 12.7 * k
         d.rect(x0 - 55 * k, y - hh, 110 * k, hh, fill=TINT[t], op=0.45, sw=1); y -= hh
     d.rect(x0 - 55 * k, y - g * k, 110 * k, g * k, fill='#FFFFFF', op=0.9, sw=0.8); y -= g * k
     top = y
@@ -91,7 +91,7 @@ def lithos():
     d.dimh(x0 - 160 * k, x0 + 160 * k, base_y + 34, 'Ø 320 steel base', ext_from=base_y)
     d.text(x0 + 55 * k + 18, top + 30, 'uplight in the bore, ≈ 900 lm 2700 K (est.)', 11, 'start', MUTED)
     d.text(x0 + 55 * k + 18, top + 160, 'clear 3030 guide, 5.6, edge-lit from the bore', 11, 'start', MUTED)
-    d.text(x0 + 55 * k + 18, top + 290, 'bands: 7 to 16 rings of 12.65 (bonded)', 11, 'start', MUTED)
+    d.text(x0 + 55 * k + 18, top + 290, 'bands: 7 to 16 rings at 12.7, clear or satin', 11, 'start', MUTED)
     d.text(x0 + 55 * k + 18, top + 420, 'bore Ø 76: LED line and tube', 11, 'start', MUTED)
     cx, cy, s = 1000, 360, 1.2
     d.circle(cx, cy, 160 * s, fill=INK, op=0.08); d.circle(cx, cy, 55 * s, fill=TINT['ember'], op=0.4); d.circle(cx, cy, 38 * s, fill=PAPER, dash='6 4')

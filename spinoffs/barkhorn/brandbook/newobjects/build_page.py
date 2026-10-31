@@ -13,11 +13,11 @@ def md(t):
     return re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', t)
 
 CAP = {
- 'moho': 'Render. Moho on a record: Ember, Dust and Acid under a Fog top, the brass core seen through them.',
- 'lithos': 'Render. Lithos lit: the clear guides glow between the eight bands; the uplight washes the ceiling.',
- 'ionos': 'Render. Ionos in Ice, its clear middle layer lit as a line; the top disc turns to tune.',
- 'cairn': 'Render. Cairn in Fog with one layer of Ember; sawn sides satin, faces polished.',
- 'bedrock': 'Render. Bedrock in Dust, the inch-thick end-plates stepped, three steel rails.',
+ 'moho': 'Render. Moho on a record: Ember, Dust and Acid under a Fog top, the brass core seen through them. Through the full 66 mm, stock 2423 Ember reads near-black, as it would in hand.',
+ 'lithos': 'Render. Lithos lit: the clear guides glow between the eight bands. In stock sheet the deep bands (Ember, Haze, Poison, Smoke) read near-black, as here. Rendered before the switch to Core Sample\'s filament and its clear-and-satin bands.',
+ 'ionos': 'Render. Ionos in Ice, its clear middle layer lit as a line; the top disc turns to tune. Through 200 mm of Ice the block reads blue-gray; the color lives at the edges.',
+ 'cairn': 'Render. Cairn in Fog with one layer of Ember; faces and sides polished. Seen edge-on, the Ember slab reads near-black.',
+ 'bedrock': 'Render. Bedrock in Dust, the inch-thick end-plates stepped, three steel rails. Dust (2422) stays warm and clear at this thickness.',
  'relief': 'Render. Relief in Fog on a white backing: the green deepens with each layer, like a sea chart in glass.',
  'meridian': 'Render. Meridian at ten past two: the Acid hour disc and the Ice minute disc cross, and where they overlap the light is green.',
 }

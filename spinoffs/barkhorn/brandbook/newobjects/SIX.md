@@ -46,17 +46,17 @@ Four discs of half-inch cast sheet, bonded into one puck 66 mm across and 51 mm 
 
 *Rock, in layers: a drill core stood on end.*
 
-A column 110 mm across and 1.12 m tall, made of 87 rings of half-inch cast sheet in eight bands of the line's tints, in uneven thicknesses like a real core. Between every band sits a quarter-inch layer of near-clear 3030 sheet. A warm LED line runs inside a white tube in the bore, slotted only where the clear layers are, so light enters the clear layers and nothing else; their polished outer edges glow: **the boundaries between the strata are lines of light**, while the tinted bands stay deep (a deep tint lit from inside through 17 mm would barely glow: TruCast's 2423 passes 14% at 3.2 mm). An LED uplight in the top of the bore washes the ceiling, which is the light you read by. The column stands on a blackened steel disc.
+A column 110 mm across and 1.12 m tall, made of 87 rings of half-inch cast sheet at Core Sample's 12.7 mm pitch in eight bands of the line's tints, in uneven thicknesses like a real core. Between every band sits a quarter-inch layer of near-clear 3030 sheet. Its light is Core Sample's own filament (the lamps lane's table lamp, which Lithos is the big sibling of): a dim-to-warm LED strip on an aluminum spine inside an opal tube, here masked except where the clear layers are, so light enters the clear layers and nothing else. As on Core Sample, the bands alternate buffed clear and bead-blasted satin; their polished outer edges glow: **the boundaries between the strata are lines of light**, while the tinted bands stay deep (a deep tint lit from inside through 17 mm would barely glow: TruCast's 2423 passes 14% at 3.2 mm). An LED uplight in the top of the bore washes the ceiling, which is the light you read by. The column stands on a blackened steel disc.
 
 | Dimension | |
 |---|---|
 | Column | Ø 110 mm outside, Ø 76 mm bore, 1,100 mm of acrylic |
 | Height overall | about 1,120 mm |
 | Base | blackened steel, Ø 320 × 20 mm |
-| Bands | eight tints, 6 to 16 rings each (87 rings of 12.7 mm), with nine 5.6 mm clear light-guide layers |
-| Light | uplight about 900 lm, 2700 K, CRI 90 (est.); a glow line about 6 W inside a white tube slotted at each clear guide; two channels, dimmable |
+| Bands | eight tints, 7 to 16 rings each (87 rings at 12.7 mm, as Core Sample), each band buffed clear or bead-blasted satin, with nine 5.6 mm clear light-guide layers |
+| Light | uplight about 900 lm, 2700 K, CRI 90 (est.); 24 V plug-in; Core Sample's filament (dim-to-warm strip, aluminum spine, opal tube) masked except at each clear guide; two channels, dimmable |
 | Weight | about 21 kg (acrylic 7 kg, base 12.6 kg; est.) |
-| Listing | UL 153 (a portable lamp), with its own Class 2 driver |
+| Listing | UL 153 (a portable lamp), with its own Class 2 driver; heat checked against acrylic's limit, as Core Sample's spine runs about 64 °C against 70 °C |
 
 **Materials and process.** Rings laser- or CNC-cut from sheet (their cores become Moho); bonded in eight bands with the clear guides between, annealed; bored and turned true; the outside polished; stacked on a threaded aluminum tube through the base.
 

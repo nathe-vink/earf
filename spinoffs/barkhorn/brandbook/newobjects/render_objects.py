@@ -269,8 +269,8 @@ def shot_lithos(sc):
         guides.append(z)
     for n, tn in zip(counts, tints):
         guide(z); z += 0.0056
-        ring(f'band{tn}', 0.055, 0.038, z + GAP / 2, n * 0.01265 - GAP, acrylic(tn), bond_top=acrylic(tn, 'bond'), bond_bottom=acrylic(tn, 'bond'))
-        z += n * 0.01265
+        ring(f'band{tn}', 0.055, 0.038, z + GAP / 2, n * 0.0127 - GAP, acrylic(tn), bond_top=acrylic(tn, 'bond'), bond_bottom=acrylic(tn, 'bond'))
+        z += n * 0.0127
     guide(z); z += 0.0056
     top = z
     # the bore: an aluminium tube, slotted at each guide, with the LED line inside: light leaves only into the guides
