@@ -20,7 +20,7 @@ free, but EARF is a company).
 
 **Tell us about your awesome project!** * (2,000 characters; this answer: 1307)
 
-For eight weeks from 19 January 2027, a vacant storefront in downtown San Francisco becomes a free listening room: a pair of hand-built horn loudspeakers, a wall of records and six chairs, open Thursday to Sunday, 1 to 8 pm. Anyone can walk in off the street and sit with a record start to finish, on a system most people never get to hear.
+From 19 January 2027 we plan to turn a vacant storefront in downtown San Francisco into a free listening room for eight weeks: a pair of hand-built horn loudspeakers, a wall of records and six chairs, open Thursday to Sunday, 1 to 8 pm. Anyone can walk in off the street and sit with a record start to finish, on a system most people never get to hear.
 
 The room runs on a small ritual. Everyone who comes in is handed a coin, cut from tinted cast acrylic in one of eight colours. Hand it over with the name of a song, and it drops into a clear column beside the turntable. The column is the queue: you can see how long the wait is, and when your coin reaches the bottom, your song plays for the whole room. One coin, one song. Keep the coin if you like.
 

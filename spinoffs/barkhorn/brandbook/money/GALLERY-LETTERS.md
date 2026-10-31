@@ -27,7 +27,7 @@ Marta's way of making room for objects that experiment with what design is for i
 
 I'm [Your name], and I make EARF in San Francisco: a horn loudspeaker, two lamps and a record player in cast acrylic,
 tinted all the way through, in eight colours from Ember to Smoke. On Tuesday 19 January, two days before FOG opens, the
-first pair of the loudspeaker plays for the first time, in a listening room that then stays open for eight weeks.
+first pair of the loudspeaker plays for the first time, at a debut night in San Francisco.
 I would love you to be there.
 
 I'd also like to propose something for Marta: an edition of the pendant, Hemisphere, made larger than the production
@@ -52,8 +52,7 @@ Dear [Name / the studio],
 The artist-made lighting you show is the company I'd most like these pieces to keep.
 
 I'm [Your name]. I make EARF in San Francisco: hi-fi and light in cast acrylic, coloured through, in eight tints. The
-first pair of our horn loudspeaker plays for the first time on Tuesday 19 January, opening an eight-week listening room
-in the city, two days before FOG. I'd be glad to have you there, before or after a day at the fair.
+first pair of our horn loudspeaker plays for the first time on Tuesday 19 January, at a debut night in the city, two days before FOG. I'd be glad to have you there, before or after a day at the fair.
 
 What I'd like to propose is an edition of Hemisphere, our pendant: a larger form than the production lamp, eight
 pieces, one in each colour, with two artist's proofs, each numbered and signed. I can send drawings and pictures now, and
@@ -79,8 +78,8 @@ in a material most people overlook.
 
 I'm [Your name], and I make EARF in San Francisco: a horn loudspeaker, lamps and a record player in cast acrylic, tinted
 all the way through. Twenty millimetres of it carries light to its edges and shows what's inside, so nothing is painted
-and nothing hidden. On Tuesday 19 January the first pair of the loudspeaker plays for the first time, in a listening room
-that opens that night, in the week of FOG. I'd be very glad to see you there.
+and nothing hidden. On Tuesday 19 January the first pair of the loudspeaker plays for the first time, at a debut night
+in the week of FOG. I'd be very glad to see you there.
 
 I'd also like to propose an edition: the pendant, Hemisphere, larger than its production form, eight pieces, one in each
 of the eight colours, plus two artist's proofs; and, if it interests you, a single unique pair of the loudspeaker in a
@@ -106,7 +105,7 @@ point.
 
 I'm [Your name]. EARF, in San Francisco, makes hi-fi and light in cast acrylic tinted all the way through, in eight
 colours. The first pair of our horn loudspeaker, its horn formed from the same tinted sheet as its cabinet, plays for
-the first time on Tuesday 19 January, opening a listening room for eight weeks, in FOG week. If you are in San Francisco
+the first time on Tuesday 19 January, at a debut night in FOG week. If you are in San Francisco
 for the fair, I'd love you to come.
 
 I'd like to propose an edition for FUMI: the pendant, Hemisphere, at a larger scale, eight pieces, one per colour, with
@@ -132,7 +131,7 @@ The strand of your programme where light and technology meet craft is exactly wh
 I'm [Your name], and I make EARF in San Francisco: a horn loudspeaker, two lamps and a record player in cast acrylic,
 coloured all the way through, in eight tints. A lamp underneath one of the loudspeakers fills the whole cabinet with
 colour; the pendant is the same acrylic lit from within. On Tuesday 19 January the first pair plays for the first time,
-in a listening room that opens that night, in the week of FOG. I'd be glad to welcome you.
+at a debut night in the week of FOG. I'd be glad to welcome you.
 
 I'd like to propose an edition: Hemisphere at a larger scale, eight pieces, one in each colour, with two artist's proofs;
 or, for a collector of sound, a unique pair of the loudspeaker in a single colourway.
@@ -155,8 +154,8 @@ Dear [Name / the team at Sacramento Street],
 You're the gallery in San Francisco I'd most like to see these pieces in, so I wanted you to hear about them first.
 
 I'm [Your name], and I make EARF here in the city: hi-fi and light in cast acrylic, tinted all the way through, in
-eight colours. On Tuesday 19 January the first pair of our horn loudspeaker plays for the first time, opening a
-listening room for eight weeks, in the week of FOG. Please come.
+eight colours. On Tuesday 19 January the first pair of our horn loudspeaker plays for the first time, at a debut
+night in the week of FOG. Please come.
 
 I'd like to propose two things: Hemisphere, our pendant, in an edition of eight, one in each colour, with two artist's
 proofs; and the production lamps, Hemisphere and Core, in your room in whichever colours suit it.

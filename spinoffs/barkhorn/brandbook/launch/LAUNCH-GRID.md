@@ -8,7 +8,7 @@ alt text until the real pieces are photographed. Mockup: `out/launch-grid.png` (
 
 | # | Day | Picture | Line on the post | Caption |
 |---|---|---|---|---|
-| 1 | Wed 20 Jan | `red-studio-1200.jpg` | It played. | Tuesday night, a pair of Tropos played for the first time. Thank you for coming. The room is open Thursday to Sunday, 1 to 8 pm, until mid-March. |
+| 1 | Wed 20 Jan | `red-studio-1200.jpg` | It played. | Tuesday night, a pair of Tropos played for the first time. Thank you for coming. [If the room goes ahead:] The room is open Thursday to Sunday, 1 to 8 pm, for the next eight weeks. |
 | 2 | Fri 22 Jan | `green-habitat-portrait.jpg` | Bottle green. Keep out of reach. | 04 Poison. One of eight colours, cast all the way through. All eight are in the room this week, as samples you can hold up to the window. |
 | 3 | Sun 24 Jan | `macro-corner.jpg` | Cast in colour, all the way through. | The corner of a Tropos cabinet: two 20 mm walls of tinted cast acrylic, cemented. Nothing is painted on, so nothing wears off. |
 | 4 | Wed 27 Jan | `bar-decks.jpg` | One coin, one song. | Everyone who comes in gets a coin. Hand it in with a song, and it goes into the column at the decks. The column is the queue. |
