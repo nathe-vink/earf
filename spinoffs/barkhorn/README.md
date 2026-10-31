@@ -149,6 +149,11 @@ brand"). Not live: main needs the owner's yes.
   `/s/color-<name>`), the British ones still answering (an alias in the page, redirects in `vercel.json`). Code
   names keep their spelling (`.colour-head`, `renderColour`, the data's `colours` keys), and so does the fonts'
   licence text (third-party, verbatim).
+- **The owner's three rulings of 2026-10-31** (r46-owner-notes a8830912): Tropos with its cover off by default (the
+  gallery now shows "Cover off" before "Cover on"; every other Tropos picture was already cover-off, the room's pair
+  excepted, which has no cover-off render); Core without its cord (no cordless frame exists yet: every Core picture
+  shows the cord, until the lamps lane renders the new charging); no starting color (no line names one; none needed
+  changing).
 - **Tropos's CAD kept off the site:** `viewer/dist` (git-ignored) goes into `site/3d` only while `VIEW3D` is on.
 - **For the owner's deploy decision:** `launch/r47-what-changes.pdf` (11 pages), before and after at 1440 and 390 px,
   page by page, on the final branch; Fog's faint horn noted (as in its still); the link previews.

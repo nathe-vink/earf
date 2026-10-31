@@ -1129,10 +1129,10 @@ if (wl) wl.addEventListener('submit', e => {
 
 // a product's page (round 34, the shop): its pictures as a shop shows them, one at a time (the arrows, a swipe, the arrow
 // keys, or the strip of thumbnails), in the color picked; Tropos's open on the photograph in its element
-const SPEAKER_VIEWS = [
+const SPEAKER_VIEWS = [            // cover off before cover on (the owner, 2026-10-31: "I prefer the product images without the cover on")
   ['habitat', 'In its element', c => `${c.name} ${c.place}.`, c => `In its element, ${c.place}.`],
-  ['on', 'Cover on', c => `With its cover on, in ${c.cover.toLowerCase()}.`],
   ['off', 'Cover off', c => `Cover off: the 15-inch woofer, the two ports, and the lining showing through the walls.`],
+  ['on', 'Cover on', c => `With its cover on, in ${c.cover.toLowerCase()}.`],
   ['spin', 'Turn it', c => `${c.name} in the studio; drag across it to turn it.`, c => `In the studio. Drag across it to turn it; every frame is a render.`],
   ['studio-light', 'In the studio', c => `${c.name} in the studio, on a pale ground.`],
   ['studio', 'In the studio', c => `${c.name} in the studio, the light coming through its acrylic.`],
