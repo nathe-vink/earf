@@ -40,7 +40,7 @@ def dining_room(level='575', shade='ember'):
     for p in st['props']:
         if p.get('fn') == 'dome':
             p['shade_glow'] = 0.8                    # the shade lit from inside (1.1 read pink through the red)
-            p['materials'] = {'liner': {'glow_color': '#FF4A22'}}
+            p['materials'] = {'liner': {'glow_color': '#FFB070'}}
         if p.get('kind') == 'lamp':
             p['off'] = True                           # the floor lamp competed with the pendant
     st['props'] += [asset('dining_chair_02', (tx - 0.42, ty - 0.68, 0.0), 0.0),
@@ -52,7 +52,8 @@ def dining_room(level='575', shade='ember'):
                       'frame': '#2A2724'}]
     st['frame'] = '#2A2724'
     s['sky'] = {'kind': 'hdri', 'polyhaven': 'twilight_sunset', 'rotation_deg': 250.0, 'strength': 0.03, 'res': '4k'}
-    s['render']['exposure'] = round(s['render']['exposure'] + 0.8, 3)     # a photographer's dusk, a stop up
+    s['render']['exposure'] = round(s['render']['exposure'] + 1.3, 3)     # a photographer's dusk, over a stop up
+    s['render']['white_balance_k'] = 4000     # 3100 neutralised the 2700 K light and turned Ember pink
     return s
 
 
@@ -117,11 +118,11 @@ def core_bedside():
                       'frame': '#1E2024'}]
     s['sky'] = {'kind': 'gradient', 'zenith': '#1A2A48', 'horizon': '#3A4A6A', 'ground': '#141820', 'strength': 0.006}
     core_pool(s, -0.62, 2.85, 0.55)
-    s['render']['exposure'] = round(s['render']['exposure'] + 1.0, 3)
-    s['render']['white_balance_k'] = 3300
+    s['render']['exposure'] = round(s['render']['exposure'] + 1.9, 3)
+    s['render']['white_balance_k'] = 4000
     s['title'] = 'Core in Ember on a bedside table at night (the campaign)'
     s['size'] = [2400, 1600]
-    s['camera'] = {'position': [-1.55, 0.95, 1.05], 'target': [-0.45, 2.75, 0.70], 'lens_mm': 38, 'level': True,
+    s['camera'] = {'position': [-1.25, 1.55, 0.92], 'target': [-0.42, 2.80, 0.70], 'lens_mm': 50, 'level': True,
                    'fstop': 2.8, 'focus': [-0.62, 2.85, 0.68]}
     return s
 
@@ -167,7 +168,7 @@ def mantle_credenza():
     mx = cx - 0.45
     s['set']['props'] = credenza_props() + record(mx, cy, cz)
     s['product'] = mantle_product(mx, cy - 0.02, cz)
-    s['materials'] = {'glow': {'strength': 9.0}}
+    s['materials'] = {'glow': {'strength': 5.0}}
     s['set']['windows'] = [{'wall': 'left', 'along': 0.6, 'sill': 0.6, 'size': [1.4, 1.8], 'mullions': [2, 1],
                             'frame': '#2A2724'}]
     s['sky'] = {'kind': 'hdri', 'polyhaven': 'twilight_sunset', 'rotation_deg': 250.0, 'strength': 0.03, 'res': '4k'}
@@ -179,10 +180,11 @@ def mantle_credenza():
         'fill': {'type': 'area', 'size_m': [2.0, 1.0], 'position': [0.4, -0.8, 1.6], 'target': [mx, cy, cz],
                  'power_w': round(120 / HB.LM_PER_W, 4), 'color': 3400, 'camera': False, 'specular': 0.3},
     }
-    s['render']['exposure'] = round(s['render']['exposure'] + 0.6, 3)
+    s['render']['exposure'] = round(s['render']['exposure'] + 1.2, 3)
+    s['render']['white_balance_k'] = 4000
     s['title'] = 'Mantle in Ember on a credenza in the evening, a record on (the campaign)'
     s['size'] = [2400, 1600]
-    s['camera'] = {'position': [mx + 0.85, cy - 1.75, 1.32], 'target': [mx + 0.1, cy, cz + 0.12], 'lens_mm': 40,
+    s['camera'] = {'position': [mx + 1.0, cy - 1.95, 1.30], 'target': [mx + 0.45, cy, cz + 0.12], 'lens_mm': 35,
                    'level': True, 'fstop': 4.0, 'focus': [mx, cy, cz + 0.1]}
     return s
 
@@ -199,7 +201,8 @@ def one_room():
     st['props'] += credenza_props() + record(mx, cy, cz) + [LF.core_piece(cx + 0.98, cy - 0.02, cz, 'smoke', glow=0.3,
                                                                           rotate_z=-20)]
     s['product'] = mantle_product(mx, cy - 0.02, cz)
-    s['materials'] = {'glow': {'strength': 9.0}}
+    s['materials'] = {'glow': {'strength': 5.0}}
+    s['render']['exposure'] = round(s['render']['exposure'] + 0.5, 3)
     for k in ('sconce1', 'sconce2', 'candle1', 'candle2'):
         s['lights'].pop(k, None)
     core_pool(s, cx + 0.98, cy - 0.02, cz, flavour_light='#E8D8C8')

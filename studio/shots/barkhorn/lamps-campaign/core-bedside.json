@@ -12,8 +12,8 @@
   "bounces": 24,
   "transmission_bounces": 20,
   "view": "Khronos PBR Neutral",
-  "exposure": 4.153,
-  "white_balance_k": 3300
+  "exposure": 5.053,
+  "white_balance_k": 4000
  },
  "sky": {
   "kind": "gradient",
@@ -333,16 +333,16 @@
  },
  "camera": {
   "position": [
-   -1.55,
-   0.95,
-   1.05
+   -1.25,
+   1.55,
+   0.92
   ],
   "target": [
-   -0.45,
-   2.75,
+   -0.42,
+   2.8,
    0.7
   ],
-  "lens_mm": 38,
+  "lens_mm": 50,
   "level": true,
   "fstop": 2.8,
   "focus": [

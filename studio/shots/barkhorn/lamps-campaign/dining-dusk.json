@@ -12,8 +12,8 @@
   "bounces": 24,
   "transmission_bounces": 20,
   "view": "Khronos PBR Neutral",
-  "exposure": 3.953,
-  "white_balance_k": 3100
+  "exposure": 4.453,
+  "white_balance_k": 4000
  },
  "sky": {
   "kind": "hdri",
@@ -340,7 +340,7 @@
     "hide": "reflector",
     "materials": {
      "liner": {
-      "glow_color": "#FF4A22"
+      "glow_color": "#FFB070"
      }
     }
    },
