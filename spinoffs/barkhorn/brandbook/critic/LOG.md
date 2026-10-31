@@ -16,3 +16,11 @@ and `critic/PROMPT-promo.md`'s prompt with `critic/measure.py`. At most three ro
 
 The packaging renders show the concept clearly (the door as a ramp, the sleeve, the dyed drums) but don't reach campaign
 quality from primitives. For pictures that sell the packaging, photograph the first real crate.
+
+## New objects (2026-10-31)
+
+Same protocol; the card names the object and its price in place of the speaker. Replies in `rounds-newobjects/`. The gate is 7.0.
+
+| Date | Shot | Round | Blind score | If fixed | Verdict | Top changes | Done |
+|---|---|---|---|---|---|---|---|
+| 2026-10-31 | moho (record weight on Mantle) | 1 | 6.0 | 7.6 | iterate | a small rim light straight behind the puck; 100 mm, f/8, the puck on the lower third; the key lower and to 90 W, a fill card; record grooves and an anisotropic sheen; a darker sweep or a flag; AgX Base Contrast | applied: rim 0.12 m, 180 W, behind at about 10° (kept out of the record's mirror); camera (0.28, −0.50, 0.13) at 100 mm, f/8; key 90 W; fill card; sweep #A69E94 and a black flag behind, seen only in reflections; Base Contrast. Grooves tried and dropped (they grayed the whole disc at this distance) |

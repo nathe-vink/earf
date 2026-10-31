@@ -255,11 +255,12 @@ def camera(loc, target, lens=50, fstop=0.0, focus=None):
 
 # ---------------------------------------------------------------------------------------------------------- the shots
 def shot_moho(sc):
-    sweep('#CFC8BD', 0.85, z0=-0.075, y_wall=0.9, R=0.4)
+    sweep('#A69E94', 0.85, z0=-0.075, y_wall=0.9, R=0.4)   # critic r1 c5: darker, so the clear top separates
+    sc.view_settings.look = 'AgX - Base Contrast'           # critic r1 c6
     # Mantle, as far as the frame needs it: the plinth and platter in Dust (2422), the record, the spindle
     slab('plinth', -0.235, -0.19, -0.075, 0.235, 0.19, -0.049, acrylic('dust-pour'))
     ring('platter', 0.155, 0, -0.047, 0.025, acrylic('dust-pour'))
-    rec = basic('vinyl', '#0C0B0E', 0.14)
+    rec = basic('vinyl', '#0C0B0E', 0.14)   # critic r1 c4 (grooves as bump, anisotropic sheen) tried: at this distance it greyed the whole disc, so not kept
     ring('record', 0.1524, 0.0036, -0.0021, 0.0020, rec)
     ring('label', 0.0505, 0.0036, -0.0002, 0.0001, basic('label', '#2C3442', 0.65))
     ring('label-ring', 0.040, 0.0385, -0.0001, 0.00005, basic('label-ink', '#C9C2B6', 0.6))
@@ -270,10 +271,13 @@ def shot_moho(sc):
              bond_top=acrylic(tn, 'bond') if i < 3 else None, bond_bottom=acrylic(tn, 'bond') if i > 0 else None)
     ring('brass', 0.01245, 0.0039, 0.0002, 4 * 0.0127 - 0.0006, basic('brass', '#B8923F', 0.22, 1.0))
     sc.render.resolution_x, sc.render.resolution_y = 1800, 1200
-    area('window', (-0.9, 1.3, 0.35), (0, 0, 0.02), 0.9, 1400, '#FFF4E6')   # daylight from behind left: edges glow, shadows fall forward
-    area('key', (0.6, -0.8, 0.9), (0, 0, 0.0), 0.8, 30, '#EEF2F8')
-    area('rim', (0.7, 0.9, 0.25), (0, 0, 0.03), 0.4, 60, '#FFE8D0')
-    camera((0.24, -0.42, 0.11), (0.0, 0.0, 0.024), lens=60, fstop=5.6)
+    win = area('window', (-0.9, 1.3, 0.35), (0, 0, 0.02), 0.9, 1400, '#FFF4E6'); win.visible_glossy = False   # flagged off the record's mirror   # daylight from behind left: edges glow, shadows fall forward
+    area('key', (0.75, -0.6, 0.30), (0, 0, 0.025), 0.8, 90, '#EEF2F8')     # critic r1 c3: lower, stronger
+    flag = slab('flag', -1.0, 0.30, -0.07, 1.0, 0.32, 0.6, basic('flag', '#0A0A0B', 0.9))   # c5: a black flag that only the record and polished tops mirror
+    for v in ('visible_camera', 'visible_shadow', 'visible_diffuse', 'visible_transmission'): setattr(flag, v, False)
+    card = slab('fillcard', -0.32, -0.30, -0.002, -0.30, -0.10, 0.25, basic('card', '#F4F1EC', 0.9)); card.visible_camera = False
+    rim = area('rim', (-0.17, 0.30, 0.07), (0, 0, 0.025), 0.12, 180, '#FFE8D0'); rim.visible_glossy = False   # its mirror image on the record greyed the vinyl   # critic r1 c1: straight through the layers at camera
+    camera((0.28, -0.50, 0.13), (0.0, 0.0, 0.034), lens=100, fstop=8)       # critic r1 c2: the puck on the lower third
 
 def shot_lithos(sc):
     # a room corner: oak floor, two plaster walls, a stack of books for scale, window light from the left
