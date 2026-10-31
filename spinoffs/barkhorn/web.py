@@ -126,7 +126,7 @@ SPEC = [('Height', '1293 mm'), ('Width', '625 mm at the horn, 560 mm at the cabi
         ('Weight', 'About 72 kg; 62 kg with the horn lifted off'),
         ('Woofer', "FaitalPRO 15PR400, 15-inch, with two ports in the front&rsquo;s lower corners"),
         ('Horn driver', 'B&amp;C DE1085TN, 2-inch compression driver'),
-        ('Horn', "Formed from the same tinted cast acrylic as its cabinet, a turned acrylic throat; the cabinet&rsquo;s full depth"),
+        ('Horn', "The same tinted cast acrylic as its cabinet; the cabinet&rsquo;s full depth"),   # how it is made is the owner's call (round 47)
         ('Amplifier', 'Hypex FusionAmp FA122, built in: two channels of 125 W, crossed at 1 kHz in its DSP'),
         ('Bass', 'To about 51 Hz at &minus;3 dB, before the room adds its own; the ports tuned to 38 Hz'),
         ('Loudness', 'Up to about 115 dB at 1 m, each'),
@@ -157,7 +157,7 @@ LAMPS = [  # key, name, kind, its line, the hero's alt, particulars
      [('Size', '200 mm across'), ('Shade', 'Cast acrylic in three layers, tinted, with a frosted layer between'),
       ('Light', '2700 K, CRI 90, its source shielded inside the hub'), ('Fitting', 'Black anodised aluminium, with a quarter-turn catch'),
       ('Hanging', 'A 600 mm drop as standard, cut to length; a black acrylic canopy 150 mm across'),
-      ('Mains', '120 V, dimmable; listing to UL 1598 to follow'),
+      ('Mains', '120 V, dimmable; safety listing to follow'),   # UL 153 plugged in, UL 1598 wired in: the owner's choice
       ('Shades', 'In all eight colours, sold singly'),
       ('Care', 'A quarter turn takes the shade off to wash: water and a drop of mild soap, then dry. No glass cleaner, alcohol or solvents: they craze acrylic.'),
       ('Figures', 'Design figures; they may change before production')]),
@@ -930,7 +930,7 @@ BOILER_SHORT = ('EARF is a San Francisco maker of hi-fi and lighting in cast acr
                 'pendant lamp; Core, a cordless table lamp; and Mantle, a record player.')
 BOILER_LONG = (BOILER_SHORT + ' Every piece is cut, formed and cemented from the same acrylic, so a speaker, a lamp and a '
                'record player can share one colour or take three. All four are in development and not yet for sale: each is '
-               'drawn for making, and the first pair of Tropos will be built as production will build it, then measured. '
+               'drawn for making, and the first pair of Tropos will be built, then measured. '
                'Planet EARF, a listening bar in San Francisco, is planned.')
 PRESS_PICS = [  # file in site/img, what it shows (the link's words and the picture's alt)
     ('hero.jpg', 'The eight Tropos speakers on a curve, covers off, Ember to Smoke'),
@@ -972,7 +972,7 @@ JOURNAL = [  # slug, date, title, standfirst, card picture (site/img), and the b
               'acrylic, light and dark. <a href="#colours">See the eight</a>.'),
      ]),
     ('the-horn', '2026-10-31', 'How the horn is formed',
-     'A horn is a shape that does an amplifier&rsquo;s job. Here is how ours will be made.', 'amber-horn-side.jpg', [
+     'A horn is a shape that does an amplifier&rsquo;s job. Here is one way to make ours.', 'amber-horn-side.jpg', [
         ('p', 'Long before amplifiers, a horn was how a small sound filled a large room. Tropos&rsquo;s is formed from the '
               'same tinted acrylic as its cabinet, and how it is formed decides how it sounds.'),
         ('p', 'The air path came first. Its profile was worked out by simulation before any acrylic was cut, and the tool '
@@ -995,6 +995,8 @@ JOURNAL = [  # slug, date, title, standfirst, card picture (site/img), and the b
               'Above 1&nbsp;kHz the horn carries the music; below, the 15-inch woofer does.'),
         ('p', 'The first horns off the tool will be cut open and measured at thirty points. If the corners come out thin, '
               'the next sheet is 12&nbsp;mm. <a href="#turn">The horn, turning</a>.'),
+        ('stacked', 'The first pair&rsquo;s horn is being made another way, in layers, with no mould: '
+                    '<a href="#journal-stacked-horn">stacked like contour lines</a>.'),
      ]),
     ('planet-earf', '2026-10-31', 'Planet EARF',
      'A listening bar in San Francisco. Planned: no address yet, and no opening night.', 'planet-street-1200.jpg', [
@@ -1317,7 +1319,8 @@ def journal_html():
     arts = ''
     for i, (slug, d, title, stand, pic, body) in enumerate(posts):
         nxt = posts[(i + 1) % len(posts)]
-        text = ''.join(f'<p>{b[1]}</p>' if b[0] == 'p' else fig(*b[1:]) for b in body)
+        text = ''.join(f'<p>{b[1]}</p>' if b[0] == 'p' else (f'<p>{b[1]}</p>' if STACKED_HORN else '') if b[0] == 'stacked'
+                       else fig(*b[1:]) for b in body)
         arts += (f'<article class="post" id="journal-{slug}" data-title="{re.sub("&[a-z]+;", "", title)}" hidden>'
                  f'<p class="crumbs"><a href="#top">Home</a> / <a href="#journal">Journal</a></p>'
                  f'<header><p class="eyebrow">{when(d)}</p><h1>{title}</h1><p class="stand">{stand}</p></header>'
@@ -2070,8 +2073,8 @@ __HABITATS__
     <ol class="promise stages">
       <li><b>Drawn.</b><span>Tropos is drawn for making, part by part: more than eighty of them, each with its fabrication
         drawing. The horn&rsquo;s profile and the cabinet&rsquo;s bass were worked out by simulation before any acrylic was cut.</span></li>
-      <li><b>Next, the first pair.</b><span>Built as production will build it: the horn formed from the cabinet&rsquo;s own
-        tinted acrylic, the back screwed to the braces. A prototype is there to test the making.</span></li>
+      <li><b>Next, the first pair.</b><span>Built to the drawings: the cabinet and its horn in the same tinted acrylic,
+        the back screwed to the braces. A prototype is there to test the making.</span></li>
       <li><b>Then, measured.</b><span>In a room, by ear and by microphone. The design figures on these pages give way to
         measured ones. The lamps and Mantle come next, the same way.</span></li>
     </ol>
@@ -2109,7 +2112,7 @@ __CLOSER__
     <div class="head">
       <div><p class="eyebrow">The horn</p><h2>The oldest amplifier is a shape.</h2>
         <p>Long before there were amplifiers, a horn was how a small sound filled a large room: the gramophone&rsquo;s, or a
-          cupped hand&rsquo;s. Ours is formed from the same tinted acrylic as its cabinet, its driver in a pod whose cap twists
+          cupped hand&rsquo;s. Ours is made of the same tinted acrylic as its cabinet, its driver in a pod whose cap twists
           off by hand. Above 1&nbsp;kHz the horn carries the music; below, a 15-inch woofer takes it, each on its own channel
           of the amplifier inside. A horn wastes little, so a little power goes a long way.</p></div>
     </div>
@@ -2407,7 +2410,7 @@ const PRODUCTS = [
   { id: 'speaker', line: 'speakers', lineName: 'Speakers', route: 'speaker', kind: 'Horn loudspeaker', name: c => c.name,
     num: c => `Tropos ${c.num}`, copy: c => c.line, views: k => BY[k].views, VIEWS: SPEAKER_VIEWS,
     card: k => { const o = BY[k].views.off; return o.tall || o.card || o; }, unit: 'each pair made to order', ask: 'Enquire about a pair',
-    facts: c => [['Acrylic', c.tint], ['Cabinet', 'Cast acrylic, 20 mm, tinted through; lined in white'], ['Horn', 'Formed from the same tinted acrylic as the cabinet'],
+    facts: c => [['Acrylic', c.tint], ['Cabinet', 'Cast acrylic, 20 mm, tinted through; lined in white'], ['Horn', 'The same tinted acrylic as the cabinet'],
       ['Cover', `Cloth disc, ${c.cover.toLowerCase()}`], ['Drivers', '15-inch woofer; 2-inch compression driver on the horn'],
       ['Amplifier', 'Hypex FusionAmp FA122, built in: 2 &times; 125 W, crossed at 1 kHz'], ['Bass', 'To about 51 Hz (&minus;3 dB) before the room; a design figure, measured with the first pair'],
       ['Inputs', 'XLR, RCA, AES, S/PDIF coaxial and optical'], ['Size', '1293 high, 625 wide, 423 deep (mm)'], ['Weight', 'About 72 kg'], ['Care', D.care]],
@@ -2839,7 +2842,7 @@ DEBUT = False            # the debut: Tue 19 January 2027, the week of FOG Desig
 FOUNDING = False         # the Founding Hundred: register interest only; no payment anywhere
 FOUNDING_REVIEW = True   # its words are counsel's to approve: a bar across the page says so until this is False
 DEBUT_FACTS = [('When', 'Tuesday 19 January 2027, the week of FOG Design+Art'), ('Where', 'San Francisco; the venue to be announced'),
-               ('Hear', 'Tropos, the horn loudspeaker, its first pair built as production will build it'),
+               ('Hear', 'Tropos, the horn loudspeaker, its first pair'),
                ('See', 'Mantle, the record player, and the lamps or their cast samples in the eight tints'),
                ('At the door', 'One coin, one song')]
 
