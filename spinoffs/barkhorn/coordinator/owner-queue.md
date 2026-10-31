@@ -43,8 +43,13 @@ while lanes run. Deck: https://claude.ai/artifact/3sihYaT4ckNTF6WE7SWR7x (v26). 
   (lamps). Deploy only on the owner's yes.
 
 ## Relaunched after the restart (the local workflows were lost)
-- Four-pieces magazine room for the deck's "line" slide -> remote render session (proof-first art direction).
-- Special editions (inclusions + bubbles) -> remote session (research, concepts, judges, renders).
+- four-pieces session_01BAaPTmWJHPRSSD5Mqr3BXq, r48-four-pieces (from main, 21:48 UTC): one magazine room with all four
+  (current designs; Tropos covers off; Core cordless); 3 directions proofed + 2 palettes, blind critics; deliverables
+  renders/2026-10-31/barkhorn/four-pieces/ (clean 3840x2160 + 1920x1080, anchors.json + calm zones). Then the coordinator
+  builds the deck's line slide with HTML callouts (name + one line), checked at 1920x1080.
+- editions session_01BAaPTk945cTfdChLhVjtFa, r48-editions (from main, 21:48 UTC): research (Miss Blanche etc., making,
+  sourcing/law), concepts (habitat specimens / bubbles by design / music and making), judge panel, EDITIONS.md, renders
+  of the top 3-4.
 
 ## Lost in the restart (reconstruct when needed)
 - scratchpad/rfq-zips/EARF-quote-requests-guide.md (the latest guide) and its zips: rebuild from the Gmail drafts and
