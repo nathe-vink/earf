@@ -103,7 +103,43 @@ bay:
    If the owner would rather not have user-replaceable 18650s at all, the cartridge is a v2 that also keeps the shell,
    ball and base. It needs a port in the base's underside.
 
-## Recommendation
+## Does a spring debut change this? (added 2026-10-31, after the owner moved the debut to spring 2027)
+
+**The battery board, dated from an engineer contracted by about 16 November** (two weeks to find one) [E]:
+- schematic, parts, layout and firmware start: files out about **15 January** (5 to 6 weeks of work, plus the holidays);
+- rev A boards from a US quick-turn assembler: about **1 February**;
+- bring-up and firmware: about **22 February**;
+- the likely rev B: files about **1 March**, boards about **15 March**, checked about **22 March**;
+- EMC pre-scan: one to two weeks after the board it scans.
+
+**Against each date:**
+
+| Debut | Battery Core? | Why |
+|---|---|---|
+| **Thu 18 March** | **only on rev A, with no slip** | A pre-scan on rev A in early March is possible, but a rev B would not be in. There's no margin, so plug-in. |
+| **Late April** | **yes** | Rev B checked about 22 March, pre-scanned late March or early April, with about 3 to 4 weeks of margin. The runtime and charge tests run on rev B. |
+| **Early May** | **yes, comfortably** | As late April, with time for the wrong-cell and temperature tests before the night. |
+
+None of these dates has the listing done. UL 153 Supplement SA, DOE Appendix Y and the MAEDbS filing take weeks after
+final hardware [E]. The debut shows lamps; sales wait for the listing either way.
+
+**The extra cost against the v1 plug-in** [E]:
+- engineering about $16k–40k;
+- two board spins about $800–1,400;
+- the battery's certification on top: Supplement SA's tests, Appendix Y and MAEDbS, UN 38.3 paperwork, several
+  thousand dollars;
+- about the same electronics per lamp.
+
+**My recommendation, honestly:**
+- **For 18 March: plug-in,** as below.
+- **For late April or early May: the battery Core is achievable,** if the owner wants Core cordless from the start. It
+  is the product's own line ("plugged in or not"), and the spring date removes the deadline that ruled it out.
+- **Still build the plug-in v1 first articles in December either way.** They cost 2 to 4 days and about $50 a lamp in
+  parts, give photographs and a UL 153 and FCC start, and stay the fallback if the board slips.
+- **So the choice is the owner's:** cordless at the debut ($16k–40k [E] and one engineer from mid-November), or plug-in
+  at the debut and the battery in a v2. I lean to the battery Core only if the debut is late April or later.
+
+## Recommendation (written for the January debut)
 
 - **For the January debut: v1 plug-in.** Bought parts in the week of 2 November, bench-tested by 9 November (the
   dim-to-warm under the chosen dimming, and the temperature in the closed bay at 3 W), lamps assembled with the balls

@@ -1,5 +1,9 @@
 # The debut night: lighting a hired gallery room with Hemisphere and Core (round 43, revised 2026-10-31)
 
+> **2026-10-31, the owner: the debut moves to spring 2027** (date and venue to set; `r46-owner-notes` b3211a43). The
+> decide-by date below (7 Dec) was keyed to 19 January; it moves with the new date, to about six weeks before it. The
+> rest of this plan stands until the date is set.
+
 The debut has moved from a bar of our own to a hired or lent room at or near Fort Mason: **Tuesday 19 January 2027**, just before FOG Design+Art (21–24 January). The
 bar lane is pricing rooms such as the Firehouse. Until the room is chosen, this plan assumes a **generic gallery-type
 room for about 120 people standing**:

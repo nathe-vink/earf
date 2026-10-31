@@ -12,19 +12,18 @@ Nothing has been sent: these are drafts for the coordinator to turn into Gmail d
 ## Short version (for a web form, 614 characters)
 
 ```
-EARF (Bay Area) asks for a quote, to book in mid-November for testing from late January 2027. Four products, no radios. (1) Tropos powered speaker (Hypex FA122): EMC pre-scan, FCC 15B Class B SDoC, 62368-1 pre-check. (2) Core battery lamp (LiFePO4 18650, USB-C charger): FCC 15B, DOE Appendix Y charger test, CEC MAEDbS. (3) Hemisphere LED pendant: plug-in swag (UL 153) or hardwired (UL 1598/8750), both priced; FCC 15B. (4) Mantle turntable on listed external supplies: does it need its own test? Please give prices, lead times, samples needed, and the NRTL listing costs that follow. [Your name], [contact line]
+EARF (Bay Area) asks for a quote, to book for testing in February or March 2027. Four products, no radios. (1) Tropos powered speaker (Hypex FA122): EMC pre-scan, FCC 15B Class B SDoC, 62368-1 pre-check. (2) Core battery lamp (LiFePO4 18650, USB-C charger): FCC 15B, DOE Appendix Y charger test, CEC MAEDbS. (3) Hemisphere LED pendant: plug-in swag (UL 153) or hardwired (UL 1598/8750), both priced; FCC 15B. (4) Mantle turntable on listed external supplies: does it need its own test? Please give prices, lead times, samples needed, and the NRTL listing costs that follow. [Your name], [contact line]
 ```
 
 ## Email version
 
 ```
-Subject: Quote request: EMC, FCC Part 15B, DOE/CEC charger and NRTL safety for four products (testing from late January)
+Subject: Quote request: EMC, FCC Part 15B, DOE/CEC charger and NRTL safety for four products (testing in early 2027)
 
 Hello,
 
 We are EARF, a small product company in the Bay Area, preparing four products for their first build. We would
-like a quote for the testing below. We hope to book in mid-November, for testing from late January 2027, starting
-with Tropos; the lamps would follow.
+like a quote for the testing below. We hope to book for testing in February or March 2027, starting with Tropos; the lamps would follow.
 
 1. Tropos, a powered loudspeaker pair: a Hypex FusionAmp FA122 class-D plate amplifier (100-120 / 200-240 V AC,
    Class I, earthed) in a sealed, earthed aluminium compartment inside a cast-acrylic cabinet; an infrared remote
@@ -62,7 +61,7 @@ Could you tell us, for each item:
 
 Specifically for you:
 - Do you test battery chargers to DOE Appendix Y, and file CEC MAEDbS listings?
-- Which of the four could Menlo Park take from late January, and which would go to Lake Forest or elsewhere?
+- Which of the four could Menlo Park take in February or March 2027, and which would go to Lake Forest or elsewhere?
 - For Hemisphere’s hardwired version, do you have a small-batch route like UL’s Limited Production Certification?
 
 We can send drawings, schematics, parts lists and the bought parts' certificates (Hypex FA122, the Class 2 and LPS
