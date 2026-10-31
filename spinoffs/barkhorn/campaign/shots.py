@@ -214,8 +214,21 @@ def room_off():
     return s
 
 
+def room_off_portrait():
+    """The same room, covers off, as a portrait for phones (the site's "At home" band): round 31's phone framing (a
+    35 mm lens 3.9 m from the speakers, aimed up at 1.25 m so the wall above takes the heading), a little toward the
+    window."""
+    s = room_off()
+    s['title'] += ', portrait'
+    s['size'] = [1600, 2000]
+    ty = s['camera']['target'][1]
+    s['camera'] = {'position': [-0.1, ty - 3.9, 1.05], 'target': [-0.1, ty, 1.25], 'lens_mm': 35.0, 'level': True,
+                   'fstop': 5.6, 'focus': s['camera'].get('focus', [0.0, ty - 0.21, 0.7])}
+    return s
+
+
 SHOTS = {'room': room, 'room-final': lambda: room(critic_round=3),   # round 3's look (7.0): the final
-         'room-final-off': room_off, 'night': night, 'inside': inside, 'corner': corner, 'above': above,
+         'room-final-off': room_off, 'room-final-off-portrait': lambda: room_off_portrait(), 'night': night, 'inside': inside, 'corner': corner, 'above': above,
          'horn-formed': lambda: horn_pair(False), 'horn-laminated': lambda: horn_pair(True), 'lineup-stock': lineup}
 for _c in ('ember', 'smoke'):
     for _r in ('formed', 'stepped', 'smooth'):
