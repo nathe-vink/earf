@@ -382,7 +382,7 @@ def shot_ionos(sc):
 
 def shot_cairn(sc):
     sweep('#C9C2B6', 0.9)
-    slabs = [(0.16, 0.12, 0.0, 'fog'), (0.14, 0.11, 0.008, 'fog'), (0.12, 0.10, -0.006, 'dust'), (0.10, 0.09, 0.009, 'fog'), (0.08, 0.08, -0.004, 'fog')]
+    slabs = [(0.16, 0.12, 0.0, 'fog'), (0.14, 0.11, 0.008, 'fog'), (0.12, 0.10, -0.006, 'dust-pour'), (0.10, 0.09, 0.009, 'fog'), (0.08, 0.08, -0.004, 'fog')]   # Dust as a lighter pour: stock reads brick red edge-on
     cols = ['#C8BBA4', '#5C5650', '#8A7F70', '#2F3B4A', '#3A3634', '#1E1E22']   # critic r1: no near-black book against the bookend
     rng = np.random.default_rng(3)
     books = [(float(rng.uniform(0.024, 0.038)), float(rng.uniform(0.2, 0.245)), float(rng.uniform(0.13, 0.155))) for _ in cols]
@@ -406,15 +406,19 @@ def shot_cairn(sc):
         slab(f'bk{c}a', x, -dp / 2, 0.0, x + t, dp / 2, hgt, cl); slab(f'bk{c}b', x + th - t, -dp / 2, 0.0, x + th, dp / 2, hgt, cl)
         slab(f'bk{c}s', x + t, -dp / 2, 0.0, x + th - t, -dp / 2 + t, hgt, cl)
         slab(f'bk{c}p', x + t + 0.0002, -dp / 2 + t, 0.003, x + th - t - 0.0002, dp / 2 - 0.003, hgt - 0.003, pages)
+        for zz in (hgt - 0.045, hgt - 0.02):   # r2: a stamped title band on each spine, so the row reads as books
+            slab(f'bk{c}t{zz:.3f}', x + 0.004, -dp / 2 - 0.0004, zz, x + th - 0.004, -dp / 2 - 0.0001, zz + 0.012 if zz < hgt - 0.03 else zz + 0.004, basic('foil', '#B89A5E', 0.35, 0.8))
         x += th + 0.001
     sc.render.resolution_x, sc.render.resolution_y = 1800, 1200
     cx = -(span / 2 + 0.08)
-    area('window', (-1.2, 1.1, 0.75), (cx, 0, 0.02), 0.7, 150, '#FFF4E6')                         # c2: lower, raised
-    area('sun', (cx - 0.55, 0.55, 0.50), (cx, 0, 0.03), 0.15, 40, '#FFF1DE')                     # c4: small and hard, behind-left: the Dust layer's pool
-    area('key', (0.4, -1.0, 0.9), (-0.15, 0, 0.04), 1.0, 6, '#EEF2F8')
+    area('window', (-1.25, 1.0, 0.75), (cx - 0.2, 0, 0.02), 0.7, 90, '#FFF4E6')                 # r2 c3
+    strip = area('strip', (cx, 0.35, 0.035), (cx, -0.5, 0.035), 0.6, 60, '#FFF1DE', size_y=0.05); strip.visible_glossy = False   # r2 c4: through the stack at the lens
+    sp = spot('hard', (cx + 0.45, 0.55, 0.32), (cx, 0, 0.03), 25, 25, 0.015, '#FFF1DE')        # r2 c5: through the Dust layer, a shaped pool in front
+    area('key', (cx + 0.75, -0.85, 0.75), (cx, 0, 0.04), 0.5, 35, '#EEF2F8')                    # r2 c2: weight, a contact shadow
+    sc.view_settings.exposure = -0.3                                                              # r2 c7
     flag = slab('flagL', cx - 0.45, -0.45, 0.0, cx - 0.15, -0.44, 0.3, basic('flag', '#0A0A0B', 0.9))   # c7: dark faces, bright edges
     for v in ('visible_camera', 'visible_shadow', 'visible_diffuse', 'visible_transmission'): setattr(flag, v, False)
-    camera((cx - 0.08, -0.78, 0.17), (cx - 0.02, 0, 0.045), lens=70, fstop=8)                    # c5: the bookend on the left third
+    camera((0.26, -1.22, 0.40), (0.0, 0, 0.085), lens=70, fstop=8)   # r2 c1, c6: orbited right and raised: the pair, the spines and tops in frame                    # c5: the bookend on the left third
 
 def shot_bedrock(sc):
     sc.world.node_tree.nodes['Background'].inputs['Color'].default_value = lin('#D9D3CA')

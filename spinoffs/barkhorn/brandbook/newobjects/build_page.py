@@ -16,7 +16,7 @@ CAP = {
  'moho': 'Render. Moho on Mantle\'s platter, at true size against a 12-inch record: Dust, Acid and Ice under a Clear top, the brass core seen through them. Lighter custom pours of Dust, Acid and Ice (est.), as is Mantle\'s Dust plinth here; in stock sheet the puck reads darker.',
  'lithos': 'Render. Lithos in a room corner, books for scale: the filament shows only at the clear guides, which glow warm between the eight bands, buffed clear and satin in turn at Core Sample\'s 12.7 mm pitch. The colored bands are lighter custom pours (est.); in stock sheet the deep ones read near-black.',
  'ionos': 'Render. Ionos in a lighter custom pour of Ice (est.), its near-clear middle layer unlit; the top disc turns to tune, 24 detents read against the lit index at the front. The electronics tray shows through the bottom layers, as it would.',
- 'cairn': 'Render. Cairn in Fog with one layer of Dust, stock sheet; faces as cast, sides flame-polished. Window light from behind throws the Dust forward.',
+ 'cairn': 'Render. A pair of Cairns in Fog with one layer of Dust (a lighter custom pour, est.; stock reads brick red edge-on); faces as cast, sides flame-polished, on silicone feet.',
  'bedrock': 'Render. Bedrock in a lighter custom pour of Dust (est.): in stock 2422 an inch of it reads red. The end-plates stepped, three steel rails; low daylight from behind throws the amber onto the floor.',
  'relief': 'Render. Relief in Fog, lit by its own bar along the top edge: the green deepens with each of the twelve layers, like a sea chart in glass.',
  'meridian': 'Render. Meridian at ten past two: the Acid hour disc and the Ice minute disc cross, and where they overlap the light is green.',
