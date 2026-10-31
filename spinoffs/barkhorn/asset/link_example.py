@@ -1,10 +1,12 @@
 # Link four Tropos tints from tropos.blend into an empty scene and render them (a check that the asset links; run:
 #   python3.11 spinoffs/barkhorn/asset/link_example.py -- OUT.png
 #   python3.11 spinoffs/barkhorn/asset/link_example.py -- strata OUT.png     (tropos-strata.blend, "Tropos Strata <tint>")
+#   python3.11 spinoffs/barkhorn/asset/link_example.py -- strata OTHER.blend OUT.png      (another build, e.g. --tints trucast)
 import bpy, math, sys
 import os
 strata = 'strata' in sys.argv[:-1]
-lib = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'tropos-strata.blend' if strata else 'tropos.blend')
+lib = next((x for x in sys.argv if x.endswith('.blend') and 'link_example' not in x), None) or \
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), 'tropos-strata.blend' if strata else 'tropos.blend')
 out = sys.argv[-1]
 bpy.ops.wm.read_factory_settings(use_empty=True)
 names = [('Tropos Strata ' if strata else 'Tropos ') + t for t in ('Ember', 'Smoke', 'Poison', 'Ice')]

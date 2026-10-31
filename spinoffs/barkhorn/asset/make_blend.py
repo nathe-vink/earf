@@ -19,7 +19,7 @@ In another file (bpy):
 
 or the Asset Browser, with the file's folder added as an asset library.
 """
-import argparse, sys
+import argparse, json, sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -44,9 +44,23 @@ TINTS = [('Ember', 'cloud-red'), ('Dust', 'cloud-orange'), ('Acid', 'cloud-amber
          ('Ice', 'cloud-blue'), ('Haze', 'cloud-violet'), ('Fog', 'birch-fog-clear'), ('Smoke', 'cloud-black')]
 
 
-def load_product(bpy, Pr, path, hide, full):
+def calibrate(pdef, tints):
+    """Stock TruCast tints (tints-trucast.json, TINTS.md) in place of the site's: every cabinet part (and Strata's
+    caldera) in its code held at 20 mm, Strata's laminated horn in stock 1/2 in held at 12.7 mm; the formed horn keeps
+    its deep lot, a custom cast."""
+    for t in tints.values():
+        m = pdef['flavours'][t['flavour']].setdefault('materials', {})
+        m['bark'] = {**m.get('bark', {}), 'deep': t['cabinet_deep'], 'radius': t['cabinet_radius_m'], 'ior': t['ior']}
+        if 'horn-strata' in json.dumps(pdef.get('assign', [])):
+            m['horn-lot'] = {**m.get('horn-lot', {}), 'deep': t['strata_horn_deep'], 'radius': t['horn_radius_m'],
+                             'ior': t['ior']}
+
+
+def load_product(bpy, Pr, path, hide, full, tints=None):
     """One engine file's parts, lightened, placed once per tint with `hide` left out: (objects, part_of)."""
     pdef = Pr.load_def(path, ROOT)
+    if tints:
+        calibrate(pdef, tints)
     templates = Pr.import_model(bpy, Path(ROOT, pdef['model']), pdef['origin_mm'], pdef.get('axes', 'gltf'))
     if pdef.get('smooth'):
         Pr.smooth_parts(bpy, templates, pdef['smooth'])
@@ -76,6 +90,8 @@ def main():
     ap.add_argument('--design', default='current', choices=sorted(DESIGNS))
     ap.add_argument('--name', default=None, help='the collections\' prefix (default Tropos, or Tropos Strata)')
     ap.add_argument('--full', action='store_true', help='keep every triangle (no LIGHTER)')
+    ap.add_argument('--tints', default='site', choices=['site', 'trucast'],
+                    help="the site's tints (default) or stock TruCast sheet's (tints-trucast.json, TINTS.md)")
     a = ap.parse_args()
     import bpy
     import product as Pr
@@ -84,7 +100,8 @@ def main():
     a.name = a.name or ('Tropos' if a.design == 'current' else f'Tropos {a.design.title()}')
     objs, part_of = [], {}
     for prod_path, hide in DESIGNS[a.design]:
-        o, p = load_product(bpy, Pr, prod_path, hide, a.full)
+        tints = json.load(open(HERE / 'tints-trucast.json')) if a.tints == 'trucast' else None
+        o, p = load_product(bpy, Pr, prod_path, hide, a.full, tints)
         objs += o; part_of.update(p)
     scene = bpy.context.scene
     for i, (tint, flavour) in enumerate(TINTS):
@@ -104,7 +121,7 @@ def main():
         cover.hide_render = True; cover.hide_viewport = True
         if not cover.objects:                     # Strata has no cover: its woofer sits in the caldera
             col.children.unlink(cover); bpy.data.collections.remove(cover)
-        col['tint'] = tint; col['flavour'] = flavour
+        col['tint'] = tint; col['flavour'] = flavour; col['tints'] = a.tints
         col['note'] = (f'{a.name} in {tint} ({flavour}): EARF\'s horn loudspeaker in tinted cast acrylic, 1293 mm tall, '
                        'metres, z up, front -y, feet on z = 0. Materials are Cycles (volume absorption in the acrylic).'
                      + ('' if a.design == 'current' else f' The {a.design.title()} proposal (spinoffs/barkhorn/variants/'

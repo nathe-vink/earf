@@ -71,3 +71,10 @@ It is 23 MB. Unused meshes are dropped before saving: the templates, and the par
 
 It needs the proposals' render model too, `spinoffs/barkhorn/variants/out/render/barkhorn-variants.glb`. That model is
 written by `variants/render_model.py` and is not in git.
+
+## Tints
+
+Both files carry the site's tints, the look of every picture so far. `make_blend.py --tints trucast` builds either
+design in stock TruCast sheet instead (`tints.py`, `tints-trucast.json`). That build is reconciled with r48-biomes'
+`tints.json`; `TINTS.md` has the comparison and the open question for the owner, how deep the horn goes. A trucast build
+is not committed: rebuild it in about 30 s.
