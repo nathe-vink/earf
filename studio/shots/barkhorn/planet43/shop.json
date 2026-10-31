@@ -152,6 +152,7 @@
     "led": 3.0,
     "felt": "#26272A",
     "ceiling": "#2E2C2A",
+    "plaster": "#A39B8F",
     "floor_tint": "#4E4943",
     "floor_coat": 0.45,
     "shop_plinth": false,
@@ -503,6 +504,14 @@
        1.065
       ],
       "flavour": "smoke"
+     },
+     {
+      "position": [
+       10.55,
+       6.890000000000001,
+       0.86
+      ],
+      "flavour": "ember"
      }
     ],
     "cable": false,
@@ -525,7 +534,7 @@
     "ceiling": 3.9624,
     "lamp_w": 4.0,
     "lamp_k": 2700,
-    "shade_glow": 0.012,
+    "shade_glow": 0.006,
     "noshadow": "shell|liner|skin",
     "spots": [
      {
@@ -833,7 +842,7 @@
    "target": [
     12.8,
     1.75,
-    0.95
+    1.15
    ],
    "power_w": 34.0,
    "cone_deg": 18.0,
@@ -852,7 +861,7 @@
    "target": [
     12.8,
     5.87,
-    0.95
+    1.15
    ],
    "power_w": 34.0,
    "cone_deg": 18.0,
@@ -983,8 +992,8 @@
   "view": "AgX",
   "look": "AgX - Medium High Contrast",
   "exposure": 4.8,
-  "white_balance_k": 3000,
-  "white_balance_tint": -2.0
+  "white_balance_k": 2700,
+  "white_balance_tint": 1.0
  },
  "materials": {
   "glow": {

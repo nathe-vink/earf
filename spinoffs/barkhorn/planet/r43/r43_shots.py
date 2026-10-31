@@ -45,18 +45,30 @@ VIEWS = {
     # reflected; the pavement the brightest thing (172); the pair underlit (19); the back crushed; the shelves bare; too
     # far back): the shop opposite gone, the pavement dark and the street lamp down, the room's fill back, the pair's
     # spots 26 to 60 W at 26 deg, sleeves face out on the upper shelves, haze, closer at 40 mm
+    # p3, the last round (p2 judged 5.0/4.5, converged: the pair darker (25) than the floor (90-123) and the plaster (160);
+    # no reflections, so the glass reads as an open stage; the sill a crushed bar; tinted sleeves and shades compete):
+    # the pair's spots 60 to 150 W at 22 deg, the fill 0.2 to 0.05, exposure 4.0 to 3.6, darker plaster; warm lit windows
+    # opposite and the street lamp up so the pane carries faint reflections and the sill an edge; sleeves in greys;
+    # the Hemispheres' glow halved; haze 0.006; white balance 2700 K, tint +1 (the pink cast)
     'window': dict(camera={'position': [-3.8, 2.3, 1.35], 'target': [2.4, 3.3, 1.2], 'lens_mm': 40, 'level': True,
-                           'fstop': 5.6, 'focus': [0.7, 2.9, 1.0]}, exposure=4.0, haze=0.002,
-                   room={'windows_lit': 0.0, 'opp_shop_glow': 0.0, 'glass_gloss': 0.35},
-                   lights={'street': {'irradiance': 0.05}, 'fill': {'irradiance': 0.2}, 'win': {'power_w': 60.0, 'cone_deg': 26.0}},
+                           'fstop': 5.6, 'focus': [0.7, 2.9, 1.0]}, exposure=3.6, haze=0.006,
+                   room={'windows_lit': 0.3, 'window_glow': 0.25, 'opp_shop_glow': 0.0, 'glass_gloss': 0.6},
+                   lights={'street': {'irradiance': 0.5}, 'fill': {'irradiance': 0.05}, 'win': {'power_w': 150.0, 'cone_deg': 22.0}},
                    pair='window'),
     # p0 look: too dark, the left stack out of frame: the camera back by the drape's opening, both stacks in; the
     # stacks' spots, the seats' light and the exposure up
-    'listening': dict(camera={'position': [9.85, 2.2, 1.25], 'target': [13.3, 3.8, 0.85], 'lens_mm': 20, 'level': True,
-                              'fstop': 4.0, 'focus': [12.6, 3.6, 0.8]}, exposure=3.3,
+    # p2 (p1 judged 4.5/4.5, converged: a pink cast; the rug the brightest thing (118); the pair darker (27) with the
+    # plinth tops hot; the plaster flat and bright; the felt washed from the top; 20 mm stretch and a chair back across
+    # the corner; no practical, no life): 2700 K, tint +1; a plain dark wool rug; the pair's spots 110 W at 24 deg aimed at
+    # the cabinets; the seats' light 2 W; the fill 0.05; the felt washed up from the floor behind the plinths; a lit Core
+    # on the decks table; haze; 24 mm from behind the back row
+    'listening': dict(camera={'position': [9.85, 3.55, 1.25], 'target': [12.8, 3.8, 1.0], 'lens_mm': 24, 'level': True,
+                              'fstop': 4.0, 'focus': [12.6, 3.6, 0.9]}, exposure=3.6, haze=0.0015,
                       # p1 proof, seen before judging: overexposed (median 111, the seats and rug blown): exposure 5.0 to
                       # 3.6, the seats' light and the back felt's wash halved
-                      lights={'stack': {'power_w': 90.0}, 'seats': {'power_w': 6.0}, 'drape': {'irradiance': 0.8}},
+                      lights={'stack': {'power_w': 110.0, 'cone_deg': 24.0}, 'seats': {'power_w': 2.0},
+                              'fill': {'irradiance': 0.05},
+                              'drape': {'position': [13.15, Q.W / 2, 0.25], 'target': [13.35, Q.W / 2, 1.3], 'irradiance': 0.5}},
                       pair='listening'),
 }
 
@@ -77,7 +89,7 @@ def scene(pair='window'):
     cards = [(x, SHELF[k], 'right') for x in (1.3, 2.5, 3.7, 4.9) for k in (1, 2)] + \
             [(x, SHELF[2], 'left') for x in (2.0, 3.4, 4.8)]
     props = [{'kind': 'kit', 'shape': 'ext', 'path': KIT43, 'fn': 'popup', 'cards': cards, 'led': 3.0,
-              'felt': '#26272A', 'ceiling': '#2E2C2A', 'floor_tint': '#4E4943', 'floor_coat': 0.45, 'shop_plinth': False,
+              'felt': '#26272A', 'ceiling': '#2E2C2A', 'plaster': '#A39B8F', 'floor_tint': '#4E4943', 'floor_coat': 0.45, 'shop_plinth': False,
               'faceout_r': [(2.20, SHELF[1]), (2.60, SHELF[1]), (3.00, SHELF[1]), (4.30, SHELF[2]), (4.70, SHELF[2]),
                             (2.05, SHELF[3]), (5.20, SHELF[3]), (1.10, SHELF[4]), (1.80, SHELF[4]), (3.40, SHELF[4])],
               'faceout_l': [(1.60, SHELF[2]), (2.40, SHELF[2]), (3.80, SHELF[2]), (4.60, SHELF[2]),
@@ -101,6 +113,7 @@ def scene(pair='window'):
                                                   ['smoke', 'fog', 'ember', 'ice', 'acid', 'haze', 'dust', 'poison']))]
     cores += [{'position': [3.05, 3.55, 0.90], 'flavour': 'ice'}, {'position': [3.35, 3.95, 0.90], 'flavour': 'ember'}]
     cores += [{'position': [x + 0.08, y - 0.05, 1.065], 'flavour': 'smoke'} for (x, y) in Q.STAND]
+    cores += [{'position': [10.55, Q.DECKS['y0'] + 0.12, 0.86], 'flavour': 'ember'}]       # on the decks table
     props.append({'kind': 'kit', 'shape': 'ext', 'module': 'earf_moon', 'fn': 'orb', 'spots': cores, 'cable': False,
                   'cartridge': 'none', 'lamp_w': 0.20, 'lamp_k': 2700, 'shade_glow': 0.005, 'noshadow': 'shell|liner|skin',
                   'materials': {'liner': {'glow_color': '#FFA060'}}})
@@ -110,7 +123,7 @@ def scene(pair='window'):
     domes += [{'position': [7.5, (Q.BAR['y0'] + Q.BAR['y1']) / 2, 2.0], 'flavour': 'smoke'},
               {'position': [8.5, (Q.BAR['y0'] + Q.BAR['y1']) / 2, 2.0], 'flavour': 'smoke'}]
     props.append({'kind': 'kit', 'shape': 'ext', 'module': 'earf_moon', 'fn': 'dome', 'ceiling': H, 'lamp_w': 4.0,
-                  'lamp_k': 2700, 'shade_glow': 0.012, 'noshadow': 'shell|liner|skin', 'spots': domes})
+                  'lamp_k': 2700, 'shade_glow': 0.006, 'noshadow': 'shell|liner|skin', 'spots': domes})
     props.append({'kind': 'kit', 'shape': 'ext', 'module': 'earf_coin', 'fn': 'fan', 'spots': [[4.15, 3.55, 0.90]],
                   'flavours': ['ember', 'ice', 'acid', 'fog', 'poison'], 'heading': 20.0})
     props.append({'kind': 'kit', 'shape': 'ext', 'module': 'earf_coin', 'fn': 'bowl', 'spots': [[2.90, 3.95, 0.90]],
@@ -136,7 +149,7 @@ def scene(pair='window'):
     lights['table'] = spot([3.6, 3.75, zc], [3.6, 3.75, 0.9], 8.0, 30.0)
     lights['bar'] = spot([8.0, W - 1.2, zc], [8.0, W - 1.7, 1.07], 16.0, 30.0)
     for i, (x, y) in enumerate(Q.STACKS):                            # the listening pair
-        lights[f'stack{i}'] = spot([11.6, y + (0.4 if y < W / 2 else -0.4), zc], [x, y, 0.95], 34.0, 18.0, k=2600)
+        lights[f'stack{i}'] = spot([11.6, y + (0.4 if y < W / 2 else -0.4), zc], [x, y, 1.15], 34.0, 18.0, k=2600)
     lights['seats'] = spot([10.9, W / 2, zc], [10.8, W / 2, 0.4], 10.0, 60.0, k=2600, blend=1.0)
     lights['drape'] = {'type': 'area', 'position': [12.9, W / 2 + 0.6, H - 0.35], 'target': [13.3, W / 2 + 0.6, 1.2],
                        'size_m': [0.3, 4.6], 'irradiance': 1.6, 'color': 2600, 'camera': False}
@@ -162,6 +175,7 @@ def shot(view):
     s['haze']['density'] = v.get('haze', 0.0006)
     s['haze']['box_m'] = [0.05, 0.05, 0.01, Q.L - 0.05, Q.W - 0.05, H - 0.05]
     s['render']['exposure'] = v.get('exposure', 3.4)
+    s['render']['white_balance_k'] = 2700; s['render']['white_balance_tint'] = 1.0   # (round 43 critics: a pink cast)
     s['render'].update(v.get('render', {}))
     if v.get('room'):
         props[0].update(v['room'])

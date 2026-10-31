@@ -195,7 +195,8 @@ def popup(bpy, name, p, kit):
     _records(bpy, objs, 'popup-lp-l', Q.WALL_L['x0'] + 0.06, Q.WALL_L['x1'] - 0.08, 'left', SHELF[0], seed=44)
     # sleeves face out on the left wall's top shelf
     covers = Mesh('popup-covers'); rnd = random.Random(5)
-    cc = ['#c8452f', '#e9e4d8', '#1d1b19', '#2f4a5e', '#d8c27a', '#e7e2d8']
+    # sleeves in black, white and greys (the critics: the tinted ones made a second colour story)
+    cc = ['#1d1b19', '#e9e4d8', '#3c3a36', '#c9bfae', '#2a2622', '#e7e2d8']
     for i in range(6):
         xc = Q.WALL_L['x0'] + 0.25 + i * 0.66
         m = Mesh(f'popup-cover{i}'); m.box(xc, W - 0.07, SHELF[-1], xc + 0.315, W - 0.064, SHELF[-1] + 0.315)
@@ -255,13 +256,15 @@ def popup(bpy, name, p, kit):
     tk = Mesh('popup-track'); tk.box(xl - 0.03, 0.0, H - 0.08, xl + 0.03, W, H - 0.04)
     objs.append(tk.object(bpy, K.blackened_steel(bpy)))
     rg = Mesh('popup-rug'); rg.box(xl + 0.25, 0.6, 0.0, Q.LISTEN['x1'] - 0.15, W - 0.4, 0.012)
-    objs.append(rg.object(bpy, LK.wool(bpy, p.get('rug', '#4E4238'), name='popup-rug')))
+    objs.append(rg.object(bpy, principled(bpy, 'popup-rug', p.get('rug', '#5A5249'), rough=0.96, spec=0.1,
+                                          bump=(0.004, 0.5, 0.001))))
     stl, wood, uph = Mesh('popup-chair-steel'), Mesh('popup-chair-oak'), Mesh('popup-chair-wool')
     for (x, y) in Q.SEATS:
         _chair(stl, wood, uph, x, y, 0.0)
     objs.append(stl.object(bpy, K.blackened_steel(bpy), smooth=True))
     objs.append(wood.object(bpy, K.dark_oak(bpy, name='oak-popup-chair'), bevel=0.004))
-    objs.append(uph.object(bpy, LK.wool(bpy, p.get('chair_wool', '#6B5444'), name='popup-chair-wool'), bevel=0.01))
+    objs.append(uph.object(bpy, principled(bpy, 'popup-chair-wool', p.get('chair_wool', '#2E2C2A'), rough=0.95, spec=0.1),
+                           bevel=0.01))
     pk = Mesh('popup-stack-plinths')
     for (x, y) in Q.STACKS:
         pk.box(x - 0.36, y - 0.36, 0.0, x + 0.36, y + 0.36, 0.40)

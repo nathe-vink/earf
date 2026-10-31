@@ -152,6 +152,7 @@
     "led": 3.0,
     "felt": "#26272A",
     "ceiling": "#2E2C2A",
+    "plaster": "#A39B8F",
     "floor_tint": "#4E4943",
     "floor_coat": 0.45,
     "shop_plinth": false,
@@ -227,9 +228,10 @@
       1.7
      ]
     ],
-    "windows_lit": 0.0,
+    "windows_lit": 0.3,
+    "window_glow": 0.25,
     "opp_shop_glow": 0.0,
-    "glass_gloss": 0.35
+    "glass_gloss": 0.6
    },
    {
     "kind": "kit",
@@ -504,6 +506,14 @@
        1.065
       ],
       "flavour": "smoke"
+     },
+     {
+      "position": [
+       10.55,
+       6.890000000000001,
+       0.86
+      ],
+      "flavour": "ember"
      }
     ],
     "cable": false,
@@ -526,7 +536,7 @@
     "ceiling": 3.9624,
     "lamp_w": 4.0,
     "lamp_k": 2700,
-    "shade_glow": 0.012,
+    "shade_glow": 0.006,
     "noshadow": "shell|liner|skin",
     "spots": [
      {
@@ -760,8 +770,8 @@
     2.42,
     0.95
    ],
-   "power_w": 60.0,
-   "cone_deg": 26.0,
+   "power_w": 150.0,
+   "cone_deg": 22.0,
    "blend": 0.7,
    "radius_m": 0.03,
    "color": 2600,
@@ -779,8 +789,8 @@
     3.38,
     0.95
    ],
-   "power_w": 60.0,
-   "cone_deg": 26.0,
+   "power_w": 150.0,
+   "cone_deg": 22.0,
    "blend": 0.7,
    "radius_m": 0.03,
    "color": 2600,
@@ -834,7 +844,7 @@
    "target": [
     12.8,
     1.75,
-    0.95
+    1.15
    ],
    "power_w": 34.0,
    "cone_deg": 18.0,
@@ -853,7 +863,7 @@
    "target": [
     12.8,
     5.87,
-    0.95
+    1.15
    ],
    "power_w": 34.0,
    "cone_deg": 18.0,
@@ -937,7 +947,7 @@
     6.0,
     4.0
    ],
-   "irradiance": 0.2,
+   "irradiance": 0.05,
    "color": 2900,
    "camera": false
   },
@@ -957,7 +967,7 @@
     0.6,
     0.6
    ],
-   "irradiance": 0.05,
+   "irradiance": 0.5,
    "color": 2200,
    "spread_deg": 80.0
   }
@@ -971,7 +981,7 @@
    7.57,
    3.9124000000000003
   ],
-  "density": 0.002,
+  "density": 0.006,
   "anisotropy": 0.3,
   "color": "#FFFFFF"
  },
@@ -983,9 +993,9 @@
   "bounces": 10,
   "view": "AgX",
   "look": "AgX - Medium High Contrast",
-  "exposure": 4.0,
-  "white_balance_k": 3000,
-  "white_balance_tint": -2.0
+  "exposure": 3.6,
+  "white_balance_k": 2700,
+  "white_balance_tint": 1.0
  },
  "materials": {
   "glow": {
