@@ -110,7 +110,7 @@ brand"). Not live: main needs the owner's yes.
   of face-on), dragged on the product's page ("Turn it"), opening on the stills' angle with one sway, none under reduced
   motion. Three critic rounds (`critic/LOG.md`): the full turn "hurt" (the profile and the back go murky), the ±40°
   arc 6 against 6.5, the re-centred arc 6 against 6, "neutral to slightly helpful". A colour shows it once its nine frames
-  are in `site/img/spin/`; Ember first, the rest rendering (about 21 minutes a colour).
+  are in `site/img/spin/`: all eight are in (about 21 minutes a colour; 72 frames, 1.2 MB on the site).
 - **Press kit PDF** (`viewer/presskit.mjs`): the press page printed with its own print styles, four A4 pages.
 - **Header and home:** Journal in the header's pages; "Notes from the bench" on the home page above the enquiries.
 - **Footer:** Journal and Press (and Privacy once the waitlist is on).
