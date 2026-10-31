@@ -284,6 +284,20 @@ def macro_core():
     s['lights']['basestrip'] = {'type': 'panel', 'size_m': [0.08, 0.3], 'position': [-0.22, -0.3, z + 0.03],
                                 'target': [0.0, 0.0, z + 0.02], 'strength': 4.0, 'color': '#FFFFFF',
                                 'ramp': {'axis': 'z', 'at_m': [z - 0.09, z + 0.16], 'values': [0.2, 1.0]}}
+    # critic r2 (5.0): c2 the liner's glow 0.5 (one flat orange); c3/c7 the spill in the ball's hue and 1.2 W (pink,
+    # the base maroon); c4 a reflection-only card for the touch ring's face (black); c5 the base's glint larger (a
+    # speck); c6 the marble floor plain (its seams mirrored as cracks). c1 (the ball's lamp lower) not
+    # applied: it sits where the LED does
+    s['materials']['liner']['glow'] = 0.5
+    s['lights']['pool+0.00'].update(color='#FF6234', power_w=1.2)
+    s['lights']['ringcard'] = {'type': 'panel', 'size_m': [0.6, 0.08], 'position': [0.02, -0.42, z - 0.028],
+                               'target': [0.0, -0.05, z + 0.035], 'strength': 2.5, 'color': '#FFFFFF',
+                               'ramp': {'axis': 'x', 'at_m': [-0.3, 0.3], 'values': [0.4, 1.0]}, 'receivers': ['ring']}
+    s['glints'].pop('base')                          # by proof: larger, it mirrored as a white oval; the strip shows the polish
+    floor = s['set']['props'][0]                   # the marble's seams out, the slab kept (the lamp stands on it)
+    for k in ('texture', 'res', 'rough_mul'):
+        floor.pop(k, None)
+    floor.update(material='paper', color='#D9D2C6')
     return s
 
 

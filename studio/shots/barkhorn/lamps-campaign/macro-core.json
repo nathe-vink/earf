@@ -35,11 +35,8 @@
    {
     "kind": "kit",
     "shape": "box",
-    "material": "pbr",
-    "texture": "marble_01",
-    "res": "2k",
-    "color": "#ECE7DF",
-    "rough_mul": 0.6,
+    "material": "paper",
+    "color": "#D9D2C6",
     "size": [
      3.0,
      4.2,
@@ -127,9 +124,9 @@
     -0.075,
     0.09
    ],
-   "power_w": 2.0,
+   "power_w": 1.2,
    "radius_m": 0.06,
-   "color": "#FF7A68",
+   "color": "#FF6234",
    "camera": false,
    "transmission": false,
    "specular": 0.0
@@ -198,6 +195,39 @@
      1.0
     ]
    }
+  },
+  "ringcard": {
+   "type": "panel",
+   "size_m": [
+    0.6,
+    0.08
+   ],
+   "position": [
+    0.02,
+    -0.42,
+    0.012
+   ],
+   "target": [
+    0.0,
+    -0.05,
+    0.07500000000000001
+   ],
+   "strength": 2.5,
+   "color": "#FFFFFF",
+   "ramp": {
+    "axis": "x",
+    "at_m": [
+     -0.3,
+     0.3
+    ],
+    "values": [
+     0.4,
+     1.0
+    ]
+   },
+   "receivers": [
+    "ring"
+   ]
   }
  },
  "render": {
@@ -218,7 +248,7 @@
   },
   "liner": {
    "radius": 0.002,
-   "glow": 0.8,
+   "glow": 0.5,
    "glow_color": "#FFDCB8"
   }
  },
@@ -271,24 +301,6 @@
    "color": 4300,
    "receivers": [
     "ring"
-   ]
-  },
-  "base": {
-   "at": [
-    0.055,
-    -0.025,
-    0.052
-   ],
-   "normal": [
-    0.85,
-    -0.5,
-    0.0
-   ],
-   "size_m": 0.04,
-   "power_w": 3.0,
-   "color": 4300,
-   "receivers": [
-    "base"
    ]
   },
   "grommet": {
