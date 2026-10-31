@@ -126,15 +126,15 @@ def core_bedside():
         box('pbr', '#D9D3C8', (1.62, 2.0, 0.22), (bx, by, 0.30), texture='rough_linen', tex_scale=0.6, tint='#CFC6B6',
             tint_mix=0.6),
         box('pbr', '#6E7684', (1.84, 1.50, 0.30), (bx, by - 0.28, 0.24), texture='rough_linen', tex_scale=0.6,
-            tint='#5E6470', tint_mix=0.7),      # the duvet, over the sides
+            tint='#6A625A', tint_mix=0.7),      # the duvet, over the sides; look 5: warm grey, not violet
         box('pbr', '#F2EFE9', (0.62, 0.40, 0.15), (bx - 0.38, 2.86, 0.52), rotate_z=4, texture='rough_linen',
             tex_scale=0.5, tint='#E4DDD0', tint_mix=0.5),
         box('pbr', '#F2EFE9', (0.62, 0.40, 0.15), (bx + 0.38, 2.86, 0.52), rotate_z=-3, texture='rough_linen',
             tex_scale=0.5, tint='#E4DDD0', tint_mix=0.5),
         box('gloss', '#3A2A1E', (1.84, 0.06, 1.05), (bx, 3.10, 0.0), roughness=0.55),
         asset('side_table_01', (-0.62, 2.82, 0.0), 0.0),
-        *book(-0.44, 2.74, 0.55, 0.15, 0.21, 0.024, '#2B3A4A', rot=14),       # the fourth look: hardbacks, a glass
-        *book(-0.44, 2.74, 0.574, 0.14, 0.20, 0.020, '#8A6A3A', rot=4),
+        *book(-0.44, 2.74, 0.55, 0.15, 0.21, 0.024, '#2B3A4A', rot=14, pages='#CFC4AE'),   # look 4: hardbacks, a glass;
+        *book(-0.44, 2.74, 0.574, 0.14, 0.20, 0.020, '#8A6A3A', rot=4, pages='#CFC4AE'),   # look 5: duller pages
         kit('lathe', 'glass', '#F4F2EE', (-0.47, 3.0, 0.55), profile=TUMBLER, clear_shadow=0.7),
         LF.core_piece(-0.64, 2.86, 0.55, 'ember', glow=0.04, rotate_z=-30, hide='led|chassis', lamp_r=0.05),
         {'kind': 'frame', 'position': [bx, 3.15], 'z': 1.55, 'size': [0.9, 0.6], 'art': '#2E3C52'},
@@ -156,7 +156,7 @@ def core_bedside():
     s['lights']['basecard'] = {'type': 'panel', 'size_m': [0.25, 0.1], 'position': [-0.95, 2.35, 0.6],
                                'target': [-0.64, 2.86, 0.565], 'strength': 3.0, 'color': '#FFB08A',
                                'ramp': {'axis': 'x', 'at_m': [-1.07, -0.83], 'values': [0, 1]},
-                               'receivers': ['base', 'ring']}   # the fourth look: the shell mirrored it as a bar
+                               'receivers': ['*base*', '*ring*']}   # look 4: the shell mirrored it as a bar; look 5: globs (bare names matched nothing)
     s['lights']['rimcard'] = {'type': 'panel', 'size_m': [0.15, 0.5], 'position': [-0.95, 3.15, 0.75],
                               'target': [-0.64, 2.86, 0.66], 'strength': 0.3, 'color': '#C8D4F0',
                               'ramp': {'axis': 'z', 'at_m': [0.55, 0.95], 'values': [0.2, 1.0]}}
@@ -169,6 +169,9 @@ def core_bedside():
 
     # the fourth look: the finish pass (Pillow fixed for the render Python); no white gain, a little contrast and clarity
     s['finish'] = FINISH
+    # the fifth look (look 4's critic, 6.0): AgX for the ball's face (flat red on PBR Neutral's shoulder)
+    s['render']['view'] = 'AgX'
+    s['render']['look'] = 'AgX - Punchy'          # by proof: plain AgX washed Ember to salmon
     return s
 
 
@@ -246,13 +249,13 @@ def sleeves(x, y, z, n=9, seed=3):
 CRED = (0.25, 2.79, 0.68)          # the credenza's top centre (modern_wooden_cabinet, 2.44 x 0.68 x 0.68)
 
 
-def credenza_props():
+def credenza_props(rx=0.62):
     cx, cy, cz = CRED
     return [asset('modern_wooden_cabinet', (cx, cy, 0.0), 0.0),
             asset('potted_plant_02', (cx + 1.55, cy - 0.05, 0.0), 20.0),
             asset('ceramic_vase_01', (cx + 0.95, cy + 0.05, cz), 0.0),
             {'kind': 'frame', 'position': [cx - 0.1, 3.15], 'z': 1.62, 'size': [1.0, 0.7], 'art': '#B4432E'},
-            *sleeves(cx + 0.62, cy + 0.02, cz)]
+            *sleeves(cx + rx, cy + 0.02, cz)]
 
 
 def mantle_credenza():
@@ -261,9 +264,11 @@ def mantle_credenza():
     cx, cy, cz = CRED
     mx = cx - 0.45
     # critic r1 (5.0): c7 the cut picture frame out; c1 the glow 2.5 (5 clipped pink-white)
-    s['set']['props'] = [p for p in credenza_props() if p.get('kind') != 'frame'] + record(mx, cy, cz)
+    rx = 0.30                                     # the fifth look (the coordinator's set call): the records nearer
+    s['set']['props'] = [p for p in credenza_props(rx) if p.get('kind') != 'frame'
+                         and p.get('model') != 'ceramic_vase_01'] + record(mx, cy, cz)   # the vase was cut at the edge
     s['product'] = mantle_product(mx, cy - 0.02, cz)
-    s['materials'] = {'glow': {'strength': 0.9}}
+    s['materials'] = {'glow': {'strength': 0.6}}
     s['set']['windows'] = [{'wall': 'left', 'along': 0.6, 'sill': 0.6, 'size': [1.4, 1.8], 'mullions': [2, 1],
                             'frame': '#2A2724'}]
     s['sky'] = {'kind': 'hdri', 'polyhaven': 'twilight_sunset', 'rotation_deg': 250.0, 'strength': 0.03, 'res': '4k'}
@@ -275,7 +280,7 @@ def mantle_credenza():
         'fill': {'type': 'area', 'size_m': [2.0, 1.0], 'position': [0.4, -0.8, 1.6], 'target': [mx, cy, cz],
                  'power_w': 2.5, 'color': 3400, 'camera': False, 'specular': 0.3},             # c2: the plinth reads
         'records': {'type': 'area', 'size_m': [0.5, 0.5], 'position': [1.3, 1.9, 1.3],             # c4: the sleeves lit
-                    'target': [cx + 0.62, cy, cz + 0.17], 'power_w': 0.05, 'color': 2900, 'camera': False},
+                    'target': [cx + rx, cy, cz + 0.17], 'power_w': 0.05, 'color': 2900, 'camera': False},
         'lidpanel': {'type': 'area', 'size_m': [1.6, 0.9], 'position': [-0.82, 1.73, 1.47],       # c6: the lid reads clear
                      'target': [mx, 3.0, 1.0], 'irradiance': 0.25, 'color': '#FFE8D0', 'camera': False,
                      'specular': 1.0, 'diffuse': 0.0},
@@ -291,10 +296,17 @@ def mantle_credenza():
     # applied: c3 a flag over the wall (untested, it could shade the product), c5 sleeve art (an asset)
     s['title'] = 'Mantle in Ember on a credenza in the evening, a record on (the campaign)'
     s['size'] = [2400, 1600]
-    s['camera'] = {'position': [mx + 0.85, cy - 1.65, 1.25], 'target': [mx + 0.43, cy, cz + 0.12], 'lens_mm': 32,
+    # the fifth look (look 4's critic, 5.5): the wall (89) and the slats (p95 109) outshone the plinth (12): nets on the
+    # fill over the wall and across the doors; the edge glow 0.6 (its core pink-white); a dodge on the plinth (a crushed
+    # red); 36 mm, the records nearer and the vase out
+    s['lights']['wallnet'] = {'type': 'flag', 'size_m': [3.0, 1.0], 'position': [0.3, 2.2, 1.92],
+                              'target': [0.4, -0.8, 1.6], 'lights': ['fill'], 'density': 0.5}
+    s['lights']['doorflag'] = {'type': 'flag', 'size_m': [3.0, 0.45], 'position': [0.3, 1.2, 0.8],
+                               'target': [0.4, -0.8, 1.6], 'lights': ['fill'], 'density': 0.6}
+    s['camera'] = {'position': [mx + 0.85, cy - 1.65, 1.25], 'target': [mx + 0.38, cy, cz + 0.12], 'lens_mm': 36,
                    'level': True, 'fstop': 4.0, 'focus': [mx, cy, cz + 0.1]}
     # the fourth look: the finish pass (Pillow fixed for the render Python); no white gain, a little contrast and clarity
-    s['finish'] = FINISH
+    s['finish'] = dict(FINISH, dodge=[{'parts': ['plinth*'], 'lift_ev': 0.9, 'below': 60, 'knee': 30, 'feather_px': 3}])
     return s
 
 
@@ -415,7 +427,7 @@ def dining_hero():
         *[kit('box', 'pbr', '#6B4A30', (tx + sx * 0.82, ty + sy * 0.38, 0.0), size=[0.06, 0.06, top_z - 0.04],
               **{k: v for k, v in walnut.items() if k != 'material'}) for sx in (-1, 1) for sy in (-1, 1)],
         kit('box', 'pbr', '#B8AD9B', (tx, ty, top_z), size=[1.7, 0.38, 0.003], texture='rough_linen', tex_scale=0.5,
-            tint='#A99E8C', tint_mix=0.7),
+            tint='#8F8574', tint_mix=0.7),
         kit('lathe', 'gloss', '#E4DED3', (tx - 0.22, ty - 0.02, top_z + 0.003), profile=PLATE, roughness=0.35),
         kit('lathe', 'glass', '#F4F2EE', (tx + 0.02, ty + 0.16, top_z + 0.003), profile=GLASS, clear_shadow=0.7),
         asset('food_pears_asian_01', (tx - 0.20, ty - 0.02, top_z + 0.008), 30.0),
@@ -446,8 +458,22 @@ def dining_hero():
                              'target': [tx, ty, top_z + 0.1], 'color': '#E8E0D4'}
     s['title'] = 'Hemisphere in Ember over a walnut table at dusk (the campaign, round 2)'
     s['size'] = [1600, 2000]
-    s['camera'] = {'position': [tx + 0.85, ty - 1.25, 1.62], 'target': [tx - 0.04, ty + 0.05, 1.12], 'lens_mm': 66,
-                   'level': False, 'fstop': 5.6, 'focus': [tx, ty, 1.45]}
+    s['camera'] = {'position': [tx + 0.85, ty - 1.25, 1.62], 'target': [tx - 0.04, ty + 0.05, 1.12], 'lens_mm': 80,
+                   'shift_y': 0.075, 'level': False, 'fstop': 5.6, 'focus': [tx, ty, 1.45]}
+    # the fifth look (look 4's critic, 5.5): 80 mm and a shift (the shade 24 % of the width); the rim card a graded
+    # panel (a clipped sticker); a rim behind for the top's tiers (crushed); the wall lit from the pool upward (it was lit
+    # from above-right); a low room fill (a black band behind the table, the glass's bowl black); the runner quieter
+    s['lights']['toprim'] = {'type': 'panel', 'size_m': [1.4, 0.8], 'position': [-0.6, 0.6, 1.95], 'target': [tx, ty, 1.5],
+                             'strength': 1.2, 'color': 2900, 'ramp': {'axis': 'x', 'at_m': [-1.2, -0.1], 'values': [1, 0]},
+                             'diffuse': False}
+    s['lights']['backrim'] = {'type': 'panel', 'size_m': [1.0, 0.3], 'position': [0.3, 1.9, 1.8], 'target': [tx, ty, 1.55],
+                              'strength': 0.6, 'color': 2900, 'ramp': {'axis': 'x', 'at_m': [-0.2, 0.8], 'values': [0.3, 1]},
+                              'diffuse': False}
+    s['lights']['wallfill'] = {'type': 'area', 'size_m': [1.5, 0.4], 'position': [0.0, 1.35, 0.85],
+                               'target': [0.0, 3.15, 0.9], 'power_w': 1.5, 'color': 2700, 'specular': 0.0,
+                               'diffuse': 1.0, 'camera': False, 'receivers': ['wall-*']}
+    s['lights']['roomfill'] = {'type': 'area', 'size_m': [1.5, 1.0], 'position': [1.2, -0.8, 2.4], 'target': [0.0, 2.6, 0.3],
+                               'irradiance': 0.08, 'color': 2700, 'specular': 0.0, 'diffuse': 1.0, 'camera': False}
     # the fourth look: the finish pass (Pillow fixed for the render Python); no white gain, a little contrast and clarity
     s['finish'] = FINISH
     return s
@@ -470,6 +496,7 @@ def main():
         for k in ('--scale', '--samples'):
             if k in a:
                 extra += [k, a[a.index(k) + 1]]
+        extra += ['--masks'] if '--masks' in a else []          # the finish's dodge reads the part mask
         os.makedirs(out, exist_ok=True)
         for n in want:
             subprocess.run(['python3', os.path.join(ROOT, 'studio', 'engine', 'render.py'), os.path.join(SHOTS, n + '.json'),

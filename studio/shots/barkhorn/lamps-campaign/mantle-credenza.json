@@ -85,27 +85,11 @@
    },
    {
     "kind": "kit",
-    "shape": "asset",
-    "model": "ceramic_vase_01",
-    "position": [
-     1.2,
-     2.84,
-     0.68
-    ],
-    "rotate": [
-     0,
-     0,
-     0.0
-    ],
-    "scale": 1.0
-   },
-   {
-    "kind": "kit",
     "shape": "box",
     "material": "gloss",
     "color": "#3A2A1E",
     "position": [
-     0.87,
+     0.55,
      2.81,
      0.68
     ],
@@ -122,7 +106,7 @@
     "material": "card",
     "color": "#CFC4AE",
     "position": [
-     0.87,
+     0.55,
      2.66,
      0.6920000000000001
     ],
@@ -140,7 +124,7 @@
     "material": "card",
     "color": "#B23A28",
     "position": [
-     0.87,
+     0.55,
      2.693,
      0.6920000000000001
     ],
@@ -157,7 +141,7 @@
     "material": "card",
     "color": "#D8D2C4",
     "position": [
-     0.87,
+     0.55,
      2.726,
      0.6920000000000001
     ],
@@ -174,7 +158,7 @@
     "material": "card",
     "color": "#2C4A6A",
     "position": [
-     0.87,
+     0.55,
      2.7590000000000003,
      0.6920000000000001
     ],
@@ -191,7 +175,7 @@
     "material": "card",
     "color": "#E0B040",
     "position": [
-     0.87,
+     0.55,
      2.7920000000000003,
      0.6920000000000001
     ],
@@ -208,7 +192,7 @@
     "material": "card",
     "color": "#5A6E4A",
     "position": [
-     0.87,
+     0.55,
      2.825,
      0.6920000000000001
     ],
@@ -225,7 +209,7 @@
     "material": "card",
     "color": "#E8E4DC",
     "position": [
-     0.87,
+     0.55,
      2.858,
      0.6920000000000001
     ],
@@ -242,7 +226,7 @@
     "material": "card",
     "color": "#7A3A5A",
     "position": [
-     0.87,
+     0.55,
      2.891,
      0.6920000000000001
     ],
@@ -259,7 +243,7 @@
     "material": "card",
     "color": "#3A3A3A",
     "position": [
-     0.87,
+     0.55,
      2.9240000000000004,
      0.6920000000000001
     ],
@@ -381,7 +365,7 @@
     1.3
    ],
    "target": [
-    0.87,
+    0.55,
     2.79,
     0.8500000000000001
    ],
@@ -410,6 +394,48 @@
    "camera": false,
    "specular": 1.0,
    "diffuse": 0.0
+  },
+  "wallnet": {
+   "type": "flag",
+   "size_m": [
+    3.0,
+    1.0
+   ],
+   "position": [
+    0.3,
+    2.2,
+    1.92
+   ],
+   "target": [
+    0.4,
+    -0.8,
+    1.6
+   ],
+   "lights": [
+    "fill"
+   ],
+   "density": 0.5
+  },
+  "doorflag": {
+   "type": "flag",
+   "size_m": [
+    3.0,
+    0.45
+   ],
+   "position": [
+    0.3,
+    1.2,
+    0.8
+   ],
+   "target": [
+    0.4,
+    -0.8,
+    1.6
+   ],
+   "lights": [
+    "fill"
+   ],
+   "density": 0.6
   }
  },
  "camera": {
@@ -419,11 +445,11 @@
    1.25
   ],
   "target": [
-   0.22999999999999998,
+   0.18,
    2.79,
    0.8
   ],
-  "lens_mm": 32,
+  "lens_mm": 36,
   "level": true,
   "fstop": 4.0,
   "focus": [
@@ -449,7 +475,7 @@
  },
  "materials": {
   "glow": {
-   "strength": 0.9
+   "strength": 0.6
   }
  },
  "finish": {
@@ -458,6 +484,17 @@
   "white_out": 236,
   "contrast": 0.1,
   "clarity": 0.1,
-  "sharpen": 0.3
+  "sharpen": 0.3,
+  "dodge": [
+   {
+    "parts": [
+     "plinth*"
+    ],
+    "lift_ev": 0.9,
+    "below": 60,
+    "knee": 30,
+    "feather_px": 3
+   }
+  ]
  }
 }
