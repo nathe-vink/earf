@@ -13,9 +13,11 @@ rounds at most per shot per look. The JSON of each critic is beside this file (P
 **Between rounds (not a critic fix, a diagnosis).** Every p1 critic named "blotchy dark stains" on the floor. Four
 quarter-size tests ruled out the scan's colour (Bright/Contrast at -0.8), its sealer coat (0), its roughness (squeezed
 to 0.42-0.55), its normal map (x0.4), Mother EARF's spot and the pendants' downlights; the floor's material was confirmed
-by `kit42.dump`. At 1200 the counter's p2 showed the shapes plainly: **leaf shadows**. The two street lamps light the
-room through the street tree and the shopfront glass. Round 40 had turned them off in the interiors for the same reason,
-and the round 41 base shot carried them. They are off in all four round 42 views now; `kit42.flatten` stays in the kit,
-unused.
+by `kit42.dump`. At 1200 the shapes looked like leaf shadows, so the street lamps went off. **That was wrong**: the
+shot has no tree and the sky is at 0, and the shapes stayed. Then a 1024-sample crop matched the 128-sample one, so it is
+not the denoiser. Turning the light sources off one family at a time found the cause: the counter's four Hemispheres
+(earf_moon dome) at 30 W each. Their point lamp leaks through the fittings and projects a dappled pattern across the
+floor. At 6 W the pattern is gone (quarter looks, `look42k`/`look42l`), and the downlights carry the zinc. The street
+lamps stay off (they lit nothing the frames need), and `kit42.flatten` stays in the kit, unused.
 | p1 | listening | proof 1200 x 800, 128 samples | 4.0 (6.5) | 4.5 (6.5) | The speakers blown to white-grey under the altar spots (median 191, plinths clipping). The near tub chair's back is the brightest large surface and blocks the altar. The Cores are white discs. Bright screens are cut by the frame's edges. The fir reads as a uniform tile. | p2: altar spots 170 to 75 W, cone 22 deg; camera seated between the near tubs, [12.2, 3.05, 1.28], 32 mm; exposure 4.8 to 5.0; the Cores 0.12 W, glow 0.003; screens 0.012; street lamps off. Out of scope: the batts behind the acrylic and the horn's shape (fixed product). |
 | p2 | shop | proof 1200 x 800, 128 samples | 4.5 (6.8) | 3.5 (6.0) | Worse than p1. Still bright (median 84 at exposure 2.9). The two area lamps p2 added on the Tropos clip its acrylic (4.99 %) and spread a red bloom on the wall and the floor. The oak plinth reads as pink card. The card said "Smoke" while the shop shows the line in its tints. | p3 (the last round for this look): the two area lamps replaced by one 18 W spot at 14 deg on the cabinet; the shop's key 0.35; the Hemispheres 4 W; tint -2 to 0. The card now says the shop shows the line in its tints and the room stays Smoke. Quarter look at 48 samples: frame median 41.7, no bloom. |

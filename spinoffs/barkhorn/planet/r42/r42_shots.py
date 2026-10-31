@@ -19,7 +19,7 @@ VIEWS = {
     # p2 (both p1 critics 5.0, converged): Mother EARF into the frame (28 mm, aimed into the room), exposure down, the
     # zinc darker and rougher, the pendants' downlights softer, the record wall in pools, the Cores up a little
     'counter': dict(camera={'position': [10.35, 2.55, 1.42], 'target': [4.6, 3.3, 1.55], 'lens_mm': 24, 'level': True,
-                            'fstop': 4.0, 'focus': [7.3, 4.0, 1.15]}, exposure=3.6,
+                            'fstop': 4.0, 'focus': [7.3, 4.0, 1.15]}, exposure=4.2,
                     lights={'pend': {'power_w': 20.0, 'cone_deg': 24.0}, 'rw': {'power_w': 8.0, 'cone_deg': 16.0, 'color': 2700},
                             'street': {'radius_m': 0.6}},
                     retouch={'darken': {'zinc': 0.25}, 'zinc_rough': [0.30, 0.60]}, orb={'lamp_w': 0.6, 'shade_glow': 0.012}),
@@ -34,7 +34,7 @@ VIEWS = {
     # p2 (critics 4.5/5.0, converged): forward of the jambs at seated height, 32 mm; the floor's stains calmed; the
     # pendants' downlights softer; the Cores and Mother's rims down, its spot up; the screens dimmer; the speakers lit
     'night': dict(camera={'position': [14.2, 3.0, 1.32], 'target': [2.0, 2.9, 1.25], 'lens_mm': 32, 'level': True,
-                          'fstop': 5.6, 'focus': [7.0, 3.0, 1.2]}, exposure=4.2,
+                          'fstop': 5.6, 'focus': [7.0, 3.0, 1.2]}, exposure=4.8,
                   lights={'pend': {'power_w': 20.0, 'cone_deg': 24.0}, 'spk': {'irradiance': 3.0}, 'barspk': {'power_w': 120.0},
                           'altar': {'power_w': 220.0, 'cone_deg': 24.0}, 'mother-spot': {'power_w': 180.0, 'cone_deg': 24.0}},
                   orb={'lamp_w': 0.15, 'shade_glow': 0.0035}, mother={'rim': 0.015}, room={'screen_glow': 0.015}),
@@ -105,6 +105,10 @@ def shot(view):
             q.update(v['retouch'])
         if q.get('fn') == 'orb' and q.get('module') == 'earf_moon' and v.get('orb'):
             q.update(v['orb'])
+        # the counter's four Hemispheres at 30 W each leaked through their fittings and threw a dappled pattern across
+        # the floor (every critic's "stains", proven by turning them off): 6 W, the downlights light the zinc
+        if q.get('fn') == 'dome' and q.get('lamp_w') == 30.0:
+            q['lamp_w'] = v.get('dome_w', 6.0)
         if q.get('fn') == 'room' and v.get('room'):
             q.update(v['room'])
         if q.get('fn') == 'mother' and v.get('mother'):
