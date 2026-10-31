@@ -6,16 +6,16 @@
  ],
  "camera": {
   "position": [
-   12.2,
+   12.0,
    3.05,
-   1.28
+   1.3
   ],
   "target": [
    16.5,
    3.05,
-   1.1
+   1.02
   ],
-  "lens_mm": 32,
+  "lens_mm": 26,
   "level": true,
   "fstop": 4.0,
   "focus": [
@@ -636,7 +636,7 @@
     0.35,
     0.35
    ],
-   "irradiance": 1.0,
+   "irradiance": 0.5,
    "color": 2900,
    "spread_deg": 90.0,
    "receivers": [
@@ -675,7 +675,7 @@
     0.3,
     0.3
    ],
-   "irradiance": 4.0,
+   "irradiance": 0.5,
    "color": 2900,
    "camera": false,
    "receivers": [
@@ -714,7 +714,7 @@
     0.35,
     0.35
    ],
-   "irradiance": 1.0,
+   "irradiance": 0.5,
    "color": 2900,
    "spread_deg": 90.0,
    "receivers": [
@@ -753,7 +753,7 @@
     0.3,
     0.3
    ],
-   "irradiance": 4.0,
+   "irradiance": 0.5,
    "color": 2900,
    "camera": false,
    "receivers": [
@@ -964,7 +964,7 @@
     1.9,
     0.8
    ],
-   "power_w": 75.0,
+   "power_w": 55.0,
    "cone_deg": 22.0,
    "blend": 0.9,
    "radius_m": 0.03,
@@ -983,7 +983,7 @@
     4.199999999999999,
     0.8
    ],
-   "power_w": 75.0,
+   "power_w": 55.0,
    "cone_deg": 22.0,
    "blend": 0.9,
    "radius_m": 0.03,
@@ -1295,7 +1295,7 @@
     1.0,
     0.7
    ],
-   "irradiance": 2.0,
+   "irradiance": 1.0,
    "color": 3000,
    "camera": false,
    "receivers": [
@@ -1373,7 +1373,7 @@
     1.0,
     0.7
    ],
-   "irradiance": 2.0,
+   "irradiance": 1.0,
    "color": 3000,
    "camera": false,
    "receivers": [
@@ -1434,6 +1434,26 @@
     "feet-base#1",
     "amp-*#1"
    ]
+  },
+  "zone_fill": {
+   "type": "area",
+   "position": [
+    13.9,
+    3.05,
+    3.25
+   ],
+   "target": [
+    13.9,
+    3.05,
+    0.2
+   ],
+   "size_m": [
+    2.2,
+    1.6
+   ],
+   "irradiance": 0.12,
+   "color": 2700,
+   "camera": false
   }
  },
  "haze": {
@@ -1457,7 +1477,7 @@
   "bounces": 10,
   "view": "AgX",
   "look": "AgX - Medium High Contrast",
-  "exposure": 5.0,
+  "exposure": 5.2,
   "white_balance_k": 3000,
   "white_balance_tint": -2.0
  },

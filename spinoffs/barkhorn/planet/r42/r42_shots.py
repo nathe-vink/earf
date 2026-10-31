@@ -26,9 +26,14 @@ VIEWS = {
     # the listening corner: the altar, the pair, the tub chairs and their Cores
     # p2 (critics 4.0/4.5, converged): the altar spots a stop and more down so the Smoke reads; the camera seated
     # between the two near tubs so they frame the corners; the Cores and the screens down
-    'listening': dict(camera={'position': [12.2, 3.05, 1.28], 'target': [16.5, 3.05, 1.10], 'lens_mm': 32, 'level': True,
-                              'fstop': 4.0, 'focus': [16.2, 3.0, 1.0]}, exposure=5.0,
-                      lights={'altar': {'power_w': 75.0, 'cone_deg': 22.0}, 'pend': {'power_w': 20.0, 'cone_deg': 24.0}},
+    # p3 (p2 seen before judging: at 32 mm the tubs fell out of frame and the batts still glared): 26 mm so the near
+    # tubs' rims frame the lower corners; the altar spots 55 W, the speakers' own lamps halved
+    'listening': dict(camera={'position': [12.0, 3.05, 1.30], 'target': [16.5, 3.05, 1.02], 'lens_mm': 26, 'level': True,
+                              'fstop': 4.0, 'focus': [16.2, 3.0, 1.0]}, exposure=5.2,
+                      lights={'altar': {'power_w': 55.0, 'cone_deg': 22.0}, 'pend': {'power_w': 20.0, 'cone_deg': 24.0},
+                              'spk': {'irradiance': 0.5}, 'keyl': {'irradiance': 1.0}},
+                      add_lights={'zone_fill': {'type': 'area', 'position': [13.9, 3.05, 3.25], 'target': [13.9, 3.05, 0.2],
+                                                'size_m': [2.2, 1.6], 'irradiance': 0.12, 'color': 2700, 'camera': False}},
                       orb={'lamp_w': 0.12, 'shade_glow': 0.003}, room={'screen_glow': 0.012}),
     # the room at night from the back, the line playing: past the tubs to the counter, the globe and the street
     # p2 (critics 4.5/5.0, converged): forward of the jambs at seated height, 32 mm; the floor's stains calmed; the
@@ -96,6 +101,7 @@ def shot(view):
     # p1 critic named are its leaves (round 40 turned them off in the interiors for the same reason)
     for name in [k for k in s['lights'] if k.startswith('street')]:
         del s['lights'][name]
+    s['lights'].update(v.get('add_lights', {}))
     for pre, kv in v.get('lights', {}).items():
         for name, L in s['lights'].items():
             if name.startswith(pre):
