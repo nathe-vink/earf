@@ -62,7 +62,7 @@ def shop_props():
         {'kind': 'kit', 'shape': 'ext', 'module': 'earf_moon', 'fn': 'orb', 'spots': cores, 'cable': False,
          'cartridge': 'none', 'lamp_w': 0.25, 'lamp_k': 2700, 'shade_glow': 0.0067, 'noshadow': 'shell|liner|skin',
          'materials': {'liner': {'glow_color': '#FFA060'}}},
-        {'kind': 'kit', 'shape': 'ext', 'module': 'earf_moon', 'fn': 'dome', 'ceiling': 3.4, 'lamp_w': 6.0, 'lamp_k': 2700,
+        {'kind': 'kit', 'shape': 'ext', 'module': 'earf_moon', 'fn': 'dome', 'ceiling': 3.4, 'lamp_w': 4.0, 'lamp_k': 2700,
          'shade_glow': 0.02, 'noshadow': 'shell|liner|skin',
          'spots': [{'position': [0.80, 5.40, 2.05], 'flavour': 'ember'}, {'position': [1.45, 5.30, 2.22], 'flavour': 'ice'},
                    {'position': [2.10, 5.40, 1.98], 'flavour': 'smoke'}]},
@@ -77,11 +77,10 @@ def shop_props():
     ]
     lights = {'shop_key': {'type': 'area', 'position': [1.9, 4.3, 3.30], 'target': [1.5, 6.0, 1.0], 'size_m': [0.3, 0.3],
                            'irradiance': 1.2, 'color': 2900, 'spread_deg': 60.0},
-              # the Tropos's own light (p2): a soft key from the front-left and a grazing rim from above the plinth
-              'shop_spk': {'type': 'area', 'position': [3.7, 4.4, 2.5], 'target': [2.95, 5.6, 0.95], 'size_m': [0.4, 0.4],
-                           'irradiance': 2.2, 'color': 2700, 'spread_deg': 50.0},
-              'shop_spk_rim': {'type': 'area', 'position': [3.2, 6.0, 2.8], 'target': [2.95, 5.6, 1.2], 'size_m': [0.25, 0.25],
-                               'irradiance': 1.5, 'color': 2700, 'spread_deg': 40.0}}
+              # the Tropos's own light (p3: p2's two area lamps clipped the Ember acrylic and smeared red on the wall
+              # and the floor, 4.5/3.5): one narrow spot on the cabinet, its pool ending at the plinth
+              'shop_spk': {'type': 'spot', 'position': [3.55, 4.85, 2.95], 'target': [2.95, 5.60, 1.05], 'power_w': 18.0,
+                           'cone_deg': 14.0, 'blend': 0.6, 'radius_m': 0.03, 'color': 2700, 'camera': False}}
     return props, products, lights
 
 
@@ -90,6 +89,7 @@ def shot(view):
     v = VIEWS[view]
     s['camera'] = v['camera']
     s['render']['exposure'] = v.get('exposure', s['render']['exposure'])
+    s['render'].update(v.get('render', {}))
     s['title'] = f'Planet EARF, round 42: {view}'
     s['set']['props'] += v.get('props', [])
     # the street lamps light the room through the street tree and the glass: the dappled "stains" on the floor every

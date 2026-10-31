@@ -799,7 +799,7 @@
     "module": "earf_moon",
     "fn": "dome",
     "ceiling": 3.4,
-    "lamp_w": 6.0,
+    "lamp_w": 4.0,
     "lamp_k": 2700,
     "shade_glow": 0.02,
     "noshadow": "shell|liner|skin",
@@ -1697,44 +1697,23 @@
    "spread_deg": 60.0
   },
   "shop_spk": {
-   "type": "area",
+   "type": "spot",
    "position": [
-    3.7,
-    4.4,
-    2.5
+    3.55,
+    4.85,
+    2.95
    ],
    "target": [
     2.95,
     5.6,
-    0.95
+    1.05
    ],
-   "size_m": [
-    0.4,
-    0.4
-   ],
-   "irradiance": 2.2,
+   "power_w": 18.0,
+   "cone_deg": 14.0,
+   "blend": 0.6,
+   "radius_m": 0.03,
    "color": 2700,
-   "spread_deg": 50.0
-  },
-  "shop_spk_rim": {
-   "type": "area",
-   "position": [
-    3.2,
-    6.0,
-    2.8
-   ],
-   "target": [
-    2.95,
-    5.6,
-    1.2
-   ],
-   "size_m": [
-    0.25,
-    0.25
-   ],
-   "irradiance": 1.5,
-   "color": 2700,
-   "spread_deg": 40.0
+   "camera": false
   }
  },
  "haze": {

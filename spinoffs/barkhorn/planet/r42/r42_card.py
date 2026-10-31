@@ -33,6 +33,11 @@ def main():
     out = sys.argv[2]
     txt = open(out).read().replace('the Atmosphere line', 'the Tropos speakers').replace('Atmosphere', 'Tropos')
     txt = txt.replace('Planet EARF, Planet EARF,', 'Planet EARF,')
+    if sys.argv[1] == 'shop':                   # the shop shows the line in its tints; the room around it stays Smoke
+        txt = txt.replace('Configuration: Smoke (the house configuration).',
+                          'Configuration: the room is in Smoke (the house configuration); the shop wall shows the line for '
+                          'sale in its tints, as a shop does (the eight Cores, a Hemisphere in Ember, Ice and Smoke, a '
+                          'Tropos in Ember): that is the frame\'s job, and fixed.')
     open(out, 'w').write(txt)
 
 
