@@ -38,3 +38,9 @@ lamps stay off (they lit nothing the frames need), and `kit42.flatten` stays in 
 setting): the shopfront has no street beyond it (a modelled street, not two lamps); Mother EARF's rims read as neon at
 every rim setting tried (0.004 to 0.025), so the discs' faces need a material pass; the concrete scan's mottle stays at
 its real scale.
+
+**The finals (2400 x 1600, 192 samples), checked by eye:** `shop.png` matches its p3 proof. `counter.png` (p1 with the
+counter Hemispheres at 6 W) has a clean floor. `night.png` (p2, the Hemispheres already at 6 W) still shows soft
+dappled pools on the floor in the middle distance; the cause is not the counter Hemispheres, and with three rounds
+spent it ships as the duel chose it, the defect named here for the next look. The listening view stays a proof
+(`proofs/listening-p1.png`): in the House Book the axonometric shows that room.
