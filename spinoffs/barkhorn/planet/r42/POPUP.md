@@ -11,20 +11,33 @@ for, signed or asked of anyone.
 1. The pop-up proves the room and sells pieces. Its numbers then raise the money.
 2. The flagship (`NUMBERS.md`, the drawings) follows about a year later.
 
+> **Corrected in round 43 (31 October; `../r43/`).** Four things below were wrong and are fixed in place:
+> - **The debut is not in the storefront.** Vacant to Vibrant reviews in 30 to 45 days and then matches a space in "two
+>   to six months", so it cannot deliver a storefront by 19 January. The debut is **Tuesday 19 January 2027 in a hired or
+>   lent room at Fort Mason** in FOG week (`../r43/DEBUT-ROOM.md`); the lean pop-up follows in **February to March**,
+>   once Vacant to Vibrant matches a storefront.
+> - **The $50,000 product raise does not pay for it.** That raise is fully allocated (the Tropos pair, the lamps and
+>   Mantle, testing, trademarks, the debut's crating and photographs, contingency). The pop-up is paid for by the Vacant
+>   to Vibrant grant, debut partners' sponsorship and deposits taken in the room; the gap is stated in
+>   `../r43/V2V-APPLICATION.md` section 5.
+> - **The Vacant to Vibrant grant is $2,000 to $10,000** (vibrantsf.org FAQs, read 31 October), not $3,000 to $12,000,
+>   and the current pages no longer say the rent is free.
+> - **Only one Tropos pair will exist**, so both pop-ups show one pair, not two.
+
 
 ## Step one: the lean pop-up (six to eight weeks, inside the free rent)
 
-The product raise is about $50,000 (the coordinator, 31 October), so the first step has to fit inside it with room to
-spare. The lean pop-up runs **Tuesday 19 January to mid-March 2027**, entirely within Vacant to Vibrant's free-rent
+The first step has to be cheap, because nothing is raised for it yet (see the correction above). The lean pop-up runs
+**eight weeks from February 2027**, once Vacant to Vibrant has matched a storefront, entirely within its
 months. Same storefront, same plan (A-401). Less is brought in, and nothing is built.
 
 | | Lean (8 weeks) | Five-month pop-up |
 |---|---|---|
-| Dates | 19 January to about 14 March 2027 | mid-January to mid-June 2027 |
+| Dates | eight weeks, February to April 2027 | five months, to about August 2027 |
 | Rent | $0 (Vacant to Vibrant's free months) | $10,000 to $16,000 |
 | Open | Thursday to Sunday, 1 to 8 pm; catered nights only on Fridays, plus FOG week | Wednesday to Sunday; one catered night a week; daily sessions |
 | Fit-out | Felt drapes on a ceiling track; the shop wall as one 8 ft run of shelves; a borrowed counter for the till; no window plinth (the pair stands in the listening room) | the full plan |
-| Sound | The Tropos pair; an amplifier and decks from EARF's own studio; 300 records lent from the owner's collection | two pairs, 800 records |
+| Sound | The Tropos pair; an amplifier and decks from EARF's own studio; 300 records lent from the owner's collection | the one pair, 800 records |
 | Staff | The founder plus one part-time host (about 25 hours a week). On catered nights the partner's two bartenders, paid by the partner. | about 60 hours a week, plus events |
 | Drinks | Type 58 nights only: 11 of the year's 36 (FOG week's three, then eight Fridays). No drinks on other days. | weekly catered nights and zero-proof drinks |
 
@@ -40,18 +53,18 @@ months. Same storefront, same plan (A-401). Less is brought in, and nothing is b
 | Debut and FOG week: printing, photography, a guest selector | $3,000 | $6,000 |
 | Contingency | $2,000 | $3,500 |
 | **Total** | **$22,000** | **$36,000** |
-| Less a Vacant to Vibrant grant | $3,000 | $12,000 |
-| **Net cash** | **$10,000 to $33,000** | |
+| Less a Vacant to Vibrant grant | $2,000 | $10,000 |
+| **Net cash** | **$12,000 to $34,000** | |
 
-It fits inside the $50,000 raise and leaves at least $14,000.
+It is paid for by the grant, debut partners and deposits taken in the room, not the $50,000 product raise (corrected above).
 
-**What has to exist by 19 January**, with no renders standing in on the floor:
+**What has to exist by the debut on 19 January**, with no renders standing in on the floor:
 - **The Tropos pair:** essential, as the first pair built the way production will build it. Without it there is no pop-up.
 - **Mantle:** likely for 21 January (the lamps lane). It plays the records, and it is for sale.
 - **Core:** possible. If it isn't ready, show the cast samples in their eight tints and take orders.
 - **Hemisphere:** shown if a prototype exists; otherwise its shades as samples.
-- **EARFcoins:** a laser-cut run of a few hundred for the request ritual, about $5 each.
-- **Mother EARF:** not at this step. The 300 mm desk globe in the window, if one is made ($450 to $550).
+- **EARFcoins:** 200 for the request ritual, about $2,000 (about $10 each; the lamps lane's `coin-quote.md`, route A).
+- **Mother EARF:** not at this step. The 300 mm desk globe in the window, if one is made: $450 to $550 one-off, retail $650 to $850 (round 33b's costing, the main README).
 
 **How it sells.** Made to order: a deposit takes a place in the queue. Nothing is held in stock that the money can't
 carry.
@@ -68,7 +81,7 @@ carry.
 | Catered nights | 11 nights; the guests and spend a night, measured |
 
 **Three steps, each paid for by the one before:**
-1. **The lean pop-up** ($22k to $36k), from the $50k product raise. Its deposits (three pairs is about $57,000 of
+1. **The lean pop-up** ($22k to $36k), paid by the Vacant to Vibrant grant, partners and deposits. Its deposits (three pairs is about $57,000 of
    orders) and the measures above fund...
 2. **...the five-month pop-up** ($130k to $210k, roughly self-paying at six pairs). Its five months of numbers raise...
 3. **...the flagship** (about $2.0M: an SBA 7(a), investors, a community round), lease in spring 2027, opening late
@@ -128,8 +141,8 @@ and takes about 2 weeks; none is needed if the space was last retail.
 
 ## Vacant to Vibrant
 
-- **What it offers:** three months' free rent, extendable. Some reports say up to six months paid. Grants of $3,000 to
-  $8,000 in earlier rounds and $8,000 to $12,000 later.
+- **What it offers** (corrected, vibrantsf.org, read 31 October): a three-month space whose lease SF New Deal signs, a
+  project manager for permits, and grants of $2,000 to $10,000. The current pages no longer say the rent is free.
 - **Scale:** about 30 storefronts so far (sf.gov, 13 March 2026).
 - **Where:** Union Square, Powell, O'Farrell, the Financial District, the East Cut and Yerba Buena.
 - **How to apply:** no 2026 or 2027 cohort window is published, and intake appears rolling *(inference)*. The application
@@ -143,14 +156,14 @@ and takes about 2 weeks; none is needed if the space was last retail.
 |---|---:|---:|
 | Rent: 3 months free under Vacant to Vibrant, then 2 months at $5,000 to $8,000 *(assumption)* | $10,000 | $16,000 |
 | Fit-out: felt drapes on track, shelving (moves to the flagship), paint, signage, acoustic panels | $35,000 | $55,000 |
-| Sound and records: amplifiers, decks, 800 records (two Tropos pairs from EARF's own stock, at no cost to the pop-up) | $15,000 | $25,000 |
+| Sound and records: amplifiers, decks, 800 records (the one Tropos pair from EARF's own stock, at no cost to the pop-up) | $15,000 | $25,000 |
 | Furniture hire: chairs, standing tables, the bar's back table | $4,000 | $7,000 |
 | Staff: about 60 hours a week on the floor at about $30 burdened, plus event nights | $40,000 | $55,000 |
 | Permits and insurance: TUA $644, one-time entertainment permits, liability | $6,000 | $12,000 |
 | Launch and marketing: the debut in FOG week, printing, photography | $10,000 | $25,000 |
 | Contingency | $10,000 | $15,000 |
 | **Total cost** | **$130,000** | **$210,000** |
-| Less a Vacant to Vibrant grant | $3,000 | $12,000 |
+| Less a Vacant to Vibrant grant | $2,000 | $10,000 |
 
 **What comes back:**
 - **Ticketed sessions:** about $25,000 to $35,000, at 10 seats x 3 sessions x 4 days x $20 at 60 to 80% full.
@@ -176,6 +189,9 @@ What investors and a lender will ask for, measured over five months:
 | Soft circles for the flagship | $500,000 or more in non-binding interest | The raise, started before the lease |
 
 ## The timeline
+
+*(Round 43: superseded by the timeline in `../r43/V2V-APPLICATION.md` section 6. The debut moves to Fort Mason; the
+storefront follows Vacant to Vibrant's match, February to June. The rows below are kept as first written.)*
 
 | When | What |
 |---|---|

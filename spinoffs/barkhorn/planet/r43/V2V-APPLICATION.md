@@ -84,7 +84,7 @@ Planet EARF is a 25 x 50 ft storefront in five zones, front to back:
 Nothing is built into the space. Everything is brought in and leaves with the lease.
 
 **Why downtown, why now**
-We want to open on Tuesday 19 January 2027, during SF Art Week and the night before FOG Design+Art's preview, when collectors, galleries and press are in town. We would then run eight weeks to mid-March. A room playing records to the pavement at night gives a dark block a reason to walk by. If it works, our plan is a permanent listening bar downtown, and the pop-up is the test.
+We debut on Tuesday 19 January 2027 with one night in a hired room at Fort Mason, during SF Art Week and the night before FOG Design+Art's preview, when collectors, galleries and press are in town. We would then open the storefront for eight weeks from February or March 2027, as soon as a space is matched. A room playing records to the pavement at night gives a dark block a reason to walk by. If it works, our plan is a permanent listening bar downtown, and the pop-up is the test.
 
 **Experience**
 [OWNER TO FILL: years designing and making; any markets, shows, pop-ups or events, with dates; any retail or hospitality work.] We have not run a storefront before. This pop-up is our first, planned in detail: a floor plan, a budget, a staffing plan and the permits worked out in advance.
@@ -119,7 +119,7 @@ Eight weeks costs $22,000 to $36,000. We would pay for it from a Vacant to Vibra
 - At the end, a decision on a long lease downtown.
 
 **Start date and length**
-We would like 19 January 2027, or the earliest available date, for 8 weeks. We are open to the standard three months.
+We would like February or March 2027, or the earliest match after that, for 8 weeks. We are open to the standard three months.
 
 **Business plan (attachment)**
 Build it from POPUP.md: the lean column, the budget in §5 below, the timeline and plan A-401. [OWNER TO FILL: a 2-page PDF.]
@@ -172,7 +172,7 @@ Today is Saturday 31 October 2026.
 | By ~4 Dec | If not V2V, sign a direct short-term lease (570 Market St advertises short-term leases; see STOREFRONTS.md) | Broker-dependent | [downtownsf.org](https://downtownsf.org/lease/market-st-ground-floor-retail) |
 | By ~7 Dec | File the TUA, if the last use was not retail. Owner or agent applies; $644. | "Usually within 2 weeks" of a complete application; the holidays are added *(inference)* | [SF Planning TUA](https://sfplanning.org/resource/tua-supplemental), via r42 `research-popup.md` (read 31 Oct 2026) |
 | By ~10 Dec | Liability insurance certificate for the lease | Not found | — |
-| Open since 21 Oct 2026 | The partner can file the debut's Type 58 authorization (ABC online: 5 to 90 days ahead; 19 Jan minus 90 days is 21 Oct). **POPUP.md's "from 21 December" is wrong; the window opened 21 October.** | 5 to 90 days ahead; $100 a night | [ABC Type 58](https://www.abc.ca.gov/licensing/license-forms/caterers-permit/apply-for-a-type-58-catering-authorization), via r42 research |
+| From about 20 Nov 2026 | Only if the debut is in a city room (not Fort Mason, where ABC does not apply and the alcohol permit comes from the US Park Police, due 6 weeks ahead): the partner files its Type 58 catering authorization, more than 5 and at most 60 days ahead per ABC's instructions (`PARTNERS.md`), so from about 20 Nov. *(Corrected: an earlier draft here said 5 to 90 days, from 21 Oct.)* | 6 to 60 days ahead; $100 a night; subject to SFPD | [ABC Type 58](https://www.abc.ca.gov/licensing/license-forms/caterers-permit/apply-for-a-type-58-catering-authorization) |
 | By ~15 Dec | Partner files the Type 58 nights for 19 and 21 to 23 Jan, early, in case ABC asks for SFPD or owner sign-off *(inference)* | — | same |
 | **By 5 Jan 2027** | One Time Indoor Event permit for the debut's selector: $586 | At least 2 weeks ahead; may be refused under 7 days | [sf.gov](https://www.sf.gov/get-entertainment-permit-your-indoor-event), via r42 research |
 | By 11 Jan | Seller's permit (temporary, for ≤90 days at one location) | Not stated | [CDTFA](https://www.cdtfa.ca.gov/services/permits-licenses.htm) |

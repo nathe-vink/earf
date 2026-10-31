@@ -61,12 +61,12 @@ The response, round 34 (`loft/`). It keeps the den's footprint: a 20 ft (6.1 m) 
 ## The concept
 
 One long concrete room, lit by its own acrylic. You come in by a plain black door under one small neon sign and the
-room opens down its length: on the left the bar, a single 8.4 m spectrum of eight back-lit panels in the Atmosphere
+room opens down its length: on the left the bar, a single 8.4 m spectrum of eight back-lit panels in the Tropos
 colours (Ember, Dust, Acid, Poison, Ice, Haze, Fog, Smoke), under a dark honed stone top; behind it the back-bar, its
 bottles on edge-lit acrylic shelves that take the colour of the panel below them, with a Fog pair of speakers standing
 among them in two lit niches 3.15 m apart, horns at a seated guest's eye. On the right, four upholstered booths along the long street
 window, an Ember Bell on each table. At the far end, open to the bar, the listening lounge: ten
-low chairs facing the record wall, an Ember Bell on each of its two side tables, an Atmosphere pair in each corner on low Smoke plinths (Ember in front, Ice either side
+low chairs facing the record wall, an Ember Bell on each of its two side tables, an Tropos pair in each corner on low Smoke plinths (Ember in front, Ice either side
 of the record wall), each grazed from behind in its complementary colour; the record wall runs floor to ceiling, its
 cubbies of uneven depth a diffuser, the DJ desk set into it with Cumulus against a dim Ice glow. Overhead, the whole
 ceiling is a back-lit acoustic membrane that keeps time: Fog and Ice at opening, Acid and Dust at sunset, Ember and Haze
@@ -83,7 +83,7 @@ acrylic), and no two acrylic walls facing (the slats go on one lounge wall only,
 |---|---|
 | `plan.py` | every dimension of the room, in one frame (metres, x along the room from the door, y from the street window) |
 | `../../../studio/engine/kit_ext/planet_room.py` | the room as one kit piece for the engine: shell, membrane, bar, back-bar, bottles, booths, lounge, record wall, street |
-| `shots.py` | the views: cameras, the products placed (Atmosphere from `barkhorn-cloud`, Bell from `barkhorn-lamp`, Cumulus from `barkhorn-turntable`), the practical lights; `DEFAULT` the room's settings |
+| `shots.py` | the views: cameras, the products placed (Tropos from `barkhorn-cloud`, Bell from `barkhorn-lamp`, Cumulus from `barkhorn-turntable`), the practical lights; `DEFAULT` the room's settings |
 | `card.py` | the critic's card for a frame |
 | `sheets.py` | the plan and the long section (A3, 1:50, the fab kit's sheet): `drawings/planet-earf-sheets.pdf` |
 | `board.py` | the materials and lighting board: `drawings/board.pdf` |
@@ -111,7 +111,7 @@ From the brief:
 - **Capacity:** 49, Group B, so no Place of Assembly permit. **38 seats** (the brief's "about 40"): 12 at the bar, 16 in four
   booths, 10 in the lounge (two chairs that stood in front of the Ice pair were taken out in round 6).
 - **Use:** quiet, kissa-style listening early, the bar staff playing records; a DJ at the record wall late.
-- **Products:** two Atmosphere pairs in the lounge's corners on low Smoke plinths; a Fog pair in back-bar niches; Cumulus
+- **Products:** two Tropos pairs in the lounge's corners on low Smoke plinths; a Fog pair in back-bar niches; Cumulus
   at the DJ desk; Bell over the bar and on the booth tables.
 - **The bar:** eight 20 mm cast panels in spectrum order over a white liner and an LED cavity; a dark honed stone top.
 - **Shelves:** 10 mm edge-lit light-guide acrylic, tinted for display, warm white on the working shelves.
@@ -193,8 +193,8 @@ choice is the owner's to overturn.*
 ### What it is
 
 Planet EARF is a listening bar for 49 people, staff included, in a concrete shell in San Francisco: 104 m² (1,116 sq ft) of room, 6.1 m
-across and 17 m deep, 3.4 m to the fir deck. It is EARF's showroom, run as a bar. Four Atmosphere speakers, the Hemisphere
-North pendants, the Core lamps and EARF's Mantle record players are all for sale, and all swap tints, so the room is one
+across and 17 m deep, 3.4 m to the fir deck. It is EARF's showroom, run as a bar. Four Tropos speakers, the Hemisphere
+pendants, the Core lamps and EARF's Mantle record players are all for sale, and all swap tints, so the room is one
 configuration of the catalogue on any given night (the house configuration is Smoke).
 
 ### From the door to last call
@@ -204,13 +204,13 @@ configuration of the catalogue on any given night (the house configuration is Sm
   you a seat and puts one coin in your hand: "That's your song."
 - **The bar.** Eight chairs at a zinc-topped racetrack counter with a fluted oak front. Behind it the back bar's record
   wall, the decks between the bar pair (raised on ledges at counter height, Ginza's way), and the request column. The
-  Hemisphere North pendants hang low over the zinc; everything else is lit from what you can see.
+  Hemisphere pendants hang low over the zinc; everything else is lit from what you can see.
 - **The banquette.** Along the street wall, four small round tables and a chair opposite each, a Core lamp on every table,
   the frosted screens above (hands on fogged glass, the dancer, the Arrival-like shell).
 - **The listening room.** Up one 200 mm step, behind the smoked partition: six low tub chairs facing the altar pair,
   side tables between. Quiet is the rule here (a card on each table says so, once). This is where the sessions happen.
 - **Last call.** Called by the record, not by a bell: the selector plays the house's closing side (the same track every
-  night, announced nowhere), the Hemisphere Norths come down a stop over its length, and the coins left in the column are played or
+  night, announced nowhere), the Hemispheres come down a stop over its length, and the coins left in the column are played or
   returned with the bill.
 
 ### The listening programme
@@ -299,8 +299,8 @@ anecdotal); this room sits at the top of that range because of its joinery, acou
 | Acoustic isolation: the listening room's box, the ceiling absorber, door seals, the party walls | $60,000 | $110,000 | (est.) |
 | Joinery: the racetrack counter (zinc top, fluted oak), the back bar, the record wall, the banquette, the altar | $120,000 | $185,000 | (est.) |
 | Acrylic: four frosted screens with displays behind them, the Smoke sink, the request column, 300 coins, Mother EARF | $54,000 | $102,000 | research.md: no public price for thick cast acrylic; back-lit onyx runs $120 to $360 a sq ft installed |
-| Lighting: Hemisphere North pendants, Core lamps, spots and their control | $35,000 | $60,000 | (est.; the companions at cost) |
-| The system: four Atmosphere, amplification, two Mantle record players, a rotary mixer, cartridges | at EARF's cost | | not yet priced |
+| Lighting: Hemisphere pendants, Core lamps, spots and their control | $35,000 | $60,000 | (est.; the companions at cost) |
+| The system: four Tropos, amplification, two Mantle record players, a rotary mixer, cartridges | at EARF's cost | | not yet priced |
 | Bar equipment: ice machine, glasswasher, under-counter refrigeration, an espresso machine, the bar die | $78,000 | $130,000 | (est.) |
 | Furniture, glassware, the first 4,000 records | $70,000 | $120,000 | records at about $12 to $18 used (est.) |
 | Design, engineering, permits and fees | $60,000 | $100,000 | about 10 % (est.) |
@@ -365,11 +365,12 @@ the frames `door` and `door-mother`, so the owner can compare.)
 - **Over a table, not a walkway:** its foot is 1.85 m above the floor, which is fine over a table and its banquette,
   not over the aisle.
 
-**The multicolour variant, kept for comparison only** (`door-mother-colour`): round 33c's six tinted discs round a
-glowing opal core, the rims lit. Rendered first (p1), it read as "a glowing multicoloured neon wireframe globe" to a
-judge told nothing, and both critics called it a nightclub cue. The owner on colour: "I also don't love the overt
-rainbow coloring. It's too Castro for SF" and "lots of acrylic features, just not rainbow everywhere". So it is not
-recommended.
+**The decision: the multicolour, as the owner chose on 22 October.** Before that choice, round 39 rendered a
+multicolour variant with a glowing opal core: a judge told nothing read it as "a glowing multicoloured neon wireframe
+globe", both critics called it a nightclub cue, and the owner had said of colour, "I also don't love the overt rainbow
+coloring. It's too Castro for SF". That variant (with the core) was not recommended then. The owner then chose the
+site's multicolour without the core, the rims lit, which round 41 rendered (`door-mother-colour`, the door hero), and
+that choice stands: the Smoke globe above is the earlier proposal, kept for comparison only.
 
 **Other ways the name could live in the bar, a sentence each:**
 

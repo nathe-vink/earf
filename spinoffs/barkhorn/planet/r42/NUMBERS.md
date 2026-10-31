@@ -122,8 +122,11 @@ The flagship's raise rests on numbers nobody has yet:
 - whether the sessions fill.
 
 `POPUP.md` gets them first:
-- **A lean pop-up:** 8 weeks from 19 January 2027 inside Vacant to Vibrant's free rent, $22k to $36k, from the $50k
-  product raise.
+- **The debut:** Tuesday 19 January 2027, one to three nights in a hired or lent room at Fort Mason in FOG week
+  (`../r43/DEBUT-ROOM.md`), about $4k to $15k, paid by a partner or lent.
+- **A lean pop-up:** 8 weeks from February 2027, once Vacant to Vibrant matches a storefront, $22k to $36k, paid by the
+  Vacant to Vibrant grant ($2k to $10k), debut partners and deposits taken in the room, not the $50k product raise,
+  which is fully allocated (corrected in round 43).
 - **Then a 5-month pop-up:** $130k to $210k, which pays for itself at about six pairs.
 
 Its measured pairs, spend and fill replace this model's assumptions before anyone signs a $2M lease.
