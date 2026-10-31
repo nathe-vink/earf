@@ -66,3 +66,6 @@ renders/2026-10-20/barkhorn/coin/site-coins/row-*
 # round 47's spin: 36 path-traced frames a colour, rebuilt by `spinoffs/barkhorn/spin47.py`; kept as the site's webp
 # frames (spinoffs/barkhorn/site/img/spin/)
 renders/2026-10-31/barkhorn/spin47/
+
+# round 47's 3D view, built by viewer/build.mjs; holds Tropos's CAD, so it stays out of git and off the site while VIEW3D is off
+spinoffs/barkhorn/viewer/dist/

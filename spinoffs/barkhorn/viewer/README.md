@@ -4,7 +4,7 @@ A "View in 3D" for a product's page: its fabkit render model, the acrylic as phy
 renders tint it, lit by a small studio made in code, turned by hand within limits. **It is off** (`VIEW3D = False` in
 `../web.py`) because it does not yet hold up beside the path-traced pictures (below).
 
-    npm install && node build.mjs      # three.js (pinned, 0.170.0) and the viewer into ../site/3d, and each model compressed
+    npm install && node build.mjs      # three.js (pinned, 0.170.0) and the viewer into dist/ (git-ignored; web.py copies it to site/3d only while VIEW3D is on), and each model compressed
 
 - `compress.mjs`: a fabkit GLB (render/<name>.glb, 62 MB for Tropos) made web-sized. The printed words and labels go;
   each part takes a material named by its finish (from the build's render/<name>.json); merged by finish, welded,
@@ -44,3 +44,11 @@ rendering here (SwiftShader) is the same image a GPU makes, so a phone would not
 `node presskit.mjs` (after `python3 ../web.py`) prints the press page to `../site/press/earf-press-kit.pdf` with its
 print styles (in `web.py`), so the PDF and the page cannot disagree. Run `web.py` again afterwards so the page's link
 shows the PDF's size.
+
+## Kept off the site while off
+
+`site/3d` holds Tropos's own CAD (compressed, but exact), so it exists only while `VIEW3D` is on: `build.mjs` writes to
+`viewer/dist/` (git-ignored), and `web.py` copies that into `site/3d` when the flag is on and removes `site/3d`
+otherwise; the page's 3D markup and script are left out too. No design protection has been filed, so the model should
+not be fetchable from the site until the owner decides it may be. Preview deployments made from this branch before
+2026-10-31 08:40 UTC (5a242186 to e9b461fd) still carry `/3d/tropos.glb`.

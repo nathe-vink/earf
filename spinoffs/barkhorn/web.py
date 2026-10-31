@@ -838,6 +838,10 @@ def body():
                 .replace('__WAITLIST__', wl_form).replace('__PRIVACY__', wl_page)
                 .replace('__FOOT_PRIVACY__', '<a href="#privacy">Privacy</a>' if WAITLIST else '')
                 .replace('__STILL__', still).replace('__POSTER__', poster).replace('__POSTER_NIGHT__', poster_night).replace('__DATA__', json.dumps(data, separators=(',', ':'))))
+    if not VIEW3D:      # the 3D view's markup and script stay out of the page entirely while it is off
+        page = re.sub(r'\n *<!--3D-->.*?<!--/3D-->', '', page, flags=re.S)
+        page = re.sub(r'/\*3D\*/.*?/\*/3D\*/', '', page, flags=re.S)
+        page = re.sub(r'//3D\n.*?///3D', 'function v3sync() {}\nfunction v3close() {}', page, flags=re.S)
     cut = page.index('</style>') + len('</style>')
     return page[:cut], page[cut:]
 
@@ -1039,7 +1043,7 @@ def make_spin():
     return made
 
 
-# round 47: the 3D view (viewer/, its README). Each product with a model in site/3d/ gets a "View in 3D" on its page; the
+# round 47: the 3D view (viewer/, its README). Each product with a model in viewer/dist/ (site/3d/ once on) gets a "View in 3D" on its page; the
 # finishes come from the engine's product file (what the renders were painted with), simplified to what a browser
 # paints, and each colour's acrylic is the engine's own: the colour it reaches after a distance (Beer's law), which is
 # three.js's attenuation. VIEW3D False takes the button off everywhere.
@@ -1049,9 +1053,9 @@ FLAVOUR3D = {'red': 'cloud-red', 'orange': 'cloud-orange', 'amber': 'cloud-amber
 
 
 def view3d():
-    """The 3D view's spec for each product whose model is in site/3d (by the product's route), and each colour's tints."""
+    """The 3D view's spec for each product whose model is in viewer/dist (by the product's route), and each colour's tints."""
     out = {}
-    if not VIEW3D or not os.path.exists(os.path.join(SITE, '3d', 'tropos.glb')):
+    if not VIEW3D or not os.path.exists(os.path.join(HERE, 'viewer', 'dist', 'tropos.glb')):
         return out
     eng = json.load(open(os.path.join(ROOT, 'studio', 'products', 'barkhorn-cloud.json')))
     simple = {'satin_paint': 0.45, 'plastic': 0.45, 'gloss_plastic': 0.18, 'rubber': 0.8, 'treated_paper': 0.7, 'ecoat': 0.42,
@@ -1626,7 +1630,7 @@ footer p { margin: 0; font: 500 12px/1.5 var(--mono); letter-spacing: 0.12em; te
 .nav:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px }
 .count { position: absolute; right: 12px; bottom: 12px; z-index: 2; font: 500 12px/1 var(--mono); letter-spacing: 0.08em; color: var(--on-photo);
   background: var(--veil); border-radius: 999px; padding: 7px 10px; pointer-events: none }
-.v3d-box { position: absolute; inset: 0; z-index: 3; border-radius: 6px; overflow: hidden; background: #F3F1EC; touch-action: none; cursor: grab }
+/*3D*/.v3d-box { position: absolute; inset: 0; z-index: 3; border-radius: 6px; overflow: hidden; background: #F3F1EC; touch-action: none; cursor: grab }
 .v3d-box:active { cursor: grabbing } .v3d-box:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px }
 .v3d-box canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block }
 .frame.three .nav, .frame.three .count { visibility: hidden }
@@ -1637,7 +1641,7 @@ footer p { margin: 0; font: 500 12px/1.5 var(--mono); letter-spacing: 0.12em; te
 .v3d-hint { position: absolute; z-index: 1; left: 12px; bottom: 12px; margin: 0; pointer-events: none; font: 500 12px/1 var(--mono); letter-spacing: 0.1em;
   text-transform: uppercase; color: var(--on-photo); background: var(--veil); border-radius: 999px; padding: 7px 10px }
 .v3d-load { position: absolute; inset: 0; z-index: 1; display: grid; place-items: center; margin: 0; pointer-events: none;
-  font: 500 13px/1.4 var(--mono); letter-spacing: 0.08em; color: var(--muted) } .v3d-load:empty { display: none }
+  font: 500 13px/1.4 var(--mono); letter-spacing: 0.08em; color: var(--muted) } .v3d-load:empty { display: none }/*/3D*/
 .thumbs { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(56px, 84px); gap: 8px; overflow-x: auto; scrollbar-width: none;
   padding: 4px; margin: -4px; position: relative; scroll-snap-type: x proximity }
 .thumbs::-webkit-scrollbar { display: none }
@@ -2016,9 +2020,11 @@ __TURNTABLE__
           <button type="button" class="nav prev" id="g-prev" aria-label="Previous picture"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M11.5 3.5 6 9l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <button type="button" class="nav next" id="g-next" aria-label="Next picture"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M6.5 3.5 12 9l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <span class="count" id="g-count" aria-hidden="true"></span>
+          <!--3D-->
           <div class="v3d-box" id="v3d-box" hidden tabindex="0" role="application" aria-roledescription="3D view" aria-label="3D view">
             <p class="v3d-hint" aria-hidden="true">Drag to turn</p><p class="v3d-load" id="v3d-load" aria-live="polite"></p></div>
           <button type="button" class="v3d-btn" id="v3d" hidden aria-pressed="false" aria-controls="v3d-box">View in 3D</button>
+          <!--/3D-->
         </div>
         <div class="thumbs" id="thumbs" role="tablist" aria-label="Pictures"></div>
         <p class="cap" id="cap" aria-live="polite"></p>
@@ -2368,6 +2374,13 @@ function renderProduct(Pr, k) {
   document.getElementById('p-more').innerHTML = MORE[P.id] || '';
   v3sync();
 }
+// "Copy link": the product's own page for link previews (/s/<address>, its card in its colour), which forwards here
+document.getElementById('p-share').addEventListener('click', () => {
+  const url = `${location.origin}/s/${location.hash.slice(1)}`, note = document.getElementById('p-share-note');
+  const say = t => { note.textContent = t; setTimeout(() => { note.textContent = ''; }, 2400); };
+  try { navigator.clipboard.writeText(url).then(() => say('Link copied.'), () => say(url)); } catch (e) { say(url); }
+});
+//3D
 // the 3D view (round 47): offered where the product has a model and the browser has WebGL 2; fetched only on the tap;
 // the colour coins repaint it in place; any failure puts the pictures back and says why
 const V3 = D.view3d || {}, has3d = !!window.WebGL2RenderingContext;
@@ -2383,12 +2396,6 @@ function v3sync() {
   if ((v3 || frameEl.classList.contains('three')) && v3for !== P.id && !v3busy) v3close();
   if (v3) { v3.tint(V3[P.id].tints[cur]); v3box.setAttribute('aria-label', v3label()); }
 }
-// "Copy link": the product's own page for link previews (/s/<address>, its card in its colour), which forwards here
-document.getElementById('p-share').addEventListener('click', () => {
-  const url = `${location.origin}/s/${location.hash.slice(1)}`, note = document.getElementById('p-share-note');
-  const say = t => { note.textContent = t; setTimeout(() => { note.textContent = ''; }, 2400); };
-  try { navigator.clipboard.writeText(url).then(() => say('Link copied.'), () => say(url)); } catch (e) { say(url); }
-});
 v3btn.addEventListener('click', async () => {
   if (frameEl.classList.contains('three')) { v3close(); return; }
   if (v3busy) return;
@@ -2407,6 +2414,7 @@ v3btn.addEventListener('click', async () => {
   v3busy = false;
 });
 v3box.addEventListener('keydown', e => { if (e.key === 'Escape') { e.preventDefault(); v3close(); v3btn.focus(); } });
+///3D
 document.getElementById('g-prev').addEventListener('click', () => go(-1));
 document.getElementById('g-next').addEventListener('click', () => go(1));
 const keys = (e, focus) => {
@@ -2778,6 +2786,13 @@ def share_pages():
 
 def build():
     """The whole site into site/: the page as a document, the favicons, robots.txt and vercel.json."""
+    # the 3D view's files (viewer/dist, from viewer/build.mjs: three.js and Tropos's compressed CAD) go into site/3d only
+    # while VIEW3D is on; off, there is no site/3d, so the CAD is never deployed (the coordinator, 2026-10-31)
+    d3, src3 = os.path.join(SITE, '3d'), os.path.join(HERE, 'viewer', 'dist')
+    if os.path.exists(d3):
+        shutil.rmtree(d3)
+    if VIEW3D and os.path.exists(src3):
+        shutil.copytree(src3, d3)
     make_editorial()
     share_pages()
     head, rest = body()
