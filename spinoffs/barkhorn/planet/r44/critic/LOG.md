@@ -32,3 +32,31 @@ The scores are, in order, architected / novel / lasting / realistic / cooler.
   - the noisy kit at the shop end;
   - a two-door sound lock with power operators;
   - restroom plumbing outside the box.
+
+## Renders, round 1 (p2; p1 was the p0 look, seen only by me)
+
+| View | Critic | Stage 1 | If fixed | Verdict |
+|---|---|---|---|---|
+| street | a | 5.0 | 7.0 | iterate |
+| street | b | 4.5 | 6.8 | iterate |
+| bar | a | 4.5 | 6.5 | iterate |
+| bar | b | 4.5 | 6.5 | iterate |
+
+The full JSONs are in `p2-*.json`.
+
+**Converged asks (all four critics):**
+- The frame is exposed like a showroom, not night: frame median 69–106.
+- The band reads as a clipped pink-white lightbox instead of amber through fins.
+- The shelf and back-bar lines read as white neon.
+- The lantern's face is washed flat: it needs a graze raking down the slats.
+- Fill and route light flatten the room into even light with no pools.
+- The terrazzo is too bright and coarse at 1:1.
+- There are no signs of life.
+
+**Two critics each:**
+- The back bar is one bottle model cloned.
+- The porch's oak reads as a smeared texture.
+- The street camera's mullion cuts near the center.
+- The oak reads mauve.
+
+**Out of scope, named by the critics and left as they are:** the products' tints (fixed as placed). The Tropos and Mother EARF are not visible from the bar or the street; the lantern view shows them.

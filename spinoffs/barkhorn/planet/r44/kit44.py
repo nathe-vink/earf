@@ -57,7 +57,7 @@ def acrylic(bpy, name, Ti=(0.995, 0.995, 0.995), d_ref=0.003, rough=0.015):
 SMOKE_TI = (0.965, 0.92, 0.84)
 
 
-def terrazzo(bpy, name, ground='#4A4743', chips=('#D9D4CA', '#8E8A84', '#2B2928', '#B9AE9C'), accent=(),
+def terrazzo(bpy, name, ground='#3A3734', chips=('#B4AEA2', '#7A766F', '#2B2928', '#968C7E'), accent=(),
              scale=48.0, rough=0.32):
     """Honed epoxy terrazzo: chips (marble, glass) in a ground, sealed. `accent` adds acrylic-offcut chips in the
     product tints, as a share of the chips (each accent colour one slot in the palette)."""
@@ -138,7 +138,7 @@ def shell(bpy, p, objs):
     H = P.CEIL; T = P.WALL
     fl = Mesh('h44-floor'); fl.box(-0.2, 0.0, -0.1, P.LANT['x0'], W, 0.0); fl.box(P.LANT['x1'], 0.0, -0.1, L, W, 0.0)
     fl.box(P.LANT['x0'], 0.0, -0.1, P.LANT['x1'], P.LANT['y0'], 0.0)
-    objs.append(fl.object(bpy, terrazzo(bpy, 'terrazzo-floor', ground=p.get('floor_ground', '#3E3C39'))))
+    objs.append(fl.object(bpy, terrazzo(bpy, 'terrazzo-floor', ground=p.get('floor_ground', '#34312E'))))
     wl = Mesh('h44-walls')
     wl.box(-0.30, -T, 0.0, L + T, 0.0, P.JOISTS)
     wl.box(-0.30, W, 0.0, L + T, W + T, P.JOISTS)
@@ -212,7 +212,7 @@ def shop(bpy, p, objs):
     sl = Mesh('h44-shelf-led')
     for z in (0.78, 1.26, 1.74, 2.22, 2.70):
         sl.box(S['x0'] + 0.05, S['y0'] + 0.02, z - 0.040, S['x1'] - 0.05, S['y0'] + 0.035, z - 0.036)
-    objs.append(sl.object(bpy, emitter(bpy, 'h44-led-warm', '#FFB774', p.get('shelf_led', 6.0))))
+    objs.append(sl.object(bpy, emitter(bpy, 'h44-led-warm', '#FF9A50', p.get('shelf_led', 1.8))))
     T_ = P.SHOP_TABLE
     tb = Mesh('h44-shop-table'); tb.box(T_['x0'], T_['y0'], T_['h'] - 0.04, T_['x1'], T_['y1'], T_['h'])
     objs.append(tb.object(bpy, oak(bpy, vertical=False, name='oak-table'), bevel=0.004))
@@ -220,6 +220,10 @@ def shop(bpy, p, objs):
     for x in (T_['x0'] + 0.08, T_['x1'] - 0.12):
         tf.box(x, T_['y0'] + 0.08, 0.0, x + 0.04, T_['y1'] - 0.08, T_['h'] - 0.04)
     objs.append(tf.object(bpy, K.blackened_steel(bpy)))
+    rc = Mesh('h44-record'); _cyl(rc.bm, T_['x0'] + 0.45, T_['y0'] + 0.40, T_['h'], 0.15, 0.002, seg=64)
+    objs.append(rc.object(bpy, principled(bpy, 'h44-vinyl', '#0B0B0C', rough=0.25), smooth=True))
+    sv_ = Mesh('h44-sleeve'); sv_.box(T_['x0'] + 0.62, T_['y0'] + 0.18, T_['h'], T_['x0'] + 0.935, T_['y0'] + 0.495, T_['h'] + 0.004)
+    objs.append(sv_.object(bpy, principled(bpy, 'h44-sleeve', '#D9D2C2', rough=0.7)))
     Wp = P.WINDOW_PLINTH
     wp = Mesh('h44-window-plinth'); wp.box(Wp['x0'], Wp['y0'], 0.0, Wp['x1'], Wp['y1'], Wp['h'])
     objs.append(wp.object(bpy, terrazzo(bpy, 'terrazzo-floor'), bevel=0.004))
@@ -255,7 +259,7 @@ def bar(bpy, p, objs):
         sv.box(B['x0'] + 0.3, W - 0.30, z - 0.02, B['x1'] - 0.3, W, z)
         led.box(B['x0'] + 0.35, W - 0.28, z - 0.024, B['x1'] - 0.35, W - 0.26, z - 0.021)
     objs.append(sv.object(bpy, K.blackened_steel(bpy)))
-    objs.append(led.object(bpy, emitter(bpy, 'h44-led-warm', '#FFB774', p.get('shelf_led', 6.0))))
+    objs.append(led.object(bpy, emitter(bpy, 'h44-led-warm', '#FF9A50', p.get('shelf_led', 1.8))))
     # bottles: glass with liquid in four warm tones, varied heights
     import kit39
     rnd = random.Random(44)
@@ -266,11 +270,15 @@ def bar(bpy, p, objs):
     for z in zs:
         x = B['x0'] + 0.38
         while x < B['x1'] - 0.42:
-            r = rnd.choice([0.035, 0.040, 0.045]); h = rnd.choice([0.24, 0.28, 0.30, 0.32])
-            y = W - 0.15 + rnd.uniform(-0.04, 0.04)
-            _cyl(bots.bm, x, y, z, r, h * 0.72, seg=20); _cyl(bots.bm, x, y, z + h * 0.72, r * 0.35, h * 0.28, seg=12)
-            _cyl(lm[rnd.randrange(4)].bm, x, y, z + 0.004, r - 0.004, h * 0.6, seg=20)
-            x += 2 * r + rnd.uniform(0.02, 0.08)
+            # eight profiles (round 1 critics: "one bottle model cloned"): body radius, height, shoulder share, neck
+            r, h, sh_, nk = rnd.choice([(0.035, 0.30, 0.70, 0.30), (0.042, 0.27, 0.62, 0.32), (0.048, 0.22, 0.75, 0.28),
+                                        (0.032, 0.34, 0.66, 0.28), (0.055, 0.18, 0.80, 0.25), (0.038, 0.25, 0.58, 0.40),
+                                        (0.045, 0.29, 0.72, 0.30), (0.030, 0.26, 0.60, 0.33)])
+            y = W - 0.15 + rnd.uniform(-0.05, 0.05)
+            seg = rnd.choice([20, 20, 6, 4])                                  # round, a few hexagonal and square
+            _cyl(bots.bm, x, y, z, r, h * sh_, seg=seg); _cyl(bots.bm, x, y, z + h * sh_, r * nk, h * (1 - sh_), seg=12)
+            _cyl(lm[rnd.randrange(4)].bm, x, y, z + 0.004, r - 0.004, h * sh_ * rnd.uniform(0.25, 0.95), seg=seg)
+            x += 2 * r + rnd.uniform(0.02, 0.10) + (0.18 if rnd.random() < 0.12 else 0.0)
     objs.append(bots.object(bpy, gm, smooth=True))
     for i in range(4):
         objs.append(lm[i].object(bpy, liq[i], smooth=True))
@@ -346,7 +354,7 @@ def lantern(bpy, p, objs):
     cap.box(x0 - 0.035, y0 - 0.035, bz0 - 0.008, x1, y0 + 0.05, bz0)
     cap.box(x0 - 0.035, y0 - 0.035, bz0 - 0.008, x0 + 0.05, y1, bz0)
     objs.append(fins.object(bpy, acrylic(bpy, 'acrylic-smoke-fin', SMOKE_TI)))
-    objs.append(diff.object(bpy, emitter(bpy, 'h44-band-led', '#FF9A4A', p.get('band_glow', 1.6))))
+    objs.append(diff.object(bpy, emitter(bpy, 'h44-band-led', '#FF8A30', p.get('band_glow', 1.1))))
     objs.append(cap.object(bpy, K.blackened_steel(bpy)))
     # the lit foot: a 100 mm recess with a warm line washing the floor
     ft = Mesh('h44-lant-foot'); ft.box(x0 + 0.04, y0 + 0.04, 0.0, x1, y1, 0.10)
@@ -358,8 +366,11 @@ def lantern(bpy, p, objs):
     Lk = P.LOCK
     pc = Mesh('h44-porch')
     hp = 2.70
-    pc.box(Lk['x0'], Lk['y1'] - 0.12, 0.0, Lk['x1'], Lk['y1'], hp)                       # its bar-side wall
-    pc.box(Lk['x0'], Lk['y0'], 0.0, Lk['x0'] + 0.12, Lk['y1'], hp)                       # its shop-side wall
+    pc.box(Lk['x0'] + 0.02, Lk['y1'] - 0.10, 0.0, Lk['x1'], Lk['y1'] - 0.02, hp)          # cores of its two blind walls
+    pc.box(Lk['x0'] + 0.02, Lk['y0'] + 0.02, 0.0, Lk['x0'] + 0.10, Lk['y1'], hp)
+    # their faces: 140 mm oak boards with a 6 mm shadow (round 1 critics: "a smeared texture")
+    _battens(pc, 'x', Lk['x0'], Lk['x1'], Lk['y1'] - 0.02, Lk['y1'], 0.0, hp, 0.140, 0.006)
+    _battens(pc, 'y', Lk['y0'], Lk['y1'], Lk['x0'], Lk['x0'] + 0.02, 0.0, hp, 0.140, 0.006)
     pc.box(Lk['x0'], Lk['y0'], 0.0, P.LOCK_DOOR1['x'], Lk['y0'] + 0.12, hp)              # the route face, beside door 1
     pc.box(P.LOCK_DOOR1['x'] + P.DOOR, Lk['y0'], 0.0, Lk['x1'], Lk['y0'] + 0.12, hp)
     pc.box(P.LOCK_DOOR1['x'], Lk['y0'], 2.13, P.LOCK_DOOR1['x'] + P.DOOR, Lk['y0'] + 0.12, hp)
