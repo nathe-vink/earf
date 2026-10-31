@@ -18,9 +18,14 @@ KIT = 'spinoffs/barkhorn/planet/r43/kit43ams.py'
 G = [0.0, -3.2]                       # the globe's place on the quay
 
 VIEWS = {
-    'quay': dict(camera={'position': [7.0, -5.4, 1.60], 'target': [0.0, -2.6, 1.55], 'lens_mm': 32, 'level': True,
+    # p2 (p1 judged 4.5/4.5 for the quay and the shadow, converged: only three rims read and the globe barely brighter
+    # than the frame; the houses a flat slab with clipped white panes; a saturated blue sky and a sepia ground; flat
+    # paving; a crushed black plinth; a lamp glow floating above the globe): the rims 0.03 to 0.12; three warmths of
+    # lit room at a fifth of the glow, some curtained; a darker, greyer sky; 3200 K; the plinth satin steel; the lamps'
+    # glow at their lanterns; the quay view swung so the lit houses stand behind the globe
+    'quay': dict(camera={'position': [5.5, -7.0, 1.60], 'target': [-1.0, 0.5, 1.6], 'lens_mm': 32, 'level': True,
                          'fstop': 4.0, 'focus': [0.0, -3.2, 1.5]}, exposure=3.6),
-    'shadow': dict(camera={'position': [4.6, -9.6, 3.40], 'target': [-0.6, -1.8, 0.4], 'lens_mm': 28, 'level': True,
+    'shadow': dict(camera={'position': [3.8, -8.2, 2.60], 'target': [-0.4, -1.8, 0.4], 'lens_mm': 32, 'level': True,
                            'fstop': 5.6, 'focus': [0.0, -2.6, 0.5]}, exposure=3.6),
     'water': dict(camera={'position': [-6.5, 9.0, -0.55], 'target': [0.0, -3.0, 1.2], 'lens_mm': 35, 'level': True,
                           'fstop': 5.6, 'focus': [0.0, -3.2, 1.4]}, exposure=3.6),
@@ -38,9 +43,9 @@ def shot(view):
     s['title'] = f'Mother EARF at 2 m, Amsterdam (a proposal): {view}'
     s['camera'] = v['camera']
     s['set'] = {'kind': 'stage', 'props': [
-        {'kind': 'kit', 'shape': 'ext', 'path': KIT, 'fn': 'canal', 'width': 18.0, 'lit': 0.36, 'window_glow': 0.8},
+        {'kind': 'kit', 'shape': 'ext', 'path': KIT, 'fn': 'canal', 'width': 18.0, 'lit': 0.45, 'window_glow': 0.35},
         {'kind': 'kit', 'shape': 'ext', 'path': KIT, 'fn': 'globe', 'size': 2.0, 't': 0.025, 'at': G,
-         'rim': v.get('rim', 0.03), 'rim_par': 1.0, 'heading': 35.0, 'base_h': 0.45, 'post': 0.10},
+         'rim': v.get('rim', 0.12), 'rim_par': 1.0, 'heading': 35.0, 'base_h': 0.45, 'post': 0.10},
         {'kind': 'kit', 'shape': 'asset', 'model': 'street_lamp_01', 'res': '1k', 'position': [-9.0, -1.0, 0.0],
          'rotate': [0, 0, 90.0]},
         {'kind': 'kit', 'shape': 'asset', 'model': 'street_lamp_01', 'res': '1k', 'position': [12.0, -1.0, 0.0],
@@ -50,18 +55,18 @@ def shot(view):
     # the hard spot: on a mast on the land side, high, throwing the globe's coloured shadow across the paving toward
     # the kerb and the water; the street lamps along the quay, sodium-warm
     s['lights'] = {
-        'hard': spot([-1.2, -9.0, 6.2], [0.0, -1.6, 0.0], v.get('hard_w', 900.0), 18.0, k=4000, blend=0.1),
-        'lamp-a': {'type': 'point', 'position': [-9.0, -1.0, 4.4], 'power_w': 60.0, 'color': 2200, 'radius_m': 0.12},
-        'lamp-b': {'type': 'point', 'position': [12.0, -1.0, 4.4], 'power_w': 60.0, 'color': 2200, 'radius_m': 0.12},
+        'hard': spot([-3.5, -8.0, 8.5], [0.4, -2.2, 0.0], v.get('hard_w', 1800.0), 30.0, k=3600, blend=0.2),
+        'lamp-a': {'type': 'point', 'position': [-9.0, -1.0, 3.9], 'power_w': 60.0, 'color': 2200, 'radius_m': 0.12},
+        'lamp-b': {'type': 'point', 'position': [12.0, -1.0, 3.9], 'power_w': 60.0, 'color': 2200, 'radius_m': 0.12},
         'far': {'type': 'area', 'position': [0.0, 20.0, 6.0], 'target': [0.0, 23.0, 3.0], 'size_m': [30.0, 1.0],
                 'irradiance': 0.15, 'color': 2400, 'camera': False},
     }
-    s['sky'] = {'kind': 'gradient', 'zenith': '#03050B', 'horizon': '#1A1E2C', 'ground': '#08080A',
-                'strength': v.get('sky', 0.25)}
+    s['sky'] = {'kind': 'gradient', 'zenith': '#040508', 'horizon': '#2A2620', 'ground': '#08080A',
+                'strength': v.get('sky', 0.12)}
     s['haze'] = {'box_m': [-20.0, -14.0, -1.1, 20.0, 22.0, 8.0], 'density': v.get('haze', 0.0025), 'anisotropy': 0.4,
                  'color': '#FFFFFF'}
     s['render']['exposure'] = v.get('exposure', 3.6)
-    s['render']['white_balance_k'] = v.get('wb', 3600)
+    s['render']['white_balance_k'] = v.get('wb', 3200)
     return s
 
 

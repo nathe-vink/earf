@@ -6,14 +6,14 @@
  ],
  "camera": {
   "position": [
-   7.0,
-   -5.4,
+   5.5,
+   -7.0,
    1.6
   ],
   "target": [
-   0.0,
-   -2.6,
-   1.55
+   -1.0,
+   0.5,
+   1.6
   ],
   "lens_mm": 32,
   "level": true,
@@ -34,8 +34,8 @@
     "path": "spinoffs/barkhorn/planet/r43/kit43ams.py",
     "fn": "canal",
     "width": 18.0,
-    "lit": 0.36,
-    "window_glow": 0.8
+    "lit": 0.45,
+    "window_glow": 0.35
    },
    {
     "kind": "kit",
@@ -48,7 +48,7 @@
      0.0,
      -3.2
     ],
-    "rim": 0.03,
+    "rim": 0.12,
     "rim_par": 1.0,
     "heading": 35.0,
     "base_h": 0.45,
@@ -90,29 +90,29 @@
  },
  "sky": {
   "kind": "gradient",
-  "zenith": "#03050B",
-  "horizon": "#1A1E2C",
+  "zenith": "#040508",
+  "horizon": "#2A2620",
   "ground": "#08080A",
-  "strength": 0.25
+  "strength": 0.12
  },
  "lights": {
   "hard": {
    "type": "spot",
    "position": [
-    -1.2,
-    -9.0,
-    6.2
+    -3.5,
+    -8.0,
+    8.5
    ],
    "target": [
-    0.0,
-    -1.6,
+    0.4,
+    -2.2,
     0.0
    ],
-   "power_w": 900.0,
-   "cone_deg": 18.0,
-   "blend": 0.1,
+   "power_w": 1800.0,
+   "cone_deg": 30.0,
+   "blend": 0.2,
    "radius_m": 0.02,
-   "color": 4000,
+   "color": 3600,
    "camera": false
   },
   "lamp-a": {
@@ -120,7 +120,7 @@
    "position": [
     -9.0,
     -1.0,
-    4.4
+    3.9
    ],
    "power_w": 60.0,
    "color": 2200,
@@ -131,7 +131,7 @@
    "position": [
     12.0,
     -1.0,
-    4.4
+    3.9
    ],
    "power_w": 60.0,
    "color": 2200,
@@ -180,7 +180,7 @@
   "view": "AgX",
   "look": "AgX - Medium High Contrast",
   "exposure": 3.6,
-  "white_balance_k": 3600,
+  "white_balance_k": 3200,
   "white_balance_tint": -2.0
  },
  "materials": {

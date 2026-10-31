@@ -56,7 +56,9 @@ def canal(bpy, name, p, kit):
     fq = Mesh('ams-far-quay'); fq.box(L0, Wc, -drop - 1.0, L1, Wc + 6.0, 0.0)
     objs.append(fq.object(bpy, principled(bpy, 'ams-far-quay', '#3E3934', rough=0.85)))
     rnd = random.Random(p.get('seed', 16))
-    brick = Mesh('ams-brick'); trim = Mesh('ams-trim'); lit = Mesh('ams-lit'); dark = Mesh('ams-dark')
+    brick = Mesh('ams-brick'); trim = Mesh('ams-trim'); dark = Mesh('ams-dark')
+    # lit rooms in three warmths and brightnesses (round 43 p1 critics: "flat white panes, identical")
+    lits = [Mesh(f'ams-lit{k}') for k in range(3)]
     x = L0; yf = Wc + 4.0
     while x < L1:
         w = rnd.choice([4.8, 5.4, 6.0, 7.2]); h = rnd.choice([11.0, 12.5, 14.0, 15.5])
@@ -71,12 +73,20 @@ def canal(bpy, name, p, kit):
             for c in range(cols):
                 wx = x + 0.45 + c * (w - 0.9) / cols; ww = (w - 0.9) / cols - 0.45
                 trim.box(wx - 0.06, yf - 0.05, z0 - 0.06, wx + ww + 0.06, yf - 0.01, z0 + 1.86)
-                (lit if rnd.random() < p.get('lit', 0.38) else dark).box(wx, yf - 0.06, z0, wx + ww, yf - 0.05, z0 + 1.8)
+                if rnd.random() < p.get('lit', 0.38):
+                    lits[rnd.randrange(3)].box(wx, yf - 0.06, z0, wx + ww, yf - 0.05, z0 + 1.8)
+                    # a curtain half across some lit windows
+                    if rnd.random() < 0.4:
+                        trim.box(wx, yf - 0.07, z0, wx + ww * rnd.uniform(0.25, 0.5), yf - 0.065, z0 + 1.8)
+                else:
+                    dark.box(wx, yf - 0.06, z0, wx + ww, yf - 0.05, z0 + 1.8)
         x += w
-    objs.append(brick.object(bpy, principled(bpy, 'ams-brick', p.get('brick', '#3A2621'), rough=0.85,
-                                             bump=(0.02, 0.25, 0.002))))
+    objs.append(brick.object(bpy, principled(bpy, 'ams-brick', p.get('brick', '#4A2A22'), rough=0.85,
+                                             bump=(0.012, 0.6, 0.003))))
     objs.append(trim.object(bpy, principled(bpy, 'ams-trim', '#BDB6AA', rough=0.6)))
-    objs.append(lit.object(bpy, emitter(bpy, 'ams-lit', '#FFA050', p.get('window_glow', 3.0))))
+    g = p.get('window_glow', 0.35)
+    for k, (col, mul) in enumerate((('#FFB070', 1.0), ('#FF9440', 0.55), ('#FFC890', 0.3))):
+        objs.append(lits[k].object(bpy, emitter(bpy, f'ams-lit{k}', col, g * mul)))
     objs.append(dark.object(bpy, principled(bpy, 'ams-dark', '#0B0B0D', rough=0.08, spec=0.6)))
     # a row of elms' trunks on the far quay and bollards on ours, for scale
     tr = Mesh('ams-trunks')
@@ -106,5 +116,6 @@ def globe(bpy, name, p, kit):
     bs = Mesh(f'{name}-base')
     _cyl(bs.bm, cx, cy, 0.0, p.get('base_r', 0.75), base_h, seg=64)
     _cyl(bs.bm, cx, cy, base_h, 0.06, post + 0.12, seg=24)
-    objs.append(bs.object(bpy, K.blackened_steel(bpy), smooth=True, bevel=0.01))
+    objs.append(bs.object(bpy, principled(bpy, 'ams-plinth-steel', '#2A2622', rough=0.35, metal=0.8,
+                                          bump=(0.01, 0.2, 0.0005)), smooth=True, bevel=0.015))
     return objs
