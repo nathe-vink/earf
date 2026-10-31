@@ -1,0 +1,62 @@
+{
+  "stage1": {"impression": "A symmetrical, dead-centre view of a fir-lined box holding two clear speakers on plinths, with a featureless dark floor and walls, flat tub chairs and a blown white disc in the foreground. It reads as a real-time home-theatre showroom render, not a night photograph of a bar: no concrete, steel, haze, pools of light or signs of life show, and the Smoke tint does not read (the speakers look clear and white). A magazine would see a generic hi-fi room, not a specific place.", "score": 3.5},
+  "verdict": "iterate",
+  "blocking_9": [
+    "The room's own materials have to show: board-formed concrete with tie holes and formwork grain, the blackened steel and a floor with texture. At the moment the walls, ceiling and floor are flat CG fields (the floor's lum_range is 14).",
+    "Light has to fall in pools. The altar spots should make visible cones and falloff on the floor and plinths, there should be light haze, and there should be dark gaps between the pools, not one even wash.",
+    "The camera needs to be off-axis and seated, with a believable lens, so the symmetrical showroom elevation becomes an interiors photograph and the frame shows enough of the bar to be read as a specific place.",
+    "Signs of life (a glass with a highlight, a record out of its sleeve, the coat) have to be legible in the frame and not cut off at the bottom edge.",
+    "The foreground lamp and the speakers' batts and lit plinth edges cannot read as blown white cards or plates.",
+    "The fir lining needs individual boards (varied tone, checks, end grain) rather than repeated identical planks."
+  ],
+  "defects": [
+    {"region": [540, 690, 660, 800], "what": "A large white disc (Orb lamp or plate) at the bottom centre, median 216. It reads as a flat white plate, is the brightest object in the frame and pulls the eye away from the speakers."},
+    {"region": [60, 570, 1140, 690], "what": "The floor is a uniform dark brown field (lum_range 14) with no texture, polish, reflections or pools of light. It reads as CG."},
+    {"region": [0, 0, 1200, 60], "what": "The ceiling and the surround are a flat, empty dark field with no concrete, beams or fixtures."},
+    {"region": [160, 120, 1040, 540], "what": "The fir lining is repeated, uniform plank texture with no checks, nail holes or variation, and it is evenly lit with no spot pools (profile flat at 72 to 86)."},
+    {"region": [320, 330, 440, 520], "what": "The speaker's batts and inner faces read as flat white card blocks with no tint. The Smoke configuration does not read, so the frame has no hero colour."},
+    {"region": [310, 500, 450, 570], "what": "The plinth top edge glows as a hard white line (1.19 % clipped), like an LED strip on a display stand."},
+    {"region": [780, 510, 850, 575], "what": "A beige rectangle (record sleeve) leaning against the right plinth reads as a flat untextured card."},
+    {"region": [0, 560, 1200, 800], "what": "The tub chairs are flat brown shapes with no velvet pile or sheen, and they are cropped at the frame's bottom and edges."},
+    {"region": [320, 255, 445, 330], "what": "The horn and resin top show smeared, blobby reflections, which suggests denoiser smear or a wobbly environment reflection."}
+  ],
+  "changes": [
+    {"id": "c1", "rank": 1, "kind": "camera", "problem": "The frame is a dead-centre symmetrical elevation of the niche, so it reads as a showroom or home-theatre render, and it shows none of the bar that would make it a specific place.", "evidence": {"region": [0, 0, 1200, 800], "measured": "Both speakers are mirrored about x=600. Only the niche, flat floor and chairs are visible, with no concrete, steel or counter."},
+      "change": {"setting": "camera position / target / lens", "from": "[12.0, 3.05, 1.3] to [16.5, 3.05, 1.02], 26 mm", "to": "about [11.2, 4.3, 1.15] aimed at [16.3, 2.6, 1.1], 35 mm, level verticals, focus on the near speaker at f/2.8. This is a seated three-quarter view past one tub chair's arm, taking in the concrete side wall and a beam."},
+      "expected": "An asymmetric, seated composition with one speaker dominant and the room's shell (concrete, fir beam, steel) entering the frame, so it reads as a specific bar.",
+      "accept": null},
+    {"id": "c2", "rank": 2, "kind": "light", "problem": "The light is an even wash on the fir and a dead floor, with no pools, no visible spot falloff and no haze.", "evidence": {"region": [500, 120, 700, 540], "measured": "Profile y is flat at 72 to 86 across the lining. The floor region [60,570,1140,690] has lum_range 14.1."},
+      "change": {"setting": "altar spots / haze / downlights", "from": "altar 2 x 55 W cone 22 deg, haze 0.003, Domes' downlights 20 W", "to": "altar spots 70 W, cone 16 deg, aimed to land a pool on the floor in front of each plinth. Haze 0.012. Domes' downlights 28 W, cone 18 deg so they make pools on the tables. Add a 3 W 2400 K grazing spot down the concrete wall."},
+      "expected": "Defined light pools on the floor and plinths with dark gaps between them, a faint beam through the haze, and the fir falling off toward the top.",
+      "accept": {"region": [60, 570, 1140, 690], "metric": "lum_range", "op": ">=", "value": 45}},
+    {"id": "c3", "rank": 3, "kind": "material", "problem": "The floor is an untextured flat field with no polish or reflections.", "evidence": {"region": [60, 570, 1140, 690], "measured": "lum_p5 19.0 and lum_p95 33.0, so almost no variation"},
+      "change": {"setting": "floor's polish / concrete's tone and sheen", "from": "matte, uniform", "to": "polished concrete at roughness 0.35 with an aggregate and trowel-mark normal and roughness variation, so the speakers, plinth glow and lamps reflect as soft streaks"},
+      "expected": "Visible soft reflections of the speakers and pools on the floor, and texture at 1:1.",
+      "accept": {"region": [60, 570, 1140, 690], "metric": "lum_p95", "op": ">=", "value": 55}},
+    {"id": "c4", "rank": 4, "kind": "light", "problem": "The foreground lamp reads as a blown white plate and is the brightest object in the frame.", "evidence": {"region": [540, 690, 660, 800], "measured": "lum_median 216.1 against a frame median of 30.2"},
+      "change": {"setting": "Orb glow / the Domes' downlights over the tables", "from": "a downlight hitting the Orb's frosted liner at full strength", "to": "aim the downlight off the Orb onto the table top, Orb glow 0.003 to 0.01. If the camera move (c1) keeps it in frame, set it off-centre and partly out of focus."},
+      "expected": "The Orb reads as a small smoked glow, darker than the speaker, and the table shows a pool with a glass in it.",
+      "accept": {"region": [540, 690, 660, 800], "metric": "lum_median", "op": "<=", "value": 120}},
+    {"id": "c5", "rank": 5, "kind": "light", "problem": "The plinth tops carry a hard white clipped line that reads as an LED display stand.", "evidence": {"region": [310, 500, 450, 570], "measured": "clip_pct 1.19, lum_p95 251"},
+      "change": {"setting": "lamps on the speakers (area, 2900 K)", "from": "0.5 W/m2, hitting the plinth edge", "to": "0.3 W/m2, moved up and back so they light the speaker cabinet and not the plinth's top edge"},
+      "expected": "The plinth edges hold texture, and the light sits in the speaker's acrylic.",
+      "accept": {"region": [310, 500, 450, 570], "metric": "clip_pct", "op": "<", "value": 0.2}},
+    {"id": "c6", "rank": 6, "kind": "post", "problem": "The frame is evenly dark-brown with no black point, so the shadows feel muddy rather than deep, and the left speaker is just under the legibility target.", "evidence": {"region": [300, 250, 460, 520], "measured": "Left speaker lum_median 44.7 (target 45 or more). The surround median is about 17 to 27 with p1 8.9."},
+      "change": {"setting": "exposure / look", "from": "exposure 5.2, AgX Medium High Contrast", "to": "exposure 5.4, AgX Base Contrast with a gentle S-curve in post, white balance 2900 K"},
+      "expected": "The speakers read clearly above 50, and the shadows deepen while still holding detail.",
+      "accept": {"region": [300, 250, 460, 520], "metric": "lum_median", "op": ">=", "value": 50}},
+    {"id": "c7", "rank": 7, "kind": "material", "problem": "The fir lining is a repeated, uniform plank texture with no real-timber detail.", "evidence": {"region": [160, 120, 300, 540], "measured": "This was seen at 1:1: identical boards with no checks or nail holes. lum_range is 68 and comes only from the lighting."},
+      "change": {"setting": "the oak's stain / the fir's finish", "from": "one tiled plank texture", "to": "per-board random tone (plus or minus 12 %), UV offset per board, a checks and nail-hole normal map, and slightly darker shadow gaps between boards"},
+      "expected": "The lining reads as real boards of old Douglas fir at their real scale.",
+      "accept": null},
+    {"id": "c8", "rank": 8, "kind": "set", "problem": "There is no legible sign of life, and the sleeve against the plinth reads as a blank beige card.", "evidence": {"region": [780, 510, 850, 575], "measured": "A flat beige rectangle with no artwork or edge wear. The glass in the foreground is cut off by the bottom edge."},
+      "change": {"setting": "props", "from": "a plain sleeve against the plinth, a glass cut off at the bottom", "to": "a sleeve with printed artwork and worn edges, angled, plus a rocks glass with ice and a highlight on the near table inside the frame and the coat draped visibly over the near chair's arm"},
+      "expected": "At least two props are readable at a glance and catch small highlights.",
+      "accept": null}
+  ],
+  "out_of_scope": [
+    {"request": "Make the Smoke tint read in the speakers' cabinets (they read as clear with white batts, so there is no hero colour)", "why": "The speakers' tint and parts are fixed by the card. Only light through and behind them may change, which c5 and c2 address partly."},
+    {"request": "Add concrete or steel surfaces to the niche or change the fir-lined box", "why": "The room's design and materials are fixed. Only the camera (c1) can bring the existing concrete and steel into view."}
+  ],
+  "score_if_fixed": 6.5
+}

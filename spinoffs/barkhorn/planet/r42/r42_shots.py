@@ -26,16 +26,15 @@ VIEWS = {
     # the listening corner: the altar, the pair, the tub chairs and their Cores
     # p2 (critics 4.0/4.5, converged): the altar spots a stop and more down so the Smoke reads; the camera seated
     # between the two near tubs so they frame the corners; the Cores and the screens down
-    # p3 (p2 seen before judging: at 32 mm the tubs fell out of frame and the batts still glared): 26 mm so the near
-    # tubs' rims frame the lower corners; the altar spots 55 W, the speakers' own lamps halved
-    'listening': dict(camera={'position': [12.0, 3.05, 1.30], 'target': [16.5, 3.05, 1.02], 'lens_mm': 26, 'level': True,
-                              'fstop': 4.0, 'focus': [16.2, 3.0, 1.0]}, exposure=5.2,
-                      lights={'altar': {'power_w': 55.0, 'cone_deg': 22.0}, 'pend': {'power_w': 20.0, 'cone_deg': 24.0},
-                              'spk': {'irradiance': 0.5}, 'keyl': {'irradiance': 1.0}},
+    # p4, the last round (p3 judged 3.5/3.5: the centred, symmetric box reads as a configurator): seated three-quarter
+    # view past a tub, 35 mm; the altar spots tight, landing pools on the floor; the Cores and the plinth light down
+    'listening': dict(camera={'position': [13.2, 1.9, 1.25], 'target': [16.5, 3.6, 1.10], 'lens_mm': 35, 'level': True,
+                              'fstop': 2.8, 'focus': [16.4, 1.95, 1.2]}, exposure=5.2,
+                      lights={'altar': {'power_w': 70.0, 'cone_deg': 14.0}, 'pend': {'power_w': 20.0, 'cone_deg': 24.0},
+                              'spk': {'irradiance': 0.25, 'color': 2700}, 'keyl': {'irradiance': 1.0}},
                       add_lights={'zone_fill': {'type': 'area', 'position': [13.9, 3.05, 3.25], 'target': [13.9, 3.05, 0.2],
                                                 'size_m': [2.2, 1.6], 'irradiance': 0.12, 'color': 2700, 'camera': False}},
-                      orb={'lamp_w': 0.12, 'shade_glow': 0.003}, room={'screen_glow': 0.012}),
-    # the room at night from the back, the line playing: past the tubs to the counter, the globe and the street
+                      orb={'lamp_w': 0.05, 'shade_glow': 0.0008}, room={'screen_glow': 0.012}),
     # p2 (critics 4.5/5.0, converged): forward of the jambs at seated height, 32 mm; the floor's stains calmed; the
     # pendants' downlights softer; the Cores and Mother's rims down, its spot up; the screens dimmer; the speakers lit
     'night': dict(camera={'position': [14.2, 3.0, 1.32], 'target': [2.0, 2.9, 1.25], 'lens_mm': 32, 'level': True,

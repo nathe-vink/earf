@@ -6,22 +6,22 @@
  ],
  "camera": {
   "position": [
-   12.0,
-   3.05,
-   1.3
+   13.2,
+   1.9,
+   1.25
   ],
   "target": [
    16.5,
-   3.05,
-   1.02
+   3.6,
+   1.1
   ],
-  "lens_mm": 26,
+  "lens_mm": 35,
   "level": true,
-  "fstop": 4.0,
+  "fstop": 2.8,
   "focus": [
-   16.2,
-   3.0,
-   1.0
+   16.4,
+   1.95,
+   1.2
   ]
  },
  "products": [
@@ -382,9 +382,9 @@
     ],
     "cable": false,
     "cartridge": "none",
-    "lamp_w": 0.12,
+    "lamp_w": 0.05,
     "lamp_k": 2700,
-    "shade_glow": 0.003,
+    "shade_glow": 0.0008,
     "noshadow": "shell|liner|skin",
     "materials": {
      "liner": {
@@ -636,8 +636,8 @@
     0.35,
     0.35
    ],
-   "irradiance": 0.5,
-   "color": 2900,
+   "irradiance": 0.25,
+   "color": 2700,
    "spread_deg": 90.0,
    "receivers": [
     "left#0",
@@ -675,8 +675,8 @@
     0.3,
     0.3
    ],
-   "irradiance": 0.5,
-   "color": 2900,
+   "irradiance": 0.25,
+   "color": 2700,
    "camera": false,
    "receivers": [
     "left#0",
@@ -714,8 +714,8 @@
     0.35,
     0.35
    ],
-   "irradiance": 0.5,
-   "color": 2900,
+   "irradiance": 0.25,
+   "color": 2700,
    "spread_deg": 90.0,
    "receivers": [
     "left#1",
@@ -753,8 +753,8 @@
     0.3,
     0.3
    ],
-   "irradiance": 0.5,
-   "color": 2900,
+   "irradiance": 0.25,
+   "color": 2700,
    "camera": false,
    "receivers": [
     "left#1",
@@ -964,8 +964,8 @@
     1.9,
     0.8
    ],
-   "power_w": 55.0,
-   "cone_deg": 22.0,
+   "power_w": 70.0,
+   "cone_deg": 14.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500,
@@ -983,8 +983,8 @@
     4.199999999999999,
     0.8
    ],
-   "power_w": 55.0,
-   "cone_deg": 22.0,
+   "power_w": 70.0,
+   "cone_deg": 14.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500,
