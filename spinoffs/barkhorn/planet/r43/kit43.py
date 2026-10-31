@@ -161,14 +161,14 @@ def popup(bpy, name, p, kit):
     sf = Mesh('popup-storefront'); gl = Mesh('popup-glass')
     head, tr = 3.05, H
     d0, d1 = Q.DOOR['y0'], Q.DOOR['y0'] + Q.DOOR['w']
-    for (a, b) in ((-T, 0.04), (d0 - 0.05, d0), (d1, d1 + 0.05), (W - 0.04, W + T), (2.85, 2.93)):
+    for (a, b) in ((-T, 0.04), (d0 - 0.05, d0), (d1, d1 + 0.05), (W - 0.04, W + T)):
         sf.box(-0.12, a, 0.0, 0.0, b, tr)                                # the mullions
     sf.box(-0.12, -T, 0.0, 0.0, d0, 0.30)                                # the bulkhead
     sf.box(-0.12, d1, 0.0, 0.0, W + T, 0.30)
     sf.box(-0.14, -T, head - 0.04, 0.0, W + T, head + 0.04)              # the transom bar
     sf.box(-0.12, d0, 2.30, 0.0, d1, head)                               # the door's head
     objs.append(sf.object(bpy, K.blackened_steel(bpy), bevel=0.003))
-    for (a, b, z0, z1) in ((0.04, 2.85, 0.30, head - 0.04), (2.93, d0 - 0.05, 0.30, head - 0.04),
+    for (a, b, z0, z1) in ((0.04, d0 - 0.05, 0.30, head - 0.04),
                            (d1 + 0.05, W - 0.04, 0.30, head - 0.04), (0.04, W - 0.04, head + 0.04, tr - 0.02)):
         gl.box(-0.07, a, z0, -0.06, b, z1)
     if not p.get('no_glass'):

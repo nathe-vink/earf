@@ -28,10 +28,17 @@ VIEWS = {
     # the camera moved to the left of the door, looking across the room to the right wall, the bar and the drapes
     'shop': dict(camera={'position': [0.50, 5.30, 1.55], 'target': [9.0, 1.9, 1.25], 'lens_mm': 24, 'level': True,
                          'fstop': 4.0, 'focus': [3.5, 2.0, 1.1]}, exposure=4.2),
-    'window': dict(camera={'position': [-5.2, 1.4, 1.55], 'target': [2.4, 3.3, 1.55], 'lens_mm': 35, 'level': True,
-                           'fstop': 5.6, 'focus': [0.7, 2.9, 1.0]}, exposure=4.0),
-    'listening': dict(camera={'position': [9.95, 1.45, 1.30], 'target': [13.2, 4.1, 1.00], 'lens_mm': 24, 'level': True,
-                              'fstop': 4.0, 'focus': [12.0, 3.8, 0.8]}, exposure=4.4),
+    # p0 look: the opposite building's windows and lit shop mirrored in the glass as white squares and a blue band, the
+    # sidewalk hot, a mullion down the middle: the facade dimmed, the glass a softer reflector, one pane, the street lamp down
+    'window': dict(camera={'position': [-5.6, 1.9, 1.50], 'target': [2.4, 3.1, 1.45], 'lens_mm': 35, 'level': True,
+                           'fstop': 5.6, 'focus': [0.7, 2.9, 1.0]}, exposure=4.0,
+                   room={'windows_lit': 0.2, 'window_glow': 0.4, 'opp_shop_glow': 0.05, 'glass_gloss': 0.35},
+                   lights={'street': {'irradiance': 0.35}}),
+    # p0 look: too dark, the left stack out of frame: the camera back by the drape's opening, both stacks in; the
+    # stacks' spots, the seats' light and the exposure up
+    'listening': dict(camera={'position': [10.0, 2.6, 1.35], 'target': [13.3, 3.4, 1.00], 'lens_mm': 24, 'level': True,
+                              'fstop': 4.0, 'focus': [12.6, 3.4, 0.8]}, exposure=5.0,
+                      lights={'stack': {'power_w': 90.0}, 'seats': {'power_w': 30.0}}),
 }
 
 
@@ -123,6 +130,8 @@ def shot(view):
     s['haze']['box_m'] = [0.05, 0.05, 0.01, Q.L - 0.05, Q.W - 0.05, H - 0.05]
     s['render']['exposure'] = v.get('exposure', 3.4)
     s['render'].update(v.get('render', {}))
+    if v.get('room'):
+        props[0].update(v['room'])
     for pre, kv in v.get('lights', {}).items():
         for name, L in s['lights'].items():
             if name.startswith(pre):
