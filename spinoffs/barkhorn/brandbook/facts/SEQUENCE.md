@@ -4,7 +4,8 @@ Brand lane, r47, 31 October 2026. **A plan, not a booking; nothing is sent, book
 
 **The owner chose C (2026-10-31): the debut moves to spring 2027.** Date and venue are the owner's next question
 (r46-owner-notes b3211a43). FOG week stays useful for meeting galleries, without a show. The two candidates sequenced
-here are **Thu 25 March** and **Thu 29 April 2027**, both in San Francisco.
+here are **Thu 18 March** and **Thu 29 April 2027**, both in San Francisco. (25 March was dropped: it's the Thursday
+before Easter, 28 March 2027, when many people travel.)
 
 **Markers:**
 - **(est.)** marks a guess.
@@ -37,7 +38,7 @@ here are **Thu 25 March** and **Thu 29 April 2027**, both in San Francisco.
 - **Kickstarter allows no photorealistic renders** (`kickstarter/README.md`, the hardware rules, read 31 Oct 2026). So
   nothing public for the campaign starts until the studio photographs exist.
 
-## Option A: debut Thursday 25 March 2027
+## Option A: debut Thursday 18 March 2027
 
 | When | What | Note |
 |---|---|---|
@@ -47,16 +48,16 @@ here are **Thu 25 March** and **Thu 29 April 2027**, both in San Francisco.
 | By 8 Feb | Decide Milan: the Fuorisalone package, or visit only (est.: visit only; no money for a stand) | |
 | **Mon 15 – Fri 19 Feb** | **The studio shoot** (and the Kickstarter film, same week) | `photo/PRODUCT-SHOOT.md`, `kickstarter/FILM.md` |
 | By 1 Mar | **The Kickstarter pre-launch page and the waiting list open**, with the studio photographs. **Embargoed print pitches** go out (Wallpaper\* exclusive; Monocle, Dwell, Sunset), lifting at the debut | `press/releases/PITCHES-PRINT.md` |
-| Early Mar | Invitations out (about 3 weeks ahead); the alcohol permit, if at Fort Mason (6 weeks ahead: by **11 Feb**) | `photo/RUN-OF-SHOW.md` |
-| **Thu 25 Mar** | **The debut**, with **Session 00** opening it (recorded) | The Thursday before Easter: some guests away (est.) |
-| **Fri 26 Mar** | **The press release** and the online lift (the media plan's 22–29 March window), with the studio photographs and the night's | `press/releases/RELEASE-MARCH.md` |
+| By 25 Feb | Invitations out (about 3 weeks ahead); the alcohol permit, if at Fort Mason (6 weeks ahead: by **4 Feb**) | `photo/RUN-OF-SHOW.md` |
+| **Thu 18 Mar** | **The debut**, with **Session 00** opening it (recorded) | Four weeks after the shoot |
+| **Fri 19 Mar** (or Mon 22 Mar) | **The press release** and the online lift, with the studio photographs and the night's. The media plan's window was 22–29 March: lift on the morning after the debut, or hold to Monday 22 March to stay inside it (one embargo time either way) | `press/releases/RELEASE-MARCH.md` |
 | Late Mar | **Partner packs** go: Klipsch (for Milan), Ace; Pro-Ject a little later (for Vienna) | `partners/` |
 | From the debut | **The waiting list**, and the Tropos first-run programme once counsel has set it: **no deposits before counsel and a company** | `money/founding-terms.html` |
-| Mid-Apr | Session 00's master to the plant (3 weeks after the night) | `sessions/README.md` |
+| About 8 Apr | Session 00's master to the plant (3 weeks after the night) | `sessions/README.md` |
 | 12–18 Apr | Milan: meet Klipsch if it answered; Euroluce for the lamp makers | |
-| **Tue 27 Apr – Thu 27 May** | **The Kickstarter**: the lamps. **27 April still works** (ten weeks after the photographs, four after the debut's press) | `kickstarter/README.md` |
+| **Tue 27 Apr – Thu 27 May** | **The Kickstarter**: the lamps. **27 April still works** (ten weeks after the photographs, about five and a half after the debut's press) | `kickstarter/README.md` |
 | 6–9 May | **HIGH END Vienna**, in the middle of the campaign; Pro-Ject | |
-| Jun–Jul (est.) | Session 00's records (a fast plant about 8 weeks; URP's "allow four months" would mean August) | `sessions/QUOTES.md` |
+| Jun (est.) | Session 00's records (a fast plant about 8 weeks; URP's "allow four months" would mean early August) | `sessions/QUOTES.md` |
 
 ## Option B: debut Thursday 29 April 2027
 
@@ -101,19 +102,15 @@ here are **Thu 25 March** and **Thu 29 April 2027**, both in San Francisco.
 
 ## Recommendation
 
-**Thursday 25 March.**
-- **The press:** it lands the debut, the photographs and the release in the media plan's own online window (22–29
-  March).
-- **Milan and Vienna:** the partner packs go out with real pictures before Milan, and Vienna sits in the Kickstarter's
-  middle week.
-- **The Kickstarter:** it keeps 27 April, a month after the debut's press, so the campaign opens on coverage rather
+**Thursday 18 March.**
+- **The press:** the debut, the photographs and the release land together, the morning after the night or at the
+  start of the media plan's 22–29 March window.
+- **Milan and Vienna:** the partner packs go out with real pictures a month before Milan, and Vienna sits in the
+  Kickstarter's middle week.
+- **The Kickstarter:** it keeps 27 April, five weeks after the debut's press, so the campaign opens on coverage rather
   than ahead of it.
-- **The schedule:** it still leaves about five weeks between the mid-February shoot and the night.
+- **Easter and the schedule:** it avoids Easter week, and leaves four weeks between the mid-February shoot and the night.
 
-**The risks:**
-- It's the Thursday before Easter, so some guests will be away. If that matters, **Tuesday 23 or Wednesday 24 March**
-  keeps every other date.
-- The pair must be playing and measured by mid-March.
-
-29 April buys a month of build time. But it stacks the debut, a re-dated Kickstarter, Vienna and the press into one
-fortnight, and it misses the planned press window. Choose it only if the Tropos pair slips past February.
+**The risk:** the Tropos pair must be playing by the shoot (mid-February) and measured by early March. If the pair slips
+past February, 29 April buys a month. But it stacks the debut, a re-dated Kickstarter (11 May – 10 June), Vienna and
+the press into one fortnight, and it misses the planned press window.

@@ -48,7 +48,7 @@ Eight, in this order, numbered 01–08:
 
 | Date | What | Status | Source |
 |---|---|---|---|
-| **Spring 2027** | **The debut night: date and venue to be set** (the owner chose C, 2026-10-31). The candidates being sequenced are Thu 25 March and Thu 29 April (`SEQUENCE.md`). It was Tue 19 January; every brand file still says so (`CONTRADICTIONS.md`, row 0) | **owner-pending** | owner r46-owner-notes b3211a43 |
+| **Spring 2027** | **The debut night: date and venue to be set** (the owner chose C, 2026-10-31). The candidates being sequenced are Thu 18 March and Thu 29 April (`SEQUENCE.md`; 25 March dropped: the Thursday before Easter). It was Tue 19 January; every brand file still says so (`CONTRADICTIONS.md`, row 0) | **owner-pending** | owner r46-owner-notes b3211a43 |
 | 16–24 Jan | SF Art Week | fixed | owner R5 |
 | 20 Jan / **21–24 Jan** | FOG Design+Art: its gala / the fair, at Fort Mason. Now for meetings with galleries, **without a show** | fixed | owner R5; bar `research-popup.md:144`; owner b3211a43 |
 | Week of 2 Nov 2026 | Quote requests sent | planned | lamps `first-articles.md`; horn `make/schedule.md:32` |
