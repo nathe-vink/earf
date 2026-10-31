@@ -1,0 +1,88 @@
+<!doctype html><meta charset="utf-8"><title>EARF · The Founding Hundred (mockup)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+/* A MOCKUP of a reservation page for the Founding Hundred, for the brand book only: not on the site, takes nothing.
+   Terms follow the funding research (r46-owner-notes, research/2026-10-31/R2-funding.md §4.4): a refundable reservation
+   for a planned product under the FTC's "dry-testing" conditions, California's disclosures before payment (B&P §17538),
+   no non-refundable deposit (Civil Code §1671). The FCC notice is the one the rules ask of an unauthorised device shown
+   before authorisation (47 CFR §2.803); counsel confirms every word before anything goes live */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400..700&display=block');
+:root { --page: #F4F1EC; --paper: #ECE8E1; --ink: #1C1A18; --muted: #5E5A53; --rule: #D6D0C6; --warn: #E9B320;
+  --sans: 'Instrument Sans', 'Helvetica Neue', Arial, sans-serif; --mono: 'IBM Plex Mono', 'Courier New', monospace }
+* { box-sizing: border-box }
+body { margin: 0; background: var(--page); color: var(--ink); font: 400 16px/1.55 var(--sans) }
+.mock { background: var(--ink); color: var(--page); font: 500 11px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; text-align: center; padding: 9px }
+header { display: flex; justify-content: space-between; align-items: center; padding: 18px 48px; border-bottom: 1px solid var(--rule) }
+header img { height: 20px }
+header nav { font: 500 11px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); display: flex; gap: 22px }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 44px 48px 64px; display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px }
+.k { font: 500 11px/1.4 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--muted) }
+h1 { margin: 10px 0 14px; font-size: 54px; line-height: .98; letter-spacing: -.035em; font-weight: 600 }
+.lede { font-size: 19px; line-height: 1.45; margin: 0 0 22px; max-width: 34em }
+.pic { border-radius: 3px; overflow: hidden; background: var(--paper); height: 300px }
+.pic img { width: 100%; height: 100%; object-fit: cover }
+.cap { font-size: 12.5px; color: var(--muted); margin-top: 6px }
+.fcc { margin: 22px 0 0; border: 1.5px solid var(--ink); border-left: 6px solid var(--warn); padding: 14px 16px; font-size: 13.5px; line-height: 1.5; background: #FBF8F1 }
+.fcc b { display: block; font: 500 11px/1.4 var(--mono); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 6px }
+ul.gets { margin: 6px 0 0; padding-left: 18px; display: grid; gap: 6px }
+.steps { margin: 18px 0 0; display: grid; gap: 0; border-top: 1px solid var(--rule) }
+.steps div { display: grid; grid-template-columns: 26px 1fr auto; gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--rule); font-size: 14.5px; align-items: baseline }
+.steps i { font: 500 12px/1 var(--mono); font-style: normal } .steps span:last-child { font-family: var(--mono); font-size: 13px }
+form { align-self: start; background: #FBFAF7; border: 1px solid var(--rule); border-radius: 4px; padding: 26px; display: grid; gap: 14px; align-content: start }
+label { display: grid; gap: 5px; font: 500 11px/1.4 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted) }
+input[type=text], input[type=email] { font: 400 15px var(--sans); padding: 11px 12px; border: 1px solid var(--rule); border-radius: 2px; background: #fff; color: var(--ink) }
+.tints { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px }
+.tints span { aspect-ratio: 1 / 1.6; border-radius: 2px; position: relative }
+.tints span.on { outline: 2px solid var(--ink); outline-offset: 2px }
+.tints small { display: block; text-align: center; font: 500 9px/1.3 var(--mono); color: var(--muted); margin-top: 4px; letter-spacing: .04em }
+.price { display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid var(--rule); padding-top: 12px; font-size: 14.5px }
+.price b { font-family: var(--mono); font-weight: 500 }
+.check { display: grid; grid-template-columns: 18px 1fr; gap: 10px; font: 400 13.5px/1.45 var(--sans); text-transform: none; letter-spacing: 0; color: var(--ink) }
+.check input { margin-top: 3px }
+button { font: 500 13px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; padding: 15px; border: 0; border-radius: 2px; background: var(--ink); color: var(--page) }
+.fine { font-size: 12px; line-height: 1.5; color: var(--muted) }
+footer { border-top: 1px solid var(--rule); padding: 18px 48px 26px; display: flex; justify-content: space-between; gap: 30px; font-size: 12px; color: var(--muted) }
+.strip { height: 5px; display: flex } .strip i { flex: 1 }
+</style>
+<div class="mock">Mockup for review · not live · takes no payment · every word to be confirmed by counsel</div>
+<header><img src="../../brand/mark/earf-wordmark-black.svg" alt="EARF"><nav><span>Speakers</span><span>Lighting</span><span>Turntable</span><span>Colours</span><span style="color:var(--ink)">The Founding Hundred</span></nav></header>
+<div class="wrap">
+  <div>
+    <span class="k">The Founding Hundred · Tropos</span>
+    <h1>Reserve one of the first hundred pairs.</h1>
+    <p class="lede">The first hundred pairs of Tropos, numbered on both rating plates and kept on a register at Planet EARF. The number is the reward: the price is the launch price.</p>
+    <div class="pic"><img src="../../site/img/hero-1200.jpg" alt="The eight Tropos speakers in a row, Ember to Smoke"></div>
+    <p class="cap">The eight colours of Tropos. A render: no Tropos has been built yet.</p>
+    <div class="fcc"><b>A prototype, not yet authorised</b>Tropos is a planned product, in development. It has not been built in production or tested, and this device has not been authorized as required by the rules of the Federal Communications Commission. This device is not, and may not be, offered for sale or lease, or sold or leased, until authorization is obtained. A reservation is not a purchase.</div>
+    <h2 style="font-size:20px;letter-spacing:-.01em;margin:30px 0 4px">What a reservation holds</h2>
+    <ul class="gets">
+      <li>A place among the first hundred pairs, in the order reserved, in the colour you choose (you can change it until you order)</li>
+      <li>Once ordered and made: FOUNDING 037 / 100, laser-marked on both rating plates, a numbered certificate, and the pair on the register</li>
+      <li>A seat at the first Session, and an EARFcoin for life</li>
+    </ul>
+    <div class="steps">
+      <div><i>1</i><span><b>Now: a reservation.</b> Refundable in full, at any time, for any reason. No ship date yet.</span><span>[RESERVATION]</span></div>
+      <div><i>2</i><span><b>When the first pair has been built and heard: an order.</b> We write to you with a delivery window that has a reasonable basis. You choose to order, with a deposit, or to take your reservation back.</span><span>30–50% of [PAIR PRICE]</span></div>
+      <div><i>3</i><span><b>Before it ships: the balance.</b></span><span>[BALANCE]</span></div>
+    </div>
+  </div>
+  <form onsubmit="return false" aria-label="Reservation form, a mockup">
+    <span class="k">Your reservation</span>
+    <label for="n">Name<input id="n" type="text" value="[Name]" disabled></label>
+    <label for="e">Email<input id="e" type="email" value="[email]" disabled></label>
+    <label>Colour
+      <div class="tints">
+        <div><span class="" style="background:#C92118;display:block"></span><small>01</small></div><div><span style="background:#E06718;display:block"></span><small>02</small></div>
+        <div><span style="background:#E2AA15;display:block"></span><small>03</small></div><div><span class="on" style="background:#367424;display:block"></span><small>04</small></div>
+        <div><span style="background:#2584BE;display:block"></span><small>05</small></div><div><span style="background:#5B3197;display:block"></span><small>06</small></div>
+        <div><span style="background:#D5DFE0;display:block"></span><small>07</small></div><div><span style="background:#57545F;display:block"></span><small>08</small></div>
+      </div><span style="text-transform:none;letter-spacing:0;font:400 13px var(--sans);color:var(--ink)">04 Poison. Bottle green. Keep out of reach.</span></label>
+    <div class="price"><span>Tropos, a pair, at launch</span><b>[PAIR PRICE]</b></div>
+    <div class="price" style="border:0;padding-top:0"><span>Reserve today, refundable</span><b>[RESERVATION]</b></div>
+    <label class="check"><input type="checkbox" disabled><span>I understand that Tropos is a planned product, not yet built or authorised, with no ship date; that this reservation is not a purchase; and that I can cancel it and be refunded in full, at any time, within seven working days.</span></label>
+    <button type="button" disabled>Reserve, refundable</button>
+    <p class="fine">Reservations are held in a separate account and spent on nothing until you order. Before you pay: our refund policy (in full, any time, until you order), our legal name, [LEGAL NAME], and our street address, [STREET ADDRESS], San Francisco. If you order and we can't meet the delivery window we gave, we tell you before it passes and you can cancel for a full refund.</p>
+  </form>
+</div>
+<footer><span>EARF · San Francisco · hello@earf.world</span><span>Terms of reservation · Refund policy · Privacy · [links]</span></footer>
+<div class="strip"><i style="background:#C92118"></i><i style="background:#E06718"></i><i style="background:#E2AA15"></i><i style="background:#367424"></i><i style="background:#2584BE"></i><i style="background:#5B3197"></i><i style="background:#D5DFE0"></i><i style="background:#57545F"></i></div>
