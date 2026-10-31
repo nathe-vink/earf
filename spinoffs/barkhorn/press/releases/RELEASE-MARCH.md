@@ -22,8 +22,9 @@ order in San Francisco [OWNER: confirm "in San Francisco" once the shops are cho
 
 **Tropos** is a powered horn loudspeaker, 1.3 m tall:
 - **The cabinet** is 20 mm cast acrylic, coloured through.
-- **The horn** is formed from the same tinted sheet. [IF THE OWNER CHOOSES THE STACKED HORN: The horn is built up from
-  [14–22] layers of the cabinet's tinted acrylic, stacked and shaped, so its edges read like strata in a cliff face.]
+- **The horn** is made from the cabinet's own tinted acrylic. The first pair's horn is built up from 22 layers of
+  tinted sheet, stacked and shaped, so its edges read like strata in a cliff face. [OWNER: say whether production keeps
+  the stacked horn or forms it over a tool; until then, describe only the first pair's.]
 - **Above 1 kHz** a 2-inch compression driver plays through the horn; **below**, a 15-inch woofer. Each has its own
   channel of the amplifier inside.
 - **A lamp underneath** fills the whole cabinet with colour.
@@ -53,9 +54,9 @@ Each product is named for a layer of the Earth.
 - Made to order, in eight colours.
 - **Tropos:** [PRICE] a pair. **Mantle:** [PRICE]. **Hemisphere:** [PRICE]. **Core:** [PRICE].
 - **The lamps** are on Kickstarter from [DATE] [only if the campaign is confirmed].
-- **The Founding Hundred:** the first hundred pairs of Tropos are numbered and reserved with a refundable deposit
-  [COUNSEL: the deposit's size, refund terms and the required California disclosures, per
-  `money/founding-terms.html`, before this sentence is used].
+- **The Founding Hundred:** the first hundred pairs of Tropos are numbered [OWNER and COUNSEL: the site's draft says
+  "no money changes hands" and the number is the reward; the money pack drafts a refundable deposit; R4 proposes a
+  Founders' Edition of 8 pairs. Pick one before this line is used].
 - Delivery estimates at earf.world. [COUNSEL: any delivery date stated needs a reasonable basis under the FTC's Mail
   Order Rule.]
 
@@ -81,4 +82,4 @@ Each piece is made to order. earf.world
   in April carries the measurements.
 - **Sustainability:** no claims (the owner's rule, `launch/held-back.md`).
 - **Renders:** none in the pack. If one must appear, its caption reads "Render".
-- **The stacked horn** is a choice the owner hasn't made (`r33-speaker-horn`); the bracket comes out, or in, with it.
+- **The horn:** the first pair's is laminated (22 layers, `r33-speaker-horn` make/schedule.md); production's route is the owner's call (`FACTS.md`).

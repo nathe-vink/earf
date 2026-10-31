@@ -104,7 +104,7 @@ Your designers' work with resin and cast material is why I'm writing: what I mak
 point.
 
 I'm [Your name]. EARF, in San Francisco, makes hi-fi and light in cast acrylic tinted all the way through, in eight
-colours. The first pair of our horn loudspeaker, its horn formed from the same tinted sheet as its cabinet, plays for
+colours. The first pair of our horn loudspeaker, its horn built from the same tinted sheet as its cabinet, plays for
 the first time on Tuesday 19 January, at a debut night in FOG week. If you are in San Francisco
 for the fair, I'd love you to come.
 

@@ -26,8 +26,8 @@ first look has been offered elsewhere.
 > Dear Rosa,
 >
 > EARF makes a horn loudspeaker, two lamps and a record player in cast acrylic tinted all the way through, in the same
-> eight colours, from Ember to Smoke, so a room can be one colour or three. The horn is formed from the cabinet's own
-> tinted sheet. A lamp underneath fills the whole speaker with colour.
+> eight colours, from Ember to Smoke, so a room can be one colour or three. The horn is built from the cabinet's own
+> tinted sheet, 22 layers deep. A lamp underneath fills the whole speaker with colour.
 >
 > The first pair played in San Francisco on 19 January, during FOG week. We'd like Wallpaper\* to have the first look,
 > exclusively in print, ahead of our announcement on [DATE]. Photographs of the prototypes, the eight colours as cast
