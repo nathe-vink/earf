@@ -152,11 +152,14 @@ def core_bedside():
     # reflection-only card on the base; c6 a cool rim on the clear shell. c4 (modelled books) and c5 (a glass) are
     # props this set lacks: the glass was taken out after it rendered as a blur
     s['lights']['basecard'] = {'type': 'panel', 'size_m': [0.25, 0.1], 'position': [-0.95, 2.35, 0.6],
-                               'target': [-0.64, 2.86, 0.565], 'strength': 0.2, 'color': '#FFB08A',
+                               'target': [-0.64, 2.86, 0.565], 'strength': 0.8, 'color': '#FFB08A',
                                'ramp': {'axis': 'x', 'at_m': [-1.07, -0.83], 'values': [0, 1]}}
     s['lights']['rimcard'] = {'type': 'panel', 'size_m': [0.15, 0.5], 'position': [-0.95, 3.15, 0.75],
                               'target': [-0.64, 2.86, 0.66], 'strength': 0.3, 'color': '#C8D4F0',
                               'ramp': {'axis': 'z', 'at_m': [0.55, 0.95], 'values': [0.2, 1.0]}}
+    # critic r2 (5.8): c1/c2 the up-light behind the ball and compact, so the wall takes a halo (the ball lit nothing);
+    # c3 the base's card 0.2 to 0.8. c4 a glass, c5 modelled books: props the set lacks
+    s['lights']['coreup'].update(position=[-0.64, 3.0, 0.7], radius_m=0.035)
     return s
 
 
