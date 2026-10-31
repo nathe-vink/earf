@@ -14,13 +14,13 @@
    0.0,
    0.09
   ],
-  "lens_mm": 100,
+  "lens_mm": 80,
   "level": false,
-  "fstop": 5.6,
+  "fstop": 13,
   "focus": [
    0.0,
-   -0.06,
-   0.08
+   -0.045,
+   0.095
   ]
  },
  "set": {
@@ -58,7 +58,7 @@
   "zenith": "#D8D2C8",
   "horizon": "#DED8CE",
   "ground": "#D6CEC2",
-  "strength": 0.35
+  "strength": 0.12
  },
  "lights": {
   "key": {
@@ -77,7 +77,7 @@
     0.0,
     0.148
    ],
-   "irradiance": 0.6,
+   "irradiance": 0.3,
    "color": 4300
   },
   "fill": {
@@ -168,6 +168,36 @@
    "camera": false,
    "transmission": false,
    "specular": 0.0
+  },
+  "basestrip": {
+   "type": "panel",
+   "size_m": [
+    0.08,
+    0.3
+   ],
+   "position": [
+    -0.22,
+    -0.3,
+    0.07
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.06
+   ],
+   "strength": 4.0,
+   "color": "#FFFFFF",
+   "ramp": {
+    "axis": "z",
+    "at_m": [
+     -0.049999999999999996,
+     0.2
+    ],
+    "values": [
+     0.2,
+     1.0
+    ]
+   }
   }
  },
  "render": {
@@ -178,7 +208,7 @@
   "bounces": 24,
   "transmission_bounces": 20,
   "view": "Khronos PBR Neutral",
-  "exposure": 0.15,
+  "exposure": -0.2,
   "white_balance_k": 4300
  },
  "title": "Core in Ember, its base close (the campaign)",
