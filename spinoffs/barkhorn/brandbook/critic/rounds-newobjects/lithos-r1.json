@@ -1,0 +1,3 @@
+{"stage1": {"score": 5.0}, "verdict": "iterate", "score_if_fixed": 7.5,
+ "changes": ["c1 harder window 0.6 x 0.9 m, 900 W, behind-left, a cast shadow", "c2 oak planks with grain and seams", "c3 the room corner behind-right, skirting", "c4 fill to 15 W, plaster tooth, wall at #DCD5CA", "c5 back light 0.5 x 1.5 m, 120 W, through the bands", "c6 real hardbacks", "c7 50 mm f/4", "c8 grade with vignette and grain"],
+ "accept": [{"id":"c2","region":[0,1600,1200,1800],"metric":"lum_range","op":">","value":40},{"id":"c4","region":[100,100,400,600],"metric":"delta_e","hex":"#DCD5CA","op":"<","value":3.0},{"id":"c5","region":[485,950,570,1050],"metric":"lum_median","op":">","value":75}]}

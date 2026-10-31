@@ -281,9 +281,14 @@ def shot_moho(sc):
 
 def shot_lithos(sc):
     # a room corner: oak floor, two plaster walls, a stack of books for scale, window light from the left
-    slab('floor', -1.5, -2.5, -0.03, 1.5, 0.8, 0.0, basic('oak', '#9A7650', 0.5, noise=0.04))
-    slab('wallB', -1.5, 0.8, 0, 1.5, 0.85, 3, basic('plaster', '#DCD5CA', 0.9, noise=0.1))
-    slab('wallL', -1.55, -2.5, 0, -1.5, 0.85, 3, basic('plaster2', '#DCD5CA', 0.9, noise=0.1))
+    # critic r1: oak planks and lime plaster from the studio engine; the corner behind and right of the lamp; skirting
+    sys.path.insert(0, os.path.join(HERE, '..', '..', '..', '..', 'studio', 'engine')); import materials as SM
+    slab('floor', -3.0, -3.0, -0.03, 0.95, 0.8, 0.0, SM.make(bpy, 'oak', 'oak'))
+    plaster = SM.make(bpy, 'plaster', 'plaster', {'color': '#DCD5CA'})
+    slab('wallB', -3.0, 0.8, 0, 0.95, 0.85, 3, plaster)
+    slab('wallR', 0.9, -3.0, 0, 0.95, 0.85, 3, plaster)
+    skirt = basic('skirting', '#E9E5DD', 0.35)
+    slab('skirtB', -3.0, 0.785, 0, 0.9, 0.8, 0.07, skirt); slab('skirtR', 0.885, -3.0, 0, 0.9, 0.785, 0.07, skirt)
     ring('base', 0.16, 0, 0, 0.02, basic('steel-black', '#1B1A1C', 0.35, 0.8))
     counts = [11, 8, 12, 9, 16, 7, 14, 10]
     tints = ['smoke-pour', 'haze-pour', 'ice-pour', 'poison-pour', 'acid-pour', 'dust-pour', 'clear', 'ember-pour']   # bottom to top
@@ -305,14 +310,21 @@ def shot_lithos(sc):
     for i, gz in enumerate(guides):
         ring(f'slot{i}', 0.0372, 0.0368, gz + 0.0006, 0.0044, emitter(f'slot{i}', '#FFB46E', 220))
     ring('uplight', 0.03, 0, top - 0.004, 0.002, emitter('up', '#FFD2A0', 80))
-    for i, (w, d, h, c) in enumerate([(0.24, 0.17, 0.035, '#3E4A5A'), (0.22, 0.16, 0.03, '#C8BBA4'), (0.2, 0.15, 0.028, '#7A2E25'), (0.19, 0.13, 0.025, '#2E2B28')]):
-        zb = sum(x[2] for x in [(0.24, 0.17, 0.035), (0.22, 0.16, 0.03), (0.2, 0.15, 0.028), (0.19, 0.13, 0.025)][:i])
-        o = slab(f'book{i}', -w / 2, -d / 2, zb, w / 2, d / 2, zb + h, basic(f'bk{i}', c, 0.7))
-        o.location = (0.34, -0.12, 0); o.rotation_euler = (0, 0, 0.3 + 0.08 * i)
+    pages = basic('pages', '#EDE6D6', 0.85, noise=0.02)
+    books = [(0.24, 0.17, 0.035, '#3E4A5A'), (0.22, 0.16, 0.03, '#C8BBA4'), (0.2, 0.15, 0.028, '#7A2E25'), (0.19, 0.13, 0.025, '#2E2B28')]
+    for i, (w, d, h, c) in enumerate(books):   # hardbacks: two boards and a spine in cloth, the page block set back 3 mm
+        zb = sum(x[2] for x in books[:i]); cl = basic(f'bk{i}', c, 0.8, noise=0.03); t = 0.0025
+        parts = [slab(f'b{i}lo', -w / 2, -d / 2, zb, w / 2, d / 2, zb + t, cl), slab(f'b{i}hi', -w / 2, -d / 2, zb + h - t, w / 2, d / 2, zb + h, cl),
+                 slab(f'b{i}sp', -w / 2, -d / 2, zb + t, -w / 2 + t, d / 2, zb + h - t, cl),
+                 slab(f'b{i}pg', -w / 2 + t, -d / 2 + 0.003, zb + t + 0.0003, w / 2 - 0.003, d / 2 - 0.003, zb + h - t - 0.0003, pages)]
+        for o in parts:
+            o.location = (0.34, -0.12, 0); o.rotation_euler = (0, 0, 0.3 + 0.08 * i)
     sc.render.resolution_x, sc.render.resolution_y = 1200, 1800
-    area('window', (-1.45, -0.6, 1.5), (0.0, 0.0, 0.6), 1.4, 420, '#FFF1E2', size_y=1.0)
-    area('fill', (1.2, -2.2, 1.0), (0, 0, 0.6), 1.2, 40, '#DDE6F2')
-    camera((0.75, -2.05, 0.85), (0.08, 0, 0.6), lens=42, fstop=0)
+    area('window', (-3.2, 0.55, 1.55), (0.0, 0.0, 0.5), 0.6, 900, '#FFF1E2', size_y=0.9)   # critic r1 c1: smaller, harder, behind-left
+    area('fill', (0.6, -2.4, 1.0), (0, 0, 0.6), 1.2, 15, '#DDE6F2')                        # c4: down, so the wall sits at its tone
+    back = area('back', (0.12, 0.7, 0.75), (0, 0, 0.75), 0.5, 120, '#FFF0E0', size_y=1.5)  # c5: through the bands toward the lens
+    back.visible_glossy = False
+    camera((-0.30, -2.10, 0.80), (0.12, 0.0, 0.62), lens=50, fstop=4.0, focus=2.15)          # c3, c7: the corner behind-right
 
 def shot_ionos(sc):
     sc.world.node_tree.nodes['Background'].inputs['Color'].default_value = lin('#D9D3CA')
