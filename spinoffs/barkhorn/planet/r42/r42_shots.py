@@ -19,7 +19,7 @@ VIEWS = {
     'counter': dict(camera={'position': [10.35, 2.55, 1.42], 'target': [4.6, 4.55, 1.30], 'lens_mm': 32, 'level': True,
                             'fstop': 4.0, 'focus': [7.3, 4.1, 1.15]}, exposure=4.0),
     # the listening corner: the altar, the pair, the tub chairs and their Cores
-    'listening': dict(camera={'position': [11.95, 2.55, 1.32], 'target': [16.5, 3.15, 1.10], 'lens_mm': 28, 'level': True,
+    'listening': dict(camera={'position': [11.25, 2.70, 1.30], 'target': [16.5, 3.05, 1.00], 'lens_mm': 26, 'level': True,
                               'fstop': 4.0, 'focus': [16.0, 3.0, 1.0]}, exposure=4.8),
     # the room at night from the back, the line playing: past the tubs to the counter, the globe and the street
     'night': dict(camera={'position': [14.9, 3.35, 1.68], 'target': [2.0, 2.7, 1.40], 'lens_mm': 28, 'level': True,

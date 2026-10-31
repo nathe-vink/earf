@@ -73,7 +73,7 @@ BANQ_CHAIR_Y = 2.12
 COMMUNAL = dict(x0=9.60, x1=13.20, y0=4.15, y1=5.15, h=0.74)   # under Mother EARF
 COMMUNAL_CHAIRS = [round(9.90 + 0.60 * i, 3) for i in range(6)]
 COMMUNAL_CHAIR_Y = (3.62, 5.68)
-MOTHER = dict(x=11.40, y=4.65, d=1.00, z=2.55)                 # the globe's centre; its spot on the table
+MOTHER = dict(x=11.40, y=4.65, d=1.25, z=2.60)                 # the globe's centre; its spot on the table
 
 # --- 3. the selector's booth and the record wall --------------------------------------------------------------------
 PARTITION = dict(x0=16.00, x1=16.30, y0=4.30, y1=W)            # the listening room's front wall: double stud, decoupled
