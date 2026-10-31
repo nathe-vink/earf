@@ -191,9 +191,10 @@ def mantle_credenza():
     s = bare_room(wall='#857B6C')
     cx, cy, cz = CRED
     mx = cx - 0.45
-    s['set']['props'] = credenza_props() + record(mx, cy, cz)
+    # critic r1 (5.0): c7 the cut picture frame out; c1 the glow 2.5 (5 clipped pink-white)
+    s['set']['props'] = [p for p in credenza_props() if p.get('kind') != 'frame'] + record(mx, cy, cz)
     s['product'] = mantle_product(mx, cy - 0.02, cz)
-    s['materials'] = {'glow': {'strength': 5.0}}
+    s['materials'] = {'glow': {'strength': 2.5}}
     s['set']['windows'] = [{'wall': 'left', 'along': 0.6, 'sill': 0.6, 'size': [1.4, 1.8], 'mullions': [2, 1],
                             'frame': '#2A2724'}]
     s['sky'] = {'kind': 'hdri', 'polyhaven': 'twilight_sunset', 'rotation_deg': 250.0, 'strength': 0.03, 'res': '4k'}
@@ -203,13 +204,18 @@ def mantle_credenza():
         'sconce': {'type': 'point', 'position': [1.6, 3.0, 1.7], 'power_w': 0.18, 'radius_m': 0.03, 'color': 2400,
                    'camera': False},
         'fill': {'type': 'area', 'size_m': [2.0, 1.0], 'position': [0.4, -0.8, 1.6], 'target': [mx, cy, cz],
-                 'power_w': round(120 / HB.LM_PER_W, 4), 'color': 3400, 'camera': False, 'specular': 0.3},
+                 'power_w': 0.45, 'color': 3400, 'camera': False, 'specular': 0.3},            # c2: the plinth reads
+        'records': {'type': 'area', 'size_m': [0.5, 0.5], 'position': [1.3, 1.9, 1.3],             # c4: the sleeves lit
+                    'target': [cx + 0.62, cy, cz + 0.17], 'power_w': 0.12, 'color': 2900, 'camera': False},
+        'lidpanel': {'type': 'area', 'size_m': [0.8, 0.4], 'position': [-0.82, 1.73, 1.47],       # c6: the lid reads clear
+                     'target': [mx, 3.0, 1.0], 'irradiance': 0.6, 'color': '#FFE8D0', 'camera': False,
+                     'specular': 1.0, 'diffuse': 0.0},
     }
     s['render']['exposure'] = round(s['render']['exposure'] + 1.2, 3)
-    s['render']['white_balance_k'] = 4000
+    s['render']['white_balance_k'] = 3300                                                  # c5: the wall cream, not olive
     s['title'] = 'Mantle in Ember on a credenza in the evening, a record on (the campaign)'
     s['size'] = [2400, 1600]
-    s['camera'] = {'position': [mx + 0.85, cy - 1.65, 1.25], 'target': [mx + 0.32, cy, cz + 0.12], 'lens_mm': 40,
+    s['camera'] = {'position': [mx + 0.85, cy - 1.65, 1.25], 'target': [mx + 0.40, cy, cz + 0.12], 'lens_mm': 32,
                    'level': True, 'fstop': 4.0, 'focus': [mx, cy, cz + 0.1]}
     return s
 
