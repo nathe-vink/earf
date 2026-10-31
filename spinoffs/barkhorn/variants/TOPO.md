@@ -52,3 +52,34 @@ boss.
 
 They are in `renders/2026-10-31/barkhorn/design-pass/`, with blind critic scores and duels against the current
 design.
+
+## Topo Clear (from the Mantle lane's idea)
+
+**The build:**
+- Each layer is water-clear cast sheet, about 9.6 mm (3/8 in, faced), with a **3 mm lamina of the tint** (stock 1/8 in,
+  2423 Ember or 2074 Smoke) bonded on its front face and cut to the same outline.
+- So the horn's body is clear and the color is a line at every layer's edge: each walk round the mountain becomes a
+  colored contour line in glass.
+- The pod, the posts and the driver show through the clear body.
+
+**Why it is worth trying:**
+- The deep tint through 10 to 45 mm of stepped wall reads very dark: TruCast 2064 passes about 1 % at 12.7 mm if its dye
+  is held per millimeter (the coordinator's note).
+- Thin laminae keep the color bright and literal.
+- 1/8 in tinted sheet is the most widely stocked of all: every code, no minimum.
+
+**Cost against the solid tinted Topo:**
+- 44 more bonded faces, because each lamina is a joint. That is the main risk: more bond lines, each a possible bubble.
+- About the same sheet cost: clear 3/8 in plus 1/8 in tinted, against tinted 1/2 in.
+- More cutting, for 44 laminae.
+
+The CAD is `horn-topo-clear` (the clear layers) and `horn-topo-lines` (the laminae) in `variants/variants.py`, shown
+with the product's option "Topo Clear".
+
+## About the colors in the pictures
+
+The tint in these renders is the stock flavor's **"held" case**: the seller's own light transmission held at the
+sheet's thickness (`make/stock_tints.py`), the central estimate until the chips are measured.
+
+If the vendor holds the dye per millimeter instead, 1/2 in 2074 Smoke is nearly black (about 1 % at 12.7 mm), and 2423
+Ember a deep oxblood. Every proposal picture's caption says which case it shows.

@@ -1726,7 +1726,8 @@ def waveguide(P):
                                trial_base=(_Pos(c['formed']['tool']['beside'] + 900.0, 0, 0) * pl(r['trial_base'])) if r['trial_base'] is not None else None,
                                laminated=[pl(l_) for l_ in r['laminated']] if r['laminated'] else None,
                                laminated_smooth=[pl(l_) for l_ in r['laminated_smooth']] if r['laminated_smooth'] else None,
-                               laminated_topo=[pl(l_) for l_ in r['laminated_topo']] if r.get('laminated_topo') else None))
+                               laminated_topo=[pl(l_) for l_ in r['laminated_topo']] if r.get('laminated_topo') else None,
+                               laminated_lines=tuple([pl(l_) for l_ in grp] for grp in r['laminated_lines']) if r.get('laminated_lines') else None))
         out['formed']['support'] = _Compound(children=out['formed']['pads'])
         return out
     if f == 'cast':
@@ -2029,7 +2030,7 @@ def formed_horn(P):
     # axes; the outside left stepped, a terrace a layer, its edges chamfered; the boss its last layer
     # (2026-10-31, later: from stock 1/2 in sheet, the layers' pitch d / round(d / layer), each layer faced to it; `smooth`
     # adds the same stack with its outside machined to follow the flare, each layer a taper from its back to its front)
-    lam = lam_smooth = lam_topo = None
+    lam = lam_smooth = lam_topo = lam_lines = None
     if F.get('laminated'):
         L_ = F['laminated']; wl = L_['wall']
         nl = max(1, round(d / L_['layer'])); t_ = d / nl
@@ -2050,13 +2051,19 @@ def formed_horn(P):
         lam_smooth = stack(True) if L_.get('smooth') else None
         if L_.get('topo'):                     # the Topo proposal (variants/topo): each layer's outline from the land
             from build123d import Polyline as _Pl, make_face as _mf, extrude as _ex
-            topo = []
+            topo, clear, lines = [], [], []
+            lm = L_.get('lamina', 0.0)          # Topo Clear: each layer clear, a thin tinted lamina bonded on its front face
             for i, outline in enumerate(L_['topo']):
                 za = d - (i + 1) * t_
                 face = _mf(_Pl(*[(x, y, za + 0.1) for x, y in outline], close=True))
                 topo.append(_ex(face, amount=t_ - 0.2) - cut)
-            topo.append(Pos(0, 0, -c['boss']['t']) * Cylinder(c['pod_r'], c['boss']['t'] - 0.1, align=(Align.CENTER, Align.CENTER, Align.MIN)) - cut)
-            lam_topo = topo
+                if lm:
+                    clear.append(_ex(face, amount=t_ - 0.2 - lm) - cut)
+                    face2 = _mf(_Pl(*[(x, y, za + t_ - 0.1 - lm + 0.05) for x, y in outline], close=True))
+                    lines.append(_ex(face2, amount=lm - 0.05) - cut)
+            boss = Pos(0, 0, -c['boss']['t']) * Cylinder(c['pod_r'], c['boss']['t'] - 0.1, align=(Align.CENTER, Align.CENTER, Align.MIN)) - cut
+            lam_topo = topo + [boss]
+            lam_lines = (clear + [boss], lines) if lm else None
     # the numbers for the notes and the README
     ts = [formed_wall(c, z, t) for z in zw for t in (0.0, math.pi / 4, math.pi / 2)]
     nums = dict(trim=formed_wall(c, zt, 0.0), mouth=formed_wall(c, d, 0.0), corner=formed_wall(c, d, math.pi / 4), thinnest=min(ts + [tf * (1 - F['thin']['corner'])]),
@@ -2065,7 +2072,8 @@ def formed_horn(P):
     nums['mass_kg'] = 1.19 * (nums['flare_cm3'] + nums['piece_cm3'] + nums['pod_cm3'] + nums['cap_cm3'] + nums['pads_cm3'] + saddle.volume / 1000) / 1000
     return dict(flare=flare, piece=piece, pod=pod, cap=cap, ring=ring, pads=pads, saddle=saddle, tool=tool, plug=plug,
                 base=base, outer=outer, nums=nums, saddle_top=stop, trial=trial, trial_base=trial_base, laminated=lam,
-                laminated_smooth=lam_smooth, laminated_topo=lam_topo)
+                laminated_smooth=lam_smooth, laminated_topo=lam_topo,
+                laminated_lines=lam_lines)
 
 
 def formed_parts(P, wg):
