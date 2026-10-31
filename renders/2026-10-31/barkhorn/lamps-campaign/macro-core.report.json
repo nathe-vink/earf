@@ -2,8 +2,8 @@
  "shot": "/home/user/earf/studio/shots/barkhorn/lamps-campaign/macro-core.json",
  "image": "/home/user/earf/renders/2026-10-31/barkhorn/lamps-campaign/macro-core.png",
  "seconds": {
-  "build": 0.9,
-  "render": 625.3
+  "build": 0.7,
+  "render": 484.4
  },
  "samples": 96,
  "size": [
@@ -24,13 +24,6 @@
   {
    "glint": "ring_l",
    "on": "no surface found; as given (the nearest receiving surface, ring#0, is 1 mm from `at`)"
-  },
-  {
-   "glint": "base",
-   "on": "seen surface (base#0)",
-   "moved_mm": 0.6,
-   "normal_off_deg": 6.7,
-   "moved_in": "the lamp moved in to 0.03 m, in front of prop0-kit (0.05 m along the mirror direction), its size and power scaled to look the same from the point"
   },
   {
    "glint": "grommet",
