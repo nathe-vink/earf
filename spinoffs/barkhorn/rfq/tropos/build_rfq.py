@@ -225,7 +225,7 @@ As an option, the same horn with its outside machined smooth to `step/outside-sm
 running round it as fine rings. Please price it as the extra over the stepped horn. The horn's small parts (pod, cap,
 pads, saddle) are from the same sheet.
 
-The pair is for a debut on 19 January, so the dates matter as much as the price: we would order in mid-November."""),
+The pair is for a debut in spring 2027. We would like to order in November or December, so the dates matter as much as the price."""),
 }
 
 Q_BASE = {
@@ -284,8 +284,8 @@ EXTRA_Q = {
         'How you would register 22 layers without dowel holes in the wall (on their bores over a stepped core, or waste '
         'ears trimmed off after), and whether a cement tinted to the sheet (Röhm allows a solvent-soluble colourant) is '
         'something you have done.',
-        'The earliest date you could deliver the first horn and the cabinet pair, ordering in mid-November, and whether '
-        'a delivery by early January for both speakers is realistic.',
+        'The earliest date you could deliver the first horn and the cabinet pair, ordering in November or December, and '
+        'your lead time for both speakers.',
     ],
 }
 

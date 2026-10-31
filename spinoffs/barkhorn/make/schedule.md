@@ -1,5 +1,82 @@
 # Tropos: a dated schedule to a first horn and an assembled pair (2026-10-31)
 
+## Spring 2027: the current plan (the owner, 2026-10-31: "C", the debut moves to spring)
+
+There is no January deadline. The debut's date and venue are the owner's next question. This section plans against
+three windows:
+- **San Francisco, Thursday 18 March 2027**: late March, the Thursday before Holy Week (Easter is 28 March);
+- **late April, after Milan** (12 to 18 April): for example Thursday 29 April;
+- **HIGH END Vienna, 6 to 9 May**.
+
+**Assumptions:**
+- No purchase order before **Monday 16 November**.
+- Thanksgiving week runs at half speed; 21 December to 3 January is lost.
+- The laminated horn takes 3 to 5 weeks a horn from cut layers. This is R8's figure, now that its anneals are known.
+- For Vienna the pair must be crated and flown about three weeks before (est.).
+
+All durations are estimates; nothing is quoted. The January plan below is kept as history, superseded.
+
+### What each horn route makes
+
+| route | first horn | pair assembled | 18 March | late April (29 Apr) | Vienna (6 to 9 May; ship by about 15 Apr) |
+|---|---|---|---|---|---|
+| **Laminated, stepped, from stock 1/2 in** (POs 16 Nov) | about **15 January** | about **5 to 12 February** | **yes**, about 5 weeks of float | yes, about 11 weeks | yes, about 9 weeks |
+| **Formed in stock 3/8 in, after the quarter trial** (trial PO 16 Nov; full plug ordered about 21 Dec if the trial passes) | about **12 February** | about **26 February to 5 March** | **only just**: about 2 weeks of float, no room for a second set of shots | **yes**, about 7 weeks | yes, about 6 weeks |
+| **Custom deep lot**, formed or laminated (chips approved about 4 Dec; match 2 to 5 weeks; pour 4 to 6 weeks, past the holidays) | about **late February** | about **mid-March** | **no** | yes, about 6 weeks | yes, about 4 weeks |
+
+**The formed horn now fits.** The horn route is open again: April and Vienna have room for the forming trial, a full
+plug and a re-shoot, and March nearly does.
+
+### The recommendation
+
+**Build the laminated pair first, and run the quarter forming trial in parallel, but start the trial by 21 December,
+not on 16 November.**
+- The laminated pair (POs 16 November, pair about 8 February) makes every window. It gives the owner real parts to
+  photograph and listen to by mid-February.
+- The trial ($3,450) then tells by early January whether forming works, so the owner chooses between the laminated
+  horn and a formed one from real parts by **mid-February**.
+- If the owner picks formed, the full plug and two formed horns follow for April or Vienna.
+
+**Price, against the $18,500 Tropos line:**
+
+| | cash |
+|---|---|
+| the laminated Smoke pair, everything (the cash table below, without contingency) | about $18,520: **on the line, with no contingency** |
+| + the quarter forming trial | + $3,450, so about **$21,970: $3,470 over** |
+| + if formed is chosen: the full plug, the trim fixture and two formed horns | + about $12,600 more (est.): $7,100 + $2,500 + $3,000 |
+| the 15 % contingency | about $2,800, also outside the line |
+
+**The trial does not fit the $18,500 line.**
+- Either it is paid from the contingency, or it waits for the next money (a community lender in 2 to 6 weeks, R-notes).
+- Starting it as late as 21 December keeps the formed horn alive for April and Vienna. Starting on 16 November is
+  needed only if the debut is the 18 March one and must have a formed horn.
+
+### What still benefits from ordering early (no longer urgent)
+
+The week-1 orders are no longer on the critical path. Three are still worth placing early:
+- **The chips and the 1/2 in off-cuts** (about $100). They settle the colours before any sheet is bought.
+- **The three sheets of TruCast 2064 3/4 in at AC Plastics** (3 left on 31 October). The Smoke cabinet's only stock
+  sheet at full thickness; if they sell, the cabinet needs a mill run.
+- **The two FA122s while Parts Express has them in stock** ($845). They are resellable, so the risk is small.
+- Optionally: the bonding kit and the coupon trials (`laminated-horn.md`). Every route needs them.
+
+Everything else (the shops' purchase orders, the horn sheet, the drivers) can wait for quotes.
+
+### The latest safe purchase-order dates
+
+These keep about two weeks of float before each window.
+
+| route | 18 March | late April (29 Apr) | Vienna (ship about 15 Apr) |
+|---|---|---|---|
+| laminated (the recommended first pair) | **14 December** | **1 February** | **18 January** |
+| formed, after the quarter trial (trial PO) | **16 November** (no slack) | **4 January** | **21 December** |
+| custom deep lot (chip approval and order) | not possible | **7 December** | **23 November** |
+
+---
+
+# Superseded: the plan for the January debut (2026-10-31, before the owner's choice of spring)
+
+
 The coordinator's targets (not commitments):
 - a San Francisco debut on **Tuesday 19 January 2027**, before FOG Design+Art week (21 to 24 January);
 - prototypes photographed by **mid-February**;
