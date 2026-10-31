@@ -39,10 +39,24 @@ def dining_room(level='575', shade='ember'):
     tx, ty = HB.TABLE
     for p in st['props']:
         if p.get('fn') == 'dome':
-            p['shade_glow'] = 0.8                    # the shade lit from inside (1.1 read pink through the red)
+            p['shade_glow'] = 0.3                    # critic c1 (both): 0.8 clipped the shell to a flat pink
             p['materials'] = {'liner': {'glow_color': '#FFB070'}}
         if p.get('kind') == 'lamp':
             p['off'] = True                           # the floor lamp competed with the pendant
+        if p.get('material') == 'glow' and p.get('emit') == 1.4:
+            p['emit'] = 0.45                          # critic c2: the sconces outshone the pendant
+        if p.get('shape') == 'lathe' and p.get('material') == 'glass':
+            # critic c4: a hollow bowl (the closed profile drew a solid lens)
+            p['profile'] = [[0, 0], [0.035, 0], [0.035, 0.004], [0.004, 0.012], [0.004, 0.1], [0.038, 0.13],
+                            [0.042, 0.19], [0.0405, 0.19], [0.0365, 0.132], [0.003, 0.104], [0.0, 0.104]]
+        if p.get('shape') == 'cylinder' and p.get('material') == 'gloss' and p.get('radius') == 0.135:
+            # critic c7: a dinner plate (a well and a rim), not a puck
+            z = p['position'][2]
+            p.update(shape='lathe', profile=[[0, 0], [0.09, 0], [0.095, 0.004], [0.13, 0.012], [0.135, 0.016],
+                                             [0.132, 0.017], [0.093, 0.006], [0.0, 0.003]])
+            p.pop('radius', None); p.pop('height', None)
+            p['position'] = [p['position'][0], p['position'][1], z]
+            p['color'] = '#E6E0D6'
     st['props'] += [asset('dining_chair_02', (tx - 0.42, ty - 0.68, 0.0), 0.0),
                     asset('dining_chair_02', (tx + 0.42, ty - 0.68, 0.0), 0.0),
                     asset('dining_chair_02', (tx - 0.42, ty + 0.68, 0.0), 180.0),
@@ -51,9 +65,15 @@ def dining_room(level='575', shade='ember'):
     st['windows'] = [{'wall': 'left', 'along': 0.1, 'sill': 0.55, 'size': [1.7, 1.85], 'mullions': [2, 1],
                       'frame': '#2A2724'}]
     st['frame'] = '#2A2724'
-    s['sky'] = {'kind': 'hdri', 'polyhaven': 'twilight_sunset', 'rotation_deg': 250.0, 'strength': 0.03, 'res': '4k'}
+    s['sky'] = {'kind': 'hdri', 'polyhaven': 'twilight_sunset', 'rotation_deg': 250.0, 'strength': 0.05, 'res': '4k'}
     s['render']['exposure'] = round(s['render']['exposure'] + 1.3, 3)     # a photographer's dusk, over a stop up
-    s['render']['white_balance_k'] = 4000     # 3100 neutralised the 2700 K light and turned Ember pink
+    s['render']['white_balance_k'] = 3300     # critics c4/c5: 4000 made the room one orange (the pink was the glow)
+    s['lights'].pop('floorlamp', None)       # critic c3: its pools on the walls had no source
+    # critic c2/c8: a soft panel seen only in the black top's reflection, so its tiers read against the wall
+    tx, ty = HB.TABLE
+    s['lights']['toprim'] = {'type': 'area', 'size_m': [0.5, 0.3], 'position': [-0.6, 0.6, 1.95],
+                             'target': [tx, ty, 1.5], 'irradiance': 1.2, 'color': 3200, 'camera': False,
+                             'specular': 1.0, 'diffuse': 0.0}
     return s
 
 
@@ -61,7 +81,8 @@ def dining_dusk():
     s = dining_room()
     s['title'] = 'Hemisphere in Ember over a dining table at dusk, at 590 lm (the campaign)'
     s['size'] = [2400, 1600]
-    s['lights'].pop('floorlamp', None)
+    s['set']['props'] = [p for p in s['set']['props'] if not (p.get('model') == 'dining_chair_02'
+                                                             and p['position'][0] > 0 and p['position'][1] < 0.5)]
     s['camera'] = {'position': [1.4, -0.65, 1.62], 'target': [-0.2, 1.1, 1.1], 'lens_mm': 32, 'level': True,
                    'fstop': 3.2, 'focus': [0.0, 0.95, 1.3]}
     s['set']['wall'] = {'color': '#8C8476'}
@@ -241,7 +262,10 @@ def dining_close():
     s['title'] = 'Hemisphere in Ember, close over the table at dusk (the campaign)'
     s['size'] = [1600, 2000]
     tx, ty = HB.TABLE
-    s['camera'] = {'position': [tx + 0.75, ty - 0.85, 1.30], 'target': [tx - 0.25, ty + 0.15, 1.34], 'lens_mm': 45,
+    for p in s['set']['props']:                # critic c8: the right glass off the frame's edge
+        if p.get('shape') == 'lathe' and p.get('material') == 'glass' and p['position'][0] > 0.1:
+            p['position'] = [0.05, p['position'][1], p['position'][2]]
+    s['camera'] = {'position': [tx + 0.75, ty - 0.85, 1.30], 'target': [tx - 0.25, ty + 0.15, 1.34], 'lens_mm': 55,
                    'level': True, 'fstop': 2.8, 'focus': [tx, ty, 1.47]}
     return s
 

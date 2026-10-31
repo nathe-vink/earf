@@ -13,13 +13,13 @@
   "transmission_bounces": 20,
   "view": "Khronos PBR Neutral",
   "exposure": 5.253,
-  "white_balance_k": 4000
+  "white_balance_k": 3300
  },
  "sky": {
   "kind": "hdri",
   "polyhaven": "twilight_sunset",
   "rotation_deg": 250.0,
-  "strength": 0.03,
+  "strength": 0.05,
   "res": "4k"
  },
  "set": {
@@ -75,30 +75,94 @@
    },
    {
     "kind": "kit",
-    "shape": "cylinder",
+    "shape": "lathe",
     "material": "gloss",
-    "color": "#F2EEE6",
+    "color": "#E6E0D6",
     "roughness": 0.25,
-    "radius": 0.135,
-    "height": 0.016,
     "position": [
      -0.38,
      0.83,
      0.75
+    ],
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.09,
+      0
+     ],
+     [
+      0.095,
+      0.004
+     ],
+     [
+      0.13,
+      0.012
+     ],
+     [
+      0.135,
+      0.016
+     ],
+     [
+      0.132,
+      0.017
+     ],
+     [
+      0.093,
+      0.006
+     ],
+     [
+      0.0,
+      0.003
+     ]
     ]
    },
    {
     "kind": "kit",
-    "shape": "cylinder",
+    "shape": "lathe",
     "material": "gloss",
-    "color": "#F2EEE6",
+    "color": "#E6E0D6",
     "roughness": 0.25,
-    "radius": 0.135,
-    "height": 0.016,
     "position": [
      0.38,
      1.0699999999999998,
      0.75
+    ],
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.09,
+      0
+     ],
+     [
+      0.095,
+      0.004
+     ],
+     [
+      0.13,
+      0.012
+     ],
+     [
+      0.135,
+      0.016
+     ],
+     [
+      0.132,
+      0.017
+     ],
+     [
+      0.093,
+      0.006
+     ],
+     [
+      0.0,
+      0.003
+     ]
     ]
    },
    {
@@ -141,8 +205,20 @@
       0.19
      ],
      [
-      0.0,
+      0.0405,
       0.19
+     ],
+     [
+      0.0365,
+      0.132
+     ],
+     [
+      0.003,
+      0.104
+     ],
+     [
+      0.0,
+      0.104
      ]
     ]
    },
@@ -186,8 +262,20 @@
       0.19
      ],
      [
-      0.0,
+      0.0405,
       0.19
+     ],
+     [
+      0.0365,
+      0.132
+     ],
+     [
+      0.003,
+      0.104
+     ],
+     [
+      0.0,
+      0.104
      ]
     ]
    },
@@ -223,7 +311,7 @@
     "flavour": "ember",
     "ceiling": 2.7,
     "lamp": false,
-    "shade_glow": 0.8,
+    "shade_glow": 0.3,
     "hide": "reflector",
     "materials": {
      "liner": {
@@ -637,17 +725,27 @@
    "color": 2700,
    "camera": false
   },
-  "floorlamp": {
-   "type": "point",
-   "position": [
-    -2.15,
-    2.75,
-    1.42
+  "toprim": {
+   "type": "area",
+   "size_m": [
+    0.5,
+    0.3
    ],
-   "power_w": 0.2196,
-   "radius_m": 0.03,
-   "color": 2400,
-   "camera": false
+   "position": [
+    -0.6,
+    0.6,
+    1.95
+   ],
+   "target": [
+    0.0,
+    0.95,
+    1.5
+   ],
+   "irradiance": 1.2,
+   "color": 3200,
+   "camera": false,
+   "specular": 1.0,
+   "diffuse": 0.0
   },
   "corepool0": {
    "type": "point",
