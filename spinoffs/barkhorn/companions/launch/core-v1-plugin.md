@@ -68,9 +68,9 @@ refuses it, fall back to (b) for the debut batch.
 - **Engineering:** the board's $16k–40k [E] and 4 to 6 weeks (`boards.md`). In its place: about **2 to 4 days** [E]
   to pick the parts, bench-test the dim-to-warm under the chosen dimming, and design the aluminium plate that holds
   the modules in the bay.
-- **Certification:** the Appendix Y test and the MAEDbS filing (the BACL request in `lab-rfq/bacl.md` asks for these), Supplement
-  SA's battery tests and the UN 38.3 paperwork. Several thousand dollars and a few weeks of lab time [E]; the lab
-  quotes in `lab-rfq/` give the real figures.
+- **Certification:** the Appendix Y test and the MAEDbS filing (the BACL request in `lab-rfq/bacl.md` asks for
+  these), Supplement SA's battery tests and the UN 38.3 paperwork. Several thousand dollars and a few weeks of lab time
+  [E]; the labs' answers to the requests in `lab-rfq/` will give the real figures.
 - **The first article's electronics: about $45–70 [E]** a lamp: the COB $10–20, the constant-current module about $8,
   the touch module about $5 (or the dimmer $9–80), the adapter $12–18, the jack, wiring and plate about $10. The
   battery Core's are about $70 (board $34, cells $9, holders $4.50, LED $9, adapter $7, plus test pads and NTC), and
