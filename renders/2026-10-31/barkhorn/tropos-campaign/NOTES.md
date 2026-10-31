@@ -12,6 +12,7 @@ stills are therefore not finished.
 | shot | state |
 |---|---|
 | room (a pair at home at golden hour, Poison) | **final: `tropos-room-golden-hour.png`** (2304 x 1296, 4.6 MB; rendered at 2400 x 1350, 160 samples, scaled 4 % to stay under 5 MB), round 3's look, blind 7.0; look 2 scored 6.5 and was dropped |
+| room, **covers off** (the owner, 2026-10-31) | **`tropos-room-golden-hour-off.png`** (2304 x 1296, the same shot as the final with the cloth discs hidden) and **`tropos-room-golden-hour-off-portrait.png`** (1200 x 1500, for phones: 40 mm from 4.1 m, the wall above for the heading) |
 | above (the horn from above, Ember) | proofs `above-p1`, `above-p2`; p2 crops the cabinet at the bottom; no critic yet |
 | night, inside, corner | not proofed on the new horn yet |
 
