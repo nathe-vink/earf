@@ -1,0 +1,990 @@
+{
+ "title": "Planet EARF, round 44: the lantern, bar",
+ "size": [
+  2400,
+  1600
+ ],
+ "camera": {
+  "position": [
+   5.2,
+   3.35,
+   1.4
+  ],
+  "target": [
+   13.0,
+   3.95,
+   1.7
+  ],
+  "lens_mm": 32,
+  "level": true,
+  "fstop": 4.0,
+  "focus": [
+   11.0,
+   4.0,
+   1.6
+  ]
+ },
+ "products": [
+  {
+   "def": "studio/products/barkhorn-cloud.json",
+   "flavour": "cloud-red",
+   "instances": [
+    {
+     "position": [
+      18.9,
+      3.19,
+      0.4
+     ],
+     "rotate_z": 239.95,
+     "hide": [
+      "cloth-disc"
+     ]
+    },
+    {
+     "position": [
+      18.9,
+      5.99,
+      0.4
+     ],
+     "rotate_z": -59.95,
+     "hide": [
+      "cloth-disc"
+     ]
+    }
+   ]
+  },
+  {
+   "def": "spinoffs/barkhorn/companions/out-concepts2/r3.json",
+   "flavour": "smoke",
+   "instances": [
+    {
+     "position": [
+      5.0,
+      4.8,
+      0.9
+     ],
+     "rotate_z": 90.0
+    }
+   ]
+  }
+ ],
+ "set": {
+  "kind": "stage",
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/planet/r44/kit44.py",
+    "fn": "house",
+    "windows_lit": 0.3,
+    "window_glow": 0.25,
+    "glass_gloss": 0.3,
+    "band_glow": 0.06,
+    "doors_open": false
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "earf_moon",
+    "fn": "orb",
+    "spots": [
+     {
+      "position": [
+       0.95,
+       7.37,
+       1.26
+      ],
+      "flavour": "ember",
+      "rotate_z": 180.0
+     },
+     {
+      "position": [
+       1.25,
+       7.37,
+       1.26
+      ],
+      "flavour": "dust",
+      "rotate_z": 180.0
+     },
+     {
+      "position": [
+       1.5499999999999998,
+       7.37,
+       1.26
+      ],
+      "flavour": "acid",
+      "rotate_z": 180.0
+     },
+     {
+      "position": [
+       1.8499999999999999,
+       7.37,
+       1.26
+      ],
+      "flavour": "poison",
+      "rotate_z": 180.0
+     },
+     {
+      "position": [
+       2.15,
+       7.37,
+       1.26
+      ],
+      "flavour": "ice",
+      "rotate_z": 180.0
+     },
+     {
+      "position": [
+       2.45,
+       7.37,
+       1.26
+      ],
+      "flavour": "haze",
+      "rotate_z": 180.0
+     },
+     {
+      "position": [
+       2.75,
+       7.37,
+       1.26
+      ],
+      "flavour": "fog",
+      "rotate_z": 180.0
+     },
+     {
+      "position": [
+       3.05,
+       7.37,
+       1.26
+      ],
+      "flavour": "smoke",
+      "rotate_z": 180.0
+     },
+     {
+      "position": [
+       3.55,
+       7.37,
+       0.78
+      ],
+      "flavour": "smoke",
+      "rotate_z": 180.0
+     },
+     {
+      "position": [
+       3.85,
+       7.37,
+       0.78
+      ],
+      "flavour": "fog",
+      "rotate_z": 180.0,
+      "lamp": false
+     },
+     {
+      "position": [
+       4.15,
+       7.37,
+       0.78
+      ],
+      "flavour": "ember",
+      "rotate_z": 180.0
+     },
+     {
+      "position": [
+       4.45,
+       7.37,
+       0.78
+      ],
+      "flavour": "ice",
+      "rotate_z": 180.0,
+      "lamp": false
+     },
+     {
+      "position": [
+       4.75,
+       7.37,
+       0.78
+      ],
+      "flavour": "acid",
+      "rotate_z": 180.0
+     },
+     {
+      "position": [
+       5.050000000000001,
+       7.37,
+       0.78
+      ],
+      "flavour": "haze",
+      "rotate_z": 180.0,
+      "lamp": false
+     },
+     {
+      "position": [
+       5.35,
+       7.37,
+       0.78
+      ],
+      "flavour": "dust",
+      "rotate_z": 180.0
+     },
+     {
+      "position": [
+       5.65,
+       7.37,
+       0.78
+      ],
+      "flavour": "poison",
+      "rotate_z": 180.0,
+      "lamp": false
+     },
+     {
+      "position": [
+       4.0,
+       4.85,
+       0.9
+      ],
+      "flavour": "ice"
+     },
+     {
+      "position": [
+       4.5,
+       5.1,
+       0.9
+      ],
+      "flavour": "ember"
+     },
+     {
+      "position": [
+       0.85,
+       3.6,
+       0.45
+      ],
+      "flavour": "ember"
+     },
+     {
+      "position": [
+       0.85,
+       4.4,
+       0.45
+      ],
+      "flavour": "smoke"
+     },
+     {
+      "position": [
+       0.85,
+       5.2,
+       0.45
+      ],
+      "flavour": "fog"
+     },
+     {
+      "position": [
+       0.85,
+       6.0,
+       0.45
+      ],
+      "flavour": "haze"
+     }
+    ],
+    "cable": false,
+    "cartridge": "none",
+    "lamp_w": 0.1,
+    "lamp_k": 2700,
+    "shade_glow": 0.005,
+    "noshadow": "shell|liner|skin",
+    "materials": {
+     "liner": {
+      "glow_color": "#FFA060"
+     }
+    }
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "earf_moon",
+    "fn": "dome",
+    "ceiling": 3.9624,
+    "lamp_w": 1.4,
+    "lamp_k": 2700,
+    "shade_glow": 0.006,
+    "noshadow": "shell|liner|skin",
+    "spots": [
+     {
+      "position": [
+       7.0,
+       5.615,
+       2.05
+      ],
+      "flavour": "smoke"
+     },
+     {
+      "position": [
+       8.4,
+       5.615,
+       2.05
+      ],
+      "flavour": "smoke"
+     },
+     {
+      "position": [
+       9.8,
+       5.615,
+       2.05
+      ],
+      "flavour": "smoke"
+     },
+     {
+      "position": [
+       4.0,
+       5.0,
+       2.15
+      ],
+      "flavour": "haze"
+     },
+     {
+      "position": [
+       4.9,
+       5.0,
+       2.15
+      ],
+      "flavour": "dust"
+     }
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "earf_coin",
+    "fn": "bowl",
+    "spots": [
+     [
+      3.75,
+      4.8,
+      0.9
+     ]
+    ],
+    "n": 30,
+    "bowl": "brass",
+    "d": 200
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/planet/r39/kit39.py",
+    "fn": "life",
+    "rocks": [
+     [
+      9.37,
+      5.495,
+      1.07,
+      0.03,
+      1,
+      "#B8641C"
+     ],
+     [
+      9.95,
+      5.535,
+      1.07,
+      0.02,
+      2,
+      "#B8641C"
+     ],
+     [
+      8.81,
+      5.565,
+      1.07,
+      0.025,
+      1,
+      "#C8A060"
+     ],
+     [
+      10.3,
+      5.4750000000000005,
+      1.07,
+      0.03,
+      2,
+      "#B8641C"
+     ],
+     [
+      4.1,
+      4.8,
+      0.9,
+      0.025,
+      1,
+      "#B8641C"
+     ],
+     [
+      13.55,
+      3.5200000000000005,
+      0.45,
+      0.025,
+      1,
+      "#B8641C"
+     ],
+     [
+      8.85,
+      2.5900000000000003,
+      0.75,
+      0.025,
+      1,
+      "#B8641C"
+     ]
+    ],
+    "coupes": [
+     [
+      8.4,
+      5.515000000000001,
+      1.07,
+      0.6,
+      "#B8462A"
+     ],
+     [
+      10.1,
+      2.56,
+      0.75,
+      0.4,
+      "#E8DDB8"
+     ]
+    ],
+    "napkins": [
+     [
+      9.37,
+      5.495,
+      1.07,
+      8.0
+     ],
+     [
+      8.4,
+      5.515000000000001,
+      1.07,
+      -12.0
+     ]
+    ],
+    "votives": [],
+    "matchbooks": [],
+    "coats": []
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/planet/r44/kit44.py",
+    "fn": "sleeves",
+    "records": [
+     [
+      8.55,
+      5.595000000000001,
+      1.071,
+      28.0,
+      0.0
+     ],
+     [
+      5.15,
+      5.25,
+      0.901,
+      -12.0,
+      0.0
+     ],
+     [
+      18.099999999999998,
+      6.960000000000001,
+      0.951,
+      74.0,
+      0.0
+     ]
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/planet/r39/kit39.py",
+    "fn": "life",
+    "seed": 443,
+    "rocks": [
+     [
+      15.93,
+      5.54,
+      0.0,
+      0.02,
+      1,
+      "#B8641C"
+     ]
+    ],
+    "coats": [
+     [
+      8.35,
+      1.6800000000000002,
+      1.05,
+      90.0,
+      0.4
+     ],
+     [
+      10.2,
+      1.6800000000000002,
+      1.05,
+      90.0,
+      0.36
+     ]
+    ],
+    "coupes": [],
+    "napkins": [],
+    "votives": [],
+    "matchbooks": []
+   }
+  ]
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#05070C",
+  "horizon": "#141824",
+  "ground": "#08080A",
+  "strength": 0.0
+ },
+ "lights": {
+  "shop0": {
+   "type": "spot",
+   "position": [
+    1.4,
+    6.220000000000001,
+    3.9124000000000003
+   ],
+   "target": [
+    1.4,
+    7.42,
+    1.4
+   ],
+   "power_w": 14.0,
+   "cone_deg": 30.0,
+   "blend": 0.6,
+   "radius_m": 0.03,
+   "color": 2700,
+   "camera": false
+  },
+  "shop1": {
+   "type": "spot",
+   "position": [
+    3.0,
+    6.220000000000001,
+    3.9124000000000003
+   ],
+   "target": [
+    3.0,
+    7.42,
+    1.4
+   ],
+   "power_w": 14.0,
+   "cone_deg": 30.0,
+   "blend": 0.6,
+   "radius_m": 0.03,
+   "color": 2700,
+   "camera": false
+  },
+  "shop2": {
+   "type": "spot",
+   "position": [
+    4.6,
+    6.220000000000001,
+    3.9124000000000003
+   ],
+   "target": [
+    4.6,
+    7.42,
+    1.4
+   ],
+   "power_w": 14.0,
+   "cone_deg": 30.0,
+   "blend": 0.6,
+   "radius_m": 0.03,
+   "color": 2700,
+   "camera": false
+  },
+  "table": {
+   "type": "spot",
+   "position": [
+    4.3,
+    5.0,
+    3.9124000000000003
+   ],
+   "target": [
+    4.3,
+    5.0,
+    0.9
+   ],
+   "power_w": 8.0,
+   "cone_deg": 24.0,
+   "blend": 0.6,
+   "radius_m": 0.03,
+   "color": 2700,
+   "camera": false
+  },
+  "ctr0": {
+   "type": "spot",
+   "position": [
+    6.85,
+    5.66,
+    3.9124000000000003
+   ],
+   "target": [
+    6.85,
+    5.46,
+    1.07
+   ],
+   "power_w": 90.0,
+   "cone_deg": 16.0,
+   "blend": 0.3,
+   "radius_m": 0.03,
+   "color": 2700,
+   "camera": false
+  },
+  "ctr1": {
+   "type": "spot",
+   "position": [
+    7.55,
+    5.66,
+    3.9124000000000003
+   ],
+   "target": [
+    7.55,
+    5.46,
+    1.07
+   ],
+   "power_w": 90.0,
+   "cone_deg": 16.0,
+   "blend": 0.3,
+   "radius_m": 0.03,
+   "color": 2700,
+   "camera": false
+  },
+  "ctr2": {
+   "type": "spot",
+   "position": [
+    8.25,
+    5.66,
+    3.9124000000000003
+   ],
+   "target": [
+    8.25,
+    5.46,
+    1.07
+   ],
+   "power_w": 90.0,
+   "cone_deg": 16.0,
+   "blend": 0.3,
+   "radius_m": 0.03,
+   "color": 2700,
+   "camera": false
+  },
+  "ctr3": {
+   "type": "spot",
+   "position": [
+    9.37,
+    5.66,
+    3.9124000000000003
+   ],
+   "target": [
+    9.37,
+    5.46,
+    1.07
+   ],
+   "power_w": 90.0,
+   "cone_deg": 16.0,
+   "blend": 0.3,
+   "radius_m": 0.03,
+   "color": 2700,
+   "camera": false
+  },
+  "bq0": {
+   "type": "spot",
+   "position": [
+    7.7,
+    2.79,
+    3.9124000000000003
+   ],
+   "target": [
+    7.7,
+    0.05,
+    1.6
+   ],
+   "power_w": 35.0,
+   "cone_deg": 30.0,
+   "blend": 0.5,
+   "radius_m": 0.03,
+   "color": 2700,
+   "camera": false
+  },
+  "bq1": {
+   "type": "spot",
+   "position": [
+    8.85,
+    2.79,
+    3.9124000000000003
+   ],
+   "target": [
+    8.85,
+    0.05,
+    1.6
+   ],
+   "power_w": 35.0,
+   "cone_deg": 30.0,
+   "blend": 0.5,
+   "radius_m": 0.03,
+   "color": 2700,
+   "camera": false
+  },
+  "bq2": {
+   "type": "spot",
+   "position": [
+    10.0,
+    2.79,
+    3.9124000000000003
+   ],
+   "target": [
+    10.0,
+    0.05,
+    1.6
+   ],
+   "power_w": 35.0,
+   "cone_deg": 30.0,
+   "blend": 0.5,
+   "radius_m": 0.03,
+   "color": 2700,
+   "camera": false
+  },
+  "bq3": {
+   "type": "spot",
+   "position": [
+    11.15,
+    2.79,
+    3.9124000000000003
+   ],
+   "target": [
+    11.15,
+    0.05,
+    1.6
+   ],
+   "power_w": 35.0,
+   "cone_deg": 30.0,
+   "blend": 0.5,
+   "radius_m": 0.03,
+   "color": 2700,
+   "camera": false
+  },
+  "route": {
+   "type": "area",
+   "position": [
+    8.0,
+    0.72,
+    3.9424
+   ],
+   "target": [
+    8.0,
+    0.72,
+    0.0
+   ],
+   "size_m": [
+    10.0,
+    0.1
+   ],
+   "irradiance": 0.1,
+   "color": 2700,
+   "camera": false
+  },
+  "fill": {
+   "type": "area",
+   "position": [
+    7.0,
+    3.81,
+    3.6624000000000003
+   ],
+   "target": [
+    7.0,
+    3.81,
+    0.0
+   ],
+   "size_m": [
+    10.0,
+    4.0
+   ],
+   "irradiance": 0.08,
+   "color": 2900,
+   "camera": false
+  },
+  "baffle": {
+   "type": "area",
+   "position": [
+    12.9,
+    4.59,
+    3.39
+   ],
+   "target": [
+    12.98,
+    4.59,
+    0.0
+   ],
+   "size_m": [
+    0.05,
+    5.6
+   ],
+   "irradiance": 0.5,
+   "color": 2400,
+   "camera": false
+  },
+  "stack0": {
+   "type": "spot",
+   "position": [
+    17.4,
+    3.59,
+    3.35
+   ],
+   "target": [
+    18.9,
+    3.19,
+    1.0
+   ],
+   "power_w": 70.0,
+   "cone_deg": 34.0,
+   "blend": 0.8,
+   "radius_m": 0.03,
+   "color": 2700,
+   "camera": false
+  },
+  "stack1": {
+   "type": "spot",
+   "position": [
+    17.4,
+    5.59,
+    3.35
+   ],
+   "target": [
+    18.9,
+    5.99,
+    1.0
+   ],
+   "power_w": 70.0,
+   "cone_deg": 34.0,
+   "blend": 0.8,
+   "radius_m": 0.03,
+   "color": 2700,
+   "camera": false
+  },
+  "mother": {
+   "type": "spot",
+   "position": [
+    19.700000000000003,
+    5.04,
+    3.35
+   ],
+   "target": [
+    18.8,
+    4.39,
+    0.3
+   ],
+   "power_w": 45.0,
+   "cone_deg": 26.0,
+   "blend": 0.8,
+   "radius_m": 0.15,
+   "color": 2700,
+   "camera": false
+  },
+  "trap": {
+   "type": "area",
+   "position": [
+    19.749999999999996,
+    4.590000000000001,
+    3.3000000000000003
+   ],
+   "target": [
+    19.999999999999996,
+    4.590000000000001,
+    1.0
+   ],
+   "size_m": [
+    0.15,
+    4.6
+   ],
+   "irradiance": 0.2,
+   "color": 2600,
+   "camera": false
+  },
+  "infill": {
+   "type": "area",
+   "position": [
+    16.95,
+    4.590000000000001,
+    3.25
+   ],
+   "target": [
+    16.95,
+    4.590000000000001,
+    0.0
+   ],
+   "size_m": [
+    5.0,
+    3.5
+   ],
+   "irradiance": 0.03,
+   "color": 2700,
+   "camera": false
+  },
+  "street": {
+   "type": "area",
+   "position": [
+    -2.4,
+    1.0,
+    6.0
+   ],
+   "target": [
+    -1.5,
+    3.0,
+    0.0
+   ],
+   "size_m": [
+    0.6,
+    0.6
+   ],
+   "irradiance": 0.6,
+   "color": 2200,
+   "spread_deg": 80.0
+  }
+ },
+ "haze": {
+  "box_m": [
+   0.05,
+   0.05,
+   0.01,
+   24.334,
+   7.57,
+   3.9124000000000003
+  ],
+  "density": 0.006,
+  "anisotropy": 0.3,
+  "color": "#FFFFFF"
+ },
+ "render": {
+  "samples": 256,
+  "adaptive": 0.02,
+  "denoise": true,
+  "clamp": 4.0,
+  "bounces": 10,
+  "view": "AgX",
+  "look": "AgX - Medium High Contrast",
+  "exposure": 3.0,
+  "white_balance_k": 2850,
+  "white_balance_tint": -1.5,
+  "caustics_refractive": true
+ },
+ "materials": {
+  "glow": {
+   "strength": 0.05,
+   "color": "#FFB060"
+  }
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 236,
+  "white_out": 240,
+  "contrast": 0.08,
+  "clarity": 0.05,
+  "sharpen": 0.25,
+  "sharpen_px": 0.7,
+  "grain": 2.5
+ }
+}
