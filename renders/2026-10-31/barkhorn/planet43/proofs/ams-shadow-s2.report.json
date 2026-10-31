@@ -1,0 +1,34 @@
+{
+ "shot": "studio/shots/barkhorn/planet43/ams-shadow2.json",
+ "image": "renders/2026-10-31/barkhorn/planet43/proofs/ams-shadow-s2.png",
+ "seconds": {
+  "build": 0.5,
+  "render": 127.2
+ },
+ "samples": 128,
+ "size": [
+  1200,
+  800
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "parts_2d": {},
+ "finish": {
+  "white_in": 236,
+  "white_out": 240,
+  "peak": 251.0,
+  "contrast": 0.08,
+  "clarity": 0.05,
+  "sharpen": 0.25,
+  "sharpen_px": 0.7,
+  "grain": [
+   2.5,
+   1.0
+  ],
+  "gain": 1.0169
+ }
+}
