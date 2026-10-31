@@ -534,7 +534,7 @@ def shot_core_sample(lit, stackmix=None, out=None, scale=1.0, samples=512, tag='
         area('room-fill', (-1.2, -1.0, 1.9), (55, 0, -40), (1.0, 1.0), 0.7, '#9FB0CC')
         kick = area('kicker', (-0.40, 1.2, tz + 0.08), (0, 0, 0), (0.6, 0.10), 1.2, '#FFF4E8'); aim(kick, tz + 0.01)
         sheen = area('sheen', (0.87, -0.5, tz + 0.12), (0, 0, 0), (0.15, 1.2), 0.5, '#FFF4E8'); aim(sheen, tz + 0.09)
-        render_settings(1600, 1067, samples, scale, exposure=0.0, look='AgX - Medium High Contrast')
+        render_settings(1600, 1067, samples, scale, exposure=0.8, look='AgX - Medium High Contrast')
     else:
         world(hdri='kiara_9_dusk', strength=0.6, rotation=200)
         window_gobo(-1.3, -1.3, 0.9, 0.75, 2.4)
@@ -608,32 +608,31 @@ def shot_terrace(lit, tint=None, out=None, scale=1.0, samples=512, kind='terrace
     import assets
     tz = 0.75
     rim = tz + (0.66 if kind == 'halo' else 0.62)
-    ceil = terrace(lit=lit, tint=tint, rim_z=rim, kind=kind)
+    ceil = terrace(lit=lit, tint=tint, rim_z=rim, kind=kind, glow=1.6 if lit else 1.0)
     wallm = assets.pbr(bpy, 'beige_wall_001', '2k', scale=1.2, name='wall', tint='#CFC8BC', tint_mix=0.35)
     plane('wall', (4.3, 4), (0.85, 1.6, 1.5), (90, 0, 0), wallm)
     plane('floor', (4.3, 6), (0.85, 0, 0), (0, 0, 0), principled('floor', '#2E2622', 0.55))
     plane('ceiling', (4.3, 6), (0.85, 0, ceil), (180, 0, 0), principled('ceiling', '#E9E6E0', 0.9))
-    topm = assets.pbr(bpy, 'oak_veneer_01', '2k', name='tabletop', tint='#6A4A32', tint_mix=0.45)
+    # critic r1 c2: walnut (Poly Haven's walnut set read pale grey here, so its oak toned to walnut)
+    topm = assets.pbr(bpy, 'oak_veneer_01', '2k', name='tabletop', tint='#3E2618', tint_mix=0.62)
     plane('wall-left', (6, 4), (-1.3, 0, 1.5), (90, 0, 90), wallm)
     box_ob('table', -0.95, -0.48, tz - 0.035, 0.95, 0.48, tz, topm, bevel=0.003)
     for x in (-0.85, 0.85):
         for y in (-0.38, 0.38):
             box_ob(f'leg{x}{y}', x - 0.025, y - 0.025, 0, x + 0.025, y + 0.025, tz - 0.035, topm)
-    linen = assets.pbr(bpy, 'rough_linen', '2k', name='runner', tint='#E8E2D6', tint_mix=0.5)
-    box_ob('runner', -0.95, -0.17, tz, 0.95, 0.17, tz + 0.002, linen)
+    # critic r1 c1: no runner, no plate: the pears on bare walnut, the one scale cue
     try:
-        assets.place(bpy, 'food_pears_asian_01', '2k', location=(-0.22, -0.05, tz + 0.002), rotation_deg=(0, 0, 40))
+        assets.place(bpy, 'food_pears_asian_01', '2k', location=(-0.12, -0.04, tz), rotation_deg=(0, 0, 40))
     except Exception as e:
         print('pears skipped', e)
-    plate = principled('plate', '#EFEBE3', 0.35, coat=0.6)
-    bpy.ops.mesh.primitive_cylinder_add(radius=0.14, depth=0.012, vertices=96, location=(0.2, 0.02, tz + 0.008))
-    po = bpy.context.object; po.data.materials.append(plate); po.cycles.is_caustics_receiver = True
-    bpy.ops.object.shade_smooth()
     if lit:
-        world(hdri='kiara_9_dusk', strength=0.05, rotation=200)
-        # the table lamps' round 1 (critic): the fill low and cool, so the pendant is the key
-        area('room-fill', (1.6, -1.6, 2.2), (60, 0, 50), (1.0, 1.0), 1.4, '#9FB0CC')
-        render_settings(1200, 1500, samples, scale, exposure=0.6)
+        # critic r1 (Terrace): c5 the dusk world 0.15, c6 the cool fill x1.8, c7 a kicker on the fins, c4 exposure -0.3
+        world(hdri='kiara_9_dusk', strength=0.15, rotation=200)
+        area('room-fill', (1.6, -1.6, 2.2), (60, 0, 50), (1.0, 1.0), 2.5, '#9FB0CC')
+        from mathutils import Vector
+        kick = area('fin-kicker', (-0.3, 0.6, rim + 0.5), (0, 0, 0), (0.3, 0.3), 15.0, '#FFF2E6')
+        kick.rotation_euler = (Vector((0, 0, rim + 0.17)) - Vector(kick.location)).to_track_quat('-Z', 'Y').to_euler()
+        render_settings(1200, 1500, samples, scale, exposure=0.3)
     else:
         world(hdri='kiara_9_dusk', strength=0.7, rotation=200)
         window_gobo(-1.3, -1.6, 1.4, 0.8, 2.3)
@@ -641,7 +640,8 @@ def shot_terrace(lit, tint=None, out=None, scale=1.0, samples=512, kind='terrace
         sun_lamp('sun', (0.80, -0.25, -0.55), strength=1.2, color='#FFE7C8', angle=1.0)
         render_settings(1200, 1500, samples, scale, exposure=-0.2)
     # standing eye height, a little above the shade, so the terraces read as rings; the table's pool below
-    camera((0.30, -1.30, 1.78), (0.0, 0.02, tz + 0.40), lens=50, fstop=4.0, focus=(0, -0.10, rim + 0.08))
+    # critic r1 c8: 70 mm, the shade's top near the frame's top and the pears near its foot
+    camera((0.36, -1.75, 1.80), (0.0, 0.0, tz + 0.42), lens=70, fstop=4.0, focus=(0, -0.10, rim + 0.08))
     bpy.context.scene.render.filepath = out
     bpy.ops.render.render(write_still=True)
 

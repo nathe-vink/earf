@@ -56,7 +56,7 @@ CS = dict(
     # chart's 59 % amber: a 39 mm path from the bore still passes its red), one Ember stratum, Dust, and Fog at the top
     # critic r2: seven Dust discs in a row read as one deep red (39 mm of 2422 passes only red), so the strata are now
     # tints that survive the depth: Clear bands glow white-gold, Dust stays as ruby bands, one Ember fault line
-    stack=('Smoke dark', 'Smoke', 'Dust', 'Clear', 'Dust', 'Dust', 'Clear', 'Fog', 'Dust', 'Ember',
+    stack=('Smoke dark', 'Smoke', 'Dust', 'Clear', 'Dust', 'Dust', 'Clear', 'Clear', 'Dust', 'Ember',
            'Clear', 'Clear', 'Clear', 'Clear'),
     # each disc's outside, finished on the lathe after turning: 'p' diamond-turned and buffed (clear, deep), 's'
     # bead-blasted satin (it glows: the light leaving the filament scatters there). Masked with tape disc by disc
