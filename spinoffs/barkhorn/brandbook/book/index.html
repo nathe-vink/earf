@@ -83,6 +83,9 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 2vw, 24px) }
 .four { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(12px, 1.6vw, 20px) }
 .full img { width: 100% }
+.three figure img { aspect-ratio: 3 / 2; object-fit: cover; width: 100% }
+.stratum.reserve h3 { font-size: clamp(22px, 2.4vw, 28px) }
+.top .mark img { height: 30px }
 @media (max-width: 860px) { .cols, .three { grid-template-columns: minmax(0, 1fr) } .four { grid-template-columns: repeat(2, minmax(0, 1fr)) } }
 @media (max-width: 620px) { .two { grid-template-columns: minmax(0, 1fr) } }
 .big-quote { font-size: clamp(30px, 4.6vw, 60px); line-height: 1.02; letter-spacing: -.035em; font-weight: 600; max-width: 18ch }
