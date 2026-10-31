@@ -1,0 +1,21 @@
+{"date": "2026-10-31",
+ "what": "Blind duel 2: Strata (round two) against the current design. A fresh critic saw only the four images and duel-2-prompt.md. Pair 1, the studio hero: X = proofs/design-strata-p2.png, Y = proofs/design-current-p1.png. Pair 2, in use: X = the current covers-off room final (tropos-campaign/tropos-room-golden-hour-off.png, resized to 1440 x 810), Y = proofs/design-strata-room-p2.png.",
+ "key": {"pair1-X": "Strata", "pair1-Y": "current", "pair2-X": "current", "pair2-Y": "Strata"},
+ "stage1": [
+  {"image": "pair1-X", "impression": "The terraced horn, with its contour-line ribs stepping down to a small polished throat, is the one feature that makes this read as an object of its own: it looks machined from solid, and the brass standoffs tie it to the bolted woofer. The woofer sits behind a clear stepped ring, so its frame, bolts and surround read as precision hardware, though the cabinet below the horn is still a busy transparent box of ribs, ports and an electronics block.", "score": 7.0},
+  {"image": "pair1-Y", "impression": "The smooth tinted horn is cleaner, but the compression driver's rear bulb shows through the bell as a blurry red blob that looks like a fault, and the thin clear rods make the horn look perched rather than fixed. The opaque glossy red trim ring around the woofer reads like an aftermarket car-audio surround and flattens the 'see into it' idea.", "score": 5.5},
+  {"image": "pair2-X", "impression": "In the room the smooth horns turn into flat green panels with a dark puck stuck to their centres, and the opaque green woofer rings make the pair look like toy or lifestyle speakers more than a $20k horn system. The silhouette holds, but the front reads as two circles on a green box.", "score": 5.0},
+  {"image": "pair2-Y", "impression": "The ribbed horns hold their depth and shape even at room distance and against the light, and the brass posts read as deliberate jewellery. The clear bolted woofer surround keeps the pro-audio honesty, though the bright green internal bracing and the bottom electronics pod still add clutter.", "score": 7.0}
+ ],
+ "pairs": [
+  {"pair": 1, "better": "X", "why": "The terraced horn and the brass standoffs give it a signature that nothing else on the market has, and the clear bolted woofer ring looks engineered, where Y's glossy trim ring and the ghostly driver blob inside its bell look cheap and unresolved."},
+  {"pair": 2, "better": "Y", "why": "The same terraced horn and brass hardware keep reading as sculpted, intentional objects at room scale, where X's smooth horns flatten into green panels with a puck in the middle."}
+ ],
+ "best": {
+  "improve": [
+   "Calm the cabinet interior: cut the visible bracing to a few deliberate members aligned with the horn posts, and hide or reshape the bottom electronics block and the wiring, so the transparency shows a composed structure rather than a crowded build.",
+   "Make the horn mount a real piece of engineering: replace the four short pins with two or three heavier turned-brass posts with visible collars or a machined cradle at the throat, so the horn reads as clamped and adjustable rather than balanced on studs.",
+   "Carry the horn's terraced language down into the cabinet, for example a matching stepped bezel around the woofer or stepped edges on the port and terminal plates, and give the cabinet one finished plinth or foot detail in place of the small feet, so top and bottom read as one design."
+  ],
+  "least_real": "The terraced horn as drawn: a deep, sharply stepped rectangular flare in tinted cast acrylic with crisp concentric ribs and an optically clean wall is extremely hard to machine or cast without stress marks, cloudiness or visible tool paths at that size. The way the ribs run without a break into a tiny polished throat ball, with no visible driver mounting flange or rear can, also makes the driver attachment look unresolved."
+ }}

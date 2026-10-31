@@ -48,3 +48,26 @@ is about 73 MB and not for git.
 
 It needs the Cloud's render model, `spinoffs/barkhorn/out-cloud/render/barkhorn-cloud.glb`, which the Cloud's fabkit
 build writes. The model is not in git. A proposal's variant gets its own file beside this one.
+
+## Strata, the leading proposal (`tropos-strata.blend`)
+
+`tropos-strata.blend` is the Strata proposal (`variants/STRATA.md`) in the same eight tints, the same frame and the
+same layout. Its collections are named **Tropos Strata Ember** through **Tropos Strata Smoke**, tagged `Strata` and
+`proposal`, and their description says it is a proposal, not the design on sale.
+
+It holds:
+- the Cloud's cabinet, with the formed horn, its throat, the stainless posts, the cloth disc and the dyed woofer ring
+  left out;
+- the stepped laminated horn (`horn-strata`: 22 layers of 1/2 in and the boss, the mouth's layer an even 20 mm lip);
+- the four ø16 bronze posts and their collars;
+- the caldera, three rings round the woofer.
+
+There is no cover collection: the woofer sits in the caldera, and the cloth disc does not fit it as drawn.
+
+It is 23 MB. Unused meshes are dropped before saving: the templates, and the parts a design hides.
+`link_example.py -- strata OUT.png` links four tints and renders `link_example_strata.png`.
+
+    python3.11 spinoffs/barkhorn/asset/make_blend.py --design strata --out spinoffs/barkhorn/asset/tropos-strata.blend
+
+It needs the proposals' render model too, `spinoffs/barkhorn/variants/out/render/barkhorn-variants.glb`. That model is
+written by `variants/render_model.py` and is not in git.

@@ -11,6 +11,11 @@
    "preset": "$bark",
    "bevel_mm": 1.0
   },
+  "brass": {
+   "preset": "metal",
+   "color": "#C9A660",
+   "roughness": 0.3
+  },
   "clear-cast": {
    "preset": "clear_resin",
    "color": "#FFFFFF",
@@ -29,11 +34,15 @@
    "material": "bark"
   },
   {
+   "match": "strata-posts|strata-collars",
+   "material": "brass"
+  },
+  {
    "match": "horn-topo-clear",
    "material": "clear-cast"
   },
   {
-   "match": "horn-topo|horn-topo-lines",
+   "match": "horn-topo|horn-topo-lines|horn-strata",
    "material": "horn-lot"
   }
  ],

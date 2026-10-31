@@ -3,10 +3,11 @@ asset, so another scene can link or append "Tropos Ember" and the rest. The part
 render engine's own (studio/engine/product.py: import_model, smooth_parts, normals_from, place), so a linked Tropos
 looks as it does in the studio's renders.
 
-    python3.11 spinoffs/barkhorn/asset/make_blend.py [--out spinoffs/barkhorn/asset/tropos.blend] [--product ...]
+    python3.11 spinoffs/barkhorn/asset/make_blend.py [--out spinoffs/barkhorn/asset/tropos.blend]
+    python3.11 spinoffs/barkhorn/asset/make_blend.py --design strata --out spinoffs/barkhorn/asset/tropos-strata.blend
 
 Needs the Cloud's render model, spinoffs/barkhorn/out-cloud/render/barkhorn-cloud.glb (written by the Cloud's
-fabkit build; not in git). Each speaker stands at the origin, its feet on z = 0, its front facing -y, in metres;
+fabkit build; not in git), and for Strata the proposals' render model too (spinoffs/barkhorn/variants/render_model.py). Each speaker stands at the origin, its feet on z = 0, its front facing -y, in metres;
 the collections are hidden from the view layer except Ember, so the file opens on one speaker.
 
 In another file (bpy):
@@ -33,43 +34,58 @@ LIGHTER = {'amp-plate-print': 0.15, 'rating-plate-print': 0.15, 'amp-plate-ink':
            # and, for a speaker seen across a landscape, the horn's dense tessellation and the lining's voile webs
            'waveguide': 0.35, 'horn-throat': 0.4, 'waveguide-cap': 0.4, 'lining-*-web': 0.3}
 COVER = ('cloth-disc', 'disc-frame')
+# the designs: each a list of (engine file, parts hidden). Strata (variants/STRATA.md) is the Cloud with its formed
+# horn, posts, cloth disc and dyed ring hidden and the proposals' laminated horn, bronze posts and caldera laid on it
+STRATA_HIDE = ['cloth-disc', 'horn-throat', 'post-*', 'post-sleeves', 'post-sockets', 'waveguide', 'woofer-ring']
+DESIGNS = {'current': [('studio/products/barkhorn-cloud.json', [])],
+           'strata': [('studio/products/barkhorn-cloud.json', STRATA_HIDE),
+                      ('studio/products/barkhorn-variants.json', ['horn-topo*'])]}
 TINTS = [('Ember', 'cloud-red'), ('Dust', 'cloud-orange'), ('Acid', 'cloud-amber'), ('Poison', 'eucalyptus-y2k-green'),
          ('Ice', 'cloud-blue'), ('Haze', 'cloud-violet'), ('Fog', 'birch-fog-clear'), ('Smoke', 'cloud-black')]
 
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument('--out', default=str(HERE / 'tropos.blend'))
-    ap.add_argument('--product', default='studio/products/barkhorn-cloud.json')
-    ap.add_argument('--name', default='Tropos')
-    ap.add_argument('--full', action='store_true', help='keep every triangle (no LIGHTER)')
-    a = ap.parse_args()
-    import bpy
-    import product as Pr
-
-    bpy.ops.wm.read_factory_settings(use_empty=True)
-    pdef = Pr.load_def(a.product, ROOT)
+def load_product(bpy, Pr, path, hide, full):
+    """One engine file's parts, lightened, placed once per tint with `hide` left out: (objects, part_of)."""
+    pdef = Pr.load_def(path, ROOT)
     templates = Pr.import_model(bpy, Path(ROOT, pdef['model']), pdef['origin_mm'], pdef.get('axes', 'gltf'))
     if pdef.get('smooth'):
         Pr.smooth_parts(bpy, templates, pdef['smooth'])
     if pdef.get('normals_from'):              # the shading normals; the waveguide's refinement onto its true surface (a
         rules = pdef['normals_from']          # few tenths of a millimetre, for macros) only with --full, as render.py's
-        if not a.full:                        # "normals_refine": false does for small copies
+        if not full:                          # "normals_refine": false does for small copies
             rules = [dict(r, refine=0) for r in rules]
         Pr.normals_from(bpy, templates, rules, pdef['origin_mm'], ROOT)
-    if not a.full:
+    if not full:
         for pname, ob in templates.items():
             ratio = next((r for k, r in LIGHTER.items() if Pr._match(pname, k)), None)
-            if ratio is None:
+            if ratio is None or any(Pr._match(pname, h) for h in hide):
                 continue
             bpy.context.scene.collection.objects.link(ob)
             m = ob.modifiers.new('lighter', 'DECIMATE'); m.ratio = ratio
             bpy.context.view_layer.objects.active = ob
             bpy.ops.object.modifier_apply(modifier=m.name)
             bpy.context.scene.collection.objects.unlink(ob)
-    shot = {'product': {'def': a.product, 'instances': [{'position': [0, 0, 0], 'rotate_z': 0, 'flavour': f}
-                                                         for _, f in TINTS]}}
-    objs, part_of = Pr.place(bpy, pdef, templates, shot, ROOT)
+    shot = {'product': {'def': path, 'instances': [{'position': [0, 0, 0], 'rotate_z': 0, 'flavour': f, 'hide': hide}
+                                                    for _, f in TINTS]}}
+    return Pr.place(bpy, pdef, templates, shot, ROOT)
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--out', default=str(HERE / 'tropos.blend'))
+    ap.add_argument('--design', default='current', choices=sorted(DESIGNS))
+    ap.add_argument('--name', default=None, help='the collections\' prefix (default Tropos, or Tropos Strata)')
+    ap.add_argument('--full', action='store_true', help='keep every triangle (no LIGHTER)')
+    a = ap.parse_args()
+    import bpy
+    import product as Pr
+
+    bpy.ops.wm.read_factory_settings(use_empty=True)
+    a.name = a.name or ('Tropos' if a.design == 'current' else f'Tropos {a.design.title()}')
+    objs, part_of = [], {}
+    for prod_path, hide in DESIGNS[a.design]:
+        o, p = load_product(bpy, Pr, prod_path, hide, a.full)
+        objs += o; part_of.update(p)
     scene = bpy.context.scene
     for i, (tint, flavour) in enumerate(TINTS):
         col = bpy.data.collections.new(f'{a.name} {tint}')
@@ -86,14 +102,24 @@ def main():
         for ob in [o for o in col.objects if any(o.name.endswith(' ' + k) or (' ' + k + '.') in o.name for k in COVER)]:
             col.objects.unlink(ob); cover.objects.link(ob)
         cover.hide_render = True; cover.hide_viewport = True
+        if not cover.objects:                     # Strata has no cover: its woofer sits in the caldera
+            col.children.unlink(cover); bpy.data.collections.remove(cover)
         col['tint'] = tint; col['flavour'] = flavour
         col['note'] = (f'{a.name} in {tint} ({flavour}): EARF\'s horn loudspeaker in tinted cast acrylic, 1293 mm tall, '
-                       'metres, z up, front -y, feet on z = 0. Materials are Cycles (volume absorption in the acrylic).')
+                       'metres, z up, front -y, feet on z = 0. Materials are Cycles (volume absorption in the acrylic).'
+                     + ('' if a.design == 'current' else f' The {a.design.title()} proposal (spinoffs/barkhorn/variants/'
+                                                         f'{a.design.upper()}.md), not the design on sale.'))
         col.asset_mark()
         col.asset_data.description = col['note']
-        col.asset_data.tags.new('EARF'); col.asset_data.tags.new(a.name); col.asset_data.tags.new(tint)
+        for t in ['EARF', 'Tropos', tint] + ([a.design.title(), 'proposal'] if a.design != 'current' else []):
+            col.asset_data.tags.new(t)
         if i:
             bpy.context.view_layer.layer_collection.children[col.name].exclude = True
+    keep = set(objs)                              # the templates and the parts a design hides stay out of the file
+    for ob in [o for o in bpy.data.objects if o not in keep]:
+        bpy.data.objects.remove(ob, do_unlink=True)
+    for me in [m for m in bpy.data.meshes if m.users == 0]:
+        bpy.data.meshes.remove(me)
     for img in bpy.data.images:                   # decals and any textures travel with the file
         if img.source == 'FILE' and not img.packed_file:
             try:

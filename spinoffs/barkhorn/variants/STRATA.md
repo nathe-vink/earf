@@ -56,6 +56,46 @@ Its three changes for Strata are now drawn:
 **The build facts are unchanged for the deck:** the horn is still **22 layers of 1/2 in stock cast sheet** (plus the
 boss). Only the mouth's layer is cut wider.
 
+## Round three: the duel against the current design (2026-10-31)
+
+A second blind duel (`renders/2026-10-31/barkhorn/design-pass/critique/duel-2.json`) set Strata's round two against
+the current design. The same framing was used for both, cover off and the whole speaker in frame.
+
+| | Strata | current |
+|---|---|---|
+| the studio hero | **7.0** | 5.5 |
+| in use (the room at golden hour) | **7.0** | 5.0 |
+
+Strata was preferred in both pairs. The critic's words: "a signature that nothing else on the market has", and the
+horns "keep reading as sculpted, intentional objects at room scale".
+
+**Its notes, and what happens to each:**
+1. *Calm the cabinet's inside* (fewer, deliberate braces; hide the electronics and wiring). This is the current
+   design's critique #8 too (`DETAILS.md`). The braces set the panels' modes, so they are not cut for a picture.
+   - What can change without a review: the batts lined up on the ribs' grid, clear clips, and the wiring dressed
+     along the braces.
+   - Fewer braces needs the panel-mode check re-run first. It is noted, not drawn.
+2. *A heavier mount: two or three posts, or a cradle.* The posts are already ø16 bronze with collars (round two).
+   Fewer posts changes the load path the tipping check and the posts' modes were worked on, as before. It is noted for
+   a structural review, not drawn.
+3. *Carry the steps into the cabinet.* The caldera does this at the woofer. In the Ember proof the critic read it as
+   clear, because ring and cabinet share the tint. The turned feet in `DETAILS.md` (two 1/2 in discs, a polished edge)
+   carry the steps to the floor. Stepped edges on the port and the plate are a possible next step, not drawn.
+
+**What it found least real:** a deep, crisply stepped horn in tinted cast acrylic with optically clean walls, "extremely
+hard to machine or cast without stress marks, cloudiness or visible tool paths".
+- It is neither cast nor machined from solid. Each layer is cut from 1/2 in sheet and its edge diamond-milled and
+  buffed while it is a flat part. The layers are then bonded and the stack annealed (`make/laminated-horn.md`).
+- That is the route a flat part's polished edge already proves. The risk is in the 21 bond lines: bubbles and
+  crazing at a joint.
+- **Before the first pair, a three-layer test stack** is made from the mouth's layers, bonded and annealed, then
+  inspected under polarised light for stress and at the bond lines for bubbles. It costs about $150 (est.).
+- The critic also saw no driver flange at the throat. The turned adaptor ring and its four screw heads are drawn
+  (`hf-adaptor`); a rear three-quarter picture should show them.
+
+**The build facts stay as stated for the deck:** 22 layers of 1/2 in stock cast sheet plus the boss, the mouth's
+layer cut 20 mm outside the air path. A speaker is about 74 kg.
+
 ## The numbers
 
 | | current | Strata | change |
