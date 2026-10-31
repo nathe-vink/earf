@@ -390,7 +390,7 @@ def interior(bpy, p, objs):
         a2, b2 = sorted((yy, yy + d * 0.02))
         sl.box(x0, a2, 0.0, P.TRAP['x0'], b2, 1.20)                                       # the wainscot board
     # the front wall: plain oak boards with the door at the route end, the selector's niche at the far end
-    sl.box(x0, y0 + 1.10, 0.0, x0 + 0.02, y1, h)
+    sl.box(x0, y0, 0.0, x0 + 0.02, y1, h)
     objs.append(sl.object(bpy, oakm, bevel=0.0015))
     # the lid: 45 mm slats across the room with 25 mm gaps over the absorber, and two rows of small spots
     ld = Mesh('h44-in-lid')
@@ -412,8 +412,8 @@ def interior(bpy, p, objs):
     bl = Mesh('h44-bench-led'); bl.box(P.BENCH['x0'] + 0.02, y0, 0.02, P.BENCH['x0'] + 0.03, y1, 0.05)
     objs.append(bl.object(bpy, emitter(bpy, 'h44-foot-led', '#FFB774', p.get('foot_glow', 4.0))))
     # the rug, the chairs (the wheelchair space left clear, beside its companion chair), side tables
-    rg = Mesh('h44-rug'); rg.box(P.SWEET[0] - 1.6, y0 + 0.55, 0.0, P.BENCH['x0'] - 0.15, y1 - 0.55, 0.012)
-    objs.append(rg.object(bpy, principled(bpy, 'h44-rug', p.get('rug', '#3E3833'), rough=0.97, spec=0.1, bump=(0.004, 0.5, 0.001))))
+    rg = Mesh('h44-rug'); rg.box(P.SWEET[0] - 1.2, y0 + 0.9, 0.0, P.BENCH['x0'] - 0.25, y1 - 0.9, 0.012)
+    objs.append(rg.object(bpy, principled(bpy, 'h44-rug', p.get('rug', '#6E6256'), rough=0.97, spec=0.1, bump=(0.004, 0.5, 0.001))))
     stl, wood, uph = Mesh('h44-chair-steel'), Mesh('h44-chair-oak'), Mesh('h44-chair-wool')
     for (x, y, kind) in P.SEATS:
         if kind in ('chair', 'companion'):

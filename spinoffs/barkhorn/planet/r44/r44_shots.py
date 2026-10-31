@@ -106,7 +106,7 @@ def scene():
     for i, (x, y) in enumerate(P.STACKS):
         lights[f'stack{i}'] = spot([x + 1.0, y + (0.5 if y < YC else -0.5), zi], [x, y, 1.3], 30.0, 20.0, k=2600)
     M = P.MOTHER
-    lights['mother'] = spot([M['x'] - 0.25, M['y'] - 0.6, zi], [M['x'] + 0.7, M['y'] + 0.25, 0.0], 60.0, 18.0, k=3000,
+    lights['mother'] = spot([M['x'] - 0.25, M['y'] - 0.6, zi], [M['x'] + 0.7, M['y'] + 0.25, 0.0], 140.0, 18.0, k=3000,
                             blend=0.2, radius=0.01)
     lights['trap'] = {'type': 'area', 'position': [P.TRAP['x0'] - 0.25, YC, zi - 0.05], 'target': [P.TRAP['x0'], YC, 1.0],
                       'size_m': [0.15, 4.6], 'irradiance': 0.5, 'color': 2600, 'camera': False}
