@@ -4,9 +4,10 @@ removed, no dimensions and no text. Parts the design should not claim (bought pa
 broken lines. A draftsperson finishes them (surface shading, the oblique lines for transparent surfaces, the FIG.
 labels, the sheet margins): see README.md.
 
-    .venv-fab/bin/python spinoffs/barkhorn/companions/ip/design_drawings.py hemisphere|core|mantle [--fabkit DIR]
+    .venv-fab/bin/python spinoffs/barkhorn/companions/ip/design_drawings.py DESIGN [--src CHECKOUT]
 
-Mantle's product file lives on r32-turntable-final; pass `--src` to a checkout of it.
+DESIGN is hemisphere, core, mantle, tropos-a (the formed horn), tropos-b (the laminated horn, horn-plan-b), globe or
+coin. Mantle's product file lives on r32-turntable-final and Tropos's on r33-speaker-horn; pass `--src` to a checkout.
 """
 import argparse, importlib.util, os, sys
 
@@ -31,15 +32,57 @@ DESIGNS = {
         broken=['arm', 'cartridge', 'motor', 'belt', 'feet', 'phono-stage', 'rear-box', 'hinges', 'led-strip',
                 'slot-mask', 'mark']),
 }
+# Tropos (r33-speaker-horn, spinoffs/barkhorn/cloud.py): the cabinet, its ports, the horn on its pod and posts claimed;
+# the drivers, the amplifier, the cloth disc and its frame, the posts' sockets and sleeves, the feet, the screws, the
+# rating plate and the mark in broken lines. Its mains cable is not modelled (README).
+_TROPOS = ['left', 'right', 'top', 'bottom', 'front-panel', 'back', 'woofer-ring', 'port-left', 'port-right',
+           'port-frame-left', 'port-frame-right', 'horn-pod', 'waveguide-cap', 'post-1', 'post-2', 'post-3', 'post-4',
+           'horn-pads']
+_TROPOS_BROKEN = ['woofer', 'amp-plate', 'hf', 'hf-adaptor', 'cloth-disc', 'disc-frame', 'post-sockets',
+                  'post-sleeves', 'feet', 'back-screws', 'port-screws', 'rating-plate', 'mark-back']
+DESIGNS.update({
+    'tropos-a': dict(file='spinoffs/barkhorn/cloud.py', claimed=_TROPOS + ['waveguide', 'horn-throat'],
+                     broken=_TROPOS_BROKEN),
+    # Plan B in the formed horn's place: horn_options.py builds it at the Cloud's origin
+    'tropos-b': dict(file='spinoffs/barkhorn/cloud.py', extra='spinoffs/barkhorn/horn_options.py',
+                     claimed=_TROPOS + ['horn-plan-b'], broken=_TROPOS_BROKEN),
+    # the six discs and the base; the glow bands, the UV ring and the hue chips left out (inside, or not the object)
+    'globe': dict(loader='globe', claimed=['disc-m90', 'disc-m30', 'disc-m150', 'disc-equator', 'disc-north',
+                                           'disc-south', 'base'], broken=[]),
+    # one coin, design A: the reeded body with the globe engraved in its back and the words in its front
+    # 40 mm across: the drawing kit's mesh, raster and stray-line sizes (set for speakers) scaled down with it
+    'coin': dict(loader='coin', claimed=['coin'], broken=[], scale=0.08),
+})
 VIEWS = [('1-perspective', 'iso'), ('2-front', 'front'), ('3-rear', 'back'), ('4-left', 'left'), ('5-right', 'right'),
          ('6-top', 'top'), ('7-bottom', 'bottom')]
 
 
 def load(path, fabkit):
     sys.path.insert(0, fabkit)
-    spec = importlib.util.spec_from_file_location('product_ip', path)
+    sys.path.insert(0, os.path.dirname(path))
+    spec = importlib.util.spec_from_file_location('product_ip_' + os.path.basename(path)[:-3], path)
     m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
-    return m.PRODUCT
+    return m
+
+
+def solids(D, src, fabkit):
+    """{part name: solid} for one design."""
+    if D.get('loader') == 'globe':
+        m = load(os.path.join(src, 'spinoffs/barkhorn/globe_colour.py'), fabkit)
+        return {p.name: p.solid for p in m.parts() if p.solid is not None}
+    if D.get('loader') == 'coin':
+        m = load(os.path.join(src, 'spinoffs/barkhorn/companions/earf_coin.py'), fabkit)
+        coin = [p for p in m.PRODUCT.parts(m.PRODUCT.params) if p.name == 'coin'][0]
+        # the engravings' solids sit a hair under each face (for the renders); moved to break the face, so they cut in
+        from build123d import Pos
+        body = coin.pieces['body'][0] - Pos(0, 0, -0.05) * coin.pieces['globe'][0] - Pos(0, 0, 0.15) * coin.pieces['words'][0]
+        return {'coin': body}
+    P = load(os.path.join(src, D['file']), fabkit).PRODUCT
+    out = {p.name: p.solid for p in P.parts(P.params) if p.solid is not None}
+    if D.get('extra'):
+        X = load(os.path.join(src, D['extra']), fabkit).PRODUCT
+        out.update({p.name: p.solid for p in X.parts(X.params) if p.solid is not None})
+    return out
 
 
 def classify(all_lines, claimed_lines, tol=1.0):
@@ -112,21 +155,25 @@ def main():
     a = ap.parse_args()
     D = DESIGNS[a.design]
     fabkit = os.path.join(a.src, 'studio', 'fabkit')
-    P = load(os.path.join(a.src, D['file']), fabkit)
+    parts = solids(D, a.src, fabkit)
     import drawings as DR
     DR.VIEWS.setdefault('bottom', ((0, 0, -1), (0, -1, 0)))
-    parts = {p.name: p for p in P.parts(P.params) if p.solid is not None}
-    claimed = [parts[n].solid for n in D['claimed'] if n in parts]
-    broken = [parts[n].solid for n in D['broken'] if n in parts]
+    k = D.get('scale', 1.0)
+    if k != 1.0:
+        for n in ('MESH_MM', 'FOOT_PX', 'NEAR_MM', 'BRIDGE_MM', 'STRAY_MM', 'EASE_MM', 'MEET_MM'):
+            setattr(DR, n, getattr(DR, n) * k)
+        DR._drop_slivers.__defaults__ = (DR.STRAY_MM, 2.0 * k)
+    claimed = [parts[n] for n in D['claimed'] if n in parts]
+    broken = [parts[n] for n in D['broken'] if n in parts]
     missing = [n for n in D['claimed'] + D['broken'] if n not in parts]
     if missing:
         print('not in the model:', missing)
     out_dir = os.path.join(HERE, a.design)
     os.makedirs(out_dir, exist_ok=True)
     for name, view in VIEWS:
-        everything, _ = DR.hlr(claimed + broken, view)
+        everything, _ = DR.hlr(claimed + broken, view) if broken else (None, None)
         mine, _ = DR.hlr(claimed, view)
-        s, b = classify(everything, mine)
+        s, b = classify(everything, mine) if broken else (mine, [])
         b = clip(b, s)
         draw(s, b, os.path.join(out_dir, f'{a.design}-{name}'))
         print(a.design, name, len(s), 'solid', len(b), 'broken', flush=True)
