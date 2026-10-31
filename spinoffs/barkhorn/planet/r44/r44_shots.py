@@ -42,7 +42,7 @@ VIEWS = {
                            'fstop': 4.0, 'focus': [7.0, 4.4, 1.2]}, exposure=2.6, haze=0.008, shutter=1.0, people='bar',
                    room={'glass_gloss': 0.6}),
     'bar': dict(camera={'position': [4.9, 2.55, 1.45], 'target': [13.0, 4.3, 2.0], 'lens_mm': 28, 'level': True,
-                        'fstop': 4.0, 'focus': [11.0, 4.5, 1.6]}, exposure=3.0, haze=0.008, shutter=0.75, people='bar'),
+                        'fstop': 4.0, 'focus': [11.0, 4.5, 1.6]}, exposure=3.0, haze=0.008, shutter=1.0, people='bar-far'),   # p1: the near guests read as mannequins
     # p4 (p3 judged 4.5/5.0, converged: too bright and even; the pair darker than the walls; Mother's spot a white pool
     # and a haze shaft; the floor camouflage; coarse terrazzo; no life; a flat symmetric view with a cut board): seated
     # on the bench at 32 mm, a chair in the foreground; exposure 3.9; fill 0.03, trap 0.2; the pair 55 W at 24 deg;
@@ -52,9 +52,9 @@ VIEWS = {
     # reversed so the pair face the door; the lantern from the listeners' side; the porch view new
     'lantern': dict(camera={'position': [14.9, 2.75, 1.15], 'target': [19.1, 4.85, 1.05], 'lens_mm': 28, 'level': True,
                             'fstop': 2.8, 'focus': [P.STACKS[0][0], P.STACKS[0][1], 1.0]},
-                    exposure=3.9, haze=0.0008, room={'interior': True}, shutter=1.0, people='lantern'),
+                    exposure=3.9, haze=0.0008, room={'interior': True}),   # p1's near listener read as a dummy: none here
     # test: from x 10.0 the open leaves of pair 1 filled half the frame; now from between them, at eye height
-    'porch': dict(camera={'position': [11.25, 3.85, 1.45], 'target': [18.9, 4.30, 1.55], 'lens_mm': 24, 'level': True,
+    'porch': dict(camera={'position': [11.25, 3.85, 1.45], 'target': [18.9, 4.30, 1.40], 'lens_mm': 32, 'level': True,
                           'fstop': 4.0, 'focus': [17.0, 4.6, 1.1]},
                   exposure=3.2, haze=0.006, shutter=1.0, people='porch'),
 }
@@ -96,7 +96,7 @@ LANT_PEOPLE = [   # listeners: still, so a slower drift than at the bar
     person(10, 'bench', [P.BENCH['x0'] + 0.30, P.INNER['y0'] + 0.62, 0], 8.0, P.BENCH['z'], move=[0.02, 0.015, 0.004],
            spin=3.0, head=[0.16, 0.09, 0.03, 30.0], arms=[0.06, 0.04, 0.03, 10.0]),
 ]
-PEOPLE = {'bar': BAR_PEOPLE, 'lantern': LANT_PEOPLE, 'porch': LANT_PEOPLE[:2]}
+PEOPLE = {'bar': BAR_PEOPLE, 'bar-far': [BAR_PEOPLE[i] for i in (2, 3, 7)], 'lantern': LANT_PEOPLE, 'porch': LANT_PEOPLE[:2]}
 
 
 def _face(x, y, tx, ty):
@@ -112,7 +112,7 @@ def spot(pos, tgt, w, cone, k=2700, blend=0.6, radius=0.03):
 def scene():
     S = P.SHOP_WALL
     props = [{'kind': 'kit', 'shape': 'ext', 'path': KIT, 'fn': 'house', 'windows_lit': 0.3, 'window_glow': 0.25,
-              'glass_gloss': 0.3, 'band_glow': 0.3}]   # look 2 test: #FFB040 at 0.6 clipped to cream under AgX
+              'glass_gloss': 0.3, 'band_glow': 0.12}]   # look 2: #FFB040 at 0.6 clipped to cream under AgX; 0.3 still cream (p1)
     shelves = [0.30, 0.78, 1.26, 1.74, 2.22]
     # the Cores along the shop's shelves, in the eight tints, some unlit
     xs = [S['x0'] + 0.35 + 0.30 * i for i in range(8)]

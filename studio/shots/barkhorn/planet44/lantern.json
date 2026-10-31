@@ -79,7 +79,7 @@
     "windows_lit": 0.3,
     "window_glow": 0.25,
     "glass_gloss": 0.3,
-    "band_glow": 0.3,
+    "band_glow": 0.12,
     "interior": true
    },
    {
@@ -462,112 +462,6 @@
     "votives": [],
     "matchbooks": [],
     "coats": []
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "path": "spinoffs/barkhorn/planet/r40/kit40.py",
-    "fn": "figures",
-    "people": [
-     {
-      "pose": "chair",
-      "at": [
-       16.38,
-       4.99,
-       0
-      ],
-      "heading": 0.0,
-      "seat": 0.4,
-      "cloth": "#1C2230",
-      "skin": "#46301F",
-      "hair": "#8A7A6A",
-      "seed": 448,
-      "move": [
-       0.02,
-       0.015,
-       0.004
-      ],
-      "spin": 3.0,
-      "head": [
-       0.16,
-       0.09,
-       0.03,
-       30.0
-      ],
-      "arms": [
-       0.06,
-       0.04,
-       0.03,
-       10.0
-      ],
-      "sleeve": "#1C2230"
-     },
-     {
-      "pose": "chair",
-      "at": [
-       15.43,
-       6.56,
-       0
-      ],
-      "heading": -12.0,
-      "seat": 0.4,
-      "cloth": "#1E1E1D",
-      "skin": "#6E4A36",
-      "hair": "#6A5038",
-      "seed": 449,
-      "move": [
-       0.02,
-       0.015,
-       0.004
-      ],
-      "spin": 3.0,
-      "head": [
-       0.16,
-       0.09,
-       0.03,
-       30.0
-      ],
-      "arms": [
-       0.06,
-       0.04,
-       0.03,
-       10.0
-      ]
-     },
-     {
-      "pose": "bench",
-      "at": [
-       13.6,
-       2.54,
-       0
-      ],
-      "heading": 8.0,
-      "seat": 0.45,
-      "cloth": "#14171E",
-      "skin": "#5E3C2A",
-      "hair": "#3A2A1E",
-      "seed": 450,
-      "move": [
-       0.02,
-       0.015,
-       0.004
-      ],
-      "spin": 3.0,
-      "head": [
-       0.16,
-       0.09,
-       0.03,
-       30.0
-      ],
-      "arms": [
-       0.06,
-       0.04,
-       0.03,
-       10.0
-      ]
-     }
-    ],
-    "shutter": 1.0
    }
   ]
  },
