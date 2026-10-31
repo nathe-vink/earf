@@ -73,15 +73,36 @@ def solids(D, src, fabkit):
     if D.get('loader') == 'coin':
         m = load(os.path.join(src, 'spinoffs/barkhorn/companions/earf_coin.py'), fabkit)
         coin = [p for p in m.PRODUCT.parts(m.PRODUCT.params) if p.name == 'coin'][0]
-        # the engravings' solids sit a hair under each face (for the renders); moved to break the face, so they cut in
-        from build123d import Pos
-        body = coin.pieces['body'][0] - Pos(0, 0, -0.05) * coin.pieces['globe'][0] - Pos(0, 0, 0.15) * coin.pieces['words'][0]
-        return {'coin': body}
+        # the reeded body through hidden-line removal; the engravings (0.2 and 0.12 deep, too fine for its mesh) drawn
+        # as their outlines on the face they open to: `face` lines, seen from the side the face looks to
+        return {'coin': coin.pieces['body'][0],
+                'face': [(coin.pieces['words'][0], +1), (coin.pieces['globe'][0], -1)]}
     P = load(os.path.join(src, D['file']), fabkit).PRODUCT
     out = {p.name: p.solid for p in P.parts(P.params) if p.solid is not None}
     if D.get('extra'):
         X = load(os.path.join(src, D['extra']), fabkit).PRODUCT
         out.update({p.name: p.solid for p in X.parts(X.params) if p.solid is not None})
+    return out
+
+
+def face_lines(items, view, DR):
+    """Outlines of thin engravings in a flat face: the edges of each engraving's face nearest that surface, projected
+    when the view looks at the face's side (`side` +1: the +z face, -1: the -z face)."""
+    import numpy as np
+    d = np.array(DR.VIEWS[view][0], float)
+    out = []
+    for solid, side in items:
+        if d[2] * side <= 1e-6:
+            continue
+        zs = [f.center().Z for f in solid.faces()]
+        z = max(zs) if side > 0 else min(zs)
+        for f in solid.faces():
+            if abs(f.center().Z - z) > 1e-3:
+                continue
+            for e in f.edges():
+                n = 2 if e.geom_type.name == 'LINE' else int(min(400, max(6, e.length / 0.05)))
+                pts = [(p.X, p.Y, p.Z) for p in (e.position_at(t) for t in np.linspace(0, 1, n))]
+                out.append(DR.to2d(view, pts))
     return out
 
 
@@ -174,6 +195,7 @@ def main():
         everything, _ = DR.hlr(claimed + broken, view) if broken else (None, None)
         mine, _ = DR.hlr(claimed, view)
         s, b = classify(everything, mine) if broken else (mine, [])
+        s = s + face_lines(parts.get('face', []), view, DR)
         b = clip(b, s)
         draw(s, b, os.path.join(out_dir, f'{a.design}-{name}'))
         print(a.design, name, len(s), 'solid', len(b), 'broken', flush=True)
