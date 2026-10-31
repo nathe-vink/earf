@@ -1,5 +1,7 @@
 # Planet EARF, the pop-up: the bridge to the house
 
+(Two sizes: a lean eight-week first step, then the five-month pop-up. Both use the same storefront and plan.)
+
 Round 42, 31 October 2026, from the coordinator's brief: "a 3 to 6 month downtown listening room and shop ... the
 bridge to the full bar", with the debut night in FOG Design+Art week. The rules come from `research-popup.md`,
 which has a source and a date for every claim. *(Inference)* marks this round's own reasoning. Nothing has been applied
@@ -8,6 +10,71 @@ for, signed or asked of anyone.
 **The order of things:**
 1. The pop-up proves the room and sells pieces. Its numbers then raise the money.
 2. The flagship (`NUMBERS.md`, the drawings) follows about a year later.
+
+
+## Step one: the lean pop-up (six to eight weeks, inside the free rent)
+
+The product raise is about $50,000 (the coordinator, 31 October), so the first step has to fit inside it with room to
+spare. The lean pop-up runs **Tuesday 19 January to mid-March 2027**, entirely within Vacant to Vibrant's free-rent
+months. Same storefront, same plan (A-401). Less is brought in, and nothing is built.
+
+| | Lean (8 weeks) | Five-month pop-up |
+|---|---|---|
+| Dates | 19 January to about 14 March 2027 | mid-January to mid-June 2027 |
+| Rent | $0 (Vacant to Vibrant's free months) | $10,000 to $16,000 |
+| Open | Thursday to Sunday, 1 to 8 pm; catered nights only on Fridays, plus FOG week | Wednesday to Sunday; one catered night a week; daily sessions |
+| Fit-out | Felt drapes on a ceiling track; the shop wall as one 8 ft run of shelves; a borrowed counter for the till; no window plinth (the pair stands in the listening room) | the full plan |
+| Sound | The Tropos pair; an amplifier and decks from EARF's own studio; 300 records lent from the owner's collection | two pairs, 800 records |
+| Staff | The founder plus one part-time host (about 25 hours a week). On catered nights the partner's two bartenders, paid by the partner. | about 60 hours a week, plus events |
+| Drinks | Type 58 nights only: 11 of the year's 36 (FOG week's three, then eight Fridays). No drinks on other days. | weekly catered nights and zero-proof drinks |
+
+**Budget, eight weeks** *(estimates)*:
+
+| | Low | High |
+|---|---:|---:|
+| Felt drapes and track (kept for the next step) | $4,000 | $6,000 |
+| One run of shelves, steel and oak (becomes the full pop-up's shop wall) | $3,000 | $6,000 |
+| Chairs, standing tables, the counter: hire and borrow | $1,500 | $3,000 |
+| The part-time host, 25 hours a week at about $30 burdened | $6,000 | $7,500 |
+| Permits and insurance: TUA $644, one entertainment permit $586 for the debut's selector, liability | $2,500 | $4,000 |
+| Debut and FOG week: printing, photography, a guest selector | $3,000 | $6,000 |
+| Contingency | $2,000 | $3,500 |
+| **Total** | **$22,000** | **$36,000** |
+| Less a Vacant to Vibrant grant | $3,000 | $12,000 |
+| **Net cash** | **$10,000 to $33,000** | |
+
+It fits inside the $50,000 raise and leaves at least $14,000.
+
+**What has to exist by 19 January**, with no renders standing in on the floor:
+- **The Tropos pair:** essential, as the first pair built the way production will build it. Without it there is no pop-up.
+- **Mantle:** likely for 21 January (the lamps lane). It plays the records, and it is for sale.
+- **Core:** possible. If it isn't ready, show the cast samples in their eight tints and take orders.
+- **Hemisphere:** shown if a prototype exists; otherwise its shades as samples.
+- **EARFcoins:** a laser-cut run of a few hundred for the request ritual, about $5 each.
+- **Mother EARF:** not at this step. The 300 mm desk globe in the window, if one is made ($450 to $550).
+
+**How it sells.** Made to order: a deposit takes a place in the queue. Nothing is held in stock that the money can't
+carry.
+
+**What it proves**, to fund the next step:
+
+| Measure | Target over 8 weeks |
+|---|---|
+| Tropos pairs ordered with a deposit | 3 or more (each about $19,000) |
+| Lamps and Mantles ordered | 30 lamps, 2 Mantles |
+| People through the door; demos booked | 1,500; 60 |
+| Emails | 1,000 |
+| Press and the design trade in FOG week | coverage, and galleries asking to stock |
+| Catered nights | 11 nights; the guests and spend a night, measured |
+
+**Three steps, each paid for by the one before:**
+1. **The lean pop-up** ($22k to $36k), from the $50k product raise. Its deposits (three pairs is about $57,000 of
+   orders) and the measures above fund...
+2. **...the five-month pop-up** ($130k to $210k, roughly self-paying at six pairs). Its five months of numbers raise...
+3. **...the flagship** (about $2.0M: an SBA 7(a), investors, a community round), lease in spring 2027, opening late
+   2027 or early 2028.
+
+If the lean pop-up misses its targets, the next step waits, and the cost of finding out was about $30,000.
 
 ## The space (drawing A-401, model `popup42.py`)
 
