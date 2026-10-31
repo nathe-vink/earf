@@ -508,19 +508,29 @@ def contour_core(lit=True, tint=None, glow=1.0, base=(0.0, 0.0, 0.0), loading=1.
 def shot_core_sample(lit, stackmix=None, out=None, scale=1.0, samples=512, tag='', which='sample', tint=None):
     bpy.ops.wm.read_factory_settings(use_empty=True)
     tz = 0.62
-    set_room(tz)
+    # look 2 (Contour Core r3 c4): lit, a plaster wall 0.38 m behind the lamp so its light lands on it; by day the far
+    # wall, so the window's light reaches the lamp
+    set_room(tz, wall_y=0.38 if lit else 0.95)
     if which == 'contour':
-        contour_core(lit=lit, tint=tint, base=(0.0, 0.0, tz), glow=1.7 if lit else 1.0)
+        contour_core(lit=lit, tint=tint, base=(0.0, 0.0, tz), glow=3.7 if lit else 1.0)     # r3 c2: x1.6
     else:
         core_sample(stackmix=stackmix, lit=lit, base=(0.0, 0.0, tz), glow=1.8 if lit else 1.0)
     import assets
     # critic r1 c6 / r2 c7: no vase, no plate cut by the frame
     # critic r1 c5: a white card low and to the front left, out of frame, for one highlight on the foot's edge
-    box_ob('card', -0.30, -0.30, tz, -0.10, -0.295, tz + 0.08, principled('card', '#F2F0EA', 0.8))
-    book = principled('cloth', '#3E4A3F', 0.8, bump=(800.0, 0.3))
-    # critic r2 c6: the books whole in the frame, behind the lamp's plane
-    box_ob('book', -0.30, 0.04, tz, -0.10, 0.19, tz + 0.032, book, bevel=0.002)
-    box_ob('book2', -0.28, 0.06, tz + 0.032, -0.12, 0.18, tz + 0.054, principled('cloth2', '#B8A98E', 0.85), bevel=0.002)
+    box_ob('card', -0.50, -0.30, tz, -0.30, -0.295, tz + 0.08, principled('card', '#F2F0EA', 0.8))
+    # critic r2 c6 (Core Sample) and Contour Core r2 c6: two real books, whole in the frame, behind the lamp's plane:
+    # cloth boards 2 mm proud of a cream page block on three sides
+    pages = principled('pages', '#E9E1CF', 0.85, bump=(3000.0, 0.4))
+
+    def book(name, x0, y0, z0, w, d, h, color):
+        cover = principled(name + '-cloth', color, 0.8, bump=(800.0, 0.3))
+        box_ob(name + '-lo', x0, y0, z0, x0 + w, y0 + d, z0 + 0.003, cover, bevel=0.0008)
+        box_ob(name + '-hi', x0, y0, z0 + h - 0.003, x0 + w, y0 + d, z0 + h, cover, bevel=0.0008)
+        box_ob(name + '-spine', x0, y0 + d - 0.004, z0, x0 + w, y0 + d, z0 + h, cover, bevel=0.001)
+        box_ob(name + '-pages', x0 + 0.002, y0 + 0.002, z0 + 0.003, x0 + w - 0.002, y0 + d - 0.004, z0 + h - 0.003, pages)
+    book('book', -0.31, 0.05, tz, 0.21, 0.15, 0.032, '#3E4A3F')
+    book('book2', -0.29, 0.07, tz + 0.032, 0.17, 0.12, 0.024, '#8A2F2A')
     if lit:
         world(hdri='kiara_9_dusk', strength=0.05, rotation=200)
         # critic r1: c1 the fill down 70 %, c7 cool (#9FB0CC), c4 a 15 x 60 strip rim light behind at 120 deg camera
@@ -531,10 +541,18 @@ def shot_core_sample(lit, stackmix=None, out=None, scale=1.0, samples=512, tag='
 
         def aim(ob, z):
             ob.rotation_euler = (Vector((0, 0, z)) - Vector(ob.location)).to_track_quat('-Z', 'Y').to_euler()
-        area('room-fill', (-1.2, -1.0, 1.9), (55, 0, -40), (1.0, 1.0), 0.7, '#9FB0CC')
+        contour = which == 'contour'
+        # Contour Core r2: c1 exposure -1.3, c2 the fill +200 %, c3 cooler, c4 the dusk 0.15, c7 the glow x1.3
+        if contour:
+            world(hdri='kiara_9_dusk', strength=0.09, rotation=200)                       # r3 c7
+            # r3 c5: a 600 x 80 strip behind and 40 deg right at the base's height, for its edges
+            rimb = area('base-rim', (0.77, 0.92, tz + 0.03), (0, 0, 0), (0.6, 0.08), 4.0, '#FFF1E2')
+            aim(rimb, tz + 0.015)
+        area('room-fill', (-1.2, -1.0, 1.9), (55, 0, -40), (1.0, 1.0), 2.1 if contour else 0.7,
+             '#9EB8FF' if contour else '#9FB0CC')                                          # r3 c3
         kick = area('kicker', (-0.40, 1.2, tz + 0.08), (0, 0, 0), (0.6, 0.10), 1.2, '#FFF4E8'); aim(kick, tz + 0.01)
         sheen = area('sheen', (0.87, -0.5, tz + 0.12), (0, 0, 0), (0.15, 1.2), 0.5, '#FFF4E8'); aim(sheen, tz + 0.09)
-        render_settings(1600, 1067, samples, scale, exposure=0.8, look='AgX - Medium High Contrast')
+        render_settings(1600, 1067, samples, scale, exposure=-2.2 if contour else 0.8, look='AgX - Medium High Contrast')
     else:
         world(hdri='kiara_9_dusk', strength=0.6, rotation=200)
         window_gobo(-1.3, -1.3, 0.9, 0.75, 2.4)
@@ -548,7 +566,7 @@ def shot_core_sample(lit, stackmix=None, out=None, scale=1.0, samples=512, tag='
     bpy.ops.render.render(write_still=True)
 
 
-def terrace(lit=True, tint=None, glow=1.0, rim_z=1.45, loading=1.0, kind='terrace'):
+def terrace(lit=True, tint=None, glow=1.0, rim_z=1.45, loading=1.0, kind='terrace', spill=1.0):
     """Terrace hung with its rim at `rim_z` (m): the shade, the engine and the canopy from the CAD, the COB lit or not.
     Returns the canopy's top z (m) so the room can put its ceiling there."""
     P = dict(S.HL if kind == 'halo' else S.HT)
@@ -584,7 +602,7 @@ def terrace(lit=True, tint=None, glow=1.0, rim_z=1.45, loading=1.0, kind='terrac
         ap = area('aperture', (0, 0, (cob_z - 14) * MM), (0, 0, 0), (0.05, 0.05), 6.0 * glow, '#FFD2A0', spread=60.0, caustic=True)
         ap.data.shape = 'DISK'; ap.data.size = 0.05
         # the satin reflector's spill: about a quarter of the light, wide, onto the rings' blasted inner edges
-        obs += [ap, point('spill', (0, 0, (cob_z - 24) * MM), 6.0 * glow, '#FFD2A0', radius=0.02)]
+        obs += [ap, point('spill', (0, 0, (cob_z - 24) * MM), 6.0 * glow * spill, '#FFD2A0', radius=0.02)]
         glowdisc = bpy.data.meshes.new('louvre')
         bm = bmesh.new(); bmesh.ops.create_circle(bm, cap_ends=True, segments=48, radius=0.025)
         bm.to_mesh(glowdisc); bm.free()
@@ -608,31 +626,37 @@ def shot_terrace(lit, tint=None, out=None, scale=1.0, samples=512, kind='terrace
     import assets
     tz = 0.75
     rim = tz + (0.66 if kind == 'halo' else 0.62)
-    ceil = terrace(lit=lit, tint=tint, rim_z=rim, kind=kind, glow=1.6 if lit else 1.0)
+    # Terrace r2: c1 the shade's glow x2 (the reflector's spill only; the pool stays), c3 exposure -0.5
+    ceil = terrace(lit=lit, tint=tint, rim_z=rim, kind=kind, glow=1.6 if lit else 1.0, spill=2.0)
     wallm = assets.pbr(bpy, 'beige_wall_001', '2k', scale=1.2, name='wall', tint='#CFC8BC', tint_mix=0.35)
     plane('wall', (4.3, 4), (0.85, 1.6, 1.5), (90, 0, 0), wallm)
     plane('floor', (4.3, 6), (0.85, 0, 0), (0, 0, 0), principled('floor', '#2E2622', 0.55))
     plane('ceiling', (4.3, 6), (0.85, 0, ceil), (180, 0, 0), principled('ceiling', '#E9E6E0', 0.9))
     # critic r1 c2: walnut (Poly Haven's walnut set read pale grey here, so its oak toned to walnut)
-    topm = assets.pbr(bpy, 'oak_veneer_01', '2k', name='tabletop', tint='#3E2618', tint_mix=0.62)
+    topm = assets.pbr(bpy, 'oak_veneer_01', '2k', name='tabletop', tint='#2A170D', tint_mix=0.85)
     plane('wall-left', (6, 4), (-1.3, 0, 1.5), (90, 0, 90), wallm)
     box_ob('table', -0.95, -0.48, tz - 0.035, 0.95, 0.48, tz, topm, bevel=0.003)
     for x in (-0.85, 0.85):
         for y in (-0.38, 0.38):
             box_ob(f'leg{x}{y}', x - 0.025, y - 0.025, 0, x + 0.025, y + 0.025, tz - 0.035, topm)
-    # critic r1 c1: no runner, no plate: the pears on bare walnut, the one scale cue
+    # critic r1 c1: no runner; r2 c7: a dark stoneware plate under the pears, on the shade's axis
+    stone = principled('stoneware', '#3B3834', 0.55, bump=(1500.0, 0.25))
+    bpy.ops.mesh.primitive_cylinder_add(radius=0.115, depth=0.014, vertices=96, location=(-0.02, -0.02, tz + 0.007))
+    po = bpy.context.object; po.data.materials.append(stone); po.cycles.is_caustics_receiver = True
+    bpy.ops.object.shade_smooth()
+    md = po.modifiers.new('b', 'BEVEL'); md.width = 0.004; md.segments = 4
     try:
-        assets.place(bpy, 'food_pears_asian_01', '2k', location=(-0.12, -0.04, tz), rotation_deg=(0, 0, 40))
+        assets.place(bpy, 'food_pears_asian_01', '2k', location=(-0.03, -0.03, tz + 0.014), rotation_deg=(0, 0, 40))
     except Exception as e:
         print('pears skipped', e)
     if lit:
         # critic r1 (Terrace): c5 the dusk world 0.15, c6 the cool fill x1.8, c7 a kicker on the fins, c4 exposure -0.3
-        world(hdri='kiara_9_dusk', strength=0.15, rotation=200)
-        area('room-fill', (1.6, -1.6, 2.2), (60, 0, 50), (1.0, 1.0), 2.5, '#9FB0CC')
+        world(hdri='kiara_9_dusk', strength=0.25, rotation=200)
+        area('room-fill', (1.6, -1.6, 2.2), (60, 0, 50), (1.0, 1.0), 3.3, '#C8D4E6')
         from mathutils import Vector
         kick = area('fin-kicker', (-0.3, 0.6, rim + 0.5), (0, 0, 0), (0.3, 0.3), 15.0, '#FFF2E6')
         kick.rotation_euler = (Vector((0, 0, rim + 0.17)) - Vector(kick.location)).to_track_quat('-Z', 'Y').to_euler()
-        render_settings(1200, 1500, samples, scale, exposure=0.3)
+        render_settings(1200, 1500, samples, scale, exposure=-0.2)
     else:
         world(hdri='kiara_9_dusk', strength=0.7, rotation=200)
         window_gobo(-1.3, -1.6, 1.4, 0.8, 2.3)
@@ -641,7 +665,7 @@ def shot_terrace(lit, tint=None, out=None, scale=1.0, samples=512, kind='terrace
         render_settings(1200, 1500, samples, scale, exposure=-0.2)
     # standing eye height, a little above the shade, so the terraces read as rings; the table's pool below
     # critic r1 c8: 70 mm, the shade's top near the frame's top and the pears near its foot
-    camera((0.36, -1.75, 1.80), (0.0, 0.0, tz + 0.42), lens=70, fstop=4.0, focus=(0, -0.10, rim + 0.08))
+    camera((0.32, -1.62, 1.80), (0.0, 0.0, tz + 0.43), lens=70, fstop=2.8, focus=(0, -0.10, rim + 0.08))
     bpy.context.scene.render.filepath = out
     bpy.ops.render.render(write_still=True)
 
