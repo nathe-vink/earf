@@ -1,0 +1,283 @@
+{
+ "size": [
+  1600,
+  2000
+ ],
+ "camera": {
+  "position": [
+   -0.16,
+   -0.62,
+   0.168
+  ],
+  "target": [
+   0.0,
+   0.0,
+   0.148
+  ],
+  "lens_mm": 75,
+  "level": true,
+  "fstop": 5.6,
+  "focus": [
+   0.0,
+   -0.06,
+   0.138
+  ]
+ },
+ "set": {
+  "kind": "sweep",
+  "color": "#EAE4DA",
+  "width": 10.0,
+  "front": 6.0,
+  "depth": 2.2,
+  "radius": 0.8,
+  "height": 4.0,
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "pbr",
+    "texture": "marble_01",
+    "res": "2k",
+    "color": "#ECE7DF",
+    "rough_mul": 0.6,
+    "size": [
+     3.0,
+     4.2,
+     0.04
+    ],
+    "position": [
+     0.0,
+     0.8,
+     0.0
+    ]
+   }
+  ]
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#D8D2C8",
+  "horizon": "#DED8CE",
+  "ground": "#D6CEC2",
+  "strength": 0.35
+ },
+ "lights": {
+  "key": {
+   "type": "area",
+   "size_m": [
+    3.0,
+    0.5
+   ],
+   "orbit": {
+    "azimuth_deg": -30,
+    "elevation_deg": 42,
+    "distance_m": 2.6
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.148
+   ],
+   "irradiance": 0.6,
+   "color": 4300
+  },
+  "fill": {
+   "type": "area",
+   "size_m": [
+    2.5,
+    2.0
+   ],
+   "orbit": {
+    "azimuth_deg": 30,
+    "elevation_deg": 12,
+    "distance_m": 3.0
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.148
+   ],
+   "irradiance": 0.25,
+   "color": 4300
+  },
+  "bgwash": {
+   "type": "area",
+   "size_m": [
+    3.5,
+    1.0
+   ],
+   "position": [
+    0.0,
+    -0.4,
+    3.0
+   ],
+   "target": [
+    0.0,
+    2.2,
+    0.25
+   ],
+   "irradiance": 2.645,
+   "color": "#FFDDA6",
+   "camera": false,
+   "specular": 0.0
+  },
+  "pool+0.00": {
+   "type": "point",
+   "position": [
+    0.0,
+    -0.075,
+    0.09
+   ],
+   "power_w": 2.0,
+   "radius_m": 0.06,
+   "color": "#CDBFAF",
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  },
+  "back": {
+   "type": "area",
+   "size_m": [
+    0.08,
+    0.6
+   ],
+   "position": [
+    0.45,
+    0.15,
+    0.2
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.138
+   ],
+   "irradiance": 1.6,
+   "color": 4300,
+   "camera": false,
+   "specular": 1.0
+  },
+  "ball": {
+   "type": "point",
+   "position": [
+    0.0,
+    0.0,
+    0.1404
+   ],
+   "power_w": 3.0,
+   "radius_m": 0.03,
+   "color": 2700,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  }
+ },
+ "render": {
+  "samples": 256,
+  "adaptive": 0.012,
+  "denoise": true,
+  "clamp": 8,
+  "bounces": 24,
+  "transmission_bounces": 20,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.15,
+  "white_balance_k": 4300
+ },
+ "title": "Core in smoke: the site tint",
+ "materials": {
+  "body": {
+   "radius": 0.009
+  },
+  "liner": {
+   "radius": 0.002,
+   "glow": 0.48,
+   "glow_color": "#FFDCB8"
+  }
+ },
+ "product": {
+  "def": "studio/products/earf-orb-table.json",
+  "flavour": "smoke",
+  "instances": [
+   {
+    "position": [
+     0.0,
+     0.0,
+     0.04
+    ],
+    "rotate_z": 25
+   }
+  ]
+ },
+ "glints": {
+  "ring": {
+   "at": [
+    0.046,
+    -0.04,
+    0.074
+   ],
+   "normal": [
+    0.55,
+    -0.7,
+    0.45
+   ],
+   "size_m": 0.06,
+   "power_w": 3.0,
+   "color": 4300,
+   "receivers": [
+    "ring"
+   ]
+  },
+  "ring_l": {
+   "at": [
+    -0.05,
+    -0.035,
+    0.074
+   ],
+   "normal": [
+    -0.5,
+    -0.7,
+    0.5
+   ],
+   "size_m": 0.06,
+   "power_w": 1.8,
+   "color": 4300,
+   "receivers": [
+    "ring"
+   ]
+  },
+  "base": {
+   "at": [
+    0.055,
+    -0.025,
+    0.052
+   ],
+   "normal": [
+    0.85,
+    -0.5,
+    0.0
+   ],
+   "size_m": 0.04,
+   "power_w": 3.0,
+   "color": 4300,
+   "receivers": [
+    "base"
+   ]
+  },
+  "grommet": {
+   "at": [
+    0.0,
+    -0.03,
+    0.072
+   ],
+   "normal": [
+    0.0,
+    -0.6,
+    -0.8
+   ],
+   "size_m": 0.03,
+   "power_w": 1.0,
+   "color": 4300,
+   "receivers": [
+    "grommet"
+   ]
+  }
+ }
+}
