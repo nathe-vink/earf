@@ -70,7 +70,7 @@
    {
     "kind": "kit",
     "shape": "box",
-    "material": "cotton",
+    "material": "pbr",
     "color": "#D9D3C8",
     "position": [
      0.55,
@@ -81,12 +81,16 @@
      1.62,
      2.0,
      0.22
-    ]
+    ],
+    "texture": "rough_linen",
+    "tex_scale": 0.6,
+    "tint": "#CFC6B6",
+    "tint_mix": 0.6
    },
    {
     "kind": "kit",
     "shape": "box",
-    "material": "wool",
+    "material": "pbr",
     "color": "#6E7684",
     "position": [
      0.55,
@@ -97,12 +101,16 @@
      1.84,
      1.5,
      0.3
-    ]
+    ],
+    "texture": "rough_linen",
+    "tex_scale": 0.6,
+    "tint": "#5E6470",
+    "tint_mix": 0.7
    },
    {
     "kind": "kit",
     "shape": "box",
-    "material": "cotton",
+    "material": "pbr",
     "color": "#F2EFE9",
     "position": [
      0.17000000000000004,
@@ -114,12 +122,16 @@
      0.4,
      0.15
     ],
-    "rotate_z": 4
+    "rotate_z": 4,
+    "texture": "rough_linen",
+    "tex_scale": 0.5,
+    "tint": "#E4DDD0",
+    "tint_mix": 0.5
    },
    {
     "kind": "kit",
     "shape": "box",
-    "material": "cotton",
+    "material": "pbr",
     "color": "#F2EFE9",
     "position": [
      0.93,
@@ -131,7 +143,11 @@
      0.4,
      0.15
     ],
-    "rotate_z": -3
+    "rotate_z": -3,
+    "texture": "rough_linen",
+    "tex_scale": 0.5,
+    "tint": "#E4DDD0",
+    "tint_mix": 0.5
    },
    {
     "kind": "kit",

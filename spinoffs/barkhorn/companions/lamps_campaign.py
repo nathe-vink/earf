@@ -122,10 +122,14 @@ def core_bedside():
     bx, by = 0.55, 2.05                      # the bed's centre: its head at the back wall (y 3.15)
     st['props'] = [
         box('gloss', '#3A2A1E', (1.72, 2.1, 0.30), (bx, by, 0.0), roughness=0.55),
-        box('cotton', '#D9D3C8', (1.62, 2.0, 0.22), (bx, by, 0.30)),
-        box('wool', '#6E7684', (1.84, 1.50, 0.30), (bx, by - 0.28, 0.24)),      # the duvet, over the sides
-        box('cotton', '#F2EFE9', (0.62, 0.40, 0.15), (bx - 0.38, 2.86, 0.52), rotate_z=4),
-        box('cotton', '#F2EFE9', (0.62, 0.40, 0.15), (bx + 0.38, 2.86, 0.52), rotate_z=-3),
+        box('pbr', '#D9D3C8', (1.62, 2.0, 0.22), (bx, by, 0.30), texture='rough_linen', tex_scale=0.6, tint='#CFC6B6',
+            tint_mix=0.6),
+        box('pbr', '#6E7684', (1.84, 1.50, 0.30), (bx, by - 0.28, 0.24), texture='rough_linen', tex_scale=0.6,
+            tint='#5E6470', tint_mix=0.7),      # the duvet, over the sides
+        box('pbr', '#F2EFE9', (0.62, 0.40, 0.15), (bx - 0.38, 2.86, 0.52), rotate_z=4, texture='rough_linen',
+            tex_scale=0.5, tint='#E4DDD0', tint_mix=0.5),
+        box('pbr', '#F2EFE9', (0.62, 0.40, 0.15), (bx + 0.38, 2.86, 0.52), rotate_z=-3, texture='rough_linen',
+            tex_scale=0.5, tint='#E4DDD0', tint_mix=0.5),
         box('gloss', '#3A2A1E', (1.84, 0.06, 1.05), (bx, 3.10, 0.0), roughness=0.55),
         asset('side_table_01', (-0.62, 2.82, 0.0), 0.0),
         box('paper', '#2B3A4A', (0.15, 0.21, 0.022), (-0.44, 2.74, 0.55), rotate_z=14),
@@ -270,7 +274,57 @@ def dining_close():
     return s
 
 
-BUILD = {'dining-dusk': dining_dusk, 'dining-close': dining_close, 'core-bedside': core_bedside, 'mantle-credenza': mantle_credenza,
+GLASS = [[0, 0], [0.035, 0], [0.035, 0.004], [0.004, 0.012], [0.004, 0.1], [0.038, 0.13], [0.042, 0.19],
+         [0.0405, 0.19], [0.0365, 0.132], [0.003, 0.104], [0.0, 0.104]]
+PLATE = [[0, 0], [0.09, 0], [0.095, 0.004], [0.13, 0.012], [0.135, 0.016], [0.132, 0.017], [0.093, 0.006], [0.0, 0.003]]
+
+
+def dining_hero():
+    """Round 2, the coordinator's art direction (2026-10-31: the bar is Louis Poulsen's, Flos's, Apparatus's campaign
+    pictures): the lamp large in the upper third and its light the light; a solid walnut table, a linen runner, one
+    ceramic plate, one glass; no chairs, sconces or candles; the window deep blue dusk, out of focus; the neutrals warm
+    and quiet so the Ember shade is the only saturated colour. Portrait."""
+    s = HB.shot('575', 'ember')
+    s['lights'] = {'cob': s['lights']['cob']}
+    s['lights']['cob']['power_w'] = round(s['lights']['cob']['power_w'] * LM / HB.LEVELS['575'], 4)
+    tx, ty = HB.TABLE
+    st = s['set']
+    dome = [p for p in st['props'] if p.get('fn') == 'dome'][0]
+    dome['shade_glow'] = 0.3
+    dome['materials'] = {'liner': {'glow_color': '#FFB070'}}
+    walnut = {'material': 'pbr', 'texture': 'american_walnut_veneer', 'tex_scale': 1.0, 'rough_mul': 0.8, 'tint': '#3A2416', 'tint_mix': 0.45}
+    top_z = HB.TABLE_Z
+    st['props'] = [
+        dome,
+        kit('box', 'pbr', '#6B4A30', (tx, ty, top_z - 0.04), size=[1.9, 0.95, 0.04], **{k: v for k, v in walnut.items() if k != 'material'}),
+        *[kit('box', 'pbr', '#6B4A30', (tx + sx * 0.82, ty + sy * 0.38, 0.0), size=[0.06, 0.06, top_z - 0.04],
+              **{k: v for k, v in walnut.items() if k != 'material'}) for sx in (-1, 1) for sy in (-1, 1)],
+        kit('box', 'pbr', '#B8AD9B', (tx, ty, top_z), size=[1.7, 0.38, 0.003], texture='rough_linen', tex_scale=0.5,
+            tint='#A99E8C', tint_mix=0.7),
+        kit('lathe', 'gloss', '#E4DED3', (tx - 0.22, ty - 0.02, top_z + 0.003), profile=PLATE, roughness=0.35),
+        kit('lathe', 'glass', '#F4F2EE', (tx + 0.02, ty + 0.16, top_z + 0.003), profile=GLASS),
+        asset('food_pears_asian_01', (tx - 0.20, ty - 0.02, top_z + 0.008), 30.0),
+        asset('potted_plant_02', (-2.05, 2.75, 0.0), 30.0),
+    ]
+    st['wall'] = {'color': '#8A8276'}
+    st['floor'] = {'plank_w': 0.16, 'plank_l': 1.8, 'base': '#4E3A2A', 'dark': '#3E2E20', 'light': '#5A4432',
+                   'plank_contrast': 0.6}
+    st['windows'] = [{'wall': 'left', 'along': 0.1, 'sill': 0.55, 'size': [1.7, 1.85], 'mullions': [2, 1],
+                      'frame': '#2A2724'}]
+    st['frame'] = '#2A2724'
+    s['sky'] = {'kind': 'gradient', 'zenith': '#0E1A33', 'horizon': '#2C4670', 'ground': '#131A26', 'strength': 0.012}
+    s['lights']['toprim'] = {'type': 'area', 'size_m': [0.5, 0.3], 'position': [-0.6, 0.6, 1.95], 'target': [tx, ty, 1.5],
+                             'irradiance': 1.2, 'color': 3200, 'camera': False, 'specular': 1.0, 'diffuse': 0.0}
+    s['render']['exposure'] = round(s['render']['exposure'] + 1.3, 3)
+    s['render']['white_balance_k'] = 3300
+    s['title'] = 'Hemisphere in Ember over a walnut table at dusk (the campaign, round 2)'
+    s['size'] = [1600, 2000]
+    s['camera'] = {'position': [tx + 0.78, ty - 1.12, 1.20], 'target': [tx - 0.04, ty + 0.05, 1.22], 'lens_mm': 50,
+                   'level': True, 'fstop': 2.8, 'focus': [tx, ty, 1.45]}
+    return s
+
+
+BUILD = {'dining-hero': dining_hero, 'dining-dusk': dining_dusk, 'dining-close': dining_close, 'core-bedside': core_bedside, 'mantle-credenza': mantle_credenza,
          'one-room': one_room, 'macro-hemisphere': macro_dome, 'macro-core': macro_core}
 
 
