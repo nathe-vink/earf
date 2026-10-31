@@ -45,7 +45,7 @@ VIEWS = {
     # standing figure ghosts; haze veils the plaster; the lantern small: band 0.30, baffle graze 1.0, route 0.03, the
     # street 0.3, haze 0.008, two seated guests, 40 mm toward the axis
     'street': dict(camera={'position': [-3.2, 4.0, 1.50], 'target': [13.0, 4.2, 1.75], 'lens_mm': 40, 'level': True,
-                           'fstop': 4.0, 'focus': [7.0, 4.4, 1.2]}, exposure=3.0, haze=0.008, shutter=0.8, people='street2',
+                           'fstop': 4.0, 'focus': [7.0, 4.4, 1.2]}, exposure=3.0, haze=0.008,   # r3: no people (the coordinator; every critic read mannequins)
                    lights={'fill': {'irradiance': 0.10}, 'shop': {'power_w': 10.0}, 'table': {'power_w': 8.0},
                            'baffle': {'irradiance': 1.0}, 'route': {'irradiance': 0.03}, 'street': {'irradiance': 0.3}},
                    room={'glass_gloss': 0.6, 'doors_open': False, 'band_glow': 0.30}),   # r1: the porch shut
@@ -86,7 +86,7 @@ VIEWS = {
                           'fstop': 4.0, 'focus': [17.0, 4.6, 1.1]},
                   # r2 (4.5/4.5): the soffit and the near leaf brighter than the room; the room a postage stamp:
                   # graze 0.15, route 0.03, fill 0.02, the pair 110 W at 26 deg, Mother 60 W, 32 mm from x 10.2
-                  exposure=3.5, haze=0.006, shutter=0.8, people='porch', render={'clamp': 4.0},
+                  exposure=3.5, haze=0.006, render={'clamp': 4.0},   # r3: no people
                   lights={'infill': {'irradiance': 0.08}, 'baffle': {'irradiance': 0.15}, 'route': {'irradiance': 0.03},
                           'fill': {'irradiance': 0.02}, 'stack': {'power_w': 110.0, 'cone_deg': 26.0},
                           'mother': {'power_w': 60.0}, 'trap': {'irradiance': 0.12}}),
@@ -174,6 +174,16 @@ def scene():
                   'coupes': [[8.40, by - 0.10, 1.07, 0.6, '#B8462A'], [P.BANQ_TABLES[2] + 0.1, P.BANQ['y1'] + 0.32, 0.75, 0.4, '#E8DDB8']],
                   'napkins': [[9.37, by - 0.12, 1.07, 8.0], [8.40, by - 0.10, 1.07, -12.0]],
                   'votives': [], 'matchbooks': [], 'coats': []})
+    # look 2 r3 (the coordinator: no people, signs of life instead): records out of their sleeves on the counter, the
+    # shop table and the selector's desk; a glass by a lantern chair; coats over the banquette's back
+    Sd = P.SELECTOR
+    props.append({'kind': 'kit', 'shape': 'ext', 'path': KIT, 'fn': 'sleeves',
+                  'records': [[8.55, by - 0.02, 1.071, 28.0, 0.0], [5.15, 5.25, P.SHOP_TABLE['h'] + 0.001, -12.0, 0.0],
+                              [Sd['x0'] + 0.75, Sd['y0'] + 0.30, Sd['h'] + 0.001, 74.0, 0.0]]})
+    props.append({'kind': 'kit', 'shape': 'ext', 'path': 'spinoffs/barkhorn/planet/r39/kit39.py', 'fn': 'life', 'seed': 443,
+                  'rocks': [[P.SWEET[0] - 0.55, P.SWEET[1] + 0.95, 0.0, 0.02, 1, '#B8641C']],
+                  'coats': [[8.35, P.BANQ['y0'] + 0.06, P.BANQ['back'], 90.0, 0.40], [10.2, P.BANQ['y0'] + 0.06, P.BANQ['back'], 90.0, 0.36]],
+                  'coupes': [], 'napkins': [], 'votives': [], 'matchbooks': []})
     sweet = P.SWEET
     products = [
         {'def': CLOUD, 'flavour': 'cloud-red', 'instances': [

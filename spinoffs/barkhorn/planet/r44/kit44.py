@@ -106,9 +106,42 @@ ACCENT = ('#7A1812', '#183A78', '#9A7A18', '#1F5C32', '#8E4214', '#47286A')   # 
                                                                            # translucent chips read darker than the sheet's face)
 
 
+SCANS = True    # look 2 r3 (the coordinator: photographed CC0 surfaces; procedural ones read "CG"): see TEXTURES.md
+
+
 def oak(bpy, vertical=True, name='oak-white-oiled', tint='#5C4A38', mix=0.6):
-    """Oiled white oak (fumed a shade): the walnut scan pulled warm and light."""
-    return D.walnut(bpy, vertical=vertical, coat=0.25, coat_rough=0.4, tint=tint, mix=mix, name='-' + name)
+    """Oiled white oak: Poly Haven's oak_veneer_01 scan, a light warm tint and a satin oil coat (before look 2 r3,
+    the smoked walnut scan pulled toward oak at 0.6, which flattened its figure)."""
+    if not SCANS:
+        return D.walnut(bpy, vertical=vertical, coat=0.25, coat_rough=0.4, tint=tint, mix=mix, name='-' + name)
+    m = D._pbr(bpy, 'oak_veneer_01', rot=(0, 90, 0) if vertical else None, tint=tint, tint_mix=0.3, scale=0.9, res='2k')
+    b = D._bsdf(m); R._set(b, 'Coat Weight', 0.25); R._set(b, 'Coat Roughness', 0.4)
+    return m
+
+
+def plaster(bpy, p, name='h44-plaster', colour=None):
+    """Lime plaster: Poly Haven's beige_wall_001 scan tinted to the plaster's tone."""
+    c = colour or p.get('plaster', '#8F877B')
+    if not SCANS:
+        return D.plaster(bpy, p, name=name, colour=c)
+    return D._pbr(bpy, 'beige_wall_001', tint=c, tint_mix=0.55, scale=2.0, res='2k')
+
+
+def leather(bpy, colour, name):
+    """Oxblood leather: Poly Haven's brown_leather scan, tinted, a waxed coat (leather_red_02 came without a colour map
+    and rendered white)."""
+    if not SCANS:
+        return K.leather(bpy, colour, name=name)
+    m = D._pbr(bpy, 'brown_leather', tint=colour, tint_mix=0.6, scale=0.5, res='2k')
+    b = D._bsdf(m); R._set(b, 'Coat Weight', 0.2); R._set(b, 'Coat Roughness', 0.35)
+    return m
+
+
+def wool(bpy, colour, name):
+    """A wool rug, procedural (wool_boucle's tile read as a checked grid at rug scale, look 2 r3 test)."""
+    if True:
+        return principled(bpy, name, colour, rough=0.97, spec=0.1, bump=(0.004, 0.5, 0.001))
+    return D._pbr(bpy, 'wool_boucle', tint=colour, tint_mix=0.6, scale=0.3, res='2k')
 
 
 def quartzite(bpy):
@@ -145,7 +178,7 @@ def shell(bpy, p, objs):
     wl.box(-0.30, W, 0.0, L + T, W + T, P.JOISTS)
     wl.box(L, 0.0, 0.0, L + T, P.REAR_EXIT['y0'], P.JOISTS); wl.box(L, P.REAR_EXIT['y1'], 0.0, L + T, W, P.JOISTS)
     wl.box(L, P.REAR_EXIT['y0'], 2.13, L + T, P.REAR_EXIT['y1'], P.JOISTS)
-    objs.append(wl.object(bpy, D.plaster(bpy, p, name='h44-plaster', colour=p.get('plaster', '#8F877B'))))
+    objs.append(wl.object(bpy, plaster(bpy, p)))
     ce = Mesh('h44-ceiling'); ce.box(-0.30, -T, H, L + T, W + T, H + 0.05)
     objs.append(ce.object(bpy, principled(bpy, 'h44-acoustic-plaster', p.get('ceiling', '#26231F'), rough=0.95, spec=0.2)))
     # linear slot diffusers in the ceiling over the route and the bar, and the downlights' black trims
@@ -165,7 +198,7 @@ def shell(bpy, p, objs):
     for i in (1, 2):
         rp.box(P.LOBBY['x1'], P.ROUTE_Y[1] + 2.0 * i - 0.06, 0.0, L, P.ROUTE_Y[1] + 2.0 * i + 0.06, P.CEIL_REAR)
     rp.box(P.LOBBY['x0'], P.ROUTE_Y[1], P.CEIL_REAR, L, W, P.CEIL_REAR + 0.05)
-    objs.append(rp.object(bpy, D.plaster(bpy, p, name='h44-plaster', colour=p.get('plaster', '#8F877B'))))
+    objs.append(rp.object(bpy, plaster(bpy, p)))
     # the rear exit door, steel, with a lit exit sign
     rd = Mesh('h44-rear-door'); rd.box(L - 0.05, P.REAR_EXIT['y0'] + 0.01, 0.0, L - 0.01, P.REAR_EXIT['y1'] - 0.01, 2.12)
     objs.append(rd.object(bpy, principled(bpy, 'h44-door-steel', '#2A2928', rough=0.5, metal=0.5)))
@@ -290,7 +323,7 @@ def bar(bpy, p, objs):
     A = P.KIT_ALCOVE
     kd = Mesh('h44-kit-wall'); kd.box(A['x0'], A['y0'] - 0.10, 0.0, A['x1'], A['y0'], P.CEIL)
     kd.box(A['x1'] - 0.10, A['y0'], 2.20, A['x1'], W, P.CEIL)
-    objs.append(kd.object(bpy, D.plaster(bpy, p, name='h44-plaster', colour=p.get('plaster', '#8F877B'))))
+    objs.append(kd.object(bpy, plaster(bpy, p)))
     dd = Mesh('h44-kit-door'); dd.box(A['x1'] - 0.08, A['y0'] + 0.25, 0.0, A['x1'] - 0.03, W - 0.20, 2.18)
     objs.append(dd.object(bpy, oak(bpy, name='oak-backbar'), bevel=0.003))
     # stools: oak seat, blackened-steel frame, 30 in high
@@ -308,7 +341,7 @@ def bar(bpy, p, objs):
     objs.append(bq.object(bpy, oak(bpy, name='oak-banq'), bevel=0.004))
     up = Mesh('h44-banq-leather'); up.box(Bq['x0'] + 0.02, Bq['y0'] + 0.08, 0.40, Bq['x1'] - 0.02, Bq['y1'], 0.47)
     up.box(Bq['x0'] + 0.02, Bq['y0'] + 0.08, 0.50, Bq['x1'] - 0.02, Bq['y0'] + 0.16, 0.92)
-    objs.append(up.object(bpy, K.leather(bpy, '#3A2618', name='h44-leather'), bevel=0.02))
+    objs.append(up.object(bpy, leather(bpy, '#3A2618', 'h44-leather'), bevel=0.02))
     tt = Mesh('h44-banq-tables'); tl = Mesh('h44-banq-table-steel')
     for x in P.BANQ_TABLES:
         y0 = Bq['y1'] + 0.08
@@ -469,7 +502,7 @@ def interior(bpy, p, objs):
     objs.append(bl.object(bpy, emitter(bpy, 'h44-foot-led', '#FFB774', p.get('foot_glow', 4.0))))
     # the rug, the chairs (the wheelchair space left clear, beside its companion chair), side tables
     rg = Mesh('h44-rug'); rg.box(P.SWEET[0] - 1.3, y0 + 0.9, 0.0, P.STACK_X - 0.55, y1 - 0.9, 0.012)
-    objs.append(rg.object(bpy, principled(bpy, 'h44-rug', p.get('rug', '#6E6256'), rough=0.97, spec=0.1, bump=(0.004, 0.5, 0.001))))
+    objs.append(rg.object(bpy, wool(bpy, p.get('rug', '#6E6256'), 'h44-rug')))
     stl, wood, uph = Mesh('h44-chair-steel'), Mesh('h44-chair-oak'), Mesh('h44-chair-wool')
     for (x, y, kind) in P.SEATS:
         if kind in ('chair', 'companion'):
@@ -530,7 +563,7 @@ def boards(bpy, tone=0.09, hue=0.012, off=2.5, seed=441):
     shifts its tone and warmth a little (look 2: "the oak the same board to board")."""
     import bmesh
     rnd = random.Random(seed)
-    mats = [m for m in bpy.data.materials if 'walnut' in m.name.lower() or m.name.startswith('-oak')]
+    mats = [m for m in bpy.data.materials if 'walnut' in m.name.lower() or 'oak_veneer' in m.name or m.name.startswith('-oak')]
     for ob in [o for o in bpy.data.objects if o.type == 'MESH' and any(sl.material in mats for sl in o.material_slots)]:
         me = ob.data
         if 'board' in me.attributes:
@@ -631,3 +664,23 @@ def street(bpy, kit, p, objs):
             vx, vy, vz = v.co
             v.co = (xx + vz, yy + vx, 0.18 + vy + 0.15)
     objs.append(wh.object(bpy, principled(bpy, 'h44-tyre', '#0B0B0B', rough=0.8), smooth=True))
+
+
+def sleeves(bpy, name, p, kit):
+    """Records out of their sleeves (look 2 r3, the coordinator: signs of life instead of people): each entry
+    [x, y, z, heading deg, lean deg] lays a 315 mm card sleeve (lean 0, flat; up to 80, leaning on something) with its
+    black disc half out beside it."""
+    objs = []
+    card = principled(bpy, 'h44-sleeve-card', p.get('card', '#C9BBA2'), rough=0.75, bump=(0.0005, 0.3, 0.0002))
+    vinyl = principled(bpy, 'h44-vinyl', '#0B0A0A', rough=0.22, spec=0.6)
+    label = principled(bpy, 'h44-label', p.get('label', '#B8462A'), rough=0.6)
+    for i, (x, y, z, hd, lean) in enumerate(p.get('records', [])):
+        sv, dk, lb = Mesh(f'{name}-sleeve{i}'), Mesh(f'{name}-disc{i}'), Mesh(f'{name}-label{i}')
+        sv.box(-0.1575, -0.1575, 0.0, 0.1575, 0.1575, 0.003)
+        _cyl(dk.bm, 0.09, 0.0, 0.003, 0.150, 0.0015, seg=72)
+        _cyl(lb.bm, 0.09, 0.0, 0.0045, 0.050, 0.0004, seg=48)
+        for m_, mat in ((sv, card), (dk, vinyl), (lb, label)):
+            ob = m_.object(bpy, mat, smooth=m_ is not sv)
+            ob.rotation_euler = (0.0, math.radians(-lean), math.radians(hd)); ob.location = (x, y, z)
+            objs.append(ob)
+    return objs
