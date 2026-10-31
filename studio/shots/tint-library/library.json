@@ -21,11 +21,11 @@
     },
     {
      "position": [
-      0.15,
+      -0.21,
       0.06,
       0.0
      ],
-     "rotate_z": 18,
+     "rotate_z": 0,
      "hide": [
       "tray",
       "chip-*"
@@ -49,7 +49,7 @@
     "material": "paper",
     "color": "#F1ECE2",
     "position": [
-     -0.03,
+     0.0,
      -0.125,
      0.0
     ],
@@ -58,7 +58,7 @@
      0.095,
      0.0008
     ],
-    "rotate_z": -8
+    "rotate_z": 0
    }
   ]
  },
@@ -67,27 +67,47 @@
   "zenith": "#D4D2CE",
   "horizon": "#DCDAD5",
   "ground": "#6A665F",
-  "strength": 0.6
+  "strength": 0.35
  },
  "lights": {
   "key": {
    "type": "area",
    "size_m": [
-    0.9,
-    0.7
+    0.25,
+    0.25
    ],
    "orbit": {
-    "azimuth_deg": -40,
-    "elevation_deg": 50,
-    "distance_m": 1.2
+    "azimuth_deg": 150,
+    "elevation_deg": 32,
+    "distance_m": 1.0
    },
    "target": [
     0.0,
     0.0,
     0.035
    ],
-   "irradiance": 0.9,
+   "irradiance": 2.2,
    "color": "#FFF3E1"
+  },
+  "top": {
+   "type": "area",
+   "size_m": [
+    0.9,
+    0.12
+   ],
+   "orbit": {
+    "azimuth_deg": 0,
+    "elevation_deg": 78,
+    "distance_m": 0.7
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.035
+   ],
+   "irradiance": 0.8,
+   "color": "#FFF7EA",
+   "camera": false
   },
   "fill": {
    "type": "area",
@@ -105,7 +125,7 @@
     0.0,
     0.035
    ],
-   "irradiance": 0.3,
+   "irradiance": 0.15,
    "color": "#FFF7EA"
   },
   "back": {
@@ -130,34 +150,34 @@
   }
  },
  "render": {
-  "samples": 256,
+  "samples": 512,
   "adaptive": 0.01,
   "denoise": true,
   "clamp": 10,
   "bounces": 16,
   "transmission_bounces": 24,
   "view": "Khronos PBR Neutral",
-  "exposure": 0.3,
-  "white_balance_k": 5400
+  "exposure": 0.75,
+  "white_balance_k": 5900
  },
  "camera": {
   "position": [
-   -0.36,
-   -0.55,
-   0.45
+   -0.3,
+   -0.62,
+   0.3
   ],
   "target": [
-   0.03,
-   0.0,
-   0.02
+   -0.04,
+   -0.03,
+   0.025
   ],
-  "lens_mm": 70,
+  "lens_mm": 85,
   "level": false,
-  "fstop": 8.0,
+  "fstop": 5.6,
   "focus": [
    0.0,
-   0.0,
-   0.035
+   -0.057,
+   0.04
   ]
  }
 }
