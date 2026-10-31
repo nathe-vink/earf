@@ -1,0 +1,174 @@
+{
+ "stage1": {
+  "impression": "A clean, well-composed studio three-quarter of a layered smoked-acrylic belt-drive deck with a floating upper plinth on clear pucks. The light and depth of field are believable, but it still reads as a render: the tan edge band is flat colour with no grain, the smoked slabs read as dark glass with drawn-on outlines, and the arm and record are generic stand-ins. Desirable, but the layered-acrylic sandwich is a familiar boutique archetype.",
+  "score": 6.0
+ },
+ "reads_as": "a boutique smoked-acrylic suspended-plinth turntable, Pro-Ject/Clearaudio territory",
+ "unreal": [
+  {
+   "rank": 1,
+   "region": [
+    170,
+    780,
+    1700,
+    1110
+   ],
+   "what": "The tan edge band on the base is a flat, uniform colour (median RGB about 132/125/116 in the band) with two perfect hairlines, no grain, no ply lines and no glue line, and it renders the same on the front and side faces.",
+   "real": "Real birch ply or a bonded laminate shows end-grain ply striping, slight tone changes between plies, a sanded or lacquered sheen that picks up a soft highlight on the lit face and goes darker on the shade face, and a crisp but not perfect glue line where it meets the acrylic."
+  },
+  {
+   "rank": 2,
+   "region": [
+    130,
+    450,
+    1530,
+    880
+   ],
+   "what": "Both acrylic slabs have a uniform dark rim and a thin light inner outline, as if a frame had been drawn at the edge. The polished edges do not glow with piped light, and there are no TIR bright edges or caustics, so they read as dark glass or a stroked outline.",
+   "real": "Through-tinted cast acrylic, polished at the edge, carries light along the sheet: edges facing the key glow brighter and more saturated than the face, with a visible tint depth gradient, soft internal reflections and slightly rounded (0.5 mm) arrises catching a fine highlight."
+  },
+  {
+   "rank": 3,
+   "region": [
+    1030,
+    1000,
+    1400,
+    1110
+   ],
+   "what": "The front-right corner of the base breaks up into noisy dark fragments and stray tan slivers where the band, the foot and the radius meet; the foot reads as a blob.",
+   "real": "A machined corner: the band stops cleanly or wraps a consistent radius, and an aluminium cone or puck foot with a chamfer and a turned finish sits clearly under it with a tight contact shadow."
+  },
+  {
+   "rank": 4,
+   "region": [
+    690,
+    455,
+    960,
+    510
+   ],
+   "what": "The record label is a blank, clipped white disc (8.5% clipped in the label area, median luminance 246) with near-illegible grey text and no paper texture; the spindle is a plain cylinder.",
+   "real": "A real label is off-white printed paper with readable type, a slight sheen and a pressing ring; it holds detail under the key. The spindle has a chamfered tip and a polished highlight."
+  },
+  {
+   "rank": 5,
+   "region": [
+    1260,
+    370,
+    1560,
+    600
+   ],
+   "what": "The tonearm is a matte grey tube with a blocky bearing yoke, a single cap bolt, a mirror-chrome counterweight and no armrest, cue lift, antiskate or tonearm cable. The base plate has three flat pan screws.",
+   "real": "A real arm has a cue lift and rest, an antiskate weight or dial, a wire exiting the pillar, an anodised or carbon tube with a fine sheen, a knurled or engraved counterweight, and the screws are countersunk socket heads in a bead-blasted plate."
+  },
+  {
+   "rank": 6,
+   "region": [
+    930,
+    485,
+    1080,
+    560
+   ],
+   "what": "The headshell and cartridge are a thin black flat plate with a stylus guard silhouette; there is no cartridge body, no finger lift detail, no visible stylus and no cartridge screws.",
+   "real": "A cartridge body with two mounting screws, coloured tag wires under the headshell, a finger lift with a rolled end, and a stylus cantilever sitting in the groove."
+  },
+  {
+   "rank": 7,
+   "region": [
+    430,
+    380,
+    1220,
+    690
+   ],
+   "what": "The record and platter edge are mirror-perfect with no dust, a flat white rim line and a perfectly even groove band. The platter looks like one solid black disc with a white stripe.",
+   "real": "Vinyl shows a fine groove sheen that changes with the land, a slightly rolled bead at the edge, some faint dust or hairline marks. A cast acrylic platter edge would read as tinted depth with a polished bevel, not a painted white line."
+  },
+  {
+   "rank": 8,
+   "region": [
+    500,
+    620,
+    970,
+    880
+   ],
+   "what": "The clear suspension pucks are glassy cylinders with a green cast and a cross-shaped top cap that looks like a placeholder; you cannot tell what is a spring, sorbothane or a bolt.",
+   "real": "Real isolators show a visible elastomer or spring with a turned aluminium cap and a threaded stud; clear parts show refraction of the plinth edge behind them and a precise seat in a counterbore."
+  },
+  {
+   "rank": 9,
+   "region": [
+    0,
+    0,
+    700,
+    220
+   ],
+   "what": "The backdrop falls from about 214 to 63 luminance in a single smooth ramp with a visible hard sweep edge on the left at about y 210; the grain is uniform digital noise on top of everything.",
+   "real": "A real cove sweep has no visible horizon at this lens height, falloff that follows the light shape, and film or sensor grain that is stronger in the shadows and almost absent in the highlights."
+  },
+  {
+   "rank": 10,
+   "region": [
+    640,
+    360,
+    760,
+    395
+   ],
+   "what": "The motor pod or rear puck at the back-left is a plain chrome disc with a flat dimple, no pulley, no belt and no switch.",
+   "real": "A belt-drive deck shows a stepped pulley, a round or flat belt to the sub-platter or platter rim, and a speed control or switch with a defined tactile detail."
+  }
+ ],
+ "cooler": [
+  {
+   "rank": 1,
+   "idea": "Make the tint the hero: let the polished acrylic edges glow amber-smoke with light piped through them, and cut a deliberate gradient (thicker, darker base; thinner, lighter top plate) so the stack reads as one cast object instead of two sheets.",
+   "now": "Two dark sheets with outlines, like most acrylic boutique decks."
+  },
+  {
+   "rank": 2,
+   "idea": "Give the birch band a reason to exist: carry it as a visible structural spine (exposed ply edge on all four sides, or a single ply layer floating between acrylic) that also aligns with the arm board.",
+   "now": "A thin tan strip that reads as trim or tape."
+  },
+  {
+   "rank": 3,
+   "idea": "Design a signature tonearm and counterweight in the same smoked acrylic and bronze language, not a generic chrome-and-grey arm.",
+   "now": "A stock gimbal arm that could be on any deck."
+  },
+  {
+   "rank": 4,
+   "idea": "Make the suspension visible and specific: clear pucks with a visible coiled spring or bronze cap, so the floating plinth is a readable mechanism and a design detail.",
+   "now": "Generic clear cylinders, close to Pro-Ject and Clearaudio suspensions."
+  },
+  {
+   "rank": 5,
+   "idea": "Add one crafted detail of identity: an engraved or cast wordmark on the plinth edge, a bronze speed selector, or a platter mat in the house colour.",
+   "now": "No brand presence on the product itself apart from the prop label."
+  }
+ ],
+ "photo": [
+  {
+   "rank": 1,
+   "change": "Add a strip light or a narrow softbox raking along the front and right edges at low height, and a black flag above, so the acrylic edges and the birch band catch a crisp gradient highlight.",
+   "expected": "The acrylic reads as thick polished cast material and the band as real wood, the single biggest gain in believability."
+  },
+  {
+   "rank": 2,
+   "change": "Replace the birch and acrylic shaders: true end-grain ply texture with plies and lacquer sheen, and acrylic with volume absorption tinted smoke plus a 0.5 mm bevel on every edge.",
+   "expected": "Removes the flat-colour and drawn-outline look on the most visible surfaces."
+  },
+  {
+   "rank": 3,
+   "change": "Pull the label exposure down about 0.7 stop (or use an off-white printed label texture) and add a real cartridge and arm hardware.",
+   "expected": "No clipped hotspot at the centre of the frame, and the business end of the deck looks manufactured."
+  },
+  {
+   "rank": 4,
+   "change": "Lower the camera slightly and lengthen the lens (about 85 to 100 mm equivalent) with the sweep continuous behind, losing the visible horizon on the left.",
+   "expected": "A more heroic, compressed product view and a seamless studio background."
+  },
+  {
+   "rank": 5,
+   "change": "Replace the uniform grain with luminance-weighted sensor noise and add a subtle contact shadow and a faint reflection under each foot.",
+   "expected": "The deck sits on the surface rather than floating, and the image reads as a photograph."
+  }
+ ],
+ "score_if_fixed": 8.0
+}
