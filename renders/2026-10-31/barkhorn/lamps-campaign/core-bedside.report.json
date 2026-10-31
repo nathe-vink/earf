@@ -3,7 +3,7 @@
  "image": "/home/user/earf/renders/2026-10-31/barkhorn/lamps-campaign/core-bedside.png",
  "seconds": {
   "build": 0.8,
-  "render": 489.5
+  "render": 482.4
  },
  "samples": 160,
  "size": [
@@ -11,12 +11,7 @@
   1200
  ],
  "applied": [],
- "pending": [
-  {
-   "id": "lights.basecard",
-   "why": "its receivers ['base', 'ring'] match no part in this frame, so the engine left it out"
-  }
- ],
+ "pending": [],
  "sets": [],
  "glints": [],
  "sun_aim": null,

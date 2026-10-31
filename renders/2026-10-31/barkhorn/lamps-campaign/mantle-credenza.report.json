@@ -2,8 +2,8 @@
  "shot": "/home/user/earf/studio/shots/barkhorn/lamps-campaign/mantle-credenza.json",
  "image": "/home/user/earf/renders/2026-10-31/barkhorn/lamps-campaign/mantle-credenza.png",
  "seconds": {
-  "build": 1.7,
-  "render": 423.3
+  "build": 1.6,
+  "render": 457.5
  },
  "samples": 96,
  "size": [
@@ -20,577 +20,583 @@
   "arm-arm#0": {
    "part": "arm-arm",
    "centre_px": [
-    632.9,
-    593.7
+    651.5,
+    594.6
    ],
    "box_px": [
-    515,
-    531,
-    735,
-    669
+    520,
+    525,
+    765,
+    678
    ],
-   "depth_m": 1.725
+   "depth_m": 1.732
   },
   "arm-lift#0": {
    "part": "arm-lift",
    "centre_px": [
-    661.3,
-    590.9
+    683.3,
+    591.6
    ],
    "box_px": [
-    625,
-    563,
-    696,
-    620
+    643,
+    561,
+    722,
+    624
    ],
-   "depth_m": 1.779
+   "depth_m": 1.785
   },
   "ball#0": {
    "part": "ball",
    "centre_px": [
-    477.9,
-    663.1
+    479.1,
+    670.7
    ],
    "box_px": [
-    474,
-    659,
-    482,
-    667
+    475,
+    667,
+    483,
+    675
    ],
-   "depth_m": 1.742
+   "depth_m": 1.754
   },
   "base-slab#0": {
    "part": "base-slab",
    "centre_px": [
-    504.1,
-    681.7
+    508.2,
+    691.8
    ],
    "box_px": [
-    202,
-    616,
-    765,
-    768
+    175,
+    618,
+    800,
+    790
    ],
-   "depth_m": 1.747
+   "depth_m": 1.759
   },
   "bearing-housing#0": {
    "part": "bearing-housing",
    "centre_px": [
-    477.9,
-    645.1
+    479.1,
+    650.7
    ],
    "box_px": [
-    441,
-    610,
-    514,
-    681
+    439,
+    612,
+    519,
+    691
    ],
-   "depth_m": 1.742
+   "depth_m": 1.754
   },
   "belt#0": {
    "part": "belt",
    "centre_px": [
-    475.5,
-    605.9
+    476.5,
+    606.9
    ],
    "box_px": [
-    265,
-    563,
-    661,
-    659
+    244,
+    558,
+    683,
+    667
    ],
-   "depth_m": 1.742
+   "depth_m": 1.755
   },
   "bushes#0": {
    "part": "bushes",
    "centre_px": [
-    477.9,
-    641.5
+    479.1,
+    646.6
    ],
    "box_px": [
     469,
-    622,
-    487,
-    661
+    625,
+    489,
+    668
    ],
-   "depth_m": 1.742
+   "depth_m": 1.754
   },
   "bushings#0": {
    "part": "bushings",
    "centre_px": [
-    504.1,
-    681.7
+    508.2,
+    691.8
    ],
    "box_px": [
-    364,
-    634,
-    628,
-    739
+    353,
+    638,
+    647,
+    756
    ],
-   "depth_m": 1.747
+   "depth_m": 1.759
   },
   "cartridge#0": {
    "part": "cartridge",
    "centre_px": [
-    530.9,
-    622.5
+    538.0,
+    625.8
    ],
    "box_px": [
-    517,
-    610,
-    545,
-    635
+    522,
+    612,
+    554,
+    640
    ],
-   "depth_m": 1.608
+   "depth_m": 1.617
   },
   "feet#0": {
    "part": "feet",
    "centre_px": [
-    504.1,
-    692.7
+    508.2,
+    704.1
    ],
    "box_px": [
-    232,
-    630,
-    743,
-    773
+    208,
+    633,
+    775,
+    796
    ],
-   "depth_m": 1.747
+   "depth_m": 1.759
   },
   "fixings#0": {
    "part": "fixings",
    "centre_px": [
-    504.1,
-    615.3
+    508.2,
+    617.6
    ],
    "box_px": [
-    215,
-    562,
-    756,
-    685
+    189,
+    557,
+    789,
+    697
    ],
-   "depth_m": 1.747
+   "depth_m": 1.759
   },
   "float-bolts#0": {
    "part": "float-bolts",
    "centre_px": [
-    504.1,
-    664.4
+    508.2,
+    672.4
    ],
    "box_px": [
-    364,
+    353,
     596,
-    628,
-    745
+    646,
+    763
    ],
-   "depth_m": 1.747
+   "depth_m": 1.759
   },
   "hinge-blocks#0": {
    "part": "hinge-blocks",
    "centre_px": [
-    578.7,
-    587.0
+    591.2,
+    586.6
    ],
    "box_px": [
-    453,
-    569,
-    709,
-    605
+    452,
+    566,
+    736,
+    608
    ],
-   "depth_m": 1.926
+   "depth_m": 1.936
   },
   "hinges#0": {
    "part": "hinges",
    "centre_px": [
-    578.3,
-    566.7
+    590.7,
+    563.9
    ],
    "box_px": [
-    457,
-    546,
-    705,
-    588
+    455,
+    540,
+    732,
+    589
    ],
-   "depth_m": 1.925
+   "depth_m": 1.935
   },
   "led-strip-edge#0": {
    "part": "led-strip-edge",
    "centre_px": [
-    504.1,
-    681.7
+    508.2,
+    691.8
    ],
    "box_px": [
-    202,
-    617,
-    766,
-    767
+    174,
+    619,
+    800,
+    788
    ],
-   "depth_m": 1.747
+   "depth_m": 1.759
   },
   "led-strip-strip#0": {
    "part": "led-strip-strip",
    "centre_px": [
-    497.7,
-    686.2
+    501.1,
+    696.8
    ],
    "box_px": [
-    222,
-    627,
-    742,
-    761
+    197,
+    630,
+    774,
+    782
    ],
-   "depth_m": 1.733
+   "depth_m": 1.745
   },
   "lid-back#0": {
    "part": "lid-back",
    "centre_px": [
-    593.1,
-    550.7
+    607.2,
+    546.0
    ],
    "box_px": [
-    410,
-    523,
-    779,
+    403,
+    514,
+    814,
     582
    ],
-   "depth_m": 1.965
+   "depth_m": 1.975
   },
   "lid-front#0": {
    "part": "lid-front",
    "centre_px": [
-    566.4,
-    273.8
+    577.4,
+    236.1
    ],
    "box_px": [
-    376,
-    259,
-    759,
-    291
+    366,
+    219,
+    792,
+    255
    ],
-   "depth_m": 1.894
+   "depth_m": 1.905
   },
   "lid-left#0": {
    "part": "lid-left",
    "centre_px": [
-    416.1,
-    408.3
+    410.6,
+    385.8
    ],
    "box_px": [
-    377,
-    261,
-    452,
-    568
+    367,
+    221,
+    451,
+    564
    ],
-   "depth_m": 1.984
+   "depth_m": 2.0
   },
   "lid-right#0": {
    "part": "lid-right",
    "centre_px": [
-    753.4,
-    421.7
+    786.3,
+    402.4
    ],
    "box_px": [
-    726,
-    265,
-    778,
-    592
+    756,
+    227,
+    814,
+    594
    ],
-   "depth_m": 1.875
+   "depth_m": 1.879
   },
   "lid-top#0": {
    "part": "lid-top",
    "centre_px": [
-    597.4,
-    400.7
+    612.0,
+    378.1
    ],
    "box_px": [
-    418,
-    255,
-    780,
-    561
+    412,
+    215,
+    816,
+    559
    ],
-   "depth_m": 1.977
+   "depth_m": 1.987
   },
   "mark#0": {
    "part": "mark",
    "centre_px": [
-    599.2,
-    673.4
+    614.0,
+    683.4
    ],
    "box_px": [
-    577,
-    670,
-    621,
-    677
+    590,
+    679,
+    638,
+    688
    ],
-   "depth_m": 1.551
+   "depth_m": 1.558
   },
   "motor#0": {
    "part": "motor",
    "centre_px": [
-    427.1,
-    589.2
+    422.9,
+    587.8
    ],
    "box_px": [
-    387,
-    556,
+    378,
+    550,
     466,
-    624
+    627
    ],
-   "depth_m": 1.896
+   "depth_m": 1.912
   },
   "phono-pads#0": {
    "part": "phono-pads",
    "centre_px": [
-    549.3,
-    648.3
+    558.4,
+    654.9
    ],
    "box_px": [
-    493,
-    633,
-    603,
-    665
+    496,
+    638,
+    619,
+    673
    ],
-   "depth_m": 1.851
+   "depth_m": 1.862
   },
   "phono-stage#0": {
    "part": "phono-stage",
    "centre_px": [
-    551.3,
-    630.9
+    560.6,
+    635.5
    ],
    "box_px": [
-    484,
+    486,
     599,
-    615,
-    666
+    631,
+    675
    ],
-   "depth_m": 1.856
+   "depth_m": 1.867
   },
   "platter-disc#0": {
    "part": "platter-disc",
    "centre_px": [
-    477.9,
-    606.1
+    479.1,
+    607.1
    ],
    "box_px": [
-    271,
-    557,
-    660,
-    667
+    251,
+    552,
+    682,
+    675
    ],
-   "depth_m": 1.742
+   "depth_m": 1.754
   },
   "platter-hub#0": {
    "part": "platter-hub",
    "centre_px": [
-    477.9,
-    606.1
+    479.1,
+    607.1
    ],
    "box_px": [
-    448,
-    590,
-    507,
-    622
+    446,
+    589,
+    512,
+    625
    ],
-   "depth_m": 1.742
+   "depth_m": 1.754
   },
   "plinth-slab#0": {
    "part": "plinth-slab",
    "centre_px": [
-    504.1,
-    629.0
+    508.2,
+    632.9
    ],
    "box_px": [
-    217,
-    566,
-    754,
-    711
+    191,
+    562,
+    787,
+    726
    ],
-   "depth_m": 1.747
+   "depth_m": 1.759
   },
   "pod-core#0": {
    "part": "pod-core",
    "centre_px": [
-    427.1,
-    613.1
+    422.9,
+    614.5
    ],
    "box_px": [
-    381,
-    573,
-    472,
-    655
+    371,
+    570,
+    473,
+    662
    ],
-   "depth_m": 1.896
+   "depth_m": 1.912
   },
   "pod-mat#0": {
    "part": "pod-mat",
    "centre_px": [
-    427.1,
-    655.5
+    422.9,
+    661.8
    ],
    "box_px": [
-    378,
-    641,
-    475,
-    671
+    369,
+    646,
+    476,
+    679
    ],
-   "depth_m": 1.896
+   "depth_m": 1.912
   },
   "pod-pads#0": {
    "part": "pod-pads",
    "centre_px": [
-    429.6,
-    648.6
+    425.6,
+    654.1
    ],
    "box_px": [
-    397,
-    636,
+    389,
+    640,
     462,
-    661
+    669
    ],
-   "depth_m": 1.902
+   "depth_m": 1.917
   },
   "pod-ring-1-stack#0": {
    "part": "pod-ring-1-stack",
    "centre_px": [
-    427.1,
-    613.1
+    422.9,
+    614.5
    ],
    "box_px": [
-    373,
-    572,
-    479,
-    657
+    363,
+    568,
+    481,
+    664
    ],
-   "depth_m": 1.896
+   "depth_m": 1.912
   },
   "post-1#0": {
    "part": "post-1",
    "centre_px": [
-    377.1,
-    684.3
+    367.5,
+    693.4
    ],
    "box_px": [
-    356,
-    662,
-    398,
-    707
+    344,
+    669,
+    391,
+    719
    ],
-   "depth_m": 1.651
+   "depth_m": 1.665
   },
   "post-2#0": {
    "part": "post-2",
    "centre_px": [
-    518.3,
-    696.7
+    523.9,
+    708.7
    ],
    "box_px": [
-    497,
-    674,
-    539,
-    720
+    501,
+    683,
+    547,
+    735
    ],
-   "depth_m": 1.611
+   "depth_m": 1.621
   },
   "post-3#0": {
    "part": "post-3",
    "centre_px": [
-    492.0,
-    621.6
+    494.7,
+    624.6
    ],
    "box_px": [
-    474,
-    603,
-    510,
-    641
+    475,
+    604,
+    514,
+    646
    ],
-   "depth_m": 1.883
+   "depth_m": 1.896
   },
   "post-4#0": {
    "part": "post-4",
    "centre_px": [
-    617.8,
-    631.1
+    634.7,
+    636.3
    ],
    "box_px": [
-    600,
-    612,
-    635,
-    651
+    615,
+    615,
+    654,
+    658
    ],
-   "depth_m": 1.844
+   "depth_m": 1.852
   },
   "pulley#0": {
    "part": "pulley",
    "centre_px": [
-    427.1,
-    570.3
+    422.9,
+    566.7
    ],
    "box_px": [
-    399,
-    560,
-    454,
-    581
+    392,
+    555,
+    453,
+    579
    ],
-   "depth_m": 1.896
+   "depth_m": 1.912
   },
   "rear-box#0": {
    "part": "rear-box",
    "centre_px": [
-    680.7,
-    631.5
+    704.9,
+    637.3
    ],
    "box_px": [
-    635,
-    610,
-    726,
-    654
+    654,
+    613,
+    755,
+    663
    ],
-   "depth_m": 1.867
+   "depth_m": 1.874
   },
   "slot-mask#0": {
    "part": "slot-mask",
    "centre_px": [
-    497.1,
-    681.4
+    500.5,
+    691.3
    ],
    "box_px": [
-    216,
-    625,
-    746,
-    753
+    190,
+    628,
+    778,
+    773
    ],
-   "depth_m": 1.732
+   "depth_m": 1.744
   },
   "spindle#0": {
    "part": "spindle",
    "centre_px": [
-    477.9,
-    621.3
+    479.1,
+    624.0
    ],
    "box_px": [
-    471,
-    581,
-    484,
-    662
+    472,
+    579,
+    486,
+    670
    ],
-   "depth_m": 1.742
+   "depth_m": 1.754
   },
   "thrust-plate#0": {
    "part": "thrust-plate",
    "centre_px": [
-    477.9,
-    666.7
+    479.1,
+    674.8
    ],
    "box_px": [
     469,
-    663,
-    487,
-    670
+    671,
+    489,
+    679
    ],
-   "depth_m": 1.742
+   "depth_m": 1.754
   }
+ },
+ "masks": {
+  "image": "/home/user/earf/renders/2026-10-31/barkhorn/lamps-campaign/mantle-credenza.mask.png",
+  "parts": 41,
+  "swatch": "/home/user/earf/renders/2026-10-31/barkhorn/lamps-campaign/mantle-credenza.swatch.png",
+  "paints": 1
  },
  "finish": {
   "white_in": 236,
@@ -600,6 +606,17 @@
   "clarity": 0.1,
   "sharpen": 0.3,
   "sharpen_px": 0.7,
+  "dodge": [
+   {
+    "parts": [
+     "plinth*"
+    ],
+    "lift_ev": 0.9,
+    "below": 60,
+    "knee": 30,
+    "feather_px": 3
+   }
+  ],
   "gain": 1.0
  }
 }

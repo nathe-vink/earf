@@ -11,10 +11,11 @@
   "clamp": 10,
   "bounces": 24,
   "transmission_bounces": 20,
-  "view": "Khronos PBR Neutral",
+  "view": "AgX",
   "exposure": 3.553,
   "white_balance_k": 3500,
-  "white_balance_tint": 4
+  "white_balance_tint": 4,
+  "look": "AgX - Punchy"
  },
  "sky": {
   "kind": "gradient",
@@ -105,7 +106,7 @@
     ],
     "texture": "rough_linen",
     "tex_scale": 0.6,
-    "tint": "#5E6470",
+    "tint": "#6A625A",
     "tint_mix": 0.7
    },
    {
@@ -244,7 +245,7 @@
     "kind": "kit",
     "shape": "box",
     "material": "paper",
-    "color": "#E9E1CF",
+    "color": "#CFC4AE",
     "position": [
      -0.440242573931569,
      2.7399395195261005,
@@ -318,7 +319,7 @@
     "kind": "kit",
     "shape": "box",
     "material": "paper",
-    "color": "#E9E1CF",
+    "color": "#CFC4AE",
     "position": [
      -0.44024939101256494,
      2.739982560881564,
@@ -502,8 +503,8 @@
     ]
    },
    "receivers": [
-    "base",
-    "ring"
+    "*base*",
+    "*ring*"
    ]
   },
   "rimcard": {
