@@ -28,5 +28,13 @@ C40.C39.FOR.update({
             'on an oak plinth beside it; the window table, the counter\'s end and the record wall. ',
 })
 
-if __name__ == '__main__':
+def main():
     C40.main()
+    out = sys.argv[2]
+    txt = open(out).read().replace('the Atmosphere line', 'the Tropos speakers').replace('Atmosphere', 'Tropos')
+    txt = txt.replace('Planet EARF, Planet EARF,', 'Planet EARF,')
+    open(out, 'w').write(txt)
+
+
+if __name__ == '__main__':
+    main()
