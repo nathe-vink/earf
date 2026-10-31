@@ -13,7 +13,7 @@ Ranked by what each does for the odds, per dollar:
 | f | The Tint Library | about $10k to $25k for 100 kits | as soon as the sheet is chosen | trade specification; settles the cast colours |
 | a | EARF Sessions | about $5k to $9k a release | Session 00 once the first pair plays | content, a product, and the bar's reason to exist |
 | d | Hotel listening suites | trade-priced kits; one pilot suite | after the first pairs are measured | overnight demos to buyers; trade revenue |
-| b | A debut room: San Francisco in FOG week (January 2027), then Milan or Design Miami | about $4k to $15k in SF (within the deck's debut line); $80k to $200k for Milan | SF: a space by December; Milan: April 2027 at the earliest | press and the trade in one week |
+| b | A debut room: San Francisco in FOG week (January 2027), High End Vienna (May 2027), Milan in 2028 | $4k to $15k in SF; Vienna's stand free, $6k to $12k to get there; $80k to $200k for Milan | SF: 21–24 Jan 2027; Vienna: apply by 31 Dec 2026; Milan: April 2028 | collectors, then the hi-fi trade, then the design world |
 | e | Artist editions | a colour batch's minimum plus the artist's share | 2027, after launch | a waitlist and a premium; the artist's audience |
 | c | Mother EARF as public art | about $150k to $300k at 4 m; less at 2 m | 12 to 18 months | the brand at city scale; sponsorship |
 
@@ -26,17 +26,27 @@ the record pressed in 04 Poison half out of it, the back's "One album, start to 
 no talking. Record some of them live, in the room, through the room's own pair, and press them: one release per
 artist, numbered, on vinyl tinted to match the night's tint. Sold at the bar, on the site and through the artist.
 
+**What a buyer gets.** A 12-inch LP, 180 g, pressed in the evening's tint, numbered, in a jacket with the room on the
+front; a download code. A Session-night ticket holder gets theirs first. Price: [LP PRICE] (about $40 is typical for a
+numbered coloured pressing; est.).
+
 **Cost (est.).** Multitrack recording in the room with a hired engineer, about $1.5k to $3k; mixing and mastering,
 $1k to $2k; lacquer cutting and a short run of 300 coloured 180 g LPs with printed jackets, about $3k to $5k. About
-$5k to $9k a release before the artist's share. At about $40 each, 300 records return about $12k. **Timeline.** A
-pressing takes some weeks to a few months depending on the plant's queue. Session 00 does not need the bar: it can be
-made in any good room the week the first pair plays.
+$5k to $9k a release before the artist's share. At about $40 each, 300 records return about $12k.
+
+**What it needs first.** A licence for every recording: the artist's agreement, and mechanical licences for any songs
+they didn't write (from the publishers, or through a licensing service). The artist's share agreed in writing.
+
+**Timeline.** Session 00 in any good room the week the first pair plays (January 2027 at the latest, for the debut
+room); master to plant by February; the pressing in the spring, depending on the plant's queue. The press rhythm the
+coordinator relayed fits it: prototypes photographed by mid-February, print pitched under embargo by 1 March, online
+design press 22 to 29 March, the hi-fi press before May. Session 00's record is the thing to send the hi-fi press.
 
 **Why it raises the odds.** It is proof the speakers are serious, in the only form that can't be faked: a record made
 through them. It gives the press and social a recurring reason to write. It is a product with a margin from day one.
 And it makes Planet EARF a label as well as a bar, which is easier to fund than a bar alone.
 
-## (b) A debut room: San Francisco in FOG week, then Milan or Design Miami
+## (b) A debut room: San Francisco in FOG week, then Vienna, then Milan
 
 **Mockup:** `out/idea-milan.png`: the invitation ("Something in the air.", the uplit eight), the room in plan (eight
 Tropos lit from below on a curved wall, Mother EARF overhead, a bench, Mantle and the coins by the door). The same room
@@ -46,25 +56,41 @@ works at any of the three.
 real at full size. A Session each night. The coin at the door. Every piece wears its tag, and the first run's orders and
 deposits are taken there.
 
-**Order.** The investor deck's plan (step 1, the $50,000 raise) already has a debut night in San Francisco, and its
-"why now" points at FOG Design+Art at Fort Mason, 21 to 24 January 2027, when collectible-design galleries and their
-collectors are in town. So: **first**, the room in San Francisco that week, a borrowed or rented space near the fair
-with the first pair (and one of each lamp and Mantle), not the eight; **then**, once a first batch exists, the full room
-at Milan Design Week (April) or Design Miami (December 2027).
+**The calendar** (from the coordinator's research; dates, not plans already made):
+- **FOG Design+Art, 21 to 24 January 2027, Fort Mason.** Design galleries (Marta, Patrick Parrish, Hostler Burrows)
+  are in San Francisco that week. The investor deck already plans a debut night in San Francisco.
+- **Milan Design Week, 12 to 18 April 2027.** Alcova has no open call (enquiries only); the Fuorisalone package is
+  €2,000 + VAT, by 8 February 2027; SaloneSatellite 2027 is closed.
+- **High End, now in Vienna, 6 to 9 May 2027.** A free Start-Up Area for young registered companies; apply by
+  31 December 2026.
 
-**Cost (est.).** San Francisco: a space for a few nights, light and the bench, $4k to $15k, inside the deck's $4,000 debut
-allowance only if the space is lent. Milan: a space in a design district for the week, $15k to $80k; build, light and
-sound, $20k to $50k; freight both ways, $10k to $25k; travel, staff and a press agent, $20k to $45k; about $80k to
-$200k all in, a pre-seed cost, not this raise's.
+**The plan: San Francisco first, Vienna second, Milan in 2028.**
+1. **San Francisco, FOG week (January 2027).** The debut room with the first pair, one of each lamp and Mantle: a
+   lent or rented space near the fair for a few nights, a Session each night, reservations and deposits taken (g).
+   The bar lane is drawing a Planet EARF pop-up from San Francisco's Vacant to Vibrant programme (up to six months'
+   rent for downtown pop-ups); if it lands, the debut room is that pop-up's first week.
+2. **Vienna, High End (May 2027).** Apply to the Start-Up Area by 31 December. It is free, it is the hi-fi trade's
+   own show (dealers, distributors and the hi-fi press), and it comes after the first pair has been measured. The
+   uplit pair is the stand.
+3. **Milan (April 2028), not 2027.** Without Alcova or SaloneSatellite, Milan 2027 means a venue found and paid for
+   in the design districts, for a product not yet in production; the €2,000 Fuorisalone package only lists an event
+   someone else hosts. In 2028 the full eight can go, with a batch behind them and the press from 2027.
 
-**Why it raises the odds.** San Francisco in FOG week puts the first real pair in front of collectors, designers and
-press for the price of a few nights' rent, and turns the waiting list into deposits (idea g). Milan then turns a local
-debut into an international one, with the trade there to sell the first run to.
+**Cost (est.).** San Francisco: a space for a few nights, light and the bench, $4k to $15k, within the deck's $4,000
+debut line only if the space is lent. Vienna: the stand is free; freight for a pair and travel, about $6k to $12k.
+Milan 2028: a space for the week, $15k to $80k; build, light and sound, $20k to $50k; freight, $10k to $25k; travel,
+staff and a press agent, $20k to $45k; about $80k to $200k all in.
+
+**Why it raises the odds.** San Francisco puts the first real pair in front of collectors, designers and press for a
+few nights' rent and turns the waiting list into deposits. Vienna puts it in front of the people who sell hi-fi, for
+the price of the freight. Milan then turns both into an international debut, with the trade there to sell a batch.
 
 ## (c) Mother EARF as public art
 
-**Mockup:** `out/idea-plaza.png`: the colour globe at 4 m across on a low black plinth in a stone plaza at dusk, its
-rims lit in their tints. Path-traced from the globe's own model (`out-globe-colour`).
+**Mockup:** `out/idea-plaza.png`: an elevation at 1:50 at dusk, the way an architect shows a proposal: the globe's own
+night render at true scale (4 m) on its 3.2 m plinth, drawn people and trees for scale, its colours pooled on the
+paving, and a small plan. A path-traced plaza (`ideas_render.py --shot plaza`, `out/idea-plaza-render.png`) scored 4.0
+twice with the critic, its people and trees reading as primitives, so the concept changed to the honest drawing.
 
 **What.** The bar's 1.25 m Mother EARF, made at city scale for a plaza, a waterfront or a festival: six slotted
 discs, each in its tint, edge-lit at night so the rims draw the globe in light.
@@ -129,15 +155,44 @@ cast colours, matched and fixed with the suppliers.
 **Mockup:** `out/idea-founding.png`: the certificate ("Pair thirty-seven of the first hundred.") and the rating
 plate marked FOUNDING 037 / 100.
 
-**What.** The first hundred pairs of Tropos, reserved with a deposit before the first is built, numbered on both
-rating plates and kept on a register at Planet EARF. Each comes with a seat at the first Session and a coin for life.
+**What a buyer gets.** One of the first hundred pairs of Tropos, in the tint of their choice, made to order:
+- the number laser-marked on both rating plates (FOUNDING 037 / 100), and the pair on a register kept at Planet EARF;
+- a numbered certificate;
+- a seat at the first Session, and an EARFcoin for life.
 
-**Cost.** Counsel's time on deposit terms, refunds and California's consumer rules, and the printing. **Timeline.**
-Before the first production run; it needs a price and a lead time, which the owner hasn't yet set.
+**Price.** [PAIR PRICE], the launch price, not a discount: the number is the reward. The reservation and deposit
+amounts below are the funding research's examples (est.), for the owner to set.
+
+**How it is taken, in three stages** (the funding research, `research/2026-10-31/R2-funding.md` §4.4 on
+`r46-owner-notes`; est., not legal advice; counsel drafts the terms):
+1. **Now, a refundable reservation.** About $1,000 for a pair (lamps $100 to $250). Labelled "planned product; no
+   ship date yet; refundable any time", which is the FTC's "dry-testing" condition for products that don't yet exist.
+2. **After a working prototype, an order with a deposit.** 30 to 50% of the price, with a stated, reasonably based
+   delivery window ("made to order in your colour; ships in 16 to 20 weeks"), the California disclosures before
+   payment (B&P §17538: refund policy, legal name, street address), and FTC delay notices if the window slips.
+   Refundable until production starts; after that, cancellation terms tied to actual, documented costs. **No
+   "non-refundable deposit"**: California's Civil Code §1671 voids penalty clauses in consumer sales.
+3. **Before shipping, the balance.**
+
+Deposits are kept in a separate account and spent only on that customer's order. The research recommends forming the
+C-corp before taking deposits, so customer money never sits with the founder personally.
+
+**Timeline.** Reservations can open as soon as the terms are written (the site lane would add the form); deposits
+after the first pair is built and heard, so around the San Francisco debut room in January 2027. The research's
+plan opens Tropos founders' deposits in that window and puts "at least 2 Tropos deposits, or at least 10 lamp
+deposits" as an early milestone.
 
 **Why it raises the odds.** It is the clearest evidence of demand an investor can be shown: a list of people who paid
-to wait. The deposits fund the first run's materials. And the first hundred owners are the brand's first ambassadors,
-each with a number they will want to show.
+to wait. The funding research's angel round asks for about $250k of pre-sales first. The deposits pay for the first
+run's materials, and the first hundred owners are the brand's first ambassadors, each with a number they will show.
+
+## A note on the name Strata
+
+The Tropos lane has drawn a laminated horn as an alternative to the formed one: 14 to 22 stacked layers of the tinted
+acrylic whose cut edges read as contour rings, like strata (`r33-speaker-horn` at
+5f87928eefebe27bb9ee9ac39988b4fdaf2da205, `renders/2026-10-31/barkhorn/horn-plan-b/compare-formed-vs-laminated.png`).
+If the owner keeps Strata in reserve, that horn, or a laminated edition of Tropos, is a natural place for it. Nothing
+is renamed here.
 
 ## Not done here
 

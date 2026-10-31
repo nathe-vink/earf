@@ -244,7 +244,7 @@ def crate(x, y, tint='ember', open_door=False, rot=0.0, name='crate', front_art=
     inside = mat_birch('inside-' + name, decal=os.path.join(OUT, 'decal-crate-inside.png'))
     side = mat_birch('side-' + name, decal=os.path.join(OUT, 'decal-crate-side.png'))
     steel = mat_basic('steel-' + name, '#1E1D1F', rough=0.35, metal=1.0)
-    felt = mat_basic('felt-' + name, '#2A2928', rough=0.95, sheen=0.4, bump=0.1, bump_scale=400.0)
+    felt = mat_basic('felt-' + name, '#2B2A28', rough=1.0, sheen=0.3, bump=0.3, bump_scale=1500.0)
     z0 = SK
     # skids
     for sx in (-W / 2 + 0.06, W / 2 - 0.10):
@@ -299,7 +299,7 @@ def crate(x, y, tint='ember', open_door=False, rot=0.0, name='crate', front_art=
                 objs.append(box('foam', fx, -D / 2 + 0.06, fz, fx + 0.07, D / 2 - T - 0.01, fz + 0.12, foam, bevel=0.004))
         # the sled, and the speaker in its sleeve on it
         objs.append(box('sled', -0.30, -D / 2 + 0.03, z0 + T, 0.30, D / 2 - T - 0.02, z0 + T + 0.03, ply, bevel=0.002))
-        sleeve = mat_basic('sleeve-' + name, {'ember': '#7A120C'}.get(tint, TINTS[tint]), rough=0.9, sheen=0.0, bump=0.25, bump_scale=900.0)   # the cotton dyed deeper than the acrylic reads
+        sleeve = mat_basic('sleeve-' + name, {'ember': '#7A120C'}.get(tint, TINTS[tint]), rough=0.9, sheen=0.4, bump=0.25, bump_scale=900.0)   # the cotton dyed deeper than the acrylic reads
         sl = box('sleeve', -0.285, -0.215, z0 + T + 0.03, 0.285, 0.215, z0 + T + 0.03 + 0.95, sleeve, bevel=0.045)
         sub = sl.modifiers.new('s', 'SUBSURF'); sub.levels = 4; sub.render_levels = 4; sub.subdivision_type = 'SIMPLE'
         # critic round 1 (5.0): the cloth as cloth. Long vertical folds that fade toward the shoulders, and a loose
@@ -391,33 +391,35 @@ def core_box(x, y, tint='ember', rot=0.2):
 
 
 def shot_pair(sc):
-    # critic round 1 (5.5): a raking key, one hero crate and its partner staggered, the case clear of the skids, a
-    # concrete floor and a limewash wall, a low 85 mm camera, Base Contrast
-    sc.view_settings.look = 'AgX - Base Contrast'; sc.view_settings.exposure = -0.4
-    sc.world.node_tree.nodes['Background'].inputs[1].default_value = 0.05
-    floor_and_wall(color='#B8B2A8', wall='#8E867B', wall_y=2.5, rough=0.7)
-    crate(-0.35, 0.0, rot=0.35, name='c1')
-    crate(0.55, 0.9, rot=-0.26, name='c2', front_art='decal-crate-front-2.png')
-    horn_case(1.15, -0.35, rot=-0.55)
-    area('key', (-3.6, -1.2, 2.4), (0, 0, 0.6), 1.0, 1400)
-    area('fill', (3.4, -2.6, 1.4), (0, 0, 0.6), 3.0, 60, '#EEF2FA')
-    area('top', (0, 0.5, 4.5), (0, 0, 0), 3.0, 80)
-    flag = mat_basic('flag', '#050505', rough=1.0)          # a flag over the wall's top, so it falls off upward
-    f = box('flag', -4, 1.6, 2.6, 4, 1.62, 3.4, flag); f.visible_camera = False
-    camera((1.4, -5.8, 0.95), (0.25, 0.15, 0.6), lens=50, fstop=5.6)
+    # critic rounds 1 and 2 (5.5, 5.5): the hero crate the brightest face, its partner set back and flagged off the key,
+    # the case clear of both, a darker floor and wall on a cove, a lower, longer lens
+    sc.view_settings.look = 'AgX - Base Contrast'; sc.view_settings.exposure = -0.85
+    sc.world.node_tree.nodes['Background'].inputs[1].default_value = 0.04
+    floor_and_wall(color='#8C857B', wall='#7A7268', wall_y=2.8, rough=0.55)
+    crate(-0.35, 0.0, rot=0.14, name='c1')
+    crate(0.40, 1.5, rot=-0.26, name='c2', front_art='decal-crate-front-2.png')
+    horn_case(1.55, -0.95, rot=-0.30)
+    area('key', (-2.6, -2.8, 2.5), (-0.35, 0, 0.7), 1.0, 1000)
+    area('fill', (3.4, -2.6, 1.4), (0, 0, 0.6), 3.0, 40, '#EEF2FA')
+    area('top', (0, 0.5, 4.5), (0, 0, 0), 3.0, 60)
+    flag = mat_basic('flag', '#050505', rough=1.0)
+    f = box('flag-wall', -4, 2.2, 2.2, 4, 2.22, 3.4, flag); f.visible_camera = False
+    g = box('flag-partner', -1.9, 0.2, 0.8, -1.3, 0.22, 2.0, flag); g.visible_camera = False   # keeps the key off the partner's face
+    camera((1.8, -7.6, 0.70), (0.5, 0.2, 0.65), lens=66, fstop=4)
 
 
 def shot_open(sc):
+    # critic rounds 1 and 2 (5.0, 5.0): the red held deep, the felt dark, the door whole in frame and lighter than the
+    # floor, a raking key, a warm glow from the crate's ceiling onto the sleeve
     sc.view_settings.look = 'AgX - Base Contrast'; sc.view_settings.exposure = -1.0
-    sc.world.node_tree.nodes['Background'].inputs[1].default_value = 0.06
-    floor_and_wall(color='#B8B2A8', wall='#8E867B', wall_y=2.2, rough=0.7)
+    sc.world.node_tree.nodes['Background'].inputs[1].default_value = 0.04
+    floor_and_wall(color='#9E978C', wall='#8E867B', wall_y=2.2, rough=0.7)
     crate(0.0, 0.3, open_door=True, name='c1')
-    area('key', (-2.8, -1.6, 2.2), (0, 0, 0.6), 1.2, 700)
-    area('fill', (3.0, -2.2, 1.2), (0, 0, 0.6), 2.6, 80, '#EEF2FA')
-    area('in', (0.2, -3.0, 1.4), (0, 0.3, 1.0), 1.6, 50)
-    bounce = area('bounce', (0.0, -0.4, 1.2), (0, 0.3, 1.2), 0.4, 40); bounce.visible_camera = False
-    area('top', (0, 0.5, 4.5), (0, 0, 0), 3.0, 80)
-    camera((0.9, -3.7, 1.1), (0.0, -0.25, 0.62), lens=48, fstop=4)
+    area('key', (-2.4, -0.6, 2.4), (0, 0, 0.6), 0.8, 650)
+    area('fill', (3.0, -2.2, 1.2), (0, 0, 0.6), 2.6, 30, '#EEF2FA')
+    glow = area('glow', (0.0, 0.25, 1.22), (0, 0.25, 0.3), 0.3, 40, '#FFD9B0'); glow.visible_camera = False
+    area('top', (0, 0.5, 4.5), (0, 0, 0), 3.0, 50)
+    camera((1.1, -4.3, 1.25), (0.0, -0.4, 0.52), lens=52, fstop=4)
 
 
 def shot_lamps(sc):

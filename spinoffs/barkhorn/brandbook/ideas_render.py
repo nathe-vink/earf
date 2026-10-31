@@ -188,7 +188,7 @@ def main():
     {'plaza': shot_plaza, 'library': shot_library}[args.shot](sc)
     sc.render.resolution_x, sc.render.resolution_y = int(1800 * args.scale), int(1200 * args.scale)
     sc.cycles.samples = args.samples
-    sc.render.filepath = args.out or os.path.join(P.OUT, f'idea-{args.shot}.png')
+    sc.render.filepath = args.out or os.path.join(P.OUT, f'idea-{args.shot}-render.png' if args.shot == 'plaza' else f'idea-{args.shot}.png')
     bpy.ops.render.render(write_still=True)
     print('wrote', sc.render.filepath)
 
