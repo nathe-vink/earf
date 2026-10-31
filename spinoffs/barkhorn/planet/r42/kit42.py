@@ -94,3 +94,23 @@ def shopwall(bpy, name, p, kit):
         px, py, pw, pd, ph = p['plinth']
         objs.append(_box(bpy, f'{name}-plinth', px - pw / 2, py - pd / 2, 0.0, px + pw / 2, py + pd / 2, ph, oak, bevel=0.006))
     return objs
+
+
+def flatten(bpy, name, p, kit):
+    """A scanned finish's stains calmed (the round 42 critics: "blotchy dark puddles", "oval blobs that read as stains"):
+    a Bright/Contrast node between the scan's colour and the BSDF, its contrast `contrast` (negative flattens), for every
+    material whose name holds `match`."""
+    for m in [m for m in bpy.data.materials if p.get('match', 'Concrete044A') in m.name and m.use_nodes and not m.get('r42flat')]:
+        b = next((n for n in m.node_tree.nodes if n.type == 'BSDF_PRINCIPLED'), None)
+        if not b or not b.inputs['Base Color'].is_linked:
+            continue
+        m['r42flat'] = 1
+        nt = m.node_tree
+        src = b.inputs['Base Color'].links[0].from_socket
+        bc = nt.nodes.new('ShaderNodeBrightContrast')
+        c = p.get('contrast', -0.35)
+        # out = (1 + c) x + bright - c / 2: hold the scan's mean (`mean`, linear) where it is, pull the stains toward it
+        bc.inputs['Bright'].default_value = c * (0.5 - p.get('mean', 0.15))
+        bc.inputs['Contrast'].default_value = c
+        nt.links.new(src, bc.inputs['Color']); nt.links.new(bc.outputs['Color'], b.inputs['Base Color'])
+    return []
