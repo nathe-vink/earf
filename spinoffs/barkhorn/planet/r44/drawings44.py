@@ -90,21 +90,25 @@ def lantern_plan(sh, F):
     # the band above (dashed, outside the outer face on the two seen sides)
     F.p(sh, [(Lt['x1'], Lt['y0'] - 0.05), (Lt['x0'] - 0.05, Lt['y0'] - 0.05), (Lt['x0'] - 0.05, Lt['y1'])], close=False,
         stroke=C['band'], sw=0.6, dash='2 1')
-    # the porch: oak walls, door 1 off the route, door 2 through the box's leaves
+    # the porch, in line with the box: blind oak sides, a pair of leaves in its front swinging out, a pair through
+    # the box's leaves swinging in, 48 in between them clear of both swings (ADA 404.2.6)
     Lk = P.LOCK
     ow = dict(fill=C['oakd'], stroke=INK, sw=0.22)
+    D1, D2, hw = P.LOCK_DOOR1, P.LOCK_DOOR2, P.DOOR_PAIR / 2
     F.r(sh, Lk['x0'], Lk['y1'] - 0.12, Lk['x1'], Lk['y1'], **ow)
-    F.r(sh, Lk['x0'], Lk['y0'], Lk['x0'] + 0.12, Lk['y1'], **ow)
-    F.r(sh, Lk['x0'], Lk['y0'], P.LOCK_DOOR1['x'], Lk['y0'] + 0.12, **ow)
-    F.r(sh, P.LOCK_DOOR1['x'] + P.DOOR, Lk['y0'], Lk['x1'], Lk['y0'] + 0.12, **ow)
-    F.door(sh, (P.LOCK_DOOR1['x'], Lk['y0'] + 0.06), (1, 0), (0, 1), P.DOOR)
-    F.r(sh, Lt['x0'], P.LOCK_DOOR2['y'], I['x0'], P.LOCK_DOOR2['y'] + P.DOOR, fill=PAPER, sw=0.2)
-    F.door(sh, (I['x0'], P.LOCK_DOOR2['y']), (0, 1), (1, 0), P.DOOR)
-    F.c(sh, Lk['x0'] + 0.82, Lk['y0'] + 1.25, 0.762, sw=0.12, dash='1.5 1')
+    F.r(sh, Lk['x0'], Lk['y0'], Lk['x1'], Lk['y0'] + 0.12, **ow)
+    F.r(sh, Lk['x0'], Lk['y0'], Lk['x0'] + 0.12, D1['y0'], **ow)
+    F.r(sh, Lk['x0'], D1['y1'], Lk['x0'] + 0.12, Lk['y1'], **ow)
+    F.door(sh, (Lk['x0'] + 0.06, D1['y0']), (0, 1), (-1, 0), hw)
+    F.door(sh, (Lk['x0'] + 0.06, D1['y1']), (0, -1), (-1, 0), hw)
+    F.r(sh, Lt['x0'], D2['y0'], I['x0'], D2['y1'], fill=PAPER, sw=0.2)
+    F.door(sh, (I['x0'], D2['y0']), (0, 1), (1, 0), hw)
+    F.door(sh, (I['x0'], D2['y1']), (0, -1), (1, 0), hw)
     # inside: the trap (hatched), the bench, the rug, the selector, the plinths and the pair, Mother EARF
     F.r(sh, P.TRAP['x0'], I['y0'], P.TRAP['x1'], I['y1'], fill=sh.hatch('trap', -45, 0.7, 0.1, INK, '#cfc6b8'), sw=0.25)
-    F.r(sh, P.BENCH['x0'], I['y0'], P.BENCH['x1'], I['y1'], fill=C['oak'], sw=0.2)
-    F.r(sh, P.SWEET[0] - 1.6, I['y0'] + 0.55, P.BENCH['x0'] - 0.15, I['y1'] - 0.55, sw=0.15, dash='1 1')
+    F.r(sh, P.BENCH['x0'], I['y0'], P.BENCH['x1'], P.BENCH['gap'][0], fill=C['oak'], sw=0.2)
+    F.r(sh, P.BENCH['x0'], P.BENCH['gap'][1], P.BENCH['x1'], I['y1'], fill=C['oak'], sw=0.2)
+    F.r(sh, P.SWEET[0] - 1.3, I['y0'] + 0.9, P.STACK_X - 0.55, I['y1'] - 0.9, sw=0.15, dash='1 1')
     Sd = P.SELECTOR
     F.r(sh, Sd['x0'] + 0.05, Sd['y0'], Sd['x1'], Sd['y1'] - 0.05, fill=C['oak'], sw=0.2)
     for dy in (0.45, 1.25):
@@ -172,11 +176,11 @@ def labels(sh, F):
             a, b = F(x, y); sh.text(a, b + 4.2 + i * 3.4, s_, size=2.3, anchor='middle', fill=GREY)
     room(3.0, 5.3, 'Shop', ['oak shelves to 10\'-6"', 'terrazzo floor'])
     room(9.9, 3.25, 'Bar', ['about 24 by CBC 1004.5', 'quartzite top, terrazzo die'])
-    room((I['x0'] + P.SWEET[0]) / 2 + 0.5, I['y1'] - 0.45, 'The lantern', ['listening room, 20 seats'])
-    room(P.LOCK['x0'] + 0.82, P.LOCK['y1'] - 0.55, 'Porch', ['sound lock'])
+    room((I['x0'] + P.SWEET[0]) / 2 + 0.5, I['y1'] - 0.45, 'The lantern', ['listening room, 18 seats'])
+    room((P.LOCK['x0'] + P.LOCK['x1']) / 2, P.LOCK['y1'] + 0.35, 'Porch', ['sound lock, doors in pairs'])
     room(P.LOBBY['x0'] + 0.62, P.W - 0.6, 'Lobby', [])
     room(1.9, 1.15, 'Vestibule', [])
-    F.t(sh, P.TRAP['x0'] + 0.45, YC, 'BASS TRAP 3\'-0" DEEP', size=2.2, weight=600, anchor='middle', rot=-90)
+    F.t(sh, P.TRAP['x0'] + 0.45, YC, 'BASS TRAP 2\'-0" DEEP', size=2.2, weight=600, anchor='middle', rot=-90)
     a, b = F(P.SWEET[0], P.SWEET[1] - 1.05); sh.text(a, b, 'sweet spot = the wheelchair space', size=2.2, anchor='middle', fill=C['route'])
     a, b = F(P.MOTHER['x'], P.MOTHER['y'] + 0.85); sh.text(a, b, 'Mother EARF', size=2.2, anchor='middle')
     a, b = F(P.LANT['x0'] + 2.4, P.LANT['y0'] - 0.25); sh.text(a, b, 'lit acrylic band above, 3.45–3.90 m', size=2.0, fill='#b07020')
@@ -219,7 +223,7 @@ def plan_sheet():
     sh.scale_bar(150, 300, S4)
     sh.north(330, 300)
     notes = ['1. Two exits (CBC 1006.2.1: over 49 occupants): the front door and the rear door, 24 m apart, joined by',
-             "   one straight route 5'-4\" clear (ADA 403; 60 in to pass and turn). The lantern holds 20, under 50: one door.",
+             "   one straight route 5'-4\" clear (ADA 403; 60 in to pass and turn). The lantern holds 18, under 50: one exit.",
              '2. Posted load about 53 by CBC Table 1004.5 (shop 60 gross; bar 15 net; the lantern by its seats). Under 100,',
              '   so CBC 903.2.1.2 does not require sprinklers for the A-2 by its load; the building may still have them.',
              '3. The lantern stands free: a 60 mm gap to the party wall, a 60 mm gap to the ceiling, its floor a 100 mm',
@@ -257,16 +261,16 @@ def rcp_sheet():
     F.r(sh, P.SHOP_X1 + 0.5, W - 2.10, P.LANT['x0'] - 0.6, W - 2.06, fill=INK, sw=0.1)
     for x_ in [1.6 + 1.45 * i for i in range(8)]:
         F.c(sh, x_, 3.4, 0.07, fill=PAPER, sw=0.25)
-    for x_ in P.STOOLS + [7.6, 8.4]:
+    for x_ in P.STOOLS + P.LOW_SEATS:
         F.c(sh, x_, P.COUNTER['y0'] + 0.25, 0.07, fill=PAPER, sw=0.25)
     by = (P.COUNTER['edge'] + P.COUNTER['y_work']) / 2
-    for x_ in (8.6, 10.0, 11.4):
+    for x_ in (7.0, 8.4, 9.8):
         F.c(sh, x_, by, 0.20, fill='#5a5a60', sw=0.2)
     for x_ in (4.0, 4.9):
         F.c(sh, x_, 3.75, 0.20, fill='#c9c3e0', sw=0.2)
     for i, (x_, y_) in enumerate(P.STACKS):
-        F.c(sh, x_ + 1.0, y_ + (0.5 if y_ < YC else -0.5), 0.06, fill=INK, sw=0.1)
-    F.c(sh, P.MOTHER['x'] - 0.25, P.MOTHER['y'] - 0.6, 0.06, fill='#d07a20', sw=0.1)
+        F.c(sh, x_ - 1.0, y_ + (0.5 if y_ < YC else -0.5), 0.06, fill=INK, sw=0.1)
+    F.c(sh, P.MOTHER['x'] + 0.35, P.MOTHER['y'] + 0.45, 0.06, fill='#d07a20', sw=0.1)
     F.l(sh, P.TRAP['x0'] - 0.25, I['y0'] + 0.3, P.TRAP['x0'] - 0.25, I['y1'] - 0.3, sw=0.6, stroke='#d07a20')
     # the lantern's air: its own fan coil on the plant deck over the rear rooms; supply and return through lined
     # silencers at the back wall, low-velocity linear grilles in the lid
@@ -461,8 +465,11 @@ def elevation_lantern(sh, F):
     # the porch (in front), the route beyond
     Lk = P.LOCK
     F.r(sh, W - Lk['y1'], 0.0, W - Lk['y0'], 2.70, fill='#b99a72', sw=0.35)
-    F.t(sh, W - (Lk['y0'] + Lk['y1']) / 2, 1.45, 'PORCH', size=2.6, weight=600, anchor='middle')
-    F.t(sh, W - (Lk['y0'] + Lk['y1']) / 2, 1.20, 'door 1 off the route, at its side', size=2.0, anchor='middle', fill=GREY)
+    D1 = P.LOCK_DOOR1
+    F.r(sh, W - D1['y1'], 0.0, W - D1['y0'], 2.13, fill='#3a2a1c', sw=0.25)            # the pair, open: the box beyond
+    F.l(sh, W - (D1['y0'] + D1['y1']) / 2, 0.0, W - (D1['y0'] + D1['y1']) / 2, 2.13, sw=0.12, stroke=GREY)
+    F.t(sh, W - (Lk['y0'] + Lk['y1']) / 2, 2.38, 'PORCH', size=2.6, weight=600, anchor='middle')
+    F.t(sh, W - (Lk['y0'] + Lk['y1']) / 2, 2.22, 'two pairs in line, 48 in apart', size=2.0, anchor='middle', fill=GREY)
     F.t(sh, W - 0.81, 1.2, 'ROUTE', size=2.4, weight=600, anchor='middle', fill=C['route'], rot=-90)
     F.r(sh, W - 0.60, 2.15, W - 0.20, 2.30, fill=C['exit'], sw=0.1)
     # the back bar's end at the left

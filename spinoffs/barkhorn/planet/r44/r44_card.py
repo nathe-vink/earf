@@ -1,4 +1,4 @@
-"""The critic's card for round 44's views of the lantern (street, bar, lantern), in the format of rounds 37 to 43.
+"""The critic's card for round 44's views of the lantern (street, bar, porch, lantern), in the format of rounds 37 to 43.
 
     python3 spinoffs/barkhorn/planet/r44/r44_card.py VIEW OUT.md --shot IMG.shot.json [--scale 0.5]
 """
@@ -12,11 +12,16 @@ FOR = {
     'bar': 'the bar room from the shop table, looking down the counter to the lantern\'s face: the terrazzo-faced counter '
            'with its quartzite top and stools, the back bar\'s lit shelves of bottles, the leather banquette, and ahead '
            'the lantern\'s slotted oak baffle, its lit band under the ceiling and the small oak porch that is its sound '
-           'lock. ',
-    'lantern': 'inside the lantern, the listening room, from its back bench: the Tropos pair in Ember on terrazzo plinths, '
-               'Mother EARF (a 1.25 m globe of six slotted tinted acrylic discs, its rims glowing) on her terrazzo plinth '
-               'between them, her colored shadow on the end-grain floor, oak slat walls and lid, lounge chairs on a rug. '
-               'Calm and dark: a room for listening. ',
+           'lock; guests and a bartender (motion-blurred on purpose: faces are never shown). ',
+    'lantern': 'inside the lantern, the listening room, from the listeners\' side: the Tropos pair in Ember on terrazzo '
+               'plinths at the far end, facing the room, their covers off and their woofers showing, Mother EARF (a 1.25 m '
+               'globe of six slotted tinted acrylic discs, its rims glowing) on her terrazzo plinth between and behind them, '
+               'her colored shadow on the end-grain floor, oak slat walls and lid, lounge chairs on a rug, a few listeners '
+               '(motion-blurred on purpose: faces are never shown). Calm and dark: a room for listening. ',
+    'porch': 'the view from the bar straight through the lantern\'s open porch (two pairs of oak doors in line) into the '
+             'listening room: the Tropos pair whole at the far end, covers off, Mother EARF between them, the lantern\'s '
+             'slotted oak face and lit amber band around the opening, people at the bar and in the room (motion-blurred '
+             'on purpose). It has to make you want to walk in. ',
 }
 
 CONTEXT = """**The project:** a design mockup of Planet EARF, a proposed listening bar in a typical San Francisco
@@ -45,6 +50,7 @@ oak's tone, the plaster's tone, the glass's reflection), small props (glasses, r
 def settings(sh, scale):
     cam = sh['camera']; R = sh['render']; Ls = sh['lights']
     room = next(p for p in sh['set']['props'] if p.get('fn') == 'house')
+    fig = next((p for p in sh['set']['props'] if p.get('fn') == 'figures'), None)
 
     def lamps(prefix):
         xs = [l for k, l in Ls.items() if k.startswith(prefix)]
@@ -57,13 +63,14 @@ def settings(sh, scale):
     return '\n'.join([
         f"- frame: {sh['size'][0]} x {sh['size'][1]} as delivered; this proof at scale {scale}",
         f"- camera: {cam['position']} m looking at {cam['target']}, lens {cam['lens_mm']} mm, f/{cam.get('fstop')}",
-        f"- the lantern's band: emission {room.get('band_glow', 0.8)} behind cast Smoke acrylic fins (IOR 1.49); its foot "
+        f"- the lantern's band: emission {room.get('band_glow', 0.6)} behind cast Smoke acrylic fins (IOR 1.49); its foot "
         f"line {room.get('foot_glow', 9.0)}; the shelf and back-bar lines {room.get('shelf_led', 1.0)}",
         f"- the shop wall: {lamps('shop')}; the table: {lamps('table')}; the counter: {lamps('ctr')}; the banquette: {lamps('bq')}",
         f"- the baffle's graze: {lamps('baffle')}; the route: {lamps('route')}; the fill: {lamps('fill')}",
         f"- inside the lantern: the pair {lamps('stack')}; Mother EARF {lamps('mother')}; the trap {lamps('trap')}; "
         f"fill {lamps('infill')}",
         f"- haze {sh['haze']['density']} per meter; glass reflection {room.get('glass_gloss', 0.5)}",
+        f"- people: {len(fig['people']) if fig else 0} figures, shutter {fig.get('shutter') if fig else '-'} (motion blur hides faces)",
         f"- render: {json.dumps(R)}"])
 
 

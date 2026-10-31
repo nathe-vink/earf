@@ -151,7 +151,7 @@ def shell(bpy, p, objs):
     sd = Mesh('h44-slots')
     sd.box(1.0, 0.70, H - 0.002, P.LANT['x0'] - 1.8, 0.74, H); sd.box(P.SHOP_X1 + 0.5, W - 2.10, H - 0.002, P.LANT['x0'] - 0.6, W - 2.06, H)
     lens = Mesh('h44-lenses')
-    spots = [(1.6 + 1.45 * i, 3.4) for i in range(8)] + [(x, P.COUNTER['y0'] + 0.25) for x in P.STOOLS + [7.6, 8.4]] + \
+    spots = [(1.6 + 1.45 * i, 3.4) for i in range(8)] + [(x, P.COUNTER['y0'] + 0.25) for x in P.STOOLS + P.LOW_SEATS] + \
             [(x, P.BANQ['y1'] + 0.40) for x in P.BANQ_TABLES]
     for (x, y) in spots:                                              # 90 mm black trims, a recessed warm lens
         _cyl(sd.bm, x, y, H - 0.012, 0.050, 0.012, seg=28)
@@ -344,8 +344,8 @@ def lantern(bpy, p, objs):
     _battens(bf, 'y', d0, d1, x0 - 0.02, x0 + 0.02, dh + 0.06, bz0 - 0.02, 0.060, 0.012)
     # the opening's oak reveals through both leaves, and its head
     for yy in (d0 - 0.04, d1):
-        bf.box(x0 - 0.02, yy, 0.0, x0 + LEAF + 0.02, yy + 0.04, dh + 0.06)
-    bf.box(x0 - 0.02, d0 - 0.04, dh, x0 + LEAF + 0.02, d1 + 0.04, dh + 0.06)
+        bf.box(x0 - 0.02, yy, 0.0, x0 + P.LEAF + 0.02, yy + 0.04, dh + 0.06)
+    bf.box(x0 - 0.02, d0 - 0.04, dh, x0 + P.LEAF + 0.02, d1 + 0.04, dh + 0.06)
     bf.box(x0 - 0.03, y0, bz0 - 0.03, x0 + 0.02, y1, bz0)                      # a top rail under the band
     # the route side: 140 mm boards with a 6 mm shadow, from the foot to the band
     _battens(bf, 'x', x0, x1, y0 - 0.02, y0 + 0.02, 0.10, bz0 - 0.02, 0.140, 0.006)

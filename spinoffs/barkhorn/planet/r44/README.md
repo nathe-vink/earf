@@ -15,10 +15,17 @@ The owner, 31 October 2026: "Make it well architected, novel, lasting." This rou
 | `plan44.py` | The geometry, areas, occupant load, acoustics and cost. Everything else reads it. |
 | `kit44.py` | The model, used for the renders and the axonometric. Calibrated acrylic: IOR 1.49, with volume absorption from internal transmittance. |
 | `drawings44.py`, `sheets44.mjs`, `drawings/` | A-101 plan, A-102 RCP, A-201 sections, A-301 elevations and A-401 axonometric (`axo44.py`), as SVG and PNG plus one PDF. |
-| `r44_shots.py`, `r44_card.py`, `r44_stage.py` | The three views (street, bar, lantern), the critic's card and the staging. |
+| `r44_shots.py`, `r44_card.py`, `r44_stage.py` | The views (street, bar, porch, lantern), the critic's card and the staging. |
 | `critic/LOG.md` | The concept critics, three rounds of render critics, and the duels against the r39 and r41 heroes. |
 
-## Finals
+## Look 2 (the picture pass)
+
+The coordinator's brief after round 3: beat the r41 and r39 heroes in blind duels, with the critics' converged list (an amber band, glass with real reflections, real fittings and pools on the bar top, oak board by board, people, a view through the open porch). What changed:
+- **The plan.** The porch now stands in line with the box: two pairs of 0.80 m oak leaves, pair 1 swinging out into the bar and pair 2 into the lantern, 48 in clear between them (ADA 404.2.6). The pair face the door from the far end, the 600 mm trap behind them, the bench along the front wall. The lantern seats 18 (load about 52). The counter ends 1.15 m short of the porch so pair 1's swing and its 60 in pull side stay clear: four stools and the low end.
+- **The model.** A yellower band source (#FFB040) behind lighter fins; 90 mm black downlight trims with lenses; oak varied board by board; a street (brick facades with lit windows, a café, a lamp post, a parked car) for the glass to reflect.
+- **The pictures.** Motion-blurred guests and a bartender (r40's figures; faces always a smear); the counter's pools at 38 W; the new porch view; the lantern seen from the listeners' side.
+
+## Finals (look 1)
 
 The finals are in `renders/2026-10-31/barkhorn/planet44/finals/`, as 1200 × 800 proofs:
 

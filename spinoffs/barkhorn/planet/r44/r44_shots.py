@@ -39,17 +39,62 @@ VIEWS = {
     # band 0.8 in deep amber, the foot line 9; lines 1.0; counter spots 22 W at 14 deg; fill 0.05; the shop table moved
     # off the axis in the plan; the street camera back so the mullion and the window plinth frame the left; glasses
     'street': dict(camera={'position': [-3.2, 3.0, 1.50], 'target': [13.0, 4.4, 1.95], 'lens_mm': 35, 'level': True,
-                           'fstop': 4.0, 'focus': [7.0, 4.4, 1.2]}, exposure=2.6, haze=0.008),
+                           'fstop': 4.0, 'focus': [7.0, 4.4, 1.2]}, exposure=2.6, haze=0.008, shutter=1.0, people='bar'),
     'bar': dict(camera={'position': [4.9, 2.55, 1.45], 'target': [13.0, 4.3, 2.0], 'lens_mm': 28, 'level': True,
-                        'fstop': 4.0, 'focus': [11.0, 4.5, 1.6]}, exposure=3.0, haze=0.008),
+                        'fstop': 4.0, 'focus': [11.0, 4.5, 1.6]}, exposure=3.0, haze=0.008, shutter=0.75, people='bar'),
     # p4 (p3 judged 4.5/5.0, converged: too bright and even; the pair darker than the walls; Mother's spot a white pool
     # and a haze shaft; the floor camouflage; coarse terrazzo; no life; a flat symmetric view with a cut board): seated
     # on the bench at 32 mm, a chair in the foreground; exposure 3.9; fill 0.03, trap 0.2; the pair 55 W at 24 deg;
     # Mother 80 W at 16 deg; haze 0.0008; end grain at block scale; a glass and a record
-    'lantern': dict(camera={'position': [P.BENCH['x0'] + 0.10, I['y0'] + 1.05, 1.10], 'target': [P.MOTHER['x'] + 0.2, YC + 0.2, 1.05],
-                            'lens_mm': 32, 'level': True, 'fstop': 2.8, 'focus': [P.MOTHER['x'], YC, 1.0]},
-                    exposure=3.9, haze=0.0008, room={'interior': True}),
+    # look 2 (the coordinator's converged list after round 3: the band amber not salmon, glass with real reflections,
+    # real fittings and pools on the bar top, oak board by board, people, a view through the open porch): the room
+    # reversed so the pair face the door; the lantern from the listeners' side; the porch view new
+    'lantern': dict(camera={'position': [14.9, 2.75, 1.15], 'target': [19.1, 4.85, 1.05], 'lens_mm': 28, 'level': True,
+                            'fstop': 2.8, 'focus': [P.STACKS[0][0], P.STACKS[0][1], 1.0]},
+                    exposure=3.9, haze=0.0008, room={'interior': True}, shutter=1.0, people='lantern'),
+    'porch': dict(camera={'position': [10.0, 3.64, 1.25], 'target': [18.9, 4.30, 2.75], 'lens_mm': 20, 'level': True,
+                          'fstop': 4.0, 'focus': [17.0, 4.6, 1.1]},
+                  exposure=3.2, haze=0.006, shutter=1.0, people='porch'),
 }
+
+
+# people (the owner: blurred figures are allowed in bar pictures): r40's figures, faces always a smear
+KIT40 = 'spinoffs/barkhorn/planet/r40/kit40.py'
+CLOTH = ['#14171E', '#0E0D0C', '#22100E', '#181716', '#1A1B15', '#2A2018', '#161C26', '#121110', '#201813', '#1E1E1D']
+SKIN = ['#9A7462', '#7E5640', '#5E3C2A', '#46301F', '#8A6650', '#A27E6A', '#6E4A36']
+HAIR = ['#1A1410', '#3A2A1E', '#0E0C0A', '#6A5038', '#2A2420', '#8A7A6A', '#151210']
+SIT = dict(move=[0.035, 0.025, 0.005], spin=5.0, head=[0.16, 0.09, 0.03, 30.0], arms=[0.14, 0.08, 0.06, 20.0])
+
+
+def person(i, pose, at, heading, seat=0.46, **k):
+    d = dict(pose=pose, at=[round(a, 3) for a in at], heading=heading, seat=seat, cloth=CLOTH[i % len(CLOTH)],
+             skin=SKIN[(i * 3) % len(SKIN)], hair=HAIR[(i * 5) % len(HAIR)], seed=440 + i, **SIT)
+    d.update(k)
+    return d
+
+
+ST = P.STOOLS
+BAR_PEOPLE = [
+    person(0, 'stool', [ST[0], P.STOOL_Y, 0], 90, 0.76),
+    person(1, 'stool', [ST[1], P.STOOL_Y - 0.10, 0], 98, 0.76, head=[0.20, 0.10, 0.03, 35.0]),     # turned to talk
+    person(2, 'stool', [ST[3], P.STOOL_Y, 0], 86, 0.76),
+    person(3, 'pour', [9.10, 6.42, 0], -90, move=[0.10, 0.03, 0.0], spin=8.0, arms=[0.26, 0.10, 0.16, 35.0],
+           head=[0.18, 0.08, 0.03, 30.0], cloth='#1A1918', sleeve='#2A2724'),                      # the bartender, mid-pour
+    person(4, 'bench', [P.BANQ_TABLES[0], P.BANQ['y0'] + 0.40, 0], 90, P.BANQ['seat']),
+    person(5, 'bench', [P.BANQ_TABLES[1] + 0.12, P.BANQ['y0'] + 0.40, 0], 90, P.BANQ['seat'], head=[0.20, 0.10, 0.03, 35.0]),
+    person(6, 'chair', [P.BANQ_TABLES[1] + 0.05, P.ROUTE_Y[1] + P.BANQ_CHAIR_DY, 0], -90, 0.46),
+    person(7, 'bench', [P.BANQ_TABLES[3] - 0.05, P.BANQ['y0'] + 0.40, 0], 90, P.BANQ['seat']),
+]
+SW = P.SWEET
+LANT_PEOPLE = [   # listeners: still, so a slower drift than at the bar
+    person(8, 'chair', [SW[0] - 0.10, SW[1] + 0.40, 0], 0.0, 0.40, move=[0.02, 0.015, 0.004], spin=3.0,
+           head=[0.16, 0.09, 0.03, 30.0], arms=[0.06, 0.04, 0.03, 10.0], cloth='#1C2230', sleeve='#1C2230'),
+    person(9, 'chair', [SW[0] - 0.95 - 0.10, P.INNER['y1'] - 0.70, 0], -12.0, 0.40, move=[0.02, 0.015, 0.004], spin=3.0,
+           head=[0.16, 0.09, 0.03, 30.0], arms=[0.06, 0.04, 0.03, 10.0]),
+    person(10, 'bench', [P.BENCH['x0'] + 0.30, P.INNER['y0'] + 0.62, 0], 8.0, P.BENCH['z'], move=[0.02, 0.015, 0.004],
+           spin=3.0, head=[0.16, 0.09, 0.03, 30.0], arms=[0.06, 0.04, 0.03, 10.0]),
+]
+PEOPLE = {'bar': BAR_PEOPLE, 'lantern': LANT_PEOPLE, 'porch': LANT_PEOPLE[:2]}
 
 
 def _face(x, y, tx, ty):
@@ -79,7 +124,7 @@ def scene():
                   'cartridge': 'none', 'lamp_w': 0.10, 'lamp_k': 2700, 'shade_glow': 0.005, 'noshadow': 'shell|liner|skin',
                   'materials': {'liner': {'glow_color': '#FFA060'}}})
     by = (P.COUNTER['edge'] + P.COUNTER['y_work']) / 2
-    domes = [{'position': [x, by, 2.05], 'flavour': 'smoke'} for x in (8.6, 10.0, 11.4)]
+    domes = [{'position': [x, by, 2.05], 'flavour': 'smoke'} for x in (7.0, 8.4, 9.8)]
     domes += [{'position': [x, 5.0, 2.15], 'flavour': f} for x, f in ((4.0, 'haze'), (4.9, 'dust'))]
     props.append({'kind': 'kit', 'shape': 'ext', 'module': 'earf_moon', 'fn': 'dome', 'ceiling': H, 'lamp_w': 1.4,
                   'lamp_k': 2700, 'shade_glow': 0.006, 'noshadow': 'shell|liner|skin', 'spots': domes})
@@ -87,12 +132,12 @@ def scene():
                   'n': 30, 'bowl': 'brass', 'd': 200})
     # signs of life: rounds on the bar and the banquette tables
     props.append({'kind': 'kit', 'shape': 'ext', 'path': 'spinoffs/barkhorn/planet/r39/kit39.py', 'fn': 'life',
-                  'rocks': [[9.55, by - 0.12, 1.07, 0.03, 1, '#B8641C'], [10.75, by - 0.08, 1.07, 0.02, 2, '#B8641C'],
-                            [8.05, by - 0.05, 1.07, 0.025, 1, '#C8A060'], [11.6, by - 0.14, 1.07, 0.03, 2, '#B8641C'],
+                  'rocks': [[9.37, by - 0.12, 1.07, 0.03, 1, '#B8641C'], [9.95, by - 0.08, 1.07, 0.02, 2, '#B8641C'],
+                            [8.81, by - 0.05, 1.07, 0.025, 1, '#C8A060'], [10.30, by - 0.14, 1.07, 0.03, 2, '#B8641C'],
                             [4.1, 4.80, P.SHOP_TABLE['h'], 0.025, 1, '#B8641C'], [P.BENCH['x0'] + 0.25, I['y0'] + 1.6, P.BENCH['z'], 0.025, 1, '#B8641C'],
                             [P.BANQ_TABLES[1], P.BANQ['y1'] + 0.35, 0.75, 0.025, 1, '#B8641C']],
-                  'coupes': [[10.15, by - 0.10, 1.07, 0.6, '#B8462A'], [P.BANQ_TABLES[2] + 0.1, P.BANQ['y1'] + 0.32, 0.75, 0.4, '#E8DDB8']],
-                  'napkins': [[9.55, by - 0.12, 1.07, 8.0], [10.15, by - 0.10, 1.07, -12.0]],
+                  'coupes': [[8.40, by - 0.10, 1.07, 0.6, '#B8462A'], [P.BANQ_TABLES[2] + 0.1, P.BANQ['y1'] + 0.32, 0.75, 0.4, '#E8DDB8']],
+                  'napkins': [[9.37, by - 0.12, 1.07, 8.0], [8.40, by - 0.10, 1.07, -12.0]],
                   'votives': [], 'matchbooks': [], 'coats': []})
     sweet = P.SWEET
     products = [
@@ -105,8 +150,8 @@ def scene():
     for i, x in enumerate((1.4, 3.0, 4.6)):                           # the shop wall
         lights[f'shop{i}'] = spot([x, W_ - 1.4, zc], [x, W_ - 0.2, 1.4], 14.0, 30.0)
     lights['table'] = spot([4.3, 5.0, zc], [4.3, 5.0, 0.9], 8.0, 24.0)
-    for i, x in enumerate([7.6, 8.4] + P.STOOLS[::2]):                # the counter
-        lights[f'ctr{i}'] = spot([x, P.COUNTER['y0'] + 0.25, zc], [x, P.COUNTER['y0'] + 0.05, 1.07], 22.0, 14.0, blend=0.3)
+    for i, x in enumerate(P.LOW_SEATS + P.STOOLS[::2]):                # the counter
+        lights[f'ctr{i}'] = spot([x, P.COUNTER['y0'] + 0.25, zc], [x, P.COUNTER['y0'] + 0.05, 1.07], 38.0, 18.0, blend=0.3)
     for i, x in enumerate(P.BANQ_TABLES):                             # the banquette tables
         lights[f'bq{i}'] = spot([x, P.BANQ['y1'] + 0.40, zc], [x, P.BANQ['y1'] + 0.10, 0.95], 12.0, 24.0, blend=0.3)
     lights['route'] = {'type': 'area', 'position': [8.0, 0.72, H - 0.02], 'target': [8.0, 0.72, 0.0], 'size_m': [10.0, 0.1],
@@ -121,9 +166,9 @@ def scene():
     # trap's graze, a low fill
     zi = I['h'] - 0.05
     for i, (x, y) in enumerate(P.STACKS):
-        lights[f'stack{i}'] = spot([x + 1.0, y + (0.5 if y < YC else -0.5), zi], [x, y, 1.1], 55.0, 24.0, k=2600)
+        lights[f'stack{i}'] = spot([x - 1.0, y + (0.5 if y < YC else -0.5), zi], [x, y, 1.1], 55.0, 24.0, k=2600)   # on the fronts
     M = P.MOTHER
-    lights['mother'] = spot([M['x'] - 0.25, M['y'] - 0.6, zi], [M['x'] + 0.7, M['y'] + 0.25, 0.0], 80.0, 16.0, k=3000,
+    lights['mother'] = spot([M['x'] + 0.35, M['y'] + 0.45, zi], [M['x'] - 0.95, M['y'] - 0.30, 0.0], 80.0, 16.0, k=3000,   # her shadow toward the seats
                             blend=0.2, radius=0.01)
     lights['trap'] = {'type': 'area', 'position': [P.TRAP['x0'] - 0.25, YC, zi - 0.05], 'target': [P.TRAP['x0'], YC, 1.0],
                       'size_m': [0.15, 4.6], 'irradiance': 0.2, 'color': 2600, 'camera': False}
@@ -143,6 +188,9 @@ def shot(view):
     props, products, lights = scene()
     s['title'] = f'Planet EARF, round 44: the lantern, {view}'
     s['camera'] = v['camera']
+    if v.get('people'):
+        props.append({'kind': 'kit', 'shape': 'ext', 'path': KIT40, 'fn': 'figures', 'people': PEOPLE[v['people']],
+                      'shutter': v.get('shutter', 1.0)})
     s['set'] = {'kind': 'stage', 'props': props}
     s['products'] = products
     s['lights'] = lights

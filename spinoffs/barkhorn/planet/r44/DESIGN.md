@@ -17,7 +17,7 @@ This round redraws the bar as an architectural scheme that a contractor could pr
 - It stands on its own floated floor at the end of the bar room.
 - Its face to the bar is a slotted oak baffle, like the front of a loudspeaker cabinet.
 - Under the ceiling, a 450 mm band of lit Smoke acrylic fins runs around its two visible faces, so the street sees a lantern at the end of a long dark room.
-- Inside is a calm, tuned room: 20 seats, the Tropos pair, and Mother EARF on her plinth between them.
+- Inside is a calm, tuned room: 18 seats, the Tropos pair at the far end facing the door, and Mother EARF on her plinth between them.
 
 **Why this concept.** Four concepts went to two critics, each in a fresh context with the boards only (`CONCEPTS.md`). Both picked (d), the lantern:
 
@@ -33,7 +33,7 @@ One critic put it this way: the lantern is "the only concept where the hardest t
 **What it takes from the other three.** Each borrowing was named by both critics.
 - **From (b), the kit:** the box is bolted and demountable. The oak panels, the leaves and the lid are numbered panels, so the biggest investment can leave with the lease. Nothing else from the kit was taken: no grid and no infill system.
 - **From (a), the strata room:**
-  - The strata's deep absorber, as a 900 mm slotted-oak bass-trap wall at the back of the room, with a bench built into its face.
+  - The strata's deep absorber, as a 600 mm slotted-oak bass-trap wall at the back of the room, behind the pair (look 2; the bench moved to the front wall).
   - Its principle that **the accessible seat is the best seat:** the wheelchair space sits on the sweet spot.
   - The terraces were not taken. Raised tiers put ears above the speakers' axis, and steps in the dark are a liability in a drinking room.
 - **From (c), offcut terrazzo:** the acrylic offcuts appear only as 15% of the chips in the terrazzo of Mother EARF's plinth and the bar's die, where nothing wears them. They are never in the floor's walking surface or on the bar top, because acrylic is only 3H pencil hardness.
@@ -56,8 +56,8 @@ From the street to the back:
 | **Vestibule** | 0.9–3.2 | Two doors in series, 2.3 m apart (ADA 404.2.6: 48 in plus a 36 in leaf). It keeps street noise out and the room's sound in. |
 | **Shop** | 0–6.1 (20 ft) | Oak shelves to 10'-6" on the left wall, lit along their front edges; a terrazzo window plinth; an oak and steel table with the till. |
 | **Bar** | 6.1–13.0 (22'-8") | **The counter** runs along the left wall: a terrazzo die, a 30 mm honed quartzite top and a brass foot rail, with a 60 in accessible run at 34 in at its near end. **The back bar** is oak with three steel shelves. **The ice machine and glasswasher** sit behind a gasketed door in an alcove at the shop end, 6.5 m from the lantern. **Seating:** a leather banquette with four tables on the right, its back to the route. |
-| **Porch** | 11.4–13.0 | A small oak sound lock outside the box's seal. Door 1 is off the route, door 2 is the box's own acoustic door set, and a 60 in turning circle fits between them. |
-| **The lantern** | 13.0–20.9 (25'-11") | Inside it measures 7.30 x 5.34 x 3.40 m (24'-0" x 17'-6" x 11'-2"). **Layout:** the Tropos pair 2.80 m apart; Mother EARF on her plinth between them and behind their line; the selector's desk in the front corner. **Seats, 20 in all:** the wheelchair space and its companion seat on the sweet spot, then a row of six, a bench of eight in the trap, and two at the sides. The rug and loose lounge chairs complete it. |
+| **Porch** | 11.65–13.0 | A small oak sound lock outside the box's seal, in line with its axis (look 2). Two pairs of 0.80 m leaves: pair 1 in the porch's front swings out into the bar, pair 2 through the box's leaves swings into the lantern, so neither swings into the porch and 48 in stays clear between them (ADA 404.2.6). Pairs seal a little worse than single leaves: an astragal and drop seals on each. Open, they line up: from the bar you see straight through to the pair. |
+| **The lantern** | 13.0–20.9 (25'-11") | Inside it measures 7.30 x 5.34 x 3.40 m (24'-0" x 17'-6" x 11'-2"). **Layout:** the Tropos pair 2.80 m apart; Mother EARF on her plinth between them and behind their line, the trap behind her; the speakers face the door; the selector's desk along the side wall. **Seats, 18 in all:** the wheelchair space and its companion seat on the sweet spot, a row of four, a row of four behind, a bench of six along the front wall either side of the doors, and two at the sides. The rug and loose lounge chairs complete it. |
 | **Rear** | 20.9–24.4 | A lobby off the route; three single-user all-gender rooms, one with a urinal; a plant deck above them for the lantern's fan coil; the rear exit. |
 
 **One straight route** runs 5'-4" clear down the right-hand wall from the front door to the rear exit. It is the accessible route, the exit access and the service corridor in one, and there is no level change anywhere.
@@ -66,10 +66,10 @@ From the street to the back:
 |---|---|---|
 | Gross area | 185.8 m² (2,000 sq ft) | 25 x 80 ft |
 | Shop / bar / lantern (outside) / lantern (inside) / rear | 46.5 / 52.6 / 46.9 / 39.0 / 26.5 m² | `plan44.areas()` |
-| Occupant load | **about 53**: shop 9 (60 sq ft gross), bar 24 (15 sq ft net), lantern 20 (its seats) | CBC Table 1004.5 |
+| Occupant load | **about 52**: shop 9 (60 sq ft gross), bar 25 (15 sq ft net), lantern 18 (its seats) | CBC Table 1004.5 |
 | Exits | 2, about 24 m apart (front and rear) | CBC 1006.2.1: more than 49 needs two |
 | Sprinklers | not required for the A-2 at fewer than 100 occupants (CBC 903.2.1.2); recommended in the lantern anyway (below) | |
-| Seats | bar 20 (6 stools, 2 at the low end, 4 two-tops at the banquette), lantern 20 | |
+| Seats | bar 18 (4 stools, 2 at the low end, 4 two-tops at the banquette; look 2 shortened the counter to keep door 1's swing and pull side clear), lantern 18 | |
 
 The bar is smaller than round 42's 2,800 sq ft house (55 seats, a load of 133). This is the 25 ft grain the owner is likely to lease.
 
@@ -91,7 +91,7 @@ The target is **Tm = 0.25 (V / 100 m³)^(1/3) s**, measured from 200 Hz to 4 kHz
 **The treatment that gets there** (typical absorption coefficients, to be replaced by the acoustician's):
 - **Side walls:** oak slats over 50 mm wool on 35% of the area, above a 1.2 m oak wainscot.
 - **Lid:** oak slats over 100 mm wool on 70% of the area.
-- **Back wall:** the 900 mm slotted trap across its whole width.
+- **Back wall:** the 600 mm slotted trap across its whole width, behind the pair.
 - **Floor and seats:** a 12 m² wool rug, and 24 people in upholstered chairs.
 
 A 24-seat bar with people in it is not a reference room, so this is a design target, not a certificate.
@@ -99,7 +99,7 @@ A 24-seat bar with people in it is not a reference room, so this is a design tar
 ### Bass
 
 The axial modes are 23.5, 32.1, 47.0, 50.4, 64.2 and 70.5 Hz. The 47 and 50 Hz pair is the one to watch.
-- **The back wall** is a 900 mm deep slotted-oak trap filled with wool, which is broadband down to about 40 Hz *(est.)*.
+- **The back wall** is a 600 mm deep slotted-oak trap filled with wool, which is broadband down to about 50 Hz *(est.)*.
 - **Corner traps,** 300–600 mm, in the two front vertical corners behind the selector's desk and the door.
 - **The pair** sits 2.2 m from the front wall and 1.7 m from the side walls, symmetric about the room's center line.
 - **Final placement** is by measurement after the box is built, with a house limiter.
@@ -121,7 +121,7 @@ A 60 mm gap runs to the party wall, with no rigid tie anywhere.
 **Lid.** 200 mm CLT, 2 × 5/8 in gypsum, 100 mm wool and oak slats. It spans 5.34 m wall to wall on the box and is **never hung from the joists**. A 60 mm gap runs to the ceiling above.
 
 **Penetrations.**
-- **Doors:** two gasketed acoustic door sets with drop seals, door 2 through both leaves.
+- **Doors:** two gasketed acoustic pairs with astragals and drop seals, pair 2 through both leaves.
 - **Air:** supply and return through lined silencers and flexible connectors at the back wall.
 - **Power and signal:** through sealed sleeves.
 
@@ -177,7 +177,7 @@ The ice machine and glasswasher sit in a gasketed alcove at the shop end of the 
 - **Route:** 5'-4" clear from the door to the rear exit, with no steps anywhere. The lantern's floor finishes flush.
 - **Doors:**
   - The vestibule's doors in series are 2.3 m apart.
-  - The porch holds a 60 in turning circle.
+  - The porch holds 48 in clear between the two pairs, neither swinging into it (ADA 404.2.6); a 60 in turning circle fits in the bar before pair 1.
   - Both acoustic doors get low-energy power operators with push plates, because gasketed doors exceed the 5 lbf opening force.
 - **The bar:** a 60 in run at 34 in at its near end (CBC 11B-902.3; LA County's 2023 checklist: "a main counter 60 inches minimum in length").
 - **The lantern** has one wheelchair space (30 x 48 in) and a companion seat ([ADA 2010 Standards](https://www.ada.gov/assets/pdfs/2010-design-standards.pdf)):
@@ -190,7 +190,7 @@ The ice machine and glasswasher sit in a gasketed alcove at the shop end of the 
 ## Fixtures
 
 California Plumbing Code §422.1.1 counts fixtures at 50% male and 50% female, and single-use rooms count toward the total (§422.1.2).
-- **Required** at a load of about 53 (the A-2 row as adopted elsewhere; [UpCodes](https://up.codes/s/fixture-count)): male 1 WC + 1 urinal, female 2 WCs, so **3 WCs + 1 urinal**, plus lavatories.
+- **Required** at a load of about 52 (the A-2 row as adopted elsewhere; [UpCodes](https://up.codes/s/fixture-count)): male 1 WC + 1 urinal, female 2 WCs, so **3 WCs + 1 urinal**, plus lavatories.
 - **Provided:** three rooms, one with a urinal.
 - **To confirm with SF DBI before design development:**
   - §422.2's "separate facilities for each sex", where all rooms are single-user;
@@ -216,7 +216,7 @@ California Plumbing Code §422.1.1 counts fixtures at 50% male and 50% female, a
 | Item | Low | High |
 |---|---:|---:|
 | Demolition, the slab cut under the box, trenching for the rear rooms | $25,000 | $45,000 |
-| The lantern: floated floor on springs, double-leaf walls, CLT lid, the porch, two acoustic door sets | $150,000 | $260,000 |
+| The lantern: floated floor on springs, double-leaf walls, CLT lid, the porch, two acoustic door pairs | $150,000 | $260,000 |
 | The lantern's oak: baffle, inner slats, the bass-trap wall, the bench | $45,000 | $80,000 |
 | The acrylic band: about 15 m of cast fins, LEDs, drivers, hatch panels | $18,000 | $35,000 |
 | Resilient ceiling over the shop and bar (about 120 m²), insulation, acoustic plaster | $35,000 | $60,000 |

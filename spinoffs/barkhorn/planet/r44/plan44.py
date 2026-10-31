@@ -57,14 +57,15 @@ BACKBAR = dict(x0=6.90, x1=12.80, y0=W - 0.60, y1=W, h=0.92)     # under-counter
 KIT_ALCOVE = dict(x0=6.10, x1=6.90, y0=W - 1.55, y1=W)            # the ice machine and the glasswasher, behind a
                                                                   # gasketed door at the shop end: 7 m from the lantern
 AISLE = 0.95
-COUNTER = dict(x0=7.20, x1=12.50, d=0.66, top_over=0.25, top_z=1.07)
+COUNTER = dict(x0=6.40, x1=10.50,   # look 2: ends 1.15 m short of the porch (door 1's swing and its 60 in pull side)
+               d=0.66, top_over=0.25, top_z=1.07)
 COUNTER['y_work'] = round(W - 0.60 - AISLE, 3)                   # 6.070, the bartender's side of the counter body
 COUNTER['y0'] = round(COUNTER['y_work'] - COUNTER['d'], 3)       # 5.410, the body's public face
 COUNTER['edge'] = round(COUNTER['y0'] - COUNTER['top_over'], 3)  # 5.160, the top's front edge
-LOW_END = dict(x0=7.20, x1=8.80, top_z=0.864)                    # CBC 11B-902.3: a 60 in run at 34 in, at the near end
-STOOLS = [round(9.25 + 0.58 * i, 3) for i in range(6)]           # six counter stools at 1.07 m (42 in)
+LOW_END = dict(x0=6.40, x1=8.00, top_z=0.864)                    # CBC 11B-902.3: a 60 in run at 34 in, at the near end
+STOOLS = [round(8.25 + 0.56 * i, 3) for i in range(4)]           # four counter stools at 1.07 m (42 in), clear of the porch
 STOOL_Y = 4.62
-LOW_SEATS = [7.65, 8.35]                                          # two chairs at the low end
+LOW_SEATS = [6.85, 7.55]                                          # two chairs at the low end
 BANQ = dict(x0=7.10, x1=11.20, y0=ROUTE_Y[1] + 0.0, y1=ROUTE_Y[1] + 0.62, seat=0.45, back=1.05)
 BANQ_TABLES = [round(7.70 + 1.15 * i, 3) for i in range(4)]      # two-tops in front of the banquette
 BANQ_TABLE = dict(w=0.70, d=0.60)
