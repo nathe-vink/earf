@@ -105,7 +105,7 @@ None yet: no prototype exists. The preview site at earf.world shows the line as 
 
 EARF makes hi-fi and lighting in cast acrylic tinted all the way through, in eight colours, from San Francisco. There are four products, all drawn and costed.
 
-- **Tropos** is a powered horn loudspeaker: a 15-inch woofer, and a 2-inch compression driver on a horn formed from the same tinted acrylic as the cabinet. A 2 × 125 W Hypex amplifier is built in, so a pair needs no separate amplifier. $19,000 a pair, made to order.
+- **Tropos** is a powered horn loudspeaker: a 15-inch woofer, and a 2-inch compression driver on a horn of the same tinted acrylic as the cabinet. A 2 × 125 W Hypex amplifier is built in, so a pair needs no separate amplifier. $19,000 a pair, made to order.
 - **Hemisphere** is a pendant lamp whose shade swaps in a quarter turn. $795–$895.
 - **Core** is a table lamp that runs plugged in, or about five hours cordless on cells you can replace. $650.
 - **Mantle** is a record player whose acrylic plinth floats over a lit base. About $5,000.
@@ -178,7 +178,7 @@ No.
 
 [Owner: a date you will hold to.]
 
-The lamps come first: $6,599 builds one Core and one Hemisphere, moulds included. Then Mantle and a Tropos pair, whose horn needs its own forming tool. The target is all four working for a debut night in San Francisco during FOG Design+Art week, 21–24 January 2027.
+The lamps come first: $6,599 builds one Core and one Hemisphere, moulds included. Then a Tropos pair, whose first horns are stacked from stock sheet so they need no forming tool, and Mantle. The target is a debut night in San Francisco on Tuesday 19 January 2027, the week of FOG Design+Art (21–24 January).
 
 #### 16. Do you have revenue?
 

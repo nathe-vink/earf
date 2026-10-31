@@ -17,3 +17,9 @@ date, and check them again before relying on them.
 | R9-strategic-partners.md | Audio, lighting, hotel and retail partners for licensed or co-branded editions and commissions: track records, deal terms, the ten best fits and three draft letters (pitch after the 19 January debut) |
 | R10-mother-earf-public-art.md | Mother EARF as public light art: SF permits and venues, Burning Man, international light festivals and patrons, with deadlines. The one live paid call: Amsterdam Light Festival Edition 16, closing 7 Dec 2026 (EUR 4,000 fee, production and travel covered), for the 2 m globe as a named designer's artwork. **Correction (coordinator, 31 Oct):** the research brief described Mother EARF wrongly, as a closed 2 m sphere with continents lit from inside. As designed (House Book, rounds 33-41) it is six slotted 25 mm discs, three meridians and three parallels at 23.4 deg, 1.25 m, rims glowing. The calls, deadlines and costs stand; the engineering figures (wall thickness, 190 kg at 2 m, wind) do not |
 | YC-W27-application-draft.md | A draft of Y Combinator's Winter 2027 application (closes 2 Nov 2026, 8 pm PT), with brackets where the owner must add facts. Nothing submitted |
+
+## Errata (coordinator, 31 Oct 2026, from the brand lane's contradiction sweep)
+
+- **The debut is Tuesday 19 January 2027**; FOG Design+Art runs 21-24 January. R2's 90-day plan (sections 5, weeks 11-13 and Gate 2) places the debut night inside FOG week (21-24 January), and R7 says 19-21 January; read both as 19 January. The YC draft is corrected.
+- **R7's horn depth (238 mm)** is the formed horn's. The stacked laminated horn is 278 mm deep (630 x 366 at the mouth).
+- **R10's engineering figures** assume a closed sphere; see the correction in its row above.
