@@ -1,0 +1,342 @@
+{
+ "title": "Core in Ember on a bedside table at night (the campaign)",
+ "size": [
+  2400,
+  1600
+ ],
+ "render": {
+  "samples": 256,
+  "adaptive": 0.01,
+  "denoise": true,
+  "clamp": 10,
+  "bounces": 24,
+  "transmission_bounces": 20,
+  "view": "Khronos PBR Neutral",
+  "exposure": 4.253,
+  "white_balance_k": 3500,
+  "white_balance_tint": 4
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#1A2A48",
+  "horizon": "#3A4A6A",
+  "ground": "#141820",
+  "strength": 0.006
+ },
+ "set": {
+  "kind": "room",
+  "size": [
+   5.2,
+   4.6,
+   2.7
+  ],
+  "center": [
+   0.0,
+   0.85
+  ],
+  "floor": {
+   "plank_w": 0.16,
+   "plank_l": 1.8,
+   "base": "#6E4E34",
+   "dark": "#5A3E28",
+   "light": "#7E5C40",
+   "plank_contrast": 0.7
+  },
+  "wall": {
+   "color": "#5A5248"
+  },
+  "ceiling": "#E6E0D6",
+  "skirting": {
+   "h": 0.12,
+   "color": "#6E665A"
+  },
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "gloss",
+    "color": "#3A2A1E",
+    "position": [
+     0.55,
+     2.05,
+     0.0
+    ],
+    "size": [
+     1.72,
+     2.1,
+     0.3
+    ],
+    "roughness": 0.55
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "pbr",
+    "color": "#D9D3C8",
+    "position": [
+     0.55,
+     2.05,
+     0.3
+    ],
+    "size": [
+     1.62,
+     2.0,
+     0.22
+    ],
+    "texture": "rough_linen",
+    "tex_scale": 0.6,
+    "tint": "#CFC6B6",
+    "tint_mix": 0.6
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "pbr",
+    "color": "#6E7684",
+    "position": [
+     0.55,
+     1.7699999999999998,
+     0.24
+    ],
+    "size": [
+     1.84,
+     1.5,
+     0.3
+    ],
+    "texture": "rough_linen",
+    "tex_scale": 0.6,
+    "tint": "#5E6470",
+    "tint_mix": 0.7
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "pbr",
+    "color": "#F2EFE9",
+    "position": [
+     0.17000000000000004,
+     2.86,
+     0.52
+    ],
+    "size": [
+     0.62,
+     0.4,
+     0.15
+    ],
+    "rotate_z": 4,
+    "texture": "rough_linen",
+    "tex_scale": 0.5,
+    "tint": "#E4DDD0",
+    "tint_mix": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "pbr",
+    "color": "#F2EFE9",
+    "position": [
+     0.93,
+     2.86,
+     0.52
+    ],
+    "size": [
+     0.62,
+     0.4,
+     0.15
+    ],
+    "rotate_z": -3,
+    "texture": "rough_linen",
+    "tex_scale": 0.5,
+    "tint": "#E4DDD0",
+    "tint_mix": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "gloss",
+    "color": "#3A2A1E",
+    "position": [
+     0.55,
+     3.1,
+     0.0
+    ],
+    "size": [
+     1.84,
+     0.06,
+     1.05
+    ],
+    "roughness": 0.55
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "side_table_01",
+    "position": [
+     -0.62,
+     2.82,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     0.0
+    ],
+    "scale": 1.0
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "paper",
+    "color": "#2B3A4A",
+    "position": [
+     -0.44,
+     2.74,
+     0.55
+    ],
+    "size": [
+     0.15,
+     0.21,
+     0.022
+    ],
+    "rotate_z": 14
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "paper",
+    "color": "#B8873C",
+    "position": [
+     -0.44,
+     2.74,
+     0.572
+    ],
+    "size": [
+     0.14,
+     0.2,
+     0.018
+    ],
+    "rotate_z": 4
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "earf_moon",
+    "fn": "orb",
+    "spots": [
+     {
+      "position": [
+       -0.64,
+       2.86,
+       0.55
+      ],
+      "rotate_z": -30
+     }
+    ],
+    "flavour": "ember",
+    "lamp_w": 0.17569546120058566,
+    "shade_glow": 0.06,
+    "materials": {
+     "body": {
+      "radius": 0.00375
+     },
+     "liner": {
+      "radius": 0.002
+     }
+    }
+   },
+   {
+    "kind": "frame",
+    "position": [
+     0.55,
+     3.15
+    ],
+    "z": 1.55,
+    "size": [
+     0.9,
+     0.6
+    ],
+    "art": "#2E3C52"
+   }
+  ],
+  "windows": [
+   {
+    "wall": "left",
+    "along": -0.4,
+    "sill": 0.75,
+    "size": [
+     1.1,
+     1.5
+    ],
+    "mullions": [
+     1,
+     1
+    ],
+    "frame": "#1E2024"
+   }
+  ]
+ },
+ "lights": {
+  "corepool0": {
+   "type": "point",
+   "position": [
+    -0.735,
+    2.84,
+    0.6100000000000001
+   ],
+   "power_w": 0.0732,
+   "radius_m": 0.03,
+   "color": "#FF8A60",
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  },
+  "corepool1": {
+   "type": "point",
+   "position": [
+    -0.545,
+    2.84,
+    0.6100000000000001
+   ],
+   "power_w": 0.0732,
+   "radius_m": 0.03,
+   "color": "#FF8A60",
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  },
+  "coreup": {
+   "type": "point",
+   "position": [
+    -0.64,
+    2.86,
+    0.8500000000000001
+   ],
+   "power_w": 0.1025,
+   "radius_m": 0.08,
+   "color": "#FF8A60",
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  }
+ },
+ "camera": {
+  "position": [
+   -1.1,
+   1.85,
+   0.78
+  ],
+  "target": [
+   -0.5,
+   2.9,
+   0.64
+  ],
+  "lens_mm": 60,
+  "level": true,
+  "fstop": 2.0,
+  "focus": [
+   -0.64,
+   2.86,
+   0.68
+  ]
+ }
+}
