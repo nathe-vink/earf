@@ -362,25 +362,38 @@ def shot_ionos(sc):
 def shot_cairn(sc):
     sweep('#C9C2B6', 0.9)
     slabs = [(0.16, 0.12, 0.0, 'fog'), (0.14, 0.11, 0.008, 'fog'), (0.12, 0.10, -0.006, 'dust'), (0.10, 0.09, 0.009, 'fog'), (0.08, 0.08, -0.004, 'fog')]
-    cols = ['#3A3634', '#5C5650', '#C8BBA4', '#2F3B4A', '#8A7F70', '#1E1E22']
+    cols = ['#C8BBA4', '#5C5650', '#8A7F70', '#2F3B4A', '#3A3634', '#1E1E22']   # critic r1: no near-black book against the bookend
     rng = np.random.default_rng(3)
     books = [(float(rng.uniform(0.024, 0.038)), float(rng.uniform(0.2, 0.245)), float(rng.uniform(0.13, 0.155))) for _ in cols]
     span = sum(b[0] + 0.001 for b in books)
     for side, sgn in (('L', -1), ('R', 1)):
         cx = sgn * (span / 2 + 0.08)
         for i, (w, d, off, tn) in enumerate(slabs):
-            z0 = i * 0.0127 + GAP / 2
+            FT = 0.0015   # the silicone feet (SIX.md): the stack stands 1.5 mm proud of the floor on four of them
+            z0 = FT + i * 0.0127 + GAP / 2
             x = cx - sgn * off
-            slab(f'c{side}{i}', x - w / 2, -d / 2, z0, x + w / 2, d / 2, (i + 1) * 0.0127 - GAP / 2, acrylic(tn), None,
+            if i == 0:
+                for fx in (-1, 1):
+                    for fy in (-1, 1):
+                        ring(f'foot{side}{fx}{fy}', 0.005, 0, 0.00005, FT - 0.0001, basic('silicone', '#3B3A38', 0.7)).location = (x + fx * (w / 2 - 0.012), fy * (d / 2 - 0.012), 0)
+            slab(f'c{side}{i}', x - w / 2, -d / 2, z0, x + w / 2, d / 2, FT + (i + 1) * 0.0127 - GAP / 2, acrylic(tn), None,
                  bond_top=acrylic(tn, 'bond') if i < 4 else None, bond_bottom=acrylic(tn, 'bond') if i > 0 else None)
     x = -span / 2
-    for (th, hgt, dp), c in zip(books, cols):
-        slab(f'book{c}', x, -dp / 2, 0.0, x + th, dp / 2, hgt, basic(f'cloth{c}', c, 0.75))
+    pages = basic('pages', '#EDE6D6', 0.85, noise=0.02)
+    for (th, hgt, dp), c in zip(books, cols):   # critic r1 c3: hardbacks, cloth boards and spine, the page block set in
+        cl = basic(f'cloth{c}', c, 0.8, noise=0.06); t = 0.0022
+        slab(f'bk{c}a', x, -dp / 2, 0.0, x + t, dp / 2, hgt, cl); slab(f'bk{c}b', x + th - t, -dp / 2, 0.0, x + th, dp / 2, hgt, cl)
+        slab(f'bk{c}s', x + t, -dp / 2, 0.0, x + th - t, -dp / 2 + t, hgt, cl)
+        slab(f'bk{c}p', x + t + 0.0002, -dp / 2 + t, 0.003, x + th - t - 0.0002, dp / 2 - 0.003, hgt - 0.003, pages)
         x += th + 0.001
     sc.render.resolution_x, sc.render.resolution_y = 1800, 1200
-    area('window', (-1.2, 0.9, 0.35), (-span / 2 - 0.08, 0, 0.02), 0.7, 260, '#FFF4E6')
-    area('key', (0.4, -1.0, 0.9), (-0.15, 0, 0.04), 1.0, 12, '#EEF2F8')
-    camera((-0.02, -0.46, 0.21), (-span / 2 - 0.05, 0, 0.04), lens=50, fstop=8)
+    cx = -(span / 2 + 0.08)
+    area('window', (-1.2, 1.1, 0.75), (cx, 0, 0.02), 0.7, 150, '#FFF4E6')                         # c2: lower, raised
+    area('sun', (cx - 0.55, 0.55, 0.50), (cx, 0, 0.03), 0.15, 40, '#FFF1DE')                     # c4: small and hard, behind-left: the Dust layer's pool
+    area('key', (0.4, -1.0, 0.9), (-0.15, 0, 0.04), 1.0, 6, '#EEF2F8')
+    flag = slab('flagL', cx - 0.45, -0.45, 0.0, cx - 0.15, -0.44, 0.3, basic('flag', '#0A0A0B', 0.9))   # c7: dark faces, bright edges
+    for v in ('visible_camera', 'visible_shadow', 'visible_diffuse', 'visible_transmission'): setattr(flag, v, False)
+    camera((cx - 0.08, -0.78, 0.17), (cx - 0.02, 0, 0.045), lens=70, fstop=8)                    # c5: the bookend on the left third
 
 def shot_bedrock(sc):
     sc.world.node_tree.nodes['Background'].inputs['Color'].default_value = lin('#D9D3CA')

@@ -1,0 +1,3 @@
+{"stage1": {"score": 4.5}, "verdict": "iterate", "score_if_fixed": 7.2,
+ "changes": ["c1 on the floor, a contact line", "c2 window down, the sweep unclipped", "c3 real books", "c4 a small hard source for a defined Dust pool", "c5 the bookend the hero, books under 25%", "c6 neutral balance", "c7 a black card for dark faces and bright edges"],
+ "accept": [{"id":"c2","region":[0,0,900,350],"metric":"clip_pct","op":"<","value":5},{"id":"c7","region":[300,420,1000,940],"metric":"lum_median","op":"<","value":150}]}
