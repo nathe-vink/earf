@@ -12,8 +12,9 @@
   "bounces": 24,
   "transmission_bounces": 20,
   "view": "Khronos PBR Neutral",
-  "exposure": 5.053,
-  "white_balance_k": 4000
+  "exposure": 4.253,
+  "white_balance_k": 3500,
+  "white_balance_tint": 4
  },
  "sky": {
   "kind": "gradient",
@@ -42,7 +43,7 @@
    "plank_contrast": 0.7
   },
   "wall": {
-   "color": "#3C4250"
+   "color": "#5A5248"
   },
   "ceiling": "#E6E0D6",
   "skirting": {
@@ -218,35 +219,6 @@
    },
    {
     "kind": "kit",
-    "shape": "lathe",
-    "material": "glass",
-    "color": "#F4F2EE",
-    "position": [
-     -0.8,
-     2.66,
-     0.55
-    ],
-    "profile": [
-     [
-      0,
-      0
-     ],
-     [
-      0.032,
-      0
-     ],
-     [
-      0.034,
-      0.11
-     ],
-     [
-      0.0,
-      0.11
-     ]
-    ]
-   },
-   {
-    "kind": "kit",
     "shape": "ext",
     "module": "earf_moon",
     "fn": "orb",
@@ -262,7 +234,7 @@
     ],
     "flavour": "ember",
     "lamp_w": 0.17569546120058566,
-    "shade_glow": 0.35,
+    "shade_glow": 0.06,
     "materials": {
      "body": {
       "radius": 0.00375
@@ -349,16 +321,16 @@
  },
  "camera": {
   "position": [
-   -1.05,
-   1.95,
-   0.8
+   -1.1,
+   1.85,
+   0.78
   ],
   "target": [
-   -0.52,
+   -0.5,
    2.9,
-   0.7
+   0.64
   ],
-  "lens_mm": 70,
+  "lens_mm": 60,
   "level": true,
   "fstop": 2.0,
   "focus": [

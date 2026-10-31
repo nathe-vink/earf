@@ -117,7 +117,7 @@ def core_pool(s, x, y, z, flavour_light='#FF8A60', lm=200.0):
 
 def core_bedside():
     """Core in Ember on a bedside table at night: the only light in the room but a cool window."""
-    s = bare_room(wall='#3C4250')
+    s = bare_room(wall='#5A5248')                 # a warm neutral (the blue-grey went purple under the red)
     st = s['set']
     bx, by = 0.55, 2.05                      # the bed's centre: its head at the back wall (y 3.15)
     st['props'] = [
@@ -134,20 +134,19 @@ def core_bedside():
         asset('side_table_01', (-0.62, 2.82, 0.0), 0.0),
         box('paper', '#2B3A4A', (0.15, 0.21, 0.022), (-0.44, 2.74, 0.55), rotate_z=14),
         box('paper', '#B8873C', (0.14, 0.20, 0.018), (-0.44, 2.74, 0.572), rotate_z=4),
-        kit('lathe', 'glass', '#F4F2EE', (-0.80, 2.66, 0.55),
-            profile=[[0, 0], [0.032, 0], [0.034, 0.11], [0.0, 0.11]]),
-        LF.core_piece(-0.64, 2.86, 0.55, 'ember', glow=0.35, rotate_z=-30),
+        LF.core_piece(-0.64, 2.86, 0.55, 'ember', glow=0.06, rotate_z=-30),
         {'kind': 'frame', 'position': [bx, 3.15], 'z': 1.55, 'size': [0.9, 0.6], 'art': '#2E3C52'},
     ]
     st['windows'] = [{'wall': 'left', 'along': -0.4, 'sill': 0.75, 'size': [1.1, 1.5], 'mullions': [1, 1],
                       'frame': '#1E2024'}]
     s['sky'] = {'kind': 'gradient', 'zenith': '#1A2A48', 'horizon': '#3A4A6A', 'ground': '#141820', 'strength': 0.006}
     core_pool(s, -0.64, 2.86, 0.55)
-    s['render']['exposure'] = round(s['render']['exposure'] + 1.9, 3)
-    s['render']['white_balance_k'] = 4000
+    s['render']['exposure'] = round(s['render']['exposure'] + 1.1, 3)
+    s['render']['white_balance_k'] = 3500
+    s['render']['white_balance_tint'] = 4
     s['title'] = 'Core in Ember on a bedside table at night (the campaign)'
     s['size'] = [2400, 1600]
-    s['camera'] = {'position': [-1.05, 1.95, 0.80], 'target': [-0.52, 2.90, 0.70], 'lens_mm': 70, 'level': True,
+    s['camera'] = {'position': [-1.10, 1.85, 0.78], 'target': [-0.50, 2.90, 0.64], 'lens_mm': 60, 'level': True,
                    'fstop': 2.0, 'focus': [-0.64, 2.86, 0.68]}
     return s
 
