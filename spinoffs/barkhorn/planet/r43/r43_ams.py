@@ -43,7 +43,7 @@ def shot(view):
     s['title'] = f'Mother EARF at 2 m, Amsterdam (a proposal): {view}'
     s['camera'] = v['camera']
     s['set'] = {'kind': 'stage', 'props': [
-        {'kind': 'kit', 'shape': 'ext', 'path': KIT, 'fn': 'canal', 'width': 18.0, 'lit': 0.45, 'window_glow': 0.35},
+        {'kind': 'kit', 'shape': 'ext', 'path': KIT, 'fn': 'canal', 'width': 18.0, 'lit': 0.45, 'window_glow': 0.18},
         {'kind': 'kit', 'shape': 'ext', 'path': KIT, 'fn': 'globe', 'size': 2.0, 't': 0.025, 'at': G,
          'rim': v.get('rim', 0.12), 'rim_par': 1.0, 'heading': 35.0, 'base_h': 0.45, 'post': 0.10},
         {'kind': 'kit', 'shape': 'asset', 'model': 'street_lamp_01', 'res': '1k', 'position': [-9.0, -1.0, 0.0],
@@ -55,7 +55,7 @@ def shot(view):
     # the hard spot: on a mast on the land side, high, throwing the globe's coloured shadow across the paving toward
     # the kerb and the water; the street lamps along the quay, sodium-warm
     s['lights'] = {
-        'hard': spot([-3.5, -8.0, 8.5], [0.4, -2.2, 0.0], v.get('hard_w', 1800.0), 30.0, k=3600, blend=0.2),
+        'hard': spot([-3.5, -8.0, 8.5], [0.4, -2.2, 0.0], v.get('hard_w', 600.0), 30.0, k=3600, blend=0.35),
         'lamp-a': {'type': 'point', 'position': [-9.0, -1.0, 3.9], 'power_w': 60.0, 'color': 2200, 'radius_m': 0.12},
         'lamp-b': {'type': 'point', 'position': [12.0, -1.0, 3.9], 'power_w': 60.0, 'color': 2200, 'radius_m': 0.12},
         'far': {'type': 'area', 'position': [0.0, 20.0, 6.0], 'target': [0.0, 23.0, 3.0], 'size_m': [30.0, 1.0],

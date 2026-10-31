@@ -1,0 +1,202 @@
+{
+ "title": "Mother EARF at 2 m, Amsterdam (a proposal): shadow",
+ "size": [
+  2400,
+  1600
+ ],
+ "camera": {
+  "position": [
+   3.8,
+   -8.2,
+   2.6
+  ],
+  "target": [
+   -0.4,
+   -1.8,
+   0.4
+  ],
+  "lens_mm": 32,
+  "level": true,
+  "fstop": 5.6,
+  "focus": [
+   0.0,
+   -2.6,
+   0.5
+  ]
+ },
+ "products": [],
+ "set": {
+  "kind": "stage",
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/planet/r43/kit43ams.py",
+    "fn": "canal",
+    "width": 18.0,
+    "lit": 0.45,
+    "window_glow": 0.35
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/planet/r43/kit43ams.py",
+    "fn": "globe",
+    "size": 2.0,
+    "t": 0.025,
+    "at": [
+     0.0,
+     -3.2
+    ],
+    "rim": 0.12,
+    "rim_par": 1.0,
+    "heading": 35.0,
+    "base_h": 0.45,
+    "post": 0.1
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "street_lamp_01",
+    "res": "1k",
+    "position": [
+     -9.0,
+     -1.0,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     90.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "street_lamp_01",
+    "res": "1k",
+    "position": [
+     12.0,
+     -1.0,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     90.0
+    ]
+   }
+  ]
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#040508",
+  "horizon": "#2A2620",
+  "ground": "#08080A",
+  "strength": 0.12
+ },
+ "lights": {
+  "hard": {
+   "type": "spot",
+   "position": [
+    -3.5,
+    -8.0,
+    8.5
+   ],
+   "target": [
+    0.4,
+    -2.2,
+    0.0
+   ],
+   "power_w": 1800.0,
+   "cone_deg": 30.0,
+   "blend": 0.2,
+   "radius_m": 0.02,
+   "color": 3600,
+   "camera": false
+  },
+  "lamp-a": {
+   "type": "point",
+   "position": [
+    -9.0,
+    -1.0,
+    3.9
+   ],
+   "power_w": 60.0,
+   "color": 2200,
+   "radius_m": 0.12
+  },
+  "lamp-b": {
+   "type": "point",
+   "position": [
+    12.0,
+    -1.0,
+    3.9
+   ],
+   "power_w": 60.0,
+   "color": 2200,
+   "radius_m": 0.12
+  },
+  "far": {
+   "type": "area",
+   "position": [
+    0.0,
+    20.0,
+    6.0
+   ],
+   "target": [
+    0.0,
+    23.0,
+    3.0
+   ],
+   "size_m": [
+    30.0,
+    1.0
+   ],
+   "irradiance": 0.15,
+   "color": 2400,
+   "camera": false
+  }
+ },
+ "haze": {
+  "box_m": [
+   -20.0,
+   -14.0,
+   -1.1,
+   20.0,
+   22.0,
+   8.0
+  ],
+  "density": 0.0025,
+  "anisotropy": 0.4,
+  "color": "#FFFFFF"
+ },
+ "render": {
+  "samples": 256,
+  "adaptive": 0.02,
+  "denoise": true,
+  "clamp": 10,
+  "bounces": 10,
+  "view": "AgX",
+  "look": "AgX - Medium High Contrast",
+  "exposure": 3.6,
+  "white_balance_k": 3200,
+  "white_balance_tint": -2.0
+ },
+ "materials": {
+  "glow": {
+   "strength": 0.05,
+   "color": "#FFB060"
+  }
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 236,
+  "white_out": 240,
+  "contrast": 0.08,
+  "clarity": 0.05,
+  "sharpen": 0.25,
+  "sharpen_px": 0.7,
+  "grain": 2.5
+ }
+}
