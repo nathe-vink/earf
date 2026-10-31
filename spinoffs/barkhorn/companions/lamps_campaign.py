@@ -141,7 +141,7 @@ def record(x, y, z):
 def sleeves(x, y, z, n=9, seed=3):
     import random
     rnd = random.Random(seed)
-    cols = ['#D8D2C4', '#1E1E22', '#B23A28', '#2C4A6A', '#E0B040', '#5A6E4A', '#E8E4DC', '#7A3A5A', '#3A3A3A']
+    cols = ['#1E1E22', '#B23A28', '#D8D2C4', '#2C4A6A', '#E0B040', '#5A6E4A', '#E8E4DC', '#7A3A5A', '#3A3A3A']
     out = [box('gloss', '#3A2A1E', (0.34, 0.36, 0.012), (x, y, z), roughness=0.5)]
     for i in range(n):
         out.append(box('card', cols[i % len(cols)], (0.315, 0.004, 0.315), (x, y - 0.15 + i * 0.033, z + 0.012),
@@ -158,7 +158,7 @@ def credenza_props():
             asset('potted_plant_02', (cx + 1.55, cy - 0.05, 0.0), 20.0),
             asset('ceramic_vase_01', (cx + 0.95, cy + 0.05, cz), 0.0),
             {'kind': 'frame', 'position': [cx - 0.1, 3.15], 'z': 1.62, 'size': [1.0, 0.7], 'art': '#B4432E'},
-            *sleeves(cx + 0.55, cy - 0.02, cz)]
+            *sleeves(cx + 0.62, cy + 0.02, cz)]
 
 
 def mantle_credenza():
