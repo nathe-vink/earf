@@ -24,8 +24,12 @@ VIEWS = {
                             'street': {'radius_m': 0.6}},
                     retouch={'darken': {'zinc': 0.25}, 'zinc_rough': [0.30, 0.60]}, orb={'lamp_w': 0.6, 'shade_glow': 0.012}),
     # the listening corner: the altar, the pair, the tub chairs and their Cores
-    'listening': dict(camera={'position': [11.25, 2.70, 1.30], 'target': [16.5, 3.05, 1.00], 'lens_mm': 26, 'level': True,
-                              'fstop': 4.0, 'focus': [16.0, 3.0, 1.0]}, exposure=4.8),
+    # p2 (critics 4.0/4.5, converged): the altar spots a stop and more down so the Smoke reads; the camera seated
+    # between the two near tubs so they frame the corners; the Cores and the screens down
+    'listening': dict(camera={'position': [12.2, 3.05, 1.28], 'target': [16.5, 3.05, 1.10], 'lens_mm': 32, 'level': True,
+                              'fstop': 4.0, 'focus': [16.2, 3.0, 1.0]}, exposure=5.0,
+                      lights={'altar': {'power_w': 75.0, 'cone_deg': 22.0}, 'pend': {'power_w': 20.0, 'cone_deg': 24.0}},
+                      orb={'lamp_w': 0.12, 'shade_glow': 0.003}, room={'screen_glow': 0.012}),
     # the room at night from the back, the line playing: past the tubs to the counter, the globe and the street
     # p2 (critics 4.5/5.0, converged): forward of the jambs at seated height, 32 mm; the floor's stains calmed; the
     # pendants' downlights softer; the Cores and Mother's rims down, its spot up; the screens dimmer; the speakers lit

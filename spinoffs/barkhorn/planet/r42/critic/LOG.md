@@ -17,3 +17,4 @@ by `kit42.dump`. At 1200 the counter's p2 showed the shapes plainly: **leaf shad
 room through the street tree and the shopfront glass. Round 40 had turned them off in the interiors for the same reason,
 and the round 41 base shot carried them. They are off in all four round 42 views now; `kit42.flatten` stays in the kit,
 unused.
+| p1 | listening | proof 1200 x 800, 128 samples | 4.0 (6.5) | 4.5 (6.5) | The speakers blown to white-grey under the altar spots (median 191, plinths clipping). The near tub chair's back is the brightest large surface and blocks the altar. The Cores are white discs. Bright screens are cut by the frame's edges. The fir reads as a uniform tile. | p2: altar spots 170 to 75 W, cone 22 deg; camera seated between the near tubs, [12.2, 3.05, 1.28], 32 mm; exposure 4.8 to 5.0; the Cores 0.12 W, glow 0.003; screens 0.012; street lamps off. Out of scope: the batts behind the acrylic and the horn's shape (fixed product). |
