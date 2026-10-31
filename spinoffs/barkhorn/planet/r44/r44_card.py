@@ -57,8 +57,8 @@ def settings(sh, scale):
     return '\n'.join([
         f"- frame: {sh['size'][0]} x {sh['size'][1]} as delivered; this proof at scale {scale}",
         f"- camera: {cam['position']} m looking at {cam['target']}, lens {cam['lens_mm']} mm, f/{cam.get('fstop')}",
-        f"- the lantern's band: emission {room.get('band_glow', 3.0)} behind cast Smoke acrylic fins (IOR 1.49); its foot "
-        f"line {room.get('foot_glow', 4.0)}; the shelf and back-bar lines {room.get('shelf_led', 6.0)}",
+        f"- the lantern's band: emission {room.get('band_glow', 0.8)} behind cast Smoke acrylic fins (IOR 1.49); its foot "
+        f"line {room.get('foot_glow', 9.0)}; the shelf and back-bar lines {room.get('shelf_led', 1.0)}",
         f"- the shop wall: {lamps('shop')}; the table: {lamps('table')}; the counter: {lamps('ctr')}; the banquette: {lamps('bq')}",
         f"- the baffle's graze: {lamps('baffle')}; the route: {lamps('route')}; the fill: {lamps('fill')}",
         f"- inside the lantern: the pair {lamps('stack')}; Mother EARF {lamps('mother')}; the trap {lamps('trap')}; "

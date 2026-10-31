@@ -60,3 +60,46 @@ The full JSONs are in `p2-*.json`.
 - The oak reads mauve.
 
 **Out of scope, named by the critics and left as they are:** the products' tints (fixed as placed). The Tropos and Mother EARF are not visible from the bar or the street; the lantern view shows them.
+
+## Renders, round 2 (p3), and the duels against the earlier heroes
+
+| View | Critic | Stage 1 | If fixed | Verdict |
+|---|---|---|---|---|
+| street | a | 5.0 | 7.0 | iterate |
+| street | b | 4.5 | 7.0 | iterate |
+| bar | a | 5.0 | 6.8 | iterate |
+| bar | b | 5.0 | 7.0 | iterate |
+| lantern (its round 1) | a | 5.0 | 7.0 | iterate |
+| lantern (its round 1) | b | 4.5 | 6.8 | iterate |
+
+**Converged asks:**
+- The band is still pink and clipping (the 2800 K balance desaturates amber).
+- The lantern has no visible foot line, so it does not read as freestanding.
+- The baffle is the brightest flat surface.
+- The shelf lines read hot.
+- There are no pools of light on the counter.
+- The ceiling and the right wall are voids.
+- The street view has a black table slab on the axis and no glass in the frame.
+- The rooms are empty, with repeated stools.
+- In the lantern:
+  - it is too bright and even;
+  - the pair is darker than the walls;
+  - Mother's spot washes her colored shadow white and shows a haze shaft;
+  - the end-grain floor reads as camouflage;
+  - the terrazzo chips are coarse;
+  - the view is a flat, symmetric showroom.
+
+**Out of scope, as the critics named it:**
+- The products' tints compete with the band. The card fixes them, so they cap the one-color criterion.
+- The Tropos are not visible from the bar or the street.
+
+**Duels against the earlier heroes**, at the same size, both orders, using the duel prompt:
+
+| Pair | Order 1 | Order 2 | Result |
+|---|---|---|---|
+| r41 door hero vs r44 street p3 | r41 (clear) | r41 (clear) | **r41 2–0** |
+| r39 door hero vs r44 lantern p3 | r39 (decisive) | r39 (clear) | **r39 2–0** |
+
+The judges read the earlier heroes as lived-in rooms (pendant and lamp pools, a record wall, a timber ceiling). They read r44 as murky or as a CG vignette.
+
+As photographs, the round 39 and round 41 heroes still win. Those frames had five or more look rounds; these have had two.

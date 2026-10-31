@@ -46,7 +46,8 @@ ROUTE_Y = (0.0, 1.62)            # 64 in clear down the building's length (ADA 4
 # --- 1. the shop (x 0 to 6.10, 20 ft) ------------------------------------------------------------------------------
 SHOP_X1 = 6.10
 SHOP_WALL = dict(x0=0.60, x1=6.00, y0=W - 0.45, y1=W, z1=3.20)   # oak shelves on the left wall, lit by the shelf edge
-SHOP_TABLE = dict(x0=3.40, x1=5.40, y0=3.30, y1=4.20, h=0.90)    # oak and blackened steel, the till at its end
+SHOP_TABLE = dict(x0=3.40, x1=5.40, y0=4.55, y1=5.45, h=0.90)    # oak and blackened steel, the till at its end;
+                                                                  # off the room's axis, so the lantern is seen from the door
 WINDOW_PLINTH = dict(x0=0.35, x1=1.35, y0=3.20, y1=6.80, h=0.45)  # the window's display, a long low plinth
 THRESHOLD = dict(x0=3.20, x1=3.50, y0=0.0, y1=W)                  # the terrazzo threshold strip between street and room
 

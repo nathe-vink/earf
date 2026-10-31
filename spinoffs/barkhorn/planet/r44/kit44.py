@@ -57,8 +57,8 @@ def acrylic(bpy, name, Ti=(0.995, 0.995, 0.995), d_ref=0.003, rough=0.015):
 SMOKE_TI = (0.965, 0.92, 0.84)
 
 
-def terrazzo(bpy, name, ground='#3A3734', chips=('#B4AEA2', '#7A766F', '#2B2928', '#968C7E'), accent=(),
-             scale=48.0, rough=0.32):
+def terrazzo(bpy, name, ground='#3E3A36', chips=('#A39C90', '#706B64', '#38342F', '#8C8274'), accent=(),
+             scale=48.0, rough=0.24):
     """Honed epoxy terrazzo: chips (marble, glass) in a ground, sealed. `accent` adds acrylic-offcut chips in the
     product tints, as a share of the chips (each accent colour one slot in the palette)."""
     if name in _M:
@@ -212,7 +212,7 @@ def shop(bpy, p, objs):
     sl = Mesh('h44-shelf-led')
     for z in (0.78, 1.26, 1.74, 2.22, 2.70):
         sl.box(S['x0'] + 0.05, S['y0'] + 0.02, z - 0.040, S['x1'] - 0.05, S['y0'] + 0.035, z - 0.036)
-    objs.append(sl.object(bpy, emitter(bpy, 'h44-led-warm', '#FF9A50', p.get('shelf_led', 1.8))))
+    objs.append(sl.object(bpy, emitter(bpy, 'h44-led-warm', '#FF9A50', p.get('shelf_led', 1.0))))
     T_ = P.SHOP_TABLE
     tb = Mesh('h44-shop-table'); tb.box(T_['x0'], T_['y0'], T_['h'] - 0.04, T_['x1'], T_['y1'], T_['h'])
     objs.append(tb.object(bpy, oak(bpy, vertical=False, name='oak-table'), bevel=0.004))
@@ -259,7 +259,7 @@ def bar(bpy, p, objs):
         sv.box(B['x0'] + 0.3, W - 0.30, z - 0.02, B['x1'] - 0.3, W, z)
         led.box(B['x0'] + 0.35, W - 0.28, z - 0.024, B['x1'] - 0.35, W - 0.26, z - 0.021)
     objs.append(sv.object(bpy, K.blackened_steel(bpy)))
-    objs.append(led.object(bpy, emitter(bpy, 'h44-led-warm', '#FF9A50', p.get('shelf_led', 1.8))))
+    objs.append(led.object(bpy, emitter(bpy, 'h44-led-warm', '#FF9A50', p.get('shelf_led', 1.0))))
     # bottles: glass with liquid in four warm tones, varied heights
     import kit39
     rnd = random.Random(44)
@@ -304,7 +304,7 @@ def bar(bpy, p, objs):
     objs.append(bq.object(bpy, oak(bpy, name='oak-banq'), bevel=0.004))
     up = Mesh('h44-banq-leather'); up.box(Bq['x0'] + 0.02, Bq['y0'] + 0.08, 0.40, Bq['x1'] - 0.02, Bq['y1'], 0.47)
     up.box(Bq['x0'] + 0.02, Bq['y0'] + 0.08, 0.50, Bq['x1'] - 0.02, Bq['y0'] + 0.16, 0.92)
-    objs.append(up.object(bpy, K.leather(bpy, '#4A1E17', name='h44-leather'), bevel=0.02))
+    objs.append(up.object(bpy, K.leather(bpy, '#3A2618', name='h44-leather'), bevel=0.02))
     tt = Mesh('h44-banq-tables'); tl = Mesh('h44-banq-table-steel')
     for x in P.BANQ_TABLES:
         y0 = Bq['y1'] + 0.08
@@ -354,7 +354,7 @@ def lantern(bpy, p, objs):
     cap.box(x0 - 0.035, y0 - 0.035, bz0 - 0.008, x1, y0 + 0.05, bz0)
     cap.box(x0 - 0.035, y0 - 0.035, bz0 - 0.008, x0 + 0.05, y1, bz0)
     objs.append(fins.object(bpy, acrylic(bpy, 'acrylic-smoke-fin', SMOKE_TI)))
-    objs.append(diff.object(bpy, emitter(bpy, 'h44-band-led', '#FF8A30', p.get('band_glow', 1.1))))
+    objs.append(diff.object(bpy, emitter(bpy, 'h44-band-led', '#FF7A1C', p.get('band_glow', 0.8))))
     objs.append(cap.object(bpy, K.blackened_steel(bpy)))
     # the lit foot: a 100 mm recess with a warm line washing the floor
     # (a strip along the two seen faces only: a slab across the footprint covered the room's floor, the p2 look)
@@ -362,7 +362,7 @@ def lantern(bpy, p, objs):
     objs.append(ft.object(bpy, blk))
     fl = Mesh('h44-lant-footled'); fl.box(x0 + 0.045, y0 + 0.045, 0.085, x0 + 0.055, y1, 0.095)
     fl.box(x0 + 0.045, y0 + 0.045, 0.085, x1, y0 + 0.055, 0.095)
-    objs.append(fl.object(bpy, emitter(bpy, 'h44-foot-led', '#FFB774', p.get('foot_glow', 4.0))))
+    objs.append(fl.object(bpy, emitter(bpy, 'h44-foot-led', '#FFA860', p.get('foot_glow', 9.0))))
     # the porch: a small oak box outside the seal, its door off the route, an acoustic door into the box
     Lk = P.LOCK
     pc = Mesh('h44-porch')
@@ -393,7 +393,11 @@ def interior(bpy, p, objs):
     import kit43
     oakm = oak(bpy, name='oak-lantern')
     fl = Mesh('h44-in-floor'); fl.box(x0 - 0.3, y0 - 0.3, -0.1, x1 + 0.3, y1 + 0.3, 0.0)
-    objs.append(fl.object(bpy, K.end_grain(bpy, name='h44-endgrain', lo='#3A2818', hi='#B08A60')))
+    eg = K.end_grain(bpy, name='h44-endgrain', lo='#2E2014', hi='#8E6C4A')
+    for n_ in eg.node_tree.nodes:                                     # blocks about 35 mm (p3: "camouflage blotches")
+        if n_.type == 'TEX_VORONOI':
+            n_.inputs['Scale'].default_value = 30.0
+    objs.append(fl.object(bpy, eg))
     # the inner leaf, black felt behind the slats; the walls 45 mm slats with 15 mm gaps (absorber behind) on 35% of
     # the side walls (the upper part), plain oak boards below to 1.2 m (the seats lean on them)
     bk = Mesh('h44-in-back')
