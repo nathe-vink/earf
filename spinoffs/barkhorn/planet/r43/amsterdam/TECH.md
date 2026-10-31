@@ -80,5 +80,7 @@ sheet is bought from a European caster. Build the 300 mm test piece first.
 ## The renders
 
 Two or three night views of the 2 m globe on an Amsterdam quay: `r43_ams.py` (views `quay`, `shadow`, `water`) builds
-them from `kit43ams.py` (the quay, the canal, the gabled houses across the water; the globe on its plinth). They are
+them from `kit43ams.py` (the quay, the canal, the gabled houses across the water; the globe on its plinth). Look 2 (views
+`quay2`, `shadow2`: modelled canal houses, klinker paving, Amsterdammertjes, a low rope ring, a bicycle, figures across the
+water, a night-blue grade, a 5000 K spot) won every blind duel against look 1; the finals are `ams-{quay,shadow}-s2`. They are
 renders, captioned so; the critic log is `../critic/LOG.md`.
