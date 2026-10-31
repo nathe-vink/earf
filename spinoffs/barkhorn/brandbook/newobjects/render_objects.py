@@ -189,8 +189,21 @@ def slab(name, x0, y0, z0, x1, y1, z1, face_mat, side_mat=None, bond_top=None, b
     caustic(o)
     return o
 
-def extrude_poly(name, pts, z0, h, mat, axis='z', cap_mat=None):
-    """A prism from a 2D outline (x, y) between z0 and z0+h. cap_mat: the two caps' material (e.g. a bond)."""
+def extrude_poly(name, pts, z0, h, mat, axis='z', cap_mat=None, smooth_walls=False):
+    """A prism from a 2D outline (x, y) between z0 and z0+h. cap_mat: the two caps' material (e.g. a bond).
+    smooth_walls: a curved outline's side walls on their own vertices, smooth-shaded (faceted walls throw rows of dashes)."""
+    if smooth_walls:
+        bm = bmesh.new(); n = len(pts)
+        if sum(pts[i][0] * pts[(i + 1) % n][1] - pts[(i + 1) % n][0] * pts[i][1] for i in range(n)) < 0: pts = pts[::-1]
+        b = [bm.verts.new((x, y, z0)) for x, y in pts]; t = [bm.verts.new((x, y, z0 + h)) for x, y in pts]
+        bm.faces.new(list(reversed(b))); bm.faces.new(t)
+        wb = [bm.verts.new((x, y, z0)) for x, y in pts]; wt = [bm.verts.new((x, y, z0 + h)) for x, y in pts]
+        walls = [bm.faces.new((wb[i], wb[(i + 1) % n], wt[(i + 1) % n], wt[i])) for i in range(n)]
+        for f in walls: f.smooth = True
+        bmesh.ops.triangulate(bm, faces=[f for f in bm.faces if len(f.verts) > 4])
+        me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free()
+        o = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(o); o.data.materials.append(mat)
+        return o
     bm = bmesh.new()
     b = [bm.verts.new((x, y, z0)) for x, y in pts]; t = [bm.verts.new((x, y, z0 + h)) for x, y in pts]
     n = len(pts)
@@ -428,7 +441,7 @@ def shot_bedrock(sc):
 
 def shot_relief(sc):
     from contours import layers
-    wall = slab('wall', -2, 0.0, -1, 2, 0.05, 2.5, basic('plaster', '#D9D3C8', 0.9, noise=0.2))
+    wall = slab('wall', -2, 0.025, -1, 2, 0.075, 2.5, basic('plaster', '#D9D3C8', 0.9, noise=0.2))   # critic r1 c5: the panel stands 25 mm off on a hidden cleat
     caustic(wall, False, True)
     k = 0.001; th = 0.0056
     slab('backing', -0.3, -0.006, 0.9, 0.3, 0.0, 1.5, basic('white-back', '#F2F0EC', 0.6))
@@ -436,7 +449,7 @@ def shot_relief(sc):
     slab('base', -0.3, -0.006 - th + GAP / 2, 0.9, 0.3, -0.006 - GAP / 2, 1.5, base_m)
     for lev, loops in layers():   # each contour island a prism (the terrain is all hills, so no loop has a hole)
         for li, l in enumerate(loops):
-            pts = [(float(x) * k, float(y) * k) for x, y in l[::2]]
+            pts = [(float(x) * k, float(y) * k) for x, y in l]   # every contour point: finer facets, smaller glints (c1)
             if len(pts) > 2:
                 area_ = sum(pts[i][0] * pts[(i + 1) % len(pts)][1] - pts[(i + 1) % len(pts)][0] * pts[i][1] for i in range(len(pts)))
                 if area_ < 0: pts = pts[::-1]
@@ -445,8 +458,9 @@ def shot_relief(sc):
             o.location = (0, -0.006 - th - (lev - 1) * th + 0.0, 1.2)
     sc.render.resolution_x, sc.render.resolution_y = 1800, 1200
     area('bar', (0.0, -0.075, 1.53), (0.0, -0.01, 0.95), 0.6, 120, '#FFEEDC', size_y=0.015)   # its LED bar: a line of light just above the top edge, washing down
-    area('room', (1.2, -2.2, 1.3), (0, 0, 1.2), 2.0, 60, '#E8EEF6')
-    camera((0.55, -1.55, 1.25), (0.0, -0.03, 1.2), lens=50, fstop=0)
+    room = area('room', (-1.3, -1.6, 2.4), (0, 0, 1.2), 2.0, 20, '#E8EEF6'); room.visible_glossy = False   # c3: weaker, camera side, high left (level, it lit the backing through the layers in a band)
+    sc.view_settings.exposure = -0.7                                                   # c2
+    camera((1.45, -2.05, 1.12), (0.12, -0.03, 1.2), lens=85, fstop=4.0, focus=2.45)    # c4, c7: oblique, quiet wall left for type
 
 def shot_meridian(sc):
     wall = slab('wall', -2, 0.0, -1, 2, 0.05, 3.0, basic('plaster', '#E4DED4', 0.9, noise=0.15))
