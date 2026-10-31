@@ -65,9 +65,19 @@ The study renders show Core and Mantle in Ember and in Smoke, three ways:
 The stock colours are the photo hues in R1 Appendix A, scaled to TruCast's published transmission (2423 14.1 %,
 2064 29.3 %).
 
-What the renders say is in the README's round 43 log. In short:
-- **2423 is redder than Ember** (photo hue about 17° against Ember's 59°), so stock Ember reads crimson, not
-  red-orange. A 2422 Amber layer over it pulls it toward Ember (R1, untested).
-- **2064 is a fair Smoke.**
-- **Mantle's 25 mm parts depend entirely on the thickness question.** The $1 chips and a 1/2" off-cut settle it before
-  any sheet is bought.
+**What the renders say** (`stock-colours-sheet.png`: Core above, Mantle below; Ember, then Smoke):
+
+| | Kind case (each sheet like its chip) | Harsh case (one dye loading) |
+|---|---|---|
+| **Core in Ember** (2423) | **Still EARF**, but crimson where the site's Ember is red-orange: 2423's hue is about 17° against Ember's 59°. A 2422 Amber layer over it would pull it back (R1, untested). | A dark maroon ball, its glow dim: **not EARF.** |
+| **Core in Smoke** (2064) | **Too pale:** 3/8" of 2064 reads near clear and slightly peach. Use **2074 Dark Gray** for Core if the chips show this case. | **Close to the site's Smoke**, a mid grey with a warm cast. |
+| **Mantle in Ember** (2423) | **Still EARF, and richer:** the plinth and lid a deeper, more saturated red than the site's pinkish Ember. | Deeper still, but **still clear red, not black**, because the site's Mantle tint is already deep at 25 mm. |
+| **Mantle in Smoke** (2064) | Reads like the site's Smoke. | Reads like the site's Smoke. |
+
+**The answer to the owner: yes, a stock-colour prototype still looks like EARF.**
+- **Mantle** in either tint is safe on stock sheet.
+- **Core in Ember** is safe if the chips show the kind case, and reads crimson.
+- **Core in Smoke** takes 2064 or 2074 depending on the chips.
+- **The one combination that fails is Core in 2423 under the harsh case.** If a 1/2" off-cut of 2423 is much deeper than its 1/8" chip, cut Core's ball from 1/4" 2423 (or 2423 1/8" over clear) instead of 3/8".
+
+The $1 chips and a 1/2" off-cut of each colour decide it before any sheet is bought. Order those first.
