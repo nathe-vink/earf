@@ -1,5 +1,12 @@
 item,kind,qty,what,size,mass_g,usd_each,finish,supplier,price_date,source,option
-"chip-1, chip-2, chip-3, chip-4, chip-5, chip-6, chip-7, chip-8",cut,8,"10 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet",80 x 50,33,0.95,chip,,,cut file dxf/chip-1.dxf,
+chip-1,cut,1,"10 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet",80 x 50,33,0.95,chip-ember,,,cut file dxf/chip-1.dxf,
+chip-2,cut,1,"10 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet",80 x 50,33,0.95,chip-dust,,,cut file dxf/chip-2.dxf,
+chip-3,cut,1,"10 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet",80 x 50,33,0.95,chip-acid,,,cut file dxf/chip-3.dxf,
+chip-4,cut,1,"10 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet",80 x 50,33,0.95,chip-poison,,,cut file dxf/chip-4.dxf,
+chip-5,cut,1,"10 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet",80 x 50,33,0.95,chip-ice,,,cut file dxf/chip-5.dxf,
+chip-6,cut,1,"10 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet",80 x 50,33,0.95,chip-haze,,,cut file dxf/chip-6.dxf,
+chip-7,cut,1,"10 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet",80 x 50,33,0.95,chip-fog,,,cut file dxf/chip-7.dxf,
+chip-8,cut,1,"10 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet",80 x 50,33,0.95,chip-smoke,,,cut file dxf/chip-8.dxf,
 tray,cnc-mill,1,"Birch, solid",110 x 154 x 38,192,52.72,birch,,,step/tray.step,
 hood-top,cut,1,3 mm Cast acrylic,106 x 150,57,2.4,smoke,,,cut file dxf/hood-top.dxf,
 "hood-front, hood-back",cut,2,3 mm Cast acrylic,106 x 62,23,0.98,smoke,,,cut file dxf/hood-front.dxf,

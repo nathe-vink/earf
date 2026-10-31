@@ -8,16 +8,72 @@
  ],
  "materials": {
   "birch": {
-   "preset": "wood",
-   "color": "#D8C3A0"
+   "preset": "birch",
+   "color": "#E2CFA6",
+   "roughness": 0.5
   },
-  "chip": {
-   "preset": "acrylic",
-   "color": "#B23A28"
+  "chip-acid": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "#E6C51E",
+   "radius": 0.0095,
+   "roughness": 0.03
+  },
+  "chip-dust": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "#E0861E",
+   "radius": 0.0095,
+   "roughness": 0.03
+  },
+  "chip-ember": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "#D8283A",
+   "radius": 0.0095,
+   "roughness": 0.03
+  },
+  "chip-fog": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "#DCEDE6",
+   "radius": 0.0095,
+   "roughness": 0.03
+  },
+  "chip-haze": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "#7A4EC0",
+   "radius": 0.0095,
+   "roughness": 0.03
+  },
+  "chip-ice": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "#2E8CCE",
+   "radius": 0.0095,
+   "roughness": 0.03
+  },
+  "chip-poison": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "#86CC36",
+   "radius": 0.0095,
+   "roughness": 0.03
+  },
+  "chip-smoke": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "#8C8C8A",
+   "radius": 0.0095,
+   "roughness": 0.03
   },
   "smoke": {
-   "preset": "acrylic",
-   "color": "#6E6A66"
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "#8E8A86",
+   "radius": 0.012,
+   "roughness": 0.03
   }
  },
  "assign": [
@@ -26,8 +82,36 @@
    "material": "birch"
   },
   {
-   "match": "chip-1|chip-2|chip-3|chip-4|chip-5|chip-6|chip-7|chip-8",
-   "material": "chip"
+   "match": "chip-3",
+   "material": "chip-acid"
+  },
+  {
+   "match": "chip-2",
+   "material": "chip-dust"
+  },
+  {
+   "match": "chip-1",
+   "material": "chip-ember"
+  },
+  {
+   "match": "chip-7",
+   "material": "chip-fog"
+  },
+  {
+   "match": "chip-6",
+   "material": "chip-haze"
+  },
+  {
+   "match": "chip-5",
+   "material": "chip-ice"
+  },
+  {
+   "match": "chip-4",
+   "material": "chip-poison"
+  },
+  {
+   "match": "chip-8",
+   "material": "chip-smoke"
   },
   {
    "match": "hood-top|hood-front|hood-back|hood-left|hood-right",

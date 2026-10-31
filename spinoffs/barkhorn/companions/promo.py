@@ -54,6 +54,13 @@ FIXED = {
               'fluorescent sheet gathers light through its faces and gives it out at its polished cut edges, so every '
               'edge glows its colour; at night a UV ring in the base makes the edges glow in the dark. Sold at about '
               '$550.'),
+    # round 43: the Tint Library (a proposal)
+    'library': ('a sample kit of a design brand\'s eight acrylic colours, for designers and architects: eight chips of '
+                'tinted cast acrylic, each 80 x 50 mm and 9.5 thick, stepped (one end milled from the back down to 3.2 '
+                'thick so the tint shows at two depths), polished, standing on edge in a solid birch tray (100 x 144 x 28) '
+                'in the spectrum\'s order (red, orange, yellow, green, blue, violet, near-clear, grey), a five-sided hood '
+                'of 3 mm smoke-grey acrylic that covers them, and a printed card of the colours. The colours are today\'s '
+                'stock sheet, estimated. Sold or sent to specifiers at about $150 to $250.'),
 }
 PURPOSE = {
     'turntable': 'The record player\'s campaign hero: the record player is the subject, in a real living room, with the '
@@ -71,6 +78,9 @@ PURPOSE = {
              'studio, a hard sun through its coloured discs throwing their colours across the paper. It will run as the '
              'product\'s lead image and beside the brand\'s own globe mark, and has to say: the brand\'s globe, made '
              'real in coloured acrylic, with light passing through it.',
+    'library': 'The Tint Library\'s picture for the owner and then the shop: the eight chips standing in their birch '
+               'tray, the smoke hood lifted off beside it, the card in front, on a pale studio sweep. It has to say at a '
+               'glance: eight colours of real acrylic, each at two depths, in a case worth keeping on a desk.',
     'coin': 'EARFcoin\'s hero: one coin, the subject, on a bar\'s zinc counter in low light, the engraved globe '
             'catching the light, shallow focus. It will run as the coin\'s lead image on the website and in the bar\'s '
             'menu, and has to say at a glance: an acrylic coin with a globe on it, a token worth something.',
@@ -122,7 +132,7 @@ def stage(a):
     card = os.path.join(STAGE, f'card-{a.tag}.md')
     L = ['# Card', '', '## What this frame is for', '', a.purpose or PURPOSE[a.kind], '',
          '## Fixed (never prescribe a change to these)', '', 'The product: ' + FIXED[a.kind] + ' Their shape, size, '
-         'colour, materials and parts are fixed' + ('.' if a.kind in ('moon', 'crystal', 'coin', 'globe') else ', and so is which loudspeaker stands '
+         'colour, materials and parts are fixed' + ('.' if a.kind in ('moon', 'crystal', 'coin', 'globe', 'library') else ', and so is which loudspeaker stands '
          'beside it. Every piece in the frame shares one colour by design.'), '',
          '## May change', '', 'Everything about the set (the room, its walls, floor, window, furniture and props, any '
          'Poly Haven CC0 texture, model or sky), the light (sun, sky, lamps, the lamp\'s own output), the camera (place, '

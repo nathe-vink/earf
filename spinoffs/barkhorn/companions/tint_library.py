@@ -26,6 +26,12 @@ from kit import Part, Product, Sheet, Machined, Bought             # noqa: E402
 TINTS = [('Ember', 'TruCast 2423'), ('Dust', '2422 Amber'), ('Acid', '2208 Yellow'), ('Poison', 'TruCast 9093'),
          ('Ice', '2069 Light Blue'), ('Haze', '1020 Purple'), ('Fog', '3030 Glass Green'), ('Smoke', 'TruCast 2064')]
 
+# each stand-in's colour through 9.5 mm, for the renders: ESTIMATES. Ember and Smoke from r33-speaker-horn's
+# stock_colours.json (published LT held at the sheet's thickness); the other six picked by eye from R1's photo hues.
+# Replace each with the chip's own measurement when the off-cuts arrive.
+STOCK_DEEP = {'Ember': '#D8283A', 'Dust': '#E0861E', 'Acid': '#E6C51E', 'Poison': '#86CC36', 'Ice': '#2E8CCE',
+              'Haze': '#7A4EC0', 'Fog': '#DCEDE6', 'Smoke': '#8C8C8A'}
+
 P = dict(
     L=80.0, H=50.0, T=10.0,         # a chip: long, tall (standing), the sheet's thickness (nominal 10; stock 3/8" is 9.5)
     step_x=5.0, thin=3.2,           # the step: from x = 5 to the right end, milled down to 3.2 from the back
@@ -85,7 +91,7 @@ def hood():
 
 def parts(P_):
     cs = chips()
-    out = [Part(f'chip-{i + 1}', s, Sheet('cast-acrylic', 10, face='-y'), finish='chip', group='chips',
+    out = [Part(f'chip-{i + 1}', s, Sheet('cast-acrylic', 10, face='-y'), finish=f'chip-{name.lower()}', group='chips',
                 notes=[f'{name}: {code}, 3/8" (9.5) cast sheet; laser-cut 80 x 50, corners R4, edges diamond- or '
                        'flame-polished; the right 35 milled from the back down to 3.2 (a flat-bottomed pocket, its '
                        'floor polished); the front of the thick part engraved: the name, the code, and LT at 9.5 and '
@@ -111,9 +117,12 @@ def parts(P_):
 
 PRODUCT = Product('tint-library', 'The Tint Library', 'EARF\'s eight tints as stepped chips in a case (a proposal)',
                   params=P, parts=parts, count=1, drawing_prefix='ETL', origin=(0, 0, 0),
-                  materials={'chip': {'preset': 'acrylic', 'color': '#B23A28'},
-                             'birch': {'preset': 'wood', 'color': '#D8C3A0'},
-                             'smoke': {'preset': 'acrylic', 'color': '#6E6A66'}},
+                  materials={**{f'chip-{n.lower()}': {'preset': 'clear_resin', 'color': '#FFFFFF', 'deep': d,
+                                                       'radius': 0.0095, 'roughness': 0.03}
+                                for n, d in STOCK_DEEP.items()},
+                             'birch': {'preset': 'birch', 'color': '#E2CFA6', 'roughness': 0.5},
+                             'smoke': {'preset': 'clear_resin', 'color': '#FFFFFF', 'deep': '#8E8A86',
+                                       'radius': 0.012, 'roughness': 0.03}},
                   notes=['A proposal (round 43): idea (f), the Tint Library. For designers and architects specifying '
                          'EARF colours, as the press mailer, and as a product that needs no certification.',
                          'Each chip shows its tint at two depths: 9.5 (shell, ball, base) and 3.2 (skin). Its LT at both '

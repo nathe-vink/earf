@@ -2,7 +2,14 @@
 
 | item | make | qty | what | size | each, USD |
 |---|---|---|---|---|---|
-| chip-1, chip-2, chip-3, chip-4, chip-5, chip-6, chip-7, chip-8 | cut | 8 | 10 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 80 x 50 | 0.95 |
+| chip-1 | cut | 1 | 10 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 80 x 50 | 0.95 |
+| chip-2 | cut | 1 | 10 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 80 x 50 | 0.95 |
+| chip-3 | cut | 1 | 10 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 80 x 50 | 0.95 |
+| chip-4 | cut | 1 | 10 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 80 x 50 | 0.95 |
+| chip-5 | cut | 1 | 10 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 80 x 50 | 0.95 |
+| chip-6 | cut | 1 | 10 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 80 x 50 | 0.95 |
+| chip-7 | cut | 1 | 10 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 80 x 50 | 0.95 |
+| chip-8 | cut | 1 | 10 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 80 x 50 | 0.95 |
 | tray | cnc-mill | 1 | Birch, solid | 110 x 154 x 38 | 52.72 |
 | hood-top | cut | 1 | 3 mm Cast acrylic | 106 x 150 | 2.40 |
 | hood-front, hood-back | cut | 2 | 3 mm Cast acrylic | 106 x 62 | 0.98 |
