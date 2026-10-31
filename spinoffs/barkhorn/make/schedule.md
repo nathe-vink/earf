@@ -1,7 +1,7 @@
 # Tropos: a dated schedule to a first horn and an assembled pair (2026-10-31)
 
 The coordinator's targets (not commitments):
-- a San Francisco debut in FOG Design+Art week, **21 to 24 January 2027**;
+- a San Francisco debut on **Tuesday 19 January 2027**, before FOG Design+Art week (21 to 24 January);
 - prototypes photographed by **mid-February**;
 - Milan Design Week, **12 to 18 April**;
 - High End Vienna, **6 to 9 May**.
@@ -12,20 +12,20 @@ and two to Christmas and New Year.
 
 ## The answer
 
-| route for the horn | first horn | the pair assembled | 21 January | mid-February | April |
+| route for the horn | first horn | the pair assembled | 19 January | mid-February | April |
 |---|---|---|---|---|---|
-| **Laminated from stock 1/2 in sheet** (`laminated-horn.md`) | about **18 December** | about **8 to 13 January** | **yes, with about a week to spare**, if everything is ordered in the first week of November | yes | yes |
+| **Laminated from stock 1/2 in sheet** (`laminated-horn.md`) | about **18 December** | about **8 to 13 January** | **yes, with about four days to spare**, if everything is ordered in the first week of November (the float below) | yes | yes |
 | **Formed from stock 3/8 in sheet** (9.5 mm: 2423 and 2064 are stocked at 3/8 in, R1), after a passing quarter trial | about **22 January** | about **29 January to 5 February** | **no** | **yes**, if the trial passes first time | yes |
 | Formed, if the trial fails and the horn goes laminated | about 20 January | about 1 February | no | yes, just | yes |
 | **Formed or laminated in a custom deep lot** (a colour match and a pallet pour) | about mid-March | about late March | no | no | **only April**, with little margin |
 
-- **For 21 January, build the laminated horn.** It needs no tooling and no custom pour. It starts the day the stock
+- **For 19 January, build the laminated horn.** It needs no tooling and no custom pour. It starts the day the stock
   sheet arrives.
 - The formed horn cannot make January. Its plug, its trial and its full plug run in series, about eight weeks before
   the first shot.
 - The custom deep lot is an April item at the earliest. The first pair should be in stock colours either way.
 
-## The critical path (the laminated pair for 21 January)
+## The critical path (the laminated pair for 19 January)
 
 | week of | what | depends on | risk to the date |
 |---|---|---|---|
@@ -38,8 +38,32 @@ and two to Christmas and New Year.
 | 14 Dec | Anneal both. 5-axis the horn's air path; polish. First horn about **18 December**. | the 5-axis shop | 5-axis time before Christmas. Book it in November. |
 | 21 Dec to 1 Jan | Holidays. The second horn's machining, if the shop is open. | — | Two weeks. |
 | 4 Jan | The second horn. Cabinets back. Assemble: drivers, amps, the remote, wiring (`assembly.md`, about 7.4 hours a speaker). | parts | — |
-| 11 Jan | First-article inspection (`fai.md`). DSP voicing in HFD (2 to 3 days with a microphone). **Pair assembled about 8 to 13 January.** Photograph. | — | About **one week of float** before 21 January. |
-| 18 Jan | Ship to the venue. FOG week **21 to 24 January**. | — | Show the pair as a prototype (see below). |
+| 11 Jan | First-article inspection (`fai.md`). DSP voicing in HFD (2 to 3 days with a microphone). **Pair assembled about 8 to 13 January.** Photograph. | — | About **four working days of float** before the van on 18 January (below). |
+| 18 Jan | Van to the venue on Monday 18 January; set up. **Debut Tuesday 19 January**, then FOG week, 21 to 24 January. | — | Show the pair as a prototype (see below). |
+
+### The float, recounted for 19 January
+
+The plan above was counted to 21 January. With the debut on Tuesday 19 January, the pair must be in the van on Monday
+18 January, set up that day.
+- If the pair is assembled on 13 January (the late end), that leaves **Thursday 14 and Friday 15 January**, and the
+  weekend: about **two working days**.
+- If it is assembled on 8 January, about seven.
+- Call it **about four working days**, against "about a week" before.
+
+The first horn (about 18 December) does not move: it sits before the holidays, which absorb the slip. What tightens is
+January, when the second horn, the cabinets, assembly, inspection and voicing run back to back.
+
+**Move earlier, to buy the two days back:**
+1. **Order the sheet in week 1 (2 November), not after the chips (9 November).** This is the "Earlier" lever below.
+   2064 and 2074 are stock items at about $570 to $1,000 a sheet, so a wrong colour costs little against a week. It
+   brings everything after it forward by up to a week, and it is the biggest single gain.
+2. **Book the 5-axis time and the shop's January slots in the November purchase order**, not when the parts arrive.
+   This covers the second horn's machining through the holidays.
+3. **Voice the DSP on the first speaker as soon as it is assembled** (early January), and photograph then. Inspection
+   and voicing then overlap the second speaker's assembly rather than following it.
+4. **Hold the van and the set-up crew for Saturday 16 January**, with Monday 18 January as the fallback, not the plan.
+
+With 1 and 3, the float is back to about a week. Without them, any slip in January lands on the debut.
 
 ## The formed horn in parallel (for mid-February)
 
@@ -52,7 +76,7 @@ and two to Christmas and New Year.
 | 25 Jan | First formed horn. The second in the week after. Fit it to the laminated pair's cabinets, which are already done. |
 | early Feb | The formed pair, to photograph beside the laminated one by mid-February. The owner chooses the route from the real thing. |
 
-## Cash out by week: the laminated Smoke pair for 21 January
+## Cash out by week: the laminated Smoke pair for 19 January
 
 **Sources:**
 - The parts list's prices: `out-cloud/bom.md`, for 2.

@@ -167,9 +167,23 @@ joints, done by the same shop.
 
 The stepped horn weighs 5.7 kg against 4.1 for the formed horn, so the speaker gains 1.6 kg at its top.
 
-The tipping check (README, S7) already assumed 10 kg of horn on top. With the front and back feet 25 mm from the edges,
-IEC 62368-1's push at the top (about 118 N m) meets about 124 N m forward and 138 N m back. The laminated stepped horn,
-at 5.7 kg, is well inside that assumption, so the margin holds.
+**What lifts off with the horn.** The horn comes off its posts with its compression driver (3.6 kg) and the driver's
+adaptor (0.65 kg). The parts list (`out-cloud/bom.csv`) puts the formed horn's assembly at **8.3 kg** and the speaker at
+about **71 kg**, with small parts the list does not weigh. That makes about **62 to 63 kg with the horn lifted off**, as
+the README and the site say. The figures by route:
+
+| | the horn assembly (with driver and adaptor) | the speaker | with the horn lifted off |
+|---|---|---|---|
+| formed | 8.3 kg | about 71 kg | about 62 to 63 kg |
+| laminated, stepped | 9.9 kg | about 72.5 kg | about 62 to 63 kg |
+| laminated, smooth | 8.1 kg | about 71 kg | about 62 to 63 kg |
+
+**Tipping.** The tipping check (README, S7) assumed 10 kg of horn on top: round 35's resin horn with its driver and
+adaptor. With the front and back feet 25 mm from the edges, IEC 62368-1's push at the top (about 118 N m) meets about
+124 N m forward and 138 N m back.
+- The stepped laminated horn's assembly, at 9.9 kg, is at that assumption, not under it. The margin holds as computed.
+- The formed and smooth horns, at about 8 kg, add a little to it.
+- Confirm on the first pair with a push gauge at the top (`fai.md`).
 
 The four 20 mm stainless posts carry the extra 1.6 kg easily: about 14 N on each post. The pads' 12 mm inserts are
 unchanged.
@@ -191,10 +205,10 @@ The smooth horn, at 3.9 kg, is lighter than the formed one.
 **Plainly:**
 - **For the prototype pair, the laminated horn is cheaper, about a third of the formed horn's cost with its tooling.
   It is faster, by about five weeks to the first horn. It is as good acoustically: the same air path and more inert
-  walls.** The stepped one is heavier, 5.7 kg, within the stability margin. The smooth one is lighter than the formed.
+  walls.** The stepped one is heavier: 5.7 kg, or 9.9 kg with its driver, at the tipping check's 10 kg allowance. The smooth one is lighter than the formed.
 - **At volume, forming is cheaper** once its plug is paid for: about $500 a horn against about $1,100. The break-even
   is roughly 15 to 30 pairs. If the owner prefers the strata, the cost at 100 pairs is about $60,000 to $160,000 more
-  across the run (estimate), or about $600 to $800 a pair on a $20,000 pair.
+  across the run (estimate), or about $600 to $1,600 a pair on a $20,000 pair.
 - **The look is a choice the owner makes.** The formed horn is one seamless shell, glossy, pale at its thin corners
   and deep at the rim. The stepped horn is strata, every layer of the Earth in one object. The smooth horn is a deep
   solid lens with fine rings.

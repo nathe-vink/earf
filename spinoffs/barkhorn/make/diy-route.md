@@ -43,7 +43,7 @@ the kit and oven stay for every later pair.
 | about 15 Jan | **Both horns**, if everything runs first time and the 5-axis shop turns each in a week. | — |
 
 **What it means:**
-- The do-it-yourself route reaches 21 January only just: about 3 to 5 weeks a horn, and one oven holds one horn. It
+- The do-it-yourself route misses 19 January as likely as it makes it: about 3 to 5 weeks a horn, and one oven holds one horn. It
   is a fallback, not the plan.
 - It needs **about three weeks of the owner's own time** between 2 November and mid-December, almost all of it bonding.
 - It is best started anyway in its cheap first steps. These cost about $450 and make any shop's job safer:

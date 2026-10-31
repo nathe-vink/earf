@@ -13,7 +13,7 @@ prototype pair on the first attempt.
 | `diy-route.md` | The horn made ourselves if no shop can: Ace Makerspace's laser, bonding and annealing in-house; cost, schedule, and the owner's own time. |
 | `stock-pair.md` | The first pair in stock sheet: Smoke from stock 3/4 in 2064, the Ember horn from stock 2423, the Ember cabinet from a Chemcast mill run; what 19 mm changes. |
 | `stock_tints.py` | Stock sheet's colour per millimetre from published light transmission, for the renders (`stock_colours.json`). |
-| `schedule.md` | The dated schedule to a first horn and an assembled pair, against 21 January, mid-February and April; the critical path. |
+| `schedule.md` | The dated schedule to a first horn and an assembled pair, against the 19 January debut, mid-February and April; the critical path. |
 | `compliance.md` | The remote's coin cell (swap to AAA) and the amplifier compartment as the fire enclosure (two gaps). |
 | `fai.md` | The first-article inspection: dimensions, finish and colour, mechanical, electrical and acoustic checks, with limits. |
 

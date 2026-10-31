@@ -12,7 +12,7 @@ colours come from `make/stock_tints.py` (estimates, see below). The picture is
 | **cabinet** (20 mm in the CAD) | **TruCast 2064 Gray, 3/4 in (19 mm)**: AC Plastics, $1,003.20 a sheet, **3 in stock**. A pair needs about 5.2 m² of 20 mm, so two sheets, nested; buy all three. | **Not from stock.** 2423 is stocked only to 1/2 in, and stock 1/2 in 2423 is far too deep for the cabinet (below). Chemcast 2423 at 20 mm is a standard-colour mill run: no colour fee, a minimum of about 8 to 10 sheets of 48 x 96, enough for 4 or 5 pairs. |
 | **horn** | **Laminated, TruCast 2074 Dark Gray 1/2 in** (`laminated-horn.md`), a lighter smoke than the site's | **Laminated, TruCast 2423 Red 1/2 in** (19 in stock): within a few percent of the site's deep horn |
 | look against the site | cabinet within 3 % of the site's Smoke at 20 mm; horn lighter | cabinet (Chemcast run) and horn both within a few percent of the site's |
-| for 21 January | **yes** (`schedule.md`) | the horn yes; the cabinet only if the mill run ships by mid-December (to confirm with Plastiglas or a distributor) |
+| for 19 January | **yes** (`schedule.md`) | the horn yes; the cabinet only if the mill run ships by mid-December (to confirm with Plastiglas or a distributor) |
 
 **Recommendation: the first pair in Smoke.** It is the only colour whose cabinet is a stock sheet at full thickness
 today, and it matches the site's Smoke cabinet. Build an Ember horn in stock 2423 alongside it, to show the Ember horn at
