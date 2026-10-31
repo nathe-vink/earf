@@ -324,7 +324,7 @@ def shot_lithos(sc):
     ring('opal', 0.037, 0.034, 0.02, top - 0.02, basic('mask', '#EDEAE4', 0.5))   # the filament's opal tube, masked between the guides
     for i, gz in enumerate(guides):
         ring(f'slot{i}', 0.0372, 0.0368, gz + 0.0006, 0.0044, emitter(f'slot{i}', '#FFB46E', 220))
-    ring('uplight', 0.03, 0, top - 0.004, 0.002, emitter('up', '#FFD2A0', 80))
+    ring('uplight', 0.03, 0, top - 0.004, 0.002, emitter('up', '#FFD2A0', 40))   # r2 c6: halved
     pages = basic('pages', '#EDE6D6', 0.85, noise=0.02)
     books = [(0.24, 0.17, 0.035, '#3E4A5A'), (0.22, 0.16, 0.03, '#C8BBA4'), (0.2, 0.15, 0.028, '#7A2E25'), (0.19, 0.13, 0.025, '#2E2B28')]
     for i, (w, d, h, c) in enumerate(books):   # hardbacks: two boards and a spine in cloth, the page block set back 3 mm
@@ -335,11 +335,12 @@ def shot_lithos(sc):
         for o in parts:
             o.location = (0.34, -0.12, 0); o.rotation_euler = (0, 0, 0.3 + 0.08 * i)
     sc.render.resolution_x, sc.render.resolution_y = 1200, 1800
-    area('window', (-3.2, 0.55, 1.55), (0.0, 0.0, 0.5), 0.6, 900, '#FFF1E2', size_y=0.9)   # critic r1 c1: smaller, harder, behind-left
-    area('fill', (0.6, -2.4, 1.0), (0, 0, 0.6), 1.2, 15, '#DDE6F2')                        # c4: down, so the wall sits at its tone
-    back = area('back', (0.12, 0.7, 0.75), (0, 0, 0.75), 0.5, 120, '#FFF0E0', size_y=1.5)  # c5: through the bands toward the lens
+    area('window', (-1.77, -0.31, 1.0), (0.0, 0.0, 0.6), 1.0, 450, '#FFF1E2', size_y=1.6)  # r2 c1: camera-left, 70 deg off the lens axis, raking
+    area('fill', (0.6, -2.4, 1.0), (0, 0, 0.6), 1.2, 5, '#DDE6F2')                           # r2 c1, c4
+    back = area('back', (0.12, 0.7, 1.05), (0, 0, 1.0), 0.5, 40, '#FFF0E0', size_y=1.5)     # r2 c3: weaker, raised, off the floor
     back.visible_glossy = False
-    camera((-0.30, -2.10, 0.80), (0.12, 0.0, 0.62), lens=50, fstop=4.0, focus=2.15)          # c3, c7: the corner behind-right
+    sc.view_settings.exposure = -0.5                                                            # r2 c2
+    camera((-0.45, -2.60, 0.70), (0.10, 0.0, 0.62), lens=65, fstop=2.8, focus=2.62)            # r2 c7
 
 def shot_ionos(sc):
     sc.world.node_tree.nodes['Background'].inputs['Color'].default_value = lin('#D9D3CA')
