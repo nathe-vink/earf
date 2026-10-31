@@ -86,3 +86,8 @@ while lanes run. Deck: https://claude.ai/artifact/3sihYaT4ckNTF6WE7SWR7x (v26). 
   first eight speakers' tints as strata in Core Sample), Firn (lens voids at every bond line of Moho, Ice), Groove
   (Session 00's waveform as a spiral air channel in Moho), Contour (Shasta's 2,000 m line as an air channel in Relief),
   Iron (an etched Gibeon slice at the center of Core). All clear cast with 3 mm tinted strata. Finals: Firn, Iron, Stamper.
+
+## Covers-off room landed (22:30 UTC, speaker 754e16a9)
+- Landscape renders/2026-10-31/barkhorn/tropos-campaign/tropos-room-golden-hour-off.png + portrait ...-off-portrait.png.
+- Deck v27: home slide swapped (/_blob/009106e7...). Site lane asked to swap the At home band (both frames).
+- Still waiting: the lamps lane's cordless Core set -> site + deck light.html (Core image /_blob/e75b6502... has a cord).
