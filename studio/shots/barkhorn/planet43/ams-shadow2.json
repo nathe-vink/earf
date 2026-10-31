@@ -12,10 +12,10 @@
   ],
   "target": [
    0.4,
-   -2.0,
-   0.2
+   -1.0,
+   1.0
   ],
-  "lens_mm": 28,
+  "lens_mm": 24,
   "level": true,
   "fstop": 5.6,
   "focus": [
@@ -37,7 +37,8 @@
     "lit": 0.35,
     "window_glow": 0.08,
     "old_houses": false,
-    "old_street": false
+    "old_street": false,
+    "klinker": true
    },
    {
     "kind": "kit",
@@ -86,18 +87,6 @@
     ],
     "figures": [
      [
-      -5.2,
-      -2.2,
-      -20.0,
-      1.72
-     ],
-     [
-      -6.0,
-      -5.6,
-      60.0,
-      1.62
-     ],
-     [
       -6.0,
       20.6,
       0.0,
@@ -120,7 +109,9 @@
      0.0,
      -3.2
     ],
-    "ring_r": 1.7
+    "ring_r": 2.4,
+    "post_h": 0.5,
+    "rope_z": 0.45
    },
    {
     "kind": "kit",
@@ -178,7 +169,7 @@
   "zenith": "#0A1430",
   "horizon": "#22304A",
   "ground": "#08080A",
-  "strength": 0.12
+  "strength": 0.08
  },
  "lights": {
   "hard": {
@@ -189,15 +180,15 @@
     8.5
    ],
    "target": [
-    0.3,
-    -2.0,
+    0.6,
+    -1.6,
     0.0
    ],
-   "power_w": 650.0,
-   "cone_deg": 16.0,
+   "power_w": 900.0,
+   "cone_deg": 14.0,
    "blend": 0.2,
    "radius_m": 0.02,
-   "color": 4500,
+   "color": 5000,
    "camera": false
   },
   "lamp-a": {
@@ -208,7 +199,7 @@
     3.9
    ],
    "power_w": 140.0,
-   "color": 2200,
+   "color": 2700,
    "radius_m": 0.12
   },
   "lamp-b": {
@@ -219,7 +210,7 @@
     3.9
    ],
    "power_w": 140.0,
-   "color": 2200,
+   "color": 2700,
    "radius_m": 0.12
   },
   "far": {
@@ -265,7 +256,7 @@
   "view": "AgX",
   "look": "AgX - Medium High Contrast",
   "exposure": 3.6,
-  "white_balance_k": 4200,
+  "white_balance_k": 3500,
   "white_balance_tint": -2.0
  },
  "materials": {

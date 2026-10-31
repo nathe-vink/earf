@@ -53,12 +53,12 @@ def settings(sh, scale):
         f"{g.get('rim')}; the plinth {g.get('base_h')} m high",
         f"- the hard spot: {hard.get('power_w')} W, cone {hard.get('cone_deg')} deg, {hard.get('color')} K, from "
         f"{hard.get('position')} at {hard.get('target')}",
-        f"- the street lamps: 2 x point, {L.get('lamp-a', {}).get('power_w')} W, 2200 K; the far quay's fill "
+        f"- the street lamps: 2 x point, {L.get('lamp-a', {}).get('power_w')} W, {L.get('lamp-a', {}).get('color')} K; the far quay's fill "
         f"{L.get('far', {}).get('irradiance')} W/m2 at 2400 K",
         f"- the houses across: {canal.get('lit')} of the windows lit, their glow {canal.get('window_glow')}",
         (f"- the street: {len(st['bollards'])} cast-iron bollards along the kerb, a bicycle, a low barrier ring "
-         f"(r {st['ring_r']} m, rope at 0.72 m) round the plinth, {len(st['figures'])} figures (two on this quay, the "
-         f"rest across the water)\n" if st else '') +
+         f"(r {st['ring_r']} m, rope at {st.get('rope_z', 0.72)} m) round the plinth, {len(st['figures'])} figures across the water"
+         f"\n" if st else '') +
         f"- sky: a night gradient at strength {sh['sky'].get('strength')}; haze {hz.get('density', 0)} per metre",
         f"- render: {json.dumps(sh['render'])}"])
 

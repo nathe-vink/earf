@@ -44,8 +44,9 @@ def canal(bpy, name, p, kit):
     Wc = p.get('width', 18.0); L0, L1 = -40.0, 40.0; drop = 1.1
     # the near quay: brick paving to the kerb, a stone kerb, the quay wall down to the water
     pv = Mesh('ams-paving'); pv.box(L0, -14.0, -0.2, L1, -0.35, 0.0)
-    objs.append(pv.object(bpy, R._pbr(bpy, kit, p.get('paving_tex', 'concrete_pavement'), res='2k',
-                                     tint=p.get('paving_tint', '#4E4640'), tint_mix=0.45)))
+    objs.append(pv.object(bpy, _klinker(bpy) if p.get('klinker') else
+                          R._pbr(bpy, kit, p.get('paving_tex', 'concrete_pavement'), res='2k',
+                                 tint=p.get('paving_tint', '#4E4640'), tint_mix=0.45)))
     kb = Mesh('ams-kerb'); kb.box(L0, -0.35, -0.2, L1, 0.0, 0.03)
     kb.box(L0, -0.30, -drop - 1.0, L1, 0.0, -0.2)                         # the quay wall's face
     objs.append(kb.object(bpy, principled(bpy, 'ams-stone', '#5A5650', rough=0.75, bump=(0.01, 0.3, 0.001))))
@@ -147,6 +148,33 @@ def _brick_mat(bpy, name, c1, c2):
     return m
 
 
+def _klinker(bpy):
+    """Amsterdam klinker paving (look 2, round 1 critics: "a smooth repeated tile"): fired brick on edge, 20 x 10 cm
+    from above, stretcher bond, per-brick tone, dirty joints, a damp sheen varied by a broad noise (roughness 0.3-0.7)."""
+    name = 'ams-klinker'
+    if name in R._M:
+        return R._M[name]
+    m = principled(bpy, name, '#4C3A32', rough=0.55)
+    nt = m.node_tree; b = D._bsdf(m)
+    tc = nt.nodes.new('ShaderNodeTexCoord'); bk = nt.nodes.new('ShaderNodeTexBrick')
+    bk.inputs['Color1'].default_value = R.lin('#54403A'); bk.inputs['Color2'].default_value = R.lin('#3E3430')
+    bk.inputs['Mortar'].default_value = R.lin('#1E1B19'); bk.inputs['Scale'].default_value = 1.0
+    bk.inputs['Mortar Size'].default_value = 0.006; bk.inputs['Brick Width'].default_value = 0.20
+    bk.inputs['Row Height'].default_value = 0.10; bk.inputs['Bias'].default_value = 0.0
+    nt.links.new(tc.outputs['Object'], bk.inputs['Vector'])
+    nz = nt.nodes.new('ShaderNodeTexNoise'); nz.inputs['Scale'].default_value = 0.35; nz.inputs['Detail'].default_value = 6.0
+    nt.links.new(tc.outputs['Object'], nz.inputs['Vector'])
+    mx = nt.nodes.new('ShaderNodeMix'); mx.data_type = 'RGBA'; mx.inputs['Factor'].default_value = 0.25
+    nt.links.new(bk.outputs['Color'], mx.inputs[6]); nt.links.new(nz.outputs['Color'], mx.inputs[7])
+    nt.links.new(mx.outputs[2], b.inputs['Base Color'])
+    cr = nt.nodes.new('ShaderNodeMapRange'); cr.inputs['To Min'].default_value = 0.28; cr.inputs['To Max'].default_value = 0.72
+    nt.links.new(nz.outputs['Fac'], cr.inputs['Value']); nt.links.new(cr.outputs['Result'], b.inputs['Roughness'])
+    bp = nt.nodes.new('ShaderNodeBump'); bp.inputs['Strength'].default_value = 0.6; bp.inputs['Distance'].default_value = 0.004
+    nt.links.new(bk.outputs['Fac'], bp.inputs['Height']); nt.links.new(bp.outputs['Normal'], b.inputs['Normal'])
+    R._M[name] = m
+    return m
+
+
 def houses(bpy, name, p, kit):
     """A row of narrow canal houses on the far quay: varied widths and heights, step, neck and cornice gables with
     white copings, tall sash windows with white frames and glazing bars, rooms lit at varied warmth and level (a
@@ -157,6 +185,7 @@ def houses(bpy, name, p, kit):
     bricks = [('#4A2A22', '#3E231C'), ('#2E211C', '#261B17'), ('#5A3428', '#4A2B21'), ('#3A2E28', '#30251F')]
     meshes = {k: Mesh(f'ams-h-brick{k}') for k in range(len(bricks))}
     trim, dark, lits, curt = Mesh('ams-h-trim'), Mesh('ams-h-dark'), [Mesh(f'ams-h-lit{k}') for k in range(4)], Mesh('ams-h-curt')
+    dimr = [Mesh(f'ams-h-room{k}') for k in range(4)]
     x = -40.0
     while x < 40.0:
         w = rnd.choice([4.2, 4.8, 5.4, 6.0, 7.2]); fl = rnd.choice([3, 4, 4, 5]); h = 0.6 + fl * 3.0
@@ -171,7 +200,7 @@ def houses(bpy, name, p, kit):
                 trim.box(x + (w - gw) / 2 - 0.04, yf - 0.04, z0 + gh, x + (w + gw) / 2 + 0.04, yf + 0.5, z0 + gh + 0.08)
             top = h + 4 * gh
         elif kind == 'neck':
-            nw = w * 0.42; nh = 3.2
+            nw = w * 0.56; nh = 3.0
             bm_.box(x + (w - nw) / 2, yf, h, x + (w + nw) / 2, yf + 0.5, h + nh)
             for s in (-1, 1):                                          # the shoulders, as white scrolls (blocks)
                 cx = x + w / 2 + s * (nw / 2 + w * 0.13)
@@ -193,7 +222,7 @@ def houses(bpy, name, p, kit):
                 if r < p.get('lit', 0.3):
                     k = rnd.randrange(4)
                     lits[k].box(wx0, yf - 0.065, z0 + wh * 0.62, wx1, yf - 0.062, z0 + wh)          # the ceiling band
-                    lits[(k + 1) % 4].box(wx0, yf - 0.065, z0, wx1, yf - 0.062, z0 + wh * 0.62)     # the room
+                    dimr[k].box(wx0, yf - 0.065, z0, wx1, yf - 0.062, z0 + wh * 0.62)            # the room, same hue, dimmer
                     if rnd.random() < 0.45:
                         cw = (wx1 - wx0) * rnd.uniform(0.2, 0.45)
                         curt.box(wx0, yf - 0.075, z0, wx0 + cw, yf - 0.07, z0 + wh)
@@ -214,6 +243,7 @@ def houses(bpy, name, p, kit):
     g = p.get('window_glow', 0.08)
     for k, (col, mul) in enumerate((('#FFB070', 1.2), ('#FF9440', 0.6), ('#FFC890', 0.35), ('#FFA860', 0.18))):
         objs.append(lits[k].object(bpy, emitter(bpy, f'ams-h-lit{k}', col, g * mul)))
+        objs.append(dimr[k].object(bpy, emitter(bpy, f'ams-h-room{k}', col, g * mul * 0.45)))
     return objs
 
 
@@ -234,8 +264,8 @@ def street(bpy, name, p, kit):
     rg = Mesh('ams-ring'); steel = principled(bpy, 'ams-ring-steel', '#1C1A18', rough=0.4, metal=0.85)
     for k in range(8):
         a = k * math.pi / 4
-        _cyl(rg.bm, cx + rr * math.cos(a), cy + rr * math.sin(a), 0.0, 0.025, 0.85, seg=12)
-    LK._arc(rg.bm, cx, cy, rr - 0.008, rr + 0.008, 0.0, 2 * math.pi, 0.72, 0.736, seg=96)
+        _cyl(rg.bm, cx + rr * math.cos(a), cy + rr * math.sin(a), 0.0, 0.025, p.get('post_h', 0.85), seg=12)
+    LK._arc(rg.bm, cx, cy, rr - 0.008, rr + 0.008, 0.0, 2 * math.pi, p.get('rope_z', 0.72), p.get('rope_z', 0.72) + 0.016, seg=96)
     objs.append(rg.object(bpy, steel, smooth=True))
     # a bicycle: two wheels, a frame, leaning on a bollard
     if p.get('bike'):

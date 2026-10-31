@@ -32,16 +32,21 @@ VIEWS = {
     # look 2, the set pass (the coordinator, 31 Oct, from the p3 critics): modelled canal houses with varied lit rooms,
     # a night-blue grade, a cooler, tighter spot so the shadow's six colours separate, Amsterdammertjes, a bicycle and a
     # few figures at the barrier ring TECH.md assumes; the shadow camera higher so the whole shadow clears the plinth
-    'quay2': dict(camera={'position': [5.5, -7.0, 1.60], 'target': [-1.0, 0.5, 1.6], 'lens_mm': 32, 'level': True,
+    # s2 (s1 judged quay 4.5/4.0, shadow 4.5/4.5, converged: peg figures on this quay; the ring cages the globe and the
+    # shadow; a white stage pool against an orange street; a smooth tile quay; the houses cropped or read as boxes with
+    # chimneys and colour-block panes; a purple lamp halo): near figures removed; the ring low and wide (rope at 0.45 m,
+    # r 2.4); klinker paving; WB 3500, lamps 2700 K, spot 5000 K 900 W 14 deg aimed toward the water; sky 0.08; neck
+    # gables wider; one hue per lit room; the cameras opened up to show the gables
+    'quay2': dict(camera={'position': [5.5, -7.0, 1.60], 'target': [-1.0, 0.5, 2.5], 'lens_mm': 30, 'level': True,
                           'fstop': 4.0, 'focus': [0.0, -3.2, 1.5]}, exposure=3.6, look=2),
-    'shadow2': dict(camera={'position': [4.5, -8.0, 4.2], 'target': [0.4, -2.0, 0.2], 'lens_mm': 28, 'level': True,
+    'shadow2': dict(camera={'position': [4.5, -8.0, 4.2], 'target': [0.4, -1.0, 1.0], 'lens_mm': 24, 'level': True,
                             'fstop': 5.6, 'focus': [0.2, -2.4, 0.4]}, exposure=3.6, look=2),
 }
 STREET = {'bollards': [(-6.6, -0.6), (-3.4, -0.6), (3.9, -0.6), (7.1, -0.6), (10.3, -0.6), (-9.8, -0.6)],
           'bike': (-3.4, -0.95, 0.0),
-          'figures': [(-5.2, -2.2, -20.0, 1.72), (-6.0, -5.6, 60.0, 1.62), (-6.0, 20.6, 0.0, 1.75),
+          'figures': [(-6.0, 20.6, 0.0, 1.75),
                       (3.8, 20.9, 180.0, 1.70), (9.2, 21.1, 10.0, 1.66)],
-          'ring_at': G, 'ring_r': 1.7}
+          'ring_at': G, 'ring_r': 2.4, 'post_h': 0.5, 'rope_z': 0.45}
 
 
 def spot(pos, tgt, w, cone, k=3000, blend=0.15, radius=0.02):
@@ -64,7 +69,7 @@ def shot(view):
          'rotate': [0, 0, 90.0]},
     ]}
     if v.get('look') == 2:
-        s['set']['props'][0].update(old_houses=False, old_street=False)
+        s['set']['props'][0].update(old_houses=False, old_street=False, klinker=True)
         s['set']['props'][1:1] = [
             {'kind': 'kit', 'shape': 'ext', 'path': KIT, 'fn': 'houses', 'width': 18.0, 'lit': v.get('lit', 0.32),
              'window_glow': v.get('glow', 0.10)},
@@ -80,16 +85,18 @@ def shot(view):
                 'irradiance': 0.4, 'color': 2400, 'camera': False},
     }
     if v.get('look') == 2:
-        s['lights']['hard'] = spot([-2.0, -9.0, 8.5], [0.3, -2.0, 0.0], v.get('hard_w', 650.0), v.get('cone', 16.0),
-                                   k=v.get('hard_k', 4500), blend=0.2)
+        s['lights']['hard'] = spot([-2.0, -9.0, 8.5], [0.6, -1.6, 0.0], v.get('hard_w', 900.0), v.get('cone', 14.0),
+                                   k=v.get('hard_k', 5000), blend=0.2)
+        for l in ('lamp-a', 'lamp-b'):
+            s['lights'][l]['color'] = 2700
     s['sky'] = {'kind': 'gradient', 'zenith': '#040508', 'horizon': '#2A2620', 'ground': '#08080A',
                 'strength': v.get('sky', 0.05)}
     s['haze'] = {'box_m': [-20.0, -14.0, -1.1, 20.0, 22.0, 8.0], 'density': v.get('haze', 0.004), 'anisotropy': 0.4,
                  'color': '#FFFFFF'}
     if v.get('look') == 2:
-        s['sky'].update(zenith='#0A1430', horizon='#22304A', strength=v.get('sky', 0.12))
+        s['sky'].update(zenith='#0A1430', horizon='#22304A', strength=v.get('sky', 0.08))
     s['render']['exposure'] = v.get('exposure', 3.6)
-    s['render']['white_balance_k'] = v.get('wb', 4200 if v.get('look') == 2 else 3400)
+    s['render']['white_balance_k'] = v.get('wb', 3500 if v.get('look') == 2 else 3400)
     return s
 
 
