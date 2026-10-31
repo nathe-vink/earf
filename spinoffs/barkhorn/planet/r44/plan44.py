@@ -84,32 +84,39 @@ INNER['h'] = 3.40                # floated floor (flush) to the lid's soffit
 FLOAT = dict(depth=0.175, f0_hz=7.0)                              # the slab cut 175 mm under the box; a 100 mm concrete
                                                                   # slab on spring jack-up mounts at about 7 Hz
 LID = 0.40                       # CLT 200 + 2 x 15.9 gypsum + 100 absorber + oak slats, spanning wall to wall
-# the sound lock: a small oak porch on the bar's side of the box, outside the seal, so the room inside stays a whole
-# rectangle. Door 1 from the route into the porch (swings in); door 2, the box's own acoustic door set through both
-# leaves, from the porch into the room (swings in). The porch holds a 60 in turning circle (ADA 404.2.6, 304.3).
-LOCK = dict(x0=LANT['x0'] - 1.60, x1=LANT['x0'], y0=ROUTE_Y[1], y1=ROUTE_Y[1] + 2.20)
-LOCK_DOOR1 = dict(x=LOCK['x0'] + 0.25, y=LOCK['y0'])              # hinge; the leaf runs +x, in the porch's route face
-LOCK_DOOR2 = dict(x=LANT['x0'], y=LOCK['y0'] + 0.45)              # hinge; the leaf runs +y, in the box's front
+# the sound lock (look 2, the picture pass, 31 Oct): a small oak porch on the bar's side of the box, outside the seal, its
+# two door pairs in line, so that between sessions, with both pairs open, the bar sees straight into the lantern to the
+# Tropos pair at its far end. Door 1, a pair of 0.80 m leaves in the porch's front, swings out toward the bar; door 2,
+# the box's own gasketed pair through both leaves, swings into the room. 48 in clear between them (ADA 404.2.6: no leaf
+# swings into the space). The trade (DESIGN.md): a pair seals a little less well than a single leaf (an astragal).
+LOCK = dict(x0=LANT['x0'] - 1.35, x1=LANT['x0'], y0=3.05, y1=5.10)
+DOOR_PAIR = 1.60                                                   # two 0.80 m leaves
+LOCK_DOOR1 = dict(x=LOCK['x0'], y0=round((LOCK['y0'] + LOCK['y1']) / 2 - DOOR_PAIR / 2, 3))
+LOCK_DOOR1['y1'] = round(LOCK_DOOR1['y0'] + DOOR_PAIR, 3)
+LOCK_DOOR2 = dict(x=LANT['x0'], y0=LOCK_DOOR1['y0'], y1=LOCK_DOOR1['y1'])
 LOCK_PORCH = True
-SELECTOR = dict(x0=INNER['x0'], x1=INNER['x0'] + 0.80, y0=INNER['y1'] - 2.20, y1=INNER['y1'], h=0.95)
 TROPOS = dict(w=0.560, d=0.428, h=1.293, plinth=0.40)
 SPREAD = 2.80                    # between the speakers' centres
 _yc = (INNER['y0'] + INNER['y1']) / 2
-STACK_X = INNER['x0'] + 2.20
+# the pair at the far end, facing the door; the bass trap behind them; the listeners toward the porch
+TRAP = dict(x0=INNER['x1'] - 0.60, x1=INNER['x1'], h=INNER['h'])  # the slotted oak bass-trap wall: 600 mm deep
+STACK_X = round(TRAP['x0'] - 1.10, 3)
 STACKS = [(STACK_X, round(_yc - SPREAD / 2, 3)), (STACK_X, round(_yc + SPREAD / 2, 3))]
-MOTHER = dict(x=round(INNER['x0'] + 1.30, 3), y=round(_yc, 3), d=1.25, plinth_h=0.40, plinth_d=0.80)
-SWEET = (round(STACK_X + SPREAD * math.sqrt(3) / 2, 2), round(_yc, 3))   # the equilateral seat
-TRAP = dict(x0=INNER['x1'] - 0.90, x1=INNER['x1'], h=INNER['h'])  # the slotted oak bass-trap wall: 900 mm deep
-BENCH = dict(x0=TRAP['x0'] - 0.55, x1=TRAP['x0'], z=0.45)        # a bench built into the trap's face
+MOTHER = dict(x=round(STACK_X + 0.45, 3), y=round(_yc, 3), d=1.25, plinth_h=0.40, plinth_d=0.80)
+SWEET = (round(STACK_X - SPREAD * math.sqrt(3) / 2, 2), round(_yc, 3))   # the equilateral seat
+SELECTOR = dict(x0=STACK_X - 1.55, x1=STACK_X - 0.55, y0=INNER['y1'] - 0.60, y1=INNER['y1'], h=0.95)   # along the side
+BENCH = dict(x0=INNER['x0'], x1=INNER['x0'] + 0.55, z=0.45,                                        # along the front,
+             gap=(LOCK_DOOR2['y0'] - 0.10, LOCK_DOOR2['y1'] + 0.10))                               # either side of the doors
 # (no raised platform: the room is level throughout, so every seat is on the accessible route)
 # the seats: the wheelchair space and its companion on the sweet spot (row 1, floor level); the rest loose
 ROW1 = [(SWEET[0], SWEET[1] - 0.55, 'wheelchair'), (SWEET[0], SWEET[1] + 0.40, 'companion'),
-        (SWEET[0] + 0.15, SWEET[1] - 1.55, 'chair'), (SWEET[0] + 0.15, SWEET[1] + 1.40, 'chair')]
-ROW2 = [(SWEET[0] + 0.85, y, 'chair') for y in (INNER['y0'] + 0.70, _yc - 1.20, _yc - 0.40, _yc + 0.40, _yc + 1.20,
-                                                       INNER['y1'] - 0.70)]
-ROW3 = [(BENCH['x0'] + 0.30, y, 'bench') for y in [round(INNER['y0'] + 0.55 + 0.61 * i, 3) for i in range(8)]]
+        (SWEET[0] - 0.15, SWEET[1] - 1.55, 'chair'), (SWEET[0] - 0.15, SWEET[1] + 1.40, 'chair'),
+        (SWEET[0] - 0.30, INNER['y0'] + 0.45, 'chair'), (SWEET[0] - 0.30, INNER['y1'] - 0.45, 'chair')]
+ROW2 = [(SWEET[0] - 0.95, y, 'chair') for y in (INNER['y0'] + 0.70, _yc - 1.20, _yc + 1.20, INNER['y1'] - 0.70)]
+ROW3 = [(BENCH['x1'] - 0.25, y, 'bench') for y in [round(INNER['y0'] + 0.35 + 0.55 * i, 3) for i in range(10)]
+        if not (BENCH['gap'][0] - 0.2 < y < BENCH['gap'][1] + 0.2)]
 SEATS = ROW1 + ROW2 + ROW3
-SIDE_SEATS = [(SWEET[0] - 1.05, INNER['y0'] + 0.45, 'chair'), (SWEET[0] - 1.05, INNER['y1'] - 0.45, 'chair')]
+SIDE_SEATS = [(SWEET[0] + 0.95, INNER['y0'] + 0.45, 'chair'), (SWEET[0] + 0.95, INNER['y1'] - 1.10, 'chair')]
 SEATS += SIDE_SEATS
 
 # --- 4. the rear (x 20.90 to 24.38): a lobby off the route, three all-gender rooms, the rear exit -----------------

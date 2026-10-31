@@ -54,7 +54,7 @@ def acrylic(bpy, name, Ti=(0.995, 0.995, 0.995), d_ref=0.003, rough=0.015):
 # the band's tint: the house's own Smoke, a pale warm amber cast sheet; internal transmittance per 3 mm (est., to be
 # measured on the chosen sheet): red 0.965, green 0.92, blue 0.84. Seen edge-on through a fin's 60 mm depth that is
 # about 0.49 / 0.19 / 0.03: amber (a darker tint goes black-red over that path, the p1 look)
-SMOKE_TI = (0.965, 0.92, 0.84)
+SMOKE_TI = (0.985, 0.965, 0.93)   # look 2: lighter, so the band reads amber under AgX (p4: salmon)
 
 
 def terrazzo(bpy, name, ground='#3E3A36', chips=('#A39C90', '#706B64', '#38342F', '#8C8274'), accent=(),
@@ -150,11 +150,14 @@ def shell(bpy, p, objs):
     # linear slot diffusers in the ceiling over the route and the bar, and the downlights' black trims
     sd = Mesh('h44-slots')
     sd.box(1.0, 0.70, H - 0.002, P.LANT['x0'] - 1.8, 0.74, H); sd.box(P.SHOP_X1 + 0.5, W - 2.10, H - 0.002, P.LANT['x0'] - 0.6, W - 2.06, H)
-    for x in [1.6 + 1.45 * i for i in range(8)]:
-        _cyl(sd.bm, x, 3.4, H - 0.004, 0.045, 0.004, seg=20)
-    for x in P.STOOLS + [7.6, 8.4]:
-        _cyl(sd.bm, x, P.COUNTER['y0'] + 0.25, H - 0.004, 0.04, 0.004, seg=20)
-    objs.append(sd.object(bpy, principled(bpy, 'h44-trim-black', '#0C0C0C', rough=0.6)))
+    lens = Mesh('h44-lenses')
+    spots = [(1.6 + 1.45 * i, 3.4) for i in range(8)] + [(x, P.COUNTER['y0'] + 0.25) for x in P.STOOLS + [7.6, 8.4]] + \
+            [(x, P.BANQ['y1'] + 0.40) for x in P.BANQ_TABLES]
+    for (x, y) in spots:                                              # 90 mm black trims, a recessed warm lens
+        _cyl(sd.bm, x, y, H - 0.012, 0.050, 0.012, seg=28)
+        _cyl(lens.bm, x, y, H - 0.016, 0.022, 0.004, seg=20)
+    objs.append(sd.object(bpy, principled(bpy, 'h44-trim-black', '#0C0C0C', rough=0.45, metal=0.3), smooth=True))
+    objs.append(lens.object(bpy, emitter(bpy, 'h44-lens', '#FFC890', p.get('lens_glow', 6.0)), smooth=True))
     # the rear lobby and rooms' partitions (seen down the route), plain plaster
     rp = Mesh('h44-rear')
     rp.box(P.LOBBY['x1'], P.ROUTE_Y[1], 0.0, P.LOBBY['x1'] + 0.12, W, P.CEIL_REAR)
@@ -325,7 +328,10 @@ def lantern(bpy, p, objs):
     bk = Mesh('h44-lant-back')
     # (four thin walls, not a solid: a solid's base was coplanar with the room's floor and rendered it black, p2 look)
     t = 0.06
-    bk.box(x0 + 0.02, y0 + 0.02, 0.0, x0 + 0.02 + t, y1, bz0 - 0.03)            # behind the baffle
+    d0, d1, dh = P.LOCK_DOOR2['y0'], P.LOCK_DOOR2['y1'], 2.13
+    for (a_, b_) in ((y0 + 0.02, d0), (d1, y1)):
+        bk.box(x0 + 0.02, a_, 0.0, x0 + 0.02 + t, b_, bz0 - 0.03)                # behind the baffle, beside the doors
+    bk.box(x0 + 0.02, d0, dh, x0 + 0.02 + t, d1, bz0 - 0.03)                    # over them
     bk.box(x0 + 0.02, y0 + 0.02, 0.0, x1, y0 + 0.02 + t, bz0 - 0.03)            # behind the route side
     bk.box(x0 + 0.08, y0 + 0.08, bz0 - 0.03, x0 + 0.08 + t, y1, h)              # behind the band's diffuser
     bk.box(x0 + 0.08, y0 + 0.08, bz0 - 0.03, x1, y0 + 0.08 + t, h)
@@ -333,7 +339,13 @@ def lantern(bpy, p, objs):
     objs.append(bk.object(bpy, blk))
     # the front baffle: 60 mm battens, 12 mm slots, from the lit foot to the band; the porch covers its route end
     bf = Mesh('h44-lant-baffle')
-    _battens(bf, 'y', y0, y1, x0 - 0.02, x0 + 0.02, 0.10, bz0 - 0.02, 0.060, 0.012)
+    _battens(bf, 'y', y0, d0, x0 - 0.02, x0 + 0.02, 0.10, bz0 - 0.02, 0.060, 0.012)
+    _battens(bf, 'y', d1, y1, x0 - 0.02, x0 + 0.02, 0.10, bz0 - 0.02, 0.060, 0.012)
+    _battens(bf, 'y', d0, d1, x0 - 0.02, x0 + 0.02, dh + 0.06, bz0 - 0.02, 0.060, 0.012)
+    # the opening's oak reveals through both leaves, and its head
+    for yy in (d0 - 0.04, d1):
+        bf.box(x0 - 0.02, yy, 0.0, x0 + LEAF + 0.02, yy + 0.04, dh + 0.06)
+    bf.box(x0 - 0.02, d0 - 0.04, dh, x0 + LEAF + 0.02, d1 + 0.04, dh + 0.06)
     bf.box(x0 - 0.03, y0, bz0 - 0.03, x0 + 0.02, y1, bz0)                      # a top rail under the band
     # the route side: 140 mm boards with a 6 mm shadow, from the foot to the band
     _battens(bf, 'x', x0, x1, y0 - 0.02, y0 + 0.02, 0.10, bz0 - 0.02, 0.140, 0.006)
@@ -354,35 +366,51 @@ def lantern(bpy, p, objs):
     cap.box(x0 - 0.035, y0 - 0.035, bz0 - 0.008, x1, y0 + 0.05, bz0)
     cap.box(x0 - 0.035, y0 - 0.035, bz0 - 0.008, x0 + 0.05, y1, bz0)
     objs.append(fins.object(bpy, acrylic(bpy, 'acrylic-smoke-fin', SMOKE_TI)))
-    objs.append(diff.object(bpy, emitter(bpy, 'h44-band-led', '#FF7A1C', p.get('band_glow', 0.8))))
+    objs.append(diff.object(bpy, emitter(bpy, 'h44-band-led', '#FFB040', p.get('band_glow', 0.6))))
     objs.append(cap.object(bpy, K.blackened_steel(bpy)))
     # the lit foot: a 100 mm recess with a warm line washing the floor
     # (a strip along the two seen faces only: a slab across the footprint covered the room's floor, the p2 look)
-    ft = Mesh('h44-lant-foot'); ft.box(x0 + 0.04, y0 + 0.04, 0.0, x0 + 0.10, y1, 0.10); ft.box(x0 + 0.04, y0 + 0.04, 0.0, x1, y0 + 0.10, 0.10)
+    ft = Mesh('h44-lant-foot'); ft.box(x0 + 0.04, y0 + 0.04, 0.0, x0 + 0.10, d0 - 0.04, 0.10); ft.box(x0 + 0.04, d1 + 0.04, 0.0, x0 + 0.10, y1, 0.10)
+    ft.box(x0 + 0.04, y0 + 0.04, 0.0, x1, y0 + 0.10, 0.10)
     objs.append(ft.object(bpy, blk))
-    fl = Mesh('h44-lant-footled'); fl.box(x0 + 0.045, y0 + 0.045, 0.085, x0 + 0.055, y1, 0.095)
+    fl = Mesh('h44-lant-footled'); fl.box(x0 + 0.045, y0 + 0.045, 0.085, x0 + 0.055, d0 - 0.04, 0.095); fl.box(x0 + 0.045, d1 + 0.04, 0.085, x0 + 0.055, y1, 0.095)
     fl.box(x0 + 0.045, y0 + 0.045, 0.085, x1, y0 + 0.055, 0.095)
     objs.append(fl.object(bpy, emitter(bpy, 'h44-foot-led', '#FFA860', p.get('foot_glow', 9.0))))
-    # the porch: a small oak box outside the seal, its door off the route, an acoustic door into the box
+    # the porch (look 2): a small oak box outside the seal, its two door pairs in line with the box's own pair, so that
+    # between sessions the bar sees straight through to the pair at the far end
     Lk = P.LOCK
     pc = Mesh('h44-porch')
     hp = 2.70
-    pc.box(Lk['x0'] + 0.02, Lk['y1'] - 0.10, 0.0, Lk['x1'], Lk['y1'] - 0.02, hp)          # cores of its two blind walls
-    pc.box(Lk['x0'] + 0.02, Lk['y0'] + 0.02, 0.0, Lk['x0'] + 0.10, Lk['y1'], hp)
-    # their faces: 140 mm oak boards with a 6 mm shadow (round 1 critics: "a smeared texture")
-    _battens(pc, 'x', Lk['x0'], Lk['x1'], Lk['y1'] - 0.02, Lk['y1'], 0.0, hp, 0.140, 0.006)
-    _battens(pc, 'y', Lk['y0'], Lk['y1'], Lk['x0'], Lk['x0'] + 0.02, 0.0, hp, 0.140, 0.006)
-    pc.box(Lk['x0'], Lk['y0'], 0.0, P.LOCK_DOOR1['x'], Lk['y0'] + 0.12, hp)              # the route face, beside door 1
-    pc.box(P.LOCK_DOOR1['x'] + P.DOOR, Lk['y0'], 0.0, Lk['x1'], Lk['y0'] + 0.12, hp)
-    pc.box(P.LOCK_DOOR1['x'], Lk['y0'], 2.13, P.LOCK_DOOR1['x'] + P.DOOR, Lk['y0'] + 0.12, hp)
-    pc.box(Lk['x0'], Lk['y0'], hp - 0.08, Lk['x1'], Lk['y1'], hp)                       # its roof
+    e0, e1 = P.LOCK_DOOR1['y0'], P.LOCK_DOOR1['y1']
+    for (a_, b_) in ((Lk['y0'], Lk['y0'] + 0.10), (Lk['y1'] - 0.10, Lk['y1'])):        # its two blind sides
+        pc.box(Lk['x0'] + 0.02, a_, 0.0, Lk['x1'], b_, hp)
+    _battens(pc, 'x', Lk['x0'], Lk['x1'], Lk['y0'] - 0.02, Lk['y0'], 0.0, hp, 0.140, 0.006)
+    _battens(pc, 'x', Lk['x0'], Lk['x1'], Lk['y1'], Lk['y1'] + 0.02, 0.0, hp, 0.140, 0.006)
+    # its front, toward the bar: boards either side of door 1 and over it
+    _battens(pc, 'y', Lk['y0'], e0, Lk['x0'] - 0.02, Lk['x0'] + 0.08, 0.0, hp, 0.140, 0.006)
+    _battens(pc, 'y', e1, Lk['y1'], Lk['x0'] - 0.02, Lk['x0'] + 0.08, 0.0, hp, 0.140, 0.006)
+    pc.box(Lk['x0'] - 0.02, e0, 2.13, Lk['x0'] + 0.08, e1, hp)
+    pc.box(Lk['x0'] - 0.02, Lk['y0'] - 0.02, hp - 0.08, Lk['x1'], Lk['y1'] + 0.02, hp)  # its roof
     objs.append(pc.object(bpy, oakm, bevel=0.003))
-    pd = Mesh('h44-porch-door'); pd.box(P.LOCK_DOOR1['x'] + 0.01, Lk['y0'] + 0.03, 0.0, P.LOCK_DOOR1['x'] + P.DOOR - 0.01, Lk['y0'] + 0.08, 2.12)
-    objs.append(pd.object(bpy, oak(bpy, vertical=True, name='oak-door', tint='#4E3622'), bevel=0.003))
-    pl = Mesh('h44-porch-pull'); pl.box(P.LOCK_DOOR1['x'] + P.DOOR - 0.10, Lk['y0'] + 0.0, 0.85, P.LOCK_DOOR1['x'] + P.DOOR - 0.08, Lk['y0'] + 0.03, 1.25)
-    objs.append(pl.object(bpy, K.brass(bpy)))
-    # the porch's name in cut brass letters is a later decision; for now a small lit push plate (the power operator)
-    pp = Mesh('h44-push'); pp.box(P.LOCK_DOOR1['x'] - 0.25, Lk['y0'] - 0.005, 0.95, P.LOCK_DOOR1['x'] - 0.13, Lk['y0'], 1.07)
+    # the doors: door 1, a pair swung out toward the bar; door 2, the box's gasketed pair, swung into the room
+    op = p.get('doors_open', True)
+    dm = Mesh('h44-porch-doors'); pull = Mesh('h44-porch-pulls')
+    lw = P.DOOR_PAIR / 2
+    for (yy, s_) in ((e0, 1), (e1, -1)):
+        if op:
+            dm.box(Lk['x0'] - lw, min(yy, yy + s_ * 0.05), 0.0, Lk['x0'] - 0.01, max(yy, yy + s_ * 0.05), 2.12)
+            dm.box(I_x0 := P.INNER['x0'], min(yy, yy + s_ * 0.07), 0.0, P.INNER['x0'] + lw, max(yy, yy + s_ * 0.07), 2.12)
+            pull.box(Lk['x0'] - lw + 0.08, min(yy, yy + s_ * 0.05) - 0.02, 0.85, Lk['x0'] - lw + 0.10, max(yy, yy + s_ * 0.05) + 0.02, 1.25)
+        else:
+            mid = (e0 + e1) / 2
+            a_, b_ = (yy, mid - 0.003) if s_ > 0 else (mid + 0.003, yy)
+            dm.box(Lk['x0'] + 0.01, a_, 0.0, Lk['x0'] + 0.06, b_, 2.12)
+            dm.box(P.INNER['x0'], a_, 0.0, P.INNER['x0'] + 0.07, b_, 2.12)
+    objs.append(dm.object(bpy, oak(bpy, vertical=True, name='oak-door', tint='#4E3622'), bevel=0.003))
+    if op:
+        objs.append(pull.object(bpy, K.brass(bpy)))
+    # the push plate of the doors' power operator, on the porch's front
+    pp = Mesh('h44-push'); pp.box(Lk['x0'] - 0.025, e1 + 0.08, 0.95, Lk['x0'] - 0.02, e1 + 0.20, 1.07)
     objs.append(pp.object(bpy, principled(bpy, 'h44-push', '#C9C2B6', rough=0.4, metal=0.6)))
     if p.get('interior', True):
         interior(bpy, p, objs)
@@ -401,7 +429,9 @@ def interior(bpy, p, objs):
     # the inner leaf, black felt behind the slats; the walls 45 mm slats with 15 mm gaps (absorber behind) on 35% of
     # the side walls (the upper part), plain oak boards below to 1.2 m (the seats lean on them)
     bk = Mesh('h44-in-back')
-    bk.box(x0 - 0.02, y0 - 0.02, 0.0, x0, y1 + 0.02, h); bk.box(x1, y0 - 0.02, 0.0, x1 + 0.02, y1 + 0.02, h)
+    d0, d1, dh = P.LOCK_DOOR2['y0'], P.LOCK_DOOR2['y1'], 2.13
+    bk.box(x0 - 0.02, y0 - 0.02, 0.0, x0, d0, h); bk.box(x0 - 0.02, d1, 0.0, x0, y1 + 0.02, h); bk.box(x0 - 0.02, d0, dh, x0, d1, h)
+    bk.box(x1, y0 - 0.02, 0.0, x1 + 0.02, y1 + 0.02, h)
     bk.box(x0, y0 - 0.02, 0.0, x1, y0, h); bk.box(x0, y1, 0.0, x1, y1 + 0.02, h)
     objs.append(bk.object(bpy, felt(bpy)))
     sl = Mesh('h44-in-slats')
@@ -411,7 +441,7 @@ def interior(bpy, p, objs):
         a2, b2 = sorted((yy, yy + d * 0.02))
         sl.box(x0, a2, 0.0, P.TRAP['x0'], b2, 1.20)                                       # the wainscot board
     # the front wall: plain oak boards with the door at the route end, the selector's niche at the far end
-    sl.box(x0, y0, 0.0, x0 + 0.02, y1, h)
+    sl.box(x0, y0, 0.0, x0 + 0.02, d0, h); sl.box(x0, d1, 0.0, x0 + 0.02, y1, h); sl.box(x0, d0, dh, x0 + 0.02, d1, h)
     objs.append(sl.object(bpy, oakm, bevel=0.0015))
     # the lid: 45 mm slats across the room with 25 mm gaps over the absorber, and two rows of small spots
     ld = Mesh('h44-in-lid')
@@ -419,26 +449,30 @@ def interior(bpy, p, objs):
     objs.append(ld.object(bpy, oakm, bevel=0.0015))
     lb = Mesh('h44-in-lid-back'); lb.box(x0, y0, h, x1, y1, h + 0.02)
     objs.append(lb.object(bpy, felt(bpy)))
-    # the bass-trap wall at the back: 900 mm deep, its face 60 mm battens with 30 mm slots (wool behind), a bench in it
+    # the bass-trap wall at the back, behind the pair: 600 mm deep, its face 60 mm battens with 30 mm slots (wool behind)
     T_ = P.TRAP
-    tr = Mesh('h44-trap'); _battens(tr, 'y', y0, y1, T_['x0'], T_['x0'] + 0.04, P.BENCH['z'] + 0.05, h - 0.03, 0.060, 0.030)
-    tr.box(P.BENCH['x0'], y0, 0.0, T_['x0'], y1, P.BENCH['z'])                          # the bench, solid oak
+    tr = Mesh('h44-trap'); _battens(tr, 'y', y0, y1, T_['x0'], T_['x0'] + 0.04, 0.08, h - 0.03, 0.060, 0.030)
     objs.append(tr.object(bpy, oakm, bevel=0.002))
     tb = Mesh('h44-trap-back'); tb.box(T_['x0'] + 0.04, y0, 0.0, T_['x1'], y1, h)
     objs.append(tb.object(bpy, felt(bpy)))
-    cu = Mesh('h44-bench-cushion'); cu.box(P.BENCH['x0'] + 0.02, y0 + 0.05, P.BENCH['z'], T_['x0'] - 0.02, y1 - 0.05, P.BENCH['z'] + 0.07)
-    cu.box(T_['x0'] - 0.10, y0 + 0.05, P.BENCH['z'] + 0.12, T_['x0'] - 0.01, y1 - 0.05, P.BENCH['z'] + 0.50)
+    # the bench along the front wall, either side of the doors: solid oak, a mohair seat and back
+    B_ = P.BENCH; g0, g1 = B_['gap']
+    bn = Mesh('h44-bench'); cu = Mesh('h44-bench-cushion'); bl = Mesh('h44-bench-led')
+    for (a_, b_) in ((y0, g0), (g1, y1)):
+        bn.box(B_['x0'], a_, 0.0, B_['x1'], b_, B_['z'])
+        cu.box(B_['x0'] + 0.10, a_ + 0.03, B_['z'], B_['x1'] - 0.02, b_ - 0.03, B_['z'] + 0.07)
+        cu.box(B_['x0'] + 0.01, a_ + 0.03, B_['z'] + 0.12, B_['x0'] + 0.10, b_ - 0.03, B_['z'] + 0.50)
+        bl.box(B_['x1'] - 0.03, a_, 0.02, B_['x1'] - 0.02, b_, 0.05)                    # the lit line under its front
+    objs.append(bn.object(bpy, oakm, bevel=0.003))
     objs.append(cu.object(bpy, K.mohair(bpy, p.get('mohair', '#4A4038'), 'h44-mohair'), bevel=0.02))
-    # the lit line under the bench's front (vertical, never trodden on)
-    bl = Mesh('h44-bench-led'); bl.box(P.BENCH['x0'] + 0.02, y0, 0.02, P.BENCH['x0'] + 0.03, y1, 0.05)
     objs.append(bl.object(bpy, emitter(bpy, 'h44-foot-led', '#FFB774', p.get('foot_glow', 4.0))))
     # the rug, the chairs (the wheelchair space left clear, beside its companion chair), side tables
-    rg = Mesh('h44-rug'); rg.box(P.SWEET[0] - 1.2, y0 + 0.9, 0.0, P.BENCH['x0'] - 0.25, y1 - 0.9, 0.012)
+    rg = Mesh('h44-rug'); rg.box(P.SWEET[0] - 1.3, y0 + 0.9, 0.0, P.STACK_X - 0.55, y1 - 0.9, 0.012)
     objs.append(rg.object(bpy, principled(bpy, 'h44-rug', p.get('rug', '#6E6256'), rough=0.97, spec=0.1, bump=(0.004, 0.5, 0.001))))
     stl, wood, uph = Mesh('h44-chair-steel'), Mesh('h44-chair-oak'), Mesh('h44-chair-wool')
     for (x, y, kind) in P.SEATS:
         if kind in ('chair', 'companion'):
-            face = math.degrees(math.atan2(P.SWEET[1] - y, (P.STACK_X - 6.0) - x)) if False else 180.0
+            face = 0.0                                                # toward the pair, at the far end
             kit43._chair(stl, wood, uph, x, y, face)
     objs.append(stl.object(bpy, K.blackened_steel(bpy), smooth=True))
     objs.append(wood.object(bpy, oakm, bevel=0.004))
@@ -448,21 +482,16 @@ def interior(bpy, p, objs):
     for (x, y) in P.STACKS:
         pk.box(x - 0.36, y - 0.36, 0.0, x + 0.36, y + 0.36, P.TROPOS['plinth'])
     objs.append(pk.object(bpy, terrazzo(bpy, 'terrazzo-floor'), bevel=0.006))
-    # the selector's desk at the front corner: oak, the decks on it, records below
+    # the selector's desk along the side wall, beside the right-hand speaker: oak, the decks on it
     Sd = P.SELECTOR
-    sd = Mesh('h44-selector'); sd.box(Sd['x0'] + 0.05, Sd['y0'], 0.0, Sd['x1'], Sd['y1'] - 0.05, Sd['h'])
+    sd = Mesh('h44-selector'); sd.box(Sd['x0'], Sd['y0'] + 0.05, 0.0, Sd['x1'], Sd['y1'], Sd['h'])
     objs.append(sd.object(bpy, oakm, bevel=0.004))
-    tt = Mesh('h44-decks')
-    for dy in (0.45, 1.25):
-        tt.box(Sd['x0'] + 0.18, Sd['y0'] + dy - 0.22, Sd['h'], Sd['x0'] + 0.62, Sd['y0'] + dy + 0.22, Sd['h'] + 0.10)
+    tt = Mesh('h44-decks'); pl = Mesh('h44-platters')
+    for dx in (0.25, 0.75):
+        tt.box(Sd['x0'] + dx - 0.22, Sd['y0'] + 0.10, Sd['h'], Sd['x0'] + dx + 0.22, Sd['y0'] + 0.50, Sd['h'] + 0.10)
+        _cyl(pl.bm, Sd['x0'] + dx, Sd['y0'] + 0.30, Sd['h'] + 0.10, 0.15, 0.012, seg=48)
     objs.append(tt.object(bpy, principled(bpy, 'h44-deck', '#1A1A1A', rough=0.35, metal=0.3), bevel=0.006))
-    pl = Mesh('h44-platters')
-    for dy in (0.45, 1.25):
-        _cyl(pl.bm, Sd['x0'] + 0.40, Sd['y0'] + dy, Sd['h'] + 0.10, 0.15, 0.012, seg=48)
     objs.append(pl.object(bpy, principled(bpy, 'h44-vinyl', '#0B0B0C', rough=0.25), smooth=True))
-    # the inner door, at the front's route end (seen closed)
-    dd = Mesh('h44-in-door'); dd.box(x0, P.LOCK_DOOR2['y'] + 0.02, 0.0, x0 + 0.06, P.LOCK_DOOR2['y'] + P.DOOR - 0.02, 2.12)
-    objs.append(dd.object(bpy, oak(bpy, vertical=True, name='oak-door', tint='#4E3622'), bevel=0.003))
 
 
 def mother(bpy, p, objs):
@@ -489,6 +518,115 @@ def house(bpy, name, p, kit):
     if p.get('mother', True):
         mother(bpy, p, objs)
     if p.get('street', True):
-        import kit43
-        kit43.street(bpy, kit, p, objs)
+        street(bpy, kit, p, objs)
+    boards(bpy)
     return objs
+
+
+def boards(bpy, tone=0.09, hue=0.012, off=2.5, seed=441):
+    """Every board of the house's oak its own piece of the scan and its own tone (round 40's `boards`, for the oak):
+    each loose part of a mesh in an oak material gets a random value that offsets where it samples the scan and
+    shifts its tone and warmth a little (look 2: "the oak the same board to board")."""
+    import bmesh
+    rnd = random.Random(seed)
+    mats = [m for m in bpy.data.materials if 'walnut' in m.name.lower() or m.name.startswith('-oak')]
+    for ob in [o for o in bpy.data.objects if o.type == 'MESH' and any(sl.material in mats for sl in o.material_slots)]:
+        me = ob.data
+        if 'board' in me.attributes:
+            continue
+        bm = bmesh.new(); bm.from_mesh(me); bm.verts.ensure_lookup_table()
+        val = [0.0] * len(bm.verts); seen = set()
+        for v in bm.verts:
+            if v.index in seen:
+                continue
+            part, stack = [], [v]
+            while stack:
+                u = stack.pop()
+                if u.index in seen:
+                    continue
+                seen.add(u.index); part.append(u.index)
+                stack.extend(e.other_vert(u) for e in u.link_edges if e.other_vert(u).index not in seen)
+            r = rnd.random()
+            for k in part:
+                val[k] = r
+        bm.free()
+        at = me.attributes.new('board', 'FLOAT', 'POINT'); at.data.foreach_set('value', val)
+    for m in mats:
+        if m.get('boards44'):
+            continue
+        m['boards44'] = 1
+        nt = m.node_tree
+        mp = next((n for n in nt.nodes if n.type == 'MAPPING'), None)
+        b = next(n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED')
+        an = nt.nodes.new('ShaderNodeAttribute'); an.attribute_name = 'board'
+        if mp and mp.inputs['Vector'].is_linked:
+            src = mp.inputs['Vector'].links[0].from_socket
+            va = nt.nodes.new('ShaderNodeVectorMath'); va.operation = 'MULTIPLY_ADD'
+            va.inputs[1].default_value = (off, off * 0.61, off * 0.37)
+            nt.links.new(an.outputs['Fac'], va.inputs[0]); nt.links.new(src, va.inputs[2]); nt.links.new(va.outputs['Vector'], mp.inputs['Vector'])
+        inp = b.inputs['Base Color']
+        if inp.is_linked:
+            src = inp.links[0].from_socket
+            hsv = nt.nodes.new('ShaderNodeHueSaturation')
+            mr = nt.nodes.new('ShaderNodeMapRange'); mr.inputs['To Min'].default_value = 1 - tone; mr.inputs['To Max'].default_value = 1 + tone
+            nt.links.new(an.outputs['Fac'], mr.inputs['Value']); nt.links.new(mr.outputs['Result'], hsv.inputs['Value'])
+            mh = nt.nodes.new('ShaderNodeMapRange'); mh.inputs['To Min'].default_value = 0.5 - hue; mh.inputs['To Max'].default_value = 0.5 + hue
+            mx = nt.nodes.new('ShaderNodeMath'); mx.operation = 'PINGPONG'; mx.inputs[1].default_value = 1.0
+            nt.links.new(an.outputs['Fac'], mx.inputs[0]); nt.links.new(mx.outputs[0], mh.inputs['Value'])
+            nt.links.new(mh.outputs['Result'], hsv.inputs['Hue'])
+            nt.links.new(src, hsv.inputs['Color']); nt.links.new(hsv.outputs['Color'], inp)
+
+
+def street(bpy, kit, p, objs):
+    """Outside the glass, for its reflections as much as for itself (look 2: "flat squares"): the sidewalk and kerb, the
+    road, a parked car at the kerb, a lamp post, and opposite a three-storey front of brick with framed windows lit at
+    varied warmth and a lit cafe at its foot."""
+    rnd = random.Random(44)
+    sw = Mesh('h44-sidewalk'); sw.box(-3.6, -30.0, -0.15, -0.20, W + 30.0, 0.0)
+    objs.append(sw.object(bpy, R._pbr(bpy, kit, 'concrete_pavement', res='2k', tint=p.get('pavement', '#2E2C29'), tint_mix=0.7)))
+    kb = Mesh('h44-kerb'); kb.box(-3.75, -30.0, -0.30, -3.6, W + 30.0, -0.02)
+    objs.append(kb.object(bpy, principled(bpy, 'h44-kerb', '#4A4844', rough=0.8)))
+    rd = Mesh('h44-road'); rd.box(-16.0, -30.0, -0.32, -3.75, W + 30.0, -0.15)
+    objs.append(rd.object(bpy, principled(bpy, 'h44-asphalt', '#1A1A1B', rough=0.45, bump=(0.004, 0.3, 0.0004))))
+    # the front opposite: brick, three storeys of framed sash windows, a lit cafe at its foot
+    fa = Mesh('h44-opp'); fa.box(-17.0, -30.0, -0.30, -16.0, W + 30.0, 13.0)
+    objs.append(fa.object(bpy, principled(bpy, 'h44-opp-brick', '#3E2E26', rough=0.85, bump=(0.03, 0.3, 0.002))))
+    fr = Mesh('h44-opp-frames'); gl = Mesh('h44-opp-dark'); lits = [Mesh(f'h44-opp-lit{k}') for k in range(3)]
+    for zf in (4.2, 7.2, 10.2):
+        for k in range(-7, 11):
+            y = k * 2.4 + 0.4
+            fr.box(-16.02, y - 0.08, zf - 0.10, -15.95, y + 1.18, zf + 1.85)
+            if rnd.random() < 0.45:
+                lits[rnd.randrange(3)].box(-16.04, y, zf, -16.03, y + 1.10, zf + 1.75)
+            else:
+                gl.box(-16.04, y, zf, -16.03, y + 1.10, zf + 1.75)
+            fr.box(-16.06, y + 0.53, zf, -16.04, y + 0.57, zf + 1.75); fr.box(-16.06, y, zf + 0.86, -16.04, y + 1.10, zf + 0.90)
+    cafe = Mesh('h44-opp-cafe'); cafe.box(-16.04, -3.0, 0.4, -16.03, 6.5, 2.9)
+    for yy in (-3.0, -0.6, 1.8, 4.2, 6.5):
+        fr.box(-16.06, yy - 0.05, 0.4, -16.02, yy + 0.05, 3.0)
+    fr.box(-16.06, -3.0, 2.9, -16.02, 6.5, 3.05)
+    objs.append(fr.object(bpy, principled(bpy, 'h44-opp-frame', '#D6D0C4', rough=0.6)))
+    objs.append(gl.object(bpy, principled(bpy, 'h44-opp-glass', '#0A0B0D', rough=0.1, spec=0.6)))
+    for k, (c, g) in enumerate((('#FFB070', 1.4), ('#FFC890', 0.8), ('#FF9A50', 0.5))):
+        objs.append(lits[k].object(bpy, emitter(bpy, f'h44-opp-lit{k}', c, g * p.get('window_glow', 1.0))))
+    objs.append(cafe.object(bpy, emitter(bpy, 'h44-opp-cafe', '#FFB880', p.get('cafe_glow', 1.6))))
+    # a lamp post at our kerb, its lantern lit
+    lp = Mesh('h44-lamp-post'); _cyl(lp.bm, -3.3, -1.5, -0.15, 0.06, 4.6, seg=16); lp.box(-3.32, -1.52, 4.40, -2.4, -1.48, 4.46)
+    objs.append(lp.object(bpy, principled(bpy, 'h44-lamp-steel', '#1E1F21', rough=0.4, metal=0.7), smooth=True))
+    lh = Mesh('h44-lamp-head'); lh.box(-2.60, -1.62, 4.26, -2.30, -1.38, 4.40)
+    objs.append(lh.object(bpy, emitter(bpy, 'h44-lamp-head', '#FFC080', p.get('lamp_glow', 25.0))))
+    # a parked car at the kerb, dark paint
+    car = Mesh('h44-car')
+    car.box(-5.5, 4.0, 0.10, -3.85, 8.4, 0.85); car.box(-5.35, 5.1, 0.85, -4.0, 7.3, 1.40)
+    objs.append(car.object(bpy, principled(bpy, 'h44-car-paint', '#16181B', rough=0.18, metal=0.6, coat=1.0, coat_rough=0.05),
+                           bevel=0.08, seg=4))
+    wh = Mesh('h44-car-wheels')
+    for (xx, yy) in ((-5.5, 4.8), (-5.5, 7.6), (-3.85, 4.8), (-3.85, 7.6)):
+        _cyl(wh.bm, yy, 0.18, xx - 0.12, 0.33, 0.24, seg=24, axis='x') if False else None
+        whm = wh.bm
+        import bmesh as _b
+        g = _b.ops.create_cone(whm, cap_ends=True, segments=24, radius1=0.33, radius2=0.33, depth=0.22)
+        for v in g['verts']:
+            vx, vy, vz = v.co
+            v.co = (xx + vz, yy + vx, 0.18 + vy + 0.15)
+    objs.append(wh.object(bpy, principled(bpy, 'h44-tyre', '#0B0B0B', rough=0.8), smooth=True))
