@@ -48,7 +48,7 @@ def _ring_around(gen, lev, ix, iy):
     return None if best is None else best[1]
 
 
-def outlines(P, r_mouth_m=2400.0, r_throat_m=150.0, relief=(8.0, 45.0), smooth_px=1.5, n=360):
+def outlines(P, r_mouth_m=2400.0, r_throat_m=150.0, relief=(8.0, 45.0), smooth_px=1.5, n=180):
     """For each of the laminated horn's layers (mouth first): its outline (mm, the horn's frame: x across, y up, the axis
     at 0, 0), the air path's section plus the wall, pushed out by the land's relief along a circle round the summit.
 
