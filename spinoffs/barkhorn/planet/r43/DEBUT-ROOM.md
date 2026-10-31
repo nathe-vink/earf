@@ -1,5 +1,7 @@
 # Planet EARF: the debut room, the drinks at Fort Mason, and a zero-proof bar
 
+> **The debut moves to spring (owner, 2026-10-31); date and venue to be set.** The spring options are in `VENUES.md`. The 19 January dates below are kept as researched.
+
 Researched **31 Oct 2026** from public web pages only (every date read below is 31 Oct 2026 unless stated). Nobody was contacted, and nothing was submitted or signed up for. Pages that returned 403 or 404 were not retried; they are noted. *(inference)* marks my reading, not something a source says. This is research, not legal advice.
 
 The brief: one to three nights. The first is Tue 19 Jan 2027, and the others may be 21 to 23 Jan, during FOG week (FOG is at Fort Mason 21 to 24 Jan; its gala is 20 Jan). The room holds 60 to 120 guests, a pair of large speakers playing records, and drinks from a licensed partner. Fort Mason's Firehouse and Store House are in `STOREFRONTS.md` and are not repeated here.
