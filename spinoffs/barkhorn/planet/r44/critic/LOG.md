@@ -197,3 +197,36 @@ p3 applied round 1:
 - **The lantern:** both critics find the upper slat wall brighter than the speakers, the inner faces clipping, and Mother's plinth sunk.
 
 The bar view lost its glimpse of the pair by closing the porch, and its score fell with it.
+
+## Look 2: round 3 (the last), p4 proofs
+
+p4 applied round 2 and the coordinator's two notes (31 October):
+- **No people.** Every critic read the figures as mannequins. Records out of their sleeves, a glass and coats over the banquette are there instead.
+- **Photographed CC0 surfaces.** Poly Haven oak_veneer_01, beige_wall_001 and brown_leather; see `TEXTURES.md`.
+
+The other changes:
+- the street band 0.30 and 40 mm toward the axis;
+- the bar at 2850 K with 90 W pools;
+- the porch from x 10.2 at 32 mm;
+- the lantern's pair at 42 W.
+
+| View | Critic a | Critic b | Verdicts | If fixed |
+|---|---|---|---|---|
+| street p4 | 5.5 | 5.5 | iterate / iterate | 7.2 / 7.0 |
+| bar p4 | 5.0 | 5.0 | iterate / iterate | 7.5 / 7.5 |
+| porch p4 | 4.5 | 4.5 | iterate / iterate | 7.0 / 7.0 |
+| lantern p4 | 4.5 | 4.5 | iterate / iterate | 6.5 / 6.8 |
+
+**Asks left (no round remains):**
+- **The street band:** a flat peach lightbox (both critics: deeper amber, fin edges).
+- **The street mullion:** splits the left third.
+- **The street glass:** shows no reflection.
+- **The porch frame:** the porch's head and the lantern's face are crushed and the band is invisible over the opening.
+- **The lantern:** the upper slat wall is brighter than the pair; the plinths sink.
+- **Everywhere:** Mother EARF's multicolored rims break "one color". This is out of scope: a product as placed.
+
+**Best per view across look 2:**
+- street p4 (5.5 / 5.5);
+- bar p2 (5.5 / 5.0), but it shows the pair cut by the porch jamb, against the owner's rule; bar p4 (5.0 / 5.0) is the final;
+- porch p4 (4.5 / 4.5, the speakers largest and whole);
+- lantern p3 (4.5 / 5.0).
