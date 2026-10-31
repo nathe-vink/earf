@@ -287,7 +287,7 @@ def ph(aid, scale=None, tint=None, tint_mix=0.0, rough_mul=1.0, bump=1.0, dye=No
 def vinyl():
     """Black vinyl: concentric grooves at about 0.1 mm as a faint bump and a sheen drawn round the disc (anisotropic,
     tangent round the spindle), a smooth lead-in band at the rim and a run-out band at the label."""
-    m = basic('vinyl', '#0B0A0C', 0.3); nt = m.node_tree; p = nt.nodes['Principled BSDF']
+    m = basic('vinyl', '#0B0A0C', 0.15); nt = m.node_tree; p = nt.nodes['Principled BSDF']
     p.inputs['Anisotropic'].default_value = 0.85
     tg = nt.nodes.new('ShaderNodeTangent'); tg.direction_type = 'RADIAL'; tg.axis = 'Z'; nt.links.new(tg.outputs[0], p.inputs['Tangent'])
     tc = nt.nodes.new('ShaderNodeTexCoord')
@@ -306,7 +306,7 @@ def shot_moho(sc):
     slab('plinth', -0.235, -0.19, -0.075, 0.235, 0.19, -0.049, acrylic('dust-pour'))
     ring('platter', 0.155, 0, -0.047, 0.025, acrylic('dust-pour'))
     ring('record', 0.1524, 0.0036, -0.0021, 0.0020, vinyl())
-    ring('label', 0.0505, 0.0036, -0.00009, 0.00012, basic('label', '#8E8577', 0.85, noise=0.03))   # uncoated paper, mid-tone so the colored light reads on it
+    ring('label', 0.0505, 0.0036, -0.00009, 0.00012, basic('label', '#6A6258', 0.85, noise=0.03))   # uncoated paper, mid-tone so the colored light reads on it
     for r0, r1, c in ((0.046, 0.0455, '#3E3A36'), (0.040, 0.0385, '#7A3E2A'), (0.026, 0.0255, '#3E3A36')):   # printed rings
         ring(f'ink{r0}', r0, r1, 0.000031, 0.00001, basic(f'ink{r0}', c, 0.7))
     ring('spindle', 0.0036, 0, -0.047, 0.060, basic('steel', '#C9CCCF', 0.15, 1.0))
@@ -315,13 +315,16 @@ def shot_moho(sc):
              bond_top=acrylic(tn, 'bond') if i < 3 else None, bond_bottom=acrylic(tn, 'bond') if i > 0 else None)
     ring('brass', 0.01245, 0.0039, 0.0002, 4 * 0.0127 - 0.0006, basic('brass', '#C49A45', 0.18, 1.0))
     sc.render.resolution_x, sc.render.resolution_y = 1800, 1200
-    spot('sun', (-0.42, 0.30, 0.20), (0.0, 0.0, 0.02), 140, 14, 0.002, '#FFF1DE')     # the hard key: the tints thrown forward-right onto the label and record
-    win = area('window', (-1.2, 0.5, 0.9), (0, 0, 0.0), 1.0, 200, '#F4F6FA'); win.visible_glossy = False   # soft daylight, the fill side
-    area('key', (0.8, -0.7, 0.6), (0, 0, 0.02), 0.6, 18, '#EEF2F8')                     # a small front key: the grooves' sheen
+    spot('sun', (-0.44, 0.33, 0.15), (0.0, 0.0, 0.02), 110, 14, 0.002, '#FFF1DE')     # the hard key, lower: a long tinted cast across label and record (L2 c2)
+    win = area('window', (-1.0, 1.1, 1.3), (0, 0, 0.0), 1.0, 120, '#F4F6FA'); win.visible_glossy = False   # soft daylight, higher and further behind (L2 c1)
+    area('key', (0.8, -0.7, 0.6), (0, 0, 0.02), 0.6, 6, '#EEF2F8')                      # L2 c2
+    graze = area('graze', (0.55, 0.45, 0.06), (0, 0, 0.0), 0.8, 30, '#FFF6EC', size_y=0.04)   # L2 c4: a strip low behind-right: the grooves' sheen
+    graze.visible_camera = False
+    top = area('topcard', (0.02, 0.06, 0.28), (0, 0, 0.05), 0.15, 3, '#FFFFFF'); top.visible_camera = False   # L2 c7: a highlight on the brass
     flag = slab('flag', -1.0, 0.30, -0.07, 1.0, 0.32, 0.6, basic('flag', '#0A0A0B', 0.9))   # mirrored only: black behind the puck's sides
     for v in ('visible_camera', 'visible_shadow', 'visible_diffuse', 'visible_transmission'): setattr(flag, v, False)
     sc.view_settings.exposure = -0.3
-    camera((0.28, -0.50, 0.24), (0.0, 0.0, 0.022), lens=100, fstop=5.6)
+    camera((0.36, -0.66, 0.26), (0.0, 0.0, 0.02), lens=100, fstop=8)   # L2 c5: the platter's amber rim in frame
 
 def shot_lithos(sc):
     # a room corner: oak floor, two plaster walls, a stack of books for scale, window light from the left
