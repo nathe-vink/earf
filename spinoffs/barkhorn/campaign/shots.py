@@ -204,7 +204,18 @@ def proposal(design, base='studio/shots/barkhorn/lookbook31/look-red-off-tall.js
     return s
 
 
-SHOTS = {'room': room, 'room-final': lambda: room(critic_round=3),   # round 3's look (7.0): the final 'night': night, 'inside': inside, 'corner': corner, 'above': above,
+def room_off():
+    """The room final (round 3's look) with the covers off (the owner, 2026-10-31: product images without the cover)."""
+    s = room(critic_round=3)
+    s['title'] += ', covers off'
+    for blk in s.get('products', []):
+        for i in blk.get('instances', []):
+            i['hide'] = sorted(set(i.get('hide', [])) | {'cloth-disc'})
+    return s
+
+
+SHOTS = {'room': room, 'room-final': lambda: room(critic_round=3),   # round 3's look (7.0): the final
+         'room-final-off': room_off, 'night': night, 'inside': inside, 'corner': corner, 'above': above,
          'horn-formed': lambda: horn_pair(False), 'horn-laminated': lambda: horn_pair(True), 'lineup-stock': lineup}
 for _c in ('ember', 'smoke'):
     for _r in ('formed', 'stepped', 'smooth'):
