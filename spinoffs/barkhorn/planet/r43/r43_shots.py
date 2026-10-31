@@ -106,7 +106,7 @@ def shot(view):
     props, products, lights = scene()
     s['title'] = f'Planet EARF, round 43: the pop-up, {view}'
     s['camera'] = v['camera']
-    s['set'] = {'kind': 'kit', 'props': props}
+    s['set'] = {'kind': 'stage', 'props': props}
     s['products'] = products
     s['lights'] = lights
     s['haze']['density'] = v.get('haze', 0.0006)
