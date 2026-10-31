@@ -1,0 +1,174 @@
+{
+ "stage1": {
+  "impression": "A competent, well-composed three-quarter studio view of a smoked-acrylic belt-drive turntable, but it reads as a clean CG render: the stacked acrylic plinth fills with ghostly rectangles and amber blobs, the arm and headshell are simplified primitives, and the sweep turns into a crushed black void at the top. The product is attractive but sits close to the familiar clear-acrylic audiophile deck archetype.",
+  "score": 5.5
+ },
+ "reads_as": "a smoked-acrylic Clearaudio / Pro-Ject style belt-drive turntable with a generic S-less tonearm",
+ "unreal": [
+  {
+   "rank": 1,
+   "region": [
+    110,
+    650,
+    1560,
+    1110
+   ],
+   "what": "The three stacked acrylic layers show internal parts as flat light-grey slabs and floating rectangles (e.g. 1040-1180, 840-1000 and 300-760, 800-1000) with no believable refraction, no total-internal-reflection darkening and no visible bonding plane or fixings between layers; the edges have no flame-polished highlight line.",
+   "real": "Cast smoke acrylic 15-20 mm thick goes nearly opaque edge-on, with a bright polished edge bead and a dark green-grey core; internal parts would be dim, distorted silhouettes. Layers would be separated by visible stand-offs or bonded with a faint witness line, and screw heads or inserts would read through the top."
+  },
+  {
+   "rank": 2,
+   "region": [
+    0,
+    0,
+    1800,
+    120
+   ],
+   "what": "The backdrop falls off to pure black at the top (median luminance 6, 41% of pixels crushed) with a hard band, like the end of a lit sweep rather than a studio.",
+   "real": "A real cove shot has the sweep falling to a soft mid grey, or the frame is cropped inside the paper; a hard black band reads as a render boundary."
+  },
+  {
+   "rank": 3,
+   "region": [
+    1060,
+    850,
+    1210,
+    910
+   ],
+   "what": "The EARF wordmark is a flat bright-white decal (p95 luminance 231) sitting on top of the bevel with an orange-brown blob of refraction directly under it; the letters look pasted, not made.",
+   "real": "Lettering on acrylic would be laser-engraved (frosted, slightly recessed) or reverse-printed from beneath, catching light as a texture, not a flat white sticker; it would sit square to the edge with a margin."
+  },
+  {
+   "rank": 4,
+   "region": [
+    920,
+    610,
+    1000,
+    720
+   ],
+   "what": "The headshell is a flat rectangular slab, the finger lift a bare rod, the cartridge body a featureless block with a pin for a stylus; no cantilever, no mounting screws, no tag wires.",
+   "real": "A real headshell has a profiled shape with slotted holes, two hex screws and nuts, four coloured tag leads, a cartridge with a stylus guard line, a cantilever and a tiny tip catching a specular."
+  },
+  {
+   "rank": 5,
+   "region": [
+    1000,
+    450,
+    1560,
+    640
+   ],
+   "what": "Tonearm reads as primitives: a matte uniform tube with a rounded plug end, a blocky bearing yoke with a single bolt, a polished ball counterweight, a plain cylindrical rest post with no cueing lift or arm clip, no anti-skate, no signal lead exiting.",
+   "real": "A shop-made arm has a tapered or anodised tube with a ferrule at the headshell, a gimbal or unipivot housing with visible bearing caps, a turned counterweight with a set screw and engraved grooves, a cue lever with damped platform, an arm rest with a rubber cradle, and a phono lead leaving the base."
+  },
+  {
+   "rank": 6,
+   "region": [
+    1280,
+    600,
+    1440,
+    670
+   ],
+   "what": "The armboard flange is a bead-blasted disk with three open holes and no screws in them.",
+   "real": "Three socket-cap or countersunk screws would sit in the holes, with the flange machined with a chamfer and a faint turning pattern."
+  },
+  {
+   "rank": 7,
+   "region": [
+    410,
+    440,
+    1200,
+    760
+   ],
+   "what": "The record has only six engraved rings and an almost blank white label; the platter beneath shows a stack of discs whose mirror-perfect reflection on the plinth top doubles the platter into a ghost.",
+   "real": "Real vinyl shows fine groove texture with a radial anisotropic sheen and land bands between tracks; the label carries print. A platter edge has machined steps and a subtle turning sheen; the acrylic top reflects it with blur and the smoke tint darkens it."
+  },
+  {
+   "rank": 8,
+   "region": [
+    230,
+    670,
+    330,
+    720
+   ],
+   "what": "Amber-brown pucks inside the plinth (r/b median 57/41) and a similar one at the back right look like toffee or rendering artefacts rather than identifiable parts.",
+   "real": "If these are isolation feet or sorbothane couplers, they would be a matte dark elastomer, crisply bounded, or brass with a turned face; colour would be consistent and the part would explain itself."
+  },
+  {
+   "rank": 9,
+   "region": [
+    640,
+    420,
+    800,
+    470
+   ],
+   "what": "The motor pulley at the back-left is a chrome disc floating at the plinth edge with no belt visible running to the platter.",
+   "real": "A belt-drive deck shows a thin black or flat belt wrapping the sub-platter or platter rim, and a motor pod with a turned pulley and a gap to the plinth."
+  },
+  {
+   "rank": 10,
+   "region": [
+    180,
+    980,
+    1200,
+    1100
+   ],
+   "what": "Feet are small generic cylinders barely visible; the plinth seems to hover, with a soft wide shadow but no dense contact shadow under each foot. A uniform grain overlay sits on top of soft focus everywhere.",
+   "real": "Turned aluminium cone or spring feet with knurled height adjusters, each with a tight dark contact shadow; grain would come from the sensor and vary with exposure, with focus falling off naturally from the arm."
+  }
+ ],
+ "cooler": [
+  {
+   "rank": 1,
+   "idea": "Make the smoke acrylic's thickness the hero: one deep monolithic block with a polished, bright edge and the mechanism visibly suspended inside it, rather than three thin layered plates.",
+   "now": "Three stacked smoke plates read as a Pro-Ject or Clearaudio acrylic deck, the familiar clear-turntable archetype."
+  },
+  {
+   "rank": 2,
+   "idea": "Design a bespoke tonearm with its own signature, for example a single sweep of anodised metal matching the smoke tint, with a turned counterweight that echoes the platter.",
+   "now": "The arm is a generic straight tube with a ball counterweight, interchangeable with any budget deck."
+  },
+  {
+   "rank": 3,
+   "idea": "Give the platter a distinctive material contrast (a thick smoked acrylic platter with a polished stainless ring, or a visible machined sub-platter through the tint) so the drive is part of the look.",
+   "now": "The platter is a dark disc that disappears under the record."
+  },
+  {
+   "rank": 4,
+   "idea": "Treat the brand mark as a made detail: an engraved or inset metal badge, or letters cast into the edge, placed deliberately on the front face.",
+   "now": "A white sans decal on the corner, like a sticker on a generic deck."
+  },
+  {
+   "rank": 5,
+   "idea": "Expose and celebrate a few interior parts through the tint (motor pod, bearing well, isolation feet) as jewelled, colour-matched components.",
+   "now": "Interior parts read as random blobs and rectangles, which looks like clutter rather than intent."
+  }
+ ],
+ "photo": [
+  {
+   "rank": 1,
+   "change": "Replace the black top band with a seamless sweep lit to a soft grey gradient, or crop inside the backdrop, and add a large overhead softbox with a dark flag to the side to draw a long gradient highlight along the acrylic top.",
+   "expected": "Removes the render-boundary look and gives the smoke acrylic a readable glossy form."
+  },
+  {
+   "rank": 2,
+   "change": "Add a narrow strip light low and behind to light the polished edges of the plinth and catch the platter rim, and a black card under the camera to darken the reflections in the top.",
+   "expected": "Edge glow tells the eye it is thick cast acrylic and hides the ghost rectangles inside."
+  },
+  {
+   "rank": 3,
+   "change": "Correct the acrylic material: through-tint absorption with depth (volume absorption rather than surface tint), polished edge normals, higher IOR, and slight roughness on internal faces.",
+   "expected": "Interior parts become dim refracted silhouettes; the plinth reads as real Smoke acrylic."
+  },
+  {
+   "rank": 4,
+   "change": "Use a longer lens (about 90-120 mm equivalent) a bit lower, focus on the headshell at around f/8 with gentle fall-off toward the back, and drop the uniform grain overlay.",
+   "expected": "Less wide-angle stretch on the front corner and a photographic depth cue in place of CG flatness."
+  },
+  {
+   "rank": 5,
+   "change": "Dress the props: a printed label on the record, a real groove texture with anisotropic radial highlight, and a visible belt; ground the feet with tight contact shadows.",
+   "expected": "Fine-scale detail that a viewer reads as a photographed object at real scale."
+  }
+ ],
+ "score_if_fixed": 7.5
+}

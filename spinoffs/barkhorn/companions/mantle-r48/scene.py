@@ -118,7 +118,7 @@ def acrylic(name, bands, tint, rough=0.004, wear_on=True, ring=None):
     st = sigma_tint(tint)
     D = max(st) * 1.0001
     mats = []
-    for slot, (r, wr) in enumerate(((rough, True), (0.010, False), (0.045, False), (0.32, False))):
+    for slot, (r, wr) in enumerate(((rough, True), (0.010, False), (0.045, False), (0.07, False))):   # bores vapor-polished
         m, nt, out = node_tree(f'{name}-{slot}')
         b = nt.nodes.new('ShaderNodeBsdfPrincipled')
         b.inputs['Base Color'].default_value = (1, 1, 1, 1)
@@ -661,14 +661,14 @@ def build(args):
     M['cart'] = dielectric('cart', '#0D0D0E', 0.25, spec=0.6)
     M['cart-accent'] = dielectric('cart-accent', '#101011', 0.4, spec=0.5)
     M['diamond'] = dielectric('diamond', '#FFFFFF', 0.0, spec=1.0)
-    M['etch'] = dielectric('etch', '#8E8D89', 0.9, spec=0.15)
+    M['etch'] = dielectric('etch', '#6E6D6A', 0.85, spec=0.25)        # a frosted laser etch, filled a shade deeper
     M['skin'] = dielectric('skin', '#C99A7E', 0.42, spec=0.45, sss=0.35)
     M['knit'] = dielectric('knit', '#2B2D33', 0.9, spec=0.1)
 
     finish = {'deck-L1-stack': 'deck', 'cover-C1-stack': 'cover', 'platter-disc': 'platter', 'platter-hub': 'brass',
               'platter-screws': 'steel', 'spindle': 'steel', 'bearing-housing': 'brass', 'bearing-nut': 'brass', 'bushes': 'brass',
               'ball': 'steel', 'thrust-plate': 'steel', 'motor-plate': 'alu-black', 'motor': 'alu-black', 'motor-grommets': 'rubber',
-              'pulley': 'alu', 'belt': 'rubber', 'arm-puck': 'alu-blast', 'feet': 'brass', 'foot-pads': 'rubber', 'foot-studs': 'steel',
+              'pulley': 'alu', 'belt': 'rubber', 'arm-puck': 'alu-blast', 'feet': 'steel', 'foot-pads': 'rubber', 'foot-studs': 'steel',
               'phono-stage': 'alu-black', 'phono-runners': 'felt', 'back-plate': 'brass-brushed', 'back-hardware': 'steel',
               'dowels': 'steel', 'mark': 'etch'}
     # proposal A's parts (mantle_strata.py)
@@ -749,6 +749,10 @@ def build(args):
     if args.shot == 'stand' or args.shot == 'closed':
         rec.hide_render = args.shot == 'closed'
 
+    # the puck's three M5 countersunk screws (stainless, black oxide)
+    for k, ang_ in enumerate((90, 210, 330)):
+        x = meta['A'][0] * mm + 0.035 * math.cos(math.radians(ang_)); y = meta['A'][1] * mm + 0.035 * math.sin(math.radians(ang_))
+        lathe(f'puck-screw-{k}', [(0, 0), (0.0049, 0), (0.0026, -0.0024), (0, -0.0024)], M['steel'], (x, y, meta['top'] * mm - 0.0001))
     # the arm and cartridge, finer than the kit's envelope
     rega_arm(meta, M, lowered=args.shot == 'use', cue_up=False)
     if args.shot == 'use':
@@ -830,6 +834,8 @@ def setup_world(args, meta):
         area('side', (0.9, 0.10), (cx - 0.95, cy + 0.10, 0.045), (cx, cy, 0.045), 160, col=(1.0, 0.98, 0.95), spread=50)
         # a low fill card right, very weak
         area('fill', (1.0, 0.6), (cx + 1.3, cy - 0.6, 0.35), T, 12, col=(0.95, 0.97, 1.0), caust=False)
+        # the sweep's back lit, so it falls to a soft gray, not to black
+        area('bg', (3.0, 1.0), (cx, cy + 0.5, 2.1), (cx, cy + 1.7, 1.0), 90, col=(1.0, 0.98, 0.96), caust=False)
         # a top scrim for the glassy tops' reflection, graded by its spread
         area('top', (0.9, 0.6), (cx + 0.15, cy - 0.15, 1.4), T, 22, spread=25)
         # black flags: a big one over the camera's right and one overhead behind, so gloss reads dark, edges bright
