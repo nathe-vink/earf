@@ -95,6 +95,10 @@ EARF · earf.world · [contact line]
 
 ## Email 3: a record label or shop
 
+> **The number behind the ask** (`../sessions/BUDGET.md`, est.): Session 00's pressing, freight and numbering come to about
+> $2,900 for 300. A partner who covers it takes the record's break-even from about 257 to about 186 records at $50, and
+> is named on the jacket. The record's plan is `../sessions/README.md`.
+
 **Subject:** The first record on a new speaker, 19 January
 
 Dear [Name / team at the label or shop],

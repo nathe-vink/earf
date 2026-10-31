@@ -19,6 +19,9 @@ Ranked by what each does for the odds, per dollar:
 
 ## (a) EARF Sessions
 
+**Now a plan:** `sessions/` (Session 00: the format, eight artists, the recording, the rights for counsel, pressing
+quote requests, a budget at 300 and 500, and the timeline). Its costs replace the estimates below.
+
 **Mockup:** `out/idea-sessions.png`: the 12-inch jacket (the listening room on the front, "[Artist] at Planet EARF"),
 the record pressed in 04 Poison half out of it, the back's "One album, start to finish."
 
