@@ -1,0 +1,19 @@
+{
+ "what": "A blind four-way duel (a fresh critic, images only, shuffled): the four designs in one rig, Ember, cover off, the whole speaker.",
+ "key": {"A": "Topo (proofs/design-topo-p1.png)", "B": "Topo Clear (proofs/design-topo-clear-p1.png)", "C": "Strata (proofs/design-strata-p1.png)", "D": "current (proofs/design-current-p1.png)"},
+ "stage1": [
+  {"option": "A", "design": "Topo", "impression": "A deep, dark-tinted rectangular horn with stepped ridges reads as a serious, almost theatrical bell over a clean acrylic cabinet, and the opaque red woofer ring ties to it. But the horn's rim is lumpy and uneven in thickness, like hand-dipped wax, which undercuts the precision the clear cabinet promises.", "score": 6.0},
+  {"option": "B", "design": "Topo Clear", "impression": "The same stepped horn in a lighter, more translucent tint matches the cabinet's colour better and the ridges read as rings of light. The thick, wobbly, gummy-pink rim makes the horn look like soft silicone or a mould reject rather than a machined or cast part, the weakest element of the four.", "score": 5.5},
+  {"option": "C", "design": "Strata", "impression": "A crisp, uniformly thin-lipped horn with fine concentric steps, and a woofer seated in a stepped clear-acrylic waveguide that echoes the horn's rings, so top and bottom read as one design language. It looks precise, cast and believable, and the ring motif is distinctive enough to own.", "score": 8.0},
+  {"option": "D", "design": "current", "impression": "A smooth, glossy horn with the compression driver's body visible through it is honest and clean, and seeing the motor floating in tinted acrylic is a memorable detail. But the off-centre driver blob and the extra standoffs make the horn look busier and more like a stock pro-audio part, and the plain woofer ring doesn't relate to it.", "score": 7.0}
+ ],
+ "ranking": ["C Strata: the only design where horn and woofer share one language, with a clean even lip that looks genuinely cast and machined",
+             "D current: smooth and believable, the driver shown through the tint as a jewel, but less coherent",
+             "A Topo: drama and depth, but the uneven, lumpy rim reads as unfinished",
+             "B Topo Clear: best colour match, but the thick gummy rim makes the horn look soft and cheap"],
+ "best_two": [
+  {"option": "C", "design": "Strata", "improve": ["a defined, slightly thicker polished front lip of even width", "thicker, fewer posts with a visible designed mount and collar under the horn", "the caldera's steps in exact rhythm with the horn's (same pitch and edge radius), the woofer's bolts one finish"], "least_real": "the horn on hair-thin posts with no visible base or collar"},
+  {"option": "D", "design": "current", "improve": ["the driver centred on the axis, its housing a clean turned cylinder", "one designed cradle under the driver instead of extra standoffs", "a woofer surround related to the horn (clear flared ring, not an opaque band)"], "least_real": "the driver housing merging into the horn wall with no visible flange or bolted joint"}
+ ],
+ "verdict": "Strata passes the gate (8.0 blind, and wins the duel against the current design's 7.0). Topo and Topo Clear fail it: the land's relief at the rim reads as lumpy wax at this distance."
+}
