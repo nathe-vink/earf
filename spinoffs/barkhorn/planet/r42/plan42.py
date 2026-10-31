@@ -159,6 +159,22 @@ def occupant_load():
     return rows, total
 
 
+def occupant_load_option():
+    """The option to stay at 99 or fewer (no sprinklers required): the front room counted as the shop it is (mercantile,
+    60 gross), the listening room's chairs fixed to the floor (counted by seat)."""
+    rows, total = [], 0
+    front = FRONT_X1 * W * SQFT
+    for k, sf, f, how, n in occupant_load()[0]:
+        if k.startswith('Shop'):
+            n = int(math.ceil(front / 60)); sf = round(front); how = 'gross: the whole front room as the shop'
+        elif k.startswith('Window'):
+            continue
+        elif k.startswith('Listening'):
+            n = len(TUBS); f = None; how = 'fixed seats'
+        rows.append((k, sf, f, how, n)); total += n
+    return rows, total
+
+
 def seats():
     return {'Window lounge': 2 * len(LOUNGE),
             'Counter (8 high, 2 at the low end)': len(STOOLS) + len(LOW_SEATS),

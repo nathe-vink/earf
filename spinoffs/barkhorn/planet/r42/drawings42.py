@@ -763,6 +763,38 @@ def sections_sheet():
     return sh
 
 
+def axo_uri(w=2400):
+    import base64, subprocess
+    j = os.path.join(OUT, '.axo-embed.jpg')
+    subprocess.run(['convert', os.path.join(OUT, 'axo.png'), '-resize', f'{w}x', '-quality', '88', j], check=True)
+    d = base64.b64encode(open(j, 'rb').read()).decode()
+    os.remove(j)
+    return 'data:image/jpeg;base64,' + d
+
+
+def axo_sheet():
+    import json
+    sh = Sheet()
+    sh.frame('A-301', 'Axonometric', 'the plan built as a model', SHEETS,
+             notes=[('HOW IT WAS MADE', ['The plan (plan42.py) built in Blender as a', 'cutaway: the far walls cut at 8 ft 6 in,',
+                                         'the near wall at 3 ft 3 in, the back of', 'house at 4 ft 3 in. The products as', 'simple solids in their colours.'])])
+    x, y, w, h = 30, 40, 760, 506.7
+    sh.image(x, y, w, h, axo_uri(3000))
+    an = os.path.join(OUT, 'axo.anchors.json')
+    if os.path.exists(an):
+        A = json.load(open(an))
+        for i, (k, (u, v)) in enumerate(sorted(A.items(), key=lambda kv: kv[1][0])):
+            px, py = x + u * w, y + v * h
+            sh.circle(px, py, 3.2, fill=INK, stroke=PAPER, sw=0.4)
+            sh.text(px, py + 1.1, str(i + 1), size=2.8, weight=700, anchor='middle', fill=PAPER)
+            col, row = divmod(i, 6)
+            lx, ly = x + 8 + col * 150, y + h + 14 + row * 5.4
+            sh.text(lx, ly, f'{i + 1}', size=2.8, weight=700)
+            sh.text(lx + 7, ly, k, size=2.8)
+    sh.text(x, y - 8, 'AXONOMETRIC FROM THE STREET CORNER, THE WALLS CUT AWAY', size=3.2, weight=700, spacing=0.6)
+    return sh
+
+
 # --- A-000: the house in numbers -------------------------------------------------------------------------------------
 def cover_sheet():
     sh = Sheet()
@@ -773,7 +805,7 @@ def cover_sheet():
     sh.text(x, 76, 'The shop and the window lounge at the street; the bar room under Mother EARF; the selector in a wall of '
             'records; the listening room behind it, its Tropos stacks facing the front.', size=3.4, fill='#55524c')
     if os.path.exists(os.path.join(OUT, 'axo.png')):
-        sh.image(330, 100, 460, 307, 'axo.png')
+        sh.image(330, 100, 460, 307, axo_uri())
     # key plan: the zones only, small
     F = Frame(x, 215, 1000 / 96)
     zones = [((0, 0, P.FRONT_X1, W), '#efe6d6', 'Shop + lounge'), ((P.FRONT_X1, 0, P.PARTITION['x0'], W), '#e6dccb', 'Bar room'),
@@ -813,8 +845,13 @@ def cover_sheet():
     sh.text(x2, yy + 1, 'Occupant load', size=3.0, weight=700)
     sh.text(x2 + 185, yy + 1, str(total), size=3.0, anchor='end', weight=700)
     sh.text(x2, yy + 8, 'Seats 55 · standing room at the counter and the shop. Post the load at the door (CBC 1004.9).', size=2.7, fill='#55524c')
+    ro, to = P.occupant_load_option()
+    sh.text(x2, yy + 15, f'OPTION: {to} OCCUPANTS, NO SPRINKLER REQUIREMENT', size=2.6, weight=700, spacing=0.5)
+    sh.lines_of(x2, yy + 20.5, ['Count the front room as the shop it is (mercantile, 60 sq ft gross a person: 15) and fix the',
+                                'listening chairs to the floor (11 seats): ' + f'{to} in all. Ask the building official before relying on it.'],
+                size=2.7, fill='#55524c')
     # code thresholds
-    y = 375
+    y = 395
     sh.text(x, y, 'WHAT THE LOAD TRIGGERS (CALIFORNIA BUILDING AND PLUMBING CODES, 2022; SF AMENDMENTS)', size=2.8, weight=700, spacing=0.6)
     T = [('Group', 'A-2 (a bar, 50 or more). Under 50 it would be a B, with no Place of Assembly permit: not possible at this size and seat count.'),
          ('Exits', 'Two (more than 49): the street door and the rear door, a third of the diagonal apart (sprinklered). Doors swing out with panic hardware.'),
@@ -837,7 +874,7 @@ def cover_sheet():
 
 def main():
     os.makedirs(OUT, exist_ok=True)
-    built = {'A-000': cover_sheet(), 'A-101': plan_sheet(), 'A-102': rcp_sheet(), 'A-201': sections_sheet()}
+    built = {'A-000': cover_sheet(), 'A-101': plan_sheet(), 'A-102': rcp_sheet(), 'A-201': sections_sheet(), 'A-301': axo_sheet()}
     for n, sh in built.items():
         open(os.path.join(OUT, f'{n}.svg'), 'w').write(sh.svg())
         print(os.path.join(OUT, f'{n}.svg'))
