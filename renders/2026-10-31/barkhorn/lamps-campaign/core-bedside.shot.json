@@ -19,7 +19,7 @@
  "sky": {
   "kind": "gradient",
   "zenith": "#1A2A48",
-  "horizon": "#3A4A6A",
+  "horizon": "#3E4650",
   "ground": "#141820",
   "strength": 0.05
  },
@@ -234,7 +234,7 @@
     ],
     "flavour": "ember",
     "lamp_w": 0.17569546120058566,
-    "shade_glow": 0.06,
+    "shade_glow": 0.04,
     "materials": {
      "body": {
       "radius": 0.00375
@@ -334,7 +334,7 @@
     2.86,
     0.565
    ],
-   "strength": 0.8,
+   "strength": 3.0,
    "color": "#FFB08A",
    "ramp": {
     "axis": "x",
