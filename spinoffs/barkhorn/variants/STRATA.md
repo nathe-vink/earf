@@ -67,9 +67,15 @@ boss). Only the mouth's layer is cut wider.
 | the horn (the kit's parts list, prototype) | formed: about $1,500 with its share of tooling | laminated: about $1,570 | about +$70, and no forming tooling ($7,100 to $9,600 saved) |
 | the caldera, against the disc, frame, ring and magnets | about $106 a speaker | about $230 a speaker (sheet, cutting, polish, bonding; est.) | about +$125 a speaker |
 
-**Stability:** the stepped horn assembly, at 9.9 kg, sits at the tipping check's 10 kg allowance (README, S7). The
-caldera's 2.1 kg is low on the front, below the woofer's center, and moves the center of mass forward by about 3 mm,
-which is negligible (est.).
+**Stability:** the tipping check (README, S7) was worked with 10 kg of horn on top. Strata's horn assembly with its
+lip is about **10.2 kg**, so it is just over that allowance, not under it.
+- The bronze posts (0.7 kg) sit below it, between the horn and the cabinet.
+- The caldera's 2.1 kg is low on the front, below the woofer's center, and moves the center of mass forward by about
+  3 mm (est.).
+
+The margin was about 124 N·m forward against a push of 118 N·m. **Re-run S7 with Strata's masses before the first
+pair**, and confirm it with the push gauge at first-article inspection. If the margin is short, the front feet move out
+by 5 mm.
 
 ## How it is made
 
