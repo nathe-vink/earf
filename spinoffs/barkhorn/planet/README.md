@@ -327,6 +327,12 @@ The owner, 2026-10-22: "Bar people: empty rooms, as round 39" and "Bar globe: th
 | detail: the door and the bowl of coins | `planet39/proofs-p3/bowl.png` (1200 x 800) | round 39 |
 | detail: the shopfront at blue hour | `planet39/finals/street-final.png` (2400 x 1600; JPEGs beside it) | round 39 |
 
+**Round 42 (2026-10-31), the house as a business:** four new interior views of the rendered room, each through three
+critic rounds and a blind duel, in `renders/2026-10-31/barkhorn/planet42/finals/` (2400 x 1600): `night.png` (the room
+at night, p2), `counter.png` (the counter, p1 with the floor's defect fixed), `shop.png` (the shop wall, p3) and
+`listening.png` (the listening room, p1). Scores and every critic's words: `r42/critic/LOG.md`. The plan, the numbers,
+the licences, the sites and the pop-up: `r42/README.md`.
+
 The Smoke globe's door frame (`planet39/finals/door-mother.png`) and the empty door (`planet39/finals/door.png`) stay
 for comparison. Scores and every critic's words: `r39/FINALS.md`, `r40/FINALS.md`, `r41/critic/LOG.md`.
 
