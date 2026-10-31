@@ -1,0 +1,175 @@
+{
+ "stage1": {
+  "impression": "A moody, competent dusk render of a red cast-acrylic turntable floating over an edge-lit sub-plinth. The red glass reads well at first glance, but the slab looks like thin glass, the plinth front face goes to near-black, and the glowing peach base edge reads as a gaming LED strip rather than a $6,500 object. Surfaces are CG-clean, the vinyl has no grooves and the arm and headshell are underdetailed.",
+  "score": 5.5
+ },
+ "reads_as": "a Rega/Pro-Ject-style acrylic deck on an RGB-lit gaming riser",
+ "unreal": [
+  {
+   "rank": 1,
+   "region": [
+    440,
+    690,
+    1770,
+    925
+   ],
+   "what": "The base's lit edge is a flat, uniform peach-white emissive band (luminance p95 about 215, 1.3% clipped) with a hairline seam along its length. It does not fade with distance from the LEDs and shows no red tint despite being Ember acrylic.",
+   "real": "Edge-lit tinted acrylic glows most saturated (deep orange-red) at the polished edge, with hot spots at LED pitch fading toward the corners. The edge is a single polished face with no seam. Brightness sits about 1.5 stops below clipping, with the colour coming from the tint."
+  },
+  {
+   "rank": 2,
+   "region": [
+    300,
+    580,
+    1700,
+    790
+   ],
+   "what": "The main plinth's front face is crushed: median luminance 7, 35% of pixels near 0, with blocky rectangular red patches (500-610, 580-690) that look like refraction artifacts, not internal reflections.",
+   "real": "A 30-40 mm cast slab shows a bright polished edge band, layered TIR reflections of the platter and feet, and a readable gradient through its depth. A photographer would add a strip light or card to draw a highlight line along the front edge."
+  },
+  {
+   "rank": 3,
+   "region": [
+    585,
+    385,
+    1390,
+    560
+   ],
+   "what": "The record is an untextured black disc with no grooves, run-out, lead-in sheen or anisotropic highlight. The label is a grey blank with illegible text.",
+   "real": "Vinyl shows concentric groove sheen as radial bands of light where the key crosses it, a glossy lead-out and a sharp, printed label."
+  },
+  {
+   "rank": 4,
+   "region": [
+    1120,
+    470,
+    1260,
+    560
+   ],
+   "what": "The headshell and cartridge are a black blob with stray specks of light, and there are no tonearm wires or finger lift detail.",
+   "real": "A machined headshell with a visible cartridge body, stylus cantilever, colour-coded tag wires and a crisp finger lift."
+  },
+  {
+   "rank": 5,
+   "region": [
+    295,
+    470,
+    620,
+    720
+   ],
+   "what": "The acrylic slab corners and edges are knife-sharp with zero radius. The top surface has no dust, micro-scratches or polish marks, and reads like a perfect glass plate.",
+   "real": "Cast acrylic is flame- or diamond-polished with a 0.5-1 mm break on every edge, which catches a thin bright line. Faint swirl marks would show under raking light."
+  },
+  {
+   "rank": 6,
+   "region": [
+    1430,
+    520,
+    1660,
+    580
+   ],
+   "what": "The tonearm base plate sits flat on the acrylic with no visible seating. The screws are bright dots without slots or heads, and the plate has no chamfer or machining texture.",
+   "real": "A bead-blasted or anodised aluminium plate with chamfered edges, socket-head cap screws with readable hex recesses, and a faint contact reflection in the acrylic beneath it."
+  },
+  {
+   "rank": 7,
+   "region": [
+    680,
+    640,
+    1170,
+    900
+   ],
+   "what": "The clear pillars between the plinth and base are hollow glass tumblers with busy internal speckle. They do not read as structural, and there is no visible fixing to either slab.",
+   "real": "Solid machined acrylic or metal spacers, end-faces polished and bonded or bolted, each with a visible bolt or insert seen through the clear material."
+  },
+  {
+   "rank": 8,
+   "region": [
+    680,
+    800,
+    1180,
+    900
+   ],
+   "what": "The feet under the base are dark grey pucks with soft, undefined contact. The warm floor bounce is uniform and its colour (yellow-amber) does not match the red-orange edge glow.",
+   "real": "Machined feet with a sharp contact shadow, and floor spill tinted the same orange-red as the glowing acrylic, brightest near the edge and falling off quickly."
+  },
+  {
+   "rank": 9,
+   "region": [
+    1260,
+    770,
+    1340,
+    805
+   ],
+   "what": "The EARF wordmark is a flat grey decal floating on the face, low contrast and soft, with no depth.",
+   "real": "Laser-engraved or reverse-printed letters with frosted engraving that catches light, or a crisp sub-surface print visible through the tint with slight parallax."
+  },
+  {
+   "rank": 10,
+   "region": [
+    0,
+    300,
+    1800,
+    1200
+   ],
+   "what": "The set is a featureless grey sweep with a hard horizon line at y~320 and fine uniform noise across everything. The bottom band has a luminance range of only 18, which reads as a CG cyc.",
+   "real": "A real surface (stone, oiled oak or textured paper) with micro-texture, a gentle falloff from the key, and grain only in the shadows."
+  }
+ ],
+ "cooler": [
+  {
+   "rank": 1,
+   "idea": "Make the edge-lit base the signature and resolve it: a single thick tinted slab whose whole edge glows ember-red from within, so the deck seems to float on a coal, rather than a thin lit tray.",
+   "now": "An RGB gaming-PC riser or LED light-panel under a Pro-Ject acrylic deck."
+  },
+  {
+   "rank": 2,
+   "region_note": "",
+   "idea": "Carry the material through: an acrylic or tinted sub-platter visible through the platter rim, tinted pillars and a tinted arm pod, so the whole object is one continuous Ember block rather than red slabs plus generic black parts.",
+   "now": "The black off-the-shelf tonearm, armboard and feet look bolted onto a coloured plate."
+  },
+  {
+   "rank": 3,
+   "idea": "Give the plinth a distinctive profile, such as a radiused or waterfall front edge, a stepped chamfer or a cut-out that reveals the belt and motor, so its silhouette is recognisable without colour.",
+   "now": "A plain rectangular slab, the generic acrylic-turntable archetype (Clearaudio, Pro-Ject, Rega Planar)."
+  },
+  {
+   "rank": 4,
+   "idea": "Design a bespoke arm whose counterweight, pivot housing and finger lift echo the plinth's geometry, in one finish such as satin bronze or anodised graphite.",
+   "now": "A stock-looking black arm with a chrome ball counterweight, similar to a Rega RB arm."
+  },
+  {
+   "rank": 5,
+   "idea": "Make the brand mark part of the material: an engraved or edge-lit logo inside the slab that glows with the base, rather than a small grey decal.",
+   "now": "A tiny flat sticker-like EARF in the corner."
+  }
+ ],
+ "photo": [
+  {
+   "rank": 1,
+   "change": "Add a long strip softbox (or a white card) raking across the top and front from camera-left and above, to draw polished highlight lines along every acrylic edge and the platter rim, and lift the plinth front face from median 7 to about 30-50.",
+   "expected": "The slab gains thickness and readable form, the crushed shadows open up, and the acrylic reads as a real cast block."
+  },
+  {
+   "rank": 2,
+   "change": "Drop the base glow intensity about 1.5 stops and tint it through the acrylic (emission colour near the Ember hex with falloff along the edge). Make the floor spill the same red-orange.",
+   "expected": "No clipped peach band. The glow reads as light in the material, not a strip LED."
+  },
+  {
+   "rank": 3,
+   "change": "Replace the grey sweep with a textured real surface (honed stone or dark oak) and a background with some depth or a soft dusk gradient instead of a hard black band at the top.",
+   "expected": "Real scale cues and a sense of a place; the CG-cyc look goes away."
+  },
+  {
+   "rank": 4,
+   "change": "Use a longer lens (85-100 mm equivalent) a bit lower, with a shallow depth of field on the far arm and counterweight and a plane of focus on the platter edge and the front corner.",
+   "expected": "A more photographic compression and fall-off; the busy refraction behind recedes."
+  },
+  {
+   "rank": 5,
+   "change": "Add surface realism: groove normal map and anisotropic sheen on the vinyl, edge bevels on all slabs, and light dust or fingerprint roughness variation on the acrylic top. Denoise, then add grain only in the shadows.",
+   "expected": "Surfaces read at real scale and the uniform render noise is replaced by photographic texture."
+  }
+ ],
+ "score_if_fixed": 7.5
+}

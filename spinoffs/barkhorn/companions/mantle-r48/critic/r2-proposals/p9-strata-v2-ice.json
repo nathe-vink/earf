@@ -1,0 +1,174 @@
+{
+ "stage1": {
+  "impression": "A clean, well-composed three-quarter studio shot of a tinted-acrylic turntable with a believable tonearm and a soft key. It is spoiled by the plinth's front and side edges, which render as near-black slabs broken by rectangular, posterised patches of saturated royal blue, a refraction or denoiser artefact that no real acrylic produces. Together with the CG-clean floor and the glassy, shadowless lower deck, it reads as a good render, not a photograph.",
+  "score": 5.0
+ },
+ "reads_as": "a Pro-Ject/Clearaudio-style clear acrylic deck on a floating sub-plinth",
+ "unreal": [
+  {
+   "rank": 1,
+   "region": [
+    310,
+    580,
+    1770,
+    880
+   ],
+   "what": "The edges of the top plinth render near-black (lum about 44, neutral grey) with blocky, hard-edged rectangles of saturated royal blue (RGB about 41/54/114) scattered along them, like posterised or denoised caustics. The pale Ice tint never shows on the edge.",
+   "real": "A polished edge on pale through-tinted cast acrylic glows: it gathers light internally and shows a brighter, more saturated cyan-ice band, with smooth reflections of the softbox and room. No rectangles, and never darker than the face. Fix the IOR/thickness or volume absorption so the edge carries the tint, add more transmission/volume bounces and samples, and drop or soften the denoiser on glass."
+  },
+  {
+   "rank": 2,
+   "region": [
+    450,
+    700,
+    1650,
+    960
+   ],
+   "what": "The sub-plinth reads as a smoked mirror with a hard black inner rectangle drawn around it, darker and greyer than the Ice top, as if it were a different material. It casts almost no shadow onto the floor.",
+   "real": "A second sheet of the same Ice acrylic would show the same pale tint, a softer polished edge glow and a coloured transmitted shadow and caustic on the floor. A rebate or chamfer would read as a thin bright line, not a black outline."
+  },
+  {
+   "rank": 3,
+   "region": [
+    690,
+    740,
+    1010,
+    870
+   ],
+   "what": "The isolation feet or couplers between the decks are a muddy jumble of refracted fragments with black specks. They do not read as machined parts.",
+   "real": "Machined aluminium or steel cones or sorbothane pucks with a crisp turned profile, a clean chamfer and a visible contact point, seen undistorted through polished acrylic."
+  },
+  {
+   "rank": 4,
+   "region": [
+    1050,
+    880,
+    1500,
+    960
+   ],
+   "what": "The floor contact is weak. The product floats with only a faint blurred shadow under the feet, and there is no contact shadow line along the sub-plinth.",
+   "real": "A tight, dark contact occlusion under each foot, a soft, broad shadow under the whole footprint and a blue-tinted transmitted light pool from the acrylic on the white sweep."
+  },
+  {
+   "rank": 5,
+   "region": [
+    1220,
+    830,
+    1340,
+    870
+   ],
+   "what": "The EARF wordmark is a flat white decal sitting on a blue rectangle. It looks pasted on, with no depth, engraving or print layer.",
+   "real": "A laser-engraved or reverse-printed mark inside the edge: a frosted engraving that catches light or a crisp pad print with a tiny parallax, scaled to about 6-8 mm cap height."
+  },
+  {
+   "rank": 6,
+   "region": [
+    590,
+    520,
+    1380,
+    660
+   ],
+   "what": "The platter rim reads as stacked blue and white plastic rings with an unexplained white band and a deep saturated blue that does not match the Ice plinth.",
+   "real": "A single thick acrylic or aluminium platter with a polished or bead-blasted rim, one consistent material and a visible belt groove or subplatter."
+  },
+  {
+   "rank": 7,
+   "region": [
+    1110,
+    520,
+    1230,
+    620
+   ],
+   "what": "The headshell and cartridge are thin, generic flat plates with oversized round screws. There is no stylus or cantilever, and the tag clamp reads as a stamped part.",
+   "real": "A die-cast headshell with a finger lift, a real cartridge body with its stylus guard off, a visible cantilever and two slotted M2.5 screws with nuts."
+  },
+  {
+   "rank": 8,
+   "region": [
+    1420,
+    480,
+    1500,
+    590
+   ],
+   "what": "The armrest post is a plain tube with no lift or cue lever. The arm sits away from it, and the cue is missing.",
+   "real": "An arm lift tower with a damped cue lever and a cradle the arm actually rests in, or the arm parked on it in a hero shot."
+  },
+  {
+   "rank": 9,
+   "region": [
+    0,
+    0,
+    1800,
+    300
+   ],
+   "what": "The background is a dark grey band (lum about 62) meeting a white sweep with a hard, diagonal falloff, so the set looks like a CG ground plane at a horizon.",
+   "real": "A continuous paper or plaster cove that grades smoothly from lit floor to a softly darker back wall, with no visible edge."
+  },
+  {
+   "rank": 10,
+   "region": [
+    790,
+    360,
+    900,
+    400
+   ],
+   "what": "The motor pod or puck at the back-left corner is a featureless chrome disc. It is unclear what it is, and the 'ST...TA' label text is faint and illegible.",
+   "real": "A defined motor pod with a turned pulley and a visible belt. A record label with legible printed type at proper contrast."
+  }
+ ],
+ "cooler": [
+  {
+   "rank": 1,
+   "idea": "Make the tint the hero. Let the thick plinth edges glow pale ice-blue as light-piping slabs, maybe with a frosted underside, so the colour reads as a material that only cast acrylic can do.",
+   "now": "A generic clear-acrylic deck (Pro-Ject Acryl, Clearaudio Emotion) with dark edges."
+  },
+  {
+   "rank": 2,
+   "idea": "Give the two-deck stack a deliberate, visible decoupling detail: large machined bronze or steel pucks set into counterbores, read as jewellery between the sheets.",
+   "now": "Anonymous feet hidden in refraction, like a lab rig."
+  },
+  {
+   "rank": 3,
+   "idea": "Draw a signature tonearm, such as a tapered, polished or tinted-acrylic armtube with a sculpted counterweight, instead of the stock straight tube and pillar.",
+   "now": "A Rega RB-style arm on a generic base, so the deck borrows its identity."
+  },
+  {
+   "rank": 4,
+   "idea": "Integrate the motor and the controls into the plinth form, for example a recessed motor in a cast pocket with a single knurled speed dial, so the top surface has one composed gesture.",
+   "now": "Parts scattered on a flat slab, the usual acrylic-turntable kit look."
+  },
+  {
+   "rank": 5,
+   "idea": "Shape the plinth in plan, with radiused corners or a cut that echoes the platter, so its silhouette is recognisable without the logo.",
+   "now": "A plain rectangle with sharp-ish corners, the default archetype."
+  }
+ ],
+ "photo": [
+  {
+   "rank": 1,
+   "change": "Fix the acrylic: a correct IOR (1.49), volume absorption in the Ice tint, raised glossy/transmission/volume bounces (12+), more samples and no aggressive denoise on glass.",
+   "expected": "The edges glow pale blue without blocky patches. This alone removes the main CG tell (+1.5)."
+  },
+  {
+   "rank": 2,
+   "change": "Add a long rim/strip light behind and to the left, plus a white card in front low, to send light into the edges and to draw clean highlight lines on the top and edge chamfers.",
+   "expected": "Crisp outlines on the two sheets and luminous edges, so it reads as a studio photograph."
+  },
+  {
+   "rank": 3,
+   "change": "Replace the horizon with a seamless curved cove and a gentle gradient, and add contact occlusion and caustics under the feet.",
+   "expected": "The product sits on the set rather than floating in front of a CG plane."
+  },
+  {
+   "rank": 4,
+   "change": "Lower the camera slightly and use a longer lens (about 85-100 mm equivalent) with shallow focus falling off at the back corner.",
+   "expected": "Less wide-angle distortion, more premium compression and a real-lens feel."
+  },
+  {
+   "rank": 5,
+   "change": "Add surface realism: faint micro-scratches and dust on the acrylic top, a slight anisotropy on the turned metal, and a legible printed label on the record.",
+   "expected": "Breaks up the CG-clean surfaces and gives real scale cues."
+  }
+ ],
+ "score_if_fixed": 7.5
+}

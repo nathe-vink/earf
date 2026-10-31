@@ -713,7 +713,7 @@ def build(args):
         M['lid'] = acrylic('lid', [(0.0, 0.5, 'tint')], tint if args.tint_mode != 'custom' else tint, rough=0.004)
         M['post'] = acrylic('post', [(0.0, 0.5, 'clear')], tint, wear_on=False)
         M['strip'], nt_, out_ = node_tree('strip')
-        em = nt_.nodes.new('ShaderNodeEmission'); em.inputs['Color'].default_value = (1.0, 0.62, 0.30, 1); em.inputs['Strength'].default_value = args.strip
+        em = nt_.nodes.new('ShaderNodeEmission'); em.inputs['Color'].default_value = tuple(args.strip_color) + (1,); em.inputs['Strength'].default_value = args.strip
         nt_.links.new(em.outputs['Emission'], out_.inputs['Surface'])
         finish.update({'plinth-L1-stack': 'plinth', 'base-L1-stack': 'base', 'studs': 'steel', 'phono-pads': 'felt', 'hinges': 'arm',
                        'hinge-blocks': 'lid', 'led-strip': 'strip', 'led-channel': 'alu-black'})
@@ -903,6 +903,11 @@ def setup_world(args, meta):
         wall = boxo('wall', (5.0, 0.05, 3.0), (cx, cy + 0.42, 1.0), PH.pbr(bpy, 'beige_wall_001', '2k', bump=0.25, name='plaster'), bev=0)
         floor = boxo('floor', (6.0, 6.0, 0.02), (cx, cy, -0.75), dielectric('floorc', '#5A4A3C', 0.6), bev=0)
 
+    if args.front_strip > 0 and args.shot in ('hero', 'dusk'):
+        # a long low strip at the front left, raking the deck's front and side edges: a highlight line on each polished
+        # edge and light into the slabs' faces, so the fronts open up (round 48's last critics)
+        area('front-strip', (1.6, 0.10), (cx - 0.55, cy - 0.85, 0.10), (cx, cy - 0.15, 0.06), args.front_strip, col=(1.0, 0.98, 0.95), spread=40)
+        area('front-card', (1.2, 0.30), (cx + 0.35, cy - 0.75, 0.03), (cx, cy, 0.07), args.front_strip * 0.4, col=(1.0, 0.99, 0.97), spread=80, caust=False)
     if args.shot == 'dusk':
         # dusk: the room's light down to a blue evening, the base's loop the brightest thing
         for o in bpy.data.objects:
@@ -1023,6 +1028,8 @@ if __name__ == '__main__':
     ap.add_argument('--spot', type=float, default=12.0); ap.add_argument('--label-deg', type=float, default=35.0)
     ap.add_argument('--blend', default=None); ap.add_argument('--strip', type=float, default=0.0)
     ap.add_argument('--tint-mode', default='stock', choices=('stock', 'wide', 'custom'))
+    ap.add_argument('--front-strip', type=float, default=0.0)
+    ap.add_argument('--strip-color', type=float, nargs=3, default=(1.0, 0.62, 0.30))
     a = ap.parse_args(argv)
     build(a)
     if a.blend:
