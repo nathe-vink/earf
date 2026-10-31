@@ -58,11 +58,11 @@ P['feet']['inset_y'] = 25.0
 # `lip` past the mouth on the tool over its last `lip_run`; the pod rolled from the batch's 6 mm sheet; the posts' pads
 # turned pucks, the tie rod's washer on a `saddle` (radius, its top's height) in the pod; the pads' M10 inserts 12 deep
 # (the shell's wall too thin to take them). The tool's plug and base drawn `beside` the speaker (x), as option 'tooling'
-# (the owner, 2026-10-22: "Horn tint: as deep as the cabinet"): every horn part in the horn's own dye lot, `dye` times the
-# cabinet's dye (product.HORN_LOT draws it)
+# (the owner, 2026-10-22, "as deep as the cabinet", then 2026-10-31, "Deep, like the site"): every horn part in the
+# horn's own heavier dye lot, about `dye` times the cabinet's dye (product.HORN_DEPTH_M draws it: the site's resin horn's tint)
 P['horn']['cast']['formed'] = dict(
     sheet=10.0, trim=40.0, cement=0.2, socket=12.0, collar=4.0, neck=7.0, cove=10.0, lip=6.0, lip_run=8.0,
-    thin=dict(throat=0.85, mouth=0.60, corner=0.18), insert_depth=12.0, dye=3.0, flange=dict(shoulder=4.0), saddle=(8.0, -78.0),
+    thin=dict(throat=0.85, mouth=0.60, corner=0.18), insert_depth=12.0, dye='6 to 10', flange=dict(shoulder=4.0), saddle=(8.0, -78.0),
     run_usd=600.0, throat_usd=400.0, pod_usd=250.0,
     tool=dict(nose=15.0, base=(900.0, 640.0, 40.0), beside=1500.0, plug_usd=14000.0, base_usd=2000.0,
               board_usd=2800.0, board_weeks='3 to 4'))   # the prototype's plug in tooling board (the coordinator's call)

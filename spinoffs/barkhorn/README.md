@@ -228,9 +228,39 @@ and each lot's number is marked on its parts. No figures for it are on
 file: round 17's makers list minimums only as "some with minimum orders" (Madreperla) and "by asking" (Plastiglas). It
 is marked so in the parts list (`waveguide`'s stock line).
 
-In the model, `product.HORN_LOT` (3.0) gives the horn's parts their own material, `horn-lot`. It is the cabinet's
-tinted acrylic reaching the same colour in a third of the distance (`radius` 8.3 mm against 25), in every colour. The
-renders below are drawn from it.
+Until 2026-10-31 the model drew that lot as `product.HORN_LOT` (3.0): the cabinet's tinted acrylic reaching the same
+colour in a third of the distance (`radius` 8.3 mm against 25). The renders of 2026-10-22 below were drawn from it.
+
+**The owner's second call (2026-10-31): "Deep, like the site."** The coordinator showed the owner the site's Ember
+frame beside the formed horn at three times the dye (`renders/2026-10-30/barkhorn/horn36-site-check/`), with three
+choices: deep like the site, lighter as drawn, or decide on the real sample. The owner chose deep. The site's pictures
+stay as they are, and the horn is drawn to match them:
+
+- **The lot.** In each colour the horn's lot is heavy enough that the formed horn reads as the site's resin horn:
+  deep and nearly opaque, with a dark neck. In the model (`product.HORN_DEPTH_M`) its tint per millimetre is the
+  resin horn's own: its `horn_deep` colour reached in 10 mm. Measured against the cabinet's tint per millimetre, that is
+  about **6 to 10 times the cabinet's dye**: Ember about 10, Ice about 10, Haze about 8.5, Poison about 8.5, Smoke
+  about 7, Dust about 6.5. The ratio is much the same in red, green and blue, so it is the same dye at a heavier load.
+  Amber's resin was a yellower hue (2.5 to 8 across the channels) and Fog's is near clear (about 5). These are
+  estimates from the render model; the caster matches each lot to a **chip we approve**, not to a multiple.
+- **The check.** The site's studio-light Ember frame rendered again with the heavier lot, beside the site's
+  (`renders/2026-10-31/barkhorn/horn36-deep/compare-site-vs-deep.jpg`): over the horn's pixels (the render's own part masks: the flare, the throat, the pod, the cap and the driver
+  behind them), the site's horn measures mean sRGB #C85C5E, relative luminance 0.288. The formed horn in the heavier
+  lot measures #E15659 at 0.273, against #EB9E99 at 0.497 at three times the dye. By eye the flare now reads as the
+  site's: deep and nearly opaque red, with the same weight on top of the cabinet. One difference no dye can close: the
+  site's dark wedge round the throat is the resin horn's solid neck, which round 36 removed on purpose. The formed
+  horn's neck is dark too, but it is the slim throat piece and the pod, so it reads smaller.
+- **What a darker lot changes.**
+  - Forming: a dark sheet absorbs an infrared oven's heat at its surface. The heater settings, the soak and perhaps
+    the sheet temperature change with each colour, and the darkest need care against surface overheating and
+    bubbles; a circulating-air oven may suit them better. A trial sheet of each colour comes before the first shot.
+  - The wall's thinning no longer shows by eye, so it is gauged (as planned).
+  - Mark-off and scratches show more on a dark gloss face.
+  - Cost and minimums: a heavy lot is a separate casting in each colour, with its own minimum. The horn's sheet
+    almost certainly cannot share the cabinet's batch, so the one-batch question becomes "two lots per colour,
+    matched to one approved chip, each lot's number on its parts".
+  - The look: the driver and the pod no longer show through the horn, as they did not in the resin horn.
+
 
 ### The tool
 

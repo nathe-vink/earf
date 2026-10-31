@@ -1799,15 +1799,15 @@ def waveguide(P):
 # stock table has no thermoformed sheet or thick cast block, so the horn's two are added here (budget rates, 2026: the
 # sheet's rate a cubic centimetre of the finished shell carries its blank, the forming, the trim and the polish)
 SOLIDS.setdefault('cast-acrylic-thermoformed', dict(
-    title='Cast acrylic sheet 10 mm, tinted through in the horn\'s own dye lot (about three times the cabinet\'s dye, matched to '
-          'it on a swatch: the lot\'s cost and minimum to confirm with the caster), pressure-formed over a male tool, trimmed and '
+    title='Cast acrylic sheet 10 mm, tinted through in the horn\'s own heavier dye lot per colour (about 6 to 10 times the cabinet\'s dye, Ember about 10; matched to a chip we approve; '
+          'the lot\'s cost and minimum to confirm with the caster), pressure-formed over a male tool, trimmed and '
           'polished (the rate carries the blank, the forming, the trim and the polish)', density=1.19, usd_per_cm3=0.13))
 SOLIDS.setdefault('tooling-board', dict(
     title='High-temperature epoxy tooling board, glued up as a block, CNC-cut, sealed (the prototype\'s forming plug; lead time '
           '3 to 4 weeks from the program)', density=1.6, usd_per_cm3=0.025))
 SOLIDS.setdefault('clear-cast-acrylic', dict(title='Cast acrylic, water-clear (untinted)', density=1.19, usd_per_cm3=0.04))
 SOLIDS.setdefault('cast-acrylic-horn-lot', dict(
-    title='Cast acrylic, tinted through in the horn\'s own dye lot (about three times the cabinet\'s dye; 6, 30 and 75 mm), turned '
+    title='Cast acrylic, tinted through in the horn\'s own heavier dye lot (about 6 to 10 times the cabinet\'s dye; 6, 30 and 75 mm), turned '
           'and milled', density=1.19, usd_per_cm3=0.05))
 SOLIDS.setdefault('cast-acrylic-block', dict(
     title='Cast acrylic, tinted through, of the cabinet\'s own batch (sheet or block, 6 to 70 mm), turned and milled',
@@ -2018,8 +2018,9 @@ def formed_parts(P, wg):
     return [
         Part('waveguide', wg['shell'], Machined('cast-acrylic-thermoformed', 'formed', setup_usd=F['run_usd']), finish='horn-lot', group='horn',
              notes=[f'mouth {c["mouth_w"]:g} x {c["mouth_h"]:g}, {c["d"]:g} deep, 2 in throat, the air path as the simulation approved it; '
-                    f'pressure-formed from {F["sheet"]:g} mm cast sheet tinted in the horn\'s own dye lot (about {F["dye"]:g} times the '
-                    'cabinet\'s dye, matched to it on a swatch, so its 5 to 8.5 mm wall reads as deep as the cabinet\'s 20 mm) over a male aluminium tool '
+                    f'pressure-formed from {F["sheet"]:g} mm cast sheet tinted in the horn\'s own heavier dye lot (about {F["dye"]} times the '
+                    'cabinet\'s dye, matched to a chip we approve, so its 5 to 8.5 mm wall reads deep and nearly opaque, as the '
+                    'site\'s pictures show the horn: the owner, 2026-10-31, "Deep, like the site") over a male aluminium tool '
                     '(horn-tool): the blank dried, heated through at about 170 C, blown into a bubble, the tool raised into it and '
                     '4 bar over it; its face against the tool is the air path, exact; the outside free and glossy. The wall '
                     f'{n["trim"]:.1f} at its throat end, thinning toward the mouth: {n["mouth"]:.1f} at the mouth\'s sides, {n["corner"]:.1f} '
@@ -2480,15 +2481,19 @@ VARIANTS['birch-fog-opal'] = {**VARIANTS['birch-y2k-ice'],
                         'materials': {**VARIANTS['birch-y2k-ice']['materials'],
                                       'bark': {'deep': '#F5F6F5', 'radius': 0.025, 'roughness': 0.05, 'milk': 0.18}}}
 
-# round 36 (the owner, 2026-10-22: "Horn tint: as deep as the cabinet (a heavier dye lot for the horn's sheet)"): the
-# formed horn's parts are cast in a dye lot of their own, about HORN_LOT times the cabinet's dye, so its 5 to 8.5 mm wall
-# reads as deep as the cabinet's 20 mm. The cabinet's tint is a Beer's-law volume reaching its `deep` colour at `radius`;
-# the horn's lot reaches the same colour in a third of the distance
-HORN_LOT = 3.0
+# round 36 (the owner, 2026-10-22: "Horn tint: as deep as the cabinet (a heavier dye lot for the horn's sheet)"; then,
+# 2026-10-31, shown the formed horn at three times the cabinet's dye beside the site's pictures: "Deep, like the site"):
+# the formed horn's parts are cast in a dye lot of their own per colour, heavy enough that the formed horn reads as the
+# resin horn the site's pictures show: deep and nearly opaque, its neck dark. Its tint per millimetre is the resin horn's
+# (`horn_deep`, reached in 10 mm), which is about 6 to 10 times the cabinet's dye (Ember about 10, Haze about 8.5, Smoke
+# about 7; Amber's resin was a yellower hue, its ratio 2.5 to 8 across the channels); the caster matches the lot to a
+# chip we approve rather than to a multiple
+HORN_DEPTH_M = 0.01                                 # the resin horn's tint reached its `horn_deep` in 10 mm
 for _v in VARIANTS.values():
     _b = _v.get('materials', {}).get('bark')
     if _v.get('bark') == 'clear_resin' and _b is not None:
-        _v['materials'] = {**_v['materials'], 'horn-lot': {**_b, 'radius': _b.get('radius', 0.01) / HORN_LOT}}
+        _v['materials'] = {**_v['materials'], 'horn-lot': {**_b, 'deep': _v.get('horn_deep', _b['deep']), 'radius': HORN_DEPTH_M}}
+
 
 PRODUCT = Product(
     'barkhorn', 'barkhorn', 'Two-way horn loudspeaker after Friendly Pressure, in birch bark or eucalyptus bark', params=P, parts=parts,
@@ -2508,7 +2513,7 @@ PRODUCT = Product(
     # the shell's edges broken on 1 (round 15): no sheet's edge is sharp once welded and planed, cemented and polished, or
     # wrapped in bark, and the light's catch on it shows where one panel meets the next
     materials={'bark': {'preset': '$bark', 'bevel_mm': 1.0}, 'raw': {'preset': 'birch'},
-               'horn-lot': {'preset': '$bark', 'bevel_mm': 1.0},     # round 36: the formed horn's own dye lot (HORN_LOT)
+               'horn-lot': {'preset': '$bark', 'bevel_mm': 1.0},     # round 36: the formed horn's own dye lot (HORN_DEPTH_M)
                'cloth': {'preset': 'cloth', 'color': '$cloth'}, 'disc': {'preset': 'cloth', 'color': '$disc'},
                'grille-paint': {'preset': 'satin_paint', 'color': '$panel', 'roughness': 0.6, 'specular': 0.3},
                'grille-timber': {'preset': 'birch', 'color': '#8E6E4E', 'roughness': 0.55},

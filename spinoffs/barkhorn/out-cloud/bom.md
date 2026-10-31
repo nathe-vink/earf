@@ -17,10 +17,10 @@
 | port-frame-left, port-frame-right | cut | 4 | 8 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 140 x 140 | 3.72 |
 | woofer | buy | 2 | FaitalPRO 15PR400-8 15 in woofer (treated paper cone, neodymium, 8 ohm) | 393 frame, 356 cut-out, 165 deep | 194.00 |
 | amp-plate | buy | 2 | Hypex FusionAmp FA122 DSP plate amplifier, 2 x 125 W into 4 ohm | 315 x 120 x 55 plate, 291 x 96 recess | 422.40 |
-| waveguide | formed | 2 | Cast acrylic sheet 10 mm, tinted through in the horn's own dye lot (about three times the cabinet's dye, matched to it on a swatch: the lot's cost and minimum to confirm with the caster), pressure-formed over a male tool, trimmed and polished (the rate carries the blank, the forming, the trim and the polish) | 2260 cm3, 640 x 248 x 376 | 628.25 |
-| horn-throat | cnc-mill | 2 | Cast acrylic, tinted through in the horn's own dye lot (about three times the cabinet's dye; 6, 30 and 75 mm), turned and milled | 210 x 210 x 75 | 370.38 |
-| horn-pod | formed | 2 | Cast acrylic, tinted through in the horn's own dye lot (about three times the cabinet's dye; 6, 30 and 75 mm), turned and milled | 456 cm3, 210 x 136 x 210 | 155.10 |
-| waveguide-cap | cnc-mill | 2 | Cast acrylic, tinted through in the horn's own dye lot (about three times the cabinet's dye; 6, 30 and 75 mm), turned and milled | 210 x 210 x 35 | 157.18 |
+| waveguide | formed | 2 | Cast acrylic sheet 10 mm, tinted through in the horn's own heavier dye lot per colour (about 6 to 10 times the cabinet's dye, Ember about 10; matched to a chip we approve; the lot's cost and minimum to confirm with the caster), pressure-formed over a male tool, trimmed and polished (the rate carries the blank, the forming, the trim and the polish) | 2260 cm3, 640 x 248 x 376 | 628.25 |
+| horn-throat | cnc-mill | 2 | Cast acrylic, tinted through in the horn's own heavier dye lot (about 6 to 10 times the cabinet's dye; 6, 30 and 75 mm), turned and milled | 210 x 210 x 75 | 370.38 |
+| horn-pod | formed | 2 | Cast acrylic, tinted through in the horn's own heavier dye lot (about 6 to 10 times the cabinet's dye; 6, 30 and 75 mm), turned and milled | 456 cm3, 210 x 136 x 210 | 155.10 |
+| waveguide-cap | cnc-mill | 2 | Cast acrylic, tinted through in the horn's own heavier dye lot (about 6 to 10 times the cabinet's dye; 6, 30 and 75 mm), turned and milled | 210 x 210 x 35 | 157.18 |
 | hf | buy | 2 | B&C Speakers DE1085TN 2 in compression driver, titanium diaphragm, 100 mm voice coil, neodymium, 16 ohm (round 5: the owner's bigger throat) | 154 across, 86 deep, 4 x M6 on 102 | 512.00 |
 | hf-adaptor | lathe | 2 | Aluminium 6061 | 194 x 20 x 194 | 43.82 |
 | post-1, post-2 | lathe | 4 | Stainless steel 304 | 20 x 20 x 73 | 15.87 |
@@ -42,8 +42,8 @@
 | post-sockets | buy | 2 | The posts' brass fittings: four M10 x 1 threaded inserts bonded with epoxy into the waveguide's pads after casting (round 36, the formed horn: into its turned acrylic pads, all four 12 long), in holes drilled through a jig taken off the top's sockets (13 across; the front pair 10 long, the rear 14, the tie post's bored through), and four sockets knurled to 15 and pressed into the cabinet's top, or bonded with epoxy into acrylic, which a press fit would crack (15 long: a 12 bore 13 deep on a 2 floor; the cable post's floor with a 7 hole, the tie post's with a 6.5), turned to order, a set of eight |  | 48.00 |
 | post-sleeves | buy | 2 | Polyurethane sleeves 12 x 10 x 13, Shore A 90, a set of four: pressed into the posts' sockets, they centre the posts and stop them buzzing |  | 8.00 |
 | tie-rod | buy | 2 | The horn's tie-down: an M6 A2 threaded rod about 110 long, an M6 knurled thumb nut and a washer, and a flanged M6 threaded insert (body 9 x 10) for the top's underside: one for plastics in HDPE, bonded with epoxy in acrylic |  | 8.00 |
-| horn-pads | lathe | 2 | Cast acrylic, tinted through in the horn's own dye lot (about three times the cabinet's dye; 6, 30 and 75 mm), turned and milled | 30 x 30 x 110 | 49.95 |
-| horn-saddle | lathe | 2 | Cast acrylic, tinted through in the horn's own dye lot (about three times the cabinet's dye; 6, 30 and 75 mm), turned and milled | 26 x 26 x 20 | 15.68 |
+| horn-pads | lathe | 2 | Cast acrylic, tinted through in the horn's own heavier dye lot (about 6 to 10 times the cabinet's dye; 6, 30 and 75 mm), turned and milled | 30 x 30 x 110 | 49.95 |
+| horn-saddle | lathe | 2 | Cast acrylic, tinted through in the horn's own heavier dye lot (about 6 to 10 times the cabinet's dye; 6, 30 and 75 mm), turned and milled | 26 x 26 x 20 | 15.68 |
 | land-left, land-right | cut | 4 | 20 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 30 x 840 | 11.97 |
 | land-top, land-bottom | cut | 4 | 20 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 460 x 30 | 6.55 |
 | back-seal | buy | 2 | EPDM cord 4 mm, 60 Shore A, about 2.7 m, its ends vulcanised into a loop for the lands' groove (round 36: in place of the sponge gasket), and a spare |  | 12.00 |

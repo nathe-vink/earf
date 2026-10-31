@@ -31,7 +31,8 @@ COMMON = [1, 2, 3, 39, 40]          # the general arrangement, the section, the 
 
 PANEL_TOL = '±0.5 outline, ±0.2 pockets, holes +0.2/0'
 CAB_TINT = 'the speaker\'s colour, cabinet lot: Ember (red) and Smoke (black) for the prototype pair'
-HORN_TINT = 'the speaker\'s colour, horn lot (about 3 x the cabinet\'s dye, matched on a swatch): Ember and Smoke'
+HORN_TINT = ('the speaker\'s colour, the horn\'s own heavier lot per colour (about 6 to 10 x the cabinet\'s dye; Ember about 10, '
+             'Smoke about 7), matched to a chip we approve: Ember and Smoke')
 POLISH = 'edges milled square; show edges polished; annealed before cementing'
 
 # kind -> [(bom item prefix, part, material, thickness, tint, finish, tolerance)]; quantities come from the parts list
@@ -112,7 +113,22 @@ from 6 mm sheet, a cap, pads and a saddle. They are cemented to the flare with a
 whole horn, please quote it as one job; if not, the forming and trimming alone.
 
 For the first pair we supply (or have cut for you; see the tooling letter) a tooling-board plug on an aluminium base
-plate. The production tool comes later, in aluminium."""),
+plate. The production tool comes later, in aluminium.
+
+A note on the colour. The horn's sheet is not the cabinet's: in each colour it is cast in its own, much heavier dye lot,
+so that the formed horn reads deep and nearly opaque, with a dark neck. We estimate about 6 to 10 times the cabinet's
+dye (Ember about 10, Smoke about 7), but the lot is matched to a colour chip we approve, not to a multiple. That
+changes the forming in a few ways we would like your view on:
+
+- A dark sheet takes up heat differently in an infrared oven. It absorbs more at the surface and heats unevenly through
+  10 mm, so the heater settings, the soak time and possibly the forming temperature will differ from clear or lightly
+  tinted sheet. Each colour may need its own settings, and the darkest (Smoke, Ember) the most care against surface
+  overheating and bubbles. A circulating-air oven may suit it better.
+- A dark horn shows less of the wall's thinning by eye, so we will measure the wall with a gauge rather than judge it
+  by the colour. Mark-off and scratches show more on a dark gloss face, so we ask for care with the plug's polish and
+  in handling.
+- The heavier lot is a separate casting per colour, with its own minimum and cost, so the horn's sheet probably cannot
+  come from the cabinet's batch. We ask below how you would match the two lots."""),
     'b-horn-tooling': ('the horn\'s forming tool', """I'm writing for a quote on a thermoforming tool for a loudspeaker horn. For the prototype we want the plug
 cut by 5-axis machining from high-temperature epoxy tooling board (rated 150 °C or more), sealed and polished, on a
 machined aluminium base plate with a groove for the forming machine's clamp frame. We supply the CAD (STEP) of the
@@ -149,7 +165,12 @@ QUESTIONS = """1. The unit price of each part at 1 pair, 10 pairs and 50 pairs (
 EXTRA_Q = {
     'a-cast-acrylic': ['9. Whether you would rather cut from our nested sheets (DXF) or nest them yourselves.',
                        '10. Whether you can source the 121 x 4 tube in the same tint, or should it be rolled from sheet.'],
-    'b-horn-forming': ['9. The press and oven you would use (pressure box, heaters), and whether you have formed 10 mm cast acrylic before.',
+    'b-horn-forming': ['9. The press and oven you would use (pressure box, heaters), and whether you have formed 10 mm cast acrylic before, '
+                       'in a deep tint.',
+                       '9a. How the darker horn lot changes your settings (heater zones, soak time, sheet temperature), and whether you would '
+                       'run a trial sheet of each colour first; what that trial costs.',
+                       '9b. Whether a heavily tinted lot costs more to buy or cast, its minimum per colour, and whether it can be poured '
+                       'with the cabinet\'s lot or must be a separate batch matched to the same chip.',
                        '10. The wall you expect at the mouth\'s corners, and whether you would recommend 12 mm sheet.',
                        '11. How many shots you would allow to set the process up on the prototype plug.'],
     'b-horn-tooling': ['9. How many shots a tooling-board plug lasts at about 170 °C sheet temperature.',

@@ -42,8 +42,10 @@ They are not copied here, so the pack never drifts from the build.
 - the dye lot: can one pair's panels and horns come from one batch? If not, how are lots matched (to one swatch, each
   lot's number on its parts)? Can 6, 10, 20, 30 and 75 mm be poured in one batch?
 
-The horn's parts are in a lot of their own at about three times the cabinet's dye (round 36, the owner's call), so
-the acrylic requests ask for both lots and how they are matched.
+The horn's parts are in a lot of their own per colour, much heavier than the cabinet's (about 6 to 10 times its dye;
+Ember about 10), matched to a chip we approve. The owner's call of 2026-10-31 was "Deep, like the site". So the
+acrylic and forming requests ask for both lots and how they are matched, and the forming letter notes what a darker
+sheet changes in the oven.
 
 **Who to ask:** `vendors.md` is a shortlist for each kind of work, Bay Area first, then the rest of the US. It was
 drawn from public sources only (each vendor's own site or listing), with the public contact route each one shows and
