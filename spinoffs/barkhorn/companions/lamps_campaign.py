@@ -321,11 +321,17 @@ def dining_hero():
     s['sky'] = {'kind': 'gradient', 'zenith': '#0E1A33', 'horizon': '#2C4670', 'ground': '#131A26', 'strength': 0.012}
     s['lights']['toprim'] = {'type': 'area', 'size_m': [0.5, 0.3], 'position': [-0.6, 0.6, 1.95], 'target': [tx, ty, 1.5],
                              'irradiance': 1.2, 'color': 3200, 'camera': False, 'specular': 1.0, 'diffuse': 0.0}
-    s['render']['exposure'] = round(s['render']['exposure'] + 1.3, 3)
+    # critic r1 (4.5): c1 exposure down 0.8 (the runner and the shade sat on the shoulder: no pool, a salmon dome);
+    # c2 a warm fill on the walls only, so the room exists and the black top separates; c5 less magenta
+    s['render']['exposure'] = round(s['render']['exposure'] + 0.5, 3)
     s['render']['white_balance_k'] = 3300
+    s['render']['white_balance_tint'] = 5
+    s['lights']['wallfill'] = {'type': 'area', 'size_m': [1.5, 1.0], 'position': [1.0, -0.5, 2.3],
+                               'target': [-0.6, 3.15, 1.5], 'power_w': 0.35, 'color': 2700, 'specular': 0.0,
+                               'diffuse': 1.0, 'camera': False, 'receivers': ['wall-*', 'ceiling']}
     s['title'] = 'Hemisphere in Ember over a walnut table at dusk (the campaign, round 2)'
     s['size'] = [1600, 2000]
-    s['camera'] = {'position': [tx + 0.78, ty - 1.12, 1.20], 'target': [tx - 0.04, ty + 0.05, 1.22], 'lens_mm': 50,
+    s['camera'] = {'position': [tx + 0.78, ty - 1.12, 1.20], 'target': [tx - 0.04, ty + 0.05, 1.22], 'lens_mm': 62,
                    'level': True, 'fstop': 2.8, 'focus': [tx, ty, 1.45]}
     return s
 
