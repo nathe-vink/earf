@@ -1,0 +1,595 @@
+{
+ "shot": "/home/user/earf/studio/shots/barkhorn/stock-colours/mantle-ember-kind.json",
+ "image": "/home/user/earf/renders/2026-10-31/barkhorn/stock-colours/mantle-ember-kind.png",
+ "seconds": {
+  "build": 1.3,
+  "render": 231.2
+ },
+ "samples": 64,
+ "size": [
+  960,
+  640
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "parts_2d": {
+  "arm-arm#0": {
+   "part": "arm-arm",
+   "centre_px": [
+    562.6,
+    372.6
+   ],
+   "box_px": [
+    459,
+    309,
+    657,
+    446
+   ],
+   "depth_m": 2.007
+  },
+  "arm-lift#0": {
+   "part": "arm-lift",
+   "centre_px": [
+    588.7,
+    368.5
+   ],
+   "box_px": [
+    556,
+    342,
+    621,
+    396
+   ],
+   "depth_m": 2.055
+  },
+  "ball#0": {
+   "part": "ball",
+   "centre_px": [
+    430.6,
+    417.5
+   ],
+   "box_px": [
+    427,
+    414,
+    434,
+    421
+   ],
+   "depth_m": 2.086
+  },
+  "base-slab#0": {
+   "part": "base-slab",
+   "centre_px": [
+    452.7,
+    434.1
+   ],
+   "box_px": [
+    211,
+    360,
+    682,
+    530
+   ],
+   "depth_m": 2.091
+  },
+  "bearing-housing#0": {
+   "part": "bearing-housing",
+   "centre_px": [
+    430.5,
+    403.0
+   ],
+   "box_px": [
+    400,
+    372,
+    461,
+    435
+   ],
+   "depth_m": 2.08
+  },
+  "belt#0": {
+   "part": "belt",
+   "centre_px": [
+    428.2,
+    370.7
+   ],
+   "box_px": [
+    257,
+    320,
+    590,
+    432
+   ],
+   "depth_m": 2.068
+  },
+  "bushes#0": {
+   "part": "bushes",
+   "centre_px": [
+    430.5,
+    400.0
+   ],
+   "box_px": [
+    423,
+    384,
+    438,
+    416
+   ],
+   "depth_m": 2.079
+  },
+  "bushings#0": {
+   "part": "bushings",
+   "centre_px": [
+    452.7,
+    434.1
+   ],
+   "box_px": [
+    338,
+    385,
+    560,
+    491
+   ],
+   "depth_m": 2.091
+  },
+  "cartridge#0": {
+   "part": "cartridge",
+   "centre_px": [
+    472.9,
+    397.9
+   ],
+   "box_px": [
+    461,
+    387,
+    485,
+    409
+   ],
+   "depth_m": 1.917
+  },
+  "feet#0": {
+   "part": "feet",
+   "centre_px": [
+    452.7,
+    443.0
+   ],
+   "box_px": [
+    234,
+    373,
+    662,
+    531
+   ],
+   "depth_m": 2.095
+  },
+  "fixings#0": {
+   "part": "fixings",
+   "centre_px": [
+    452.4,
+    380.0
+   ],
+   "box_px": [
+    218,
+    315,
+    676,
+    463
+   ],
+   "depth_m": 2.069
+  },
+  "float-bolts#0": {
+   "part": "float-bolts",
+   "centre_px": [
+    452.6,
+    420.1
+   ],
+   "box_px": [
+    337,
+    354,
+    561,
+    496
+   ],
+   "depth_m": 2.085
+  },
+  "hinge-blocks#0": {
+   "part": "hinge-blocks",
+   "centre_px": [
+    518.9,
+    350.3
+   ],
+   "box_px": [
+    411,
+    325,
+    634,
+    377
+   ],
+   "depth_m": 2.229
+  },
+  "hinges#0": {
+   "part": "hinges",
+   "centre_px": [
+    518.6,
+    333.1
+   ],
+   "box_px": [
+    414,
+    305,
+    630,
+    363
+   ],
+   "depth_m": 2.221
+  },
+  "led-strip-edge#0": {
+   "part": "led-strip-edge",
+   "centre_px": [
+    452.7,
+    434.1
+   ],
+   "box_px": [
+    210,
+    361,
+    683,
+    529
+   ],
+   "depth_m": 2.091
+  },
+  "led-strip-strip#0": {
+   "part": "led-strip-strip",
+   "centre_px": [
+    447.2,
+    438.2
+   ],
+   "box_px": [
+    226,
+    371,
+    660,
+    523
+   ],
+   "depth_m": 2.079
+  },
+  "lid-back#0": {
+   "part": "lid-back",
+   "centre_px": [
+    532.3,
+    318.0
+   ],
+   "box_px": [
+    374,
+    279,
+    700,
+    361
+   ],
+   "depth_m": 2.253
+  },
+  "lid-front#0": {
+   "part": "lid-front",
+   "centre_px": [
+    509.1,
+    72.8
+   ],
+   "box_px": [
+    339,
+    46,
+    689,
+    103
+   ],
+   "depth_m": 2.088
+  },
+  "lid-left#0": {
+   "part": "lid-left",
+   "centre_px": [
+    377.4,
+    182.7
+   ],
+   "box_px": [
+    340,
+    44,
+    411,
+    323
+   ],
+   "depth_m": 2.27
+  },
+  "lid-right#0": {
+   "part": "lid-right",
+   "centre_px": [
+    678.8,
+    219.0
+   ],
+   "box_px": [
+    647,
+    67,
+    710,
+    373
+   ],
+   "depth_m": 2.071
+  },
+  "lid-top#0": {
+   "part": "lid-top",
+   "centre_px": [
+    537.7,
+    185.1
+   ],
+   "box_px": [
+    376,
+    39,
+    712,
+    343
+   ],
+   "depth_m": 2.209
+  },
+  "mark#0": {
+   "part": "mark",
+   "centre_px": [
+    529.2,
+    448.7
+   ],
+   "box_px": [
+    511,
+    444,
+    548,
+    454
+   ],
+   "depth_m": 1.856
+  },
+  "motor#0": {
+   "part": "motor",
+   "centre_px": [
+    388.9,
+    343.8
+   ],
+   "box_px": [
+    355,
+    313,
+    422,
+    376
+   ],
+   "depth_m": 2.24
+  },
+  "phono-pads#0": {
+   "part": "phono-pads",
+   "centre_px": [
+    492.2,
+    403.8
+   ],
+   "box_px": [
+    444,
+    387,
+    539,
+    422
+   ],
+   "depth_m": 2.18
+  },
+  "phono-stage#0": {
+   "part": "phono-stage",
+   "centre_px": [
+    494.0,
+    389.4
+   ],
+   "box_px": [
+    436,
+    357,
+    550,
+    424
+   ],
+   "depth_m": 2.178
+  },
+  "platter-disc#0": {
+   "part": "platter-disc",
+   "centre_px": [
+    430.2,
+    371.0
+   ],
+   "box_px": [
+    261,
+    315,
+    590,
+    438
+   ],
+   "depth_m": 2.067
+  },
+  "platter-hub#0": {
+   "part": "platter-hub",
+   "centre_px": [
+    430.2,
+    371.0
+   ],
+   "box_px": [
+    405,
+    356,
+    455,
+    387
+   ],
+   "depth_m": 2.067
+  },
+  "plinth-slab#0": {
+   "part": "plinth-slab",
+   "centre_px": [
+    452.4,
+    391.3
+   ],
+   "box_px": [
+    220,
+    319,
+    674,
+    483
+   ],
+   "depth_m": 2.074
+  },
+  "pod-core#0": {
+   "part": "pod-core",
+   "centre_px": [
+    389.3,
+    363.7
+   ],
+   "box_px": [
+    350,
+    327,
+    428,
+    402
+   ],
+   "depth_m": 2.248
+  },
+  "pod-mat#0": {
+   "part": "pod-mat",
+   "centre_px": [
+    389.9,
+    398.4
+   ],
+   "box_px": [
+    349,
+    383,
+    430,
+    414
+   ],
+   "depth_m": 2.263
+  },
+  "pod-pads#0": {
+   "part": "pod-pads",
+   "centre_px": [
+    391.9,
+    392.6
+   ],
+   "box_px": [
+    364,
+    380,
+    419,
+    406
+   ],
+   "depth_m": 2.266
+  },
+  "pod-ring-1-stack#0": {
+   "part": "pod-ring-1-stack",
+   "centre_px": [
+    389.3,
+    363.7
+   ],
+   "box_px": [
+    344,
+    325,
+    434,
+    404
+   ],
+   "depth_m": 2.248
+  },
+  "post-1#0": {
+   "part": "post-1",
+   "centre_px": [
+    347.5,
+    433.2
+   ],
+   "box_px": [
+    330,
+    414,
+    365,
+    453
+   ],
+   "depth_m": 2.018
+  },
+  "post-2#0": {
+   "part": "post-2",
+   "centre_px": [
+    462.6,
+    456.5
+   ],
+   "box_px": [
+    445,
+    437,
+    480,
+    477
+   ],
+   "depth_m": 1.946
+  },
+  "post-3#0": {
+   "part": "post-3",
+   "centre_px": [
+    443.8,
+    375.9
+   ],
+   "box_px": [
+    428,
+    359,
+    459,
+    393
+   ],
+   "depth_m": 2.22
+  },
+  "post-4#0": {
+   "part": "post-4",
+   "centre_px": [
+    551.2,
+    395.0
+   ],
+   "box_px": [
+    536,
+    377,
+    567,
+    413
+   ],
+   "depth_m": 2.148
+  },
+  "pulley#0": {
+   "part": "pulley",
+   "centre_px": [
+    388.6,
+    328.1
+   ],
+   "box_px": [
+    365,
+    317,
+    412,
+    339
+   ],
+   "depth_m": 2.233
+  },
+  "rear-box#0": {
+   "part": "rear-box",
+   "centre_px": [
+    606.9,
+    398.5
+   ],
+   "box_px": [
+    566,
+    376,
+    648,
+    422
+   ],
+   "depth_m": 2.156
+  },
+  "slot-mask#0": {
+   "part": "slot-mask",
+   "centre_px": [
+    446.7,
+    434.3
+   ],
+   "box_px": [
+    221,
+    369,
+    664,
+    517
+   ],
+   "depth_m": 2.076
+  },
+  "spindle#0": {
+   "part": "spindle",
+   "centre_px": [
+    430.3,
+    383.5
+   ],
+   "box_px": [
+    425,
+    350,
+    436,
+    417
+   ],
+   "depth_m": 2.072
+  },
+  "thrust-plate#0": {
+   "part": "thrust-plate",
+   "centre_px": [
+    430.7,
+    420.5
+   ],
+   "box_px": [
+    423,
+    417,
+    438,
+    424
+   ],
+   "depth_m": 2.087
+  }
+ }
+}
