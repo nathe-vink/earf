@@ -473,9 +473,12 @@ def shot_relief(sc):
             o.location = (0, -0.006 - th - (lev - 1) * th + 0.0, 1.2)
     sc.render.resolution_x, sc.render.resolution_y = 1800, 1200
     area('bar', (0.0, -0.075, 1.53), (0.0, -0.01, 0.95), 0.6, 120, '#FFEEDC', size_y=0.015)   # its LED bar: a line of light just above the top edge, washing down
-    room = area('room', (-1.3, -1.6, 2.4), (0, 0, 1.2), 2.0, 20, '#E8EEF6'); room.visible_glossy = False   # c3: weaker, camera side, high left (level, it lit the backing through the layers in a band)
-    sc.view_settings.exposure = -0.7                                                   # c2
-    camera((1.45, -2.05, 1.12), (0.12, -0.03, 1.2), lens=85, fstop=4.0, focus=2.45)    # c4, c7: oblique, quiet wall left for type
+    room = area('room', (-1.2, -2.0, 1.75), (0, 0, 1.05), 2.0, 70, '#E8EEF6'); room.visible_glossy = False   # r2 c1: front-left, onto the lower half (not level: level lit the backing in a band)
+    rimr = area('rimR', (0.6, 0.3, 0.7), (0.25, -0.03, 1.1), 0.1, 15, '#F4FFF8'); rimr.visible_glossy = False; rimr.visible_camera = False   # r2 c4
+    sys.path.insert(0, os.path.join(HERE, '..', '..', '..', '..', 'studio', 'engine')); import materials as SM
+    slab('sideboard', -1.1, -0.48, 0.0, 0.45, 0.02, 0.76, SM.make(bpy, 'oak-r', 'oak'))      # r2 c7: a sideboard under it, for scale
+    sc.view_settings.exposure = -1.0                                                   # r2 c3
+    camera((1.55, -2.30, 1.05), (0.20, -0.03, 1.16), lens=85, fstop=5.6, focus=2.7)     # r2 c6: the panel left, air below, the right third for type
 
 def shot_meridian(sc):
     sys.path.insert(0, os.path.join(HERE, '..', '..', '..', '..', 'studio', 'engine')); import materials as SM

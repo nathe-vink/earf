@@ -1,0 +1,3 @@
+{"stage1": {"score": 6.0}, "verdict": "iterate", "score_if_fixed": 7.6,
+ "changes": ["c1 fill front-left onto the lower half", "c2 finer edges", "c3 -1.0 EV", "c4 a rim behind-right through the edges", "c5 bounce below", "c6 camera, air below, type right", "c7 a sideboard for scale", "c8 grade"],
+ "accept": [{"id":"c1","region":[420,700,760,1000],"metric":"lum_median","op":"between","value":[45,95]},{"id":"c3","region":[0,0,1800,140],"metric":"clip_pct","op":"<","value":3}]}
