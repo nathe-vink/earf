@@ -210,7 +210,13 @@ annealed again; and the lands' faces, the bosses' faces and the back's seal groo
   the final air path), faced to the pitch less the bond line, and its outside edge polished before bonding (the
   stepped outside is a terrace a layer, and each edge shows);
 - bonded with a polymerising cement in three sub-stacks, then the sub-stacks joined, with no bubble within 5 mm of the
-  air path and none visible through the tint;
+  air path and none visible through the tint. As we read Röhm's and ACRYLITE's guides:
+  - the cement is degassed no lower than about 0.2 bar, and the layers are pressed with dead weight on spacers, not in a
+    vacuum bag;
+  - the cut layers are annealed less than 24 hours before bonding, and no bonded face is polished;
+  - no brass or copper is near the cement;
+  - the layers register on their bores over a stepped core. We would rather not have dowel holes: through the tint they
+    would show as rods in the wall. Tell us if you register another way;
 - annealed, and the air path cut through the stack on 5 axes to our STEP (`step/air-path.step`, the horn's inside as a
   solid, from the throat at z = 0), then polished. Its shape is acoustically set and must follow the STEP; the bond lines
   cross it flush.
@@ -275,6 +281,9 @@ EXTRA_Q = {
         '(we would pay for that test).',
         'Your 5-axis router\'s reach for a part 630 x 366 x 292, and how you hold the stack while cutting the air path.',
         'The edge finish of the layers: polished, or frosted as an option; and the price difference.',
+        'How you would register 22 layers without dowel holes in the wall (on their bores over a stepped core, or waste '
+        'ears trimmed off after), and whether a cement tinted to the sheet (Röhm allows a solvent-soluble colourant) is '
+        'something you have done.',
         'The earliest date you could deliver the first horn and the cabinet pair, ordering in mid-November, and whether '
         'a delivery by early January for both speakers is realistic.',
     ],

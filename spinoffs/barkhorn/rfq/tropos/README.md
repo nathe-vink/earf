@@ -13,6 +13,7 @@ minimums and labour. **Nothing here has been sent.** No vendor has been contacte
 | `c-metal/` | a CNC and sheet-metal job shop | the amplifier compartment, the driver's adaptor ring, the stainless posts, the brass sockets and inserts, the rating plate |
 | `d-other/` | small specialist shops | the lining batts and their sewn voile sleeves, the cloth disc, the etched wordmark, the EPDM cord seal and gasket, the post sleeves |
 | `e-laminated-horn/` | one shop that bonds and 5-axis machines (first: Architectural Plastics, Petaluma, research R7) | the first pair in stock sheet: the cabinet in stock 3/4 in Smoke (as `a-`), and the horn laminated from 22 layers of stock 1/2 in, stepped, with the smooth outside as an option, and its small parts; the layers as DXF and the air path and smooth outside as STEP (`layers_dxf.py`, `make/laminated-horn.md`) |
+| `f-layer-cutting/` | cutters only (Pololu, Neal's CNC, Acrylic Art, Atlas Contour; research R8) | the horn's 44 layers cut from our own 1/2 in sheet: short and email versions, paste-ready, in `letters.md`; the DXFs are `e-laminated-horn/`'s |
 
 Each folder has:
 

@@ -98,8 +98,8 @@ Each joint is polymerising cement (ACRIFIX 2R 0190 or Weld-On 40), the cabinet's
 - Twenty-two joints multiply the cabinet's risk C2 (`horn-risks.md`) by 22.
 
 **The mitigation.**
-- Cement mixed under vacuum, laid as a bead along each ring's middle, and pressed outward to both edges with a flat
-  weighted platen. That pushes air out, not in.
+- Cement degassed gently (no lower than about 0.2 bar absolute), poured a third of the way across each ring, and the
+  next layer lowered from one edge onto spacers under dead weight, which pushes air out, not in (below).
 - Bond three sub-stacks of 7 or 8 layers, inspect each joint through its polished edge with a bright light, then join
   the sub-stacks.
 - A bad joint scraps at most one sub-stack. A layer is about $20 to $40 of sheet and an hour of work until it is
@@ -125,6 +125,40 @@ Each joint is polymerising cement (ACRIFIX 2R 0190 or Weld-On 40), the cabinet's
   pigmented sheet can bond weaker.
   - Mitigation: bond two off-cuts of each stock colour (2423, 2074) with the chosen cement first. Check the line for a
     halo, then break-test it. Add this to the 5-layer test stack.
+
+**How it is bonded** (research R8, from Röhm's *Joining PLEXIGLAS* 311-3 and ACRYLITE's reactive-cement brief):
+- **Press with dead weight on spacers, not in a vacuum bag.**
+  - The layers rest on about 1 mm polyethylene cord spacers, on a flat melamine or glass table with stops.
+  - Use only enough weight to push out the air. Too much starves the joint.
+  - Degas the mixed cement no lower than about 0.2 bar absolute. Below that, Röhm says the cement "will foam".
+  - Pour about a third of the way across each layer, then lower the next layer from one edge.
+- **Anneal the cut layers less than 24 hours before bonding.** This relieves the cutting stress, which matters most on a
+  laser edge.
+  - Never polish or flame-polish a face that will be bonded.
+  - The outside edges are polished; the faces are only faced flat.
+  - Anneal each sub-stack within 24 hours of bonding, heating at no more than 10 °C an hour.
+- **No copper or brass near the cement:** they inhibit its cure. Use stainless or acetal for every pin, weight and stop.
+- **Registration without holes.** A dowel hole through a layer would show through the tint as a dark rod in the wall,
+  and the 3 mm left inside the rough bore is too narrow for one.
+  - The layers are registered on their rough bores, over a stepped core cut in the same program as the layers (MDF or
+    acetal, wrapped in polyethylene film so the cement does not take).
+  - The outline is checked against a fence at the back.
+  - If a shop prefers dowels, they go through waste ears outside each outline, cut in the same program and trimmed off
+    after bonding. That costs a re-polish of each ear's spot on a stepped edge.
+- **Coupon trials first:**
+  - two-layer coupons of 2423 and of 2074 off-cuts, in clear cement and in cement tinted with a solvent-soluble colourant
+    (Röhm allows it);
+  - annealed at 70 and at 80 °C;
+  - checked for colour bleed, pale or yellowed glue lines, and bubbles.
+
+  A tinted cement would hide the glue lines in the deep tint.
+
+**Patents (a status, not a legal opinion).** R8 found two patents near this horn:
+- Tannoy's US 8,213,658, a horn profile, with layers only in its dependent claims;
+- US 10,397,695, laminated acrylic panels.
+
+Both show "Expired - Fee Related" on Google Patents (checked by the coordinator, 2026-10-31). No freedom-to-operate block
+is visible. Counsel should confirm before production.
 
 **Likelihood:** medium on the first horn, low after it. These are the same process and inspection as the cabinet's
 joints, done by the same shop.

@@ -10,6 +10,7 @@ prototype pair on the first attempt.
 | `plan-b.md` | Five other ways to make the horn if forming fails, compared on cost, risk, look and acoustics. The recommendation is laminated layers, and it is modelled and rendered. |
 | `assembly.md` | The assembly sequence with hours for each step, and the labour line for a speaker, a pair and the first pair. |
 | `laminated-horn.md` | The laminated horn from 22 layers of stock 1/2 in sheet, stepped or smooth: colour, air path, edges, bond lines, mass and stability, cost and schedule beside the formed horn. |
+| `diy-route.md` | The horn made ourselves if no shop can: Ace Makerspace's laser, bonding and annealing in-house; cost, schedule, and the owner's own time. |
 | `stock-pair.md` | The first pair in stock sheet: Smoke from stock 3/4 in 2064, the Ember horn from stock 2423, the Ember cabinet from a Chemcast mill run; what 19 mm changes. |
 | `stock_tints.py` | Stock sheet's colour per millimetre from published light transmission, for the renders (`stock_colours.json`). |
 | `schedule.md` | The dated schedule to a first horn and an assembled pair, against 21 January, mid-February and April; the critical path. |
