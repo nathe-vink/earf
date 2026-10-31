@@ -278,7 +278,7 @@ def rcp_sheet():
         F.r(sh, I['x0'] + 1.0, y_ - 0.04, I['x1'] - 1.0, y_ + 0.04, fill=INK, sw=0.1)
     F.r(sh, P.LOBBY['x0'], P.ROUTE_Y[1], L, W, fill='#efefec80', sw=0.2, dash='1 1')
     legend = ['○  downlight, 2700 K, dimmed (the counter, the tables, the shop)', '●  Hemisphere (the product) over the counter and the shop table',
-              '▬  linear slot diffuser (supply), under 2 m/s face velocity', '•  spot inside the lantern: the pair, Mother EARF (its coloured shadow), the trap\'s graze',
+              '▬  linear slot diffuser (supply), under 2 m/s face velocity', '•  spot inside the lantern: the pair, Mother EARF (its colored shadow), the trap\'s graze',
               '━  the lantern\'s lit band (amber line), seen from the bar and the route',
               'FCU  the lantern\'s own fan coil on the plant deck; supply and return through lined silencers and flexible',
               '     connectors at the box\'s back wall; grilles in the lid at under 1.5 m/s (NC 15–20 target)']

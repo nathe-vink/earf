@@ -15,7 +15,7 @@ FOR = {
            'lock. ',
     'lantern': 'inside the lantern, the listening room, from its back bench: the Tropos pair in Ember on terrazzo plinths, '
                'Mother EARF (a 1.25 m globe of six slotted tinted acrylic discs, its rims glowing) on her terrazzo plinth '
-               'between them, her coloured shadow on the end-grain floor, oak slat walls and lid, lounge chairs on a rug. '
+               'between them, her colored shadow on the end-grain floor, oak slat walls and lid, lounge chairs on a rug. '
                'Calm and dark: a room for listening. ',
 }
 
@@ -36,7 +36,7 @@ counter, the back bar, the banquette, the shop's shelves and table, the window p
 materials (terrazzo, quartzite, oak, blackened steel, lime plaster, end-grain oak, the acrylic band's place and fins),
 and EARF's products as placed (one Tropos pair in Ember, Mother EARF on her plinth, the Cores and Hemispheres in tints)."""
 
-MAY = """**What may change:** every light level and colour (the band's glow, the lantern's foot line, the downlights,
+MAY = """**What may change:** every light level and color (the band's glow, the lantern's foot line, the downlights,
 the shelf and back-bar lines, the speakers' and Mother's spots, the trap's graze, the fills, the street), the camera,
 the exposure and grade, haze, the materials' finish within their kind (the terrazzo's chip size and ground tone, the
 oak's tone, the plaster's tone, the glass's reflection), small props (glasses, records), and the finish."""
@@ -63,7 +63,7 @@ def settings(sh, scale):
         f"- the baffle's graze: {lamps('baffle')}; the route: {lamps('route')}; the fill: {lamps('fill')}",
         f"- inside the lantern: the pair {lamps('stack')}; Mother EARF {lamps('mother')}; the trap {lamps('trap')}; "
         f"fill {lamps('infill')}",
-        f"- haze {sh['haze']['density']} per metre; glass reflection {room.get('glass_gloss', 0.5)}",
+        f"- haze {sh['haze']['density']} per meter; glass reflection {room.get('glass_gloss', 0.5)}",
         f"- render: {json.dumps(R)}"])
 
 

@@ -101,7 +101,7 @@ A 24-seat bar with people in it is not a reference room, so this is a design tar
 The axial modes are 23.5, 32.1, 47.0, 50.4, 64.2 and 70.5 Hz. The 47 and 50 Hz pair is the one to watch.
 - **The back wall** is a 900 mm deep slotted-oak trap filled with wool, which is broadband down to about 40 Hz *(est.)*.
 - **Corner traps,** 300–600 mm, in the two front vertical corners behind the selector's desk and the door.
-- **The pair** sits 2.2 m from the front wall and 1.7 m from the side walls, symmetric about the room's centre line.
+- **The pair** sits 2.2 m from the front wall and 1.7 m from the side walls, symmetric about the room's center line.
 - **Final placement** is by measurement after the box is built, with a house limiter.
 
 ### Isolation: the box in the box
@@ -200,13 +200,13 @@ California Plumbing Code §422.1.1 counts fixtures at 50% male and 50% female, a
 
 | Element | Material | Why it lasts | Care |
 |---|---|---|---|
-| Floor, shop and bar | Honed epoxy terrazzo, 3/8 in, marble and glass chips in a warm grey ground | Decades in restaurants; NTMA quotes $0.85/sq ft/year over 40 years | Neutral cleaner daily; reseal yearly; hone every 5–10 years |
+| Floor, shop and bar | Honed epoxy terrazzo, 3/8 in, marble and glass chips in a warm gray ground | Decades in restaurants; NTMA quotes $0.85/sq ft/year over 40 years | Neutral cleaner daily; reseal yearly; hone every 5–10 years |
 | Floor, the lantern | End-grain white oak blocks, oiled, on the floated slab | Wears into a patina; re-sandable many times | Re-oil yearly; spot-sand |
 | Bar top | Honed quartzite, 30 mm, eased nosing | Hard; honed hides wear | Seal every 6–12 months; test a sample for etching (lemon, vinegar) before buying |
 | Bar die, Mother's plinth, window plinth | Terrazzo; the die and Mother's plinth with 15% acrylic-offcut chips | Vertical or untouched: no wear on the acrylic | As the floor |
 | Joinery | Oiled white oak, fumed a shade; blackened steel | Repairable, re-oilable, ages warm | Re-oil touch surfaces yearly |
 | The lantern's skin | Slotted oak baffle (60 mm battens, 12 mm slots), 140 mm boards on the route side | Bolted panels: replaceable one at a time | As joinery |
-| The band | Cast Smoke acrylic fins, 20 mm on a 28 mm pitch, 60 mm deep, IOR 1.49 | Behind the oak line, out of reach; cast sheet keeps its colour guarantee because it is cut flat, never formed | Dust twice a year with a damp microfibre (no solvents: they craze acrylic) |
+| The band | Cast Smoke acrylic fins, 20 mm on a 28 mm pitch, 60 mm deep, IOR 1.49 | Behind the oak line, out of reach; cast sheet keeps its color guarantee because it is cut flat, never formed | Dust twice a year with a damp microfiber (no solvents: they craze acrylic) |
 | Walls | Lime plaster on the party walls | Breathable; patches invisibly | Limewash every few years |
 | Ceiling | Acoustic plaster on resilient clips | Seamless; repairable | Repaint over its life only with the maker's acoustic paint |
 | Seating | Oxblood leather banquette; mohair chairs and bench in the lantern | Leather and mohair outlast synthetics | Condition the leather twice a year; clean mohair professionally |
@@ -242,7 +242,7 @@ California Plumbing Code §422.1.1 counts fixtures at 50% male and 50% female, a
 
 **What it saves.** It is demountable, so at the next site it is re-erected rather than rebuilt: a new floor cut, the services and the reassembly, about a third of its first cost *(est.)*.
 
-These figures replace round 42's construction line, which was $560k–$1.26M for 2,800 sq ft. They do not include the licence, the sound system, the products, furniture or pre-opening.
+These figures replace round 42's construction line, which was $560k–$1.26M for 2,800 sq ft. They do not include the license, the sound system, the products, furniture or pre-opening.
 
 ## Maintenance (what keeps it looking new in ten years)
 

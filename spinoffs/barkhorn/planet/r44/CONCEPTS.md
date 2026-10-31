@@ -29,7 +29,7 @@ These four boards went to a blind critic, who picked one (its verdict is in `cri
 
 ## (a) The strata room
 
-**The idea.** The listening room's floor rises in four curved terraces around the speakers, like the contour lines of a map or a small amphitheatre.
+**The idea.** The listening room's floor rises in four curved terraces around the speakers, like the contour lines of a map or a small amphitheater.
 - **The focus.** Mother EARF stands on its plinth at the focus, between the speakers.
 - **The terraces.** They are oak-faced timber boxes filled with mineral wool. Their riser faces are slotted, so the terraces themselves are the room's bass traps: a 1.2 m deep volume of absorber under the seats.
 - **The light.** A thin lit line runs under each nosing (an LED behind a vertical acrylic strip, never trodden on), so the contours glow faintly in the dark.
