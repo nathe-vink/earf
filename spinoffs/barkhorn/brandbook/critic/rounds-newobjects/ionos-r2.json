@@ -1,0 +1,3 @@
+{"stage1": {"score": 5.0}, "verdict": "iterate", "score_if_fixed": 7.3,
+ "changes": ["c1 the stone at its gray", "c2 a bigger, higher window for an attached shadow", "c3 the sweep 3 m back and lit from above, no band", "c4 a bounce card into the front, rim 45 W", "c5 a black flag right", "c6 an overhead card for the disc", "c7 caustics", "c8 stone texture"],
+ "accept": [{"id":"c1","region":[100,950,400,1150],"metric":"delta_e","hex":"#8C857A","op":"<","value":12},{"id":"c2","region":[480,862,600,885],"metric":"lum_median","op":"<","value":185},{"id":"c3","region":[900,150,1000,450],"metric":"lum_range","op":"<","value":60},{"id":"c4","region":[480,450,1110,900],"metric":"lum_median","op":">","value":110}]}
