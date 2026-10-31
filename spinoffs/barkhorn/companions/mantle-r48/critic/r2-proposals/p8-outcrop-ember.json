@@ -1,0 +1,174 @@
+{
+ "stage1": {
+  "impression": "A clean, competent studio render of a stacked-acrylic belt-drive turntable. The tonearm and platter are believable at a glance. Up close it reads as CG: the 'tinted' plinth looks like smoked grey glass with a red pinstripe rather than a through-tinted cast block, the stack edges are mirror-black with no light piping, stray white rectangles float inside the layers, and the arm hardware is generic catalogue parts. The set is a flat seamless with a hard horizon and an overlaid uniform grain, which adds no photographic depth.",
+  "score": 5.5
+ },
+ "reads_as": "a smoked-acrylic Pro-Ject/Clearaudio-style stacked plinth turntable with a red accent line",
+ "unreal": [
+  {
+   "rank": 1,
+   "region": [
+    900,
+    820,
+    1650,
+    1060
+   ],
+   "what": "Inside the three plinth layers there are hard-edged white and red rectangles and slivers (luminance range 17 to 218 in a 140x40 patch at 1060,860) that read as refraction of flat internal geometry or coplanar faces, not as anything a cast block would contain.",
+   "real": "A cast acrylic stack shows the parts behind it softly displaced by refraction and tinted by the path length. Either remove or blur the internal boards, or make them deliberate, machined and finished (anodised standoffs, a visible bearing well), so what you see through the block reads as engineering."
+  },
+  {
+   "rank": 2,
+   "region": [
+    110,
+    640,
+    1650,
+    1040
+   ],
+   "what": "The 'Ember' through-tint does not read. The layers look neutral smoked grey to black (body medians about R65 G61 B57), and the red appears only as a thin inner rim line on the top layer. The polished edges are mirror-black with no colour.",
+   "real": "Through-tinted cast acrylic glows hardest at its polished edges, where light travels the long path: the edges should carry a saturated amber or ember line, getting deeper with thickness, and the top face should be a warm translucent tint over the stuff below, not grey glass."
+  },
+  {
+   "rank": 3,
+   "region": [
+    110,
+    690,
+    1650,
+    1040
+   ],
+   "what": "The layer edges are perfectly sharp black slabs with uniform reflections and a dark gap line that looks like a modelling gap, not a bonded or spaced joint.",
+   "real": "Real laminated acrylic shows a 0.5 to 1 mm polished arris on every edge catching a thin bright highlight, and either a bonded seam (invisible, with a slight colour change) or visible spacers or standoffs if the layers are separated. Add edge rounding and a defined joint."
+  },
+  {
+   "rank": 4,
+   "region": [
+    920,
+    600,
+    1030,
+    720
+   ],
+   "what": "The headshell is a flat black plate with a stubby finger lift, and the cartridge is a plain black box with no stylus, cantilever, mounting screws or tag wires to speak of.",
+   "real": "A $6,500 deck would carry a recognisable moving-coil cartridge with a polished body, visible cantilever and stylus over the groove, two slotted screws with nuts, and coloured tag wires running to the arm. Model the stylus touching the record or lift it clearly."
+  },
+  {
+   "rank": 5,
+   "region": [
+    1420,
+    450,
+    1530,
+    540
+   ],
+   "what": "The counterweight is a polished chrome dome with a perfect mirror and no knurling, set screw or graduation, and is oversized for the arm.",
+   "real": "Real counterweights are turned stainless or tungsten with a knurled band, a grub screw and often a decoupling bush; they are matt-blasted or brushed rather than mirror, and sized to the arm's effective mass."
+  },
+  {
+   "rank": 6,
+   "region": [
+    1270,
+    600,
+    1450,
+    680
+   ],
+   "what": "The armboard is a featureless flat grey disc with four dimple screws, and the arm pillar is a smooth CG cylinder with no VTA collar, locking screw or cable exit.",
+   "real": "A machined armboard has a turned or brushed finish with concentric tool marks, chamfered edges, countersunk cap screws, and the arm base shows a VTA adjustment collar with a locking grub screw, plus an arm cable leaving the base."
+  },
+  {
+   "rank": 7,
+   "region": [
+    410,
+    450,
+    1200,
+    760
+   ],
+   "what": "The record is a smooth black disc with a few evenly spaced rings. There is no fine groove sheen or anisotropic highlight, and the label text 'STRATA' is barely legible and centred like a placeholder.",
+   "real": "Vinyl under a softbox shows a radial anisotropic highlight streak across the grooves, distinct lead-in, track gaps and runout, a slight dish, and a printed label with readable typography and some ink texture."
+  },
+  {
+   "rank": 8,
+   "region": [
+    100,
+    0,
+    1800,
+    260
+   ],
+   "what": "The sweep ends in a hard horizontal horizon at about y=200 into a dark grey wall (median luminance 74), banded and flat, like a CG ground plane against a backdrop.",
+   "real": "A studio seamless curves into the wall with a continuous falloff and no visible edge, or the set is a real table with a physical edge and depth of field that softens the background."
+  },
+  {
+   "rank": 9,
+   "region": [
+    230,
+    1020,
+    1450,
+    1110
+   ],
+   "what": "The feet are almost invisible: tiny dark pucks under the corners with a thin uniform contact shadow, so the deck appears to hover.",
+   "real": "Real decks sit on visible machined or sorbothane feet (20 to 30 mm) with a dense contact shadow right under each, a softer ambient shadow under the whole block, and a faint tinted caustic where the light passes through the acrylic onto the sweep."
+  },
+  {
+   "rank": 10,
+   "region": [
+    0,
+    0,
+    1800,
+    1200
+   ],
+   "what": "A uniform fine noise overlay covers the whole frame, including the smooth background, on top of an image that is otherwise CG-clean. It reads as added grain rather than sensor noise.",
+   "real": "A real capture is cleanest in the bright, even areas and shows noise mostly in the shadows, along with a little chromatic aberration at high-contrast edges and lens falloff. Drop the overlay, or apply it in a luminance-dependent way."
+  }
+ ],
+ "cooler": [
+  {
+   "rank": 1,
+   "idea": "Make the Ember tint the hero: a thick, single through-tinted block, or layers stepped in depth of colour, with polished edges that glow like embers when backlit, so the colour carries the product.",
+   "now": "Smoked-acrylic stacked plinth with a red rim line, the familiar Pro-Ject/Clearaudio clear-acrylic archetype."
+  },
+  {
+   "rank": 2,
+   "idea": "Make the visible internals intentional: a machined bearing housing, motor pod and a visible belt seen through the tint, arranged as a composition, the way a skeleton watch frames its movement.",
+   "now": "Incidental shapes and white rectangles leaking through the layers like construction debris."
+  },
+  {
+   "rank": 3,
+   "idea": "Give the tonearm and armboard a signature detail in the family language, such as a cast-bronze or ember-anodised armboard, a distinctive counterweight form or a fluted arm tube, instead of off-the-shelf chrome.",
+   "now": "A generic catalogue S-less straight arm with a chrome ball counterweight, of the Rega/Pro-Ject kind."
+  },
+  {
+   "rank": 4,
+   "idea": "Articulate how the layers stack: visible bronze spacer pucks or a stepped chamfer per layer, so the strata read as designed and the side elevation has a rhythm.",
+   "now": "Three near-identical slabs with dark gaps that read as a modelling artefact."
+  },
+  {
+   "rank": 5,
+   "idea": "Integrate the wordmark properly: engraved and colour-filled, or cast letters set into the tint, aligned to a corner grid, rather than a white sticker.",
+   "now": "A small white 'EARF' decal that reads as a placeholder sticker near the front right corner."
+  }
+ ],
+ "photo": [
+  {
+   "rank": 1,
+   "change": "Add a strong back or rim light (a strip softbox behind and above at low angle) so light passes through the acrylic and lights up its polished edges and tint, and gives a coloured caustic on the sweep.",
+   "expected": "The Ember tint and the edges read as cast colour, and the object gains depth and glow. This is the biggest single gain."
+  },
+  {
+   "rank": 2,
+   "change": "Replace the hard-horizon set with a continuous curved seamless or a real material surface (oak, honed stone), and use a longer lens (about 85 to 100 mm equivalent) at f/5.6 so the background falls off softly.",
+   "expected": "The set stops reading as a CG ground plane, and perspective compression makes the deck look more substantial."
+  },
+  {
+   "rank": 3,
+   "change": "Add a large overhead softbox whose reflection sweeps across the top face and the record, with an anisotropic groove highlight on the vinyl.",
+   "expected": "The top face reads as polished acrylic, the record reads as vinyl, and the image gains a clear hero highlight."
+  },
+  {
+   "rank": 4,
+   "change": "Put brushed, bead-blasted and turned finishes with microscopic roughness on all the metal, and a 0.5 mm polished arris on every acrylic edge.",
+   "expected": "Edges and parts read at real scale and as manufactured rather than as perfect CG primitives."
+  },
+  {
+   "rank": 5,
+   "change": "Remove the global grain overlay. Add noise that depends on luminance, a slight vignette and a touch of lateral chromatic aberration, and densify the contact shadows under the feet.",
+   "expected": "Lens and sensor character reads as photographic, and the deck sits firmly on the surface."
+  }
+ ],
+ "score_if_fixed": 8.0
+}

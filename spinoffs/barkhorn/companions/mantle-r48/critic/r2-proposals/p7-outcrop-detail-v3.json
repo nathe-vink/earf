@@ -1,0 +1,174 @@
+{
+ "stage1": {
+  "impression": "A moody, shallow-depth close-up of a cartridge resting on a record above a glossy dark plinth. The bokeh and warm low-key light carry it a long way toward a photograph. But the record has no visible grooves, the cartridge and headshell are generic softened blocks, and the record edge and plinth bands read as clean CG extrusions rather than made parts.",
+  "score": 6.0
+ },
+ "reads_as": "a generic modern belt-drive turntable, shot as a cartridge macro",
+ "unreal": [
+  {
+   "rank": 1,
+   "region": [
+    100,
+    150,
+    1200,
+    420
+   ],
+   "what": "The record surface in focus near the stylus is a smooth, featureless matte grey-brown (lum p5-p95 65-107, no fine structure). There are no groove bands, lead-in, run-out or land between tracks.",
+   "real": "Vinyl in a raking macro shows concentric micro-groove sheen: fine anisotropic radial highlights, visible gaps between tracks, and a glossy land at the edge. Use an anisotropic or ring-normal groove texture with track gaps."
+  },
+  {
+   "rank": 2,
+   "region": [
+    1095,
+    400,
+    1310,
+    490
+   ],
+   "what": "The stylus is a straight polished pin sticking forward out of a rounded block. It hovers in mid-air, with no cantilever angle, no stylus guard and no tip contact or reflection on the record.",
+   "real": "A real cantilever is a thin aluminium or boron tube angled down about 20 degrees from the body to a tiny diamond, with a damper collar at the body. It either sits in the groove with a reflection or hangs clearly lifted on the arm rest."
+  },
+  {
+   "rank": 3,
+   "region": [
+    1460,
+    300,
+    1800,
+    420
+   ],
+   "what": "The record edge to the right of the cartridge is a white, crumbly, noisy strip with an irregular lower edge. It reads as a mesh or shader artifact, like foam or paper, not vinyl.",
+   "real": "The vinyl edge is a smooth, rolled black bead about 1.5 mm thick with a crisp specular line. Fix the edge geometry and material, and check for coplanar or intersecting faces with the mat or platter."
+  },
+  {
+   "rank": 4,
+   "region": [
+    1140,
+    195,
+    1530,
+    425
+   ],
+   "what": "The cartridge body is a uniformly bevelled grey box with even satin shading. It has no mounting threads, no pin markings, no brand engraving and no parting line, so it looks like a placeholder primitive.",
+   "real": "Real bodies are machined or moulded, with a sharp front face, a small engraving or logo, a visible tracking face with a coil-housing window and four colour-coded pins with clips and wires at the back."
+  },
+  {
+   "rank": 5,
+   "region": [
+    1255,
+    70,
+    1400,
+    150
+   ],
+   "what": "The headshell screws are blown-out chrome blobs with lumpy, melted highlights and no slot or hex. They have no washers and no thread visible under the plate.",
+   "real": "Real fixings are M2.5 stainless or black-oxide socket-cap screws with a crisp hex recess, a flat washer and a tiny hard reflection, sized about 4 mm across."
+  },
+  {
+   "rank": 6,
+   "region": [
+    0,
+    420,
+    1100,
+    570
+   ],
+   "what": "The platter or plinth band is pure black: 73% of the region is crushed to 0. That reads as a void, not tinted acrylic, so the Smoke tint is invisible.",
+   "real": "Through-tinted smoke acrylic shows depth: a brown-grey translucency with internal refraction of the bearing and sub-platter, and a lit polished edge glowing faintly with the tint. Expose the shadows or add a backlight so the tint reads."
+  },
+  {
+   "rank": 7,
+   "region": [
+    0,
+    570,
+    1800,
+    660
+   ],
+   "what": "The grey band across the frame is a flat, uniform satin strip with a constant width and no edge highlight. It reads as a modelling separator rather than a part.",
+   "real": "A cast-acrylic layer or aluminium ring would show a polished or flame-polished edge with a bright rim line, slight variation where it catches the key, and a visible glue line or gap where it meets the parts above and below."
+  },
+  {
+   "rank": 8,
+   "region": [
+    0,
+    1000,
+    900,
+    1200
+   ],
+   "what": "The bottom-left foreground plate has a thin, irregular white edge line, and the surface reflection is stepped and blocky.",
+   "real": "A polished acrylic edge in a defocused foreground blurs into a soft bright line with a refracted glow. Remove the aliasing and stepped reflections, and let the defocus match the rest of the depth of field."
+  },
+  {
+   "rank": 9,
+   "region": [
+    1380,
+    0,
+    1800,
+    120
+   ],
+   "what": "The arm pillar and counterweight are softly blurred but too evenly smooth, with no machining marks or knurling. The arm tube joint is invisible.",
+   "real": "Turned aluminium shows fine lathe rings, a knurled or engraved counterweight, and a clamp screw at the arm-tube joint."
+  },
+  {
+   "rank": 10,
+   "region": [
+    300,
+    700,
+    1700,
+    1000
+   ],
+   "what": "The large plinth face reflects broad blocky rectangles of the set with hard straight edges. It has no dust, no micro-scratches and no surface imperfection anywhere on a gloss surface.",
+   "real": "Real gloss acrylic photographed at macro shows a few dust motes, faint polishing swirls and a slightly curved, soft-edged reflection of a real room or flag."
+  }
+ ],
+ "cooler": [
+  {
+   "rank": 1,
+   "idea": "Make the smoke-tinted acrylic the hero: let light pass through the plinth and platter so the bearing, belt and sub-platter float visibly inside the tint.",
+   "now": "It reads as black piano-gloss MDF, the familiar archetype of a Pro-Ject or Rega-style plinth."
+  },
+  {
+   "rank": 2,
+   "idea": "Give the headshell and cartridge a signature form: a single machined piece with a distinctive finger lift or a cut-away that matches the plinth layers.",
+   "now": "A generic rectangular headshell with a bent black finger lift, like any OEM arm."
+  },
+  {
+   "rank": 3,
+   "idea": "Express the layered construction honestly with polished, flame-bright edges and visible stand-offs between the layers, so the stack becomes the identity.",
+   "now": "Bands of grey and black that look like paint stripes rather than distinct cast layers."
+  },
+  {
+   "rank": 4,
+   "idea": "Add one precise jewellery detail in view, such as an engraved platter rim scale, a contrasting bronze stylus guard or a coloured cartridge pin set.",
+   "now": "Every part is the same desaturated grey or black, with nothing to remember it by."
+  },
+  {
+   "rank": 5,
+   "idea": "Use a platter mat or record clamp that picks up the tint or a material accent, so the top plane carries the brand.",
+   "now": "A plain record on a plain platter."
+  }
+ ],
+ "photo": [
+  {
+   "rank": 1,
+   "change": "Add a narrow strip light or backlight behind and below the plinth to drive light through the smoke acrylic and its polished edges. Lift the shadows so the crushed region (0-560 y) sits around 10-25 lum, not 0.",
+   "expected": "The tint and translucency read, the black void disappears, and the frame shows the material it is selling."
+  },
+  {
+   "rank": 2,
+   "change": "Rake a small hard light low across the record from the far side, and use a real groove normal or anisotropic texture.",
+   "expected": "Groove sheen and the stylus's reflection make it unmistakably a photograph of vinyl."
+  },
+  {
+   "rank": 3,
+   "change": "Move the focus plane to the stylus tip and cantilever, at about f/4 equivalent, and seat the stylus in the groove or lift it clearly.",
+   "expected": "The detail frame gets a clear subject and the main contact point looks engineered."
+  },
+  {
+   "rank": 4,
+   "change": "Replace the plinth's blocky set reflections with a softbox and one dark flag, and add subtle dust and polishing micro-scratches to the gloss surfaces.",
+   "expected": "The CG-clean look goes and the scale reads correctly."
+  },
+  {
+   "rank": 5,
+   "change": "Fix the record edge and the foreground plate's edge (white noisy strips) with clean geometry and more samples or denoising on the thin edges.",
+   "expected": "The two most obvious render artifacts are gone."
+  }
+ ],
+ "score_if_fixed": 7.8
+}

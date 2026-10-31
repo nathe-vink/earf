@@ -17,6 +17,10 @@ and the two frames in a random order (`*.order.json` says which was new). Replie
 | `outcrop-use.png` (B) | a record playing, the cover as the sleeve's frame | **6.0** | a layered smoked deck with an acrylic sleeve frame |
 | `outcrop-detail.png` (B) | the arm's corner | **5.0** | a glossy black acrylic deck through a heavy filter |
 | `strata-hero.png` (A, Strata Float) | studio, lid off, the base lit | **6.0** | a boutique smoked-acrylic suspended-plinth deck |
+| `outcrop-hero-v2.png` (B) | the critics' notes: gray sweep, frosted etch, puck screws, stainless feet | 5.5 | a Pro-Ject or Rega-style acrylic deck |
+| `outcrop-hero-v3.png` (B) | the arm's details (tag wires, pins, screws, marks), the vinyl's sheen | 5.5 | a smoked-acrylic layered-plinth deck, an off-the-shelf arm |
+| `outcrop-detail-v3.png` (B) | close on the stylus and headshell | **6.0** | a modern belt-drive deck shot as a cartridge macro |
+| `outcrop-ember.png` (B) | Outcrop in stock 2423 Red | 5.5 | a stacked smoked-acrylic deck with a red accent line |
 
 ## Duels against the current heroes
 
@@ -25,8 +29,9 @@ and the two frames in a random order (`*.order.json` says which was new). Replie
 | `outcrop-hero.png` | `studio-smoke.png` | 6.5 | 4.0 | **new** |
 | `outcrop-use.png` | `dusk-smoke.png` | 6.5 | 4.5 | **new** |
 | `strata-hero.png` | `studio-smoke.png` | **7.0** | 4.0 | **new** |
+| `outcrop-detail-v3.png` | `detail.png` | 6.5 | 3.5 | **new** |
 
-All three new frames won their duels against the site's current frames, which passes the gate. No single blind score
+All four new frames won their duels against the site's current frames, which passes the gate. No single blind score
 reached 7.0. The critics' estimates with their notes applied ran 7.5-8.0.
 
 ## What the critics still see, and what was done
@@ -46,3 +51,21 @@ reached 7.0. The critics' estimates with their notes applied ran 7.5-8.0.
 - **"Still the clear-deck archetype"**: every critic says it. The Outcrop cover-as-frame and the closed strata block
   are the moves no Pro-Ject has. The critics who saw only the open deck could not see them, and the closed frame is
   for that.
+
+## Where it stopped, and why
+
+The hero has had three passes (v1, v2, v3), which is the protocol's limit for a shot at one look. Its blind score held
+at 5.5 while each round's specific complaints were fixed, and the critics moved on to the next layer of detail each
+time. The duels are the more sensitive measure (critic/duel.py's note), and every new frame won its duel by 2.5-3.5
+points.
+
+What the last critics agree on, for whoever takes this further:
+- **The Ember tint reads as a red pinstripe, not through-tint** (p8). That is the design's honest look: thin tinted
+  rings round clear strata. A through-tinted Ember block at 47 mm would be black (2423 passes 14 % at 1/8 in). If the
+  owner wants more color, the rings can go wider, or the caster can pour lighter Ember laminae.
+- **The bought arm still reads as generic.** It is a generic arm: Rega's RB330. A bespoke arm is a product decision
+  (the critics' "cooler" lists keep asking for one), not a render fix.
+- **Bright internal rectangles** (the tunnel, the pockets, the notch seen through the clear strata): honest, but they
+  read as debris. Next: vapor-polish them and place the phono stage's tunnel deeper, or tint the bottom stratum.
+- **No caustics are claimed.** With MNEE on, tinted laminae would throw white caustics (the coordinator's note);
+  none of these frames shows one where a colored shadow should fall.
