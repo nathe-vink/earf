@@ -31,7 +31,7 @@ TINTS = {
     'fog':    ('2515', 69.1, '#E9ECEE'),   # light grey transparent
     'ice':    ('2069', 57.6, '#4FB8FF'),   # tinted blue transparent
     'acid':   ('2422', 59.1, '#FFC93A'),   # amber transparent (the nearest light warm yellow on the chart)
-    'smoke':  ('2064', 29.3, '#9A96A6'),   # light grey / smoke
+    'smoke':  ('2064', 29.3, '#A9A7A3'),   # light grey / smoke, near neutral
     'poison': ('2092', 18.6, '#6BD45A'),   # green
     'ember':  ('2283', 12.3, '#FF4A3A'),   # red
     'dust':   ('2119', 5.8, '#FF8A3A'),    # orange
@@ -53,7 +53,7 @@ def sigma_per_mm(key, thin=1.0):
     _, tt, hue = TINTS[key]
     t_int = min(tt / 92.0, 0.999)
     if key == 'clear':                                   # cast PMMA itself: a whisper of green-cyan over 100 mm
-        return [0.0016 * thin, 0.0007 * thin, 0.0009 * thin]
+        return [0.0005 * thin, 0.00025 * thin, 0.0003 * thin]
     h = hex_lin(hue)
     m = max(h)
     shape = [-math.log(max(c / m, 0.02)) + 0.05 for c in h]     # how much faster each channel goes than the hue's own
@@ -455,3 +455,83 @@ def render(out, w=1800, h=1200, samples=256, scale=1.0, exposure=0.0, seed=0):
 def args():
     a = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else sys.argv[1:]
     return a
+
+
+def studio(subject_h=60, ground='#4A4846', key=1.0, overhead=1.0, rims=1.0, card=True, warm='#FFF6EA', cool='#EEF4FF',
+           wall_range=None, side=-1):
+    """The editions' seamless: a warm grey cove, a big overhead softbox a little behind (the bright face every polished
+    top reflects), a soft key on the camera's side, two tall strips behind for edge lines, and a white card low in front
+    (so the front faces carry a reflection, not black). Powers scale with the subject's size."""
+    s = max(subject_h, 30) / 60.0
+    cove(ground, rough=0.6, radius=420)
+    area('overhead', (0, 120 * s, 700 * s), (0, 0, 0), (900 * s, 600 * s), 60 * overhead * s * s, warm)
+    area('key', (side * 520 * s, -380 * s, 420 * s), (0, 0, subject_h * 0.4), 300 * s, 30 * key * s * s, warm)
+    for x in (-1, 1):
+        area(f'rim{x}', (x * 300 * s, 360 * s, 180 * s), (0, 0, subject_h * 0.5), (70 * s, 700 * s), 25 * rims * s * s, cool)
+    if card:
+        ob = block('card', 900 * s, 4, 0, 260 * s, principled('card', '#F4F2EE', rough=0.9), bevel=0, y=-650 * s,
+                   x=0)
+        ob.location.z = 0.0
+
+
+def strata(name, layers, z_range):
+    """One clear acrylic body whose tint changes by height: `layers` [(z0, z1, tint, thin)] in mm, clear elsewhere.
+    A bonded laminate of one polymer has no optical boundary at its bond lines, so it is one solid here; only the
+    absorption steps from stratum to stratum (a bond line is invisible when the cement is index-matched and clean)."""
+    mat = bpy.data.materials.new(name)
+    nt, out = _nodes(mat)
+    b = nt.nodes.new('ShaderNodeBsdfPrincipled')
+    b.inputs['Transmission Weight'].default_value = 1.0
+    b.inputs['IOR'].default_value = 1.49
+    b.inputs['Roughness'].default_value = 0.0
+    nt.links.new(b.outputs['BSDF'], out.inputs['Surface'])
+    zs0, zs1 = z_range
+    bands = [(zs0, zs1, sigma_per_mm('clear'))]
+    for z0, z1, t, thin in layers:
+        bands.append((z0, z1, sigma_per_mm(t, thin)))
+    D = max(max(s) for *_, s in bands) / MM
+    tc = nt.nodes.new('ShaderNodeTexCoord')
+    sep = nt.nodes.new('ShaderNodeSeparateXYZ')
+    nt.links.new(tc.outputs['Object'], sep.inputs['Vector'])
+    mr = nt.nodes.new('ShaderNodeMapRange')
+    mr.inputs['From Min'].default_value = zs0 * MM
+    mr.inputs['From Max'].default_value = zs1 * MM
+    nt.links.new(sep.outputs['Z'], mr.inputs['Value'])
+    ramp = nt.nodes.new('ShaderNodeValToRGB')
+    cr = ramp.color_ramp
+    cr.interpolation = 'CONSTANT'
+    col = lambda s: tuple(1.0 - (c / MM) / D for c in s) + (1.0,)
+    cr.elements[0].position = 0.0
+    cr.elements[0].color = col(bands[0][2])
+    cr.elements[1].position = 1.0
+    cr.elements[1].color = col(bands[0][2])
+    for z0, z1, s in bands[1:]:
+        e = cr.elements.new(max((z0 - zs0) / (zs1 - zs0), 0.0001))
+        e.color = col(s)
+        e2 = cr.elements.new(min((z1 - zs0) / (zs1 - zs0), 0.9999))
+        e2.color = col(bands[0][2])
+    nt.links.new(mr.outputs['Result'], ramp.inputs['Fac'])
+    ab = nt.nodes.new('ShaderNodeVolumeAbsorption')
+    ab.inputs['Density'].default_value = D
+    nt.links.new(ramp.outputs['Color'], ab.inputs['Color'])
+    nt.links.new(ab.outputs['Volume'], out.inputs['Volume'])
+    return mat
+
+
+def lamina(name, tint, thin=1.0):
+    """A tinted stratum set inside a clear body (inset 0.05 mm from its faces): its surface is a plain transparent
+    pass (no refraction, as a clean index-matched bond line has none), its volume adds the tint's absorption on top of
+    the clear body's along the stretch of path that crosses it."""
+    mat = bpy.data.materials.new(name)
+    nt, out = _nodes(mat)
+    tr = nt.nodes.new('ShaderNodeBsdfTransparent')
+    nt.links.new(tr.outputs['BSDF'], out.inputs['Surface'])
+    s = sigma_per_mm(tint, thin)
+    c = sigma_per_mm('clear')
+    s = [max(a - b, 0.0) for a, b in zip(s, c)]
+    D = max(s) / MM
+    ab = nt.nodes.new('ShaderNodeVolumeAbsorption')
+    ab.inputs['Density'].default_value = D
+    ab.inputs['Color'].default_value = tuple(1.0 - (x / MM) / D for x in s) + (1.0,)
+    nt.links.new(ab.outputs['Volume'], out.inputs['Volume'])
+    return mat
