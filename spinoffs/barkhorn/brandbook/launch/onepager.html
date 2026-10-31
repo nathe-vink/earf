@@ -1,0 +1,77 @@
+<!doctype html><meta charset="utf-8">
+<title>EARF · Investor summary</title>
+<style>
+/* EARF's investor one-pager: US Letter, one side, to attach to an outreach email. Every fact and figure is the
+   investor deck's (https://claude.ai/artifact/3sihYaT4ckNTF6WE7SWR7x, read 31 October 2026); placeholders in brackets */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400..700&display=block');
+@page { size: Letter; margin: 0 }
+* { box-sizing: border-box }
+body { margin: 0; font-family: 'Instrument Sans', Arial, sans-serif; color: #1C1A18; -webkit-print-color-adjust: exact; print-color-adjust: exact }
+.page { width: 8.5in; height: 11in; background: #F4F1EC; padding: .42in .5in .38in; display: flex; flex-direction: column; gap: 11px; position: relative; overflow: hidden }
+.k { font-family: 'IBM Plex Mono', monospace; font-size: 7pt; letter-spacing: .12em; text-transform: uppercase; color: #5E5A53 }
+.top { display: flex; justify-content: space-between; align-items: center }
+.top img { height: 17px }
+h1 { margin: 0; font-size: 31pt; line-height: .95; letter-spacing: -.035em; font-weight: 600 }
+.lede { margin: 0; font-size: 10.5pt; line-height: 1.42; max-width: 6.4in }
+.hero { height: 1.95in; border-radius: 3px; overflow: hidden; margin: 0 -.5in; border-radius: 0 }
+.hero img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30% }
+.row4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px }
+.prod img { width: 100%; height: 1.1in; object-fit: cover; border-radius: 2px; display: block; background: #ECE8E1 }
+.prod b { display: block; font-size: 10.5pt; margin-top: 4px; letter-spacing: -.01em }
+.prod span { display: block; font-size: 7.6pt; line-height: 1.35; color: #5E5A53 }
+.prod i { font-style: normal; font-family: 'IBM Plex Mono', monospace; font-size: 6.8pt; letter-spacing: .04em; color: #1C1A18 }
+h2 { margin: 0 0 4px; font-size: 11pt; letter-spacing: -.01em }
+.cols { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px }
+.fact b { display: block; font-size: 15pt; letter-spacing: -.02em; color: #B23A17; line-height: 1 }
+.fact span { display: block; font-size: 7.6pt; line-height: 1.35; color: #3A3733; margin-top: 3px }
+.two { display: grid; grid-template-columns: 1.05fr 1fr; gap: 16px }
+ol, ul { margin: 0; padding-left: 14px; font-size: 8pt; line-height: 1.4 }
+li { margin-bottom: 2px }
+.ask { background: #1C1A18; color: #F4F1EC; border-radius: 3px; padding: 10px 13px; display: grid; gap: 4px }
+.ask .big { font-size: 22pt; font-weight: 600; color: #F08A5D; letter-spacing: -.02em; line-height: 1 }
+.ask table { border-collapse: collapse; font-size: 7.4pt; width: 100% }
+.ask td { padding: 1.5px 0; border-bottom: 1px solid #3A3733 } .ask td:last-child { text-align: right; font-family: 'IBM Plex Mono', monospace }
+.ask tr:last-child td { border: 0; font-weight: 600 }
+.ask p { margin: 0; font-size: 7.4pt; color: #BDB6AA; line-height: 1.4 }
+.state { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 7.8pt }
+.foot { margin-top: auto; display: flex; justify-content: space-between; align-items: end; border-top: 1px solid #D6D0C6; padding-top: 7px }
+.foot .c { font-size: 9pt; line-height: 1.45 } .foot .c b { font-weight: 600 }
+.src { font-size: 6.2pt; color: #5E5A53; line-height: 1.35; max-width: 4.6in; text-align: right }
+.strip { position: absolute; left: 0; right: 0; bottom: 0; height: 5px; display: flex } .strip i { flex: 1 }
+</style>
+<div class="page">
+  <div class="top"><img src="../../brand/mark/earf-wordmark-black.svg" alt="EARF"><span class="k">Investor summary · San Francisco · [Month] 2026</span></div>
+  <h1>Something in the air.</h1>
+  <p class="lede">EARF makes hi-fi and lighting in cast acrylic, tinted all the way through, in eight colours. Four pieces, named for the Earth, made to order and sold direct. Drawn, engineered and priced; not yet built. This raise builds the first of each and debuts them in San Francisco.</p>
+  <div class="hero"><img src="../../site/img/hero-1200.jpg" alt=""></div>
+  <div class="row4">
+    <div class="prod"><img src="../../site/img/red-studio-light-1200.jpg" alt=""><b>Tropos</b><span>A powered horn loudspeaker: 15-inch woofer, 2-inch compression driver, Hypex amplifier built in.</span><i>$19,000 a pair (planned)</i></div>
+    <div class="prod"><img src="../../site/img/lamp-dome-800.jpg" alt=""><b>Hemisphere</b><span>A pendant whose shade swaps in a quarter turn.</span><i>$795–$895 (suggested)</i></div>
+    <div class="prod"><img src="../../site/img/lamp-orb-800.jpg" alt=""><b>Core</b><span>A table lamp, plugged in or not, on cells the owner can replace.</span><i>$650</i></div>
+    <div class="prod"><img src="../../site/img/tt-violet-dusk-1200.jpg" alt=""><b>Mantle</b><span>A record player that floats on its own light.</span><i>About $5,000 (suggested)</i></div>
+  </div>
+  <div>
+    <h2>Why now</h2>
+    <div class="cols">
+      <div class="fact"><b>$1.04B</b><span>US vinyl sales in 2025, up 9.3%, the 19th straight year of growth; the first half of 2026 rose another 17.7%.</span></div>
+      <div class="fact"><b>$516,600</b><span>An acrylic chair at auction: Kuramata's Miss Blanche, Phillips New York, June 2022, more than double its low estimate.</span></div>
+      <div class="fact"><b>Sold out</b><span>A designer's horn speaker: Klipsch × OJAS kO-R1, 100 pairs at $8,498; then 600 numbered pairs at $11,995.</span></div>
+    </div>
+  </div>
+  <div class="two">
+    <div style="display:grid;gap:9px;align-content:start">
+      <div><h2>The plan: each step paid for by the one before</h2>
+        <ol><li><b>Prototypes and a debut.</b> This raise: the first Tropos pair and one of each lamp and Mantle; a debut night in San Francisco; real photographs; a waiting list and deposits.</li>
+        <li><b>Certification and a first batch.</b> A pre-seed raised on those deposits: FCC, UL and California listings, the production horn tool, the first made-to-order pairs.</li>
+        <li><b>Planet EARF.</b> Financed on its own, $1.0–1.6 M: a listening bar in San Francisco that sells everything in it.</li></ol></div>
+      <div class="state"><div><h2>Done</h2><ul><li>Drawings and parts lists for all four</li><li>Horn, heat and batteries engineered</li><li>Compliance mapped</li><li>Names searched; earf.world built</li></ul></div>
+        <div><h2>Not yet</h2><ul><li>No prototype built</li><li>No sales or deposits</li><li>Every picture is a render</li><li>Production costs wait on quotes</li></ul></div></div>
+    </div>
+    <div class="ask"><span class="k" style="color:#BDB6AA">The ask</span><div class="big">$50,000</div>
+      <table><tr><td>Tropos prototype pair: parts and tooling</td><td>$19,200</td></tr><tr><td>Hemisphere, Core and Mantle, one of each</td><td>$10,400</td></tr><tr><td>Casting minimums, labour and finishing*</td><td>$8,000</td></tr><tr><td>Trademark search* and filings</td><td>$3,600</td></tr><tr><td>Emissions pre-scans, Tropos and Core*</td><td>$2,000</td></tr><tr><td>The debut: crating, transport, photographs*</td><td>$4,000</td></tr><tr><td>Contingency</td><td>$2,800</td></tr><tr><td>Total</td><td>$50,000</td></tr></table>
+      <p>From angels who love hi-fi and design, and Kiva's 0% loans. Terms: [to set]. * Allowances until quotes replace them.</p></div>
+  </div>
+  <div class="foot"><div class="c"><b>[Founder's name]</b>, Founder<br>[email] · [phone] · earf.world</div>
+    <div class="src">In development; every picture is a render. Sources: RIAA year-end 2025 and mid-year 2026 reports; Phillips, June 2022 design sales; the OJAS store and Gear Patrol, 2024–2026. Prices as in the deck: Tropos planned, Hemisphere and Mantle suggested.</div></div>
+  <div class="strip"><i style="background:#C92118"></i><i style="background:#E06718"></i><i style="background:#E2AA15"></i><i style="background:#367424"></i><i style="background:#2584BE"></i><i style="background:#5B3197"></i><i style="background:#D5DFE0"></i><i style="background:#57545F"></i></div>
+</div>

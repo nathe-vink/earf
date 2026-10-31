@@ -52,6 +52,9 @@ def main():
     for f in ['decal-crate-front.png', 'decal-crate-side.png', 'decal-crate-inside.png']:
         im = Image.open(os.path.join(HERE, 'out', f)).convert('RGBA'); bg = Image.new('RGBA', im.size, (226, 207, 170, 255))
         save(Image.alpha_composite(bg, im), f[:-4] + '.jpg', width=700)
+    for f in sorted(os.listdir(os.path.join(HERE, 'launch', 'out'))):   # the debut's paper and the one-pager
+        if f.endswith('.png'):
+            save(Image.open(os.path.join(HERE, 'launch', 'out', f)), f[:-4] + '.jpg', width=1400, q=86)
     import shutil   # the motion: the site's turning globe and two of the parked idents (round 27)
     for dst, src in {'globe-turn.mp4': 'site/img/globe-turn.mp4', 'ident-coin.mp4': 'brand/earth-ident-coin-acrylic-paper.mp4',
                      'ident-rise.mp4': 'brand/earth-ident-rise-acrylic-night.mp4'}.items():

@@ -1,0 +1,46 @@
+<!doctype html><meta charset="utf-8"><title>EARF · Debut invitation (card)</title>
+<style>
+/* The debut invitation, printed: a 5 x 7 in card, front and back, letterpress on 600 gsm with the tints on its foot.
+   Facts from the bar lane's pop-up plan (r33-planet-world, planet/r42/POPUP.md): Tuesday 19 January 2027, FOG week */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400..700&display=block');
+@page { size: 5in 7in; margin: 0 }
+* { box-sizing: border-box }
+body { margin: 0; font-family: 'Instrument Sans', Arial, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact }
+.card { width: 5in; height: 7in; position: relative; overflow: hidden; page-break-after: always }
+.front { background: #0E0D10; color: #EDE7DD }
+.front img.pic { position: absolute; left: 0; top: 0; width: 100%; height: 4.3in; object-fit: cover; object-position: 50% 45% }
+.front .fade { position: absolute; left: 0; right: 0; top: 3.1in; height: 1.25in; background: linear-gradient(180deg, rgba(14,13,16,0), #0E0D10) }
+.front .w { position: absolute; left: .4in; top: .4in; height: 14px }
+.front .t { position: absolute; left: .4in; right: .4in; top: 4.05in; display: grid; gap: 8px }
+.front h1 { margin: 0; font-size: 30pt; line-height: .95; letter-spacing: -.035em; font-weight: 600 }
+.front p { margin: 0; font-size: 10.5pt; line-height: 1.4; color: #CFC8BD }
+.k { font-family: 'IBM Plex Mono', monospace; font-size: 7pt; letter-spacing: .14em; text-transform: uppercase; color: #A79F93 }
+.front .when { position: absolute; left: .4in; right: .4in; bottom: .45in; display: flex; justify-content: space-between; align-items: end; font-family: 'IBM Plex Mono', monospace; font-size: 8pt; letter-spacing: .08em; text-transform: uppercase; line-height: 1.6 }
+.strip { position: absolute; left: 0; right: 0; bottom: 0; height: 5px; display: flex } .strip i { flex: 1 }
+.back { background: #F4F1EC; color: #1C1A18; padding: .45in .4in; display: flex; flex-direction: column; gap: 14px }
+.back h2 { margin: 0; font-size: 17pt; letter-spacing: -.02em; line-height: 1.05 }
+.back dl { margin: 0; display: grid; grid-template-columns: .95in 1fr; gap: 7px 10px; font-size: 9.5pt; line-height: 1.35; border-top: 1px solid #D6D0C6; padding-top: 10px }
+.back dt { font-family: 'IBM Plex Mono', monospace; font-size: 7pt; letter-spacing: .1em; text-transform: uppercase; color: #5E5A53; padding-top: 2px }
+.back dd { margin: 0 }
+.back .note { font-size: 8.5pt; color: #5E5A53; line-height: 1.45 }
+.back .f { margin-top: auto; display: flex; justify-content: space-between; align-items: end }
+.back .f img { height: 12px }
+</style>
+<div class="card front">
+  <img class="pic" src="../../site/img/red-studio-1200.jpg" alt="">
+  <div class="fade"></div>
+  <img class="w" src="../../../barkhorn/brand/mark/earf-wordmark-white.svg" alt="EARF">
+  <div class="t"><span class="k">You are invited</span><h1>Something<br>in the air.</h1><p>The first pair of Tropos, heard for the first time. Hi-fi and light in cast acrylic, in eight colours.</p></div>
+  <div class="when"><span>Tuesday 19 January 2027<br>[Time] · [Venue], San Francisco</span><span>RSVP<br>[RSVP]</span></div>
+  <div class="strip"><i style="background:#C92118"></i><i style="background:#E06718"></i><i style="background:#E2AA15"></i><i style="background:#367424"></i><i style="background:#2584BE"></i><i style="background:#5B3197"></i><i style="background:#D5DFE0"></i><i style="background:#57545F"></i></div>
+</div>
+<div class="card back">
+  <span class="k">The opening of the EARF pop-up · the week of FOG Design+Art</span>
+  <h2>A listening room for eight weeks, opening with one night.</h2>
+  <dl><dt>When</dt><dd>Tuesday 19 January 2027, [time]</dd><dt>Where</dt><dd>[Venue], [address], San Francisco</dd>
+    <dt>Hear</dt><dd>Tropos, the horn loudspeaker, its first pair built as production will build it</dd>
+    <dt>See</dt><dd>Mantle, the record player, and the lamps or their cast samples in the eight tints</dd>
+    <dt>At the door</dt><dd>One coin, one song</dd></dl>
+  <p class="note">Everything in the room is made to order and can be reserved on the night. The pop-up then opens Thursday to Sunday, 1 to 8 pm, until mid-March.</p>
+  <div class="f"><span class="k">earf.world · hello@earf.world</span><img src="../../../barkhorn/brand/mark/earf-wordmark-black.svg" alt="EARF"></div>
+</div>
