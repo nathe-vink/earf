@@ -186,7 +186,7 @@
    {
     "kind": "kit",
     "shape": "box",
-    "material": "paper",
+    "material": "card",
     "color": "#2B3A4A",
     "position": [
      -0.44,
@@ -196,26 +196,178 @@
     "size": [
      0.15,
      0.21,
-     0.022
+     0.0025
+    ],
+    "roughness": 0.75,
+    "rotate_z": 14,
+    "ease": 0.0008
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "card",
+    "color": "#2B3A4A",
+    "position": [
+     -0.44,
+     2.74,
+     0.5715000000000001
+    ],
+    "size": [
+     0.15,
+     0.21,
+     0.0025
+    ],
+    "roughness": 0.75,
+    "rotate_z": 14,
+    "ease": 0.0008
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "card",
+    "color": "#2B3A4A",
+    "position": [
+     -0.5115593098128547,
+     2.722158260199525,
+     0.5525
+    ],
+    "size": [
+     0.0025,
+     0.21,
+     0.019
+    ],
+    "roughness": 0.75,
+    "rotate_z": 14,
+    "ease": 0.0008
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "paper",
+    "color": "#E9E1CF",
+    "position": [
+     -0.440242573931569,
+     2.7399395195261005,
+     0.5525
+    ],
+    "size": [
+     0.1445,
+     0.204,
+     0.019
     ],
     "rotate_z": 14
    },
    {
     "kind": "kit",
     "shape": "box",
-    "material": "paper",
-    "color": "#B8873C",
+    "material": "card",
+    "color": "#8A6A3A",
     "position": [
      -0.44,
      2.74,
-     0.572
+     0.574
     ],
     "size": [
      0.14,
      0.2,
-     0.018
+     0.0025
+    ],
+    "roughness": 0.75,
+    "rotate_z": 4,
+    "ease": 0.0008
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "card",
+    "color": "#8A6A3A",
+    "position": [
+     -0.44,
+     2.74,
+     0.5915
+    ],
+    "size": [
+     0.14,
+     0.2,
+     0.0025
+    ],
+    "roughness": 0.75,
+    "rotate_z": 4,
+    "ease": 0.0008
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "card",
+    "color": "#8A6A3A",
+    "position": [
+     -0.5085825284553629,
+     2.7352042424300915,
+     0.5764999999999999
+    ],
+    "size": [
+     0.0025,
+     0.2,
+     0.015
+    ],
+    "roughness": 0.75,
+    "rotate_z": 4,
+    "ease": 0.0008
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "paper",
+    "color": "#E9E1CF",
+    "position": [
+     -0.44024939101256494,
+     2.739982560881564,
+     0.5764999999999999
+    ],
+    "size": [
+     0.1345,
+     0.194,
+     0.015
     ],
     "rotate_z": 4
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "material": "glass",
+    "color": "#F4F2EE",
+    "position": [
+     -0.47,
+     3.0,
+     0.55
+    ],
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.036,
+      0
+     ],
+     [
+      0.036,
+      0.095
+     ],
+     [
+      0.0335,
+      0.095
+     ],
+     [
+      0.0335,
+      0.006
+     ],
+     [
+      0.0,
+      0.006
+     ]
+    ],
+    "clear_shadow": 0.7
    },
    {
     "kind": "kit",
@@ -235,6 +387,8 @@
     "flavour": "ember",
     "lamp_w": 0.17569546120058566,
     "shade_glow": 0.04,
+    "hide": "led|chassis",
+    "lamp_r": 0.05,
     "materials": {
      "body": {
       "radius": 0.00375
@@ -346,7 +500,11 @@
      0,
      1
     ]
-   }
+   },
+   "receivers": [
+    "base",
+    "ring"
+   ]
   },
   "rimcard": {
    "type": "panel",
@@ -398,5 +556,13 @@
    2.86,
    0.68
   ]
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 236,
+  "white_out": 236,
+  "contrast": 0.1,
+  "clarity": 0.1,
+  "sharpen": 0.3
  }
 }

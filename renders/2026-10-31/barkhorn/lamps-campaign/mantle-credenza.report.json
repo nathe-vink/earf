@@ -3,7 +3,7 @@
  "image": "/home/user/earf/renders/2026-10-31/barkhorn/lamps-campaign/mantle-credenza.png",
  "seconds": {
   "build": 1.7,
-  "render": 407.5
+  "render": 423.3
  },
  "samples": 96,
  "size": [
@@ -591,5 +591,15 @@
    ],
    "depth_m": 1.742
   }
+ },
+ "finish": {
+  "white_in": 236,
+  "white_out": 236,
+  "peak": 251.0,
+  "contrast": 0.1,
+  "clarity": 0.1,
+  "sharpen": 0.3,
+  "sharpen_px": 0.7,
+  "gain": 1.0
  }
 }

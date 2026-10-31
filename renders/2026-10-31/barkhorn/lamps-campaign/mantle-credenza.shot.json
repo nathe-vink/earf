@@ -131,7 +131,8 @@
      0.004,
      0.315
     ],
-    "rotate_x": -5.810176864540543
+    "rotate_x": -5.810176864540543,
+    "image": "spinoffs/barkhorn/companions/art/sleeve-rings.png"
    },
    {
     "kind": "kit",
@@ -450,5 +451,13 @@
   "glow": {
    "strength": 0.9
   }
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 236,
+  "white_out": 236,
+  "contrast": 0.1,
+  "clarity": 0.1,
+  "sharpen": 0.3
  }
 }
