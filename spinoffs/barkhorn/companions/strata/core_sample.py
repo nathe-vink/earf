@@ -67,7 +67,8 @@ def parts(P):
     # the light engine: a plug in the foot's bore, the spine up the bore with two LED runs, the opal tube over it
     plug = cyl('z', (0, 0), 30.0, fh - 5, fh + 2)
     spine = box(-5, -5, fh + 2, 5, 5, fh + 2 + P['bar'][1])
-    strips = union(box(-4, -5.8, fh + 6, 4, -5.0, fh + 6 + 140), box(-4, 5.0, fh + 6, 4, 5.8, fh + 6 + 140))
+    ls = P['bar'][1] - 8
+    strips = union(box(-4, -5.8, fh + 6, 4, -5.0, fh + 6 + ls), box(-4, 5.0, fh + 6, 4, 5.8, fh + 6 + ls))
     od, wall, ln = P['tube']
     tube = cyl('z', (0, 0), od, fh + 2, fh + 2 + ln) - cyl('z', (0, 0), od - 2 * wall, fh + 1, fh + ln - 1)
     out += [Part('plug', plug, Machined('aluminium', 'lathe'), finish='anodised', group='engine', inside=True,
@@ -92,7 +93,7 @@ def parts(P):
 def heat():
     """The light engine's heat path, worked: 4.4 W of strips at full, about 3.3 W of it heat (the rest light)."""
     q = 0.75 * P['led_w']
-    bar_R = 0.140 / (2 * 200.0 * 1e-4)                 # 6063 bar, k 200, 10 x 10: half its length on average, K/W
+    bar_R = P['bar'][1] * 1e-3 / (2 * 200.0 * 1e-4)                 # 6063 bar, k 200, 10 x 10: half its length on average, K/W
     fd, fh = P['base']
     foot_area = (math.pi * fd * fh + math.pi * (fd / 2) ** 2) * 1e-6
     foot_rise = S.sink_rise(q, foot_area, h=10.0)
@@ -113,7 +114,8 @@ def _notes():
         'bead-blasted satin, so the strata differ in finish as well as tint; its bore bored to 32 and polished. '
         f'About {m:.2f} kg of acrylic.',
         f'The light: two runs of dim-to-warm strip (2700 to about 1900 K) on a 10 mm aluminium spine, inside an opal '
-        f'tube, about {P["led_w"]:.1f} W at full. The engine drops out of the bottom: the cover\'s four screws, then '
+        f'tube that ends just inside the Clear cap, whose bore is bead-blasted (so the cap glows evenly), about {P["led_w"]:.1f} W '
+        f'and about 300 lm at full. The engine drops out of the bottom: the cover\'s four screws, then '
         'two set screws.',
         f'Heat (worked): about {h["q"]:.1f} W of heat down the spine (about {h["bar_rise"]:.0f} K along it) into the '
         f'foot, {h["foot_area"] * 1e4:.0f} cm2 of black anodise: about {h["foot_rise"]:.0f} K over the room. In a '

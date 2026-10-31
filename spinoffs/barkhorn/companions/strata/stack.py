@@ -46,15 +46,21 @@ CS = dict(
     base=(96.0, 16.0),                           # the foot: diameter (set in 7 under the column, a shadow line), height
     edge=1.5,                                    # the column's top and bottom arrises, rounded on the lathe
     inserts=(3, 72.0, 'M5'),                     # brass threaded inserts in the bottom disc: count, PCD, thread
-    tube=(25.4, 3.2, 150.0),                     # the diffuser: opal cast acrylic tube 1 in OD, 1/8 wall, its length
-    bar=(10.0, 140.0),                           # the light's spine: aluminium square bar, its side and length
-    led_w=4.4,                                   # the LED strips' power at full (two runs of 140 on the bar's faces)
+    # the filament stops just into the first Clear disc and the bore through the Clear discs is bead-blasted, so the cap
+    # glows evenly (critic r1: the tube's top read as a hard bright rectangle through the frosted cap); shorter, it
+    # also runs cooler
+    tube=(25.4, 3.2, 120.0),                     # the diffuser: opal cast acrylic tube 1 in OD, 1/8 wall, its length
+    bar=(10.0, 100.0),                           # the light's spine: aluminium square bar, its side and length
+    led_w=3.0,                                   # the LED strips' power at full (two runs of 92 on the bar's faces)
     # the discs from the bottom: one tint, or a chosen stack. The first: two Smoke at the foot, nine Dust (2422, the
     # chart's 59 % amber: a 39 mm path from the bore still passes its red), one Ember stratum, Dust, and Fog at the top
-    stack=('Smoke dark', 'Smoke') + ('Dust',) * 7 + ('Ember',) + ('Clear',) * 4,
+    # critic r2: seven Dust discs in a row read as one deep red (39 mm of 2422 passes only red), so the strata are now
+    # tints that survive the depth: Clear bands glow white-gold, Dust stays as ruby bands, one Ember fault line
+    stack=('Smoke dark', 'Smoke', 'Dust', 'Clear', 'Dust', 'Dust', 'Clear', 'Fog', 'Dust', 'Ember',
+           'Clear', 'Clear', 'Clear', 'Clear'),
     # each disc's outside, finished on the lathe after turning: 'p' diamond-turned and buffed (clear, deep), 's'
     # bead-blasted satin (it glows: the light leaving the filament scatters there). Masked with tape disc by disc
-    finish='ppsppspspp' + 'ssss',
+    finish='pppsppsppp' + 'ssss',
 )
 
 

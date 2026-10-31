@@ -76,7 +76,8 @@ def profile(L):
                 k = next((j for j, l in enumerate(L) if abs(l['z0'] - min(z0, z1)) < 1e-6), 0)
                 tags.append('side-s' if L[k].get('finish') == 's' else 'side')
             else:
-                tags.append('bore')
+                k = next((j for j, l in enumerate(L) if abs(l['z0'] - min(z0, z1)) < 1e-6), 0)
+                tags.append('bore-s' if L[k].get('finish') == 's' and L[k].get('tint') == 'Clear' else 'bore')
         elif abs(z1 - z0) < 1e-6:
             if abs(z0 - zmin) < 1e-6:
                 tags.append('bottom')
@@ -207,20 +208,21 @@ def acrylic_material(name, layers, rough, kind='polished', loading=1.0, scratch=
         w = N('ShaderNodeTexWave'); w.wave_type = 'RINGS'; w.inputs['Scale'].default_value = 2.0
         Lk(tc.outputs['Object'], w.inputs['Vector'])
         r = math_('ADD', r, math_('MULTIPLY', w.outputs['Fac'], 0.06))
-    Lk(r, glass.inputs['Roughness'])
-    shader = glass.outputs[0]
     if bond:
-        # the bond lines: within 0.06 mm of a layer joint, a hairline of milky scatter
+        # the bond lines: within 0.06 mm of a layer joint, a hairline of milky scatter, kept inside the one glass BSDF
+        # (a mixed-in translucent shader stops Cycles' MNEE treating the acrylic as a caustic caster)
         frac = math_('FRACT', math_('DIVIDE', math_('SUBTRACT', zmm.outputs[0], layers[0][0]), S.T))
         d = math_('MINIMUM', frac, math_('SUBTRACT', 1.0, frac))
         line = math_('LESS_THAN', math_('MULTIPLY', d, S.T), 0.06)
         top = math_('LESS_THAN', zmm.outputs[0], layers[-1][1] - 0.2)
         bot = math_('GREATER_THAN', zmm.outputs[0], layers[0][0] + 0.2)
         line = math_('MULTIPLY', math_('MULTIPLY', line, top), bot)
-        tr = N('ShaderNodeBsdfTranslucent'); tr.inputs['Color'].default_value = (0.9, 0.9, 0.88, 1)
-        mx = N('ShaderNodeMixShader')
-        Lk(math_('MULTIPLY', line, 0.35), mx.inputs['Fac']); Lk(glass.outputs[0], mx.inputs[1]); Lk(tr.outputs[0], mx.inputs[2])
-        shader = mx.outputs[0]
+        r = math_('ADD', r, math_('MULTIPLY', line, 0.35))
+        dim = N('ShaderNodeMix'); dim.data_type = 'RGBA'; dim.inputs['B'].default_value = (0.86, 0.86, 0.85, 1)
+        Lk(line, dim.inputs['Factor']); Lk(mix.outputs['Result'], dim.inputs['A'])
+        Lk(dim.outputs['Result'], glass.inputs['Color'])
+    Lk(r, glass.inputs['Roughness'])
+    shader = glass.outputs[0]
     Lk(shader, out.inputs['Surface'])
     return m
 
@@ -300,7 +302,22 @@ def area(name, loc, rot_deg, size, watts, color, spread=180.0, caustic=False, ca
     return ob
 
 
-def sun(name, direction, strength, color, angle=0.53, caustic=True):
+def sun(name, direction, strength, color, angle=0.53, caustic=True, dist=15.0, at=(0.0, 0.0, 0.7)):
+    """Sunlight travelling along `direction` (x, y, z), `strength` W/m2 at the scene. Cycles' MNEE shadow caustics take
+    no sun lamp, so the sun is a small point light `dist` metres off (its disc `angle` degrees across, as the sun's),
+    its power set so its irradiance at `at` is `strength`."""
+    from mathutils import Vector
+    d = Vector(direction).normalized()
+    ld = bpy.data.lights.new(name, 'POINT'); ld.color = hex_lin(color)
+    ld.energy = strength * 4 * math.pi * dist * dist
+    ld.shadow_soft_size = dist * math.tan(math.radians(angle) / 2)
+    ld.cycles.is_caustics_light = caustic
+    ob = bpy.data.objects.new(name, ld); bpy.context.scene.collection.objects.link(ob)
+    ob.location = Vector(at) - d * dist
+    return ob
+
+
+def sun_lamp(name, direction, strength, color, angle=0.53, caustic=True):
     """A sun whose light travels along `direction` (x, y, z)."""
     from mathutils import Vector
     ld = bpy.data.lights.new(name, 'SUN'); ld.energy = strength; ld.color = hex_lin(color); ld.angle = math.radians(angle)
@@ -390,7 +407,9 @@ def render_settings(W, H, samples, scale, exposure=0.0, look='None'):
     sc.cycles.use_denoising = True; sc.cycles.denoiser = 'OPENIMAGEDENOISE'
     sc.cycles.max_bounces = 24; sc.cycles.transmission_bounces = 24; sc.cycles.glossy_bounces = 8
     sc.cycles.diffuse_bounces = 4; sc.cycles.transparent_max_bounces = 16
-    sc.cycles.caustics_refractive = False; sc.cycles.caustics_reflective = False
+    # refractive caustics on: Cycles' MNEE shadow caustics run only with them (tested 2026-10-31); filter_glossy keeps
+    # the brute-force part of them quiet
+    sc.cycles.caustics_refractive = True; sc.cycles.caustics_reflective = False; sc.cycles.blur_glossy = 1.0
     sc.cycles.sample_clamp_indirect = 8.0
     sc.render.resolution_x = int(W * scale); sc.render.resolution_y = int(H * scale)
     sc.render.resolution_percentage = 100
@@ -416,9 +435,10 @@ def core_sample(stackmix=None, lit=True, glow=1.0, base=(0.0, 0.0, 0.0), loading
         'side-s': acrylic_material('cs-satin', lay, 0.42, 'blasted', loading),
         'top': acrylic_material('cs-top', lay, 0.0, 'polished', loading, bond=False),
         'bore': acrylic_material('cs-bore', lay, 0.02, 'polished', loading, scratch=0.0),
+        'bore-s': acrylic_material('cs-bore-satin', lay, 0.45, 'blasted', loading, scratch=0.0),
         'bottom': acrylic_material('cs-bottom', lay, 0.12, 'turned', loading, bond=False),
     }
-    zones = {'side': 'cs-side', 'side-s': 'cs-satin', 'top': 'cs-top', 'bore': 'cs-bore', 'inner_tread': 'cs-bore', 'bottom': 'cs-bottom',
+    zones = {'side': 'cs-side', 'side-s': 'cs-satin', 'top': 'cs-top', 'bore': 'cs-bore', 'bore-s': 'cs-bore-satin', 'inner_tread': 'cs-bore', 'bottom': 'cs-bottom',
              'tread': 'cs-side'}
     col = revolve('column', L, zones, segs=256)
     out = os.path.join(HERE, 'out-core-sample', 'stl')
@@ -428,17 +448,13 @@ def core_sample(stackmix=None, lit=True, glow=1.0, base=(0.0, 0.0, 0.0), loading
                     ('jack', principled('nickel', '#B9B6AE', 0.3, 1.0)), ('bumpers', principled('rubber', '#141414', 0.7))):
         obs.append(stl(os.path.join(out, f'{nm}.stl'), mat, nm))
     # the filament: the opal tube, glowing to the eye; the light it gives, five lights up its axis
-    tube = stl(os.path.join(out, 'tube.stl'), emitter('filament', '#FFC48A', 2.5 * glow if lit else 0.0), 'tube')
-    tube.visible_shadow = False; tube.visible_diffuse = False
+    # the opal tube is the light: an emitter for every ray (its light reaches the table through the bore's and the
+    # skin's polished faces as path-traced refractive caustics; MNEE did not converge on an upright cylinder here)
+    tube = stl(os.path.join(out, 'tube.stl'), emitter('filament', '#FFC48A', 2.6 * glow if lit else 0.0, mirror_only=False), 'tube')
     if not lit:
         tube.data.materials[0] = principled('opal-off', '#E8E4DC', 0.5)
         tube.visible_shadow = True; tube.visible_diffuse = True
     obs.append(tube)
-    if lit:
-        fh = P['base'][1]
-        for i in range(5):
-            z = (fh + 12 + i * 30) * MM
-            obs.append(point(f'filament{i}', (0, 0, z), 2.5 * glow, '#FFC48A', radius=0.006))
     for o in obs:
         o.location = (o.location[0] + base[0], o.location[1] + base[1], o.location[2] + base[2])
         if o.type == 'MESH' and o.name != 'column':
@@ -467,8 +483,8 @@ def contour_core(lit=True, tint=None, glow=1.0, base=(0.0, 0.0, 0.0), loading=1.
     lay = [(l['z0'], l['z1'], l['tint']) for l in L]
     mats = {'side': acrylic_material('cc-edge', lay, 0.0, 'polished', loading),
             'tread': acrylic_material('cc-face', lay, 0.0, 'cast', loading, scratch=0.6),
-            'bore': acrylic_material('cc-inner', lay, 0.40, 'blasted', loading, scratch=0.0)}
-    zones = {'side': 'cc-edge', 'side-s': 'cc-edge', 'tread': 'cc-face', 'top': 'cc-face', 'bottom': 'cc-face',
+            'bore': acrylic_material('cc-inner', lay, 0.75, 'blasted', loading, scratch=0.0)}
+    zones = {'side': 'cc-edge', 'side-s': 'cc-edge', 'bore-s': 'cc-inner', 'tread': 'cc-face', 'top': 'cc-face', 'bottom': 'cc-face',
              'bore': 'cc-inner', 'inner_tread': 'cc-face'}
     ball = revolve('ball', L, zones, segs=288)
     out = os.path.join(HERE, 'out-contour-core', 'stl')
@@ -479,11 +495,8 @@ def contour_core(lit=True, tint=None, glow=1.0, base=(0.0, 0.0, 0.0), loading=1.
                     ('jack', principled('nickel', '#B9B6AE', 0.3, 1.0)), ('bumpers', principled('rubber', '#141414', 0.7))):
         obs.append(stl(os.path.join(out, f'{nm}.stl'), mat, nm))
     zc = (P['base_top'] + P['n'] * S.T / 2 - P['skip'] * S.T) * MM
-    glob = stl(os.path.join(out, 'globe.stl'), emitter('globe-glow', '#FFC48A', 3.0 * glow) if lit else
+    glob = stl(os.path.join(out, 'globe.stl'), emitter('globe-glow', '#FFC48A', 2.4 * glow, mirror_only=False) if lit else
                principled('opal-off', '#ECE8E0', 0.45), 'globe')
-    if lit:
-        glob.visible_shadow = False; glob.visible_diffuse = False
-        obs.append(point('globe-light', (0, 0, zc), 9.0 * glow, '#FFC48A', radius=0.045))
     obs.append(glob)
     for o in obs:
         o.location = (o.location[0] + base[0], o.location[1] + base[1], o.location[2] + base[2])
@@ -497,28 +510,40 @@ def shot_core_sample(lit, stackmix=None, out=None, scale=1.0, samples=512, tag='
     tz = 0.62
     set_room(tz)
     if which == 'contour':
-        contour_core(lit=lit, tint=tint, base=(0.0, 0.0, tz))
+        contour_core(lit=lit, tint=tint, base=(0.0, 0.0, tz), glow=1.7 if lit else 1.0)
     else:
-        core_sample(stackmix=stackmix, lit=lit, base=(0.0, 0.0, tz))
+        core_sample(stackmix=stackmix, lit=lit, base=(0.0, 0.0, tz), glow=1.8 if lit else 1.0)
     import assets
-    # a vase and a book for scale: a real ceramic vase (Poly Haven, CC0) and a cloth-bound book
-    try:
-        v = assets.place(bpy, 'ceramic_vase_01', '2k', location=(0.26, 0.16, tz), rotation_deg=(0, 0, 30))
-    except Exception as e:
-        print('vase skipped', e)
+    # critic r1 c6 / r2 c7: no vase, no plate cut by the frame
+    # critic r1 c5: a white card low and to the front left, out of frame, for one highlight on the foot's edge
+    box_ob('card', -0.30, -0.30, tz, -0.10, -0.295, tz + 0.08, principled('card', '#F2F0EA', 0.8))
     book = principled('cloth', '#3E4A3F', 0.8, bump=(800.0, 0.3))
-    box_ob('book', -0.36, -0.13, tz, -0.13, 0.03, tz + 0.032, book, bevel=0.002)
-    box_ob('book2', -0.34, -0.11, tz + 0.032, -0.15, 0.02, tz + 0.054, principled('cloth2', '#B8A98E', 0.85), bevel=0.002)
+    # critic r2 c6: the books whole in the frame, behind the lamp's plane
+    box_ob('book', -0.30, 0.04, tz, -0.10, 0.19, tz + 0.032, book, bevel=0.002)
+    box_ob('book2', -0.28, 0.06, tz + 0.032, -0.12, 0.18, tz + 0.054, principled('cloth2', '#B8A98E', 0.85), bevel=0.002)
     if lit:
         world(hdri='kiara_9_dusk', strength=0.05, rotation=200)
-        area('room-fill', (-1.2, -1.0, 1.9), (55, 0, -40), (1.0, 1.0), 6.0, '#FFD3A8')
-        render_settings(1600, 1067, samples, scale, exposure=0.6)
+        # critic r1: c1 the fill down 70 %, c7 cool (#9FB0CC), c4 a 15 x 60 strip rim light behind at 120 deg camera
+        # right, c2 the lamp's glow 1.7 (in core_sample), c3 exposure down 0.6
+        # critic r2: c1 the fill down a further 60 %; c4 a 10 x 60 kicker low behind-left on the foot; c5 a tall thin
+        # sheen strip camera-right (replacing r1's rim strip, whose specular ticks read as CG on the terraced ball)
+        from mathutils import Vector
+
+        def aim(ob, z):
+            ob.rotation_euler = (Vector((0, 0, z)) - Vector(ob.location)).to_track_quat('-Z', 'Y').to_euler()
+        area('room-fill', (-1.2, -1.0, 1.9), (55, 0, -40), (1.0, 1.0), 0.7, '#9FB0CC')
+        kick = area('kicker', (-0.40, 1.2, tz + 0.08), (0, 0, 0), (0.6, 0.10), 1.2, '#FFF4E8'); aim(kick, tz + 0.01)
+        sheen = area('sheen', (0.87, -0.5, tz + 0.12), (0, 0, 0), (0.15, 1.2), 0.5, '#FFF4E8'); aim(sheen, tz + 0.09)
+        render_settings(1600, 1067, samples, scale, exposure=0.0, look='AgX - Medium High Contrast')
     else:
         world(hdri='kiara_9_dusk', strength=0.6, rotation=200)
         window_gobo(-1.3, -1.3, 0.9, 0.75, 2.4)
-        sun('sun', (0.80, -0.35, -0.42), strength=4.5, color='#FFE7C8')
+        # daylight: the window's sky as a large soft source (its coloured shadows converge as refractive caustics), and a
+        # weak low sun for the sun patches
+        win = area('window-sky', (-1.25, -0.2, 1.55), (0, -90, 0), (1.5, 2.0), 260.0, '#DCE6F5')
+        sun_lamp('sun', (0.80, -0.35, -0.42), strength=1.2, color='#FFE7C8', angle=1.0)
         render_settings(1600, 1067, samples, scale, exposure=-0.3)
-    camera((0.22, -0.98, tz + 0.30), (0.0, 0.0, tz + 0.085), lens=85, fstop=4.0)
+    camera((0.22, -0.98, tz + 0.30), (0.0, 0.0, tz + 0.085), lens=85, fstop=2.8 if lit else 4.0)
     bpy.context.scene.render.filepath = out
     bpy.ops.render.render(write_still=True)
 
@@ -538,7 +563,7 @@ def terrace(lit=True, tint=None, glow=1.0, rim_z=1.45, loading=1.0, kind='terrac
         'bore': acrylic_material('tr-blast', lay, 0.38, 'blasted', loading),
         'inner_tread': acrylic_material('tr-under', lay, 0.0, 'cast', loading, scratch=0.3),
     }
-    zones = {'side': 'tr-edge', 'side-s': 'tr-satin', 'tread': 'tr-face', 'top': 'tr-face', 'bottom': 'tr-under',
+    zones = {'side': 'tr-edge', 'side-s': 'tr-satin', 'bore-s': 'tr-blast', 'tread': 'tr-face', 'top': 'tr-face', 'bottom': 'tr-under',
              'bore': 'tr-blast', 'inner_tread': 'tr-under'}
     shade = revolve('shade', L, zones, segs=288)
     out = os.path.join(HERE, f'out-{kind}', 'stl')
@@ -556,7 +581,7 @@ def terrace(lit=True, tint=None, glow=1.0, rim_z=1.45, loading=1.0, kind='terrac
     cob_z = top - (30.0 if kind == 'halo' else 36.0)
     if lit:
         # the louvred aperture: a disc of light 50 across under the COB, cut off at about 30 deg (the honeycomb)
-        ap = area('aperture', (0, 0, (cob_z - 14) * MM), (180, 0, 0), (0.05, 0.05), 22.0 * glow, '#FFD2A0', spread=60.0, caustic=True)
+        ap = area('aperture', (0, 0, (cob_z - 14) * MM), (0, 0, 0), (0.05, 0.05), 6.0 * glow, '#FFD2A0', spread=60.0, caustic=True)
         ap.data.shape = 'DISK'; ap.data.size = 0.05
         # the satin reflector's spill: about a quarter of the light, wide, onto the rings' blasted inner edges
         obs += [ap, point('spill', (0, 0, (cob_z - 24) * MM), 6.0 * glow, '#FFD2A0', radius=0.02)]
@@ -606,14 +631,17 @@ def shot_terrace(lit, tint=None, out=None, scale=1.0, samples=512, kind='terrace
     bpy.ops.object.shade_smooth()
     if lit:
         world(hdri='kiara_9_dusk', strength=0.05, rotation=200)
-        area('room-fill', (1.6, -1.6, 2.2), (60, 0, 50), (1.0, 1.0), 4.0, '#FFD3A8')
-        render_settings(1200, 1500, samples, scale, exposure=1.3)
+        # the table lamps' round 1 (critic): the fill low and cool, so the pendant is the key
+        area('room-fill', (1.6, -1.6, 2.2), (60, 0, 50), (1.0, 1.0), 1.4, '#9FB0CC')
+        render_settings(1200, 1500, samples, scale, exposure=0.6)
     else:
         world(hdri='kiara_9_dusk', strength=0.7, rotation=200)
         window_gobo(-1.3, -1.6, 1.4, 0.8, 2.3)
-        sun('sun', (0.80, -0.25, -0.55), strength=4.0, color='#FFE7C8')
+        win = area('window-sky', (-1.25, 0.0, 1.55), (0, -90, 0), (1.5, 3.0), 300.0, '#DCE6F5')
+        sun_lamp('sun', (0.80, -0.25, -0.55), strength=1.2, color='#FFE7C8', angle=1.0)
         render_settings(1200, 1500, samples, scale, exposure=-0.2)
-    camera((0.30, -1.75, 1.52), (0.0, 0.05, tz + 0.42), lens=58, fstop=4.0, focus=(0, -0.10, rim + 0.06))
+    # standing eye height, a little above the shade, so the terraces read as rings; the table's pool below
+    camera((0.30, -1.30, 1.78), (0.0, 0.02, tz + 0.40), lens=50, fstop=4.0, focus=(0, -0.10, rim + 0.08))
     bpy.context.scene.render.filepath = out
     bpy.ops.render.render(write_still=True)
 

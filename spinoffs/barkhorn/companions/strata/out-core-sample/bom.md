@@ -11,7 +11,7 @@
 | screws | buy | 3 | M5 x 12 button head socket screws, A2 stainless, black oxide or plain, with nylon washers |  | 1.50 |
 | cover-screws | buy | 4 | M3 x 6 countersunk socket screws, A2 stainless, into tapped holes in the foot |  | 1.00 |
 | plug | lathe | 1 | Aluminium 6061 | 40 x 40 x 17 | 45.68 |
-| spine | cnc-mill | 1 | Aluminium 6061 | 20 x 20 x 150 | 46.50 |
+| spine | cnc-mill | 1 | Aluminium 6061 | 20 x 20 x 110 | 46.10 |
 | strips | buy | 1 | Waveform Lighting (or alike) Dim-to-warm LED strip, 24 V, CRI 95+, 2700 K at full warming toward 1800-2000 K as it dims (CENTRIC WARM class), 8 mm, two runs of 140 mm on the spine's faces, about 4.4 W at full |  | 12.00 |
 | tube | buy | 1 | any (Plaskolite or Spartech opal cast tube) White translucent (opal) cast acrylic tube, 1 in OD x 1/8 in wall, cut to 150 and capped with an opal disc bonded in, about 50-60 % transmission |  | 6.00 |
 | knob | lathe | 1 | Stainless steel 304 | 22 x 26 x 26 | 45.44 |
