@@ -216,13 +216,15 @@ def room_off():
 
 def room_off_portrait():
     """The same room, covers off, as a portrait for phones (the site's "At home" band): round 31's phone framing (a
-    35 mm lens 3.9 m from the speakers, aimed up at 1.25 m so the wall above takes the heading), a little toward the
-    window."""
+    35 mm lens 3.9 m from the speakers, aimed up at 1.25 m so the wall above takes the heading), adjusted after its
+    proof, a little toward the window."""
     s = room_off()
     s['title'] += ', portrait'
     s['size'] = [1600, 2000]
     ty = s['camera']['target'][1]
-    s['camera'] = {'position': [-0.1, ty - 3.9, 1.05], 'target': [-0.1, ty, 1.25], 'lens_mm': 35.0, 'level': True,
+    # (the proof at 35 mm, 3.9 m, aiming at 1.25: the pair small and a band of ceiling; 40 mm from 4.1 m at 0.95 puts the
+    # ceiling line at the frame's top and the pair larger)
+    s['camera'] = {'position': [-0.1, ty - 4.1, 1.05], 'target': [-0.1, ty, 0.95], 'lens_mm': 40.0, 'level': True,
                    'fstop': 5.6, 'focus': s['camera'].get('focus', [0.0, ty - 0.21, 0.7])}
     return s
 
