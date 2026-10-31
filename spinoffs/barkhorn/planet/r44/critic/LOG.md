@@ -230,3 +230,38 @@ The other changes:
 - bar p2 (5.5 / 5.0), but it shows the pair cut by the porch jamb, against the owner's rule; bar p4 (5.0 / 5.0) is the final;
 - porch p4 (4.5 / 4.5, the speakers largest and whole);
 - lantern p3 (4.5 / 5.0).
+
+## Look 2: duels against the heroes (blind, both orders)
+
+Prompt: `/tmp/claude-0/duel/PROMPT.txt` (the photo editor's pick of one picture). Images at 1200 wide.
+
+| Ours | Hero | Ours first | Hero first | Result |
+|---|---|---|---|---|
+| street p4 | r41 door | r41 wins (clear) | **street p4 wins (clear)** | 1–1, a split |
+| porch p4 | r39 door | r39 wins (clear) | r39 wins (clear) | r39 2–0 |
+| lantern p3 | r39 door | r39 wins (clear) | r39 wins (clear) | r39 2–0 |
+
+JSONs: `critic/L2-duel-*.json`.
+
+**Why the heroes still win:**
+- the street p4 duels went one each way: "sparse and murky ... props placed for a render" against "reads as a real room photographed at night by its own light ... framed with restraint through the glass";
+- the porch view is two-thirds black frame around a small vignette;
+- the speakers glow flat red like signage;
+- Mother EARF reads as a neon overlay.
+
+## Look 2: finals
+
+| View | Final | Critics | Against the hero |
+|---|---|---|---|
+| street | `look2/finals/street-p4.png` | 5.5 / 5.5 (look 1: 5.0 / 5.5) | r41 door 1–1 (look 1: lost 2–0) |
+| bar | `look2/finals/bar-p4.png` | 5.0 / 5.0 | not dueled |
+| porch | `look2/finals/porch-p4.png` | 4.5 / 4.5 | r39 door wins 2–0 |
+| lantern | `look2/finals/lantern-p3.png` | 4.5 / 5.0 | r39 door wins 2–0 |
+
+No view beat a hero outright, so the House Book keeps its v11 hero. The street view is the first lantern picture to take a duel from the r41 door.
+
+**What would move it further, from the critics:**
+- **The band:** deeper amber with lit fin edges.
+- **The street:** a reflection in the shopfront glass; the mullion out of the left third.
+- **The interior:** the speakers lit from outside rather than glowing.
+- **Out of scope:** Mother EARF's multicolored rims, the critics' standing "one color" complaint, are a product decision for the owner.
