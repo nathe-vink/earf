@@ -186,7 +186,21 @@ the frame its realism, so the playing record carries the "in use" instead.
 
 ## 6. Blind scores and duels
 
-See `critic/LOG.md` (filled after the renders).
+Fresh blind critics, PROMPT-promo's scale (`critic/LOG.md` has every reply):
+
+| frame | blind | duel against the site's current frame |
+|---|---|---|
+| current site frames (studio, dusk, open, detail) | 4.5 each | |
+| `strata-hero.png` | 6.0 | **7.0** to 4.0 (studio-smoke) |
+| `outcrop-use.png` | 6.0 | **6.5** to 4.5 (dusk-smoke) |
+| `outcrop-hero.png` (v1; v2, v3 5.5 too) | 5.5 | **6.5** to 4.0 (studio-smoke) |
+| `outcrop-detail-v3.png` | 6.0 | **6.5** to 3.5 (detail) |
+| `outcrop-ember.png` | 5.5 | |
+
+**The gate is passed by the duels** (four of four won by 2.5-3.5 points). No single blind score reached 7.0. The hero
+stopped at the protocol's three rounds. What still holds the scores down, in the critics' words: the bought Rega arm
+"reads generic" (it is generic), and the parts inside the clear strata read as debris. The color reads as a red
+pinstripe, which is the honest look of thin stock tint (`critic/LOG.md`, the end).
 
 ## Open questions for the owner
 
