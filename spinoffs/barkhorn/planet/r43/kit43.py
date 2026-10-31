@@ -109,7 +109,7 @@ def _slab(m, pts, t, normal=None):
 def street(bpy, kit, p, objs):
     """Outside the glass: the sidewalk, the kerb and the road, and the building opposite with a few lit windows."""
     sw = Mesh('popup-sidewalk'); sw.box(-3.6, -30.0, -0.15, -0.20, Q.W + 30.0, 0.0)
-    objs.append(sw.object(bpy, R._pbr(bpy, kit, 'concrete_pavement', res='2k', tint='#6E6B66', tint_mix=0.35)))
+    objs.append(sw.object(bpy, R._pbr(bpy, kit, 'concrete_pavement', res='2k', tint=p.get('pavement', '#45423E'), tint_mix=0.5)))
     rd = Mesh('popup-road'); rd.box(-16.0, -30.0, -0.30, -3.6, Q.W + 30.0, -0.15)
     objs.append(rd.object(bpy, principled(bpy, 'popup-asphalt', '#1C1C1D', rough=0.55, bump=(0.004, 0.3, 0.0004))))
     fa = Mesh('popup-opposite'); fa.box(-17.0, -30.0, -0.30, -16.0, Q.W + 30.0, 14.0)
@@ -174,7 +174,7 @@ def popup(bpy, name, p, kit):
     if not p.get('no_glass'):
         objs.append(gl.object(bpy, R.thin_glass(bpy, p.get('glass_gloss', 1.0))))
     # the name, frosted on the glass over the window
-    if p.get('wordmark', True):
+    if p.get('wordmark', False):              # a plain glowing bar, not letters (p0 look): off until it is lettering
         nm = Mesh('popup-name'); nm.box(-0.058, 1.55, 2.55, -0.056, 4.25, 2.72)
         objs.append(nm.object(bpy, principled(bpy, 'popup-name-frost', '#E9E4DA', rough=0.5, alpha=0.55,
                                                emit='#FFD8A8', strength=p.get('name_glow', 0.15))))

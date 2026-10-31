@@ -110,6 +110,8 @@ def scene():
     for i, (x, y) in enumerate(Q.STACKS):                            # the listening pair
         lights[f'stack{i}'] = spot([11.6, y + (0.4 if y < W / 2 else -0.4), zc], [x, y, 0.95], 34.0, 18.0, k=2600)
     lights['seats'] = spot([10.9, W / 2, zc], [10.8, W / 2, 0.4], 10.0, 60.0, k=2600, blend=1.0)
+    lights['drape'] = {'type': 'area', 'position': [12.9, W / 2 + 0.6, H - 0.35], 'target': [13.3, W / 2 + 0.6, 1.2],
+                       'size_m': [0.3, 4.6], 'irradiance': 0.6, 'color': 2600, 'camera': False}
     lights['fill'] = {'type': 'area', 'position': [5.0, W / 2, H - 0.3], 'target': [5.0, W / 2, 0.0], 'size_m': [6.0, 4.0],
                       'irradiance': 0.12, 'color': 2900, 'camera': False}
     lights['street'] = {'type': 'area', 'position': [-2.4, 1.0, 6.0], 'target': [-1.5, 3.0, 0.0], 'size_m': [0.6, 0.6],
