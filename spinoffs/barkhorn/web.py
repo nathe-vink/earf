@@ -302,6 +302,26 @@ def hero_spots():
     return out
 
 
+# the "At home" band (the owner, 2026-10-31: "I also prefer the product images without the cover on"): the speaker
+# lane's golden-hour room, the Poison pair with their covers off (r33-speaker-horn 754e16a9, 7.0 blind), and its phone
+# frame; round 31's covers-on room before it
+ROOM_SRC = (os.path.join(ROOT, 'renders', '2026-10-31', 'barkhorn', 'tropos-campaign', 'tropos-room-golden-hour-off.png'),
+            os.path.join(ROOT, 'renders', '2026-10-31', 'barkhorn', 'tropos-campaign', 'tropos-room-golden-hour-off-portrait.png'))
+
+
+def make_room():
+    """The room's pictures from ROOM_SRC, where it is to hand: room.jpg (as wide as the render, up to 2880), room-1440.jpg
+    and room-portrait.jpg; its path, or None."""
+    land, port = ROOM_SRC
+    if not os.path.exists(land):
+        return None
+    im = Image.open(land)
+    save(im, 'room.jpg', 2880, q=82); save(im, 'room-1440.jpg', 1440, q=82)
+    if os.path.exists(port):
+        save(Image.open(port), 'room-portrait.jpg', 1000, q=84)
+    return land
+
+
 def make_images(sources=None):
     """The page's pictures, into site/img: from the repository's renders and icons, and from `sources` the photographs,
     the room, the drawings and the coins where it has them. A picture whose source is not to hand is kept as it is."""
@@ -380,9 +400,10 @@ def make_images(sources=None):
     for tag, names in (('facade', ('facade', 'night', 'opera')), ('facade-portrait', ('facade-portrait', 'night-portrait', 'opera-portrait'))):
         one(first(*[os.path.join(U31, f'{n}.{e}') for n in names for e in ('png', 'jpg')]),
             lambda p, t=tag: (save(Image.open(p), f'{t}.jpg', 2400, q=84), save(Image.open(p), f'{t}-1200.jpg', 1200, q=82)))
-    room = first(os.path.join(RM31, 'room.png'), os.path.join(RM31, 'room.jpg'), os.path.join(FIN, 'room.png'))
-    one(room, lambda p: (save(Image.open(p), 'room.jpg', 2880, q=82), save(Image.open(p), 'room-1440.jpg', 1440, q=82)))   # full bleed: 2x at 1440
-    port = first(*[os.path.join(os.path.dirname(room), f'room-portrait.{e}') for e in ('png', 'jpg')]) if room else ''
+    room = make_room() or first(os.path.join(RM31, 'room.png'), os.path.join(RM31, 'room.jpg'), os.path.join(FIN, 'room.png'))
+    if room != ROOM_SRC[0]:
+        one(room, lambda p: (save(Image.open(p), 'room.jpg', 2880, q=82), save(Image.open(p), 'room-1440.jpg', 1440, q=82)))   # full bleed: 2x at 1440
+    port = ROOM_SRC[1] if room == ROOM_SRC[0] else first(*[os.path.join(os.path.dirname(room), f'room-portrait.{e}') for e in ('png', 'jpg')]) if room else ''
     if port and os.path.exists(port):                   # the room's phone frame travels with it, as the hero's does
         one(port, lambda p: save(Image.open(p), 'room-portrait.jpg', 1000, q=84))
     elif room and os.path.exists(os.path.join(IMG, 'room-portrait.jpg')):
@@ -897,6 +918,7 @@ def body():
     wl_form, wl_page = waitlist_html()
     page = (PAGE.replace('__WORD__', word).replace('__HOTSPOTS__', hotspots).replace('__NAMES__', names)
                 .replace('__HERO_TALL__', hero_tall).replace('__ROOM_TALL__', room_tall)
+                .replace('__ROOM_W__', str(Image.open(os.path.join(IMG, 'room.jpg')).width)).replace('__ROOM_H__', str(Image.open(os.path.join(IMG, 'room.jpg')).height))
                 .replace('__HERO_CLASS__', ' has-tall' if hero_tall else '')
                 .replace('__TURN__', turn).replace('__CARDS__', cards).replace('__SPEC__', spec).replace('__DWG__', dwg)
                 .replace('__REEL__', reel).replace('__HABITATS__', habitats).replace('__CLOSER__', closer)
@@ -934,7 +956,7 @@ BOILER_LONG = (BOILER_SHORT + ' Every piece is cut, formed and cemented from the
                'Planet EARF, a listening bar in San Francisco, is planned.')
 PRESS_PICS = [  # file in site/img, what it shows (the link's words and the picture's alt)
     ('hero.jpg', 'The eight Tropos speakers on a curve, covers off, Ember to Smoke'),
-    ('room.jpg', 'A pair of Tropos in Poison at home, covers on, by a tall window'),
+    ('room.jpg', 'A pair of Tropos in Poison at home, at golden hour'),
     ('red-habitat.jpg', 'Tropos in Ember on a lava field at blue hour'),
     ('violet-habitat.jpg', 'Tropos in Haze before layered hills in evening light'),
     ('black-habitat.jpg', 'Tropos in Smoke on a city overpass at dusk'),
@@ -2064,8 +2086,8 @@ __REEL__
 __HABITATS__
   <section class="band room" id="room">
     <div class="wrap"><div class="head"><div><p class="eyebrow">At home</p><h2>A pair in Poison.</h2></div></div></div>
-    <figure><picture>__ROOM_TALL__<img src="img/room.jpg" srcset="img/room-1440.jpg 1440w, img/room.jpg 2880w" sizes="100vw" width="2880" height="1620" alt="Two green speakers either side of a walnut sideboard with a record player, low sun from a tall window on the left" loading="lazy"></picture>
-      <figcaption class="wrap"><span>Covers on, by a tall window.</span><span>Each stands 1293&nbsp;mm tall, 560&nbsp;mm wide at the cabinet.</span></figcaption></figure>
+    <figure><picture>__ROOM_TALL__<img src="img/room.jpg" srcset="img/room-1440.jpg 1440w, img/room.jpg __ROOM_W__w" sizes="100vw" width="__ROOM_W__" height="__ROOM_H__" alt="Two green speakers, their covers off, either side of a walnut sideboard, late sun from a tall window on the left raking across the wall" loading="lazy"></picture>
+      <figcaption class="wrap"><span>At golden hour, by a tall window.</span><span>Each stands 1293&nbsp;mm tall, 560&nbsp;mm wide at the cabinet.</span></figcaption></figure>
   </section>
 
   <section class="band" id="progress"><div class="wrap">
