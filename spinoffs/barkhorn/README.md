@@ -105,6 +105,14 @@ brand"). Not live: main needs the owner's yes.
   r170 self-hosted, the engine's own tints, loaded on a tap, reduced motion, phones) and kept off: a blind critic scored
   its frames 3.5 to 4 against the renders' 6.5 to 7 and called it "hurt" beside them. `viewer/README.md` has the reasons
   and two ways to close the gap.
+- **The spin, path-traced** (`spin47.py`, `SPIN = True`): in place of the 3D view (the coordinator's call), Tropos turned
+  in the stills' own studio shot, camera and light fixed, nine frames over the front arc (about 46 degrees either side
+  of face-on), dragged on the product's page ("Turn it"), opening on the stills' angle with one sway, none under reduced
+  motion. Three critic rounds (`critic/LOG.md`): the full turn "hurt" (the profile and the back go murky), the ±40°
+  arc 6 against 6.5, the re-centred arc 6 against 6, "neutral to slightly helpful". A colour shows it once its nine frames
+  are in `site/img/spin/`; Ember first, the rest rendering (about 21 minutes a colour).
+- **Press kit PDF** (`viewer/presskit.mjs`): the press page printed with its own print styles, four A4 pages.
+- **Header and home:** Journal in the header's pages; "Notes from the bench" on the home page above the enquiries.
 - **Footer:** Journal and Press (and Privacy once the waitlist is on).
 
 ## Round 31: every picture final, the amplifier's plate as it is, and pictures for a launch (the owner's notes of 2026-10-18; in progress)

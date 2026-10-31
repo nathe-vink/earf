@@ -521,10 +521,11 @@ def image_meta():
                 (w, h), (tw, th) = size(f'{k}-{v}-wide.jpg'), size(f'{k}-{v}-tall.jpg')
                 card = dict(src=views[v]['src'], w=views[v]['w'], h=views[v]['h'])     # the tall frame stays for the small cards
                 views[v] = dict(src=f'img/{k}-{v}-wide.jpg', w=w, h=h, fill=True, tall=dict(src=f'img/{k}-{v}-tall.jpg', w=tw, h=th), card=card)
-        w, h = size(f'turn-{k}.jpg')
         if SPIN and all(os.path.exists(os.path.join(IMG, 'spin', f'{k}-{i:02d}.webp')) for i in range(SPIN_N)):
-            w, h = size(f'spin/{k}-00.webp')
-            views['spin'] = dict(src=f'img/spin/{k}-00.webp', w=w, h=h, n=SPIN_N, base=f'img/spin/{k}-', **ground(f'spin/{k}-00.webp'))
+            mid = f'spin/{k}-{SPIN_HOME:02d}.webp'
+            w, h = size(mid)
+            views['spin'] = dict(src=f'img/{mid}', w=w, h=h, n=SPIN_N, home=SPIN_HOME, base=f'img/spin/{k}-', **ground(mid))
+        w, h = size(f'turn-{k}.jpg')
         views['turn'] = dict(src=f'img/turn-{k}.jpg', w=w // 6, h=h // 4, **ground(f'turn-{k}.jpg', (0, 0, w // 6, h // 4)))
         meta[k] = views
         corner = np.asarray(Image.open(os.path.join(IMG, f'{k}-on.jpg')).convert('RGB'))[-18:-3].reshape(-1, 3).mean(0)   # where the photograph meets its panel
@@ -963,21 +964,27 @@ PRIVACY = [  # the notice, as drafted in launch/policies-draft.md (section 4), f
 ]
 
 
-# round 47: Tropos turning, path-traced (spin47.py): 36 frames a colour in the studio's bright field, dragged round on
-# the product's page in place of the real-time 3D view. SPIN False keeps it off; on, a colour shows it once all 36 of
-# its frames are in site/img/spin/.
-SPIN = False
+# round 47: Tropos turning, path-traced (spin47.py): the front arc, about 46 degrees either side of face-on in nine frames
+# (-20 to +60 degrees of turn from the stills' own angle, which stands 26 degrees off the face), in the studio's
+# bright field, dragged on the product's page in place of the real-time 3D view (the critic's round 2 kept the arc: the
+# profile and the back read muddy). SPIN False keeps it off; on, a colour shows it once its nine frames are in site/img/spin/.
+SPIN = True       # on (2026-10-31): critic round 3 scored the front arc level with the stills (6 against 6); critic/LOG.md
 SPIN_SRC = os.path.join(ROOT, 'renders', '2026-10-31', 'barkhorn', 'spin47')
-SPIN_N, SPIN_W = 36, 600
+SPIN_ARC, SPIN_W = [i % 36 for i in range(-2, 7)], 600     # spin47's file numbers, from -20 to +60 degrees of turn
+SPIN_N, SPIN_HOME = len(SPIN_ARC), 2                        # it opens on frame 2, the stills' own angle
 SPIN_NAME = {'red': 'ember', 'orange': 'dust', 'amber': 'acid', 'green': 'poison', 'blue': 'ice', 'violet': 'haze', 'ice': 'fog', 'black': 'smoke'}
 
 
 def make_spin():
-    """Each colour's turning frames for the site, from spin47's renders where all 36 are in: site/img/spin/<key>-NN.webp."""
+    """Each colour's turning frames for the site, from spin47's renders where the arc's nine are in:
+    site/img/spin/<key>-NN.webp, 00 at -20 degrees of turn to 08 at +60 (02 is the stills' angle)."""
     made = []
     os.makedirs(os.path.join(IMG, 'spin'), exist_ok=True)
+    for f in os.listdir(os.path.join(IMG, 'spin')):     # frames from an earlier, longer turn
+        if not re.fullmatch(r'[a-z]+-0[0-8]\.webp', f):
+            os.remove(os.path.join(IMG, 'spin', f))
     for k, name in SPIN_NAME.items():
-        src = [os.path.join(SPIN_SRC, name, f'f-{i:02d}.png') for i in range(SPIN_N)]
+        src = [os.path.join(SPIN_SRC, name, f'f-{i:02d}.png') for i in SPIN_ARC]
         if not all(os.path.exists(p) for p in src):
             continue
         for i, p in enumerate(src):
@@ -2165,7 +2172,7 @@ const SPEAKER_VIEWS = [
   ['habitat', 'In its element', c => `${c.name} ${c.place}.`, c => `In its element, ${c.place}.`],
   ['on', 'Cover on', c => `With its cover on, in ${c.cover.toLowerCase()}.`],
   ['off', 'Cover off', c => `Cover off: the 15-inch woofer, the two ports, and the lining showing through the walls.`],
-  ['spin', 'Turn it', c => `${c.name}, turning in the studio; drag to turn it.`, c => `In the studio. Drag it round; every frame is a render.`],
+  ['spin', 'Turn it', c => `${c.name} in the studio; drag across it to turn it.`, c => `In the studio. Drag across it to turn it; every frame is a render.`],
   ['studio-light', 'In the studio', c => `${c.name} in the studio, on a pale ground.`],
   ['studio', 'In the studio', c => `${c.name} in the studio, the light coming through its acrylic.`],
   ['back', 'From behind', c => `From behind: the name cut into the back and filled with colour, grips in the sides, the amplifier below.`],
@@ -2242,14 +2249,17 @@ function showView(v, focus) {
     if (!reduce) { const t0 = performance.now(); (function f(now) { const p = Math.min(1, (now - t0) / 2600); turnFrame = Math.round(p * N) % N;
       pic.style.backgroundPosition = frameAt(turnFrame); if (p < 1) autoTurn = requestAnimationFrame(f); })(t0); }
   } else if (v === 'spin') {         // round 47: path-traced frames, dragged round; one turn on arrival, never under reduced motion
-    const fr = i => `${s.base}${String(((i % s.n) + s.n) % s.n).padStart(2, '0')}.webp`;
+    const fr = i => `${s.base}${String(i).padStart(2, '0')}.webp`, home = s.home ?? 0;
     pic = el('img', { class: 'fit spinner' + (s.edge === 'cut' ? ' cut' : ''), src: s.src, width: s.w, height: s.h, alt: say(c, v), draggable: 'false', style: `--ar:${ar}` });
     const frames = Array.from({ length: s.n }, (_, i) => { const im = new Image(); im.decoding = 'async'; im.src = fr(i); return im; });
-    let at = 0; const show = i => { at = ((i % s.n) + s.n) % s.n; pic.src = frames[at].src; };
-    draggable(pic, (d, start, base) => { if (start) { cancelAnimationFrame(autoTurn); return at; } show(base - d); });
+    let at = home; const show = i => { at = Math.max(0, Math.min(s.n - 1, Math.round(i))); pic.src = frames[at].src; };
+    // the whole arc across about half the stage; a drag to the right turns its face to the right
+    draggable(pic, (d, start, base) => { if (start) { cancelAnimationFrame(autoTurn); return at; }
+      show(base - d * 9 * (s.n - 1) / Math.max(240, stage.clientWidth * 0.5)); });
     if (!reduce) Promise.all(frames.map(f => f.decode().catch(() => {}))).then(() => { if (!pic.isConnected) return;
-      const t0 = performance.now(); (function f(now) { const p = Math.min(1, (now - t0) / 3600), e = 0.5 - Math.cos(Math.PI * p) / 2;
-        show(Math.round(e * s.n)); if (p < 1 && pic.isConnected) autoTurn = requestAnimationFrame(f); })(t0); });
+      const t0 = performance.now(); (function f(now) { const p = Math.min(1, (now - t0) / 3200);   // a sway: left, right, home
+        const k = Math.sin(2 * Math.PI * p); show(home + (k > 0 ? (s.n - 1 - home) : home) * k);
+        if (p < 1 && pic.isConnected) autoTurn = requestAnimationFrame(f); })(t0); });
   } else if (v === 'habitat' || s.fill) {
     pic = el('picture', { class: 'fill' }, (s.tall ? `<source media="(max-width: 700px)" srcset="${s.tall.src}" width="${s.tall.w}" height="${s.tall.h}">` : '')
       + `<img src="${s.src}" width="${s.w}" height="${s.h}" alt="" draggable="false">`);
