@@ -1826,6 +1826,7 @@ html.cursor, html.cursor * { cursor: none !important }
 .dl-grid figcaption { margin-top: 8px; font-size: 14px; line-height: 1.45 } .dl-grid a { color: var(--ink); text-underline-offset: 3px; white-space: nowrap }
 .jlist { list-style: none; margin: 32px 0 80px; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px 20px }
 .jband { margin: 0 }
+.share-note { margin: 8px 0 0; min-height: 1.4em; font-size: 14px; color: var(--muted); word-break: break-all }
 /* the press page printed (viewer/presskit.mjs makes site/press/earf-press-kit.pdf from it): the words and the
    particulars, the pictures as a contact sheet, nothing to click */
 @media print {
@@ -2029,7 +2030,8 @@ __TURNTABLE__
         <p class="price">Priced at launch <span id="p-unit">&middot; each pair made to order</span></p>
         <ul class="swatches" id="swatches" aria-label="Colour"></ul>
         <p class="pick">Colour: <b id="p-pick"></b><span class="pick-ic" id="p-pick-ic"></span></p>
-        <div class="acts"><a class="btn solid" id="p-enquire" href="#contact">Enquire about a pair</a></div>
+        <div class="acts"><a class="btn solid" id="p-enquire" href="#contact">Enquire about a pair</a><button type="button" class="btn" id="p-share">Copy link</button></div>
+        <p class="share-note" id="p-share-note" aria-live="polite"></p>
         <dl class="facts" id="facts"></dl>
       </aside>
     </div>
@@ -2381,6 +2383,12 @@ function v3sync() {
   if ((v3 || frameEl.classList.contains('three')) && v3for !== P.id && !v3busy) v3close();
   if (v3) { v3.tint(V3[P.id].tints[cur]); v3box.setAttribute('aria-label', v3label()); }
 }
+// "Copy link": the product's own page for link previews (/s/<address>, its card in its colour), which forwards here
+document.getElementById('p-share').addEventListener('click', () => {
+  const url = `${location.origin}/s/${location.hash.slice(1)}`, note = document.getElementById('p-share-note');
+  const say = t => { note.textContent = t; setTimeout(() => { note.textContent = ''; }, 2400); };
+  try { navigator.clipboard.writeText(url).then(() => say('Link copied.'), () => say(url)); } catch (e) { say(url); }
+});
 v3btn.addEventListener('click', async () => {
   if (frameEl.classList.contains('three')) { v3close(); return; }
   if (v3busy) return;
@@ -2659,9 +2667,119 @@ def favicons():
     t.convert('RGB').save(os.path.join(SITE, 'apple-touch-icon.png'))
 
 
+# round 47: a page per address for link previews. The site is one page whose views are #addresses, which a link
+# preview never sees, so each product in each colour, each colour, the press page and each journal post gets a small
+# page of its own at /s/<address>: its own card (Open Graph and Twitter: title, words, a 1200 x 630 picture in that
+# colour, the colour as theme-color), schema.org data (a Product with no offer, as nothing is priced; an Article for a
+# post), and a forward to the view itself. "Copy link" on a product's page gives this address.
+def share_pages():
+    from html import escape
+    os.makedirs(os.path.join(SITE, 's'), exist_ok=True)
+    os.makedirs(os.path.join(IMG, 'og'), exist_ok=True)
+    def card(src, out, mode='crop'):
+        im = Image.open(os.path.join(IMG, src)).convert('RGB')
+        if mode == 'crop':                               # fill 1200 x 630, centred, a little above the middle
+            s = max(1200 / im.width, 630 / im.height)
+            im = im.resize((round(im.width * s), round(im.height * s)), Image.LANCZOS)
+            x, y = (im.width - 1200) // 2, int((im.height - 630) * 0.25)
+            im = im.crop((x, y, x + 1200, y + 630))
+        else:                                            # a tall picture, its edges carried out to the card's sides
+            from PIL import ImageFilter
+            im = im.resize((round(im.width * 630 / im.height), 630), Image.LANCZOS)
+            a = np.asarray(im).astype(np.float32)
+            left, right = np.median(a[:, :8], 1), np.median(a[:, -8:], 1)      # each row's own edge colour
+            x0 = (1200 - im.width) // 2
+            g = np.empty((630, 1200, 3), np.float32); g[:, :x0 + 8] = left[:, None]; g[:, x0 + 8:] = right[:, None]
+            bg = Image.fromarray(g.astype(np.uint8)).filter(ImageFilter.GaussianBlur(6))
+            ramp = np.clip(np.minimum(np.arange(im.width), np.arange(im.width)[::-1]) / 40.0, 0, 1)   # its sides feathered in
+            mask = Image.fromarray((np.tile(ramp, (630, 1)) * 255).astype(np.uint8))
+            bg.paste(im, (x0, 0), mask); im = bg
+        im.save(os.path.join(IMG, 'og', out), quality=84, optimize=True, progressive=True)
+        return f'img/og/{out}'
+    def page(route, title, desc, img, alt, tint, kind, ld):
+        t, d = escape(title), escape(desc)
+        html = f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{t}</title>
+<meta name="description" content="{d}">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="{tint}">
+<link rel="canonical" href="{URL}/s/{route}">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="{kind}">
+<meta property="og:site_name" content="EARF">
+<meta property="og:title" content="{t}">
+<meta property="og:description" content="{d}">
+<meta property="og:url" content="{URL}/s/{route}">
+<meta property="og:image" content="{URL}/{img}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{escape(alt)}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{t}">
+<meta name="twitter:description" content="{d}">
+<meta name="twitter:image" content="{URL}/{img}">
+<script type="application/ld+json">{json.dumps(ld, separators=(',', ':'))}</script>
+<meta http-equiv="refresh" content="0; url=/#{route}">
+<script>location.replace('/#{route}')</script>
+<style>body{{margin:0;font:17px/1.5 system-ui,sans-serif;background:#F4F1EC;color:#1C1A18;display:grid;place-items:center;min-height:100vh}}a{{color:inherit}}</style>
+</head>
+<body><main><p><a href="/#{route}">{t}</a></p></main></body>
+</html>
+"""
+        open(os.path.join(SITE, 's', f'{route}.html'), 'w').write(html)
+        return route
+    brand = {'@type': 'Brand', 'name': 'EARF'}
+    def product(name, colour, desc, img, extra=()):
+        return {'@context': 'https://schema.org', '@type': 'Product', 'name': f'{name} in {colour}', 'brand': brand,
+                'color': colour, 'description': desc, 'image': f'{URL}/{img}', 'category': extra[0] if extra else None,
+                'additionalProperty': [{'@type': 'PropertyValue', 'name': 'Status', 'value': 'In development, not yet for sale'}]}
+    made = []
+    for k, num, name, icon, tint, line, cover in CLOUDS:
+        low, col = name.lower(), MARK[k]
+        img = card(f'{k}-habitat-1200.jpg', f'speaker-{k}.jpg')
+        desc = f'{line} Tropos {num}, a powered horn loudspeaker cast in {tint.lower()} acrylic. In development, not yet for sale.'
+        made.append(page(f'speaker-{low}', f'Tropos in {name} · EARF', desc, img, f'Tropos in {name}, {PLACES.get(ELEMENT[k], "on location")}',
+                         col, 'product', product('Tropos', name, desc, img, ('Loudspeakers',))))
+        for lk, lname, kind, lline, alt, facts in LAMPS:
+            src = f'{lk}-{k}.jpg' if os.path.exists(os.path.join(IMG, f'{lk}-{k}.jpg')) else f'{lk}-red.jpg'
+            img = card(src, f'{lk}-{k}.jpg', 'pad')
+            desc = f'{lline} {kind} in {name}. In development, not yet for sale.'
+            made.append(page(f'{SLUG[lk]}-{low}', f'{lname} in {name} · EARF', desc, img, f'{lname} lit, in {name}', col, 'product',
+                             product(lname, name, desc, img, ('Lighting',))))
+        if os.path.exists(os.path.join(IMG, f'tt-{k}-studio-1200.jpg')):
+            img = card(f'tt-{k}-studio-1200.jpg', f'tt-{k}.jpg')
+            desc = f'{TT["line"]} {TT["kind"]} in {name}. In development, not yet for sale.'
+            made.append(page(f'mantle-{low}', f'{TT["name"]} in {name} · EARF', desc, img, f'{TT["name"]} in {name}', col, 'product',
+                             product(TT['name'], name, desc, img, ('Turntables',))))
+        img = card(f'{k}-studio-light-1200.jpg', f'colour-{k}.jpg')
+        desc = f'{line} {name}: {tint.lower()} cast acrylic, in every EARF line.'
+        made.append(page(f'colour-{low}', f'{name} · EARF', desc, img, f'Tropos in {name} in the studio', col, 'website',
+                         {'@context': 'https://schema.org', '@type': 'WebPage', 'name': f'{name} · EARF', 'description': desc}))
+    img = card('hero-1200.jpg', 'press.jpg')
+    made.append(page('press', 'Press · EARF', BOILER_SHORT, img, 'The eight Tropos speakers on a curve, Ember to Smoke', '#F4F1EC', 'website',
+                     {'@context': 'https://schema.org', '@type': 'Organization', 'name': 'EARF', 'url': URL, 'description': BOILER_SHORT,
+                      'logo': f'{URL}/apple-touch-icon.png'}))
+    for slug, d, title, stand, pic, body in JOURNAL:
+        if not os.path.exists(os.path.join(IMG, pic)):
+            continue
+        plain = re.sub('&[a-z]+;', lambda m: {'&rsquo;': '’', '&nbsp;': ' ', '&deg;': '°'}.get(m.group(), ''), title)
+        stand_ = re.sub('&[a-z]+;', lambda m: {'&rsquo;': '’', '&nbsp;': ' '}.get(m.group(), ''), stand)
+        img = card(pic, f'journal-{slug}.jpg')
+        made.append(page(f'journal-{slug}', f'{plain} · EARF', stand_, img, plain, '#F4F1EC', 'article',
+                         {'@context': 'https://schema.org', '@type': 'Article', 'headline': plain, 'description': stand_,
+                          'datePublished': d, 'image': f'{URL}/{img}', 'author': {'@type': 'Organization', 'name': 'EARF'},
+                          'publisher': {'@type': 'Organization', 'name': 'EARF'}}))
+    return made
+
+
 def build():
     """The whole site into site/: the page as a document, the favicons, robots.txt and vercel.json."""
     make_editorial()
+    share_pages()
     head, rest = body()
     open(os.path.join(SITE, 'index.html'), 'w').write(HEAD + head.strip() + '\n</head>\n<body>\n' + rest.strip() + '\n</body>\n</html>\n')
     favicons()

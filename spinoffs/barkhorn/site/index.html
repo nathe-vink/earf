@@ -587,6 +587,7 @@ html.cursor, html.cursor * { cursor: none !important }
 .dl-grid figcaption { margin-top: 8px; font-size: 14px; line-height: 1.45 } .dl-grid a { color: var(--ink); text-underline-offset: 3px; white-space: nowrap }
 .jlist { list-style: none; margin: 32px 0 80px; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px 20px }
 .jband { margin: 0 }
+.share-note { margin: 8px 0 0; min-height: 1.4em; font-size: 14px; color: var(--muted); word-break: break-all }
 /* the press page printed (viewer/presskit.mjs makes site/press/earf-press-kit.pdf from it): the words and the
    particulars, the pictures as a contact sheet, nothing to click */
 @media print {
@@ -839,7 +840,8 @@ html.cursor, html.cursor * { cursor: none !important }
         <p class="price">Priced at launch <span id="p-unit">&middot; each pair made to order</span></p>
         <ul class="swatches" id="swatches" aria-label="Colour"></ul>
         <p class="pick">Colour: <b id="p-pick"></b><span class="pick-ic" id="p-pick-ic"></span></p>
-        <div class="acts"><a class="btn solid" id="p-enquire" href="#contact">Enquire about a pair</a></div>
+        <div class="acts"><a class="btn solid" id="p-enquire" href="#contact">Enquire about a pair</a><button type="button" class="btn" id="p-share">Copy link</button></div>
+        <p class="share-note" id="p-share-note" aria-live="polite"></p>
         <dl class="facts" id="facts"></dl>
       </aside>
     </div>
@@ -1234,6 +1236,12 @@ function v3sync() {
   if ((v3 || frameEl.classList.contains('three')) && v3for !== P.id && !v3busy) v3close();
   if (v3) { v3.tint(V3[P.id].tints[cur]); v3box.setAttribute('aria-label', v3label()); }
 }
+// "Copy link": the product's own page for link previews (/s/<address>, its card in its colour), which forwards here
+document.getElementById('p-share').addEventListener('click', () => {
+  const url = `${location.origin}/s/${location.hash.slice(1)}`, note = document.getElementById('p-share-note');
+  const say = t => { note.textContent = t; setTimeout(() => { note.textContent = ''; }, 2400); };
+  try { navigator.clipboard.writeText(url).then(() => say('Link copied.'), () => say(url)); } catch (e) { say(url); }
+});
 v3btn.addEventListener('click', async () => {
   if (frameEl.classList.contains('three')) { v3close(); return; }
   if (v3busy) return;

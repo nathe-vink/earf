@@ -114,7 +114,13 @@ brand"). Not live: main needs the owner's yes.
 - **Press kit PDF** (`viewer/presskit.mjs`): the press page printed with its own print styles, four A4 pages.
 - **Header and home:** Journal in the header's pages; "Notes from the bench" on the home page above the enquiries.
 - **Footer:** Journal and Press (and Privacy once the waitlist is on).
-- **For the owner's deploy decision:** `launch/r47-what-changes.pdf`, before and after at 1440 and 390 px, page by page.
+- **Link previews** (`share_pages()`): the site is one page of #addresses, which a link preview never sees, so each
+  product in each colour, each colour, the press page and each post has its own page at `/s/<address>` (44): its card
+  (Open Graph and Twitter, a 1200 x 630 picture in that colour from `site/img/og/`, the colour as theme-color),
+  schema.org data (a Product with no offer, or an Article), and a forward to the view. "Copy link" on a product's page
+  copies it.
+- **For the owner's deploy decision:** `launch/r47-what-changes.pdf` (11 pages), before and after at 1440 and 390 px,
+  page by page, on the final branch; Fog's faint horn noted (as in its still); the link previews.
 - **Campaign slots** (`CAMPAIGN` in `web.py`, empty): one entry per picture (product, source render, per colour or
   shared, where it sits in the gallery, its label, caption and alt) and `web.py --images` puts the product sessions'
   finals into the galleries; tested with a stand-in on a scratch copy. Nothing goes in before the owner picks.
