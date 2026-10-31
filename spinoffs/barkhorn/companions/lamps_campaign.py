@@ -304,6 +304,14 @@ def macro_core():
     for k in ('texture', 'res', 'rough_mul'):
         floor.pop(k, None)
     floor.update(material='paper', color='#D9D2C6')
+    # critic r3 (5.0, the last round): c1 the overhead wash on the set only (it lit the ball from above); c2 the spill
+    # 0.45 W (the floor salmon, the base brown); c3 the base's strip 12; c4/c6 the ring's card at 4300 K and 2.0; c5 the
+    # dome 0.05 (no occlusion at the foot)
+    s['lights']['bgwash']['receivers'] = ['sweep*', 'prop*']
+    s['lights']['pool+0.00']['power_w'] = 0.45
+    s['lights']['basestrip']['strength'] = 12.0
+    s['lights']['ringcard'].update(color=4300, strength=2.0)
+    s['sky']['strength'] = 0.05
     return s
 
 
