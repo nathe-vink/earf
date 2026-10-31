@@ -83,6 +83,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 2vw, 24px) }
 .four { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(12px, 1.6vw, 20px) }
 .full img { width: 100% }
+.motion video { width: 100%; max-width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 4px; background: #F2EFEA; display: block }
 .three figure img { aspect-ratio: 3 / 2; object-fit: cover; width: 100% }
 .stratum.reserve h3 { font-size: clamp(22px, 2.4vw, 28px) }
 .top .mark img { height: 30px }
@@ -196,17 +197,24 @@ tr:last-child td { border-bottom: 0 }
 .sheet dd { margin: 0 }
 .boiler { background: var(--page); border-radius: 4px; padding: clamp(20px, 3vw, 32px); display: grid; gap: 12px; box-shadow: 0 0 0 1px var(--rule); max-width: 820px }
 .boiler p:not(.eyebrow) { font-size: 18px; line-height: 1.55 }
+.timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--rule) }
+.timeline li { display: grid; grid-template-columns: 180px minmax(0, 1fr) minmax(0, 1fr); gap: 24px; padding: 20px 0; border-bottom: 1px solid var(--rule); align-items: baseline }
+.timeline .when { font: 500 12px/1.5 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted) }
+.timeline h3 { font-size: 22px; letter-spacing: -.015em }
+.timeline p { color: var(--muted); font-size: 15.5px }
+@media (max-width: 760px) { .timeline li { grid-template-columns: minmax(0, 1fr); gap: 6px } }
 footer { padding-block: 56px 72px; font-size: 14.5px }
 footer .in { display: grid; gap: 10px; max-width: var(--wide) }
 footer p { max-width: 76ch }
 </style>
+<script>addEventListener('DOMContentLoaded', () => { if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.querySelectorAll('video').forEach(v => { v.removeAttribute('autoplay'); v.pause(); v.controls = true }) })</script>
 
 <header class="top band">
   <div class="in">
     <a class="mark" href="#cover" aria-label="EARF Brand Book, the start"><img src="img/lockup-paper.jpg" alt="EARF" width="1200" height="459"></a>
     <nav aria-label="Chapters">
       <a href="#position">Position</a><a href="#names">Names</a><a href="#identity">Identity</a><a href="#colour">Colour</a>
-      <a href="#type">Type</a><a href="#images">Images</a><a href="#voice">Voice</a><a href="#applications">Applications</a><a href="#packaging">Packaging</a><a href="#ideas">Ideas</a><a href="#press">Press</a>
+      <a href="#type">Type</a><a href="#images">Images</a><a href="#voice">Voice</a><a href="#applications">Applications</a><a href="#packaging">Packaging</a><a href="#ideas">Ideas</a><a href="#press">Press</a><a href="#launch">Launch</a>
     </nav>
   </div>
 </header>
@@ -297,6 +305,11 @@ footer p { max-width: 76ch }
       <li><b>Never</b><span>Recolour the globe's discs, outline the wordmark, set it in another face, stretch it, add a shadow or a glow it doesn't have, or put the tints in a gradient.</span></li>
       <li><b>Files</b><span>spinoffs/barkhorn/brand/mark (SVG and PNG in every colourway), brand/real (the object), brand/mark/small.</span></li>
     </ul>
+    <div class="three motion">
+      <figure><video src="img/globe-turn.mp4" autoplay muted loop playsinline aria-label="The acrylic globe turning, as in the site's header"></video><figcaption><b>The turn.</b> The globe turning on its axis, as it does in the site's header; the only motion the mark makes at rest.</figcaption></figure>
+      <figure><video src="img/ident-coin.mp4" autoplay muted loop playsinline aria-label="The coin ident: a coin spins and lands showing the globe"></video><figcaption><b>The coin.</b> An ident: a coin spins, wobbles and lands face up on the globe. Parked since round 27, kept for a launch film and EARFcoin.</figcaption></figure>
+      <figure><video src="img/ident-rise.mp4" autoplay muted loop playsinline aria-label="The rise ident: the globe rises over a dark horizon"></video><figcaption><b>Earthrise.</b> An ident on night: the globe rises over its own horizon. Parked, for the bar's screens and the end of a film.</figcaption></figure>
+    </div>
     <div class="two">
       <div class="clear"><div class="box"><img src="img/wordmark-colour.png" alt="The wordmark in the tints, each letter a different colour of acrylic" loading="lazy" width="1600" height="530"></div></div>
       <div class="prose" style="align-content:center"><p class="eyebrow">The wordmark in the tints</p><p>For the rare moment when the name itself should carry the colour: the opening of a launch film, the spine of a box set, a wall at the bar. Each letter takes one tint, as cut sheets laid over each other would. Used once per surface, never beside the colour globe.</p></div>
@@ -434,6 +447,9 @@ footer p { max-width: 76ch }
     <div class="app"><figure><img src="img/social.jpg" alt="Three social posts: the eight speakers with Something in the air; Poison in a forest with Bottle green, keep out of reach; a red corner close up with Cast in colour, all the way through" loading="lazy" width="1800" height="795"></figure>
       <div class="txt"><h3>Social posts</h3><p>One picture, one line, the wordmark small in a corner. The line is always the site's, never a caption written for the feed. Three kinds rotate: the eight, a tint in its element, the material up close.</p>
         <dl><dt>Format</dt><dd>4:5, 1080 × 1350</dd><dt>Line</dt><dd>Instrument Sans 600, top-left or over sky</dd><dt>Label</dt><dd>Plex Mono, the tint's number and name</dd><dt>Never</dt><dd>Stickers, emoji, countdowns</dd></dl></div></div>
+    <div class="app"><figure><img src="img/stationery.jpg" alt="A letterhead with the wordmark and the eight tints along its foot, an envelope, a black care card reading Care for cast acrylic, and a cotton tote printed with the globe" loading="lazy" width="1800" height="1125"></figure>
+      <div class="txt"><h3>Paper, and the card in the box</h3><p>The letter says what the site says: made to order, so we quote rather than list. The care card ships in every box in the site's own words, because the one thing that harms acrylic is the wrong cleaner. The tote is the bar's: the globe in one colour on heavy cotton.</p>
+        <dl><dt>Letter</dt><dd>US Letter, letterpress, the tints along its foot</dd><dt>Envelope</dt><dd>No. 10, the wordmark and the city only</dd><dt>Care card</dt><dd>Black, white print, 4 × 5.5 in</dd><dt>Tote</dt><dd>Heavy natural cotton, one-colour screen print</dd></dl></div></div>
     <div class="app"><figure><img src="img/signage.jpg" alt="Planet EARF's signs: a blackened steel door with an etched globe disc; two acrylic price tags on oak; a card reading Quiet here; the hours on smoked acrylic" loading="lazy" width="1800" height="1125"></figure>
       <div class="txt"><h3>Planet EARF's signs</h3><p>The bar names itself once, quietly, on a side door. Inside, the brand's busiest application is a tag: everything in the room is for sale, so every object wears one, cut from Fog acrylic and hung on a black thread, its tint marked with a dot.</p>
         <dl><dt>Door</dt><dd>Blackened steel, a 280 mm etched disc, unlit</dd><dt>Tag</dt><dd>90 × 50 mm Fog acrylic, engraved, filled black</dd><dt>Hours</dt><dd>6 mm Smoke, glazed to the window; as in the house book</dd><dt>Prices</dt><dd>[PRICE] and [PAIR PRICE] until set</dd></dl></div></div>
@@ -486,8 +502,8 @@ footer p { max-width: 76ch }
       <div class="txt"><p class="eyebrow">Idea a</p><h3>EARF Sessions</h3><p>A live record of a Session in the listening room, pressed in the night's tint, numbered, sold at the bar and on the site.</p>
         <dl><dt>Cost</dt><dd>About $5k to $9k a release, 300 LPs <span class="prop">est.</span></dd><dt>When</dt><dd>Session 00 the week the first pair plays</dd><dt>Why</dt><dd>Proof the speakers are serious, in a form that can't be faked; a product with a margin; a reason for the press to come back.</dd></dl></div></div>
     <div class="app"><figure><img src="img/idea-milan.jpg" alt="An invitation with the uplit eight and the words Something in the air, beside a plan of the installation room" loading="lazy" width="1800" height="1125"></figure>
-      <div class="txt"><p class="eyebrow">Idea b</p><h3>A debut room, Milan, April 2027</h3><p>One dark room: the eight lit from below, Mother EARF overhead, a Session each night, every piece tagged for sale.</p>
-        <dl><dt>Cost</dt><dd>About $80k to $200k all in <span class="prop">est.</span></dd><dt>When</dt><dd>Venue by about January 2027</dd><dt>Why</dt><dd>Design press, designers, hotel groups and retailers in one city for one week; the deadline that pulls the first run forward.</dd></dl></div></div>
+      <div class="txt"><p class="eyebrow">Idea b</p><h3>A debut room: San Francisco, then Milan</h3><p>One dark room: the speakers lit from below, a Session each night, every piece tagged for sale. First in San Francisco in FOG week, January 2027, with the first pair, as the investor deck's debut night; then the full eight at Milan or Design Miami once a batch exists.</p>
+        <dl><dt>Cost</dt><dd>$4k to $15k in SF; $80k to $200k for Milan <span class="prop">est.</span></dd><dt>When</dt><dd>SF: 21–24 January 2027; Milan: April at the earliest</dd><dt>Why</dt><dd>Collectors, designers and press in one week, for a few nights' rent; the waiting list turned into deposits.</dd></dl></div></div>
     <div class="app"><figure><img src="img/idea-plaza.jpg" alt="The colour globe, four metres across, glowing on a black plinth in a stone plaza at dusk" loading="lazy" width="1800" height="1125"></figure>
       <div class="txt"><p class="eyebrow">Idea c</p><h3>Mother EARF, at city scale</h3><p>The bar's globe, 4 m across, edge-lit in its tints on a low plinth in a plaza or on a waterfront.</p>
         <dl><dt>Cost</dt><dd>About $150k to $300k at 4 m; far less at 2 m <span class="prop">est.</span></dd><dt>When</dt><dd>6 to 9 months temporary; 12 to 18 permanent</dd><dt>Why</dt><dd>The mark at the size of a building, and the idea someone else can pay for: a developer, a sponsor, a festival.</dd></dl></div></div>
@@ -519,6 +535,14 @@ footer p { max-width: 76ch }
       <article class="sheet"><img src="img/tt-amber-studio.jpg" alt="Mantle in Acid in the studio" loading="lazy" width="1600" height="900"><div class="sb"><p class="eyebrow">Record player</p><h3>Mantle</h3><p>A record player that floats on its own light: a tinted plinth 40 mm over an edge-lit base.</p><dl><dt>Plinth</dt><dd>25 mm cast acrylic, tinted through</dd><dt>Drive</dt><dd>Belt, the motor in a pod of its own</dd><dt>Arm · cartridge</dt><dd>Rega RB330 · Ortofon 2M Black</dd><dt>Phono</dt><dd>Built in, MM, with a bypass</dd><dt>Size</dt><dd>470 × 380 × 194 mm, lid down</dd><dt>Weight</dt><dd>About 15.5 kg</dd></dl></div></article>
     </div>
     <p class="muted" style="font-size:15px;max-width:76ch">Every release carries the standing lines: in development and not yet for sale; every picture a render until the first are built; design figures until measured; prices set at launch. Planet EARF has an internal sheet only, since the bar isn't on the site.</p>
+  </div>
+</section>
+
+<section class="chap band" id="launch">
+  <div class="in">
+    <div class="head"><p class="no">12 · Launch</p><h2>In order, each step paying for the next.</h2>
+      <p class="lede">The brand's moves set against the investor deck's plan: a $50,000 raise for the first pieces and a debut, a pre-seed on deposits, the bar financed apart. Dates are proposals.</p></div>
+    <ol class="timeline"><li><span class="when">Now to December 2026</span><h3>Name and mark, protected</h3><p>The trademark search and filings the deck budgets (EARF, Tropos, Mantle, Hemisphere). The brand book frozen as version one; the press kit held until the debut.</p></li><li><span class="when">As the sheet is chosen</span><h3>The Tint Library</h3><p>The eight cast colours fixed with the suppliers, and the first kits cut from them: the first time anyone outside sees the real tints.</p></li><li><span class="when">When the first pair plays</span><h3>Session 00</h3><p>One album recorded through the first pair, in any good room. The first sound anyone can hear, and the first picture that isn't a render.</p></li><li><span class="when">21–24 January 2027</span><h3>The debut room, San Francisco</h3><p>FOG week. The first pair lit from below, one of each lamp and Mantle, the coin at the door, the tags on everything. The press kit goes out the week before.</p></li><li><span class="when">From the debut</span><h3>The Founding Hundred</h3><p>Deposits on numbered pairs, on terms counsel has set: the evidence for the pre-seed, and the first run's materials.</p></li><li><span class="when">Spring 2027</span><h3>Certification and a first batch</h3><p>The deck's step 2. Packaging tested to ISTA with a dummy load before the first crate leaves.</p></li><li><span class="when">April or December 2027</span><h3>Milan or Design Miami</h3><p>The full eight in one room, once a batch exists. Mother EARF at 2 m travels with it.</p></li><li><span class="when">Financed on its own</span><h3>Planet EARF</h3><p>The deck's step 3: the bar, the Sessions as a label, the sign on the side door.</p></li></ol>
   </div>
 </section>
 

@@ -71,7 +71,7 @@ def mat_birch(name, decal=None, ink=None):
     tc = node(nt, 'ShaderNodeTexCoord', (-1400, 0))
     mp = node(nt, 'ShaderNodeMapping', (-1200, 0)); mp.inputs['Scale'].default_value = (1.0, 1.0, 9.0)
     nt.links.new(tc.outputs['Object'], mp.inputs['Vector'])
-    wv = node(nt, 'ShaderNodeTexWave', (-1000, 100), Scale=7.0, Distortion=9.0, Detail=6.0)
+    wv = node(nt, 'ShaderNodeTexWave', (-1000, 100), Scale=14.0, Distortion=4.0, Detail=6.0)
     wv.wave_type = 'RINGS'
     nt.links.new(mp.outputs['Vector'], wv.inputs['Vector'])
     ramp = node(nt, 'ShaderNodeValToRGB', (-800, 100))
@@ -79,7 +79,7 @@ def mat_birch(name, decal=None, ink=None):
     nt.links.new(wv.outputs['Fac'], ramp.inputs['Fac'])
     nz = node(nt, 'ShaderNodeTexNoise', (-1000, -200), Scale=3.0, Detail=4.0)
     mix0 = node(nt, 'ShaderNodeMix', (-550, 0)); mix0.data_type = 'RGBA'; mix0.blend_type = 'MULTIPLY'
-    mix0.inputs['Factor'].default_value = 0.25
+    mix0.inputs['Factor'].default_value = 0.08
     nt.links.new(ramp.outputs['Color'], mix0.inputs['A']); nt.links.new(nz.outputs['Color'], mix0.inputs['B'])
     base = mix0.outputs['Result']
     if decal:
@@ -195,12 +195,13 @@ def drum_uv(o, r, h, z0, wall_decal=True):
                 uvl[li].uv = (a, (v.z + h / 2) / h)
 
 
-def floor_and_wall(color='#CFC8BD'):
-    m = mat_basic('ground', color, rough=0.85, bump=0.02, bump_scale=60.0)
+def floor_and_wall(color='#CFC8BD', wall=None, wall_y=3.2, rough=0.85):
+    m = mat_basic('ground', color, rough=rough, bump=0.02, bump_scale=60.0)
     bpy.ops.mesh.primitive_plane_add(size=40, location=(0, 0, 0)); bpy.context.object.data.materials.append(m)
-    # a cove: the wall 3 m behind, curved into the floor
-    bpy.ops.mesh.primitive_plane_add(size=40, location=(0, 3.2, 0), rotation=(math.pi / 2, 0, 0))
-    bpy.context.object.data.materials.append(m)
+    # the wall behind: the floor's own colour, or a limewash of its own
+    w = mat_basic('wall', wall, rough=0.95, bump=0.15, bump_scale=8.0) if wall else m
+    bpy.ops.mesh.primitive_plane_add(size=40, location=(0, wall_y, 0), rotation=(math.pi / 2, 0, 0))
+    bpy.context.object.data.materials.append(w)
 
 
 def area(name, loc, target, size, power, color='#FFF6EC'):
@@ -235,14 +236,14 @@ def camera(loc, target, lens=50, fstop=0.0):
 W, D, H, T, SK = 0.72, 0.60, 1.16, 0.018, 0.10
 
 
-def crate(x, y, tint='ember', open_door=False, rot=0.0, name='crate'):
+def crate(x, y, tint='ember', open_door=False, rot=0.0, name='crate', front_art='decal-crate-front.png'):
     """A crate at (x, y), its door facing -y; rot turns it about its centre (radians). Returns its objects."""
     objs = []
     ply = mat_birch('ply-' + name)
-    front = mat_birch('front-' + name, decal=os.path.join(OUT, 'decal-crate-front.png'))
+    front = mat_birch('front-' + name, decal=os.path.join(OUT, front_art))
     inside = mat_birch('inside-' + name, decal=os.path.join(OUT, 'decal-crate-inside.png'))
     side = mat_birch('side-' + name, decal=os.path.join(OUT, 'decal-crate-side.png'))
-    steel = mat_basic('steel-' + name, '#1E1D1F', rough=0.45, metal=1.0)
+    steel = mat_basic('steel-' + name, '#1E1D1F', rough=0.35, metal=1.0)
     felt = mat_basic('felt-' + name, '#2A2928', rough=0.95, sheen=0.4, bump=0.1, bump_scale=400.0)
     z0 = SK
     # skids
@@ -298,17 +299,25 @@ def crate(x, y, tint='ember', open_door=False, rot=0.0, name='crate'):
                 objs.append(box('foam', fx, -D / 2 + 0.06, fz, fx + 0.07, D / 2 - T - 0.01, fz + 0.12, foam, bevel=0.004))
         # the sled, and the speaker in its sleeve on it
         objs.append(box('sled', -0.30, -D / 2 + 0.03, z0 + T, 0.30, D / 2 - T - 0.02, z0 + T + 0.03, ply, bevel=0.002))
-        sleeve = mat_basic('sleeve-' + name, TINTS[tint], rough=0.8, sheen=0.8, bump=0.35, bump_scale=18.0)
-        sl = box('sleeve', -0.285, -0.215, z0 + T + 0.03, 0.285, 0.215, z0 + T + 0.03 + 0.95, sleeve, bevel=0.035)
-        # a soft fall to the cloth: a displacement of low noise
-        tex = bpy.data.textures.new('wr', 'CLOUDS'); tex.noise_scale = 0.18
-        sub = sl.modifiers.new('s', 'SUBSURF'); sub.levels = 3; sub.render_levels = 3; sub.subdivision_type = 'SIMPLE'
-        dsp = sl.modifiers.new('d', 'DISPLACE'); dsp.texture = tex; dsp.strength = 0.012
+        sleeve = mat_basic('sleeve-' + name, {'ember': '#7A120C'}.get(tint, TINTS[tint]), rough=0.9, sheen=0.0, bump=0.25, bump_scale=900.0)   # the cotton dyed deeper than the acrylic reads
+        sl = box('sleeve', -0.285, -0.215, z0 + T + 0.03, 0.285, 0.215, z0 + T + 0.03 + 0.95, sleeve, bevel=0.045)
+        sub = sl.modifiers.new('s', 'SUBSURF'); sub.levels = 4; sub.render_levels = 4; sub.subdivision_type = 'SIMPLE'
+        # critic round 1 (5.0): the cloth as cloth. Long vertical folds that fade toward the shoulders, and a loose
+        # unevenness over them, so the sleeve hangs rather than stands
+        folds = bpy.data.textures.new('folds', 'CLOUDS'); folds.noise_scale = 0.05; folds.noise_depth = 2
+        stretch = bpy.data.objects.new('fold-axis', None); bpy.context.collection.objects.link(stretch)
+        stretch.scale = (1.0, 1.0, 14.0); stretch.location = sl.location     # the noise drawn out up the sleeve: folds that hang
+        d1 = sl.modifiers.new('folds', 'DISPLACE'); d1.texture = folds; d1.strength = 0.03
+        d1.texture_coords = 'OBJECT'; d1.texture_coords_object = stretch
+        tex = bpy.data.textures.new('wr', 'CLOUDS'); tex.noise_scale = 0.12
+        d2 = sl.modifiers.new('d', 'DISPLACE'); d2.texture = tex; d2.strength = 0.01
         bpy.context.view_layer.objects.active = sl; bpy.ops.object.shade_smooth()
         objs.append(sl)
-        # the sleeve's woven label: the tint's number and name
-        lab = mat_basic('label-' + name, '#F2EFEA', rough=0.7, sheen=0.3)
-        objs.append(box('label', -0.06, -0.226, z0 + 0.62, 0.06, -0.218, z0 + 0.68, lab))
+        # the woven label: off-white, the wordmark woven in, stitched at both ends
+        art = os.path.join(OUT, 'decal-label.png')
+        lab = mat_board('label-' + name, '#EFEBE2', decal=art if os.path.exists(art) else None)
+        lb = box('label', -0.04, -0.236, z0 + 0.66, 0.04, -0.231, z0 + 0.69, lab, uv_face='-y')
+        objs.append(lb)
     root = bpy.data.objects.new(name, None); bpy.context.collection.objects.link(root)
     for o in objs:
         o.parent = root
@@ -382,24 +391,33 @@ def core_box(x, y, tint='ember', rot=0.2):
 
 
 def shot_pair(sc):
-    floor_and_wall()
-    crate(-0.55, 0.30, rot=0.10, name='c1')
-    crate(0.45, 0.55, rot=-0.08, name='c2')
-    horn_case(0.05, -0.85, rot=0.04)
-    area('key', (-3.0, -3.2, 3.2), (0, 0, 0.6), 2.6, 900)
-    area('fill', (3.4, -2.6, 1.4), (0, 0, 0.6), 3.0, 160, '#EEF2FA')
-    area('top', (0, 0.5, 4.5), (0, 0, 0), 3.0, 140)
-    camera((1.6, -4.6, 1.55), (0.0, 0.0, 0.62), lens=50, fstop=0)
+    # critic round 1 (5.5): a raking key, one hero crate and its partner staggered, the case clear of the skids, a
+    # concrete floor and a limewash wall, a low 85 mm camera, Base Contrast
+    sc.view_settings.look = 'AgX - Base Contrast'; sc.view_settings.exposure = -0.4
+    sc.world.node_tree.nodes['Background'].inputs[1].default_value = 0.05
+    floor_and_wall(color='#B8B2A8', wall='#8E867B', wall_y=2.5, rough=0.7)
+    crate(-0.35, 0.0, rot=0.35, name='c1')
+    crate(0.55, 0.9, rot=-0.26, name='c2', front_art='decal-crate-front-2.png')
+    horn_case(1.15, -0.35, rot=-0.55)
+    area('key', (-3.6, -1.2, 2.4), (0, 0, 0.6), 1.0, 1400)
+    area('fill', (3.4, -2.6, 1.4), (0, 0, 0.6), 3.0, 60, '#EEF2FA')
+    area('top', (0, 0.5, 4.5), (0, 0, 0), 3.0, 80)
+    flag = mat_basic('flag', '#050505', rough=1.0)          # a flag over the wall's top, so it falls off upward
+    f = box('flag', -4, 1.6, 2.6, 4, 1.62, 3.4, flag); f.visible_camera = False
+    camera((1.4, -5.8, 0.95), (0.25, 0.15, 0.6), lens=50, fstop=5.6)
 
 
 def shot_open(sc):
-    floor_and_wall(color='#CFC8BD')
+    sc.view_settings.look = 'AgX - Base Contrast'; sc.view_settings.exposure = -1.0
+    sc.world.node_tree.nodes['Background'].inputs[1].default_value = 0.06
+    floor_and_wall(color='#B8B2A8', wall='#8E867B', wall_y=2.2, rough=0.7)
     crate(0.0, 0.3, open_door=True, name='c1')
-    area('key', (-2.6, -3.0, 3.0), (0, 0, 0.7), 2.4, 900)
-    area('fill', (3.0, -2.2, 1.2), (0, 0, 0.6), 2.6, 160, '#EEF2FA')
-    area('in', (0.0, -3.6, 1.0), (0, 0.3, 0.6), 1.6, 160)
-    area('top', (0, 0.5, 4.5), (0, 0, 0), 3.0, 140)
-    camera((1.0, -3.6, 1.45), (0.0, -0.45, 0.5), lens=40)
+    area('key', (-2.8, -1.6, 2.2), (0, 0, 0.6), 1.2, 700)
+    area('fill', (3.0, -2.2, 1.2), (0, 0, 0.6), 2.6, 80, '#EEF2FA')
+    area('in', (0.2, -3.0, 1.4), (0, 0.3, 1.0), 1.6, 50)
+    bounce = area('bounce', (0.0, -0.4, 1.2), (0, 0.3, 1.2), 0.4, 40); bounce.visible_camera = False
+    area('top', (0, 0.5, 4.5), (0, 0, 0), 3.0, 80)
+    camera((0.9, -3.7, 1.1), (0.0, -0.25, 0.62), lens=48, fstop=4)
 
 
 def shot_lamps(sc):

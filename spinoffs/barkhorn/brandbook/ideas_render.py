@@ -61,48 +61,98 @@ def globe(scale, z0):
     return root
 
 
+def figure(x, y, h, mat, rot=0.0):
+    """A person for scale, in silhouette at dusk: legs, a coat and a head, h tall."""
+    parts = []
+    for dx in (-0.09, 0.09):
+        bpy.ops.mesh.primitive_cylinder_add(radius=0.065, depth=h * 0.47, location=(x + dx, y, h * 0.235)); parts.append(bpy.context.object)
+    bpy.ops.mesh.primitive_cylinder_add(radius=0.2, depth=h * 0.38, location=(x, y, h * 0.47 + h * 0.19)); parts.append(bpy.context.object)
+    bpy.ops.mesh.primitive_uv_sphere_add(radius=h * 0.065, location=(x, y, h * 0.93)); parts.append(bpy.context.object)
+    for o in parts:
+        o.data.materials.append(mat); o.rotation_euler.z = rot
+        bpy.context.view_layer.objects.active = o; bpy.ops.object.shade_smooth()
+
+
+def tree(x, y, mat_trunk, mat_crown, h=7.0):
+    P.cylinder('trunk', 0.14, h * 0.55, (x, y, 0), mat_trunk, verts=16)
+    bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=3, radius=h * 0.28, location=(x, y, h * 0.7))
+    c = bpy.context.object; c.scale = (1.0, 1.0, 1.15); c.data.materials.append(mat_crown)
+    tex = bpy.data.textures.new('leaf', 'CLOUDS'); tex.noise_scale = 0.6
+    d = c.modifiers.new('d', 'DISPLACE'); d.texture = tex; d.strength = 0.6
+
+
+def lamp_post(x, y, mat, glow):
+    P.cylinder('post', 0.06, 4.2, (x, y, 0), mat, verts=16)
+    bpy.ops.mesh.primitive_uv_sphere_add(radius=0.22, location=(x, y, 4.35)); bpy.context.object.data.materials.append(glow)
+
+
 def shot_plaza(sc):
+    # critic round 1 (4.0): pavers that read, a lit skyline lifted by distance, people, trees and lamps for scale,
+    # the uplight hidden, a deeper sky, a honed stone plinth, a lower, closer camera with the globe on the right third
     sc.view_settings.exposure = 0.0
     w = sc.world.node_tree; bg = w.nodes['Background']
     sky = w.nodes.new('ShaderNodeTexSky'); sky.sky_type = 'MULTIPLE_SCATTERING'
     try:
-        sky.sun_elevation = math.radians(-2.5); sky.sun_rotation = math.radians(200); sky.altitude = 0
+        sky.sun_elevation = math.radians(-3.0); sky.sun_rotation = math.radians(240); sky.altitude = 0
     except Exception:
         pass
-    w.links.new(sky.outputs['Color'], bg.inputs['Color']); bg.inputs['Strength'].default_value = 1.6
-    # the plaza: stone pavers, wet enough to hold a reflection
+    w.links.new(sky.outputs['Color'], bg.inputs['Color']); bg.inputs['Strength'].default_value = 1.5
+    # the plaza: granite pavers 600 x 300 with dark joints, a post-rain sheen in patches
     m = bpy.data.materials.new('pavers'); m.use_nodes = True; nt = m.node_tree; p = nt.nodes['Principled BSDF']
-    br = P.node(nt, 'ShaderNodeTexBrick', (-500, 0), Scale=0.6, **{'Mortar Size': 0.012})
-    br.inputs['Color1'].default_value = P.lin('#6B6863'); br.inputs['Color2'].default_value = P.lin('#5A5853')
-    br.inputs['Mortar'].default_value = P.lin('#2C2B29')
+    tc = P.node(nt, 'ShaderNodeTexCoord', (-900, 0))
+    br = P.node(nt, 'ShaderNodeTexBrick', (-500, 0), Scale=1.0, **{'Mortar Size': 0.012, 'Brick Width': 0.6, 'Row Height': 0.3})
+    nt.links.new(tc.outputs['Object'], br.inputs['Vector'])
+    br.inputs['Color1'].default_value = P.lin('#7A7670'); br.inputs['Color2'].default_value = P.lin('#5E5B56')
+    br.inputs['Mortar'].default_value = P.lin('#1E1D1C')
     nt.links.new(br.outputs['Color'], p.inputs['Base Color'])
-    p.inputs['Roughness'].default_value = 0.32
-    bpy.ops.mesh.primitive_plane_add(size=200); bpy.context.object.data.materials.append(m)
-    # buildings round it, dark with lit windows
-    win = bpy.data.materials.new('facade'); win.use_nodes = True; nt = win.node_tree; p = nt.nodes['Principled BSDF']
-    p.inputs['Base Color'].default_value = P.lin('#1A1A1E'); p.inputs['Roughness'].default_value = 0.8
-    bk = P.node(nt, 'ShaderNodeTexBrick', (-600, -200), Scale=0.45, Bias=-0.55, **{'Mortar Size': 0.18, 'Brick Width': 1.1, 'Row Height': 0.5})
-    bk.inputs['Color1'].default_value = P.lin('#FFD7A0'); bk.inputs['Color2'].default_value = (0, 0, 0, 1)
-    bk.inputs['Mortar'].default_value = (0, 0, 0, 1)
-    tc = P.node(nt, 'ShaderNodeTexCoord', (-900, -200)); nt.links.new(tc.outputs['Object'], bk.inputs['Vector'])
-    nz = P.node(nt, 'ShaderNodeTexWhiteNoise', (-900, -400))
-    nt.links.new(bk.outputs['Color'], p.inputs['Emission Color'])
-    p.inputs['Emission Strength'].default_value = 2.5
-    dark = P.mat_basic('skyline', '#0E0E12', rough=0.9)
+    wet = P.node(nt, 'ShaderNodeTexNoise', (-500, -300), Scale=0.15, Detail=3.0)
+    rr = P.node(nt, 'ShaderNodeMapRange', (-250, -300)); rr.inputs['To Min'].default_value = 0.18; rr.inputs['To Max'].default_value = 0.55
+    nt.links.new(wet.outputs['Fac'], rr.inputs['Value']); nt.links.new(rr.outputs['Result'], p.inputs['Roughness'])
+    bm = P.node(nt, 'ShaderNodeBump', (-250, -500), Strength=0.3, Distance=0.004)
+    nt.links.new(br.outputs['Fac'], bm.inputs['Height']); nt.links.new(bm.outputs['Normal'], p.inputs['Normal'])
+    bpy.ops.mesh.primitive_plane_add(size=400); bpy.context.object.data.materials.append(m)
+    # the skyline: blue-grey facades lifted by distance, lit windows on the faces toward us
     import random
     random.seed(4)
-    x = -160.0
-    while x < 160:                      # a far skyline, in silhouette
-        w_ = random.uniform(8, 22); h = random.uniform(3, 13)
-        P.box('bld', x, 180, 0, x + w_, 190, h, dark); x += w_ + random.uniform(0, 4)
-    # the plinth and the globe, 4 m across, lifted 0.6 m
-    plinth = P.mat_basic('plinth', '#151417', rough=0.25)
-    P.cylinder('plinth', 1.6, 0.6, (0, 0, 0), plinth, verts=128)
+    for row, (y0, tone, lit) in enumerate([(220, '#2A2E3C', 0.16), (420, '#3A4054', 0.10)]):
+        x = -260.0
+        while x < 260:
+            w_ = random.uniform(14, 34); h = random.uniform(10, 40) * (1.4 if row else 1.0)
+            fac = bpy.data.materials.new('fac'); fac.use_nodes = True; nt = fac.node_tree; p = nt.nodes['Principled BSDF']
+            p.inputs['Base Color'].default_value = P.lin(tone); p.inputs['Roughness'].default_value = 0.9
+            tc = P.node(nt, 'ShaderNodeTexCoord', (-900, 0)); sep = P.node(nt, 'ShaderNodeSeparateXYZ', (-700, 0))
+            nt.links.new(tc.outputs['Object'], sep.inputs['Vector'])
+            comb = P.node(nt, 'ShaderNodeCombineXYZ', (-500, 0))
+            nt.links.new(sep.outputs['X'], comb.inputs['X']); nt.links.new(sep.outputs['Z'], comb.inputs['Y'])
+            bk = P.node(nt, 'ShaderNodeTexBrick', (-300, 0), Scale=0.5, Bias=-0.75, **{'Mortar Size': 0.35, 'Brick Width': 0.9, 'Row Height': 0.55})
+            nt.links.new(comb.outputs['Vector'], bk.inputs['Vector'])
+            bk.inputs['Color1'].default_value = P.lin('#FFD49A'); bk.inputs['Color2'].default_value = (0.0, 0.0, 0.0, 1)
+            bk.inputs['Mortar'].default_value = (0, 0, 0, 1)
+            add = P.node(nt, 'ShaderNodeMix', (-100, -100)); add.data_type = 'RGBA'; add.blend_type = 'ADD'
+            add.inputs['Factor'].default_value = 1.0
+            add.inputs['A'].default_value = tuple(c * 0.12 for c in P.lin(tone)[:3]) + (1.0,)   # the air between us and it
+            nt.links.new(bk.outputs['Color'], add.inputs['B'])
+            nt.links.new(add.outputs['Result'], p.inputs['Emission Color']); p.inputs['Emission Strength'].default_value = 3.0
+            P.box('bld', x, y0, 0, x + w_, y0 + 20, h, fac); x += w_ + random.uniform(1, 8)
+    # dressing: trees and lamps receding left and right, a few people
+    trunk = P.mat_basic('trunk', '#1A1714', rough=0.9); crown = P.mat_basic('crown', '#141A14', rough=0.9)
+    post = P.mat_basic('post', '#111114', rough=0.5, metal=1.0); glow = P.mat_basic('glow', '#FFE6C0', rough=0.5)
+    glow.node_tree.nodes['Principled BSDF'].inputs['Emission Color'].default_value = P.lin('#FFD9A8')
+    glow.node_tree.nodes['Principled BSDF'].inputs['Emission Strength'].default_value = 30.0
+    for k in range(6):
+        tree(-16 - k * 0.6, 8 + k * 10, trunk, crown, h=6.0); tree(15 + k * 0.6, 10 + k * 10, trunk, crown, h=6.0)
+        lamp_post(-11, 0 + k * 9, post, glow); lamp_post(10.5, 2 + k * 9, post, glow)
+    coat = P.mat_basic('coat', '#16151A', rough=0.8)
+    for x, y, h in [(-3.4, -2.4, 1.78), (-2.9, -2.6, 1.66), (5.2, 3.5, 1.74), (-7.5, 6.0, 1.70)]:
+        figure(x, y, h, coat, rot=0.3)
+    # the plinth, honed black granite, and the globe, 4 m across
+    plinth = P.mat_basic('plinth', '#151417', rough=0.45)
+    P.cylinder('plinth', 1.6, 0.6, (0, 0, 0), plinth, verts=128, bevel=0.015)
     globe(4.0 / 0.3, 0.6 - 0.0181 * 4.0 / 0.3)
-    # a low warm uplight from the plinth's rim, and the street's own spill
-    P.area('up', (0, -2.2, 0.62), (0, 0, 3.0), 1.2, 900, '#FFE2C0')
-    P.area('spill', (-14, -12, 7), (0, 0, 1), 6.0, 2500, '#FFC890')
-    P.camera((4.2, -16.5, 1.6), (0.0, 0.0, 3.6), lens=30)
+    up = P.area('up', (0, 0, 0.61), (0, 0, 3.0), 1.0, 600, '#FFE2C0')
+    up.visible_camera = False; up.visible_glossy = False
+    P.area('spill', (-14, -12, 7), (0, 0, 1), 6.0, 1800, '#FFC890')
+    P.camera((5.5, -11.0, 1.2), (-1.6, 0.0, 3.0), lens=35, fstop=5.6)
 
 
 def shot_library(sc):

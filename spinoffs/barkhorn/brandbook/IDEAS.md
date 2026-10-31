@@ -13,7 +13,7 @@ Ranked by what each does for the odds, per dollar:
 | f | The Tint Library | about $10k to $25k for 100 kits | as soon as the sheet is chosen | trade specification; settles the cast colours |
 | a | EARF Sessions | about $5k to $9k a release | Session 00 once the first pair plays | content, a product, and the bar's reason to exist |
 | d | Hotel listening suites | trade-priced kits; one pilot suite | after the first pairs are measured | overnight demos to buyers; trade revenue |
-| b | A debut installation, Milan, April 2027 | about $80k to $200k all in | venue booked by about January 2027 | press and the trade in one week |
+| b | A debut room: San Francisco in FOG week (January 2027), then Milan or Design Miami | about $4k to $15k in SF (within the deck's debut line); $80k to $200k for Milan | SF: a space by December; Milan: April 2027 at the earliest | press and the trade in one week |
 | e | Artist editions | a colour batch's minimum plus the artist's share | 2027, after launch | a waitlist and a premium; the artist's audience |
 | c | Mother EARF as public art | about $150k to $300k at 4 m; less at 2 m | 12 to 18 months | the brand at city scale; sponsorship |
 
@@ -36,24 +36,30 @@ made in any good room the week the first pair plays.
 through them. It gives the press and social a recurring reason to write. It is a product with a margin from day one.
 And it makes Planet EARF a label as well as a bar, which is easier to fund than a bar alone.
 
-## (b) A debut installation: Milan Design Week, April 2027 (or Design Miami, December 2027)
+## (b) A debut room: San Francisco in FOG week, then Milan or Design Miami
 
 **Mockup:** `out/idea-milan.png`: the invitation ("Something in the air.", the uplit eight), the room in plan (eight
-Tropos lit from below on a curved wall, Mother EARF overhead, a bench, Mantle and the coins by the door).
+Tropos lit from below on a curved wall, Mother EARF overhead, a bench, Mantle and the coins by the door). The same room
+works at any of the three.
 
-**What.** One dark room. The eight Tropos lit from below, throwing their colours up a wall, the picture on the site
-made real at full size. A Session each night. The coin at the door. Every piece wears its tag, and the first run's
-orders are taken there.
+**What.** One dark room. The speakers lit from below, throwing their colours up a wall, the picture on the site made
+real at full size. A Session each night. The coin at the door. Every piece wears its tag, and the first run's orders and
+deposits are taken there.
 
-**Cost (est.).** A space in one of the design districts for the week, about $15k to $80k; build, light and sound,
-$20k to $50k; freight both ways for eight crates, the horn cases and the globe, $10k to $25k; travel, staff and a
-press agent, $20k to $45k. About $80k to $200k all in. **Timeline.** Spaces for April are taken through the winter:
-book by about January 2027; ship in March. The eight speakers must exist first, which makes this the deadline that
-pulls the first production run forward. If Milan is too soon, Design Miami in December 2027 gives eight months more.
+**Order.** The investor deck's plan (step 1, the $50,000 raise) already has a debut night in San Francisco, and its
+"why now" points at FOG Design+Art at Fort Mason, 21 to 24 January 2027, when collectible-design galleries and their
+collectors are in town. So: **first**, the room in San Francisco that week, a borrowed or rented space near the fair
+with the first pair (and one of each lamp and Mantle), not the eight; **then**, once a first batch exists, the full room
+at Milan Design Week (April) or Design Miami (December 2027).
 
-**Why it raises the odds.** Design press, interior designers, hotel groups and retailers are all in one city for one
-week. One room that photographs as well as the renders turns a site of renders into a brand with a public debut, and
-a list of trade contacts to sell the first run to.
+**Cost (est.).** San Francisco: a space for a few nights, light and the bench, $4k to $15k, inside the deck's $4,000 debut
+allowance only if the space is lent. Milan: a space in a design district for the week, $15k to $80k; build, light and
+sound, $20k to $50k; freight both ways, $10k to $25k; travel, staff and a press agent, $20k to $45k; about $80k to
+$200k all in, a pre-seed cost, not this raise's.
+
+**Why it raises the odds.** San Francisco in FOG week puts the first real pair in front of collectors, designers and
+press for the price of a few nights' rent, and turns the waiting list into deposits (idea g). Milan then turns a local
+debut into an international one, with the trade there to sell the first run to.
 
 ## (c) Mother EARF as public art
 

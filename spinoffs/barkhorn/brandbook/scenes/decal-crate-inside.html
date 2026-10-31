@@ -5,7 +5,7 @@
 body { width: 1520px; height: 2360px; background: transparent; position: relative; color: #1C1A18 }
 .h { position: absolute; left: 110px; top: 160px; font-weight: 600; font-size: 132px; letter-spacing: -.03em; line-height: 1.02 }
 ol { position: absolute; left: 110px; right: 110px; top: 620px; margin: 0; padding: 0; list-style: none; display: grid; gap: 70px; counter-reset: s }
-li { display: grid; grid-template-columns: 150px 1fr; font-size: 58px; line-height: 1.25; counter-increment: s }
+li { display: grid; grid-template-columns: 150px 1fr; align-items: baseline; font-size: 58px; line-height: 1.4; counter-increment: s }
 li::before { content: counter(s); font-family: var(--mono); font-size: 54px; padding-top: 4px }
 .foot { position: absolute; left: 110px; right: 110px; bottom: 140px; font-family: var(--mono); font-size: 40px; letter-spacing: .08em; text-transform: uppercase; display: flex; justify-content: space-between; border-top: 6px solid #1C1A18; padding-top: 40px }
 </style>

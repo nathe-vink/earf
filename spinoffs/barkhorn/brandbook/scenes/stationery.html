@@ -1,0 +1,45 @@
+<!doctype html><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<style>
+/* the paper: a US Letter sheet, a No. 10 envelope, the care card that ships in every box, and a tote for the bar */
+body { width: 1600px; height: 1000px; background: radial-gradient(1100px 700px at 40% 30%, #E9E4DC, #D7D0C5) }
+.sh { position: absolute; background: #FBFAF7; box-shadow: 0 1px 1px rgba(0,0,0,.1), 0 20px 34px -18px rgba(40,30,20,.45) }
+.letter { left: 80px; top: 60px; width: 560px; height: 724px; transform: rotate(-3deg); padding: 54px 58px; display: flex; flex-direction: column; gap: 18px; font-size: 13px; line-height: 1.6 }
+.letter .hd { display: flex; justify-content: space-between; align-items: flex-start }
+.letter .hd img { height: 22px }
+.letter .k { font-family: var(--mono); font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); line-height: 1.7; text-align: right }
+.letter p { margin: 0; color: #2A2826 }
+.letter .ft { margin-top: auto; display: flex; justify-content: space-between; font-family: var(--mono); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 10px }
+.letter .bar { position: absolute; left: 0; right: 0; bottom: 0; height: 5px; display: flex } .letter .bar i { flex: 1 }
+.env { left: 520px; top: 640px; width: 620px; height: 270px; transform: rotate(4deg); padding: 34px 40px; background: #F4F1EC }
+.env img { height: 16px } .env .k { position: absolute; left: 40px; top: 60px; font-family: var(--mono); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); line-height: 1.6 }
+.env .to { position: absolute; left: 300px; top: 140px; font-size: 14px; line-height: 1.6; color: #2A2826 }
+.env .stamp { position: absolute; right: 34px; top: 30px; width: 64px; height: 76px; border: 2px dashed #B8B0A4 }
+.care { left: 760px; top: 90px; width: 380px; height: 500px; transform: rotate(5deg); background: #1C1A18; color: #EDE7DD; padding: 40px 38px; display: flex; flex-direction: column; gap: 14px }
+.care .k { font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: #A79F93 }
+.care h3 { margin: 0; font-size: 32px; letter-spacing: -.025em; line-height: 1 }
+.care p { margin: 0; font-size: 14px; line-height: 1.55; color: #CFC8BD }
+.care .w { margin-top: auto; height: 14px; align-self: flex-start }
+.tote { position: absolute; left: 1180px; top: 160px; width: 360px; height: 420px; background: linear-gradient(170deg, #EDE6D8, #DCD3C2); transform: rotate(-2deg);
+  box-shadow: 0 24px 40px -20px rgba(40,30,20,.5); display: grid; place-items: center }
+.tote::before { content: ''; position: absolute; left: 70px; right: 70px; top: -150px; height: 170px; border: 16px solid #DCD3C2; border-bottom: 0; border-radius: 90px 90px 0 0 }
+.tote .g { width: 190px; opacity: .92 }
+.tote .w { position: absolute; bottom: 44px; height: 20px }
+.tote::after { content: ''; position: absolute; inset: 0; opacity: .35; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .45 0 0 0 0 .4 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E") }
+.cap { position: absolute; left: 1180px; top: 640px; width: 360px; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); line-height: 1.7 }
+</style>
+<body data-w="1600" data-h="1000">
+<div class="sh letter"><div class="hd"><img src="../../brand/mark/earf-wordmark-black.svg" alt=""><div class="k">EARF<br>San Francisco, California<br>earf.world</div></div>
+  <p style="margin-top:34px">[Date]</p><p>[Name]<br>[Address]</p><p>Dear [Name],</p>
+  <p>Thank you for asking about Tropos. Everything we make is made to order, so we quote rather than list: the pair, its colour and when it can be with you.</p>
+  <p>[Body of the letter.]</p><p>With best wishes,</p><p>[Name]<br><span style="color:var(--muted)">EARF</span></p>
+  <div class="ft"><span>hello@earf.world</span><span>Hi-fi and light, cast in tinted acrylic</span></div>
+  <div class="bar"><i style="background:#C92118"></i><i style="background:#E06718"></i><i style="background:#E2AA15"></i><i style="background:#367424"></i><i style="background:#2584BE"></i><i style="background:#5B3197"></i><i style="background:#D5DFE0"></i><i style="background:#57545F"></i></div></div>
+<div class="sh env"><img src="../../brand/mark/earf-wordmark-black.svg" alt=""><div class="k">San Francisco, California</div><div class="stamp"></div><div class="to">[Name]<br>[Street]<br>[City, State ZIP]</div></div>
+<div class="sh care"><span class="k">In every box</span><h3>Care for cast acrylic.</h3>
+  <p>Dust with a soft microfibre cloth. Wash with water and a drop of mild soap, then dry.</p>
+  <p>No glass cleaner, alcohol or solvents: they craze acrylic.</p><p>Fine scratches polish out.</p>
+  <img class="w" src="../../brand/mark/earf-wordmark-white.svg" alt=""></div>
+<div class="tote"><img class="g" src="../../brand/mark/earf-globe-black-stroke.svg" alt=""><img class="w" src="../../brand/mark/earf-wordmark-black.svg" alt=""></div>
+<div class="cap">The letter, US Letter, letterpress · the No. 10 envelope · the care card, in every box, the site's own words · a heavy cotton tote for the bar, the globe printed in one colour</div>
+</body>
