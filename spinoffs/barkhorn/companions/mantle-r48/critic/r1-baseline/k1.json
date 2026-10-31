@@ -1,0 +1,174 @@
+{
+ "stage1": {
+  "impression": "A clean, high-key catalogue render of a smoked-acrylic turntable with the lid open. From a distance it looks expensive, but up close it gives itself away. The lower plinth's edges have a smeared, painterly streak texture. The logo turns into illegible glyphs ('EACF'). The tonearm is built from untoleranced primitive boxes and cylinders. The lid and floor are a featureless 248-white void with no environment to reflect, so the gloss surfaces read as CG rather than polished cast acrylic.",
+  "score": 4.5
+ },
+ "reads_as": "a generic acrylic two-tier audiophile turntable (Pro-Ject / Rega P-series archetype) on a white sweep",
+ "unreal": [
+  {
+   "rank": 1,
+   "region": [
+    1300,
+    1100,
+    1400,
+    1150
+   ],
+   "what": "The wordmark on the upper plinth's front-right edge is garbled ('EACF'). The letters smear into the streaky reflection, as if painted onto a texture rather than engraved or printed.",
+   "real": "Crisp engraved or pad-printed letters a few mm high, each with a sharp edge and a consistent depth or ink density, readable at 3x."
+  },
+  {
+   "rank": 2,
+   "region": [
+    540,
+    1080,
+    1700,
+    1320
+   ],
+   "what": "The polished edge of the lower plinth has a brushed, smeared streak texture (upscaler or denoiser artifact). It reads like a watercolour, not a flame-polished acrylic edge.",
+   "real": "A flame- or diamond-polished acrylic edge: a dark, glassy band with one or two crisp specular lines and internal total-reflection bands that brighten towards the corners, no surface grain."
+  },
+  {
+   "rank": 3,
+   "region": [
+    1150,
+    970,
+    1280,
+    1030
+   ],
+   "what": "The headshell is a plain rectangular block, with no cartridge, stylus, finger lift or lead wires. The arm tube ends in a capped cylinder that sits inside it.",
+   "real": "A headshell with a mounted cartridge body (two M2.5 screws visible), a cantilever and stylus, a finger lift, and four coloured tag wires entering the tube."
+  },
+  {
+   "rank": 4,
+   "region": [
+    1480,
+    810,
+    1640,
+    900
+   ],
+   "what": "The arm pillar, bearing yoke and counterweight are hard-edged CAD primitives with zero-radius edges. There is no anti-skate, arm rest/clip, cueing lever or VTA collar, and the counterweight has no set screw or decoupler.",
+   "real": "Machined parts with 0.3-0.5 mm chamfers and catching highlights, a gimbal or unipivot housing, a cue lever and arm rest beside the pillar, and a counterweight with a grub screw and an elastomer ring."
+  },
+  {
+   "rank": 5,
+   "region": [
+    1030,
+    785,
+    1085,
+    830
+   ],
+   "what": "The lid hinge is a small black cube floating at the back edge, with no visible pin, spring or fixing into the lid or plinth.",
+   "real": "Friction or spring hinges with a visible leaf screwed or bonded to both lid and plinth, steel pin ends, and slight shadowing where the lid rests."
+  },
+  {
+   "rank": 6,
+   "region": [
+    840,
+    210,
+    1730,
+    900
+   ],
+   "what": "The lid reads as a perfectly flat, grey-tinted plane. It has uniform transmission, no thickness-dependent tint at the edges, no reflected environment and no dust or caustics. The edge joints show no bonding seam.",
+   "real": "A 4-5 mm cast acrylic cover whose edges are darker and greener where the light path is long, solvent-welded corner seams, a soft window-shaped reflection across one face, and a faint caustic on the plinth below."
+  },
+  {
+   "rank": 7,
+   "region": [
+    620,
+    1130,
+    1190,
+    1200
+   ],
+   "what": "The isolation posts between the tiers are vague chrome blobs. You cannot tell what is elastomer, what is threaded rod, or how it is fixed.",
+   "real": "A defined stack: a machined aluminium cup, a sorbothane or silicone ring with a matte surface, and a threaded stud with a lock nut. Each part has its own finish, and a contact shadow where it meets each plate."
+  },
+  {
+   "rank": 8,
+   "region": [
+    530,
+    1260,
+    1700,
+    1345
+   ],
+   "what": "The contact shadow under the base is a soft generic grey gradient. The feet barely ground the object, and smoke acrylic would throw no tinted transmitted light.",
+   "real": "A tight, dark occlusion line under each foot, a broader soft shadow, and a faint grey-brown tint cast through the acrylic onto the floor."
+  },
+  {
+   "rank": 9,
+   "region": [
+    770,
+    790,
+    1200,
+    1060
+   ],
+   "what": "The platter and record stack are mushy. The platter edge, the sub-platter and the belt are indistinct, the record has no groove sheen, and the label is a blank cream disc with a floating spindle.",
+   "real": "A crisp platter rim with a machined edge highlight, a visible flat belt around the sub-platter or motor pulley, concentric groove banding catching the key light, and a printed label."
+  },
+  {
+   "rank": 10,
+   "region": [
+    925,
+    1045,
+    965,
+    1080
+   ],
+   "what": "The plinth fixings are glossy hemispherical beads, like glass dome stickers, rather than real fasteners.",
+   "real": "Stainless socket or Torx button heads countersunk flush in the acrylic, with a tiny dark recess and a sharp ring highlight."
+  }
+ ],
+ "cooler": [
+  {
+   "rank": 1,
+   "idea": "Give it one signature structural move, for example a single thick slab of Smoke acrylic with the motor and bearing visible inside as a machined bronze or brass core, rather than two floating plates on posts.",
+   "now": "the familiar two-tier acrylic sandwich used by dozens of mid-price decks"
+  },
+  {
+   "rank": 2,
+   "idea": "Design a bespoke tonearm with a sculpted, tapered tube and a jewel-like bearing housing in a contrasting metal, so the arm becomes the object's signature at $6,500.",
+   "now": "a generic box-and-cylinder arm that looks borrowed from a budget deck"
+  },
+  {
+   "rank": 3,
+   "idea": "Use the through-tint: let edge thickness and polished edges glow (the acrylic acting as a light pipe), perhaps with an engraved line or the wordmark that catches light from inside.",
+   "now": "flat grey panels that could be painted MDF"
+  },
+  {
+   "rank": 4,
+   "idea": "Replace the boxy dust cover with a lid that has a distinctive form (a radiused front, a fold line, or a closed-state profile echoing the plinth) and visible, designed hinges.",
+   "now": "a standard rectangular hinged dust cover"
+  },
+  {
+   "rank": 5,
+   "idea": "Make the platter a statement: a thick, clear or Smoke acrylic platter with a polished edge band, a visible bronze bearing, and a distinctive record clamp.",
+   "now": "a black platter that disappears under the record"
+  }
+ ],
+ "photo": [
+  {
+   "rank": 1,
+   "change": "Render natively at full resolution with enough samples, and remove the upscaler/denoiser pass that smears the acrylic edges and the logo.",
+   "expected": "Crisp edges, legible letters and clean specular lines: the single biggest step from CG toward photograph."
+  },
+  {
+   "rank": 2,
+   "change": "Light it like a product photograph of clear plastic: two tall strip softboxes for clean edge lines on the plinth and lid, a dark flag or card for black reflections, and a mid-grey or warm stone sweep instead of a 248-white void (floor measured at lum median 248, range 4).",
+   "expected": "Defined edges, depth in the acrylic, and graphic reflections in the gloss surfaces."
+  },
+  {
+   "rank": 3,
+   "change": "Use a longer lens (about 100-120 mm equivalent), a slightly lower camera and shallow focus falloff towards the back of the lid.",
+   "expected": "More heroic proportions, less wide-angle CAD feel, a real optical depth cue."
+  },
+  {
+   "rank": 4,
+   "change": "Give the acrylic real physical transmission: volume absorption so the tint deepens with thickness, a correct IOR of 1.49, and caustics or a tinted transmitted shadow on the floor.",
+   "expected": "The material reads as cast Smoke acrylic, not grey glass shader."
+  },
+  {
+   "rank": 5,
+   "change": "Add micro-reality: faint dust or fingerprint haze on the lid, groove sheen on the record, chamfer highlights on the machined parts, and a real cartridge.",
+   "expected": "Breaks the CG-clean look and makes it read as a used, manufactured object."
+  }
+ ],
+ "score_if_fixed": 7.0
+}

@@ -1,0 +1,252 @@
+{
+ "_note": "Mantle round 48's own library (the kit reads only the components.json beside a product file). Entries copied from ../components.json keep their sources and dates; new ones are marked estimate where no listing was read. Prices to confirm before ordering.",
+ "bearing-bushes-solid": {
+  "kind": "bearing",
+  "maker": "any lathe shop",
+  "model": "Two solid bronze plain bushes (C932 / SAE 660), 10 x 14 x 12, pressed into the housing and honed or line-reamed to 10 H6 (8-12 um running clearance on a 10 g5 spindle)",
+  "usd": 40,
+  "estimate": true,
+  "supplier": "the bearing's lathe shop",
+  "price_date": "2026-10-22"
+ },
+ "carbide-ball": {
+  "kind": "bearing",
+  "maker": "any",
+  "model": "Tungsten carbide ball, 6 mm, grade 10: the spindle's thrust point, seated in a cup at the spindle's foot",
+  "usd": 5,
+  "estimate": true,
+  "supplier": "a bearing supplier",
+  "price_date": "2026-10-18"
+ },
+ "thrust-plate": {
+  "kind": "bearing",
+  "maker": "any",
+  "model": "Thrust plate 13.8 x 3, hardened 52100 steel (60 HRC) lapped flat, at the foot of the housing's bore in the oil bath, under the carbide ball (a sapphire window of the same size is the alternative)",
+  "usd": 20,
+  "estimate": true,
+  "supplier": "a bearing supplier or the lathe shop",
+  "price_date": "2026-10-22"
+ },
+ "rega-24v-motor": {
+  "kind": "motor",
+  "maker": "Rega",
+  "model": "24 V low-vibration synchronous motor upgrade kit (motor, its board and mounting), for the Neo PSU",
+  "usd": 265,
+  "supplier": "Audio Advisor (US, in stock, 2026-10-31; HiFi Gear UK was GBP 150)",
+  "price_date": "2026-10-31",
+  "url": "https://www.hifigear.co.uk/rega-neo-mk2.html",
+  "note": "the motor's size and shaft are not published in what was read: the pod's bore (56) and the pulley's bore wait on the motor in hand; sold through Rega dealers"
+ },
+ "rega-rb330": {
+  "kind": "tonearm",
+  "maker": "Rega",
+  "model": "RB330 tonearm (9 in, Rega geometry: 222 mm from the platter's centre to the arm's hole, effective length 236.5, overhang 14.5, offset 21.55 deg), with its own lead and cueing lift",
+  "usd": 675,
+  "supplier": "Safe and Sound HQ (US); Home Cinema Solutions $698",
+  "price_date": "2026-10-18",
+  "url": "https://www.safeandsoundhq.com/products/rega-rb330-tonearm",
+  "note": "the mounting hole and the plinth thickness it takes are in Rega's RB330 manual (arm mounting data; https://phonophono.de/mwdownloads/download/link/id/921), not read: confirm the 24 hole and the 40 mm of acrylic under its nut, or counterbore from below"
+ },
+ "ortofon-2m-black": {
+  "kind": "cartridge",
+  "maker": "Ortofon",
+  "model": "2M Black moving-magnet cartridge (nude Shibata stylus), black body, 1/2 in mount",
+  "usd": 750,
+  "supplier": "Upscale Audio ($749.99)",
+  "price_date": "2026-10-18",
+  "url": "https://upscaleaudio.com/collections/cartridges",
+  "note": "black so it reads as a part in every colour (the lead session, round 31: the 2M Blue's blue read as a stray accent); moving magnet, so any phono stage; the 2M Red (red body) could ride on Ember"
+ },
+ "rega-neo-psu-mk2": {
+  "kind": "power",
+  "maker": "Rega",
+  "model": "Neo PSU MK2: DSP-generated drive for Rega's 24 V motor, 33/45 by a button, fine speed trim (0.01 rpm steps) on the back; US 60 Hz 115-120 V version",
+  "usd": 445,
+  "supplier": "Audio Advisor (US)",
+  "price_date": "2026-10-18",
+  "url": "https://www.audioadvisor.com/products/rega-neo-psu-mk2-60hz-turntable-psu-power-supply-black",
+  "note": "the speed changes without moving the belt, so the pulley has one diameter; the box stands beside the record player (or under it, on the shelf)"
+ },
+ "bearing-oil": {
+  "kind": "material",
+  "maker": "any",
+  "model": "Turntable bearing oil, 8 ml (a light synthetic oil, ISO VG 32 or as the bush maker says)",
+  "usd": 15,
+  "estimate": true,
+  "supplier": "any hi-fi dealer",
+  "price_date": "2026-10-18"
+ },
+ "acrylic-cement-2r": {
+  "kind": "consumable",
+  "maker": "Evonik (R\u00f6hm)",
+  "model": "ACRIFIX 2R 0190, two-component polymerising cement for cast acrylic (cures through any tint, unlike the one-part light-curing 1R 0192); Weld-On 40 or 42 is the US equivalent",
+  "usd": 45,
+  "estimate": true,
+  "supplier": "a plastics distributor",
+  "price_date": "2026-10-22"
+ },
+ "laser-etch-small": {
+  "kind": "service",
+  "maker": "any",
+  "model": "Laser etching into the cast acrylic, frosted, about 0.1 deep, from a vector file: EARF 44 wide, the etch filled with the colour, deeper",
+  "usd": 15,
+  "estimate": true,
+  "supplier": "a laser-cutting shop with an engraver",
+  "price_date": "2026-10-18"
+ },
+ "phono-felts": {
+  "kind": "hardware",
+  "maker": "any",
+  "model": "Four 10 mm felt pads under the phono stage",
+  "usd": 2,
+  "estimate": true,
+  "supplier": "any",
+  "price_date": "2026-10-22"
+ },
+ "phono-box-s2": {
+  "kind": "phono stage",
+  "maker": "Pro-Ject",
+  "model": "Phono Box S2, MM/MC phono stage in an aluminium case, 103 x 115 x 36 (one listing 103 x 36 x 115 mm, 0.57 kg): RIAA within 0.4 dB 20 Hz-20 kHz, MM S/N 94 dBA at 40/43 dB gain, THD under 0.01 %, subsonic filter 20 Hz 12 dB/oct, MM 47k with switchable capacitance; 18 V DC 500 mA in. Used whole, inside Mantle's float, fed from the rear box's regulator",
+  "usd": 269,
+  "supplier": "Bloom Audio ($269); Doug Brady HiFi GBP 159",
+  "price_date": "2026-10-22",
+  "url": "https://bloomaudio.com/collections/pro-ject/products/pro-ject-phono-box-s2",
+  "note": "dimensions conflict between listings (one gives 4.5 x 4.1 x 1.4 in): confirm 36 mm tall on the unit before cutting the float to 40; in Core it runs on its own supplied 18 V adapter (no regulator, no shared supply)"
+ },
+ "platter-screws": {
+  "kind": "hardware",
+  "maker": "any",
+  "model": "Six M4 x 20 stainless socket button screws (ISO 7380), black oxide",
+  "usd": 6,
+  "supplier": "McMaster-Carr kind",
+  "estimate": true,
+  "price_date": "2026-10-31"
+ },
+ "rega-grommets": {
+  "kind": "hardware",
+  "maker": "Rega",
+  "model": "Rega's motor mounting grommets (three), as fitted to the 24 V motor kit's mount; spares from a Rega dealer",
+  "usd": 15,
+  "supplier": "a Rega dealer",
+  "estimate": true,
+  "price_date": "2026-10-31"
+ },
+ "flat-belt-core": {
+  "kind": "drive",
+  "maker": "any",
+  "model": "Flat turntable belt, ground rubber or polyurethane, 5 wide x 0.6, cut to the measured path (about 945 long for the 994 path, 5 % stretch); an O-ring test belt first",
+  "usd": 30,
+  "supplier": "Origin Live or a belt maker (cut to length); VPI BL001 $30 for a 12 in rim [snippet]",
+  "estimate": true,
+  "price_date": "2026-10-31"
+ },
+ "foot-sorbothane": {
+  "kind": "hardware",
+  "maker": "Isolate It (Sorbothane Inc.)",
+  "model": "Three Sorbothane discs 40 x 4, 50 duro, bonded under the brass feet: about 45 N each, 36 kPa",
+  "usd": 20,
+  "supplier": "Isolate It",
+  "estimate": true,
+  "price_date": "2026-10-31"
+ },
+ "foot-studs": {
+  "kind": "hardware",
+  "maker": "any",
+  "model": "Three M8 x 30 stainless studs, three M8 brass lock nuts (thin), three M8 x 12 brass threaded inserts (for acrylic, epoxy-bonded)",
+  "usd": 18,
+  "supplier": "McMaster-Carr kind",
+  "estimate": true,
+  "price_date": "2026-10-31"
+ },
+ "back-hardware": {
+  "kind": "hardware",
+  "maker": "Neutrik / Switchcraft / CUI kind",
+  "model": "Two gold panel RCA jacks (insulated, 1/4 in hole), a 4 mm earth binding post, a DPDT mini toggle (C&K 7201 kind), a 2.1 mm DC panel jack; shielded leads inside to the S2",
+  "usd": 48,
+  "supplier": "Digi-Key / Mouser kind",
+  "estimate": true,
+  "price_date": "2026-10-31"
+ },
+ "cover-bumpers": {
+  "kind": "hardware",
+  "maker": "3M",
+  "model": "Bumpon SJ5302 clear, six (three under the cover, three spare)",
+  "usd": 4,
+  "supplier": "any distributor",
+  "estimate": true,
+  "price_date": "2026-10-31"
+ },
+ "cover-dowels": {
+  "kind": "hardware",
+  "maker": "any",
+  "model": "Two 5 x 12 stainless dowel pins, h6, pressed into the deck",
+  "usd": 4,
+  "supplier": "McMaster-Carr kind",
+  "estimate": true,
+  "price_date": "2026-10-31"
+ },
+ "core-inserts": {
+  "kind": "hardware",
+  "maker": "any (E-Z Lok / Tappex kind)",
+  "model": "Brass threaded inserts for plastics, epoxy-bonded: 3 M5 (the puck), 4 M3 (the back plate); with M5 x 12 countersunk and M3 x 6 button screws",
+  "usd": 14,
+  "supplier": "McMaster-Carr kind",
+  "estimate": true,
+  "price_date": "2026-10-31"
+ },
+ "core-wiring": {
+  "kind": "hardware",
+  "maker": "any",
+  "model": "Shielded interconnects inside (the arm's lead to the S2, the S2 to the plate), a star earth at the plate's post (arm, bearing housing via an M3 ring tag, S2), two clear cord clips under the deck, a cord grip for the Neo's lead",
+  "usd": 25,
+  "supplier": "any",
+  "estimate": true,
+  "price_date": "2026-10-31"
+ },
+ "cover-hinges": {
+  "kind": "hardware",
+  "maker": "Pro-Ject",
+  "model": "Replacement dust cover hinge for Debut series (rp-611), two: friction hinges that hold the lid open at any angle, a spring blade clamped to the lid's back wall, the foot in a slot (here a pocket in an acrylic block on the plinth's back edge)",
+  "usd": 34,
+  "supplier": "Turntable Lab ($16.95 each; listed as coming soon)",
+  "price_date": "2026-10-22",
+  "url": "https://www.turntablelab.com/collections/pro-ject-alpha/products/pro-ject-replacement-dust-cover-hinge-for-debut-series-turntables-c1303580",
+  "note": "Debut lids are about 3-4 mm and weigh about 1.2 kg; ours is 6 mm and about 2.9 kg: confirm the hinges' torque holds it, or take Technics-pattern hinges (2-pack $15.99) and add a counterspring; Strata Float's 3 mm lid is 1.1 kg, about the Debut lid these hinges are made for"
+ },
+ "led-adapter-float": {
+  "kind": "power",
+  "maker": "Mean Well",
+  "model": "GST25A24-P1J desktop adapter, 24 V DC 1.04 A (25 W), level VI, IEC C8 inlet, 2.1 mm plug; UL/cUL 62368-1 listed, a Class 2 / limited power source (the strip draws 6.8 W)",
+  "usd": 19,
+  "supplier": "IBS Electronics ($19.42)",
+  "price_date": "2026-10-18"
+ },
+ "float-dimmer-hf": {
+  "kind": "control",
+  "maker": "Waveform Lighting",
+  "model": "FilmGrade Flicker-Free LED Dimmer, part 3081, 6-60 V DC, 10 A, turn dial, in line on the 24 V lead; PWM at 25 kHz (Waveform's knowledge base; the store page says flicker-free 0-100 %), above anything a phono stage hears",
+  "usd": 80,
+  "supplier": "Waveform Lighting (about $80, a customer's review)",
+  "price_date": "2026-10-22",
+  "url": "https://store.waveformlighting.com/products/filmgrade-flicker-free-dimmer-for-led-strip",
+  "note": "confirm the PWM frequency on its datasheet; Moss LED's MiniCine V2 (selectable to 32 kHz) is the alternative"
+ },
+ "led-strip-cob": {
+  "kind": "light",
+  "maker": "any (Waveform, LEDSupply, BTF kind)",
+  "model": "24 V COB LED strip, dotless, 8 mm, 2700 K, CRI 90+, about 3 W/m; 1.48 m used in one closed loop (4.4 W)",
+  "usd": 40,
+  "estimate": true,
+  "supplier": "a strip maker (COB, 24 V)",
+  "price_date": "2026-10-31"
+ },
+ "float-studs": {
+  "kind": "hardware",
+  "maker": "any",
+  "model": "Four M6 x 75 stainless studs (A2), eight M6 brass threaded inserts for plastics (epoxy-bonded), thread-locker: the posts torqued 4 N m",
+  "usd": 14,
+  "estimate": true,
+  "supplier": "McMaster-Carr kind",
+  "price_date": "2026-10-31"
+ }
+}

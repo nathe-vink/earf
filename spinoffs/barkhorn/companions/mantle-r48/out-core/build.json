@@ -1,0 +1,23 @@
+{
+ "product": "mantle-core",
+ "title": "Mantle: Core (proposal B)",
+ "parts": 53,
+ "seconds": 46,
+ "sheets": {
+  "trucast-tint-3": 1,
+  "trucast-clear-3": 1,
+  "trucast-clear-12.7": 1,
+  "aluminium-3": 1,
+  "brass-sheet-2": 1,
+  "trucast-clear-5.6": 1
+ },
+ "budget_usd": {
+  "cut": 403,
+  "lathe": 1149,
+  "buy": 2730
+ },
+ "options_usd": {},
+ "checks_ok": true,
+ "drawings": "spinoffs/barkhorn/companions/mantle-r48/out-core/drawings/mantle-core-sheets.pdf",
+ "render": "spinoffs/barkhorn/companions/mantle-r48/out-core/render/mantle-core.glb"
+}

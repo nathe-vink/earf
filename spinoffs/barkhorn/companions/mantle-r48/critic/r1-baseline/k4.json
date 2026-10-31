@@ -1,0 +1,174 @@
+{
+ "stage1": {
+  "impression": "A close, shallow-focus detail of a black gloss turntable with a tonearm resting over the record. The cartridge is a flat grey box with no texture, no fixings and no visible stylus, and the record has no grooves. The background is a flat white void and the blur looks painted on with halo edges, so the frame reads as a CG model with a depth-of-field filter rather than a photograph.",
+  "score": 4.5
+ },
+ "reads_as": "a generic black gloss turntable with a placeholder cartridge, CG product render",
+ "unreal": [
+  {
+   "rank": 1,
+   "region": [
+    530,
+    540,
+    930,
+    910
+   ],
+   "what": "The cartridge is two stacked untextured grey boxes with knife-sharp edges, a uniform matte value, no mounting screws, no headshell, no pin connectors, no cantilever or stylus (only a tiny rectangular tab). It sits where the frame's focus is, so this flaw carries the shot.",
+   "real": "A real cartridge has a machined or moulded body with 0.3 to 0.5 mm edge radii, two M2.5 screws through slotted headshell ears, a jewel cantilever with a visible diamond tip angling down to the groove, a stylus guard step, and a printed or engraved maker mark. Its surface is bead-blasted anodised or textured polymer, with a fine specular rim along each edge."
+  },
+  {
+   "rank": 2,
+   "region": [
+    960,
+    530,
+    1030,
+    650
+   ],
+   "what": "The arm tube runs straight into the cartridge's top plate with no headshell, collar or finger lift. The tube end is a flat open disc, like a cut cylinder primitive.",
+   "real": "A headshell or integrated arm wand with a clamp collar, a bent finger lift, and visible tonearm wiring or a plugged end cap. The tube end would be closed with a turned insert that has a small chamfer catching the light."
+  },
+  {
+   "rank": 3,
+   "region": [
+    0,
+    300,
+    2100,
+    900
+   ],
+   "what": "The record surface is mirror-smooth black with no groove texture, no run-out band, no lead-in or land between tracks, and its reflections smear like glossy plastic.",
+   "real": "Vinyl shows concentric micro-grooves that break highlights into a fine anisotropic radial sheen, a matte lead-out area, visible track bands, and a few dust specks on the surface."
+  },
+  {
+   "rank": 4,
+   "region": [
+    250,
+    330,
+    1220,
+    560
+   ],
+   "what": "The label is a flat cream ellipse that glows (median lum 248 vs ground 251), with no print, no paper texture and no edge step where it meets the vinyl. The spindle reads as a tall soft fin at top (1090\u20131210, 160\u2013260) rather than a turned steel pin.",
+   "real": "A printed paper label with text, a slight paper tooth, a tiny raised step at its edge, and a polished steel spindle with a chamfered tip showing a crisp point highlight."
+  },
+  {
+   "rank": 5,
+   "region": [
+    0,
+    0,
+    2400,
+    250
+   ],
+   "what": "The background is a uniform white void (lum 248\u2013251, range 1.1) with no falloff, horizon or environment. Everything reflected in the plinth and record is the same blank white, so nothing gives scale or place.",
+   "real": "A real studio sweep falls off in tone from key to shadow side, and a real room shows soft structure in its reflections: a softbox edge, a flag, a window bar."
+  },
+  {
+   "rank": 6,
+   "region": [
+    2100,
+    450,
+    2400,
+    900
+   ],
+   "what": "The arm rest post and its base are blurred with hard halo edges and blown-white blobs around the dark post. These are post-process blur and upscaling artefacts, not lens bokeh.",
+   "real": "Optical defocus from a real lens has smooth circles of confusion that scale with distance and keep highlights round, with slight cat-eye shapes at the frame edge and no ringing."
+  },
+  {
+   "rank": 7,
+   "region": [
+    0,
+    600,
+    2000,
+    1300
+   ],
+   "what": "The 'smoke tint cast acrylic' plinth and platter read as opaque black gloss lacquer. There is no translucency, no visible internal depth, no edge glow where the light enters an edge, and no view of the parts inside.",
+   "real": "Smoked cast acrylic transmits light. Its polished edges glow brighter than its faces, you can dimly see the bearing, motor and fixings through it, and thick sections look darker than thin ones."
+  },
+  {
+   "rank": 8,
+   "region": [
+    0,
+    650,
+    2100,
+    900
+   ],
+   "what": "The platter rim and plinth edges are perfectly sharp with no chamfer, no polish line and no seam. The platter's stacked layers read as coplanar CG discs.",
+   "real": "Machined acrylic carries a 0.5 mm chamfer or radius that throws a bright specular line, faint tool marks or flame-polish waviness on the edge, and a visible gap and shadow between the platter and the plinth."
+  },
+  {
+   "rank": 9,
+   "region": [
+    1000,
+    1420,
+    1700,
+    1600
+   ],
+   "what": "The foreground wordmark is cropped to 'EA' and smeared, with no thickness or shadow to read as cast metal letters. It is a white blob on black.",
+   "real": "Cast letters would show a polished face, satin sides, a contact shadow, and a reflection in the gloss beneath them. Either frame the wordmark fully or crop it out of the shot."
+  },
+  {
+   "rank": 10,
+   "region": [
+    0,
+    0,
+    2400,
+    1600
+   ],
+   "what": "The image has an overall waxy, oil-paint smoothness from denoising or upscaling. There is no grain, no micro-texture, and no dust or fingerprint on any surface.",
+   "real": "A real capture keeps fine sensor grain, a slight chromatic fringe on the hardest edges, and the odd dust mote even after retouching. Luxury retouchers leave texture in."
+  }
+ ],
+ "cooler": [
+  {
+   "rank": 1,
+   "idea": "Make the smoke-tint acrylic the hero: let light pass through the plinth and platter so the bearing, belt and sub-chassis show dimly inside, and give the edges a glow. The material is the point of difference.",
+   "now": "It reads as an ordinary black piano-gloss deck, the same archetype as countless Pro-Ject and Rega-style turntables."
+  },
+  {
+   "rank": 2,
+   "idea": "Design a bespoke arm wand and headshell, for example one tapered, machined piece with a distinctive finger lift, instead of a straight tube that ends at a box.",
+   "now": "It looks like a placeholder: a straight black tube on a post, the default tonearm silhouette."
+  },
+  {
+   "rank": 3,
+   "idea": "Give the arm rest and pillar a signature form, such as a machined clamp with a contrasting metal accent that matches the cast letters, so the detail shot has a jewel moment.",
+   "now": "A plain black cylinder post with no character."
+  },
+  {
+   "rank": 4,
+   "idea": "Add one crafted metal accent, such as a bronze or brushed spindle cap or arm-pivot collar, to answer the cast wordmark and break the all-black monotony.",
+   "now": "The whole thing is a monochrome black mass with no point of material contrast."
+  },
+  {
+   "rank": 5,
+   "idea": "Shape the platter edge: a stepped or radiused acrylic rim with a polished bevel would catch a single crisp highlight ring and become a recognisable visual signature.",
+   "now": "A generic flat-sided stack of discs."
+  }
+ ],
+ "photo": [
+  {
+   "rank": 1,
+   "change": "Replace the cartridge with a real model: headshell, screws, cantilever and stylus, 0.3 mm edge bevels, and a bead-blast or anodised texture. Then keep it as the focal point.",
+   "expected": "The sharpest part of the frame becomes believable, which removes the biggest CG tell. Worth about +1.5."
+  },
+  {
+   "rank": 2,
+   "change": "Render true lens depth of field in the path tracer (aperture set in mm at a 100 mm macro focal length, about f/4) instead of post blur, and drop the upscaler or denoiser smoothing. Add light grain.",
+   "expected": "Natural bokeh with no halos or ringing around the arm rest, and photographic texture. Worth about +1."
+  },
+  {
+   "rank": 3,
+   "change": "Swap the white void for a graded studio sweep: a dark falloff behind, one large softbox key from upper left, and black flags to cut controlled reflections into the gloss.",
+   "expected": "Shaped reflections that describe the form, depth in the background, and a premium low-key mood. Worth about +1."
+  },
+  {
+   "rank": 4,
+   "change": "Give the acrylic real transmission (a volume absorption tint, not opaque black), with polished edges that catch the key, and model the internals visible through it.",
+   "expected": "The smoke-acrylic story reads at a glance and the edges glow. Worth about +0.5 to +1."
+  },
+  {
+   "rank": 5,
+   "change": "Use a real record: a groove normal or anisotropic radial highlight, a printed label, a turned spindle, and a few dust specks.",
+   "expected": "The prop stops reading as CG, and the radial sheen leads the eye to the stylus. Worth about +0.5."
+  }
+ ],
+ "score_if_fixed": 7.5
+}

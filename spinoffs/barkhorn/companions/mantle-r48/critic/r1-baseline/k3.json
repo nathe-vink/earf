@@ -1,0 +1,174 @@
+{
+ "stage1": {
+  "impression": "A clean, competent studio render of a two-tier smoked-acrylic belt-drive deck under a big box hood, but it reads as CG: shading is flat and even, the white sweep has no light falloff, and edges look upscaled and smeared. Up close, the tonearm is built from untextured blocks, the record seems to warp up into a swoosh by the arm, and the amber motor can glows through the plinth like a jar of honey. Nothing on it looks like a shop made it.",
+  "score": 4.5
+ },
+ "reads_as": "a generic stacked-acrylic audiophile turntable (Pro-Ject/Clearaudio archetype) under a stock smoked dust cover",
+ "unreal": [
+  {
+   "rank": 1,
+   "region": [
+    1380,
+    744,
+    1700,
+    960
+   ],
+   "what": "The tonearm is a box armtube end, a square block for a counterweight collar and a rectangular headshell with no cartridge, stylus, finger lift, bearing yoke, anti-skate or VTA tower. It parks in mid-air, neither on a rest nor on the record.",
+   "real": "A machined bearing housing with a visible gimbal or unipivot, a tapered tube, a headshell with a bolted cartridge body, a cantilever and a finger lift, a cueing lever, and the arm resting in a clip on an armrest post."
+  },
+  {
+   "rank": 2,
+   "region": [
+    1416,
+    840,
+    1560,
+    960
+   ],
+   "what": "The record and platter edge curl up into a continuous swoosh around the arm base, so the surface looks melted. The grooves have no sheen, the lead-in and run-out are missing, and the label is a flat cream disc.",
+   "real": "A flat 180 g disc with a clear land between lead-in and grooves, an anisotropic groove sheen that bands with the light, a 1\u20132 mm edge bead, and a printed label with type and paper texture."
+  },
+  {
+   "rank": 3,
+   "region": [
+    768,
+    936,
+    960,
+    1260
+   ],
+   "what": "The motor housing shows through the smoke acrylic as an evenly lit amber cylinder, with no stator, wiring or decoupling. It reads as glowing liquid, not a motor.",
+   "real": "A dark machined aluminium or steel motor can with a turned finish, a cable exit and a grommet. Seen through tinted acrylic it would go darker and greener, not warm-yellow."
+  },
+  {
+   "rank": 4,
+   "region": [
+    696,
+    984,
+    1716,
+    1152
+   ],
+   "what": "The plate edges are rendered like brushed grey metal: flat, opaque and evenly shaded. They don't pipe light the way cast acrylic does.",
+   "real": "Flame- or diamond-polished acrylic edges that glow with the tint concentrated (deeper smoke, almost green-black), carry bright specular lines at the arrises, and show faint tool marks where they were cut."
+  },
+  {
+   "rank": 5,
+   "region": [
+    1560,
+    1040,
+    1620,
+    1085
+   ],
+   "what": "The fasteners are chrome domes sitting on the acrylic like droplets of mercury, with no washer, no counterbore and no visible thread or drive.",
+   "real": "Counterbored socket or Torx button heads with a nylon or stainless washer, sitting flush or a little proud, satin rather than mirror, and the bore visible through the clear material."
+  },
+  {
+   "rank": 6,
+   "region": [
+    588,
+    108,
+    1548,
+    864
+   ],
+   "what": "The dust cover is a perfectly uniform tinted box with knife-sharp, zero-radius edges. A grey mountain ghost from the environment shows in the lower panel, and the hinges are black blocks with no pin or spring.",
+   "real": "A moulded or bonded cover with 1\u20132 mm radiused edges, faint solvent-weld lines at the corners, a few dust specks and fingerprint haze, real reflections of the softboxes, and friction hinges with a visible pivot and a metal insert."
+  },
+  {
+   "rank": 7,
+   "region": [
+    672,
+    1260,
+    1992,
+    1476
+   ],
+   "what": "There is no contact shadow under the feet, so the base floats on blown-out white (median luminance about 235). The feet are tiny featureless pucks.",
+   "real": "A soft occlusion shadow tight under each foot that fades into a broader penumbra, a slight reflection on a satin surface, and turned feet with a visible elastomer layer."
+  },
+  {
+   "rank": 8,
+   "region": [
+    1320,
+    1080,
+    1416,
+    1212
+   ],
+   "what": "The clear posts between the plates are glassy cylinders with chrome cores, with no compliant element or visible join where they meet the plates.",
+   "real": "Turned acrylic or Delrin pillars with a visible sorbothane or silicone washer at each end, a captive bolt you can see through the clear, and a small shadow line where pillar meets plate."
+  },
+  {
+   "rank": 9,
+   "region": [
+    1812,
+    954,
+    1880,
+    980
+   ],
+   "what": "The wordmark on the plinth's right edge is clipped and illegible, as if it were a texture wrapped over the corner.",
+   "real": "A wordmark laser-etched or cast into one face, set back from the edge with consistent depth and frosted where the etch catches the light."
+  },
+  {
+   "rank": 10,
+   "region": [
+    0,
+    0,
+    2400,
+    1600
+   ],
+   "what": "The whole frame has upscaler softness, with smeared edges and haloing at dark-to-white boundaries, and no grain or lens character.",
+   "real": "A native-resolution capture with fine sensor grain, slight chromatic falloff and a real depth-of-field roll-off toward the back of the lid."
+  }
+ ],
+ "cooler": [
+  {
+   "rank": 1,
+   "idea": "Give the deck one signature move nobody else has: a non-rectangular top plate, or a sculpted single-block plinth, instead of two plates stacked on pillars.",
+   "now": "The clear acrylic sandwich on posts used by Pro-Ject, Clearaudio and Rega."
+  },
+  {
+   "rank": 2,
+   "idea": "Design a tonearm that is the product's jewellery: a distinctive tube section, a bearing you can see and a counterweight shaped in the product's own vocabulary.",
+   "now": "A generic straight-arm placeholder."
+  },
+  {
+   "rank": 3,
+   "idea": "Make the cast-acrylic tint the hero by letting the thick edges glow and the internal parts show as designed silhouettes (motor, bearing, belt), arranged as deliberately as a watch movement.",
+   "now": "Tinted plastic that half-hides some yellow parts."
+  },
+  {
+   "rank": 4,
+   "idea": "Replace the box hood with a cover that belongs to this deck: radiused, thinner, or a lift-off with a sculpted grip, so the open-lid frame isn't dominated by an empty grey wall.",
+   "now": "A stock 1980s-style hinged dust cover."
+  },
+  {
+   "rank": 5,
+   "idea": "Put the controls (speed, power) somewhere considered, such as a machined dial on the plinth or a touch strip, and give the brand a crafted mark.",
+   "now": "No visible control, so there is no interaction story."
+  }
+ ],
+ "photo": [
+  {
+   "rank": 1,
+   "change": "Ground the product: a mid-grey or warm stone sweep instead of blown-out white (sweep median about 235 now), with a contact shadow under every foot and a soft gradient falloff behind.",
+   "expected": "The product sits on a surface and gains weight. The smoked acrylic reads against a ground that isn't white."
+  },
+  {
+   "rank": 2,
+   "change": "Light for acrylic: a long strip softbox raking the plate edges from behind, and a black flag on the camera side, so the edges pipe light and the top surfaces get one clean graded reflection.",
+   "expected": "The edges glow and the volumes become legible. The material reads as cast acrylic instead of grey metal."
+  },
+  {
+   "rank": 3,
+   "change": "Lower the camera and turn it further so the lid takes less of the frame. Use a longer lens (about 100 mm equivalent) and focus on the arm, with a shallow roll-off toward the lid.",
+   "expected": "The deck becomes the subject, not the empty hood, and the lens reads as a real camera."
+  },
+  {
+   "rank": 4,
+   "change": "Give the record real vinyl: an anisotropic groove shader, a flat surface, and a printed label.",
+   "expected": "Removes the most obvious CG tell in the frame's focal area."
+  },
+  {
+   "rank": 5,
+   "change": "Render at native resolution with enough samples, add subtle grain, and add surface imperfections: haze on the lid, micro-scratches and dust on the acrylic.",
+   "expected": "Removes the upscaler smear and the CG-clean look."
+  }
+ ],
+ "score_if_fixed": 6.5
+}

@@ -1,0 +1,174 @@
+{
+ "stage1": {
+  "impression": "A strong silhouette (smoked acrylic box lid, floating plinth over a glowing base slab) in a moody blue dusk, but it reads as a clean real-time CG render: every surface is the same glossy navy, the edges are knife-sharp, the tonearm is built from primitive boxes and cylinders, and the lid carries a flat white gradient band instead of a reflected softbox. The edge-lit base is the one memorable idea, but its glow looks like an emissive stripe, not light travelling through acrylic.",
+  "score": 4.5
+ },
+ "reads_as": "a generic smoked-acrylic belt-drive turntable in a blue-tinted CG product render",
+ "unreal": [
+  {
+   "rank": 1,
+   "region": [
+    1150,
+    800,
+    1630,
+    1000
+   ],
+   "what": "The tonearm is made of primitives: a plain rod, a cube for the pivot, a plain cylinder for the counterweight, a cube for the headshell, a flat cylinder for the base. There is no bearing yoke, no anti-skate, no arm lift, no arm rest with a clip, no tonearm cable, and no finger lift.",
+   "real": "A machined arm: a tapered or stepped carbon or aluminium tube, a gimbal or unipivot housing with visible bearing cups, a VTA collar and set screw, a counterweight with a decoupling ring and a knurled band, a cueing lever and a sprung arm rest, and a headshell with a cartridge, its four colour-coded tags and a finger lift."
+  },
+  {
+   "rank": 2,
+   "region": [
+    528,
+    1116,
+    1704,
+    1308
+   ],
+   "what": "The base's lit edge is a flat, uniformly white emissive stripe (p95 about 200, median 16 across the edge band) with even brightness end to end, no falloff from the light source, and no glow inside the acrylic.",
+   "real": "Edge-lit cast acrylic glows brightest near the LEDs and falls off along its length, shows small hotspots at the diodes, frosts where the edge is diamond-polished versus sawn, and spills a soft coloured caustic onto the floor that hugs the slab."
+  },
+  {
+   "rank": 3,
+   "region": [
+    912,
+    396,
+    1728,
+    636
+   ],
+   "what": "The lid shows a flat white horizontal band (median 227, near clip) running straight across both the back panel and the side, the same value on surfaces at different angles. It reads as a texture, not a reflection.",
+   "real": "A real softbox reflection bends at the lid's corner, differs in brightness between panels at different angles, shows the box's edges or grid, and lets you see the room and the product through the tint where the reflection fades."
+  },
+  {
+   "rank": 4,
+   "region": [
+    552,
+    900,
+    1668,
+    1190
+   ],
+   "what": "Every edge of the plinth, lid and base is a perfect zero-radius line with no highlight. Cast acrylic does not come off a CNC like this.",
+   "real": "Flame- or diamond-polished acrylic edges with a 0.3 to 0.5 mm break that catches a thin bright line, and slightly brighter edges because a through-tinted sheet pipes light to its cut faces."
+  },
+  {
+   "rank": 5,
+   "region": [
+    770,
+    780,
+    1400,
+    1060
+   ],
+   "what": "Record and platter are the same uniform glossy black-navy with no grooves, no lead-in/run-out difference, no label print, and a grey blank label; the platter stack below has no material change (no mat, no sub-platter, no belt).",
+   "real": "Visible groove bands with an anisotropic sheen arc across the record, a printed label, a felt or cork mat edge, a visible belt running to a motor pulley, and a platter rim with a machined finish."
+  },
+  {
+   "rank": 6,
+   "region": [
+    600,
+    1080,
+    1200,
+    1200
+   ],
+   "what": "The supports between plinth and base are hard to read: dark stubs with a tiny bright fitting and nothing that explains how the plinth floats or is isolated.",
+   "real": "Distinct suspension towers or sorbothane/elastomer cones with a machined metal cup, a visible spring or o-ring, and a shadow on the base under each."
+  },
+  {
+   "rank": 7,
+   "region": [
+    1560,
+    1165,
+    1660,
+    1200
+   ],
+   "what": "A pink and purple fragment sits inside the base at the right corner, reading as a stray texture or a z-fight.",
+   "real": "Either a deliberate component (a PCB, a power inlet) seen clearly through the tint, or nothing."
+  },
+  {
+   "rank": 8,
+   "region": [
+    1030,
+    756,
+    1080,
+    792
+   ],
+   "what": "The lid hinges are plain black blocks with no pin, no friction-hinge body, no fasteners, and they do not visibly connect lid to plinth.",
+   "real": "Metal friction hinges with a visible barrel and two screws into the lid, the lid's back edge clearing the plinth with a consistent gap."
+  },
+  {
+   "rank": 9,
+   "region": [
+    1270,
+    1100,
+    1330,
+    1135
+   ],
+   "what": "The EARF wordmark is ghosted and partly lost in a reflection, with a blurred first letter; it looks like a decal floating on the surface.",
+   "real": "A crisp engraved or reverse-printed mark with a defined depth or ink edge, legible at this distance."
+  },
+  {
+   "rank": 10,
+   "region": [
+    0,
+    600,
+    2400,
+    700
+   ],
+   "what": "The set is a blue gradient cyclorama with a soft bright halo behind the product and no texture, grain or real floor material; the whole image is colour-graded to one blue hue, so materials cannot separate.",
+   "real": "A physical surface (stone, paper sweep, oiled oak) with micro texture and a natural falloff, with at least one neutral or warm light so the acrylic, metal and vinyl read as different materials."
+  }
+ ],
+ "cooler": [
+  {
+   "rank": 1,
+   "idea": "Give the tonearm and its base a signature form (one continuous machined bronze or brushed-steel piece, a distinctive counterweight shape) so the one metal object on a tinted-glass deck is the jewel.",
+   "now": "A generic box-and-rod arm that could be on any entry-level deck."
+  },
+  {
+   "rank": 2,
+   "idea": "Make the light-piped base the identity: let the edge glow come from the plinth too, or route the light through engraved lines or the wordmark so the deck draws a line of light that only this product has.",
+   "now": "An edge-lit slab like a lit acrylic shelf or LED sign base."
+  },
+  {
+   "rank": 3,
+   "idea": "Break the box: give the lid or plinth one unexpected move (a radiused front edge, a stepped section, a chamfer that matches the arm) so the silhouette is not the standard dust-cover-on-plinth form.",
+   "now": "The archetypal 1970s rectangular hinged dust cover over a rectangular plinth, as on Pro-Ject or Rega."
+  },
+  {
+   "rank": 4,
+   "idea": "Show the mechanism through the tint: a visible motor pod, belt and bearing well under the smoked plinth, composed like a watch caseback.",
+   "now": "The interior is a dark muddle that the tint hides rather than frames."
+  },
+  {
+   "rank": 5,
+   "idea": "Add one material contrast at the touch points (machined aluminium feet, a metal platter rim, a leather or cork mat) so the acrylic reads as precious against it.",
+   "now": "Everything is one glossy dark material, which reads as plastic."
+  }
+ ],
+ "photo": [
+  {
+   "rank": 1,
+   "change": "Replace the flat white lid band with a real shaped softbox or strip light at a known position, and add a rim light from behind-left to trace the plinth and lid edges.",
+   "expected": "Reflections that bend and change between panels, bright edge lines that define the acrylic, the product separated from the background."
+  },
+  {
+   "rank": 2,
+   "change": "Lift the blue grade: use a neutral or warm key and keep the dusk blue only in the ambient/background, so black acrylic, vinyl and metal render as different materials.",
+   "expected": "Material separation and a photograph's colour rather than a monochrome CG look."
+  },
+  {
+   "rank": 3,
+   "change": "Rebuild the base glow as real light: LED emitters inside the edge with falloff, light transported through the acrylic volume, and its spill on the floor shaped by the slab.",
+   "expected": "A lit edge that reads as physical light, the hero effect of the dusk frame."
+  },
+  {
+   "rank": 4,
+   "change": "Put the deck on a real surface with texture (honed stone or oak) and add a slight lens character: shallow depth of field on the lid's back, mild vignette, film grain.",
+   "expected": "Scale and a real lens; the CG-clean floor and halo go away."
+  },
+  {
+   "rank": 5,
+   "change": "Add edge bevels (0.5 mm) and polish to every acrylic cut, plus micro surface imperfections (faint dust on the lid, fingerprint-free but not mathematically perfect gloss).",
+   "expected": "Edges catch light like machined acrylic and surfaces stop reading as perfect CG."
+  }
+ ],
+ "score_if_fixed": 7.5
+}
