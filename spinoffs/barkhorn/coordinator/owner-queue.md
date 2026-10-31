@@ -59,3 +59,9 @@ while lanes run. Deck: https://claude.ai/artifact/3sihYaT4ckNTF6WE7SWR7x (v26). 
 ## Parked by the owner (don't raise until design is settled)
 - Debut date and venue (bar VENUES.md has options); week-1 orders; AC Plastics 2064 sheets (3 left, unconfirmed);
   YC W27; company formation; Vienna; Amsterdam (closes 7 Dec); the site deploy; RFQ sending; prices; funding route.
+
+## Check-in 3 (22:00 UTC)
+- four-pieces running (no push yet); editions 8da8ed68 (research + 17 concepts + Cycles kit; bubble lens-void proof).
+- lamps 8afb3e79: Terrace won a 2nd blind duel (sides swapped); Halo won its first. Nudged: cordless Core set first.
+- Mantle acd7522d: renamed Outcrop. Bar bf83a3c0: look 2. Brand 5c18702b: Bedrock r2 5.0. Speaker 1253c74b: room
+  re-render (covers off, landscape + portrait) due ~22:30. Check-in 4 armed for ~22:51.
