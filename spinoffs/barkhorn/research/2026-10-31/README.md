@@ -21,6 +21,6 @@ date, and check them again before relying on them.
 
 ## Errata (coordinator, 31 Oct 2026, from the brand lane's contradiction sweep)
 
-- **The debut is Tuesday 19 January 2027**; FOG Design+Art runs 21-24 January. R2's 90-day plan (sections 5, weeks 11-13 and Gate 2) places the debut night inside FOG week (21-24 January), and R7 says 19-21 January; read both as 19 January. The YC draft is corrected.
+- **The debut moves to spring 2027** (the owner's "C", 31 Oct; date and venue to be set). Every date in R2, R7, R9 and R11 keyed to 19 January moves with it. R11: file the design applications before the prototypes are first shown in public; the hard stop of 15 Oct 2027 does not move. R9: read "after 19 Jan" as "after the debut". FOG week (21-24 January) stays useful for meeting galleries, without a show. The erratum this replaces read: **The debut is Tuesday 19 January 2027**; FOG Design+Art runs 21-24 January. R2's 90-day plan (sections 5, weeks 11-13 and Gate 2) places the debut night inside FOG week (21-24 January), and R7 says 19-21 January; read both as 19 January. The YC draft is corrected.
 - **R7's horn depth (238 mm)** is the formed horn's. The stacked laminated horn is 278 mm deep (630 x 366 at the mouth).
 - **R10's engineering figures** assume a closed sphere; see the correction in its row above.

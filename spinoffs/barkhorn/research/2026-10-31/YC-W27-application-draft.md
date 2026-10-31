@@ -178,7 +178,7 @@ No.
 
 [Owner: a date you will hold to.]
 
-The lamps come first: $6,599 builds one Core and one Hemisphere, moulds included. Then a Tropos pair, whose first horns are stacked from stock sheet so they need no forming tool, and Mantle. The target is a debut night in San Francisco on Tuesday 19 January 2027, the week of FOG Design+Art (21–24 January).
+The lamps come first: $6,599 builds one Core and one Hemisphere, moulds included. Then a Tropos pair, whose first horns are stacked from stock sheet so they need no forming tool, and Mantle. The target is a debut night in San Francisco in spring 2027; the date is being set.
 
 #### 16. Do you have revenue?
 
@@ -403,7 +403,7 @@ What's left after this draft is your own answers and the video. That should take
 
 **What would raise the odds**, most effective first (this order is a judgement):
 1. **A working prototype, photographed.** A lit Core or Hemisphere is the quickest; $6,599 builds one of each, moulds included.
-2. **Numbers from real people: sign-ups, then deposits.** The site has no sign-up form yet, and it needs a privacy policy before it collects emails (CalOPPA; launch checklist row 23). The research's targets are estimates: 150 sign-ups by 14 November, 500 by 15 December and 1,000 by 14 January.
+2. **Numbers from real people: sign-ups, then deposits.** The site has no sign-up form yet, and it needs a privacy policy before it collects emails (CalOPPA; launch checklist row 23). The research's targets are estimates, set for a January debut: 150 sign-ups by 14 November, 500 by 15 December and 1,000 by 14 January. With the debut in spring, the last moves to the weeks before it.
 3. **Quotes for the acrylic and the horn.** They turn the biggest risk into a number.
 4. **A cofounder or partner** who has taken a physical product to production.
 5. **Your background, told specifically.** It is the blank half of this draft.
