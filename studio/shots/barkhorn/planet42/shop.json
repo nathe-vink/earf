@@ -645,15 +645,6 @@
     "kind": "kit",
     "shape": "ext",
     "path": "spinoffs/barkhorn/planet/r42/kit42.py",
-    "fn": "flatten",
-    "match": "Concrete044A",
-    "contrast": -0.45,
-    "mean": 0.15
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "path": "spinoffs/barkhorn/planet/r42/kit42.py",
     "fn": "shopwall",
     "x": [
      0.45,
@@ -1125,28 +1116,6 @@
    "radius_m": 0.006,
    "color": 1900,
    "camera": false
-  },
-  "street0": {
-   "type": "point",
-   "position": [
-    -2.2600000000000002,
-    -6.0,
-    5.6
-   ],
-   "power_w": 8.0,
-   "radius_m": 0.15,
-   "color": 2700
-  },
-  "street1": {
-   "type": "point",
-   "position": [
-    -2.2600000000000002,
-    15.1,
-    5.6
-   ],
-   "power_w": 8.0,
-   "radius_m": 0.15,
-   "color": 2700
   },
   "rw0": {
    "type": "spot",

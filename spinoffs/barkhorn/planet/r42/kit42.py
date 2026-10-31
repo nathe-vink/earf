@@ -114,4 +114,35 @@ def flatten(bpy, name, p, kit):
         bc.inputs['Bright'].default_value = c * (0.5 - p.get('mean', 0.15))
         bc.inputs['Contrast'].default_value = c
         nt.links.new(src, bc.inputs['Color']); nt.links.new(bc.outputs['Color'], b.inputs['Base Color'])
+        # the scan's roughness too: glossy patches mirror the dark ceiling and read as stains, so its range is squeezed
+        if p.get('rough') and b.inputs['Roughness'].is_linked:
+            r = b.inputs['Roughness'].links[0].from_socket
+            mr = nt.nodes.new('ShaderNodeMapRange')
+            mr.inputs['To Min'].default_value, mr.inputs['To Max'].default_value = p['rough']
+            nt.links.new(r, mr.inputs['Value']); nt.links.new(mr.outputs['Result'], b.inputs['Roughness'])
+        elif p.get('rough'):
+            b.inputs['Roughness'].default_value = sum(p['rough']) / 2
+        if p.get('normal', 1.0) != 1.0 and b.inputs['Normal'].is_linked:
+            nm = b.inputs['Normal'].links[0].from_node
+            if 'Strength' in nm.inputs:
+                nm.inputs['Strength'].default_value *= p['normal']
+        if p.get('debug'):
+            for n in nt.nodes:
+                ins = {i.name: (i.links[0].from_node.name if i.is_linked else None) for i in n.inputs if i.is_linked}
+                print(f"[kit42.node] {n.type} {n.name} {n.label} <- {ins}")
+        print(f"[kit42.flatten] {m.name}: contrast {c}, rough {p.get('rough')}, normal x{p.get('normal', 1.0)}")
+    return []
+
+
+def dump(bpy, name, p, kit):
+    """A diagnostic: every mesh whose top lies within `z` of the floor, with its materials and its footprint."""
+    from mathutils import Vector
+    for o in bpy.data.objects:
+        if o.type != 'MESH':
+            continue
+        bb = [o.matrix_world @ Vector(c) for c in o.bound_box]
+        z1 = max(v.z for v in bb); x0, x1 = min(v.x for v in bb), max(v.x for v in bb); y0, y1 = min(v.y for v in bb), max(v.y for v in bb)
+        if z1 < p.get('z', 0.03) and (x1 - x0) * (y1 - y0) > p.get('area', 0.05):
+            print(f"[kit42.dump] {o.name}: z1 {z1:.3f}, x {x0:.2f}..{x1:.2f}, y {y0:.2f}..{y1:.2f}, "
+                  f"mats {[s.material.name for s in o.material_slots if s.material]}")
     return []

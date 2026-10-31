@@ -32,17 +32,14 @@ VIEWS = {
     'night': dict(camera={'position': [14.2, 3.0, 1.32], 'target': [2.0, 2.9, 1.25], 'lens_mm': 32, 'level': True,
                           'fstop': 5.6, 'focus': [7.0, 3.0, 1.2]}, exposure=4.2,
                   lights={'pend': {'power_w': 20.0, 'cone_deg': 24.0}, 'spk': {'irradiance': 3.0}, 'barspk': {'power_w': 120.0},
-                          'altar': {'power_w': 220.0, 'cone_deg': 24.0}, 'mother-spot': {'power_w': 180.0, 'cone_deg': 24.0},
-                          'street': {'radius_m': 0.6}},
-                  orb={'lamp_w': 0.15, 'shade_glow': 0.0035}, mother={'rim': 0.015}, room={'screen_glow': 0.015},
-                  props=[{'kind': 'kit', 'shape': 'ext', 'path': KIT42, 'fn': 'flatten', 'match': 'Concrete044A', 'contrast': -0.45, 'mean': 0.15}]),
+                          'altar': {'power_w': 220.0, 'cone_deg': 24.0}, 'mother-spot': {'power_w': 180.0, 'cone_deg': 24.0}},
+                  orb={'lamp_w': 0.15, 'shade_glow': 0.0035}, mother={'rim': 0.015}, room={'screen_glow': 0.015}),
     # the shop wall by the door: everything in the room is on sale, and this is where it waits
     # p2 (critics 5.0/4.5, converged): night exposure (4.2 to 2.9), the Tropos lit to stay the hero, the Domes and the
     # shelf strips down, the Cores grouped over two shelves (two unlit), the cards bigger, seated camera at 32 mm
     'shop': dict(camera={'position': [0.82, 1.84, 1.28], 'target': [2.5, 5.9, 1.18], 'lens_mm': 32, 'level': True,
                          'fstop': 4.0, 'focus': [2.2, 5.7, 1.1]}, exposure=2.9, shop=True,
-                 lights={'pend': {'power_w': 20.0, 'cone_deg': 24.0}, 'shop_key': {'irradiance': 0.5}},
-                 props=[{'kind': 'kit', 'shape': 'ext', 'path': KIT42, 'fn': 'flatten', 'match': 'Concrete044A', 'contrast': -0.45, 'mean': 0.15}]),
+                 lights={'pend': {'power_w': 20.0, 'cone_deg': 24.0}, 'shop_key': {'irradiance': 0.5}}),
 }
 FLAVOURS = ['ember', 'dust', 'acid', 'poison', 'ice', 'haze', 'fog', 'smoke']
 SHELF = [0.32, 0.80, 1.28, 1.70]
@@ -91,6 +88,10 @@ def shot(view):
     s['render']['exposure'] = v.get('exposure', s['render']['exposure'])
     s['title'] = f'Planet EARF, round 42: {view}'
     s['set']['props'] += v.get('props', [])
+    # the street lamps light the room through the street tree and the glass: the dappled "stains" on the floor every
+    # p1 critic named are its leaves (round 40 turned them off in the interiors for the same reason)
+    for name in [k for k in s['lights'] if k.startswith('street')]:
+        del s['lights'][name]
     for pre, kv in v.get('lights', {}).items():
         for name, L in s['lights'].items():
             if name.startswith(pre):
