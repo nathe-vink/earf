@@ -144,3 +144,9 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
   10.2 kg, just over the tipping check's 10 kg allowance (0f43215b): watch this in the finals' design note.
 - Mantle: a blind head-to-head duel (Strata Float vs Outcrop, both custom Ice, same light, both orders) is running
   locally, to back the recommendation in the owner's Mantle question.
+- Mantle head-to-head (local workflow wf_975e208d-6bc, 4 fresh critics, both orders, both custom Ice, same light):
+  **Strata Float won 3-1**, mean 6.4 vs 5.5, distinctiveness 6.9 vs 3.9 ("the floating glass turntable"; Outcrop "a
+  generic slab", edges near-black). Strata's repeated faults: posts and feet on two grids; two same-size tiers read as
+  stacked trays; double-sheet seams; screws visible in the posts; dust in the gap. Both: the bold white top-corner EARF
+  mark "cheapens" (line-wide lesson: small etched marks). Mantle lane restarted for one short fix pass on Strata Float
+  (Ice studio + dusk Ember, max 2 critic rounds), so the owner's A is at its best when asked.
