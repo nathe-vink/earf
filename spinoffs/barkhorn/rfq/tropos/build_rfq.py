@@ -42,7 +42,7 @@ KINDS = {
         ('top', 'shell top', 'cell-cast acrylic', '20', CAB_TINT, POLISH + '; 4 post sockets and an M12 thread', PANEL_TOL),
         ('bottom', 'shell bottom', 'cell-cast acrylic', '20', CAB_TINT, POLISH + '; 4 feet insert holes', PANEL_TOL),
         ('front-panel', 'front panel', 'cell-cast acrylic', '20', CAB_TINT, POLISH + '; woofer rebate, port recesses, magnet pockets', PANEL_TOL),
-        ('back', 'back (removable)', 'cell-cast acrylic', '20', CAB_TINT, POLISH + '; amplifier cutout and recess; EARF etched (see d)', PANEL_TOL),
+        ('back', 'back (removable)', 'cell-cast acrylic', '20', CAB_TINT, POLISH + '; amplifier cutout and recess; EARF etched (quoted separately)', PANEL_TOL),
         ('brace', 'braces', 'cell-cast acrylic', '20', CAB_TINT, 'edges milled square (inside)', PANEL_TOL),
         ('rib-', 'ribs', 'cell-cast acrylic', '20', CAB_TINT, 'edges milled square (inside)', PANEL_TOL),
         ('land-', 'land strips', 'cell-cast acrylic', '20', CAB_TINT, 'M5 insert holes; the seal groove milled after assembly', PANEL_TOL),
@@ -51,7 +51,7 @@ KINDS = {
         ('woofer-ring', 'woofer ring', 'cell-cast acrylic', '6', 'opaque, in the ring colour (Ember: oxblood, about #7A1A1C; Smoke: near-black #141316)', 'face polished; screw-head and disc pockets behind', PANEL_TOL),
         ('disc-frame', 'cloth disc frame', 'cell-cast acrylic', '12', 'black', 'face edge rounded R5; magnet pockets', PANEL_TOL),
         ('port-frame-', 'port frames', 'cell-cast acrylic', '8', CAB_TINT, 'mouth rounded R8 and polished; 4 countersinks', PANEL_TOL),
-        ('port-left', 'port tubes', 'cast acrylic tube 121 x 4 wall', '4 (wall)', CAB_TINT + ' (tinted tube: ask)', 'inner end flared R8 over a heated mandrel, annealed; bore polished; cemented into its frame', '±0.3'),
+        ('port-left', 'port tubes', 'cast acrylic tube 121 x 4 wall', '4 (wall)', 'the speaker\'s colour, the cabinet lot, if tinted tube can be had (question 10)', 'inner end flared R8 over a heated mandrel, annealed; bore polished; cemented into its frame', '±0.3'),
         ('grip-', 'grip cups', 'cast acrylic sheet', '3', CAB_TINT, 'drape-formed over a buck; cemented behind the grip slot', '±0.5'),
         ('ir-bracket', 'IR receiver bracket (one a pair)', 'cast acrylic, water-clear', '10', 'clear', 'milled pocket and ledge; 2 bonded M2.5 inserts', '±0.2'),
         ('ir-window', 'IR window, fallback only', 'cast acrylic rod, water-clear', 'ø12 x 20', 'clear', 'bonded through the front panel, faces polished flush', '±0.1'),
@@ -89,7 +89,7 @@ KINDS = {
 }
 
 INTRO = {
-    'a-cast-acrylic': ('cast acrylic fabrication', """I'm writing for a quote on the acrylic parts of a loudspeaker we are prototyping. Tropos is a horn loudspeaker
+    'a-cast-acrylic': ('cast acrylic fabrication', """I'm writing from EARF, a new hi-fi and lighting maker in San Francisco, for a quote on the acrylic parts of a loudspeaker we are prototyping. Tropos is a horn loudspeaker
 whose cabinet is 20 mm cell-cast acrylic, tinted through, so you see into it. The first pair will be in two colours,
 Ember (a transparent red) and Smoke (a transparent black). If it goes well, ten pairs follow, then about fifty.
 
@@ -101,7 +101,7 @@ bosses' faces and the seal's groove milled in one setup. Quote the cutting and t
 
 The tint matters most. We will send colour chips. We need to know whether you can cast or source sheet tinted to them,
 and how you keep one pair's panels the same colour."""),
-    'b-horn-forming': ('thermoforming the horn', """I'm writing for a quote on forming the horn of a loudspeaker we are prototyping. Tropos's horn is a
+    'b-horn-forming': ('thermoforming the horn', """I'm writing from EARF, a new hi-fi and lighting maker in San Francisco, for a quote on forming the horn of a loudspeaker we are prototyping. Tropos's horn is a
 pressure-formed flare in 10 mm cell-cast acrylic, tinted through: a 610 x 346 mouth, about 630 x 366 outside, 238 deep. It is
 formed over a male plug whose surface is the horn's air path; the outside is the free face and has to stay glossy. Our
 model has the wall at about 8.5 mm at the throat end, thinning to about 6 at the mouth's sides and about 5 in its
@@ -112,8 +112,8 @@ The other horn parts are turned and milled from the same tinted lot: a throat pi
 from 6 mm sheet, a cap, pads and a saddle. They are cemented to the flare with a polymerising cement. If you can do the
 whole horn, please quote it as one job; if not, the forming and trimming alone.
 
-For the first pair we supply (or have cut for you; see the tooling letter) a tooling-board plug on an aluminium base
-plate. The production tool comes later, in aluminium.
+For the first pair we supply (or have cut for you by a pattern shop) a tooling-board plug on an aluminium base
+plate; if you make such plugs yourselves, please quote one too. The production tool comes later, in aluminium.
 
 A note on the colour. The horn's sheet is not the cabinet's: in each colour it is cast in its own, much heavier dye lot,
 so that the formed horn reads deep and nearly opaque, with a dark neck. We estimate about 6 to 10 times the cabinet's
@@ -129,7 +129,7 @@ changes the forming in a few ways we would like your view on:
   in handling.
 - The heavier lot is a separate casting per colour, with its own minimum and cost, so the horn's sheet probably cannot
   come from the cabinet's batch. We ask below how you would match the two lots."""),
-    'b-horn-tooling': ('the horn\'s forming tool', """I'm writing for a quote on a thermoforming tool for a loudspeaker horn. For the prototype we want the plug
+    'b-horn-tooling': ('the horn\'s forming tool', """I'm writing from EARF, a new hi-fi and lighting maker in San Francisco, for a quote on a thermoforming tool for a loudspeaker horn. For the prototype we want the plug
 cut by 5-axis machining from high-temperature epoxy tooling board (rated 150 °C or more), sealed and polished, on a
 machined aluminium base plate with a groove for the forming machine's clamp frame. We supply the CAD (STEP) of the
 plug's surface, which is the horn's air path, and of the base.
@@ -138,46 +138,66 @@ Please also quote, as a separate later line, the production plug in aluminium: c
 5 axes, cored, with oil channels to hold it at about 85 °C and 0.6 mm vents, on the same base plate. We will only order
 it once the prototype's measurements confirm the profile. A trim fixture for the 5-axis router, copying the plug, is a
 third line if you make those."""),
-    'c-metal': ('CNC and sheet-metal work', """I'm writing for a quote on the metal parts of a loudspeaker we are prototyping. There are six: a small folded
+    'c-metal': ('CNC and sheet-metal work', """I'm writing from EARF, a new hi-fi and lighting maker in San Francisco, for a quote on the metal parts of a loudspeaker we are prototyping. There are six lines: a small folded
 and welded aluminium box for the amplifier (1.5 mm, black anodised), a turned aluminium adaptor ring, stainless tube
-posts threaded at one end, a set of turned brass sockets and threaded inserts, and an anodised rating plate,
+posts (front and rear) threaded at one end, a set of turned brass sockets and threaded inserts, and an anodised rating plate,
 laser-marked. The drawings give every size. The quantities are small for now: one pair first, then ten, then about
 fifty."""),
-    'd-other': ('other outside work', """I'm writing for a quote on some smaller jobs for a loudspeaker we are prototyping. The cabinet is clear,
+    'd-other': ('other outside work', """I'm writing from EARF, a new hi-fi and lighting maker in San Francisco, for a quote on some smaller jobs for a loudspeaker we are prototyping. The cabinet is clear,
 tinted acrylic, so these parts are seen and have to be neat: acoustic polyester batts cut to size and each sewn into a
 white voile sleeve; a speaker cloth stretched over a frame; our wordmark laser-etched into the back panel and filled in
 the speaker's colour; and a few seals (an EPDM cord loop with a vulcanised joint, a die-cut sponge gasket, small
 polyurethane sleeves). Please quote whichever of these you do."""),
 }
 
-QUESTIONS = """1. The unit price of each part at 1 pair, 10 pairs and 50 pairs (the quantities in the table are for those).
-2. Tooling and setup: any one-off charge (fixtures, programming, moulds, mandrels), and what we would own.
-3. Minimum order quantities and, for tinted material, any casting minimum: the least sheet or block you would cast or
-   buy in a colour, and its cost.
-4. Lead time from order to delivery at each quantity, and for samples first.
-5. Tint matching: can you match our colour chips (we will send them), and how do you prove a match (a swatch for our
-   approval, a spectrophotometer reading)?
-6. The dye lot: can one pair's parts all come from one batch? If not, how are lots matched (to one swatch, each lot's
-   number marked on its parts)? Can you pour 6, 10, 20, 30 and 75 mm in one batch?
-7. Packing: how the parts are protected and shipped (the faces are show faces and scratch).
-8. Anything in the drawings you would change to make the parts cheaper or better, before you quote."""
+Q_BASE = {
+    1: 'The unit price of each part at 1 pair, 10 pairs and 50 pairs (the quantities in the table are for those).',
+    2: 'Tooling and setup: any one-off charge (fixtures, programming, moulds, mandrels), and what we would own.',
+    3: 'Minimum order quantities and, for tinted material, any casting minimum: the least sheet or block you would cast or\n'
+       '   buy in a colour, and its cost.',
+    4: 'Lead time from order to delivery at each quantity, and for samples first.',
+    5: 'Tint matching: can you match our colour chips (we will send them), and how do you prove a match (a swatch for our\n'
+       '   approval, a spectrophotometer reading)?',
+    6: 'The dye lot: can one pair\'s parts all come from one batch? If not, how are lots matched (to one swatch, each lot\'s\n'
+       '   number marked on its parts)?',
+    7: 'Packing: how the parts are protected and shipped (the faces are show faces and scratch).',
+    8: 'Anything in the drawings you would change to make the parts cheaper or better, before you quote.',
+}
+# each kind's own wording of the common questions (None drops one; nothing in the tooling or the metal is tinted)
+Q_KIND = {
+    'a-cast-acrylic': {6: Q_BASE[6] + ' Can you pour the 3, 8 and 20 mm sheet and the block for the bosses in one batch?'},
+    'b-horn-forming': {6: Q_BASE[6] + ' Can you pour the horn lot\'s 6, 10 and 30 mm sheet and its 75 mm block in one batch?'},
+    'b-horn-tooling': {1: 'The price of each line.', 3: 'Minimum order, if any.',
+                       4: 'Lead time from order to delivery for each line.', 5: None, 6: None,
+                       7: 'Packing: how the plug and the plate are protected and shipped (any mark on the plug\'s face shows on every '
+                          'horn formed over it).'},
+    'c-metal': {3: 'Minimum order quantities, and any minimum lot for anodising.', 5: None, 6: None},
+}
 
 EXTRA_Q = {
-    'a-cast-acrylic': ['9. Whether you would rather cut from our nested sheets (DXF) or nest them yourselves.',
-                       '10. Whether you can source the 121 x 4 tube in the same tint, or should it be rolled from sheet.'],
-    'b-horn-forming': ['9. The press and oven you would use (pressure box, heaters), and whether you have formed 10 mm cast acrylic before, '
+    'a-cast-acrylic': ['Whether you would rather cut from our nested sheets (DXF) or nest them yourselves.',
+                       'Whether you can source the 121 x 4 tube in the same tint, or should it be rolled from sheet.'],
+    'b-horn-forming': ['The press and oven you would use (pressure box, heaters), and whether you have formed 10 mm cast acrylic before, '
                        'in a deep tint.',
-                       '9a. How the darker horn lot changes your settings (heater zones, soak time, sheet temperature), and whether you would '
+                       'How the darker horn lot changes your settings (heater zones, soak time, sheet temperature), and whether you would '
                        'run a trial sheet of each colour first; what that trial costs.',
-                       '9b. Whether a heavily tinted lot costs more to buy or cast, its minimum per colour, and whether it can be poured '
+                       'Whether a heavily tinted lot costs more to buy or cast, its minimum per colour, and whether it can be poured '
                        'with the cabinet\'s lot or must be a separate batch matched to the same chip.',
-                       '10. The wall you expect at the mouth\'s corners, and whether you would recommend 12 mm sheet.',
-                       '11. How many shots you would allow to set the process up on the prototype plug.'],
-    'b-horn-tooling': ['9. How many shots a tooling-board plug lasts at about 170 °C sheet temperature.',
-                       '10. Whether you would cast the production plug or machine it from a block, and its weight cored.'],
-    'c-metal': ['9. Whether the box can be folded from one blank with welded corners, and the anodising colour match.'],
-    'd-other': ['9. Your minimum for a custom-sewn sleeve run, and whether you can cut the batts too.'],
+                       'The wall you expect at the mouth\'s corners, and whether you would recommend 12 mm sheet.',
+                       'How many shots you would allow to set the process up on the prototype plug.'],
+    'b-horn-tooling': ['How many shots a tooling-board plug lasts at about 170 °C sheet temperature.',
+                       'Whether you would cast the production plug or machine it from a block, and its weight cored.'],
+    'c-metal': ['Whether the box can be folded from one blank with welded corners, and how you keep the black anodise the same '
+                'on the box, the ring and the plate, and from lot to lot.'],
+    'd-other': ['Your minimum for a custom-sewn sleeve run, and whether you can cut the batts too.'],
 }
+
+
+def questions(kind):
+    """The numbered questions for one kind: the common ones in its own wording, then its own."""
+    qs = [Q_KIND.get(kind, {}).get(n, Q_BASE[n]) for n in sorted(Q_BASE)]
+    qs = [q for q in qs if q] + EXTRA_Q.get(kind, [])
+    return '\n'.join(f'{n}. {q}' for n, q in enumerate(qs, 1))
 
 
 def rows():
@@ -253,20 +273,22 @@ def write(kind):
     md = [f'# Request for quotation: {title}', '', 'To: [vendor]  ', 'From: ' + SIGN + '  ', 'Date: [date]  ',
           'Re: Tropos loudspeaker, prototype pair, then 10 and 50 pairs', '', 'Hello,', '', body, '',
           '## The parts', '',
-          'Quantities are for one pair (two speakers), then 10 and 50 pairs. Sheet numbers are in the attached '
+          ('Each line is one tool, whatever the number of speakers. ' if kind == 'b-horn-tooling' else
+           'Quantities are for one pair (two speakers), then 10 and 50 pairs. ') + 'Sheet numbers are in the attached '
           '`drawings.pdf` (our drawing set BHC-001 to BHC-040, issue 2026-10-25; the general arrangement, the section, '
           'the exploded view and the notes are attached to every request). Dimensions in mm.' +
-          (' The DXF cut files and the nested sheets come with this letter (`dxf/`).' if kind == 'a-cast-acrylic' else '') +
-          (' STEP files of every part come with this letter (`step/`).' if kind != 'a-cast-acrylic' else ''), '',
+          (' The DXF cut files and the nested sheets come with this letter (`dxf/`), and STEP files of every part too '
+           '(`step/`: the bosses, the tubes, the cups and the IR parts have no DXF).' if kind == 'a-cast-acrylic' else
+           ' STEP files of every part come with this letter (`step/`).'), '',
           '| no. | part | our part names | sheet | material | thickness | tint | 1 pair | 10 pairs | 50 pairs | finish | tolerance |',
           '|---|---|---|---|---|---|---|---|---|---|---|---|']
     for t in tab:
         md.append('| ' + ' | '.join(t[c] for c in cols) + ' |')
-    md += ['', '## What I would like to know', '', QUESTIONS] + EXTRA_Q.get(kind, []) + [
+    md += ['', '## What I would like to know', '', questions(kind)] + [
         '', 'If any of this is outside what you do, a word to say so is just as useful, and the name of someone who does it '
         'would be very welcome.', '', 'Thank you,', '', SIGN, '',
         '---', '', f'*Attach: `drawings.pdf` (sheets {", ".join(str(p) for p in pages)}), `parts.csv`'
-        + (', the DXF files of the parts listed' if kind == 'a-cast-acrylic' else ', the STEP files of the parts listed') + '.*', '']
+        + (', the DXF and STEP files of the parts listed' if kind == 'a-cast-acrylic' else ', the STEP files of the parts listed') + '.*', '']
     open(os.path.join(d, 'letter.md'), 'w').write('\n'.join(md))
     return len(tab), pages
 

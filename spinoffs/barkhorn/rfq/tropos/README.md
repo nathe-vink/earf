@@ -24,12 +24,16 @@ Each folder has:
   Every request carries sheet 1 (the general arrangement), 2 (the section), 3 (the exploded view) and 39 and 40 (the
   notes).
 
-Attach also, from `spinoffs/barkhorn/out-cloud/`:
+Attach also:
 
-- to (a): the DXF cut files of the parts listed (`dxf/<part>.dxf`) and the nested sheets (`dxf/nest-cast-acrylic-*.dxf`);
-- to (b), (b tooling) and (c): the STEP files of the parts listed (`step/<part>.step`).
+- to (a): the DXF cut files of the parts listed (`spinoffs/barkhorn/out-cloud/dxf/<part>.dxf`), the nested sheets
+  (`dxf/nest-cast-acrylic-*.dxf`), and the STEP files of every part listed; the bosses, the tubes, the cups and the IR
+  parts have no DXF;
+- to (b), (b tooling) and (c): the STEP files of the parts listed.
 
-They are not copied here, so the pack never drifts from the build.
+The DXF files are committed. The STEP files (`out-cloud/step/`) are not. Build them from `cloud.py` at the same commit:
+`.venv-fab/bin/python studio/fabkit/build.py spinoffs/barkhorn/cloud.py --out spinoffs/barkhorn/out-cloud --skip
+drawings,render,stl` (about a minute). Nothing is copied into this folder, so the pack never drifts from the build.
 
 **Every letter asks:**
 

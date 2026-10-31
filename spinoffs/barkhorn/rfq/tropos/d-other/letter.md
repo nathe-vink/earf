@@ -7,7 +7,7 @@ Re: Tropos loudspeaker, prototype pair, then 10 and 50 pairs
 
 Hello,
 
-I'm writing for a quote on some smaller jobs for a loudspeaker we are prototyping. The cabinet is clear,
+I'm writing from EARF, a new hi-fi and lighting maker in San Francisco, for a quote on some smaller jobs for a loudspeaker we are prototyping. The cabinet is clear,
 tinted acrylic, so these parts are seen and have to be neat: acoustic polyester batts cut to size and each sewn into a
 white voile sleeve; a speaker cloth stretched over a frame; our wordmark laser-etched into the back panel and filled in
 the speaker's colour; and a few seals (an EPDM cord loop with a vulcanised joint, a die-cut sponge gasket, small
@@ -37,7 +37,7 @@ Quantities are for one pair (two speakers), then 10 and 50 pairs. Sheet numbers 
 5. Tint matching: can you match our colour chips (we will send them), and how do you prove a match (a swatch for our
    approval, a spectrophotometer reading)?
 6. The dye lot: can one pair's parts all come from one batch? If not, how are lots matched (to one swatch, each lot's
-   number marked on its parts)? Can you pour 6, 10, 20, 30 and 75 mm in one batch?
+   number marked on its parts)?
 7. Packing: how the parts are protected and shipped (the faces are show faces and scratch).
 8. Anything in the drawings you would change to make the parts cheaper or better, before you quote.
 9. Your minimum for a custom-sewn sleeve run, and whether you can cut the batts too.
