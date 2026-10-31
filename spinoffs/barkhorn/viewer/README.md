@@ -38,3 +38,9 @@ rendering here (SwiftShader) is the same image a GPU makes, so a phone would not
 2. Or skip real time: a turntable of path-traced frames, 36 a colour, at about 900 px, the way the horns turn on the
    speakers' page already. It is a picture, so it matches the pictures; it costs render time (a few hours on this CPU for
    eight colours) instead of fidelity.
+
+## The press kit PDF
+
+`node presskit.mjs` (after `python3 ../web.py`) prints the press page to `../site/press/earf-press-kit.pdf` with its
+print styles (in `web.py`), so the PDF and the page cannot disagree. Run `web.py` again afterwards so the page's link
+shows the PDF's size.

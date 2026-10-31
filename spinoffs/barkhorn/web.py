@@ -1068,6 +1068,10 @@ def press_html():
     zkb = os.path.getsize(os.path.join(SITE, 'press', 'earf-logos.zip')) // 1024 if os.path.exists(os.path.join(SITE, 'press', 'earf-logos.zip')) else 0
     logos = (f'<p class="logo-dl"><a class="btn" href="press/earf-logos.zip" download>The marks, SVG and PNG ({zkb:,}&nbsp;KB)</a>'
              '<span>The lockup, the globe and the wordmark, in black, white and colour.</span></p>') if zkb else ''
+    kit = os.path.join(SITE, 'press', 'earf-press-kit.pdf')       # viewer/presskit.mjs prints it from this page
+    if os.path.exists(kit):
+        logos += (f'<p class="logo-dl"><a class="btn" href="press/earf-press-kit.pdf" download>This page as a PDF '
+                  f'({os.path.getsize(kit) // 1024:,}&nbsp;KB)</a><span>Four pages: who we are, the names, the particulars, the pictures.</span></p>')
     tints = ''.join(f'<li><span class="coin-dot" style="--i:{i}"></span><b>{name}</b><span>{tint}</span></li>'
                     for i, (k, num, name, icon, tint, line, cover) in enumerate(CLOUDS))
     return f'''
@@ -1771,6 +1775,20 @@ html.cursor, html.cursor * { cursor: none !important }
 .dl-grid figcaption { margin-top: 8px; font-size: 14px; line-height: 1.45 } .dl-grid a { color: var(--ink); text-underline-offset: 3px; white-space: nowrap }
 .jlist { list-style: none; margin: 32px 0 80px; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px 20px }
 .jband { margin: 0 }
+/* the press page printed (viewer/presskit.mjs makes site/press/earf-press-kit.pdf from it): the words and the
+   particulars, the pictures as a contact sheet, nothing to click */
+@media print {
+  @page { size: A4; margin: 16mm 14mm }
+  body { background: #FFF; font-size: 10.5pt }
+  header.top, footer, .crumbs, .copy-text, .copied, .logo-dl, .flyer, .splash, body::before { display: none !important }
+  #press .ed-head h1 { font-size: 30pt } #press .lede { font-size: 12pt }
+  #press .ed-band { break-inside: auto; padding-block: 14pt; margin-top: 10pt }
+  #press .sheets { grid-template-columns: 1fr 1fr; gap: 14pt 24pt } #press h2, #press .sheet h3 { break-after: avoid }
+  #press .sheet dt, #press .sheet dd { break-inside: avoid } #press .coin-dot { print-color-adjust: exact; -webkit-print-color-adjust: exact }
+  #press .dl-grid { grid-template-columns: repeat(4, 1fr); gap: 8pt } #press .dl-grid li { break-inside: avoid }
+  #press .dl-grid figcaption { font-size: 7.5pt } #press .dl-grid a { text-decoration: none; color: #555 }
+  #press .boiler { grid-template-columns: 1fr; gap: 10pt } #press [aria-labelledby="pr-pics"] { break-before: page }
+}
 .jcard { display: grid; gap: 8px; color: var(--ink); text-decoration: none }
 .jcard img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 6px; display: block; margin-bottom: 6px; background: #F1EDE8 }
 .jcard .eyebrow { margin: 0 } .jcard b { font-size: 22px; line-height: 1.15; font-weight: 600; letter-spacing: -0.01em } .jcard > span:last-child { color: var(--muted) }
