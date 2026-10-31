@@ -19,7 +19,7 @@ Nothing has been reviewed by an architect, an engineer, a lawyer, a lender or th
 | `research-sf-rules.md`, `research-market.md` | The research notes, with a source for every claim. Both are from public web pages; nobody was contacted. |
 | `r42_shots.py`, `kit42.py` | New interior views of the rendered room (counter, listening, night, shop wall), and the shop wall as a kit piece holding the products' own models. |
 | `r42_card.py`, `r42_stage.py` | The critic's card and staging for the new views (the CLAUDE.md protocol: fresh context, image and card only). |
-| `critic/LOG.md` | The critic rounds, the duels and the finals: night p2, counter p1 (the floor fixed), shop p3, listening p1, at 2400 x 1600 in `renders/2026-10-31/barkhorn/planet42/finals/`. |
+| `critic/LOG.md` | The critic rounds, the duels and the finals: night p2, counter p1 (the floor fixed), shop p3 at 2400 x 1600 (listening p1 stays a 1200 proof), in `renders/2026-10-31/barkhorn/planet42/finals/`. |
 
 ## Rebuild
 
