@@ -1,0 +1,47 @@
+{
+  "stage1": {"impression": "A clear sphere on a black puck holds a slice that reads as a meteorite, but the slice looks pasted on: a flat glowing panel with a hard white rectangle in its centre and a ragged dark rim. The ball's lower half is an opaque mid-grey that reads as a solid grey fill, not water-clear acrylic, while the floor caustics are the one passage that looks expensive.", "score": 5.0},
+  "blocking_9": [
+    "No hard rectangular reflection on the slice: region [845,492,935,528] must show the etch pattern (lum_range > 35), not a uniform 216 patch (now lum_range 10.6)",
+    "The ball's interior must read as clear, not grey: lower interior [650,600,760,760] is lum_median 61.5, darker than the cove behind it (83); it needs a bright refracted core or gradient seen through the ball",
+    "The pool at the ball's foot must not be a flat clipped white blob: [780,805,1080,835] is 90% clipped",
+    "The base's anodised side must hold a highlight and a falloff: [660,900,1140,960] has median 5, crush 29%, and the vertical profile is flat at 16 to 9 under the lip",
+    "The etched slice must read as metal with deep-and-bright Widmanstatten contrast; now it is a pale green-white panel (median 193, p5 135), delta E 13 against a neutral iron grey"
+  ],
+  "changes": [
+    {"id": "c1", "rank": 1, "kind": "light",
+     "problem": "The front softbox mirrors in the slice's polished face as a hard white rectangle dead centre, which flattens the etch and reads as a sticker.",
+     "evidence": {"region": [845, 492, 935, 528], "measured": "uniform patch, lum_median 216, lum_range 10.6, against the slice around it at p5 135 to p95 238; the rectangle's shape matches the 700 x 300 front light behind the camera"},
+     "change": {"setting": "front position z", "from": "zc+120", "to": "zc+520"},
+     "expected": "The front reflection leaves the slice's face (it lifts above the slice or out of it); the etch pattern runs continuously through the centre and the slice's local contrast rises.",
+     "accept": {"region": [845, 492, 935, 528], "metric": "lum_range", "op": "between", "value": [35, 140]}},
+    {"id": "c2", "rank": 2, "kind": "asset",
+     "problem": "The ball's lower half reads as a solid grey fill darker than the backdrop, so the acrylic does not read as water-clear.",
+     "evidence": {"region": [650, 600, 760, 760], "measured": "lum_median 61.5 (and 65.5 at [1040,600,1160,760]) against the cove at 83 [100,100,400,400]; the left edge profile falls 158 to 36 with no bright core"},
+     "change": {"setting": "asset: background glow", "from": "none", "to": "an area light 300 x 150 mm, about 6 W, at (0, 450, 60), aimed at the cove behind the ball at (0, 700, 150), hidden from the camera by the ball, putting a soft pool on the cove about 40 levels above the surrounding cove that the ball refracts as a bright inverted core"},
+     "expected": "The ball's lower interior lifts to about 80 to 105 with a soft gradient, brighter than or equal to the cove beside it, so the ball reads as a clear lens; the cove outside the ball's silhouette changes by under 10 levels.",
+     "accept": {"region": [650, 600, 760, 760], "metric": "lum_median", "op": "between", "value": [75, 110]}},
+    {"id": "c3", "rank": 3, "kind": "light",
+     "problem": "The overhead disc shows through the bottom of the ball as a large flat clipped white blob that blows out the junction of the ball and the base.",
+     "evidence": {"region": [780, 805, 1080, 835], "measured": "clip_pct 90.3, lum_median 255"},
+     "change": {"setting": "overhead power", "from": 30, "to": 18},
+     "expected": "The pool at the foot holds tone (median about 215 to 240) with a visible gradient toward its edges; the top reflection [740,170,1060,220] keeps median above 190.",
+     "accept": {"region": [780, 805, 1080, 835], "metric": "clip_pct", "op": "between", "value": [2, 35]}},
+    {"id": "c4", "rank": 4, "kind": "asset",
+     "problem": "The base's anodised side is a black silhouette with no specular line, so it does not read as finished metal.",
+     "evidence": {"region": [660, 900, 1140, 960], "measured": "lum_median 5.2, p95 17, crush 29.5%; profile [880,880,920,990] runs 16, 15, 14, 13, 12, 11, 9 under the lip"},
+     "change": {"setting": "asset: white flag", "from": "none", "to": "a white card 700 x 60 mm, matte, at (0, -420, 25), vertical, facing the base, out of frame below the lens; lit by the existing front light, or an 80 x 700 mm strip light of about 3 W in its place"},
+     "expected": "A soft horizontal highlight band runs along the base's side, peaking at about 60 to 100 and falling to about 10 at the bottom edge; the slab still reads black.",
+     "accept": {"region": [660, 900, 1140, 960], "metric": "lum_p95", "op": "between", "value": [40, 110]}},
+    {"id": "c5", "rank": 5, "kind": "light",
+     "problem": "The etched slice is lit flat and too bright, so the kamacite bands read as pale frosted glass instead of etched iron with deep valleys.",
+     "evidence": {"region": [760, 430, 1060, 620], "measured": "lum_median 193, p5 135, p95 238; RGB 189/198/190, delta E 2000 13.0 against #9A9C9E"},
+     "change": {"setting": "key power", "from": 26, "to": 18},
+     "expected": "The slice's median drops to about 150 to 175 and its darkest etch valleys fall below 110, so the pattern reads as relief on metal; the ball's rim highlights from the rim lights are unchanged.",
+     "accept": {"region": [760, 430, 1060, 620], "metric": "lum_p5", "op": "between", "value": [70, 115]}}
+  ],
+  "out_of_scope": [
+    {"request": "Neutralise the slight green-cyan cast on the slice (G 198 against R 189)", "why": "It comes from the acrylic's measured absorption through about 80 mm of acrylic, which the card fixes; it costs the iron its neutral metal colour."},
+    {"request": "Tidy the slice's ragged dark rim and the faint halo plane behind it", "why": "These are the slice's shape and the inclusion's geometry, which are fixed. If the dark rim is a modelling artefact (a coplanar face or a gap), the model owner should check it."}
+  ],
+  "score_if_fixed": 6.8
+}

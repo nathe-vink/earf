@@ -38,9 +38,9 @@ def record(z0=LIFT, r=151.0, t=1.6):
     mat = bpy.data.materials.new('vinyl')
     nt, out = pt._nodes(mat)
     b = nt.nodes.new('ShaderNodeBsdfPrincipled')
-    b.inputs['Base Color'].default_value = (0.006, 0.006, 0.007, 1)
-    b.inputs['Roughness'].default_value = 0.3
-    b.inputs['Anisotropic'].default_value = 0.6
+    b.inputs['Base Color'].default_value = (0.0035, 0.0035, 0.004, 1)
+    b.inputs['Roughness'].default_value = 0.16
+    b.inputs['Anisotropic'].default_value = 0.0   # a radial tangent's branch cut drew a line across the disc (round 2)
     b.inputs['Specular IOR Level'].default_value = 0.35
     tg = nt.nodes.new('ShaderNodeTangent')
     tg.direction_type = 'RADIAL'
@@ -55,10 +55,11 @@ def record(z0=LIFT, r=151.0, t=1.6):
     bm = nt.nodes.new('ShaderNodeBump')
     bm.inputs['Strength'].default_value = 0.15
     nt.links.new(wave.outputs['Fac'], bm.inputs['Height'])
-    nt.links.new(bm.outputs['Normal'], b.inputs['Normal'])
+    # no groove bump: at this scale the rings alias into a hard line across the disc (critic rounds 1 and 2); pressed
+    # vinyl seen from a metre is a black mirror anyway
     nt.links.new(b.outputs['BSDF'], out.inputs['Surface'])
     pt.disc('record', r, z0, z0 + t, mat, bevel=0.5)
-    pt.disc('label', 50, z0 + t + 0.02, z0 + t + 0.12, pt.principled('label', '#26241F', rough=0.85), bevel=0)
+    pt.disc('label', 50, z0 + t + 0.02, z0 + t + 0.12, pt.principled('label', '#2B2B2D', rough=0.5), bevel=0)
     steel = pt.principled('spindle', '#B8B6B2', rough=0.25, metal=1.0)
     pt.disc('spindle_pin', 3.55, z0 + t, z0 + t + 11.0, steel, bevel=0.6, segs=40)
     return z0 + t
@@ -69,7 +70,8 @@ FIRN = dict(r=40.0, h=36.0, ice=3.0, layers=6, layer=5.0, spindle=(4.0, 12.0))
 
 
 def firn(z0):
-    """Moho in clear with an Ice base and top: six 5 mm clear layers between two 3 mm Ice laminae. At each of the
+    """Moho in clear with an Ice top: six 5 mm clear layers and a 3 mm clear base under a 3 mm Ice lamina (round 1 of
+    the critic: an Ice base lamina, seen by total reflection along the base, went navy and hid the lowest voids). At each of the
     five inner bond lines and under the top lamina, lens-shaped air voids from two matching dished pockets: columns of
     them stacked like the air a glacier traps as snow turns to ice."""
     f = FIRN
@@ -77,7 +79,6 @@ def firn(z0):
     mat = pt.acrylic('firn', 'clear')
     body = pt.disc('moho', f['r'], zb, zt, mat, bevel=1.2, segs=200)
     ice = pt.lamina('ice', 'ice')
-    pt.disc('ice_base', f['r'] - 0.05, zb + 0.05, zb + f['ice'], ice, bevel=1.15, segs=200)
     pt.disc('ice_top', f['r'] - 0.05, zt - f['ice'], zt - 0.05, ice, bevel=1.15, segs=200)
     # the spindle's hole from below
     cut(body, pt.disc('spindle', f['spindle'][0], zb - 2, zb + f['spindle'][1], None, segs=48, bevel=0))
@@ -108,21 +109,37 @@ def firn(z0):
 def firn_scene(shot):
     pt.reset()
     if shot == 'hero':
-        pt.cove('#2C2C2F', rough=0.5, radius=500)
+        # critic round 1 (5.5): cove darker, overhead and key and right rim down, the card lit, cove rougher, camera up
+        # critic round 2 (5.5): (a grey card behind for the lower body was tried and read as a placard); rims and key down; overhead down and
+        # softer at its edge (its 40 degree pool drew a hard line across the LP); the glint lower; a dark label
+        pt.cove('#0B0B0C', rough=0.75, radius=500)
         top = record()
         firn(top + LIFT)
-        pt.area('overhead', (-60, 160, 620), (0, 0, 20), (700, 420), 26, '#FFF4E6')
-        pt.area('key', (-420, -260, 300), (0, 0, 22), 220, 9, '#FFF1E0')
-        pt.area('rimL', (-260, 300, 140), (0, 0, 20), (60, 520), 7, '#E8F0FF')
-        pt.area('rimR', (280, 280, 160), (0, 0, 20), (60, 520), 9, '#E8F0FF')
-        pt.spot('glint', (380, -200, 420), (0, 0, 36), 60, size_mm=6, angle=12)
-        pt.block('card', 600, 4, 0, 160, pt.principled('card', '#EEEAE4', rough=0.9), bevel=0, y=-520)
-        pt.camera((60, -470, 170), (0, 0, 14), lens=85)
+        pt.area('overhead', (-60, 160, 620), (0, 0, 20), (700, 420), 11, '#FFF4E6', spread=75)
+        pt.area('key', (-420, -260, 300), (0, 0, 22), 220, 2, '#FFF1E0')
+        pt.area('rimL', (-260, 300, 140), (0, 0, 20), (60, 520), 3, '#E8F0FF')
+        pt.area('rimR', (280, 280, 160), (0, 0, 20), (60, 520), 2, '#E8F0FF')
+        pt.spot('glint', (300, -260, 180), (0, 0, 36), 60, size_mm=6, angle=12)
+        pt.area('card', (0, -520, 40), (0, 0, 14), (600, 160), 4, '#FFFFFF')
+        pt.camera((60, -470, 220), (0, 0, 14), lens=85)
+    elif shot == 'hero_b':
+        # a second hero (its own card and rounds): bright-field. The first hero stopped at 5.0 after three rounds, every
+        # round naming the same cause: clear acrylic on a black set transmits black. Here a light seamless fills the body,
+        # and the camera sits low so the bond-line voids are seen near edge-on, as columns
+        pt.cove('#B9B7B3', rough=0.8, radius=700, height=2400, width=5000)
+        top = record()
+        firn(top + LIFT)
+        pt.area('overhead', (-40, 120, 520), (0, 0, 20), (600, 360), 9, '#FFF4E6', spread=75)
+        pt.area('key', (-460, -220, 220), (0, 0, 20), 240, 6, '#FFF1E0')
+        pt.area('wall', (0, 500, 200), (0, 900, 260), (900, 500), 10, '#FFFFFF')
+        pt.area('rimR', (300, 240, 90), (0, 0, 20), (60, 400), 3, '#E8F0FF')
+        pt.spot('glint', (260, -300, 160), (0, 0, 30), 40, size_mm=5, angle=10)
+        pt.camera((40, -420, 150), (0, 0, 18), lens=100)
     else:
-        pt.cove('#2A2A2D', rough=0.5, radius=400)
+        pt.cove('#0B0B0C', rough=0.75, radius=400)
         top = record()
         firn(top + LIFT)
-        pt.area('overhead', (0, 120, 420), (0, 0, 20), (500, 300), 14, '#FFF4E6')
+        pt.area('overhead', (0, 120, 420), (0, 0, 20), (500, 300), 14, '#FFF4E6', spread=40)
         pt.area('back', (40, 260, 30), (0, 0, 18), (300, 90), 7, '#EAF2FF')
         pt.area('key', (-260, -160, 200), (0, 0, 20), 140, 5, '#FFF1E0')
         pt.spot('glint', (300, -120, 300), (0, 0, 30), 30, size_mm=5, angle=10)
@@ -233,13 +250,13 @@ def etched(name, tex, zc):
     nt.links.new(mp.outputs['Vector'], im.inputs['Vector'])
     ramp = nt.nodes.new('ShaderNodeValToRGB')
     cr = ramp.color_ramp
-    cr.elements[0].position = 0.3; cr.elements[0].color = (0.20, 0.195, 0.19, 1)
-    cr.elements[1].position = 0.85; cr.elements[1].color = (0.92, 0.90, 0.86, 1)
+    cr.elements[0].position = 0.35; cr.elements[0].color = (0.06, 0.06, 0.06, 1)
+    cr.elements[1].position = 0.8; cr.elements[1].color = (0.55, 0.545, 0.53, 1)
     nt.links.new(im.outputs['Color'], ramp.inputs['Fac'])
     nt.links.new(ramp.outputs['Color'], b.inputs['Base Color'])
     rr = nt.nodes.new('ShaderNodeMapRange')
     rr.inputs['From Min'].default_value = 0.3; rr.inputs['From Max'].default_value = 0.9
-    rr.inputs['To Min'].default_value = 0.6; rr.inputs['To Max'].default_value = 0.22
+    rr.inputs['To Min'].default_value = 0.7; rr.inputs['To Max'].default_value = 0.3
     nt.links.new(im.outputs['Color'], rr.inputs['Value'])
     nt.links.new(rr.outputs['Result'], b.inputs['Roughness'])
     bp = nt.nodes.new('ShaderNodeBump'); bp.inputs['Strength'].default_value = 0.3
@@ -324,7 +341,7 @@ def iron(z_base=LIFT):
     prism_xy('slice', out, 5.0, meteor, (0, 0, zc), rot_x=90, offset=0.0)
     prism_xy('pocket', out, 5.0, clear, (0, 0, zc), rot_x=90, offset=0.5, inward=True)
     # the slice's sawn edge: a dark oxidised rim as dealers leave it, a thin band round the outline
-    edge = pt.principled('rind', '#3A332C', rough=0.6, metal=0.6)
+    edge = pt.principled('rind', '#1C1814', rough=0.75, metal=0.4, bump=(4000, 0.6, 4))
     sl = bpy.data.objects['slice']
     sl.data.materials.append(edge)
     for p in sl.data.polygons:
@@ -335,15 +352,24 @@ def iron(z_base=LIFT):
 
 def iron_scene(shot):
     pt.reset()
-    pt.cove('#262628', rough=0.45, radius=600)
+    pt.cove('#161618' if shot == 'hero' else '#262628', rough=0.45, radius=600)
     zc = iron()
     if shot == 'hero':
-        pt.area('overhead', (-80, 520, 700), (0, 0, zc), 700, 30, '#FFF3E4', shape='DISK')
-        pt.area('key', (-700, -220, 460), (0, 0, zc), 300, 26, '#FFF0DE')
-        pt.area('front', (0, -1300, zc + 120), (0, 0, zc), (700, 300), 12, '#FFF6EC')
+        # critic round 1 (5.0): the front light up out of the slice's mirror; a glow on the cove behind for the ball
+        # to refract; overhead and key down; a low strip in front for the base's anodised side
+        # critic round 2 (5.5): front 12 -> 3; a black flag behind the camera for the etch's dark phase; overhead
+        # 18 -> 9; the key moved back so its reflection leaves the slice; rimR 14 -> 7; cove darker; the low strip 3 -> 1.2.
+        # The etch itself redrawn (widman.py v2): interlocking lamellae, not overlapping bars
+        pt.area('overhead', (-80, 520, 700), (0, 0, zc), 700, 9, '#FFF3E4', shape='DISK')
+        pt.area('key', (-700, 120, 460), (0, 0, zc), 300, 18, '#FFF0DE')
+        pt.area('front', (0, -1300, zc + 520), (0, 0, zc), (700, 300), 3, '#FFF6EC')
+        fl = pt.block('blackflag', 900, 2, 0, 500, pt.principled('blackflag', '#303030', rough=1.0, spec=0.0), bevel=0)
+        fl.location = (0.04, -1.15, zc * MM + 0.244 - 0.25 - zc * MM)
+        pt.area('glow', (0, 330, 40), (0, 640, 110), (220, 110), 3, '#FFF3E4')
+        pt.area('flag', (0, -420, 25), (0, 0, 12), (700, 80), 1.2, '#FFFFFF')
         pt.area('rimL', (-360, 380, 240), (0, 0, zc), (80, 800), 12, '#E6EEFF')
-        pt.area('rimR', (380, 360, 260), (0, 0, zc), (80, 800), 14, '#E6EEFF')
-        pt.spot('glint', (460, -300, 520), (0, 0, zc + 20), 120, size_mm=8, angle=14)
+        pt.area('rimR', (380, 360, 260), (0, 0, zc), (80, 800), 7, '#E6EEFF')
+        pt.spot('glint', (460, -300, 520), (0, 0, zc + 20), 30, size_mm=8, angle=14)
         pt.camera((40, -900, zc + 150), (0, 0, zc - 22), lens=85)
     else:
         pt.area('overhead', (0, 520, 560), (0, 0, zc), 600, 18, '#FFF3E4', shape='DISK')
@@ -365,8 +391,8 @@ def stamper_mat():
     b = nt.nodes.new('ShaderNodeBsdfPrincipled')
     b.inputs['Base Color'].default_value = (0.64, 0.62, 0.58, 1)
     b.inputs['Metallic'].default_value = 1.0
-    b.inputs['Roughness'].default_value = 0.035
-    b.inputs['Anisotropic'].default_value = 0.45
+    b.inputs['Roughness'].default_value = 0.14
+    b.inputs['Anisotropic'].default_value = 0.7
     b.inputs['Thin Film Thickness'].default_value = 0.0
     b.inputs['Thin Film IOR'].default_value = 1.6
     tg = nt.nodes.new('ShaderNodeTangent'); tg.direction_type = 'RADIAL'; tg.axis = 'Y'
@@ -377,6 +403,9 @@ def stamper_mat():
     nt.links.new(tc.outputs['Object'], wave.inputs['Vector'])
     bm = nt.nodes.new('ShaderNodeBump'); bm.inputs['Strength'].default_value = 0.12
     nt.links.new(wave.outputs['Fac'], bm.inputs['Height'])
+    # real grooves are about 0.1 mm apart, below the frame's resolution: the bump is kept faint so it does not beat
+    # into moire (critic, stamper round 2); the anisotropic sheen along them carries the look
+    bm.inputs['Strength'].default_value = 0.025
     nt.links.new(bm.outputs['Normal'], b.inputs['Normal'])
     nt.links.new(b.outputs['BSDF'], out.inputs['Surface'])
     return mat
@@ -423,16 +452,26 @@ def bedrock(z0=LIFT):
 
 def stamper_scene(shot):
     pt.reset()
-    pt.cove('#19191B', rough=0.4, radius=700, height=1600)
+    pt.cove('#A6A6A4' if shot == 'hero' else '#19191B', rough=0.6, radius=700, height=2600, width=5000)
     zc = bedrock()
     if shot == 'hero':
-        pt.area('overhead', (-60, 260, 900), (0, 0, 60), (1000, 600), 34, '#FFF3E4')
-        pt.area('key', (-560, -420, 380), (0, 0, 30), 320, 26, '#FFF0DE')
-        pt.area('rimL', (-420, 420, 260), (0, 0, 120), (90, 900), 14, '#E6EEFF')
-        pt.area('rimR', (440, 380, 260), (0, 0, 120), (90, 900), 16, '#E6EEFF')
-        pt.spot('glint', (420, -460, 300), (0, -31, 34), 220, size_mm=8, angle=12)
-        pt.area('front', (-80, -760, 560), (0, -31, 34), (900, 300), 12, '#FFF6EC')
-        pt.camera((-260, -600, 125), (0, 0, 52), lens=70)
+        # critic round 1 (4.5): the glint down; the rims up for the edges; the set's tone was the root of three of its
+        # notes (the block read as dark glass because it transmits the dark set), so the cove goes light (the card lets
+        # any neutral) and the black sleeve then reads black against it; the front is a strip whose reflection crosses
+        # the whole shard as a band. The flag and floor card it asked for were tried in proof: the flag blacked out the set.
+        # critic round 2 (4.5): wider and higher so the sleeve reads whole; overhead down; the front up off the shard's
+        # face so it carries an edge; the glint up for the grooves; black flags for the block's end faces; a cooler cove
+        pt.area('overhead', (-60, 260, 900), (0, 0, 60), (1000, 600), 16, '#FFF3E4')
+        pt.area('key', (-560, -420, 380), (0, 0, 30), 320, 18, '#FFF0DE')
+        pt.area('front', (-80, -760, 600), (0, -31, 34), (1600, 160), 10, '#FFF6EC')
+        for sx in (-1, 1):
+            f = pt.block(f'flag{sx}', 150, 2, 0, 450, pt.principled(f'flag{sx}', '#050505', rough=1.0, spec=0.0), bevel=0)
+            f.location = (sx * 0.62, -0.08, 0.0)
+            f.rotation_euler.z = math.radians(-sx * 30)
+        pt.area('rimL', (-420, 420, 260), (0, 0, 120), (90, 900), 28, '#E6EEFF')
+        pt.area('rimR', (440, 380, 260), (0, 0, 120), (90, 900), 32, '#E6EEFF')
+        pt.spot('glint', (420, -460, 300), (0, -31, 34), 110, size_mm=8, angle=6)
+        pt.camera((-330, -760, 190), (0, 0, 160), lens=45)
     else:
         pt.area('overhead', (0, 160, 480), (0, -20, 40), (500, 300), 16, '#FFF3E4')
         pt.area('key', (-280, -300, 180), (0, -30, 34), 180, 10, '#FFF0DE')

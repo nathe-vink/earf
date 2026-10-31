@@ -72,7 +72,7 @@ goes near a driver's magnet. (Source: `research/making.md`, section 5.)
 |---|---|---|---|---|---|
 | 1 | **Stamper** | Bedrock, clear, a Smoke base stratum | a shard of the nickel stamper that pressed Session 00 | 12 to 16, as many as one stamper yields | +150% |
 | 2 | **Offcuts** | Core, the stack of discs, clear with eight tints | the first eight speakers' offcuts, one stratum each, Ember to Smoke | 8 | +70% |
-| 3 | **Firn** | Moho, clear between two Ice laminae | air: columns of lens-shaped voids, one at each bond line | 25 | +120% |
+| 3 | **Firn** | Moho, clear under an Ice lamina | air: columns of lens-shaped voids, one at each bond line | 25 | +120% |
 | 4 | **Groove** | Moho, clear, a Smoke stratum beneath | Session 00's opening, drawn as a spiral channel of air | 33 | +150% |
 | 5 | **Contour** | Relief, clear, edge-lit | one contour of a real mountain, traced as a round air channel | 8 a mountain | +100% |
 | 6 | **Iron** | Core, the 160 mm ball, water-clear (Fog) | an etched slice of an iron meteorite at the centre | 12 | +150 to 250% |
@@ -152,8 +152,9 @@ Cut:
 
 ### 3. Firn — "Air, kept at every layer." *(rendered)*
 
-- **Product and tint.** Moho, the record weight (proposed ø 80 × 36 mm). Six 5 mm clear layers between two 3 mm Ice
-  laminae.
+- **Product and tint.** Moho, the record weight (proposed ø 80 × 36 mm). A 3 mm clear base, six 5 mm clear layers,
+  and a 3 mm Ice lamina on top. An Ice base was tried in the render and dropped after the first critic round. Seen by
+  total reflection along the base, it went navy and hid the lowest voids.
 - **Inside.** Air. At each of the five inner bond lines and under the top lamina, lens-shaped voids 1.5 to 13 mm
   across and up to 1.4 mm deep. Each comes from two matching dished pockets in the mating faces. The voids stack in
   columns, as snow traps air when it turns to glacier ice. Firn is that snow, half-way to ice, and an ice core's air
@@ -163,7 +164,7 @@ Cut:
     well-worn photo trope; the name should change before the object does." Firn keeps Ice's snow country and is a
     core sample, as the brand is.
 - **How it's made.**
-  1. Pre-dry and anneal all eight sheets at 80 °C.
+  1. Pre-dry and anneal all eight sheets at 80 °C (the base, six layers, and the Ice lamina).
   2. CNC each void's dish with a polished single-crystal diamond ball-nose at 0.01 to 0.02 mm stepover, so it is
      optical off the tool. Give each dish a 0.3 mm square rim step, the capillary stop. Mirror the dish in the mating
      face.

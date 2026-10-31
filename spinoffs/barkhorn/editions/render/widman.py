@@ -1,34 +1,41 @@
-"""An etched octahedrite's face as an image: kamacite lamellae laid down in three directions 60 degrees apart (a slice
-cuts the octahedron's four plane sets as three or four), each set bright or dark by how its crystal faces catch the
-light after the etch, edged with thin bright taenite, over a fine dark plessite ground. Gibeon is a fine octahedrite:
-its bands are about 0.3 mm wide (the Meteoritical Bulletin's class, Of), so at slice scale the pattern is fine."""
+"""An etched octahedrite's face as an image (v2, after the Iron critic's round 2: v1 drew outlined bars that overlapped
+and read as "stacked translucent bars", not etched iron).
+
+How the real pattern forms, and so how it is drawn: as the iron cooled, kamacite plates grew along the octahedron's
+four plane sets; a slice cuts them as three or four families of straight bands. Plates stop where they meet a plate
+already grown, so bands interlock and butt into each other rather than cross. Between plates, the last nickel-rich
+taenite is a hairline border, bright after the etch; the leftover fields are plessite, a fine dark mottle. After the
+acid etch each family catches light at its own angle, so a family reads as one tone with a slight drift along it.
+Gibeon is a fine octahedrite (bandwidth about 0.3 mm in the Meteoritical Bulletin's class Of); at the scale of a
+62 mm slice the bands are drawn 0.35 to 0.9 mm wide.
+"""
 import math
 import random
+import subprocess
 
 import numpy as np
 
 
-def make(path, w_mm=70.0, h_mm=52.0, px_per_mm=24, seed=11, band=(0.45, 1.2), n=1500):
+def make(path, w_mm=70.0, h_mm=52.0, px_per_mm=26, seed=11, band=(0.22, 0.55), tries=20000):
     W, H = int(w_mm * px_per_mm), int(h_mm * px_per_mm)
     rnd = random.Random(seed)
-    yy, xx = np.mgrid[0:H, 0:W].astype(np.float32) / px_per_mm
-    # plessite: fine mottled grey
     rng = np.random.default_rng(seed)
-    ground = 0.30 + 0.05 * rng.standard_normal((H // 4 + 1, W // 4 + 1)).astype(np.float32)
-    ground = np.kron(ground, np.ones((4, 4), np.float32))[:H, :W]
-    img = ground.copy()
-    edge = np.zeros_like(img)
-    dirs = [rnd.uniform(0, 180)]
-    dirs += [dirs[0] + 60 + rnd.uniform(-4, 4), dirs[0] + 120 + rnd.uniform(-4, 4)]
-    tone = [0.86, 0.46, 0.66]                  # each set's brightness after the etch
-    for k in range(n):
+    yy, xx = np.mgrid[0:H, 0:W].astype(np.float32) / px_per_mm
+    # plessite: a fine dark mottle
+    g = rng.standard_normal((H // 3 + 1, W // 3 + 1)).astype(np.float32)
+    img = 0.17 + 0.035 * np.kron(g, np.ones((3, 3), np.float32))[:H, :W]
+    owner = np.full((H, W), -1, np.int16)                 # which family holds each pixel
+    a0 = rnd.uniform(0, 180)
+    dirs = [a0, a0 + 58 + rnd.uniform(-3, 3), a0 + 121 + rnd.uniform(-3, 3)]
+    tone = [0.78, 0.44, 0.60]                            # each family's brightness after the etch
+    drift = [rnd.uniform(0, 6.28) for _ in dirs]
+    for k in range(tries):
         i = rnd.randrange(3)
-        a = math.radians(dirs[i])
+        a = math.radians(dirs[i] + rnd.gauss(0, 0.6))
         ux, uy = math.cos(a), math.sin(a)
         cx, cy = rnd.uniform(0, w_mm), rnd.uniform(0, h_mm)
-        L = rnd.uniform(4, 26)
+        L = rnd.uniform(8, 40)
         wdt = rnd.uniform(*band)
-        # a window round the lamella to keep it cheap
         r = L / 2 + 1
         x0, x1 = max(int((cx - r) * px_per_mm), 0), min(int((cx + r) * px_per_mm), W)
         y0, y1 = max(int((cy - r) * px_per_mm), 0), min(int((cy + r) * px_per_mm), H)
@@ -38,23 +45,36 @@ def make(path, w_mm=70.0, h_mm=52.0, px_per_mm=24, seed=11, band=(0.45, 1.2), n=
         s = X * ux + Y * uy
         t = -X * uy + Y * ux
         inside = (np.abs(s) < L / 2) & (np.abs(t) < wdt / 2)
-        rim = (np.abs(s) < L / 2 + 0.05) & (np.abs(t) < wdt / 2 + 0.05) & ~inside
-        v = tone[i] + rnd.uniform(-0.05, 0.05)
+        own = owner[y0:y1, x0:x1]
+        # grow from the centre outward until the plate meets another: keep the run along s that is free
+        free = inside & (own < 0)
+        if free.sum() < 0.35 * max(inside.sum(), 1):
+            continue
+        # stop the plate at the first occupied pixel each way along its axis (a butt joint, not a crossing)
+        blocked = inside & (own >= 0)
+        if blocked.any():
+            sb = s[blocked]
+            lo = sb[sb < 0].max() if (sb < 0).any() else -L / 2
+            hi = sb[sb > 0].min() if (sb > 0).any() else L / 2
+            if hi - lo < 5.0:                            # too short a run: real plates are long, so skip it
+                continue
+            free = free & (s > lo + 0.05) & (s < hi - 0.05)
+        own[free] = i
+        v = tone[i] + 0.05 * math.sin(drift[i] + (cx * ux + cy * uy) * 0.15) + rnd.uniform(-0.025, 0.025)
         sub = img[y0:y1, x0:x1]
-        sub[inside] = v
-        e = edge[y0:y1, x0:x1]
-        e[rim] = 1.0
-        e[inside] = 0.0
-    img = np.where(edge > 0, 0.80, img)
-    # a slight sheen variation across the slice, as an etch never lands evenly
-    img *= (0.92 + 0.08 * np.sin(xx / w_mm * 3.0 + 0.7) * np.cos(yy / h_mm * 2.0))
+        sub[free] = v + 0.02 * rng.standard_normal(int(free.sum())).astype(np.float32)
+    # taenite: a hairline bright border wherever two plates of different families meet, or a plate meets plessite
+    o = owner
+    edge = np.zeros((H, W), bool)
+    edge[:, 1:] |= (o[:, 1:] != o[:, :-1])
+    edge[1:, :] |= (o[1:, :] != o[:-1, :])
+    img = np.where(edge, 0.9, img)
     out = (np.clip(img, 0, 1) * 255).astype(np.uint8)
-    import subprocess
     pgm = path + '.pgm'
-    with open(pgm, 'wb') as f:                  # written as PGM and converted (the system PIL is not this Python's)
+    with open(pgm, 'wb') as f:                   # written as PGM and converted (the system PIL is not this Python's)
         f.write(b'P5 %d %d 255\n' % (W, H))
         f.write(np.ascontiguousarray(out[::-1]).tobytes())
-    subprocess.run(['convert', pgm, path], check=True)
+    subprocess.run(['convert', pgm, '-blur', '0x0.6', path], check=True)
     import os
     os.remove(pgm)
     return path

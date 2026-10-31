@@ -84,8 +84,8 @@ def reset():
     cy.caustics_refractive = True
     cy.caustics_reflective = True
     cy.blur_glossy = 0.2
-    cy.max_bounces = 48
-    cy.transmission_bounces = 40
+    cy.max_bounces = 28
+    cy.transmission_bounces = 24
     cy.glossy_bounces = 16
     cy.diffuse_bounces = 4
     cy.volume_bounces = 2
@@ -200,7 +200,7 @@ def bevel_mod(ob, width_mm, segs=4, angle=40):
 
 def disc(name, r, z0, z1, mat, segs=160, bevel=0.8, x=0.0, y=0.0):
     bm = bmesh.new()
-    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=segs, radius1=r * MM, radius2=r * MM,
+    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=True, segments=segs, radius1=r * MM, radius2=r * MM,
                           depth=(z1 - z0) * MM)
     bmesh.ops.translate(bm, vec=(x * MM, y * MM, (z0 + z1) / 2 * MM), verts=bm.verts)
     ob = _obj_from_bm(name, bm, mat, smooth=False)
@@ -368,7 +368,7 @@ def cove(color='#1A1A1C', rough=0.55, width=2000, depth=1400, height=1200, radiu
         for j in range(len(prof) - 1):
             bm.faces.new((grid[i][j], grid[i + 1][j], grid[i + 1][j + 1], grid[i][j + 1]))
     bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
-    ob = _obj_from_bm('cove', bm, mat or principled('cove', color, rough=rough, spec=0.3))
+    ob = _obj_from_bm('cove', bm, mat or principled('cove', color, rough=rough, spec=0.0))
     for f in ob.data.polygons:
         if f.normal.z < 0 and f.normal.y > -0.5:
             pass
