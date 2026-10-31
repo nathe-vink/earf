@@ -29,10 +29,12 @@ before Easter, 28 March 2027, when many people travel.)
 - **Lamps and Mantle:**
   - working and **photographable by mid-February** (lamps `first-articles.md`, f5426f0f);
   - the January dates no longer press on the moulds' pre-Christmas window, so the lamps gain slack.
-- **The Tropos pair:**
-  - the first laminated horn about 18 December;
-  - the pair built and playing in January (horn `make/schedule.md`, a1c61f27, counted to January);
-  - **measured** a few weeks after that (est.).
+- **The Tropos pair** (horn lane, re-based for spring at ec252318):
+  - no purchase orders before 16 November;
+  - the first laminated horn about **15 January**;
+  - the pair assembled about **5–12 February**, with about 5 weeks of float to 18 March;
+  - a formed-horn pair about 26 February – 5 March, only just in time for 18 March;
+  - the custom deep colour lot is **not** possible for March, so the pair is in stock sheet and its captions say so.
 - **The shoot and the debut.** With the debut in spring, the **studio shoot comes before it**, so the debut night is
   photographed for itself, not as the first pictures (`photo/PRODUCT-SHOOT.md`).
 - **Kickstarter allows no photorealistic renders** (`kickstarter/README.md`, the hardware rules, read 31 Oct 2026). So
@@ -46,7 +48,8 @@ before Easter, 28 March 2027, when many people travel.)
 | By **31 Dec 2026** | **HIGH END Vienna Start-Up application** submitted (owner) | Shown there: the pair, Mantle, the lamps; the Session 00 test pressings if they've come |
 | 21–24 Jan | **FOG week, no show**: meetings (below) | |
 | By 8 Feb | Decide Milan: the Fuorisalone package, or visit only (est.: visit only; no money for a stand) | |
-| **Mon 15 – Fri 19 Feb** | **The studio shoot** (and the Kickstarter film, same week) | `photo/PRODUCT-SHOOT.md`, `kickstarter/FILM.md` |
+| **Mon 15 – Fri 19 Feb** | **The studio shoot** (and the Kickstarter film, same week). **It holds** with the pair done as late as 12 February: the lamps and Mantle don't wait for it, and the pair needs only a clean and a day's settling. **Shoot the lamps, Mantle and the samples first, and Tropos last (Thu–Fri)** | `photo/PRODUCT-SHOOT.md`, `kickstarter/FILM.md` |
+| *Fallback:* **Mon 22 – Fri 26 Feb** | **Only if the pair slips past 12 Feb**, a Tropos-only day in this week. The lamps keep the 15–19 Feb shoot, so the **pre-launch page by 1 March** (lamps only) and the **invitations by 25 February** (they need no Tropos photograph) don't move. What moves: the **embargoed print pitches**, sent by 1 March with the lamp photographs and followed by the pair's picture by about 5 March; and the partner packs for Klipsch, which wait for the pair's | est. |
 | By 1 Mar | **The Kickstarter pre-launch page and the waiting list open**, with the studio photographs. **Embargoed print pitches** go out (Wallpaper\* exclusive; Monocle, Dwell, Sunset), lifting at the debut | `press/releases/PITCHES-PRINT.md` |
 | By 25 Feb | Invitations out (about 3 weeks ahead); the alcohol permit, if at Fort Mason (6 weeks ahead: by **4 Feb**) | `photo/RUN-OF-SHOW.md` |
 | **Thu 18 Mar** | **The debut**, with **Session 00** opening it (recorded) | Four weeks after the shoot |
@@ -111,6 +114,6 @@ before Easter, 28 March 2027, when many people travel.)
   than ahead of it.
 - **Easter and the schedule:** it avoids Easter week, and leaves four weeks between the mid-February shoot and the night.
 
-**The risk:** the Tropos pair must be playing by the shoot (mid-February) and measured by early March. If the pair slips
+**The risk:** the Tropos pair is assembled about 5–12 February (horn lane ec252318) and must be measured by early March. The shoot holds; if the pair slips, only its photographs move a week (the fallback above). If the pair slips
 past February, 29 April buys a month. But it stacks the debut, a re-dated Kickstarter (11 May – 10 June), Vienna and
 the press into one fortnight, and it misses the planned press window.
