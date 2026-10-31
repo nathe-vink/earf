@@ -38,3 +38,12 @@ concrete scan without plank seams, and the windows opposite as rooms, not cards.
 **The Amsterdam finals:** quay p3 (4.5/5.0) and shadow p3 (5.5/5.0), 1200 x 800 proofs. The shadow p3 is the first frame of
 round 43 to reach 5.5 with one critic. The next look is a set pass: modelled canal houses, a night-blue grade, a cooler
 tighter spot (the p2 shadow's crispness at p3's warmth), bollards, a bicycle, figures.
+| duel | Amsterdam: quay | p3 against s2 (look 2), both orders | s2 (clear) | s2 (clear) | s2 reads as a specific Amsterdam canal: stepped and neck gables against a blue night sky, mullioned windows lit unevenly, a figure for scale; p3 a flat gridded block under amber haze. s2's flaw: the white spot disc. | s2 |
+| duel | Amsterdam: shadow | p3 against s2 (look 2), both orders | s2 (clear) | s2 (clear) | s2's cool spot lays the violet, rose and amber discs on the paving in a legible pool; p3's shadow a brownish smear under an orange cast. s2's flaws: a hard pool edge, the rope ring. | s2 |
+
+**Look 2 (the set pass, two rounds, the coordinator's limit):** s1 judged quay 4.5/4.0, shadow 4.5/4.5 (peg figures on this quay,
+the ring caging the globe, a smooth tile quay, the houses cropped); s2 judged quay 5.0/5.0, shadow 5.5/5.0, and won all
+four duels against p3. **The Amsterdam finals are now s2** (1200 x 800 proofs). Converged asks left for a third look, not
+run: the near lamp's pool on the left foreground brighter than the work (140 W to about 50 W); the spot warmer (3800 to
+4000 K) and stronger so the shadow is the brightest ground; brick and window interiors still read flat at 1:1; real
+people instead of silhouettes; finer water ripple; the rope ring thicker or gone; the bicycle out from behind the globe.
