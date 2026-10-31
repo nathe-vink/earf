@@ -260,8 +260,17 @@ def macro_core():
     z = s['product']['instances'][0]['position'][2]
     s['title'] = 'Core in Ember, its base close (the campaign)'
     s['size'] = [2000, 1600]
-    s['camera'] = {'position': [0.20, -0.36, z + 0.10], 'target': [0.0, 0.0, z + 0.05], 'lens_mm': 100, 'level': False,
-                   'fstop': 5.6, 'focus': [0.0, -0.06, z + 0.04]}
+    # critic r1 (4.5): c1/c2 f/13, focus on the ring's lip (all soft); c3 exposure -0.35 (the red on the shoulder);
+    # c4 the key halved, c5 the dome 0.12 (the ball lit, not glowing); c6 a reflection-only strip on the base; c7 80 mm
+    # (the base's foot cut)
+    s['camera'] = {'position': [0.20, -0.36, z + 0.10], 'target': [0.0, 0.0, z + 0.05], 'lens_mm': 80, 'level': False,
+                   'fstop': 13, 'focus': [0.0, -0.045, z + 0.055]}
+    s['render']['exposure'] = round(s['render']['exposure'] - 0.35, 3)
+    s['lights']['key']['irradiance'] = 0.3
+    s['sky']['strength'] = 0.12
+    s['lights']['basestrip'] = {'type': 'panel', 'size_m': [0.08, 0.3], 'position': [-0.22, -0.3, z + 0.03],
+                                'target': [0.0, 0.0, z + 0.02], 'strength': 4.0, 'color': '#FFFFFF',
+                                'ramp': {'axis': 'z', 'at_m': [z - 0.09, z + 0.16], 'values': [0.2, 1.0]}}
     return s
 
 
