@@ -6,16 +6,16 @@
  ],
  "camera": {
   "position": [
-   14.9,
-   2.75,
-   1.15
+   15.3,
+   2.55,
+   1.1
   ],
   "target": [
    19.1,
    4.85,
-   1.05
+   1.1
   ],
-  "lens_mm": 28,
+  "lens_mm": 32,
   "level": true,
   "fstop": 2.8,
   "focus": [
@@ -79,7 +79,7 @@
     "windows_lit": 0.3,
     "window_glow": 0.25,
     "glass_gloss": 0.3,
-    "band_glow": 0.12,
+    "band_glow": 0.1,
     "interior": true
    },
    {
@@ -462,6 +462,47 @@
     "votives": [],
     "matchbooks": [],
     "coats": []
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/planet/r40/kit40.py",
+    "fn": "figures",
+    "people": [
+     {
+      "pose": "chair",
+      "at": [
+       15.43,
+       6.56,
+       0
+      ],
+      "heading": -12.0,
+      "seat": 0.4,
+      "cloth": "#1E1E1D",
+      "skin": "#6E4A36",
+      "hair": "#6A5038",
+      "seed": 449,
+      "move": [
+       0.02,
+       0.015,
+       0.004
+      ],
+      "spin": 3.0,
+      "head": [
+       0.16,
+       0.09,
+       0.03,
+       30.0
+      ],
+      "arms": [
+       0.06,
+       0.04,
+       0.03,
+       10.0
+      ]
+     }
+    ],
+    "shutter": 0.8
    }
   ]
  },
@@ -629,17 +670,17 @@
    "type": "spot",
    "position": [
     7.7,
-    2.64,
+    2.79,
     3.9124000000000003
    ],
    "target": [
     7.7,
-    2.3400000000000003,
-    0.95
+    0.05,
+    1.6
    ],
-   "power_w": 12.0,
-   "cone_deg": 24.0,
-   "blend": 0.3,
+   "power_w": 20.0,
+   "cone_deg": 30.0,
+   "blend": 0.5,
    "radius_m": 0.03,
    "color": 2700,
    "camera": false
@@ -648,17 +689,17 @@
    "type": "spot",
    "position": [
     8.85,
-    2.64,
+    2.79,
     3.9124000000000003
    ],
    "target": [
     8.85,
-    2.3400000000000003,
-    0.95
+    0.05,
+    1.6
    ],
-   "power_w": 12.0,
-   "cone_deg": 24.0,
-   "blend": 0.3,
+   "power_w": 20.0,
+   "cone_deg": 30.0,
+   "blend": 0.5,
    "radius_m": 0.03,
    "color": 2700,
    "camera": false
@@ -667,17 +708,17 @@
    "type": "spot",
    "position": [
     10.0,
-    2.64,
+    2.79,
     3.9124000000000003
    ],
    "target": [
     10.0,
-    2.3400000000000003,
-    0.95
+    0.05,
+    1.6
    ],
-   "power_w": 12.0,
-   "cone_deg": 24.0,
-   "blend": 0.3,
+   "power_w": 20.0,
+   "cone_deg": 30.0,
+   "blend": 0.5,
    "radius_m": 0.03,
    "color": 2700,
    "camera": false
@@ -686,17 +727,17 @@
    "type": "spot",
    "position": [
     11.15,
-    2.64,
+    2.79,
     3.9124000000000003
    ],
    "target": [
     11.15,
-    2.3400000000000003,
-    0.95
+    0.05,
+    1.6
    ],
-   "power_w": 12.0,
-   "cone_deg": 24.0,
-   "blend": 0.3,
+   "power_w": 20.0,
+   "cone_deg": 30.0,
+   "blend": 0.5,
    "radius_m": 0.03,
    "color": 2700,
    "camera": false
@@ -764,39 +805,39 @@
   "stack0": {
    "type": "spot",
    "position": [
-    17.9,
-    3.69,
+    17.4,
+    3.59,
     3.35
    ],
    "target": [
     18.9,
     3.19,
-    1.1
+    1.0
    ],
-   "power_w": 55.0,
-   "cone_deg": 24.0,
-   "blend": 0.6,
+   "power_w": 70.0,
+   "cone_deg": 34.0,
+   "blend": 0.8,
    "radius_m": 0.03,
-   "color": 2600,
+   "color": 2700,
    "camera": false
   },
   "stack1": {
    "type": "spot",
    "position": [
-    17.9,
-    5.49,
+    17.4,
+    5.59,
     3.35
    ],
    "target": [
     18.9,
     5.99,
-    1.1
+    1.0
    ],
-   "power_w": 55.0,
-   "cone_deg": 24.0,
-   "blend": 0.6,
+   "power_w": 70.0,
+   "cone_deg": 34.0,
+   "blend": 0.8,
    "radius_m": 0.03,
-   "color": 2600,
+   "color": 2700,
    "camera": false
   },
   "mother": {
@@ -807,15 +848,15 @@
     3.35
    ],
    "target": [
-    18.400000000000002,
-    4.29,
-    0.0
+    18.8,
+    4.39,
+    0.3
    ],
-   "power_w": 80.0,
-   "cone_deg": 16.0,
-   "blend": 0.2,
-   "radius_m": 0.01,
-   "color": 3000,
+   "power_w": 45.0,
+   "cone_deg": 26.0,
+   "blend": 0.8,
+   "radius_m": 0.15,
+   "color": 2700,
    "camera": false
   },
   "trap": {
@@ -854,7 +895,7 @@
     5.0,
     3.5
    ],
-   "irradiance": 0.03,
+   "irradiance": 0.07,
    "color": 2700,
    "camera": false
   },
@@ -888,7 +929,7 @@
    7.57,
    3.9124000000000003
   ],
-  "density": 0.0008,
+  "density": 0.0025,
   "anisotropy": 0.3,
   "color": "#FFFFFF"
  },
@@ -896,7 +937,7 @@
   "samples": 256,
   "adaptive": 0.02,
   "denoise": true,
-  "clamp": 10,
+  "clamp": 4.0,
   "bounces": 10,
   "view": "AgX",
   "look": "AgX - Medium High Contrast",

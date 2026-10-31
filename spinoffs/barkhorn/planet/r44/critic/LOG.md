@@ -148,3 +148,26 @@ As photographs, the round 39 and round 41 heroes still win. Those frames had fiv
 - board-to-board oak;
 - props;
 - the lantern seen through its open porch from the bar, which shows the Tropos.
+
+## Look 2 (the picture pass): round 1, p2 proofs
+
+Look 2 changed the plan and the model (the in-line porch, the pair facing the door, a yellower band source, downlight lenses, per-board oak, a street, people), so the count restarts. p1 was checked before judging and fixed without a critic: the band at 0.3 still clipped to cream, the near guests read as mannequins, the lantern's near listener read as a dummy, the porch view at 24 mm was half door leaf. The critics judged p2 (`renders/2026-10-31/barkhorn/planet44/look2/*-p2.png`).
+
+| View | Critic a | Critic b | Verdicts | If fixed |
+|---|---|---|---|---|
+| street p2 | 4.5 | 4.5 | iterate / iterate | 6.8 / 6.5 |
+| bar p2 | 5.5 | 5.0 | iterate / iterate | 7.0 / 7.0 |
+| porch p2 (new) | 3.5 | 4.5 | rethink / iterate | 6.5 / 7.5 |
+| lantern p2 | 4.5 | 5.0 | rethink / iterate | 6.5 / 7.0 |
+
+JSONs: `critic/L2R1-*.json`.
+
+**Converged:**
+- The band reads as a flat beige or gold lightbox. Both bar critics want it dimmer (0.05–0.06), both street critics want it more amber: the source color, not its level, is the fault.
+- The figures read as translucent ghosts or mannequins at shutter 1.0. Three critics ask for a shorter shutter (0.15–0.35) with smaller movements, backs to the camera.
+- The pair's covers clip pink while their bodies sit dark: wider, softer spots on the cabinets.
+- Mother's spot lands as a hard white ellipse on the floor (all four lantern and porch critics).
+- The right wall in the bar and street is a dead dark plane: scallops on the plaster above the banquette.
+- The porch view shows mostly door jamb, with no bar and no band (both critics: pull back to the bar).
+
+**Out of scope throughout:** Mother EARF's multicolored rims (a product as placed), the horn's reflections and the cabinets' edges (the speaker's geometry).

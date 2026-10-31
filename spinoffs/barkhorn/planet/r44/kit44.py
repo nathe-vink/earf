@@ -55,6 +55,7 @@ def acrylic(bpy, name, Ti=(0.995, 0.995, 0.995), d_ref=0.003, rough=0.015):
 # measured on the chosen sheet): red 0.965, green 0.92, blue 0.84. Seen edge-on through a fin's 60 mm depth that is
 # about 0.49 / 0.19 / 0.03: amber (a darker tint goes black-red over that path, the p1 look)
 SMOKE_TI = (0.985, 0.965, 0.93)   # look 2: lighter, so the band reads amber under AgX (p4: salmon)
+AMBER_TI = (0.99, 0.93, 0.78)     # look 2 r1: the band a flat beige lightbox; cast amber fins color it by their depth
 
 
 def terrazzo(bpy, name, ground='#3E3A36', chips=('#A39C90', '#706B64', '#38342F', '#8C8274'), accent=(),
@@ -365,8 +366,8 @@ def lantern(bpy, p, objs):
     cap.box(x0 - 0.035, y0 - 0.035, bz1 - 0.02, x1, y1, bz1)
     cap.box(x0 - 0.035, y0 - 0.035, bz0 - 0.008, x1, y0 + 0.05, bz0)
     cap.box(x0 - 0.035, y0 - 0.035, bz0 - 0.008, x0 + 0.05, y1, bz0)
-    objs.append(fins.object(bpy, acrylic(bpy, 'acrylic-smoke-fin', SMOKE_TI)))
-    objs.append(diff.object(bpy, emitter(bpy, 'h44-band-led', '#FFB040', p.get('band_glow', 0.6))))
+    objs.append(fins.object(bpy, acrylic(bpy, 'acrylic-amber-fin', AMBER_TI if p.get('amber_fins', True) else SMOKE_TI)))
+    objs.append(diff.object(bpy, emitter(bpy, 'h44-band-led', p.get('band_color', '#FFC878'), p.get('band_glow', 0.6))))
     objs.append(cap.object(bpy, K.blackened_steel(bpy)))
     # the lit foot: a 100 mm recess with a warm line washing the floor
     # (a strip along the two seen faces only: a slab across the footprint covered the room's floor, the p2 look)

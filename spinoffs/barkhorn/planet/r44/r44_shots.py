@@ -38,11 +38,21 @@ VIEWS = {
     # ceiling a void; the table a black slab on the axis; no glass in the street view; empty): white balance 3200 K, the
     # band 0.8 in deep amber, the foot line 9; lines 1.0; counter spots 22 W at 14 deg; fill 0.05; the shop table moved
     # off the axis in the plan; the street camera back so the mullion and the window plinth frame the left; glasses
-    'street': dict(camera={'position': [-3.2, 3.0, 1.50], 'target': [13.0, 4.4, 1.95], 'lens_mm': 35, 'level': True,
-                           'fstop': 4.0, 'focus': [7.0, 4.4, 1.2]}, exposure=2.6, haze=0.008, shutter=1.0, people='bar',
-                   room={'glass_gloss': 0.6}),
-    'bar': dict(camera={'position': [4.9, 2.55, 1.45], 'target': [13.0, 4.3, 2.0], 'lens_mm': 28, 'level': True,
-                        'fstop': 4.0, 'focus': [11.0, 4.5, 1.6]}, exposure=3.0, haze=0.008, shutter=1.0, people='bar-far'),   # p1: the near guests read as mannequins
+    # look 2 r1 (street 4.5/4.5): the band a flat beige panel (amber fins now); ghosts at shutter 1.0; a dead right pier;
+    # the frame too dark (median 16); the plinth the brightest mass: the camera 0.6 m toward the axis, exposure 3.0,
+    # shutter 0.3 with four guests, fill 0.12, haze 0.015, the shop wall 10 W
+    'street': dict(camera={'position': [-3.2, 3.6, 1.50], 'target': [13.0, 4.2, 1.90], 'lens_mm': 35, 'level': True,
+                           'fstop': 4.0, 'focus': [7.0, 4.4, 1.2]}, exposure=3.0, haze=0.015, shutter=0.8, people='street',
+                   lights={'fill': {'irradiance': 0.12}, 'shop': {'power_w': 10.0}, 'table': {'power_w': 5.0}},
+                   room={'glass_gloss': 0.6, 'doors_open': False}),   # r1: the porch shut (a pair seen cut by its jamb)
+    # look 2 r1 (bar 5.5/5.0): the pair a sliver behind the porch leaf; the band a flat lightbox; the porch head the
+    # hottest surface; ghost figures; the right wall dead; no pools on the top: the camera toward the axis at 32 mm so
+    # the porch frames the pair; the baffle graze 0.3; shutter 0.35; the banquette spots wash the plaster; the counter
+    # spots 60 W at 22 deg; clamp 4
+    'bar': dict(camera={'position': [5.2, 3.35, 1.40], 'target': [13.0, 3.95, 1.70], 'lens_mm': 32, 'level': True,
+                        'fstop': 4.0, 'focus': [11.0, 4.0, 1.6]}, exposure=3.0, haze=0.006, shutter=0.8, people='bar-far', room={'doors_open': False},
+                lights={'baffle': {'irradiance': 0.3}, 'ctr': {'power_w': 60.0, 'cone_deg': 22.0}},
+                render={'clamp': 4.0}),
     # p4 (p3 judged 4.5/5.0, converged: too bright and even; the pair darker than the walls; Mother's spot a white pool
     # and a haze shaft; the floor camouflage; coarse terrazzo; no life; a flat symmetric view with a cut board): seated
     # on the bench at 32 mm, a chair in the foreground; exposure 3.9; fill 0.03, trap 0.2; the pair 55 W at 24 deg;
@@ -50,13 +60,20 @@ VIEWS = {
     # look 2 (the coordinator's converged list after round 3: the band amber not salmon, glass with real reflections,
     # real fittings and pools on the bar top, oak board by board, people, a view through the open porch): the room
     # reversed so the pair face the door; the lantern from the listeners' side; the porch view new
-    'lantern': dict(camera={'position': [14.9, 2.75, 1.15], 'target': [19.1, 4.85, 1.05], 'lens_mm': 28, 'level': True,
+    # look 2 r1 (lantern 4.5/5.0): the covers clip pink while the bodies sit dark; Mother's spot a hard white ellipse
+    # and a scallop on the wall; the plinths crushed; a dead chair slab across the bottom; empty: the camera a step in
+    # and lower at 32 mm; fill 0.07; haze 0.0025; one listener, back to the lens, at a short shutter; a glass
+    'lantern': dict(camera={'position': [15.3, 2.55, 1.10], 'target': [19.1, 4.85, 1.10], 'lens_mm': 32, 'level': True,
                             'fstop': 2.8, 'focus': [P.STACKS[0][0], P.STACKS[0][1], 1.0]},
-                    exposure=3.9, haze=0.0008, room={'interior': True}),   # p1's near listener read as a dummy: none here
+                    exposure=3.9, haze=0.0025, room={'interior': True}, people='lantern-one', shutter=0.8,
+                    lights={'infill': {'irradiance': 0.07}}, render={'clamp': 4.0}),
     # test: from x 10.0 the open leaves of pair 1 filled half the frame; now from between them, at eye height
-    'porch': dict(camera={'position': [11.25, 3.85, 1.45], 'target': [18.9, 4.30, 1.40], 'lens_mm': 32, 'level': True,
+    # look 2 r1 (porch 3.5/4.5): half the frame door jamb, no bar, no band: back to x 9.6 (at 8.8 pair 2's leaves cut
+    # the speakers), 24 mm shifted up to take the band
+    'porch': dict(camera={'position': [9.6, 3.62, 1.35], 'target': [18.9, 4.15, 3.1], 'lens_mm': 24, 'level': True,
                           'fstop': 4.0, 'focus': [17.0, 4.6, 1.1]},
-                  exposure=3.2, haze=0.006, shutter=1.0, people='porch'),
+                  exposure=3.8, haze=0.006, shutter=0.8, people='porch', render={'clamp': 4.0},
+                  lights={'infill': {'irradiance': 0.08}}),
 }
 
 
@@ -65,7 +82,7 @@ KIT40 = 'spinoffs/barkhorn/planet/r40/kit40.py'
 CLOTH = ['#14171E', '#0E0D0C', '#22100E', '#181716', '#1A1B15', '#2A2018', '#161C26', '#121110', '#201813', '#1E1E1D']
 SKIN = ['#9A7462', '#7E5640', '#5E3C2A', '#46301F', '#8A6650', '#A27E6A', '#6E4A36']
 HAIR = ['#1A1410', '#3A2A1E', '#0E0C0A', '#6A5038', '#2A2420', '#8A7A6A', '#151210']
-SIT = dict(move=[0.035, 0.025, 0.005], spin=5.0, head=[0.16, 0.09, 0.03, 30.0], arms=[0.14, 0.08, 0.06, 20.0])
+SIT = dict(move=[0.02, 0.015, 0.004], spin=3.0, head=[0.10, 0.06, 0.02, 22.0], arms=[0.10, 0.06, 0.05, 16.0])   # r1: ghosts at full travel
 
 
 def person(i, pose, at, heading, seat=0.46, **k):
@@ -96,7 +113,7 @@ LANT_PEOPLE = [   # listeners: still, so a slower drift than at the bar
     person(10, 'bench', [P.BENCH['x0'] + 0.30, P.INNER['y0'] + 0.62, 0], 8.0, P.BENCH['z'], move=[0.02, 0.015, 0.004],
            spin=3.0, head=[0.16, 0.09, 0.03, 30.0], arms=[0.06, 0.04, 0.03, 10.0]),
 ]
-PEOPLE = {'bar': BAR_PEOPLE, 'bar-far': [BAR_PEOPLE[i] for i in (2, 3, 7)], 'lantern': LANT_PEOPLE, 'porch': LANT_PEOPLE[:2]}
+PEOPLE = {'street': [BAR_PEOPLE[i] for i in (2, 3, 5, 6)], 'lantern-one': [LANT_PEOPLE[1]], 'bar': BAR_PEOPLE, 'bar-far': [BAR_PEOPLE[i] for i in (2, 3, 7)], 'lantern': LANT_PEOPLE, 'porch': LANT_PEOPLE[:2]}
 
 
 def _face(x, y, tx, ty):
@@ -112,7 +129,7 @@ def spot(pos, tgt, w, cone, k=2700, blend=0.6, radius=0.03):
 def scene():
     S = P.SHOP_WALL
     props = [{'kind': 'kit', 'shape': 'ext', 'path': KIT, 'fn': 'house', 'windows_lit': 0.3, 'window_glow': 0.25,
-              'glass_gloss': 0.3, 'band_glow': 0.12}]   # look 2: #FFB040 at 0.6 clipped to cream under AgX; 0.3 still cream (p1)
+              'glass_gloss': 0.3, 'band_glow': 0.10}]   # look 2: #FFB040 at 0.6 clipped to cream under AgX; 0.3 still cream (p1)
     shelves = [0.30, 0.78, 1.26, 1.74, 2.22]
     # the Cores along the shop's shelves, in the eight tints, some unlit
     xs = [S['x0'] + 0.35 + 0.30 * i for i in range(8)]
@@ -155,7 +172,7 @@ def scene():
     for i, x in enumerate(P.LOW_SEATS + P.STOOLS[::2]):                # the counter
         lights[f'ctr{i}'] = spot([x, P.COUNTER['y0'] + 0.25, zc], [x, P.COUNTER['y0'] + 0.05, 1.07], 38.0, 18.0, blend=0.3)
     for i, x in enumerate(P.BANQ_TABLES):                             # the banquette tables
-        lights[f'bq{i}'] = spot([x, P.BANQ['y1'] + 0.40, zc], [x, P.BANQ['y1'] + 0.10, 0.95], 12.0, 24.0, blend=0.3)
+        lights[f'bq{i}'] = spot([x, P.BANQ['y1'] + 0.55, zc], [x, 0.05, 1.6], 20.0, 30.0, blend=0.5)   # r1: scallops on the plaster
     lights['route'] = {'type': 'area', 'position': [8.0, 0.72, H - 0.02], 'target': [8.0, 0.72, 0.0], 'size_m': [10.0, 0.1],
                        'irradiance': 0.1, 'color': 2700, 'camera': False}
     lights['fill'] = {'type': 'area', 'position': [7.0, W_ / 2, H - 0.3], 'target': [7.0, W_ / 2, 0.0], 'size_m': [10.0, 4.0],
@@ -168,10 +185,10 @@ def scene():
     # trap's graze, a low fill
     zi = I['h'] - 0.05
     for i, (x, y) in enumerate(P.STACKS):
-        lights[f'stack{i}'] = spot([x - 1.0, y + (0.5 if y < YC else -0.5), zi], [x, y, 1.1], 55.0, 24.0, k=2600)   # on the fronts
+        lights[f'stack{i}'] = spot([x - 1.5, y + (0.4 if y < YC else -0.4), zi], [x, y, 1.0], 70.0, 34.0, k=2700, blend=0.8)   # r1: wide and soft on the cabinets
     M = P.MOTHER
-    lights['mother'] = spot([M['x'] + 0.35, M['y'] + 0.45, zi], [M['x'] - 0.95, M['y'] - 0.30, 0.0], 80.0, 16.0, k=3000,   # her shadow toward the seats
-                            blend=0.2, radius=0.01)
+    lights['mother'] = spot([M['x'] + 0.35, M['y'] + 0.45, zi], [M['x'] - 0.55, M['y'] - 0.20, 0.3], 45.0, 26.0, k=2700,   # r1: soft, through her
+                            blend=0.8, radius=0.15)
     lights['trap'] = {'type': 'area', 'position': [P.TRAP['x0'] - 0.25, YC, zi - 0.05], 'target': [P.TRAP['x0'], YC, 1.0],
                       'size_m': [0.15, 4.6], 'irradiance': 0.2, 'color': 2600, 'camera': False}
     lights['infill'] = {'type': 'area', 'position': [(I['x0'] + I['x1']) / 2, YC, zi - 0.1], 'target': [(I['x0'] + I['x1']) / 2, YC, 0.0],
