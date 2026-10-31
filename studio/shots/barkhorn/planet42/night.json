@@ -6,16 +6,16 @@
  ],
  "camera": {
   "position": [
-   14.9,
-   3.35,
-   1.68
+   14.2,
+   3.0,
+   1.32
   ],
   "target": [
    2.0,
-   2.7,
-   1.4
+   2.9,
+   1.25
   ],
-  "lens_mm": 28,
+  "lens_mm": 32,
   "level": true,
   "fstop": 5.6,
   "focus": [
@@ -125,7 +125,7 @@
     "name_glow": 0.25,
     "niche_strip": 6.0,
     "sink_glow": 0.8,
-    "screen_glow": 0.03,
+    "screen_glow": 0.015,
     "screen_tint": "#FFA060",
     "screen_gap": 0.04,
     "screen_rough": 0.22,
@@ -382,9 +382,9 @@
     ],
     "cable": false,
     "cartridge": "none",
-    "lamp_w": 0.252,
+    "lamp_w": 0.15,
     "lamp_k": 2700,
-    "shade_glow": 0.0067,
+    "shade_glow": 0.0035,
     "noshadow": "shell|liner|skin",
     "materials": {
      "liner": {
@@ -592,7 +592,7 @@
     "size": 1.25,
     "t": 0.025,
     "core": 0.0,
-    "rim": 0.025,
+    "rim": 0.015,
     "radius": 0.07,
     "ceiling": 3.4,
     "heading": 55.0,
@@ -609,6 +609,15 @@
     "shape": "ext",
     "path": "spinoffs/barkhorn/planet/r39/kit39.py",
     "fn": "retouch"
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/planet/r42/kit42.py",
+    "fn": "flatten",
+    "match": "Concrete044A",
+    "contrast": -0.45,
+    "mean": 0.15
    }
   ]
  },
@@ -636,7 +645,7 @@
     0.35,
     0.35
    ],
-   "irradiance": 1.0,
+   "irradiance": 3.0,
    "color": 2900,
    "spread_deg": 90.0,
    "receivers": [
@@ -675,7 +684,7 @@
     0.3,
     0.3
    ],
-   "irradiance": 4.0,
+   "irradiance": 3.0,
    "color": 2900,
    "camera": false,
    "receivers": [
@@ -714,7 +723,7 @@
     0.35,
     0.35
    ],
-   "irradiance": 1.0,
+   "irradiance": 3.0,
    "color": 2900,
    "spread_deg": 90.0,
    "receivers": [
@@ -753,7 +762,7 @@
     0.3,
     0.3
    ],
-   "irradiance": 4.0,
+   "irradiance": 3.0,
    "color": 2900,
    "camera": false,
    "receivers": [
@@ -788,8 +797,8 @@
     4.2700000000000005,
     1.07
    ],
-   "power_w": 32.0,
-   "cone_deg": 20.0,
+   "power_w": 20.0,
+   "cone_deg": 24.0,
    "blend": 0.5,
    "radius_m": 0.07,
    "color": 2400,
@@ -807,8 +816,8 @@
     4.2700000000000005,
     1.07
    ],
-   "power_w": 32.0,
-   "cone_deg": 20.0,
+   "power_w": 20.0,
+   "cone_deg": 24.0,
    "blend": 0.5,
    "radius_m": 0.07,
    "color": 2400,
@@ -826,8 +835,8 @@
     4.2700000000000005,
     1.07
    ],
-   "power_w": 32.0,
-   "cone_deg": 20.0,
+   "power_w": 20.0,
+   "cone_deg": 24.0,
    "blend": 0.5,
    "radius_m": 0.07,
    "color": 2400,
@@ -845,8 +854,8 @@
     4.2700000000000005,
     1.07
    ],
-   "power_w": 32.0,
-   "cone_deg": 20.0,
+   "power_w": 20.0,
+   "cone_deg": 24.0,
    "blend": 0.5,
    "radius_m": 0.07,
    "color": 2400,
@@ -884,7 +893,7 @@
     5.6
    ],
    "power_w": 8.0,
-   "radius_m": 0.15,
+   "radius_m": 0.6,
    "color": 2700
   },
   "street1": {
@@ -895,7 +904,7 @@
     5.6
    ],
    "power_w": 8.0,
-   "radius_m": 0.15,
+   "radius_m": 0.6,
    "color": 2700
   },
   "rw0": {
@@ -986,8 +995,8 @@
     1.9,
     0.8
    ],
-   "power_w": 170.0,
-   "cone_deg": 30.0,
+   "power_w": 220.0,
+   "cone_deg": 24.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500,
@@ -1005,8 +1014,8 @@
     4.199999999999999,
     0.8
    ],
-   "power_w": 170.0,
-   "cone_deg": 30.0,
+   "power_w": 220.0,
+   "cone_deg": 24.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500,
@@ -1199,7 +1208,7 @@
     5.7162,
     1.866
    ],
-   "power_w": 80.0,
+   "power_w": 120.0,
    "cone_deg": 26.0,
    "blend": 0.8,
    "radius_m": 0.03,
@@ -1218,7 +1227,7 @@
     5.7162,
     1.866
    ],
-   "power_w": 80.0,
+   "power_w": 120.0,
    "cone_deg": 26.0,
    "blend": 0.8,
    "radius_m": 0.03,
@@ -1275,8 +1284,8 @@
     1.15,
     2.47
    ],
-   "power_w": 135.0,
-   "cone_deg": 20.0,
+   "power_w": 180.0,
+   "cone_deg": 24.0,
    "blend": 0.35,
    "radius_m": 0.02,
    "color": 3000,
@@ -1479,7 +1488,7 @@
   "bounces": 10,
   "view": "AgX",
   "look": "AgX - Medium High Contrast",
-  "exposure": 4.4,
+  "exposure": 4.2,
   "white_balance_k": 3000,
   "white_balance_tint": -2.0
  },

@@ -27,11 +27,22 @@ VIEWS = {
     'listening': dict(camera={'position': [11.25, 2.70, 1.30], 'target': [16.5, 3.05, 1.00], 'lens_mm': 26, 'level': True,
                               'fstop': 4.0, 'focus': [16.0, 3.0, 1.0]}, exposure=4.8),
     # the room at night from the back, the line playing: past the tubs to the counter, the globe and the street
-    'night': dict(camera={'position': [14.9, 3.35, 1.68], 'target': [2.0, 2.7, 1.40], 'lens_mm': 28, 'level': True,
-                          'fstop': 5.6, 'focus': [7.0, 3.0, 1.2]}, exposure=4.4),
+    # p2 (critics 4.5/5.0, converged): forward of the jambs at seated height, 32 mm; the floor's stains calmed; the
+    # pendants' downlights softer; the Cores and Mother's rims down, its spot up; the screens dimmer; the speakers lit
+    'night': dict(camera={'position': [14.2, 3.0, 1.32], 'target': [2.0, 2.9, 1.25], 'lens_mm': 32, 'level': True,
+                          'fstop': 5.6, 'focus': [7.0, 3.0, 1.2]}, exposure=4.2,
+                  lights={'pend': {'power_w': 20.0, 'cone_deg': 24.0}, 'spk': {'irradiance': 3.0}, 'barspk': {'power_w': 120.0},
+                          'altar': {'power_w': 220.0, 'cone_deg': 24.0}, 'mother-spot': {'power_w': 180.0, 'cone_deg': 24.0},
+                          'street': {'radius_m': 0.6}},
+                  orb={'lamp_w': 0.15, 'shade_glow': 0.0035}, mother={'rim': 0.015}, room={'screen_glow': 0.015},
+                  props=[{'kind': 'kit', 'shape': 'ext', 'path': KIT42, 'fn': 'flatten', 'match': 'Concrete044A', 'contrast': -0.45, 'mean': 0.15}]),
     # the shop wall by the door: everything in the room is on sale, and this is where it waits
-    'shop': dict(camera={'position': [0.80, 1.85, 1.40], 'target': [2.35, 5.95, 1.12], 'lens_mm': 28, 'level': True,
-                         'fstop': 4.0, 'focus': [2.0, 5.7, 1.1]}, exposure=4.2, shop=True),
+    # p2 (critics 5.0/4.5, converged): night exposure (4.2 to 2.9), the Tropos lit to stay the hero, the Domes and the
+    # shelf strips down, the Cores grouped over two shelves (two unlit), the cards bigger, seated camera at 32 mm
+    'shop': dict(camera={'position': [1.0, 1.65, 1.28], 'target': [2.5, 5.9, 1.18], 'lens_mm': 32, 'level': True,
+                         'fstop': 4.0, 'focus': [2.2, 5.7, 1.1]}, exposure=2.9, shop=True,
+                 lights={'pend': {'power_w': 20.0, 'cone_deg': 24.0}, 'shop_key': {'irradiance': 0.5}},
+                 props=[{'kind': 'kit', 'shape': 'ext', 'path': KIT42, 'fn': 'flatten', 'match': 'Concrete044A', 'contrast': -0.45, 'mean': 0.15}]),
 }
 FLAVOURS = ['ember', 'dust', 'acid', 'poison', 'ice', 'haze', 'fog', 'smoke']
 SHELF = [0.32, 0.80, 1.28, 1.70]
@@ -39,16 +50,19 @@ SHELF = [0.32, 0.80, 1.28, 1.70]
 
 def shop_props():
     yw = 6.10
-    cores = [{'position': [0.62 + 0.235 * i, 5.93, SHELF[2]], 'flavour': f, 'rotate_z': 0.0} for i, f in enumerate(FLAVOURS)]
-    cards = [(c['position'][0], SHELF[2]) for c in cores[::2]] + [(0.95, SHELF[1]), (1.75, SHELF[1]), (1.9, SHELF[0])]
+    # grouped by hand, not drilled: three and three on the third shelf, two on the top; two of them unlit
+    xs = [(0.62, 2), (0.84, 2), (1.06, 2), (1.62, 2), (1.84, 2), (2.06, 2), (0.80, 3), (1.15, 3)]
+    cores = [{'position': [x, 5.93, SHELF[k]], 'flavour': f, 'rotate_z': 0.0, **({'lamp': False} if i in (2, 6) else {})}
+             for i, ((x, k), f) in enumerate(zip(xs, FLAVOURS))]
+    cards = [(0.84, SHELF[2]), (1.84, SHELF[2]), (0.95, SHELF[1]), (1.75, SHELF[1]), (1.9, SHELF[0]), (0.98, SHELF[3])]
     props = [
         {'kind': 'kit', 'shape': 'ext', 'path': KIT42, 'fn': 'shopwall', 'x': [0.45, 2.35], 'wall': yw, 'shelves': SHELF,
-         'cards': cards, 'plinth': [2.95, 5.60, 0.62, 0.52, 0.26]},
+         'cards': cards, 'card_size': [0.09, 0.06], 'led': 3.0, 'covers': ['#c8452f', '#e9e4d8'], 'plinth': [2.95, 5.60, 0.62, 0.52, 0.26]},
         {'kind': 'kit', 'shape': 'ext', 'module': 'earf_moon', 'fn': 'orb', 'spots': cores, 'cable': False,
          'cartridge': 'none', 'lamp_w': 0.25, 'lamp_k': 2700, 'shade_glow': 0.0067, 'noshadow': 'shell|liner|skin',
          'materials': {'liner': {'glow_color': '#FFA060'}}},
-        {'kind': 'kit', 'shape': 'ext', 'module': 'earf_moon', 'fn': 'dome', 'ceiling': 3.4, 'lamp_w': 12.0, 'lamp_k': 2700,
-         'shade_glow': 0.05, 'noshadow': 'shell|liner|skin',
+        {'kind': 'kit', 'shape': 'ext', 'module': 'earf_moon', 'fn': 'dome', 'ceiling': 3.4, 'lamp_w': 6.0, 'lamp_k': 2700,
+         'shade_glow': 0.02, 'noshadow': 'shell|liner|skin',
          'spots': [{'position': [0.80, 5.40, 2.05], 'flavour': 'ember'}, {'position': [1.45, 5.30, 2.22], 'flavour': 'ice'},
                    {'position': [2.10, 5.40, 1.98], 'flavour': 'smoke'}]},
         {'kind': 'kit', 'shape': 'ext', 'module': 'earf_coin', 'fn': 'fan', 'spots': [[1.80, 5.90, SHELF[1]]],
@@ -61,7 +75,12 @@ def shop_props():
          'instances': [{'position': [2.95, 5.60, 0.26], 'rotate_z': -35.0, 'hide': ['cloth-disc']}]},
     ]
     lights = {'shop_key': {'type': 'area', 'position': [1.9, 4.3, 3.30], 'target': [1.5, 6.0, 1.0], 'size_m': [0.3, 0.3],
-                           'irradiance': 1.2, 'color': 2900, 'spread_deg': 60.0}}
+                           'irradiance': 1.2, 'color': 2900, 'spread_deg': 60.0},
+              # the Tropos's own light (p2): a soft key from the front-left and a grazing rim from above the plinth
+              'shop_spk': {'type': 'area', 'position': [3.7, 4.4, 2.5], 'target': [2.95, 5.6, 0.95], 'size_m': [0.4, 0.4],
+                           'irradiance': 2.2, 'color': 2700, 'spread_deg': 50.0},
+              'shop_spk_rim': {'type': 'area', 'position': [3.2, 6.0, 2.8], 'target': [2.95, 5.6, 1.2], 'size_m': [0.25, 0.25],
+                               'irradiance': 1.5, 'color': 2700, 'spread_deg': 40.0}}
     return props, products, lights
 
 
@@ -81,6 +100,10 @@ def shot(view):
             q.update(v['retouch'])
         if q.get('fn') == 'orb' and q.get('module') == 'earf_moon' and v.get('orb'):
             q.update(v['orb'])
+        if q.get('fn') == 'room' and v.get('room'):
+            q.update(v['room'])
+        if q.get('fn') == 'mother' and v.get('mother'):
+            q.update(v['mother'])
     if v.get('shop'):
         props, products, lights = shop_props()
         s['set']['props'] += props

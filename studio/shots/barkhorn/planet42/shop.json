@@ -6,20 +6,20 @@
  ],
  "camera": {
   "position": [
-   0.8,
-   1.85,
-   1.4
+   1.0,
+   1.65,
+   1.28
   ],
   "target": [
-   2.35,
-   5.95,
-   1.12
+   2.5,
+   5.9,
+   1.18
   ],
-  "lens_mm": 28,
+  "lens_mm": 32,
   "level": true,
   "fstop": 4.0,
   "focus": [
-   2.0,
+   2.2,
    5.7,
    1.1
   ]
@@ -645,6 +645,15 @@
     "kind": "kit",
     "shape": "ext",
     "path": "spinoffs/barkhorn/planet/r42/kit42.py",
+    "fn": "flatten",
+    "match": "Concrete044A",
+    "contrast": -0.45,
+    "mean": 0.15
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/planet/r42/kit42.py",
     "fn": "shopwall",
     "x": [
      0.45,
@@ -659,19 +668,11 @@
     ],
     "cards": [
      [
-      0.62,
+      0.84,
       1.28
      ],
      [
-      1.0899999999999999,
-      1.28
-     ],
-     [
-      1.56,
-      1.28
-     ],
-     [
-      2.03,
+      1.84,
       1.28
      ],
      [
@@ -685,7 +686,20 @@
      [
       1.9,
       0.32
+     ],
+     [
+      0.98,
+      1.7
      ]
+    ],
+    "card_size": [
+     0.09,
+     0.06
+    ],
+    "led": 3.0,
+    "covers": [
+     "#c8452f",
+     "#e9e4d8"
     ],
     "plinth": [
      2.95,
@@ -712,7 +726,7 @@
      },
      {
       "position": [
-       0.855,
+       0.84,
        5.93,
        1.28
       ],
@@ -721,16 +735,17 @@
      },
      {
       "position": [
-       1.0899999999999999,
+       1.06,
        5.93,
        1.28
       ],
       "flavour": "acid",
-      "rotate_z": 0.0
+      "rotate_z": 0.0,
+      "lamp": false
      },
      {
       "position": [
-       1.325,
+       1.62,
        5.93,
        1.28
       ],
@@ -739,7 +754,7 @@
      },
      {
       "position": [
-       1.56,
+       1.84,
        5.93,
        1.28
       ],
@@ -748,7 +763,7 @@
      },
      {
       "position": [
-       1.795,
+       2.06,
        5.93,
        1.28
       ],
@@ -757,18 +772,19 @@
      },
      {
       "position": [
-       2.03,
+       0.8,
        5.93,
-       1.28
+       1.7
       ],
       "flavour": "fog",
-      "rotate_z": 0.0
+      "rotate_z": 0.0,
+      "lamp": false
      },
      {
       "position": [
-       2.265,
+       1.15,
        5.93,
-       1.28
+       1.7
       ],
       "flavour": "smoke",
       "rotate_z": 0.0
@@ -792,9 +808,9 @@
     "module": "earf_moon",
     "fn": "dome",
     "ceiling": 3.4,
-    "lamp_w": 12.0,
+    "lamp_w": 6.0,
     "lamp_k": 2700,
-    "shade_glow": 0.05,
+    "shade_glow": 0.02,
     "noshadow": "shell|liner|skin",
     "spots": [
      {
@@ -1022,8 +1038,8 @@
     4.2700000000000005,
     1.07
    ],
-   "power_w": 32.0,
-   "cone_deg": 20.0,
+   "power_w": 20.0,
+   "cone_deg": 24.0,
    "blend": 0.5,
    "radius_m": 0.07,
    "color": 2400,
@@ -1041,8 +1057,8 @@
     4.2700000000000005,
     1.07
    ],
-   "power_w": 32.0,
-   "cone_deg": 20.0,
+   "power_w": 20.0,
+   "cone_deg": 24.0,
    "blend": 0.5,
    "radius_m": 0.07,
    "color": 2400,
@@ -1060,8 +1076,8 @@
     4.2700000000000005,
     1.07
    ],
-   "power_w": 32.0,
-   "cone_deg": 20.0,
+   "power_w": 20.0,
+   "cone_deg": 24.0,
    "blend": 0.5,
    "radius_m": 0.07,
    "color": 2400,
@@ -1079,8 +1095,8 @@
     4.2700000000000005,
     1.07
    ],
-   "power_w": 32.0,
-   "cone_deg": 20.0,
+   "power_w": 20.0,
+   "cone_deg": 24.0,
    "blend": 0.5,
    "radius_m": 0.07,
    "color": 2400,
@@ -1710,6 +1726,46 @@
    "irradiance": 1.2,
    "color": 2900,
    "spread_deg": 60.0
+  },
+  "shop_spk": {
+   "type": "area",
+   "position": [
+    3.7,
+    4.4,
+    2.5
+   ],
+   "target": [
+    2.95,
+    5.6,
+    0.95
+   ],
+   "size_m": [
+    0.4,
+    0.4
+   ],
+   "irradiance": 2.2,
+   "color": 2700,
+   "spread_deg": 50.0
+  },
+  "shop_spk_rim": {
+   "type": "area",
+   "position": [
+    3.2,
+    6.0,
+    2.8
+   ],
+   "target": [
+    2.95,
+    5.6,
+    1.2
+   ],
+   "size_m": [
+    0.25,
+    0.25
+   ],
+   "irradiance": 1.5,
+   "color": 2700,
+   "spread_deg": 40.0
   }
  },
  "haze": {
@@ -1733,7 +1789,7 @@
   "bounces": 10,
   "view": "AgX",
   "look": "AgX - Medium High Contrast",
-  "exposure": 4.2,
+  "exposure": 2.9,
   "white_balance_k": 3000,
   "white_balance_tint": -2.0
  },

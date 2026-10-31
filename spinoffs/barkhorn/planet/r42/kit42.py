@@ -86,7 +86,8 @@ def shopwall(bpy, name, p, kit):
         objs.append(ob)
     # price cards, leaning at the shelf fronts
     for (cx, cz) in p.get('cards', []):
-        ob = _box(bpy, f'{name}-card', cx - 0.03, yw - d + 0.015, cz, cx + 0.03, yw - d + 0.017, cz + 0.042, card)
+        cw, ch = p.get('card_size', [0.06, 0.042])
+        ob = _box(bpy, f'{name}-card', cx - cw / 2, yw - d + 0.015, cz, cx + cw / 2, yw - d + 0.017, cz + ch, card)
         ob.rotation_euler[0] = math.radians(-14)
         objs.append(ob)
     # the plinth for a Tropos beside the shelves
