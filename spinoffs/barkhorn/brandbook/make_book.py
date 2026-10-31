@@ -58,6 +58,10 @@ def main():
             save(Image.open(os.path.join(HERE, 'launch', 'out', f)), f.rsplit('.', 1)[0] + '.jpg', width=1400, q=86)
         elif f.startswith('earf-teaser') and f.endswith('.mp4'):
             shutil.copy(os.path.join(HERE, 'launch', 'out', f), os.path.join(IMG, f))
+    kso = os.path.join(HERE, 'kickstarter', 'out')   # the Kickstarter kit's pre-launch mockup
+    for f in sorted(os.listdir(kso)) if os.path.isdir(kso) else []:
+        if f.endswith('.png'):
+            save(Image.open(os.path.join(kso, f)), 'ks-' + f[:-4] + '.jpg', width=1600, q=86)
     import shutil   # the motion: the site's turning globe and two of the parked idents (round 27)
     for dst, src in {'globe-turn.mp4': 'site/img/globe-turn.mp4', 'ident-coin.mp4': 'brand/earth-ident-coin-acrylic-paper.mp4',
                      'ident-rise.mp4': 'brand/earth-ident-rise-acrylic-night.mp4'}.items():
