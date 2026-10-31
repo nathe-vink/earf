@@ -31,7 +31,7 @@ while lanes run. Deck: https://claude.ai/artifact/3sihYaT4ckNTF6WE7SWR7x (v26). 
 - Mantle session_01BAaPTkQRnfd37XJHVyiVJC, r48-mantle-design, ac37a29e: Strata Float and Outcrop (was "Core") beat the
   current frames in blind duels (7.0-4.0, 6.5-4.0, 6.5-4.5); FAULTS.md lists 10 faults in today's design. Next: real
   arm and cartridge, rename, pass 2, one frame in color. Owner shown the side-by-side.
-- bar session_01F92PeyfLNoJKA3GtzQwjAe, r33-planet-world, b0b6d234: "the lantern" (a demountable oak listening box,
+- bar session_01F92PeyfLNoJKA3GtzQwjAe, r33-planet-world, dda0cf97 (House Book v11 published: the lantern first, American English, debut spring 2027). Lantern renders LOST duels to the r41/r39 heroes (murky/CG); picture pass sent (amber band, real glass, ceiling pools, oak variation, blurred people, a porch view; max 3 rounds). Earlier b0b6d234: "the lantern" (a demountable oak listening box,
   room-in-room; a lit Smoke fin band; the accessible seat is the best seat). Next: renders, duels, axo, House Book v11.
 - brand session_01BAaPTm6ZnW6Wr5zqpr5BWJ, r47-brand, b0df6681: new objects (Moho, Lithos, Ionos, Cairn, Bedrock,
   Relief + Meridian); finals at a blind 7.0 gate, then the "EARF New Objects" artifact; then the American-English pass
