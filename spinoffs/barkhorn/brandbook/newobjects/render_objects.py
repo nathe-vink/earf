@@ -328,10 +328,13 @@ def shot_lithos(sc):
 
 def shot_ionos(sc):
     sc.world.node_tree.nodes['Background'].inputs['Color'].default_value = lin('#D9D3CA')
-    sc.world.node_tree.nodes['Background'].inputs['Strength'].default_value = 0.55   # the room around the sideboard
-    sweep('#D6CFC4', 0.85, z0=-0.04, y_wall=0.6, R=0.3)
-    slab('sideboard', -0.6, -0.3, -0.04, 0.6, 0.25, 0.0, basic('limestone', '#E4DED3', 0.55, noise=0.08))
-    card = slab('card', -0.3, -0.75, 0.0, 0.3, -0.74, 0.4, basic('card', '#F4F1EC', 0.9)); card.visible_camera = False
+    sc.world.node_tree.nodes['Background'].inputs['Strength'].default_value = 0.2    # critic r1 c4: less fill
+    sweep('#BDB5A9', 0.85, z0=-0.04, y_wall=2.1, R=0.5)                                  # c6: pushed back, darker, so it falls off
+    sys.path.insert(0, os.path.join(HERE, '..', '..', '..', '..', 'studio', 'engine')); import materials as SM
+    slab('sideboard', -0.9, -0.6, -0.04, 0.9, 0.35, 0.0, SM.make(bpy, 'limestone', 'plaster', {'color': '#8C857A'}))   # c8: honed stone with a tooth
+    strip = slab('strip', -0.45, -0.70, 0.0, -0.35, -0.69, 0.12, basic('card', '#F4F1EC', 0.9)); strip.visible_camera = False   # c4: a thin edge line, low front-left
+    flag = slab('flagR', 0.42, -0.3, 0.0, 0.43, 0.3, 0.6, basic('flag', '#0A0A0B', 0.9))   # c5: the right face mirrors black, not the sweep
+    for v in ('visible_camera', 'visible_shadow', 'visible_diffuse', 'visible_transmission'): setattr(flag, v, False)
     tn = 'ice-pour'
     W, D, L = 0.2, 0.11, 0.0127
     x0, y0 = -W / 2, -D / 2
@@ -351,10 +354,10 @@ def shot_ionos(sc):
     # the machined pocket, honestly: the electronics in a black anodized tray, in the bottom two layers, seen through the block
     slab('tray', -0.06, -0.035, 0.003, 0.06, 0.045, 0.024, basic('tray', '#1C1B1E', 0.4, 0.6))
     sc.render.resolution_x, sc.render.resolution_y = 1800, 1200
-    area('window', (-1.1, 0.9, 0.7), (0, 0, 0.06), 0.9, 500, '#FFF4E6')
-    area('rim', (0.6, 0.7, 0.35), (0, 0, 0.12), 0.5, 260, '#FFE8D0')
-    area('key', (0.5, -0.9, 0.8), (0, 0, 0.06), 0.8, 25, '#EEF2F8')
-    camera((0.30, -0.56, 0.31), (0.0, -0.005, 0.075), lens=70, fstop=5.6)
+    area('window', (-0.73, 0.73, 0.66), (0, 0, 0.06), 0.15, 150, '#FFF4E6', shape='DISK')   # c2: small, hard, back-left: a crisp shadow forward-right
+    rim = area('rim', (0.45, 0.55, 0.40), (0, 0, 0.12), 0.3, 25, '#FFE8D0'); rim.visible_glossy = False   # c5
+    area('key', (0.5, -0.9, 1.05), (0, 0, 0.06), 0.8, 14, '#EEF2F8')                          # c7: higher, off the disc's edge
+    camera((0.50, -1.10, 0.30), (0.02, -0.02, 0.075), lens=85, fstop=4.0)                      # c1: air around it, ground in front
 
 def shot_cairn(sc):
     sweep('#C9C2B6', 0.9)

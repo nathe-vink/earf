@@ -1,0 +1,3 @@
+{"stage1": {"score": 4.5}, "verdict": "iterate", "score_if_fixed": 6.8,
+ "changes": ["c1 camera back, 85 mm, ground in front", "c2 small hard window back-left for a shadow", "c3 a blue transmitted shadow", "c4 world 0.2, a thin strip for the edge line", "c5 rim down, a black flag right", "c6 sweep back and darker", "c7 key higher, clean the disc", "c8 honed stone with a tooth"],
+ "accept": [{"id":"c2","region":[1000,1050,1500,1150],"metric":"lum_median","op":"<","value":190},{"id":"c4","region":[0,0,1800,200],"metric":"lum_median","op":"between","value":[170,200]},{"id":"c5","region":[1300,600,1460,1100],"metric":"r_median","op":"<","value":150}]}
