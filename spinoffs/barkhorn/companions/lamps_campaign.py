@@ -202,19 +202,19 @@ def mantle_credenza():
     # critic r1 (5.0): c7 the cut picture frame out; c1 the glow 2.5 (5 clipped pink-white)
     s['set']['props'] = [p for p in credenza_props() if p.get('kind') != 'frame'] + record(mx, cy, cz)
     s['product'] = mantle_product(mx, cy - 0.02, cz)
-    s['materials'] = {'glow': {'strength': 1.4}}
+    s['materials'] = {'glow': {'strength': 0.9}}
     s['set']['windows'] = [{'wall': 'left', 'along': 0.6, 'sill': 0.6, 'size': [1.4, 1.8], 'mullions': [2, 1],
                             'frame': '#2A2724'}]
     s['sky'] = {'kind': 'hdri', 'polyhaven': 'twilight_sunset', 'rotation_deg': 250.0, 'strength': 0.03, 'res': '4k'}
     s['lights'] = {
         'key': {'type': 'area', 'size_m': [1.2, 1.2], 'position': [-1.2, 1.0, 2.2], 'target': [mx, cy, cz + 0.1],
-                'power_w': round(450 / HB.LM_PER_W, 4), 'color': 2900, 'camera': False},
+                'power_w': round(1.4 * 450 / HB.LM_PER_W, 4), 'color': 2900, 'camera': False},
         'sconce': {'type': 'point', 'position': [1.6, 3.0, 1.7], 'power_w': 0.18, 'radius_m': 0.03, 'color': 2400,
                    'camera': False},
         'fill': {'type': 'area', 'size_m': [2.0, 1.0], 'position': [0.4, -0.8, 1.6], 'target': [mx, cy, cz],
-                 'power_w': 1.0, 'color': 3400, 'camera': False, 'specular': 0.3},             # c2: the plinth reads
+                 'power_w': 2.5, 'color': 3400, 'camera': False, 'specular': 0.3},             # c2: the plinth reads
         'records': {'type': 'area', 'size_m': [0.5, 0.5], 'position': [1.3, 1.9, 1.3],             # c4: the sleeves lit
-                    'target': [cx + 0.62, cy, cz + 0.17], 'power_w': 0.12, 'color': 2900, 'camera': False},
+                    'target': [cx + 0.62, cy, cz + 0.17], 'power_w': 0.05, 'color': 2900, 'camera': False},
         'lidpanel': {'type': 'area', 'size_m': [1.6, 0.9], 'position': [-0.82, 1.73, 1.47],       # c6: the lid reads clear
                      'target': [mx, 3.0, 1.0], 'irradiance': 0.25, 'color': '#FFE8D0', 'camera': False,
                      'specular': 1.0, 'diffuse': 0.0},
@@ -225,6 +225,9 @@ def mantle_credenza():
     # pink-white); c4 the lid's panel larger (a hard blotch); c5 fill 1.0 W (the deck crushed); c6 the frame right
     # (the records against the edge); c7 the finish pass not run (PIL missing in the render Python); c8 sleeve art: an asset
     s['render']['white_balance_tint'] = 2
+    # critic r3 (5.0, the last round): c1 the records lamp 0.05 (the sleeve outshone the product); c2 fill 2.5 W (the
+    # platter crushed); c4 glow 0.9 (the edge clipped pink-white); c6 the key x1.4 (the credenza top a void). Not
+    # applied: c3 a flag over the wall (untested, it could shade the product), c5 sleeve art (an asset)
     s['title'] = 'Mantle in Ember on a credenza in the evening, a record on (the campaign)'
     s['size'] = [2400, 1600]
     s['camera'] = {'position': [mx + 0.85, cy - 1.65, 1.25], 'target': [mx + 0.43, cy, cz + 0.12], 'lens_mm': 32,
