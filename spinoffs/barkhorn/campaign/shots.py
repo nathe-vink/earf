@@ -191,15 +191,16 @@ def proposal(design, base='studio/shots/barkhorn/lookbook31/look-red-off-tall.js
         for i in inst:
             i['hide'] = sorted(set(i['hide']) | set(HORN_PARTS) | ({'woofer-ring'} if design == 'strata' else set()))
         keep = lambda i: {k: v for k, v in i.items() if k not in ('hide', 'options')}
-        if design == 'strata':
-            prods.append({'def': OPTIONS, 'flavour': flavour,
-                          'instances': [{**keep(i), 'hide': ['horn-trial-plug', 'horn-trial-base', 'horn-plan-b-smooth']} for i in inst]})
+        if design == 'strata':      # the Strata horn (with its lip), its bronze posts and collars, and the caldera
+            for i in inst:          # the pads stay (the posts thread into them); the stainless posts and cups go
+                i['hide'] = sorted((set(i['hide']) - {'horn-pads'}) | {'post-*', 'post-sockets', 'post-sleeves'})
             prods.append({'def': VARIANTS, 'flavour': flavour, 'instances': [{**keep(i), 'hide': ['horn-topo']} for i in inst]})
         elif design == 'topo':
-            prods.append({'def': VARIANTS, 'flavour': flavour, 'instances': [{**keep(i), 'hide': ['caldera-*']} for i in inst]})
+            prods.append({'def': VARIANTS, 'flavour': flavour,
+                          'instances': [{**keep(i), 'hide': ['caldera-*', 'horn-strata', 'strata-*']} for i in inst]})
         else:                       # topo-clear: the clear layers and their tinted laminae (an option in the product)
             prods.append({'def': VARIANTS, 'flavour': flavour,
-                          'instances': [{**keep(i), 'hide': ['caldera-*', 'horn-topo'], 'options': ['Topo Clear']} for i in inst]})
+                          'instances': [{**keep(i), 'hide': ['caldera-*', 'horn-topo', 'horn-strata', 'strata-*'], 'options': ['Topo Clear']} for i in inst]})
     s['products'] = prods
     return s
 

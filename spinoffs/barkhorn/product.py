@@ -2043,7 +2043,8 @@ def formed_horn(P):
                 if i == 0:
                     w_, h_ = hw, hh
                 wb, hb, nb = flare_section(c, za) if smooth else (w_, h_, n_)
-                layers.append(_loft([_se_pts(wb + wl, hb + wl, max(nb, 2.0), za + 0.1), _se_pts(w_ + wl, h_ + wl, max(n_, 2.0), zz - 0.1)]))
+                ow = L_.get('lip', wl) if i == 0 else wl      # Strata: a wider, even, polished front lip on the mouth's layer
+                layers.append(_loft([_se_pts(wb + ow, hb + ow, max(nb, 2.0), za + 0.1), _se_pts(w_ + ow, h_ + ow, max(n_, 2.0), zz - 0.1)]))
             layers.append(Pos(0, 0, -c['boss']['t']) * Cylinder(c['pod_r'], c['boss']['t'] - 0.1, align=(Align.CENTER, Align.CENTER, Align.MIN)))
             return [l_ - cut for l_ in layers]
         cut = _loft([_se_pts(c['r0'], c['r0'], 2.0, -c['boss']['t'] - 2.0)] + air_sections(c, 0.0, d))

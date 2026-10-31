@@ -670,7 +670,9 @@
      "rotate_z": 6.0,
      "hide": [
       "caldera-*",
-      "horn-topo"
+      "horn-topo",
+      "horn-strata",
+      "strata-*"
      ],
      "options": [
       "Topo Clear"
@@ -686,7 +688,9 @@
      "rotate_z": -6.0,
      "hide": [
       "caldera-*",
-      "horn-topo"
+      "horn-topo",
+      "horn-strata",
+      "strata-*"
      ],
      "options": [
       "Topo Clear"

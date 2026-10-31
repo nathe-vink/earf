@@ -689,30 +689,12 @@
      "flavour": "cloud-red",
      "hide": [
       "cloth-disc",
-      "horn-pads",
       "horn-throat",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
       "waveguide",
       "woofer-ring"
-     ]
-    }
-   ]
-  },
-  {
-   "def": "studio/products/barkhorn-horn-options.json",
-   "flavour": "cloud-red",
-   "instances": [
-    {
-     "position": [
-      0,
-      0,
-      0
-     ],
-     "rotate_z": 0,
-     "flavour": "cloud-red",
-     "hide": [
-      "horn-trial-plug",
-      "horn-trial-base",
-      "horn-plan-b-smooth"
      ]
     }
    ]

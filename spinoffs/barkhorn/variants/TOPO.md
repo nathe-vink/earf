@@ -1,4 +1,14 @@
-# Tropos "Topo" (a proposal, 2026-10-31)
+# Tropos "Topo" (a proposal, 2026-10-31): tried, parked
+
+**Status:** tried and parked (the coordinator, after the blind duel).
+- The four-way duel (`renders/2026-10-31/barkhorn/design-pass/critique/duel-1.json`) scored **Topo 6.0** and **Topo
+  Clear 5.5**, against Strata's 8.0 and the current design's 7.0.
+- The critic, blind: Topo's rim is "lumpy and uneven in thickness, like hand-dipped wax", and Topo Clear's "thick,
+  wobbly, gummy-pink rim" reads "like soft silicone or a mould reject". At studio distance the land's relief (8 to 45 mm
+  on every layer) reads as an unfinished edge, not as a mountain.
+- **For a later try:** keep the mouth's rim crisp and regular (Strata's even lip), and put the land's relief on the
+  inner layers only, where it reads as terrain seen into the horn. Or show it at macro distance, where the ridges read.
+
 
 **The idea:** a pair carries a place. The horn is the laminated one (22 layers of stock 1/2 in cast sheet). Each
 layer's outer outline is a walk round a real mountain: Mount Tamalpais's East Peak, 784 m, the mountain over the Bay.

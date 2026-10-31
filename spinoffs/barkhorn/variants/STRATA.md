@@ -28,13 +28,42 @@ asked for exactly this:
   recess is under a tenth of it deep and wider than the cone, so it changes the woofer's response by less than the
   cloth disc did (est.). Check it with the first measurement.
 
+## Round two: the blind duel's three changes (2026-10-31)
+
+A blind four-way duel (`renders/2026-10-31/barkhorn/design-pass/critique/duel-1.json`) ranked the designs:
+
+| design | score |
+|---|---|
+| Strata | **8.0** |
+| current | 7.0 |
+| Topo | 6.0 |
+| Topo Clear | 5.5 |
+
+Its three changes for Strata are now drawn:
+1. **A defined, polished front lip.** The mouth's layer is cut 20 mm outside the air path, against 10 on the other
+   layers. That gives an even, flat front face round the mouth, polished, so the rim reads as a deliberate edge. It adds
+   about 0.27 kg (est.). The other 21 layers are unchanged.
+2. **A visible mount.** The posts are now ø16 bronze rods (C93200 or C544), against ø10 stainless tubes. Each has a
+   turned collar on the top plate (ø28 × 8) and one under the horn's pad (ø24 × 6), with an M12 thread into the pad's
+   insert (`strata-posts`, `strata-collars`).
+   - They stay four, at the reviewed positions. "Fewer" (the critic's word) would change the load path the tipping
+     check and the posts' modes were worked on. That needs its own structural review first, so it is noted, not
+     drawn.
+   - They add about 0.65 kg (est.).
+3. **The caldera in the horn's rhythm.** The rings' bores are now Ø400, Ø427 and Ø454: 13.5 mm steps, the horn's own
+   step at its mouth. Each ring is the horn's 1/2 in, and the edges are polished square like the horn's.
+
+**The build facts are unchanged for the deck:** the horn is still **22 layers of 1/2 in stock cast sheet** (plus the
+boss). Only the mouth's layer is cut wider.
+
 ## The numbers
 
 | | current | Strata | change |
 |---|---|---|---|
 | the horn assembly (with driver and adaptor) | 8.3 kg | 9.9 kg | +1.6 kg |
 | the caldera, against the disc, frame and ring | about 1.4 kg | 2.1 kg | +0.7 kg |
-| **a speaker** | **about 71 kg** | **about 73 kg** | **+2.3 kg** |
+| the lip and the bronze posts (round two) | — | about 0.9 kg | +0.9 kg |
+| **a speaker** | **about 71 kg** | **about 74 kg** | **+3.2 kg** |
 | the horn (the kit's parts list, prototype) | formed: about $1,500 with its share of tooling | laminated: about $1,570 | about +$70, and no forming tooling ($7,100 to $9,600 saved) |
 | the caldera, against the disc, frame, ring and magnets | about $106 a speaker | about $230 a speaker (sheet, cutting, polish, bonding; est.) | about +$125 a speaker |
 

@@ -634,8 +634,10 @@
      "rotate_z": 6.0,
      "hide": [
       "cloth-disc",
-      "horn-pads",
       "horn-throat",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
       "waveguide",
       "woofer-ring"
      ]
@@ -650,44 +652,12 @@
      "rotate_z": -6.0,
      "hide": [
       "cloth-disc",
-      "horn-pads",
       "horn-throat",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
       "waveguide",
       "woofer-ring"
-     ]
-    }
-   ]
-  },
-  {
-   "def": "studio/products/barkhorn-horn-options.json",
-   "flavour": "eucalyptus-y2k-green",
-   "instances": [
-    {
-     "flavour": "eucalyptus-y2k-green",
-     "position": [
-      -1.2,
-      0.3,
-      0.0
-     ],
-     "rotate_z": 6.0,
-     "hide": [
-      "horn-trial-plug",
-      "horn-trial-base",
-      "horn-plan-b-smooth"
-     ]
-    },
-    {
-     "flavour": "eucalyptus-y2k-green",
-     "position": [
-      1.2,
-      0.3,
-      0.0
-     ],
-     "rotate_z": -6.0,
-     "hide": [
-      "horn-trial-plug",
-      "horn-trial-base",
-      "horn-plan-b-smooth"
      ]
     }
    ]
