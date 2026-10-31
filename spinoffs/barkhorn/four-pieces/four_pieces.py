@@ -41,6 +41,7 @@ LAYOUTS = {
     'v2': {'mid': 0.45, 'side': [-1.58, 0.36], 'chair': [-1.95, -0.38, 40.0], 'hemi': [-1.72, -0.62, 1.40],
            'plant': [3.3, 0.6, 30.0]},
 }
+LAYOUTS['v2b'] = dict(LAYOUTS['v2'], hemi=[-1.70, -0.60, 1.32])
 LAYOUT = LAYOUTS['v1']
 SPK_X, SPK_Y = 1.22, 0.53               # each Tropos 1.22 either side of the music's centre line, 0.29 m off the wall
 SIDE_H = 0.551                          # side_table_01: 0.55 x 0.45, 0.551 tall
@@ -130,6 +131,7 @@ def shot(direction, palette, layout='v1', camera=None, sun=None, rug=None):
     s['materials'] = {'glow': {'strength': 0.0}}
     s['render'] = {**s['render'], 'caustics_refractive': True, 'samples': 128}
     L = s['lights']
+    L['floorbounce'] = {'off': True}           # the base shot's spare lamp (0 W) stood in this frame
     if direction == 'a':                       # morning, north light
         s['sun'] = {'azimuth_deg': -68.0, 'elevation_deg': 30.0, 'irradiance': 0.0}
         s['sky'] = {'kind': 'physical', 'strength': 1.6, 'air': 1.0, 'dust': 1.0, 'sun_elevation_deg': 35.0}
@@ -177,6 +179,16 @@ R2 = {
                  camera={'position': [2.55, -4.05, 1.02], 'target': [-0.35, 0.45, 0.88], 'lens_mm': 32, 'level': True,
                          'fstop': 8.0, 'focus': [0.2, 0.4, 0.8]}),
     # nearly square but lower and from a little right of centre, a longer lens, less floor
+    # r2-q refined: Hemisphere lower over the arm, the rug darker and warmer, the sun higher, the right speaker clear of
+    # the edge
+    'r2-q2': dict(layout='v2b', rug=dict(JUTE, value=0.55, tint='#9A8466', tint_mix=0.35), sun={'elevation_deg': 28.0},
+                  camera={'position': [2.55, -4.05, 1.02], 'target': [-0.25, 0.45, 0.9], 'lens_mm': 31, 'level': True,
+                          'fstop': 8.0, 'focus': [0.2, 0.4, 0.8]}),
+    # round 3: no rug (no scan in the cache reads as wool at this size; the floor and its sun stripes carry the
+    # foreground)
+    'r3': dict(layout='v2b', rug={'off': True}, sun={'elevation_deg': 28.0},
+               camera={'position': [2.55, -4.05, 1.02], 'target': [-0.25, 0.45, 0.9], 'lens_mm': 31, 'level': True,
+                       'fstop': 8.0, 'focus': [0.2, 0.4, 0.8]}),
     'r2-f': dict(layout='v2', rug=JUTE, sun={'elevation_deg': 22.0},
                  camera={'position': [0.9, -5.3, 0.98], 'target': [0.0, 0.45, 1.0], 'lens_mm': 35, 'level': True,
                          'fstop': 8.0, 'focus': [0.3, 0.4, 0.8]}),

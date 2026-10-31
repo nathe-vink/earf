@@ -456,23 +456,7 @@
    "color": "#F4F1EC"
   },
   "floorbounce": {
-   "type": "area",
-   "size_m": [
-    0.8,
-    0.3
-   ],
-   "position": [
-    0.0,
-    -0.6,
-    0.08
-   ],
-   "target": [
-    0.0,
-    0.8,
-    0.04
-   ],
-   "irradiance": 0.0,
-   "color": "#FFE8CC"
+   "off": true
   },
   "window": {
    "type": "area",
