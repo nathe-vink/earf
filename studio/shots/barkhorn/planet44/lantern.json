@@ -462,47 +462,6 @@
     "votives": [],
     "matchbooks": [],
     "coats": []
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "path": "spinoffs/barkhorn/planet/r40/kit40.py",
-    "fn": "figures",
-    "people": [
-     {
-      "pose": "chair",
-      "at": [
-       15.43,
-       6.56,
-       0
-      ],
-      "heading": -12.0,
-      "seat": 0.4,
-      "cloth": "#1E1E1D",
-      "skin": "#6E4A36",
-      "hair": "#6A5038",
-      "seed": 449,
-      "move": [
-       0.02,
-       0.015,
-       0.004
-      ],
-      "spin": 3.0,
-      "head": [
-       0.16,
-       0.09,
-       0.03,
-       30.0
-      ],
-      "arms": [
-       0.06,
-       0.04,
-       0.03,
-       10.0
-      ]
-     }
-    ],
-    "shutter": 0.8
    }
   ]
  },
@@ -814,8 +773,8 @@
     3.19,
     1.0
    ],
-   "power_w": 70.0,
-   "cone_deg": 34.0,
+   "power_w": 42.0,
+   "cone_deg": 24.0,
    "blend": 0.8,
    "radius_m": 0.03,
    "color": 2700,
@@ -833,8 +792,8 @@
     5.99,
     1.0
    ],
-   "power_w": 70.0,
-   "cone_deg": 34.0,
+   "power_w": 42.0,
+   "cone_deg": 24.0,
    "blend": 0.8,
    "radius_m": 0.03,
    "color": 2700,
@@ -852,8 +811,8 @@
     4.39,
     0.3
    ],
-   "power_w": 45.0,
-   "cone_deg": 26.0,
+   "power_w": 60.0,
+   "cone_deg": 20.0,
    "blend": 0.8,
    "radius_m": 0.15,
    "color": 2700,
@@ -875,7 +834,7 @@
     0.15,
     4.6
    ],
-   "irradiance": 0.2,
+   "irradiance": 0.08,
    "color": 2600,
    "camera": false
   },
@@ -929,7 +888,7 @@
    7.57,
    3.9124000000000003
   ],
-  "density": 0.0025,
+  "density": 0.006,
   "anisotropy": 0.3,
   "color": "#FFFFFF"
  },
@@ -941,7 +900,7 @@
   "bounces": 10,
   "view": "AgX",
   "look": "AgX - Medium High Contrast",
-  "exposure": 3.9,
+  "exposure": 3.65,
   "white_balance_k": 3200,
   "white_balance_tint": -1.5,
   "caustics_refractive": true

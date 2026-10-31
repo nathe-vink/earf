@@ -171,3 +171,29 @@ JSONs: `critic/L2R1-*.json`.
 - The porch view shows mostly door jamb, with no bar and no band (both critics: pull back to the bar).
 
 **Out of scope throughout:** Mother EARF's multicolored rims (a product as placed), the horn's reflections and the cabinets' edges (the speaker's geometry).
+
+## Look 2: round 2, p3 proofs
+
+p3 applied round 1:
+- amber fins and a lower band source;
+- wider, softer spots on the pair and on Mother;
+- scallops on the plaster;
+- the porch view from x 9.6 (at 8.8 the leaves of pair 2 cut the speakers);
+- the porch shut in the bar and street views (the pair, seen cut by its jamb, broke the owner's whole-speaker rule);
+- shutter 0.8 with smaller movements.
+
+| View | Critic a | Critic b | Verdicts | If fixed |
+|---|---|---|---|---|
+| street p3 | 5.0 | 5.5 | iterate / iterate | 7.5 / 7.0 |
+| bar p3 | 4.0 | 4.0 | iterate / iterate | 6.5 / 6.5 |
+| porch p3 | 4.5 | 4.5 | iterate / iterate | 6.5 / 6.8 |
+| lantern p3 | 4.5 | 5.0 | iterate / iterate | 6.5 / 7.0 |
+
+**Converged:**
+- **The figures:** every critic still reads them as mannequins. The bar critics prefer none, with signs of life instead.
+- **The street band:** both street critics want it brighter and more amber, the brightest thing in the far room.
+- **The bar band:** both bar critics want it dimmer, with edge light; the bar frame is orange throughout (WB 2750–2850).
+- **The porch:** both critics find the porch soffit and the near leaf brighter than the room (graze down, route and fill down, the pair up).
+- **The lantern:** both critics find the upper slat wall brighter than the speakers, the inner faces clipping, and Mother's plinth sunk.
+
+The bar view lost its glimpse of the pair by closing the porch, and its score fell with it.

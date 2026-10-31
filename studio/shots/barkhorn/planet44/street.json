@@ -7,15 +7,15 @@
  "camera": {
   "position": [
    -3.2,
-   3.6,
+   4.0,
    1.5
   ],
   "target": [
    13.0,
    4.2,
-   1.9
+   1.75
   ],
-  "lens_mm": 35,
+  "lens_mm": 40,
   "level": true,
   "fstop": 4.0,
   "focus": [
@@ -79,7 +79,7 @@
     "windows_lit": 0.3,
     "window_glow": 0.25,
     "glass_gloss": 0.6,
-    "band_glow": 0.1,
+    "band_glow": 0.3,
     "doors_open": false
    },
    {
@@ -502,71 +502,6 @@
       ]
      },
      {
-      "pose": "pour",
-      "at": [
-       9.1,
-       6.42,
-       0
-      ],
-      "heading": -90,
-      "seat": 0.46,
-      "cloth": "#1A1918",
-      "skin": "#5E3C2A",
-      "hair": "#3A2A1E",
-      "seed": 443,
-      "move": [
-       0.1,
-       0.03,
-       0.0
-      ],
-      "spin": 8.0,
-      "head": [
-       0.18,
-       0.08,
-       0.03,
-       30.0
-      ],
-      "arms": [
-       0.26,
-       0.1,
-       0.16,
-       35.0
-      ],
-      "sleeve": "#2A2724"
-     },
-     {
-      "pose": "bench",
-      "at": [
-       8.97,
-       2.02,
-       0
-      ],
-      "heading": 90,
-      "seat": 0.45,
-      "cloth": "#2A2018",
-      "skin": "#7E5640",
-      "hair": "#2A2420",
-      "seed": 445,
-      "move": [
-       0.02,
-       0.015,
-       0.004
-      ],
-      "spin": 3.0,
-      "head": [
-       0.2,
-       0.1,
-       0.03,
-       35.0
-      ],
-      "arms": [
-       0.1,
-       0.06,
-       0.05,
-       16.0
-      ]
-     },
-     {
       "pose": "chair",
       "at": [
        8.9,
@@ -680,7 +615,7 @@
     5.0,
     0.9
    ],
-   "power_w": 5.0,
+   "power_w": 8.0,
    "cone_deg": 24.0,
    "blend": 0.6,
    "radius_m": 0.03,
@@ -855,7 +790,7 @@
     10.0,
     0.1
    ],
-   "irradiance": 0.1,
+   "irradiance": 0.03,
    "color": 2700,
    "camera": false
   },
@@ -875,7 +810,7 @@
     10.0,
     4.0
    ],
-   "irradiance": 0.12,
+   "irradiance": 0.1,
    "color": 2900,
    "camera": false
   },
@@ -895,7 +830,7 @@
     0.05,
     5.6
    ],
-   "irradiance": 0.6,
+   "irradiance": 1.0,
    "color": 2400,
    "camera": false
   },
@@ -1012,7 +947,7 @@
     0.6,
     0.6
    ],
-   "irradiance": 0.6,
+   "irradiance": 0.3,
    "color": 2200,
    "spread_deg": 80.0
   }
@@ -1026,7 +961,7 @@
    7.57,
    3.9124000000000003
   ],
-  "density": 0.015,
+  "density": 0.008,
   "anisotropy": 0.3,
   "color": "#FFFFFF"
  },

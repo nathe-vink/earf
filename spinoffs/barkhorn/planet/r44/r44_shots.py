@@ -41,18 +41,26 @@ VIEWS = {
     # look 2 r1 (street 4.5/4.5): the band a flat beige panel (amber fins now); ghosts at shutter 1.0; a dead right pier;
     # the frame too dark (median 16); the plinth the brightest mass: the camera 0.6 m toward the axis, exposure 3.0,
     # shutter 0.3 with four guests, fill 0.12, haze 0.015, the shop wall 10 W
-    'street': dict(camera={'position': [-3.2, 3.6, 1.50], 'target': [13.0, 4.2, 1.90], 'lens_mm': 35, 'level': True,
-                           'fstop': 4.0, 'focus': [7.0, 4.4, 1.2]}, exposure=3.0, haze=0.015, shutter=0.8, people='street',
-                   lights={'fill': {'irradiance': 0.12}, 'shop': {'power_w': 10.0}, 'table': {'power_w': 5.0}},
-                   room={'glass_gloss': 0.6, 'doors_open': False}),   # r1: the porch shut (a pair seen cut by its jamb)
+    # look 2 r2 (street 5.0/5.5): the band should be the far room's brightest amber thing; the plinth outshines it; the
+    # standing figure ghosts; haze veils the plaster; the lantern small: band 0.30, baffle graze 1.0, route 0.03, the
+    # street 0.3, haze 0.008, two seated guests, 40 mm toward the axis
+    'street': dict(camera={'position': [-3.2, 4.0, 1.50], 'target': [13.0, 4.2, 1.75], 'lens_mm': 40, 'level': True,
+                           'fstop': 4.0, 'focus': [7.0, 4.4, 1.2]}, exposure=3.0, haze=0.008, shutter=0.8, people='street2',
+                   lights={'fill': {'irradiance': 0.10}, 'shop': {'power_w': 10.0}, 'table': {'power_w': 8.0},
+                           'baffle': {'irradiance': 1.0}, 'route': {'irradiance': 0.03}, 'street': {'irradiance': 0.3}},
+                   room={'glass_gloss': 0.6, 'doors_open': False, 'band_glow': 0.30}),   # r1: the porch shut
     # look 2 r1 (bar 5.5/5.0): the pair a sliver behind the porch leaf; the band a flat lightbox; the porch head the
     # hottest surface; ghost figures; the right wall dead; no pools on the top: the camera toward the axis at 32 mm so
     # the porch frames the pair; the baffle graze 0.3; shutter 0.35; the banquette spots wash the plaster; the counter
     # spots 60 W at 22 deg; clamp 4
+    # look 2 r2 (bar 4.0/4.0): mannequins (both: none, signs of life instead); one orange cast; no pools; the band a
+    # flat corrugated sheet; a clipped hotspot over the porch: no figures; 2850 K; counter 90 W at 16 deg; band 0.06;
+    # graze 0.5; banquette 35 W; fill 0.08
     'bar': dict(camera={'position': [5.2, 3.35, 1.40], 'target': [13.0, 3.95, 1.70], 'lens_mm': 32, 'level': True,
-                        'fstop': 4.0, 'focus': [11.0, 4.0, 1.6]}, exposure=3.0, haze=0.006, shutter=0.8, people='bar-far', room={'doors_open': False},
-                lights={'baffle': {'irradiance': 0.3}, 'ctr': {'power_w': 60.0, 'cone_deg': 22.0}},
-                render={'clamp': 4.0}),
+                        'fstop': 4.0, 'focus': [11.0, 4.0, 1.6]}, exposure=3.0, haze=0.006, room={'doors_open': False, 'band_glow': 0.06},
+                lights={'baffle': {'irradiance': 0.5}, 'ctr': {'power_w': 90.0, 'cone_deg': 16.0}, 'bq': {'power_w': 35.0},
+                        'fill': {'irradiance': 0.08}},
+                render={'clamp': 4.0, 'white_balance_k': 2850}),
     # p4 (p3 judged 4.5/5.0, converged: too bright and even; the pair darker than the walls; Mother's spot a white pool
     # and a haze shaft; the floor camouflage; coarse terrazzo; no life; a flat symmetric view with a cut board): seated
     # on the bench at 32 mm, a chair in the foreground; exposure 3.9; fill 0.03, trap 0.2; the pair 55 W at 24 deg;
@@ -65,15 +73,23 @@ VIEWS = {
     # and lower at 32 mm; fill 0.07; haze 0.0025; one listener, back to the lens, at a short shutter; a glass
     'lantern': dict(camera={'position': [15.3, 2.55, 1.10], 'target': [19.1, 4.85, 1.10], 'lens_mm': 32, 'level': True,
                             'fstop': 2.8, 'focus': [P.STACKS[0][0], P.STACKS[0][1], 1.0]},
-                    exposure=3.9, haze=0.0025, room={'interior': True}, people='lantern-one', shutter=0.8,
-                    lights={'infill': {'irradiance': 0.07}}, render={'clamp': 4.0}),
+                    exposure=3.65, haze=0.006, room={'interior': True},
+                    # r2 (4.5/5.0): the upper wall outshines the pair; the inner faces clip; Mother's plinth sunk; the
+                    # listener out of frame: the pair 42 W at 24 deg, trap 0.08, Mother 60 W at 20 deg, no figure
+                    lights={'infill': {'irradiance': 0.07}, 'stack': {'power_w': 42.0, 'cone_deg': 24.0},
+                            'trap': {'irradiance': 0.08}, 'mother': {'power_w': 60.0, 'cone_deg': 20.0}},
+                    render={'clamp': 4.0}),
     # test: from x 10.0 the open leaves of pair 1 filled half the frame; now from between them, at eye height
     # look 2 r1 (porch 3.5/4.5): half the frame door jamb, no bar, no band: back to x 9.6 (at 8.8 pair 2's leaves cut
     # the speakers), 24 mm shifted up to take the band
-    'porch': dict(camera={'position': [9.6, 3.62, 1.35], 'target': [18.9, 4.15, 3.1], 'lens_mm': 24, 'level': True,
+    'porch': dict(camera={'position': [10.2, 3.66, 1.35], 'target': [18.9, 4.15, 2.3], 'lens_mm': 32, 'level': True,
                           'fstop': 4.0, 'focus': [17.0, 4.6, 1.1]},
-                  exposure=3.8, haze=0.006, shutter=0.8, people='porch', render={'clamp': 4.0},
-                  lights={'infill': {'irradiance': 0.08}}),
+                  # r2 (4.5/4.5): the soffit and the near leaf brighter than the room; the room a postage stamp:
+                  # graze 0.15, route 0.03, fill 0.02, the pair 110 W at 26 deg, Mother 60 W, 32 mm from x 10.2
+                  exposure=3.5, haze=0.006, shutter=0.8, people='porch', render={'clamp': 4.0},
+                  lights={'infill': {'irradiance': 0.08}, 'baffle': {'irradiance': 0.15}, 'route': {'irradiance': 0.03},
+                          'fill': {'irradiance': 0.02}, 'stack': {'power_w': 110.0, 'cone_deg': 26.0},
+                          'mother': {'power_w': 60.0}, 'trap': {'irradiance': 0.12}}),
 }
 
 
@@ -113,7 +129,7 @@ LANT_PEOPLE = [   # listeners: still, so a slower drift than at the bar
     person(10, 'bench', [P.BENCH['x0'] + 0.30, P.INNER['y0'] + 0.62, 0], 8.0, P.BENCH['z'], move=[0.02, 0.015, 0.004],
            spin=3.0, head=[0.16, 0.09, 0.03, 30.0], arms=[0.06, 0.04, 0.03, 10.0]),
 ]
-PEOPLE = {'street': [BAR_PEOPLE[i] for i in (2, 3, 5, 6)], 'lantern-one': [LANT_PEOPLE[1]], 'bar': BAR_PEOPLE, 'bar-far': [BAR_PEOPLE[i] for i in (2, 3, 7)], 'lantern': LANT_PEOPLE, 'porch': LANT_PEOPLE[:2]}
+PEOPLE = {'street2': [BAR_PEOPLE[i] for i in (2, 6)], 'street': [BAR_PEOPLE[i] for i in (2, 3, 5, 6)], 'lantern-one': [LANT_PEOPLE[1]], 'bar': BAR_PEOPLE, 'bar-far': [BAR_PEOPLE[i] for i in (2, 3, 7)], 'lantern': LANT_PEOPLE, 'porch': LANT_PEOPLE[:2]}
 
 
 def _face(x, y, tx, ty):

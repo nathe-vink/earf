@@ -6,16 +6,16 @@
  ],
  "camera": {
   "position": [
-   9.6,
-   3.62,
+   10.2,
+   3.66,
    1.35
   ],
   "target": [
    18.9,
    4.15,
-   3.1
+   2.3
   ],
-  "lens_mm": 24,
+  "lens_mm": 32,
   "level": true,
   "fstop": 4.0,
   "focus": [
@@ -790,7 +790,7 @@
     10.0,
     0.1
    ],
-   "irradiance": 0.1,
+   "irradiance": 0.03,
    "color": 2700,
    "camera": false
   },
@@ -810,7 +810,7 @@
     10.0,
     4.0
    ],
-   "irradiance": 0.05,
+   "irradiance": 0.02,
    "color": 2900,
    "camera": false
   },
@@ -830,7 +830,7 @@
     0.05,
     5.6
    ],
-   "irradiance": 0.6,
+   "irradiance": 0.15,
    "color": 2400,
    "camera": false
   },
@@ -846,8 +846,8 @@
     3.19,
     1.0
    ],
-   "power_w": 70.0,
-   "cone_deg": 34.0,
+   "power_w": 110.0,
+   "cone_deg": 26.0,
    "blend": 0.8,
    "radius_m": 0.03,
    "color": 2700,
@@ -865,8 +865,8 @@
     5.99,
     1.0
    ],
-   "power_w": 70.0,
-   "cone_deg": 34.0,
+   "power_w": 110.0,
+   "cone_deg": 26.0,
    "blend": 0.8,
    "radius_m": 0.03,
    "color": 2700,
@@ -884,7 +884,7 @@
     4.39,
     0.3
    ],
-   "power_w": 45.0,
+   "power_w": 60.0,
    "cone_deg": 26.0,
    "blend": 0.8,
    "radius_m": 0.15,
@@ -907,7 +907,7 @@
     0.15,
     4.6
    ],
-   "irradiance": 0.2,
+   "irradiance": 0.12,
    "color": 2600,
    "camera": false
   },
@@ -973,7 +973,7 @@
   "bounces": 10,
   "view": "AgX",
   "look": "AgX - Medium High Contrast",
-  "exposure": 3.8,
+  "exposure": 3.5,
   "white_balance_k": 3200,
   "white_balance_tint": -1.5,
   "caustics_refractive": true
