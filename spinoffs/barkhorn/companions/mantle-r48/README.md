@@ -1,26 +1,28 @@
 # Mantle, round 48: make it real, make it EARF's
 
+(Proposal B was first called Core; the coordinator renamed it Outcrop, since Core is the table lamp. Older commits say core.)
+
 The owner, 2026-10-31: "I mostly want to nail design, make it realistic, make it cooler … Make it well architected,
 novel, lasting." The current Mantle (`../turntable_float.py`, `../out-turntable-float/`, round 34 and round 43's BOM)
 **stays the baseline**. Nothing of it was changed. This folder holds two proposals beside it. Each has its own CAD,
 drawings, parts list, numbers and renders. The owner chooses.
 
-| | baseline | **A, Strata Float** | **B, Core** |
+| | baseline | **A, Strata Float** | **B, Outcrop** |
 |---|---|---|---|
 | idea | a squared plinth floating over a lit base, hinged box lid | the same architecture, every fault fixed, the plinth and base laminated as strata | a stepped block of strata; lift the top strata off and the deck is there; the lifted strata frame the sleeve |
-| product file | `turntable_float.py` | `mantle_strata.py` | `mantle_core.py` |
-| build | `out-turntable-float/` | `out-strata/` (23 sheets) | `out-core/` (30 sheets + `drawings/details.png`) |
+| product file | `turntable_float.py` | `mantle_strata.py` | `mantle_outcrop.py` |
+| build | `out-turntable-float/` | `out-strata/` (23 sheets) | `out-outcrop/` (30 sheets + `drawings/details.png`) |
 | size | 470 x 380 x 194 | 470 x 380 x about 200 | 472 x 382 x 155 closed, 47 deck |
 | mass | about 15.5 kg | about 15 kg | 16.1 kg (deck 8.7, cover 2.9, turning 2.1) |
-| parts list, one off | $3,910 | **$4,356** | **$4,282** |
+| parts list, one off | $3,910 | **$3,822** | **$3,773** |
 | supplies at the wall | Neo + Mean Well (light, shared with the phono stage) | Neo + Mean Well (light) + the S2's own | Neo + the S2's own |
 | checks | | 0 clashes, stock ok, library ok | 0 clashes, stock ok, library ok |
 
-    .venv-fab/bin/python studio/fabkit/build.py spinoffs/barkhorn/companions/mantle-r48/mantle_core.py --out spinoffs/barkhorn/companions/mantle-r48/out-core
+    .venv-fab/bin/python studio/fabkit/build.py spinoffs/barkhorn/companions/mantle-r48/mantle_outcrop.py --out spinoffs/barkhorn/companions/mantle-r48/out-outcrop
     .venv-fab/bin/python studio/fabkit/build.py spinoffs/barkhorn/companions/mantle-r48/mantle_strata.py --out spinoffs/barkhorn/companions/mantle-r48/out-strata
-    .venv-fab/bin/python spinoffs/barkhorn/companions/mantle-r48/core_numbers.py > spinoffs/barkhorn/companions/mantle-r48/out-core/numbers.md
+    .venv-fab/bin/python spinoffs/barkhorn/companions/mantle-r48/outcrop_numbers.py > spinoffs/barkhorn/companions/mantle-r48/out-outcrop/numbers.md
     .venv-fab/bin/python spinoffs/barkhorn/companions/mantle-r48/details.py
-    sh spinoffs/barkhorn/companions/mantle-r48/render_all.sh          # Cycles, about 25 min a frame on 4 cores
+    sh spinoffs/barkhorn/companions/mantle-r48/render_all.sh          # Cycles, 6-15 min a frame on 4 cores (render_v2.sh, render_v3.sh: the later passes)
 
 (After a build, write `render/meta.json` for the scene: see the commit, or `python -c` the product's `derived(P)`.)
 
@@ -76,7 +78,7 @@ It found ten things a shop or a turntable engineer would not build as drawn:
 - The webs are thin.
 
 It also listed what is missing: a bearing section, fits and finishes, a wiring and earth scheme, and a rating label.
-Both proposals answer every point. Core's `details.png` draws the missing pieces.
+Both proposals answer every point. Outcrop's `details.png` draws the missing pieces.
 
 ## 2. The signature: strata, and why the tint goes in thin lines
 
@@ -89,7 +91,7 @@ before drawing anything, and the numbers turned it around.
   slab (`scene.py`, first passes): nothing passes through it, and the strata vanish. That matches round 43's "harsh
   case". The $1 chips and a 1/2 in offcut will confirm it before any sheet is bought.
 - **So the strata are clear, and the color is the contour line.** Each proposal is thick water-clear stock
-  (12.7, 5.6) with thin tinted laminae (3 mm). In Core each tinted lamina is a **20 mm ring round a clear inlay** cut
+  (12.7, 5.6) with thin tinted laminae (3 mm). In Outcrop each tinted lamina is a **20 mm ring round a clear inlay** cut
   from the same file. The color sits at the edges as a dark contour line under every terrace. The inside is clear,
   so the brass bearing, the feet and the motor show through the block, like a watch's caseback. This also gives the
   critics' "light passing through" and the engineer's "make the bond line the signature".
@@ -105,9 +107,9 @@ before drawing anything, and the numbers turned it around.
 
 ## 3. The proposals
 
-### B, Core (recommended)
+### B, Outcrop (recommended)
 
-Closed, Core is a stepped block of strata 155 mm tall. The deck is six laminae (tinted 3 / clear 12.7 ×3, 47.1),
+Closed, Outcrop is a stepped block of strata 155 mm tall. The deck is six laminae (tinted 3 / clear 12.7 ×3, 47.1),
 stepping in 3 mm a terrace. The cover continues the same contours: five clear rings 10 wide, each with a tinted ring
 on it, and a clear 5.6 top under a tinted 3. Lift the cover off and the record player is underneath, cut into the
 block. Stand the cover on its back edge, open side forward, and the sleeve of the record playing stands in it:
@@ -123,7 +125,7 @@ The owner's original brief, kept: squared, like a Debut or an Orbit, a clear bod
 float, the lit base and the hinged lid, and fixes every fault the review found:
 
 - **The plinth** is laminated (tinted 3 ring / clear 12.7 / tinted 3 ring / clear 5.6 = 24.3), stepping 2 mm.
-- **The posts** are torqued studs (rigid). Isolation is in four brass feet on Sorbothane.
+- **The posts** are torqued studs (rigid). Isolation is in four stainless feet on Sorbothane.
 - **The motor** hangs from the plinth on Rega's grommets, in the float's gap.
 - **The base** is clear 12.7 under a tinted 3 ring. The light's slot is 6 deep and 25 in from the edge, in one closed
   loop of dotless COB strip (4.4 W). The black band is printed inside the stack.
@@ -131,9 +133,9 @@ float, the lit base and the hinged lid, and fixes every fault the review found:
 
 A is the safer choice; B is the new idea.
 
-## 4. Real details (Core; A shares them unless noted)
+## 4. Real details (Outcrop; A shares them unless noted)
 
-`out-core/drawings/details.png` draws A to F. `out-core/numbers.md` has the arithmetic.
+`out-outcrop/drawings/details.png` draws A to F. `out-outcrop/numbers.md` has the arithmetic.
 
 | detail | what | mass | cost (one off) | service |
 |---|---|---|---|---|
@@ -142,22 +144,18 @@ A is the safer choice; B is the new idea.
 | motor, belt, decoupling | Rega's 24 V motor on its plate, **hung on Rega's three grommets** in a pocket in the deck, so the pulley's height is fixed to the platter's by solid acrylic. Pulley 39.48 (250 rpm), 180 from the spindle, wrap 87°. Flat belt 5 x 0.6, path 992 mm, cut to about 945. | 0.41 kg | motor kit $265, grommets $15, pulley $47, belt $30 | Lift the motor plate out of its pocket (three grommets); the belt is changed with the platter off. |
 | arm and arm board | Rega RB330 at 222 on an **aluminum arm-board puck** (84 x 12, bead-blasted, Rega three-point), on three M5 into inserts. Another arm takes another puck. The record sits 28.8 over the deck's top; Rega spacers set the tube level on the first sample. | 0.46 kg | arm $675, puck about $40 | The arm comes off from below through the 56 bore. |
 | arm rest and cueing | Rega's own lift and rest, on the arm's base. The lever sits to the right of the arm, front. | in the arm | in the arm | Rega's. |
-| feet and levelling | **Three** turned brass feet (40 x 12) on Sorbothane 40 x 4, on M8 studs in bonded inserts, levelled by turning and locked with a brass nut. Three never rock. f about 50 Hz on 13 kg: they keep 70 Hz and up off the deck, pass footfall (a bouncy floor wants a wall shelf), and add nothing in the arm's 8 Hz band. | 0.47 kg | brass $~90, pads $20, studs $18 | Turn to level; replaceable pads. |
-| external supply and connector | Rega's Neo PSU MK2 (mains, its maker's listing; check its US mark) drives the motor through its own lead in a groove to the back notch. The S2's own listed 18 V adapter plugs into a 2.1 mm jack on the brass plate. Nothing inside Core is above 24 V. | | Neo $445 | Both are standard, replaceable boxes. |
+| feet and levelling | **Three** turned stainless feet (40 x 12; brass read as amber through the tint) on Sorbothane 40 x 4, on M8 studs in bonded inserts, levelled by turning and locked with a nut. Three never rock. f about 50 Hz on 13 kg: they keep 70 Hz and up off the deck, pass footfall (a bouncy floor wants a wall shelf), and add nothing in the arm's 8 Hz band. | 0.47 kg | stainless $~70, pads $20, studs $18 | Turn to level; replaceable pads. |
+| external supply and connector | Rega's Neo PSU MK2 (mains, its maker's listing; check its US mark) drives the motor through its own lead in a groove to the back notch. The S2's own listed 18 V adapter plugs into a 2.1 mm jack on the brass plate. Nothing inside Outcrop is above 24 V. | | Neo $445 | Both are standard, replaceable boxes. |
 | speed change | 33/45 on the Neo's button, trimmed in 0.01 rpm steps. One pulley diameter; the belt never moves. | | | |
 | hinges and stays (A) | A: Pro-Ject's Debut friction hinges in 9.5 acrylic blocks on M4 into inserts (in shear), with a 1.1 kg lid. **B: none.** The cover lifts off on dowels. | | A $34 | |
 | cartridge and phono cable | Ortofon 2M Black (or 2M Blue for the first build, round 43). The RB330's own lead goes down the puck's bore, along an 8 x 6 groove under the deck, into the **S2 in a tunnel from the back** (on felt runners). The S2 feeds the brass plate's DPDT (stage or bypass) to the gold RCAs. Star earth at the plate's post: arm, bearing housing (M3 tag), S2. | S2 0.57 kg | 2M $750, S2 $269, plate hardware $48, wiring $25 | Four M3 screws hold the plate; the S2 slides out for its switches. |
 | labels and rating | Laser-engraved and black-filled on the brushed brass plate: name, line out, 18 V DC 0.5 A (center +), SN, "Motor: Rega Neo PSU". EARF etched at the deck's front right, filled. No compliance mark until tested (the supplies carry their own). | 0.11 kg | plate about $50, etch $15 | |
 
-**Heat:** none to speak of in Core (the S2 draws 0.5 W in an open tunnel). In A the COB loop is 4.4 W in a 6 mm slot
+**Heat:** none to speak of in Outcrop (the S2 draws 0.5 W in an open tunnel). In A the COB loop is 4.4 W in a 6 mm slot
 open below, a third less a meter than the baseline's strip, through 25 mm of clear acrylic to the edge. The
 baseline's first-sample thermocouple check stays.
 
-**Cost against the baseline ($3,910):** Core is $4,282, about +$370. It adds the turned feet, the puck, the screwed
-hub, the threaded housing's nut and the cover's ten rings. It drops the light, the dimmer, the adapter, the rear box,
-the regulator, the posts, the bushings and the hinges. A is $4,356, about +$450 (the same turned parts, plus the
-COB loop). The kit prices every ring as a full rectangle of sheet. In practice the platter blanks, the puck's ring
-and the inlays nest inside the rings' offcuts, so the acrylic line is high.
+**Cost against the baseline ($3,910):** Outcrop is $3,773 (about -$140) and Strata Float $3,822 (about -$90). Outcrop adds the turned stainless feet, the puck, the screwed hub, the threaded housing's nut and the cover's ten rings. It drops the light, the dimmer, the adapter, the rear box, the regulator, the posts, the bushings and the hinges. Strata Float adds the same turned parts and a COB loop, and drops the regulator, the rear box and the bushings. The kit prices every ring as a full rectangle of sheet. In practice the platter blanks, the puck's ring and the inlays nest inside the rings' offcuts, so the acrylic line is high. (An earlier figure of about $4,300 priced the feet as one bounding block of brass; they are now priced as three 45 mm blanks of stainless.)
 
 ## 5. The renders (`renders/2026-10-31/barkhorn/mantle-r48/`)
 
@@ -176,10 +174,11 @@ Path-traced in Cycles by `scene.py` from the fab kit's render model (one model, 
 
 | frame | what |
 |---|---|
-| `core-hero.png` | Core, studio, cover off, Smoke (2064) |
-| `core-closed.png` | Core closed: the block of strata |
-| `core-detail.png` | the arm's corner: cartridge, the platter's strata rim, the terrace, the mark |
-| `core-use.png` | a record playing (the label blurred at 33⅓, 1/8 s), the cover stood as the sleeve's frame, on a walnut sideboard |
+| `outcrop-hero.png`, `-v2`, `-v3` | Outcrop, studio, cover off, Smoke (2064): first pass; the critics' notes (gray sweep, frosted etch, puck screws, stainless feet, polished bores); the arm's and the cartridge's details and the vinyl's sheen |
+| `outcrop-closed.png`, `-v2` | Outcrop closed: the block of strata |
+| `outcrop-detail.png`, `-v2`, `-v3` | the arm's corner; v3 close on the stylus and headshell (tag wires, screws, pins) |
+| `outcrop-use.png`, `-v2` | a record playing (the label blurred at 33⅓, 1/8 s), the cover stood as the sleeve's frame, on a walnut sideboard; v2 lit through from a back window |
+| `outcrop-ember.png` | Outcrop in Ember (stock 2423 Red, 14.1 % at 1/8 in, Beer-Lambert): the color as contour lines |
 | `strata-hero.png` | Strata Float, studio, lid off, the base's loop lit |
 
 The in-use frame was to have a hand on the cue lever. The procedural hand read as a cartoon, and it would have cost
@@ -194,7 +193,7 @@ See `critic/LOG.md` (filled after the renders).
 1. **A or B,** or B's cover on A's float.
 2. **The thin-tint stack** depends on 2064 being as dark as its chart says. The chips and a 1/2 in offcut settle it.
    If the caster pours EARF's own tints lighter, thicker tinted strata come back as an option.
-3. **Core's cover is 2.9 kg.** A 3 + 3 top instead of 5.6 + 3 would bring it to about 2.4.
-4. **Core has no light.** If the owner wants the glow, A's lit base can go under Core's deck on four short clear
+3. **Outcrop's cover is 2.9 kg.** A 3 + 3 top instead of 5.6 + 3 would bring it to about 2.4.
+4. **Outcrop has no light.** If the owner wants the glow, A's lit base can go under Outcrop's deck on four short clear
    posts, at A's cost.
 5. **Cartridge:** the 2M Black ($750), or the 2M Blue ($220) for the first build (round 43).

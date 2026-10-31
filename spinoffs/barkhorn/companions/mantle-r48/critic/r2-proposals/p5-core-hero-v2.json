@@ -1,0 +1,174 @@
+{
+ "stage1": {
+  "impression": "A clean, competent product render of a belt-drive turntable on a layered smoked-acrylic plinth, in a soft grey studio. The silhouette is tidy, but it reads as CG: the record is a flat, untextured disc, the cartridge and headshell are blocky, the acrylic shows smeared internal reflections and no real refraction at its edges, and the arm is a generic straight tube on a stock pillar. The stack of three slabs is the one distinctive idea, and it is undersold.",
+  "score": 5.5
+ },
+ "reads_as": "a Pro-Ject or Rega-style acrylic deck with a generic straight-tube tonearm",
+ "unreal": [
+  {
+   "rank": 1,
+   "region": [
+    920,
+    600,
+    1060,
+    720
+   ],
+   "what": "The cartridge and headshell are flat rectangular plates with a thin finger lift and a box cartridge. There are no stylus cantilever, no body chamfers and no tonearm leads, and the headshell sits as if hovering over the record's edge.",
+   "real": "A machined headshell with offset angle and a slotted mount, two M2.5 screws with visible heads, a cartridge with a tapered nose and a cantilever and stylus catching a speck of light, and four coloured tag wires at the back."
+  },
+  {
+   "rank": 2,
+   "region": [
+    410,
+    450,
+    1200,
+    680
+   ],
+   "what": "The vinyl is a matte, evenly grey disc. There are only five drawn track rings, with no groove microstructure, no anisotropic sheen and no lead-in or run-out land.",
+   "real": "Real vinyl gives a radial, anisotropic highlight streak (a bright wedge across the grooves). Glossy land shows between tracks, the run-out is visibly smoother, and the label sits in a slight recess with a pressing ring."
+  },
+  {
+   "rank": 3,
+   "region": [
+    120,
+    700,
+    1640,
+    1000
+   ],
+   "what": "The acrylic slab edges are uniformly black with random smeared bright rectangles inside. They read as glossy black plastic with noise, not as through-tinted cast acrylic. Measured median luminance in that band is 48 and 5.5% is crushed.",
+   "real": "Cast smoke acrylic edges glow brighter than the face (light piping), show the polished flame edge as a lighter line, and refract the slab below in a coherent, compressed image, not floating fragments."
+  },
+  {
+   "rank": 4,
+   "region": [
+    560,
+    590,
+    1260,
+    760
+   ],
+   "what": "The internal components seen through the top slab (motor pulley, sub-chassis, yellow-orange blobs) are blurred, unidentifiable shapes, and the platter's reflection on the top face is a ghost doubled inside the material.",
+   "real": "Either a crisp, deliberately designed internal layout (motor, belt, bearing, PCB) seen with correct refraction, or a darker tint that hides it. A photograph shows a sharp surface reflection over a slightly displaced interior."
+  },
+  {
+   "rank": 5,
+   "region": [
+    1000,
+    450,
+    1530,
+    660
+   ],
+   "what": "The tonearm is a plain constant-diameter grey tube with a cylindrical pillar, a block bearing yoke with a single domed pin, and a polished counterweight as a simple cylinder. It has no anti-skate, no VTA collar, no arm rest clip, no lift lever and no internal wiring exit.",
+   "real": "A tapered or straight arm tube with a finger-sized cueing lever beside it, an anti-skate weight or dial, a VTA locking collar with grub screws on the pillar, and a counterweight with a knurled band or scale ring."
+  },
+  {
+   "rank": 6,
+   "region": [
+    1280,
+    600,
+    1450,
+    680
+   ],
+   "what": "The armboard disc is a flat, uniform satin grey with four domed rivet-like dots. Its edge has no chamfer, and its contact with the acrylic shows no shadow line or seating.",
+   "real": "A turned aluminium armboard with a visible lathe-finish spiral or brushed grain, countersunk hex-socket screws flush with the face, a 0.5 mm edge chamfer catching a line of light, and a dark contact line where it meets the acrylic."
+  },
+  {
+   "rank": 7,
+   "region": [
+    780,
+    510,
+    830,
+    580
+   ],
+   "what": "The spindle is a tall, thin, bright cylinder standing well proud of the label, out of scale (it looks 25 mm or more above the record).",
+   "real": "A spindle standing about 12 to 15 mm above a record, with a polished conical tip and the label's centre hole showing a slight gap around it."
+  },
+  {
+   "rank": 8,
+   "region": [
+    230,
+    680,
+    330,
+    720
+   ],
+   "what": "The left-front fixing (a small black boss with a bright pin) and the rear-right post are generic cylinders that read as placeholder geometry, with no thread, washer or seat.",
+   "real": "A flush stainless cap screw in a counterbore, or a cover hinge pin seated in a turned bushing, with a crisp anodised or polished edge."
+  },
+  {
+   "rank": 9,
+   "region": [
+    1060,
+    860,
+    1200,
+    900
+   ],
+   "what": "The EARF wordmark is pure white, flat and slightly fuzzy, and reads as a sticker floating on the surface with no depth or relation to the acrylic.",
+   "real": "A reverse-printed or laser-engraved mark seen through the top skin, with a faint frost and a slight parallax shadow, or a screen print with a crisp ink edge and a subtle gloss break."
+  },
+  {
+   "rank": 10,
+   "region": [
+    200,
+    900,
+    1400,
+    1010
+   ],
+   "what": "The feet are barely visible and the contact shadow is a soft, uniform smear. The three slabs float with even black gaps and nothing visibly separates or locates them.",
+   "real": "Visible machined feet with a crisp occlusion line at the floor, and spacers or bushings between the slabs that you can see at the gaps, each casting a small dark contact."
+  }
+ ],
+ "cooler": [
+  {
+   "rank": 1,
+   "idea": "Make the three-slab stack the product's signature. Vary the slabs' thickness or offset them by a few millimetres in plan, and leave visible machined spacers in the gaps so the stack reads as a decoupled, engineered sandwich rather than three identical sheets.",
+   "now": "It reads as a generic layered-acrylic plinth (Pro-Ject, Clearaudio entry)."
+  },
+  {
+   "rank": 2,
+   "idea": "Design a tonearm that belongs to this object: a smoke-acrylic or dark-anodised tapered tube, an armboard turned as a ring flush with the top slab, and a counterweight echoing the stack (three discs).",
+   "now": "The arm is a stock Rega-type straight tube on a pillar and could be on any deck."
+  },
+  {
+   "rank": 3,
+   "idea": "Use the transparency on purpose. Lay out the motor, belt and bearing as a composed, visible mechanism (one bronze or brass element glowing through the smoke) instead of hiding stray blurred parts.",
+   "now": "The interior reads as accidental clutter seen through tinted plastic."
+  },
+  {
+   "rank": 4,
+   "idea": "Give the platter a distinctive edge: a thick smoke-acrylic platter with a polished, light-piping rim, or a visible belt groove in a contrasting metal, so the platter and plinth read as one material family.",
+   "now": "A black platter with a thin silver band, typical of mid-price decks."
+  },
+  {
+   "rank": 5,
+   "idea": "Move the wordmark from a white print on the corner to an engraved or edge-lit mark on a slab edge, where the acrylic's light piping can carry it.",
+   "now": "It reads as a white logo sticker on a corner."
+  }
+ ],
+ "photo": [
+  {
+   "rank": 1,
+   "change": "Add a long strip softbox behind and above at a grazing angle, so the acrylic edges and the vinyl pick up a long, clean specular gradient (with a black flag opposite for contrast). Also add a narrow kicker low on the right to make the slab edges light-pipe.",
+   "expected": "Acrylic reads as glass-like cast material, the vinyl gets its radial sheen, and the stack of three slabs becomes legible."
+  },
+  {
+   "rank": 2,
+   "change": "Replace the vinyl shader with an anisotropic, radially oriented groove material, with a glossier land and run-out, and add a recessed label.",
+   "expected": "The record stops reading as a grey disc, which removes the biggest CG giveaway in the frame centre."
+  },
+  {
+   "rank": 3,
+   "change": "Lower the camera slightly and use a longer lens (about 85 to 100 mm equivalent) with a shallow but real depth of field, focused on the headshell and cartridge.",
+   "expected": "Less wide-angle distortion on the plinth, a hero detail sharp, and a more photographic falloff."
+  },
+  {
+   "rank": 4,
+   "change": "Darken the background top band to a smoother gradient (its median is now 74 over a 110 range, with a hard, blotchy transition) and move the ground to a warm mid grey with a crisper contact shadow under the feet.",
+   "expected": "The product separates cleanly from a studio sweep without the patchy vignette, and it sits on the floor instead of floating."
+  },
+  {
+   "rank": 5,
+   "change": "Increase the acrylic's tint density and correct its IOR/thickness so internals refract coherently. Add a faint dust and fingerprint layer on the top slab and micro edge bevels on every metal part.",
+   "expected": "Surfaces lose the CG-clean look, and the transparent body reads as a real, heavy cast part."
+  }
+ ],
+ "score_if_fixed": 7.5
+}

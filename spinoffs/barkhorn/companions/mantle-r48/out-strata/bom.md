@@ -29,15 +29,15 @@
 | pulley | lathe | 1 | Aluminium 6061 | 55 x 55 x 22 | 46.69 |
 | belt | buy | 1 | Flat turntable belt, ground rubber or polyurethane, 5 wide x 0.6, cut to the measured path (about 945 long for the 994 path, 5 % stretch); an O-ring test belt first |  | 30.00 |
 | arm-puck | lathe | 1 | Aluminium 6061 | 94 x 94 x 22 | 49.86 |
-| arm | buy | 1 | Rega RB330 tonearm (9 in, Rega geometry: 222 mm from the platter's centre to the arm's hole, effective length 236.5, overhang 14.5, offset 21.55 deg), with its own lead and cueing lift |  | 675.00 |
+| arm | buy | 1 | Rega RB330 tonearm (9 in, Rega geometry: 222 mm from the platter's center to the arm's hole, effective length 236.5, overhang 14.5, offset 21.55 deg), with its own lead and cueing lift |  | 675.00 |
 | cartridge | buy | 1 | Ortofon 2M Black moving-magnet cartridge (nude Shibata stylus), black body, 1/2 in mount |  | 750.00 |
-| feet | lathe | 1 | Brass C69300 (Eco Brass, lead-free) or C27450 | 454 x 364 x 22 | 577.95 |
+| feet | lathe | 1 | Stainless steel 304 | 45 x 45 x 80 | 49.86 |
 | foot-pads | buy | 1 | Isolate It (Sorbothane Inc.) Three Sorbothane discs 40 x 4, 50 duro, bonded under the brass feet: about 45 N each, 36 kPa |  | 20.00 |
 | foot-studs | buy | 1 | Three M8 x 30 stainless studs, three M8 brass lock nuts (thin), three M8 x 12 brass threaded inserts (for acrylic, epoxy-bonded) |  | 18.00 |
-| phono-stage | buy | 1 | Pro-Ject Phono Box S2, MM/MC phono stage in an aluminium case, 103 x 115 x 36 (one listing 103 x 36 x 115 mm, 0.57 kg): RIAA within 0.4 dB 20 Hz-20 kHz, MM S/N 94 dBA at 40/43 dB gain, THD under 0.01 %, subsonic filter 20 Hz 12 dB/oct, MM 47k with switchable capacitance; 18 V DC 500 mA in. Used whole, inside Mantle's float, fed from the rear box's regulator |  | 269.00 |
+| phono-stage | buy | 1 | Pro-Ject Phono Box S2, MM/MC phono stage in an aluminum case, 103 x 115 x 36 (one listing 103 x 36 x 115 mm, 0.57 kg): RIAA within 0.4 dB 20 Hz-20 kHz, MM S/N 94 dBA at 40/43 dB gain, THD under 0.01 %, subsonic filter 20 Hz 12 dB/oct, MM 47k with switchable capacitance; 18 V DC 500 mA in. Used whole, inside Mantle's float, fed from the rear box's regulator |  | 269.00 |
 | phono-pads | buy | 1 | Four 10 mm felt pads under the phono stage |  | 2.00 |
 | back-hardware | buy | 1 | Neutrik / Switchcraft / CUI kind Two gold panel RCA jacks (insulated, 1/4 in hole), a 4 mm earth binding post, a DPDT mini toggle (C&K 7201 kind), a 2.1 mm DC panel jack; shielded leads inside to the S2 |  | 48.00 |
-| hinge-blocks | cnc-mill | 1 | Cast acrylic tube, tinted through | 344 x 20 x 29 | 52.86 |
+| hinge-blocks | cnc-mill | 1 | Cast acrylic tube, tinted through | 45 x 15 x 58 | 46.57 |
 | hinges | buy | 1 | Pro-Ject Replacement dust cover hinge for Debut series (rp-611), two: friction hinges that hold the lid open at any angle, a spring blade clamped to the lid's back wall, the foot in a slot (here a pocket in an acrylic block on the plinth's back edge) |  | 34.00 |
 | lid-top | cut | 1 | 3 mm Cell-cast acrylic sheet, stock tint (TruCast 2064 Gray or 2423 Red), 4 x 8 ft | 452 x 362 | 13.50 |
 | lid-front, lid-back | cut | 2 | 3 mm Cell-cast acrylic sheet, stock tint (TruCast 2064 Gray or 2423 Red), 4 x 8 ft | 452 x 97 | 3.62 |
@@ -53,9 +53,9 @@
 | | USD |
 |---|---|
 | buy | 2,894 |
-| cnc-mill | 53 |
+| cnc-mill | 47 |
 | cut | 168 |
-| lathe | 1,241 |
-| total | 4,356 |
+| lathe | 713 |
+| total | 3,822 |
 
 Budget figures: bought parts from the component library (dated retailer listings), made parts from the kit's stock rates: 25 % offcut on sheet parts, a handling charge a print, and a setup a machined line spread over its pieces. A shop's quote replaces them.

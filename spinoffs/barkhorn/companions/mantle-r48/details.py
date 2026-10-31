@@ -1,4 +1,4 @@
-"""Core's detail sheet (round 48): what the kit's general sections do not cut through, drawn from mantle_core's numbers.
+"""Outcrop's detail sheet (round 48): what the kit's general sections do not cut through, drawn from mantle_outcrop's numbers.
 The review of the baseline asked for a bearing section, fits and finishes, the oil level, the arm's height stack, the
 wiring and earth scheme, and the rating label. One A3 sheet, PNG and PDF.
 
@@ -12,10 +12,10 @@ from matplotlib.patches import Rectangle, Circle, Polygon
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-import mantle_core as M                                             # noqa: E402
+import mantle_outcrop as M                                             # noqa: E402
 
 P, D = M.P, M.derived(M.P)
-OUT = os.path.join(HERE, 'out-core', 'drawings')
+OUT = os.path.join(HERE, 'out-outcrop', 'drawings')
 FS = 7.2
 
 
@@ -96,7 +96,7 @@ def foot(ax):
     strata(ax, -35, 35, [l0, l1])
     R(ax, -20, 0, 20, 4, fc='#555', hatch='...'); R(ax, -20, 4, 20, 16, fc='#f2e3b3', hatch='\\\\\\'); R(ax, -15, 16, 15, b0 - 0.5, fc='#f2e3b3', hatch='\\\\\\')
     R(ax, -4, b0 - 4, 4, b0 + 12, fc='#ccc', z=3); R(ax, -5.5, b0, 5.5, b0 + 12, fc='none', ec='k', lw=0.6, hatch='xx', z=2)
-    note(ax, 28, 2, 'Sorbothane 40 x 4, 50 duro', (20, 2)); note(ax, 28, 10, 'turned brass 40 x 12, M8 bore; brass lock nut', (20, 10))
+    note(ax, 28, 2, 'Sorbothane 40 x 4, 50 duro', (20, 2)); note(ax, 28, 10, 'turned 303 stainless 40 x 12, M8 bore; lock nut', (20, 10))
     note(ax, 28, b0 + 6, 'M8 x 12 insert, epoxy-bonded through L1 into L2', (5.5, b0 + 6))
     ax.set_xlim(-40, 110); ax.set_ylim(-3, b0 + 18); ax.set_aspect('equal'); ax.axis('off')
 
@@ -143,7 +143,7 @@ def plate(ax):
         ax.add_patch(Circle((x, jz), d / 2, fc='white', ec='k', lw=0.6)); ax.text(x, jz + 8, lab, fontsize=4.6, ha='center')
     for x, y in ((6, 5), (nw - 8, 5), (6, nh - 5), (nw - 8, nh - 5)):
         ax.add_patch(Circle((x, y), 1.7, fc='white', ec='k', lw=0.5))
-    ax.text(11, 7.2, 'EARF  MANTLE CORE   LINE OUT   18 V DC 0.5 A (center +)   SN 0001', fontsize=4.0)
+    ax.text(11, 7.2, 'EARF  MANTLE OUTCROP   LINE OUT   18 V DC 0.5 A (center +)   SN 0001', fontsize=4.0)
     ax.text(11, 3.2, 'Motor: Rega Neo PSU (own listing)   Designed in San Francisco', fontsize=4.0)
     note(ax, 0, -6, '2 mm lead-free brass, brushed, the text laser-engraved 0.05 deep and filled black. Compliance marks only\nafter testing (FCC Part 15B for the stage\'s supply as sold; the S2 and its adapter carry their own).', None)
     ax.set_xlim(-4, nw + 4); ax.set_ylim(-16, nh + 6); ax.set_aspect('equal'); ax.axis('off')
@@ -161,7 +161,7 @@ def wiring(ax):
     ax.plot([13, 13, 93, 93], [26, 34, 34, 40], color='#2a8a2a', lw=0.8); ax.plot([13, 13], [40, 34], color='#2a8a2a', lw=0.8)
     ax.plot([53, 53], [34, 40], color='#2a8a2a', lw=0.8)
     ax.text(70, 30.5, 'star earth at the plate\'s post (arm lead, housing, S2)', fontsize=FS - 1, color='#2a8a2a')
-    ax.text(0, 4, 'Two plugs at the wall, both makers\' listed supplies; nothing in Core above 24 V. The motor lead runs in its groove\nto the back notch, the arm lead in its own, 40 mm apart; no LED, no dimmer, no shared supply.', fontsize=FS - 1)
+    ax.text(0, 4, 'Two plugs at the wall, both makers\' listed supplies; nothing in Outcrop above 24 V. The motor lead runs in its groove\nto the back notch, the arm lead in its own, 40 mm apart; no LED, no dimmer, no shared supply.', fontsize=FS - 1)
     ax.set_xlim(-2, 146); ax.set_ylim(0, 56); ax.set_aspect('equal'); ax.axis('off')
 
 
@@ -170,8 +170,8 @@ def main():
     gs = fig.add_gridspec(3, 3, left=0.03, right=0.97, top=0.94, bottom=0.08, hspace=0.25, wspace=0.12)
     bearing(fig.add_subplot(gs[0:2, 0:2])); foot(fig.add_subplot(gs[0, 2])); motor(fig.add_subplot(gs[1, 2]))
     cover(fig.add_subplot(gs[2, 0])); plate(fig.add_subplot(gs[2, 1])); wiring(fig.add_subplot(gs[2, 2]))
-    fig.text(0.03, 0.97, 'Mantle: Core (proposal B), details', fontsize=14, weight='bold')
-    fig.text(0.03, 0.955, 'mm, first angle; from mantle_core.py (round 48). Strata hatched where tinted. A proposal until the owner signs it.', fontsize=FS)
+    fig.text(0.03, 0.97, 'Mantle: Outcrop (proposal B), details', fontsize=14, weight='bold')
+    fig.text(0.03, 0.955, 'mm, first angle; from mantle_outcrop.py (round 48). Strata hatched where tinted. A proposal until the owner signs it.', fontsize=FS)
     fig.text(0.03, 0.03, 'Fits: spindle 10 g5 / bushes 10 H6 (8-12 um); hub spigot 40 h6 / platter 40.2 H7; the housing a 30.4 clearance bore. '
              'Finishes: outer acrylic faces diamond-polished, treads buffed, holes and pockets as machined. Arm height: Rega spacers to a level tube on the first sample.',
              fontsize=FS)

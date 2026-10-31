@@ -12,7 +12,7 @@ shot). Written for realism, not for the studio engine's look:
 - the record is a prop with grooves (a radial anisotropic sheen, the lead-in, the bands, the run-out) and a label;
 - the bought arm and cartridge are modelled from their published geometry, finer than the fab kit's envelope.
 
-    python3.11 scene.py SHOT --colour smoke --out PNG [--samples N] [--scale S] [--model out-core]
+    python3.11 scene.py SHOT --colour smoke --out PNG [--samples N] [--scale S] [--model out-outcrop]
 SHOT: hero, macro, use, closed, stand
 """
 import argparse, json, math, os, sys
@@ -235,9 +235,9 @@ def vinyl_material(label_png):
     m, nt, out = node_tree('vinyl')
     b = nt.nodes.new('ShaderNodeBsdfPrincipled')
     b.inputs['Base Color'].default_value = (0.006, 0.006, 0.0065, 1)
-    b.inputs['Roughness'].default_value = 0.30
-    b.inputs['Anisotropic'].default_value = 0.9
-    b.inputs['Specular IOR Level'].default_value = 0.32
+    b.inputs['Roughness'].default_value = 0.22
+    b.inputs['Anisotropic'].default_value = 0.97
+    b.inputs['Specular IOR Level'].default_value = 0.5
     tg = nt.nodes.new('ShaderNodeTangent'); tg.direction_type = 'RADIAL'; tg.axis = 'Z'
     nt.links.new(tg.outputs['Tangent'], b.inputs['Tangent'])
     tc = nt.nodes.new('ShaderNodeTexCoord')
@@ -251,8 +251,8 @@ def vinyl_material(label_png):
     E = ramp.color_ramp.elements
     E[0].position = 0.0; E[0].color = (0.09, 0, 0, 1)
     E[1].position = 0.0560 / 0.16; E[1].color = (0.09, 0, 0, 1)
-    pts = [(0.0600, 0.30), (0.0832, 0.30), (0.0838, 0.10), (0.0845, 0.30), (0.1031, 0.30), (0.1037, 0.10), (0.1044, 0.30),
-           (0.1213, 0.30), (0.1219, 0.10), (0.1226, 0.30), (0.1455, 0.30), (0.1462, 0.14), (0.1505, 0.14)]
+    pts = [(0.0600, 0.22), (0.0832, 0.22), (0.0838, 0.08), (0.0845, 0.22), (0.1031, 0.22), (0.1037, 0.08), (0.1044, 0.22),
+           (0.1213, 0.22), (0.1219, 0.08), (0.1226, 0.22), (0.1455, 0.22), (0.1462, 0.10), (0.1505, 0.10)]
     for r, v in pts:
         e = E.new(r / 0.16); e.color = (v, 0, 0, 1)
     mr = nt.nodes.new('ShaderNodeMath'); mr.operation = 'DIVIDE'; mr.inputs[1].default_value = 0.16
@@ -286,7 +286,7 @@ def vinyl_material(label_png):
 
 
 def sleeve_object():
-    art = os.path.join(HERE, 'out-core', 'render', 'sleeve.png')
+    art = os.path.join(HERE, 'out-outcrop', 'render', 'sleeve.png')
     if not os.path.exists(art):
         import subprocess
         subprocess.run(['python3', os.path.abspath(__file__), '--sleeve', art], check=True)
@@ -543,6 +543,9 @@ def rega_arm(meta, mats, lowered=False, cue_up=False):
         rx, ry = A[0] + 0.105 * ux + 0.016 * nx, A[1] + 0.105 * uy + 0.016 * ny
     # the lead: a black cable down from the base, unseen; the cartridge
     cart = cartridge(mats, piv, hx + 0.012)
+    sys.path.insert(0, HERE)
+    import arm_detail
+    arm_detail.add(piv, cart, tube_len, 0.0046, mats)
     return piv
 
 
@@ -554,8 +557,8 @@ def cartridge(mats, piv, hx):
     e = bpy.data.objects.new('cart-frame', None); bpy.context.collection.objects.link(e)
     e.parent = piv; e.location = (hx, 0, -0.0056); e.rotation_euler = (0, 0, off)
     # body: a trapezoid prism (top 0.022 long, bottom 0.019), 0.018 wide, 0.0155 tall
-    v = [(-0.012, -0.009, 0), (0.010, -0.009, 0), (0.010, 0.009, 0), (-0.012, 0.009, 0),
-         (-0.012, -0.009, -0.0155), (0.0065, -0.009, -0.0155), (0.0065, 0.009, -0.0155), (-0.012, 0.009, -0.0155)]
+    v = [(-0.012, -0.009, 0), (0.008, -0.009, 0), (0.008, 0.009, 0), (-0.012, 0.009, 0),
+         (-0.012, -0.0075, -0.0155), (0.0035, -0.0068, -0.0155), (0.0035, 0.0068, -0.0155), (-0.012, 0.0075, -0.0155)]
     f = [(0, 1, 2, 3), (7, 6, 5, 4), (0, 4, 5, 1), (1, 5, 6, 2), (2, 6, 7, 3), (3, 7, 4, 0)]
     body = add_mesh('cart-body', v, f, blk, smooth=False)
     body.parent = e
@@ -712,7 +715,7 @@ def build(args):
             o.data.materials.append(M[f])
     # the cover: on, off (hidden), or stood on its back edge beside the deck (the frame for the sleeve)
     cov = objs.get('cover-C1-stack') or bpy.data.objects.new('nocover', None)
-    if args.shot in ('hero', 'macro', 'use') and cov.type == 'MESH':
+    if args.shot in ('hero', 'macro', 'macro-stylus', 'use') and cov.type == 'MESH':
         cov.hide_render = args.shot != 'use'
     if args.shot in ('use', 'stand') and cov.type == 'MESH':
         # stand it on its back long edge to the left of the deck, its open side forward
@@ -737,7 +740,7 @@ def build(args):
         pass
 
     # the record (a prop): 0.1505 radius, 1.8 thick, its edge bead
-    label = os.path.join(HERE, 'out-core', 'render', 'label.png')  # shared by both proposals
+    label = os.path.join(HERE, 'out-outcrop', 'render', 'label.png')  # shared by both proposals
     if not os.path.exists(label):
         import subprocess
         subprocess.run(['python3', os.path.abspath(__file__), '--label', label], check=True)
@@ -979,7 +982,7 @@ if __name__ == '__main__':
     ap = argparse.ArgumentParser()
     ap.add_argument('shot'); ap.add_argument('--colour', default='smoke'); ap.add_argument('--out', required=True)
     ap.add_argument('--samples', type=int, default=256); ap.add_argument('--scale', type=float, default=1.0)
-    ap.add_argument('--size', type=int, nargs=2, default=(2400, 1600)); ap.add_argument('--model', default='out-core')
+    ap.add_argument('--size', type=int, nargs=2, default=(2400, 1600)); ap.add_argument('--model', default='out-outcrop')
     ap.add_argument('--paper', default='#2A2826'); ap.add_argument('--exposure', type=float, default=0.0)
     ap.add_argument('--spot', type=float, default=12.0); ap.add_argument('--label-deg', type=float, default=35.0)
     ap.add_argument('--blend', default=None); ap.add_argument('--strip', type=float, default=0.0)

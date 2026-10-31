@@ -5,12 +5,12 @@ cd "$(dirname "$0")"
 OUT=../../../../renders/2026-10-31/barkhorn/mantle-r48
 mkdir -p $OUT
 COMMON="--scale 0.75 --samples 80 --exposure -2.0 --paper #7A7570"
-for n in ${@:-core-hero core-closed core-detail core-use strata-hero}; do
+for n in ${@:-outcrop-hero outcrop-closed outcrop-detail outcrop-use strata-hero}; do
   case $n in
-    core-hero)   python3.11 scene.py hero   --model out-core   --out $OUT/$n.png $COMMON ;;
-    core-closed) python3.11 scene.py closed --model out-core   --out $OUT/$n.png $COMMON ;;
-    core-detail) python3.11 scene.py macro  --model out-core   --out $OUT/$n.png $COMMON ;;
-    core-use)    python3.11 scene.py use    --model out-core   --out $OUT/$n.png $COMMON ;;
+    outcrop-hero)   python3.11 scene.py hero   --model out-outcrop   --out $OUT/$n.png $COMMON ;;
+    outcrop-closed) python3.11 scene.py closed --model out-outcrop   --out $OUT/$n.png $COMMON ;;
+    outcrop-detail) python3.11 scene.py macro  --model out-outcrop   --out $OUT/$n.png $COMMON ;;
+    outcrop-use)    python3.11 scene.py use    --model out-outcrop   --out $OUT/$n.png $COMMON ;;
     strata-hero) python3.11 scene.py hero   --model out-strata --out $OUT/$n.png $COMMON --strip 3 ;;
   esac > /tmp/mantle-r48-$n.log 2>&1
   echo "$n $(grep -c wrote /tmp/mantle-r48-$n.log)"

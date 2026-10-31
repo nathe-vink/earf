@@ -25,8 +25,8 @@ import math, os, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-import mantle_core as B                                             # noqa: E402  (the stock sheets, the arm, the hull)
-from mantle_core import *                                           # noqa: E402,F403
+import mantle_outcrop as B                                             # noqa: E402  (the stock sheets, the arm, the hull)
+from mantle_outcrop import *                                           # noqa: E402,F403
 
 P = dict(
     W=450.0, D=360.0, R=4.0,                  # the plinth's top: the baseline's footprint
@@ -176,7 +176,7 @@ def parts(P):
                         finish='clear', group='float', notes=['water-clear rod 30, bored 6.6, faced and polished; cemented under the plinth on a jig; an M6 stud through it, torqued 4 N m into the inserts top and bottom: rigid'] if i == 0 else []))
     out.append(Part('studs', union(*[cyl('z', p, 6.0, b0 + 1, z0 + 10) for p in posts]), Bought('float-studs'), finish='steel', group='float'))
 
-    # ---- the bearing, platter, hub, spindle (as Core) ----
+    # ---- the bearing, platter, hub, spindle (as Outcrop) ----
     hz0 = z0 - 20.0
     ft = P['flange_t']
     housing = (cyl('z', S, P['housing_d'], hz0, top - ft) + cyl('z', S, P['flange_d'], top - ft, top)) - cyl('z', S, 14.0, hz0 + 4, top + 1)
@@ -236,12 +236,12 @@ def parts(P):
     out += [
         Part('platter', platter, Machined('cast-acrylic', 'lathe', stock=(310.0, 310.0, 22.0), setup_usd=80.0), finish='acrylic', group='platter',
              pieces={'disc': (platter, 'acrylic-strata-platter')},
-             notes=['tinted 3 / clear 12.7 / tinted 5.6 cemented, annealed, turned to 300 x 21 as Core\'s; on a screwed brass hub']),
+             notes=['tinted 3 / clear 12.7 / tinted 5.6 cemented, annealed, turned to 300 x 21 as Outcrop\'s; on a screwed brass hub']),
         Part('platter-hub', hub, Machined('brass-leadfree', 'lathe'), finish='brass', group='platter'),
         Part('platter-screws', screws, Bought('platter-screws'), finish='steel', group='platter'),
         Part('spindle', spindle, Machined('stainless', 'lathe', setup_usd=120.0), finish='steel', group='bearing'),
         Part('bearing-housing', housing, Machined('brass-leadfree', 'lathe'), finish='brass', group='bearing',
-             notes=['as Core\'s: M30 x 1.5, clamped by its nut under the plinth, hanging 20 into the float where its brass shows']),
+             notes=['as Outcrop\'s: M30 x 1.5, clamped by its nut under the plinth, hanging 20 into the float where its brass shows']),
         Part('bearing-nut', nut, Machined('brass-leadfree', 'lathe'), finish='brass', group='bearing'),
         Part('bushes', bushes, Bought('bearing-bushes-solid'), finish='brass', group='bearing', inside=True),
         Part('ball', ball, Bought('carbide-ball'), finish='steel', group='bearing', inside=True),
@@ -254,14 +254,14 @@ def parts(P):
         Part('arm-puck', puck, Machined('aluminium', 'lathe'), finish='aluminium', group='arm'),
         Part('arm', union(arm, lift), Bought('rega-rb330'), finish='arm', group='arm'),
         Part('cartridge', cart, Bought('ortofon-2m-black'), finish='cartridge', group='arm'),
-        Part('feet', foot, Machined('brass-leadfree', 'lathe'), finish='brass', group='feet',
-             notes=['four, 40 x 10 with a 30 neck, on M8 studs in the base\'s inserts, levelled and locked; Sorbothane under']),
+        Part('feet', foot, Machined('stainless', 'lathe', stock=(45.0, 45.0, 4 * 20.0)), finish='steel', group='feet',
+             notes=['four, turned 303 stainless, 40 x 10 with a 30 neck, on M8 studs in the base\'s inserts, levelled and locked; Sorbothane under']),
         Part('foot-pads', pads, Bought('foot-sorbothane'), finish='rubber', group='feet'),
         Part('foot-studs', fstuds, Bought('foot-studs'), finish='steel', group='feet'),
         Part('phono-stage', phono, Bought('phono-box-s2'), finish='aluminium-dark', group='phono'),
         Part('phono-pads', felts, Bought('phono-felts'), finish='rubber', group='phono'),
         Part('back-hardware', None, Bought('back-hardware')),
-        Part('hinge-blocks', blocks, tint[9.5] if False else Machined('cast-acrylic', 'cnc-mill'), finish='acrylic', group='lid',
+        Part('hinge-blocks', blocks, Machined('cast-acrylic', 'cnc-mill', stock=(45.0, 15.0, 2 * 29.0)), finish='acrylic', group='lid',
              notes=['two 40 x 9.5 blocks of the color, each with the hinge\'s slot 3.2 x 12 x 18 deep, on two M4 screws into inserts in the plinth\'s back edge (horizontal, in shear)']),
         Part('hinges', hinges, Bought('cover-hinges'), finish='black', group='lid'),
         *[Part(k, s, Sheet('trucast-tint', 3.0), finish='acrylic-lid', group='lid',
@@ -301,7 +301,7 @@ NOTES = [
     'edge; the black band printed on the clear before lamination; Mean Well listed adapter and the 25 kHz dimmer. The '
     'phono stage runs from its own listed adapter.',
     'The motor: Rega 24 V on its plate, hung on Rega\'s grommets in a pocket through the plinth, below it in the float.',
-    'The bearing, platter, arm puck and phono stage as Core\'s (mantle_core.py).',
+    'The bearing, platter, arm puck and phono stage as Outcrop\'s (mantle_outcrop.py).',
     'The lid: 3 mm 2064, 1.1 kg, on Pro-Ject\'s friction hinges.',
 ]
 

@@ -13,17 +13,17 @@ and the two frames in a random order (`*.order.json` says which was new). Replie
 | baseline `dusk-smoke.png` | the dusk hero | 4.5 | a generic smoked-acrylic deck in a blue CG render |
 | baseline `open.png` | lid open from the left | 4.5 | the stacked-acrylic archetype under a stock dust cover |
 | baseline `detail.png` | the arm at rest | 4.5 | a generic black gloss deck, placeholder cartridge |
-| `core-hero.png` (B, Outcrop) | studio, cover off | **5.5** | a smoked-acrylic Clearaudio / Pro-Ject-style deck |
-| `core-use.png` (B) | a record playing, the cover as the sleeve's frame | **6.0** | a layered smoked deck with an acrylic sleeve frame |
-| `core-detail.png` (B) | the arm's corner | **5.0** | a glossy black acrylic deck through a heavy filter |
+| `outcrop-hero.png` (B, Outcrop) | studio, cover off | **5.5** | a smoked-acrylic Clearaudio / Pro-Ject-style deck |
+| `outcrop-use.png` (B) | a record playing, the cover as the sleeve's frame | **6.0** | a layered smoked deck with an acrylic sleeve frame |
+| `outcrop-detail.png` (B) | the arm's corner | **5.0** | a glossy black acrylic deck through a heavy filter |
 | `strata-hero.png` (A, Strata Float) | studio, lid off, the base lit | **6.0** | a boutique smoked-acrylic suspended-plinth deck |
 
 ## Duels against the current heroes
 
 | new | against | new | old | winner |
 |---|---|---|---|---|
-| `core-hero.png` | `studio-smoke.png` | 6.5 | 4.0 | **new** |
-| `core-use.png` | `dusk-smoke.png` | 6.5 | 4.5 | **new** |
+| `outcrop-hero.png` | `studio-smoke.png` | 6.5 | 4.0 | **new** |
+| `outcrop-use.png` | `dusk-smoke.png` | 6.5 | 4.5 | **new** |
 | `strata-hero.png` | `studio-smoke.png` | **7.0** | 4.0 | **new** |
 
 All three new frames won their duels against the site's current frames, which passes the gate. No single blind score
