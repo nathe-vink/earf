@@ -1166,6 +1166,47 @@ def view3d():
     return out
 
 
+# round 47: a fourth post, built dark (the coordinator, 2026-10-31): the stacked horn, the recommended route the owner
+# has not yet chosen (make/laminated-horn.md and the horn-choice renders on r33-speaker-horn). STACKED_HORN False keeps
+# it, its pictures and its card off the site entirely; on, it leads the journal.
+STACKED_HORN = False
+JOURNAL_STACKED = ('stacked-horn', '2026-10-31', 'Stacked like contour lines',
+                   'Twenty-two sheets of acrylic, one on another, and a horn cut through the middle.', 'journal-stack-terraces.jpg', [
+    ('p', 'Tropos&rsquo;s first horn has no mould. It is twenty-two layers of half-inch cast acrylic, each cut flat from our '
+          'files, stacked and bonded into a block, with the horn&rsquo;s air path machined through the middle.'),
+    ('fig', 'journal-stack-terraces.jpg', 'Close on an Ember horn built in layers: its terraces step down into the throat like strata',
+     'Ember, close: each terrace is one layer of sheet.'),
+    ('p', 'Every layer is faced to its exact thickness, and its outer edge polished while it is still a flat part on the '
+          'bench, because that edge will be on show for good. Each outline sits ten millimetres outside the air path at its '
+          'front face, so the outside climbs to the mouth in terraces: twenty-two of them, from the throat to the rim.'),
+    ('p', 'The layers are bonded with a polymerising cement, the cabinet&rsquo;s own, which cures to an acrylic about as hard '
+          'as the sheet. They go down in three stacks of seven or eight, each pressed under dead weight on spacers so the air '
+          'is pushed out rather than trapped, and each joint is looked through along its polished edge before the stacks are '
+          'joined. The block is annealed, slowly, so no stress is left where the cutters will go.'),
+    ('p', 'Then the air path is machined through it on five axes, from the same surface the simulation approved, and '
+          'polished. Where a joint crosses it the cut runs flush: any step is under a twentieth of a millimetre, and the '
+          'shortest wave the horn carries is about seventeen millimetres long. The walls are ten to thirty millimetres of '
+          'solid acrylic, so there is nothing to ring.'),
+    ('fig', 'journal-stack-smoke.jpg', 'A Smoke horn built in layers, on its cabinet: dark acrylic between the bright edges of its terraces',
+     'Smoke: dark between the bright edges of its layers.'),
+    ('p', 'No mould means no wait for one. A formed horn needs a tool cut and proved before its first shot; a stacked one '
+          'needs sheet, a cutter and a bench. That is why the first pair can play in January.'),
+    ('p', 'And the stack is honest about how it was made. From the front, the terraces read as strata, or as the contour '
+          'lines of a map: the Earth again, though nobody drew it on. It comes from the building.'),
+    ('fig', 'journal-stack-lineup.jpg', 'Four Tropos speakers in a row: Ember as on this site, Ember in stock sheet with the '
+     'stacked horn, Smoke as on this site, Smoke in stock sheet with the stacked horn',
+     'Left to right: Ember as on this site, Ember in stock sheet with the stacked horn, then Smoke the same way.'),
+])
+JOURNAL_STACKED_PICS = [('journal-stack-terraces.jpg', 'renders/2026-10-31/barkhorn/horn-choice/choice-terraces-ember.png', 1200),
+                        ('journal-stack-smoke.jpg', 'renders/2026-10-31/barkhorn/horn-choice/choice-stepped-smoke.png', 1600),
+                        ('journal-stack-lineup.jpg', 'renders/2026-10-31/barkhorn/horn-choice/lineup-stock.png', 1800)]
+
+
+def journal_posts():
+    """The journal's posts as the site shows them: the stacked horn first while its flag is on."""
+    return ([JOURNAL_STACKED] if STACKED_HORN else []) + JOURNAL
+
+
 def press_html():
     """The press page: who we are in two lengths, the slots (only once filled), the particulars, the names, the pictures."""
     nb = lambda t: re.sub(r'(\d) (mm|kg|Hz)\b', '\\1\u00a0\\2', t)
@@ -1238,7 +1279,7 @@ def press_html():
 
 def journal_band():
     """The home page's three latest posts, above the enquiries."""
-    posts = [p for p in JOURNAL if os.path.exists(os.path.join(IMG, p[4]))][:3]
+    posts = [p for p in journal_posts() if os.path.exists(os.path.join(IMG, p[4]))][:3]
     if not posts:
         return ''
     return ('  <section class="band" id="from-journal"><div class="wrap">\n'
@@ -1271,7 +1312,7 @@ def journal_html():
         srcset = f' srcset="img/{half} 1200w, img/{f} {w}w" sizes="(max-width: 760px) 100vw, 720px"' if os.path.exists(os.path.join(IMG, half)) and w > 1200 else ''
         return f'<figure><img src="img/{f}"{srcset} width="{w}" height="{h}" loading="lazy" alt="{alt}"><figcaption>{cap} A render.</figcaption></figure>'
     card = journal_card
-    posts = [p for p in JOURNAL if os.path.exists(os.path.join(IMG, p[4]))]
+    posts = [p for p in journal_posts() if os.path.exists(os.path.join(IMG, p[4]))]
     index = ''.join(card(s, d, t, st, pic) for s, d, t, st, pic, body in posts)
     arts = ''
     for i, (slug, d, title, stand, pic, body) in enumerate(posts):
@@ -1332,6 +1373,14 @@ def make_editorial():
             for f in marks:                     # dated, so the same marks make the same zip
                 z.writestr(zipfile.ZipInfo(os.path.basename(f), (2026, 10, 31, 0, 0, 0)), open(f, 'rb').read(), zipfile.ZIP_DEFLATED)
     made = []
+    for name, srcp, w in JOURNAL_STACKED_PICS:       # the stacked horn's: on the site only while its post is on
+        out = os.path.join(IMG, name)
+        if not STACKED_HORN:
+            if os.path.exists(out):
+                os.remove(out)
+            continue
+        if os.path.exists(os.path.join(ROOT, srcp)) and (not os.path.exists(out) or os.path.getmtime(out) < os.path.getmtime(os.path.join(ROOT, srcp))):
+            made.append(save(Image.open(os.path.join(ROOT, srcp)), name, w, q=84))
     for name, srcp, w in JOURNAL_PICS:
         p = os.path.join(ROOT, srcp)
         if os.path.exists(p):
@@ -3027,7 +3076,7 @@ def share_pages():
     made.append(page('press', 'Press · EARF', BOILER_SHORT, img, 'The eight Tropos speakers on a curve, Ember to Smoke', '#F4F1EC', 'website',
                      {'@context': 'https://schema.org', '@type': 'Organization', 'name': 'EARF', 'url': URL, 'description': BOILER_SHORT,
                       'logo': f'{URL}/apple-touch-icon.png'}))
-    for slug, d, title, stand, pic, body in JOURNAL:
+    for slug, d, title, stand, pic, body in journal_posts():
         if not os.path.exists(os.path.join(IMG, pic)):
             continue
         plain = re.sub('&[a-z]+;', lambda m: {'&rsquo;': '’', '&nbsp;': ' ', '&deg;': '°'}.get(m.group(), ''), title)

@@ -137,6 +137,11 @@ brand"). Not live: main needs the owner's yes.
   address (the enquiries until that is filled). Off, nothing of either is in `site/`: no markup, style, route name,
   link, `/s/` page or card picture (checked by search); on, both swept at 1440 and 390, with and without forms, their
   `/s/` cards (an Event for the debut) landing where they should.
+- **A fourth post built dark** (`STACKED_HORN`, False): "Stacked like contour lines", the horn as 22 layers of stock
+  half-inch cast sheet, bonded, annealed and machined through on five axes, with no mould (from `make/laminated-horn.md`
+  and the horn-choice renders on `r33-speaker-horn`, brought here under the same paths; no supplier names or prices).
+  Off, nothing of it is in `site/` (its pictures are removed at build); on, it leads the journal and the home band, its
+  `/s/` card an Article.
 - **Tropos's CAD kept off the site:** `viewer/dist` (git-ignored) goes into `site/3d` only while `VIEW3D` is on.
 - **For the owner's deploy decision:** `launch/r47-what-changes.pdf` (11 pages), before and after at 1440 and 390 px,
   page by page, on the final branch; Fog's faint horn noted (as in its still); the link previews.
