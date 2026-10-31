@@ -176,7 +176,9 @@ the words in a band round the front face, both edges rounded and the edge reeded
      - the cable's segment marks (Core);
      - the cord (Hemisphere);
    - the coin's reeds, drawn from a fine mesh (its engravings are exact outlines, projected);
-   - Tropos's ports, whose flared lips come out as a band of close lines: draw each as one or two clean circles.
+   - Tropos's ports, whose flared lips come out as a band of close lines: draw each as one or two clean circles;
+   - Tropos's side views: the back's screw heads show as small solid ticks along the back edge; they are disclaimed,
+     so draw them broken or leave them out.
    - Make the broken lines even and consistent.
    - Tropos (b)'s 22 terraces must stay crisp and evenly spaced; they are its design.
    - **Check every line's type against the claim.** A line counts as solid when it lies on a claimed part's own
