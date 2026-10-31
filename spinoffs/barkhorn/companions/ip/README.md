@@ -107,6 +107,9 @@ asked; the draftsperson adds the labels.
   - the posts' sockets and sleeves;
   - the feet, the back's and the ports' screws;
   - the rating plate and the EARF mark.
+- **Tropos (b)'s bore [Atty].** Inside the mouth (FIG. 1 and 2), the drawing shows the 22 layers' bond lines across the
+  bore. The bore is machined and polished smooth, but in tinted acrylic the bonds show as faint lines. Keep them only if
+  the attorney wants them claimed; otherwise the draftsperson drops them and the bore reads smooth, as in (a).
 - **On the back (FIG. 3),** the amplifier plate and the screw heads fill openings in the claimed back panel, so their
   outlines come out solid: they are the openings' edges. This claims the openings' shape and placement, not the plate
   or the screws. To claim the back free of them, the draftsperson draws those outlines broken [Atty].
