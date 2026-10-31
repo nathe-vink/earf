@@ -39,7 +39,8 @@ VIEWS = {
     # band 0.8 in deep amber, the foot line 9; lines 1.0; counter spots 22 W at 14 deg; fill 0.05; the shop table moved
     # off the axis in the plan; the street camera back so the mullion and the window plinth frame the left; glasses
     'street': dict(camera={'position': [-3.2, 3.0, 1.50], 'target': [13.0, 4.4, 1.95], 'lens_mm': 35, 'level': True,
-                           'fstop': 4.0, 'focus': [7.0, 4.4, 1.2]}, exposure=2.6, haze=0.008, shutter=1.0, people='bar'),
+                           'fstop': 4.0, 'focus': [7.0, 4.4, 1.2]}, exposure=2.6, haze=0.008, shutter=1.0, people='bar',
+                   room={'glass_gloss': 0.6}),
     'bar': dict(camera={'position': [4.9, 2.55, 1.45], 'target': [13.0, 4.3, 2.0], 'lens_mm': 28, 'level': True,
                         'fstop': 4.0, 'focus': [11.0, 4.5, 1.6]}, exposure=3.0, haze=0.008, shutter=0.75, people='bar'),
     # p4 (p3 judged 4.5/5.0, converged: too bright and even; the pair darker than the walls; Mother's spot a white pool
@@ -52,7 +53,8 @@ VIEWS = {
     'lantern': dict(camera={'position': [14.9, 2.75, 1.15], 'target': [19.1, 4.85, 1.05], 'lens_mm': 28, 'level': True,
                             'fstop': 2.8, 'focus': [P.STACKS[0][0], P.STACKS[0][1], 1.0]},
                     exposure=3.9, haze=0.0008, room={'interior': True}, shutter=1.0, people='lantern'),
-    'porch': dict(camera={'position': [10.0, 3.64, 1.25], 'target': [18.9, 4.30, 2.75], 'lens_mm': 20, 'level': True,
+    # test: from x 10.0 the open leaves of pair 1 filled half the frame; now from between them, at eye height
+    'porch': dict(camera={'position': [11.25, 3.85, 1.45], 'target': [18.9, 4.30, 1.55], 'lens_mm': 24, 'level': True,
                           'fstop': 4.0, 'focus': [17.0, 4.6, 1.1]},
                   exposure=3.2, haze=0.006, shutter=1.0, people='porch'),
 }
@@ -110,7 +112,7 @@ def spot(pos, tgt, w, cone, k=2700, blend=0.6, radius=0.03):
 def scene():
     S = P.SHOP_WALL
     props = [{'kind': 'kit', 'shape': 'ext', 'path': KIT, 'fn': 'house', 'windows_lit': 0.3, 'window_glow': 0.25,
-              'glass_gloss': 0.3}]
+              'glass_gloss': 0.3, 'band_glow': 0.3}]   # look 2 test: #FFB040 at 0.6 clipped to cream under AgX
     shelves = [0.30, 0.78, 1.26, 1.74, 2.22]
     # the Cores along the shop's shelves, in the eight tints, some unlit
     xs = [S['x0'] + 0.35 + 0.30 * i for i in range(8)]
