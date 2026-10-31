@@ -13,4 +13,5 @@ date, and check them again before relying on them.
 | R5-events-press.md | Fairs, shows, awards and press, with 2026–27 deadlines |
 | R6-manufacturing-geography.md | The US, Mexico or Asia for the acrylic, with partners and tariffs |
 | R7-bonding-cnc-amps.md | Shops that bond acrylic with polymerising cement, 5-axis time for the horn, and where to buy the FA122 |
+| R9-strategic-partners.md | Audio, lighting, hotel and retail partners for licensed or co-branded editions and commissions: track records, deal terms, the ten best fits and three draft letters (pitch after the 19 January debut) |
 | YC-W27-application-draft.md | A draft of Y Combinator's Winter 2027 application (closes 2 Nov 2026, 8 pm PT), with brackets where the owner must add facts. Nothing submitted |
