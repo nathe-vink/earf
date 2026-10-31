@@ -62,6 +62,7 @@ SOLIDS = {
     'oak': dict(title='White oak, solid', density=0.75, usd_per_cm3=0.018),
     'aluminium': dict(title='Aluminium 6061', density=2.70, usd_per_cm3=0.025),
     'brass': dict(title='Brass C360', density=8.5, usd_per_cm3=0.12),
+    'brass-leadfree': dict(title='Brass C69300 (Eco Brass, lead-free) or C27450', density=8.2, usd_per_cm3=0.15),
     'steel': dict(title='Mild steel', density=7.85, usd_per_cm3=0.01),
     'stainless': dict(title='Stainless steel 304', density=8.0, usd_per_cm3=0.03),
     'cast-resin': dict(title='Casting resin (polyurethane or epoxy), tinted clear, translucent or pigmented', density=1.1, usd_per_cm3=0.04),

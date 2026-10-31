@@ -10,17 +10,17 @@
 | bushings | buy | 1 | Isolate It (Sorbothane Inc.) Sorbothane vibration isolation bushings, 30 duro, 0.28 in ID x 0.72 in OD x 0.22 in thick (7.1 x 18.3 x 5.6), a 12-pack: two at each post (eight), one over and one under the base on the M6 bolt; about 1.8 kg on each (77 kPa), so the plinth sits at roughly 15-20 Hz, under the arm and cartridge's 10 Hz only by a factor of two: confirm on the maker's load chart and by a tap test |  | 25.00 |
 | float-bolts | buy | 1 | Four M6 x 70 stainless socket cap bolts, four 18 mm stainless washers, four M6 nyloc nuts (the float's hold-downs, snug only) |  | 8.00 |
 | platter | lathe | 1 | Cast acrylic tube, tinted through | 310 x 310 x 25 | 181.10 |
-| platter-hub | lathe | 1 | Brass C360 | 56 x 56 x 30 | 56.29 |
+| platter-hub | lathe | 1 | Brass C69300 (Eco Brass, lead-free) or C27450 | 56 x 56 x 30 | 59.11 |
 | spindle | lathe | 1 | Stainless steel 304 | 20 x 20 x 95 | 126.14 |
-| bearing-housing | lathe | 1 | Brass C360 | 66 x 66 x 67 | 80.02 |
+| bearing-housing | lathe | 1 | Brass C69300 (Eco Brass, lead-free) or C27450 | 66 x 66 x 67 | 88.78 |
 | bushes | buy | 1 | any lathe shop Two solid bronze plain bushes (C932 / SAE 660), 10 x 14 x 12, pressed into the housing and honed in line to the ground spindle, 3-5 um diametral clearance |  | 40.00 |
 | ball | buy | 1 | Tungsten carbide ball, 6 mm, grade 10: the spindle's thrust point, seated in a cup at the spindle's foot |  | 5.00 |
 | thrust-plate | buy | 1 | Thrust plate 13.8 x 3, hardened 52100 steel (60 HRC) lapped flat, at the foot of the housing's bore in the oil bath, under the carbide ball (a sapphire window of the same size is the alternative) |  | 20.00 |
 | pod-ring-1, pod-ring-2, pod-ring-3 | cut | 3 | 20 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 88 x 88 | 3.68 |
 | pod-ring-4 | cut | 1 | 12 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 88 x 88 | 2.21 |
-| pod-core | lathe | 1 | Brass C360 | 86 x 86 x 82 | 117.78 |
+| pod-core | lathe | 1 | Brass C69300 (Eco Brass, lead-free) or C27450 | 86 x 86 x 82 | 135.97 |
 | pod-mat | cut | 1 | 6 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 80 x 80 | 0.91 |
-| motor | buy | 1 | Rega 24 V low-vibration synchronous motor upgrade kit (motor, its board and mounting), for the Neo PSU |  | 200.00 |
+| motor | buy | 1 | Rega 24 V low-vibration synchronous motor upgrade kit (motor, its board and mounting), for the Neo PSU |  | 265.00 |
 | pulley | lathe | 1 | Aluminium 6061 | 55 x 55 x 22 | 46.69 |
 | pod-pads | buy | 1 | Isolate It (Sorbothane Inc.) Sorbothane bushings, 30 duro, 7.1 x 18.3 x 5.6 (the float's, from a second 12-pack): three stacks of two under the motor's pod, 2.4 kg on three, 35 kPa a stack (load per the maker's table UNCONFIRMED) |  | 25.00 |
 | belt | buy | 1 | Flat turntable belt, ground rubber or polyurethane, 5 wide x 0.6, about 975 long unstretched (1025 round the platter's rim and the 40 pulley, stretched 5 %) |  | 25.00 |
@@ -49,9 +49,9 @@
 
 | | USD |
 |---|---|
-| buy | 2,939 |
+| buy | 3,004 |
 | cut | 197 |
-| lathe | 679 |
-| total | 3,815 |
+| lathe | 709 |
+| total | 3,910 |
 
 Budget figures: bought parts from the component library (dated retailer listings), made parts from the kit's stock rates: 25 % offcut on sheet parts, a handling charge a print, and a setup a machined line spread over its pieces. A shop's quote replaces them.
