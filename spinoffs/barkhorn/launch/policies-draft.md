@@ -146,3 +146,29 @@ This warranty gives you specific legal rights, and you may also have other right
 **How.** Write to us before you send anything back. We arrange the packaging and collection. We pay every refund within 7 working days, as the law requires for cancellations [row 26].
 
 *Counsel:* A standard Tropos in a standard colour is probably not "customized" [row 22] [UNCONFIRMED]; the same doubt covers every piece. Posting this policy conspicuously is what keeps the 30-day refund right away [row 22]. Show it on each product page and the order page.
+
+---
+
+## 4. Privacy notice (the waitlist)
+
+*Added 2026-10-31 (round 47, `r47-site-next`). The first three sections had no privacy wording, so this is new, drafted for counsel from row 23 (CalOPPA) and row 24 (CCPA, probably not triggered). It is the text `web.py` shows at `#privacy` when `WAITLIST` is switched on; with the form off, nothing of it is published.*
+
+In effect from **[OWNER: the date the form goes live]**. Short, because we keep very little.
+
+**What we collect.** Your email address, and which pieces you tick, if any. Nothing else is asked for. Like any website, ours is served by a host (Vercel) that logs the address your browser connects from, for security; we keep no cookies and run no analytics or advertising trackers.
+
+**Why.** To write to you about EARF: when there is something new to see, and when the pieces you ticked can be ordered. Nothing else, and we don't sell, rent or swap the list.
+
+**Who holds it.** The list is kept for us by **[OWNER: the provider, once chosen; see `launch/waitlist-options.md`]**, which sends our emails and stores the list on its servers in **[OWNER: its location]**. It may use it only to provide that service to us.
+
+**Leaving, and seeing what we hold.** Every email has a link to unsubscribe. To see, correct or delete what we hold, write to **[OWNER: the address]**; we will do it within 30 days.
+
+**Do Not Track.** We track no one across sites, so a browser's Do Not Track signal changes nothing here: there is nothing for it to turn off.
+
+**Children.** The list is not meant for anyone under 16, and we don't knowingly keep their addresses.
+
+**Changes.** If this notice changes, the new one goes here with its date; a change in what we do with your address will be emailed to you before it takes effect.
+
+**Who we are.** **[OWNER: the legal name and postal address of the company]**, San Francisco, California.
+
+*Counsel:* CalOPPA asks for the categories collected, the third parties they go to, how to review and correct, how changes are notified, the Do Not Track response and an effective date [row 23]; each has a paragraph above. Check: whether "no cookies" stays true once a provider's embed is used (a hosted form may set its own); whether Vercel's request logs need naming as a processor; CAN-SPAM's postal address in every email (the provider adds it); and, if EU visitors sign up, whether consent wording or a double opt-in is wanted (most providers offer it).

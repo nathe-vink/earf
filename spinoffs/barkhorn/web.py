@@ -804,7 +804,7 @@ def body():
                 for k, num, name, icon, tint, line, cover in CLOUDS],
         hues=E.HUES, care=CARE[1],
         lamps={k_: dict(name=name, kind=kind, line=line, facts=facts, colours=pm[k_], route=SLUG[k_]) for k_, name, kind, line, alt, facts in LAMPS} if lighting else {},
-        tt=dict(TT, colours=tt) if tt else None)
+        tt=dict(TT, colours=tt) if tt else None, view3d=view3d())
     # a phone frame of the hero or the room, where one was made (re-framed, not cropped); with the hero's, its links
     # give way on phones to the names under it, the boxes being the landscape frame's
     tall = lambda f: os.path.exists(os.path.join(IMG, f))
@@ -820,20 +820,350 @@ def body():
             f'<a class="spot tall-only" href="#speaker-{name.lower()}" style="left:{s["l"]}%;top:{s["t"]}%;width:{s["w"]}%;height:{s["h"]}%;z-index:{zp[i]}">'
             f'<span class="sr">{name}, Tropos {num}</span></a>'
             for i, ((k, num, name, *_), s) in enumerate(zip(CLOUDS, ps)))
+    wl_form, wl_page = waitlist_html()
     page = (PAGE.replace('__WORD__', word).replace('__HOTSPOTS__', hotspots).replace('__NAMES__', names)
                 .replace('__HERO_TALL__', hero_tall).replace('__ROOM_TALL__', room_tall)
                 .replace('__HERO_CLASS__', ' has-tall' if hero_tall else '')
                 .replace('__TURN__', turn).replace('__CARDS__', cards).replace('__SPEC__', spec).replace('__DWG__', dwg)
                 .replace('__REEL__', reel).replace('__HABITATS__', habitats).replace('__CLOSER__', closer)
                 .replace('__LINES__', lines).replace('__COLOURS__', colours).replace('__LIGHTING__', lighting).replace('__TURNTABLE__', turntable)
+                .replace('__PRESS__', press_html()).replace('__JOURNAL__', journal_html())
+                .replace('__WAITLIST__', wl_form).replace('__PRIVACY__', wl_page)
+                .replace('__FOOT_PRIVACY__', '<a href="#privacy">Privacy</a>' if WAITLIST else '')
                 .replace('__STILL__', still).replace('__POSTER__', poster).replace('__POSTER_NIGHT__', poster_night).replace('__DATA__', json.dumps(data, separators=(',', ':'))))
     cut = page.index('</style>') + len('</style>')
     return page[:cut], page[cut:]
 
 
+# round 47 (the site's next pass, 2026-10-31): a press page, a journal, and a waitlist kept switched off. The press page
+# states only what the site and the READMEs already say; its two slots (who's behind it, and whom the press write to)
+# stay out of the page until the owner fills them here, and the page says nothing in their place.
+PRESS = {
+    'founder': None,     # SLOT, the owner's: e.g. ('Name', 'Founder', 'A line on them, in their words'); None leaves it off the page
+    'contact': None,     # SLOT, the owner's: the press address, e.g. 'press@earf.world' (earf.world has no mail records yet)
+}
+BOILER_SHORT = ('EARF is a San Francisco maker of hi-fi and lighting in cast acrylic, tinted all the way through, in eight '
+                'colours from Ember to Smoke. Its first four pieces are Tropos, a powered horn loudspeaker; Hemisphere, a '
+                'pendant lamp; Core, a cordless table lamp; and Mantle, a record player.')
+BOILER_LONG = (BOILER_SHORT + ' Every piece is cut, formed and cemented from the same acrylic, so a speaker, a lamp and a '
+               'record player can share one colour or take three. All four are in development and not yet for sale: each is '
+               'drawn for making, and the first pair of Tropos will be built as production will build it, then measured. '
+               'Planet EARF, a listening bar in San Francisco, is planned.')
+PRESS_PICS = [  # file in site/img, what it shows (the link's words and the picture's alt)
+    ('hero.jpg', 'The eight Tropos speakers on a curve, covers off, Ember to Smoke'),
+    ('room.jpg', 'A pair of Tropos in Poison at home, covers on, by a tall window'),
+    ('red-habitat.jpg', 'Tropos in Ember on a lava field at blue hour'),
+    ('violet-habitat.jpg', 'Tropos in Haze before layered hills in evening light'),
+    ('black-habitat.jpg', 'Tropos in Smoke on a city overpass at dusk'),
+    ('facade.jpg', 'The eight on lights at the foot of a concrete wall by a river at night'),
+    ('red-studio-light.jpg', 'Tropos in Ember in the studio, on a pale ground'),
+    ('dome-red.jpg', 'Hemisphere lit, its Ember shade beneath a black hub'),
+    ('orb-red.jpg', 'Core lit in Ember, low in its black acrylic base'),
+    ('lamps-domes.jpg', 'Eight Hemisphere pendants in a row, lit, one in each colour'),
+    ('tt-violet-dusk.jpg', 'Mantle in Haze at dusk, its lid raised and its base lit'),
+    ('tt-red-studio.jpg', 'Mantle in Ember in the studio, its lid raised'),
+]
+LOGOS = ['earf-lockup-black.svg', 'earf-lockup-black.png', 'earf-lockup-white.svg', 'earf-lockup-white.png',
+         'earf-lockup-colour.svg', 'earf-lockup-colour.png', 'earf-globe-colour.svg', 'earf-globe-colour.png',
+         'earf-globe-black.svg', 'earf-globe-black.png', 'earf-wordmark-black.svg', 'earf-wordmark-white.svg']
+JOURNAL = [  # slug, date, title, standfirst, card picture (site/img), and the body: ('p', html) or ('fig', file, alt, caption)
+    ('eight-colours', '2026-10-31', 'Eight colours, all the way through',
+     'Paint is a decision you can sand off. Tint is one you live with.', 'violet-habitat-1200.jpg', [
+        ('p', 'Every EARF piece is cast acrylic with its colour mixed in before the sheet sets. So the colour runs to the '
+              'edge, and the edge is where it shows best: cast acrylic carries light along its length and lets it out '
+              'wherever it is cut.'),
+        ('p', 'There are eight. Six go round the painter&rsquo;s wheel: Ember, Dust, Acid, Poison, Ice and Haze. Two have no '
+              'hue at all. Fog is water-clear, almost not there; Smoke is smoked glass, for after dark.'),
+        ('fig', 'red-habitat.jpg', 'Tropos in Ember on a lava field at blue hour, the crust cracked to its glow',
+         'Ember, on a lava field at blue hour.'),
+        ('p', 'Each one began somewhere, and we went looking for it. Ember on a lava field at blue hour, the crust cracked to '
+              'its glow. Dust on rippled sand at golden hour. Acid in acid rain on black lava. Poison on a redwood floor, '
+              'among death caps and a deer&rsquo;s bones. Smoke on a city overpass, come down like a meteor.'),
+        ('fig', 'black-habitat.jpg', 'Tropos in Smoke on a city overpass at dusk, the road torn open and burning behind it',
+         'Smoke, on an overpass at dusk.'),
+        ('p', 'The same eight run through everything we make. The lamps&rsquo; shades are cast so that, lit from within, '
+              'each reads as its speaker does by day; Mantle&rsquo;s plinth is the same sheet again. A room can be one '
+              'colour, or three.'),
+        ('p', 'If three, the wheel helps. Every colour&rsquo;s page shows the company it keeps: its opposite, its '
+              'neighbours, and itself in the other lines. Fog and Smoke, having no hue, pair with each other: the same '
+              'acrylic, light and dark. <a href="#colours">See the eight</a>.'),
+     ]),
+    ('the-horn', '2026-10-31', 'How the horn is formed',
+     'A horn is a shape that does an amplifier&rsquo;s job. Here is how ours will be made.', 'amber-horn-side.jpg', [
+        ('p', 'Long before amplifiers, a horn was how a small sound filled a large room. Tropos&rsquo;s is formed from the '
+              'same tinted acrylic as its cabinet, and how it is formed decides how it sounds.'),
+        ('p', 'The air path came first. Its profile was worked out by simulation before any acrylic was cut, and the tool '
+              'is cut to that profile. Everything else serves it.'),
+        ('fig', 'macro-horn.jpg', 'The Acid horn from the side: its flare, and its driver&rsquo;s pod behind it',
+         'The flare, and the driver&rsquo;s pod behind it.'),
+        ('p', 'The sheet is cast acrylic, 10&nbsp;mm, from a dye lot about three times as strong as the cabinet&rsquo;s, so a '
+              'thinner wall reads as deep as the 20&nbsp;mm beside it. It is heated to about 170&nbsp;&deg;C until it is '
+              'rubbery all the way through. Cast sheet doesn&rsquo;t melt; it gives.'),
+        ('p', 'Then it is blown into a shallow bubble, a plug rises into it, and a pressure box closes over the top at 4 bar '
+              'while vacuum draws through fine vents in the plug. The plug is the horn&rsquo;s air path, so the face '
+              'that lies on the tool is the face the sound sees, and it is exact. The outside touches nothing, so it '
+              'keeps the sheet&rsquo;s own gloss.'),
+        ('p', 'Why over a plug and not into a mould: the sheet thins as it stretches, and over a plug it thins toward the '
+              'mouth, where the shape wants it thin. Into a mould, it would thin toward the throat, where it can least '
+              'afford to.'),
+        ('p', 'The horn is annealed, trimmed on a five-axis router, and its rim routed round and polished. The throat is '
+              'turned from a solid block of the same lot and cemented on, both air faces cut to one surface so they '
+              'meet without a step. Behind it, in a pod whose cap twists off by hand, sits a 2-inch compression driver. '
+              'Above 1&nbsp;kHz the horn carries the music; below, the 15-inch woofer does.'),
+        ('p', 'The first horns off the tool will be cut open and measured at thirty points. If the corners come out thin, '
+              'the next sheet is 12&nbsp;mm. <a href="#turn">The horn, turning</a>.'),
+     ]),
+    ('planet-earf', '2026-10-31', 'Planet EARF',
+     'A listening bar in San Francisco. Planned: no address yet, and no opening night.', 'planet-street-1200.jpg', [
+        ('p', 'Somewhere to hear the speakers properly, with a drink, among people who came for the same reason.'),
+        ('fig', 'planet-street.jpg', 'A narrow shopfront at dusk, EARF on the glass, a warm room of records behind it',
+         'A first drawing of the street front.'),
+        ('p', 'The room we are drawing is narrow: one shopfront, one long room. Board-formed concrete, Douglas fir beams, '
+              'blackened steel. The acrylic stays clear, frosted or smoked, thick and polished at the edge, so that the '
+              'speakers are the colour in the room and nothing else is.'),
+        ('p', 'The bar runs down one side, records fill the wall at the back, and a pair stands at the far end where it can '
+              'be heard rather than seen. Core sits on every table. It is dim, but never so dim you can&rsquo;t read a '
+              'sleeve.'),
+        ('fig', 'planet-room.jpg', 'A long, dim room: the bar on the left, Core lamps on small tables, a pair of speakers at '
+                                   'the far end, a large ringed globe hung overhead',
+         'Inside, as drawn so far.'),
+        ('p', 'Nothing here is final, and all of it is a render. When there is an address, it will be on this page first.'),
+     ]),
+]
+# the pictures the journal brings from elsewhere in the repository (Planet EARF's, from its own session's renders): the
+# file in site/img, its source under renders/, and its width; a picture whose source is not to hand is kept as it is
+JOURNAL_PICS = [('planet-street.jpg', 'renders/2026-10-22/barkhorn/planet39/finals/street-2400.jpg', 2400),
+                ('planet-street-1200.jpg', 'renders/2026-10-22/barkhorn/planet39/finals/street-1200.jpg', 1200),
+                ('planet-room.jpg', 'renders/2026-10-22/barkhorn/planet41/finals/door-mother-colour-p3-2400.jpg', 2400)]
+# the waitlist: ready, and off until the owner picks a provider (launch/waitlist-options.md) and its privacy notice is
+# approved (launch/policies-draft.md, section 4). With WAITLIST False the page carries no form, no notice and no route.
+WAITLIST = False
+WAITLIST_ACTION = ''     # the provider's endpoint, once chosen: e.g. a Buttondown embed URL, or /api/waitlist (a Vercel function)
+WAITLIST_FIELD = 'email'  # the field name the provider expects for the address
+PRIVACY_DATE = '[OWNER: the date it goes live]'
+PRIVACY = [  # the notice, as drafted in launch/policies-draft.md (section 4), for counsel
+    ('What we collect', 'Your email address, and which pieces you tick, if any. Nothing else is asked for. Like any website, '
+     'ours is served by a host (Vercel) that logs the address your browser connects from, for security; we keep no '
+     'cookies and run no analytics or advertising trackers.'),
+    ('Why', 'To write to you about EARF: when there is something new to see, and when the pieces you ticked can be ordered. '
+     'Nothing else, and we don&rsquo;t sell, rent or swap the list.'),
+    ('Who holds it', 'The list is kept for us by [OWNER: the provider, once chosen], which sends our emails and stores the '
+     'list on its servers in [OWNER: its location]. It may use it only to provide that service to us.'),
+    ('Leaving, and seeing what we hold', 'Every email has a link to unsubscribe. To see, correct or delete what we hold, '
+     'write to [OWNER: the address]; we will do it within 30 days.'),
+    ('Do Not Track', 'We track no one across sites, so a browser&rsquo;s Do Not Track signal changes nothing here: there '
+     'is nothing for it to turn off.'),
+    ('Children', 'The list is not meant for anyone under 16, and we don&rsquo;t knowingly keep their addresses.'),
+    ('Changes', 'If this notice changes, the new one goes here with its date; a change in what we do with your address '
+     'will be emailed to you before it takes effect.'),
+    ('Who we are', '[OWNER: the legal name and postal address of the company], San Francisco, California.'),
+]
+
+
+# round 47: the 3D view (viewer/, its README). Each product with a model in site/3d/ gets a "View in 3D" on its page; the
+# finishes come from the engine's product file (what the renders were painted with), simplified to what a browser
+# paints, and each colour's acrylic is the engine's own: the colour it reaches after a distance (Beer's law), which is
+# three.js's attenuation. VIEW3D False takes the button off everywhere.
+VIEW3D = False     # off (2026-10-31): a blind critic scored its frames 3.5 to 4 against the renders' 6.5 to 7, "hurt" beside them (viewer/README.md)
+FLAVOUR3D = {'red': 'cloud-red', 'orange': 'cloud-orange', 'amber': 'cloud-amber', 'green': 'eucalyptus-y2k-green',
+             'blue': 'cloud-blue', 'violet': 'cloud-violet', 'ice': 'birch-fog-clear', 'black': 'cloud-black'}   # finals.py's
+
+
+def view3d():
+    """The 3D view's spec for each product whose model is in site/3d (by the product's route), and each colour's tints."""
+    out = {}
+    if not VIEW3D or not os.path.exists(os.path.join(SITE, '3d', 'tropos.glb')):
+        return out
+    eng = json.load(open(os.path.join(ROOT, 'studio', 'products', 'barkhorn-cloud.json')))
+    simple = {'satin_paint': 0.45, 'plastic': 0.45, 'gloss_plastic': 0.18, 'rubber': 0.8, 'treated_paper': 0.7, 'ecoat': 0.42,
+              'doped_cloth': 0.85, 'cloth': 0.95, 'batting': 0.95, 'opaque_acrylic': 0.12}
+    fin = {}
+    for name, m in eng['materials'].items():
+        p, col = m.get('preset', ''), m.get('color', '#888888')
+        if p in ('$bark', '$horn_preset') or name in ('bark', 'horn', 'print', 'amp-label', 'amp-foil'):
+            continue
+        f = dict(color=col if not col.startswith('$') else '#888888', roughness=m.get('roughness', simple.get(p, 0.5)))
+        if p in ('metal', 'black_oxide'):
+            f.update(metal=1, color='#2A2A2A' if p == 'black_oxide' else col, roughness=m.get('roughness', 0.4))
+        if p == 'emit':
+            f.update(emit=m.get('strength', 2) / 3)
+        if p in ('batting', 'cloth', 'doped_cloth'):
+            f.update(sheen=0.6)
+        if p == 'batting':
+            f.update(color='#EFF0EE')
+        if p == 'opaque_acrylic':
+            f.update(coat=1)
+        fin[name] = f
+    tints = {}
+    for k, fl in FLAVOUR3D.items():
+        v = eng['flavours'][fl]
+        tints[k] = dict(deep=v['materials']['bark']['deep'], horn=v['horn_deep'], disc=v['disc'])
+    out['speaker'] = dict(src='3d/tropos.glb', finishes=fin, tints=tints,
+                          # the walls 20 mm and the horn 6 to 8.5, each seen through twice; their depth grows across a face
+                          acrylic={'bark': dict(deep='deep', radius=0.025, roughness=0.02, thickness=0.035),
+                                   'horn': dict(deep='horn', radius=0.01, roughness=0.03, thickness=0.012)},
+                          # inside, lit through a wall: the lining's light has crossed one already
+                          inside={'lining': dict(through='deep', light=0.5, dim=0.42), 'driver-frame': dict(through='deep', light=0.6),
+                                  'driver-motor': dict(through='deep', light=0.6)},
+                          tinted={'ring': 'disc', 'disc': 'disc', 'mark-tint': 'disc'}, hide=['disc'],   # cover off, as the cards open
+                          ground='#F3F1EC', azimuth=14, elevation=-2, aim=0.55, fov=20,
+                          label='Tropos in {name}, in 3D, cover off. Drag or use the arrow keys to turn it; plus and minus to come closer.')
+    return out
+
+
+def press_html():
+    """The press page: who we are in two lengths, the slots (only once filled), the particulars, the names, the pictures."""
+    nb = lambda t: re.sub(r'(\d) (mm|kg|Hz)\b', '\\1\u00a0\\2', t)
+    sheet = lambda title, kind, facts: (f'<section class="sheet"><h3>{title}<small>{kind}</small></h3><dl>' +
+                                        ''.join(f'<dt>{a}</dt><dd>{nb(b)}</dd>' for a, b in facts if a not in ('Care',)) + '</dl></section>')
+    sheets = (sheet('Tropos', 'Powered horn loudspeaker', [x for x in SPEC if x[0] not in ('Lining',)]) +
+              ''.join(sheet(name, kind, facts) for k_, name, kind, line, alt, facts in LAMPS) +
+              sheet(TT['name'], TT['kind'], TT['facts']))
+    slots = ''
+    if PRESS['founder']:
+        n, role, about = PRESS['founder']
+        slots += f'<div class="slot"><p class="eyebrow">Behind it</p><p><b>{n}</b>, {role}. {about}</p></div>'
+    if PRESS['contact']:
+        slots += (f'<div class="slot"><p class="eyebrow">Press enquiries</p><p><a href="mailto:{PRESS["contact"]}">'
+                  f'{PRESS["contact"]}</a></p></div>')
+    slots = slots or ('<!-- press slots: the founder and the press address go here once the owner fills PRESS in web.py; '
+                      'nothing shows until then -->')
+    size = lambda f: Image.open(os.path.join(IMG, f)).size
+    def dl(f, what):
+        w, h = size(f); kb = os.path.getsize(os.path.join(IMG, f)) // 1024
+        small = f.replace('.jpg', '-1200.jpg'); small = small if os.path.exists(os.path.join(IMG, small)) else f
+        card = f.replace('.jpg', '-card.jpg'); thumb = card if os.path.exists(os.path.join(IMG, card)) else small
+        tw, th = size(thumb)
+        return (f'<li><figure><img src="img/{thumb}" width="{tw}" height="{th}" loading="lazy" alt="{what}">'
+                f'<figcaption>{what}. <a href="img/{f}" download>JPEG, {w}&thinsp;&times;&thinsp;{h}, {kb:,}&nbsp;KB</a></figcaption></figure></li>')
+    pics = ''.join(dl(f, what) for f, what in PRESS_PICS if os.path.exists(os.path.join(IMG, f)))
+    zkb = os.path.getsize(os.path.join(SITE, 'press', 'earf-logos.zip')) // 1024 if os.path.exists(os.path.join(SITE, 'press', 'earf-logos.zip')) else 0
+    logos = (f'<p class="logo-dl"><a class="btn" href="press/earf-logos.zip" download>The marks, SVG and PNG ({zkb:,}&nbsp;KB)</a>'
+             '<span>The lockup, the globe and the wordmark, in black, white and colour.</span></p>') if zkb else ''
+    tints = ''.join(f'<li><span class="coin-dot" style="--i:{i}"></span><b>{name}</b><span>{tint}</span></li>'
+                    for i, (k, num, name, icon, tint, line, cover) in enumerate(CLOUDS))
+    return f'''
+<main id="press" hidden>
+  <div class="wrap">
+    <p class="crumbs"><a href="#top">Home</a> / Press</p>
+    <div class="ed-head"><p class="eyebrow">Press</p><h1>EARF, for the record.</h1>
+      <p class="lede">Who we are in two lengths, the particulars, and the pictures at full size. Nothing is built yet, so every
+        picture is a render; we&rsquo;d be glad if you said so.</p></div>
+    <section class="ed-band" aria-labelledby="pr-about"><h2 id="pr-about">About EARF</h2>
+      <div class="boiler"><div><p class="eyebrow">In one breath</p><p id="boiler-short">{BOILER_SHORT}</p>
+        <button type="button" class="btn copy-text" data-copy="boiler-short">Copy</button></div>
+      <div><p class="eyebrow">In a paragraph</p><p id="boiler-long">{BOILER_LONG}</p>
+        <button type="button" class="btn copy-text" data-copy="boiler-long">Copy</button></div></div>
+      <p class="copied" aria-live="polite"></p>
+      {slots}
+    </section>
+    <section class="ed-band" aria-labelledby="pr-names"><h2 id="pr-names">Names and colours</h2>
+      <p class="ed-note">EARF in capitals. Tropos, Hemisphere, Core and Mantle each take a capital, and so do the colours:
+        Tropos in Ember, not in ember. Every piece comes in all eight.</p>
+      <ul class="tints">{tints}</ul>
+    </section>
+    <section class="ed-band" aria-labelledby="pr-facts"><h2 id="pr-facts">The particulars</h2>
+      <p class="ed-note">Design figures, from the drawings and their simulation; measured ones follow the first builds.
+        Prices are set at launch.</p>
+      <div class="sheets">{sheets}</div>
+    </section>
+    <section class="ed-band" aria-labelledby="pr-pics"><h2 id="pr-pics">Pictures</h2>
+      <p class="ed-note">Free to use in writing about EARF, credited &ldquo;Render: EARF&rdquo;. Please don&rsquo;t crop
+        out the colour or alter it.</p>
+      {logos}
+      <ul class="dl-grid">{pics}</ul>
+    </section>
+  </div>
+</main>'''
+
+
+def journal_html():
+    """The journal: an index of its posts, then each post, one at a time (#journal, #journal-<slug>)."""
+    def when(d):
+        y, m, dd = d.split('-')
+        return f'<time datetime="{d}">{int(dd)} {["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][int(m) - 1]} {y}</time>'
+    def fig(f, alt, cap):
+        if not os.path.exists(os.path.join(IMG, f)):
+            return ''
+        w, h = Image.open(os.path.join(IMG, f)).size
+        half = f.replace('.jpg', '-1200.jpg')
+        srcset = f' srcset="img/{half} 1200w, img/{f} {w}w" sizes="(max-width: 760px) 100vw, 720px"' if os.path.exists(os.path.join(IMG, half)) and w > 1200 else ''
+        return f'<figure><img src="img/{f}"{srcset} width="{w}" height="{h}" loading="lazy" alt="{alt}"><figcaption>{cap} A render.</figcaption></figure>'
+    def card(slug, d, title, stand, pic):
+        w, h = Image.open(os.path.join(IMG, pic)).size
+        return (f'<li><a class="jcard" href="#journal-{slug}"><img src="img/{pic}" width="{w}" height="{h}" loading="lazy" alt="">'
+                f'<span class="eyebrow">{when(d)}</span><b>{title}</b><span>{stand}</span></a></li>')
+    posts = [p for p in JOURNAL if os.path.exists(os.path.join(IMG, p[4]))]
+    index = ''.join(card(s, d, t, st, pic) for s, d, t, st, pic, body in posts)
+    arts = ''
+    for i, (slug, d, title, stand, pic, body) in enumerate(posts):
+        nxt = posts[(i + 1) % len(posts)]
+        text = ''.join(f'<p>{b[1]}</p>' if b[0] == 'p' else fig(*b[1:]) for b in body)
+        arts += (f'<article class="post" id="journal-{slug}" data-title="{re.sub("&[a-z]+;", "", title)}" hidden>'
+                 f'<p class="crumbs"><a href="#top">Home</a> / <a href="#journal">Journal</a></p>'
+                 f'<header><p class="eyebrow">{when(d)}</p><h1>{title}</h1><p class="stand">{stand}</p></header>'
+                 f'<div class="post-body">{text}</div>'
+                 f'<p class="post-next">Next: <a href="#journal-{nxt[0]}">{nxt[2]}</a></p></article>')
+    return f'''
+<main id="journal" hidden>
+  <div class="wrap">
+    <div class="jindex" id="journal-index">
+      <p class="crumbs"><a href="#top">Home</a> / Journal</p>
+      <div class="ed-head"><p class="eyebrow">Journal</p><h1>Notes from the bench.</h1>
+        <p class="lede">How things are made, why they look the way they do, and what comes next.</p></div>
+      <ul class="jlist">{index}</ul>
+    </div>
+    {arts}
+  </div>
+</main>'''
+
+
+def waitlist_html():
+    """The waitlist's form for the enquiries band, and its privacy notice as a page; both '' while WAITLIST is off."""
+    if not WAITLIST:
+        return '', ''
+    picks = ''.join(f'<label><input type="checkbox" name="interest" value="{v}"> {v}</label>'
+                    for v in ('Tropos', 'Hemisphere', 'Core', 'Mantle', 'Planet EARF'))
+    form = f'''
+    <form class="waitlist" id="waitlist" action="{WAITLIST_ACTION}" method="post" novalidate>
+      <h3>Hear first.</h3>
+      <p>One email when there&rsquo;s something new to see, and one when it can be ordered. That&rsquo;s all.</p>
+      <div class="wl-row"><label for="wl-email" class="sr">Email address</label>
+        <input id="wl-email" name="{WAITLIST_FIELD}" type="email" autocomplete="email" required placeholder="you@example.com" aria-describedby="wl-note">
+        <button class="btn solid" type="submit">Join the list</button></div>
+      <fieldset><legend>Most interested in (optional)</legend>{picks}</fieldset>
+      <input type="text" name="website" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true">
+      <p class="wl-note" id="wl-note">Unsubscribe from any email. <a href="#privacy">How we keep your address</a>.</p>
+      <p class="wl-status" id="wl-status" role="status"></p>
+    </form>'''
+    page = ('\n<main id="privacy" hidden><div class="wrap"><p class="crumbs"><a href="#top">Home</a> / Privacy</p>'
+            '<div class="ed-head"><p class="eyebrow">Privacy</p><h1>Your address, and what we do with it.</h1>'
+            f'<p class="lede">In effect from {PRIVACY_DATE}. Short, because we keep very little.</p></div><dl class="policy">' +
+            ''.join(f'<dt>{a}</dt><dd>{b}</dd>' for a, b in PRIVACY) + '</dl></div></main>')
+    return form, page
+
+
+def make_editorial():
+    """The press kit's zip of marks (site/press/earf-logos.zip) and the journal's pictures from elsewhere in the
+    repository; a source not to hand keeps what is there."""
+    import zipfile
+    os.makedirs(os.path.join(SITE, 'press'), exist_ok=True)
+    marks = [os.path.join(BRAND, 'mark', f) for f in LOGOS if os.path.exists(os.path.join(BRAND, 'mark', f))]
+    if marks:
+        with zipfile.ZipFile(os.path.join(SITE, 'press', 'earf-logos.zip'), 'w', zipfile.ZIP_DEFLATED) as z:
+            for f in marks:                     # dated, so the same marks make the same zip
+                z.writestr(zipfile.ZipInfo(os.path.basename(f), (2026, 10, 31, 0, 0, 0)), open(f, 'rb').read(), zipfile.ZIP_DEFLATED)
+    made = []
+    for name, srcp, w in JOURNAL_PICS:
+        p = os.path.join(ROOT, srcp)
+        if os.path.exists(p):
+            made.append(save(Image.open(p), name, w, q=84))
+    return made
+
+
 PAGE = r"""
 <script>(function (d) { d.classList.add('opening');      // the opening's choice, made before anything paints: whether it plays, and by day or night
-  if (/^#(speaker|dome|orb|turntable|colour)-|^#(speakers|lighting|turntable|tropos|atmosphere|turn|spec|lamps|record)$/.test(location.hash)
+  if (/^#(speaker|dome|orb|turntable|colour)-|^#(speakers|lighting|turntable|tropos|atmosphere|turn|spec|lamps|record|press|journal|privacy)$|^#journal-/.test(location.hash)
       || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   d.classList.add('intro');
   if (matchMedia('(prefers-color-scheme: dark)').matches) { d.classList.add('night'); document.querySelector('meta[name="theme-color"]').content = '#100F12'; }
@@ -1193,6 +1523,18 @@ footer p { margin: 0; font: 500 12px/1.5 var(--mono); letter-spacing: 0.12em; te
 .nav:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px }
 .count { position: absolute; right: 12px; bottom: 12px; z-index: 2; font: 500 12px/1 var(--mono); letter-spacing: 0.08em; color: var(--on-photo);
   background: var(--veil); border-radius: 999px; padding: 7px 10px; pointer-events: none }
+.v3d-box { position: absolute; inset: 0; z-index: 3; border-radius: 6px; overflow: hidden; background: #F3F1EC; touch-action: none; cursor: grab }
+.v3d-box:active { cursor: grabbing } .v3d-box:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px }
+.v3d-box canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block }
+.frame.three .nav, .frame.three .count { visibility: hidden }
+.v3d-btn { position: absolute; z-index: 4; top: 12px; right: 12px; min-height: 40px; padding: 0 14px; border: 0; border-radius: 999px; cursor: pointer;
+  font: 500 12px/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--on-photo); background: var(--veil);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.14) }
+.v3d-btn:hover { box-shadow: inset 0 0 0 1.5px var(--on-photo), 0 1px 8px rgba(0, 0, 0, 0.14) } .v3d-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px }
+.v3d-hint { position: absolute; z-index: 1; left: 12px; bottom: 12px; margin: 0; pointer-events: none; font: 500 12px/1 var(--mono); letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--on-photo); background: var(--veil); border-radius: 999px; padding: 7px 10px }
+.v3d-load { position: absolute; inset: 0; z-index: 1; display: grid; place-items: center; margin: 0; pointer-events: none;
+  font: 500 13px/1.4 var(--mono); letter-spacing: 0.08em; color: var(--muted) } .v3d-load:empty { display: none }
 .thumbs { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(56px, 84px); gap: 8px; overflow-x: auto; scrollbar-width: none;
   padding: 4px; margin: -4px; position: relative; scroll-snap-type: x proximity }
 .thumbs::-webkit-scrollbar { display: none }
@@ -1355,6 +1697,57 @@ html.cursor, html.cursor * { cursor: none !important }
 .pick-ic:empty { display: none }
 .more-line { padding-block: 32px 72px; margin: 0; color: var(--muted) }
 .more-line:empty { padding-block: 0 48px }
+
+/* round 47: the press page, the journal, the waitlist and its notice; in the shop's paper and ink, a column for reading */
+.ed-head { padding-block: 18px 8px; max-width: 760px }
+.ed-head h1 { font-size: clamp(38px, 5vw, 64px) }
+.ed-band { padding-block: 40px; border-top: 1px solid var(--rule); margin-top: 32px; display: grid; gap: 18px }
+.ed-band h2 { font-size: clamp(24px, 2.6vw, 32px) }
+.ed-note { margin: 0; max-width: 64ch; color: var(--muted) }
+.boiler { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px }
+.boiler p:not(.eyebrow) { margin: 0 0 14px; max-width: 62ch }
+.copied { margin: 0; min-height: 1.5em; color: var(--muted); font-size: 14px }
+.slot p { margin: 0 }
+.tints { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px 24px }
+.tints li { display: grid; grid-template-columns: auto 1fr; gap: 0 10px; align-items: center }
+.tints span:last-child { grid-column: 2; color: var(--muted); font-size: 14px }
+.sheets { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 48px }
+.sheet h3 { margin: 0 0 10px; font-size: 22px; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap }
+.sheet h3 small, .jcard .eyebrow { font: 500 12px/1.3 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted) }
+.sheet dl { margin: 0; display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 6px 16px; font-size: 15px; border-top: 1px solid var(--rule); padding-top: 10px }
+.sheet dt { font: 500 12px/1.6 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted) }
+.sheet dd { margin: 0 }
+.logo-dl { margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px } .logo-dl span { color: var(--muted); font-size: 15px }
+.dl-grid { list-style: none; margin: 8px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px 18px }
+.dl-grid figure { margin: 0 } .dl-grid img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 6px; display: block; background: #F1EDE8 }
+.dl-grid figcaption { margin-top: 8px; font-size: 14px; line-height: 1.45 } .dl-grid a { color: var(--ink); text-underline-offset: 3px; white-space: nowrap }
+.jlist { list-style: none; margin: 32px 0 80px; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px 20px }
+.jcard { display: grid; gap: 8px; color: var(--ink); text-decoration: none }
+.jcard img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 6px; display: block; margin-bottom: 6px; background: #F1EDE8 }
+.jcard .eyebrow { margin: 0 } .jcard b { font-size: 22px; line-height: 1.15; font-weight: 600; letter-spacing: -0.01em } .jcard > span:last-child { color: var(--muted) }
+.jcard:hover b { text-decoration: underline; text-underline-offset: 4px }
+.post { max-width: 720px; margin: 0 auto; padding-bottom: 72px }
+.post header { padding-block: 24px 8px } .post h1 { font-size: clamp(36px, 5vw, 58px) }
+.post .stand { margin: 14px 0 28px; font-size: 21px; line-height: 1.4; color: var(--muted) }
+.post-body p { margin: 0 0 1.1em; font-size: 18px; line-height: 1.65 }
+.post-body a, .post-next a, .policy a { color: var(--ink); text-underline-offset: 3px }
+.post-body figure { margin: 32px 0 }
+.post-body img { width: 100%; height: auto; display: block; border-radius: 4px }
+.post-body figcaption { margin-top: 8px; font-size: 14px; color: var(--muted) }
+.post-next { margin: 40px 0 0; padding-top: 18px; border-top: 1px solid var(--rule) }
+.waitlist { margin-top: 28px; padding-top: 28px; border-top: 1px solid var(--rule); display: grid; gap: 12px; max-width: 640px }
+.waitlist h3 { margin: 0; font-size: 24px } .waitlist p { margin: 0 }
+.wl-row { display: flex; flex-wrap: wrap; gap: 10px }
+.wl-row input { flex: 1 1 260px; min-width: 0; font: 400 17px/1.2 var(--sans); padding: 12px 16px; border: 1px solid var(--ink); border-radius: 999px; background: #FFF; color: var(--ink) }
+.waitlist fieldset { border: 0; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 18px }
+.waitlist legend { padding: 0; margin-bottom: 6px; font-size: 15px; color: var(--muted) }
+.waitlist label { font-size: 15px } .waitlist .hp { position: absolute; left: -9999px; width: 1px; height: 1px }
+.wl-note, .wl-status { font-size: 14px; color: var(--muted) } .wl-note a { color: var(--ink) }
+.policy { max-width: 760px; margin: 24px 0 80px; display: grid; gap: 4px 0 }
+.policy dt { margin-top: 18px; font-weight: 600 } .policy dd { margin: 0; color: var(--ink); line-height: 1.6 }
+@media (max-width: 900px) { .sheets, .boiler { grid-template-columns: minmax(0, 1fr) } .tints { grid-template-columns: repeat(2, minmax(0, 1fr)) }
+  .dl-grid, .jlist { grid-template-columns: repeat(2, minmax(0, 1fr)) } }
+@media (max-width: 560px) { .dl-grid, .jlist { grid-template-columns: minmax(0, 1fr) } .sheet dl { grid-template-columns: 96px minmax(0, 1fr) } }
 .more-line a { color: var(--ink); text-underline-offset: 4px }
 @media (max-width: 960px) { .shopcol { grid-template-columns: repeat(4, minmax(0, 1fr)) } .pgrid { grid-template-columns: repeat(2, minmax(0, 1fr)) } }
 @media (max-width: 720px) {
@@ -1431,6 +1824,7 @@ __HABITATS__
       Trade and stockists: the same address.</p>
     <div class="addr"><code id="addr">hello@earf.world</code><button type="button" class="btn" id="copy">Copy address</button></div>
     <small id="copy-note"></small>
+__WAITLIST__
   </div></section>
 </main>
 
@@ -1501,6 +1895,9 @@ __TURNTABLE__
           <button type="button" class="nav prev" id="g-prev" aria-label="Previous picture"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M11.5 3.5 6 9l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <button type="button" class="nav next" id="g-next" aria-label="Next picture"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M6.5 3.5 12 9l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <span class="count" id="g-count" aria-hidden="true"></span>
+          <div class="v3d-box" id="v3d-box" hidden tabindex="0" role="application" aria-roledescription="3D view" aria-label="3D view">
+            <p class="v3d-hint" aria-hidden="true">Drag to turn</p><p class="v3d-load" id="v3d-load" aria-live="polite"></p></div>
+          <button type="button" class="v3d-btn" id="v3d" hidden aria-pressed="false" aria-controls="v3d-box">View in 3D</button>
         </div>
         <div class="thumbs" id="thumbs" role="tablist" aria-label="Pictures"></div>
         <p class="cap" id="cap" aria-live="polite"></p>
@@ -1520,10 +1917,13 @@ __TURNTABLE__
     <p class="more-line" id="p-more"></p>
   </div>
 </main>
+__PRESS__
+__JOURNAL__
+__PRIVACY__
 
 <footer><div class="wrap">
   <a class="brand" href="#top" aria-label="EARF, home">__WORD__</a>
-  <nav class="foot-nav" aria-label="More"><a href="#progress">Progress</a><a href="#contact">Enquiries</a></nav>
+  <nav class="foot-nav" aria-label="More"><a href="#progress">Progress</a><a href="#journal">Journal</a><a href="#press">Press</a><a href="#contact">Enquiries</a>__FOOT_PRIVACY__</nav>
   <p>EARF &middot; San Francisco &middot; In development, not yet for sale &middot; The pictures are renders &middot; &copy; 2026</p>
 </div></footer>
 
@@ -1672,6 +2072,24 @@ document.getElementById('copy').addEventListener('click', () => {
   try { navigator.clipboard.writeText(text).then(done, pickText); } catch (e) { pickText(); }
 });
 
+// the press page's paragraphs, copied as text
+document.querySelectorAll('.copy-text').forEach(b => b.addEventListener('click', () => {
+  const t = document.getElementById(b.dataset.copy).textContent, note = b.closest('section').querySelector('.copied');
+  try { navigator.clipboard.writeText(t).then(() => { note.textContent = 'Copied.'; }, () => { note.textContent = 'Select the text to copy it.'; }); }
+  catch (e) { note.textContent = 'Select the text to copy it.'; }
+}));
+// the waitlist (when switched on): sent in the background where the provider allows it, else posted as a form
+const wl = document.getElementById('waitlist');
+if (wl) wl.addEventListener('submit', e => {
+  const st = document.getElementById('wl-status'), em = wl.querySelector('input[type=email]');
+  if (!em.value || !em.checkValidity()) { e.preventDefault(); st.textContent = 'That address doesn’t look right.'; em.focus(); return; }
+  if (wl.website.value || !wl.action) { e.preventDefault(); st.textContent = 'Thank you.'; return; }
+  e.preventDefault(); st.textContent = 'Sending…';
+  fetch(wl.action, { method: 'POST', body: new FormData(wl), mode: 'no-cors' })
+    .then(() => { wl.reset(); st.textContent = 'You’re on the list. We’ll write when there’s something to say.'; },
+          () => { st.textContent = 'That didn’t go through. Try again in a moment.'; });
+});
+
 // a product's page (round 34, the shop): its pictures as a shop shows them, one at a time (the arrows, a swipe, the arrow
 // keys, or the strip of thumbnails), in the colour picked; Tropos's open on the photograph in its element
 const SPEAKER_VIEWS = [
@@ -1807,7 +2225,41 @@ function renderProduct(Pr, k) {
   showView(shown(c)[0]);                              // Tropos opens on its photograph in its element, the rest on their hero
   company(document.getElementById('p-company'), k, P.id, true);
   document.getElementById('p-more').innerHTML = MORE[P.id] || '';
+  v3sync();
 }
+// the 3D view (round 47): offered where the product has a model and the browser has WebGL 2; fetched only on the tap;
+// the colour coins repaint it in place; any failure puts the pictures back and says why
+const V3 = D.view3d || {}, has3d = !!window.WebGL2RenderingContext;
+const v3btn = document.getElementById('v3d'), v3box = document.getElementById('v3d-box'), v3load = document.getElementById('v3d-load'), frameEl = stage.parentElement;
+let v3 = null, v3for = null, v3busy = false;
+const v3label = () => (V3[P.id].label || '{name}, in 3D').replace('{name}', BY[cur].name);
+function v3close() {
+  if (v3) v3.dispose(); v3 = null; v3for = null; v3box.hidden = true; v3load.textContent = '';
+  frameEl.classList.remove('three'); v3btn.setAttribute('aria-pressed', 'false'); v3btn.textContent = 'View in 3D';
+}
+function v3sync() {
+  v3btn.hidden = !(V3[P.id] && has3d);
+  if ((v3 || frameEl.classList.contains('three')) && v3for !== P.id && !v3busy) v3close();
+  if (v3) { v3.tint(V3[P.id].tints[cur]); v3box.setAttribute('aria-label', v3label()); }
+}
+v3btn.addEventListener('click', async () => {
+  if (frameEl.classList.contains('three')) { v3close(); return; }
+  if (v3busy) return;
+  const spec = V3[P.id], pid = P.id; v3busy = true;
+  frameEl.classList.add('three'); v3box.hidden = false; v3box.setAttribute('aria-label', v3label());
+  v3btn.setAttribute('aria-pressed', 'true'); v3btn.textContent = 'Back to pictures'; v3load.textContent = 'Loading the model';
+  try {
+    const m = await import('./3d/viewer.js');
+    if (!m.supported()) throw new Error('no WebGL 2');
+    const v = await m.open(v3box, spec, spec.tints[cur], { reduce, onProgress: p => { v3load.textContent = `Loading the model, ${Math.round(p * 100)}%`; } });
+    if (!frameEl.classList.contains('three') || P.id !== pid) { v.dispose(); }      // closed, or another product, while it loaded
+    else { v3 = v; v3for = pid; v3.tint(spec.tints[cur]); v3load.textContent = ''; v3box.focus({ preventScroll: true }); }
+  } catch (e) {
+    v3close(); v3btn.hidden = true; document.getElementById('cap').textContent = 'The 3D view could not start in this browser; the pictures are all here.';
+  }
+  v3busy = false;
+});
+v3box.addEventListener('keydown', e => { if (e.key === 'Escape') { e.preventDefault(); v3close(); v3btn.focus(); } });
 document.getElementById('g-prev').addEventListener('click', () => go(-1));
 document.getElementById('g-next').addEventListener('click', () => go(1));
 const keys = (e, focus) => {
@@ -1893,12 +2345,13 @@ function renderColour(k) {
 const OLD = { dome: 'hemisphere', orb: 'core', turntable: 'mantle' };
 const home = document.getElementById('home'), pdp = document.getElementById('pdp');
 const lineMain = document.getElementById('line'), colourMain = document.getElementById('colour'), MAINS = { home, line: lineMain, colour: colourMain, pdp };
+['press', 'journal', 'privacy'].forEach(n => { const m = document.getElementById(n); if (m) MAINS[n] = m; });
 const LINE_OF = { speakers: 'speakers', tropos: 'speakers', atmosphere: 'speakers', turn: 'speakers', spec: 'speakers', closer: 'speakers',
                   lighting: 'lighting', lamps: 'lighting', turntable: 'turntable', record: 'turntable' };
 const LINE_NAME = { speakers: 'Speakers', lighting: 'Lighting', turntable: 'Turntable' };
 const TITLE0 = document.title;
 let last = null;
-const showMain = name => Object.entries(MAINS).forEach(([n, m]) => { m.hidden = n !== name; });
+const showMain = name => { Object.entries(MAINS).forEach(([n, m]) => { m.hidden = n !== name; }); if (name !== 'pdp' && typeof v3close === 'function') v3close(); };
 // the phones' Menu: opens and closes the pages' list; any page chosen, Escape, or a new address closes it
 const navEl = document.getElementById('nav'), menuBtn = navEl.querySelector('.menu');
 const menuOpen = o => { navEl.classList.toggle('open', o); menuBtn.setAttribute('aria-expanded', String(o)); };
@@ -1919,6 +2372,14 @@ function route() {
     navAt(PBY[m[1]].line);
   } else if ((m = /^colour-([a-z]+)$/.exec(h)) && keyOf(m[1])) {
     page = h; showMain('colour'); renderColour(keyOf(m[1])); scrollTo(0, 0); navAt('colours');
+  } else if (MAINS.press && h === 'press' || MAINS.privacy && h === 'privacy') {      // round 47: the press page, the privacy notice
+    page = h; showMain(h); document.title = `${h === 'press' ? 'Press' : 'Privacy'} · EARF`; scrollTo(0, 0); navAt(null);
+  } else if (MAINS.journal && (m = /^journal(?:-([a-z0-9-]+))?$/.exec(h)) && (!m[1] || document.getElementById(h))) {   // the journal and its posts
+    page = h; showMain('journal');
+    document.getElementById('journal-index').hidden = !!m[1];
+    MAINS.journal.querySelectorAll('.post').forEach(a => { a.hidden = a.id !== h; });
+    document.title = m[1] ? `${document.getElementById(h).dataset.title} · EARF` : 'Journal · EARF';
+    scrollTo(0, 0); navAt(null);
   } else if (LINE_OF[h] || /^(turntable|mantle)-/.test(h)) {         // Mantle's own addresses, before its page exists
     const L = LINE_OF[h] || 'turntable'; page = 'line-' + L; showMain('line');
     lineMain.querySelectorAll('.lineview').forEach(v => { v.hidden = v.dataset.line !== L; });
@@ -2061,6 +2522,7 @@ def favicons():
 
 def build():
     """The whole site into site/: the page as a document, the favicons, robots.txt and vercel.json."""
+    make_editorial()
     head, rest = body()
     open(os.path.join(SITE, 'index.html'), 'w').write(HEAD + head.strip() + '\n</head>\n<body>\n' + rest.strip() + '\n</body>\n</html>\n')
     favicons()

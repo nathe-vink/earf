@@ -1,0 +1,13 @@
+{
+  "name": "earf-viewer",
+  "private": true,
+  "description": "The site's 3D view: compresses a product's render model for the web and carries three.js, pinned (see README.md)",
+  "type": "module",
+  "dependencies": {
+    "@gltf-transform/core": "4.5.1",
+    "@gltf-transform/extensions": "4.5.1",
+    "@gltf-transform/functions": "4.5.1",
+    "meshoptimizer": "1.2.0",
+    "three": "0.170.0"
+  }
+}

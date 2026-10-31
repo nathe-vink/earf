@@ -84,6 +84,29 @@ R's hole, each colour's own cutaway), and makes the cloth read as cloth; it buil
 acrylic, and starts the pictures for a launch, each passed by a critic to a $20,000 product's bar: the studio, the
 speakers lit from below and on a night facade, and each Cloud in its element, photographed in a real place.
 
+## Round 47: the site's next pass: a press page, a journal, a waitlist kept off, and a 3D view kept off (2026-10-31, `r47-site-next`)
+
+The coordinator's brief for the site lane (the owner, 2026-10-31: "better site ... establish EARF as a world class
+brand"). Not live: main needs the owner's yes.
+
+- **Press** (`#press`, `press_html()`): the boilerplate in two lengths with copy buttons, how to write the names, the
+  eight colours, each product's particulars (the site's own SPEC, LAMPS and TT, nothing new), twelve pictures to download
+  at full size and a zip of the marks (`site/press/earf-logos.zip`, from `brand/mark`). Two slots, `PRESS['founder']` and
+  `PRESS['contact']`, stay off the page (an HTML comment marks the place) until the owner fills them.
+- **Journal** (`#journal`, `#journal-<slug>`, `JOURNAL`): three posts. *Eight colours, all the way through* (the tints and
+  their elements); *How the horn is formed* (round 36's making, from `r33-speaker-horn`'s README, as plans, "will be");
+  *Planet EARF* (planned, no address; two of the bar session's renders, `renders/2026-10-22/barkhorn/planet39` and
+  `planet41`, copied here from `r33-planet-world`). Every figure says it is a render.
+- **Waitlist** (`WAITLIST = False`): the form in the enquiries band (address, five optional ticks, a hidden bot field),
+  the privacy notice at `#privacy` (`launch/policies-draft.md` section 4, new: the drafts had none), and three providers
+  compared in `launch/waitlist-options.md` (Buttondown recommended). With the flag off the page has no form, no notice and
+  no route. No account was opened.
+- **3D view** (`viewer/`, `VIEW3D = False`): built end to end (Tropos's CAD compressed from 62 MB to 2.1 MB, three.js
+  r170 self-hosted, the engine's own tints, loaded on a tap, reduced motion, phones) and kept off: a blind critic scored
+  its frames 3.5 to 4 against the renders' 6.5 to 7 and called it "hurt" beside them. `viewer/README.md` has the reasons
+  and two ways to close the gap.
+- **Footer:** Journal and Press (and Privacy once the waitlist is on).
+
 ## Round 31: every picture final, the amplifier's plate as it is, and pictures for a launch (the owner's notes of 2026-10-18; in progress)
 
 | the owner's note | what changes |
