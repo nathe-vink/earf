@@ -515,15 +515,18 @@ def shot_core_sample(lit, stackmix=None, out=None, scale=1.0, samples=512, tag='
         contour_core(lit=lit, tint=tint, base=(0.0, 0.0, tz), glow=3.7 if lit else 1.0)     # r3 c2: x1.6
     else:
         core_sample(stackmix=stackmix, lit=lit, base=(0.0, 0.0, tz), glow=1.1 if lit else 1.0)    # r4 c1: x0.6
-        # r4 c7: two pears on a small dark plate to the right, to catch the lamp's coloured light
-        if lit:
+    if lit:
+        # Core Sample r4 c7 and Contour Core look 2 r1 c6: two pears on a small dark plate to the right, to catch the
+        # lamp's coloured light
+        if True:
+            px = 0.22 if which == 'contour' else 0.24
             stone = principled('stoneware', '#3B3834', 0.55, bump=(1500.0, 0.25))
-            bpy.ops.mesh.primitive_cylinder_add(radius=0.08, depth=0.012, vertices=96, location=(0.24, 0.06, tz + 0.006))
+            bpy.ops.mesh.primitive_cylinder_add(radius=0.08, depth=0.012, vertices=96, location=(px, 0.06, tz + 0.006))
             po = bpy.context.object; po.data.materials.append(stone); po.cycles.is_caustics_receiver = True
             bpy.ops.object.shade_smooth()
             import assets
             try:
-                assets.place(bpy, 'food_pears_asian_01', '2k', location=(0.24, 0.06, tz + 0.012), rotation_deg=(0, 0, 10), scale=1.8)
+                assets.place(bpy, 'food_pears_asian_01', '2k', location=(px, 0.06, tz + 0.012), rotation_deg=(0, 0, 10), scale=1.8)
             except Exception as e:
                 print('pears skipped', e)
     import assets
@@ -554,16 +557,18 @@ def shot_core_sample(lit, stackmix=None, out=None, scale=1.0, samples=512, tag='
             ob.rotation_euler = (Vector((0, 0, z)) - Vector(ob.location)).to_track_quat('-Z', 'Y').to_euler()
         contour = which == 'contour'
         # Contour Core r2: c1 exposure -1.3, c2 the fill +200 %, c3 cooler, c4 the dusk 0.15, c7 the glow x1.3
-        world(hdri='kiara_9_dusk', strength=0.09 if contour else 0.12, rotation=200)      # r3 c7 / r4 c5
+        # Contour Core look 2 r1: c1 exposure -0.5, c3 the fill +80 %, c4 #A8BCDD, c5 the dusk 0.12, c8 the fill larger
+        # (1.2 x 0.9) for soft highlights on the ring edges, c7 the camera 40 mm lower
+        world(hdri='kiara_9_dusk', strength=0.12, rotation=200)      # r3 c7 / r4 c5 / L2r1 c5
         if True:
             # r3 c5: a 600 x 80 strip behind and 40 deg right at the base's height, for its edges
             rimb = area('base-rim', (0.55, 0.12, tz + 0.03), (0, 0, 0), (0.6, 0.08), 2.5, '#FFF1E2')     # off the wall
             aim(rimb, tz + 0.015)
-        area('room-fill', (-1.2, -1.0, 1.9), (55, 0, -40), (1.0, 1.0), 2.1 if contour else 0.7,
-             '#9EB8FF' if contour else '#9FB0CC')                                          # r3 c3
+        area('room-fill', (-1.2, -1.0, 1.9), (55, 0, -40), (1.2, 0.9) if contour else (1.0, 1.0), 3.8 if contour else 0.7,
+             '#A8BCDD' if contour else '#9FB0CC')                                          # r3 c3, L2r1 c3/c4/c8
         kick = area('kicker', (-0.45, 0.12, tz + 0.08), (0, 0, 0), (0.6, 0.10), 0.8, '#FFF4E8'); aim(kick, tz + 0.01)
         sheen = area('sheen', (0.87, -0.5, tz + 0.12), (0, 0, 0), (0.15, 1.2), 0.5, '#FFF4E8'); aim(sheen, tz + 0.09)
-        render_settings(1600, 1067, samples, scale, exposure=-2.2 if contour else 1.3, look='AgX - Medium High Contrast')
+        render_settings(1600, 1067, samples, scale, exposure=-2.7 if contour else 1.3, look='AgX - Medium High Contrast')
     else:
         # Contour Core day r1: c4 the sky down (0.35 and the window's sky 60 %), c3 a strong low sun (5) from the left and
         # a little behind, so the lamp throws a hard shadow toward the camera's right and the window's bars cross the
@@ -574,7 +579,8 @@ def shot_core_sample(lit, stackmix=None, out=None, scale=1.0, samples=512, tag='
         sun_lamp('sun', (0.86, -0.25, -0.34), strength=12.0, color='#FFE7C8', angle=1.5)
         box_ob('bounce', 0.40, -0.25, tz, 0.70, -0.24, tz + 0.20, principled('bounce', '#F4F2EE', 0.9))
         render_settings(1600, 1067, samples, scale, exposure=0.0)
-    camera((0.22, -0.98, tz + 0.30), (0.0, 0.0, tz + 0.085), lens=85, fstop=2.8 if lit else 4.0)
+    cz = 0.26 if (lit and which == 'contour') else 0.30                 # Contour Core look 2 r1 c7
+    camera((0.22, -0.98, tz + cz), (0.0, 0.0, tz + 0.085), lens=85, fstop=2.8 if lit else 4.0)
     bpy.context.scene.render.filepath = out
     bpy.ops.render.render(write_still=True)
 
