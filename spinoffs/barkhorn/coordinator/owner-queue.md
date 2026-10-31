@@ -91,3 +91,10 @@ while lanes run. Deck: https://claude.ai/artifact/3sihYaT4ckNTF6WE7SWR7x (v26). 
 - Landscape renders/2026-10-31/barkhorn/tropos-campaign/tropos-room-golden-hour-off.png + portrait ...-off-portrait.png.
 - Deck v27: home slide swapped (/_blob/009106e7...). Site lane asked to swap the At home band (both frames).
 - Still waiting: the lamps lane's cordless Core set -> site + deck light.html (Core image /_blob/e75b6502... has a cord).
+
+## Lamps milestone 4 (22:31 UTC, fec0dc4a)
+- TERRACE met (won all 4 duels: 7.0-5.5, 6.5-5.5 swapped, 6.8-6.0 vs dining-hero, 7.0-5.5 daylight); HALO met (6.5-5.5);
+  CONTOUR CORE met by day (6.5-5.0), lit lost 3 (last 6.2-6.8); CORE SAMPLE not met (dropped). Every duel: proposals more
+  distinctive (6-7 vs 3-4). Owner-facing notes: thick laminations read RED not amber (calibration; copy or lighter pour);
+  pendant pool white by design (a tinted lens option for bars); Terrace fins ~31 K -> ~6 K.
+- Third ask sent with priority: the cordless Core set first.
