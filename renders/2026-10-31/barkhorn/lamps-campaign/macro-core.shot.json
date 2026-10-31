@@ -55,7 +55,7 @@
   "zenith": "#D8D2C8",
   "horizon": "#DED8CE",
   "ground": "#D6CEC2",
-  "strength": 0.12
+  "strength": 0.05
  },
  "lights": {
   "key": {
@@ -115,7 +115,11 @@
    "irradiance": 2.645,
    "color": "#FFDDA6",
    "camera": false,
-   "specular": 0.0
+   "specular": 0.0,
+   "receivers": [
+    "sweep*",
+    "prop*"
+   ]
   },
   "pool+0.00": {
    "type": "point",
@@ -124,7 +128,7 @@
     -0.075,
     0.09
    ],
-   "power_w": 1.2,
+   "power_w": 0.45,
    "radius_m": 0.06,
    "color": "#FF6234",
    "camera": false,
@@ -182,7 +186,7 @@
     0.0,
     0.06
    ],
-   "strength": 4.0,
+   "strength": 12.0,
    "color": "#FFFFFF",
    "ramp": {
     "axis": "z",
@@ -212,8 +216,8 @@
     -0.05,
     0.07500000000000001
    ],
-   "strength": 2.5,
-   "color": "#FFFFFF",
+   "strength": 2.0,
+   "color": 4300,
    "ramp": {
     "axis": "x",
     "at_m": [
