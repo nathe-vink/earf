@@ -103,3 +103,48 @@ The full JSONs are in `p2-*.json`.
 The judges read the earlier heroes as lived-in rooms (pendant and lamp pools, a record wall, a timber ceiling). They read r44 as murky or as a CG vignette.
 
 As photographs, the round 39 and round 41 heroes still win. Those frames had five or more look rounds; these have had two.
+
+## Renders, round 3 (p4): the last round for street and bar, the second for the lantern
+
+| View | Critic | Stage 1 | If fixed | Verdict |
+|---|---|---|---|---|
+| street | a | 5.0 | 7.0 | iterate |
+| street | b | **5.5** | 7.5 | iterate |
+| bar | a | 5.0 | 6.8 | iterate |
+| bar | b | 5.0 | 7.0 | iterate |
+| lantern | a | 4.5 | 6.5 | iterate |
+| lantern | b | 4.5 | 6.5 | iterate |
+
+**Duels in both orders against the earlier heroes:**
+- r41 door hero against street p4: r41 wins 2–0 (clear). The judges named murk and the ghost squares the glass reflects.
+- r39 door hero against lantern p4: r39 wins 2–0 (clear). The judges said "CG product scene", citing the self-lit red cabinets and the neon globe.
+
+**Converged asks left:**
+- The band still reads salmon. The red-orange source, filtered by the Smoke fins, lands red, and AgX turns bright saturated orange-red pink. A yellower source (about #FFB040) and lighter fins are the fix. It was not made, because no round is left for street and bar.
+- The glass reflections are flat squares: the opposite facade's unlit windows.
+- The ceiling is a void.
+- The bar top has no pools.
+- The oak is uniform board to board.
+- The terrazzo chips are coarse.
+- The rooms are empty.
+- The lantern view has these issues:
+  - the cabinets glow flat red;
+  - the floor pool is the brightest broad surface;
+  - a blurred chair cuts the bottom edge.
+
+**Out of scope throughout:** the products' tints, which compete with the band (the card fixes them), and the Tropos being invisible from the bar and the street.
+
+## Finals
+
+| View | Final | Critics | Against the hero |
+|---|---|---|---|
+| street | `finals/street-p4.png` (1200 × 800 proof) | 5.0 / 5.5 | r41 door wins 2–0 |
+| bar | `finals/bar-p4.png` | 5.0 / 5.0 | not dueled (no bar hero at this angle) |
+| lantern | `finals/lantern-p3.png` (p4 scored lower, 4.5 / 4.5) | 5.0 / 4.5 | r39 door wins 2–0 |
+
+**The verdict, plainly:** the architecture won its own contest. Both concept critics picked it, and it is drawn, numbered and costed. The pictures of it did not beat the house's best pictures. The round 39 and round 41 heroes had five or more look rounds each; these have had two or three. The owner's next look at the lantern should be a picture pass in its own right:
+- the band's color;
+- real reflections in the glass;
+- board-to-board oak;
+- props;
+- the lantern seen through its open porch from the bar, which shows the Tropos.
