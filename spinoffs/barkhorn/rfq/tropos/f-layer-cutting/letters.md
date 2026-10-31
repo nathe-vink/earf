@@ -9,7 +9,8 @@ research R8. **Nothing here has been sent. These are drafts for the owner.**
 - the sheet drawing BHH-005 from `../e-laminated-horn/drawings.pdf` (its last pages).
 
 **Facts used below:**
-- **The sheet:** TruCast 2074 Dark Gray 1/2 in, two horns' worth. We order it cut to 48 x 36 in blanks: A&C Plastics cuts
+- **The sheet:** TruCast 2074 Dark Gray 1/2 in, two horns' worth. That is Smoke, the pricing reference: the pair's color is
+  chosen at order, and another stock code cuts the same. We order it cut to 48 x 36 in blanks: A&C Plastics cuts
   to size, and that size fits Pololu's 48 x 48 limit and a 1300 x 900 mm laser bed.
 - **The layers:** about 40 m of cut per horn, outlines and bores together.
 - **The largest layer:** 630 x 366 mm.
@@ -26,7 +27,7 @@ email to its custom-cutting address with the files.
 
 **Short (order comment):**
 
-> Customer-supplied TruCast cell-cast acrylic, 1/2 in (12.7 mm), dark grey 2074, in 48 x 36 in blanks: 44 parts (22
+> Customer-supplied TruCast cell-cast acrylic, 1/2 in (12.7 mm), dark gray 2074, in 48 x 36 in blanks: 44 parts (22
 > DXFs, 2 of each), rings that nest inside one another. Please cut outline and bore; we register on the bores, so
 > please tell us the bore tolerance you hold at 1/2 in and the edge taper. Edge as cut is fine. We'll anneal before
 > bonding. What turnaround from receipt of sheet?
@@ -38,7 +39,7 @@ email to its custom-cutting address with the files.
 > Hello,
 >
 > We're EARF, a small hi-fi maker in San Francisco. We'd like a quote to laser-cut 44 parts from 1/2 in (12.7 mm)
-> TruCast cell-cast acrylic, dark grey 2074, which we would ship to you in 48 x 36 in blanks.
+> TruCast cell-cast acrylic, dark gray 2074, which we would ship to you in 48 x 36 in blanks.
 >
 > The parts are the 22 layers of a loudspeaker horn, two of each. Each is a ring: an outline up to 630 x 366 mm and a
 > bore inside it. The DXFs and a table of sizes are attached. The rings nest inside one another, so a blank takes a
@@ -74,7 +75,7 @@ email to its custom-cutting address with the files.
 > acrylic: the 22 layers of a loudspeaker horn, two of each. Each is a ring, an outline up to 630 x 366 mm with a bore
 > inside it (DXFs and a size table attached).
 >
-> We'd like to supply the sheet (TruCast 2074 dark grey, 48 x 36 in blanks, or full 48 x 96 sheets if you prefer). Do
+> We'd like to supply the sheet (TruCast 2074 dark gray, 48 x 36 in blanks, or full 48 x 96 sheets if you prefer). Do
 > you take customer-supplied material?
 >
 > Questions:
@@ -94,7 +95,7 @@ email to its custom-cutting address with the files.
 
 > Quote to cut 44 rings from 1/2 in cast acrylic (our TruCast 2074, or yours), DXFs ready, up to 630 x 366 mm, outline
 > and bore. Edge finish (router or laser), tolerance on the bore, turnaround. Also: do you bond thick laminations with a
-> polymerising cement (Weld-On 40 or ACRIFIX), and anneal?
+> polymerizing cement (Weld-On 40 or ACRIFIX), and anneal?
 
 **Email:**
 
@@ -103,7 +104,7 @@ email to its custom-cutting address with the files.
 > Hello,
 >
 > We're EARF, a small hi-fi maker in San Francisco. Our loudspeaker's horn is laminated from 22 layers of 1/2 in
-> cell-cast acrylic, tinted dark grey. We'd like a quote to cut the layers for a pair, 44 rings (DXFs and a size table
+> cell-cast acrylic, tinted dark gray. We'd like a quote to cut the layers for a pair, 44 rings (DXFs and a size table
 > attached). The largest is 630 x 366 mm. Each has an outline and a bore. We can supply the sheet (TruCast 2074) or you
 > can source it.
 >
@@ -113,7 +114,7 @@ email to its custom-cutting address with the files.
 > 2. **Tolerance** on the outline and on the bore. We register on the bores, with no dowel holes, because they would
 >    show through the tint.
 > 3. **Turnaround and price.**
-> 4. **Bonding:** your site mentions museum work. Do you bond thick laminations with a two-part polymerising cement
+> 4. **Bonding:** your site mentions museum work. Do you bond thick laminations with a two-part polymerizing cement
 >    (Weld-On 40 or ACRIFIX 2R 0190) and anneal them? If so, we'd also like to talk about bonding the stack and
 >    machining its air path. A fuller request with drawings is ready.
 >
@@ -139,7 +140,7 @@ email to its custom-cutting address with the files.
 > We're EARF, a small hi-fi maker in San Francisco. We have two jobs on one loudspeaker horn and would like a quote on
 > either or both.
 >
-> 1. **Cutting:** 44 rings from 1/2 in (12.7 mm) cell-cast acrylic, which we would supply (TruCast 2074 dark grey, 48 x
+> 1. **Cutting:** 44 rings from 1/2 in (12.7 mm) cell-cast acrylic, which we would supply (TruCast 2074 dark gray, 48 x
 >    36 in blanks). These are the 22 layers of the horn, two of each. Each has an outline up to 630 x 366 mm and a bore
 >    (DXFs and a size table attached). Please say whether you'd laser or route them, the edge that leaves, the
 >    tolerance on the bore (we register on it), and the turnaround.

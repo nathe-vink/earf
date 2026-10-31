@@ -14,7 +14,7 @@ Candidate shops and their routes are in `README.md` beside this file.
 
 **What:** 16 batts a speaker, 32 a pair, polyester, acoustic grade, about 30 kg/m3, thermally bonded (no binder),
 50 and 100 mm thick, cut 10 mm oversize to our DXF shapes (`lining-*`, sheets 4 and 22 to 25). Each batt is sewn into
-a sleeve of white polyester voile (a sheer curtain fabric), seams to the wall side, so no fibre escapes into the
+a sleeve of white polyester voile (a sheer curtain fabric), seams to the wall side, so no fiber escapes into the
 cabinet. The cabinet is clear acrylic, so the sleeves are seen: even seams, no puckers, the batt filling the sleeve.
 
 **Short (sewing shop's web form or phone):**
@@ -66,10 +66,11 @@ two or three. A short email to FoamOrder:
 
 **What:** two discs a pair. Each is a 12 mm acrylic ring frame, ø436 (sheet 16), with its face edge rounded R5; an
 acoustically transparent knit is stretched over its face and round its edge and fixed at the back. About 0.6 x 0.95 m
-of cloth a disc. Colour: the speaker's (Smoke for the first pair: near-black; Ember later).
+of cloth a disc. Color: the speaker's, chosen at order (near-black for Smoke, the pricing reference).
 
-**Cloth:** Parts Express's stretch grille cloths by the yard (Mellotone Premium Black, 64 in; standard black, grey,
-white at 70 in), so the first pair needs one yard of black. No order letter needed; order with the electronics.
+**Cloth:** Parts Express's stretch grille cloths by the yard (Mellotone Premium Black, 64 in; standard black, gray,
+white at 70 in). A Smoke pair needs one yard of black; the cloth follows the color chosen at order. No order letter
+is needed: order it with the electronics.
 
 **Short (upholstery shop, web form or phone):**
 
@@ -99,10 +100,10 @@ white at 70 in), so the first pair needs one yard of black. No order letter need
 
 ---
 
-## 3. The wordmark etched into the back, filled with colour
+## 3. The wordmark etched into the back, filled with color
 
 **What:** EARF, 140 mm wide, laser-etched about 0.1 mm deep into the outside of the back panel (20 mm cast acrylic,
-518 x 838, sheet 10), frosted, from our vector file; the etch filled with a deeper tint of the speaker's colour, wiped
+518 x 838, sheet 10), frosted, from our vector file; the etch filled with a deeper tint of the speaker's color, wiped
 in and cured. Two backs a pair.
 
 **Two points for the shop** (research R8 and engravers' notes): a laser-cut or etched acrylic edge carries stress, and
@@ -112,22 +113,23 @@ or alike), and the panel annealed after etching and before filling, or etched be
 **Short (laser engraver's web form or phone):**
 
 > Laser-etch our wordmark (vector, 140 mm wide) about 0.1 mm deep into the face of a 518 x 838 x 20 mm cast acrylic
-> panel, frosted, then colour-fill the etch (dark grey for the first pair) with a fill that won't craze acrylic.
-> Two panels, then 20. Do you take a panel this size, and can you colour-fill? Price and turnaround?
+> panel, frosted, then color-fill the etch with a fill that won't craze acrylic. The fill's color is chosen at order;
+> please quote a dark gray. Two panels, then 20. Do you take a panel this size, and can you color-fill? Price and
+> turnaround?
 
 **Email:**
 
-> Subject: Quote: laser-etched and colour-filled wordmark on two acrylic panels
+> Subject: Quote: laser-etched and color-filled wordmark on two acrylic panels
 >
 > Hello,
 >
 > We're EARF, a small hi-fi maker in San Francisco. Our loudspeaker's back panel is 20 mm cell-cast acrylic, 518 x 838
 > mm, tinted. We'd like our wordmark (EARF, 140 mm wide; vector file attached) laser-etched about 0.1 mm deep into its
-> outer face, frosted, and the etch filled with colour (a dark grey for the first pair), wiped flush and cured. Two
-> panels first, then 20 and 100.
+> outer face, frosted, and the etch filled with color, wiped flush and cured. The fill's color is chosen at order;
+> please quote a dark gray. Two panels first, then 20 and 100.
 >
 > 1. Can your laser take a panel 518 x 838 x 20 mm (we can also send it before the shop polishes and anneals it)?
-> 2. Do you colour-fill, and with what? We'd like a fill that won't craze the acrylic (not solvent-based).
+> 2. Do you color-fill, and with what? We'd like a fill that won't craze the acrylic (not solvent-based).
 > 3. Price and turnaround.
 >
 > Thank you,
@@ -141,7 +143,7 @@ or alike), and the panel annealed after etching and before filling, or etched be
 
 | part | spec | a pair | route |
 |---|---|---|---|
-| back seal | EPDM cord ø4 mm, 60 Shore A, about 2.7 m a speaker, ends vulcanised into a loop (and a spare) | 3 loops | a seal house that vulcanises cord (below) |
+| back seal | EPDM cord ø4 mm, 60 Shore A, about 2.7 m a speaker, ends vulcanized into a loop (and a spare) | 3 loops | a seal house that vulcanizes cord (below) |
 | amplifier compartment gasket | EPDM sponge, closed cell, 3 mm, a frame 15 wide round the flange, about 158 x 353 outside (sheet 30) | 2 | a die-cutter, or hand-cut from sheet for the first pair |
 | cap O-ring | 182 x 2 mm, EPDM 70 Shore A | 2 (+2 spare) | stock: a standard metric O-ring |
 | post sleeves | polyurethane, Shore A 90, ø12 x 10 x 13, sets of 4 | 2 sets | cut from 12 mm polyurethane rod, or a stock bushing |
@@ -149,18 +151,18 @@ or alike), and the panel annealed after etching and before filling, or etched be
 
 **Short (seal house's web form):**
 
-> Quote: vulcanised EPDM cord loops, ø4 mm cord, 60 Shore A, each about 2,700 mm long (we'll give the exact length),
+> Quote: vulcanized EPDM cord loops, ø4 mm cord, 60 Shore A, each about 2,700 mm long (we'll give the exact length),
 > 3 pieces, then 20 and 100. Also: 2 die-cut EPDM closed-cell sponge frames, 3 mm thick, 15 mm wide, about 158 x 353
 > outside (drawing attached), and 4 O-rings 182 x 2 mm EPDM 70. Price and lead time?
 
 **Email:**
 
-> Subject: Quote: vulcanised EPDM cord loops, a die-cut sponge gasket, O-rings (small quantities)
+> Subject: Quote: vulcanized EPDM cord loops, a die-cut sponge gasket, O-rings (small quantities)
 >
 > Hello,
 >
 > We're EARF, a small hi-fi maker in San Francisco, building a loudspeaker prototype. We'd like a quote for:
-> 1. **Cord loops:** EPDM O-ring cord, ø4 mm, 60 Shore A (70 if that's what you stock), the ends vulcanised into a loop
+> 1. **Cord loops:** EPDM O-ring cord, ø4 mm, 60 Shore A (70 if that's what you stock), the ends vulcanized into a loop
 >    about 2,700 mm round (we'll confirm the exact length from the first cabinet). 3 pieces, then 20 and 100. The loop
 >    sits in a groove in an acrylic panel and seals a removable back; a static seal.
 > 2. **A gasket:** EPDM closed-cell sponge, 3 mm, die-cut as a rectangular frame 15 mm wide, about 158 x 353 outside

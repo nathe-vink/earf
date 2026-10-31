@@ -16,6 +16,10 @@ three windows:
 
 All durations are estimates; nothing is quoted. The January plan below is kept as history, superseded.
 
+**Color:** no starting color is promised (the owner, 2026-10-31). The first pair's color is chosen at order. Every
+price here is for Smoke (stock TruCast 2064 and 2074), the pricing reference; another stock color may change the
+price or the lead time.
+
 ### What each horn route makes
 
 | route | first horn | pair assembled | 18 March | late April (29 Apr) | Vienna (6 to 9 May; ship by about 15 Apr) |
@@ -41,7 +45,7 @@ not on 16 November.**
 
 | | cash |
 |---|---|
-| the laminated Smoke pair, everything (the cash table below, without contingency) | about $18,520: **on the line, with no contingency** |
+| the laminated pair, priced in Smoke, everything (the cash table below, without contingency) | about $18,520: **on the line, with no contingency** |
 | + the quarter forming trial | + $3,450, so about **$21,970: $3,470 over** |
 | + if formed is chosen: the full plug, the trim fixture and two formed horns | + about $12,600 more (est.): $7,100 + $2,500 + $3,000 |
 | the 15 % contingency | about $2,800, also outside the line |
@@ -153,7 +157,7 @@ With 1 and 3, the float is back to about a week. Without them, any slip in Janua
 | 25 Jan | First formed horn. The second in the week after. Fit it to the laminated pair's cabinets, which are already done. |
 | early Feb | The formed pair, to photograph beside the laminated one by mid-February. The owner chooses the route from the real thing. |
 
-## Cash out by week: the laminated Smoke pair for 19 January
+## Cash out by week: the laminated pair, priced in Smoke, for 19 January
 
 **Sources:**
 - The parts list's prices: `out-cloud/bom.md`, for 2.

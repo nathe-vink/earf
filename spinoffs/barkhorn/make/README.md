@@ -11,7 +11,7 @@ prototype pair on the first attempt.
 | `assembly.md` | The assembly sequence with hours for each step, and the labour line for a speaker, a pair and the first pair. |
 | `laminated-horn.md` | The laminated horn from 22 layers of stock 1/2 in sheet, stepped or smooth: colour, air path, edges, bond lines, mass and stability, cost and schedule beside the formed horn. |
 | `diy-route.md` | The horn made ourselves if no shop can: Ace Makerspace's laser, bonding and annealing in-house; cost, schedule, and the owner's own time. |
-| `stock-pair.md` | The first pair in stock sheet: Smoke from stock 3/4 in 2064, the Ember horn from stock 2423, the Ember cabinet from a Chemcast mill run; what 19 mm changes. |
+| `stock-pair.md` | The first pair in stock sheet, its color chosen at order and priced in Smoke: Smoke from stock 3/4 in 2064, the Ember horn from stock 2423, the Ember cabinet from a Chemcast mill run; what 19 mm changes. |
 | `stock_tints.py` | Stock sheet's colour per millimetre from published light transmission, for the renders (`stock_colours.json`). |
 | `schedule.md` | The dated schedule. The current plan is spring 2027 (18 March, late April, Vienna): each horn route's dates and float, the recommendation, the latest safe order dates. The January plan is kept below it, superseded. |
 | `compliance.md` | The remote's coin cell (swap to AAA) and the amplifier compartment as the fire enclosure (two gaps). |

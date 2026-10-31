@@ -3,16 +3,16 @@
 Draft requests for the first pair of Tropos (the Cloud, `spinoffs/barkhorn/cloud.py`), for the owner to send. The
 quotes they bring back replace the budget figures in the funding deck: the parts list's $9,577 a pair, the
 prototype's tooling ($7,109 on the parts list; about $9,600 with the trim fixture), and the allowances for casting
-minimums and labour. **Nothing here has been sent.** No vendor has been contacted, no form submitted, no account opened.
+minimums and labor. **Nothing here has been sent.** No vendor has been contacted, no form submitted, no account opened.
 
 | folder | to whom | what it asks for |
 |---|---|---|
-| `a-cast-acrylic/` | an acrylic fabricator (and, through them or directly, a caster) | the cabinet's 20 mm tinted panels in Ember and Smoke, cut, edge-polished, annealed and (separately priced) cemented; the ring, the disc frame, the port frames and tubes, the bosses, the grip cups, the IR bracket and its fallback window |
+| `a-cast-acrylic/` | an acrylic fabricator (and, through them or directly, a caster) | the cabinet's 20 mm tinted panels in the pair's color (chosen at order; quoted in Smoke), cut, edge-polished, annealed and (separately priced) cemented; the ring, the disc frame, the port frames and tubes, the bosses, the grip cups, the IR bracket and its fallback window |
 | `b-horn-forming/` | a thermoformer of thick cast acrylic | the horn: the flare pressure-formed over our plug, trimmed and polished; its throat piece, pod, cap, pads and saddle in the horn's own (heavier) dye lot |
-| `b-horn-tooling/` | a pattern or tooling shop | the forming plug in tooling board for the prototype, its aluminium base plate; the aluminium production plug as a later line |
+| `b-horn-tooling/` | a pattern or tooling shop | the forming plug in tooling board for the prototype, its aluminum base plate; the aluminum production plug as a later line |
 | `c-metal/` | a CNC and sheet-metal job shop | the amplifier compartment, the driver's adaptor ring, the stainless posts, the brass sockets and inserts, the rating plate |
 | `d-other/` | small specialist shops | the lining batts and their sewn voile sleeves, the cloth disc, the etched wordmark, the EPDM cord seal and gasket, the post sleeves |
-| `e-laminated-horn/` | one shop that bonds and 5-axis machines (first: Architectural Plastics, Petaluma, research R7) | the first pair in stock sheet: the cabinet in stock 3/4 in Smoke (as `a-`), and the horn laminated from 22 layers of stock 1/2 in, stepped, with the smooth outside as an option, and its small parts; the layers as DXF and the air path and smooth outside as STEP (`layers_dxf.py`, `make/laminated-horn.md`) |
+| `e-laminated-horn/` | one shop that bonds and 5-axis machines (first: Architectural Plastics, Petaluma, research R7) | the first pair in stock sheet, its color chosen at order and quoted in Smoke: the cabinet in stock 3/4 in 2064 (as `a-`), and the horn laminated from 22 layers of stock 1/2 in, stepped, with the smooth outside as an option, and its small parts; the layers as DXF and the air path and smooth outside as STEP (`layers_dxf.py`, `make/laminated-horn.md`) |
 | `f-layer-cutting/` | cutters only (Pololu, Neal's CNC, Acrylic Art, Atlas Contour; research R8) | the horn's 44 layers cut from our own 1/2 in sheet: short and email versions, paste-ready, in `letters.md`; the DXFs are `e-laminated-horn/`'s |
 | `g-round-two/` | the small outside jobs, one trade each: a sewing shop, an upholsterer, a laser engraver, a seal house (research, round two) | the lining sleeves and batts, the cloth disc, the etched and filled wordmark, the seals and gaskets; and a named source for every part the parts list still calls "any" (`README.md` there) |
 
@@ -49,7 +49,7 @@ drawings,render,stl` (about a minute). Nothing is copied into this folder, so th
 - the dye lot: can one pair's panels and horns come from one batch? If not, how are lots matched (to one swatch, each
   lot's number on its parts)? Can 6, 10, 20, 30 and 75 mm be poured in one batch?
 
-The horn's parts are in a lot of their own per colour, much heavier than the cabinet's (about 6 to 10 times its dye;
+The horn's parts are in a lot of their own per color, much heavier than the cabinet's (about 6 to 10 times its dye;
 Ember about 10), matched to a chip we approve. The owner's call of 2026-10-31 was "Deep, like the site". So the
 acrylic and forming requests ask for both lots and how they are matched, and the forming letter notes what a darker
 sheet changes in the oven.

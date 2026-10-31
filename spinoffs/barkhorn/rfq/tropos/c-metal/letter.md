@@ -8,8 +8,8 @@ Re: Tropos loudspeaker, prototype pair, then 10 and 50 pairs
 Hello,
 
 I'm writing from EARF, a new hi-fi and lighting maker in San Francisco, for a quote on the metal parts of a loudspeaker we are prototyping. There are six lines: a small folded
-and welded aluminium box for the amplifier (1.5 mm, black anodised), a turned aluminium adaptor ring, stainless tube
-posts (front and rear) threaded at one end, a set of turned brass sockets and threaded inserts, and an anodised rating plate,
+and welded aluminum box for the amplifier (1.5 mm, black anodized), a turned aluminum adaptor ring, stainless tube
+posts (front and rear) threaded at one end, a set of turned brass sockets and threaded inserts, and an anodized rating plate,
 laser-marked. The drawings give every size. The quantities are small for now: one pair first, then ten, then about
 fifty.
 
@@ -19,22 +19,22 @@ Quantities are for one pair (two speakers), then 10 and 50 pairs. Sheet numbers 
 
 | no. | part | our part names | sheet | material | thickness | tint | 1 pair | 10 pairs | 50 pairs | finish | tolerance |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| C01 | amplifier compartment | amp-box | 30 | aluminium 5052 or 6061 sheet | 1.5 | black anodised | 2 | 20 | 100 | folded, corners welded, flange; 3 gland holes; an earth stud on a bared spot | ±0.3 |
-| C02 | driver adaptor ring | hf-adaptor | 28 | aluminium 6061 | ø184 x 10 | black anodised | 2 | 20 | 100 | turned; 4 countersunk M6 on 101.6; 4 x 5.5 on 170 | ±0.1 |
+| C01 | amplifier compartment | amp-box | 30 | aluminum 5052 or 6061 sheet | 1.5 | black anodized | 2 | 20 | 100 | folded, corners welded, flange; 3 gland holes; an earth stud on a bared spot | ±0.3 |
+| C02 | driver adaptor ring | hf-adaptor | 28 | aluminum 6061 | ø184 x 10 | black anodized | 2 | 20 | 100 | turned; 4 countersunk M6 on 101.6; 4 x 5.5 on 170 | ±0.1 |
 | C03 | front horn posts | post-1, post-2 | 29 | stainless 304 tube 10 x 7 | ø10 | natural, satin | 4 | 40 | 200 | cut to length, threaded M10 x 1 at the top, deburred | length ±0.2 |
 | C04 | rear horn posts | post-3, post-4 | 29 | stainless 304 tube 10 x 7 | ø10 | natural, satin | 4 | 40 | 200 | cut to length, threaded M10 x 1 at the top, deburred | length ±0.2 |
 | C05 | post sockets and inserts (a set of 8) | post-sockets | 2 | brass C360 | ø15 x 15 cups; M10 x 1 inserts 13 x 12 | natural | 2 | 20 | 100 | turned, knurled; cups bored 12 on a 2 floor | ±0.05 on the bore |
-| C06 | rating plate | rating-plate | 1 | aluminium | 70 x 40 x 1 | black anodised | 2 | 20 | 100 | laser-marked (model, serial, ratings, WEEE bin) | ±0.2 |
+| C06 | rating plate | rating-plate | 1 | aluminum | 70 x 40 x 1 | black anodized | 2 | 20 | 100 | laser-marked (model, serial, ratings, WEEE bin) | ±0.2 |
 
 ## What I would like to know
 
 1. The unit price of each part at 1 pair, 10 pairs and 50 pairs (the quantities in the table are for those).
-2. Tooling and setup: any one-off charge (fixtures, programming, moulds, mandrels), and what we would own.
-3. Minimum order quantities, and any minimum lot for anodising.
+2. Tooling and setup: any one-off charge (fixtures, programming, molds, mandrels), and what we would own.
+3. Minimum order quantities, and any minimum lot for anodizing.
 4. Lead time from order to delivery at each quantity, and for samples first.
 5. Packing: how the parts are protected and shipped (the faces are show faces and scratch).
 6. Anything in the drawings you would change to make the parts cheaper or better, before you quote.
-7. Whether the box can be folded from one blank with welded corners, and how you keep the black anodise the same on the box, the ring and the plate, and from lot to lot.
+7. Whether the box can be folded from one blank with welded corners, and how you keep the black anodize the same on the box, the ring and the plate, and from lot to lot.
 
 If any of this is outside what you do, a word to say so is just as useful, and the name of someone who does it would be very welcome.
 

@@ -14,9 +14,13 @@ colours come from `make/stock_tints.py` (estimates, see below). The picture is
 | look against the site | cabinet within 3 % of the site's Smoke at 20 mm; horn lighter | cabinet (Chemcast run) and horn both within a few percent of the site's |
 | for 19 January | **yes** (`schedule.md`) | the horn yes; the cabinet only if the mill run ships by mid-December (to confirm with Plastiglas or a distributor) |
 
-**Recommendation: the first pair in Smoke.** It is the only colour whose cabinet is a stock sheet at full thickness
-today, and it matches the site's Smoke cabinet. Build an Ember horn in stock 2423 alongside it, to show the Ember horn at
-the debut. Order the Chemcast 2423 run at 20 mm for an Ember pair by Milan.
+**No starting color is promised (the owner, 2026-10-31): the first pair's color is chosen at order.** Smoke is the
+pricing reference for every quote and cost here. It is the only color whose cabinet is a stock sheet at full thickness
+today, and it matches the site's Smoke cabinet. The requests say: "please quote in Smoke; tell us if another stock color
+changes the price or lead time".
+
+An Ember horn in stock 2423 alongside it would show the Ember horn at the debut. An Ember cabinet needs the Chemcast
+2423 run at 20 mm.
 
 **Two orders before any sheet:**
 - the chips;

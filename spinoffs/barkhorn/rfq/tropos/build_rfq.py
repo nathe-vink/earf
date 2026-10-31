@@ -35,14 +35,15 @@ SHEET = {'left': 5, 'right': 6, 'top': 7, 'bottom': 8, 'front-panel': 9, 'back':
 COMMON = [1, 2, 3, 39, 40]          # the general arrangement, the section, the exploded view and the notes, to everyone
 
 PANEL_TOL = '±0.5 outline, ±0.2 pockets, holes +0.2/0'
-CAB_TINT = 'the speaker\'s colour, cabinet lot: Ember (red) and Smoke (black) for the prototype pair'
-HORN_TINT = ('the speaker\'s colour, the horn\'s own heavier lot per colour (about 6 to 10 x the cabinet\'s dye; Ember about 10, '
-             'Smoke about 7), matched to a chip we approve: Ember and Smoke')
+CAB_TINT = 'the speaker\'s color, cabinet lot, chosen at order; please quote in Smoke (black), and say if another color changes the price or lead time'
+HORN_TINT = ('the speaker\'s color, the horn\'s own heavier lot per color (about 6 to 10 x the cabinet\'s dye; Ember about 10, '
+             'Smoke about 7), matched to a chip we approve; please quote in Smoke')
 POLISH = 'edges milled square; show edges polished; annealed before cementing'
-# the first pair in stock sheet (make/stock-pair.md): Smoke, from TruCast 2064 3/4 in; the horn from 2074 1/2 in
-STOCK_CAB = 'Smoke: TruCast 2064 Gray 3/4 in (19 mm) cell-cast, stock (AC Plastics); we buy it or you source it'
-STOCK_THIN = 'Smoke: TruCast 2064 Gray cell-cast, stock, in the nearest stock thickness to the one listed'
-STOCK_HORN = 'Smoke: TruCast 2074 Dark Gray 1/2 in cell-cast, stock; an Ember horn in 2423 Red 1/2 in as an option'
+# the first pair in stock sheet (make/stock-pair.md); its color is chosen at order (the owner, 2026-10-31), so Smoke is
+# the pricing reference only: TruCast 2064 3/4 in, the horn from 2074 1/2 in
+STOCK_CAB = 'chosen at order; quote in Smoke: TruCast 2064 Gray 3/4 in (19 mm) cell-cast, stock (AC Plastics); we buy it or you source it'
+STOCK_THIN = 'chosen at order; quote in Smoke: TruCast 2064 Gray cell-cast, stock, in the nearest stock thickness to the one listed'
+STOCK_HORN = 'chosen at order; quote in Smoke: TruCast 2074 Dark Gray 1/2 in cell-cast, stock (another stock color, e.g. 2423 Red, if it changes the price)'
 
 # kind -> [(bom item prefix, part, material, thickness, tint, finish, tolerance)]; quantities come from the parts list
 KINDS = {
@@ -57,10 +58,10 @@ KINDS = {
         ('land-', 'land strips', 'cell-cast acrylic', '20', CAB_TINT, 'M5 insert holes; the seal groove milled after assembly', PANEL_TOL),
         ('top-pad', 'pad under the top', 'cell-cast acrylic', '20', CAB_TINT, 'M12 thread, an insert hole', PANEL_TOL),
         ('back-boss-', 'brace bosses', 'cast acrylic block, cabinet lot', '36 x 36 x 85', CAB_TINT, 'milled, slotted over the brace; M5 insert hole', '±0.2'),
-        ('woofer-ring', 'woofer ring', 'cell-cast acrylic', '6', 'opaque, in the ring colour (Ember: oxblood, about #7A1A1C; Smoke: near-black #141316)', 'face polished; screw-head and disc pockets behind', PANEL_TOL),
+        ('woofer-ring', 'woofer ring', 'cell-cast acrylic', '6', 'opaque, in the ring color (Ember: oxblood, about #7A1A1C; Smoke: near-black #141316)', 'face polished; screw-head and disc pockets behind', PANEL_TOL),
         ('disc-frame', 'cloth disc frame', 'cell-cast acrylic', '12', 'black', 'face edge rounded R5; magnet pockets', PANEL_TOL),
         ('port-frame-', 'port frames', 'cell-cast acrylic', '8', CAB_TINT, 'mouth rounded R8 and polished; 4 countersinks', PANEL_TOL),
-        ('port-left', 'port tubes', 'cast acrylic tube 121 x 4 wall', '4 (wall)', 'the speaker\'s colour, the cabinet lot, if tinted tube can be had (question 10)', 'inner end flared R8 over a heated mandrel, annealed; bore polished; cemented into its frame', '±0.3'),
+        ('port-left', 'port tubes', 'cast acrylic tube 121 x 4 wall', '4 (wall)', 'the speaker\'s color, the cabinet lot, if tinted tube can be had (question 10)', 'inner end flared R8 over a heated mandrel, annealed; bore polished; cemented into its frame', '±0.3'),
         ('grip-', 'grip cups', 'cast acrylic sheet', '3', CAB_TINT, 'drape-formed over a buck; cemented behind the grip slot', '±0.5'),
         ('ir-bracket', 'IR receiver bracket (one a pair)', 'cast acrylic, water-clear', '10', 'clear', 'milled pocket and ledge; 2 bonded M2.5 inserts', '±0.2'),
         ('ir-window', 'IR window, fallback only', 'cast acrylic rod, water-clear', 'ø12 x 20', 'clear', 'bonded through the front panel, faces polished flush', '±0.1'),
@@ -75,23 +76,23 @@ KINDS = {
     ],
     'b-horn-tooling': [
         ('horn-tool-prototype', 'forming plug, prototype', 'high-temperature epoxy tooling board (150 C or more)', '628 x 273 x 364', '-', 'cut by 5-axis program from our CAD (the horn\'s air path), sealed and polished, vented 0.6', 'surface ±0.1'),
-        ('horn-tool-base', 'forming base plate (carries into production)', 'aluminium 6061 plate', '900 x 640 x 40', '-', 'machined; clamp-frame seal groove; plug bolted from below', '±0.1'),
-        ('horn-tool', 'forming plug, production (a later line)', 'aluminium, cast near shape (A356) and machined', '628 x 273 x 364', '-', 'machined all over on 5 axes, polished; oil channels for 85 C; vents 0.6; cored', 'surface ±0.05'),
+        ('horn-tool-base', 'forming base plate (carries into production)', 'aluminum 6061 plate', '900 x 640 x 40', '-', 'machined; clamp-frame seal groove; plug bolted from below', '±0.1'),
+        ('horn-tool', 'forming plug, production (a later line)', 'aluminum, cast near shape (A356) and machined', '628 x 273 x 364', '-', 'machined all over on 5 axes, polished; oil channels for 85 C; vents 0.6; cored', 'surface ±0.05'),
     ],
     'c-metal': [
-        ('amp-box', 'amplifier compartment', 'aluminium 5052 or 6061 sheet', '1.5', 'black anodised', 'folded, corners welded, flange; 3 gland holes; an earth stud on a bared spot', '±0.3'),
-        ('hf-adaptor', 'driver adaptor ring', 'aluminium 6061', 'ø184 x 10', 'black anodised', 'turned; 4 countersunk M6 on 101.6; 4 x 5.5 on 170', '±0.1'),
+        ('amp-box', 'amplifier compartment', 'aluminum 5052 or 6061 sheet', '1.5', 'black anodized', 'folded, corners welded, flange; 3 gland holes; an earth stud on a bared spot', '±0.3'),
+        ('hf-adaptor', 'driver adaptor ring', 'aluminum 6061', 'ø184 x 10', 'black anodized', 'turned; 4 countersunk M6 on 101.6; 4 x 5.5 on 170', '±0.1'),
         (('post-1', 'post-2'), 'front horn posts', 'stainless 304 tube 10 x 7', 'ø10', 'natural, satin', 'cut to length, threaded M10 x 1 at the top, deburred', 'length ±0.2'),
         (('post-3', 'post-4'), 'rear horn posts', 'stainless 304 tube 10 x 7', 'ø10', 'natural, satin', 'cut to length, threaded M10 x 1 at the top, deburred', 'length ±0.2'),
         ('post-sockets', 'post sockets and inserts (a set of 8)', 'brass C360', 'ø15 x 15 cups; M10 x 1 inserts 13 x 12', 'natural', 'turned, knurled; cups bored 12 on a 2 floor', '±0.05 on the bore'),
-        ('rating-plate', 'rating plate', 'aluminium', '70 x 40 x 1', 'black anodised', 'laser-marked (model, serial, ratings, WEEE bin)', '±0.2'),
+        ('rating-plate', 'rating plate', 'aluminum', '70 x 40 x 1', 'black anodized', 'laser-marked (model, serial, ratings, WEEE bin)', '±0.2'),
     ],
     'd-other': [
         (('lining-bottom-', 'lining-top-', 'lining-left-', 'lining-right-', 'lining-back-'), 'lining batts', 'polyester batt, acoustic grade, about 30 kg/m3, recycled PET', '50 and 100', 'white', 'cut 10 oversize each way; each sewn into a white voile sleeve', '±5'),
         ('lining-sleeves', 'lining sleeves (voile)', 'white polyester voile', '-', 'white', 'sewn to each batt\'s size, seams to the wall', '±5'),
-        ('cloth-disc', 'cloth disc covering', 'acoustically transparent knit', '-', 'in the speaker\'s colour', 'stretched over the disc frame and round its edge', '-'),
-        ('mark-back', 'EARF on the back', 'laser etch into the back panel', '0.1 deep', 'etch filled in the speaker\'s colour, deeper', 'frosted, 140 wide, from our vector file', '±0.2'),
-        ('back-seal', 'back seal', 'EPDM cord 4 mm, 60 Shore A', '4', 'black', 'about 2.7 m a speaker, its ends vulcanised into a loop', 'length ±5'),
+        ('cloth-disc', 'cloth disc covering', 'acoustically transparent knit', '-', 'in the speaker\'s color', 'stretched over the disc frame and round its edge', '-'),
+        ('mark-back', 'EARF on the back', 'laser etch into the back panel', '0.1 deep', 'etch filled in the speaker\'s color, deeper', 'frosted, 140 wide, from our vector file', '±0.2'),
+        ('back-seal', 'back seal', 'EPDM cord 4 mm, 60 Shore A', '4', 'black', 'about 2.7 m a speaker, its ends vulcanized into a loop', 'length ±5'),
         ('amp-box-gasket', 'amplifier compartment gasket', 'EPDM sponge, closed cell', '3', 'black', 'die-cut frame, 15 wide', '±0.5'),
         ('post-sleeves', 'post sleeves (a set of 4)', 'polyurethane, Shore A 90', 'ø12 x 10 x 13', 'black', 'cast or cut', '±0.1'),
     ],
@@ -106,7 +107,7 @@ def _stock(pre, part, mat, th, tint, fin, tol):
     if pre == 'back-boss-':
         return pre, part, 'stock cell-cast sheet, two 3/4 in layers bonded, then milled', th, STOCK_CAB, fin, tol
     if pre == 'port-left':
-        return pre, part, mat, th, 'Smoke, 2064, if tinted tube can be had; otherwise rolled from 1/8 in 2064 sheet', fin, tol
+        return pre, part, mat, th, 'chosen at order; quote in Smoke, 2064, if tinted tube can be had; otherwise rolled from 1/8 in 2064 sheet', fin, tol
     if tint == CAB_TINT:
         return pre, part, mat, '19 (stock 3/4 in)' if th == '20' else th, STOCK_CAB if th == '20' else STOCK_THIN, fin, tol
     return pre, part, mat, th, tint, fin, tol
@@ -118,31 +119,32 @@ KINDS['e-laminated-horn'] = [
     ('ho:horn-plan-b', 'laminated horn, stepped (2 a pair)', 'stock cell-cast sheet 1/2 in, 22 layers and a boss',
      '22 x 12.64 pitch (layer + bond line)', STOCK_HORN,
      'layers CNC-cut from our DXF (outline and a rough bore); edges polished before bonding; bonded in sub-stacks with a '
-     'polymerising cement, no visible bubble; annealed; the air path cut through on 5 axes from our STEP and polished',
+     'polymerizing cement, no visible bubble; annealed; the air path cut through on 5 axes from our STEP and polished',
      'air path ±0.1 to the STEP; outline ±0.5; stack 278 ±1 to the mouth'),
     ('ho:horn-plan-b-smooth', 'OPTION: the same horn, outside machined smooth', 'as above', 'as above', STOCK_HORN,
      'as above, then the outside cut on 5 axes to our STEP (outside-smooth.step) and polished; quote as the extra over the stepped',
      'outside ±0.3'),
 ] + [(pre, part, mat, '25 (two 1/2 in layers)' if th == '30' else th, STOCK_HORN, fin, tol)
      for pre, part, mat, th, tint, fin, tol in KINDS['b-horn-forming'] if pre in ('waveguide-cap', 'horn-pads', 'horn-saddle')] + [
-    ('horn-pod', 'pod', 'stock cast sheet, horn colour', '6 (1/4 in)', STOCK_HORN,
+    ('horn-pod', 'pod', 'stock cast sheet, horn color', '6 (1/4 in)', STOCK_HORN,
      'rolled to ø200 over a heated mandrel, seam scarfed and cemented, annealed, bore turned true, 3 L-slots milled; or turned from a '
      'bonded stack of 1/2 in rings if you would rather', 'bore ±0.1'),
 ]
 
 INTRO = {
     'a-cast-acrylic': ('cast acrylic fabrication', """I'm writing from EARF, a new hi-fi and lighting maker in San Francisco, for a quote on the acrylic parts of a loudspeaker we are prototyping. Tropos is a horn loudspeaker
-whose cabinet is 20 mm cell-cast acrylic, tinted through, so you see into it. The first pair will be in two colours,
-Ember (a transparent red) and Smoke (a transparent black). If it goes well, ten pairs follow, then about fifty.
+whose cabinet is 20 mm cell-cast acrylic, tinted through, so you see into it. It comes in eight colors, from Ember (a
+transparent red) to Smoke (a transparent black), and the first pair's color is chosen at order. Please quote in Smoke,
+and tell us if another color changes the price or lead time. If it goes well, ten pairs follow, then about fifty.
 
 We need the panels cut on a CNC router from our DXF files, edges milled square, the edges that show polished, and the
 panels annealed before they are cemented. If you also assemble, we would like a price for the cemented cabinet:
-corners, front panel, braces, ribs and land strips cemented with a two-part polymerising cement (ACRIFIX 2R 0190 or
+corners, front panel, braces, ribs and land strips cemented with a two-part polymerizing cement (ACRIFIX 2R 0190 or
 Weld-On 40, no solvent cement), with no visible bubble in any joint; the box annealed again; and the lands' faces, the
 bosses' faces and the seal's groove milled in one setup. Quote the cutting and the assembly separately, please.
 
-The tint matters most. We will send colour chips. We need to know whether you can cast or source sheet tinted to them,
-and how you keep one pair's panels the same colour."""),
+The tint matters most. We will send color chips. We need to know whether you can cast or source sheet tinted to them,
+and how you keep one pair's panels the same color."""),
     'b-horn-forming': ('thermoforming the horn', """I'm writing from EARF, a new hi-fi and lighting maker in San Francisco, for a quote on forming the horn of a loudspeaker we are prototyping. Tropos's horn is a
 pressure-formed flare in 10 mm cell-cast acrylic, tinted through: a 610 x 346 mouth, about 630 x 366 outside, 238 deep. It is
 formed over a male plug whose surface is the horn's air path; the outside is the free face and has to stay glossy. Our
@@ -151,65 +153,66 @@ corners; 4 mm is the least we can accept. After forming, the flare is annealed, 
 rim is routed full round and polished.
 
 The other horn parts are turned and milled from the same tinted lot: a throat piece from a 75 mm block, a pod rolled
-from 6 mm sheet, a cap, pads and a saddle. They are cemented to the flare with a polymerising cement. If you can do the
+from 6 mm sheet, a cap, pads and a saddle. They are cemented to the flare with a polymerizing cement. If you can do the
 whole horn, please quote it as one job; if not, the forming and trimming alone.
 
-For the first pair we supply (or have cut for you by a pattern shop) a tooling-board plug on an aluminium base
-plate; if you make such plugs yourselves, please quote one too. The production tool comes later, in aluminium.
+For the first pair we supply (or have cut for you by a pattern shop) a tooling-board plug on an aluminum base
+plate; if you make such plugs yourselves, please quote one too. The production tool comes later, in aluminum.
 
-A note on the colour. The horn's sheet is not the cabinet's: in each colour it is cast in its own, much heavier dye lot,
+A note on the color. The horn's sheet is not the cabinet's: in each color it is cast in its own, much heavier dye lot,
 so that the formed horn reads deep and nearly opaque, with a dark neck. We estimate about 6 to 10 times the cabinet's
-dye (Ember about 10, Smoke about 7), but the lot is matched to a colour chip we approve, not to a multiple. That
+dye (Ember about 10, Smoke about 7), but the lot is matched to a color chip we approve, not to a multiple. That
 changes the forming in a few ways we would like your view on:
 
 - A dark sheet takes up heat differently in an infrared oven. It absorbs more at the surface and heats unevenly through
   10 mm, so the heater settings, the soak time and possibly the forming temperature will differ from clear or lightly
-  tinted sheet. Each colour may need its own settings, and the darkest (Smoke, Ember) the most care against surface
+  tinted sheet. Each color may need its own settings, and the darkest (Smoke, Ember) the most care against surface
   overheating and bubbles. A circulating-air oven may suit it better.
 - A dark horn shows less of the wall's thinning by eye, so we will measure the wall with a gauge rather than judge it
-  by the colour. Mark-off and scratches show more on a dark gloss face, so we ask for care with the plug's polish and
+  by the color. Mark-off and scratches show more on a dark gloss face, so we ask for care with the plug's polish and
   in handling.
-- The heavier lot is a separate casting per colour, with its own minimum and cost, so the horn's sheet probably cannot
+- The heavier lot is a separate casting per color, with its own minimum and cost, so the horn's sheet probably cannot
   come from the cabinet's batch. We ask below how you would match the two lots."""),
     'b-horn-tooling': ('the horn\'s forming tool', """I'm writing from EARF, a new hi-fi and lighting maker in San Francisco, for a quote on a thermoforming tool for a loudspeaker horn. For the prototype we want the plug
 cut by 5-axis machining from high-temperature epoxy tooling board (rated 150 °C or more), sealed and polished, on a
-machined aluminium base plate with a groove for the forming machine's clamp frame. We supply the CAD (STEP) of the
+machined aluminum base plate with a groove for the forming machine's clamp frame. We supply the CAD (STEP) of the
 plug's surface, which is the horn's air path, and of the base.
 
-Please also quote, as a separate later line, the production plug in aluminium: cast near shape and machined all over on
+Please also quote, as a separate later line, the production plug in aluminum: cast near shape and machined all over on
 5 axes, cored, with oil channels to hold it at about 85 °C and 0.6 mm vents, on the same base plate. We will only order
 it once the prototype's measurements confirm the profile. A trim fixture for the 5-axis router, copying the plug, is a
 third line if you make those."""),
     'c-metal': ('CNC and sheet-metal work', """I'm writing from EARF, a new hi-fi and lighting maker in San Francisco, for a quote on the metal parts of a loudspeaker we are prototyping. There are six lines: a small folded
-and welded aluminium box for the amplifier (1.5 mm, black anodised), a turned aluminium adaptor ring, stainless tube
-posts (front and rear) threaded at one end, a set of turned brass sockets and threaded inserts, and an anodised rating plate,
+and welded aluminum box for the amplifier (1.5 mm, black anodized), a turned aluminum adaptor ring, stainless tube
+posts (front and rear) threaded at one end, a set of turned brass sockets and threaded inserts, and an anodized rating plate,
 laser-marked. The drawings give every size. The quantities are small for now: one pair first, then ten, then about
 fifty."""),
     'd-other': ('other outside work', """I'm writing from EARF, a new hi-fi and lighting maker in San Francisco, for a quote on some smaller jobs for a loudspeaker we are prototyping. The cabinet is clear,
 tinted acrylic, so these parts are seen and have to be neat: acoustic polyester batts cut to size and each sewn into a
 white voile sleeve; a speaker cloth stretched over a frame; our wordmark laser-etched into the back panel and filled in
-the speaker's colour; and a few seals (an EPDM cord loop with a vulcanised joint, a die-cut sponge gasket, small
+the speaker's color; and a few seals (an EPDM cord loop with a vulcanized joint, a die-cut sponge gasket, small
 polyurethane sleeves). Please quote whichever of these you do."""),
     'e-laminated-horn': ('a laminated acrylic horn and its cabinet', """I'm writing from EARF, a new hi-fi and lighting maker in San Francisco, for a quote on the acrylic of a loudspeaker we are prototyping: the cabinet, and a horn laminated from
 stock sheet. Your site's "museum-grade acrylic bonding", "controlled lamination process to reduce bubbles and distortion"
 and "we bond one-off prototypes", with a 5-axis router and diamond and buff polishing, are exactly what it needs, so we
 would like to give you the whole job.
 
-Tropos is a horn loudspeaker in clear tinted cell-cast acrylic, so you see into it. The first pair is in Smoke, from
-stock sheet: the cabinet in TruCast 2064 Gray 3/4 in (19 mm; our drawings say 20, and every cut is to the sheet as
-measured), the horn in 2074 Dark Gray 1/2 in. We can buy the sheet and have it delivered to you, or you can source it;
-please say which you prefer.
+Tropos is a horn loudspeaker in clear tinted cell-cast acrylic, so you see into it. The first pair is in stock sheet,
+and its color is chosen at order. Please quote in Smoke: the cabinet in TruCast 2064 Gray 3/4 in (19 mm; our drawings
+say 20, and every cut is to the sheet as measured), the horn in 2074 Dark Gray 1/2 in. Tell us if another stock color
+changes the price or lead time. We can buy the sheet and have it delivered to you, or you can source it; please say
+which you prefer.
 
 **The cabinet** is as our drawings show: panels CNC-cut from our DXF files, edges milled square, the edges that show
 polished, annealed before cementing; then corners, front panel, braces, ribs and land strips cemented with a two-part
-polymerising cement (ACRIFIX 2R 0190 or Weld-On 40, no solvent cement) with no visible bubble in any joint; the box
+polymerizing cement (ACRIFIX 2R 0190 or Weld-On 40, no solvent cement) with no visible bubble in any joint; the box
 annealed again; and the lands' faces, the bosses' faces and the back's seal groove milled in one setup.
 
 **The horn** is 630 x 366 at its mouth and 278 deep, laminated from 22 layers of 1/2 in sheet and a boss (sheet BHH-005):
 - each layer cut flat from our DXF (`dxf/layer-01.dxf` to `layer-22.dxf`: its outline, and a rough bore 3 mm inside
   the final air path), faced to the pitch less the bond line, and its outside edge polished before bonding (the
   stepped outside is a terrace a layer, and each edge shows);
-- bonded with a polymerising cement in three sub-stacks, then the sub-stacks joined, with no bubble within 5 mm of the
+- bonded with a polymerizing cement in three sub-stacks, then the sub-stacks joined, with no bubble within 5 mm of the
   air path and none visible through the tint. As we read Röhm's and ACRYLITE's guides:
   - the cement is degassed no lower than about 0.2 bar, and the layers are pressed with dead weight on spacers, not in a
     vacuum bag;
@@ -230,11 +233,11 @@ The pair is for a debut in spring 2027. We would like to order in November or De
 
 Q_BASE = {
     1: 'The unit price of each part at 1 pair, 10 pairs and 50 pairs (the quantities in the table are for those).',
-    2: 'Tooling and setup: any one-off charge (fixtures, programming, moulds, mandrels), and what we would own.',
+    2: 'Tooling and setup: any one-off charge (fixtures, programming, molds, mandrels), and what we would own.',
     3: 'Minimum order quantities and, for tinted material, any casting minimum: the least sheet or block you would cast or\n'
-       '   buy in a colour, and its cost.',
+       '   buy in a color, and its cost.',
     4: 'Lead time from order to delivery at each quantity, and for samples first.',
-    5: 'Tint matching: can you match our colour chips (we will send them), and how do you prove a match (a swatch for our\n'
+    5: 'Tint matching: can you match our color chips (we will send them), and how do you prove a match (a swatch for our\n'
        '   approval, a spectrophotometer reading)?',
     6: 'The dye lot: can one pair\'s parts all come from one batch? If not, how are lots matched (to one swatch, each lot\'s\n'
        '   number marked on its parts)?',
@@ -249,7 +252,7 @@ Q_KIND = {
                        4: 'Lead time from order to delivery for each line.', 5: None, 6: None,
                        7: 'Packing: how the plug and the plate are protected and shipped (any mark on the plug\'s face shows on every '
                           'horn formed over it).'},
-    'c-metal': {3: 'Minimum order quantities, and any minimum lot for anodising.', 5: None, 6: None},
+    'c-metal': {3: 'Minimum order quantities, and any minimum lot for anodizing.', 5: None, 6: None},
     'e-laminated-horn': {3: 'Whether you would source the stock sheet (TruCast 2064 3/4 in, 2074 1/2 in) or take ours, and any '
                             'handling charge.', 5: None,
                          6: 'Both speakers\' parts from one sheet of each code, so the pair matches: is that how you would '
@@ -262,14 +265,14 @@ EXTRA_Q = {
     'b-horn-forming': ['The press and oven you would use (pressure box, heaters), and whether you have formed 10 mm cast acrylic before, '
                        'in a deep tint.',
                        'How the darker horn lot changes your settings (heater zones, soak time, sheet temperature), and whether you would '
-                       'run a trial sheet of each colour first; what that trial costs.',
-                       'Whether a heavily tinted lot costs more to buy or cast, its minimum per colour, and whether it can be poured '
+                       'run a trial sheet of each color first; what that trial costs.',
+                       'Whether a heavily tinted lot costs more to buy or cast, its minimum per color, and whether it can be poured '
                        'with the cabinet\'s lot or must be a separate batch matched to the same chip.',
                        'The wall you expect at the mouth\'s corners, and whether you would recommend 12 mm sheet.',
                        'How many shots you would allow to set the process up on the prototype plug.'],
     'b-horn-tooling': ['How many shots a tooling-board plug lasts at about 170 °C sheet temperature.',
                        'Whether you would cast the production plug or machine it from a block, and its weight cored.'],
-    'c-metal': ['Whether the box can be folded from one blank with welded corners, and how you keep the black anodise the same '
+    'c-metal': ['Whether the box can be folded from one blank with welded corners, and how you keep the black anodize the same '
                 'on the box, the ring and the plate, and from lot to lot.'],
     'd-other': ['Your minimum for a custom-sewn sleeve run, and whether you can cut the batts too.'],
     'e-laminated-horn': [
@@ -277,12 +280,12 @@ EXTRA_Q = {
         'face each layer or the stack after bonding.',
         'How you anneal the bonded horn: by the stack\'s height (about 290 mm) or by its thickest wall (about 30 mm, 60 at '
         'the boss), how long a cycle takes, and whether annealing the three sub-stacks apart shortens it.',
-        'Whether the cement may make the tint bleed at a joint, and whether you would bond two off-cuts of each colour first '
+        'Whether the cement may make the tint bleed at a joint, and whether you would bond two off-cuts of each color first '
         '(we would pay for that test).',
         'Your 5-axis router\'s reach for a part 630 x 366 x 292, and how you hold the stack while cutting the air path.',
         'The edge finish of the layers: polished, or frosted as an option; and the price difference.',
         'How you would register 22 layers without dowel holes in the wall (on their bores over a stepped core, or waste '
-        'ears trimmed off after), and whether a cement tinted to the sheet (Röhm allows a solvent-soluble colourant) is '
+        'ears trimmed off after), and whether a cement tinted to the sheet (Röhm allows a solvent-soluble colorant) is '
         'something you have done.',
         'The earliest date you could deliver the first horn and the cabinet pair, ordering in November or December, and '
         'your lead time for both speakers.',
