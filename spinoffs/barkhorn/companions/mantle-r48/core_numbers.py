@@ -56,7 +56,7 @@ Zp = math.sqrt(rho_p * E_p); Zv = math.sqrt(rho_v * E_v)
 Rc = ((Zv - Zp) / (Zv + Zp)) ** 2
 w(f'- Bar impedance sqrt(rho E): PMMA {Zp / 1e6:.2f} MRayl, PVC vinyl {Zv / 1e6:.2f} MRayl: {Rc * 100:.2f} % of the energy '
   'reflects at the record\'s underside, so the stylus\'s energy crosses into the platter instead of ringing back.')
-w('- And it stays there: PMMA\'s loss factor is about 0.03-0.06 in the audio band (aluminium about 0.0001, glass 0.001): '
+w('- And it stays there: PMMA\'s loss factor is about 0.03-0.06 in the audio band (aluminum about 0.0001, glass 0.001): '
   'the platter does not ring. That is why Pro-Ject, Clearaudio and Michell use acrylic, and why Core runs without a mat.')
 w('- The bond lines are not damping: a polymerising cement cures to PMMA (it is meant to be invisible), so a cemented '
   'stack behaves as one solid. Constrained-layer damping would need a viscoelastic interlayer (an acrylic foam tape '
@@ -104,7 +104,7 @@ w('- Service: lift the platter, its hub and the spindle out together (one assemb
   'Shipping: that assembly in its own foam, a nitrile cap over the housing.\n')
 
 w('## The arm\n')
-w(f'- RB330 at 222 mm on an aluminium puck (84 x 12, Rega three-point). Record surface {D["record_z"] - D["top"]:.1f} mm over the '
+w(f'- RB330 at 222 mm on an aluminum puck (84 x 12, Rega three-point). Record surface {D["record_z"] - D["top"]:.1f} mm over the '
   'deck\'s top: the arm\'s height is set with Rega spacers on the first sample, the tube level with the stylus down.')
 w('- The cue lift and the arm rest are Rega\'s own, on the arm\'s base. The lead goes down through the puck\'s 56 bore and '
   'along a groove under the deck to the phono stage\'s tunnel.\n')
@@ -116,7 +116,7 @@ w('- No light, so no heat to speak of: the phono stage draws about 18 V x 0.03 A
 w('## The cover as a stand\n')
 ch = D['height'] - D['top']
 w(f'- The cover is {ch:.0f} deep and stands on its back long edge, its open side forward; a sleeve (315 square, 3 thick) '
-  'stands in it on the lower ring\'s inner face, leaning back on the top lamina. The cover\'s centre of mass is about '
+  'stands in it on the lower ring\'s inner face, leaning back on the top lamina. The cover\'s center of mass is about '
   f'{ch * 0.62:.0f} mm from its open face (the top lamina is the heaviest piece), so it tips back past about '
   f'{math.degrees(math.atan2(ch * 0.38, 190)):.0f} deg and forward past about {math.degrees(math.atan2(ch * 0.62, 190)):.0f} deg: '
   'steady on a shelf, not on a slope.\n')

@@ -39,7 +39,7 @@ Rega P-series archetype)"; "the clear acrylic sandwich on posts used by Pro-Ject
 1. The arm is primitives: a box headshell with no cartridge, stylus or finger lift; a cube for the bearing; no cue
    lift or arm rest that reads.
 2. Upscaler and denoiser smear: the polished edges look brushed, and the wordmark reads "EACF".
-3. The acrylic reads as opaque gloss or grey metal. Nothing passes light, edges don't pipe it, and the inside can't
+3. The acrylic reads as opaque gloss or gray metal. Nothing passes light, edges don't pipe it, and the inside can't
    be seen.
 4. Every edge is a zero-radius CAD line, with no break, no polish line and no seam.
 5. The record has no grooves, no lead-in or run-out, and a blank label.
@@ -88,9 +88,9 @@ before drawing anything, and the numbers turned it around.
   third, 12.7 mm about 1 %, and 25 mm about 0.01 %. Rendered at those numbers, a stack of thick tinted sheet is a black
   slab (`scene.py`, first passes): nothing passes through it, and the strata vanish. That matches round 43's "harsh
   case". The $1 chips and a 1/2 in offcut will confirm it before any sheet is bought.
-- **So the strata are clear, and the colour is the contour line.** Each proposal is thick water-clear stock
+- **So the strata are clear, and the color is the contour line.** Each proposal is thick water-clear stock
   (12.7, 5.6) with thin tinted laminae (3 mm). In Core each tinted lamina is a **20 mm ring round a clear inlay** cut
-  from the same file. The colour sits at the edges as a dark contour line under every terrace. The inside is clear,
+  from the same file. The color sits at the edges as a dark contour line under every terrace. The inside is clear,
   so the brass bearing, the feet and the motor show through the block, like a watch's caseback. This also gives the
   critics' "light passing through" and the engineer's "make the bond line the signature".
 - **Honest about the bond lines.** A polymerising cement (ACRIFIX 2R 0190, Weld-On 40) cures to PMMA. It is
@@ -138,19 +138,19 @@ A is the safer choice; B is the new idea.
 | detail | what | mass | cost (one off) | service |
 |---|---|---|---|---|
 | bearing and oil | Lead-free brass housing M30 x 1.5, clamped by its nut under the deck (10 N m, PTFE washer), with **no insert near the bore**. Two C932 bushes honed to 10 H6 on a 10 g5 440C spindle (8-12 µm). A 6 mm carbide ball on a lapped 52100 plate: 20 N, Hertz peak 2.3 GPa, under half the static limit. 2.5 ml ISO VG 32, filled to 10 mm under the flange. | 0.38 kg | housing $~90, nut, bushes $40, ball $5, plate $20, oil $15 | Lift the platter, hub and spindle out together; wipe; 1 ml of oil every two years with a syringe; lower it slowly. Shipping: that assembly in its own foam, a nitrile cap on the housing. |
-| platter | Tinted 3 / clear 12.7 / tinted 5.6, cemented, annealed, turned to 300 x 21. Run-out 0.05. **Why acrylic:** PMMA's bar impedance (1.95 MRayl) is within 4 % of vinyl's (2.03), so only 0.04 % of the stylus's energy reflects at the record's underside; the rest goes into a material with a loss factor of 0.03-0.06 (aluminium about 0.0001). It doesn't ring, so there's no mat. I = 0.020 kg m2. | 1.74 kg (2.07 turning) | $170 + hub $71 | The six M4 screws hold it on the hub, so the bond carries no torque and the platter can be refaced and repolished. |
+| platter | Tinted 3 / clear 12.7 / tinted 5.6, cemented, annealed, turned to 300 x 21. Run-out 0.05. **Why acrylic:** PMMA's bar impedance (1.95 MRayl) is within 4 % of vinyl's (2.03), so only 0.04 % of the stylus's energy reflects at the record's underside; the rest goes into a material with a loss factor of 0.03-0.06 (aluminum about 0.0001). It doesn't ring, so there's no mat. I = 0.020 kg m2. | 1.74 kg (2.07 turning) | $170 + hub $71 | The six M4 screws hold it on the hub, so the bond carries no torque and the platter can be refaced and repolished. |
 | motor, belt, decoupling | Rega's 24 V motor on its plate, **hung on Rega's three grommets** in a pocket in the deck, so the pulley's height is fixed to the platter's by solid acrylic. Pulley 39.48 (250 rpm), 180 from the spindle, wrap 87°. Flat belt 5 x 0.6, path 992 mm, cut to about 945. | 0.41 kg | motor kit $265, grommets $15, pulley $47, belt $30 | Lift the motor plate out of its pocket (three grommets); the belt is changed with the platter off. |
-| arm and arm board | Rega RB330 at 222 on an **aluminium arm-board puck** (84 x 12, bead-blasted, Rega three-point), on three M5 into inserts. Another arm takes another puck. The record sits 28.8 over the deck's top; Rega spacers set the tube level on the first sample. | 0.46 kg | arm $675, puck about $40 | The arm comes off from below through the 56 bore. |
+| arm and arm board | Rega RB330 at 222 on an **aluminum arm-board puck** (84 x 12, bead-blasted, Rega three-point), on three M5 into inserts. Another arm takes another puck. The record sits 28.8 over the deck's top; Rega spacers set the tube level on the first sample. | 0.46 kg | arm $675, puck about $40 | The arm comes off from below through the 56 bore. |
 | arm rest and cueing | Rega's own lift and rest, on the arm's base. The lever sits to the right of the arm, front. | in the arm | in the arm | Rega's. |
 | feet and levelling | **Three** turned brass feet (40 x 12) on Sorbothane 40 x 4, on M8 studs in bonded inserts, levelled by turning and locked with a brass nut. Three never rock. f about 50 Hz on 13 kg: they keep 70 Hz and up off the deck, pass footfall (a bouncy floor wants a wall shelf), and add nothing in the arm's 8 Hz band. | 0.47 kg | brass $~90, pads $20, studs $18 | Turn to level; replaceable pads. |
 | external supply and connector | Rega's Neo PSU MK2 (mains, its maker's listing; check its US mark) drives the motor through its own lead in a groove to the back notch. The S2's own listed 18 V adapter plugs into a 2.1 mm jack on the brass plate. Nothing inside Core is above 24 V. | | Neo $445 | Both are standard, replaceable boxes. |
 | speed change | 33/45 on the Neo's button, trimmed in 0.01 rpm steps. One pulley diameter; the belt never moves. | | | |
 | hinges and stays (A) | A: Pro-Ject's Debut friction hinges in 9.5 acrylic blocks on M4 into inserts (in shear), with a 1.1 kg lid. **B: none.** The cover lifts off on dowels. | | A $34 | |
 | cartridge and phono cable | Ortofon 2M Black (or 2M Blue for the first build, round 43). The RB330's own lead goes down the puck's bore, along an 8 x 6 groove under the deck, into the **S2 in a tunnel from the back** (on felt runners). The S2 feeds the brass plate's DPDT (stage or bypass) to the gold RCAs. Star earth at the plate's post: arm, bearing housing (M3 tag), S2. | S2 0.57 kg | 2M $750, S2 $269, plate hardware $48, wiring $25 | Four M3 screws hold the plate; the S2 slides out for its switches. |
-| labels and rating | Laser-engraved and black-filled on the brushed brass plate: name, line out, 18 V DC 0.5 A (centre +), SN, "Motor: Rega Neo PSU". EARF etched at the deck's front right, filled. No compliance mark until tested (the supplies carry their own). | 0.11 kg | plate about $50, etch $15 | |
+| labels and rating | Laser-engraved and black-filled on the brushed brass plate: name, line out, 18 V DC 0.5 A (center +), SN, "Motor: Rega Neo PSU". EARF etched at the deck's front right, filled. No compliance mark until tested (the supplies carry their own). | 0.11 kg | plate about $50, etch $15 | |
 
 **Heat:** none to speak of in Core (the S2 draws 0.5 W in an open tunnel). In A the COB loop is 4.4 W in a 6 mm slot
-open below, a third less a metre than the baseline's strip, through 25 mm of clear acrylic to the edge. The
+open below, a third less a meter than the baseline's strip, through 25 mm of clear acrylic to the edge. The
 baseline's first-sample thermocouple check stays.
 
 **Cost against the baseline ($3,910):** Core is $4,282, about +$370. It adds the turned feet, the puck, the screwed

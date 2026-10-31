@@ -262,7 +262,7 @@ def parts(P):
         Part('phono-pads', felts, Bought('phono-felts'), finish='rubber', group='phono'),
         Part('back-hardware', None, Bought('back-hardware')),
         Part('hinge-blocks', blocks, tint[9.5] if False else Machined('cast-acrylic', 'cnc-mill'), finish='acrylic', group='lid',
-             notes=['two 40 x 9.5 blocks of the colour, each with the hinge\'s slot 3.2 x 12 x 18 deep, on two M4 screws into inserts in the plinth\'s back edge (horizontal, in shear)']),
+             notes=['two 40 x 9.5 blocks of the color, each with the hinge\'s slot 3.2 x 12 x 18 deep, on two M4 screws into inserts in the plinth\'s back edge (horizontal, in shear)']),
         Part('hinges', hinges, Bought('cover-hinges'), finish='black', group='lid'),
         *[Part(k, s, Sheet('trucast-tint', 3.0), finish='acrylic-lid', group='lid',
                notes=['3 mm 2064 (1/8 in stock), cemented as a box with ACRIFIX 2R 0190; 1.1 kg, within the Debut hinges\' rating; outer edges eased R0.5 and polished'] if k == 'lid-top' else [])

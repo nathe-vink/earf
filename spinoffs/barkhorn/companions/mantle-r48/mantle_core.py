@@ -12,19 +12,19 @@ playing.
   clear 12.7, 47.1 tall. Each tinted lamina with the clear one on it steps in 3 mm from the pair below, so every
   terrace is a clear stratum on a dark contour line, and the deck's top is clear: you look down into it. Why thin tint in clear and not the reverse: stock
   2064 Gray passes 29.3 % at 1/8 in (TruCast's chart, Fresnel included), so by Beer-Lambert 12.7 mm of it passes
-  about 1 % and reads black; three millimetres pass about a third. Thick clear strata keep the light passing and the
-  bearing, the motor and the phono stage visible inside, like a watch's caseback; the thin laminae carry the colour.
+  about 1 % and reads black; three millimeters pass about a third. Thick clear strata keep the light passing and the
+  bearing, the motor and the phono stage visible inside, like a watch's caseback; the thin laminae carry the color.
 - **The cover** is the same stack continued upward: five clear rings 10 wide with a tinted lamina on each, stepping
   in 3 mm a ring, and a clear 5.6 top under a tinted 3. Closed, the strata run unbroken from the shelf to the top. It
   lifts off (two dowels locate it; no hinges to sag), and stood on its back edge it frames the sleeve playing.
 - **Rigid on three feet** (the review of the baseline: the float sat at 25-36 Hz, in the feedback band). The block is
   heavy and stiff; isolation is in the three feet (turned brass, a Sorbothane puck under each, levelled on M8 studs).
-- **The motor hangs in the block** on Rega's own three grommets from an aluminium plate, as a Rega does, so the
+- **The motor hangs in the block** on Rega's own three grommets from an aluminum plate, as a Rega does, so the
   pulley's height is fixed to the platter's by solid acrylic (the review: the pod on the shelf tipped under the belt).
 - **The platter** is three laminae of its own (tinted 3 / clear 12.7 / tinted 5.6, faced to 21), turned, on a flanged
   brass hub shrunk onto the spindle, held by six M4 screws: the bond carries nothing. The belt runs on the clear
   stratum's rim, between the two dark lines.
-- **The arm** stands on an aluminium arm-board puck (Rega's three-point mount into it), replaceable for another arm.
+- **The arm** stands on an aluminum arm-board puck (Rega's three-point mount into it), replaceable for another arm.
 - **The phono stage** (Pro-Ject's Phono Box S2, whole) slides into a tunnel from the back; a brass plate closes it and
   carries the line out, the bypass toggle, the earth post, the 18 V inlet and the rating.
 
@@ -43,10 +43,10 @@ sys.path.insert(0, COMP)
 from kit import *                                                   # noqa: E402,F403
 import common as C                                                  # noqa: E402
 
-# stock cell-cast sheet as AC Plastics / Canal sell it (round 43's stock-colours.md): 1/8 (3.0), 1/4 (5.6), 3/8 (9.5),
-# 1/2 (12.7). Priced a square metre a millimetre from the 4 x 8 ft listings of 2026-10-31: 2064 Gray 1/2 $495 (Canal)
+# stock cell-cast sheet as AC Plastics / Canal sell it (round 43's stock-colors.md): 1/8 (3.0), 1/4 (5.6), 3/8 (9.5),
+# 1/2 (12.7). Priced a square meter a millimeter from the 4 x 8 ft listings of 2026-10-31: 2064 Gray 1/2 $495 (Canal)
 # = 13.1, 3/8 $375 = 13.3; 2423 Red 1/2 $835.80 (AC) = 22.2; clear 1/8 about $110 = 11.7. The tinted rate is the
-# dearer of the two first colours, so a budget never undershoots.
+# dearer of the two first colors, so a budget never undershoots.
 SHEETS['trucast-tint'] = dict(title='Cell-cast acrylic sheet, stock tint (TruCast 2064 Gray or 2423 Red), 4 x 8 ft',
                               density=1.19, sheet=(2440.0, 1220.0), usd_per_m2_mm=22.0, thicknesses=(3.0, 5.6, 9.5, 12.7))
 SHEETS['trucast-clear'] = dict(title='Cell-cast acrylic sheet, water-clear, 4 x 8 ft', density=1.19,
@@ -226,7 +226,7 @@ def parts(P):
                      'cast sheet varies in thickness (about +-10 % at 12.7): the stack is 47.1 nominal, measured before the faces are cut; the record height is set by Rega spacers on the first sample']
         if l['kind'] == 'tint' and P['tint_ring']:
             # the tinted lamina is a ring (tint_ring wide) round a clear inlay cut to fit from 3 mm clear sheet: the
-            # colour stays at the edges as a contour line, and the interior stays clear, so the mechanism shows
+            # color stays at the edges as a contour line, and the interior stays clear, so the mechanism shows
             band = prism(outline(P, D, l['inset'] + P['tint_ring']), 'z', l['z0'] - 1, l['z1'] + 1)
             ring_s, inlay_s = s - band, s & band
             lam_parts.append(Part(f'deck-L{i + 1}', ring_s, make, finish='acrylic', group='deck', render=False, notes=notes + (
@@ -416,7 +416,7 @@ NOTES = [
     'to vinyl in acoustic impedance); a carbon-fibre brush and an earthed housing for static.',
     'The motor: Rega 24 V on its plate, hung on Rega\'s three grommets in a pocket in the deck; the Neo PSU MK2 beside '
     'the record player switches 33/45 and trims speed. The pulley is turned to the motor\'s measured speed.',
-    'The arm: Rega RB330 on an aluminium puck (Rega three-point) at 222 from the spindle; Rega spacers set the height '
+    'The arm: Rega RB330 on an aluminum puck (Rega three-point) at 222 from the spindle; Rega spacers set the height '
     'to the record (28.8 over the deck\'s top, set on the first sample with the tube level).',
     'The phono stage: Pro-Ject Phono Box S2 in a tunnel from the back, on felt runners; the brass plate closes it and '
     'carries line out, earth, bypass toggle and the 18 V inlet (Pro-Ject\'s own listed adapter). The arm\'s lead runs '
