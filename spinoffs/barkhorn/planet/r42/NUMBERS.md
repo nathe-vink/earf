@@ -114,6 +114,20 @@ Equity is 68% of the money to open. The loan is sized so the base EBITDA covers 
 | Rent $10/sq ft lower | e.g. Oakland or SoMa against Hayes Valley | $28,000 |
 
 
+## Before the flagship: two pop-ups
+
+The flagship's raise rests on numbers nobody has yet:
+- whether the room sells Tropos pairs;
+- what a guest spends;
+- whether the sessions fill.
+
+`POPUP.md` gets them first:
+- **A lean pop-up:** 8 weeks from 19 January 2027 inside Vacant to Vibrant's free rent, $22k to $36k, from the $50k
+  product raise.
+- **Then a 5-month pop-up:** $130k to $210k, which pays for itself at about six pairs.
+
+Its measured pairs, spend and fill replace this model's assumptions before anyone signs a $2M lease.
+
 ## How to fund it
 
 **The base case needs about $2.0M to open (about $700 a sq ft, everything in).** The base EBITDA (about $120k) supports

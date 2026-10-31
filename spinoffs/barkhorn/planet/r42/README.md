@@ -15,6 +15,7 @@ Nothing has been reviewed by an architect, an engineer, a lawyer, a lender or th
 | `RULES.md` | San Francisco's rules and the permit path, a summary of `research-sf-rules.md`: which ABC licence, the Entertainment Commission, Planning, health, fire, building, plumbing and accessibility, and the critical path. |
 | `NUMBERS.md` | Capex, opex, three revenue scenarios, the P&L, break-even, the levers and the financing, from `numbers42.py`. Also what the comparable bars show. |
 | `SITES.md` | Three SF neighbourhoods and one in Oakland, with asking rents and why each fits. |
+| `POPUP.md`, `popup42.py`, `popaxo42.py` | The bridge to the flagship, in two sizes: a lean 8-week pop-up inside Vacant to Vibrant's free rent ($22k to $36k), then a 5-month one ($130k to $210k). It includes the drinks route (a partner's Type 58 catering), what must exist by the 19 January 2027 debut in FOG week, and what each step proves. Drawing A-401, and the axonometric `drawings/popaxo.png`. Research in `research-popup.md`. |
 | `research-sf-rules.md`, `research-market.md` | The research notes, with a source for every claim. Both are from public web pages; nobody was contacted. |
 | `r42_shots.py`, `kit42.py` | New interior views of the rendered room (counter, listening, night, shop wall), and the shop wall as a kit piece holding the products' own models. |
 | `r42_card.py`, `r42_stage.py` | The critic's card and staging for the new views (the CLAUDE.md protocol: fresh context, image and card only). |
@@ -30,6 +31,9 @@ Nothing has been reviewed by an architect, an engineer, a lawyer, a lender or th
     python3 spinoffs/barkhorn/planet/r42/r42_shots.py && python3 studio/engine/render.py studio/shots/barkhorn/planet42/night.json --out IMG --scale 0.5
 
 ## What the round found
+
+- **The order:** a lean pop-up (19 January to mid-March 2027, paid from the $50k product raise), then a 5-month
+  pop-up, then the flagship (lease in spring 2027). Each step is paid for by the one before (POPUP.md).
 
 - **The house:** 2,800 sq ft, 55 seats.
   - The code's occupant load is 133: A-2, sprinklered, two exits.
