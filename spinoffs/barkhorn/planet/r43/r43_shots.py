@@ -34,9 +34,11 @@ VIEWS = {
     # So the shop is seen from the bar end toward the street: both walls of shelves, the table, the pair in the window
     # against the street, at 28 mm
     'shop': dict(camera={'position': [8.0, 1.95, 1.45], 'target': [0.6, 2.9, 1.10], 'lens_mm': 28, 'level': True,
-                         'fstop': 4.0, 'focus': [3.6, 3.5, 0.9]}, exposure=4.2, haze=0.0012, pair='window',
+                         'fstop': 4.0, 'focus': [3.6, 3.5, 0.9]}, exposure=4.8, haze=0.0012, pair='window',
                  lights={'win': {'power_w': 40.0, 'cone_deg': 26.0}, 'street': {'irradiance': 0.05}},
-                 room={'windows_lit': 0.12, 'window_glow': 0.18, 'glass_gloss': 0.35}),
+                 # p2a, seen before judging: the lit windows opposite still read as white squares, the frame dark
+                 # (median 19): the windows off, exposure 4.2 to 4.8
+                 room={'windows_lit': 0.0, 'glass_gloss': 0.35}),
     # p0 look: the opposite building's windows and lit shop mirrored in the glass as white squares and a blue band, the
     # sidewalk hot, a mullion down the middle: the facade dimmed, the glass a softer reflector, one pane, the street lamp down
     # p2 (p1 judged 4.5/4.0, converged: a hard blue rectangle on the glass, which was the placeholder shop opposite
