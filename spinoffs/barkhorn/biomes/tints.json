@@ -1,0 +1,130 @@
+{
+ "Ember": {
+  "flavour": "cloud-red",
+  "trucast": "2423 Red",
+  "tt_percent": 14.1,
+  "sigma_per_mm": [
+   0.01891,
+   0.23642,
+   0.20096
+  ],
+  "cabinet_deep": "#CF0913",
+  "cabinet_radius_m": 0.025,
+  "horn_deep": "#D81724",
+  "horn_radius_m": 0.01,
+  "ior": 1.49,
+  "check_tt_20mm": 14.1
+ },
+ "Dust": {
+  "flavour": "cloud-orange",
+  "trucast": "2422 Orange (amber)",
+  "tt_percent": 59.1,
+  "sigma_per_mm": [
+   0.00135,
+   0.027,
+   0.06751
+  ],
+  "cabinet_deep": "#FBBD77",
+  "cabinet_radius_m": 0.025,
+  "horn_deep": "#FCC98B",
+  "horn_radius_m": 0.01,
+  "ior": 1.49,
+  "check_tt_20mm": 59.1
+ },
+ "Acid": {
+  "flavour": "cloud-amber",
+  "trucast": "9097 Fluorescent Yellow",
+  "tt_percent": 77.6,
+  "sigma_per_mm": [
+   0.0,
+   0.00755,
+   0.07552
+  ],
+  "cabinet_deep": "#FFEB6C",
+  "cabinet_radius_m": 0.025,
+  "horn_deep": "#FFEF81",
+  "horn_radius_m": 0.01,
+  "ior": 1.49,
+  "check_tt_20mm": 77.6
+ },
+ "Poison": {
+  "flavour": "eucalyptus-y2k-green",
+  "trucast": "2092 Green",
+  "tt_percent": 18.6,
+  "sigma_per_mm": [
+   0.35157,
+   0.06328,
+   0.28126
+  ],
+  "cabinet_deep": "#017D03",
+  "cabinet_radius_m": 0.025,
+  "horn_deep": "#03910C",
+  "horn_radius_m": 0.01,
+  "ior": 1.49,
+  "check_tt_20mm": 18.6
+ },
+ "Ice": {
+  "flavour": "cloud-blue",
+  "trucast": "2069 Tinted Blue",
+  "tt_percent": 57.6,
+  "sigma_per_mm": [
+   0.04991,
+   0.01997,
+   0.00299
+  ],
+  "cabinet_deep": "#92CCF7",
+  "cabinet_radius_m": 0.025,
+  "horn_deep": "#A3D6F8",
+  "horn_radius_m": 0.01,
+  "ior": 1.49,
+  "check_tt_20mm": 57.6
+ },
+ "Haze": {
+  "flavour": "cloud-violet",
+  "trucast": "2287 Violet",
+  "tt_percent": 13.5,
+  "sigma_per_mm": [
+   0.07026,
+   0.14051,
+   0.01686
+  ],
+  "cabinet_deep": "#7330D4",
+  "cabinet_radius_m": 0.025,
+  "horn_deep": "#8845DC",
+  "horn_radius_m": 0.01,
+  "ior": 1.49,
+  "check_tt_20mm": 13.5
+ },
+ "Fog": {
+  "flavour": "birch-fog-clear",
+  "trucast": "0000 Clear",
+  "tt_percent": 93.0,
+  "sigma_per_mm": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "cabinet_deep": "#FFFFFF",
+  "cabinet_radius_m": 0.025,
+  "horn_deep": "#FFFFFF",
+  "horn_radius_m": 0.01,
+  "ior": 1.49,
+  "check_tt_20mm": 92.0
+ },
+ "Smoke": {
+  "flavour": "cloud-black",
+  "trucast": "2064 Gray",
+  "tt_percent": 29.3,
+  "sigma_per_mm": [
+   0.05721,
+   0.05721,
+   0.05721
+  ],
+  "cabinet_deep": "#868686",
+  "cabinet_radius_m": 0.025,
+  "horn_deep": "#999999",
+  "horn_radius_m": 0.01,
+  "ior": 1.49,
+  "check_tt_20mm": 29.3
+ }
+}

@@ -62,3 +62,6 @@ spinoffs/barkhorn/companions/out-earf-coin-column/step/
 spinoffs/barkhorn/companions/out-earf-coin-column/stl/
 # the site coins' full rows (7400 px wide, 8 MB): working files, the tiles are cut from them (site_coins.py)
 renders/2026-10-20/barkhorn/coin/site-coins/row-*
+
+# r48-biomes: the generated Tropos library (tropos_lib.py rebuilds it in 20 s) and the world renders in progress
+spinoffs/barkhorn/biomes/assets/*.blend
