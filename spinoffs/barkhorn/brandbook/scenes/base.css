@@ -1,0 +1,13 @@
+/* the brand's own type and neutrals, as the site sets them (web.py): Instrument Sans and IBM Plex Mono, paper and ink */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400..700&display=block');
+:root {
+  --paper: #ECE8E1; --page: #F4F1EC; --ink: #1C1A18; --muted: #5E5A53; --rule: #D6D0C6; --night: #100F12;
+  --sans: 'Instrument Sans', 'Helvetica Neue', Arial, sans-serif; --mono: 'IBM Plex Mono', 'Courier New', monospace;
+  --ember: #D2382F; --dust: #E5732A; --acid: #E9B320; --poison: #4F7F3A; --ice: #4A90C8; --haze: #6C4BA3; --fog: #F6F8F8; --smoke: #34323A;
+}
+* { box-sizing: border-box }
+html, body { margin: 0; padding: 0 }
+body { font-family: var(--sans); color: var(--ink); overflow: hidden; -webkit-font-smoothing: antialiased }
+.mono { font-family: var(--mono); letter-spacing: .06em; text-transform: uppercase }
+.word { display: block }
+.word svg, img.word { display: block; height: 100%; width: auto }

@@ -1,0 +1,46 @@
+<!doctype html><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<style>
+/* EARF Sessions: a live record from the listening room, pressed in one of the eight tints. A 12-inch jacket
+   (314 mm at 2 px a mm), the record half out of it, and the back; on the bar's dark oak */
+body { width: 1600px; height: 1000px; background: radial-gradient(1000px 700px at 40% 40%, #3A2A20, #1E1611 70%, #120D0A) }
+.oak { position: absolute; inset: 0; opacity: .5; background: repeating-linear-gradient(92deg, rgba(0,0,0,0) 0 7px, rgba(0,0,0,.12) 7px 9px, rgba(255,220,180,.03) 9px 19px) }
+.jacket { position: absolute; width: 628px; height: 628px; border-radius: 3px; overflow: hidden; box-shadow: 0 30px 50px -20px rgba(0,0,0,.8), 0 2px 4px rgba(0,0,0,.5) }
+.front { left: 120px; top: 190px; transform: rotate(-4deg); background: #0F0E0D; z-index: 3 }
+.front img { position: absolute; left: 0; top: 0; width: 100%; height: 66%; object-fit: cover; object-position: 50% 45% }
+.front .shade { position: absolute; left: 0; right: 0; top: 40%; height: 26%; background: linear-gradient(180deg, rgba(15,14,13,0), #0F0E0D) }
+.front .t { position: absolute; left: 40px; right: 40px; bottom: 40px; color: #EDE7DD; display: grid; gap: 8px }
+.front .k { font-family: var(--mono); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: #A79F93; display: flex; justify-content: space-between }
+.front h1 { margin: 0; font-size: 64px; line-height: .95; letter-spacing: -.04em; font-weight: 600 }
+.front .no { position: absolute; right: 36px; top: 30px; font-weight: 600; font-size: 120px; letter-spacing: -.06em; color: rgba(237,231,221,.9); line-height: 1 }
+.front .w { position: absolute; left: 40px; top: 40px; height: 26px }
+.disc { position: absolute; left: 420px; top: 170px; width: 610px; height: 610px; border-radius: 50%; z-index: 2;
+  background: radial-gradient(circle, transparent 0 4px, rgba(0,0,0,0) 4px),
+    repeating-radial-gradient(circle, rgba(255,255,255,.05) 0 1px, rgba(0,0,0,.04) 1px 3px),
+    radial-gradient(circle at 35% 30%, rgba(160,230,140,.75), rgba(54,116,36,.86) 45%, rgba(25,60,18,.95));
+  box-shadow: 0 30px 50px -20px rgba(0,0,0,.8), inset 0 0 0 2px rgba(255,255,255,.12) }
+.disc::before { content: ''; position: absolute; inset: 0; border-radius: 50%; background: conic-gradient(from 210deg, rgba(255,255,255,0) 0 20%, rgba(255,255,255,.22) 26%, rgba(255,255,255,0) 32%, rgba(255,255,255,0) 70%, rgba(255,255,255,.16) 76%, rgba(255,255,255,0) 82%) }
+.label { position: absolute; left: 50%; top: 50%; width: 200px; height: 200px; margin: -100px; border-radius: 50%; background: #F4F1EC; display: grid; place-items: center; text-align: center; padding: 30px }
+.label::after { content: ''; position: absolute; left: 50%; top: 50%; width: 14px; height: 14px; margin: -7px; border-radius: 50%; background: #1E1611 }
+.label .w { height: 16px; margin: 0 auto }
+.label p { margin: 0; font-family: var(--mono); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; line-height: 1.5; color: #1C1A18 }
+.back { left: 1010px; top: 300px; transform: rotate(6deg); background: #ECE8E1; padding: 40px; color: #1C1A18; z-index: 1; display: flex; flex-direction: column; width: 560px; height: 560px }
+.back h2 { margin: 0 0 18px; font-size: 26px; letter-spacing: -.02em }
+.back ol { margin: 0; padding: 0; list-style: none; display: grid; gap: 7px; font-size: 15px }
+.back li { display: grid; grid-template-columns: 34px 1fr; font-variant-numeric: tabular-nums }
+.back li span:first-child, .back li span:last-child { font-family: var(--mono); font-size: 12px; color: #5E5A53; padding-top: 2px }
+.back .f { margin-top: auto; font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em; line-height: 1.6; text-transform: uppercase; color: #5E5A53 }
+.cap { position: absolute; left: 60px; bottom: 36px; font-family: var(--mono); font-size: 12px; letter-spacing: .08em; color: rgba(237,231,221,.7); text-transform: uppercase }
+</style>
+<body data-w="1600" data-h="1000">
+<div class="oak"></div>
+<div class="jacket front"><img src="../assets/bar-listening.jpg" alt=""><div class="shade"></div>
+  <img class="w" src="../../brand/mark/earf-wordmark-white.svg" alt="" style="position:absolute;left:40px;top:40px;width:auto;height:26px">
+  <div class="no">01</div>
+  <div class="t"><div class="k"><span>EARF Sessions</span><span>Pressed in 04 Poison</span></div><h1>[Artist]<br>at Planet EARF</h1>
+  <div class="k"><span>Recorded live in the listening room, San Francisco</span><span>33⅓</span></div></div></div>
+<div class="disc"><div class="label"><div><img class="w" src="../../brand/mark/earf-wordmark-black.svg" alt="" style="height:16px;width:auto;display:block;margin:0 auto 10px"><p>Sessions 01 · Side A<br>Six chairs, one take</p></div></div></div>
+<div class="jacket back"><h2>One album, start to finish.</h2>
+  <ol><li><span>A1</span><span>[Title]</span></li><li><span>A2</span><span>[Title]</span></li><li><span>A3</span><span>[Title]</span></li><li><span>B1</span><span>[Title]</span></li><li><span>B2</span><span>[Title]</span></li><li><span>B3</span><span>[Title]</span></li></ol>
+  <div class="f">Recorded in front of six listeners on a Tuesday at 8 pm.<br>Played back through a pair of Tropos in Smoke. Mixed in the room.<br>One pressing, numbered. In the tint of the night it was made.</div></div>
+<div class="cap">EARF Sessions · 12-inch, 180 g, pressed in the evening's tint · a mockup; the artist and titles are placeholders</div>
+</body>

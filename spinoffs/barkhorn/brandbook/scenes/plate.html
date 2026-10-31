@@ -1,0 +1,54 @@
+<!doctype html><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<style>
+/* the rating plate: 70 x 40 x 1 mm black anodised aluminium, laser-marked white, two black pan heads, on the back of a
+   Tropos in Ember (the cabinet's own 20 mm tinted acrylic); drawn at 12 px a mm */
+body { width: 1600px; height: 1000px; background:
+  radial-gradient(900px 600px at 62% 40%, #E2483A 0%, #B92A22 45%, #7E1612 100%) }
+.depth { position: absolute; inset: 0; background:
+  linear-gradient(90deg, rgba(255,255,255,.0) 0 70%, rgba(255,200,180,.18) 70.4%, rgba(255,255,255,0) 72%),
+  repeating-linear-gradient(0deg, rgba(0,0,0,.0) 0 58px, rgba(90,10,8,.10) 58px 60px) }
+.lining { position: absolute; left: 0; top: 0; width: 70%; height: 100%; opacity: .25; mix-blend-mode: screen;
+  background: radial-gradient(400px 260px at 30% 70%, #fff, transparent 70%), radial-gradient(300px 200px at 10% 20%, #fff, transparent 70%); filter: blur(30px) }
+.plate { position: absolute; left: 380px; top: 250px; width: 840px; height: 480px; border-radius: 10px;
+  background: linear-gradient(170deg, #2A292C 0%, #1B1A1D 45%, #141316 100%);
+  box-shadow: 0 2px 0 rgba(255,255,255,.06) inset, 0 -1px 0 rgba(0,0,0,.6) inset, 0 14px 24px -8px rgba(60,0,0,.65), 0 2px 3px rgba(0,0,0,.5) }
+.plate::before { content: ''; position: absolute; inset: 0; border-radius: 10px; opacity: .5;
+  background: repeating-linear-gradient(90deg, rgba(255,255,255,.018) 0 1px, transparent 1px 3px) }
+.screw { position: absolute; top: 50%; width: 66px; height: 66px; margin-top: -33px; border-radius: 50%;
+  background: radial-gradient(circle at 38% 32%, #4A484D, #18171A 60%, #0C0B0D); box-shadow: 0 3px 6px rgba(0,0,0,.6) }
+.screw::after { content: ''; position: absolute; left: 50%; top: 50%; width: 26px; height: 26px; margin: -13px; border-radius: 3px;
+  background: #050506; clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%) }
+.s1 { left: 22px } .s2 { right: 22px }
+.print { position: absolute; left: 120px; right: 120px; top: 46px; bottom: 40px; color: #EDEAE4; display: flex; flex-direction: column }
+.print .w { height: 50px; width: auto; align-self: flex-start }
+.print .row { font-family: var(--mono); font-size: 19px; letter-spacing: .07em; line-height: 1.55; text-transform: uppercase }
+.print .lede { margin-top: 22px; font-family: var(--sans); font-weight: 600; font-size: 25px; letter-spacing: .02em }
+.print hr { border: 0; border-top: 2px solid rgba(237,234,228,.85); margin: 18px 0 16px }
+.marks { display: flex; gap: 30px; align-items: center; font-family: var(--sans); font-weight: 600; font-size: 30px; margin-top: auto }
+.marks .ce { font-weight: 400; font-size: 36px; letter-spacing: -.04em }
+.marks svg { height: 44px; width: auto }
+.dot { display: inline-block; width: 16px; height: 16px; border-radius: 50%; background: #D2382F; box-shadow: 0 0 0 2px #EDEAE4; vertical-align: -1px; margin-right: 10px }
+.cap { position: absolute; left: 60px; bottom: 44px; font-family: var(--mono); font-size: 12px; letter-spacing: .08em; color: rgba(255,235,228,.8); text-transform: uppercase; line-height: 1.7 }
+.scale { position: absolute; left: 380px; top: 760px; width: 840px; display: flex; justify-content: space-between; font-family: var(--mono); font-size: 12px; color: rgba(255,235,228,.75) }
+.scale::before { content: ''; position: absolute; left: 0; right: 0; top: -10px; border-top: 1px solid rgba(255,235,228,.6) }
+</style>
+<body data-w="1600" data-h="1000">
+<div class="lining"></div><div class="depth"></div>
+<div class="plate">
+  <i class="screw s1"></i><i class="screw s2"></i>
+  <div class="print">
+    <img class="w" src="../../brand/mark/earf-wordmark-white.svg" alt="">
+    <div class="lede">TROPOS &nbsp;·&nbsp; HORN LOUDSPEAKER, POWERED</div>
+    <div class="row"><span class="dot"></span>01 EMBER &nbsp;&nbsp; MODEL T-1 &nbsp;&nbsp; S/N T1-27-0001</div>
+    <div class="row">100–120 V~ / 200–240 V~ &nbsp; 50–60 HZ &nbsp; 350 W MAX</div>
+    <hr>
+    <div class="row">DESIGNED IN SAN FRANCISCO, CALIFORNIA</div>
+    <div class="row" style="opacity:.7">EARF.WORLD &nbsp;·&nbsp; HELLO@EARF.WORLD</div>
+    <div class="marks"><span class="ce">CE</span><span>UKCA</span><span>FCC</span>
+      <svg viewBox="0 0 40 50" fill="none" stroke="#EDEAE4" stroke-width="3"><path d="M10 12 L13 40 H27 L30 12 Z M7 12 H33 M16 8 H24"/><path d="M4 4 L36 44 M36 4 L4 44"/><path d="M8 48 H32" stroke-width="5"/></svg></div>
+  </div>
+</div>
+<div class="scale"><span>0</span><span>10</span><span>20</span><span>30</span><span>40</span><span>50</span><span>60</span><span>70 mm</span></div>
+<div class="cap">The rating plate · 70 × 40 × 1 mm black anodised aluminium, laser-marked, beside the amplifier<br>
+Ratings as on the FA122's own plate · serial format proposed · marks drawn where they go once tested, not yet earned</div>
+</body>

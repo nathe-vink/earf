@@ -1,0 +1,42 @@
+<!doctype html><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<style>
+/* three posts at 4:5 (1080 x 1350 at 2x), side by side as a feed shows them; one picture, one line, the mark small */
+body { width: 1720px; height: 760px; background: #E7E2DA; display: flex; gap: 20px; padding: 40px; align-items: center }
+.post { position: relative; width: 540px; height: 675px; overflow: hidden; flex: none; background: #F4F1EC; box-shadow: 0 20px 40px -24px rgba(0,0,0,.4) }
+.post img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover }
+.post .t { position: absolute; left: 34px; right: 34px; font-weight: 600; letter-spacing: -.02em; line-height: 1.02 }
+.post .m { position: absolute; font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase }
+.post .w { position: absolute; right: 30px; bottom: 30px; height: 15px }
+/* 1: the eight */
+.p1 .bg { object-position: 50% 50% }
+.p1 .t { top: 40px; font-size: 54px; color: var(--ink) }
+.p1 .m { left: 34px; bottom: 32px; color: var(--muted) }
+/* 2: Poison where it began */
+.p2 .t { top: 64px; font-size: 46px; color: #F4F1EC; text-shadow: 0 1px 30px rgba(0,0,0,.35) }
+.p2 .m { left: 34px; top: 34px; color: rgba(244,241,236,.85) }
+.p2 .m.b { top: auto; bottom: 34px }
+.p2::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.5), rgba(0,0,0,0) 32%, rgba(0,0,0,0) 75%, rgba(0,0,0,.45)) }
+.p2 > * { z-index: 1 }
+/* 3: the material, close */
+.p3 { background: #F4F1EC }
+.post.p3 img.bg { height: 74%; bottom: auto }
+.p3 .t { top: auto; bottom: 74px; font-size: 34px; color: var(--ink) }
+.p3 .m { left: 34px; bottom: 34px; color: var(--muted) }
+.sw { position: absolute; left: 34px; top: 34px; display: flex; gap: 6px }
+.sw i { width: 18px; height: 18px; border-radius: 50% }
+</style>
+<body data-w="1720" data-h="760">
+<div class="post p1"><img class="bg" src="../../site/img/hero-portrait.jpg" alt="">
+  <div class="t">Something<br>in the air.</div>
+  <div class="m">Tropos · eight colours, Ember to Smoke</div>
+  <img class="w" src="../../brand/mark/earf-wordmark-black.svg" alt=""></div>
+<div class="post p2"><img class="bg" src="../../site/img/green-habitat-portrait.jpg" alt="">
+  <div class="m">04 · Poison</div>
+  <div class="t">Bottle green.<br>Keep out of reach.</div>
+  <div class="m b">Tropos 04 · in its element</div>
+  <img class="w" src="../../brand/mark/earf-wordmark-white.svg" alt=""></div>
+<div class="post p3"><img class="bg" src="../../site/img/macro-corner.jpg" alt="">
+  <div class="t">Cast in colour,<br>all the way through.</div>
+  <div class="m">Two 20 mm walls, one colour, cemented</div>
+  <img class="w" src="../../brand/mark/earf-wordmark-black.svg" alt=""></div>
+</body>

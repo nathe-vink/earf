@@ -1,0 +1,47 @@
+<!doctype html><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<style>
+/* Hotel listening suites: a suite drawn in plan with its EARF pieces, the acrylic key, and the card on the desk */
+body { width: 1600px; height: 1000px; background: #ECE8E1 }
+.plan { position: absolute; left: 50px; top: 50px; width: 900px; height: 900px; background: #F4F1EC; box-shadow: inset 0 0 0 1px #D6D0C6 }
+.plan svg { width: 100%; height: 100% }
+.lab { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .08em; fill: #5E5A53; text-transform: uppercase }
+.lab.b { fill: #1C1A18; font-weight: 500 }
+.key { position: absolute; left: 1010px; top: 90px; width: 500px; height: 316px; border-radius: 18px; transform: rotate(-5deg);
+  background: linear-gradient(150deg, rgba(79,127,58,.55), rgba(54,116,36,.75)); box-shadow: inset 0 0 0 2px rgba(255,255,255,.3), 0 30px 40px -20px rgba(30,70,20,.6); padding: 34px; color: #F4F1EC }
+.key::before { content: ''; position: absolute; inset: 0; border-radius: 18px; background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,.28) 42%, transparent 54%) }
+.key .n { font-size: 96px; font-weight: 600; letter-spacing: -.05em; line-height: 1; position: absolute; right: 34px; bottom: 26px }
+.key .m { font-family: var(--mono); font-size: 13px; letter-spacing: .12em; text-transform: uppercase }
+.key img { height: 24px; margin-bottom: 14px }
+.card { position: absolute; left: 1020px; top: 480px; width: 500px; height: 440px; background: #F9F8F5; padding: 40px; box-shadow: 0 20px 40px -20px rgba(0,0,0,.35); transform: rotate(2deg); display: flex; flex-direction: column; gap: 14px }
+.card h3 { margin: 0; font-size: 34px; letter-spacing: -.025em; line-height: 1.02 }
+.card p { margin: 0; font-size: 16px; line-height: 1.5 }
+.card .k { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: #5E5A53 }
+.card .f { margin-top: auto; display: flex; justify-content: space-between; align-items: end }
+.card .f img { height: 16px }
+</style>
+<body data-w="1600" data-h="1000">
+<div class="plan"><svg viewBox="0 0 900 900" fill="none" stroke="#1C1A18">
+  <rect x="60" y="80" width="780" height="740" stroke-width="10"/>
+  <path d="M60 470 H430 M430 80 V330 M430 410 V470" stroke-width="6"/>
+  <path d="M60 720 H250 M250 720 V820" stroke-width="6"/>
+  <path d="M150 820 a70 70 0 0 1 70 -70" stroke-width="1.5"/>
+  <rect x="120" y="140" width="250" height="210" stroke-width="1.5"/><text x="128" y="160" class="lab">Bed</text>
+  <rect x="480" y="120" width="300" height="10" fill="#1C1A18" stroke="none"/><text x="560" y="112" class="lab">Window</text>
+  <!-- the pair, at the window, the listening seat on the axis -->
+  <rect x="490" y="150" width="56" height="42" fill="#4F7F3A" fill-opacity=".55" stroke="#1C1A18" stroke-width="2"/>
+  <rect x="714" y="150" width="56" height="42" fill="#4F7F3A" fill-opacity=".55" stroke="#1C1A18" stroke-width="2"/>
+  <path d="M518 192 L630 420 M742 192 L630 420" stroke="#4F7F3A" stroke-dasharray="4 6" stroke-width="1.5"/>
+  <rect x="580" y="420" width="100" height="90" rx="20" stroke-width="2"/><text x="590" y="540" class="lab">The chair</text>
+  <text x="474" y="222" class="lab b">Tropos 04</text><text x="700" y="222" class="lab b">Tropos 04</text>
+  <rect x="560" y="160" width="140" height="44" stroke-width="2"/><text x="574" y="187" class="lab b">Mantle</text>
+  <rect x="740" y="560" width="70" height="200" stroke-width="2"/><text x="690" y="790" class="lab">Records, 200</text>
+  <circle cx="700" cy="460" r="16" fill="#4F7F3A" fill-opacity=".55" stroke-width="2"/><text x="720" y="470" class="lab b">Core</text>
+  <circle cx="245" cy="410" r="22" fill="#4F7F3A" fill-opacity=".35" stroke-width="2" stroke-dasharray="3 3"/><text x="275" y="415" class="lab b">Hemisphere, over the desk</text>
+  <rect x="140" y="380" width="200" height="60" stroke-width="1.5"/><text x="148" y="458" class="lab">Desk</text>
+  <rect x="470" y="600" width="200" height="120" stroke-width="1.5"/><text x="478" y="740" class="lab">Sofa</text>
+  <text x="80" y="790" class="lab">Bath</text><text x="80" y="60" class="lab b">Suite 1204 · Poison · about 45 m²</text>
+  <text x="560" y="60" class="lab">0 · 1 · 2 · 3 m</text><path d="M560 68 H800" stroke-width="1.5"/>
+</svg></div>
+<div class="key"><img src="../../brand/mark/earf-wordmark-white.svg" alt=""><div class="m">[Hotel] · the listening suite</div><div class="m" style="margin-top:6px;opacity:.8">Cast acrylic, 2 mm · 04 Poison</div><div class="n">1204</div></div>
+<div class="card"><span class="k">On the desk</span><h3>This room plays.</h3><p>The speakers are a pair of Tropos in Poison; the record player is Mantle. Two hundred records are in the cabinet by the window, chosen for this room. Turn Mantle's base up for light, down for sleep.</p><p>Everything here can be bought at the front desk, in any of eight colours.</p><div class="f"><span class="k">Fitted by EARF</span><img src="../../brand/mark/earf-wordmark-black.svg" alt=""></div></div>
+</body>

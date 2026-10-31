@@ -1,0 +1,32 @@
+<!doctype html><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<style>
+/* Artist editions: a ninth tint, made once with a musician or an artist, numbered. A colour study only: the Ember
+   render's hue turned, not a cast */
+body { width: 1600px; height: 1000px; background: #F4F1EC }
+.pic { position: absolute; left: 0; top: 0; width: 1000px; height: 1000px; overflow: hidden }
+.pic img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 50% }
+.side { position: absolute; left: 1000px; top: 0; right: 0; bottom: 0; padding: 70px 64px; display: flex; flex-direction: column; gap: 26px }
+.k { font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted) }
+h1 { margin: 0; font-size: 64px; line-height: .95; letter-spacing: -.04em; font-weight: 600 }
+.row { display: grid; grid-template-columns: repeat(9, 1fr); gap: 5px }
+.row i { aspect-ratio: 1 / 2; border-radius: 2px; box-shadow: inset 0 0 0 1px rgba(0,0,0,.06) }
+.row i.n { outline: 2px solid var(--ink); outline-offset: 3px }
+p { margin: 0; font-size: 17px; line-height: 1.5 }
+dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; font-size: 15px; border-top: 1px solid var(--rule); padding-top: 16px }
+dt { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); padding-top: 3px }
+dd { margin: 0 }
+.sig { margin-top: auto; display: flex; justify-content: space-between; align-items: end; border-top: 1px solid var(--rule); padding-top: 16px }
+.sig span { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted) }
+.sig img { height: 18px }
+</style>
+<body data-w="1600" data-h="1000">
+<div class="pic"><img src="../assets/edition-study.jpg" alt=""></div>
+<div class="side">
+  <div class="k">Artist edition · 09 · a colour study</div>
+  <h1>A ninth colour,<br>made once.</h1>
+  <div class="row"><i style="background:#C92118"></i><i style="background:#E06718"></i><i style="background:#E2AA15"></i><i style="background:#367424"></i><i style="background:#2584BE"></i><i style="background:#5B3197"></i><i style="background:#D5DFE0"></i><i style="background:#57545F"></i><i class="n" style="background:#C2187A"></i></div>
+  <p>Each year one musician or artist chooses a tint with us. It is cast in one dye lot, made into a numbered run of Tropos, Hemisphere shades and coins, and never cast again. The artist names it, from what drifts through the air.</p>
+  <dl><dt>Tint</dt><dd>09 · [Name, chosen with the artist]</dd><dt>Run</dt><dd>[N] pairs of Tropos, numbered on the plate</dd><dt>With it</dt><dd>A Session pressed in the same tint</dd><dt>Artist</dt><dd>[Artist], a share of each pair</dd></dl>
+  <div class="sig"><span>Edition 1 · 2027 · the picture is a hue study of the Ember render</span><img src="../../brand/mark/earf-wordmark-black.svg" alt=""></div>
+</div>
+</body>

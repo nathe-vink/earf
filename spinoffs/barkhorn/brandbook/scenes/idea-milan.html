@@ -1,0 +1,47 @@
+<!doctype html><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<style>
+/* A debut installation for a design week: eight Tropos uplit in a dark room, Mother EARF overhead. The invitation,
+   and the room in plan */
+body { width: 1600px; height: 1000px; background: #100F12; color: #EDE7DD }
+.poster { position: absolute; left: 60px; top: 60px; width: 620px; height: 880px; background: #0B0A0C; overflow: hidden; box-shadow: 0 0 0 1px #2E2B27 }
+.poster img { position: absolute; left: -10%; width: 120%; top: 120px; height: 420px; object-fit: cover; object-position: 50% 60% }
+.poster .w { position: absolute; left: 44px; top: 44px; height: 30px }
+.poster .d { position: absolute; right: 44px; top: 50px; font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #A79F93; text-align: right; line-height: 1.6 }
+.poster h1 { position: absolute; left: 44px; right: 44px; top: 580px; margin: 0; font-size: 70px; line-height: .95; letter-spacing: -.045em; font-weight: 600 }
+.poster .f { position: absolute; left: 44px; right: 44px; bottom: 44px; display: grid; grid-template-columns: auto 1fr; gap: 6px 20px; font-family: var(--mono); font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase }
+.poster .f span:nth-child(odd) { color: #A79F93 }
+.plan { position: absolute; left: 740px; top: 60px; width: 800px; height: 560px; background: #1A1918; box-shadow: inset 0 0 0 1px #2E2B27 }
+.plan svg { width: 100%; height: 100% }
+.lab { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .08em; fill: #A79F93; text-transform: uppercase }
+.notes { position: absolute; left: 740px; top: 650px; width: 800px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px }
+.notes div { border-top: 1px solid #2E2B27; padding-top: 14px; display: grid; gap: 6px }
+.notes b { font-weight: 600; font-size: 18px }
+.notes p { margin: 0; color: #A79F93; font-size: 14.5px; line-height: 1.5 }
+</style>
+<body data-w="1600" data-h="1000">
+<div class="poster"><img src="../../site/img/facade.jpg" alt="">
+  <img class="w" src="../../brand/mark/earf-wordmark-white.svg" alt="" style="position:absolute;left:44px;top:44px;width:auto;height:30px">
+  <div class="d">Milan · April 2027<br>Design week</div>
+  <h1>Something<br>in the air.</h1>
+  <div class="f"><span>Where</span><span>[Venue], [district]</span><span>When</span><span>[Dates], 11 am to 11 pm</span><span>At 9 pm</span><span>A Session, one album, start to finish</span></div></div>
+<div class="plan"><svg viewBox="0 0 800 560" fill="none" stroke="#EDE7DD">
+  <rect x="40" y="40" width="720" height="440" stroke-width="6"/>
+  <path d="M40 300 V360" stroke="#1A1918" stroke-width="10"/><text x="54" y="336" class="lab">In</text>
+  <path d="M120 90 Q400 40 680 90" stroke="#A79F93" stroke-dasharray="3 5"/>
+  <g stroke-width="2">
+    <rect x="130" y="96" width="34" height="26" fill="#C92118"/><rect x="198" y="84" width="34" height="26" fill="#E06718"/>
+    <rect x="266" y="76" width="34" height="26" fill="#E2AA15"/><rect x="334" y="72" width="34" height="26" fill="#367424"/>
+    <rect x="432" y="72" width="34" height="26" fill="#2584BE"/><rect x="500" y="76" width="34" height="26" fill="#5B3197"/>
+    <rect x="568" y="84" width="34" height="26" fill="#D5DFE0"/><rect x="636" y="96" width="34" height="26" fill="#57545F"/></g>
+  <text x="300" y="140" class="lab">Eight Tropos, lit from below, on the curved wall</text>
+  <circle cx="400" cy="270" r="62" stroke-width="2" stroke-dasharray="6 4"/><text x="352" y="350" class="lab">Mother EARF overhead</text>
+  <path d="M260 410 h280" stroke-width="2"/><text x="300" y="400" class="lab">Bench, 12 seats</text>
+  <rect x="640" y="380" width="90" height="70" stroke-width="2"/><text x="640" y="470" class="lab">Mantle · coins</text>
+  <text x="60" y="520" class="lab">About 15 × 9 m · dark, one door · drawn for a venue to be found</text>
+</svg></div>
+<div class="notes">
+  <div><b>One room, one idea</b><p>The colours thrown up a wall by the speakers themselves, the picture on the site made real at full size.</p></div>
+  <div><b>Played, not shown</b><p>Sessions at 9 pm each night. The coin at the door, one song each, by day.</p></div>
+  <div><b>Everything for sale</b><p>Every piece wears its tag. Orders taken for the first run, made to order.</p></div>
+</div>
+</body>

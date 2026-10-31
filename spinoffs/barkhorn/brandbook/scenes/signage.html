@@ -1,0 +1,60 @@
+<!doctype html><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<style>
+/* Planet EARF's signs, drawn on the room's own night: blackened steel, smoked glass, oak. The door's etched disc; the
+   tag every object in the room wears, because everything is for sale; the listening room's card; the hours */
+body { width: 1600px; height: 1000px; background: #0F0E0D; color: #EDE7DD }
+.door { position: absolute; left: 60px; top: 60px; width: 560px; height: 880px; border-radius: 2px;
+  background: radial-gradient(500px 700px at 70% 30%, #2A2826, #1A1918 60%, #121110), #1A1918;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.04), inset 0 0 80px rgba(0,0,0,.6) }
+.door::before { content: ''; position: absolute; inset: 0; opacity: .35; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .5' numOctaves='3'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E") }
+.pull { position: absolute; right: 54px; top: 380px; width: 18px; height: 220px; border-radius: 9px; background: linear-gradient(90deg, #0A0A0A, #3A3836 50%, #0D0C0C); box-shadow: 6px 8px 14px rgba(0,0,0,.6) }
+.disc { position: absolute; left: 140px; top: 170px; width: 280px; height: 280px; border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #2C2A28, #1C1B1A); box-shadow: 0 0 0 1px rgba(255,255,255,.07), inset 0 2px 8px rgba(0,0,0,.6) }
+.disc img { position: absolute; left: 40px; top: 40px; width: 200px; height: 200px; opacity: .5 }
+.disc span { position: absolute; left: 0; right: 0; bottom: -60px; text-align: center; font-family: var(--mono); font-size: 13px; letter-spacing: .32em; color: rgba(237,231,221,.55) }
+.door .num { position: absolute; left: 0; right: 0; top: 640px; text-align: center; font-family: var(--mono); font-size: 12px; letter-spacing: .2em; color: rgba(237,231,221,.4); line-height: 2 }
+.lbl { position: absolute; font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: #A79F93 }
+/* the object tag: 1 mm Fog acrylic, engraved and filled, hung from a black thread */
+.oak { position: absolute; left: 680px; top: 60px; width: 860px; height: 420px; border-radius: 2px;
+  background: repeating-linear-gradient(90deg, #4A3526 0 3px, #553C2B 3px 9px, #47321F 9px 11px, #5A4130 11px 20px); filter: saturate(.85) }
+.oak::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.2), rgba(0,0,0,.55)) }
+.tag { position: absolute; width: 300px; height: 168px; border-radius: 6px; padding: 22px 24px; color: #1B1916;
+  background: linear-gradient(160deg, rgba(246,248,248,.9), rgba(222,228,229,.82)); box-shadow: inset 0 0 0 1px rgba(255,255,255,.6), 0 18px 30px -10px rgba(0,0,0,.7);
+  display: flex; flex-direction: column; gap: 6px }
+.tag .k { font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: #5F5950; display: flex; justify-content: space-between }
+.tag .k i { width: 11px; height: 11px; border-radius: 50%; display: inline-block; vertical-align: -1px; margin-right: 6px }
+.tag b { font-size: 26px; font-weight: 600; letter-spacing: -.01em }
+.tag p { margin: 0; font-size: 14px; line-height: 1.35 }
+.tag .p { margin-top: auto; font-family: var(--mono); font-size: 12px; letter-spacing: .04em; display: flex; justify-content: space-between }
+.t1 { left: 740px; top: 150px; transform: rotate(-3deg) } .t2 { left: 1100px; top: 190px; transform: rotate(2.5deg) }
+.thread { position: absolute; width: 1px; background: #000; height: 100px }
+/* the listening room's card and the hours plate */
+.card { position: absolute; left: 680px; top: 540px; width: 400px; height: 400px; background: #1A1918; border-radius: 2px; padding: 44px; display: flex; flex-direction: column; box-shadow: inset 0 0 0 1px #2E2B27 }
+.card h3 { margin: 0; font-size: 46px; line-height: 1; font-weight: 600; letter-spacing: -.025em }
+.card p { margin: 18px 0 0; color: #A79F93; font-size: 16px; line-height: 1.45 }
+.card .w { margin-top: auto; height: 16px; align-self: flex-start; opacity: .8 }
+.hours { position: absolute; left: 1120px; top: 540px; width: 420px; height: 400px; border-radius: 2px; padding: 40px 40px;
+  background: linear-gradient(160deg, rgba(60,58,66,.85), rgba(30,29,34,.92)); box-shadow: inset 0 0 0 1px rgba(255,255,255,.12) }
+.hours::before { content: ''; position: absolute; inset: 0; background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,.07) 45%, transparent 55%) }
+.hours .t { font-weight: 600; font-size: 30px; letter-spacing: -.01em; margin-bottom: 4px }
+.hours .s { color: #A79F93; font-size: 14px; margin-bottom: 26px }
+.hours dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 9px 26px; font-family: var(--mono); font-size: 14px; letter-spacing: .03em }
+.hours dt { color: #A79F93; text-transform: uppercase; letter-spacing: .1em; font-size: 12px; padding-top: 2px }
+.hours dd { margin: 0 }
+</style>
+<body data-w="1600" data-h="1000">
+<div class="door"><div class="disc"><img src="../../brand/mark/earf-globe-white-stroke.svg" alt=""><span>PLANET EARF</span></div><div class="pull"></div>
+  <div class="num">THE SIDE DOOR<br>RING ONCE</div></div>
+<div class="lbl" style="left:60px;top:960px">The door · blackened steel · a 280 mm etched disc, unlit</div>
+<div class="oak"></div>
+<div class="thread" style="left:890px;top:60px;height:96px;transform:rotate(-3deg)"></div>
+<div class="thread" style="left:1250px;top:60px;height:136px;transform:rotate(2.5deg)"></div>
+<div class="tag t1"><div class="k"><span><i style="background:#D2382F"></i>For sale</span><span>Lighting</span></div><b>Hemisphere</b><p>The pendant over the bar, in Ember. A quarter turn and it's another colour.</p><div class="p"><span>[PRICE]</span><span>Ask at the bar</span></div></div>
+<div class="tag t2"><div class="k"><span><i style="background:#34323A"></i>For sale</span><span>Speakers</span></div><b>Tropos 08</b><p>The pair behind the decks, in Smoke. Made to order, in any of eight.</p><div class="p"><span>[PAIR PRICE]</span><span>Ask at the bar</span></div></div>
+<div class="lbl" style="left:680px;top:500px">The tag · every object in the room wears one · 90 × 50 mm Fog acrylic, engraved and filled</div>
+<div class="card"><h3>Quiet here.</h3><p>One album, start to finish. Talk at the bar; it's just through there.</p><img class="w" src="../../brand/mark/earf-wordmark-white.svg" alt=""></div>
+<div class="hours"><div class="t">Planet EARF</div><div class="s">A listening bar. Everything in the room is for sale.</div>
+  <dl><dt>Tue–Thu</dt><dd>5 pm – midnight</dd><dt>Fri–Sat</dt><dd>5 pm – 1:30 am</dd><dt>Sun</dt><dd>3 – 10 pm</dd><dt>Mon</dt><dd>Closed</dd><dt>Sessions</dt><dd>Tue–Thu, 8 pm</dd></dl></div>
+<div class="lbl" style="left:680px;top:960px">The listening room's card, once on each table · the hours, on 6 mm Smoke glazed to the window</div>
+</body>
