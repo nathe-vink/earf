@@ -80,3 +80,49 @@ Neither waits for formed acrylic.
 
 **Mantle:** the bearing and pulleys are the long pole. Turn them first, and test speed and rumble on a plain MDF
 plinth while the acrylic is made.
+
+## The dates (added 2026-10-31)
+
+**The targets, from the research:**
+- the San Francisco debut night in FOG Design+Art week, 21 to 24 January 2027;
+- prototypes photographed by mid-February 2027;
+- Milan Design Week, 12 to 18 April;
+- High End Vienna, 6 to 9 May.
+
+**Assumptions:** today is 31 October 2026, and the owner sends the RFQs in the week of 2 November. Most shops close
+from about 21 December to 3 January, which takes two of the eleven and a half weeks to 21 January. The lead times
+below are typical for small shops, not quotes: the RFQs ask for the real ones.
+
+| Week of | Hemisphere | Core | Mantle |
+|---|---|---|---|
+| 2 Nov | RFQs 01, 03, 04 sent. Order 3 COBs, both drivers, the reflector's spinner quote. Ask for tinted sheet chips (stock tints) | RFQs 02, 03, 04 sent. Order 12 cells and a bench LiFePO4 board (LTC4162 evaluation kit). Start the board's per-cell switching design | RFQ 05 sent; bearing and pulley added to RFQ 04. Order the Rega motor kit, Neo PSU, RB330 and 2M Blue (all in stock) |
+| 9 Nov | **Driver bench test** (headroom at Tc 85 °C), and the go or no-go on the ERP driver | **Runtime and charge bench tests** on the evaluation kit | Bench-run the Rega motor on its board. **Bearing and pulley ordered** |
+| 16 Nov | Quotes back; **moulds ordered** (shell, liner, skin: about 4 weeks) | Quotes back; **ball mould ordered** (about 4 weeks). Board layout | Quotes back; plinth, base and lid ordered from flat sheet |
+| 23 Nov | Tinted sheet ordered: a **stock tint** nearest each target, unless the mill's custom tint lands in time | Board sent to fab and assembly (about 3 weeks) | |
+| 7 Dec | Turned and anodised aluminium in | Base, ring and hatch in | **Bearing and pulley in**; speed and rumble on an MDF test plinth |
+| 14 Dec | **Moulds in**; first forming trials before the shutdown, if the former can | **Ball mould in**; first halves formed | Acrylic parts in; assembly; **speed, wow and flutter, rumble** |
+| 21 Dec – 3 Jan | shutdown | shutdown | shutdown (bench tests at home continue) |
+| 4 Jan | Shades formed, bonded, polished | Balls joined and polished; **boards in**, firmware | A working player |
+| 11 Jan | **Closed-shade temperature test** (4 h); cord and catch | Runtime and charge on the real board; wrong-cell test; IP44 | Lid and light; the 100 h bearing run starts |
+| 18 Jan | Hung for an evening in the room | An evening's runtime in the room | Played for an evening in the room |
+| **21 Jan** | **Possible** (about even odds): only if the moulds are in before the shutdown | **Possible as a working prototype**: the ball's joint finish may not be final | **Likely**: no moulds, bought drive |
+| mid-Feb | **Photographed** | **Photographed** | **Photographed** |
+
+**The critical path, in order of risk:**
+1. **The moulds:** the three shade moulds and the ball mould. Ordered by 16 November they land about 14 December,
+   and every week later moves Hemisphere and Core past the shutdown. If the former can't make the dates, ask about
+   free-blowing the shell (RFQ 01, question 10).
+2. **The tinted sheet.** A mill's custom tint is weeks and a pallet. **For January, use the stock colours nearest each
+   tint** (the stock-colour study), and save the matched casts for Milan.
+3. **Mantle's bearing and pulley.** Nothing off the shelf replaces them (`mantle-drive.md`). Ordered by 9 November,
+   they are in by 7 December.
+4. **The driver bench test** (week of 9 November). If the ERP driver fails headroom, the EPtronics is on the bench the
+   same week, so it costs days, not weeks.
+5. **Core's board.** Per-cell switching is new design work. Use the evaluation kit and a hand-wired cell switch for
+   the debut night if the board slips.
+
+**After the debut night:**
+- **mid-February:** photographs of all three;
+- **March:** the tints cast to match, if the owner orders them in January;
+- **12 to 18 April:** Milan with matched tints;
+- **6 to 9 May:** High End Vienna with Mantle.
