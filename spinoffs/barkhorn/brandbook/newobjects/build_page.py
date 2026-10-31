@@ -13,15 +13,15 @@ def md(t):
     return re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', t)
 
 CAP = {
- 'moho': 'Render. Moho on a record: Ember, Dust and Acid under a Fog top, the brass core seen through them. Through the full 66 mm, stock 2423 Ember reads near-black, as it would in hand.',
- 'lithos': 'Render. Lithos lit: the clear guides glow between the eight bands. In stock sheet the deep bands (Ember, Haze, Poison, Smoke) read near-black, as here. Rendered before the switch to Core Sample\'s filament and its clear-and-satin bands.',
- 'ionos': 'Render. Ionos in Ice, its clear middle layer lit as a line; the top disc turns to tune. Through 200 mm of Ice the block reads blue-gray; the color lives at the edges.',
- 'cairn': 'Render. Cairn in Fog with one layer of Ember; faces and sides polished. Seen edge-on, the Ember slab reads near-black.',
- 'bedrock': 'Render. Bedrock in Dust, the inch-thick end-plates stepped, three steel rails. Dust (2422) stays warm and clear at this thickness.',
- 'relief': 'Render. Relief in Fog on a white backing: the green deepens with each layer, like a sea chart in glass.',
+ 'moho': 'Render. Moho on Mantle\'s platter, at true size against a 12-inch record: Dust, Acid and Ice under a Clear top, the brass core seen through them. Lighter custom pours of Dust, Acid and Ice (est.), as is Mantle\'s Dust plinth here; in stock sheet the puck reads darker.',
+ 'lithos': 'Render. Lithos in a room corner, books for scale: the filament shows only at the clear guides, which glow warm between the eight bands, buffed clear and satin in turn at Core Sample\'s 12.7 mm pitch. The colored bands are lighter custom pours (est.); in stock sheet the deep ones read near-black.',
+ 'ionos': 'Render. Ionos in a lighter custom pour of Ice (est.), its near-clear middle layer unlit; the top disc turns to tune, 24 detents read against the lit index at the front. The electronics tray shows through the bottom layers, as it would.',
+ 'cairn': 'Render. Cairn in Fog with one layer of Dust, stock sheet; faces as cast, sides flame-polished. Window light from behind throws the Dust forward.',
+ 'bedrock': 'Render. Bedrock in stock Dust (2422), the inch-thick end-plates stepped, three steel rails; low daylight from behind throws the amber onto the floor.',
+ 'relief': 'Render. Relief in Fog, lit by its own bar along the top edge: the green deepens with each of the twelve layers, like a sea chart in glass.',
  'meridian': 'Render. Meridian at ten past two: the Acid hour disc and the Ice minute disc cross, and where they overlap the light is green.',
 }
-TINT_OF = {'meridian': 'poison', 'moho': 'ember', 'lithos': 'smoke', 'ionos': 'ice', 'cairn': 'fog', 'bedrock': 'dust', 'relief': 'fog'}
+TINT_OF = {'meridian': 'poison', 'moho': 'dust', 'lithos': 'smoke', 'ionos': 'ice', 'cairn': 'fog', 'bedrock': 'dust', 'relief': 'fog'}
 
 def images():
     for o in six.OBJECTS:
@@ -141,7 +141,7 @@ footer {{ padding-block: 24px 48px; font-family: var(--mono); font-size: 12px; c
 <section class="method">
   <div>
     <h3>How the tints are rendered</h3>
-    <p>Each tint is a volume that absorbs light by the Beer–Lambert law, calibrated so that 3.2 mm of it passes the light that AC Plastics' TruCast stock publishes for the nearest code, in the tint's own hue, with about 8% lost at the two faces. Index 1.49; polished faces clear, sawn faces satin; bonded layers meet at index-matched joints; caustics on. That is why the deep tints read deep: 2423 Red passes 14% through 3.2 mm, so a thick Ember part is nearly black except where light runs through an edge, and why Lithos lights its clear layers rather than its colors.</p>
+    <p>Each tint is a volume that absorbs light by the Beer–Lambert law, calibrated so that 3.2 mm of it passes the light that AC Plastics' TruCast stock publishes for the nearest code, in the tint's own hue, with about 8% lost at the two faces. Index 1.49; polished faces clear, sawn faces satin; bonded layers show as faint, countable joint lines, as a laminate does; caustics on. That is why the deep tints read deep: 2423 Red passes 14% through 3.2 mm, so a thick Ember part is nearly black except where light runs through an edge. So thick parts here are in the light stock tints (Dust, Fog) or in lighter custom pours, captioned as such, and Lithos lights its clear layers rather than its colors.</p>
     <p class="note">Prior art set the rules: thin countable layers with bond lines, no polished monoliths, no ombré, no neon, nothing embedded, and names clear of Strata, Skyline, Totem and Voie. The long list, the prior art, the costing and the scene files are in the repository under spinoffs/barkhorn/brandbook/newobjects/.</p>
   </div>
   <div>

@@ -22,17 +22,24 @@ TINTS = {
     'haze': ('373 Purple', 0.074, '#5B3197'),
     'fog': ('3030 Glass Green', 0.868, '#D5DFE0'),
     'smoke': ('2064 Gray', 0.293, '#57545F'),
+    'clear': ('0000 Clear', 0.92, '#F2F6F4'),     # no tint: only the two surfaces' loss
 }
+# Lighter custom pours for thick parts (est.: a mill pour at a lower dye loading; captioned "custom pour" wherever used)
+POUR = {'ember': 0.80, 'smoke': 0.82, 'haze': 0.76, 'poison': 0.80, 'ice': 0.885, 'dust': 0.88, 'acid': 0.885}
 T_REF, SURF = 0.003175, 0.92
-GAP = -0.00002   # bonded layers overlap by 0.02 mm: an index-matched joint with no air in it
+GAP = 0.0001   # bonded layers sit 0.1 mm apart behind transparent bond faces: an overlap corrupts Cycles' volume stack (rays leave still tinted, so stacks go black), and coplanar faces render black
 
 def srgb_lin(h):
     c = np.array([int(h[i:i + 2], 16) / 255 for i in (1, 3, 5)])
     return np.where(c <= 0.04045, c / 12.92, ((c + 0.055) / 1.055) ** 2.4)
 
 def sigma(tint):
-    """Absorption per metre for R, G, B so that 3.175 mm transmits the tint's hue at its published LT."""
-    _, lt, hx = TINTS[tint]
+    """Absorption per meter for R, G, B so that 3.175 mm transmits the tint's hue at its published LT
+    ('ember-pour' etc.: the same hue at the lighter custom pour's LT)."""
+    base = tint.replace('-pour', '')
+    _, lt, hx = TINTS[base]
+    if tint.endswith('-pour'):
+        lt = POUR[base]
     c = np.clip(srgb_lin(hx), 1e-4, 1)
     target = min(0.999, lt / SURF)
     Y = lambda t: 0.2126 * t[0] + 0.7152 * t[1] + 0.0722 * t[2]
@@ -54,7 +61,7 @@ def reset():
     sc.cycles.use_denoising = True
     sc.cycles.caustics_refractive = True
     sc.cycles.caustics_reflective = True
-    sc.cycles.max_bounces = 24; sc.cycles.transmission_bounces = 24; sc.cycles.volume_bounces = 4
+    sc.cycles.max_bounces = 48; sc.cycles.transmission_bounces = 48; sc.cycles.volume_bounces = 4
     sc.cycles.glossy_bounces = 8; sc.cycles.transparent_max_bounces = 128   # every bond face is a transparent bounce
     sc.cycles.blur_glossy = 0.3
     sc.view_settings.view_transform = 'AgX'
@@ -72,7 +79,10 @@ def acrylic(tint, edge='polished'):
     if name in bpy.data.materials:
         return bpy.data.materials[name]
     m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree
-    if edge == 'bond':
+    if edge == 'bond':   # tested 2026-10-31: a transparent bond face turns a stack black in bands; a glass face over a
+        bpy.data.materials.remove(m)   # 0.1 mm gap reads as a laminate, faint countable lines (the hybrid shader keeps
+        return acrylic(tint, 'polished')   # shadows and inner rays straight, so no TIR darkening)
+    if False:
         nt.nodes.remove(nt.nodes['Principled BSDF'])
         tb = nt.nodes.new('ShaderNodeBsdfTransparent')
         nt.links.new(tb.outputs[0], nt.nodes['Material Output'].inputs['Surface'])
@@ -86,6 +96,14 @@ def acrylic(tint, edge='polished'):
     p.inputs['Transmission Weight'].default_value = 1.0
     p.inputs['IOR'].default_value = 1.49
     p.inputs['Roughness'].default_value = 0.0 if edge == 'polished' else 0.32
+    # Light paths: shadow and diffuse rays pass a transparent face, so the volume colors the shadow by the true path
+    # length (Cycles cannot sample a light through refraction cleanly; MNEE ignores volumes). Camera and glossy rays
+    # see the glass.
+    lp = nt.nodes.new('ShaderNodeLightPath'); mx = nt.nodes.new('ShaderNodeMath'); mx.operation = 'MAXIMUM'
+    nt.links.new(lp.outputs['Is Camera Ray'], mx.inputs[0]); nt.links.new(lp.outputs['Is Glossy Ray'], mx.inputs[1])
+    tr = nt.nodes.new('ShaderNodeBsdfTransparent'); mix = nt.nodes.new('ShaderNodeMixShader')
+    nt.links.new(mx.outputs[0], mix.inputs['Fac']); nt.links.new(tr.outputs[0], mix.inputs[1]); nt.links.new(p.outputs[0], mix.inputs[2])
+    nt.links.new(mix.outputs[0], nt.nodes['Material Output'].inputs['Surface'])
     s = sigma(tint); D = float(s.max())
     v = nt.nodes.new('ShaderNodeVolumeAbsorption')
     v.inputs['Color'].default_value = tuple(1 - s / D) + (1.0,)
@@ -237,89 +255,100 @@ def camera(loc, target, lens=50, fstop=0.0, focus=None):
 
 # ---------------------------------------------------------------------------------------------------------- the shots
 def shot_moho(sc):
-    sweep('#9A948B', 0.85, z0=-0.013, y_wall=0.35, R=0.25)
-    rec = basic('vinyl', '#0C0B0E', 0.16)
-    ring('platter', 0.152, 0, -0.013, 0.010, basic('mat', '#2B2A2E', 0.9))
-    ring('record', 0.1505, 0.0036, -0.0028, 0.0019, rec)
-    lab = ring('label', 0.050, 0.0036, -0.0009, 0.0008, basic('label', '#ECE8E1', 0.7)); caustic(lab, False, True)
-    ring('spindle', 0.0036, 0, -0.013, 0.030, basic('steel', '#C9CCCF', 0.15, 1.0))
-    t = ['ember', 'dust', 'acid', 'fog']
+    sweep('#CFC8BD', 0.85, z0=-0.075, y_wall=0.9, R=0.4)
+    # Mantle, as far as the frame needs it: the plinth and platter in Dust (2422), the record, the spindle
+    slab('plinth', -0.235, -0.19, -0.075, 0.235, 0.19, -0.049, acrylic('dust-pour'))
+    ring('platter', 0.155, 0, -0.047, 0.025, acrylic('dust-pour'))
+    rec = basic('vinyl', '#0C0B0E', 0.14)
+    ring('record', 0.1524, 0.0036, -0.0021, 0.0020, rec)
+    ring('label', 0.0505, 0.0036, -0.0002, 0.0001, basic('label', '#2C3442', 0.65))
+    ring('label-ring', 0.040, 0.0385, -0.0001, 0.00005, basic('label-ink', '#C9C2B6', 0.6))
+    ring('spindle', 0.0036, 0, -0.047, 0.060, basic('steel', '#C9CCCF', 0.15, 1.0))
+    t = ['dust-pour', 'acid-pour', 'ice-pour', 'clear']
     for i, tn in enumerate(t):
-        z0 = i * 0.0127
-        ring(f'moho{i}', 0.033, 0.0125, z0 + GAP / 2, 0.0127 - GAP, acrylic(tn),
+        ring(f'moho{i}', 0.033, 0.0125, i * 0.0127 + GAP / 2, 0.0127 - GAP, acrylic(tn),
              bond_top=acrylic(tn, 'bond') if i < 3 else None, bond_bottom=acrylic(tn, 'bond') if i > 0 else None)
     ring('brass', 0.01245, 0.0039, 0.0002, 4 * 0.0127 - 0.0006, basic('brass', '#B8923F', 0.22, 1.0))
     sc.render.resolution_x, sc.render.resolution_y = 1800, 1200
-    area('key', (-0.5, -0.35, 0.55), (0, 0, 0.02), 0.5, 14)
-    area('wallwash', (0, 0.05, 0.6), (0, 0.35, 0.15), 0.8, 30, '#FFF1E2')
-    spot('back', (-0.05, 0.55, 0.12), (0, 0, 0.025), 90, 14, 0.003)
-    spot('hard', (0.5, 0.15, 0.16), (0, 0, 0.025), 40, 16, 0.003)
-    camera((0.30, -0.46, 0.15), (0.0, 0.0, 0.022), lens=90, fstop=8.0)
+    area('window', (-0.9, 1.3, 0.35), (0, 0, 0.02), 0.9, 1400, '#FFF4E6')   # daylight from behind left: edges glow, shadows fall forward
+    area('key', (0.6, -0.8, 0.9), (0, 0, 0.0), 0.8, 30, '#EEF2F8')
+    area('rim', (0.7, 0.9, 0.25), (0, 0, 0.03), 0.4, 60, '#FFE8D0')
+    camera((0.24, -0.42, 0.11), (0.0, 0.0, 0.024), lens=60, fstop=5.6)
 
 def shot_lithos(sc):
-    sweep('#B9B2A6', 0.9, w=8, depth=6, height=4, R=0.8, y_wall=0.9)
+    # a room corner: oak floor, two plaster walls, a stack of books for scale, window light from the left
+    slab('floor', -1.5, -2.5, -0.03, 1.5, 0.8, 0.0, basic('oak', '#9A7650', 0.5, noise=0.04))
+    slab('wallB', -1.5, 0.8, 0, 1.5, 0.85, 3, basic('plaster', '#DCD5CA', 0.9, noise=0.1))
+    slab('wallL', -1.55, -2.5, 0, -1.5, 0.85, 3, basic('plaster2', '#DCD5CA', 0.9, noise=0.1))
     ring('base', 0.16, 0, 0, 0.02, basic('steel-black', '#1B1A1C', 0.35, 0.8))
     counts = [11, 8, 12, 9, 16, 7, 14, 10]
-    tints = ['smoke', 'haze', 'ice', 'poison', 'acid', 'dust', 'fog', 'ember']   # bottom to top
+    tints = ['smoke-pour', 'haze-pour', 'ice-pour', 'poison-pour', 'acid-pour', 'dust-pour', 'clear', 'ember-pour']   # bottom to top
+    P = 0.0127
     z = 0.02
     guides = []
     def guide(z):
         ring(f'guide{len(guides)}', 0.055, 0.0385, z + GAP / 2, 0.0056 - GAP, acrylic('fog'),
              bond_top=acrylic('fog', 'bond'), bond_bottom=acrylic('fog', 'bond') if z > 0.021 else None)
         guides.append(z)
-    for n, tn in zip(counts, tints):
+    for b, (n, tn) in enumerate(zip(counts, tints)):
         guide(z); z += 0.0056
-        ring(f'band{tn}', 0.055, 0.038, z + GAP / 2, n * 0.0127 - GAP, acrylic(tn), bond_top=acrylic(tn, 'bond'), bond_bottom=acrylic(tn, 'bond'))
-        z += n * 0.0127
+        satin = acrylic(tn, 'saw') if b % 2 else None   # as Core Sample: bands buffed clear or bead-blasted satin
+        ring(f'band{b}', 0.055, 0.038, z + GAP / 2, n * P - GAP, acrylic(tn), side_mat=satin, bond_top=acrylic(tn, 'bond'), bond_bottom=acrylic(tn, 'bond'))
+        z += n * P
     guide(z); z += 0.0056
     top = z
-    # the bore: an aluminium tube, slotted at each guide, with the LED line inside: light leaves only into the guides
-    ring('tube', 0.037, 0.034, 0.02, top - 0.02, basic('white-tube', '#EDEAE4', 0.5))
+    ring('opal', 0.037, 0.034, 0.02, top - 0.02, basic('mask', '#EDEAE4', 0.5))   # the filament's opal tube, masked between the guides
     for i, gz in enumerate(guides):
-        ring(f'slot{i}', 0.0372, 0.0368, gz + 0.0008, 0.004, emitter(f'slot{i}', '#FFC28A', 18))
-    ring('uplight', 0.03, 0, top - 0.004, 0.002, emitter('up', '#FFD2A0', 60))
+        ring(f'slot{i}', 0.0372, 0.0368, gz + 0.0006, 0.0044, emitter(f'slot{i}', '#FFB46E', 220))
+    ring('uplight', 0.03, 0, top - 0.004, 0.002, emitter('up', '#FFD2A0', 80))
+    for i, (w, d, h, c) in enumerate([(0.24, 0.17, 0.035, '#3E4A5A'), (0.22, 0.16, 0.03, '#C8BBA4'), (0.2, 0.15, 0.028, '#7A2E25'), (0.19, 0.13, 0.025, '#2E2B28')]):
+        zb = sum(x[2] for x in [(0.24, 0.17, 0.035), (0.22, 0.16, 0.03), (0.2, 0.15, 0.028), (0.19, 0.13, 0.025)][:i])
+        o = slab(f'book{i}', -w / 2, -d / 2, zb, w / 2, d / 2, zb + h, basic(f'bk{i}', c, 0.7))
+        o.location = (0.34, -0.12, 0); o.rotation_euler = (0, 0, 0.3 + 0.08 * i)
     sc.render.resolution_x, sc.render.resolution_y = 1200, 1800
-    area('key', (-1.3, -1.2, 1.5), (0, 0, 0.6), 1.0, 35, '#FFEBD8')
-    area('fill', (1.4, -1.6, 0.9), (0, 0, 0.6), 1.2, 8, '#DDE6F2')
-    area('ceiling-wash', (0, 0.0, 1.9), (0, 0.6, 2.4), 0.3, 25, '#FFD2A0')
-    camera((0.85, -2.05, 0.80), (0, 0, 0.57), lens=50, fstop=0)
+    area('window', (-1.45, -0.6, 1.5), (0.0, 0.0, 0.6), 1.4, 420, '#FFF1E2', size_y=1.0)
+    area('fill', (1.2, -2.2, 1.0), (0, 0, 0.6), 1.2, 40, '#DDE6F2')
+    camera((0.75, -2.05, 0.85), (0.08, 0, 0.6), lens=42, fstop=0)
 
 def shot_ionos(sc):
-    sweep('#CFC8BD', 0.85, z0=-0.04, y_wall=0.6, R=0.3)
-    slab('sideboard', -0.6, -0.3, -0.04, 0.6, 0.25, 0.0, basic('walnut', '#3B2618', 0.45, noise=0.05))
-    tn = 'ice'
+    sc.world.node_tree.nodes['Background'].inputs['Color'].default_value = lin('#D9D3CA')
+    sc.world.node_tree.nodes['Background'].inputs['Strength'].default_value = 0.55   # the room around the sideboard
+    sweep('#D6CFC4', 0.85, z0=-0.04, y_wall=0.6, R=0.3)
+    slab('sideboard', -0.6, -0.3, -0.04, 0.6, 0.25, 0.0, basic('limestone', '#E4DED3', 0.55, noise=0.08))
+    card = slab('card', -0.3, -0.75, 0.0, 0.3, -0.74, 0.4, basic('card', '#F4F1EC', 0.9)); card.visible_camera = False
+    tn = 'ice-pour'
     W, D, L = 0.2, 0.11, 0.0127
     x0, y0 = -W / 2, -D / 2
     for i in range(9):
         z0 = i * L + GAP / 2; z1 = (i + 1) * L - GAP / 2
-        if i == 4:   # the clear layer, a frame round a hidden light, its outer edges satin so the line glows softly
-            f = slab('fog', x0, y0, z0, x0 + W, y0 + D, z1, acrylic('fog'), acrylic('fog', 'saw'))
-            cut = slab('fogcut', x0 + 0.02, y0 + 0.02, z0 - 0.001, x0 + W - 0.02, y0 + D - 0.02, z1 + 0.001, acrylic('fog'))
-            mod = f.modifiers.new('cut', 'BOOLEAN'); mod.operation = 'DIFFERENCE'; mod.object = cut; mod.solver = 'EXACT'
-            bpy.context.view_layer.objects.active = f; bpy.ops.object.modifier_apply(modifier='cut')
-            bpy.data.objects.remove(cut)
-            slab('light', x0 + 0.03, y0 + 0.03, z0 + 0.002, x0 + W - 0.03, y0 + D - 0.03, z1 - 0.002, emitter('lineglow', '#FFD9B0', 60))
-        else:
-            slab(f'layer{i}', x0, y0, z0, x0 + W, y0 + D, z1, acrylic(tn),
-                 bond_top=acrylic(tn, 'bond') if i not in (3, 8) else None, bond_bottom=acrylic(tn, 'bond') if i not in (0, 5) else None)
-    ring('disc', 0.05, 0, 9 * L + 0.0005, 0.0127, acrylic(tn))
-    ring('disc-dot', 0.0016, 0, 9 * L + 0.0133, 0.0003, emitter('dot', '#FFD9B0', 30))
-    slab('backplate', x0 + 0.01, y0 + D + 0.0002, 0.006, x0 + W - 0.01, y0 + D + 0.0032, 9 * L - 0.006, basic('alu', '#8E9196', 0.35, 1.0))
+        bt = 'fog' if i == 4 else tn
+        mat = acrylic(bt); b = acrylic(bt, 'bond')
+        slab(f'layer{i}', x0, y0, z0, x0 + W, y0 + D, z1, mat, bond_top=b if i < 8 else None, bond_bottom=b if i > 0 else None)
+    # the top disc, the tuner: 24 detent marks round its rim, read against a lit index at the front edge
+    ring('disc', 0.05, 0, 9 * L + 0.0004, 0.0127, acrylic('ice-pour'))
+    for k in range(24):
+        a = 2 * math.pi * k / 24
+        o = slab(f'tick{k}', -0.0006, -0.004, 0, 0.0006, 0.0, 0.0004, basic('etch', '#F3F1EC', 0.4))
+        o.rotation_euler = (0, 0, a); o.location = (0.046 * math.sin(a), -0.046 * math.cos(a) + 0.0, 9 * L + 0.0131)
+    slab('index', -0.0012, y0 + 0.004, 9 * L - 0.0003, 0.0012, y0 + 0.01, 9 * L + 0.0002, emitter('index', '#FFD9B0', 25))
+    slab('backplate', -0.045, y0 + D + 0.0002, 0.004, 0.045, y0 + D + 0.0032, 0.030, basic('alu', '#8E9196', 0.35, 1.0))
+    # the machined pocket, honestly: the electronics in a black anodized tray, in the bottom two layers, seen through the block
+    slab('tray', -0.06, -0.035, 0.003, 0.06, 0.045, 0.024, basic('tray', '#1C1B1E', 0.4, 0.6))
     sc.render.resolution_x, sc.render.resolution_y = 1800, 1200
-    area('key', (-0.7, -0.6, 0.7), (0, 0, 0.06), 0.8, 70)
-    area('rim', (0.5, 0.6, 0.45), (0, 0, 0.06), 0.6, 45, '#E6ECF5')
-    spot('hard', (-0.2, 0.7, 0.3), (0, 0, 0.06), 60, 18, 0.004)
-    camera((0.42, -0.62, 0.30), (0.0, 0.0, 0.055), lens=70, fstop=5.6)
+    area('window', (-1.1, 0.9, 0.7), (0, 0, 0.06), 0.9, 500, '#FFF4E6')
+    area('rim', (0.6, 0.7, 0.35), (0, 0, 0.12), 0.5, 260, '#FFE8D0')
+    area('key', (0.5, -0.9, 0.8), (0, 0, 0.06), 0.8, 25, '#EEF2F8')
+    camera((0.30, -0.56, 0.31), (0.0, -0.005, 0.075), lens=70, fstop=5.6)
 
 def shot_cairn(sc):
-    sweep('#ECE8E1', 0.9)
-    slabs = [(0.16, 0.12, 0.0, 'fog'), (0.14, 0.11, 0.008, 'fog'), (0.12, 0.10, -0.006, 'ember'), (0.10, 0.09, 0.009, 'fog'), (0.08, 0.08, -0.004, 'fog')]
+    sweep('#C9C2B6', 0.9)
+    slabs = [(0.16, 0.12, 0.0, 'fog'), (0.14, 0.11, 0.008, 'fog'), (0.12, 0.10, -0.006, 'dust'), (0.10, 0.09, 0.009, 'fog'), (0.08, 0.08, -0.004, 'fog')]
     cols = ['#3A3634', '#5C5650', '#C8BBA4', '#2F3B4A', '#8A7F70', '#1E1E22']
     rng = np.random.default_rng(3)
     books = [(float(rng.uniform(0.024, 0.038)), float(rng.uniform(0.2, 0.245)), float(rng.uniform(0.13, 0.155))) for _ in cols]
     span = sum(b[0] + 0.001 for b in books)
     for side, sgn in (('L', -1), ('R', 1)):
-        cx = sgn * (span / 2 + 0.08)   # each stack's inner edge meets the books
+        cx = sgn * (span / 2 + 0.08)
         for i, (w, d, off, tn) in enumerate(slabs):
             z0 = i * 0.0127 + GAP / 2
             x = cx - sgn * off
@@ -330,13 +359,14 @@ def shot_cairn(sc):
         slab(f'book{c}', x, -dp / 2, 0.0, x + th, dp / 2, hgt, basic(f'cloth{c}', c, 0.75))
         x += th + 0.001
     sc.render.resolution_x, sc.render.resolution_y = 1800, 1200
-    area('key', (-0.9, -0.8, 1.0), (0, 0, 0.05), 1.0, 90)
-    spot('back', (-0.55, 0.65, 0.28), (-span / 2 - 0.08, 0, 0.02), 220, 16, 0.004, '#FFF0DA')
-    area('fill', (0.6, -0.9, 0.3), (-0.2, 0, 0.04), 0.8, 25, '#E6ECF5')
-    camera((-0.02, -0.46, 0.13), (-span / 2 - 0.07, 0, 0.035), lens=65, fstop=5.6)
+    area('window', (-1.2, 0.9, 0.35), (-span / 2 - 0.08, 0, 0.02), 0.7, 260, '#FFF4E6')
+    area('key', (0.4, -1.0, 0.9), (-0.15, 0, 0.04), 1.0, 12, '#EEF2F8')
+    camera((-0.02, -0.46, 0.21), (-span / 2 - 0.05, 0, 0.04), lens=50, fstop=8)
 
 def shot_bedrock(sc):
-    sweep('#C9C2B6', 0.85)
+    sc.world.node_tree.nodes['Background'].inputs['Color'].default_value = lin('#D9D3CA')
+    sc.world.node_tree.nodes['Background'].inputs['Strength'].default_value = 0.4
+    sweep('#C9C2B6', 0.85, w=10.0, depth=6.0)
     prof = [(0, 0), (0.30, 0), (0.30, 0.15), (0.25, 0.15), (0.25, 0.185), (0.18, 0.185), (0.18, 0.215), (0.09, 0.215), (0.09, 0.23), (0, 0.23)]
     tn = 'dust'
     for xi in (-0.235, 0.235 - 0.0254):
@@ -358,8 +388,8 @@ def shot_bedrock(sc):
         o.location = (x, 0.0, 0.02); o.rotation_euler = (0, lean, 0)
         x += th + 0.0015
     sc.render.resolution_x, sc.render.resolution_y = 1800, 1200
-    area('key', (-1.2, -1.0, 1.3), (0, 0, 0.15), 1.4, 220)
-    spot('sun', (-1.0, 0.5, 0.5), (-0.235, 0, 0.1), 200, 22, 0.004, '#FFF0DA')
+    area('key', (-1.2, -1.0, 1.3), (0, 0, 0.15), 1.4, 120)
+    spot('sun', (-1.1, 0.9, 0.55), (-0.2, -0.1, 0.05), 900, 26, 0.004, '#FFF0DA')   # low daylight from behind: the plates throw amber forward
     area('fill', (1.0, -1.4, 0.6), (0, 0, 0.15), 1.2, 40, '#E6ECF5')
     camera((-0.95, -0.75, 0.42), (0.05, 0, 0.14), lens=50, fstop=0)
 
@@ -370,18 +400,18 @@ def shot_relief(sc):
     k = 0.001; th = 0.0056
     slab('backing', -0.3, -0.006, 0.9, 0.3, 0.0, 1.5, basic('white-back', '#F2F0EC', 0.6))
     base_m = acrylic('fog')
-    slab('base', -0.3, -0.006 - th - 0.00002, 0.9, 0.3, -0.0060001, 1.5, base_m)
+    slab('base', -0.3, -0.006 - th + GAP / 2, 0.9, 0.3, -0.006 - GAP / 2, 1.5, base_m)
     for lev, loops in layers():   # each contour island a prism (the terrain is all hills, so no loop has a hole)
         for li, l in enumerate(loops):
             pts = [(float(x) * k, float(y) * k) for x, y in l[::2]]
             if len(pts) > 2:
                 area_ = sum(pts[i][0] * pts[(i + 1) % len(pts)][1] - pts[(i + 1) % len(pts)][0] * pts[i][1] for i in range(len(pts)))
                 if area_ < 0: pts = pts[::-1]
-            o = extrude_poly(f'lev{lev}-{li}', pts, 0, th + 0.00002, base_m, cap_mat=acrylic('fog', 'bond'))
+            o = extrude_poly(f'lev{lev}-{li}', pts, 0, th - GAP, base_m)
             o.rotation_euler = (math.pi / 2, 0, 0)
             o.location = (0, -0.006 - th - (lev - 1) * th + 0.0, 1.2)
     sc.render.resolution_x, sc.render.resolution_y = 1800, 1200
-    spot('gallery', (-0.7, -1.3, 2.3), (0, -0.03, 1.2), 900, 22, 0.01, '#FFEEDC')
+    area('bar', (0.0, -0.075, 1.53), (0.0, -0.01, 0.95), 0.6, 120, '#FFEEDC', size_y=0.015)   # its LED bar: a line of light just above the top edge, washing down
     area('room', (1.2, -2.2, 1.3), (0, 0, 1.2), 2.0, 60, '#E8EEF6')
     camera((0.55, -1.55, 1.25), (0.0, -0.03, 1.2), lens=50, fstop=0)
 
@@ -412,7 +442,7 @@ def shot_meridian(sc):
     area('key', (-1.2, -1.6, 2.0), (0, 0, cz), 1.2, 35)
     spot('rake', (-0.9, -0.55, 2.0), (0.05, -0.03, cz), 380, 20, 0.006, '#FFF1E0')
     area('fill', (1.2, -1.6, 1.3), (0, 0, cz), 1.2, 14, '#E6ECF5')
-    camera((0.42, -1.45, 1.33), (0.02, -0.03, cz - 0.01), lens=55, fstop=0)
+    camera((0.26, -0.98, 1.38), (0.02, -0.03, cz - 0.005), lens=55, fstop=0)
 
 SHOTS = dict(moho=shot_moho, lithos=shot_lithos, ionos=shot_ionos, cairn=shot_cairn, bedrock=shot_bedrock, relief=shot_relief, meridian=shot_meridian)
 

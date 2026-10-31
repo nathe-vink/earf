@@ -92,7 +92,7 @@ A block of nine bonded layers of one tint, 200 × 110 × 115 mm, with a near-cle
 | Weight | about 2.4 kg (est.) |
 | Compliance | FCC Part 15B on the product; the Wi-Fi module carries its own grant |
 
-**Materials and process.** Laminate the block, machine the pocket and the top recess, polish all faces; turn the top disc; fit the electronics, sensor and bearing; back plate in anodised aluminum.
+**Materials and process.** Laminate the block, machine the pocket and the top recess, polish all faces; turn the top disc; fit the electronics, sensor and bearing; back plate in anodized aluminum.
 
 | BOM line (a run of 100, est.) | USD |
 |---|---|
@@ -116,7 +116,7 @@ A block of nine bonded layers of one tint, 200 × 110 × 115 mm, with a near-cle
 
 *Stones stacked to mark a way.*
 
-Five slabs of half-inch sheet, each smaller than the one below and set a little off its center, bonded into a stepped stack like stones on a trail. Two tints to a pair, never a rainbow: Fog with one layer of Ember, say, or Smoke with one of Acid. The slabs' faces are the sheet's own polish and their sides are flame-polished, so the stack reads as layered glass, the Ember running through it. A stainless tongue under the bottom slab goes under the books and holds them.
+Five slabs of half-inch sheet, each smaller than the one below and set a little off its center, bonded into a stepped stack like stones on a trail. Two tints to a pair, never a rainbow: Fog with one layer of Dust, say, or Smoke with one of Acid. The slabs' faces are the sheet's own polish and their sides are flame-polished, so the stack reads as layered glass, the Dust running through it. A stainless tongue under the bottom slab goes under the books and holds them.
 
 | Dimension | |
 |---|---|

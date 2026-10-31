@@ -53,7 +53,7 @@ class D:
 def moho():
     d = D('Moho', 'record weight · four layers 1/2" · brass core', '01'); k = 5.5
     x0, y0 = 220, 560; w, h = 66 * k, 50.8 * k
-    tints = ['ember', 'dust', 'acid', 'fog']
+    tints = ['dust', 'acid', 'ice', 'fog']
     for i, t in enumerate(tints):
         d.rect(x0, y0 - (i + 1) * 12.7 * k, w, 12.7 * k, fill=TINT[t], op=0.35, sw=1.2)
     d.rect(x0 + (66 - 25) / 2 * k, y0 - h, 25 * k, h, fill='#B08D57', op=0.35, sw=1, dash='6 4')
@@ -126,7 +126,7 @@ def ionos():
 def cairn():
     d = D('Cairn', 'bookends · five layers 1/2" · two tints · polished sides', '04'); k = 2.6
     x0, y0 = 160, 600
-    slabs = [(160, 0, 'fog'), (140, 8, 'fog'), (120, -6, 'ember'), (100, 9, 'fog'), (80, -4, 'fog')]
+    slabs = [(160, 0, 'fog'), (140, 8, 'fog'), (120, -6, 'dust'), (100, 9, 'fog'), (80, -4, 'fog')]
     for i, (sw_, off, t) in enumerate(slabs):
         cx = x0 + 80 * k + off * k
         d.rect(cx - sw_ / 2 * k, y0 - (i + 1) * 12.7 * k, sw_ * k, 12.7 * k, fill=TINT[t], op=0.45, sw=1.2)

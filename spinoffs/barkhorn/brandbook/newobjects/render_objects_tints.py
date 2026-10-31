@@ -8,4 +8,5 @@ TINTS = {
     'haze': ('373 Purple', 0.074, '#5B3197'),
     'fog': ('3030 Glass Green', 0.868, '#D5DFE0'),
     'smoke': ('2064 Gray', 0.293, '#57545F'),
+    'clear': ('0000 Clear', 0.92, '#F2F6F4'),
 }

@@ -51,7 +51,7 @@ OBJECTS = [
   dims=[('Block', '200 W × 110 D × 115 H mm (nine layers of 12.7 mm)'), ('Top disc', 'Ø 100 × 12.7 mm, on a bearing, 24 detents'),
         ('Light', 'a 5.6 mm clear 3030 layer at mid-height, edge-lit from inside'), ('Inside', 'a machined pocket: a single-board computer, a DAC board, a magnetic angle sensor'),
         ('Outputs', 'RCA line, optical, coaxial; USB-C power'), ('Weight', 'about 2.4 kg (est.)'), ('Compliance', 'FCC Part 15B on the product; the Wi-Fi module carries its own grant')],
-  process='Laminate the block, machine the pocket and the top recess, polish all faces; turn the top disc; fit the electronics, sensor and bearing; back plate in anodised aluminum.',
+  process='Laminate the block, machine the pocket and the top recess, polish all faces; turn the top disc; fit the electronics, sensor and bearing; back plate in anodized aluminum.',
   bom=[('Sheet: nine layers of 1/2", 200 × 110', lambda: sheet('1/2', 9 * 0.2 * 0.11)), ('Top disc and clear layer', lambda: sheet('1/2', 0.11**2) + sheet('1/4', 0.2 * 0.11)),
        ('Lamination, pocket machining, polishing: 2.5 h', lambda: RATE * 2.5), ('Top disc turning: 25 min', lambda: RATE * 0.4),
        ('Single-board computer (2 GB class)', lambda: 50), ('DAC board with outputs', lambda: 70), ('Angle sensor, bearing, detent', lambda: 18),
@@ -60,8 +60,8 @@ OBJECTS = [
   price=1450, role='A listening object below Tropos\'s price: a gift for the hi-fi crowd, a hotel room\'s radio, the add-on that makes a pair complete.'),
  dict(key='cairn', name='Cairn', what='Bookends', tag='Stones stacked to mark a way.',
   concept=("Five slabs of half-inch sheet, each smaller than the one below and set a little off its center, bonded into a stepped stack "
-           "like stones on a trail. Two tints to a pair, never a rainbow: Fog with one layer of Ember, say, or Smoke with one of Acid. The slabs' faces are the sheet's "
-           "own polish and their sides are flame-polished, so the stack reads as layered glass, the Ember running through it. A stainless tongue under the "
+           "like stones on a trail. Two tints to a pair, never a rainbow: Fog with one layer of Dust, say, or Smoke with one of Acid. The slabs' faces are the sheet's "
+           "own polish and their sides are flame-polished, so the stack reads as layered glass, the Dust running through it. A stainless tongue under the "
            "bottom slab goes under the books and holds them."),
   dims=[('Each', 'about 160 W × 120 D × 64 H mm (five layers of 12.7 mm)'), ('Slabs', '160×120, 140×110, 120×100, 100×90, 80×80 mm, offset ±8 mm'),
         ('Tongue', '2 mm stainless, 120 × 100 mm, let into the base'), ('Weight', 'about 1.1 kg each (est.)')],
