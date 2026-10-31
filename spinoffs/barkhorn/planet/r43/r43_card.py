@@ -6,18 +6,18 @@ fixed and what may change, and every setting as rendered, in the format of round
 import json, sys
 
 FOR = {
-    'shop': 'the hero of the pop-up: its shop, from just inside the door at night. Blackened-steel and oak shelving runs '
-            'the right-hand wall with EARF\'s Core table lamps in their eight tints, a Mantle record player and records, '
-            'a price card at each piece; a Tropos speaker in Ice on a low oak plinth at its end; a long walnut table with '
-            'two Cores, a second Mantle and a bowl of EARFcoins; Hemisphere pendants hung low in tints; the portable bar '
-            'a partner pours from, standing ledges, and at the back the charcoal felt drapes of the listening room. ',
+    'shop': 'the hero of the pop-up: its shop at night, seen from the bar end toward the street. Blackened-steel and oak '
+            'shelving on both walls with EARF\'s Core table lamps in their tints, Mantle record players and records, a '
+            'price card at each piece; a long walnut table with two Cores, a Mantle and a bowl of EARFcoins; Hemisphere '
+            'pendants hung low in tints; and in the window, against the street, the Tropos pair in Ember on its low black '
+            'plinth, facing out. ',
     'window': 'the pop-up from the sidewalk at night, as a passer-by sees it: one big pane of shopfront glass, a Tropos '
               'pair in Ember on a low black plinth in the window facing the street, the shop lit behind them (the shelves '
               'on both walls, the Hemispheres, the table, the bar), the felt drapes at the back. It has to stop someone '
               'walking past. ',
     'listening': 'the pop-up\'s listening room, behind the felt: a room of charcoal felt drapes on a ceiling track, a wool '
-                 'rug, ten oak chairs in two rows facing a Tropos speaker in Smoke on an oak plinth either side, toed in '
-                 'to the middle seat; the decks on a table by the drape. Quiet is the rule here. ',
+                 'rug, ten oak chairs in two rows facing the Tropos pair in Ember on oak plinths either side, toed in to '
+                 'the middle seat; the decks on a table by the drape. Quiet is the rule here. ',
 }
 
 CONTEXT = """**The project:** a design mockup of the Planet EARF pop-up, the first step toward a proposed listening bar in
@@ -36,7 +36,8 @@ generic shop?"""
 FIXED = """**Fixed (never change):** EARF's products (their shape, colour and parts): the Tropos speakers (1293 mm tall,
 tinted cast-acrylic cabinets with white batts inside, a resin horn), the Hemisphere pendant and the Core table lamp
 (tinted acrylic with a frosted liner within), the Mantle record player, the EARFcoins, each in its tint as placed (the
-shop shows the line in its tints, as a shop does; the listening pair is in Smoke). The plan (drawing A-401): the room's
+shop shows the line in its tints, as a shop does). Only one Tropos pair exists, in Ember: it stands in the window and is
+moved to the listening room's plinths for sessions, so a frame shows it in one place or the other, never two pairs. The plan (drawing A-401): the room's
 size, the zones front to back (window, shop, bar, listening room, back of house), where the shelves, table, bar, ledges,
 drapes, chairs and plinths stand, and their materials."""
 

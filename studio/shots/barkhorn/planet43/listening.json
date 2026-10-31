@@ -31,34 +31,6 @@
    "instances": [
     {
      "position": [
-      0.7,
-      2.42,
-      0.3
-     ],
-     "rotate_z": -84.0,
-     "hide": [
-      "cloth-disc"
-     ]
-    },
-    {
-     "position": [
-      0.7,
-      3.38,
-      0.3
-     ],
-     "rotate_z": -96.0,
-     "hide": [
-      "cloth-disc"
-     ]
-    }
-   ]
-  },
-  {
-   "def": "studio/products/barkhorn-cloud.json",
-   "flavour": "cloud-black",
-   "instances": [
-    {
-     "position": [
       12.8,
       1.75,
       0.4
@@ -75,23 +47,6 @@
       0.4
      ],
      "rotate_z": -49.36,
-     "hide": [
-      "cloth-disc"
-     ]
-    }
-   ]
-  },
-  {
-   "def": "studio/products/barkhorn-cloud.json",
-   "flavour": "cloud-blue",
-   "instances": [
-    {
-     "position": [
-      5.9,
-      0.75,
-      0.26
-     ],
-     "rotate_z": 221.74,
      "hide": [
       "cloth-disc"
      ]
@@ -199,6 +154,7 @@
     "ceiling": "#2E2C2A",
     "floor_tint": "#4E4943",
     "floor_coat": 0.45,
+    "shop_plinth": false,
     "faceout_r": [
      [
       2.2,
@@ -844,44 +800,6 @@
    "blend": 0.7,
    "radius_m": 0.03,
    "color": 2700,
-   "camera": false
-  },
-  "shopspk": {
-   "type": "spot",
-   "position": [
-    5.0,
-    2.2,
-    3.6
-   ],
-   "target": [
-    5.9,
-    0.75,
-    0.9
-   ],
-   "power_w": 40.0,
-   "cone_deg": 22.0,
-   "blend": 0.7,
-   "radius_m": 0.03,
-   "color": 2700,
-   "camera": false
-  },
-  "shopspk-rim": {
-   "type": "spot",
-   "position": [
-    6.6,
-    0.55,
-    3.0
-   ],
-   "target": [
-    5.9,
-    0.75,
-    0.8
-   ],
-   "power_w": 12.0,
-   "cone_deg": 25.0,
-   "blend": 0.7,
-   "radius_m": 0.03,
-   "color": 2600,
    "camera": false
   },
   "bar": {

@@ -29,9 +29,14 @@ VIEWS = {
     # p2 (p1 judged 4.5/4.5, converged: the bare foreground floor the brightest thing, lit by the window pair's spill;
     # the Tropos small, dim and unlit; the felt a flat black wall; no sign of life; 24 mm cavernous): closer at 35 mm,
     # the table leading to the Tropos, which gets its own spot and a rim; the window spill and street down; props
-    'shop': dict(camera={'position': [2.2, 4.6, 1.45], 'target': [7.5, 1.3, 1.0], 'lens_mm': 35, 'level': True,
-                         'fstop': 2.8, 'focus': [5.9, 0.75, 0.9]}, exposure=4.2, haze=0.0012,
-                 lights={'win': {'power_w': 10.0}, 'street': {'irradiance': 0.6}}),
+    # (31 Oct, the coordinator: only one Tropos pair will exist, so the pop-up shows one pair, in Ember, which stands
+    # in the window and moves to the listening room for sessions; the shop's single Tropos and its plinth are gone.)
+    # So the shop is seen from the bar end toward the street: both walls of shelves, the table, the pair in the window
+    # against the street, at 28 mm
+    'shop': dict(camera={'position': [8.2, 2.1, 1.45], 'target': [0.6, 3.6, 1.10], 'lens_mm': 28, 'level': True,
+                         'fstop': 4.0, 'focus': [3.6, 3.5, 0.9]}, exposure=4.2, haze=0.0012, pair='window',
+                 lights={'win': {'power_w': 40.0, 'cone_deg': 26.0}, 'street': {'irradiance': 0.05}},
+                 room={'windows_lit': 0.15, 'window_glow': 0.6}),
     # p0 look: the opposite building's windows and lit shop mirrored in the glass as white squares and a blue band, the
     # sidewalk hot, a mullion down the middle: the facade dimmed, the glass a softer reflector, one pane, the street lamp down
     # p2 (p1 judged 4.5/4.0, converged: a hard blue rectangle on the glass, which was the placeholder shop opposite
@@ -41,14 +46,16 @@ VIEWS = {
     'window': dict(camera={'position': [-3.8, 2.3, 1.35], 'target': [2.4, 3.3, 1.2], 'lens_mm': 40, 'level': True,
                            'fstop': 5.6, 'focus': [0.7, 2.9, 1.0]}, exposure=4.0, haze=0.002,
                    room={'windows_lit': 0.0, 'opp_shop_glow': 0.0, 'glass_gloss': 0.35},
-                   lights={'street': {'irradiance': 0.05}, 'fill': {'irradiance': 0.2}, 'win': {'power_w': 60.0, 'cone_deg': 26.0}}),
+                   lights={'street': {'irradiance': 0.05}, 'fill': {'irradiance': 0.2}, 'win': {'power_w': 60.0, 'cone_deg': 26.0}},
+                   pair='window'),
     # p0 look: too dark, the left stack out of frame: the camera back by the drape's opening, both stacks in; the
     # stacks' spots, the seats' light and the exposure up
     'listening': dict(camera={'position': [9.85, 2.2, 1.25], 'target': [13.3, 3.8, 0.85], 'lens_mm': 20, 'level': True,
                               'fstop': 4.0, 'focus': [12.6, 3.6, 0.8]}, exposure=3.6,
                       # p1 proof, seen before judging: overexposed (median 111, the seats and rug blown): exposure 5.0 to
                       # 3.6, the seats' light and the back felt's wash halved
-                      lights={'stack': {'power_w': 90.0}, 'seats': {'power_w': 15.0}, 'drape': {'irradiance': 0.8}}),
+                      lights={'stack': {'power_w': 90.0}, 'seats': {'power_w': 15.0}, 'drape': {'irradiance': 0.8}},
+                      pair='listening'),
 }
 
 
@@ -62,13 +69,13 @@ def spot(pos, tgt, w, cone, k=2700, blend=0.7):
             'radius_m': 0.03, 'color': k, 'camera': False}
 
 
-def scene():
+def scene(pair='window'):
     W = Q.W
     zc = H - 0.25                                                     # the track's spots
     cards = [(x, SHELF[k], 'right') for x in (1.3, 2.5, 3.7, 4.9) for k in (1, 2)] + \
             [(x, SHELF[2], 'left') for x in (2.0, 3.4, 4.8)]
     props = [{'kind': 'kit', 'shape': 'ext', 'path': KIT43, 'fn': 'popup', 'cards': cards, 'led': 3.0,
-              'felt': '#26272A', 'ceiling': '#2E2C2A', 'floor_tint': '#4E4943', 'floor_coat': 0.45,
+              'felt': '#26272A', 'ceiling': '#2E2C2A', 'floor_tint': '#4E4943', 'floor_coat': 0.45, 'shop_plinth': False,
               'faceout_r': [(2.20, SHELF[1]), (2.60, SHELF[1]), (3.00, SHELF[1]), (4.30, SHELF[2]), (4.70, SHELF[2]),
                             (2.05, SHELF[3]), (5.20, SHELF[3]), (1.10, SHELF[4]), (1.80, SHELF[4]), (3.40, SHELF[4])],
               'faceout_l': [(1.60, SHELF[2]), (2.40, SHELF[2]), (3.80, SHELF[2]), (4.60, SHELF[2]),
@@ -111,11 +118,8 @@ def scene():
     products = [
         {'def': CLOUD, 'flavour': 'cloud-red', 'instances': [
             {'position': [Pw['x'], Pw['y'] + dy, Pw['h']], 'rotate_z': -90.0 + t, 'hide': ['cloth-disc']}
-            for dy, t in ((-0.48, 6.0), (0.48, -6.0))]},
-        {'def': CLOUD, 'flavour': 'cloud-black', 'instances': [
+            for dy, t in ((-0.48, 6.0), (0.48, -6.0))] if pair == 'window' else [
             {'position': [x, y, 0.40], 'rotate_z': _face(x, y, *sweet), 'hide': ['cloth-disc']} for (x, y) in Q.STACKS]},
-        {'def': CLOUD, 'flavour': 'cloud-blue', 'instances': [
-            {'position': [5.90, 0.75, 0.26], 'rotate_z': _face(5.9, 0.75, 3.0, 4.0), 'hide': ['cloth-disc']}]},
         {'def': MANTLE, 'flavour': 'smoke', 'instances': [{'position': [1.85, 0.21, SHELF[1]], 'rotate_z': 180.0},
                                                           {'position': [4.15, 3.95, 0.90], 'rotate_z': 90.0},
                                                           {'position': [10.30, Q.DECKS['y0'] + 0.35, 0.86], 'rotate_z': 90.0}]},
@@ -128,9 +132,6 @@ def scene():
     for i, dy in enumerate((-0.48, 0.48)):                           # the window pair, grazed from the glass side
         lights[f'win{i}'] = spot([0.20, Pw['y'] + dy, 3.30], [0.80, Pw['y'] + dy, 0.95], 26.0, 20.0, k=2600)
     lights['table'] = spot([3.6, 3.75, zc], [3.6, 3.75, 0.9], 8.0, 30.0)
-    # the shop's Tropos: a key from high in front, and a rim from behind (p1: "dim, unlit")
-    lights['shopspk'] = spot([5.0, 2.2, 3.6], [5.9, 0.75, 0.9], 40.0, 22.0)
-    lights['shopspk-rim'] = spot([6.6, 0.55, 3.0], [5.9, 0.75, 0.8], 12.0, 25.0, k=2600)
     lights['bar'] = spot([8.0, W - 1.2, zc], [8.0, W - 1.7, 1.07], 16.0, 30.0)
     for i, (x, y) in enumerate(Q.STACKS):                            # the listening pair
         lights[f'stack{i}'] = spot([11.6, y + (0.4 if y < W / 2 else -0.4), zc], [x, y, 0.95], 34.0, 18.0, k=2600)
@@ -150,7 +151,7 @@ def scene():
 def shot(view):
     s = copy.deepcopy(json.load(open(BASE)))
     v = VIEWS[view]
-    props, products, lights = scene()
+    props, products, lights = scene(v.get('pair', 'window'))
     s['title'] = f'Planet EARF, round 43: the pop-up, {view}'
     s['camera'] = v['camera']
     s['set'] = {'kind': 'stage', 'props': props}
