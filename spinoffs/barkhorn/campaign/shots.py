@@ -20,7 +20,7 @@ def load(path):
     return json.load(open(os.path.join(ROOT, path)))
 
 
-def room(critic_round=3):
+def room(critic_round=4):
     s = load('studio/shots/barkhorn/room31/room.json')
     s['title'] = 'Tropos, a pair at home at golden hour (Poison), round 36 horn'
     s['products'] = [p for p in s['products'] if 'turntable' not in p['def']]
@@ -53,6 +53,20 @@ def room(critic_round=3):
                 p.update(value=0.6, tex_scale=1.0, displace=0.006, tint='#8A7A64', tint_mix=1.0)
             if p.get('fn') == 'sheer' and p.get('seed') == 12:
                 p['open'] = 0.6
+    if critic_round >= 4:                    # look 2 (the coordinator, after round 3's 7.0): round 3's changes (room-r3.json).
+        L = s['lights']                      # The rug's tint did take; it read neutral because the scan is pale (value is
+        L['north']['irradiance'] = 0.8       # a linear multiply) and PBR Neutral desaturates near-white; so darker, as c1
+        L['bounce'].update(position=[0.4, -3.6, 1.0], irradiance=0.55)
+        s['sun'].update(azimuth_deg=-60.0, elevation_deg=15.0)
+        for p in s['set']['props']:
+            if p.get('fn') == 'rug':
+                p.update(value=0.32, tint='#7E6C56', pile=0.022, displace=0.009)
+            if p.get('fn') == 'sheer' and p.get('seed') == 11:
+                p.update(color='#DDD3C4', open=0.45, folds=3)
+            if p.get('fn') == 'floor':
+                p.update(coat=0.25, coat_rough=0.22)
+            if p.get('model') == 'ceramic_vase_02':
+                p['rotate'] = [0, 0, 200]
     return s
 
 

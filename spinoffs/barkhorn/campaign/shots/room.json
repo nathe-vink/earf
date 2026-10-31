@@ -110,8 +110,8 @@
     "res": "4k",
     "rotate_deg": 90.0,
     "rough_mul": 1.0,
-    "coat": 0.15,
-    "coat_rough": 0.35,
+    "coat": 0.25,
+    "coat_rough": 0.22,
     "value": 1.0,
     "offset": [
      0.37,
@@ -165,13 +165,13 @@
      2.4,
      1.5
     ],
-    "pile": 0.016,
+    "pile": 0.022,
     "texture": "poly_wool_herringbone",
-    "tint": "#8A7A64",
+    "tint": "#7E6C56",
     "tint_mix": 1.0,
-    "displace": 0.006,
+    "displace": 0.009,
     "res": "4k",
-    "value": 0.6,
+    "value": 0.32,
     "tex_scale": 1.0
    },
    {
@@ -399,7 +399,7 @@
     "rotate": [
      0,
      0,
-     20
+     200
     ],
     "scale": 1.0
    },
@@ -446,13 +446,13 @@
      0.22,
      2.83
     ],
-    "folds": 1,
+    "folds": 3,
     "amplitude": 0.045,
     "noise": 0.35,
     "seed": 11,
     "res": 140,
-    "open": 0.15,
-    "color": "#F3EEE4"
+    "open": 0.45,
+    "color": "#DDD3C4"
    },
    {
     "kind": "kit",
@@ -530,8 +530,8 @@
   ]
  },
  "sun": {
-  "azimuth_deg": -68.0,
-  "elevation_deg": 17.0,
+  "azimuth_deg": -60.0,
+  "elevation_deg": 15.0,
   "irradiance": 48.0,
   "angle_deg": 1.0,
   "color": "#FFE4C8"
@@ -568,15 +568,15 @@
     0.2,
     0.9
    ],
-   "irradiance": 0.45,
+   "irradiance": 0.8,
    "color": "#DCE4EE"
   },
   "bounce": {
    "type": "area",
    "position": [
-    -0.6,
+    0.4,
     -3.6,
-    1.35
+    1.0
    ],
    "size_m": [
     2.4,
@@ -587,7 +587,7 @@
     0.3,
     1.15
    ],
-   "irradiance": 0.4,
+   "irradiance": 0.55,
    "color": "#FFF0DE"
   },
   "floorbounce": {
