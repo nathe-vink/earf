@@ -1,0 +1,3 @@
+{"stage1": {"score": 5.0}, "verdict": "iterate", "score_if_fixed": 7.3,
+ "changes": ["c1 rim 1.0 x 0.3 m, 250 W through the front plate", "c2 the spot through the plate onto the floor in front", "c3 sweep #6E665D, world 0.12", "c4 key 3 m, off the plate's mirror", "c5 bounces", "c6 75 mm, room for type", "c7 a halo behind", "c8 floor tooth"],
+ "accept": [{"id":"c1","region":[770,600,812,900],"metric":"lum_median","op":">=","value":110},{"id":"c3","region":[350,650,750,950],"metric":"b_median","op":"<=","value":120},{"id":"c4","region":[350,600,750,760],"metric":"lum_range","op":"<=","value":25}]}
