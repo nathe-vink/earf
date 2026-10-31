@@ -107,7 +107,10 @@ def build(spec, ground):
             f'<h3 style="font-size:{name_px}px;font-weight:600;line-height:1.1;letter-spacing:-0.2px;color:{hexc(col)}">'
             f'{esc(c["name"])}</h3>'
             f'<p style="font-size:{line_px}px;line-height:1.35;color:{sub}">{esc(c["line"])}</p></div>')
-        # leader: from the anchor to the label's attach point
+        # The owner ruled out leader lines and dots (2026-10-31): labels sit beside their objects.
+        # Leaders are drawn only if a spec asks for them explicitly.
+        if not S.get('leaders', False) or 'anchor' not in c:
+            continue
         ax, ay = c['anchor']
         tx, ty = c.get('attach') or (lx - 14 if align == 'left' else lx + lw + 14, ly + kind_px * 0.8)
         pts = c.get('via')
@@ -131,7 +134,7 @@ def build(spec, ground):
 
     overlay = ('<svg width="1920" height="1080" viewBox="0 0 1920 1080" aria-hidden="true" '
                'style="position:absolute;left:0;top:0;width:1920px;height:1080px;overflow:visible">'
-               + ''.join(svg) + '</svg>')
+               + ''.join(svg) + '</svg>') if svg else ''
     return parts, overlay, report
 
 def section(spec, src, parts, overlay):
@@ -139,7 +142,7 @@ def section(spec, src, parts, overlay):
            f'height:1080px;object-fit:cover;object-position:{spec.get("pos", "50% 50%")}">')
     return (f'<section id="line" data-transition="fade" style="background:#1C1A18;color:#F4F1EC;'
             f'font-family:\'Instrument Sans\', Arial, sans-serif;padding:0">\n'
-            + img + '\n' + overlay + '\n' + '\n'.join(parts) + '\n'
+            + img + '\n' + (overlay + '\n' if overlay else '') + '\n'.join(parts) + '\n'
             + f'<aside>{esc(spec["notes"])}</aside>\n</section>\n')
 
 def main():

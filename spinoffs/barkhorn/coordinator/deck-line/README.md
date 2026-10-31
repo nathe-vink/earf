@@ -9,8 +9,11 @@ builds the deck section around it.
   dark ink (#1C1A18) on light ground, light (#F4F1EC) on dark; anything under 4.5:1 is flagged.
 - `shoot.js preview.html out.png` renders the preview at 1920x1080 with Playwright (fonts: Instrument Sans and
   IBM Plex Mono from Google Fonts, saved locally next to the builder as `fonts/local.css`).
-- `spec-example.json` is the first layout on a stand-in: header on the shaded upper wall (light ink), Hemisphere,
-  Core and Mantle labels on the sunlit wall (dark ink), Tropos on the shaded wall, pins to each product.
+- `spec-example.json` is the first layout on a stand-in (it had pin lines to each product).
+- **Owner ruling (6a93885f): no leader lines or dots.** The room is re-laid so each piece has an even, neutral label
+  zone beside it, and a label next to each object is enough. The builder draws no leaders unless a spec sets
+  `style.leaders`; labels are placed in the four-pieces lane's label zones (anchors.json). Two versions: golden hour
+  and lights on.
 
 Copy (American English; no starting color; Tropos cover off; Core cordless):
 Tropos, Speaker, "A powered horn loudspeaker." / Hemisphere, Pendant, "A shade that swaps in a quarter turn." /
