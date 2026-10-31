@@ -13,7 +13,8 @@
   "transmission_bounces": 20,
   "view": "Khronos PBR Neutral",
   "exposure": 4.353,
-  "white_balance_k": 3300
+  "white_balance_k": 3300,
+  "white_balance_tint": 2
  },
  "sky": {
   "kind": "hdri",
@@ -119,7 +120,7 @@
     "kind": "kit",
     "shape": "box",
     "material": "card",
-    "color": "#1E1E22",
+    "color": "#CFC4AE",
     "position": [
      0.87,
      2.66,
@@ -362,7 +363,7 @@
     2.79,
     0.68
    ],
-   "power_w": 0.45,
+   "power_w": 1.0,
    "color": 3400,
    "camera": false,
    "specular": 0.3
@@ -390,8 +391,8 @@
   "lidpanel": {
    "type": "area",
    "size_m": [
-    0.8,
-    0.4
+    1.6,
+    0.9
    ],
    "position": [
     -0.82,
@@ -403,7 +404,7 @@
     3.0,
     1.0
    ],
-   "irradiance": 0.6,
+   "irradiance": 0.25,
    "color": "#FFE8D0",
    "camera": false,
    "specular": 1.0,
@@ -417,7 +418,7 @@
    1.25
   ],
   "target": [
-   0.2,
+   0.22999999999999998,
    2.79,
    0.8
   ],
@@ -447,7 +448,7 @@
  },
  "materials": {
   "glow": {
-   "strength": 2.5
+   "strength": 1.4
   }
  }
 }

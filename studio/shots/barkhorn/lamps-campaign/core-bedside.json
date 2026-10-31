@@ -12,7 +12,7 @@
   "bounces": 24,
   "transmission_bounces": 20,
   "view": "Khronos PBR Neutral",
-  "exposure": 4.253,
+  "exposure": 3.553,
   "white_balance_k": 3500,
   "white_balance_tint": 4
  },
@@ -21,7 +21,7 @@
   "zenith": "#1A2A48",
   "horizon": "#3A4A6A",
   "ground": "#141820",
-  "strength": 0.006
+  "strength": 0.05
  },
  "set": {
   "kind": "room",
@@ -317,6 +317,66 @@
    "camera": false,
    "transmission": false,
    "specular": 0.0
+  },
+  "basecard": {
+   "type": "panel",
+   "size_m": [
+    0.25,
+    0.1
+   ],
+   "position": [
+    -0.95,
+    2.35,
+    0.6
+   ],
+   "target": [
+    -0.64,
+    2.86,
+    0.565
+   ],
+   "strength": 0.2,
+   "color": "#FFB08A",
+   "ramp": {
+    "axis": "x",
+    "at_m": [
+     -1.07,
+     -0.83
+    ],
+    "values": [
+     0,
+     1
+    ]
+   }
+  },
+  "rimcard": {
+   "type": "panel",
+   "size_m": [
+    0.15,
+    0.5
+   ],
+   "position": [
+    -0.95,
+    3.15,
+    0.75
+   ],
+   "target": [
+    -0.64,
+    2.86,
+    0.66
+   ],
+   "strength": 0.3,
+   "color": "#C8D4F0",
+   "ramp": {
+    "axis": "z",
+    "at_m": [
+     0.55,
+     0.95
+    ],
+    "values": [
+     0.2,
+     1.0
+    ]
+   }
   }
  },
  "camera": {

@@ -139,15 +139,24 @@ def core_bedside():
     ]
     st['windows'] = [{'wall': 'left', 'along': -0.4, 'sill': 0.75, 'size': [1.1, 1.5], 'mullions': [1, 1],
                       'frame': '#1E2024'}]
-    s['sky'] = {'kind': 'gradient', 'zenith': '#1A2A48', 'horizon': '#3A4A6A', 'ground': '#141820', 'strength': 0.006}
+    s['sky'] = {'kind': 'gradient', 'zenith': '#1A2A48', 'horizon': '#3A4A6A', 'ground': '#141820', 'strength': 0.05}
     core_pool(s, -0.64, 2.86, 0.55)
-    s['render']['exposure'] = round(s['render']['exposure'] + 1.1, 3)
+    s['render']['exposure'] = round(s['render']['exposure'] + 0.4, 3)
     s['render']['white_balance_k'] = 3500
     s['render']['white_balance_tint'] = 4
     s['title'] = 'Core in Ember on a bedside table at night (the campaign)'
     s['size'] = [2400, 1600]
     s['camera'] = {'position': [-1.10, 1.85, 0.78], 'target': [-0.50, 2.90, 0.64], 'lens_mm': 60, 'level': True,
                    'fstop': 2.0, 'focus': [-0.64, 2.86, 0.68]}
+    # critic r1 (5.5): c1 exposure -0.7 (the ball's centre clipped salmon); c2 moonlight, sky 0.006 to 0.05; c3 a warm
+    # reflection-only card on the base; c6 a cool rim on the clear shell. c4 (modelled books) and c5 (a glass) are
+    # props this set lacks: the glass was taken out after it rendered as a blur
+    s['lights']['basecard'] = {'type': 'panel', 'size_m': [0.25, 0.1], 'position': [-0.95, 2.35, 0.6],
+                               'target': [-0.64, 2.86, 0.565], 'strength': 0.2, 'color': '#FFB08A',
+                               'ramp': {'axis': 'x', 'at_m': [-1.07, -0.83], 'values': [0, 1]}}
+    s['lights']['rimcard'] = {'type': 'panel', 'size_m': [0.15, 0.5], 'position': [-0.95, 3.15, 0.75],
+                              'target': [-0.64, 2.86, 0.66], 'strength': 0.3, 'color': '#C8D4F0',
+                              'ramp': {'axis': 'z', 'at_m': [0.55, 0.95], 'values': [0.2, 1.0]}}
     return s
 
 
@@ -165,7 +174,7 @@ def record(x, y, z):
 def sleeves(x, y, z, n=9, seed=3):
     import random
     rnd = random.Random(seed)
-    cols = ['#1E1E22', '#B23A28', '#D8D2C4', '#2C4A6A', '#E0B040', '#5A6E4A', '#E8E4DC', '#7A3A5A', '#3A3A3A']
+    cols = ['#CFC4AE', '#B23A28', '#D8D2C4', '#2C4A6A', '#E0B040', '#5A6E4A', '#E8E4DC', '#7A3A5A', '#3A3A3A']
     out = [box('gloss', '#3A2A1E', (0.34, 0.36, 0.012), (x, y, z), roughness=0.5)]
     for i in range(n):
         out.append(box('card', cols[i % len(cols)], (0.315, 0.004, 0.315), (x, y - 0.15 + i * 0.033, z + 0.012),
@@ -193,7 +202,7 @@ def mantle_credenza():
     # critic r1 (5.0): c7 the cut picture frame out; c1 the glow 2.5 (5 clipped pink-white)
     s['set']['props'] = [p for p in credenza_props() if p.get('kind') != 'frame'] + record(mx, cy, cz)
     s['product'] = mantle_product(mx, cy - 0.02, cz)
-    s['materials'] = {'glow': {'strength': 2.5}}
+    s['materials'] = {'glow': {'strength': 1.4}}
     s['set']['windows'] = [{'wall': 'left', 'along': 0.6, 'sill': 0.6, 'size': [1.4, 1.8], 'mullions': [2, 1],
                             'frame': '#2A2724'}]
     s['sky'] = {'kind': 'hdri', 'polyhaven': 'twilight_sunset', 'rotation_deg': 250.0, 'strength': 0.03, 'res': '4k'}
@@ -203,18 +212,22 @@ def mantle_credenza():
         'sconce': {'type': 'point', 'position': [1.6, 3.0, 1.7], 'power_w': 0.18, 'radius_m': 0.03, 'color': 2400,
                    'camera': False},
         'fill': {'type': 'area', 'size_m': [2.0, 1.0], 'position': [0.4, -0.8, 1.6], 'target': [mx, cy, cz],
-                 'power_w': 0.45, 'color': 3400, 'camera': False, 'specular': 0.3},            # c2: the plinth reads
+                 'power_w': 1.0, 'color': 3400, 'camera': False, 'specular': 0.3},             # c2: the plinth reads
         'records': {'type': 'area', 'size_m': [0.5, 0.5], 'position': [1.3, 1.9, 1.3],             # c4: the sleeves lit
                     'target': [cx + 0.62, cy, cz + 0.17], 'power_w': 0.12, 'color': 2900, 'camera': False},
-        'lidpanel': {'type': 'area', 'size_m': [0.8, 0.4], 'position': [-0.82, 1.73, 1.47],       # c6: the lid reads clear
-                     'target': [mx, 3.0, 1.0], 'irradiance': 0.6, 'color': '#FFE8D0', 'camera': False,
+        'lidpanel': {'type': 'area', 'size_m': [1.6, 0.9], 'position': [-0.82, 1.73, 1.47],       # c6: the lid reads clear
+                     'target': [mx, 3.0, 1.0], 'irradiance': 0.25, 'color': '#FFE8D0', 'camera': False,
                      'specular': 1.0, 'diffuse': 0.0},
     }
     s['render']['exposure'] = round(s['render']['exposure'] + 1.2, 3)
     s['render']['white_balance_k'] = 3300                                                  # c5: the wall cream, not olive
+    # critic r2 (5.5): c1 the front sleeve cream (the records a black slab); c2 tint 2 (magenta); c3 glow 1.4 (the edge
+    # pink-white); c4 the lid's panel larger (a hard blotch); c5 fill 1.0 W (the deck crushed); c6 the frame right
+    # (the records against the edge); c7 the finish pass not run (PIL missing in the render Python); c8 sleeve art: an asset
+    s['render']['white_balance_tint'] = 2
     s['title'] = 'Mantle in Ember on a credenza in the evening, a record on (the campaign)'
     s['size'] = [2400, 1600]
-    s['camera'] = {'position': [mx + 0.85, cy - 1.65, 1.25], 'target': [mx + 0.40, cy, cz + 0.12], 'lens_mm': 32,
+    s['camera'] = {'position': [mx + 0.85, cy - 1.65, 1.25], 'target': [mx + 0.43, cy, cz + 0.12], 'lens_mm': 32,
                    'level': True, 'fstop': 4.0, 'focus': [mx, cy, cz + 0.1]}
     return s
 
