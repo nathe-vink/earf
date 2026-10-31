@@ -315,8 +315,13 @@ def lantern(bpy, p, objs):
     blk = felt(bpy)
     # the outer leaf behind the oak, black (seen through the slots and the fins)
     bk = Mesh('h44-lant-back')
-    bk.box(x0 + 0.02, y0 + 0.02, 0.0, x1, y1, bz0 - 0.03)
-    bk.box(x0 + 0.08, y0 + 0.08, bz0 - 0.03, x1, y1, h)                     # behind the band's diffuser
+    # (four thin walls, not a solid: a solid's base was coplanar with the room's floor and rendered it black, p2 look)
+    t = 0.06
+    bk.box(x0 + 0.02, y0 + 0.02, 0.0, x0 + 0.02 + t, y1, bz0 - 0.03)            # behind the baffle
+    bk.box(x0 + 0.02, y0 + 0.02, 0.0, x1, y0 + 0.02 + t, bz0 - 0.03)            # behind the route side
+    bk.box(x0 + 0.08, y0 + 0.08, bz0 - 0.03, x0 + 0.08 + t, y1, h)              # behind the band's diffuser
+    bk.box(x0 + 0.08, y0 + 0.08, bz0 - 0.03, x1, y0 + 0.08 + t, h)
+    bk.box(x0 + 0.02, y0 + 0.02, h - 0.02, x1, y1, h)                          # the box's top
     objs.append(bk.object(bpy, blk))
     # the front baffle: 60 mm battens, 12 mm slots, from the lit foot to the band; the porch covers its route end
     bf = Mesh('h44-lant-baffle')
