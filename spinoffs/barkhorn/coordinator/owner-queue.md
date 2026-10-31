@@ -2,7 +2,7 @@
 
 Ask the owner ONE question at a time, examples first, choices also in plain text. Save every owner answer to the
 owner-notes table in spinoffs/barkhorn/README.md immediately (this branch), then act. Don't block on AskUserQuestion
-while lanes run. Deck: https://claude.ai/artifact/3sihYaT4ckNTF6WE7SWR7x (v26). Nothing outward without the owner's yes.
+while lanes run. Deck: https://claude.ai/artifact/3sihYaT4ckNTF6WE7SWR7x (v27). Nothing outward without the owner's yes.
 
 ## Owner rulings today (all saved in the README owner-notes table on this branch)
 - Debut moves to spring ("C"), then DATES AND LOGISTICS PARKED (design first). Date question withdrawn.
@@ -98,3 +98,31 @@ while lanes run. Deck: https://claude.ai/artifact/3sihYaT4ckNTF6WE7SWR7x (v26). 
   distinctive (6-7 vs 3-4). Owner-facing notes: thick laminations read RED not amber (calibration; copy or lighter pour);
   pendant pool white by design (a tinted lens option for bars); Terrace fins ~31 K -> ~6 K.
 - Third ask sent with priority: the cordless Core set first.
+
+## Check-in 4 (22:51 UTC)
+- Lamps: the cordless Core set is rendering since 22:36 (`companions/lamps_cordless.py`, round 41's pass-4 shots with
+  only the cable hidden): PNGs `renders/2026-10-31/barkhorn/lamps-cordless/p4-*`, JPEGs under the site's names in its
+  `site-img/`. CORE-RECHARGE.md landed (0f3d083c): **contact dock recommended** (a 150 x 8 mm polished black cast
+  acrylic disc, two flush stainless rings, spring pins in Core's base, the dock's USB-C cable leaving behind the
+  furniture; 2-3 h charge; 4.7-5.8 h a charge; about $30-45 added; no radio, so no new approval). Qi rejected on
+  physics (aluminum hatch, steel ballast). Cost-down options for the owner later: an OEM Li-ion board ($2-5k, gives up
+  the standard-LiFePO4 story) or a fixed-price LiFePO4 board ($12-20k). Working design = the dock (a proposal until
+  the owner signs; show him the drawing with the cordless frames).
+  Deck copy to change with the image swap: light.html "plugged in or not" -> "cordless: about five hours a charge".
+- Speaker 398d0c90: blind four-way duel Strata 8.0 > current 7.0 > Topo 6.0 > Topo Clear 5.5. Strata finals and its
+  .blend next (polished lip, fewer thicker posts with the bronze collar, caldera in rhythm). Topo parked. Asked: report
+  any change to "22 layers of 1/2 in stock cast sheet"; reconcile tints with biomes' tints.json.
+- Mantle aead3871 (STOPPED, nothing rendering): custom pour at a lighter dye loading is the color the brand needs
+  (stock tint past a few mm goes near black); Strata Float at dusk in custom Ember is the strongest frame (no critic);
+  arm route 1 = EARF parts on a bought RB330 (~$150-250 a set + the arm). Its owner questions 6 (lighter custom dye
+  from the caster) and 7 (RB330 vs Rega counterweight) are supplier questions: PARKED with sourcing.
+- Four-pieces 91f9360e: r2-q2 and r3 (no rug) at 1920 x 1080. Asked for the lamps bigger at slide scale (Core >= 70 px,
+  Hemisphere >= 90 px), Mantle's float visible, anchors.json (bbox + pin per product) and calm zones (light/dark).
+- Editions: hero renders queued; Firn ready, Iron and Stamper being fixed.
+- Line slide builder committed: `coordinator/deck-line/` (README there). Layout proven on a stand-in.
+
+## Owner questions, in order (one at a time)
+1. Tagline A-D (asked, waiting).
+2. Mantle: A Strata Float / B Outcrop / Outcrop's cover on Strata's float (show the dusk frame and Outcrop in custom
+   Ember side by side).
+Not questions (FYI with pictures when there's a natural moment): Core's contact dock; the line slide; editions finals.

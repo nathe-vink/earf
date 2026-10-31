@@ -1,0 +1,103 @@
+{
+ "ground": "bg-standin.png  (the room picture at 1920x1080; a stand-in from four-pieces r2-q was used for the first layout)",
+ "src": "/_blob/PENDING",
+ "alt": "A living room at golden hour with all four EARF pieces in Poison, a transparent green acrylic: a Hemisphere pendant hanging by the window over a leather lounge chair, a Core lamp on the side table beside it, a pair of Tropos speakers with their covers off either side of a walnut credenza, and a Mantle record player on the credenza",
+ "notes": "Each piece takes its name from the Earth. Tropos is Greek for a turn; the troposphere, the layer of air where sound travels, is named for it. Core, Mantle and Hemisphere are the planet’s own parts. Here all four share one room at golden hour, in Poison, one of the eight colors. It is a render, not a photograph: Tropos with its cover off, Core cordless.",
+ "header": {
+  "eyebrow": "The line",
+  "title": "Four pieces, named for the Earth.",
+  "x": 980,
+  "y": 58,
+  "w": 900,
+  "h": 110,
+  "px": 54
+ },
+ "callouts": [
+  {
+   "id": "hemisphere",
+   "name": "Hemisphere",
+   "kind": "Pendant",
+   "line": "A shade that swaps in a quarter turn.",
+   "anchor": [
+    434,
+    346
+   ],
+   "label": {
+    "x": 612,
+    "y": 150,
+    "w": 420,
+    "lines": 1
+   },
+   "ink": "dark"
+  },
+  {
+   "id": "core",
+   "name": "Core",
+   "kind": "Table lamp",
+   "line": "Cordless, about five hours a charge.",
+   "anchor": [
+    652,
+    576
+   ],
+   "attach": [
+    652,
+    404
+   ],
+   "label": {
+    "x": 612,
+    "y": 296,
+    "w": 420,
+    "lines": 1
+   },
+   "ink": "dark"
+  },
+  {
+   "id": "mantle",
+   "name": "Mantle",
+   "kind": "Record player",
+   "line": "Floats on its own light.",
+   "anchor": [
+    1226,
+    598
+   ],
+   "attach": [
+    1226,
+    474
+   ],
+   "label": {
+    "x": 1068,
+    "y": 366,
+    "w": 300,
+    "lines": 1
+   },
+   "ink": "dark"
+  },
+  {
+   "id": "tropos",
+   "name": "Tropos",
+   "kind": "Speaker",
+   "line": "A powered horn loudspeaker.",
+   "anchor": [
+    1650,
+    390
+   ],
+   "attach": [
+    1650,
+    350
+   ],
+   "label": {
+    "x": 1452,
+    "y": 236,
+    "w": 400,
+    "lines": 1
+   }
+  }
+ ],
+ "foot": {
+  "text": "A render. Shown in Poison, one of eight colors.",
+  "x": 1280,
+  "y": 1030,
+  "w": 600,
+  "align": "right"
+ }
+}
