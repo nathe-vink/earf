@@ -317,7 +317,7 @@ def dining_hero():
     tx, ty = HB.TABLE
     st = s['set']
     dome = [p for p in st['props'] if p.get('fn') == 'dome'][0]
-    dome['shade_glow'] = 0.15
+    dome['shade_glow'] = 0.19
     dome['materials'] = {'liner': {'glow_color': '#FFB070'}}
     walnut = {'material': 'pbr', 'texture': 'american_walnut_veneer', 'tex_scale': 1.0, 'rough_mul': 0.8, 'tint': '#3A2416', 'tint_mix': 0.62}
     top_z = HB.TABLE_Z
@@ -331,7 +331,6 @@ def dining_hero():
         kit('lathe', 'gloss', '#E4DED3', (tx - 0.22, ty - 0.02, top_z + 0.003), profile=PLATE, roughness=0.35),
         kit('lathe', 'glass', '#F4F2EE', (tx + 0.02, ty + 0.16, top_z + 0.003), profile=GLASS),
         asset('food_pears_asian_01', (tx - 0.20, ty - 0.02, top_z + 0.008), 30.0),
-        asset('potted_plant_02', (-2.05, 2.75, 0.0), 30.0),
     ]
     st['wall'] = {'color': '#8A8276'}
     st['floor'] = {'plank_w': 0.16, 'plank_l': 1.8, 'base': '#4E3A2A', 'dark': '#3E2E20', 'light': '#5A4432',
@@ -340,24 +339,27 @@ def dining_hero():
                       'frame': '#2A2724'}]
     st['frame'] = '#2A2724'
     s['sky'] = {'kind': 'gradient', 'zenith': '#0E1A33', 'horizon': '#2C4670', 'ground': '#131A26', 'strength': 0.08}
-    s['lights']['toprim'] = {'type': 'area', 'size_m': [0.5, 0.3], 'position': [-0.6, 0.6, 1.95], 'target': [tx, ty, 1.5],
+    s['lights']['toprim'] = {'type': 'area', 'size_m': [1.2, 0.7], 'position': [-0.6, 0.6, 1.95], 'target': [tx, ty, 1.5],
                              'irradiance': 3.0, 'color': 3200, 'camera': False, 'specular': 1.0, 'diffuse': 0.0}
     # critic r1 (4.5): c1 exposure down 0.8 (the runner and the shade sat on the shoulder: no pool, a salmon dome);
     # c2 a warm fill on the walls only, so the room exists and the black top separates; c5 less magenta
     # critic r2 (5.0): c1 sky 0.08 (the room a void), c2 glow 0.15 (the dome salmon), c3 exposure back 0.5 (the runner
     # on the shoulder), c4 walnut tint 0.62, c5 the top's rim 3.0, c6 a warm bounce for the glass, c7 3000 K
-    s['render']['exposure'] = round(s['render']['exposure'] + 0.0, 3)
+    s['render']['exposure'] = round(s['render']['exposure'] - 0.35, 3)
+    # critic r3 (5.0, the last round): c1 exposure -0.35 (the runner flat on the shoulder), c3 glow 0.19 to hold the
+    # shade, c2 the top's rim card 1.2 x 0.7 (a clipped sticker on the dome), c4 tint 0 (mauve walnut), c6 the wall fill
+    # aimed low (the wall brightest at the ceiling), c7 the plant out, c8 f/5.6. c5 (a clear shadow) the engine lacks
     s['render']['white_balance_k'] = 3000
-    s['render']['white_balance_tint'] = 5
+    s['render']['white_balance_tint'] = 0
     s['lights']['wallfill'] = {'type': 'area', 'size_m': [1.5, 1.0], 'position': [1.0, -0.5, 2.3],
-                               'target': [-0.6, 3.15, 1.5], 'power_w': 3.0, 'color': 2700, 'specular': 0.0,
+                               'target': [-0.6, 3.15, 0.8], 'power_w': 3.0, 'color': 2700, 'specular': 0.0,
                                'diffuse': 1.0, 'camera': False, 'receivers': ['wall-*', 'ceiling']}
     s['lights']['bounce'] = {'type': 'flag', 'size_m': [1.0, 0.6], 'position': [tx + 1.3, ty - 0.45, top_z + 0.2],
                              'target': [tx, ty, top_z + 0.1], 'color': '#E8E0D4'}
     s['title'] = 'Hemisphere in Ember over a walnut table at dusk (the campaign, round 2)'
     s['size'] = [1600, 2000]
     s['camera'] = {'position': [tx + 0.85, ty - 1.25, 1.62], 'target': [tx - 0.04, ty + 0.05, 1.12], 'lens_mm': 66,
-                   'level': False, 'fstop': 2.8, 'focus': [tx, ty, 1.45]}
+                   'level': False, 'fstop': 5.6, 'focus': [tx, ty, 1.45]}
     return s
 
 

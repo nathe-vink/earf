@@ -12,9 +12,9 @@
   "bounces": 24,
   "transmission_bounces": 20,
   "view": "Khronos PBR Neutral",
-  "exposure": 3.153,
+  "exposure": 2.803,
   "white_balance_k": 3000,
-  "white_balance_tint": 5
+  "white_balance_tint": 0
  },
  "sky": {
   "kind": "gradient",
@@ -66,7 +66,7 @@
     "flavour": "ember",
     "ceiling": 2.7,
     "lamp": false,
-    "shade_glow": 0.15,
+    "shade_glow": 0.19,
     "hide": "reflector",
     "materials": {
      "liner": {
@@ -317,22 +317,6 @@
      30.0
     ],
     "scale": 1.0
-   },
-   {
-    "kind": "kit",
-    "shape": "asset",
-    "model": "potted_plant_02",
-    "position": [
-     -2.05,
-     2.75,
-     0.0
-    ],
-    "rotate": [
-     0,
-     0,
-     30.0
-    ],
-    "scale": 1.0
    }
   ],
   "windows": [
@@ -378,8 +362,8 @@
   "toprim": {
    "type": "area",
    "size_m": [
-    0.5,
-    0.3
+    1.2,
+    0.7
    ],
    "position": [
     -0.6,
@@ -411,7 +395,7 @@
    "target": [
     -0.6,
     3.15,
-    1.5
+    0.8
    ],
    "power_w": 3.0,
    "color": 2700,
@@ -455,7 +439,7 @@
   ],
   "lens_mm": 66,
   "level": false,
-  "fstop": 2.8,
+  "fstop": 5.6,
   "focus": [
    0.0,
    0.95,
