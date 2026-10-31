@@ -13,3 +13,4 @@ date, and check them again before relying on them.
 | R5-events-press.md | Fairs, shows, awards and press, with 2026–27 deadlines |
 | R6-manufacturing-geography.md | The US, Mexico or Asia for the acrylic, with partners and tariffs |
 
+| YC-W27-application-draft.md | A draft of Y Combinator's Winter 2027 application (closes 2 Nov 2026, 8 pm PT), with brackets where the owner must add facts. Nothing submitted |
