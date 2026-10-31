@@ -17,6 +17,14 @@ Brand lane, r47, 31 October 2026. One page: what is settled, what is planned, an
 | **site** | r47-site-next | 3e647894 |
 | **deck** | the EARF Investor Deck, an artifact outside the repo | — |
 
+## Owner rulings, 2026-10-31 (r46-owner-notes a883091275401471b7fc329927a263c6313e420a)
+
+1. **No starting color is promised.** The first pair's color is chosen at order; nothing says Smoke or Ember comes
+   first. (The stock 2423 and 2064 sheet below is what the prototypes are cut from, not a promise.)
+2. **Product images show Tropos with its cover off, by default:** the woofer showing, the whole speaker in frame.
+3. **Core stays cordless.** The v1 plug-in is set aside while the lamps lane redesigns its recharging. No Core picture
+   shows a cord.
+
 ## Names (settled)
 
 | Fact | Of record | Source |

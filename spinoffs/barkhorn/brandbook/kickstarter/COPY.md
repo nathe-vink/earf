@@ -56,8 +56,8 @@ the two lamps that go with it, and they are the first things we're making in a r
 **Core.** A 160 mm ball of tinted acrylic on a black acrylic base, 180 mm tall.
 - **The light:** 2200 to 2700 K, warmer as it dims.
 - **The control:** touch the black ring. Tap to switch it on or off; hold to dim.
-- **Power:** USB-C, cable and adapter in the box. About five hours cordless at full brightness, longer dimmed, on
-  cells you can replace yourself.
+- **Power:** cordless. About five hours at full brightness, longer dimmed, on cells you can replace yourself.
+  [RECHARGING: the lamps lane is redesigning it (owner, 2026-10-31); fill in from its design.]
 - **Outdoors:** designed to meet IP44, for terraces and spilt drinks.
 
 **Hemisphere.** A pendant 200 mm across, in three layers of cast acrylic:
@@ -166,9 +166,9 @@ doesn't allow photorealistic renders, and we agree with the rule.
 Eight: Ember, Dust, Acid, Poison, Ice, Haze, Fog and Smoke. You choose in the survey after the campaign, so you can see
 the photographs of every tint first.
 
-**How long does Core run without its cord?**
-About five hours at full brightness and longer dimmed: [MEASURED] on the prototype. Charge it over USB-C with the
-cable and adapter in the box.
+**How long does Core run on a charge?**
+About five hours at full brightness and longer dimmed: [MEASURED] on the prototype. [RECHARGING: how it charges,
+from the lamps lane's redesign.]
 
 **Can I replace Core's cells?**
 Yes. They sit under a hatch in the base. [Spares: OWNER TO CONFIRM whether EARF sells them, and the cell type to name.]
