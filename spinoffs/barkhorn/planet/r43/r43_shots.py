@@ -33,12 +33,18 @@ VIEWS = {
     # in the window and moves to the listening room for sessions; the shop's single Tropos and its plinth are gone.)
     # So the shop is seen from the bar end toward the street: both walls of shelves, the table, the pair in the window
     # against the street, at 28 mm
-    'shop': dict(camera={'position': [8.0, 1.95, 1.45], 'target': [0.6, 2.9, 1.10], 'lens_mm': 28, 'level': True,
-                         'fstop': 4.0, 'focus': [3.6, 3.5, 0.9]}, exposure=4.8, haze=0.0012, pair='window',
-                 lights={'win': {'power_w': 40.0, 'cone_deg': 26.0}, 'street': {'irradiance': 0.05}},
-                 # p2a, seen before judging: the lit windows opposite still read as white squares, the frame dark
-                 # (median 19): the windows off, exposure 4.2 to 4.8
-                 room={'windows_lit': 0.0, 'glass_gloss': 0.35}),
+    'shop': dict(camera={'position': [6.0, 2.6, 1.25], 'target': [0.7, 2.9, 0.95], 'lens_mm': 40, 'level': True,
+                         'fstop': 2.8, 'focus': [0.7, 2.9, 0.95]}, exposure=4.4, haze=0.004, pair='window',
+                 # p3, the last round (p2 judged 4.5/4.5, converged: the floor the brightest thing (109) and read as
+                 # planks; the window a black mirror with a grey slab in it (the room's fill reflected); the pair dark
+                 # (24) and small; a pale table; the shelf strips hard lines; empty): seated at 40 mm on the pair; its
+                 # spots 90 W at 20 deg; the fill off; the floor darker with the scan's pattern blended down; the street
+                 # lit; a walnut table; the shelf strips 3 to 1; the wall spots down and tighter; haze 0.004
+                 lights={'win': {'power_w': 90.0, 'cone_deg': 20.0}, 'street': {'irradiance': 0.5}, 'fill': {'irradiance': 0.0},
+                         'tr': {'power_w': 22.0, 'cone_deg': 24.0}, 'tl': {'power_w': 18.0, 'cone_deg': 24.0},
+                         'table': {'power_w': 10.0, 'cone_deg': 22.0}},
+                 room={'windows_lit': 0.3, 'window_glow': 0.25, 'glass_gloss': 0.35, 'led': 1.0,
+                       'floor_tint': '#36322E', 'floor_mix': 0.92}),
     # p0 look: the opposite building's windows and lit shop mirrored in the glass as white squares and a blue band, the
     # sidewalk hot, a mullion down the middle: the facade dimmed, the glass a softer reflector, one pane, the street lamp down
     # p2 (p1 judged 4.5/4.0, converged: a hard blue rectangle on the glass, which was the placeholder shop opposite

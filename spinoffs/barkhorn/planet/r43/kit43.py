@@ -220,7 +220,8 @@ def popup(bpy, name, p, kit):
     # the shop table: walnut on a blackened-steel frame
     Tb = Q.TABLE
     tb = Mesh('popup-table'); tb.box(Tb['x0'], Tb['y0'], 0.86, Tb['x1'], Tb['y1'], 0.90)
-    objs.append(tb.object(bpy, D.walnut(bpy, coat=0.4, name='-popup-table'), bevel=0.004))
+    objs.append(tb.object(bpy, D.walnut(bpy, coat=0.4, tint=p.get('table_tint', '#3A2618'), mix=0.55, name='-popup-table'),
+                         bevel=0.004))
     tf = Mesh('popup-table-frame')
     for x in (Tb['x0'] + 0.10, Tb['x1'] - 0.14):
         tf.box(x, Tb['y0'] + 0.08, 0.0, x + 0.04, Tb['y1'] - 0.08, 0.86)

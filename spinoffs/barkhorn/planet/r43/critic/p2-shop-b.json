@@ -1,0 +1,54 @@
+{
+  "stage1": {"impression": "A competent but empty CG shop at night. The floor is the brightest surface in the frame, the shopfront behind the Tropos pair is a flat black void with a floating grey rectangle in it, and the red speakers are underlit against it. Shelving, table and lamps are tidy and catalogue-like, with no sign of life, no pools of light and no texture at 1:1 (the floor reads as grey laminate planks, not sealed concrete). A magazine would read this as a generic shop showroom render, not a specific place.", "score": 4.5},
+  "verdict": "iterate",
+  "blocking_9": [
+    "The floor must stop being the brightest large surface: floor [0,540,1200,800] lum_median at or below 45, with light falling in pools under the spots rather than a uniform wash rising toward the camera",
+    "The Tropos pair must be the hero: speaker region [495,335,705,510] lum_median 45 or more, with light visibly passing through the Ember acrylic and its edges reading",
+    "The shopfront must read as a window onto a night street (lit windows opposite, a street lamp, pavement), not a black mirror with a floating grey rectangle",
+    "The floor must read as sealed concrete at 1:1 (trowel marks, sheen variation, no plank seams)",
+    "Signs of life and specificity: records out of sleeves, glasses, price cards legible, a coat, so the room reads as this pop-up rather than a generic showroom",
+    "Atmosphere and depth: the dark band of ceiling and window needs held shadow detail, not empty black"
+  ],
+  "defects": [
+    {"region": [0, 540, 1200, 800], "what": "Floor is the brightest large area (lum_median 108, brightening toward the camera to 123); reads as grey timber planks with a repeating seam pattern, not sealed concrete"},
+    {"region": [460, 140, 820, 230], "what": "Floating grey rectangles in the window glass (a reflection of a ceiling element or a backdrop plane) that read as a CG artefact"},
+    {"region": [250, 60, 1090, 470], "what": "Shopfront and back zone are an empty black void (lum_median 11.6); no street, no building opposite (0 windows lit), only a few stray point highlights"},
+    {"region": [495, 335, 705, 510], "what": "Tropos pair underlit (lum_median 23.7, below the 45 target); acrylic reads as flat salmon-pink panels rather than tinted cast acrylic with glowing edges"},
+    {"region": [460, 520, 740, 560], "what": "Window spots throw a hard, blotchy pink-white pool onto the floor in front of the plinth that looks like a decal"},
+    {"region": [710, 445, 1060, 515], "what": "Table top is flat, evenly lit pale oak with clipped highlights (clip 0.2 %); the Mantle and props look staged, no glasses or sign of use"},
+    {"region": [0, 150, 280, 720], "what": "Left shelving: uniform glowing shelf edges from LED strips read as a retail fixture; shelves mostly empty, Cores lined up like a catalogue"},
+    {"region": [0, 0, 240, 160], "what": "Upper left wall plaster brighter (median 89) than the products, smooth and textureless"},
+    {"region": [1100, 60, 1200, 520], "what": "Right wall plaster bright (median 78) and featureless; right shelving cropped hard at the edge"}
+  ],
+  "changes": [
+    {"id": "c1", "rank": 1, "kind": "material", "problem": "The floor dominates the frame as its brightest, most uniform surface and reads as laminate, not concrete.", "evidence": {"region": [0, 540, 1200, 800], "measured": "lum_median 108.2, lum_p95 160, falloff along y rising 92 to 123 toward the camera"},
+     "change": {"setting": "materials: the floor (sealed concrete scan tint) and its sheen", "from": "tint #4E4943, plank-like scan", "to": "tint #2F2C29, a seamless trowelled concrete scan with low, uneven sheen (roughness 0.35 to 0.6 varied)"},
+     "expected": "Floor drops into the low key and the pools under the spots read against it; no plank seams.", "accept": {"region": [0, 540, 1200, 800], "metric": "lum_median", "op": "between", "value": [25, 45]}},
+    {"id": "c2", "rank": 2, "kind": "light", "problem": "The Tropos pair, meant as the hero, sits darker than the floor and the walls.", "evidence": {"region": [495, 335, 705, 510], "measured": "lum_median 23.7, r_median 46"},
+     "change": {"setting": "track spots: the window pair", "from": "2 x 40.0 W, 2600 K, cone 26 deg", "to": "2 x 90 W, 2600 K, cone 20 deg, aimed at the upper cabinet and horn, plus a low back-light behind each cabinet so light passes through the acrylic"},
+     "expected": "The Ember acrylic glows and its edges catch light; the pair reads at a glance.", "accept": {"region": [495, 335, 705, 510], "metric": "lum_median", "op": ">=", "value": 45}},
+    {"id": "c3", "rank": 3, "kind": "set", "problem": "The shopfront is a black void; nothing says this is a storefront at night onto a street.", "evidence": {"region": [250, 60, 1090, 470], "measured": "lum_median 11.6, lum_p95 53.9"},
+     "change": {"setting": "outside: the building opposite's lit windows, and the street lamp", "from": "0.0 lit; street lamp 0.05 W/m2", "to": "0.3 lit (warm, varied); street lamp 0.4 W/m2 at 2200 K"},
+     "expected": "A soft, out-of-focus street behind the speakers that silhouettes them and gives depth.", "accept": {"region": [250, 60, 1090, 470], "metric": "lum_median", "op": "between", "value": [16, 35]}},
+    {"id": "c4", "rank": 4, "kind": "set", "problem": "Floating grey rectangles in the window glass read as a CG artefact.", "evidence": {"region": [460, 140, 820, 230], "measured": "two flat grey planes, lum_median 21.5 against the void around them"},
+     "change": {"setting": "plain description: the reflected ceiling element or backdrop plane", "from": "visible as a flat grey slab in the glass", "to": "removed, or replaced by a real fascia/transom with a lit sign-free frame and mullions so the glass has structure"},
+     "expected": "No unexplained shapes in the window; the glass reads by its frame and soft reflections of the pendants.", "accept": null},
+    {"id": "c5", "rank": 5, "kind": "light", "problem": "Light is an even wash rather than pools; walls and floor outshine the products.", "evidence": {"region": [0, 0, 240, 160], "measured": "plaster lum_median 89; right wall [1100,60,1200,520] median 78"},
+     "change": {"setting": "track spots: the right and left walls' shelves; the room's fill", "from": "40 W and 32 W at cone 34 deg; fill 0.12 W/m2", "to": "18 W and 15 W at cone 22 deg aimed onto shelf contents, not the wall above; fill 0.06 W/m2"},
+     "expected": "Pools on the shelves with dark between; plaster above shelves falls to the low key.", "accept": {"region": [0, 0, 240, 160], "metric": "lum_median", "op": "between", "value": [30, 55]}},
+    {"id": "c6", "rank": 6, "kind": "light", "problem": "The shelf LED strips make every shelf edge glow uniformly, which reads as a retail fixture.", "evidence": {"region": [0, 150, 280, 720], "measured": "bright continuous lines on every shelf front at 1:1"},
+     "change": {"setting": "the shelves' LED strips", "from": "3.0", "to": "0.8"},
+     "expected": "Shelves read as steel and oak lit by the spots, with the Cores providing the colour.", "accept": null},
+    {"id": "c7", "rank": 7, "kind": "set", "problem": "No sign of life; the room reads as a generic, unopened showroom.", "evidence": {"region": [710, 445, 1060, 515], "measured": "table holds only the products and a pen; shelves sparse"},
+     "change": {"setting": "small props", "from": "products and a few records", "to": "a record out of its sleeve on the Mantle, two glasses on the table, legible price cards, more records filed face-out, a coat over a chair at the bar end"},
+     "expected": "The frame reads as a specific, used pop-up a magazine would run.", "accept": null},
+    {"id": "c8", "rank": 8, "kind": "light", "problem": "The table top is evenly bright with clipped highlights rather than a pool.", "evidence": {"region": [710, 445, 1060, 515], "measured": "lum_median 117.7, clip_pct 0.2"},
+     "change": {"setting": "track spots: the table; materials: the oak's stain", "from": "8.0 W cone 30 deg; pale oak", "to": "6 W cone 20 deg centred on the Mantle; oak stained one step darker"},
+     "expected": "A pool on the table falling off to its ends; no clipping.", "accept": {"region": [710, 445, 1060, 515], "metric": "clip_pct", "op": "<", "value": 0.05}}
+  ],
+  "out_of_scope": [
+    {"request": "Saturated colours from Cores and Hemispheres compete with the Ember pair", "why": "The card fixes the products in their tints as placed; only their light levels may change"},
+    {"request": "Make the Tropos acrylic look thicker or clearer", "why": "The speaker's shape, colour and parts are fixed"}
+  ],
+  "score_if_fixed": 7.0
+}
