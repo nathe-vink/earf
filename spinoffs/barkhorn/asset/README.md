@@ -10,6 +10,15 @@ Smoke**.
 - the feet stand on z = 0;
 - the speaker is centred on x.
 
+**The cover is off by default** (the owner, 2026-10-31: every Tropos picture shows the woofer). Each tint's cloth
+disc sits in a child collection, `Tropos <tint> cover`, which is hidden in render and viewport. To fit it:
+
+```python
+c = bpy.data.collections['Tropos Smoke cover']; c.hide_render = c.hide_viewport = False
+```
+
+This works on a linked library collection only through a library override; otherwise append the collection.
+
 **The materials** are the render engine's own (Cycles; the acrylic is a volume absorber, so a speaker casts its tint's
 shadow). The file opens with Ember shown and the other seven excluded from the view layer.
 
@@ -25,7 +34,7 @@ e.instance_collection = bpy.data.collections['Tropos Smoke']; bpy.context.scene.
 
 Or add the folder as an asset library in Blender's preferences and drag a tint in from the Asset Browser.
 
-**Weight.** The file is 30 MB. It is made for a speaker seen across a room or a landscape:
+**Weight.** The file is 30 MB, and has no `.blend1` backup beside it. It is made for a speaker seen across a room or a landscape:
 - the plates' printed text and the screws' threads are collapsed;
 - the horn's dense tessellation and the lining's voile webs are collapsed;
 - see `LIGHTER` in `make_blend.py`.

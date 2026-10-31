@@ -32,6 +32,7 @@ LIGHTER = {'amp-plate-print': 0.15, 'rating-plate-print': 0.15, 'amp-plate-ink':
            'amp-plate-screws': 0.25, 'woofer-screws': 0.25, 'woofer-spider': 0.5, 'woofer-cap': 0.5,
            # and, for a speaker seen across a landscape, the horn's dense tessellation and the lining's voile webs
            'waveguide': 0.35, 'horn-throat': 0.4, 'waveguide-cap': 0.4, 'lining-*-web': 0.3}
+COVER = ('cloth-disc', 'disc-frame')
 TINTS = [('Ember', 'cloud-red'), ('Dust', 'cloud-orange'), ('Acid', 'cloud-amber'), ('Poison', 'eucalyptus-y2k-green'),
          ('Ice', 'cloud-blue'), ('Haze', 'cloud-violet'), ('Fog', 'birch-fog-clear'), ('Smoke', 'cloud-black')]
 
@@ -78,6 +79,13 @@ def main():
                 c.objects.unlink(ob)
             col.objects.link(ob)
             ob.name = f'{a.name} {tint} {part_of.get(ob.name, ob.name).split("#")[0]}'
+        # the cover (the cloth disc on its frame) in a child collection of its own, hidden by default: EARF shows Tropos
+        # with its cover off (the owner, 2026-10-31); show it with `hide_render = hide_viewport = False`
+        cover = bpy.data.collections.new(f'{a.name} {tint} cover')
+        col.children.link(cover)
+        for ob in [o for o in col.objects if any(o.name.endswith(' ' + k) or (' ' + k + '.') in o.name for k in COVER)]:
+            col.objects.unlink(ob); cover.objects.link(ob)
+        cover.hide_render = True; cover.hide_viewport = True
         col['tint'] = tint; col['flavour'] = flavour
         col['note'] = (f'{a.name} in {tint} ({flavour}): EARF\'s horn loudspeaker in tinted cast acrylic, 1293 mm tall, '
                        'metres, z up, front -y, feet on z = 0. Materials are Cycles (volume absorption in the acrylic).')
@@ -93,6 +101,7 @@ def main():
             except RuntimeError:
                 pass
     bpy.context.preferences.filepaths.use_file_compression = True
+    bpy.context.preferences.filepaths.save_version = 0          # no .blend1 backup beside it
     bpy.ops.wm.save_as_mainfile(filepath=a.out, compress=True)
     print(a.out, len(objs), 'objects in', len(TINTS), 'collections')
 
