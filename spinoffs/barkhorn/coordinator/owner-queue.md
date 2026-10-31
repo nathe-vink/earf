@@ -39,8 +39,8 @@ while lanes run. Deck: https://claude.ai/artifact/3sihYaT4ckNTF6WE7SWR7x (v26). 
 - biomes session_01BAaPTnGwdpP4WKGVD3vbqx, r48-biomes, b970bb3f: blind critic 3.0 at proof size ("a level-select screen": vertical-dissolve joins, clipped sky, thin atmosphere, box city, denoiser smear). Fix round sent (blend along landforms; atmosphere; real city). Delivering BOTH the 8-biome panorama and seam frames (2 biomes + 2 speakers each, real lens) + 4:5 phone; owner chooses on seeing them. Earlier 2d7c53d1: a time-slice ring world (one camera, each biome at its
   own hour) -> a 5:1 panorama + a little planet; proof 3 rendering.
 - site session_01BAaPTnZ3md8RoquoqYWJkd, r47-site-next, 00b6ad31 (fast-forward from main 856f80d7): American English;
-  cover-off first; debut page leads with the eight. WAITING: the room frames (speaker) and the cordless Core frames
-  (lamps). Deploy only on the owner's yes.
+  cover-off first; debut page leads with the eight; At home band = covers-off golden-hour room (d6cc6b7c, LH 95).
+  WAITING: the cordless Core frames (lamps). Deploy only on the owner's yes.
 
 ## Relaunched after the restart (the local workflows were lost)
 - four-pieces session_01BAaPTmWJHPRSSD5Mqr3BXq, r48-four-pieces (from main, 21:48 UTC): one magazine room with all four
