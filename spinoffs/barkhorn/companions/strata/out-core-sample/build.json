@@ -1,0 +1,20 @@
+{
+ "product": "core-sample",
+ "title": "Core Sample",
+ "parts": 28,
+ "seconds": 23,
+ "sheets": {
+  "cast-acrylic-12": 1,
+  "aluminium-2": 1
+ },
+ "budget_usd": {
+  "cut": 50,
+  "buy": 63,
+  "lathe": 143,
+  "cnc-mill": 46
+ },
+ "options_usd": {},
+ "checks_ok": true,
+ "drawings": "spinoffs/barkhorn/companions/strata/out-core-sample/drawings/core-sample-sheets.pdf",
+ "render": "spinoffs/barkhorn/companions/strata/out-core-sample/render/core-sample.glb"
+}

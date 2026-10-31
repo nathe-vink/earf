@@ -1,0 +1,59 @@
+{
+ "_note": "Contour Core for the engine, written by studio/fabkit/render.py from the fabrication CAD; part names are the parts' names, materials the parts' finishes.",
+ "model": "spinoffs/barkhorn/companions/strata/out-contour-core/render/contour-core.glb",
+ "origin_mm": [
+  0.0,
+  0.0,
+  1e-06
+ ],
+ "materials": {
+  "anodised": {
+   "preset": "metal",
+   "color": "#2A2A2D",
+   "roughness": 0.4
+  },
+  "led": {
+   "preset": "emit",
+   "color": "#FFC890",
+   "strength": 0.0
+  },
+  "opal": {
+   "preset": "frosted",
+   "color": "#F4F2EE"
+  },
+  "rubber": {
+   "preset": "rubber",
+   "color": "#1A1A1A"
+  },
+  "steel": {
+   "preset": "metal",
+   "color": "#B8B8B8",
+   "roughness": 0.25
+  }
+ },
+ "assign": [
+  {
+   "match": "base|holder|cover",
+   "material": "anodised"
+  },
+  {
+   "match": "led",
+   "material": "led"
+  },
+  {
+   "match": "globe",
+   "material": "opal"
+  },
+  {
+   "match": "seat|bumpers",
+   "material": "rubber"
+  },
+  {
+   "match": "knob|jack",
+   "material": "steel"
+  }
+ ],
+ "flavours": {
+  "default": {}
+ }
+}

@@ -1,0 +1,77 @@
+{
+ "_note": "Terrace for the engine, written by studio/fabkit/render.py from the fabrication CAD; part names are the parts' names, materials the parts' finishes.",
+ "model": "spinoffs/barkhorn/companions/strata/out-terrace/render/terrace.glb",
+ "origin_mm": [
+  0.0,
+  0.0,
+  1e-06
+ ],
+ "materials": {
+  "anodised": {
+   "preset": "metal",
+   "color": "#2A2A2D",
+   "roughness": 0.4
+  },
+  "fabric": {
+   "preset": "rubber",
+   "color": "#141414",
+   "roughness": 0.8
+  },
+  "led": {
+   "preset": "emit",
+   "color": "#FFC890",
+   "strength": 0.0
+  },
+  "rubber": {
+   "preset": "rubber",
+   "color": "#1A1A1A"
+  },
+  "satin": {
+   "preset": "metal",
+   "color": "#C8C8C8",
+   "roughness": 0.45
+  },
+  "steel": {
+   "preset": "metal",
+   "color": "#B8B8B8",
+   "roughness": 0.25
+  },
+  "trim": {
+   "preset": "gloss_plastic",
+   "color": "#0C0C0D"
+  }
+ },
+ "assign": [
+  {
+   "match": "flange|core|fin-1|fin-2|fin-3|fin-4|fin-5|fin-6|fin-7|cap|louvre|canopy",
+   "material": "anodised"
+  },
+  {
+   "match": "cord",
+   "material": "fabric"
+  },
+  {
+   "match": "cob",
+   "material": "led"
+  },
+  {
+   "match": "gasket",
+   "material": "rubber"
+  },
+  {
+   "match": "reflector",
+   "material": "satin"
+  },
+  {
+   "match": "thumbscrews|cable",
+   "material": "steel"
+  },
+  {
+   "match": "grips",
+   "material": "trim"
+  }
+ ],
+ "flavours": {
+  "default": {}
+ }
+}

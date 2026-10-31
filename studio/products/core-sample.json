@@ -1,0 +1,68 @@
+{
+ "_note": "Core Sample for the engine, written by studio/fabkit/render.py from the fabrication CAD; part names are the parts' names, materials the parts' finishes.",
+ "model": "spinoffs/barkhorn/companions/strata/out-core-sample/render/core-sample.glb",
+ "origin_mm": [
+  0.0,
+  0.0,
+  1e-06
+ ],
+ "materials": {
+  "aluminium": {
+   "preset": "metal",
+   "color": "#C8C8C8",
+   "roughness": 0.3
+  },
+  "anodised": {
+   "preset": "metal",
+   "color": "#2A2A2D",
+   "roughness": 0.4
+  },
+  "led": {
+   "preset": "emit",
+   "color": "#FFC890",
+   "strength": 0.0
+  },
+  "opal": {
+   "preset": "frosted",
+   "color": "#F4F2EE"
+  },
+  "rubber": {
+   "preset": "rubber",
+   "color": "#1A1A1A"
+  },
+  "steel": {
+   "preset": "metal",
+   "color": "#B8B8B8",
+   "roughness": 0.25
+  }
+ },
+ "assign": [
+  {
+   "match": "spine",
+   "material": "aluminium"
+  },
+  {
+   "match": "foot|cover|plug",
+   "material": "anodised"
+  },
+  {
+   "match": "strips",
+   "material": "led"
+  },
+  {
+   "match": "tube",
+   "material": "opal"
+  },
+  {
+   "match": "bumpers",
+   "material": "rubber"
+  },
+  {
+   "match": "knob|jack",
+   "material": "steel"
+  }
+ ],
+ "flavours": {
+  "default": {}
+ }
+}
