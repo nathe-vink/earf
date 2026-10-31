@@ -510,12 +510,14 @@ def shot_relief(sc):
             o.location = (0, -0.006 - th - (lev - 1) * th + 0.0, 1.2)
     sc.render.resolution_x, sc.render.resolution_y = 1800, 1200
     area('bar', (0.0, -0.075, 1.53), (0.0, -0.01, 0.95), 0.6, 120, '#FFEEDC', size_y=0.015)   # its LED bar: a line of light just above the top edge, washing down
-    room = area('room', (-1.2, -2.0, 1.75), (0, 0, 1.05), 2.0, 35, '#E8EEF6'); room.visible_glossy = False   # front-left fill (not level: level lit the backing in a band)
-    spot('sun', (-1.1, -0.55, 2.1), (0.0, -0.03, 1.15), 380, 22, 0.003, '#FFF1DE')       # the hard key
+    room = area('room', (-0.9, -2.2, 2.1), (0, 0, 1.15), 2.0, 90, '#E8EEF6'); room.visible_glossy = False   # L2 c1: fill, camera side, high (level with the panel it lights the backing in a band)
+    spot('sun', (-0.75, -0.75, 1.95), (0.0, -0.03, 1.2), 260, 35, 0.015, '#FFF1DE')     # L2 c1, c6: the key, a little softer (15 mm)
+    strip = area('strip', (0.36, -0.02, 0.86), (0.0, -0.03, 1.2), 0.6, 40, '#F4FFF8', size_y=0.05); strip.visible_camera = False   # L2 c5: into the layer edges from below right
+    gflag = slab('gflag', -0.75, -3.4, 2.2, 0.75, -2.4, 2.21, basic('gflag', '#5A5652', 0.9))   # L2 c2: one even tone in the acrylic's reflection, no box edge
+    for v in ('visible_camera', 'visible_shadow', 'visible_diffuse', 'visible_transmission'): setattr(gflag, v, False)
     rimr = area('rimR', (0.6, 0.3, 0.7), (0.25, -0.03, 1.1), 0.1, 15, '#F4FFF8'); rimr.visible_glossy = False; rimr.visible_camera = False   # r2 c4
-    slab('sideboard', -1.1, -0.48, 0.0, 0.45, 0.02, 0.76, ph('oak_wood_planks'))      # a sideboard under it, for scale
-    sc.view_settings.exposure = -1.0                                                   # r2 c3
-    camera((1.55, -2.30, 1.05), (0.20, -0.03, 1.16), lens=85, fstop=5.6, focus=2.7)     # r2 c6: the panel left, air below, the right third for type
+    sc.view_settings.exposure = -1.4                                                   # L2 c3
+    camera((1.35, -2.40, 0.90), (0.22, -0.03, 1.2), lens=85, fstop=4.0, focus=2.75)   # L2 c4     # r2 c6: the panel left, air below, the right third for type
 
 def shot_meridian(sc):
     sys.path.insert(0, os.path.join(HERE, '..', '..', '..', '..', 'studio', 'engine')); import materials as SM
