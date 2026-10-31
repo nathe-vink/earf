@@ -51,13 +51,14 @@ def acrylic(bpy, name, Ti=(0.995, 0.995, 0.995), d_ref=0.003, rough=0.015):
     return m
 
 
-# the band's tint: the house's own Smoke (a warm grey-amber), internal transmittance at 3 mm (est., to be measured on
-# the chosen sheet): red 0.80, green 0.62, blue 0.42
-SMOKE_TI = (0.78, 0.55, 0.30)
+# the band's tint: the house's own Smoke, a pale warm amber cast sheet; internal transmittance per 3 mm (est., to be
+# measured on the chosen sheet): red 0.965, green 0.92, blue 0.84. Seen edge-on through a fin's 60 mm depth that is
+# about 0.49 / 0.19 / 0.03: amber (a darker tint goes black-red over that path, the p1 look)
+SMOKE_TI = (0.965, 0.92, 0.84)
 
 
 def terrazzo(bpy, name, ground='#4A4743', chips=('#D9D4CA', '#8E8A84', '#2B2928', '#B9AE9C'), accent=(),
-             scale=34.0, rough=0.32):
+             scale=48.0, rough=0.32):
     """Honed epoxy terrazzo: chips (marble, glass) in a ground, sealed. `accent` adds acrylic-offcut chips in the
     product tints, as a share of the chips (each accent colour one slot in the palette)."""
     if name in _M:
@@ -100,7 +101,8 @@ def terrazzo(bpy, name, ground='#4A4743', chips=('#D9D4CA', '#8E8A84', '#2B2928'
     return m
 
 
-ACCENT = ('#B8241C', '#1F4FA8', '#E0B320', '#2F8A4A', '#D9661E', '#6A3C9C')   # the six disc tints, as offcut chips
+ACCENT = ('#7A1812', '#183A78', '#9A7A18', '#1F5C32', '#8E4214', '#47286A')   # the six disc tints as offcut chips (deep:
+                                                                           # translucent chips read darker than the sheet's face)
 
 
 def oak(bpy, vertical=True, name='oak-white-oiled', tint='#5C4A38', mix=0.6):
@@ -339,7 +341,7 @@ def lantern(bpy, p, objs):
     cap.box(x0 - 0.035, y0 - 0.035, bz0 - 0.008, x1, y0 + 0.05, bz0)
     cap.box(x0 - 0.035, y0 - 0.035, bz0 - 0.008, x0 + 0.05, y1, bz0)
     objs.append(fins.object(bpy, acrylic(bpy, 'acrylic-smoke-fin', SMOKE_TI)))
-    objs.append(diff.object(bpy, emitter(bpy, 'h44-band-led', '#FFB46A', p.get('band_glow', 3.0))))
+    objs.append(diff.object(bpy, emitter(bpy, 'h44-band-led', '#FF9A4A', p.get('band_glow', 1.6))))
     objs.append(cap.object(bpy, K.blackened_steel(bpy)))
     # the lit foot: a 100 mm recess with a warm line washing the floor
     ft = Mesh('h44-lant-foot'); ft.box(x0 + 0.04, y0 + 0.04, 0.0, x1, y1, 0.10)

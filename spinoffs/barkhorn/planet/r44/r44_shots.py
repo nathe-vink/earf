@@ -50,7 +50,7 @@ def spot(pos, tgt, w, cone, k=2700, blend=0.6, radius=0.03):
 def scene():
     S = P.SHOP_WALL
     props = [{'kind': 'kit', 'shape': 'ext', 'path': KIT, 'fn': 'house', 'windows_lit': 0.3, 'window_glow': 0.25,
-              'glass_gloss': 0.5}]
+              'glass_gloss': 0.3}]
     shelves = [0.30, 0.78, 1.26, 1.74, 2.22]
     # the Cores along the shop's shelves, in the eight tints, some unlit
     xs = [S['x0'] + 0.35 + 0.30 * i for i in range(8)]
