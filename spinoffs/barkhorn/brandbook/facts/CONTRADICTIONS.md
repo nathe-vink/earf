@@ -14,6 +14,27 @@ routes those fixes. Paths are under `spinoffs/barkhorn/`.
 
 `FACTS.md` holds what's right where it's settled.
 
+## Row 0: the debut has moved (the owner chose C, 2026-10-31; r46-owner-notes b3211a43)
+
+The debut is now **spring 2027, date and venue to be set**. Every brand file below still says **Tuesday 19 January**
+(or builds a timeline on it). **Re-date them in one pass once the owner sets the date. Not yet.** `SEQUENCE.md` gives
+the spring order for two candidate dates.
+
+| Group | Files (brand lane, r47-brand) |
+|---|---|
+| The invitation | `launch/invite-card.html` → `out/earf-debut-invitation-card.pdf/.png`; `launch/invite-email.html` → `out/earf-debut-invitation-email.png` |
+| The guests and press plan | `launch/INVITE-LIST.md`, `launch/MEDIA-PLAN.md` (its January rhythm), `launch/LAUNCH-GRID.md`, `launch/STORYBOARD.md` and `launch/teaser.py` (the teaser's end card; re-render the MP4s) |
+| The one-pager | `launch/onepager.html` → `out/earf-investor-one-pager.pdf` |
+| The sponsor brief and emails | `money/partner-brief.html` → `out/earf-debut-partner-brief.pdf`; `money/PARTNERS.md` (all three emails) |
+| Gallery letters and applications | `money/GALLERY-LETTERS.md` (all six invite to 19 January); `money/applications/awesome-foundation-sf.md`, `emergent-ventures.md`, `high-end-vienna-start-up.md` |
+| Partner packs | `partners/make_packs.py` → `klipsch.html`, `ace.html`, `project.html` → the three PDFs; `partners/README.md` (timings counted from the debut) |
+| Press | `press/releases/LOCAL-AND-FOG.md` (the local note becomes a note for the spring date; the FOG note becomes a meeting request), `PITCHES-PRINT.md`, `RELEASE-MARCH.md` and its PDF (built by `make_release.py`) |
+| The pictures | `photo/RUN-OF-SHOW.md`, `photo/README.md`, `photo/PRODUCT-SHOOT.md` (the shoot now comes **before** the debut), `photo/budget.py` → `BUDGET.md` |
+| Session 00 | `sessions/README.md` (its timeline), `sessions/RIGHTS.md` (the performance date) |
+| The Kickstarter kit | `kickstarter/README.md` (its calendar), `kickstarter/LAUNCH-PLAN.md` |
+| Amsterdam | `festival/amsterdam/STATEMENT.md` (the bio's "first showed … January 2027"), `CHECKLIST.md` |
+| The Brand Book | `book/index.html`: chapters 12 to 21 |
+
 ## The top ten, by impact
 
 | # | What | One side | The other | Which is right | Fix |

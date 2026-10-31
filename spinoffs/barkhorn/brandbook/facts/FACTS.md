@@ -48,14 +48,14 @@ Eight, in this order, numbered 01–08:
 
 | Date | What | Status | Source |
 |---|---|---|---|
-| **Tue 19 January 2027** | **The debut night**, in a hired or lent room at or near Fort Mason, about 120 guests | **Firm** | bar `planet/r43/DEBUT-ROOM.md` (64695495); site `web.py:2838`; owner `R9:3` |
+| **Spring 2027** | **The debut night: date and venue to be set** (the owner chose C, 2026-10-31). The candidates being sequenced are Thu 25 March and Thu 29 April (`SEQUENCE.md`). It was Tue 19 January; every brand file still says so (`CONTRADICTIONS.md`, row 0) | **owner-pending** | owner r46-owner-notes b3211a43 |
 | 16–24 Jan | SF Art Week | fixed | owner R5 |
-| 20 Jan / **21–24 Jan** | FOG Design+Art: its gala / the fair, at Fort Mason | fixed | owner R5; bar `research-popup.md:144` |
+| 20 Jan / **21–24 Jan** | FOG Design+Art: its gala / the fair, at Fort Mason. Now for meetings with galleries, **without a show** | fixed | owner R5; bar `research-popup.md:144`; owner b3211a43 |
 | Week of 2 Nov 2026 | Quote requests sent | planned | lamps `first-articles.md`; horn `make/schedule.md:32` |
 | By 16 Nov | Lamp moulds ordered (critical path) | planned | lamps `first-articles.md` |
 | About 18 Dec | The first laminated horn | planned | horn `make/schedule.md`, `laminated-horn.md` |
 | **7 Dec 2026, 23:59 CET** | Amsterdam Light Festival Ed. 16 call closes | fixed | owner R10; the festival's FAQ |
-| **8 Dec 2026** | US Park Police alcohol permit for Fort Mason (6 weeks ahead) | planned | bar `DEBUT-ROOM.md` |
+| 6 weeks before the debut | US Park Police alcohol permit, if the debut is at Fort Mason (was 8 Dec for 19 Jan) | moves with the date | bar `DEBUT-ROOM.md` |
 | **31 Dec 2026** | HIGH END Vienna's Start-Up Area closes; it needs a registered company | fixed | owner R5, R9 |
 | February–March 2027 | The listening room / pop-up: **planned, not funded** (Vacant to Vibrant's matching takes 2–6 months) | planned | bar `r43/V2V-APPLICATION.md` |
 | Mid-February | Prototypes photographed: the first pictures that aren't renders | planned | lamps `first-articles.md` |
@@ -130,7 +130,7 @@ Eight, in this order, numbered 01–08:
    - or R4's Founders' Edition of 8 pairs.
    Counsel follows.
 4. **Hemisphere's first listing:** the plug-in swag (UL 153) or hardwired (UL 1598). The site says 1598.
-5. **The debut:** the room; the lighting version (by 7 Dec); alcohol through a USPP permit (by 8 Dec) or zero-proof.
+5. **The debut:** **the date and the venue** (spring 2027; the owner's next question); the room; the lighting version; alcohol through a USPP permit (6 weeks ahead) or zero-proof.
    Where the room, the lamps and the photographs come from, beyond the $4,000 line.
 6. **The money gaps:** lamp testing ($18–46k across all four, before sales); the February photo day; the lamps' and
    Tropos's overruns.
