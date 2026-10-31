@@ -210,6 +210,31 @@ SHOTS['choice-terraces-ember'] = lambda: horn_choice('stepped', 'ember', macro=T
 for _d in ('current', 'strata', 'topo'):
     SHOTS[f'design-{_d}'] = (lambda d=_d: proposal(d))
 
+
+def _macro(design):
+    s = proposal(design)
+    s['title'] += ', macro'
+    s['size'] = [1600, 1600]
+    if design == 'strata':          # the caldera and the woofer, from the front right, low
+        s['camera'] = {'position': [0.62, -1.05, 0.58], 'target': [0.0, -0.02, 0.47], 'lens_mm': 85.0, 'level': False,
+                       'fstop': 5.6, 'focus': [0.12, -0.03, 0.47]}
+    else:                           # the horn's terraces, from the front right, a little above
+        s['camera'] = {'position': [0.75, -1.2, 1.32], 'target': [0.05, 0.05, 1.07], 'lens_mm': 85.0, 'level': False,
+                       'fstop': 5.6, 'focus': [0.2, -0.05, 1.07]}
+    return s
+
+
+def _in_use(design):
+    s = proposal(design, base='spinoffs/barkhorn/campaign/shots/room-final.json', flavour='eucalyptus-y2k-green')
+    s['title'] = f'Tropos, {design} (design pass), at home at golden hour, Poison'
+    return s
+
+
+for _d in ('strata', 'topo'):
+    SHOTS[f'design-{_d}-macro'] = (lambda d=_d: _macro(d))
+    SHOTS[f'design-{_d}-room'] = (lambda d=_d: _in_use(d))
+SHOTS['design-current-room'] = lambda: _in_use('current')
+
 if __name__ == '__main__':
     os.makedirs(OUT, exist_ok=True)
     for name, fn in SHOTS.items():

@@ -1,0 +1,726 @@
+{
+ "title": "Tropos, strata (design pass), at home at golden hour, Poison",
+ "set": {
+  "kind": "room",
+  "size": [
+   5.8,
+   7.0,
+   2.9
+  ],
+  "center": [
+   0.8500000000000001,
+   -2.55
+  ],
+  "floor": {
+   "base": "#B89B78"
+  },
+  "wall": {
+   "color": "#E8E2D8"
+  },
+  "ceiling": "#F2EFEA",
+  "skirting": {
+   "h": 0.09,
+   "color": "#E8E2D8",
+   "t": 0.014
+  },
+  "frame": "#5A5650",
+  "windows": [
+   {
+    "wall": "left",
+    "along": 2.75,
+    "sill": 0.04,
+    "size": [
+     1.45,
+     2.71
+    ],
+    "mullions": [
+     1,
+     1
+    ],
+    "frame": "#5A5650"
+   },
+   {
+    "wall": "left",
+    "along": 1.15,
+    "sill": 0.04,
+    "size": [
+     1.45,
+     2.71
+    ],
+    "mullions": [
+     2,
+     1
+    ],
+    "frame": "#5A5650"
+   },
+   {
+    "wall": "left",
+    "along": -0.9,
+    "sill": 0.04,
+    "size": [
+     1.45,
+     2.71
+    ],
+    "mullions": [
+     2,
+     1
+    ],
+    "frame": "#5A5650"
+   }
+  ],
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/room31/pieces.py",
+    "fn": "floor",
+    "rect": [
+     -2.05,
+     -6.05,
+     3.75,
+     0.95
+    ],
+    "texture": "wood_floor",
+    "res": "4k",
+    "rotate_deg": 90.0,
+    "rough_mul": 1.0,
+    "coat": 0.15,
+    "coat_rough": 0.35,
+    "value": 1.0,
+    "offset": [
+     0.37,
+     0.11,
+     0.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/room31/pieces.py",
+    "fn": "plaster",
+    "texture": "beige_wall_001",
+    "res": "4k",
+    "color": "#E8E2D8",
+    "tint_mix": 0.5,
+    "value": 0.88,
+    "bump": 2.0,
+    "tex_scale": 1.6
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/room31/pieces.py",
+    "fn": "credenza",
+    "position": [
+     0.0,
+     0.718
+    ],
+    "size": [
+     1.62,
+     0.44,
+     0.56
+    ],
+    "doors": 3,
+    "texture": "walnut_veneer_02",
+    "lift": 0.75,
+    "grain_rot": 90.0
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/room31/pieces.py",
+    "fn": "rug",
+    "off": false,
+    "position": [
+     0.0,
+     -0.9
+    ],
+    "size": [
+     2.4,
+     1.5
+    ],
+    "pile": 0.016,
+    "texture": "poly_wool_herringbone",
+    "tint": "#8A7A64",
+    "tint_mix": 1.0,
+    "displace": 0.006,
+    "res": "4k",
+    "value": 0.6,
+    "tex_scale": 1.0
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/room31/pieces.py",
+    "fn": "socket",
+    "position": [
+     -1.78,
+     0.95,
+     0.3
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/room31/pieces.py",
+    "fn": "socket",
+    "position": [
+     1.78,
+     0.95,
+     0.3
+    ]
+   },
+   {
+    "kind": "cable",
+    "position": [
+     0.0,
+     0.0
+    ],
+    "points": [
+     [
+      -1.78,
+      0.9129999999999999,
+      0.27
+     ],
+     [
+      -1.78,
+      0.9099999999999999,
+      0.21
+     ],
+     [
+      -1.78,
+      0.9339999999999999,
+      0.06
+     ],
+     [
+      -1.78,
+      0.9319999999999999,
+      0.0036
+     ],
+     [
+      -1.52,
+      0.9299999999999999,
+      0.0036
+     ],
+     [
+      -1.26,
+      0.9259999999999999,
+      0.0036
+     ],
+     [
+      -1.2,
+      0.83,
+      0.0036
+     ],
+     [
+      -1.2345,
+      0.6282,
+      0.0036
+     ],
+     [
+      -1.2295,
+      0.5805,
+      0.06
+     ],
+     [
+      -1.2284,
+      0.5705,
+      0.26
+     ],
+     [
+      -1.227,
+      0.5566,
+      0.4
+     ],
+     [
+      -1.2219,
+      0.5086,
+      0.419
+     ]
+    ],
+    "d": 0.0075,
+    "plug": [
+     0.05,
+     0.024
+    ],
+    "per": 10
+   },
+   {
+    "kind": "cable",
+    "position": [
+     0.0,
+     0.0
+    ],
+    "points": [
+     [
+      1.78,
+      0.9129999999999999,
+      0.27
+     ],
+     [
+      1.78,
+      0.9099999999999999,
+      0.21
+     ],
+     [
+      1.78,
+      0.9339999999999999,
+      0.06
+     ],
+     [
+      1.78,
+      0.9319999999999999,
+      0.0036
+     ],
+     [
+      1.52,
+      0.9299999999999999,
+      0.0036
+     ],
+     [
+      1.26,
+      0.9259999999999999,
+      0.0036
+     ],
+     [
+      1.2,
+      0.83,
+      0.0036
+     ],
+     [
+      1.2345,
+      0.6282,
+      0.0036
+     ],
+     [
+      1.2295,
+      0.5805,
+      0.06
+     ],
+     [
+      1.2284,
+      0.5705,
+      0.26
+     ],
+     [
+      1.227,
+      0.5566,
+      0.4
+     ],
+     [
+      1.2219,
+      0.5086,
+      0.419
+     ]
+    ],
+    "d": 0.0075,
+    "plug": [
+     0.05,
+     0.024
+    ],
+    "per": 10
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/room31/pieces.py",
+    "fn": "books",
+    "position": [
+     -0.4,
+     0.71,
+     0.56
+    ],
+    "seed": 4,
+    "books": [
+     [
+      0.31,
+      0.24,
+      0.032,
+      "#3E4A57",
+      "#D9D2C2",
+      "ROOMS IN LATE LIGHT",
+      "HALDEN"
+     ],
+     [
+      0.27,
+      0.21,
+      0.026,
+      "#C9BBA2",
+      "#3A332C",
+      "On Listening",
+      "NORTH PRESS"
+     ],
+     [
+      0.24,
+      0.19,
+      0.022,
+      "#7A3A2C",
+      "#E8DCC8",
+      "The Shape of Sound",
+      "ESSAYS"
+     ]
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "ceramic_vase_02",
+    "position": [
+     0.55,
+     0.78,
+     0.56
+    ],
+    "rotate": [
+     0,
+     0,
+     20
+    ],
+    "scale": 1.0
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/room31/pieces.py",
+    "fn": "recolour",
+    "off": true,
+    "model": "modern_arm_chair_01",
+    "position": [
+     -1.68,
+     -0.5,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     235.0
+    ],
+    "match": [
+     "pillow"
+    ],
+    "color": "#8A7460",
+    "blend": "MIX",
+    "mix": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/room31/pieces.py",
+    "fn": "sheer",
+    "position": [
+     -1.9499999999999997,
+     -0.66,
+     2.85
+    ],
+    "rotate": [
+     0,
+     0,
+     90
+    ],
+    "size": [
+     0.22,
+     2.83
+    ],
+    "folds": 1,
+    "amplitude": 0.045,
+    "noise": 0.35,
+    "seed": 11,
+    "res": 140,
+    "open": 0.15,
+    "color": "#F3EEE4"
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/room31/pieces.py",
+    "fn": "sheer",
+    "position": [
+     -1.9499999999999997,
+     -2.73,
+     2.85
+    ],
+    "rotate": [
+     0,
+     0,
+     90
+    ],
+    "size": [
+     2.95,
+     2.83
+    ],
+    "folds": 26,
+    "amplitude": 0.045,
+    "noise": 0.35,
+    "seed": 12,
+    "res": 140,
+    "open": 0.6,
+    "color": "#F3EEE4"
+   },
+   {
+    "kind": "kit",
+    "shape": "drape",
+    "off": true,
+    "position": [
+     -1.9599999999999997,
+     0.6199999999999999,
+     2.84
+    ],
+    "rotate": [
+     0,
+     0,
+     90
+    ],
+    "size": [
+     0.55,
+     2.82
+    ],
+    "folds": 9,
+    "amplitude": 0.035,
+    "noise": 0.35,
+    "thickness": 0.0,
+    "material": "organza",
+    "color": "#F1ECE2",
+    "alpha": 0.55,
+    "seed": 5,
+    "res": 120
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/room31/pieces.py",
+    "fn": "exterior",
+    "hdri": "autumn_forest_04",
+    "rotation_deg": 100.0,
+    "strength": 4.0,
+    "res": "8k",
+    "centre": [
+     -3.05,
+     -1.0,
+     1.4
+    ],
+    "radius": 60.0,
+    "blur": 0.0008,
+    "tint": "#FFE9D2"
+   }
+  ]
+ },
+ "sun": {
+  "azimuth_deg": -68.0,
+  "elevation_deg": 17.0,
+  "irradiance": 48.0,
+  "angle_deg": 1.0,
+  "color": "#FFE4C8"
+ },
+ "sky": {
+  "kind": "physical",
+  "strength": 1.0,
+  "air": 1.0,
+  "dust": 1.5
+ },
+ "lights": {
+  "key": {
+   "off": true
+  },
+  "fill": {
+   "off": true
+  },
+  "wash": {
+   "off": true
+  },
+  "north": {
+   "type": "area",
+   "size_m": [
+    2.2,
+    2.4
+   ],
+   "position": [
+    -0.4,
+    -3.6,
+    2.2
+   ],
+   "target": [
+    0.0,
+    0.2,
+    0.9
+   ],
+   "irradiance": 0.45,
+   "color": "#DCE4EE"
+  },
+  "bounce": {
+   "type": "area",
+   "position": [
+    -0.6,
+    -3.6,
+    1.35
+   ],
+   "size_m": [
+    2.4,
+    1.2
+   ],
+   "target": [
+    0.0,
+    0.3,
+    1.15
+   ],
+   "irradiance": 0.4,
+   "color": "#FFF0DE"
+  },
+  "floorbounce": {
+   "type": "area",
+   "size_m": [
+    0.8,
+    0.3
+   ],
+   "position": [
+    0.0,
+    -0.6,
+    0.08
+   ],
+   "target": [
+    0.0,
+    0.8,
+    0.04
+   ],
+   "irradiance": 0.0,
+   "color": "#FFE8CC"
+  }
+ },
+ "render": {
+  "samples": 128,
+  "adaptive": 0.02,
+  "denoise": true,
+  "clamp": 10,
+  "bounces": 12,
+  "view": "Khronos PBR Neutral",
+  "exposure": -1.2,
+  "white_balance_k": 5200,
+  "white_balance_tint": 0.0
+ },
+ "size": [
+  2880,
+  1620
+ ],
+ "camera": {
+  "position": [
+   -0.25,
+   -4.76,
+   1.05
+  ],
+  "target": [
+   -0.25,
+   0.3,
+   0.855
+  ],
+  "lens_mm": 40,
+  "level": true,
+  "fstop": 5.6,
+  "focus": [
+   0.6,
+   0.09,
+   0.7
+  ]
+ },
+ "products": [
+  {
+   "def": "studio/products/barkhorn-cloud.json",
+   "flavour": "eucalyptus-y2k-green",
+   "instances": [
+    {
+     "flavour": "eucalyptus-y2k-green",
+     "position": [
+      -1.2,
+      0.3,
+      0.0
+     ],
+     "rotate_z": 6.0,
+     "hide": [
+      "cloth-disc",
+      "horn-pads",
+      "horn-throat",
+      "waveguide",
+      "woofer-ring"
+     ]
+    },
+    {
+     "flavour": "eucalyptus-y2k-green",
+     "position": [
+      1.2,
+      0.3,
+      0.0
+     ],
+     "rotate_z": -6.0,
+     "hide": [
+      "cloth-disc",
+      "horn-pads",
+      "horn-throat",
+      "waveguide",
+      "woofer-ring"
+     ]
+    }
+   ]
+  },
+  {
+   "def": "studio/products/barkhorn-horn-options.json",
+   "flavour": "eucalyptus-y2k-green",
+   "instances": [
+    {
+     "flavour": "eucalyptus-y2k-green",
+     "position": [
+      -1.2,
+      0.3,
+      0.0
+     ],
+     "rotate_z": 6.0,
+     "hide": [
+      "horn-trial-plug",
+      "horn-trial-base",
+      "horn-plan-b-smooth"
+     ]
+    },
+    {
+     "flavour": "eucalyptus-y2k-green",
+     "position": [
+      1.2,
+      0.3,
+      0.0
+     ],
+     "rotate_z": -6.0,
+     "hide": [
+      "horn-trial-plug",
+      "horn-trial-base",
+      "horn-plan-b-smooth"
+     ]
+    }
+   ]
+  },
+  {
+   "def": "studio/products/barkhorn-variants.json",
+   "flavour": "eucalyptus-y2k-green",
+   "instances": [
+    {
+     "flavour": "eucalyptus-y2k-green",
+     "position": [
+      -1.2,
+      0.3,
+      0.0
+     ],
+     "rotate_z": 6.0,
+     "hide": [
+      "horn-topo"
+     ]
+    },
+    {
+     "flavour": "eucalyptus-y2k-green",
+     "position": [
+      1.2,
+      0.3,
+      0.0
+     ],
+     "rotate_z": -6.0,
+     "hide": [
+      "horn-topo"
+     ]
+    }
+   ]
+  }
+ ]
+}

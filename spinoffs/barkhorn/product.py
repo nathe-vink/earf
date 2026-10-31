@@ -2051,9 +2051,9 @@ def formed_horn(P):
         if L_.get('topo'):                     # the Topo proposal (variants/topo): each layer's outline from the land
             from build123d import Polyline as _Pl, make_face as _mf, extrude as _ex
             topo = []
-            for i, ring in enumerate(L_['topo']):
+            for i, outline in enumerate(L_['topo']):
                 za = d - (i + 1) * t_
-                face = _mf(_Pl(*[(x, y, za + 0.1) for x, y in ring], close=True))
+                face = _mf(_Pl(*[(x, y, za + 0.1) for x, y in outline], close=True))
                 topo.append(_ex(face, amount=t_ - 0.2) - cut)
             topo.append(Pos(0, 0, -c['boss']['t']) * Cylinder(c['pod_r'], c['boss']['t'] - 0.1, align=(Align.CENTER, Align.CENTER, Align.MIN)) - cut)
             lam_topo = topo
