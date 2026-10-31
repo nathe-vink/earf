@@ -1,0 +1,3 @@
+{"stage1": {"score": 4.5}, "verdict": "iterate", "score_if_fixed": 6.8,
+ "changes": ["c1 grazing strips into the face's edge", "c2 a three-quarter view, 100 mm", "c3 the rake nearer the lens", "c4 a card for the brass", "c5 fill lower left", "c6 a mid-tone wall", "c7 key 45 W", "c8 grain"],
+ "accept": [{"id":"c1","region":[370,560,420,620],"metric":"lum_range","op":">=","value":25},{"id":"c4","region":[692,605,722,630],"metric":"lum_p95","op":">=","value":140}]}
