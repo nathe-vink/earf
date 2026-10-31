@@ -1,0 +1,217 @@
+{
+ "shot": "/home/user/earf/studio/shots/tint-library/library.json",
+ "image": "/home/user/earf/renders/2026-10-31/barkhorn/tint-library/library.png",
+ "seconds": {
+  "build": 0.2,
+  "render": 560.1
+ },
+ "samples": 256,
+ "size": [
+  1600,
+  1067
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "parts_2d": {
+  "chip-1#0": {
+   "part": "chip-1",
+   "centre_px": [
+    824.8,
+    616.3
+   ],
+   "box_px": [
+    670,
+    467,
+    973,
+    769
+   ],
+   "depth_m": 0.741
+  },
+  "chip-2#0": {
+   "part": "chip-2",
+   "centre_px": [
+    788.5,
+    587.9
+   ],
+   "box_px": [
+    635,
+    441,
+    935,
+    738
+   ],
+   "depth_m": 0.751
+  },
+  "chip-3#0": {
+   "part": "chip-3",
+   "centre_px": [
+    753.2,
+    560.3
+   ],
+   "box_px": [
+    600,
+    416,
+    898,
+    708
+   ],
+   "depth_m": 0.762
+  },
+  "chip-4#0": {
+   "part": "chip-4",
+   "centre_px": [
+    718.8,
+    533.4
+   ],
+   "box_px": [
+    567,
+    391,
+    862,
+    679
+   ],
+   "depth_m": 0.772
+  },
+  "chip-5#0": {
+   "part": "chip-5",
+   "centre_px": [
+    685.4,
+    507.2
+   ],
+   "box_px": [
+    534,
+    367,
+    827,
+    651
+   ],
+   "depth_m": 0.782
+  },
+  "chip-6#0": {
+   "part": "chip-6",
+   "centre_px": [
+    652.8,
+    481.7
+   ],
+   "box_px": [
+    502,
+    344,
+    793,
+    623
+   ],
+   "depth_m": 0.792
+  },
+  "chip-7#0": {
+   "part": "chip-7",
+   "centre_px": [
+    621.1,
+    456.9
+   ],
+   "box_px": [
+    471,
+    321,
+    760,
+    596
+   ],
+   "depth_m": 0.803
+  },
+  "chip-8#0": {
+   "part": "chip-8",
+   "centre_px": [
+    590.2,
+    432.7
+   ],
+   "box_px": [
+    441,
+    299,
+    729,
+    570
+   ],
+   "depth_m": 0.813
+  },
+  "tray#0": {
+   "part": "tray",
+   "centre_px": [
+    703.4,
+    590.3
+   ],
+   "box_px": [
+    387,
+    371,
+    1039,
+    850
+   ],
+   "depth_m": 0.788
+  },
+  "hood-back#1": {
+   "part": "hood-back",
+   "centre_px": [
+    813.6,
+    211.4
+   ],
+   "box_px": [
+    698,
+    57,
+    921,
+    373
+   ],
+   "depth_m": 0.931
+  },
+  "hood-front#1": {
+   "part": "hood-front",
+   "centre_px": [
+    1244.2,
+    355.4
+   ],
+   "box_px": [
+    1132,
+    184,
+    1352,
+    535
+   ],
+   "depth_m": 0.857
+  },
+  "hood-left#1": {
+   "part": "hood-left",
+   "centre_px": [
+    917.1,
+    350.9
+   ],
+   "box_px": [
+    706,
+    179,
+    1151,
+    531
+   ],
+   "depth_m": 0.859
+  },
+  "hood-right#1": {
+   "part": "hood-right",
+   "centre_px": [
+    1115.1,
+    215.2
+   ],
+   "box_px": [
+    912,
+    59,
+    1342,
+    378
+   ],
+   "depth_m": 0.929
+  },
+  "hood-top#1": {
+   "part": "hood-top",
+   "centre_px": [
+    1024.3,
+    178.9
+   ],
+   "box_px": [
+    698,
+    48,
+    1353,
+    334
+   ],
+   "depth_m": 0.876
+  }
+ }
+}
