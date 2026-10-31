@@ -36,7 +36,7 @@ while lanes run. Deck: https://claude.ai/artifact/3sihYaT4ckNTF6WE7SWR7x (v26). 
 - brand session_01BAaPTm6ZnW6Wr5zqpr5BWJ, r47-brand, b0df6681: new objects (Moho, Lithos, Ionos, Cairn, Bedrock,
   Relief + Meridian); finals at a blind 7.0 gate, then the "EARF New Objects" artifact; then the American-English pass
   of the Brand Book. FACTS has the rulings (be80a921).
-- biomes session_01BAaPTnGwdpP4WKGVD3vbqx, r48-biomes, 2d7c53d1: a time-slice ring world (one camera, each biome at its
+- biomes session_01BAaPTnGwdpP4WKGVD3vbqx, r48-biomes, b970bb3f: blind critic 3.0 at proof size ("a level-select screen": vertical-dissolve joins, clipped sky, thin atmosphere, box city, denoiser smear). Fix round sent (blend along landforms; atmosphere; real city). Delivering BOTH the 8-biome panorama and seam frames (2 biomes + 2 speakers each, real lens) + 4:5 phone; owner chooses on seeing them. Earlier 2d7c53d1: a time-slice ring world (one camera, each biome at its
   own hour) -> a 5:1 panorama + a little planet; proof 3 rendering.
 - site session_01BAaPTnZ3md8RoquoqYWJkd, r47-site-next, 00b6ad31 (fast-forward from main 856f80d7): American English;
   cover-off first; debut page leads with the eight. WAITING: the room frames (speaker) and the cordless Core frames
