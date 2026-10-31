@@ -197,9 +197,8 @@
     "led": 3.0,
     "felt": "#1B1C1E",
     "ceiling": "#2E2C2A",
-    "windows_lit": 0.2,
-    "window_glow": 0.4,
-    "opp_shop_glow": 0.05,
+    "windows_lit": 0.0,
+    "opp_shop_glow": 0.03,
     "glass_gloss": 0.35
    },
    {
@@ -796,7 +795,7 @@
     6.0,
     4.0
    ],
-   "irradiance": 0.12,
+   "irradiance": 0.0,
    "color": 2900,
    "camera": false
   },
@@ -816,7 +815,7 @@
     0.6,
     0.6
    ],
-   "irradiance": 0.35,
+   "irradiance": 0.15,
    "color": 2200,
    "spread_deg": 80.0
   }

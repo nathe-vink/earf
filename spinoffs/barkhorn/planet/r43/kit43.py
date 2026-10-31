@@ -236,6 +236,10 @@ def popup(bpy, name, p, kit):
     o0, o1 = Q.DRAPE_OPEN
     LK.D._curtain(cv, xl, 0.0, o0, H - 0.08, folds=0.05, n=20, seed=0.4)
     LK.D._curtain(cv, xl, o1, W, H - 0.08, folds=0.05, n=110, seed=1.1)
+    # felt across the back wall too (round 43 p0 look: the store's door sat in the middle of the view), on its own track,
+    # drawn back to the WC's door
+    if p.get('back_drape', True):
+        LK.D._curtain(cv, Q.LISTEN['x1'] - 0.10, 1.30, W, H - 0.08, folds=0.05, n=120, seed=2.3)
     # a plain dense wool felt (the velour scan's sheen read the charcoal as lilac grey in the p0 look)
     objs.append(cv.object(bpy, principled(bpy, 'popup-felt', p.get('felt', '#1F1E1D'), rough=0.97, spec=0.15,
                                           sheen=0.25), smooth=True))

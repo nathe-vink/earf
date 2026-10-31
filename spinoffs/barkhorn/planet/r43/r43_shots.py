@@ -32,12 +32,12 @@ VIEWS = {
     # sidewalk hot, a mullion down the middle: the facade dimmed, the glass a softer reflector, one pane, the street lamp down
     'window': dict(camera={'position': [-5.6, 1.9, 1.50], 'target': [2.4, 3.1, 1.45], 'lens_mm': 35, 'level': True,
                            'fstop': 5.6, 'focus': [0.7, 2.9, 1.0]}, exposure=4.0,
-                   room={'windows_lit': 0.2, 'window_glow': 0.4, 'opp_shop_glow': 0.05, 'glass_gloss': 0.35},
-                   lights={'street': {'irradiance': 0.35}}),
+                   room={'windows_lit': 0.0, 'opp_shop_glow': 0.03, 'glass_gloss': 0.35},
+                   lights={'street': {'irradiance': 0.15}, 'fill': {'irradiance': 0.0}}),
     # p0 look: too dark, the left stack out of frame: the camera back by the drape's opening, both stacks in; the
     # stacks' spots, the seats' light and the exposure up
-    'listening': dict(camera={'position': [10.0, 2.6, 1.35], 'target': [13.3, 3.4, 1.00], 'lens_mm': 24, 'level': True,
-                              'fstop': 4.0, 'focus': [12.6, 3.4, 0.8]}, exposure=5.0,
+    'listening': dict(camera={'position': [9.85, 2.2, 1.25], 'target': [13.3, 3.8, 0.85], 'lens_mm': 20, 'level': True,
+                              'fstop': 4.0, 'focus': [12.6, 3.6, 0.8]}, exposure=5.0,
                       lights={'stack': {'power_w': 90.0}, 'seats': {'power_w': 30.0}}),
 }
 
