@@ -522,6 +522,9 @@ def image_meta():
                 card = dict(src=views[v]['src'], w=views[v]['w'], h=views[v]['h'])     # the tall frame stays for the small cards
                 views[v] = dict(src=f'img/{k}-{v}-wide.jpg', w=w, h=h, fill=True, tall=dict(src=f'img/{k}-{v}-tall.jpg', w=tw, h=th), card=card)
         w, h = size(f'turn-{k}.jpg')
+        if SPIN and all(os.path.exists(os.path.join(IMG, 'spin', f'{k}-{i:02d}.webp')) for i in range(SPIN_N)):
+            w, h = size(f'spin/{k}-00.webp')
+            views['spin'] = dict(src=f'img/spin/{k}-00.webp', w=w, h=h, n=SPIN_N, base=f'img/spin/{k}-', **ground(f'spin/{k}-00.webp'))
         views['turn'] = dict(src=f'img/turn-{k}.jpg', w=w // 6, h=h // 4, **ground(f'turn-{k}.jpg', (0, 0, w // 6, h // 4)))
         meta[k] = views
         corner = np.asarray(Image.open(os.path.join(IMG, f'{k}-on.jpg')).convert('RGB'))[-18:-3].reshape(-1, 3).mean(0)   # where the photograph meets its panel
@@ -827,7 +830,7 @@ def body():
                 .replace('__TURN__', turn).replace('__CARDS__', cards).replace('__SPEC__', spec).replace('__DWG__', dwg)
                 .replace('__REEL__', reel).replace('__HABITATS__', habitats).replace('__CLOSER__', closer)
                 .replace('__LINES__', lines).replace('__COLOURS__', colours).replace('__LIGHTING__', lighting).replace('__TURNTABLE__', turntable)
-                .replace('__PRESS__', press_html()).replace('__JOURNAL__', journal_html())
+                .replace('__PRESS__', press_html()).replace('__JOURNAL__', journal_html()).replace('__JOURNAL_BAND__', journal_band())
                 .replace('__WAITLIST__', wl_form).replace('__PRIVACY__', wl_page)
                 .replace('__FOOT_PRIVACY__', '<a href="#privacy">Privacy</a>' if WAITLIST else '')
                 .replace('__STILL__', still).replace('__POSTER__', poster).replace('__POSTER_NIGHT__', poster_night).replace('__DATA__', json.dumps(data, separators=(',', ':'))))
@@ -960,6 +963,31 @@ PRIVACY = [  # the notice, as drafted in launch/policies-draft.md (section 4), f
 ]
 
 
+# round 47: Tropos turning, path-traced (spin47.py): 36 frames a colour in the studio's bright field, dragged round on
+# the product's page in place of the real-time 3D view. SPIN False keeps it off; on, a colour shows it once all 36 of
+# its frames are in site/img/spin/.
+SPIN = False
+SPIN_SRC = os.path.join(ROOT, 'renders', '2026-10-31', 'barkhorn', 'spin47')
+SPIN_N, SPIN_W = 36, 600
+SPIN_NAME = {'red': 'ember', 'orange': 'dust', 'amber': 'acid', 'green': 'poison', 'blue': 'ice', 'violet': 'haze', 'ice': 'fog', 'black': 'smoke'}
+
+
+def make_spin():
+    """Each colour's turning frames for the site, from spin47's renders where all 36 are in: site/img/spin/<key>-NN.webp."""
+    made = []
+    os.makedirs(os.path.join(IMG, 'spin'), exist_ok=True)
+    for k, name in SPIN_NAME.items():
+        src = [os.path.join(SPIN_SRC, name, f'f-{i:02d}.png') for i in range(SPIN_N)]
+        if not all(os.path.exists(p) for p in src):
+            continue
+        for i, p in enumerate(src):
+            im = Image.open(p).convert('RGB')
+            im = im.resize((SPIN_W, round(im.height * SPIN_W / im.width)), Image.LANCZOS)
+            im.save(os.path.join(IMG, 'spin', f'{k}-{i:02d}.webp'), 'WEBP', quality=80, method=6)
+            made.append(f'spin/{k}-{i:02d}.webp')
+    return made
+
+
 # round 47: the 3D view (viewer/, its README). Each product with a model in site/3d/ gets a "View in 3D" on its page; the
 # finishes come from the engine's product file (what the renders were painted with), simplified to what a browser
 # paints, and each colour's acrylic is the engine's own: the colour it reaches after a distance (Beer's law), which is
@@ -1077,11 +1105,33 @@ def press_html():
 </main>'''
 
 
+def journal_band():
+    """The home page's three latest posts, above the enquiries."""
+    posts = [p for p in JOURNAL if os.path.exists(os.path.join(IMG, p[4]))][:3]
+    if not posts:
+        return ''
+    return ('  <section class="band" id="from-journal"><div class="wrap">\n'
+            '    <div class="head"><div><p class="eyebrow">Journal</p><h2>Notes from the bench.</h2></div>'
+            '<a class="btn" href="#journal">All notes</a></div>\n'
+            f'    <ul class="jlist jband">{"".join(journal_card(*p[:5]) for p in posts)}</ul>\n  </div></section>')
+
+
+def journal_when(d):
+    y, m, dd = d.split('-')
+    month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November',
+             'December'][int(m) - 1]
+    return f'<time datetime="{d}">{int(dd)} {month} {y}</time>'
+
+
+def journal_card(slug, d, title, stand, pic, h='b'):
+    w, hh = Image.open(os.path.join(IMG, pic)).size
+    return (f'<li><a class="jcard" href="#journal-{slug}"><img src="img/{pic}" width="{w}" height="{hh}" loading="lazy" alt="">'
+            f'<span class="eyebrow">{journal_when(d)}</span><b>{title}</b><span>{stand}</span></a></li>')
+
+
 def journal_html():
     """The journal: an index of its posts, then each post, one at a time (#journal, #journal-<slug>)."""
-    def when(d):
-        y, m, dd = d.split('-')
-        return f'<time datetime="{d}">{int(dd)} {["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][int(m) - 1]} {y}</time>'
+    when = journal_when
     def fig(f, alt, cap):
         if not os.path.exists(os.path.join(IMG, f)):
             return ''
@@ -1089,10 +1139,7 @@ def journal_html():
         half = f.replace('.jpg', '-1200.jpg')
         srcset = f' srcset="img/{half} 1200w, img/{f} {w}w" sizes="(max-width: 760px) 100vw, 720px"' if os.path.exists(os.path.join(IMG, half)) and w > 1200 else ''
         return f'<figure><img src="img/{f}"{srcset} width="{w}" height="{h}" loading="lazy" alt="{alt}"><figcaption>{cap} A render.</figcaption></figure>'
-    def card(slug, d, title, stand, pic):
-        w, h = Image.open(os.path.join(IMG, pic)).size
-        return (f'<li><a class="jcard" href="#journal-{slug}"><img src="img/{pic}" width="{w}" height="{h}" loading="lazy" alt="">'
-                f'<span class="eyebrow">{when(d)}</span><b>{title}</b><span>{stand}</span></a></li>')
+    card = journal_card
     posts = [p for p in JOURNAL if os.path.exists(os.path.join(IMG, p[4]))]
     index = ''.join(card(s, d, t, st, pic) for s, d, t, st, pic, body in posts)
     arts = ''
@@ -1510,6 +1557,7 @@ footer p { margin: 0; font: 500 12px/1.5 var(--mono); letter-spacing: 0.12em; te
 .stage .fit.cut { align-self: end;
   -webkit-mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent), linear-gradient(transparent, #000 3%);
   mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent), linear-gradient(transparent, #000 3%) }
+.stage .spinner { cursor: grab; touch-action: pan-y } .stage .spinner.dragging { cursor: grabbing }
 .stage .blur { width: 100%; height: 100%; background: center / cover no-repeat; filter: blur(28px) saturate(1.1); transform: scale(1.15) }
 .stage .in { animation: g-in 0.24s ease-out }
 @keyframes g-in { from { opacity: 0 } }
@@ -1722,6 +1770,7 @@ html.cursor, html.cursor * { cursor: none !important }
 .dl-grid figure { margin: 0 } .dl-grid img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 6px; display: block; background: #F1EDE8 }
 .dl-grid figcaption { margin-top: 8px; font-size: 14px; line-height: 1.45 } .dl-grid a { color: var(--ink); text-underline-offset: 3px; white-space: nowrap }
 .jlist { list-style: none; margin: 32px 0 80px; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px 20px }
+.jband { margin: 0 }
 .jcard { display: grid; gap: 8px; color: var(--ink); text-decoration: none }
 .jcard img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 6px; display: block; margin-bottom: 6px; background: #F1EDE8 }
 .jcard .eyebrow { margin: 0 } .jcard b { font-size: 22px; line-height: 1.15; font-weight: 600; letter-spacing: -0.01em } .jcard > span:last-child { color: var(--muted) }
@@ -1773,6 +1822,7 @@ html.cursor, html.cursor * { cursor: none !important }
   <nav aria-label="Pages" id="nav"><button type="button" class="menu" aria-expanded="false" aria-controls="nav-list">Menu</button><ul id="nav-list">
     <li><a href="#speakers" data-nav="speakers">Speakers</a></li><li><a href="#lighting" data-nav="lighting">Lighting</a></li>
     <li><a href="#turntable" data-nav="turntable">Turntable</a></li><li class="wide"><a href="#colours" data-nav="colours">Colours</a></li>
+    <li><a href="#journal" data-nav="journal">Journal</a></li>
     <li><a href="#contact">Enquire</a></li>
   </ul></nav>
 </div></header>
@@ -1817,6 +1867,7 @@ __HABITATS__
     </ol>
   </div></section>
 
+__JOURNAL_BAND__
   <section class="band" id="contact"><div class="wrap contact">
     <p class="eyebrow">Enquiries</p>
     <h2>Write to us.</h2>
@@ -2096,6 +2147,7 @@ const SPEAKER_VIEWS = [
   ['habitat', 'In its element', c => `${c.name} ${c.place}.`, c => `In its element, ${c.place}.`],
   ['on', 'Cover on', c => `With its cover on, in ${c.cover.toLowerCase()}.`],
   ['off', 'Cover off', c => `Cover off: the 15-inch woofer, the two ports, and the lining showing through the walls.`],
+  ['spin', 'Turn it', c => `${c.name}, turning in the studio; drag to turn it.`, c => `In the studio. Drag it round; every frame is a render.`],
   ['studio-light', 'In the studio', c => `${c.name} in the studio, on a pale ground.`],
   ['studio', 'In the studio', c => `${c.name} in the studio, the light coming through its acrylic.`],
   ['back', 'From behind', c => `From behind: the name cut into the back and filled with colour, grips in the sides, the amplifier below.`],
@@ -2171,6 +2223,15 @@ function showView(v, focus) {
     draggable(pic, (d, start, base) => { if (start) return turnFrame; turnFrame = ((base - d) % N + N) % N; pic.style.backgroundPosition = frameAt(turnFrame); });
     if (!reduce) { const t0 = performance.now(); (function f(now) { const p = Math.min(1, (now - t0) / 2600); turnFrame = Math.round(p * N) % N;
       pic.style.backgroundPosition = frameAt(turnFrame); if (p < 1) autoTurn = requestAnimationFrame(f); })(t0); }
+  } else if (v === 'spin') {         // round 47: path-traced frames, dragged round; one turn on arrival, never under reduced motion
+    const fr = i => `${s.base}${String(((i % s.n) + s.n) % s.n).padStart(2, '0')}.webp`;
+    pic = el('img', { class: 'fit spinner' + (s.edge === 'cut' ? ' cut' : ''), src: s.src, width: s.w, height: s.h, alt: say(c, v), draggable: 'false', style: `--ar:${ar}` });
+    const frames = Array.from({ length: s.n }, (_, i) => { const im = new Image(); im.decoding = 'async'; im.src = fr(i); return im; });
+    let at = 0; const show = i => { at = ((i % s.n) + s.n) % s.n; pic.src = frames[at].src; };
+    draggable(pic, (d, start, base) => { if (start) { cancelAnimationFrame(autoTurn); return at; } show(base - d); });
+    if (!reduce) Promise.all(frames.map(f => f.decode().catch(() => {}))).then(() => { if (!pic.isConnected) return;
+      const t0 = performance.now(); (function f(now) { const p = Math.min(1, (now - t0) / 3600), e = 0.5 - Math.cos(Math.PI * p) / 2;
+        show(Math.round(e * s.n)); if (p < 1 && pic.isConnected) autoTurn = requestAnimationFrame(f); })(t0); });
   } else if (v === 'habitat' || s.fill) {
     pic = el('picture', { class: 'fill' }, (s.tall ? `<source media="(max-width: 700px)" srcset="${s.tall.src}" width="${s.tall.w}" height="${s.tall.h}">` : '')
       + `<img src="${s.src}" width="${s.w}" height="${s.h}" alt="" draggable="false">`);
@@ -2192,7 +2253,7 @@ function showView(v, focus) {
     thumbs.scrollTo({ left: b.offsetLeft - (thumbs.clientWidth - b.offsetWidth) / 2, behavior: reduce ? 'auto' : 'smooth' });
     if (focus) b.focus({ preventScroll: true }); });
   for (const n of [list[(i + 1) % list.length], list[(i + list.length - 1) % list.length]]) {   // the neighbours load while this one is looked at
-    const t = src(c, n); if (n !== 'turn') new Image().src = (phone.matches && t.tall ? t.tall : t).src; }
+    const t = src(c, n); if (n !== 'turn' && n !== 'spin') new Image().src = (phone.matches && t.tall ? t.tall : t).src; }
 }
 function go(d, focus) { const list = shown(BY[cur]); showView(list[(list.indexOf(view) + d + list.length) % list.length], focus); }
 const MORE = {
@@ -2270,7 +2331,7 @@ thumbs.addEventListener('keydown', e => keys(e, true));
 stage.addEventListener('keydown', e => keys(e, false));
 // a swipe across the stage turns the page; on the turning horn a drag spins it instead
 let sx = null, sy = 0;
-stage.addEventListener('pointerdown', e => { if (view !== 'turn' && e.isPrimary) { sx = e.clientX; sy = e.clientY; } });
+stage.addEventListener('pointerdown', e => { if (view !== 'turn' && view !== 'spin' && e.isPrimary) { sx = e.clientX; sy = e.clientY; } });
 stage.addEventListener('pointerup', e => { if (sx === null) return; const dx = e.clientX - sx, dy = e.clientY - sy; sx = null;
   if (Math.abs(dx) > 40 && Math.abs(dx) > 1.2 * Math.abs(dy)) go(dx < 0 ? 1 : -1); });
 stage.addEventListener('pointercancel', () => { sx = null; });
@@ -2379,7 +2440,7 @@ function route() {
     document.getElementById('journal-index').hidden = !!m[1];
     MAINS.journal.querySelectorAll('.post').forEach(a => { a.hidden = a.id !== h; });
     document.title = m[1] ? `${document.getElementById(h).dataset.title} · EARF` : 'Journal · EARF';
-    scrollTo(0, 0); navAt(null);
+    scrollTo(0, 0); navAt('journal');
   } else if (LINE_OF[h] || /^(turntable|mantle)-/.test(h)) {         // Mantle's own addresses, before its page exists
     const L = LINE_OF[h] || 'turntable'; page = 'line-' + L; showMain('line');
     lineMain.querySelectorAll('.lineview').forEach(v => { v.hidden = v.dataset.line !== L; });
@@ -2550,7 +2611,7 @@ def main():
     ap.add_argument('--sources', metavar='DIR', help="the working notes' folder, for the photographs, room, drawings and coins")
     a = ap.parse_args()
     if a.images:
-        print('pictures made:', len(make_images(a.sources)))
+        print('pictures made:', len(make_images(a.sources)) + len(make_spin()))
     print(build())
 
 

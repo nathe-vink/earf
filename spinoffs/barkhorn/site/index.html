@@ -373,6 +373,7 @@ footer p { margin: 0; font: 500 12px/1.5 var(--mono); letter-spacing: 0.12em; te
 .stage .fit.cut { align-self: end;
   -webkit-mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent), linear-gradient(transparent, #000 3%);
   mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent), linear-gradient(transparent, #000 3%) }
+.stage .spinner { cursor: grab; touch-action: pan-y } .stage .spinner.dragging { cursor: grabbing }
 .stage .blur { width: 100%; height: 100%; background: center / cover no-repeat; filter: blur(28px) saturate(1.1); transform: scale(1.15) }
 .stage .in { animation: g-in 0.24s ease-out }
 @keyframes g-in { from { opacity: 0 } }
@@ -585,6 +586,7 @@ html.cursor, html.cursor * { cursor: none !important }
 .dl-grid figure { margin: 0 } .dl-grid img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 6px; display: block; background: #F1EDE8 }
 .dl-grid figcaption { margin-top: 8px; font-size: 14px; line-height: 1.45 } .dl-grid a { color: var(--ink); text-underline-offset: 3px; white-space: nowrap }
 .jlist { list-style: none; margin: 32px 0 80px; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px 20px }
+.jband { margin: 0 }
 .jcard { display: grid; gap: 8px; color: var(--ink); text-decoration: none }
 .jcard img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 6px; display: block; margin-bottom: 6px; background: #F1EDE8 }
 .jcard .eyebrow { margin: 0 } .jcard b { font-size: 22px; line-height: 1.15; font-weight: 600; letter-spacing: -0.01em } .jcard > span:last-child { color: var(--muted) }
@@ -637,6 +639,7 @@ html.cursor, html.cursor * { cursor: none !important }
   <nav aria-label="Pages" id="nav"><button type="button" class="menu" aria-expanded="false" aria-controls="nav-list">Menu</button><ul id="nav-list">
     <li><a href="#speakers" data-nav="speakers">Speakers</a></li><li><a href="#lighting" data-nav="lighting">Lighting</a></li>
     <li><a href="#turntable" data-nav="turntable">Turntable</a></li><li class="wide"><a href="#colours" data-nav="colours">Colours</a></li>
+    <li><a href="#journal" data-nav="journal">Journal</a></li>
     <li><a href="#contact">Enquire</a></li>
   </ul></nav>
 </div></header>
@@ -707,6 +710,10 @@ html.cursor, html.cursor * { cursor: none !important }
     </ol>
   </div></section>
 
+  <section class="band" id="from-journal"><div class="wrap">
+    <div class="head"><div><p class="eyebrow">Journal</p><h2>Notes from the bench.</h2></div><a class="btn" href="#journal">All notes</a></div>
+    <ul class="jlist jband"><li><a class="jcard" href="#journal-eight-colours"><img src="img/violet-habitat-1200.jpg" width="1200" height="800" loading="lazy" alt=""><span class="eyebrow"><time datetime="2026-10-31">31 October 2026</time></span><b>Eight colours, all the way through</b><span>Paint is a decision you can sand off. Tint is one you live with.</span></a></li><li><a class="jcard" href="#journal-the-horn"><img src="img/amber-horn-side.jpg" width="1000" height="750" loading="lazy" alt=""><span class="eyebrow"><time datetime="2026-10-31">31 October 2026</time></span><b>How the horn is formed</b><span>A horn is a shape that does an amplifier&rsquo;s job. Here is how ours will be made.</span></a></li><li><a class="jcard" href="#journal-planet-earf"><img src="img/planet-street-1200.jpg" width="1200" height="800" loading="lazy" alt=""><span class="eyebrow"><time datetime="2026-10-31">31 October 2026</time></span><b>Planet EARF</b><span>A listening bar in San Francisco. Planned: no address yet, and no opening night.</span></a></li></ul>
+  </div></section>
   <section class="band" id="contact"><div class="wrap contact">
     <p class="eyebrow">Enquiries</p>
     <h2>Write to us.</h2>
@@ -1048,6 +1055,7 @@ const SPEAKER_VIEWS = [
   ['habitat', 'In its element', c => `${c.name} ${c.place}.`, c => `In its element, ${c.place}.`],
   ['on', 'Cover on', c => `With its cover on, in ${c.cover.toLowerCase()}.`],
   ['off', 'Cover off', c => `Cover off: the 15-inch woofer, the two ports, and the lining showing through the walls.`],
+  ['spin', 'Turn it', c => `${c.name}, turning in the studio; drag to turn it.`, c => `In the studio. Drag it round; every frame is a render.`],
   ['studio-light', 'In the studio', c => `${c.name} in the studio, on a pale ground.`],
   ['studio', 'In the studio', c => `${c.name} in the studio, the light coming through its acrylic.`],
   ['back', 'From behind', c => `From behind: the name cut into the back and filled with colour, grips in the sides, the amplifier below.`],
@@ -1123,6 +1131,15 @@ function showView(v, focus) {
     draggable(pic, (d, start, base) => { if (start) return turnFrame; turnFrame = ((base - d) % N + N) % N; pic.style.backgroundPosition = frameAt(turnFrame); });
     if (!reduce) { const t0 = performance.now(); (function f(now) { const p = Math.min(1, (now - t0) / 2600); turnFrame = Math.round(p * N) % N;
       pic.style.backgroundPosition = frameAt(turnFrame); if (p < 1) autoTurn = requestAnimationFrame(f); })(t0); }
+  } else if (v === 'spin') {         // round 47: path-traced frames, dragged round; one turn on arrival, never under reduced motion
+    const fr = i => `${s.base}${String(((i % s.n) + s.n) % s.n).padStart(2, '0')}.webp`;
+    pic = el('img', { class: 'fit spinner' + (s.edge === 'cut' ? ' cut' : ''), src: s.src, width: s.w, height: s.h, alt: say(c, v), draggable: 'false', style: `--ar:${ar}` });
+    const frames = Array.from({ length: s.n }, (_, i) => { const im = new Image(); im.decoding = 'async'; im.src = fr(i); return im; });
+    let at = 0; const show = i => { at = ((i % s.n) + s.n) % s.n; pic.src = frames[at].src; };
+    draggable(pic, (d, start, base) => { if (start) { cancelAnimationFrame(autoTurn); return at; } show(base - d); });
+    if (!reduce) Promise.all(frames.map(f => f.decode().catch(() => {}))).then(() => { if (!pic.isConnected) return;
+      const t0 = performance.now(); (function f(now) { const p = Math.min(1, (now - t0) / 3600), e = 0.5 - Math.cos(Math.PI * p) / 2;
+        show(Math.round(e * s.n)); if (p < 1 && pic.isConnected) autoTurn = requestAnimationFrame(f); })(t0); });
   } else if (v === 'habitat' || s.fill) {
     pic = el('picture', { class: 'fill' }, (s.tall ? `<source media="(max-width: 700px)" srcset="${s.tall.src}" width="${s.tall.w}" height="${s.tall.h}">` : '')
       + `<img src="${s.src}" width="${s.w}" height="${s.h}" alt="" draggable="false">`);
@@ -1144,7 +1161,7 @@ function showView(v, focus) {
     thumbs.scrollTo({ left: b.offsetLeft - (thumbs.clientWidth - b.offsetWidth) / 2, behavior: reduce ? 'auto' : 'smooth' });
     if (focus) b.focus({ preventScroll: true }); });
   for (const n of [list[(i + 1) % list.length], list[(i + list.length - 1) % list.length]]) {   // the neighbours load while this one is looked at
-    const t = src(c, n); if (n !== 'turn') new Image().src = (phone.matches && t.tall ? t.tall : t).src; }
+    const t = src(c, n); if (n !== 'turn' && n !== 'spin') new Image().src = (phone.matches && t.tall ? t.tall : t).src; }
 }
 function go(d, focus) { const list = shown(BY[cur]); showView(list[(list.indexOf(view) + d + list.length) % list.length], focus); }
 const MORE = {
@@ -1222,7 +1239,7 @@ thumbs.addEventListener('keydown', e => keys(e, true));
 stage.addEventListener('keydown', e => keys(e, false));
 // a swipe across the stage turns the page; on the turning horn a drag spins it instead
 let sx = null, sy = 0;
-stage.addEventListener('pointerdown', e => { if (view !== 'turn' && e.isPrimary) { sx = e.clientX; sy = e.clientY; } });
+stage.addEventListener('pointerdown', e => { if (view !== 'turn' && view !== 'spin' && e.isPrimary) { sx = e.clientX; sy = e.clientY; } });
 stage.addEventListener('pointerup', e => { if (sx === null) return; const dx = e.clientX - sx, dy = e.clientY - sy; sx = null;
   if (Math.abs(dx) > 40 && Math.abs(dx) > 1.2 * Math.abs(dy)) go(dx < 0 ? 1 : -1); });
 stage.addEventListener('pointercancel', () => { sx = null; });
@@ -1331,7 +1348,7 @@ function route() {
     document.getElementById('journal-index').hidden = !!m[1];
     MAINS.journal.querySelectorAll('.post').forEach(a => { a.hidden = a.id !== h; });
     document.title = m[1] ? `${document.getElementById(h).dataset.title} · EARF` : 'Journal · EARF';
-    scrollTo(0, 0); navAt(null);
+    scrollTo(0, 0); navAt('journal');
   } else if (LINE_OF[h] || /^(turntable|mantle)-/.test(h)) {         // Mantle's own addresses, before its page exists
     const L = LINE_OF[h] || 'turntable'; page = 'line-' + L; showMain('line');
     lineMain.querySelectorAll('.lineview').forEach(v => { v.hidden = v.dataset.line !== L; });
