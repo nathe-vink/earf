@@ -1,0 +1,420 @@
+{
+ "title": "Hemisphere in Ember over a walnut table at dusk (the campaign, round 2)",
+ "size": [
+  1600,
+  2000
+ ],
+ "render": {
+  "samples": 256,
+  "adaptive": 0.01,
+  "denoise": true,
+  "clamp": 10,
+  "bounces": 24,
+  "transmission_bounces": 20,
+  "view": "Khronos PBR Neutral",
+  "exposure": 4.453,
+  "white_balance_k": 3300
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#0E1A33",
+  "horizon": "#2C4670",
+  "ground": "#131A26",
+  "strength": 0.012
+ },
+ "set": {
+  "kind": "room",
+  "size": [
+   5.2,
+   4.6,
+   2.7
+  ],
+  "center": [
+   0.0,
+   0.85
+  ],
+  "floor": {
+   "plank_w": 0.16,
+   "plank_l": 1.8,
+   "base": "#4E3A2A",
+   "dark": "#3E2E20",
+   "light": "#5A4432",
+   "plank_contrast": 0.6
+  },
+  "wall": {
+   "color": "#8A8276"
+  },
+  "ceiling": "#E6E0D6",
+  "skirting": {
+   "h": 0.12,
+   "color": "#6E665A"
+  },
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "earf_moon",
+    "fn": "dome",
+    "spots": [
+     [
+      0.0,
+      0.95,
+      1.45
+     ]
+    ],
+    "flavour": "ember",
+    "ceiling": 2.7,
+    "lamp": false,
+    "shade_glow": 0.3,
+    "hide": "reflector",
+    "materials": {
+     "liner": {
+      "glow_color": "#FFB070"
+     }
+    }
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "pbr",
+    "color": "#6B4A30",
+    "position": [
+     0.0,
+     0.95,
+     0.71
+    ],
+    "size": [
+     1.9,
+     0.95,
+     0.04
+    ],
+    "texture": "american_walnut_veneer",
+    "tex_scale": 1.0,
+    "rough_mul": 0.8,
+    "tint": "#3A2416",
+    "tint_mix": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "pbr",
+    "color": "#6B4A30",
+    "position": [
+     -0.82,
+     0.57,
+     0.0
+    ],
+    "size": [
+     0.06,
+     0.06,
+     0.71
+    ],
+    "texture": "american_walnut_veneer",
+    "tex_scale": 1.0,
+    "rough_mul": 0.8,
+    "tint": "#3A2416",
+    "tint_mix": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "pbr",
+    "color": "#6B4A30",
+    "position": [
+     -0.82,
+     1.33,
+     0.0
+    ],
+    "size": [
+     0.06,
+     0.06,
+     0.71
+    ],
+    "texture": "american_walnut_veneer",
+    "tex_scale": 1.0,
+    "rough_mul": 0.8,
+    "tint": "#3A2416",
+    "tint_mix": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "pbr",
+    "color": "#6B4A30",
+    "position": [
+     0.82,
+     0.57,
+     0.0
+    ],
+    "size": [
+     0.06,
+     0.06,
+     0.71
+    ],
+    "texture": "american_walnut_veneer",
+    "tex_scale": 1.0,
+    "rough_mul": 0.8,
+    "tint": "#3A2416",
+    "tint_mix": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "pbr",
+    "color": "#6B4A30",
+    "position": [
+     0.82,
+     1.33,
+     0.0
+    ],
+    "size": [
+     0.06,
+     0.06,
+     0.71
+    ],
+    "texture": "american_walnut_veneer",
+    "tex_scale": 1.0,
+    "rough_mul": 0.8,
+    "tint": "#3A2416",
+    "tint_mix": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "pbr",
+    "color": "#B8AD9B",
+    "position": [
+     0.0,
+     0.95,
+     0.75
+    ],
+    "size": [
+     1.7,
+     0.38,
+     0.003
+    ],
+    "texture": "rough_linen",
+    "tex_scale": 0.5,
+    "tint": "#A99E8C",
+    "tint_mix": 0.7
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "material": "gloss",
+    "color": "#E4DED3",
+    "position": [
+     -0.22,
+     0.9299999999999999,
+     0.753
+    ],
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.09,
+      0
+     ],
+     [
+      0.095,
+      0.004
+     ],
+     [
+      0.13,
+      0.012
+     ],
+     [
+      0.135,
+      0.016
+     ],
+     [
+      0.132,
+      0.017
+     ],
+     [
+      0.093,
+      0.006
+     ],
+     [
+      0.0,
+      0.003
+     ]
+    ],
+    "roughness": 0.35
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "material": "glass",
+    "color": "#F4F2EE",
+    "position": [
+     0.02,
+     1.1099999999999999,
+     0.753
+    ],
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.035,
+      0
+     ],
+     [
+      0.035,
+      0.004
+     ],
+     [
+      0.004,
+      0.012
+     ],
+     [
+      0.004,
+      0.1
+     ],
+     [
+      0.038,
+      0.13
+     ],
+     [
+      0.042,
+      0.19
+     ],
+     [
+      0.0405,
+      0.19
+     ],
+     [
+      0.0365,
+      0.132
+     ],
+     [
+      0.003,
+      0.104
+     ],
+     [
+      0.0,
+      0.104
+     ]
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "food_pears_asian_01",
+    "position": [
+     -0.2,
+     0.9299999999999999,
+     0.758
+    ],
+    "rotate": [
+     0,
+     0,
+     30.0
+    ],
+    "scale": 1.0
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "potted_plant_02",
+    "position": [
+     -2.05,
+     2.75,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     30.0
+    ],
+    "scale": 1.0
+   }
+  ],
+  "windows": [
+   {
+    "wall": "left",
+    "along": 0.1,
+    "sill": 0.55,
+    "size": [
+     1.7,
+     1.85
+    ],
+    "mullions": [
+     2,
+     1
+    ],
+    "frame": "#2A2724"
+   }
+  ],
+  "frame": "#2A2724"
+ },
+ "lights": {
+  "cob": {
+   "type": "area",
+   "shape": "DISK",
+   "size_m": [
+    0.01,
+    0.01
+   ],
+   "position": [
+    0.0,
+    0.95,
+    1.5314999999999999
+   ],
+   "target": [
+    0.0,
+    0.95,
+    0.0
+   ],
+   "power_w": 1.4093,
+   "color": 2700,
+   "camera": false
+  },
+  "toprim": {
+   "type": "area",
+   "size_m": [
+    0.5,
+    0.3
+   ],
+   "position": [
+    -0.6,
+    0.6,
+    1.95
+   ],
+   "target": [
+    0.0,
+    0.95,
+    1.5
+   ],
+   "irradiance": 1.2,
+   "color": 3200,
+   "camera": false,
+   "specular": 1.0,
+   "diffuse": 0.0
+  }
+ },
+ "camera": {
+  "position": [
+   0.78,
+   -0.17000000000000015,
+   1.2
+  ],
+  "target": [
+   -0.04,
+   1.0,
+   1.22
+  ],
+  "lens_mm": 50,
+  "level": true,
+  "fstop": 2.8,
+  "focus": [
+   0.0,
+   0.95,
+   1.45
+  ]
+ }
+}
