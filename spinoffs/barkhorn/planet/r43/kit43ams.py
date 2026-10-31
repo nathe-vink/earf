@@ -76,7 +76,7 @@ def canal(bpy, name, p, kit):
     objs.append(brick.object(bpy, principled(bpy, 'ams-brick', p.get('brick', '#3A2621'), rough=0.85,
                                              bump=(0.02, 0.25, 0.002))))
     objs.append(trim.object(bpy, principled(bpy, 'ams-trim', '#BDB6AA', rough=0.6)))
-    objs.append(lit.object(bpy, emitter(bpy, 'ams-lit', '#FFC27A', p.get('window_glow', 3.0))))
+    objs.append(lit.object(bpy, emitter(bpy, 'ams-lit', '#FFA050', p.get('window_glow', 3.0))))
     objs.append(dark.object(bpy, principled(bpy, 'ams-dark', '#0B0B0D', rough=0.08, spec=0.6)))
     # a row of elms' trunks on the far quay and bollards on ours, for scale
     tr = Mesh('ams-trunks')

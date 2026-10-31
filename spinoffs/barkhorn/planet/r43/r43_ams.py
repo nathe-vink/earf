@@ -38,7 +38,7 @@ def shot(view):
     s['title'] = f'Mother EARF at 2 m, Amsterdam (a proposal): {view}'
     s['camera'] = v['camera']
     s['set'] = {'kind': 'stage', 'props': [
-        {'kind': 'kit', 'shape': 'ext', 'path': KIT, 'fn': 'canal', 'width': 18.0, 'lit': 0.36, 'window_glow': 2.2},
+        {'kind': 'kit', 'shape': 'ext', 'path': KIT, 'fn': 'canal', 'width': 18.0, 'lit': 0.36, 'window_glow': 0.8},
         {'kind': 'kit', 'shape': 'ext', 'path': KIT, 'fn': 'globe', 'size': 2.0, 't': 0.025, 'at': G,
          'rim': v.get('rim', 0.03), 'rim_par': 1.0, 'heading': 35.0, 'base_h': 0.45, 'post': 0.10},
         {'kind': 'kit', 'shape': 'asset', 'model': 'street_lamp_01', 'res': '1k', 'position': [-9.0, -1.0, 0.0],
