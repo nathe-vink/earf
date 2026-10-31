@@ -463,7 +463,8 @@ def shot_relief(sc):
     camera((1.45, -2.05, 1.12), (0.12, -0.03, 1.2), lens=85, fstop=4.0, focus=2.45)    # c4, c7: oblique, quiet wall left for type
 
 def shot_meridian(sc):
-    wall = slab('wall', -2, 0.0, -1, 2, 0.05, 3.0, basic('plaster', '#E4DED4', 0.9, noise=0.15))
+    sys.path.insert(0, os.path.join(HERE, '..', '..', '..', '..', 'studio', 'engine')); import materials as SM
+    wall = slab('wall', -2, 0.0, -1, 2, 0.05, 3.0, SM.make(bpy, 'plaster', 'plaster', {'color': '#E4DED4', 'bump': 0.05}))   # critic r1 c5
     cz = 1.45
     def disc(name, r, depth, h, mat, x=0.0, z=cz, r_in=0.0):
         o = ring(name, r, r_in, 0, h, mat)
@@ -474,7 +475,7 @@ def shot_meridian(sc):
         a = math.radians(90 - i * 30)
         o = slab(f'mark{i}', -0.0015, -0.0006, -0.006, 0.0015, 0.0, 0.006, acrylic('fog'))
         o.rotation_euler = (0, -a + math.pi / 2, 0)   # radial bars
-        o.location = (0.166 * math.cos(a), -0.0356, cz + 0.166 * math.sin(a))
+        o.location = (0.166 * math.cos(a), -0.03565, cz + 0.166 * math.sin(a))   # 0.05 mm proud: touching the face, two rendered black
     disc('housing', 0.028, 0.004, 0.024, basic('black-alu', '#18171A', 0.4, 0.7))
     ah, am = math.radians(90 - (2 + 10 / 60) * 30), math.radians(90 - 10 * 6)   # ten past two
     brass = basic('brass', '#B8923F', 0.25, 1.0)
@@ -486,10 +487,14 @@ def shot_meridian(sc):
         disc(f'{nm}-weight', cw, depth - 0.0002, 0.006, brass, x=-0.03 * math.cos(ang), z=cz - 0.03 * math.sin(ang))
     disc('hub', 0.006, 0.052, 0.008, brass)
     sc.render.resolution_x, sc.render.resolution_y = 1800, 1200
-    area('key', (-1.2, -1.6, 2.0), (0, 0, cz), 1.2, 35)
-    spot('rake', (-0.9, -0.55, 2.0), (0.05, -0.03, cz), 380, 20, 0.006, '#FFF1E0')
-    area('fill', (1.2, -1.6, 1.3), (0, 0, cz), 1.2, 14, '#E6ECF5')
-    camera((0.26, -0.98, 1.38), (0.02, -0.03, cz - 0.005), lens=55, fstop=0)
+    area('key', (-1.7, -1.1, 2.1), (0, 0, cz), 1.2, 35, shape='DISK')                         # c1: round, off the face's mirror angle
+    graze = area('graze', (0.0, -0.08, cz + 0.40), (0.0, -0.04, cz + 0.17), 0.6, 15, '#FFF4E8', size_y=0.05)   # c2: skims the face's top edge
+    graze.visible_glossy = False
+    r = spot('rake', (-0.75, -1.0, 2.05), (0.05, -0.03, cz), 300, 34, 0.04, '#FFF1E0')          # c3: nearer the camera axis, softer, a wide blend
+    r.data.spot_blend = 0.9
+    area('fill', (1.2, -1.6, 1.3), (0, 0, cz), 1.2, 6, '#E6ECF5')                              # c4
+    camera((0.15, -2.00, 1.40), (0.06, -0.03, cz - 0.005), lens=85, fstop=0)                  # c7: frontal, the face nearly round, room for type left
+    sc.view_settings.exposure = -0.4
 
 SHOTS = dict(moho=shot_moho, lithos=shot_lithos, ionos=shot_ionos, cairn=shot_cairn, bedrock=shot_bedrock, relief=shot_relief, meridian=shot_meridian)
 
