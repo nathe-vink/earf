@@ -24,6 +24,11 @@ def room():
     s = load('studio/shots/barkhorn/room31/room.json')
     s['title'] = 'Tropos, a pair at home at golden hour (Poison), round 36 horn'
     s['products'] = [p for p in s['products'] if 'turntable' not in p['def']]
+    for p in s['set']['props']:              # with the record player gone, the books and the vase drawn in toward the middle
+        if p.get('fn') == 'books':
+            p['position'] = [-0.4] + p['position'][1:]
+        if p.get('model') == 'ceramic_vase_02':
+            p['position'] = [0.42] + p['position'][1:]
     return s
 
 
@@ -50,7 +55,7 @@ def above():
     s = load('studio/shots/barkhorn/studio31/hero-light-ember.json')
     s['title'] = 'Tropos, the horn from above (Ember)'
     s['size'] = [2400, 1600]
-    s['camera'] = {'position': [1.05, -1.55, 2.55], 'target': [0.0, 0.02, 1.12], 'lens_mm': 85.0, 'level': False}
+    s['camera'] = {'position': [1.45, -2.05, 3.0], 'target': [0.0, 0.06, 1.05], 'lens_mm': 70.0, 'level': False}
     return s
 
 
