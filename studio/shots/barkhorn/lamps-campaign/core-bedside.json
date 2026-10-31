@@ -1,0 +1,354 @@
+{
+ "title": "Core in Ember on a bedside table at night (the campaign)",
+ "size": [
+  2400,
+  1600
+ ],
+ "render": {
+  "samples": 256,
+  "adaptive": 0.01,
+  "denoise": true,
+  "clamp": 10,
+  "bounces": 24,
+  "transmission_bounces": 20,
+  "view": "Khronos PBR Neutral",
+  "exposure": 4.153,
+  "white_balance_k": 3300
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#1A2A48",
+  "horizon": "#3A4A6A",
+  "ground": "#141820",
+  "strength": 0.006
+ },
+ "set": {
+  "kind": "room",
+  "size": [
+   5.2,
+   4.6,
+   2.7
+  ],
+  "center": [
+   0.0,
+   0.85
+  ],
+  "floor": {
+   "plank_w": 0.16,
+   "plank_l": 1.8,
+   "base": "#6E4E34",
+   "dark": "#5A3E28",
+   "light": "#7E5C40",
+   "plank_contrast": 0.7
+  },
+  "wall": {
+   "color": "#3C4250"
+  },
+  "ceiling": "#E6E0D6",
+  "skirting": {
+   "h": 0.12,
+   "color": "#6E665A"
+  },
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "gloss",
+    "color": "#3A2A1E",
+    "position": [
+     0.55,
+     2.05,
+     0.0
+    ],
+    "size": [
+     1.72,
+     2.1,
+     0.3
+    ],
+    "roughness": 0.55
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "cotton",
+    "color": "#ECE8E0",
+    "position": [
+     0.55,
+     2.05,
+     0.3
+    ],
+    "size": [
+     1.62,
+     2.0,
+     0.22
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "wool",
+    "color": "#7F8794",
+    "position": [
+     0.55,
+     1.7499999999999998,
+     0.5
+    ],
+    "size": [
+     1.66,
+     1.45,
+     0.07
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "cotton",
+    "color": "#F2EFE9",
+    "position": [
+     0.17000000000000004,
+     2.86,
+     0.52
+    ],
+    "size": [
+     0.62,
+     0.4,
+     0.15
+    ],
+    "rotate_z": 4
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "cotton",
+    "color": "#F2EFE9",
+    "position": [
+     0.93,
+     2.86,
+     0.52
+    ],
+    "size": [
+     0.62,
+     0.4,
+     0.15
+    ],
+    "rotate_z": -3
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "gloss",
+    "color": "#3A2A1E",
+    "position": [
+     0.55,
+     3.1,
+     0.0
+    ],
+    "size": [
+     1.84,
+     0.06,
+     1.05
+    ],
+    "roughness": 0.55
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "side_table_01",
+    "position": [
+     -0.62,
+     2.82,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     0.0
+    ],
+    "scale": 1.0
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "paper",
+    "color": "#2B3A4A",
+    "position": [
+     -0.7,
+     2.8,
+     0.55
+    ],
+    "size": [
+     0.17,
+     0.24,
+     0.025
+    ],
+    "rotate_z": 8
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "paper",
+    "color": "#B8873C",
+    "position": [
+     -0.7,
+     2.8,
+     0.575
+    ],
+    "size": [
+     0.16,
+     0.23,
+     0.02
+    ],
+    "rotate_z": -4
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "material": "glass",
+    "color": "#F4F2EE",
+    "position": [
+     -0.47,
+     2.7,
+     0.55
+    ],
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.032,
+      0
+     ],
+     [
+      0.034,
+      0.11
+     ],
+     [
+      0.0,
+      0.11
+     ]
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "earf_moon",
+    "fn": "orb",
+    "spots": [
+     {
+      "position": [
+       -0.62,
+       2.85,
+       0.55
+      ],
+      "rotate_z": -30
+     }
+    ],
+    "flavour": "ember",
+    "lamp_w": 0.17569546120058566,
+    "shade_glow": 0.35,
+    "materials": {
+     "body": {
+      "radius": 0.00375
+     },
+     "liner": {
+      "radius": 0.002
+     }
+    }
+   },
+   {
+    "kind": "frame",
+    "position": [
+     0.55,
+     3.15
+    ],
+    "z": 1.55,
+    "size": [
+     0.9,
+     0.6
+    ],
+    "art": "#2E3C52"
+   }
+  ],
+  "windows": [
+   {
+    "wall": "left",
+    "along": -0.4,
+    "sill": 0.75,
+    "size": [
+     1.1,
+     1.5
+    ],
+    "mullions": [
+     1,
+     1
+    ],
+    "frame": "#1E2024"
+   }
+  ]
+ },
+ "lights": {
+  "corepool0": {
+   "type": "point",
+   "position": [
+    -0.715,
+    2.83,
+    0.6100000000000001
+   ],
+   "power_w": 0.0732,
+   "radius_m": 0.03,
+   "color": "#FF8A60",
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  },
+  "corepool1": {
+   "type": "point",
+   "position": [
+    -0.525,
+    2.83,
+    0.6100000000000001
+   ],
+   "power_w": 0.0732,
+   "radius_m": 0.03,
+   "color": "#FF8A60",
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  },
+  "coreup": {
+   "type": "point",
+   "position": [
+    -0.62,
+    2.85,
+    0.8500000000000001
+   ],
+   "power_w": 0.1025,
+   "radius_m": 0.08,
+   "color": "#FF8A60",
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  }
+ },
+ "camera": {
+  "position": [
+   -1.55,
+   0.95,
+   1.05
+  ],
+  "target": [
+   -0.45,
+   2.75,
+   0.7
+  ],
+  "lens_mm": 38,
+  "level": true,
+  "fstop": 2.8,
+  "focus": [
+   -0.62,
+   2.85,
+   0.68
+  ]
+ }
+}

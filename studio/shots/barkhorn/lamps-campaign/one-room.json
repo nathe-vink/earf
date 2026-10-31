@@ -1,0 +1,735 @@
+{
+ "title": "Hemisphere, Core and Mantle in one room at dusk (the campaign)",
+ "size": [
+  2400,
+  1600
+ ],
+ "render": {
+  "samples": 256,
+  "adaptive": 0.01,
+  "denoise": true,
+  "clamp": 10,
+  "bounces": 24,
+  "transmission_bounces": 20,
+  "view": "Khronos PBR Neutral",
+  "exposure": 3.953,
+  "white_balance_k": 3100
+ },
+ "sky": {
+  "kind": "hdri",
+  "polyhaven": "twilight_sunset",
+  "rotation_deg": 250.0,
+  "strength": 0.03,
+  "res": "4k"
+ },
+ "set": {
+  "kind": "room",
+  "size": [
+   5.2,
+   4.6,
+   2.7
+  ],
+  "center": [
+   0.0,
+   0.85
+  ],
+  "floor": {
+   "plank_w": 0.16,
+   "plank_l": 1.8,
+   "base": "#6E4E34",
+   "dark": "#5A3E28",
+   "light": "#7E5C40",
+   "plank_contrast": 0.7
+  },
+  "wall": {
+   "color": "#7D7466"
+  },
+  "ceiling": "#E6E0D6",
+  "skirting": {
+   "h": 0.12,
+   "color": "#6E665A"
+  },
+  "props": [
+   {
+    "kind": "table",
+    "position": [
+     0.0,
+     0.95
+    ],
+    "size": [
+     1.7,
+     0.9,
+     0.75
+    ],
+    "color": "#6B4A30"
+   },
+   {
+    "kind": "lamp",
+    "position": [
+     -2.15,
+     2.75
+    ],
+    "height": 1.55,
+    "shade": "#E8DCC8",
+    "off": true
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "material": "gloss",
+    "color": "#F2EEE6",
+    "roughness": 0.25,
+    "radius": 0.135,
+    "height": 0.016,
+    "position": [
+     -0.38,
+     0.83,
+     0.75
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "material": "gloss",
+    "color": "#F2EEE6",
+    "roughness": 0.25,
+    "radius": 0.135,
+    "height": 0.016,
+    "position": [
+     0.38,
+     1.0699999999999998,
+     0.75
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "material": "glass",
+    "color": "#F4F2EE",
+    "position": [
+     -0.18,
+     0.6499999999999999,
+     0.75
+    ],
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.035,
+      0
+     ],
+     [
+      0.035,
+      0.004
+     ],
+     [
+      0.004,
+      0.012
+     ],
+     [
+      0.004,
+      0.1
+     ],
+     [
+      0.038,
+      0.13
+     ],
+     [
+      0.042,
+      0.19
+     ],
+     [
+      0.0,
+      0.19
+     ]
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "material": "glass",
+    "color": "#F4F2EE",
+    "position": [
+     0.22,
+     1.25,
+     0.75
+    ],
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.035,
+      0
+     ],
+     [
+      0.035,
+      0.004
+     ],
+     [
+      0.004,
+      0.012
+     ],
+     [
+      0.004,
+      0.1
+     ],
+     [
+      0.038,
+      0.13
+     ],
+     [
+      0.042,
+      0.19
+     ],
+     [
+      0.0,
+      0.19
+     ]
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "paper",
+    "color": "#F1ECE2",
+    "size": [
+     0.15,
+     0.22,
+     0.002
+    ],
+    "position": [
+     -0.05,
+     0.77,
+     0.75
+    ],
+    "rotate_z": 12
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "earf_moon",
+    "fn": "dome",
+    "spots": [
+     [
+      0.0,
+      0.95,
+      1.45
+     ]
+    ],
+    "flavour": "ember",
+    "ceiling": 2.7,
+    "lamp": false,
+    "shade_glow": 0.8,
+    "hide": "reflector",
+    "materials": {
+     "liner": {
+      "glow_color": "#FF4A22"
+     }
+    }
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "dining_chair_02",
+    "position": [
+     -0.42,
+     0.2699999999999999,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     0.0
+    ],
+    "scale": 1.0
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "dining_chair_02",
+    "position": [
+     0.42,
+     0.2699999999999999,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     0.0
+    ],
+    "scale": 1.0
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "dining_chair_02",
+    "position": [
+     -0.42,
+     1.63,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     180.0
+    ],
+    "scale": 1.0
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "dining_chair_02",
+    "position": [
+     0.42,
+     1.63,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     180.0
+    ],
+    "scale": 1.0
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "potted_plant_02",
+    "position": [
+     -2.05,
+     2.75,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     30.0
+    ],
+    "scale": 1.0
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "modern_wooden_cabinet",
+    "position": [
+     0.25,
+     2.79,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     0.0
+    ],
+    "scale": 1.0
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "potted_plant_02",
+    "position": [
+     1.8,
+     2.74,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     20.0
+    ],
+    "scale": 1.0
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "ceramic_vase_01",
+    "position": [
+     1.2,
+     2.84,
+     0.68
+    ],
+    "rotate": [
+     0,
+     0,
+     0.0
+    ],
+    "scale": 1.0
+   },
+   {
+    "kind": "frame",
+    "position": [
+     0.15,
+     3.15
+    ],
+    "z": 1.62,
+    "size": [
+     1.0,
+     0.7
+    ],
+    "art": "#B4432E"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "gloss",
+    "color": "#3A2A1E",
+    "position": [
+     0.8,
+     2.77,
+     0.68
+    ],
+    "size": [
+     0.34,
+     0.36,
+     0.012
+    ],
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "card",
+    "color": "#D8D2C4",
+    "position": [
+     0.8,
+     2.62,
+     0.6920000000000001
+    ],
+    "size": [
+     0.315,
+     0.004,
+     0.315
+    ],
+    "rotate_x": -5.810176864540543
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "card",
+    "color": "#1E1E22",
+    "position": [
+     0.8,
+     2.653,
+     0.6920000000000001
+    ],
+    "size": [
+     0.315,
+     0.004,
+     0.315
+    ],
+    "rotate_x": -4.278853873520241
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "card",
+    "color": "#B23A28",
+    "position": [
+     0.8,
+     2.686,
+     0.6920000000000001
+    ],
+    "size": [
+     0.315,
+     0.004,
+     0.315
+    ],
+    "rotate_x": -5.150224167259603
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "card",
+    "color": "#2C4A6A",
+    "position": [
+     0.8,
+     2.7190000000000003,
+     0.6920000000000001
+    ],
+    "size": [
+     0.315,
+     0.004,
+     0.315
+    ],
+    "rotate_x": -3.980399807019028
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "card",
+    "color": "#E0B040",
+    "position": [
+     0.8,
+     2.7520000000000002,
+     0.6920000000000001
+    ],
+    "size": [
+     0.315,
+     0.004,
+     0.315
+    ],
+    "rotate_x": -3.87139847945973
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "card",
+    "color": "#5A6E4A",
+    "position": [
+     0.8,
+     2.785,
+     0.6920000000000001
+    ],
+    "size": [
+     0.315,
+     0.004,
+     0.315
+    ],
+    "rotate_x": -6.6723557038009345
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "card",
+    "color": "#E8E4DC",
+    "position": [
+     0.8,
+     2.818,
+     0.6920000000000001
+    ],
+    "size": [
+     0.315,
+     0.004,
+     0.315
+    ],
+    "rotate_x": -6.9341600422256295
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "card",
+    "color": "#7A3A5A",
+    "position": [
+     0.8,
+     2.851,
+     0.6920000000000001
+    ],
+    "size": [
+     0.315,
+     0.004,
+     0.315
+    ],
+    "rotate_x": -2.8126545895176998
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "card",
+    "color": "#3A3A3A",
+    "position": [
+     0.8,
+     2.8840000000000003,
+     0.6920000000000001
+    ],
+    "size": [
+     0.315,
+     0.004,
+     0.315
+    ],
+    "rotate_x": -5.703229928359962
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "material": "gloss",
+    "color": "#0C0C0D",
+    "position": [
+     -0.32500000000000007,
+     2.778,
+     0.793
+    ],
+    "radius": 0.1505,
+    "height": 0.0018,
+    "roughness": 0.22
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "material": "paper",
+    "color": "#C8402A",
+    "position": [
+     -0.32500000000000007,
+     2.778,
+     0.7948000000000001
+    ],
+    "radius": 0.05,
+    "height": 0.0003
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "earf_moon",
+    "fn": "orb",
+    "spots": [
+     {
+      "position": [
+       1.23,
+       2.77,
+       0.68
+      ],
+      "rotate_z": -20
+     }
+    ],
+    "flavour": "smoke",
+    "lamp_w": 0.17569546120058566,
+    "shade_glow": 0.3,
+    "materials": {
+     "body": {
+      "radius": 0.009
+     },
+     "liner": {
+      "radius": 0.002
+     }
+    }
+   }
+  ],
+  "windows": [
+   {
+    "wall": "left",
+    "along": 0.1,
+    "sill": 0.55,
+    "size": [
+     1.7,
+     1.85
+    ],
+    "mullions": [
+     2,
+     1
+    ],
+    "frame": "#2A2724"
+   }
+  ],
+  "frame": "#2A2724"
+ },
+ "lights": {
+  "cob": {
+   "type": "area",
+   "shape": "DISK",
+   "size_m": [
+    0.01,
+    0.01
+   ],
+   "position": [
+    0.0,
+    0.95,
+    1.5314999999999999
+   ],
+   "target": [
+    0.0,
+    0.95,
+    0.0
+   ],
+   "power_w": 1.4093,
+   "color": 2700,
+   "camera": false
+  },
+  "floorlamp": {
+   "type": "point",
+   "position": [
+    -2.15,
+    2.75,
+    1.42
+   ],
+   "power_w": 0.2196,
+   "radius_m": 0.03,
+   "color": 2400,
+   "camera": false
+  },
+  "corepool0": {
+   "type": "point",
+   "position": [
+    1.135,
+    2.75,
+    0.74
+   ],
+   "power_w": 0.0732,
+   "radius_m": 0.03,
+   "color": "#E8D8C8",
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  },
+  "corepool1": {
+   "type": "point",
+   "position": [
+    1.325,
+    2.75,
+    0.74
+   ],
+   "power_w": 0.0732,
+   "radius_m": 0.03,
+   "color": "#E8D8C8",
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  },
+  "coreup": {
+   "type": "point",
+   "position": [
+    1.23,
+    2.77,
+    0.98
+   ],
+   "power_w": 0.1025,
+   "radius_m": 0.08,
+   "color": "#E8D8C8",
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  }
+ },
+ "camera": {
+  "position": [
+   1.75,
+   -1.45,
+   1.45
+  ],
+  "target": [
+   -0.15,
+   1.75,
+   1.0
+  ],
+  "lens_mm": 28,
+  "level": true,
+  "fstop": 5.6,
+  "focus": [
+   0.0,
+   1.4,
+   1.0
+  ]
+ },
+ "product": {
+  "def": "spinoffs/barkhorn/companions/out-turntable-float/open/barkhorn-turntable-float-open.json",
+  "flavour": "ember",
+  "hide": [],
+  "instances": [
+   {
+    "position": [
+     -0.30000000000000004,
+     2.77,
+     0.68
+    ],
+    "rotate_z": 0.0
+   }
+  ]
+ },
+ "materials": {
+  "glow": {
+   "strength": 9.0
+  }
+ }
+}
