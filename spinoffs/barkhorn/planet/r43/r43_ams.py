@@ -35,7 +35,7 @@ VIEWS = {
     # s2 (s1 judged quay 4.5/4.0, shadow 4.5/4.5, converged: peg figures on this quay; the ring cages the globe and the
     # shadow; a white stage pool against an orange street; a smooth tile quay; the houses cropped or read as boxes with
     # chimneys and colour-block panes; a purple lamp halo): near figures removed; the ring low and wide (rope at 0.45 m,
-    # r 2.4); klinker paving; WB 3500, lamps 2700 K, spot 5000 K 900 W 14 deg aimed toward the water; sky 0.08; neck
+    # r 2.4); klinker paving; WB 3500, lamps 2700 K, spot 5000 K 900 W (aim and cone kept from s1: a 14 deg test toward the water smeared the shadow violet); sky 0.08; neck
     # gables wider; one hue per lit room; the cameras opened up to show the gables
     'quay2': dict(camera={'position': [5.5, -7.0, 1.60], 'target': [-1.0, 0.5, 2.5], 'lens_mm': 30, 'level': True,
                           'fstop': 4.0, 'focus': [0.0, -3.2, 1.5]}, exposure=3.6, look=2),
@@ -85,7 +85,7 @@ def shot(view):
                 'irradiance': 0.4, 'color': 2400, 'camera': False},
     }
     if v.get('look') == 2:
-        s['lights']['hard'] = spot([-2.0, -9.0, 8.5], [0.6, -1.6, 0.0], v.get('hard_w', 900.0), v.get('cone', 14.0),
+        s['lights']['hard'] = spot([-2.0, -9.0, 8.5], [0.3, -2.0, 0.0], v.get('hard_w', 900.0), v.get('cone', 16.0),
                                    k=v.get('hard_k', 5000), blend=0.2)
         for l in ('lamp-a', 'lamp-b'):
             s['lights'][l]['color'] = 2700
