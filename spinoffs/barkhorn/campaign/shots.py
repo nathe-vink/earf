@@ -168,7 +168,7 @@ def lineup():
     return s
 
 
-SHOTS = {'room': room, 'night': night, 'inside': inside, 'corner': corner, 'above': above,
+SHOTS = {'room': room, 'room-final': lambda: room(critic_round=3),   # round 3's look (7.0): the final 'night': night, 'inside': inside, 'corner': corner, 'above': above,
          'horn-formed': lambda: horn_pair(False), 'horn-laminated': lambda: horn_pair(True), 'lineup-stock': lineup}
 for _c in ('ember', 'smoke'):
     for _r in ('formed', 'stepped', 'smooth'):
