@@ -129,6 +129,14 @@ brand"). Not live: main needs the owner's yes.
   the page's load, its still frame until then; the eight "Lit from below" pictures and the colour cards loaded within a
   screen of view (Chrome's own lazy distance fetched 1.8 MB of them up front); the gallery's neighbours after load;
   the dark icons, never shown in a one-theme site, gone.
+- **Two pages built dark** (`DEBUT`, `FOUNDING`, both False; from the brand lane's mockups on `r47-brand`): `#debut`, the
+  invitation (Tuesday 19 January 2027, the week of FOG Design+Art, the venue to be announced; Ember in the dark studio,
+  the eight tints in a bar) and `#founding-hundred` (the first hundred pairs, numbered; the FCC's words for an
+  unauthorised device; "Register interest" only, no payment, no price; a "Draft for counsel" bar while
+  `FOUNDING_REVIEW`). Each asks through the waitlist's form once it has a provider, else by one button to the press
+  address (the enquiries until that is filled). Off, nothing of either is in `site/`: no markup, style, route name,
+  link, `/s/` page or card picture (checked by search); on, both swept at 1440 and 390, with and without forms, their
+  `/s/` cards (an Event for the debut) landing where they should.
 - **Tropos's CAD kept off the site:** `viewer/dist` (git-ignored) goes into `site/3d` only while `VIEW3D` is on.
 - **For the owner's deploy decision:** `launch/r47-what-changes.pdf` (11 pages), before and after at 1440 and 390 px,
   page by page, on the final branch; Fog's faint horn noted (as in its still); the link previews.

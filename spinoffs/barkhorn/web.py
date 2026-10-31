@@ -893,6 +893,7 @@ def body():
         if data['tt'] and c['k'] in data['tt']['colours']:
             v = data['tt']['colours'][c['k']]['views']['studio']
             lead[f"mantle-{c['name'].lower()}"] = [v['src'], (v.get('tall') or {}).get('src')]
+    dark_html, dark_css, dark_routes = dark_pages()
     wl_form, wl_page = waitlist_html()
     page = (PAGE.replace('__WORD__', word).replace('__HOTSPOTS__', hotspots).replace('__NAMES__', names)
                 .replace('__HERO_TALL__', hero_tall).replace('__ROOM_TALL__', room_tall)
@@ -900,6 +901,10 @@ def body():
                 .replace('__TURN__', turn).replace('__CARDS__', cards).replace('__SPEC__', spec).replace('__DWG__', dwg)
                 .replace('__REEL__', reel).replace('__HABITATS__', habitats).replace('__CLOSER__', closer)
                 .replace('__LINES__', lines).replace('__COLOURS__', colours).replace('__LIGHTING__', lighting).replace('__TURNTABLE__', turntable)
+                .replace('__DARK__', dark_html).replace('/*DARK*/', dark_css.strip())
+                .replace('__DARK_ALT__', ''.join('|' + r for r in dark_routes)).replace('__DARK_JS__', json.dumps(dark_routes))
+                .replace('__DARK_TITLE__', json.dumps({r: n for r, n in (('debut', 'The debut'), ('founding-hundred', 'The Founding Hundred')) if r in dark_routes}))
+                .replace('__DARK_FOOT__', ''.join(f'<a href="#{r}">{n}</a>' for r, n in (('debut', 'The debut'), ('founding-hundred', 'The Founding Hundred')) if r in dark_routes))
                 .replace('__PRESS__', press_html()).replace('__JOURNAL__', journal_html()).replace('__JOURNAL_BAND__', journal_band())
                 .replace('__WAITLIST__', wl_form).replace('__PRIVACY__', wl_page)
                 .replace('__FOOT_PRIVACY__', '<a href="#privacy">Privacy</a>' if WAITLIST else '')
@@ -1342,13 +1347,13 @@ PAGE = r"""
   const L = __LEAD__, m = /^#([a-z]+-[a-z]+)$/.exec(h), add = (href, set, media) => { const l = d.ownerDocument.createElement('link');
     l.rel = 'preload'; l.as = 'image'; l.fetchPriority = 'high'; if (href) l.href = href; if (set) { l.imageSrcset = set; l.imageSizes = '100vw'; }
     if (media) l.media = media; d.ownerDocument.head.appendChild(l); };
-  const home = !h || h === '#' || !/^#(speaker|hemisphere|core|mantle|dome|orb|turntable|colour|journal|press|privacy|speakers|lighting|turntable|tropos|atmosphere|turn|spec|lamps|record|closer)\b/.test(h);
+  const home = !h || h === '#' || !/^#(speaker|hemisphere|core|mantle|dome|orb|turntable|colour|journal|press|privacy|speakers|lighting|turntable|tropos|atmosphere|turn|spec|lamps|record|closer__DARK_ALT__)\b/.test(h);
   d.dataset.home = home ? '1' : '';
   if (home) { add('img/hero-portrait.webp', null, '(max-width: 700px)'); add(null, 'img/hero-1200.webp 1200w, img/hero.webp 2400w', '(min-width: 701px)'); }
   else if (m && L[m[1]]) { const [wide, tall] = L[m[1]]; if (tall) { add(tall, null, '(max-width: 700px)'); add(wide, null, '(min-width: 701px)'); } else add(wide); }
 })(document.documentElement, location.hash)</script>
 <script>(function (d) { d.classList.add('opening');      // the opening's choice, made before anything paints: whether it plays, and by day or night
-  if (/^#(speaker|dome|orb|turntable|colour)-|^#(speakers|lighting|turntable|tropos|atmosphere|turn|spec|lamps|record|press|journal|privacy)$|^#journal-/.test(location.hash)
+  if (/^#(speaker|dome|orb|turntable|colour)-|^#(speakers|lighting|turntable|tropos|atmosphere|turn|spec|lamps|record|press|journal|privacy__DARK_ALT__)$|^#journal-/.test(location.hash)
       || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   d.classList.add('intro');
   if (matchMedia('(prefers-color-scheme: dark)').matches) { d.classList.add('night'); document.querySelector('meta[name="theme-color"]').content = '#100F12'; }
@@ -1909,6 +1914,7 @@ html.cursor, html.cursor * { cursor: none !important }
 .dl-grid figure { margin: 0 } .dl-grid img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 6px; display: block; background: #F1EDE8 }
 .dl-grid figcaption { margin-top: 8px; font-size: 14px; line-height: 1.45 } .dl-grid a { color: var(--ink); text-underline-offset: 3px; white-space: nowrap }
 .jlist { list-style: none; margin: 32px 0 80px; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px 20px }
+/*DARK*/
 .jband { margin: 0 }
 .share-note { margin: 8px 0 0; min-height: 1.4em; font-size: 14px; color: var(--muted); word-break: break-all }
 /* the press page printed (viewer/presskit.mjs makes site/press/earf-press-kit.pdf from it): the words and the
@@ -2129,10 +2135,11 @@ __TURNTABLE__
 __PRESS__
 __JOURNAL__
 __PRIVACY__
+__DARK__
 
 <footer><div class="wrap">
   <a class="brand" href="#top" aria-label="EARF, home">__WORD__</a>
-  <nav class="foot-nav" aria-label="More"><a href="#progress">Progress</a><a href="#journal">Journal</a><a href="#press">Press</a><a href="#contact">Enquiries</a>__FOOT_PRIVACY__</nav>
+  <nav class="foot-nav" aria-label="More"><a href="#progress">Progress</a><a href="#journal">Journal</a><a href="#press">Press</a><a href="#contact">Enquiries</a>__DARK_FOOT____FOOT_PRIVACY__</nav>
   <p>EARF &middot; San Francisco &middot; In development, not yet for sale &middot; The pictures are renders &middot; &copy; 2026</p>
 </div></footer>
 
@@ -2592,7 +2599,8 @@ function renderColour(k) {
 const OLD = { dome: 'hemisphere', orb: 'core', turntable: 'mantle' };
 const home = document.getElementById('home'), pdp = document.getElementById('pdp');
 const lineMain = document.getElementById('line'), colourMain = document.getElementById('colour'), MAINS = { home, line: lineMain, colour: colourMain, pdp };
-['press', 'journal', 'privacy'].forEach(n => { const m = document.getElementById(n); if (m) MAINS[n] = m; });
+['press', 'journal', 'privacy', ...__DARK_JS__].forEach(n => { const m = document.getElementById(n); if (m) MAINS[n] = m; });
+const DARK_TITLE = __DARK_TITLE__;
 const LINE_OF = { speakers: 'speakers', tropos: 'speakers', atmosphere: 'speakers', turn: 'speakers', spec: 'speakers', closer: 'speakers',
                   lighting: 'lighting', lamps: 'lighting', turntable: 'turntable', record: 'turntable' };
 const LINE_NAME = { speakers: 'Speakers', lighting: 'Lighting', turntable: 'Turntable' };
@@ -2619,6 +2627,8 @@ function route() {
     navAt(PBY[m[1]].line);
   } else if ((m = /^colour-([a-z]+)$/.exec(h)) && keyOf(m[1])) {
     page = h; showMain('colour'); renderColour(keyOf(m[1])); scrollTo(0, 0); navAt('colours');
+  } else if (DARK_TITLE[h] && MAINS[h]) {                 // a page built dark, once its flag is on
+    page = h; showMain(h); document.title = `${DARK_TITLE[h]} · EARF`; scrollTo(0, 0); navAt(null);
   } else if (MAINS.press && h === 'press' || MAINS.privacy && h === 'privacy') {      // round 47: the press page, the privacy notice
     page = h; showMain(h); document.title = `${h === 'press' ? 'Press' : 'Privacy'} · EARF`; scrollTo(0, 0); navAt(null);
   } else if (MAINS.journal && (m = /^journal(?:-([a-z0-9-]+))?$/.exec(h)) && (!m[1] || document.getElementById(h))) {   // the journal and its posts
@@ -2772,10 +2782,151 @@ def favicons():
 # page of its own at /s/<address>: its own card (Open Graph and Twitter: title, words, a 1200 x 630 picture in that
 # colour, the colour as theme-color), schema.org data (a Product with no offer, as nothing is priced; an Article for a
 # post), and a forward to the view itself. "Copy link" on a product's page gives this address.
+# round 47: two pages built dark, for the owner's yes (the coordinator, 2026-10-31), from the brand lane's mockups
+# (r47-brand: brandbook/launch/invite-card.html and reserve.html; the terms in money/out/, for counsel). Off, neither
+# leaves a trace: no markup, style, route, link, /s/ page or card picture. No price is shown on either: the site's is
+# "Priced at launch", and the mockup's [PAIR PRICE] and [RESERVATION] wait for the owner and counsel.
+DEBUT = False            # the debut: Tue 19 January 2027, the week of FOG Design+Art, the venue to be announced
+FOUNDING = False         # the Founding Hundred: register interest only; no payment anywhere
+FOUNDING_REVIEW = True   # its words are counsel's to approve: a bar across the page says so until this is False
+DEBUT_FACTS = [('When', 'Tuesday 19 January 2027, the week of FOG Design+Art'), ('Where', 'San Francisco; the venue to be announced'),
+               ('Hear', 'Tropos, the horn loudspeaker, its first pair built as production will build it'),
+               ('See', 'Mantle, the record player, and the lamps or their cast samples in the eight tints'),
+               ('At the door', 'One coin, one song')]
+
+
+def ask_link():
+    """Where an invitation or a place is asked for before the waitlist has a provider: the press address once it is
+    filled, the enquiries until then."""
+    return f'mailto:{PRESS["contact"]}' if PRESS['contact'] else '#contact'
+
+
+def interest_form(list_name, button, fallback):
+    """The waitlist's form for one list (the debut's, the Founding Hundred's), or, until the waitlist is on with a
+    provider, one button to ask by."""
+    if not (WAITLIST and WAITLIST_ACTION):
+        return f'<p class="ask"><a class="btn solid" href="{ask_link()}">{fallback}</a></p>'
+    return (f'<form class="waitlist dark-form" action="{WAITLIST_ACTION}" method="post" novalidate>'
+            f'<input type="hidden" name="list" value="{list_name}">'
+            f'<div class="wl-row"><label for="wl-{list_name}" class="sr">Email address</label>'
+            f'<input id="wl-{list_name}" name="{WAITLIST_FIELD}" type="email" autocomplete="email" required placeholder="you@example.com">'
+            f'<button class="btn solid" type="submit">{button}</button></div>'
+            '<input type="text" name="website" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true">'
+            '<p class="wl-note">Unsubscribe from any email. <a href="#privacy">How we keep your address</a>.</p>'
+            '<p class="wl-status" role="status"></p></form>')
+
+
+def dark_pages():
+    """The debut's and the Founding Hundred's pages, their styles and their routes; empty for each one that is off."""
+    html, css, routes = '', '', []
+    tints = ''.join(f'<span style="background:{MARK[k]}"></span>' for k in KEYS)
+    if DEBUT:
+        routes.append('debut')
+        facts = ''.join(f'<dt>{a}</dt><dd>{b}</dd>' for a, b in DEBUT_FACTS)
+        w_, h_ = Image.open(os.path.join(IMG, 'red-studio.jpg')).size
+        webp('img/red-studio.jpg')
+        html += f"""
+<main id="debut" hidden>
+  <section class="debut-top">
+    <img src="img/red-studio.webp" srcset="img/red-studio-1200.jpg 1200w, img/red-studio.webp 2400w" sizes="100vw" width="{w_}" height="{h_}"
+      alt="Tropos in Ember in the dark, lit from above, its reflection in a black floor" loading="lazy">
+    <div class="wrap debut-words"><p class="eyebrow">You are invited</p><h1>Something in the air.</h1>
+      <p class="lede">The first pair of Tropos, heard for the first time. Hi-fi and light in cast acrylic, in eight colours.</p>
+      <p class="debut-when">Tuesday 19 January 2027<br>San Francisco &middot; venue to be announced</p>
+      {interest_form('debut', 'Ask for an invitation', 'Invitations by request')}</div>
+    <div class="tint-bar" aria-hidden="true">{tints}</div>
+  </section>
+  <div class="debut-more"><div class="wrap"><p class="eyebrow">The EARF debut &middot; the week of FOG Design+Art</p>
+    <h2>One night, and the first time it plays.</h2><dl class="debut-facts">{facts}</dl>
+    <p class="ed-note">Everything in the room is made to order. Until the night, every picture here is a render: no Tropos has been built yet.</p></div></div>
+</main>"""
+        css += """
+.debut-top { position: relative; color: #F2EFEA; background: #0B0C10; overflow: hidden }
+.debut-top img { display: block; width: 100%; height: auto; max-height: 72vh; object-fit: cover; object-position: 50% 40% }
+.debut-words { position: relative; padding-block: 8px 48px } .debut-words .eyebrow { color: #A7A39B }
+.debut-words h1 { font-size: clamp(44px, 7vw, 96px) } .debut-words .lede { color: #CFCBC4; max-width: 40ch }
+.debut-when { margin: 22px 0 18px; font: 500 15px/1.6 var(--mono); letter-spacing: 0.1em; text-transform: uppercase }
+.debut-top .btn.solid { background: #F2EFEA; color: #0B0C10; border-color: #F2EFEA }
+.debut-top .btn:focus-visible { outline-color: #F2EFEA }
+.debut-top .wl-note, .debut-top .wl-status { color: #A7A39B } .debut-top .wl-note a { color: #F2EFEA }
+.tint-bar { display: flex; height: 6px } .tint-bar span { flex: 1 }
+.debut-more { padding-block: 56px 80px }
+.debut-facts { display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 10px 20px; margin: 24px 0; padding-top: 16px; border-top: 1px solid var(--rule); max-width: 760px }
+.debut-facts dt { font: 500 12px/1.7 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted) } .debut-facts dd { margin: 0 }
+@media (max-width: 560px) { .debut-facts { grid-template-columns: minmax(0, 1fr); gap: 2px } .debut-facts dd { margin-bottom: 10px } }
+.ask { margin: 0 }
+"""
+    if FOUNDING:
+        routes.append('founding-hundred')
+        hw, hh = Image.open(os.path.join(IMG, 'hero-1200.jpg')).size
+        webp('img/hero-1200.jpg')
+        review = ('<p class="review-bar">Draft for counsel &middot; takes no payment &middot; every word to be confirmed</p>'
+                  if FOUNDING_REVIEW else '')
+        html += f"""
+<main id="founding-hundred" hidden>
+  {review}
+  <div class="wrap fh">
+    <div class="fh-head">
+      <p class="crumbs"><a href="#top">Home</a> / The Founding Hundred</p>
+      <p class="eyebrow">The Founding Hundred &middot; Tropos</p>
+      <h1>One of the first hundred pairs.</h1>
+      <p class="lede">The first hundred pairs of Tropos, numbered on both rating plates and kept on a register at Planet EARF.
+        The number is the reward: the price is the launch price.</p>
+    </div>
+    <aside class="fh-side" aria-labelledby="fh-reg"><h2 class="eyebrow" id="fh-reg">Register interest</h2>
+      <p>Tell us you&rsquo;d like one of the hundred. We&rsquo;ll write before anyone else, when there is a pair to hear and a
+        price to name.</p>
+      {interest_form('founding-hundred', 'Register interest', 'Register interest')}
+      <p class="fh-small">Priced at launch. Registering costs nothing and commits you to nothing.</p></aside>
+    <div class="fh-main">
+      <figure><img src="img/hero-1200.webp" width="{hw}" height="{hh}" loading="lazy"
+        alt="The eight Tropos speakers on a curve, Ember to Smoke"><figcaption>The eight colours. A render: no Tropos has been built yet.</figcaption></figure>
+      <aside class="notice" aria-label="A prototype, not yet authorised"><p class="eyebrow">A prototype, not yet authorised</p>
+        <p>Tropos is a planned product, in development. It has not been built in production or tested, and this device has
+        not been authorized as required by the rules of the Federal Communications Commission. This device is not, and may
+        not be, offered for sale or lease, or sold or leased, until authorization is obtained.</p></aside>
+      <h2>What a place among the hundred would hold</h2>
+      <ul class="fh-list"><li>A place among the first hundred pairs, in the order registered, in the colour you choose.</li>
+        <li>Once ordered and made: its number, from FOUNDING 001 to 100, laser-marked on both rating plates, a numbered
+          certificate, and the pair on the register.</li>
+        <li>A seat at the first Session, and an EARFcoin for life.</li></ul>
+      <ol class="fh-steps"><li><span><b>Now: interest, nothing more.</b> No money changes hands, and there is no ship date yet.</span></li>
+        <li><span><b>When the first pair has been built and heard:</b> we write with a delivery window that has a reasonable basis,
+          the price and the terms. You choose whether to order.</span></li>
+        <li><span><b>Before it ships:</b> the balance, on the terms you were shown before you ordered.</span></li></ol>
+    </div>
+
+  </div>
+</main>"""
+        css += """
+.review-bar { margin: 0; background: var(--ink); color: var(--page); text-align: center; font: 500 12px/1.4 var(--mono);
+  letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 16px }
+.fh { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); grid-template-areas: "head side" "main side"; column-gap: 48px;
+  align-items: start; padding-bottom: 80px } .fh-head { grid-area: head } .fh-main { grid-area: main } .fh-side { grid-area: side }
+.fh-head h1 { font-size: clamp(38px, 5vw, 64px) }
+.fh-main h2 { font-size: 26px; margin-top: 36px }
+.fh-main figure { margin: 28px 0 } .fh-main figure img { width: 100%; height: auto; display: block; border-radius: 6px }
+.fh-main figcaption { margin-top: 8px; font-size: 14px; color: var(--muted) }
+.notice { border: 1px solid var(--ink); border-left: 6px solid #E9B320; padding: 16px 20px; background: #FBF9F5 }
+.notice p { margin: 0 } .notice .eyebrow { margin-bottom: 8px; color: var(--ink) }
+.fh-list { padding-left: 20px; line-height: 1.6 } .fh-list li { margin-bottom: 8px }
+.fh-steps { list-style: none; counter-reset: s; margin: 24px 0 0; padding: 0 } .fh-steps li { counter-increment: s; display: grid;
+  grid-template-columns: 32px minmax(0, 1fr); padding: 14px 0; border-top: 1px solid var(--rule) }
+.fh-steps li::before { content: counter(s); font: 500 14px/1.7 var(--mono) }
+.fh-side { position: sticky; top: calc(var(--header) + 24px); border: 1px solid var(--rule); border-radius: 6px; padding: 24px; background: #FBF9F5; margin-top: 64px }
+.fh-side h2.eyebrow { margin: 0 0 8px; font-size: 13px; letter-spacing: 0.14em } .fh-side p { margin: 0 0 16px } .fh-small { margin: 16px 0 0; font-size: 14px; color: var(--muted) }
+@media (max-width: 900px) { .fh { grid-template-columns: minmax(0, 1fr); grid-template-areas: "head" "side" "main" } .fh-side { position: static; margin-top: 24px } }
+.ask { margin: 0 }
+"""
+    return html, css, routes
+
+
 def share_pages():
     from html import escape
-    os.makedirs(os.path.join(SITE, 's'), exist_ok=True)
-    os.makedirs(os.path.join(IMG, 'og'), exist_ok=True)
+    for d in (os.path.join(SITE, 's'), os.path.join(IMG, 'og')):   # made afresh each build: a page turned off leaves nothing
+        if os.path.exists(d):
+            shutil.rmtree(d)
+        os.makedirs(d)
     def card(src, out, mode='crop'):
         im = Image.open(os.path.join(IMG, src)).convert('RGB')
         if mode == 'crop':                               # fill 1200 x 630, centred, a little above the middle
@@ -2859,6 +3010,19 @@ def share_pages():
         desc = f'{line} {name}: {tint.lower()} cast acrylic, in every EARF line.'
         made.append(page(f'colour-{low}', f'{name} · EARF', desc, img, f'Tropos in {name} in the studio', col, 'website',
                          {'@context': 'https://schema.org', '@type': 'WebPage', 'name': f'{name} · EARF', 'description': desc}))
+    if DEBUT:
+        img = card('red-studio-1200.jpg', 'debut.jpg')
+        d = 'The first pair of Tropos, heard for the first time. Tuesday 19 January 2027, San Francisco, the week of FOG Design+Art.'
+        made.append(page('debut', 'The EARF debut · Something in the air', d, img, 'Tropos in Ember in the dark', '#0B0C10', 'website',
+                         {'@context': 'https://schema.org', '@type': 'Event', 'name': 'The EARF debut', 'startDate': '2027-01-19',
+                          'eventStatus': 'https://schema.org/EventScheduled', 'description': d,
+                          'location': {'@type': 'Place', 'name': 'To be announced', 'address': 'San Francisco, CA'},
+                          'organizer': {'@type': 'Organization', 'name': 'EARF', 'url': URL}, 'image': f'{URL}/{img}'}))
+    if FOUNDING:
+        img = card('hero-1200.jpg', 'founding-hundred.jpg')
+        d = 'The first hundred pairs of Tropos, numbered on both rating plates. Register interest; no payment is taken.'
+        made.append(page('founding-hundred', 'The Founding Hundred · EARF', d, img, 'The eight Tropos speakers on a curve', '#F4F1EC', 'website',
+                         {'@context': 'https://schema.org', '@type': 'WebPage', 'name': 'The Founding Hundred', 'description': d}))
     img = card('hero-1200.jpg', 'press.jpg')
     made.append(page('press', 'Press · EARF', BOILER_SHORT, img, 'The eight Tropos speakers on a curve, Ember to Smoke', '#F4F1EC', 'website',
                      {'@context': 'https://schema.org', '@type': 'Organization', 'name': 'EARF', 'url': URL, 'description': BOILER_SHORT,
