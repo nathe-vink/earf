@@ -34,6 +34,13 @@ and rounds), `../companions/`, `../product.py` (the rating plate), and the bar's
 are sampled from the site's rendered coins (`site/img/coins-light.jpg`); the cast references wait for the stock-colour
 research. Every cost in `IDEAS.md` and `PACKAGING.md` is an estimate, not a quote.
 
+## Renders: where they stand
+
+Critic rounds are in `critic/LOG.md`. The crates and the open crate stopped after three rounds at 5.5 (from 5.5 and
+5.0): the light and staging are now right, and the limit is the material (procedural birch, displaced cloth). A
+photographed birch-ply texture and a cloth simulation are the next step, or better, a photograph of the first real
+crate. The plaza render scored 4.0 twice and was replaced by an elevation drawing.
+
 ## Open for the owner
 
 - The names held in reserve (Crust, Strata, Ozone): yes, no, or others, before any trademark search.
