@@ -1721,7 +1721,10 @@ def waveguide(P):
         out = dict(shell=pl(r['flare']), cap=pl(r['cap']), ring=pl(r['ring']), zc=zc, throat_y=depth,
                    driver_y=depth + c['boss']['t'] + c['adaptor']['t'], notes=[],
                    formed=dict(piece=pl(r['piece']), pod=pl(r['pod']), pads=[pl(p_) for p_ in r['pads']], saddle=pl(r['saddle']),
-                               plug=tool_at * pl(r['plug']), base=tool_at * pl(r['base']), nums=r['nums'], floor=zc + r['saddle_top']))
+                               plug=tool_at * pl(r['plug']), base=tool_at * pl(r['base']), nums=r['nums'], floor=zc + r['saddle_top'],
+                               trial=(_Pos(c['formed']['tool']['beside'] + 900.0, 0, 0) * pl(r['trial'])) if r['trial'] is not None else None,
+                               trial_base=(_Pos(c['formed']['tool']['beside'] + 900.0, 0, 0) * pl(r['trial_base'])) if r['trial_base'] is not None else None,
+                               laminated=[pl(l_) for l_ in r['laminated']] if r['laminated'] else None))
         out['formed']['support'] = _Compound(children=out['formed']['pads'])
         return out
     if f == 'cast':
@@ -2000,6 +2003,41 @@ def formed_horn(P):
     from build123d import Box
     base = Pos(0, 0, d) * Box(T_['base'][0], T_['base'][1], T_['base'][2], align=(Align.CENTER, Align.CENTER, Align.MIN))
     tool = plug + base
+    # the forming trial (2026-10-31): the plug at full scale cut to one quadrant (the throat end and the mouth's lower right
+    # corner, the two places the forming is decided), its two cut faces drafted outward toward the base so the sheet forms
+    # over them; on a quarter base
+    trial, trial_base = None, None
+    if F.get('trial'):
+        tr = F['trial']; a_, tn = tr['past'], math.tan(math.radians(tr['draft']))
+        from build123d import Plane, extrude, make_face, Polyline
+        z0_, z1_ = T_['nose'] - 30.0, d + 60.0
+        kx = extrude(Plane.XZ * make_face(Polyline((-a_ - (z0_ - T_['nose']) * tn, z0_), (-a_ - (z1_ - T_['nose']) * tn, z1_),
+                                                   (2000.0, z1_), (2000.0, z0_), close=True)), amount=2000.0, both=True)
+        ky = extrude(Plane.YZ * make_face(Polyline((a_ + (z0_ - T_['nose']) * tn, z0_), (a_ + (z1_ - T_['nose']) * tn, z1_),
+                                                   (-2000.0, z1_), (-2000.0, z0_), close=True)), amount=2000.0, both=True)
+        trial = plug & kx & ky
+        bx, by, bt = tr['base']
+        trial_base = Pos(hw / 2 + 10.0, -hh / 2 - 10.0, d) * Box(bx, by, bt, align=(Align.CENTER, Align.CENTER, Align.MIN))
+    # Plan B (2026-10-31): the flare and the neck laminated from the horn lot's 20 mm sheet, each layer CNC-cut to its
+    # outline (the air path pushed out by `wall` at the layer's front), bonded, and the air path machined through on 5
+    # axes; the outside left stepped, a terrace a layer, its edges chamfered; the boss its last layer
+    lam = None
+    if F.get('laminated'):
+        L_ = F['laminated']; t_, wl = L_['layer'], L_['wall']
+        layers = []
+        zz = d
+        while zz > 0.01:
+            za = max(zz - t_, 0.0)
+            w_, h_, n_ = flare_section(c, zz)
+            if zz >= d - 0.01:
+                w_, h_ = hw, hh
+            lay = _loft([_se_pts(w_ + wl, h_ + wl, max(n_, 2.0), za + 0.1), _se_pts(w_ + wl, h_ + wl, max(n_, 2.0), zz - 0.1)])
+            layers.append(lay)
+            zz = za
+        boss = Pos(0, 0, -c['boss']['t']) * Cylinder(c['pod_r'], c['boss']['t'] - 0.1, align=(Align.CENTER, Align.CENTER, Align.MIN))
+        layers.append(boss)
+        cut = _loft([_se_pts(c['r0'], c['r0'], 2.0, -c['boss']['t'] - 2.0)] + air_sections(c, 0.0, d))
+        lam = [l_ - cut for l_ in layers]
     # the numbers for the notes and the README
     ts = [formed_wall(c, z, t) for z in zw for t in (0.0, math.pi / 4, math.pi / 2)]
     nums = dict(trim=formed_wall(c, zt, 0.0), mouth=formed_wall(c, d, 0.0), corner=formed_wall(c, d, math.pi / 4), thinnest=min(ts + [tf * (1 - F['thin']['corner'])]),
@@ -2007,7 +2045,7 @@ def formed_horn(P):
                 cap_cm3=cap.volume / 1000, pads_cm3=sum(p.volume for p in pads) / 1000)
     nums['mass_kg'] = 1.19 * (nums['flare_cm3'] + nums['piece_cm3'] + nums['pod_cm3'] + nums['cap_cm3'] + nums['pads_cm3'] + saddle.volume / 1000) / 1000
     return dict(flare=flare, piece=piece, pod=pod, cap=cap, ring=ring, pads=pads, saddle=saddle, tool=tool, plug=plug,
-                base=base, outer=outer, nums=nums, saddle_top=stop)
+                base=base, outer=outer, nums=nums, saddle_top=stop, trial=trial, trial_base=trial_base, laminated=lam)
 
 
 def formed_parts(P, wg):
@@ -2083,7 +2121,25 @@ def formed_later(P, wg):
              option='tooling, the prototype\'s', render=False,
              notes=['the tool\'s base plate in the mouth\'s plane, 6061 machined, the clamp frame\'s seal groove round it and the plug '
                     'bolted on from below, so the flange forms flat on it; ' + tool_note]),
-    ]
+    ] + ([
+        Part('horn-trial-plug', fm['trial'], Machined('tooling-board', 'cnc-mill', setup_usd=F['trial']['plug_usd']), qty=0.5,
+             finish='driver-frame', option='tooling, the forming trial', render=False,
+             notes=[f'the forming trial (make/forming-trial.md): the production plug\'s surface cut to one quadrant, the throat end and the '
+                    f'mouth\'s lower corner at full scale, its cut faces drafted {F["trial"]["draft"]:g} degrees outward toward the base and '
+                    f'{F["trial"]["past"]:g} past the axis; the same 5-axis program as the full plug, in the same board; formed in stock '
+                    '10 mm cast sheet, then gauged for wall and colour before the full plug is cut']),
+        Part('horn-trial-base', fm['trial_base'], Machined('tooling-board', 'cnc-mill', setup_usd=150.0), qty=0.5,
+             finish='driver-frame', option='tooling, the forming trial', render=False,
+             notes=['the trial plug\'s base, in board, bolted to the forming machine\'s table; the clamp frame sized to it']),
+    ] if fm.get('trial') is not None else []) + ([
+        Part('horn-plan-b', Compound(children=fm['laminated']), Machined('cast-acrylic-horn-lot', 'cnc-mill', stock=(640.0, 376.0, 116.0), setup_usd=F['laminated']['setup_usd']),
+             finish='horn-lot', group='horn', option='horn, Plan B: laminated',
+             notes=[f'Plan B (make/plan-b.md): the flare and the neck laminated from {len(fm["laminated"]) - 1} layers of the horn lot\'s '
+                    f'{F["laminated"]["layer"]:g} mm sheet and the boss, each layer CNC-cut to its outline ({F["laminated"]["wall"]:g} outside the '
+                    'air path at its front), its edges chamfered, bonded with polymerising cement in a jig, annealed, and the air path '
+                    'machined through on 5 axes and polished; the outside stepped, a terrace a layer; in place of the formed flare and '
+                    'the throat piece, on the same pod, cap, pads and posts; its blank priced as the 20 mm sheet its layers are cut from, about 1.4 m2']),
+    ] if fm.get('laminated') else [])
 
 
 def adaptor_ring(P, wg, hf):
@@ -2494,6 +2550,35 @@ for _v in VARIANTS.values():
     if _v.get('bark') == 'clear_resin' and _b is not None:
         _v['materials'] = {**_v['materials'], 'horn-lot': {**_b, 'deep': _v.get('horn_deep', _b['deep']), 'radius': HORN_DEPTH_M}}
 
+
+# 2026-10-31 (the coordinator: a first pair in stock colours, if a custom tint's minimum is a pallet): flavours from
+# measured stock cast sheet, read from stock_colours.json. A colour measured through a sheet `mm` thick (on white, in
+# daylight; or a maker's swatch) is the engine's `deep` reached in that distance, so a measurement drops straight in.
+# Each entry: {"base": a flavour to start from (its ring, cloth and lighting), "cabinet": ["#hex", mm], "horn": ["#hex",
+# mm] or null (the horn formed from the cabinet's own stock sheet), "ring": "#hex" (optional), "source": "...", "note": "..."}
+STOCK_FILE = os.path.join(HERE, 'stock_colours.json')
+
+
+def stock_flavour(base, cabinet, horn=None, ring=None):
+    """A flavour from measured stock sheet: the cabinet's colour through `cabinet[1]` mm, the horn's through `horn[1]`
+    (or the cabinet's own sheet, per mm, if None), the ring's and the disc's colour if given."""
+    import copy as _copy
+    v = _copy.deepcopy(VARIANTS[base])
+    mats = v.setdefault('materials', {})
+    cab = {**mats.get('bark', {}), 'deep': cabinet[0], 'radius': cabinet[1] / 1000.0}
+    mats['bark'] = cab
+    mats['horn-lot'] = {**cab, 'deep': horn[0], 'radius': horn[1] / 1000.0} if horn else dict(cab)
+    if horn:
+        v['horn_deep'] = horn[0]
+    if ring:
+        v['disc'] = ring
+    return v
+
+
+if os.path.exists(STOCK_FILE):
+    for _k, _e in json.load(open(STOCK_FILE)).items():
+        if not _k.startswith('_'):
+            VARIANTS[_k] = stock_flavour(_e['base'], _e['cabinet'], _e.get('horn'), _e.get('ring'))
 
 PRODUCT = Product(
     'barkhorn', 'barkhorn', 'Two-way horn loudspeaker after Friendly Pressure, in birch bark or eucalyptus bark', params=P, parts=parts,

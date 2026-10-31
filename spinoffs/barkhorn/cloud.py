@@ -66,6 +66,7 @@ P['horn']['cast']['formed'] = dict(
     run_usd=600.0, throat_usd=400.0, pod_usd=250.0,
     tool=dict(nose=15.0, base=(900.0, 640.0, 40.0), beside=1500.0, plug_usd=14000.0, base_usd=2000.0,
               board_usd=2800.0, board_weeks='3 to 4'))   # the prototype's plug in tooling board (the coordinator's call)
+# (the forming trial's plug and Plan B, the laminated horn, are built apart: horn_options.py)
 P['horn']['cast']['posts'].update(pad_h=15.0, insert_depth=12.0, front_insert_depth=12.0)
 # round 36 (the engineering review's S1, the owner: yes): the back tied to the braces, two M5 screws a brace into
 # machined bosses saddled on their rear members, beside the back's ribs (product.back_ties); a 4 mm EPDM cord in a groove

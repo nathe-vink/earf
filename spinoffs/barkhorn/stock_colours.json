@@ -1,0 +1,3 @@
+{
+ "_how": "Measured stock cast acrylic for a first pair in stock colours (product.stock_flavour). One entry a colour, keyed by the flavour name to render with (e.g. 'stock-ember'): base (the flavour it starts from: cloud-red, cloud-orange, cloud-amber, eucalyptus-y2k-green, cloud-blue, cloud-violet, birch-fog-clear, cloud-black), cabinet ['#hex', mm] (the sheet's colour seen through mm of it, on white, in daylight), horn ['#hex', mm] or null, ring '#hex' (optional), source (maker, product, colour code, where measured), note. Rebuild cloud.py to put them in the engine's product file."
+}
