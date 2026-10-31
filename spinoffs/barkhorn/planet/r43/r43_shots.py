@@ -24,12 +24,14 @@ SHELF = [0.30, 0.78, 1.26, 1.70, 2.12]
 H = Q.CEIL
 
 VIEWS = {
-    'shop': dict(camera={'position': [0.55, 1.30, 1.50], 'target': [9.0, 4.3, 1.30], 'lens_mm': 24, 'level': True,
-                         'fstop': 4.0, 'focus': [4.0, 3.0, 1.0]}, exposure=3.4),
+    # p0 look (seen before any critic): the table filled the foreground and the right wall's shelves read empty, so
+    # the camera moved to the left of the door, looking across the room to the right wall, the bar and the drapes
+    'shop': dict(camera={'position': [0.50, 5.30, 1.55], 'target': [9.0, 1.9, 1.25], 'lens_mm': 24, 'level': True,
+                         'fstop': 4.0, 'focus': [3.5, 2.0, 1.1]}, exposure=4.2),
     'window': dict(camera={'position': [-5.2, 1.4, 1.55], 'target': [2.4, 3.3, 1.55], 'lens_mm': 35, 'level': True,
-                           'fstop': 5.6, 'focus': [0.7, 2.9, 1.0]}, exposure=3.4),
+                           'fstop': 5.6, 'focus': [0.7, 2.9, 1.0]}, exposure=4.0),
     'listening': dict(camera={'position': [9.95, 1.45, 1.30], 'target': [13.2, 4.1, 1.00], 'lens_mm': 24, 'level': True,
-                              'fstop': 4.0, 'focus': [12.0, 3.8, 0.8]}, exposure=3.6),
+                              'fstop': 4.0, 'focus': [12.0, 3.8, 0.8]}, exposure=4.4),
 }
 
 
@@ -48,7 +50,8 @@ def scene():
     zc = H - 0.25                                                     # the track's spots
     cards = [(x, SHELF[k], 'right') for x in (1.3, 2.5, 3.7, 4.9) for k in (1, 2)] + \
             [(x, SHELF[2], 'left') for x in (2.0, 3.4, 4.8)]
-    props = [{'kind': 'kit', 'shape': 'ext', 'path': KIT43, 'fn': 'popup', 'cards': cards, 'led': 3.0}]
+    props = [{'kind': 'kit', 'shape': 'ext', 'path': KIT43, 'fn': 'popup', 'cards': cards, 'led': 3.0,
+              'felt': '#1B1C1E', 'ceiling': '#2E2C2A'}]
     # the Cores: eight tints on the right wall's shelves, grouped, two unlit; two on the shop table; the Smoke ones on
     # the standing ledges
     xs = [(1.05, 2), (1.30, 2), (1.55, 2), (2.45, 2), (2.70, 2), (3.70, 3), (3.95, 3), (4.95, 2)]
@@ -83,9 +86,9 @@ def scene():
     ]
     lights = {}
     for i, x in enumerate((1.6, 3.4, 5.2)):                          # the right wall's shelves
-        lights[f'tr{i}'] = spot([x, 1.30, zc], [x, 0.20, 1.20], 22.0, 34.0)
+        lights[f'tr{i}'] = spot([x, 1.30, zc], [x, 0.20, 1.20], 40.0, 34.0)
     for i, x in enumerate((2.2, 3.5, 4.8)):                          # the left wall
-        lights[f'tl{i}'] = spot([x, W - 1.30, zc], [x, W - 0.20, 1.30], 18.0, 34.0)
+        lights[f'tl{i}'] = spot([x, W - 1.30, zc], [x, W - 0.20, 1.30], 32.0, 34.0)
     for i, dy in enumerate((-0.48, 0.48)):                           # the window pair, grazed from the glass side
         lights[f'win{i}'] = spot([0.20, Pw['y'] + dy, 3.30], [0.80, Pw['y'] + dy, 0.95], 26.0, 20.0, k=2600)
     lights['table'] = spot([3.6, 3.75, zc], [3.6, 3.75, 0.9], 14.0, 30.0)
@@ -94,7 +97,7 @@ def scene():
         lights[f'stack{i}'] = spot([11.6, y + (0.4 if y < W / 2 else -0.4), zc], [x, y, 0.95], 34.0, 18.0, k=2600)
     lights['seats'] = spot([10.9, W / 2, zc], [10.8, W / 2, 0.4], 10.0, 60.0, k=2600, blend=1.0)
     lights['fill'] = {'type': 'area', 'position': [5.0, W / 2, H - 0.3], 'target': [5.0, W / 2, 0.0], 'size_m': [6.0, 4.0],
-                      'irradiance': 0.06, 'color': 2900, 'camera': False}
+                      'irradiance': 0.12, 'color': 2900, 'camera': False}
     lights['street'] = {'type': 'area', 'position': [-2.4, 1.0, 6.0], 'target': [-1.5, 3.0, 0.0], 'size_m': [0.6, 0.6],
                         'irradiance': 1.5, 'color': 2200, 'spread_deg': 80.0}
     return props, products, lights
