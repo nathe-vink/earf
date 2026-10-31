@@ -57,6 +57,39 @@ def bilinear(img, yy, xx, wrap_x=True):
             + px(y0 + 1, x0) * (1 - fx) * fy + px(y0 + 1, x0 + 1) * fx * fy)
 
 
+def persp(a, bpy, meta):
+    """A rectilinear frame (world.py --persp): the same weighing, no roll; the sky's azimuth from the lens."""
+    W, H = meta['width'], meta['height']
+    yaw, pitch, lens, _, _, back = [float(v) for v in meta['persp'].split(':')]
+    pos = load_exr(bpy, os.path.join(a.dir, 'position.exr'))
+    geo = pos[..., 3] > 0.5
+    f = W / 2 / math.tan(2 * math.atan(18.0 / lens) / 2)
+    X, Y = np.meshgrid(np.arange(W) + 0.5 - W / 2, H / 2 - (np.arange(H) + 0.5))
+    p_ = math.radians(pitch)
+    az = (yaw + np.degrees(np.arctan2(X, f * math.cos(p_) - Y * math.sin(p_)))) % 360.0
+    Wt = np.zeros((H, W, F.N), np.float32)
+    Wt[geo] = F.weights(pos[..., 0][geo], pos[..., 1][geo], band=a.feather)
+    Wt[~geo] = F.dir_weights(az[~geo], band=a.sky_band)
+    LUMW = np.array([0.2126, 0.7152, 0.0722], np.float32)
+    acc = np.zeros((H, W, 3), np.float32); wsum = np.zeros((H, W), np.float32)
+    evs = list(a.ev or [h['ev'] for h in meta['hours']])
+    for k, sl in meta['slices'].items():
+        i = int(k)
+        img = load_exr(bpy, os.path.join(a.dir, sl['file']))
+        if a.meter:
+            own = (Wt[..., i] > 0.95) & geo
+            med = float(np.median(img[..., :3][own] @ LUMW)) if own.any() else 0.18
+            evs[i] = math.log2(meta['hours'][i].get('key', 0.18) / max(med, 1e-6)) + (a.trim[i] if a.trim else 0.0)
+            print('metered', F.NAMES[i], round(med, 4), round(evs[i], 2))
+        acc += img[..., :3] * (2.0 ** evs[i]) * Wt[..., i:i + 1]
+        wsum += Wt[..., i]
+    out = acc / np.maximum(wsum, 1e-6)[..., None]
+    miss = wsum < 0.5
+    print(f'pixels whose hours were not rendered: {miss.mean() * 100:.2f} %')
+    save(bpy, out, os.path.join(a.dir, 'world.exr'), a.look, linear_exr=True)
+    save(bpy, out, os.path.join(a.dir, 'frame.png'), a.look, a.exposure)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('dir')
@@ -84,6 +117,8 @@ def main():
     lat0, lat1 = meta['lat']
     pos = load_exr(bpy, os.path.join(a.dir, 'position.exr'))
     geo = pos[..., 3] > 0.5
+    if meta.get('persp'):
+        return persp(a, bpy, meta)
     lon = -180.0 + 360.0 * (np.arange(W) + 0.5) / W                       # each column's longitude (deg)
     lat = lat1 - (lat1 - lat0) * (np.arange(H) + 0.5) / H
     # which world azimuth each column looks at (camera at yaw 0): fitted from the ground's positions
@@ -121,8 +156,8 @@ def main():
     for k, sl in meta['slices'].items():
         i = int(k)
         img = load_exr(bpy, os.path.join(a.dir, sl['file']))
-        # the slice was rendered with its centre column on the sector's centre: roll it home
-        target_col = ((F.centre_az(i) - off) * s + 180.0) % 360.0 / 360.0 * W - 0.5
+        # the slice was rendered with its center column on the sector's center: roll it home
+        target_col = ((F.center_az(i) - off) * s + 180.0) % 360.0 / 360.0 * W - 0.5
         shift = int(round(target_col - (W / 2 - 0.5)))
         img = np.roll(img, shift, axis=1)
         cov = img[..., 3] > 0.99
@@ -148,7 +183,7 @@ def main():
 
     # the panorama: cylindrical, a band round the horizon, starting where Smoke gives way to Ice (by default)
     pw = a.pano or W
-    start = a.pano_start if a.pano_start is not None else F.centre_az(0) - F.SECTOR / 2 - 4.0
+    start = a.pano_start if a.pano_start is not None else F.center_az(0) - F.SECTOR / 2 - 4.0
     span = a.pano_span
     t0, t1 = math.tan(math.radians(a.pano_lat[0])), math.tan(math.radians(a.pano_lat[1]))
     hfov = math.radians(span)

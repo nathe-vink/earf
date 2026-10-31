@@ -2,14 +2,14 @@
 
     python3 spinoffs/barkhorn/biomes/tints.py      ->  tints.json beside this file, and a table
 
-Source: "Trucast Acrylic Light Transmissions" (A&C Plastics, dated 5.26.26), total transmission TT % per colour code.
-The code for each tint is a PROPOSAL (the nearest stock transparent TruCast colour to the site's tint); Ember and Smoke
+Source: "Trucast Acrylic Light Transmissions" (A&C Plastics, dated 5.26.26), total transmission TT % per color code.
+The code for each tint is a PROPOSAL (the nearest stock transparent TruCast color to the site's tint); Ember and Smoke
 follow the Tropos session's stock-pair (2423 Red, 2064 Gray). The method is that session's `make/stock_tints.py`
 'held' case: the seller's TT held at the sheet's own thickness (a maker dilutes the dye in thick sheet so a code keeps
 its look), a hue split per channel scaled so the luminance after 8 % surface loss is the published TT.
 
 Cabinet: 20 mm walls, TT at 20 mm. Horn: 10 mm sheet cast in a heavier dye lot "as deep as the cabinet" (the owner,
-2026-10-22), so its sheet passes what the cabinet's wall passes. Output: the colour white light takes after the
+2026-10-22), so its sheet passes what the cabinet's wall passes. Output: the color white light takes after the
 renderer's `radius` (clear_resin's `deep`), 25 mm for the cabinet and 10 mm for the horn, IOR 1.49 (cast PMMA).
 """
 import json, math, os

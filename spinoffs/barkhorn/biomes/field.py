@@ -1,7 +1,7 @@
 """The world's field: which biome a point belongs to, and how high the ground is there (pure numpy, no Blender).
 
 The world is a ring round the camera, which stands at the origin. Eight biomes in turn, clockwise seen from above
-(azimuth from +y toward +x), each a 45-degree sector with its Tropos standing at R metres on the sector's centre line.
+(azimuth from +y toward +x), each a 45-degree sector with its Tropos standing at R meters on the sector's center line.
 Neighbours meet along boundaries bent by noise (more near, less far), and blend over a band B degrees each side.
 world.py builds the ground, the scatter and the volumes from this; composite.py weighs the eight hours by it, read
 at each pixel's first hit (the position pass), so the light changes exactly where the ground changes.
@@ -12,13 +12,13 @@ import numpy as np
 NAMES = ['Ice', 'Poison', 'Fog', 'Haze', 'Dust', 'Acid', 'Ember', 'Smoke']
 N = len(NAMES)
 SECTOR = 360.0 / N
-R_SPEAKER = 2.8             # m from the camera to each speaker's centre
+R_SPEAKER = 2.8             # m from the camera to each speaker's center
 BAND = 7.0                  # deg: half the width of a blend
-CENTRE = 0.0                # deg: azimuth of the first sector's centre line
+CENTER = 0.0                # deg: azimuth of the first sector's center line
 
 
-def centre_az(i):
-    return CENTRE + i * SECTOR
+def center_az(i):
+    return CENTER + i * SECTOR
 
 
 # --- noise: smooth value noise (deterministic, the same in every process) ---------------------------------------------
@@ -68,12 +68,12 @@ def azimuth(x, y):
 
 
 def warp(x, y):
-    """Degrees the boundaries bend: a few metres' wiggle near, broad lobes at range, fading with distance."""
+    """Degrees the boundaries bend: a few meters' wiggle near, broad lobes at range, fading with distance."""
     r = np.hypot(x, y)
-    near = 9.0 * fbm(x / 6.0, y / 6.0, 4, seed=11)                    # metre-scale tongues near the speakers
+    near = 9.0 * fbm(x / 6.0, y / 6.0, 4, seed=11)                    # meter-scale tongues near the speakers
     mid = 6.0 * fbm(x / 60.0, y / 60.0, 3, seed=23)
     fade = 1.0 / (1.0 + (r / 400.0) ** 2)
-    calm = smooth(0.0, 1.5, r)                                         # at the centre the pinwheel stays still
+    calm = smooth(0.0, 1.5, r)                                         # at the center the pinwheel stays still
     return (near + mid) * fade * calm
 
 
@@ -83,7 +83,7 @@ def weights(x, y, band=BAND, use_warp=True):
     phi = azimuth(x, y) + (warp(x, y) if use_warp else 0.0)
     W = []
     for i in range(N):
-        d = np.abs(((phi - centre_az(i)) + 180.0) % 360.0 - 180.0)
+        d = np.abs(((phi - center_az(i)) + 180.0) % 360.0 - 180.0)
         W.append(1.0 - smooth(SECTOR / 2 - band, SECTOR / 2 + band, d))
     W = np.stack(W, -1)
     return W / np.maximum(W.sum(-1, keepdims=True), 1e-9)
@@ -94,7 +94,7 @@ def dir_weights(az_deg, band=BAND):
     a = np.asarray(az_deg, float)
     W = []
     for i in range(N):
-        d = np.abs(((a - centre_az(i)) + 180.0) % 360.0 - 180.0)
+        d = np.abs(((a - center_az(i)) + 180.0) % 360.0 - 180.0)
         W.append(1.0 - smooth(SECTOR / 2 - band, SECTOR / 2 + band, d))
     W = np.stack(W, -1)
     return W / np.maximum(W.sum(-1, keepdims=True), 1e-9)
@@ -169,7 +169,7 @@ HEIGHTS = [h_ice, h_poison, h_fog, h_haze, h_dust, h_acid, h_ember, h_smoke]
 
 def volcano(x, y):
     """Ember's cone: a volcano at about 2.4 km on the sector's line, its crater glowing."""
-    a = math.radians(centre_az(6) + 6.0)
+    a = math.radians(center_az(6) + 6.0)
     cx, cy = 2400 * math.sin(a), 2400 * math.cos(a)
     d = np.hypot(x - cx, y - cy)
     cone = 520.0 * np.clip(1.0 - d / 1300.0, 0, None) ** 1.6
@@ -189,7 +189,7 @@ def height(x, y, W=None):
             z[m] += wi[m] * f(x[m], y[m], r[m])
     v, _ = volcano(x, y)
     z += W[..., 6] * v
-    # the centre: a low granite dome the photographer stands on, common to all eight
+    # the center: a low granite dome the photographer stands on, common to all eight
     z = z * smooth(0.8, 2.2, r) + 0.05 * (1 - smooth(0.0, 1.8, r))
     return z
 
@@ -198,7 +198,7 @@ JITTER = [(0.2, 1.5), (-0.3, -2.0), (0.1, 2.5), (-0.2, -1.0), (0.3, 1.0), (-0.1,
 
 
 def speaker_spot(i):
-    """Where biome i's Tropos stands: on its sector's line, nudged by hand (metres out, degrees round)."""
+    """Where biome i's Tropos stands: on its sector's line, nudged by hand (meters out, degrees round)."""
     dr, da = JITTER[i]
-    a = math.radians(centre_az(i) + da)
+    a = math.radians(center_az(i) + da)
     return (R_SPEAKER + dr) * math.sin(a), (R_SPEAKER + dr) * math.cos(a)

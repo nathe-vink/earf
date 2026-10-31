@@ -3,7 +3,7 @@
     python3.11 spinoffs/barkhorn/biomes/world.py --out DIR [--width 2048] [--samples 32] [--only 0 3 ...]
                                                   [--lat -90 90] [--save-blend PATH]
 
-Builds the world once (field.py says what grows where), then renders it from one camera at the centre of the ring as
+Builds the world once (field.py says what grows where), then renders it from one camera at the center of the ring as
 an equirectangular frame, once per biome: each render under that biome's own hour (its sky and sun, from dawn over the
 snow to night in the city), cropped to that biome's sector and the blends either side. composite.py lays the eight
 together, weighing each pixel by the biome its first hit belongs to (a position pass rendered here once): a day-to-night
@@ -22,10 +22,12 @@ sys.path.insert(0, os.path.join(ROOT, 'studio', 'engine'))
 import numpy as np                                        # noqa: E402
 import field as F                                         # noqa: E402
 
-CAM_Z = 1.0                                              # the lens, metres over the centre's dome
-TROPOS = os.path.join(HERE, 'assets', 'tropos-current.blend')
+CAM_Z = 1.0                                              # the lens, meters over the center's dome
+TROPOS = os.path.join(HERE, 'assets', 'horn', 'tropos.blend')     # r33-speaker-horn 8e44484e, not in git
+if not os.path.exists(TROPOS):
+    TROPOS = os.path.join(HERE, 'assets', 'tropos-current.blend')    # tropos_lib.py's build
 
-# Each biome's hour. sun: elevation and azimuth offset from the sector's centre line (deg); sky: air, aerosols
+# Each biome's hour. sun: elevation and azimuth offset from the sector's center line (deg); sky: air, aerosols
 # (dust), ozone; strength scales the sky; exposure is the photographer's for that slice (EV).
 HOURS = [
     dict(name='Ice', hdri='qwantani_dawn_puresky',    hour='dawn',            sun_el=-1.5, sun_off=-16, air=1.0, dust=1.0, ozone=1.0, strength=1.0, ev=2.6, key=0.15),
@@ -35,7 +37,7 @@ HOURS = [
     dict(name='Dust', hdri='qwantani_sunset_puresky',   hour='golden hour',     sun_el=5.0,  sun_off=-15, air=1.0, dust=2.5, ozone=1.0, strength=1.0, ev=-0.1, key=0.16),
     dict(name='Acid', hdri='kloofendal_overcast_puresky',   hour='sunset, in rain', sun_el=1.2,  sun_off=17,  air=1.6, dust=6.0, ozone=1.0, strength=0.6, ev=1.2, key=0.07),
     dict(name='Ember', hdri='qwantani_dusk_2_puresky',  hour='blue hour',       sun_el=-4.5, sun_off=-15, air=1.0, dust=1.0, ozone=1.6, strength=1.0, ev=3.6, key=0.045),
-    dict(name='Smoke', hdri='qwantani_night_puresky',  hour='night',           sun_el=-14., sun_off=15,  air=1.0, dust=1.0, ozone=1.0, strength=1.0, ev=6.0, key=0.035),
+    dict(name='Smoke', hdri='qwantani_night_puresky', sky_strength=0.12,  hour='night',           sun_el=-14., sun_off=15,  air=1.0, dust=1.0, ozone=1.0, strength=1.0, ev=6.0, key=0.035),
 ]
 TINT = {n: n for n in F.NAMES}                            # each biome's Tropos is its own tint
 
@@ -47,7 +49,7 @@ def lin(h):
 
 # --- the ground ------------------------------------------------------------------------------------------------------
 def rings(r0=0.04, r1=4500.0, k=1.0):
-    """Ring radii: a centre cap, then geometric steps about k x the angular step (0.25 deg)."""
+    """Ring radii: a center cap, then geometric steps about k x the angular step (0.25 deg)."""
     out = [0.0, r0]
     step = math.radians(0.25) * 2.0 * k
     while out[-1] < r1:
@@ -57,12 +59,12 @@ def rings(r0=0.04, r1=4500.0, k=1.0):
 
 def terrain(bpy, mats, segs=1440, lod=1.0):
     """Eight wedge meshes (one per sector, sharing their edges) with heights from field.height and the biomes'
-    weights as two float colour attributes (wA: 0-3, wB: 4-7)."""
+    weights as two float color attributes (wA: 0-3, wB: 4-7)."""
     R = rings(k=lod)
     per = segs // F.N
     objs = []
     for i in range(F.N):
-        a0 = F.centre_az(i) - F.SECTOR / 2
+        a0 = F.center_az(i) - F.SECTOR / 2
         az = np.radians(a0 + np.arange(per + 1) * (F.SECTOR / per))
         rr, aa = np.meshgrid(R[1:], az, indexing='ij')
         x = rr * np.sin(aa); y = rr * np.cos(aa)
@@ -71,7 +73,7 @@ def terrain(bpy, mats, segs=1440, lod=1.0):
         V = np.stack([x, y, z], -1).reshape(-1, 3)
         Wv = W.reshape(-1, 8)
         nr, na = rr.shape
-        # the centre point
+        # the center point
         V = np.vstack([[0.0, 0.0, float(F.height(np.array([0.0]), np.array([0.0]))[0])], V])
         Wv = np.vstack([np.full(8, 1 / 8), Wv])
         idx = lambda r, a: 1 + r * na + a
@@ -149,10 +151,10 @@ def tex_paths(aid, res='2k'):
     return assets.texture(aid, res)
 
 
-def img(bpy, T, path, colour, vec, proj='FLAT'):
+def img(bpy, T, path, color, vec, proj='FLAT'):
     n = T.n('ShaderNodeTexImage')
     n.image = bpy.data.images.load(os.path.abspath(path), check_existing=True)
-    if not colour:
+    if not color:
         n.image.colorspace_settings.name = 'Non-Color'
     n.projection = proj
     T.l(vec, n.inputs['Vector'])
@@ -161,8 +163,8 @@ def img(bpy, T, path, colour, vec, proj='FLAT'):
 
 def pbr_layer(bpy, T, aid, scale, tint=None, tint_mix=0.0, value=1.0, rough_mul=1.0, rough_add=0.0, bump=1.0,
               res='2k', far=8.0):
-    """A ground texture laid in plan (object x, y) at `scale` metres a tile, and again at `far` x that size beyond 30 m
-    so it does not tile at range. Returns (colour, roughness, normal, height) sockets."""
+    """A ground texture laid in plan (object x, y) at `scale` meters a tile, and again at `far` x that size beyond 30 m
+    so it does not tile at range. Returns (color, roughness, normal, height) sockets."""
     maps = tex_paths(aid, res)
     tc = T.n('ShaderNodeTexCoord')
     pos = tc.outputs['Object']
@@ -222,7 +224,7 @@ def biome_bsdf(bpy, T, i):
         col = T.mix(col, rock, st.outputs[0])
         T.l(col, b.inputs['Base Color']); T.l(rough, b.inputs['Roughness']); T.l(nor, b.inputs['Normal'])
     elif name == 'Haze':
-        col, rough, nor, h = pbr_layer(bpy, T, 'withered_grass', 1.6, tint='#9C7A3E', tint_mix=0.5, value=0.8)
+        col, rough, nor, h = pbr_layer(bpy, T, 'withered_grass', 1.6, tint='#A27A2E', tint_mix=0.65, value=0.75)
         T.l(col, b.inputs['Base Color']); T.l(rough, b.inputs['Roughness']); T.l(nor, b.inputs['Normal'])
     elif name == 'Dust':
         col, rough, nor, h = pbr_layer(bpy, T, 'aerial_sand', 3.0, tint='#B8693A', tint_mix=0.7, value=0.8, bump=1.0)
@@ -272,11 +274,11 @@ def biome_bsdf(bpy, T, i):
     return b.outputs['BSDF']
 
 
-def ground_material(bpy, centre):
-    """The ground of wedge `centre`: its biome and its two neighbours mixed by the weights (Cycles holds 64 closures
+def ground_material(bpy, center):
+    """The ground of wedge `center`: its biome and its two neighbours mixed by the weights (Cycles holds 64 closures
     a shader; eight Principled BSDFs overflowed)."""
-    keep = {(centre - 1) % F.N, centre, (centre + 1) % F.N}
-    m = bpy.data.materials.new(f'ground.{F.NAMES[centre]}'); m.use_nodes = True
+    keep = {(center - 1) % F.N, center, (center + 1) % F.N}
+    m = bpy.data.materials.new(f'ground.{F.NAMES[center]}'); m.use_nodes = True
     nt = m.node_tree; nt.nodes.clear(); T = NT(nt)
     out = T.n('ShaderNodeOutputMaterial')
     wa = T.n('ShaderNodeAttribute', attribute_name='wA', attribute_type='GEOMETRY')
@@ -348,7 +350,7 @@ def rng_points(rng, n, rmin, rmax, i, spread=1.0, minsep=0.0, avoid_speaker=1.2)
     while len(pts) < n and tries < n * 60:
         tries += 1
         r = math.sqrt(rng.uniform(rmin ** 2, rmax ** 2))
-        a = math.radians(F.centre_az(i) + rng.uniform(-1, 1) * (F.SECTOR / 2 + F.BAND) * spread)
+        a = math.radians(F.center_az(i) + rng.uniform(-1, 1) * (F.SECTOR / 2 + F.BAND) * spread)
         x, y = r * math.sin(a), r * math.cos(a)
         w = F.weights(np.array([x]), np.array([y]))[0, i]
         if rng.random() > w ** 1.5:
@@ -436,8 +438,8 @@ def city(bpy, rng):
     T.l(T.mix(0.8, 0.08, inwin, kind='FLOAT'), b.inputs['Roughness'])
     T.l(b.outputs[0], out.inputs['Surface'])
     objs = []
-    pts = rng_points(rng, 30, 110.0, 260.0, 7, minsep=22.0, spread=0.8)
-    pts += rng_points(rng, 150, 260.0, 1500.0, 7, minsep=40.0, spread=0.8)
+    pts = rng_points(rng, 30, 110.0, 260.0, 7, minsep=22.0, spread=0.55)
+    pts += rng_points(rng, 150, 260.0, 1500.0, 7, minsep=40.0, spread=0.55)
     for k, (x, y) in enumerate(pts):
         r = math.hypot(x, y)
         w_ = rng.uniform(10, 30) * (1 + r / 600); dpt = rng.uniform(10, 26) * (1 + r / 600)
@@ -450,8 +452,8 @@ def city(bpy, rng):
         ob.location = (x, y, ground_z(x, y)); ob.rotation_euler = (0, 0, math.atan2(x, y) + rng.uniform(-0.2, 0.2))
         objs.append(ob)
     # streetlights along the near road, sodium and LED; the first just behind the speaker, to its left
-    a7 = math.radians(F.centre_az(7) - 9.0)
-    near = [(6.2 * math.sin(a7), 6.2 * math.cos(a7))]
+    a7 = math.radians(F.center_az(7) - 1.5 - 16.0)
+    near = [(4.9 * math.sin(a7), 4.9 * math.cos(a7))]
     for k, (x, y) in enumerate(near + rng_points(rng, 8, 12.0, 45.0, 7, minsep=7.0, spread=0.7)):
         z0 = ground_z(x, y)
         pole = simple_mat(bpy, 'pole', '#2A2B2D', 0.5)
@@ -501,7 +503,7 @@ def flora(bpy, rng):
 
 
 # --- air ------------------------------------------------------------------------------------------------------------
-# density (1/m) of the air near the ground in each biome, its scale height (m), and its colour
+# density (1/m) of the air near the ground in each biome, its scale height (m), and its color
 AIR = {'Ice': (0.00008, 400, '#F4F8FF'), 'Poison': (0.0015, 40, '#F2F0E8'), 'Fog': (0.00012, 400, '#FFFFFF'),
        'Haze': (0.00025, 700, '#F0DCC8'), 'Dust': (0.00008, 600, '#F0D8B8'), 'Acid': (0.0012, 400, '#C9CCB8'),
        'Ember': (0.0003, 300, '#D9D3D0'), 'Smoke': (0.0008, 200, '#B7B2AE')}
@@ -523,8 +525,8 @@ def air(bpy):
     wsum = None
     for i, nm in enumerate(F.NAMES):
         d0, hs, c = AIR[nm]
-        # angular distance to the sector centre, folded
-        dd = T.math('SUBTRACT', T.math('MODULO', T.math('ADD', T.math('SUBTRACT', azd, F.centre_az(i)), 540.0), 360.0), 180.0)
+        # angular distance to the sector center, folded
+        dd = T.math('SUBTRACT', T.math('MODULO', T.math('ADD', T.math('SUBTRACT', azd, F.center_az(i)), 540.0), 360.0), 180.0)
         dd = T.math('ABSOLUTE', dd)
         mr = T.n('ShaderNodeMapRange', interpolation_type='SMOOTHSTEP'); T.l(dd, mr.inputs[0])
         mr.inputs[1].default_value = F.SECTOR / 2 + F.BAND; mr.inputs[2].default_value = F.SECTOR / 2 - F.BAND
@@ -542,7 +544,7 @@ def air(bpy):
     below = T.n('ShaderNodeMapRange', interpolation_type='SMOOTHSTEP'); T.l(T.math('SUBTRACT', top, sep.outputs['Z']), below.inputs[0])
     below.inputs[1].default_value = 0.0; below.inputs[2].default_value = 6.0
     fogw_ = T.n('ShaderNodeMapRange', interpolation_type='SMOOTHSTEP')
-    dd = T.math('ABSOLUTE', T.math('SUBTRACT', T.math('MODULO', T.math('ADD', T.math('SUBTRACT', azd, F.centre_az(2)), 540.0), 360.0), 180.0))
+    dd = T.math('ABSOLUTE', T.math('SUBTRACT', T.math('MODULO', T.math('ADD', T.math('SUBTRACT', azd, F.center_az(2)), 540.0), 360.0), 180.0))
     T.l(dd, fogw_.inputs[0]); fogw_.inputs[1].default_value = 60.0; fogw_.inputs[2].default_value = 30.0
     sea = T.math('MULTIPLY', T.math('MULTIPLY', below.outputs[0], fogw_.outputs[0]), 0.06)
     dens = T.math('ADD', dens, sea)
@@ -556,6 +558,44 @@ def air(bpy):
     me = bpy.data.meshes.new('air'); bm.to_mesh(me); bm.free(); me.materials.append(m)
     ob = bpy.data.objects.new('air', me); bpy.context.scene.collection.objects.link(ob)
     ob['volume'] = True
+    return ob
+
+
+def fog_sea(bpy):
+    """The sea of fog below Fog's headland: a slab from the cliff's foot out to the far summits, its top rolling
+    between 14 and 4 m under the headland's lip."""
+    import bmesh
+    m = bpy.data.materials.new('fog-sea'); m.use_nodes = True
+    nt = m.node_tree; nt.nodes.clear(); T = NT(nt)
+    out = T.n('ShaderNodeOutputMaterial'); vol = T.n('ShaderNodeVolumePrincipled')
+    tc = T.n('ShaderNodeTexCoord'); pos = tc.outputs['Object']
+    sep = T.n('ShaderNodeSeparateXYZ'); T.l(pos, sep.inputs[0])
+    nz = T.n('ShaderNodeTexNoise'); T.l(pos, nz.inputs['Vector']); nz.inputs['Scale'].default_value = 0.012
+    nz.inputs['Detail'].default_value = 7.0; nz.inputs['Roughness'].default_value = 0.6
+    top = T.math('MULTIPLY_ADD', nz.outputs['Fac'], 16.0, -16.0)
+    mr = T.n('ShaderNodeMapRange', interpolation_type='SMOOTHSTEP'); T.l(T.math('SUBTRACT', top, sep.outputs['Z']), mr.inputs[0])
+    mr.inputs[1].default_value = 0.0; mr.inputs[2].default_value = 5.0
+    T.l(T.math('MULTIPLY', mr.outputs[0], 0.05), vol.inputs['Density'])
+    vol.inputs['Color'].default_value = (1, 1, 1, 1); vol.inputs['Anisotropy'].default_value = 0.6
+    T.l(vol.outputs[0], out.inputs['Volume'])
+    a = math.radians(F.center_az(2))
+    bm = bmesh.new()
+    pts = []
+    for k in range(25):
+        t = math.radians(F.center_az(2) - 34 + 68 * k / 24)
+        pts.append((t, ))
+    verts_lo, verts_hi = [], []
+    for r in (22.0, 2500.0):
+        for k in range(25):
+            t = math.radians(F.center_az(2) - 34 + 68 * k / 24)
+            verts_lo.append(bm.verts.new((r * math.sin(t), r * math.cos(t), -60.0)))
+            verts_hi.append(bm.verts.new((r * math.sin(t), r * math.cos(t), 0.0)))
+    me = bpy.data.meshes.new('fog-sea'); bm.to_mesh(me); bm.free()
+    ob = bpy.data.objects.new('fog-sea', me); bpy.context.scene.collection.objects.link(ob)
+    # a closed shell: rebuild as the convex hull of those points
+    import bmesh as B
+    bm = B.new(); bm.from_mesh(me); B.ops.convex_hull(bm, input=bm.verts); bm.to_mesh(me); bm.free()
+    me.materials.append(m); ob['volume'] = True
     return ob
 
 
@@ -593,17 +633,19 @@ def plume(bpy):
 # --- the speakers --------------------------------------------------------------------------------------------------
 def speakers(bpy, path=TROPOS, turn=(18, -8, 22, -14, 6, -20, 12, -4)):
     """Link each tint's collection from the Tropos .blend and stand an instance of it on its spot, facing the camera
-    and turned a little, its feet a few millimetres into the ground."""
+    and turned a little, its feet a few millimeters into the ground."""
     with bpy.data.libraries.load(path, link=True) as (src, dst):
-        dst.collections = [f'Tropos.{n}' for n in F.NAMES if f'Tropos.{n}' in src.collections]
-    cols = {c.name.split('.', 1)[1]: c for c in dst.collections if c}
+        dst.collections = [c for c in src.collections if c.startswith('Tropos') and not c.endswith('cover')
+                           and c.replace('Tropos', '').strip(' .') in F.NAMES]
+    # the speaker lane's asset names them 'Tropos Ember'; tropos_lib.py's 'Tropos.Ember'
+    cols = {c.name.replace('Tropos', '').strip(' .'): c for c in dst.collections if c}
     out = []
     for i, nm in enumerate(F.NAMES[:int(os.environ.get('SPK_N', 8))]):
         x, y = F.speaker_spot(i)
         e = bpy.data.objects.new(f'tropos.{nm}', None)
         e.instance_type = 'COLLECTION'; e.instance_collection = cols[TINT[nm]]
         e.location = (x, y, ground_z(x, y) - 0.006)
-        e.rotation_euler = (0, 0, -math.radians(F.centre_az(i)) + math.radians(turn[i]))
+        e.rotation_euler = (0, 0, -math.radians(F.center_az(i)) + math.radians(turn[i]))
         bpy.context.scene.collection.objects.link(e)
         out.append(e)
     return out
@@ -636,7 +678,7 @@ def set_hour_hdri(bpy, i, world=None):
     env.image = bpy.data.images.load(os.path.abspath(assets.hdri(h['hdri'], '4k')))
     env.image['hour_sky'] = True
     tc = T.n('ShaderNodeTexCoord'); mp = T.n('ShaderNodeMapping')
-    rot = hdri_rotation(h['hdri'], F.centre_az(i) + h['sun_off'])
+    rot = hdri_rotation(h['hdri'], F.center_az(i) + h['sun_off'])
     mp.inputs['Rotation'].default_value = (0.0, 0.0, math.radians(rot))
     T.l(tc.outputs['Generated'], mp.inputs['Vector']); T.l(mp.outputs['Vector'], env.inputs['Vector'])
     bg = T.n('ShaderNodeBackground'); T.l(env.outputs['Color'], bg.inputs['Color'])
@@ -665,7 +707,7 @@ def set_hour(bpy, i, world=None):
     sky = T.n('ShaderNodeTexSky', sky_type='MULTIPLE_SCATTERING')
     sky.sun_disc = True; sky.sun_size = math.radians(0.545); sky.sun_intensity = 1.0
     sky.sun_elevation = math.radians(h['sun_el'])
-    az = F.centre_az(i) + h['sun_off']
+    az = F.center_az(i) + h['sun_off']
     # Blender's sky: rotation 0 puts the sun toward +y? measured: see README (checked on the proof)
     sky.sun_rotation = math.radians((-az + 90.0) % 360.0)
     sky.altitude = 50.0; sky.air_density = h['air']; sky.aerosol_density = h['dust']; sky.ozone_density = h['ozone']
@@ -680,7 +722,7 @@ def set_hour(bpy, i, world=None):
         ad = T.n('ShaderNodeAddShader'); T.l(bg.outputs[0], ad.inputs[0]); T.l(add.outputs[0], ad.inputs[1])
         T.l(ad.outputs[0], out.inputs['Surface'])
     elif h['name'] == 'Acid':
-        # overcast: the sky's own colour under a grey lid that lets the low sun through at the horizon
+        # overcast: the sky's own color under a gray lid that lets the low sun through at the horizon
         grad = T.n('ShaderNodeTexCoord'); sep = T.n('ShaderNodeSeparateXYZ'); T.l(grad.outputs['Generated'], sep.inputs[0])
         lid = T.n('ShaderNodeMapRange', interpolation_type='SMOOTHSTEP'); T.l(sep.outputs['Z'], lid.inputs[0])
         lid.inputs[1].default_value = 0.02; lid.inputs[2].default_value = 0.25
@@ -711,7 +753,7 @@ def camera(bpy, yaw_deg=0.0, lat=(-90, 90)):
 
 
 def aim(ob, yaw_deg):
-    """Point the panorama's centre at azimuth yaw (clockwise from +y). Blender's equirectangular centre looks along
+    """Point the panorama's center at azimuth yaw (clockwise from +y). Blender's equirectangular center looks along
     the camera's -z; so stand the camera up (x 90 deg) and turn it."""
     ob.rotation_euler = (math.radians(90), 0, -math.radians(yaw_deg))
 
@@ -776,7 +818,7 @@ def bounces(bpy):
     out = []
     for i, nm in enumerate(F.NAMES):
         x, y = F.speaker_spot(i)
-        a = math.radians(F.centre_az(i) + (-25 if i % 2 else 25))
+        a = math.radians(F.center_az(i) + (-25 if i % 2 else 25))
         px, py = x - 1.4 * math.sin(a), y - 1.4 * math.cos(a)
         w, col = BOUNCE[nm]
         ld = bpy.data.lights.new(f'bounce.{nm}', 'AREA'); ld.shape = 'RECTANGLE'; ld.size = 1.0; ld.size_y = 1.2
@@ -792,7 +834,7 @@ def bounces(bpy):
 
 
 def knob(bpy):
-    """A low granite knob under the camera, the one ground all eight share (the little planet's centre)."""
+    """A low granite knob under the camera, the one ground all eight share (the little planet's center)."""
     import bmesh
     m = bpy.data.materials.new('granite'); m.use_nodes = True
     nt = m.node_tree; nt.nodes.clear(); T = NT(nt)
@@ -821,11 +863,13 @@ def main():
     ap.add_argument('--samples', type=int, default=32)
     ap.add_argument('--only', type=int, nargs='*')
     ap.add_argument('--lat', type=float, nargs=2, default=(-90.0, 90.0))
-    ap.add_argument('--half', type=float, default=54.0, help='degrees each side of a sector centre each slice renders')
+    ap.add_argument('--half', type=float, default=54.0, help='degrees each side of a sector center each slice renders')
     ap.add_argument('--tropos', default=TROPOS)
     ap.add_argument('--lod', type=float, default=1.0)
     ap.add_argument('--no-flora', action='store_true')
     ap.add_argument('--save-blend')
+    ap.add_argument('--persp', help='a rectilinear frame instead: YAW:PITCH:LENS_MM:W:H:BACK (the camera BACK m behind '
+                    'the center, looking along YAW), rendered under the hours named by --only')
     ap.add_argument('--threads', type=int, default=0)
     a = ap.parse_args()
     import bpy
@@ -845,24 +889,36 @@ def main():
         flora(bpy, R)
     print('scatter', round(time.time() - t0, 1))
     if not os.environ.get("NO_AIR"):
-        air(bpy); plume(bpy)
+        air(bpy); plume(bpy); fog_sea(bpy)
     knob(bpy)
     bl = bounces(bpy)
     if not os.environ.get('NO_SPK'):
         speakers(bpy, a.tropos)
-    W = a.width; H = int(round(W * (a.lat[1] - a.lat[0]) / 360.0))
+    if a.persp:
+        yaw, pitch, lens, W, H, back = [float(v) for v in a.persp.split(':')]
+        W, H = int(W), int(H)
+    else:
+        W = a.width; H = int(round(W * (a.lat[1] - a.lat[0]) / 360.0))
     setup_render(bpy, W, H, a.samples)
     if a.threads:
         bpy.context.scene.render.threads_mode = 'FIXED'; bpy.context.scene.render.threads = a.threads
     cam = camera(bpy, 0.0, a.lat)
+    if a.persp:
+        cd = cam.data; cd.type = 'PERSP'; cd.lens = lens; cd.sensor_width = 36.0; cd.sensor_fit = 'HORIZONTAL'
+        y_ = math.radians(yaw)
+        cam.location = (-back * math.sin(y_), -back * math.cos(y_), CAM_Z)
+        cam.rotation_euler = (math.radians(90 + pitch), 0, -y_)
+        cd.dof.use_dof = True; cd.dof.aperture_fstop = 5.6
+        cd.dof.focus_distance = back + F.R_SPEAKER * math.cos(math.radians(22.5)) - 0.2
     os.makedirs(a.out, exist_ok=True)
-    meta = {'width': W, 'height': H, 'lat': list(a.lat), 'cam_z': CAM_Z, 'half': a.half, 'samples': a.samples,
+    meta = {'width': W, 'height': H, 'lat': list(a.lat), 'persp': a.persp, 'cam_z': CAM_Z, 'half': a.half, 'samples': a.samples,
             'hours': HOURS, 'slices': {}}
     if a.save_blend:
         bpy.ops.wm.save_as_mainfile(filepath=os.path.abspath(a.save_blend))
     pp = os.path.join(a.out, 'position.exr')
     if not os.path.exists(pp):
-        aim(cam, 0.0)
+        if not a.persp:
+            aim(cam, 0.0)
         position_pass(bpy, pp, W, H, None)
     print('built', round(time.time() - t0, 1))
     sc = bpy.context.scene
@@ -873,16 +929,17 @@ def main():
         for k_, lo in enumerate(bl):
             lo.hide_render = k_ != i
         sc.view_settings.exposure = 0.0
-        # the slice: the camera turned to the sector, a border round the image's centre
-        aim(cam, F.centre_az(i))
-        sc.render.use_border = True; sc.render.use_crop_to_border = False
+        # the slice: the camera turned to the sector, a border round the image's center
+        if not a.persp:
+            aim(cam, F.center_az(i))
+        sc.render.use_border = not a.persp; sc.render.use_crop_to_border = False
         f = a.half / 360.0
         sc.render.border_min_x, sc.render.border_max_x = 0.5 - f, 0.5 + f
         sc.render.border_min_y, sc.render.border_max_y = 0.0, 1.0
         p = os.path.join(a.out, f'slice-{i}-{F.NAMES[i].lower()}.exr')
         sc.render.filepath = p
         bpy.ops.render.render(write_still=True)
-        meta['slices'][str(i)] = {'file': os.path.basename(p), 'yaw': F.centre_az(i), 'seconds': round(time.time() - t1, 1)}
+        meta['slices'][str(i)] = {'file': os.path.basename(p), 'yaw': F.center_az(i), 'seconds': round(time.time() - t1, 1)}
         print(F.NAMES[i], round(time.time() - t1, 1), flush=True)
         json.dump(meta, open(os.path.join(a.out, 'meta.json'), 'w'), indent=1)
     print('done', round(time.time() - t0, 1))

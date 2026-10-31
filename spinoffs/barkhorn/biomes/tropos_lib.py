@@ -4,7 +4,7 @@
 
 The interface a swapped-in model must keep (the Tropos session's .blend, when it comes, replaces this file):
 - one collection per tint, named `Tropos.Ember`, `Tropos.Dust`, ... `Tropos.Smoke`;
-- each in metres, its feet at z 0, centred on x and y, its front facing -y (the studio engine's frame).
+- each in meters, its feet at z 0, centered on x and y, its front facing -y (the studio engine's frame).
 world.py links (not appends) the collections, so the model can change without touching the scene.
 
 This build is the current design as the element scripts render it (studio/products/barkhorn-cloud.json, built by

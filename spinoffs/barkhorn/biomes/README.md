@@ -6,7 +6,7 @@ showing speakers in each." And: "I mostly want to nail design, make it realistic
 ## The idea
 
 One world, one camera, one day. The eight habitats stand in a ring round the camera, each a 45-degree sector with its
-Tropos on the sector's centre line, 3.6 m out, facing the lens and turned a little. Neighbours meet as geography does:
+Tropos on the sector's center line, 3.6 m out, facing the lens and turned a little. Neighbours meet as geography does:
 snow country thins into redwood floor, the redwoods open onto a coastal headland above a sea of fog, the headland's
 grass dries into golden hills, the hills into desert sand under mesas, the sand into black lava wet with rain, the wet
 rock into a lava field still glowing, the lava into the city's asphalt; and round the back the city's edge meets the
@@ -31,7 +31,7 @@ Two pictures come from the one render:
 | `field.py` | The world's field, numpy only: each point's biome weights (sectors with noise-bent boundaries, blended over 7 degrees each side) and the ground's height, biome by biome (mountains behind the snow, the headland's cliff, layered ranges, mesas, volcanic cones, a volcano for Ember). The scene and the compositor both read it, so light changes exactly where the ground does. |
 | `tints.py`, `tints.json` | The eight tints calibrated to A&C Plastics' TruCast light-transmission chart (TT % held at the sheet's thickness, the Tropos session's `stock_tints.py` method), IOR 1.49. The TruCast code for each tint is a proposal. |
 | `tropos_lib.py` | Writes `assets/tropos-current.blend` (not committed; 20 s to rebuild): one collection per tint, `Tropos.Ember` ... `Tropos.Smoke`, feet at z 0, front to -y. |
-| `world.py` | Builds the world in Blender (Cycles) and renders the slices: the ground as eight wedge meshes carrying the weights, one ground material mixing eight Poly Haven ground sets at real size, redwoods, firs, ferns, oaks, desert shrubs and boulders, the city's blocks with lit windows and streetlights, one volume of air whose density and colour follow the biomes, the fog's sea, the volcano's plume. The speakers are **linked** collection instances: `--tropos other.blend` swaps the model. |
+| `world.py` | Builds the world in Blender (Cycles) and renders the slices: the ground as eight wedge meshes carrying the weights, one ground material mixing eight Poly Haven ground sets at real size, redwoods, firs, ferns, oaks, desert shrubs and boulders, the city's blocks with lit windows and streetlights, one volume of air whose density and color follow the biomes, the fog's sea, the volcano's plume. The speakers are **linked** collection instances: `--tropos other.blend` swaps the model. |
 | `composite.py` | Lays the slices together (position pass -> field weights; sky by direction), each at its slice's exposure, and cuts the panorama and the planet, toned through AgX. |
 
 Run:
@@ -83,3 +83,37 @@ What was done (proof 5):
 - The cracks' emission cut a third.
 - Each speaker nudged by hand (`field.JITTER`) and turned 4 to 22 degrees.
 - 32 samples at proof size.
+
+### Pass 2 (proofs 5 and 6, 32 samples)
+
+Proof 6 has these changes:
+- **Photographed skies, one per hour.** Most are from Poly Haven's Qwantani series, one place shot through one day:
+  dawn, morning, late afternoon, sunset, dusk and night. Fog has Kloofendal's misty morning, and Acid has
+  Kloofendal's overcast. Each sky is turned so its sun stands in its biome's sector (`hdri_rotation`).
+- **A lower lens and closer speakers.** The lens is at 1.0 m and the speakers at 2.8 m, so each stands up to its
+  horizon and is about 40% of the panorama's height.
+
+**Blind critic, round 2:**
+- **Panorama: 3.0, rethink.**
+  - The joins read as vertical dissolves, not geography.
+  - The midday sky clips (12.6%).
+  - The night city stands under a pale sky, and it shows behind the snow at the wrap.
+  - The fog, golden haze and rain don't read.
+  - Smoke is crushed.
+  - The ground materials are smooth.
+  - "Composited vertical time slices in a 266 px band of eight scenes cannot read as one photograph": the critic
+    asks for the joins on physical features, or a sequence of frames.
+- **Planet: 3.0, rethink.** The sky ring is open (a white void), the knob is the hero, the speakers are small, and the
+  projection caps the score.
+
+**What was done (proof 7):**
+- Tropos is now the speaker lane's asset (r33-speaker-horn 8e44484e, cover off), linked from a gitignored path.
+- Smoke's sky is at 0.12 strength, so the windows and street lamps carry the night, with a lamp 2 m behind and left of
+  the speaker.
+- The city is kept inside its own sector.
+- The fog sea is its own volume below the headland.
+- The grass is golden.
+- The midday hours are trimmed by 0.7 EV.
+
+**Option C**, from the critics: rectilinear "seam" frames from the same world, two neighbors and their two speakers
+through a real lens (`composite.py --view`).
