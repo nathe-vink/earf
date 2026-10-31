@@ -270,6 +270,9 @@ def north_parts(p=N):
     z_cord = sz1 + ch
     cord = cyl('z', (0, 0), 6, z_cord, z_cord + p['drop'])
     zc = z_cord + p['drop']
+    # round 43 (proposal, certification.md): the fixture hangs from a fine steel cable beside the cord, so the cord
+    # carries current only (UL 153 lets an SPT-2 cord carry 2.5 lb; Hemisphere is about 3.5); an option until signed
+    susp = cyl('z', (5.5, 0), 1.5, z_cord, zc) + cyl('z', (5.5, 0), 5.0, z_cord, z_cord + 9) + cyl('z', (5.5, 0), 5.0, zc - 9, zc)
     cnd, cnh = p['canopy']
     canopy = cyl('z', (0, 0), cnd, zc, zc + cnh) - cyl('z', (0, 0), cnd - 6, zc - 1, zc + cnh - 3)
     driver = box(-42, -28.5, zc + 6, 42, 28.5, zc + 6 + 29.5)
@@ -293,6 +296,7 @@ def north_parts(p=N):
                     'runs at the hub\'s 49 to 52 C), over the listed cord grip (the strain relief, tested with the '
                     'fixture\'s weight), on two M3 into the crown; part of the heat sink']),
         Part('cord', cord, Bought('hemi-cord'), finish='cord', group='fixture'),
+        Part('suspension', susp, Bought('hemi-suspension'), finish='anodised', group='fixture', option='suspension'),
         Part('canopy', canopy, Machined('cast-acrylic', 'lathe'), finish='trim', group='canopy',
              notes=['150 x 50, black cast acrylic, polished: over the driver and a steel junction-box strap (the strap '
                     'carries the load)']),
@@ -503,7 +507,7 @@ NOTES_ORB = [
     'Black, so the tint is the only colour: the base black cast acrylic, polished, over an aluminium chassis and a steel '
     'ballast; the ring, the port\'s lining and the hatch black anodised aluminium.',
 ]
-TOUCHING_DOME = [('pins', 'ring'), ('rim', 'shell'), ('rim', 'skin'), ('rim', 'liner'), ('cob', 'hub'), ('gland', 'crown'),
+TOUCHING_DOME = [('suspension', 'gland'), ('suspension', 'canopy'), ('suspension', 'cord'), ('pins', 'ring'), ('rim', 'shell'), ('rim', 'skin'), ('rim', 'liner'), ('cob', 'hub'), ('gland', 'crown'),
                  ('crown', 'hub'), ('clamp', 'collar'), ('gaskets', 'collar'), ('gaskets', 'clamp'), ('gaskets', 'shell'),
                  ('gaskets', 'skin'), ('reflector', 'hub')]
 TOUCHING_ORB = [('grommet', 'shell'), ('window', 'base'), ('seat', 'base'), ('ring', 'base'), ('led', 'board'),

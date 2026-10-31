@@ -111,6 +111,11 @@ def _place(bpy, which, name, p, kit):
         if which in CANOPY_TOP_MM and p.get('ceiling') is not None:
             lift = p['ceiling'] - s['position'][2] - CANOPY_TOP_MM[which] / 1000
         hide = s.get('hide', p.get('hide', ''))
+        # round 43: an option's parts (Hemisphere's suspension cable) stay out unless the piece asks for the option
+        shown = set(s.get('options', p.get('options', [])))
+        unfitted = [n for o, names in pdef.get('options', {}).items() if o not in shown for n in names]
+        if unfitted:
+            hide = '|'.join([h for h in [hide] + unfitted if h])
         noshadow = p.get('noshadow', '')
         cart_off = 0.0
         if which == 'orb':

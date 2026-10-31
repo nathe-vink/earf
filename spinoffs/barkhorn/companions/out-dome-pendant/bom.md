@@ -31,4 +31,13 @@
 | total | 4,572 |
 
 No price yet for: UL or Intertek (ETL) Listing the pendant to UL 1598 (and the table lamp's battery and charger to UL 153 / IEC 62368): a one-off cost a design, spread over the first run.
+
+## Options (each for 1, on top of the total above)
+
+### suspension: about $12
+
+| item | make | qty | what | size | each, USD |
+|---|---|---|---|---|---|
+| suspension | buy | 1 | Griplock Systems or Gripple (to choose) Round 43, PROPOSAL (certification.md): a 1.5 mm black-coated stainless suspension cable, 2 m, cut to the drop, with an adjustable gripper in the canopy and a fixed end in the cap; rated well over the fixture's 1.6 kg (Griplock's 1.5 mm kits are rated about 30 to 45 kg; to confirm on the part's sheet). The fixture hangs from it; the cord beside it carries the 26 V only |  | 12.00 |
+
 Budget figures: bought parts from the component library (dated retailer listings), made parts from the kit's stock rates: 25 % offcut on sheet parts, a handling charge a print, and a setup a machined line spread over its pieces. A shop's quote replaces them.

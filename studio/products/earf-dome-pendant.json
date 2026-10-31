@@ -53,7 +53,7 @@
  },
  "assign": [
   {
-   "match": "collar|clamp|hub|pins|reflector|crown|gland",
+   "match": "collar|clamp|hub|pins|reflector|crown|gland|suspension",
    "material": "anodised"
   },
   {
@@ -166,5 +166,10 @@
     }
    }
   }
+ },
+ "options": {
+  "suspension": [
+   "suspension"
+  ]
  }
 }

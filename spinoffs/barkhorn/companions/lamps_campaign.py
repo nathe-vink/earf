@@ -101,29 +101,29 @@ def core_bedside():
     bx, by = 0.55, 2.05                      # the bed's centre: its head at the back wall (y 3.15)
     st['props'] = [
         box('gloss', '#3A2A1E', (1.72, 2.1, 0.30), (bx, by, 0.0), roughness=0.55),
-        box('cotton', '#ECE8E0', (1.62, 2.0, 0.22), (bx, by, 0.30)),
-        box('wool', '#7F8794', (1.66, 1.45, 0.07), (bx, by - 0.3, 0.50)),
+        box('cotton', '#D9D3C8', (1.62, 2.0, 0.22), (bx, by, 0.30)),
+        box('wool', '#6E7684', (1.84, 1.50, 0.30), (bx, by - 0.28, 0.24)),      # the duvet, over the sides
         box('cotton', '#F2EFE9', (0.62, 0.40, 0.15), (bx - 0.38, 2.86, 0.52), rotate_z=4),
         box('cotton', '#F2EFE9', (0.62, 0.40, 0.15), (bx + 0.38, 2.86, 0.52), rotate_z=-3),
         box('gloss', '#3A2A1E', (1.84, 0.06, 1.05), (bx, 3.10, 0.0), roughness=0.55),
         asset('side_table_01', (-0.62, 2.82, 0.0), 0.0),
-        box('paper', '#2B3A4A', (0.17, 0.24, 0.025), (-0.70, 2.80, 0.55), rotate_z=8),
-        box('paper', '#B8873C', (0.16, 0.23, 0.02), (-0.70, 2.80, 0.575), rotate_z=-4),
-        kit('lathe', 'glass', '#F4F2EE', (-0.47, 2.70, 0.55),
+        box('paper', '#2B3A4A', (0.15, 0.21, 0.022), (-0.44, 2.74, 0.55), rotate_z=14),
+        box('paper', '#B8873C', (0.14, 0.20, 0.018), (-0.44, 2.74, 0.572), rotate_z=4),
+        kit('lathe', 'glass', '#F4F2EE', (-0.80, 2.66, 0.55),
             profile=[[0, 0], [0.032, 0], [0.034, 0.11], [0.0, 0.11]]),
-        LF.core_piece(-0.62, 2.85, 0.55, 'ember', glow=0.35, rotate_z=-30),
+        LF.core_piece(-0.64, 2.86, 0.55, 'ember', glow=0.35, rotate_z=-30),
         {'kind': 'frame', 'position': [bx, 3.15], 'z': 1.55, 'size': [0.9, 0.6], 'art': '#2E3C52'},
     ]
     st['windows'] = [{'wall': 'left', 'along': -0.4, 'sill': 0.75, 'size': [1.1, 1.5], 'mullions': [1, 1],
                       'frame': '#1E2024'}]
     s['sky'] = {'kind': 'gradient', 'zenith': '#1A2A48', 'horizon': '#3A4A6A', 'ground': '#141820', 'strength': 0.006}
-    core_pool(s, -0.62, 2.85, 0.55)
+    core_pool(s, -0.64, 2.86, 0.55)
     s['render']['exposure'] = round(s['render']['exposure'] + 1.9, 3)
     s['render']['white_balance_k'] = 4000
     s['title'] = 'Core in Ember on a bedside table at night (the campaign)'
     s['size'] = [2400, 1600]
-    s['camera'] = {'position': [-1.25, 1.55, 0.92], 'target': [-0.42, 2.80, 0.70], 'lens_mm': 50, 'level': True,
-                   'fstop': 2.8, 'focus': [-0.62, 2.85, 0.68]}
+    s['camera'] = {'position': [-1.05, 1.95, 0.80], 'target': [-0.52, 2.90, 0.70], 'lens_mm': 70, 'level': True,
+                   'fstop': 2.0, 'focus': [-0.64, 2.86, 0.68]}
     return s
 
 
@@ -184,7 +184,7 @@ def mantle_credenza():
     s['render']['white_balance_k'] = 4000
     s['title'] = 'Mantle in Ember on a credenza in the evening, a record on (the campaign)'
     s['size'] = [2400, 1600]
-    s['camera'] = {'position': [mx + 1.0, cy - 1.95, 1.30], 'target': [mx + 0.45, cy, cz + 0.12], 'lens_mm': 35,
+    s['camera'] = {'position': [mx + 0.85, cy - 1.65, 1.25], 'target': [mx + 0.32, cy, cz + 0.12], 'lens_mm': 40,
                    'level': True, 'fstop': 4.0, 'focus': [mx, cy, cz + 0.1]}
     return s
 
@@ -202,7 +202,7 @@ def one_room():
                                                                           rotate_z=-20)]
     s['product'] = mantle_product(mx, cy - 0.02, cz)
     s['materials'] = {'glow': {'strength': 5.0}}
-    s['render']['exposure'] = round(s['render']['exposure'] + 0.5, 3)
+    s['render']['exposure'] = round(s['render']['exposure'] + 0.8, 3)
     for k in ('sconce1', 'sconce2', 'candle1', 'candle2'):
         s['lights'].pop(k, None)
     core_pool(s, cx + 0.98, cy - 0.02, cz, flavour_light='#E8D8C8')
@@ -235,7 +235,18 @@ def macro_core():
     return s
 
 
-BUILD = {'dining-dusk': dining_dusk, 'core-bedside': core_bedside, 'mantle-credenza': mantle_credenza,
+def dining_close():
+    """Hemisphere close over the table at dusk: the shade, its pool on the cloth and the glasses, the window behind."""
+    s = dining_room()
+    s['title'] = 'Hemisphere in Ember, close over the table at dusk (the campaign)'
+    s['size'] = [1600, 2000]
+    tx, ty = HB.TABLE
+    s['camera'] = {'position': [tx + 0.75, ty - 0.85, 1.30], 'target': [tx - 0.25, ty + 0.15, 1.34], 'lens_mm': 45,
+                   'level': True, 'fstop': 2.8, 'focus': [tx, ty, 1.47]}
+    return s
+
+
+BUILD = {'dining-dusk': dining_dusk, 'dining-close': dining_close, 'core-bedside': core_bedside, 'mantle-credenza': mantle_credenza,
          'one-room': one_room, 'macro-hemisphere': macro_dome, 'macro-core': macro_core}
 
 
