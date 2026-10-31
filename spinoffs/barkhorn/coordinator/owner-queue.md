@@ -65,3 +65,11 @@ while lanes run. Deck: https://claude.ai/artifact/3sihYaT4ckNTF6WE7SWR7x (v26). 
 - lamps 8afb3e79: Terrace won a 2nd blind duel (sides swapped); Halo won its first. Nudged: cordless Core set first.
 - Mantle acd7522d: renamed Outcrop. Bar bf83a3c0: look 2. Brand 5c18702b: Bedrock r2 5.0. Speaker 1253c74b: room
   re-render (covers off, landscape + portrait) due ~22:30. Check-in 4 armed for ~22:51.
+
+## Mantle pass complete (22:16 UTC, b4f17251)
+- Outcrop $3,773, Strata Float $3,822 (baseline $3,910); 0 clashes; stainless feet; arm details; all 4 duels won
+  (7.0-4.0, 6.5-4.5, 6.5-4.0, 6.5-3.5); blind 5.5-6.0; Ember frame = "red pinstripe" (honest thin stock tint).
+- NEXT OWNER QUESTION (after the tagline): Mantle A Strata Float / B Outcrop / Outcrop's cover on Strata's float.
+  Also later: a bespoke arm (product decision); cover weight 2.9 kg (3+3 top -> 2.4).
+- Asked for a short last pass: more color (wider or lighter custom laminae; Ember + a cool tint), a Strata Float dusk
+  frame, a bespoke-arm concept with OEM costs.
