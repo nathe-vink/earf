@@ -1,0 +1,40 @@
+{
+ "_note": "The Tint Library for the engine, written by studio/fabkit/render.py from the fabrication CAD; part names are the parts' names, materials the parts' finishes.",
+ "model": "spinoffs/barkhorn/companions/out-tint-library/render/tint-library.glb",
+ "origin_mm": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "materials": {
+  "birch": {
+   "preset": "wood",
+   "color": "#D8C3A0"
+  },
+  "chip": {
+   "preset": "acrylic",
+   "color": "#B23A28"
+  },
+  "smoke": {
+   "preset": "acrylic",
+   "color": "#6E6A66"
+  }
+ },
+ "assign": [
+  {
+   "match": "tray",
+   "material": "birch"
+  },
+  {
+   "match": "chip-1|chip-2|chip-3|chip-4|chip-5|chip-6|chip-7|chip-8",
+   "material": "chip"
+  },
+  {
+   "match": "hood-top|hood-front|hood-back|hood-left|hood-right",
+   "material": "smoke"
+  }
+ ],
+ "flavours": {
+  "default": {}
+ }
+}

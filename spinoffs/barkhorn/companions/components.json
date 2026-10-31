@@ -728,5 +728,50 @@
   "estimate": true,
   "supplier": "lighting-hardware distributors",
   "price_date": "2026-10-31"
+ },
+ "tint-chip-engrave": {
+  "kind": "service",
+  "maker": "a laser shop (a CO2 laser, 100 W or more)",
+  "model": "Laser work on one Tint Library chip at about 100 sets: cut 80 x 50 R4 from 3/8\" cast sheet (about 260 mm of cut), and the front's three lines engraved (the name, the code, LT at 9.5 and 3.2) and paint-filled",
+  "usd": 2.5,
+  "estimate": true,
+  "supplier": "any laser shop",
+  "price_date": "2026-10-31"
+ },
+ "tint-chip-step": {
+  "kind": "service",
+  "maker": "a CNC shop",
+  "model": "The step on one chip: a 35 x 50 flat-bottomed pocket milled from the back down to 3.2 (a 12 mm flat end mill, a vacuum fixture of 8), the floor fly-cut and polished clear, the edges polished",
+  "usd": 4.0,
+  "estimate": true,
+  "supplier": "any CNC shop",
+  "price_date": "2026-10-31"
+ },
+ "tint-card": {
+  "kind": "print",
+  "maker": "any printer",
+  "model": "The particulars card, 140 x 95, 600 gsm uncoated, letterpress or digital: the eight tints, each one's stock code, LT at both depths, and where EARF uses it",
+  "usd": 2.0,
+  "estimate": true,
+  "supplier": "a print shop",
+  "price_date": "2026-10-31"
+ },
+ "tint-felt": {
+  "kind": "hardware",
+  "maker": "any",
+  "model": "Four self-adhesive felt pads, 12 mm, under the tray",
+  "usd": 0.4,
+  "estimate": true,
+  "supplier": "any hardware retailer",
+  "price_date": "2026-10-31"
+ },
+ "tint-mailer": {
+  "kind": "packaging",
+  "maker": "any",
+  "model": "A rigid mailer box with a foam insert for the case, 180 x 130 x 90",
+  "usd": 3.5,
+  "estimate": true,
+  "supplier": "a packaging supplier",
+  "price_date": "2026-10-31"
  }
 }
