@@ -107,7 +107,7 @@ while lanes run. Deck: https://claude.ai/artifact/3sihYaT4ckNTF6WE7SWR7x (v27). 
   furniture; 2-3 h charge; 4.7-5.8 h a charge; about $30-45 added; no radio, so no new approval). Qi rejected on
   physics (aluminum hatch, steel ballast). Cost-down options for the owner later: an OEM Li-ion board ($2-5k, gives up
   the standard-LiFePO4 story) or a fixed-price LiFePO4 board ($12-20k). Working design = the dock (a proposal until
-  the owner signs; show him the drawing with the cordless frames).
+  the owner signs; show the owner the drawing with the cordless frames).
   Deck copy to change with the image swap: light.html "plugged in or not" -> "cordless: about five hours a charge".
 - Speaker 398d0c90: blind four-way duel Strata 8.0 > current 7.0 > Topo 6.0 > Topo Clear 5.5. Strata finals and its
   .blend next (polished lip, fewer thicker posts with the bronze collar, caldera in rhythm). Topo parked. Asked: report
