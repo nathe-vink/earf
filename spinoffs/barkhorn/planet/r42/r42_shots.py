@@ -16,16 +16,15 @@ KIT42 = 'spinoffs/barkhorn/planet/r42/kit42.py'
 
 VIEWS = {
     # along the counter from its far end: the zinc, the Hemispheres, the back bar and the record wall, the decks
-    # p2 (both p1 critics 5.0, converged): Mother EARF into the frame (28 mm, aimed into the room), exposure down, the
-    # zinc darker and rougher, the pendants' downlights softer, the record wall in pools, the Cores up a little
-    'counter': dict(camera={'position': [10.35, 2.55, 1.42], 'target': [4.6, 3.3, 1.55], 'lens_mm': 24, 'level': True,
+    # p3, the last round (p2 judged 5.0/4.5: the globe a "rotate gizmo" of neon rims and cropped; the grade orange; haze
+    # shafts; the niche Tropos a black box; matte zinc): back 0.65 m so the globe sits whole; its rims down, its spot up
+    # and tighter so the discs' faces carry the tint; haze halved; 3300 K; the zinc glossier; the bar pair lit
+    'counter': dict(camera={'position': [11.0, 2.8, 1.35], 'target': [4.6, 3.0, 1.75], 'lens_mm': 24, 'level': True,
                             'fstop': 4.0, 'focus': [7.3, 4.0, 1.15]}, exposure=4.2,
-                    lights={'pend': {'power_w': 20.0, 'cone_deg': 24.0}, 'rw': {'power_w': 8.0, 'cone_deg': 16.0, 'color': 2700},
-                            'street': {'radius_m': 0.6}},
-                    retouch={'darken': {'zinc': 0.25}, 'zinc_rough': [0.30, 0.60]}, orb={'lamp_w': 0.6, 'shade_glow': 0.012}),
-    # the listening corner: the altar, the pair, the tub chairs and their Cores
-    # p2 (critics 4.0/4.5, converged): the altar spots a stop and more down so the Smoke reads; the camera seated
-    # between the two near tubs so they frame the corners; the Cores and the screens down
+                    lights={'pend': {'power_w': 20.0, 'cone_deg': 24.0}, 'rw': {'power_w': 6.0, 'cone_deg': 16.0, 'color': 2700},
+                            'mother-spot': {'power_w': 220.0, 'cone_deg': 16.0}, 'barspk': {'power_w': 130.0}},
+                    render={'white_balance_k': 2850}, haze=0.0015, mother={'rim': 0.010},
+                    retouch={'darken': {'zinc': 0.30}, 'zinc_rough': [0.20, 0.40]}, orb={'lamp_w': 0.15, 'shade_glow': 0.004}),
     # p4, the last round (p3 judged 3.5/3.5: the centred, symmetric box reads as a configurator): seated three-quarter
     # view past a tub, 35 mm; the altar spots tight, landing pools on the floor; the Cores and the plinth light down
     'listening': dict(camera={'position': [13.2, 1.9, 1.25], 'target': [16.5, 3.6, 1.10], 'lens_mm': 35, 'level': True,
@@ -35,14 +34,18 @@ VIEWS = {
                       add_lights={'zone_fill': {'type': 'area', 'position': [13.9, 3.05, 3.25], 'target': [13.9, 3.05, 0.2],
                                                 'size_m': [2.2, 1.6], 'irradiance': 0.12, 'color': 2700, 'camera': False}},
                       orb={'lamp_w': 0.05, 'shade_glow': 0.0008}, room={'screen_glow': 0.012}),
-    # p2 (critics 4.5/5.0, converged): forward of the jambs at seated height, 32 mm; the floor's stains calmed; the
-    # pendants' downlights softer; the Cores and Mother's rims down, its spot up; the screens dimmer; the speakers lit
-    'night': dict(camera={'position': [14.2, 3.0, 1.32], 'target': [2.0, 2.9, 1.25], 'lens_mm': 32, 'level': True,
-                          'fstop': 5.6, 'focus': [7.0, 3.0, 1.2]}, exposure=4.8,
-                  lights={'pend': {'power_w': 20.0, 'cone_deg': 24.0}, 'spk': {'irradiance': 3.0}, 'barspk': {'power_w': 120.0},
-                          'altar': {'power_w': 220.0, 'cone_deg': 24.0}, 'mother-spot': {'power_w': 180.0, 'cone_deg': 24.0}},
-                  orb={'lamp_w': 0.15, 'shade_glow': 0.0035}, mother={'rim': 0.015}, room={'screen_glow': 0.015}),
-    # the shop wall by the door: everything in the room is on sale, and this is where it waits
+    # p3, the last round (p2 judged 5.5/5.0: Mother's rims read as neon, its coloured shadow brighter than the globe; haze
+    # shafts; the bar pair dark slabs, the niche strips clipping; the Cores blown; the grade orange): the rims down, the
+    # spot wide and stronger so the whole globe is lit and its shadow spreads; haze a third; the niche strips halved and
+    # the record wall's spots up; the Cores down; 2850 K (lower reads less orange in this engine, round 41 p6)
+    'night': dict(camera={'position': [13.7, 3.0, 1.40], 'target': [2.0, 2.9, 1.25], 'lens_mm': 32, 'level': True,
+                          'fstop': 8.0, 'focus': [9.0, 3.0, 1.0]}, exposure=4.8,
+                  lights={'pend': {'power_w': 20.0, 'cone_deg': 24.0}, 'spk': {'irradiance': 3.0}, 'barspk': {'power_w': 130.0},
+                          'altar': {'power_w': 220.0, 'cone_deg': 24.0}, 'mother-spot': {'power_w': 230.0, 'cone_deg': 36.0},
+                          'rw': {'power_w': 10.0, 'cone_deg': 18.0}},
+                  render={'white_balance_k': 2850}, haze=0.001,
+                  orb={'lamp_w': 0.08, 'shade_glow': 0.0018}, mother={'rim': 0.007},
+                  room={'screen_glow': 0.015, 'niche_strip': 3.0, 'spk_niche_strip': 0.75}),
     # p2 (critics 5.0/4.5, converged): night exposure (4.2 to 2.9), the Tropos lit to stay the hero, the Domes and the
     # shelf strips down, the Cores grouped over two shelves (two unlit), the cards bigger, seated camera at 32 mm
     'shop': dict(camera={'position': [0.82, 1.84, 1.28], 'target': [2.5, 5.9, 1.18], 'lens_mm': 32, 'level': True,
@@ -94,6 +97,8 @@ def shot(view):
     s['camera'] = v['camera']
     s['render']['exposure'] = v.get('exposure', s['render']['exposure'])
     s['render'].update(v.get('render', {}))
+    if v.get('haze') is not None:
+        s['haze']['density'] = v['haze']
     s['title'] = f'Planet EARF, round 42: {view}'
     s['set']['props'] += v.get('props', [])
     # the street lamps light the room through the street tree and the glass: the dappled "stains" on the floor every
