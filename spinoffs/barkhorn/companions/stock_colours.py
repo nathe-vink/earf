@@ -74,6 +74,7 @@ def mantle(flavour, case):
     s = json.loads(raw)
     s = s[0] if isinstance(s, list) else s
     s['product']['def'] = MANTLE
+    s['finish'] = {'enabled': False}          # its finishing pass needs PIL, which the render Python here lacks
     if case != 'site':
         name, T = STOCK[flavour]
         m = s.setdefault('materials', {})
@@ -123,6 +124,8 @@ def main():
     if '--render' in sys.argv:
         os.makedirs(RENDERS, exist_ok=True)
         for n in BUILD:
+            if os.path.exists(os.path.join(RENDERS, n + '.png')) and '--again' not in sys.argv:
+                continue
             subprocess.run(['python3', os.path.join(ROOT, 'studio', 'engine', 'render.py'), os.path.join(SHOTS, n + '.json'),
                             '--out', os.path.join(RENDERS, n + '.png'), '--scale', '0.4', '--samples', '64'], cwd=ROOT,
                            check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
