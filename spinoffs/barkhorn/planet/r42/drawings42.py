@@ -19,7 +19,7 @@ S4 = 1000 / 48.0                  # 1/4" = 1'-0": paper mm per metre
 S38 = 1000 / 32.0                 # 3/8" = 1'-0"
 PLAN_O = (112.0, 300.0)           # the paper point of the plan's origin (x = 0 at the glass, y = 0 the right wall)
 SHEETS = [('A-000', 'The house in numbers'), ('A-101', 'Floor plan'), ('A-102', 'Reflected ceiling plan'),
-          ('A-201', 'Sections'), ('A-301', 'Axonometric')]
+          ('A-201', 'Sections'), ('A-301', 'Axonometric'), ('A-401', 'The pop-up')]
 EXISTING = '#2a2927'
 NEW = '#77736c'
 TINT = {'smoke': '#4a4a50', 'tropos': '#3f3e44', 'fog': '#e9e7e2', 'ember': '#c8452f', 'zinc': '#b8b6b0',
@@ -795,6 +795,117 @@ def axo_sheet():
     return sh
 
 
+
+# --- A-401: the pop-up ------------------------------------------------------------------------------------------------
+def popup_sheet():
+    import popup42 as Q
+    sh = Sheet()
+    sh.frame('A-401', 'The pop-up', "3/8\" = 1'-0\" · 1,250 sq ft · 3 to 6 months", SHEETS,
+             notes=[('THE BRIDGE', ['A vacant downtown storefront for 3 to', '6 months: the shop, a catered bar and a',
+                                    'ten-seat listening room behind felt.', 'Everything portable; nothing built that',
+                                    'a short licence cannot carry away.']),
+                    ('READ WITH', ['POPUP.md: the drinks route, the budget,', 'the timeline to FOG week (January 2027)', 'and what it proves.'])],
+             site=["A vacant downtown storefront, 25'-0\" x", "50'-0\": 1,250 sq ft, 13 ft ceiling, an", 'existing accessible WC and a rear door.',
+                   'For 3 to 6 months. No site chosen.'])
+    S = S38
+    F = Frame(70.0, 330.0, S)
+    W_, L_ = Q.W, Q.L
+    T = 0.25
+    ex = dict(fill=EXISTING, stroke=INK, sw=0.25)
+    F.r(sh, 0, -T, L_ + T, 0, **ex); F.r(sh, 0, W_, L_ + T, W_ + T, **ex)
+    F.r(sh, L_, 0, L_ + T, Q.REAR_DOOR_Y, **ex); F.r(sh, L_, Q.REAR_DOOR_Y + 0.915, L_ + T, W_, **ex)
+    F.r(sh, -0.10, 0, 0, Q.GLASS[1], fill=PAPER, sw=0.2); F.l(sh, -0.05, 0, -0.05, Q.GLASS[1], sw=0.12)
+    F.r(sh, -0.25, Q.GLASS[1], 0, Q.DOOR['y0'], **ex); F.r(sh, -0.25, Q.DOOR['y0'] + Q.DOOR['w'], 0, W_, **ex)
+    F.door(sh, (0, Q.DOOR['y0']), (0, 1), (-1, 0), Q.DOOR['w'])
+    F.door(sh, (L_, Q.REAR_DOOR_Y), (0, 1), (1, 0), 0.915)
+    # zones
+    F.r(sh, 0, 0, Q.SHOP_X1, W_, fill=TINT['shop'], stroke='none')
+    F.r(sh, Q.LISTEN['x0'], 0, Q.LISTEN['x1'], W_, fill=TINT['listen'], stroke='none')
+    F.r(sh, Q.BACK['x0'], 0, L_, W_, fill=TINT['boh'], stroke='none')
+    # the felt drapes on ceiling track, the opening; the back wall of the listening room (existing partition assumed)
+    import numpy as np
+    for ya, yb in ((0.0, Q.DRAPE_OPEN[0]), (Q.DRAPE_OPEN[1], W_)):
+        ys = np.linspace(ya, yb, 60)
+        F.p(sh, [(Q.LISTEN['x0'] + 0.05 * math.sin(k * 1.3), yy) for k, yy in enumerate(ys)], close=False, sw=0.6, stroke='#5a4636')
+    F.r(sh, Q.LISTEN['x1'], 0, Q.LISTEN['x1'] + 0.12, W_, fill=NEW, sw=0.25)
+    F.r(sh, Q.WC['x0'] + 0.12, Q.WC['y1'], Q.WC['x1'], Q.WC['y1'] + 0.12, fill=NEW, sw=0.25)
+    F.r(sh, Q.STORE['x0'] + 0.12, Q.STORE['y1'], Q.STORE['x1'], Q.STORE['y1'] + 0.12, fill=NEW, sw=0.25)
+    F.r(sh, Q.LISTEN['x1'], 3.2, Q.LISTEN['x1'] + 0.12, 4.12, fill=PAPER, stroke='none')       # the door through
+    F.door(sh, (Q.LISTEN['x1'] + 0.06, 3.2), (0, 1), (1, 0), 0.915)
+    # shop: walls, window plinth with a Tropos pair facing the street, the table, Hemispheres
+    for Wl, y0, y1 in ((Q.WALL_R, 0, Q.WALL_R['d']), (Q.WALL_L, W_ - Q.WALL_L['d'], W_)):
+        F.r(sh, Wl['x0'], y0, Wl['x1'], y1, fill='#f7f4ee', sw=0.25)
+        for k in range(1, int((Wl['x1'] - Wl['x0']) / 0.9) + 1):
+            F.l(sh, Wl['x0'] + k * 0.9, y0, Wl['x0'] + k * 0.9, y1, sw=0.12)
+    P_ = Q.WINDOW_PLINTH
+    F.r(sh, P_['x'] - P_['d'] / 2, P_['y'] - P_['w'] / 2, P_['x'] + P_['d'] / 2, P_['y'] + P_['w'] / 2, fill='#d8d4cc', sw=0.2)
+    for dy in (-0.45, 0.45):
+        F.r(sh, P_['x'] - 0.21, P_['y'] + dy - 0.28, P_['x'] + 0.21, P_['y'] + dy + 0.28, fill=TINT['tropos'], sw=0.2)
+    F.r(sh, Q.TABLE['x0'], Q.TABLE['y0'], Q.TABLE['x1'], Q.TABLE['y1'], fill='#ece6da', sw=0.25)
+    for i in range(8):
+        F.c(sh, Q.TABLE['x0'] + 0.25 + i * 0.12, Q.TABLE['y1'] - 0.2, 0.045,
+            fill=['#c8452f', '#d27a3a', '#d9b43c', '#5d8a4a', '#6fa8c8', '#8b6fb0', '#e9e7e2', '#4a4a50'][i], sw=0.08)
+    for x, y in Q.HEMI:
+        F.c(sh, x, y, 0.21, fill=HEMI, sw=0.15, dash='1 0.6')
+    # the bar, its back table, the standing tables
+    B = Q.BAR
+    F.r(sh, B['x0'], B['y0'], B['x1'], B['y1'], fill=TINT['oak'], sw=0.25)
+    F.r(sh, B['x0'] + 0.2, W_ - 0.05 - B['back'], B['x1'] - 0.2, W_ - 0.05, fill='#e2ddd3', sw=0.2)
+    for x, y in Q.STAND:
+        F.c(sh, x, y, 0.30, fill='#5a4636', sw=0.2)
+    # the listening room: the stacks, the seats, the decks
+    sweet = (Q.STACKS[0][0] - 4.12 * math.sqrt(3) / 2, W_ / 2)
+    for x, y in Q.STACKS:
+        F.r(sh, x - 0.43, y - 0.36, x + 0.43, y + 0.36, fill='#2b2a28', sw=0.2)
+        ang = math.degrees(math.atan2(sweet[1] - y, sweet[0] - x))
+        rot_rect(sh, F, x, y, Q.TROPOS['d'], Q.TROPOS['w'], ang, fill=TINT['tropos'], sw=0.2)
+    for x, y in Q.SEATS:
+        chair(sh, F, x, y, 0)
+    F.r(sh, Q.DECKS['x0'], Q.DECKS['y0'], Q.DECKS['x1'], Q.DECKS['y1'], fill='#4a4844', sw=0.2)
+    # back of house
+    F.ellipse = None
+    x, y = F(Q.WC['x1'] - 0.42, 0.33); sh.ellipse(x, y, 0.20 * S, 0.30 * S, fill=PAPER, sw=0.2)
+    F.c(sh, (Q.WC['x0'] + Q.WC['x1']) / 2, 1.3, 0.76, sw=0.12, dash='1.5 1', stroke=TINT['route'])
+    # labels
+    def tag(x, y, s, sub=None):
+        F.tag(sh, x, y, s, size=3.0, weight=700, spacing=0.8)
+        if sub:
+            F.t(sh, x, y - 0.32, sub, size=2.4, anchor='middle', fill='#55524c')
+    tag(3.4, 5.2, 'Shop', 'everything for sale; the till at the table')
+    tag(8.0, 5.35, 'Bar', 'catered: a licensed partner pours')
+    tag(11.4, 6.85, 'Listening room', '10 seats behind felt; sessions on the hour')
+    tag(14.3, 6.4, 'Back')
+    F.t(sh, 3.5, 0.22, 'Core · Mantle · records', size=2.4, anchor='middle', weight=600)
+    F.t(sh, 3.5, W_ - 0.25, 'Hemisphere shades · coins · the desk globe', size=2.4, anchor='middle', weight=600)
+    F.t(sh, P_['x'] + 0.55, P_['y'], 'A Tropos pair in the window', size=2.3, rot=-90, anchor='middle')
+    F.t(sh, 14.3, 1.15, 'WC (existing)', size=2.4, anchor='middle')
+    F.t(sh, 14.3, 3.9, 'Stock, ice, glass', size=2.4, anchor='middle')
+    F.t(sh, 10.3, Q.W - 0.5, 'Decks', size=2.3, anchor='middle', fill=PAPER)
+    F.t(sh, Q.LISTEN['x0'] - 0.25, 3.0, 'Felt drapes on ceiling track', size=2.3, rot=-90, anchor='middle')
+    F.dim(sh, 0, W_ + T, L_, W_ + T, 12)
+    F.dim(sh, L_ + T, 0, L_ + T, W_, -10)
+    for a, b in ((0, Q.SHOP_X1), (Q.SHOP_X1, Q.LISTEN['x0']), (Q.LISTEN['x0'], Q.LISTEN['x1']), (Q.LISTEN['x1'], L_)):
+        F.dim(sh, a, W_ + T, b, W_ + T, 5.5)
+    sh.scale_bar(70, 372, S, label="3/8\" = 1'-0\"")
+    rows, tot = Q.occupancy()
+    x, y = 70, 395
+    sh.text(x, y, 'OCCUPANT LOAD', size=2.4, weight=700, spacing=0.6)
+    yy = y + 6
+    for k, sf, n in rows:
+        sh.text(x, yy, k, size=2.6); sh.text(x + 120, yy, f'{sf:,} sf', size=2.6, anchor='end', fill=GREY)
+        sh.text(x + 135, yy, str(n), size=2.6, anchor='end', weight=600); yy += 5.2
+    sh.line(x, yy - 3.4, x + 135, yy - 3.4, sw=0.2)
+    sh.text(x, yy + 0.8, 'Occupant load: under 50, so no Place of Assembly permit', size=2.6, weight=700)
+    sh.text(x + 135, yy + 0.8, str(tot), size=2.6, anchor='end', weight=700)
+    x2 = 230
+    sh.text(x2, y, 'WHAT IS BROUGHT IN', size=2.4, weight=700, spacing=0.6)
+    sh.lines_of(x2, y + 6, ['Felt drapes on a ceiling track (the listening room), acoustic panels on stands',
+                             'Two Tropos pairs: one in the window, one on the stacks; amplifiers, decks, 800 records',
+                             'The shop: shelves on the two walls, the table, 11 Hemispheres and 15 Cores on show and lit',
+                             'A portable bar with sinks and an ice well, brought by the caterer; rented chairs and tables',
+                             'Mother EARF? Only if the ceiling can take it: else the 300 mm desk globe in the window'], size=2.6, lead=1.5)
+    return sh
+
 # --- A-000: the house in numbers -------------------------------------------------------------------------------------
 def cover_sheet():
     sh = Sheet()
@@ -874,7 +985,7 @@ def cover_sheet():
 
 def main():
     os.makedirs(OUT, exist_ok=True)
-    built = {'A-000': cover_sheet(), 'A-101': plan_sheet(), 'A-102': rcp_sheet(), 'A-201': sections_sheet(), 'A-301': axo_sheet()}
+    built = {'A-000': cover_sheet(), 'A-101': plan_sheet(), 'A-102': rcp_sheet(), 'A-201': sections_sheet(), 'A-301': axo_sheet(), 'A-401': popup_sheet()}
     for n, sh in built.items():
         open(os.path.join(OUT, f'{n}.svg'), 'w').write(sh.svg())
         print(os.path.join(OUT, f'{n}.svg'))

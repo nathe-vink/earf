@@ -108,7 +108,7 @@ class Sheet:
                 + '\n'.join(self.el) + '</svg>')
 
     # --- a sheet's furniture --------------------------------------------------------------------------------------------
-    def frame(self, number, title, subtitle, sheet_list, notes=()):
+    def frame(self, number, title, subtitle, sheet_list, notes=(), site=None):
         """The border and a title strip down the right-hand edge, US style."""
         m = 12.0
         self.rect(m, m, self.w - m, self.h - m, sw=0.5)
@@ -126,9 +126,9 @@ class Sheet:
                                      'engineer or the building official.'], size=2.6)
         y += 4
         self.text(x, y, 'SITE (ASSUMED)', size=2.2, weight=600, spacing=0.4, fill=GREY)
-        y = self.lines_of(x, y + 5, ["A ground floor 35'-0\" x 80'-0\" inside the", 'walls: 2,800 sq ft. Existing shell,',
-                                     "15'-9\" to the joists, one street front,", 'a rear yard with a side passage to',
-                                     'the street. No site chosen.'], size=2.6)
+        y = self.lines_of(x, y + 5, site or ["A ground floor 35'-0\" x 80'-0\" inside the", 'walls: 2,800 sq ft. Existing shell,',
+                                             "15'-9\" to the joists, one street front,", 'a rear yard with a side passage to',
+                                             'the street. No site chosen.'], size=2.6)
         y += 4
         for n in notes:
             self.text(x, y, n[0], size=2.2, weight=600, spacing=0.4, fill=GREY)
