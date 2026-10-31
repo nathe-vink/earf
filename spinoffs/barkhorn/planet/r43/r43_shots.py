@@ -68,8 +68,10 @@ VIEWS = {
     # the corner; no practical, no life): 2700 K, tint +1; a plain dark wool rug; the pair's spots 110 W at 24 deg aimed at
     # the cabinets; the seats' light 2 W; the fill 0.05; the felt washed up from the floor behind the plinths; a lit Core
     # on the decks table; haze; 24 mm from behind the back row
-    'listening': dict(camera={'position': [9.85, 3.55, 1.25], 'target': [12.8, 3.8, 1.0], 'lens_mm': 24, 'level': True,
-                              'fstop': 4.0, 'focus': [12.6, 3.6, 0.9]}, exposure=3.6, haze=0.0015,
+    # (p2a, seen before judging: at 24 mm both stacks fell off the frame's edges, median 18: 22 mm on the room's axis,
+    # exposure 4.2; the room is symmetric, so the frame is)
+    'listening': dict(camera={'position': [9.8, 3.81, 1.2], 'target': [12.8, 3.81, 1.05], 'lens_mm': 22, 'level': True,
+                              'fstop': 4.0, 'focus': [12.6, 3.6, 0.9]}, exposure=4.2, haze=0.0015,
                       # p1 proof, seen before judging: overexposed (median 111, the seats and rug blown): exposure 5.0 to
                       # 3.6, the seats' light and the back felt's wash halved
                       lights={'stack': {'power_w': 110.0, 'cone_deg': 24.0}, 'seats': {'power_w': 2.0},
