@@ -7,11 +7,14 @@
 >   that needs a login (401, not retried). These headings follow the FAQ's criteria (quality, interpretation of the
 >   briefing, visitor experience, relation to the artist statement, two months outdoors, no nuisance). Re-map them to the
 >   template's headings once the owner downloads it.
-> - **The design** is the globe as drawn in the bar lane's House Book and the site's mark (round 33c): six slotted discs
->   of tinted cast acrylic, edge-lit. It is **not** a globe with continents; that would be a new design, and the owner
->   decides that.
-> - **Size and weight.** The House Book's piece is 1.25 m and about 190 kg in 25 mm sheet. At 2 m it would be about
->   490 kg in 25 mm (est., the same arithmetic scaled by area); the bar lane's technical sheet sets the true figure.
+> - **The design** is Mother EARF as drawn in the bar lane's House Book (rounds 33–41): six slotted discs of 25 mm cast
+>   acrylic, three meridians and three parallels, the axis at 23.4 degrees, the rims glowing. No continents, and no
+>   inside to light (the coordinator's correction, 2026-10-31).
+> - **Size and weight.** The House Book's piece is 1.25 m and about 190 kg. The 2 m version is the bar lane's proposal
+>   for the owner: "under study; figures to confirm" (House Book v8), about 245–485 kg depending on thickness, before
+>   ballast. Every figure in brackets comes from that sheet. R10's sphere figures are not used.
+> - **Colours.** Six discs, six colours (the House Book's). The bar lane's 2 m render is described as "rims glowing in
+>   the eight tints"; six discs show six of the eight unless a disc is split. The owner decides; the text says six.
 > - **No logos.** The work is entered under the owner's name. "EARF" appears nowhere in the work; the title is the
 >   owner's choice (see the end).
 
@@ -19,7 +22,7 @@
 
 ## The work
 
-A globe two metres across, drawn in light.
+A globe two metres across, drawn in light: an armillary sphere of the Earth, made of colour.
 
 It is made of six discs of cast acrylic, each tinted all the way through in one colour:
 - **Three meridians**, in green, orange and violet, stand on edge and cross at the poles.
@@ -31,12 +34,13 @@ and through one colour into the next. Its axis leans 23.4 degrees, as the Earth'
 By day it is a piece of coloured glass the size of a small room. The sun goes through each disc and throws its colour
 on the ground, and where two discs cross the colours mix.
 
-At night, light is fed into the discs from inside the base and travels through the acrylic to their polished edges. A
-disc of cast acrylic carries light the way a fibre does, so the faces stay dark and clear and **the rims glow**. Six
-lines of colour, each the circle of its disc, draw the globe in the air.
+At night the rims glow. Cast acrylic carries light along a disc the way a fibre does, so light fed into an edge
+leaves at the polished rims while the faces stay dark and clear [bar lane: how the light enters the discs, as
+proofed]. Six lines of colour, each the circle of its disc, draw the globe in the air. One hard spot, low across the
+quay, throws the globe's shadow: rings inside rings, each in its own colour, laid over the paving and the water.
 
 There's no screen, no projection and no moving part. The light is steady, and the work is the material doing what it
-does.
+does: one object, drawn three times, in its rims, on the quay and in the canal.
 
 [IMAGE 1, from the bar lane: the globe at night, from eye level, at the waterside. A render, captioned so.]
 
@@ -65,13 +69,14 @@ being shone onto it. Keep it in your voice; the jury reads this for "relation to
   people can walk round it and look up through it. The polished edges are lit; the faces are cool and clear.
 - **Through it.** Stand on the far side and the city appears through the discs, tinted: a bridge in yellow, a
   facade in violet. Phones will do the rest: the picture everyone takes is the city framed by the world.
-- **By day.** The globe is a coloured shadow on the paving. In low winter sun the shadow is long, and walking through
-  it puts the colours on your coat.
+- **Its shadow.** The spot lays the globe flat on the quay in coloured rings, long and low. Walking through it puts
+  the colours on your coat, and the rings ride on the canal's surface beyond. By day, the low winter sun does the
+  same.
 - **For everyone.** It's silent and steady: no flashing, no strobe, nothing that startles. The light level is
   [to be set with the festival's technicians] for the site, so it sits among the canal's own lights rather than
   over them.
 
-[IMAGE 2, from the bar lane: by day, the coloured shadow on the paving. A render, captioned so.]
+[IMAGE 2, from the bar lane: the hard spot's coloured shadow on the quay and the water. A render, captioned so.]
 
 ## Materials and making
 
@@ -113,9 +118,9 @@ pre-assembled or in [two] halves. Installation takes [one day with a small crane
 |---|---|
 | Title | [TITLE] |
 | Maker | [OWNER: full name], San Francisco |
-| Size | About 2 m across on a plinth about [0.5] m high; [weight from the bar lane's sheet] |
+| Size | About 2 m across on a plinth about [0.5] m high; about [245–485] kg before ballast, under study [bar lane's sheet] |
 | Material | Cell-cast acrylic, tinted through in six colours; a ballasted [steel] plinth |
-| Light | Low-voltage sealed LEDs, edge-fed; [W] |
+| Light | Low-voltage sealed LEDs, edge-fed, and one hard spot for the shadow; [W] |
 | New or existing | New: made for the festival, at 2 m. A [1.25] m version is [planned / built] [OWNER] |
 | Budget | [From the bar lane's budget: production, transport, installation] |
 

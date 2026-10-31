@@ -24,8 +24,8 @@ downloads it first**, and this list gets corrected against it.
 | # | Item | Who | Status |
 |---|---|---|---|
 | 0.1 | **Download the artist briefing** (the SharePoint link on the open-call page) and send it to both lanes | Owner | to do: the template, theme and portal list depend on it |
-| 0.2 | **Decide the design for the entry**: the globe as drawn (six slotted discs, six colours, edge-lit), or a new design (the brief mentioned continents in eight colours, which the drawn globe doesn't have) | Owner | open: the text follows the drawn design |
-| 0.3 | **Decide the size**: 2 m, as R10 proposes, or the House Book's 1.25 m | Owner, with Bar | open; at 2 m in 25 mm sheet it's about 490 kg (est.), not 190 |
+| 0.2 | **The design**: Mother EARF as drawn (six slotted discs, rims glowing, a hard spot's coloured shadow), settled by the coordinator's correction. Open: six colours (six discs) or the render brief's "eight tints" | Owner | text follows the drawn design, six colours |
+| 0.3 | **Decide the size**: the bar lane's 2 m proposal (about 245–485 kg depending on thickness, before ballast; under study) or the House Book's 1.25 m (about 190 kg) | Owner, with Bar | open; the text says 2 m, with figures in brackets |
 | 0.4 | **Choose the title** ("Mother", "Mother Earth, in Six Colours", or "Mother EARF" after asking the festival about the company name) | Owner | open |
 | 0.5 | **Confirm whether a €35 contribution applies to professionals** (R10: earlier calls asked; unverified) | Owner (from the briefing) | to check |
 
@@ -40,7 +40,7 @@ From the FAQ and the open-call page; **confirm against the briefing**.
 | 3 | **Visitor experience** | Brand | drafted (`CONCEPT.md`, "How the public meets it") |
 | 4 | **Artist statement** | Brand (draft) + Owner (own words) | drafted: `STATEMENT.md` |
 | 5 | **Bio or CV** | Owner (facts) | template in `STATEMENT.md`, with [OWNER TO FILL] |
-| 6 | **Visualisations**: the globe at night at the waterside; by day, its shadow. Renders, captioned as renders | Bar | to do |
+| 6 | **Visualisations**: the 2 m globe at night by a canal, rims glowing; the hard spot's coloured shadow on the quay. Renders, captioned as renders | Bar | to do |
 | 7 | **Technical sheet**: dimensions, weight, plan and elevation, the plinth and ballast, the light (LEDs, voltage, IP rating, watts), installation and removal, how it survives two months outdoors | Bar | to do; `CONCEPT.md`'s durability table leaves its figures in brackets for this sheet |
 | 8 | **Budget estimate**: production, transport to Amsterdam, installation, removal (earlier rounds asked for one, per R10) | Bar | to do, after House Book v8 |
 | 9 | **Previous work / portfolio** | Owner | to do. Photographs of real work after 19 January would be ideal, but the deadline is earlier, so show what exists, and label renders as renders |

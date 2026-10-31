@@ -20,17 +20,17 @@ A shared job:
 
 1. **The briefing is behind a sign-in.** The template, Edition 16's theme and the portal list are in a SharePoint
    folder that returned 401 (not retried). The owner downloads it, and the text is mapped onto it.
-2. **The design.**
-   - The coordinator's brief describes "the continents glowing in eight colours".
-   - The globe as drawn has no continents and six colours. In the House Book and the site's mark (round 33c) it is six
-     slotted discs: three meridians (green, orange, violet) and three parallels (red, blue, yellow). The discs are
-     cemented clear where they cross and edge-lit so the rims glow.
-   - The owner chose that multicolour globe (2026-10-22) over a glowing-core version the critics called "a nightclub cue".
-   - The text describes the drawn globe. A continents globe would be a new design, and the owner decides that.
+2. **The design (settled by the coordinator's correction, 2026-10-31).**
+   - Mother EARF is as drawn in the House Book (rounds 33–41): six slotted discs of 25 mm cast acrylic, three meridians
+     and three parallels, the axis at 23.4 degrees, the rims glowing.
+   - There are no continents and no inside to light. At 2 m, a hard spot throws its coloured shadow on the quay; that's
+     the bar lane's render.
+   - One question remains: six discs carry six colours, while the bar lane's render brief says "the eight tints". The
+     owner decides; the text says six.
 3. **Size and weight.**
-   - "About 2 m, about 190 kg" mixes two figures. The House Book's 190 kg is the **1.25 m** piece in 25 mm sheet.
-   - At 2 m the same discs come to about **490 kg** (est., scaled by area).
-   - R10's "12.7 mm walls" assumes a closed shell, which the globe isn't.
-   - The bar lane's technical sheet sets the real figure. The text leaves it in brackets.
+   - The 1.25 m piece weighs about 190 kg.
+   - The 2 m version is a proposal under study: about 245–485 kg depending on thickness, before ballast (House Book v8,
+     "figures to confirm").
+   - R10's closed-sphere figures are not used. Every figure in the concept is in brackets for the bar lane's sheet.
 4. **No logos, and the title.** The work is entered as the owner's own. "Mother EARF" carries the company's name, so the
    text offers "Mother" or "Mother Earth, in Six Colours", or asking the festival first.
