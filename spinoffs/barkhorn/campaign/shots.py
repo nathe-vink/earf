@@ -20,7 +20,7 @@ def load(path):
     return json.load(open(os.path.join(ROOT, path)))
 
 
-def room(critic_round=2):
+def room(critic_round=3):
     s = load('studio/shots/barkhorn/room31/room.json')
     s['title'] = 'Tropos, a pair at home at golden hour (Poison), round 36 horn'
     s['products'] = [p for p in s['products'] if 'turntable' not in p['def']]
@@ -42,6 +42,17 @@ def room(critic_round=2):
                 p['position'] = [0.55, 0.78, 0.56]
             if p.get('fn') == 'rug':
                 p.update(off=False, position=[0.0, -0.9], size=[2.4, 1.5])
+    if critic_round >= 3:                    # round 2 (room-r2.json): c1, c2, c3 (the same texture, tinted), c4 to c7
+        L = s['lights']
+        L['north']['irradiance'] = 0.45
+        L['bounce']['irradiance'] = 0.4
+        s['sun'].update(elevation_deg=17.0, angle_deg=1.0)
+        s['camera'].update(position=[-0.25] + s['camera']['position'][1:], target=[-0.25] + s['camera']['target'][1:])
+        for p in s['set']['props']:
+            if p.get('fn') == 'rug':
+                p.update(value=0.6, tex_scale=1.0, displace=0.006, tint='#8A7A64', tint_mix=1.0)
+            if p.get('fn') == 'sheer' and p.get('seed') == 12:
+                p['open'] = 0.6
     return s
 
 

@@ -1,0 +1,17 @@
+{
+ "image": "proofs/room-p2-post.png",
+ "stage1": {"impression": "A believable golden-hour living room: warm raking sun, a real plaster wall and a credible window view, with green light passing through the left cabinet onto the credenza and vase, which is the best moment in the frame. The speakers still read as CG. Their faces are evenly lit lime green with a too-light disc. The left horn throws a big neutral-grey bottle-shaped shadow in the middle of the wall. A flat cool-grey rug slab fills the foreground. The right pair sits crowded against the frame edge.", "score": 6.0},
+ "verdict": "iterate",
+ "changes": [
+  {"id": "c1", "change": {"setting": "sun elevation", "from": "11.0", "to": "17.0"}, "accept": {"region": [800, 360, 960, 430], "metric": "lum_median", "op": ">=", "value": 185}},
+  {"id": "c2", "change": {"setting": "lamp north irradiance", "from": "0.9", "to": "0.45"}, "accept": {"region": [440, 480, 530, 580], "metric": "delta_e", "op": "<", "value": 8, "hex": "#2E4A2C"}},
+  {"id": "c3", "change": {"setting": "prop 3 rug", "from": "poly_wool_herringbone, value 0.75, tex_scale 0.25", "to": "a wool loop or boucle texture tinted #8A7A64, value 0.6, tex_scale 1.0, displace 0.006"}, "accept": {"region": [520, 760, 1280, 805], "metric": "delta_e", "op": "<", "value": 5, "hex": "#8A7A64"}},
+  {"id": "c4", "change": {"setting": "prop 12 sheer open", "from": "0.35", "to": "0.6"}, "accept": {"region": [0, 0, 60, 810], "metric": "clip_pct", "op": "<", "value": 0.2}},
+  {"id": "c5", "change": {"setting": "camera x and aim x", "from": "-0.45", "to": "-0.25"}, "accept": null},
+  {"id": "c6", "change": {"setting": "sun size", "from": "0.5 deg", "to": "1.0 deg"}, "accept": {"region": [580, 640, 620, 700], "metric": "g_median", "op": ">=", "value": 108}},
+  {"id": "c7", "change": {"setting": "lamp bounce irradiance", "from": "0.25", "to": "0.4"}, "accept": {"region": [1250, 150, 1420, 380], "metric": "lum_median", "op": "between", "value": [100, 140]}}
+ ],
+ "out_of_scope": [{"request": "the batts read as uniform lime", "why": "the speaker's colour and parts are fixed"}],
+ "score_if_fixed": 7.5,
+ "note": "Condensed from the critic's reply (problems, evidence and defects summarised in ../NOTES.md). c3: no other rug texture is in the local CC0 cache, so the tint, value, scale and displacement are applied to the same texture."
+}

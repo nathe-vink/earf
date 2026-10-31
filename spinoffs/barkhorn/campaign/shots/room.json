@@ -169,10 +169,10 @@
     "texture": "poly_wool_herringbone",
     "tint": "#8A7A64",
     "tint_mix": 1.0,
-    "displace": 0.004,
+    "displace": 0.006,
     "res": "4k",
-    "value": 0.75,
-    "tex_scale": 0.25
+    "value": 0.6,
+    "tex_scale": 1.0
    },
    {
     "kind": "kit",
@@ -478,7 +478,7 @@
     "noise": 0.35,
     "seed": 12,
     "res": 140,
-    "open": 0.35,
+    "open": 0.6,
     "color": "#F3EEE4"
    },
    {
@@ -531,9 +531,9 @@
  },
  "sun": {
   "azimuth_deg": -68.0,
-  "elevation_deg": 11.0,
+  "elevation_deg": 17.0,
   "irradiance": 48.0,
-  "angle_deg": 0.5,
+  "angle_deg": 1.0,
   "color": "#FFE4C8"
  },
  "sky": {
@@ -568,7 +568,7 @@
     0.2,
     0.9
    ],
-   "irradiance": 0.9,
+   "irradiance": 0.45,
    "color": "#DCE4EE"
   },
   "bounce": {
@@ -587,7 +587,7 @@
     0.3,
     1.15
    ],
-   "irradiance": 0.25,
+   "irradiance": 0.4,
    "color": "#FFF0DE"
   },
   "floorbounce": {
@@ -627,12 +627,12 @@
  ],
  "camera": {
   "position": [
-   -0.45,
+   -0.25,
    -4.76,
    1.05
   ],
   "target": [
-   -0.45,
+   -0.25,
    0.3,
    0.855
   ],
