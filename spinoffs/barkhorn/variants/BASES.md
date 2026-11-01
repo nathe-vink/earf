@@ -63,19 +63,35 @@ The steps' polished edges catch some of it.
 
 **The light:**
 - **The strip:** COB (dotless) LED, 24 V, **4.8 W/m, 2700 K, CRI 90+ (R9 above 50)**, 8 mm wide (`plinth-led`).
-- **The channel:** a **removable black anodized aluminum U-channel**, about 43 x 5 outside with 1.5 mm walls, mitred to a
-  frame **90 mm in from the bottom frame's outside edge all round** (40 until the coordinator's call of 2026-11-01). It
-  carries the strip and, at its open face, a **40 mm wide, 3 mm opal acrylic diffuser**. It is light-tight above and at
-  the sides, so no light enters the clear frame (the deck's reveal rows, 2026-11-01: light piped through the bottom frame
-  glowed at its edges as a line). It is held by M3 stainless screws into threaded inserts about every 250 mm, not bonded,
-  so the strip can be replaced in service (`plinth-channel`).
-- **The reveal:** the bottom frame's underside is rebated 6 mm deep over its outer 70 mm (a 6.7 mm lip in the 1/2 in
-  sheet), so the gap at the step's edge is 18 mm with the feet still 12 (the coordinator, 2026-11-01).
-- **The light's path:** the strip faces the floor through the diffuser. The plinth stands 12 mm up on its feet, so the
-  light spreads from the diffuser onto the floor as a soft pool that reaches past the bottom step. The step's edge no
-  longer shows the strip itself as a line (the deck's LED rows, 2026-11-01: at 40 in it read as an orange line at every
-  strength). The feet, the footprint and the plinth's outline are unchanged.
-- **Length and power:** 1.94 m a speaker, so **9.3 W at full** and 4.7 W at the default 50 %.
+- **The channel:** a shallow aluminum channel, about 10 x 4, with a frosted PMMA diffuser, bonded into a groove routed
+  in the bottom frame's underside, **40 mm in from its outside edge all round**. The underside is flat (no reveal).
+- **Broken at the feet:** the strip runs in four lengths, each stopped 30 mm short of the corner so it clears the foot
+  pads there (the pads reach 45 mm in from the edges; the strip at 40 would run over them). The lengths are joined by
+  short soldered jumpers across each corner (the coordinator, 2026-11-01).
+- **The light's path:** the strip faces the floor. The plinth stands 12 mm up on its feet, so the light leaves at the
+  bottom step as a thin warm line on the floor, with some light entering the bottom frame and showing at its polished
+  edge. This is the look the deck hero shows: **glow 20 by day and 40 at dusk** in the pictures.
+- **Length and power:** 2.1 m a speaker, so **10.1 W at full** and 5.0 W at the default 50 %.
+
+**Tested and not adopted** (2026-11-01; the deck's comparison rows at 1664 x 520 and the Ice front-off-wide proofs, half
+size, all in `renders/2026-11-01/barkhorn/`). The aim was a soft pool on the floor in place of the line.
+- **The bare strip at 40 at lower strengths** (`deck/tropos-eight-row-led40/20/10.png`): the line thins but stays a line.
+  Kept, at glow 20 by day.
+- **90 in behind a 40 x 3 opal diffuser** (`deck/tropos-eight-row-pool20/40.png`): a broader warm band under the dark
+  tints, but the diffuser glowed through the clear frames. Not adopted: still a line on the light tints.
+- **A 6 mm reveal under the bottom frame's outer 70 mm** (`deck/tropos-eight-row-reveal20/40.png`,
+  `site-strata/proofs/front-off-wide-ice-reveal.png`): more warm light on the floor, but the light piped through the
+  clear frame and lit its underside as a wider band. Not adopted: it doesn't stop the line, and it costs about 1 kg of
+  machining and a point of tipping margin. (A 15 mm reveal does not fit the 1/2 in frame.)
+- **A sealed, removable black U-channel, 90 in** (`deck/tropos-eight-row-sealed20.png`,
+  `site-strata/proofs/front-off-wide-ice-sealed.png`): the frame stays in its own tint, but the light lands under the
+  plinth, hidden by the step. Not adopted: no pool reaches past the step.
+- **The same channel at 40 in** (`deck/tropos-eight-row-sealed40in-20.png`, `site-strata/proofs/front-off-wide-ice-sealed40in.png`):
+  a crisp warm line on the floor under the edge, the frame clean. Not adopted: it is the same line as the bare strip at
+  more cost. It stays the alternative if the frame's glow is ever unwanted (`PLINTH_LIGHT['sealed']` in `variants.py`;
+  `plinth-channel` in `components.json`).
+- A real pool past the step needs the light further from the floor (taller feet, about 50 mm). That changes the look,
+  so it is the owner's to ask for.
 
 **Power, separate from the FA122's mains:**
 - **A plug-in supply, 24 V, 15 W, UL listed Class 2** (UL 1310) or IEC 62368-1 PS1 (`plinth-supply`), with a 2 m lead

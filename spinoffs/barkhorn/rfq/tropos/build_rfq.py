@@ -96,7 +96,7 @@ KINDS = {
     'd-other': [
         (('lining-bottom-', 'lining-top-', 'lining-left-', 'lining-right-', 'lining-back-'), 'lining batts', 'polyester batt, acoustic grade, about 30 kg/m3, recycled PET', '50 and 100', 'white', 'cut 10 oversize each way; each sewn into a black voile sleeve', '±5'),
         ('lining-sleeves', 'lining sleeves (voile)', 'black polyester voile', '-', 'black', 'sewn to each batt\'s size, seams to the wall', '±5'),
-        ('fd:plinth-light:2', 'the plinth\'s light (one a speaker)', '24 V COB LED strip, 4.8 W/m, 2700 K, CRI 90+, 2.0 m, behind a 40 x 3 mm opal acrylic diffuser in a removable black anodized aluminum U-channel (light-tight, screwed, not bonded); a 24 V 15 W UL Class 2 supply; a small dimmer board (EARF\'s design)', '-', '-', 'the strip cut and soldered to length in its channel; leads and a DC socket', '-'),
+        ('fd:plinth-light:2', 'the plinth\'s light (one a speaker)', '24 V COB LED strip, 4.8 W/m, 2700 K, CRI 90+, 2.1 m in four lengths joined by short jumpers at the corners (clear of the feet), in a 10 x 4 aluminum channel with a frosted diffuser; a 24 V 15 W UL Class 2 supply; a small dimmer board (EARF\'s design)', '-', '-', 'the strip cut and soldered to length in its channel; leads and a DC socket', '-'),
         ('mark-back', 'EARF on the back', 'laser etch into the back panel', '0.1 deep', 'etch filled in the speaker\'s color, deeper', 'frosted, 140 wide, from our vector file', '±0.2'),
         ('back-seal', 'back seal', 'EPDM cord 4 mm, 60 Shore A', '4', 'black', 'about 2.7 m a speaker, its ends vulcanized into a loop', 'length ±5'),
         ('amp-box-gasket', 'amplifier compartment gasket', 'EPDM sponge, closed cell', '3', 'black', 'die-cut frame, 15 wide', '±0.5'),
