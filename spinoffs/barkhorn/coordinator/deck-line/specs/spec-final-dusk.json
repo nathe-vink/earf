@@ -1,0 +1,89 @@
+{
+ "ground": "../fps-final/dusk-1920.png",
+ "src": "/_blob/fb6656f5bca3567d6433879263d4cdd3",
+ "alt": "A living room at dusk with the lamps lit and all four EARF pieces in Poison, a transparent green acrylic: a pair of Tropos speakers with stepped horns and their covers off, each on a stepped plinth that lights the floor beneath it, either side of a low oak credenza with a Mantle record player whose base glows; a glowing Core lamp on a side table at the left; a lit Hemisphere pendant over a cognac leather chair at the right; a plain plaster wall behind",
+ "notes": "Each piece takes its name from the Earth. Tropos is Greek for a turn; the troposphere, the layer of air we live in, is named for it. Core, Mantle and Hemisphere are the planet’s own parts. Here all four share one room at dusk with the lights on, in Poison, one of the eight colors. It is a render, not a photograph: Tropos with its stepped horn and its cover off, on its lit plinth; Core cordless; Mantle in its first design, which is being redrawn. This render shows the earlier, lighter Poison; the darker stock tint the line now uses follows. A daytime version of the same room exists.",
+ "header": {
+  "eyebrow": "The line",
+  "title": "Four pieces, named for the Earth.",
+  "x": 100,
+  "y": 66,
+  "w": 900,
+  "h": 160,
+  "px": 60,
+  "ink": "light"
+ },
+ "callouts": [
+  {
+   "id": "hemisphere",
+   "name": "Hemisphere",
+   "kind": "Pendant",
+   "line": "A shade that swaps in a quarter turn.",
+   "label": {
+    "x": 1049,
+    "y": 213,
+    "w": 380,
+    "h": 112,
+    "lines": 1,
+    "align": "right"
+   },
+   "ink": "light"
+  },
+  {
+   "id": "core",
+   "name": "Core",
+   "kind": "Table lamp",
+   "line": "Cordless, about five hours a charge.",
+   "label": {
+    "x": 114,
+    "y": 481,
+    "w": 380,
+    "h": 112,
+    "lines": 1,
+    "align": "center"
+   },
+   "ink": "light"
+  },
+  {
+   "id": "mantle",
+   "name": "Mantle",
+   "kind": "Record player",
+   "line": "Belt drive, phono stage built in.",
+   "label": {
+    "x": 770,
+    "y": 477,
+    "w": 380,
+    "h": 112,
+    "lines": 1,
+    "align": "center"
+   },
+   "ink": "light"
+  },
+  {
+   "id": "tropos",
+   "name": "Tropos",
+   "kind": "Speaker",
+   "line": "A powered horn loudspeaker.",
+   "label": {
+    "x": 444,
+    "y": 257,
+    "w": 380,
+    "h": 112,
+    "lines": 1,
+    "align": "center"
+   },
+   "ink": "light"
+  }
+ ],
+ "foot": {
+  "text": "A render, in Poison.",
+  "x": 1200,
+  "y": 1030,
+  "w": 280,
+  "align": "right",
+  "ink": "light"
+ },
+ "style": {
+  "halo": "text-shadow:0 0 16px rgba(20,16,14,0.7),0 1px 3px rgba(20,16,14,0.55);"
+ }
+}

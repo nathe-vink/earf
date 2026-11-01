@@ -19,3 +19,10 @@ Copy (American English; no starting color; Tropos cover off; Core cordless):
 Tropos, Speaker, "A powered horn loudspeaker." / Hemisphere, Pendant, "A shade that swaps in a quarter turn." /
 Core, Table lamp, "Cordless, about five hours a charge." / Mantle, Record player, "Floats on its own light." /
 foot: "A render. Shown in Poison, one of eight colors."
+
+## Effective contrast with the halo (2026-11-01)
+`line_build.py`'s worst-case figure ignores the halo, so a dark frame can report under 4.5:1 while it reads well. To measure what is
+actually rendered: `node shoot_pair.js out/preview.html A.png B.png` (B is the same frame with the text transparent and its shadows kept),
+then `python3 eff_contrast.py spec.json A.png B.png`, which compares each block's glyph cores against the halo-darkened ground under them.
+The final dusk frame (specs/spec-final-dusk.json: all labels light, halo `0 0 16px rgba(20,16,14,0.7), 0 1px 3px rgba(20,16,14,0.55)`)
+measures 7.0 to 13.3:1 on the labels and 4.7:1 on the corner note.

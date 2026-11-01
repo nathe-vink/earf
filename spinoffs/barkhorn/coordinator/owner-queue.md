@@ -453,3 +453,12 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
   Mantle 2092 by the speaker calibration); held vs deep explained (known bracket; frames stand either way).
 - Board v2 published (MGUByhczqB2jUYDV7R4t3h): six decisions, three settled (darker colors, flush horn with corrected acoustics, black
   lining), Smoke's go in its own session, later list with dates. Second check wf_ef6fe320-80f running (refuter + owner-eyed reader).
+- 11:40 deck v42: line slide = four-pieces 256d495e dusk final (Tropos's final form, the earlier lighter Poison) as the interim; all
+  labels light with a stronger halo, effective contrast 7.0-13.3:1 (corner note 4.7:1). Assets: dusk /_blob/fb6656f5bca3567d6433879263d4cdd3,
+  day /_blob/35a6b01dad36a9132e7519d5b572f954 (alt kept at scratchpad deck/line-day-final-alt.html). -final-2092: day ~12:10, dusk ~12:50.
+- Speaker: horn depth decided by the coordinator (proposal, on the owner's board): Ember, Poison, Haze, Smoke, Fog horns stay stock code
+  (read deep at 12.7 mm, and match the picture the owner chose); Dust, Acid, Ice take the site's deep horn. Haze 2287 may be translucent
+  (Acme) -> check for a transparent violet. SHA corrections noted: 5947d8ca (use of funds), bbf21f36 (RFQ drafts).
+- Lamps 2a39629a/b320f6e0: Hemisphere v3 (tint outside: 3 mm stock shell, 6 mm clear, opal) recommended over v2 -> drawing set as a
+  proposal; Core: chips first (~$50); if deep or no 3/8 in stock, two-layer ball (Ember, Poison, Haze, Smoke; second mould ~$1.2k) and
+  single-layer stock (Dust, Ice, Acid, Fog); custom 1/3 pour out on cost (~$10-15k a color). No 3/8 in TruCast listed in any of the eight.
