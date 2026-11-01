@@ -182,6 +182,53 @@ not returnable.
 | Contingency, 15 % of the made parts and moulds | about $1,100 [E] |
 | **Total to 14 January** | **about $15,500** [E] |
 
+### Re-run for the owner's picks (2026-11-01)
+
+What the owner signed on 2026-11-01 (r46-owner-notes 5b63e05b):
+- Hemisphere v3, the color outside;
+- Core with the signed contact dock and LiFePO4 cells;
+- Mantle as Strata Float v3 after the shared fixes (r48-mantle-design 9e72cf70, $3,877), still with the 2M Blue.
+
+**The board's design itself is not here.** The fixed-price design (about $12k to $20k, `core-board-rfq.md`) is
+step 2, not this raise. Every figure is an estimate [E] from the rebuilt BOMs. Changes against the table above:
+
+| Line | Was | Now | Change | Why |
+|---|---|---|---|---|
+| The moulds | $5,400 (Hemisphere's three $3,900; Core's ball $1,500) | $5,700 | **+$300** | v3's three moulds: the tint shell on the outer form, the 6 mm clear shell and the opal's female mould ($1,500 + $1,500 + $1,200 = $4,200). The clear structural shell is a larger mould than v2's liner |
+| Hemisphere's other parts | $672 | $694 | +$22 | the shouldered pins, the tether, the canopy's steel strap and driver box (the review) |
+| Core's other parts | $527 | $664 | +$137 | the dock (body, stainless post and ring, its board, the cable stays in the box), the pin board and pins, the cell tray, the thermal pads, the six hatch screws into steel |
+| Core's boards, fab and assembly | $400 | $550 | +$150 | adds the pin board and the dock's board to the 5-board run |
+| Chips | $150 | $200 | +$50 | 1/8 in and 3/8 in of 2092 beside 2423, to settle "held" against "deep" (parked with logistics) |
+| Mantle | $3,815 (turntable-float) | $3,877 (Strata Float v3) | +$62 | the shared fixes |
+| Contingency, 15 % of made parts and moulds | about $1,100 | about $1,180 | +$80 | on the above |
+| **Total to 14 January** | **about $15,500** | **about $16,300** | **+$800** | |
+
+**For the deck's ask slide: "Hemisphere, Core and Mantle (one of each): $16,300"** (was $14,400, a figure older than
+this table's $15,500).
+
+**What it does to the $50,000:**
+
+| Line | Amount |
+|---|---|
+| Tropos | $20,700 |
+| Hemisphere, Core and Mantle | **$16,300** |
+| Tropos testing | $5,000 |
+| Trademarks | $3,600 |
+| The debut | $4,000 |
+| **Reserve** | **about $400** (was about $2,300) |
+
+**Not in the $16,300; each comes out of that $400:**
+- **Core's two-layer ball,** only if the chips show "deep": about $1,200 for the second mould plus about $25 for the
+  ball. That would put the reserve about $800 under.
+- **The 2M Black** for the show unit: +$530.
+- **The debut night's lighting:** about $9,400, below. It was never in the $50,000.
+
+**Where to find room if it's needed:**
+- The $600 of bench equipment is returnable and keeps its value.
+- The early electronics (about $370) are mostly returnable.
+- Hemisphere's moulds could be ordered for one tint first. That saves nothing on the moulds but defers the sheet.
+- Paying the moulds' usual 50 % deposit spreads about $2,850 into January.
+
 ### Option, not in the total: the debut night's lighting
 
 Six more Hemispheres and ten more Cores (`debut-night-lighting.md`), on the moulds already paid for: 6 × $672 +
