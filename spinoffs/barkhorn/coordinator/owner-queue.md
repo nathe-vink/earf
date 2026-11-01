@@ -563,3 +563,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   rows, hold the portrait; start the site set with Ice (then Dust, Acid, Fog), critic gate on Ice; hold Ember/Poison/Haze/Smoke and
   the all-eight shared frames until the pick. Its checks: 29352c30's Smoke cabinet is 2074; the rows reproduce 29352c30's four
   cabinets exactly, only TT changes; Haze renders transparent (real 2287 is translucent, so the row flatters it).
+- 15:45 comparison rows landed: middle 7ef8daa8, site e88112ed. They are only a little lighter (speaker lane's face means: Ember
+  70/17/15 -> 86/21/21 -> 93/30/33; Poison 42/56/44 -> 42/69/47 -> 48/86/56; Haze 73/67/99 -> 81/71/108 -> 92/79/117; Smoke 46/47/49 ->
+  52/53/55). Cause: through a clear wall you see what's behind it, and behind every wall is the black voile lining (my recommendation
+  after the owner's "doesn't look like smoke", the working default "unless the owner prefers white"), the black woofer and dark
+  internals; the site was lighter because its batts were white. So the lining is the lever, not the tint's depth. Asked the speaker
+  lane for two more quick rows: D = light lining in the seven colors, Smoke on black; E = mid-gray lining in all eight. Site-set
+  full-size frames held until the owner picks lining and depth (Ice proofs at half size for framing only). Stack: scratchpad tints/abc.jpg.
