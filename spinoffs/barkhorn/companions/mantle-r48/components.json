@@ -234,11 +234,11 @@
  "led-strip-cob": {
   "kind": "light",
   "maker": "any (Waveform, LEDSupply, BTF kind)",
-  "model": "24 V COB LED strip, dotless, 8 mm, 2700 K, CRI 90+, about 3 W/m; 1.48 m used in one closed loop (4.4 W)",
-  "usd": 40,
+  "model": "24 V COB LED strip, dotless, 5 mm wide, 2700 K, CRI 90+, 5 W/m or less (about 4 W/m chosen; confirm on its data sheet), its minimum cut length to suit four straight runs; about 1.2 m used (about 4.9 W)",
+  "usd": 35,
   "estimate": true,
   "supplier": "a strip maker (COB, 24 V)",
-  "price_date": "2026-10-31"
+  "price_date": "2026-11-01"
  },
  "float-studs": {
   "kind": "hardware",
@@ -252,11 +252,11 @@
  "led-channel": {
   "kind": "hardware",
   "maker": "any (Klus / Muzata kind)",
-  "model": "Black anodized aluminum U-channel for 5 mm LED strip, about 4.6 x 6, bent and cut to the base's loop (about 1.3 m)",
+  "model": "Black anodized aluminum U-channel about 7 x 7 (inside 5.2) for 5 mm strip, cut to four straight runs and mitred at 45 at the corners (no bending in its own plane); about 1.2 m",
   "usd": 25,
   "estimate": true,
   "supplier": "an LED profile supplier",
-  "price_date": "2026-10-31"
+  "price_date": "2026-11-01"
  },
  "platter-inserts": {
   "kind": "hardware",
@@ -283,6 +283,25 @@
   "usd": 6,
   "supplier": "McMaster-Carr kind",
   "estimate": true,
+  "price_date": "2026-11-01"
+ },
+ "led-adapter-class2": {
+  "kind": "power",
+  "maker": "Mean Well kind",
+  "model": "Desktop or wall adapter, 24 V DC, 12 W (0.5 A), UL/cUL 62368-1 listed and marked Class 2 / LPS (Mean Well GE12I24-P1J kind; read the label before ordering), 2.5 mm plug; the strip draws about 4.9 W",
+  "usd": 15,
+  "estimate": true,
+  "supplier": "Digi-Key / Mouser kind",
+  "price_date": "2026-11-01",
+  "note": "replaces the 25 W GST25A24 (the audit: a 25 W supply makes the light a PS2 circuit beside HB acrylic; distributors list it Class I with a C14 inlet). No dimmer: the 25 kHz PWM dimmer's FCC status was open"
+ },
+ "strata-rear-hardware": {
+  "kind": "hardware",
+  "maker": "Neutrik / Switchcraft / C&K / CUI kind",
+  "model": "For Strata's rear plate: two gold insulated panel RCA jacks (1/4 in hole); a 4 mm earth binding post; a 4PDT signal toggle with gold contacts (C&K 7411 kind); an SPST mini toggle for the light; an insulated 2.1 mm DC panel jack (18 V, the S2) and an insulated 2.5 mm one (24 V, the light); the Neo's motor inlet as Rega's kit supplies it (connector UNCONFIRMED); two M3 x 10 button screws; shielded leads inside",
+  "usd": 70,
+  "estimate": true,
+  "supplier": "Digi-Key / Mouser kind",
   "price_date": "2026-11-01"
  }
 }

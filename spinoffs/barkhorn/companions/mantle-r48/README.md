@@ -288,9 +288,40 @@ The render's emission was set by eye for the frame's exposure, not converted fro
 | `strata-v3-ice-custom.png` | studio, v2 r2's rig, custom Ice deck over the smoked base |
 | `strata-v3-dusk-ember-custom.png` | dusk, custom Ember deck, the light pooled under the smoked base |
 
+## 11. The owner's pick: Strata Float v3, in the line's stock tints (2026-11-01)
+
+The owner picked A, Strata Float v3, at about 12:10 UTC (r46-owner-notes 5b63e05b), after the stock-tint sheets
+(`STOCK-AND-AUDIT.md`, section 1). Outcrop is set aside. What followed, all proposals until the owner signs:
+
+- **The shared audit fixes** (`STOCK-AND-AUDIT.md`, section 3):
+  - the pulley waits for a bench test on the US Neo;
+  - a 4PDT bypass;
+  - the bearing: 1.0 ml of oil, a vented 440C spindle, a disc spring under the nut;
+  - no isolation claim for the feet;
+  - the motor hard-mounted as Rega fits it;
+  - the platter screwed from below into bonded inserts.
+- **A product block for other lanes' scenes:** `studio/products/mantle-strata-v3.json`, written by the build. Its
+  flavors are the line's stock codes: poison-2092 (the default), ember-2423, smoke-2074, haze-2287 and ice-2069. The
+  base is stock Smoke 2074 under every flavor. Proofs: `renders/2026-11-01/barkhorn/mantle-r48/block-proof-*.png`.
+- **The rear plate** (the audit: Strata had nowhere to mount its jacks, no wiring or earth drawing, and no rating):
+  - 2 mm brass on the base's back edge at the back right, under the deck's 35 mm overhang, so it never shows from
+    the front;
+  - the upper row: line out, the earth post (the star), the 4PDT and the light's switch;
+  - the lower row: the S2's 18 V inlet (2.1 mm), the light's 24 V inlet (2.5 mm, so the plugs can't be swapped) and
+    the Neo's inlet;
+  - the rating engraved along its foot.
+  - The plate, the wiring and earth diagram, the section and the label text are in
+    `out-strata-v3/drawings/rear-panel.png` (`strata_rear.py`).
+- **The light** (the audit: an 8 mm strip in a 5 mm slot with 2 mm corners, on a 25 W supply):
+  - a 5 mm 24 V COB strip of 5 W/m or less, in four straight runs on a mitred black U-channel 7 x 7, in a slot
+    7.4 x 7 routed from below, facing down onto the shelf;
+  - about 1.2 m and 4.9 W, on a listed Class 2 adapter of 12 W;
+  - no PWM dimmer inside, so the record player stays on the PS1 path.
+- **The budget** goes from $3,877 to $3,798: the dimmer is out; the plate and its hardware are in.
+
 ## Open questions for the owner
 
-1. **A or B,** or B's cover on A's float.
+1. **A or B,** or B's cover on A's float. *(Answered 2026-11-01: A, Strata Float v3.)*
 2. **The thin-tint stack** depends on 2064 being as dark as its chart says. The chips and a 1/2 in offcut settle it.
    If the caster pours EARF's own tints lighter, thicker tinted strata come back as an option.
 3. **Outcrop's cover is 2.9 kg.** A 3 + 3 top instead of 5.6 + 3 would bring it to about 2.4.
@@ -300,3 +331,8 @@ The render's emission was set by eye for the frame's exposure, not converted fro
 6. **Color:** stock sheet only draws dark lines. Do we ask the caster for EARF's tints at a lighter dye loading, in 3 and
    12.7 mm (section 7)?
 7. **The arm:** keep the RB330, or ask Rega about EARF's own counterweight, finger lift and rest on it (section 8)?
+8. **The deck as glass:** in the stock deep tints, Strata's 25.4 deck passes 1.5-3.7 % and reads as a deep colored
+   slab. A custom pour for its two sheets only, at about 35-40 % TT per 1/2 in, would make it read as glass (about
+   12-15 % through). The owner decides after the color chips are measured (`STOCK-AND-AUDIT.md`, section 2).
+9. **Dimming the light:** none inside now. If it is wanted, use a listed Class 2 dimmer in the adapter's lead,
+   outside the record player.

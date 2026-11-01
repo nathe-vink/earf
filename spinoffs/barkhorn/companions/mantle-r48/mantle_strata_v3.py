@@ -11,6 +11,10 @@ The shared audit fixes (2026-11-01, STOCK-AND-AUDIT.md 3; proposals until the ow
 Rega fits it; the platter's screws up through the hub into bonded inserts; the bearing on a disc spring, 1.0 ml of
 oil, a vented 440C spindle; the pulley for 300 rpm pending the bench test; a 4PDT bypass; no isolation claim for the
 feet.
+Strata's own audit items (2026-11-01, after the owner picked A; proposals until signed): a brass rear plate on the
+base's back edge, under the deck's overhang, carries the line out, the earth post, the 4PDT, the light's switch, the
+two DC inlets and the Neo's inlet, with the rating engraved (drawing: strata_rear.py); the light is a 5 mm strip of
+5 W/m or less in four straight runs in a 7.4 x 7 slot, on a listed Class 2 adapter of 12 W, with no PWM dimmer inside.
 
 v2's notes follow.
 
@@ -72,7 +76,7 @@ P = dict(
     puck_d=84.0, puck_t=12.0,
     motor_d=184.7, motor_x=64.0, motor_pocket=76.0,
     rpm_motor=300.0,                                  # PROPOSAL until benched: the US Neo at 60 Hz (STOCK-AND-AUDIT.md 3.1)
-    slot_in=12.0, slot_w=5.0, slot_h=6.0,
+    slot_in=12.0, slot_w=7.4, slot_h=7.0,             # the audit: a 5 mm strip in a 7 x 7 channel, four straight runs
     lid_t=3.0, lid_h=100.0, bumper=5.0,
     housing_d=30.0, flange_d=50.0, flange_t=5.0,
     tint_ring=20.0,
@@ -132,6 +136,15 @@ def poutline(P, D, inset, extra=0.0):
                         cx=m + D['W0'] / 2, cy=m + D['D0'] / 2)
 
 
+# the rear plate's hardware (name, x, z, hole, outside d, outside l, inside d, inside l), in the model frame: x across,
+# z up from the shelf, through the plate along y. Upper row: line out, the earth post, the 4PDT, the light's SPST;
+# lower row: the S2's 18 V inlet (2.1 mm), the light's 24 V inlet (2.5 mm, so the two plugs cannot be swapped), the Neo's
+REAR_HW = [('OUT L', 322, 52, 6.5, 10, 10, 9, 15), ('OUT R', 340, 52, 6.5, 10, 10, 9, 15), ('EARTH', 360, 52, 4.5, 10, 15, 10, 12),
+           ('PHONO / BYPASS', 384, 52, 6.4, 6.4, 16, 13, 14), ('LIGHT', 404, 52, 6.4, 6.4, 14, 8, 10),
+           ('18 V', 322, 37, 8.0, 11, 2, 9, 16), ('24 V', 344, 37, 8.0, 11, 2, 9, 16), ('MOTOR', 370, 37, 12.0, 15, 4, 14, 15)]
+REAR_PLATE = dict(x0=308.0, x1=418.0, screws=(318.0, 408.0))
+
+
 def boutline(P, D, inset=0.0):
     m = P['margin']
     return rounded_rect(D['Wb'] - 2 * inset, D['Db'] - 2 * inset, max(P['Rb'] - inset, 2.0), cx=m + D['W0'] / 2, cy=m + D['D0'] / 2)
@@ -179,7 +192,7 @@ def parts(P):
             out.append(Part(f'plinth-L{i + 1}-inlay', s & band, clr[3.0], finish='clear', group='plinth', render=False))
         else:
             out.append(Part(f'plinth-L{i + 1}', s, clr[l['t']], finish='clear', group='plinth', render=False,
-                            notes=['the deck: two clear 12.7 sheets (custom-poured in the color for the color versions), cemented flush with ACRIFIX 2R 0190 in a vacuum press: one bond line, at mid-edge; annealed, faces fly-cut, the outline finish-routed as one; the outer edge fine bead-blasted to a satin (round 48\'s duels: a polished thick edge refracts the room in patches, a satin one collects light evenly), the top and bottom faces left glassy'] if i == 0 else []))
+                            notes=['the deck: two 12.7 sheets of the line\'s stock tint in the flavor\'s code (a lighter custom pour is an open question for the owner), cemented flush with ACRIFIX 2R 0190 in a vacuum press: one bond line, at mid-edge; annealed, faces fly-cut, the outline finish-routed as one; the outer edge fine bead-blasted to a satin (round 48\'s duels: a polished thick edge refracts the room in patches, a satin one collects light evenly), the top and bottom faces left glassy'] if i == 0 else []))
     plinth_one = cut(union(*one), cuts)
     out[0].pieces = {'stack': (plinth_one, 'acrylic-strata')}; out[0].render = True
 
@@ -189,19 +202,29 @@ def parts(P):
     feet = list(posts)
     # each foot's M8 brass insert in a blind hole drilled up through the base into the bonded post's foot (14 deep)
     bcuts = [slot] + [cyl('z', f, 8.5, b0 - 1, b1 + 1) for f in feet]        # the feet's studs, clear through
+    # ---- the rear plate: 2 mm brass on the base's back edge at the back right, under the deck's 35 overhang ----
+    yb = m + D['D0'] / 2 + Db / 2                                             # the base's back edge
+    zp = (b0 + b1) / 2                                                         # the plate's two M3 screws, into the edge
+    RP = dict(x0=REAR_PLATE['x0'], x1=REAR_PLATE['x1'], z0=b0 + 1.0, z1=z0 - 4.0)
+    rp_screws = [(x, zp) for x in REAR_PLATE['screws']]
+    bcuts += [cyl('y', c, 4.6, yb - 10, yb + 0.5) for c in rp_screws]         # brass M3 inserts, bonded into the edge
+    RPH = [h[1:] for h in REAR_HW]
     bl0 = D['base'][0]
     base_c = cut(prism(boutline(P, D), 'z', bl0['z0'], bl0['z1']), bcuts)
     out += [Part('base-L1', base_c, tint[12.7], finish='acrylic', group='base', render=False,
                  pieces={'stack': (base_c, 'acrylic-base')},
                  notes=['the base: one 12.7 sheet of stock smoked 2064 in every version (it recedes; the color is the deck\'s), the deck\'s corner radius, 35 in from the deck on all four sides; the light\'s slot routed from below (5 x 6, 12 in from the edge, one closed loop), its whole outer edge diamond-polished so it all glows',
+                        'the light\'s slot is now 7.4 wide x 7 deep from below, 12 in from the edge, its corners squared by the cutter (r1.5 inside) for four straight runs of channel mitred at 45 (the audit: an 8 mm strip in a 5 mm slot with 2 mm corners); two M3 inserts in the back edge for the rear plate',
                         'four 8.5 holes through it under the posts, for the feet\'s M8 studs into the posts']),]
     out[-1].render = True
-    channel = prism(boutline(P, D, si + 0.2), 'z', b0 + 5.4, b0 + 5.9) - prism(boutline(P, D, si + sw - 0.2), 'z', b0 + 5.3, b0 + 6.0)
+    channel = prism(boutline(P, D, si + 0.2), 'z', b0 + 6.2, b0 + 6.8) - prism(boutline(P, D, si + sw - 0.2), 'z', b0 + 6.1, b0 + 6.9)
     out.append(Part('led-channel', channel, Bought('led-channel'), finish='black', group='base',
-                    notes=['a black anodized aluminum U-channel 4.6 x 6 bent to the loop: its closed back faces up, so the strip never shows from above; it replaces the printed band']))
-    strip = prism(boutline(P, D, si + 0.6), 'z', b0 + 0.2, b0 + 5.2) - prism(boutline(P, D, si + 1.8), 'z', b0, b0 + 5.4)
+                    notes=['black anodized aluminum U-channel 7 x 7 (inside 5.2), four straight runs mitred at the corners, bonded in the slot with its closed back up and its open face down: the strip never shows from above, and it lights the shelf']))
+    loop_m = 2 * ((Wb - 2 * (si + sw / 2)) + (Db - 2 * (si + sw / 2))) / 1000
+    strip = prism(boutline(P, D, si + 1.2), 'z', b0 + 5.2, b0 + 6.2) - prism(boutline(P, D, si + 6.2), 'z', b0 + 5.1, b0 + 6.3)
     out.append(Part('led-strip', strip, Bought('led-strip-cob'), finish='ledstrip', group='base',
-                    notes=['a 24 V COB strip (dotless) on its back in the slot, its light facing out, one closed loop of about 1.48 m: 4.4 W at 3 W/m']))
+                    notes=[f'a 5 mm 24 V dotless COB strip, 5 W/m or less (about 4 W/m chosen), on the channel\'s back facing down, in four straight runs of {loop_m * 1000 / 4:.0f} mm on average ({loop_m:.2f} m, about {4 * loop_m:.1f} W), joined at the corners by soldered jumpers: COB strip does not bend in its own plane',
+                           'its lead to the plate\'s 24 V inlet through the SPST; the light\'s circuit is isolated from signal ground']))
 
     # ---- the posts: solid 303 stainless, polished; bonded into a 2 mm seat under the deck, a tapped M8 x 16 hole from below ----
     for i, p in enumerate(posts):
@@ -258,6 +281,15 @@ def parts(P):
     px0, py0 = m + D['W0'] / 2 - 51.5, m + D['D0'] / 2 + Db / 2 - 125.0
     phono = box(px0, py0, b1 + 1.5, px0 + 103, py0 + 115, b1 + 37.5)
     felts = union(*[cyl('z', (px0 + x, py0 + y), 10.0, b1 + 0.15, b1 + 1.5) for x in (12, 91) for y in (12, 103)])
+    # the rear plate and its hardware (its plugs and the S2's project behind the base, under the deck's overhang)
+    rplate = box(RP['x0'], yb, RP['z0'], RP['x1'], yb + 2.0, RP['z1'])
+    for x, z, hole, *_ in RPH:
+        rplate = rplate - cyl('y', (x, z), hole, yb - 1, yb + 3)
+    for c in rp_screws:
+        rplate = rplate - cyl('y', c, 3.4, yb - 1, yb + 3)
+    rhw = union(*[cyl('y', (x, z), do, yb + 2.0, yb + 2.0 + lo) + cyl('y', (x, z), di, yb - li, yb) + cyl('y', (x, z), hole - 0.2, yb - 0.5, yb + 2.5)
+                  for x, z, hole, do, lo, di, li in RPH],
+                *[cyl('y', c, 3.0, yb - 8, yb + 2.0) + cyl('y', c, 5.6, yb + 2.0, yb + 3.6) for c in rp_screws])
 
     # ---- the mark: EARF, 18 wide, laser-etched into the deck's front edge, low in its lower sheet, frosted ----
     import turntable as T_
@@ -310,16 +342,19 @@ def parts(P):
         Part('foot-studs', fstuds, Bought('foot-studs'), finish='steel', group='feet'),
         Part('phono-stage', phono, Bought('phono-box-s2'), finish='aluminium-dark', group='phono'),
         Part('phono-pads', felts, Bought('phono-felts'), finish='rubber', group='phono'),
-        Part('back-hardware', None, Bought('back-hardware')),
+        Part('rear-plate', rplate, Sheet('brass-sheet', 2, face='+y') if 'brass-sheet' in SHEETS else Machined('brass-leadfree', 'cnc-mill'), finish='brass', group='rear',
+             notes=['2 mm lead-free brass, brushed, 110 x 47.7, on the base\'s back edge at the back right, 35 in from the deck\'s back edge: two M3 button screws into brass inserts bonded in the edge',
+                    'upper row: line out L and R, the 4 mm earth post (the star), the 4PDT stage / bypass, the light\'s on-off; lower row: 18 V for the phono stage (2.1 mm), 24 V for the light (2.5 mm, so the two plugs cannot be swapped), the Neo\'s motor inlet',
+                    'the rating engraved along its foot and filled black (strata_rear.py has the text and the wiring and earth drawing)']),
+        Part('rear-hardware', rhw, Bought('strata-rear-hardware'), finish='steel', group='rear'),
         Part('hinge-blocks', blocks, Machined('cast-acrylic', 'cnc-mill', stock=(45.0, 15.0, 2 * 29.0)), finish='acrylic', group='lid',
              notes=['two 40 x 9.5 blocks of the color, each with the hinge\'s slot 3.2 x 12 x 18 deep, on two M4 screws into inserts in the plinth\'s back edge (horizontal, in shear)']),
         Part('hinges', hinges, Bought('cover-hinges'), finish='black', group='lid'),
         *[Part(k, s, Sheet('trucast-tint', 3.0), finish='acrylic-lid', group='lid',
-               notes=['3 mm 2064 (1/8 in stock), cemented as a box with ACRIFIX 2R 0190; 1.1 kg, within the Debut hinges\' rating; outer edges eased R0.5 and polished'] if k == 'lid-top' else [])
+               notes=['3 mm stock sheet in the flavor\'s code (1/8 in), cemented as a box with ACRIFIX 2R 0190; 1.1 kg, within the Debut hinges\' rating; outer edges eased R0.5 and polished'] if k == 'lid-top' else [])
           for k, s in lid.items()],
         mark_part,
-        Part('led-adapter', None, Bought('led-adapter-float')),
-        Part('led-dimmer', None, Bought('float-dimmer-hf')),
+        Part('led-adapter', None, Bought('led-adapter-class2')),
         Part('inserts', None, Bought('core-inserts')),
         Part('wiring', None, Bought('core-wiring')),
         Part('neo-psu', None, Bought('rega-neo-psu-mk2')),
@@ -348,9 +383,12 @@ NOTES = [
     'cemented with ACRIFIX 2R 0190 in one vacuum press, annealed, fly-cut, stepped 2 mm a stratum, diamond-polished.',
     'The float: four solid 303 stainless posts bonded into 2 mm seats under the plinth, held to the base by the feet\'s M8 studs: '
     'rigid. The four feet (stainless on Sorbothane, levelled and locked) locate and level it; no isolation is claimed. For isolation, a platform at 3-5 Hz.',
-    'The light: a dotless 24 V COB strip, 3 W/m, one closed loop in a 3 x 6 slot routed from below 25 in from the base\'s '
-    'edge; the black band printed on the clear before lamination; Mean Well listed adapter and the 25 kHz dimmer. The '
-    'phono stage runs from its own listed adapter.',
+    'The light: a 5 mm dotless 24 V COB strip of 5 W/m or less, in four straight runs on a black U-channel in a 7.4 x 7 slot '
+    'routed from below 12 in from the base\'s edge, facing down onto the shelf; a listed Class 2 24 V adapter of 12 W into the '
+    'plate\'s 2.5 mm inlet, an SPST on the plate. No dimmer inside: with no clocked circuit, the record player keeps the '
+    'PS1 path (the audit). The phono stage runs from its own listed adapter.',
+    'The rear plate: 2 mm brass on the base\'s back edge, under the deck\'s overhang; line out, earth post (the star earth), '
+    '4PDT stage / bypass, the light\'s switch, the two DC inlets and the Neo\'s; the rating engraved. Wiring and earth: strata_rear.py.',
     'The motor: Rega 24 V on its plate, screwed hard to a shoulder in a pocket through the plinth as Rega fits it, below it in the float. '
     'The pulley waits for the motor\'s speed measured on the US Neo (300 rpm expected at 60 Hz).',
     'The bearing, platter, arm puck and phono stage as Outcrop\'s (mantle_outcrop.py): a disc spring under the bearing\'s nut, '
@@ -385,7 +423,7 @@ VARIANTS = {k: {'deep': deep, 'accent': acc, 'glow': '#FF8C40', 'base': SMOKE_20
 
 PRODUCT = Product('mantle-strata-v3', 'Mantle: Strata Float v3 (proposal A)', 'Belt-drive record player, a laminated plinth floating over a lit laminated base',
                   params=P, parts=parts, count=1, notes=NOTES, materials=MATERIALS, variants=VARIANTS,
-                  touching=[('plinth-L*', 'plinth-L*'), ('base-L*', 'base-L*'), ('led-strip', 'base-L*'), ('post-*', 'plinth-L*'), ('post-*', 'base-L*'), ('foot-studs', 'post-*'), ('foot-studs', 'base-L*'), ('led-channel', 'base-L*'), ('led-strip', 'led-channel'), ('phono-pads', 'phono-stage'), ('bushes', 'bearing-housing'), ('bushes', 'spindle'),
+                  touching=[('plinth-L*', 'plinth-L*'), ('base-L*', 'base-L*'), ('led-strip', 'base-L*'), ('post-*', 'plinth-L*'), ('post-*', 'base-L*'), ('foot-studs', 'post-*'), ('foot-studs', 'base-L*'), ('led-channel', 'base-L*'), ('led-strip', 'led-channel'), ('rear-plate', 'base-L*'), ('rear-hardware', 'rear-plate'), ('rear-hardware', 'base-L*'), ('phono-pads', 'phono-stage'), ('bushes', 'bearing-housing'), ('bushes', 'spindle'),
                             ('platter-hub', 'spindle'), ('platter-screws', 'platter*'), ('foot-studs', 'feet'), ('foot-studs', 'base-L*'),
                             ('foot-pads', 'feet'), ('motor-screws', 'motor-plate'), ('motor-screws', 'plinth-L*'), ('motor', 'motor-plate'),
                             ('platter-inserts', 'platter'), ('platter-screws', 'platter-hub'), ('platter-screws', 'platter-inserts'), ('bearing-spring', 'bearing-*'), ('bearing-washer', 'plinth-L*'), ('bearing-spring', 'bearing-washer'),
