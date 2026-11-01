@@ -23,11 +23,30 @@ CAP = {
 }
 TINT_OF = {'meridian': 'poison', 'moho': 'dust', 'lithos': 'smoke', 'ionos': 'ice', 'cairn': 'fog', 'bedrock': 'dust', 'relief': 'fog'}
 
+# The frame shown for each object: its best blind-critic score across both looks (critic/LOG.md; the gate is 7.0).
+# (commit holding renders/<key>.png, score, which round)
+BEST = {
+ 'moho': ('dc287ced1d7112a78c553ef12f8dfc003dedafde', 6.0, 'look 1, round 1'),
+ 'relief': ('60782879', 6.5, 'look 2, round 1'),
+ 'meridian': ('12a088d4', 6.5, 'look 2, round 2'),
+ 'lithos': ('d6f98b8a', 6.0, 'look 2, round 3'),
+}
+
+def frame(k):
+    """The best frame's PNG, read from git history."""
+    import io, subprocess
+    c = BEST[k][0]
+    data = subprocess.run(['git', 'show', f'{c}:spinoffs/barkhorn/brandbook/newobjects/renders/{k}.png'], cwd=HERE, capture_output=True, check=True).stdout
+    return Image.open(io.BytesIO(data))
+
+def score_note(k):
+    sc, rd = BEST[k][1], BEST[k][2]
+    return f' Blind critic: {sc:.1f} of 10 ({rd}), under the 7.0 gate.' if sc < 7.0 else f' Blind critic: {sc:.1f} of 10 ({rd}): passed the 7.0 gate.'
+
 def images():
     for o in six.OBJECTS:
         k = o['key']
-        src = os.path.join(HERE, 'renders', f'{k}.png')
-        im = Image.open(src).convert('RGB'); im.thumbnail((1600, 1600)); im.save(os.path.join(IMG, f'{k}.jpg'), quality=86)
+        im = frame(k).convert('RGB'); im.thumbnail((1600, 1600)); im.save(os.path.join(IMG, f'{k}.jpg'), quality=86)
         d = Image.open(os.path.join(HERE, 'drawings', f'{k}.png')).convert('RGB'); d.thumbnail((1500, 1500)); d.save(os.path.join(IMG, f'{k}-drawing.jpg'), quality=86)
 
 def page():
@@ -44,7 +63,7 @@ def page():
         bom = ''.join(f'<tr><td>{html.escape(a)}</td><td class="num">${f():,.0f}</td></tr>' for a, f in o['bom'])
         secs.append(f'''
 <section class="obj{' portrait' if portrait else ''}" id="{k}">
-  <figure class="hero"><img src="img/{k}.jpg" alt="{html.escape(CAP[k])}" width="{1067 if portrait else 1600}" height="{1600 if portrait else 1067}" loading="lazy"><figcaption>{html.escape(CAP[k])}</figcaption></figure>
+  <figure class="hero"><img src="img/{k}.jpg" alt="{html.escape(CAP[k])}" width="{1067 if portrait else 1600}" height="{1600 if portrait else 1067}" loading="lazy"><figcaption>{html.escape(CAP[k] + score_note(k))}</figcaption></figure>
   <div class="text">
     <p class="eyebrow"><span class="chip" style="--c: var(--t-{TINT_OF[k]})"></span>{html.escape(o["what"])}</p>
     <h2>{o["name"]}</h2>
