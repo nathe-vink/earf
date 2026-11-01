@@ -1,0 +1,45 @@
+{
+  "stage1": {"impression": "A clear cast puck full of flat lens-shaped voids, on a dark disc in front of a flat white wall. The glass edges and the upper voids read well, but the lower half of the body goes to an even pale grey where the voids lose contrast, and the plain white backdrop eats the far rim.", "score": 5.5},
+  "blocking_9": [
+    "The side of the body must be lit evenly enough that voids read the same top to bottom: the lower body [1000,880,1400,1000] is 213 against 140 for the upper body [1000,600,1400,700], so the lower voids are white on white (lower void [640,895,780,920] median 201)",
+    "The far rim must separate from the wall: its edge step is 12 to 20 levels over 14 to 82 px at [880,200,940,280] and [500,260,560,360]",
+    "The backdrop needs a soft gradient instead of a flat card: wall [300,20,1500,200] is 215 with a 6.6 range, x profile 217.6 to 212.6 to 216.3",
+    "The left wall of the cylinder must not be a blown white bar: [255,450,300,1100] clips 15.4 %"
+  ],
+  "changes": [
+    {"id": "c1", "rank": 1, "kind": "set",
+     "problem": "The lower half of the body is a flat pale field, most likely the white card behind seen through the cylinder, so the lower bond-line voids show neither the dark centres nor the silver rims the upper ones have.",
+     "evidence": {"region": [1000, 880, 1400, 1000], "measured": "lum_median 213.3, p95 218.3, against 140.5 for the upper body [1000,600,1400,700]; body y profile 146, 138, 141, 175, 212, 213, 212, 187; lower void [640,895,780,920] median 201 with neutral RGB 202/201/201"},
+     "change": {"setting": "whitecard colour", "from": "#E6E6E6", "to": "#8C8C8C"},
+     "expected": "The lower body drops to about 160 to 180, within roughly 30 levels of the upper body, so the lower voids show the same dark core and bright rim as the upper ones.",
+     "accept": {"region": [1000, 880, 1400, 1000], "metric": "lum_median", "op": "between", "value": [150, 185]}},
+    {"id": "c2", "rank": 2, "kind": "light",
+     "problem": "The wall is a uniform 215, so the clear far rim and the pale-blue lamina dissolve into it and the frame has no depth behind the object.",
+     "evidence": {"region": [300, 20, 1500, 200], "measured": "lum_median 215.6, range 6.6; rim silhouette edge step 12.4 at [880,200,940,280], -18.3 over 82 px at [500,260,560,360]"},
+     "change": {"setting": "wall power", "from": 7, "to": 4.5},
+     "expected": "The wall settles near 180 to 195, so the bright rim and the blue lamina stand out against it by 20 or more levels.",
+     "accept": {"region": [300, 20, 1500, 200], "metric": "lum_median", "op": "between", "value": [175, 198]}},
+    {"id": "c3", "rank": 3, "kind": "light",
+     "problem": "Even at lower power the wash stays flat from side to side. Moving the wall light off axis gives the cove a soft falloff that models the space and puts a darker zone behind the right-hand rim.",
+     "evidence": {"region": [300, 20, 1500, 200], "measured": "x profile 217.6, 217.4, 216.4, 214.6, 212.6, 214.4, 215.4, 216.3: a 5-level spread across 1200 px"},
+     "change": {"setting": "wall position", "from": [0, 500, 420], "to": [-300, 500, 420]},
+     "expected": "The wall falls off about 20 to 35 levels from left to right across the frame, brighter behind the left side and darker behind the right rim.",
+     "accept": {"region": [300, 20, 1500, 200], "metric": "lum_range", "op": "between", "value": [18, 40]}},
+    {"id": "c4", "rank": 4, "kind": "light",
+     "problem": "The left wall of the cylinder carries a hard blown vertical bar that reads as a flat white stripe, not a polished edge.",
+     "evidence": {"region": [255, 450, 300, 1100], "measured": "clip_pct 15.4, p95 255, median 92.8"},
+     "change": {"setting": "flagL size", "from": [160, 300], "to": [280, 300]},
+     "expected": "The bar keeps a thin specular line but most of it drops below clipping, so the edge reads as a bright line beside a dark band of black-card reflection.",
+     "accept": {"region": [255, 450, 300, 1100], "metric": "clip_pct", "op": "between", "value": [1, 6]}},
+    {"id": "c5", "rank": 5, "kind": "light",
+     "problem": "The cool low fill adds to the flat brightness of the lower body. Lowering it together with c1 keeps the lower voids' rims as the brightest thing there.",
+     "evidence": {"region": [400, 950, 780, 1100], "measured": "lum_median 199.4, p95 214.2: the rims cannot rise above the field"},
+     "change": {"setting": "lowfill power", "from": 2.0, "to": 1.2},
+     "expected": "The lower-left body falls to about 160 to 185, leaving the void rims 30 or more levels above it.",
+     "accept": {"region": [400, 950, 780, 1100], "metric": "lum_median", "op": "between", "value": [155, 188]}}
+  ],
+  "out_of_scope": [
+    {"request": "Make the voids' blue cores less saturated where they mirror the top lamina", "why": "The colour comes from the fixed lamina tint and total internal reflection in real air voids. Lighting can change how they read, but the tint is fixed."}
+  ],
+  "score_if_fixed": 7.3
+}

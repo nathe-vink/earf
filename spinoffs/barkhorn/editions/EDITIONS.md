@@ -298,7 +298,7 @@ in `critic/rounds/`. The blind score sat between 4.0 and 5.5 from round to round
 | Iron (house set) | `renders/2026-10-31/iron_core-core-v3.png` | 5.0, 5.0, 5.0 | stopped after three rounds |
 | Iron, detail | `renders/2026-10-31/iron_core-core_macro-v3.png` | 4.5, 5.0 | two rounds; it needs a finer etch map |
 | Firn (bright-field) | `renders/2026-10-31/firn-hero_b-v3.png` | 5.5, 5.5, 5.5 | stopped after three rounds |
-| Firn, detail | `renders/2026-10-31/firn-macro_b-v3.png` | 5.0, **6.0**, see LOG | three rounds; the closest to the gate |
+| Firn, detail | `renders/2026-10-31/firn-macro_b-v2.png` | 5.0, **6.0**, 5.5 | stopped after three rounds; v2 came closest to the gate |
 | Stamper (house set) | `renders/2026-10-31/stamper_core-core-v4.png` | 4.0, 5.0, 4.5 | stopped after three rounds |
 | Earlier looks (dark set) | `firn-hero-v*`, `iron-hero-v*`, `stamper-hero-v*` | 4.5 to 5.5 | stopped |
 
