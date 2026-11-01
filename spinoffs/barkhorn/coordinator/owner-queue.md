@@ -331,3 +331,9 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
   (session_01BAaPTnGwdpP4WKGVD3vbqx, "EARF: one world, eight biomes"). Finding: the milkiness is the asset's acrylic
   glowing in backlight (TT ~33 %/20 mm, same as the old model), not the lining; the speaker lane asked to fix the asset's
   Smoke material (and check the other tints in backlight).
+- 06:27 UTC: speaker 04f6c9d6: lit-plinth + flush-horn proofs (studio, dusk, three-quarter) SENT to the owner.
+  Plinth light: 2700 K COB 24 V 4.8 W/m, 2.34 m (11.2 W full, 5.6 W default), aluminum channel + frosted diffuser 40 mm in,
+  facing the floor; a plug-in 24 V 15 W UL Class 2/PS1 supply; a plinth board, on with the amp (opto state line, asked of
+  Hypex), touch off/25/50/100 %, flicker-free; ~10-15 K; ships flat (~13 kg), bolts on at set-up. Flush horn: 536 mouth;
+  within ~+-1 dB to 1.6 kHz; steadier coverage at the crossover. Parts $9,563 a pair. Asked: black sleeves into the asset
+  (the dusk proof's pale side is the white voile), Smoke backlight fix, >1.6 kHz BEM, 22 layer DXFs.
