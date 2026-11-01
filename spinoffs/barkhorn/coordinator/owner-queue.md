@@ -616,3 +616,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   still a line: the LED's light pipes through the clear tinted bottom frame and out of its edges. My call: an opaque seal, a
   removable black U-channel carrying strip + diffuser (screwed or clipped, serviceable), 6 mm rebate kept, feet unchanged; row and Ice
   proof at 20 next. Taller feet would change the look, so they go to the owner only if the pool is too narrow.
+- 20:00 speaker sealed channel (bfcab478; source/docs 944d599d; fab package with drawing note 9, the rib's polished end, 60634e11):
+  the frames stop glowing (Ice's bottom frame in its own blue), but the pool lands under the plinth (floor r-b beside it ~neutral),
+  a thin warm line through the 18 mm gap. Last test asked: sealed channel at 40 mm in, glow 20 (no look change). If it gives a soft
+  band past the step with no frame glow, it's the design; otherwise keep the original bare strip at 40 in, glow 20 day / 40 dusk (the
+  thin warm line the hero shows), sealed channel documented as an alternative. Taller feet not modelled; owner only if they ask for
+  a real pool. Plinth then closed until card 03.
