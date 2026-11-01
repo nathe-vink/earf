@@ -388,3 +388,7 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
   Tropos on the lit plinth.
 - Later: the biomes Smoke go (in that session only); the site deploy (pick: wait for the new pictures, then deploy
   once); the Mother EARF armature project; editions (another picture pass or settle the write-up).
+- ~10:55 UTC OWNER (on the decision board): "I like the darker colors. Go for smoke render. Not sure about mantle."
+  -> tints: B, stock sheet's deeper tints (saved in the README's owner notes). Biomes: the owner's go relayed verbatim. Mantle: open;
+  show both designs in the darker tints before asking again. Still open: tagline; Core battery. Flush horn and black lining stand
+  (the owner raised no objection).
