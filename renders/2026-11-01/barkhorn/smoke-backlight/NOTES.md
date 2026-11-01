@@ -27,3 +27,7 @@ light behind it as the fire. Left to right:
 
 The site's other Smoke pictures (rendered with the old tint) will read lighter than the rebuilt asset until they are
 rendered again.
+
+**The eight tints, backlit, after the fix** (`eight-tints-backlit-black-sleeves.png`, the rebuilt `tropos.blend`;
+Ember to Smoke): none shows the milky white bays now. The light tints (Ember to Fog, about 50 % through 20 mm) read
+as light, clear glass, which is their site color. Smoke reads smoked.
