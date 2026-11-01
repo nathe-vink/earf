@@ -303,3 +303,11 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
   no for a listed product (the 20 % push must pass in normal use) unless the lab accepts anchoring; it can ship separately.
   Speaker lane: lit plinth design + flush horn + proofs; A-vs-B duel stopped.
   Owner questions now: tagline (asked); color depth; Mantle A/B; later: lining sleeves, Mother EARF armature, editions pictures.
+
+## Check-in 10 (04:41 UTC)
+- Deck v36 done (lights-on line slide). Four-pieces DONE.
+- Speaker 4b92a587: the owner's base A lit from underneath (2700 K COB strip under the bottom step, a separate Class 2
+  24 V 15 W supply, a controller on with the amp); proofs rendering; flush-horn acoustic check pending.
+- Biomes 8331186a: Smoke's habitat re-composed (smoke_align.py) + the strip tool; renders in progress (~2 h cap from 04:20).
+- Owner: Smoke direction saved f4c6aca3. Open owner questions: tagline (asked); color depth; Mantle A/B; later lining
+  sleeves, Mother EARF armature, editions pictures.
