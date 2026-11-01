@@ -20,7 +20,7 @@ while i < len(lines):
         while i + 1 < len(lines) and lines[i + 1].strip() and not re.match(r'^(#|- )', lines[i + 1]): i += 1; para.append(lines[i])
         out.append(f'<p>{inl(" ".join(para))}</p>')
     i += 1
-strip = ''.join(f'<i style="background:{c}"></i>' for c in ('#C92118','#E06718','#E2AA15','#367424','#2584BE','#5B3197','#D5DFE0','#57545F'))
+strip = ''.join(f'<i style="background:{c}"></i>' for c in ('#920000','#E06718','#E2AA15','#024800','#2584BE','#330066','#D5DFE0','#3A3741'))
 css = """@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400..700&display=block');
 @page { size: Letter; margin: 0 } * { box-sizing: border-box }
 body { margin: 0; font-family: 'Instrument Sans', Arial; color: #1C1A18; -webkit-print-color-adjust: exact; print-color-adjust: exact }

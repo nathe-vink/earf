@@ -181,6 +181,10 @@ WORDMARK, WORDMARK_W = _wordmark()
 
 LINES = [('Bark', TREE, 'a tree'), ('Cloud', CLOUD, 'a cloud'), ('Crag', STONE, 'a crag')]
 # key (as frames.py's LOOKS), line, number, name, colour
+# The Cloud colours follow the line's stock TruCast tints (the owner, 2026-11-01: "I like the darker colors"; r46-owner-notes
+# 8832050e): Ember, Poison and Haze deepened by the brandbook README's method (0.6 of the OKLab-lightness change the stock
+# sheet makes to light through the wall). Was Ember #D2382F, Poison #4F7F3A, Haze #6C4BA3. Smoke stays #34323A: the method
+# gives #19171F, the ink's own value (#1C1A18), and the acrylic construction (ink outlines over the fills) disappears.
 SPEAKERS = [
     ('eucalyptus', 'Bark', '01', 'Eucalyptus', '#9C9A5E'),
     ('autumn', 'Bark', '02', 'Autumn Birch', '#E2A62E'),
@@ -191,12 +195,12 @@ SPEAKERS = [
     # owner chose Ember again, as fitting the line better than a flash of light), Smoke made black
     # ("Smoke was meant to be the black one"; round 10's grey retired), all numbered again in that order; Acid and Haze
     # since round 17, Dust and Ice since round 18
-    ('red', 'Cloud', '01', 'Ember', '#D2382F'),
+    ('red', 'Cloud', '01', 'Ember', '#9B0000'),
     ('orange', 'Cloud', '02', 'Dust', '#E5732A'),
     ('amber', 'Cloud', '03', 'Acid', '#E9B320'),
-    ('green', 'Cloud', '04', 'Poison', '#4F7F3A'),
+    ('green', 'Cloud', '04', 'Poison', '#245208'),
     ('blue', 'Cloud', '05', 'Ice', '#4A90C8'),
-    ('violet', 'Cloud', '06', 'Haze', '#6C4BA3'),
+    ('violet', 'Cloud', '06', 'Haze', '#421D72'),
     ('ice', 'Cloud', '07', 'Fog', '#F6F8F8'),
     ('black', 'Cloud', '08', 'Smoke', '#34323A'),
     ('cobalt', 'Crag', '01', 'Cobalt Marble', '#ECEFF6'),

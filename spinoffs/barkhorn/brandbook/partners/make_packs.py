@@ -9,7 +9,7 @@ import html, os
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 STRIP = ''.join(f'<i style="background:{c}"></i>' for c in
-                ('#C92118', '#E06718', '#E2AA15', '#367424', '#2584BE', '#5B3197', '#D5DFE0', '#57545F'))
+                ('#920000', '#E06718', '#E2AA15', '#024800', '#2584BE', '#330066', '#D5DFE0', '#3A3741'))
 
 CSS = """
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400..700&display=block');
@@ -52,7 +52,7 @@ EARF_IS = ("EARF makes hi-fi and light in San Francisco, in cast acrylic tinted 
 PACKS = [
     dict(slug='klipsch', who='Klipsch', file='earf-pitch-klipsch',
          title='A numbered horn edition, built in Hope.',
-         pic='../book/img/amber-studio-light.jpg', pos='50% 50%',
+         pic='../book/img/amber-studio-light.jpg', pos='50% 50%', fit='contain', bg='#FAF9F5',   # the whole speaker, never cropped
          proposal="A Klipsch × EARF edition of a Heritage model, built by Klipsch in Hope, with an EARF cast-acrylic horn "
                   "surround, baffle or stands in one of our tints: about 100 numbered pairs. EARF sells it direct in the "
                   "United States; Klipsch dealers sell it everywhere else, as with the kO-R2.",
@@ -87,7 +87,7 @@ PACKS = [
          route='pr@klipsch.com (its press office), asking for the note to be passed to product partnerships'),
     dict(slug='ace', who='Ace Hotel Group', file='earf-pitch-ace-hotel',
          title='A listening corner for one Ace lobby.',
-         pic='../book/img/room.jpg', pos='50% 55%',
+         pic='../book/img/room.jpg', pos='50% 85%',   # low enough that the pair's feet show: whole, never cropped
          proposal="A season-long EARF listening corner in one Ace lobby: a numbered pair of Tropos, a Mantle record player "
                   "and Hemisphere pendants, in a tint chosen for the room, with listening sessions through the season. "
                   "It starts as a residency and becomes a purchase if it works for Ace. Beside it, an Ace × EARF edition "
@@ -167,7 +167,7 @@ def build(p):
   <div class="top"><img src="../../brand/mark/earf-wordmark-white.svg" alt="EARF"><span class="k">A proposal for {html.escape(p['who'])} · draft · confidential</span></div>
   <h1>{html.escape(p['title'])}</h1>
   <p class="lede">{html.escape(EARF_IS)}</p>
-  <div class="pic"><img src="{p['pic']}" alt="" style="object-position:{p['pos']}"><span class="lbl">Render · replaced by a photograph from the debut before sending</span></div>
+  <div class="pic" style="background:{p.get('bg', 'transparent')}"><img src="{p['pic']}" alt="" style="object-position:{p['pos']};object-fit:{p.get('fit', 'cover')}"><span class="lbl">Render · replaced by a photograph from the debut before sending</span></div>
   <div><span class="k">What we propose</span><p style="font-size:11pt;line-height:1.45;margin-top:4px">{html.escape(p['proposal'])}</p></div>
   <div class="cols">
     <div class="card"><span class="k">Why {html.escape(p['who'])}</span>{li(p['why'])}</div>
