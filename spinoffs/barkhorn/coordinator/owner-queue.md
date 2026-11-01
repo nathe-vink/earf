@@ -554,3 +554,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   whole. Effective contrast 7.0-13.3:1, corner note 4.7:1. Notes: Strata Float and color outside; the "earlier design" clause dropped.
   The four-pieces lane is idle (-sf pair complete: day 11a1d8bf, dusk 02877dad). If the owner picks a lighter Poison, the room needs a
   re-render in it.
+- Check-in 20 (15:21): all its items done (v48 cover, v49 line final). Speaker lane committed the comparison rows' product files
+  (0ced03de: only Ember, Poison, Haze, Smoke cabinets lighter); both rows render after the room landscape, then the portrait.
+  Next check-in 16:32 (trig_014Evgknkm82JUJ9HA4n5GpY).
