@@ -183,7 +183,8 @@ LINES = [('Bark', TREE, 'a tree'), ('Cloud', CLOUD, 'a cloud'), ('Crag', STONE, 
 # key (as frames.py's LOOKS), line, number, name, colour
 # The Cloud colours follow the line's stock TruCast tints (the owner, 2026-11-01: "I like the darker colors"; r46-owner-notes
 # 8832050e): Ember, Poison and Haze deepened by the brandbook README's method (0.6 of the OKLab-lightness change the stock
-# sheet makes to light through the wall). Was Ember #D2382F, Poison #4F7F3A, Haze #6C4BA3. Smoke stays #34323A: the method
+# sheet makes to light through the wall). Was Ember #D2382F, Poison #4F7F3A, Haze #6C4BA3 (Poison and Haze
+# per colors F, 2026-11-01: lighter custom batches, 32.3 % and 25.8 % through 20 mm). Smoke stays #34323A: the method
 # gives #19171F, the ink's own value (#1C1A18), and the acrylic construction (ink outlines over the fills) disappears.
 SPEAKERS = [
     ('eucalyptus', 'Bark', '01', 'Eucalyptus', '#9C9A5E'),
@@ -198,9 +199,9 @@ SPEAKERS = [
     ('red', 'Cloud', '01', 'Ember', '#9B0000'),
     ('orange', 'Cloud', '02', 'Dust', '#E5732A'),
     ('amber', 'Cloud', '03', 'Acid', '#E9B320'),
-    ('green', 'Cloud', '04', 'Poison', '#245208'),
+    ('green', 'Cloud', '04', 'Poison', '#376621'),
     ('blue', 'Cloud', '05', 'Ice', '#4A90C8'),
-    ('violet', 'Cloud', '06', 'Haze', '#421D72'),
+    ('violet', 'Cloud', '06', 'Haze', '#543287'),
     ('ice', 'Cloud', '07', 'Fog', '#F6F8F8'),
     ('black', 'Cloud', '08', 'Smoke', '#34323A'),
     ('cobalt', 'Crag', '01', 'Cobalt Marble', '#ECEFF6'),

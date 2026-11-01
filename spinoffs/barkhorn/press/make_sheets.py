@@ -90,7 +90,7 @@ dt { font-family: 'IBM Plex Mono', monospace; font-size: 7.5pt; letter-spacing: 
 .strip { position: absolute; left: 0; right: 0; bottom: 0; height: 6px; display: flex }
 .strip i { flex: 1 }
 """
-TINTS = ['#920000', '#E06718', '#E2AA15', '#024800', '#2584BE', '#330066', '#D5DFE0', '#3A3741']
+TINTS = ['#920000', '#E06718', '#E2AA15', '#1C5B02', '#2584BE', '#44147B', '#D5DFE0', '#3A3741']
 
 
 def page(key, name, kind, line, pic, body, rows):

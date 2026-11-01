@@ -39,6 +39,10 @@ the horn lane's held TT and channel splits; the change in OKLab lightness, at 0.
 chroma scaled by the change in chroma (floor 0.75); tints whose lightness moves less than 0.05 keep their swatch. Held
 until the chips are measured. Approved as a proposal (coordinator, 2026-11-01) and swept through the collateral's
 strips, `pack_render.py` and the marks (`../marks.py`: Ember `#9B0000`, Poison `#245208`, Haze `#421D72`).
+**Colors F** (the owner's pick, 2026-11-01, owner note 68adc2c3; speaker lane `TINTS.md` c38f8ee6, render model
+55c12c58): a white lining in seven colors (Smoke keeps black), and Poison and Haze in lighter custom batches, 32.3 % and
+25.8 % through 20 mm. By the same method, from the site's swatches: In light Poison `#1C5B02`, Haze `#44147B`; Mark
+Poison `#376621`, Haze `#543287`. The other six are unchanged.
 **The exception: Smoke's mark stays `#34323A`.** The method gives `#19171F`, the outline ink's own value (`#1C1A18`), and
 the mark and its icon lose their acrylic construction, the ink outlines over the fills, and read as a black blob. A mark
 that loses its construction is worse than one a step lighter; the Book's In light swatch, `#3A3741`, carries the deeper

@@ -17,8 +17,8 @@ import bpy
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, 'out')
 TINTS = {  # the Brand Book's In light swatches (stock TruCast tints, 2026-11-01; README), for the boards and the sleeve
-    'ember': '#920000', 'dust': '#E06718', 'acid': '#E2AA15', 'poison': '#024800',
-    'ice': '#2584BE', 'haze': '#330066', 'fog': '#D5DFE0', 'smoke': '#3A3741'}
+    'ember': '#920000', 'dust': '#E06718', 'acid': '#E2AA15', 'poison': '#1C5B02',
+    'ice': '#2584BE', 'haze': '#44147B', 'fog': '#D5DFE0', 'smoke': '#3A3741'}
 
 
 def lin(h):

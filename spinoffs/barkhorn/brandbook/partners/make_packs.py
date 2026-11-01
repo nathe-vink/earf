@@ -9,7 +9,7 @@ import html, os
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 STRIP = ''.join(f'<i style="background:{c}"></i>' for c in
-                ('#920000', '#E06718', '#E2AA15', '#024800', '#2584BE', '#330066', '#D5DFE0', '#3A3741'))
+                ('#920000', '#E06718', '#E2AA15', '#1C5B02', '#2584BE', '#44147B', '#D5DFE0', '#3A3741'))
 
 CSS = """
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400..700&display=block');
