@@ -297,6 +297,10 @@ def base_lit(view='hero', glow=None):
             if 'irradiance' in L:
                 L['irradiance'] = round(L['irradiance'] * 0.1, 3)
             L['color'] = '#C9D3E8'
+        # (the first dusk proof: the right side read pale silver, the side face mirroring the kick light at a grazing
+        # angle, not the batts; at dusk there is no kick)
+        if 'kick' in s['lights']:
+            s['lights']['kick']['irradiance'] = 0.0
         s['render']['exposure'] = s['render'].get('exposure', 0.0) + 1.3
         s['render']['white_balance_k'] = 4800
     if glow is not None:
