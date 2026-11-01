@@ -76,11 +76,12 @@ def build(spec, ground):
     ink, cr, st = ground.ink(hb, h.get('ink'))
     col = hexc(DARK if ink == 'dark' else LIGHT)
     acc = ACC_ON_LIGHT if ink == 'dark' else ACC_ON_DARK
+    halo = S.get('halo', 'text-shadow:0 1px 14px rgba(20,16,14,0.55),0 0 2px rgba(20,16,14,0.35);') if ink == 'light' else ''
     report.append(('header', ink, cr, st))
     align = h.get('align', 'left')
     parts.append(
         f'<div style="position:absolute;left:{h["x"]}px;top:{h["y"]}px;width:{h["w"]}px;'
-        f'display:flex;flex-direction:column;gap:14px;text-align:{align}">'
+        f'display:flex;flex-direction:column;gap:14px;text-align:{align};{halo}">'
         f'<p style="font-family:\'IBM Plex Mono\', \'Courier New\', monospace;font-size:22px;letter-spacing:4px;'
         f'text-transform:uppercase;color:{acc}">{esc(h["eyebrow"])}</p>'
         f'<h2 style="font-size:{h.get("px", 60)}px;font-weight:600;line-height:1.08;letter-spacing:-0.5px;'
@@ -95,13 +96,14 @@ def build(spec, ground):
         col = DARK if ink == 'dark' else LIGHT
         sub = 'rgba(28,26,24,0.78)' if ink == 'dark' else 'rgba(244,241,236,0.84)'
         ring = 'rgba(244,241,236,0.7)' if ink == 'dark' else 'rgba(28,26,24,0.55)'
+        halo = S.get('halo', 'text-shadow:0 1px 14px rgba(20,16,14,0.55),0 0 2px rgba(20,16,14,0.35);') if ink == 'light' else ''
         report.append((c['id'], ink, cr, st))
         align = lb.get('align', 'left')
         numhtml = (f'<span style="font-family:\'IBM Plex Mono\', \'Courier New\', monospace;font-size:{kind_px}px;'
                    f'letter-spacing:2px;color:{sub};margin-right:14px">{i:02d}</span>') if num else ''
         parts.append(
             f'<div style="position:absolute;left:{lx}px;top:{ly}px;width:{lw}px;display:flex;flex-direction:column;'
-            f'gap:6px;text-align:{align}">'
+            f'gap:6px;text-align:{align};{halo}">'
             f'<p style="font-family:\'IBM Plex Mono\', \'Courier New\', monospace;font-size:{kind_px}px;letter-spacing:3px;'
             f'text-transform:uppercase;color:{sub}">{numhtml}{esc(c["kind"])}</p>'
             f'<h3 style="font-size:{name_px}px;font-weight:600;line-height:1.1;letter-spacing:-0.2px;color:{hexc(col)}">'

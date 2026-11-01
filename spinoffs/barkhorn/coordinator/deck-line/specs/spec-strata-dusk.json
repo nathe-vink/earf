@@ -1,0 +1,80 @@
+{
+ "ground": "../fps/dusk-1920.png",
+ "src": "/_blob/875407c396c2650375b4880035abef32",
+ "alt": "A living room at dusk with the lamps lit and all four EARF pieces in Poison, a transparent green acrylic: a pair of Tropos speakers with stepped horns and their covers off, either side of a low oak credenza with a Mantle record player whose base glows green; a glowing Core lamp on a side table at the left; a lit Hemisphere pendant over a cognac leather chair at the right; a plain plaster wall behind",
+ "notes": "Each piece takes its name from the Earth. Tropos is Greek for a turn; the troposphere, the layer of air where sound travels, is named for it. Core, Mantle and Hemisphere are the planet’s own parts. Here all four share one room at dusk with the lights on, in Poison, one of the eight colors. It is a render, not a photograph: Tropos with its stepped horn and its cover off, Core cordless. A daytime version of the same room exists.",
+ "header": {
+  "eyebrow": "The line",
+  "title": "Four pieces, named for the Earth.",
+  "x": 100,
+  "y": 66,
+  "w": 900,
+  "h": 160,
+  "px": 60
+ },
+ "callouts": [
+  {
+   "id": "hemisphere",
+   "name": "Hemisphere",
+   "kind": "Pendant",
+   "line": "A shade that swaps in a quarter turn.",
+   "label": {
+    "x": 1049,
+    "y": 213,
+    "w": 380,
+    "h": 112,
+    "lines": 1,
+    "align": "right"
+   }
+  },
+  {
+   "id": "core",
+   "name": "Core",
+   "kind": "Table lamp",
+   "line": "Cordless, about five hours a charge.",
+   "label": {
+    "x": 124,
+    "y": 481,
+    "w": 380,
+    "h": 112,
+    "lines": 1,
+    "align": "center"
+   }
+  },
+  {
+   "id": "mantle",
+   "name": "Mantle",
+   "kind": "Record player",
+   "line": "Floats on its own light.",
+   "label": {
+    "x": 770,
+    "y": 477,
+    "w": 380,
+    "h": 112,
+    "lines": 1,
+    "align": "center"
+   }
+  },
+  {
+   "id": "tropos",
+   "name": "Tropos",
+   "kind": "Speaker",
+   "line": "A powered horn loudspeaker.",
+   "label": {
+    "x": 446,
+    "y": 254,
+    "w": 380,
+    "h": 112,
+    "lines": 1,
+    "align": "center"
+   }
+  }
+ ],
+ "foot": {
+  "text": "A render, in Poison.",
+  "x": 1200,
+  "y": 1030,
+  "w": 280,
+  "align": "right"
+ }
+}

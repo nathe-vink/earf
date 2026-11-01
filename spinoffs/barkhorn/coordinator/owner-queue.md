@@ -294,3 +294,7 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
   (3840 JPEG). The old four-tile slide is backed up at scratchpad deck/line-tiles-backup.html. Owner shown the slide.
   Dusk (lights on) lands ~04:00: build it, show it, and swap the deck to it (the coordinator's recommendation) unless
   the owner prefers day.
+- 04:05 UTC: deck v36: line.html = the LIGHTS-ON room (four-pieces Strata dusk final df2af162; /_blob/875407c3...),
+  light type with a soft halo (worst raw ground 4.0:1 at Hemisphere, halo lifts it). The day version is kept as the
+  alternative (coordinator/deck-line/specs/line-day.html, /_blob/11da3b53...). Four-pieces lane DONE. Owner shown it;
+  they can ask for day instead.
