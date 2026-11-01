@@ -574,3 +574,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   D lifts Ember, Dust, Acid, Ice and Fog 40-50 % (glowing colored glass, as the site); E is a muted step; Poison and Haze barely move
   with either lining (stock 2092/2287 absorb both ways). Sent the owner A/D/E (tints/ade.jpg). Asked the speaker lane for F (D +
   Poison 32.3 %, Haze 25.8 %) and G (D + Poison 56.0 %, Haze 49.2 %), Ember stock; then the Ice proofs resume.
+- 16:45 rows F (86530c22: D + Poison 32.3 %, Haze 25.8 %) and G (bf2204ae: D + Poison 56.0 %, Haze 49.2 %) landed. Lane's face means
+  Poison G-channel 56 (deck) -> 63 (D) -> 80 (F) -> 109 (G); Haze B-channel 99 -> 117 -> 127 -> 139. F: bottle green and a readable
+  violet; G: emerald and lilac, level with the rest (G's depths aren't stock codes; real 2287 is translucent). Sent the owner the
+  four-row sheet (tints/adfg.jpg) and asked: F (my pick) / G / D / A. Board v6 (same URL): card 03 "Which version should the line
+  use?" with the four rows (img/row-*.jpg), reply bar adds Colors; settled "darker colors" now points to card 03. Check-in 21 done;
+  next 18:45 (send_later). Speaker lane on Ice proofs (half size); four-pieces idle.
