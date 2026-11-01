@@ -30,7 +30,7 @@ SHEET = {'left': 5, 'right': 6, 'top': 7, 'bottom': 8, 'front-panel': 9, 'back':
          'horn-tool-base': 34, 'horn-tool': 34,
          # bought or finished parts with no sheet of their own: where they show in the assembly (1), the section (2) or
          # the exploded view (3)
-         'post-sockets': 2, 'post-sleeves': 2, 'rating-plate': 1, 'cloth-disc': 3, 'mark-back': 1, 'back-seal': 2,
+         'post-sockets': 2, 'post-sleeves': 2, 'rating-plate': 1, 'mark-back': 1, 'back-seal': 2,
          'amp-box-gasket': 2, 'lining-sleeves': 'DXF'}
 COMMON = [1, 2, 3, 39, 40]          # the general arrangement, the section, the exploded view and the notes, to everyone
 
@@ -40,10 +40,10 @@ HORN_TINT = ('the speaker\'s color, the horn\'s own heavier lot per color (about
              'Smoke about 7), matched to a chip we approve; please quote in Smoke')
 POLISH = 'edges milled square; show edges polished; annealed before cementing'
 # the first pair in stock sheet (make/stock-pair.md); its color is chosen at order (the owner, 2026-10-31), so Smoke is
-# the pricing reference only: TruCast 2064 3/4 in, the horn from 2074 1/2 in
-STOCK_CAB = 'chosen at order; quote in Smoke: TruCast 2064 Gray 3/4 in (19 mm) cell-cast, stock (AC Plastics); we buy it or you source it'
-STOCK_THIN = 'chosen at order; quote in Smoke: TruCast 2064 Gray cell-cast, stock, in the nearest stock thickness to the one listed'
-STOCK_HORN = 'chosen at order; quote in Smoke: TruCast 2074 Dark Gray 1/2 in cell-cast, stock (another stock color, e.g. 2423 Red, if it changes the price)'
+# the pricing reference only: TruCast 2074 throughout since 2026-11-01 (3/4 in a mill run, 2064 the stocked fallback)
+STOCK_CAB = 'chosen at order; quote in Smoke: TruCast 2074 Dark Gray 3/4 in (19 mm) cell-cast, a mill run (2074 is stocked only to 1/2 in; please say if you can source or pour it, and the minimum); stocked 2064 Gray 3/4 in as the fallback'
+STOCK_THIN = 'chosen at order; quote in Smoke: TruCast 2074 Dark Gray cell-cast, stock, in the nearest stock thickness to the one listed'
+STOCK_HORN = 'chosen at order; quote in Smoke: TruCast 2074 Dark Gray 1/2 in cell-cast, stock, the cabinet\'s own code (another stock color, e.g. 2423 Red, if it changes the price)'
 
 # kind -> [(bom item prefix, part, material, thickness, tint, finish, tolerance)]; quantities come from the parts list
 KINDS = {
@@ -58,8 +58,8 @@ KINDS = {
         ('land-', 'land strips', 'cell-cast acrylic', '20', CAB_TINT, 'M5 insert holes; the seal groove milled after assembly', PANEL_TOL),
         ('top-pad', 'pad under the top', 'cell-cast acrylic', '20', CAB_TINT, 'M12 thread, an insert hole', PANEL_TOL),
         ('back-boss-', 'brace bosses', 'cast acrylic block, cabinet lot', '36 x 36 x 85', CAB_TINT, 'milled, slotted over the brace; M5 insert hole', '±0.2'),
-        ('woofer-ring', 'woofer ring', 'cell-cast acrylic', '6', 'opaque, in the ring color (Ember: oxblood, about #7A1A1C; Smoke: near-black #141316)', 'face polished; screw-head and disc pockets behind', PANEL_TOL),
-        ('disc-frame', 'cloth disc frame', 'cell-cast acrylic', '12', 'black', 'face edge rounded R5; magnet pockets', PANEL_TOL),
+        ('fd:caldera:6', 'caldera rings round the woofer (3 a speaker; the final design, in place of the cover and its ring)', 'cell-cast acrylic', '12.7', CAB_TINT,
+         'CNC-cut, outside Ø500, bores Ø400, Ø427 and Ø454; bore and outside edges polished; bonded to the front panel and to each other', 'bores ±0.2'),
         ('port-frame-', 'port frames', 'cell-cast acrylic', '8', CAB_TINT, 'mouth rounded R8 and polished; 4 countersinks', PANEL_TOL),
         ('port-left', 'port tubes', 'cast acrylic tube 121 x 4 wall', '4 (wall)', 'the speaker\'s color, the cabinet lot, if tinted tube can be had (question 10)', 'inner end flared R8 over a heated mandrel, annealed; bore polished; cemented into its frame', '±0.3'),
         ('grip-', 'grip cups', 'cast acrylic sheet', '3', CAB_TINT, 'drape-formed over a buck; cemented behind the grip slot', '±0.5'),
@@ -82,15 +82,19 @@ KINDS = {
     'c-metal': [
         ('amp-box', 'amplifier compartment', 'aluminum 5052-H32 sheet (not 6061: it cracks at tight folds)', '1.5', 'black anodized', 'folded, corners welded, flange; 3 gland holes; an earth stud on a bared spot', '±0.3'),
         ('hf-adaptor', 'driver adaptor ring', 'aluminum 6061', 'ø184 x 10', 'black anodized', 'turned; 4 countersunk M6 on 101.6; 4 x 5.5 on 170', '±0.1'),
-        (('post-1', 'post-2'), 'front horn posts', 'stainless 304 tube 10 x 7', 'ø10', 'natural, satin', 'cut to length, threaded M10 x 1 at the top; the foot plugged and turned to a head 14 across, 4 thick, on an 8 neck, to hook under its keyhole socket', 'length ±0.2'),
-        (('post-3', 'post-4'), 'rear horn posts', 'stainless 304 tube 10 x 7', 'ø10', 'natural, satin', 'cut to length, threaded M10 x 1 at the top; the foot plugged and turned to a head 14 across, 4 thick, on an 8 neck, to hook under its keyhole socket', 'length ±0.2'),
+        (('post-1', 'post-2'), 'front horn posts', 'bronze bar ø16, C93200 or C544', 'ø16', 'natural, satin',
+         'cut to length, threaded M12 at the top; the foot turned to a head 14 across, 4 thick, on an 8 neck, to hook under its keyhole socket', 'length ±0.2'),
+        (('post-3', 'post-4'), 'rear horn posts', 'bronze bar ø16, C93200 or C544', 'ø16', 'natural, satin',
+         'cut to length, threaded M12 at the top; bored 6 through (the tie rod in one, the HF lead in the other)', 'length ±0.2'),
+        ('fd:collars:16', 'post collars (8 a speaker)', 'bronze bar, C93200 or C544', 'ø28 x 8 and ø24 x 6', 'natural, satin',
+         'turned, bored 16.2; one on the top plate and one under the pad at each post', '±0.1'),
         ('post-sockets', 'post sockets and inserts (a set of 8)', 'brass C360; the front pair bronze', 'ø15 x 15 cups (rear); keyhole sockets ø30 x 15 (front); M10 x 1 inserts 13 x 12', 'natural', 'turned, knurled; rear cups bored 12 on a 2 floor; front: a 15 hole and a 9 slot 10 long with a 3 lip over a 15 x 4 undercut', '±0.05 on the bore and slot'),
         ('rating-plate', 'rating plate', 'aluminum', '70 x 40 x 1', 'black anodized', 'laser-marked (model, serial, ratings, WEEE bin)', '±0.2'),
     ],
     'd-other': [
         (('lining-bottom-', 'lining-top-', 'lining-left-', 'lining-right-', 'lining-back-'), 'lining batts', 'polyester batt, acoustic grade, about 30 kg/m3, recycled PET', '50 and 100', 'white', 'cut 10 oversize each way; each sewn into a black voile sleeve', '±5'),
         ('lining-sleeves', 'lining sleeves (voile)', 'black polyester voile', '-', 'black', 'sewn to each batt\'s size, seams to the wall', '±5'),
-        ('cloth-disc', 'cloth disc covering', 'acoustically transparent knit', '-', 'in the speaker\'s color', 'stretched over the disc frame and round its edge', '-'),
+        ('fd:plinth-light:2', 'the plinth\'s light (one a speaker)', '24 V COB LED strip, 4.8 W/m, 2700 K, CRI 90+, 2.4 m, in a 10 x 4 aluminum channel with a frosted diffuser; a 24 V 15 W UL Class 2 supply; a small dimmer board (EARF\'s design)', '-', '-', 'the strip cut and soldered to length in its channel; leads and a DC socket', '-'),
         ('mark-back', 'EARF on the back', 'laser etch into the back panel', '0.1 deep', 'etch filled in the speaker\'s color, deeper', 'frosted, 140 wide, from our vector file', '±0.2'),
         ('back-seal', 'back seal', 'EPDM cord 4 mm, 60 Shore A', '4', 'black', 'about 2.7 m a speaker, its ends vulcanized into a loop', 'length ±5'),
         ('amp-box-gasket', 'amplifier compartment gasket', 'EPDM sponge, closed cell', '3', 'black', 'die-cut frame, 15 wide', '±0.5'),
@@ -108,14 +112,24 @@ def _stock(pre, part, mat, th, tint, fin, tol):
     if pre == 'back-boss-':
         return pre, part, 'stock cell-cast sheet, two 3/4 in layers bonded, then milled', th, STOCK_CAB, fin, tol
     if pre == 'port-left':
-        return pre, part, mat, th, 'chosen at order; quote in Smoke, 2064, if tinted tube can be had; otherwise rolled from 1/8 in 2064 sheet', fin, tol
+        return pre, part, mat, th, 'chosen at order; quote in Smoke, 2074, if tinted tube can be had; otherwise rolled from 1/8 in 2074 sheet', fin, tol
     if tint == CAB_TINT:
         return pre, part, mat, '19 (stock 3/4 in)' if th == '20' else th, STOCK_CAB if th == '20' else STOCK_THIN, fin, tol
     return pre, part, mat, th, tint, fin, tol
 
 
 KINDS['e-laminated-horn'] = [
-    _stock(*line) for line in KINDS['a-cast-acrylic'] if line[0] not in ('ir-window',)
+    _stock(*line) for line in KINDS['a-cast-acrylic'] if line[0] not in ('ir-window',) and not line[0].startswith('fd:')
+] + [
+    # the owner's final design (2026-11-01; variants/STRATA.md, variants/BASES.md): the caldera in place of the cover
+    # and its ring, and the stepped plinth lit from underneath; 'fd:' lines carry their own quantity a pair
+    ('fd:caldera:6', 'caldera rings round the woofer (3 a speaker)', 'stock cell-cast sheet 1/2 in', '12.7',
+     STOCK_HORN, 'CNC-cut, outside Ø500, bores Ø400, Ø427 and Ø454; bore and outside edges diamond-milled and buffed; faced, '
+     'annealed, bonded to the front panel and to each other with a polymerizing cement', 'bores ±0.2; Ø500 ±0.3'),
+    ('fd:plinth:6', 'stepped plinth frames (3 a speaker)', 'stock cell-cast sheet 1/2 in', '12.7', STOCK_HORN,
+     'CNC-cut frames 600 x 460, 630 x 566 and 660 x 670 round a 440 x 300 opening; outside edges polished; bonded; '
+     'a 10 x 4 groove routed under the bottom frame 40 in from its edge for the LED channel; 4 counterbored M8 holes '
+     'through, and 4 M8 foot inserts', 'outline ±0.5; groove ±0.2'),
 ] + [
     ('ho:horn-plan-b', 'laminated horn, stepped (2 a pair)', 'stock cell-cast sheet 1/2 in, 22 layers and a boss',
      '22 x 12.64 pitch (layer + bond line)', STOCK_HORN,
@@ -147,7 +161,7 @@ bosses' faces and the seal's groove milled in one setup. Quote the cutting and t
 The tint matters most. We will send color chips. We need to know whether you can cast or source sheet tinted to them,
 and how you keep one pair's panels the same color."""),
     'b-horn-forming': ('thermoforming the horn', """I'm writing from EARF, a new hi-fi and lighting maker in San Francisco, for a quote on forming the horn of a loudspeaker we are prototyping. Tropos's horn is a
-pressure-formed flare in 10 mm cell-cast acrylic, tinted through: a 610 x 346 mouth, about 630 x 366 outside, 238 deep. It is
+pressure-formed flare in 10 mm cell-cast acrylic, tinted through: a 536 x 346 mouth, about 556 x 366 outside (flush with the 560 cabinet), 238 deep. It is
 formed over a male plug whose surface is the horn's air path; the outside is the free face and has to stay glossy. Our
 model has the wall at about 8.5 mm at the throat end, thinning to about 6 at the mouth's sides and about 5 in its
 corners; 4 mm is the least we can accept. After forming, the flare is annealed, trimmed on a 5-axis router, and its
@@ -190,7 +204,7 @@ laser-marked. The drawings give every size. The quantities are small for now: on
 fifty."""),
     'd-other': ('other outside work', """I'm writing from EARF, a new hi-fi and lighting maker in San Francisco, for a quote on some smaller jobs for a loudspeaker we are prototyping. The cabinet is clear,
 tinted acrylic, so these parts are seen and have to be neat: acoustic polyester batts cut to size and each sewn into a
-black voile sleeve; a speaker cloth stretched over a frame; our wordmark laser-etched into the back panel and filled in
+black voile sleeve; a small LED light for the stepped plinth the speaker stands on; our wordmark laser-etched into the back panel and filled in
 the speaker's color; and a few seals (an EPDM cord loop with a vulcanized joint, a die-cut sponge gasket, small
 polyurethane sleeves). Please quote whichever of these you do."""),
     'e-laminated-horn': ('a laminated acrylic horn and its cabinet', """I'm writing from EARF, a new hi-fi and lighting maker in San Francisco, for a quote on the acrylic of a loudspeaker we are prototyping: the cabinet, and a horn laminated from
@@ -199,9 +213,11 @@ and "we bond one-off prototypes", with a 5-axis router and diamond and buff poli
 would like to give you the whole job.
 
 Tropos is a horn loudspeaker in clear tinted cell-cast acrylic, so you see into it. The first pair is in stock sheet,
-and its color is chosen at order. Please quote in Smoke: the cabinet in TruCast 2064 Gray 3/4 in (19 mm; our drawings
-say 20, and every cut is to the sheet as measured), the horn in 2074 Dark Gray 1/2 in. Tell us if another stock color
-changes the price or lead time. We can buy the sheet and have it delivered to you, or you can source it; please say
+and its color is chosen at order. Please quote in Smoke: the cabinet in TruCast 2074 Dark Gray 3/4 in (19 mm; our
+drawings say 20, and every cut is to the sheet as measured), the horn, the caldera rings round the woofer and the
+stepped plinth in 2074 1/2 in. 2074 is stocked only to 1/2 in, so the 3/4 in is a mill run: please say if you can
+source it and at what minimum; stocked 2064 Gray 3/4 in is the fallback. Tell us if another stock color changes the
+price or lead time. We can buy the sheet and have it delivered to you, or you can source it; please say
 which you prefer.
 
 **The cabinet** is as our drawings show: panels CNC-cut from our DXF files, edges milled square, the edges that show
@@ -209,7 +225,7 @@ polished, annealed before cementing; then corners, front panel, braces, ribs and
 polymerizing cement (ACRIFIX 2R 0190 or Weld-On 40, no solvent cement) with no visible bubble in any joint; the box
 annealed again; and the lands' faces, the bosses' faces and the back's seal groove milled in one setup.
 
-**The horn** is 630 x 366 at its mouth and 278 deep, laminated from 22 layers of 1/2 in sheet and a boss (sheet BHH-005):
+**The horn** is 560 x 370 outside at its mouth (its air path 536 x 346) and 278 deep, laminated from 22 layers of 1/2 in sheet and a boss (sheet BHH-005):
 - each layer cut flat from our DXF (`dxf/layer-01.dxf` to `layer-22.dxf`: its outline, and a rough bore 3 mm inside
   the final air path), faced to the pitch less the bond line, and its outside edge polished before bonding (the
   stepped outside is a terrace a layer, and each edge shows);
@@ -254,7 +270,7 @@ Q_KIND = {
                        7: 'Packing: how the plug and the plate are protected and shipped (any mark on the plug\'s face shows on every '
                           'horn formed over it).'},
     'c-metal': {3: 'Minimum order quantities, and any minimum lot for anodizing.', 5: None, 6: None},
-    'e-laminated-horn': {3: 'Whether you would source the stock sheet (TruCast 2064 3/4 in, 2074 1/2 in) or take ours, and any '
+    'e-laminated-horn': {3: 'Whether you would source the sheet (TruCast 2074 3/4 in, a mill run, or 2064 3/4 in stocked as the fallback; 2074 1/2 in) or take ours, and any '
                             'handling charge.', 5: None,
                          6: 'Both speakers\' parts from one sheet of each code, so the pair matches: is that how you would '
                             'nest them?'},
@@ -283,7 +299,7 @@ EXTRA_Q = {
         'the boss), how long a cycle takes, and whether annealing the three sub-stacks apart shortens it.',
         'Whether the cement may make the tint bleed at a joint, and whether you would bond two off-cuts of each color first '
         '(we would pay for that test).',
-        'Your 5-axis router\'s reach for a part 630 x 366 x 292, and how you hold the stack while cutting the air path.',
+        'Your 5-axis router\'s reach for a part 560 x 370 x 292, and how you hold the stack while cutting the air path.',
         'The edge finish of the layers: polished, or frosted as an option; and the price difference.',
         'How you would register 22 layers without dowel holes in the wall (on their bores over a stepped core, or waste '
         'ears trimmed off after), and whether a cement tinted to the sheet (Röhm allows a solvent-soluble colorant) is '
@@ -331,6 +347,13 @@ def table(kind):
     bom = rows()
     bom_ho = list(csv.DictReader(open(os.path.join(OUT_HO, 'bom.csv'))))
     for i, (pre, part, mat, th, tint, fin, tol) in enumerate(KINDS[kind], 1):
+        if isinstance(pre, str) and pre.startswith('fd:'):
+            _, name, per_pair = pre.split(':')
+            q = float(per_pair)
+            out.append(dict(no=f'{kind[0].upper()}{i:02d}', part=part, items=name, sheets='BHV (variants/BASES.md, STRATA.md)',
+                            material=mat, thickness_mm=th, tint=tint, qty_1_pair=f'{q:g}', qty_10_pairs=f'{q * 10:g}',
+                            qty_50_pairs=f'{q * 50:g}', finish=fin, tolerance_mm=tol))
+            continue
         if isinstance(pre, str) and pre.startswith('ho:'):
             match = [r for r in bom_ho if r['item'] == pre[3:]]
             if match:

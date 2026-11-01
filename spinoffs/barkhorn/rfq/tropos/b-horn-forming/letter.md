@@ -8,7 +8,7 @@ Re: Tropos loudspeaker, prototype pair, then 10 and 50 pairs
 Hello,
 
 I'm writing from EARF, a new hi-fi and lighting maker in San Francisco, for a quote on forming the horn of a loudspeaker we are prototyping. Tropos's horn is a
-pressure-formed flare in 10 mm cell-cast acrylic, tinted through: a 610 x 346 mouth, about 630 x 366 outside, 238 deep. It is
+pressure-formed flare in 10 mm cell-cast acrylic, tinted through: a 536 x 346 mouth, about 556 x 366 outside (flush with the 560 cabinet), 238 deep. It is
 formed over a male plug whose surface is the horn's air path; the outside is the free face and has to stay glossy. Our
 model has the wall at about 8.5 mm at the throat end, thinning to about 6 at the mouth's sides and about 5 in its
 corners; 4 mm is the least we can accept. After forming, the flare is annealed, trimmed on a 5-axis router, and its

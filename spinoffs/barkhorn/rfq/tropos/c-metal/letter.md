@@ -21,10 +21,11 @@ Quantities are for one pair (two speakers), then 10 and 50 pairs. Sheet numbers 
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | C01 | amplifier compartment | amp-box | 30 | aluminum 5052-H32 sheet (not 6061: it cracks at tight folds) | 1.5 | black anodized | 2 | 20 | 100 | folded, corners welded, flange; 3 gland holes; an earth stud on a bared spot | ±0.3 |
 | C02 | driver adaptor ring | hf-adaptor | 28 | aluminum 6061 | ø184 x 10 | black anodized | 2 | 20 | 100 | turned; 4 countersunk M6 on 101.6; 4 x 5.5 on 170 | ±0.1 |
-| C03 | front horn posts | post-1, post-2 | 29 | stainless 304 tube 10 x 7 | ø10 | natural, satin | 4 | 40 | 200 | cut to length, threaded M10 x 1 at the top; the foot plugged and turned to a head 14 across, 4 thick, on an 8 neck, to hook under its keyhole socket | length ±0.2 |
-| C04 | rear horn posts | post-3, post-4 | 29 | stainless 304 tube 10 x 7 | ø10 | natural, satin | 4 | 40 | 200 | cut to length, threaded M10 x 1 at the top; the foot plugged and turned to a head 14 across, 4 thick, on an 8 neck, to hook under its keyhole socket | length ±0.2 |
-| C05 | post sockets and inserts (a set of 8) | post-sockets | 2 | brass C360; the front pair bronze | ø15 x 15 cups (rear); keyhole sockets ø30 x 15 (front); M10 x 1 inserts 13 x 12 | natural | 2 | 20 | 100 | turned, knurled; rear cups bored 12 on a 2 floor; front: a 15 hole and a 9 slot 10 long with a 3 lip over a 15 x 4 undercut | ±0.05 on the bore and slot |
-| C06 | rating plate | rating-plate | 1 | aluminum | 70 x 40 x 1 | black anodized | 2 | 20 | 100 | laser-marked (model, serial, ratings, WEEE bin) | ±0.2 |
+| C03 | front horn posts | post-1, post-2 | 29 | bronze bar ø16, C93200 or C544 | ø16 | natural, satin | 4 | 40 | 200 | cut to length, threaded M12 at the top; the foot turned to a head 14 across, 4 thick, on an 8 neck, to hook under its keyhole socket | length ±0.2 |
+| C04 | rear horn posts | post-3, post-4 | 29 | bronze bar ø16, C93200 or C544 | ø16 | natural, satin | 4 | 40 | 200 | cut to length, threaded M12 at the top; bored 6 through (the tie rod in one, the HF lead in the other) | length ±0.2 |
+| C05 | post collars (8 a speaker) | collars | BHV (variants/BASES.md, STRATA.md) | bronze bar, C93200 or C544 | ø28 x 8 and ø24 x 6 | natural, satin | 16 | 160 | 800 | turned, bored 16.2; one on the top plate and one under the pad at each post | ±0.1 |
+| C06 | post sockets and inserts (a set of 8) | post-sockets | 2 | brass C360; the front pair bronze | ø15 x 15 cups (rear); keyhole sockets ø30 x 15 (front); M10 x 1 inserts 13 x 12 | natural | 2 | 20 | 100 | turned, knurled; rear cups bored 12 on a 2 floor; front: a 15 hole and a 9 slot 10 long with a 3 lip over a 15 x 4 undercut | ±0.05 on the bore and slot |
+| C07 | rating plate | rating-plate | 1 | aluminum | 70 x 40 x 1 | black anodized | 2 | 20 | 100 | laser-marked (model, serial, ratings, WEEE bin) | ±0.2 |
 
 ## What I would like to know
 
