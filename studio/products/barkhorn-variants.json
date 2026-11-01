@@ -31,6 +31,13 @@
   "horn-lot": {
    "preset": "$bark",
    "bevel_mm": 1.0
+  },
+  "led": {
+   "preset": "frosted",
+   "color": "#FFF1E0",
+   "absorb": "#FFE9D2",
+   "glow": 40.0,
+   "glow_color": "#FFB46B"
   }
  },
  "assign": [
@@ -53,6 +60,10 @@
   {
    "match": "horn-topo|horn-topo-lines|horn-strata",
    "material": "horn-lot"
+  },
+  {
+   "match": "base-plinth-light",
+   "material": "led"
   }
  ],
  "flavours": {
@@ -1580,6 +1591,9 @@
    "base-plinth-2",
    "base-plinth-3",
    "base-plinth-feet"
+  ],
+  "Plinth light": [
+   "base-plinth-light"
   ],
   "Outriggers": [
    "base-outriggers",

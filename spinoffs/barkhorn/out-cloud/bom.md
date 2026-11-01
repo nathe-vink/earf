@@ -17,13 +17,13 @@
 | port-frame-left, port-frame-right | cut | 4 | 8 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 140 x 140 | 3.72 |
 | woofer | buy | 2 | FaitalPRO 15PR400-8 15 in woofer (treated paper cone, neodymium, 8 ohm) | 393 frame, 356 cut-out, 165 deep | 194.00 |
 | amp-plate | buy | 2 | Hypex FusionAmp FA122 DSP plate amplifier, 2 x 125 W into 4 ohm | 315 x 120 x 55 plate, 291 x 96 recess | 422.40 |
-| waveguide | formed | 2 | Cast acrylic sheet 10 mm, tinted through in the horn's own heavier dye lot per colour (about 6 to 10 times the cabinet's dye, Ember about 10; matched to a chip we approve; the lot's cost and minimum to confirm with the caster), pressure-formed over a male tool, trimmed and polished (the rate carries the blank, the forming, the trim and the polish) | 2260 cm3, 640 x 248 x 376 | 628.25 |
+| waveguide | formed | 2 | Cast acrylic sheet 10 mm, tinted through in the horn's own heavier dye lot per colour (about 6 to 10 times the cabinet's dye, Ember about 10; matched to a chip we approve; the lot's cost and minimum to confirm with the caster), pressure-formed over a male tool, trimmed and polished (the rate carries the blank, the forming, the trim and the polish) | 2008 cm3, 566 x 248 x 376 | 592.19 |
 | horn-throat | cnc-mill | 2 | Cast acrylic, tinted through in the horn's own heavier dye lot (about 6 to 10 times the cabinet's dye; 6, 30 and 75 mm), turned and milled | 210 x 210 x 75 | 370.38 |
 | horn-pod | formed | 2 | Cast acrylic, tinted through in the horn's own heavier dye lot (about 6 to 10 times the cabinet's dye; 6, 30 and 75 mm), turned and milled | 456 cm3, 210 x 136 x 210 | 155.10 |
 | waveguide-cap | cnc-mill | 2 | Cast acrylic, tinted through in the horn's own heavier dye lot (about 6 to 10 times the cabinet's dye; 6, 30 and 75 mm), turned and milled | 210 x 210 x 35 | 157.18 |
 | hf | buy | 2 | B&C Speakers DE1085TN 2 in compression driver, titanium diaphragm, 100 mm voice coil, neodymium, 16 ohm (round 5: the owner's bigger throat) | 154 across, 86 deep, 4 x M6 on 102 | 512.00 |
 | hf-adaptor | lathe | 2 | Aluminium 6061 | 194 x 20 x 194 | 43.82 |
-| post-1, post-2 | lathe | 4 | Stainless steel 304 | 20 x 20 x 73 | 15.87 |
+| post-1, post-2 | lathe | 4 | Stainless steel 304 | 20 x 20 x 75 | 15.90 |
 | post-3, post-4 | lathe | 4 | Stainless steel 304 | 20 x 20 x 142 | 16.70 |
 | disc-frame | cut | 2 | 12 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 436 x 436 | 54.18 |
 | cloth-disc | buy | 2 | Acoustically transparent speaker cloth (a knit sold for grilles), about 0.6 x 0.95 m a grille, in the finish's colour |  | 15.00 |
@@ -86,10 +86,10 @@
 | buy | 3,129 |
 | cnc-mill | 1,243 |
 | cut | 2,692 |
-| formed | 2,051 |
+| formed | 1,979 |
 | lathe | 349 |
 | sheet metal | 171 |
-| total | 9,635 |
+| total | 9,563 |
 
 
 ## Options (each for 2, on top of the total above)
@@ -100,17 +100,17 @@
 |---|---|---|---|---|---|
 | ir-window | lathe | 1.0 | Cast acrylic, water-clear (untinted) | 22 x 30 x 22 | 25.59 |
 
-### tooling, the prototype's: about $7,109
+### tooling, the prototype's: about $6,925
 
 | item | make | qty | what | size | each, USD |
 |---|---|---|---|---|---|
-| horn-tool-prototype | cnc-mill | 1.0 | High-temperature epoxy tooling board, glued up as a block, CNC-cut, sealed (the prototype's forming plug; lead time 3 to 4 weeks from the program) | 628 x 273 x 364 | 4,364.39 |
+| horn-tool-prototype | cnc-mill | 1.0 | High-temperature epoxy tooling board, glued up as a block, CNC-cut, sealed (the prototype's forming plug; lead time 3 to 4 weeks from the program) | 554 x 273 x 364 | 4,180.67 |
 | horn-tool-base | cnc-mill | 1.0 | Aluminium 6061 | 910 x 50 x 650 | 2,744.38 |
 
-### tooling, production (after the first pair): about $14,528
+### tooling, production (after the first pair): about $14,465
 
 | item | make | qty | what | size | each, USD |
 |---|---|---|---|---|---|
-| horn-tool | cast | 1.0 | Aluminium 6061 | 19015 cm3, 628 x 273 x 364 | 14,527.92 |
+| horn-tool | cast | 1.0 | Aluminium 6061 | 16725 cm3, 554 x 273 x 364 | 14,464.93 |
 
 Budget figures: bought parts from the component library (dated retailer listings), made parts from the kit's stock rates: 25 % offcut on sheet parts, a handling charge a print, and a setup a machined line spread over its pieces. A shop's quote replaces them.
