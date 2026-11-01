@@ -464,8 +464,8 @@ def shot_cairn(sc):
 def shot_bedrock(sc):
     sc.world.node_tree.nodes['Background'].inputs['Color'].default_value = lin('#D9D3CA')
     sc.world.node_tree.nodes['Background'].inputs['Strength'].default_value = 0.12   # r2 c3
-    slab('floor', -4.0, -4.0, -0.03, 4.0, 1.2, 0.0, ph('oak_wood_planks', tint='#BFAE98', tint_mix=0.35))   # L2 c4: a paler oak, so the amber leads   # look 2: an oak floor and a plaster wall
-    slab('wall', -4.0, 1.2, -0.03, 4.0, 1.25, 3.0, ph('beige_wall_001', tint='#8A8278', tint_mix=0.4, bump=0.25))               # r2 c3: darker, so the amber reads                             # c4, c5: wider, further, a stop darker
+    slab('floor', -8.0, -6.0, -0.03, 8.0, 1.2, 0.0, ph('oak_wood_planks', tint='#BFAE98', tint_mix=0.35))   # L2 c4: a paler oak, so the amber leads   # look 2: an oak floor and a plaster wall
+    slab('wall', -8.0, 1.2, -0.03, 8.0, 1.25, 3.0, ph('beige_wall_001', tint='#8A8278', tint_mix=0.4, bump=0.25))               # r2 c3: darker, so the amber reads                             # c4, c5: wider, further, a stop darker
     prof = [(0, 0), (0.30, 0), (0.30, 0.15), (0.25, 0.15), (0.25, 0.185), (0.18, 0.185), (0.18, 0.215), (0.09, 0.215), (0.09, 0.23), (0, 0.23)]
     tn = 'dust-pour'   # critic r1: stock 2422 at an inch reads red; a lighter custom pour reads amber (captioned)
     for xi in (-0.235, 0.235 - 0.0254):
@@ -489,7 +489,7 @@ def shot_bedrock(sc):
         x += th + 0.0025
     sc.render.resolution_x, sc.render.resolution_y = 1800, 1200
     key = area('key', (-1.6, 0.6, 1.9), (0, 0, 0.15), 3.0, 50); key.visible_glossy = False   # r2 c4: round further, out of the plate's mirror
-    spot('sun', (-0.4, 1.4, 0.45), (-0.235, 0, 0.23), 380, 14, 0.004, '#FFF0DA')   # L2 c1: aimed higher, through the plate            # r2 c2: through the front plate onto the floor in front
+    spot('sun', (-0.4, 1.4, 0.45), (-0.235, 0, 0.23), 200, 14, 0.004, '#FFF0DA')   # L2r2 c1: weaker (the other round-2 changes tried and dropped: the plate lost its amber)   # L2 c1: aimed higher, through the plate            # r2 c2: through the front plate onto the floor in front
     rim = area('rim', (0.2, 0.75, 0.5), (-0.235, 0, 0.18), 1.0, 420, '#FFE8D0', size_y=0.3); rim.visible_glossy = False   # r2 c1
     rim.visible_camera = False
     area('fill', (1.4, -1.6, 0.6), (0, 0, 0.15), 1.2, 20, '#E6ECF5')                         # r2 c7
