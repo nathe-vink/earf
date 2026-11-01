@@ -128,7 +128,8 @@ while lanes run. Deck: https://claude.ai/artifact/3sihYaT4ckNTF6WE7SWR7x (v29). 
    r33-speaker-horn asset/link_example_strata.png (site) over link_example_strata_trucast.png (stock). Sub-question:
    does the horn match the cabinet's depth or go deeper (TINTS.md)? Thick parts (Mantle laminae, Core, stepped horns)
    go near-black in stock at full loading: a lighter custom pour is likely needed for those either way.
-3. Mantle: A Strata Float (v2, after its fix pass) / B Outcrop / Outcrop's cover on Strata's float.
+3. Mantle: A Strata Float (v3: strata-v3-ice-custom-r2 + the v1 dusk mood frame) / B Outcrop. Duels close (1-1 on
+   looks), Strata clearly more distinctive. Detail: a small frosted front-edge mark, or none.
 Not questions (FYI with pictures when there's a natural moment): Core's contact dock; the line slide; editions finals.
 
 ## After check-in 4 (23:00-23:30 UTC)
@@ -202,3 +203,11 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
   vs Outcrop pending.
 - Brand: Relief look 2 r2 6.0; Moho look 2 r2 5.5. Editions: no push since 23:38 (Iron in the Core rig in progress).
 - Speaker: Strata studio hero still rendering (shot at 23:43).
+- Lamps DONE with the site set (735e7593): all ten cordless frames checked (no cord; a small USB-C service notch under the
+  base), sent to the site lane with the copy change (no dock named yet). CORE-RECHARGE options for the owner: dock (b)
+  recommended; board route 1 = OEM board + listed 1S2P Li-ion (Tenergy 31001, 19.24 Wh; ~$2-5k NRE; ~6.9 h; a spec change)
+  vs route 2 = LiFePO4 fixed-price board (~$12-20k). Next for the lane: dock frame, proposal rounds, letters' wording.
+- Mantle v3 DONE (ea84fe38, stopped): smoked 2064 base 12.7 thick with 35 mm setback, solid polished 303 posts (bonded
+  seats, M8 studs, Sorbothane under the feet), tone-on-tone mark on the back edge, satin bead-blasted deck edge ($3,800).
+  Duels vs Outcrop: polished edge lost 0-2; satin edge 1-1 (6.25 vs 6.0). Show the owner: v3-ice-custom-r2 (design) +
+  v1 dusk (mood) + Outcrop; detail: a small frosted front mark or none.
