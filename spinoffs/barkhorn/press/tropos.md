@@ -23,10 +23,10 @@ so it is dressed in white voile. A cloth cover goes on over the woofer.
 | Lining | Polyester batts in white voile, 100 mm at the top and the bottom |
 | Colors (acrylic · cover) | 01 Ember (translucent red · oxblood), 02 Dust (translucent orange · rust), 03 Acid (translucent golden yellow · ochre), 04 Poison (translucent bottle green · bottle green), 05 Ice (translucent ice blue · deep blue), 06 Haze (translucent violet · deep violet), 07 Fog (water-clear · white), 08 Smoke (smoked black · black) |
 | Price | Set at launch; each pair is made to order |
-| Care | Dust with a soft microfibre cloth; wash with water and a drop of mild soap, then dry. No glass cleaner, alcohol or solvents: they craze acrylic. Fine scratches polish out |
+| Care | Dust with a soft microfiber cloth; wash with water and a drop of mild soap, then dry. No glass cleaner, alcohol or solvents: they craze acrylic. Fine scratches polish out |
 | Figures | Design figures, from the drawings and their simulation; measured ones follow with the first pair |
 
 **The name.** The troposphere is the layer of air we live in, named for the Greek *tropos*, a turn.
 
-**Pictures:** `site/img/hero.jpg`, `lineup.jpg`, `room.jpg`, `facade.jpg`, `red-studio.jpg`, `macro-*.jpg`
-(`images.md`). All renders.
+**Pictures:** `site/img/hero.jpg`, `lineup.jpg`, `facade.jpg`, `red-studio.jpg`, and the room with its covers off
+(`brandbook/book/img/room.jpg`); always the whole speaker, cover off, never a crop (`images.md`). All renders.

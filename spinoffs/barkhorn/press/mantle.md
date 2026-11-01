@@ -18,7 +18,7 @@ stays out of the plinth.
 | Size | 470 wide, 380 deep, 194 high with the lid down (mm) |
 | Weight | About 15.5 kg |
 | Colors | The same eight |
-| Care | Dust with a soft microfibre cloth; wash with water and a drop of mild soap, then dry. No glass cleaner, alcohol or solvents: they craze acrylic. Fine scratches polish out |
+| Care | Dust with a soft microfiber cloth; wash with water and a drop of mild soap, then dry. No glass cleaner, alcohol or solvents: they craze acrylic. Fine scratches polish out |
 | Figures | Design figures; they may change before production |
 | Price | Set at launch |
 

@@ -33,7 +33,7 @@ published editors.
 
 | # | Outlet | Kind | Angle | When | What to send | How it takes pitches | Status |
 |---|---|---|---|---|---|---|---|
-| 1 | Wallpaper* | Print and online, global design | The eight tints; the horn | Embargoed print, by 1 March; candidate for the exclusive | Pictures of the prototypes, the eight-colour sheet, the fact sheets, prices and availability | Pitch named editors (Rosa Bertoli, Global Design Director; Charlotte Gunn, Director of Digital Content); contact@ is feedback only | [C] |
+| 1 | Wallpaper* | Print and online, global design | The eight tints; the horn | Embargoed print, by 1 March; candidate for the exclusive | Pictures of the prototypes, the eight-color sheet, the fact sheets, prices and availability | Pitch named editors (Rosa Bertoli, Global Design Director; Charlotte Gunn, Director of Digital Content); contact@ is feedback only | [C] |
 | 2 | Monocle | Print, radio, newsletter | The listening bar; a San Francisco maker | Embargoed print, by 1 March | The pop-up's story, the fact sheets, an offer of a radio interview in the room | "Contact the relevant editor" (Josh Fehnert, Editor; Nic Monisse, Design Editor) | [C] |
 | 3 | Dezeen | Online, global design | The eight tints; the horn | Online, 22–29 March; candidate for the exclusive | Release, 6 to 10 pictures with credits in the file names, the film, the fact sheets | Process unverified (site refused access) | [U] |
 | 4 | designboom | Online, global design | The eight tints | Online, 22–29 March | The same pack | Reader submission through a registered account; you confirm IP and your signature runs with the article | [C] |

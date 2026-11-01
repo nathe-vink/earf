@@ -12,10 +12,12 @@ base. Cordless, it goes where the conversation is."
 | Power | Cordless: about five hours at full brightness, longer dimmed, on cells you can replace yourself |
 | Rating | Designed to meet IP44, for terraces and spilled drinks |
 | Shades | In all eight colors, sold singly |
-| Care | Dust with a soft microfibre cloth; wash with water and a drop of mild soap, then dry. No glass cleaner, alcohol or solvents: they craze acrylic. Fine scratches polish out |
+| Care | Dust with a soft microfiber cloth; wash with water and a drop of mild soap, then dry. No glass cleaner, alcohol or solvents: they craze acrylic. Fine scratches polish out |
 | Figures | Design figures; they may change before production |
 | Price | Set at launch |
 
 **The name.** The glowing center.
 
-**Pictures:** `site/img/lamp-orb.jpg`, `lamps-orbs.jpg`, `lamps-unlit.jpg`, `orb-<color>.jpg`. All renders.
+**Pictures:** cordless only: `brandbook/book/img/lamp-orb.jpg`, `lamps-orbs.jpg`, `lamps-unlit.jpg`, and the single colors
+from the lamps lane's cordless set (`renders/2026-10-31/barkhorn/lamps-cordless/` on `r32-lamps-final`). The site's
+copies still show the cord; don't send those. All renders.

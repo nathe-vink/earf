@@ -23,7 +23,7 @@ San Francisco galleries first.
 | Gallery FUMI | London | info@galleryfumi.com (a press option on its form) | galleryfumi.com/contact | Collectible design led by material, resin and cast work among it | [verified] |
 | Sarah Myerscough Gallery | London | info@sarahmyerscough.com; press marketing@sarahmyerscough.com | sarahmyerscough.com/contact | Material-led craft and design; collectors who buy how a thing is made | [verified] |
 | Galerie Maria Wettergren | Paris | info@mariawettergren.com | mariawettergren.com/contact | Scandinavian collectible design with a light-and-technology strand, close to EARF's mix | [verified] |
-| Salon 94 \| S94D | New York | info@salon94.com | salon94.com/contact | Art and design crossover; S94D fits colour-saturated sculptural objects | [verified] |
+| Salon 94 \| S94D | New York | info@salon94.com | salon94.com/contact | Art and design crossover; S94D fits color-saturated sculptural objects | [verified] |
 | Nonaka Hill | Los Angeles / Kyoto | Contact form | nonaka-hill.com/contact | Japanese and Japan-adjacent design and craft; object-focused collectors | [verified] (form only) |
 | Moderne Gallery | Philadelphia | info@modernegallery.com | modernegallery.com/contact | American studio furniture and craft; long-term collectors | [verified] |
 | Norr Cohan | New York | info@norrcohan.com | norrcohan.com/contact | A major contemporary gallery (formerly James Cohan); art-collector reach | [verified] |
@@ -43,14 +43,14 @@ San Francisco galleries first.
 | Organization | Where | Contact route | Source | Why in the room | Status |
 |---|---|---|---|---|---|
 | The Future Perfect | 3085 Sacramento St | "Inquire" form; the showroom's published phone; a press page | thefutureperfect.com/contact | The city's leading collectible-contemporary showroom: EARF's peers and buyers | [verified] |
-| San Francisco Design Week (Design Bay Area) | San Francisco | Contact form; press page designbayarea.org/press | sfdesignweek.org/press | The design-week organiser; its network is the city's design community (and EARF's June option) | [verified] |
+| San Francisco Design Week (Design Bay Area) | San Francisco | Contact form; press page designbayarea.org/press | sfdesignweek.org/press | The design-week organizer; its network is the city's design community (and EARF's June option) | [verified] |
 | AIA San Francisco | 140 Sutter St | Contact form; published phone | aiasf.org/contact-us | Architects who specify lighting and hi-fi in residential work | [verified] |
 | IIDA Northern California | San Francisco | Media contact iida@landispr.com (its PR agency) | iidanc.org/contact-us | Interior designers: commercial and hospitality specifiers | [verified] (media route only) |
 | San Francisco Design Center | 2 Henry Adams St | info@sfdesigncenter.com; form | sfdesigncenter.com | The hub of the design trade's showrooms | [verified] |
-| Heath Ceramics | Mission / Sausalito | press@heathceramics.com | heathceramics.com/pages/contact-us | The Bay Area's defining colour-and-material maker | [verified] |
+| Heath Ceramics | Mission / Sausalito | press@heathceramics.com | heathceramics.com/pages/contact-us | The Bay Area's defining color-and-material maker | [verified] |
 | Coup d'Etat | 111 Rhode Island St | info@coupdetatsf.com | coupdetatsf.com/contact | A San Francisco gallery-showroom for collectible design, selling to the same clients | [verified] |
 | NICOLEHOLLIS | 1000 Brannan St | info@; press@nicolehollis.com | nicolehollis.com/contact | An interior design studio specifying collectible lighting for high-end homes | [verified] |
-| Ken Fulk | San Francisco / NY / LA | info@kenfulk.com | kenfulk.com | Colour-rich rooms and events; a tastemaker | [verified] |
+| Ken Fulk | San Francisco / NY / LA | info@kenfulk.com | kenfulk.com | Color-rich rooms and events; a tastemaker | [verified] |
 | Ammunition | 1500 Sansome St | media@ammunitiongroup.com | ammunitiongroup.com/contact | An industrial design studio with deep consumer-audio work | [verified] |
 | fuseproject | 1401 16th St | info@; press@fuseproject.com | fuseproject.com/contact | Product-design peers, and press pull | [verified] |
 | March | 3075 Sacramento St | Phone from a third-party listing; its site returned 404 | afar.com listing | A design-led store beside The Future Perfect | [unverified] |

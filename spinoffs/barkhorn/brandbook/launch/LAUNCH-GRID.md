@@ -10,11 +10,11 @@ alt text until the real pieces are photographed. Mockup: `out/launch-grid.png` (
 |---|---|---|---|---|
 | 1 | Wed 20 Jan | `red-studio-1200.jpg` | It played. | Tuesday night, a pair of Tropos played for the first time. Thank you for coming. [If the room goes ahead:] The room is open Thursday to Sunday, 1 to 8 pm, for the next eight weeks. |
 | 2 | Fri 22 Jan | `green-habitat-portrait.jpg` | Bottle green. Keep out of reach. | 04 Poison. One of eight colors, cast all the way through. All eight are in the room this week, as samples you can hold up to the window. |
-| 3 | Sun 24 Jan | `macro-corner.jpg` | Cast in color, all the way through. | The corner of a Tropos cabinet: two 20 mm walls of tinted cast acrylic, cemented. Nothing is painted on, so nothing wears off. |
+| 3 | Sun 24 Jan | `ice-studio-light.jpg` (whole speaker, cover off) | [LINE: owner's pick] | A Tropos cabinet: two 20 mm walls of tinted cast acrylic, cemented. Nothing is painted on, so nothing wears off. |
 | 4 | Wed 27 Jan | `bar-decks.jpg` | One coin, one song. | Everyone who comes in gets a coin. Hand it in with a song, and it goes into the column at the decks. The column is the queue. |
-| 5 | Fri 29 Jan | `lamp-orb-800.jpg` | Goes where the conversation is. | Core runs from its cable or from the cells in its base: about five hours at full brightness, longer dimmed. When the cells tire, you change the cells, not the lamp. |
+| 5 | Fri 29 Jan | `lamp-orb.jpg` (cordless) | Goes where the conversation is. | Core is cordless. It runs from the cells in its base: about five hours at full brightness, longer dimmed. When the cells tire, you change the cells, not the lamp. |
 | 6 | Sun 31 Jan | `bar-listening.jpg` | One album, start to finish. | This week's Session: [Album] by [Artist], start to finish, in the listening room. Six chairs. No talking. Ask at the room for a place. |
-| 7 | Wed 3 Feb | `macro-horn.jpg` | The oldest amplifier is a shape. | Long before amplifiers, a horn was how a small sound filled a large room. Ours is formed from the same tinted acrylic as its cabinet. |
+| 7 | Wed 3 Feb | `room-portrait.jpg` (the pair, whole, covers off; horn lane) | The oldest amplifier is a shape. | Long before amplifiers, a horn was how a small sound filled a large room. Ours is formed from the same tinted acrylic as its cabinet. |
 | 8 | Fri 5 Feb | `tt-violet-dusk-1200.jpg` | Floats on its own light. | Mantle's tinted plinth floats 40 mm over a base that glows at its edge. It is playing in the room now. |
 | 9 | Sun 7 Feb | `hero-portrait.jpg` | Something in the air. | Everything in the room is made to order, in any of eight colors. Reserve a place in line at the room, or write to hello@earf.world. |
 

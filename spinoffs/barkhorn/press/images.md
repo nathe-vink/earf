@@ -2,27 +2,26 @@
 
 Every picture is a **render** and is captioned "Render" wherever it runs, until the first pieces are photographed.
 Paths are from the repository root; the files are the site's own (`spinoffs/barkhorn/site/img/`, built by `web.py` from
-`finals.py`). Color keys in file names: `red` Ember, `orange` Dust, `amber` Acid, `green` Poison, `blue` Ice, `violet` Haze, `ice` Fog, `black` Smoke.
+`finals.py`), except where a row points at the Brand Book's copies. **Two rules (owner, 2026-10-31):** Tropos is always
+shown whole with its cover off, never cropped (so the site's `macro-*.jpg` crops and its covers-on room are out); Core
+is cordless (so its pictures are the lamps lane's cordless set, `r32-lamps-final`; the site's still show the cord).
+Color keys in file names: `red` Ember, `orange` Dust, `amber` Acid, `green` Poison, `blue` Ice, `violet` Haze, `ice` Fog, `black` Smoke.
 
 | Product | File | Size | What it shows |
 |---|---|---|---|
 | Tropos | `spinoffs/barkhorn/site/img/hero.jpg` | 2400 × 1200 | The eight Tropos in a row on a pale floor, Ember to Smoke, each throwing a colored shadow |
 | Tropos | `spinoffs/barkhorn/site/img/lineup.jpg` | 2400 × 1000 | The eight in a row on a white seamless |
-| Tropos | `spinoffs/barkhorn/site/img/room.jpg` | 2880 × 1620 | A pair in Poison, covers on, by a tall window |
+| Tropos | `spinoffs/barkhorn/brandbook/book/img/room.jpg` | 1600 × 900 | A pair in Poison, covers off, by a tall window at golden hour (master: `tropos-room-golden-hour-off.png`, horn lane) |
 | Tropos | `spinoffs/barkhorn/site/img/facade.jpg` | 2400 × 1000 | The eight at night, lit from below, their colors thrown up a concrete wall |
 | Tropos | `spinoffs/barkhorn/site/img/red-studio.jpg` | 2400 × 1350 | Tropos in Ember alone, on a dark seamless |
 | Tropos | `spinoffs/barkhorn/site/img/red-studio-light.jpg` | 2400 × 1350 | Tropos in Ember alone, on a pale seamless (each color: <key>-studio-light.jpg) |
 | Tropos | `spinoffs/barkhorn/site/img/green-habitat.jpg` | 2400 × 1600 | Tropos in Poison in its element, a forest (each color: <key>-habitat.jpg) |
 | Tropos | `spinoffs/barkhorn/site/img/inside.jpg` | 880 × 1100 | The cutaway: the lining, the woofer and the amplifier through the wall |
-| Tropos | `spinoffs/barkhorn/site/img/macro-corner.jpg` | 720 × 720 | The corner of an Ember cabinet: two 20 mm walls, cemented |
-| Tropos | `spinoffs/barkhorn/site/img/macro-horn.jpg` | 720 × 720 | The Acid horn from the side, its flare and driver pod |
-| Tropos | `spinoffs/barkhorn/site/img/macro-amp.jpg` | 720 × 720 | Hypex's FA122 amplifier on the back of a Dust cabinet |
-| Tropos | `spinoffs/barkhorn/site/img/macro-woofer.jpg` | 720 × 720 | The 15-inch woofer through an Ice cabinet |
 | Hemisphere | `spinoffs/barkhorn/site/img/lamp-dome.jpg` | 1600 × 2000 | Hemisphere lit, its Ember shade glowing beneath a black hub |
 | Hemisphere | `spinoffs/barkhorn/site/img/lamps-domes.jpg` | 2400 × 800 | Eight Hemisphere pendants hung in a row, lit, one in each color |
-| Core | `spinoffs/barkhorn/site/img/lamp-orb.jpg` | 1600 × 2000 | Core lit in Ember, sitting low in its black acrylic base |
-| Core | `spinoffs/barkhorn/site/img/lamps-orbs.jpg` | 2400 × 800 | Eight Core lamps in a row, lit, in spectrum order |
-| Lighting | `spinoffs/barkhorn/site/img/lamps-unlit.jpg` | 1600 × 2000 | A Core and a Hemisphere in Smoke, switched off |
+| Core | `spinoffs/barkhorn/brandbook/book/img/lamp-orb.jpg` | 1600 × 2000 | Core lit in Ember, sitting low in its black acrylic base, cordless |
+| Core | `spinoffs/barkhorn/brandbook/book/img/lamps-orbs.jpg` | 1600 × 533 | Eight Core lamps in a row, lit, in spectrum order |
+| Lighting | `spinoffs/barkhorn/brandbook/book/img/lamps-unlit.jpg` | 1600 × 2000 | A Core and a Hemisphere in Smoke, switched off |
 | Mantle | `spinoffs/barkhorn/site/img/tt-violet-dusk.jpg` | 2400 × 1600 | Mantle in Haze at dusk, its base glowing |
 | Mantle | `spinoffs/barkhorn/site/img/tt-amber-studio.jpg` | 2400 × 1600 | Mantle in Acid in the studio |
 | Mantle | `spinoffs/barkhorn/site/img/tt-open.jpg` | 2400 × 1600 | Mantle with its lid raised |

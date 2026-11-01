@@ -31,6 +31,7 @@ BAR = {'bar-door.jpg': 'renders/2026-10-22/barkhorn/planet41/finals/door-mother-
 # whole (the horn lane's golden-hour room, covers off); Core cordless (the lamps lane's cordless set). The site's
 # macro crops of Tropos are no longer used.
 PINNED = {'room.jpg': ('754e16a9852f364fb2ebe8eb752c10ab6bdc0e23', 'renders/2026-10-31/barkhorn/tropos-campaign/tropos-room-golden-hour-off.png'),
+          'room-portrait.jpg': ('754e16a9852f364fb2ebe8eb752c10ab6bdc0e23', 'renders/2026-10-31/barkhorn/tropos-campaign/tropos-room-golden-hour-off-portrait.png'),
           'lamp-orb.jpg': ('735e759304b00400750741d5038722a3d4d5f5fb', 'renders/2026-10-31/barkhorn/lamps-cordless/site-img/lamp-orb.jpg'),
           'lamps-orbs.jpg': ('735e759304b00400750741d5038722a3d4d5f5fb', 'renders/2026-10-31/barkhorn/lamps-cordless/site-img/lamps-orbs.jpg'),
           'lamps-unlit.jpg': ('735e759304b00400750741d5038722a3d4d5f5fb', 'renders/2026-10-31/barkhorn/lamps-cordless/site-img/lamps-unlit.jpg')}

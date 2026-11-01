@@ -9,7 +9,7 @@
 What it is (highendsociety.de/start-up-358.html, read 31 October 2026): a free complete exhibition stand at HIGH END,
 **6–9 May 2027, Austria Center Vienna**, for up to ten young companies; an individual mention in the press releases and
 the exhibition magazine; the same treatment as regular exhibitors. Travel, hotel and extra advertising are not covered.
-The organiser alone decides; no appeal. Prototypes are allowed (events research, R5 §2).
+The organizer alone decides; no appeal. Prototypes are allowed (events research, R5 §2).
 
 **How to apply:** by email to alex[at]highendsociety.de, with the registration documents. The page asks for nothing
 else, so the email can be short; the draft below adds what a juror would want to know.

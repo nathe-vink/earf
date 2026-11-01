@@ -111,7 +111,7 @@ def shot_plaza(sc):
     bm = P.node(nt, 'ShaderNodeBump', (-250, -500), Strength=0.3, Distance=0.004)
     nt.links.new(br.outputs['Fac'], bm.inputs['Height']); nt.links.new(bm.outputs['Normal'], p.inputs['Normal'])
     bpy.ops.mesh.primitive_plane_add(size=400); bpy.context.object.data.materials.append(m)
-    # the skyline: blue-grey facades lifted by distance, lit windows on the faces toward us
+    # the skyline: blue-gray facades lifted by distance, lit windows on the faces toward us
     import random
     random.seed(4)
     for row, (y0, tone, lit) in enumerate([(220, '#2A2E3C', 0.16), (420, '#3A4054', 0.10)]):

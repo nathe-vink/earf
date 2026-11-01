@@ -22,7 +22,7 @@ most fragile, most beautiful part travels on its own, face up.
 | Outside | 720 W × 600 D × 1160 H mm, on two 100 mm skids (forklift and pallet-jack entry) | 1420 × 560 × 460 mm |
 | Sized from | the cabinet's 560 × 420 mm and its height under the horn, plus 40 mm foam and 18 mm ply a side; **to be resized from the CAD** before quoting | the horn's 635 × 418 × 372 mm envelope (the BOM's waveguide), two side by side |
 | Shell | 18 mm birch ply (BB/BB), cleated frames on the sides, black powder-coated steel corners | the same, a lifting lid, two steel handles, four corners |
-| Door | the front, hinged at its foot with a piano hinge; four over-centre latches; comes down to the floor as a ramp (about 6° off the skids) | — |
+| Door | the front, hinged at its foot with a piano hinge; four over-center latches; comes down to the floor as a ramp (about 6° off the skids) | — |
 | Inside | charcoal felt on every inner face; cross-linked PE foam corner blocks top and bottom; a birch sled with felt runners under the speaker | a cut cross-linked PE bed, each horn face up, its throat unloaded; the pods' caps in a pocket |
 | The speaker wears | a cotton sleeve dyed the tint, a woven label with its number and name; it stays as the dust cover | — |
 | Print | outside: the wordmark, the tint's number and name in the tint, its line, "Tropos · 1 of 2", the weight; the side: handling marks; the door's inside: the five steps | the front: "The horns.", the tint, "Lift the lid, not the horns" |

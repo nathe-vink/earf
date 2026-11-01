@@ -2,7 +2,7 @@
 
 Run: python3 budget.py > BUDGET.md. Every figure is est. unless a source is named; sources were read 2026-10-31.
   Precision Record Pressing, precisionpressing.com/pricing: translucent color, standard weight, all in (DMM cutting,
-    plating, 5 test pressings, full-colour jacket and labels, poly sleeves, assembly, shrink): 300 $2,396, 500 $3,067.
+    plating, 5 test pressings, full-color jacket and labels, poly sleeves, assembly, shrink): 300 $2,396, 500 $3,067.
     180 g extra not published.
   United Record Pressing, customers.urpressing.com/180g.php: item prices (180 g $1.96, color +$0.69, setup $95,
     lacquer mastering $330, plating $290, tests $100, labels $160, shrink $0.15, 500 jackets from $695).

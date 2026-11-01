@@ -33,7 +33,7 @@ The lamps lane picked them as the nearest stock colors (`stock-colours.md`), bec
 and a pallet. The other six tints don't exist as products yet.
 
 **The rules:**
-1. **Never recolour a photograph** toward the mark's hex, and never composite a tint that wasn't cast. A photograph of
+1. **Never recolor a photograph** toward the mark's hex, and never composite a tint that wasn't cast. A photograph of
    a stock-red Hemisphere stays stock red.
 2. **Caption the color as cast.** Where it differs from the tint, name both:
    - "Hemisphere in stock red (2423), nearest to Ember. Prototype, February 2027."
@@ -58,7 +58,7 @@ The Brand Book's look, made with real light:
   - a polariser controls glare;
   - the object's own light gets a long exposure, blended with a flash frame only if both are real and the caption
     stays true.
-- **Clean as for a jeweler:** cotton gloves, a microfibre, an anti-static brush, a blower. Dust shows on every acrylic
+- **Clean as for a jeweler:** cotton gloves, a microfiber, an anti-static brush, a blower. Dust shows on every acrylic
   face at 100%. Never solvent or glass spray: they craze acrylic.
 
 ## The shot list, by product and use
@@ -119,7 +119,7 @@ on paper and on black); **Partner** (the three packs).
 |---|---|
 | Photographer (product, with acrylic and glass in the portfolio) | 1 day, plus a half day of prep with the owner |
 | First assistant | 1 day |
-| Digital tech, tethered, colour-managed | 1 day |
+| Digital tech, tethered, color-managed | 1 day |
 | The owner, as art director | Approves each set-up on the tethered screen |
 | Studio | A cyclorama or a large dark room; freight access for Tropos; enough power for the lamps; 1 day plus a load-in evening |
 | Optional: a video operator | For the loops and the Kickstarter film's P1–P8 stills (`../kickstarter/FILM.md`), if shot the same day |

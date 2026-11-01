@@ -24,7 +24,7 @@ guides (PHOTOGRAPHERS.md), except Flash Studio's, which is on its own page. **Qu
 | Photographer, a half day's prep with the owner | $0 | $750 | est. |
 | Usage: perpetual, non-exclusive, every EARF channel, partner packs and press | $1,000 | $2,500 | a perpetual buyout runs 2-4x the base fee (CreativeLive); non-exclusive should cost less (est.) |
 | First assistant | $350 | $500 | $350-650/day |
-| Digital tech, tethered and colour-managed | $0 | $650 | $500-900/day; SF $515-765 (Beverly Boy). Lean: the photographer tethers |
+| Digital tech, tethered and color-managed | $0 | $650 | $500-900/day; SF $515-765 (Beverly Boy). Lean: the photographer tethers |
 | Studio: Flash Studio, 10 h, up to 5 people, plus 2 h for load-in | $1,200 | $1,560 | $1,200 a day, overtime $180/h (flashsf.com) [verified] |
 | Lighting and grip hire: strip lights, flags, a polariser, stands | $300 | $600 | est.; rented separately |
 | Seamless: the brand's paper and black | $100 | $150 | est. |

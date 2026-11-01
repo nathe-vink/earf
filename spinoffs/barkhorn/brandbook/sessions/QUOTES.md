@@ -69,8 +69,8 @@ The owner chooses one; Ember is the likelier match from stock (Ruby, T-4, Pirate
 - 180 g;
 - DMM cutting from files;
 - 5 test pressings;
-- full-colour labels;
-- full-colour jacket;
+- full-color labels;
+- full-color jacket;
 - poly-lined sleeves;
 - shrink.
 
@@ -118,7 +118,7 @@ The owner chooses one; Ember is the likelier match from stock (Ruby, T-4, Pirate
 >
 > We're pressing a live album recorded in San Francisco in January and would like a quote and your current lead time:
 > 300 and 500 × 12" 33⅓ at **180 g**, in a **custom translucent color** matched to Pantone [7621 C] (#D2382F), with
-> cutting from our files (or lacquers if you prefer), 5 test pressings, full-colour labels, printed single-pocket
+> cutting from our files (or lacquers if you prefer), 5 test pressings, full-color labels, printed single-pocket
 > jackets, poly-lined sleeves, a 12 × 12 insert and shrink, delivered to San Francisco. We'll number the jackets by hand.
 > Files ready about 15 February 2027; records wanted by late April. Is that possible?
 >

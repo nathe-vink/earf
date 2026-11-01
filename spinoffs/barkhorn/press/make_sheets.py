@@ -8,6 +8,10 @@ import json, os, subprocess
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 IMG = os.path.join(HERE, '..', 'site', 'img')
+# Core is cordless (owner, 2026-10-31): its pictures come from the Brand Book's copy of the lamps lane's cordless set,
+# since the site's still show the cord.
+BOOK = os.path.join(HERE, '..', 'brandbook', 'book', 'img')
+FROM_BOOK = {'lamp-orb.jpg', 'lamps-orbs.jpg', 'lamps-unlit.jpg', 'room.jpg'}
 OUT = os.path.join(HERE, 'out')
 MARK = os.path.join(HERE, '..', 'brand', 'mark', 'earf-wordmark-black.svg')
 STANDING = ('In development and not yet for sale. Every picture is a render until the first are built. Figures are '
@@ -95,7 +99,7 @@ def page(key, name, kind, line, pic, body, rows):
     strip = ''.join(f'<i style="background:{c}"></i>' for c in TINTS)
     return (f'<section class="page"><div class="top"><img src="file://{MARK}" alt="EARF"><span class="k">Press · fact sheet · not for release</span></div>'
             f'<div><span class="k">{esc(kind)}</span><h1>{esc(name)}</h1></div><p class="line">{esc(line)}</p>'
-            f'<div class="pic{" fit" if key in ("tropos",) else ""}"><img src="file://{os.path.join(IMG, pic)}" alt=""></div><p class="body">{esc(body)}</p><dl>{dl}</dl>'
+            f'<div class="pic{" fit" if key in ("tropos",) else ""}"><img src="file://{os.path.join(BOOK if pic in FROM_BOOK else IMG, pic)}" alt=""></div><p class="body">{esc(body)}</p><dl>{dl}</dl>'
             f'<div class="foot"><span>{STANDING} Picture: {pic}, a render.</span><span>earf.world<br>hello@earf.world</span></div>'
             f'<div class="strip">{strip}</div></section>')
 

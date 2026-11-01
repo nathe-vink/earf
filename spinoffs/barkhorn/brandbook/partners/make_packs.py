@@ -52,7 +52,7 @@ EARF_IS = ("EARF makes hi-fi and light in San Francisco, in cast acrylic tinted 
 PACKS = [
     dict(slug='klipsch', who='Klipsch', file='earf-pitch-klipsch',
          title='A numbered horn edition, built in Hope.',
-         pic='../../site/img/macro-horn.jpg', pos='50% 50%',
+         pic='../book/img/amber-studio-light.jpg', pos='50% 50%',
          proposal="A Klipsch × EARF edition of a Heritage model, built by Klipsch in Hope, with an EARF cast-acrylic horn "
                   "surround, baffle or stands in one of our tints: about 100 numbered pairs. EARF sells it direct in the "
                   "United States; Klipsch dealers sell it everywhere else, as with the kO-R2.",
@@ -87,7 +87,7 @@ PACKS = [
          route='pr@klipsch.com (its press office), asking for the note to be passed to product partnerships'),
     dict(slug='ace', who='Ace Hotel Group', file='earf-pitch-ace-hotel',
          title='A listening corner for one Ace lobby.',
-         pic='../../site/img/room-1440.jpg', pos='50% 55%',
+         pic='../book/img/room.jpg', pos='50% 55%',
          proposal="A season-long EARF listening corner in one Ace lobby: a numbered pair of Tropos, a Mantle record player "
                   "and Hemisphere pendants, in a tint chosen for the room, with listening sessions through the season. "
                   "It starts as a residency and becomes a purchase if it works for Ace. Beside it, an Ace × EARF edition "

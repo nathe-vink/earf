@@ -18,4 +18,4 @@ another puts a new color on."
 
 **The name.** Half a globe, hung mouth down.
 
-**Pictures:** `site/img/lamp-dome.jpg`, `lamps-domes.jpg`, `lamps-unlit.jpg`, `dome-<color>.jpg`. All renders.
+**Pictures:** `site/img/lamp-dome.jpg`, `lamps-domes.jpg`, `brandbook/book/img/lamps-unlit.jpg` (cordless Core beside it), `dome-<color>.jpg`. All renders.

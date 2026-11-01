@@ -26,7 +26,7 @@ runs **16–24 January**, FOG Design+Art **21–24 January** at Fort Mason; the 
 | Hotel | Hotel Emblem (Union Square) | A Beat-generation hotel with an arts program | sales@hotelemblem.com |
 | Hotel | San Francisco Proper (Mid-Market) | Design-led; its group's press notes a feature on hotels for music lovers | proper@autumncommunications.com (its press agency) |
 | Drinks | St. George Spirits (Alameda) | The Bay's distillery, with events of its own; says it isn't taking donation requests, so pitch it as marketing | Contact form, "Marketing inquiry" |
-| Drinks | Ghia (non-alcoholic) | Design-led and colour-saturated; no tied-house question | partnerships@drinkghia.com |
+| Drinks | Ghia (non-alcoholic) | Design-led and color-saturated; no tied-house question | partnerships@drinkghia.com |
 | Drinks | The New Bar (alcohol-free shop) | Events and partnerships are on its contact form; a whole zero-proof list | Contact form, "Events & partnerships"; press@thenewbar.com |
 | Drinks | Seedlip (non-alcoholic spirits) | The category's best-known name | Contact form, "Trade inquiry" |
 | Records | Stranded Records + Superior Viaduct | A curated shop and its reissue label: crates and a Session on a release | info@strandedrecords.com; press@superiorviaduct.com |

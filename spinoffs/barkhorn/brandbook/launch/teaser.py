@@ -2,9 +2,10 @@
 
     python3 teaser.py [--aspect 16x9|4x5] [--fps 25] [--out out/earf-teaser-16x9.mp4]
 
-Silent: the music is a placeholder, a licensed track to be chosen (STORYBOARD.md). The hero beat is a real camera move,
-the horn turning through 360°: the site's 24 path-traced frames (site/img/turn-red.jpg, round 23), stepped over
-4.7 s like a turntable photo series (motion interpolation smeared the 15° steps). Every other beat is a slow move on a still. Frames are drawn with Pillow and encoded by ffmpeg.
+Silent: the music is a placeholder, a licensed track to be chosen (STORYBOARD.md). Every beat is a slow move on a still.
+Tropos is always shown whole, its cover off (owner, 2026-10-31): the horn beat is a whole speaker, not the site's turn
+sprite, whose frames crop the cabinet. Core is cordless: its stills come from the Brand Book (book/img), which carries
+the lamps lane's cordless set; the site's lamps-orbs.jpg still shows cords. Frames are drawn with Pillow and encoded by ffmpeg.
 The fonts (Instrument Sans, IBM Plex Mono; OFL) are fetched once from Google Fonts into ~/.cache/earf-fonts.
 """
 import argparse, math, os, subprocess, urllib.request
@@ -13,6 +14,7 @@ from PIL import Image, ImageDraw, ImageFont, ImageFilter
 HERE = os.path.dirname(os.path.abspath(__file__))
 B = os.path.abspath(os.path.join(HERE, '..', '..'))
 IMG = os.path.join(B, 'site', 'img')
+BOOK = os.path.join(HERE, '..', 'book', 'img')   # cordless Core, whole Tropos
 CACHE = os.path.expanduser('~/.cache/earf-fonts')
 FONTS = {'sans400': 'https://fonts.gstatic.com/s/instrumentsans/v4/pximypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr-yp2JGEJOH9npSTF-Qf1.ttf',
          'sans600': 'https://fonts.gstatic.com/s/instrumentsans/v4/pximypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr-yp2JGEJOH9npSQb_gf1.ttf',
@@ -53,11 +55,10 @@ class Teaser:
         self.f_txt = font('sans400', int(30 * u)); self.f_mono = font('mono500', int(20 * u))
         load = lambda f: Image.open(os.path.join(IMG, f)).convert('RGB')
         self.studio = load('red-studio.jpg'); self.facade = load('facade.jpg'); self.hero = load('hero.jpg' if W > H else 'hero-portrait.jpg')
-        self.orbs = load('lamps-orbs.jpg'); self.mantle = load('tt-violet-dusk.jpg')
+        book = lambda f: Image.open(os.path.join(BOOK, f)).convert('RGB')
+        self.orbs = book('lamps-orbs.jpg'); self.mantle = load('tt-violet-dusk.jpg')
+        self.horn = book('amber-studio-light.jpg')
         self.habitat = [load(f'{k}-habitat.jpg') for _, _, k in TINTS]
-        sprite = load('turn-red.jpg'); cw, ch = sprite.width // 6, sprite.height // 4
-        self.turn = [sprite.crop((c * cw, r * ch, (c + 1) * cw, (r + 1) * ch)) for r in range(4) for c in range(6)]
-        self.turn_bg = self.turn[0].getpixel((8, 8))
         word = Image.open(os.path.join(B, 'brand', 'mark', 'earf-wordmark-white.png')).convert('RGBA')
         self.word_w = word.resize((int(150 * u), int(150 * u * word.height / word.width)), Image.LANCZOS)
         wb = Image.open(os.path.join(B, 'brand', 'mark', 'earf-wordmark-black.png')).convert('RGBA')
@@ -83,7 +84,11 @@ class Teaser:
     def line(self, im, s, t, t0, dark=True, big=False, y=None):
         """A line set low left, rising 12 px as it fades in from t0."""
         a = ease((t - t0) / 0.6); m = int(80 * self.u)
-        y = y if y is not None else self.H - m - int((92 if big else 58) * self.u)
+        f = self.f_big if big else self.f_mid
+        lines = 1
+        if f.getlength(s) > self.W - 2 * m and ', ' in s:      # too wide for the 4:5 crop: break at the last comma
+            i = s.rindex(', ') + 1; s = s[:i] + '\n' + s[i + 1:]; lines = 2
+        y = y if y is not None else self.H - m - int((92 if big else 58) * self.u) * lines
         self.text(im, (m, y + int(12 * self.u * (1 - a))), s, self.f_big if big else self.f_mid, NIGHT_INK if dark else INK, a)
 
     def label(self, im, s, dark=True, alpha=1.0, top=True):
@@ -105,19 +110,13 @@ class Teaser:
         if t < 0.9:
             im = Image.blend(Image.new('RGB', im.size, NIGHT), im, ease(t / 0.9))
         self.label(im, 'EARF · San Francisco', alpha=ease((t - 0.8) / 0.6))
-        self.line(im, 'Cast in color, all the way through.', t, 1.3)
+        self.line(im, "[LINE: owner's pick]", t, 1.3)
         return im
 
     def b_turn(self, t):
         k = (t - 3.0) / 4.7
-        im = Image.new('RGB', (self.W, self.H), self.turn_bg)
-        # one turn in 24 steps, held like a turntable photo series (interpolating 15° steps smears the acrylic)
-        fr = self.turn[min(23, int(k * 24))]
-        h = int(min(self.H * 0.82, self.W * 0.86 * fr.height / fr.width)); w = int(fr.width * h / fr.height)
-        fr = fr.resize((w, h), Image.LANCZOS)
-        mask = Image.new('L', (w, h), 0); ImageDraw.Draw(mask).rectangle((int(w * .06), int(h * .06), int(w * .94), int(h * .86)), fill=255)
-        mask = mask.filter(ImageFilter.GaussianBlur(w * .03))   # feathered, so the tile's edge never shows
-        im.paste(fr, ((self.W - w) // 2, int(self.H * 0.06)), mask)
+        # the whole speaker, cover off; a slow push of 4% about its center keeps it whole on both crops
+        im = cover(self.horn, self.W, self.H, 1.0 + 0.04 * ease(k), 0.5, 0.5)
         self.label(im, 'Tropos · the horn, formed from its own acrylic', dark=False, alpha=ease((t - 3.4) / 0.6))
         self.line(im, 'The oldest amplifier is a shape.', t, 4.4, dark=False)
         return im
@@ -144,7 +143,7 @@ class Teaser:
         k = (t - 15.5) / 3.2
         if k < 0.5:
             im = cover(self.orbs, self.W, self.H, 1.06 - 0.06 * ease(k * 2), 0.5, 0.5)
-            self.label(im, 'Core · Hemisphere', dark=False)
+            self.label(im, 'Core · cordless', dark=False)
         else:
             im = cover(self.mantle, self.W, self.H, 1.0 + 0.06 * ease((k - 0.5) * 2), 0.5, 0.55)
             self.label(im, 'Mantle')

@@ -185,7 +185,7 @@ against a Lutron Diva CL, a Leviton Decora SureSlide and a Lutron Caséta.
 Yes. A quarter turn takes the shade off and another puts a new one on. Spare shades come in all eight tints.
 
 **How do I clean them?**
-Dust with a soft microfibre cloth. Wash with water and a drop of mild soap, then dry. No glass cleaner, alcohol or
+Dust with a soft microfiber cloth. Wash with water and a drop of mild soap, then dry. No glass cleaner, alcohol or
 solvents: they craze acrylic.
 
 **Do you ship outside the US?**

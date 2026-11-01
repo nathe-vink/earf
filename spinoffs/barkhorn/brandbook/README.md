@@ -31,7 +31,7 @@ the brand from what they already are, and proposes what isn't yet decided. **Pro
 
 The site (`web.py`: `CLOUDS`, `SPEC`, `LAMPS`, `TT`, the copy), the project log (`../README.md`, the owner-notes table
 and rounds), `../companions/`, `../product.py` (the rating plate), and the bar's house book. "In light" color values
-are sampled from the site's rendered coins (`site/img/coins-light.jpg`); the cast references wait for the stock-colour
+are sampled from the site's rendered coins (`site/img/coins-light.jpg`); the cast references wait for the stock-color
 research. Every cost in `IDEAS.md` and `PACKAGING.md` is an estimate, not a quote.
 
 ## Renders: where they stand
