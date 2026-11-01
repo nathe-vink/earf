@@ -25,6 +25,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ASSET = os.path.join(HERE, 'assets', 'horn2', 'tropos.blend')
 SPOT = (0.0, -2.4)                    # where the speaker now stands (the crater is at the origin)
 TURN = -22.0                          # its front turned toward the camera's side
+# the speaker's box in each frame (fractions, x0 y0 x1 y1 from the top left), measured on the proofs, with a margin
+SPEAKER_BOX = {'portrait': [0.355, 0.355, 0.64, 0.80], 'landscape': [0.40, 0.30, 0.60, 0.82]}
 
 
 def compose(sh, frame):
@@ -49,7 +51,20 @@ def compose(sh, frame):
     sh['camera'] = cam
     sh['size'] = [2400, 1600] if frame == 'landscape' else [1200, 1500]
     sh['title'] = 'Smoke in its element, aligned with the other seven (r48)'
+    # the heat shimmer (a 2D haze in the finish) keeps off the speaker where it now stands, a margin round it
+    hz = (sh.get('finish') or {}).get('dream', {}).get('haze')
+    if hz:
+        hz['exclude'] = [SPEAKER_BOX[frame]]
     return sh
+
+
+def refinish(raw, out, shot_json, frame):
+    """The finish again on a raw render, with the shimmer kept off the speaker (no new render)."""
+    sh = json.load(open(shot_json))
+    fin = sh['finish']
+    fin['dream']['haze']['exclude'] = [SPEAKER_BOX[frame]]
+    import finish as Fn
+    Fn.post(raw, out, fin)
 
 
 def main():
@@ -57,8 +72,12 @@ def main():
     ap.add_argument('worktree'); ap.add_argument('frame', choices=['landscape', 'portrait'])
     ap.add_argument('--out', required=True); ap.add_argument('--samples', type=int, default=128)
     ap.add_argument('--scale', type=float, default=1.0)
+    ap.add_argument('--refinish', help='a raw render (.raw.png) to finish again, no render')
     a = ap.parse_args()
     W = os.path.abspath(a.worktree)
+    if a.refinish:
+        sys.path.insert(0, os.path.join(W, 'studio', 'engine'))
+        return refinish(a.refinish, a.out, os.path.splitext(a.refinish)[0].replace('.raw', '') + '.shot.json', a.frame)
     src = os.path.join(W, 'renders/2026-10-18/barkhorn/element31',
                        'smoke_e12r_p19.shot.json' if a.frame == 'landscape' else 'smoke_e12r_p19-portrait.shot.json')
     sh = compose(json.load(open(src)), a.frame)
