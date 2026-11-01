@@ -500,3 +500,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - Speaker 11ebcb40: schedule + RFQ drafts on the first pair in 2064 (thin parts and port tube 2064; horn 2074); three close-ups kept
   (caldera Ember, horn layers Ice, plinth at dusk Smoke), site set ~18.5 h queued after the deck frames. Coordinator's call (on the board
   for the owner to overrule): caldera rings and plinth in 2064 1/2 in for a one-tone body; the horn stays 2074 (deep, by the horn ruling).
+- 12:40 lamps ef23b82d (Hemisphere v3 main, v2 alternative; Core dock drawn, notch closed, USB-C faces down through the hatch; LiFePO4
+  board RFQ drafted, not sent) and d62bb0e6 (budget re-run): the lamps-and-Mantle line is about $16,300 (was the stale $14,400; the
+  itemized table already said $15,500, which board v4 should have carried: my miss). With the owner's "keep $50,000, first pair in stocked
+  gray", the reserve is about $400 (the lamps line has its own 15% on made parts and molds, about $1,180). Risks: Core's two-layer ball
+  about $1,225 if the chips say "deep"; 2M Black +$530. Deck v44 ask slide shows it ($16,300; contingency about 1%, $400). Asked the
+  owner: keep $50,000 with ~$400 spare, raise to about $55,000 (a 10% reserve, my pick), or make room (e.g. Mantle's prototype later).
+  Room told: Core off its dock in the room.
