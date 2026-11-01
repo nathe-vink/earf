@@ -311,3 +311,11 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
 - Biomes 8331186a: Smoke's habitat re-composed (smoke_align.py) + the strip tool; renders in progress (~2 h cap from 04:20).
 - Owner: Smoke direction saved f4c6aca3. Open owner questions: tagline (asked); color depth; Mantle A/B; later lining
   sleeves, Mother EARF armature, editions pictures.
+
+## Check-in 11 (05:33 UTC)
+- Speaker 8650af8f: horn FLUSH with the cabinet (mouth 536 across, was 610; both horns 556-560 outside; Strata's lip 12);
+  BEM re-solve: loading and output within ~1 dB up to 1.6 kHz, so no audible cost. Lit plinth A designed (4b92a587:
+  2700 K COB strip under the bottom step, separate Class 2 24 V 15 W supply, on with the amp, dimmable). Proofs pending.
+- Biomes 46e23660 (framing matched: center 0.50, height 0.41, feet 0.78 vs the median 0.51/0.41/0.79) then 2ed79dc2
+  (--black-lining, the site's Smoke look) rendering after the owner's "the speaker doesn't look like smoke at all"
+  (saved 91533ddd; black lining now the working default unless the owner prefers white).
