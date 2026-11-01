@@ -326,3 +326,8 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
   Lit-plinth proofs rendering (three frames).
 - Biomes: idle after pushing --black-lining (2ed79dc2) without rendering ("paused"); nudged at 06:15 to render the
   portrait, the landscape and the strip.
+- 06:16 UTC: biomes lane HOLDING the dark-Smoke render: in its own session an action was declined with "stop and wait
+  for the user"; a cross-session message can't lift that. Owner told; it resumes only on the owner's go in that session
+  (session_01BAaPTnGwdpP4WKGVD3vbqx, "EARF: one world, eight biomes"). Finding: the milkiness is the asset's acrylic
+  glowing in backlight (TT ~33 %/20 mm, same as the old model), not the lining; the speaker lane asked to fix the asset's
+  Smoke material (and check the other tints in backlight).
