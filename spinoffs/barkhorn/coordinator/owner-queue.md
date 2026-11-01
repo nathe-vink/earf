@@ -664,3 +664,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 23:06 brand lane: colors F in the Brand Book and marks (f6e3dc12, from speaker 55c12c58 + TINTS.md c38f8ee6): Poison mark
   #245208 -> #376621, Haze #421D72 -> #543287 (in-light swatches #1C5B02, #44147B); the other six unchanged; collateral regenerated;
   hexes sent to the site lane for MARK_NEXT; lamps pack render re-rendering. Tagline untouched. Nothing published.
+- 23:09 site lane put the speaker lane's cabinet "deep" colors into MARK_NEXT for all eight (1a169e34): Dust, Acid, Ice and Smoke came
+  out pale. Corrected (my call, per the morning ruling that site and brand swatches follow the line's tints via the brand lane):
+  MARK_NEXT mirrors all eight marks in marks.py at r47-brand f6e3dc12 (Poison #376621, Haze #543287, the other six as the brand has
+  them); new before/after strip asked. Brand lane: colors F complete (6254153e, lamps pack render).
