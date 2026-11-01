@@ -80,9 +80,9 @@ Eight, in this order, numbered 01–08:
 | Tropos, a pair | **$19,000 (planned)** | $32,000 | $42,000, 8 pairs (one a tint) | deck; owner `R4:21`; the owner's round-14 decision of $19,000 (README:2502) |
 | Mantle | [deck figure] | $9,500 | $12,500, 8 units | owner `R4`, `R9:13` |
 | Hemisphere | $1,200 | $1,200 | $1,700, 8 a tint | owner `R4:23` |
-| Core | $750 | $750 | $1,100, 8 a tint | owner `R4:24` |
+| Core | **Not set: the owner's to set.** The deck (v41, the light and model slides) says "$650 with its cells (suggested)"; $650 was the coordinator's working figure of 2026-10-25 | about $750 | $1,100, 8 a tint | deck v41; lamps `PARTICULARS.md` (r32-lamps-final: "owner to set"); owner `R4:24` |
 
-**Superseded (don't use):** Core $650 and Hemisphere $795–895 (lamps `PARTICULARS.md`); Mantle "about $5,000" (owner
+**Superseded (don't use):** Hemisphere $795–895 (lamps `PARTICULARS.md`); Mantle "about $5,000" (owner
 `YC-W27-application-draft.md`).
 
 ## Sizes and weights (design figures until measured)
