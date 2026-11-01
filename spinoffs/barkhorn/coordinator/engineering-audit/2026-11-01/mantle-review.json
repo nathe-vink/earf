@@ -1,0 +1,258 @@
+{
+ "product": "Mantle record player: Strata Float v2 (proposal A) with v3 and Outcrop (proposal B) noted. r48 = origin/r48-mantle-design:spinoffs/barkhorn/companions/mantle-r48/ (mantle_strata_v2.py, mantle_strata_v3.py, mantle_outcrop.py, details.py, out-strata-v2/, out-outcrop/numbers.md, components.json, README.md, FAULTS.md). r32 = origin/r32-lamps-final:spinoffs/barkhorn/companions/ (launch/mantle-drive.md, launch/certification.md, launch/first-articles.md). My arithmetic is in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/review-mantle/calc/ (geom.py, lid.py, bearing.py). Downloaded references: the RB330 manual text is at /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/review-mantle/dl-rb330/rb330.txt, and Rega's 24 V motor-kit fitting instructions are at /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/review-mantle/dl-motor/doc.txt. Coordinates below use the CAD's global frame: the deck runs from x 10 to 460 and from y 10 to 370.",
+ "confirmations": [
+  "The drive-ratio error is real. Both r48:mantle_strata_v2.py and r48:mantle_outcrop.py set rpm_motor=250, Outcrop with the comment 'at 60 Hz'. derived() then gives pulley_d = round(2*150.3*(100/3)/250 - 0.6, 2) = 39.48, as in r48:out-strata-v2/render/meta.json. A synchronous motor runs at n = 120f/p, so 250 rpm at 60 Hz would need 28.8 poles, which is impossible. Retailer listings (Music Direct, Audio Advisor) sell the Neo MK2 in 50 Hz and 60 Hz versions to match regional pulleys, and forum sources give Rega's motor as 250 rpm at 50 Hz and 300 at 60 Hz. Rega's own kit instructions run the motor from a mains-frequency wall plug with a factory pulley, which is consistent. As drawn the platter turns 300 x 40.08/300.6 = 40.0 rpm on '33' and 54.0 on '45'; the correct belt face is 32.80 mm. Two things would catch this, but neither is in the v2 package: Outcrop's NOTES ('The pulley is turned to the motor's measured speed') and r32's plan to bench-run the motor first.",
+  "Strata v2 has no rear panel. In r48:mantle_strata_v2.py, Part('back-hardware', None, ...) and the 'inserts' line have no geometry: no plate, notch or holes. Yet r48:out-strata-v2/bom.md buys the RCA jacks, earth post, DPDT, DC jack and '4 M3 (the back plate)' inserts. details.py panels E and F are Outcrop only.",
+  "The LED strip can't be installed as specified. The BOM gives an 8 mm strip; the CAD has slot_w=5 and slot_h=6 and a channel 'for 5 mm LED strip, about 4.6 x 6'. boutline() gives max(Rb - inset, 2) = 2 mm corner radii at the slot in both v2 (Rb 8) and v3 (Rb 6). The loop is about 1.23 m, so 3.7 W at the claimed 3 W/m; the files say 1.48 m and 4.4 W (v1's base), and the adapter line says 6.8 W. In v2 the strip is modelled on edge, 'light facing out', which contradicts both the channel ('closed back faces up') and v3's light that 'falls ... onto the shelf'.",
+  "The DPDT bypass loading is real. Two poles can only pick what reaches the RCAs, so in bypass the S2's 47k input stays across the 2M: an outside stage sees 47k || 47k = 23.5k plus the S2's capacitance. Fixing it needs a 4PDT, a relay on the input, or no bypass.",
+  "The bearing fit and spindle conflict are real. Under ISO 286, 10 H6 is 0/+9 um and 10 g5 is -5/-11 um, so the clearance is 5-20 um, not 8-12. The BOM prices a 'Stainless steel 304' spindle at $126.02, while mantle_outcrop.py and details.py call for 440C at 58 HRC, ground to g5.",
+  "The clamp's thermal sensitivity is real. The clamp holds 20.4 mm of PMMA with a CTE difference of about 53e-6/K, so 20 K gives 21.6 um. The acrylic is about 147 MN/m in series with brass at about 2.5 GN/m (139 MN/m), so the preload changes by about 3.0 kN, against the 1.8-2.7 kN that 10 N m sets on a PTFE face. PTFE creep is a real way to lose preload, and nothing locks the nut.",
+  "The belt arithmetic checks. Outcrop: 994.3 mm pitch path and 87.3 deg of wrap. Strata v2 (motor at 184.7): 1,001.0 mm and 90.3 deg, so a 945 mm belt stretches 5.9 %. With a 32.8 mm pulley the path is 995.8 mm. 10 um of pulley run-out on a 16.7 mm pitch radius gives +/-0.06 % at 5 Hz, near the peak of the DIN weighting, which is a real share of the 0.10 % budget.",
+  "The platter numbers check: 1.74 kg net, I = 0.0196 kg m2. A 40.2 H7 bore on a 40 h6 spigot leaves 0.200-0.241 mm of clearance, so the platter can sit up to 0.12 mm off-centre: +/-0.08 % of speed at 0.56 Hz unless the rim is finished on the platter's own hub.",
+  "Rigid posts really do remove the baseline's 25-36 Hz float. Per post: 56.5 MN/m axial and about 10.5 MN/m lateral. That gives sway at about 345 Hz and bounce at about 800 Hz. The deck's D is 5,063 N m, and the bare 145 mm overhang's first mode is about 345 Hz.",
+  "My mass build-up for Strata v2 is 11.5 kg with the centre of mass at (231, 198); the audit had (231, 201). On foot centres that gives 59 N on the left edge and 65 N on the right, matching the audit. See the recompute for the effect of foot width.",
+  "The arm facts match the RB330 manual, which I downloaded and read: 'must be 222mm'; 'requires a diameter of 25mm', so the puck's 24 mm hole is a real error; the clearance arc must be 'within the rear and side edges ... (and the lid when closed)'; and 'at least 250mm' to the inside front, which is 270 mm here. The null points are 56.9 and 116.8 mm, and the 2M on the RB330 resonates at 7.7-8.1 Hz.",
+  "The supply and compliance points stand. Digi-Key and RS list the Mean Well GST25A24-P1J as Class I with an IEC C14 inlet, not the BOM's 'C8 ... Class 2 / LPS'. A 25 W source puts the LED circuit in PS2 under 62368-1, and r32:launch/certification.md's advice ('15 W or less' LPS) was not carried into r48. No US listing was found for the Neo.",
+  "The paperwork conflicts are real. The NOTES in mantle_strata_v2.py, which feed sheet MS2's notes, still describe v1: a 24.3 stack, M6 studs at 4 N m, a 3 x 6 slot 25 mm in, a printed band and brass feet. The v3 BOM calls the posts 'Stainless steel 304' while the CAD note says 303, and it has no line for the Plexus MA310 the v3 docstring calls for.",
+  "The left hinge's M4 insert hole (x 80, z 78.2) is 12.3 mm from the 76 mm motor pocket and sits exactly on the 12.7/12.7 bond line at z 78.2.",
+  "The S2 placement in Strata is workable. It lifts out between the rear posts with 130 mm clear for a 103 mm box, and its rear panel (y 325) is about 45 mm inside the deck's back edge, so its plugs fit. Outcrop's tunnel has no such room; see the new risks.",
+  "One genuinely good feature the audit didn't credit: the bearing flange (5 mm counterbore), the arm puck (12 mm counterbore) and the motor shoulder (6 mm) all register to the deck's top face. The roughly 10 % thickness tolerance of cast sheet therefore never stacks into record height, arm height or the belt plane."
+ ],
+ "corrections": [
+  {
+   "subsystem": "Motor (Rega 24 V kit) and its mounting",
+   "original_status": "sound on paper, needs a prototype test",
+   "corrected_status": "questionable: not mounted the way the kit is designed to be, and the parts are unproven",
+   "why": "The audit says the motor is 'mounted the way Rega mounts it'. That is not supported. Rega's 24 V motor upgrade-kit fitting instructions (2011 edition, phonophono.de download id 1141; the text is saved in my scratch folder) hard-mount the motor on adhesive pads ('Thin (double) or Thick (triple)'). They say 'the pulley is factory fitted to a set height', press the motor with a bias pad from a cover tray, and carry the PCB in that tray with socket A (wall plug) and socket B (TT PSU). The team's own r32:launch/mantle-drive.md describes the kit as 'a hand-tuned board and a rigid mount'. No document supports r48's BOM line 'Rega's motor mounting grommets (three), as fitted to the 24 V motor kit's mount' ($15, marked estimate). These are therefore assumed or undesigned: the three-grommet hang, removal of the factory-fitted pulley (and whether the shaft takes Mantle's grub-screw pulley), the tray and PCB location, and the socket B lead. A motor on grommets, with its pulley about 17 mm above the grommet plane, can rock under belt pull, which is a path for flutter."
+  },
+  {
+   "subsystem": "Main bearing",
+   "original_status": "sound on paper, needs a prototype test",
+   "corrected_status": "questionable: fill, venting and static margin wrong as drawn",
+   "why": "The audit missed three things. (1) Oil volume. details.py and the README say 2.5 ml 'to 10 under the flange'. With the spindle in, the drawn housing holds 1.23 ml to that line and 1.68 ml to the brim (Strata v2); Outcrop holds 1.20 and 1.51 ml. So 2.5 ml overflows onto the hub and the acrylic, and so would the service note's '1 ml every two years'. (2) No vent. No flat or groove is drawn on the spindle or the bushes, so the 1.84 ml the spindle displaces must squeeze up through the 5-20 um bush clearance. With 20.3 N on 78.5 mm2 (0.26 MPa) and VG 32 oil, seating takes about 10-70 min at 20 um, 1-9 h at 10 um and 10-75 h at 5 um. The note's 'the oil has to pass the ball' names the wrong restriction. (3) The Hertz pressure of 2.32 GPa is 55 % of ISO 76's 4.2 GPa, not 'under half'. That is statically safe, but a 10 g jolt with the platter on gives 5.0 GPa, which would brinell the plate. The notes already say to ship with the platter assembly out."
+  },
+  {
+   "subsystem": "Floating deck on posts, feet, isolation and stability (Strata v2)",
+   "original_status": "sound on paper, needs a prototype test",
+   "corrected_status": "the structure is sound on paper; the isolation claim is wrong; the tipping numbers are conservative",
+   "why": "Sorbothane's own Engineering Design Guide gives the dynamic spring rate as E(1 + 2 SF^2)A/t. A bonded 36 x 4 pad has SF 2.25, a factor of 11.1, so the feet sit at about 187 Hz on 11.5 kg, not 56 Hz. Outcrop's 40 x 4 pads have SF 2.5, a factor of 13.5, giving about 186 Hz on 13.1 kg. I used E = 1.4 MPa; Sorbothane's 50-duro data gives 1.2-1.6 MPa at 50 Hz, and it is stiffer at about 190 Hz, so 185-210 Hz is the realistic range. The static strain is about 0.2 %, against the 10-20 % Sorbothane designs for. So nothing below about 260 Hz is isolated, and the README and numbers.md claim that the feet 'keep 70 Hz and up off the deck' is false: the deck behaves like a Rega-style rigid plinth. Tipping: on foot centres the audit's 59 and 65 N are right. With the 36 mm feet's outer edges as the pivot, the figures are 84 and 90 N (8.5-9 kgf). Past that the deck rocks about 10 deg onto the base's edge (16 mm up, 92 mm outboard of the pivot); it cannot fall. It is a rattle and stylus-skip risk, not a toppling hazard."
+  },
+  {
+   "subsystem": "Outcrop (proposal B): stance, cover, phono tunnel",
+   "original_status": "questionable",
+   "corrected_status": "missing or wrong: the phono tunnel can't take its plugs, and the proposed foot fix is blocked",
+   "why": "In r48:mantle_outcrop.py the tunnel runs from y 251 to the notch face at 370 (119 mm), and the S2 is drawn from y 253 to 368, with 3.5 mm a side, 0.5 mm on top and 1.5 mm under. Retail listings give the S2 as 103 x 36 x 115 or 103 x 37 x 119 mm, with every connection on its rear panel: RCA in, RCA out, earth and 18 V DC. There is no room for one plug at either end; RCA plugs and their cable bend need about 40-50 mm. The arm lead's groove also enters at the tunnel's front (262, 271), away from the S2's inputs. The audit's fix of moving the back foot to x 236 falls inside the tunnel (x 156-266, a 4 mm floor), and moving the foot forward of the tunnel makes things worse (about 12 N at the left-rear corner). My tip figures are 14-18 N on foot centres and 26-30 N on the 40 mm feet's edges, the same order as the audit's 18-23 N."
+  },
+  {
+   "subsystem": "Dust cover (Strata's hinged lid) and the arm's clearance under it",
+   "original_status": "questionable",
+   "corrected_status": "questionable (confirmed), but the clash is not established and the torque arithmetic needs fixing",
+   "why": "Clash. The lid's inner right wall is at x 456 and the pivot at x 405, 51 mm away. With the CAD's own counterweight envelope (34 dia, 38-66 mm behind the pivot), first contact comes at r of about 110 mm, so only about 42 % of a side plays; that is worse than 'late in each side'. But the envelope is the CAD's guess, not Rega data. A retailer gives the RB330's steel weight as 95 g and 35 mm OD; balancing a 7.2 g 2M probably puts its rear face about 50-60 mm behind the pivot. A weight ending 60 mm back touches at r 69-81; one ending 55 mm back or less clears. The real margin is about -10 to +5 mm, so this needs Rega's template and a full-sweep check; 'probably stops the arm' overstates what is known. Torque. The audit scaled the flat-lid torque by cos 45. The lid's centre of mass is about 184 mm ahead of and 52-70 mm above the hinge line, which gives 2.03 N m flat, 1.8 N m at 15 deg, about 0.9-1.0 N m at 45 deg (not 1.40), and zero at about 69-74 deg. The worst holding case is near closed, and above about 70 deg the lid falls backward unless the hinge has a stop."
+  },
+  {
+   "subsystem": "Lit base (LED strip, channel, dimmer, heat)",
+   "original_status": "missing or wrong",
+   "corrected_status": "missing or wrong (confirmed); the heat verdict was too generous",
+   "why": "'Heat is NOT a concern' rests on a 3 W/m COB strip that no part number backs. Narrow 24 V COB strips run about 5 W/m (a 4 mm, 5 W/m, 2700 K CRI 90 part is listed) up to the common 8-15 W/m. A fin model of the base (9.5 mm PMMA, k 0.19, about 8 W/m2K a face, plus the slot's opening) dissipates about 0.35 W per metre per K. That is a rise of about 9 K at 3 W/m, 14 K at 5 W/m, 28 K at 10 W/m and 42 K at 15 W/m, so a typical COB strip at full dimmer in a 25-35 C room puts the slot wall at 55-75 C, at or past the 65 C acrylic limit. Separately, v2's 9.5 mm base under a 6 mm slot leaves a 3.5 mm skin (about 2.7-4.3 mm with cast tolerance), half of FAULTS #1's own fix (12.7 base, 6.7 mm); v3's 12.7 base restores it."
+  },
+  {
+   "subsystem": "Platter and hub",
+   "original_status": "sound on paper, needs a prototype test",
+   "corrected_status": "sound on paper, needs a prototype test (with one added weakness)",
+   "why": "The audit missed one weakness: the six ISO 7380 M4 heads (7.6 mm across, in 8 x 4 counterbores) bear directly on acrylic, with no washer and no torque given. 0.3, 0.5 and 1.0 N m give about 13, 21 and 42 MPa under the heads, above PMMA's long-term creep and craze level of about 10 MPa. The screws will relax, and the platter then has 0.2-0.24 mm of spigot clearance to shift in. Two wording fixes. 'Both are insulators' is wrong as written: the brass housing and steel spindle conduct, but the record and the acrylic platter don't, so earthing the housing can't drain the playing surface. And the 0.04 % impedance-match figure assumes a bonded interface; a record resting on a platter isn't bonded, so that figure is marketing physics. It is harmless to the build."
+  },
+  {
+   "subsystem": "Phono stage (Pro-Ject Phono Box S2) and power supplies",
+   "original_status": "sound on paper, needs a prototype test / questionable",
+   "corrected_status": "unchanged, with smaller numbers corrected",
+   "why": "Retail specs give the S2 as 18 V at 80-85 mA, so about 1.5 W, not the 0.5 W in numbers.md and the audit. That is harmless in Strata's open gap, and about 10 K over ambient in Outcrop's closed tunnel. Its height is 36 mm in some listings and 37 mm in others, so Outcrop's 38 mm tunnel on 1.5 mm runners may be 0.5 mm short, and Strata keeps about 1.5-2.5 mm. The Mean Well is Class I: check that an earthed C13 mains cord is supplied, since none is in the BOM."
+  }
+ ],
+ "recomputed": [
+  {
+   "quantity": "Platter speed as drawn (39.48 mm pulley on the US 60 Hz Neo)",
+   "documented_value": "files: 33.33 rpm (rpm_motor=250 'at 60 Hz'); audit: 40.0 rpm and 54.0 rpm",
+   "recomputed_value": "motor 120 x 60/24 = 300 rpm (405 rpm on 45): 300 x 40.08/300.6 = 40.0 rpm, 54.0 rpm; correct belt face 300.6 x 33.333/300 - 0.6 = 32.80 mm",
+   "agrees": true,
+   "note": "Agrees with the audit; the files are wrong (250 rpm at 60 Hz needs 28.8 poles)."
+  },
+  {
+   "quantity": "Belt path, wrap and stretch (Strata v2, motor at 184.7 mm)",
+   "documented_value": "files: 992-994 mm, 87 deg, about 945 mm belt at '5 %'; audit: 1,001 mm, 90.3 deg, 5.9 %",
+   "recomputed_value": "1,001.0 mm pitch path, 90.3 deg, 5.9 %; Outcrop 994.3 mm, 87.3 deg; with the 32.8 mm pulley 995.8 mm",
+   "agrees": true,
+   "note": "Agrees with the audit."
+  },
+  {
+   "quantity": "Hertz contact, 6 mm WC ball on a 52100 plate",
+   "documented_value": "files and audit: a = 65 um, p0 = 2.32 GPa, 'under half' of the static limit",
+   "recomputed_value": "E* = 169 GPa, a = 64.6 um, p0 = 2.32 GPa = 55 % of ISO 76's 4.2 GPa (58 % of the files' 4 GPa); a 5 g jolt gives 3.97 GPa, 10 g gives 5.0 GPa",
+   "agrees": false,
+   "note": "The pressure agrees; 'under half' is false. Static margin is about 1.8x; there is no shock margin with the platter installed."
+  },
+  {
+   "quantity": "Bush running clearance, 10 H6 / 10 g5",
+   "documented_value": "files: 8-12 um; audit: 5-20 um",
+   "recomputed_value": "H6 0/+9, g5 -5/-11, so 5-20 um",
+   "agrees": true,
+   "note": "Agrees with the audit. 8-12 um needs selective fitting."
+  },
+  {
+   "quantity": "Bearing oil fill",
+   "documented_value": "files: 2.5 ml 'to 10 under the flange'; audit: not checked",
+   "recomputed_value": "free volume with the spindle in: Strata v2 1.23 ml to top-10 and 1.68 ml to the brim; Outcrop 1.20 and 1.51 ml",
+   "agrees": false,
+   "note": "2.5 ml overflows by about 0.8-1.3 ml onto the hub and acrylic."
+  },
+  {
+   "quantity": "Time for the spindle to seat (no vent drawn)",
+   "documented_value": "files: 'lower it back slowly (the oil has to pass the ball)'",
+   "recomputed_value": "1,838 mm3 through the bush gap at 0.26 MPa, VG 32 at 0.05-0.07 Pa s: about 10-70 min at 20 um, 1-9 h at 10 um, 10-75 h at 5 um diametral clearance",
+   "agrees": false,
+   "note": "The restriction is the bushes, not the ball. Needs a flat or spiral groove."
+  },
+  {
+   "quantity": "Clamp preload change for 20 K",
+   "documented_value": "audit: about 3.0 kN, against 1.7-2.8 kN of preload",
+   "recomputed_value": "139 MN/m x 21.6 um = 3.0 kN; preload at 10 N m is 1.8-2.7 kN (PTFE face friction 0.05-0.1)",
+   "agrees": true,
+   "note": "Agrees with the audit."
+  },
+  {
+   "quantity": "Feet natural frequency",
+   "documented_value": "files: 50 Hz (Outcrop, 'read this as a floor'); audit: 56 Hz (Strata), 50.5 Hz (Outcrop), 'likely higher'",
+   "recomputed_value": "Sorbothane EDG k = E(1 + 2SF^2)A/t: Strata 36x4 (SF 2.25, x11.1) = 15.9 MN/m on 11.5 kg = 187 Hz; Outcrop 40x4 (SF 2.5, x13.5) = 17.8 MN/m on 13.1 kg = 186 Hz; realistic range 185-210 Hz",
+   "agrees": false,
+   "note": "No isolation below about 260 Hz. Static strain is about 0.2 %, against Sorbothane's 10-20 % design range. E is estimated from Sorbothane's 50-duro data, not measured."
+  },
+  {
+   "quantity": "Strata v2 mass and centre of mass",
+   "documented_value": "audit: about 11.5 kg at (231, 201); files: none",
+   "recomputed_value": "11.5 kg at (231, 198): deck 4.60 kg net, base 1.20, turning 2.07, bearing 0.38, lid 1.13, S2 0.57, arm and puck 0.47, motor 0.41, feet 0.41, posts 0.14, hinges 0.1",
+   "agrees": true,
+   "note": "Agrees with the audit."
+  },
+  {
+   "quantity": "Strata v2 side-edge tip force",
+   "documented_value": "audit: 59 N (left), 65 N (right)",
+   "recomputed_value": "on foot centres 59.2 and 65.1 N; with the 36 mm feet's outer edges as pivots, 84 and 90 N; it then rocks about 10 deg onto the base's edge and cannot fall",
+   "agrees": false,
+   "note": "The audit's figures are a conservative lower bound; the real force is 6-9 kgf."
+  },
+  {
+   "quantity": "Outcrop left-rear corner tip force",
+   "documented_value": "audit: 18-23 N",
+   "recomputed_value": "centre of mass at (231, 200) to (233, 190) is 29-38 mm inside the line from the front-left to the back foot, with the corner 264 mm outside: 14-18 N on foot centres, 26-30 N on 40 mm foot edges; the front-right foot lifts about 19 mm",
+   "agrees": true,
+   "note": "Same order (2-3 kgf). Moving the foot to x 236 hits the S2 tunnel; two rear feet flanking the tunnel plus one front-centre foot gives about 46 N or more."
+  },
+  {
+   "quantity": "Lid wall vs counterweight: first contact",
+   "documented_value": "audit: the counterweight reaches 448 (r 100) and 455.8 (r 53) against the wall at 446 (deck frame), stopping the arm from about r = 105",
+   "recomputed_value": "global frame: wall x 456, pivot x 405. CAD envelope: first touch at r = 109.6 mm (about 42 % of a 146-to-60 side plays); a 30-35 mm weight ending 60 mm behind the pivot touches at r 69-81; one ending 55 mm or less clears",
+   "agrees": false,
+   "note": "The arithmetic agrees with the audit's CAD-based figure; its 'probably' does not hold, because the result depends on the real RB330 weight (95 g, 35 mm OD per a retailer), whose position is unmeasured."
+  },
+  {
+   "quantity": "Lid torque about the hinges (1.13 kg lid)",
+   "documented_value": "audit: 1.98 N m flat, 1.40 N m at 45 deg (0.70 a hinge)",
+   "recomputed_value": "centre of mass 184 mm ahead and 52-70 mm above the hinge line: 2.03 N m flat, 1.77-1.82 at 15 deg, 0.89-1.03 at 45 deg, zero at 69-74 deg (over centre)",
+   "agrees": false,
+   "note": "The worst holding case is near closed. Above about 70 deg the lid needs a stop."
+  },
+  {
+   "quantity": "LED loop power and slot-wall temperature rise",
+   "documented_value": "files: 1.48 m, 4.4 W (adapter line 6.8 W); audit: 1.23 m, 3.7 W, rise 10-25 K, 'NOT a concern'",
+   "recomputed_value": "1.22-1.23 m; the base fin conducts about 0.35 W per metre per K, so about 9 K at 3 W/m, 14 K at 5 W/m, 28 K at 10 W/m, 42 K at 15 W/m",
+   "agrees": false,
+   "note": "Fine only at 5 W/m or less. Common 24 V COB strips (8-15 W/m) put the slot wall at 55-75 C in a 25-35 C room."
+  },
+  {
+   "quantity": "Phono Box S2 power draw",
+   "documented_value": "files and audit: 18 V x 0.03 A = 0.5 W",
+   "recomputed_value": "retail specs: 18 V at 80-85 mA = 1.4-1.5 W",
+   "agrees": false,
+   "note": "Minor. No thermal consequence in Strata; about 10 K in Outcrop's closed tunnel."
+  },
+  {
+   "quantity": "Arm and cartridge resonance (RB330 + 2M)",
+   "documented_value": "audit: 7.7-8.1 Hz",
+   "recomputed_value": "(11 + 7.2 + 1) g with 20-22 um/mN gives 7.7-8.1 Hz",
+   "agrees": true,
+   "note": "Agrees. With feet near 190 Hz, footfall at 2-20 Hz reaches this resonance unattenuated."
+  },
+  {
+   "quantity": "Platter screw-head bearing stress on acrylic",
+   "documented_value": "files: six M4 x 20 ISO 7380 in 8 x 4 counterbores, no washer, no torque",
+   "recomputed_value": "bearing area 29.5 mm2: 0.3, 0.5 and 1.0 N m give 375, 625 and 1,250 N, so 13, 21 and 42 MPa",
+   "agrees": false,
+   "note": "New. The files give no stress; these values exceed PMMA's long-term creep and craze level of about 10 MPa."
+  },
+  {
+   "quantity": "Thin webs (Strata v2)",
+   "documented_value": "FAULTS #10 asks for webs of 24 mm or more; audit: hinge insert about 12 mm from the motor pocket",
+   "recomputed_value": "hinge insert at x 80: 12.3 mm; arm-puck counterbore (84.4 dia, 12 deep) to the deck's right edge: 460 - 405 - 42.2 = 12.8 mm, and its floor (z 78.9) is 0.7 mm above the bond line (z 78.2)",
+   "agrees": true,
+   "note": "Agrees on the hinge web; the puck web is new."
+  }
+ ],
+ "new_risks": [
+  {
+   "risk": "Outcrop's S2 tunnel leaves no room for connections. The box fills the 119 mm tunnel to within 2 mm at each end and 3.5 mm a side, while all of the S2's RCA, earth and DC connections are on its rear panel. The arm lead's groove also arrives at the tunnel's front, away from the inputs.",
+   "severity": "high",
+   "fix": "Lengthen the tunnel by about 50 mm (move the brass plate back, or recess it deeper), or add a harness bay behind the S2 with a cable path from the arm groove. Measure the S2's real depth (listings give 115-119 mm) and height (36-37 mm) before cutting."
+  },
+  {
+   "risk": "The motor mount is not Rega's method. Rega's kit instructions hard-mount the motor on adhesive pads, with a factory-fitted pulley at a set height, a bias pad and a cover tray carrying the PCB and the Neo socket (B). No grommet hang appears in them, the BOM's '$15 Rega grommets as fitted to the kit' may not exist, and the factory pulley must come off before Mantle's rim-drive pulley can go on.",
+   "severity": "medium",
+   "fix": "Get the current kit in hand before drawing the plate. Either mount it as Rega does (adhesive pad on a rigid plate, with a bias pad) or prove the grommet hang with a W&F test. Confirm the pulley can be pulled without harming the motor and that the shaft takes a grub-screw pulley. Design where the tray and PCB go and the socket B lead in both proposals."
+  },
+  {
+   "risk": "The bearing is over-filled and has no vent. 2.5 ml of oil goes into about 1.2 ml of space, so the excess runs onto the hub and acrylic, and ester-type synthetic oils can craze stressed PMMA. With no flat or groove, the spindle takes tens of minutes to hours to seat and traps air.",
+   "severity": "medium",
+   "fix": "Specify about 1.0-1.2 ml and fill to a mark with the spindle in. Grind a 0.3-0.5 mm flat or a spiral groove along the spindle journals, or a vent slot in the bushes. Choose a PAO or mineral oil checked against PMMA, and fix the service note."
+  },
+  {
+   "risk": "The feet don't isolate. Using Sorbothane's own spring-rate formula they sit at about 185-210 Hz, so the README's 'isolation in the feet' and 'keep 70 Hz and up off the deck' claims are false. Speaker feedback and footfall reach the deck and the arm's 8 Hz resonance unattenuated.",
+   "severity": "medium",
+   "fix": "Drop the isolation claim and treat the feet as damped rigid feet (as on a Rega), or design real isolation for 10-15 % strain with a target well below the arm band. Replace r32's 'float 15-20 Hz' pass criterion with a measured transmissibility or rumble check."
+  },
+  {
+   "risk": "Outcrop's proposed stability fix is blocked. The middle-back foot position lies inside the S2 tunnel (x 156-266, a 4 mm floor), and moving that foot forward of the tunnel cuts the left-rear tip force to about 12 N.",
+   "severity": "medium",
+   "fix": "Flip the tripod: two rear feet flanking the tunnel and one front-centre foot, which gives about 46 N or more at the worst corner. Or use four levelled feet."
+  },
+  {
+   "risk": "The platter's six M4 button heads bear directly on acrylic at 13-42 MPa, with no washer and no torque given. Over time they creep, craze and loosen, and the platter can then shift in its 0.2-0.24 mm spigot clearance, adding wow and noise.",
+   "severity": "low",
+   "fix": "Fit stainless washers of 10 mm OD or more, or a thin brass clamp ring, torque to about 0.3 N m with thread-locker, and re-check after a thermal cycle."
+  },
+  {
+   "risk": "With a real COB strip, the LED slot wall can reach 55-75 C. The 'no heat concern' verdict rests on an unspecified 3 W/m strip.",
+   "severity": "low",
+   "fix": "Specify a strip of 5 W/m or less, 5 mm wide or narrower (a 4 mm, 5 W/m, 2700 K CRI 90 24 V COB part exists), or cap the power with a listed adapter of 15 W or less. Thermocouple the slot at 100 % in a 35 C enclosure."
+  },
+  {
+   "risk": "In Strata, the RB330 pivot sits 90 mm outboard of the right posts on a 145 mm PMMA overhang: bare first mode about 345 Hz, about 250 Hz with the closed lid's edge mass, Q about 15-30. The arm-to-bearing loop runs through the most compliant part of the deck.",
+   "severity": "low",
+   "fix": "In the planned tap test, measure the puck against the bearing with an accelerometer. If a 250-350 Hz peak shows, move the right posts under the arm, which also improves tipping, or stiffen that edge."
+  },
+  {
+   "risk": "There are thin webs at load points: the arm-puck counterbore is 12.8 mm from the deck's right edge with its floor 0.7 mm above the bond line, and the left hinge insert is 12.3 mm from the motor pocket and on the bond line. Both are against FAULTS #10's 24 mm rule.",
+   "severity": "low",
+   "fix": "Move the platter and arm group 12-15 mm left (keeping the 222 mm), which also adds lid clearance, and move the left hinge block or its inserts inboard and off the bond line."
+  },
+  {
+   "risk": "The lid goes over centre at about 69-74 deg, so above that it loads the hinges backward. r32's test of holding at any angle from 15 to 80 deg will fail unless the Debut hinge has a stop.",
+   "severity": "low",
+   "fix": "Confirm the hinge's stop angle, or limit opening to about 65 deg with a stop on the hinge block."
+  },
+  {
+   "risk": "Strata v2's 9.5 mm base leaves only a 3.5 mm skin over the 6 mm light slot (about 2.7-4.3 mm with cast tolerance), half of FAULTS #1's own fix.",
+   "severity": "low",
+   "fix": "Keep v3's 12.7 mm base, or face the base before routing the slot."
+  }
+ ],
+ "overall_after_review": "not yet sound",
+ "verdict_in_one_line": "The audit's main findings hold: the 20 % drive-ratio error, Strata's missing rear panel, the LED strip that can't fit, the DPDT bypass loading, the bearing fit and spindle conflict, and the PS2 light circuit. But it was too generous on four points. Rega hard-mounts this motor kit, so the grommet hang is the designers' own invention. The feet sit near 190 Hz, so they don't isolate. The bearing is specified 2.5 ml of oil for about 1.2 ml of space, with no vent. And Outcrop's S2 tunnel has no room for a single plug. It was also too sure of the lid clash, which depends on an RB330 counterweight nobody has measured. Not yet sound."
+}

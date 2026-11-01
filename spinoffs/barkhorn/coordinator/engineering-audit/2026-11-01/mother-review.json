@@ -1,0 +1,206 @@
+{
+ "product": "Mother EARF: the 1.25 m multicolour cast-acrylic globe of six slotted discs, now meant for a plinth in the lantern after hanging over the bar in earlier rounds. Also covered: main's 1 m kit and the 300 mm desk globe with its UV-A base.",
+ "confirmations": [
+  "Overall verdict confirmed. At bar scale the piece is renders plus 2D outline files. Nothing structural is designed at 1.25 m: no hang point, rigging, secondary, plinth armature, anchorage or lighting.",
+  "Hanging confirmed missing. The only specification is 'a 3 mm cable' (r33-planet-world:spinoffs/barkhorn/planet/r39/FINALS.md:14), modelled as a 6 mm rod (kit39.py:142, _cyl radius 0.003). The load is 1.86-2.04 kN, so the design factor is about 3:1 at best. A-102 ('hung from the joists') and the House Book (r42/housebook/index.html:285 'hangs over it') still contradict r43/VENUES.md:17 ('will stand on a plinth, not hang') and r44/CONCEPTS.md:18 ('It cannot hang').",
+  "Cemented joints: the critique is right in substance. Round 33c's 'A dry fit holds' (main:spinoffs/barkhorn/companions/README.md:868) is false, because every piece except Poison is a butt joint with nothing to grip. Weld-On 4 is the water-thin capillary grade, and users report it failing to bond on exactly a 1/64 in (0.4 mm) gap. No annealing step appears anywhere. One nuance: a thickened solvent cement (Weld-On 16, which round 33b specified) is made for small gaps. A polymerising cement (Weld-On 40 or Acrifix 2R 0190) is still the right call for structural 25 mm joints.",
+  "Plinth confirmed undefined. As modelled (r44/kit44.py:531-537 into r43/kit43ams.py:109-127), the post bears on one Acid sector. The 'south pole's cradle' in kit43ams's comment does not exist: with the 23.4 degree lean the south pole is 249 mm off the post. The tipping figures (0.37, 0.64 and 0.90 g) check exactly.",
+  "Night glow confirmed render-only. Rim emission is a shader tuned from 0.14 down to 0.011 (r41/r41_colour.py:40-58). components.json:432 says 'nothing to buy'. Main's own note says the 1 m piece is day-only (companions/README.md:857-858). TECH.md:20 calls the strip method both 'as proofed' and 'to prove in a 300 mm test piece'. The strip arithmetic is right: 21.72 m of rim, 217 W, 9.05 A at 24 V, 23 separately fed segments, and at least three 100 VA Class 2 supplies.",
+  "Desk-globe glow mismatch confirmed. globe_colour.py:152 leans the globe about Y, so Poison's plane contains the base point. Haze's and Dust's planes are 20.2 degrees away, while the UV ring covers only 11.5 degrees. Haze is not fluorescent and is fed at 395 nm, where the eye's sensitivity V(lambda) is about 0.0002, so 'glows dimmer' really means nearly dark. The night render still gives all six rims 2.5 (globe_colour.py:185).",
+  "Cut-file defects confirmed by parsing the SVGs (scripts: /tmp/audit-mother/svgarea.py and /tmp/audit-mother/sliver.py). Every outline is written twice, once per face, plus zero-area side loops. Poison has 3 loops; each sector file has 30 loops, 18 of them zero-area. The six 1000 files total 3.8126 m2. There are no files at 1.25 m or 5 mm, and no BOM, jig drawing or checks file.",
+  "The 13 vs 23 piece-count conflict is confirmed. main:spinoffs/barkhorn/out-globe-mono/pieces.json gives the 8 mm parallels 1 piece each. The meridian cutter reaches only 112.8 mm at a parallel's top face, against its 114.9 mm radius. The same sliver survives in kit39's 1.25 m model: the cutter reaches 470.7 mm against a 478.8 mm radius.",
+  "Certification gaps confirmed. main:spinoffs/barkhorn/launch/launch-readiness.md covers T, H, C and M only. Under NEC 410.6 any wired, lit version is a luminaire that must be listed or field-evaluated. The team's own row 7 puts USB-powered lamps under UL 153. So the desk globe also needs an FCC Part 15B SDoC if its touch or dimming circuit is digital, plus an IEC 62471 assessment.",
+  "Fire: confirmed flagged but unanswered (planet/README.md:284, 363-364; House Book :381). 180-208 kg at about 25 MJ/kg is 4.5-5.2 GJ. In r44 the piece sits in a closed oak-and-wool room whose own DESIGN.md:173 recommends sprinklers, so sprinklers should be a condition of the plinth version.",
+  "Hard spot and coloured shadow: confirmed as the only part that works today, using any listed LED spot. One caveat: the shadow depends on 25 mm tints made lighter than the cabinets' stock (kit39.py:34-35), which means custom castings that nobody has sourced or priced.",
+  "The number conflicts were spot-checked and are real: 1 m vs 1.25 m across; centre heights of 2.47, 2.54 and 2.60 m; a 3 mm cable vs a 6 mm rod; 160 vs 113 kg; 5 vs 8 mm sheet; 13 vs 23 pieces; the desk-price inversion; and R10's sphere vs the discs (already logged at r47-brand CONTRADICTIONS.md:57).",
+  "All geometry was recomputed independently: /tmp/audit-mother/geom.py (masses, cable foot, plumb line, plinth post, tipping, 60-degree joints, rim notch, rim power, groove heat) and /tmp/audit-mother/trap.py (rim extents and clearance to the bass trap)."
+ ],
+ "corrections": [
+  {
+   "subsystem": "Structure: six slotted discs, 23 cemented pieces",
+   "original_status": "questionable",
+   "corrected_status": "missing or wrong (bar piece); questionable (desk piece)",
+   "why": "Three things are worse than the audit says. First, the cut files are mid-plane sections, so every edge is cut square, but Haze and Dust meet Poison (and each other) at 60 degrees along the polar axis. A square edge at the file's 14.9 mm from the axis sits 6.65 mm from Poison's mid-plane on one face and 19.15 mm on the other. So in 25 mm sheet it runs 5.85 mm into Poison and leaves a 6.65 mm gap; in 8 mm sheet the figures are 1.85 mm and 2.15 mm. The 3D model hides this because its booleans cut the bevel, and no document says to machine one. Second, 22 of the 23 pieces are held by cement alone, not 20: every piece except Poison pulls straight out, including Dust's V-groove. Third, the cement is wrong for the gap and there is no annealing step. The documented method therefore cannot produce a sound joint at bar scale."
+  },
+  {
+   "subsystem": "Suspension over a table (rounds 39-42)",
+   "original_status": "missing or wrong",
+   "corrected_status": "missing or wrong (unchanged; two supporting claims corrected)",
+   "why": "(1) 'No disc lies under the plumb line through the centre of mass' is false. With kit39's lean, the plumb line passes through an Ember sector 0.438 m above the centre, 174 mm off the axis and 87-174 mm from every slot, so it is in solid sheet. The cable foot ends 25 mm directly above that point. A hang point there would hold the 23.4 degree lean, but it would put 1.86-2.04 kN on one 3.2 kg sector held by two solvent joints, so the verdict stands. (2) The README's 'slab' is not invented. The brief (r33-planet-world:spinoffs/barkhorn/planet/BRIEF.md:14; README:109) says '14 ft to the slab, a concrete shell', and the rendered fir deck at 3.4 m can be read as a finish below that slab. Only the r42 and r44 shells (joists at 15'-9\") have no slab."
+  },
+  {
+   "subsystem": "Plinth (the current plan, rounds 43-44)",
+   "original_status": "missing or wrong",
+   "corrected_status": "missing or wrong (the audit's fix is itself wrong)",
+   "why": "The diagnosis is right; the cure is not. 'Bolted through the plinth to the structural slab with an isolation detail through the floated floor' defeats itself: a rigid tie across a 7 Hz jack-up floor short-circuits the isolation, and a resilient sleeve means it is no longer a seismic anchor. The right detail is to anchor the plinth to the 100 mm floated slab and to restrain that slab with seismic snubbers, which any spring floor in SF needs anyway. Also, the post's tilted top edge does more than come near Acid in the model: it runs about 9 mm into Acid's lower face. The lowest disc point is 0.455 m up, not 0.44 m; 0.44 m is the sphere's bottom, which is open space."
+  },
+  {
+   "subsystem": "Heat in the rim grooves",
+   "original_status": "sound on paper, needs a prototype test",
+   "corrected_status": "sound on paper, needs a prototype test (the audit overstates the rise)",
+   "why": "I used the audit's own inputs (k = 0.19, t = 25 mm, h = 10). The infinite-fin conductance is sqrt(2hkt) = 0.31 W/m.K, and the rim face adds h x t = 0.25 W/m.K. So 7 W/m of heat raises the groove wall about 12.5 K, or 16 K at h = 7, not about 24 K. With 2-10 K more inside the groove, a 10 W/m strip runs at about 40-50 C in a 25 C room. That is inside cast PMMA's roughly 80 C service limit and most strips' 60-75 C Tc, so 10 W/m is acceptable indoors, not 'marginal'. The 32 C ceiling case applied only to the hung version, which has been abandoned."
+  },
+  {
+   "subsystem": "Night glow at bar scale (the signed look)",
+   "original_status": "missing or wrong",
+   "corrected_status": "missing or wrong (unchanged; detail corrected)",
+   "why": "The 2 m strip sheet is not 'the only physical method named anywhere'. kit39.py:6-12 names an opal core lamp feeding each meridian's inner edge; the parallels cannot reach it, and the owner rejected the core. Round 33c names fluorescent sheet under UV, which it rules out at 25 mm. Neither changes the verdict. The audit also undercounts the dark gaps. 24 V strip can only be cut every 50-100 mm, so each end of the 22 open segments can be up to one cut interval unlit, on top of the 26-30 mm slot. A 0.48 m parallel-sector arc could be 10-20 % dark, while the render shows a continuous ring."
+  },
+  {
+   "subsystem": "Cut files and fab package",
+   "original_status": "questionable",
+   "corrected_status": "missing or wrong",
+   "why": "Beyond the doubled outlines, the files cannot make 4 of the 23 pieces at any size. The Haze and Dust halves need 60-degree bevels: a single 30-degree bevel on Haze and a chevron on Dust, which a 2D outline cannot carry. The parallels' rims also want a 40-degree conical edge to follow the sphere. The fixed 241-point sampling clips corners by up to about 0.7 mm, and the two copies of each outline differ (for example, the Haze half's y-extent is 499.78/499.56 in one copy and 499.56/499.78 in the other). There are no 1.25 m or 5 mm files."
+  },
+  {
+   "subsystem": "300 mm desk globe: UV-A base",
+   "original_status": "sound on paper, needs a prototype test",
+   "corrected_status": "questionable",
+   "why": "The audit's own findings already go past 'sound on paper': a mismatched UV feed, an unkeyed globe, and a base that tips at about 20 degrees. Add three more. The 8 mm cut files interfere by 1.85 mm at the 60-degree joints. The 'seat' is a 35 mm-radius, 4 mm-deep dimple with a 63 mm ring pocket inside it, so only two points on Poison's rim bear and the globe is neutrally stable about its centre. And the electronics have no schematic. The power is trivially safe (about 1 W at 5 V), but as a product shown for sale it is not yet sound."
+  }
+ ],
+ "recomputed": [
+  {
+   "quantity": "Gross disc area and mass, 1.25 m in 25 mm",
+   "documented_value": "6.35 m2; about 190 kg, or 208 kg at +10 % (planet/README.md:360-361)",
+   "recomputed_value": "6.349 m2; 188.9 kg; 207.8 kg at 27.5 mm",
+   "agrees": true,
+   "note": "Four great circles of 4.909 m2 plus two 40-degree parallels of 1.440 m2, x 1190 kg/m3."
+  },
+  {
+   "quantity": "Net object mass at 1.25 m (slot strips removed)",
+   "documented_value": "Audit: about 0.27 m2 of strips; 181 kg / 199 kg",
+   "recomputed_value": "0.314 m2 of strips; 179.5 kg / 196.5 kg (slots cut to measured sheet + 0.8 mm)",
+   "agrees": true,
+   "note": "Within 1.5 %. The same strip formula gives 0.250 m2 at 1 m, which matches the cut files (4.063 - 3.813 m2). So the audit's 0.27 m2 at 1.25 m is about 15 % low, which changes nothing that matters."
+  },
+  {
+   "quantity": "1 m mass and 2 m mass",
+   "documented_value": "Cut files 3.813 m2 = 113 kg; README 160 kg in 25 mm; 2 m 485 kg (TECH.md:18)",
+   "recomputed_value": "3.8126 m2 parsed from the six 1000 SVGs = 113.4 kg (gross 120.9 kg); 160 kg back-solves to 5.38 m2 of bought sheet; 2 m = 16.25 m2 = 483.5 kg",
+   "agrees": true,
+   "note": "The 160 kg figure includes offcut, as planet/README.md:361 says."
+  },
+  {
+   "quantity": "Hung load against the 3 mm cable",
+   "documented_value": "1.86-2.04 kN; 3 mm 7x19 MBL 4.69-5.77 kN; 2.3-3.1:1",
+   "recomputed_value": "Same. 1770-grade galvanised 3 mm 7x19 is listed at 5.77 kN (GS Products), giving 2.8-3.1:1; stainless rope is lower, about 2.3-2.7:1",
+   "agrees": true,
+   "note": "The cable is far below 5:1 (slings) and 8:1 (rigging over people)."
+  },
+  {
+   "quantity": "Hero cable foot and the plumb line (kit39 in door-mother-colour-p3)",
+   "documented_value": "0.479 m above the centre; 95 mm from Haze and Dust; 25 mm above Ember; 'no disc under the plumb line'",
+   "recomputed_value": "0.479 m; 95.2 mm; 25.0 mm above Ember's top face. But the plumb line passes through an Ember sector at 0.438 m, 174 mm off the axis, in solid sheet",
+   "agrees": false,
+   "note": "The three distances are exact; the 'no disc' claim is wrong. The conclusion that there is no viable hang point stands."
+  },
+  {
+   "quantity": "Plinth geometry and tipping (r44)",
+   "documented_value": "Centre 1.07 m; post top 27 mm from Acid's mid-plane and 186 mm off the axis; tips at 0.37 / 0.64 / 0.90 g; lowest disc 0.44 m",
+   "recomputed_value": "Centre 1.0675 m; 27.2 mm and 186.0 mm; the post's tilted 60 mm-radius top edge comes within 3.3 mm of Acid's mid-plane, so it runs about 9 mm into Acid; tips at 0.37 / 0.64 / 0.90 g; lowest disc point 0.455 m",
+   "agrees": true,
+   "note": "A solid terrazzo plinth (0.80 x 0.40 m) is 483 kg."
+  },
+  {
+   "quantity": "Peel stress on a parallel sector's joints from 100 kg on its rim",
+   "documented_value": "981 N x 0.45 m = 441 Nm over Z = 9.4e-5 m3, about 4.7 MPa",
+   "recomputed_value": "2.4-4.7 MPa",
+   "agrees": false,
+   "note": "The audit used the radial 0.45 m as the lever. The load at mid-rim is only 0.24 m (perpendicular) from each joint line, and part of the moment goes into the joints' stiff in-plane mode. A plate estimate (edge moment of about F/4 to F/2 per metre) gives 2.4-4.7 MPa, so the audit's figure is the upper bound. The conclusion holds: a good solvent joint gives about 12-18 MPa, and a starved one far less."
+  },
+  {
+   "quantity": "Groove-wall temperature rise at 7 W/m of heat",
+   "documented_value": "About 24 K, plus 2-5 K inside the strip",
+   "recomputed_value": "12.5 K (h = 10) to 16 K (h = 7), plus 2-10 K inside: 15-26 K in total",
+   "agrees": false,
+   "note": "The fin conductance is 0.31 W/m.K and the rim face adds 0.25 W/m.K. At 10 W/m the strip is fine indoors."
+  },
+  {
+   "quantity": "Pieces held by cement alone",
+   "documented_value": "20 of 23",
+   "recomputed_value": "22 of 23 (every piece except Poison)",
+   "agrees": false,
+   "note": "Every non-Poison piece pulls out along its wedge's opening direction, so nothing is captured."
+  },
+  {
+   "quantity": "60-degree meridian joints cut square from the 2D files",
+   "documented_value": "Not addressed",
+   "recomputed_value": "25 mm sheet: 5.85 mm interference and 6.65 mm gap. Cutting the edge back to clear (22.1 mm from the axis) leaves a wedge 0.4-12.9 mm wide. 8 mm sheet: 1.85 mm interference and 2.15 mm gap",
+   "agrees": false,
+   "note": "Edge at (t/2 + gap)/sin 60 from the axis; its corners sit at that x sin 60 -/+ (t/2) cos 60 from Poison's mid-plane."
+  },
+  {
+   "quantity": "Parallel rim notch, rim length and strip power at 1.25 m",
+   "documented_value": "Notch 10.8 mm; 21.72 m; 217 W; 9.1 A; 109 W at 5 W/m; 23 segments",
+   "recomputed_value": "Meridian rim at 468.0 mm (top face) and 489.0 mm (bottom face) against the parallel's 478.8 mm; 21.72 m; 217 W; 9.05 A; 109 W; 23 segments (Poison is a closed loop, 22 open arcs, about 0.58 m of slot gaps)",
+   "agrees": true,
+   "note": "There is a 10.8 mm notch on one side and a 10.2 mm protrusion on the other."
+  },
+  {
+   "quantity": "Desk globe: UV ring coverage and tipping",
+   "documented_value": "Ring within about 12 degrees; Haze about 20 degrees away; tips at about 20 degrees, about 6.6 N at the top",
+   "recomputed_value": "Ring at 11.5 degrees; Haze and Dust planes at 20.2 degrees; combined centre of mass about 148-151 mm up; atan(55/148) = 20.3 degrees; about 6-7 N at the 318 mm top",
+   "agrees": true,
+   "note": "The globe sits 168 mm up; the anodised base is about 0.5 kg."
+  },
+  {
+   "quantity": "Assembled globe against the r44 doors",
+   "documented_value": "Not addressed (plan44.py:41: every door a 3'-0\" leaf, 32 in clear)",
+   "recomputed_value": "The rims reach 0.613-0.620 m from the centre. In any direction a meridian lies within 30 degrees, so the minimum width is at least 1.08 m, against 0.81 m clear",
+   "agrees": false,
+   "note": "The globe cannot pass the doors once assembled."
+  },
+  {
+   "quantity": "Clearance to the bass trap and rocking frequency (r44)",
+   "documented_value": "Not addressed (MOTHER x = STACK_X + 0.45; STACK_X = TRAP.x0 - 1.10)",
+   "recomputed_value": "The centre is 0.650 m from the trap face and the furthest rim reaches 0.613 m at heading 30, leaving 37 mm. Rocking mode about 22 Hz (my estimate, for an assumed 120 x 6 mm tube 0.67 m to the centre, 190 kg, J about 30 kg.m2)",
+   "agrees": false,
+   "note": "The lantern's axial modes are 23.5 and 32.1 Hz (DESIGN.md:101). The post itself is not designed."
+  }
+ ],
+ "new_risks": [
+  {
+   "risk": "The 2D cut files cannot make the three meridians' 60-degree joints. Cut square at 14.9 mm from the axis, a 25 mm Haze or Dust edge runs 5.85 mm into Poison and leaves 6.65 mm open (8 mm sheet: 1.85 mm and 2.15 mm). Cut back far enough to fit, it leaves a 0.4-12.9 mm wedge that solvent cement cannot fill. That puts the four largest cemented pieces (about 17.7 kg each at 1.25 m) on line contact. The 3D model hides this because its booleans cut the bevel.",
+   "severity": "medium",
+   "fix": "Publish per-piece 3D files (STEP) with the bevels called out: Haze a single 30-degree bevel, Dust a chevron, and the parallels a 40-degree conical rim. Machine them on a 5-axis router or with tilted tooling. Better still, end the side meridians at a central steel hub, which also gives the plinth or hang armature. Prove it on the 300 mm piece."
+  },
+  {
+   "risk": "The assembled globe cannot get into the room or be handled. It is at least 1.08 m wide in every direction, and r44's doors are 32 in (0.81 m) clear. So 23 pieces would have to be solvent-cemented in a jig inside the lantern. Once cemented it cannot be lifted by its rims without loading the joints, and it can never leave with the lease, as the 'bolted and demountable' lantern can (plan44.py:19). TECH.md's 2 m plan instead ships 'the six discs flat' and slots them onto an armature with 2 mm of play. That is a different construction from FACTS.md's 'cemented clear where they cross'.",
+   "severity": "medium",
+   "fix": "Pick one construction. A bolted, demountable armature with floating clamps (TECH.md:26-27, 52-53) lets the discs travel flat and makes the cement cosmetic. Write down the lifting points, the install sequence and the removal sequence."
+  },
+  {
+   "risk": "The plinth sits on the lantern's 7 Hz jack-up floor. The globe and a solid terrazzo plinth come to about 670 kg on 0.5 m2 (about 13 kPa), on springs that deflect about 5 mm under static load. Without added mounts the floor will dip and tilt locally. The audit's tie through to the structural slab would short-circuit the isolation the room is built around.",
+   "severity": "medium",
+   "fix": "Have the acoustician add or re-rate mounts under the globe's plinth and under each Tropos plinth (about 570 kg each). Anchor the plinth to the floated slab, and restrain that slab with seismic snubbers. Feed any power to the plinth through a flexible whip, never rigid conduit across the isolation."
+  },
+  {
+   "risk": "The globe can couple acoustically with the room and has almost no clearance behind it. On a plausible post, its rocking mode (about 22 Hz, estimated) and a free 1.25 m disc's first plate mode (about 27 Hz) sit on the lantern's 23.5 and 32.1 Hz modes, between the Tropos pair on the same floated floor. Any loose cradle contact or starved joint will buzz. r44 also puts the rims 37 mm from the slotted-oak trap face: there is no room to clean behind it and a real chance of contact.",
+   "severity": "low",
+   "fix": "Clamp the globe positively to a stiff armature with resilient pads. Move it so the rims are at least 150 mm from the trap. Have the acoustician model its reflections. After install, run a 20-120 Hz sine sweep at listening level and listen for rattles."
+  },
+  {
+   "risk": "If the piece is rim-lit inside the lantern, PWM-dimmed 24 V strips and DALI drivers in the plinth would sit between the speakers and near the turntables' phono cabling. Low-frequency PWM buzz and radiated noise can reach a room built for silence.",
+   "severity": "low",
+   "fix": "Use constant-current-reduction dimming or PWM above 20 kHz. Keep the drivers remote and on the lighting side of DESIGN.md:172's isolated audio circuits, and route the globe's 24 V away from phono and speaker runs."
+  },
+  {
+   "risk": "The desk globe's electronics are generic and unschematised, and four known traps apply. A USB-C sink without 5.1 kohm Rd on CC1 and CC2 gets no power from C-to-C chargers. A capacitive 'touch dimmer under the rim' cannot sense through anodised aluminium unless the whole base is the electrode. Twelve parallel LEDs on one constant-current driver will hog current. And fluorescent dyes photobleach under constant UV-A, so the glow fades first nearest the ring.",
+   "severity": "low",
+   "fix": "Draw a schematic and PCB with the Rd resistors, per-LED or per-string current control, a base-as-electrode touch input with TVS protection, and a cavity for the board and socket. Get the sheet maker's lightfastness data and run a 500 h UV soak on a sample."
+  },
+  {
+   "risk": "The audit's own fix, a steel hub 'bolted to every disc', creates a thermal mismatch: acrylic moves about 70 um/m.K against steel's 12. Over the 1.25 m axis and a 15 K swing that is about 1.1 mm. If constrained at bolt holes (Kt about 3), that is up to about 8 MPa locally, enough to craze acrylic that has been cemented or cleaned.",
+   "severity": "low",
+   "fix": "Give each disc one fixed point. Use oversized or slotted holes, nylon or EPDM bushings and washers, and floating clamps (TECH.md:53), with no solvent near the holes."
+  },
+  {
+   "risk": "The cement formulations have changed. IPS reformulated Weld-On 3, 4 and 16 without DCM and TCE in 2025, and vendors report methylene-chloride cements being phased out under EPA's 2024 rule. Joint strength and crazing behaviour taken from older experience may not carry over.",
+   "severity": "low",
+   "fix": "Name the current formulation (or Weld-On 40 or Acrifix 2R 0190) in the spec. Check Acrifix 1R 0192's composition and US availability. Run the coupon pull and peel tests with the cement that will actually be used."
+  }
+ ],
+ "overall_after_review": "not yet sound",
+ "verdict_in_one_line": "The audit stands: at bar scale Mother EARF is a render with no hang point, armature, plinth design or light source. Three of its details are wrong: the plumb line does cross an Ember sector, 22 of 23 pieces (not 20) rely on cement alone, and bolting through the floated floor would defeat its isolation. It also missed that the 2D cut files cannot make the 60-degree meridian joints, and that the assembled 1.25 m globe cannot pass the plan's 32 in doors."
+}

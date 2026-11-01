@@ -1,0 +1,241 @@
+{
+ "product": "Hemisphere (pendant: Vero SE 10 COB on a 180 mA driver, the \"575 lm\" level, shade swapped on a 30° bayonet) and Core (cordless table lamp: hollow formed acrylic ball on a 120 × 30 base, three LiFePO4 18650 cells, proposed contact dock). The strata proposals (Terrace, Halo, Contour Core) are noted. Branch: origin/r32-lamps-final.",
+ "overall": "not yet sound",
+ "one_line": "Not yet. Hemisphere is close: the COB and driver are real bought parts and the 2.7 W heat budget holds up, but the hub-side retention of the overhead shade isn't drawn and the COB runs right at the driver's 24 V floor. Core is described rather than designed: no board, no chosen LED, the LED's heat sealed in an acrylic pocket (my estimate is +30 to +45 K over the room), a hollow formed ball (not solid), and a dock whose written pin and ring geometry can't make contact.",
+ "subsystems": [
+  {
+   "name": "Hemisphere: LED module and driver (how 575 lm is reached)",
+   "as_designed": "COB: Bridgelux Vero SE 10, 2700 K, CRI 90 (BXRC-27G1000-D-73), on an Ideal Chip-Lok holder, 22 mm up a 46 mm bore. Reflector: a spun cone (45 mm mouth, 20 mm at the COB, 21 mm deep), made to order, about $6. Driver: ERP Power ESS010W-0180-42 in the canopy (180 mA, 24-42 V, 7.6 W, TRIAC/ELV/0-10 V, Class 2, FCC 15B). Claims: about 590 lm at the COB (the owner's '575 lm' level) at about 24.6 V and 4.4 W; about 500 lm out of the fitting; about 500 lux directly below and 380 lux across a 90 cm table with the rim 700 mm above it.",
+   "status": "questionable",
+   "evidence": "origin/r32-lamps-final:spinoffs/barkhorn/companions/components.json (hemi-cob, north-driver-575), out-dome-pendant/bom.md, PARTICULARS.md, README.md round 42. The ERP part exists: a Future Electronics listing gives 100-277 VAC, 7.6 W, 180 mA, 24-42 V. Light: 180 mA is 51 % of the COB's 350 mA nominal (26.0 V, about 1,130 lm). Scaling linearly gives 581 lm, and about 590 with the efficacy gain at low current is plausible. Power is 0.18 × 24.6 = 4.43 W, so about 133 lm/W at the COB. Out of the fitting: 590 × 0.85 = 502 lm. The 85 % is an estimate; with a bright-dipped anodised cone (about 85 % reflectance, not Miro's 95 %) expect about 470-500 lm. Voltage: 24.6 V typical at Tc 25 °C is only 0.6 V over the driver's 24 V floor. At the design's Tc of about 50 °C the string loses about 0.4-0.6 V (about −2.5 mV/K per die × 8-9 dies). At the test plan's Tc 85 °C it loses about 1.2-1.4 V, to about 23.3 V. That fails the docs' own pass mark of at least 24.5 V at 85 °C (launch/first-articles.md). Low-Vf bins and deep dimming go lower still. The alternate, EPtronics LD6W120-36-C0170-TL (22-36 V), only dims to about 15 %.",
+   "check": "'575 lumens' is the COB's output, not the luminaire's. The fitting is estimated to deliver about 470-500 lm. The voltage headroom is the real weak point, and the docs flag it as UNCONFIRMED.",
+   "to_prove": "Get Bridgelux's minimum Vf at 180 mA. Bench three or more production-bin COBs on the ERP driver at Tc 25 and 85 °C, at 108 and 132 V, and at 10 % and 1 % dim. If they fail, move to a COB whose Vf sits mid-window or to a driver whose window starts at 20 V or below. Run LM-79 (integrating sphere or goniophotometer) for delivered lumens and an IES file."
+  },
+  {
+   "name": "Hemisphere: thermal path and acrylic temperatures",
+   "as_designed": "Round 41 low top, no fins. Path: COB → thermal pad → 6061 hub core (Ø62) → neck → black anodised crown (Ø80 × 11.5) and an aluminium cap (Ø40 × 14) in room air. A PEEK ring (0.25 W/m·K) is the thermal break between the hub and the shade's collar. 575 lm only.",
+   "status": "sound on paper, needs a prototype test",
+   "evidence": "origin/r32-lamps-final:spinoffs/barkhorn/companions/hemisphere_thermal.py (I ran it). Heat = 4.3 − 575/310 + 0.15 × 1.85 = 2.7 W. Top to room is 7.3 K/W, in parallel with the collar path (9.2 + 6.9 = 16.1 K/W), about 5 K/W overall, so +13.7 K. That gives hub 49 °C, Tc 50 °C, junction 52 °C and acrylic by the collar 41 °C in a 35 °C room. My hand check: the top's area is about 0.0097 m²; with about 8 W/m²·K convection and about 6 W/m²·K radiation that is 0.136 W/K, or 7.4 K/W, the same as the script. With no collar path at all: 2.8 W × 7.4 = +21 K, hub about 56 °C. The acrylic is heated only through the collar, the air trapped in the inverted bowl and a sliver of light, so it can't run hotter than the hub. That caps it at about 49-56 °C in a 35 °C room, far under cast PMMA's 90-105 °C softening and the 65 °C UL 1598 figure the docs cite. Assumptions to watch: R_hub-collar 9.2 and R_collar-room 6.9 K/W are guesses (the script's sensitivity rows move the acrylic only from 41 to 44 °C); luminous efficacy of radiation 310 lm/W; 85 % out; Rj-c 0.9 K/W 'to confirm'; the neck-to-crown joint is ignored. strata/CRITIQUE.md item 9 says about 3.3 W and +31 K, but it counts only the top's area and too little power leaving as light. About 2.7 W is the defensible figure.",
+   "check": "At 2.7 W this is a low-stress, credible estimate. 1,100 lm is correctly ruled out, and the 180 mA driver can't reach it anyway.",
+   "to_prove": "Run the thermocouple plan in README.md round 35 and launch/first-articles.md: acrylic at or under 50 °C at 35 °C ambient, Tc at or under 85 °C, crown and cap at or under 60 °C, with the mock 100 mm ceiling recess."
+  },
+  {
+   "name": "Hemisphere: bayonet shade mount and the overhead load path",
+   "as_designed": "The shade weighs about 1.1 kg (0.8 kg acrylic plus 0.29 kg aluminium collar and clamp). It is clamped between the collar's internal spherical flange and an M96 × 1.5 clamp ring on silicone rings, so a failed bond can't drop it. The collar hangs on three Ø4 stainless pins in J-slots: lift about 5 mm, turn 30°, lower. A ball spring plunger of about 10 N is the detent. The pins sit in a PEEK ring on the hub; the hub's neck sits in the crown 'on a thermal pad'; the crown holds the cap on two M3; the cap holds the cord grip (and the optional cable).",
+   "status": "questionable",
+   "evidence": "origin/r32-lamps-final:spinoffs/barkhorn/companions/crystal.py. N['turn'] = 30.0, so it is not a quarter turn. The pins are modelled from r 33 to 43.5, inside the PEEK ring (ID 62, OD 78, z 86-100) and 2 mm short of the hub. The hub core is a plain Ø62 cylinder from z 60 to 100 with no shoulder under the ring, and nothing fastens the ring to the hub or the Ø40 neck to the crown's Ø40.2 bore. The plunger isn't modelled. components.json (dome-pins 'pressed into the hub', dome-plunger 'threaded into the hub') contradicts the PEEK-ring design. Loads are tiny (3.6 N a pin; about 0.15 MPa bearing on the PEEK), so retention, not strength, is the problem. PEEK expands about twice as fast as aluminium, so a press fit on Ø62 loosens by about 0.04 mm over a 25 K rise, and PEEK creeps. Release needs only an upward push of about 8 mm (for example a head bump: over a 750 mm table the rim hangs about 1.45 m off the floor) plus a counter-twist. The 'drop of thread-lock' on the clamp sits beside clamped PMMA, and anaerobic threadlockers craze acrylic.",
+   "check": "Clamping the shade, rather than hanging it on a bond, is sound. The hub-side joints that carry it are not drawn.",
+   "to_prove": "Draw a hub shoulder plus screws or a retaining ring for the PEEK ring, a threaded or screwed neck-to-crown joint, and a secondary lock (a captive set screw or a sprung latch). Use a plastic-safe thread lock. Tests: a 4× weight pull for 1 h at 50 °C; 200 swaps; a 10 mm upward push with about 0.5 N·m of twist must not release; drop the shade from its hung height."
+  },
+  {
+   "name": "Hemisphere: suspension, canopy and the two versions",
+   "as_designed": "Hardwired: an 18 AWG 2-conductor SVT/Class 2 textile cord carrying 26 V DC, with listed grips in the cap and canopy, and the driver inside a 150 × 50 black cast-acrylic canopy over a steel junction-box strap. Plug-in swag (UL 153, the recommended first listing): a ceiling hook, the cord swagged to a plug, a listed Class 2 supply plus a constant-current (CC) stage, and a 1.5 mm stainless suspension cable as an option (about $12). The cable is needed because UL 153 lets an SPT-2 cord carry 2.5 lb (1.1 kg) and the fixture is 1.59 kg.",
+   "status": "questionable",
+   "evidence": "origin/r32-lamps-final:spinoffs/barkhorn/companions/crystal.py north_parts (canopy in black cast acrylic over the driver; 'suspension' is an option). out-dome-pendant/bom.md: the suspension is under Options, the listing is '[PRICE]', and there is no crossbar, ground screw or wire connectors. launch/certification.md. hemi_mounting.py says the swag has 'no canopy', while launch/boards.md puts 'a small constant-current board in the canopy'. No listed 180 mA CC plug-in was found.",
+   "check": "Black cast acrylic is HB-rated, so it can't be the enclosure for a 120 V driver's leads and splices under UL 1598. The strata Terrace and Halo BOMs show the right build: an aluminium canopy, a crossbar with a ground screw, and stainless cable on listed grippers.",
+   "to_prove": "Choose the version. Hardwired: a metal canopy or a listed remote driver enclosure, plus a crossbar and ground. Swag: decide where the CC stage lives and how it is listed. Make the cable standard and draw its anchor in the 40 × 14 cap. Pull-test the cord grips at 35 lb (UL 1598 5.15.2)."
+  },
+  {
+   "name": "Hemisphere: dimming",
+   "as_designed": "The ERP driver dims by forward or reverse phase at 120 V, or 0-10 V, from 1 to 100 %. The swag version would use an in-line low-voltage dimmer (PWM above 20 kHz, or analog).",
+   "status": "sound on paper, needs a prototype test",
+   "evidence": "origin/r32-lamps-final:spinoffs/barkhorn/companions/components.json north-driver-575 (PF over 0.9 and THD under 20 % are series figures); README.md round 35 JA8 table; launch/first-articles.md dimming test on a Lutron Diva CL, a Leviton SureSlide and a Lutron Caséta. At 10 % (18 mA) and 1 % the COB's forward voltage falls about 1.5-2.5 V below its full-current value, further under the driver's 24 V floor (see the LED item).",
+   "check": "Deep dimming is where the headroom problem will show first. PF at 4.4 W on a 7.6 W driver (58 % load) is unverified.",
+   "to_prove": "Measure flicker % and frequency at 100, 50, 10 and 1 %, watch for pop-on and dropout, measure PF and THD at 120 V, and keep noise under 24 dBA for JA8."
+  },
+  {
+   "name": "Hemisphere: shade construction (three formed layers) and its glow",
+   "as_designed": "A 9 mm tinted shell drape-formed from 10 mm cast sheet, a 3 mm opal liner and a 3 mm tinted skin (formed into a female mould), with 1 mm air gaps, a turned rim and an ePTFE vent. Three aluminium moulds: $1,500 + $1,200 + $1,200.",
+   "status": "questionable",
+   "evidence": "origin/r32-lamps-final:spinoffs/barkhorn/companions/crystal.py cover_parts draws even 9/3/3 mm walls. out-dome-pendant/bom.md: shell 446, liner 117 and skin 111 cm³, about 0.8 kg of acrylic. A 200 × 100 mm hemisphere is a 1:2 draw with twice its footprint's area, so the wall averages about half the sheet and the last-formed zone thins most. README.md round 35 admits 'thinner toward the rim [the former confirms]', but the CAD, the weights and the tint casts assume even walls. No anneal is stated for the formed and rim-bonded shade. Optics: README.md round 35 says that with the 46° cut-off 'almost none of the COB's light reaches it', yet lamps_campaign.py gives the liner its own glow (shade_glow 0.19-0.3) in the dining hero.",
+   "check": "The glowing tinted dome in the campaign pictures is a render setting. The engineered fixture will show a mostly dark shade with a lit rim and a white pool on the table.",
+   "to_prove": "Get the former's thickness map on a first pull. Anneal after forming and bonding. Re-render with no self-emission, or measure the shade's luminance, before using the look to sell."
+  },
+  {
+   "name": "Hemisphere: certification path (UL 1598 / UL 153, FCC, JA8)",
+   "as_designed": "First listing: a plug-in swag under UL 153 on a listed Class 2/LPS supply. Later: hardwired under UL 1598 with a UL 8750 driver, via UL Limited Production Certification for a small batch. FCC 15B. JA8 for California hardwired installs.",
+   "status": "sound on paper, needs a prototype test",
+   "evidence": "origin/r32-lamps-final:spinoffs/barkhorn/companions/launch/certification.md quotes UL 1598 (2018): a Class 2 secondary needs no enclosure and no V-0 for the shade; acrylic 65 °C (Table 15.1.2); 35 lb cord pull; UL 153's cord-weight and clamp-grip rules. launch/lab-rfq/ holds four unsent drafts. The BOM's listing line is '[PRICE]'; R3 estimates $6-15k for the plug-in and $5-12k for limited production.",
+   "check": "The route is credible. Before a lab sees it: fix the stale CAD note (crystal.py NOTES_DOME 'Listed to UL 1598 with any shade') and the acrylic canopy. R9 sits at Bridgelux's 50 minimum.",
+   "to_prove": "A lab pre-review, the temperature test, an FCC scan with the driver, and the JA8 items (R9 on the order, 10 % dimming, flicker, PF)."
+  },
+  {
+   "name": "Core: the cells (3-cell LiFePO4 pack)",
+   "as_designed": "Three Power Sonic PSL-FP-IFR18650EC LiFePO4 18650s in parallel (1S3P), in three Keystone 1042-type holders round the LED, behind a four-screw aluminium hatch. User-replaceable.",
+   "status": "off-the-shelf / proven",
+   "evidence": "I read the Power Sonic datasheet (linked from origin/r32-lamps-final:spinoffs/barkhorn/companions/components.json core-cells-18650): 3.2 V; 1.5 Ah at 0.2C to 2.0 V; 4.8 Wh; 38 mΩ or less; maximum charge 1.5 A (1C), standard 0.5C to 3.65 V; discharge to 2.5 V; charge 0-45 °C (15-35 °C recommended); 2,000 cycles at 100 % DOD to 80 %; 65 × 18.2 mm; 40 g; UL 1642, IEC 62133, UN 38.3. The pack is parallel: 3.2 V nominal (2.5-3.65 V), 4.5 Ah, 3 × 4.8 = 14.4 Wh ✓. Each cell is under 20 Wh and the set under 100 Wh. Load at full: 2.5 W / 0.9 / 3.2 V = 0.87 A, or 0.29 A (0.19C) a cell ✓.",
+   "check": "Real, certified cells used within their ratings. Their temperature in the base is the risk (see the heat item). The datasheet says 'Button' terminal; the BOM says 'flat top'.",
+   "to_prove": "Get the IEC 62133-2 report and the UN 38.3 test summary. Measure capacity to 2.5 V at about 0.2C at 25 and 45 °C."
+  },
+  {
+   "name": "Core: control board (charger, protection, per-cell switching, gauge, touch, MCU) and its cost and route",
+   "as_designed": "A 48 mm ring board, described only. USB-C 5 V 3 A sink; ADI LTC4162-F switching LiFePO4 charger with power path; a '90 % limit' at about 3.45 V a cell; a protector; a fuel gauge; NTC hold-off from 0 to 45 °C; a FET per cell with a power-up check (each cell 2.5-3.65 V, all within 0.1 V) and a blink code; capacitive touch on the anodised ring; test pads and a test mode; under 0.1 W standby. $34 a board at 500 off.",
+   "status": "missing or wrong",
+   "evidence": "origin/r32-lamps-final:spinoffs/barkhorn/companions/launch/boards.md says it plainly: no schematic, layout, gerbers, MPN BOM or firmware. Only the LTC4162-F is named; the MCU, protector, gauge, FETs and LED driver are unchosen. It estimates 4-6 engineer-weeks, about $16-40k (160-240 h × $100-175/h = $16-42k, so the arithmetic holds). The LTC4162-F is real: 4.5-35 V in, 1-9 LFP cells, 3.2 A, and 3.4125 V + n × 12.5 mV a cell, so 3.45 V can be set. But the -F family also has fixed-voltage ordering codes (for example -FST, listed as a fixed 3.6 V part). Physics: LFP's open-circuit voltage is flat at about 3.3 V from roughly 20 to 95 %, so a 3.45 V hold to termination still ends near full. The '90 %' is not 90 %, and voltage-based gauging won't work on this chemistry.",
+   "check": "Cheaper routes in the files: a plug-in v1 on bought modules (launch/core-v1-plugin.md, 2-4 days); an OEM cordless-lamp board with a listed Li-ion 1S2P pack ($2-5k NRE, a spec change); a fixed-price design house ($12-20k). Not considered anywhere: a keyed, factory-made 1S3P LiFePO4 pack with its own protection behind the same hatch. It is still user-replaceable under EU 2023/1542, and it removes per-cell switching, the wrong-cell fault tests and the PHMSA 'cells wired to a board' question.",
+   "to_prove": "A schematic, MPN BOM, layout and firmware; a bench run on the DC2038A-F evaluation kit; the wrong-cell, reverse-cell and mixed-charge tests; an EMC pre-scan."
+  },
+  {
+   "name": "Core: 2.5 W warm-dim LED and its driver",
+   "as_designed": "'A 30 mm round warm-dim LED board, two channels (2200 K and 2700 K, CRI 90+), about 2.5 W at full, 200 lm', from 'Nichia or Seoul (to choose)', $9 estimated. Its driver is a two-channel constant-current stage on the unbuilt board. It shines up through a sealed acrylic window into the ball's 40 mm port.",
+   "status": "missing or wrong",
+   "evidence": "origin/r32-lamps-final:spinoffs/barkhorn/companions/out-orb-table/bom.md 'led' and components.json moon-led-table still include 'a second 4-LED ring at the column's foot to light the column (0.3 W)', text inherited from Moon; Core has no column. crystal.py orb_parts puts the LED at z 13.2-14.8 over a chassis that ends at z 12.2, so in the CAD the LED floats 1 mm above its heat spreader. 200 lm / 2.5 W = 80 lm/W is plausible for CRI 90 warm-dim.",
+   "check": "Easy to buy, but nothing is chosen. The 2.5 W, the efficacy and the flicker are all assumptions.",
+   "to_prove": "Choose the module and driver IC. Measure lm, W, CCT across the dim range and flicker, and the light that leaves the ball in each tint."
+  },
+  {
+   "name": "Core: runtime and charge time",
+   "as_designed": "Runtime: 4.7 h at 2.5 W and 5.8 h at 2 W at the 90 % limit (5.2 and 6.5 h on a full charge). Charge: 'about 2 h' (PARTICULARS.md, README.md round 42) or '2 to 3 h, the charger at about 1.5 A' (CORE-RECHARGE.md).",
+   "status": "questionable",
+   "evidence": "Runtime arithmetic checks: 14.4 × 0.9 / 2.5 = 5.18 h, × 0.9 = 4.67 h; 14.4 × 0.9 / 2.0 = 6.48 h, × 0.9 = 5.83 h. Charge: 90 % is 4.05 Ah. At the specified about 1.5 A (origin/r32-lamps-final:spinoffs/barkhorn/companions/launch/boards.md, CORE-RECHARGE.md) that is 2.7 h of constant current alone, which fails launch/first-articles.md's own '90 % in at most 2.5 h'. 'About 2 h' needs about 2.25 A (0.5C a cell, the datasheet's standard rate), so more input power and more heat in the base. Since LFP's '90 %' is really about 95 % or more (see the board item), the real runtime would sit nearer the full-charge figures. Thermal foldback, if it is needed, would cut both runtime and charging.",
+   "check": "The runtime is internally consistent but rests on an unchosen LED and an unbuilt driver's 90 % efficiency. The charge-time numbers conflict between files.",
+   "to_prove": "Set the charge current, then run the first-articles runtime and charge tests on the real board at 25 and 35 °C, with the lamp on and off."
+  },
+  {
+   "name": "Core: heat in the 30 mm base",
+   "as_designed": "The LED and board sit on a 50 × 1.6 mm aluminium 'chassis' (the heat spreader) inside a Ø50.4 pocket in the black cast-acrylic drum, with an air space below it down to the aluminium hatch. The cells are 1-2 mm of acrylic away. The base is sealed to IP44. Nothing in the repo analyses this; strata/CRITIQUE.md item 9 asserts 'about 15 K rise' with no working.",
+   "status": "questionable",
+   "evidence": "Geometry from origin/r32-lamps-final:spinoffs/barkhorn/companions/crystal.py orb_parts and drawing EOT-002 (section). I built a rough axisymmetric conduction model, not in the repo: /tmp/audit-lamps/model/core_base_fd_cg.py. It smears the cells and ballast into rings and assumes perfect contacts except a 0.2 mm air gap at the chassis rim; take it as ±30-50 %. At full brightness there is about 2.1 W of heat (2.5 W − about 0.7 W of light + about 0.28 W driver loss). On a wooden table: chassis +32 to +45 K over the room, acrylic touching the chassis about +27 K, cells about +10 K on average (+14 K on their inner faces). Charging at the same time adds about 0.7 W: chassis about +59 K, acrylic about +36 K, cells +14 to +18 K. So in a 35 °C room, charging while lit, the cells reach about 49-53 °C, over their 45 °C charge limit and over first-articles.md's own pass mark; the LED's chassis is about 94 °C and the acrylic beside it about 71 °C. The same model with an aluminium post tying the chassis to the hatch: chassis about +11 K, cells about +9 to +13 K. On the 8 mm acrylic dock the bottom path is worse.",
+   "check": "The LED has no metal path out of an acrylic box. As drawn, this is the Core item most likely to fail its test.",
+   "to_prove": "Add a metal path: a post or boss with a gap pad to the removable hatch, or the chassis tied into the ring through an insulating pad. Seat the LED on the chassis. Add firmware foldback (dim, then cut charge current, above about 40 °C at the cell). Then run the 35 °C charge-while-lit test."
+  },
+  {
+   "name": "Core: contact dock (rings, spring pins, 47 kΩ sense resistor, ideal diodes)",
+   "as_designed": "A Ø150 × 8 black acrylic dock with a Ø122 × 1.5 pocket. Two 304 stainless rings, flush, at r 30 (+) and r 44 (−), each 4 mm wide. Two gold spring pins (1.5 mm travel) at r 30 and 44 on the 170° line, 'on the USB-C board', through Ø3 holes in the hatch, 'recessed 0.5 below the foot ring's face'. The dock board: USB-C sink, resettable fuse, and a load switch that powers the rings only when it sees a 47 kΩ resistor across the lamp's pins. An ideal diode on each of the lamp's two inputs. '6 N per pin', 'contacts about 0.01 W', $18-45.",
+   "status": "questionable",
+   "evidence": "origin/r32-lamps-final:spinoffs/barkhorn/companions/CORE-RECHARGE.md; core_dock_drawing.py is a schematic SVG, not CAD. Geometry: pins recessed 0.5 mm behind the plane the foot sits on can't reach rings flush with that plane (the drawing instead shows the pins reaching the floor). In Core's CAD the USB-C receptacle occupies r 43-50.5 on the same 170° line, so the r 44 pin clashes with it, and r 30 is solid acrylic. Force: 2 × 6 N = 12 N against a 12.7-14.3 N lamp, with both pins about 37 mm off-centre on one side. Moments about the far foot edge (57 mm): 14.3 × 0.057 = 0.82 N·m against 12 × 0.094 = 1.13 N·m, so the lamp tilts until the pins carry about 8.7 N. Typical pogo pins run 0.5-2 N. Contact loss: 1.1-2.3 A through two pins at about 25-50 mΩ each on stainless (a passive-film contact) is about 0.05-0.5 W, not 0.01 W. Detection: a fully charged lamp draws only about 0.1 mA through 47 kΩ, so detecting its removal needs µA sensing. A sugary or salty drink film can read in the tens of kΩ: harmless at 5 V, but it corrodes the rings. Two holes in the hatch break IP44 unless sealed pins are used, and the pins must be insulated from the aluminium hatch. The concept itself is proven: bar lamps such as Zafferano's charge on contact bases. Rejecting Qi is physically right (aluminium hatch, steel ballast).",
+   "check": "Fixable within the 'about 5 days' estimate, but as written it doesn't work.",
+   "to_prove": "Model the dock in Core's CAD: raised gold-plated targets (or pins that protrude past the foot) at about 1-1.5 N each, sealed pogo pins in insulating bushes at a ballast corner (50° or 290°), and a defined detection scheme. Test 5,000 placements, contact resistance, rocking, spills, and charge time on the dock."
+  },
+  {
+   "name": "Core: the ball",
+   "as_designed": "Not solid. A 160 mm hollow ball with a 9 mm wall as modelled: two hemispheres drape-formed from 10 mm tinted cast sheet on one $1,500 aluminium mould, insides bead-blasted, joined at the equator with polymerising cement (Acrifix 192 kind), the joint turned and polished. A 40 mm port with an anodised grommet. It rests on a silicone seat in an 18 mm cup and lifts off.",
+   "status": "questionable",
+   "evidence": "origin/r32-lamps-final:spinoffs/barkhorn/companions/crystal.py orb_parts; out-orb-table/bom.md ('shell' 634 cm³); drawing EOT-002 shows a uniform hollow shell. My check: 4/3·π·(80³ − 71³) = 645 cm³, less the port about 634 cm³, × 1.19 = 0.75 kg ✓. A solid 160 mm PMMA sphere would weigh 2.14 L × 1.19 = 2.55 kg and would need a slow pressurised cure and long anneal to avoid voids; that is not what is designed. Each half is a full hemisphere (twice its footprint's area), so the wall can't stay 9 mm. The last-formed zone, the equator, thins most, so the bond lands on the thinnest and palest part, and the tint casts deepened 12/9 for a 9 mm wall won't hold. Bond-line voids or a clear line are the cement's usual risks. No anneal after bonding and turning is stated, and stressed PMMA crazes under alcohol cleaners. The ball is held only by gravity: it rolls out past asin(50/80) = 39° of tilt (before the lamp tips at 43°) or with about 6 N sideways at its centre (0.76 × 9.81 × tan 39°), for example when a cordless lamp is carried.",
+   "check": "The process is plausible; the drawn wall and the 0.75 kg are idealised.",
+   "to_prove": "A formed half's thickness map; the bond line's look and strength; an anneal step; a drop test (UL 153 Supplement SA has a tougher drop programme); a retention feature or carry instructions."
+  },
+  {
+   "name": "Core: steel ballast and stability",
+   "as_designed": "0.17 kg of zinc-plated mild-steel corner pieces plus 0.12 kg of cells. 1.46 kg in all. Tips at 43°; about 4.5 N at the top of the ball tips it.",
+   "status": "sound on paper, needs a prototype test",
+   "evidence": "origin/r32-lamps-final:spinoffs/barkhorn/companions/PARTICULARS.md (ball 0.76 kg, base 0.70 kg). My check: centre of gravity at (0.76 × 100.45 + 0.70 × about 16)/1.46 ≈ 60 mm; tip angle atan(57/60) ≈ 43.5° ✓; push at 180 mm: 14.3 × 57/180 = 4.5 N ✓. UL 153's 8° incline passes with a large margin. The bar brief asked for about 1.5 kg.",
+   "check": "Stable. The weak point is the loose ball, not tipping.",
+   "to_prove": "The incline and push tests in launch/first-articles.md."
+  },
+  {
+   "name": "Core: battery safety and shipping (UL 1642 / IEC 62133-2 / UL 2054, UN 38.3)",
+   "as_designed": "Cells carry UL 1642, IEC 62133 and UN 38.3 from the maker. Per-cell switching and checks against a wrong (Li-ion 4.1 V) or reversed cell. Charge at most 3.6 V a cell. Hatch label 'LiFePO4 18650 (3.2 V) only'. Cells shipped packed beside the lamp (UN3481, small-battery exception, 49 CFR 173.185(c)). No UL 2054 pack listing expected for listed cells in holders (to confirm).",
+   "status": "sound on paper, needs a prototype test",
+   "evidence": "origin/r32-lamps-final:spinoffs/barkhorn/companions/launch/certification.md (Core items 1-5, and the 2019 PHMSA letter on cells wired to a board); the datasheet's approvals; 4.8 Wh a cell under 20 Wh and 14.4 Wh a set under 100 Wh ✓.",
+   "check": "The analysis is right. But the protection that makes loose user-swappable 18650s safe exists only as a requirement on an unbuilt board. CORE-RECHARGE.md's 'LiFePO4 sees no thermal runaway' is overstated: LFP is far more benign, not immune.",
+   "to_prove": "The 62133-2 report and the UN 38.3 summary; the wrong, reversed and mixed-cell tests on the real board; the lab's view on UL 2054."
+  },
+  {
+   "name": "Core: certification and energy rules (UL 153 Supplement SA, FCC, DOE and California charger rules)",
+   "as_designed": "UL 153 with Supplement SA (battery-operated portable luminaires), with UL 8750 for the LED parts. FCC 15B SDoC. The DOE battery-charger standard (10 CFR 430.32(z), Appendix Y) and California MAEDbS listing, tested as one system with the named 20 W USB-C Level VI adapter and the dock: no trickle charge, sleep modes, test pads, a test mode. AB 2440 stewardship.",
+   "status": "sound on paper, needs a prototype test",
+   "evidence": "origin/r32-lamps-final:spinoffs/barkhorn/companions/launch/certification.md and launch/lab-rfq/*.md (drafts, nothing sent). UL's notice (ul.com, 'UL 153 expanded to add battery-operated portable luminaires') confirms that Supplement SA covers tabletop battery lamps, requires UL 1642 or UL 62133-2 cells, caps voltage and battery power, and adds a tougher drop programme. Stale conflicts remain: crystal.py NOTES_ORB and README.md round 35 still say IEC/UL 62368-1, and components.json moon-listing says 'UL 153 / IEC 62368'.",
+   "check": "These are the right standards. Nothing can be tested until the board exists.",
+   "to_prove": "Lab quotes; no-battery and maintenance-mode power on the first articles (under 0.1 W at the wall including the adapter); Supplement SA drop and ingress results."
+  },
+  {
+   "name": "Strata proposals (Terrace, Halo, Contour Core): engineering as drawn",
+   "as_designed": "Laminated 12 mm stock cast sheet, bonded with Weld-On 40 class cement and annealed. Terrace and Halo: the same Vero SE 10 and ERP driver, a satin reflector and honeycomb louvre, seven 2 mm aluminium fin discs, an aluminium canopy with a crossbar and ground screw, stainless cable on listed grippers, and the shade held by three radial M4 thumbscrews into heat-set brass inserts in the top acrylic ring. Contour Core: a 2.5 W warm-dim LED on its own star in an aluminium base, a stock 4 in opal globe, and a plug-in v1 (24 V Class 2 adapter, Mean Well LDD-350L, an unhoused PWM dimmer).",
+   "status": "sound on paper, needs a prototype test",
+   "evidence": "origin/r32-lamps-final:spinoffs/barkhorn/companions/strata/README.md, strata/out-terrace/bom.md ($533), strata/out-halo/bom.md ($448), strata/out-contour-core/bom.md ($289), strata/terrace.py ('heat-set radially into the top ring's edge, 8 deep'). These are more conventional and more buildable than the formed lamps: no moulds, metal heat paths, a metal canopy and cable suspension. The fin-stack figure (about 6 K at about 2.8 W) is plausible from its envelope alone. Concerns: cast PMMA doesn't reflow cleanly round a heat-set insert and crazes under sustained load near heat, and here three such inserts carry a 1.9 kg overhead shade. Thick tints go near-black or red (the proposals' own finding). Core Sample's spine at about 64 °C is marginal (they propose dropping it). A cordless Contour Core would inherit Core's unbuilt board.",
+   "check": "Proposals only; the owner hasn't picked one and none is drawn with the dock.",
+   "to_prove": "Pull and creep tests of the inserts in cast acrylic at 50 °C (or switch to bonded or through fixings); a fin-stack temperature test; Terrace's 2.5 kg on its cable and canopy."
+  }
+ ],
+ "top_risks": [
+  {
+   "risk": "Core's LED heat has no metal path out: a 50 × 1.6 mm aluminium chassis sits in an air pocket inside the acrylic drum, with the cells 1-2 mm away. My rough conduction model: at full brightness (about 2.1 W) the chassis runs +32 to +45 K over the room and the cells about +10 to +14 K. Charging at the same time, the chassis reaches about +59 K and the cells +14 to +18 K. In a 35 °C room that puts the cells at about 49-53 °C (their charge limit is 45 °C) and the acrylic beside the chassis near 70 °C.",
+   "severity": "high",
+   "fix": "Tie the chassis to the aluminium hatch with a post or boss and a gap pad (in the same model the chassis drops to about +11 K) and seat the LED on the chassis. Add firmware thermal foldback. Run first-articles.md's 35 °C charge-while-lit test before tooling anything else."
+  },
+  {
+   "risk": "Core's electronics are a description, not a design. There is no schematic, no chosen LED, LED driver, MCU, protector or gauge. The board needs $16-40k and 4-6 engineer-weeks (launch/boards.md), which is not in first-articles.md's roughly $15.5k cash plan (against a $50k raise). Loose user-swappable 18650s force per-cell switching and wrong-cell fault tests.",
+   "severity": "high",
+   "fix": "Decide the route now. Option one: hire the engineer against the LTC4162-F evaluation kit. Option two: simplify to a keyed, factory-made 1S3P LiFePO4 pack with its own protection behind the same hatch; it is still user-replaceable under EU 2023/1542. Option three: ship the plug-in v1 from launch/core-v1-plugin.md first."
+  },
+  {
+   "risk": "Hemisphere's overhead load path isn't closed in the CAD. The PEEK ring that carries the bayonet pins sits line-to-line on a plain Ø62 hub with no shoulder or fastener; it loosens as it warms and creeps. The hub's neck sits in the crown 'on a thermal pad' with no fastener. The 1.1 kg acrylic shade is held by gravity in a 30° J-slot with an about 10 N detent and no secondary lock.",
+   "severity": "high",
+   "fix": "Add a hub shoulder with screws or a retaining ring, a threaded or screwed neck-to-crown joint, and a captive set screw or sprung latch on the collar. Use a plastic-safe thread lock. Add a push-up-and-twist test and a 4× weight pull at 50 °C to the first-article tests."
+  },
+  {
+   "risk": "Hemisphere's COB-to-driver voltage match. The Vero SE 10 runs about 24.6 V at 180 mA against the ERP driver's 24 V floor. When warm (about 23.3 V at the test's Tc 85 °C), in low-Vf bins and at 10 % or 1 % dim, it falls under the floor. The alternate driver dims only to about 15 %, short of JA8's 10 %.",
+   "severity": "medium",
+   "fix": "Get Bridgelux's minimum Vf at 180 mA. Pick a COB whose voltage sits mid-window, or a Class 2 phase-dim driver whose window starts at 20 V or below. Bench at Tc 25 and 85 °C and at 10 % and 1 % on the named dimmers before ordering."
+  },
+  {
+   "risk": "The contact dock as written can't make reliable contact. The pins are recessed 0.5 mm while the rings are flush. Two pins at 6 N on one side, against a 13-14 N lamp, tilt it. The pin line clashes with the USB-C receptacle. Two holes break IP44. Contact loss is about 0.05-0.5 W, not 0.01 W.",
+   "severity": "medium",
+   "fix": "Draw the dock in Core's CAD: raised gold-plated targets or protruding pins at about 1-1.5 N each, sealed and insulated pogo pins at a ballast corner, and a defined detection scheme. Test placements, contact resistance and spills."
+  },
+  {
+   "risk": "The formed parts are drawn idealised. Full hemispheres from 10 mm sheet (Hemisphere's shell, Core's ball halves) can't keep a uniform 9 mm wall, and the ball's bond lands on its thinnest, palest zone. No anneal step is stated. The ball is a hollow 0.75 kg shell (not solid) that rolls out at 39° of tilt or about 6 N sideways. Separately, the glow of Hemisphere's tinted shade in the campaign renders is a shader setting; the optics put almost no light on it.",
+   "severity": "medium",
+   "fix": "Get the former's thickness map from a first pull and re-derive the weights and tint casts. Anneal after forming, bonding and turning. Drop-test the ball. Render the shade with no self-emission, or measure it, before selling the look."
+  },
+  {
+   "risk": "Claims run ahead of the data. '575 lumens' is the COB's output; about 470-500 lm leaves the fitting (estimate). Core's 'about 2 h' charge needs about 2.25 A, but the board is specified at about 1.5 A, which takes about 2.7 h to reach 90 %. Runtime rests on an unchosen 2.5 W LED.",
+   "severity": "medium",
+   "fix": "Quote delivered lumens after an LM-79 test. Set the charge current (about 0.5C a cell) and re-quote the charge time. Keep runtime marked as an estimate until the real board is tested."
+  },
+  {
+   "risk": "The hardwired Hemisphere puts a 120 V driver under a black cast-acrylic (HB) canopy, and the BOM has no crossbar, ground or connectors. The plug-in swag has no canopy to hold its constant-current stage, and no listed 180 mA CC plug-in was found.",
+   "severity": "medium",
+   "fix": "Use a metal canopy with a crossbar and ground screw (as the strata Terrace BOM does) or a listed remote driver box. For the swag, use a listed in-line CC module or a Class 2 CC plug-in, and make the steel suspension cable standard."
+  },
+  {
+   "risk": "Stale text in the CAD-generated documents a lab will read: 62368-1 for Core, 'UL 1598 with any shade', pins 'pressed into the hub', a column LED that doesn't exist, two different foot rings, 'flat top' cells.",
+   "severity": "low",
+   "fix": "Sweep crystal.py NOTES_*, components.json and the BOMs before the lab packs go out."
+  },
+  {
+   "risk": "LiFePO4 physics: a 3.45 V charge limit doesn't give 90 % on LFP's flat voltage curve, because a constant-voltage hold to termination ends near full. A voltage-based fuel gauge won't work on this chemistry either.",
+   "severity": "low",
+   "fix": "Set the limit and the gauge by coulomb counting with an LFP model. Confirm that the chosen LTC4162-F ordering code allows the 3.45 V setting."
+  }
+ ],
+ "numbers_that_conflict": [
+  "Core weight: 1.46 kg in PARTICULARS.md, README.md rounds 40-41 and launch/core-v1-plugin.md, but 'about 1.3 kg [E]' in CORE-RECHARGE.md (dock section).",
+  "Core charge time: 'about 2 hours' in PARTICULARS.md, README.md round 42 and crystal.py NOTES_ORB, but '2 to 3 h, the charger at about 1.5 A' in CORE-RECHARGE.md and 'up to 1.5 A' in launch/boards.md. At 1.5 A, 4.05 Ah to 90 % takes about 2.7 h, which fails launch/first-articles.md's own '90 % in at most 2.5 h'. 'About 2 h' needs about 2.25 A.",
+  "Core certification route: 'IEC/UL 62368-1 with its battery annex' in crystal.py NOTES_ORB and README.md round 35, and 'UL 153 / IEC 62368' in components.json moon-listing; but 'UL 153 with Supplement SA; UL 62368-1 is not the route' in launch/certification.md and PARTICULARS.md.",
+  "Hemisphere listing: 'Listed to UL 1598 with any shade' in crystal.py NOTES_DOME, but the plug-in swag under UL 153 comes first in launch/certification.md (PARTICULARS.md: 'UL 153 or UL 1598, as the owner chooses').",
+  "Hemisphere low-top heat: 2.7 W in the hub and +14 K (hub 49 °C at 35 °C) in hemisphere_thermal.py and PARTICULARS.md, but about 3.3 W, about +31 K and a crown at about 56-65 °C in strata/CRITIQUE.md item 9 and strata/README.md ('the current low top's marginal ~31 K').",
+  "Acrylic temperature limit: 'about 71 °C continuous; UL 1598 will likely hold it to about 50 °C' in README.md round 35, but 'UL 1598 acrylic at most 65 °C, Table 15.1.2 item 20' in launch/certification.md and launch/first-articles.md, and 'about 70 °C long-term' in strata/CRITIQUE.md.",
+  "Bayonet twist: 'quarter-turn' in PARTICULARS.md and README.md, but 30° in the CAD (crystal.py N['turn'] = 30.0).",
+  "Bayonet pins and detent: 'pressed into the hub' and 'threaded into the hub' in components.json (dome-pins, dome-plunger) and out-dome-pendant/bom.md, but 'the PEEK ring carries the three pins and the detent' in crystal.py and README.md round 35. The CAD pins (r 33-43.5) sit only in the PEEK, 2 mm short of the hub.",
+  "Hemisphere output: '575 lumens' (the owner's level and the site copy), about 590 lm at the COB on the 180 mA driver, and about 500 lm out of the fitting [estimate] in PARTICULARS.md. The advertised figure is the COB's.",
+  "Hemisphere driver: 'Fulham T1T11200350-15L for homes, PCD-16-350A for bars' in README.md round 39 (never amended), but the ERP ESS010W-0180-42 'serves homes and bars' in README.md round 42 and PARTICULARS.md.",
+  "Core LED: 'a second 4-LED ring at the column's foot to light the column (0.3 W)' in out-orb-table/bom.md and components.json moon-led-table. Core has no column.",
+  "Core foot ring: two different silicone foot rings in one BOM, '110 x 2' (orb-seals, inside the 'usb' line) and '117 x 114 x 2' (core-foot), in out-orb-table/bom.md.",
+  "Cell terminal: 'flat top' in out-orb-table/bom.md and components.json, but 'Terminal Type: Button' in the Power Sonic datasheet those entries link.",
+  "Core base heat: 'about 15 K rise, fine on paper' in strata/CRITIQUE.md item 9, with no working shown. No analysis exists elsewhere; my rough model gives +32 to +45 K at the LED chassis.",
+  "Dock contact geometry: pins 'recessed 0.5 below the foot ring's face' with rings 'flush' in CORE-RECHARGE.md, but the core_dock_drawing.py section shows the pins reaching the pocket floor. Core's own CAD puts the silicone foot ring 0.2 mm above the base's lowest face, a 1 mm acrylic annulus at Ø112-114.",
+  "Dock pin force and location: '6 N per pin' with a '1.3 kg' lamp (12 N against 12.7-14.3 N, both pins on one side) and 'two spring pins on the USB-C board' at r 30 and 44 on the 170° line in CORE-RECHARGE.md. In Core's CAD the USB-C receptacle sits at r 43-50.5 on that line and r 30 is solid acrylic.",
+  "Dock contact loss: 'the contacts, about 0.01 W' in CORE-RECHARGE.md, against about 0.05-0.5 W by I²R for 1.1-2.3 A through two pins at 25-50 mΩ each.",
+  "Plug-in swag driver: 'a small constant-current board in the canopy' in launch/boards.md and launch/certification.md, but the swag has 'no canopy' in hemi_mounting.py.",
+  "Core board money: launch/first-articles.md books $400 (fab and assembly) in a roughly $15,500 plan, but launch/boards.md puts the design at $16k-40k (README.md round 42: a $50,000 raise)."
+ ],
+ "not_documented": [
+  "Core board: schematic, layout, firmware, MCU, protector, fuel gauge, per-cell FETs and LED driver IC. None exist, as launch/boards.md says.",
+  "Core LED: a part number, measured lm/W, flicker and CCT range, and the light that leaves the ball in each tint.",
+  "Any thermal analysis of Core's base (LED plus charger plus cells in sealed acrylic), and the LED's thermal interface to its chassis (the CAD leaves a 1 mm gap).",
+  "How the '90 %' limit is set on a flat-voltage LFP cell (voltage or coulomb counting), and which LTC4162-F ordering code allows 3.45 V.",
+  "USB-C current detection (Type-C Rp advertisement) and the input-current limit; how the capacitive touch behaves on USB or dock ground and with a wet ring or a glass on it.",
+  "The dock in CAD; its detection circuit; the pin part number and force; how the pins are sealed to keep IP44 and insulated from the aluminium hatch.",
+  "The ball: its formed wall-thickness map, the equator bond design, annealing after bonding and turning, a drop test, and any retention when the cordless lamp is carried.",
+  "Hemisphere: how the PEEK ring is fixed to the hub and the hub's neck to the crown; where the detent's dimple is; any secondary shade lock.",
+  "Hemisphere: Bridgelux's minimum and maximum Vf at 180 mA and at 10 % and 1 % dim (only web-quoted typical values); the reflector's measured efficiency; LM-79 lumens and an IES file.",
+  "Hemisphere: the formed shell's thickness profile; annealing of the formed and rim-bonded shade; a thread-locker safe for acrylic.",
+  "Hemisphere hardwired: a mains enclosure for the driver inside the acrylic canopy, and the crossbar or strap, ground screw and connectors (none are in out-dome-pendant/bom.md).",
+  "Hemisphere plug-in swag: where the constant-current stage goes and how it is listed; the suspension cable's anchor in the 40 × 14 cap (the cable is still an 'option').",
+  "Listing cost ('[PRICE]' in out-dome-pendant/bom.md) and any lab answer (every lab-rfq letter is an unsent draft).",
+  "The cells' IEC 62133-2 report and UN 38.3 test summary (still to request), and Supplement SA's numeric limits and drop heights as applied to Core.",
+  "No prototype of either lamp has been built or measured. Every temperature, lumen, runtime and charge figure is an estimate."
+ ]
+}

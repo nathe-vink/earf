@@ -1,0 +1,223 @@
+{
+ "product": "Tropos powered 2-way horn loudspeaker (EARF; called \"barkhorn\" in the repo). Covers the current Cloud design with the thermoformed horn and the Strata variant with the 22-layer stepped laminated horn and the woofer caldera. Branch: origin/r33-speaker-horn.",
+ "overall": "sound with open items",
+ "one_line": "Tropos is engineered for real, not just rendered: it uses real, correctly matched catalogue parts (FaitalPRO 15PR400-8, B&C DE1085TN-16, Hypex FA122), and its box, port, horn-loading and power arithmetic all check out when recomputed. But nothing has been built or measured, there is no DSP preset, Strata's tipping margin is gone on my estimate, the horn mount and transit are unanalysed, and the safety-listing path for an uncertified internal-mains amplifier in an acrylic cabinet still has open gaps.",
+ "subsystems": [
+  {
+   "name": "Woofer: FaitalPRO 15PR400-8",
+   "as_designed": "15 in, 8 ohm pro woofer (paper cone, neodymium): 99 dB 1 W/1 m, Fs 35 Hz, Qts 0.32, Vas 248.9 L, Sd 857 cm2, Xmax 5.75 mm, Xdamage 15.5 mm, 400 W AES, min impedance 5.9 ohm, $194. Front-mounted in a rebate (the CAD draws a 10 mm flange plus a 1.5 mm gasket) on eight M6 button heads into epoxy-bonded brass inserts in the 20 mm acrylic baffle.",
+   "status": "off-the-shelf / proven",
+   "evidence": "r33-speaker-horn:spinoffs/barkhorn/components.json (faital-15pr400-8); README.md round 36 'The woofer against FaitalPRO's current datasheet'; drivers31.md; variants/DETAILS.md 'Fixing the drivers' ('eight M6 at 15 N·m'). FaitalPRO's product page, fetched 2026-11-01: every value above matches.",
+   "check": "The datasheet matches the file exactly. The FA122 gives the woofer 24.5 V: 75 W at 8 ohm, about 102 W at its 5.9 ohm minimum. That is a quarter of its AES rating, so thermally it is loafing; cone excursion is the real limit (see the bass box). One number is wrong. DETAILS.md fixes the flange with 'eight M6 at 15 N·m'. An A2-70 M6 yields at roughly 9-10 N·m, and an ISO 7380 button head takes less. At K≈0.2, 15 N·m aims for about 12.5 kN of clamp per screw (15/(0.2×0.006)). That load would go into an epoxy-bonded insert sitting in the ~8.5 mm of acrylic left behind the 11.5 mm rebate: ~7.5 mm in 19 mm stock, and less still if FaitalPRO's real 13.1 mm flange-plus-gasket is used. FAI M1 would then test the inserts at 30 N·m. Woofers like this are normally fitted at 3-5 N·m.",
+   "to_prove": "Pull-out and spin-out of the bonded inserts on a cemented coupon at a corrected torque. Rebate depth and insert length against the real flange. Impedance within 10 % of the first sample (FAI E3)."
+  },
+  {
+   "name": "Bass box and ports",
+   "as_designed": "135.6 L net (gross inside 520 × 356 × 840 mm = 155.5 L), vented at 38 Hz by two cast-acrylic tubes (113 mm bore, 223 mm long, flared inner ends). The DSP adds an LR4 high-pass at 28 Hz, a limiter and a notch at the ports' pipe resonance. Lining is 50 mm polyester batts, 100 mm top and bottom.",
+   "status": "sound on paper, needs a prototype test",
+   "evidence": "r33-speaker-horn:spinoffs/barkhorn/README.md round 36 'The box at 75 W'; studio/fabkit/speaker/box.py; README.md round 18 'More lining?' (box modes 204/330/408/482 Hz); README.md round 13 (r6).",
+   "check": "Reproduced with my own lumped-element model from the datasheet T/S values. Helmholtz fb = 38.0 Hz (A = 2π·0.0565² = 0.0201 m², Leff = 0.223 + 0.732×0.113 = 0.306 m); f3 = 50.9 Hz. At 24.5 V with the 28 Hz LR4: peak excursion 4.4 mm at 59 Hz (Xmax 5.75), port air 9.1 m/s, 117.3 dB at 100 Hz at 1 m. Without the high-pass: 14.6 mm at 20 Hz, against Xdamage 15.5. All of this matches the README to within 0.2 mm. The alignment is close to Keele's QB3 rule (15×249×0.32^2.87 = 142 L, fb ≈ 41 Hz). Two caveats. The woofer's survival depends entirely on a DSP high-pass that exists only as prose. And the 51 Hz / 117 dB figures are half-space: the 560 mm baffle steps near 205 Hz, so flattening the free-standing response costs up to 6 dB of bass headroom.",
+   "to_prove": "Impedance sweep (confirms fb). Near-field cone and port response. No port chuff at full output. In-room bass at the intended placement. High-pass and limiter present in the locked shipping preset."
+  },
+  {
+   "name": "Compression driver: B&C DE1085TN-16",
+   "as_designed": "2 in exit, 100 mm titanium diaphragm, neodymium, 16 ohm, 108 dB at 1 W (4 V) = 105 dB at 2.83 V, 140 W, B&C's recommended crossover 0.8 kHz, 154 × 86 mm, 3.6-3.7 kg, $512. Mounted on a turned 6061 adaptor ring (four M6 countersunk on 101.6); the ring goes to four M5 inserts on a 170 circle in the horn's boss.",
+   "status": "off-the-shelf / proven",
+   "evidence": "r33-speaker-horn:spinoffs/barkhorn/components.json (bc-de1085tn-16); drivers31.md; README.md round 5 (driver table) and round 35 (S5); out-cloud/bom.md. B&C product page, fetched: 2 in exit, 100 mm VC, titanium, 8/16 ohm, 140 W nominal / 280 W program, crossover 0.8 kHz, 154 × 86 mm, 3.7 kg.",
+   "check": "Real, current and correctly described. Through the L-pad, at the FA122's full 24.5 V the driver sees 13.0 V, about 10.6 W: roughly 8 % of its rating. Peak output ≈ 105 + 20·log(13.0/2.83) = 118 dB at 1 m, which matches the woofer's ~117 dB. A 1 kHz LR4 crossover sits above B&C's 800 Hz minimum.",
+   "to_prove": "Distortion at 800, 900 and 1000 Hz at 100 dB/1 m on this horn (FAI E5 requires under 1 % at 1 kHz)."
+  },
+  {
+   "name": "Horn acoustics (air path, cutoff, crossover point)",
+   "as_designed": "Superellipse waveguide: 610 × 346 mm mouth, 278 mm deep, 2 in throat, walls opening 95° × 63°. Simulated with BEM (bempp-cl, Burton-Miller, checked against a pulsating sphere). Crossover LR4 at 1 kHz in the 'shipping preset'. Woofer and horn centres are 0.62 m apart.",
+   "status": "sound on paper, needs a prototype test",
+   "evidence": "r33-speaker-horn:spinoffs/barkhorn/acoustics/README.md; acoustics/summary.json; horn_sim.py; README.md round 5 table and round 35 (S6).",
+   "check": "Cutoff, recomputed: throat 2.03e-3 m², mouth ≈0.21 m² (area ratio ≈103) over 278 mm. An exponential horn with that ratio has flare m = ln(103)/0.278 = 16.7/m, so fc = mc/4π ≈ 455 Hz. The mouth reaches ka = 1 at ≈212 Hz (the files' old '210 Hz' rule of thumb). The BEM throat resistance (0.31 ρc at 630 Hz, 0.77 at 800, 1.51 at 1 kHz) agrees: full loading from about 900 Hz ≈ 2×fc. So crossing at 1 kHz is right and 800 Hz is marginal. The simulation's own data also show problems EQ cannot fix: a directivity bump at 1.1-1.4 kHz (horn DI 13.1 dB at 1.25 kHz against 10.9 at 1 kHz; system DI 15 dB and -25 dB at 60° at 1.25 kHz with the 1 kHz crossover), and the throat over-loaded at about 2 ρc from 1.1 to 1.6 kHz. Vertical lobing: 0.62 m spacing is 1.8 λ at 1 kHz, putting nulls at about ±16°, so a standing listener at 3 m sits near a null. The simulation's stated limits: rigid walls, a flat-piston driver, nothing above 8 kHz, and no measurement.",
+   "to_prove": "Measured horizontal and vertical polars from 0.5 to 16 kHz. Whether the 1.1-1.4 kHz DI bump is audible. The vertical window at seated and standing positions. Response above 8 kHz."
+  },
+  {
+   "name": "Crossover, DSP and the HF protection network",
+   "as_designed": "In the FA122's DSP (Hypex Filter Design, 15 biquads per channel): LR4 at 1 kHz, LR4 high-pass at 28 Hz, notch at the port resonance, delay alignment, soft-clip limiter, auto-standby. In series on the HF line: a 33 µF/100 V film cap, then an L-pad of 6.8 ohm series / 15 ohm shunt (25 W aluminium-housed resistors on a 3 mm plate inside the sealed amplifier box).",
+   "status": "sound on paper, needs a prototype test",
+   "evidence": "r33-speaker-horn:spinoffs/barkhorn/README.md rounds 13, 35, 36; components.json (attenuator-l-pad, hf-protect-cap); make/fai.md E6. A branch-wide search found no HFD preset and no FRD/ZMA measurement files.",
+   "check": "L-pad: 15∥16 = 7.74 ohm, so attenuation is 7.74/14.54 = -5.47 dB and the amp sees 14.5 ohm. At 24.5 V the series resistor burns 19.3 W and the shunt 11.3 W: 30.6 W inside a sealed box. Cap: corner ≈ 1/(2π·14.5·33 µF) ≈ 330 Hz, first order. A full-range signal is only ~11 dB down at 100 Hz, and 300-600 Hz passes almost whole. So 'keeps low frequencies off the driver if the preset is lost' is overstated: a lost preset leaves the FA silent, since FAs ship with no filter; the real risk is a wrong preset. The pad's anti-hiss rationale is weak: the FA122's 118 dB SNR means ~28 µV of noise, about 5 dB SPL at 1 m from the bare driver. The entire voicing exists only as prose.",
+   "to_prove": "Build the preset from gated in-box measurements of each driver (FRD/ZMA). Verify the acoustic crossover. Set the HF soft-clip so the pad never sees sustained full power. Version-lock the preset and load it at the factory (FAI E6)."
+  },
+  {
+   "name": "Amplifier module: Hypex FusionAmp FA122",
+   "as_designed": "One per speaker. 2 × 125 W into 4 ohm, 2 × 75 W into 8 ohm, NCore class D, SigmaDSP. Inputs: XLR in plus loop-through, RCA, AES/EBU, S/PDIF coax I/O, Toslink, USB for setup. Plate 315 × 120 × 55 mm, cutout 291 × 96, 815 g. $422.40 at Parts Express (in stock). Mounted on eight bonded M4 inserts, with plate holes opened to 5.5 mm for thermal growth.",
+   "status": "off-the-shelf / proven",
+   "evidence": "r33-speaker-horn:fab/research/amps.md; spinoffs/barkhorn/components.json; README.md round 36. Hypex FA122 page and Fusion Manual R4, fetched. r46-owner-notes:spinoffs/barkhorn/research/2026-10-31/R7-bonding-cnc-amps.md for price and stock.",
+   "check": "The loads are matched correctly. Woofer channel: 24.5 V gives 75 W into 8 ohm and 102 W into 5.9 ohm, within the 125 W/4 ohm rating. HF channel: ~41 W into the 14.5 ohm pad network. The manual confirms everything the design relies on: master/slave over the S/PDIF I/O with IR disabled on the slave; thermal limiting (-6 dB) and shutdown; a latching DC-fault shutdown; 0.5 W standby (ErP Lot 6); Class I ('This product must be earthed'); 'not airtight', to be fitted in a separate sealed compartment of V-1/V-0 material with 3 mm clearance. The design follows each of these. The thermal-growth arithmetic also checks: (77-23)e-6/K × 315 mm × 25 K ≈ 0.4 mm.",
+   "to_prove": "Integration only: the preset, heat and EMC (see those entries)."
+  },
+  {
+   "name": "Power supply and mains construction",
+   "as_designed": "Internal mains, not an external certified supply: the FA122's own SMPS with an IEC C14 inlet and rocker switch on the plate. The module sits in a 1.5 mm black-anodised aluminium box (125 × 320 × 75 mm inside), sealed with 3 mm EPDM to the back's inner face, with three M12 glands. The box is bonded to protective earth (M4 stud on a bared spot, star washer, 1 mm² green/yellow lead to the FA122's earth point). FAI E1 checks continuity at ≤0.1 ohm.",
+   "status": "questionable",
+   "evidence": "r33-speaker-horn:spinoffs/barkhorn/make/compliance.md §2; README.md round 35 (B3) and round 36 'Three notes from the launch-readiness check'; README.md round 31 'The amplifier's plate'; components.json (earth-bond-kit). main:spinoffs/barkhorn/launch/launch-readiness.md ('Does the FA122's compliance carry over? No.'). r46-owner-notes:.../R3-compliance.md (no UL recognition or CB certificate found).",
+   "check": "Earthing and the metal compartment are done the way Hypex's manual asks. But the supply is an uncertified internal SMPS: the Hypex and Parts Express pages show no UL, CB or FCC marks, and the manual calls the FA122 a subassembly whose end-product compliance falls on the maker. The files themselves list three open fire-enclosure gaps: (1) a 20 mm band of PMMA between the box flange and the plate (a 1 mm aluminium collar is proposed, not yet in the CAD); (2) nylon glands rated V-2 (brass proposed); (3) the HF capacitor sits 2.0 mm from the module against Hypex's 3 mm. compliance.md also says the box has no openings except the glands, but the FA122 plate itself has ten vent slots (README round 31), so the enclosure does have openings. Mains voltage: Hypex lists 100-120 / 200-240 V while Soundimports lists 200-240 V only, and nothing confirms a given unit is set up for 120 V.",
+   "to_prove": "Hypex's CB report or construction file. The collar and brass glands drawn in the CAD, and the capacitor moved to clear 3 mm. Hipot, touch current, earth continuity and abnormal-operation heating at the IEC 62368-1 pre-check. Each unit verified on 120 V."
+  },
+  {
+   "name": "Heat: the amplifier in a sealed box in an acrylic cabinet",
+   "as_designed": "Heat leaves through the FA122's aluminium plate to room air at the back. The compartment has no ventilation into the cabinet. DETAILS.md estimates 25 W of loss at 2 × 125 W, about 5 W with music and 0.5 W in standby. FAI E8 is a 4-hour heat test with a thermocouple.",
+   "status": "sound on paper, needs a prototype test",
+   "evidence": "r33-speaker-horn:spinoffs/barkhorn/variants/DETAILS.md (plate amplifier row); make/compliance.md 'Ventilation'; make/fai.md E8; components.json (amp-screws-acrylic, attenuator-l-pad).",
+   "check": "The real loads cap output at about 116 W (75 W woofer + 41 W HF), so at 92 % efficiency full-power loss is about 10 W plus idle overhead. Hypex does not publish idle losses, and the '5 W with music' figure (a tenth of 25 W) ignores them, though they dominate at low level; my estimate is nearer 10 W whenever the amp is awake. A flat 315 × 120 mm plate (0.038 m², h ≈ 8-10 W/m²K) runs about 2.6-3.3 K/W: +26-33 K at 10 W, and +50-65 K at 20 W, where Hypex's thermal limit steps in. Acrylic conducts better than MDF (k ≈ 0.19 against 0.1-0.15 W/m·K), so the cabinet is no worse than a wooden one. Two real gaps: the L-pad's up to 30.6 W (full sine) is inside the sealed metal box, and the plate hangs on epoxy-bonded inserts next to a 50-60 °C plate with no epoxy Tg specified. E8's 'below its limit' has no number.",
+   "to_prove": "Thermocouples on the plate, the module, the compartment air, the L-pad and the acrylic beside the plate: 4 hours at 1/8-power pink noise, plus a full-power HF run. Set E8's limits from IEC 62368-1 touch temperatures and the epoxy's Tg."
+  },
+  {
+   "name": "Cabinet: 3/4 in cast acrylic (20 mm drawn, 19 mm stock)",
+   "as_designed": "Outside 560 × 420 × 880 mm. Cast PMMA, 20 mm in the CAD, or stock TruCast 2064 3/4 in (19 mm) for the first pair. Cemented with two-part polymerising ACRIFIX 2R 0190 or Weld-On 40. Two windowed braces plus ribs on the sides, back, top and bottom. Removable back on 22 M5 screws into bonded inserts, sealed by a 4 mm EPDM cord in a groove and tied to the braces through machined bosses. About 53 kg of sheet per cabinet.",
+   "status": "sound on paper, needs a prototype test",
+   "evidence": "r33-speaker-horn:spinoffs/barkhorn/cloud.py (header); out-cloud/bom.md; README.md round 36 'The back tied to the braces', round 18 'More lining?', round 15 'The Cloud: 20 mm'; make/stock-pair.md 'Smoke at 19 mm'; make/assembly.md. ACRIFIX 2R 0190 strength from r46-owner-notes:.../R7-bonding-cnc-amps.md.",
+   "check": "20 mm PMMA (E 3.2 GPa, density 1190 kg/m³) has D = 2.47 kN·m and 23.8 kg/m². That is about 16 % stiffer and 66 % heavier per m² than 19 mm MDF, so its panel modes sit about 17 % lower, with similar damping (η ≈ 0.04). A 300 × 500 mm back bay comes out at ~240 Hz simply supported, consistent with the files' ~210 Hz for the tied back; a 356 × 500 mm side bay at ~190 Hz. Both fall inside the woofer band, as in any box. 19 mm stock loses (19/20)³ = 14 % of stiffness. Volume: 155.5 L gross minus ribs, braces, lands, ports, amp box and woofer ≈ 136 L, matching the 135.6 L claimed. Joint risk is about process (bubbles, crazing), not strength: 28-38 MPa shear, 47-57 MPa after annealing. One internal contradiction: the port frames' mouths are 'flame polished' and then cemented, against the rule of no flame polish near a joint.",
+   "to_prove": "A cemented corner coupon (bubbles, polariscope). Panel accelerometer sweep from 50 to 500 Hz, before and after the back is tied. Leak test at 1 kPa (FAI M2). Rattle sweep (M3). A drop and transit test on a 62 kg box."
+  },
+  {
+   "name": "Horn construction, current design: thermoformed 10 mm shell",
+   "as_designed": "10 mm cast sheet in a heavier dye lot, pressure-formed at 4 bar over a male plug (epoxy tooling board for the prototype, aluminium for production), annealed at 80 °C, trimmed on 5 axes. A turned throat piece is cemented on, with a rolled 6 mm pod. Walls run from 8.5 mm at the throat to 4.9 mm in the mouth corners (CAD estimate), against a 4 mm floor.",
+   "status": "sound on paper, needs a prototype test",
+   "evidence": "r33-speaker-horn:spinoffs/barkhorn/README.md round 36 (wall and resonance tables); make/horn-risks.md (F1-F8, A1-A2, C1-C3); make/forming-trial.md; make/plan-b.md; make/schedule.md.",
+   "check": "The wall-mode arithmetic checks: a 200 × 450 × 6.6 mm PMMA panel comes out at 158 Hz simply supported, matching the table. All shell modes sit far below the 1 kHz crossover, so above it they are only driven by the air in the horn. The margin on the wall floor is thin: 4.9 mm against 4.0 (about 4.6 in stock 3/8 in sheet), and that 4.9 comes from a shop rule, not a trial. The files themselves rate webbing (F2) as medium risk and heating the dark lot in an IR oven (F4) as high. The quarter-plug trial ($3,450) has not been run, and the schedule already prefers the laminated horn for the first pair.",
+   "to_prove": "Quarter-plug trial: wall ≥4 mm at 30 points, no webbing, air path within ±0.3 mm of the CAD by scan, no springback after annealing."
+  },
+  {
+   "name": "Horn construction, Strata: 22-layer laminated stack",
+   "as_designed": "22 layers of stock 1/2 in cast sheet (TruCast 2423 or 2074), each faced to a 12.64 mm pitch less the bond line. Each layer's outline sits 10 mm outside the air path (20 mm on Strata's mouth layer). Edges are polished before bonding. Layers are bonded in three sub-stacks under dead weight on spacers and annealed; the air path is then machined on 5 axes to ±0.1 mm and polished. Stack 278 ±1 mm. 4.8 kg of acrylic; 5.7 kg for the horn.",
+   "status": "sound on paper, needs a prototype test",
+   "evidence": "r33-speaker-horn:spinoffs/barkhorn/make/laminated-horn.md; variants/STRATA.md; rfq/tropos/e-laminated-horn/layers.csv and parts.csv. r46-owner-notes:.../R7-bonding-cnc-amps.md (Röhm and ACRIFIX guidance).",
+   "check": "22 × 12.64 = 278.1 mm, matching layers.csv. My volume estimate from layers.csv (each outline minus a tapered bore) is 3.7-4.3 L, or 4.4-5.1 kg, which brackets the files' 4.05 L / 4.8 kg. Because the air path is machined after bonding, layer and bond-line tolerances never reach the acoustics; a step under 0.05 mm is far below λ/20 (0.86 mm) at 20 kHz. The files themselves record these open problems: 21 bond lines that must each show no visible bubble; spacer bond lines of 0.5-1.5 mm against 0.2 mm in the CAD (adding 10-30 mm to the stack); 1/2 in sheet can arrive 10 % thin (11.4 mm; Canal's is 12.0), below the 12.14 mm facing target; Röhm's rule gives about 7 days per anneal cycle if the 292 mm stack counts as solid; ACRIFIX's datasheet warns the bond can yellow above 70 °C, yet the plan anneals at 80 °C; dye can bleed at joints. No flatness tolerance is given for a 630 × 366 mm ring only 10-27 mm wide. The $150 test stack has not been made.",
+   "to_prove": "3- to 5-layer coupon stacks in the actual stock colours: sectioned for voids, polariscope, yellowing at 70 vs 80 °C, colour halo, break test. Then one full horn scanned against the STEP file."
+  },
+  {
+   "name": "Horn mounting: posts, tie rod, driver on the boss",
+   "as_designed": "Current design: four 304 stainless tubes, ø10 × 7 mm, threaded M10 × 1 into bonded inserts in turned acrylic pads. Their feet stand in brass sockets bonded into the top, each in a 90A polyurethane sleeve. An M6 tie rod runs from inside the pod to an insert under the top. The 3.7 kg driver plus its 0.65 kg adaptor are cantilevered behind the throat on four M5 inserts. Strata: ø16 bronze rods with collars and 'an M12 thread into the pad's insert'.",
+   "status": "questionable",
+   "evidence": "r33-speaker-horn:spinoffs/barkhorn/variants/DETAILS.md (posts row); rfq/tropos/c-metal/parts.csv (C03-C05); rfq/tropos/e-laminated-horn/parts.csv (E20); variants/STRATA.md round two; make/laminated-horn.md ('four 20 mm stainless posts', '14 N on each post'); README.md round 13 (r1).",
+   "check": "Vertical load is trivial: 9.9 kg / 4 = 24 N per post, under 1 MPa. What is missing is anything sideways. The files' own stability push (~92-94 N at the top) lands on the horn, and someone leaning on a horn at about 1.3 m is likely. The posts are thin tubes: cutting M10 × 1 on a ø10 × 7 tube leaves ~0.9 mm of wall at the thread root. They stand in compliant sleeves, held down by a tension-only rod. There is no lateral, rocking-mode or transit calculation anywhere in the repo, despite STRATA.md's 'the posts' modes were worked on'. Drawing conflicts: ø10 tubes against '20 mm posts'; Strata's M12 thread against pads bored for M10 inserts; and laminated-horn.md's '14 N on each post' for an extra 1.6 kg is really 1.6 × 9.81 / 4 = 3.9 N.",
+   "to_prove": "A lateral push and lean test at the horn's top, with the horn's rocking frequency measured. Post threads and inserts under that load. Transit with the driver fitted."
+  },
+  {
+   "name": "Weight and tipping (current and Strata)",
+   "as_designed": "About 71 kg (current; formed-horn assembly 8.3 kg) or 74 kg (Strata; horn assembly 9.9 kg + 0.27 kg lip = 10.2 kg, caldera 2.1 kg, bronze posts). Four M8 levelling feet, front and back pairs 25 mm from the edges. Stability check S7 (round 35, worked for a 72 kg speaker with 10 kg of resin horn): 'push at the top about 118 N·m' against 124 N·m restoring forward and 138 N·m back.",
+   "status": "questionable",
+   "evidence": "r33-speaker-horn:spinoffs/barkhorn/README.md round 35 (S7); cloud.py lines 46-50; variants/STRATA.md 'The numbers' and 'Stability'; make/laminated-horn.md 'Mass and stability'; make/fai.md M5; rfq/tropos/e-laminated-horn/layers.csv.",
+   "check": "S7 can only be reproduced as a push of 13 % of the weight at ~1.29 m (0.13 × 72 × 9.81 × 1.285 = 118 N·m) against weight × 0.176 m (124 N·m): a 5 % margin. Because the push scales with weight, the margin depends only on where the centre of mass sits, so Strata's 0.2 kg over the '10 kg allowance' is irrelevant in itself (about +0.3 N·m on each side). Where the mass sits is what changed. The stepped stack's centre of mass is ~98 mm behind the mouth (my calculation from layers.csv), well forward of the resin horn's solid neck that S7 assumed, and the caldera adds mass at the front (STRATA.md: centre of mass moves 3 mm forward). My estimate for Strata is about 119-121 N·m restoring against about 122 N·m of push: -3 % to 0 %, not +5 %. STRATA.md's fallback, moving the front feet out 5 mm, adds only 3.6 N·m (back to roughly 0-3 %). The 10° static tilt is comfortable: the tip angle is about 17-18° with a centre of mass ~0.55 m high (my estimate). The S7 inputs (centre-of-mass positions, heights) and the clause it applies are not in the repo. If the lab applies a flat 100 N instead, the current design is already short (≈129 vs 124 N·m).",
+   "to_prove": "Measure the real centre of mass (three-point weighing). Push-gauge the top in four directions on a non-slip floor. Confirm with the lab which IEC 62368-1 clause 8.6 tests apply. Design for at least 10 % margin."
+  },
+  {
+   "name": "Inputs, controls, remote and cover",
+   "as_designed": "No jacks of EARF's own: everything is on the FA122 plate (XLR in and loop-through, RCA left/right, AES, S/PDIF coax I/O, Toslink, USB for setup, C14 inlet and rocker, Select button and LEDs). Hypex's Fusion Remote Kit sits in the master only, behind the front panel's own tint (fallback: a ø12 clear rod window). Master and slave are linked by 75 ohm coax on S/PDIF. The Hypex RC-5 remote (CR2032 coin cell) is to be swapped for a 2 × AAA programmable RC-5 remote. Cover: a cloth disc on a 12 mm acrylic frame held by magnets on the current design; none on Strata, with the disc optional.",
+   "status": "sound on paper, needs a prototype test",
+   "evidence": "r33-speaker-horn:spinoffs/barkhorn/README.md round 36 'Volume from Hypex's remote' and round 31 'The amplifier's plate'; make/compliance.md §1; components.json (hypex-remote, hypex-remote-kit, hypex-link-coax); variants/DETAILS.md and STRATA.md (grille). Hypex Fusion Manual R4, fetched (master/slave link, IR kit).",
+   "check": "The hardware is all Hypex catalogue parts, used the way the manual describes. Unproven: whether 940 nm IR passes 19-20 mm of each tint (a carbon-black smoke may block it), and whether the AAA universal remote can send RC-5 device 16; neither has been tried. Not addressed anywhere: the intended system (Mantle's line out into two earthed Class I speakers that are also joined by the coax link) is a textbook ground loop, and RCA has no loop-through, so each speaker needs its own run. Strata leaves a 15 in paper cone exposed.",
+   "to_prove": "940 nm transmission per tint, and the remote from 3 m at 30° (FAI E7). The AAA remote working with the FA122. Hum with the actual source and cables."
+  },
+  {
+   "name": "Compliance: FCC Part 15B / EMC",
+   "as_designed": "Class B digital device (it has DSP), self-declared (SDoC) after an EMC pre-scan (~25 Jan) and a lab test (~8 Feb), with the remote tested as part of the system. The rating plate carries no FCC, CE or UKCA marks until they are earned. Deposits before the SDoC are taken as conditional sales.",
+   "status": "sound on paper, needs a prototype test",
+   "evidence": "r33-speaker-horn:spinoffs/barkhorn/make/compliance.md ('For the schedule'); make/schedule.md (EMC/FCC rows); README.md round 35 (rating plate). main:spinoffs/barkhorn/launch/launch-readiness.md rows 1-3 and 'Does the FA122's compliance carry over? No.'",
+   "check": "The route is right (47 CFR 15.101 SDoC), and the files correctly say Hypex's marks do not carry over to the speaker. Nothing has been measured. Acrylic gives no shielding: the class-D module is inside the metal box, but 1-1.3 m of unshielded speaker leads run through the cabinet and up a post to the horn.",
+   "to_prove": "Radiated and conducted emissions pre-scan on the assembled pair. Lead routing or ferrites if needed."
+  },
+  {
+   "name": "Compliance: IEC/UL 62368-1 safety listing, fire, Reese's Law",
+   "as_designed": "The metal compartment serves as the fire enclosure. A 62368-1 pre-check (hipot, touch current, temperature rise; $1,000-2,500). NRTL listing to UL 62368-1 ($10,000-25,000, 8-16 weeks) deferred until before selling 100 units. The coin-cell remote to be swapped for AAA to stay outside Reese's Law.",
+   "status": "questionable",
+   "evidence": "r33-speaker-horn:spinoffs/barkhorn/make/compliance.md; README.md round 36 'Three notes'; spinoffs/barkhorn/price.py (CERT). main:spinoffs/barkhorn/launch/launch-readiness.md rows 4, 6, 8, 12. r46-owner-notes:spinoffs/barkhorn/research/2026-10-31/R3-compliance.md.",
+   "check": "The plan hangs together, but its key inputs are missing. With no CB report for the FA122, an NRTL has to evaluate an uncertified internal SMPS. The three enclosure gaps above are still open. The cabinet is ~53 kg of UL 94 HB acrylic plus polyester batting, and the speaker-output wiring runs through it; the woofer channel can exceed 100 W into its 5.9 ohm minimum. Whether those circuits count as PS2 or PS3 under 62368-1, and what that means for the materials around them, is not addressed. The bar install is a workplace, where a listing (or an inspector's field evaluation) is effectively required (launch-readiness rows 4 and 6). 'No federal law requires a listing' is R3's research, not counsel's. price.py budgets $12,000 for certification, below compliance.md's own $13,300-32,500.",
+   "to_prove": "Hypex's CB report. A 62368-1 pre-assessment that covers the power-source class of the amplifier outputs and the stability tests. A US box with no coin-cell remote in it."
+  }
+ ],
+ "top_risks": [
+  {
+   "risk": "Safety listing: the only mains electronics is a Hypex FA122 with no CB report or UL recognition on file, inside a cabinet of ~53 kg of UL 94 HB acrylic plus polyester batting. A UL 62368-1 listing (needed in practice for the bar, shops and insurers) has to evaluate Hypex's own SMPS, and three fire-enclosure gaps are still open in the CAD (the 20 mm acrylic band at the plate, nylon V-2 glands, a capacitor at 2.0 mm against 3 mm).",
+   "severity": "high",
+   "fix": "Ask Hypex for its CB report or construction file now. Put the aluminium collar and the brass glands in the CAD, and move the capacitor to clear 3 mm. Book the 62368-1 pre-assessment with the stability tests and the amplifier-output power-source class on it. If Hypex has no CB report, price a full SMPS evaluation, or R3's own alternative: a DC-input amplifier on an external listed supply."
+  },
+  {
+   "risk": "Strata's tipping margin. S7 gave 5 % (124 vs 118 N·m) for a 10 kg resin horn. The stepped horn's mass sits forward (stack centre of mass ~98 mm behind the mouth) and the caldera adds mass at the front, so my estimate is about -3 % to 0 %. STRATA.md's fallback, front feet out 5 mm, recovers only 3.6 N·m. A 74 kg speaker tipping forward is a serious injury hazard.",
+   "severity": "high",
+   "fix": "Find the first cabinet's real centre of mass by three-point weighing, then push-gauge it at the top in four directions. Design for at least 10 % margin: outrigger feet or a low plinth, since feet at the very edge are limited by the 12.5 mm insert holes. Get the lab's ruling on which clause 8.6 tests apply."
+  },
+  {
+   "risk": "Horn mount never analysed sideways. The stability push and anyone leaning on a chest-high horn load four thin tubes (M10 × 1 cut on ø10 × 7 leaves ~0.9 mm at the thread root) standing in compliant sleeves, held down by a tension-only rod. No lateral, rocking-mode or transit calculation exists, and Strata's M12 posts conflict with the M10 pad inserts in the RFQ.",
+   "severity": "medium",
+   "fix": "Calculate the posts and inserts for ~100 N sideways at the horn's top and a person leaning on it. Use solid posts (Strata's ø16 bronze) clamped in their sockets. Reconcile M10 against M12 before the RFQs go out, and ship the horn separately from the cabinet."
+  },
+  {
+   "risk": "Laminated-horn process: 21 bond lines that must show no bubble, bond lines thicker than the CAD allows (stack +10-30 mm), anneals of up to about 7 days per cycle, and ACRIFIX's warning that the bond yellows above 70 °C against an 80 °C anneal plan. Any of these could eat the spring-2027 float.",
+   "severity": "medium",
+   "fix": "Make 3- to 5-layer coupon stacks in the actual stock sheets this month: sectioned for voids, polariscope, 70 vs 80 °C, colour halo, break test. Specify layer flatness of 0.2 mm or better, and redraw the stack to the bond line the shop can actually hold."
+  },
+  {
+   "risk": "No DSP preset or measurement exists, yet both drivers' survival depends on one. Without the 28 Hz high-pass the woofer reaches 14.6 mm at 20 Hz (Xdamage 15.5). The 33 µF first-order cap passes 300-600 Hz almost whole to a 2 in titanium diaphragm.",
+   "severity": "medium",
+   "fix": "Build the preset from gated in-box measurements, version-lock it and load it at the factory (FAI E6). Set the HF soft-clip for the pad network. Consider a second-order passive high-pass on the HF line, or replace the L-pad with DSP gain (the FA122's 118 dB SNR leaves only ~5 dB SPL of hiss)."
+  },
+  {
+   "risk": "Woofer fixing torque of 15 N·m (variants/DETAILS.md) is above an A2-70 M6's ~9-10 N·m capacity, and FAI M1 would test acrylic-bonded inserts at 30 N·m. Followed literally, it strips screws, spins inserts or cracks the baffle.",
+   "severity": "medium",
+   "fix": "Specify 3-5 N·m with a calibrated driver, test the inserts at 2× that, and check insert length against the acrylic left behind the rebate (7.5-8.5 mm, less with the real 13.1 mm flange)."
+  },
+  {
+   "risk": "Transit: there is no crate or drop design for a 62 kg cemented acrylic box and an acrylic horn carrying a 3.7 kg driver on bonded M5 inserts, and Vienna is planned as crate-and-fly.",
+   "severity": "medium",
+   "fix": "Design crates with the horn packed separately and the driver removed or braced. Run a drop and vibration test (ISTA-style) on the first pair or a dummy."
+  },
+  {
+   "risk": "Heat in the sealed compartment: up to 30.6 W from the L-pad at full sine plus the FA122's unpublished idle losses, with the plate hung on epoxy-bonded inserts beside a 50-60 °C plate. E8 has no numeric limit.",
+   "severity": "low",
+   "fix": "Drop or relocate the L-pad. Specify an epoxy with Tg of 90 °C or higher. Set E8's limits from 62368-1 touch temperatures, and run the 4-hour test early."
+  },
+  {
+   "risk": "Directivity and lobing: the simulation's own data show a 3-4 dB DI bump at 1.1-1.4 kHz (-25 dB at 60° at 1.25 kHz with the 1 kHz crossover), and the 0.62 m driver spacing puts nulls at about ±16° at 1 kHz, near a standing listener at 3 m. EQ cannot fix either.",
+   "severity": "low",
+   "fix": "Measure polars on the first pair. If the bump is audible, revise the horn depth or profile. In the laminated route the air path is a machined STEP file, so changing it costs little before any tooling."
+  },
+  {
+   "risk": "Hum: the intended system (an RCA line out into two earthed speakers that are also joined by the S/PDIF coax link) is a classic ground loop.",
+   "severity": "low",
+   "fix": "Test with Mantle's actual output. Prefer XLR, AES or optical from the source, or give Mantle a balanced output."
+  }
+ ],
+ "numbers_that_conflict": [
+  "Crossover frequency: 800 Hz LR4 'stays' (r33-speaker-horn:spinoffs/barkhorn/acoustics/README.md; README.md round 5) vs 1 kHz LR4 'in the shipping preset' (README.md round 35 S6, round 36) vs 'the 900 Hz crossover' (variants/STRATA.md).",
+  "Horn depth: 278 mm (acoustics/README.md, make/laminated-horn.md, rfq/tropos/e-laminated-horn/layers.csv) vs 'This horn is 170 mm deep' (README.md round 35 S6).",
+  "Horn coverage: 'about 113 x 82 degrees' for the 278 mm horn (README.md 'What the photograph shows' table) vs 95 x 63 (README.md round 5 table) vs a simulated 70-100 x 40-70 (acoustics/README.md).",
+  "HF sensitivity: '108 dB at 2.83 V' for the 16 ohm DE1085TN (README.md round 5) vs 108 dB at 1 W = 4 V, i.e. 105 dB at 2.83 V (components.json; README.md round 35 S5).",
+  "HF L-pad: 10 ohm series / 8.2 ohm shunt, about -9 dB (out/bom.md, the paused bark line) vs 6.8 ohm / 15 ohm, -5.5 dB (out-cloud/bom.md, out-pressed/bom.md).",
+  "Woofer data: the BEM model uses Sd 805 cm² (acoustics/README.md) vs 857 cm² on the datasheet (components.json). Bolt circle 375 mm ('eight holes on 375' in out-cloud/bom.md) vs 374 mm (datasheet; make/fai.md D3). Flange 10 mm 'proportioned' in the CAD vs 13.1 mm flange-and-gasket on FaitalPRO's drawing (drivers31.md).",
+  "Horn posts: ø10 × 7 stainless tubes (variants/DETAILS.md; rfq/tropos/c-metal/parts.csv C03/C04) vs 'the four 20 mm stainless posts' (make/laminated-horn.md). Strata's 'M12 thread into the pad's insert' (variants/STRATA.md) vs pads 'bored for M10 inserts' (rfq/tropos/e-laminated-horn/parts.csv E20) and M10 × 1 inserts (components.json).",
+  "Load per post: '+1.6 kg ... about 14 N on each post' (make/laminated-horn.md); the arithmetic gives 1.6 × 9.81 / 4 = 3.9 N.",
+  "Speaker mass: 72 kg (cloud.py S7 basis; main:launch/launch-readiness.md) vs about 71 kg (variants/DETAILS.md, make/laminated-horn.md) vs 72.5 kg for the stepped laminated horn (make/laminated-horn.md) vs 74 kg for Strata (variants/STRATA.md).",
+  "Strata horn assembly against the tipping allowance: 9.9 kg, 'at that assumption ... the margin holds as computed' (make/laminated-horn.md) vs 10.2 kg with the lip, 'just over' (variants/STRATA.md).",
+  "Cabinet sheet: 20 mm (CAD, out-cloud/bom.md) vs 19 mm stock 3/4 in (make/stock-pair.md; rfq/tropos/e-laminated-horn/parts.csv).",
+  "Amplifier heat: '2 × 125 W ... about 25 W of loss' (variants/DETAILS.md), but the actual loads (8 ohm woofer, 14.5 ohm pad network) cap output near 116 W, and '5 W with music' leaves out idle losses.",
+  "Fire-enclosure openings: 'the box has none except the glands' (make/compliance.md) vs the FA122 plate's 'ten vent slots' (README.md round 31 'The amplifier's plate').",
+  "Port pipe-resonance notch: 515 Hz (README.md round 14) vs about 540 Hz (round 13) vs 543 Hz (pressed cabinet, round 15) vs 560 Hz (Cloud, round 15).",
+  "Bond line: 0.2 mm per joint in the CAD vs 0.5-1.5 mm spacer-controlled (make/laminated-horn.md; R7), adding 10-30 mm to the stack.",
+  "Anneal temperature for bonded work: 80 °C (cloud.py, make/laminated-horn.md, make/assembly.md) vs the ACRIFIX 2R 0190 datasheet: '> 70 °C could also create yellowing' (r46-owner-notes:spinoffs/barkhorn/research/2026-10-31/R7-bonding-cnc-amps.md).",
+  "FA122 mains input: 100-120 / 200-240 V (Hypex page, Parts Express) vs 200-240 V only (Soundimports; flagged in fab/research/amps.md).",
+  "Certification budget: price.py CERT = $12,000 over the first 100 pairs vs make/compliance.md's own $13,300-32,500 (pre-scan + FCC + 62368-1 pre-check + NRTL listing).",
+  "Stability test definition: FAI M5 'tips back to upright from 10° ... (IEC 62368-1's push)' mixes the 10° tilt with S7's top-push moment test.",
+  "Lining: out-cloud/bom.md lists 100 mm polyester batts, but out-cloud/checks.json flags 100 mm as not sold (stock 25/50/75)."
+ ],
+ "not_documented": [
+  "No DSP preset file (HFD) and no measured driver or system data (FRD/ZMA, polars, distortion, impedance) anywhere on the branch. Every crossover, EQ, notch and limiter setting is prose, and FusionAmps ship silent until programmed.",
+  "No prototype exists and nothing has been measured: panels, heat, leakage, IR through the tint, push test, rattles. Every 'check' in variants/DETAILS.md is a calculation or an estimate.",
+  "The S7 tipping calculation itself: masses, centre-of-mass positions, push height and the clause cited. Only its results ('the review's estimates') appear, in README.md round 35 and cloud.py.",
+  "Horn mount under sideways load and under a person leaning on it, and the posts' rocking modes. STRATA.md's 'the posts' modes were worked on' has no calculation in the repo.",
+  "Transit: crating and drop or vibration testing for a 62 kg cemented acrylic cabinet and an acrylic horn carrying a 3.7 kg driver on bonded M5 inserts.",
+  "FA122: a CB report or UL recognition, idle (non-standby) power, and confirmation that the units bought are set up for 120 V.",
+  "IEC 62368-1 power-source class (PS2/PS3) of the amplifier output circuits running through PMMA and polyester, and the UL 94 rating of the specific acrylic grade (HB assumed, never checked).",
+  "Numeric limits for the 4-hour heat test (FAI E8 says only 'below its limit'), the Tg of the epoxy holding the plate's inserts, and abnormal-operation heating of the L-pad inside the sealed compartment.",
+  "Baffle-step and in-room bass: the 50.9 Hz f3 and ~117 dB are half-space figures, with no free-field or in-room prediction.",
+  "Ground-loop and hum handling for the intended system wiring (RCA line out to two Class I speakers joined by the S/PDIF coax link).",
+  "Flatness tolerance for the faced laminate layers. Only stack height (278 ±1 mm), outline (±0.5) and air path (±0.1) are specified.",
+  "940 nm IR transmission of each tint at 19-20 mm (planned, not measured), and whether the AAA universal remote can send RC-5 device 16."
+ ]
+}

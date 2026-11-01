@@ -1,0 +1,245 @@
+{
+ "product": "Hemisphere (pendant: a Bridgelux Vero 10 COB at 180 mA on an ERP ESS010W-0180-42 driver, the 575 lm level, the shade on a 30° bayonet) and Core (cordless table lamp: a hollow formed 160 mm acrylic ball on a 120 × 30 base, three LiFePO4 18650 cells, a proposed contact dock). The strata proposals are noted. Branch origin/r32-lamps-final; \"companions/\" below means origin/r32-lamps-final:spinoffs/barkhorn/companions/. My scratch work is in /tmp/audit-reviewer/ (datasheet extracts, and the network model core_net.py in model/).",
+ "confirmations": [
+  "The audit is right that Core's ball is hollow; the task text's 'solid acrylic ball' is wrong. In companions/crystal.py, ball() is Sphere(R) − Sphere(R − t), with R 80, t 9 and a Ø40 port. That gives 4/3·π·(80³ − 71³) = 645 cm³, less about 11 cm³ of port = 634 cm³ (out-orb-table/bom.md also says 634), × 1.19 = 0.75 kg. A solid 160 mm ball would weigh 2.14 L × 1.19 = 2.55 kg.",
+  "Hemisphere's heat budget holds. I ran companions/hemisphere_thermal.py: 2.7 W into the hub, top 7.3 K/W, hub 49 °C, Tc 50 °C, junction 52 °C, acrylic by the collar 41 °C in a 35 °C room. Hand check of the area: crown side 2.89e-3 + crown top 3.77e-3 + cap side 1.76e-3 + cap top 1.26e-3 = 9.68e-3 m². With about 8 W/m²K convection and 6 radiation that is 7.4 K/W. Bridgelux DS90 gives Rj-c 0.49 K/W, so the script's 0.9 is conservative. strata/CRITIQUE.md item 9 (3.3 W, +31 K) overstates.",
+  "The audit is right that Hemisphere's overhead load path is not closed in the CAD. N['turn'] = 30.0. The pins run r 33-43.5, entirely in the PEEK ring (ID 62), 2 mm short of the Ø62 hub. There is no shoulder or fastener under the ring. Nothing fastens the Ø40 neck into the crown's Ø40.2 bore, yet about 1.4 kg (hub plus shade) hangs on that joint. The plunger has no geometry, and components.json still says the pins are 'pressed into the hub'. Each pin carries only 1.1 × 9.81 / 3 = 3.6 N, so retention, not strength, is the problem.",
+  "The ERP driver is as described. ERP's ESS/ESST datasheet (erp-power.com/wp-content/series-assets/ess-esst-series/datasheet-long/ess-esst-series-datasheet.pdf) lists the ESS010W-0180-42 at 180 mA, Vout 24 min / 37.8 nominal / 42 max, 7.6 W, 1-100 % phase and 0-10 V dimming, FCC Part 15 Class B at 120 V. It is 'UL8750 recognized Class 2', 82 % nominal efficiency, in a potted plastic case 84 × 40 × 25 mm, Tc max 90 °C.",
+  "The cell data are right. Power Sonic's PSL-FP-IFR18650EC sheet (Digi-Key-hosted PDF): 3.2 V; 1,500 mAh at 0.2C to 2.0 V; 4.8 Wh; ≤38 mΩ; max charge 1.5 A; standard charge 0.5C to 3.65 V then CV to 0.05C; 2.5 V cut-off; charge 0-45 °C; 2,000 cycles; 65 × 18.2 mm; 40 g. It says 'Terminal Type: Button', so the BOM's 'flat top' is wrong. Approvals: UL 1642, IEC 62133, UN 38.3. Pack: 3 × 4.8 = 14.4 Wh. Load at full: 2.5 / 0.9 / 3.2 = 0.87 A, or 0.29 A a cell.",
+  "The LTC4162-F points hold: 4.5-35 V input, 1-9 LiFePO4 cells, 3.2 A. Its ordering table lists FAD (I²C-adjustable) and FST (fixed 3.6 V), so the order must say FAD. A 3.45 V hold to termination on LiFePO4's flat curve ends near full, so the '90 %' is not 90 %. A voltage-based gauge can't work on this chemistry, and the LTC4162 has telemetry but no coulomb counter.",
+  "The runtime and charge arithmetic checks. 14.4 × 0.9 / 2.5 × 0.9 = 4.67 h; 14.4 × 0.9 / 2.0 × 0.9 = 5.83 h. 90 % is 4.05 Ah, which at 1.5 A takes 2.7 h: that fails launch/first-articles.md's own '90 % in at most 2.5 h'. About 2 h needs about 2.25 A.",
+  "The dock as written can't make contact or stay level. The pins are recessed 0.5 mm behind the foot plane while the rings are flush. In orb_parts, r 30 on the 170° line is solid acrylic. Two 6 N pins about 37 mm off-centre on one side, against 14.3 N of lamp: 14.3 × 0.057 = 0.82 N·m against 12 × 0.094 = 1.13 N·m, so it tilts until the pins carry 0.82 / 0.094 = 8.7 N. Contact loss at 1.8-2.4 A through 50-100 mΩ is 0.15-0.56 W, not 0.01 W. 5 V / 47 kΩ = 0.11 mA, so detecting removal needs µA sensing. Two holes in the hatch break IP44 unless the pins are sealed.",
+  "Core's CAD defects are real. The LED (z 13.2-14.8) floats 1 mm above the chassis (top at z 12.2). The lamp rests on a 1 mm acrylic annulus at z 0, with the silicone foot ring 0.2 mm above it. The 'column' LED text and the two different foot rings in out-orb-table/bom.md are stale.",
+  "Stability checks. CG ≈ (0.76 × 100.45 + 0.70 × 15) / 1.46 = 59.5 mm, so the lamp tips at atan(57 / 59.5) = 43.8°, and a push of 14.3 × 57 / 180 = 4.5 N at the top tips it. The loose ball rolls out first: at asin(50 / 80) = 38.7° of tilt, or with 0.76 × 9.81 × tan 38.7° = 6.0 N sideways.",
+  "The hardwired canopy problem is real, and slightly worse than the audit says. The ERP part is UL 8750 recognized, not listed, so the luminaire must enclose it, and the canopy is HB cast acrylic. out-dome-pendant/bom.md has no crossbar, ground screw or connectors. strata/out-terrace/bom.md shows the right build.",
+  "Forming and the pictures: a full hemisphere formed from 10 mm sheet thins most in the last-formed zone (the ball's equator, on a male mould), so the drawn 9 mm walls and the tint casts are idealised, and no anneal step is stated. The shade's glow in the pictures is a shader setting: hemi_mounting.py sets liner glow 1.4 and shade_glow 0.25.",
+  "Core's electronics are only a description, and the money gap is real. launch/boards.md lists no schematic, MPN BOM, layout or firmware. Its estimate of 160-240 h × $100-175/h = $16-42k compares with $400 booked in launch/first-articles.md.",
+  "On the strata proposals: Terrace and Halo are the more buildable pendants (a metal canopy, a crossbar, cable grippers, a fin stack). The audit is right to worry about heat-set inserts in cast acrylic carrying an overhead shade."
+ ],
+ "corrections": [
+  {
+   "subsystem": "Hemisphere: LED module and driver",
+   "original_status": "questionable: the COB at about 24.6 V, losing about 1.2-1.4 V by Tc 85 °C (to about 23.3 V, under the 24 V floor); about 470-500 lm out of the fitting",
+   "corrected_status": "questionable, but because of the voltage-bin spread and the driver's 37.8 V nominal, not warm-up; and the light is understated",
+   "why": "The part number named (BXRC-27G1000-D-73) is a Gen 7 Vero 10, whose datasheet is Bridgelux DS90 (gainer-led.com/uploads/42875/files/Vero-Series-Gen-7-Vero-10-Array.pdf), not the Vero SE's DS120. DS90 Table 6 gives ΔVf/ΔTc = −11.8 mV/°C for the whole array, not the audit's −20 to −22 mV/K. Fig. 3 puts the typical array at about 24.9 V at 180 mA. So a typical COB runs about 24.9 V at Tc 25 °C, 24.6 V at the design's Tc 50 °C and 24.2 V at Tc 85 °C. That stays inside the ERP's 24-42 V window throughout, but is still under first-articles.md's own 24.5 V pass mark at 85 °C. The real exposure is the spread. DS90 lists 24.1 / 26.0 / 28.0 V (min/typ/max) at 350 mA, so a low-Vf array runs about 23.0 V cold and 22.3 V at Tc 85 °C at 180 mA, below the floor at every temperature. ERP's datasheet adds that this model's nominal Vout is 37.8 V, and that 'dimming performance may vary when the driver is operated near its minimum output voltage'. Light: DS90 Fig. 6 gives 54 % of 1,165 lm at 180 mA, about 630 lm at Tc 25 °C and 600 lm at Tc 50 °C (a minimum-flux part, about 530 lm). The cone reflects only the roughly 48 % of light that misses the mouth directly, so the fitting passes 0.521 + 0.479 × (0.85 to 0.95) = 93-98 %, less a few per cent at the holder: about 530-575 lm out, not 470-500. Fix: order a stated Vf bin (the code is marked on the back of each array; DS90 refers to AN92), or use a driver with a lower floor."
+  },
+  {
+   "subsystem": "Hemisphere: dimming",
+   "original_status": "sound on paper, needs a prototype test",
+   "corrected_status": "questionable",
+   "why": "Both makers flag this operating point. ERP: dimming performance may vary near the driver's minimum output voltage. PF ≥ 0.9 and THD < 20 % are specified only at the nominal LED voltage (37.8 V), and ripple current may reach 40 % by the IES method, more than JA8's 30 % flicker limit. Bridgelux DS90 (notes to Figs 1-6): it does not recommend driving its arrays at low currents, and recommends PWM for dimming. So constant-current dimming to 1 % (1.8 mA) on this COB may give patchy or colour-shifted light. Here the COB draws 4.4 of the driver's 7.6 W (58 %), at the bottom of its voltage window."
+  },
+  {
+   "subsystem": "Core: heat in the 30 mm base",
+   "original_status": "questionable (chassis +32 to +45 K at full brightness; with a post to the hatch, chassis about +11 K and cells +9 to +13 K)",
+   "corrected_status": "missing or wrong: no heat path is designed, the drawn one fails, and the proposed post alone is not enough",
+   "why": "I built my own lumped network (/tmp/audit-reviewer/model/core_net.py). Its inputs: the 0.2 mm rim air gap 30.6 K/W; the 1.8 mm acrylic web 10-20 K/W; the 8.1 mm of still air under the chassis 96-159 K/W; the upward path 50-80 K/W; the drum's side 14-18 K/W; a wooden table 20-33 K/W; the ring and ball 8-11 K/W. At 2.1 W it gives the chassis +47 to +67 K, and at 2.8 W (lit and charging) +63 to +90 K. The cells come out +10 to +15 K and +13 to +20 K. The audit's chassis figure sits at the optimistic edge; its cell figure agrees. A bound that doesn't depend on the details: even with perfect internal spreading, the base's outside sheds only about 0.3 W/K (drum side 0.0113 m² × 12 = 0.136; ring 0.0062 m² × 12 = 0.074; table about 0.04; the ball's foot about 0.045). So 2.8 W lifts the whole base about +9.5 K, and in a 35 °C room the cells start at their 45 °C charge limit. A 2 K/W post from the chassis to the hatch (the audit's fix) brings the chassis to +22 to +30 K. But it sends the heat out past the cells, which rise to +17 to +25 K at 2.8 W in the same network. The post fixes the LED and the acrylic, not the cells."
+  },
+  {
+   "subsystem": "Core: battery safety and shipping",
+   "original_status": "sound on paper, needs a prototype test",
+   "corrected_status": "questionable",
+   "why": "The safety case rests on holders 'keyed so a cell cannot go in backwards' plus per-cell switching. Keystone's catalogue page 29 (keyelco.com/userAssets/file/K75p29.pdf) lists the named 1042 as plain 'Leaf Springs'; the polarized version is the 1042P. The 1042 is surface-mount, so it needs a PCB the CAD doesn't have. Its body is 77.1 mm long (86.0 mm over its tabs) and 20.7 mm wide. The drawn holder is 69.2 mm, which matches Keystone's 68.9 mm inside length, not the body. Placed on the drawn chords (cell axis at r 36.2), the real body's corners land at √(46.55² + 38.55²) = 60.4 mm, outside the 60 mm drum. And 'a FET per cell' (boards.md) blocks only one direction: a single MOSFET passes current through its body diode the other way. So unless each cell gets back-to-back switches, either a reversed cell or a 4.1 V cell still feeds the others. Until the real board exists, nothing reliably stops a reversed cell shorting the two in parallel with it."
+  },
+  {
+   "subsystem": "Core: contact dock",
+   "original_status": "questionable (fixable within the about 5 days estimated)",
+   "corrected_status": "questionable; even with the contact geometry fixed, it won't charge at the claimed rate on 5 V",
+   "why": "Beyond the geometry, the dock's 5 V budget doesn't close. The LTC4162 needs at least 4.5 V. At 1.8-2.4 A (charging plus the lamp), a compliant 3 A cable drops 0.2-0.4 V, the dock's fuse and load switch about 0.1-0.35 V, two stainless contacts 0.1-0.5 V, and the ideal diode about 0.05 V. That leaves about 4.3 V typical (3.5-4.8 V across tolerances), so the charger throttles or stops, and 'the same 2 to 3 h' on the dock fails. The 5 days also leave out several things: detection that tells a lamp from a spill, sealed and insulated pins, and the USB board redrawn to reach r 30 (solid acrylic) and r 44 (under the receptacle). One to two weeks is more honest."
+  }
+ ],
+ "recomputed": [
+  {
+   "quantity": "Vero 10 (BXRC-27G1000-D-7x) forward-voltage temperature coefficient",
+   "documented_value": "audit: about −2.5 mV/K per die × 8-9 dies (−20 to −22.5 mV/K)",
+   "recomputed_value": "−11.8 mV/°C for the whole array (Bridgelux DS90, Table 6)",
+   "agrees": false,
+   "note": "The audit overstated the warm-up drop about two-fold."
+  },
+  {
+   "quantity": "COB Vf at 180 mA, Tc 25 °C, typical",
+   "documented_value": "24.6 V (docs and audit)",
+   "recomputed_value": "about 24.9 V, read off DS90 Fig. 3 (±0.15 V)",
+   "agrees": false,
+   "note": "A small difference, but it widens the margin over the 24 V floor from 0.6 to about 0.9 V."
+  },
+  {
+   "quantity": "COB Vf at 180 mA, Tc 85 °C, typical",
+   "documented_value": "about 23.3 V (audit)",
+   "recomputed_value": "24.9 − 0.0118 × 60 = 24.2 V",
+   "agrees": false,
+   "note": "Inside the driver's 24 V floor, but under first-articles.md's own 24.5 V pass mark, so the planned test fails even a typical part."
+  },
+  {
+   "quantity": "COB Vf at 180 mA, low-Vf array",
+   "documented_value": "not computed ('varies by bin')",
+   "recomputed_value": "DS90 gives 24.1 V min against 26.0 typical at 350 mA, so about 23.0 V at Tc 25 °C, 22.7 at Tc 50 and 22.3 at Tc 85",
+   "agrees": false,
+   "note": "Below the 24 V floor at every temperature. A high-bin array (28.0 V at 350 mA) runs about 26.9 V cold. Order by bin code."
+  },
+  {
+   "quantity": "Flux at the COB at 180 mA",
+   "documented_value": "about 590 lm",
+   "recomputed_value": "DS90: 1,165 lm typical (1,025 min) at 350 mA, Tc 25 °C, × 54 % (Fig. 6) = 629 lm; about 600 lm at Tc 50 °C; about 530 lm for a minimum-flux array",
+   "agrees": true,
+   "note": "590 lm is a fair typical figure when hot."
+  },
+  {
+   "quantity": "Lumens out of Hemisphere's fitting",
+   "documented_value": "docs about 500 lm (85 % out); audit 470-500 lm",
+   "recomputed_value": "Direct light sin²46.2° = 0.521, plus 0.479 × 0.85-0.95 reflected in one bounce (the cone's 30.5° half-angle sends every ray out of the mouth) = 93-98 %, less about 3 % at the holder: about 530-575 lm",
+   "agrees": false,
+   "note": "The audit applied the reflectance to all of the light, not just the 48 % that hits the cone. Still to be settled by an LM-79 test."
+  },
+  {
+   "quantity": "Heat into Hemisphere's hub at 575 lm",
+   "documented_value": "2.7 W",
+   "recomputed_value": "4.3 − 575/310 + 0.15 × 575/310 = 2.72 W (2.8 W at the 590 lm, 4.43 W point)",
+   "agrees": true,
+   "note": ""
+  },
+  {
+   "quantity": "Hemisphere low top to room",
+   "documented_value": "7.3 K/W (script)",
+   "recomputed_value": "9.68e-3 m² × (8 + 6) W/m²K = 0.136 W/K, or 7.4 K/W",
+   "agrees": true,
+   "note": ""
+  },
+  {
+   "quantity": "Hemisphere hub-to-collar resistance",
+   "documented_value": "9.2 K/W (the script's guess)",
+   "recomputed_value": "PEEK ring radially, ln(39/31) / (2π × 0.25 × 0.014) = 10.4 K/W, plus 2 mm of air 21.9 K/W, gives 32 K/W; in parallel with the pins (about 100), radiation (about 50) and the 10 mm air annulus (about 78): about 13.5 K/W",
+   "agrees": false,
+   "note": "It raises the hub only about 1 K; the conclusion holds."
+  },
+  {
+   "quantity": "Hemisphere bayonet pin engagement",
+   "documented_value": "not stated; BOM: 'dowel pins 4 × 8, pressed into the hub'",
+   "recomputed_value": "The pins end at r 43.5; the collar bore is at r 41 and the slot runs to r 45.5: 2.5 mm engagement with 2 mm radial play (PEEK OD 78 in collar ID 82). The drawn pin is 10.5 mm long (r 33-43.5), so a 4 × 8 pin standing 4.5 mm proud leaves only 3.5 mm pressed into the PEEK",
+   "agrees": false,
+   "note": "A pin that creeps 2.5 mm inward drops out of its slot."
+  },
+  {
+   "quantity": "Core chassis rise at full brightness (2.1 W)",
+   "documented_value": "audit +32 to +45 K; strata/CRITIQUE.md 'about 15 K'",
+   "recomputed_value": "+47 to +67 K (central +57 K), from my lumped network",
+   "agrees": false,
+   "note": "The audit's figure is the optimistic edge; CRITIQUE's is far off."
+  },
+  {
+   "quantity": "Core cell rise, lit and charging (2.8 W)",
+   "documented_value": "audit +14 to +18 K",
+   "recomputed_value": "+13 to +20 K from the network; even with perfect spreading, 2.8 W ÷ 0.295 W/K = +9.5 K",
+   "agrees": true,
+   "note": "In a 35 °C room the cells reach their 45 °C charge limit even in the ideal case."
+  },
+  {
+   "quantity": "Core with a 2 K/W post from the chassis to the hatch, at 2.8 W",
+   "documented_value": "audit: chassis about +11 K, cells +9 to +13 K",
+   "recomputed_value": "chassis +22 to +30 K, cells +17 to +25 K",
+   "agrees": false,
+   "note": "The post moves the heat into the hatch and the cell bay."
+  },
+  {
+   "quantity": "Keystone 1042 holder in the Ø120 drum",
+   "documented_value": "CAD holder 69.2 × 20 × 11.8 mm; cell corners at r 55.9",
+   "recomputed_value": "Keystone 1042 body 77.1 × 20.7 × 16.0 mm, 86.0 mm over its SMT tabs; corners at √(46.55² + 38.55²) = 60.4 mm, beyond the drum's 60.0 mm",
+   "agrees": false,
+   "note": "It doesn't fit, and it isn't the polarized version (that is the 1042P)."
+  },
+  {
+   "quantity": "Charger input voltage on the dock at full load",
+   "documented_value": "'the same 5 V' as the cable (CORE-RECHARGE.md)",
+   "recomputed_value": "5.1 V − 2.0 A × (0.15 Ω cable + 0.1 Ω fuse and switch + 0.1 Ω two contacts) − 0.04 V ≈ 4.3 V typical; 3.5-4.8 V across tolerances",
+   "agrees": false,
+   "note": "The LTC4162 needs 4.5 V; it will throttle or stop."
+  },
+  {
+   "quantity": "Dock contact loss",
+   "documented_value": "0.01 W (CORE-RECHARGE.md); the audit's 0.05-0.5 W",
+   "recomputed_value": "1.76² × 0.05 = 0.15 W up to 2.36² × 0.1 = 0.56 W",
+   "agrees": true,
+   "note": "Agrees with the audit, not the docs."
+  },
+  {
+   "quantity": "Core charge to 90 % at 1.5 A",
+   "documented_value": "about 2 h (PARTICULARS.md)",
+   "recomputed_value": "4.05 Ah ÷ 1.5 A = 2.7 h of constant current alone",
+   "agrees": false,
+   "note": "The audit is right."
+  },
+  {
+   "quantity": "Core runtime at full brightness, 90 % limit",
+   "documented_value": "4.7 h",
+   "recomputed_value": "14.4 × 0.9 / 2.5 × 0.9 = 4.67 h",
+   "agrees": true,
+   "note": "It rests on an unchosen 2.5 W LED."
+  },
+  {
+   "quantity": "Core tip angle and ball roll-out",
+   "documented_value": "43° and 39° (audit)",
+   "recomputed_value": "atan(57 / 59.5) = 43.8°; asin(50 / 80) = 38.7°, or 6.0 N sideways",
+   "agrees": true,
+   "note": ""
+  }
+ ],
+ "new_risks": [
+  {
+   "risk": "Core's named cell holder doesn't fit and doesn't key polarity. Keystone lists the 1042 as plain 'Leaf Springs'; the polarized version is the 1042P. It is a surface-mount part on a PCB the CAD lacks, 77.1 mm long (86.0 mm over its tabs) × 20.7 × 16.0 mm. On the drawn chords its corners land at r 60.4 mm, outside the 60 mm drum. Mounting it on a PCB lifts each cell about 2 mm into the roughly 2 mm of acrylic between the bays and the cup. The drawn 69.2 mm bay also leaves only about 2 mm a side for contacts, so the 66-67 mm button-top and 68-70 mm protected 18650s that 'standard cells you can buy anywhere' implies won't go in.",
+   "severity": "high",
+   "fix": "Design the bays around bare spring contacts set into the milled base: a shrouded positive contact that only meets a button top, and a coil spring at the negative end. Re-check the 120 × 30 envelope with real contact lengths and redraw. Or switch to a keyed, factory-made LiFePO4 pack behind the same hatch."
+  },
+  {
+   "risk": "Per-cell switching, if built literally as 'a FET per cell' (launch/boards.md), is unsafe. A single MOSFET blocks only one direction. Fitted to stop a reversed cell, it lets a 4.1 V Li-ion cell discharge through its body diode into the other two (0.9 V across about 0.1 Ω, roughly 9 A). Fitted the other way round, it passes the reversed cell instead: 6.4 V across about 0.1-0.15 Ω, tens of amps.",
+   "severity": "high",
+   "fix": "Give each cell back-to-back FETs (or an ideal-diode controller), off by default. Power the MCU through a diode-OR from every cell, so it can check voltages before any cell is connected. Add a PTC or fuse per cell, and run the wrong-cell tests in launch/first-articles.md on the real board."
+  },
+  {
+   "risk": "5 V USB starves the LTC4162 (minimum 4.5 V in). At 1.8-2.4 A (charging plus the lamp), the cable, the dock's fuse and load switch, and two stainless contacts leave about 4.3 V typical at the charger. By cable alone it is marginal in the worst case. Both the dock's charge time and 'about 2 h' fail.",
+   "severity": "medium",
+   "fix": "Negotiate USB PD at 9 V (the boxed 20 W adapter offers it) with a PD sink controller in the dock and in the lamp's USB-C path. That also cuts the current through the contacts by about 45 %, and the I²R loss by about 70 %. Or use a charger designed for 5 V USB. Measure VIN at full load on the first board."
+  },
+  {
+   "risk": "Charging while lit at full brightness in a 35 °C room can't pass in this envelope, even with the audit's post. With perfect spreading the base sheds about 0.3 W/K, so 2.8 W already puts the cells at about 45 °C. A post to the hatch pushes heat toward the cells (+17 to +25 K at 2.8 W). The 2.5 W for 200 lm assumes 80 lm/W, low for a CRI 90, 2700 K mid-power board.",
+   "severity": "high",
+   "fix": "Specify the LED at 130 lm/W or better at 2700 K, CRI 90 (200 lm at 1.5 W or less saves about 1 W). Add firmware foldback (dim first, then cut charge current) keyed to an NTC on every cell, not just one. Then either relax the 35 °C charge-while-lit target or accept slower charging while lit."
+  },
+  {
+   "risk": "Hemisphere's JA8 margin is thinner than the docs say. DS90 gives R9 at least 50 for 90 CRI parts, with a ±3 tolerance, so a conforming COB can measure 47. ERP allows ripple up to 40 % by the IES method, against JA8's limit of under 30 % flicker below 200 Hz. ERP specifies PF of 0.9 or more only at the nominal 37.8 V load, while this COB runs about 24-25 V at 58 % of the driver's power.",
+   "severity": "medium",
+   "fix": "Use the 97-CRI version of the same array, BXRC-27H1000-D-7x: R9 at least 93, the same 26 V class, about 11 % less light (1,033 against 1,165 lm at 350 mA). Measure flicker and PF at 100, 20 and 10 % on the named dimmers before claiming JA8."
+  },
+  {
+   "risk": "The plug-in swag's power plan can't drive this COB at the low end of its stated range. certification.md (Hemisphere item 5) and boards.md section 3 propose a listed 24 to 30 V constant-voltage plug-in plus a small constant-current board. A buck stage fed from 24 V can't reach a COB at 24.2-26.9 V (typical hot to high bin cold). From 30 V it has only 3-6 V of headroom, marginal for buck modules that ask for about 3 V.",
+   "severity": "medium",
+   "fix": "Set the supply at about 30 V with a low-dropout linear stage (worst case 0.18 A × 7.6 V ≈ 1.4 W) or a buck rated for the headroom. Or use a 36-48 V Class 2 supply for dry locations, or a listed Class 2 constant-current plug-in. Bench it across the Vf bins."
+  },
+  {
+   "risk": "Hemisphere's bayonet engages only 2.5 mm, with 2 mm of radial play. Nothing but the pins centres the collar on the PEEK ring, so a sideways knock cuts engagement on two of the pins to about 1.5 mm. The BOM's 4 × 8 dowel can't span the drawn 10.5 mm pin. A pressed pin that creeps 2.5 mm inward releases its share of the 1.1 kg shade.",
+   "severity": "medium",
+   "fix": "Use shouldered pins screwed through the PEEK into the hub (or captured by it), with at least 4 mm of engagement, plus a centring land that holds the collar to about 0.3 mm. Add the audit's secondary lock and the hub and neck fastenings, and a sideways-knock case to the 200-swap test."
+  },
+  {
+   "risk": "The COB is misidentified and its seat doesn't match. BXRC-27G1000-D-73 is a Gen 7 Vero 10 (datasheet DS90), not a Vero SE 10 (DS120). It is a star board 20 mm across the flats, with its own connector port and M2.5 mounting slots, so it needs no Chip-Lok. The docs' 1,130 and 1,020 lm don't match DS90's 1,165 and 1,049 lm. The spun reflector's 2 mm flange, at r 10-12, would sit on the array's face near its solder pads and connector.",
+   "severity": "low",
+   "fix": "Pick one part and one holder. Redraw the seat (screws on 19 mm centres), keep the reflector's flange clear of the pads or insulate it, and re-quote the light figures from the right datasheet."
+  },
+  {
+   "risk": "Core's v1 plug-in route (launch/core-v1-plugin.md, route 1) pairs a 24 V adapter and a Mean Well LDD-350L buck (9-36 V in, 2-32 V out, input must stay above output) with the Luminus CDM-9-3018-90-36-DW02. By Luminus's naming, -36- parts are about a 35 V class (a CXM-22-30-90-36 lists 35 V; an -18- part lists 17 V), so the chain can't light it.",
+   "severity": "low",
+   "fix": "Confirm the Vf on Luminus's sheet. Use an 18 V-class dim-to-warm part (Future lists the CDM-6-3018-90-18-DW01), or a 48 V Class 2 supply. Bench the colour shift under the chosen dimming."
+  },
+  {
+   "risk": "Core's touch electrode is also the ball's seat: the ball rests on silicone in the anodised ring, so handling or lifting the ball couples a hand to the electrode. The ground reference also changes between battery, USB cable and dock, and adapter noise is a known cause of phantom toggles in USB-charged touch lamps. The audit's alternative heat path (the chassis tied into the ring through an insulating pad) would add roughly 100 pF from the electrode to ground.",
+   "severity": "low",
+   "fix": "Track the baseline and debounce in firmware. Test on battery, on cable and on the dock, with a wet ring, a glass on it and the ball being lifted. Keep the heat path away from the touch ring."
+  },
+  {
+   "risk": "Nothing yet decides where Hemisphere's load enters the canopy. The cord grip, the optional cable gripper (1.6 kg sustained, a 35 lb pull test) and the canopy screws all sit in black cast acrylic, and none is drawn. A notched acrylic thread under sustained load cracks.",
+   "severity": "low",
+   "fix": "Anchor the grips and grippers in the steel strap or crossbar, or use a metal canopy as Terrace does, with the acrylic as a cover only."
+  }
+ ],
+ "overall_after_review": "not yet sound",
+ "verdict_in_one_line": "The audit's \"not yet sound\" stands, and most of its findings check out. But it misread the COB's voltage data (the danger is the voltage-bin spread, not warm-up), undersold Hemisphere's light, and was too generous about Core's base heat and its fix. It also missed that Core's named cell holder neither fits the base nor keys polarity, and that 5 V through the dock starves a charger that needs 4.5 V in."
+}

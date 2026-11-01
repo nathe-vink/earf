@@ -1,0 +1,226 @@
+{
+ "product": "Tropos powered 2-way horn loudspeaker (\"barkhorn\"), branch origin/r33-speaker-horn: the current Cloud design with the thermoformed horn, and the Strata variant with the 22-layer stepped laminated horn and the woofer caldera.",
+ "confirmations": [
+  "Parts are real, current and correctly matched: FaitalPRO 15PR400-8, B&C DE1085TN-16 and Hypex FA122. Hypex's FA122 page (fetched 2026-11-01) gives 2 x 125 W into 4 ohm, 2 x 75 W into 8 ohm and 15 biquads per channel, so 24.5 V into 8 ohm holds. The $422.40 price comes from r46-owner-notes:spinoffs/barkhorn/research/2026-10-31/R7-bonding-cnc-amps.md.",
+  "Bass box, recomputed with my own lumped model (/tmp/audit-claude/calc/box.py, datasheet T/S values, 135.6 L, 2 x 113 mm x 223 mm ports, end correction 0.732 d): fb 37.97 Hz, f3 51.0 Hz, 4.41 mm peak at 59 Hz at 24.5 V with the 28 Hz LR4, port air 9.1 m/s, 117.3 dB at 100 Hz (half-space), 14.6 mm at 20 Hz without the high-pass. QB3 gives 141.9 L at 41.0 Hz. The audit and README round 36 are right on every one.",
+  "HF network arithmetic is right: 15 || 16 = 7.74 ohm, -5.47 dB, the amp sees 14.54 ohm, 19.3 W + 11.3 W in the pad at 24.5 V, 13.0 V / 10.6 W at the driver, about 118 dB at 1 m. The 33 uF cap is 301 Hz into 16 ohm and 332 Hz into the 14.54 ohm network.",
+  "A lost preset gives silence, not a fried driver. Hypex Fusion Manual R4 (cdn.hypex.nl/media/df/df/c2/1678368740/Fusion%20Manual%20R4.pdf): 'the DSP does not contain a filter out of the box. A filter needs to be configured and uploaded ... before the FusionAmp will produce an output signal.' The manual also says soft-clip is off by default, so FAI E6 is right to check that the limiter is on.",
+  "The woofer torque is wrong as the audit says: DETAILS.md's '15 N·m' is about 12.5 kN of clamp (15/(0.2 x 0.006)), above an A2-70 M6 button head's capacity, and FAI M1 would then test the bonded inserts at 30 N·m.",
+  "Horn data reproduced from acoustics/summary.json: horn DI 13.08 dB at 1.25 kHz against 10.92 at 1 kHz; with the 1 kHz crossover, system DI 15.0 dB and -24.8 dB at 60 deg at 1.25 kHz; throat resistance 1.93-2.14 rho c from 1.12 to 1.4 kHz. With 0.62 m spacing the nulls fall at +-16.1 deg and -6 dB at +-10.6 deg at 1 kHz, matching the file's +-10 deg window.",
+  "Panel and wall modes check: D = 2.47 kN·m for 20 mm PMMA; a 300 x 500 bay is 242 Hz and a 356 x 500 bay 190 Hz; a 200 x 450 x 6.6 mm horn wall is 158 Hz.",
+  "Laminated stack checks: 22 x 12.64 = 278.1 mm. Integrating layers.csv (/tmp/audit-claude/calc/stack.py) gives 3.97-4.29 L, or 4.05 L with a superellipse exponent running 7 to 2, which is the file's figure. The centre of mass sits 95-98 mm behind the mouth. Strata's wider mouth layer adds 0.30 kg (the file says 0.27).",
+  "The thin post threads are real. product.py gives the posts d=10, bore=7 ('stainless lamp tube threaded M10 x 1'), so the M10x1 root (8.77 mm) leaves 0.89 mm of wall.",
+  "The ground-loop concern is right, with one detail now confirmed. The Hypex manual says 'Analogue input signal can not be routed to digital output', so with Mantle's RCA out each speaker needs its own unbalanced run into a Class I speaker, plus the coax link between two earthed chassis. Toslink or AES into the master, daisy-chained over S/PDIF, avoids the loop.",
+  "Hypex's installation rules (separate compartment, V-1/V-0, all conductive parts earthed, 3 mm clearance, 'This product must be earthed') are as the audit says. The three open gaps are documented in README.md round 36 and make/compliance.md: the 20 mm acrylic band, V-2 nylon glands, and the capacitor at 2.0 mm.",
+  "The flame-polish contradiction is real. product.py's port-frame note says 'the mouth rounded over R8 on the router and flame polished', and the tube is then 'cemented square into its frame's back face'. In an 8 mm frame the R8 runs right to that joint.",
+  "The idle-loss point is right. Hypex's NC122MP page (the FA122's module) gives 'Idle Power: 7.5W', plus the DSP/input board, so about 10-12 W whenever the amp is awake. DETAILS.md's 'music ... about 5 W' leaves this out.",
+  "The cost conflict is real: price.py CERT = 12000.0 against compliance.md's own pre-scan + FCC + pre-check + NRTL total of $13,300-32,500.",
+  "The audit is slightly harsh on the 80 °C anneal. The ACRIFIX 2R 0190 TDS quoted in R7 gives its higher shear strength 'after 5 hrs at 80 °C', so 80 °C is the maker's own conditioning. The '> 70 °C' yellowing warning is cosmetic, and the 70 vs 80 °C coupon test is already planned in make/laminated-horn.md."
+ ],
+ "corrections": [
+  {
+   "subsystem": "Weight and tipping (current and Strata)",
+   "original_status": "questionable (current +5 % margin; Strata -3 % to 0 %)",
+   "corrected_status": "fails as drawn on IEC 62368-1's static-stability test, both variants, every direction",
+   "why": "S7 used a push of 13 % of the weight, which is not the governing test. UL's CB report E323749-A6002-CB-1 (IEC 62368-1, a floor-standing unit of 63 kg / 83.26 kg; contex.com/wp-content/uploads/2018/05/E323749-A6002-CB-1-Original-RB67GRC67GRC67R.pdf) records the 8.6.2.2 static-stability force as 123.5 N and 163.2 N. That is exactly 20 % of each weight (63 x 9.807 x 0.2 = 123.6; 83.26 x 9.807 x 0.2 = 163.3), as in 60950-1's 20 %/250 N lineage. The same report records the 8.6.5 horizontal force as 100 N. At 20 % on the horn's top: 0.2 x 72 x 9.81 x 1.285 = 181.5 N·m, against S7's own 124 forward / 138 back (-32 % / -24 %). Sideways: 706 N x 0.23 m = 162 N·m (-11 %). Even applied at 1.0 m (141 N·m) the front-to-back direction fails. The 8.6.5 force of 100 N (128.5 N·m) already beats S7's 124 forward. Strata is not the specific problem either. My mass budget (/tmp/audit-claude/calc/tip.py) totals 71.8 kg, matching the files' 71, and puts the centre of mass 232 mm behind the front face, not the 200 mm S7 implies. That is because the holed front panel (~6.9 kg) is far lighter than the solid back with its lands, ribs, bosses and amplifier (~16 kg at y 370-410). On that basis the critical direction is backward (-3 % on 13 %, -11 % on 100 N). Strata moves mass forward (CoM ~224 mm), which helps rather than hurts. I could not read the clause text itself, so confirm the force and height with the lab."
+  },
+  {
+   "subsystem": "Horn mounting: posts, tie rod, driver on the boss",
+   "original_status": "questionable",
+   "corrected_status": "unsafe as drawn: no positive retention against rocking",
+   "why": "In product.py the post feet stand loose in sleeved sockets ('its foot plain ... in a polyurethane sleeve'). The only hold-down is one M6 rod in rear post 3 (rod_places: front posts at x +-183, y 35; rear posts at x +-40, y 353; tie_post=3). About the rear-post line, and about the line through post 3, the rod lies on the pivot, so only the horn's weight resists (/tmp/audit-claude/calc/rock.py). The formed assembly (8.35 kg, CoM ~255 mm) starts to rock at about 15-31 N at its top, depending on rod preload. Strata (10.2 kg, CoM ~213 mm) does so at about 23-46 N. A 62368-1 push at the top lands on the horn at 92-147 N. After about 2.3 deg the front feet leave their 13 mm sockets, and what holds it then is the 0.9 mm thread roots and the sockets' epoxy. FAI M4 only checks that the horn 'cannot be lifted', so it would pass this design."
+  },
+  {
+   "subsystem": "Compliance: IEC/UL 62368-1 safety listing",
+   "original_status": "questionable",
+   "corrected_status": "not yet sound",
+   "why": "Beyond the audit's gaps: the stability clause very likely fails as drawn (above). The January '62368-1 safety pre-check' in make/schedule.md and make/compliance.md lists only hipot, touch current and temperature rise, so the failure would surface late. There is also no listed mains cord set anywhere in out-cloud/bom.md, and the Hypex manual says 'Other cables are not included'."
+  },
+  {
+   "subsystem": "Power supply and mains construction",
+   "original_status": "questionable (includes 'nothing confirms a given unit is set up for 120 V')",
+   "corrected_status": "questionable, with the mains-voltage item closed",
+   "why": "Hypex Fusion Manual R4, 'System information': 'Auto switching Line input power: Low Line 100-120Vac ±10%, High Line 200-240Vac ±10%'. The NC122MP OEM page says 'Automatic input voltage selection: Yes'. No unit-by-unit 120 V check is needed. The CB-report, acrylic-band, gland and 2.0 mm clearance gaps stand."
+  },
+  {
+   "subsystem": "Heat: amplifier and HF pad in the sealed compartment",
+   "original_status": "sound on paper, needs a prototype test (low)",
+   "corrected_status": "sound for normal use; questionable under abnormal operation",
+   "why": "Normal music use is fine: about 10-12 W of idle loss through the FA122's plate. But the L-pad's up to 30.6 W (a full-scale HF sine, a 62368-1 abnormal-operation case) has no path to room air. The pad's 3 mm plate sits inside the compartment, and the compartment's walls face the lined, sealed bass box (amp_box in product.py; assembly.md step 17). By my rough estimate the box air rises about 19 K at 30 W (~0.6 K/W) and the compartment wall sits about 50 K above that. README round 36 also says the 33 uF polypropylene capacitor lies on that same plate; PP film caps are typically rated 85-105 °C. The Hypex manual adds a 'Max. 35 °C' ambient, and FAI E8 has no number."
+  }
+ ],
+ "recomputed": [
+  {
+   "quantity": "Helmholtz tuning, 135.6 L, 2 x 113 mm x 223 mm",
+   "documented_value": "38 Hz",
+   "recomputed_value": "37.97 Hz (A 0.02006 m2, Leff 0.3057 m)",
+   "agrees": true,
+   "note": "Lumped model, datasheet T/S values."
+  },
+  {
+   "quantity": "f3 (half-space)",
+   "documented_value": "50.9 Hz",
+   "recomputed_value": "51.0 Hz",
+   "agrees": true,
+   "note": "Free-standing below the ~205 Hz baffle step, up to 6 dB less."
+  },
+  {
+   "quantity": "Peak excursion at 24.5 V with 28 Hz LR4",
+   "documented_value": "4.4 mm at 59 Hz",
+   "recomputed_value": "4.41 mm at 59.3 Hz",
+   "agrees": true,
+   "note": "Xmax 5.75 mm."
+  },
+  {
+   "quantity": "Excursion without the high-pass",
+   "documented_value": "14.4 mm at 20 Hz (README); audit 14.6",
+   "recomputed_value": "14.6 mm at 20 Hz; 18.8 mm at 15 Hz",
+   "agrees": true,
+   "note": "Below 20 Hz (record warps from Mantle) a missing high-pass exceeds Xdamage 15.5 mm."
+  },
+  {
+   "quantity": "Port air speed at full drive",
+   "documented_value": "9.1 m/s",
+   "recomputed_value": "9.1 m/s at 38 Hz with the HP; 12.8 m/s without",
+   "agrees": true,
+   "note": "Well under ~17 m/s."
+  },
+  {
+   "quantity": "QB3 starting alignment",
+   "documented_value": "142 L, ~41 Hz (audit)",
+   "recomputed_value": "141.9 L, 41.0 Hz",
+   "agrees": true,
+   "note": ""
+  },
+  {
+   "quantity": "L-pad attenuation, load and dissipation at 24.5 V",
+   "documented_value": "-5.5 dB; audit 14.5 ohm, 30.6 W",
+   "recomputed_value": "-5.47 dB, 14.54 ohm, 19.3 W + 11.3 W",
+   "agrees": true,
+   "note": "The 30.6 W goes into the sealed compartment."
+  },
+  {
+   "quantity": "Amplifier hiss at the bare HF driver",
+   "documented_value": "audit: '118 dB SNR', ~28 uV, ~5 dB SPL at 1 m",
+   "recomputed_value": "Hypex: NC122MP output noise 40 uV, about 8 dB SPL at 1 m bare (2.5 dB padded); FA DSP 'SNR DA -111dB' unweighted",
+   "agrees": false,
+   "note": "The 118 dB figure is not in Hypex's manual or module page. The conclusion stands: hiss is no strong reason for a pad."
+  },
+  {
+   "quantity": "FA122 losses while awake",
+   "documented_value": "DETAILS.md: about 5 W with music; audit ~10 W",
+   "recomputed_value": "NC122MP idle 7.5 W + DSP board, about 10-12 W",
+   "agrees": true,
+   "note": "Agrees with the audit, not with DETAILS.md."
+  },
+  {
+   "quantity": "Laminated stack volume, mass and centre of mass",
+   "documented_value": "4.05 L / 4.8 kg; audit CoM ~98 mm behind the mouth",
+   "recomputed_value": "3.97-4.29 L; CoM 95-98 mm behind the mouth; Strata lip +0.30 kg",
+   "agrees": true,
+   "note": "Strata horn assembly CoM about 213 mm behind the cabinet front."
+  },
+  {
+   "quantity": "Load per horn post",
+   "documented_value": "laminated-horn.md '14 N'; audit 'really 3.9 N'",
+   "recomputed_value": "14.0 N = 5.7 kg horn (no driver) / 4; true per-post load 9.9 x 9.81 / 4 = 24.3 N",
+   "agrees": false,
+   "note": "The file mislabels the horn's own weight as the 1.6 kg increment. It is not an arithmetic slip on 1.6 kg."
+  },
+  {
+   "quantity": "S7 overturning push",
+   "documented_value": "about 118 N·m",
+   "recomputed_value": "118 N·m at 13 %; 128.5 at 100 N (8.6.5); 181.5 at 20 % (8.6.2.2), all at 1.285 m, 72 kg",
+   "agrees": false,
+   "note": "The number reproduces only on the 13 % basis, which is not the static-stability test."
+  },
+  {
+   "quantity": "Speaker centre of mass, distance behind the front face",
+   "documented_value": "S7 implies 200 mm (124 fwd + 138 back = 708 N x 0.37 m)",
+   "recomputed_value": "232 mm current (71.8 kg budget); 224 mm Strata (75.0 kg)",
+   "agrees": false,
+   "note": "A ~30 mm difference is ~20 N·m, more than any claimed margin."
+  },
+  {
+   "quantity": "Strata tipping margin, 13 % basis",
+   "documented_value": "audit: -3 % to 0 % forward",
+   "recomputed_value": "forward +18 %, backward +1 %; current design backward -3 %",
+   "agrees": false,
+   "note": "On 20 %: current -19 % fwd / -37 % back / -11 % side; Strata -23 % / -34 % / -11 %."
+  },
+  {
+   "quantity": "Force at the horn's top that starts it rocking on its posts",
+   "documented_value": "not calculated anywhere",
+   "recomputed_value": "formed 15-31 N; Strata 23-46 N (backward, or toward the tie-rod post)",
+   "agrees": false,
+   "note": "Rod preload 0-1 kN; lever 0.416 m from the post feet to the top."
+  },
+  {
+   "quantity": "FAI M2 leak test (ports plugged, 20 Hz, 100 dB, 1 kPa)",
+   "documented_value": "a routine check",
+   "recomputed_value": "needs ~30 V and 10.9 mm peak excursion; gives 976 Pa",
+   "agrees": false,
+   "note": "Nearly 2 x Xmax, and impossible through the shipping 28 Hz HP. M3 at 100 dB at 20 Hz (ports open) would need 48 V and 28.7 mm."
+  },
+  {
+   "quantity": "Acrylic left behind the woofer rebate",
+   "documented_value": "audit: 11.5 mm rebate, 8.5 mm left",
+   "recomputed_value": "product.py gasket=1.0, so an 11.0 mm rebate and 9.0 mm left; with FaitalPRO's 13.1 mm flange-plus-gasket, 6.9 mm (5.9 mm in 19 mm stock)",
+   "agrees": true,
+   "note": "Minor. The BOM buys 1.5 mm gasket strip while the CAD draws 1.0."
+  },
+  {
+   "quantity": "Vertical null at 1 kHz, 0.62 m spacing",
+   "documented_value": "audit ±16 deg; file -6 dB window ±10 deg",
+   "recomputed_value": "null ±16.1 deg; -6 dB ±10.6 deg",
+   "agrees": true,
+   "note": ""
+  },
+  {
+   "quantity": "Bond-line growth over 21 joints",
+   "documented_value": "10 to 30 mm",
+   "recomputed_value": "6.3 to 27.3 mm over the CAD's 0.2 mm per joint",
+   "agrees": true,
+   "note": "The file counts the whole bond line, not the excess."
+  }
+ ],
+ "new_risks": [
+  {
+   "risk": "Both variants very likely fail IEC 62368-1 8.6.2.2 static stability. The force is 20 % of the weight at the top (UL CB report E323749-A6002-CB-1), not S7's 13 %. The overturning moment is 181-191 N·m against 115-169 N·m available in every direction. The base cannot pass on its 420 x 560 mm footprint, and Strata is not the specific culprit.",
+   "severity": "high",
+   "fix": "Get the lab's reading of 8.6.2.2 and 8.6.5 (force, height, directions) now, and add stability to the January pre-check. Measure the real centre of mass by three-point weighing. Redesign the base so every tipping edge is at least about 285 mm from the CoM (0.2 x 1.295 m, plus 10 %): for example an outrigger plinth of about 600 x 600 mm with feet at its corners. For installed units, use a lab-accepted restraint."
+  },
+  {
+   "risk": "The horn is held against rocking only by its own weight about the rear-post line and about the line through the tie-rod post. It starts to lift at about 15-31 N (formed) or 23-46 N (Strata) at its top. Past ~2.3 deg the front feet leave their sockets, and the load falls on 0.9 mm thread roots and epoxy-bonded sockets: a falling 8-10 kg horn from 1.3 m.",
+   "severity": "high",
+   "fix": "Positively fix every post foot to the top, for example a threaded foot with a nut or a clamped insert from below, or use two tie rods on a diagonal. Use solid posts (Strata's ø16 bronze), and reconcile M10 against M12. Replace FAI M4's lift check with a 150 N push at the horn's top in eight directions with no lift-off."
+  },
+  {
+   "risk": "Thermal layout of the HF protection. The 33 uF polypropylene cap lies on the L-pad's resistor plate (README round 36). The pad's up to 30.6 W (full-scale HF sine, a 62368-1 abnormal-operation case) can only leave through the compartment walls into the lined, sealed bass box. The 25 W resistors' ratings assume a heatsink and 25 °C ambient.",
+   "severity": "medium",
+   "fix": "Stand the cap off the plate, with 3 mm of clearance. Either sink the resistors to the FA122's outer plate, where Hypex's thermal limit then protects them too, or drop the pad and attenuate in DSP: 40 uV of NC122MP noise is about 8 dB SPL at 1 m. Add a full-scale 1-2 kHz sine abnormal-operation run with thermocouples on the cap, the plate, the compartment flange and the acrylic."
+  },
+  {
+   "risk": "FAI test levels would overdrive the woofer. M2's 1 kPa leak test (20 Hz, 100 dB, ports plugged) needs about 30 V and 10.9 mm of excursion. M3's 100 dB sweep from 20 Hz with the ports open needs 48 V and 28.7 mm. Both exceed Xmax 5.75 mm and can only be reached by bypassing the protective preset. E4's 'gated, 60 Hz' limit cannot be resolved by a gated in-room measurement.",
+   "severity": "medium",
+   "fix": "M2: a static pressure-decay test at 1 kPa through a port-plug fitting with a hand pump and manometer, or 100 dB at 40 Hz or above (2.7 mm, 244 Pa). M3: sweep 30-200 Hz at 100 dB, and 20-30 Hz at a level held within Xmax through the shipping preset. E4: near-field, spliced, below about 300 Hz."
+  },
+  {
+   "risk": "The preset protecting both drivers can be changed by any owner. USB setup and the Select button (three preset slots) are on the outside plate. Hypex's 'Filter protection' (a password) exists but is specified nowhere, and soft-clip is off by default.",
+   "severity": "medium",
+   "fix": "Load the same verified filter into all three slots, with the 28 Hz HP, limiter and soft-clip. Enable Hypex's filter password at the factory and record it in FAI E6. Keep the series cap as a backstop."
+  },
+  {
+   "risk": "No mains cord set is in the parts list, and Hypex ships none. A listed US product needs a listed NEMA 5-15P to C13 cord.",
+   "severity": "low",
+   "fix": "Add an 18 AWG SJT listed cord set to out-cloud/bom.md and the 'other' RFQ."
+  },
+  {
+   "risk": "Drawing conflicts that reach RFQs. The FA122 plate has ten 4.5 mm holes (README round 31; product.py amp_plate_pieces), but eight M4 inserts are specified (Hypex: '8 or 10 screws'). The amp box is 1.5 mm in the CAD and RFQ but 2 mm 6061 in the BOM, and 6061-T6 cracks on tight folds. The posts are priced as lathe parts from 20 x 20 stock in the BOM, which is the likely source of laminated-horn.md's '20 mm posts', but specified as 10 x 7 lamp tube in RFQ C03/C04.",
+   "severity": "low",
+   "fix": "Check against Hypex's 2D drawing. Specify 5052-H32 for the folded box. Make the BOM and RFQs agree before anything is sent."
+  }
+ ],
+ "overall_after_review": "not yet sound",
+ "verdict_in_one_line": "The electro-acoustic core is legitimate (real, well-matched parts, and the box, port, crossover and power arithmetic reproduce), but as drawn Tropos is not yet sound mechanically: its footprint very likely fails IEC 62368-1's 20 %-of-weight stability push in every direction for both variants, the horn is held against rocking only by its own weight in two directions, and the DSP preset, every measurement and the safety listing do not exist yet."
+}

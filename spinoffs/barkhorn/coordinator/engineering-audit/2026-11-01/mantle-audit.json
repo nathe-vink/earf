@@ -1,0 +1,225 @@
+{
+ "product": "Mantle record player: Strata Float v2 (proposal A; r48 = origin/r48-mantle-design:spinoffs/barkhorn/companions/mantle-r48/, mantle_strata_v2.py + out-strata-v2/, $3,784), with v3 (the newest commit) and the Outcrop alternative (proposal B) noted. Earlier docs: r32 = origin/r32-lamps-final:spinoffs/barkhorn/companions/. My arithmetic is in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/calc/ (numbers.py, arm.py, tip.py).",
+ "overall": "not yet sound",
+ "one_line": "Part of this is real engineering: the bought core is genuine and used within its ratings (Rega RB330, Rega's 24 V motor and Neo PSU, Pro-Ject Phono Box S2, Ortofon 2M), the custom bearing's sums are right, and making the posts rigid correctly removes the old 25-36 Hz float problem. But it can't be built as drawn: the pulley is sized for 250 rpm, while the specified US 60 Hz Neo runs the motor at 300 rpm, so the platter turns at 40.0 rpm instead of 33 1/3. Strata v2 also has no rear jack panel, its LED strip doesn't fit its slot, and the closed lid probably stops the arm late in each side. Its BOM and drawing notes also contradict its CAD.",
+ "subsystems": [
+  {
+   "name": "Motor (Rega 24 V AC synchronous kit) and its mounting",
+   "as_designed": "Rega 24 V low-vibration AC synchronous motor upgrade kit ($265 at Audio Advisor; motor, hand-tuned board and mount). It hangs from a 3 mm 5052 aluminium plate on three Rega grommets ($15 of spares) in a 76 mm pocket through the deck, so the pulley's height is fixed by solid acrylic. In Strata v2 the motor sits at the left rear, 184.7 mm from the spindle (180 mm in Outcrop). The CAD models it as a 50 x 30 can with a 4 mm shaft, with grommets on r 36 at 120 deg.",
+   "status": "sound on paper, needs a prototype test",
+   "evidence": "r48/out-strata-v2/bom.md (motor, motor-grommets, motor-plate). r48/mantle_strata_v2.py: motor = cyl 50, grommets r 36, motor_d=184.7. r48/components.json rega-24v-motor note: 'the motor's size and shaft are not published in what was read ... wait on the motor in hand'. r32/launch/mantle-drive.md says Rega lists the kit 'for Rega turntables only ... no fully DIY deck was found', and: 'The Neo PSU drives Rega's motor board ... sends 24 V AC, plus a 20 V DC line that switches a relay on the motor's board for 45 rpm. Keep the board inside the motor pod.' No board, board location or Neo connector appears anywhere in the r48 CAD.",
+   "check": "The motor type is right for a quality belt drive. An AC synchronous motor is locked to the Neo's crystal-derived frequency, it has Rega's anti-vibration board, and it is mounted the way Rega mounts it. Hanging it from the deck correctly fixes the baseline's tipping pod (0.18 N m tipping against 0.26 N m restoring). These things are ASSUMED, not known: the can size; the shaft diameter and length (the belt plane is 15 mm above the deck top, so the shaft needs about 25 mm above the plate); the grommet pitch; and where the board and its 24 V AC + 20 V DC lead go. The motor's 1-2 W draw (numbers.md) is an estimate.",
+   "to_prove": "Buy the US kit and Neo first and bench-run them before any acrylic is cut (already in the r32 plan). Measure shaft speed on both settings, shaft size and length, can and grommet dimensions, and fit the board in the float gap. On the first article, check rumble: at least 65 dB below, DIN-B weighted (r32/launch/first-articles.md)."
+  },
+  {
+   "name": "Speed control (Neo PSU MK2), drive ratio, speed accuracy, wow and flutter",
+   "as_designed": "Rega Neo PSU MK2, US 60 Hz 115-120 V version ($445). It gives a DSP sine drive, 33/45 on a button (45 by frequency, so the belt never moves) and a rear trim in 0.01 rpm steps. There is one pulley, with a 39.48 mm belt face derived as 2 x 150.3 x 33.33/250 - 0.6, i.e. for a motor turning 250 rpm. Targets (r32 first-articles): speed within 0.1 %, drift at most 0.1 % over 30 min, wow and flutter at most 0.10 % weighted.",
+   "status": "missing or wrong",
+   "evidence": "r48/mantle_outcrop.py P: rpm_motor=250.0 with the comment '# Rega's 24 V motor at 60 Hz (mantle-drive.md: check on the kit's sheet)'. r32/launch/mantle-drive.md: 'The Rega motor turns at 250 rpm at 60 Hz [check against the kit's sheet]'. r48/out-strata-v2/render/meta.json: pulley_d 39.48. bom.md neo-psu: 'US 60 Hz'. Retailer and forum sources say the Neo is sold in 50 Hz and 60 Hz versions to match regional pulleys, and that Rega's 24 V motor turns 250 rpm at 50 Hz and 300 rpm at 60 Hz.",
+   "check": "A synchronous motor turns at 120f/p. 250 rpm is a 24-pole motor at 50 Hz; '250 rpm at 60 Hz' would need 28.8 poles, which is impossible. With the specified 60 Hz Neo the motor turns 300 rpm, so the platter runs at 300 x 40.08/300.6 = 40.0 rpm on '33' and 405 x 40.08/300.6 = 54.0 rpm on '45' (+20 %). A trim in 0.01 rpm steps can't recover that. The correct belt face for 300 rpm is 300.6 x 33.333/300 - 0.6 = 32.80 mm. Outcrop's notes do say 'the pulley is turned to the motor's measured speed', which would catch the error, but the CAD, drawings, BOM and README all carry 39.48 mm. Speed accuracy and W&F are targets only; nothing is predicted. Two contributors I can size: every 10 um of pulley eccentricity adds +/-0.06 % at 5 Hz, and the platter's possible 0.12 mm offset on its hub adds +/-0.08 % at 0.56 Hz (see the platter).",
+   "to_prove": "Bench the US Neo and motor with a strobe or tachometer (expect 300 and 405 rpm), turn the pulley to the measured speed (about 32.8 mm), and correct the CAD and BOM. Then run r32's tests: a 3150 Hz test LP into REW, speed within 0.1 % after trim, drift at most 0.1 % over 30 min, and W&F at most 0.10 % DIN-weighted."
+  },
+  {
+   "name": "Belt drive",
+   "as_designed": "A flat ground-rubber or polyurethane belt, 5 x 0.6 mm, from 'any' maker (an O-ring test belt first). It runs round the 300 mm platter rim on the clear stratum, crowned 0.2 mm, and round the pulley. Path 992-994 mm, belt about 945 mm (5 % stretch), wrap 87 deg on the pulley.",
+   "status": "sound on paper, needs a prototype test",
+   "evidence": "r48/out-strata-v2/bom.md belt; r48/out-outcrop/numbers.md 'The drive'; r48/mantle_outcrop.py platter notes (rim crowned 0.2).",
+   "check": "I re-did the arithmetic. Outcrop (C = 180, pitch radii 150.3 and 20.04): wrap = 180 - 2 asin(130.26/180) = 87.3 deg, and pitch path = 2C cos a + (pi + 2a)R + (pi - 2a)r = 994.4 mm. The README's 992 mm is the surface path. Strata v2 moves the motor to 184.7 mm, which gives 1,001 mm and 90.3 deg, so a 945 mm belt stretches 5.9 %, not 5 %. With the corrected 32.8 mm pulley the path is 996 mm. Driving the rim at a 150 mm radius needs little belt tension, so the bearing's side load is small. Platter inertia is 0.020 kg m2; run-up time on Rega's low-torque motor is untested. No belt is specified by part number, and flutter depends on its thickness uniformity.",
+   "to_prove": "Check belt tracking on the crowned acrylic rim over an hour, start-up slip and run-up time, and W&F with the belt actually chosen."
+  },
+  {
+   "name": "Main bearing",
+   "as_designed": "Turned to order: a lead-free brass housing, M30 x 1.5 with a 50 x 5 flange, clamped by a brass nut under the deck at 10 N m on a PTFE washer, in a 30.4 mm clearance bore. Two C932 bronze bushes 10 x 14 x 12, honed to 10 H6. Spindle: 440C at 58 HRC, ground to 10 g5 (per the drawing). A 6 mm tungsten-carbide ball on a lapped 52100 plate, in 2.5 ml of ISO VG 32 oil. r32 found no off-the-shelf bearing.",
+   "status": "sound on paper, needs a prototype test",
+   "evidence": "r48/details.py panel A; r48/mantle_outcrop.py spindle and housing notes; r48/out-outcrop/numbers.md 'The bearing'; r48/out-strata-v2/bom.md spindle line 'Stainless steel 304 ... 126.02'; r32/launch/mantle-drive.md 'the bearing is turned to order ... the critical path'.",
+   "check": "The Hertz contact checks out and matches the file: F = 2.07 kg x 9.81 = 20.3 N, E* = 169 GPa, a = (3FR/4E*)^(1/3) = 65 um, p0 = 3F/(2 pi a^2) = 2.32 GPa, under half of 52100's static limit. Three things are wrong. (1) Under ISO 286, 10 H6 is +0/+9 um and 10 g5 is -5/-11 um, so the clearance is 5-20 um, not the stated 8-12 um; hitting 8-12 needs selective fitting. (2) The BOM prices a turned 304 spindle, which can't be hardened, while the drawing calls for hardened, ground 440C. The baseline review flagged the same split and it is still open. (3) Thermal: the brass housing clamps 20.4 mm of acrylic (the 25.4 mm deck minus a 5 mm counterbore). With a CTE difference of about 53e-6/K, a 20 K swing is 21.6 um. With the acrylic at about 147 MN/m in series with the brass at about 2.3 GN/m, that is about 3.0 kN of preload change, against the 1.7-2.8 kN that 10 N m gives (F = T/Kd, K 0.2-0.12). Cold shipping lets the clamp go slack; warm rooms push the acrylic and the PTFE washer into creep; the housing then sits loose in a 0.4 mm bore. The bush centres are only about 16-17 mm apart, which is acceptable because the belt preloads the spindle to one side.",
+   "to_prove": "Spin-down from 33.33 rpm with the belt off of at least 3 min, and a 100 h run (r32 first-articles). Thermal-cycle the clamped housing from -10 to 40 C and recheck nut torque and spindle tilt. Replace the PTFE washer with a disc-spring stack on a metal washer. Price a ground 440C spindle. Measure each bush and spindle pair's clearance."
+  },
+  {
+   "name": "Platter and hub",
+   "as_designed": "An acrylic laminate (tinted 3 / clear 12.7 / tinted 5.6) cemented with ACRIFIX 2R 0190, annealed and turned to 300 x 21; 1.74 kg (2.07 kg turning); no mat. A brass hub (70 x 5 flange, 40 h6 spigot) is shrunk onto the spindle and turned true. The platter sits on the spigot in a 40.2 H7 bore, held by six M4 x 20 screws on r 28 through all the laminae; run-out 0.05.",
+   "status": "sound on paper, needs a prototype test",
+   "evidence": "r48/out-outcrop/numbers.md; r48/mantle_outcrop.py platter and hub notes; r48/details.py 'hub spigot 40 h6 / platter 40.2 H7'; bom.md platter line ('Cast acrylic tube, tinted through 310 x 310 x 22').",
+   "check": "The numbers check: 1190 x pi x 0.15^2 x 0.021 = 1.77 kg gross, about 1.74 kg net; I = 0.5 m r^2 = 0.0199 kg m2. Impedance sqrt(rho E) is 1.95 MRayl for PMMA and 2.03 for PVC, so the reflection is (0.08/3.98)^2 = 0.04 %. The screws carry the torque, not the bond, which is good. One weakness: a 40.2 H7 bore over a 40 h6 spigot leaves 0.200-0.241 mm of diametral clearance. If the rim is turned before fitting, as the notes order it, the platter can sit 0.12 mm off-centre. With the belt on the rim that is +/-0.12/150.3 = +/-0.08 % speed variation at 0.56 Hz. Also, an earthed housing does not drain static from an acrylic platter; both are insulators.",
+   "to_prove": "Finish-turn the belt face and top with the platter screwed to its hub on its own spindle, and hold rim TIR to 0.02 mm or less. Check the bond lines on a light table after annealing (already planned)."
+  },
+  {
+   "name": "Tonearm, arm board, cartridge alignment and cueing",
+   "as_designed": "Rega RB330 ($675) at 222 mm: effective length 236.5, offset 21.55 deg, overhang 14.5, effective mass 11 g (Rega's published figures). It mounts on a 6061 aluminium puck, 84 x 12, flush in an 84.4 counterbore, held by three M5 countersunk screws into brass inserts, with a 56 mm bore below for access. The Rega three-point holes are 'per Rega's template, UNCONFIRMED'; the puck's centre hole is 24 mm. The record surface is 28.8 mm above the deck, with height set by Rega spacers 'on the first sample'. Cueing is Rega's own lift and rest. Cartridge: Ortofon 2M Black (7.2 g), or a 2M Blue for the first build.",
+   "status": "sound on paper, needs a prototype test",
+   "evidence": "r48/out-strata-v2/bom.md arm and arm-puck; r48/mantle_outcrop.py arm-puck note; r48/components.json rega-rb330 note (Rega's mounting data 'not read'). The RB330 manual (the PDF linked in components.json) says: 'The arm mounting pillar requires a diameter of 25mm'; 'exactly 222mm from the record centre'; the clearance arc must be 'within the rear and side edges ... (and the lid when closed)'; 'at least 250mm clearance ... to the inside front'. Rega's and retailers' listings confirm 222 / 236.5 / 21.55 / 14.5 / 11 g.",
+   "check": "The arm, its geometry and its cueing are off the shelf and proven. The geometry gives Rega's own null points of 56.9 and 116.8 mm (n1 x n2 = L^2 - D^2 = 6,648; n1 + n2 = 2L sin 21.55 = 173.7), set with the protractor printed on Rega's template. Arm-cartridge resonance is 1/(2 pi sqrt(0.0192 x 0.020-0.022)) = 7.7-8.1 Hz, at the low edge of the 8-12 Hz window. Front clearance is 270 mm against Rega's 250 mm minimum, which is fine. Wrong or open: the centre hole is 24 mm against Rega's 25 mm. The three-point pattern hasn't been checked against the puck's M5 screws at r 35. The arm height isn't designed: spacers can only raise the arm, so if 28.8 mm is below Rega's design height the puck must be remade (cheap, because the puck is replaceable). The arm's sweep against the lid isn't checked (see the dust cover).",
+   "to_prove": "Get Rega's template and put the 25 mm hole and the three-point pattern into the puck. On the first article, check that the tube sits level and record the spacer stack, and measure arm resonance at 8-12 Hz from a test LP sweep (r32)."
+  },
+  {
+   "name": "Floating deck on posts, feet, isolation and stability (Strata v2)",
+   "as_designed": "Deck: two clear 12.7 mm sheets cemented flush (25.4 mm), 450 x 360, faces fly-cut. Base: clear 9.5 mm, 380 x 290, 35 mm in from the deck all round. Four clear acrylic posts, 30 dia x 40, bonded at both ends with ACRIFIX at x 145/305, y 75/285. Four stainless feet (36 x 8) stand directly under the posts on 36 x 4 Sorbothane pads (per the CAD), on M8 studs into inserts drilled up through the base and 4.5 mm into each post. The gap is 40 mm. v3 changes the posts to solid stainless 30 x 42, held by the feet's M8 studs.",
+   "status": "sound on paper, needs a prototype test",
+   "evidence": "r48/mantle_strata_v2.py P (posts, post_d, gap, feet_h, base_inset) and the post and foot Parts; r48/README.md section 9; the diff to r48/mantle_strata_v3.py.",
+   "check": "The posts are rigid, so the baseline's 25-36 Hz float problem is gone. Per post, axial EA/L = 3.2e9 x 7.07e-4/0.04 = 56.5 MN/m; laterally, fixed-fixed bending (23.9 MN/m) in series with shear (19.1 MN/m) gives 10.6 MN/m. For about 9 kg on four posts that puts sway at about 345 Hz and bounce at about 800 Hz. Deck: D = Et^3/12(1-nu^2) = 5,063 N m; the first bending mode of the 145 mm side overhangs is about 340 Hz before added masses, and static sag is a few um. The only isolation is the feet: 4 x 1.4 MPa x 1.018e-3 m2/0.004 m = 1.43 MN/m on about 11.5 kg (my mass estimate; the files give none) gives f = 56 Hz. So nothing below about 80 Hz is isolated, and 40-70 Hz is slightly amplified. The pads see 28 kPa, about 2 % strain against Sorbothane's 10-20 % design range, so the real frequency is likely higher. The 'float' is visual only, and the README says so honestly. Stability: the feet stand 160 x 210 mm apart under a 450 x 360 deck. With the centre of mass at about (231, 201), 112.8 N x 75.9/145 = 59 N (6 kgf) pressed on the left edge tips it, or 65 N on the right edge. The bond-only post joints are untested for shipping shock (v3's studs address this).",
+   "to_prove": "Tap test with the stylus on a still record (already planned); an edge-push tip test; a drop and vibration test of a bonded post set. Replace r32's obsolete pass criterion 'float around 15 to 20 Hz' with a feet-resonance and rumble check."
+  },
+  {
+   "name": "Phono stage (Pro-Ject Phono Box S2 inside the float)",
+   "as_designed": "A whole Pro-Ject Phono Box S2 ($269), MM/MC, set to MM 40 dB, 47 k / 100 pF. It sits on four felt pads on the base in the 40 mm gap, behind the bearing (box top at 63 mm against the deck's underside at 65.5 mm). It runs on its own Pro-Ject 18 V DC 0.5 A adapter and lifts out the back between the rear posts (130 mm clear for a 103 mm box).",
+   "status": "sound on paper, needs a prototype test",
+   "evidence": "r48/mantle_strata_v2.py phono box (x 183.5-286.5, y 210-325); r48/out-strata-v2/bom.md phono-stage (still says 'fed from the rear box's regulator'); r48/components.json phono-box-s2 note ('confirm 36 mm tall on the unit'). Retailer listings: 18 V DC/500 mA adapter in the box, MM 47 kOhm, 100/200/320/420 pF; one listing gives S/N as 85 dB against the BOM's 94 dBA.",
+   "check": "A real, suitable part used within its ratings (draw estimated at 0.5 W). The internal placement is plausible, but its hum exposure is untested. The motor can sits about 85 mm from the S2's case (motor centre at (74, 303), S2 edge at x 183.5: 109.5 mm minus the 25 mm can radius). The 25 kHz PWM LED loop runs about 5 mm under the S2's rear: the slot is at y 318-323 under a box that ends at y 325, with 3.5 mm of acrylic plus 1.5 mm of felt between, and Waveform says the dimmer switches the low side. The S2's 36 mm height hasn't been checked against the 40 mm gap.",
+   "to_prove": "Run r32's hum test: at least 70 dB below 5 cm/s with the motor running and the light on and off at several dimmer settings. Measure the S2's height including its feet."
+  },
+  {
+   "name": "Signal I/O, stage/bypass switch, earthing and wiring",
+   "as_designed": "Outcrop: a 2 mm brass plate in a back notch carries two RCAs, a 4 mm earth post, a DPDT 'stage / bypass' toggle (C&K 7201 kind), a 2.1 mm 18 V inlet and the rating. Star earth at the post (arm earth, bearing housing via an M3 tag, S2); the arm and motor leads run in grooves 40 mm apart (details F). Strata v2 buys the same 'back-hardware' and '4 M3 (the back plate)' inserts, but its CAD has no plate, notch, tunnel or groove.",
+   "status": "missing or wrong",
+   "evidence": "r48/details.py panels E and F (Outcrop only); r48/mantle_outcrop.py back-plate. A grep of r48/mantle_strata.py, mantle_strata_v2.py and mantle_strata_v3.py finds no plate, notch or jack geometry, only Part('back-hardware', None). r48/out-strata-v2/bom.md back-hardware and inserts. The README table says Strata 'drops ... the rear box'.",
+   "check": "(1) Strata v2 has nowhere to mount its RCA jacks, earth post, toggle, DC inlet or the Neo's cord grip, and no wiring or earth drawing of its own. (2) A DPDT can only choose which signal reaches the RCAs. In bypass the 2M stays wired to the S2's input, so an outside phono stage sees 47k in parallel with 47k = 23.5 kOhm, plus the S2's 100 pF. That is the wrong load for a 2M Black (47 kOhm) and means treble droop. It needs a 4-pole switch or a relay that also disconnects the S2's input, or no bypass. (3) The LED adapter is Class I (earthed): if its DC side ever touches signal ground there is an earth loop through the amplifier. (4) Details F labels the output 'RCA out to speakers'.",
+   "to_prove": "Draw Strata's rear plate, harness, strain reliefs and earth scheme; specify a 4PDT; measure hum and noise in both switch positions into an outside phono stage."
+  },
+  {
+   "name": "Lit base (LED strip, channel, dimmer, heat)",
+   "as_designed": "A 24 V dotless COB strip, 2700 K, CRI 90+, 'about 3 W/m', 8 mm wide, from 'any (Waveform, LEDSupply, BTF kind)', '1.48 m ... 4.4 W' in one closed loop. It sits in a black anodised U-channel 'for 5 mm strip, 4.6 x 6 ... about 1.3 m', in a 5 x 6 mm slot routed from below 12 mm in from the base's edge. A Waveform FilmGrade dimmer, part 3081 (25 kHz PWM, 6-60 V, 10 A), runs in line, fed by a Mean Well GST25A24-P1J (24 V, 1.04 A, 25 W).",
+   "status": "missing or wrong",
+   "evidence": "r48/out-strata-v2/bom.md led-strip, led-channel, led-dimmer, led-adapter. r48/mantle_strata_v2.py slot, channel and strip: corner radius max(Rb - inset, 2) = 2 mm; the strip is modelled 1.2 x 5 standing on edge, 'its light facing out'; the channel is modelled as a 0.5 mm flat ring, 'closed back faces up'. r48/README.md section 10 (v3: the light 'falls from the open slot onto the shelf'). Waveform's support pages confirm 25 kHz and low-side switching (common positive). r32/launch/certification.md (Mantle): 'Swap the 25 W LED adapter for one listed LPS adapter of 15 W or less'.",
+   "check": "It doesn't assemble as specified. An 8 mm strip fits neither a 5 mm-wide slot lying flat, nor a 6 mm-deep slot on edge, nor a channel 'for 5 mm strip'. The loop's corners are 2 mm radius, far tighter than any LED strip's bend radius, and a 4.6 x 6 aluminium U-channel can't be bent in its own plane to 2 mm. The v2 text has the light facing out through the edge, while v3's drops it onto the shelf: two different installations. Length: the v2 loop is 2 x (353.6 + 263.6) = 1.23 m, so 3.7 W at 3 W/m, not 1.48 m and 4.4 W (those are v1's base); the adapter line still says 6.8 W. 3 W/m is low for COB strip, and no part number backs it. Heat is NOT a concern: 3 W/m in an aluminium channel means a rise of roughly 10-25 K, under the 65 C acrylic limit that round 43 quotes for luminaires. Power class: a 25 W supply makes the LED circuit PS2 under UL/IEC 62368-1, right next to HB-rated acrylic. The team's own round-43 advice (at most 15 W LPS, to stay PS1) was not carried into r48.",
+   "to_prove": "Pick a real strip: part number, width of 5 mm or less (or widen the slot), its minimum bend radius, and a cut pitch that divides the loop. Radius the slot's corners to suit, or use four soldered runs. Use a listed Class 2/LPS 24 V adapter of 15 W or less. Put a thermocouple on the first article, and run r32's light-on/light-off hum test."
+  },
+  {
+   "name": "Power supplies",
+   "as_designed": "All external; nothing inside runs above 24 V. Strata has three wall plugs: the Rega Neo PSU MK2 for the motor (115-120 V 60 Hz in, 24 V AC 350 mA out), Pro-Ject's own 18 V DC 0.5 A adapter for the S2, and the Mean Well GST25A24-P1J feeding the LED through the inline dimmer. Outcrop has two (the Neo and the S2's adapter).",
+   "status": "questionable",
+   "evidence": "r48/README.md table ('supplies at the wall'); r48/out-strata-v2/bom.md neo-psu and led-adapter; r48/README.md section 4 ('Rega's Neo PSU MK2 (mains, its maker's listing; check its US mark)'). r32/launch/certification.md: for the Neo's 'listing certificate. None was found publicly'; 'Mean Well's GST25A24 datasheet claims UL 62368-1 but not LPS or Class 2'. Distributor listings (Digi-Key, RS) describe the GST25A24-P1J as Class I with an IEC C14 inlet.",
+   "check": "The architecture is right: no mains inside, and each supply is lightly loaded (motor 1-2 W from a Neo rated 24 V 350 mA; S2 about 0.5 W from 9 W; LED 3.7 W from 25 W). The certification story is unproven, though. No US listing was found for the Neo or the Pro-Ject adapter, and the BOM describes the Mean Well part wrongly ('IEC C8 inlet ... Class 2 / limited power source', where distributors list Class I with a C14 inlet). Three plugs plus an inline dimmer box is also clumsy for a $3,800 product.",
+   "to_prove": "Get UL/ETL file numbers or CB reports from Rega (for the US Neo) and from Pro-Ject. Swap the LED supply for a listed Class 2/LPS 24 V adapter of 15 W or less, and read its label."
+  },
+  {
+   "name": "Dust cover (Strata's hinged lid) and the arm's clearance under it",
+   "as_designed": "A 3 mm TruCast 2064 box, 448 x 358 x 100, cemented with ACRIFIX, 1.1 kg, resting on 5 mm bumpers. It hangs on two Pro-Ject Debut replacement friction hinges ($16.95 each, 'listed as coming soon'). The hinge feet sit in 9.5 mm acrylic blocks, each screwed with two M4 into inserts in the deck's back edge.",
+   "status": "questionable",
+   "evidence": "r48/mantle_strata_v2.py lid, hinge blocks and hinge-insert holes; r48/components.json cover-hinges; r48/FAULTS.md item 8; r48/mantle_outcrop.py arm_solids() (counterweight 34 mm dia, from 38 to 66 mm behind the pivot; the docstring says the envelope is placed 'at rest ... for the clash check'); out-strata-v2/checks.json (clash check only).",
+   "check": "The mass checks: 1190 x 0.003 x 0.316 m2 = 1.13 kg. Torque is 1.13 x 9.81 x 0.179 = 1.98 N m with the lid flat and 1.40 N m at 45 deg (0.70 per hinge). Pro-Ject publishes no torque rating, so 'within the rating' rests on an estimated Debut lid weight (1.0 kg in FAULTS.md, 1.2 kg in components.json). Clearance: the lid's inner right wall is 51 mm from the arm pivot. Using the CAD's own arm envelope, the counterweight reaches x = 448 at r = 100 mm and 455.8 at the lead-out (r = 53), against the wall at 446. So the closed lid would stop the arm from about r = 105 mm inward. Even a 30 mm weight ending 60 mm behind the pivot reaches 449-450. The clash check only placed the arm at rest. Separately, the left hinge's M4 insert hole sits about 12 mm from the motor pocket's wall and is drilled on the deck's bond line; FAULTS #10 asked for webs of 24 mm or more.",
+   "to_prove": "Lay Rega's template clearance arc on the deck. Sweep the arm from r 168 to r 53 with the lid closed, in CAD and on the first article. Run r32's lid test (holds at any angle from 15 to 80 deg, 50 cycles). Confirm the hinges can actually be bought."
+  },
+  {
+   "name": "Compliance (FCC / UL, labels)",
+   "as_designed": "'No compliance mark until tested (the supplies carry their own)'. Round 43's path: UL 62368-1 with only external listed supplies and nothing inside above ES1/PS1. Lab RFQs ask whether Mantle needs its own test ($0 if covered by the supplies; otherwise $1.5-3.5k for FCC and $4-10k for a UL 62368-1 listing). Outcrop has a rating plate drawn (18 V DC 0.5 A, SN, 'Motor: Rega Neo PSU').",
+   "status": "missing or wrong",
+   "evidence": "r48/README.md section 4 'labels and rating'; r48/details.py panel E; r32/launch/certification.md 'Mantle' (the PS1 path; FCC left 'for the FCC researcher'); r32/launch/lab-rfq/README.md, Mantle row.",
+   "check": "Nothing has been done for r48, and Strata v2 breaks the planned path. Its 25 W LED supply makes a PS2 circuit beside HB acrylic. The integrated 25 kHz PWM dimmer is a clocked device whose FCC Part 15B status is still open. Strata has no rating label, and no plate to carry one. No US listing was found for the Neo. CE/UKCA (EMC, RoHS, WEEE) isn't mentioned for EU or UK sales. Outcrop is the easy path: no clocked circuit inside, two makers' own supplies, and a rating plate drawn.",
+   "to_prove": "A lab pre-scan with the dimmer on (or choose Outcrop, or a PS1 LED circuit); certificates for the Neo and the Pro-Ject adapter; a Strata rating label."
+  },
+  {
+   "name": "Outcrop (proposal B): stance, cover, phono tunnel",
+   "as_designed": "A deck of six laminae plus inlays, 47.1 mm thick, 472 x 382, 8.7 kg. Three turned stainless feet on 40 x 4 Sorbothane at (48, 48), (424, 48) and (322, 340). A 2.9 kg lift-off strata cover on two dowels and three bumpers, with no hinges; while a record plays it stands on its edge as a sleeve display. The S2 sits in a 110 x 38 x 131 tunnel on felt runners behind a brass plate. No LED, two wall plugs. Motor, Neo, pulley, bearing, platter, arm and DPDT are the same as Strata's.",
+   "status": "questionable",
+   "evidence": "r48/mantle_outcrop.py feet list (the comment says 'one at the back's middle'; the coordinates are (W1 - 150, D1 - 42)) and tunnel=(110, 38, 131); r48/out-outcrop/numbers.md mass table; r48/details.py.",
+   "check": "Its electronics are the cleaner of the two: two makers' own supplies, PS1 only, no PWM, and a drawn wiring/earth diagram and rating plate. Its feet arithmetic is right: 3 x 1.4 MPa x 1.257e-3 m2/0.004 m = 1.32 MN/m on 13.1 kg = 50.5 Hz. But the back foot sits at x = 322, 86 mm right of the middle (236). With the centre of mass at about (233, 190), the left-rear tipping line passes only 38 mm from it, while the left-rear corner is 264 mm beyond that line. So about 18-23 N (2 kgf) pressed on the left-rear corner, over the motor, rocks the block onto that corner and lifts the front-right foot about 19 mm. With the foot at the middle it would take 46-56 N. Tunnel: 38 mm for a 36 mm S2 on 1.5 mm runners leaves 0.5 mm, and the S2's height is unconfirmed. Because it plays with the cover off, there's no arm/cover clash, but also no dust cover while playing.",
+   "to_prove": "Move the back foot to the middle (or use four feet) and recheck; measure the S2; check that people can handle a 2.9 kg cover."
+  }
+ ],
+ "top_risks": [
+  {
+   "risk": "Drive ratio wrong for the parts specified. The pulley is sized for 250 rpm, but the US 60 Hz Neo runs Rega's 24-pole motor at 300 rpm, so the platter turns at 40.0 rpm on '33' and 54.0 rpm on '45'. The trim can't correct 20 %.",
+   "severity": "high",
+   "fix": "Bench the motor on the US Neo and turn the pulley to the measured speed: a belt face of about 32.80 mm for 300 rpm with a 0.6 mm belt. Correct the CAD, drawings, BOM and README."
+  },
+  {
+   "risk": "Strata v2 has no rear connection panel. The RCA jacks, earth post, stage/bypass toggle, DC inlet and cord grips are bought but have no part or place to mount. There is no wiring or earth drawing for Strata, and no rating label.",
+   "severity": "high",
+   "fix": "Design a rear plate (Outcrop's brass plate is a template) in a bracket on the deck's back edge or on the base. Route and strain-relieve the Neo, LED and S2 leads, and draw Strata's own wiring and earth panel."
+  },
+  {
+   "risk": "The closed lid probably stops the arm late in each side. The pivot is 51 mm from the lid's inner wall, and the CAD's own counterweight envelope reaches 455.8 against the wall at 446 from about r = 105 mm inward. The clash check only tested the arm at rest.",
+   "severity": "medium",
+   "fix": "Check Rega's template clearance arc. Move the platter and arm group about 15 mm left (keeping the 222 mm distance), or widen the lid and deck. Run the clash check across the arm's full sweep (r 168 to r 53)."
+  },
+  {
+   "risk": "The drawing package contradicts the v2 CAD. Sheet MS2-016's notes describe v1 (M6 studs, a 24.3 mm tinted stack, a 3 x 6 slot 25 mm in, a printed band, brass feet). The BOM says tinted 40 mm tube posts, three pads and three studs, a 44 mm mark, a 304 spindle, an 8 mm strip and a regulator that no longer exists. A shop quoting from it (RFQ 05) would price or build the wrong parts.",
+   "severity": "medium",
+   "fix": "Regenerate the BOM text and drawing notes from the CAD, and add a release check that compares BOM descriptions against the geometry and parameters."
+  },
+  {
+   "risk": "The lit base doesn't assemble as specified: an 8 mm strip in a 5 mm slot and channel, and 2 mm corner radii. Its 25 W adapter makes the LED circuit PS2 under 62368-1, next to HB acrylic.",
+   "severity": "medium",
+   "fix": "Use a real strip of 5 mm or less with a known bend radius, radius the slot corners to suit (or use four soldered runs), and supply it from a listed Class 2/LPS 24 V adapter of 15 W or less. Keep the LED circuit isolated from signal ground."
+  },
+  {
+   "risk": "The DPDT stage/bypass switch leaves the S2's 47k input across the cartridge in bypass, so an outside phono stage sees about 23.5 kOhm: the wrong load for a 2M Black.",
+   "severity": "medium",
+   "fix": "Use a 4PDT or a relay that also disconnects the S2's input, or drop bypass."
+  },
+  {
+   "risk": "Stability. Strata v2's feet sit under the posts (a 160 x 210 mm footprint under a 450 x 360 deck), so about 6 kgf on a side edge tips it. Outcrop's back foot is 86 mm off-centre, so about 2 kgf on its left-rear corner rocks it.",
+   "severity": "medium",
+   "fix": "Outcrop: move the back foot to the middle (46-56 N to tip) or use four feet. Strata: move the feet outboard of the posts, or widen the post grid."
+  },
+  {
+   "risk": "Bearing housing clamp: a 20 K temperature swing changes preload by about 3 kN, against the 1.7-2.8 kN set at 10 N m, on a PTFE washer that creeps, so the housing can loosen in its 0.4 mm clearance bore. The spindle spec is also split: 304 in the BOM, ground 440C on the drawing.",
+   "severity": "medium",
+   "fix": "Fit disc springs on a metal washer, thermal-cycle and re-torque on the first article, and put a ground 440C spindle in the BOM at its real price."
+  },
+  {
+   "risk": "Rega's motor kit is unproven outside a Rega deck ('for Rega turntables only'), and the motor's dimensions, board location and the Neo's 45-rpm relay wiring are not designed.",
+   "severity": "medium",
+   "fix": "Bench-run the kit on the Neo before cutting any acrylic (already in the r32 plan), then design the board's mount and the Neo lead's route."
+  },
+  {
+   "risk": "Compliance not started. No US listing was found for the Neo, the FCC status of the integrated PWM dimmer is undecided, Strata has no rating label, and EU/UK marking isn't addressed.",
+   "severity": "medium",
+   "fix": "Get certificates from Rega and Pro-Ject, have a lab pre-scan, and prefer Outcrop or a PS1 LED circuit."
+  },
+  {
+   "risk": "Untested hum: the motor can is about 85 mm from the S2, and the PWM LED loop runs about 5 mm under the S2's rear.",
+   "severity": "low",
+   "fix": "Run r32's hum test (at least 70 dB below 5 cm/s, light on and off, motor running) and adjust cable dress and spacing as needed."
+  },
+  {
+   "risk": "The platter is centred on a spigot with 0.2-0.24 mm of clearance. If the rim is turned before fitting, that means +/-0.08 % speed variation at 0.56 Hz.",
+   "severity": "low",
+   "fix": "Finish-turn the rim with the platter screwed to its hub on its own spindle; rim TIR 0.02 mm or less."
+  },
+  {
+   "risk": "Lid hardware: the Debut hinges have no published torque rating and the supplier lists them as 'coming soon'. The left hinge insert sits about 12 mm from the motor pocket, drilled on the deck's bond line.",
+   "severity": "low",
+   "fix": "Choose hinges with a stated torque, or test 50 cycles at 15-80 deg, and move the hinge block or insert to at least 24 mm from the pocket."
+  }
+ ],
+ "numbers_that_conflict": [
+  "Motor speed: r48/mantle_outcrop.py says rpm_motor=250, 'Rega's 24 V motor at 60 Hz', and r32/launch/mantle-drive.md says '250 rpm at 60 Hz', but every BOM specifies the US 60 Hz Neo. A 24-pole synchronous motor turns 300 rpm at 60 Hz, so the 39.48 mm pulley (README, numbers.md, meta.json) should be 32.80 mm; as drawn the platter turns 40.0 and 54.0 rpm.",
+  "Pulley and rim: r32/launch/mantle-drive.md and first-articles.md order a stepped 41.3/55.8 mm pulley ('two pulleys ... for the 310 platter rim'); r48 uses one 39.48 mm pulley on a 300 mm rim, with 45 rpm from the Neo.",
+  "Belt path: README and numbers.md say 992 mm; the BOM says 'about 945 long for the 994 path'. Strata v2's motor at 184.7 mm gives a 1,001 mm pitch path, so a 945 mm belt stretches 5.9 %, not 5 %.",
+  "LED power and length: the BOM and the CAD note say 1.48 m and 4.4 W; the v2 geometry gives 1.23 m and 3.7 W (2 x (353.6 + 263.6) mm at 3 W/m); the led-adapter line says 'the strip draws 6.8 W'; FAULTS #9 gives the baseline as 4.7 W; the channel is 'about 1.3 m'.",
+  "LED width: the strip is 8 mm, the channel is 'for 5 mm LED strip, about 4.6 x 6', the CAD slot is 5 x 6, and the CAD models the strip 5 mm tall on edge.",
+  "Posts: the v2 BOM says 'Cast acrylic tube, tinted through, 40 x 40 x 50'; the CAD has clear rod, 30 dia x 40, bonded at both ends; drawing notes sheet MS2-016 says 'M6 studs torqued 4 N m into inserts in the plinth and the base'.",
+  "Feet: the v2 BOM says 'Three Sorbothane discs 40 x 4 ... bonded under the brass feet: about 45 N each, 36 kPa' and 'Three M8 x 30 studs'; the CAD has four stainless feet on 36 mm pads (about 28 kPa at 11.5 kg). Foot material is 304 in the BOM and 303 in the CAD notes.",
+  "Spindle: the BOM says 'Stainless steel 304', $126.02; details.py and mantle_outcrop.py say '440C hardened to 58 HRC, ground to 10 g5'. The baseline review flagged the same split.",
+  "Bearing clearance: the files state '8-12 um' for 10 H6 / 10 g5, but ISO 286 gives 5-20 um for that fit.",
+  "Mark: the BOM says 'EARF 44 wide'; the v2 CAD and README say 18 wide; the Outcrop CAD says 36 wide.",
+  "Phono supply: the BOM's phono-stage line says 'fed from the rear box's regulator'; the README and CAD notes say 'its own listed 18 V adapter'. No regulator or rear box exists in r48.",
+  "Strata v2 drawing notes (sheet MS2-016) describe v1: 'tinted 3 ring / clear 12.7 / tinted 3 ring / clear 5.6 (24.3) ... stepped 2 mm', a '3 x 6 slot ... 25 in', a printed black band and 'brass on Sorbothane'. The v2 CAD has two clear 12.7 mm sheets flush (25.4), a 5 x 6 slot 12 mm in, a U-channel and stainless feet.",
+  "Mean Well GST25A24-P1J: the BOM says 'IEC C8 inlet ... Class 2 / limited power source'; distributor listings say Class I with an IEC C14 inlet; r32/launch/certification.md says the datasheet 'claims UL 62368-1 but not LPS or Class 2'. r32 advised 15 W or less; r48 keeps 25 W.",
+  "Debut hinge basis: FAULTS.md says 'Debut hinges carry about a 1 kg lid'; components.json says 'Debut lids ... weigh about 1.2 kg'. Neither cites a published torque.",
+  "RB330 hole: the puck in the CAD has a 24 mm hole; Rega's RB330 manual says the arm mounting pillar 'requires a diameter of 25mm'.",
+  "Outcrop back foot: the comment says 'one at the back's middle', but the coordinate is x = W1 - 150 = 322; the middle is 236.",
+  "Test plan against design: r32/launch/first-articles.md expects 'the plinth's float around 15 to 20 Hz' and 'the printed band hides the strip'; r48 has rigid posts, feet at about 50-56 Hz, and no printed band.",
+  "Platter: the BOM says 'Cast acrylic tube, tinted through 310 x 310 x 22'; the design is a laminate of tinted 3 / clear 12.7 / tinted 5.6.",
+  "S2 noise: the BOM says 'MM S/N 94 dBA'; one retailer listing says 85 dB.",
+  "Mass: the README table says 'about 15 kg' for Strata Float (v1); v2 states no mass (my estimate is about 11.5 kg), and Outcrop's '50 Hz on 13 kg' feet figure is reused for Strata.",
+  "v3 calls for a Plexus MA310 bond for the stainless posts; the v3 BOM lists only ACRIFIX."
+ ],
+ "not_documented": [
+  "Motor can size, shaft diameter and length, grommet pitch and pulley bore (components.json: these 'wait on the motor in hand').",
+  "Where Rega's motor board goes, and the Neo-to-board connector and lead (24 V AC plus the 20 V DC 45-rpm relay line), in either proposal.",
+  "For Strata: a rear plate, cable exits, cord grips and strain relief; its own wiring and earth diagram; a rating label.",
+  "A bearing section for Strata. Its 25.4 mm deck changes the housing length, bush positions and oil volume from Outcrop's drawn 47.1 mm version. Also undocumented: nut locking and how the preload is retained.",
+  "The arm height stack (spacers 'on the first sample'), Rega's three-point hole pattern ('UNCONFIRMED'), and any check of the arm's sweep against the lid.",
+  "Predicted speed accuracy and wow and flutter; only targets are given.",
+  "The LED strip's part number, its real W/m, bend radius and cut pitch; how the corners are made; and where the dimmer and its lead go.",
+  "The hinge torque rating, and the hinge-foot dimensions assumed for the block's slot (3.2 x 12 x 18).",
+  "Strata v2's total mass and centre of mass, any tip check, and shipping or drop protection for the bonded posts.",
+  "The belt's part number and specification (listed as 'any').",
+  "Tolerances for deck flatness and bearing perpendicularity; only generic 'sheet parts +/-0.5, pockets +/-0.2' are given.",
+  "An FCC plan for the dimmer; CE/UKCA, RoHS and WEEE; listings for the US Neo and the Pro-Ject adapter.",
+  "Static control for an acrylic platter with no mat (an earthed housing doesn't drain it).",
+  "The cartridge alignment procedure. Rega's template protractor comes with the arm, but no file refers to it."
+ ]
+}

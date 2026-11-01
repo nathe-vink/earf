@@ -1,0 +1,181 @@
+{
+ "product": "Mother EARF: the multicolour globe of six slotted, tinted cast-acrylic discs. The bar piece is 1.25 m across in 25 mm sheet. Also checked: main's 1 m back-bar kit and the 300 mm desk globe with a UV-A base, the only version with electronics specified.",
+ "overall": "not yet sound",
+ "one_line": "As a bar piece, Mother EARF is renders plus a sheet-cutting concept. The weight sum is right (about 180-208 kg). There is no hang point, no rigging or secondary, no plinth anchorage and no lighting design at 1.25 m: the glowing rims are a shader. The team's own latest documents say it cannot hang.",
+ "subsystems": [
+  {
+   "name": "Structure: six slotted discs, 23 cemented pieces",
+   "as_designed": "Six flat cast-acrylic discs with the axis at 23.4 degrees. Three meridians: Poison whole, Haze and Dust cut into halves around it. Three parallels at 0 and +/-40 degrees: Ice, Ember and Acid, each cut into 6 sectors. That makes 23 pieces. The bar piece is 1.25 m in 25 mm clear tints. Main's kit is drawn at 300 mm in 8 mm and 1 m in 25 mm. Slot width is the measured sheet plus 0.3 mm at 300 and plus 0.8 mm at 1000. Bonding is specified two ways: thickened Weld-On 16 or Acrifix 1R 0192 (round 33b), or thin Weld-On 4 'wicked into each slot' (round 33c), in a jig. Edges are diamond-polished.",
+   "status": "questionable",
+   "evidence": "main:spinoffs/barkhorn/globe_colour.py:32-34, 204 (full_discs, discs, cut_files); main:spinoffs/barkhorn/companions/README.md:790-801, 829, 862-869. Piece areas from main:spinoffs/barkhorn/out-globe-colour/cut/globe-1000-*.svg: Poison 0.785 m2, Haze and Dust halves 0.378 m2 each, Ice sectors 0.118 m2, Ember and Acid sectors 0.067 m2. Bar size and sheet: r33-planet-world:spinoffs/barkhorn/planet/README.md:347-349.",
+   "check": "Each later disc is cut clean through around the earlier ones. So 20 of the 23 pieces have no interlock: they are edge-to-face butt joints held only by cement. Round 33c's 'A dry fit holds' is therefore wrong; round 33b had it right ('not friction alone'). Weld-On 4 is a water-thin capillary cement for tight joints. A 0.4 mm gap a side is gap-filling work, which needs a Weld-On 40/42 or Acrifix 2R 0190 class cement. There is no annealing step before cut edges are solvent-bonded, which is the classic cause of crazing. Static stress is tiny: a 1.25 m parallel sector weighs about 3.4 kg and sits on two 25 x 450 mm joints, about 1.5 kPa. A 100 kg guest hanging on a parallel's rim is different. That is 981 N x 0.45 m = 441 Nm on two joints with Z = 2 x 0.45 x 0.025^2 / 6 = 9.4e-5 m3, about 4.7 MPa in bending. A starved solvent joint cannot be trusted with that. Square-edged flat parallels in 25 mm sheet also have a fit problem. At a parallel's top face the meridian rim is at 468.0 mm and the parallel's edge at 478.8 mm, so the parallel stands 10.8 mm proud of the meridian there. That leaves an open slot notch at each of 12 crossings. Cast sheet runs +/-10 % + 0.4 mm, so 25 mm sheet can be anywhere from 22.1 to 27.9 mm and slots must be cut to the measured sheet. The docs do say to measure.",
+   "to_prove": "Make full-size 25 mm joint coupons, annealed then cemented, and pull- and peel-test them. Bond one 1:1 parallel sector to a meridian offcut and load it at the rim. Build the 300 mm piece to check slot fit and the rim notches before any 25 mm sheet is bought."
+  },
+  {
+   "name": "Mass",
+   "as_designed": "1.25 m in 25 mm: about 190 kg, or 208 kg if the sheet runs 10 % thick (6.35 m2 x 25 mm x 1190 kg/m3). 1 m: 90 kg in 20 mm and 55 kg in 12 mm (round 33b); 160 kg in 25 mm and 95 kg in 15 mm (round 33c). 2 m: 485 kg in 25 mm.",
+   "status": "sound on paper, needs a prototype test",
+   "evidence": "r33-planet-world:spinoffs/barkhorn/planet/README.md:360-362; main:spinoffs/barkhorn/companions/README.md:808-810, 872-873; r33-planet-world:spinoffs/barkhorn/planet/r43/amsterdam/TECH.md:18",
+   "check": "Re-derived. Four great circles: 4 x pi x 0.625^2 = 4.909 m2. Two parallels: 2 x pi x (0.625 cos 40)^2 = 1.440 m2. Total 6.349 m2, giving 188.9 kg at 25 mm and 207.8 kg at 27.5 mm. Less the slot strips (about 0.27 m2), the hung object is about 181 kg, or 199 kg in thick sheet. So 190-208 kg is right and slightly conservative. At 1 m in 25 mm the gross figure is 120.9 kg, and the 1000 cut files sum to 3.813 m2, which is 113 kg. Round 33c's '160 kg' is sheet bought with offcut, about 40 % over the object, while round 33b's 90 and 55 kg are object masses (97 and 58 kg). The 2 m figure checks: 16.25 m2 x 25 mm = 483.5 kg. The desk globe is 3.5 kg in 8 mm and 2.2 kg in 5 mm.",
+   "to_prove": "Weigh the cut pieces. Design the hanger or plinth for the measured mass plus 10 %."
+  },
+  {
+   "name": "Suspension over a table (rounds 39-42)",
+   "as_designed": "Round 41 hero: one black cable from a canopy, globe centre 2.47 m, its foot 1.85 m up, 1.1 m over a banquette table (kit39; README). Round 39 finals: 'a 3 mm cable'. README: 'hangs from the slab on a rated fixing, not from the fir deck, and needs an engineer'. Round 42 ceiling plan (A-102): 'the 1 m globe in multicolour, hung from the joists', centre 8 ft 4 in, over the communal table for 12.",
+   "status": "missing or wrong",
+   "evidence": "r33-planet-world:spinoffs/barkhorn/planet/r39/kit39.py:140-157 (the cable is a cylinder of radius 0.003 m from 0.766 R above the centre up to the canopy); renders/2026-10-22/barkhorn/planet41/finals/door-mother-colour-p3.shot.json (centre [6.24, 1.15, 2.47], size 1.25, ceiling 3.40, heading 55); planet/README.md:196 ('3.4 m to the fir deck'), 349-366; planet/r39/FINALS.md:14; planet/r42/drawings/A-102.svg; planet/r42/plan42.py:73-76",
+   "check": "The object has no hang point. In kit39 the axis leans about the globe's x-axis, so no disc lies under the plumb line through the centre of mass. I checked the hero frame's geometry. The cable stops 0.479 m above the centre in open space, 95 mm from the Dust and Haze mid-planes and about 25 mm clear of Ember's face. It holds nothing, and its canopy sits on the fir deck the README rules out. Hanging from one point on any rim would let the globe rotate until its centre of mass is under that point, losing the 23.4 degree lean. Holding the lean needs an internal hub or a bridle. Load is 1.86-2.04 kN. On 3 mm 7x19 rope (minimum breaking load 4.69-5.77 kN) that is a design factor of 2.3-3.1:1. Even 1/8 in galvanised aircraft cable (2,000 lbf, 8.9 kN) gives only 4.4-4.8:1. Both fall below the 5:1 sling minimum (ASME B30.9) and the 8-10:1 customary for static loads over people. Nothing is specified for the anchor capacity, canopy, terminations, swivel, seismic swing, or clearance to the Hemispheres. 'Hung from the joists' contradicts 'not from the fir deck'. The 'slab' presumes concrete overhead that the assumed shells (fir deck on beams; wood joists at 15 ft 9 in) do not have. The team later concluded it cannot hang (r43/VENUES.md:17; r44/CONCEPTS.md:18).",
+   "to_prove": "If hanging is kept, all of these are needed: a stamped structural calc for the anchor and an ASCE 7 Chapter 13 seismic check; an internal steel hub through the polar axis bolted to every disc; two independent wire-rope legs at 8:1 or better; a 2x proof load on the hub before install; and a DBI permit."
+  },
+  {
+   "name": "Secondary retention over people",
+   "as_designed": "None.",
+   "status": "missing or wrong",
+   "evidence": "No safety cable, secondary, WLL, design factor, shackle or termination appears anywhere in r33-planet-world:spinoffs/barkhorn/planet/**/*.md, r39/kit39.py or the r42 scripts (searched).",
+   "check": "An independent second load path is standard practice for 180-208 kg over a table of 12 (r42) or a banquette (r41). It has its own anchor and its own attachment to the hub. Nothing like it exists.",
+   "to_prove": "Specify the secondary path and drop-test it with the hub."
+  },
+  {
+   "name": "Plinth (the current plan, rounds 43-44)",
+   "as_designed": "'Mother EARF will stand on a plinth, not hang.' Round 44: the 1.25 m globe on a terrazzo plinth 0.80 m across and 0.40 m high, with 15 % acrylic-offcut chips, between the Tropos pair in the lantern. The render shows a 120 mm post to a 'cradle', with the globe centre at 1.07 m. Main's 1 m piece sits on 'a weighted steel base 300 across, its foot bolted through, and wants a plinth'.",
+   "status": "missing or wrong",
+   "evidence": "r33-planet-world:spinoffs/barkhorn/planet/r43/VENUES.md:17-19; planet/r44/CONCEPTS.md:18; planet/r44/DESIGN.md:20, 60, 109, 206; planet/r44/plan44.py:106; planet/r44/kit44.py:531-537; planet/r43/kit43ams.py:109-127; main:spinoffs/barkhorn/companions/README.md:872",
+   "check": "There is no cradle or armature drawing and nothing says which disc carries the load. In the render the post's top is 27 mm from the Acid parallel's mid-plane and 186 mm off its centre, so as drawn the whole globe would bear on one yellow sector held by two cemented joints. Stability: with the centre at 1.07 m, the assembly tips at 0.37 g static (21 degrees) if the plinth is light, 0.64 g with a 200 kg hollow plinth, and 0.90 g if the plinth is solid terrazzo (about 480 kg). San Francisco's ground-floor design accelerations are of that order (roughly 0.4-0.5 g), so it must be anchored. The plinth sits on the lantern's spring-floated slab (about 7 Hz), which is not an anchor point. The lowest disc is 0.44 m up, within reach of 18 seats, so it can be grabbed or climbed. Main's 1 m globe with its centre of mass about 0.55 m over a 300 mm base tips at about 15 degrees unless bolted.",
+   "to_prove": "Design a steel armature through the axis, bolted through the plinth to the structural slab with an isolation detail through the floated floor. Calculate seismic restraint. Provide a guard or stand-off. Load-test it."
+  },
+  {
+   "name": "Night glow at bar scale (the signed look)",
+   "as_designed": "The owner's choice is 'each rim glowing its colour, no core'. The renders do it with an emission shader on each rim, tuned between 0.011 and 0.14 across passes; round 44 renders it the same way. The only physical method named anywhere is in the 2 m festival sheet: a 24 V IP67 side-emitting strip in a 6 mm groove along each rim under a polished cap, 10 W/m, run at about half. That sheet also says 'the strip method to prove in a 300 mm test piece'.",
+   "status": "missing or wrong",
+   "evidence": "r33-planet-world:spinoffs/barkhorn/planet/README.md:343; planet/r41/r41_colour.py (COLOUR rim 0.14; p2 0.06; p3 0.025; p4 0.011); main:spinoffs/barkhorn/companions/README.md:857-858 ('At 1 m: there's no fluorescent stock 15 to 25 mm thick, so the back-bar piece is day only ... A night glow at 1 m: maybe not'); main:spinoffs/barkhorn/companions/components.json:432 ('globe-glow': the render's stand-in, nothing to buy); planet/r43/amsterdam/TECH.md:20-21",
+   "check": "The signed bar look shows a light source that main's own analysis says does not exist at 25 mm. The strip method at 1.25 m would mean 21.72 m of rim: 217 W and 9.1 A at 24 V at 10 W/m, or 109 W at 5 W/m. Each later disc is cut into pieces around the earlier ones, so the rims break into 23 separately fed segments (Poison 1, Haze 2, Dust 2, Ice 6, Ember 6, Acid 6). Each segment needs wires through a cemented joint and leaves a dark end-gap at the crossing. A cap bonded over the groove makes the strips unserviceable. White LEDs under a thin tinted cap read pale, so the colour needs coloured LEDs, including a violet. None of this is specified.",
+   "to_prove": "Decide between the day look (tints under a spot) and a real glow. If glow, build the 300 mm rim-lit test piece first (TECH.md budgets EUR 600-1,200) with a named listed strip, Class 2 drivers, removable caps and wiring through the hub. Photograph it against the render."
+  },
+  {
+   "name": "Heat in the rim grooves",
+   "as_designed": "Nothing at 1.25 m. TECH.md asserts 'the LEDs run cool' at 10 W/m full and about half in use. The desk base has a 1 W UV ring in aluminium.",
+   "status": "sound on paper, needs a prototype test",
+   "evidence": "r33-planet-world:spinoffs/barkhorn/planet/r43/amsterdam/TECH.md:21, 56; my estimate below",
+   "check": "The globe is open discs, not an enclosure, so heat only matters in a capped rim groove. My estimate assumes PMMA k = 0.19 W/m.K, a 25 mm plate acting as a fin and h = 10 W/m2.K. About 7 W/m of heat at 10 W/m electrical gives roughly a 24 K rise at the groove, plus 2-5 K inside the strip. That is about 52 C in a 25 C room and about 59 C near a 32 C ceiling. At 5 W/m it is about 40-47 C. Cast PMMA's continuous service limit is about 70-80 C and many strips' Tc limit is 60-75 C, so 10 W/m is marginal and 5 W/m is fine. The desk UV ring's 1 W in an aluminium base is negligible.",
+   "to_prove": "Thermocouple the strip and the groove wall at full power for 4 h in a 35 C enclosure."
+  },
+  {
+   "name": "Power, controls and service access",
+   "as_designed": "Nothing for the bar piece. Round 44 uses DALI dimming throughout, and the globe appears on the lighting plan only as a spot ('Mother EARF (its colored shadow)'). The 2 m sheet puts IP67 24 V fused drivers and a DMX/timer in the plinth.",
+   "status": "missing or wrong",
+   "evidence": "r33-planet-world:spinoffs/barkhorn/planet/r44/DESIGN.md:172; planet/r44/drawings/A-102.svg; planet/r43/amsterdam/TECH.md:21",
+   "check": "Hung, the only link to the ceiling is the support cable: there is no power drop, driver location or strain relief. On the plinth, there is no route from a floor box through the plinth, post and cradle into a disc and on to 23 segments. 217 W at full needs at least three Class 2 supplies of 100 VA or less. Nothing says how a failed strip or driver is reached.",
+   "to_prove": "Produce an electrical drawing: remote listed Class 2 drivers, circuits, DALI integration, wiring through the hub with a service loop, and a replaceable-strip detail."
+  },
+  {
+   "name": "Hard spot and coloured shadow (the day look)",
+   "as_designed": "One narrow spot behind the globe: 135 W at 20 degrees and 3000 K in Blender terms, plus a 45 W rim spot. The round 42 plan gives it 'its own spot', and the round 44 plan has a spot in the lantern for 'its colored shadow'.",
+   "status": "off-the-shelf / proven",
+   "evidence": "r33-planet-world:renders/2026-10-22/barkhorn/planet41/finals/door-mother-colour-p3.shot.json (mother-spot, mother-rim); planet/r42/drawings/A-102.svg legend; planet/r44/drawings/A-102.svg",
+   "check": "Clear tinted cast sheet under a hard point source throws coloured shadows. That is ordinary physics, and any listed 15-25 degree LED spot or profile on the track will do it. The 135 W is the renderer's light power, not a fixture rating, and no fixture is named. This is the only part of the show that would work as rendered today.",
+   "to_prove": "Pick a listed fixture. Mock it up with a tinted offcut to check the shadow's density on the wall."
+  },
+  {
+   "name": "300 mm desk globe: UV-A base",
+   "as_designed": "300 mm globe in 5 mm fluorescent cast (8 mm in the model) on a black-anodised aluminium base 110 x 22 mm with a seat ring. Inside: twelve 395 nm 3528 UV-A LEDs (about 1 W) on a 48-62 mm aluminium PCB, 5 V constant-current, a touch dimmer and USB-C. The ring is estimated at $22.",
+   "status": "sound on paper, needs a prototype test",
+   "evidence": "main:spinoffs/barkhorn/globe_colour.py:8-16, 37, 152, 160-168, 185; main:spinoffs/barkhorn/companions/components.json:422-430; main:spinoffs/barkhorn/companions/README.md:842-858, 870-871",
+   "check": "Electrically trivial: 12 x about 20 mA x about 3.3 V is about 0.8 W, roughly 0.16-0.25 A from USB-C. The parts are generic, with no part numbers, schematic or PCB, and the modelled base has no cavity for the board or socket. Fluorescent Perspex exists in 3 and 5 mm, some colours in 3 mm only, with no violet, as the docs say. The README says Haze stands in the base and is fed directly. In the model the lean is about the camera axis, so it is Poison's rim that sits over the ring; Haze's plane passes about 20 degrees from the base point, while the ring is within about 12 degrees. So the non-fluorescent violet disc gets no direct feed, yet the night render lights all six rims equally (2.5). The globe rests loose in a matching spherical cup, so it can roll to any orientation. With 3.5 kg and its centre of mass 151 mm up over a 55 mm base radius, it tips at about 20 degrees or about 6.6 N at the top. The docs note an IEC 62471 assessment is still needed.",
+   "to_prove": "Make a dark-room sample of the six sheets over the ring. Key the globe to the base and widen or weight the base. Do IEC 62471, plus UL 153 and FCC Part 15B if it is sold."
+  },
+  {
+   "name": "Cut files and fab package",
+   "as_designed": "SVG and DXF outlines per disc at 300 mm (8 mm) and 1000 mm (25 mm). There is no BOM, no assembly or jig drawing and no checks file.",
+   "status": "questionable",
+   "evidence": "main:spinoffs/barkhorn/out-globe-colour/cut/ (12 DXF, 12 SVG); main:spinoffs/barkhorn/globe_colour.py:204-245. The output folder holds only cut/, earf-globe-colour.json and render/, while main:spinoffs/barkhorn/companions/out-dome-pendant/ has bom.csv, cutlist.csv, a drawings PDF and checks.json.",
+   "check": "There are no files for the 1.25 m bar piece. Scaling the 1000 files by 1.25 would give 32.3 mm slots for 25 mm sheet. Every outline appears twice, plus zero-area loops, because _flat sections a 0.01 mm slab and writes both faces and the sides. One Poison disc is 3 polylines; the six equator sectors are 30 loops. A laser would cut each path twice. There are no 5 mm files for the recommended desk sheet.",
+   "to_prove": "Regenerate clean single-loop outlines at 1250 mm and at 5 mm from the measured sheet, and have the cutter's CAM review them."
+  },
+  {
+   "name": "Fire and building code",
+   "as_designed": "Flagged only: 'Cast acrylic burns, and CFC section 807 may class it as a hanging decoration (a flame test, at most 10 % of the ceiling): the first question for SFFD.'",
+   "status": "questionable",
+   "evidence": "r33-planet-world:spinoffs/barkhorn/planet/README.md:284, 363-364; planet/r42/housebook/index.html:381",
+   "check": "180-208 kg of PMMA at about 25 MJ/kg is about 4.5-5.2 GJ of fuel. It would hang over, or stand among, seated guests in an assembly room. Ordinary cast PMMA is not flame-retardant and drips while burning. The issue is correctly flagged but unanswered, with no fallback such as FR sheet or a smaller size.",
+   "to_prove": "Hold a pre-application meeting with SFFD and DBI before any sheet is bought. Get the material's ASTM D635 (CC1/CC2) data and NFPA 701 data if it is demanded."
+  },
+  {
+   "name": "Electrical listing",
+   "as_designed": "None for the globe.",
+   "status": "missing or wrong",
+   "evidence": "main:spinoffs/barkhorn/launch/launch-readiness.md:3 (product codes T, H, C and M only), 23, 85; r33-planet-world:spinoffs/barkhorn/planet/r42/POPUP.md:67, 102 (the desk globe on the shop's shelves, 'Every piece is on sale')",
+   "check": "A lit globe wired in at the bar is a luminaire, and NEC 410.6 requires it to be listed. That means UL 1598 (fixed) or UL 153 (cord-connected), with a UL 2388 strip and UL 1310/8750 Class 2 drivers. A one-off needs a field evaluation the AHJ accepts. If the desk globe is sold it needs UL 153 or equivalent, IEC 62471 and FCC Part 15B. None of this is planned.",
+   "to_prove": "Add both globes to launch-readiness.md and get a field-evaluation quote."
+  }
+ ],
+ "top_risks": [
+  {
+   "risk": "Hanging about 180-208 kg of cemented acrylic over seated guests with no designed hard point, rigging, anchor or secondary. The hero render's cable attaches to no disc and its canopy is on the fir deck the README rules out. The A-102 ceiling plan and the House Book still say it hangs ('hung from the joists').",
+   "severity": "high",
+   "fix": "Make the plinth the only design and retire the hanging text in README:349-366, A-102/A-201 and the House Book. If hanging is wanted, commission a structural engineer: an internal steel hub through the polar axis bolted to every disc, two independent wire-rope legs to engineered anchors at 8:1 or better, an ASCE 7 Chapter 13 seismic and swing check, a 2x proof load on the hub, and a DBI permit."
+  },
+  {
+   "risk": "20 of 23 pieces are held only by solvent-cemented edge-to-face butt joints. The spec calls for water-thin Weld-On 4 in gaps up to 0.4 mm a side, with no annealing. Those joints will be starved and prone to crazing, and a guest grabbing a rim (about 4.7 MPa from 100 kg on a parallel) or an earthquake could break one.",
+   "severity": "high",
+   "fix": "Add a mechanical armature (a hub with bolted tabs) so the cement is cosmetic. If it stays cemented, anneal first and use a polymerising cement (Weld-On 40/42, Acrifix 2R 0190) at controlled 0.1-0.3 mm gaps. Destructive-test full-size coupons, and keep the globe out of reach."
+  },
+  {
+   "risk": "The owner-chosen look, every rim glowing, has no physical source at 25 mm: main's own note says no fluorescent stock exists at that thickness and the piece is 'day only'. The rim-strip idea is untested and written for 2 m. At 1.25 m it means 23 separately fed segments through cemented joints, 109-217 W, unserviceable under bonded caps, with no listing path.",
+   "severity": "high",
+   "fix": "Either sign off the day look (tints under a hard spot, real today) and stop rendering lit rims, or first build the 300 mm rim-lit test piece. It should use a named listed strip, Class 2 drivers, removable caps, wiring through the hub and thermocouples, followed by a field-evaluation quote."
+  },
+  {
+   "risk": "Fire: about 4.5-5.2 GJ of non-FR cast PMMA as a likely CFC section 807 decoration in an assembly room. It is flagged as 'the first question for SFFD' but unanswered.",
+   "severity": "medium",
+   "fix": "Hold a pre-application meeting with SFFD and DBI before buying sheet, and have a fallback ready: a smaller globe, FR material, or not installing it."
+  },
+  {
+   "risk": "The plinth version is undefined. There is no cradle (the render's post meets one Acid sector), the centre sits 1.07 m up, it tips at 0.37-0.90 g depending on the unknown plinth mass, it stands on a spring-floated slab, and it is reachable from 18 seats.",
+   "severity": "medium",
+   "fix": "Use a steel armature bolted through the plinth to the structural slab with an isolation detail, back it with a seismic calc, and add a guard or stand-off."
+  },
+  {
+   "risk": "The specs conflict: 1 m vs 1.25 m vs 1.3 m across; centre at 2.47, 2.54 or 2.60 m; supported from the slab, the joists, the fir deck or a plinth. A fabricator or the city could get the wrong drawing.",
+   "severity": "medium",
+   "fix": "Write one signed spec sheet and regenerate A-102, A-201 and the House Book from it."
+  },
+  {
+   "risk": "The cut files are not shop-ready. There are none at 1.25 m, every outline is doubled with zero-area loops, the parallels leave 10.8 mm rim notches at 12 crossings, and the desk files are 8 mm while the recommended sheet is 5 mm.",
+   "severity": "low",
+   "fix": "Regenerate clean files at 1250 mm and 5 mm from the measured sheet, have them reviewed in CAM, and detail a bevel or accept the notch after a 300 mm proof."
+  },
+  {
+   "risk": "Desk globe: the UV ring sits under Poison, not Haze, so the violet disc will barely glow, though the render lights it. The globe rests loose in its cup and the whole tips at about 20 degrees or 6.6 N. There is no UL 153, IEC 62471 or FCC plan, though the pop-up shows it for sale.",
+   "severity": "low",
+   "fix": "Make a sample before marketing it, key the globe to a wider or heavier base, and add it to launch-readiness.md."
+  }
+ ],
+ "numbers_that_conflict": [
+  "Bar globe diameter: 1.25 m (r33-planet-world planet/README.md:349; the round 41 final shot's size 1.25; r42/plan42.py:76; r44/plan44.py:106) vs 1.3 m (r39/kit39.py docstring and default size 1.30) vs 'the 1 m globe' and '3 ft 3 in' (r42/drawings/A-102.svg; drawings42.py:422, 521) vs main's 1 m back-bar piece (companions/README.md:857, 872).",
+  "Globe centre height: 2.47 m with its foot at 1.85 m (round 41 final shot; README:365) vs 2.60 m (r42/plan42.py:76) vs 8 ft 4 in = 2.54 m (A-102 label; A-201 heights note).",
+  "Support: 'from the slab on a rated fixing, not from the fir deck' (README:362-363) vs 'one black cable from a canopy on the deck' (kit39.py docstring; the final shot's canopy is at 3.40 m, which README:196 says is the fir deck) vs 'hung from the joists' (A-102 legend) vs 'will stand on a plinth, not hang' (r43/VENUES.md:17) and 'It cannot hang' (r44/CONCEPTS.md:18). The House Book says both 'Mother EARF hangs over it' (r42/housebook/index.html:285) and 'on her plinth between them' (:141).",
+  "Cable: 'a 3 mm cable' (r39/FINALS.md:14) vs a 6 mm-diameter cylinder in the model (kit39.py, radius 0.003 m).",
+  "1 m mass: 160 kg in 25 mm and 95 kg in 15 mm (main companions/README.md:872-873; sheet bought, per planet/README.md:361) vs 121 kg gross and 113 kg from the cut files' areas. Round 33b's 90 kg (20 mm) and 55 kg (12 mm) in the same file are object masses (97 and 58 kg), so one document mixes two bases.",
+  "Desk globe sheet: 5 mm fluorescent (companions/README.md:851-852) vs 8 mm in globe_colour.py:33, its cut files and out-globe-mono/pieces.json.",
+  "Piece count: 23 (companions/README.md:829; the cut files) vs 13 for the 8 mm acrylic in out-globe-mono/pieces.json (north 1, south 1; the board version 23). At 8 mm the meridian cutter reaches only 112.8 mm at a parallel's top face against its 114.9 mm radius, so the 3D model never separates the parallels, while the mid-plane cut files do.",
+  "Cement and fit: thickened Weld-On 16 or Acrifix 1R 0192 at 0.15 mm a side (round 33b, :793) vs thin Weld-On 4 wicked into 0.15-0.4 mm a side (round 33c, :865-868). 'A dry fit holds' (round 33c, :868) vs 'not friction alone' (round 33b, :798-799). The 1 m slot is +0.5 mm in 20 mm sheet (round 33b) vs +0.8 mm in 25 mm (round 33c).",
+  "Glow at bar scale: 'At 1 m: there's no fluorescent stock 15 to 25 mm thick, so the back-bar piece is day only ... A night glow at 1 m: maybe not' (main companions/README.md:857-858) vs the owner-chosen bar look, 'each rim glowing its colour' (planet/README.md:343), vs TECH.md's 'Rim-lit ... (as proofed) ... This is what the renders show' sitting beside 'the strip method to prove in a 300 mm test piece' (r43/amsterdam/TECH.md:20).",
+  "Desk night glow: 'Haze is a meridian standing in the base, so the ring feeds its edge directly' (companions/README.md:848) vs globe_colour.py:152, where the lean about the camera axis puts Poison's rim over the 24-31 mm UV ring and Haze's plane passes about 20 degrees from the base point. The night render also gives all six rims the same 2.5 glow (globe_colour.py:185), despite the README's 'its edge glows dimmer'.",
+  "Desk retail: $650-850 for the plain Smoke globe (round 33b; quoted for the shop in r42/POPUP.md:67) vs $495-595 for the fluorescent globe with a UV base (round 33c). The more complex lit piece is priced lower.",
+  "2 m mass: 485 kg in 25 mm (TECH.md:18) vs 'A 2 m, 190 kg globe implies walls about 12.7 mm' (r46-owner-notes:spinoffs/barkhorn/research/2026-10-31/R10-mother-earf-public-art.md:18). R10 models a hollow sphere, not discs; this is already flagged in r47-brand brandbook/facts/CONTRADICTIONS.md:57."
+ ],
+ "not_documented": [
+  "Any hang point or hub on the object. With the axis leaned as rendered (kit39 leans it about the globe's x-axis), no disc lies under the plumb line through the centre of mass. In the hero frame the cable stops 0.479 m above the centre in open space, 95 mm from the Dust and Haze mid-planes and about 25 mm clear of Ember: it holds nothing.",
+  "Rigging: cable size and grade, terminations, swivel, canopy, anchor and its capacity, design factor, secondary, inspection, seismic design (ASCE 7 Chapter 13), and swing clearance to the Hemispheres over a table of 12. The README's 'slab' presumes concrete overhead that the assumed shells (a fir deck on beams; wood joists at 15 ft 9 in) do not have.",
+  "The plinth: its construction and mass, the cradle or armature, which discs carry the load (the render's post meets the underside of one Acid sector 186 mm off the axis), anchorage through the spring-floated lantern floor, seismic restraint, and guarding against climbing.",
+  "Lighting at 1.25 m: strip part number, LED colour per disc (white LEDs under a thin tinted cap read pale), W/m, drivers and Class 2 grouping (217 W needs at least three 100 VA supplies), dimming (round 44 is DALI throughout), the wiring path through 23 cemented pieces, end-gaps at the crossings, and how a failed strip is replaced under a bonded cap.",
+  "Power entry and cable route for either the hung or the plinth version.",
+  "Any physical sample or measurement of the globe. Joint strength, rim notches, tint and the desk piece's UV glow are all judged from renders and critics' scores.",
+  "Cut files for the 1.25 m bar piece and the 5 mm desk piece, plus a BOM, assembly drawing, jig drawing and checks file. out-globe-colour holds only cut outlines and render configs, while the lamps' kits carry bom.csv, cut lists, drawing PDFs and checks.json.",
+  "Annealing of cut edges before cementing, cement cure and inspection, and cleaning and maintenance access for a piece hung at 1.85-2.0 m.",
+  "A source and price for 25 mm cast sheet in the six tints. The cabinets' stock is 20 mm (main README, round 33b).",
+  "Certification: launch/launch-readiness.md covers only Tropos, Hemisphere, Core and Mantle. There is no UL 1598/153 or field-evaluation plan for the lit bar piece, and no UL 153, IEC 62471 or FCC Part 15B plan for the desk globe shown for sale in the pop-up's shop.",
+  "The fire outcome under CFC section 807 and CBC section 2606 for about 4.5-5.2 GJ of non-FR acrylic, and any fallback if SFFD refuses.",
+  "What the $9,000-12,000 bar-globe estimate leaves out: rigging or plinth, engineering, lighting and permits. The 2 m festival budget does carry LEDs at EUR 2,500-4,500 and engineering at EUR 2,000-4,000."
+ ]
+}
