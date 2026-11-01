@@ -18,7 +18,22 @@ Each design is shown as the owner last saw it, on the same light and camera:
 | `sheet-studio-poison-2092.png` | `a-studio-poison-2092.png` | `b-studio-poison-2092.png` |
 | `sheet-dusk-ember-2423.png` | `a-dusk-ember-2423.png` (its base loop lit) | `b-dusk-ember-2423.png` (Outcrop has no light of its own) |
 
-One-line reads are in the section below the table, filled in as the frames land.
+Each frame is 1800 x 1200, 80 samples, on the rigs the owner last saw. One-line reads (mine, not a critic's, as asked):
+- **A, studio, Ember:** a deep oxblood slab. The red shows where light comes up through the gap and along the satin edge;
+  the Smoke base and stainless posts recede, as meant. The most "colored" of the six.
+- **B, studio, Ember:** a black glossy stepped block. The red is only the top lamina's rim and a flare in the reflections;
+  the parts inside are gone (section 2's 0.09 %).
+- **A, studio, Poison:** a near-black slab with a bottle-green glow at its back corner; it reads as dark green glass, not
+  black plastic, but only just.
+- **B, studio, Poison:** black. Nothing says green except a faint cast in the top's reflections. Stock Poison does not work
+  for Outcrop.
+- **A, dusk, Ember:** the float is the picture: the warm loop under the base, the posts and feet lit, the deck a dark red
+  plane above. The Smoke base's long edge reads pale cyan-gray where the loop lights it end-on.
+- **B, dusk, Ember:** a black block in a dark room. With no light of its own, the stock tint leaves nothing to see but
+  the arm, the record and the steps' highlights.
+
+In short: in stock deep tints, A still reads as colored glass with its light carrying it at dusk, and B reads as black.
+B needs the custom deck lot of section 2 to be the design it was drawn as.
 
 ## 2. What goes near-black in stock, at each part's thickness
 
