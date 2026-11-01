@@ -1,0 +1,316 @@
+{
+ "stage1": {
+  "impression": "A terraced glowing ball sits dead centre on a dark table, dusk-dark room, books left and pears right. The glow is a flat, saturated red that reads as a red plastic night-light: it lights almost nothing around it, the base is a black hole, the pears are lost, and the brightest thing after the lamp is an unexplained grey patch on the left wall.",
+  "score": 5.0
+ },
+ "blocking_9": [
+  "A visible pool of the lamp's coloured light on the table: the table just in front of the base at least 2x brighter than the table 350 px away (now 15 vs 11, about 1.3x)",
+  "The black anodised base reads as a form: an edge or highlight on it (now 99% crushed, lum 0 across 450-750 x 600-660)",
+  "The lamp's colour reads as amber, not signal red (now R227 G46 B15 in the body), at least where it is brightest",
+  "Props lit by the lamp so they tell the dusk story: the pears catch the glow (now lum 6) instead of sitting as silhouettes",
+  "The left wall's neutral grey patch (lum p95 59, brighter than any table area) no longer competes with the lamp; the room holds a cool dusk against the warm lamp"
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The frame is for the lamp's coloured light on the table, but the table barely changes with distance from the lamp: no pool.",
+   "evidence": {
+    "region": [
+     400,
+     680,
+     800,
+     790
+    ],
+    "measured": "table in front of the lamp lum_median 12.9 (R39 G6 B1); table at left 100-400 x 600-700 lum_median 11.2; profile right of lamp 7.5 -> 0 so the only gradient is darkness, not a pool"
+   },
+   "change": {
+    "setting": "lamp glow",
+    "from": 1.0,
+    "to": 2.0
+   },
+   "expected": "A warm pool on the table in front of and beside the base, its median roughly doubling near the lamp while the far table stays dark; the lamp body brightens without clipping.",
+   "accept": {
+    "region": [
+     400,
+     680,
+     800,
+     790
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     24,
+     55
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "asset",
+   "problem": "The black anodised base and its knurled knob are pure black, so the lamp floats on a hole and the metal finish is invisible.",
+   "evidence": {
+    "region": [
+     450,
+     600,
+     750,
+     660
+    ],
+    "measured": "lum_median 0.0, p95 1.0, crush_pct 99.2; whole base 450-750 x 560-650 crush_pct 88"
+   },
+   "change": {
+    "setting": "asset: rim light for the base",
+    "from": "none",
+    "to": "a strip area light 15 x 50 cm, behind the lamp and 40 cm to the camera-left, its centre at base height, aimed to graze the base's side, about 5 W, neutral-cool (#C8D4E6), not visible to camera"
+   },
+   "expected": "A thin bright edge down the base's left and a soft sheen along its top lip, so the base reads as satin metal; the knob's knurl catches small glints; the rest of the base stays deep.",
+   "accept": {
+    "region": [
+     450,
+     560,
+     750,
+     650
+    ],
+    "metric": "lum_p95",
+    "op": "between",
+    "value": [
+     18,
+     70
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The room fill puts a neutral grey bloom on the left wall that is brighter than anything but the lamp and pulls the eye off the product.",
+   "evidence": {
+    "region": [
+     50,
+     150,
+     300,
+     350
+    ],
+    "measured": "lum_median 33.8, p95 59.0, R43 G32 B25; wall right of lamp 850-1150 x 100-300 lum_median 21.4"
+   },
+   "change": {
+    "setting": "room fill watts",
+    "from": "as set",
+    "to": "-50%"
+   },
+   "expected": "The left wall falls to about the level of the right wall, so the lamp is the only bright area and the frame balances.",
+   "accept": {
+    "region": [
+     50,
+     150,
+     300,
+     350
+    ],
+    "metric": "lum_p95",
+    "op": "between",
+    "value": [
+     22,
+     40
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The room light is the same warm grey as everything else, so dusk does not read and the warm lamp has no cool to stand against.",
+   "evidence": {
+    "region": [
+     850,
+     100,
+     1150,
+     300
+    ],
+    "measured": "wall R32 G19 B14: warm, b_median below r_median"
+   },
+   "change": {
+    "setting": "room fill colour",
+    "from": "as set (neutral warm)",
+    "to": "#8FA6CC"
+   },
+   "expected": "The walls and the far table go slightly blue-grey, so the amber/red glow and its pool read as warm against a cool dusk.",
+   "accept": {
+    "region": [
+     850,
+     100,
+     1150,
+     300
+    ],
+    "metric": "b_median",
+    "op": "between",
+    "value": [
+     20,
+     40
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "set",
+   "problem": "The dark table veneer swallows the glow, so even more light gives little visible colour on the table.",
+   "evidence": {
+    "region": [
+     400,
+     680,
+     800,
+     790
+    ],
+    "measured": "R39 G6 B1 directly in front of a lamp whose body is R227: the surface returns very little"
+   },
+   "change": {
+    "setting": "table veneer",
+    "from": "walnut",
+    "to": "oak"
+   },
+   "expected": "The pool takes on a visible warm orange on the lighter wood, with the grain readable inside it.",
+   "accept": {
+    "region": [
+     400,
+     680,
+     800,
+     790
+    ],
+    "metric": "r_median",
+    "op": "between",
+    "value": [
+     70,
+     170
+    ]
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "set",
+   "problem": "The pears sit outside the lamp's reach and read as near-black silhouettes, cut by the frame edge.",
+   "evidence": {
+    "region": [
+     1000,
+     450,
+     1150,
+     600
+    ],
+    "measured": "lum_median 6.1, R12 G4 B0"
+   },
+   "change": {
+    "setting": "props: pears position",
+    "from": "as set",
+    "to": "15 cm closer to the lamp along the table, fully inside the frame"
+   },
+   "expected": "The pears' lamp-side faces take a warm rim of glow and they read as fruit, not shapes.",
+   "accept": {
+    "region": [
+     930,
+     400,
+     1150,
+     620
+    ],
+    "metric": "lum_p95",
+    "op": "between",
+    "value": [
+     25,
+     80
+    ]
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "camera",
+   "problem": "The overall frame is underexposed for a hero, with 87% of pixels below 40 and the lamp body peaking at only lum 102.",
+   "evidence": {
+    "region": [
+     420,
+     250,
+     780,
+     500
+    ],
+    "measured": "lamp body lum_median 82.5, p95 102.1; whole image median 18.5"
+   },
+   "change": {
+    "setting": "exposure EV",
+    "from": "as set",
+    "to": "+0.5"
+   },
+   "expected": "The lamp body brightens and shifts toward orange in its brightest bands without clipping; the dark room keeps its mood.",
+   "accept": {
+    "region": [
+     420,
+     250,
+     780,
+     500
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     100,
+     170
+    ]
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "light",
+   "problem": "The dusk world adds nothing visible, so the top of the frame is a flat brown dark.",
+   "evidence": {
+    "region": [
+     850,
+     100,
+     1150,
+     300
+    ],
+    "measured": "lum_range 4.6: the wall is one value"
+   },
+   "change": {
+    "setting": "dusk world strength",
+    "from": 0.05,
+    "to": 0.12
+   },
+   "expected": "A faint cool gradient on the wall, lighter toward the top, with the lamp still dominant.",
+   "accept": {
+    "region": [
+     850,
+     60,
+     1150,
+     360
+    ],
+    "metric": "lum_range",
+    "op": "between",
+    "value": [
+     8,
+     25
+    ]
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the lamp read amber rather than red (body R227 G46 B15, hue about 8 degrees).",
+   "why": "The card calls the tint amber; at this thickness it renders signal red, which changes what the product looks like on its own page. The tint is fixed and calibrated, so if more glow and exposure do not shift it toward amber, the calibration or the description should be checked by the owner."
+  },
+  {
+   "request": "Brighten the top rings (500-700 x 115-160 lum_median 14, R49 G0 B0, versus 82 in the body).",
+   "why": "The crown reads dead and cuts the ball's silhouette; it follows from the thick tinted acrylic, which is the design."
+  }
+ ],
+ "score_if_fixed": 7.0,
+ "duel": {
+  "against": "core-bedside-look4 (B)",
+  "winner": "B (the current hero)",
+  "margin": "clear",
+  "A_score": 5.5,
+  "B_score": 7.0,
+  "distinctive_A": 7,
+  "distinctive_B": 4,
+  "why": "B reads as a photograph: the glow pools warmly on the wood, the clear outer shell over the opal sphere catches a believable rim highlight, and the dark, uncluttered composition keeps the lamp the hero. A's stepped-ring shade is the more distinctive object, but the render is flat and CG. The red saturates every ring into one blob, the light does nothing to the room, and the dark base and pears sink into murk."
+ }
+}
