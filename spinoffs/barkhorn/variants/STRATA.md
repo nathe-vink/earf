@@ -139,3 +139,8 @@ the first step, inside the Ø400 bore.
 
 They are in `renders/2026-10-31/barkhorn/design-pass/`, with blind critic scores and duels against the current
 design. The CAD is `variants/variants.py` (the caldera) and `horn_options.py` (the horn).
+
+**The finals (2026-11-01):** `design-strata.png` (the studio hero, Ember) and `design-strata-room.png` (in use, Poison),
+cover off and the whole speaker in frame. The macro is kept as a working proof only (`proofs/design-strata-macro-p3.png`).
+A detail crop cannot show the whole speaker, as every Tropos picture must, and this frame cuts the caldera's steps at the
+edge. Whether a detail shot is allowed at all is the owner's call.
