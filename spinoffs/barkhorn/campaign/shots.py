@@ -276,7 +276,8 @@ def base(which, view='hero'):
                     i['options'] = [opt]
     if view == 'three-quarter':          # from higher and further round, so the base's footprint reads; whole speaker
         # (its first proof at 50 mm saw past the studio's sweep at the top left, the speaker small: a longer lens)
-        s['camera'] = {'position': [2.15, -2.35, 1.7], 'target': [0.0, 0.04, 0.63], 'lens_mm': 72.0, 'level': True,
+        # (and at 72 mm the base cut at the bottom: further back, on 85 mm)
+        s['camera'] = {'position': [2.85, -3.1, 1.75], 'target': [0.0, 0.04, 0.6], 'lens_mm': 85.0, 'level': True,
                        'fstop': 6.3, 'focus': [0.25, -0.2, 0.5]}
     return s
 
