@@ -86,3 +86,23 @@ custom tint goes dark, and the light it does pass comes through in patches, wher
 behind. A photograph of the real slab would show the same. A brighter, more even edge needs a lighter pour, or the
 deck's edge frosted or chamfered to collect light. Both are design choices for the owner, not render settings.
 Stopped at the two rounds asked for.
+
+## Strata Float v3 against Outcrop (the coordinator's detail notes; the same rig, custom Ice, both orders)
+
+| round | v3 frame | v3 shown | v3 | Outcrop | winner |
+|---|---|---|---|---|---|
+| 1 | `strata-v3-ice-custom.png` (polished deck edge, a raking front strip) | first | 4.0 | 6.0 | Outcrop |
+| 1 | the same | second | 4.5 | 6.0 | Outcrop |
+| 2 | `strata-v3-ice-custom-r2.png` (the deck's outer edge satin) | second | **6.5** | 5.5 | **v3** |
+| 2 | the same | first | 6.0 | 6.5 | Outcrop |
+
+Round 1's verdict was the same from both judges: the thick polished edge refracted the set in blocky blue patches.
+Round 2 satin-finished the deck's outer edge (bead-blasted, a real shop finish, now in the deck's notes). The patches
+went, and both judges called v3's edges clean. Both orders together: v3 1-1, mean 6.25 to 6.0. What still costs it:
+- no legible mark: both judges wanted one, where the coordinator's earlier judges called the bold one cheap. A small
+  frosted mark on the front edge is the middle;
+- the satin top reads "flatter" to one judge. It is the top's reflection of the set, not the top's finish, which
+  stays glassy;
+- the deck's front reads as a dark band;
+- faint marks on the top edge (the posts' bonded seats, seen through the deck).
+Stopped at the two rounds asked for.
