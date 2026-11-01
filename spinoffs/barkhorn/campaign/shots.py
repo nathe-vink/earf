@@ -385,6 +385,47 @@ SHOTS['deck-home-portrait'] = lambda: dict(strata_lit(room_off_portrait(), glow=
                                            title='Tropos at home, golden hour, Poison, portrait (the final design)')
 
 
+# --- the site set in the final design (2026-11-01; SITE-SET-PLAN.md) ---------------------------------------------------
+# tint: (flavour, the key of today's rigs). finals31 names Ice's frames 'blue' and Fog's 'ice'; studio31 uses the tint names.
+SITE_TINTS = {'ember': ('cloud-red', 'red'), 'dust': ('cloud-orange', 'orange'), 'acid': ('cloud-amber', 'amber'),
+              'poison': ('eucalyptus-y2k-green', 'green'), 'ice': ('cloud-blue', 'blue'), 'haze': ('cloud-violet', 'violet'),
+              'fog': ('birch-fog-clear', 'ice'), 'smoke': ('cloud-black', 'black')}
+SITE_FRAMES = {     # frame: (today's rig, size, the glow)
+    'front-off-tall': ('studio/shots/barkhorn/finals31/front-off-tall-{key}.json', [1000, 1250], 40.0),
+    'front-off-wide': ('studio/shots/barkhorn/finals31/front-off-wide-{key}.json', [1800, 1200], 40.0),
+    'hero-light':     ('studio/shots/barkhorn/studio31/hero-light-{tint}.json', [2400, 1350], 40.0),
+    'side':           ('studio/shots/barkhorn/finals31/front-off-tall-{key}.json', [1000, 1250], 40.0),
+    'back':           ('studio/shots/barkhorn/finals31/back-{key}.json', [880, 1100], 40.0),
+}
+
+
+def site(frame, tint):
+    """One frame of the site set in the owner's final design (Strata, the flush horn, the lit plinth, cover off, the line's
+    stock tints): today's rig for that frame and tint, at the site's size, 96 samples. 'side' is new: the tall front's
+    studio seen from the speaker's right, a little forward of square, so the stepped horn's profile and the plinth's
+    steps read; the whole speaker in frame."""
+    fl, key = SITE_TINTS[tint]
+    rig, size, glow = SITE_FRAMES[frame]
+    s = load(rig.format(key=key, tint=tint))
+    blk = s['product'] if 'product' in s else s['products'][0]
+    blk['flavour'] = fl
+    for i in blk['instances']:
+        i['flavour'] = fl
+        i['hide'] = sorted(set(i.get('hide', [])) | {'cloth-disc'})
+    s = strata_lit(s, glow=glow)
+    s['title'] = f'Tropos, {frame}, {tint} (the final design)'
+    s['size'] = size
+    s['render']['samples'] = 96
+    if frame == 'side':
+        c = s['camera']; T = c['target']
+        s['camera'] = {**c, 'position': [T[0] + 2.75, T[1] - 0.55, c['position'][2]], 'shift_x': 0.0}
+    return s
+
+
+for _f in SITE_FRAMES:
+    for _t in SITE_TINTS:
+        SHOTS[f'site-{_f}-{_t}'] = (lambda f=_f, t=_t: site(f, t))
+
 for _v in ('hero', 'dusk', 'three-quarter'):
     SHOTS['base-plinth-lit' + {'hero': '', 'dusk': '-dusk', 'three-quarter': '-34'}[_v]] = (lambda v=_v: base_lit(v))
 
