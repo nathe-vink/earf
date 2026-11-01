@@ -20,7 +20,7 @@ Sources:
 | Lab (file) | Nearest site | NRTL for UL 153 / 1598 / 62368-1 | EMC and FCC | DOE App. Y and CEC | Quote route | Role |
 |---|---|---|---|---|---|---|
 | **BACL** (`bacl.md`) | Sunnyvale | yes / yes / yes (also UL 8750, 1310) | A2LA 17025, FCC TCB | CEC-approved lab and certifier for battery chargers | form, sales@baclcorp.com, 408-732-9162 | **First choice: all four products in one building** |
-| **UL Solutions** (`ul-solutions.md`) | Fremont | yes / yes / yes | Fremont EMC lab, FCC recognised, TCB | CEC and DOE named as programmes; the site is unconfirmed | sales form, 510-319-4135; LightingInfo@UL.com | Comparison quote; **Limited Production Certification** for a hardwired Hemisphere batch |
+| **UL Solutions** (`ul-solutions.md`) | Fremont | yes / yes / yes | Fremont EMC lab, FCC recognized, TCB | CEC and DOE named as programs; the site is unconfirmed | sales form, 510-319-4135; LightingInfo@UL.com | Comparison quote; **Limited Production Certification** for a hardwired Hemisphere batch |
 | **Intertek (ETL)** (`intertek.md`) | Menlo Park | yes / yes / yes | EMC and safety at Menlo Park; FCC TCB | CEC named; Appendix Y unconfirmed | Part 15 contact form; 650-463-2900 (confirm) | Comparison quote |
 | **TÜV Rheinland** (`tuv-rheinland.md`) | Pleasanton; Fremont (wireless) | yes / yes / yes | "FCC listed" (older source); CB test labs | unconfirmed | tuv.com contact form; 925-249-9123 (confirm) | Comparison quote for the listings |
 

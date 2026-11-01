@@ -4,7 +4,7 @@ A comparison quote; the ETL mark carries the same weight as UL’s (any NRTL, OS
 
 **Quote route:** Part 15 contact form https://www.intertek.com/communications-equipment/fcc-certification/part15/contact/ ; +1 650-463-2900 (from a seminar page: confirm before use)
 
-**Why this lab:** An OSHA NRTL site at 1365 Adams Court, Menlo Park, its scope covering UL 153, UL 1598 and UL 62368-1; EMC and safety at Menlo Park since 1980; an FCC TCB; the CEC among its energy programmes (battery-charger testing unconfirmed). Sources: the OSHA NRTL page for Intertek; intertek.com (FCC and energy-efficiency pages).
+**Why this lab:** An OSHA NRTL site at 1365 Adams Court, Menlo Park, its scope covering UL 153, UL 1598 and UL 62368-1; EMC and safety at Menlo Park since 1980; an FCC TCB; the CEC among its energy programs (battery-charger testing unconfirmed). Sources: the OSHA NRTL page for Intertek; intertek.com (FCC and energy-efficiency pages).
 
 Nothing has been sent: these are drafts for the coordinator to turn into Gmail drafts. Our own figures are estimates (R3,
 `r46-owner-notes` 97ca003e7b22bb01f250a855ba9f29c0504b71eb); none came from this lab.
@@ -26,7 +26,7 @@ We are EARF, a small product company in the Bay Area, preparing four products fo
 like a quote for the testing below. We hope to book for testing in February or March 2027, starting with Tropos; the lamps would follow.
 
 1. Tropos, a powered loudspeaker pair: a Hypex FusionAmp FA122 class-D plate amplifier (100-120 / 200-240 V AC,
-   Class I, earthed) in a sealed, earthed aluminium compartment inside a cast-acrylic cabinet; an infrared remote
+   Class I, grounded) in a sealed, grounded aluminum compartment inside a cast-acrylic cabinet; an infrared remote
    (RC-5) on AAA cells; no radio.
    - EMC pre-scan (half a day).
    - FCC Part 15 Subpart B, Class B, for an SDoC.

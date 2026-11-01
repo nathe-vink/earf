@@ -26,7 +26,7 @@ We are EARF, a small product company in the Bay Area, preparing four products fo
 like a quote for the testing below. We hope to book for testing in February or March 2027, starting with Tropos; the lamps would follow.
 
 1. Tropos, a powered loudspeaker pair: a Hypex FusionAmp FA122 class-D plate amplifier (100-120 / 200-240 V AC,
-   Class I, earthed) in a sealed, earthed aluminium compartment inside a cast-acrylic cabinet; an infrared remote
+   Class I, grounded) in a sealed, grounded aluminum compartment inside a cast-acrylic cabinet; an infrared remote
    (RC-5) on AAA cells; no radio.
    - EMC pre-scan (half a day).
    - FCC Part 15 Subpart B, Class B, for an SDoC.

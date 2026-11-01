@@ -6,7 +6,7 @@ grant would pay for about 200 coins handed out free.
 
 **The design, as the owner signed it (2026-10-20, "EARFcoin: A, engraved, reeded edge"; `companions/README.md`, round 33):**
 - **The coin:** 40 mm across, 6 thick, cast acrylic in a tint, about 9 g. Both arrises are rounded 1.5 and the edge
-  is reeded (100 grooves 0.3 deep), then vapour-polished.
+  is reeded (100 grooves 0.3 deep), then vapor-polished.
 - **The back:** the EARF globe, laser-engraved 0.2 deep from a mirrored file, filled black (Smoke's white), so it reads
   the right way round from the front.
 - **The front:** GOOD FOR ONE SONG over the top and EARF under it, IBM Plex Mono caps 1.9 tall, engraved 0.12, filled
@@ -15,7 +15,7 @@ grant would pay for about 200 coins handed out free.
   600 × 400 nest of 104).
 - **Still proposals** (not signed): the 40 × 6, the 1.5 edges, the globe at 25 across, the words' band.
 
-## The stock colours (stand-ins for the eight tints)
+## The stock colors (stand-ins for the eight tints)
 
 All are cell cast, and all are 1/4" stock where it exists. Sources: R1, on `r46-owner-notes`
 (`research/2026-10-31/R1-stock-colours.md`), and `stock-colours.md`.
@@ -38,16 +38,16 @@ about a casino chip. The quote asks the shop to say what it stocks.
 
 All figures are **estimates [E]**, from the coin's own cost model (`coin.py --costs`: $5.46 at 500, $4.14 at 1,000 for
 this face and edge), scaled for 200. **Sheet** is the swing at 200: eight tints at 25 coins each means eight part
-sheets, most of it offcut. A shop with offcuts in these colours changes the answer.
+sheets, most of it offcut. A shop with offcuts in these colors changes the answer.
 
 | Route | What you get | 200 coins | 1,000 coins | Notes |
 |---|---|---|---|---|
-| **A. A Bay Area laser and CNC shop, the full design** | cut, both faces engraved and filled, rounded and reeded edge, vapour polish | **about $8–12 a coin** [E], so $1,600–2,400, sheet included (8 part sheets, about $300–650) | **about $5–6 a coin** [E], so $5,000–6,000 (8 × 24×48 sheets about $800–1,900; labour as the model, $4.14 less its sheet) | The design as signed. The reeding needs a CNC router with a vacuum fixture; a laser-only shop can't. |
+| **A. A Bay Area laser and CNC shop, the full design** | cut, both faces engraved and filled, rounded and reeded edge, vapor polish | **about $8–12 a coin** [E], so $1,600–2,400, sheet included (8 part sheets, about $300–650) | **about $5–6 a coin** [E], so $5,000–6,000 (8 × 24×48 sheets about $800–1,900; labor as the model, $4.14 less its sheet) | The design as signed. The reeding needs a CNC router with a vacuum fixture; a laser-only shop can't. |
 | **B. A laser shop, laser only (plain edge)** | cut, both faces engraved; the edge is the laser's own glossy cut edge, arrises left sharp-ish, no reeds | **about $4–7 a coin** [E] | **about $2.50–3.50** [E] | Drops the reeding (signed) and the roundover. EARF could paint-fill by hand ($0.35 of enamel and time a coin). A fallback, not the design. |
-| **C. An online laser service** (upload, pick a material) | as B, in its own stock colours (likely fewer than eight, and not these codes) | **about $3–6 a coin** [E] | **about $2–3** [E] | Fast and cheap, but the colours are theirs and nothing is reeded. For a test batch of 20 to check the faces. |
+| **C. An online laser service** (upload, pick a material) | as B, in its own stock colors (likely fewer than eight, and not these codes) | **about $3–6 a coin** [E] | **about $2–3** [E] | Fast and cheap, but the colors are theirs and nothing is reeded. For a test batch of 20 to check the faces. |
 
 **Recommendation:** ask A-type shops for the full design at 200 and 1,000, and one online service (C) for a 20-coin
-test batch in two colours (2423 and 2064) to check the engraving and fill before committing. For the grant, budget
+test batch in two colors (2423 and 2064) to check the engraving and fill before committing. For the grant, budget
 **about $2,000 for 200**, the upper middle of route A, so it doesn't come up short.
 
 **Candidate shops (verify before using; their capability here is from their public descriptions, not a quote):**
@@ -63,9 +63,9 @@ test batch in two colours (2423 and 2064) to check the engraving and fill before
 
 ```
 Quote please: 200 and 1,000 acrylic coins, 40 mm dia x 6 mm (or your 1/4" cast, 0.220"), cut from cell-cast acrylic in
-8 stock colours (TruCast 2423, 2422, 2208, 9093, 2069, 1020, 3030, 2064; ~25 / ~125 of each). Each coin: laser-engraved
+8 stock colors (TruCast 2423, 2422, 2208, 9093, 2069, 1020, 3030, 2064; ~25 / ~125 of each). Each coin: laser-engraved
 both faces (a line-art globe on the back, mirrored; small text on the front), engravings paint-filled; both edges
-rounded 1.5 mm and 100 reeds milled round the edge (like a coin), edge vapour-polished. Vector files ready (SVG/DXF).
+rounded 1.5 mm and 100 reeds milled round the edge (like a coin), edge vapor-polished. Vector files ready (SVG/DXF).
 Price per coin at each quantity, and lead time? Can you do the reeding, or should we drop it? [Your name], [contact line]
 ```
 
@@ -81,13 +81,13 @@ quantities: 200 and 1,000.
 
 The coin:
 - 40 mm across and 6 mm thick (your 1/4" cast stock at 0.220" is fine), cut from cell-cast acrylic.
-- Eight stock colours, about equal numbers of each: TruCast 2423 Red, 2422 Amber, 2208 Yellow, 9093 fluorescent green,
+- Eight stock colors, about equal numbers of each: TruCast 2423 Red, 2422 Amber, 2208 Yellow, 9093 fluorescent green,
   2069 Light Blue, 1020 Purple, 3030 Glass Green and 2064 Gray (or your nearest equivalents; please say which).
 - The back face: a line-art globe laser-engraved about 0.2 mm deep from a mirrored file, filled black (white on the
-  grey coins).
+  gray coins).
 - The front face: two lines of small capitals (1.9 mm tall) engraved about 0.12 mm deep, filled white.
 - The edge: both arrises rounded 1.5 mm, then 100 reeds milled across the edge, 0.3 mm deep (like a coin's milled
-  edge), and the edge vapour-polished. The faces stay the sheet's own, masked until the end.
+  edge), and the edge vapor-polished. The faces stay the sheet's own, masked until the end.
 
 We have the files ready: SVG and DXF in mm, the cut, each face's engraving, and a 600 x 400 mm nest of 104.
 
