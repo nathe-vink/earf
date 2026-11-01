@@ -34,6 +34,10 @@ spec = {
             'room, in Poison, one of the eight colors. It is a render, not a photograph: Tropos with its cover off, Core cordless.'),
   'header': {'eyebrow': 'The line', 'title': 'Four pieces, named for the Earth.', 'x': hx0, 'y': hy0 + 6, 'w': hx1 - hx0, 'h': hy1 - hy0, 'px': 60},
   'callouts': callouts,
-  'foot': {'text': 'A render. Shown in Poison, one of eight colors.', 'x': 1280, 'y': 1036, 'w': 600, 'align': 'right'},
+  'foot': {'text': 'A render, in Poison.', 'x': 1280, 'y': 1036, 'w': 600, 'align': 'right'},
 }
+cn = a.get('corner_note')
+if cn:
+    cx0, cy0, cx1, cy1 = cn['zone']
+    spec['foot'] = {'text': 'A render, in Poison.', 'x': cx0, 'y': cy0 + (cy1 - cy0 - 20) // 2, 'w': cx1 - cx0, 'align': 'right'}
 json.dump(spec, open(out, 'w'), indent=1, ensure_ascii=False)
