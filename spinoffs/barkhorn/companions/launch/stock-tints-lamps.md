@@ -110,6 +110,30 @@ ball, offcut included [E].
 
 Lumens, heat, the board, the battery route and the copy are unchanged by any of these.
 
+## Both outcomes (the coordinator's addendum, 2026-11-01)
+
+The proofs use "deep". The speaker lane renders sheet in its "held" central case (`make/stock_tints.py`,
+`stock-pair.md` on `r33-speaker-horn`): the maker dilutes the dye in thick sheet, so a code keeps the chart's figure
+at any thickness. R1 says either can be true, and only the vendor's off-cuts settle it.
+
+| | If "held" is confirmed | If "deep" |
+|---|---|---|
+| **Core's ball** (9 mm, formed from 10 mm sheet) | A ball from stock sheet keeps about the chart's figure (2423 about 14 %, 2092 about 19 %): the "1/3 loading" row of `tint-proof-core-options.png`. **No custom pour, no second layer**, if the codes come at the ball's thickness | Measure, then the recommendation above: single-layer stock for Dust, Ice, Acid and Fog; the two-layer ball for Ember, Poison, Haze and Smoke |
+| **Hemisphere** | **Still needed.** As drawn, the shade has two tinted layers (the shell and the skin) and the light crosses both: about 14 % × 14 % ≈ 2 % for 2423, 3.5 % for 2092. That is still dim lit. Either one-tinted-layer construction fixes it; v3 (tint outside) is still the one that keeps the color unlit | v3 recommended (v2 in the CAD now): one tinted 3 mm layer, 15 to 20 % |
+
+**Is 3/8 in (9.5 mm) or 10 mm a stocked thickness for the eight codes?** Not that public listings show:
+- A&C's TruCast pages show these and related codes at .125, .187, .220 and .500 in, with no .375 for any of the eight.
+- A&C's Illinois surplus list shows 2074 only at .125 and .187.
+- The ball is drawn from 10 mm sheet, so if 3/8 in isn't stocked, the nearest are:
+  - **.220 in (5.6 mm) laminated pairs:** a lamination, which brings back the two-layer question;
+  - **.500 in (12.7 mm):** heavier, and deeper than the chart even if "held";
+  - a custom thickness, which is a custom lot.
+- **So "held" helps Core only if 3/8 in is stocked or quoted in the line's codes.** Ask that in the same call as the
+  chips: (888) 702-6028.
+
+Sources: https://www.acplasticsinc.com/media/IL%20Nov%20Surplus.pdf, https://acplasticsinc.com/products/9093-500-48x-96-trucast-p,
+https://www.acplasticsinc.com/products/9095-220-48x-96-trucast-p
+
 ## Sources (public pages, not quotes)
 
 - AC Plastics' TruCast transmission table: https://www.acplasticsinc.com/wp-content/uploads/2026/08/Trucast-Acrylic-Light-Transmissions-5.26.26-1.pdf
