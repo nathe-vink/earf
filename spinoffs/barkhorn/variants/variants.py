@@ -43,7 +43,11 @@ BASE = dict(feet=[(-25.0, -94.0), (585.0, -94.0), (-25.0, 526.0), (585.0, 526.0)
 # A: a stepped plinth in Strata's language, three frames of the cabinet's 1/2 in sheet stepping out to 660 x 670, the
 # cabinet bolted down on the top one through its own feet's inserts
 PLINTH = dict(layer=12.7, gap=0.1, outer=[(-20.0, -20.0, 580.0, 440.0), (-35.0, -70.0, 595.0, 496.0), (-50.0, -119.0, 610.0, 551.0)],
-              inner=(60.0, 60.0, 500.0, 360.0))
+              inner=(60.0, 60.0, 500.0, 360.0),
+              # the reveal (the coordinator, 2026-11-01, option b): a rebate in the bottom frame's underside from its outside
+              # edge in to the diffuser, so the gap at the step's edge is 18 (the feet's 12 and the rebate's 6) and a low eye
+              # sees under it, not the diffuser; 6 deep leaves a 6.7 lip in the 1/2 in sheet (a 15 reveal does not fit)
+              reveal=dict(depth=6.0, width=70.0))
 # B: four outrigger arms of bronze bar, 30 x 20, from under the cabinet's corners (two M8 into its feet's inserts and
 # a second insert each) out on the diagonal to the feet
 # A, lit (the owner, 2026-11-01: "can we make them light up from underneath? ... I'd go with the one on the left"): a
@@ -72,6 +76,12 @@ def plinth(Q):
         ring = Pos((x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2) * Box(x1 - x0, y1 - y0, z1 - z0)
         ix0, iy0, ix1, iy1 = Q['inner']
         ring = ring - Pos((ix0 + ix1) / 2, (iy0 + iy1) / 2, (z0 + z1) / 2) * Box(ix1 - ix0, iy1 - iy0, z1 - z0 + 2)
+        rv = Q.get('reveal')
+        if rv and k == len(Q['outer']) - 1:          # the bottom frame: its underside's outer band rebated
+            w_, d_ = rv['width'], rv['depth']
+            band = Pos((x0 + x1) / 2, (y0 + y1) / 2, z0 + d_ / 2 - 1) * Box(x1 - x0 + 2, y1 - y0 + 2, d_ + 2)
+            band = band - Pos((x0 + x1) / 2, (y0 + y1) / 2, z0 + d_ / 2 - 1) * Box(x1 - x0 - 2 * w_, y1 - y0 - 2 * w_, d_ + 4)
+            ring = ring - band
         out.append(ring); z = z0
     return out, z
 
