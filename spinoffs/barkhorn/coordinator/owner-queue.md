@@ -661,3 +661,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 23:00 site lane: tagline change d0212727 reverted (734e3229, tree identical to 27438a23); the one-line sizing check kept for the
   next round; swatches wait on the speaker lane's hexes (TINTS.md F defaults at c38f8ee6). Speaker: F defaults c38f8ee6, deck shots
   at glow 20, render models rebuilding, then tropos-strata.blend for the four-pieces lane.
+- 23:06 brand lane: colors F in the Brand Book and marks (f6e3dc12, from speaker 55c12c58 + TINTS.md c38f8ee6): Poison mark
+  #245208 -> #376621, Haze #421D72 -> #543287 (in-light swatches #1C5B02, #44147B); the other six unchanged; collateral regenerated;
+  hexes sent to the site lane for MARK_NEXT; lamps pack render re-rendering. Tagline untouched. Nothing published.
