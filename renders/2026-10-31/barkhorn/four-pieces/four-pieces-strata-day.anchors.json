@@ -1,0 +1,183 @@
+{
+ "image_1920": "four-pieces-strata-day-1920.png",
+ "image_3840": "four-pieces-strata-day-3840.jpg",
+ "size": [
+  1920,
+  1080
+ ],
+ "note": "pixels at 1920 x 1080, [x0, y0, x1, y1] from the top left; label zones 380 x 130, 40-80 px from their product; tone is the ground under the zone (light: use dark ink; dark: use light ink)",
+ "products": {
+  "tropos": {
+   "name": "Tropos",
+   "bbox": [
+    519,
+    422,
+    754,
+    857
+   ],
+   "label_zone": [
+    446,
+    236,
+    826,
+    366
+   ],
+   "label_side": "above",
+   "tone": "light",
+   "zone_luminance": {
+    "median": 218.0,
+    "p5": 213.0,
+    "p95": 223.1,
+    "spread": 10.1,
+    "block_range": 13.3,
+    "median_srgb": [
+     226,
+     217,
+     202
+    ],
+    "median_hex": "#E2D9CA"
+   },
+   "note": "the pair; the box and zone are the left speaker's",
+   "bbox_right": [
+    1166,
+    422,
+    1401,
+    857
+   ]
+  },
+  "mantle": {
+   "name": "Mantle",
+   "bbox": [
+    885,
+    629,
+    1035,
+    699
+   ],
+   "label_zone": [
+    770,
+    459,
+    1150,
+    589
+   ],
+   "label_side": "above",
+   "tone": "light",
+   "zone_luminance": {
+    "median": 201.1,
+    "p5": 169.7,
+    "p95": 212.4,
+    "spread": 42.7,
+    "block_range": 54.0,
+    "median_srgb": [
+     207,
+     201,
+     186
+    ],
+    "median_hex": "#CFC9BA"
+   }
+  },
+  "core": {
+   "name": "Core",
+   "bbox": [
+    260,
+    649,
+    368,
+    743
+   ],
+   "label_zone": [
+    124,
+    463,
+    504,
+    593
+   ],
+   "label_side": "above",
+   "tone": "light",
+   "zone_luminance": {
+    "median": 216.8,
+    "p5": 202.8,
+    "p95": 221.6,
+    "spread": 18.9,
+    "block_range": 24.4,
+    "median_srgb": [
+     222,
+     216,
+     205
+    ],
+    "median_hex": "#DED8CD"
+   }
+  },
+  "hemisphere": {
+   "name": "Hemisphere",
+   "bbox": [
+    1509,
+    178,
+    1646,
+    261
+   ],
+   "label_zone": [
+    1049,
+    204,
+    1429,
+    334
+   ],
+   "label_side": "left",
+   "tone": "light",
+   "zone_luminance": {
+    "median": 198.7,
+    "p5": 181.2,
+    "p95": 215.9,
+    "spread": 34.7,
+    "block_range": 41.6,
+    "median_srgb": [
+     208,
+     198,
+     181
+    ],
+    "median_hex": "#D0C6B5"
+   }
+  }
+ },
+ "header": {
+  "zone": [
+   100,
+   60,
+   1000,
+   220
+  ],
+  "tone": "light",
+  "zone_luminance": {
+   "median": 200.5,
+   "p5": 184.3,
+   "p95": 212.3,
+   "spread": 28.0,
+   "block_range": 40.2,
+   "median_srgb": [
+    211,
+    199,
+    182
+   ],
+   "median_hex": "#D3C7B6"
+  }
+ },
+ "layout_problems": [],
+ "corner_note": {
+  "zone": [
+   1520,
+   1020,
+   1800,
+   1060
+  ],
+  "tone": "light",
+  "zone_luminance": {
+   "median": 153.8,
+   "p5": 143.9,
+   "p95": 165.2,
+   "spread": 21.3,
+   "block_range": 66.6,
+   "median_srgb": [
+    158,
+    154,
+    140
+   ],
+   "median_hex": "#9E9A8C"
+  }
+ }
+}
