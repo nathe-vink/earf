@@ -628,3 +628,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   the original bare strip at 40 mm in, glow 20 day / 40 dusk, flat underside (6 mm reveal dropped: +1 kg machining, back margin
   14 -> 13 %, no gain without the seal); the strip breaks with a short jumper at each foot pad (it ran over them in the original too).
   The sealed channel, sealed-90 and reveal are documented in BASES.md as tested alternatives. Plinth closed until card 03.
+- 21:04 speaker: plinth closed (24e81544): bare strip 40 in, flat underside, four runs stopped 30 mm short of the corners with
+  soldered jumpers, 2.1 m, 10.1 W at full, glow 20 day / 40 dusk; parts about $12,058 a pair (the deck's "about $12,100" holds).
+  Tested-and-not-adopted list in BASES.md (lower strength, opal 90, 6 mm reveal, sealed 90, sealed 40; a real pool needs ~50 mm feet,
+  the owner's to ask for); sealed channel switchable (variants.py PLINTH_LIGHT['sealed']). Stability (0662ee73): 84.6 kg, CoM 520 mm,
+  +19 / +14 / +14 %, passes. Speaker lane now holding everything for card 03; four-pieces idle.
