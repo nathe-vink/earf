@@ -417,8 +417,14 @@ def site(frame, tint):
     s['size'] = size
     s['render']['samples'] = 96
     if frame == 'side':
-        c = s['camera']; T = c['target']
-        s['camera'] = {**c, 'position': [T[0] + 2.75, T[1] - 0.55, c['position'][2]], 'shift_x': 0.0}
+        # (its first proof moved the camera round to the speaker's side and saw past the sweep's edge: the camera stays
+        # in the studio's frame and the speaker turns, its right side to the camera, a little of the front showing)
+        for blk in s['products']:
+            for i in blk['instances']:
+                i['rotate_z'] = i.get('rotate_z', 0) - 50.0
+    if frame == 'back':
+        # (its first proof put the plinth's near corner on the frame's bottom edge: a little wider)
+        s['camera']['lens_mm'] = round(s['camera']['lens_mm'] * 0.9, 1)
     return s
 
 

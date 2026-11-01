@@ -5,8 +5,8 @@
  ],
  "camera": {
   "position": [
-   2.75,
-   -0.5,
+   1.2,
+   -2.5,
    1.0
   ],
   "target": [
@@ -16,7 +16,7 @@
   ],
   "lens_mm": 60.5,
   "level": true,
-  "shift_x": 0.0,
+  "shift_x": -0.027,
   "shift_y": 0.012,
   "fstop": 6.3,
   "focus": [
@@ -685,7 +685,7 @@
       0,
       0.0385
      ],
-     "rotate_z": 0,
+     "rotate_z": -50.0,
      "flavour": "cloud-black",
      "hide": [
       "cloth-disc",
@@ -711,7 +711,7 @@
       0,
       0.0385
      ],
-     "rotate_z": 0,
+     "rotate_z": -50.0,
      "flavour": "cloud-black",
      "hide": [
       "horn-topo*",
