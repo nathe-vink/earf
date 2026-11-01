@@ -236,16 +236,16 @@
   }
  },
  "strata_plinth": {
-  "mass_kg": 84.6,
+  "mass_kg": 83.7,
   "com_m": [
    0.0,
    0.0091,
-   0.5201
+   0.5258
   ],
   "push_height_m": 1.3356,
-  "push_N": 166.0,
+  "push_N": 164.2,
   "need_arm_mm": 267,
-  "plinth_kg": 10.36,
+  "plinth_kg": 9.41,
   "tipping": {
    "plinth feet (centres)": {
     "forward": {
@@ -256,7 +256,7 @@
     "back": {
      "arm_mm": 303,
      "need_mm": 267,
-     "margin_pct": 14
+     "margin_pct": 13
     },
     "left": {
      "arm_mm": 305,

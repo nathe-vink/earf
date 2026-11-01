@@ -27,10 +27,10 @@ It lifts the cabinet 38.5 mm.
 | | |
 |---|---|
 | footprint (the feet's centers) | 610 x 620 mm; the base itself 660 x 670 |
-| weight | **10.4 kg** (computed from the CAD), so the speaker with the flush horn is **84.6 kg** |
+| weight | **9.4 kg** (computed from the CAD, with the reveal), so the speaker with the flush horn is **83.7 kg** |
 | cost, a speaker | about $260 of sheet ($0.03/cm3) + about $250 of cutting, polishing and bonding + $18 of feet: **about $530** (est.) |
-| the push | 166 N (20 % of 84.6 kg) at 1.336 m: the arm needed is 267 mm |
-| margins (the feet's centers) | **forward +19 %, back +14 %, sideways +14 %** (computed: `stability/com.json`, `strata_plinth`) |
+| the push | 164 N (20 % of 83.7 kg) at 1.336 m: the arm needed is 267 mm |
+| margins (the feet's centers) | **forward +19 %, back +13 %, sideways +14 %** (computed: `stability/com.json`, `strata_plinth`; with the 6 mm reveal under the bottom frame, 2026-11-01) |
 
 ## B. Outrigger feet
 
