@@ -10,7 +10,9 @@
 #                         Claude Code cloud environment at /opt/pw-browsers; locally, point CHROMIUM at any Chromium)
 #   bpy (system Python)   Blender as a Python module, for every path-traced render. bpy 5.0 needs numpy 1.
 #   .venv-fab/            build123d, ezdxf, fonttools, uharfbuzz, matplotlib, scipy for CAD, cut files, drawings,
-#                         acoustics and crossovers. build123d needs numpy 2, hence its own venv.
+#                         acoustics and crossovers, and shapely for barkhorn's icons.py, brand.py and mark.py.
+#                         build123d needs numpy 2, hence its own venv.
+#   rsvg-convert          librsvg2-bin (apt), which barkhorn's mark.py uses to write the marks' PNGs.
 set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
@@ -51,9 +53,20 @@ if [ ! -x "$VENV/bin/python" ]; then
   log "creating .venv-fab"
   python3 -m venv "$VENV"
 fi
-if ! "$VENV/bin/python" -c "import build123d, ezdxf, fontTools, uharfbuzz, matplotlib, scipy" >/dev/null 2>&1; then
+if ! "$VENV/bin/python" -c "import build123d, ezdxf, fontTools, uharfbuzz, matplotlib, scipy, shapely" >/dev/null 2>&1; then
   log "pip install fab/requirements.txt into .venv-fab (build123d and OpenCascade, once)"
   "$VENV/bin/python" -m pip install --quiet --disable-pip-version-check -r fab/requirements.txt
+fi
+
+# 3b. rsvg-convert, for barkhorn's mark.py (the marks' PNGs).
+if ! command -v rsvg-convert >/dev/null 2>&1; then
+  if command -v apt-get >/dev/null 2>&1 && [ "$(id -u)" = 0 ]; then
+    log "apt-get install librsvg2-bin (rsvg-convert, once)"
+    apt-get install -y -q librsvg2-bin >/dev/null 2>&1 || { apt-get update -q >/dev/null 2>&1 && apt-get install -y -q librsvg2-bin >/dev/null 2>&1; } \
+      || log "warning: could not install librsvg2-bin; barkhorn's mark.py needs rsvg-convert"
+  else
+    log "warning: no rsvg-convert; install librsvg2-bin (barkhorn's mark.py needs it)"
+  fi
 fi
 
 # 4. Chromium for the real-time renderer.
@@ -69,7 +82,7 @@ done
 
 # Quick check (imports only).
 "$BPY_PY" -c "import bpy, numpy; assert numpy.__version__.startswith('1.')" && log "bpy ok ($BPY_PY)"
-"$VENV/bin/python" -c "import build123d, ezdxf, uharfbuzz" && log "CAD venv ok ($VENV)"
+"$VENV/bin/python" -c "import build123d, ezdxf, uharfbuzz, shapely" && log "CAD venv ok ($VENV)"
 node -e "require('$ROOT/render/node_modules/three/package.json')" && log "render/ node modules ok"
 
 if [ "${1:-}" = "--doctor" ]; then
