@@ -322,7 +322,7 @@
  "dome-pins": {
   "kind": "hardware",
   "maker": "any",
-  "model": "Three stainless shouldered pins, M3 thread with a Ø4 × 10.5 shoulder, screwed through the PEEK ring into the hub (thread locker); 4 mm or more of bayonet engagement against a centering land on the hub, radial play 0.2 or less. Secondary retention: a 1 mm stainless safety tether, crimped, from the hub to an eye on the collar, rated well over 10 × the 1.1 kg shade (review, 2026-11-01). Replaces 4 x 8 dowels pressed into the hub, which gave about 2.5 mm of engagement with 2 mm of play and could not span the 10.5 mm pin",
+  "model": "Three stainless shouldered pins, M3 thread with a Ø4 × 10.5 shoulder, screwed through the PEEK ring into the hub, a pre-applied nylon patch (no anaerobic locker: it crazes acrylic); 4 mm or more of bayonet engagement against a centering land on the hub, radial play 0.2 or less. Secondary retention: a 1 mm stainless safety tether, crimped, from the hub to an eye on the collar, rated well over 10 × the 1.1 kg shade (review, 2026-11-01). Replaces 4 x 8 dowels pressed into the hub, which gave about 2.5 mm of engagement with 2 mm of play and could not span the 10.5 mm pin",
   "usd": 6.0,
   "estimate": true,
   "supplier": "McMaster-Carr or alike",
@@ -817,6 +817,15 @@
   "usd": 1.0,
   "estimate": true,
   "supplier": "Digi-Key",
+  "price_date": "2026-11-01"
+ },
+ "core-tray": {
+  "kind": "hardware",
+  "maker": "to make (a sheet-metal shop)",
+  "model": "Review 2026-11-01 (UL 153 SA): a 0.5 mm 304 stainless tray formed round Core's three cell bays and the chassis's corners, open only at the aluminium hatch, so the cells sit in metal on every side; it holds them if the acrylic cracks in a drop. Fallback: a 0.4 mm UL 94 V-0 polypropylene liner (Formex GK class)",
+  "usd": 9.0,
+  "estimate": true,
+  "supplier": "a sheet-metal shop",
   "price_date": "2026-11-01"
  }
 }

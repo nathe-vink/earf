@@ -21,13 +21,14 @@
 | cable | buy | 1 | any (made to order) A slim black braided-fabric USB-C to USB-C cable, 2 m, 3 A, a black right-angle overmoulded plug for the notch |  | 6.00 |
 | adapter | buy | 1 | any (UL/CE listed) A 20 W USB-C wall adapter, black, UL 62368-1 listed, DOE Level VI external power supply: it is part of Core's battery charger system as tested (the DOE standard and California Title 20, listed in the CEC's MAEDbS under Core's model number) |  | 7.00 |
 | screws | buy | 1 | Four captive M3 x 6 stainless pan-head screws (Phillips or Torx T10) with retaining washers, for the hatch |  | 1.50 |
+| tray | buy | 1 | to make (a sheet-metal shop) Review 2026-11-01 (UL 153 SA): a 0.5 mm 304 stainless tray formed round Core's three cell bays and the chassis's corners, open only at the aluminium hatch, so the cells sit in metal on every side; it holds them if the acrylic cracks in a drop. Fallback: a 0.4 mm UL 94 V-0 polypropylene liner (Formex GK class) |  | 9.00 |
 
 | | USD |
 |---|---|
-| buy | 79 |
+| buy | 88 |
 | formed | 1,547 |
 | lathe | 257 |
 | mill | 148 |
-| total | 2,030 |
+| total | 2,039 |
 
 Budget figures: bought parts from the component library (dated retailer listings), made parts from the kit's stock rates: 25 % offcut on sheet parts, a handling charge a print, and a setup a machined line spread over its pieces. A shop's quote replaces them.

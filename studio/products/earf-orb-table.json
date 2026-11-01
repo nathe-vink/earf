@@ -20,12 +20,6 @@
    "radius": 0.005,
    "roughness": 0.04
   },
-  "fabric": {
-   "preset": "rubber",
-   "color": "#141414",
-   "roughness": 0.8,
-   "sheen": 0.4
-  },
   "led": {
    "preset": "emit",
    "color": "#FFC890",
@@ -72,10 +66,6 @@
   {
    "match": "shell-shell",
    "material": "body"
-  },
-  {
-   "match": "cable",
-   "material": "fabric"
   },
   {
    "match": "led",

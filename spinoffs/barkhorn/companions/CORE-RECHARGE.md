@@ -201,6 +201,38 @@ in the next pass: the cell contacts, the heat path and the pins.
 | 11 | **Touch electrode** | Baseline tracking (it drifts with the ground: on battery, the cable or the dock); a 50 ms debounce for taps; a 600 ms hold to dim; re-baseline when the input changes. **Test on all three**: battery, cable and dock | |
 | 12 | **Stale text** | Core is UL 153 with Supplement SA, not 62368-1. Hemisphere's hardwired listing is UL 1598 for its own shade, not "any shade". Hemisphere's bayonet pins are screwed, not "pressed into the hub" (PARTICULARS, components). The cells are button-top, not "flat top" | |
 
+## 6. Drop, fire and materials (the audit, 2026-11-01)
+
+UL 153 Supplement SA puts a battery luminaire through a stiffer drop program (ANSI/PLATO FL-1: at least 1 m onto
+concrete, in six orientations) and limits the battery's fire risk. Core is designed for it as below. **None of it
+changes how Core looks.** It is in the CAD notes (`crystal.py`); the geometry follows with the dock, once the owner
+signs a charging route.
+
+| Risk | Design | Numbers |
+|---|---|---|
+| **The ball comes loose in a drop** (a loose 160 mm acrylic ball is the hazard) | **A quarter-turn bayonet holds the ball.** The ball's aluminum grommet grows a spigot, Ø38 × 6, under the ball, with three L-slots (30°). It drops into a Ø38.4 socket turned in the base's top round the window, which carries three Ø3 stainless pins. Balls still swap: lift, turn 30°, lift off. The spigot and socket sit under the ball, inside the cup, so they are not seen | The ball weighs 0.76 kg. At 50 g of deceleration it pulls about 370 N, against about 6 kN for three Ø3 pins in shear; the grommet is bonded over its whole 40 port |
+| **The cells leave their bays** | **The hatch holds the cells in their bays; the bays hold them radially, the spring axially.** The hatch goes from 4 to **6 captive M3**, tapped into the **steel ballast corners**, not into inserts in acrylic, so drop loads go metal to metal | A 40 g cell at 100 g puts about 40 N on the hatch; six M3 in steel hold several kN |
+| **The + shroud breaks** | The shroud becomes a **pressed-in brass cup** (Ø8 ID, 1.5 deep, 0.5 wall, gold-flashed leaf in it) in place of a pocket milled in acrylic | |
+| **The acrylic round the cells cracks open, or a cell vents** | **A 0.5 mm 304 stainless tray** wraps the three bays and the chassis's corners, open only at the aluminum hatch, so the cells sit in metal on every side. It holds them if the acrylic cracks and meets SA's fire expectation for a metal enclosure. The bays widen by 1.0 for it (18.6 to 19.6). Fallback: a 0.4 mm UL 94 V-0 polypropylene liner (Formex GK class [check]) | About 25 g of steel, which adds to the ballast |
+| **Stress cracking of the acrylic** | **No anaerobic thread-locker** anywhere on or near acrylic or PEEK. Screws in the base go into steel or aluminum, never into heat-set inserts in acrylic. The chassis is screwed to the ballast corners. The grommet is bonded with a two-part MMA adhesive, not cyanoacrylate. Every machined acrylic part is annealed after machining | See `launch/certification.md`, "Joints and stress cracking", for every lamp joint |
+
+**The drop-test plan for first articles:**
+- **Samples:** three Cores, each with its cells fitted and charged to 90 %, lit.
+- **The drop:** from 1.0 m onto concrete, in six orientations: on the ball, on the hatch, and on the base's edge at 0°,
+  90°, 180° and 270°, with 170° being the USB-C corner. One drop per orientation per sample.
+- **After each drop, it passes if:**
+  - the ball is still attached;
+  - no cell is exposed or out of its bay;
+  - the hatch is closed;
+  - no crack exposes a cell or the tray;
+  - nothing vents, smokes or gets warm (thermocouple on the tray for 1 h);
+  - it still works: touch, light and charge.
+- **At the end:** a full charge and discharge, then the cells are taken out and checked for dents and their voltage;
+  the + cup and the springs are inspected.
+- **If one sample fails,** fix the design and retest all three.
+- **Then the lab runs SA's own program** (drop, the abnormal tests: short circuit, a reversed cell, a wrong-chemistry
+  cell).
+
 ## Sources (public pages, not quotes)
 
 - Adafruit Universal Qi transmitter, 2162: https://www.adafruit.com/product/2162

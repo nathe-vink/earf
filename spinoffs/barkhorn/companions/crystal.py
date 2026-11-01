@@ -233,7 +233,8 @@ def cover_parts(p=N):
         Part('clamp', clamp, Machined('aluminium', 'lathe'), finish='anodised', group='cover',
              notes=['aluminium, black anodised: screwed onto the collar over the crown, its spherical face on a silicone '
                     'ring, to a torque the shade maker sets (the acrylic is clamped between two silicone rings, never metal '
-                    'on acrylic); a drop of thread-lock']),
+                    'on acrylic); no thread-locker near acrylic (review 2026-11-01: anaerobics craze it): held by the '
+                    'silicone\'s preload and a nylon-tipped set screw through the ring into the collar']),
         Part('gaskets', gasket_in + gasket_out, Bought('hemi-gaskets'), finish='silicone', group='cover'),
         Part('vent', None, Bought('hemi-vent')),
     ]
@@ -302,7 +303,8 @@ def north_parts(p=N):
                     'in the collar\'s 82 bore (0.2 diametral), three Ø3.2 clearance holes for the pins\' threads']),
         Part('pins', pins, Bought('dome-pins'), finish='anodised', group='fixture',
              notes=['stainless shouldered pins: Ø4 shoulder 4.2 long, M3 thread 15.8, screwed through the PEEK into the '
-                    'hub (6 of thread in the aluminium, thread-locked); 4.0 of engagement in the collar\'s slots']),
+                    'hub (6 of thread in the aluminium, a pre-applied nylon patch, no anaerobic locker); 4.0 of engagement in the '
+                    'collar\'s slots']),
         Part('tether', None, Bought('hemi-tether')),
         Part('reflector', refl, Bought('north-reflector'), finish='anodised', group='fixture', inside=True),
         Part('cob', cob, Bought('hemi-cob'), finish='led', group='fixture', inside=True),
@@ -432,7 +434,10 @@ def orb_parts(p=O):
                     'faint line at the equator (to judge on the first sample); a 40 port cut at its underside. One part '
                     'where there were three: the frost scatters because it faces air']),
         Part('grommet', grommet, Machined('aluminium', 'lathe'), finish='anodised', group='ball',
-             notes=['black anodised aluminium: lines the port, bonded']),
+             notes=['black anodised aluminium: lines the port, bonded with a two-part MMA adhesive (not cyanoacrylate). '
+                    'Review 2026-11-01, to draw with the dock: it grows a Ø38 x 6 spigot under the ball with three 30 deg '
+                    'L-slots, into a Ø38.4 socket round the window with three Ø3 stainless pins, so the ball stays '
+                    'captive in a drop and still swaps with a quarter turn (CORE-RECHARGE.md §6)']),
         Part('base', base, Machined('cast-acrylic', 'lathe', setup_usd=80.0), finish='trim', group='base',
              notes=['black cast acrylic, polished, turned from rod: 120 x 30 (round 32f\'s), the cup turned in it; from '
                     'below the hatch\'s counterbore (112), the middle pocket (50) for the chassis, the board and the LED, '
@@ -461,15 +466,19 @@ def orb_parts(p=O):
                     'makes no contact) and a nickel-plated conical - spring Ø12, 1.7 at rest; leads in a milled channel '
                     'to the board, the NTC on one cell; no exposed contact outside the hatch']),
         Part('hatch', hatch, Machined('aluminium', 'mill'), finish='anodised', group='battery',
-             notes=['black anodised aluminium, 2.3 thick, in a counterbore under the base: four captive M3 screws '
-                    '(Phillips or Torx: commercially available tools), an O-ring (IP44); a label inside: the cells\' '
-                    'type (LiFePO4 18650 only) and how to change them']),
+             notes=['black anodised aluminium, 2.3 thick, in a counterbore under the base: six captive M3 screws '
+                    '(Phillips or Torx: commercially available tools; review 2026-11-01: six, was four, tapped into the '
+                    'steel ballast corners, not inserts in acrylic, nylon-patched), an O-ring (IP44); a label inside: the '
+                    'cells\' type (LiFePO4 18650 only) and how to change them. Under it, to draw with the dock: a 0.5 '
+                    '304 stainless tray round the three bays (the bays 19.6 wide for it), so the cells sit in metal on '
+                    'every side (UL 153 SA; CORE-RECHARGE.md §6)']),
         Part('usb', usb, Bought('orb-seals'), finish='steel', group='base', inside=True, render=False),
         Part('seat', seat, Bought('orb-seat'), finish='silicone', group='base'),
         Part('foot-ring', foot, Bought('core-foot'), finish='silicone', group='base'),
-        Part('cable', cable + plug, Bought('orb-cable'), finish='fabric', group='cable'),
+        Part('cable', None, Bought('orb-cable')),            # cordless (the owner, 2026-10-31): in the box only, not drawn
         Part('adapter', None, Bought('orb-adapter')),
         Part('screws', None, Bought('core-screws')),
+        Part('tray', None, Bought('core-tray')),
     ]
 
 

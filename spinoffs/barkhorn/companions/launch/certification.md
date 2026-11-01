@@ -83,8 +83,51 @@ or an unprotected cell, and the lab will fault-test exactly that. The CPSC warne
 contains tested cells is not retested. But a 2019 PHMSA letter treats cells that are electrically connected with a
 circuit board as a "battery", which then needs its own UN 38.3 test.
 
-**Recommendation: ship the three cells in the box beside the lamp** (UN3481, packed with equipment, still the small-
-battery exception), not installed. This also shows the buyer the hatch.
+**The route (decided 2026-11-01, the audit): the cells ship in the box beside the lamp, UN3481, packed with
+equipment,** under the small-battery exception (49 CFR 173.185(c); IATA Section II). Each cell is 4.8 Wh and the set
+14.4 Wh. The cells sit in their own non-conductive sleeves in a separate compartment of the box, terminals covered.
+Reasons:
+1. **No question of being "a battery".** Installed, the cells would be electrically connected through the board, which
+   PHMSA's 2019 letter reads as a battery needing its own UN 38.3 test. Beside the lamp they stay tested cells.
+2. **The air rule of 2026.** IATA's 67th edition (2026) requires lithium-ion cells packed with equipment to ship at
+   **30 % state of charge or less** [check the exact wording]. LiFePO4 is lithium-ion. Our cells are charged to 30 %
+   or less at the warehouse: a fixture charges them to 3.25 V on the counted curve before they are sleeved. That
+   satisfies air, and ground has no state-of-charge limit, so one pack-out serves both.
+3. **The drop test and the hatch.** Shipping and the drop program don't depend on each other, and the buyer sees the
+   hatch on day one and learns the cells are theirs to change (the EU's 2023/1542 intent).
+
+**Not chosen:** installed, "contained in equipment" (UN3481, PI 967). It needs no sleeves but leaves the PHMSA
+question open, and the 30 % rule is only recommended there today, likely mandatory later. The docs that said
+"contained in equipment" are now made to match (`PARTICULARS.md`).
+
+## Joints and stress cracking (the audit, 2026-11-01)
+
+Acrylic under stress crazes when it meets anaerobic thread-lockers, cyanoacrylate fumes, alcohol and many solvents.
+PEEK is safe next to acrylic, but its lockers aren't. The rule for every lamp, from now on:
+- **No anaerobic thread-locker** on any screw that touches, or sits within about 10 mm of, acrylic. Use a
+  **pre-applied nylon patch** (Nylok class) on the screw, or a plastics-safe locker (Vibra-TITE VC-3 class [check]).
+- **No heat-set or pressed inserts under tension in acrylic.** Screws go into metal (steel, aluminum or brass parts),
+  or into inserts fitted before the part is annealed.
+- **Bond acrylic to metal with a two-part MMA adhesive or epoxy,** not cyanoacrylate. Seal with **neutral-cure
+  silicone**, not acetoxy.
+- **Anneal every machined or bonded acrylic part** after machining and after cementing.
+
+| Lamp | Joint | Was | Now |
+|---|---|---|---|
+| Hemisphere | bayonet pins: M3 through the PEEK into the hub | "thread-locked" | **nylon-patch pins** (pre-applied); the PEEK and the hub carry no locker |
+| Hemisphere | clamp ring on the collar's M96 thread, its face on silicone over the shade | "a drop of thread-lock" | **no locker**: torqued to the shade maker's figure, held by the silicone's preload and a nylon-tipped set screw through the ring into the collar |
+| Hemisphere | collar to shade (a seal, not a load path) | unspecified | neutral-cure silicone |
+| Hemisphere | gland (cap) on two M3 into the crown; canopy screws into the steel strap | — | metal into metal: plain screws (no acrylic within 10 mm in the gland; the canopy's screws pass through acrylic into steel, so nylon patch) |
+| Core | ball halves | polymerizing cement (Acrifix 192 class) | the same, then the ball annealed |
+| Core | grommet into the ball | "bonded" | two-part MMA adhesive |
+| Core | chassis and hatch | threaded inserts in the acrylic base | screws into the steel ballast corners (CORE-RECHARGE §6); the hatch's six captive M3 nylon-patched |
+| Strata proposals | thumbscrews and screws into inserts in the acrylic | brass heat-set inserts | inserts fitted before annealing, or the screws taken into the metal flange; nylon patch, no locker |
+
+**Cleaners and bar spirits.** The care card says water and a drop of mild soap, with no glass cleaner, alcohol or
+solvents. Bars will still wipe with sanitizer and spill spirits. So the first articles test, on annealed off-cuts
+and on one shade: 70 % isopropyl, a quaternary-ammonium sanitizer, a 40 % spirit and a citrus spirit. Each sits for
+10 min on a bent strip at 0.5 % strain (a simple ISO 22088-3 style test). Any crazing means a care-card line for bars
+("wipe dry within a minute") and a check of the joint's stress, not a change of material.
 
 ## Mantle
 
