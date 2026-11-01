@@ -513,3 +513,4 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   set in 35 mm, lid 3 mm in color, 450 x ~370 x ~199 mm, ~12.9 kg; $3,850); site 27438a23 (copy behind COPY_NEXT, off; Mantle rows per
   71d3163e, Core dock post and ring). Coordinator's calls (to the board): plate back right; one fixed brightness. Tagline workflow:
   writers and two judges done. Waiting on the owner: budget (A ~$55,000 / B keep $50,000 ~$400 spare / C make room). Next check-in 13:33.
+- 12:50 deck v45: Tropos slide = the speaker lane hero 39d580bb (final design, stock Ember 2423, whole speaker and plinth; /_blob/4b7fac1f6169271d6581eb3cc3dcd050); subtitle: the horn stepped in 22 layers and flush with the cabinet, on a plinth lit from underneath. Row (eight) rendering, then cover, room + portrait.
