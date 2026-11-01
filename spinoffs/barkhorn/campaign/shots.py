@@ -426,7 +426,52 @@ def site(frame, tint):
         # (its first proof put the plinth's near corner on the frame's bottom edge: a little wider)
         s['camera']['lens_mm'] = round(s['camera']['lens_mm'] * 0.9, 1)
     _site_round1(s, frame)
+    _site_round2(s, frame)
     return s
+
+
+def _site_round2(s, frame):
+    """The Ice proofs' second critic round (2026-11-01; all five at 5.5): the speaker still light on the floor, the horn
+    and the side faces dark, the backdrops uneven. Light, set and camera only (CRITIC.md)."""
+    L = s['lights']; c = s['set'].setdefault('contact', {})
+    if frame == 'front-off-tall':
+        L['floor']['irradiance'] = 0.15; L['wash']['irradiance'] = 0.0; L['pool']['irradiance'] = 0.2
+        c['core_distance_m'] = 0.06
+        L['key']['size_m'] = [1.0, 1.3]; L['key']['orbit']['distance_m'] = 2.2      # a smaller key, set back: a shadow
+        L['horn']['irradiance'] = 5.0; L['rim']['power_w'] = 30
+        L['wall_left']['irradiance'] = 3.0; L['bg-left']['irradiance'] = 0.9
+        L['edge']['power_w'] = 1.0; L['sidesheen']['strength'] = 0.9
+    elif frame == 'front-off-wide':
+        L['cove_far']['irradiance'] = 3.0; L['floor'].update(irradiance=0.6, spread_deg=80)   # the banded floor
+        c.update(core_strength=1.0, core_distance_m=0.05, distance_m=0.30); L['scrim']['strength'] = 0.6
+        L['wash']['irradiance'] = 0.45
+        L['bg-right'].update(irradiance=1.1, target=[1.0, 6.0, 1.6])
+        L['sidesheen']['strength'] = 1.0; L['kick']['irradiance'] = 2.6
+        L['topline'].update(strength=2.2, position=[-1.0, -2.1, 1.1])
+    elif frame == 'side':
+        # the side face mirrors the sidesheen panel: moved to its mirror position about the face, from the camera
+        L['sidesheen'].update(position=[2.2, -1.2, 0.7], target=[0.28, -0.1, 0.55], size_m=[0.9, 2.2], strength=1.4)
+        L['sidesheen']['ramp'] = {**L['sidesheen']['ramp'], 'values': [0.05, 1.0]}
+        L['back'].update(target=[0.05, 0.0, 1.12], irradiance=4.0, size_m=[1.0, 0.8])
+        L['back']['orbit'].update(azimuth_deg=150, elevation_deg=30, distance_m=1.6)     # through the horn's layers
+        L['rim'].update(position=[0.7, -0.6, 1.6], target=[0.15, 0.0, 1.12], power_w=30)
+        L['rim']['receivers'] = L['rim']['receivers'] + ['hf-*']
+        L['wall_left']['irradiance'] = 2.6; L['bg-right']['irradiance'] = 0.5; L['floor']['irradiance'] = 0.25
+        s['render'].update(white_balance_k=5900, white_balance_tint=0.0)
+        c.update(core_strength=1.0, core_distance_m=0.015, distance_m=0.35)
+        L['key']['size_m'] = [1.4, 1.8]; L['key']['orbit'].update(azimuth_deg=-45, elevation_deg=28)
+    elif frame == 'back':
+        L['wash']['irradiance'] = 0.3                                                   # the side and top mirrored it
+        L['glow'].update(irradiance=5.0, transmission=True, size_m=[0.9, 0.5])
+        L['fill'].update(irradiance=1.1, size_m=[1.5, 1.5]); L['fill']['orbit'].update(azimuth_deg=10, elevation_deg=10)
+        c.update(strength=0.6, distance_m=0.12)
+        L['d-wall']['irradiance'] = 0.25
+    elif frame == 'hero-light':
+        c.update(strength=1.4, distance_m=0.5, core_strength=2.2, core_distance_m=0.025)
+        L['back-top']['irradiance'] = 45.0; L['back-top']['orbit'].update(azimuth_deg=190, elevation_deg=35)
+        L['scrim']['irradiance'] = 3.6
+        L['bg-left'].update(position=[-3.6, 3.0, 3.6], target=[-2.6, 6.0, 1.2], irradiance=3.4)   # the grey top-left
+        s['materials']['sweep']['roughness'] = 0.35
 
 
 def _site_round1(s, frame):

@@ -41,9 +41,9 @@
   "height": 5.5,
   "contact": {
    "strength": 1.0,
-   "distance_m": 0.45,
-   "core_strength": 0.95,
-   "core_distance_m": 0.03
+   "distance_m": 0.35,
+   "core_strength": 1.0,
+   "core_distance_m": 0.015
   },
   "flags": [
    {
@@ -125,12 +125,12 @@
   "key": {
    "type": "area",
    "size_m": [
-    1.8,
-    2.2
+    1.4,
+    1.8
    ],
    "orbit": {
-    "azimuth_deg": -35,
-    "elevation_deg": 22,
+    "azimuth_deg": -45,
+    "elevation_deg": 28,
     "distance_m": 1.5
    },
    "target": [
@@ -165,20 +165,20 @@
   "back": {
    "type": "area",
    "size_m": [
-    1.2,
-    1.0
+    1.0,
+    0.8
    ],
    "orbit": {
-    "azimuth_deg": 180,
-    "elevation_deg": 20,
-    "distance_m": 2.0
+    "azimuth_deg": 150,
+    "elevation_deg": 30,
+    "distance_m": 1.6
    },
    "target": [
+    0.05,
     0.0,
-    -0.3,
-    0.3
+    1.12
    ],
-   "irradiance": 2.4,
+   "irradiance": 4.0,
    "color": "#FFF8F0",
    "receivers": [
     "right",
@@ -364,20 +364,20 @@
   "sidesheen": {
    "type": "panel",
    "size_m": [
-    0.8,
-    2.0
+    0.9,
+    2.2
    ],
    "position": [
-    1.1,
-    2.3,
-    0.6
+    2.2,
+    -1.2,
+    0.7
    ],
    "target": [
     0.28,
-    0.0,
-    0.5
+    -0.1,
+    0.55
    ],
-   "strength": 0.6,
+   "strength": 1.4,
    "color": "#FFFFFF",
    "diffuse": 0.0,
    "ramp": {
@@ -387,7 +387,7 @@
      1.6
     ],
     "values": [
-     0.15,
+     0.05,
      1.0
     ]
    }
@@ -427,21 +427,22 @@
     0.3
    ],
    "position": [
-    0.3,
-    -0.5,
-    2.0
+    0.7,
+    -0.6,
+    1.6
    ],
    "target": [
-    0.05,
+    0.15,
     0.0,
-    1.2
+    1.12
    ],
-   "power_w": 18,
+   "power_w": 30,
    "color": "#FFFFFF",
    "diffuse": 0.1,
    "receivers": [
     "waveguide",
-    "waveguide-cap"
+    "waveguide-cap",
+    "hf-*"
    ]
   },
   "horn": {
@@ -571,7 +572,7 @@
     6.0,
     1.0
    ],
-   "irradiance": 0.8,
+   "irradiance": 0.5,
    "color": "#FFF4E8",
    "specular": 0.0,
    "receivers": [
@@ -594,7 +595,7 @@
     5.5,
     4.7
    ],
-   "irradiance": 3.6,
+   "irradiance": 2.6,
    "color": "#FFF0E2",
    "specular": 0.0,
    "receivers": [
@@ -640,7 +641,7 @@
     0.5,
     0.0
    ],
-   "irradiance": 0.35,
+   "irradiance": 0.25,
    "spread_deg": 50,
    "color": "#FFF4E8",
    "specular": 0.0,
@@ -659,8 +660,8 @@
   "transmission_bounces": 32,
   "view": "Khronos PBR Neutral",
   "exposure": 0.0,
-  "white_balance_k": 5600,
-  "white_balance_tint": 3.0
+  "white_balance_k": 5900,
+  "white_balance_tint": 0.0
  },
  "finish": {
   "enabled": true,

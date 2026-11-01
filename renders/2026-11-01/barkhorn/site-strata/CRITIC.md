@@ -19,3 +19,17 @@ also read the card's "gray plinth" against a blue one: the card was wrong (the p
 model has it), corrected in `stage_site.py`.
 
 The critics also asked for 384 to 768 samples; the finals' count is decided when the gate passes.
+
+## Round 2 (proofs `*-ice-r2`, fresh critics)
+
+| frame | blind | if fixed | the critic's main notes | what was done |
+|---|---|---|---|---|
+| front-off-tall | 5.5 (+0.5) | 7.0 | still floats (209 under the edge, 210 open floor); a big close key, no cast shadow; horn the darkest mass; a lump on the left sweep | floor 0.15, wash 0, pool 0.2, contact core 0.06 m; key 1.0 x 1.3 m at 2.2 m; horn 5.0, rim 30 W; wall_left 3.0, bg-left 0.9; edge 1.0 W, sidesheen 0.9 |
+| front-off-wide | 5.5 (=) | 7.3 | a grey band across the left floor (a fold in the sweep); foreground floor grey; plinth's left corner floats; right backdrop patchy | cove_far 3.0, floor 0.6 spread 80; contact core 0.05 m, distance 0.30, scrim 0.6; wash 0.45; bg-right 1.1 aimed high right; sidesheen 1.0, kick 2.6; topline 2.2 higher |
+| hero-light | 5.5 (=) | 7.3 | no dark contact line; front of the cabinet navy; a dirty grey top-left (211 against 248) | contact 1.4 / 0.5 m / core 2.2 at 0.025 m; back-top 45 at azimuth 190, elevation 35; scrim 3.6; bg-left moved out and aimed higher, 3.4; sweep roughness 0.35. Not taken: a white bounce card |
+| side | 5.5 (=) | 7.3 | the side face a flat slab (range 7.7); horn navy, throat crushed; little depth | sidesheen moved to the side face's mirror position, 1.4; back light behind and above the horn, 4.0; rim at the throat, 30 W; a diagonal falloff on the set; 5900 K, tint 0; contact core 0.015 m; key 1.4 x 1.8 m at azimuth -45, elevation 28 |
+| back | 5.5 (+1.0) | 7.3 | side and top mirror the sweep (grey-white); interior near-black; plate dim; light contact | wash 0.3; glow 5.0 with transmission; fill 1.1 near the camera axis; contact 0.6 at 0.12 m; d-wall 0.25. Not taken: black flags (the rig has none), led.glow 18 (a material) |
+
+Every critic again named the same material limits, for the owner: the plinth's LED as a hard orange or white line
+(the back's 12 % clipped), the dark lining making the interior a slab, the blue at the gamut's edge, and (wide) a dark
+vertical streak in the lining at the cabinet's top centre, to check in the model.
