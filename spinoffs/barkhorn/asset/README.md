@@ -78,3 +78,9 @@ Both files carry the site's tints, the look of every picture so far. `make_blend
 design in stock TruCast sheet instead (`tints.py`, `tints-trucast.json`). That build is reconciled with r48-biomes'
 `tints.json`; `TINTS.md` has the comparison and the open question for the owner, how deep the horn goes. A trucast build
 is not committed: rebuild it in about 30 s.
+
+## Fixed 2026-11-01: the top batt's wedge
+
+Collapsing the lining meshes broke the top batt, a 48-face box, into a pale wedge. The four-pieces room showed it. A
+mesh under 2,000 faces is now never collapsed (`MIN_FACES`), and both files are rebuilt. See
+`renders/2026-11-01/barkhorn/top-batt/NOTES.md`.

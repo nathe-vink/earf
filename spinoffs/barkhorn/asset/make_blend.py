@@ -33,6 +33,7 @@ LIGHTER = {'amp-plate-print': 0.15, 'rating-plate-print': 0.15, 'amp-plate-ink':
            'amp-plate-screws': 0.25, 'woofer-screws': 0.25, 'woofer-spider': 0.5, 'woofer-cap': 0.5,
            # and, for a speaker seen across a landscape, the horn's dense tessellation and the lining's voile webs
            'waveguide': 0.35, 'horn-throat': 0.4, 'waveguide-cap': 0.4, 'lining-*-web': 0.3}
+MIN_FACES = 2000                          # below this a part is never collapsed
 COVER = ('cloth-disc', 'disc-frame')
 # the designs: each a list of (engine file, parts hidden). Strata (variants/STRATA.md) is the Cloud with its formed
 # horn, posts, cloth disc and dyed ring hidden and the proposals' laminated horn, bronze posts and caldera laid on it
@@ -72,7 +73,9 @@ def load_product(bpy, Pr, path, hide, full, tints=None):
     if not full:
         for pname, ob in templates.items():
             ratio = next((r for k, r in LIGHTER.items() if Pr._match(pname, k)), None)
-            if ratio is None or any(Pr._match(pname, h) for h in hide):
+            # a mesh already light is left whole: collapsing lining-top-3-web (a 48-face box with the top rib's notch;
+            # the other webs are quilted, 15 to 35 thousand faces) broke its faces into a pale wedge (2026-11-01, README.md)
+            if ratio is None or any(Pr._match(pname, h) for h in hide) or len(ob.data.polygons) < MIN_FACES:
                 continue
             bpy.context.scene.collection.objects.link(ob)
             m = ob.modifiers.new('lighter', 'DECIMATE'); m.ratio = ratio
