@@ -116,11 +116,11 @@
  "platter-screws": {
   "kind": "hardware",
   "maker": "any",
-  "model": "Six M4 x 20 stainless socket button screws (ISO 7380), black oxide",
+  "model": "Six M4 x 10 stainless socket button screws (ISO 7380), up through the hub into the platter's inserts",
   "usd": 6,
   "supplier": "McMaster-Carr kind",
   "estimate": true,
-  "price_date": "2026-10-31"
+  "price_date": "2026-11-01"
  },
  "rega-grommets": {
   "kind": "hardware",
@@ -161,11 +161,11 @@
  "back-hardware": {
   "kind": "hardware",
   "maker": "Neutrik / Switchcraft / CUI kind",
-  "model": "Two gold panel RCA jacks (insulated, 1/4 in hole), a 4 mm earth binding post, a DPDT mini toggle (C&K 7201 kind), a 2.1 mm DC panel jack; shielded leads inside to the S2",
-  "usd": 48,
+  "model": "Two gold panel RCA jacks (insulated, 1/4 in hole), a 4 mm earth binding post, a 4PDT signal toggle with gold contacts (C&K 7411 kind: in bypass it switches the phono stage's input and output, so the cartridge sees one 47k load), a 2.1 mm DC panel jack; shielded leads inside to the S2",
+  "usd": 62,
   "supplier": "Digi-Key / Mouser kind",
   "estimate": true,
-  "price_date": "2026-10-31"
+  "price_date": "2026-11-01"
  },
  "cover-bumpers": {
   "kind": "hardware",
@@ -257,5 +257,32 @@
   "estimate": true,
   "supplier": "an LED profile supplier",
   "price_date": "2026-10-31"
+ },
+ "platter-inserts": {
+  "kind": "hardware",
+  "maker": "any (E-Z Lok / Tappex kind)",
+  "model": "Six M4 brass threaded inserts for bonding into plastics, 5.6 OD x 8, epoxy-bonded into the platter from below (no thread-locker near acrylic)",
+  "usd": 9,
+  "supplier": "McMaster-Carr kind",
+  "estimate": true,
+  "price_date": "2026-11-01"
+ },
+ "bearing-disc-spring": {
+  "kind": "hardware",
+  "maker": "Schnorr / Mubea / Christianson kind",
+  "model": "One DIN 2093 group 2 series C disc spring 63 x 31 x 1.8 (51CrV4), under the bearing nut; load and rate to confirm in the maker's table",
+  "usd": 6,
+  "supplier": "McMaster-Carr kind",
+  "estimate": true,
+  "price_date": "2026-11-01"
+ },
+ "motor-mount-screws": {
+  "kind": "hardware",
+  "maker": "any",
+  "model": "Three M3 x 12 stainless button screws and three M3 brass inserts (4.6 OD), the motor plate hard to the pocket's shoulder as Rega fits its motor",
+  "usd": 6,
+  "supplier": "McMaster-Carr kind",
+  "estimate": true,
+  "price_date": "2026-11-01"
  }
 }

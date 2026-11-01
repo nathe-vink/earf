@@ -11,9 +11,9 @@ import mantle_outcrop as M                                             # noqa: E
 P = M.P
 D = M.derived(P)
 parts = M.parts(P)
-DENS = {'trucast-tint': 1.19, 'trucast-clear': 1.19, 'cast-acrylic': 1.19, 'brass-leadfree': 8.2, 'stainless': 7.8,
+DENS = {'trucast-tint': 1.19, 'trucast-clear': 1.19, 'cast-acrylic': 1.19, 'brass-leadfree': 8.2, 'stainless': 7.8, 'stainless-440c': 7.8,
         'aluminium': 2.70, 'brass-sheet': 8.5}
-BOUGHT_G = {'rega-24v-motor': 330, 'rega-rb330': 300, 'ortofon-2m-black': 7.2, 'phono-box-s2': 570, 'rega-grommets': 5,
+BOUGHT_G = {'rega-24v-motor': 330, 'rega-rb330': 300, 'ortofon-2m-black': 7.2, 'phono-box-s2': 570, 'motor-mount-screws': 4, 'platter-inserts': 6, 'bearing-disc-spring': 20,
             'flat-belt-core': 6, 'foot-sorbothane': 15, 'foot-studs': 60, 'platter-screws': 12, 'back-hardware': 45,
             'bearing-bushes-solid': 25, 'carbide-ball': 2, 'thrust-plate': 3, 'phono-felts': 2, 'cover-dowels': 4}
 mass, groups = 0.0, {}
@@ -63,18 +63,19 @@ w('- The bond lines are not damping: a polymerising cement cures to PMMA (it is 
   'or an optical PSA), which would creep under the bearing\'s load and show as a milky line. Outcrop does not claim it; '
   'the deck is damped by its mass and by PMMA\'s own loss.\n')
 
-w('## The isolation\n')
+w('## The feet (no isolation is claimed)\n')
 k_feet = 3 * 1.4e6 * (math.pi * 0.02 ** 2) / 0.004          # 50 duro Sorbothane, E about 1.4 MPa (dynamic), 40 x 4
 m_iso = (mass - groups.get('cover', 0)) / 1000
 f_feet = 1 / (2 * math.pi) * math.sqrt(k_feet / m_iso)
 w(f'- Three 40 x 4 Sorbothane discs (50 duro, dynamic E about 1.4 MPa, shape factor 2.5: stiffer than its E alone, so '
-  f'read this as a floor): k about {k_feet / 1e3:.0f} kN/m in all under {m_iso:.1f} kg: f = {f_feet:.0f} Hz. Honestly: '
-  'feet like these isolate only above about 1.4 f (about 70 Hz), so they keep the motor\'s and the speakers\' 100 Hz and '
-  'up off the deck but pass footfall (2-20 Hz); a floor that bounces wants a wall shelf. They stay far above the '
+  f'read this as a floor): k about {k_feet / 1e3:.0f} kN/m in all under {m_iso:.1f} kg: f = {f_feet:.0f} Hz or more. '
+  'Feet like these isolate only above about 1.4 f, not in the speakers\' 25-40 Hz feedback band, and they pass footfall '
+  '(2-20 Hz). So they locate and level the deck, and no isolation is claimed (the audit, 2026-11-01); isolation, if '
+  'wanted, is a platform at 3-5 Hz under the record player. They stay far above the '
   'arm-cartridge resonance (about 8 Hz: the RB330\'s 11 g effective + the 2M\'s 7.2 g at 20 um/mN), so they add nothing '
   'in the 8-12 Hz band, which is what a soft float does.')
 w('- The float of the baseline sat at 25-36 Hz on its bushings (the review), in the band where speakers feed back. '
-  'Outcrop has no float: one stiff block, the motor on Rega\'s own grommets, the feet doing the isolating.\n')
+  'Outcrop has no float: one stiff block, the motor screwed hard into it as Rega fits its motor, on three feet that level it.\n')
 
 w('## The drive\n')
 S, Mo = D['S'], D['M']
@@ -82,9 +83,9 @@ d = math.hypot(Mo[0] - S[0], Mo[1] - S[1])
 r = D['pulley_d'] / 2; Rr = P['platter_d'] / 2
 beta = math.asin((Rr - r) / d)
 wrap = math.pi - 2 * beta
-w(f'- Pulley to spindle {d:.0f} mm; pulley {D["pulley_d"]:.2f} for 33.3 at 250 rpm; wrap on the pulley {math.degrees(wrap):.0f} deg '
+w(f'- Pulley to spindle {d:.0f} mm; pulley {D["pulley_d"]:.2f} for 33.3 at {P["rpm_motor"]:g} rpm (a PROPOSAL until the bench test: Rega\'s motor on the US Neo at 60 Hz); wrap on the pulley {math.degrees(wrap):.0f} deg '
   f'(a Rega Planar 3\'s is about the same). Belt path {2 * math.sqrt(d * d - (Rr - r) ** 2) + Rr * (math.pi + 2 * beta) + r * wrap:.0f} mm.')
-w('- The motor hangs on Rega\'s three grommets in its own pocket, so the pulley\'s height is fixed to the platter\'s by '
+w('- The motor\'s plate is screwed hard to a shoulder in its own pocket (three M3 into inserts), as Rega fits its motor; the belt decouples it. The pulley\'s height is fixed to the platter\'s by '
   'solid acrylic: nothing can tilt it (the baseline pod\'s tipping moment under the belt was close to its weight\'s).')
 w('- Speed: the Neo PSU MK2 switches 33/45 electrically and trims in 0.01 rpm steps; the pulley has one diameter.\n')
 
@@ -98,9 +99,11 @@ w(f'- Thrust: {Wt:.1f} N on a 6 mm carbide ball on hardened 52100: Hertz contact
 w('- Journals: 10 g5 spindle in two C932 bronze bushes honed to 10 H6: 8-12 um running clearance (the review: 3-5 um '
   'was too tight for oil). PV is trivial at 0.56 Hz.')
 w('- The housing is threaded M30 x 1.5 and clamped by its nut under the deck, so there is no insert beside the bore '
-  '(the baseline\'s M4 inserts left 2.8 mm webs).')
+  '(the baseline\'s M4 inserts left 2.8 mm webs). The nut bears on a DIN 2093 63 x 31 x 1.8 disc spring and a brass washer, '
+  'set to about 1.5 kN: 20 K moves the clamp 48 um, which moves the preload about 0.05 kN (about 3 kN on the acrylic alone).')
+w('- Oil: 1.0 ml ISO VG 32 (the space below the upper bush is about 1.2 ml). A vent flat 1.0 x 0.3 along the 440C spindle lets air out of the blind bore.')
 w('- Service: lift the platter, its hub and the spindle out together (one assembly; the six M4 screws stay in), wipe the '
-  'spindle, add 1 ml of oil every two years with a syringe, lower it back slowly (the oil has to pass the ball). '
+  'spindle, top up to 1.0 ml every two years with a syringe, lower it back slowly (the oil has to pass the ball). '
   'Shipping: that assembly in its own foam, a nitrile cap over the housing.\n')
 
 w('## The arm\n')

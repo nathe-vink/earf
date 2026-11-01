@@ -43,6 +43,10 @@ def lin(h):
 # passes is the color's `deep` (the speakers' flavours, ../common.py), so a full 12.7 stratum can be tinted and still pass
 # light. A caster pours these to order (round 17's partners); they are not stock.
 CUSTOM = {'ember-custom': '#F2A29C', 'ice-custom': '#B5D9EE', 'haze-custom': '#BEADD8', 'dust-custom': '#F2B184'}
+# the line's stock tints since 2026-11-01 (the owner: "I like the darker colors"; r33-speaker-horn
+# spinoffs/barkhorn/asset/tints-trucast.json): each code's TruCast TT held at its own 1/2 in sheet, given as the color
+# after 10 mm (`strata_horn_deep`, horn_radius_m 0.01)
+STOCK_HELD = {'ember-2423': '#E02B3A', 'poison-2092': '#0DA41C', 'smoke-2074': '#787B7E', 'haze-2287': '#9C5DE3', 'ice-2069': '#B4DEFA'}
 
 
 def sigma_tint(key):
@@ -50,6 +54,8 @@ def sigma_tint(key):
     `deep` after 25 mm."""
     if key in CUSTOM:
         return [-math.log(max(x, 0.002)) / 0.025 for x in lin(CUSTOM[key])]
+    if key in STOCK_HELD:
+        return [-math.log(max(x, 0.002)) / 0.010 for x in lin(STOCK_HELD[key])]
     t = TINTS[key]
     c = lin(t['hue'])
     y = 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]
@@ -713,7 +719,7 @@ def build(args):
         M['base'] = acrylic('base', bands_b, tint, ring=(0.0, 0.0, meta['Wb'] * mm, meta['Db'] * mm, rw * mm) if rw else None)
         if meta['P'].get('post_material') == 'stainless':
             # v3: the base is stock smoked 2064 in every version, the posts polished stainless, the mark a polished recess
-            M['base'] = acrylic('base', [(l['z0'] * mm, l['z1'] * mm, 'tint') for l in meta['base']], 'smoke')
+            M['base'] = acrylic('base', [(l['z0'] * mm, l['z1'] * mm, 'tint') for l in meta['base']], args.base_tint)
             M['etch-tone'] = dielectric('etch-tone', '#101012', 0.12, spec=0.5)
         M['lid'] = acrylic('lid', [(0.0, 0.5, 'tint')], tint if args.tint_mode != 'custom' else tint, rough=0.004)
         M['post'] = acrylic('post', [(0.0, 0.5, 'clear')], tint, wear_on=False)
@@ -1037,6 +1043,7 @@ if __name__ == '__main__':
     ap.add_argument('--tint-mode', default='stock', choices=('stock', 'wide', 'custom'))
     ap.add_argument('--front-strip', type=float, default=0.0)
     ap.add_argument('--edge-frost', type=float, default=0.0)
+    ap.add_argument('--base-tint', default='smoke')
     ap.add_argument('--strip-color', type=float, nargs=3, default=(1.0, 0.62, 0.30))
     a = ap.parse_args(argv)
     build(a)

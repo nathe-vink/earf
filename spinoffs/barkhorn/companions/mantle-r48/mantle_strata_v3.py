@@ -7,6 +7,10 @@ v2 stays as it was:
    methacrylate, Plexus MA310 kind) and held from below by its foot's M8 stud through the base into a tapped hole in
    the post; no fixing shows; the isolation is the foot's Sorbothane pad;
 3. the mark is a polished recess, tone on tone, on the deck's back edge.
+The shared audit fixes (2026-11-01, STOCK-AND-AUDIT.md 3; proposals until the owner signs): the motor hard-mounted as
+Rega fits it; the platter's screws up through the hub into bonded inserts; the bearing on a disc spring, 1.0 ml of
+oil, a vented 440C spindle; the pulley for 300 rpm pending the bench test; a 4PDT bypass; no isolation claim for the
+feet.
 
 v2's notes follow.
 
@@ -67,7 +71,7 @@ P = dict(
     arm_r=222.0, arm_x=395.0, L_eff=236.5, offset=21.55, rest_r=168.0,
     puck_d=84.0, puck_t=12.0,
     motor_d=184.7, motor_x=64.0, motor_pocket=76.0,
-    rpm_motor=250.0,
+    rpm_motor=300.0,                                  # PROPOSAL until benched: the US Neo at 60 Hz (STOCK-AND-AUDIT.md 3.1)
     slot_in=12.0, slot_w=5.0, slot_h=6.0,
     lid_t=3.0, lid_h=100.0, bumper=5.0,
     housing_d=30.0, flange_d=50.0, flange_t=5.0,
@@ -150,8 +154,10 @@ def parts(P):
     cuts += [cyl('z', A, pd + 0.4, top - pt, top + 1), cyl('z', A, 56.0, z0 - 1, top - pt + 0.5)]
     puck_screws = [(A[0] + 35 * math.cos(math.radians(a)), A[1] + 35 * math.sin(math.radians(a))) for a in (90, 210, 330)]
     cuts += [cyl('z', c, 7.0, z0 - 1, top - pt + 0.5) for c in puck_screws]
-    # the motor's pocket through the plinth: the plate hangs on grommets on a shoulder 6 down, the motor below in the gap
-    cuts += [cyl('z', M, P['motor_pocket'] + 8, top - 6, top + 1), cyl('z', M, P['motor_pocket'], z0 - 1, top + 1)]
+    # the motor's pocket through the plinth: the plate screwed hard to a shoulder 6 down (Rega's method), the motor below in the gap
+    cuts += [cyl('z', M, P['motor_pocket'] + 16, top - 6, top + 1), cyl('z', M, P['motor_pocket'], z0 - 1, top + 1)]
+    cuts += [cyl('z', (M[0] + 42 * math.cos(math.radians(a)), M[1] + 42 * math.sin(math.radians(a))), 4.6, top - 14, top - 5.5)
+             for a in (30, 150, 270)]   # the plate's three M3 inserts
     cuts += [cyl('z', p, P['post_d'] + 0.3, z0 - 1, z0 + 2.0) for p in posts]          # the posts' 2 mm bonded seats
     hx = [m + 80.0, m + D['W0'] - 80.0]
     cuts += [cyl('y', (x + s_ * 10, (z0 + top) / 2), 6.0, m + D['D0'] - 14, m + D['D0'] + 1) for x in hx for s_ in (-1, 1)]
@@ -206,7 +212,10 @@ def parts(P):
     hz0 = z0 - 20.0
     ft = P['flange_t']
     housing = (cyl('z', S, P['housing_d'], hz0, top - ft) + cyl('z', S, P['flange_d'], top - ft, top)) - cyl('z', S, 14.0, hz0 + 4, top + 1)
-    nut = cyl('z', S, 46.0, z0 - 7, z0) - cyl('z', S, P['housing_d'] + 0.2, z0 - 8, z0 + 1)
+    # under the plinth, down from it: a brass washer 64 x 31 x 3, one DIN 2093 C 63 x 31 x 1.8 disc spring (set about 3.0), the nut
+    cwasher = cyl('z', S, 64.0, z0 - 3.0, z0) - cyl('z', S, 31.0, z0 - 4, z0 + 1)
+    dspring = cyl('z', S, 63.0, z0 - 6.0, z0 - 3.0) - cyl('z', S, 31.0, z0 - 7, z0 - 2)
+    nut = cyl('z', S, 46.0, z0 - 13.5, z0 - 6.0) - cyl('z', S, P['housing_d'] + 0.2, z0 - 14.5, z0 - 5)
     plate = cyl('z', S, 13.8, hz0 + 4, hz0 + 6)
     ball_c = hz0 + 9
     ball = Pos(S[0], S[1], ball_c) * Sphere(3.0)
@@ -217,17 +226,19 @@ def parts(P):
     spindle = cyl('z', S, 10.0, ball_c + 3, pz0 + 12) + cyl('z', S, 7.2, pz0 + 12, pz1 + 15)
     hub_screws = [(S[0] + 28 * math.cos(math.radians(60 * k + 30)), S[1] + 28 * math.sin(math.radians(60 * k + 30))) for k in range(6)]
     platter = cyl('z', S, P['platter_d'], pz0, pz1) - cyl('z', S, 40.2, pz0 - 1, pz0 + 12.2) - cyl('z', S, 8.0, pz0, pz1 + 1)
-    for c in hub_screws:
-        platter = platter - cyl('z', c, 4.5, pz0 - 1, pz1 + 1) - cyl('z', c, 8.0, pz1 - 4, pz1 + 1)
-    screws = union(*[cyl('z', c, 4.0, pz0 - 4, pz1 - 4) + cyl('z', c, 7.4, pz1 - 4, pz1 - 0.5) for c in hub_screws])
+    for c in hub_screws:   # as Outcrop's: up through the hub into bonded brass inserts, no head on acrylic
+        platter = platter - cyl('z', c, 5.6, pz0 - 1, pz0 + 8)
+        hub = hub - cyl('z', c, 4.5, pz0 - 6, pz0 + 1) - cyl('z', c, 7.8, pz0 - 6, pz0 - 2.6)
+    screws = union(*[cyl('z', c, 4.0, pz0 - 2.8, pz0 + 7) + cyl('z', c, 7.4, pz0 - 5.0, pz0 - 2.8) for c in hub_screws])
+    pinserts = union(*[cyl('z', c, 5.6, pz0, pz0 + 8) - cyl('z', c, 4.0, pz0 - 1, pz0 + 9) for c in hub_screws])
 
-    # ---- the motor, hung from the plinth into the gap ----
+    # ---- the motor, screwed hard to the plinth (Rega's method), hanging into the gap ----
     bz = D['belt_z']
-    mt = top - 2
-    mplate = cyl('z', M, P['motor_pocket'] + 6, mt - 3, mt) - cyl('z', M, 26, mt - 4, mt + 1)
+    mt = top - 3
+    mplate = cyl('z', M, P['motor_pocket'] + 14, mt - 3, mt) - cyl('z', M, 26, mt - 4, mt + 1)
     motor = union(cyl('z', M, 50.0, mt - 3 - 30, mt - 3), cyl('z', M, 4.0, mt - 3, bz + 9))
-    grommets = union(*[cyl('z', (M[0] + 36 * math.cos(math.radians(a)), M[1] + 36 * math.sin(math.radians(a))), 8.0, top - 6, mt + 1.5)
-                       for a in (0, 120, 240)])
+    mscrews = union(*[cyl('z', (M[0] + 42 * math.cos(math.radians(a)), M[1] + 42 * math.sin(math.radians(a))), 3.0, top - 13, mt + 1.6)
+                      for a in (30, 150, 270)])
     pdia = D['pulley_d']
     pulley = (cyl('z', M, pdia, bz - 5, bz + 5) + cyl('z', M, pdia + 6, bz + 5, bz + 7)) - cyl('z', M, 4.0, bz - 6, bz + 8)
     R = P['platter_d'] / 2
@@ -268,26 +279,33 @@ def parts(P):
     out += [
         Part('platter', platter, Machined('cast-acrylic', 'lathe', stock=(310.0, 310.0, 22.0), setup_usd=80.0), finish='acrylic', group='platter',
              pieces={'disc': (platter, 'acrylic-strata-platter')},
-             notes=['tinted 3 / clear 12.7 / tinted 5.6 cemented, annealed, turned to 300 x 21 as Outcrop\'s; on a screwed brass hub']),
+             notes=['tinted 3 / clear 12.7 / tinted 5.6 cemented, annealed, turned to 300 x 21 as Outcrop\'s; six blind 5.6 holes from below for bonded brass M4 inserts, the record side unbroken']),
         Part('platter-hub', hub, Machined('brass-leadfree', 'lathe'), finish='brass', group='platter'),
-        Part('platter-screws', screws, Bought('platter-screws'), finish='steel', group='platter'),
-        Part('spindle', spindle, Machined('stainless', 'lathe', setup_usd=120.0), finish='steel', group='bearing'),
+        Part('platter-screws', screws, Bought('platter-screws'), finish='steel', group='platter',
+             notes=['six M4 x 10 up through the hub\'s flange into the inserts, 0.6 N m, no thread-locker near acrylic']),
+        Part('platter-inserts', pinserts, Bought('platter-inserts'), finish='brass', group='platter'),
+        Part('spindle', spindle, Machined('stainless-440c', 'lathe', setup_usd=120.0), finish='steel', group='bearing',
+             notes=['as Outcrop\'s: 440C, 58 HRC, ground 10 g5; a vent flat 1.0 x 0.3 along the journals']),
         Part('bearing-housing', housing, Machined('brass-leadfree', 'lathe'), finish='brass', group='bearing',
-             notes=['as Outcrop\'s: M30 x 1.5, clamped by its nut under the plinth, hanging 20 into the float where its brass shows']),
+             notes=['as Outcrop\'s: M30 x 1.5, clamped by its nut on a disc spring and a brass washer under the plinth (about 1.5 kN), hanging 20 into the float where its brass shows; 1.0 ml of oil']),
         Part('bearing-nut', nut, Machined('brass-leadfree', 'lathe'), finish='brass', group='bearing'),
+        Part('bearing-spring', dspring, Bought('bearing-disc-spring'), finish='steel', group='bearing'),
+        Part('bearing-washer', cwasher, Machined('brass-leadfree', 'lathe'), finish='brass', group='bearing'),
         Part('bushes', bushes, Bought('bearing-bushes-solid'), finish='brass', group='bearing', inside=True),
         Part('ball', ball, Bought('carbide-ball'), finish='steel', group='bearing', inside=True),
         Part('thrust-plate', plate, Bought('thrust-plate'), finish='steel', group='bearing', inside=True),
-        Part('motor-plate', mplate, Sheet('aluminium', 3, face='+z'), finish='aluminium', group='motor'),
+        Part('motor-plate', mplate, Sheet('aluminium', 3, face='+z'), finish='aluminium', group='motor',
+             notes=['3 mm 5052, black anodized, 90 across, hard on the shoulder on three M3 screws into inserts, as Rega fits its motor (no grommets)']),
         Part('motor', motor, Bought('rega-24v-motor'), finish='black', group='motor'),
-        Part('motor-grommets', grommets, Bought('rega-grommets'), finish='rubber', group='motor'),
-        Part('pulley', pulley, Machined('aluminium', 'lathe'), finish='aluminium', group='motor'),
+        Part('motor-screws', mscrews, Bought('motor-mount-screws'), finish='steel', group='motor'),
+        Part('pulley', pulley, Machined('aluminium', 'lathe'), finish='aluminium', group='motor',
+             notes=[f'belt face {pdia:.2f} at {P["rpm_motor"]:g} rpm: PROPOSAL, not turned until the bench test (STOCK-AND-AUDIT.md 3.1)']),
         Part('belt', belt, Bought('flat-belt-core'), finish='rubber', group='platter'),
         Part('arm-puck', puck, Machined('aluminium', 'lathe'), finish='aluminium', group='arm'),
         Part('arm', union(arm, lift), Bought('rega-rb330'), finish='arm', group='arm'),
         Part('cartridge', cart, Bought('ortofon-2m-black'), finish='cartridge', group='arm'),
         Part('feet', foot, Machined('stainless', 'lathe', stock=(40.0, 40.0, 4 * 18.0)), finish='steel', group='feet',
-             notes=['four, directly under the posts (one grid), turned 303 stainless, 36 x 8 with a 30 neck, on M8 studs in the base\'s inserts, levelled and locked; Sorbothane under']),
+             notes=['four, directly under the posts (one grid), turned 303 stainless, 36 x 8 with a 30 neck, on M8 studs through the base into the posts, levelled and locked; Sorbothane under. They locate and level; no isolation is claimed']),
         Part('foot-pads', pads, Bought('foot-sorbothane'), finish='rubber', group='feet'),
         Part('foot-studs', fstuds, Bought('foot-studs'), finish='steel', group='feet'),
         Part('phono-stage', phono, Bought('phono-box-s2'), finish='aluminium-dark', group='phono'),
@@ -328,13 +346,16 @@ def B_hull(circles, n=360):
 NOTES = [
     'The plinth: tinted 3 ring / clear 12.7 / tinted 3 ring / clear 5.6 (24.3), each tinted ring 20 wide round a clear inlay, '
     'cemented with ACRIFIX 2R 0190 in one vacuum press, annealed, fly-cut, stepped 2 mm a stratum, diamond-polished.',
-    'The float: four clear posts bonded under the plinth, M6 studs torqued 4 N m into inserts in the plinth and the base: '
-    'rigid. Isolation in the four feet (brass on Sorbothane, on M8 studs, levelled and locked).',
+    'The float: four solid 303 stainless posts bonded into 2 mm seats under the plinth, held to the base by the feet\'s M8 studs: '
+    'rigid. The four feet (stainless on Sorbothane, levelled and locked) locate and level it; no isolation is claimed. For isolation, a platform at 3-5 Hz.',
     'The light: a dotless 24 V COB strip, 3 W/m, one closed loop in a 3 x 6 slot routed from below 25 in from the base\'s '
     'edge; the black band printed on the clear before lamination; Mean Well listed adapter and the 25 kHz dimmer. The '
     'phono stage runs from its own listed adapter.',
-    'The motor: Rega 24 V on its plate, hung on Rega\'s grommets in a pocket through the plinth, below it in the float.',
-    'The bearing, platter, arm puck and phono stage as Outcrop\'s (mantle_outcrop.py).',
+    'The motor: Rega 24 V on its plate, screwed hard to a shoulder in a pocket through the plinth as Rega fits it, below it in the float. '
+    'The pulley waits for the motor\'s speed measured on the US Neo (300 rpm expected at 60 Hz).',
+    'The bearing, platter, arm puck and phono stage as Outcrop\'s (mantle_outcrop.py): a disc spring under the bearing\'s nut, '
+    '1.0 ml of oil, a vented 440C spindle; the platter screwed from below into bonded inserts; a 4PDT bypass.',
+    'Before the first sample: with the arm in hand, check its counterweight clears the lid\'s back wall.',
     'The lid: 3 mm 2064, 1.1 kg, on Pro-Ject\'s friction hinges.',
 ]
 
@@ -345,6 +366,7 @@ PRODUCT = Product('mantle-strata-v3', 'Mantle: Strata Float v3 (proposal A)', 'B
                   params=P, parts=parts, count=1, notes=NOTES, materials=MATERIALS, variants=B.C.VARIANTS,
                   touching=[('plinth-L*', 'plinth-L*'), ('base-L*', 'base-L*'), ('led-strip', 'base-L*'), ('post-*', 'plinth-L*'), ('post-*', 'base-L*'), ('foot-studs', 'post-*'), ('foot-studs', 'base-L*'), ('led-channel', 'base-L*'), ('led-strip', 'led-channel'), ('phono-pads', 'phono-stage'), ('bushes', 'bearing-housing'), ('bushes', 'spindle'),
                             ('platter-hub', 'spindle'), ('platter-screws', 'platter*'), ('foot-studs', 'feet'), ('foot-studs', 'base-L*'),
-                            ('foot-pads', 'feet'), ('motor-grommets', 'motor-plate'), ('motor-grommets', 'plinth-L*'), ('motor', 'motor-plate'),
+                            ('foot-pads', 'feet'), ('motor-screws', 'motor-plate'), ('motor-screws', 'plinth-L*'), ('motor', 'motor-plate'),
+                            ('platter-inserts', 'platter'), ('platter-screws', 'platter-hub'), ('platter-screws', 'platter-inserts'), ('bearing-spring', 'bearing-*'), ('bearing-washer', 'plinth-L*'), ('bearing-spring', 'bearing-washer'),
                             ('bearing-nut', 'bearing-housing'), ('arm', 'arm-puck'), ('lid-*', 'lid-*')],
                   drawing_prefix='MS3')

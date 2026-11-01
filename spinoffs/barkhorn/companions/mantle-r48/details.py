@@ -47,13 +47,18 @@ def bearing(ax):
     S0 = 0.0
     lams = D['lams']; b0 = P['feet_h']; top = D['top']
     strata(ax, -60, -16, lams); strata(ax, 16, 60, lams)
-    hz0 = b0 + 2.0; ft = P['flange_t']
+    hz0 = b0 + 0.5; ft = P['flange_t']
     # housing body and flange
     R(ax, -15, hz0, -7, top - ft, hatch='\\\\\\', fc='#f2e3b3'); R(ax, 7, hz0, 15, top - ft, hatch='\\\\\\', fc='#f2e3b3')
     R(ax, -15, hz0, 15, hz0 + 4, hatch='\\\\\\', fc='#f2e3b3')
     R(ax, -25, top - ft, -7, top, hatch='\\\\\\', fc='#f2e3b3'); R(ax, 7, top - ft, 25, top, hatch='\\\\\\', fc='#f2e3b3')
     # nut under the deck in its counterbore
-    R(ax, -23, b0 + 2, -15, b0 + 9, hatch='xx', fc='#f2e3b3'); R(ax, 15, b0 + 2, 23, b0 + 9, hatch='xx', fc='#f2e3b3')
+    R(ax, -23, b0 + 0.5, -15, b0 + 8, hatch='xx', fc='#f2e3b3'); R(ax, 15, b0 + 0.5, 23, b0 + 8, hatch='xx', fc='#f2e3b3')
+    # the disc spring (a cone, drawn as its set section) and the brass washer on the acrylic
+    for s_ in (-1, 1):
+        ax.add_patch(Polygon([(s_ * 15.5, b0 + 9.2), (s_ * 31.5, b0 + 8.0), (s_ * 31.5, b0 + 9.8), (s_ * 15.5, b0 + 11.0)], closed=True, fc='#777', ec='k', lw=0.5, zorder=3))
+        R(ax, min(s_ * 15.5, s_ * 32), b0 + 11, max(s_ * 15.5, s_ * 32), b0 + 14, hatch='\\\\\\', fc='#f2e3b3')
+    note(ax, 30, b0 - 3, 'disc spring DIN 2093 C 63 x 31 x 1.8 set to about 1.5 kN; brass washer 64 x 31 x 3', (31.5, b0 + 9))
     # bushes
     for z0_, z1_ in ((hz0 + 12, hz0 + 24), (top - 16, top - 4)):
         R(ax, -7, z0_, -5, z1_, hatch='....', fc='#e8c98a'); R(ax, 5, z0_, 7, z1_, hatch='....', fc='#e8c98a')
@@ -63,7 +68,7 @@ def bearing(ax):
     pz0, pz1 = D['pz0'], D['pz1']
     R(ax, -5, hz0 + 12, 5, pz0 + 12, fc='#e6e6e6', z=2); R(ax, -3.6, pz0 + 12, 3.6, pz1 + 15, fc='#e6e6e6', z=2)
     # oil level
-    ax.plot([-7, 7], [top - 10, top - 10], ls='--', lw=0.6, color='#2a6fb0'); note(ax, 30, top - 10, 'oil to here: 2.5 ml ISO VG 32', (7, top - 10))
+    ax.plot([-7, 7], [top - 10, top - 10], ls='--', lw=0.6, color='#2a6fb0'); note(ax, 30, top - 10, 'oil to here: 1.0 ml ISO VG 32 (space about 1.2 ml)', (7, top - 10))
     # hub and platter
     R(ax, -35, pz0 - 5, -5, pz0, hatch='\\\\\\', fc='#f2e3b3'); R(ax, 5, pz0 - 5, 35, pz0, hatch='\\\\\\', fc='#f2e3b3')
     R(ax, -20, pz0, -5, pz0 + 12, hatch='\\\\\\', fc='#f2e3b3'); R(ax, 5, pz0, 20, pz0 + 12, hatch='\\\\\\', fc='#f2e3b3')
@@ -75,16 +80,17 @@ def bearing(ax):
             zz += t
     R(ax, -20.1, pz0 + 12, -4, pz1, fc='white', lw=0.5); R(ax, 4, pz0 + 12, 20.1, pz1, fc='white', lw=0.5)
     for x in (-28, 28):
-        R(ax, x - 2, pz0 - 4, x + 2, pz1 - 4, fc='#999', lw=0.4, z=3); R(ax, x - 3.7, pz1 - 4, x + 3.7, pz1 - 0.5, fc='#999', lw=0.4, z=3)
+        R(ax, x - 2.8, pz0, x + 2.8, pz0 + 8, fc='#e8c98a', hatch='....', lw=0.4, z=3)
+        R(ax, x - 2, pz0 - 2.8, x + 2, pz0 + 7, fc='#999', lw=0.4, z=3); R(ax, x - 3.7, pz0 - 5, x + 3.7, pz0 - 2.8, fc='#999', lw=0.4, z=3)
     R(ax, -80, pz1, 80, pz1 + 1.8, fc='#222', lw=0.3)
     ax.text(70, pz1 + 4, 'record', fontsize=FS - 1)
     dim(ax, -70, top, -70, D['record_z'], f'{D["record_z"] - top:.1f}', off=(-6, 0), rot=90)
     dim(ax, -55, b0, -55, top, f'{top - b0:.1f}', off=(-6, 0), rot=90)
-    note(ax, 30, hz0 - 4, 'housing: lead-free brass, M30 x 1.5 x 30, clamped by its nut (10 N m) on a PTFE washer', (15, hz0 + 3))
+    note(ax, 30, hz0 - 4, 'housing: lead-free brass, M30 x 1.5 x 30, clamped by its nut on the disc spring', (15, hz0 + 3))
     note(ax, 30, hz0 + 18, 'bushes: C932, 10 x 14 x 12, pressed, honed to 10 H6', (7, hz0 + 18))
     note(ax, 30, hz0 + 8.5, 'carbide ball 6 g10 on lapped 52100 plate, 60 HRC, Ra 0.05', (3, hz0 + 9))
-    note(ax, 30, top + 1.5, 'spindle 440C 58 HRC, 10 g5, Ra 0.1; shrunk into the hub', (5, top))
-    note(ax, 30, pz0 + 6, 'hub flange 70 x 5, spigot 40 h6 in 40.2 H7; six M4 x 20 on r 28', (35, pz0 - 2))
+    note(ax, 30, top + 1.5, 'spindle 440C 58 HRC, 10 g5, Ra 0.1, vent flat 1.0 x 0.3; shrunk into the hub', (5, top))
+    note(ax, 30, pz0 + 6, 'hub flange 70 x 5, spigot 40 h6 in 40.2 H7; six M4 x 10 up into bonded brass inserts, 0.6 N m', (35, pz0 - 2))
     note(ax, -78, pz1 + 9, 'platter: tinted 3 / clear 12.7 / tinted 5.6, faced to 21.0; run-out 0.05', None)
     ax.set_xlim(-85, 150); ax.set_ylim(b0 - 6, pz1 + 22); ax.set_aspect('equal'); ax.axis('off')
 
@@ -102,21 +108,21 @@ def foot(ax):
 
 
 def motor(ax):
-    ax.set_title('C  Motor hung on Rega\'s grommets (1:1)', fontsize=FS + 1, loc='left')
+    ax.set_title('C  Motor hard-mounted, as Rega fits it (1:1)', fontsize=FS + 1, loc='left')
     top = D['top']; lams = D['lams']
     pk = P['motor_pocket'] / 2
-    strata(ax, -60, -pk - 4, lams); strata(ax, pk + 4, 60, lams)
+    strata(ax, -60, -pk - 8, lams); strata(ax, pk + 8, 60, lams)
     for s in (-1, 1):
-        x0 = s * (pk + 4)
+        x0 = s * (pk + 8)
         R(ax, min(s * pk, x0), lams[0]['z0'], max(s * pk, x0), top - 6, fc='#d9d9d9', lw=0.5)
-    R(ax, -41, top - 5, 41, top - 2, fc='#333')
-    for x in (-36, 36):
-        R(ax, x - 4, top - 6, x + 4, top - 0.5, fc='#555', hatch='...', z=3)
+    R(ax, -45, top - 6, 45, top - 3, fc='#333')
+    for x in (-42, 42):
+        R(ax, x - 1.5, top - 13, x + 1.5, top - 1.4, fc='#999', z=3); R(ax, x - 2.3, top - 14, x + 2.3, top - 6, fc='#e8c98a', hatch='....', z=2)
     R(ax, -25, top - 35, 25, top - 5, fc='#444'); R(ax, -2, top - 5, 2, D['belt_z'] + 9, fc='#bbb')
     pd = D['pulley_d'] / 2
     R(ax, -pd, D['belt_z'] - 5, pd, D['belt_z'] + 5, fc='#ddd', hatch='--')
-    note(ax, 50, top + 16, 'plate 3 mm 5052, black anodised;\nthree grommets on a 6 shoulder;\npocket 76 x 40, a 12 lead hole', (30, top - 3))
-    note(ax, 50, D['belt_z'] + 2, f'pulley {D["pulley_d"]:.2f} (250 rpm), the belt on the clear stratum\'s rim', (pd, D['belt_z']))
+    note(ax, 50, top + 16, 'plate 3 mm 5052, black anodized, 90 across;\nscrewed hard to a 6 shoulder on three M3\ninto brass inserts (no grommets);\npocket 76 x 40, a 12 lead hole', (30, top - 3))
+    note(ax, 50, D['belt_z'] + 2, f'pulley {D["pulley_d"]:.2f} ({P["rpm_motor"]:g} rpm, after the bench test), the belt on the clear stratum\'s rim', (pd, D['belt_z']))
     ax.set_xlim(-65, 190); ax.set_ylim(top - 40, top + 30); ax.set_aspect('equal'); ax.axis('off')
 
 
@@ -153,7 +159,7 @@ def wiring(ax):
     ax.set_title('F  Signal, power and earth', fontsize=FS + 1, loc='left')
     box = lambda x, y, w, h, t: (ax.add_patch(Rectangle((x, y), w, h, fc='white', ec='k', lw=0.7)), ax.text(x + w / 2, y + h / 2, t, fontsize=FS - 1, ha='center', va='center'))
     box(0, 40, 26, 12, 'RB330 + 2M\n(own lead)'); box(40, 40, 26, 12, 'Phono Box S2\nMM 40 dB 47k/100p')
-    box(80, 40, 26, 12, 'plate: DPDT\nstage / bypass'); box(120, 40, 22, 12, 'RCA out\nto speakers')
+    box(80, 40, 26, 12, 'plate: 4PDT\nstage / bypass'); box(120, 40, 22, 12, 'RCA out\nto speakers')
     box(40, 14, 26, 12, 'Pro-Ject 18 V\nadapter (listed)'); box(0, 14, 26, 12, 'bearing housing\nM3 ring tag')
     box(120, 14, 22, 12, 'Rega Neo PSU\n(listed) to motor')
     for a, b in (((26, 46), (40, 46)), ((66, 46), (80, 46)), ((106, 46), (120, 46)), ((53, 26), (53, 40))):
