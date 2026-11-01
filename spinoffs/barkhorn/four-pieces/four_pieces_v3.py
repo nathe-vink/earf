@@ -253,6 +253,14 @@ def main():
         if 'v3' in only:
             json.dump(shot(v), open(os.path.join(SHOTS, f'v3-{v}.json'), 'w'), indent=1)
             print(f'v3-{v}')
+        if 'v3sff' in only:                   # -final-2092-sf-f: Tropos in colours F (owner note 68adc2c3,
+            # r33-speaker-horn 2bf9b217: Poison's cabinet 32.3 % through 20 mm over a white lining, the bare-strip plinth
+            # light), its glow 20 by day, 40 at dusk; everything else as -sf
+            sh = strata_float_v3(hemisphere_v3(stock2092(strata(shot(v)))), v)
+            sh['tropos_glow'] = 40.0 if v == 'dusk' else 20.0
+            sh['title'] += ', Tropos in colours F'
+            json.dump(sh, open(os.path.join(SHOTS, f'v3sff-{v}.json'), 'w'), indent=1)
+            print(f'v3sff-{v}')
         if 'v3sf' in only:                    # -final-2092-sf: Hemisphere v3 and Strata Float v3
             json.dump(strata_float_v3(hemisphere_v3(stock2092(strata(shot(v)))), v),
                       open(os.path.join(SHOTS, f'v3sf-{v}.json'), 'w'), indent=1)

@@ -52,6 +52,8 @@ def _tropos(bpy):
         x, y = t['position'][:2]
         # `tropos_lift`: the asset's origin at the speaker's base, its plinth below (Strata's final form: 38.5 mm)
         e.location = (x, y, SHOT.get('tropos_lift', 0.0)); e.rotation_euler = (0, 0, math.radians(t.get('rotate_z', 0.0)))
+        if SHOT.get('tropos_glow') is not None:
+            e['glow'] = float(SHOT['tropos_glow'])   # the plinth light (make_blend.plinth_glow reads it; 20 if unset)
         bpy.context.scene.collection.objects.link(e)
 
 
