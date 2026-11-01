@@ -1,0 +1,15 @@
+{"stage1": {"impression": "A clean, legible product card: a cobalt acrylic floorstander with its horn floating on bronze posts against a warm cream sweep, and the whole silhouette reads at a glance. It still reads as a render. The plinth hovers with almost no ground shadow, the horn's blue is so saturated it looks electric, the interior (ports, amp box, braces) is lit busily through the walls, and at proof size the horn's terraces and the edges look smeared by the denoiser.", "score": 5.0},
+ "verdict": "iterate",
+ "changes": [
+  {"id": "c1", "kind": "light", "change": {"setting": "lights.floor.irradiance and lights.wash.irradiance", "from": "floor 0.7, wash 0.5", "to": "floor 0.35, wash 0.2"}, "accept": {"region": [180, 558, 360, 580], "metric": "lum_median", "op": "<=", "value": 226}},
+  {"id": "c2", "kind": "light", "change": {"setting": "set.contact.core_distance_m and set.contact.distance_m", "from": "core 0.015, distance 0.32", "to": "core 0.03, distance 0.45"}, "accept": {"region": [180, 558, 360, 600], "metric": "falloff", "axis": "y", "op": ">=", "value": 12}},
+  {"id": "c3", "kind": "light", "change": {"setting": "lights.pool.irradiance (sweep only)", "from": "1.0", "to": "0.5"}, "accept": {"region": [200, 545, 330, 565], "metric": "lum_median", "op": "<=", "value": 215}},
+  {"id": "c4", "kind": "post", "change": {"setting": "render.samples / render.adaptive", "from": "96 / 0.01", "to": "384 / 0.005"}, "accept": {"region": [300, 230, 355, 500], "metric": "lum_range", "op": ">=", "value": 120}},
+  {"id": "c5", "kind": "light", "change": {"setting": "lights.back.irradiance", "from": "2.4", "to": "1.3"}, "accept": {"region": [160, 430, 310, 510], "metric": "lum_p95", "op": "<=", "value": 200}},
+  {"id": "c6", "kind": "light", "change": {"setting": "lights.horn.irradiance and lights.rim.power_w", "from": "horn 2.6, rim 12", "to": "horn 3.4, rim 18"}, "accept": {"region": [160, 100, 300, 200], "metric": "lum_p95", "op": ">=", "value": 130}},
+  {"id": "c7", "kind": "light", "change": {"setting": "lights.bg-right.irradiance and lights.bg-high.irradiance", "from": "bg-right 1.1, bg-high 0.2", "to": "bg-right 0.8, bg-high 0.0"}, "accept": {"region": [380, 0, 500, 80], "metric": "lum_median", "op": "between", "value": [218, 228]}},
+  {"id": "c8", "kind": "light", "change": {"setting": "lights.topline.strength", "from": "1.8", "to": "2.6"}, "accept": {"region": [170, 205, 300, 232], "metric": "lum_p95", "op": ">=", "value": 200}}
+ ],
+ "out_of_scope": ["horn and cabinet tint saturation (owner's decision)", "interior/lining (fixed)", "LED glow strength (owner's decision)"],
+ "score_if_fixed": 7.0,
+ "_note": "Abridged: problems, evidence, expected and the full defect list are in the hand-back; this file keeps every change and accept test verbatim."}

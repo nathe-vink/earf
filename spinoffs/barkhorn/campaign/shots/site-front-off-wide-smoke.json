@@ -5,16 +5,16 @@
  ],
  "camera": {
   "position": [
-   1.2,
-   -2.5,
-   1.0
+   1.86,
+   -3.87,
+   0.95
   ],
   "target": [
    0.0,
    0.05,
    0.52
   ],
-  "lens_mm": 32.3,
+  "lens_mm": 50.0,
   "level": true,
   "shift_x": -0.011,
   "shift_y": 0.025,
@@ -40,10 +40,10 @@
   "radius": 2.8,
   "height": 9.0,
   "contact": {
-   "strength": 0.9,
-   "distance_m": 0.32,
+   "strength": 1.0,
+   "distance_m": 0.45,
    "core_strength": 0.95,
-   "core_distance_m": 0.015
+   "core_distance_m": 0.03
   },
   "flags": [
    {
@@ -225,7 +225,7 @@
     -0.4,
     0.0
    ],
-   "irradiance": 1.0,
+   "irradiance": 0.4,
    "color": "#FFF8F0",
    "specular": 0.0,
    "receivers": [
@@ -436,7 +436,7 @@
     0.0,
     1.2
    ],
-   "power_w": 12,
+   "power_w": 18,
    "color": "#FFFFFF",
    "diffuse": 0.1,
    "receivers": [
@@ -460,7 +460,7 @@
     0.0,
     1.12
    ],
-   "irradiance": 2.6,
+   "irradiance": 3.2,
    "color": "#FFF8F0",
    "spread_deg": 40,
    "specular": 1.0
@@ -526,7 +526,7 @@
     -0.4,
     0.0
    ],
-   "irradiance": 0.5,
+   "irradiance": 0.2,
    "color": "#FFF0E2",
    "receivers": [
     "sweep"
@@ -571,7 +571,7 @@
     6.0,
     1.0
    ],
-   "irradiance": 1.1,
+   "irradiance": 0.8,
    "color": "#FFF4E8",
    "specular": 0.0,
    "receivers": [
@@ -594,7 +594,7 @@
     5.5,
     4.7
    ],
-   "irradiance": 4.5,
+   "irradiance": 3.6,
    "color": "#FFF0E2",
    "specular": 0.0,
    "receivers": [
@@ -617,7 +617,7 @@
     5.5,
     5.0
    ],
-   "irradiance": 0.2,
+   "irradiance": 0.0,
    "color": "#FFF4E8",
    "specular": 0.0,
    "receivers": [
@@ -640,7 +640,7 @@
     0.5,
     0.0
    ],
-   "irradiance": 0.7,
+   "irradiance": 0.35,
    "spread_deg": 50,
    "color": "#FFF4E8",
    "specular": 0.0,
@@ -714,7 +714,7 @@
   "white_out": 236,
   "contrast": 0.2,
   "clarity": 0.05,
-  "sharpen": 0.3,
+  "sharpen": 0.15,
   "sharpen_px": 0.7,
   "grain": 1.5,
   "grain_px": 1.0

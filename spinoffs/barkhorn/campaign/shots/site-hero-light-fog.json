@@ -13,10 +13,10 @@
   "radius": 5.0,
   "height": 9.0,
   "contact": {
-   "strength": 0.8,
+   "strength": 1.0,
    "distance_m": 0.7,
-   "core_strength": 0.9,
-   "core_distance_m": 0.08
+   "core_strength": 1.0,
+   "core_distance_m": 0.04
   },
   "flags": [
    {
@@ -82,7 +82,7 @@
    0.75
   ],
   "target": [
-   0.0,
+   -0.55,
    0.0,
    0.66
   ],
@@ -119,7 +119,7 @@
  },
  "materials": {
   "sweep": {
-   "roughness": 0.32
+   "roughness": 0.6
   },
   "led": {
    "glow": 40.0
@@ -140,9 +140,9 @@
    "target": [
     -1.5,
     6.0,
-    1.2
+    0.6
    ],
-   "irradiance": 3.6,
+   "irradiance": 2.8,
    "color": "#FFF4E8",
    "camera": false,
    "specular": 0.0
@@ -159,11 +159,11 @@
     3.4
    ],
    "target": [
-    -0.9,
+    0.9,
     6.0,
-    1.0
+    0.6
    ],
-   "irradiance": 3.6,
+   "irradiance": 2.8,
    "color": "#FFF4E8",
    "camera": false,
    "specular": 0.0
@@ -184,7 +184,7 @@
     0.0,
     0.8
    ],
-   "irradiance": 1.6,
+   "irradiance": 2.6,
    "color": "#FFFAF4",
    "camera": false
   },
@@ -251,7 +251,7 @@
    ],
    "orbit": {
     "azimuth_deg": 200,
-    "elevation_deg": 30,
+    "elevation_deg": 45,
     "distance_m": 2.5
    },
    "target": [
@@ -259,7 +259,7 @@
     -0.5,
     0.0
    ],
-   "irradiance": 22.0,
+   "irradiance": 30.0,
    "color": "#FFF8F0",
    "camera": false
   },

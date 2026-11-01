@@ -6,7 +6,8 @@
   "front": 5.0,
   "depth": 1.5,
   "radius": 1.2,
-  "height": 4.0
+  "height": 4.0,
+  "contact": {}
  },
  "lights": {
   "key": {
@@ -16,8 +17,8 @@
     2.0
    ],
    "orbit": {
-    "azimuth_deg": -35,
-    "elevation_deg": 40,
+    "azimuth_deg": -60,
+    "elevation_deg": 32,
     "distance_m": 4.0
    },
    "target": [
@@ -25,7 +26,7 @@
     0.0,
     0.8
    ],
-   "irradiance": 2.2,
+   "irradiance": 2.6,
    "color": "#FFF3E1"
   },
   "fill": {
@@ -44,7 +45,7 @@
     0.0,
     0.6
    ],
-   "irradiance": 1.0,
+   "irradiance": 0.6,
    "color": "#FFF7EA"
   },
   "wash": {
@@ -74,15 +75,15 @@
    ],
    "position": [
     0.0,
-    0.66,
-    1.12
+    0.55,
+    1.35
    ],
    "target": [
     0.0,
     0.0,
     1.1
    ],
-   "irradiance": 1.6,
+   "irradiance": 2.4,
    "color": "#FFF1DC",
    "specular": 0,
    "transmission": false
@@ -95,15 +96,15 @@
    ],
    "position": [
     0.0,
-    -0.8,
-    3.2
+    -0.5,
+    1.6
    ],
    "target": [
     0.0,
     1.5,
-    1.4
+    0.6
    ],
-   "irradiance": 0.35,
+   "irradiance": 0.2,
    "color": "#FFF4E8",
    "specular": 0.0,
    "receivers": [
@@ -126,7 +127,7 @@
     -0.5,
     0.0
    ],
-   "irradiance": 0.15,
+   "irradiance": 0.0,
    "spread_deg": 60,
    "color": "#FFF4E8",
    "specular": 0.0,
@@ -160,7 +161,7 @@
   "target": [
    0.0,
    0.02,
-   0.58
+   0.52
   ],
   "lens_mm": 70.2,
   "level": true

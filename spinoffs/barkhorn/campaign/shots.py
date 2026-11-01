@@ -425,7 +425,41 @@ def site(frame, tint):
     if frame == 'back':
         # (its first proof put the plinth's near corner on the frame's bottom edge: a little wider)
         s['camera']['lens_mm'] = round(s['camera']['lens_mm'] * 0.9, 1)
+    _site_round1(s, frame)
     return s
+
+
+def _site_round1(s, frame):
+    """The Ice proofs' first critic round (2026-11-01, framing and light only; renders/2026-11-01/barkhorn/site-strata/
+    CRITIC.md): every frame floated (no contact shadow, the floor fills as bright as the open floor) on a flat ground.
+    Material notes (the tints, the lining, the plinth's glow) and sample counts are set aside."""
+    L = s['lights']; c = s['set'].setdefault('contact', {})
+    if frame in ('front-off-tall', 'front-off-wide', 'side'):          # finals31's studio
+        L['floor']['irradiance'] = 0.35; L['wash']['irradiance'] = 0.2; L['pool']['irradiance'] = 0.4
+        c.update(strength=1.0, distance_m=0.45, core_distance_m=0.03)
+        L['bg-right']['irradiance'] = 0.8; L['bg-high']['irradiance'] = 0.0; L['wall_left']['irradiance'] = 3.6
+        L['horn']['irradiance'] = 3.2; L['rim']['power_w'] = 18              # the horn's shaded terraces crushed
+        if frame == 'front-off-tall':
+            L['back']['irradiance'] = 1.6                                     # the lower interior too busy
+            L['topline']['strength'] = 2.6                                    # the bronze posts read as metal
+        if frame == 'front-off-wide':                                         # 32 mm leaned the verticals: 50 mm, further back
+            s['camera'].update(position=[1.86, -3.87, 0.95], lens_mm=50.0)
+            s['finish']['sharpen'] = 0.15
+        if frame == 'side':                                                   # the side panel a dead slab: rake it
+            L['kick'].update(irradiance=2.8); L['kick']['orbit'].update(azimuth_deg=75, elevation_deg=25)
+    elif frame == 'back':                                                     # finals31's back rig
+        L['d-floor']['irradiance'] = 0.0; L['fill']['irradiance'] = 0.6
+        L['d-wall'].update(irradiance=0.2, position=[0.0, -0.5, 1.6], target=[0.0, 1.5, 0.6])
+        L['key']['irradiance'] = 2.6; L['key']['orbit'].update(azimuth_deg=-60, elevation_deg=32)   # the amplifier's plate
+        L['glow'].update(irradiance=2.4, position=[0.0, 0.55, 1.35])        # the horn from behind
+        s['camera']['target'] = [s['camera']['target'][0], s['camera']['target'][1], 0.52]
+    elif frame == 'hero-light':                                               # studio31's light hero
+        c.update(strength=1.0, core_strength=1.0, core_distance_m=0.04)
+        L['scrim']['irradiance'] = 2.6
+        L['bg-left'].update(irradiance=2.8, target=[-1.5, 6.0, 0.6]); L['bg-right'].update(irradiance=2.8, target=[0.9, 6.0, 0.6])
+        L['back-top']['irradiance'] = 30.0; L['back-top']['orbit']['elevation_deg'] = 45
+        s['camera']['target'] = [-0.55] + s['camera']['target'][1:]          # the speaker to the right third, room for the heading
+        s.setdefault('materials', {}).setdefault('sweep', {})['roughness'] = 0.6
 
 
 for _f in SITE_FRAMES:

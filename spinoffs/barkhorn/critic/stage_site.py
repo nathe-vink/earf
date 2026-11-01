@@ -30,7 +30,7 @@ PRODUCT = """EARF's Tropos loudspeaker, in its final design, sold at about $20,0
 acrylic (TINT), clear enough to see into, lined inside with polyester batts in dark voile sleeves between its ribs; a
 woofer in a stepped ring of the same acrylic (the caldera); above it, on four bronze posts, a horn built from laminated
 layers of the same tinted acrylic, stepped like terraces (Strata); the whole standing on a stepped plinth of three
-frames of gray acrylic with a warm LED strip under the bottom step, so it glows faintly on the floor. Cover off."""
+frames of the same tinted acrylic with a warm LED strip under the bottom step, so it glows faintly on the floor. Cover off."""
 
 FIXED = ["The speaker: its shape, its parts, its proportions.",
          "Its materials as they are: the cabinet's and horn's tint, the lining's colour behind the walls, the plinth's "
