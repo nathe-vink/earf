@@ -471,3 +471,12 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
   hero due ~12:00; four-pieces -final-2092 day ~12:10, dusk ~12:50; Mantle shared fixes 5b8db2fe/9e72cf70 (both ~$3,900 parts;
   proposals; owner questions on custom deck lots depend on A/B); brand 3292654e pack renders, 44b3f237 plinth ships flat in its own
   carton. Board second check wf_ef6fe320-80f still running. Next check-in 12:42 (trig_012hpzbexXc9pvEw2Jk7yn2M).
+- 12:15 board v4 (second check wf_ef6fe320-80f: refuter 13 issues, owner-eyed reader 37; all addressed): budget card now "chips first,
+  then decide" (the +$8,200 is ~$6,000 dark sheet + ~$2,200 plinths/parts every option pays; option C drains the $4,500 reserve to
+  ~$2,300; option D trim another line; 2064's 3 sheets unconfirmed; Chemcast lists 2074 lighter than TruCast; ~$150 chips/offcuts incl.
+  a 3/4 in 2064 piece); Core dock corrected (its own cable behind the furniture; contacts show when lifted; a port is cordless in use
+  too, ~$8); YC corrected (late applications read; Early Decision is for students; reapply with sales; ~9.5% in YC's example; ~2 h of
+  owner answers); flush horn moved to card 07 to confirm (46-64 deg at 1-1.4 kHz, not 46-57); close-ups: the whole-speaker rule was
+  the coordinator's extension; horns: lighter than the site's by TT, Fog clear, three custom lots at production; design filings hard
+  stop 15 Oct 2027 (Dec target was for the January debut); site deploy needs no waitlist provider; "AI review passes", not
+  "independent reviewers". Brand lane asked to fix FACTS.md's Core price ($650 deck suggested vs "$750 planned").
