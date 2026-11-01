@@ -525,3 +525,5 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   darker stock tint: Tropos near-black with deep green horns, plinths glowing, Core and Hemisphere lit. Same label layout; effective
   contrast 7.0-13.3:1, corner note 4.7:1. Notes say Hemisphere is its color-inside version and Mantle an earlier floating design,
   the chosen designs follow (the -sf frames: day ~13:45, dusk ~14:25).
+- Check-in 19 (13:34): board v5 up and the owner asked (tagline, budget); deck v46 line interim in. Speaker row rendering since 12:44
+  (~13:45), then cover, room + portrait; four-pieces -sf day ~13:45, dusk ~14:25. Next check-in 14:35 (trig_01F1p2PA46C4JnqFbT8eF61k).
