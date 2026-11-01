@@ -1576,7 +1576,7 @@
    "disc": "#9A6A12",
    "horn_preset": "clear_resin",
    "horn": "#FFFFFF",
-   "horn_deep": "#F2B705",
+   "horn_deep": "#FFB101",
    "horn_cloud": 0.0,
    "materials": {
     "bark": {
@@ -1589,12 +1589,13 @@
      "roughness": 0.03
     },
     "horn-lot": {
-     "deep": "#F2B705",
+     "deep": "#FFB101",
      "radius": 0.01,
      "roughness": 0.05,
      "ior": 1.49
     }
    },
+   "horn_deep_site_hue": "#F2B705",
    "tint": "TruCast 9097 Fluorescent Yellow"
   },
   "cloud-violet": {
@@ -1634,7 +1635,7 @@
    "disc": "#8C3B14",
    "horn_preset": "clear_resin",
    "horn": "#FFFFFF",
-   "horn_deep": "#E0661C",
+   "horn_deep": "#F25508",
    "horn_cloud": 0.0,
    "materials": {
     "bark": {
@@ -1647,12 +1648,13 @@
      "roughness": 0.03
     },
     "horn-lot": {
-     "deep": "#E0661C",
+     "deep": "#F25508",
      "radius": 0.01,
      "roughness": 0.05,
      "ior": 1.49
     }
    },
+   "horn_deep_site_hue": "#E0661C",
    "tint": "TruCast 2422 Orange (amber)"
   },
   "cloud-blue": {
@@ -1663,7 +1665,7 @@
    "disc": "#24557E",
    "horn_preset": "clear_resin",
    "horn": "#FFFFFF",
-   "horn_deep": "#3C86C2",
+   "horn_deep": "#2981E7",
    "horn_cloud": 0.0,
    "materials": {
     "bark": {
@@ -1676,12 +1678,13 @@
      "roughness": 0.03
     },
     "horn-lot": {
-     "deep": "#3C86C2",
+     "deep": "#2981E7",
      "radius": 0.01,
      "roughness": 0.05,
      "ior": 1.49
     }
    },
+   "horn_deep_site_hue": "#3C86C2",
    "tint": "TruCast 2069 Tinted Blue"
   },
   "cloud-red": {
