@@ -562,7 +562,12 @@ def parts(P):
                                                 notes=[f'{P["ribs"]["depth"]:g} on edge, '
                                                        + {'hdpe': 'extrusion welded', 'acrylic': 'cemented', 'wood': 'glued'}[kind] + ' to '
                                                        + ('the back both sides: it comes off with the back' if n.startswith('rib-back') else
-                                                          'the panel both sides')])
+                                                          'the panel both sides')
+                                                       # the coordinator (2026-11-01): the top rib's front end, seen edge-on through
+                                                       # the front panel, read as a dark streak in the site-set critics' proofs;
+                                                       # polished, it reads as a clear edge (structurally neutral)
+                                                       + ('; its front end polished (seen through the front panel)'
+                                                          if kind == 'acrylic' and n.startswith('rib-top') else '')])
                                            for n, r in ribs]
     batts = [Part(n, s, Sheet(P['lining']['stock'], batt_t(P, n)), finish='lining', group='lining', inside=True,
                  pieces={'web': (soft(s, P['lining']['soft']), 'lining')},
