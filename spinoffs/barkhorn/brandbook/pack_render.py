@@ -5,7 +5,8 @@
 Built from primitives in meters; the printed faces are the decals that shoot.cjs makes from scenes/decal-*.html
 (transparent PNGs), laid over the birch or the board as ink. Sizes are proposals (README, "Packaging"):
 - the crate: 720 W x 600 D x 1160 H, 18 mm birch ply on two 100 mm skids, the door at the front hinged at its foot;
-  inside, a charcoal felt lining, foam corner blocks and a birch sled the speaker walks out on, wearing its sleeve;
+  inside, a charcoal felt lining, foam corner blocks and a birch sled the speaker walks out on (the speaker lane's
+  asset, uncovered; its shipping sleeve folded on the crate's top);
 - the horn case: 1420 x 560 x 460, both horns of a pair, ply with a lid;
 - Hemisphere's drum: 260 across, 170 tall, through-dyed board in the shade's tint, the globe debossed in the lid;
 - Core's box: a 220 mm cube in through-dyed board, the lid lifted, the ball in a molded pulp cradle.
@@ -232,6 +233,47 @@ def camera(loc, target, lens=50, fstop=0.0):
     bpy.context.scene.camera = c
 
 
+
+# the speaker -------------------------------------------------------------------------------------------------------
+# The speaker lane's asset, pinned: the owner's final Tropos (flush stepped horn, black sleeves, lit plinth) in the
+# stock TruCast tints (r33-speaker-horn a682dc52, spinoffs/barkhorn/asset/tropos-strata.blend). Read from git into a
+# cache outside the repo, so its 23 MB isn't copied onto this branch.
+ASSET = ('a682dc526010b04eca7deef6494b07d33b993c73', 'spinoffs/barkhorn/asset/tropos-strata.blend')
+TINT_NAME = {'ember': 'Ember', 'dust': 'Dust', 'acid': 'Acid', 'poison': 'Poison', 'ice': 'Ice', 'haze': 'Haze',
+             'fog': 'Fog', 'smoke': 'Smoke'}
+SHIPS_APART = ('horn-', 'hf-', 'cap-o-ring', 'waveguide-cap', 'base-plinth')   # in the horn case, or packed apart
+
+
+def asset_path():
+    import subprocess
+    sha, path = ASSET
+    cache = os.path.expanduser('~/.cache/earf-asset'); os.makedirs(cache, exist_ok=True)
+    f = os.path.join(cache, f'{sha[:12]}-{os.path.basename(path)}')
+    if not os.path.exists(f):
+        root = subprocess.run(['git', 'rev-parse', '--show-toplevel'], capture_output=True, text=True, cwd=HERE, check=True).stdout.strip()
+        blob = subprocess.run(['git', 'show', f'{sha}:{path}'], capture_output=True, cwd=root, check=True).stdout
+        open(f, 'wb').write(blob)
+    return f
+
+
+def tropos_cabinet(tint, z):
+    """The asset's Tropos in `tint`, without the parts that ship apart, its feet at local height z. Returns its root."""
+    cname = f'Tropos Strata {TINT_NAME[tint]}'
+    with bpy.data.libraries.load(asset_path(), link=False) as (src, dst):
+        dst.collections = [cname]
+    col = bpy.data.collections[cname]
+    for o in list(col.all_objects):
+        short = o.name.replace(cname + ' ', '')
+        if short.startswith(SHIPS_APART):
+            bpy.data.objects.remove(o, do_unlink=True)
+    bpy.context.scene.collection.children.link(col)
+    root = bpy.data.objects.new('tropos-' + tint, None); bpy.context.collection.objects.link(root)
+    root.location = (0, 0, z)
+    for o in col.all_objects:
+        if o.parent is None:
+            o.parent = root
+    return root
+
 # the crate --------------------------------------------------------------------------------------------------------
 W, D, H, T, SK = 0.72, 0.60, 1.16, 0.018, 0.10
 
@@ -297,26 +339,25 @@ def crate(x, y, tint='ember', open_door=False, rot=0.0, name='crate', front_art=
         for fx in (-W / 2 + T + 0.01, W / 2 - T - 0.01 - 0.07):
             for fz in (z0 + T + 0.04, z0 + H - T - 0.01 - 0.12):
                 objs.append(box('foam', fx, -D / 2 + 0.06, fz, fx + 0.07, D / 2 - T - 0.01, fz + 0.12, foam, bevel=0.004))
-        # the sled, and the speaker in its sleeve on it
+        # the sled, and the speaker on it: the speaker lane's asset (the owner's final Tropos in stock TruCast tints),
+        # whole and uncovered (the owner, 2026-10-31: the cover off in every picture). Its horn travels in the horn
+        # case and its lit plinth (660 x 670) is packed apart, so the cabinet stands on the sled with its posts.
         objs.append(box('sled', -0.30, -D / 2 + 0.03, z0 + T, 0.30, D / 2 - T - 0.02, z0 + T + 0.03, ply, bevel=0.002))
+        objs.append(tropos_cabinet(tint, z0 + T + 0.03))
+        # its shipping sleeve, taken off and folded on the crate's top
         sleeve = mat_basic('sleeve-' + name, {'ember': '#7A120C'}.get(tint, TINTS[tint]), rough=0.9, sheen=0.4, bump=0.25, bump_scale=900.0)   # the cotton dyed deeper than the acrylic reads
-        sl = box('sleeve', -0.285, -0.215, z0 + T + 0.03, 0.285, 0.215, z0 + T + 0.03 + 0.95, sleeve, bevel=0.045)
-        sub = sl.modifiers.new('s', 'SUBSURF'); sub.levels = 4; sub.render_levels = 4; sub.subdivision_type = 'SIMPLE'
-        # critic round 1 (5.0): the cloth as cloth. Long vertical folds that fade toward the shoulders, and a loose
-        # unevenness over them, so the sleeve hangs rather than stands
+        sl = box('sleeve', -0.21, -0.17, z0 + H, 0.17, 0.13, z0 + H + 0.045, sleeve, bevel=0.012)
+        sl.rotation_euler = (0, 0, 0.12)
+        sub = sl.modifiers.new('s', 'SUBSURF'); sub.levels = 3; sub.render_levels = 3; sub.subdivision_type = 'SIMPLE'
         folds = bpy.data.textures.new('folds', 'CLOUDS'); folds.noise_scale = 0.05; folds.noise_depth = 2
-        stretch = bpy.data.objects.new('fold-axis', None); bpy.context.collection.objects.link(stretch)
-        stretch.scale = (1.0, 1.0, 14.0); stretch.location = sl.location     # the noise drawn out up the sleeve: folds that hang
-        d1 = sl.modifiers.new('folds', 'DISPLACE'); d1.texture = folds; d1.strength = 0.03
-        d1.texture_coords = 'OBJECT'; d1.texture_coords_object = stretch
-        tex = bpy.data.textures.new('wr', 'CLOUDS'); tex.noise_scale = 0.12
-        d2 = sl.modifiers.new('d', 'DISPLACE'); d2.texture = tex; d2.strength = 0.01
+        d1 = sl.modifiers.new('folds', 'DISPLACE'); d1.texture = folds; d1.strength = 0.008
         bpy.context.view_layer.objects.active = sl; bpy.ops.object.shade_smooth()
         objs.append(sl)
         # the woven label: off-white, the wordmark woven in, stitched at both ends
         art = os.path.join(OUT, 'decal-label.png')
         lab = mat_board('label-' + name, '#EFEBE2', decal=art if os.path.exists(art) else None)
-        lb = box('label', -0.04, -0.236, z0 + 0.66, 0.04, -0.231, z0 + 0.69, lab, uv_face='-y')
+        lb = box('label', -0.05, -0.12, z0 + H + 0.045, 0.03, -0.09, z0 + H + 0.049, lab)
+        lb.rotation_euler = (0, 0, 0.12)
         objs.append(lb)
     root = bpy.data.objects.new(name, None); bpy.context.collection.objects.link(root)
     for o in objs:
@@ -418,6 +459,8 @@ def shot_open(sc):
     area('key', (-2.4, -0.6, 2.4), (0, 0, 0.6), 0.8, 650)
     area('fill', (3.0, -2.2, 1.2), (0, 0, 0.6), 2.6, 30, '#EEF2FA')
     glow = area('glow', (0.0, 0.25, 1.22), (0, 0.25, 0.3), 0.3, 40, '#FFD9B0'); glow.visible_camera = False
+    # the uncovered speaker (2026-11-01): a soft light into the crate's mouth, so the deep tint reads as acrylic, not wood
+    inside = area('inside', (0.35, -1.7, 0.85), (0, 0.3, 0.62), 0.9, 70, '#FFF1E2'); inside.visible_camera = False
     area('top', (0, 0.5, 4.5), (0, 0, 0), 3.0, 50)
     camera((1.1, -4.3, 1.25), (0.0, -0.4, 0.52), lens=52, fstop=4)
 

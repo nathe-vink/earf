@@ -25,6 +25,7 @@ most fragile, most beautiful part travels on its own, face up.
 | Door | the front, hinged at its foot with a piano hinge; four over-center latches; comes down to the floor as a ramp (about 6° off the skids) | — |
 | Inside | charcoal felt on every inner face; cross-linked PE foam corner blocks top and bottom; a birch sled with felt runners under the speaker | a cut cross-linked PE bed, each horn face up, its throat unloaded; the pods' caps in a pocket |
 | The speaker wears | a cotton sleeve dyed the tint, a woven label with its number and name; it stays as the dust cover | — |
+| The lit plinth | **open:** the owner's final Tropos stands on a lit plinth about 660 × 670 mm (r33-speaker-horn a682dc52), deeper than this 600 mm crate; it needs its own flat box, or the crate grows to about 700 mm deep | — |
 | Print | outside: the wordmark, the tint's number and name in the tint, its line, "Tropos · 1 of 2", the weight; the side: handling marks; the door's inside: the five steps | the front: "The horns.", the tint, "Lift the lid, not the horns" |
 | Indicators | a tilt indicator and a 25 g shock indicator on two faces | a shock indicator |
 | Weight in the crate | the cabinet (about 62 kg) plus about 35 kg of crate, sled and foam: **estimate** | two horns (about 12 kg each, from 74 − 62) plus about 25 kg: **estimate** |
