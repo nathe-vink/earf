@@ -461,7 +461,7 @@ def shot_cairn(sc):
 def shot_bedrock(sc):
     sc.world.node_tree.nodes['Background'].inputs['Color'].default_value = lin('#D9D3CA')
     sc.world.node_tree.nodes['Background'].inputs['Strength'].default_value = 0.12   # r2 c3
-    slab('floor', -4.0, -4.0, -0.03, 4.0, 1.2, 0.0, ph('oak_wood_planks'))   # look 2: an oak floor and a plaster wall
+    slab('floor', -4.0, -4.0, -0.03, 4.0, 1.2, 0.0, ph('oak_wood_planks', tint='#BFAE98', tint_mix=0.35))   # L2 c4: a paler oak, so the amber leads   # look 2: an oak floor and a plaster wall
     slab('wall', -4.0, 1.2, -0.03, 4.0, 1.25, 3.0, ph('beige_wall_001', tint='#8A8278', tint_mix=0.4, bump=0.25))               # r2 c3: darker, so the amber reads                             # c4, c5: wider, further, a stop darker
     prof = [(0, 0), (0.30, 0), (0.30, 0.15), (0.25, 0.15), (0.25, 0.185), (0.18, 0.185), (0.18, 0.215), (0.09, 0.215), (0.09, 0.23), (0, 0.23)]
     tn = 'dust-pour'   # critic r1: stock 2422 at an inch reads red; a lighter custom pour reads amber (captioned)
@@ -480,18 +480,18 @@ def shot_bedrock(sc):
     x = -0.19
     while x < 0.19:
         th = 0.0034; lean = float(rng.uniform(-0.012, 0.012))   # sleeves stand nearly upright, so none cut into its neighbour
-        col = '#1A191C' if x < -0.185 else cols[int(rng.integers(len(cols)))]   # r2: a dark front sleeve, so the plate's steps stand off it
+        col = '#D9D2C4' if x < -0.185 else cols[int(rng.integers(len(cols)))]   # r2: a dark front sleeve, so the plate's steps stand off it
         o = slab(f'lp{x:.3f}', -th / 2, -0.1575, 0.0, th / 2, 0.1575, 0.315, basic(f'sl{x:.3f}', col, 0.9, noise=0.03))
         o.location = (x, float(rng.uniform(-0.004, 0.004)), 0.02); o.rotation_euler = (0, lean, 0)
         x += th + 0.0025
     sc.render.resolution_x, sc.render.resolution_y = 1800, 1200
-    key = area('key', (-1.6, 0.6, 1.9), (0, 0, 0.15), 3.0, 70); key.visible_glossy = False   # r2 c4: round further, out of the plate's mirror
-    spot('sun', (-0.4, 1.4, 0.45), (-0.235, 0, 0.08), 700, 20, 0.004, '#FFF0DA')            # r2 c2: through the front plate onto the floor in front
-    rim = area('rim', (0.2, 0.75, 0.3), (-0.235, 0, 0.12), 1.0, 250, '#FFE8D0', size_y=0.3); rim.visible_glossy = False   # r2 c1
+    key = area('key', (-1.6, 0.6, 1.9), (0, 0, 0.15), 3.0, 50); key.visible_glossy = False   # r2 c4: round further, out of the plate's mirror
+    spot('sun', (-0.4, 1.4, 0.45), (-0.235, 0, 0.23), 380, 14, 0.004, '#FFF0DA')   # L2 c1: aimed higher, through the plate            # r2 c2: through the front plate onto the floor in front
+    rim = area('rim', (0.2, 0.75, 0.5), (-0.235, 0, 0.18), 1.0, 420, '#FFE8D0', size_y=0.3); rim.visible_glossy = False   # r2 c1
     rim.visible_camera = False
     area('fill', (1.4, -1.6, 0.6), (0, 0, 0.15), 1.2, 20, '#E6ECF5')                         # r2 c7
     bg = area('bglamp', (0.3, 0.2, 0.9), (0.2, 2.0, 0.4), 0.5, 40, '#FFE6CC'); bg.visible_glossy = False   # r2 c7: a halo behind
-    camera((-2.05, -1.45, 0.46), (0.14, 0.05, 0.15), lens=75, fstop=0)                          # r2 c6: longer, room for type
+    camera((-2.05, -1.45, 0.46), (0.06, 0.12, 0.15), lens=75, fstop=0)   # L2 c3: panned left, the bare return out of frame                          # r2 c6: longer, room for type
 
 def shot_relief(sc):
     from contours import layers
