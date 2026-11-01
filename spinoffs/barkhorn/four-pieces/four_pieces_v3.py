@@ -30,9 +30,9 @@ P = {
     # round 7 (both critics: closer, the products bigger; a shorter, lower credenza so Mantle is the centre)
     'spk': 1.0, 'spk_y': 0.53,                # each Tropos 1.0 either side of centre, 0.29 m off the wall
     'cred': [1.2, 0.42, 0.45],
-    'core': [-1.15, -1.65],                    # the side table's centre (side_table_01, 0.551 tall)
-    'hemi': [1.15, -1.6, 1.55],              # the rim, over the reading chair's inner arm
-    'chair_r': [1.38, -1.3, -42.0],           # the reading chair, turned toward the room and the music
+    'core': [-1.35, -1.15],                   # round 7's critics: the side table whole, its feet in frame                    # the side table's centre (side_table_01, 0.551 tall)
+    'hemi': [1.25, -1.25, 1.55],              # the rim, over the reading chair's inner arm
+    'chair_r': [1.55, -0.95, -35.0],           # the reading chair, turned toward the room and the music
     'camera': {'position': [0.0, -4.5, 1.0], 'target': [0.0, 0.3, 0.95], 'lens_mm': 30, 'level': True,
                'fstop': 5.6, 'focus': [0.0, 0.3, 0.8]},
 }
@@ -54,7 +54,7 @@ def props(pal):
             continue                          # the wall between the horns is Mantle's label's
         p = copy.deepcopy(p)
         if fn == 'credenza':
-            p.update({'position': [0.0, 0.718], 'size': P['cred']})
+            p.update({'position': [0.0, 0.718], 'size': P['cred'], 'lift': 0.5})   # a deeper walnut (round 7, c7)
         if fn == 'books':
             continue                          # Mantle alone on the credenza (round 6's critic, c6)
         if fn == 'floor':
@@ -73,8 +73,8 @@ def props(pal):
          'position': [cr[0], cr[1], 0.0], 'rotate': [0, 0, cr[2]], 'match': ['pillow'], 'color': '#8A5A3A',
          'blend': 'MIX', 'mix': 0.85},
         # a flat-weave wool rug, undyed oatmeal, under the side table and the chair
-        {'kind': 'kit', 'shape': 'box', 'material': 'wool', 'color': '#857A66', 'size': [3.0, 1.9, 0.008],
-         'position': [0.0, -1.75, 0.0], 'ease': 0.003},
+        {'kind': 'kit', 'shape': 'box', 'material': 'wool', 'color': '#857A66', 'size': [3.0, 2.0, 0.008],
+         'position': [0.1, -1.2, 0.0], 'rotate': [0, 0, 3.0], 'ease': 0.003},
         {'kind': 'kit', 'shape': 'asset', 'model': 'side_table_01', 'position': [P['core'][0], P['core'][1], 0.0],
          'rotate': [0, 0, 0.0], 'scale': 1.0},
         {'kind': 'kit', 'shape': 'ext', 'module': 'earf_moon', 'fn': 'orb', 'flavour': pal['lamps'],
@@ -116,24 +116,31 @@ def shot(version, palette='p1'):
                         'target': [0.0, 0.70, 0.66], 'irradiance': 1.2, 'color': '#FFF0DE', 'camera': False}
     if version == 'day':
         # round 6's critic: brighter, the sun softer and less of the frame's drama
-        s['sun'].update({'azimuth_deg': -64.0, 'elevation_deg': 26.0, 'angle_deg': 3.0, 'irradiance': 40.0})
-        L['bounce'].update({'irradiance': 0.6})
+        # round 7's critic (5, 7 if fixed): the plaster cream not khaki (c1), the pair matched (c2), the sun softer
+        # and higher so its patch stays low (c3), a warmer balance (c7)
+        s['sun'].update({'azimuth_deg': -64.0, 'elevation_deg': 29.0, 'angle_deg': 6.0, 'irradiance': 36.0})
+        L['bounce'].update({'irradiance': 1.2, 'color': '#FFF6EC'})
+        L['right_card'] = {'type': 'area', 'size_m': [1.5, 1.0], 'position': [2.5, -0.5, 1.0], 'target': [1.0, 0.53, 0.7],
+                           'irradiance': 0.5, 'color': 4500, 'camera': False}
         F.lamps(s['set']['props'], 0.6)
-        s['render']['exposure'] = -0.25
+        s['render'].update({'exposure': 0.15, 'white_balance_k': 5200})
     else:                                                       # dusk, lights on
         s['sun'] = {'azimuth_deg': -80.0, 'elevation_deg': 2.0, 'irradiance': 0.0}
         s['sky'] = {'kind': 'gradient', 'zenith': '#2E3E66', 'horizon': '#6A7BA6', 'ground': '#1E2230', 'strength': 0.8}
-        L['north'].update({'irradiance': 0.15, 'color': '#E2E6EA'})      # the last daylight, near neutral (no mauve)
-        L['bounce'].update({'irradiance': 0.18, 'color': '#FFD2A0'})
+        L['north'].update({'irradiance': 0.05, 'color': '#E2E6EA'})      # the last daylight, near neutral (no mauve)
+        L['bounce'].update({'irradiance': 0.07, 'color': '#FFD2A0'})
         # a long soft light high at the right, out of frame, so the acrylic's edges and the horns' lips catch a line
         L['edge'] = {'type': 'area', 'size_m': [1.8, 0.3], 'position': [2.6, -1.4, 2.7], 'target': [0.0, 0.5, 1.0],
-                     'irradiance': 0.6, 'color': 3000, 'camera': False}     # the room's warm light off the ceiling
+                     'irradiance': 0.3, 'color': 3000, 'camera': False}
+        # a soft wash grazing the back wall from the ceiling, so the wall falls off top to bottom, not left to right
+        L['wallwash'] = {'type': 'area', 'size_m': [3.0, 0.2], 'position': [-0.5, 0.55, 3.5], 'target': [-0.5, 0.95, 1.2],
+                         'irradiance': 0.12, 'color': 2700, 'camera': False}     # the room's warm light off the ceiling
         # the room's other lamps, out of frame: a warm wash from the left (a floor lamp by the windows) and the right
         L['warm_l'] = {'type': 'area', 'size_m': [1.0, 1.0], 'position': [-3.6, -3.0, 1.6], 'target': [-1.0, 0.6, 0.8],
-                       'irradiance': 0.14, 'color': 2700, 'camera': False}
+                       'irradiance': 0.06, 'color': 2700, 'camera': False}
         L['warm_r'] = {'type': 'area', 'size_m': [1.0, 1.0], 'position': [3.6, -3.4, 1.8], 'target': [1.0, 0.6, 0.9],
-                       'irradiance': 0.08, 'color': 2700, 'camera': False}
-        L['mantle_kick'].update({'irradiance': 0.5, 'color': '#FFD9B0'})
+                       'irradiance': 0.06, 'color': 2700, 'camera': False}
+        L['mantle_kick'].update({'irradiance': 0.5, 'color': 3000})
         s['materials']['glow'] = {'strength': 2.0}
         for q in s['set']['props']:
             if q.get('fn') == 'exterior':
@@ -141,10 +148,10 @@ def shot(version, palette='p1'):
         F.lamps(s['set']['props'], 1.0)
         for q in s['set']['props']:              # lit for the evening: Hemisphere's pool on the chair, Core's on its table
             if q.get('fn') == 'dome':
-                q['lamp_w'] = 40.0; q['shade_glow'] = 0.4
+                q['lamp_w'] = 80.0; q['shade_glow'] = 0.4
             if q.get('fn') == 'orb':
-                q['lamp_w'] = 14.0; q['shade_glow'] = 0.3
-        s['render'].update({'exposure': 0.5, 'white_balance_k': 3600})
+                q['lamp_w'] = 28.0; q['shade_glow'] = 0.3
+        s['render'].update({'exposure': 0.8, 'white_balance_k': 3300})
     # the rug's wool: its sheen down (at full sheen it read white at this grazing angle)
     s['material_tweaks'] = {'kit-wool': {'Sheen Weight': 0.15, 'Subsurface Weight': 0.0}}
     s['labels'] = copy.deepcopy(LABELS)

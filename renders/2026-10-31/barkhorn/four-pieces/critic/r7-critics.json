@@ -1,0 +1,11 @@
+{"round": 7, "note": "round 2 of 3 for this layout",
+ "day": {"image": "proofs/r7-day.png", "score": 5, "score_if_fixed": 7,
+   "summary": "clean 3D room; the wall khaki not cream (lum 108 vs plaster 226), the pair unmatched (left lit, right in shade), a hard sun on a near-white rug, no lived-in props, a frontal catalogue row",
+   "zones": {"header": "usable (range 26)", "tropos": "best (10.4)", "mantle": "acceptable (21)", "core": "even enough (19)", "hemisphere": "usable (25)"},
+   "applied_in_final": ["c1 bounce 0.6 -> 1.2 neutral, exposure -0.25 -> +0.15", "c2 a card on the right speaker; the sun higher (29) not turned to -55, which would put its patch by Core's zone", "c3 the sun softer (6 degrees, 36 W/m2)", "c4 the rug moved under the furniture, turned 3 degrees", "c7 5200 K, a deeper walnut"],
+   "not_applied": ["c5 the plant moved into frame: it would sit in Core's zone; LP sleeves and a throw: no model in the cache", "c6 an off-axis camera: every zone would need re-solving; no time left in the budget", "c8 a limewash bump: the zones' evenness comes first"]},
+ "dusk": {"image": "proofs/r7-dusk.png", "score": 5, "score_if_fixed": 7,
+   "summary": "tidy, reads as CG; the practicals light almost nothing; the header a 0.7-stop left-to-right gradient; the rug a slab; the side table and chair cropped",
+   "zones": {"header": "not usable (range 42, left 54 / right 86)", "tropos": "usable (22)", "mantle": "usable (22)", "core": "usable for light type (16)", "hemisphere": "best (11.6)"},
+   "applied_in_final": ["c1 fills down (north 0.05, bounce 0.07, washes 0.06/0.06), Hemisphere 80 W, Core 28 W, exposure 0.8", "c2 the edge light 0.3; a ceiling wall-wash so the wall falls off top to bottom", "c3 the rug smaller, turned 3 degrees", "c4 the side table to (-1.35, -1.15), the chair to (1.55, -0.95) at -35, Hemisphere to (1.25, -1.25): all whole in frame", "c6 Mantle's card at 3000 K", "c8 3300 K, vignette 0.12"],
+   "not_applied": ["c5 off-axis camera (as above)", "c7 props (no models)"]}}
