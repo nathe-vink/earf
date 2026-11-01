@@ -636,3 +636,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - Check-in 24 (22:39): plinth already settled and closed (21:04). No lane is running: the speaker and four-pieces lanes are holding
   for card 03; the owner has been quiet since 15:10. Check-ins stopped (none armed); the owner's reply or a lane message brings the
   coordinator back. On the reply: board v6's three cards (tagline, budget, colors) as in check-in 23's notes.
+- ~22:45 the owner: "Go" (after "The teams are paused until you pick on the board's three cards"). Taken as my picks on all three:
+  tagline "Have the world over."; budget A (about $55,000; ~$5,400 spare); colors F (white lining in the seven, Smoke black; Poison
+  32.3 %, Haze 25.8 % through 20 mm; Ember and the rest stock). README rows added (with "they might be too dark now", 15:10). Next:
+  lanes told; deck cover headline + ask slide; board settled; re-render the deck's pictures in F.
