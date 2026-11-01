@@ -49,7 +49,7 @@ import common as C                                                  # noqa: E402
 # 1/2 (12.7). Priced a square meter a millimeter from the 4 x 8 ft listings of 2026-10-31: 2064 Gray 1/2 $495 (Canal)
 # = 13.1, 3/8 $375 = 13.3; 2423 Red 1/2 $835.80 (AC) = 22.2; clear 1/8 about $110 = 11.7. The tinted rate is the
 # dearer of the two first colors, so a budget never undershoots.
-SHEETS['trucast-tint'] = dict(title='Cell-cast acrylic sheet, stock tint (TruCast 2064 Gray or 2423 Red), 4 x 8 ft',
+SHEETS['trucast-tint'] = dict(title='Cell-cast acrylic sheet, stock tint in the line codes (TruCast 2423 Ember, 2092 Poison, 2287 Haze, 2069 Ice, 2074 Smoke), 4 x 8 ft',
                               density=1.19, sheet=(2440.0, 1220.0), usd_per_m2_mm=22.0, thicknesses=(3.0, 5.6, 9.5, 12.7))
 SHEETS['trucast-clear'] = dict(title='Cell-cast acrylic sheet, water-clear, 4 x 8 ft', density=1.19,
                                sheet=(2440.0, 1220.0), usd_per_m2_mm=12.0, thicknesses=(3.0, 5.6, 9.5, 12.7))

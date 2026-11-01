@@ -2,9 +2,9 @@
 
 | item | make | qty | what | size | each, USD |
 |---|---|---|---|---|---|
-| plinth-L1 | cut | 1 | 12.7 mm Cell-cast acrylic sheet, water-clear, 4 x 8 ft | 450 x 360 | 30.86 |
-| plinth-L2 | cut | 1 | 12.7 mm Cell-cast acrylic sheet, water-clear, 4 x 8 ft | 450 x 360 | 30.86 |
-| base-L1 | cut | 1 | 12.7 mm Cell-cast acrylic sheet, stock tint (TruCast 2064 Gray or 2423 Red), 4 x 8 ft | 380 x 290 | 38.49 |
+| plinth-L1 | cut | 1 | 12.7 mm Cell-cast acrylic sheet, stock tint in the line codes (TruCast 2423 Ember, 2092 Poison, 2287 Haze, 2069 Ice, 2074 Smoke), 4 x 8 ft | 450 x 360 | 56.58 |
+| plinth-L2 | cut | 1 | 12.7 mm Cell-cast acrylic sheet, stock tint in the line codes (TruCast 2423 Ember, 2092 Poison, 2287 Haze, 2069 Ice, 2074 Smoke), 4 x 8 ft | 450 x 360 | 56.58 |
+| base-L1 | cut | 1 | 12.7 mm Cell-cast acrylic sheet, stock tint in the line codes (TruCast 2423 Ember, 2092 Poison, 2287 Haze, 2069 Ice, 2074 Smoke), 4 x 8 ft | 380 x 290 | 38.49 |
 | led-channel | buy | 1 | any (Klus / Muzata kind) Black anodized aluminum U-channel about 7 x 7 (inside 5.2) for 5 mm strip, cut to four straight runs and mitred at 45 at the corners (no bending in its own plane); about 1.2 m |  | 25.00 |
 | led-strip | buy | 1 | any (Waveform, LEDSupply, BTF kind) 24 V COB LED strip, dotless, 5 mm wide, 2700 K, CRI 90+, 5 W/m or less (about 4 W/m chosen; confirm on its data sheet), its minimum cut length to suit four straight runs; about 1.2 m used (about 4.9 W) |  | 35.00 |
 | post-1, post-2, post-3, post-4 | lathe | 4 | Stainless steel 304 | 35 x 35 x 46 | 16.69 |
@@ -37,9 +37,9 @@
 | rear-hardware | buy | 1 | Neutrik / Switchcraft / C&K / CUI kind For Strata's rear plate: two gold insulated panel RCA jacks (1/4 in hole); a 4 mm earth binding post; a 4PDT signal toggle with gold contacts (C&K 7411 kind); an SPST mini toggle for the light; an insulated 2.1 mm DC panel jack (18 V, the S2) and an insulated 2.5 mm one (24 V, the light); the Neo's motor inlet as Rega's kit supplies it (connector UNCONFIRMED); two M3 x 10 button screws; shielded leads inside |  | 70.00 |
 | hinge-blocks | cnc-mill | 1 | Cast acrylic tube, tinted through | 45 x 15 x 58 | 46.57 |
 | hinges | buy | 1 | Pro-Ject Replacement dust cover hinge for Debut series (rp-611), two: friction hinges that hold the lid open at any angle, a spring blade clamped to the lid's back wall, the foot in a slot (here a pocket in an acrylic block on the plinth's back edge) |  | 34.00 |
-| lid-top | cut | 1 | 3 mm Cell-cast acrylic sheet, stock tint (TruCast 2064 Gray or 2423 Red), 4 x 8 ft | 448 x 358 | 13.23 |
-| lid-front, lid-back | cut | 2 | 3 mm Cell-cast acrylic sheet, stock tint (TruCast 2064 Gray or 2423 Red), 4 x 8 ft | 448 x 97 | 3.59 |
-| lid-left, lid-right | cut | 2 | 3 mm Cell-cast acrylic sheet, stock tint (TruCast 2064 Gray or 2423 Red), 4 x 8 ft | 352 x 97 | 2.82 |
+| lid-top | cut | 1 | 3 mm Cell-cast acrylic sheet, stock tint in the line codes (TruCast 2423 Ember, 2092 Poison, 2287 Haze, 2069 Ice, 2074 Smoke), 4 x 8 ft | 448 x 358 | 13.23 |
+| lid-front, lid-back | cut | 2 | 3 mm Cell-cast acrylic sheet, stock tint in the line codes (TruCast 2423 Ember, 2092 Poison, 2287 Haze, 2069 Ice, 2074 Smoke), 4 x 8 ft | 448 x 97 | 3.59 |
+| lid-left, lid-right | cut | 2 | 3 mm Cell-cast acrylic sheet, stock tint in the line codes (TruCast 2423 Ember, 2092 Poison, 2287 Haze, 2069 Ice, 2074 Smoke), 4 x 8 ft | 352 x 97 | 2.82 |
 | mark | buy | 1 | Laser etching into the cast acrylic, frosted, about 0.1 deep, from a vector file: EARF 44 wide, the etch filled with the color, deeper |  | 15.00 |
 | led-adapter | buy | 1 | Mean Well kind Desktop or wall adapter, 24 V DC, 12 W (0.5 A), UL/cUL 62368-1 listed and marked Class 2 / LPS (Mean Well GE12I24-P1J kind; read the label before ordering), 2.5 mm plug; the strip draws about 4.9 W |  | 15.00 |
 | inserts | buy | 1 | any (E-Z Lok / Tappex kind) Brass threaded inserts for plastics, epoxy-bonded: 3 M5 (the puck), 4 M3 (the back plate); with M5 x 12 countersunk and M3 x 6 button screws |  | 14.00 |
@@ -52,8 +52,8 @@
 |---|---|
 | buy | 2,859 |
 | cnc-mill | 47 |
-| cut | 130 |
+| cut | 181 |
 | lathe | 763 |
-| total | 3,798 |
+| total | 3,850 |
 
 Budget figures: bought parts from the component library (dated retailer listings), made parts from the kit's stock rates: 25 % offcut on sheet parts, a handling charge a print, and a setup a machined line spread over its pieces. A shop's quote replaces them.

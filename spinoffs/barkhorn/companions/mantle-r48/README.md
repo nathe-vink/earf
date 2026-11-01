@@ -124,7 +124,7 @@ plugs: Rega's Neo, and the Phono Box S2's own listed adapter.
 The owner's original brief, kept: squared, like a Debut or an Orbit, a clear body and a matching cover. It keeps the
 float, the lit base and the hinged lid, and fixes every fault the review found:
 
-- **The plinth** is laminated (tinted 3 ring / clear 12.7 / tinted 3 ring / clear 5.6 = 24.3), stepping 2 mm.
+- **The plinth** is laminated (tinted 3 ring / clear 12.7 / tinted 3 ring / clear 5.6 = 24.3), stepping 2 mm. *(v1 only. Since v2 the deck is two 12.7 sheets cemented flush, 25.4, through-tinted: see section 11's spec.)*
 - **The posts** are torqued studs (rigid). Four stainless feet on Sorbothane locate and level it. Since the audit (2026-11-01), they make no isolation claim.
 - **The motor** hangs from the plinth in the float's gap. Since the audit, it is screwed hard to the plinth as Rega fits it, with no grommets.
 - **The base** is clear 12.7 under a tinted 3 ring. The light's slot is 6 deep and 25 in from the edge, in one closed
@@ -317,7 +317,19 @@ The owner picked A, Strata Float v3, at about 12:10 UTC (r46-owner-notes 5b63e05
     7.4 x 7 routed from below, facing down onto the shelf;
   - about 1.2 m and 4.9 W, on a listed Class 2 adapter of 12 W;
   - no PWM dimmer inside, so the record player stays on the PS1 path.
-- **The budget** goes from $3,877 to $3,798: the dimmer is out; the plate and its hardware are in.
+- **The budget** goes from $3,877 to $3,798: the dimmer is out; the plate and its hardware are in. Pricing the deck's two
+  sheets as stock tint, which is what they are (the parts list had them as clear), brings it to **$3,850**.
+
+### The spec as built (`mantle_strata_v3.py`, after 9e72cf70; the site's copy should match this)
+
+| | |
+|---|---|
+| deck | two 12.7 mm sheets of stock cast acrylic in the flavor's tint, cemented flush: 25.4 mm, through-tinted, one bond line; 450 x 360, the outer edge satin, the faces glassy |
+| float | the deck floats 40 mm over the base on four solid 303 stainless posts, 30 mm across, polished, bonded under the deck |
+| base | one 12.7 mm sheet of stock Smoke 2074, 380 x 290, 35 mm in from the deck all round; the light's loop under it, falling onto the shelf |
+| lid | 3 mm stock sheet in the flavor's tint, a five-sided box 448 x 358 x 100, on Pro-Ject's friction hinges |
+| size | 450 W x about 370 D (with the hinges) x 94 H to the deck's top, about 199 H with the lid closed |
+| weight | about 12.9 kg with the lid (11.8 without); the supplies are outside it |
 
 ## Open questions for the owner
 

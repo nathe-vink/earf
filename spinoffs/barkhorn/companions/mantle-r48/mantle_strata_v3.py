@@ -191,7 +191,8 @@ def parts(P):
                             notes=['the plinth: four laminae of stock sheet (tinted 3 ring / clear 12.7 / tinted 3 ring / clear 5.6), each tinted lamina a 20 wide ring round a clear inlay cut from the same file; cemented in one vacuum press with ACRIFIX 2R 0190, annealed, faces fly-cut, the stepped outline finish-routed, edges diamond-polished, holes left satin'] if i == 0 else []))
             out.append(Part(f'plinth-L{i + 1}-inlay', s & band, clr[3.0], finish='clear', group='plinth', render=False))
         else:
-            out.append(Part(f'plinth-L{i + 1}', s, clr[l['t']], finish='clear', group='plinth', render=False,
+            # a plain lamina ('clear' in P: no inlay ring): since the stock line (2026-11-01), the flavor's stock tinted sheet
+            out.append(Part(f'plinth-L{i + 1}', s, tint[l['t']], finish='clear', group='plinth', render=False,
                             notes=['the deck: two 12.7 sheets of the line\'s stock tint in the flavor\'s code (a lighter custom pour is an open question for the owner), cemented flush with ACRIFIX 2R 0190 in a vacuum press: one bond line, at mid-edge; annealed, faces fly-cut, the outline finish-routed as one; the outer edge fine bead-blasted to a satin (round 48\'s duels: a polished thick edge refracts the room in patches, a satin one collects light evenly), the top and bottom faces left glassy'] if i == 0 else []))
     plinth_one = cut(union(*one), cuts)
     out[0].pieces = {'stack': (plinth_one, 'acrylic-strata')}; out[0].render = True
@@ -213,7 +214,7 @@ def parts(P):
     base_c = cut(prism(boutline(P, D), 'z', bl0['z0'], bl0['z1']), bcuts)
     out += [Part('base-L1', base_c, tint[12.7], finish='acrylic', group='base', render=False,
                  pieces={'stack': (base_c, 'acrylic-base')},
-                 notes=['the base: one 12.7 sheet of stock smoked 2064 in every version (it recedes; the color is the deck\'s), the deck\'s corner radius, 35 in from the deck on all four sides; the light\'s slot routed from below (5 x 6, 12 in from the edge, one closed loop), its whole outer edge diamond-polished so it all glows',
+                 notes=['the base: one 12.7 sheet of stock Smoke 2074 (Dark Gray) in every flavor (it recedes; the color is the deck\'s), the deck\'s corner radius, 35 in from the deck on all four sides; the light\'s slot routed from below (5 x 6, 12 in from the edge, one closed loop), its whole outer edge diamond-polished so it all glows',
                         'the light\'s slot is now 7.4 wide x 7 deep from below, 12 in from the edge, its corners squared by the cutter (r1.5 inside) for four straight runs of channel mitred at 45 (the audit: an 8 mm strip in a 5 mm slot with 2 mm corners); two M3 inserts in the back edge for the rear plate',
                         'four 8.5 holes through it under the posts, for the feet\'s M8 studs into the posts']),]
     out[-1].render = True
@@ -379,8 +380,10 @@ def B_hull(circles, n=360):
 
 
 NOTES = [
-    'The plinth: tinted 3 ring / clear 12.7 / tinted 3 ring / clear 5.6 (24.3), each tinted ring 20 wide round a clear inlay, '
-    'cemented with ACRIFIX 2R 0190 in one vacuum press, annealed, fly-cut, stepped 2 mm a stratum, diamond-polished.',
+    'The deck (as built since v2): two 12.7 sheets of the flavor\'s stock tint, cemented flush with ACRIFIX 2R 0190 in a vacuum press (25.4, '
+    'one bond line at mid-edge), annealed, fly-cut, the outline routed as one; the outer edge bead-blasted satin, the faces glassy. '
+    '450 x 360, corners R4. (v1\'s tinted-ring / clear-inlay strata, 24.3, are gone.)',
+    'The base: one 12.7 sheet of stock Smoke 2074, 380 x 290, corners R6, 35 in from the deck all round; the deck floats 40 over it.',
     'The float: four solid 303 stainless posts bonded into 2 mm seats under the plinth, held to the base by the feet\'s M8 studs: '
     'rigid. The four feet (stainless on Sorbothane, levelled and locked) locate and level it; no isolation is claimed. For isolation, a platform at 3-5 Hz.',
     'The light: a 5 mm dotless 24 V COB strip of 5 W/m or less, in four straight runs on a black U-channel in a 7.4 x 7 slot '
