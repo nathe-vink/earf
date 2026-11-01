@@ -62,7 +62,15 @@ def main(shot_path, frame, outdir, name):
     out['header'] = {'zone': [round(v) for v in Z['header']], 'tone': 'light' if st['median'] >= 128 else 'dark',
                      'zone_luminance': st}
     # the coordinator's small "A render" note in the bottom-right corner
-    cz = [1600, 1020, 1880, 1060]
+    # the evenest 280 x 40 patch in the bottom-right strip (100 px in from the right edge, 20 up from the bottom)
+    best = None
+    for x0 in range(1200, 1541, 20):
+        for y0 in range(960, 1021, 10):
+            c = [x0, y0, x0 + 280, y0 + 40]
+            sp = zone_stats(L, c)['spread']
+            if best is None or sp < best[0]:
+                best = (sp, c)
+    cz = best[1]
     st = zone_stats(L, cz, A)
     out['corner_note'] = {'zone': cz, 'tone': 'light' if st['median'] >= 128 else 'dark', 'zone_luminance': st}
     json.dump(out, open(os.path.join(outdir, f'{name}.anchors.json'), 'w'), indent=1)
