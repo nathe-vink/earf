@@ -549,3 +549,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   Poison 32.3 %, Haze 25.8 % transparent, Smoke 2064 29.3 %) and "site" (49.7 / 56.0 / 49.2 %, Smoke 2064). No tint change until
   the owner picks. Cost if lighter: Smoke 2064 stocked; Ember/Poison/Haze custom batches at production (~$10-15k a color, estimate;
   Haze needs one anyway); first pair and the $50,000 unchanged. Chips (~$200) still parked.
+- 15:20 deck v49: line.html = the four-pieces -sf dusk (02877dad; /_blob/43138711dfedd8f3150f6dddaa84a527): Strata Float v3 (its warm
+  LED line under the dark 2092 deck), Hemisphere v3 (color outside), Core lit, Tropos near-black with deep green horns; both speakers
+  whole. Effective contrast 7.0-13.3:1, corner note 4.7:1. Notes: Strata Float and color outside; the "earlier design" clause dropped.
+  The four-pieces lane is idle (-sf pair complete: day 11a1d8bf, dusk 02877dad). If the owner picks a lighter Poison, the room needs a
+  re-render in it.

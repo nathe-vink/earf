@@ -34,3 +34,7 @@ The Strata Float day frame (specs/spec-final2092sf-day.json, the four-pieces lan
 specs/line-day-sf.html, image /_blob/1506c4659a39015266edad449a224397): dark ink, no halo; 7.7 to 12.2:1 on the labels. The corner note
 sits on the rug's mid tone, where the builder's muted ink measured 3.9:1, so a spec can now set `foot.color` (here #1C1A18: 5.5:1).
 Kept as the alternative; the deck shows the lights-on room.
+
+**Current (deck v49):** the Strata Float dusk frame (specs/spec-final2092sf-dusk.json; the four-pieces lane's final-2092-sf dusk,
+02877dad; slide kept as specs/line-dusk-sf.html, image /_blob/43138711dfedd8f3150f6dddaa84a527): Strata Float v3 and Hemisphere v3,
+Mantle's label 10 px lower with its zone; 7.0 to 13.3:1 on the labels, 4.7:1 on the corner note. Day alternative: line-day-sf.html.
