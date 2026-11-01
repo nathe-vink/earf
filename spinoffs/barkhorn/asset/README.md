@@ -74,10 +74,14 @@ written by `variants/render_model.py` and is not in git.
 
 ## Tints
 
-Both files carry the site's tints, the look of every picture so far. `make_blend.py --tints trucast` builds either
-design in stock TruCast sheet instead (`tints.py`, `tints-trucast.json`). That build is reconciled with r48-biomes'
-`tints.json`; `TINTS.md` has the comparison and the open question for the owner, how deep the horn goes. A trucast build
-is not committed: rebuild it in about 30 s.
+Since 2026-11-01 both files carry **stock TruCast sheet's tints**, the owner's choice ("I like the darker colors").
+- Each cabinet is in its code, with its TT held at 20 mm. Smoke is 2074 Dark Gray.
+- Each horn is in its cabinet's code at 12.7 mm, except Dust, Acid and Ice. Their horns keep the site's deep horn, a
+  heavier batch, by the owner's "Deep, like the site".
+- The calibration is `tints.py` / `tints-trucast.json`, applied to the line's eight flavors in `product.py`. Every
+  rebuild carries it, so `--tints trucast` now gives the same files.
+- `TINTS.md` has the decisions, the earlier comparison with the site's lighter tints, and one doubt: Haze's 2287 is
+  listed as translucent, not transparent.
 
 ## Fixed 2026-11-01: the top batt's wedge
 
