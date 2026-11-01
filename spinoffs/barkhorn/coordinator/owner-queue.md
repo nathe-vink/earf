@@ -252,3 +252,14 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
 - The owner asked "What are my tagline options?" -> re-listed A-D + reserve; waiting on the pick.
 - The owner asked why the top of the speaker insulation looks triangular -> the top lining batt (white voile, 100 mm)
   seen edge-on through thick tinted acrylic; speaker lane rendering a diagnostic (as is / magenta / hidden / black sleeves).
+- The TRIANGLE (owner's question): a modeling error in the asset. make_blend.py decimated the 48-face top lining box
+  (lining-top-3-web) to 14 faces, a sliver wedge, pale through the tint. Fixed at r33-speaker-horn c77460f0 (no mesh
+  under 2,000 faces decimated; tropos.blend and tropos-strata.blend rebuilt). Four-pieces re-linking before its Strata pass.
+  Speaker lane listing every published image made from the decimated asset (re-render list). Owner shown crops
+  (a/b/e/f). OWNER CHOICE (open, low priority): lining sleeves white (pale rectangles through the tint) or black (recedes);
+  coordinator recommends black.
+- Lamps 367709bf: the reviewed fixes in the spec (Hemisphere: Gen 7 Vero 10 by bin, 97-CRI part, screwed shouldered pins
+  + tether, steel strap/enclosure under the acrylic canopy, 36-48 V swag supply; Core: 130 lm/W LED + foldback + heat
+  path, shrouded button-top contacts, back-to-back FETs, USB PD 9 V, redrawn dock, coulomb counting, ~2.7 h to 90 %).
+  No change to the looks. CAD pass approved (+1.5 h), then stop. Copy stays "about five hours" until benched.
+- Four-pieces: current-Tropos pass stopped; Strata pass (day, dusk) running with the fixed asset.
