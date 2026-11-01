@@ -580,3 +580,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   four-row sheet (tints/adfg.jpg) and asked: F (my pick) / G / D / A. Board v6 (same URL): card 03 "Which version should the line
   use?" with the four rows (img/row-*.jpg), reply bar adds Colors; settled "darker colors" now points to card 03. Check-in 21 done;
   next 18:45 (send_later). Speaker lane on Ice proofs (half size); four-pieces idle.
+- 17:10 speaker lane: Ice critic gate (framing and light, half-size, 3 rounds) passed nothing (5.0-5.5; "if fixed" 6.8-7.5;
+  site-strata/CRITIC.md, 47d3b346). Holding it: the plinth LED (a hard line that fills the contact shadow), the dark lining (card 03),
+  48-sample denoiser smear, and Ice's two blues (site deep-lot cobalt horn vs stock 2069 teal-navy cabinet). My calls: LED comparison
+  rows at 40/20/10 on today's defaults (I pick a soft glow that keeps the contact shadow); deep horns take each cabinet's own hue,
+  only deeper (the ruling is about depth; TINTS.md to note it); fix the lining streak, the blue rectangle and the side-face flag; after
+  the owner's card 03, one fresh gate with picked materials + LED + round-3 notes, finals at 256 samples (384 if the critics ask).
