@@ -671,3 +671,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 23:10 site lane MARK_NEXT = brand marks at f6e3dc12 (d06b3a79): Poison #376621, Haze #543287, and Ember #9B0000 (the brand's
   morning stock-tint mark, which the site's marks.py predated); Dust, Acid, Ice, Fog, Smoke unchanged. Strip launch/swatches-F.png;
   flag-on sweep passed. Held, no deploy.
+- 23:14 speaker: tropos-strata.blend in F (2bf9b217: settled plinth, per-shot glow property, unset 20 / dusk 40) sent to the
+  four-pieces lane; render models cloud 55c12c58 (Poison #12AA24, Haze #9F61E4), variants 2011a67f; make_blend default now --tints line
+  (the old trucast flag would have overwritten F). Deck frames in F rendering: cover, row, golden-hour room, Ember hero, portrait.
