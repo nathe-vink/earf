@@ -418,8 +418,8 @@ def shot_ionos(sc):
     camera((0.50, -1.10, 0.22), (0.02, -0.02, 0.075), lens=85, fstop=2.8, focus=1.17)   # L2 c7                      # c1: air around it, ground in front
 
 def shot_cairn(sc):
-    slab('table', -1.2, -0.8, -0.04, 1.2, 0.5, 0.0, ph('oak_wood_planks'))   # look 2: an oak table and a plaster wall
-    slab('wall', -2.0, 0.5, -0.04, 2.0, 0.55, 1.5, ph('beige_wall_001', tint='#D6CFC4', tint_mix=0.3, bump=0.25))
+    slab('table', -1.2, -0.8, -0.04, 1.2, 0.5, 0.0, ph('oak_wood_planks', scale=0.6, tint='#8E6E50', tint_mix=0.15))   # L2 c6: finer grain   # look 2: an oak table and a plaster wall
+    slab('wall', -2.0, 0.5, -0.04, 2.0, 0.55, 1.5, ph('beige_wall_001', tint='#C9C6C0', tint_mix=0.5, bump=0.4))   # L2 c8: cooler
     slabs = [(0.16, 0.12, 0.0, 'fog'), (0.14, 0.11, 0.008, 'fog'), (0.12, 0.10, -0.006, 'dust-pour'), (0.10, 0.09, 0.009, 'fog'), (0.08, 0.08, -0.004, 'fog')]   # Dust as a lighter pour: stock reads brick red edge-on
     cols = ['#C8BBA4', '#5C5650', '#8A7F70', '#2F3B4A', '#3A3634', '#1E1E22']   # critic r1: no near-black book against the bookend
     rng = np.random.default_rng(3)
@@ -449,14 +449,16 @@ def shot_cairn(sc):
         x += th + 0.001
     sc.render.resolution_x, sc.render.resolution_y = 1800, 1200
     cx = -(span / 2 + 0.08)
-    area('window', (-1.25, 1.0, 0.75), (cx - 0.2, 0, 0.02), 0.7, 90, '#FFF4E6')                 # r2 c3
-    strip = area('strip', (cx, 0.35, 0.035), (cx, -0.5, 0.035), 0.6, 60, '#FFF1DE', size_y=0.05); strip.visible_glossy = False   # r2 c4: through the stack at the lens
-    sp = spot('hard', (cx - 0.40, 0.42, 0.26), (cx, 0, 0.03), 60, 18, 0.002, '#FFF1DE')   # look 2: harder, behind-left: the Dust layer thrown forward        # r2 c5: through the Dust layer, a shaped pool in front
+    area('window', (-1.25, 1.0, 1.05), (cx - 0.2, 0, 0.3), 0.7, 50, '#FFF4E6')                  # L2 c4
+    for sx in (cx, -cx):   # L2 c1: a low strip into each stack's edges, flagged off the table
+        st = area(f'strip{sx:.2f}', (sx, 0.30, 0.03), (sx, -0.5, 0.03), 0.4, 15, '#FFF1DE', size_y=0.03); st.visible_glossy = False; st.visible_camera = False
+        bc = slab(f'bounce{sx:.2f}', sx - 0.15, 0.25, 0.0, sx + 0.15, 0.26, 0.2, basic('bcard', '#F2EEE8', 0.9)); bc.visible_camera = False   # L2 c3
+    sp = spot('hard', (-cx + 0.55, 0.50, 0.16), (-cx, 0, 0.03), 80, 10, 0.002, '#FFF1DE')   # L2 c2: through the right stack's amber, low from behind-right        # r2 c5: through the Dust layer, a shaped pool in front
     area('key', (cx + 0.75, -0.85, 0.75), (cx, 0, 0.04), 0.5, 35, '#EEF2F8')                    # r2 c2: weight, a contact shadow
     sc.view_settings.exposure = -0.3                                                              # r2 c7
     flag = slab('flagL', cx - 0.45, -0.45, 0.0, cx - 0.15, -0.44, 0.3, basic('flag', '#0A0A0B', 0.9))   # c7: dark faces, bright edges
     for v in ('visible_camera', 'visible_shadow', 'visible_diffuse', 'visible_transmission'): setattr(flag, v, False)
-    camera((0.26, -1.22, 0.40), (0.0, 0, 0.085), lens=70, fstop=8)   # r2 c1, c6: orbited right and raised: the pair, the spines and tops in frame                    # c5: the bookend on the left third
+    camera((-cx + 0.22, -0.78, 0.13), (-cx - 0.03, 0, 0.035), lens=90, fstop=4.0, focus=0.80)   # L2 c5, c7: low on the right bookend, the books trailing left   # r2 c1, c6: orbited right and raised: the pair, the spines and tops in frame                    # c5: the bookend on the left third
 
 def shot_bedrock(sc):
     sc.world.node_tree.nodes['Background'].inputs['Color'].default_value = lin('#D9D3CA')
