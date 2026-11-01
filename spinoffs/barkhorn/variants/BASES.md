@@ -63,9 +63,14 @@ The steps' polished edges catch some of it.
 
 **The light:**
 - **The strip:** COB (dotless) LED, 24 V, **4.8 W/m, 2700 K, CRI 90+ (R9 above 50)**, 8 mm wide (`plinth-led`).
-- **The channel:** a shallow aluminum channel, about 10 x 4, bonded into a groove routed in the bottom frame's underside,
-  **90 mm in from its outside edge all round** (40 until the coordinator's call of 2026-11-01). Under it, a **40 mm wide,
-  3 mm opal acrylic diffuser** bonded into a rebate, flush with the frame's underside.
+- **The channel:** a **removable black anodized aluminum U-channel**, about 43 x 5 outside with 1.5 mm walls, mitred to a
+  frame **90 mm in from the bottom frame's outside edge all round** (40 until the coordinator's call of 2026-11-01). It
+  carries the strip and, at its open face, a **40 mm wide, 3 mm opal acrylic diffuser**. It is light-tight above and at
+  the sides, so no light enters the clear frame (the deck's reveal rows, 2026-11-01: light piped through the bottom frame
+  glowed at its edges as a line). It is held by M3 stainless screws into threaded inserts about every 250 mm, not bonded,
+  so the strip can be replaced in service (`plinth-channel`).
+- **The reveal:** the bottom frame's underside is rebated 6 mm deep over its outer 70 mm (a 6.7 mm lip in the 1/2 in
+  sheet), so the gap at the step's edge is 18 mm with the feet still 12 (the coordinator, 2026-11-01).
 - **The light's path:** the strip faces the floor through the diffuser. The plinth stands 12 mm up on its feet, so the
   light spreads from the diffuser onto the floor as a soft pool that reaches past the bottom step. The step's edge no
   longer shows the strip itself as a line (the deck's LED rows, 2026-11-01: at 40 in it read as an orange line at every

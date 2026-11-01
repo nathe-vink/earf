@@ -22,8 +22,8 @@ cm3, bronze $0.12 a cm3, plus $5 a part) on its blank, because the proposals' fu
 | + | the caldera: three rings of 1/2 in a speaker, from 510 x 510 blanks (est.) | +$624.00 |
 | − | the cabinet's own levelling feet (`feet`; the inserts stay, they take the plinth's bolts) | −$36.00 |
 | + | the stepped plinth: three frames of 1/2 in a speaker, from 610 x 470, 640 x 576 and 670 x 680 blanks (est.) | +$876.00 |
-| + | the plinth's feet, LED strip, Class 2 supply and controller (`levelling-feet`, `plinth-led`, `plinth-supply`, `plinth-controller`: $18 + $38 + $14 + $22 a speaker) | +$184.00 |
-| | **parts for a pair, the final design** | **about $12,058 (est.)** |
+| + | the plinth's feet, LED strip, its light-tight channel, Class 2 supply and controller (`levelling-feet`, `plinth-led`, `plinth-channel`, `plinth-supply`, `plinth-controller`: $18 + $38 + $24 + $14 + $22 a speaker; the channel added 2026-11-01) | +$232.00 |
+| | **parts for a pair, the final design** | **about $12,106 (est.)** |
 
 **What this replaces:** the deck's "about $11,200 a pair" (the speaker lane's message of 09:42) was low by about
 $860.

@@ -56,7 +56,10 @@ PLINTH = dict(layer=12.7, gap=0.1, outer=[(-20.0, -20.0, 580.0, 440.0), (-35.0, 
 # the plinth light (the coordinator, 2026-11-01: a soft pool on the floor, not a line): the 10 mm COB strip 90 in from the
 # bottom frame's edge, behind a 40 wide, 3 mm opal diffuser under the frame, so the step's edge no longer shows the strip
 # itself and its light leaves downward; the feet, the footprint and the plinth's outline unchanged (it was 40 in, bare)
-PLINTH_LIGHT = dict(inset=90.0, w=10.0, t=2.0, diffuser_w=40.0, diffuser_t=3.0)
+# and the seal (the coordinator, 2026-11-01): the light piped through the clear frame and glowed at its edges as a line,
+# so the strip and the diffuser ride in a removable black U-channel (1.5 walls), screwed to the frame's underside, light
+# tight above and at the sides: only the diffuser's face lights, down onto the floor; the strip replaceable in service
+PLINTH_LIGHT = dict(inset=90.0, w=10.0, t=2.0, diffuser_w=40.0, diffuser_t=3.0, channel_wall=1.5)
 OUTRIG = dict(w=30.0, h=20.0, inner=[(95.0, 80.0), (465.0, 80.0), (95.0, 340.0), (465.0, 340.0)])
 
 
@@ -177,17 +180,31 @@ def parts(P):
     from build123d import Box
     x0, y0, x1, y1 = PLINTH['outer'][-1]; L_ = PLINTH_LIGHT; i_ = L_['inset']
     # what shows and glows is the diffuser (the strip sits in its channel above it, inside the frame's underside)
-    W_ = L_['diffuser_w']; zl1 = zp - 0.1; zl0 = zl1 - L_['diffuser_t']
-    strip = []
+    W_ = L_['diffuser_w']; cw = L_['channel_wall']
+    zc1 = zp - 0.1; zl1 = zc1 - cw - 0.1; zl0 = zl1 - L_['diffuser_t']     # the channel's top, then the diffuser below it
+    strip, chan = [], []
     for (ax, ay, bx, by) in ((x0 + i_, y0 + i_, x1 - i_, y0 + i_), (x0 + i_, y1 - i_, x1 - i_, y1 - i_),
                              (x0 + i_, y0 + i_, x0 + i_, y1 - i_), (x1 - i_, y0 + i_, x1 - i_, y1 - i_)):
         lx = abs(bx - ax) + W_; ly = abs(by - ay) + W_
-        strip.append(Pos((ax + bx) / 2, (ay + by) / 2, (zl0 + zl1) / 2) * Box(lx if lx > W_ else W_, ly if ly > W_ else W_, L_['diffuser_t']))
+        dx, dy = (lx if lx > W_ else W_), (ly if ly > W_ else W_)
+        strip.append(Pos((ax + bx) / 2, (ay + by) / 2, (zl0 + zl1) / 2) * Box(dx, dy, L_['diffuser_t']))
+        # the U-channel round it: a top plate and two walls down to the diffuser's face (a frame of the run, its corners
+        # closed by the neighbouring runs)
+        ox, oy = dx + 2 * cw + 0.2, dy + 2 * cw + 0.2
+        u = Pos((ax + bx) / 2, (ay + by) / 2, (zl0 + zc1) / 2) * Box(ox, oy, zc1 - zl0)
+        u = u - Pos((ax + bx) / 2, (ay + by) / 2, (zl0 + zl1) / 2 - 0.5) * Box(dx + 0.2, dy + 0.2, L_['diffuser_t'] + 1.0)
+        chan.append(u)
     out.append(product.Part('base-plinth-light', _C(children=strip), product.Bought('plinth-led'), finish='led', group='base',
                             option='Plinth light', notes=['Base A, lit: the COB strip in a channel under the bottom frame, '
                                                           f'{i_:g} in from its edge all round, behind a {W_:g} wide, '
                                                           f'{L_["diffuser_t"]:g} mm opal acrylic diffuser, so it throws a soft pool on '
                                                           'the floor, not a line at the step (variants/BASES.md)']))
+    out.append(product.Part('base-plinth-channel', _C(children=chan), product.Bought('plinth-channel'), finish='channel', group='base',
+                            option='Plinth light', notes=['Base A, lit: the strip and its diffuser ride in a black anodised aluminium '
+                                                          f'U-channel ({cw:g} walls), light tight above and at the sides so no light '
+                                                          'enters the clear frame; held to the frame\'s underside by M3 stainless screws '
+                                                          'into threaded inserts about every 250, not bonded, so the strip can be '
+                                                          'replaced (the coordinator, 2026-11-01; variants/BASES.md)']))
     for nm, key in (('base-plinth-supply', 'plinth-supply'), ('base-plinth-controller', 'plinth-controller')):
         out.append(product.Part(nm, None, product.Bought(key), group='base', option='Plinth light'))
     pf = [foot(x, y, zp - 0.1) for x, y in BASE['feet']]
@@ -218,7 +235,9 @@ PRODUCT = dataclasses.replace(
     materials={**cloud.PRODUCT.materials,                # Topo Clear's body: water-clear cast sheet, a faint cool cast
                'clear-cast': {'preset': 'clear_resin', 'color': '#FFFFFF', 'deep': '#EEF2EF', 'radius': 0.05, 'roughness': 0.03},
                # the plinth light's diffuser: frosted, lit from within at 2700 K (a shot may turn `glow` up or down)
-               'led': {'preset': 'frosted', 'color': '#FFF1E0', 'absorb': '#FFE9D2', 'glow': 40.0, 'glow_color': '#FFB46B'}},
+               'led': {'preset': 'frosted', 'color': '#FFF1E0', 'absorb': '#FFE9D2', 'glow': 40.0, 'glow_color': '#FFB46B'},
+               # the plinth light's channel: black anodised aluminium, light tight
+               'channel': {'preset': 'plastic', 'color': '#111111', 'roughness': 0.55}},
     kind='Tropos design-pass proposals: Strata\'s caldera and the Topo horn',
     notes=['Proposals beside the current design (variants/README.md); the Cloud\'s CAD is unchanged.'],
     origin=(280.0, 213.7, -12.0), drawing_prefix='BHV')
