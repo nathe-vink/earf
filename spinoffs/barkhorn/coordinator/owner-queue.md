@@ -370,3 +370,21 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
   owner's design). Four-pieces and biomes need to re-link for future renders. FLUSH HORN MID BAND: power unchanged;
   horizontal coverage 65-70 deg (was ~90) from 1.1 to 2 kHz; on-axis waviness EQable. Alternative for full 90 deg: widen
   the cabinet to 630. Coordinator recommends keeping flush (owner told). High band (4.5-8 kHz) solving ~2.5 h.
+
+## Decision board (11:00 UTC)
+- The owner asked "Show me what I need to decide on. What are my options". Published a private decision board:
+  https://claude.ai/artifact/MGUByhczqB2jUYDV7R4t3h (pictures, options, costs, coordinator's pick; a tap-to-build reply).
+- Yours to decide, with my picks:
+  1. Tagline: A "Cast in color. Even the shadows." (B "Cast in color." / C "Light, held." / D "Every layer, cast in
+     color." / E reserve "Made to be heard and seen through.").
+  2. Tint depth: B, stock sheet's deeper tints (A, the site's lighter tints, needs custom lots: about a pallet,
+     ~2,500 lb a color, for Ember, Poison and Haze). Thick parts (Mantle, Core) likely need a lighter custom pour either way.
+  3. Mantle: A Strata Float v3 (B Outcrop).
+  4. Core battery: A, keep LiFePO4 and buy the board as a fixed-price design (~$12-20k est.). B = an OEM board and a
+     listed 1S2P Li-ion pack (~$2-5k est.; ~11 h at 1.5 W est. per CORE-RECHARGE.md, not the older 6.9 h; copy becomes
+     "a battery you can replace"). The lamps lane leaned B on cost.
+- Done unless the owner objects: 5. flush horn (65-70 deg from 1.1 to 2 kHz; alternative a 630 mm cabinet);
+  6. black lining. Smaller defaults: horn takes the cabinet's tint; Mantle mark tone-on-tone on the back edge; every
+  Tropos on the lit plinth.
+- Later: the biomes Smoke go (in that session only); the site deploy (pick: wait for the new pictures, then deploy
+  once); the Mother EARF armature project; editions (another picture pass or settle the write-up).
