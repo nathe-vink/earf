@@ -359,11 +359,32 @@ NOTES = [
     'The lid: 3 mm 2064, 1.1 kg, on Pro-Ject\'s friction hinges.',
 ]
 
-MATERIALS = dict(B.MATERIALS, **{'acrylic-base': {'preset': 'clear_resin', 'color': '#FFFFFF', 'deep': '$deep', 'radius': 0.025, 'roughness': 0.05}},
+# The engine's look (studio/products/mantle-strata-v3.json, written by the build; the room and other lanes drop it into
+# their scenes). The line's stock cast tints (2026-11-01): `deep` is the color light has after `radius` m, held per
+# stock sheet as scene.py's STOCK_HELD (each code's TruCast TT at 1/2 in, two faces' Fresnel out). The deck, the hinge
+# blocks and the lid are through-tinted in the flavor; the platter is tinted 3 / clear 12.7 / tinted 5.6, so its one
+# material carries 21 mm at 8.6 mm's tint (radius 0.024); the base is always stock Smoke 2074. The engine has no
+# per-face finish, so the deck's satin outer edge and the polished top read as one polished slab here; scene.py draws
+# them apart.
+CLEAR = {'preset': 'clear_resin', 'color': '#FFFFFF', 'deep': '$deep', 'radius': 0.010, 'roughness': 0.05}
+MATERIALS = dict(B.MATERIALS,
+                 acrylic=dict(CLEAR),
+                 **{'acrylic-strata': dict(CLEAR),
+                    'acrylic-strata-platter': dict(CLEAR, radius=0.024),
+                    'acrylic-base': dict(CLEAR, deep='$base'),
+                    'acrylic-lid': dict(CLEAR, radius=0.010),
+                    'etch-tone': {'preset': 'satin_paint', 'color': '$accent', 'roughness': 0.35, 'specular': 0.5}},
                  ledstrip={'preset': 'satin_paint', 'color': '#EDEAE4', 'roughness': 0.5, 'specular': 0.3})
 
+# flavors: the line's stock codes (the first is the engine's default). `accent` is the etched mark's tone, `glow` the
+# base's warm loop (one 2700 K strip whatever the tint), `base` the Smoke 2074 base under every flavor
+SMOKE_2074 = '#787B7E'
+STOCK = [('poison-2092', '#0DA41C', '#123A16'), ('ember-2423', '#E02B3A', '#4A0E12'), ('smoke-2074', SMOKE_2074, '#1A1B1C'),
+         ('haze-2287', '#9C5DE3', '#2E1A4A'), ('ice-2069', '#B4DEFA', '#24557E')]
+VARIANTS = {k: {'deep': deep, 'accent': acc, 'glow': '#FF8C40', 'base': SMOKE_2074} for k, deep, acc in STOCK}
+
 PRODUCT = Product('mantle-strata-v3', 'Mantle: Strata Float v3 (proposal A)', 'Belt-drive record player, a laminated plinth floating over a lit laminated base',
-                  params=P, parts=parts, count=1, notes=NOTES, materials=MATERIALS, variants=B.C.VARIANTS,
+                  params=P, parts=parts, count=1, notes=NOTES, materials=MATERIALS, variants=VARIANTS,
                   touching=[('plinth-L*', 'plinth-L*'), ('base-L*', 'base-L*'), ('led-strip', 'base-L*'), ('post-*', 'plinth-L*'), ('post-*', 'base-L*'), ('foot-studs', 'post-*'), ('foot-studs', 'base-L*'), ('led-channel', 'base-L*'), ('led-strip', 'led-channel'), ('phono-pads', 'phono-stage'), ('bushes', 'bearing-housing'), ('bushes', 'spindle'),
                             ('platter-hub', 'spindle'), ('platter-screws', 'platter*'), ('foot-studs', 'feet'), ('foot-studs', 'base-L*'),
                             ('foot-pads', 'feet'), ('motor-screws', 'motor-plate'), ('motor-screws', 'plinth-L*'), ('motor', 'motor-plate'),
