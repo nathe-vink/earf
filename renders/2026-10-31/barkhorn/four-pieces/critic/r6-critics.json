@@ -1,0 +1,10 @@
+{"round": 6, "layout": "four_pieces_v3.py first pass (frontal; the lamps forward; label zones by layout.py)",
+ "day": {"image": "proofs/r6-day.png", "score": 5, "score_if_fixed": 7,
+   "summary": "competent, one family through the green; reads as CG: a dim taupe wall, the sun's drama spent on empty floor, a black armchair cut by the edge, a ceiling strip, the vignette bending the header and Hemisphere zones",
+   "zones": {"tropos": "good (range 10.6)", "mantle": "acceptable (20)", "core": "mostly even, range 44 at its bottom edge", "hemisphere": "vignette gradient (32)", "header": "vignette gradient (35), under the ceiling strip"},
+   "top_changes": ["exposure -0.65 -> -0.15, bounce 0.6", "a softer sun, less on the empty floor", "the chair cognac and whole in frame", "vignette down 60 %", "ceiling out of frame", "a shorter, lower credenza; no books", "an oatmeal flat-weave rug", "the lamps at 60 %"]},
+ "dusk": {"image": "proofs/r6-dusk.png", "score": 4, "score_if_fixed": 6.5,
+   "summary": "an empty showroom at one muddy level; the lamps light nothing; the products 15 % of the frame; a mauve cast on every zone",
+   "top_changes": ["Core 5 -> 14 W, Hemisphere 16 -> 40 W, exposure 0.5", "camera to (0, -4.6, 1.0), 32 mm, the lamps in", "north fill near-neutral #E2E6EA at 0.15, 3600 K (no mauve)", "vignette down, ceiling out", "a rug", "the chair whole", "an edge light for the acrylic", "LP sleeves"]},
+ "applied_in_r7": "camera (0, -4.5, 1.0) 30 mm and the speakers 1.0 either side (layout.py's search: Tropos 430 px tall, Core 126 px, Hemisphere 154 px, every zone clear); credenza 1.2 x 0.42 x 0.45, no books; chair cognac, whole; a wool rug (sheen down); ceiling 3.6 m; vignette 0.08; day exposure -0.25, bounce 0.6, softer sun (3 degrees, 40 W/m2), lamps 60 %; dusk Hemisphere 40 W, Core 14 W, neutral north fill, 3600 K, an edge light, Mantle's loop at 2",
+ "not_applied": "LP sleeves (no model in the cache)"}

@@ -27,20 +27,21 @@ SHOTS = os.path.join(HERE, 'shots')
 HALF = 4.2                                    # the room's half width (x from -4.2 to 4.2), the back wall at y = 0.95
 
 P = {
-    'spk': 1.25, 'spk_y': 0.53,               # each Tropos 1.25 either side of centre, 0.29 m off the wall
-    'cred': [1.62, 0.44, 0.56],
-    'core': [-1.45, -2.3],                    # the side table's centre (side_table_01, 0.551 tall)
-    'hemi': [1.25, -2.25, 1.55],              # the rim, over the reading chair's inner arm
-    'chair_r': [1.62, -2.2, -62.0],           # the reading chair, turned toward the room and the music
-    'camera': {'position': [0.0, -5.5, 1.1], 'target': [0.0, 0.3, 1.0], 'lens_mm': 28, 'level': True,
+    # round 7 (both critics: closer, the products bigger; a shorter, lower credenza so Mantle is the centre)
+    'spk': 1.0, 'spk_y': 0.53,                # each Tropos 1.0 either side of centre, 0.29 m off the wall
+    'cred': [1.2, 0.42, 0.45],
+    'core': [-1.15, -1.65],                    # the side table's centre (side_table_01, 0.551 tall)
+    'hemi': [1.15, -1.6, 1.55],              # the rim, over the reading chair's inner arm
+    'chair_r': [1.38, -1.3, -42.0],           # the reading chair, turned toward the room and the music
+    'camera': {'position': [0.0, -4.5, 1.0], 'target': [0.0, 0.3, 0.95], 'lens_mm': 30, 'level': True,
                'fstop': 5.6, 'focus': [0.0, 0.3, 0.8]},
 }
 LABELS = {'tropos': {'of': 'tropos0', 'side': 'above'},
           'mantle': {'of': 'mantle', 'side': 'above', 'gap': 40},
-          'core': {'of': 'core', 'side': 'above-right', 'dx': -60},
+          'core': {'of': 'core', 'side': 'above'},
           'hemisphere': {'of': 'hemisphere', 'side': 'left'},
-          'header': [100, 70]}
-CEILING = 3.2                                 # high enough that its line stays out of the frame
+          'header': [100, 60]}
+CEILING = 3.6                                 # high enough that its line stays out of the frame
 
 
 def props(pal):
@@ -55,7 +56,7 @@ def props(pal):
         if fn == 'credenza':
             p.update({'position': [0.0, 0.718], 'size': P['cred']})
         if fn == 'books':
-            p['position'] = [-0.6, 0.73, 0.56]
+            continue                          # Mantle alone on the credenza (round 6's critic, c6)
         if fn == 'floor':
             p['rect'] = [-HALF, p['rect'][1], HALF, p['rect'][3]]
         if fn == 'sheer':
@@ -67,8 +68,13 @@ def props(pal):
         out.append(p)
     cr = P['chair_r']
     out += [
-        {'kind': 'kit', 'shape': 'asset', 'model': 'modern_arm_chair_01', 'position': [cr[0], cr[1], 0.0],
-         'rotate': [0, 0, cr[2]], 'scale': 1.0},
+        # the chair re-covered in cognac (round 6's critic: the black leather was a hole in the frame)
+        {'kind': 'kit', 'shape': 'ext', 'path': F.PIECES, 'fn': 'recolour', 'model': 'modern_arm_chair_01',
+         'position': [cr[0], cr[1], 0.0], 'rotate': [0, 0, cr[2]], 'match': ['pillow'], 'color': '#8A5A3A',
+         'blend': 'MIX', 'mix': 0.85},
+        # a flat-weave wool rug, undyed oatmeal, under the side table and the chair
+        {'kind': 'kit', 'shape': 'box', 'material': 'wool', 'color': '#857A66', 'size': [3.0, 1.9, 0.008],
+         'position': [0.0, -1.75, 0.0], 'ease': 0.003},
         {'kind': 'kit', 'shape': 'asset', 'model': 'side_table_01', 'position': [P['core'][0], P['core'][1], 0.0],
          'rotate': [0, 0, 0.0], 'scale': 1.0},
         {'kind': 'kit', 'shape': 'ext', 'module': 'earf_moon', 'fn': 'orb', 'flavour': pal['lamps'],
@@ -89,7 +95,7 @@ def shot(version, palette='p1'):
     s['title'] = f'Four pieces, round 6 layout, {version}: Tropos pair, Mantle, Hemisphere, Core'
     s['products'] = [{'def': 'studio/products/barkhorn-turntable-float.json', 'flavour': pal['hifi'],
                       'hide': ['lid-*', 'hinges'],
-                      'instances': [{'flavour': pal['hifi'], 'position': [0.0, 0.70, 0.56], 'rotate_z': 0.0}]}]
+                      'instances': [{'flavour': pal['hifi'], 'position': [0.0, 0.70, P['cred'][2]], 'rotate_z': 0.0}]}]
     s['tropos'] = [{'tint': F.TINT[pal['hifi']], 'position': [-P['spk'], P['spk_y']], 'rotate_z': 4.0},
                    {'tint': F.TINT[pal['hifi']], 'position': [P['spk'], P['spk_y']], 'rotate_z': -4.0}]
     s['set']['props'] = props(pal)
@@ -109,35 +115,42 @@ def shot(version, palette='p1'):
     L['mantle_kick'] = {'type': 'area', 'size_m': [0.8, 0.5], 'position': [0.3, -1.4, 1.9],
                         'target': [0.0, 0.70, 0.66], 'irradiance': 1.2, 'color': '#FFF0DE', 'camera': False}
     if version == 'day':
-        s['sun'].update({'azimuth_deg': -64.0, 'elevation_deg': 28.0})
-        F.lamps(s['set']['props'], 0.35)
-        s['render']['exposure'] = -0.65
+        # round 6's critic: brighter, the sun softer and less of the frame's drama
+        s['sun'].update({'azimuth_deg': -64.0, 'elevation_deg': 26.0, 'angle_deg': 3.0, 'irradiance': 40.0})
+        L['bounce'].update({'irradiance': 0.6})
+        F.lamps(s['set']['props'], 0.6)
+        s['render']['exposure'] = -0.25
     else:                                                       # dusk, lights on
         s['sun'] = {'azimuth_deg': -80.0, 'elevation_deg': 2.0, 'irradiance': 0.0}
         s['sky'] = {'kind': 'gradient', 'zenith': '#2E3E66', 'horizon': '#6A7BA6', 'ground': '#1E2230', 'strength': 0.8}
-        L['north'].update({'irradiance': 0.30, 'color': '#9FB0D8'})      # the last blue from the windows
-        L['bounce'].update({'irradiance': 0.22, 'color': '#FFD2A0'})     # the room's warm light off the ceiling
+        L['north'].update({'irradiance': 0.15, 'color': '#E2E6EA'})      # the last daylight, near neutral (no mauve)
+        L['bounce'].update({'irradiance': 0.18, 'color': '#FFD2A0'})
+        # a long soft light high at the right, out of frame, so the acrylic's edges and the horns' lips catch a line
+        L['edge'] = {'type': 'area', 'size_m': [1.8, 0.3], 'position': [2.6, -1.4, 2.7], 'target': [0.0, 0.5, 1.0],
+                     'irradiance': 0.6, 'color': 3000, 'camera': False}     # the room's warm light off the ceiling
         # the room's other lamps, out of frame: a warm wash from the left (a floor lamp by the windows) and the right
         L['warm_l'] = {'type': 'area', 'size_m': [1.0, 1.0], 'position': [-3.6, -3.0, 1.6], 'target': [-1.0, 0.6, 0.8],
                        'irradiance': 0.14, 'color': 2700, 'camera': False}
         L['warm_r'] = {'type': 'area', 'size_m': [1.0, 1.0], 'position': [3.6, -3.4, 1.8], 'target': [1.0, 0.6, 0.9],
                        'irradiance': 0.08, 'color': 2700, 'camera': False}
         L['mantle_kick'].update({'irradiance': 0.5, 'color': '#FFD9B0'})
-        s['materials']['glow'] = {'strength': 3.0}
+        s['materials']['glow'] = {'strength': 2.0}
         for q in s['set']['props']:
             if q.get('fn') == 'exterior':
                 q['strength'] = 1.0; q['tint'] = '#6F8BD6'
         F.lamps(s['set']['props'], 1.0)
         for q in s['set']['props']:              # lit for the evening: Hemisphere's pool on the chair, Core's on its table
             if q.get('fn') == 'dome':
-                q['lamp_w'] = 16.0; q['shade_glow'] = 0.4
+                q['lamp_w'] = 40.0; q['shade_glow'] = 0.4
             if q.get('fn') == 'orb':
-                q['lamp_w'] = 5.0; q['shade_glow'] = 0.3
-        s['render'].update({'exposure': 0.7, 'white_balance_k': 3900})
+                q['lamp_w'] = 14.0; q['shade_glow'] = 0.3
+        s['render'].update({'exposure': 0.5, 'white_balance_k': 3600})
+    # the rug's wool: its sheen down (at full sheen it read white at this grazing angle)
+    s['material_tweaks'] = {'kit-wool': {'Sheen Weight': 0.15, 'Subsurface Weight': 0.0}}
     s['labels'] = copy.deepcopy(LABELS)
     sp = P['spk']; h = P['hemi']; c = P['core']
     s['anchors'] = {'tropos': [-sp, P['spk_y'] - 0.2, 1.10], 'tropos_right': [sp, P['spk_y'] - 0.2, 1.10],
-                    'mantle': [0.08, 0.70, 0.68], 'hemisphere': [h[0], h[1], h[2] + 0.06],
+                    'mantle': [0.08, 0.70, P['cred'][2] + 0.12], 'hemisphere': [h[0], h[1], h[2] + 0.06],
                     'core': [c[0], c[1] + 0.02, F.SIDE_H + 0.11]}
     return s
 

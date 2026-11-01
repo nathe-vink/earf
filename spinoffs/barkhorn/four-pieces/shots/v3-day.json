@@ -5,7 +5,7 @@
   "size": [
    8.4,
    7.0,
-   3.2
+   3.6
   ],
   "center": [
    0.0,
@@ -102,55 +102,14 @@
      0.718
     ],
     "size": [
-     1.62,
-     0.44,
-     0.56
+     1.2,
+     0.42,
+     0.45
     ],
     "doors": 3,
     "texture": "walnut_veneer_02",
     "lift": 0.75,
     "grain_rot": 90.0
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "path": "spinoffs/barkhorn/room31/pieces.py",
-    "fn": "books",
-    "position": [
-     -0.6,
-     0.73,
-     0.56
-    ],
-    "seed": 4,
-    "books": [
-     [
-      0.31,
-      0.24,
-      0.032,
-      "#3E4A57",
-      "#D9D2C2",
-      "ROOMS IN LATE LIGHT",
-      "HALDEN"
-     ],
-     [
-      0.27,
-      0.21,
-      0.026,
-      "#C9BBA2",
-      "#3A332C",
-      "On Listening",
-      "NORTH PRESS"
-     ],
-     [
-      0.24,
-      0.19,
-      0.022,
-      "#7A3A2C",
-      "#E8DCC8",
-      "The Shape of Sound",
-      "ESSAYS"
-     ]
-    ]
    },
    {
     "kind": "kit",
@@ -227,27 +186,51 @@
    },
    {
     "kind": "kit",
-    "shape": "asset",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/room31/pieces.py",
+    "fn": "recolour",
     "model": "modern_arm_chair_01",
     "position": [
-     1.62,
-     -2.2,
+     1.38,
+     -1.3,
      0.0
     ],
     "rotate": [
      0,
      0,
-     -62.0
+     -42.0
     ],
-    "scale": 1.0
+    "match": [
+     "pillow"
+    ],
+    "color": "#8A5A3A",
+    "blend": "MIX",
+    "mix": 0.85
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "wool",
+    "color": "#857A66",
+    "size": [
+     3.0,
+     1.9,
+     0.008
+    ],
+    "position": [
+     0.0,
+     -1.75,
+     0.0
+    ],
+    "ease": 0.003
    },
    {
     "kind": "kit",
     "shape": "asset",
     "model": "side_table_01",
     "position": [
-     -1.45,
-     -2.3,
+     -1.15,
+     -1.65,
      0.0
     ],
     "rotate": [
@@ -266,8 +249,8 @@
     "spots": [
      {
       "position": [
-       -1.45,
-       -2.3,
+       -1.15,
+       -1.65,
        0.551
       ],
       "rotate_z": -20
@@ -275,8 +258,8 @@
     ],
     "cable": false,
     "cartridge": "in",
-    "lamp_w": 1.0499999999999998,
-    "shade_glow": 0.0875
+    "lamp_w": 1.7999999999999998,
+    "shade_glow": 0.15
    },
    {
     "kind": "kit",
@@ -287,15 +270,15 @@
     "spots": [
      {
       "position": [
-       1.25,
-       -2.25,
+       1.15,
+       -1.6,
        1.55
       ]
      }
     ],
-    "ceiling": 3.2,
-    "lamp_w": 3.15,
-    "shade_glow": 0.0875
+    "ceiling": 3.6,
+    "lamp_w": 5.3999999999999995,
+    "shade_glow": 0.15
    },
    {
     "kind": "kit",
@@ -317,9 +300,9 @@
  },
  "sun": {
   "azimuth_deg": -64.0,
-  "elevation_deg": 28.0,
-  "irradiance": 48.0,
-  "angle_deg": 1.0,
+  "elevation_deg": 26.0,
+  "irradiance": 40.0,
+  "angle_deg": 3.0,
   "color": "#FFE4C8"
  },
  "sky": {
@@ -373,7 +356,7 @@
     0.3,
     1.0
    ],
-   "irradiance": 0.3,
+   "irradiance": 0.6,
    "color": "#FFF0DE"
   },
   "floorbounce": {
@@ -407,7 +390,7 @@
   "clamp": 10,
   "bounces": 12,
   "view": "Khronos PBR Neutral",
-  "exposure": -0.65,
+  "exposure": -0.25,
   "white_balance_k": 5600,
   "white_balance_tint": 0.0,
   "caustics_refractive": true
@@ -419,15 +402,15 @@
  "camera": {
   "position": [
    0.0,
-   -5.5,
-   1.1
+   -4.5,
+   1.0
   ],
   "target": [
    0.0,
    0.3,
-   1.0
+   0.95
   ],
-  "lens_mm": 28,
+  "lens_mm": 30,
   "level": true,
   "fstop": 5.6,
   "focus": [
@@ -450,7 +433,7 @@
      "position": [
       0.0,
       0.7,
-      0.56
+      0.45
      ],
      "rotate_z": 0.0
     }
@@ -461,7 +444,7 @@
   {
    "tint": "Poison",
    "position": [
-    -1.25,
+    -1.0,
     0.53
    ],
    "rotate_z": 4.0
@@ -469,7 +452,7 @@
   {
    "tint": "Poison",
    "position": [
-    1.25,
+    1.0,
     0.53
    ],
    "rotate_z": -4.0
@@ -478,6 +461,12 @@
  "materials": {
   "glow": {
    "strength": 1.5
+  }
+ },
+ "material_tweaks": {
+  "kit-wool": {
+   "Sheen Weight": 0.15,
+   "Subsurface Weight": 0.0
   }
  },
  "labels": {
@@ -492,8 +481,7 @@
   },
   "core": {
    "of": "core",
-   "side": "above-right",
-   "dx": -60
+   "side": "above"
   },
   "hemisphere": {
    "of": "hemisphere",
@@ -501,33 +489,33 @@
   },
   "header": [
    100,
-   70
+   60
   ]
  },
  "anchors": {
   "tropos": [
-   -1.25,
+   -1.0,
    0.33,
    1.1
   ],
   "tropos_right": [
-   1.25,
+   1.0,
    0.33,
    1.1
   ],
   "mantle": [
    0.08,
    0.7,
-   0.68
+   0.5700000000000001
   ],
   "hemisphere": [
-   1.25,
-   -2.25,
+   1.15,
+   -1.6,
    1.61
   ],
   "core": [
-   -1.45,
-   -2.28,
+   -1.15,
+   -1.63,
    0.661
   ]
  }

@@ -42,9 +42,23 @@ def _tropos(bpy):
         bpy.context.scene.collection.objects.link(e)
 
 
+def _tweaks(bpy):
+    """The shot's `material_tweaks`: {name prefix: {Principled input: value}}, set on every material whose name starts
+    with the prefix (the kit's wool at full sheen read white on a rug seen at a grazing angle)."""
+    for pre, ins in (SHOT.get('material_tweaks') or {}).items():
+        for m in bpy.data.materials:
+            if m.name.startswith(pre) and m.node_tree:
+                for n in m.node_tree.nodes:
+                    if n.type == 'BSDF_PRINCIPLED':
+                        for k, v in ins.items():
+                            n.inputs[k].default_value = v
+                print('tweaked', m.name, ins)
+
+
 def room(bpy, st, mats):
     r = _room(bpy, st, mats)
     _tropos(bpy)
+    _tweaks(bpy)
     return r
 
 
