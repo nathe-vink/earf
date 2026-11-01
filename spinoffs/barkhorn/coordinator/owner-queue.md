@@ -647,3 +647,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   made/risks/ask asides: six colors stock, Poison and Haze lighter custom batches, Dust/Acid/Ice horns deeper, at volume (~$10-15k
   each, estimate). Board v8: all three settled, F row shown, reply bar removed; my calls add the plinth light and horn hue.
   Verification workflow wf_5e9bb724-4d6 running. Check-ins re-armed (send_later, ~00:30).
+- ~23:00 the owner: "Tagline: none: another round · Budget: raise to about $55,000 · Colors: F, light lining with Poison and Haze a
+  step lighter I kind of like "A world of sound" or something about sound, color and light." Budget and colors confirmed. Tagline
+  NOT "Have the world over.": deck v51 cover back to "Something in the air."; site and brand lanes told to undo. New tagline round
+  in the owner's direction (sound, color and light; "A world of sound") next.
