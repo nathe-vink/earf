@@ -33,3 +33,25 @@ The critics also asked for 384 to 768 samples; the finals' count is decided when
 Every critic again named the same material limits, for the owner: the plinth's LED as a hard orange or white line
 (the back's 12 % clipped), the dark lining making the interior a slab, the blue at the gamut's edge, and (wide) a dark
 vertical streak in the lining at the cabinet's top centre, to check in the model.
+
+## Round 3 (proofs `*-ice-r3`, fresh critics): the last round; the gate not passed
+
+| frame | r1 | r2 | r3 | if fixed | the critic's main notes (not applied: three rounds is the limit) |
+|---|---|---|---|---|---|
+| front-off-tall | 5.0 | 5.5 | 5.0 | 6.8 | denoiser smear at 48 samples the main tell; the front-right edge a flat white bar (edge 1.0 W too strong); horn flat blue; contact spreads right; a dark band back on the left sweep |
+| front-off-wide | 5.5 | 5.5 | 5.5 | 7.0 | still floats (the LED glow fills the contact core); the grey cove band on the left (a 27-level dip); horn flat; backdrop uneven |
+| hero-light | 5.5 | 5.5 | 5.5 | 7.5 | ground now flat paper white; contact short; back-top 45 throws a blue streak across the floor; the plinth violet from the rig's magenta white-balance tint (7.0): set it to 0 |
+| side | 5.5 | 5.5 | 5.5 | 6.8 | the side face still a black slab: **round 2 moved the sidesheen panel behind a black reflect-only flag (`set.flags[2]` at [1.6, -1.2, 1.2])**, so the face still mirrors black; remove the flag. Horn flank crushed |
+| back | 4.5 | 5.5 | 5.5 | 7.0 | the left side and top mirror the sweep (white, edge lost); flat backdrop; contact weak; interior navy; a strip rim for the horn's layers |
+
+**Result:** no frame type reached 7.0 in three rounds; every critic's "if fixed" is 6.8 to 7.5. What holds the frames
+back is mostly outside this gate:
+- **Materials (the owner's):** the plinth's LED, read in all fifteen passes as a hard orange or white line (7 to 12 %
+  clipped on the back), which also fills the contact shadow; the dark lining (the interior a navy slab); the blue at the
+  gamut's edge; the Ice horn (the site's deep lot, cobalt) and cabinet (stock 2069, teal-navy) reading as two materials.
+- **The proofs' 48 samples:** every critic named the denoiser's smear first or second; the finals' count (the critics
+  ask 384 to 512) is a time decision: at the plan's rate a 1000 x 1250 frame at 384 samples is about 55 minutes.
+- **To check in the model:** a dark vertical streak in the lining at the cabinet's top centre (wide r2) and a small
+  bright blue rectangle at the cabinet's upper-left edge from the back (back r3).
+
+The round-3 notes above are the next pass's starting point if the owner keeps these materials.
