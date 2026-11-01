@@ -16,6 +16,11 @@
    "color": "#C9A660",
    "roughness": 0.3
   },
+  "channel": {
+   "preset": "plastic",
+   "color": "#111111",
+   "roughness": 0.55
+  },
   "clear-cast": {
    "preset": "clear_resin",
    "color": "#FFFFFF",
@@ -48,6 +53,10 @@
   {
    "match": "strata-posts|strata-collars|base-outriggers",
    "material": "brass"
+  },
+  {
+   "match": "base-plinth-channel",
+   "material": "channel"
   },
   {
    "match": "horn-topo-clear",
@@ -1618,7 +1627,8 @@
    "base-plinth-feet"
   ],
   "Plinth light": [
-   "base-plinth-light"
+   "base-plinth-light",
+   "base-plinth-channel"
   ],
   "Outriggers": [
    "base-outriggers",
