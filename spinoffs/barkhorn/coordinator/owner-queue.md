@@ -674,3 +674,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 23:14 speaker: tropos-strata.blend in F (2bf9b217: settled plinth, per-shot glow property, unset 20 / dusk 40) sent to the
   four-pieces lane; render models cloud 55c12c58 (Poison #12AA24, Haze #9F61E4), variants 2011a67f; make_blend default now --tints line
   (the old trucast flag would have overwritten F). Deck frames in F rendering: cover, row, golden-hour room, Ember hero, portrait.
+- 23:20 verification wf_5e9bb724-4d6: numbers all correct (ask sums to $55,000; contingency 10.9 % of costs / 9.8 % of the ask; Tropos
+  $12,058 and 84.6 kg; lamps-and-Mantle $16,300 per d62bb0e6). Claims/stale fixed in deck v52: colours and line asides no longer call
+  the stock look current (F stated; pictures being re-rendered); risks row "six cabinets ... several horns are custom batches"; made
+  card "stock cast sheet ... the first pair in the stocked gray"; "published minimums run about a pallet a color" (was "the only
+  published figure"); tropos aside horn sourcing; Haze's horn needs its own pour (no clear violet stocked at 1/2 in) in made/risks and
+  board v10. Speaker lane asked for a per-color cabinet/horn sourcing table in TINTS.md (Haze horn; is 2092 stocked at 1/2 in?).
