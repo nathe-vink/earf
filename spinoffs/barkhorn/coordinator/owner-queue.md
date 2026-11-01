@@ -541,3 +541,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   footnote ("In development. Every picture in this deck is a render.") moved from the bottom (it sat on the shadows) to under the
   subtitle; the slide ground set to the render's sweep (#F0ECE5) so there's no seam; month now November 2026. Headline waits on the
   tagline. Speaker room (2304x1296) then portrait (1200x1500) rendering -> home.html.
+- 15:10 the owner, on the deck's colors slide (v47, the eight in a row in stock tints): "they might be too dark now". My read: Poison,
+  Haze and Smoke read near-black and hide their insides; Ember is a deep red that still shows the woofer (borderline); Dust, Acid,
+  Ice and Fog barely changed from the site. Those four went about 3x darker in stock sheet (TINTS.md: Ember 49.7 -> 14.1 %, Poison
+  56.0 -> 18.6 %, Haze 49.2 -> 13.5 %, Smoke 30.3 -> 11.7 % through 20 mm, held). Smoke's renders show 2074; the first pair is 2064.
+  Asked the speaker lane for two quick comparison rows (1664x520, after the room, before the portrait): "middle" (Ember 26.5 %,
+  Poison 32.3 %, Haze 25.8 % transparent, Smoke 2064 29.3 %) and "site" (49.7 / 56.0 / 49.2 %, Smoke 2064). No tint change until
+  the owner picks. Cost if lighter: Smoke 2064 stocked; Ember/Poison/Haze custom batches at production (~$10-15k a color, estimate;
+  Haze needs one anyway); first pair and the $50,000 unchanged. Chips (~$200) still parked.
