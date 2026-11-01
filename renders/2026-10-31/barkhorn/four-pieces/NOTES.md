@@ -8,6 +8,17 @@ the lights on?"
 
 ## The deliverables
 
+**The deck uses the Strata pair** (the owner, 2026-11-01: Tropos starts with the stepped Strata design). The frames
+are `four-pieces-strata-{day,dusk}-3840.jpg`, `four-pieces-strata-{day,dusk}-1920.png` and
+`four-pieces-strata-{day,dusk}.anchors.json`. They come from the rebuilt asset `tropos-strata.blend` (r33-speaker-horn
+c77460f0, where the top bay's lining box is whole again), with the same camera, lights and zones. Only Tropos's zone moves,
+by 1-3 px. They carry the last measured pass:
+- day: the sun softened so the rug no longer clips; the window as the key light; the skirting a step below the wall;
+- dusk: a wall-wash and an uplight even the wall; soft cards on the two speakers; 3100 K.
+
+The files below, without "strata", are the first finals (the round-36 Tropos). The coordinator built the line slide on
+them; they are kept as a record.
+
 | file | what |
 |---|---|
 | `four-pieces-day-3840.jpg`, `four-pieces-day-1920.png` | golden hour, no text |
@@ -40,7 +51,8 @@ The room is the speaker team's golden-hour room (6770c713), widened to 8.4 m, wi
 | 4 / 5 | the critic's fixes; the sun turned so Hemisphere's shadow falls on a speaker (a ray cast found the "caster-less" ellipse was the pendant's) | 6 (7.5); lost both blind duels to the 7.0 golden room, 6 to 7 |
 | 6 | re-laid for the owner's ruling: frontal, the lamps forward, zones solved | day 5, dusk 4 |
 | 7 | closer (Tropos 430 px tall), shorter credenza, cognac chair, a rug, the furniture whole | day 5, dusk 5 (7 if fixed) |
-| finals | round 7's fixes; day's wall warm off-white for dark ink (the coordinator), Hemisphere's zone off the pendant's glow | see below |
+| finals | round 7's fixes; day's wall warm off-white for dark ink (the coordinator), Hemisphere's zone off the pendant's glow | day 5, dusk 5 (7 if fixed): the gate is not met, and three rounds is the limit for this look; as a slide "mostly yes" (day) and "structurally it does the job" (dusk) |
+| Strata | the launch speaker, with the measured fixes from the finals' critics; judged on measurements, no critic round (the coordinator) | day zones sRGB #CFC9BA-#E2D9CA (dark ink); dusk zones luminance 66-113, spread 13-37 (light ink) |
 
 Critic notes are in `critic/`. Proofs are in `proofs/`.
 

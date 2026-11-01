@@ -1,0 +1,183 @@
+{
+ "image_1920": "four-pieces-strata-dusk-1920.png",
+ "image_3840": "four-pieces-strata-dusk-3840.jpg",
+ "size": [
+  1920,
+  1080
+ ],
+ "note": "pixels at 1920 x 1080, [x0, y0, x1, y1] from the top left; label zones 380 x 130, 40-80 px from their product; tone is the ground under the zone (light: use dark ink; dark: use light ink)",
+ "products": {
+  "tropos": {
+   "name": "Tropos",
+   "bbox": [
+    519,
+    422,
+    754,
+    857
+   ],
+   "label_zone": [
+    446,
+    236,
+    826,
+    366
+   ],
+   "label_side": "above",
+   "tone": "dark",
+   "zone_luminance": {
+    "median": 99.1,
+    "p5": 86.0,
+    "p95": 107.1,
+    "spread": 21.1,
+    "block_range": 25.0,
+    "median_srgb": [
+     114,
+     96,
+     86
+    ],
+    "median_hex": "#726056"
+   },
+   "note": "the pair; the box and zone are the left speaker's",
+   "bbox_right": [
+    1166,
+    422,
+    1401,
+    857
+   ]
+  },
+  "mantle": {
+   "name": "Mantle",
+   "bbox": [
+    885,
+    629,
+    1035,
+    699
+   ],
+   "label_zone": [
+    770,
+    459,
+    1150,
+    589
+   ],
+   "label_side": "above",
+   "tone": "dark",
+   "zone_luminance": {
+    "median": 92.4,
+    "p5": 79.1,
+    "p95": 101.8,
+    "spread": 22.6,
+    "block_range": 29.5,
+    "median_srgb": [
+     105,
+     90,
+     80
+    ],
+    "median_hex": "#695A50"
+   }
+  },
+  "core": {
+   "name": "Core",
+   "bbox": [
+    260,
+    649,
+    368,
+    743
+   ],
+   "label_zone": [
+    124,
+    463,
+    504,
+    593
+   ],
+   "label_side": "above",
+   "tone": "dark",
+   "zone_luminance": {
+    "median": 66.1,
+    "p5": 54.0,
+    "p95": 74.3,
+    "spread": 20.3,
+    "block_range": 29.6,
+    "median_srgb": [
+     82,
+     63,
+     55
+    ],
+    "median_hex": "#523F37"
+   }
+  },
+  "hemisphere": {
+   "name": "Hemisphere",
+   "bbox": [
+    1509,
+    178,
+    1646,
+    261
+   ],
+   "label_zone": [
+    1049,
+    204,
+    1429,
+    334
+   ],
+   "label_side": "left",
+   "tone": "dark",
+   "zone_luminance": {
+    "median": 112.8,
+    "p5": 105.5,
+    "p95": 118.0,
+    "spread": 12.5,
+    "block_range": 18.1,
+    "median_srgb": [
+     127,
+     110,
+     99
+    ],
+    "median_hex": "#7F6E63"
+   }
+  }
+ },
+ "header": {
+  "zone": [
+   100,
+   60,
+   1000,
+   220
+  ],
+  "tone": "dark",
+  "zone_luminance": {
+   "median": 93.2,
+   "p5": 71.0,
+   "p95": 108.1,
+   "spread": 37.2,
+   "block_range": 41.0,
+   "median_srgb": [
+    109,
+    90,
+    79
+   ],
+   "median_hex": "#6D5A4F"
+  }
+ },
+ "layout_problems": [],
+ "corner_note": {
+  "zone": [
+   1200,
+   1020,
+   1480,
+   1060
+  ],
+  "tone": "dark",
+  "zone_luminance": {
+   "median": 86.9,
+   "p5": 83.9,
+   "p95": 90.1,
+   "spread": 6.2,
+   "block_range": 8.1,
+   "median_srgb": [
+    103,
+    84,
+    67
+   ],
+   "median_hex": "#675443"
+  }
+ }
+}
