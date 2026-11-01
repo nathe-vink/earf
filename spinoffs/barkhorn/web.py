@@ -238,8 +238,12 @@ def tagline_css(line):
 
 # the swatches for colors F (the coordinator, 2026-11-01: override here, under the flag; marks.py, the brand's source,
 # stays as it is): key -> hex, from the speaker lane's TINTS.md (c38f8ee6) and barkhorn-cloud.json once its Poison and
-# Haze land. Empty keeps today's swatches.
-MARK_NEXT = {}
+# Haze land. Empty keeps today's swatches. The speaker lane's cabinet "deep" colors (white light after 25 mm of the
+# cabinet's acrylic, sRGB; r33-speaker-horn 55c12c58, asset/tints-trucast.json and barkhorn-cloud.json): Ember, Dust, Acid,
+# Ice and Smoke stock; Poison and Haze the lighter custom batches (32.3 % and 25.8 % through 20 mm). Fog keeps today's
+# swatch: its cabinet is clear (#FFFFFF), which would vanish on the page's ground.
+MARK_NEXT = {'red': '#CF0913', 'orange': '#FBBD77', 'amber': '#FFEB6C', 'green': '#12AA24', 'blue': '#92CCF7',
+             'violet': '#9F61E4', 'black': '#4B4E51'}
 
 
 def tagline():
