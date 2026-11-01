@@ -570,3 +570,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   internals; the site was lighter because its batts were white. So the lining is the lever, not the tint's depth. Asked the speaker
   lane for two more quick rows: D = light lining in the seven colors, Smoke on black; E = mid-gray lining in all eight. Site-set
   full-size frames held until the owner picks lining and depth (Ice proofs at half size for framing only). Stack: scratchpad tints/abc.jpg.
+- 16:00 lining rows landed: D light (4bc9fde1: white lining in the seven, Smoke black), E gray (193e2ab9: #767674 in all eight).
+  D lifts Ember, Dust, Acid, Ice and Fog 40-50 % (glowing colored glass, as the site); E is a muted step; Poison and Haze barely move
+  with either lining (stock 2092/2287 absorb both ways). Sent the owner A/D/E (tints/ade.jpg). Asked the speaker lane for F (D +
+  Poison 32.3 %, Haze 25.8 %) and G (D + Poison 56.0 %, Haze 49.2 %), Ember stock; then the Ice proofs resume.
