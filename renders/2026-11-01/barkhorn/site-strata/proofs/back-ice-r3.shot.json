@@ -1,0 +1,235 @@
+{
+ "set": {
+  "kind": "sweep",
+  "color": "#F7F0E8",
+  "width": 6.0,
+  "front": 5.0,
+  "depth": 1.5,
+  "radius": 1.2,
+  "height": 4.0,
+  "contact": {
+   "strength": 0.6,
+   "distance_m": 0.12
+  }
+ },
+ "lights": {
+  "key": {
+   "type": "area",
+   "size_m": [
+    2.5,
+    2.0
+   ],
+   "orbit": {
+    "azimuth_deg": -60,
+    "elevation_deg": 32,
+    "distance_m": 4.0
+   },
+   "target": [
+    0,
+    0.0,
+    0.8
+   ],
+   "irradiance": 2.6,
+   "color": "#FFF3E1"
+  },
+  "fill": {
+   "type": "area",
+   "size_m": [
+    1.5,
+    1.5
+   ],
+   "orbit": {
+    "azimuth_deg": 10,
+    "elevation_deg": 10,
+    "distance_m": 4.0
+   },
+   "target": [
+    0,
+    0.0,
+    0.6
+   ],
+   "irradiance": 1.1,
+   "color": "#FFF7EA"
+  },
+  "wash": {
+   "type": "area",
+   "size_m": [
+    5.0,
+    1.0
+   ],
+   "position": [
+    0.0,
+    -1.0,
+    2.9
+   ],
+   "target": [
+    0.0,
+    0.5,
+    1.2
+   ],
+   "irradiance": 0.3,
+   "color": "#FFF7EA"
+  },
+  "glow": {
+   "type": "area",
+   "size_m": [
+    0.9,
+    0.5
+   ],
+   "position": [
+    0.0,
+    0.55,
+    1.35
+   ],
+   "target": [
+    0.0,
+    0.0,
+    1.1
+   ],
+   "irradiance": 5.0,
+   "color": "#FFF1DC",
+   "specular": 0,
+   "transmission": true
+  },
+  "d-wall": {
+   "type": "area",
+   "size_m": [
+    4.0,
+    2.0
+   ],
+   "position": [
+    0.0,
+    -0.5,
+    1.6
+   ],
+   "target": [
+    0.0,
+    1.5,
+    0.6
+   ],
+   "irradiance": 0.25,
+   "color": "#FFF4E8",
+   "specular": 0.0,
+   "receivers": [
+    "sweep"
+   ]
+  },
+  "d-floor": {
+   "type": "area",
+   "size_m": [
+    4.0,
+    3.0
+   ],
+   "position": [
+    0.0,
+    -1.8,
+    3.5
+   ],
+   "target": [
+    0.0,
+    -0.5,
+    0.0
+   ],
+   "irradiance": 0.0,
+   "spread_deg": 60,
+   "color": "#FFF4E8",
+   "specular": 0.0,
+   "receivers": [
+    "sweep"
+   ]
+  }
+ },
+ "render": {
+  "samples": 96,
+  "adaptive": 0.02,
+  "denoise": true,
+  "clamp": 8,
+  "bounces": 12,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.0,
+  "white_balance_k": 5600,
+  "white_balance_tint": 3.0
+ },
+ "title": "Tropos, back, ice (the final design)",
+ "size": [
+  880,
+  1100
+ ],
+ "camera": {
+  "position": [
+   1.05,
+   -2.6,
+   1.12
+  ],
+  "target": [
+   0.0,
+   0.02,
+   0.52
+  ],
+  "lens_mm": 70.2,
+  "level": true
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#C4C2BE",
+  "horizon": "#CFCDC8",
+  "ground": "#5A5650",
+  "strength": 0.7
+ },
+ "products": [
+  {
+   "def": "studio/products/barkhorn-cloud.json",
+   "flavour": "cloud-blue",
+   "instances": [
+    {
+     "position": [
+      0,
+      0,
+      0.0385
+     ],
+     "rotate_z": 214,
+     "flavour": "cloud-blue",
+     "hide": [
+      "cloth-disc",
+      "feet-base",
+      "feet-stem",
+      "horn-throat",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "waveguide",
+      "woofer-ring"
+     ]
+    }
+   ]
+  },
+  {
+   "def": "studio/products/barkhorn-variants.json",
+   "flavour": "cloud-blue",
+   "instances": [
+    {
+     "position": [
+      0,
+      0,
+      0.0385
+     ],
+     "rotate_z": 214,
+     "flavour": "cloud-blue",
+     "hide": [
+      "horn-topo*",
+      "base-out*"
+     ],
+     "options": [
+      "Plinth",
+      "Plinth light"
+     ]
+    }
+   ]
+  }
+ ],
+ "materials": {
+  "led": {
+   "glow": 40.0
+  }
+ }
+}
