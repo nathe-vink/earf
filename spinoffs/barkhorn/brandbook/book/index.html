@@ -59,6 +59,8 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .cover .in { display: grid; gap: 28px }
 .cover h1 { font-size: clamp(56px, 11vw, 168px); line-height: .9; letter-spacing: -.045em; font-weight: 600 }
 .cover h1 span { display: block; color: var(--muted); font-weight: 500 }
+.cover h1 span.tag { color: inherit; font-weight: inherit; white-space: nowrap; font-size: clamp(30px, 9.4vw, 150px); line-height: 1 }   /* the tagline on one line, always */
+.tagline { white-space: nowrap }
 .cover .meta { display: flex; flex-wrap: wrap; gap: 10px 28px; justify-content: space-between; align-items: end }
 .spectrum { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: clamp(4px, .8vw, 10px); margin-top: 12px }
 .slab { aspect-ratio: 1 / 2.2; border-radius: 3px; position: relative; background: var(--t);
@@ -233,8 +235,8 @@ footer p { max-width: 76ch }
 
 <section class="cover band" id="cover">
   <div class="in">
-    <p class="eyebrow">EARF · San Francisco · the brand book, first edition, 31 October 2026</p>
-    <h1>Something<br>in the air.<span>The EARF brand book.</span></h1>
+    <p class="eyebrow">EARF · San Francisco · the brand book, second edition, 1 November 2026 (draft)</p>
+    <h1><span class="tag">Have the world&nbsp;over.</span><span>The EARF brand book.</span></h1>
     <div class="meta">
       <p class="lede">Hi-fi and light, cast in tinted acrylic, in eight colors from Ember to Smoke. This book is how EARF looks, sounds and arrives, so that everything made under the name feels like it came out of one room.</p>
     </div>
@@ -379,7 +381,7 @@ footer p { max-width: 76ch }
       <div><div class="mo">20 mm</div><p class="muted" style="margin-top:14px">IBM Plex Mono · 400 and 500 · labels, numbers, eyebrows, particulars; capitals with a little tracking</p></div>
     </div>
     <div class="scale">
-      <div><span class="k">Display · 600 · −4.5%</span><span style="font-size:clamp(40px,6vw,72px);font-weight:600;letter-spacing:-.045em;line-height:1">Something in the air.</span></div>
+      <div><span class="k">Display · 600 · −4.5%</span><span class="tagline" style="font-size:clamp(34px,6vw,72px);font-weight:600;letter-spacing:-.045em;line-height:1">Have the world&nbsp;over.</span></div>
       <div><span class="k">Headline · 600 · −3%</span><span style="font-size:clamp(28px,3.4vw,40px);font-weight:600;letter-spacing:-.03em;line-height:1.05">The oldest amplifier is a shape.</span></div>
       <div><span class="k">Lede · 400</span><span style="font-size:21px;line-height:1.45">Cast acrylic carries light to its edges, so a lamp underneath fills the whole cabinet with color.</span></div>
       <div><span class="k">Text · 400 · 17/1.6</span><span>Each cabinet is cast acrylic, 20 mm thick and tinted all the way through. The lining shows through the walls, so we dressed it in white voile.</span></div>
@@ -421,7 +423,7 @@ footer p { max-width: 76ch }
     <div class="head"><p class="no" style="color:var(--night-muted)">07 · Voice</p><h2>Cheeky, but reserved.</h2>
       <p class="lede" style="color:var(--night-muted)">The owner's brief: sophisticated, witty, never pleased with itself. Say what the thing is and what it does. Let one line per surface smile; let the rest be exact.</p></div>
     <div class="lines">
-      <div><q>Something in the air.</q><span>The headline</span></div>
+      <div><q class="tagline">Have the world&nbsp;over.</q><span>The tagline</span></div>
       <div><q>Eight things in the air.</q><span>Tropos, the eight</span></div>
       <div><q>The oldest amplifier is a shape.</q><span>The horn</span></div>
       <div><q>Put a light under it.</q><span>Lit from below</span></div>
@@ -429,6 +431,10 @@ footer p { max-width: 76ch }
       <div><q>A record player that floats on its own light.</q><span>Mantle</span></div>
       <div><q>Bottle green. Keep out of reach.</q><span>04 Poison</span></div>
       <div><q>Drawn to be made.</q><span>Progress</span></div>
+    </div>
+    <div class="cols">
+      <div><h3>The tagline, set</h3><p style="color:var(--night-muted)">"Have the world over." Sentence case, with its full stop, always on one line. Never break it between "world" and "over": split there, "the world over" reads as "everywhere", and the invitation is lost. Size it to fit its measure instead (the cover scales it with the page). On the web, set it with <code>white-space: nowrap</code> and a no-break space between "world" and "over".</p></div>
+      <div><h3>The record</h3><p style="color:var(--night-muted)">"Something in the air." was the headline from the first pictures to 1 November 2026, when the owner took "Have the world over." It is retired: don't set it on anything new. Pieces already drafted with it (the launch grid, the invitation, the one-pager, the partner brief) change in their next pass.</p></div>
     </div>
     <div class="cols">
       <div><h3>Exact</h3><p style="color:var(--night-muted)">Millimeters, kilograms, hertz. "About" when a figure is designed and not yet measured. Never a superlative a measurement hasn't earned.</p></div>
