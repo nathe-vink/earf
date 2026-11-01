@@ -1,4 +1,16 @@
-# Tropos's tints: the site's, and stock TruCast sheet's (reconciled 2026-10-31)
+# Tropos's tints: stock TruCast sheet's, the line's default since 2026-11-01
+
+**The owner, 2026-11-01:** "I like the darker colors" (r46-owner-notes 8832050e).
+- The eight colors are now stock cast sheet's own tints: each cabinet in its TruCast code with its TT held at 20 mm, and
+  each horn, stepped or formed, in the same code at 12.7 mm.
+- They are applied to the line's eight flavors in `product.py` (from `tints-trucast.json`), so every engine render and
+  both `.blend` assets carry them.
+- Smoke's cabinet is now 2074 Dark Gray (11.7 %), as it has been since the backlight pass. The rest of this note is the
+  comparison that led here.
+
+---
+
+# The comparison: the site's tints, and stock TruCast sheet's (reconciled 2026-10-31)
 
 There are two calibrations of Tropos's eight tints on two branches. This note compares them.
 
@@ -7,8 +19,8 @@ There are two calibrations of Tropos's eight tints on two branches. This note co
 - **r48-biomes** (`spinoffs/barkhorn/biomes/tints.json`, commit b970bb3f) covers all eight tints. It uses this
   branch's "held" method: the seller's total transmission (TT) held at the sheet's own thickness.
 
-`tints.py` here copies biomes' codes, TT and channel splits, and writes `tints-trucast.json`. The assets take it with
-`make_blend.py --tints trucast`. The committed `.blend` files keep the site's tints, the look of every picture so far.
+`tints.py` here copies biomes' codes, TT and channel splits, and writes `tints-trucast.json`. Since 2026-11-01 these are
+the line's tints (above). `make_blend.py --tints trucast` is now the same as the default.
 
 ## Where they agree
 

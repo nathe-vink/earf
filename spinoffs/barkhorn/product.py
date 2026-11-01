@@ -2642,6 +2642,24 @@ if os.path.exists(STOCK_FILE):
         if not _k.startswith('_'):
             VARIANTS[_k] = stock_flavour(_e['base'], _e['cabinet'], _e.get('horn'), _e.get('ring'))
 
+# 2026-11-01, the owner ("I like the darker colors"; r46-owner-notes 8832050e): the line's eight colours are stock cast
+# sheet's own tints, the site's lighter ones retired. Each line flavour's cabinet takes its TruCast code's colour (TT held
+# at 20 mm), its horn (stepped or formed) the same code at the 1/2 in sheet's 12.7 mm, IOR 1.49, from
+# asset/tints-trucast.json (asset/tints.py, asset/TINTS.md)
+TRUCAST_FILE = os.path.join(HERE, 'asset', 'tints-trucast.json')
+if os.path.exists(TRUCAST_FILE):
+    for _t, _e in json.load(open(TRUCAST_FILE)).items():
+        _v = VARIANTS.get(_e['flavour'])
+        if _v is None or _v.get('bark') != 'clear_resin':
+            continue
+        _m = _v.setdefault('materials', {})
+        _cab = {**_m.get('bark', {}), 'deep': _e['cabinet_deep'], 'radius': _e['cabinet_radius_m'], 'ior': _e['ior']}
+        _cab.pop('milk', None)
+        _m['bark'] = _cab
+        _m['horn-lot'] = {**_cab, 'deep': _e['strata_horn_deep'], 'radius': _e['horn_radius_m']}
+        _v['horn_deep'] = _e['strata_horn_deep']
+        _v['tint'] = _e['cabinet']
+
 PRODUCT = Product(
     'barkhorn', 'barkhorn', 'Two-way horn loudspeaker after Friendly Pressure, in birch bark or eucalyptus bark', params=P, parts=parts,
     notes=['Bark on the shell (sides, top, bottom and back): real birch bark sheet (Betula papyrifera, from fallen or felled trees) laminated to the plywood with PVA in a vacuum bag and sealed with a matt waterborne lacquer, wrapped round the shell\'s front edges; for eucalyptus, the shed bark of a smooth-barked gum (spotted or snow gum) pressed flat and laminated the same way, or a UV-printed veneer of it. Approve a sample board first.',

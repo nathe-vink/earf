@@ -29,9 +29,9 @@ TINTS = {
     'Ice':    ('cloud-blue',           '2069', 'Tinted Blue',        57.6, (1.00, 0.40, 0.06)),
     'Haze':   ('cloud-violet',         '2287', 'Violet',             13.5, (0.50, 1.00, 0.12)),
     'Fog':    ('birch-fog-clear',      '0000', 'Clear',              93.0, (1.00, 1.00, 1.00)),
-    'Smoke':  ('cloud-black',          '2064', 'Gray',               29.3, (1.00, 1.00, 1.00)),
+    'Smoke':  ('cloud-black',          '2074', 'Dark Gray',          11.7, (1.03, 1.00, 0.97)),   # 2064 until 2026-11-01
 }
-STRATA_HORN = {'Smoke': ('2074', 'Dark Gray', 11.7, (1.03, 1.00, 0.97))}     # make/stock-pair.md
+STRATA_HORN = {}                     # every horn in its cabinet's code (Smoke's was 2074 under a 2064 cabinet until 2026-11-01)
 WALL, LAYER = 20.0, 12.7
 
 
