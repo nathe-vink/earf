@@ -93,6 +93,8 @@ for _k, _c in CAST.items():
 # it; a mould is the line's setup): my estimates, not quotes
 SOLIDS.setdefault('acrylic-formed', dict(title='Cast acrylic sheet, tinted through, drape-formed over an aluminium mould',
                                          density=1.19, usd_per_cm3=0.06))
+SOLIDS.setdefault('acrylic-clear-formed', dict(title='Cast acrylic sheet, clear (TruCast 0000), drape-formed over an '
+                                               'aluminium mould (proposal 2026-11-01)', density=1.19, usd_per_cm3=0.05))
 SOLIDS.setdefault('acrylic-opal-formed', dict(title='Cast acrylic sheet, volume-diffusing (opal), formed over an aluminium '
                                               'mould', density=1.19, usd_per_cm3=0.06))
 SOLIDS.setdefault('peek', dict(title='PEEK rod, unfilled', density=1.30, usd_per_cm3=0.35))
@@ -212,9 +214,11 @@ def cover_parts(p=N):
     note_formed = ('drape-formed from cast sheet over an aluminium mould, trimmed and polished; the prototypes are formed on '
                    'the production moulds')
     return [
-        Part('shell', shell, Machined('acrylic-formed', 'formed', setup_usd=1500.0), finish='body', group='cover',
-             notes=['the outside: 10 mm tinted cast sheet ' + note_formed + ' (9 at the crown, thinner toward the rim: the '
-                    'former confirms); its outer face never touches the mould, so it keeps the cast sheet\'s gloss']),
+        Part('shell', shell, Machined('acrylic-clear-formed', 'formed', setup_usd=1500.0), finish='body', group='cover',
+             notes=['the outside: 10 mm cast sheet ' + note_formed + ' (9 at the crown, thinner toward the rim: the '
+                    'former confirms); its outer face never touches the mould, so it keeps the cast sheet\'s gloss. '
+                    'PROPOSAL 2026-11-01 (the stock-tint line, tint_proof): CLEAR, TruCast 0000; the color is the skin\'s, '
+                    'seen through 9 of clear, so the shade still glows lit (12 mm of stock tint passes under 0.2 %)']),
         Part('liner', liner, Machined('acrylic-opal-formed', 'formed', setup_usd=1200.0), finish='liner', group='cover',
              inside=True,
              notes=['the diffuser: 3 mm volume-diffusing (opal) cast acrylic, light-diffusing grade, about 70 % '
@@ -222,7 +226,9 @@ def cover_parts(p=N):
                     'touches the tinted layers (a bead-blasted clear liner goes clear where it is bonded or wetted)']),
         Part('skin', skin, Machined('acrylic-formed', 'formed', setup_usd=1200.0), finish='body', group='cover',
              notes=['the inside: 3 mm tinted cast sheet formed into a female mould, so its inner (seen) face keeps its '
-                    'gloss and the opal is seen only through tint']),
+                    'gloss and the opal is seen only through tint. PROPOSAL 2026-11-01: 1/8 in stock TruCast in the line\'s '
+                    'code (Ember 2423, Poison 2092, Haze 2287, Dust 2422, Acid 9097, Ice 2069, Fog 0000, Smoke 2074), its '
+                    'chart transmission (14 to 93 %) as it is: the one tinted layer']),
         Part('rim', rim, Machined('cast-acrylic', 'lathe'), finish='body', group='cover',
              notes=['closes the three layers at the mouth, bonded and polished with them; a press-in ePTFE vent in its '
                     'face keeps the gaps between the layers at room pressure and dry']),

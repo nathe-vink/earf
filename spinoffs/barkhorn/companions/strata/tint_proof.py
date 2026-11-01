@@ -5,7 +5,7 @@ unlit, with scene.py's calibrated acrylic (Beer-Lambert by ray length from the 3
 sheet.
 
     python3.11 spinoffs/barkhorn/companions/strata/tint_proof.py FRAME --out PATH [--samples N]   # one frame
-    python3 spinoffs/barkhorn/companions/strata/tint_proof.py --sheet                              # the sheet (PIL)
+    python3 spinoffs/barkhorn/companions/strata/tint_proof.py --all [sheet|hemi-v2|core-options] [--samples N]
 
 FRAME is {core,hemi}-{ember,poison}-{lit,unlit}. The geometry is the CAD's numbers, built procedurally (spheres), not
 the CAD's meshes: a proof of the tint at real thickness, not a hero.
@@ -24,7 +24,8 @@ def build(frame, out, samples):
     sys.path.insert(0, HERE)
     import stack as S
     import scene as SC
-    prod, tint, mode = frame.split('-')
+    prod, tint, mode, *var = frame.split('-')
+    var = var[0] if var else ''
     name, code, lt, hue = STOCK[tint]
     S.TINTS[name] = (code, lt, hue)
     lit = mode == 'lit'
@@ -45,8 +46,13 @@ def build(frame, out, samples):
         ob.location = (0, 0, z * MM); me.materials.append(mat)
         return ob
 
-    def tinted(nm, rough):
-        return SC.acrylic_material(nm, [(-1000.0, 1000.0, name)], rough, 'polished', scratch=0.3, bond=False)
+    def tinted(nm, rough, which=None, loading=1.0):
+        return SC.acrylic_material(nm, [(-1000.0, 1000.0, which or name)], rough, 'polished', loading=loading, scratch=0.3,
+                                   bond=False)
+    # the 2026-11-01 options: 'v2' Hemisphere's shell clear (0000), only the 3 mm skin tinted; 'held' Core's 9 mm ball
+    # at a third of the chip's dye per mm (a custom pour, or stock 3/8 in sheet if the maker holds LT at thickness);
+    # 'two' Core's ball in two layers, 6 mm clear outside and a 3 mm stock skin inside, 1 mm apart
+    ld = 1.0 / 3.0 if var == 'held' else 1.0
 
     table = SC.principled('table', '#8C8780', 0.6)
     SC.plane('table', (4, 4), (0, 0, 0), (0, 0, 0), table)
@@ -61,16 +67,28 @@ def build(frame, out, samples):
         bpy.context.object.data.materials.append(black)
         bpy.ops.mesh.primitive_cylinder_add(vertices=128, radius=0.060, depth=ring * MM, location=(0, 0, (dock_h + base_h + ring / 2) * MM))
         bpy.context.object.data.materials.append(SC.anodised())
-        sphere('ball-out', 80.0, zc, tinted('ball-out', 0.0))
-        sphere('ball-in', 71.0, zc, tinted('ball-frost', 0.55), inward=True)      # the inside bead-blasted
+        if var == 'two':
+            sphere('ball-out', 80.0, zc, tinted('ball-out', 0.0, 'Clear'))
+            sphere('ball-out-in', 74.0, zc, tinted('ball-out-in', 0.0, 'Clear'), inward=True)
+            sphere('skin-out', 73.0, zc, tinted('skin-out', 0.0))
+            sphere('skin-in', 70.0, zc, tinted('skin-frost', 0.55), inward=True)
+        else:
+            sphere('ball-out', 80.0, zc, tinted('ball-out', 0.0, loading=ld))
+            sphere('ball-in', 71.0, zc, tinted('ball-frost', 0.55, loading=ld), inward=True)      # the inside bead-blasted
         if lit:   # the 200 lm warm LED under the window, up into the ball, and the light the frost passes on
             SC.point('led', (0, 0, (zc - 62) * MM), 2.2, '#FFC98A', radius=0.012, caustic=False)
         cam, tgt, lens = (0.0, -0.62, 0.20), (0, 0, zc * 0.9 * MM), 85
     else:
         rim = 300.0                               # the rim 300 above the table: the shade and its pool in one frame
-        sh = tinted('shell', 0.0)
-        sphere('shell-out', 100.0, rim, sh, cut=0.0)
-        sphere('shell-in', 91.0, rim, tinted('shell-in', 0.0), inward=True, cut=0.0)
+        shw = 'Clear' if var in ('v2', 'v3') else None
+        if var == 'v3':     # the tint outside: a 3 mm stock-tint shell over a 6 mm clear one, the opal, a clear skin
+            sphere('tint-out', 100.0, rim, tinted('tint', 0.0), cut=0.0)
+            sphere('tint-in', 97.0, rim, tinted('tint-in', 0.0), inward=True, cut=0.0)
+            sphere('shell-out', 96.0, rim, tinted('shell', 0.0, 'Clear'), cut=0.0)
+            sphere('shell-in', 90.0, rim, tinted('shell-in', 0.0, 'Clear'), inward=True, cut=0.0)
+        else:
+            sphere('shell-out', 100.0, rim, tinted('shell', 0.0, shw), cut=0.0)
+            sphere('shell-in', 91.0, rim, tinted('shell-in', 0.0, shw), inward=True, cut=0.0)
         opal = bpy.data.materials.new('opal'); opal.use_nodes = True
         nt = opal.node_tree; nt.nodes.clear()
         o = nt.nodes.new('ShaderNodeOutputMaterial'); tr = nt.nodes.new('ShaderNodeBsdfTranslucent')
@@ -78,11 +96,12 @@ def build(frame, out, samples):
         tr.inputs['Color'].default_value = (0.92, 0.92, 0.9, 1); df.inputs['Color'].default_value = (0.9, 0.9, 0.88, 1)
         nt.links.new(df.outputs[0], mx.inputs[1]); nt.links.new(tr.outputs[0], mx.inputs[2]); nt.links.new(mx.outputs[0], o.inputs['Surface'])
         sphere('liner', 88.5, rim, opal, cut=4.0)
-        sphere('skin-out', 86.0, rim, tinted('skin', 0.0), cut=0.0)
-        sphere('skin-in', 83.0, rim, tinted('skin-in', 0.0), inward=True, cut=0.0)
+        skw = 'Clear' if var == 'v3' else None
+        sphere('skin-out', 86.0, rim, tinted('skin', 0.0, skw), cut=0.0)
+        sphere('skin-in', 83.0, rim, tinted('skin-in', 0.0, skw), inward=True, cut=0.0)
         # the rim ring that closes the layers (tinted), the crown and cap in black anodised aluminium, the cord
         bpy.ops.mesh.primitive_torus_add(major_radius=0.0915, minor_radius=0.0045, location=(0, 0, rim * MM))
-        bpy.context.object.data.materials.append(tinted('rim', 0.0))
+        bpy.context.object.data.materials.append(tinted('rim', 0.0, shw))
         an = SC.anodised()
         bpy.ops.mesh.primitive_cylinder_add(vertices=96, radius=0.040, depth=0.0115, location=(0, 0, (rim + 106) * MM))
         bpy.context.object.data.materials.append(an)
@@ -107,33 +126,51 @@ def build(frame, out, samples):
         SC.area('rim', (0.8, 0.4, 0.6), (70, 0, 120), (0.4, 1.0), 40.0, '#FFFFFF')
         exposure = 0.0
     SC.render_settings(600, 600, samples, 1.0, exposure=exposure, look='AgX - Medium High Contrast')
-    bpy.context.scene.cycles.caustics_refractive = False
+    # Core has no diffuse surface behind its glass; Hemisphere's opal liner sits behind the shell and the skin, so it is
+    # lit only along refracted (caustic) paths: on for Hemisphere (without them the liner renders black)
+    bpy.context.scene.cycles.caustics_refractive = prod == 'hemi'
     SC.camera(cam, tgt, lens=lens, fstop=8.0)
     bpy.context.scene.render.filepath = out
     bpy.ops.render.render(write_still=True)
 
 
-def sheet():
+SETS = {'sheet': (FRAMES, 'tint-proof-sheet', 'Stock tints at real thickness: Ember = TruCast 2423 Red, Poison = TruCast '
+                   '2092 Green (calibrated from the 3 mm chart, Beer-Lambert by path length)'),
+        'hemi-v2': ([f'hemi-{t}-{l}-v2' for t in ('ember', 'poison') for l in ('unlit', 'lit')], 'tint-proof-hemi-v2',
+                    'Hemisphere, proposed: the 9 mm shell clear (0000), only the 3 mm skin in stock 2423 / 2092'),
+        'hemi-v3': ([f'hemi-{t}-{l}-v3' for t in ('ember', 'poison') for l in ('unlit', 'lit')], 'tint-proof-hemi-v3',
+                    'Hemisphere, alternative: the 3 mm stock tint outside (over 6 mm clear), the opal and a clear skin inside'),
+        'core-options': ([f'core-{t}-{l}-{v}' for v in ('held', 'two') for t in ('ember', 'poison') for l in ('unlit', 'lit')],
+                         'tint-proof-core-options', 'Core: top, the 9 mm ball at 1/3 of the chip\'s dye (stock 3/8 in if held, '
+                         'or a custom pour); bottom, two layers: 6 mm clear + 3 mm stock skin')}
+
+
+def sheet(which='sheet'):
+    frames, fname, title = SETS[which]
     from PIL import Image, ImageDraw, ImageFont
     W = 600
-    im = Image.new('RGB', (4 * W + 50, 2 * W + 140), '#F4F1EC')
+    rows = (len(frames) + 3) // 4
+    im = Image.new('RGB', (4 * W + 50, rows * (W + 40) + 60), '#F4F1EC')
     d = ImageDraw.Draw(im)
     try:
         f = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', 22)
         fs = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', 16)
     except OSError:
         f = fs = ImageFont.load_default()
-    d.text((20, 18), 'Stock tints at real thickness: Ember = TruCast 2423 Red, Poison = TruCast 2092 Green '
-           '(calibrated from the 3 mm chart, Beer-Lambert by path length)', fill='#1C1A18', font=f)
-    for i, fr in enumerate(FRAMES):
+    d.text((20, 18), title, fill='#1C1A18', font=f)
+    for i, fr in enumerate(frames):
         p = os.path.join(OUT, fr + '.png')
         x, y = 10 + (i % 4) * (W + 10), 60 + (i // 4) * (W + 40)
         if os.path.exists(p):
             im.paste(Image.open(p).convert('RGB').resize((W, W)), (x, y))
-        prod, tint, mode = fr.split('-')
-        lab = f"{'Core, ball 9 mm' if prod == 'core' else 'Hemisphere, 9 + 3 mm tint'}  ·  {STOCK[tint][1]}  ·  {mode}"
+        prod, tint, mode, *var = fr.split('-')
+        var = var[0] if var else ''
+        what = {'': 'Core, ball 9 mm' if prod == 'core' else 'Hemisphere, 9 + 3 mm tint', 'v2': 'Hemisphere, clear + 3 mm skin',
+                'held': 'Core, 9 mm at 1/3 dye', 'two': 'Core, 6 clear + 3 mm skin',
+                'v3': 'Hemisphere, 3 mm tint outside'}[var]
+        lab = f"{what}  ·  {STOCK[tint][1]}  ·  {mode}"
         d.text((x + 4, y + W + 6), lab, fill='#1C1A18', font=fs)
-    path = os.path.join(OUT, 'tint-proof-sheet.png')
+    path = os.path.join(OUT, fname + '.png')
     im.save(path, optimize=True)
     print(os.path.relpath(path, ROOT))
 
@@ -141,12 +178,13 @@ def sheet():
 if __name__ == '__main__':
     a = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else sys.argv[1:]
     if a and a[0] == '--sheet':
-        sheet()
+        sheet(a[1] if len(a) > 1 else 'sheet')
     elif a and a[0] == '--all':
         os.makedirs(OUT, exist_ok=True)
+        which = a[1] if len(a) > 1 and not a[1].startswith('--') else 'sheet'
         spp = a[a.index('--samples') + 1] if '--samples' in a else '96'
-        for fr in FRAMES:
+        for fr in SETS[which][0]:
             subprocess.run(['python3.11', __file__, fr, '--out', os.path.join(OUT, fr + '.png'), '--samples', spp], check=True)
-        sheet()
+        sheet(which)
     else:
         build(a[0], os.path.abspath(a[a.index('--out') + 1]), int(a[a.index('--samples') + 1]) if '--samples' in a else 96)

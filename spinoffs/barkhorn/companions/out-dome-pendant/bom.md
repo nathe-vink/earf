@@ -2,7 +2,7 @@
 
 | item | make | qty | what | size | each, USD |
 |---|---|---|---|---|---|
-| shell | formed | 1 | Cast acrylic sheet, tinted through, drape-formed over an aluminium mould | 446 cm3, 210 x 210 x 98 | 1,534.41 |
+| shell | formed | 1 | Cast acrylic sheet, clear (TruCast 0000), drape-formed over an aluminium mould (proposal 2026-11-01) | 446 cm3, 210 x 210 x 98 | 1,529.51 |
 | liner | formed | 1 | Cast acrylic sheet, volume-diffusing (opal), formed over an aluminium mould | 117 cm3, 190 x 190 x 82 | 1,212.73 |
 | skin | formed | 1 | Cast acrylic sheet, tinted through, drape-formed over an aluminium mould | 111 cm3, 182 x 182 x 81 | 1,212.30 |
 | rim | lathe | 1 | Cast acrylic tube, tinted through | 192 x 192 x 14 | 65.26 |
@@ -29,9 +29,9 @@
 | | USD |
 |---|---|
 | buy | 87 |
-| formed | 3,959 |
+| formed | 3,955 |
 | lathe | 558 |
-| total | 4,604 |
+| total | 4,599 |
 
 No price yet for: UL or Intertek (ETL) Listing the pendant to UL 1598 (and the table lamp's battery and charger to UL 153 / IEC 62368): a one-off cost a design, spread over the first run.
 
