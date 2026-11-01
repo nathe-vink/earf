@@ -263,3 +263,17 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
   path, shrouded button-top contacts, back-to-back FETs, USB PD 9 V, redrawn dock, coulomb counting, ~2.7 h to 90 %).
   No change to the looks. CAD pass approved (+1.5 h), then stop. Copy stays "about five hours" until benched.
 - Four-pieces: current-Tropos pass stopped; Strata pass (day, dusk) running with the fixed asset.
+
+## Engineering audit follow-through (02:30-02:45 UTC)
+- ENGINEERING-AUDIT.md + raw results committed (88bba1fa). Reviewed verdicts: Tropos not yet sound mechanically
+  (IEC 62368-1 8.6.2.2 20 % push fails as drawn; horn retention), electro-acoustics legitimate; Hemisphere and Core not yet
+  sound -> fixed in spec 367709bf and CAD 5e4b7aba (0 clashes; Core's board still to design; Core's CAD still draws the
+  old cable: remove per the cordless ruling); Mantle not yet sound (drive ratio vs the Neo's output frequency to bench, no
+  rear panel, LED strip fit, DPDT bypass, bearing oil/vent, feet ~190 Hz, motor mount, lid vs arm, Outcrop's tunnel);
+  Mother EARF not yet sound (no hang point/armature, cement-only joints, doors, no light source, fire code).
+- Deck v32-v33: risks + light claims corrected. Site e46ec0c0: clean (Core "three standard LiFePO4 cells"). Brand 147ae5b6:
+  FALSE claims removed ("certification booked", "the tests the prototypes passed", "they're measured", "we tested them");
+  Hemisphere "A 575-lumen LED"; Core cells/hours; Tropos ~74 kg.
+- Speaker lane: lining diagnostic done (c77460f0); now the stability/horn-retention list; will ask before any base change
+  that alters the look.
+- Lamps lane: stopped after the CAD pass.
