@@ -215,3 +215,7 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
   "No cord: it goes where the conversation is." / "Cordless: about five hours a charge at full brightness, longer
   dimmed; it charges in two to three hours, on cells you can replace yourself." (flag: changes if the owner picks the
   OEM Li-ion pack). 65 routes clean; Lighthouse mobile home 95/95/95. Fast-forward from main; HOLDING, no deploy.
+- Editions 8c8d5338 (01:04): Iron in the lamps' pass-4 Core rig (Widmanstaetten redrawn; clear PMMA absorption fixed),
+  rounds 5.0, 5.0, r3 rendering; Stamper bright-field, now Bedrock in water-clear (the Smoke stratum read black), r1 4.0;
+  Firn stopped (hero_b 5.5 x3). No frame at 6.5 yet. Next: Iron r3, Stamper r2, macros, summary.
+- Engineering audit (wf_32ea5a79-234): Tropos and lamps audits in (00:48), reviews and Mantle/Mother running.
