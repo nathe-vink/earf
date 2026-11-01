@@ -332,7 +332,7 @@ def shot_lithos(sc):
     # critic r1: oak planks and lime plaster from the studio engine; the corner behind and right of the lamp; skirting
     sys.path.insert(0, os.path.join(HERE, '..', '..', '..', '..', 'studio', 'engine')); import materials as SM
     slab('floor', -3.0, -3.0, -0.03, 0.95, 0.8, 0.0, ph('oak_wood_planks'))   # look 2: photographed oak
-    plaster = ph('beige_wall_001', tint='#DCD5CA', tint_mix=0.6, bump=0.4)   # L2 c3
+    plaster = ph('beige_wall_001', tint='#DCD5CA', tint_mix=0.45, bump=1.2)   # L2r2 c3: the plaster's surface shows   # L2 c3
     slab('wallB', -3.0, 0.8, 0, 0.95, 0.85, 3, plaster)
     slab('wallR', 0.9, -3.0, 0, 0.95, 0.85, 3, plaster)
     skirt = basic('skirting', '#E8E2D8', 0.4)
@@ -368,14 +368,14 @@ def shot_lithos(sc):
         for o in parts:
             o.location = (0.34, -0.12, 0); o.rotation_euler = (0, 0, 0.3 + 0.08 * i)
     sc.render.resolution_x, sc.render.resolution_y = 1200, 1800
-    area('window', (-1.77, -0.31, 1.0), (0.0, 0.0, 0.6), 1.0, 120, '#FFF1E2', size_y=1.6)  # soft daylight, camera-left (L2 c1)
-    sn = spot('sun', (-1.45, -1.65, 0.62), (0.0, 0.0, 0.62), 3500, 50, 0.004, '#FFF1DE'); sn.data.spot_blend = 0.8   # L2 c1: the hard key from the front-left, low: the banded shadow lands on the back wall, right of the column
-    area('fill', (0.6, -2.4, 1.0), (0, 0, 0.6), 1.2, 2, '#DDE6F2')                           # L2 c4
+    area('window', (-1.6, 0.4, 1.2), (0.3, 0.8, 0.8), 1.0, 50, '#FFF1E2', size_y=1.6)   # L2r2 c1: raking the wall from the side  # soft daylight, camera-left (L2 c1)
+    sn = spot('sun', (-2.9, -3.3, 0.75), (0.0, 0.0, 0.62), 9000, 30, 0.004, '#FFF1DE'); sn.data.spot_blend = 0.8   # L2r2 c2: twice as far: the wall shadow near the lamp's own size, and it runs across the floor   # L2 c1: the hard key from the front-left, low: the banded shadow lands on the back wall, right of the column
+    area('fill', (0.6, -2.4, 1.0), (0, 0, 0.6), 1.2, 1, '#DDE6F2')                           # L2 c4
     bc = slab('bounce', -1.4, -4.3, 0.0, 0.6, -4.28, 2.0, basic('bounce', '#EDE8E0', 0.9)); bc.visible_camera = False   # L2 c2: the polished bands see a lit room, not a void
     back = area('back', (0.12, 0.7, 1.05), (0, 0, 1.0), 0.5, 10, '#FFF0E0', size_y=1.5)     # L2 c6
     back.visible_glossy = False
     sc.view_settings.exposure = -0.8                                                            # r2 c2
-    camera((-0.45, -2.60, 0.70), (0.10, 0.0, 0.62), lens=65, fstop=2.8, focus=2.62)            # r2 c7
+    camera((-0.59, -3.40, 0.70), (0.10, 0.0, 0.62), lens=85, fstop=2.0, focus=3.43)   # L2r2 c8            # r2 c7
 
 def shot_ionos(sc):
     sc.world.node_tree.nodes['Background'].inputs['Color'].default_value = lin('#D9D3CA')
