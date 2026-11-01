@@ -1,0 +1,131 @@
+{
+ "image_1920": "v3-dusk-1920.png",
+ "image_3840": "v3-dusk-3840.jpg",
+ "size": [
+  1920,
+  1080
+ ],
+ "note": "pixels at 1920 x 1080, [x0, y0, x1, y1] from the top left; label zones 380 x 130, 40-80 px from their product; tone is the ground under the zone (light: use dark ink; dark: use light ink)",
+ "products": {
+  "tropos": {
+   "name": "Tropos",
+   "bbox": [
+    523,
+    425,
+    751,
+    856
+   ],
+   "label_zone": [
+    447,
+    239,
+    827,
+    369
+   ],
+   "label_side": "above",
+   "tone": "dark",
+   "zone_luminance": {
+    "median": 74.9,
+    "p5": 65.0,
+    "p95": 86.7,
+    "spread": 21.6,
+    "block_range": 24.5
+   },
+   "note": "the pair; the box and zone are the left speaker's",
+   "bbox_right": [
+    1169,
+    425,
+    1397,
+    856
+   ]
+  },
+  "mantle": {
+   "name": "Mantle",
+   "bbox": [
+    885,
+    629,
+    1035,
+    699
+   ],
+   "label_zone": [
+    770,
+    459,
+    1150,
+    589
+   ],
+   "label_side": "above",
+   "tone": "dark",
+   "zone_luminance": {
+    "median": 85.0,
+    "p5": 72.6,
+    "p95": 94.3,
+    "spread": 21.7,
+    "block_range": 33.0
+   }
+  },
+  "core": {
+   "name": "Core",
+   "bbox": [
+    250,
+    670,
+    376,
+    783
+   ],
+   "label_zone": [
+    123,
+    484,
+    503,
+    614
+   ],
+   "label_side": "above",
+   "tone": "dark",
+   "zone_luminance": {
+    "median": 51.8,
+    "p5": 43.2,
+    "p95": 59.1,
+    "spread": 15.9,
+    "block_range": 20.9
+   }
+  },
+  "hemisphere": {
+   "name": "Hemisphere",
+   "bbox": [
+    1520,
+    135,
+    1674,
+    230
+   ],
+   "label_zone": [
+    1084,
+    117,
+    1464,
+    247
+   ],
+   "label_side": "left",
+   "tone": "dark",
+   "zone_luminance": {
+    "median": 104.6,
+    "p5": 99.1,
+    "p95": 110.7,
+    "spread": 11.6,
+    "block_range": 12.2
+   }
+  }
+ },
+ "header": {
+  "zone": [
+   100,
+   60,
+   1000,
+   220
+  ],
+  "tone": "dark",
+  "zone_luminance": {
+   "median": 68.0,
+   "p5": 50.1,
+   "p95": 91.8,
+   "spread": 41.6,
+   "block_range": 48.7
+  }
+ },
+ "layout_problems": []
+}
