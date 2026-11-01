@@ -308,6 +308,83 @@ def base_lit(view='hero', glow=None):
     return s
 
 
+def deck_hero():
+    """The deck's Tropos slide (the owner's final design, 2026-11-01): Strata in Ember on the lit plinth, the studio,
+    2:3 portrait (shown at 720 x 1080, object-fit cover), the glow subtle but visible."""
+    s = base_lit('hero', glow=80.0)
+    s['title'] = 'Tropos, the deck hero (Strata, flush horn, lit plinth, Ember)'
+    s['size'] = [1440, 2160]
+    s['render']['samples'] = 192
+    return s
+
+
+SHOTS['deck-hero'] = deck_hero
+
+
+def strata_lit(s, glow=None):
+    """Any shot's Tropos instances turned into the owner's final design: Strata (its horn, posts, caldera; the Cloud's
+    formed horn, posts, cloth disc, ring and feet hidden) on the lit stepped plinth, everything lifted onto it."""
+    blk = s.pop('product') if 'product' in s else s.pop('products')[0]
+    lift = BASES['plinth'][1]
+    inst = []
+    for i in blk['instances']:
+        x, y, z = (list(i.get('position', [0, 0, 0])) + [0, 0, 0])[:3]
+        inst.append({**i, 'position': [x, y, z + lift],
+                     'hide': sorted(set(i.get('hide', [])) | set(HORN_PARTS) - {'horn-pads'} | {'cloth-disc', 'woofer-ring', 'post-*', 'post-sockets', 'post-sleeves', 'feet-base', 'feet-stem'})})
+    keep = lambda i: {k: v for k, v in i.items() if k not in ('hide', 'options')}
+    s['products'] = [{**blk, 'instances': inst},
+                     {'def': VARIANTS, 'flavour': blk.get('flavour', 'cloud-red'),
+                      'instances': [{**keep(i), 'hide': ['horn-topo*', 'base-out*'], 'options': ['Plinth', 'Plinth light']} for i in inst]}]
+    if glow is not None:
+        s.setdefault('materials', {})['led'] = {'glow': glow}
+    return s
+
+
+def deck_row():
+    """The deck's Colors slide: the eight in a row on white (studio31's line-up rig), Ember to Smoke, 3328 x 1040."""
+    s = strata_lit(load('studio/shots/barkhorn/studio31/lineup.json'), glow=60.0)
+    s['title'] = 'Tropos, the eight in a row (Strata on the lit plinth)'
+    s['size'] = [3328, 1040]
+    s['render']['samples'] = 160
+    return s
+
+
+SHOTS['deck-row'] = deck_row
+
+
+def deck_cover():
+    """The deck's cover (shown 1920 x 680 across the slide's bottom): the eight on one gentle curve in hero31's studio,
+    each turned to the camera, the plinths glowing faintly; a calm, wide frame, 3840 x 1360, its top third clear for the
+    headline."""
+    import math
+    s = load('studio/shots/barkhorn/hero31/hero.json')
+    blk = s['product'] if 'product' in s else s['products'][0]
+    order = ['cloud-red', 'cloud-orange', 'cloud-amber', 'eucalyptus-y2k-green', 'cloud-blue', 'cloud-violet', 'birch-fog-clear', 'cloud-black']
+    cam_y = -15.0
+    inst = []
+    for k, fl in enumerate(order):
+        x = (k - 3.5) * 0.98
+        y = 0.9 - 0.055 * x * x                      # the ends a little forward, a gentle curve
+        rz = math.degrees(math.atan2(x, y - cam_y))   # each turned to face the camera
+        inst.append({'position': [round(x, 4), round(y, 4), 0.0], 'rotate_z': round(rz, 2), 'flavour': fl, 'hide': ['cloth-disc']})
+    blk['instances'] = inst
+    s = strata_lit(s, glow=35.0)
+    s['title'] = 'Tropos, the deck cover: the eight on a curve (Strata on the lit plinth)'
+    s['size'] = [3840, 1360]
+    # (its first test at eye level with a 0.11 shift: the bases cut and no curve; a little higher, less shift)
+    s['camera'] = {'position': [0.0, cam_y, 2.3], 'target': [0.0, 0.5, 0.62], 'lens_mm': 56.0, 'level': True,
+                   'shift_y': 0.05, 'fstop': 5.6, 'focus': [0.0, 0.3, 0.7]}
+    s['render']['samples'] = 128
+    return s
+
+
+SHOTS['deck-cover'] = deck_cover
+# the deck's Home slide: the golden-hour room (754e16a9's scene, covers off) with the pair turned into the final design
+SHOTS['deck-home'] = lambda: dict(strata_lit(room_off(), glow=30.0), title='Tropos at home, golden hour, Poison (the final design)')
+SHOTS['deck-home-portrait'] = lambda: dict(strata_lit(room_off_portrait(), glow=30.0),
+                                           title='Tropos at home, golden hour, Poison, portrait (the final design)')
+
+
 for _v in ('hero', 'dusk', 'three-quarter'):
     SHOTS['base-plinth-lit' + {'hero': '', 'dusk': '-dusk', 'three-quarter': '-34'}[_v]] = (lambda v=_v: base_lit(v))
 
