@@ -460,6 +460,9 @@ def _site_round2(s, frame):
         s['render'].update(white_balance_k=5900, white_balance_tint=0.0)
         c.update(core_strength=1.0, core_distance_m=0.015, distance_m=0.35)
         L['key']['size_m'] = [1.4, 1.8]; L['key']['orbit'].update(azimuth_deg=-45, elevation_deg=28)
+        # (round 3: the black reflect-only flag at [1.6, -1.2, 1.2] stood between the side face and the moved sidesheen,
+        # so the face still mirrored black; the coordinator, 2026-11-01: take it out)
+        s['set']['flags'] = [f for f in s['set'].get('flags', []) if f.get('center_m') != [1.6, -1.2, 1.2]]
     elif frame == 'back':
         L['wash']['irradiance'] = 0.3                                                   # the side and top mirrored it
         L['glow'].update(irradiance=5.0, transmission=True, size_m=[0.9, 0.5])
