@@ -494,3 +494,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   lamps (LiFePO4 board RFQ draft, the dock drawn and the notch closed, v3 the main build, re-run the lamps-and-Mantle budget), speaker
   (schedule + RFQ to 2064 first pair, close-ups kept beside whole shots, site set queued after deck frames), four-pieces (re-render the
   room with Strata Float after the 2092 frames: -final-2092-sf), site (copy drafts). Tagline workflow wf_9bb8d840-719 running.
+- 12:30 four-pieces 5f04bb0e (day -final-2092): Tropos stock codes (near-black cabinets over black sleeves, bottle-green horns), Mantle
+  plinth 2092, Core 1/3 loading; Hemisphere reads cream (v2 construction, before the owner's v3 pick) -> -final-2092-sf re-render gets
+  Strata Float v3 + Hemisphere v3. Dusk-2092 ~12:55 -> deck interim.
+- Speaker 11ebcb40: schedule + RFQ drafts on the first pair in 2064 (thin parts and port tube 2064; horn 2074); three close-ups kept
+  (caldera Ember, horn layers Ice, plinth at dusk Smoke), site set ~18.5 h queued after the deck frames. Coordinator's call (on the board
+  for the owner to overrule): caldera rings and plinth in 2064 1/2 in for a one-tone body; the horn stays 2074 (deep, by the horn ruling).
