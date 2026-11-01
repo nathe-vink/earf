@@ -453,9 +453,27 @@ def orb_parts(p=O):
     base = base - cyl('z', (0, 0), 50.4, -1, uz) - cyl('z', (0, 0), 30, uz - 0.1, bh) - bay
     base = base - (cyl('z', (0, 0), 108.4, -1, z0c + d + 0.6) - cyl('z', (0, 0), 53.6, -2, 31) - _chords(a, L, d, -0.2) -
                    at(uang, box(30, -7.8, -2, 70, 7.8, 31)))
-    base = base - notch - at(uang, box(42.5, -5.5, -1, 51, 5.5, 10.5))
-    hatch = cyl('z', (0, 0), 111.6, 0.2, hz) - notch
-    foot = cyl('z', (0, 0), 117.6, 0.2, 2) - cyl('z', (0, 0), 114.4, 0, 3) - notch
+    # the owner signed the contact dock (2026-11-01, r46-owner-notes 5b63e05b): the cable notch is closed; the USB-C
+    # (service and travel) faces down through a slot in the hatch; the hatch takes the dock's contacts: a Ø8 hole on
+    # the axis and a ring groove (r 17 to 23, 1.8 deep) over two spring pins on a small board under the chassis
+    base = base - at(uang, box(42.5, -5.5, -1, 51, 5.5, 10.5))
+    pin_a = math.radians(140.0)
+    pin2 = (20.0 * math.cos(pin_a), 20.0 * math.sin(pin_a))
+    hatch = (cyl('z', (0, 0), 111.6, 0.2, hz) - at(uang, box(44.0, -4.6, -1, 49.5, 4.6, 3)) - cyl('z', (0, 0), 8.0, -1, 3) -
+             (cyl('z', (0, 0), 46.0, -1, 2.0) - cyl('z', (0, 0), 34.0, -2, 3)) - cyl('z', pin2, 3.0, -1, 3))
+    foot = cyl('z', (0, 0), 117.6, 0.2, 2) - cyl('z', (0, 0), 114.4, 0, 3)
+    pins = cyl('z', (0, 0), 1.5, 1.7, 9.0) + cyl('z', pin2, 1.5, 1.7, 9.0)          # drawn on the dock: compressed 1.0
+    pinboard = cyl('z', (0, 0), 46.0, 9.0, cz0)
+    # the dock (in the box; drawn under the lamp): Ø150 x 8 polished black cast acrylic, a 1.5 pocket Ø122 the base sits
+    # in, a 304 stainless post Ø6 on the axis (+) and a ring r 18.5 to 21.5 (-), 1.7 proud of the pocket's floor, so
+    # they rise into the hatch's hole and groove (the pins, free 0.7 above the foot's face, work at 1.0 of their 1.5);
+    # its board in a pocket at the back, the USB-C cable leaving through a channel in the back edge
+    dz0 = -6.5
+    contacts = cyl('z', (0, 0), 6.0, -2.0, 1.7) + (cyl('z', (0, 0), 43.0, -2.0, 1.7) - cyl('z', (0, 0), 37.0, -3, 2))
+    dock_board = box(-19.0, 46.0, -4.5, 19.0, 69.0, -2.9)
+    dock_cable = cyl('y', (0, -2.75), 4.0, 74.6, 180.0)
+    dock = (eased(150.0, dz0, 1.5, 1.5) - cyl('z', (0, 0), 122.0, 0, 3) - contacts - box(-20.0, 45.0, -5.0, 20.0, 70.0, -1.0) -
+            cyl('y', (0, -2.75), 4.2, 60.0, 80.0))
     base = base - (cyl('z', (0, 0), 118, -1, 2) - cyl('z', (0, 0), 114, -2, 3)) - cyl('z', (0, 0), 92.4, zs - 2, zs + 0.01)
     ring = eased(bd, bh, z_top, 2.0, bottom=False) - cup
     ring = ring - (cyl('z', (0, 0), 92.4, zs - 2, zs + 0.01) - cyl('z', (0, 0), 83.6, zs - 3, zs + 1))
@@ -510,7 +528,17 @@ def orb_parts(p=O):
         Part('usb', usb, Bought('orb-seals'), finish='steel', group='base', inside=True, render=False),
         Part('seat', seat, Bought('orb-seat'), finish='silicone', group='base'),
         Part('foot-ring', foot, Bought('core-foot'), finish='silicone', group='base'),
-        Part('cable', None, Bought('orb-cable')),            # cordless (the owner, 2026-10-31): in the box only, not drawn
+        Part('pins', pins, Bought('core-dock-pins'), finish='steel', group='base', inside=True,
+             notes=['two gold-plated spring pins, 1.5 travel, about 0.8 N at 1.0: + on the axis, - at r 20; on the pin '
+                    'board, through the hatch\'s hole and groove; free, their tips sit 0.7 above the foot\'s face']),
+        Part('pinboard', pinboard, Bought('core-pinboard'), finish='steel', group='base', inside=True, render=False),
+        Part('dock', dock, Machined('cast-acrylic', 'lathe', setup_usd=80.0), finish='trim', group='dock',
+             notes=['the contact dock (signed 2026-11-01): Ø150 x 8, polished black cast acrylic, turned; a 1.5 pocket '
+                    'Ø122 the base sits in; the contacts pressed in; a pocket at the back for its board and a channel '
+                    'for the cable; silicone dots underneath (CORE-RECHARGE.md)']),
+        Part('dock-contacts', contacts, Bought('core-dock-contacts'), finish='steel', group='dock'),
+        Part('dock-board', dock_board, Bought('core-dock-board'), finish='steel', group='dock', inside=True, render=False),
+        Part('dock-cable', dock_cable, Bought('orb-cable'), finish='fabric', group='dock'),
         Part('adapter', None, Bought('orb-adapter')),
         Part('screws', None, Bought('core-screws')),
         Part('tray', None, Bought('core-tray')),
@@ -606,7 +634,9 @@ TOUCHING_ORB = [('grommet', 'shell'), ('window', 'base'), ('seat', 'base'), ('ri
                 ('chassis', 'base'), ('ballast', 'chassis'), ('ballast', 'base'), ('cable', 'base'), ('board', 'chassis'),
                 ('foot-ring', 'base'), ('cells', 'holder'), ('hatch', 'base'), ('usb', 'base'), ('cable', 'hatch'),
                 ('led', 'chassis'), ('holder', 'base'), ('holder', 'hatch'), ('ballast', 'hatch'), ('chassis', 'board'),
-                ('window', 'led'), ('usb', 'hatch'), ('pads', 'chassis'), ('pads', 'ring'), ('pads', 'base')]
+                ('window', 'led'), ('usb', 'hatch'), ('pads', 'chassis'), ('pads', 'ring'), ('pads', 'base'),
+                ('pins', 'pinboard'), ('pinboard', 'chassis'), ('dock-contacts', 'dock'), ('base', 'dock'),
+                ('foot-ring', 'dock'), ('dock-cable', 'dock'), ('pins', 'dock-contacts')]
 
 
 # Hemisphere South, DROPPED (the owner, 2026-10-25: "Get rid of south altogether and just call it hemisphere."). Kept as a record.

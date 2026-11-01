@@ -20,6 +20,12 @@
    "radius": 0.005,
    "roughness": 0.04
   },
+  "fabric": {
+   "preset": "rubber",
+   "color": "#141414",
+   "roughness": 0.8,
+   "sheen": 0.4
+  },
   "led": {
    "preset": "emit",
    "color": "#FFC890",
@@ -68,6 +74,10 @@
    "material": "body"
   },
   {
+   "match": "dock-cable",
+   "material": "fabric"
+  },
+  {
    "match": "led",
    "material": "led"
   },
@@ -80,11 +90,11 @@
    "material": "silicone"
   },
   {
-   "match": "chassis|ballast",
+   "match": "chassis|ballast|pins|dock-contacts",
    "material": "steel"
   },
   {
-   "match": "base|holder",
+   "match": "base|holder|dock",
    "material": "trim"
   },
   {

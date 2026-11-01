@@ -18,18 +18,23 @@
 | usb | buy | 1 | Two EPDM O-rings (the window, the chassis to the drum), a silicone foot ring 110 x 2 (Shore 40, non-slip), a sealed USB-C receptacle (IP67 rated, e.g. GCT USB4135 kind): IP44 |  | 5.00 |
 | seat | buy | 1 | A silicone seat ring 92 x 84 x 1.5 (Shore 40, black) in the base's cup: the ball rests on it, and it stops a nudge rolling it |  | 1.50 |
 | foot-ring | buy | 1 | A silicone foot ring 117 x 114 x 2 (Shore 40, non-slip), and the hatch's O-ring |  | 2.00 |
-| cable | buy | 1 | any (made to order) A slim black braided-fabric USB-C to USB-C cable, 2 m, 3 A, a black right-angle overmoulded plug for the notch |  | 6.00 |
+| pins | buy | 1 | Mill-Max (to choose) Two gold-plated spring-loaded pins, about 1.5 mm travel, low force (about 0.8 N at 1.0 mm), on the pin board: + on the axis, - at r 20 |  | 3.00 |
+| pinboard | buy | 1 | to make (with the main board) A Ø46 x 1.6 board under the chassis carrying the dock's two pins, wired to the main board's dock input (its ideal diode and PD path) |  | 4.00 |
+| dock | lathe | 1 | Cast acrylic tube, tinted through | 160 x 160 x 18 | 103.43 |
+| dock-contacts | buy | 1 | to make (a turning shop) 304 stainless, turned and lapped: a post Ø6 (+) and a ring r 18.5 to 21.5 (-), pressed into the dock, 1.7 proud of its pocket |  | 8.00 |
+| dock-board | buy | 1 | to make (a contract PCB house) The dock's board: a USB PD sink asking 9 V (STUSB4500 or CH224K class), a resettable fuse, a load switch that powers the contacts only when it sees the lamp's 47 kOhm sense resistor, a USB-C receptacle at the back edge |  | 6.00 |
+| dock-cable | buy | 1 | any (made to order) A slim black braided-fabric USB-C to USB-C cable, 2 m, 3 A, its plug into the dock's back edge (the dock signed 2026-11-01; the base's notch is closed); the same cable charges the lamp directly at its USB-C under the hatch for travel |  | 6.00 |
 | adapter | buy | 1 | any (UL/CE listed) A 20 W USB-C wall adapter, black, UL 62368-1 listed, DOE Level VI external power supply: it is part of Core's battery charger system as tested (the DOE standard and California Title 20, listed in the CEC's MAEDbS under Core's model number) |  | 7.00 |
 | screws | buy | 1 | Four captive M3 x 6 stainless pan-head screws (Phillips or Torx T10) with retaining washers, for the hatch |  | 1.50 |
 | tray | buy | 1 | to make (a sheet-metal shop) Review 2026-11-01 (UL 153 SA): a 0.5 mm 304 stainless tray formed round Core's three cell bays and the chassis's corners, open only at the aluminium hatch, so the cells sit in metal on every side; it holds them if the acrylic cracks in a drop. Fallback: a 0.4 mm UL 94 V-0 polypropylene liner (Formex GK class) |  | 9.00 |
 
 | | USD |
 |---|---|
-| buy | 88 |
+| buy | 109 |
 | formed | 1,547 |
-| lathe | 257 |
+| lathe | 360 |
 | mill | 148 |
-| total | 2,039 |
+| total | 2,164 |
 
 
 ## Options (each for 1, on top of the total above)

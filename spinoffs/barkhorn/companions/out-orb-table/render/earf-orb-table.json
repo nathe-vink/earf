@@ -27,7 +27,7 @@
   "base": [
    -60.0,
    -60.0,
-   -0.0,
+   0.0,
    60.0,
    60.0,
    30.0
@@ -111,6 +111,38 @@
    58.8,
    58.8,
    2.0
+  ],
+  "pins": [
+   -16.1,
+   -0.8,
+   1.7,
+   0.8,
+   13.6,
+   9.0
+  ],
+  "dock": [
+   -75.0,
+   -75.0,
+   -6.5,
+   75.0,
+   75.0,
+   1.5
+  ],
+  "dock-contacts": [
+   -21.5,
+   -21.5,
+   -2.0,
+   21.5,
+   21.5,
+   1.7
+  ],
+  "dock-cable": [
+   -2.0,
+   74.6,
+   -4.8,
+   2.0,
+   180.0,
+   -0.7
   ]
  },
  "finishes": {
@@ -127,6 +159,10 @@
   "holder": "trim",
   "hatch": "anodised",
   "seat": "silicone",
-  "foot-ring": "silicone"
+  "foot-ring": "silicone",
+  "pins": "steel",
+  "dock": "trim",
+  "dock-contacts": "steel",
+  "dock-cable": "fabric"
  }
 }

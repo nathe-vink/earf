@@ -98,8 +98,8 @@ def plan(cx, cy):
     # the cable's notch at the back (up in the plan)
     o.append(rect(cx - 4 * S, cy - r_d - 1, 8 * S, 6 * S, fill='#FFFFFF', c=INK, sw=1.0))
     o.append(line(cx, cy - r_d - 1, cx, cy - r_d - 70, 4.0, '#141414'))
-    o.append(dim_h(cx - p['ring_r'][1] * S, cx + p['ring_r'][1] * S, cy + r_d + 26, '− ring Ø40, on a 2.0 island'))
-    o.append(dim_h(cx - p['ring_r'][0] * S, cx + p['ring_r'][0] * S, cy + r_d + 50, '+ center disc Ø12'))
+    o.append(dim_h(cx - p['ring_r'][1] * S, cx + p['ring_r'][1] * S, cy + r_d + 26, '− ring Ø37–43, 1.7 proud'))
+    o.append(dim_h(cx - p['ring_r'][0] * S, cx + p['ring_r'][0] * S, cy + r_d + 50, '+ post Ø6, 1.7 proud'))
     o.append(text(cx, cy + r_d + 80, 'concentric: Core charges at any rotation', 13))
     o.append(text(cx + 8, cy - r_d - 52, 'back', 12, 'start', MUTED))
     return ''.join(o)
@@ -108,9 +108,9 @@ def plan(cx, cy):
 def main():
     W, H = 1900, 980
     body = [f'<rect width="{W}" height="{H}" fill="#F4F1EC"/>',
-            text(60, 60, 'Core on its contact dock (CORE-RECHARGE.md, route b): a proposal', 22, 'start', INK, '600'),
-            text(60, 88, 'Section through the axis (left) and the dock’s plan (right). Millimeters. Core’s CAD unchanged until '
-                         'the owner signs.', 14, 'start', MUTED),
+            text(60, 60, 'Core on its contact dock (CORE-RECHARGE.md, route b): signed 2026-11-01', 22, 'start', INK, '600'),
+            text(60, 88, 'Section through the axis (left) and the dock’s plan (right). Millimeters. Drawn in the CAD (out-orb-table), '
+                         'the lamp seated, its pins compressed.', 14, 'start', MUTED),
             section(700, 790), plan(1560, 480),
             text(60, H - 40, 'Off the dock the pins are dead (an ideal diode on each input); the rings are powered only '
                              'when the dock sees the lamp’s 47 kΩ sense resistor. USB PD at 9 V.', 13, 'start', MUTED)]

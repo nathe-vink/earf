@@ -469,7 +469,7 @@
  "orb-cable": {
   "kind": "wiring",
   "maker": "any (made to order)",
-  "model": "A slim black braided-fabric USB-C to USB-C cable, 2 m, 3 A, a black right-angle overmoulded plug for the notch",
+  "model": "A slim black braided-fabric USB-C to USB-C cable, 2 m, 3 A, its plug into the dock's back edge (the dock signed 2026-11-01; the base's notch is closed); the same cable charges the lamp directly at its USB-C under the hatch for travel",
   "usd": 6,
   "estimate": true,
   "supplier": "a cable maker (Shenzhen)",
@@ -835,6 +835,42 @@
   "usd": 28.0,
   "estimate": true,
   "supplier": "the shade former",
+  "price_date": "2026-11-01"
+ },
+ "core-dock-pins": {
+  "kind": "hardware",
+  "maker": "Mill-Max (to choose)",
+  "model": "Two gold-plated spring-loaded pins, about 1.5 mm travel, low force (about 0.8 N at 1.0 mm), on the pin board: + on the axis, - at r 20",
+  "usd": 3.0,
+  "estimate": true,
+  "supplier": "Mouser or Digi-Key",
+  "price_date": "2026-11-01"
+ },
+ "core-pinboard": {
+  "kind": "control",
+  "maker": "to make (with the main board)",
+  "model": "A Ø46 x 1.6 board under the chassis carrying the dock's two pins, wired to the main board's dock input (its ideal diode and PD path)",
+  "usd": 4.0,
+  "estimate": true,
+  "supplier": "a PCB assembler, about 500 off",
+  "price_date": "2026-11-01"
+ },
+ "core-dock-contacts": {
+  "kind": "hardware",
+  "maker": "to make (a turning shop)",
+  "model": "304 stainless, turned and lapped: a post Ø6 (+) and a ring r 18.5 to 21.5 (-), pressed into the dock, 1.7 proud of its pocket",
+  "usd": 8.0,
+  "estimate": true,
+  "supplier": "a turning shop",
+  "price_date": "2026-11-01"
+ },
+ "core-dock-board": {
+  "kind": "control",
+  "maker": "to make (a contract PCB house)",
+  "model": "The dock's board: a USB PD sink asking 9 V (STUSB4500 or CH224K class), a resettable fuse, a load switch that powers the contacts only when it sees the lamp's 47 kOhm sense resistor, a USB-C receptacle at the back edge",
+  "usd": 6.0,
+  "estimate": true,
+  "supplier": "a PCB assembler, about 500 off",
   "price_date": "2026-11-01"
  }
 }

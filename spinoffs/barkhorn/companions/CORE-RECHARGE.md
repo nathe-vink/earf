@@ -1,5 +1,26 @@
 # Core: recharging with no cord in sight (2026-10-31)
 
+**Signed (the owner, 2026-11-01, r46-owner-notes 5b63e05b):** "Core battery: A, LiFePO4" and "Core charging: sign the
+dock". The dock is now Core's design, drawn in `crystal.py` (`out-orb-table/`): see "The dock as built" below. The
+battery stays three standard LiFePO4 cells on a board bought as a fixed-price design (Option 2 below; the request to
+design houses is drafted in `launch/core-board-rfq.md`, not sent). Option 1 (the OEM board and a Li-ion pack) stays here
+as the alternative.
+
+### The dock as built (2026-11-01), replacing the island drawn earlier
+
+The first draft put the contacts on a 2.0 island under pins recessed 0.5, but the hatch sits only 0.2 above the foot's
+face, so an island has no room. As drawn now:
+- **On the dock:** a 304 stainless post Ø6 on the axis (+) and a ring r 18.5 to 21.5 (−), both 1.7 proud of the
+  pocket's floor.
+- **In the lamp:** they rise into a Ø8 hole on the axis and a ring groove (r 17 to 23, 1.8 deep) in the hatch's
+  underside. Two gold spring pins sit in them, on a Ø46 pin board under the chassis: + on the axis, − at r 20.
+- **The pins:** free, their tips sit 0.7 above the foot's face, out of reach of a table. On the dock they work at 1.0
+  of their 1.5 travel, about 0.8 N each. Still rotation-free.
+- **The notch is closed.** The USB-C (service and travel) faces down through a slot in the hatch.
+- **The dock:** its board sits in a pocket at its back, and its cable leaves through a channel in the back edge.
+- **Clash checks pass.**
+
+
 **A proposal for the owner to sign.** It answers the owner's ruling of 2026-10-31 (saved at `r46-owner-notes`
 a883091275401471b7fc329927a263c6313e420a): *"the orb definitely looked better without the cord, so lets redo the
 design of that to allow for recharging"*.
@@ -136,7 +157,7 @@ What public search found:
 | A listed battery pack | Tenergy sells protected 18650 Li-ion packs, for example the 31001 (1S2P, 5200 mAh, 19.24 Wh), $33.30 at BatteryJunction [Q]. Tenergy's LiFePO4 18650 (30085, 1450 mAh) is sold as a bare cell | ask Tenergy for the UL 2054 / IEC 62133-2 file numbers [check]; none appeared in the listings |
 | A listed charger | the 20 W USB-C adapter (bought, listed by its maker) | as now |
 
-### Option 1 (recommended for v1, if the owner accepts Li-ion): the OEM board and a listed pack
+### Option 1 (the alternative; the owner chose Option 2 on 2026-11-01): the OEM board and a listed pack
 
 - **The electronics:** a lamp OEM adapts its cordless-lamp board to Core:
   - our 48 mm ring;
@@ -155,7 +176,7 @@ What public search found:
 - The pack's own certificates replace the per-cell ones.
 - **This is a spec change** (PARTICULARS: "Three LiFePO4 18650 cells"). It is the owner's to sign.
 
-### Option 2: keep LiFePO4, buy the board as a package
+### Option 2 (signed 2026-11-01): keep LiFePO4, buy the board as a package
 
 - The design as `boards.md` specifies it, bought from a design house at a fixed price, with the LTC4162-F evaluation
   kit as the bench reference.
