@@ -40,9 +40,10 @@ HORN_TINT = ('the speaker\'s color, the horn\'s own heavier lot per color (about
              'Smoke about 7), matched to a chip we approve; please quote in Smoke')
 POLISH = 'edges milled square; show edges polished; annealed before cementing'
 # the first pair in stock sheet (make/stock-pair.md); its color is chosen at order (the owner, 2026-10-31), so Smoke is
-# the pricing reference only: TruCast 2074 throughout since 2026-11-01 (3/4 in a mill run, 2064 the stocked fallback)
-STOCK_CAB = 'chosen at order; quote in Smoke: TruCast 2074 Dark Gray 3/4 in (19 mm) cell-cast, a mill run (2074 is stocked only to 1/2 in; please say if you can source or pour it, and the minimum); stocked 2064 Gray 3/4 in as the fallback'
-STOCK_THIN = 'chosen at order; quote in Smoke: TruCast 2074 Dark Gray cell-cast, stock, in the nearest stock thickness to the one listed'
+# the pricing reference only: the owner (2026-11-01): the first pair's cabinet in stocked 2064 3/4 in, the horn, caldera and
+# plinth in 2074 1/2 in; later pairs' cabinets 2074 by mill run
+STOCK_CAB = 'chosen at order; quote in Smoke: the first pair in stocked TruCast 2064 Gray 3/4 in (19 mm) cell-cast (AC Plastics); later pairs in 2074 Dark Gray 3/4 in by mill run (stocked only to 1/2 in): please price both'
+STOCK_THIN = 'chosen at order; quote in Smoke: TruCast 2064 Gray cell-cast (the first pair\'s cabinet code), stock, in the nearest stock thickness to the one listed'
 STOCK_HORN = 'chosen at order; quote in Smoke: TruCast 2074 Dark Gray 1/2 in cell-cast, stock, the cabinet\'s own code (another stock color, e.g. 2423 Red, if it changes the price)'
 
 # kind -> [(bom item prefix, part, material, thickness, tint, finish, tolerance)]; quantities come from the parts list
@@ -112,7 +113,7 @@ def _stock(pre, part, mat, th, tint, fin, tol):
     if pre == 'back-boss-':
         return pre, part, 'stock cell-cast sheet, two 3/4 in layers bonded, then milled', th, STOCK_CAB, fin, tol
     if pre == 'port-left':
-        return pre, part, mat, th, 'chosen at order; quote in Smoke, 2074, if tinted tube can be had; otherwise rolled from 1/8 in 2074 sheet', fin, tol
+        return pre, part, mat, th, 'chosen at order; quote in Smoke, 2064 (the first pair\'s cabinet code), if tinted tube can be had; otherwise rolled from 1/8 in 2064 sheet', fin, tol
     if tint == CAB_TINT:
         return pre, part, mat, '19 (stock 3/4 in)' if th == '20' else th, STOCK_CAB if th == '20' else STOCK_THIN, fin, tol
     return pre, part, mat, th, tint, fin, tol
@@ -213,11 +214,11 @@ and "we bond one-off prototypes", with a 5-axis router and diamond and buff poli
 would like to give you the whole job.
 
 Tropos is a horn loudspeaker in clear tinted cell-cast acrylic, so you see into it. The first pair is in stock sheet,
-and its color is chosen at order. Please quote in Smoke: the cabinet in TruCast 2074 Dark Gray 3/4 in (19 mm; our
-drawings say 20, and every cut is to the sheet as measured), the horn, the caldera rings round the woofer and the
-stepped plinth in 2074 1/2 in. 2074 is stocked only to 1/2 in, so the 3/4 in is a mill run: please say if you can
-source it and at what minimum; stocked 2064 Gray 3/4 in is the fallback. Tell us if another stock color changes the
-price or lead time. We can buy the sheet and have it delivered to you, or you can source it; please say
+and its color is chosen at order. Please quote in Smoke: the first pair's cabinet in stocked TruCast 2064 Gray 3/4 in
+(19 mm; our drawings say 20, and every cut is to the sheet as measured), and the horn, the caldera rings round the
+woofer and the stepped plinth in 2074 Dark Gray 1/2 in. Later pairs move the cabinet to 2074 at 3/4 in, which is
+stocked only to 1/2 in, so a mill run: please say if you can source it and at what minimum. Tell us if another stock
+color changes the price or lead time. We can buy the sheet and have it delivered to you, or you can source it; please say
 which you prefer.
 
 **The cabinet** is as our drawings show: panels CNC-cut from our DXF files, edges milled square, the edges that show
@@ -270,7 +271,7 @@ Q_KIND = {
                        7: 'Packing: how the plug and the plate are protected and shipped (any mark on the plug\'s face shows on every '
                           'horn formed over it).'},
     'c-metal': {3: 'Minimum order quantities, and any minimum lot for anodizing.', 5: None, 6: None},
-    'e-laminated-horn': {3: 'Whether you would source the sheet (TruCast 2074 3/4 in, a mill run, or 2064 3/4 in stocked as the fallback; 2074 1/2 in) or take ours, and any '
+    'e-laminated-horn': {3: 'Whether you would source the sheet (TruCast 2064 3/4 in for the first pair, 2074 3/4 in by mill run for later pairs; 2074 1/2 in) or take ours, and any '
                             'handling charge.', 5: None,
                          6: 'Both speakers\' parts from one sheet of each code, so the pair matches: is that how you would '
                             'nest them?'},

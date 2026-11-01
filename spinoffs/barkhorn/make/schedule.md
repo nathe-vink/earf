@@ -159,6 +159,31 @@ With 1 and 3, the float is back to about a week. Without them, any slip in Janua
 
 ## Use of funds: the final design (2026-11-01)
 
+**The owner's decision (2026-11-01, about 12:10 UTC; r46-owner-notes 5b63e05b): "keep $50,000, first pair in stocked
+gray".**
+- **The first pair's cabinet is stocked TruCast 2064 Gray at 3/4 in**, the lighter smoke. AC Plastics had 3 sheets on
+  31 October; confirm before buying.
+- **The horn stays 2074 1/2 in**, and so do the caldera and the plinth.
+- The 2074 mill run for the cabinet waits for the first orders.
+- **The Tropos line is about $20,700 (est.)**, and the reserve about $2,300.
+- The renders keep the line's darker look; the first pair's photographs will show the lighter smoke.
+- Nothing is bought or sent; logistics are parked.
+
+**What else changes in the build because of it:**
+- The cabinet's 3/4 in sheet is 2064, which is lighter (29 % through 19 mm) than the horn's 2074 (12 % through
+  12.7 mm). So the first pair's horn reads darker than its cabinet, as the stock pair always planned (`stock-pair.md`).
+- The caldera and the plinth, in 2074 1/2 in, read darker than the cabinet too. That is a deliberate two-tone, the
+  darker steps against a lighter box. They could be cut from 2064 1/2 in instead, for one tone (a sheet each way, the
+  same price).
+- With the black sleeves, the lighter cabinet still reads as smoked glass. In backlight it reads as the backlight
+  test's middle frame (`renders/2026-11-01/barkhorn/smoke-backlight/`), lighter than the renders.
+- The 1/2 in sheet for the thin parts (the rings, frames and grips) was 2064 in the old table. With the cover gone,
+  these are the port frames and the grips only, in 2064 to match the cabinet.
+- Nothing else changes: the CAD, the drawings, the cut files and the stability margins are the same, since the sheet's
+  thickness (19 mm) is the same.
+
+The analysis that led to the decision follows.
+
 **The design:** Strata, its stepped horn flush, on bronze posts, the caldera round the woofer, black sleeves, the
 stock tints (the owner, 2026-11-01: "I like the darker colors"), on the lit plinth. It is priced in Smoke, now 2074
 Dark Gray for the cabinet as well as the horn. Dates are parked; this is cash, not a calendar. The week-by-week
@@ -186,7 +211,7 @@ table below is kept as the basis; this section changes its lines.
 
 **What gives, if the total stays $50,000.** With the mill run, the Tropos line grows by about $8,200 (est.), and the
 lines outside this one are not this lane's to cut. It comes from the 15 % contingency (about $2,800 here), or from the
-other products' lines, or by taking the 2064 fallback for the first pair. **For the ask slide:**
+other products' lines, or by taking the 2064 fallback for the first pair. **For the ask slide (decided: the second):**
 - **Tropos, about $26,700 (est.), the first pair in the owner's dark Smoke**, the mill run's other 6 to 8 sheets
   carried as stock for pairs 2 to 5;
 - or **about $20,700 with the first pair in stocked 2064**, the dark mill run paid from the first orders.

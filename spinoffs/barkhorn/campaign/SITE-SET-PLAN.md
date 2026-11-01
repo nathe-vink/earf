@@ -23,9 +23,23 @@ view:**
 |---|---|---|
 | `horn-side`, `horn-back` (1200 x 900, 8 each) | the horn alone | **dropped**; a whole-speaker side view takes their place |
 | `amp` (1000 x 1250, 8) | the plate amplifier, close | **dropped**; the whole back (below) shows it |
-| `macro-*` (4) | details | **dropped** (the coordinator: whole speaker only) |
+| `macro-*` (4) | details | **three kept, always beside a whole-speaker picture** (the owner, 2026-11-01: "a few, always beside a whole-speaker picture"; below) |
 | `front-on-*` (24) | cover on | **dropped** (cover off) |
 | `inside` (8) | the cabinet's inside | kept only if it shows the whole speaker; otherwise dropped |
+
+## The close-ups (the owner, 2026-11-01)
+
+"A few, always beside a whole-speaker picture." Three details, each placed next to that tint's whole-speaker frame
+(`front-off-wide` or `hero-light`) in one row or one spread, never alone:
+
+| detail (site name) | what it shows | size | each |
+|---|---|---|---|
+| `detail-caldera-{tint}` | the caldera's stepped rings round the woofer, its polished edges and the bond lines | 1000 x 1000 | 12 min |
+| `detail-horn-{tint}` | the stepped horn's layers from the front three-quarter, the terraces and the polished lip | 1000 x 1000 | 12 min |
+| `detail-plinth-{tint}` | the plinth's steps and the warm light under the bottom one, at dusk | 1000 x 1000 | 12 min |
+
+They are rendered in one tint each: the caldera in Ember, the horn in Ice (the deep horn) and the plinth in Smoke.
+That is about 40 minutes, with each detail's own critic round as a pair (the detail and its whole-speaker frame).
 
 ## The set, the timing
 
@@ -44,8 +58,9 @@ The rate is from this week's finals: about 147,000 samples a pixel a second. For
 | `lineup` (the look book) | 2400 x 1000 | 128 | 35 min | 1 | 0.6 h |
 | `room` and `room-portrait` (Poison, golden hour) | 2880 x 1620; 1000 x 1250 | 128 | 68 and 18 min | 1 | 1.4 h |
 | **shared** | | | | | **3.6 h** |
-| proofs and critic rounds (half size, 6 frame types, up to 3 rounds) | | | | | about 2 h |
-| **Tier A + B: the product pages and the shared frames** | | | | | **about 18 h of rendering** |
+| the three close-ups (above) | 1000 x 1000 | 96 | 12 min | 3 | 0.6 h |
+| proofs and critic rounds (half size, 7 frame types, up to 3 rounds) | | | | | about 2 h |
+| **Tier A + B: the product pages and the shared frames** | | | | | **about 18.5 h of rendering** |
 
 Each job stays under the 2-hour limit (one tint's five frames is about 1.6 h), so the set is about 12 jobs in sequence.
 A preview contact sheet goes out after the first tint passes its critics, before the other seven are rendered.
