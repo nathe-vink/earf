@@ -12,9 +12,9 @@
 | vent | buy | 1 | Gore or alike A press-in ePTFE pressure-equalising vent (about 4 across), in the rim ring: it lets the air gaps between the layers breathe and keeps out dust and liquid |  | 1.50 |
 | hub | lathe | 1 | Aluminium 6061 | 72 x 72 x 54 | 52.00 |
 | ring | lathe | 1 | PEEK rod, unfilled | 88 x 88 x 24 | 110.05 |
-| pins | buy | 1 | Three stainless dowel pins 4 x 8 (ISO 8734), pressed into the hub: the bayonet's pins |  | 1.50 |
+| pins | buy | 1 | Three stainless shouldered pins, M3 thread with a Ø4 × 10.5 shoulder, screwed through the PEEK ring into the hub (thread locker); 4 mm or more of bayonet engagement against a centering land on the hub, radial play 0.2 or less. Secondary retention: a 1 mm stainless safety tether, crimped, from the hub to an eye on the collar, rated well over 10 × the 1.1 kg shade (review, 2026-11-01). Replaces 4 x 8 dowels pressed into the hub, which gave about 2.5 mm of engagement with 2 mm of play and could not span the 10.5 mm pin |  | 6.00 |
 | reflector | buy | 1 | a metal spinner (to quote: Helander Metal Spinning, Lombard IL; Acme Metal Spinning, Minneapolis MN) Round 42: spun to order, no catalogue part fits the bore. A plain conical reflector spun from 0.5 mm spinning-grade high-reflectance aluminium (Alanod Miro kind, about 95 %, or 1100-O spun then bright-dipped and anodised clear, about 85 %), 45 across at its mouth, 20 at the COB, 21 deep (as drawn in crystal.north_parts), a flange of 2 at the COB end to seat under the Chip-Lok holder: about 85 % of the COB's lumens out within the 46 deg cut-off (estimate). Facets, if wanted, by a second hammered tool. Ledil's Vero 10 reflectors (BARBARA-PF-VERO10, 82 x 31; ANGELINA, 82) are far too big; the closest catalogue part, Ledil ADELY-50 (about 50 across, made for COBs with a 10 mm light-emitting surface), would need the hub's bore opened from 46 to about 51 and its depth and fit checked on the Vero SE 10 (not confirmed) |  | 6.00 |
-| cob | buy | 1 | Bridgelux Vero SE 10 COB, 2700 K, CRI 90 (BXRC-27G1000-D-73), on an Ideal Chip-Lok holder with a thermal pad, at the top of the hub's bore. DS120: at 350 mA 26.0 V typical, 9.1 W, about 1,130 lm at Tc 25 C and 1,020 at Tc 85 C; at 700 mA (its maximum) 28.4 V, 19.9 W, about 2,120 lm |  | 12.00 |
+| cob | buy | 1 | Bridgelux Bridgelux Gen 7 Vero 10 COB (not Vero SE 10), 2700 K, the 97 CRI array for JA8 margin: BXRC-27H1000-D-7x (R9 93 or more), datasheet DS90, on an Ideal Chip-Lok holder with a thermal pad, at the top of the hub's bore. At 180 mA: about 24.9 V typical cold and 24.2 V at Tc 85 C; a low-Vf bin about 23.0 V, under the ERP driver's 24 V floor at every temperature. ORDER BY BIN: only bins whose Vf at 180 mA and Tc 85 C is 24.5 V or more, or use a driver with headroom (north-driver-575's note) (review, 2026-11-01) |  | 12.00 |
 | crown | lathe | 1 | Aluminium 6061 | 90 x 90 x 22 | 49.35 |
 | gland | lathe | 1 | Aluminium 6061 | 50 x 50 x 24 | 46.50 |
 | cord | buy | 1 | any (UL listed) Black textile-braided pendant cord, 2-conductor 18 AWG, UL listed (SVT-rated, or a listed Class 2 cord: past the driver in the canopy it carries the LED's 26 V DC, not mains), 3 m cut to the drop; a listed cord grip in the cap and one in the canopy, the pair tested to hold the fixture (UL 1598's cord-support test: confirm the load with the lab) |  | 16.00 |
@@ -25,10 +25,10 @@
 
 | | USD |
 |---|---|
-| buy | 60 |
+| buy | 65 |
 | formed | 3,959 |
 | lathe | 552 |
-| total | 4,572 |
+| total | 4,577 |
 
 No price yet for: UL or Intertek (ETL) Listing the pendant to UL 1598 (and the table lamp's battery and charger to UL 153 / IEC 62368): a one-off cost a design, spread over the first run.
 

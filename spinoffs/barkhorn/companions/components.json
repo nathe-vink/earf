@@ -258,7 +258,7 @@
  "moon-led-table": {
   "kind": "led",
   "maker": "Nichia or Seoul (to choose)",
-  "model": "A 30 mm round warm-dim LED board, two channels (2200 K and 2700 K, CRI 90+), about 2.5 W at full, 200 lm; a second 4-LED ring at the column's foot to light the column (0.3 W)",
+  "model": "A 30 mm round warm-dim LED board, two channels (2200 K and 2700 K, CRI 90+), 130 lm/W or better: 200 lm at 1.5 W or less (review 2026-11-01; was 2.5 W), on the aluminum chassis's heat path to the touch ring; a second 4-LED ring at the column's foot (0.3 W)",
   "usd": 9,
   "estimate": true,
   "supplier": "an LED module house",
@@ -322,8 +322,8 @@
  "dome-pins": {
   "kind": "hardware",
   "maker": "any",
-  "model": "Three stainless dowel pins 4 x 8 (ISO 8734), pressed into the hub: the bayonet's pins",
-  "usd": 1.5,
+  "model": "Three stainless shouldered pins, M3 thread with a Ø4 × 10.5 shoulder, screwed through the PEEK ring into the hub (thread locker); 4 mm or more of bayonet engagement against a centering land on the hub, radial play 0.2 or less. Secondary retention: a 1 mm stainless safety tether, crimped, from the hub to an eye on the collar, rated well over 10 × the 1.1 kg shade (review, 2026-11-01). Replaces 4 x 8 dowels pressed into the hub, which gave about 2.5 mm of engagement with 2 mm of play and could not span the 10.5 mm pin",
+  "usd": 6.0,
   "estimate": true,
   "supplier": "McMaster-Carr or alike",
   "price_date": "2026-10-19"
@@ -523,7 +523,7 @@
   "price_date": "2026-10-30",
   "url": "https://www.erp-power.com/erp-series/ess-series/",
   "alternate": "EPtronics LD6W120-36-C0170-TL: 170 mA, 22-36 V (a comfortable window for 24.5 V), 6 W, 120 V AC, TRIAC/ELV phase dimming, US Class 2, UL 8750 / UL 1310 recognized (Type HL), FCC Part 15 Class B at 120 V AC, PF 0.90 or more, THD under 20 %, 82 % efficient (EPtronics LD6W-TL datasheet). But it dims only to about 15 % ('<15% to ~100% CCR'), short of the 10 % JA8 and the brief ask; about 560 lm at 170 mA",
-  "note": "No 175 mA phase-dimmable Class 2 part was found (round 42, public datasheets): the ERP part meets every line on paper but its voltage headroom; the EPtronics part meets every line but its dimming depth. The Hatch XTC16-0350P-UNV-I (I-LOC key, 20-46 V, keys 50 to 100 % of 350 mA) may reach 175 mA but its key list, FCC class and dimming depth were not published on the page read"
+  "note": "No 175 mA phase-dimmable Class 2 part was found (round 42, public datasheets): the ERP part meets every line on paper but its voltage headroom; the EPtronics part meets every line but its dimming depth. The Hatch XTC16-0350P-UNV-I (I-LOC key, 20-46 V, keys 50 to 100 % of 350 mA) may reach 175 mA but its key list, FCC class and dimming depth were not published on the page read | REVIEW 2026-11-01: with the Gen 7 Vero 10 at 24.2 V hot (typical) and about 23.0 V (low bin), the 24 V floor fails on low bins: bin-select the COBs (Vf 24.5 V or more at 180 mA, Tc 85 C), or choose a 180 mA driver whose window reaches about 21 V. Check its output ripple against JA8's flicker limit (under 30 % at every dimming level) on the bench."
  },
  "north-driver-010v": {
   "kind": "power",
@@ -574,12 +574,12 @@
  "hemi-cob": {
   "kind": "led",
   "maker": "Bridgelux",
-  "model": "Vero SE 10 COB, 2700 K, CRI 90 (BXRC-27G1000-D-73), on an Ideal Chip-Lok holder with a thermal pad, at the top of the hub's bore. DS120: at 350 mA 26.0 V typical, 9.1 W, about 1,130 lm at Tc 25 C and 1,020 at Tc 85 C; at 700 mA (its maximum) 28.4 V, 19.9 W, about 2,120 lm",
+  "model": "Bridgelux Gen 7 Vero 10 COB (not Vero SE 10), 2700 K, the 97 CRI array for JA8 margin: BXRC-27H1000-D-7x (R9 93 or more), datasheet DS90, on an Ideal Chip-Lok holder with a thermal pad, at the top of the hub's bore. At 180 mA: about 24.9 V typical cold and 24.2 V at Tc 85 C; a low-Vf bin about 23.0 V, under the ERP driver's 24 V floor at every temperature. ORDER BY BIN: only bins whose Vf at 180 mA and Tc 85 C is 24.5 V or more, or use a driver with headroom (north-driver-575's note) (review, 2026-11-01)",
   "usd": 12,
   "estimate": true,
   "supplier": "Digi-Key",
   "price_date": "2026-10-22",
-  "note": "Figures from the datasheet tables as quoted by web search (the supplier site is blocked here): confirm on the PDF"
+  "note": "The earlier DS120 (Vero SE 10) figures were the wrong part; confirm DS90's bin table and the 97 CRI array's flux at 180 mA on the PDF [check]"
  },
  "south-led": {
   "kind": "led",
@@ -694,7 +694,7 @@
  "core-cells-18650": {
   "kind": "power",
   "maker": "Power Sonic",
-  "model": "PSL-FP-IFR18650EC (round 42), three in parallel (1S3P): LiFePO4 18650 energy cell, 3.2 V, 1.5 Ah rated, 4.8 Wh each, 14.4 Wh the set; 2,000 cycles at 100 % depth of discharge; 65 x 18.2 mm (flat top), about 40 g; charge 3.65 V cut-off, at most 1.5 A (1C); discharge cut-off 2.5 V; charge 0 to 45 C, discharge -20 to 60 C. Approvals on the datasheet: UL 1642 cell certificate, IEC 62133 cell certificate (the edition is not stated: ask Power Sonic for the IEC 62133-2 report), UN 38.3 certified (the test summary, which 49 CFR 173.185(a)(3) requires a cell maker to make available, to request). Each cell 4.8 Wh (at most 20 Wh), the set 14.4 Wh (at most 100 Wh): the small-battery exception (49 CFR 173.185(c), UN3481, contained in equipment)",
+  "model": "PSL-FP-IFR18650EC (round 42), three in parallel (1S3P): LiFePO4 18650 energy cell, 3.2 V, 1.5 Ah rated, 4.8 Wh each, 14.4 Wh the set; 2,000 cycles at 100 % depth of discharge; 65 x 18.2 mm (flat top on its datasheet: Core needs a button-top cell for its shrouded + contact, so confirm a button-top version with Power Sonic or qualify another maker [check], review 2026-11-01), about 40 g; charge 3.65 V cut-off, at most 1.5 A (1C); discharge cut-off 2.5 V; charge 0 to 45 C, discharge -20 to 60 C. Approvals on the datasheet: UL 1642 cell certificate, IEC 62133 cell certificate (the edition is not stated: ask Power Sonic for the IEC 62133-2 report), UN 38.3 certified (the test summary, which 49 CFR 173.185(a)(3) requires a cell maker to make available, to request). Each cell 4.8 Wh (at most 20 Wh), the set 14.4 Wh (at most 100 Wh): the small-battery exception (49 CFR 173.185(c), UN3481, contained in equipment)",
   "usd": 9,
   "estimate": true,
   "supplier": "Power Sonic distributors (Digi-Key, TRC Electronics)",
@@ -704,9 +704,9 @@
  },
  "core-holder-18650": {
   "kind": "power",
-  "maker": "Keystone (or alike)",
-  "model": "Since round 41: three single-cell 18650 holders (Keystone 1042 kind) set as a triangle round the LED, spring contacts, keyed for polarity, the cells' NTC on one, wired to the board",
-  "usd": 4.5,
+  "maker": "to make (in the milled base)",
+  "model": "No holder (review, 2026-11-01): bare spring contacts in the milled base. The − end has a nickel-plated conical spring in a pocket; the + end has a gold-flashed leaf at the bottom of an 8 mm shroud 1.5 deep, so only a button top reaches it. The bays are 18.6 wide and 67.5 between contact faces [E, to fit]; leads run in a milled channel to the board; the cells' NTC sits on one. Replaces the Keystone 1042, which is 77.1 long (its corners land outside the drum), not polarized (that is the 1042P) and surface-mount",
+  "usd": 3.0,
   "estimate": true,
   "supplier": "Digi-Key",
   "price_date": "2026-10-29"
@@ -714,7 +714,7 @@
  "core-board-18650": {
   "kind": "control",
   "maker": "to make (a contract PCB house)",
-  "model": "Core's board since round 41 (the 30 base), the same circuit as core-board (USB-C sink, LTC4162-F LiFePO4 charger with power path, the 90 % charge limit, protector, fuel gauge, NTC hold-off, warm-dim driver, touch), laid out as a 48 ring under the LED in the middle of the cells' triangle, the USB-C on a flex to its small board in the corner at 170 deg",
+  "model": "Core's board since round 41 (the 30 base), revised by the review of 2026-11-01: a USB PD sink at 9 V on the USB-C path and the dock's pins (an ideal diode on each input); the LTC4162-F LiFePO4 charger with power path (35 V max in), 1.5 A, 3.6 V; a coulomb counter (LTC2941 class [check]) for the gauge and the 90 % stop (4.05 of 4.5 Ah); per cell, back-to-back FETs under an ideal-diode controller (LTC4359 class [check]), off by default; the MCU on a diode-OR of the input and the cells; thermal foldback on a chassis NTC (55 C: LED to 70 %; 60 C: charge to 0.5 A) and the cells' NTC (no charge over 45 C); the warm-dim driver; capacitive touch with baseline tracking and a 50 ms debounce. Laid out as a 48 ring under the LED, the dock's pins on it (the axis and r 20), the USB-C on a flex to its small board in the corner at 170 deg",
   "usd": 34,
   "estimate": true,
   "supplier": "a PCB assembler, about 500 off",
@@ -773,5 +773,23 @@
   "estimate": true,
   "supplier": "a packaging supplier",
   "price_date": "2026-10-31"
+ },
+ "hemi-canopy-strap": {
+  "kind": "hardware",
+  "maker": "any (a lighting supplier)",
+  "model": "Zinc-plated steel crossbar, 1.6 mm, screwed to the 4 in junction box; the cord grip, the suspension gripper and the canopy's screws anchor in it, and the driver and the 120 V splices sit in a closed steel enclosure on it. The black cast-acrylic canopy is a decorative cover only (black acrylic can't enclose 120 V splices) (review, 2026-11-01). No change to how the canopy looks",
+  "usd": 6.0,
+  "estimate": true,
+  "supplier": "a lighting supplier",
+  "price_date": "2026-11-01"
+ },
+ "hemi-swag-supply": {
+  "kind": "power",
+  "maker": "Mean Well (to choose)",
+  "model": "The plug-in swag (review, 2026-11-01): a 36 to 48 V Class 2 desktop supply (a 48 V 36 W level VI unit, GST36A48 class [check its Class 2 marking]) feeding a constant-current buck at 180 mA in the canopy (Mean Well LDD-L class [check the 180 mA setting]), which covers the COB's 23.0 to 26.9 V. Replaces 24 V and a buck, which can't drive a 24.2 to 26.9 V COB",
+  "usd": 28.0,
+  "estimate": true,
+  "supplier": "Digi-Key or Mouser",
+  "price_date": "2026-11-01"
  }
 }

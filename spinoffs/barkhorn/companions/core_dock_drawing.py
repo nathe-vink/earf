@@ -9,7 +9,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(HERE)))
 OUT = os.path.join(ROOT, 'renders', '2026-10-31', 'barkhorn', 'lamps-cordless', 'core-dock-drawing')
 
-D = dict(dock_d=150.0, dock_h=8.0, pocket_d=122.0, pocket_h=1.5, ring_r=(30.0, 44.0), ring_w=4.0,
+D = dict(dock_d=150.0, dock_h=8.0, pocket_d=122.0, pocket_h=1.5, ring_r=(3.0, 20.0), ring_w=6.0,       # review 2026-11-01: a center disc Ø12 (+) and an r 20 ring (−)
          base_d=120.0, base_h=30.0, hatch_d=112.0, ball_r=80.0, pin_angle=170.0)
 S = 5.0                       # px per mm in the section (the plan at 0.62 of it)
 PS = 0.62
@@ -78,11 +78,11 @@ def section(cx, ty):
     o.append(dim_v(cx - r_d - 14, top, ty, '8', left=True))
     o.append(dim_v(cx + rb + 34, bt, top + ph, 'base 30'))
     lx, ly = cx - r_d - 30, bt + 4 * S
-    o.append(text(lx, ly, 'gold spring pins at r 30 and r 44,', 12, 'end'))
-    o.append(text(lx, ly + 16, 'on the 170° line, through the hatch', 12, 'end'))
-    o.append(line(lx + 4, ly - 4, cx - 44 * S, top + ph - 9 * S, 0.8))
+    o.append(text(lx, ly, 'gold spring pins on the axis and at r 20,', 12, 'end'))
+    o.append(text(lx, ly + 16, 'on the main board, clear of the USB-C', 12, 'end'))
+    o.append(line(lx + 4, ly - 4, cx - 20 * S, top + ph - 9 * S, 0.8))
     o.append(text(cx, bt + 13 * S, 'Core’s base 120 × 30: cells, chassis, ballast (unchanged)', 12, 'middle', '#F2EEE8'))
-    o.append(text(cx, ty + 74, 'the dock: polished black cast acrylic, two 304 stainless rings pressed in flush', 12, 'middle'))
+    o.append(text(cx, ty + 74, 'the dock: polished black cast acrylic; a 304 stainless center disc and ring on a turned island', 12, 'middle'))
     o.append(text(cx, bt - 46 * S, 'the ball (unchanged)', 12, 'middle', MUTED))
     return ''.join(o)
 
@@ -98,8 +98,8 @@ def plan(cx, cy):
     # the cable's notch at the back (up in the plan)
     o.append(rect(cx - 4 * S, cy - r_d - 1, 8 * S, 6 * S, fill='#FFFFFF', c=INK, sw=1.0))
     o.append(line(cx, cy - r_d - 1, cx, cy - r_d - 70, 4.0, '#141414'))
-    o.append(dim_h(cx - p['ring_r'][1] * S, cx + p['ring_r'][1] * S, cy + r_d + 26, '− ring Ø88 (4 wide)'))
-    o.append(dim_h(cx - p['ring_r'][0] * S, cx + p['ring_r'][0] * S, cy + r_d + 50, '+ ring Ø60 (4 wide)'))
+    o.append(dim_h(cx - p['ring_r'][1] * S, cx + p['ring_r'][1] * S, cy + r_d + 26, '− ring Ø40, on a 2.0 island'))
+    o.append(dim_h(cx - p['ring_r'][0] * S, cx + p['ring_r'][0] * S, cy + r_d + 50, '+ center disc Ø12'))
     o.append(text(cx, cy + r_d + 80, 'concentric: Core charges at any rotation', 13))
     o.append(text(cx + 8, cy - r_d - 52, 'back', 12, 'start', MUTED))
     return ''.join(o)
@@ -113,7 +113,7 @@ def main():
                          'the owner signs.', 14, 'start', MUTED),
             section(700, 790), plan(1560, 480),
             text(60, H - 40, 'Off the dock the pins are dead (an ideal diode on each input); the rings are powered only '
-                             'when the dock sees the lamp’s 47 kΩ sense resistor.', 13, 'start', MUTED)]
+                             'when the dock sees the lamp’s 47 kΩ sense resistor. USB PD at 9 V.', 13, 'start', MUTED)]
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     open(OUT + '.svg', 'w').write(f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}">'
                                   + ''.join(body) + '</svg>')

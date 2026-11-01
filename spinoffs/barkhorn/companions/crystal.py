@@ -482,8 +482,9 @@ NOTES_DOME = [
     'makes 2.7 W of heat; estimated in a 35 C room: the hub 49 C, the COB\'s case 50 C, the collar and the acrylic '
     'beside it 41 C (hemisphere_thermal.py; to measure, README round 35).',
     'Mains stops at the canopy: the driver is there, and the cord carries the LED\'s 26 V DC (Class 2). The cord is a '
-    'listed 18 AWG 2-conductor in a black textile braid, its grips tested with the fixture\'s weight. Listed to UL 1598 '
-    'with any shade.',
+    'listed 18 AWG 2-conductor in a black textile braid, its grips tested with the fixture\'s weight. To be listed to '
+    'UL 1598 (hardwired) with its own shades, each tint in the listing; the canopy\'s strap and steel enclosure carry '
+    'the grip, the gripper and the splices, the acrylic a cover only.',
     'Hang over a bar at 750 to 900 centres, the rim 700 to 800 above the counter; over a table, one a table, the rim '
     'about 650 to 750 above it.',
 ]
@@ -493,15 +494,16 @@ NOTES_ORB = [
     'One ball where there were three layers: tinted cast acrylic, two halves formed on one mould and joined at the '
     'equator, their inside bead-blasted. The frost faces air, so it scatters; seen from outside it is behind the tint, '
     'and the port that would show it faces the base.',
-    'Plugged in or not, one product: three LiFePO4 18650 cells (Power Sonic PSL-FP-IFR18650EC, 14.4 Wh) in a triangle round the LED, behind '
-    'a hatch underneath on four captive screws, the user\'s to replace with standard cells. It runs from USB-C (5 V 3 A, '
-    'the adapter and a 2 m fabric cable in the box) or from its cells, and charges while it runs, in about 2 hours. '
-    'About 4.7 hours at full brightness (2.5 W) at the default charge limit (90 %), 5.2 at a full charge; about 5.8 '
-    'at the bar setting (2 W).',
+    'Cordless (the owner, 2026-10-31): three button-top LiFePO4 18650 cells (Power Sonic PSL-FP-IFR18650EC class, 14.4 Wh) '
+    'on bare spring contacts in bays milled round the LED, behind a hatch underneath on four captive screws, the user\'s '
+    'to replace with standard cells. It charges on its dock or from USB-C underneath at 9 V (USB PD, the 20 W adapter '
+    'in the box; CORE-RECHARGE.md), and charges while it runs, about 2.7 hours to 90 % at 1.5 A. About 7.8 hours at '
+    'full brightness (1.5 W) at the default charge limit (90 %, counted by a coulomb counter), 8.6 at a full charge; '
+    'about 9.7 at the bar setting (1.2 W).',
     'Long life: LiFePO4 keeps about 80 % of its capacity after about 2,000 cycles (ordinary Li-ion about 500); the '
-    'charge limit, a battery-management circuit (protection, a fuel gauge, charging held off below 0 C and above 45 C '
-    'by the cells\' NTC) and no exposed contacts. Certified as one product: IEC/UL 62368-1 with its battery annex; the '
-    'cells to IEC 62133-2 and UN 38.3.',
+    'charge limit, a battery-management circuit (protection, a coulomb counter, each cell behind back-to-back FETs off '
+    'until checked, charging held off below 0 C and above 45 C by the cells\' NTC, thermal foldback) and no exposed '
+    'live contacts. To be listed as one product to UL 153 with Supplement SA; the cells to IEC 62133-2 and UN 38.3.',
     'Touch the black ring: tap to switch, hold to dim, 2200 to 2700 K as it dims. IP44: the base sealed by O-rings at '
     'the window, the chassis and the hatch, the USB-C receptacle sealed; with the ball on or off.',
     'Black, so the tint is the only colour: the base black cast acrylic, polished, over an aluminium chassis and a steel '
