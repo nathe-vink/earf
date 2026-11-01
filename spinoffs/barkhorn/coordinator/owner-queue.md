@@ -530,3 +530,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 13:55 four-pieces -sf day landed (11a1d8bf): Strata Float v3 and Hemisphere v3 (color outside), all four in stock 2092, both
   speakers whole. Built as the line slide's day alternative (specs/line-day-sf.html; effective 7.7-12.2:1, corner note 5.5:1 with
   solid ink); not published, the deck keeps the lights-on room. -sf dusk ~14:30 -> line.html final.
+- 14:00 deck v47: colours.html = the speaker lane's eight in a row (29352c30; /_blob/753088c047507edef1371426d2551420, 3328x1040 =
+  the 1664x520 box, nothing cropped): final design, stock tints, covers off, lit plinths, Dust/Acid/Ice with deep horns, all eight
+  whole. Notes: stock tints; deeper horns planned for Dust, Acid, Ice; Acid's fluorescence not modeled. Speaker cover (3840x1360)
+  rendering, ~75 min (~15:05); then room + portrait.
