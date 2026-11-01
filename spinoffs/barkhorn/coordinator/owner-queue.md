@@ -557,3 +557,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - Check-in 20 (15:21): all its items done (v48 cover, v49 line final). Speaker lane committed the comparison rows' product files
   (0ced03de: only Ember, Poison, Haze, Smoke cabinets lighter); both rows render after the room landscape, then the portrait.
   Next check-in 16:32 (trig_014Evgknkm82JUJ9HA4n5GpY).
+- 15:30 speaker frame 4a landed (6c2bed2e, the golden-hour room, 2304x1296): final design, Poison pair, both whole, but 2092's
+  cabinets read almost black in room light (the green lives in the horns and plinth glow). Held out of the deck (home.html keeps
+  009106e7) until the owner picks a depth; re-rendered in the pick (with fill if 2092 stays). Speaker lane told: after the comparison
+  rows, hold the portrait; start the site set with Ice (then Dust, Acid, Fog), critic gate on Ice; hold Ember/Poison/Haze/Smoke and
+  the all-eight shared frames until the pick. Its checks: 29352c30's Smoke cabinet is 2074; the rows reproduce 29352c30's four
+  cabinets exactly, only TT changes; Haze renders transparent (real 2287 is translucent, so the row flatters it).
