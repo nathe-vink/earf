@@ -134,6 +134,33 @@ at any thickness. R1 says either can be true, and only the vendor's off-cuts set
 Sources: https://www.acplasticsinc.com/media/IL%20Nov%20Surplus.pdf, https://acplasticsinc.com/products/9093-500-48x-96-trucast-p,
 https://www.acplasticsinc.com/products/9095-220-48x-96-trucast-p
 
+## The decisions (the coordinator, 2026-11-01, as proposals for the owner's board)
+
+**Hemisphere: v3 recommended; v2 stays as the alternative.**
+- v3 is drawn as its own build: `dome_pendant_v3.py` → `out-dome-pendant-v3/` (drawings, BOM, cut files, 0 clashes).
+- The main build `dome_pendant.py` stays v2.
+
+| | v2 (main build) | v3 (proposal) |
+|---|---|---|
+| Layers, outside in | 9 mm clear shell (R 100–91), 3 mm opal (R 90–87), 3 mm stock-tint skin (R 86–83) | 3 mm stock-tint shell (R 100–97), 6 mm clear structural shell (R 96–90), 3 mm opal (R 89–86) |
+| Unlit | white opal behind clear; the color only at the rim | the color, deep and glossy |
+| Lit | glows in color | glows in color |
+| Moulds | three (shell R 100, liner R 90, skin, female) | three: the shell mould is v2's outer form (R 100); **two new**, the clear R 96 and the opal's female R 86 |
+| Layer cost, one-off, the kit's rates | $3,955 (setups $3,900 + material about $55) | $4,248 (setups $4,200 + material about $48) |
+| Whole-lamp budget, one-off | $4,599 | $4,894 (+$295, all of it tooling; about $6 a shade less in sheet) |
+
+Heat, lumens, the hub, the collar, the bayonet and the clamp are unchanged. The clamp stack is the same 12 mm of acrylic
+plus the gaps.
+
+**Core: no change until the chips are measured.**
+- The two-layer ball is in Core's BOM as a priced option: `core-ball-two-layer`, about **$28 a ball** [E] on top of the
+  single-layer ball. That is the inner ball's forming and 1/8 in sheet, about $15 to $25, plus the second mould's
+  $1,200 spread over 200.
+- The custom 1/3 pour is out on cost.
+
+**Parked with logistics, nobody calls yet:** the chips (1/8 and 3/8 in, 2423 and 2092 first), whether 3/8 in is
+stocked in the eight codes, and whether 2287 is transparent. AC Plastics, (888) 702-6028. They are on the owner's list.
+
 ## Sources (public pages, not quotes)
 
 - AC Plastics' TruCast transmission table: https://www.acplasticsinc.com/wp-content/uploads/2026/08/Trucast-Acrylic-Light-Transmissions-5.26.26-1.pdf

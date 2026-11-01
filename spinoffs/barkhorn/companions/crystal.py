@@ -213,7 +213,28 @@ def cover_parts(p=N):
     clamp = clamp - cyl('z', (0, 0), co, 80, 110)
     note_formed = ('drape-formed from cast sheet over an aluminium mould, trimmed and polished; the prototypes are formed on '
                    'the production moulds')
-    return [
+    if p.get('build') == 'v3':
+        # PROPOSAL v3 (2026-11-01, tint_proof, recommended over v2): the tint outside. The same three formed layers in a
+        # new order: a 3 mm stock-tint shell outside (colour unlit), a 6 mm clear shell (the structural one, clamped by
+        # the collar with the others), the 3 mm opal inside, seen directly from below; no tinted skin
+        layers = [
+            Part('shell', shell, Machined('acrylic-formed', 'formed', setup_usd=1500.0), finish='body', group='cover',
+                 notes=['v3, the outside: 1/8 in (3 mm) stock TruCast in the line\'s code (Ember 2423, Poison 2092, Haze '
+                        '2287, Dust 2422, Acid 9097, Ice 2069, Fog 0000, Smoke 2074), ' + note_formed + '; the one '
+                        'tinted layer, seen unlit, glowing lit (15 to 20 % at 3 mm for 2423 and 2092). Its mould is v2\'s '
+                        'shell mould (the outer face, R 100), the sheet 1/8 in instead of 10 mm']),
+            Part('liner', liner, Machined('acrylic-clear-formed', 'formed', setup_usd=1500.0), finish='body',
+                 group='cover', inside=True,
+                 notes=['v3, the middle: 6 mm clear cast sheet (TruCast 0000), ' + note_formed + ': the structural shell '
+                        '(R 96 to 90), clamped at the crown with the others; a new mould (v2\'s liner mould was R 90)']),
+            Part('skin', skin, Machined('acrylic-opal-formed', 'formed', setup_usd=1200.0), finish='liner', group='cover',
+                 notes=['v3, the inside: 3 mm volume-diffusing (opal) cast acrylic, about 70 % transmission, ' +
+                        note_formed + ', formed into a female mould (R 89 to 86, a new mould), so its seen face keeps '
+                        'its gloss; it hides the COB and lights evenly']),
+        ]
+    else:
+        layers = None
+    return (layers or [
         Part('shell', shell, Machined('acrylic-clear-formed', 'formed', setup_usd=1500.0), finish='body', group='cover',
              notes=['the outside: 10 mm cast sheet ' + note_formed + ' (9 at the crown, thinner toward the rim: the '
                     'former confirms); its outer face never touches the mould, so it keeps the cast sheet\'s gloss. '
@@ -229,6 +250,7 @@ def cover_parts(p=N):
                     'gloss and the opal is seen only through tint. PROPOSAL 2026-11-01: 1/8 in stock TruCast in the line\'s '
                     'code (Ember 2423, Poison 2092, Haze 2287, Dust 2422, Acid 9097, Ice 2069, Fog 0000, Smoke 2074), its '
                     'chart transmission (14 to 93 %) as it is: the one tinted layer']),
+    ]) + [
         Part('rim', rim, Machined('cast-acrylic', 'lathe'), finish='body', group='cover',
              notes=['closes the three layers at the mouth, bonded and polished with them; a press-in ePTFE vent in its '
                     'face keeps the gaps between the layers at room pressure and dry']),
@@ -485,6 +507,7 @@ def orb_parts(p=O):
         Part('adapter', None, Bought('orb-adapter')),
         Part('screws', None, Bought('core-screws')),
         Part('tray', None, Bought('core-tray')),
+        Part('ball-two-layer', None, Bought('core-ball-two-layer'), option='two-layer ball'),
     ]
 
 

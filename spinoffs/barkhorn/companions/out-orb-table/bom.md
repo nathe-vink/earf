@@ -31,4 +31,13 @@
 | mill | 148 |
 | total | 2,039 |
 
+
+## Options (each for 1, on top of the total above)
+
+### two-layer ball: about $28
+
+| item | make | qty | what | size | each, USD |
+|---|---|---|---|---|---|
+| ball-two-layer | buy | 1 | the shade former (to quote) OPTION (2026-11-01, launch/stock-tints-lamps.md), for Ember, Poison, Haze and Smoke if the chips show the 'deep' case or 3/8 in isn't stocked: the ball in two layers, 6 mm clear outside on the existing mould and a 3 mm (1/8 in) stock-tint inner ball, frosted inside, on a second, smaller mould, 1 mm apart, joined only at the equator joint and the port's grommet (no bond across the face). Per ball, on top of the single-layer ball: the inner ball's forming and sheet about $15 to $25, the second mould about $1,200 spread over a run of 200 (about $6) |  | 28.00 |
+
 Budget figures: bought parts from the component library (dated retailer listings), made parts from the kit's stock rates: 25 % offcut on sheet parts, a handling charge a print, and a setup a machined line spread over its pieces. A shop's quote replaces them.
