@@ -467,3 +467,7 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
   Hemisphere color outside v3 7c4b5993 +$295 once vs inside v2); darker-colors card: horn reading (five stock, Dust/Acid/Ice deeper;
   868dd347), Haze 2287 is translucent, no transparent deep violet stocked (mill run of 373 or a custom pour at order). Mantle asked again
   via the board (pick A, more clearly). Second check wf_ef6fe320-80f still running.
+- Check-in 17 (11:51): stored list done except lane frames. Speaker ab147db0 (asset README: stock tints, Dust/Acid/Ice deep horns);
+  hero due ~12:00; four-pieces -final-2092 day ~12:10, dusk ~12:50; Mantle shared fixes 5b8db2fe/9e72cf70 (both ~$3,900 parts;
+  proposals; owner questions on custom deck lots depend on A/B); brand 3292654e pack renders, 44b3f237 plinth ships flat in its own
+  carton. Board second check wf_ef6fe320-80f still running. Next check-in 12:42 (trig_012hpzbexXc9pvEw2Jk7yn2M).
