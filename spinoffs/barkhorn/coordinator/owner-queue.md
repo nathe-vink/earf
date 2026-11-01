@@ -364,3 +364,9 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
   now stock 2074 Dark Gray); 3) Mantle A Strata Float v3 / B Outcrop; later: Mother EARF armature project, editions
   picture pass, the biomes Smoke go. Then: the site set (Strata on the lit plinth, black sleeves, ~18 h) and the Brand
   Book republish (after the tagline).
+- 09:42 UTC speaker 603a54e2: final figures: 660 x 670 x 1336 mm on the plinth (cabinet + horn 560 wide); 84.6 kg on the
+  plinth, 74.6 without; plinth + light ~$600 a speaker; parts ~$11,200 a pair (est., before tooling/labor). Deck v39 updated.
+  Black voile everywhere; Smoke at ~12 %/20 mm (= stock 2074 Dark Gray); both assets rebuilt (tropos-strata.blend = the
+  owner's design). Four-pieces and biomes need to re-link for future renders. FLUSH HORN MID BAND: power unchanged;
+  horizontal coverage 65-70 deg (was ~90) from 1.1 to 2 kHz; on-axis waviness EQable. Alternative for full 90 deg: widen
+  the cabinet to 630. Coordinator recommends keeping flush (owner told). High band (4.5-8 kHz) solving ~2.5 h.
