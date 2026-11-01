@@ -37,7 +37,10 @@ MIN_FACES = 2000                          # below this a part is never collapsed
 COVER = ('cloth-disc', 'disc-frame')
 # the designs: each a list of (engine file, parts hidden). Strata (variants/STRATA.md) is the Cloud with its formed
 # horn, posts, cloth disc and dyed ring hidden and the proposals' laminated horn, bronze posts and caldera laid on it
-STRATA_HIDE = ['cloth-disc', 'horn-throat', 'post-*', 'post-sleeves', 'post-sockets', 'waveguide', 'woofer-ring']
+STRATA_HIDE = ['cloth-disc', 'horn-throat', 'post-*', 'post-sleeves', 'post-sockets', 'waveguide', 'woofer-ring', 'feet-*']
+# Strata stands on base A, the stepped plinth lit from underneath (the owner, 2026-11-01): the variants' options, and
+# everything lifted by the plinth's height so its feet stand on z = 0 (variants/BASES.md)
+STRATA_OPTIONS, STRATA_LIFT = ['Plinth', 'Plinth light'], 0.0385
 DESIGNS = {'current': [('studio/products/barkhorn-cloud.json', [])],
            'strata': [('studio/products/barkhorn-cloud.json', STRATA_HIDE),
                       ('studio/products/barkhorn-variants.json', ['horn-topo*'])]}
@@ -62,7 +65,7 @@ def calibrate(pdef, tints):
                              'ior': t['ior']}
 
 
-def load_product(bpy, Pr, path, hide, full, tints=None):
+def load_product(bpy, Pr, path, hide, full, tints=None, options=(), lift=0.0):
     """One engine file's parts, lightened, placed once per tint with `hide` left out: (objects, part_of)."""
     pdef = Pr.load_def(path, ROOT)
     if tints:
@@ -87,8 +90,8 @@ def load_product(bpy, Pr, path, hide, full, tints=None):
             bpy.context.view_layer.objects.active = ob
             bpy.ops.object.modifier_apply(modifier=m.name)
             bpy.context.scene.collection.objects.unlink(ob)
-    shot = {'product': {'def': path, 'instances': [{'position': [0, 0, 0], 'rotate_z': 0, 'flavour': f, 'hide': hide}
-                                                    for _, f in TINTS]}}
+    shot = {'product': {'def': path, 'instances': [{'position': [0, 0, lift], 'rotate_z': 0, 'flavour': f, 'hide': hide,
+                                                     'options': list(options)} for _, f in TINTS]}}
     return Pr.place(bpy, pdef, templates, shot, ROOT)
 
 
@@ -114,7 +117,10 @@ def main():
             unhide = HORNS[a.horn].get('studio/products/barkhorn-cloud.json', []) if 'cloud' in prod_path else []
             hide = [h for h in hide if h not in unhide] + (HORNS[a.horn].get(prod_path, []) if 'variants' in prod_path else [])
         tints = json.load(open(HERE / 'tints-trucast.json')) if a.tints == 'trucast' else None
-        o, p = load_product(bpy, Pr, prod_path, hide, a.full, tints)
+        st = a.design == 'strata'
+        o, p = load_product(bpy, Pr, prod_path, hide, a.full, tints,
+                            options=STRATA_OPTIONS if st and 'variants' in prod_path else (),
+                            lift=STRATA_LIFT if st else 0.0)
         objs += o; part_of.update(p)
     scene = bpy.context.scene
     for i, (tint, flavour) in enumerate(TINTS):
