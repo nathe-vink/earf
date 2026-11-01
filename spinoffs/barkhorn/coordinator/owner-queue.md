@@ -289,3 +289,8 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
   (3bcabe36: captive ball, steel cell tray, drop plan, joint table, UN3481 shipping at 30 % or less; cable off the drawing).
   Owner questions pending, in order: tagline (asked again 02:22); Tropos footprint A/B (when proofs land); color depth;
   Mantle A/B; later: lining sleeves white/black, Mother EARF armature, editions picture pass.
+- 03:20 UTC: deck v34: line.html is the four-pieces room (Strata DAY final 83a8acdb, the fixed asset), labels beside
+  each piece from the lane's zones (day: dark type 7.2-11.8:1; note 5.4:1); image /_blob/11da3b5329df27039124ad679aec922a
+  (3840 JPEG). The old four-tile slide is backed up at scratchpad deck/line-tiles-backup.html. Owner shown the slide.
+  Dusk (lights on) lands ~04:00: build it, show it, and swap the deck to it (the coordinator's recommendation) unless
+  the owner prefers day.
