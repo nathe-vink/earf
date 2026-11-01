@@ -238,3 +238,7 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
 - Four-pieces: NOTES.md + finalize.py (00:49); finals not yet announced.
 - Editions 8c8d5338: Iron r3 rendering.
 - Brand: Relief stopped (best 6.5, look 2 r1); Meridian, Lithos, Ionos, Bedrock, Cairn r3 rendering.
+- Brand: "EARF New Objects" published (private) https://claude.ai/artifact/UUJtcAypMzj1y9VeQcgegZ (a4c13cc5). No frame
+  passed 7.0: Relief 6.5, Meridian 6.5, Bedrock 6.3, Moho 6.0, Lithos 6.0, Ionos 5.5, Cairn 5.0; honest captions. A third
+  look would need photographed props + an HDRI room. Next: American-English pass of the brand material + the cover-off and
+  cordless swaps (no Strata or new Mantle until the owner signs; headline waits on the tagline).
