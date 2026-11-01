@@ -96,7 +96,8 @@ PRODUCT = dataclasses.replace(
         'on a CNC router from 4 x 8 ft sheets of one batch (approve a tint swatch and a cemented corner sample first). The '
         'ring (6 mm) is cast acrylic tinted opaque in the ring colour; the cloth disc\'s frame (12 mm) black cast acrylic.',
         'Assembly: each panel\'s edges milled square and polished where they show, the panels annealed (about 80 C, an hour '
-        'for each 3 mm of thickness, cooled slowly); the ribs cemented to their panels flat (the back\'s to the back); the '
+        'for each 3 mm of thickness, cooled slowly); the ribs cemented to their panels flat (the back\'s to the back), the '
+        'top rib\'s front end polished, since it shows edge-on through the front panel (the coordinator, 2026-11-01); the '
         'shell\'s corners, the front panel (set back 24 mm), the two braces and the back\'s four land strips cemented with a '
         'two-part polymerising acrylic cement for thick sheet (ACRIFIX 2R 0190 or Weld-On 40), clamped square on a jig, no visible bubble in any joint; the box '
         'annealed again; the lands\' faces, the bosses\' and the seal\'s groove milled in one setup; the back closes the box last, '
