@@ -9,12 +9,12 @@ printed faces `out/decal-crate-front.png`, `-inside`, `-side`, `out/decal-case.p
 
 The acrylic is tinted all the way through, so the packaging is too: the lamps' boxes are made of board dyed through
 in the tint of the shade inside, and Tropos's crate is plain birch printed in two inks, black and the tint. Opening
-should be a sequence the owner can follow without reading a manual, and without lifting 72 kg.
+should be a sequence the owner can follow without reading a manual, and without lifting 74 kg.
 
 ## Tropos
 
 A pair ships as three pieces: two upright crates (one a speaker, cabinet only) and one horn case holding both horns.
-The horn lifts off (the site: about 72 kg with it, 62 kg without), so the crates carry the lighter cabinet and the
+The horn lifts off (about 74 kg with the stepped horn, 62 kg without), so the crates carry the lighter cabinet and the
 most fragile, most beautiful part travels on its own, face up.
 
 | | Crate | Horn case |
@@ -27,7 +27,7 @@ most fragile, most beautiful part travels on its own, face up.
 | The speaker wears | a cotton sleeve dyed the tint, a woven label with its number and name; it stays as the dust cover | — |
 | Print | outside: the wordmark, the tint's number and name in the tint, its line, "Tropos · 1 of 2", the weight; the side: handling marks; the door's inside: the five steps | the front: "The horns.", the tint, "Lift the lid, not the horns" |
 | Indicators | a tilt indicator and a 25 g shock indicator on two faces | a shock indicator |
-| Weight in the crate | the cabinet (about 62 kg) plus about 35 kg of crate, sled and foam: **estimate** | two horns (about 10 kg each, from 72 − 62) plus about 25 kg: **estimate** |
+| Weight in the crate | the cabinet (about 62 kg) plus about 35 kg of crate, sled and foam: **estimate** | two horns (about 12 kg each, from 74 − 62) plus about 25 kg: **estimate** |
 
 **The opening, in five steps** (printed inside the door): unlatch; lower the door; walk the speaker out on its sled;
 lift the sleeve off; crown it with the horn from its case.

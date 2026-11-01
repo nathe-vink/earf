@@ -7,7 +7,7 @@ another puts a new color on."
 |---|---|
 | Size | 200 mm across |
 | Shade | Cast acrylic in three layers, tinted, with a frosted layer between |
-| Light | 2700 K, CRI 90, its source shielded inside the hub |
+| Light | A 575-lumen LED, 2700 K, CRI 90, shielded inside the hub |
 | Fitting | Black anodized aluminum, with a quarter-turn catch |
 | Hanging | A 600 mm drop as standard, cut to length; a black acrylic canopy 150 mm across |
 | Mains | 120 V, dimmable; listing to UL 1598 to follow |

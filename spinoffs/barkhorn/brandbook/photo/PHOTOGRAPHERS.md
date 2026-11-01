@@ -39,7 +39,7 @@ figure is a benchmark from a directory or guide, so ask each for a quote.
 | Sara Anderson's own studio | SF | | Ask, if she's booked | |
 
 **Check before booking any studio:**
-- **freight access for Tropos** (about 72 kg a cabinet);
+- **freight access for Tropos** (about 74 kg a speaker with its horn);
 - **blackout** (the night set needs a truly dark room);
 - **power** for the lamps' chargers.
 

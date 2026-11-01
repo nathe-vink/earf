@@ -33,7 +33,7 @@ order in San Francisco [OWNER: confirm "in San Francisco" once the shops are cho
 quarter turn takes its shade off, and another puts a new color on.
 
 **Core** is a table lamp, a ball of tinted acrylic on a black base. Cordless, it runs about
-five hours and goes where the conversation is.
+five hours a charge on three standard LiFePO4 cells and goes where the conversation is.
 
 **Mantle** is a record player whose tinted plinth floats 40 mm above a base that glows at its edge, its motor in a
 pod of its own and a phono stage built in.

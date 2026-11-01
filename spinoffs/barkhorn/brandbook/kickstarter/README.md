@@ -160,7 +160,7 @@ the molds, so that money comes back.
 | **Tuesday 27 April** | **Launch**: 30 days |
 | 6–9 May | High End, Vienna, in the middle of the campaign |
 | Thursday 27 May | The campaign ends |
-| June | Funds arrive, two to three weeks after the end (R2, citing Kickstarter); labs booked; run ordered |
+| June | Funds arrive, two to three weeks after the end (R2, citing Kickstarter); lab testing, planned with the first build, begins; run ordered |
 | June–September | Certification: 8 to 16 weeks for the listings (R3) |
 | August–October | The run: forming, turning, assembly |
 | **October 2027** | **Core ships (est.)** |
@@ -171,5 +171,5 @@ the molds, so that money comes back.
 1. **The prices.** R4's $750 and $1,200 are recommendations; the press sheets still say "Set at launch". The tiers above are proposals.
 2. **Which Hemisphere ships.** It could be the plug-in swag version, listed to UL 153 (R3's and the lamps lane's suggestion for the first sales), or the hardwired pendant under UL 1598, which the press sheet names. The economics assume the swag version.
 3. **Matched tints or stock tints.** `first-articles.md` uses the stock sheet nearest each tint for January and saves the matched casts for Milan. The campaign must promise only what the run will be cast in.
-4. **The figures (settled by the lamps lane, aa78e0c7).** Core weighs about 1.46 kg ("about 1.5 kg"); Hemisphere gives about 575 lm (500 out of the shade). Core's runtime is 4.7 h at full brightness at the 90% limit, 5.8 h at the bar setting. Measure the prototype.
+4. **The figures (settled by the lamps lane, aa78e0c7).** Core weighs about 1.46 kg ("about 1.5 kg"); Hemisphere has a 575-lumen LED (about 500 lm out of the shade). Core's runtime is 4.7 h at full brightness at the 90% limit, 5.8 h at the bar setting. Measure the prototype.
 5. **A company.** The campaign needs a payout account and someone verified to run it (check Kickstarter's current requirements before the pre-launch page). R2 advises forming the entity first; Vienna's Start-Up Area needs one too.

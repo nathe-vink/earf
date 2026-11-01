@@ -17,7 +17,7 @@ same prototypes, so they're unpacked, cleaned and charged once.
 
 | Object | State by mid-February (lamps lane, est.) | Notes |
 |---|---|---|
-| **Tropos**, the pair | The first pair, if it played on 19 January | About 72 kg each with the horn (62 kg without; the horn lifts off). **The studio needs ground-floor or freight-lift access**, a dolly and two people per cabinet. The horn travels in its own case |
+| **Tropos**, the pair | The first pair, if it played on 19 January | About 74 kg each with the stepped horn (62 kg without; the horn lifts off). **The studio needs ground-floor or freight-lift access**, a dolly and two people per cabinet. The horn travels in its own case |
 | **Hemisphere** | One complete pendant in **Smoke** (stock 2064 Gray), a spare **Fog** shade, and the Ember shades if made | Hung on the plug-in swag, from a C-stand and boom. The steel cable carries it, never the cord |
 | **Core** | Two: **Ember** (stock 2423 Red) and **Smoke** (stock 2064) | Charged; spare cells |
 | **Mantle** | One complete player in **Ember** (stock 2423) | Its base lit; a record on it; the lid |

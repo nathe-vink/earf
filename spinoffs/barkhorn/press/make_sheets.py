@@ -38,7 +38,7 @@ SHEETS = [
      'woofer takes it, each on its own channel of the amplifier inside. The lining shows through the walls, so it is '
      'dressed in white voile. The name: the troposphere, the air we live in, from the Greek tropos, a turn.',
      [('Height', '1293 mm'), ('Width', '625 mm at the horn, 560 mm at the cabinet'), ('Depth', '423 mm overall, 420 mm at the cabinet'),
-      ('Weight', 'About 72 kg; 62 kg with the horn lifted off'), ('Woofer', 'FaitalPRO 15PR400, 15-inch, two ports in the front’s lower corners'),
+      ('Weight', 'About 74 kg with the stepped horn; 62 kg with the horn lifted off'), ('Woofer', 'FaitalPRO 15PR400, 15-inch, two ports in the front’s lower corners'),
       ('Horn driver', 'B&C DE1085TN, 2-inch compression driver'), ('Amplifier', 'Hypex FusionAmp FA122, built in: two channels of 125 W, crossed at 1 kHz in its DSP'),
       ('Bass', 'To about 51 Hz at −3 dB, before the room adds its own; ports tuned to 38 Hz'), ('Loudness', 'Up to about 115 dB at 1 m, each'),
       ('Inputs', 'XLR (and a link out), RCA, AES, S/PDIF coaxial and optical; USB to set it up'),
@@ -48,7 +48,7 @@ SHEETS = [
      'A pendant in the speakers’ acrylic, frosted within, so the color glows and the source never shows. Hung low over '
      'the bar. The shade comes off by hand to wash or to change color. The name: half a globe, hung mouth down.',
      [('Size', '200 mm across'), ('Shade', 'Cast acrylic in three layers, tinted, with a frosted layer between'),
-      ('Light', '2700 K, CRI 90, its source shielded inside the hub'), ('Fitting', 'Black anodized aluminum, with a quarter-turn catch'),
+      ('Light', 'A 575-lumen LED, 2700 K, CRI 90, shielded inside the hub'), ('Fitting', 'Black anodized aluminum, with a quarter-turn catch'),
       ('Hanging', 'A 600 mm drop as standard, cut to length; a black acrylic canopy 150 mm across'),
       ('Mains', '120 V, dimmable; listing to UL 1598 to follow'), ('Shades', 'In all eight colors, sold singly')]),
     ('core', 'Core', 'Table lamp', 'Goes where the conversation is.', 'lamp-orb.jpg',
@@ -56,7 +56,7 @@ SHEETS = [
      'conversation is. When the cells tire, you change the cells, not the lamp. The name: the glowing center.',
      [('Size', '160 mm ball, 180 mm tall'), ('Weight', 'About 1.5 kg'), ('Light', '2200 to 2700 K, warmer as it dims'),
       ('Control', 'Touch the black ring: tap to switch, hold to dim'),
-      ('Power', 'Cordless: about five hours at full brightness, longer dimmed, on cells you can replace yourself'),
+      ('Power', 'Cordless: about five hours a charge on three standard LiFePO4 cells you can replace yourself; two to three hours to charge'),
       ('Rating', 'Designed to meet IP44, for terraces and spilled drinks'), ('Shades', 'In all eight colors, sold singly')]),
     ('mantle', 'Mantle', 'Record player', 'A record player that floats on its own light.', 'tt-amber-studio.jpg',
      'Its tinted plinth floats 40 mm over a base that glows at its edge. The motor stands apart in a pod of its own, on '

@@ -56,13 +56,14 @@ the two lamps that go with it, and they are the first things we're making in a r
 **Core.** A 160 mm ball of tinted acrylic on a black acrylic base, 180 mm tall.
 - **The light:** 2200 to 2700 K, warmer as it dims.
 - **The control:** touch the black ring. Tap to switch it on or off; hold to dim.
-- **Power:** cordless. About five hours at full brightness, longer dimmed, on cells you can replace yourself.
+- **Power:** cordless. About five hours a charge at full brightness, longer dimmed, on three standard LiFePO4 cells you can replace
+  yourself. It charges in two to three hours.
   [RECHARGING: the lamps lane is redesigning it (owner, 2026-10-31); fill in from its design.]
 - **Outdoors:** designed to meet IP44, for terraces and spilled drinks.
 
 **Hemisphere.** A pendant 200 mm across, in three layers of cast acrylic:
 - a tinted shell, a frosted layer between, and a tinted skin;
-- the light source, 2700 K at CRI 90, shielded inside the hub, so you see the color and never the LED;
+- the light source, a 575-lumen LED at 2700 K and CRI 90, shielded inside the hub, so you see the color and never the LED;
 - a quarter-turn catch, so the shade comes off to wash, or to swap for another color.
 
 **Image block** (all photographs of the prototypes or the samples):
@@ -100,7 +101,7 @@ tests, and we've written down every one (Kickstarter asks, and you should too).
   - every Core is run, charged and checked for its cut-outs;
   - every Hemisphere is lit and dimmed on the three dimmers we test against.
 
-**The tests the prototypes passed** (from our first-article plan, filled in with the measured figures before launch):
+**The tests, planned with the first build** (from our first-article plan; the measured figures go in when they exist):
 
 | Lamp | Test | Our pass mark | Measured |
 |---|---|---|---|
@@ -115,7 +116,7 @@ tests, and we've written down every one (Kickstarter asks, and you should too).
 
 | When | What |
 |---|---|
-| June 2027 | Campaign funds arrive; certification booked; the run ordered |
+| June 2027 | Campaign funds arrive; certification, planned with the first build, begins; the run ordered |
 | June to September | FCC, DOE and California filings for Core; UL listing for both lamps |
 | August to October | Forming, turning and assembly |
 | October | Core ships, the Numbered Edition first |
@@ -125,7 +126,7 @@ We'll post an update at every step, with photographs of the step.
 
 ### Risks and challenges
 
-> **This is our first run.** The prototypes work, and they're measured. But making fifty or a hundred of anything
+> **This is our first run.** The prototypes work, and their tests are planned with the first build. But making fifty or a hundred of anything
 > teaches you things one doesn't. We've built the timeline with that in it, and we'll tell you as soon as we know
 > something you'd want to know.
 >
@@ -167,11 +168,12 @@ Eight: Ember, Dust, Acid, Poison, Ice, Haze, Fog and Smoke. You choose in the su
 the photographs of every tint first.
 
 **How long does Core run on a charge?**
-About five hours at full brightness and longer dimmed: [MEASURED] on the prototype. [RECHARGING: how it charges,
+About five hours a charge at full brightness and longer dimmed: [MEASURED] on the prototype. It charges in two to three
+hours. [RECHARGING: how it charges,
 from the lamps lane's redesign.]
 
 **Can I replace Core's cells?**
-Yes. They sit under a hatch in the base. [Spares: OWNER TO CONFIRM whether EARF sells them, and the cell type to name.]
+Yes. They're three standard LiFePO4 cells under a hatch in the base. [Spares: OWNER TO CONFIRM whether EARF sells them.]
 
 **Can I take Core outside?**
 Yes. It's designed to meet IP44: rain on a terrace, a drink over it. Not a pool, not a storm.
