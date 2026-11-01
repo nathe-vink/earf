@@ -10,7 +10,8 @@ in frame, at the site's names and sizes. The lamps lane's cordless set is the pa
 - No cloth disc.
 - The whole speaker in frame, never cropped.
 - The site's tint names.
-- The site's tints, not stock TruCast (TINTS.md), unless the owner says otherwise.
+- The line's tints as they stand: stock TruCast (the owner's ruling, 2026-11-01; `asset/TINTS.md`), with the site's deep
+  horn on Dust, Acid and Ice. (This plan first said the site's tints; it predates that ruling.)
 - Each frame type passes a blind critic at 7.0 or wins a duel against today's frame, up to three rounds a look (proofs at
   half size).
 
@@ -75,11 +76,15 @@ Until those are redone, those pages would show the formed horn beside Strata on 
 **The smooth horn (the option):** one front-off-tall and one hero-light, in Ember, about 50 minutes. That is for the
 page that names the option.
 
-**Order:**
-1. Ember (the hero tint);
-2. the shared frames;
-3. the other seven, in the site's order: Dust, Acid, Poison, Ice, Haze, Fog, Smoke;
+**Order** (the coordinator, 2026-11-01, while the owner weighs the cabinets' depth after the deck's colours slide):
+1. Ice, with the critic gate for each frame type, then its contact sheet and the horn close-up;
+2. Dust, Acid, Fog (cabinets the depth question does not touch);
+3. held for the owner's pick: Ember, Poison, Haze, Smoke, the shared frames with all eight (the arc and its portrait, the
+   line-up), the room portrait, and the caldera (Ember) and plinth (Smoke) close-ups;
 4. Tier C when asked.
+
+Shots: `shots.py`'s `site(frame, tint)` (`campaign/shots/site-{frame}-{tint}.json`). Tints are named by tint here; today's
+finals31 rigs call Ice 'blue' and Fog 'ice'.
 
 All frames go to `renders/2026-11-01/barkhorn/site-strata/`. Every PNG stays under 5 MB, and the site lane converts
 them to JPEG as now.
