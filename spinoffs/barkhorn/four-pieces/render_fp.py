@@ -60,10 +60,41 @@ def _tweaks(bpy):
                 print('tweaked', m.name, ins)
 
 
+def _part_tints(bpy):
+    """The shot's `part_tints`: [{"material": substring, "parts": regex, "sigma": [r, g, b] 1/m}], each object whose name
+    matches `parts` and whose material's name holds `material` gets a copy of that material with its volume absorption
+    set to `sigma` (Beer-Lambert by path length, as the engine's clear resin: density = the largest channel, colour =
+    1 - sigma / density). For a construction a material can't say by itself: Hemisphere's clear shell over its tinted
+    skin (the lamps lane's stock-tint proof, r32-lamps-final 64e96820), all three on one `body` material."""
+    import re
+    made = {}
+    for spec in SHOT.get('part_tints') or []:
+        rx = re.compile(spec['parts'])
+        sig = spec['sigma']; D = max(max(sig), 1e-6)
+        for o in bpy.context.scene.objects:
+            if o.type != 'MESH' or not rx.search(o.name):
+                continue
+            for slot in o.material_slots:
+                m = slot.material
+                if not m or spec['material'] not in m.name:
+                    continue
+                key = (m.name, tuple(sig))
+                if key not in made:
+                    c = m.copy(); c.name = f"{m.name}-{spec.get('label', 'tint')}"
+                    for n in c.node_tree.nodes:
+                        if n.type == 'VOLUME_ABSORPTION':
+                            n.inputs['Density'].default_value = D
+                            n.inputs['Color'].default_value = tuple(1.0 - x / D for x in sig) + (1.0,)
+                    made[key] = c
+                slot.link = 'OBJECT'; slot.material = made[key]
+                print('part tint', o.name, '->', made[key].name)
+
+
 def room(bpy, st, mats):
     r = _room(bpy, st, mats)
     _tropos(bpy)
     _tweaks(bpy)
+    _part_tints(bpy)
     return r
 
 

@@ -194,17 +194,24 @@ def strata(s):
 
 
 # the owner, 2026-11-01 (r46-owner-notes 8832050e): "I like the darker colors": the line takes stock sheet's deeper
-# tints. Poison is TruCast 2092 Green (tints-trucast.json: cabinet_deep #017D03 at 25 mm, 18.6 % through 20 mm).
-# Mantle's laminated plinth is sheet: 2092 by absorption. Core's ball and Hemisphere's shade are cast to order: tuned
-# by eye to read as the same deep bottle green as the cabinet beside them (the coordinator), not 2092 through 160 mm.
-LAMP_2092 = {'deep': '#5E9A4E', 'radius': 0.005}
+# tints, Poison is TruCast 2092 Green.
+# - Mantle's laminated plinth is sheet: 2092 by absorption, as the speaker lane's cabinet beside it (tints-trucast.json:
+#   cabinet_deep #017D03 at 25 mm).
+# - The lamps as the lamps lane's stock-tint proof makes them (r32-lamps-final 64e96820, strata/tint_proof.py), with its
+#   calibration (A&C's chart, 2092 18.6 % at 3 mm, hue #0DA41C, Beer-Lambert by path length): Hemisphere a clear 9 mm
+#   shell (0000), the opal, a 3 mm inner skin in 2092 (and the rim that closes the layers); Core's 9 mm ball wall at a
+#   third of 2092's dye loading. The engine's lamp models carry the same parts (shell, liner, skin, rim; shell-shell).
+SIGMA_2092 = [1931.4, 423.3, 1578.2]          # 1/m, per channel (tint_proof's absorption('Poison stock'))
+CLEAR_0000 = [0.5, 0.5, 0.5]                  # water-white cast acrylic
 
 
-def stock2092(s, lamp=None):
+def stock2092(s):
     s['materials']['acrylic'] = {'deep': '#017D03', 'radius': 0.025}
-    for p in s['set']['props']:
-        if p.get('module') == 'earf_moon':
-            p['materials'] = {**p.get('materials', {}), 'body': dict(lamp or LAMP_2092)}
+    s['part_tints'] = [
+        {'material': 'body@moon-dome', 'parts': r'-shell', 'sigma': CLEAR_0000, 'label': 'clear0000'},
+        {'material': 'body@moon-dome', 'parts': r'-(skin|rim)', 'sigma': SIGMA_2092, 'label': '2092'},
+        {'material': 'body@moon-orb', 'parts': r'-shell-shell', 'sigma': [x / 3 for x in SIGMA_2092], 'label': '2092-third'},
+    ]
     s['title'] += ' (stock 2092)'
     return s
 

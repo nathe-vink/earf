@@ -264,13 +264,7 @@
     "cable": false,
     "cartridge": "in",
     "lamp_w": 1.7999999999999998,
-    "shade_glow": 0.15,
-    "materials": {
-     "body": {
-      "deep": "#5E9A4E",
-      "radius": 0.005
-     }
-    }
+    "shade_glow": 0.15
    },
    {
     "kind": "kit",
@@ -289,13 +283,7 @@
     ],
     "ceiling": 3.6,
     "lamp_w": 5.3999999999999995,
-    "shade_glow": 0.15,
-    "materials": {
-     "body": {
-      "deep": "#5E9A4E",
-      "radius": 0.005
-     }
-    }
+    "shade_glow": 0.15
    },
    {
     "kind": "kit",
@@ -572,5 +560,37 @@
   -0.333,
   0.337,
   1.336
+ ],
+ "part_tints": [
+  {
+   "material": "body@moon-dome",
+   "parts": "-shell",
+   "sigma": [
+    0.5,
+    0.5,
+    0.5
+   ],
+   "label": "clear0000"
+  },
+  {
+   "material": "body@moon-dome",
+   "parts": "-(skin|rim)",
+   "sigma": [
+    1931.4,
+    423.3,
+    1578.2
+   ],
+   "label": "2092"
+  },
+  {
+   "material": "body@moon-orb",
+   "parts": "-shell-shell",
+   "sigma": [
+    643.8000000000001,
+    141.1,
+    526.0666666666667
+   ],
+   "label": "2092-third"
+  }
  ]
 }
