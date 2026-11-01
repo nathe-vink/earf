@@ -191,3 +191,14 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
   every speaker (about a day). Nothing from the lane meets the gate. Coordinator's fallback for the owner: the eight
   existing single-habitat portraits (covers off, 6-6.7 each) as one strip with thin gutters (scratchpad
   poly/earf-eight-biomes-strip.jpg, 4870 x 750): show with the honest status; offer the day-long true blend as an option.
+
+## Check-in 6 (00:40 UTC)
+- Lamps: cordless Core 8 of 10 (Smoke 00:37); the rows (lamps-orbs, lamps-unlit) next.
+- Four-pieces becc85b5 (round 7, day + dusk proofs, anchors with label zones): the layout meets the owner's ruling. Built
+  the slide on both from anchors.json (coordinator/deck-line/spec_from_anchors.py): DUSK reads well (light type 5.7-9.9:1;
+  Hemisphere 4.4:1 near its glow); DAY's mid-gray wall gives 3.5-4.0:1 in both inks. Asked: day wall to warm off-white
+  (sRGB ~200-215 in zones) for dark type 7:1+; move Hemisphere's dusk zone off the glow; bottom-right calm for the note.
+- Mantle v3 (2fddab95): smoked receding base, solid polished stainless posts, tone-on-tone mark on the back edge; its duel
+  vs Outcrop pending.
+- Brand: Relief look 2 r2 6.0; Moho look 2 r2 5.5. Editions: no push since 23:38 (Iron in the Core rig in progress).
+- Speaker: Strata studio hero still rendering (shot at 23:43).
