@@ -227,3 +227,14 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
   (7.0 vs 5.5, 7.0 vs 5.0); tropos-strata.blend (2208e2af, eight tints, proposal, no cover); a three-layer test stack
   (~$150) added before the first pair; RFQs in American English quoting in Smoke "color chosen at order" (e0a5fa5e).
   Holding for the engineering review's list.
+
+## Check-in 7 (01:32 UTC)
+- OWNER got a first-pass engineering answer at ~01:25 (Tropos, Hemisphere, Core, Mother EARF; Mantle pending; flagged as
+  unreviewed). Workflow wf_32ea5a79-234: all four audits done (Mantle "not yet sound": real bought core - Rega RB330, Rega
+  24 V motor + Neo PSU, Pro-Ject Phono Box S2, Ortofon 2M - but the pulley sized for 250 rpm vs a 60 Hz Neo at 300 rpm
+  = 40 rpm (TO VERIFY: does the US Neo output 60 Hz?), no rear jack panel on Strata, LED strip doesn't fit its slot, lid
+  vs arm sweep, BOM/drawings contradict CAD, DPDT bypass loads the cartridge, compliance not started). The four reviews
+  and the completeness pass are running; send the owner the checked version, then dispatch fixes to the lanes.
+- Four-pieces: NOTES.md + finalize.py (00:49); finals not yet announced.
+- Editions 8c8d5338: Iron r3 rendering.
+- Brand: Relief stopped (best 6.5, look 2 r1); Meridian, Lithos, Ionos, Bedrock, Cairn r3 rendering.
