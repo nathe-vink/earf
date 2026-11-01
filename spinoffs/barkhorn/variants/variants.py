@@ -49,7 +49,10 @@ PLINTH = dict(layer=12.7, gap=0.1, outer=[(-20.0, -20.0, 580.0, 440.0), (-35.0, 
 # A, lit (the owner, 2026-11-01: "can we make them light up from underneath? ... I'd go with the one on the left"): a
 # 2700 K COB strip in a shallow aluminium channel with a frosted diffuser, routed into the bottom frame's underside
 # `inset` in from its outside edge all round, so a soft warm glow falls on the floor round the plinth (variants/BASES.md)
-PLINTH_LIGHT = dict(inset=40.0, w=10.0, t=2.0)
+# the plinth light (the coordinator, 2026-11-01: a soft pool on the floor, not a line): the 10 mm COB strip 90 in from the
+# bottom frame's edge, behind a 40 wide, 3 mm opal diffuser under the frame, so the step's edge no longer shows the strip
+# itself and its light leaves downward; the feet, the footprint and the plinth's outline unchanged (it was 40 in, bare)
+PLINTH_LIGHT = dict(inset=90.0, w=10.0, t=2.0, diffuser_w=40.0, diffuser_t=3.0)
 OUTRIG = dict(w=30.0, h=20.0, inner=[(95.0, 80.0), (465.0, 80.0), (95.0, 340.0), (465.0, 340.0)])
 
 
@@ -163,15 +166,18 @@ def parts(P):
                                        'bonded; the cabinet bolted down on it with M8 through its feet\'s inserts']))
     from build123d import Box
     x0, y0, x1, y1 = PLINTH['outer'][-1]; L_ = PLINTH_LIGHT; i_ = L_['inset']
-    zl1 = zp - 0.1; zl0 = zl1 - L_['t']
+    # what shows and glows is the diffuser (the strip sits in its channel above it, inside the frame's underside)
+    W_ = L_['diffuser_w']; zl1 = zp - 0.1; zl0 = zl1 - L_['diffuser_t']
     strip = []
     for (ax, ay, bx, by) in ((x0 + i_, y0 + i_, x1 - i_, y0 + i_), (x0 + i_, y1 - i_, x1 - i_, y1 - i_),
                              (x0 + i_, y0 + i_, x0 + i_, y1 - i_), (x1 - i_, y0 + i_, x1 - i_, y1 - i_)):
-        lx = abs(bx - ax) + L_['w']; ly = abs(by - ay) + L_['w']
-        strip.append(Pos((ax + bx) / 2, (ay + by) / 2, (zl0 + zl1) / 2) * Box(lx if lx > L_['w'] else L_['w'], ly if ly > L_['w'] else L_['w'], L_['t']))
+        lx = abs(bx - ax) + W_; ly = abs(by - ay) + W_
+        strip.append(Pos((ax + bx) / 2, (ay + by) / 2, (zl0 + zl1) / 2) * Box(lx if lx > W_ else W_, ly if ly > W_ else W_, L_['diffuser_t']))
     out.append(product.Part('base-plinth-light', _C(children=strip), product.Bought('plinth-led'), finish='led', group='base',
-                            option='Plinth light', notes=['Base A, lit: the COB strip\'s frosted diffuser under the bottom frame, '
-                                                          f'{i_:g} in from its edge all round (variants/BASES.md)']))
+                            option='Plinth light', notes=['Base A, lit: the COB strip in a channel under the bottom frame, '
+                                                          f'{i_:g} in from its edge all round, behind a {W_:g} wide, '
+                                                          f'{L_["diffuser_t"]:g} mm opal acrylic diffuser, so it throws a soft pool on '
+                                                          'the floor, not a line at the step (variants/BASES.md)']))
     for nm, key in (('base-plinth-supply', 'plinth-supply'), ('base-plinth-controller', 'plinth-controller')):
         out.append(product.Part(nm, None, product.Bought(key), group='base', option='Plinth light'))
     pf = [foot(x, y, zp - 0.1) for x, y in BASE['feet']]

@@ -63,12 +63,14 @@ The steps' polished edges catch some of it.
 
 **The light:**
 - **The strip:** COB (dotless) LED, 24 V, **4.8 W/m, 2700 K, CRI 90+ (R9 above 50)**, 8 mm wide (`plinth-led`).
-- **The channel:** a shallow aluminum channel, about 10 x 4, with a frosted PMMA diffuser. It is bonded into a groove
-  routed in the bottom frame's underside, **40 mm in from its outside edge all round**.
-- **The light's path:** the strip faces the floor. The plinth stands 12 mm up on its feet, so the light spills out
-  past the bottom step as a band of glow. Light also enters the bottom frame through the groove's walls and shows
-  at its polished outside edge.
-- **Length and power:** 2.34 m a speaker, so **11.2 W at full** and 5.6 W at the default 50 %.
+- **The channel:** a shallow aluminum channel, about 10 x 4, bonded into a groove routed in the bottom frame's underside,
+  **90 mm in from its outside edge all round** (40 until the coordinator's call of 2026-11-01). Under it, a **40 mm wide,
+  3 mm opal acrylic diffuser** bonded into a rebate, flush with the frame's underside.
+- **The light's path:** the strip faces the floor through the diffuser. The plinth stands 12 mm up on its feet, so the
+  light spreads from the diffuser onto the floor as a soft pool that reaches past the bottom step. The step's edge no
+  longer shows the strip itself as a line (the deck's LED rows, 2026-11-01: at 40 in it read as an orange line at every
+  strength). The feet, the footprint and the plinth's outline are unchanged.
+- **Length and power:** 1.94 m a speaker, so **9.3 W at full** and 4.7 W at the default 50 %.
 
 **Power, separate from the FA122's mains:**
 - **A plug-in supply, 24 V, 15 W, UL listed Class 2** (UL 1310) or IEC 62368-1 PS1 (`plinth-supply`), with a 2 m lead
