@@ -486,3 +486,11 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
 Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few, beside the whole speaker · Flush horn: flush"
 - Saved in the README owner notes. Next: a new tagline set (workflow); lanes told; deck: Mantle = Strata Float, ask table (Tropos about
   $20,700, reserve about $2,300), first pair in stocked 2064 gray; board marks them settled when the tagline set is added.
+- 12:25 deck v43: Mantle slide = Strata Float v3 in Ember at dusk (/_blob/d67e7bced956190bb433bdf89b176c64), "A record player that
+  floats on its own light.", Deck row, 2M (cartridge open), parts ~$3,900; line slide's Mantle label back to "Floats on its own light.";
+  ask: Tropos $20,700 (first pair in stocked 2064, plinths included), contingency about 5% $2,300 (total $50,000), notes: the lamps-and-
+  Mantle line being re-run (Hemisphere's new molds ~$295, Mantle fixes ~$80, from the contingency); made/risks: first pair in 2064;
+  light notes: Core's dock, Hemisphere's color outside. Lanes told: Mantle (Strata-only items, a Strata Float product block for the room),
+  lamps (LiFePO4 board RFQ draft, the dock drawn and the notch closed, v3 the main build, re-run the lamps-and-Mantle budget), speaker
+  (schedule + RFQ to 2064 first pair, close-ups kept beside whole shots, site set queued after deck frames), four-pieces (re-render the
+  room with Strata Float after the 2092 frames: -final-2092-sf), site (copy drafts). Tagline workflow wf_9bb8d840-719 running.
