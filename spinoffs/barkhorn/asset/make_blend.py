@@ -95,6 +95,36 @@ def load_product(bpy, Pr, path, hide, full, tints=None, options=(), lift=0.0):
     return Pr.place(bpy, pdef, templates, shot, ROOT)
 
 
+GLOW_DAY, GLOW_DUSK = 20.0, 40.0
+
+
+def plinth_glow(bpy, objs):
+    """The plinth light's strength as one setting a shot can change (the coordinator, 2026-11-01: 20 by day, 40 at dusk):
+    every glowing material reads a custom property `glow` from the object that instances the collection (a linked
+    collection's empty) if it has one, else from the strip object itself (set to GLOW_DAY here). So: link a tint's
+    collection, add a custom property `glow` = 40.0 to its instance empty for dusk; nothing to make local."""
+    mats = {s.material for o in objs if o.type == 'MESH' for s in o.material_slots
+            if s.material and s.material.use_nodes and any(n.type == 'BSDF_PRINCIPLED' and n.inputs['Emission Strength'].default_value > 0
+                                                          and not n.inputs['Emission Strength'].is_linked for n in s.material.node_tree.nodes)}
+    for m in mats:
+        nt = m.node_tree
+        bsdf = next(n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED' and n.inputs['Emission Strength'].default_value > 0)
+        a_obj = nt.nodes.new('ShaderNodeAttribute'); a_obj.attribute_type = 'OBJECT'; a_obj.attribute_name = 'glow'
+        a_ins = nt.nodes.new('ShaderNodeAttribute'); a_ins.attribute_type = 'INSTANCER'; a_ins.attribute_name = 'glow'
+        gt = nt.nodes.new('ShaderNodeMath'); gt.operation = 'GREATER_THAN'; gt.inputs[1].default_value = 0.0
+        sub = nt.nodes.new('ShaderNodeMath'); sub.operation = 'SUBTRACT'
+        mad = nt.nodes.new('ShaderNodeMath'); mad.operation = 'MULTIPLY_ADD'      # obj + (inst > 0) * (inst - obj)
+        nt.links.new(a_ins.outputs['Fac'], gt.inputs[0])
+        nt.links.new(a_ins.outputs['Fac'], sub.inputs[0]); nt.links.new(a_obj.outputs['Fac'], sub.inputs[1])
+        nt.links.new(gt.outputs[0], mad.inputs[0]); nt.links.new(sub.outputs[0], mad.inputs[1]); nt.links.new(a_obj.outputs['Fac'], mad.inputs[2])
+        nt.links.new(mad.outputs[0], bsdf.inputs['Emission Strength'])
+        m['glow_note'] = f'emission = the instancer\'s `glow` if set, else the object\'s ({GLOW_DAY:g} day, {GLOW_DUSK:g} dusk)'
+    for o in objs:
+        if o.type == 'MESH' and any(s.material in mats for s in o.material_slots):
+            o['glow'] = GLOW_DAY
+    print('plinth glow:', len(mats), 'materials,', sum(1 for o in objs if 'glow' in o), 'objects')
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--out', default=str(HERE / 'tropos.blend'))
@@ -102,8 +132,10 @@ def main():
     ap.add_argument('--name', default=None, help='the collections\' prefix (default Tropos, Tropos Strata, or Tropos Strata Smooth)')
     ap.add_argument('--horn', default='stepped', choices=sorted(HORNS), help='Strata\'s horn: stepped (the lead) or smooth (the option)')
     ap.add_argument('--full', action='store_true', help='keep every triangle (no LIGHTER)')
-    ap.add_argument('--tints', default='site', choices=['site', 'trucast'],
-                    help="the site's tints (default) or stock TruCast sheet's (tints-trucast.json, TINTS.md)")
+    ap.add_argument('--tints', default='line', choices=['line', 'site', 'trucast'],
+                    help="the line's own (default: the product files as product.py writes them, colors F since "
+                         "2026-11-01, TINTS.md), or the old recalibrations: 'site' (the files untouched before the "
+                         "stock tints were the line's) and 'trucast' (plain stock sheet, overwriting F and the deep horns)")
     a = ap.parse_args()
     import bpy
     import product as Pr
@@ -163,6 +195,7 @@ def main():
                 img.pack()
             except RuntimeError:
                 pass
+    plinth_glow(bpy, objs)
     bpy.context.preferences.filepaths.use_file_compression = True
     bpy.context.preferences.filepaths.save_version = 0          # no .blend1 backup beside it
     bpy.ops.wm.save_as_mainfile(filepath=a.out, compress=True)
