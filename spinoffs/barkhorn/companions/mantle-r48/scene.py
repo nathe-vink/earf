@@ -121,13 +121,13 @@ def wear(nt, strength=1.0, scale=1.0):
     return sc.outputs[0], ds.outputs[0]
 
 
-def acrylic(name, bands, tint, rough=0.004, wear_on=True, ring=None):
+def acrylic(name, bands, tint, rough=0.004, wear_on=True, ring=None, edge_rough=0.010):
     """`bands`: [(z0, z1, 'tint'|'clear')] in metres. The material has slots: 0 glassy (cast faces), 1 polished edge,
     2 buffed tread, 3 machined satin. One node tree per slot, the volume shared."""
     st = sigma_tint(tint)
     D = max(st) * 1.0001
     mats = []
-    for slot, (r, wr) in enumerate(((rough, True), (0.010, False), (0.045, False), (0.07, False))):   # bores vapor-polished
+    for slot, (r, wr) in enumerate(((rough, True), (edge_rough, False), (0.045, False), (0.07, False))):   # bores vapor-polished
         m, nt, out = node_tree(f'{name}-{slot}')
         b = nt.nodes.new('ShaderNodeBsdfPrincipled')
         b.inputs['Base Color'].default_value = (1, 1, 1, 1)
@@ -707,7 +707,8 @@ def build(args):
     if 'plinth-L1-stack' in objs:
         bands_pl = remap([(l['z0'] * mm, l['z1'] * mm, l['kind'], l['inset'] * mm) for l in meta['lams']])
         o0 = meta['P']['margin'] * mm
-        M['plinth'] = acrylic('plinth', bands_pl, tint, ring=(o0, o0, o0 + (meta['W0']) * mm, o0 + meta['D0'] * mm, rw * mm) if rw else None)
+        M['plinth'] = acrylic('plinth', bands_pl, tint, ring=(o0, o0, o0 + (meta['W0']) * mm, o0 + meta['D0'] * mm, rw * mm) if rw else None,
+                              edge_rough=args.edge_frost if args.edge_frost else 0.010)
         bands_b = remap([(l['z0'] * mm, l['z1'] * mm, l['kind'], 0.0) for l in meta['base']])
         M['base'] = acrylic('base', bands_b, tint, ring=(0.0, 0.0, meta['Wb'] * mm, meta['Db'] * mm, rw * mm) if rw else None)
         if meta['P'].get('post_material') == 'stainless':
@@ -1035,6 +1036,7 @@ if __name__ == '__main__':
     ap.add_argument('--blend', default=None); ap.add_argument('--strip', type=float, default=0.0)
     ap.add_argument('--tint-mode', default='stock', choices=('stock', 'wide', 'custom'))
     ap.add_argument('--front-strip', type=float, default=0.0)
+    ap.add_argument('--edge-frost', type=float, default=0.0)
     ap.add_argument('--strip-color', type=float, nargs=3, default=(1.0, 0.62, 0.30))
     a = ap.parse_args(argv)
     build(a)

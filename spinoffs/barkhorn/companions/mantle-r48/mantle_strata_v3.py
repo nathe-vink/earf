@@ -173,7 +173,7 @@ def parts(P):
             out.append(Part(f'plinth-L{i + 1}-inlay', s & band, clr[3.0], finish='clear', group='plinth', render=False))
         else:
             out.append(Part(f'plinth-L{i + 1}', s, clr[l['t']], finish='clear', group='plinth', render=False,
-                            notes=['the deck: two clear 12.7 sheets (custom-poured in the color for the color versions), cemented flush with ACRIFIX 2R 0190 in a vacuum press: one bond line, at mid-edge; annealed, faces fly-cut, the outline finish-routed as one, edges diamond-polished'] if i == 0 else []))
+                            notes=['the deck: two clear 12.7 sheets (custom-poured in the color for the color versions), cemented flush with ACRIFIX 2R 0190 in a vacuum press: one bond line, at mid-edge; annealed, faces fly-cut, the outline finish-routed as one; the outer edge fine bead-blasted to a satin (round 48\'s duels: a polished thick edge refracts the room in patches, a satin one collects light evenly), the top and bottom faces left glassy'] if i == 0 else []))
     plinth_one = cut(union(*one), cuts)
     out[0].pieces = {'stack': (plinth_one, 'acrylic-strata')}; out[0].render = True
 
