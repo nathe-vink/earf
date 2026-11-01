@@ -1,10 +1,10 @@
 {
- "_note": "Hemisphere v3 (proposal) for the engine, written by studio/fabkit/render.py from the fabrication CAD; part names are the parts' names, materials the parts' finishes.",
- "model": "spinoffs/barkhorn/companions/out-dome-pendant-v3/render/earf-dome-pendant-v3.glb",
+ "_note": "Hemisphere v2 (alternative) for the engine, written by studio/fabkit/render.py from the fabrication CAD; part names are the parts' names, materials the parts' finishes.",
+ "model": "spinoffs/barkhorn/companions/out-dome-pendant-v2/render/earf-dome-pendant-v2.glb",
  "origin_mm": [
   0.0,
   0.0,
-  0.0
+  -0.0
  ],
  "materials": {
   "anodised": {
@@ -61,7 +61,7 @@
    "material": "anodised"
   },
   {
-   "match": "shell|liner|rim",
+   "match": "shell|skin|rim",
    "material": "body"
   },
   {
@@ -73,7 +73,7 @@
    "material": "led"
   },
   {
-   "match": "skin",
+   "match": "liner",
    "material": "liner"
   },
   {

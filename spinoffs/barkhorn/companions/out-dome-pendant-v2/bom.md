@@ -1,12 +1,12 @@
-# Hemisphere v3 (proposal): parts for 1 (Pendant in cast acrylic, the tint outside)
+# Hemisphere v2 (alternative): parts for 1 (Pendant in cast acrylic, the tint inside)
 
 | item | make | qty | what | size | each, USD |
 |---|---|---|---|---|---|
-| shell | formed | 1 | Cast acrylic sheet, tinted through, drape-formed over an aluminium mould | 160 cm3, 210 x 210 x 98 | 1,515.53 |
-| liner | formed | 1 | Cast acrylic sheet, clear (TruCast 0000), drape-formed over an aluminium mould (proposal 2026-11-01) | 265 cm3, 202 x 202 x 89 | 1,519.57 |
-| skin | formed | 1 | Cast acrylic sheet, volume-diffusing (opal), formed over an aluminium mould | 120 cm3, 188 x 188 x 85 | 1,212.95 |
-| rim | lathe | 1 | Cast acrylic tube, tinted through | 204 x 204 x 14 | 67.88 |
-| collar | lathe | 1 | Aluminium 6061 | 126 x 126 x 53 | 66.22 |
+| shell | formed | 1 | Cast acrylic sheet, clear (TruCast 0000), drape-formed over an aluminium mould | 446 cm3, 210 x 210 x 98 | 1,529.51 |
+| liner | formed | 1 | Cast acrylic sheet, volume-diffusing (opal), formed over an aluminium mould | 117 cm3, 190 x 190 x 82 | 1,212.73 |
+| skin | formed | 1 | Cast acrylic sheet, tinted through, drape-formed over an aluminium mould | 111 cm3, 182 x 182 x 81 | 1,212.30 |
+| rim | lathe | 1 | Cast acrylic tube, tinted through | 192 x 192 x 14 | 65.26 |
+| collar | lathe | 1 | Aluminium 6061 | 126 x 126 x 58 | 67.96 |
 | clamp | lathe | 1 | Aluminium 6061 | 126 x 126 x 24 | 54.65 |
 | gaskets | buy | 1 | Two moulded silicone rings (Shore 40, black, 1 mm, spherical): one between the collar's flange and the skin inside, one between the clamp ring and the shell outside |  | 3.00 |
 | vent | buy | 1 | Gore or alike A press-in ePTFE pressure-equalising vent (about 4 across), in the rim ring: it lets the air gaps between the layers breathe and keeps out dust and liquid |  | 1.50 |
@@ -29,9 +29,9 @@
 | | USD |
 |---|---|
 | buy | 87 |
-| formed | 4,248 |
-| lathe | 559 |
-| total | 4,894 |
+| formed | 3,955 |
+| lathe | 558 |
+| total | 4,599 |
 
 No price yet for: UL or Intertek (ETL) Listing the pendant to UL 1598 (and the table lamp's battery and charger to UL 153 / IEC 62368): a one-off cost a design, spread over the first run.
 

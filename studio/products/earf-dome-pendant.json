@@ -4,7 +4,7 @@
  "origin_mm": [
   0.0,
   0.0,
-  -0.0
+  0.0
  ],
  "materials": {
   "anodised": {
@@ -61,7 +61,7 @@
    "material": "anodised"
   },
   {
-   "match": "shell|skin|rim",
+   "match": "shell|liner|rim",
    "material": "body"
   },
   {
@@ -73,7 +73,7 @@
    "material": "led"
   },
   {
-   "match": "liner",
+   "match": "skin",
    "material": "liner"
   },
   {

@@ -94,7 +94,7 @@ for _k, _c in CAST.items():
 SOLIDS.setdefault('acrylic-formed', dict(title='Cast acrylic sheet, tinted through, drape-formed over an aluminium mould',
                                          density=1.19, usd_per_cm3=0.06))
 SOLIDS.setdefault('acrylic-clear-formed', dict(title='Cast acrylic sheet, clear (TruCast 0000), drape-formed over an '
-                                               'aluminium mould (proposal 2026-11-01)', density=1.19, usd_per_cm3=0.05))
+                                               'aluminium mould', density=1.19, usd_per_cm3=0.05))
 SOLIDS.setdefault('acrylic-opal-formed', dict(title='Cast acrylic sheet, volume-diffusing (opal), formed over an aluminium '
                                               'mould', density=1.19, usd_per_cm3=0.06))
 SOLIDS.setdefault('peek', dict(title='PEEK rod, unfilled', density=1.30, usd_per_cm3=0.35))
@@ -214,7 +214,7 @@ def cover_parts(p=N):
     note_formed = ('drape-formed from cast sheet over an aluminium mould, trimmed and polished; the prototypes are formed on '
                    'the production moulds')
     if p.get('build') == 'v3':
-        # PROPOSAL v3 (2026-11-01, tint_proof, recommended over v2): the tint outside. The same three formed layers in a
+        # v3, the main build since the owner signed it (2026-11-01): the tint outside. The same three formed layers in a
         # new order: a 3 mm stock-tint shell outside (colour unlit), a 6 mm clear shell (the structural one, clamped by
         # the collar with the others), the 3 mm opal inside, seen directly from below; no tinted skin
         layers = [
@@ -357,7 +357,14 @@ def north_parts(p=N):
     ]
 
 
-dome_parts = north_parts
+# The owner signed v3 (2026-11-01, r46-owner-notes 5b63e05b: "Hemisphere: color outside"): the main build's shade is
+# a 3 mm stock-tint shell outside, a 6 mm clear structural shell, then the opal. v2 (clear outside, tinted skin) stays
+# as the alternative in dome_pendant_v2.py
+V3 = dict(N, shell=3.0, liner=6.0, skin=3.0, build='v3')
+
+
+def dome_parts(p=None):
+    return north_parts(V3 if p is None else p)
 
 
 # --- Orb, the table lamp -------------------------------------------------------------------------------------------
