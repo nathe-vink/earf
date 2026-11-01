@@ -586,3 +586,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   rows at 40/20/10 on today's defaults (I pick a soft glow that keeps the contact shadow); deep horns take each cabinet's own hue,
   only deeper (the ruling is about depth; TINTS.md to note it); fix the lining streak, the blue rectangle and the side-face flag; after
   the owner's card 03, one fresh gate with picked materials + LED + round-3 notes, finals at 256 samples (384 if the critics ask).
+- 17:35 speaker LED rows (40 839bed31, 20 d87fcf91, 10 53ef0ac8; the deck row is at 60): in the studio rig the contact shadow holds at
+  every level; 40-60 a clear orange line, 20 a thin warm edge, 10 almost gone. A line at every level: the strip sits 40 mm in, 10 mm wide,
+  so a soft pool needs geometry. My calls: LED 20 for daylight, 40 for dusk; strip moved 80-100 mm in behind a ~3 mm opal diffuser
+  (no visible change to the plinth; tip-test footprint unchanged), quick rows at 20/40; a wider gap only as an owner option if that
+  fails. HF lead (the "streak", pending a hide test) routed up the rear inside corner on the rib, sleeved in the lining's color. The
+  "blue rectangle" is the grip pocket, real. Deep horns in the cabinet's hue done (332c9e5d: Dust #F25508, Acid #FFB101, Ice #2981E7);
+  side-view flag removed (64282aa1).
