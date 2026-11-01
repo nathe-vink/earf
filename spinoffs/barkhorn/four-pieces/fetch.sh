@@ -7,7 +7,9 @@ for b in r33-speaker-horn r32-lamps-final r32-turntable-final; do
 done
 # Tropos: the asset (one collection per tint, cover hidden) and the golden-hour room's set pieces
 # 2026-11-01: both assets rebuilt (the top bay's lining box had been decimated into a wedge); Strata is the launch design
-git checkout c77460f03d0e39956b11097ed4a46887967d7553 -- spinoffs/barkhorn/asset/tropos.blend spinoffs/barkhorn/asset/tropos-strata.blend
+git checkout c77460f03d0e39956b11097ed4a46887967d7553 -- spinoffs/barkhorn/asset/tropos.blend
+# the owner's final Strata (the stepped horn flush, black sleeves, the lit stepped plinth)
+git checkout 603a54e2287f5b30b84f209db58c8c2eaaa1b60a -- spinoffs/barkhorn/asset/tropos-strata.blend
 git checkout 6770c713 -- spinoffs/barkhorn/room31/pieces.py spinoffs/barkhorn/room31/post.py
 # Hemisphere and Core (round 41: the low top, Core on the 30 base) and the kit piece that places them
 git checkout origin/r32-lamps-final -- studio/engine/kit.py studio/engine/kit_ext/earf_moon.py \

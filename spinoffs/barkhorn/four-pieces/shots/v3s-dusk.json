@@ -462,7 +462,7 @@
     0.53,
     1.0
    ],
-   "irradiance": 0.25,
+   "irradiance": 0.5,
    "color": 3000,
    "camera": false
   },
@@ -482,7 +482,7 @@
     0.53,
     1.0
    ],
-   "irradiance": 0.25,
+   "irradiance": 0.5,
    "color": 3000,
    "camera": false
   },
@@ -616,7 +616,8 @@
  "labels": {
   "tropos": {
    "of": "tropos0",
-   "side": "above"
+   "side": "above",
+   "gap": 40
   },
   "mantle": {
    "of": "mantle",
@@ -625,7 +626,8 @@
   },
   "core": {
    "of": "core",
-   "side": "above"
+   "side": "above",
+   "dx": -10
   },
   "hemisphere": {
    "of": "hemisphere",
@@ -667,10 +669,11 @@
  },
  "tropos_asset": "spinoffs/barkhorn/asset/tropos-strata.blend",
  "tropos_prefix": "Tropos Strata",
+ "tropos_lift": 0.039,
  "tropos_box": [
-  0.325,
-  -0.228,
-  0.214,
-  1.305
+  0.33,
+  -0.333,
+  0.337,
+  1.336
  ]
 }

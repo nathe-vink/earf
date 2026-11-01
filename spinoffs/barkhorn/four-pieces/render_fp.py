@@ -42,7 +42,8 @@ def _tropos(bpy):
         e = bpy.data.objects.new(f'tropos-{i}', None)
         e.instance_type = 'COLLECTION'; e.instance_collection = col
         x, y = t['position'][:2]
-        e.location = (x, y, 0.0); e.rotation_euler = (0, 0, math.radians(t.get('rotate_z', 0.0)))
+        # `tropos_lift`: the asset's origin at the speaker's base, its plinth below (Strata's final form: 38.5 mm)
+        e.location = (x, y, SHOT.get('tropos_lift', 0.0)); e.rotation_euler = (0, 0, math.radians(t.get('rotate_z', 0.0)))
         bpy.context.scene.collection.objects.link(e)
 
 

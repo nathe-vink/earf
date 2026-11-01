@@ -178,7 +178,17 @@ def strata(s):
     spinoffs/barkhorn/asset/tropos-strata.blend; 650 x 442 x 1305 mm, no cover). The same camera, lights and zones."""
     s['tropos_asset'] = 'spinoffs/barkhorn/asset/tropos-strata.blend'
     s['tropos_prefix'] = 'Tropos Strata'
-    s['tropos_box'] = [0.325, -0.228, 0.214, 1.305]
+    # the owner's final form (r33-speaker-horn 603a54e2): the stepped horn flush with the cabinet, black lining
+    # sleeves, a stepped plinth lit from underneath (660 x 670, lifting the speaker 38.5 mm): its origin at the
+    # speaker's base, so the instance stands 39 mm up and the plinth on the floor
+    s['tropos_lift'] = 0.039
+    s['tropos_box'] = [0.33, -0.333, 0.337, 1.336]
+    # the taller, wider speaker: its label 40 px over the horn (clear of the header), Core's 10 px left (clear of the plinth)
+    s['labels']['tropos']['gap'] = 40
+    s['labels']['core']['dx'] = -10
+    for k, L in s['lights'].items():
+        if k.startswith('top'):
+            L['irradiance'] = 0.5                 # the darker cabinet (black sleeves) at dusk
     s['title'] = s['title'].replace('Tropos pair', 'Tropos Strata pair')
     return s
 
