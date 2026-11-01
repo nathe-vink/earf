@@ -193,13 +193,32 @@ def strata(s):
     return s
 
 
+# the owner, 2026-11-01 (r46-owner-notes 8832050e): "I like the darker colors": the line takes stock sheet's deeper
+# tints. Poison is TruCast 2092 Green (tints-trucast.json: cabinet_deep #017D03 at 25 mm, 18.6 % through 20 mm).
+# Mantle's laminated plinth is sheet: 2092 by absorption. Core's ball and Hemisphere's shade are cast to order: tuned
+# by eye to read as the same deep bottle green as the cabinet beside them (the coordinator), not 2092 through 160 mm.
+LAMP_2092 = {'deep': '#5E9A4E', 'radius': 0.005}
+
+
+def stock2092(s, lamp=None):
+    s['materials']['acrylic'] = {'deep': '#017D03', 'radius': 0.025}
+    for p in s['set']['props']:
+        if p.get('module') == 'earf_moon':
+            p['materials'] = {**p.get('materials', {}), 'body': dict(lamp or LAMP_2092)}
+    s['title'] += ' (stock 2092)'
+    return s
+
+
 def main():
     os.makedirs(SHOTS, exist_ok=True)
-    only = sys.argv[1:] or ['v3', 'v3s']
+    only = sys.argv[1:] or ['v3', 'v3s', 'v3k']
     for v in ('day', 'dusk'):
         if 'v3' in only:
             json.dump(shot(v), open(os.path.join(SHOTS, f'v3-{v}.json'), 'w'), indent=1)
             print(f'v3-{v}')
+        if 'v3k' in only:
+            json.dump(stock2092(strata(shot(v))), open(os.path.join(SHOTS, f'v3k-{v}.json'), 'w'), indent=1)
+            print(f'v3k-{v}')
         if 'v3s' in only:
             json.dump(strata(shot(v)), open(os.path.join(SHOTS, f'v3s-{v}.json'), 'w'), indent=1)
             print(f'v3s-{v}')
