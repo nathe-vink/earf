@@ -242,7 +242,8 @@ def tagline_css(line):
 # brand lane's marks for colors F (marks.py SPEAKERS on r47-brand f6e3dc12): Poison and Haze derived from the lighter
 # custom batches, and Ember as the brand lane set it this morning for the stock tints (this branch's marks.py predates
 # that). The other five marks are unchanged.
-MARK_NEXT = {'red': '#9B0000', 'green': '#376621', 'violet': '#543287'}
+MARK_NEXT = {'red': '#9B0000', 'orange': '#E5732A', 'amber': '#E9B320', 'green': '#376621', 'blue': '#4A90C8',
+             'violet': '#543287', 'ice': '#F6F8F8', 'black': '#34323A'}   # all eight, as the brand has them
 
 
 def tagline():
