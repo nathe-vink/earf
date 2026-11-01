@@ -344,3 +344,11 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
   2074 Dark Gray's TT, a stock sheet). Backlit test sent to the owner (white / black / black + deep).
 - Biomes: still holding the dark-Smoke habitat render for the owner's go in its own session.
 - Owner questions pending: tagline (asked); color depth (note: Smoke now set to stock 2074 Dark Gray); Mantle A/B.
+
+## Check-in 14 (07:59 UTC)
+- Speaker 562d01fc + 497a237a: both assets rebuilt (black sleeves, deeper Smoke at ~12 %/20 mm = 2074, flush horn);
+  tropos-strata.blend = the owner's design (Strata on the lit plinth); the laminated horn's 22 layer DXFs/STEPs at the
+  536 mouth; requests rebuilt. BASES.md: plinth 660 x 670, lifts the cabinet 38.5 mm, 10.4 kg (speaker 84.6 kg), about
+  $530 a speaker (est.) + the light. Waiting on the lane's one-line final figures for the deck's Tropos slide.
+- Biomes: still holding for the owner's go (its own session).
+- Only owner answers + the speaker's final figures remain: one last check-in armed, then stop.
