@@ -123,7 +123,11 @@ while lanes run. Deck: https://claude.ai/artifact/3sihYaT4ckNTF6WE7SWR7x (v29). 
 
 ## Owner questions, in order (one at a time)
 1. Tagline A-D (asked, waiting).
-2. Color depth (affects every picture): A the site's lighter tints (Ember, Poison and Haze cabinets need a custom cast
+2. TROPOS: adopt Strata (the stepped laminated horn with the caldera)? It won all three blind duels (8.0 vs 7.0; studio
+   7.0 vs 5.5; room 7.0 vs 5.0). Finals: r33-speaker-horn renders/2026-10-31/barkhorn/design-pass/design-strata.png (Ember
+   studio) and design-strata-room.png (Poison pair). Same build facts (22 layers of 1/2 in stock sheet + the boss; about
+   74 kg a speaker). Condition: the audit puts Strata's tipping margin near zero (fix: wider or heavier base).
+2b. Color depth (affects every picture): A the site's lighter tints (Ember, Poison and Haze cabinets need a custom cast
    lot or lighter codes) / B stock sheet's deeper tints (buyable today: a deep red, a bottle green). Picture:
    r33-speaker-horn asset/link_example_strata.png (site) over link_example_strata_trucast.png (stock). Sub-question:
    does the horn match the cabinet's depth or go deeper (TINTS.md)? Thick parts (Mantle laminae, Core, stepped horns)
@@ -219,3 +223,7 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
   rounds 5.0, 5.0, r3 rendering; Stamper bright-field, now Bedrock in water-clear (the Smoke stratum read black), r1 4.0;
   Firn stopped (hero_b 5.5 x3). No frame at 6.5 yet. Next: Iron r3, Stamper r2, macros, summary.
 - Engineering audit (wf_32ea5a79-234): Tropos and lamps audits in (00:48), reviews and Mantle/Mother running.
+- Speaker DONE (558fb86f): Strata finals (studio Ember 1440x1800; room Poison pair 2304x1296), blind duel 2 won both
+  (7.0 vs 5.5, 7.0 vs 5.0); tropos-strata.blend (2208e2af, eight tints, proposal, no cover); a three-layer test stack
+  (~$150) added before the first pair; RFQs in American English quoting in Smoke "color chosen at order" (e0a5fa5e).
+  Holding for the engineering review's list.
