@@ -48,7 +48,8 @@ def main():
         out[t] = {'flavour': fl, 'cabinet': f'TruCast {code} {name}', 'cabinet_tt_20mm': tt,
                   'cabinet_deep': hexs([math.exp(-s * 25.0) for s in sc]), 'cabinet_radius_m': 0.025,
                   'strata_horn': f'TruCast {hc} {hn}, 1/2 in', 'strata_horn_tt_12_7mm': htt,
-                  'strata_horn_deep': hexs([math.exp(-s * 10.0) for s in sh]), 'horn_radius_m': 0.010, 'ior': IOR}
+                  'strata_horn_deep': hexs([math.exp(-s * 10.0) for s in sh]), 'horn_radius_m': 0.010, 'ior': IOR,
+                  'split': list(split)}
         print(f"| {t} | {code} {name} | {tt} % | {hc} {hn} | {htt} % |")
     json.dump(out, open(os.path.join(HERE, 'tints-trucast.json'), 'w'), indent=1)
 

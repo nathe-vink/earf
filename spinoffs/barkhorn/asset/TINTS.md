@@ -10,8 +10,13 @@
 **The horns: "Deep, like the site"** (the owner, 2026-10-31). Every horn must read at least as deep as the site's
 horn.
 - **Dust, Acid and Ice's horns are a heavier batch, not stock sheet** (the coordinator, 2026-11-01). Stock 2422, 9097
-  and 2069 at 12.7 mm pass 59, 78 and 58 %, against the site's horns at 19, 42 and 14 %. Their horns keep the site's
-  deep color (`SITE_DEEP_HORN` in `product.py`).
+  and 2069 at 12.7 mm pass 59, 78 and 58 %, against the site's horns at 19, 42 and 14 %. Their horns take the site
+  horn's depth (`SITE_DEEP_HORN` in `product.py`).
+- **In the cabinet's own hue, only deeper** (the coordinator's call, 2026-11-01). The owner's ruling is about depth, not
+  hue. With the site's horn color, Ice's horn read cobalt over a teal-navy cabinet: two materials in one speaker (the
+  site-set critics, round 3). Each deep horn now keeps its stock code's channel split, with the absorbance scaled so its
+  luminance after 10 mm matches the site horn's. Dust #E0661C becomes #F25508, Acid #F2B705 becomes #FFB101, Ice
+  #3C86C2 becomes #2981E7. The site's color stays on each flavor as `horn_deep_site_hue`, for reference.
 - **The other five keep their stock codes** (the coordinator's reading of the ruling, 2026-11-01, which the owner may
   overrule). The ruling's intent is that no horn reads pale, and at 12.7 mm, seen through several stepped layers, these
   five read deep. The owner chose the darker colors from `link_example_strata_trucast.png`, which shows stock-code

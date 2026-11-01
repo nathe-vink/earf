@@ -2662,7 +2662,21 @@ if os.path.exists(TRUCAST_FILE):
         _cab.pop('milk', None)
         _m['bark'] = _cab
         if _e['flavour'] in SITE_DEEP_HORN:          # the owner's "Deep, like the site" (2026-10-31): a heavier batch
-            _m['horn-lot'] = {**_cab, 'deep': _v.get('horn_deep', _e['strata_horn_deep']), 'radius': HORN_DEPTH_M}
+            # in the cabinet's own hue, only deeper (the coordinator, 2026-11-01: the ruling is about depth, not hue; the
+            # site's horn colour made Ice's horn cobalt over a teal-navy cabinet): the stock code's channel split, with
+            # its absorbance scaled so the luminance after HORN_DEPTH_M is the site horn's
+            _lin = lambda c: c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4
+            _sh = _v.get('horn_deep', _e['strata_horn_deep']).lstrip('#')
+            _Y = sum(w * _lin(int(_sh[i:i + 2], 16) / 255) for w, i in zip((0.2126, 0.7152, 0.0722), (0, 2, 4)))
+            _lo, _hi = 0.0, 50.0
+            for _ in range(80):
+                _k = (_lo + _hi) / 2
+                _L = sum(w * math.exp(-_k * s) for w, s in zip((0.2126, 0.7152, 0.0722), _e['split']))
+                _lo, _hi = (_k, _hi) if _L > _Y else (_lo, _k)
+            _srgb = lambda x: 12.92 * x if x <= 0.0031308 else 1.055 * x ** (1 / 2.4) - 0.055
+            _deep = '#' + ''.join(f'{max(0, min(255, round(255 * _srgb(math.exp(-_k * s))))):02X}' for s in _e['split'])
+            _m['horn-lot'] = {**_cab, 'deep': _deep, 'radius': HORN_DEPTH_M}
+            _v['horn_deep_site_hue'] = _v.get('horn_deep'); _v['horn_deep'] = _deep
         else:
             _m['horn-lot'] = {**_cab, 'deep': _e['strata_horn_deep'], 'radius': _e['horn_radius_m']}
             _v['horn_deep'] = _e['strata_horn_deep']
