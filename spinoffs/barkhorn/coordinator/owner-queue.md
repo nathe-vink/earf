@@ -285,3 +285,7 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
 - Speaker a921df53: STABILITY needs an owner decision: footprint must be ~600 x 600 (feet ~20 mm outside the sides,
   80-100 mm beyond front/back). A = stepped plinth in Strata's language (~650 x 650, ~8 kg); B = outrigger feet; C =
   anchoring (a lab question, not a design option). Proofs + blind duel A vs B rendering; then ONE owner question.
+- 03:00 UTC: OWNER got the checked engineering answer (all five products) + the eight-biome strip. Lamps lane DONE
+  (3bcabe36: captive ball, steel cell tray, drop plan, joint table, UN3481 shipping at 30 % or less; cable off the drawing).
+  Owner questions pending, in order: tagline (asked again 02:22); Tropos footprint A/B (when proofs land); color depth;
+  Mantle A/B; later: lining sleeves white/black, Mother EARF armature, editions picture pass.

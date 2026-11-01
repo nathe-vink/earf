@@ -139,3 +139,19 @@ was found to be fake.
 - **MEDIUM: Transit, packaging and owner set-up: the shipping plan hands the owner the joints the reviews found weakest** (Tropos, Mantle, Core, Hemisphere, Mother desk globe). Documented ONLY AS A CONCEPT: r47-brand:spinoffs/barkhorn/brandbook/PACKAGING.md proposes crates and ISTA 3A/3B tests ('every size, stock and test below is a proposal'). Full text in completeness.json.
 - **MEDIUM: Lithium transport mode for Core: four documents, two answers, and the 2026 air state-of-charge rule** (Core (sales, spare cells, returns and warranty shipments)). Documented, AND CONTRADICTORY. Full text in completeness.json.
 - **LOW: ESD and EMC design inside acrylic bodies that give no shielding** (Core, Mantle, Tropos, Hemisphere, Mother desk globe). No review examined this. Full text in completeness.json.
+
+## Follow-through (as of 03:05 UTC)
+- **Lamps:**
+  - spec 367709bf, CAD 5e4b7aba (0 clashes);
+  - completeness items closed at 3bcabe36: Core's captive ball (a quarter-turn bayonet), hatch screws into the steel
+    ballast, a stainless cell tray, and a drop-test plan for first articles (1 m onto concrete, six orientations);
+  - a joint-by-joint stress-cracking table (no anaerobic locker within about 10 mm of acrylic);
+  - cells shipped beside the lamp (UN3481, packed with equipment) at 30 % or less;
+  - the old cable removed from Core's drawing.
+  - Open: the board itself; the bench tests.
+- **Speaker:** stability needs the owner's pick of a footprint (A: a stepped plinth / B: outrigger feet, proofs
+  rendering, a921df53). Items 2-7 (horn retention, heat, preset, FAI levels, parts and docs, the FA122 CB letter) are in
+  progress.
+- **Mantle:** the fix list waits on the owner's pick of A or B.
+- **Mother EARF:** the owner's call (an armature project).
+- **Claims:** deck v32-v33; site e46ec0c0; brand 147ae5b6.
