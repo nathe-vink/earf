@@ -165,7 +165,7 @@ LAMPS = [  # key, name, kind, its line, the hero's alt, particulars
      'Core lit in Ember, sitting low in its black acrylic base',
      [('Size', '160 mm ball, 180 mm tall'), ('Weight', 'About 1.5 kg'),
       ('Light', '2200 to 2700 K, warmer as it dims'), ('Control', 'Touch the black ring: tap to switch, hold to dim'),
-      ('Power', 'Cordless: about five hours a charge at full brightness, longer dimmed; it charges in two to three hours, on cells you can replace yourself'),
+      ('Power', 'Cordless: about five hours a charge at full brightness, longer dimmed; it charges in two to three hours, on three standard LiFePO4 cells you can replace yourself'),
       ('Rating', 'Designed to meet IP44, for terraces and spilled drinks'),
       ('Shades', 'In all eight colors, sold singly'), CARE, ('Figures', 'Design figures; they may change before production')]),
 ]
