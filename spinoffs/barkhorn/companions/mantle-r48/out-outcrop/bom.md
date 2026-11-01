@@ -13,17 +13,20 @@
 | deck-L6 | cut | 1 | 12.7 mm Cell-cast acrylic sheet, water-clear, 4 x 8 ft | 460 x 370 | 32.42 |
 | platter | lathe | 1 | Cast acrylic tube, tinted through | 310 x 310 x 22 | 169.57 |
 | platter-hub | lathe | 1 | Brass C69300 (Eco Brass, lead-free) or C27450 | 80 x 80 x 27 | 70.92 |
-| platter-screws | buy | 1 | Six M4 x 20 stainless socket button screws (ISO 7380), black oxide |  | 6.00 |
-| spindle | lathe | 1 | Stainless steel 304 | 20 x 20 x 85 | 126.02 |
-| bearing-housing | lathe | 1 | Brass C69300 (Eco Brass, lead-free) or C27450 | 60 x 60 x 55 | 74.75 |
-| bearing-nut | lathe | 1 | Brass C69300 (Eco Brass, lead-free) or C27450 | 56 x 56 x 17 | 53.00 |
+| platter-screws | buy | 1 | Six M4 x 10 stainless socket button screws (ISO 7380), up through the hub into the platter's inserts |  | 6.00 |
+| platter-inserts | buy | 1 | any (E-Z Lok / Tappex kind) Six M4 brass threaded inserts for bonding into plastics, 5.6 OD x 8, epoxy-bonded into the platter from below (no thread-locker near acrylic) |  | 9.00 |
+| spindle | lathe | 1 | Stainless steel 440C, hardened 58 HRC and ground | 20 x 20 x 87 | 127.08 |
+| bearing-housing | lathe | 1 | Brass C69300 (Eco Brass, lead-free) or C27450 | 60 x 60 x 57 | 75.56 |
+| bearing-nut | lathe | 1 | Brass C69300 (Eco Brass, lead-free) or C27450 | 56 x 56 x 18 | 53.23 |
+| bearing-spring | buy | 1 | Schnorr / Mubea / Christianson kind One DIN 2093 group 2 series C disc spring 63 x 31 x 1.8 (51CrV4), under the bearing nut; load and rate to confirm in the maker's table |  | 6.00 |
+| bearing-washer | lathe | 1 | Brass C69300 (Eco Brass, lead-free) or C27450 | 74 x 74 x 13 | 55.68 |
 | bushes | buy | 1 | any lathe shop Two solid bronze plain bushes (C932 / SAE 660), 10 x 14 x 12, pressed into the housing and honed or line-reamed to 10 H6 (8-12 um running clearance on a 10 g5 spindle) |  | 40.00 |
 | ball | buy | 1 | Tungsten carbide ball, 6 mm, grade 10: the spindle's thrust point, seated in a cup at the spindle's foot |  | 5.00 |
 | thrust-plate | buy | 1 | Thrust plate 13.8 x 3, hardened 52100 steel (60 HRC) lapped flat, at the foot of the housing's bore in the oil bath, under the carbide ball (a sapphire window of the same size is the alternative) |  | 20.00 |
-| motor-plate | cut | 1 | 3 mm Aluminium 5052 sheet | 82 x 82 | 1.34 |
+| motor-plate | cut | 1 | 3 mm Aluminium 5052 sheet | 90 x 90 | 1.62 |
 | motor | buy | 1 | Rega 24 V low-vibration synchronous motor upgrade kit (motor, its board and mounting), for the Neo PSU |  | 265.00 |
-| motor-grommets | buy | 1 | Rega Rega's motor mounting grommets (three), as fitted to the 24 V motor kit's mount; spares from a Rega dealer |  | 15.00 |
-| pulley | lathe | 1 | Aluminium 6061 | 55 x 55 x 22 | 46.69 |
+| motor-screws | buy | 1 | Three M3 x 12 stainless button screws and three M3 brass inserts (4.6 OD), the motor plate hard to the pocket's shoulder as Rega fits its motor |  | 6.00 |
+| pulley | lathe | 1 | Aluminium 6061 | 49 x 49 x 22 | 46.31 |
 | belt | buy | 1 | Flat turntable belt, ground rubber or polyurethane, 5 wide x 0.6, cut to the measured path (about 945 long for the 994 path, 5 % stretch); an O-ring test belt first |  | 30.00 |
 | arm-puck | lathe | 1 | Aluminium 6061 | 94 x 94 x 22 | 49.86 |
 | arm | buy | 1 | Rega RB330 tonearm (9 in, Rega geometry: 222 mm from the platter's center to the arm's hole, effective length 236.5, overhang 14.5, offset 21.55 deg), with its own lead and cueing lift |  | 675.00 |
@@ -34,7 +37,7 @@
 | phono-stage | buy | 1 | Pro-Ject Phono Box S2, MM/MC phono stage in an aluminum case, 103 x 115 x 36 (one listing 103 x 36 x 115 mm, 0.57 kg): RIAA within 0.4 dB 20 Hz-20 kHz, MM S/N 94 dBA at 40/43 dB gain, THD under 0.01 %, subsonic filter 20 Hz 12 dB/oct, MM 47k with switchable capacitance; 18 V DC 500 mA in. Used whole, inside Mantle's float, fed from the rear box's regulator |  | 269.00 |
 | phono-runners | buy | 1 | Four 10 mm felt pads under the phono stage |  | 2.00 |
 | back-plate | cut | 1 | 2 mm Lead-free brass sheet (C26000 / C27450), brushed | 144 x 45 | 2.59 |
-| back-hardware | buy | 1 | Neutrik / Switchcraft / CUI kind Two gold panel RCA jacks (insulated, 1/4 in hole), a 4 mm earth binding post, a DPDT mini toggle (C&K 7201 kind), a 2.1 mm DC panel jack; shielded leads inside to the S2 |  | 48.00 |
+| back-hardware | buy | 1 | Neutrik / Switchcraft / CUI kind Two gold panel RCA jacks (insulated, 1/4 in hole), a 4 mm earth binding post, a 4PDT signal toggle with gold contacts (C&K 7411 kind: in bypass it switches the phono stage's input and output, so the cartridge sees one 47k load), a 2.1 mm DC panel jack; shielded leads inside to the S2 |  | 62.00 |
 | cover-bumpers | buy | 1 | 3M Bumpon SJ5302 clear, six (three under the cover, three spare) |  | 4.00 |
 | dowels | buy | 1 | Two 5 x 12 stainless dowel pins, h6, pressed into the deck |  | 4.00 |
 | inserts | buy | 1 | any (E-Z Lok / Tappex kind) Brass threaded inserts for plastics, epoxy-bonded: 3 M5 (the puck), 4 M3 (the back plate); with M5 x 12 countersunk and M3 x 6 button screws |  | 14.00 |
@@ -58,9 +61,9 @@
 
 | | USD |
 |---|---|
-| buy | 2,730 |
+| buy | 2,750 |
 | cut | 403 |
-| lathe | 640 |
-| total | 3,773 |
+| lathe | 698 |
+| total | 3,851 |
 
 Budget figures: bought parts from the component library (dated retailer listings), made parts from the kit's stock rates: 25 % offcut on sheet parts, a handling charge a print, and a setup a machined line spread over its pieces. A shop's quote replaces them.

@@ -27,15 +27,23 @@
   "platter-screws": [
    178.1,
    142.3,
-   67.1,
+   66.1,
    233.9,
    205.7,
-   91.6
+   78.1
+  ],
+  "platter-inserts": [
+   179.0,
+   143.2,
+   71.1,
+   233.0,
+   204.8,
+   79.1
   ],
   "spindle": [
    201.0,
    169.0,
-   32.0,
+   30.5,
    211.0,
    179.0,
    107.1
@@ -43,7 +51,7 @@
   "bearing-housing": [
    181.0,
    149.0,
-   20.0,
+   18.5,
    231.0,
    199.0,
    65.1
@@ -51,15 +59,31 @@
   "bearing-nut": [
    183.0,
    151.0,
-   20.0,
+   18.5,
    229.0,
    197.0,
-   27.0
+   26.0
+  ],
+  "bearing-spring": [
+   174.5,
+   142.5,
+   26.0,
+   237.5,
+   205.5,
+   29.0
+  ],
+  "bearing-washer": [
+   174.0,
+   142.0,
+   29.0,
+   238.0,
+   206.0,
+   32.0
   ],
   "bushes": [
    199.0,
    167.0,
-   32.0,
+   30.5,
    213.0,
    181.0,
    61.1
@@ -67,49 +91,49 @@
   "ball": [
    203.0,
    171.0,
-   26.0,
+   24.5,
    209.0,
    177.0,
-   32.0
+   30.5
   ],
   "thrust-plate": [
    199.1,
    167.1,
-   24.0,
+   22.5,
    212.9,
    180.9,
-   26.0
+   24.5
   ],
   "motor-plate": [
-   40.0,
-   262.5,
-   60.1,
-   122.0,
-   344.5,
-   63.1
+   36.0,
+   258.5,
+   59.1,
+   126.0,
+   348.5,
+   62.1
   ],
   "motor": [
    56.0,
    278.5,
-   30.1,
+   29.1,
    106.0,
    328.5,
    89.1
   ],
-  "motor-grommets": [
-   59.0,
-   268.3,
-   59.1,
-   121.0,
-   338.7,
-   64.6
+  "motor-screws": [
+   43.1,
+   260.0,
+   52.1,
+   118.9,
+   326.0,
+   63.7
   ],
   "pulley": [
-   58.3,
-   280.8,
+   61.6,
+   284.1,
    75.1,
-   103.7,
-   326.3,
+   100.4,
+   322.9,
    87.1
   ],
   "belt": [
@@ -230,15 +254,18 @@
   "platter-disc": "acrylic-strata-platter",
   "platter-hub": "brass",
   "platter-screws": "steel",
+  "platter-inserts": "brass",
   "spindle": "steel",
   "bearing-housing": "brass",
   "bearing-nut": "brass",
+  "bearing-spring": "steel",
+  "bearing-washer": "brass",
   "bushes": "brass",
   "ball": "steel",
   "thrust-plate": "steel",
   "motor-plate": "aluminium",
   "motor": "black",
-  "motor-grommets": "rubber",
+  "motor-screws": "steel",
   "pulley": "aluminium",
   "belt": "rubber",
   "arm-puck": "aluminium",

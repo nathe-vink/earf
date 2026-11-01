@@ -83,10 +83,18 @@
   "platter-screws": [
    182.1,
    146.3,
-   96.1,
+   95.1,
    237.9,
    209.7,
-   120.6
+   107.1
+  ],
+  "platter-inserts": [
+   183.0,
+   147.2,
+   100.1,
+   237.0,
+   208.8,
+   108.1
   ],
   "spindle": [
    205.0,
@@ -107,9 +115,25 @@
   "bearing-nut": [
    187.0,
    155.0,
-   61.7,
+   55.2,
    233.0,
    201.0,
+   62.7
+  ],
+  "bearing-spring": [
+   178.5,
+   146.5,
+   62.7,
+   241.5,
+   209.5,
+   65.7
+  ],
+  "bearing-washer": [
+   178.0,
+   146.0,
+   65.7,
+   242.0,
+   210.0,
    68.7
   ],
   "bushes": [
@@ -137,39 +161,39 @@
    54.7
   ],
   "motor-plate": [
-   33.0,
-   262.0,
-   89.1,
-   115.0,
-   344.0,
-   92.1
+   29.0,
+   258.0,
+   88.1,
+   119.0,
+   348.0,
+   91.1
   ],
   "motor": [
    49.0,
    278.0,
-   59.1,
+   58.1,
    99.0,
    328.0,
    118.1
   ],
-  "motor-grommets": [
-   52.0,
-   267.8,
-   88.1,
-   114.0,
-   338.1,
-   93.6
+  "motor-screws": [
+   36.1,
+   259.5,
+   81.1,
+   111.9,
+   325.5,
+   92.7
   ],
   "pulley": [
-   51.3,
-   280.2,
+   54.6,
+   283.6,
    104.1,
-   96.7,
-   325.7,
+   93.4,
+   322.4,
    116.1
   ],
   "belt": [
-   53.6,
+   57.0,
    27.4,
    106.6,
    360.6,
@@ -317,15 +341,18 @@
   "platter-disc": "acrylic-strata-platter",
   "platter-hub": "brass",
   "platter-screws": "steel",
+  "platter-inserts": "brass",
   "spindle": "steel",
   "bearing-housing": "brass",
   "bearing-nut": "brass",
+  "bearing-spring": "steel",
+  "bearing-washer": "brass",
   "bushes": "brass",
   "ball": "steel",
   "thrust-plate": "steel",
   "motor-plate": "aluminium",
   "motor": "black",
-  "motor-grommets": "rubber",
+  "motor-screws": "steel",
   "pulley": "aluminium",
   "belt": "rubber",
   "arm-puck": "aluminium",

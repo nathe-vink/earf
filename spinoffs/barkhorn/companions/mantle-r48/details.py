@@ -48,6 +48,8 @@ def bearing(ax):
     lams = D['lams']; b0 = P['feet_h']; top = D['top']
     strata(ax, -60, -16, lams); strata(ax, 16, 60, lams)
     hz0 = b0 + 0.5; ft = P['flange_t']
+    for s_ in (-1, 1):   # the 66 x 14 counterbore from below, cut from the laminae
+        R(ax, min(s_ * 16, s_ * 33), b0, max(s_ * 16, s_ * 33), b0 + 14, fc='white', ec='k', lw=0.5)
     # housing body and flange
     R(ax, -15, hz0, -7, top - ft, hatch='\\\\\\', fc='#f2e3b3'); R(ax, 7, hz0, 15, top - ft, hatch='\\\\\\', fc='#f2e3b3')
     R(ax, -15, hz0, 15, hz0 + 4, hatch='\\\\\\', fc='#f2e3b3')
@@ -58,7 +60,7 @@ def bearing(ax):
     for s_ in (-1, 1):
         ax.add_patch(Polygon([(s_ * 15.5, b0 + 9.2), (s_ * 31.5, b0 + 8.0), (s_ * 31.5, b0 + 9.8), (s_ * 15.5, b0 + 11.0)], closed=True, fc='#777', ec='k', lw=0.5, zorder=3))
         R(ax, min(s_ * 15.5, s_ * 32), b0 + 11, max(s_ * 15.5, s_ * 32), b0 + 14, hatch='\\\\\\', fc='#f2e3b3')
-    note(ax, 30, b0 - 3, 'disc spring DIN 2093 C 63 x 31 x 1.8 set to about 1.5 kN; brass washer 64 x 31 x 3', (31.5, b0 + 9))
+    note(ax, 30, b0 - 10, 'disc spring DIN 2093 C 63 x 31 x 1.8 set to about 1.5 kN; brass washer 64 x 31 x 3', (31.5, b0 + 9))
     # bushes
     for z0_, z1_ in ((hz0 + 12, hz0 + 24), (top - 16, top - 4)):
         R(ax, -7, z0_, -5, z1_, hatch='....', fc='#e8c98a'); R(ax, 5, z0_, 7, z1_, hatch='....', fc='#e8c98a')
@@ -86,13 +88,13 @@ def bearing(ax):
     ax.text(70, pz1 + 4, 'record', fontsize=FS - 1)
     dim(ax, -70, top, -70, D['record_z'], f'{D["record_z"] - top:.1f}', off=(-6, 0), rot=90)
     dim(ax, -55, b0, -55, top, f'{top - b0:.1f}', off=(-6, 0), rot=90)
-    note(ax, 30, hz0 - 4, 'housing: lead-free brass, M30 x 1.5 x 30, clamped by its nut on the disc spring', (15, hz0 + 3))
+    note(ax, 30, hz0 - 3, 'housing: lead-free brass, M30 x 1.5 x 30, clamped by its nut on the disc spring', (15, hz0 + 3))
     note(ax, 30, hz0 + 18, 'bushes: C932, 10 x 14 x 12, pressed, honed to 10 H6', (7, hz0 + 18))
     note(ax, 30, hz0 + 8.5, 'carbide ball 6 g10 on lapped 52100 plate, 60 HRC, Ra 0.05', (3, hz0 + 9))
     note(ax, 30, top + 1.5, 'spindle 440C 58 HRC, 10 g5, Ra 0.1, vent flat 1.0 x 0.3; shrunk into the hub', (5, top))
     note(ax, 30, pz0 + 6, 'hub flange 70 x 5, spigot 40 h6 in 40.2 H7; six M4 x 10 up into bonded brass inserts, 0.6 N m', (35, pz0 - 2))
     note(ax, -78, pz1 + 9, 'platter: tinted 3 / clear 12.7 / tinted 5.6, faced to 21.0; run-out 0.05', None)
-    ax.set_xlim(-85, 150); ax.set_ylim(b0 - 6, pz1 + 22); ax.set_aspect('equal'); ax.axis('off')
+    ax.set_xlim(-85, 150); ax.set_ylim(b0 - 14, pz1 + 22); ax.set_aspect('equal'); ax.axis('off')
 
 
 def foot(ax):
