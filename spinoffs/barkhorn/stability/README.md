@@ -60,10 +60,10 @@ The force's height is the horn's top as drawn.
 
 | | Strata on the plinth |
 |---|---|
-| mass, a speaker | **83.7 kg** (the plinth 9.4 kg, with its 6 mm reveal, 2026-11-01) |
-| center of mass | 9 mm behind the cabinet's middle, 526 mm up |
-| the push (20 % of the weight) | 164 N at 1.336 m: the arm needed is 267 mm |
-| margins on the plinth's feet (centers) | **forward +19 %, back +13 %, sideways +14 %** |
+| mass, a speaker | **84.6 kg** (the plinth 10.4 kg) |
+| center of mass | 9 mm behind the cabinet's middle, 520 mm up |
+| the push (20 % of the weight) | 166 N at 1.336 m: the arm needed is 267 mm |
+| margins on the plinth's feet (centers) | **forward +19 %, back +14 %, sideways +14 %** |
 
 **It passes in every direction with margin.** On the cabinet's own feet it still fails (Strata, flush: -23 % forward,
 -34 % back, -11 % sideways), so the plinth is part of the listed product.
