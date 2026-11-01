@@ -256,6 +256,35 @@ def _macro(design):
     return s
 
 
+BASES = {'plinth': ('Plinth', 0.0385), 'outriggers': ('Outriggers', 0.0202)}   # the option, and how far it lifts the cabinet (m)
+
+
+def base(which, view='hero'):
+    """Strata on a base for the stability test (the engineering audit, 2026-11-01; variants/variants.py PLINTH, OUTRIG):
+    'plinth' (A, stepped frames of 1/2 in sheet), 'outriggers' (B, bronze arms), or 'today' (the Cloud's own feet, for
+    reference). The studio hero's frame, or a higher three-quarter view so the footprint reads."""
+    s = proposal('strata')
+    s['title'] = f'Tropos Strata on {which}' + (', three-quarter' if view == 'three-quarter' else '')
+    if which != 'today':
+        opt, lift = BASES[which]
+        for blk in s['products']:
+            for i in blk['instances']:
+                i['position'] = [i['position'][0], i['position'][1], lift]
+                if 'cloud' in blk['def']:
+                    i['hide'] = sorted(set(i['hide']) | {'feet-base', 'feet-stem'})
+                else:
+                    i['options'] = [opt]
+    if view == 'three-quarter':          # from higher and further round, so the base's footprint reads; whole speaker
+        s['camera'] = {'position': [1.95, -2.15, 1.75], 'target': [0.02, 0.06, 0.6], 'lens_mm': 50.0, 'level': True,
+                       'fstop': 6.3, 'focus': [0.25, -0.2, 0.5]}
+    return s
+
+
+for _b in ('plinth', 'outriggers', 'today'):
+    for _v in ('hero', 'three-quarter'):
+        SHOTS[f'base-{_b}' + ('' if _v == 'hero' else '-34')] = (lambda b=_b, v=_v: base(b, v))
+
+
 def _in_use(design):
     s = proposal(design, base='spinoffs/barkhorn/campaign/shots/room-final.json', flavour='eucalyptus-y2k-green')
     s['title'] = f'Tropos, {design} (design pass), at home at golden hour, Poison'

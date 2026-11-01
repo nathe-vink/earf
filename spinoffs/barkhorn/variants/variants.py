@@ -12,7 +12,7 @@ here changes the Cloud's CAD.
   Tamalpais's East Peak at a set distance, the land's relief pushing the edge out (variants/topo/topo.py); the air
   path and the wall unchanged.
 """
-import copy, dataclasses, json, os, sys
+import copy, dataclasses, json, math, os, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.dirname(HERE))
@@ -34,6 +34,52 @@ POSTS = dict(at=[(97.0, 35.0, 929.6), (463.0, 35.0, 929.6), (240.0, 353.0, 998.7
 # the caldera: rings of stock 1/2 in sheet stacked on the front panel's face round the woofer, the bores stepping out
 # toward the room (a short terraced horn of the woofer's own); centre and face from the Cloud (x 280, z 478; face y 24)
 CALDERA = dict(centre=(280.0, 478.0), face_y=24.0, layer=12.7, od=500.0, ids=(400.0, 427.0, 454.0))   # 13.5 radial steps: the horn's own at the mouth
+
+
+# the base (the engineering audit, 2026-11-01, item 1: IEC 62368-1 8.6.2.2 needs the feet about 600 x 600 apart,
+# stability/README.md): two proposals for the owner, each an option. The Cloud's frame: the cabinet x 0..560, y 0..420
+# (front 0), its bottom at z 0; the centre of mass at about (280, 222). The feet's centres at x -25 / 585 and y -94 / 526.
+BASE = dict(feet=[(-25.0, -94.0), (585.0, -94.0), (-25.0, 526.0), (585.0, 526.0)], foot=(40.0, 6.0, 16.0, 6.0))
+# A: a stepped plinth in Strata's language, three frames of the cabinet's 1/2 in sheet stepping out to 660 x 670, the
+# cabinet bolted down on the top one through its own feet's inserts
+PLINTH = dict(layer=12.7, gap=0.1, outer=[(-20.0, -20.0, 580.0, 440.0), (-35.0, -70.0, 595.0, 496.0), (-50.0, -119.0, 610.0, 551.0)],
+              inner=(60.0, 60.0, 500.0, 360.0))
+# B: four outrigger arms of bronze bar, 30 x 20, from under the cabinet's corners (two M8 into its feet's inserts and
+# a second insert each) out on the diagonal to the feet
+OUTRIG = dict(w=30.0, h=20.0, inner=[(95.0, 80.0), (465.0, 80.0), (95.0, 340.0), (465.0, 340.0)])
+
+
+def foot(x, y, z_top):
+    """A levelling foot under z_top: a stem and a 40 pad (the Cloud's own kind)."""
+    d, t, sd, sh = BASE['foot']
+    stem = Pos(x, y, z_top - sh) * Cylinder(sd / 2, sh - 0.1, align=(Align.CENTER, Align.CENTER, Align.MIN))
+    pad = Pos(x, y, z_top - sh - t) * Cylinder(d / 2, t - 0.1, align=(Align.CENTER, Align.CENTER, Align.MIN))
+    return stem, pad
+
+
+def plinth(Q):
+    from build123d import Box
+    out, z = [], 0.0
+    for k, (x0, y0, x1, y1) in enumerate(Q['outer']):
+        z1 = z - Q['gap']; z0 = z1 - Q['layer']
+        ring = Pos((x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2) * Box(x1 - x0, y1 - y0, z1 - z0)
+        ix0, iy0, ix1, iy1 = Q['inner']
+        ring = ring - Pos((ix0 + ix1) / 2, (iy0 + iy1) / 2, (z0 + z1) / 2) * Box(ix1 - ix0, iy1 - iy0, z1 - z0 + 2)
+        out.append(ring); z = z0
+    return out, z
+
+
+def outriggers(Q):
+    from build123d import Box
+    arms = []
+    z1 = -0.1; z0 = z1 - Q['h']
+    for (xi, yi), (xo, yo) in zip(Q['inner'], BASE['feet']):
+        L = math.hypot(xo - xi, yo - yi); ang = math.degrees(math.atan2(yo - yi, xo - xi))
+        bar = Pos((xi + xo) / 2, (yi + yo) / 2, (z0 + z1) / 2) * Rot(0, 0, ang) * Box(L, Q['w'], Q['h'])
+        for (x, y) in ((xi, yi), (xo, yo)):              # rounded ends
+            bar = bar + Pos(x, y, z0) * Cylinder(Q['w'] / 2, Q['h'], align=(Align.CENTER, Align.CENTER, Align.MIN))
+        arms.append(bar)
+    return arms, z0
 
 
 def caldera(C):
@@ -103,6 +149,26 @@ def parts(P):
                             finish='brass', group='horn',
                             notes=['Strata: a turned bronze collar on the top plate at each post (ø28 x 8) and one under each pad '
                                    '(ø24 x 6), so the horn reads as mounted, not hovering']))
+    from build123d import Compound as _C
+    layers, zp = plinth(PLINTH)
+    for k, ring in enumerate(layers):
+        out.append(product.Part(f'base-plinth-{k + 1}', ring, product.Machined('stock-cast-sheet', 'cnc-mill', setup_usd=60.0),
+                                finish='bark', group='base', option='Plinth',
+                                notes=[f'Base A, the stepped plinth (make/engineering-audit.md, stability/README.md): frame {k + 1} of 3 '
+                                       'from the top, 1/2 in stock sheet in the cabinet\'s color, its outside edges polished, the three '
+                                       'bonded; the cabinet bolted down on it with M8 through its feet\'s inserts']))
+    pf = [foot(x, y, zp - 0.1) for x, y in BASE['feet']]
+    out.append(product.Part('base-plinth-feet', _C(children=[c for f in pf for c in f]), product.Bought('levelling-feet'),
+                            finish='foot', group='base', option='Plinth', notes=['four M8 levelling feet under the plinth\'s corners']))
+    arms, zo = outriggers(OUTRIG)
+    out.append(product.Part('base-outriggers', _C(children=arms), product.Machined('bronze', 'cnc-mill', setup_usd=120.0),
+                            finish='brass', group='base', option='Outriggers',
+                            notes=['Base B, outrigger feet (make/engineering-audit.md): four arms of bronze bar 30 x 20 (C93200 or '
+                                   'C544), from under the cabinet\'s corners out on the diagonal to the feet, each held by two M8 '
+                                   'into inserts in the bottom (its foot\'s own and a second)']))
+    of = [foot(x, y, zo - 0.1) for x, y in BASE['feet']]
+    out.append(product.Part('base-outrigger-feet', _C(children=[c for f in of for c in f]), product.Bought('levelling-feet'),
+                            finish='foot', group='base', option='Outriggers', notes=['four M8 levelling feet under the arms\' ends']))
     for k, ring in enumerate(caldera(CALDERA)):
         out.append(product.Part(f'caldera-{k + 1}', ring, product.Machined('stock-cast-sheet', 'cnc-mill', stock=(CALDERA['od'] + 10, CALDERA['od'] + 10, CALDERA['layer']), setup_usd=60.0),
                                 finish='bark', group='cabinet',
