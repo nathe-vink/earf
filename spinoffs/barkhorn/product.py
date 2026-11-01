@@ -2571,7 +2571,9 @@ VARIANTS.update({
                   'materials': {'bark': {'deep': '#F2A29C', 'radius': 0.025, 'roughness': 0.05}, 'horn': {'roughness': 0.03}}},
     'cloud-black': {**BIRCH, 'horn_preset': 'clear_resin', 'horn': '#FFFFFF', 'horn_deep': '#2A292C', 'horn_cloud': 0.0,
                     'bark': 'clear_resin', 'disc': '#141316',
-                    'materials': {'bark': {'deep': '#8A888E', 'radius': 0.025, 'roughness': 0.05}, 'horn': {'roughness': 0.03}}},
+                    # Smoke deepened (2026-11-01, the owner: in backlight it "doesn't look like smoke at all"): about 12 %
+                    # through 20 mm (was 30), the TT of stock TruCast 2074 Dark Gray; with the black sleeves it reads smoked
+                    'materials': {'bark': {'deep': '#4F4D54', 'radius': 0.025, 'roughness': 0.05}, 'horn': {'roughness': 0.03}}},
 })
 # round 22 (the owner: "Should we redo the fog to be more clear white the same way we redid smoke"): Fog made the white
 # one as Smoke was made the black: polished, not frosted, cast acrylic, near colourless with a faint opal haze, so the
