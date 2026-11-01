@@ -39,7 +39,8 @@ P = {
 LABELS = {'tropos': {'of': 'tropos0', 'side': 'above'},
           'mantle': {'of': 'mantle', 'side': 'above', 'gap': 40},
           'core': {'of': 'core', 'side': 'above'},
-          'hemisphere': {'of': 'hemisphere', 'side': 'left'},
+          # the coordinator (round 7's slide): at dusk the pendant's glow reached its zone; the zone sits further off
+          'hemisphere': {'of': 'hemisphere', 'side': 'left', 'gap': 80, 'dy': 50},
           'header': [100, 60]}
 CEILING = 3.6                                 # high enough that its line stays out of the frame
 
@@ -123,7 +124,8 @@ def shot(version, palette='p1'):
         L['right_card'] = {'type': 'area', 'size_m': [1.5, 1.0], 'position': [2.5, -0.5, 1.0], 'target': [1.0, 0.53, 0.7],
                            'irradiance': 0.5, 'color': 4500, 'camera': False}
         F.lamps(s['set']['props'], 0.6)
-        s['render'].update({'exposure': 0.15, 'white_balance_k': 5200})
+        # the coordinator: the wall a warm off-white in every zone (sRGB 200-215) so dark ink reads at 7:1
+        s['render'].update({'exposure': 1.1, 'white_balance_k': 5200})
     else:                                                       # dusk, lights on
         s['sun'] = {'azimuth_deg': -80.0, 'elevation_deg': 2.0, 'irradiance': 0.0}
         s['sky'] = {'kind': 'gradient', 'zenith': '#2E3E66', 'horizon': '#6A7BA6', 'ground': '#1E2230', 'strength': 0.8}

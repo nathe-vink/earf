@@ -415,7 +415,7 @@
   "clamp": 10,
   "bounces": 12,
   "view": "Khronos PBR Neutral",
-  "exposure": 0.15,
+  "exposure": 1.1,
   "white_balance_k": 5200,
   "white_balance_tint": 0.0,
   "caustics_refractive": true
@@ -510,7 +510,9 @@
   },
   "hemisphere": {
    "of": "hemisphere",
-   "side": "left"
+   "side": "left",
+   "gap": 80,
+   "dy": 50
   },
   "header": [
    100,

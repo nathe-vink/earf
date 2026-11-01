@@ -39,8 +39,8 @@ def box_px(proj, lo, hi):
     return [min(xs), min(ys), max(xs), max(ys)], min(p[2] for p in pts)
 
 
-def zone(b, side, gap=GAP, dx=0.0):
-    cx, cy = (b[0] + b[2]) / 2 + dx, (b[1] + b[3]) / 2
+def zone(b, side, gap=GAP, dx=0.0, dy=0.0):
+    cx, cy = (b[0] + b[2]) / 2 + dx, (b[1] + b[3]) / 2 + dy
     if side == 'above':
         return [cx - ZW / 2, b[1] - gap - ZH, cx + ZW / 2, b[1] - gap]
     if side == 'below':
@@ -87,7 +87,7 @@ def solve(shot, verbose=True):
     for k, spec in lab.items():
         if k == 'header':
             continue
-        Z[k] = zone(B[spec['of']][0], spec['side'], spec.get('gap', GAP), spec.get('dx', 0.0))
+        Z[k] = zone(B[spec['of']][0], spec['side'], spec.get('gap', GAP), spec.get('dx', 0.0), spec.get('dy', 0.0))
     if 'header' in lab:
         x0, y0 = lab['header']
         Z['header'] = [x0, y0, x0 + HEADER[0], y0 + HEADER[1]]
