@@ -658,3 +658,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   speaker lane to rebuild it first and send the SHA to both; four-pieces renders dusk first, sends paths to me and the Mantle lane.
   Mantle lane: expects its stock Poison deck (2092, 25.4 mm, ~3.7 %) to read darker than the new Poison; will propose a custom deck
   lot scaled from 32.3 % at 20 mm (~24 % through 25.4) after seeing the room (README question 8, deck-as-glass).
+- 23:00 site lane: tagline change d0212727 reverted (734e3229, tree identical to 27438a23); the one-line sizing check kept for the
+  next round; swatches wait on the speaker lane's hexes (TINTS.md F defaults at c38f8ee6). Speaker: F defaults c38f8ee6, deck shots
+  at glow 20, render models rebuilding, then tropos-strata.blend for the four-pieces lane.
