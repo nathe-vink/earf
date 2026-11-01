@@ -622,3 +622,5 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   band past the step with no frame glow, it's the design; otherwise keep the original bare strip at 40 in, glow 20 day / 40 dusk (the
   thin warm line the hero shows), sealed channel documented as an alternative. Taller feet not modelled; owner only if they ask for
   a real pool. Plinth then closed until card 03.
+- Check-in 23 (20:37): owner quiet since 15:10. Speaker lane's sealed-40 test rendering in a background job (variants.py at 40 in,
+  uncommitted on purpose; restores to 90 after). Next check-in ~22:37 (send_later).
