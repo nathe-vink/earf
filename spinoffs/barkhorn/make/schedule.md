@@ -163,7 +163,9 @@ With 1 and 3, the float is back to about a week. Without them, any slip in Janua
 gray".**
 - **The first pair's cabinet is stocked TruCast 2064 Gray at 3/4 in**, the lighter smoke. AC Plastics had 3 sheets on
   31 October; confirm before buying.
-- **The horn stays 2074 1/2 in**, and so do the caldera and the plinth.
+- **The horn stays 2074 1/2 in**, deep, by the owner's horn ruling. **The caldera rings and the plinth are cut from
+  2064 1/2 in**, so the body reads as one tone with the 2064 cabinet, at the same price. That is the coordinator's
+  call (2026-11-01), shown on the owner's board for them to overrule.
 - The 2074 mill run for the cabinet waits for the first orders.
 - **The Tropos line is about $20,700 (est.)**, and the reserve about $2,300.
 - The renders keep the line's darker look; the first pair's photographs will show the lighter smoke.
@@ -172,9 +174,9 @@ gray".**
 **What else changes in the build because of it:**
 - The cabinet's 3/4 in sheet is 2064, which is lighter (29 % through 19 mm) than the horn's 2074 (12 % through
   12.7 mm). So the first pair's horn reads darker than its cabinet, as the stock pair always planned (`stock-pair.md`).
-- The caldera and the plinth, in 2074 1/2 in, read darker than the cabinet too. That is a deliberate two-tone, the
-  darker steps against a lighter box. They could be cut from 2064 1/2 in instead, for one tone (a sheet each way, the
-  same price).
+- The caldera and the plinth are in 2064 1/2 in, one tone with the cabinet; only the horn is darker. The two sheets of
+  1/2 in for them are 2064 instead of 2074, at the same price. Later pairs move the whole body to 2074 with the
+  cabinet's mill run.
 - With the black sleeves, the lighter cabinet still reads as smoked glass. In backlight it reads as the backlight
   test's middle frame (`renders/2026-11-01/barkhorn/smoke-backlight/`), lighter than the renders.
 - The 1/2 in sheet for the thin parts (the rings, frames and grips) was 2064 in the old table. With the cover gone,
@@ -193,7 +195,7 @@ table below is kept as the basis; this section changes its lines.
 |---|---|---|---|
 | the electronics, the drivers, the remote | $2,424 | the same, the L-pads gone (no L-pad, the HF in the DSP) | about −$24 |
 | **the cabinet's 3/4 in sheet** | 3 sheets of stocked TruCast 2064, $3,009.60 | **2074 at 3/4 in is not stocked** (2074 stops at 1/2 in): a mill run of about 8 to 10 sheets of 48 x 96, no color fee, at about the stocked 3/4 in price, about $8,000 to $10,000 (est.). It covers 4 to 5 pairs; the first pair uses 2 sheets of it | **+$5,000 to +$7,000** |
-| the 1/2 in sheet | 2064 1/2 in and .220 ($800.80), 2074 1/2 in for the horns ($569.80) | the same, plus **two more sheets of 2074 1/2 in** for the plinths' frames and the caldera rings (about 2.2 m2 and 1.6 m2 a pair) | +$1,140 |
+| the 1/2 in sheet | 2064 1/2 in and .220 ($800.80), 2074 1/2 in for the horns ($569.80) | the same, plus **two more sheets of 1/2 in** for the plinths' frames and the caldera rings (about 2.2 m2 and 1.6 m2 a pair): 2064 for the first pair, one tone with its cabinet | +$1,140 |
 | the horn shop | est. $4,000 | the same (the stepped horn was already the plan) | — |
 | the cabinet shop | $3,750 | plus the plinths' frames and the caldera rings: cutting, polished edges, bonding, anneal (est. $800 a pair) | +$800 |
 | the plinths' light and feet | — | COB strips, Class 2 supplies, the controller boards, feet ($184 a pair; `PARTS-FINAL-DESIGN.md`) | +$184 |

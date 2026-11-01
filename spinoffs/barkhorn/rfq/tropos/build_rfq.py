@@ -40,10 +40,11 @@ HORN_TINT = ('the speaker\'s color, the horn\'s own heavier lot per color (about
              'Smoke about 7), matched to a chip we approve; please quote in Smoke')
 POLISH = 'edges milled square; show edges polished; annealed before cementing'
 # the first pair in stock sheet (make/stock-pair.md); its color is chosen at order (the owner, 2026-10-31), so Smoke is
-# the pricing reference only: the owner (2026-11-01): the first pair's cabinet in stocked 2064 3/4 in, the horn, caldera and
-# plinth in 2074 1/2 in; later pairs' cabinets 2074 by mill run
+# the pricing reference only: the owner (2026-11-01): the first pair's cabinet in stocked 2064 3/4 in, its caldera and plinth
+# in 2064 1/2 in (one tone; the coordinator's call), the horn in 2074 1/2 in; later pairs' bodies 2074 by mill run
 STOCK_CAB = 'chosen at order; quote in Smoke: the first pair in stocked TruCast 2064 Gray 3/4 in (19 mm) cell-cast (AC Plastics); later pairs in 2074 Dark Gray 3/4 in by mill run (stocked only to 1/2 in): please price both'
 STOCK_THIN = 'chosen at order; quote in Smoke: TruCast 2064 Gray cell-cast (the first pair\'s cabinet code), stock, in the nearest stock thickness to the one listed'
+STOCK_BODY = 'chosen at order; quote in Smoke: TruCast 2064 Gray 1/2 in cell-cast, stock, the first pair\'s cabinet code (one tone with the cabinet; later pairs 2074 with the cabinet\'s mill run)'
 STOCK_HORN = 'chosen at order; quote in Smoke: TruCast 2074 Dark Gray 1/2 in cell-cast, stock, the cabinet\'s own code (another stock color, e.g. 2423 Red, if it changes the price)'
 
 # kind -> [(bom item prefix, part, material, thickness, tint, finish, tolerance)]; quantities come from the parts list
@@ -125,9 +126,9 @@ KINDS['e-laminated-horn'] = [
     # the owner's final design (2026-11-01; variants/STRATA.md, variants/BASES.md): the caldera in place of the cover
     # and its ring, and the stepped plinth lit from underneath; 'fd:' lines carry their own quantity a pair
     ('fd:caldera:6', 'caldera rings round the woofer (3 a speaker)', 'stock cell-cast sheet 1/2 in', '12.7',
-     STOCK_HORN, 'CNC-cut, outside Ø500, bores Ø400, Ø427 and Ø454; bore and outside edges diamond-milled and buffed; faced, '
+     STOCK_BODY, 'CNC-cut, outside Ø500, bores Ø400, Ø427 and Ø454; bore and outside edges diamond-milled and buffed; faced, '
      'annealed, bonded to the front panel and to each other with a polymerizing cement', 'bores ±0.2; Ø500 ±0.3'),
-    ('fd:plinth:6', 'stepped plinth frames (3 a speaker)', 'stock cell-cast sheet 1/2 in', '12.7', STOCK_HORN,
+    ('fd:plinth:6', 'stepped plinth frames (3 a speaker)', 'stock cell-cast sheet 1/2 in', '12.7', STOCK_BODY,
      'CNC-cut frames 600 x 460, 630 x 566 and 660 x 670 round a 440 x 300 opening; outside edges polished; bonded; '
      'a 10 x 4 groove routed under the bottom frame 40 in from its edge for the LED channel; 4 counterbored M8 holes '
      'through, and 4 M8 foot inserts', 'outline ±0.5; groove ±0.2'),
@@ -215,9 +216,10 @@ would like to give you the whole job.
 
 Tropos is a horn loudspeaker in clear tinted cell-cast acrylic, so you see into it. The first pair is in stock sheet,
 and its color is chosen at order. Please quote in Smoke: the first pair's cabinet in stocked TruCast 2064 Gray 3/4 in
-(19 mm; our drawings say 20, and every cut is to the sheet as measured), and the horn, the caldera rings round the
-woofer and the stepped plinth in 2074 Dark Gray 1/2 in. Later pairs move the cabinet to 2074 at 3/4 in, which is
-stocked only to 1/2 in, so a mill run: please say if you can source it and at what minimum. Tell us if another stock
+(19 mm; our drawings say 20, and every cut is to the sheet as measured), with the caldera rings round the woofer and the
+stepped plinth in 2064 1/2 in, one tone with it; the horn in 2074 Dark Gray 1/2 in, deeper. Later pairs move the
+cabinet, the caldera and the plinth to 2074 (the 3/4 in is
+stocked only to 1/2 in, so a mill run): please say if you can source it and at what minimum. Tell us if another stock
 color changes the price or lead time. We can buy the sheet and have it delivered to you, or you can source it; please say
 which you prefer.
 
@@ -271,7 +273,7 @@ Q_KIND = {
                        7: 'Packing: how the plug and the plate are protected and shipped (any mark on the plug\'s face shows on every '
                           'horn formed over it).'},
     'c-metal': {3: 'Minimum order quantities, and any minimum lot for anodizing.', 5: None, 6: None},
-    'e-laminated-horn': {3: 'Whether you would source the sheet (TruCast 2064 3/4 in for the first pair, 2074 3/4 in by mill run for later pairs; 2074 1/2 in) or take ours, and any '
+    'e-laminated-horn': {3: 'Whether you would source the sheet (TruCast 2064 3/4 in and 1/2 in for the first pair\'s body, 2074 3/4 in by mill run for later pairs; 2074 1/2 in for the horn) or take ours, and any '
                             'handling charge.', 5: None,
                          6: 'Both speakers\' parts from one sheet of each code, so the pair matches: is that how you would '
                             'nest them?'},
