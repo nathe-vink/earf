@@ -12,8 +12,10 @@ horn.
 - **Dust, Acid and Ice's horns are a heavier batch, not stock sheet** (the coordinator, 2026-11-01). Stock 2422, 9097
   and 2069 at 12.7 mm pass 59, 78 and 58 %, against the site's horns at 19, 42 and 14 %. Their horns keep the site's
   deep color (`SITE_DEEP_HORN` in `product.py`).
-- **The other five are flagged, awaiting the coordinator's call.** Their stock horns are lighter than the site's too,
-  TT through 12.7 mm:
+- **The other five keep their stock codes** (the coordinator's reading of the ruling, 2026-11-01, which the owner may
+  overrule). The ruling's intent is that no horn reads pale, and at 12.7 mm, seen through several stepped layers, these
+  five read deep. The owner chose the darker colors from `link_example_strata_trucast.png`, which shows stock-code
+  horns. By TT they are still lighter than the site's horn, through 12.7 mm:
 
   | tint | stock sheet | the site's horn |
   |---|---|---|
@@ -23,8 +25,27 @@ horn.
   | Smoke | 2074, 11.7 % | 0.7 % |
   | Fog | 0000, 92 % | 78 % |
 
+  The owner may ask for deeper.
 - A heavier-batch horn is a custom pour: its 22 layers of 1/2 in come from a horn lot with a pour's minimum and lead
   time, not from stock sheet.
+  The three heavier-batch horns are a custom horn lot at production. The prototype pair is priced in Smoke, so the cash
+  table is unchanged.
+
+**A doubt about Haze's code: 2287 is listed as translucent, not transparent.**
+- Acme lists 2287 as "Violet – Translucent", a diffusing sheet, not a clear tint (the lamps lane, 2026-11-01).
+- The research's stock lists do not carry 2287. R1 (r46-owner-notes, `research/2026-10-31/R1-stock-colours.md`, line
+  259) has it only as a translucent chip, beside 2793, 2240 and 2283.
+- Its 13.5 % TT is a translucent sheet's. A real 2287 cabinet would look milky and diffuse, not glassy, and the
+  internals would not show.
+- **The transparent violets that are known:**
+  - **TruCast 373 Purple**, transparent, TT 7.4 %: stocked only in .220 in (R1, line 187).
+  - **3730 Dark Purple**, transparent, TT not published: 1/8 in only (eStreet).
+  - **1020 Purple**, a light violet: TT not reliably published, thin sheet only.
+  - **ACRYLITE Soundstop GS Amethyst 4S01**, transparent, made in 15, 20 and 25 mm. It reads magenta, and its minimum
+    is about two skids.
+- **None is stocked as a transparent violet at 1/2 or 3/4 in.** Haze in the deep, transparent look needs a custom
+  pour, or a mill run of a transparent purple such as 373.
+- The renders keep Haze transparent at the current calibration (13.5 % held at 20 mm) until a code is settled.
 
 The rest of this note is the comparison that led here.
 

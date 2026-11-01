@@ -2649,8 +2649,8 @@ if os.path.exists(STOCK_FILE):
 TRUCAST_FILE = os.path.join(HERE, 'asset', 'tints-trucast.json')
 # the horns that keep the site's deep horn, a heavier batch rather than the cabinet's stock sheet, by the owner's ruling
 # of 2026-10-31 ("Deep, like the site"): stock 2422, 9097 and 2069 at 12.7 mm pass 51 to 75 % against the site's 14 to
-# 42 % (the coordinator, 2026-11-01). The other five's stock horns are lighter than the site's too: flagged to the
-# coordinator, awaiting their call
+# 42 % (the coordinator, 2026-11-01). The other five keep their stock codes, by the coordinator's reading of the ruling
+# (no horn reads pale); by TT they are lighter than the site's horn (asset/TINTS.md), and the owner may ask for deeper
 SITE_DEEP_HORN = {'cloud-orange', 'cloud-amber', 'cloud-blue'}
 if os.path.exists(TRUCAST_FILE):
     for _t, _e in json.load(open(TRUCAST_FILE)).items():
