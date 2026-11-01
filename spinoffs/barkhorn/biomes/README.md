@@ -147,3 +147,52 @@ through a real lens (`composite.py --view`).
 - 256 samples or more at the master.
 
 At this container's speed that is roughly a day of work and rendering, not an evening.
+
+### Option C in the CG world: Acid | Ember seam frame (2026-11-01)
+
+This is `world.py --persp 247.5:1.5:40:1800:1200:3.0 --only 5 6`, at 48 samples. The output is
+`renders/2026-10-31/barkhorn/biomes/seam-acid-ember-cg-1800.jpg`. It was not critiqued: the coordinator stopped the
+CG-terrain method first.
+
+### The coordinator's test: a seam frame on photographed plates (2026-11-01, `seam_plate.py`)
+
+The test asked for one rectilinear seam frame, each side a photographed Poly Haven place, with two speakers rendered
+in and the join hidden behind a divider.
+- **The two plates:** Poison in `misty_pines`, a conifer forest in morning mist with a fern floor; Fog on
+  `white_cliff_top`, a rock headland above the sea, the plate turned 180 degrees so the speaker stands on its rock.
+- **The divider:** a redwood trunk on the join, with ferns at its foot.
+- **The speakers:** each lit by its own plate, standing on a shadow catcher; the speaker lane's asset, cover off.
+- **The camera:** 35 mm, 1.45 m high, 3 degrees down, f/5.6. 1800 x 1200, 96 samples, about 12 minutes for the pair.
+
+The output is `renders/2026-10-31/barkhorn/biomes/seam-poison-fog-plates-1800.jpg`.
+
+- **Blind critic: 3.5, rethink.** The critic saw "two different photographs cross-faded behind a CG redwood trunk":
+  - the speakers small, at the edges, flat-lit and nearly without contact shadows;
+  - the trunk as the hero;
+  - the projected plate ground soft at the frame's foot;
+  - two horizons;
+  - a person in the headland plate.
+
+  Estimated score if fixed: 6.5. The fixes it named:
+  - modelled ground with a hard rock lip at the join;
+  - speakers on the thirds at 60% of the frame's height, with a 50 mm lens at 1.0 m;
+  - a shared soft key and rim cards;
+  - one haze over both sides.
+- **Blind duel against the Fog headland:** the headland 6.0, the plate frame 3.5. The judge: the speakers "look pasted
+  onto the backplate".
+- **Below the coordinator's bar of 6.0, so the method stops here.** Photographed plates fixed the "game level" look
+  of the sky and the distance. They did not fix the near ground or the speakers' contact: an HDRI's ground is a
+  projection at infinity, and a speaker stood on it reads as pasted. Passing that bar would take modelled foreground
+  ground at scan quality under every speaker. That is what the single habitat pictures that score 6 to 6.7 have.
+
+## Where this stands
+
+| picture | file | blind | duel against the Fog headland |
+|---|---|---|---|
+| A, the eight-biome panorama (final) | `planet-earf-pano-master-4800.jpg`, `-2400`, `-1200` | 3.5 | 3.0 to 6.5 |
+| B, Planet EARF (proof 7) | `proof7-planet.png` | 3.0 | - |
+| C, a seam frame in the CG world | `seam-acid-ember-cg-1800.jpg` | - | - |
+| C, a seam frame on photographed plates | `seam-poison-fog-plates-1800.jpg` | 3.5 | 3.5 to 6.0 |
+
+The gate (7.0, or beating the best habitat) was not met by any of them. The phone frame was not made; the method it
+would have used stopped first.
