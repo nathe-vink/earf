@@ -601,3 +601,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 18:20 speaker: the streak is the top rib's front end (rib-top, 20 mm clear, seen edge-on against the dark batt); hide tests clear the
   HF lead, gland and tie-rod pad; no clashes (out-cloud/checks.json). My call: polish the rib's front end, keep it full length (edge
   spec). No HF lead rerouting. Soft-pool rows at 20/40 rendering (~18:35).
+- 18:35 speaker soft-pool rows (pool20 6d5abab0, pool40 e4f19954): warmer, broader band under dark tints (floor r-b under Smoke 12->17
+  at 20, 21->27 at 40; under Fog 13->28, 16->32); contact shadow holds; but through Fog/Acid/Dust's clear bottom frame the opal
+  diffuser shows as a lit band, and the eye-level deck camera foreshortens any pool. Asked for option (b): a 15 mm reveal on the bottom
+  frame's underside (feet stay 12, diffuser 90 in, hidden from a low eye), tip test re-checked; rows at 20/40 + a half-size Ice
+  front-off-wide proof at 20. If it reads as a pool: show the owner, adopt unless they object.
