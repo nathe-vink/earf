@@ -1,0 +1,41 @@
+{
+  "stage1": {"impression": "A path-traced clear cylinder with stacked, flattened blue-cored voids around a polished post, on a dark plinth against a pale cove; the refraction is convincing but the frame crops the object's base and the post, and the upper half of the side is a grey mush in which the right-hand voids disappear. Two burnt vertical streaks on the left limb and near-black void cores pull the eye away from the stack the frame exists to show.", "score": 6.0},
+  "blocking_9": [
+    "The whole weight, including its base, its contact with the plinth and the foot of the post, is inside the frame with margin; now the bottom edge cuts the object at about two-thirds of its height (rows 1150-1200 are acrylic, not plinth).",
+    "No clipped streak on the acrylic: the left limb [120,300,170,700] is 36% clipped and [150,780,200,1080] is 40% clipped; both under 10%.",
+    "Void cores read as lit air with a silver rim rather than navy holes: core [540,775,740,800] median 54 (r 37) and p5 14; median 80-140.",
+    "The side band behind the upper voids [1100,560,1500,700] (median 95, range 73) carries enough light that the small voids at the right read as silhouettes; median 120-160.",
+    "A single readable hierarchy: one column of voids at a bond line reads first; now the left stack, the centre voids and the post compete at equal weight."
+  ],
+  "changes": [
+    {"id": "c1", "rank": 1, "kind": "camera",
+     "problem": "The 80 mm lens at 200 mm frames about 90 mm of width, so the 80 mm weight runs off the bottom edge and the stack of voids and the post's foot are cut.",
+     "evidence": {"region": [700, 1150, 1100, 1200], "measured": "bottom rows are still acrylic and post (median about 160, post clip 2.3% in [790,830,1000,1180]); left and right limbs reach x 100 and x 1690 of 1800"},
+     "change": {"setting": "Camera lens", "from": 80, "to": 65},
+     "expected": "Frame width about 119 mm: the object spans about 67% of the width, with the base edge and a strip of dark plinth (about 90) below it across the bottom rows.",
+     "accept": {"region": [700, 1165, 1100, 1200], "metric": "lum_median", "op": "between", "value": [60, 125]}},
+    {"id": "c2", "rank": 2, "kind": "light",
+     "problem": "The key's reflection burns two long vertical bands into the left limb of the cylinder; they are the brightest things in the frame and pull the eye off the voids.",
+     "evidence": {"region": [120, 300, 170, 700], "measured": "clip_pct 36.3, p95 255; lower band [150,780,200,1080] clip_pct 40.1, whole-frame clip only 0.99%"},
+     "change": {"setting": "key power (W)", "from": 2.5, "to": 1.5},
+     "expected": "The limb highlight stays as a bright line but holds detail: clipped fraction in the upper band under 10%, p95 about 245.",
+     "accept": {"region": [120, 300, 170, 700], "metric": "clip_pct", "op": "between", "value": [0.5, 10]}},
+    {"id": "c3", "rank": 3, "kind": "light",
+     "problem": "The void cores reflect (by TIR) the unlit dark area below and in front, so they read as navy holes rather than lit air, and the silver rim loses its contrast against them.",
+     "evidence": {"region": [540, 775, 740, 800], "measured": "lum_median 54, p5 14, RGB median 37/56/85; similar voids [940,905,1160,925] median 103, p5 23"},
+     "change": {"setting": "lowfill power (W)", "from": 0.8, "to": 2.0},
+     "expected": "The cores lift to a mid blue-grey (median about 100) with the rim still the brightest part of each void, so the voids read as air lenses, not dark discs.",
+     "accept": {"region": [540, 775, 740, 800], "metric": "lum_median", "op": "between", "value": [80, 140]}},
+    {"id": "c4", "rank": 4, "kind": "asset",
+     "problem": "Through the upper half of the side the acrylic refracts the dark plinth behind it, so the band holding the smaller voids is a flat grey at about 95 and the voids there have nothing bright to be silhouetted against; the lower half is bright (about 180), which inverts the bright-field look.",
+     "evidence": {"region": [1100, 560, 1500, 700], "measured": "lum_median 94.6, range 73; vertical profile [1100,470,1500,1150]: 106, 98, 90, 97, 140, 182, 180, 179"},
+     "change": {"setting": "asset: white bounce card", "from": "none", "to": "matte white card #E6E6E6, 160 x 50 mm, standing on the plinth behind the object at (0, 110, 0 to 50), square to the camera axis, unlit except by the existing overhead and wall lights"},
+     "expected": "The refracted image of the card fills the upper band: median rises from 95 to about 135, so the small voids at the right read as dark-cored, silver-rimmed lenses against a light field.",
+     "accept": {"region": [1100, 560, 1500, 700], "metric": "lum_median", "op": "between", "value": [120, 165]}}
+  ],
+  "out_of_scope": [
+    {"request": "Make the void interiors less saturated blue", "why": "The blue comes from the measured pale-blue lamina reflected by TIR; the tint and optics are fixed, and only light (c3) may change how the cores read."},
+    {"request": "Thin out or reposition the left-hand stack of voids so it competes less with the centre", "why": "The voids' shape, size and position are the object's fixed contents; the hierarchy must come from framing and light instead."}
+  ],
+  "score_if_fixed": 7.2
+}

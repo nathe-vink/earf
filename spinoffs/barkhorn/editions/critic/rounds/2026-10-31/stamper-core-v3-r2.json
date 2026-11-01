@@ -1,0 +1,46 @@
+{
+  "stage1": {"impression": "A dark flat board standing in a clear block on cream marble; the block's lower half reads as an opaque cream slab and the curved metal sector reads as matte fabric pasted on the front, not a mirror inside acrylic. The board is a featureless dark rectangle filling the top half, and a hard-edged clipped glare patch on the floor at upper right pulls the eye off the product.", "score": 5.0},
+  "blocking_9": [
+    "The stamper shard reads as a polished mirror: inside the shard (840,710,1020,790) a lum_range above 110 with dark areas below lum 100 and a bright groove streak, instead of the uniform 195 +/- 35 it is now",
+    "The acrylic reads clear: the block's lower front (520,870,780,950) shows refracted floor detail and dark edge lines, not a flat cream 176-186",
+    "The sleeve board shows a sheen falloff of at least 18 levels top to bottom instead of 35.6 to 27.6",
+    "No clipped, hard-edged reflection on the marble: clip_pct under 0.3 in (1350,200,1800,650), now 2.49",
+    "Each acrylic edge carries a continuous thin bright or dark line defining the block's silhouette against the cream floor"
+  ],
+  "changes": [
+    {"id": "c1", "rank": 1, "kind": "light",
+     "problem": "Through the front face (refraction to about 21 deg, mirror leaning back 10 deg) the shard mirrors the region near (430,-900,130) where the 700 x 180 strip sits, so the strip fills the whole mirror evenly and the grooves read as woven fabric.",
+     "evidence": {"region": [820, 700, 1040, 800], "measured": "lum_median 194.8, p5 164.3, p95 235.8, range 71.5; x profile 204,214,212,207,203,202,197,213: a single flat light value, no dark field and no streak"},
+     "change": {"setting": "strip size (mm)", "from": [700, 180], "to": [700, 30]},
+     "expected": "The strip mirrors as a thin bright curved band across the shard (p95 >= 220) while the rest of the shard drops to the darker surroundings, so the shard reads as a mirror with a highlight.",
+     "accept": {"region": [840, 710, 1020, 790], "metric": "lum_range", "op": "between", "value": [110, 215]}},
+    {"id": "c2", "rank": 2, "kind": "asset",
+     "problem": "Around the strip the shard mirrors the cream room, so even with a thinner strip the mirror's field stays light and low in contrast; a polished mirror needs something dark to reflect.",
+     "evidence": {"region": [840, 710, 1020, 790], "measured": "lum_p5 164.3: no part of the mirror goes darker than mid-cream"},
+     "change": {"setting": "add black flag", "from": "none", "to": "matte black card 1000 x 450 mm, vertical, centred (430, -1050, 150), facing the stand, unseen by the camera, directly behind the strip as seen from the shard"},
+     "expected": "The mirror field around the strip's streak goes near black (lum 30-90), giving the shard a black-and-silver mirror read; the black also lands in the acrylic's front faces as dark edge lines.",
+     "accept": {"region": [840, 710, 1020, 790], "metric": "lum_p5", "op": "between", "value": [20, 100]}},
+    {"id": "c3", "rank": 3, "kind": "asset",
+     "problem": "The block's lower front reads as an opaque cream slab: it refracts and internally reflects the bright floor with no dark to define the faces, so the acrylic does not read as water-clear.",
+     "evidence": {"region": [520, 850, 1280, 950], "measured": "lum_median 185.9, r/g/b 204/184/151 (floor colour); y profile through 900-940 x: 222,212,194,171,236,184,178,176, flat in the bottom 40% of the block"},
+     "change": {"setting": "add black flags", "from": "none", "to": "two matte black cards 600 x 300 mm standing on the marble out of frame, at (-700, -200, 190) and (700, -200, 190), each turned 45 deg toward the stand, unseen by the camera"},
+     "expected": "Dark lines and bands appear along the block's vertical end edges and lower front through refraction and TIR, the lower front gains contrast (median 130-175) and the block reads as clear glass rather than a white solid.",
+     "accept": {"region": [520, 870, 780, 950], "metric": "lum_median", "op": "between", "value": [120, 175]}},
+    {"id": "c4", "rank": 4, "kind": "light",
+     "problem": "The sleeve board is one dark value: the big fill at azimuth 30 elevation 28 is mirrored evenly across the board's whole face, so it reads as a flat cutout.",
+     "evidence": {"region": [500, 20, 1100, 600], "measured": "board (450,100,1150,400) lum 33.7, range 6.0; y profile 35.6,35.6,34.6,33.7,32.7,30.8,28.6,27.6, 8 levels over 580 px"},
+     "change": {"setting": "fill elevation (deg)", "from": 28, "to": 42},
+     "expected": "The fill's reflection rides up the board, so the board's sheen is brightest near the top of frame and falls off toward the stand by 18-40 levels.",
+     "accept": {"region": [500, 20, 1100, 600], "metric": "lum_range", "op": "between", "value": [18, 45]}},
+    {"id": "c5", "rank": 5, "kind": "material",
+     "problem": "The marble mirrors the sweep as a hard-edged, clipped trapezoid at upper right that is brighter than anything on the product.",
+     "evidence": {"region": [1350, 200, 1800, 650], "measured": "lum_median 237.9, p95 247.3, clip_pct 2.49, with a sharp diagonal edge at about (1350-1800, 230-350)"},
+     "change": {"setting": "marble roughness multiplier", "from": 0.85, "to": 1.1},
+     "expected": "The sweep's reflection softens into a gradient with no clipping, its peak below 240, and the product becomes the brightest-contrast thing in frame.",
+     "accept": {"region": [1350, 200, 1800, 650], "metric": "clip_pct", "op": "<", "value": 0.3}}
+  ],
+  "out_of_scope": [
+    {"request": "Make the shard's grooves visibly finer or deeper so they diffract into a rainbow streak", "why": "The shard's geometry and surface are fixed; the lighting changes above are what can show the grooves."}
+  ],
+  "score_if_fixed": 7.0
+}

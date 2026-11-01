@@ -148,12 +148,23 @@ def firn_scene(shot):
         fl.location = (0.04, -0.52, 0.11)
         pt.camera((40, -420, 120), (0, 0, 18), lens=100)
         if shot == 'macro_b':                              # the detail: the same light, close on the void columns
+            # macro_b critic round 1 (5.0): f/22; flagL further out; a lighter cove; rimR up; the wall higher; 80 mm
+            bpy.data.objects['flagL'].location.x = -0.32
+            bpy.data.materials['cove'].node_tree.nodes['Principled BSDF'].inputs['Base Color'].default_value = tuple(pt.hex_lin('#B2B0AC')) + (1,)
+            bpy.data.objects['rimR'].data.energy = 14
+            bpy.data.objects['wall'].location.z = 0.42
+            # macro_b round 2 (6.0): 65 mm; key 2.5 -> 1.5; lowfill 0.8 -> 2.0; a small white card behind on the record
+            bpy.data.objects['key'].data.energy = 1.5
+            bpy.data.objects['lowfill'].data.energy = 2.0
+            wc = pt.block('whitecard', 160, 2, 0, 50, pt.principled('whitecard', '#E6E6E6', rough=0.95, spec=0.0), bevel=0)
+            wc.location = (0, 0.11, 0.0022)
             bpy.data.objects['cam'].location = (0.012, -0.2, 0.085)
             pt._aim(bpy.data.objects['cam'], pt.Vector((0, 0.005, 0.02)))
             cd = bpy.data.objects['cam'].data
             cd.dof.use_dof = True
-            cd.dof.aperture_fstop = 11
+            cd.dof.aperture_fstop = 22
             cd.dof.focus_distance = 0.2
+            cd.lens = 65
     else:
         pt.cove('#0B0B0C', rough=0.75, radius=400)
         top = record()
@@ -578,7 +589,17 @@ def iron_core_scene(shot):
     if shot == 'core':
         pt.camera((-160, -620, 168), (0, 0, 148), lens=75, fstop=5.6, focus=math.dist((-160, -620, 168), (0, 0, zc)))
     else:                                                  # core_macro: the same light, closer, on the slice
-        pt.camera((-60, -330, zc + 6), (0, 0, zc), lens=100, fstop=8, focus=332)
+        # core_macro critic round 1 (4.5): key 0.6 -> 1.3, softbox halved, a back-left light, f/14, a tall specular
+        # strip for a sheen across the bands, bgwash 1.4
+        pt.camera((-60, -330, zc + 6), (0, 0, zc), lens=100, fstop=14, focus=332)
+        T = (0, 0, 148)
+        k = bpy.data.objects['key']; k.data.energy *= 1.3 / 0.6
+        bpy.data.objects['softbox'].data.energy *= 0.5
+        bpy.data.objects['bgwash'].data.energy *= 1.4 / 1.9
+        for name, loc, size, E in (('back_left', (-450, 150, 200), (80, 600), 1.4), ('strip_spec', (-500, -900, 450), (150, 1400), 0.8)):
+            d = math.dist(loc, (0, 0, zc)) * MM
+            ob = pt.area(name, loc, (0, 0, zc), size, E * math.pi * d * d, '#FFFFFF')
+            ob.visible_camera = False
     return zc
 
 
@@ -603,12 +624,23 @@ def stamper_core_scene(shot):
     # stamper-core critic round 1 (4.0): the wash white; the fill higher for a sheen on the sleeve; the back light lower
     # and stronger to carry light through the block; the marble rougher; a strip the shard mirrors
     global BGWASH, FILL_EL, BACK_Z, BACK_E, MARBLE_ROUGH
-    BGWASH, FILL_EL, BACK_Z, BACK_E, MARBLE_ROUGH = '#FFFFFF', 28, 110, 3.5, 0.85
+    BGWASH, FILL_EL, BACK_Z, BACK_E, MARBLE_ROUGH = '#FFFFFF', 42, 110, 3.5, 1.1
     pt.reset()
     top = core_rig()
     d = math.dist((430, -900, 130), (0, -31, 75)) * MM
-    st = pt.area('strip', (430, -900, 130), (0, -31, 75), (700, 180), 0.35 * math.pi * d * d, '#FFFFFF')
+    # round 2 (5.0): the strip thin (180 -> 30) with a black flag behind it, so the shard mirrors black with a silver
+    # streak; black flags either side for the block's edges; the fill higher; the marble rougher
+    st = pt.area('strip', (430, -900, 130), (0, -31, 75), (700, 30), 0.35 * math.pi * d * d, '#FFFFFF')
     st.visible_camera = False
+    def flag(name, w, h, loc, face):
+        f = pt.block(name, w, 2, 0, h, pt.principled(name, '#060606', rough=1.0, spec=0.0), bevel=0)
+        f.location = (loc[0] * MM, loc[1] * MM, (loc[2] - h / 2) * MM)
+        f.rotation_euler.z = math.atan2(face[1] - loc[1], face[0] - loc[0]) - math.pi / 2
+        f.visible_camera = False
+        return f
+    flag('flag_strip', 1000, 450, (430, -1060, 150), (0, -31))
+    flag('flag_l', 600, 300, (-700, -200, top + 150), (0, 0))
+    flag('flag_r', 600, 300, (700, -200, top + 150), (0, 0))
     # water-clear, no Smoke base (2026-11-01): seen from above, the light crossed the 3 mm Smoke stratum twice and the
     # whole block read black; the edition is now Bedrock in Fog, the brand's water-clear
     bedrock(z0=top + LIFT, sleeve_mat=black_paper(), smoke=False)

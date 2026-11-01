@@ -273,7 +273,42 @@ Cut:
 
 ## Renders
 
-Path-traced in Blender Cycles (`render/`): IOR 1.49; tint absorption from the TruCast chart (`render/pt.py`, `TINTS`);
-air voids as closed inward-facing meshes, so they read silver by total internal reflection; inclusions seen by
-refraction; caustics path-traced (no MNEE). A studio hero and a detail macro for each rendered edition, in
-`renders/2026-10-31/`, with the blind critic's rounds in `critic/LOG.md`.
+Path-traced in Blender Cycles (`render/`). The physics:
+- IOR 1.49.
+- Tint absorption from A&C's TruCast chart (`render/pt.py`, `TINTS`), matched to transmission at 1/8 in.
+- Air voids as closed inward-facing meshes, so they read silver by total internal reflection.
+- Inclusions seen by refraction.
+- Caustics path-traced (no MNEE).
+- Clear cast PMMA given a faint cyan over a metre.
+
+Iron and Stamper stand in the lamps lane's pass-4 Core house set: paper sweep #EAE4DA, Poly Haven `marble_01` (CC0), the
+same camera and lights, and the Khronos PBR Neutral view. Its values were read from `r32-lamps-final`, not changed there.
+Firn is bright-field. The CC0 textures (Poly Haven, and ambientCG `Paper005` for the sleeve) are fetched by
+`studio/engine/assets.py` into the git-ignored cache.
+
+To render: `python3.11 render/scenes.py -- EDITION SHOT OUT.png [--scale 0.3 --samples 32]` for a proof. The editions are
+`iron_core`, `stamper_core` and `firn`. The shots are `core` and `core_macro`, or `hero_b` and `macro_b` for Firn.
+
+**The gate was a blind critic score of 7.0. No frame reached it.** Every round is in `critic/LOG.md`, and the replies are
+in `critic/rounds/`. The blind score sat between 4.0 and 5.5 from round to round. After each round the critic estimated
+7.0 to 7.5 once its changes were made, but no re-render reached that.
+
+| Edition | Best frame | Blind scores | Status |
+|---|---|---|---|
+| Iron (house set) | `renders/2026-10-31/iron_core-core-v3.png` | 5.0, 5.0, 5.0 | stopped after three rounds |
+| Iron, detail | `renders/2026-10-31/iron_core-core_macro-v3.png` | 4.5, 5.0 | two rounds; it needs a finer etch map |
+| Firn (bright-field) | `renders/2026-10-31/firn-hero_b-v3.png` | 5.5, 5.5, 5.5 | stopped after three rounds |
+| Firn, detail | `renders/2026-10-31/firn-macro_b-v3.png` | 5.0, **6.0**, see LOG | three rounds; the closest to the gate |
+| Stamper (house set) | `renders/2026-10-31/stamper_core-core-v4.png` | 4.0, 5.0, 4.5 | stopped after three rounds |
+| Earlier looks (dark set) | `firn-hero-v*`, `iron-hero-v*`, `stamper-hero-v*` | 4.5 to 5.5 | stopped |
+
+What every critic named, and what a next look should change:
+- **Clear acrylic shows what is behind it.** On a dark set the body read black; on a bright sweep it merged into the wall.
+  The frames that came closest have black flags placed so that each edge refracts a dark line. More are needed, close in
+  (Iron: flags at ±170 mm and a black card above and behind).
+- **Iron.** The etched slice needs per-band reflectance: each kamacite family should catch the light at its own angle,
+  not just differ in tone. The dry pocket's outline should be smoothed (its 90-segment offset prism shows as steps
+  through the ball).
+- **Firn.** The vinyl needs real grooves (a normal map at 0.1 mm pitch with an anisotropic sheen along them). The void
+  cores mirror the blue lamina and read as inlaid blue, so they need a neutral white bounce below to fill them.
+- **Stamper.** The mirror needs a black field with one thin strip of light in it. The sleeve needs a sheen falloff.

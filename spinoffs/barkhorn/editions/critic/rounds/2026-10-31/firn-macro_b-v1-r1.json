@@ -1,0 +1,53 @@
+{
+  "stage1": {"impression": "A tight macro of a clear cylindrical block with flat lens-shaped voids and a chrome post. The side reads as a smoky grey slab whose right third falls to charcoal, the top face is soft and busy with hard-edged pane reflections, and the object is cropped on both sides so it never reads as a whole thing.", "score": 5.0},
+  "blocking_9": [
+    "Void rims crisp across the front and top columns: edge 10-90 width <= 10 px on rims (now 17 to 38 px)",
+    "The right third of the body not charcoal: [1300,550,1700,700] median >= 85 (now 61), with the right-hand voids showing silver rims (p95 >= 190, now 152)",
+    "The body reads as clear acrylic in bright-field, not smoked: the cove seen through the base at about 165 to 200 (now 140 to 147)",
+    "The whole silhouette in frame with air on both sides and above the top rim (now cut at x=0 and x=1720, top rim at y=40)",
+    "The top face free of hard rectangular light-panel reflections that chop it into vertical bars (x 1300-1480 and 0-110, y 80-400)"
+  ],
+  "changes": [
+    {"id": "c1", "rank": 1, "kind": "camera",
+     "problem": "Almost no void rim is crisp: at f/11 and 100 mm from about 215 mm the depth of field is a few millimetres, so the top cluster smears and even the front voids are soft, which defeats the frame's purpose (crisp voids at the bond lines).",
+     "evidence": {"region": [740, 755, 760, 795], "measured": "rim edge width 10-90 = 31 px; top void [800,205,820,245] 17 px; void [1000,720,1020,760] 24 px with a step of only 26"},
+     "change": {"setting": "Camera f-stop", "from": "f/11", "to": 22},
+     "expected": "Front and mid-depth void rims resolve to a hard silver line, edge width <= 12 px, top cluster legible as separate lenses.",
+     "accept": {"region": [740, 755, 760, 795], "metric": "edge", "axis": "y", "op": "<=", "value": 12}},
+    {"id": "c2", "rank": 2, "kind": "light",
+     "problem": "The right third of the body is a flat charcoal band, so its voids barely show; flagL, behind and left of the object, is refracted through the cylinder onto its right side.",
+     "evidence": {"region": [1300, 550, 1700, 700], "measured": "lum_median 61, neutral (61/61/61); profile down the right side 70, 66, 55, 52, 89, 123, 125, 111 versus 140 to 147 through the left and centre base"},
+     "change": {"setting": "flagL position x", "from": -160, "to": -320},
+     "expected": "The right side picks up the cove through the acrylic instead of the black card, median 90 to 130, and keeps a narrow dark edge at the silhouette for definition.",
+     "accept": {"region": [1300, 550, 1700, 700], "metric": "lum_median", "op": "between", "value": [85, 135]}},
+    {"id": "c3", "rank": 3, "kind": "set",
+     "problem": "The card calls this a bright-field shot, but the cove seen through the body is mid-grey, so the clear acrylic reads as smoked glass and the silver rims have little to stand against.",
+     "evidence": {"region": [400, 1000, 700, 1180], "measured": "lum_median 145 (RGB 147/145/141); [1150,1000,1500,1180] median 140; centre body [1100,600,1500,1000] median 99"},
+     "change": {"setting": "cove colour", "from": "#8E8C89", "to": "#B2B0AC"},
+     "expected": "The cove through the base rises to about 170 to 200 and the body reads as clear rather than grey. The cove above the object stays below clipping.",
+     "accept": {"region": [400, 1000, 700, 1180], "metric": "lum_median", "op": "between", "value": [165, 205]}},
+    {"id": "c4", "rank": 4, "kind": "light",
+     "problem": "The voids on the right column have no silver at their rims; they show as dim blue slits, because nothing bright sits at the grazing angle on that side.",
+     "evidence": {"region": [1550, 740, 1700, 800], "measured": "lum_median 43.5, p95 152; compare left-column rims, which reach about 230 at p95"},
+     "change": {"setting": "rimR power", "from": 8, "to": 14},
+     "expected": "The right-hand void rims carry a thin silver line, p95 190 to 240, without a hot streak on the silhouette.",
+     "accept": {"region": [1550, 740, 1700, 800], "metric": "lum_p95", "op": "between", "value": [185, 240]}},
+    {"id": "c5", "rank": 5, "kind": "light",
+     "problem": "The top face mirrors the wall light as hard-edged pale-blue rectangles at the left and right, which chop the top into vertical bars and compete with the voids.",
+     "evidence": {"region": [1300, 150, 1600, 300], "measured": "lum_median 181, lum_range 100, RGB 150/187/213 against 120 (105/123/146) at [600,100,1200,200]; similar pane at x 0-110, y 200-400"},
+     "change": {"setting": "wall light position", "from": [0, 500, 200], "to": [0, 500, 420]},
+     "expected": "The pane's reflection rises out of the top face. The top shows a smooth cove gradient, so the pane region falls to within about 30 levels of the centre of the top face.",
+     "accept": {"region": [1300, 150, 1600, 300], "metric": "lum_median", "op": "between", "value": [110, 155]}},
+    {"id": "c6", "rank": 6, "kind": "camera",
+     "problem": "At 100 mm from this distance the field is about 78 mm wide for an 80 mm object, so both sides of the silhouette are cut and the top rim sits 40 px from the frame edge; the object never reads as a whole.",
+     "evidence": {"region": [0, 450, 40, 1150], "measured": "left strip is object, not set (median 110, p95 230); dark silhouette at [1720,300,1800,1200] median 51; cove above the rim only y 0-40 (median 197)"},
+     "change": {"setting": "Camera lens", "from": 100, "to": 80},
+     "expected": "The whole cylinder fits with about 6 to 8 percent air at the left and right and above the rim; the frame edges show only the cove. Other regions in this list move, so re-measure them on the new frame.",
+     "accept": {"region": [0, 0, 30, 1200], "metric": "lum_p5", "op": ">", "value": 120}}
+  ],
+  "out_of_scope": [
+    {"request": "Thin out the dense void cluster at the left edge and under the top face", "why": "It doubles up and reads as clutter at x 0-380, but the voids' number and position are the object's fixed contents."},
+    {"request": "Make the top lamina's blue less saturated where it rings the top edge", "why": "The tint and its absorption are fixed optics; the band at y 380-520 would otherwise read as a separate blue lid."}
+  ],
+  "score_if_fixed": 7.0
+}
