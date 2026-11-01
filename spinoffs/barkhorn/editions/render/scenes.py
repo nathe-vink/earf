@@ -6,6 +6,7 @@ EDITION: firn | iron | stamper. SHOT: hero | macro.
 Geometry is a proposal for the editions (EDITIONS.md); the products' own drawings rule where they differ.
 """
 import math
+import os
 import random
 import sys
 
@@ -14,6 +15,7 @@ import bpy  # noqa: E402
 import pt  # noqa: E402
 from pt import MM  # noqa: E402
 
+ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..', '..'))
 LIFT = 0.3            # every solid stands 0.3 mm off what it rests on: coplanar faces render black in Cycles
 
 
@@ -59,7 +61,7 @@ def record(z0=LIFT, r=151.0, t=1.6):
     # vinyl seen from a metre is a black mirror anyway
     nt.links.new(b.outputs['BSDF'], out.inputs['Surface'])
     pt.disc('record', r, z0, z0 + t, mat, bevel=0.5)
-    pt.disc('label', 50, z0 + t + 0.02, z0 + t + 0.12, pt.principled('label', '#2B2B2D', rough=0.5), bevel=0)
+    pt.disc('label', 50, z0 + t + 0.02, z0 + t + 0.12, pt.principled('label', '#1E1E1E', rough=0.92, spec=0.2), bevel=0)
     steel = pt.principled('spindle', '#B8B6B2', rough=0.25, metal=1.0)
     pt.disc('spindle_pin', 3.55, z0 + t, z0 + t + 11.0, steel, bevel=0.6, segs=40)
     return z0 + t
@@ -122,19 +124,36 @@ def firn_scene(shot):
         pt.spot('glint', (300, -260, 180), (0, 0, 36), 60, size_mm=6, angle=12)
         pt.area('card', (0, -520, 40), (0, 0, 14), (600, 160), 4, '#FFFFFF')
         pt.camera((60, -470, 220), (0, 0, 14), lens=85)
-    elif shot == 'hero_b':
+    elif shot in ('hero_b', 'macro_b'):
         # a second hero (its own card and rounds): bright-field. The first hero stopped at 5.0 after three rounds, every
         # round naming the same cause: clear acrylic on a black set transmits black. Here a light seamless fills the body,
         # and the camera sits low so the bond-line voids are seen near edge-on, as columns
-        pt.cove('#B9B7B3', rough=0.8, radius=700, height=2400, width=5000)
+        # hero_b critic round 1 (5.5): the wall wash aimed higher, out of what the record mirrors; the cove a mid grey;
+        # a black flag in front for the label and vinyl; rimR up to feed the trapped voids; key down; the camera lower
+        pt.cove('#8E8C89', rough=0.8, radius=700, height=2400, width=5000)
         top = record()
         firn(top + LIFT)
-        pt.area('overhead', (-40, 120, 520), (0, 0, 20), (600, 360), 9, '#FFF4E6', spread=75)
-        pt.area('key', (-460, -220, 220), (0, 0, 20), 240, 6, '#FFF1E0')
-        pt.area('wall', (0, 500, 200), (0, 900, 260), (900, 500), 10, '#FFFFFF')
-        pt.area('rimR', (300, 240, 90), (0, 0, 20), (60, 400), 3, '#E8F0FF')
+        # hero_b round 2 (5.5): overhead 9 -> 4, key 4.5 -> 2.5, wall 10 -> 7; a black flag on the left; a low fill
+        pt.area('overhead', (-40, 120, 520), (0, 0, 20), (600, 360), 4, '#FFF4E6', spread=75)
+        pt.area('key', (-460, -220, 220), (0, 0, 20), 240, 2.5, '#FFF1E0')
+        pt.area('wall', (0, 500, 200), (0, 900, 520), (900, 500), 7, '#FFFFFF')
+        fl2 = pt.block('flagL', 160, 2, 0, 300, pt.principled('flagL', '#111111', rough=1.0, spec=0.0), bevel=0)
+        fl2.location = (-0.16, 0.11, 0.0)
+        fl2.rotation_euler.z = math.radians(55)
+        lo = pt.area('lowfill', (0, -260, 30), (0, 0, 18), (300, 80), 0.8, '#FFF8F0')
+        lo.visible_camera = False
+        pt.area('rimR', (300, 240, 90), (0, 0, 20), (60, 400), 8, '#E8F0FF')
         pt.spot('glint', (260, -300, 160), (0, 0, 30), 40, size_mm=5, angle=10)
-        pt.camera((40, -420, 150), (0, 0, 18), lens=100)
+        fl = pt.block('flag', 600, 2, 0, 300, pt.principled('flag', '#0A0A0A', rough=1.0, spec=0.0), bevel=0)
+        fl.location = (0.04, -0.52, 0.11)
+        pt.camera((40, -420, 120), (0, 0, 18), lens=100)
+        if shot == 'macro_b':                              # the detail: the same light, close on the void columns
+            bpy.data.objects['cam'].location = (0.012, -0.2, 0.085)
+            pt._aim(bpy.data.objects['cam'], pt.Vector((0, 0.005, 0.02)))
+            cd = bpy.data.objects['cam'].data
+            cd.dof.use_dof = True
+            cd.dof.aperture_fstop = 11
+            cd.dof.focus_distance = 0.2
     else:
         pt.cove('#0B0B0C', rough=0.75, radius=400)
         top = record()
@@ -256,7 +275,7 @@ def etched(name, tex, zc):
     nt.links.new(ramp.outputs['Color'], b.inputs['Base Color'])
     rr = nt.nodes.new('ShaderNodeMapRange')
     rr.inputs['From Min'].default_value = 0.3; rr.inputs['From Max'].default_value = 0.9
-    rr.inputs['To Min'].default_value = 0.7; rr.inputs['To Max'].default_value = 0.3
+    rr.inputs['To Min'].default_value = 0.5; rr.inputs['To Max'].default_value = 0.22
     nt.links.new(im.outputs['Color'], rr.inputs['Value'])
     nt.links.new(rr.outputs['Result'], b.inputs['Roughness'])
     bp = nt.nodes.new('ShaderNodeBump'); bp.inputs['Strength'].default_value = 0.3
@@ -411,12 +430,13 @@ def stamper_mat():
     return mat
 
 
-def bedrock(z0=LIFT):
+def bedrock(z0=LIFT, sleeve_mat=None, smoke=True):
     """Bedrock in clear with a 3 mm Smoke base stratum: a slot along its top holds a sleeve; in the front, 9 mm behind
     the face, a sector of the stamper (Session 00's lead-in and first track) stands in a pocket 0.2 mm larger."""
     b = BED
     mat = pt.acrylic('bedrock', 'clear')
-    pt.block('smoke', b['L'] - 0.1, b['D'] - 0.1, z0 + 0.05, z0 + b['smoke'], pt.lamina('smoke_l', 'smoke'), bevel=1.45)
+    if smoke:
+        pt.block('smoke', b['L'] - 0.1, b['D'] - 0.1, z0 + 0.05, z0 + b['smoke'], pt.lamina('smoke_l', 'smoke'), bevel=1.45)
     body = pt.block('bedrock', b['L'], b['D'], z0, z0 + b['H'], mat, bevel=1.5)
     sw, sd = b['slot']
     cut(body, pt.block('slot', b['L'] - 30, sw, z0 + b['H'] - sd, z0 + b['H'] + 5, None, bevel=0))
@@ -445,7 +465,7 @@ def bedrock(z0=LIFT):
     shard.data.transform(_M.Translation(-cen))
     shard.location = cen
     # a sleeve in the slot: plain card, ink-black, the session's number blind-debossed (not drawn)
-    sleeve = pt.block('sleeve', 314, 3.2, z0 + b['H'] - sd + 0.4, z0 + b['H'] - sd + 314, pt.principled(
+    sleeve = pt.block('sleeve', 314, 3.2, z0 + b['H'] - sd + 0.4, z0 + b['H'] - sd + 314, sleeve_mat or pt.principled(
         'sleeve', '#141414', rough=0.7), bevel=0.4, y=0)
     return zc
 
@@ -483,6 +503,126 @@ def stamper_scene(shot):
 
 SCENES = {'firn': firn_scene, 'iron': iron_scene, 'stamper': stamper_scene}
 
+# --- the lamps lane's pass-4 Core rig (r32-lamps-final, studio/shots/barkhorn/lamps-cordless/p4-lamp-orb-*.json, read,
+# never written): the same sweep, marble, camera, lights and view as the Core product frames, so Iron reads as "Core,
+# with a meteorite inside". Lamps are converted as studio/engine/lights.py does: an area lamp's watts are its
+# irradiance x pi x d^2; azimuth 0 is in front (-y), +90 toward +x. Colour 4300 K under the rig's 4300 K white balance
+# is neutral here.
+def _orbit(target, az, el, d):
+    a, e = math.radians(az), math.radians(el)
+    return (target[0] + d * math.cos(e) * math.sin(a), target[1] - d * math.cos(e) * math.cos(a), target[2] + d * math.sin(e))
+
+
+KEY_EL, BGWASH_Z, BGWASH = 42, 250, '#FFE6C4'
+FILL_EL, BACK_Z, BACK_E, MARBLE_ROUGH = 12, 200, 1.6, 0.6
+BGWASH_SIZE, BGWASH_E, SKY = (3500, 1000), 2.645, '#D8D2C8'
+
+
+def core_rig(lit=False):
+    sys.path.insert(0, os.path.join(ROOT, 'studio', 'engine'))
+    import assets                                          # Poly Haven CC0, cached in studio/assets/cache (not in git)
+    pt.cove('#EAE4DA', rough=0.9, width=10000, depth=6000, height=4000, radius=800)
+    slab = pt.block('marble', 3000, 4200, 0, 40, assets.pbr(bpy, 'marble_01', '2k', tint='#ECE7DF', tint_mix=0.3,
+                                                           rough_mul=MARBLE_ROUGH, name='marble'), bevel=0, y=800)
+    sc = bpy.context.scene
+    bg = sc.world.node_tree.nodes['Background']
+    bg.inputs['Color'].default_value = tuple(pt.hex_lin(SKY)) + (1,)
+    bg.inputs['Strength'].default_value = 0.35
+    T = (0, 0, 148)
+    def area_e(name, size, loc, target, E, color='#FFFFFF', camera=True, spec=True):
+        d = math.dist(loc, target) * MM
+        ob = pt.area(name, loc, target, size, E * math.pi * d * d, color)
+        ob.visible_camera = camera
+        ob.visible_glossy = spec
+        return ob
+    area_e('key', (3000, 500), _orbit(T, -30, KEY_EL, 2600), T, 0.6)
+    area_e('fill', (2500, 2000), _orbit(T, 30, FILL_EL, 3000), T, 0.25)
+    area_e('bgwash', BGWASH_SIZE, (0, -400, 3000), (0, 2200, BGWASH_Z), BGWASH_E, BGWASH, camera=False, spec=False)
+    area_e('back', (80, 600), (450, 150, BACK_Z), (0, 0, 138), BACK_E, camera=False)
+    if lit:
+        pass
+    sc.view_settings.view_transform = 'Khronos PBR Neutral'
+    sc.view_settings.look = 'None'
+    sc.view_settings.exposure = 0.15
+    return 40.0                                           # the slab's top
+
+
+def iron_core_scene(shot):
+    global KEY_EL, BGWASH_Z, BGWASH, BGWASH_SIZE, BGWASH_E, SKY
+    KEY_EL, BGWASH_Z, BGWASH = 50, 0, '#FFFFFF'           # round 2: the wash white, smaller, weaker; the sky cooler
+    BGWASH_SIZE, BGWASH_E, SKY = (1400, 700), 1.9, '#DAD8D4'
+    pt.reset()
+    top = core_rig()
+    global CORE
+    CORE = dict(R=80.0, base=(60.0, 30.0))                 # Core's own base: 120 across, 30 tall
+    zc = iron(z_base=top + LIFT)
+    if shot in ('core', 'core_macro'):
+        # iron-core critic round 1 (5.0): black flags either side for the ball's silhouette; a softbox behind the camera
+        # for the etched kamacite to catch; a white card on the floor for the base's face (set in core_rig's globals:
+        # the wash neutral and lower, the key higher)
+        for sx in (-1, 1):
+            f = pt.block(f'flag{sx}', 400, 2, 0, 700, pt.principled(f'flag{sx}', '#060606', rough=1.0, spec=0.0), bevel=0)
+            f.location = (sx * 0.24, 0.0, (top + 0.5) * MM)
+            f.rotation_euler.z = math.radians(90)
+        d = math.dist((-180, -1500, 300), (0, 0, zc)) * MM
+        sb = pt.area('softbox', (-180, -1500, 300), (0, 0, zc), (2600, 1600), 1.1 * math.pi * d * d, '#FFF8F0')
+        sb.visible_camera = False
+        # the white floor card read as a band across the frame's foot: a low soft strip the camera cannot see instead
+        lo = pt.area('lowcard', (0, -300, top + 20), (0, 0, top + 18), (500, 60), 1.5, '#FFF8F0')
+        lo.visible_camera = False
+        # light linking: the strip lights the base only (the slice mirrored it as a bar across the etch, round 2 proof)
+        col = bpy.data.collections.new('lowcard_receivers')
+        col.objects.link(bpy.data.objects['base'])
+        lo.light_linking.receiver_collection = col
+    bpy.data.materials['ledring'].node_tree.nodes['Emission'].inputs['Strength'].default_value = 0.0   # unlit
+    if shot == 'core':
+        pt.camera((-160, -620, 168), (0, 0, 148), lens=75, fstop=5.6, focus=math.dist((-160, -620, 168), (0, 0, zc)))
+    else:                                                  # core_macro: the same light, closer, on the slice
+        pt.camera((-60, -330, zc + 6), (0, 0, zc), lens=100, fstop=8, focus=332)
+    return zc
+
+
+SCENES['iron_core'] = iron_core_scene
+
+
+def black_paper(name='sleeve_paper'):
+    """A record sleeve's black board: ambientCG Paper005 (CC0) for its tooth and sheen, its colour black."""
+    sys.path.insert(0, os.path.join(ROOT, 'studio', 'engine'))
+    import assets
+    m = assets.pbr(bpy, 'acg:Paper005', '2K', scale=0.25, name=name, bump=0.6)
+    nt = m.node_tree
+    b = next(n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED')
+    for l in list(nt.links):
+        if l.to_socket == b.inputs['Base Color']:
+            nt.links.remove(l)
+    b.inputs['Base Color'].default_value = (0.012, 0.012, 0.013, 1)
+    return m
+
+
+def stamper_core_scene(shot):
+    # stamper-core critic round 1 (4.0): the wash white; the fill higher for a sheen on the sleeve; the back light lower
+    # and stronger to carry light through the block; the marble rougher; a strip the shard mirrors
+    global BGWASH, FILL_EL, BACK_Z, BACK_E, MARBLE_ROUGH
+    BGWASH, FILL_EL, BACK_Z, BACK_E, MARBLE_ROUGH = '#FFFFFF', 28, 110, 3.5, 0.85
+    pt.reset()
+    top = core_rig()
+    d = math.dist((430, -900, 130), (0, -31, 75)) * MM
+    st = pt.area('strip', (430, -900, 130), (0, -31, 75), (700, 180), 0.35 * math.pi * d * d, '#FFFFFF')
+    st.visible_camera = False
+    # water-clear, no Smoke base (2026-11-01): seen from above, the light crossed the 3 mm Smoke stratum twice and the
+    # whole block read black; the edition is now Bedrock in Fog, the brand's water-clear
+    bedrock(z0=top + LIFT, sleeve_mat=black_paper(), smoke=False)
+    T = (0, -10, top + 50)
+    if shot == 'core':
+        pt.camera((-430, -760, top + 620), (0, -10, top + 60), lens=70)
+    else:
+        pt.area('front', (60, -420, top + 470), (0, -31, top + 34), (700, 140), 9, '#FFF6EC')
+        pt.camera((-60, -380, top + 66), (0, -31, top + 34), lens=100, fstop=11)
+
+
+SCENES['stamper_core'] = stamper_core_scene
+
+
 if __name__ == '__main__':
     a = pt.args()
     ed, shot, out = a[0], a[1], a[2]
@@ -490,4 +630,5 @@ if __name__ == '__main__':
     samples = int(a[a.index('--samples') + 1]) if '--samples' in a else 256
     exposure = float(a[a.index('--exposure') + 1]) if '--exposure' in a else 0.0
     SCENES[ed](shot)
-    pt.render(out, 1800, 1200, samples=samples, scale=scale, exposure=exposure)
+    w, h = (1600, 2000) if ed == 'iron_core' and shot == 'core' else (1800, 1200)
+    pt.render(out, w, h, samples=samples, scale=scale, exposure=exposure or bpy.context.scene.view_settings.exposure)

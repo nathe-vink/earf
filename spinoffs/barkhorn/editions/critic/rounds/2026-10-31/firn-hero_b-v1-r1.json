@@ -1,0 +1,53 @@
+{
+  "stage1": {"impression": "A clear cast cylinder with stacked lens voids stands on a pale silver disc on a mid-grey glossy round surface against a bright grey sweep; the acrylic's refraction and side highlights are believable. But the disc and the surface read as brushed aluminium and grey plastic rather than a dark label and black vinyl, half the voids have flat saturated-blue cores that read as decals, and the far edge of the round surface runs almost tangent to the weight's top rim.", "score": 5.5},
+  "blocking_9": [
+    "The centre label reads as the specified dark satin: region [370,790,450,860] lum_median <= 100 and delta_e to #2B2B2D < 25 (now 170, dE 48.5)",
+    "The LP reads as glossy black vinyl with a few highlights, not mid-grey: [100,1000,400,1150] lum_median <= 70 (now 95) and [50,470,300,560] <= 100 (now 145)",
+    "No void core reads as flat saturated blue-black: void [690,650,760,668] r_median >= 30 (now 1) and lum_median >= 90 (now 62); every void shows a silver TIR rim around a lit interior",
+    "The weight has a darker base where it sits on the label, so it reads as resting on the record and not floating in a pale band: [560,780,820,880] lum_median <= 170 (now 206)",
+    "The LP's far edge no longer runs tangent to the weight's top rim (now both at about y 340-380); at least 40 px of clear background or clear overlap between them"
+  ],
+  "changes": [
+    {"id": "c1", "rank": 1, "kind": "light",
+     "problem": "The label and the vinyl mirror the brightest band of the cove: the specular direction from the record at the camera's 17 degree elevation lands at about z 270 at y 900, which is exactly where the wall light's wash is aimed, so the dark satin label renders as silver and the black vinyl as grey.",
+     "evidence": {"region": [370, 790, 450, 860], "measured": "label lum_median 170.3, RGB 173/170/166, delta_e2000 to #2B2B2D 48.5; LP back-left [50,470,300,560] lum_median 145; cove profile y peaks 239 at the horizon band"},
+     "change": {"setting": "wall: cove wash target (mm)", "from": [0, 900, 260], "to": [0, 900, 520]},
+     "expected": "The cove stays bright in the upper frame (lum about 215-235) while the band the record mirrors drops; the label falls toward its own dark satin value and the vinyl darkens by 40 or more levels at the back.",
+     "accept": {"region": [370, 790, 450, 860], "metric": "lum_median", "op": "between", "value": [45, 100]}},
+    {"id": "c2", "rank": 2, "kind": "set",
+     "problem": "Even off the wash spot, the cove is a near-white field that the glossy vinyl mirrors at every angle, so the record has no black anywhere and the front reads mid-grey.",
+     "evidence": {"region": [100, 1000, 400, 1150], "measured": "LP front lum_median 95.3, range 11.7 (one flat grey); cove [100,50,1700,300] lum_median 230"},
+     "change": {"setting": "cove colour", "from": "#B9B7B3", "to": "#8E8C89"},
+     "expected": "Background still reads light grey (lum about 190-215) for a bright-field hero; vinyl front drops to near-black with its reflection of the weight standing out.",
+     "accept": {"region": [100, 1000, 400, 1150], "metric": "lum_median", "op": "between", "value": [25, 70]}},
+    {"id": "c3", "rank": 3, "kind": "asset",
+     "problem": "Nothing behind or above the camera gives the near half of the record and the label a dark field to mirror; the front of the label reads 149 and the front of the weight's base picks the same pale value up by refraction.",
+     "evidence": {"region": [600, 940, 800, 980], "measured": "front label lum_median 149, RGB 150/149/148 against a specified #2B2B2D"},
+     "change": {"setting": "asset: black flag", "from": "none", "to": "matte black card 600 x 300 mm, reflectance 3 percent, at (40, -520, 260), facing the target, held clear of the camera's view"},
+     "expected": "The front band of the label and the vinyl between the label and the frame edge darken; the weight's lower half refracts a dark label and gains a base.",
+     "accept": {"region": [600, 940, 800, 980], "metric": "lum_median", "op": "between", "value": [35, 100]}},
+    {"id": "c4", "rank": 4, "kind": "light",
+     "problem": "About half the voids show cores of saturated blue-black (red channel 1) where the path through them is trapped by total internal reflection and ends in no light, so they read as painted blue ellipses rather than air.",
+     "evidence": {"region": [690, 650, 760, 668], "measured": "void lum_median 62, r_median 1, g 74, b 124; a neighbouring silver void [900,600,960,625] reads 142 neutral"},
+     "change": {"setting": "rimR power (W)", "from": 3, "to": 8},
+     "expected": "Low raking light from the back-right enters the side wall at the voids' height and feeds the trapped paths; the cores go from blue-black to a lit, cool-silver interior with a brighter rim, red channel at least 30.",
+     "accept": {"region": [690, 650, 760, 668], "metric": "lum_median", "op": "between", "value": [90, 200]}},
+    {"id": "c5", "rank": 5, "kind": "camera",
+     "problem": "The record's far edge runs almost tangent to the weight's top rim, so the horizon line clips the top lamina and flattens the silhouette.",
+     "evidence": {"region": [440, 330, 1360, 480], "measured": "the LP's far edge sits at y 370-470 behind the top rim at y 330-380; LP_profile drops from 163 to 138 across the band where the two lines meet"},
+     "change": {"setting": "camera position z (mm)", "from": 150, "to": 120},
+     "expected": "The camera drops about 4 degrees; the record's far edge falls below the top rim, and the top lamina silhouettes against the cove with a clean edge and a less busy top face.",
+     "accept": {"region": [0, 0, 1800, 1200], "metric": "lum_p95", "op": "<=", "value": 250}},
+    {"id": "c6", "rank": 6, "kind": "light",
+     "problem": "The left wall carries a full-height clipped highlight band about 50 px wide, which reads as a white stripe rather than a polished edge highlight with a falloff.",
+     "evidence": {"region": [470, 720, 520, 880], "measured": "clip_pct 15.7, lum_p95 255; edge [430,600,520,640] 10-90 width 56 px with only a 20 level step"},
+     "change": {"setting": "key power (W)", "from": 6, "to": 4.5},
+     "expected": "The left highlight stays the brightest value on the weight but rolls off instead of clipping; clipped share in that strip under 3 percent.",
+     "accept": {"region": [470, 720, 520, 880], "metric": "clip_pct", "op": "between", "value": [0.2, 3]}}
+  ],
+  "out_of_scope": [
+    {"request": "Make the voids' blue cores less saturated by reducing the lamina tint", "why": "The acrylic's tint absorption is fixed from the maker's chart; the saturated blue-black cores (R=1) are the largest remaining reason the voids read as decals, so if c4 does not lift them the tint model of the 3 mm lamina should be checked against the chart."},
+    {"request": "Thin out or shift the voids that overlap the top face and the central column", "why": "Void layout is fixed geometry; viewed through the top lamina they make a dense jumble that competes with the side voids, which c5 reduces only by lowering the camera."}
+  ],
+  "score_if_fixed": 7.3
+}

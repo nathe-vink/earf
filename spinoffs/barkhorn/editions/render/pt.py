@@ -31,7 +31,7 @@ TINTS = {
     'fog':    ('2515', 69.1, '#E9ECEE'),   # light grey transparent
     'ice':    ('2069', 57.6, '#4FB8FF'),   # tinted blue transparent
     'acid':   ('2422', 59.1, '#FFC93A'),   # amber transparent (the nearest light warm yellow on the chart)
-    'smoke':  ('2064', 29.3, '#A9A7A3'),   # light grey / smoke, near neutral
+    'smoke':  ('2064', 29.3, '#A8A8A8'),   # light grey / smoke: neutral (a warm grey turned amber over long paths)
     'poison': ('2092', 18.6, '#6BD45A'),   # green
     'ember':  ('2283', 12.3, '#FF4A3A'),   # red
     'dust':   ('2119', 5.8, '#FF8A3A'),    # orange
@@ -53,7 +53,7 @@ def sigma_per_mm(key, thin=1.0):
     _, tt, hue = TINTS[key]
     t_int = min(tt / 92.0, 0.999)
     if key == 'clear':                                   # cast PMMA itself: a whisper of green-cyan over 100 mm
-        return [0.0005 * thin, 0.00025 * thin, 0.0003 * thin]
+        return [0.00012 * thin, 0.00006 * thin, 0.00008 * thin]   # cast PMMA: a faint cyan over a metre
     h = hex_lin(hue)
     m = max(h)
     shape = [-math.log(max(c / m, 0.02)) + 0.05 for c in h]     # how much faster each channel goes than the hue's own

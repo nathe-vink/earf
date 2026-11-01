@@ -1,0 +1,48 @@
+{
+  "stage1": {"impression": "A dark slab stands in an orange-brown block on warm marble, and a flat, evenly grey fan-shaped card sticks out of the block's front with no reflection in it, so it reads as a paper cut-out, not a polished mirror inside clear acrylic. The whole frame has an orange cast, the 'clear' block reads as amber glass, and the sleeve is a featureless brown-black void filling the top half.", "score": 4.0},
+  "blocking_9": [
+    "The stamper reads as a mirror: its face shows a reflected source with a graded value (lum_range over 40 across the face, p95 near 200-235) instead of one flat grey of 134 (range 5)",
+    "The clear acrylic reads near-clear, not amber: the lower front of the block is not r65 g31 b3",
+    "Neutral white balance: the sweep within dE 5 of #EAE4DA (now 9.3) and the marble within about dE 8 of #ECE7DF (now 18.0)",
+    "The black sleeve shows a soft sheen across its board face (now 28 +/- 6.5 everywhere) so it reads as a material and not a hole",
+    "The floor's right half is not a near-white glaze (median 228, p95 242) competing with the product",
+    "The stand and stamper occupy more of the frame; at 70 mm the 100 mm stamper is about 300 px of 1800"
+  ],
+  "changes": [
+    {"id": "c1", "rank": 1, "kind": "asset",
+     "problem": "The stamper is one flat grey from edge to edge, so it reads as a matte card, not a mirror of grooves: by the camera's geometry (elevation 34 deg, the shard leaning back 10 deg, refraction at the front face) it reflects the floor about 0.45 m in front-right of the stand at a grazing angle, at azimuth about +25, elevation about -5, where there is no source.",
+     "evidence": {"region": [880, 670, 1040, 750], "measured": "lum_median 134.7, p5 131.5, p95 136.7, range 5.2; profile across the shard 132.4, 132.5, 132.5, 133.9, 135.4, 136.5 (flat)"},
+     "change": {"setting": "add light: strip softbox", "from": "none", "to": "area light 700 x 180 mm, centre (430, -900, 130), aimed at (0, -31, 75), long side horizontal, a soft vertical falloff (brighter at its top edge), unseen by camera, seen by glossy rays, strength set so its reflection in the stamper reaches lum 200-230"},
+     "expected": "The stamper shows a bright band of the strip across part of its face falling off to a darker floor reflection, so its face spans at least 40 levels and its brightest part reaches 200-235 without clipping; the grooves' fine texture becomes visible in the bright band.",
+     "accept": {"region": [880, 670, 1040, 750], "metric": "lum_p95", "op": "between", "value": [190, 238]}},
+    {"id": "c2", "rank": 2, "kind": "light",
+     "problem": "The background wash is warm and turns the whole frame orange: the sweep and marble are far off their specified neutrals and the black sleeve reads brown (r38 g27 b8).",
+     "evidence": {"region": [0, 0, 300, 80], "measured": "sweep rgb 248,223,190, dE2000 9.31 vs #EAE4DA; floor [50,900,300,1150] rgb 222,185,134, dE 18.0 vs #ECE7DF; sleeve [400,50,1250,550] r38 g27 b8"},
+     "change": {"setting": "bgwash colour", "from": "#FFE6C4", "to": "#FFFFFF"},
+     "expected": "The sweep reads as warm paper close to #EAE4DA (dE under 5), the marble drops its orange cast, and the sleeve's blue channel rises toward its red.",
+     "accept": {"region": [0, 0, 300, 80], "metric": "delta_e", "hex": "#EAE4DA", "op": "<", "value": 5}},
+    {"id": "c3", "rank": 3, "kind": "light",
+     "problem": "The sleeve's board face is one dead value with no sheen, so the upper half of the frame is a hole: the face mirrors the direction azimuth +30, elevation about 34, which sits just above the fill softbox's top edge (fill centred at elevation 12, spanning about -6 to +30).",
+     "evidence": {"region": [400, 50, 1250, 550], "measured": "lum_median 28.0, p5 18.2, p95 31.2, range 13; vertical profile 28.3, 29.0, 29.0, 28.3, 28.0, 26.0, 23.9, 23.2"},
+     "change": {"setting": "fill elevation", "from": 12, "to": 28},
+     "expected": "A soft broad sheen of the fill across the sleeve's face, brighter toward one side, so the board reads as a satin black material: median about 35-50, a gradient of 20-50 levels across the face, still clearly black.",
+     "accept": {"region": [400, 50, 1250, 550], "metric": "lum_range", "op": "between", "value": [22, 70]}},
+    {"id": "c4", "rank": 4, "kind": "light",
+     "problem": "The block's solid front reads as dark brown glass, not clear acrylic: little light enters the 80 mm block from behind, so its lower front face shows a dark saturated interior.",
+     "evidence": {"region": [560, 880, 760, 930], "measured": "lum_median 36.2, p95 170.3, rgb median 65,31,3; right end [1300,610,1355,680] lum_median 39.6, range 8.7"},
+     "change": {"setting": "back light", "from": {"size": [80, 600], "position": [450, 150, 200], "irradiance_Wm2": 1.6}, "to": {"size": [80, 600], "position": [450, 150, 110], "irradiance_Wm2": 3.5}},
+     "expected": "Light carried through the block from behind and the right lifts the lower front face to a clear, lit interior with bright total-internal-reflection edges: median 60-130 instead of 36.",
+     "accept": {"region": [560, 880, 760, 930], "metric": "lum_median", "op": "between", "value": [60, 140]}},
+    {"id": "c5", "rank": 5, "kind": "set",
+     "problem": "The floor's right half is a near-white glossy reflection of the sweep and wash, brighter than anything on the product and pulling the eye out of frame right.",
+     "evidence": {"region": [1450, 150, 1780, 500], "measured": "lum_median 228.2, p95 242.0, clip 0.13%; the left floor [50,900,300,1150] median 189"},
+     "change": {"setting": "marble roughness multiplier", "from": 0.6, "to": 0.85},
+     "expected": "The right-floor glaze breaks into a soft sheen showing the marble's veining, median about 200-215 and p95 under 230, closer to the left floor.",
+     "accept": {"region": [1450, 150, 1780, 500], "metric": "lum_p95", "op": "between", "value": [195, 230]}}
+  ],
+  "out_of_scope": [
+    {"request": "Check the acrylic's tint and strata: the block reads amber/orange (lower front rgb 65,31,3; the slot walls orange) where the card says thick clear acrylic is very slightly cyan with only a thin smoke-grey base stratum.", "why": "The optics are fixed, but if the block is still amber after the wash is made neutral (c2), the absorption or the stratum colour in the scene does not match the maker's chart, and the product will read as amber glass, not clear acrylic."},
+    {"request": "Show more of the stand and the shard in the frame (for example a longer lens, 80-85 mm).", "why": "Not prescribed this round because it moves every test region; at 70 mm the shard, the subject of the edition, is about 310 px wide in an 1800 px frame and the sleeve's cropped top fills the upper half."}
+  ],
+  "score_if_fixed": 6.0
+}

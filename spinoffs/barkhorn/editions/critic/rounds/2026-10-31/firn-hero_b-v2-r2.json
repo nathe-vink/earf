@@ -1,0 +1,53 @@
+{
+  "stage1": {"impression": "A clear cast cylinder with stacked lens voids and the spindle seen through it, sitting on a dark gloss disc in front of a light cove; the glass reads, but the voids' cores are saturated blue like inlaid paint, and the left wall is a blown white bar. The black record and its label read as mid-grey, so the base looks like a grey plate under a candle holder and not a collectible on vinyl.", "score": 5.5},
+  "blocking_9": [
+    "The record label reads as black paper: region [340,770,420,800] lum_median between 40 and 75 and delta_e to #1E1E1E under 15 (now 126 and 33.1).",
+    "The vinyl reads as black gloss: LP foreground [60,980,300,1150] lum_median at or under 60 (now 78.5), with the object's reflection streaks kept.",
+    "Neither side wall of the cylinder clips: left wall [450,500,470,800] clip_pct under 10 (now 59.5), with a dark refracted edge on both sides (right [1270,520,1310,800] already 47).",
+    "The voids read as air, with silver rims and neutral to pale cores, not saturated blue: void [700,635,800,648] r_median at or above 40 (now 12.5).",
+    "The top face shows the voids below it through a calm reflection, not a busy pale-blue mirror with 1.2% clipped glints ([700,380,1100,440])."
+  ],
+  "changes": [
+    {"id": "c1", "rank": 1, "kind": "light",
+     "problem": "The matte-black label outside the weight's footprint reads mid-grey because the 600 x 360 overhead floods it, and the same overhead, entering through the blue lamina, fills the void cores with saturated blue.",
+     "evidence": {"region": [340, 770, 420, 800], "measured": "label lum_median 125.8, RGB 131/125/119, delta_e2000 to #1E1E1E 33.1; void core [700,635,800,648] RGB median 12/74/112"},
+     "change": {"setting": "overhead power (W)", "from": 9, "to": 4},
+     "expected": "Label outside the footprint drops to about lum 55-70 and reads as black paper; the caustic under the weight stays as the brightest part of the label; void cores lose some of their blue fill.",
+     "accept": {"region": [340, 770, 420, 800], "metric": "lum_median", "op": "between", "value": [40, 75]}},
+    {"id": "c2", "rank": 2, "kind": "light",
+     "problem": "The left wall of the cylinder is a blown white bar, while the right wall has a dark refracted edge, so the solid looks lopsided and its left silhouette disappears.",
+     "evidence": {"region": [450, 500, 470, 800], "measured": "clip_pct 59.5, lum_median 255; right wall [1270,520,1310,800] lum_median 47.4"},
+     "change": {"setting": "key power (W)", "from": 4.5, "to": 2.5},
+     "expected": "The left wall keeps a bright line about 5-8 px wide but no longer clips across its full 20 px width; p95 stays near white so the edge still glints.",
+     "accept": {"region": [450, 500, 470, 800], "metric": "clip_pct", "op": "between", "value": [1, 10]}},
+    {"id": "c3", "rank": 3, "kind": "asset",
+     "problem": "Only the right wall gets a dark refracted edge, so the left half of the body is flat grey and gives no sense of the 80 mm of solid acrylic.",
+     "evidence": {"region": [485, 520, 530, 800], "measured": "lum_median 108, p5 62.8, vs right wall 47.4; x-profile across the body 128, 149, 141, 140, 138, 137, 130, 68: dark only at the right"},
+     "change": {"setting": "asset: black flag left", "from": "none", "to": "matte black card #111111, 160 x 300 mm, at (-210, 60, 0 to 300), facing the object, outside the frame"},
+     "expected": "A dark refracted band 20-40 px wide on the inner left wall, matching the right, so the cylinder is drawn by dark lines on both sides as clear glass is.",
+     "accept": {"region": [485, 520, 530, 800], "metric": "lum_median", "op": "between", "value": [45, 85]}},
+    {"id": "c4", "rank": 4, "kind": "set",
+     "problem": "The glossy vinyl reflects the near-white cove and reads as mid-grey, not black record.",
+     "evidence": {"region": [60, 980, 300, 1150], "measured": "lum_median 78.5 (right side [1500,980,1750,1150] 85.5); cove at horizon [1450,200,1800,440] 227"},
+     "change": {"setting": "wall power (W)", "from": 10, "to": 7},
+     "expected": "The cove near the horizon drops to about 195-210, still bright-field behind the glass; the vinyl drops to about 55-65 and reads as black, with the object's reflection streaks intact.",
+     "accept": {"region": [60, 980, 300, 1150], "metric": "lum_median", "op": "between", "value": [45, 65]}},
+    {"id": "c5", "rank": 5, "kind": "light",
+     "problem": "The card meant as a black flag is pale blue-white, and the top face mirrors it as a busy pale-blue sheet with clipped glints that hide the voids under it.",
+     "evidence": {"region": [700, 380, 1100, 440], "measured": "lum_median 145, RGB 133/147/162, p95 208, clip_pct 1.2"},
+     "change": {"setting": "flag colour", "from": "#E8F0FF", "to": "#1A1A1A"},
+     "expected": "The top face becomes a darker mirror, about lum 85-115, through which the void columns read with depth; the lamina's pale blue shows at the edge band only.",
+     "accept": {"region": [700, 380, 1100, 440], "metric": "lum_median", "op": "between", "value": [80, 120]}},
+    {"id": "c6", "rank": 6, "kind": "asset",
+     "problem": "The void rims carry only thin silver lines and their cores take the colour of whatever they mirror, so they read as blue inlays rather than trapped air.",
+     "evidence": {"region": [700, 635, 800, 648], "measured": "RGB median 12/74/112, p95 185"},
+     "change": {"setting": "asset: white bounce card low front", "from": "none", "to": "matte white card #F2F2F2, 300 x 80 mm, at (0, -260, 0 to 80) lying 30 degrees back, below the frame, unlit except by the key"},
+     "expected": "The voids' undersides mirror a neutral white by total internal reflection, so the cores go silver-grey with r_median above 40 and the blue stays at the rims only.",
+     "accept": {"region": [700, 635, 800, 648], "metric": "r_median", "op": "between", "value": [40, 150]}}
+  ],
+  "out_of_scope": [
+    {"request": "Make the void cores less blue by changing the lamina tint or its absorption.", "why": "Tint and optics are fixed by the measured transmission chart; the fix has to come from what the voids mirror (c1, c6)."},
+    {"request": "Shallow depth of field to soften the LP horizon.", "why": "At 100 mm and 420 mm the depth of field at f/5.6 is about 5 mm, far less than the 80 mm object; any useful softening would blur the product."}
+  ],
+  "score_if_fixed": 7.5
+}

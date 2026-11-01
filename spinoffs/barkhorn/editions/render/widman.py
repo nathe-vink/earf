@@ -16,7 +16,7 @@ import subprocess
 import numpy as np
 
 
-def make(path, w_mm=70.0, h_mm=52.0, px_per_mm=26, seed=11, band=(0.22, 0.55), tries=20000):
+def make(path, w_mm=70.0, h_mm=52.0, px_per_mm=26, seed=11, band=(0.12, 0.34), tries=32000):
     W, H = int(w_mm * px_per_mm), int(h_mm * px_per_mm)
     rnd = random.Random(seed)
     rng = np.random.default_rng(seed)
@@ -34,8 +34,8 @@ def make(path, w_mm=70.0, h_mm=52.0, px_per_mm=26, seed=11, band=(0.22, 0.55), t
         a = math.radians(dirs[i] + rnd.gauss(0, 0.6))
         ux, uy = math.cos(a), math.sin(a)
         cx, cy = rnd.uniform(0, w_mm), rnd.uniform(0, h_mm)
-        L = rnd.uniform(8, 40)
-        wdt = rnd.uniform(*band)
+        L = rnd.uniform(6, 30)
+        wdt = min(max(rnd.lognormvariate(math.log((band[0] * band[1]) ** 0.5), 0.42), 0.08), 1.6)   # lognormal widths, a few swathing bands
         r = L / 2 + 1
         x0, x1 = max(int((cx - r) * px_per_mm), 0), min(int((cx + r) * px_per_mm), W)
         y0, y1 = max(int((cy - r) * px_per_mm), 0), min(int((cy + r) * px_per_mm), H)
@@ -56,11 +56,11 @@ def make(path, w_mm=70.0, h_mm=52.0, px_per_mm=26, seed=11, band=(0.22, 0.55), t
             sb = s[blocked]
             lo = sb[sb < 0].max() if (sb < 0).any() else -L / 2
             hi = sb[sb > 0].min() if (sb > 0).any() else L / 2
-            if hi - lo < 5.0:                            # too short a run: real plates are long, so skip it
+            if hi - lo < 3.5:                            # too short a run: real plates are long, so skip it
                 continue
             free = free & (s > lo + 0.05) & (s < hi - 0.05)
         own[free] = i
-        v = tone[i] + 0.05 * math.sin(drift[i] + (cx * ux + cy * uy) * 0.15) + rnd.uniform(-0.025, 0.025)
+        v = tone[i] + 0.07 * math.sin(drift[i] + (cx * ux + cy * uy) * 0.15) + rnd.uniform(-0.06, 0.06)
         sub = img[y0:y1, x0:x1]
         sub[free] = v + 0.02 * rng.standard_normal(int(free.sum())).astype(np.float32)
     # taenite: a hairline bright border wherever two plates of different families meet, or a plate meets plessite
@@ -69,6 +69,16 @@ def make(path, w_mm=70.0, h_mm=52.0, px_per_mm=26, seed=11, band=(0.22, 0.55), t
     edge[:, 1:] |= (o[:, 1:] != o[:, :-1])
     edge[1:, :] |= (o[1:, :] != o[:-1, :])
     img = np.where(edge, 0.9, img)
+    # a slight domain warp: the plates bend a little, as real ones do, so the figure does not tile
+    def smooth_noise(scale_px, amp_px):
+        g = rng.standard_normal((H // scale_px + 2, W // scale_px + 2)).astype(np.float32)
+        yi = np.linspace(0, g.shape[0] - 1.001, H); xi = np.linspace(0, g.shape[1] - 1.001, W)
+        y0 = yi.astype(int); x0 = xi.astype(int); fy = (yi - y0)[:, None]; fx = (xi - x0)[None, :]
+        a = g[y0][:, x0]; b = g[y0][:, x0 + 1]; c = g[y0 + 1][:, x0]; d = g[y0 + 1][:, x0 + 1]
+        return amp_px * ((a * (1 - fx) + b * fx) * (1 - fy) + (c * (1 - fx) + d * fx) * fy)
+    dx = smooth_noise(220, 5.0); dy = smooth_noise(220, 5.0)
+    Y, X = np.mgrid[0:H, 0:W]
+    img = img[np.clip((Y + dy).astype(int), 0, H - 1), np.clip((X + dx).astype(int), 0, W - 1)]
     out = (np.clip(img, 0, 1) * 255).astype(np.uint8)
     pgm = path + '.pgm'
     with open(pgm, 'wb') as f:                   # written as PGM and converted (the system PIL is not this Python's)

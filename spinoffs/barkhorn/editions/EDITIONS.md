@@ -70,7 +70,7 @@ goes near a driver's magnet. (Source: `research/making.md`, section 5.)
 
 | # | Edition | Product | Inside | Size | Premium (proposal) |
 |---|---|---|---|---|---|
-| 1 | **Stamper** | Bedrock, clear, a Smoke base stratum | a shard of the nickel stamper that pressed Session 00 | 12 to 16, as many as one stamper yields | +150% |
+| 1 | **Stamper** | Bedrock, water-clear (Fog) | a shard of the nickel stamper that pressed Session 00 | 12 to 16, as many as one stamper yields | +150% |
 | 2 | **Offcuts** | Core, the stack of discs, clear with eight tints | the first eight speakers' offcuts, one stratum each, Ember to Smoke | 8 | +70% |
 | 3 | **Firn** | Moho, clear under an Ice lamina | air: columns of lens-shaped voids, one at each bond line | 25 | +120% |
 | 4 | **Groove** | Moho, clear, a Smoke stratum beneath | Session 00's opening, drawn as a spiral channel of air | 33 | +150% |
@@ -102,7 +102,8 @@ Cut:
 ### 1. Stamper — "The mirror that pressed it."
 
 - **Product and tint.** Bedrock, the record stand (proposed 300 × 80 × 72 mm, a 7 mm slot along the top for a sleeve),
-  in clear, with a 3 mm Smoke stratum at the base.
+  in water-clear (Fog). A 3 mm Smoke base stratum was drawn first and dropped in the renders. Seen from above, the light
+  crosses the stratum twice, and the whole block read black.
 - **Inside.** One sector of the nickel stamper that pressed Session 00: about 100 × 46 mm across its grooves, 0.3 to
   0.4 mm thick. It stands 9 mm behind the front face, grooves forward, the lead-in at the top. The shards come from one
   stamper, so the edition is as large as that stamper is: about 12 to 16 pieces. Each card carries a map of the
@@ -117,7 +118,7 @@ Cut:
   5. Set the shard grooves-forward, not touching the cover. Lay degassed ACRIFIX 2R 0190 as a bead on the flats.
      Press, vent, flush the pocket with dry air for 20 minutes, and plug.
   6. Wait 24 h, then anneal at 70 °C.
-  7. Bond the Smoke base stratum. Mill the slot, then diamond-polish the faces and flame-polish the arrises.
+  7. Mill the slot, then diamond-polish the faces and flame-polish the arrises.
   8. The pocket is shallow and seen face-on, so its walls barely show. A thin silver outline stays round the shard,
      and it reads as the shard's frame.
 - **Sourcing, legal and ethical.** The stamper is EARF's own tooling from its own pressing, so its legality is
