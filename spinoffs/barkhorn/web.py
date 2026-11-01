@@ -220,10 +220,36 @@ NEXT_TEXT = {   # today's words -> the drafts (each must be found exactly once i
         'acrylic, and it charges in two to three hours.',
 }
 
+# the headline, once a new one is picked (the owner, 2026-11-01: "Tagline: none: another round"): None keeps today's.
+# Set, it replaces the home h1, the debut's and the debut's preview title, on one line at every width (no-break spaces,
+# nowrap, clamp(): checked from 320 to 2560 px for "Have the world over." on d0212727, reverted in 734e3229)
+TAGLINE, TAGLINE_NEXT = 'Something in the air.', None
+
+
+def tagline_css(line):
+    """The headline's size: as large as before, but never wider than the screen less its gutters, for a line of any
+    length (Instrument Sans sets about 0.44 em a character; 0.47 leaves a margin)."""
+    fit = f'calc((100vw - 32px) / {0.47 * len(line):.2f})'
+    return ('h1.tagline { white-space: nowrap }\n'
+            f'.hero-title h1.tagline {{ font-size: clamp(18px, min(5vw, {fit}), 80px) }}\n'
+            f'@media (max-width: 860px) {{ .hero-title h1.tagline {{ font-size: clamp(18px, min(9.4vw, {fit}), 44px) }} }}\n'
+            f'.debut-words h1.tagline {{ font-size: clamp(18px, min(7vw, {fit}), 96px) }}\n')
+
+
+# the swatches for colors F (the coordinator, 2026-11-01: override here, under the flag; marks.py, the brand's source,
+# stays as it is): key -> hex, from the speaker lane's TINTS.md (c38f8ee6) and barkhorn-cloud.json once its Poison and
+# Haze land. Empty keeps today's swatches.
+MARK_NEXT = {}
+
+
+def tagline():
+    return TAGLINE_NEXT if COPY_NEXT and TAGLINE_NEXT else TAGLINE
+
 
 def copy_next():
     """Put the drafted words in place of today's (the data here; the page's own words through NEXT_TEXT at build)."""
     TT.update(TT_NEXT)
+    MARK.update(MARK_NEXT)
     for i, (k, name, kind, line, alt, facts) in enumerate(LAMPS):
         f = dict(facts)
         if k == 'dome':
@@ -3159,7 +3185,7 @@ def share_pages():
     if DEBUT:
         img = card('hero-1200.jpg', 'debut.jpg')
         d = 'The first pair of Tropos, heard for the first time. Spring 2027, in San Francisco. Date to come.'
-        made.append(page('debut', 'The EARF debut · Something in the air', d, img, 'The eight Tropos speakers on a curve, Ember to Smoke', '#0B0C10', 'website',
+        made.append(page('debut', 'The EARF debut · ' + tagline().rstrip('.'), d, img, 'The eight Tropos speakers on a curve, Ember to Smoke', '#0B0C10', 'website',
                          # a WebPage, not an Event, until there is a date: an Event needs a startDate
                          {'@context': 'https://schema.org', '@type': 'WebPage', 'name': 'The EARF debut', 'description': d,
                           'publisher': {'@type': 'Organization', 'name': 'EARF', 'url': URL}, 'image': f'{URL}/{img}'}))
@@ -3207,6 +3233,11 @@ def build():
         for old, new in NEXT_TEXT.items():
             assert rest.count(old) == 1, ('COPY_NEXT: not found once', old[:60])
             rest = rest.replace(old, new)
+        if TAGLINE_NEXT:
+            assert rest.count(f'<h1>{TAGLINE}</h1>') >= 1
+            rest = rest.replace(f'<h1>{TAGLINE}</h1>', '<h1 class="tagline">' + TAGLINE_NEXT.replace(' ', '&nbsp;') + '</h1>')
+            i = head.rindex('</style>')
+            head = head[:i] + tagline_css(TAGLINE_NEXT) + head[i:]
     open(os.path.join(SITE, 'index.html'), 'w').write(HEAD + head.strip() + '\n</head>\n<body>\n' + rest.strip() + '\n</body>\n</html>\n')
     favicons()
     open(os.path.join(SITE, 'robots.txt'), 'w').write('User-agent: *\nDisallow: /\n')

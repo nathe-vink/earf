@@ -165,6 +165,10 @@ brand"). Not live: main needs the owner's yes.
   Hemisphere's shade with its color outside, over clear. Off, the page is byte for byte today's. It goes on with the speaker
   lane's new picture set, whose alts will describe the new Mantle; the pictures on the site still show the old one.
   Close-ups go beside a whole-product picture when that set is laid out.
+- **Held for the next round:** `TAGLINE_NEXT` (None: the headline stays "Something in the air.") and `MARK_NEXT` (empty:
+  today's swatches; colors F's values go here, under `COPY_NEXT`, and `marks.py` stays the brand's). A picked line takes
+  the home h1, the debut's and its preview title, on one line at every width: no-break spaces, nowrap, and a size that
+  shrinks with the line's length (checked 320-2560 px for three lines of 17 to 34 characters).
 
 ## Round 31: every picture final, the amplifier's plate as it is, and pictures for a launch (the owner's notes of 2026-10-18; in progress)
 
