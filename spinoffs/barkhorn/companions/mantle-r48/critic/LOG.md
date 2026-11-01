@@ -69,3 +69,20 @@ What the last critics agree on, for whoever takes this further:
   read as debris. Next: vapor-polish them and place the phono stage's tunnel deeper, or tint the bottom stratum.
 - **No caustics are claimed.** With MNEE on, tinted laminae would throw white caustics (the coordinator's note);
   none of these frames shows one where a colored shadow should fall.
+
+## Strata Float v2 (the coordinator's head-to-head notes; two rounds, as asked)
+
+| frame | round | blind | the critic's main note |
+|---|---|---|---|
+| `strata-v2-ice-custom.png` | 1 | 5.0 | the deck's edges near-black with blocky royal-blue patches; the sub-plinth reads darker than the top |
+| `strata-v2-dusk-ember-custom.png` | 1 | 5.5 | the base glow a clipped peach "gaming LED"; the deck's front face crushed |
+| `strata-v2-ice-custom-r2.png` | 2 (a raking front strip and card) | 5.5 | still cobalt patches and dark bands on the deck's edges; the arm a primitive |
+| `strata-v2-dusk-ember-custom-r2.png` | 2 (the glow redder, 1.5 stops down) | 5.5 | the front edge near-black with flat red rectangles; the glow still reads as an LED strip |
+
+v2's design fixes (one grid, a subordinate base, one-slab tiers, bonded posts, a small edge mark) drew no complaints in
+either round: none of the four critics named a double sheet, a second grid, a screw through a post or a bold mark.
+What they still see is a rendering truth about thick tinted acrylic. Seen edge-on, a long path through the deck's
+custom tint goes dark, and the light it does pass comes through in patches, where the polished faces refract what lies
+behind. A photograph of the real slab would show the same. A brighter, more even edge needs a lighter pour, or the
+deck's edge frosted or chamfered to collect light. Both are design choices for the owner, not render settings.
+Stopped at the two rounds asked for.

@@ -1,0 +1,174 @@
+{
+ "stage1": {
+  "impression": "A moody, well-composed dusk shot of a red acrylic turntable floating over a glowing base. The two-tier silhouette and the lit lower edge are a strong idea. But the top plinth's front edge goes dead black in stretches and then breaks into flat red rectangles, the base glow looks like a pink LED strip rather than light inside tinted acrylic, and the grain and the clean, sharp-edged slabs give it away as CG.",
+  "score": 5.5
+ },
+ "reads_as": "a Pro-Ject/Rega-style acrylic belt-drive deck on an LED-lit riser",
+ "unreal": [
+  {
+   "rank": 1,
+   "region": [
+    295,
+    580,
+    940,
+    750
+   ],
+   "what": "The plinth's front polished edge is almost opaque black (lum median 4, RGB 6/2/3 at 620-900 x 600-700), interrupted by two hard-edged flat red rectangles (R 191, G 13 at 505-605 x 620-690) that look like caustic or refraction tiles, not glass.",
+   "real": "A polished edge on through-tinted cast acrylic glows a continuous deep ember red that gets brighter toward the corners. It carries the light piped through the sheet and shows soft reflections of the set, never black voids or blocky patches. Raise the transmission bounces and depth, and polish the edge with a slight arris so it collects light."
+  },
+  {
+   "rank": 2,
+   "region": [
+    440,
+    700,
+    1640,
+    920
+   ],
+   "what": "The base's edge glow is desaturated salmon to near white (band median R39/G17, p95 lum 202) with two parallel bright lines, like an LED tape behind a diffuser.",
+   "real": "An edge-lit Ember sheet glows saturated orange-red along its whole polished edge, brightest at the ends. Light gathers at engraved or frosted marks, and a warm spill falls on the floor beneath. Tint the emission through the acrylic's absorption instead of emitting white-pink."
+  },
+  {
+   "rank": 3,
+   "region": [
+    680,
+    640,
+    1180,
+    840
+   ],
+   "what": "The clear standoff cylinders between the plinth and base read as glass tumblers, with muddy internal reflections and no visible fixing, so the plinth seems to float without a credible joint.",
+   "real": "Machined acrylic or metal spacers with a visible counterbored bolt or captive insert at each end, a small chamfer, and a clean contact ring on both sheets."
+  },
+  {
+   "rank": 4,
+   "region": [
+    295,
+    470,
+    1790,
+    790
+   ],
+   "what": "Every slab edge is a knife-sharp CG box edge with no arris, radius or polish highlight.",
+   "real": "Flame- or diamond-polished acrylic has a 0.5-1 mm arris that catches a thin bright line of the key light along every edge, which defines the sheet and its thickness."
+  },
+  {
+   "rank": 5,
+   "region": [
+    1260,
+    770,
+    1340,
+    805
+   ],
+   "what": "The 'EARF' wordmark is flat mid-grey type sitting on a black edge, like a decal floating on the surface.",
+   "real": "Engraved or laser-etched into the tinted edge, so it glows lighter red from the piped light, or a fine inlaid metal mark with its own small highlight."
+  },
+  {
+   "rank": 6,
+   "region": [
+    0,
+    0,
+    1800,
+    1200
+   ],
+   "what": "Visible per-pixel colour noise in the shadows and on the floor (blacks crushed: 55% of the frame below lum 40, the top band median 2) reads as an undersampled path trace, not film or sensor grain.",
+   "real": "Clean shadows with a slight lift and fine luminance grain only. Render more samples and denoise, then add grain in post."
+  },
+  {
+   "rank": 7,
+   "region": [
+    585,
+    380,
+    1395,
+    600
+   ],
+   "what": "The platter is a red acrylic disc under a black mat with a thin chrome-looking ring, and its sides show smeared, jumbled red reflections. The record and mat merge into one black mass with no groove sheen.",
+   "real": "A real LP shows a fine anisotropic groove sheen that crosses the disc as a band of light. The platter edge shows a clean refracted band and one crisp reflection of the softbox."
+  },
+  {
+   "rank": 8,
+   "region": [
+    1120,
+    350,
+    1720,
+    580
+   ],
+   "what": "The tonearm is generic matte-black tubes with a mirror-chrome ball counterweight and a featureless base, and the headshell and cartridge area is a dark blur.",
+   "real": "Visible bearing housing, VTA collar with a set screw, cue lever with its rest, a fine tonearm wire loop, and a counterweight with a knurled or turned finish rather than a perfect mirror ball."
+  },
+  {
+   "rank": 9,
+   "region": [
+    660,
+    790,
+    1180,
+    900
+   ],
+   "what": "The feet under the base are dark undefined pucks, and the contact shadow is soft but lacks a dark occlusion line where the feet meet the floor.",
+   "real": "Turned feet with a visible chamfer or elastomer ring, a crisp contact shadow under each, and the red glow spilling onto the floor around them."
+  },
+  {
+   "rank": 10,
+   "region": [
+    0,
+    300,
+    1800,
+    1200
+   ],
+   "what": "The floor is a uniform, featureless grey-blue (lum range 14 across the foreground) with an artificial vignette band at the back. It reads as an infinite CG plane.",
+   "real": "A real surface such as honed stone, oak or linen board, with micro texture and some reflection of the glowing edge. The falloff should come from a real light, not a gradient."
+  }
+ ],
+ "cooler": [
+  {
+   "rank": 1,
+   "idea": "Make the Ember tint the hero: let the whole plinth glow from within, lit by the base, so the light rises through the standoffs into the top sheet and the deck looks like a slab of lit amber.",
+   "now": "The top plinth reads near black and generic, so the deck looks like any smoked-acrylic Pro-Ject or Clearaudio."
+  },
+  {
+   "rank": 2,
+   "idea": "Give the tonearm and its pod a shape and finish of its own, such as a bronze or tinted-acrylic pod and a counterweight that matches the plinth's language, instead of an off-the-shelf black arm.",
+   "now": "It resembles a Rega/Pro-Ject arm on a round armboard, the most familiar part of the archetype."
+  },
+  {
+   "rank": 3,
+   "idea": "Make the floating gap the signature: fewer, more architectural standoffs, such as three precise columns or one central pillar, with a visible engineered fixing, so the levitation reads as designed decoupling.",
+   "now": "Four glass-tumbler spacers that read as stand-ins."
+  },
+  {
+   "rank": 4,
+   "idea": "Engrave the wordmark and a fine line of graphics into the edge-lit base so they catch the piped light and glow. That makes the light the branding.",
+   "now": "A grey decal-like word on a black edge that disappears."
+  },
+  {
+   "rank": 5,
+   "idea": "Give the platter a distinctive edge, such as a thick tinted-acrylic platter whose rim glows like the base, or a stepped profile, to tie the rotating parts to the plinth's material story.",
+   "now": "A generic black platter and mat that could belong to any deck."
+  }
+ ],
+ "photo": [
+  {
+   "rank": 1,
+   "change": "Raise the transmission and refraction bounce depth and the samples (or turn on caustics/MNEE for the acrylic) so the thick edges carry continuous red light rather than black voids and blocky patches.",
+   "expected": "The plinth edge reads as tinted glass with depth, the biggest single gain in realism."
+  },
+  {
+   "rank": 2,
+   "change": "Saturate the base's edge emission through the Ember absorption colour and let it spill warm red onto the floor, with a reflective floor surface to show it.",
+   "expected": "The glow becomes a material property rather than an LED strip, and the product sits in its own light."
+  },
+  {
+   "rank": 3,
+   "change": "Add a long, narrow strip softbox raking from the back left to draw a thin highlight along every polished arris and across the record's groove sheen, and a low fill to lift the crushed blacks to about lum 10-15.",
+   "expected": "The edges and thicknesses read clearly, the record looks like vinyl, and the image no longer sinks into black."
+  },
+  {
+   "rank": 4,
+   "change": "Replace the flat grey floor with a real material such as dark honed stone or oiled oak, and replace the gradient backdrop with a dimly lit wall that has real falloff.",
+   "expected": "Real scale cues and a photographed set rather than a CG void."
+  },
+  {
+   "rank": 5,
+   "change": "Render clean and add film-like luminance grain in post, use a slightly longer lens (about 85-100 mm equivalent) with a shallow but real focus fall-off, and correct the slight downward perspective.",
+   "expected": "It reads as a still-life photograph, with less of the wide CG camera feel."
+  }
+ ],
+ "score_if_fixed": 7.5
+}

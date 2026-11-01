@@ -1,0 +1,174 @@
+{
+ "stage1": {
+  "impression": "A clean, competent studio render of a clear-acrylic belt-drive deck floating over a smoked sub-plinth. It is undone by the plinth's front edge, which shows blotchy, saturated cobalt patches and near-black grey bands where a pale ice-blue cast slab would glow evenly cyan. The tonearm, cartridge and record are toy-simple: CG-smooth surfaces and generic proportions. The set is a seamless white cove with a muddy grey band across the top. It reads as a good CG render, not a photograph.",
+  "score": 5.5
+ },
+ "reads_as": "a clear-acrylic audiophile turntable in the Pro-Ject / Clearaudio / Rega Planar mould, rendered",
+ "unreal": [
+  {
+   "rank": 1,
+   "region": [
+    310,
+    590,
+    1640,
+    900
+   ],
+   "what": "The plinth's front and right edges show irregular, saturated cobalt blotches (about RGB 69/95/147 at 620-700,560-600) next to flat dark-grey bands (median luminance about 59 at 700-900,720-790). These look like refracted environment noise or a broken volume absorption. The tint reads as a deep sapphire patchwork, not the pale Ice the card describes.",
+   "real": "A through-tinted cast slab seen edge-on gets a deeper version of its own hue that is even along the edge, here a clear cyan-aqua, with one crisp, continuous highlight along the polished arris. It is not random royal-blue patches. Fix the volume absorption colour or density and the IOR, and give the room enough smooth, large reflectors so the edge refracts something coherent."
+  },
+  {
+   "rank": 2,
+   "region": [
+    1120,
+    380,
+    1650,
+    610
+   ],
+   "what": "The tonearm is a plain dull-grey tube with a sphere at the end. The headshell is a flat bent plate, the cartridge a grey wedge, the cueing lift a bare post. Every piece is a primitive with no machining marks, wire, finger lift or arm rest clip, and the counterweight is a featureless chrome cylinder.",
+   "real": "A real $6,500 deck carries a recognisable arm: a tapered or bead-blasted tube, a machined headshell with a finger lift, tonearm leads at the rear, a cueing platform with a damped lever, an arm rest with a clip, a knurled or decoupled counterweight, and an anti-skate mechanism."
+  },
+  {
+   "rank": 3,
+   "region": [
+    600,
+    370,
+    1130,
+    560
+   ],
+   "what": "The record is uniform dark grey with a few concentric rings and no groove sheen. The label is a blank off-white disc with faint, half-cut text ('ST..TA'). It reads as a placeholder prop.",
+   "real": "Real vinyl is near-black with fine groove anisotropy, so a radial highlight streak runs across the grooves, plus a lead-in and run-out and a visible dead wax band. The label carries printed artwork. As a prop it should be a convincing record."
+  },
+  {
+   "rank": 4,
+   "region": [
+    590,
+    520,
+    1140,
+    660
+   ],
+   "what": "The platter edge is a stack of a blue-glass layer and a flat white ring that look like coplanar slabs. The white stripe reads like a belt drawn as a ring, with no thickness and no shadow.",
+   "real": "If it is a belt it should be a thin black or translucent round-section band running from the motor pulley, with a slight sag and a visible path. A platter rim would show machined facets and the glass's internal reflections."
+  },
+  {
+   "rank": 5,
+   "region": [
+    440,
+    700,
+    1700,
+    940
+   ],
+   "what": "The sub-plinth's top face is a flat, almost white mirror with a black inset line. Its front edge is a grey band with a faint vertical brushed streak, like a texture, not polished acrylic. The feet sit as faintly drawn ghost cylinders with no contact shadow.",
+   "real": "Smoked acrylic has a dark, glossy top that reflects the deck above. Its polished edge shows a deeper smoke tone with one continuous highlight. Each foot casts a tight, dark contact shadow onto the table."
+  },
+  {
+   "rank": 6,
+   "region": [
+    1050,
+    740,
+    1200,
+    880
+   ],
+   "what": "The decoupling pucks between the two plinths show a jumbled, noisy, multicoloured mess of refracted geometry, with orange and green specks, like a broken caustic or firefly cluster.",
+   "real": "A real elastomer or metal-and-sorbothane coupler is a solid, readable part: an anodised cup with a black elastomer ring, and a clean bolt head if it is visible through the clear stock."
+  },
+  {
+   "rank": 7,
+   "region": [
+    1520,
+    500,
+    1720,
+    760
+   ],
+   "what": "The plinth's right edge reads as a near-black wall with stray blue smudges, so the slab looks hollow and dark instead of solid tinted acrylic. The rounded corner has no consistent highlight.",
+   "real": "Even a thick slab of pale tint transmits light through its side. The side would read light aqua with a bright rim where the polished radius catches the key."
+  },
+  {
+   "rank": 8,
+   "region": [
+    790,
+    375,
+    910,
+    400
+   ],
+   "what": "The motor pod or bearing housing at the back left is a flat white disc with a chrome tab and no visible pulley, belt or fixing.",
+   "real": "A real motor pod shows a machined pulley with two steps for 33/45, the belt wrapped around it, and a short gap between the pod and the platter."
+  },
+  {
+   "rank": 9,
+   "region": [
+    1240,
+    838,
+    1310,
+    862
+   ],
+   "what": "The 'EARF' wordmark is a flat white decal floating on the edge's blue patch. It has no depth, no engraving and no relation to the material.",
+   "real": "On cast acrylic a mark would be laser-engraved (frosted, slightly recessed and catching light) or reverse-printed on a polished face, so it reads under the surface."
+  },
+  {
+   "rank": 10,
+   "region": [
+    0,
+    0,
+    1800,
+    260
+   ],
+   "what": "The top of the frame is a smeared grey-brown gradient band (median luminance about 95) over a white cove, like an unlit room ceiling bleeding into the backdrop. Uniform film grain sits over everything, including the CG-smooth surfaces.",
+   "real": "A studio sweep falls off smoothly to a controlled tone, or shows a deliberate wall. Grain in a real photo sits under real micro-detail rather than being sprinkled over flat CG shading."
+  }
+ ],
+ "cooler": [
+  {
+   "rank": 1,
+   "idea": "Make the tint the hero: a thick, solid ice-blue slab whose polished edges glow evenly cyan, with a visibly different smoked sub-plinth, so the colour contrast between the two layers is deliberate.",
+   "now": "A generic clear-acrylic deck like Pro-Ject's Acryl or Clearaudio's Emotion, made worse by patchy edges."
+  },
+  {
+   "rank": 2,
+   "idea": "Design a signature tonearm and pillar in the same cast material or in a distinctive metal finish, with a sculpted headshell and counterweight that echo the plinth's radius.",
+   "now": "A stock 9-inch gimbal-arm archetype that could belong to any entry-level deck."
+  },
+  {
+   "rank": 3,
+   "idea": "Make the floating sub-plinth a feature. Show the isolation points as precise, jewel-like machined couplers, visibly sized and spaced, so the layered stack reads as engineered.",
+   "now": "The two-plate 'floating' layout reads like a Rega or Pro-Ject with a stand, and the couplers are illegible."
+  },
+  {
+   "rank": 4,
+   "idea": "Give the platter its own identity, for example a thick clear platter with an edge-lit or frosted ring, or a visible inverted bearing seen through the clear stock.",
+   "now": "A thin layered disc with a white ring, which reads like any mid-market acrylic platter."
+  },
+  {
+   "rank": 5,
+   "idea": "Integrate the motor pod and the speed control as one designed object, cast in the same tint, with a single machined knob or touch control.",
+   "now": "A small anonymous white puck behind the platter, with no designed control surface at all."
+  }
+ ],
+ "photo": [
+  {
+   "rank": 1,
+   "change": "Fix the acrylic shader. Pale cyan volume absorption, uniform; IOR about 1.49; smooth large softbox reflectors placed so the front and right edges refract and reflect clean gradients.",
+   "expected": "The edges read as solid tinted cast acrylic instead of blotchy cobalt and black, which removes the biggest CG tell."
+  },
+  {
+   "rank": 2,
+   "change": "Replace the white seamless with a mid-tone surface: a matte warm-grey stone or oak top against a soft-focus dark wall. Light the deck with a large overhead soft key plus a low rim light from behind-right.",
+   "expected": "The clear material gets a background to read against and the edges catch a rim. The muddy top band goes away, and the frame reads as editorial photography."
+  },
+  {
+   "rank": 3,
+   "change": "Add contact shadows and occlusion under the feet and couplers, and lower the camera slightly with a longer lens (about 85-100 mm equivalent) and shallow depth of field falling off toward the rear motor pod.",
+   "expected": "The deck sits on the surface with weight, and the lens and focus read as a real camera."
+  },
+  {
+   "rank": 4,
+   "change": "Replace the props with detailed ones: a groove-sheen record with a printed label, a real belt, tonearm leads, a cueing lever and machining marks on the metal parts.",
+   "expected": "It removes the primitive-model look up close, which is what a luxury buyer zooms into."
+  },
+  {
+   "rank": 5,
+   "change": "Remove the uniform overlay grain, or reduce it. Raise samples and denoise properly so the couplers' fireflies and the caustic noise inside the clear parts clean up.",
+   "expected": "Cleaner glass internals and no fake-film veneer over CG-smooth surfaces."
+  }
+ ],
+ "score_if_fixed": 7.5
+}
