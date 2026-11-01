@@ -145,7 +145,10 @@ N = dict(R=100.0, shell=9.0, liner=3.0, skin=3.0, gap=1.0,
          pin_z=93.0, turn=30.0, notch=(82.5, 95.5),     # North's pins (from the outer end) and their notch
          south_pins=(69.0, 60.0),                # round 36: South's pins enter from the inner end: their height, the
                                                  # slots' angle off North's
-         ring=(62.0, 78.0, 86.0, 100.0),        # the PEEK pin carrier: ID, OD, z0, z1
+         ring=(62.0, 81.6, 86.0, 100.0),        # the PEEK pin carrier: ID, OD, z0, z1. Review 2026-11-01: its OD is the
+                                                 # centering land, 0.2 under the collar's 82 bore (was 78: 2 mm of play)
+         pin=(4.0, 45.0, 3.0, 25.0),            # review 2026-11-01: the shouldered pin's shoulder Ø, its tip radius (4.0
+                                                 # into the 41 bore), its M3 thread, the thread's inner end (6 into the hub)
          core=(62.0, 60.0, 100.0),               # the hub core: OD, z0, z1 (the bore and the reflector in it)
          bore=(46.0, 82.0),                      # the bore's diameter and the COB's face (22 up from the mouth at 60)
          neck=(40.0, 104.0),                     # the core's neck, up into the crown
@@ -254,10 +257,16 @@ def north_parts(p=N):
     core = core + cyl('z', (0, 0), nd, z1, nz)
     core = core - cyl('z', (0, 0), 10, bz + 3, nz + 1)                                 # the wires
     ring = cyl('z', (0, 0), ro, rz0, rz1) - cyl('z', (0, 0), ri, rz0 - 1, rz1 + 1)
+    # the bayonet's pins (review 2026-11-01): stainless shouldered pins, the M3 thread through the PEEK into the hub, the
+    # Ø4 shoulder seated on the PEEK's land and reaching 4.0 into the collar's slots (was a 4 x 8 dowel, 2.5 in)
+    sd_, tip, td, tin = p['pin']
     pins = None
     for a in (0, 120, 240):
-        pin = at(a + p['turn'], cyl('x', (0, pz), 4.0, ri / 2 + 2, p['collar'][1] / 2 + 2.5))
+        pin = at(a + p['turn'], cyl('x', (0, pz), sd_, ro / 2, tip) + cyl('x', (0, pz), td, tin, ro / 2))
         pins = pin if pins is None else pins + pin
+        hole = at(a + p['turn'], cyl('x', (0, pz), td, tin, ro / 2 + 1))
+        ring = ring - hole
+        core = core - hole
     # the reflector: a faceted cone of high-reflectance aluminium in the bore, from the COB's edge to the mouth
     from build123d import Cone, Pos, Align
     al = (Align.CENTER, Align.CENTER, Align.MIN)
@@ -276,6 +285,12 @@ def north_parts(p=N):
     cnd, cnh = p['canopy']
     canopy = cyl('z', (0, 0), cnd, zc, zc + cnh) - cyl('z', (0, 0), cnd - 6, zc - 1, zc + cnh - 3)
     driver = box(-42, -28.5, zc + 6, 42, 28.5, zc + 6 + 29.5)
+    # review 2026-11-01: the load and the 120 V splices are in steel, the acrylic a cover. A 1.6 crossbar under the
+    # canopy's closed face, screwed to the junction box, holds the cord grip, the gripper and the canopy's screws; a
+    # closed steel enclosure (1.0 wall) hangs from it round the driver and the splices
+    ztop = zc + cnh - 3
+    strap = box(-60, -11, ztop - 1.6, 60, 11, ztop)
+    encl = box(-46, -32, zc + 4, 46, 32, ztop - 1.6) - box(-45, -31, zc + 5, 45, 31, ztop - 2.6)
     return cover_parts(p) + [
         Part('hub', core, Machined('aluminium', 'lathe'), finish='anodised', group='fixture',
              notes=['aluminium 6061, black anodised: the core, turned from bar. The COB on its holder at the top of the 46 '
@@ -283,8 +298,12 @@ def north_parts(p=N):
                     'round it, the crown on its neck on a thermal pad; a 10 bore for the wires']),
         Part('ring', ring, Machined('peek', 'lathe'), finish='trim', group='fixture', inside=True,
              notes=['PEEK, unfilled (0.25 W/m K), black: the thermal break. It carries the three pins and the detent, so '
-                    'the cover touches the fixture only through it; 4 to 5 mm of air round the core inside the collar']),
-        Part('pins', pins, Bought('dome-pins'), finish='anodised', group='fixture'),
+                    'the cover touches the fixture only through it. Review 2026-11-01: its 81.6 OD is the centering land '
+                    'in the collar\'s 82 bore (0.2 diametral), three Ø3.2 clearance holes for the pins\' threads']),
+        Part('pins', pins, Bought('dome-pins'), finish='anodised', group='fixture',
+             notes=['stainless shouldered pins: Ø4 shoulder 4.2 long, M3 thread 15.8, screwed through the PEEK into the '
+                    'hub (6 of thread in the aluminium, thread-locked); 4.0 of engagement in the collar\'s slots']),
+        Part('tether', None, Bought('hemi-tether')),
         Part('reflector', refl, Bought('north-reflector'), finish='anodised', group='fixture', inside=True),
         Part('cob', cob, Bought('hemi-cob'), finish='led', group='fixture', inside=True),
         Part('crown', crown, Machined('aluminium', 'lathe'), finish='anodised', group='fixture',
@@ -298,8 +317,10 @@ def north_parts(p=N):
         Part('cord', cord, Bought('hemi-cord'), finish='cord', group='fixture'),
         Part('suspension', susp, Bought('hemi-suspension'), finish='anodised', group='fixture', option='suspension'),
         Part('canopy', canopy, Machined('cast-acrylic', 'lathe'), finish='trim', group='canopy',
-             notes=['150 x 50, black cast acrylic, polished: over the driver and a steel junction-box strap (the strap '
-                    'carries the load)']),
+             notes=['150 x 50, black cast acrylic, polished: a cover only (review 2026-11-01), screwed to the steel '
+                    'strap, which carries the load; the driver and the splices are in the steel enclosure']),
+        Part('strap', strap, Bought('hemi-canopy-strap'), finish='steel', group='canopy', inside=True),
+        Part('enclosure', encl, Bought('hemi-driver-box'), finish='steel', group='canopy', inside=True),
         Part('driver', driver, Bought('north-driver-575'), finish='steel', group='canopy', inside=True, render=False),   # round 36: 575 lm
         Part('plunger', None, Bought('dome-plunger')),
         Part('listing', None, Bought('moon-listing')),
@@ -511,7 +532,7 @@ NOTES_ORB = [
 ]
 TOUCHING_DOME = [('suspension', 'gland'), ('suspension', 'canopy'), ('suspension', 'cord'), ('pins', 'ring'), ('rim', 'shell'), ('rim', 'skin'), ('rim', 'liner'), ('cob', 'hub'), ('gland', 'crown'),
                  ('crown', 'hub'), ('clamp', 'collar'), ('gaskets', 'collar'), ('gaskets', 'clamp'), ('gaskets', 'shell'),
-                 ('gaskets', 'skin'), ('reflector', 'hub')]
+                 ('gaskets', 'skin'), ('reflector', 'hub'), ('pins', 'hub'), ('strap', 'canopy'), ('enclosure', 'strap')]
 TOUCHING_ORB = [('grommet', 'shell'), ('window', 'base'), ('seat', 'base'), ('ring', 'base'), ('led', 'board'),
                 ('chassis', 'base'), ('ballast', 'chassis'), ('ballast', 'base'), ('cable', 'base'), ('board', 'chassis'),
                 ('foot-ring', 'base'), ('cells', 'holder'), ('hatch', 'base'), ('usb', 'base'), ('cable', 'hatch'),

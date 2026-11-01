@@ -43,6 +43,10 @@
    "preset": "rubber",
    "color": "#1A1A1A"
   },
+  "steel": {
+   "preset": "gunmetal",
+   "color": "#232120"
+  },
   "trim": {
    "preset": "gloss_plastic",
    "color": "#0C0C0D",
@@ -75,6 +79,10 @@
   {
    "match": "gaskets",
    "material": "silicone"
+  },
+  {
+   "match": "strap|enclosure",
+   "material": "steel"
   },
   {
    "match": "ring|canopy",
