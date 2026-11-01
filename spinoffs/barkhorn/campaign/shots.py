@@ -390,12 +390,12 @@ SHOTS['deck-home-portrait'] = lambda: dict(strata_lit(room_off_portrait(), glow=
 SITE_TINTS = {'ember': ('cloud-red', 'red'), 'dust': ('cloud-orange', 'orange'), 'acid': ('cloud-amber', 'amber'),
               'poison': ('eucalyptus-y2k-green', 'green'), 'ice': ('cloud-blue', 'blue'), 'haze': ('cloud-violet', 'violet'),
               'fog': ('birch-fog-clear', 'ice'), 'smoke': ('cloud-black', 'black')}
-SITE_FRAMES = {     # frame: (today's rig, size, the glow)
-    'front-off-tall': ('studio/shots/barkhorn/finals31/front-off-tall-{key}.json', [1000, 1250], 40.0),
-    'front-off-wide': ('studio/shots/barkhorn/finals31/front-off-wide-{key}.json', [1800, 1200], 40.0),
-    'hero-light':     ('studio/shots/barkhorn/studio31/hero-light-{tint}.json', [2400, 1350], 40.0),
-    'side':           ('studio/shots/barkhorn/finals31/front-off-tall-{key}.json', [1000, 1250], 40.0),
-    'back':           ('studio/shots/barkhorn/finals31/back-{key}.json', [880, 1100], 40.0),
+SITE_FRAMES = {     # frame: (today's rig, size, the glow: 20 in daylight, 40 at dusk, the coordinator 2026-11-01)
+    'front-off-tall': ('studio/shots/barkhorn/finals31/front-off-tall-{key}.json', [1000, 1250], 20.0),
+    'front-off-wide': ('studio/shots/barkhorn/finals31/front-off-wide-{key}.json', [1800, 1200], 20.0),
+    'hero-light':     ('studio/shots/barkhorn/studio31/hero-light-{tint}.json', [2400, 1350], 20.0),
+    'side':           ('studio/shots/barkhorn/finals31/front-off-tall-{key}.json', [1000, 1250], 20.0),
+    'back':           ('studio/shots/barkhorn/finals31/back-{key}.json', [880, 1100], 20.0),
 }
 
 
