@@ -308,10 +308,11 @@ def base_lit(view='hero', glow=None):
     return s
 
 
+# the deck's LED level (the coordinator, 2026-11-01): 20 by day, 40 at dusk; every deck frame is a daylight frame
 def deck_hero():
     """The deck's Tropos slide (the owner's final design, 2026-11-01): Strata in Ember on the lit plinth, the studio,
     2:3 portrait (shown at 720 x 1080, object-fit cover), the glow subtle but visible."""
-    s = base_lit('hero', glow=80.0)
+    s = base_lit('hero', glow=20.0)
     s['title'] = 'Tropos, the deck hero (Strata, flush horn, lit plinth, Ember)'
     s['size'] = [1440, 2160]
     s['render']['samples'] = 192
@@ -342,7 +343,7 @@ def strata_lit(s, glow=None):
 
 def deck_row():
     """The deck's Colors slide: the eight in a row on white (studio31's line-up rig), Ember to Smoke, 3328 x 1040."""
-    s = strata_lit(load('studio/shots/barkhorn/studio31/lineup.json'), glow=60.0)
+    s = strata_lit(load('studio/shots/barkhorn/studio31/lineup.json'), glow=20.0)
     s['title'] = 'Tropos, the eight in a row (Strata on the lit plinth)'
     s['size'] = [3328, 1040]
     s['render']['samples'] = 160
@@ -368,7 +369,7 @@ def deck_cover():
         rz = math.degrees(math.atan2(x, y - cam_y))   # each turned to face the camera
         inst.append({'position': [round(x, 4), round(y, 4), 0.0], 'rotate_z': round(rz, 2), 'flavour': fl, 'hide': ['cloth-disc']})
     blk['instances'] = inst
-    s = strata_lit(s, glow=35.0)
+    s = strata_lit(s, glow=20.0)
     s['title'] = 'Tropos, the deck cover: the eight on a curve (Strata on the lit plinth)'
     s['size'] = [3840, 1360]
     # (its first test at eye level with a 0.11 shift: the bases cut and no curve; a little higher, less shift)
@@ -380,8 +381,8 @@ def deck_cover():
 
 SHOTS['deck-cover'] = deck_cover
 # the deck's Home slide: the golden-hour room (754e16a9's scene, covers off) with the pair turned into the final design
-SHOTS['deck-home'] = lambda: dict(strata_lit(room_off(), glow=30.0), title='Tropos at home, golden hour, Poison (the final design)')
-SHOTS['deck-home-portrait'] = lambda: dict(strata_lit(room_off_portrait(), glow=30.0),
+SHOTS['deck-home'] = lambda: dict(strata_lit(room_off(), glow=20.0), title='Tropos at home, golden hour, Poison (the final design)')
+SHOTS['deck-home-portrait'] = lambda: dict(strata_lit(room_off_portrait(), glow=20.0),
                                            title='Tropos at home, golden hour, Poison, portrait (the final design)')
 
 

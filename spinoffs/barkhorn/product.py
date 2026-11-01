@@ -2687,6 +2687,32 @@ if os.path.exists(TRUCAST_FILE):
             _v['horn_deep'] = _e['strata_horn_deep']
         _v['tint'] = _e['cabinet']
 
+# colors F (the owner's "Go", 2026-11-01 about 22:45, taken as the coordinator's picks: owner note 68adc2c3 on
+# r46-owner-notes; asset/TINTS.md). Through the clear walls the lining showed more than the tint, so:
+# - a white voile lining (the batting preset's own, as the site had) in the seven colors; Smoke keeps its black lining;
+# - Poison's cabinet at 32.3 % and Haze's at 25.8 % through 20 mm, each in its stock code's channel split (custom batches
+#   at production; Haze needed one anyway); every other cabinet and every horn stays as it is
+LINING_WHITE = {'preset': 'batting', 'color': '#EFF0EE', 'sheen': 0.7, 'subsurface': 0.4, 'cloud': 0.09}   # the preset's own white (row D)
+COLORS_F_DEPTH = {'eucalyptus-y2k-green': 32.3, 'cloud-violet': 25.8}
+if os.path.exists(TRUCAST_FILE):
+    for _t, _e in json.load(open(TRUCAST_FILE)).items():
+        _v = VARIANTS.get(_e['flavour'])
+        if _v is None or _v.get('bark') != 'clear_resin':
+            continue
+        if _e['flavour'] != 'cloud-black':
+            _v['materials']['lining'] = dict(LINING_WHITE)
+        if _e['flavour'] in COLORS_F_DEPTH:
+            _tt = COLORS_F_DEPTH[_e['flavour']] / 100
+            _lo, _hi = 0.0, 5.0                              # make/stock_tints.sigma_for: k so 0.92 x luminance after 20 mm is TT
+            for _ in range(80):
+                _k = (_lo + _hi) / 2
+                _L = 0.92 * sum(w * math.exp(-_k * s * 20.0) for w, s in zip((0.2126, 0.7152, 0.0722), _e['split']))
+                _lo, _hi = (_k, _hi) if _L > _tt else (_lo, _k)
+            _srgb = lambda x: 12.92 * x if x <= 0.0031308 else 1.055 * x ** (1 / 2.4) - 0.055
+            _v['materials']['bark']['deep'] = '#' + ''.join(
+                f'{max(0, min(255, round(255 * _srgb(math.exp(-_k * s * 25.0))))):02X}' for s in _e['split'])
+            _v['tint'] = f"{_e['cabinet']} depth, custom batch at {COLORS_F_DEPTH[_e['flavour']]:g} % through 20 mm"
+
 PRODUCT = Product(
     'barkhorn', 'barkhorn', 'Two-way horn loudspeaker after Friendly Pressure, in birch bark or eucalyptus bark', params=P, parts=parts,
     notes=['Bark on the shell (sides, top, bottom and back): real birch bark sheet (Betula papyrifera, from fallen or felled trees) laminated to the plywood with PVA in a vacuum bag and sealed with a matt waterborne lacquer, wrapped round the shell\'s front edges; for eucalyptus, the shed bark of a smooth-barked gum (spotted or snow gum) pressed flat and laminated the same way, or a UV-printed veneer of it. Approve a sample board first.',

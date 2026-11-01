@@ -1,5 +1,21 @@
 # Tropos's tints: stock TruCast sheet's, the line's default since 2026-11-01
 
+**Colors F, the owner's pick (2026-11-01, about 22:45: "Go", taken as the coordinator's picks; owner note
+68adc2c39e6058397dfa98d2818a1254ac6d2b71 on r46-owner-notes).** After "they might be too dark now" (about 15:10), the
+comparison rows (`renders/2026-11-01/barkhorn/deck/tropos-eight-row-*.png`, A to G) showed it was the lining more than
+the tint: through the clear walls you saw the black lining, the woofer and the internals.
+- **The lining:** white voile sleeves (the batting preset's own white, as the site had) in Ember, Dust, Acid, Poison,
+  Ice, Haze and Fog. **Smoke keeps its black lining.**
+- **Poison's cabinet at 32.3 % and Haze's at 25.8 % through 20 mm**, each in its stock code's channel split (2092's
+  green, 2287's violet), only lighter. Both are **custom batches at production** (Haze needed one anyway: 2287 is
+  translucent, and the model keeps Haze transparent).
+- **Every other cabinet stays stock** (Ember 2423, Dust 2422, Acid 9097, Ice 2069, Fog clear, Smoke 2074), and **every
+  horn is unchanged** (Dust, Acid and Ice deep in their cabinet's hue; the other five their stock code).
+- In `product.py` (`LINING_WHITE`, `COLORS_F_DEPTH`) after the stock tints, so every engine render and asset carries it.
+- **The lamps and Mantle keep their parts as they are**, unless their lanes report a mismatch with these colors.
+
+The rest of this file is the stock-tint record it builds on.
+
 **The owner, 2026-11-01:** "I like the darker colors" (r46-owner-notes 8832050e).
 - The eight colors are now stock cast sheet's own tints: each cabinet in its TruCast code with its TT held at 20 mm, and
   each horn, stepped or formed, in the same code at 12.7 mm.
