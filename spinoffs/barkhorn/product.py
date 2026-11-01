@@ -1812,8 +1812,8 @@ SOLIDS.setdefault('cast-acrylic-thermoformed', dict(
 SOLIDS.setdefault('tooling-board', dict(
     title='High-temperature epoxy tooling board, glued up as a block, CNC-cut, sealed (the prototype\'s forming plug; lead time '
           '3 to 4 weeks from the program)', density=1.6, usd_per_cm3=0.025))
-SOLIDS.setdefault('aluminium-5052', dict(title='Aluminium 5052-H32 sheet, folded (6061 cracks at tight folds; the engineering audit, '
-                                         '2026-11-01)', density=2.68, usd_per_cm3=0.025))
+SOLIDS.setdefault('aluminium-5052', dict(title='Aluminium 5052-H32 sheet, 1.5 mm, folded (6061 cracks at tight folds; the size column rounds '
+                                         'the blank\'s 1.5 to 2; the engineering audit, 2026-11-01)', density=2.68, usd_per_cm3=0.025))
 SOLIDS.setdefault('clear-cast-acrylic', dict(title='Cast acrylic, water-clear (untinted)', density=1.19, usd_per_cm3=0.04))
 SOLIDS.setdefault('cast-acrylic-horn-lot', dict(
     title='Cast acrylic, tinted through in the horn\'s own heavier dye lot (about 6 to 10 times the cabinet\'s dye; 6, 30 and 75 mm), turned '
