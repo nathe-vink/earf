@@ -37,8 +37,12 @@ the darker colors": stock TruCast sheet's deeper tints, `r33-speaker-horn` `asse
 Dust, Acid, Ice and Fog unchanged. Method: the light through 20 mm of each stock sheet and of the site's sheet, computed with
 the horn lane's held TT and channel splits; the change in OKLab lightness, at 0.6, applied to the old swatch, with its
 chroma scaled by the change in chroma (floor 0.75); tints whose lightness moves less than 0.05 keep their swatch. Held
-until the chips are measured. The collateral's color strips, `pack_render.py` and the marks keep the old values until the
-owner approves the draft. Every cost in `IDEAS.md` and `PACKAGING.md` is an estimate, not a quote.
+until the chips are measured. Approved as a proposal (coordinator, 2026-11-01) and swept through the collateral's
+strips, `pack_render.py` and the marks (`../marks.py`: Ember `#9B0000`, Poison `#245208`, Haze `#421D72`).
+**The exception: Smoke's mark stays `#34323A`.** The method gives `#19171F`, the outline ink's own value (`#1C1A18`), and
+the mark and its icon lose their acrylic construction, the ink outlines over the fills, and read as a black blob. A mark
+that loses its construction is worse than one a step lighter; the Book's In light swatch, `#3A3741`, carries the deeper
+Smoke. The three Cycles pack renders wait for the speaker lane's regenerated asset. Every cost in `IDEAS.md` and `PACKAGING.md` is an estimate, not a quote.
 
 ## Renders: where they stand
 
