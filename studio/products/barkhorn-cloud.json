@@ -852,23 +852,26 @@
    "disc": "#2E4A2C",
    "horn_preset": "clear_resin",
    "horn": "#FFFFFF",
-   "horn_deep": "#4C6A36",
+   "horn_deep": "#0DA41C",
    "horn_cloud": 0.0,
    "materials": {
     "bark": {
-     "deep": "#B2C9A2",
+     "deep": "#017D03",
      "radius": 0.025,
-     "roughness": 0.05
+     "roughness": 0.05,
+     "ior": 1.49
     },
     "horn": {
      "roughness": 0.03
     },
     "horn-lot": {
-     "deep": "#4C6A36",
+     "deep": "#0DA41C",
      "radius": 0.01,
-     "roughness": 0.05
+     "roughness": 0.05,
+     "ior": 1.49
     }
-   }
+   },
+   "tint": "TruCast 2092 Green"
   },
   "birch-y2k-ice": {
    "bark": "clear_resin",
@@ -1573,23 +1576,26 @@
    "disc": "#9A6A12",
    "horn_preset": "clear_resin",
    "horn": "#FFFFFF",
-   "horn_deep": "#F2B705",
+   "horn_deep": "#FFF296",
    "horn_cloud": 0.0,
    "materials": {
     "bark": {
-     "deep": "#F2D06B",
+     "deep": "#FFEB6C",
      "radius": 0.025,
-     "roughness": 0.05
+     "roughness": 0.05,
+     "ior": 1.49
     },
     "horn": {
      "roughness": 0.03
     },
     "horn-lot": {
-     "deep": "#F2B705",
+     "deep": "#FFF296",
      "radius": 0.01,
-     "roughness": 0.05
+     "roughness": 0.05,
+     "ior": 1.49
     }
-   }
+   },
+   "tint": "TruCast 9097 Fluorescent Yellow"
   },
   "cloud-violet": {
    "bark": "clear_resin",
@@ -1599,23 +1605,26 @@
    "disc": "#3F2A5E",
    "horn_preset": "clear_resin",
    "horn": "#FFFFFF",
-   "horn_deep": "#5E3F8F",
+   "horn_deep": "#9C5DE3",
    "horn_cloud": 0.0,
    "materials": {
     "bark": {
-     "deep": "#BEADD8",
+     "deep": "#7330D4",
      "radius": 0.025,
-     "roughness": 0.05
+     "roughness": 0.05,
+     "ior": 1.49
     },
     "horn": {
      "roughness": 0.03
     },
     "horn-lot": {
-     "deep": "#5E3F8F",
+     "deep": "#9C5DE3",
      "radius": 0.01,
-     "roughness": 0.05
+     "roughness": 0.05,
+     "ior": 1.49
     }
-   }
+   },
+   "tint": "TruCast 2287 Violet"
   },
   "cloud-orange": {
    "bark": "clear_resin",
@@ -1625,23 +1634,26 @@
    "disc": "#8C3B14",
    "horn_preset": "clear_resin",
    "horn": "#FFFFFF",
-   "horn_deep": "#E0661C",
+   "horn_deep": "#FDD39F",
    "horn_cloud": 0.0,
    "materials": {
     "bark": {
-     "deep": "#F2B184",
+     "deep": "#FBBD77",
      "radius": 0.025,
-     "roughness": 0.05
+     "roughness": 0.05,
+     "ior": 1.49
     },
     "horn": {
      "roughness": 0.03
     },
     "horn-lot": {
-     "deep": "#E0661C",
+     "deep": "#FDD39F",
      "radius": 0.01,
-     "roughness": 0.05
+     "roughness": 0.05,
+     "ior": 1.49
     }
-   }
+   },
+   "tint": "TruCast 2422 Orange (amber)"
   },
   "cloud-blue": {
    "bark": "clear_resin",
@@ -1651,23 +1663,26 @@
    "disc": "#24557E",
    "horn_preset": "clear_resin",
    "horn": "#FFFFFF",
-   "horn_deep": "#3C86C2",
+   "horn_deep": "#B4DEFA",
    "horn_cloud": 0.0,
    "materials": {
     "bark": {
-     "deep": "#B5D9EE",
+     "deep": "#92CCF7",
      "radius": 0.025,
-     "roughness": 0.05
+     "roughness": 0.05,
+     "ior": 1.49
     },
     "horn": {
      "roughness": 0.03
     },
     "horn-lot": {
-     "deep": "#3C86C2",
+     "deep": "#B4DEFA",
      "radius": 0.01,
-     "roughness": 0.05
+     "roughness": 0.05,
+     "ior": 1.49
     }
-   }
+   },
+   "tint": "TruCast 2069 Tinted Blue"
   },
   "cloud-red": {
    "bark": "clear_resin",
@@ -1677,23 +1692,26 @@
    "disc": "#7A1A1C",
    "horn_preset": "clear_resin",
    "horn": "#FFFFFF",
-   "horn_deep": "#C8262B",
+   "horn_deep": "#E02B3A",
    "horn_cloud": 0.0,
    "materials": {
     "bark": {
-     "deep": "#F2A29C",
+     "deep": "#CF0913",
      "radius": 0.025,
-     "roughness": 0.05
+     "roughness": 0.05,
+     "ior": 1.49
     },
     "horn": {
      "roughness": 0.03
     },
     "horn-lot": {
-     "deep": "#C8262B",
+     "deep": "#E02B3A",
      "radius": 0.01,
-     "roughness": 0.05
+     "roughness": 0.05,
+     "ior": 1.49
     }
-   }
+   },
+   "tint": "TruCast 2423 Red"
   },
   "cloud-black": {
    "bark": "clear_resin",
@@ -1703,23 +1721,26 @@
    "disc": "#141316",
    "horn_preset": "clear_resin",
    "horn": "#FFFFFF",
-   "horn_deep": "#2A292C",
+   "horn_deep": "#787B7E",
    "horn_cloud": 0.0,
    "materials": {
     "bark": {
-     "deep": "#4F4D54",
+     "deep": "#4B4E51",
      "radius": 0.025,
-     "roughness": 0.05
+     "roughness": 0.05,
+     "ior": 1.49
     },
     "horn": {
      "roughness": 0.03
     },
     "horn-lot": {
-     "deep": "#2A292C",
+     "deep": "#787B7E",
      "radius": 0.01,
-     "roughness": 0.05
+     "roughness": 0.05,
+     "ior": 1.49
     }
-   }
+   },
+   "tint": "TruCast 2074 Dark Gray"
   },
   "birch-fog-clear": {
    "bark": "clear_resin",
@@ -1729,25 +1750,26 @@
    "disc": "#E7E6E1",
    "horn_preset": "clear_resin",
    "horn": "#FFFFFF",
-   "horn_deep": "#F1F1EE",
+   "horn_deep": "#FFFFFF",
    "horn_cloud": 0.0,
    "materials": {
     "bark": {
-     "deep": "#F7F8F7",
+     "deep": "#FFFFFF",
      "radius": 0.025,
      "roughness": 0.05,
-     "milk": 0.0
+     "ior": 1.49
     },
     "horn": {
      "roughness": 0.03
     },
     "horn-lot": {
-     "deep": "#F1F1EE",
+     "deep": "#FFFFFF",
      "radius": 0.01,
      "roughness": 0.05,
-     "milk": 0.0
+     "ior": 1.49
     }
-   }
+   },
+   "tint": "TruCast 0000 Clear"
   },
   "birch-fog-opal": {
    "bark": "clear_resin",
