@@ -25,7 +25,8 @@ Quantities are for one pair (two speakers), then 10 and 50 pairs. Sheet numbers 
 | D04 | EARF on the back | mark-back | 1 | laser etch into the back panel | 0.1 deep | etch filled in the speaker's color, deeper | 2 | 20 | 100 | frosted, 140 wide, from our vector file | ±0.2 |
 | D05 | back seal | back-seal | 2 | EPDM cord 4 mm, 60 Shore A | 4 | black | 2 | 20 | 100 | about 2.7 m a speaker, its ends vulcanized into a loop | length ±5 |
 | D06 | amplifier compartment gasket | amp-box-gasket | 2 | EPDM sponge, closed cell | 3 | black | 2 | 20 | 100 | die-cut frame, 15 wide | ±0.5 |
-| D07 | post sleeves (a set of 4) | post-sleeves | 2 | polyurethane, Shore A 90 | ø12 x 10 x 13 | black | 2 | 20 | 100 | cast or cut | ±0.1 |
+| D07 | post sleeves (a pair, the rear posts) | post-sleeves | 2 | polyurethane, Shore A 90 | ø12 x 10 x 13 | black | 2 | 20 | 100 | cast or cut | ±0.1 |
+| D08 | mains cord set (one a speaker) | mains-cord |  | NEMA 5-15P to IEC 60320 C13, 18 AWG SJT, UL listed (UL 817) | 2 m | black | 2 | 20 | 100 | listed; bought, not made: quote if you stock it | - |
 
 ## What I would like to know
 
