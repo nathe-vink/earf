@@ -380,14 +380,14 @@ def shot_ionos(sc):
     sc.world.node_tree.nodes['Background'].inputs['Color'].default_value = lin('#D9D3CA')
     sc.world.node_tree.nodes['Background'].inputs['Strength'].default_value = 0.2    # critic r1 c4: less fill
     sweep('#BDB5A9', 0.85, z0=-0.04, y_wall=3.0, R=0.8)                                  # r2 c3: 3 m back
-    sw = area('sweeplight', (0.0, -1.0, 2.2), (0.0, 3.0, 0.8), 1.5, 40, '#F2EEE8', size_y=1.0); sw.visible_glossy = False   # r2 c3: grazes the sweep top, falls off to the floor
+    sw = area('sweeplight', (0.0, -0.5, 2.2), (0.0, 3.0, 0.8), 1.5, 25, '#F2EEE8', size_y=1.0); sw.visible_glossy = False   # r2 c3: grazes the sweep top, falls off to the floor
     sys.path.insert(0, os.path.join(HERE, '..', '..', '..', '..', 'studio', 'engine')); import materials as SM
-    slab('sideboard', -0.9, -0.6, -0.04, 0.9, 0.35, 0.0, ph('marble_01', tint='#7A746B', tint_mix=0.5))   # c8: honed stone with a tooth
-    bounce = slab('bounce', -0.62, -0.42, 0.0, -0.32, -0.41, 0.30, basic('card', '#F4F1EC', 0.9)); bounce.visible_camera = False   # r2 c4: a bounce card into the front face
-    bounce.rotation_euler = (0, 0, -0.6)
+    slab('sideboard', -0.9, -0.6, -0.04, 0.9, 0.35, 0.0, ph('marble_01', scale=4.0, tint='#7A746B', tint_mix=0.5))   # L2 c3: one slab at 4 m a tile, no grout in frame
+    bounce = slab('bounce', -0.5, -0.41, 0.0, 0.5, -0.40, 0.6, basic('card', '#F4F1EC', 0.9)); bounce.visible_camera = False   # L2 c1: a 1.0 × 0.6 m card 0.4 m in front
+    lowc = area('lowcard', (-0.35, -0.35, 0.02), (0, 0, 0.02), 0.2, 3, '#FFFFFF'); lowc.visible_camera = False   # L2 c5: a sheen on the lower layers
     over = slab('overcard', -0.4, -0.35, 0.60, 0.4, 0.15, 0.61, basic('card2', '#F4F1EC', 0.9)); over.rotation_euler = (-0.35, 0, 0)   # r2 c6: the disc top mirrors it
     for v in ('visible_camera', 'visible_shadow'): setattr(over, v, False)
-    flag = slab('flagR', 0.42, -0.3, 0.0, 0.43, 0.3, 0.6, basic('flag', '#0A0A0B', 0.9))   # c5: the right face mirrors black, not the sweep
+    flag = slab('flagR', 0.60, -0.3, 0.0, 0.61, 0.3, 0.6, basic('flag', '#0A0A0B', 0.9))   # c5: the right face mirrors black, not the sweep
     for v in ('visible_camera', 'visible_shadow', 'visible_diffuse', 'visible_transmission'): setattr(flag, v, False)
     tn = 'ice-pour'
     W, D, L = 0.2, 0.11, 0.0127
@@ -408,12 +408,14 @@ def shot_ionos(sc):
     # the machined pocket, honestly: the electronics in a black anodized tray, in the bottom two layers, seen through the block
     slab('tray', -0.06, -0.035, 0.003, 0.06, 0.045, 0.024, basic('tray', '#1C1B1E', 0.4, 0.6))
     sc.render.resolution_x, sc.render.resolution_y = 1800, 1200
-    spot('sun', (-0.55, 0.45, 0.42), (0, 0, 0.05), 60, 14, 0.002, '#FFF1DE')   # look 2: the hard key through the block: a blue cast forward-right
+    spot('sun', (-0.52, 0.42, 0.23), (0.04, -0.04, 0.05), 150, 20, 0.002, '#FFF1DE')   # L2 c2: lower, through the block onto the floor front-right   # look 2: the hard key through the block: a blue cast forward-right
     area('window', (-0.49, 0.49, 1.04), (0, 0, 0.06), 0.5, 25, '#FFF4E6', shape='DISK')   # r2 c2: higher, bigger: an attached shadow   # c2: small, hard, back-left: a crisp shadow forward-right
-    rim = area('rim', (0.45, 0.55, 0.40), (0, 0, 0.12), 0.3, 45, '#FFE8D0'); rim.visible_glossy = False   # c5
-    area('key', (0.5, -0.9, 1.05), (0, 0, 0.06), 0.8, 14, '#EEF2F8')                          # c7: higher, off the disc's edge
+    rim = area('rim', (0.45, 0.55, 0.40), (0, 0, 0.12), 0.3, 45, '#FFE8D0'); rim.visible_glossy = False
+    st = area('stripR', (0.35, 0.25, 0.06), (0.1, 0, 0.06), 0.6, 30, '#FFF6EC', size_y=0.1); st.visible_camera = False; st.visible_glossy = False   # L2 c4   # c5
+    area('key', (0.5, -0.9, 1.05), (0, 0, 0.06), 1.2, 35, '#EEF2F8')                          # c7: higher, off the disc's edge
     sc.view_settings.exposure = -0.3   # r2 c1: the stone at its gray (with the window at 40 W: 150 W at a meter overlit it)
-    camera((0.50, -1.10, 0.30), (0.02, -0.02, 0.075), lens=85, fstop=4.0)                      # c1: air around it, ground in front
+    sc.view_settings.look = 'AgX - Medium High Contrast'
+    camera((0.50, -1.10, 0.22), (0.02, -0.02, 0.075), lens=85, fstop=2.8, focus=1.17)   # L2 c7                      # c1: air around it, ground in front
 
 def shot_cairn(sc):
     slab('table', -1.2, -0.8, -0.04, 1.2, 0.5, 0.0, ph('oak_wood_planks'))   # look 2: an oak table and a plaster wall
