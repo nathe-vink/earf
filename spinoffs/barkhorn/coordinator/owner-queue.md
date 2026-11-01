@@ -178,3 +178,11 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
   ~52), the counter shortened to four stools + the low end. Critics' standing notes for any look 3: speakers lit from
   outside, not glowing like signage; deeper amber fins; the porch head falls to black. LATER OWNER QUESTION: Mother EARF's
   multicolored rims break "one color" in every frame (keep the globe multicolor, or one tint per room?).
+- Mantle v2 (b1dd9f0c, all five faults fixed): local duels wf_fd6133bf-228: v2 beat v1 3-1 (6.25 vs 5.75); v2 vs
+  Outcrop 2-2 (6.1 vs 5.75; distinctiveness 6.0 vs 4.75; the split followed order). All eight judges: the base reads as
+  a pale accessory tray with a black inset "printed trim" line; clear posts show hardware "like jars with parts
+  inside"; the etched mark reads printed white. v3 detail pass sent (receding smoked base, no dark line, solid posts,
+  tone-on-tone mark), then a duel vs Outcrop, max 2 rounds, then stop.
+- OWNER ASKED 00:20 UTC: "Are the mechanics and electronic aspects of each of the products legit?" Engineering audit
+  running locally (wf_32ea5a79-234): an engineer per product (Tropos; Hemisphere + Core; Mantle; Mother EARF) + an
+  adversarial reviewer each + a completeness pass. Answer the owner with the verified result.
