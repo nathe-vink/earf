@@ -710,6 +710,10 @@ def build(args):
         M['plinth'] = acrylic('plinth', bands_pl, tint, ring=(o0, o0, o0 + (meta['W0']) * mm, o0 + meta['D0'] * mm, rw * mm) if rw else None)
         bands_b = remap([(l['z0'] * mm, l['z1'] * mm, l['kind'], 0.0) for l in meta['base']])
         M['base'] = acrylic('base', bands_b, tint, ring=(0.0, 0.0, meta['Wb'] * mm, meta['Db'] * mm, rw * mm) if rw else None)
+        if meta['P'].get('post_material') == 'stainless':
+            # v3: the base is stock smoked 2064 in every version, the posts polished stainless, the mark a polished recess
+            M['base'] = acrylic('base', [(l['z0'] * mm, l['z1'] * mm, 'tint') for l in meta['base']], 'smoke')
+            M['etch-tone'] = dielectric('etch-tone', '#101012', 0.12, spec=0.5)
         M['lid'] = acrylic('lid', [(0.0, 0.5, 'tint')], tint if args.tint_mode != 'custom' else tint, rough=0.004)
         M['post'] = acrylic('post', [(0.0, 0.5, 'clear')], tint, wear_on=False)
         M['strip'], nt_, out_ = node_tree('strip')
@@ -718,7 +722,9 @@ def build(args):
         finish.update({'plinth-L1-stack': 'plinth', 'base-L1-stack': 'base', 'studs': 'steel', 'phono-pads': 'felt', 'hinges': 'arm',
                        'hinge-blocks': 'lid', 'led-strip': 'strip', 'led-channel': 'alu-black'})
         for k in range(1, 5):
-            finish[f'post-{k}'] = 'post'
+            finish[f'post-{k}'] = 'steel' if meta['P'].get('post_material') == 'stainless' else 'post'
+        if meta['P'].get('post_material') == 'stainless':
+            finish['mark'] = 'etch-tone'
         for k in ('top', 'front', 'back', 'left', 'right'):
             finish[f'lid-{k}'] = 'lid'
     for n, o in objs.items():

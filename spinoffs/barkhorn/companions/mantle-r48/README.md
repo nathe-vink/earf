@@ -267,6 +267,27 @@ and is wiped through with a soft brush. The phono stage there sits on felt runne
 | `strata-v2-ice-custom.png` | studio, the same rig as `strata-ice-custom.png`, custom-poured Ice |
 | `strata-v2-dusk-ember-custom.png` | dusk, custom-poured Ember, the base's loop lit |
 
+## 10. Strata Float v3 (`mantle_strata_v3.py`, `out-strata-v3/`, $3,800)
+
+The coordinator's duels: v2 beat v1 3-1, and v2 and Outcrop split 2-2 (distinctiveness 6.0 to 4.75). All eight judges
+named the same details under the float, and v3 answers them; v2 stays as it was.
+
+| the judges | v3 |
+|---|---|
+| the base reads as "a thin, paler accessory tray", its channel line as printed trim | **the base recedes**: stock smoked 2064 in every version (the color is the deck's), 12.7 thick, the deck's corner radius, the same 35 setback on all four sides. The channel is lost in the smoke |
+| the clear posts read as "jars with parts inside" | **solid posts**: turned 303 stainless, polished, 30 across. Each is bonded into a 2 mm seat under the deck with a structural methacrylate (Plexus MA310 kind) and held from below by its foot's M8 stud through the base. Nothing shows. The isolation is the Sorbothane pad under each foot |
+| the etched mark still reads as printed white | **a polished recess, tone on tone, on the back edge** |
+| top-heaviness | the base is heavier (12.7 smoke, was 9.5 clear) and darker, so the deck no longer sits on a pale sliver |
+
+**At dusk** the smoked base passes little of the strip's light through its edge (12 mm of 2064 is about 1 %). So the
+strip runs brighter, and most of its light falls from the open slot onto the shelf: the deck floats on a pool of light.
+The render's emission was set by eye for the frame's exposure, not converted from the strip's watts. The real loop runs at most at its rated 4.4 W, and whether that is bright enough at dusk is a first-sample check.
+
+| frame | what |
+|---|---|
+| `strata-v3-ice-custom.png` | studio, v2 r2's rig, custom Ice deck over the smoked base |
+| `strata-v3-dusk-ember-custom.png` | dusk, custom Ember deck, the light pooled under the smoked base |
+
 ## Open questions for the owner
 
 1. **A or B,** or B's cover on A's float.
