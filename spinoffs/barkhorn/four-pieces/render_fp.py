@@ -22,6 +22,14 @@ SHOT = json.loads(Path(shot_path).read_text())
 
 import bpy  # noqa: E402,F401
 import sets  # noqa: E402
+
+# `moon_defs`: the lamps kit piece's product files, by its fn (2026-11-01: Hemisphere v3, "color outside",
+# studio/products/earf-dome-pendant-v3.json from r32-lamps-final 7c4b5993)
+if SHOT.get('moon_defs'):
+    sys.path.insert(0, str(ROOT / 'studio' / 'engine' / 'kit_ext'))
+    import earf_moon  # noqa: E402
+    earf_moon.DEFS.update(SHOT['moon_defs'])
+    print('moon defs', earf_moon.DEFS)
 _room = sets.room
 
 

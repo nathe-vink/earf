@@ -216,6 +216,19 @@ def stock2092(s):
     return s
 
 
+def hemisphere_v3(s):
+    """The owner's "color outside" Hemisphere (lamps lane v3, r32-lamps-final 7c4b5993, dome_pendant_v3.py), outside in:
+    a 3 mm 2092 shell, a 6 mm clear structural shell (the part named `liner`), the 3 mm opal (the part named `skin`, on
+    the `liner` material, which glows); no tinted skin inside. The same Beer-Lambert calibration."""
+    s['moon_defs'] = {'dome': 'studio/products/earf-dome-pendant-v3.json'}
+    s['part_tints'] = [t for t in s.get('part_tints', []) if 'moon-dome' not in t['material']] + [
+        {'material': 'body@moon-dome', 'parts': r'-shell#', 'sigma': SIGMA_2092, 'label': '2092'},
+        {'material': 'body@moon-dome', 'parts': r'-liner#', 'sigma': CLEAR_0000, 'label': 'clear0000'},
+        {'material': 'body@moon-dome', 'parts': r'-rim#', 'sigma': SIGMA_2092, 'label': '2092'},
+    ]
+    return s
+
+
 def main():
     os.makedirs(SHOTS, exist_ok=True)
     only = sys.argv[1:] or ['v3', 'v3s', 'v3k']
@@ -223,6 +236,9 @@ def main():
         if 'v3' in only:
             json.dump(shot(v), open(os.path.join(SHOTS, f'v3-{v}.json'), 'w'), indent=1)
             print(f'v3-{v}')
+        if 'v3h' in only:                     # -final-2092 with Hemisphere v3 (the Mantle swap follows)
+            json.dump(hemisphere_v3(stock2092(strata(shot(v)))), open(os.path.join(SHOTS, f'v3h-{v}.json'), 'w'), indent=1)
+            print(f'v3h-{v}')
         if 'v3k' in only:
             json.dump(stock2092(strata(shot(v))), open(os.path.join(SHOTS, f'v3k-{v}.json'), 'w'), indent=1)
             print(f'v3k-{v}')

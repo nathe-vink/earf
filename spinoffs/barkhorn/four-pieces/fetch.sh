@@ -20,3 +20,6 @@ git checkout origin/r32-lamps-final -- studio/engine/kit.py studio/engine/kit_ex
 # Mantle (the floating plinth)
 git checkout 8f465244 -- studio/products/barkhorn-turntable-float.json spinoffs/barkhorn/companions/out-turntable-float/render
 git reset -q
+# Hemisphere v3, "color outside" (the owner, 2026-11-01), for the -final-2092-sf frames
+git checkout 7c4b5993eb3e9f12cc3e6a092b2987dfd319ff9b -- spinoffs/barkhorn/companions/out-dome-pendant-v3/render studio/products/earf-dome-pendant-v3.json
+git reset -q
