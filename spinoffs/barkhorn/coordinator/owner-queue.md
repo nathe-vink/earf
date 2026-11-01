@@ -624,3 +624,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   a real pool. Plinth then closed until card 03.
 - Check-in 23 (20:37): owner quiet since 15:10. Speaker lane's sealed-40 test rendering in a background job (variants.py at 40 in,
   uncommitted on purpose; restores to 90 after). Next check-in ~22:37 (send_later).
+- 20:45 plinth settled (my call): sealed-40 (a88fe984) also lands as a crisp line under the step, no warmth past it (Smoke -2). So
+  the original bare strip at 40 mm in, glow 20 day / 40 dusk, flat underside (6 mm reveal dropped: +1 kg machining, back margin
+  14 -> 13 %, no gain without the seal); the strip breaks with a short jumper at each foot pad (it ran over them in the original too).
+  The sealed channel, sealed-90 and reveal are documented in BASES.md as tested alternatives. Plinth closed until card 03.
