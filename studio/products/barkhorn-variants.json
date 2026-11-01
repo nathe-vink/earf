@@ -23,6 +23,11 @@
    "radius": 0.05,
    "roughness": 0.03
   },
+  "foot": {
+   "preset": "plastic",
+   "color": "#1C1C1C",
+   "roughness": 0.6
+  },
   "horn-lot": {
    "preset": "$bark",
    "bevel_mm": 1.0
@@ -30,16 +35,20 @@
  },
  "assign": [
   {
-   "match": "caldera-1|caldera-2|caldera-3",
+   "match": "base-plinth-1|base-plinth-2|base-plinth-3|caldera-1|caldera-2|caldera-3",
    "material": "bark"
   },
   {
-   "match": "strata-posts|strata-collars",
+   "match": "strata-posts|strata-collars|base-outriggers",
    "material": "brass"
   },
   {
    "match": "horn-topo-clear",
    "material": "clear-cast"
+  },
+  {
+   "match": "base-plinth-feet|base-outrigger-feet",
+   "material": "foot"
   },
   {
    "match": "horn-topo|horn-topo-lines|horn-strata",
@@ -1565,6 +1574,16 @@
   "Topo Clear": [
    "horn-topo-clear",
    "horn-topo-lines"
+  ],
+  "Plinth": [
+   "base-plinth-1",
+   "base-plinth-2",
+   "base-plinth-3",
+   "base-plinth-feet"
+  ],
+  "Outriggers": [
+   "base-outriggers",
+   "base-outrigger-feet"
   ]
  }
 }
