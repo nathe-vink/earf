@@ -157,6 +157,43 @@ With 1 and 3, the float is back to about a week. Without them, any slip in Janua
 | 25 Jan | First formed horn. The second in the week after. Fit it to the laminated pair's cabinets, which are already done. |
 | early Feb | The formed pair, to photograph beside the laminated one by mid-February. The owner chooses the route from the real thing. |
 
+## Use of funds: the final design (2026-11-01)
+
+**The design:** Strata, its stepped horn flush, on bronze posts, the caldera round the woofer, black sleeves, the
+stock tints (the owner, 2026-11-01: "I like the darker colors"), on the lit plinth. It is priced in Smoke, now 2074
+Dark Gray for the cabinet as well as the horn. Dates are parked; this is cash, not a calendar. The week-by-week
+table below is kept as the basis; this section changes its lines.
+
+| line | the $18,520 table | the final design | change |
+|---|---|---|---|
+| the electronics, the drivers, the remote | $2,424 | the same, the L-pads gone (no L-pad, the HF in the DSP) | about −$24 |
+| **the cabinet's 3/4 in sheet** | 3 sheets of stocked TruCast 2064, $3,009.60 | **2074 at 3/4 in is not stocked** (2074 stops at 1/2 in): a mill run of about 8 to 10 sheets of 48 x 96, no color fee, at about the stocked 3/4 in price, about $8,000 to $10,000 (est.). It covers 4 to 5 pairs; the first pair uses 2 sheets of it | **+$5,000 to +$7,000** |
+| the 1/2 in sheet | 2064 1/2 in and .220 ($800.80), 2074 1/2 in for the horns ($569.80) | the same, plus **two more sheets of 2074 1/2 in** for the plinths' frames and the caldera rings (about 2.2 m2 and 1.6 m2 a pair) | +$1,140 |
+| the horn shop | est. $4,000 | the same (the stepped horn was already the plan) | — |
+| the cabinet shop | $3,750 | plus the plinths' frames and the caldera rings: cutting, polished edges, bonding, anneal (est. $800 a pair) | +$800 |
+| the plinths' light and feet | — | COB strips, Class 2 supplies, the controller boards, feet ($184 a pair; `PARTS-FINAL-DESIGN.md`) | +$184 |
+| the posts | stainless, in the metal shop's $600 | ø16 bronze with collars, and the keyhole sockets (est.) | +$150 |
+| the cover | cloth discs, their frames, magnets, the rings | gone (the caldera) | about −$210 |
+| freight, crates, the rest | as the table | the plinths ship in their own cartons (est. +$150) | +$150 |
+| **the Tropos line** | **about $18,520** | **about $26,700 with the 2074 mill run (est.; $25,700 to $27,700)** | **about +$8,200** |
+
+**The fallback: 2064 at 3/4 in, stocked.** AC Plastics had 3 sheets on 31 October.
+- With it, the cabinet is the lighter smoke: 29 % through 19 mm, against 2074's 12 %. The horn stays 2074.
+- With the black sleeves it reads as a mid-gray glass, not the owner's dark smoke. In backlight it is the "light amber
+  smoke" of the backlight test (`renders/2026-11-01/barkhorn/smoke-backlight/`, the middle frame).
+- **The Tropos line with the fallback: about $20,700 (est.)**, +$2,200 on today's $18,520.
+- It keeps the first pair inside the old envelope, but it is not the darker color the owner chose.
+
+**What gives, if the total stays $50,000.** With the mill run, the Tropos line grows by about $8,200 (est.), and the
+lines outside this one are not this lane's to cut. It comes from the 15 % contingency (about $2,800 here), or from the
+other products' lines, or by taking the 2064 fallback for the first pair. **For the ask slide:**
+- **Tropos, about $26,700 (est.), the first pair in the owner's dark Smoke**, the mill run's other 6 to 8 sheets
+  carried as stock for pairs 2 to 5;
+- or **about $20,700 with the first pair in stocked 2064**, the dark mill run paid from the first orders.
+
+The mill run's price is an estimate. Ask Plastiglas or a distributor for a quote on 2074 at 3/4 in (and its minimum)
+before the slide is final.
+
 ## Cash out by week: the laminated pair, priced in Smoke, for 19 January
 
 **Sources:**
