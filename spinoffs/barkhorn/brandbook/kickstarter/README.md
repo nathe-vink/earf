@@ -74,7 +74,7 @@ FAQ).
 
 | Reward | Pledge (est.) | Against list | Limit | What's in the box |
 |---|---|---|---|---|
-| **Core, Early Bird** | **$650** | 13% under | the first 40 | Core in one tint, its cells, the USB-C cable and adapter |
+| **Core, Early Bird** | **$650** | 13% under | the first 40 | Core in one tint and its cells [RECHARGING: from the lamps lane’s redesign] |
 | **Core** | **$695** | 7% under | none | The same |
 | **Core, a pair** | **$1,290** | 14% under two | none | Two, in any two tints (or one twice) |
 | **Core, Numbered Edition** | **$1,100** | R4's premium | 8 a tint, 64 in all | Core numbered *n / 8* in its tint under the base, signed, with a certificate; the first of the run to ship |
@@ -98,8 +98,8 @@ why the deeper cut would leave Core's early bird at about a third of its pledge.
 
 | | Core at 50 | Core at 100 | Hemisphere at 50 | Hemisphere at 100 |
 |---|---|---|---|---|
-| Cost of goods a unit (parts, assembly, packaging, moulds spread) | $342 | $287 | $398 | $319 |
-| Margin on the standard reward, after 8.5% fees, a 3% reserve and $10 fulfilment | $263 (38%) | $318 (46%) | $583 (52%) | $662 (59%) |
+| Cost of goods a unit (parts, assembly, packaging, molds spread) | $342 | $287 | $398 | $319 |
+| Margin on the standard reward, after 8.5% fees, a 3% reserve and $10 fulfillment | $263 (38%) | $318 (46%) | $583 (52%) | $662 (59%) |
 
 The parts come from the lamps lane's run-of-200 figures (about $200 and $195 a unit), with a small-batch premium of
 11% at 100 and 23% at 50 (est.).
@@ -120,7 +120,7 @@ also pays the fixed costs that a first run can't avoid:
 | Fixed cost | est. |
 |---|---|
 | Certification: FCC, DOE Appendix Y, CEC, and the UL 153 listings for both lamps (midpoint of R3's $18.5k to $47k) | $32,750 |
-| A second Hemisphere shell mould, for wear over a run | $1,500 |
+| A second Hemisphere shell mold, for wear over a run | $1,500 |
 | Test units used up in certification, two of each | $1,480 |
 | Photographs and the film, of the real prototypes | $3,000 |
 | Pledge manager and survey | $1,000 |
@@ -143,9 +143,9 @@ So the lab quotes (`companions/launch/lab-rfq/`) set the final goal. Ask for the
 
 **The target, not the goal:** R2's customer-funded path aims at $150k to $500k for the lamps.
 
-**What the prototypes cost isn't in it.** The moulds and first articles (about $6,600 for the two lamps;
+**What the prototypes cost isn't in it.** The molds and first articles (about $6,600 for the two lamps;
 `first-articles.md`) are paid from the investor deck's $50,000 before the campaign. Each unit carries its share of
-the moulds, so that money comes back.
+the molds, so that money comes back.
 
 ---
 

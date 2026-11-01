@@ -11,7 +11,7 @@ collects it, and is not revenue.
 | Parts (the lane's run-of-200 parts × a small-batch premium) | $240 | $216 | $246 | $222 |
 | Assembly, finishing, QC, freight in | $50 | $40 | $50 | $40 |
 | Packaging (the drum or the cube) | $22 | $16 | $24 | $18 |
-| Moulds spread over the run | $30 | $15 | $78 | $39 |
+| Molds spread over the run | $30 | $15 | $78 | $39 |
 | **Cost of goods** | $342 | $287 | $398 | $319 |
 
 For scale, the lane's own figure at a run of 200 is about $235 (Core) and $250 (Hemisphere) landed; the one-off prototypes are $2,027 and $4,572.
@@ -19,7 +19,7 @@ Certification is a fixed cost, in the goal below, not in these sums.
 
 ## Margin per reward, at a run of 50 of each lamp (est.)
 
-| Reward | Pledge | Limit | Goods | Fees 8.5% | Reserve 3% | Fulfilment | **Margin** | Margin % |
+| Reward | Pledge | Limit | Goods | Fees 8.5% | Reserve 3% | Fulfillment | **Margin** | Margin % |
 |---|---|---|---|---|---|---|---|---|
 | Core, Early Bird | $650 | first 40 | $342 | $55 | $20 | $10 | **$223** | 34% |
 | Core | $695 | none | $342 | $59 | $21 | $10 | **$263** | 38% |
@@ -33,7 +33,7 @@ Certification is a fixed cost, in the goal below, not in these sums.
 
 ## Margin per reward, at a run of 100 of each lamp (est.)
 
-| Reward | Pledge | Limit | Goods | Fees 8.5% | Reserve 3% | Fulfilment | **Margin** | Margin % |
+| Reward | Pledge | Limit | Goods | Fees 8.5% | Reserve 3% | Fulfillment | **Margin** | Margin % |
 |---|---|---|---|---|---|---|---|---|
 | Core, Early Bird | $650 | first 40 | $287 | $55 | $20 | $10 | **$278** | 43% |
 | Core | $695 | none | $287 | $59 | $21 | $10 | **$318** | 46% |
@@ -59,13 +59,13 @@ Certification is a fixed cost, in the goal below, not in these sums.
 
 ## The goal (est.)
 
-What the campaign must carry beyond the cost of the lamps it sells. The moulds for the prototypes are paid before
+What the campaign must carry beyond the cost of the lamps it sells. The molds for the prototypes are paid before
 it, from the pre-seed; the run's share of them is in each unit above, so it returns to the business.
 
 | Fixed cost | Amount |
 |---|---|
 | Certification, both lamps (midpoint of R3's range) | $32,750 |
-| A second Hemisphere shell mould, for a run's wear (est.) | $1,500 |
+| A second Hemisphere shell mold, for a run's wear (est.) | $1,500 |
 | Test units destroyed in certification: two of each (est.) | $1,480 |
 | Photography and the film, of real prototypes (est.) | $3,000 |
 | Pledge manager and survey (est.) | $1,000 |
@@ -74,7 +74,7 @@ it, from the pre-seed; the run's share of them is in each unit above, so it retu
 | **Fixed, in all** | **$50,289** |
 
 **A minimum run** (54 Core, 48 Hemisphere, an assumed mix: 94 backers):
-pledges $93,675; margin after goods, fees, reserve and fulfilment $44,398; fixed costs $50,289; **short by $5,891**.
+pledges $93,675; margin after goods, fees, reserve and fulfillment $44,398; fixed costs $50,289; **short by $5,891**.
 
 | The mix assumed | Backers |
 |---|---|

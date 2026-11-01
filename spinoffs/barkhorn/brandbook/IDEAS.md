@@ -10,11 +10,11 @@ Ranked by what each does for the odds, per dollar:
 | | Idea | Est. cost | When | Main effect |
 |---|---|---|---|---|
 | g | The Founding Hundred | counsel and printing, a few $k | before the first run | turns interest into deposits, the proof investors ask for |
-| f | The Tint Library | about $10k to $25k for 100 kits | as soon as the sheet is chosen | trade specification; settles the cast colours |
+| f | The Tint Library | about $10k to $25k for 100 kits | as soon as the sheet is chosen | trade specification; settles the cast colors |
 | a | EARF Sessions | about $5k to $9k a release | Session 00 once the first pair plays | content, a product, and the bar's reason to exist |
 | d | Hotel listening suites | trade-priced kits; one pilot suite | after the first pairs are measured | overnight demos to buyers; trade revenue |
 | b | A debut room: San Francisco in FOG week (January 2027), High End Vienna (May 2027), Milan in 2028 | $4k to $15k in SF; Vienna's stand free, $6k to $12k to get there; $80k to $200k for Milan | SF: 21–24 Jan 2027; Vienna: apply by 31 Dec 2026; Milan: April 2028 | collectors, then the hi-fi trade, then the design world |
-| e | Artist editions | a colour batch's minimum plus the artist's share | 2027, after launch | a waitlist and a premium; the artist's audience |
+| e | Artist editions | a color batch's minimum plus the artist's share | 2027, after launch | a waitlist and a premium; the artist's audience |
 | c | Mother EARF as public art | about $150k to $300k at 4 m; less at 2 m | 12 to 18 months | the brand at city scale; sponsorship |
 
 ## (a) EARF Sessions
@@ -31,13 +31,13 @@ artist, numbered, on vinyl tinted to match the night's tint. Sold at the bar, on
 
 **What a buyer gets.** A 12-inch LP, 180 g, pressed in the evening's tint, numbered, in a jacket with the room on the
 front; a download code. A Session-night ticket holder gets theirs first. Price: [LP PRICE] (about $40 is typical for a
-numbered coloured pressing; est.).
+numbered colored pressing; est.).
 
 **Cost (est.).** Multitrack recording in the room with a hired engineer, about $1.5k to $3k; mixing and mastering,
-$1k to $2k; lacquer cutting and a short run of 300 coloured 180 g LPs with printed jackets, about $3k to $5k. About
+$1k to $2k; lacquer cutting and a short run of 300 colored 180 g LPs with printed jackets, about $3k to $5k. About
 $5k to $9k a release before the artist's share. At about $40 each, 300 records return about $12k.
 
-**What it needs first.** A licence for every recording: the artist's agreement, and mechanical licences for any songs
+**What it needs first.** A license for every recording: the artist's agreement, and mechanical licenses for any songs
 they didn't write (from the publishers, or through a licensing service). The artist's share agreed in writing.
 
 **Timeline.** Session 00 in any good room the week the first pair plays (January 2027 at the latest, for the debut
@@ -55,14 +55,14 @@ And it makes Planet EARF a label as well as a bar, which is easier to fund than 
 Tropos lit from below on a curved wall, Mother EARF overhead, a bench, Mantle and the coins by the door). The same room
 works at any of the three.
 
-**What.** One dark room. The speakers lit from below, throwing their colours up a wall, the picture on the site made
+**What.** One dark room. The speakers lit from below, throwing their colors up a wall, the picture on the site made
 real at full size. A Session each night. The coin at the door. Every piece wears its tag, and the first run's orders and
 deposits are taken there.
 
 **The calendar** (from the coordinator's research; dates, not plans already made):
 - **FOG Design+Art, 21 to 24 January 2027, Fort Mason.** Design galleries (Marta, Patrick Parrish, Hostler Burrows)
   are in San Francisco that week. The investor deck already plans a debut night in San Francisco.
-- **Milan Design Week, 12 to 18 April 2027.** Alcova has no open call (enquiries only); the Fuorisalone package is
+- **Milan Design Week, 12 to 18 April 2027.** Alcova has no open call (inquiries only); the Fuorisalone package is
   €2,000 + VAT, by 8 February 2027; SaloneSatellite 2027 is closed.
 - **High End, now in Vienna, 6 to 9 May 2027.** A free Start-Up Area for young registered companies; apply by
   31 December 2026.
@@ -70,7 +70,7 @@ deposits are taken there.
 **The plan: San Francisco first, Vienna second, Milan in 2028.**
 1. **San Francisco, FOG week (January 2027).** The debut room with the first pair, one of each lamp and Mantle: a
    lent or rented space near the fair for a few nights, a Session each night, reservations and deposits taken (g).
-   The bar lane is drawing a Planet EARF pop-up from San Francisco's Vacant to Vibrant programme (up to six months'
+   The bar lane is drawing a Planet EARF pop-up from San Francisco's Vacant to Vibrant program (up to six months'
    rent for downtown pop-ups); if it lands, the debut room is that pop-up's first week.
 2. **Vienna, High End (May 2027).** Apply to the Start-Up Area by 31 December. It is free, it is the hi-fi trade's
    own show (dealers, distributors and the hi-fi press), and it comes after the first pair has been measured. The
@@ -91,14 +91,14 @@ the price of the freight. Milan then turns both into an international debut, wit
 ## (c) Mother EARF as public art
 
 **Mockup:** `out/idea-plaza.png`: an elevation at 1:50 at dusk, the way an architect shows a proposal: the globe's own
-night render at true scale (4 m) on its 3.2 m plinth, drawn people and trees for scale, its colours pooled on the
+night render at true scale (4 m) on its 3.2 m plinth, drawn people and trees for scale, its colors pooled on the
 paving, and a small plan. A path-traced plaza (`ideas_render.py --shot plaza`, `out/idea-plaza-render.png`) scored 4.0
 twice with the critic, its people and trees reading as primitives, so the concept changed to the honest drawing.
 
 **What.** The bar's 1.25 m Mother EARF, made at city scale for a plaza, a waterfront or a festival: six slotted
 discs, each in its tint, edge-lit at night so the rims draw the globe in light.
 
-**Cost (est.).** Cast sheet does not come 4 m wide, so each disc is built from segments on a steel or aluminium
+**Cost (est.).** Cast sheet does not come 4 m wide, so each disc is built from segments on a steel or aluminum
 armature: material, fabrication, structure and engineering, lighting and installation, about $150k to $300k. A 2 m
 version for a design week or a festival is a fraction of that. **Timeline.** A temporary piece, 6 to 9 months; a
 permanent public commission, 12 to 18 months or more with the city's arts process, engineering and permits.
@@ -113,7 +113,7 @@ festival's arts budget. Start with a 2 m globe at the Milan room; let it travel.
 Core, Hemisphere over the desk, 200 records), its acrylic key in Poison, and the card on the desk ("This room plays.").
 
 **What.** A suite in a boutique hotel, fitted with a complete EARF room in one tint, with a record library chosen for
-it. Everything can be bought at the front desk. A pilot with one hotel, then a programme: one suite per hotel, a
+it. Everything can be bought at the front desk. A pilot with one hotel, then a program: one suite per hotel, a
 different tint in each.
 
 **Cost (est.).** The kit at trade price (a pair, Mantle, a Core, a Hemisphere), installation and the records; the
@@ -125,14 +125,14 @@ and a suite is a showroom that pays for itself. It is trade revenue that doesn't
 
 ## (e) Artist editions: a ninth tint
 
-**Mockup:** `out/idea-edition.png`: Tropos in a ninth colour beside the eight (a hue study of the Ember render, not a
-cast), with the edition's card: "A ninth colour, made once."
+**Mockup:** `out/idea-edition.png`: Tropos in a ninth color beside the eight (a hue study of the Ember render, not a
+cast), with the edition's card: "A ninth color, made once."
 
 **What.** Once a year a musician or artist chooses a tint with EARF. It is cast in one dye lot, made into a numbered
-run of Tropos, Hemisphere shades and coins, paired with a Session pressed in the same colour, and never cast again.
+run of Tropos, Hemisphere shades and coins, paired with a Session pressed in the same color, and never cast again.
 The artist names it, from what drifts through the air.
 
-**Cost (est.).** A custom colour means the caster's minimum batch, which can be several sheets or a full run; the
+**Cost (est.).** A custom color means the caster's minimum batch, which can be several sheets or a full run; the
 artist's share, typically a royalty on each piece. **Timeline.** 2027, after the eight are in production.
 
 **Why it raises the odds.** Scarcity and a name the press will print. A waitlist before a sheet is cast. A premium
@@ -147,11 +147,11 @@ order, the lid behind, "The Tint Library". Path-traced.
 a card of the particulars. Sent to architects, interior designers, hotel groups and retailers who ask.
 
 **Cost (est.).** Eight tiles cut from production sheet, polished, a tray and a printed lid: about $100 to $250 a kit
-at 100 kits. **Timeline.** As soon as the sheet suppliers and their colours are chosen.
+at 100 kits. **Timeline.** As soon as the sheet suppliers and their colors are chosen.
 
 **Why it raises the odds.** No render shows what a tint looks like in a client's own light; a tile on a desk does.
 Designers specify what they can hold. And making the kit forces the decision manufacturing needs anyway: the eight
-cast colours, matched and fixed with the suppliers.
+cast colors, matched and fixed with the suppliers.
 
 ## (g) The Founding Hundred (my own)
 
@@ -168,10 +168,10 @@ amounts below are the funding research's examples (est.), for the owner to set.
 
 **How it is taken, in three stages** (the funding research, `research/2026-10-31/R2-funding.md` §4.4 on
 `r46-owner-notes`; est., not legal advice; counsel drafts the terms):
-1. **Now, a refundable reservation.** About $1,000 for a pair (lamps $100 to $250). Labelled "planned product; no
+1. **Now, a refundable reservation.** About $1,000 for a pair (lamps $100 to $250). Labeled "planned product; no
    ship date yet; refundable any time", which is the FTC's "dry-testing" condition for products that don't yet exist.
 2. **After a working prototype, an order with a deposit.** 30 to 50% of the price, with a stated, reasonably based
-   delivery window ("made to order in your colour; ships in 16 to 20 weeks"), the California disclosures before
+   delivery window ("made to order in your color; ships in 16 to 20 weeks"), the California disclosures before
    payment (B&P §17538: refund policy, legal name, street address), and FTC delay notices if the window slips.
    Refundable until production starts; after that, cancellation terms tied to actual, documented costs. **No
    "non-refundable deposit"**: California's Civil Code §1671 voids penalty clauses in consumer sales.

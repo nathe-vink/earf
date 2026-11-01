@@ -33,7 +33,7 @@ most fragile, most beautiful part travels on its own, face up.
 lift the sleeve off; crown it with the horn from its case.
 
 **Shipping.** Freight (less than a truckload), white-glove for the first pairs. Test to ISTA 3B (packaged products for
-LTL shipment) with a dummy load of the cabinet's mass and centre of gravity before the first shipment; add a 300 mm
+LTL shipment) with a dummy load of the cabinet's mass and center of gravity before the first shipment; add a 300 mm
 drop on each bottom edge and a tilt test on the crate. The crate is built to be used more than once: whether it is
 collected back is an operations decision for the owner, not a claim to make.
 
@@ -46,7 +46,7 @@ that would otherwise be bought.
 Each shade is sold singly, so each comes in a drum of its own: 260 mm across, 170 mm tall, through-dyed board in the
 shade's tint (a dyed-through board range such as GF Smith's Colorplan is the reference; to be matched to the eight),
 the globe blind-debossed on the lid, the wrap printed white: "Hemisphere", "A quarter turn off, a quarter turn on.",
-the wordmark. A moulded pulp ring holds the shade by its aluminium collar, clear of every wall. The fitting (the hub,
+the wordmark. A molded pulp ring holds the shade by its aluminum collar, clear of every wall. The fitting (the hub,
 canopy and cord) ships in a black tray under the shade's drum when sold with one. Eight drums in a row are the
 spectrum: at the bar they can sit on the back shelf as the stock of spare shades.
 
@@ -54,9 +54,9 @@ Test to ISTA 3A (parcel).
 
 ## Core: the cube
 
-A 220 mm cube in through-dyed board in the ball's tint, the lid lifting off. Moulded pulp: the ball on top, seated in
-a cup; the base, the USB-C cable and adapter beneath. White print on one face: the wordmark, "Core", "A table lamp ·
-plugged in or not". The cells ship fitted in the base and are declared to the carrier as required for lithium cells
+A 220 mm cube in through-dyed board in the ball's tint, the lid lifting off. Molded pulp: the ball on top, seated in
+a cup; the base and its charger beneath [RECHARGING: from the lamps lane’s redesign]. White print on one face: the wordmark, "Core", "A table lamp ·
+cordless". The cells ship fitted in the base and are declared to the carrier as required for lithium cells
 (the lamps' certification lane owns that).
 
 Test to ISTA 3A (parcel).

@@ -10,15 +10,15 @@ Sources:
 """
 
 # --- the lamps lane's run-of-200 figures (est., theirs) ----------------------------------------
-RUN200 = {  # parts per unit, moulds (a one-off set), landed per unit at 200
-    "Hemisphere": dict(parts=200, moulds=3900, landed=250),
-    "Core": dict(parts=195, moulds=1500, landed=235),
+RUN200 = {  # parts per unit, molds (a one-off set), landed per unit at 200
+    "Hemisphere": dict(parts=200, molds=3900, landed=250),
+    "Core": dict(parts=195, molds=1500, landed=235),
 }
 SCALE = {200: 1.00, 100: 1.11, 50: 1.23}   # small-batch premium on parts: setups spread over fewer pieces (est.)
 ASSEMBLY = {100: 40, 50: 50}               # assembly, finishing, QC and freight in, a unit (est.; the lane's landed figure carries about $30 at 200)
 PACK = {"Hemisphere": {100: 18, 50: 24},   # the drum: through-dyed board, pulp insert, print (est.)
-        "Core": {100: 16, 50: 22}}         # the cube: board, moulded pulp (est.)
-FULFIL = 10                                # pick, pack, label, from the studio or a small 3PL, an order (est.)
+        "Core": {100: 16, 50: 22}}         # the cube: board, molded pulp (est.)
+FULFILL = 10                                # pick, pack, label, from the studio or a small 3PL, an order (est.)
 FEES = 0.085                               # 5% Kickstarter + about 3.5% Stripe (Kickstarter help: 3-5%)
 RESERVE = 0.03                             # breakage, returns and replacement shades, of the pledge (est.)
 
@@ -49,7 +49,7 @@ def unit_cost(product, n, tooling=True):
     r = RUN200[product]
     c = r["parts"] * SCALE[n] + ASSEMBLY[n] + PACK[product][n]
     if tooling:
-        c += r["moulds"] / n
+        c += r["molds"] / n
     return c
 
 
@@ -58,7 +58,7 @@ def row(name, product, units, pledge, n):
     goods = sum(unit_cost(p, n) for p in prods)
     fees = pledge * FEES
     reserve = pledge * RESERVE
-    margin = pledge - goods - fees - reserve - FULFIL
+    margin = pledge - goods - fees - reserve - FULFILL
     return goods, fees, reserve, margin
 
 
@@ -79,7 +79,7 @@ def main():
         ("Parts (the lane's run-of-200 parts × a small-batch premium)", lambda pr, n: RUN200[pr]["parts"] * SCALE[n]),
         ("Assembly, finishing, QC, freight in", lambda pr, n: ASSEMBLY[n]),
         ("Packaging (the drum or the cube)", lambda pr, n: PACK[pr][n]),
-        ("Moulds spread over the run", lambda pr, n: RUN200[pr]["moulds"] / n),
+        ("Molds spread over the run", lambda pr, n: RUN200[pr]["molds"] / n),
         ("**Cost of goods**", lambda pr, n: unit_cost(pr, n)),
     ]
     for label, f in lines:
@@ -90,11 +90,11 @@ def main():
 
     for n in (50, 100):
         p(f"## Margin per reward, at a run of {n} of each lamp (est.)\n")
-        p("| Reward | Pledge | Limit | Goods | Fees 8.5% | Reserve 3% | Fulfilment | **Margin** | Margin % |")
+        p("| Reward | Pledge | Limit | Goods | Fees 8.5% | Reserve 3% | Fulfillment | **Margin** | Margin % |")
         p("|---|---|---|---|---|---|---|---|---|")
         for name, product, units, pledge, limit, note in TIERS:
             g, fe, rs, m = row(name, product, units, pledge, n)
-            p(f"| {name} | ${pledge:,} | {limit or 'none'} | ${g:,.0f} | ${fe:,.0f} | ${rs:,.0f} | ${FULFIL} | **${m:,.0f}** | {m / pledge:.0%} |")
+            p(f"| {name} | ${pledge:,} | {limit or 'none'} | ${g:,.0f} | ${fe:,.0f} | ${rs:,.0f} | ${FULFILL} | **${m:,.0f}** | {m / pledge:.0%} |")
         p("")
 
     p("## Certification before the first lamp ships (R3's ranges, est.)\n")
@@ -109,7 +109,7 @@ def main():
     # the goal: fixed costs the campaign must carry, met by the margin on a minimum run
     fixed = [
         ("Certification, both lamps (midpoint of R3's range)", (lo + hi) / 2),
-        ("A second Hemisphere shell mould, for a run's wear (est.)", 1500),
+        ("A second Hemisphere shell mold, for a run's wear (est.)", 1500),
         ("Test units destroyed in certification: two of each (est.)", 2 * unit_cost("Core", 50) + 2 * unit_cost("Hemisphere", 50)),
         ("Photography and the film, of real prototypes (est.)", 3000),
         ("Pledge manager and survey (est.)", 1000),
@@ -118,7 +118,7 @@ def main():
     fixed_total = sum(v for _, v in fixed)
     contingency = 0.15 * fixed_total
     p("## The goal (est.)\n")
-    p("What the campaign must carry beyond the cost of the lamps it sells. The moulds for the prototypes are paid before")
+    p("What the campaign must carry beyond the cost of the lamps it sells. The molds for the prototypes are paid before")
     p("it, from the pre-seed; the run's share of them is in each unit above, so it returns to the business.\n")
     p("| Fixed cost | Amount |\n|---|---|")
     for k, v in fixed:
@@ -136,7 +136,7 @@ def main():
     units_core = sum(q * (t[k][2] if t[k][1] == "Core" else (1 if t[k][1] == "Both" else 0)) for k, q in mix.items())
     units_hemi = sum(q * (t[k][2] if t[k][1] == "Hemisphere" else (1 if t[k][1] == "Both" else 0)) for k, q in mix.items())
     p(f"**A minimum run** ({units_core} Core, {units_hemi} Hemisphere, an assumed mix: {sum(mix.values())} backers):")
-    p(f"pledges ${pledged:,.0f}; margin after goods, fees, reserve and fulfilment ${margin:,.0f};"
+    p(f"pledges ${pledged:,.0f}; margin after goods, fees, reserve and fulfillment ${margin:,.0f};"
       f" fixed costs ${fixed_total + contingency:,.0f}; **{'left' if margin >= fixed_total + contingency else 'short by'} ${abs(margin - fixed_total - contingency):,.0f}**.\n")
     p("| The mix assumed | Backers |\n|---|---|")
     for k, q in mix.items():

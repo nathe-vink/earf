@@ -46,4 +46,4 @@ print("  same crew shoots it in the same week. Either raise that line to about $
 print("  pre-seed, as part of the debut. **This is the recommendation:** the pictures serve the press, the partner packs and the")
 print("  site as much as the campaign.")
 print("- **Saving the most:** one person for both days (a product photographer who also shoots events), a non-exclusive")
-print("  licence rather than a buyout, the Flash Studio day, and the film shot in the studio week by the same crew.")
+print("  license rather than a buyout, the Flash Studio day, and the film shot in the studio week by the same crew.")

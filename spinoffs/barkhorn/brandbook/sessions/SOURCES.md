@@ -26,7 +26,7 @@ refused access were not retried.
 - Pirates Press: piratespress.com /contact/, /ordering/, /products/12-vinyl/, /products/vinyl-technical-conditions/, /products/terms-conditions/ (the pages render by script; figures from search excerpts of them)
 - Precision: https://precisionpressing.com , /pricing , /vinyl
 - United Record Pressing: https://customers.urpressing.com/180g.php ; https://customers.urpressing.com/faq.php ; https://urpressing.com/client-resources/vinyl-colors/ ; https://www.foxcarolina.com/2026/06/24/vinyl-demand-drives-innovation-nashville-record-pressing-plant/
-- Gotta Groove (no 180 g colour): https://gottagrooverecords.com/vinyl-colors/
+- Gotta Groove (no 180 g color): https://gottagrooverecords.com/vinyl-colors/
 - Hand Drawn: https://handdrawnpressing.com/custom-quote
 - Cutting: https://goldenmastering.com/estimator/vinyl ; https://bonatimastering.com/pricing ; https://chicagomasteringservice.com (404; search excerpt) ; https://marshmastering.com/online-mastering
 - Secondary: https://chartlex.com/blog/money/vinyl-pressing-cost-guide-2026 (2026-08-09)

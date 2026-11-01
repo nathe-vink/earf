@@ -2,7 +2,7 @@
 
     python3.11 ideas_render.py --shot plaza|library [--samples 128] [--scale 1] [--out ...]
 
-plaza    Mother EARF as public art: the colour globe (out-globe-colour's GLB, the six discs in their tints) scaled to
+plaza    Mother EARF as public art: the color globe (out-globe-colour's GLB, the six discs in their tints) scaled to
          4 m across on a low black plinth, in a stone plaza at dusk, its rims lit. A proposal's picture, not a site.
 library  The Tint Library: eight 100 x 100 x 20 mm cast tiles standing in a birch tray in the spectrum's order, the
          lid beside, the coin of each tint in front. For architects and interior designers.

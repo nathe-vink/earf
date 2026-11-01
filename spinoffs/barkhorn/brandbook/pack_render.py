@@ -2,13 +2,13 @@
 
     python3.11 pack_render.py --shot pair|open|lamps [--samples 128] [--scale 1] [--out out/pack-pair.png]
 
-Built from primitives in metres; the printed faces are the decals that shoot.cjs makes from scenes/decal-*.html
+Built from primitives in meters; the printed faces are the decals that shoot.cjs makes from scenes/decal-*.html
 (transparent PNGs), laid over the birch or the board as ink. Sizes are proposals (README, "Packaging"):
 - the crate: 720 W x 600 D x 1160 H, 18 mm birch ply on two 100 mm skids, the door at the front hinged at its foot;
   inside, a charcoal felt lining, foam corner blocks and a birch sled the speaker walks out on, wearing its sleeve;
 - the horn case: 1420 x 560 x 460, both horns of a pair, ply with a lid;
 - Hemisphere's drum: 260 across, 170 tall, through-dyed board in the shade's tint, the globe debossed in the lid;
-- Core's box: a 220 mm cube in through-dyed board, the lid lifted, the ball in a moulded pulp cradle.
+- Core's box: a 220 mm cube in through-dyed board, the lid lifted, the ball in a molded pulp cradle.
 """
 import argparse, math, os, sys
 import bpy
@@ -65,7 +65,7 @@ def mat_basic(name, color, rough=0.5, metal=0.0, sheen=0.0, coat=0.0, bump=0.0, 
 
 
 def mat_birch(name, decal=None, ink=None):
-    """Birch ply: a pale wood with a long grain, and a decal's ink over it (its own colours, its alpha as the ink)."""
+    """Birch ply: a pale wood with a long grain, and a decal's ink over it (its own colors, its alpha as the ink)."""
     m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree
     p = nt.nodes['Principled BSDF']; p.inputs['Roughness'].default_value = 0.62
     tc = node(nt, 'ShaderNodeTexCoord', (-1400, 0))
@@ -198,7 +198,7 @@ def drum_uv(o, r, h, z0, wall_decal=True):
 def floor_and_wall(color='#CFC8BD', wall=None, wall_y=3.2, rough=0.85):
     m = mat_basic('ground', color, rough=rough, bump=0.02, bump_scale=60.0)
     bpy.ops.mesh.primitive_plane_add(size=40, location=(0, 0, 0)); bpy.context.object.data.materials.append(m)
-    # the wall behind: the floor's own colour, or a limewash of its own
+    # the wall behind: the floor's own color, or a limewash of its own
     w = mat_basic('wall', wall, rough=0.95, bump=0.15, bump_scale=8.0) if wall else m
     bpy.ops.mesh.primitive_plane_add(size=40, location=(0, wall_y, 0), rotation=(math.pi / 2, 0, 0))
     bpy.context.object.data.materials.append(w)
@@ -237,7 +237,7 @@ W, D, H, T, SK = 0.72, 0.60, 1.16, 0.018, 0.10
 
 
 def crate(x, y, tint='ember', open_door=False, rot=0.0, name='crate', front_art='decal-crate-front.png'):
-    """A crate at (x, y), its door facing -y; rot turns it about its centre (radians). Returns its objects."""
+    """A crate at (x, y), its door facing -y; rot turns it about its center (radians). Returns its objects."""
     objs = []
     ply = mat_birch('ply-' + name)
     front = mat_birch('front-' + name, decal=os.path.join(OUT, front_art))

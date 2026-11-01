@@ -44,7 +44,7 @@ td:first-child { font-weight: 600; width: 24% }
 .strip { position: absolute; left: 0; right: 0; bottom: 0; height: 5px; display: flex } .strip i { flex: 1 }
 """
 
-EARF_IS = ("EARF makes hi-fi and light in San Francisco, in cast acrylic tinted all the way through, in eight colours "
+EARF_IS = ("EARF makes hi-fi and light in San Francisco, in cast acrylic tinted all the way through, in eight colors "
            "from Ember to Smoke. Tropos is a powered horn loudspeaker; Mantle, a record player whose plinth floats over "
            "a base lit at its edge; Hemisphere, a pendant; Core, a cordless table lamp. The first pair of Tropos played "
            "for the first time at our debut in San Francisco on 19 January 2027, in FOG Design+Art week.")
@@ -58,10 +58,10 @@ PACKS = [
                   "United States; Klipsch dealers sell it everywhere else, as with the kO-R2.",
          why=["The kO-R1 (2024): 100 pairs at $8,498, built in Hope with Devon Turnbull of OJAS, and sold out.",
               "The kO-R2 (2026): 600 numbered pairs at $11,998, “handcrafted in Hope”, “sold direct from Ojas” in "
-              "the US, through authorised retailers in Europe, launched at Milan Design Week with USM and Karimoku.",
+              "the US, through authorized retailers in Europe, launched at Milan Design Week with USM and Karimoku.",
               "Klipsch’s sound in other people’s objects and rooms: La-Z-Boy’s AudioLuxe furniture, and the "
               "Equipment Room at Hotel Magdalena, Austin (October 2026).",
-              "EARF brings what OJAS brought: a designer’s object, a colour, a room to launch it in. The tint is new."],
+              "EARF brings what OJAS brought: a designer’s object, a color, a room to launch it in. The tint is new."],
          theirs=["The Heritage model and its engineering", "The build in Hope: quality, warranty, certification",
                  "Its dealers outside the US", "Its press, and a show stand"],
          ours=["The acrylic parts’ design, drawn and specified", "The eight tints, and approval of each cast",
@@ -74,7 +74,7 @@ PACKS = [
                 ("Fee", "A development fee for the design work, recoupable against royalty. Advances in this field are "
                         "small or none."),
                 ("Edition", "About 100 numbered pairs, capped; the tint and the numbering EARF’s to approve."),
-                ("Control", "EARF approves colour, material and finish, and the use of its name; credit on the product."),
+                ("Control", "EARF approves color, material and finish, and the use of its name; credit on the product."),
                 ("Term", "1–3 years, renewable; a sell-off of 30–180 days; rights revert if not launched in 12–18 "
                          "months."),
                 ("Prices", "A suggested retail price only: a licensor can’t set resale prices in California."),
@@ -97,17 +97,17 @@ PACKS = [
               "Elsewhere, hotels now commission listening rooms: OJAS’s Listening Room at Patina Osaka; the Equipment "
               "Room at Hotel Magdalena, Austin, with Klipsch.",
               "A corner is smaller than a room: one season, one tint, no construction."],
-         theirs=["The lobby, and the guests in it", "The programme: who plays, and when",
+         theirs=["The lobby, and the guests in it", "The program: who plays, and when",
                  "Its shop, for the Core edition", "Photography and its own channels"],
          ours=["The system: Tropos, Mantle, Hemisphere, installed and tuned",
                "The Sessions: one album, start to finish, on set nights", "Core in an Ace tint, numbered",
                "Service through the season"],
-         terms=[("Residency", "A season (about three months): EARF installs and services; Ace hosts and programmes. A "
+         terms=[("Residency", "A season (about three months): EARF installs and services; Ace hosts and programs. A "
                               "residency fee or a loan [to agree]."),
                 ("Purchase", "At the end, Ace may buy the corner: 50% on order, the balance on installation, as "
                              "commissions usually run."),
                 ("Core edition", "Ace buys a numbered run (for example 100) at wholesale, about 40–50% of retail."),
-                ("Co-brand", "“Ace × EARF” on the Core edition, under a licence of 1–3 years; each approves the "
+                ("Co-brand", "“Ace × EARF” on the Core edition, under a license of 1–3 years; each approves the "
                              "other’s use of its name."),
                 ("IP", "EARF keeps the design; a credit line such as “The Listening Corner by EARF”."),
                 ("Care", "Insurance and liability for loaned equipment in a public lobby; a service contract if bought."),
@@ -116,10 +116,10 @@ PACKS = [
                ("2–5 weeks after", "This letter, with the photographs (February)"),
                ("About 12 weeks after", "A meeting in Milan, 13–18 April, or at the property"),
                ("Mid-2027", "The residency opens, in a city Ace chooses"),
-               ("With the Core run", "The Ace edition of Core, numbered (est. autumn 2027)")],
+               ("With the Core run", "The Ace edition of Core, numbered (est. fall 2027)")],
          route='business@acehotel.com (Atelier Ace business inquiries); press@acehotel.com in copy'),
     dict(slug='project', who='Pro-Ject Audio Systems', file='earf-pitch-pro-ject',
-         title='A tinted-acrylic edition, made under licence.',
+         title='A tinted-acrylic edition, made under license.',
          pic='../../site/img/tt-violet-dusk-1200.jpg', pos='50% 50%',
          proposal="A Pro-Ject turntable built in Pro-Ject’s own factory with an EARF cast-acrylic plinth and platter, "
                   "in a few of our tints, numbered: about 50 to 100 in each. Pro-Ject sells it through its dealers; EARF "
@@ -134,12 +134,12 @@ PACKS = [
                  "Its dealers, worldwide", "Its stand at HIGH END"],
          ours=["The plinth and platter, designed in cast acrylic", "The tints, and approval of each cast",
                "The US launch: a listening event, a Session record", "Direct sales, and the design press"],
-         terms=[("Structure", "A licence: Pro-Ject manufactures; EARF licenses the design and the tint. EARF buys units at "
+         terms=[("Structure", "A license: Pro-Ject manufactures; EARF licenses the design and the tint. EARF buys units at "
                               "a transfer price for its direct sales."),
                 ("Royalty", "3–7% of net wholesale on Pro-Ject’s sales, 5% common; net defined."),
                 ("Fee", "A development fee, recoupable; a minimum guarantee from the second year."),
                 ("Edition", "50–100 numbered per tint, in a few tints; the edition capped."),
-                ("Control", "EARF approves colour, material and finish; the tint system stays EARF’s own, and "
+                ("Control", "EARF approves color, material and finish; the tint system stays EARF’s own, and "
                             "exclusivity covers this edition only."),
                 ("Term", "1–3 years; sell-off 30–180 days; reversion if not launched in 12–18 months, or if "
                          "production stops."),
@@ -189,9 +189,9 @@ def build(p):
   <table><tr><th>From the debut</th><th>What</th></tr>{when}</table>
   <div class="cols" style="margin-top:4px;grid-template-columns:1fr 1fr 1fr">
     <div><h3>What we’d send next</h3><p>Photographs and a short film from the debut; drawings of the parts we’d
-    design; samples of the eight tints in cast sheet; an edition sheet with sizes, colours and lead times.</p></div>
+    design; samples of the eight tints in cast sheet; an edition sheet with sizes, colors and lead times.</p></div>
     <div><h3>What stays EARF\u2019s own</h3><p>Tropos, Mantle and the tint system. An edition is designed around them
-    and licensed for its own run; nothing here licenses EARF\u2019s products or its colours beyond it.</p></div>
+    and licensed for its own run; nothing here licenses EARF\u2019s products or its colors beyond it.</p></div>
     <div><h3>Who</h3><p>[Your name], founder, EARF, San Francisco. [contact line].<br>Through {html.escape(p['route'])}.</p></div>
   </div>
   <div class="foot"><span>Draft · terms for counsel · figures are ranges, not proposals of price</span><span>earf.world</span></div>

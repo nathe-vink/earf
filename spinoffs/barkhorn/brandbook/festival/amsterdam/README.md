@@ -23,9 +23,9 @@ A shared job:
 2. **The design (settled by the coordinator's correction, 2026-10-31).**
    - Mother EARF is as drawn in the House Book (rounds 33–41): six slotted discs of 25 mm cast acrylic, three meridians
      and three parallels, the axis at 23.4 degrees, the rims glowing.
-   - There are no continents and no inside to light. At 2 m, a hard spot throws its coloured shadow on the quay; that's
+   - There are no continents and no inside to light. At 2 m, a hard spot throws its colored shadow on the quay; that's
      the bar lane's render.
-   - One question remains: six discs carry six colours, while the bar lane's render brief says "the eight tints". The
+   - One question remains: six discs carry six colors, while the bar lane's render brief says "the eight tints". The
      owner decides; the text says six.
 3. **Size, weight, wind and money**, now from the bar lane's technical sheet (`r33-planet-world` 2866f79f,
    `planet/r43/amsterdam/TECH.md`, all est.):
@@ -35,4 +35,4 @@ A shared job:
    - three crates, a crew of four, one day to install;
    - about €28,000–60,000 to produce, which the festival covers.
 4. **No logos, and the title.** The work is entered as the owner's own. "Mother EARF" carries the company's name, so the
-   text offers "Mother" or "Mother Earth, in Six Colours", or asking the festival first.
+   text offers "Mother" or "Mother Earth, in Six Colors", or asking the festival first.

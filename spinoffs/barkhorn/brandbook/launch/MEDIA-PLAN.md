@@ -19,8 +19,8 @@ published editors.
 
 ## The angles
 
-- **The eight tints.** Hi-fi and light in cast acrylic coloured all the way through, the same eight in everything; a
-  room in one colour or three. The design press's angle.
+- **The eight tints.** Hi-fi and light in cast acrylic colored all the way through, the same eight in everything; a
+  room in one color or three. The design press's angle.
 - **The horn.** "The oldest amplifier is a shape": a horn formed from the cabinet's own tinted acrylic. If the owner
   chooses the laminated horn (14 to 22 stacked layers whose edges read as strata, `r33-speaker-horn`), that is the
   picture: a horn you can read like a cliff face. The hi-fi and object press's angle.
@@ -40,7 +40,7 @@ published editors.
 | 5 | Design Milk | Online, US product design | The eight tints; Core and Hemisphere | Online, 22–29 March | The same pack, lamps forward | Online form; they review every submission but don't reply to each | [C] |
 | 6 | Sight Unseen | Online, independent American design | The horn; the object | Online, 22–29 March | A short description, a few low-res JPEGs, one link to a folder of high-res JPEGs and a fact document; credits in file names | submissions@sightunseen.com; incomplete emails are discarded; no paid coverage | [C] |
 | 7 | Kinfolk | Print | The listening room as a way of living | Embargoed print, by 1 March, as an idea, not a pitch | Only if invited | "Unlikely to accept unsolicited submissions"; commissioned in-house | [C], low odds |
-| 8 | Dwell | Print and online, US homes | A room in one colour; the pair at home | Embargoed print, by 1 March | The at-home pictures once photographed, the fact sheets | Process unverified (site refused access) | [U] |
+| 8 | Dwell | Print and online, US homes | A room in one color; the pair at home | Embargoed print, by 1 March | The at-home pictures once photographed, the fact sheets | Process unverified (site refused access) | [U] |
 | 9 | Hypebeast | Online, lifestyle | The listening bar; the coin; the Sessions | Online, 22–29 March | The film, the coin and the Session pictures | Contact page came back empty | [U] |
 | 10 | Core77 | Online, industrial design | How it is made: cast acrylic, the horn formed over a plug, 80-odd drawn parts | Online, 22–29 March; and the Core77 Design Awards when they open | A making-of: drawings, the horn tool, the prototypes | Unverified for pitches; awards dates for 2027 not yet published | [U] |
 | 11 | Stereophile | Print and online, hi-fi | The horn; measured figures | Before May | Measurements from the first pair, the particulars, a loan policy | Review policy unverified (site refused access) | [U] |
@@ -51,7 +51,7 @@ published editors.
 | 16 | Part-Time Audiophile | Online, hi-fi and shows | Vienna's Start-Up Area; the horn | Before May, and at HIGH END | Release to Press@; a review request to Marc@ once a loan pair exists | Press@ and Marc@parttimeaudiophile.com; no paid articles | [C] |
 | 17 | San Francisco Chronicle | Daily, city | The pop-up and the listening-bar plan | Week of 11 January, for the opening | The invitation and a short note on the room | Route to find by hand (the deck cites it on the city's listening bars) | to find |
 | 18 | 7x7 | Online, city culture | The room, the coin, the Sessions | Week of 11 January | The same | Route to find by hand (cited in the deck) | to find |
-| 19 | Sunset | Print and online, the West | A West Coast maker; colour in the home | Embargoed print, by 1 March | The at-home pictures, the eight tints | Route to find by hand (cited in the deck) | to find |
+| 19 | Sunset | Print and online, the West | A West Coast maker; color in the home | Embargoed print, by 1 March | The at-home pictures, the eight tints | Route to find by hand (cited in the deck) | to find |
 | 20 | Gear Patrol | Online, objects and audio | A designer's horn speaker (it covered the Klipsch × OJAS runs) | Online, 22–29 March, or with the hi-fi round | The pack and the price at launch | Route to find by hand (cited in the deck) | to find |
 
 ## The pack

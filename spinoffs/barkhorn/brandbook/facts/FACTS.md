@@ -60,7 +60,7 @@ Eight, in this order, numbered 01–08:
 | 16–24 Jan | SF Art Week | fixed | owner R5 |
 | 20 Jan / **21–24 Jan** | FOG Design+Art: its gala / the fair, at Fort Mason. Now for meetings with galleries, **without a show** | fixed | owner R5; bar `research-popup.md:144`; owner b3211a43 |
 | Week of 2 Nov 2026 | Quote requests sent | planned | lamps `first-articles.md`; horn `make/schedule.md:32` |
-| By 16 Nov | Lamp moulds ordered (critical path) | planned | lamps `first-articles.md` |
+| By 16 Nov | Lamp molds ordered (critical path) | planned | lamps `first-articles.md` |
 | About 18 Dec | The first laminated horn | planned | horn `make/schedule.md`, `laminated-horn.md` |
 | **7 Dec 2026, 23:59 CET** | Amsterdam Light Festival Ed. 16 call closes | fixed | owner R10; the festival's FAQ |
 | 6 weeks before the debut | US Park Police alcohol permit, if the debut is at Fort Mason (was 8 Dec for 19 Jan) | moves with the date | bar `DEBUT-ROOM.md` |
@@ -99,7 +99,7 @@ Eight, in this order, numbered 01–08:
 - **The object:** six slotted discs of 25 mm cast acrylic. Three meridians (green, orange, violet) and three parallels
   (red, blue, yellow), axis at 23.4°, cemented clear where they cross, the rims glowing.
 - **Size and cost:** **1.25 m, about 190 kg**, about $9–12k.
-- **Colour:** multicolour, the owner's choice of 2026-10-22.
+- **Color:** multicolour, the owner's choice of 2026-10-22.
 - **Variants:**
   - a **2 m** festival version is **under study** (about 245–485 kg before ballast; figures to confirm);
   - 4 m is an idea drawing only;
@@ -132,7 +132,7 @@ Eight, in this order, numbered 01–08:
 1. **Prices**, all four, and Tropos above all ($19,000 against R4's $32,000).
 2. **The horn's production route:** laminated (no tool) or formed over a tool (about $14,500–15,000). This decides what
    the public copy says.
-3. **The first-run programme:**
+3. **The first-run program:**
    - the Founding Hundred, as on the site (a number, no money);
    - or deposits (the money pack);
    - or R4's Founders' Edition of 8 pairs.
@@ -146,5 +146,5 @@ Eight, in this order, numbered 01–08:
 8. **Matched or stock tints** for the first run; the 2423 / 2064 stand-ins until then.
 9. **Planet EARF named in public**, or not.
 10. **Session 00:** the artist, the fee, Ember or Smoke vinyl, $40 or $50.
-11. **Amsterdam:** the title, six colours or eight, 2 m or 1.25 m.
+11. **Amsterdam:** the title, six colors or eight, 2 m or 1.25 m.
 12. **The Kickstarter:** the dates, the goal (about $110k est.), the tiers.

@@ -23,10 +23,10 @@ for faces only (never on the lamps), and a lavalier.
 | 2 | 0:06–0:12 | The same hand lifts Core off the table, no cord anywhere, and walks it out of frame. The light leaves with it | Footsteps; a door | none |
 | 3 | 0:12–0:20 | Outside on a step at dusk, Core set down, still lit. Wide, 35 mm | Street, far off | none |
 | 4 | 0:20–0:30 | Inside, a dark room: Hemisphere over a table, Ice. A hand reaches up, a quarter turn, the shade comes off; the bare hub glows soft, the source hidden; another shade (Acid) goes on, a quarter turn back | The click of the catch | none |
-| 5 | 0:30–0:40 | The eight tints as cast samples standing on a lightbox, the camera sliding along them, Ember to Smoke | A record starts | EARF. Two lamps, in eight colours. |
-| 6 | 0:40–1:05 | The owner at the bench: forming a shade over its mould, a lathe turning a collar, a hand polishing an edge. Close, 85 mm | The owner: why acrylic, why tinted through, why eight colours | Captions name each step: *Forming*, *Turning*, *Polishing* |
+| 5 | 0:30–0:40 | The eight tints as cast samples standing on a lightbox, the camera sliding along them, Ember to Smoke | A record starts | EARF. Two lamps, in eight colors. |
+| 6 | 0:40–1:05 | The owner at the bench: forming a shade over its mold, a lathe turning a collar, a hand polishing an edge. Close, 85 mm | The owner: why acrylic, why tinted through, why eight colors | Captions name each step: *Forming*, *Turning*, *Polishing* |
 | 7 | 1:05–1:20 | The tests: a thermocouple on a closed shade, the logger's screen; Core's run-time log (how it recharges waits for the lamps lane's redesign; no cord in frame); the splash test | The owner: we tested them, here are the numbers | The pass marks and the measured figures, as text, from `COPY.md` |
-| 8 | 1:20–1:35 | Core dimmed by holding the ring, the colour warming as it dims. Then Hemisphere on a wall dimmer, down to its lowest, no flicker | Room | *Hold to dim.* |
+| 8 | 1:20–1:35 | Core dimmed by holding the ring, the color warming as it dims. Then Hemisphere on a wall dimmer, down to its lowest, no flicker | Room | *Hold to dim.* |
 | 9 | 1:35–1:50 | A table at night: four people, a Hemisphere over them in Haze, a Core in Poison between the glasses | Talk, glasses, the record | none |
 | 10 | 1:50–2:00 | Black. Core switched off with a tap | The tap | EARF. Core and Hemisphere. On Kickstarter. [DATE] |
 
@@ -53,7 +53,7 @@ for faces only (never on the lamps), and a lavalier.
 | B1 | 4 | 50 mm, locked, low | Hemisphere only, at 700 mm over the table | Hemisphere with the Ice shade, a spare Acid shade | Film the hub bare, to show the source is shielded |
 | B2 | 4 | 85 mm insert | Hemisphere | Hands on the shade | The quarter turn in one take, both ways |
 | C1 | 5 | 85 mm on a slider | A lightbox under the samples | The eight cast tint samples | Only the tints actually cast; caption them *Samples of the sheet* |
-| D1–D4 | 6 | 85 mm, handheld, close | Bench light | A mould and a sheet; the lathe; a polishing wheel | Real work, not mimed; the former's or the shop's permission to film |
+| D1–D4 | 6 | 85 mm, handheld, close | Bench light | A mold and a sheet; the lathe; a polishing wheel | Real work, not mimed; the former's or the shop's permission to film |
 | E1–E3 | 7 | 50 mm, locked | Bench | The logger, the thermocouples, the run-time log, the splash rig (no cord on Core in frame) | Shoot the screens readable; the figures go on as text in the edit |
 | F1 | 8 | 85 mm | Core only | Core, warming as it dims | Run the full dim, 20 s; cut in the edit |
 | F2 | 8 | 50 mm | Hemisphere on the wall dimmer | A Lutron Diva CL | Film at 1/50 s; check for flicker on the monitor before rolling |

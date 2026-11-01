@@ -1,6 +1,6 @@
 # Tropos
 
-**A powered horn loudspeaker in eight colours of cast acrylic.** "Eight things in the air."
+**A powered horn loudspeaker in eight colors of cast acrylic.** "Eight things in the air."
 
 Each cabinet is cast acrylic, 20 mm thick and tinted all the way through. The horn is formed from the same tinted
 acrylic as its cabinet, its driver in a pod whose cap twists off by hand. Above 1 kHz the horn carries the music;
@@ -21,7 +21,7 @@ so it is dressed in white voile. A cloth cover goes on over the woofer.
 | Loudness | Up to about 115 dB at 1 m, each |
 | Inputs | XLR (and a link out), RCA, AES, S/PDIF coaxial and optical; USB to set it up |
 | Lining | Polyester batts in white voile, 100 mm at the top and the bottom |
-| Colours (acrylic · cover) | 01 Ember (translucent red · oxblood), 02 Dust (translucent orange · rust), 03 Acid (translucent golden yellow · ochre), 04 Poison (translucent bottle green · bottle green), 05 Ice (translucent ice blue · deep blue), 06 Haze (translucent violet · deep violet), 07 Fog (water-clear · white), 08 Smoke (smoked black · black) |
+| Colors (acrylic · cover) | 01 Ember (translucent red · oxblood), 02 Dust (translucent orange · rust), 03 Acid (translucent golden yellow · ochre), 04 Poison (translucent bottle green · bottle green), 05 Ice (translucent ice blue · deep blue), 06 Haze (translucent violet · deep violet), 07 Fog (water-clear · white), 08 Smoke (smoked black · black) |
 | Price | Set at launch; each pair is made to order |
 | Care | Dust with a soft microfibre cloth; wash with water and a drop of mild soap, then dry. No glass cleaner, alcohol or solvents: they craze acrylic. Fine scratches polish out |
 | Figures | Design figures, from the drawings and their simulation; measured ones follow with the first pair |

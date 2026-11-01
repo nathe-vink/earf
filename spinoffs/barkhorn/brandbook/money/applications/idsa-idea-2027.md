@@ -18,7 +18,7 @@ $575. Round 2 must be completed and paid to be a finalist. The Impact Award is a
 
 - [ ] Which product, and which category: Tropos as a concept (the strongest story: the horn formed from its own acrylic)
 - [ ] A short description against each of the five criteria (the brand book's position and the fact sheets are the source)
-- [ ] Images: the prototype's photographs (February) or the renders, labelled as renders, as the rules allow
+- [ ] Images: the prototype's photographs (February) or the renders, labeled as renders, as the rules allow
 - [ ] Drawings and the process: the horn simulation, the parts drawn for making
 - [ ] A short film: the teaser (`../../launch/out/earf-teaser-16x9.mp4`) or a making-of
 - [ ] The entrant: the company's name and registration (see the HIGH END note: not yet registered)

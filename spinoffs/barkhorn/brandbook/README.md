@@ -20,7 +20,7 @@ the brand from what they already are, and proposes what isn't yet decided. **Pro
 - **Renders** are Cycles on the CPU (`python3.11`, the `bpy` wheel from `studio/setup.sh`):
   `python3.11 pack_render.py --shot pair|open|lamps` and `python3.11 ideas_render.py --shot plaza|library`, each
   `[--samples 128] [--scale 1]`; about 5 to 10 minutes a frame on four cores. Built from primitives (the crates, the
-  boxes, the tiles) and, for the plaza, the colour globe's own GLB (`../out-globe-colour/render/`).
+  boxes, the tiles) and, for the plaza, the color globe's own GLB (`../out-globe-colour/render/`).
 - **The book's pictures:** `python3 make_book.py` copies the site's finals, the marks, the mockups and (read-only, by
   `git show`) four of the bar's renders from `origin/r33-planet-world` into `book/img/` as JPEGs.
 - `assets/` holds cut-outs of the globe and lockup renders (their paper ground unmixed to alpha), a hue study for the
@@ -30,7 +30,7 @@ the brand from what they already are, and proposes what isn't yet decided. **Pro
 ## Sources of fact
 
 The site (`web.py`: `CLOUDS`, `SPEC`, `LAMPS`, `TT`, the copy), the project log (`../README.md`, the owner-notes table
-and rounds), `../companions/`, `../product.py` (the rating plate), and the bar's house book. "In light" colour values
+and rounds), `../companions/`, `../product.py` (the rating plate), and the bar's house book. "In light" color values
 are sampled from the site's rendered coins (`site/img/coins-light.jpg`); the cast references wait for the stock-colour
 research. Every cost in `IDEAS.md` and `PACKAGING.md` is an estimate, not a quote.
 

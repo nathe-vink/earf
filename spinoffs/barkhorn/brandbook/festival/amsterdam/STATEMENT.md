@@ -12,14 +12,14 @@ Please don't add facts that aren't true. If a sentence doesn't fit, cut it rathe
 
 I make objects in cast acrylic tinted all the way through: loudspeakers, lamps, a record player. I'm interested in a
 material that holds light rather than reflecting it. A slab of tinted acrylic, lit at one edge, glows at the others;
-its faces stay dark and clear. The colour isn't a coat on the surface. It is the thing.
+its faces stay dark and clear. The color isn't a coat on the surface. It is the thing.
 
 [TITLE] is that idea at the scale of a place. It is a globe reduced to its lines, the meridians and parallels we drew
-on the planet to find our way, each cut from one colour and lit from within so that only its edge shines. With the
-surface gone, you look through the world to whatever is behind it, and every step round it changes which colours
+on the planet to find our way, each cut from one color and lit from within so that only its edge shines. With the
+surface gone, you look through the world to whatever is behind it, and every step round it changes which colors
 cross.
 
-I wanted something that works without a screen, a sound or a trick: steady light, one material, six colours, and the
+I wanted something that works without a screen, a sound or a trick: steady light, one material, six colors, and the
 city behind it.
 
 [OWNER TO FILL: one or two sentences in your own words: where the globe came from for you, and what you'd like
@@ -31,7 +31,7 @@ someone to feel standing beside it on a canal in December.]
 
 [OWNER: full name] is a designer based in San Francisco. [OWNER TO FILL: training or background, in one clause, e.g.
 "Trained as …" or "After … years in …".] [He / She / They] make[s] hi-fi and lighting in tinted cast acrylic, in a
-palette of eight colours, and first showed the work in San Francisco in January 2027, during FOG Design+Art week.
+palette of eight colors, and first showed the work in San Francisco in January 2027, during FOG Design+Art week.
 [TITLE] is [his / her / their] first work for public space. [OWNER TO FILL: anything shown, published or awarded,
 only if true.] [He / She / They] live[s] and work[s] in [OWNER TO FILL: city].
 

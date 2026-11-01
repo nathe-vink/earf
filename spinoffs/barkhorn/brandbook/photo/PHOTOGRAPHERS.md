@@ -11,7 +11,7 @@ figure is a benchmark from a directory or guide, so ask each for a quote.
 |---|---|---|---|
 | **Sara Anderson** | SF, with her own studio | "Sculptural" still life for design-led brands: glass fragrance bottles and candles (MOCO, Misc Goods Co), ceramics (Ailuros). **The best fit for glossy, transparent objects** | sara@sara-anderson.com, or the form on her site [verified]. Quotes after a consultation [verified] |
 | **Lucas Saugen** | SF | Commercial product and still life, and motion directing. His site shows lamp work (Lumio), chairs, glassware. APA lists Vode Lighting, Apple and the Museum of Craft & Design. **The fit for both days and the Kickstarter film**, if he'll shoot an event | Lucas@SaugenPhotography.com [verified] |
-| **Kelsey McClellan** | SF | Colourful, graphic still life. A project on her site is called "Lamps". Clients include Apple, Airbnb, Oura, Wired, The New Yorker | The email and phone on her site [verified] |
+| **Kelsey McClellan** | SF | Colorful, graphic still life. A project on her site is called "Lamps". Clients include Apple, Airbnb, Oura, Wired, The New Yorker | The email and phone on her site [verified] |
 | Shaun Sullivan | SF | Still life and interiors for about 20 years, furniture among them (a directory lists Crate & Barrel and Pottery Barn) | Production Paradise profile only; no site of his own found |
 | Joe Fletcher | Bay Area | Architecture and interiors (Feldman, Mork Ulnes, Saitowitz; AD, Dwell, Wallpaper*). **For rooms**: the debut room or a future listening room, not studio product work | joefletcher.com (script-rendered; no contact read) |
 | Ella Sophie | Bay Area / Oakland | A directory profile: architectural lighting installations internationally, and interiors. A candidate for **Mother EARF's outdoor pictures** | ellasophiephoto.com (script-rendered; no contact read) |
@@ -32,7 +32,7 @@ figure is a benchmark from a directory or guide, so ask each for a quote.
 
 | Studio | Where | Space | Rates | Light and grip |
 |---|---|---|---|---|
-| **Flash Studio** | 390 Swift Ave, South SF (near SFO) | 5,400 sq ft, about 4,000 open; a 40 × 22 ft cyclorama; ceiling 16.5–18 ft | **$1,200 for a 10-hour day** (up to 5 people), $1,600 (up to 15); overtime $180 an hour; a fresh white cyc +$300; weekends +$300 [verified] | Rented from its catalogue |
+| **Flash Studio** | 390 Swift Ave, South SF (near SFO) | 5,400 sq ft, about 4,000 open; a 40 × 22 ft cyclorama; ceiling 16.5–18 ft | **$1,200 for a 10-hour day** (up to 5 people), $1,600 (up to 15); overtime $180 an hour; a fresh white cyc +$300; weekends +$300 [verified] | Rented from its catalog |
 | **Capitol Art** | 3073 17th St, Mission | West studio about 3,700 sq ft with a 40 ft cyc; East about 3,300 | Quote: studio@capitolartsf.com [verified] | Broncolor, Profoto, continuous lights and grip to rent [verified] |
 | Left Space | 2055 Bryant St, SF | Four studios, 880–3,800 sq ft; ceilings 18–26 ft; no cyc mentioned | Not published | An in-house lighting and grip department |
 | StoodilyDoodleyO | 434 N Canal St, South SF | 3,000 sq ft; a 33 ft cyc (APA's list) | The rate sheet is an image that couldn't be read; mark@stoodily.com | Little Giant Lighting & Grip |

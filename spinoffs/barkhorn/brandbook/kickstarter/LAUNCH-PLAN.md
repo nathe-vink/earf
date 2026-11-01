@@ -22,12 +22,12 @@ The goal needs about 110 backers. Kickstarter's figure is that **32% of pre-laun
 ### 1. Welcome: the day someone signs up
 
 **Subject:** You're on the list
-**Preview:** Two lamps, eight colours, and a date in April.
+**Preview:** Two lamps, eight colors, and a date in April.
 
 > Thank you for signing up.
 >
 > EARF makes hi-fi and light in cast acrylic, tinted all the way through. This spring we're making our first run of
-> two lamps: Core, a table lamp that goes where you go, and Hemisphere, a pendant that changes colour with a quarter
+> two lamps: Core, a table lamp that goes where you go, and Hemisphere, a pendant that changes color with a quarter
 > turn. They open on Kickstarter on Tuesday 27 April.
 >
 > We'll write about five more times before then, and not again unless you ask. The first people in get the early-bird
@@ -38,22 +38,22 @@ The goal needs about 110 backers. Kickstarter's figure is that **32% of pre-laun
 ### 2. The making: about six weeks out (Tuesday 16 March)
 
 **Subject:** How a shade is made
-**Preview:** Over a mould, by hand, three layers deep.
+**Preview:** Over a mold, by hand, three layers deep.
 
 > Hemisphere's shade is three layers of cast acrylic: a tinted shell, a frosted layer, and a tinted skin. Each is
-> formed from a flat sheet over an aluminium mould, then trimmed, bonded and polished. [Photograph: the shell coming
-> off its mould. *Prototype, February 2027.*]
+> formed from a flat sheet over an aluminum mold, then trimmed, bonded and polished. [Photograph: the shell coming
+> off its mold. *Prototype, February 2027.*]
 >
 > It takes [time, measured] a shade. That's why there's a run, and why it's made to order.
 >
 > [Button: See the pre-launch page]
 
-### 3. The colours: four weeks out (Tuesday 30 March)
+### 3. The colors: four weeks out (Tuesday 30 March)
 
-**Subject:** Eight colours, one of them yours
+**Subject:** Eight colors, one of them yours
 **Preview:** Ember to Smoke, cast, lit from behind.
 
-> Every EARF piece comes in the same eight colours, so a room can be one colour, or three. Here are the cast samples,
+> Every EARF piece comes in the same eight colors, so a room can be one color, or three. Here are the cast samples,
 > photographed lit: Ember, Dust, Acid, Poison, Ice, Haze, Fog, Smoke. [Photograph, the eight samples. *Samples of the
 > sheet.*]
 >
@@ -65,7 +65,7 @@ The goal needs about 110 backers. Kickstarter's figure is that **32% of pre-laun
 **Preview:** And then in a hot room. The numbers.
 
 > Before we ask anyone to back a lamp, we test it. Hemisphere ran closed for four hours in a 35 °C room: the acrylic
-> stayed at [MEASURED] °C, against our mark of 50. Core ran for [MEASURED] hours unplugged at full brightness.
+> stayed at [MEASURED] °C, against our mark of 50. Core ran for [MEASURED] hours on its cells at full brightness.
 > All the tests, the marks and the figures are on the campaign page from the 27th.
 >
 > We're in Milan this week. [If you're there: where to find us.]
@@ -82,7 +82,7 @@ The goal needs about 110 backers. Kickstarter's figure is that **32% of pre-laun
 > | Core | $650, the first 40 | $695 | $750 |
 > | Hemisphere | $1,050, the first 30 | $1,120 | $1,200 |
 >
-> And eight of each lamp in each colour, numbered and signed: $1,100 and $1,700. Pledges of $125 or more can be paid
+> And eight of each lamp in each color, numbered and signed: $1,100 and $1,700. Pledges of $125 or more can be paid
 > in three parts. Shipping in the US only.
 >
 > [Button: Follow, to be told the minute it opens]
@@ -117,6 +117,6 @@ a project's visibility on Kickstarter, and backers back what others back (est., 
 
 **Rules for the month:**
 - **Every update has a photograph of something real.** No renders, even in updates.
-- **No stretch goals that change the product.** A colour or an add-on, only once its cost is known.
+- **No stretch goals that change the product.** A color or an add-on, only once its cost is known.
 - **Answer every comment within a day.**
 - **Late pledges stay open after the end** (switched on in the draft), and the site takes orders after that.

@@ -1,10 +1,10 @@
 """Session 00: the record's budget at 300 and 500, the price, and break-even.
 
 Run: python3 budget.py > BUDGET.md. Every figure is est. unless a source is named; sources were read 2026-10-31.
-  Precision Record Pressing, precisionpressing.com/pricing: translucent colour, standard weight, all in (DMM cutting,
+  Precision Record Pressing, precisionpressing.com/pricing: translucent color, standard weight, all in (DMM cutting,
     plating, 5 test pressings, full-colour jacket and labels, poly sleeves, assembly, shrink): 300 $2,396, 500 $3,067.
     180 g extra not published.
-  United Record Pressing, customers.urpressing.com/180g.php: item prices (180 g $1.96, colour +$0.69, setup $95,
+  United Record Pressing, customers.urpressing.com/180g.php: item prices (180 g $1.96, color +$0.69, setup $95,
     lacquer mastering $330, plating $290, tests $100, labels $160, shrink $0.15, 500 jackets from $695).
   Different Fur Studios (mobile: engineer $60/hr, 4 h minimum; gear $100/day; travel $25 in SF);
   Wildplum Recordings (remote: 16 tracks $800-1,200, 24 tracks $1,400-2,500); House Call ($300 a song mixing, SoundBetter).
@@ -22,14 +22,14 @@ def costs(n, cover_songs=0, songs=8):
     c["180 g over standard weight (not published; about $0.50 a record)"] = 0.50 * n
     c["Freight from the plant to San Francisco"] = {300: 250, 500: 350}[n]
     c["Numbering by hand: a stamp, ink, an afternoon"] = 100
-    c["Jacket: cover photograph licence and print-ready artwork"] = 500
-    c["Mechanical licences (8 songs, own or covers, 13.1 c each a copy; Songfile fees on covers)"] = songs * 0.131 * n + sum(16 if i < 5 else 14 for i in range(cover_songs))
+    c["Jacket: cover photograph license and print-ready artwork"] = 500
+    c["Mechanical licenses (8 songs, own or covers, 13.1 c each a copy; Songfile fees on covers)"] = songs * 0.131 * n + sum(16 if i < 5 else 14 for i in range(cover_songs))
     c["The artist's fee for the night (a trio; not recouped)"] = 1500
     sub = sum(c.values())
     c["Contingency, 10%"] = 0.10 * sub
     return c
 
-PRICE = 40           # IDEAS.md (a): about $40 is typical for a numbered coloured pressing (est.)
+PRICE = 40           # IDEAS.md (a): about $40 is typical for a numbered colored pressing (est.)
 FEES = 0.03          # card processing on direct sales (est.)
 ROYALTY_B = 6        # option B in RIGHTS.md: $6 an LP sold
 ARTIST_COPIES = 25

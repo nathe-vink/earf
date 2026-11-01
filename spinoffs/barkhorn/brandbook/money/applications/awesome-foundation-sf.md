@@ -22,15 +22,15 @@ free, but EARF is a company).
 
 From 19 January 2027 we plan to turn a vacant storefront in downtown San Francisco into a free listening room for eight weeks: a pair of hand-built horn loudspeakers, a wall of records and six chairs, open Thursday to Sunday, 1 to 8 pm. Anyone can walk in off the street and sit with a record start to finish, on a system most people never get to hear.
 
-The room runs on a small ritual. Everyone who comes in is handed a coin, cut from tinted cast acrylic in one of eight colours. Hand it over with the name of a song, and it drops into a clear column beside the turntable. The column is the queue: you can see how long the wait is, and when your coin reaches the bottom, your song plays for the whole room. One coin, one song. Keep the coin if you like.
+The room runs on a small ritual. Everyone who comes in is handed a coin, cut from tinted cast acrylic in one of eight colors. Hand it over with the name of a song, and it drops into a clear column beside the turntable. The column is the queue: you can see how long the wait is, and when your coin reaches the bottom, your song plays for the whole room. One coin, one song. Keep the coin if you like.
 
-I design the speakers, lamps and record player in the room, in tinted acrylic, under the name EARF. This is their first public outing, and the room opens in FOG Design+Art week, when the city's design world is out. But the room is free and for anyone: commuters, neighbours, kids who have only heard music through earbuds. Once a week we play one album, start to finish, with no talking, and anyone can take a chair.
+I design the speakers, lamps and record player in the room, in tinted acrylic, under the name EARF. This is their first public outing, and the room opens in FOG Design+Art week, when the city's design world is out. But the room is free and for anyone: commuters, neighbors, kids who have only heard music through earbuds. Once a week we play one album, start to finish, with no talking, and anyone can take a chair.
 
-The storefront comes through the city's Vacant to Vibrant programme, so the room also puts life back into an empty shopfront for two months.
+The storefront comes through the city's Vacant to Vibrant program, so the room also puts life back into an empty shopfront for two months.
 
 **How will you use the money?** * (500 characters; this answer: 250)
 
-$1,000 pays for the coins: about 200 laser-cut acrylic coins in the eight colours, engraved and polished (about $5 each), handed free to everyone who walks in over the eight weeks. Every coin that leaves the room is a small piece of it someone keeps.
+$1,000 pays for the coins: about 200 laser-cut acrylic coins in the eight colors, engraved and polished (about $5 each), handed free to everyone who walks in over the eight weeks. Every coin that leaves the room is a small piece of it someone keeps.
 
 **Tell us a little about yourself** * (500 characters; this answer: 264)
 

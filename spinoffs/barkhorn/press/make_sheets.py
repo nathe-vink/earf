@@ -14,15 +14,15 @@ STANDING = ('In development and not yet for sale. Every picture is a render unti
             'design figures; measured ones follow with the first pair. Prices are set at launch.')
 
 SHEETS = [
-    ('company', 'EARF', 'The company', 'Hi-fi and light, cast in tinted acrylic, in eight colours from Ember to Smoke.',
+    ('company', 'EARF', 'The company', 'Hi-fi and light, cast in tinted acrylic, in eight colors from Ember to Smoke.',
      'lineup.jpg',
      'EARF is a San Francisco maker of hi-fi and lighting in cast acrylic, tinted all the way through. Every product comes '
-     'in the same eight colours, from Ember to Smoke, so a room can be one colour or three. Each is named for a layer of '
-     'the Earth. Cast acrylic carries light to its edges, so a lamp underneath fills a whole cabinet with colour, and a '
+     'in the same eight colors, from Ember to Smoke, so a room can be one color or three. Each is named for a layer of '
+     'the Earth. Cast acrylic carries light to its edges, so a lamp underneath fills a whole cabinet with color, and a '
      'wall 20 mm thick shows what is inside it.',
-     [('Where', 'San Francisco, California'), ('Site', 'earf.world'), ('Enquiries', 'hello@earf.world; trade and stockists the same'),
+     [('Where', 'San Francisco, California'), ('Site', 'earf.world'), ('Inquiries', 'hello@earf.world; trade and stockists the same'),
       ('Products', 'Tropos, a powered horn loudspeaker · Hemisphere, a pendant · Core, a table lamp · Mantle, a record player'),
-      ('Colours', '01 Ember · 02 Dust · 03 Acid · 04 Poison · 05 Ice · 06 Haze · 07 Fog · 08 Smoke'),
+      ('Colors', '01 Ember · 02 Dust · 03 Acid · 04 Poison · 05 Ice · 06 Haze · 07 Fog · 08 Smoke'),
       ('Sells', 'Made to order; prices set at launch'),
       ('Where it stands', 'Tropos is drawn for making, part by part: more than eighty parts, each with its fabrication drawing. '
        'The horn and the bass were worked out by simulation before any acrylic was cut. Next, the first pair, built as '
@@ -38,22 +38,22 @@ SHEETS = [
       ('Horn driver', 'B&C DE1085TN, 2-inch compression driver'), ('Amplifier', 'Hypex FusionAmp FA122, built in: two channels of 125 W, crossed at 1 kHz in its DSP'),
       ('Bass', 'To about 51 Hz at −3 dB, before the room adds its own; ports tuned to 38 Hz'), ('Loudness', 'Up to about 115 dB at 1 m, each'),
       ('Inputs', 'XLR (and a link out), RCA, AES, S/PDIF coaxial and optical; USB to set it up'),
-      ('Lining', 'Polyester batts in white voile'), ('Colours', 'All eight; the cover cloth matched to each')]),
-    ('hemisphere', 'Hemisphere', 'Pendant lamp', 'A quarter turn takes its shade off, and another puts a new colour on.',
+      ('Lining', 'Polyester batts in white voile'), ('Colors', 'All eight; the cover cloth matched to each')]),
+    ('hemisphere', 'Hemisphere', 'Pendant lamp', 'A quarter turn takes its shade off, and another puts a new color on.',
      'lamp-dome.jpg',
-     'A pendant in the speakers’ acrylic, frosted within, so the colour glows and the source never shows. Hung low over '
-     'the bar. The shade comes off by hand to wash or to change colour. The name: half a globe, hung mouth down.',
+     'A pendant in the speakers’ acrylic, frosted within, so the color glows and the source never shows. Hung low over '
+     'the bar. The shade comes off by hand to wash or to change color. The name: half a globe, hung mouth down.',
      [('Size', '200 mm across'), ('Shade', 'Cast acrylic in three layers, tinted, with a frosted layer between'),
-      ('Light', '2700 K, CRI 90, its source shielded inside the hub'), ('Fitting', 'Black anodised aluminium, with a quarter-turn catch'),
+      ('Light', '2700 K, CRI 90, its source shielded inside the hub'), ('Fitting', 'Black anodized aluminum, with a quarter-turn catch'),
       ('Hanging', 'A 600 mm drop as standard, cut to length; a black acrylic canopy 150 mm across'),
-      ('Mains', '120 V, dimmable; listing to UL 1598 to follow'), ('Shades', 'In all eight colours, sold singly')]),
-    ('core', 'Core', 'Table lamp', 'Plugged in or not.', 'lamp-orb.jpg',
-     'A ball of tinted acrylic sitting low in a black acrylic base. Plugged in, it stays put; unplugged, it goes where the '
-     'conversation is. When the cells tire, you change the cells, not the lamp. The name: the glowing centre.',
+      ('Mains', '120 V, dimmable; listing to UL 1598 to follow'), ('Shades', 'In all eight colors, sold singly')]),
+    ('core', 'Core', 'Table lamp', 'Goes where the conversation is.', 'lamp-orb.jpg',
+     'A ball of tinted acrylic sitting low in a black acrylic base. Cordless, it goes where the '
+     'conversation is. When the cells tire, you change the cells, not the lamp. The name: the glowing center.',
      [('Size', '160 mm ball, 180 mm tall'), ('Weight', 'About 1.5 kg'), ('Light', '2200 to 2700 K, warmer as it dims'),
       ('Control', 'Touch the black ring: tap to switch, hold to dim'),
-      ('Power', 'USB-C, cable and adapter included; about five hours cordless at full brightness, longer dimmed, on cells you can replace yourself'),
-      ('Rating', 'Designed to meet IP44, for terraces and spilt drinks'), ('Shades', 'In all eight colours, sold singly')]),
+      ('Power', 'Cordless: about five hours at full brightness, longer dimmed, on cells you can replace yourself'),
+      ('Rating', 'Designed to meet IP44, for terraces and spilled drinks'), ('Shades', 'In all eight colors, sold singly')]),
     ('mantle', 'Mantle', 'Record player', 'A record player that floats on its own light.', 'tt-amber-studio.jpg',
      'Its tinted plinth floats 40 mm over a base that glows at its edge. The motor stands apart in a pod of its own, on '
      'soft feet, so its hum stays out of the plinth, and the phono stage is built in. The lid’s hinges sit on brass '

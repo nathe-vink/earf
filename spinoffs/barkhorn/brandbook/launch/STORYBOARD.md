@@ -4,13 +4,13 @@ For the debut invitation's email, the site and the feed. Built by `teaser.py` fr
 brand's type: `out/earf-teaser-16x9.mp4` (1920 × 1080, about 5 MB) and `out/earf-teaser-4x5.mp4` (1080 × 1350, about
 4 MB), 25 fps, H.264. The board: `out/earf-teaser-storyboard.jpg`; one still per beat in `out/teaser-*-beat*.jpg`.
 
-**Sound: silent. The music is a placeholder.** A licensed track to be chosen and cleared (a sync licence for the
+**Sound: silent. The music is a placeholder.** A licensed track to be chosen and cleared (a sync license for the
 recording and the composition) before it runs anywhere with sound. Brief for the track: a single slow phrase, warm,
 analogue, no vocal, that lands its last note on the end card at 21.5 s. Until then, it runs silent with on-screen type.
 
 | Beat | Time | Picture | Move | Type |
 |---|---|---|---|---|
-| 1 | 0.0–3.2 s | Tropos in Ember alone in the dark (`red-studio.jpg`) | fade up from black, push in 10% | EARF · San Francisco; "Cast in colour, all the way through." |
+| 1 | 0.0–3.2 s | Tropos in Ember alone in the dark (`red-studio.jpg`) | fade up from black, push in 10% | EARF · San Francisco; "Cast in color, all the way through." |
 | 2 | 3.0–7.7 s | The horn turning through 360° (`turn-red.jpg`, 24 path-traced frames) | stepped, like a turntable photo series | Tropos · the horn, formed from its own acrylic; "The oldest amplifier is a shape." |
 | 3 | 7.5–11.7 s | The eight lit from below on a concrete wall (`facade.jpg`) | a slow pan left to right | "Put a light under it." |
 | 4 | 11.5–15.7 s | The eight tints in their elements (`*-habitat.jpg`) | a cut every half second, a slight push on each | 01 Ember … 08 Smoke |

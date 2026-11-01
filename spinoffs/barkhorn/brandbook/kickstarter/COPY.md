@@ -13,10 +13,10 @@ Placeholders stay in brackets.
 
 ## The pre-launch page
 
-**Title (60 characters at most):** EARF: two lamps in tinted cast acrylic, in eight colours
+**Title (60 characters at most):** EARF: two lamps in tinted cast acrylic, in eight colors
 
 **Subtitle (135 at most):** Core, a table lamp that goes cordless when you do. Hemisphere, a pendant whose shade
-changes colour with a quarter turn.
+changes color with a quarter turn.
 
 **Category:** Design › Product Design. **Location:** San Francisco, CA.
 
@@ -25,14 +25,14 @@ February 2027.*
 
 **The short text (the page allows a little):**
 
-> Two lamps, cast in acrylic tinted all the way through, in the same eight colours as our loudspeakers: Ember, Dust,
+> Two lamps, cast in acrylic tinted all the way through, in the same eight colors as our loudspeakers: Ember, Dust,
 > Acid, Poison, Ice, Haze, Fog and Smoke.
 >
-> **Core** is a ball of tinted acrylic sitting low on a black base. Plugged in, it stays put; unplugged, it goes where
-> the conversation is.
+> **Core** is a ball of tinted acrylic sitting low on a black base. Cordless, it goes where the
+> conversation is.
 >
 > **Hemisphere** is half a globe, hung mouth down, frosted within. A quarter turn takes its shade off, and another puts a
-> new colour on.
+> new color on.
 >
 > Both are working. Both are made to order, in San Francisco, starting with this run. Follow the project, and we'll
 > tell you the morning it opens. The first backers get the early-bird price.
@@ -49,8 +49,8 @@ February 2027.*
 
 **Something in the air. And on the table.**
 
-EARF makes hi-fi and light in cast acrylic, tinted all the way through. Everything comes in the same eight colours,
-from Ember to Smoke, so a room can be one colour, or three. Our first product is a horn loudspeaker, Tropos. These are
+EARF makes hi-fi and light in cast acrylic, tinted all the way through. Everything comes in the same eight colors,
+from Ember to Smoke, so a room can be one color, or three. Our first product is a horn loudspeaker, Tropos. These are
 the two lamps that go with it, and they are the first things we're making in a run.
 
 **Core.** A 160 mm ball of tinted acrylic on a black acrylic base, 180 mm tall.
@@ -58,27 +58,27 @@ the two lamps that go with it, and they are the first things we're making in a r
 - **The control:** touch the black ring. Tap to switch it on or off; hold to dim.
 - **Power:** cordless. About five hours at full brightness, longer dimmed, on cells you can replace yourself.
   [RECHARGING: the lamps lane is redesigning it (owner, 2026-10-31); fill in from its design.]
-- **Outdoors:** designed to meet IP44, for terraces and spilt drinks.
+- **Outdoors:** designed to meet IP44, for terraces and spilled drinks.
 
 **Hemisphere.** A pendant 200 mm across, in three layers of cast acrylic:
 - a tinted shell, a frosted layer between, and a tinted skin;
-- the light source, 2700 K at CRI 90, shielded inside the hub, so you see the colour and never the LED;
-- a quarter-turn catch, so the shade comes off to wash, or to swap for another colour.
+- the light source, 2700 K at CRI 90, shielded inside the hub, so you see the color and never the LED;
+- a quarter-turn catch, so the shade comes off to wash, or to swap for another color.
 
 **Image block** (all photographs of the prototypes or the samples):
-1. Core lit on a table, then unplugged on a terrace step. *Prototype.*
+1. Core lit on a table, then carried to a terrace step. *Prototype.*
 2. A hand on Core's ring, dimming it. *Prototype.*
 3. Hemisphere, a quarter turn, the shade off in a hand. *Prototype.*
 4. The eight tints as cast samples, lit from behind. *Samples of the sheet.*
 5. The drawing sheets: Hemisphere's section, Core's exploded view. *Drawings.*
 
-**Why acrylic.** Cast acrylic tinted through carries light to its edges. It's the colour all the way in, so there's
+**Why acrylic.** Cast acrylic tinted through carries light to its edges. It's the color all the way in, so there's
 nothing painted to chip. A fine scratch polishes out.
 
 ### What you get
 
 [The reward table from `README.md`, set as Kickstarter rewards, each with:]
-- **Includes:** the lamp, in the tint you choose after the campaign. Core comes with its cells, cable and adapter;
+- **Includes:** the lamp, in the tint you choose after the campaign. Core comes with its cells [RECHARGING: from the lamps lane’s redesign];
   Hemisphere with its cord and canopy.
 - **Estimated delivery:** Core, October 2027. Hemisphere, November 2027.
 - **Ships to:** the United States only.
@@ -91,7 +91,7 @@ They are made first and shipped first. When a tint's eight are gone, they're gon
 This is our first production run. We have not made lamps before. We've made the drawings, the first articles and the
 tests, and we've written down every one (Kickstarter asks, and you should too).
 
-- **The shades and the ball** are formed from cast sheet over aluminium moulds, by [the former], then trimmed, bonded
+- **The shades and the ball** are formed from cast sheet over aluminum molds, by [the former], then trimmed, bonded
   and polished.
 - **The metal and acrylic fittings** are turned by [the machine shop].
 - **Core's board** is made and assembled by [the board house], to our design.
@@ -134,11 +134,11 @@ We'll post an update at every step, with photographs of the step.
 > listing for each. The labs' lead times are 8 to 16 weeks. If a test asks for a change, we'll make it, test again,
 > and tell you what changed and why. A lamp ships late before it ships unlisted.
 >
-> **The colours.** Cast acrylic is tinted by the mill, batch by batch. We match each batch to our eight references, and
+> **The colors.** Cast acrylic is tinted by the mill, batch by batch. We match each batch to our eight references, and
 > the run is cast to match. Two lamps a month apart can differ by a shade, as dyed glass does. Your tint is the tint
 > in the photographs; if it isn't, we'll replace it. [OWNER TO CONFIRM THIS PROMISE]
 >
-> **The moulds.** The shades and the ball are formed over aluminium moulds. Moulds wear, and the budget has a second
+> **The molds.** The shades and the ball are formed over aluminum molds. Molds wear, and the budget has a second
 > one for Hemisphere's shell.
 >
 > **Shipping.** Core's cells travel packed beside the lamp, by ground: lithium cells are restricted in the air. That,
@@ -159,10 +159,10 @@ goal makes the run longer and each lamp a little cheaper to make.
 
 **Are these photographs?**
 Yes. Every picture on this page is a photograph of a working prototype or a cast sample, or a drawing, and each is
-labelled. Earlier pictures of EARF on our site and elsewhere were renders, made before anything was built. Kickstarter
+labeled. Earlier pictures of EARF on our site and elsewhere were renders, made before anything was built. Kickstarter
 doesn't allow photorealistic renders, and we agree with the rule.
 
-**Which colours?**
+**Which colors?**
 Eight: Ember, Dust, Acid, Poison, Ice, Haze, Fog and Smoke. You choose in the survey after the campaign, so you can see
 the photographs of every tint first.
 
@@ -181,7 +181,7 @@ Yes. It's designed to meet IP44: rain on a terrace, a drink over it. Not a pool,
 hook; the hardwired version needs an electrician and a junction box.] It's dimmable on common wall dimmers: we test
 against a Lutron Diva CL, a Leviton Decora SureSlide and a Lutron Caséta.
 
-**Can I change Hemisphere's colour later?**
+**Can I change Hemisphere's color later?**
 Yes. A quarter turn takes the shade off and another puts a new one on. Spare shades come in all eight tints.
 
 **How do I clean them?**

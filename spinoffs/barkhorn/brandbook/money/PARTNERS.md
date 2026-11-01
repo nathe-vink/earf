@@ -6,7 +6,7 @@
 Brand lane, r47 (2026-10-31). **Drafts only: nothing has been sent and nobody contacted.** The brief is
 `out/earf-debut-partner-brief.pdf` (three US Letter pages, from `partner-brief.html`; page 3 lists the candidates and
 is internal: remove it before sending). Values marked est. are the funding research's estimates (r46-owner-notes
-97ca003e, `R2-funding.md` §4.8). Contact routes were seen on each organisation's own site on 31 October 2026.
+97ca003e, `R2-funding.md` §4.8). Contact routes were seen on each organization's own site on 31 October 2026.
 
 The facts every email rests on: the debut night, **Tuesday 19 January 2027**, is the firm thing. The eight-week pop-up after it
 is planned, not funded, and now follows in February and March: Vacant to Vibrant's matching takes 2 to 6 months, so
@@ -14,7 +14,7 @@ the debut itself moves to a hired or lent room at or near Fort Mason in FOG week
 plan pays for the pop-up with the Vacant to Vibrant grant and free rent, partners like these, and deposits
 (`planet/r42/POPUP.md`); the investor deck's $50,000 covers the prototypes and a $4,000 debut night
 only. So the emails promise the night, describe the room as planned, and say plainly that a partner helps make it happen; SF Art Week
-runs **16–24 January**, FOG Design+Art **21–24 January** at Fort Mason; the guests are the 48 organisations in
+runs **16–24 January**, FOG Design+Art **21–24 January** at Fort Mason; the guests are the 48 organizations in
 `../launch/INVITE-LIST.md` and the press in `../launch/MEDIA-PLAN.md`.
 
 ## The candidates
@@ -23,7 +23,7 @@ runs **16–24 January**, FOG Design+Art **21–24 January** at Fort Mason; the 
 |---|---|---|---|
 | Hotel | The Battery (Jackson Square) | Members are the creative and tech crowd Planet EARF wants; near the galleries | press@thebatterysf.com |
 | Hotel | Palihotel San Francisco (Union Square) | Design-driven; lobby lamps, a listening corner, rooms for FOG guests | events@palihotelsf.com |
-| Hotel | Hotel Emblem (Union Square) | A Beat-generation hotel with an arts programme | sales@hotelemblem.com |
+| Hotel | Hotel Emblem (Union Square) | A Beat-generation hotel with an arts program | sales@hotelemblem.com |
 | Hotel | San Francisco Proper (Mid-Market) | Design-led; its group's press notes a feature on hotels for music lovers | proper@autumncommunications.com (its press agency) |
 | Drinks | St. George Spirits (Alameda) | The Bay's distillery, with events of its own; says it isn't taking donation requests, so pitch it as marketing | Contact form, "Marketing inquiry" |
 | Drinks | Ghia (non-alcoholic) | Design-led and colour-saturated; no tied-house question | partnerships@drinkghia.com |
@@ -32,7 +32,7 @@ runs **16–24 January**, FOG Design+Art **21–24 January** at Fort Mason; the 
 | Records | Stranded Records + Superior Viaduct | A curated shop and its reissue label: crates and a Session on a release | info@strandedrecords.com; press@superiorviaduct.com |
 | Records | Dark Entries Records | The city's archival label, with a DJ following | Contact form on its Bandcamp page |
 | Records | Light in the Attic | Reissues that suit a listening session | press@lightintheattic.net |
-| Records | Craft Recordings | Fantasy's Bay Area jazz catalogue; audiophile reissues | info@craftrecordings.com |
+| Records | Craft Recordings | Fantasy's Bay Area jazz catalog; audiophile reissues | info@craftrecordings.com |
 
 **Drinks and the law.** California's tied-house rules bar alcohol makers and wholesalers from furnishing money or things
 of value to on-sale licensees, with narrow exceptions (B&P §25500). Structure any spirits partnership with counsel; serve
@@ -47,7 +47,7 @@ Park Police or other permit, the zero-proof partners (Ghia, The New Bar) are the
 
 Dear [Name / team at the hotel],
 
-I'm [Your name], and I make EARF: hi-fi and light in cast acrylic, tinted all the way through, in eight colours, here in
+I'm [Your name], and I make EARF: hi-fi and light in cast acrylic, tinted all the way through, in eight colors, here in
 San Francisco. On Tuesday 19 January our first pair of Tropos, a horn loudspeaker, plays for the first time, at a
 debut night near Fort Mason in FOG week. After it comes a listening room we plan to open in February and March.
 
@@ -60,7 +60,7 @@ the invitation, host the night's Session (one album, start to finish, under your
 Beyond the room, rooms for a few visiting guests and press, or a contribution of $5,000 to $15,000, would also help
 make the February room happen. Later, if it suits you, a listening suite fitted by EARF.
 
-The brief is attached: two pages. Could we talk for twenty minutes in the next fortnight?
+The brief is attached: two pages. Could we talk for twenty minutes in the next two weeks?
 
 With best wishes,
 [Your name]
@@ -70,11 +70,11 @@ EARF · earf.world · [contact line]
 
 ## Email 2: a drinks brand
 
-**Subject:** A drink for each of eight colours, 19 January
+**Subject:** A drink for each of eight colors, 19 January
 
 Dear [Name / partnerships team at the brand],
 
-I'm [Your name], and I make EARF: hi-fi and light in cast acrylic, coloured all the way through, in eight tints from
+I'm [Your name], and I make EARF: hi-fi and light in cast acrylic, colored all the way through, in eight tints from
 Ember to Smoke. On Tuesday 19 January, in FOG Design+Art week, the first pair of our horn loudspeaker plays for the first
 time, at a debut night near Fort Mason in FOG week; after it, a listening room we plan to open in February and March.
 

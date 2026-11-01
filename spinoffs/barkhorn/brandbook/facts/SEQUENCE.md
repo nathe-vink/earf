@@ -28,13 +28,13 @@ before Easter, 28 March 2027, when many people travel.)
 
 - **Lamps and Mantle:**
   - working and **photographable by mid-February** (lamps `first-articles.md`, f5426f0f);
-  - the January dates no longer press on the moulds' pre-Christmas window, so the lamps gain slack.
+  - the January dates no longer press on the molds' pre-Christmas window, so the lamps gain slack.
 - **The Tropos pair** (horn lane, re-based for spring at ec252318):
   - no purchase orders before 16 November;
   - the first laminated horn about **15 January**;
   - the pair assembled about **5–12 February**, with about 5 weeks of float to 18 March;
   - a formed-horn pair about 26 February – 5 March, only just in time for 18 March;
-  - the custom deep colour lot is **not** possible for March, so the pair is in stock sheet and its captions say so.
+  - the custom deep color lot is **not** possible for March, so the pair is in stock sheet and its captions say so.
 - **The shoot and the debut.** With the debut in spring, the **studio shoot comes before it**, so the debut night is
   photographed for itself, not as the first pictures (`photo/PRODUCT-SHOOT.md`).
 - **Kickstarter allows no photorealistic renders** (`kickstarter/README.md`, the hardware rules, read 31 Oct 2026). So
@@ -55,7 +55,7 @@ before Easter, 28 March 2027, when many people travel.)
 | **Thu 18 Mar** | **The debut**, with **Session 00** opening it (recorded) | Four weeks after the shoot |
 | **Fri 19 Mar** (or Mon 22 Mar) | **The press release** and the online lift, with the studio photographs and the night's. The media plan's window was 22–29 March: lift on the morning after the debut, or hold to Monday 22 March to stay inside it (one embargo time either way) | `press/releases/RELEASE-MARCH.md` |
 | Late Mar | **Partner packs** go: Klipsch (for Milan), Ace; Pro-Ject a little later (for Vienna) | `partners/` |
-| From the debut | **The waiting list**, and the Tropos first-run programme once counsel has set it: **no deposits before counsel and a company** | `money/founding-terms.html` |
+| From the debut | **The waiting list**, and the Tropos first-run program once counsel has set it: **no deposits before counsel and a company** | `money/founding-terms.html` |
 | About 8 Apr | Session 00's master to the plant (3 weeks after the night) | `sessions/README.md` |
 | 12–18 Apr | Milan: meet Klipsch if it answered; Euroluce for the lamp makers | |
 | **Tue 27 Apr – Thu 27 May** | **The Kickstarter**: the lamps. **27 April still works** (ten weeks after the photographs, about five and a half after the debut's press) | `kickstarter/README.md` |
@@ -75,7 +75,7 @@ before Easter, 28 March 2027, when many people travel.)
 | Early Apr | Invitations; the alcohol permit by **18 Mar** if at Fort Mason | |
 | **Thu 29 Apr** | **The debut** with **Session 00** | |
 | Fri 30 Apr | The press release and the online lift (outside the media plan's 22–29 March window; re-plan it) | |
-| **Kickstarter** | **27 April no longer works**: it would open two days before the debut. **Move it to Tue 11 May – Thu 10 June** (est.), after the debut and Vienna, so the team isn't at a launch, a debut and a fair in one fortnight | |
+| **Kickstarter** | **27 April no longer works**: it would open two days before the debut. **Move it to Tue 11 May – Thu 10 June** (est.), after the debut and Vienna, so the team isn't at a launch, a debut and a fair in two weeks | |
 | 6–9 May | HIGH END Vienna, **a week after the debut** | |
 | Jul–Aug (est.) | Session 00's records | |
 
@@ -116,4 +116,4 @@ before Easter, 28 March 2027, when many people travel.)
 
 **The risk:** the Tropos pair is assembled about 5–12 February (horn lane ec252318) and must be measured by early March. The shoot holds; if the pair slips, only its photographs move a week (the fallback above). If the pair slips
 past February, 29 April buys a month. But it stacks the debut, a re-dated Kickstarter (11 May – 10 June), Vienna and
-the press into one fortnight, and it misses the planned press window.
+the press into two weeks, and it misses the planned press window.

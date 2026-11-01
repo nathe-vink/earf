@@ -13,26 +13,26 @@ A one-page layout of the same text is `release-march.html` → `out/earf-release
 
 **FOR RELEASE: [DATE], [TIME] PT** · *Embargoed until then*
 
-# EARF: hi-fi and light, cast in tinted acrylic, in eight colours
+# EARF: hi-fi and light, cast in tinted acrylic, in eight colors
 
 **San Francisco, [DATE].** EARF makes a horn loudspeaker, two lamps and a record player in cast acrylic tinted all
-the way through, in the same eight colours: Ember, Dust, Acid, Poison, Ice, Haze, Fog and Smoke. A room can be one
-colour or three. First shown in San Francisco on 19 January, during FOG Design+Art week, the four pieces are made to
+the way through, in the same eight colors: Ember, Dust, Acid, Poison, Ice, Haze, Fog and Smoke. A room can be one
+color or three. First shown in San Francisco on 19 January, during FOG Design+Art week, the four pieces are made to
 order in San Francisco [OWNER: confirm "in San Francisco" once the shops are chosen].
 
 **Tropos** is a powered horn loudspeaker, 1.3 m tall:
-- **The cabinet** is 20 mm cast acrylic, coloured through.
+- **The cabinet** is 20 mm cast acrylic, colored through.
 - **The horn** is made from the cabinet's own tinted acrylic. The first pair's horn is built up from 22 layers of
   tinted sheet, stacked and shaped, so its edges read like strata in a cliff face. [OWNER: say whether production keeps
   the stacked horn or forms it over a tool; until then, describe only the first pair's.]
 - **Above 1 kHz** a 2-inch compression driver plays through the horn; **below**, a 15-inch woofer. Each has its own
   channel of the amplifier inside.
-- **A lamp underneath** fills the whole cabinet with colour.
+- **A lamp underneath** fills the whole cabinet with color.
 
 **Hemisphere** is a pendant, half a globe hung mouth down, in three layers of acrylic with a frosted layer between. A
-quarter turn takes its shade off, and another puts a new colour on.
+quarter turn takes its shade off, and another puts a new color on.
 
-**Core** is a table lamp, a ball of tinted acrylic on a black base. Plugged in, it stays put; unplugged, it runs about
+**Core** is a table lamp, a ball of tinted acrylic on a black base. Cordless, it runs about
 five hours and goes where the conversation is.
 
 **Mantle** is a record player whose tinted plinth floats 40 mm above a base that glows at its edge, its motor in a
@@ -51,7 +51,7 @@ Each product is named for a layer of the Earth.
   for sale, and one coin buys one song. [OWNER: confirm Planet EARF may be named publicly; it isn't on the site yet.]
 
 **Availability.**
-- Made to order, in eight colours.
+- Made to order, in eight colors.
 - **Tropos:** [PRICE] a pair. **Mantle:** [PRICE]. **Hemisphere:** [PRICE]. **Core:** [PRICE].
 - **The lamps** are on Kickstarter from [DATE] [only if the campaign is confirmed].
 - **The Founding Hundred:** the first hundred pairs of Tropos are numbered [OWNER and COUNSEL: the site's draft says
@@ -68,9 +68,9 @@ Each product is named for a layer of the Earth.
   [PHOTOGRAPHER].
 
 **About EARF.** EARF is a San Francisco maker of hi-fi and lighting in cast acrylic, tinted all the way through. Every
-product comes in the same eight colours, from Ember to Smoke. Tropos, the flagship, is a powered horn loudspeaker
-whose cabinet and horn are both cast in the tint. Hemisphere, a pendant, and Core, a table lamp that runs plugged in or
-not, light the room in the same acrylic. Mantle is a record player whose plinth floats over a base lit at its edge.
+product comes in the same eight colors, from Ember to Smoke. Tropos, the flagship, is a powered horn loudspeaker
+whose cabinet and horn are both cast in the tint. Hemisphere, a pendant, and Core, a cordless table lamp, light the
+room in the same acrylic. Mantle is a record player whose plinth floats over a base lit at its edge.
 Each piece is made to order. earf.world
 
 **Media contact:** [NAME], [EMAIL], [PHONE]. Interviews, loans for review and visits to the room by arrangement.

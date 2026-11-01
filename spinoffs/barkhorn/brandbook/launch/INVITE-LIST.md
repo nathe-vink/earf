@@ -1,8 +1,8 @@
 # The debut invitation list: Tuesday 19 January 2027
 
 Brand lane, r47 (2026-10-31). **Preparation only: nothing has been sent, no form submitted, nobody contacted.**
-Organisations only, with their public business contact routes as published on their own sites; a person is named only
-where they are the published contact for an organisation. **[verified]**: the route was seen on the organisation's own
+Organizations only, with their public business contact routes as published on their own sites; a person is named only
+where they are the published contact for an organization. **[verified]**: the route was seen on the organization's own
 site on 31 October 2026. **[unverified]**: seen only in a third-party listing or a search result, or the site refused
 access. Compiled by two research agents from public pages; re-check each route before sending, since contacts change.
 
@@ -15,7 +15,7 @@ studios and showrooms), the hi-fi and listening-bar crowd, records, hospitality,
 All on the 2027 exhibitor list at fogfair.com/exhibitors (checked 31 October 2026). Collectible-design galleries and the
 San Francisco galleries first.
 
-| Organisation | City | Contact route | Source | Why in the room | Status |
+| Organization | City | Contact route | Source | Why in the room | Status |
 |---|---|---|---|---|---|
 | Hostler Burrows | New York / Los Angeles | info@hostlerburrows.com (LA: la@hostlerburrows.com) | hostlerburrows.com/contact | Nordic and contemporary collectible design and ceramics: a natural home for objects in tinted cast acrylic | [verified] |
 | Patrick Parrish Studio | Brooklyn | info@patrickparrish.com | patrickparrish.com/contact-us | Collectible design known for artist-made lighting and furniture; Hemisphere and Core sit in its territory | [verified] |
@@ -28,19 +28,19 @@ San Francisco galleries first.
 | Moderne Gallery | Philadelphia | info@modernegallery.com | modernegallery.com/contact | American studio furniture and craft; long-term collectors | [verified] |
 | Norr Cohan | New York | info@norrcohan.com | norrcohan.com/contact | A major contemporary gallery (formerly James Cohan); art-collector reach | [verified] |
 | GALERIE 1900-2000 (with Crèvecœur) | Paris | info@galerie1900-2000.com | galerie1900-2000.com/contact | At the border of art and design; a Paris collector network | [verified] |
-| Charles Moffett | New York | gallery@charlesmoffett.com | charlesmoffett.com/contact | A young gallery in FOCUS whose programme leans to sculpture and objects | [verified] |
+| Charles Moffett | New York | gallery@charlesmoffett.com | charlesmoffett.com/contact | A young gallery in FOCUS whose program leans to sculpture and objects | [verified] |
 | Haines | San Francisco (Fort Mason) | art@hainesgallery.com | hainesgallery.com/contact | Based at the fair's own venue; a core local collector base | [verified] |
 | Casemore Gallery | San Francisco | info@casemoregallery.com | casemoregallery.com/contact | At Minnesota Street Project; local collectors and dealers | [verified] |
 | Jessica Silverman | San Francisco | info@jessicasilvermangallery.com (press through THIRDEYE) | jessicasilvermangallery.com/about | Central to the city's collector scene | [verified] |
 | Berggruen Gallery | San Francisco | info@berggruen.com | berggruen.com/contact | Long-established; a deep local collector list | [verified] |
-| Rebecca Camacho Presents | San Francisco | info@rebeccacamacho.com | rebeccacamacho.com/about | Jackson Square; a programme with material- and craft-led artists | [verified] |
-| Municipal Bonds | San Francisco | info@municipalbonds.art (Emily Miller, Director, the published contact) | municipalbonds.art/contact | An international programme; local and new collectors | [verified] |
+| Rebecca Camacho Presents | San Francisco | info@rebeccacamacho.com | rebeccacamacho.com/about | Jackson Square; a program with material- and craft-led artists | [verified] |
+| Municipal Bonds | San Francisco | info@municipalbonds.art (Emily Miller, Director, the published contact) | municipalbonds.art/contact | An international program; local and new collectors | [verified] |
 | LEBRETON | Monaco | No route on its own site; a third-party listing gives an address by appointment | designmiami.com/galleries/lebreton | Postwar French ceramics and artist-designed furniture | [unverified] |
 | Crèvecœur | Paris | galeriecrevecoeur.com (the site returned 503) | artbasel.com listing | Shares the booth with Galerie 1900-2000 | [unverified] |
 
 ## B. San Francisco design studios, showrooms and bodies
 
-| Organisation | Where | Contact route | Source | Why in the room | Status |
+| Organization | Where | Contact route | Source | Why in the room | Status |
 |---|---|---|---|---|---|
 | The Future Perfect | 3085 Sacramento St | "Inquire" form; the showroom's published phone; a press page | thefutureperfect.com/contact | The city's leading collectible-contemporary showroom: EARF's peers and buyers | [verified] |
 | San Francisco Design Week (Design Bay Area) | San Francisco | Contact form; press page designbayarea.org/press | sfdesignweek.org/press | The design-week organiser; its network is the city's design community (and EARF's June option) | [verified] |
@@ -57,7 +57,7 @@ San Francisco galleries first.
 
 ## C. Listening bars and hi-fi shops
 
-| Organisation | Where | Contact route | Source | Why in the room | Status |
+| Organization | Where | Contact route | Source | Why in the room | Status |
 |---|---|---|---|---|---|
 | Audio Vision SF | 1628 California St | info@audiovisionsf.com | audiovisionsf.com/pages/contact | The city's best-known high-end hi-fi shop, with its own listening events: Tropos's buyers | [verified] |
 | Music Lovers Audio | 2295 Bush St; Berkeley | info@musicloversaudio.com | musicloversaudio.com/contact | A long-running dealer with two showrooms; a first stockist conversation | [verified] |
@@ -68,24 +68,24 @@ San Francisco galleries first.
 
 ## D. Records: labels and shops
 
-| Organisation | Where | Contact route | Source | Why in the room | Status |
+| Organization | Where | Contact route | Source | Why in the room | Status |
 |---|---|---|---|---|---|
 | Stranded Records | 1055 Valencia St; Oakland | info@strandedrecords.com | strandedrecords.com/pages/contact | A serious curated shop in both cities; a partner for the room's crates | [verified] |
 | Superior Viaduct | San Francisco | press@; info@superiorviaduct.com | superiorviaduct.com/pages/contact | A reissue label with a new slate: a Session built on a release | [verified] |
 | Dark Entries Records | San Francisco | Contact form on its Bandcamp page | darkentriesrecords.bandcamp.com | The city's defining archival label, with a local DJ following | [verified] (Bandcamp) |
 | Originals Vinyl | 701 Fillmore St | Contact page; published phone | originalsvinyl.com/contact | Used vinyl and ultrasonic cleaning: customers who care how records play | [verified] |
 | 1-2-3-4 Go! Records | Oakland | Store info page; published phone | 1234gorecords.com/info | Oakland's largest selection of new records | [verified] |
-| Light in the Attic | Seattle / LA | press@lightintheattic.net | lightintheattic.net/pages/about-us | A reissue label whose catalogue suits a listening session | [verified] |
-| Craft Recordings | (Concord) | info@craftrecordings.com | craftrecordings.com/pages/contact-us | Fantasy, the Bay Area jazz catalogue, and audiophile reissues | [verified] |
+| Light in the Attic | Seattle / LA | press@lightintheattic.net | lightintheattic.net/pages/about-us | A reissue label whose catalog suits a listening session | [verified] |
+| Craft Recordings | (Concord) | info@craftrecordings.com | craftrecordings.com/pages/contact-us | Fantasy, the Bay Area jazz catalog, and audiophile reissues | [verified] |
 
 ## E. Hotels and hospitality
 
-| Organisation | Where | Contact route | Source | Why in the room | Status |
+| Organization | Where | Contact route | Source | Why in the room | Status |
 |---|---|---|---|---|---|
 | San Francisco Proper | 1100 Market St | Press through its agency, proper@autumncommunications.com; events page | properhotel.com/san-francisco | A design-led hotel; its group's press notes a piece on hotels for music lovers | [verified] |
 | Palihotel San Francisco (Palisociety) | 417 Stockton St | events@palihotelsf.com; info@palisociety.com | palisociety.com/contact-us | A design-driven group: lamps in a lobby, a listening corner | [verified] |
 | The Battery | 717 Battery St | press@thebatterysf.com | thebatterysf.com/press | A members' club and hotel whose members are Planet EARF's buyers | [verified] |
-| Hotel Emblem | 562 Sutter St | sales@hotelemblem.com; contact page | hotelemblem.com | A Beat-generation hotel with an arts programme that suits records | [verified] |
+| Hotel Emblem | 562 Sutter St | sales@hotelemblem.com; contact page | hotelemblem.com | A Beat-generation hotel with an arts program that suits records | [verified] |
 | FW Hospitality (Flour + Water; partner in Trick Dog) | Mission | events@fwhospitality.com | fwhospitality.com | Design-heavy bars and dinners: collaborations around the room | [verified] |
 
 ## Not verified, closed or left out
@@ -102,5 +102,5 @@ San Francisco galleries first.
 
 ## Count
 
-48 organisations with a route: 20 galleries (18 verified), 12 studios and bodies (11 verified), 6 listening bars and
+48 organizations with a route: 20 galleries (18 verified), 12 studios and bodies (11 verified), 6 listening bars and
 hi-fi shops, 7 record labels and shops, 5 hotel and hospitality groups. The press is in `MEDIA-PLAN.md`.

@@ -31,9 +31,9 @@ important hour of the day.
 | The room at 20–30% house | low: a dim gallery | ISO 3200–6400, f/2, or the tripod | f/1.4–2, high base ISO |
 | **"Lights"**: lamps only | very low, except at the lamps | **Tripod**, ISO 1600–3200, f/2.8–4, 1/4–1 s for the room; handheld f/1.4 for people | f/1.4, high base ISO; keep the lamps from clipping |
 
-- **White balance: fixed at 2700 K for the night**, the lamps' colour. The tints must read as the tints, not as
-  something corrected toward grey.
-- **A ColorChecker** (or a grey card and a tint chip) shot once at every station before the doors, under the night's
+- **White balance: fixed at 2700 K for the night**, the lamps' color. The tints must read as the tints, not as
+  something corrected toward gray.
+- **A ColorChecker** (or a gray card and a tint chip) shot once at every station before the doors, under the night's
   light. It gives the editor a reference for each tint.
 - **The tints are the risk.** Red and blue clip first in a dark room (Ember, Ice, Haze). Expose for the brightest rim,
   and bracket the empty-room wides.
@@ -104,7 +104,7 @@ Each shot names its main use: **KS** (Kickstarter), **Press**, **Partner** (the 
 - **The artist** approves pictures of themself, as `../sessions/RIGHTS.md` provides.
 - **The room.** Commercial photography and filming are allowed in the hire contract. Ask FMCAC whether a filming permit
   applies on federal property inside a leased venue **[to ask]**.
-- **The photographer's licence** (in the booking): EARF gets a perpetual, non-exclusive licence for editorial and
+- **The photographer's license** (in the booking): EARF gets a perpetual, non-exclusive license for editorial and
   commercial use (site, Kickstarter, press, partner packs, social, print), with credit where it's practical. No
   exclusivity is needed.
 
@@ -122,5 +122,5 @@ Each shot names its main use: **KS** (Kickstarter), **Press**, **Partner** (the 
 **Captions** follow the honesty rule:
 - what the object is;
 - "prototype";
-- the tint as cast. A stock colour is named as stock (`PRODUCT-SHOOT.md`): "Hemisphere in stock red, nearest to
+- the tint as cast. A stock color is named as stock (`PRODUCT-SHOOT.md`): "Hemisphere in stock red, nearest to
   Ember. Prototype, January 2027."

@@ -16,7 +16,7 @@
 >   not used.
 > - **Wind (corrected).** Flat discs catch *more* wind than a sphere (a face-on disc's drag coefficient is about 1.2,
 >   against 0.47), so the plinth carries about 1.0–1.8 t of ballast (TECH.md). Nothing here says otherwise.
-> - **Colours.** Six discs, six colours (the House Book's). The bar lane's 2 m render is described as "rims glowing in
+> - **Colors.** Six discs, six colors (the House Book's). The bar lane's 2 m render is described as "rims glowing in
 >   the eight tints"; six discs show six of the eight unless a disc is split. The owner decides; the text says six.
 > - **No logos.** The work is entered under the owner's name. "EARF" appears nowhere in the work; the title is the
 >   owner's choice (see the end).
@@ -25,21 +25,21 @@
 
 ## The work
 
-A globe two metres across, drawn in light: an armillary sphere of the Earth, made of colour.
+A globe two meters across, drawn in light: an armillary sphere of the Earth, made of color.
 
-It is made of six discs of cast acrylic, each tinted all the way through in one colour:
+It is made of six discs of cast acrylic, each tinted all the way through in one color:
 - **Three meridians**, in green, orange and violet, stand on edge and cross at the poles.
 - **Three parallels**, in red, blue and yellow, ring them at the equator and at forty degrees north and south.
 
 The discs are slotted into one another where they cross, so the globe is open: you see through it, and through one
-colour into the next. Its axis leans 23.4 degrees, as the Earth's does.
+color into the next. Its axis leans 23.4 degrees, as the Earth's does.
 
-By day it is a piece of coloured glass the size of a small room. The sun goes through each disc and throws its colour
-on the ground, and where two discs cross the colours mix.
+By day it is a piece of colored glass the size of a small room. The sun goes through each disc and throws its color
+on the ground, and where two discs cross the colors mix.
 
 At night the rims glow. A slim line of light runs in a groove along each disc's outer edge, under a polished acrylic
-cap, so the rim shines in the disc's own colour while the faces stay dark and clear. Six lines of colour, each the circle of its disc, draw the globe in the air. One hard spot, low across the
-quay, throws the globe's shadow: rings inside rings, each in its own colour, laid over the paving and the water.
+cap, so the rim shines in the disc's own color while the faces stay dark and clear. Six lines of color, each the circle of its disc, draw the globe in the air. One hard spot, low across the
+quay, throws the globe's shadow: rings inside rings, each in its own color, laid over the paving and the water.
 
 There's no screen, no projection and no moving part. The light is steady, and the work is the material doing what it
 does: one object, drawn three times, in its rims, on the quay and in the canal.
@@ -50,14 +50,14 @@ does: one object, drawn three times, in its rims, on the quay and in the canal.
 
 [THEME: Edition 16's theme, from the artist briefing. One paragraph that reads the work through it, written once the
 theme is known. Hold to what the work is: a model of the planet you can stand inside the light of, made from one
-material in six colours.]
+material in six colors.]
 
 A globe is the oldest way of holding the whole world in front of you. Most globes are solid: a surface of countries
 with nothing inside. This one is only lines, the meridians and the parallels, the grid we drew on the planet to find
 our way around it. With the surface gone, the light is what's left, and you can look straight through the world to the
 city on the other side.
 
-Each line is its own colour, and none is the "right" one. Walk round it, and the colours in front pass over the ones
+Each line is its own color, and none is the "right" one. Walk round it, and the colors in front pass over the ones
 behind and mix, so the globe changes with every step.
 
 [OWNER: one or two sentences of your own: why a globe, and why light that comes from inside the material rather than
@@ -65,24 +65,24 @@ being shone onto it. Keep it in your voice; the jury reads this for "relation to
 
 ## How the public meets it
 
-- **From a distance.** On the canal route, the globe reads first as six coloured circles hanging in the dark, from a
+- **From a distance.** On the canal route, the globe reads first as six colored circles hanging in the dark, from a
   boat or from the far quay. Water doubles it: every rim is drawn a second time, broken up, on the canal below.
 - **Close to.** The globe stands at the waterside on a low plinth, its lowest point about 0.55 m above the ground, so
   people can walk round it and look up through it. The polished edges are lit; the faces are cool and clear.
 - **Through it.** Stand on the far side and the city appears through the discs, tinted: a bridge in yellow, a
   facade in violet. Phones will do the rest: the picture everyone takes is the city framed by the world.
-- **Its shadow.** The spot lays the globe flat on the quay in coloured rings, long and low. Walking through it puts
-  the colours on your coat, and the rings ride on the canal's surface beyond. By day, the low winter sun does the
+- **Its shadow.** The spot lays the globe flat on the quay in colored rings, long and low. Walking through it puts
+  the colors on your coat, and the rings ride on the canal's surface beyond. By day, the low winter sun does the
   same.
 - **For everyone.** It's silent and steady: no flashing, no strobe, nothing that startles. The light level is
   [to be set with the festival's technicians] for the site, so it sits among the canal's own lights rather than
   over them.
 
-[IMAGE 2, from the bar lane: the hard spot's coloured shadow on the quay and the water. A render, captioned so.]
+[IMAGE 2, from the bar lane: the hard spot's colored shadow on the quay and the water. A render, captioned so.]
 
 ## Materials and making
 
-- **The discs.** Cell-cast acrylic sheet, 25 mm thick, tinted through in six colours. Each disc is cut flat by CNC
+- **The discs.** Cell-cast acrylic sheet, 25 mm thick, tinted through in six colors. Each disc is cut flat by CNC
   (in two bonded halves where the sheet is narrower than the disc), slotted, grooved along its rim and edge-polished.
   The discs are about 485 kg together. On site they slot together on the armature, with 2 mm of play in each slot.
 - **The light.** A 24 V side-emitting LED strip, sealed to IP67, in a 6 mm groove along each rim under a polished
@@ -108,11 +108,11 @@ The work is built for an Amsterdam winter, from late November to mid-January, an
 |---|---|
 | **Rain, frost, damp** | Acrylic doesn't rust or rot, and takes up only a little water. The LEDs, their connections and the drivers are sealed to IP67; the rim grooves drain at their low points; the plinth is vented |
 | **Wind** | Flat discs catch more wind than a sphere of the same size, so the plinth is built for it: about 1.0–1.8 t of ballast for gusts of 30–40 m/s (est.), to a Dutch structural engineer's calculation for the site under Eurocode EN 1991-1-4, signed off before installation. The 25 mm discs and their slotted joints are checked for the 2–3 kN each takes face-on |
-| **Cold, damp and movement** | Acrylic moves more than metal: about 0.07 mm per metre for each degree, so a 2 m disc grows or shrinks about 1.5 mm over a 20 °C swing, and a little more as it takes up damp. The slots have 2 mm of play and the armature's clamps float, so the discs move without stress |
-| **Colour over time** | The discs are cut flat, not heat-formed, from colour-stable cast sheet. The maker's colour guarantee covers flat sheet outdoors (it doesn't cover sheet that has been formed), and two months is well within it |
+| **Cold, damp and movement** | Acrylic moves more than metal: about 0.07 mm per meter for each degree, so a 2 m disc grows or shrinks about 1.5 mm over a 20 °C swing, and a little more as it takes up damp. The slots have 2 mm of play and the armature's clamps float, so the discs move without stress |
+| **Color over time** | The discs are cut flat, not heat-formed, from colour-stable cast sheet. The maker's color guarantee covers flat sheet outdoors (it doesn't cover sheet that has been formed), and two months is well within it |
 | **Knocks and climbing** | Cast acrylic is far tougher than glass and doesn't break into shards. At 0.55 m the lowest point and the open discs invite climbing, so the work assumes a low barrier ring about 1 m out and the festival's stewarding [to agree with the festival] |
 | **Cleaning** | Water and a mild soap only, never solvents or glass sprays, which craze acrylic. A cleaning sheet goes to the festival's crew |
-| **Nuisance** | None: no sound, no smoke, no lasers, no flashing. The light points inward and along the discs, not out at the windows of the neighbours |
+| **Nuisance** | None: no sound, no smoke, no lasers, no flashing. The light points inward and along the discs, not out at the windows of the neighbors |
 | **Fire** | Acrylic is combustible. The LEDs run cool, the drivers are fused and outside the acrylic, and the electrical work is inspected to the festival's technical rules |
 
 **Installing and removing.** The work arrives in three crates: the six discs flat in one A-frame crate (2.3 × 2.3 ×
@@ -127,7 +127,7 @@ slotted on, the light commissioned at dusk. Removal takes half a day, and leaves
 | Title | [TITLE] |
 | Maker | [OWNER: full name], San Francisco |
 | Size | About 2 m across; the lowest point 0.55 m above the ground on a plinth 1.5 m across. About 485 kg in 25 mm sheet, plus 1.0–1.8 t of ballast in all (est.) |
-| Material | Cell-cast acrylic, 25 mm, tinted through in six colours; a blackened steel plinth, ballasted |
+| Material | Cell-cast acrylic, 25 mm, tinted through in six colors; a blackened steel plinth, ballasted |
 | Light | 24 V rim-lit LED strip (IP67) and one hard spot for the shadow; about 0.4–0.6 kW connected, about 3.5 kWh a night |
 | New or existing | New: made for the festival, at 2 m. A [1.25] m version is [planned / built] [OWNER] |
 | Budget | About €28,000–60,000 (est.) for production, transport, installation and removal, with 15% contingency; low if made in the Netherlands. The artist fee is separate |
@@ -136,6 +136,6 @@ slotted on, the light commissioned at dusk. Removal takes half a day, and leaves
 
 **Title options for the owner** (the work is entered under your name, with no company logos):
 1. **Mother.** Short and warm, and it carries the piece's name without the company's.
-2. **Mother Earth, in Six Colours.** Says what it is; a little long.
+2. **Mother Earth, in Six Colors.** Says what it is; a little long.
 3. **Mother EARF.** The piece's own name. But it contains the company's name, and the festival may read that as
    branding. Ask the festival (artists@amsterdamlightfestival.com) before using it.

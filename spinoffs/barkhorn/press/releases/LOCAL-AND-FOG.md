@@ -16,7 +16,7 @@ before the debut (the media plan's rhythm).
 > near Fort Mason.
 >
 > The night opens with Session 00: one album, start to finish, played to a seated room by [ARTIST] and recorded
-> live, to be pressed on coloured vinyl. Then the room listens to records. A coin at the door buys a song.
+> live, to be pressed on colored vinyl. Then the room listens to records. A coin at the door buys a song.
 >
 > It's invitation only, about 120 guests; we'd be glad to have you there, or to show you the room that afternoon
 > [TIME]. Pictures from the night, the first photographs of the pieces, follow by 21 January.
@@ -46,12 +46,12 @@ For editors and writers who are in San Francisco for FOG Design+Art (21–24 Jan
 (Wallpaper\*, Dezeen, designboom, Design Milk, Sight Unseen, Core77), and any outlet FOG's own press list shows
 attending [to find, once FOG publishes it]. Send in the week of 11 January, to the routes in `MEDIA-PLAN.md`.
 
-**Subject:** In town for FOG? A new studio's hi-fi in eight colours, two days before the fair
+**Subject:** In town for FOG? A new studio's hi-fi in eight colors, two days before the fair
 
 > Hello,
 >
 > If you're in San Francisco for FOG, we'd love to show you something new before the fair opens. EARF makes a horn
-> loudspeaker, two lamps and a record player in cast acrylic tinted all the way through, in eight colours, and on
+> loudspeaker, two lamps and a record player in cast acrylic tinted all the way through, in eight colors, and on
 > Tuesday 19 January the first pair plays for the first time, near Fort Mason.
 >
 > Come to the night, [TIME], or for a quiet look at the room that afternoon, [TIME]. It's [a few minutes] from the fair.

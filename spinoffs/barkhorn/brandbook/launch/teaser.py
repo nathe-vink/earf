@@ -105,7 +105,7 @@ class Teaser:
         if t < 0.9:
             im = Image.blend(Image.new('RGB', im.size, NIGHT), im, ease(t / 0.9))
         self.label(im, 'EARF · San Francisco', alpha=ease((t - 0.8) / 0.6))
-        self.line(im, 'Cast in colour, all the way through.', t, 1.3)
+        self.line(im, 'Cast in color, all the way through.', t, 1.3)
         return im
 
     def b_turn(self, t):
@@ -137,7 +137,7 @@ class Teaser:
         no, name, _ = TINTS[n]
         m = int(80 * self.u)
         self.text(im, (m, self.H - m - int(58 * self.u)), f'{no}  {name}', self.f_mid, NIGHT_INK)
-        self.label(im, 'Eight colours, each where it began')
+        self.label(im, 'Eight colors, each where it began')
         return im
 
     def b_lamps(self, t):

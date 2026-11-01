@@ -21,16 +21,16 @@ first look has been offered elsewhere.
 ## 1. Wallpaper\*: the exclusive first look
 
 **To:** Rosa Bertoli, Global Design Director (the published editor; route to confirm). contact@ is feedback only.
-**Subject:** First look, under embargo: hi-fi and light in eight colours of cast acrylic
+**Subject:** First look, under embargo: hi-fi and light in eight colors of cast acrylic
 
 > Dear Rosa,
 >
 > EARF makes a horn loudspeaker, two lamps and a record player in cast acrylic tinted all the way through, in the same
-> eight colours, from Ember to Smoke, so a room can be one colour or three. The horn is built from the cabinet's own
-> tinted sheet, 22 layers deep. A lamp underneath fills the whole speaker with colour.
+> eight colors, from Ember to Smoke, so a room can be one color or three. The horn is built from the cabinet's own
+> tinted sheet, 22 layers deep. A lamp underneath fills the whole speaker with color.
 >
 > The first pair played in San Francisco on 19 January, during FOG week. We'd like Wallpaper\* to have the first look,
-> exclusively in print, ahead of our announcement on [DATE]. Photographs of the prototypes, the eight colours as cast
+> exclusively in print, ahead of our announcement on [DATE]. Photographs of the prototypes, the eight colors as cast
 > samples and the fact sheets are here: [LINK].
 >
 > Could I hold it for you until [DATE]?
@@ -46,7 +46,7 @@ first look has been offered elsewhere.
 
 > Dear Nic,
 >
-> In San Francisco, EARF makes hi-fi and light in cast acrylic, tinted through, in eight colours. Its plan is a
+> In San Francisco, EARF makes hi-fi and light in cast acrylic, tinted through, in eight colors. Its plan is a
 > listening bar, Planet EARF [OWNER: confirm it may be named], where everything in the room is for sale and one coin
 > buys one song. [IF IT OPENED: For February and March it ran as a pop-up at [ADDRESS].] Each Session is one album,
 > start to finish, with no talking. The first, Session 00, was recorded at our debut on 19 January and is being pressed
@@ -59,35 +59,35 @@ first look has been offered elsewhere.
 
 *(132 words)*
 
-## 3. Dwell: a room in one colour
+## 3. Dwell: a room in one color
 
 **To:** route unverified (dwell.com refused automated access). Find the editor for products or design news by hand.
-**Subject:** Under embargo: a whole room in one colour, sound and light included
+**Subject:** Under embargo: a whole room in one color, sound and light included
 
 > Hello,
 >
-> What if the speakers, the lamps and the record player were all the same colour, all the way through? EARF, in San
+> What if the speakers, the lamps and the record player were all the same color, all the way through? EARF, in San
 > Francisco, makes all four in cast acrylic tinted through, in eight shades. In Smoke, a room goes quiet and dark; in
 > Ember, it glows. Core, the table lamp, runs cordless for about five hours and moves through the house with you.
 >
 > Photographs of the prototypes, and of [the pair at home, when shot], are under embargo until [DATE]: [LINK]. A first
 > look has gone to one title in print.
 >
-> Would one room in one colour suit a spring issue?
+> Would one room in one color suit a spring issue?
 >
 > [Your name], EARF, San Francisco · [contact line]
 
 *(110 words)*
 
-## 4. Sunset: a West Coast maker, colour at home
+## 4. Sunset: a West Coast maker, color at home
 
 **To:** route to find by hand (the deck cites Sunset; no route was checked).
-**Subject:** Under embargo: a San Francisco maker's eight colours, from Ember to Smoke
+**Subject:** Under embargo: a San Francisco maker's eight colors, from Ember to Smoke
 
 > Hello,
 >
-> EARF is a San Francisco maker of hi-fi and lighting in cast acrylic, tinted all the way through, in eight colours:
-> Ember, Dust, Acid, Poison, Ice, Haze, Fog and Smoke. A pendant whose shade changes colour with a quarter turn; a
+> EARF is a San Francisco maker of hi-fi and lighting in cast acrylic, tinted all the way through, in eight colors:
+> Ember, Dust, Acid, Poison, Ice, Haze, Fog and Smoke. A pendant whose shade changes color with a quarter turn; a
 > table lamp that goes out to the terrace and back; a record player that floats on its own light; a horn loudspeaker,
 > all made to order.
 >

@@ -15,8 +15,8 @@ replace these figures.
 | 180 g over standard weight (not published; about $0.50 a record) | $150 | $250 |
 | Freight from the plant to San Francisco | $250 | $350 |
 | Numbering by hand: a stamp, ink, an afternoon | $100 | $100 |
-| Jacket: cover photograph licence and print-ready artwork | $500 | $500 |
-| Mechanical licences (8 songs, own or covers, 13.1 c each a copy; Songfile fees on covers) | $378 | $588 |
+| Jacket: cover photograph license and print-ready artwork | $500 | $500 |
+| Mechanical licenses (8 songs, own or covers, 13.1 c each a copy; Songfile fees on covers) | $378 | $588 |
 | The artist's fee for the night (a trio; not recouped) | $1,500 | $1,500 |
 | Contingency, 10% | $992 | $1,100 |
 | **Total** | **$10,917** | **$12,106** |

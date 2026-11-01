@@ -17,7 +17,7 @@ stays out of the plinth.
 | Cover | Tinted acrylic, hinged |
 | Size | 470 wide, 380 deep, 194 high with the lid down (mm) |
 | Weight | About 15.5 kg |
-| Colours | The same eight |
+| Colors | The same eight |
 | Care | Dust with a soft microfibre cloth; wash with water and a drop of mild soap, then dry. No glass cleaner, alcohol or solvents: they craze acrylic. Fine scratches polish out |
 | Figures | Design figures; they may change before production |
 | Price | Set at launch |
@@ -25,4 +25,4 @@ stays out of the plinth.
 **The name.** The layer that moves beneath the crust.
 
 **Pictures:** `site/img/tt-violet-dusk.jpg`, `tt-amber-studio.jpg`, `tt-open.jpg`, `tt-pod.jpg`, `tt-detail.jpg`,
-`tt-<colour>-studio.jpg`. All renders.
+`tt-<color>-studio.jpg`. All renders.

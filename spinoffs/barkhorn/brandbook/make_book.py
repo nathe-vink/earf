@@ -11,10 +11,10 @@ B = os.path.dirname(HERE)
 IMG = os.path.join(HERE, 'book', 'img')
 SITE = os.path.join(B, 'site', 'img')
 KEYS = ['red', 'orange', 'amber', 'green', 'blue', 'violet', 'ice', 'black']
-SITE_PICS = ['hero-1200.jpg', 'hero-portrait.jpg', 'lineup-1200.jpg', 'room-1440.jpg', 'facade-1200.jpg', 'macro-horn.jpg',
-             'macro-corner.jpg', 'macro-woofer.jpg', 'lamps-orbs-1200.jpg', 'lamps-domes-1200.jpg', 'lamps-unlit-800.jpg',
+SITE_PICS = ['hero-1200.jpg', 'hero-portrait.jpg', 'lineup-1200.jpg', 'facade-1200.jpg',
+             'lamps-domes-1200.jpg',
              'tt-violet-dusk-1200.jpg', 'tt-amber-studio-1200.jpg', 'red-studio-1200.jpg', 'lamp-dome-800.jpg',
-             'lamp-orb-800.jpg', 'inside.jpg'] + \
+             'inside.jpg'] + \
             [f'{k}-habitat-1200.jpg' for k in KEYS] + [f'{k}-studio-light-1200.jpg' for k in KEYS]
 BRAND = {'lockup-paper.jpg': 'brand/mark/earf-lockup-render.png', 'lockup-night.jpg': 'brand/mark/earf-lockup-render-night.png',
          'globe-paper.jpg': 'brand/mark/earf-globe-render.png', 'globe-night.jpg': 'brand/mark/earf-globe-render-night.png',
@@ -25,6 +25,22 @@ BAR = {'bar-door.jpg': 'renders/2026-10-22/barkhorn/planet41/finals/door-mother-
        'bar-street.jpg': 'renders/2026-10-22/barkhorn/planet39/finals/street-1200.jpg',
        'bar-decks.jpg': 'renders/2026-10-20/barkhorn/planet38/finals-best/coins-decks.png',
        'bar-listening.jpg': 'renders/2026-10-20/barkhorn/planet38/finals-best/listening-smoke.png'}
+
+
+# Pinned to other lanes' commits (read-only), after the owner's rulings of 2026-10-31: Tropos always cover off and
+# whole (the horn lane's golden-hour room, covers off); Core cordless (the lamps lane's cordless set). The site's
+# macro crops of Tropos are no longer used.
+PINNED = {'room.jpg': ('754e16a9852f364fb2ebe8eb752c10ab6bdc0e23', 'renders/2026-10-31/barkhorn/tropos-campaign/tropos-room-golden-hour-off.png'),
+          'lamp-orb.jpg': ('735e759304b00400750741d5038722a3d4d5f5fb', 'renders/2026-10-31/barkhorn/lamps-cordless/site-img/lamp-orb.jpg'),
+          'lamps-orbs.jpg': ('735e759304b00400750741d5038722a3d4d5f5fb', 'renders/2026-10-31/barkhorn/lamps-cordless/site-img/lamps-orbs.jpg'),
+          'lamps-unlit.jpg': ('735e759304b00400750741d5038722a3d4d5f5fb', 'renders/2026-10-31/barkhorn/lamps-cordless/site-img/lamps-unlit.jpg')}
+
+
+def pinned():
+    root = subprocess.run(['git', 'rev-parse', '--show-toplevel'], capture_output=True, text=True, cwd=HERE).stdout.strip()
+    for dst, (c, src) in PINNED.items():
+        blob = subprocess.run(['git', 'show', f'{c}:{src}'], capture_output=True, cwd=root, check=True).stdout
+        save(Image.open(io.BytesIO(blob)), dst)
 
 
 def save(im, dst, width=1600, q=84):
@@ -66,6 +82,7 @@ def main():
     for dst, src in {'globe-turn.mp4': 'site/img/globe-turn.mp4', 'ident-coin.mp4': 'brand/earth-ident-coin-acrylic-paper.mp4',
                      'ident-rise.mp4': 'brand/earth-ident-rise-acrylic-night.mp4'}.items():
         shutil.copy(os.path.join(B, src), os.path.join(IMG, dst))
+    pinned()
     print(len(os.listdir(IMG)), 'pictures in', IMG)
 
 
