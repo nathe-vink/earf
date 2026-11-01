@@ -352,3 +352,15 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
   $530 a speaker (est.) + the light. Waiting on the lane's one-line final figures for the deck's Tropos slide.
 - Biomes: still holding for the owner's go (its own session).
 - Only owner answers + the speaker's final figures remain: one last check-in armed, then stop.
+
+## Check-in 15, the last (09:01 UTC) - check-ins STOPPED
+- Deck v38: tropos.html Size row "On a lit plinth 660 x 670 mm; about 85 kg" (from BASES.md: plinth 10.4 kg, speaker
+  84.6 kg); notes: parts $9,563 a pair + about $1,060 for two plinths before the light (est.). The Tropos image is still
+  the plinth-less Strata hero: swap to a final Strata-on-lit-plinth frame when the site set renders.
+- Speaker lane idle (upper-band BEM sims in the background, assets at 497a237a). Its one-line final figures (overall
+  height on the plinth) never arrived: ask again when work resumes.
+- Biomes: holding the dark-Smoke habitat for the owner's go in its own session.
+- WAITING ON THE OWNER: 1) tagline A-D (asked twice); 2) color depth (stock deep vs the site's lighter tints; Smoke is
+  now stock 2074 Dark Gray); 3) Mantle A Strata Float v3 / B Outcrop; later: Mother EARF armature project, editions
+  picture pass, the biomes Smoke go. Then: the site set (Strata on the lit plinth, black sleeves, ~18 h) and the Brand
+  Book republish (after the tagline).
