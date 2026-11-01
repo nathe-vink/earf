@@ -26,7 +26,7 @@ ASSET = os.path.join(HERE, 'assets', 'horn2', 'tropos.blend')
 SPOT = (0.0, -2.4)                    # where the speaker now stands (the crater is at the origin)
 TURN = -22.0                          # its front turned toward the camera's side
 # the speaker's box in each frame (fractions, x0 y0 x1 y1 from the top left), measured on the proofs, with a margin
-SPEAKER_BOX = {'portrait': [0.355, 0.355, 0.64, 0.80], 'landscape': [0.40, 0.30, 0.60, 0.82]}
+SPEAKER_BOX = {'portrait': [0.355, 0.355, 0.64, 0.80], 'landscape': [0.39, 0.225, 0.60, 0.79]}
 
 
 def compose(sh, frame):

@@ -196,3 +196,45 @@ The output is `renders/2026-10-31/barkhorn/biomes/seam-poison-fog-plates-1800.jp
 
 The gate (7.0, or beating the best habitat) was not met by any of them. The phone frame was not made; the method it
 would have used stopped first.
+
+## Smoke aligned with the other seven (2026-11-01, the owner's note)
+
+The owner, on seeing the eight habitats side by side: "The smoke image looks like the odd one out now, in terms of
+speaker positioning in its setting. Anyway to align it with the rest? Maybe the fire in front is preventing it from
+looking right."
+
+**Measured** on the seven live portraits (`site/img/<key>-habitat-portrait.jpg`, 1200 x 1500), as fractions of the
+frame:
+
+| | Ember | Dust | Acid | Poison | Ice | Haze | Fog | median |
+|---|---|---|---|---|---|---|---|---|
+| center x | 0.50 | 0.47 | 0.51 | 0.50 | 0.64 | 0.63 | 0.51 | **0.51** |
+| height | 0.40 | 0.36 | 0.42 | 0.37 | 0.43 | 0.41 | 0.41 | **0.41** |
+| foot line | 0.79 | 0.68 | 0.73 | 0.79 | 0.77 | 0.88 | 0.79 | **0.79** |
+
+Every camera sits at about eye level, with the horizon near the middle. The live Smoke had the speaker 0.25 of the
+frame's height, in its crater, with flames and rubble in front of it.
+
+**Re-composed** (`smoke_align.py`, from E12r p19's own shots in a worktree of r31-element-smoke-e10 at d55e7570):
+- The speaker stands up out of its crater onto the intact road, 2.4 m toward the camera, upright and turned 22
+  degrees toward it.
+- The crater, the fire, the plume and the trench stay where they were, so the fire rises behind it and over its top,
+  and the trench runs in from behind.
+- The slab field thrown forward and the debris spread ahead of the crater are left out. Nothing stands in front of
+  the speaker or its base.
+- The heat shimmer is a 2D haze in the finish. It is kept off the speaker's new box; its old exclusion warped the
+  speaker's edges.
+- The camera is the other habitats': 60 mm from 6.5 m at 0.95 m for the landscape, 92 mm for the portrait.
+- The speaker is linked from the speaker lane's asset at r33-speaker-horn c77460f0 (`assets/horn2/`, gitignored),
+  cover off. The engine's own model is still built, so the shot's lamps find their parts by name, but it is hidden;
+  the linked instance stands in its place in each lamp's light linking.
+
+**Result** (48 samples, proofs), measured on the portrait: center x 0.50, height 0.41, feet at 0.78, which is the
+median. The files are in `renders/2026-11-01/barkhorn/smoke-aligned/`:
+- `smoke-aligned-2400x1600.jpg`;
+- `smoke-aligned-portrait-1200x1500.jpg`;
+- their shots;
+- `strip-eight-4870x750.jpg`, the seven as they are and the new Smoke (`strip.py`).
+
+The linked Smoke reads pale gray, with its white lining showing through the TruCast-2064 gray. The old model was near
+black.
