@@ -277,3 +277,11 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
 - Speaker lane: lining diagnostic done (c77460f0); now the stability/horn-retention list; will ask before any base change
   that alters the look.
 - Lamps lane: stopped after the CAD pass.
+- Editions DONE (eea8ba4e, stopped): no frame at 6.5 (best Firn macro 6.0; Iron 5.0; Stamper 5.0). EDITIONS.md: six
+  editions with making, sourcing, law, first tests. Owner captions: Iron (Core with an etched Gibeon slice; edition of 12,
+  +150-250 %; humidity test decides), Firn (Moho record weight, clear under Ice, flat air bubbles at every bond line; 25,
+  +120 %), Stamper (Bedrock in water-clear with a shard of Session 00's nickel stamper; 12-16, +150 %). LATER OWNER
+  QUESTION: another picture pass, or decide on the write-up? (not now; the tagline first)
+- Speaker a921df53: STABILITY needs an owner decision: footprint must be ~600 x 600 (feet ~20 mm outside the sides,
+  80-100 mm beyond front/back). A = stepped plinth in Strata's language (~650 x 650, ~8 kg); B = outrigger feet; C =
+  anchoring (a lab question, not a design option). Proofs + blind duel A vs B rendering; then ONE owner question.
