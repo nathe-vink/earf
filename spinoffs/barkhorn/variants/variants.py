@@ -46,6 +46,10 @@ PLINTH = dict(layer=12.7, gap=0.1, outer=[(-20.0, -20.0, 580.0, 440.0), (-35.0, 
               inner=(60.0, 60.0, 500.0, 360.0))
 # B: four outrigger arms of bronze bar, 30 x 20, from under the cabinet's corners (two M8 into its feet's inserts and
 # a second insert each) out on the diagonal to the feet
+# A, lit (the owner, 2026-11-01: "can we make them light up from underneath? ... I'd go with the one on the left"): a
+# 2700 K COB strip in a shallow aluminium channel with a frosted diffuser, routed into the bottom frame's underside
+# `inset` in from its outside edge all round, so a soft warm glow falls on the floor round the plinth (variants/BASES.md)
+PLINTH_LIGHT = dict(inset=40.0, w=10.0, t=2.0)
 OUTRIG = dict(w=30.0, h=20.0, inner=[(95.0, 80.0), (465.0, 80.0), (95.0, 340.0), (465.0, 340.0)])
 
 
@@ -157,6 +161,19 @@ def parts(P):
                                 notes=[f'Base A, the stepped plinth (make/engineering-audit.md, stability/README.md): frame {k + 1} of 3 '
                                        'from the top, 1/2 in stock sheet in the cabinet\'s color, its outside edges polished, the three '
                                        'bonded; the cabinet bolted down on it with M8 through its feet\'s inserts']))
+    from build123d import Box
+    x0, y0, x1, y1 = PLINTH['outer'][-1]; L_ = PLINTH_LIGHT; i_ = L_['inset']
+    zl1 = zp - 0.1; zl0 = zl1 - L_['t']
+    strip = []
+    for (ax, ay, bx, by) in ((x0 + i_, y0 + i_, x1 - i_, y0 + i_), (x0 + i_, y1 - i_, x1 - i_, y1 - i_),
+                             (x0 + i_, y0 + i_, x0 + i_, y1 - i_), (x1 - i_, y0 + i_, x1 - i_, y1 - i_)):
+        lx = abs(bx - ax) + L_['w']; ly = abs(by - ay) + L_['w']
+        strip.append(Pos((ax + bx) / 2, (ay + by) / 2, (zl0 + zl1) / 2) * Box(lx if lx > L_['w'] else L_['w'], ly if ly > L_['w'] else L_['w'], L_['t']))
+    out.append(product.Part('base-plinth-light', _C(children=strip), product.Bought('plinth-led'), finish='led', group='base',
+                            option='Plinth light', notes=['Base A, lit: the COB strip\'s frosted diffuser under the bottom frame, '
+                                                          f'{i_:g} in from its edge all round (variants/BASES.md)']))
+    for nm, key in (('base-plinth-supply', 'plinth-supply'), ('base-plinth-controller', 'plinth-controller')):
+        out.append(product.Part(nm, None, product.Bought(key), group='base', option='Plinth light'))
     pf = [foot(x, y, zp - 0.1) for x, y in BASE['feet']]
     out.append(product.Part('base-plinth-feet', _C(children=[c for f in pf for c in f]), product.Bought('levelling-feet'),
                             finish='foot', group='base', option='Plinth', notes=['four M8 levelling feet under the plinth\'s corners']))
@@ -183,7 +200,9 @@ PRODUCT = dataclasses.replace(
     cloud.PRODUCT, name='barkhorn-variants', params=P, parts=parts, count=2,
     touching=[('horn-topo', 'horn-topo-clear'), ('horn-topo', 'horn-topo-lines')],      # alternatives in one place
     materials={**cloud.PRODUCT.materials,                # Topo Clear's body: water-clear cast sheet, a faint cool cast
-               'clear-cast': {'preset': 'clear_resin', 'color': '#FFFFFF', 'deep': '#EEF2EF', 'radius': 0.05, 'roughness': 0.03}},
+               'clear-cast': {'preset': 'clear_resin', 'color': '#FFFFFF', 'deep': '#EEF2EF', 'radius': 0.05, 'roughness': 0.03},
+               # the plinth light's diffuser: frosted, lit from within at 2700 K (a shot may turn `glow` up or down)
+               'led': {'preset': 'frosted', 'color': '#FFF1E0', 'absorb': '#FFE9D2', 'glow': 40.0, 'glow_color': '#FFB46B'}},
     kind='Tropos design-pass proposals: Strata\'s caldera and the Topo horn',
     notes=['Proposals beside the current design (variants/README.md); the Cloud\'s CAD is unchanged.'],
     origin=(280.0, 213.7, -12.0), drawing_prefix='BHV')

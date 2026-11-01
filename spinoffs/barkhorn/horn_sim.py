@@ -489,10 +489,16 @@ def main():
     ap.add_argument('--name', default='horn', help='the run\'s name: acoustics/<name>-<band>.json')
     ap.add_argument('--freqs', nargs='+', type=float, default=None)
     ap.add_argument('--bell', type=float, default=None, help='the proposal: a bell-flared lip of this radius across (mm)')
+    ap.add_argument('--mouth-w', type=float, default=None,
+                    help='the mouth\'s width instead of the approved one (the owner, 2026-11-01: the horn flush with the cabinet)')
     a = ap.parse_args()
     if a.cmd == 'check':
         return check()
-    horn, V, T, D, radiators = build(a.band, bell=a.bell)
+    P = None
+    if a.mouth_w:
+        import copy, product
+        P = copy.deepcopy(product.P); P['horn']['cast']['mouth_w'] = a.mouth_w
+    horn, V, T, D, radiators = build(a.band, P=P, bell=a.bell)
     if a.bell:
         print(f'bell: the flare to {horn.d1:.1f} on a {2 * horn.hw1:.0f} x {2 * horn.hh1:.0f} mouth, its walls at {math.degrees(horn.th[0]):.1f} '
               f'and {math.degrees(horn.th[1]):.1f} deg, curled on {horn.R[0]:.0f} and {horn.R[1]:.0f} mm to {2 * horn.hw:.0f} x {2 * horn.hh:.0f}')

@@ -282,6 +282,32 @@ def base(which, view='hero'):
     return s
 
 
+def base_lit(view='hero', glow=None):
+    """Strata on the stepped plinth lit from underneath (the owner, 2026-11-01): the studio frame, or 'dusk', the same
+    frame with the studio's lamps brought down to about a tenth and cooled, so the plinth's warm glow on the floor
+    carries the picture. The whole speaker, cover off."""
+    s = base('plinth', 'three-quarter' if view == 'three-quarter' else 'hero')
+    s['title'] = 'Tropos Strata on the lit plinth' + {'hero': '', 'dusk': ', dusk', 'three-quarter': ', three-quarter'}[view]
+    for blk in s['products']:
+        if 'variants' in blk['def']:
+            for i in blk['instances']:
+                i['options'] = ['Plinth', 'Plinth light']
+    if view == 'dusk':
+        for L in s['lights'].values():
+            if 'irradiance' in L:
+                L['irradiance'] = round(L['irradiance'] * 0.1, 3)
+            L['color'] = '#C9D3E8'
+        s['render']['exposure'] = s['render'].get('exposure', 0.0) + 1.3
+        s['render']['white_balance_k'] = 4800
+    if glow is not None:
+        s.setdefault('materials', {})['led'] = {'glow': glow}
+    return s
+
+
+for _v in ('hero', 'dusk', 'three-quarter'):
+    SHOTS['base-plinth-lit' + {'hero': '', 'dusk': '-dusk', 'three-quarter': '-34'}[_v]] = (lambda v=_v: base_lit(v))
+
+
 for _b in ('plinth', 'outriggers', 'today'):
     for _v in ('hero', 'three-quarter'):
         SHOTS[f'base-{_b}' + ('' if _v == 'hero' else '-34')] = (lambda b=_b, v=_v: base(b, v))
