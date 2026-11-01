@@ -8,7 +8,7 @@ COPY = {
   'tropos': ('Tropos', 'Speaker', 'A powered horn loudspeaker.'),
   'hemisphere': ('Hemisphere', 'Pendant', 'A shade that swaps in a quarter turn.'),
   'core': ('Core', 'Table lamp', 'Cordless, about five hours a charge.'),
-  'mantle': ('Mantle', 'Record player', 'Floats on its own light.'),
+  'mantle': ('Mantle', 'Record player', 'Belt drive, phono stage built in.'),
 }
 callouts = []
 for key in ['hemisphere', 'core', 'mantle', 'tropos']:
@@ -29,8 +29,8 @@ spec = {
           ': a pair of Tropos speakers in Poison, a transparent green acrylic, with their covers off, either side of a low oak '
           'credenza with a Mantle record player on it; a Core lamp on a side table at the left; a Hemisphere pendant over a '
           'cognac leather chair at the right; a plain plaster wall behind'),
-  'notes': ('Each piece takes its name from the Earth. Tropos is Greek for a turn; the troposphere, the layer of air where '
-            'sound travels, is named for it. Core, Mantle and Hemisphere are the planet’s own parts. Here all four share one '
+  'notes': ('Each piece takes its name from the Earth. Tropos is Greek for a turn; the troposphere, the layer of air we '
+            'live in, is named for it. Core, Mantle and Hemisphere are the planet’s own parts. Here all four share one '
             'room, in Poison, one of the eight colors. It is a render, not a photograph: Tropos with its cover off, Core cordless.'),
   'header': {'eyebrow': 'The line', 'title': 'Four pieces, named for the Earth.', 'x': hx0, 'y': hy0 + 6, 'w': hx1 - hx0, 'h': hy1 - hy0, 'px': 60},
   'callouts': callouts,

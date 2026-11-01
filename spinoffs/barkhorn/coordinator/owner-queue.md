@@ -408,3 +408,28 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
 - Workflows: deck audit wf_70aa00cc-d49 in Verify; board fact-check wf_fbf4c876-14a running (3 refuters + a completeness critic).
 - Owner asked "What are the tagline options" -> re-listed A-E with notes; flagged B and D as close to the ruled-out literal material
   lines; offered a fresh set. Waiting.
+
+## Deck v40 (11:30 UTC): the audit applied
+- Workflow wf_70aa00cc-d49 (6 agents: 4 auditors, a gaps editor, a verifier): 43 edits verified, 34 approve, 6 approve-with-fix,
+  3 rejected (cover month, waits on the tagline; two color edits superseded by the 10:55 tint ruling). Local deck == live before applying.
+- Applied 40 + 14 of the coordinator's, one publish (18 slides + deck.json), render-checked at 1920 x 1080 (no overflow):
+  - honesty: tip test "needs to pass" (not "passes"); home's "7/10, best room" claim removed; prices "planned"/"suggested"
+    (Core's included); Hemisphere's cool cap "estimated"; vinyl "(wholesale)"; "Written, not yet sent", "13 shops";
+    quote requests "still to add" the latest changes; certification row and notes now name the fixes in the design;
+    "certified external supplies" -> "external low-voltage supplies"; dates removed from the cash risk.
+  - stands: "Drawn, reviewed and priced. Not yet built."; Not yet: nothing built or tested; Core's board; Mantle's fixes.
+  - money: parts about $11,200 a pair (est.); plan step 2 drops the $15,000 horn tool (the stepped horn needs none) and adds
+    Core's circuit board; bar "about $2.0 M to open (est.)" per the House Book base case, plan step 3 matched; bar notes say the
+    picture is an earlier scheme (Mother EARF now on a plinth).
+  - Mantle neutral (owner undecided): "A belt-drive record player, its phono stage built in."; Design "Being redrawn: two
+    directions, one to choose"; Drive "Belt, Rega's 24 V motor"; line slide label "Belt drive, phono stage built in."
+  - color pass for the 10:55 ruling: risks row "Color in thick sheet"; made: "stock cast sheet in the line's own tints",
+    "Sheet from Mexico"; notes: mill run of about 10 sheets for most 3/4 in cabinets; thick parts may read darker than renders
+    (held vs deep), chips + two offcuts settle it, a lighter pour is the fallback.
+  - colours: the scratch line (literal material line) -> "One palette across the line."; line notes: "the layer of air we live in".
+  - the first-pair slide dropped from the order (redundant; its picture was a cropped, overhanging horn). The file stays.
+- Not done (images): Tropos hero, the eight in a row, the cover, the home room (speaker lane, stock tints, ~5 h); line dusk
+  interim (four-pieces, site tint) then -final-2092; close (biomes Smoke, needs the owner's go in that session); bar picture.
+- Asked the speaker lane (later): commit the $11,200 breakdown; re-run the $18,520 cash table (plinths; Smoke 2074 at 3/4 in
+  is a mill run); update RFQ drafts (2074, 536 mouth, plinth, caldera, bronze posts). Nothing sent.
+- deck-line generator: Mantle label and the notes' troposphere line updated (spec_from_anchors.py).
