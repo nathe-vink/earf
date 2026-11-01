@@ -536,3 +536,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   rendering, ~75 min (~15:05); then room + portrait.
 - 14:23 four-pieces: -sf dusk lost to a background-job time-out (2 h limit; stopped ~36 min into the render); restarted alone, same
   shot, ~15:05. Day 11a1d8bf unaffected. Deck keeps the dusk-2092 interim until then. Check-in moved to 15:20 (trig_01F1p2PA46C4JnqFbT8eF61k).
+- 15:00 deck v48: cover.html = the speaker lane's cover (c471f400; /_blob/fccc71352727a74951672086956d00f2, 3840x1360 = the 1920x680
+  box): the eight on a shallow curve, final design, stock tints, covers off, lit plinths, long colored shadows; all whole. Fixes: the
+  footnote ("In development. Every picture in this deck is a render.") moved from the bottom (it sat on the shadows) to under the
+  subtitle; the slide ground set to the render's sweep (#F0ECE5) so there's no seam; month now November 2026. Headline waits on the
+  tagline. Speaker room (2304x1296) then portrait (1200x1500) rendering -> home.html.
