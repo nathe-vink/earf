@@ -161,7 +161,7 @@ brand"). Not live: main needs the owner's yes.
   shared, where it sits in the gallery, its label, caption and alt) and `web.py --images` puts the product sessions'
   finals into the galleries; tested with a stand-in on a scratch copy. Nothing goes in before the owner picks.
 - **The owner's decisions of 2026-11-01, drafted and held** (`COPY_NEXT` in `web.py`, off): Mantle as Strata Float v3
-  (its line, particulars, band and captions; the plinth, posts, size and weight held for the Mantle lane's spec line), Core's contact dock (its Power fact, a Dock fact, the lamps' note) and
+  (its line, particulars, band and captions, its rows from the Mantle lane's spec as built, r48-mantle-design 71d3163e), Core's contact dock (its Power fact, a Dock fact, the lamps' note) and
   Hemisphere's shade with its color outside, over clear. Off, the page is byte for byte today's. It goes on with the speaker
   lane's new picture set, whose alts will describe the new Mantle; the pictures on the site still show the old one.
   Close-ups go beside a whole-product picture when that set is laid out.

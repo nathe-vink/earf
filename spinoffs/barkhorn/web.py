@@ -192,20 +192,21 @@ TT = dict(name='Mantle', kind='Record player', route='mantle',             # rou
 COPY_NEXT = False
 TT_NEXT = dict(
     line='A record player that floats over a pool of its own light.',
-    # HELD (the coordinator, 2026-11-01): the plinth, posts, size and weight wait for the Mantle lane's spec line (its model
-    # has the deck through-tinted, 2 x 12.7 mm, not laminated); until then these four rows keep today's words
-    facts=[('Plinth', 'Cast acrylic, 25 mm, tinted through; it floats 40 mm over the base'),
-           ('Base', 'Smoked cast acrylic, 12.7 mm, with a loop of light in a slot beneath it; at dusk the light pools on the shelf'),
+    # the Mantle lane's spec as built (r48-mantle-design 71d3163e, companions/mantle-r48/README.md section 11)
+    facts=[('Plinth', 'Two sheets of cast acrylic in its color, cemented into one, 25.4 mm, tinted through; it floats 40 mm over the base'),
+           ('Posts', 'Four solid posts of polished stainless steel, 30 mm across'),
+           ('Base', 'Smoke cast acrylic, 12.7 mm, set in 35 mm all round, with a loop of light beneath it; at dusk the light pools on the shelf'),
            ('Drive', 'Belt, from Rega&rsquo;s 24 V motor, fixed beneath the plinth'),
            ('Speeds', '33 and 45, by a button'), ('Arm', 'Rega RB330'), ('Cartridge', 'Ortofon 2M Black'),
            ('Phono stage', 'Built in, for moving-magnet cartridges, with a line out and a switch to bypass it'),
-           ('Cover', 'Smoked acrylic, 3 mm, on friction hinges'), ('Size', '470 wide, 380 deep, 194 high with the lid down (mm)'),
-           ('Weight', 'About 15.5 kg'), CARE, ('Figures', 'Design figures; they may change before production')])
+           ('Cover', 'Cast acrylic in its color, 3 mm, on friction hinges'),
+           ('Size', '450 wide, about 370 deep with the hinges, about 199 high with the lid down (mm)'),
+           ('Weight', 'About 12.9 kg with the lid'), CARE, ('Figures', 'Design figures; they may change before production')])
 NEXT_TEXT = {   # today's words -> the drafts (each must be found exactly once in the page when COPY_NEXT is on)
     # Mantle's band on the home page
     'acrylic. Its tinted plinth floats 40&nbsp;mm over a base that glows at its edge. The motor stands apart in a pod of its '
     'own, and the phono stage is built in.':
-        'acrylic. Its tinted plinth floats over a smoked base, and at dusk a '
+        'acrylic. Its tinted plinth floats 40&nbsp;mm over a smoked base on four polished steel posts, and at dusk a '
         'loop of light beneath it pools on the shelf. The motor is fixed under the plinth, and the phono stage is built in.',
     'The lid raised. Its hinges sit on brass inserts, so no screw cuts the acrylic.':
         'The lid raised, on friction hinges. They sit on threaded inserts, so no screw cuts the acrylic.',
