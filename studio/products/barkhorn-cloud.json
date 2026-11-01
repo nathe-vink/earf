@@ -139,7 +139,11 @@
    "roughness": 0.15
   },
   "lining": {
-   "preset": "batting"
+   "preset": "batting",
+   "color": "#18181B",
+   "sheen": 0.5,
+   "subsurface": 0.0,
+   "cloud": 0.03
   },
   "mark-tint": {
    "preset": "satin_paint",
@@ -1703,7 +1707,7 @@
    "horn_cloud": 0.0,
    "materials": {
     "bark": {
-     "deep": "#8A888E",
+     "deep": "#4F4D54",
      "radius": 0.025,
      "roughness": 0.05
     },
