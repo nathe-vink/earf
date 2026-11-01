@@ -20,7 +20,7 @@
   "ceiling": "#F2EFEA",
   "skirting": {
    "h": 0.09,
-   "color": "#E8E2D8",
+   "color": "#CFC8BC",
    "t": 0.014
   },
   "frame": "#5A5650",
@@ -341,7 +341,7 @@
     0.3,
     0.9
    ],
-   "irradiance": 0.05,
+   "irradiance": 0.02,
    "color": "#E2E6EA"
   },
   "bounce": {
@@ -409,21 +409,81 @@
   "wallwash": {
    "type": "area",
    "size_m": [
-    3.0,
+    6.0,
     0.2
    ],
    "position": [
-    -0.5,
+    -1.0,
     0.55,
     3.5
    ],
    "target": [
-    -0.5,
+    -1.0,
     0.95,
     1.2
    ],
-   "irradiance": 0.12,
+   "irradiance": 0.14,
    "color": 2700,
+   "camera": false
+  },
+  "uplight": {
+   "type": "area",
+   "size_m": [
+    1.2,
+    1.2
+   ],
+   "position": [
+    -3.2,
+    -1.6,
+    2.6
+   ],
+   "target": [
+    -2.0,
+    0.95,
+    1.6
+   ],
+   "irradiance": 0.16,
+   "color": 2700,
+   "camera": false
+  },
+  "top0": {
+   "type": "area",
+   "size_m": [
+    0.6,
+    0.6
+   ],
+   "position": [
+    -1.0,
+    0.1,
+    2.5
+   ],
+   "target": [
+    -1.0,
+    0.53,
+    1.0
+   ],
+   "irradiance": 0.25,
+   "color": 3000,
+   "camera": false
+  },
+  "top1": {
+   "type": "area",
+   "size_m": [
+    0.6,
+    0.6
+   ],
+   "position": [
+    1.0,
+    0.1,
+    2.5
+   ],
+   "target": [
+    1.0,
+    0.53,
+    1.0
+   ],
+   "irradiance": 0.25,
+   "color": 3000,
    "camera": false
   },
   "warm_l": {
@@ -442,7 +502,7 @@
     0.6,
     0.8
    ],
-   "irradiance": 0.06,
+   "irradiance": 0.14,
    "color": 2700,
    "camera": false
   },
@@ -475,7 +535,7 @@
   "bounces": 12,
   "view": "Khronos PBR Neutral",
   "exposure": 0.8,
-  "white_balance_k": 3300,
+  "white_balance_k": 3100,
   "white_balance_tint": 0.0,
   "caustics_refractive": true
  },

@@ -20,7 +20,7 @@
   "ceiling": "#F2EFEA",
   "skirting": {
    "h": 0.09,
-   "color": "#E8E2D8",
+   "color": "#CFC8BC",
    "t": 0.014
   },
   "frame": "#5A5650",
@@ -306,8 +306,8 @@
  "sun": {
   "azimuth_deg": -64.0,
   "elevation_deg": 29.0,
-  "irradiance": 36.0,
-  "angle_deg": 6.0,
+  "irradiance": 20.0,
+  "angle_deg": 12.0,
   "color": "#FFE4C8"
  },
  "sky": {
@@ -333,8 +333,8 @@
     2.4
    ],
    "position": [
-    0.0,
-    -4.6,
+    -2.6,
+    -3.6,
     2.2
    ],
    "target": [
@@ -342,8 +342,8 @@
     0.3,
     0.9
    ],
-   "irradiance": 0.75,
-   "color": "#CFDDF0"
+   "irradiance": 1.2,
+   "color": "#F2E6D6"
   },
   "bounce": {
    "type": "area",
@@ -361,7 +361,7 @@
     0.3,
     1.0
    ],
-   "irradiance": 1.2,
+   "irradiance": 0.6,
    "color": "#FFF6EC"
   },
   "floorbounce": {
@@ -415,7 +415,7 @@
   "clamp": 10,
   "bounces": 12,
   "view": "Khronos PBR Neutral",
-  "exposure": 1.1,
+  "exposure": 1.25,
   "white_balance_k": 5200,
   "white_balance_tint": 0.0,
   "caustics_refractive": true

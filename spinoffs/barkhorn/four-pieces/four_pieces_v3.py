@@ -100,6 +100,7 @@ def shot(version, palette='p1'):
     s['tropos'] = [{'tint': F.TINT[pal['hifi']], 'position': [-P['spk'], P['spk_y']], 'rotate_z': 4.0},
                    {'tint': F.TINT[pal['hifi']], 'position': [P['spk'], P['spk_y']], 'rotate_z': -4.0}]
     s['set']['props'] = props(pal)
+    s['set']['skirting'] = {**s['set'].get('skirting', {}), 'color': '#CFC8BC'}   # a step below the wall (final day, c5)
     s['set']['size'] = [2 * HALF, 7.0, CEILING]; s['set']['center'] = [0.0, -2.55]
     # the window nearest the back wall threw the sun's band across the header's wall: gone; the sun comes in by the
     # two forward windows, onto the speakers and the floor, and reaches the back wall only below 0.4 m
@@ -119,27 +120,35 @@ def shot(version, palette='p1'):
         # round 6's critic: brighter, the sun softer and less of the frame's drama
         # round 7's critic (5, 7 if fixed): the plaster cream not khaki (c1), the pair matched (c2), the sun softer
         # and higher so its patch stays low (c3), a warmer balance (c7)
-        s['sun'].update({'azimuth_deg': -64.0, 'elevation_deg': 29.0, 'angle_deg': 6.0, 'irradiance': 36.0})
-        L['bounce'].update({'irradiance': 1.2, 'color': '#FFF6EC'})
+        s['sun'].update({'azimuth_deg': -64.0, 'elevation_deg': 29.0, 'angle_deg': 12.0, 'irradiance': 20.0})
+        L['bounce'].update({'irradiance': 0.6, 'color': '#FFF6EC'})
+        L['north'].update({'irradiance': 1.2, 'color': '#F2E6D6', 'position': [-2.6, -3.6, 2.2]})   # the window side
         L['right_card'] = {'type': 'area', 'size_m': [1.5, 1.0], 'position': [2.5, -0.5, 1.0], 'target': [1.0, 0.53, 0.7],
                            'irradiance': 0.5, 'color': 4500, 'camera': False}
         F.lamps(s['set']['props'], 0.6)
         # the coordinator: the wall a warm off-white in every zone (sRGB 200-215) so dark ink reads at 7:1
-        s['render'].update({'exposure': 1.1, 'white_balance_k': 5200})
+        s['render'].update({'exposure': 1.25, 'white_balance_k': 5200})
     else:                                                       # dusk, lights on
         s['sun'] = {'azimuth_deg': -80.0, 'elevation_deg': 2.0, 'irradiance': 0.0}
         s['sky'] = {'kind': 'gradient', 'zenith': '#2E3E66', 'horizon': '#6A7BA6', 'ground': '#1E2230', 'strength': 0.8}
-        L['north'].update({'irradiance': 0.05, 'color': '#E2E6EA'})      # the last daylight, near neutral (no mauve)
+        L['north'].update({'irradiance': 0.02, 'color': '#E2E6EA'})      # the last daylight, near neutral (no mauve)
         L['bounce'].update({'irradiance': 0.07, 'color': '#FFD2A0'})
         # a long soft light high at the right, out of frame, so the acrylic's edges and the horns' lips catch a line
         L['edge'] = {'type': 'area', 'size_m': [1.8, 0.3], 'position': [2.6, -1.4, 2.7], 'target': [0.0, 0.5, 1.0],
                      'irradiance': 0.3, 'color': 3000, 'camera': False}
         # a soft wash grazing the back wall from the ceiling, so the wall falls off top to bottom, not left to right
-        L['wallwash'] = {'type': 'area', 'size_m': [3.0, 0.2], 'position': [-0.5, 0.55, 3.5], 'target': [-0.5, 0.95, 1.2],
-                         'irradiance': 0.12, 'color': 2700, 'camera': False}     # the room's warm light off the ceiling
+        L['wallwash'] = {'type': 'area', 'size_m': [6.0, 0.2], 'position': [-1.0, 0.55, 3.5], 'target': [-1.0, 0.95, 1.2],
+                         'irradiance': 0.14, 'color': 2700, 'camera': False}
+        # an uplight's wash on the upper left wall (a floor lamp out of frame), so the header and Core's zone are not a
+        # ramp from dark at the left to light at the right (the final critic, c4)
+        L['uplight'] = {'type': 'area', 'size_m': [1.2, 1.2], 'position': [-3.2, -1.6, 2.6], 'target': [-2.0, 0.95, 1.6],
+                        'irradiance': 0.16, 'color': 2700, 'camera': False}
+        for i, x in enumerate((-1.0, 1.0)):      # a soft card over each Tropos, so the pair reads, not the chair
+            L[f'top{i}'] = {'type': 'area', 'size_m': [0.6, 0.6], 'position': [x, 0.1, 2.5], 'target': [x, 0.53, 1.0],
+                            'irradiance': 0.25, 'color': 3000, 'camera': False}     # the room's warm light off the ceiling
         # the room's other lamps, out of frame: a warm wash from the left (a floor lamp by the windows) and the right
         L['warm_l'] = {'type': 'area', 'size_m': [1.0, 1.0], 'position': [-3.6, -3.0, 1.6], 'target': [-1.0, 0.6, 0.8],
-                       'irradiance': 0.06, 'color': 2700, 'camera': False}
+                       'irradiance': 0.14, 'color': 2700, 'camera': False}
         L['warm_r'] = {'type': 'area', 'size_m': [1.0, 1.0], 'position': [3.6, -3.4, 1.8], 'target': [1.0, 0.6, 0.9],
                        'irradiance': 0.06, 'color': 2700, 'camera': False}
         L['mantle_kick'].update({'irradiance': 0.5, 'color': 3000})
@@ -153,7 +162,7 @@ def shot(version, palette='p1'):
                 q['lamp_w'] = 80.0; q['shade_glow'] = 0.4
             if q.get('fn') == 'orb':
                 q['lamp_w'] = 28.0; q['shade_glow'] = 0.3
-        s['render'].update({'exposure': 0.8, 'white_balance_k': 3300})
+        s['render'].update({'exposure': 0.8, 'white_balance_k': 3100})
     # the rug's wool: its sheen down (at full sheen it read white at this grazing angle)
     s['material_tweaks'] = {'kit-wool': {'Sheen Weight': 0.15, 'Subsurface Weight': 0.0}}
     s['labels'] = copy.deepcopy(LABELS)
