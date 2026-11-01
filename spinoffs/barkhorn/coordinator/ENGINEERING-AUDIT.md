@@ -155,3 +155,19 @@ was found to be fake.
 - **Mantle:** the fix list waits on the owner's pick of A or B.
 - **Mother EARF:** the owner's call (an armature project).
 - **Claims:** deck v32-v33; site e46ec0c0; brand 147ae5b6.
+- **Speaker (03:40 UTC, a559517f):**
+  - heat solved by removing the L-pad: the 6 dB comes off in the FA122's DSP, and the 33 uF cap is stood off 3 mm.
+    Abnormal-case compartment heat drops from 25.6-30.6 W to 0 W. The driver can take the full 22.4 V (31 W of its
+    140 W AES), about 123 dB at 1 m, with hiss at 8-10 dB SPL.
+  - the horn retained at three points: keyhole hooks on the front feet, and the tie rod at 1.7 kN preload.
+  - the preset loaded in all three slots, with the password and soft clip.
+  - the FAI levels made safe.
+  - woofer screws at 5 N m.
+  - a listed cord set.
+  - 5052-H32 at 1.5 mm.
+  - 1 kHz everywhere.
+  - a ground-loop note.
+  - a transit plan (70-75 kg on a skid crate, ISTA 3B).
+  - a draft letter to Hypex (not sent).
+  - parts $9,635 a pair; deck updated (v35).
+  - Still to come: the stability footprint (A/B, owner) and the keyhole-socket detail drawing.
