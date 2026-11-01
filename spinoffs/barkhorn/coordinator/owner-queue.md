@@ -611,3 +611,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 18:37 speaker correction: the bottom frame is one 1/2 in sheet, so a 15 mm reveal can't be cut. Modelling a 6 mm rebate in its
   underside instead (outside edge in 70 mm to the diffuser; 6.7 mm lip; 18 mm gap at the step's edge; feet, height, outline unchanged);
   tip test rerun; rows at 20/40 + Ice proof. Told: go; if still a line, say which of a 3/4 in bottom frame or taller feet before modelling.
+- 19:16 speaker reveal (b) rendered (row 20 cfc22f65, row 40 cb9863f3, Ice wide proof 52faa9d7); tip test passes, same footprint
+  (83.7 kg; margins +19 % fwd, +13 % back, +14 % side; ff71936d). More warm light on the floor (r-b under Smoke at 20: 17 -> 39) but
+  still a line: the LED's light pipes through the clear tinted bottom frame and out of its edges. My call: an opaque seal, a
+  removable black U-channel carrying strip + diffuser (screwed or clipped, serviceable), 6 mm rebate kept, feet unchanged; row and Ice
+  proof at 20 next. Taller feet would change the look, so they go to the owner only if the pool is too narrow.
