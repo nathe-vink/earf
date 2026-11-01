@@ -1,0 +1,238 @@
+{
+ "current": {
+  "mass_kg": 70.2,
+  "com_m": [
+   0.0,
+   0.0192,
+   0.5327
+  ],
+  "top": [
+   [
+    "back",
+    9.6
+   ],
+   [
+    "left",
+    8.56
+   ],
+   [
+    "right",
+    8.56
+   ],
+   [
+    "front-panel",
+    6.95
+   ],
+   [
+    "bottom",
+    5.19
+   ],
+   [
+    "top",
+    5.18
+   ],
+   [
+    "hf-motor",
+    2.99
+   ],
+   [
+    "waveguide",
+    2.69
+   ],
+   [
+    "brace",
+    1.26
+   ],
+   [
+    "brace-2",
+    1.26
+   ],
+   [
+    "woofer-frame",
+    1.2
+   ],
+   [
+    "rib-back-1",
+    1.11
+   ]
+  ],
+  "push_height_m": 1.2951,
+  "push_N": 137.7,
+  "need_arm_mm": 259,
+  "need_arm_mm_for_15pct": 298,
+  "tipping": {
+   "feet now (centres)": {
+    "forward": {
+     "arm_mm": 208,
+     "need_mm": 259,
+     "margin_pct": -20
+    },
+    "back": {
+     "arm_mm": 162,
+     "need_mm": 259,
+     "margin_pct": -37
+    },
+    "left": {
+     "arm_mm": 230,
+     "need_mm": 259,
+     "margin_pct": -11
+    },
+    "right": {
+     "arm_mm": 230,
+     "need_mm": 259,
+     "margin_pct": -11
+    }
+   },
+   "feet now (pad edges)": {
+    "forward": {
+     "arm_mm": 228,
+     "need_mm": 259,
+     "margin_pct": -12
+    },
+    "back": {
+     "arm_mm": 182,
+     "need_mm": 259,
+     "margin_pct": -30
+    },
+    "left": {
+     "arm_mm": 250,
+     "need_mm": 259,
+     "margin_pct": -3
+    },
+    "right": {
+     "arm_mm": 250,
+     "need_mm": 259,
+     "margin_pct": -3
+    }
+   }
+  },
+  "feet_for_15pct_m": {
+   "x": [
+    -0.298,
+    0.298
+   ],
+   "y": [
+    -0.279,
+    0.317
+   ]
+  }
+ },
+ "strata": {
+  "mass_kg": 75.2,
+  "com_m": [
+   0.0,
+   0.0086,
+   0.5531
+  ],
+  "top": [
+   [
+    "back",
+    9.6
+   ],
+   [
+    "left",
+    8.56
+   ],
+   [
+    "right",
+    8.56
+   ],
+   [
+    "front-panel",
+    6.95
+   ],
+   [
+    "horn-strata",
+    5.57
+   ],
+   [
+    "bottom",
+    5.19
+   ],
+   [
+    "top",
+    5.18
+   ],
+   [
+    "hf-motor",
+    2.99
+   ],
+   [
+    "brace",
+    1.26
+   ],
+   [
+    "brace-2",
+    1.26
+   ],
+   [
+    "woofer-frame",
+    1.2
+   ],
+   [
+    "rib-back-1",
+    1.11
+   ]
+  ],
+  "push_height_m": 1.305,
+  "push_N": 147.5,
+  "need_arm_mm": 261,
+  "need_arm_mm_for_15pct": 300,
+  "tipping": {
+   "feet now (centres)": {
+    "forward": {
+     "arm_mm": 197,
+     "need_mm": 261,
+     "margin_pct": -24
+    },
+    "back": {
+     "arm_mm": 173,
+     "need_mm": 261,
+     "margin_pct": -34
+    },
+    "left": {
+     "arm_mm": 230,
+     "need_mm": 261,
+     "margin_pct": -12
+    },
+    "right": {
+     "arm_mm": 230,
+     "need_mm": 261,
+     "margin_pct": -12
+    }
+   },
+   "feet now (pad edges)": {
+    "forward": {
+     "arm_mm": 217,
+     "need_mm": 261,
+     "margin_pct": -17
+    },
+    "back": {
+     "arm_mm": 193,
+     "need_mm": 261,
+     "margin_pct": -26
+    },
+    "left": {
+     "arm_mm": 250,
+     "need_mm": 261,
+     "margin_pct": -4
+    },
+    "right": {
+     "arm_mm": 250,
+     "need_mm": 261,
+     "margin_pct": -4
+    }
+   }
+  },
+  "feet_for_15pct_m": {
+   "x": [
+    -0.3,
+    0.3
+   ],
+   "y": [
+    -0.292,
+    0.309
+   ]
+  }
+ }
+}
