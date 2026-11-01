@@ -8,8 +8,8 @@
 - throat.png: the load the driver sees: the throat's resistance and reactance against a plane wave's (1 = rho c);
 - crossover.png: the whole speaker (cab: the horn and the woofer on the cabinet) through Linkwitz-Riley crossovers
   (fourth order, each driver equalised flat on the listening axis and aligned there, as the amplifier's DSP can):
-  the level 30, 45 and 60 degrees off axis horizontally against the axis, and the vertical maps, at 800 Hz (today's)
-  and the proposal.
+  the level 30, 45 and 60 degrees off axis horizontally against the axis, and the vertical maps, at 800 Hz (round 12's) and the
+  proposal; the shipping crossover is 1 kHz (README S6; the engineering audit, 2026-11-01).
 """
 import glob, json, os
 from pathlib import Path

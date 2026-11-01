@@ -113,21 +113,26 @@ isolator.
   does not replace it. The listed cord set (`mains-cord-nema`) and the metal compartment as fire enclosure (section 2)
   are part of it.
 - **The lab's pre-check (January) also covers:** its reading of stability, 8.6.2.2 (the 20 % push) and 8.6.5
-  (`stability/README.md`; both designs fail on today's feet); and the L-pad's abnormal heat (section 5).
+  (`stability/README.md`; both designs fail on today's feet); and the HF channel's abnormal case, now without an L-pad (section 5).
 
-## 5. The L-pad's heat in the abnormal case
+## 5. The L-pad is gone: the HF channel attenuated in the DSP (the engineering audit, 2026-11-01)
 
-The L-pad's two resistors can dissipate up to about 26 to 31 W with a full-scale HF sine. That is 25.6 W by this
-file's arithmetic at 22.4 V (the FA122's 125 W into 4 Ω), and 30.6 W by the audit's. It all sits inside the sealed
-compartment, with the capacitor on the resistors' plate.
+**The problem:** the passive L-pad could dissipate 25 to 31 W inside the sealed compartment with a full-scale HF sine.
+That is 25.6 W by this file's arithmetic at the FA122's 22.4 V, and 30.6 W by the audit's. A first answer, capping the
+HF channel at 10 V, cost 7 to 8 dB of the horn's headroom.
 
-- **The audit asked for the resistors to be sunk to the FA122's outer plate. As drawn, they cannot be.** The module
-  fills the plate's inside face (236 to 324 by 380 to 660 in the CAD), leaving margins of 16 and 18 mm.
-- **What is done instead:**
-  - The preset limits the HF channel to 10 V, so in use the pad dissipates at most about 5 W (3.2 W in the series
-    resistor, 1.9 W across the driver).
-  - The capacitor is stood off 3 mm on nylon spacers.
-  - The abnormal case (limiter defeated) is tested in FAI E8. The aluminium compartment is the fire enclosure that
-    contains it.
-- **If the lab wants the abnormal case cooler:** a heatsink plate through the back beside the FA122, with the
-  resistors bolted to its inside. That shows on the back, so it is a look change for the owner.
+**The answer: no L-pad.** The 6 dB the horn needs comes off in the FA122's DSP. The 33 uF series capacitor stays,
+stood off 3 mm on nylon spacers.
+
+| | the L-pad | DSP only |
+|---|---|---|
+| heat in the compartment, abnormal case | 25.6 to 30.6 W | **0 W** (beyond the amplifier's own) |
+| the HF channel's headroom | full only with the pad's heat; 10 V if capped (about 110 dB at 1 m) | **the FA122's full 22.4 V: 31 W into the driver, about 123 dB at 1 m**, past the woofer's 117 |
+| the driver in the abnormal case (limiter defeated) | 8.9 W | **31 W, within its 140 W (AES) rating**; the heat is in its own motor in the pod, outside the sealed box |
+| hiss at 1 m | the pad's 6 dB below | **about 8 to 10 dB SPL** (the reviewer: about 8; about 10 at 50 uV of amplifier noise), below a quiet room's 25 to 30 dB, and lower again at the seat |
+| protection if the preset is lost | the capacitor (300 Hz, first order) | the same capacitor |
+| parts | two 25 W resistors and a plate, about $24 | none |
+
+**Checks:**
+- FAI E8: a full-scale HF sine with the limiter defeated, with thermocouples on the pod and the boss;
+- the hiss measured at 1 m on the first pair.

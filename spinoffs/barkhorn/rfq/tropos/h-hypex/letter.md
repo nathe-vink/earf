@@ -17,9 +17,9 @@ product to a test lab, we have a few questions.
    screws in nylon shoulder washers, so it can slide as it warms.
 3. **The preset.** We plan to load the same verified filter into all three preset slots and to set the filter
    password at the factory. Is there anything we should know about doing that, or about restoring it in service?
-4. **Heat.** Our HF channel feeds a passive L-pad (two 25 W aluminium-housed resistors) inside the compartment. The
-   preset limits it to 10 V. Is there a place on the plate's inside where a small resistor plate may be bolted for
-   cooling, or should we keep it off the plate?
+4. **Gain.** We attenuate the HF channel 6 dB in the DSP rather than with a passive pad (a 16 ohm compression driver,
+   108 dB at 4 V, behind a series capacitor). Is the FA122's output noise figure published, so we can confirm the
+   driver's hiss at 1 m?
 5. **The link.** We would like to put a 75 Ω S/PDIF isolation transformer in the master-to-slave link, to break a
    ground loop. Does the link tolerate one?
 

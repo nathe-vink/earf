@@ -8,10 +8,10 @@ article. The analysis scripts are `stability/com.py` and `stability/horn.py`, wi
 |---|---|---|
 | 1 | Stability, IEC 62368-1 8.6.2.2 | **the owner's decision**: both designs fail in every direction; the options are below |
 | 2 | Horn retention | **fixed**: keyhole sockets at the front, the tie rod at 2 N m; the drawing's detail to follow |
-| 3 | Heat, the abnormal case | **fixed differently**: the HF limit in the preset and the capacitor's standoff (the plate cannot take the resistors) |
+| 3 | Heat, the abnormal case | **fixed**: the L-pad removed, the 6 dB in the DSP; the capacitor stood off |
 | 4 | Preset | **fixed**: three slots, the password, the limits |
 | 5 | FAI levels | **fixed**: a static pressure decay at 200 Pa; sweeps from 35 Hz |
-| 6 | Parts and docs | **fixed**, except the site's crossover (not this lane's file) |
+| 6 | Parts and docs | **fixed** |
 | 7 | The FA122's CB report | **a draft request to Hypex** (not sent); the end product's listing planned |
 
 ## 1. Stability
@@ -52,27 +52,30 @@ the stability test's push at its top, the horn starts to lift at **13 N (formed)
   Strata's posts in `variants/variants.py`, the RFQ's posts and sockets, and FAI D11, M1 and M4. **The keyhole's detail
   drawing is still to come.** The CAD still draws round sockets; the parts list and the RFQ describe the keyholes.
 
-## 3. Heat in the abnormal case
+## 3. Heat in the abnormal case: the L-pad removed
 
 **The audit's finding:** the L-pad can dissipate up to 30.6 W inside the sealed compartment, with the capacitor on the
-resistors' plate. This file's own arithmetic gives 25.6 W at the FA122's full 22.4 V.
+resistors' plate. This file's arithmetic gives 25.6 W at the FA122's full 22.4 V.
 
-**Why the audit's fix cannot be done:** the FA122's module covers its plate's inside face, leaving 16 and 18 mm
-margins, so the resistors cannot be sunk to the plate as drawn.
+**Two steps:**
+- **First answer, superseded:** cap the HF channel at 10 V in the preset. It cost 7 to 8 dB of the horn's headroom
+  (the coordinator's check).
+- **The audit's own fix cannot be done:** the FA122's module fills its plate's inside face, leaving 16 and 18 mm
+  margins, so the resistors cannot be sunk to the plate.
 
-**The fix:**
-- The preset limits the HF channel to **10 V**. The pad then dissipates at most about 5 W: 3.2 W in the series
-  resistor and 1.9 W across the driver. The driver gets 1.8 W, about 110 dB at 1 m, which is plenty.
-- The capacitor is stood off 3 mm on nylon spacers.
-- The limiter-defeated case is tested in FAI E8, with thermocouples. The metal compartment is its fire enclosure
-  (`compliance.md`, sections 2 and 5).
-- If the lab wants it cooler: a heatsink plate through the back. That is a look change.
-- The question has gone to Hypex: `rfq/tropos/h-hypex/letter.md`.
+**The answer (the coordinator's suggestion, checked):** no L-pad. The 6 dB comes off in the FA122's DSP, and the 33 uF
+series capacitor stays, stood off 3 mm.
+- **Hiss:** the bare driver's is about 8 to 10 dB SPL at 1 m, inaudible.
+- **Headroom:** the full 22.4 V is 31 W into the driver, within its 140 W rating, about 123 dB at 1 m.
+- **Heat:** nothing in the compartment heats but the amplifier. In the abnormal case the heat is in the driver's own
+  motor, in the pod.
+- **Cost:** two resistors and a plate fewer (about $24).
+- The comparison is in `compliance.md` 5.
 
 ## 4. The preset
 
-- The same verified preset in **all three slots**: the 1 kHz LR4 crossover, a 28 Hz high-pass, the limiters (the HF
-  channel at 10 V), soft clip on, the port notch, auto-standby.
+- The same verified preset in **all three slots**: the 1 kHz LR4 crossover, the HF channel 6 dB down (there is no
+  L-pad), a 28 Hz high-pass, the limiters at the drivers' ratings, soft clip on, the port notch, auto-standby.
 - **Hypex's filter password** is set at the factory and recorded in the FAI file, not on the speaker (FAI E6).
 
 ## 5. FAI levels
@@ -92,7 +95,7 @@ margins, so the resistors cannot be sunk to the plate as drawn.
 | Mains cord | none in the parts list | **NEMA 5-15P to C13, 2 m, 18 AWG SJT, UL listed** (`mains-cord-nema`, part `mains-cord`, the "other" RFQ) |
 | FA122's plate | 10 holes in the model, 8 inserts bought | **ten inserts**, the pattern to be confirmed against Hypex's drawing (asked in the Hypex letter) |
 | Amp box | 1.5 in the CAD; "6061" in the parts list and "5052 or 6061" in the RFQ | **1.5 mm 5052-H32** (6061 cracks at tight folds), in the CAD, the parts list and the RFQ |
-| Crossover | 800 Hz and 1 kHz in different files | **1 kHz, LR4** (README S6; the preset). The site's `web.py` still says 800 Hz: that is the site lane's file |
+| Crossover | 800 Hz and 1 kHz in different files | **1 kHz, LR4** in every file of this lane (README S6, the preset, `product.py`, `horn_sim.py`, `horn_plots.py`) |
 | Horn depth | "170 mm" in README S6 | **278 mm** (170 was an earlier flare's) |
 | Post load | "14 N" (`laminated-horn.md`) | **21 N formed, 28 N Strata** (`stability/horn.json`) |
 | Ground loop | not documented | **the source to the master only, an S/PDIF isolation transformer in the link, never a mains earth-lift** (`compliance.md` 3) |

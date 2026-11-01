@@ -1,5 +1,5 @@
 """The cast horn's sound field by boundary elements (round 12, the owner: "Do 1-3", the first being to check the horn's
-acoustics by simulation): its coverage, its loading and its on-axis response from below the 800 Hz crossover to
+acoustics by simulation): its coverage, its loading and its on-axis response from below the 1 kHz crossover to
 8 kHz, alone and on its cabinet beside the 15 in woofer, and the two summed through the crossover.
 
     .venv-fab/bin/python spinoffs/barkhorn/horn_sim.py check               # the solver against a pulsating sphere

@@ -17,7 +17,7 @@ Sizes are scaled from the photograph by its turntable (about 450 wide): the cabi
 from the cabinet: about 630 x 366, its rim about 37 above the top.
 
 Parts from the horn-speaker research of 2026-10-10 and 2026-10-12 (components.json): FaitalPRO 15PR400-8 woofer (treated
-paper cone), B&C DE1085TN-16 compression driver (2 in exit, 100 mm titanium diaphragm, crossed at 800 Hz or above; round
+paper cone), B&C DE1085TN-16 compression driver (2 in exit, 100 mm titanium diaphragm, crossed at 1 kHz (B&C allow 800 Hz or above); round
 5, for the owner's bigger throat, in place of round 4's 1 in BMS 4550), a Hypex FusionAmp FA122.
 """
 import math, os, random, sys
@@ -710,9 +710,10 @@ def parts(P):
                 notes=['master to slave on the FA122s\' S/PDIF I/O, which carries Hypex\'s link: one remote sets both'])]
           if P.get('remote') else []),
         *([] if hz['form'] == 'cast' else [Part('hf-cable', None, Bought('speaker-cable-1m'))]),
-        Part('hf-capacitor', None, Bought('hf-protect-cap'), notes=['in series ahead of the L-pad: the driver safe from low frequencies '
+        Part('hf-capacitor', None, Bought('hf-protect-cap'), notes=['in series with the driver: the driver safe from low frequencies '
                                                                     'even if the amplifier\'s preset is lost (a first-order high-pass at '
-                                                                    'about 300 Hz into 16 ohm)']),
+                                                                    'about 300 Hz into 16 ohm); clipped on nylon standoffs 3 mm off the '
+                                                                    'compartment\'s pan']),
         Part('mains-cord', None, Bought('mains-cord-nema'), notes=['shipped with each speaker (the engineering audit, 2026-11-01)']),
         Part('loom', None, Bought('loom-set')),
         Part('terminals', None, Bought('push-on-terminal'), qty=4),
@@ -1557,13 +1558,9 @@ def amp_compartment(P, ribs, wz, wood):
                        f'anodised; a {fl:g} flange round its open side, on a {ab["gasket"]:g} EPDM gasket on the back\'s inner face, '
                        'ten screws through it, so the box stays airtight and the mains electronics are enclosed in metal; two M12 '
                        'cable glands in its front; the ports\' length found with it fitted (it takes volume)']),
-           Part('amp-box-gasket', seal, Bought('epdm-gasket'), finish='sleeve', inside=True),
-           Part('hf-pad', pad, Bought('attenuator-l-pad'), finish='amp', inside=True, render=False,
-                notes=['on a 3 mm aluminium plate screwed to the compartment\'s front, inside, with thermal compound under the '
-                       'resistors; the capacitor beside them, stood off 3 mm on nylon spacers and clipped (the engineering '
-                       'audit, 2026-11-01); crimped, insulated 6.3 mm receptacles. The preset limits the HF channel to 10 V, so '
-                       'the pad dissipates about 5 W at most in use; up to about 26 to 31 W with the limiter defeated, the '
-                       'abnormal case, which the metal compartment encloses (make/engineering-audit.md)'])]
+           Part('amp-box-gasket', seal, Bought('epdm-gasket'), finish='sleeve', inside=True)]
+    # the engineering audit (2026-11-01): no L-pad. The HF channel is attenuated in the FA122's DSP; the driver's
+    # capacitor alone stays in the compartment, clipped on nylon standoffs 3 mm off the pan (`pad` is no longer a part)
     # the leads (round 14: they stay in the cabinet when the back comes off, each unplugged at its connector at the
     # compartment): the HF lead straight up from its gland, through brace-2's window, in under the top's batts to its
     # gland at the cable post; the woofer's under the motor to the basket's lower spoke
@@ -2263,7 +2260,7 @@ def alternative_covers(P, x0, x1, z0, z1):
                     notes=['the cups in four 10 mm holes 12 deep in the panel\'s corners, 25 in from the recess\'s edges']))
 
     # the slotted grilles: 6 mm plywood, flush with the shell's front, on pegs as the cloth grille; the woofer plays
-    # below 800 Hz only, so an open area about a quarter of the face costs it nothing audible (the air behind the grille
+    # below the 1 kHz crossover only, so an open area about a quarter of the face costs it nothing audible (the air behind the grille
     # resonates in its slots near 1.9 kHz, over an octave above the crossover)
     t, b, sw = cv['grille_t'], cv['border'], cv['slot_w']
     for name, opt, fn, stock, fin in (('lenticel', 'lenticel-grille', lenticels, 'baltic-birch', 'grille-paint'),
@@ -2647,8 +2644,8 @@ PRODUCT = Product(
            'The woofer flush in its rebate on a gasket, on eight M6 T-nuts from inside; the ring over its frame, held by four magnets in the panel under steel discs in its back; each port, printed in one with its square frame, fitted from the front, the frame flush in a recess on a foam gasket, four black wood screws in its corners; its length found on the first sample (its rounded ends cannot be trimmed).',
            'The waveguide stands on four posts, stainless lamp tube 10 x 7, each threaded M10 x 1 at its top into a brass insert bonded in a pad cast under the horn (drilled after casting, through a jig taken off the top\'s sockets), the rear posts\' plain feet standing in polyurethane sleeves in brass sockets bonded into the top, and the front posts\' feet, turned heads 14 across, hooked under the lips of keyhole sockets bonded through the top into the front panel\'s edge (the engineering audit, 2026-11-01: loose feet let the horn lift at a push of about 13 to 23 N), so the horn and its posts lift off as one once slid 10 mm forward. An M6 rod down the free rear post, from a knurled nut inside the pod tightened to 2 N m to an insert under the top, holds the rear down and locks the slide: held at three points, the horn cannot lift. The cap closing the pod is held by a twist-lock (round 16): three lugs on its spigot in L-slots in the pod\'s bore, locked by an eighth of a turn, an O-ring beyond them; no screw shows. The HF lead, a round silicone cable 5 across, runs from its connector at the amplifier\'s compartment straight up, through a gland under the top and up inside a rear post into the pod, where it plugs into the driver\'s leads. To lift the horn off: the cap off, the nut undone, the lead unplugged, and the horn slid 10 mm forward.',
            'The front: the panel faced in bark (1 mm) round the ring and the port, and a cloth disc over the woofer, its MDF frame standing on the ring on four magnet pairs, its face 18.5 clear of the cone at rest.',
-           'The FA122 crosses at 1 kHz, LR4 (the one crossover in every file since the engineering audit of 2026-11-01; round 35: in its simulation the horn loads the driver fully only from about 900 Hz, and two-way speakers of this size cross where their horns allow: JBL\'s 4367 at 700 Hz and its M2 at 800 on deeper waveguides, its 4430 at 1 kHz; 800 to 900 Hz only if the first sample\'s distortion at 100 dB/1 m stays low; B&C asks 12 dB/oct or steeper, at 800 Hz or above) with the HF channel about 6 dB down (105 dB at 2.83 V against the woofer\'s 99), part of it in the passive L-pad after the amplifier, so its hiss stays inaudible: two 25 W aluminium-housed resistors on a plate in the compartment, behind a 33 uF film capacitor that keeps low frequencies off the driver if the preset is ever lost.',
-           'The amplifier\'s preset, stored before the speaker ships, the same verified preset in all three of the FA122\'s slots so no slot plays without it, behind Hypex\'s filter password set at the factory and recorded in the first-article file (the engineering audit, 2026-11-01): the crossover; a 4th-order Butterworth high-pass at 28 Hz on the woofer (below the ports\' tuning the box no longer holds the cone, which would pass Xmax below about 30 Hz at full output, and a record\'s warp drives it there); limiters set to the woofer\'s Xmax and the driver\'s rating, the HF channel\'s at 10 V (the L-pad then dissipates about 5 W at most); soft clip on; a notch at the ports\' pipe resonance (about 540 Hz in the pressed cabinet, 560 in the Cloud\'s, 600 in the plywood one), measured in each port\'s near field; and Hypex\'s auto-standby on (round 35: about 0.5 W asleep, and the compartment cooler in a warm room).',
+           'The FA122 crosses at 1 kHz, LR4 (the one crossover in every file since the engineering audit of 2026-11-01; round 35: in its simulation the horn loads the driver fully only from about 900 Hz, and two-way speakers of this size cross where their horns allow: JBL\'s 4367 at 700 Hz and its M2 at 800 on deeper waveguides, its 4430 at 1 kHz; 800 to 900 Hz only if the first sample\'s distortion at 100 dB/1 m stays low; B&C asks 12 dB/oct or steeper, at 800 Hz or above) with the HF channel about 6 dB down (105 dB at 2.83 V against the woofer\'s 99), all of it in the FA122\'s DSP (the engineering audit, 2026-11-01: no L-pad; the bare driver\'s hiss is about 8 to 10 dB SPL at 1 m, inaudible, and the FA122\'s full 22.4 V is 31 W into the driver, within its 140 W rating), behind a 33 uF film capacitor that keeps low frequencies off the driver if the preset is ever lost.',
+           'The amplifier\'s preset, stored before the speaker ships, the same verified preset in all three of the FA122\'s slots so no slot plays without it, behind Hypex\'s filter password set at the factory and recorded in the first-article file (the engineering audit, 2026-11-01): the crossover; a 4th-order Butterworth high-pass at 28 Hz on the woofer (below the ports\' tuning the box no longer holds the cone, which would pass Xmax below about 30 Hz at full output, and a record\'s warp drives it there); limiters set to the woofer\'s Xmax and the driver\'s rating; soft clip on; a notch at the ports\' pipe resonance (about 540 Hz in the pressed cabinet, 560 in the Cloud\'s, 600 in the plywood one), measured in each port\'s near field; and Hypex\'s auto-standby on (round 35: about 0.5 W asleep, and the compartment cooler in a warm room).',
            'The amplifier in a sealed compartment of its own, as Hypex asks: 1.5 mm aluminium 5052-H32 (folds without cracking, where 6061 would not), black anodised, on an EPDM gasket on the back\'s inner face, so the box stays airtight and the mains electronics are enclosed in metal. The leads leave it through cable glands. A rating plate beside the amplifier carries the model, the serial number, the ratings, the marks and the maker\'s address; the finished speaker needs an EMC pre-scan and an IEC 62368-1 assessment.',
            'The lining: polyester batts (thermally bonded, recycled PET), 50 mm on the sides and 100 mm on the top and the bottom (round 21), one to each bay between the braces (and the ribs), and 50 mm on the back, its full height between its ribs, so they come off with it; each cut 10 full each way and sewn into a sleeve of white voile; none on the front panel, none beside the ports (10 clear of each tube, nothing between its inner end and the back\'s batts) and none within 20 of the amplifier\'s compartment.',
            'The back comes off (round 14): it closes on a 3 mm EPDM gasket against four land strips inside the shell, sixteen M5 button heads through it into inserts in them. The amplifier\'s compartment, the back\'s ribs and its batts come off with it and the leads unplug at the compartment, so the amplifier, the L-pad and the leads can be reached.',
