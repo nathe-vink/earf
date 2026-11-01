@@ -38,7 +38,7 @@ while lanes run. Deck: https://claude.ai/artifact/3sihYaT4ckNTF6WE7SWR7x (v29). 
   of the Brand Book. FACTS has the rulings (be80a921).
 - biomes session_01BAaPTnGwdpP4WKGVD3vbqx, r48-biomes, b970bb3f: blind critic 3.0 at proof size ("a level-select screen": vertical-dissolve joins, clipped sky, thin atmosphere, box city, denoiser smear). Fix round sent (blend along landforms; atmosphere; real city). Delivering BOTH the 8-biome panorama and seam frames (2 biomes + 2 speakers each, real lens) + 4:5 phone; owner chooses on seeing them. Earlier 2d7c53d1: a time-slice ring world (one camera, each biome at its
   own hour) -> a 5:1 panorama + a little planet; proof 3 rendering.
-- site session_01BAaPTnZ3md8RoquoqYWJkd, r47-site-next, 00b6ad31 (fast-forward from main 856f80d7): American English;
+- site session_01BAaPTnZ3md8RoquoqYWJkd, r47-site-next, 996e273b (Core cordless everywhere, 01:03), earlier 00b6ad31 (fast-forward from main 856f80d7): American English;
   cover-off first; debut page leads with the eight; At home band = covers-off golden-hour room (d6cc6b7c, LH 95).
   WAITING: the cordless Core frames (lamps). Deploy only on the owner's yes.
 
@@ -211,3 +211,7 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
   seats, M8 studs, Sorbothane under the feet), tone-on-tone mark on the back edge, satin bead-blasted deck edge ($3,800).
   Duels vs Outcrop: polished edge lost 0-2; satin edge 1-1 (6.25 vs 6.0). Show the owner: v3-ice-custom-r2 (design) +
   v1 dusk (mood) + Outcrop; detail: a small frosted front mark or none.
+- Site 996e273b (01:03): Core cordless on every page and card (WebP, thumbnails, /s/core-* previews, press kit); copy
+  "No cord: it goes where the conversation is." / "Cordless: about five hours a charge at full brightness, longer
+  dimmed; it charges in two to three hours, on cells you can replace yourself." (flag: changes if the owner picks the
+  OEM Li-ion pack). 65 routes clean; Lighthouse mobile home 95/95/95. Fast-forward from main; HOLDING, no deploy.
