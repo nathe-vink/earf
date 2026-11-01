@@ -88,8 +88,8 @@ KINDS = {
         ('rating-plate', 'rating plate', 'aluminum', '70 x 40 x 1', 'black anodized', 'laser-marked (model, serial, ratings, WEEE bin)', '±0.2'),
     ],
     'd-other': [
-        (('lining-bottom-', 'lining-top-', 'lining-left-', 'lining-right-', 'lining-back-'), 'lining batts', 'polyester batt, acoustic grade, about 30 kg/m3, recycled PET', '50 and 100', 'white', 'cut 10 oversize each way; each sewn into a white voile sleeve', '±5'),
-        ('lining-sleeves', 'lining sleeves (voile)', 'white polyester voile', '-', 'white', 'sewn to each batt\'s size, seams to the wall', '±5'),
+        (('lining-bottom-', 'lining-top-', 'lining-left-', 'lining-right-', 'lining-back-'), 'lining batts', 'polyester batt, acoustic grade, about 30 kg/m3, recycled PET', '50 and 100', 'white', 'cut 10 oversize each way; each sewn into a black voile sleeve', '±5'),
+        ('lining-sleeves', 'lining sleeves (voile)', 'black polyester voile', '-', 'black', 'sewn to each batt\'s size, seams to the wall', '±5'),
         ('cloth-disc', 'cloth disc covering', 'acoustically transparent knit', '-', 'in the speaker\'s color', 'stretched over the disc frame and round its edge', '-'),
         ('mark-back', 'EARF on the back', 'laser etch into the back panel', '0.1 deep', 'etch filled in the speaker\'s color, deeper', 'frosted, 140 wide, from our vector file', '±0.2'),
         ('back-seal', 'back seal', 'EPDM cord 4 mm, 60 Shore A', '4', 'black', 'about 2.7 m a speaker, its ends vulcanized into a loop', 'length ±5'),
@@ -190,7 +190,7 @@ laser-marked. The drawings give every size. The quantities are small for now: on
 fifty."""),
     'd-other': ('other outside work', """I'm writing from EARF, a new hi-fi and lighting maker in San Francisco, for a quote on some smaller jobs for a loudspeaker we are prototyping. The cabinet is clear,
 tinted acrylic, so these parts are seen and have to be neat: acoustic polyester batts cut to size and each sewn into a
-white voile sleeve; a speaker cloth stretched over a frame; our wordmark laser-etched into the back panel and filled in
+black voile sleeve; a speaker cloth stretched over a frame; our wordmark laser-etched into the back panel and filled in
 the speaker's color; and a few seals (an EPDM cord loop with a vulcanized joint, a die-cut sponge gasket, small
 polyurethane sleeves). Please quote whichever of these you do."""),
     'e-laminated-horn': ('a laminated acrylic horn and its cabinet', """I'm writing from EARF, a new hi-fi and lighting maker in San Francisco, for a quote on the acrylic of a loudspeaker we are prototyping: the cabinet, and a horn laminated from
