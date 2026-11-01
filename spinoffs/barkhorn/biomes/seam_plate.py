@@ -21,7 +21,7 @@ import numpy as np                                        # noqa: E402
 TROPOS = os.path.join(HERE, 'assets', 'horn', 'tropos.blend')
 CAM = dict(z=1.45, lens=35.0, pitch=-3.0)
 LEFT = dict(tint='Poison', hdri='misty_pines', rot=0.0, x=-1.75, y=4.6, turn=16.0, strength=1.0)
-RIGHT = dict(tint='Fog', hdri='white_cliff_top', rot=0.0, x=1.75, y=4.6, turn=-16.0, strength=1.0)
+RIGHT = dict(tint='Fog', hdri='white_cliff_top', rot=180.0, x=1.75, y=4.6, turn=-16.0, strength=1.0)
 TRUNK = dict(x=0.0, y=8.5, d=1.7)
 
 
