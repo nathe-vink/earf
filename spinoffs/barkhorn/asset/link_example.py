@@ -2,12 +2,14 @@
 #   python3.11 spinoffs/barkhorn/asset/link_example.py -- OUT.png
 #   python3.11 spinoffs/barkhorn/asset/link_example.py -- strata OUT.png     (tropos-strata.blend, "Tropos Strata <tint>")
 #   python3.11 spinoffs/barkhorn/asset/link_example.py -- strata OTHER.blend OUT.png      (another build, e.g. --tints trucast)
+#   ... -- strata glow=40 OUT.png      (the plinth light at dusk: a `glow` property on each instance empty; 20 if unset)
 import bpy, math, sys
 import os
 strata = 'strata' in sys.argv[:-1]
 lib = next((x for x in sys.argv if x.endswith('.blend') and 'link_example' not in x), None) or \
     os.path.join(os.path.dirname(os.path.abspath(__file__)), 'tropos-strata.blend' if strata else 'tropos.blend')
 out = sys.argv[-1]
+glow = next((float(x[5:]) for x in sys.argv if x.startswith('glow=')), None)
 bpy.ops.wm.read_factory_settings(use_empty=True)
 with bpy.data.libraries.load(lib, link=True, assets_only=True) as (src, dst):
     print('collections in the library:', src.collections)
@@ -18,6 +20,8 @@ sc = bpy.context.scene
 for i, n in enumerate(names):
     e = bpy.data.objects.new(n, None); e.instance_type = 'COLLECTION'; e.instance_collection = bpy.data.collections[n]
     e.location = (-1.65 + 1.1 * i, 0, 0); e.rotation_euler = (0, 0, math.radians(-20)); sc.collection.objects.link(e)
+    if glow is not None:
+        e['glow'] = glow                       # the plinth light's strength for this instance (make_blend.plinth_glow)
 bpy.ops.mesh.primitive_plane_add(size=30); 
 sun = bpy.data.objects.new('sun', bpy.data.lights.new('sun', 'SUN')); sun.data.energy = 4; sun.rotation_euler = (math.radians(50), 0, math.radians(-40)); sc.collection.objects.link(sun)
 w = bpy.data.worlds.new('w'); w.use_nodes = True; w.node_tree.nodes['Background'].inputs[1].default_value = 0.6; sc.world = w
