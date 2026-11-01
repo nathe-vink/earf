@@ -26,13 +26,17 @@ _room = sets.room
 
 
 def _tropos(bpy):
-    want = sorted({f"Tropos {t['tint']}" for t in SHOT.get('tropos', [])})
+    # `tropos_asset` / `tropos_prefix`: another Tropos file (2026-11-01: the owner starts with Strata,
+    # spinoffs/barkhorn/asset/tropos-strata.blend, collections "Tropos Strata <Tint>", no cover)
+    pre = SHOT.get('tropos_prefix', 'Tropos')
+    asset = ROOT / SHOT['tropos_asset'] if SHOT.get('tropos_asset') else ASSET
+    want = sorted({f"{pre} {t['tint']}" for t in SHOT.get('tropos', [])})
     if not want:
         return
-    with bpy.data.libraries.load(str(ASSET), link=True, assets_only=True) as (src, dst):
+    with bpy.data.libraries.load(str(asset), link=True, assets_only=True) as (src, dst):
         dst.collections = want
     for i, t in enumerate(SHOT['tropos']):
-        col = bpy.data.collections[f"Tropos {t['tint']}"]
+        col = bpy.data.collections[f"{pre} {t['tint']}"]
         for ch in col.children:                       # the cover stays off (hidden in the library; checked here)
             assert ch.hide_render, ch.name
         e = bpy.data.objects.new(f'tropos-{i}', None)

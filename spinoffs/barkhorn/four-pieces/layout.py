@@ -64,9 +64,10 @@ def overlap(a, b, pad=0):
 def boxes(shot):
     """Each product's world box (metres), from the shot's own placements."""
     out = {}
+    hw, y0, y1, h = shot.get('tropos_box', [0.315, -0.214, 0.214, 1.295])   # half width, front, back, height
     for i, t in enumerate(shot['tropos']):
         x, y = t['position']
-        out[f'tropos{i}'] = ([x - 0.315, y - 0.214, 0.0], [x + 0.315, y + 0.214, 1.295])
+        out[f'tropos{i}'] = ([x - hw, y + y0, 0.0], [x + hw, y + y1, h])
     m = shot['products'][0]['instances'][0]['position']
     out['mantle'] = ([m[0] - 0.235, m[1] - 0.19, m[2]], [m[0] + 0.235, m[1] + 0.19, m[2] + 0.194])
     for p in shot['set']['props']:

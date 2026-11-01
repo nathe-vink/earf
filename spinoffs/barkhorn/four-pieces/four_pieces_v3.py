@@ -173,11 +173,26 @@ def shot(version, palette='p1'):
     return s
 
 
+def strata(s):
+    """The owner, 2026-11-01: Tropos starts with the stepped Strata design (r33-speaker-horn 2208e2af,
+    spinoffs/barkhorn/asset/tropos-strata.blend; 650 x 442 x 1305 mm, no cover). The same camera, lights and zones."""
+    s['tropos_asset'] = 'spinoffs/barkhorn/asset/tropos-strata.blend'
+    s['tropos_prefix'] = 'Tropos Strata'
+    s['tropos_box'] = [0.325, -0.228, 0.214, 1.305]
+    s['title'] = s['title'].replace('Tropos pair', 'Tropos Strata pair')
+    return s
+
+
 def main():
     os.makedirs(SHOTS, exist_ok=True)
+    only = sys.argv[1:] or ['v3', 'v3s']
     for v in ('day', 'dusk'):
-        json.dump(shot(v), open(os.path.join(SHOTS, f'v3-{v}.json'), 'w'), indent=1)
-        print(f'v3-{v}')
+        if 'v3' in only:
+            json.dump(shot(v), open(os.path.join(SHOTS, f'v3-{v}.json'), 'w'), indent=1)
+            print(f'v3-{v}')
+        if 'v3s' in only:
+            json.dump(strata(shot(v)), open(os.path.join(SHOTS, f'v3s-{v}.json'), 'w'), indent=1)
+            print(f'v3s-{v}')
 
 
 if __name__ == '__main__':
