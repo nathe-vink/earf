@@ -550,19 +550,20 @@ def shot_meridian(sc):
         disc(f'{nm}-weight', cw, depth - 0.0002, 0.006, brass, x=-0.03 * math.cos(ang), z=cz - 0.03 * math.sin(ang))
     disc('hub', 0.006, 0.052, 0.008, brass)
     sc.render.resolution_x, sc.render.resolution_y = 1800, 1200
-    area('key', (-1.75, -0.95, 2.1), (0, 0, cz), 1.2, 45, shape='DISK')                        # r2 c7 (r2 c6: the wall a mid-tone lime, #CFC6B8)
-    lft = area('grazeSide', (-0.30, -0.06, cz), (-0.18, -0.033, cz), 1.0, 12, '#FFF4E8', size_y=0.05); lft.visible_glossy = False; lft.rotation_euler[1] += 1.5708   # L2 c2
-    for nm, zz, w in (('graze', cz + 0.30, 25), ('grazeL', cz - 0.30, 15)):                    # r2 c1: into the face's edge, above and below
+    area('key', (-1.75, -0.95, 2.1), (0, 0, cz), 1.2, 60, shape='DISK')                        # r2 c7 (r2 c6: the wall a mid-tone lime, #CFC6B8)
+    lft = area('grazeSide', (-0.30, -0.06, cz), (-0.18, -0.033, cz), 1.0, 12, '#FFF4E8', size_y=0.05)   # (L2r2 c1 tried at 40 W from the upper left: it lit the plaster in hot patches); lft.visible_glossy = False; lft.rotation_euler[1] += 1.5708   # L2 c2
+    for nm, zz, w in (('graze', cz + 0.30, 8), ('grazeL', cz - 0.30, 0.01)):   # L2r2 c3                    # r2 c1: into the face's edge, above and below
         g = area(nm, (0.0, -0.06, zz), (0.0, -0.033, cz + (0.18 if zz > cz else -0.18)), 1.0, w, '#FFF4E8', size_y=0.05)
         g.visible_glossy = False
-    r = spot('rake', (-0.35, -1.25, 1.95), (0.05, -0.03, cz), 150, 20, 0.02, '#FFF1E0')  # L2 c1: a 20 mm source, the shadows keep color and gain a penumbra         # r2 c3: nearer the lens, the ring hugs the rim
+    r = spot('rake', (-0.95, -1.05, 2.45), (0.05, -0.03, cz), 220, 20, 0.02, '#FFF1E0')   # L2r2 c2, c6: higher and to the side, crisper  # L2 c1: a 20 mm source, the shadows keep color and gain a penumbra         # r2 c3: nearer the lens, the ring hugs the rim
     r.data.spot_blend = 0.6
-    br = area('brasscard', (0.9, -1.2, 1.9), (0, -0.04, cz), 0.6, 15, '#FFF2DC', size_y=0.15)   # L2 c5               # r2 c4: seen in the brass
+    br = area('brasscard', (0.9, -1.2, 1.9), (0, -0.04, cz), 0.6, 5, '#FFF2DC', size_y=0.15)   # L2 c5               # r2 c4: seen in the brass
     br.visible_diffuse = False
-    area('fill', (0.4, -1.8, 0.9), (0, 0, cz), 1.8, 30, '#E6ECF5')   # L2 c3: even                            # r2 c5: lower left
+    area('fill', (0.4, -1.8, 0.9), (0, 0, cz), 1.8, 10, '#E6ECF5')
+    de = area('discedge', (0.12, -0.08, cz - 0.10), (0.06, -0.04, cz + 0.05), 0.3, 15, '#FFF6EC', size_y=0.1); de.visible_camera = False; de.visible_glossy = False   # L2r2 c4   # L2 c3: even                            # r2 c5: lower left
     camera((0.55, -1.85, 1.25), (0.13, -0.03, cz), lens=85, fstop=0)                          # L2 c7: the clock left of center, the right third open
-    sc.view_settings.exposure = -0.9   # (-0.5 washed the frame with the brighter strips and fill)
-    sc.view_settings.look = 'AgX - Base Contrast'                                              # L2 c6
+    sc.view_settings.exposure = -0.6
+    sc.view_settings.look = 'AgX - Medium High Contrast'   # L2r2 c5                                              # L2 c6
 
 SHOTS = dict(moho=shot_moho, lithos=shot_lithos, ionos=shot_ionos, cairn=shot_cairn, bedrock=shot_bedrock, relief=shot_relief, meridian=shot_meridian)
 
