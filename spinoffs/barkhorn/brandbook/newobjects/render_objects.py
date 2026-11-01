@@ -301,8 +301,8 @@ def shot_moho(sc):
     # look 2 (2026-10-31, the coordinator: photographed textures; a hard key so the caustics throw tinted light):
     # Mantle on an oak table against a lime-plaster wall; a small hard sun from behind-left through the puck
     slab('table', -1.2, -0.9, -0.115, 1.2, 0.6, -0.075, ph('oak_wood_planks'))
-    slab('wall', -2.0, 0.6, -0.115, 2.0, 0.65, 1.5, ph('beige_wall_001', tint='#CFC6B8', tint_mix=0.3))
-    sc.view_settings.look = 'AgX - Medium High Contrast'
+    slab('wall', -2.0, 0.6, -0.115, 2.0, 0.65, 1.5, ph('beige_wall_001', tint='#8E867A', tint_mix=0.5))   # L2r2 c3: darker
+    sc.view_settings.look = 'AgX - Base Contrast'   # L2r2 c6
     slab('plinth', -0.235, -0.19, -0.075, 0.235, 0.19, -0.049, acrylic('dust-pour'))
     ring('platter', 0.155, 0, -0.047, 0.025, acrylic('dust-pour'))
     ring('record', 0.1524, 0.0036, -0.0021, 0.0020, vinyl())
@@ -315,16 +315,17 @@ def shot_moho(sc):
              bond_top=acrylic(tn, 'bond') if i < 3 else None, bond_bottom=acrylic(tn, 'bond') if i > 0 else None)
     ring('brass', 0.01245, 0.0039, 0.0002, 4 * 0.0127 - 0.0006, basic('brass', '#C49A45', 0.18, 1.0))
     sc.render.resolution_x, sc.render.resolution_y = 1800, 1200
-    spot('sun', (-0.44, 0.33, 0.15), (0.0, 0.0, 0.02), 110, 14, 0.002, '#FFF1DE')     # the hard key, lower: a long tinted cast across label and record (L2 c2)
-    win = area('window', (-1.0, 1.1, 1.3), (0, 0, 0.0), 1.0, 120, '#F4F6FA'); win.visible_glossy = False   # soft daylight, higher and further behind (L2 c1)
-    area('key', (0.8, -0.7, 0.6), (0, 0, 0.02), 0.6, 6, '#EEF2F8')                      # L2 c2
+    spot('sun', (-0.32, 0.52, 0.15), (0.0, 0.0, 0.02), 160, 10, 0.002, '#FFF1DE')   # L2r2 c4: nearly behind the puck: the label gets only its tinted light     # the hard key, lower: a long tinted cast across label and record (L2 c2)
+    win = area('window', (-1.3, 1.1, 1.6), (0, 0, 0.0), 1.0, 80, '#F4F6FA'); win.visible_glossy = False   # soft daylight, higher and further behind (L2 c1)
+    area('key', (0.8, -0.7, 0.6), (0, 0, 0.03), 0.6, 2, '#EEF2F8')                      # L2 c2
     graze = area('graze', (0.55, 0.45, 0.06), (0, 0, 0.0), 0.8, 30, '#FFF6EC', size_y=0.04)   # L2 c4: a strip low behind-right: the grooves' sheen
     graze.visible_camera = False
+    g2 = area('graze2', (-0.55, 0.45, 0.06), (0, 0, 0.0), 0.8, 40, '#FFF6EC', size_y=0.04); g2.visible_camera = False   # L2r2 c2
     top = area('topcard', (0.02, 0.06, 0.28), (0, 0, 0.05), 0.15, 3, '#FFFFFF'); top.visible_camera = False   # L2 c7: a highlight on the brass
-    flag = slab('flag', -1.0, 0.30, -0.07, 1.0, 0.32, 0.6, basic('flag', '#0A0A0B', 0.9))   # mirrored only: black behind the puck's sides
+    flag = slab('flag', -1.2, 0.30, -0.07, 1.2, 0.32, 0.6, basic('flag', '#0A0A0B', 0.9))   # mirrored only: black behind the puck's sides
     for v in ('visible_camera', 'visible_shadow', 'visible_diffuse', 'visible_transmission'): setattr(flag, v, False)
     sc.view_settings.exposure = -0.3
-    camera((0.36, -0.66, 0.26), (0.0, 0.0, 0.02), lens=100, fstop=8)   # L2 c5: the platter's amber rim in frame
+    camera((0.36, -0.66, 0.19), (0.0, 0.0, 0.026), lens=120, fstop=6.3)   # L2r2 c7   # L2 c5: the platter's amber rim in frame
 
 def shot_lithos(sc):
     # a room corner: oak floor, two plaster walls, a stack of books for scale, window light from the left
