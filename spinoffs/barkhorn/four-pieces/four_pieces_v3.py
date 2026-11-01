@@ -229,6 +229,23 @@ def hemisphere_v3(s):
     return s
 
 
+def strata_float_v3(s, version):
+    """The owner's Mantle A, Strata Float v3 (2026-11-01, r48-mantle-design 1d59abeb: studio/products/mantle-strata-v3.json,
+    flavour poison-2092: the deck, hinge blocks and lid tinted, the base stock Smoke 2074). 450 x 370 x 161 mm without
+    its lid (the lid left off, as before). Its base light is not an emitter in the block: at dusk the LED strip is one,
+    #FF8C40 (the Mantle lane)."""
+    blk = s['products'][0]
+    blk['def'] = 'studio/products/mantle-strata-v3.json'; blk['flavour'] = 'poison-2092'
+    blk['instances'][0]['flavour'] = 'poison-2092'
+    s['materials'].pop('acrylic', None)                  # the old Mantle's plinth; the new block carries its own 2092
+    s['materials'].pop('glow', None)
+    if version == 'dusk':
+        s['materials']['ledstrip'] = {'preset': 'emit', 'color': '#FF8C40', 'strength': 6.0}
+    s['mantle_box'] = [0.225, 0.185, 0.161]
+    s['title'] = s['title'].replace('Mantle', 'Mantle (Strata Float v3)')
+    return s
+
+
 def main():
     os.makedirs(SHOTS, exist_ok=True)
     only = sys.argv[1:] or ['v3', 'v3s', 'v3k']
@@ -236,6 +253,10 @@ def main():
         if 'v3' in only:
             json.dump(shot(v), open(os.path.join(SHOTS, f'v3-{v}.json'), 'w'), indent=1)
             print(f'v3-{v}')
+        if 'v3sf' in only:                    # -final-2092-sf: Hemisphere v3 and Strata Float v3
+            json.dump(strata_float_v3(hemisphere_v3(stock2092(strata(shot(v)))), v),
+                      open(os.path.join(SHOTS, f'v3sf-{v}.json'), 'w'), indent=1)
+            print(f'v3sf-{v}')
         if 'v3h' in only:                     # -final-2092 with Hemisphere v3 (the Mantle swap follows)
             json.dump(hemisphere_v3(stock2092(strata(shot(v)))), open(os.path.join(SHOTS, f'v3h-{v}.json'), 'w'), indent=1)
             print(f'v3h-{v}')

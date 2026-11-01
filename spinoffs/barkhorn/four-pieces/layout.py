@@ -69,7 +69,8 @@ def boxes(shot):
         x, y = t['position']
         out[f'tropos{i}'] = ([x - hw, y + y0, 0.0], [x + hw, y + y1, h])
     m = shot['products'][0]['instances'][0]['position']
-    out['mantle'] = ([m[0] - 0.235, m[1] - 0.19, m[2]], [m[0] + 0.235, m[1] + 0.19, m[2] + 0.194])
+    hw, hd, h = shot.get('mantle_box', [0.235, 0.19, 0.194])           # half width, half depth, height
+    out['mantle'] = ([m[0] - hw, m[1] - hd, m[2]], [m[0] + hw, m[1] + hd, m[2] + h])
     for p in shot['set']['props']:
         if p.get('module') == 'earf_moon':
             s = p['spots'][0]['position']

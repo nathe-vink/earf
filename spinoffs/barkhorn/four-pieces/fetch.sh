@@ -23,3 +23,6 @@ git reset -q
 # Hemisphere v3, "color outside" (the owner, 2026-11-01), for the -final-2092-sf frames
 git checkout 7c4b5993eb3e9f12cc3e6a092b2987dfd319ff9b -- spinoffs/barkhorn/companions/out-dome-pendant-v3/render studio/products/earf-dome-pendant-v3.json
 git reset -q
+# Mantle A, Strata Float v3 (the owner, 2026-11-01), for the -final-2092-sf frames
+git checkout 1d59abeb1b1c55b971c7c47dba354adcf49917e9 -- studio/products/mantle-strata-v3.json spinoffs/barkhorn/companions/mantle-r48/out-strata-v3/render
+git reset -q
