@@ -220,6 +220,15 @@ NEXT_TEXT = {   # today's words -> the drafts (each must be found exactly once i
         'acrylic, and it charges in two to three hours.',
 }
 
+# the tagline (the owner's "Go", 2026-11-01 22:45, r46-owner-notes 68adc2c3): one line at every width, never broken
+# between "world" and "over" (broken there, "the world over" reads as "everywhere"): no-break spaces, nowrap, and a size
+# from clamp() that fits the narrowest phone
+TAGLINE, TAGLINE_NEXT = 'Something in the air.', 'Have the world over.'
+TAGLINE_CSS = ('h1.tagline { white-space: nowrap }\n'
+               '.hero-title h1.tagline { font-size: clamp(26px, 5vw, 80px) }\n'
+               '@media (max-width: 860px) { .hero-title h1.tagline { font-size: clamp(24px, 9.4vw, 44px) } }\n'
+               '.debut-words h1.tagline { font-size: clamp(24px, 7vw, 96px) }\n')
+
 
 def copy_next():
     """Put the drafted words in place of today's (the data here; the page's own words through NEXT_TEXT at build)."""
@@ -3159,7 +3168,7 @@ def share_pages():
     if DEBUT:
         img = card('hero-1200.jpg', 'debut.jpg')
         d = 'The first pair of Tropos, heard for the first time. Spring 2027, in San Francisco. Date to come.'
-        made.append(page('debut', 'The EARF debut · Something in the air', d, img, 'The eight Tropos speakers on a curve, Ember to Smoke', '#0B0C10', 'website',
+        made.append(page('debut', 'The EARF debut · ' + (TAGLINE_NEXT if COPY_NEXT else TAGLINE).rstrip('.'), d, img, 'The eight Tropos speakers on a curve, Ember to Smoke', '#0B0C10', 'website',
                          # a WebPage, not an Event, until there is a date: an Event needs a startDate
                          {'@context': 'https://schema.org', '@type': 'WebPage', 'name': 'The EARF debut', 'description': d,
                           'publisher': {'@type': 'Organization', 'name': 'EARF', 'url': URL}, 'image': f'{URL}/{img}'}))
@@ -3207,6 +3216,10 @@ def build():
         for old, new in NEXT_TEXT.items():
             assert rest.count(old) == 1, ('COPY_NEXT: not found once', old[:60])
             rest = rest.replace(old, new)
+        assert rest.count(f'<h1>{TAGLINE}</h1>') >= 1
+        rest = rest.replace(f'<h1>{TAGLINE}</h1>', '<h1 class="tagline">' + TAGLINE_NEXT.replace(' ', '&nbsp;') + '</h1>')
+        i = head.rindex('</style>')
+        head = head[:i] + TAGLINE_CSS + head[i:]
     open(os.path.join(SITE, 'index.html'), 'w').write(HEAD + head.strip() + '\n</head>\n<body>\n' + rest.strip() + '\n</body>\n</html>\n')
     favicons()
     open(os.path.join(SITE, 'robots.txt'), 'w').write('User-agent: *\nDisallow: /\n')

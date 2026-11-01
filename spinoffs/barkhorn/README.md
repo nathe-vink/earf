@@ -165,6 +165,10 @@ brand"). Not live: main needs the owner's yes.
   Hemisphere's shade with its color outside, over clear. Off, the page is byte for byte today's. It goes on with the speaker
   lane's new picture set, whose alts will describe the new Mantle; the pictures on the site still show the old one.
   Close-ups go beside a whole-product picture when that set is laid out.
+- **The tagline "Have the world over."** (the owner's "Go", 2026-11-01 22:45; r46-owner-notes 68adc2c3), also behind
+  `COPY_NEXT`: the home h1 and the debut's (dark), and the debut's link-preview title. One line at every width: no-break
+  spaces, nowrap, and clamp() sizes checked from 320 to 2560 px (`launch/tagline-390.jpg`, `launch/tagline-1440.jpg`).
+  The swatches follow the speaker lane's TINTS.md update (colors F) once it lands on `r33-speaker-horn`.
 
 ## Round 31: every picture final, the amplifier's plate as it is, and pictures for a launch (the owner's notes of 2026-10-18; in progress)
 
