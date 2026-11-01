@@ -26,3 +26,6 @@ actually rendered: `node shoot_pair.js out/preview.html A.png B.png` (B is the s
 then `python3 eff_contrast.py spec.json A.png B.png`, which compares each block's glyph cores against the halo-darkened ground under them.
 The final dusk frame (specs/spec-final-dusk.json: all labels light, halo `0 0 16px rgba(20,16,14,0.7), 0 1px 3px rgba(20,16,14,0.55)`)
 measures 7.0 to 13.3:1 on the labels and 4.7:1 on the corner note.
+
+The stock-tint dusk frame (specs/spec-final2092-dusk.json, the four-pieces lane's final-2092 dusk, 416eb5e6, near-black Tropos
+cabinets with deep green horns): same zones, inks and halo; 7.0 to 13.3:1 on the labels and 4.7:1 on the corner note. Deck v46.

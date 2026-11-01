@@ -521,3 +521,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   (https://claude.ai/artifact/MGUByhczqB2jUYDV7R4t3h): 01 tagline (cover samples, "none: another round"), 02 budget correction
   (A ~$55,000 my pick / B keep $50,000 ~$400 spare / C make room), the owner's 12:10 picks and my calls as settled (horn depth: Ember,
   Poison, Haze, Fog and Smoke stock; Dust, Acid and Ice deep), Smoke's go needed in the biomes session. Asked the owner both.
+- 13:10 deck v46: line.html = the four-pieces final-2092 dusk (416eb5e6; /_blob/8a8547900e847d0131ea466e95b54094), the line's
+  darker stock tint: Tropos near-black with deep green horns, plinths glowing, Core and Hemisphere lit. Same label layout; effective
+  contrast 7.0-13.3:1, corner note 4.7:1. Notes say Hemisphere is its color-inside version and Mantle an earlier floating design,
+  the chosen designs follow (the -sf frames: day ~13:45, dusk ~14:25).
