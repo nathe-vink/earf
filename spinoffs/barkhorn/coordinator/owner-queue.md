@@ -319,3 +319,10 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
 - Biomes 46e23660 (framing matched: center 0.50, height 0.41, feet 0.78 vs the median 0.51/0.41/0.79) then 2ed79dc2
   (--black-lining, the site's Smoke look) rendering after the owner's "the speaker doesn't look like smoke at all"
   (saved 91533ddd; black lining now the working default unless the owner prefers white).
+
+## Check-in 12 (06:14 UTC)
+- Speaker 3a1041bf: the owner's design (Strata, flush horn, lit plinth) PASSES stability: 84.6 kg, margins +19 / +14 /
+  +14 % on the plinth's feet. c723e3fb: package regenerated with the 536 mouth; the plinth light in the engine file.
+  Lit-plinth proofs rendering (three frames).
+- Biomes: idle after pushing --black-lining (2ed79dc2) without rendering ("paused"); nudged at 06:15 to render the
+  portrait, the landscape and the strip.
