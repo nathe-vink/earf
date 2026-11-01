@@ -27,10 +27,10 @@ It lifts the cabinet 38.5 mm.
 | | |
 |---|---|
 | footprint (the feet's centers) | 610 x 620 mm; the base itself 660 x 670 |
-| weight | about 10.3 kg of acrylic (8.6 L), so the speaker is about 85.5 kg (est.) |
+| weight | **10.4 kg** (computed from the CAD), so the speaker with the flush horn is **84.6 kg** |
 | cost, a speaker | about $260 of sheet ($0.03/cm3) + about $250 of cutting, polishing and bonding + $18 of feet: **about $530** (est.) |
-| the push | 168 N (20 % of 85.5 kg) at 1.344 m: the arm needed is 269 mm |
-| margins (the feet's centers) | **forward +17 %, back +13 %, sideways +13 %** (est.) |
+| the push | 166 N (20 % of 84.6 kg) at 1.336 m: the arm needed is 267 mm |
+| margins (the feet's centers) | **forward +19 %, back +14 %, sideways +14 %** (computed: `stability/com.json`, `strata_plinth`) |
 
 ## B. Outrigger feet
 
@@ -102,7 +102,6 @@ The steps' polished edges catch some of it.
 **Stability with the plinth:**
 - The plinth makes the speaker heavier and lower, but the test is geometric: its feet carry the margins in the table
   above.
-- The flush horn (the owner, 2026-11-01) is lighter by about half a kilogram and the same height, so the margins stand
-  (recomputed in `stability/` once it is drawn).
+- With the flush horn drawn, the margins are recomputed from the CAD (`stability/README.md`): +19 / +14 / +14 %.
 - **The plinth is not optional for a listed product.** On the cabinet's own feet the speaker fails the 20 % push in
   every direction. A lab's acceptance of anchoring is the only other route.

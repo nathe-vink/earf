@@ -49,3 +49,21 @@ sides and about 80 to 100 mm beyond its front and back.
   8.6.5**, and add stability to the January pre-check.
 
 A heavier base does not help (the ratio is geometric). A lower horn would, but it is the product.
+
+## The owner's design: Strata with the flush horn on the lit plinth (2026-11-01)
+
+`com.py` now also sums the design as the owner chose it:
+- Strata, its stepped horn flush at 560 (the mouth 536, the lip 12);
+- on base A, the stepped plinth with its light (`variants/BASES.md`);
+- lifted 38.5 mm.
+The force's height is the horn's top as drawn.
+
+| | Strata on the plinth |
+|---|---|
+| mass, a speaker | **84.6 kg** (the plinth 10.4 kg) |
+| center of mass | 9 mm behind the cabinet's middle, 520 mm up |
+| the push (20 % of the weight) | 166 N at 1.336 m: the arm needed is 267 mm |
+| margins on the plinth's feet (centers) | **forward +19 %, back +14 %, sideways +14 %** |
+
+**It passes in every direction with margin.** On the cabinet's own feet it still fails (Strata, flush: -23 % forward,
+-34 % back, -11 % sideways), so the plinth is part of the listed product.

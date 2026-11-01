@@ -49,11 +49,11 @@ def props(ob):
     return abs(V), [x / V for x in C]
 
 
-def parts(prod, hide=()):
+def parts(prod, hide=(), options=()):
     bpy.ops.wm.read_factory_settings(use_empty=True)
     pdef = Pr.load_def(prod, ROOT)
     t = Pr.import_model(bpy, Path(ROOT, pdef['model']), pdef['origin_mm'], pdef.get('axes', 'gltf'))
-    unfitted = {n for names in pdef.get('options', {}).values() for n in names}
+    unfitted = {n for o, names in pdef.get('options', {}).items() if o not in options for n in names}
     out, groups = {}, {}
     for name, ob in t.items():
         if name in unfitted or any(Pr._match(name, h) for h in hide) or any(name.startswith(s) for s in SKIP):
@@ -69,11 +69,11 @@ def parts(prod, hide=()):
         else:
             d = next((v for k, v in DENS.items() if name.startswith(k)), ACRYLIC)
             m, src = vol * d, f'{d} kg/m3'
-        out[name] = dict(mass=m, c=c, src=src)
+        out[name] = dict(mass=m, c=c, src=src, zmax=max(v.co.z for v in ob.data.vertices))
     for g, pieces in groups.items():
         V = sum(v for _, v, _ in pieces)
         for name, v, c in pieces:
-            out[name] = dict(mass=BOM[GROUP_BOM[g]] * v / V, c=c, src=f'{GROUP_BOM[g]} by volume')
+            out[name] = dict(mass=BOM[GROUP_BOM[g]] * v / V, c=c, src=f'{GROUP_BOM[g]} by volume', zmax=c[2])
     return out, pdef
 
 
@@ -103,7 +103,7 @@ def main():
         res[label] = dict(mass_kg=round(M, 1), com_m=[round(x, 4) for x in C],
                           top=[(n, round(p['mass'], 2)) for n, p in sorted(P.items(), key=lambda kv: -kv[1]['mass'])[:12]])
     # the force's height: the top of the horn (the most unfavourable point under 2 m)
-    tops = {'current': 1.2951, 'strata': 1.305}
+    tops = {'current': max(p['zmax'] for p in cur.values()), 'strata': max(p['zmax'] for p in st.values())}
     # tipping edges: the feet's centres (a swivel base pivots on its ball: the conservative edge) and their pads' outer
     # edges; then the footprint each option needs for a 15 % margin. x: -left +right; y: -front +back
     configs = {'feet now (centres)': (-0.23, 0.23, -0.1887, 0.1813),
@@ -118,13 +118,28 @@ def main():
         a = 0.2 * h * 1.15                 # the feet's centres for a 15 % margin, about this centre of mass
         res[label]['feet_for_15pct_m'] = dict(x=[round(C[0] - a, 3), round(C[0] + a, 3)],
                                               y=[round(C[1] - a, 3), round(C[1] + a, 3)])
+    # the owner's choice (2026-11-01): Strata, the flush horn, on the stepped plinth (A) lit from underneath. The plinth
+    # lifts everything 38.5 mm; its feet's centres at x -25 / 585, y -94 / 526 in the Cloud's frame
+    lift = 0.0385
+    sp = {**parts('studio/products/barkhorn-cloud.json', STRATA_HIDE + ['feet-*'])[0],
+          **parts('studio/products/barkhorn-variants.json', ['horn-topo*', 'base-out*'], options=('Plinth', 'Plinth light'))[0]}
+    M = sum(p['mass'] for p in sp.values())
+    C = [sum(p['mass'] * p['c'][i] for p in sp.values()) / M for i in range(3)]
+    C[2] += lift
+    h = max(p['zmax'] for p in sp.values()) + lift
+    feet = (-0.305, 0.305, -0.3077, 0.3123)
+    res['strata_plinth'] = dict(mass_kg=round(M, 1), com_m=[round(x, 4) for x in C], push_height_m=round(h, 4),
+                                push_N=round(min(0.2 * M * G, 250), 1), need_arm_mm=round(200 * h),
+                                plinth_kg=round(sum(p['mass'] for n, p in sp.items() if n.startswith('base-plinth')), 2),
+                                tipping={'plinth feet (centres)': tipping(None, C, feet, h)})
     json.dump(res, open(Path(__file__).with_name('com.json'), 'w'), indent=1)
     for label in res:
         r = res[label]
-        print(label, r['mass_kg'], 'kg, CoM', r['com_m'], 'push', r['push_N'], 'N at', r['push_height_m'], 'm; need', r['need_arm_mm'], 'mm (15 %:', r['need_arm_mm_for_15pct'], ')')
+        print(label, r['mass_kg'], 'kg, CoM', r['com_m'], 'push', r['push_N'], 'N at', r['push_height_m'], 'm; need', r['need_arm_mm'], 'mm', r.get('need_arm_mm_for_15pct', ''))
         for k, v in r['tipping'].items():
             print('   ', k, {d: (x['arm_mm'], f"{x['margin_pct']:+d} %") for d, x in v.items()})
-        print('    feet for +15 %:', r['feet_for_15pct_m'])
+        if 'feet_for_15pct_m' in r:
+            print('    feet for +15 %:', r['feet_for_15pct_m'])
 
 
 if __name__ == '__main__':

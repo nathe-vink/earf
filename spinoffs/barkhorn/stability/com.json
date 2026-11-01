@@ -1,10 +1,10 @@
 {
  "current": {
-  "mass_kg": 70.2,
+  "mass_kg": 69.9,
   "com_m": [
    0.0,
-   0.0192,
-   0.5327
+   0.0197,
+   0.5302
   ],
   "top": [
    [
@@ -37,7 +37,7 @@
    ],
    [
     "waveguide",
-    2.69
+    2.39
    ],
    [
     "brace",
@@ -56,8 +56,8 @@
     1.11
    ]
   ],
-  "push_height_m": 1.2951,
-  "push_N": 137.7,
+  "push_height_m": 1.2950961589813232,
+  "push_N": 137.1,
   "need_arm_mm": 259,
   "need_arm_mm_for_15pct": 298,
   "tipping": {
@@ -70,7 +70,7 @@
     "back": {
      "arm_mm": 162,
      "need_mm": 259,
-     "margin_pct": -37
+     "margin_pct": -38
     },
     "left": {
      "arm_mm": 230,
@@ -112,17 +112,17 @@
     0.298
    ],
    "y": [
-    -0.279,
-    0.317
+    -0.278,
+    0.318
    ]
   }
  },
  "strata": {
-  "mass_kg": 75.2,
+  "mass_kg": 74.6,
   "com_m": [
    0.0,
-   0.0086,
-   0.5531
+   0.01,
+   0.5482
   ],
   "top": [
    [
@@ -142,16 +142,16 @@
     6.95
    ],
    [
-    "horn-strata",
-    5.57
-   ],
-   [
     "bottom",
     5.19
    ],
    [
     "top",
     5.18
+   ],
+   [
+    "horn-strata",
+    4.91
    ],
    [
     "hf-motor",
@@ -174,65 +174,101 @@
     1.11
    ]
   ],
-  "push_height_m": 1.305,
-  "push_N": 147.5,
-  "need_arm_mm": 261,
-  "need_arm_mm_for_15pct": 300,
+  "push_height_m": 1.2970962524414062,
+  "push_N": 146.4,
+  "need_arm_mm": 259,
+  "need_arm_mm_for_15pct": 298,
   "tipping": {
    "feet now (centres)": {
     "forward": {
-     "arm_mm": 197,
-     "need_mm": 261,
-     "margin_pct": -24
+     "arm_mm": 199,
+     "need_mm": 259,
+     "margin_pct": -23
     },
     "back": {
-     "arm_mm": 173,
-     "need_mm": 261,
+     "arm_mm": 171,
+     "need_mm": 259,
      "margin_pct": -34
     },
     "left": {
      "arm_mm": 230,
-     "need_mm": 261,
-     "margin_pct": -12
+     "need_mm": 259,
+     "margin_pct": -11
     },
     "right": {
      "arm_mm": 230,
-     "need_mm": 261,
-     "margin_pct": -12
+     "need_mm": 259,
+     "margin_pct": -11
     }
    },
    "feet now (pad edges)": {
     "forward": {
-     "arm_mm": 217,
-     "need_mm": 261,
-     "margin_pct": -17
+     "arm_mm": 219,
+     "need_mm": 259,
+     "margin_pct": -16
     },
     "back": {
-     "arm_mm": 193,
-     "need_mm": 261,
+     "arm_mm": 191,
+     "need_mm": 259,
      "margin_pct": -26
     },
     "left": {
      "arm_mm": 250,
-     "need_mm": 261,
+     "need_mm": 259,
      "margin_pct": -4
     },
     "right": {
      "arm_mm": 250,
-     "need_mm": 261,
+     "need_mm": 259,
      "margin_pct": -4
     }
    }
   },
   "feet_for_15pct_m": {
    "x": [
-    -0.3,
-    0.3
+    -0.298,
+    0.298
    ],
    "y": [
-    -0.292,
-    0.309
+    -0.288,
+    0.308
    ]
+  }
+ },
+ "strata_plinth": {
+  "mass_kg": 84.6,
+  "com_m": [
+   0.0,
+   0.0091,
+   0.5201
+  ],
+  "push_height_m": 1.3356,
+  "push_N": 166.0,
+  "need_arm_mm": 267,
+  "plinth_kg": 10.36,
+  "tipping": {
+   "plinth feet (centres)": {
+    "forward": {
+     "arm_mm": 317,
+     "need_mm": 267,
+     "margin_pct": 19
+    },
+    "back": {
+     "arm_mm": 303,
+     "need_mm": 267,
+     "margin_pct": 14
+    },
+    "left": {
+     "arm_mm": 305,
+     "need_mm": 267,
+     "margin_pct": 14
+    },
+    "right": {
+     "arm_mm": 305,
+     "need_mm": 267,
+     "margin_pct": 14
+    }
+   }
   }
  }
 }
