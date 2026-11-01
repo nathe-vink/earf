@@ -651,3 +651,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   step lighter I kind of like "A world of sound" or something about sound, color and light." Budget and colors confirmed. Tagline
   NOT "Have the world over.": deck v51 cover back to "Something in the air."; site and brand lanes told to undo. New tagline round
   in the owner's direction (sound, color and light; "A world of sound") next.
+- 23:00 deck v51 (cover back to "Something in the air."); board v9 (tagline: another round; budget and colors settled). Tagline
+  round 3 workflow wf_334f3225-e4a (five angles on sound, color and light; the owner's "A world of sound" judged with the rest and
+  collision-checked). Brand lane: edition 2 drafted (c719b0e6) then reverted (640d6469), nothing published, colors wait on TINTS.md.
+  Four-pieces: needs the speaker lane's rebuilt tropos-strata.blend (F materials, bare-strip plinth, glow per shot) -> asked the
+  speaker lane to rebuild it first and send the SHA to both; four-pieces renders dusk first, sends paths to me and the Mantle lane.
+  Mantle lane: expects its stock Poison deck (2092, 25.4 mm, ~3.7 %) to read darker than the new Poison; will propose a custom deck
+  lot scaled from 32.3 % at 20 mm (~24 % through 25.4) after seeing the room (README question 8, deck-as-glass).
