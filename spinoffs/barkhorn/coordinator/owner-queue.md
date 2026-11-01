@@ -534,3 +534,5 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   the 1664x520 box, nothing cropped): final design, stock tints, covers off, lit plinths, Dust/Acid/Ice with deep horns, all eight
   whole. Notes: stock tints; deeper horns planned for Dust, Acid, Ice; Acid's fluorescence not modeled. Speaker cover (3840x1360)
   rendering, ~75 min (~15:05); then room + portrait.
+- 14:23 four-pieces: -sf dusk lost to a background-job time-out (2 h limit; stopped ~36 min into the render); restarted alone, same
+  shot, ~15:05. Day 11a1d8bf unaffected. Deck keeps the dusk-2092 interim until then. Check-in moved to 15:20 (trig_01F1p2PA46C4JnqFbT8eF61k).
