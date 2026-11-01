@@ -5,8 +5,28 @@
   each horn, stepped or formed, in the same code at 12.7 mm.
 - They are applied to the line's eight flavors in `product.py` (from `tints-trucast.json`), so every engine render and
   both `.blend` assets carry them.
-- Smoke's cabinet is now 2074 Dark Gray (11.7 %), as it has been since the backlight pass. The rest of this note is the
-  comparison that led here.
+- Smoke's cabinet is now 2074 Dark Gray (11.7 %), as it has been since the backlight pass.
+
+**The horns: "Deep, like the site"** (the owner, 2026-10-31). Every horn must read at least as deep as the site's
+horn.
+- **Dust, Acid and Ice's horns are a heavier batch, not stock sheet** (the coordinator, 2026-11-01). Stock 2422, 9097
+  and 2069 at 12.7 mm pass 59, 78 and 58 %, against the site's horns at 19, 42 and 14 %. Their horns keep the site's
+  deep color (`SITE_DEEP_HORN` in `product.py`).
+- **The other five are flagged, awaiting the coordinator's call.** Their stock horns are lighter than the site's too,
+  TT through 12.7 mm:
+
+  | tint | stock sheet | the site's horn |
+  |---|---|---|
+  | Ember | 2423, 14.1 % | 10.2 % |
+  | Poison | 2092, 18.6 % | 6.4 % |
+  | Haze | 2287, 13.5 % | 4.0 % |
+  | Smoke | 2074, 11.7 % | 0.7 % |
+  | Fog | 0000, 92 % | 78 % |
+
+- A heavier-batch horn is a custom pour: its 22 layers of 1/2 in come from a horn lot with a pour's minimum and lead
+  time, not from stock sheet.
+
+The rest of this note is the comparison that led here.
 
 ---
 

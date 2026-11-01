@@ -2647,6 +2647,11 @@ if os.path.exists(STOCK_FILE):
 # at 20 mm), its horn (stepped or formed) the same code at the 1/2 in sheet's 12.7 mm, IOR 1.49, from
 # asset/tints-trucast.json (asset/tints.py, asset/TINTS.md)
 TRUCAST_FILE = os.path.join(HERE, 'asset', 'tints-trucast.json')
+# the horns that keep the site's deep horn, a heavier batch rather than the cabinet's stock sheet, by the owner's ruling
+# of 2026-10-31 ("Deep, like the site"): stock 2422, 9097 and 2069 at 12.7 mm pass 51 to 75 % against the site's 14 to
+# 42 % (the coordinator, 2026-11-01). The other five's stock horns are lighter than the site's too: flagged to the
+# coordinator, awaiting their call
+SITE_DEEP_HORN = {'cloud-orange', 'cloud-amber', 'cloud-blue'}
 if os.path.exists(TRUCAST_FILE):
     for _t, _e in json.load(open(TRUCAST_FILE)).items():
         _v = VARIANTS.get(_e['flavour'])
@@ -2656,8 +2661,11 @@ if os.path.exists(TRUCAST_FILE):
         _cab = {**_m.get('bark', {}), 'deep': _e['cabinet_deep'], 'radius': _e['cabinet_radius_m'], 'ior': _e['ior']}
         _cab.pop('milk', None)
         _m['bark'] = _cab
-        _m['horn-lot'] = {**_cab, 'deep': _e['strata_horn_deep'], 'radius': _e['horn_radius_m']}
-        _v['horn_deep'] = _e['strata_horn_deep']
+        if _e['flavour'] in SITE_DEEP_HORN:          # the owner's "Deep, like the site" (2026-10-31): a heavier batch
+            _m['horn-lot'] = {**_cab, 'deep': _v.get('horn_deep', _e['strata_horn_deep']), 'radius': HORN_DEPTH_M}
+        else:
+            _m['horn-lot'] = {**_cab, 'deep': _e['strata_horn_deep'], 'radius': _e['horn_radius_m']}
+            _v['horn_deep'] = _e['strata_horn_deep']
         _v['tint'] = _e['cabinet']
 
 PRODUCT = Product(
