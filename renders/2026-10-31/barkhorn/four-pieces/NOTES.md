@@ -8,6 +8,26 @@ the lights on?"
 
 ## The deliverables
 
+**The current frames are `four-pieces-{day,dusk}-final-2092-sf`** (3840 JPEG, 1920 PNG, anchors.json). They show the
+owner's choices of 2026-11-01:
+- Tropos's final form: the stepped horn flush, black sleeves, the lit stepped plinth, in the TruCast stock codes
+  (r33-speaker-horn a682dc52; the plinth lifts it 39 mm).
+- Mantle A, Strata Float v3 (r48-mantle-design 1d59abeb, poison-2092; its LED strip lit at dusk).
+- Hemisphere v3, "color outside" (r32-lamps-final 7c4b5993): a 3 mm 2092 shell, 6 mm clear, the opal.
+- Core's 9 mm wall at a third of 2092's loading, cordless.
+- Each lamp tinted part by part by Beer-Lambert path length (`render_fp.py` part_tints), on the lamps lane's
+  calibration. The cabinet and the deck use the speaker lane's ("held" at 20 mm). The coordinator calls the gap a known
+  bracket.
+
+Earlier sets are kept as a record. In order:
+- `-final-2092`: the old Mantle and Hemisphere v2.
+- `-final`: site tints, Tropos's final form.
+- `four-pieces-strata-*`: the earlier Strata.
+- `four-pieces-{day,dusk}`: the round-36 Tropos.
+
+The label zones are the same in every set except Tropos's (1-3 px) and Mantle's (10 px lower with Strata Float v3).
+The tone and median sRGB of each zone are in each anchors.json.
+
 **The deck uses the Strata pair** (the owner, 2026-11-01: Tropos starts with the stepped Strata design). The frames
 are `four-pieces-strata-{day,dusk}-3840.jpg`, `four-pieces-strata-{day,dusk}-1920.png` and
 `four-pieces-strata-{day,dusk}.anchors.json`. They come from the rebuilt asset `tropos-strata.blend` (r33-speaker-horn
