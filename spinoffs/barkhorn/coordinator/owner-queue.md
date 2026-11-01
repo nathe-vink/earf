@@ -598,3 +598,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   diffuser flush with the frame's underside; feet, footprint, outline unchanged; strip 1.94 m a speaker, 9.3 W at full; BASES.md,
   components.json and the draft RFQ line updated; deck-row comparison at 20/40 next. The streak is not the HF lead (hide test);
   next suspect the top cable gland / tie-rod pad; report before any change. Site frames: LED 20 day, 40 dusk.
+- 18:20 speaker: the streak is the top rib's front end (rib-top, 20 mm clear, seen edge-on against the dark batt); hide tests clear the
+  HF lead, gland and tie-rod pad; no clashes (out-cloud/checks.json). My call: polish the rib's front end, keep it full length (edge
+  spec). No HF lead rerouting. Soft-pool rows at 20/40 rendering (~18:35).
