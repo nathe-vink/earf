@@ -392,3 +392,19 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
   -> tints: B, stock sheet's deeper tints (saved in the README's owner notes). Biomes: the owner's go relayed verbatim. Mantle: open;
   show both designs in the darker tints before asking again. Still open: tagline; Core battery. Flush horn and black lining stand
   (the owner raised no objection).
+
+## Check-in 16 (11:00 UTC)
+- Four-pieces 225cecf0 (day final, Tropos final form, site tints): line slide built (out-final-day, worst contrast 5.4:1), not published;
+  dusk (site tints) ~11:20 -> deck interim. All its Poison (Tropos, Core, Hemisphere, Mantle) is the SITE tint. Approved: day + dusk
+  re-render "-final-2092" (~1 h 45) once the speaker lane's regenerated tropos-strata.blend SHA is forwarded; Mantle plinth 2092 by
+  absorption; Core ball + Hemisphere shade matched by LOOK to the 2092 cabinet (cast to order), lamps lane's proof governs if it differs.
+- Speaker: all five in-flight deck frames were site tints (none landed; light-Ember hero stopped). product.py now applies
+  tints-trucast.json to the eight (cabinet TT at 20 mm, horn same code at 12.7 mm); Smoke 2074 #4B4E51; engine files + both assets
+  regenerating (~35 min, SHA to the coordinator first), then hero ~70 min, row ~60, cover ~75, room + portrait ~70 (about 5 h).
+  Watch-points: Ember 2423 / Haze 2287 may hide internals; Poison 2092 dark; Acid fluorescence not modeled. Told: add fill, don't lighten.
+- Biomes: a relayed go can't lift its session's own stop -> the owner was asked to type "go" there (link given). Noted: stock deep tints.
+- Lamps: asked for Core + Hemisphere in 2423 / 2092, lit and unlit, one sheet. Mantle: asked for six frames (A/B in 2423, 2092, dusk 2423),
+  a near-black report, then the shared audit fixes as proposals. Brand + site: swatch notes (later).
+- Workflows: deck audit wf_70aa00cc-d49 in Verify; board fact-check wf_fbf4c876-14a running (3 refuters + a completeness critic).
+- Owner asked "What are the tagline options" -> re-listed A-E with notes; flagged B and D as close to the ruled-out literal material
+  lines; offered a fresh set. Waiting.
