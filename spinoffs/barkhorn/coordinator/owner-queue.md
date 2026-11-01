@@ -462,3 +462,8 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
 - Lamps 2a39629a/b320f6e0: Hemisphere v3 (tint outside: 3 mm stock shell, 6 mm clear, opal) recommended over v2 -> drawing set as a
   proposal; Core: chips first (~$50); if deep or no 3/8 in stock, two-layer ball (Ember, Poison, Haze, Smoke; second mould ~$1.2k) and
   single-layer stock (Dust, Ice, Acid, Fog); custom 1/3 pour out on cost (~$10-15k a color). No 3/8 in TruCast listed in any of the eight.
+- 12:00 board v3: Mantle card in the darker colors (ed77b160: A keeps color, oxblood / dark green glass, its light carries it at dusk;
+  B's 47 mm deck goes black, 0.04-0.2 %, rescued only by a custom deck lot); lamps card = three to sign (Core battery, Core dock,
+  Hemisphere color outside v3 7c4b5993 +$295 once vs inside v2); darker-colors card: horn reading (five stock, Dust/Acid/Ice deeper;
+  868dd347), Haze 2287 is translucent, no transparent deep violet stocked (mill run of 373 or a custom pour at order). Mantle asked again
+  via the board (pick A, more clearly). Second check wf_ef6fe320-80f still running.
