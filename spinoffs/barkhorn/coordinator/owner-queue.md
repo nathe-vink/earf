@@ -337,3 +337,10 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
   Hypex), touch off/25/50/100 %, flicker-free; ~10-15 K; ships flat (~13 kg), bolts on at set-up. Flush horn: 536 mouth;
   within ~+-1 dB to 1.6 kHz; steadier coverage at the crossover. Parts $9,563 a pair. Asked: black sleeves into the asset
   (the dusk proof's pale side is the white voile), Smoke backlight fix, >1.6 kHz BEM, 22 layer DXFs.
+
+## Check-in 13 (06:57 UTC)
+- Speaker 0289cac8: black voile sleeves in the asset and product.py (the working default). ed74cf53: Smoke reads smoked in
+  backlight: the milkiness was the white batts + a light tint; Smoke's cabinet deepened to ~12 % through 20 mm (TruCast
+  2074 Dark Gray's TT, a stock sheet). Backlit test sent to the owner (white / black / black + deep).
+- Biomes: still holding the dark-Smoke habitat render for the owner's go in its own session.
+- Owner questions pending: tagline (asked); color depth (note: Smoke now set to stock 2074 Dark Gray); Mantle A/B.
