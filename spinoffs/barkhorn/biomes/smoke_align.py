@@ -23,6 +23,7 @@ import argparse, json, math, os, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ASSET = os.path.join(HERE, 'assets', 'horn2', 'tropos.blend')
+BLACK_LINING = False                  # --black-lining
 SPOT = (0.0, -2.4)                    # where the speaker now stands (the crater is at the origin)
 TURN = -22.0                          # its front turned toward the camera's side
 # the speaker's box in each frame (fractions, x0 y0 x1 y1 from the top left), measured on the proofs, with a margin
@@ -73,7 +74,10 @@ def main():
     ap.add_argument('--out', required=True); ap.add_argument('--samples', type=int, default=128)
     ap.add_argument('--scale', type=float, default=1.0)
     ap.add_argument('--refinish', help='a raw render (.raw.png) to finish again, no render')
+    ap.add_argument('--black-lining', action='store_true')
     a = ap.parse_args()
+    global BLACK_LINING
+    BLACK_LINING = a.black_lining
     W = os.path.abspath(a.worktree)
     if a.refinish:
         sys.path.insert(0, os.path.join(W, 'studio', 'engine'))
@@ -93,9 +97,34 @@ def main():
         objs, part_of = place0(bpy_, pdef, templates, shot_, root)
         for o in objs:
             o.hide_render = True
-        with bpy_.data.libraries.load(ASSET, link=True) as (s_, d_):
+        with bpy_.data.libraries.load(ASSET, link=not BLACK_LINING) as (s_, d_):
             d_.collections = ['Tropos Smoke']
         col = d_.collections[0]
+        if BLACK_LINING:
+            # black lining sleeves (the coordinator's recommendation, 2026-11-01, awaiting the owner): the asset is
+            # appended, not linked, so its lining's material can change; everything else is the asset's own
+            black = bpy_.data.materials.new('lining-black'); black.use_nodes = True
+            b = black.node_tree.nodes['Principled BSDF']
+            b.inputs['Base Color'].default_value = (0.012, 0.012, 0.012, 1); b.inputs['Roughness'].default_value = 0.95
+            # and the acrylic at the site's Smoke look: the engine's own cloud-black cabinet and horn materials (the
+            # model the site's pictures were made with), built for the hidden copy, put on the asset's parts
+            site = {}
+            for o in objs:
+                for sl in o.material_slots:
+                    if sl.material:
+                        site[sl.material.name] = sl.material
+            for o in col.all_objects:
+                for sl in o.material_slots:
+                    if not sl.material:
+                        continue
+                    base = sl.material.name.split('.')[0]
+                    if base.startswith('lining@'):
+                        sl.material = black
+                    elif base.startswith('bark@') and 'bark@cloud-black' in site:
+                        sl.material = site['bark@cloud-black']
+                    elif base.startswith('horn-lot@') and 'horn@cloud-black' in site:
+                        sl.material = site['horn@cloud-black']
+            print('site look:', sorted(k for k in site if k.startswith(('bark', 'horn'))))
         for inst in shot_['product']['instances']:
             e = bpy_.data.objects.new('Tropos Smoke', None)
             e.instance_type = 'COLLECTION'; e.instance_collection = col
