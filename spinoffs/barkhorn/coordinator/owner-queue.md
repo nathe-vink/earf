@@ -186,3 +186,8 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
 - OWNER ASKED 00:20 UTC: "Are the mechanics and electronic aspects of each of the products legit?" Engineering audit
   running locally (wf_32ea5a79-234): an engineer per product (Tropos; Hemisphere + Core; Mantle; Mother EARF) + an
   adversarial reviewer each + a completeness pass. Answer the owner with the verified result.
+- Biomes STOPPED (332f480f): the photographed-plate seam test scored 3.5 (duel 3.5 vs the headland 6.0): plates cure the
+  sky and distance, not the ground at a speaker's feet ("pasted on"). A true blend needs modelled scan-quality ground under
+  every speaker (about a day). Nothing from the lane meets the gate. Coordinator's fallback for the owner: the eight
+  existing single-habitat portraits (covers off, 6-6.7 each) as one strip with thin gutters (scratchpad
+  poly/earf-eight-biomes-strip.jpg, 4870 x 750): show with the honest status; offer the day-long true blend as an option.
