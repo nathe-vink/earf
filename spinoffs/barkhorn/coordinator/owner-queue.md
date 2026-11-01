@@ -507,3 +507,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   about $1,225 if the chips say "deep"; 2M Black +$530. Deck v44 ask slide shows it ($16,300; contingency about 1%, $400). Asked the
   owner: keep $50,000 with ~$400 spare, raise to about $55,000 (a 10% reserve, my pick), or make room (e.g. Mantle's prototype later).
   Room told: Core off its dock in the room.
+- Check-in 18 (12:42): speaker hero not landed yet (last ca39fba8, one-tone first pair); four-pieces e2c4c32a (Strata Float block in
+  the -sf setup), dusk-2092 ~12:55; Mantle 9d617c0c (rear plate back right under the overhang, COB strip ~4.9 W on a Class 2 adapter,
+  no dimmer; $3,798) and 71d3163e (as-built spec: deck through-tinted 2 x 12.7, floats 40 mm on 4 x 30 mm 303 posts, base Smoke 12.7
+  set in 35 mm, lid 3 mm in color, 450 x ~370 x ~199 mm, ~12.9 kg; $3,850); site 27438a23 (copy behind COPY_NEXT, off; Mantle rows per
+  71d3163e, Core dock post and ring). Coordinator's calls (to the board): plate back right; one fixed brightness. Tagline workflow:
+  writers and two judges done. Waiting on the owner: budget (A ~$55,000 / B keep $50,000 ~$400 spare / C make room). Next check-in 13:33.
