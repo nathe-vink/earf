@@ -26,7 +26,7 @@ product.SOLIDS.setdefault('bronze', dict(title='Bronze bar (C93200 bearing bronz
 P = copy.deepcopy(horn_options.P)
 _topo = json.load(open(os.path.join(HERE, 'topo', 'outlines.json')))
 P['horn']['cast']['formed']['laminated'].update(topo=[r['points'] for r in _topo['rings']], smooth=False, lamina=3.0,
-                                                lip=20.0)   # Strata: the mouth's layer 20 outside the air path, an even lip
+                                                lip=12.0)   # Strata: the mouth's layer 12 outside the 536 air path, so the stepped horn is 560, flush (the owner, 2026-11-01; 20 before)
 # Strata's posts (the critic: a visible mount): the four reviewed post positions kept, each a ø16 bronze rod with a
 # turned collar on the top plate and one under the horn's pad, in place of the ø10 stainless tubes and their cups
 POSTS = dict(at=[(97.0, 35.0, 929.6), (463.0, 35.0, 929.6), (240.0, 353.0, 998.7), (320.0, 353.0, 998.7)],

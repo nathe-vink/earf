@@ -109,7 +109,10 @@ P = dict(
               # blind threads in its front plate, so it screws to an aluminium adaptor ring from the front first, and the ring
               # to brass inserts in the boss on a circle outside the driver (a ball-end key reaches them past it with the cap
               # off), so the pod is 200 across
-              cast=dict(mouth_w=610.0, mouth_h=346.0, d=278.0, r0=25.4, wall=6.0, rim=10.0, round_rim=4.0, n_mouth=7.0,
+              # the owner (2026-11-01): "The horns look like they're protruding past the sides of the loudspeaker now ...
+              # Looks a little goofy": the mouth 536 across (was 610), so the horn's outside, its 10 rims on, is 556 against
+              # the cabinet's 560; the simulation (acoustics/flush_compare.json): loading and output within about 1 dB to 1.6 kHz
+              cast=dict(mouth_w=536.0, mouth_h=346.0, d=278.0, r0=25.4, wall=6.0, rim=10.0, round_rim=4.0, n_mouth=7.0,
                         pod_r=100.0, pod_back=130.0, dome=12.0, gap=37.0, solid_neck=True,
                         boss=dict(d=184.0, t=14.0, bolt_d=170.0, bolts=4, bolt_hole=7.0),   # 2 clear inside the pod
                         adaptor=dict(t=10.0, od=184.0, driver_holes=6.6, sink=12.5, screw_hole=5.5),
