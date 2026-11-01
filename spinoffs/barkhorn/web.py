@@ -161,11 +161,11 @@ LAMPS = [  # key, name, kind, its line, the hero's alt, particulars
       ('Shades', 'In all eight colors, sold singly'),
       ('Care', 'A quarter turn takes the shade off to wash: water and a drop of mild soap, then dry. No glass cleaner, alcohol or solvents: they craze acrylic.'),
       ('Figures', 'Design figures; they may change before production')]),
-    ('orb', 'Core', 'Table lamp', 'A ball of tinted acrylic sitting low in a black acrylic base. Plugged in, it stays put; unplugged, it goes where the conversation is.',
+    ('orb', 'Core', 'Table lamp', 'A ball of tinted acrylic sitting low in a black acrylic base. No cord: it goes where the conversation is.',
      'Core lit in Ember, sitting low in its black acrylic base',
      [('Size', '160 mm ball, 180 mm tall'), ('Weight', 'About 1.5 kg'),
       ('Light', '2200 to 2700 K, warmer as it dims'), ('Control', 'Touch the black ring: tap to switch, hold to dim'),
-      ('Power', 'USB-C, cable and adapter included; about five hours cordless at full brightness, longer dimmed, on cells you can replace yourself'),
+      ('Power', 'Cordless: about five hours a charge at full brightness, longer dimmed; it charges in two to three hours, on cells you can replace yourself'),
       ('Rating', 'Designed to meet IP44, for terraces and spilled drinks'),
       ('Shades', 'In all eight colors, sold singly'), CARE, ('Figures', 'Design figures; they may change before production')]),
 ]
@@ -322,6 +322,22 @@ def make_room():
     return land
 
 
+# Core without its cord (the owner, 2026-10-31: "the orb definitely looked better without the cord"): the lamps lane's
+# cordless frames (r32-lamps-final 735e7593), already at the site's names and sizes; they go in after the lamp
+# pictures above, so they win wherever a name is shared
+CORDLESS = os.path.join(ROOT, 'renders', '2026-10-31', 'barkhorn', 'lamps-cordless', 'site-img')
+
+
+def make_cordless():
+    """Copy the cordless Core pictures into site/img by name; the names copied."""
+    if not os.path.isdir(CORDLESS):
+        return []
+    names = sorted(f for f in os.listdir(CORDLESS) if f.endswith('.jpg'))
+    for f in names:
+        shutil.copy(os.path.join(CORDLESS, f), os.path.join(IMG, f))
+    return names
+
+
 def make_images(sources=None):
     """The page's pictures, into site/img: from the repository's renders and icons, and from `sources` the photographs,
     the room, the drawings and the coins where it has them. A picture whose source is not to hand is kept as it is."""
@@ -467,6 +483,7 @@ def make_images(sources=None):
                       os.path.join(LP, f'lamp-{lamp}-{fl}.png'),
                       os.path.join(ROOT, 'renders', '2026-10-19', 'barkhorn', 'lamps-site', f'lamp-{lamp}.png') if fl == 'ember' else ''),
                 lambda p, lamp=lamp, k=k: (save(Image.open(p), f'{lamp}-{k}.jpg', 1600, q=84), save(Image.open(p), f'{lamp}-{k}-card.jpg', 640, q=82)))
+    made += make_cordless()
     # the record player (round 34) as its pictures arrive: each color in the studio, at dusk and in the phone's frame
     for k in KEYS:
         fl = HABITAT[k]
@@ -796,7 +813,7 @@ def body():
                 f'<div class="pt-body"><h3>{name}<small>{kind}</small></h3><p class="line">{line}</p>{dots(route)}'
                 f'<a class="more" href="#{SLUG.get(route, route)}-ember">See {name}</a></div></article>')
     # the lighting line: Hemisphere and Core, each with its eight, then the rows, and the pair switched off beside
-    # Core's word on its battery (round 35: plugged in or not, the cartridge dropped)
+    # Core's word on its battery (cordless since 2026-10-31: the owner preferred it without the cord)
     lighting = ('  <section class="band lamps" id="lamps"><div class="wrap">\n'
                 '    <div class="head"><div><p class="eyebrow">Lighting</p><h2>The same eight, lit from within.</h2>\n'
                 '      <p>A pendant and a table lamp in the speakers&rsquo; acrylic, frosted inside, so the color glows and the '
@@ -806,8 +823,8 @@ def body():
                 '    <figure class="eight">' + pic('lamps-domes', None) + pic('lamps-orbs', None) +
                 '<figcaption>In the speakers&rsquo; order: Ember, Dust, Acid, Poison, Ice, Haze, Fog and Smoke.</figcaption></figure>\n'
                 '    <div class="lamp-duo solo"><figure>' + pic('lamps-unlit', None) + '<figcaption>Off, in Smoke.</figcaption></figure>'
-                '<div class="lamp-note"><h3>Plugged in or not.</h3><p>Core runs from its cable or from the cells in its base: '
-                'about five hours without the cable at full brightness, longer dimmed, and when the cells tire, you change the cells, not the lamp.</p></div></div>\n'
+                '<div class="lamp-note"><h3>Cordless.</h3><p>About five hours a charge at full brightness, longer dimmed, and it charges '
+                'in two to three hours. When the cells tire, you change the cells, not the lamp.</p></div></div>\n'
                 '  </div></section>') if lamps_shown and pm['dome'] and pm['orb'] else ''
     # the turntable line: the record player in its eight once its pictures are in; until then the concept, and a word
     tt = pm['turntable']
