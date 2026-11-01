@@ -242,3 +242,13 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
   passed 7.0: Relief 6.5, Meridian 6.5, Bedrock 6.3, Moho 6.0, Lithos 6.0, Ionos 5.5, Cairn 5.0; honest captions. A third
   look would need photographed props + an HDRI room. Next: American-English pass of the brand material + the cover-off and
   cordless swaps (no Strata or new Mantle until the owner signs; headline waits on the tagline).
+
+## 02:20 UTC: the owner on Tropos (saved 29fe44a6)
+- "I love the stepping in the loudspeaker but not sure about the horn. Would like to keep both options for the horn but
+  happy to start with the stepped version." -> Strata's stepping adopted; two horns kept (stepped first, smooth an
+  option). Speaker lane: horn switch in the asset, engineering fixes (tipping first), site set plan. Four-pieces lane:
+  link tropos-strata.blend for the final. Deck v30: tropos.html shows Strata (Ember studio, /_blob/099fbe81...), "stepped
+  horn" copy, about 74 kg; v31: cover notes lose "tinted all the way through".
+- The owner asked "What are my tagline options?" -> re-listed A-D + reserve; waiting on the pick.
+- The owner asked why the top of the speaker insulation looks triangular -> the top lining batt (white voile, 100 mm)
+  seen edge-on through thick tinted acrylic; speaker lane rendering a diagnostic (as is / magenta / hidden / black sleeves).
