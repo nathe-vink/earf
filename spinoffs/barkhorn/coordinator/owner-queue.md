@@ -480,3 +480,9 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
   the coordinator's extension; horns: lighter than the site's by TT, Fog clear, three custom lots at production; design filings hard
   stop 15 Oct 2027 (Dec target was for the January debut); site deploy needs no waitlist provider; "AI review passes", not
   "independent reviewers". Brand lane asked to fix FACTS.md's Core price ($650 deck suggested vs "$750 planned").
+
+## The owner's picks (about 12:10 UTC), from board v4
+"Tagline: none: write a new set · Mantle: A · Core battery: A, LiFePO4 · Core charging: sign the dock · Hemisphere: color outside ·
+Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few, beside the whole speaker · Flush horn: flush"
+- Saved in the README owner notes. Next: a new tagline set (workflow); lanes told; deck: Mantle = Strata Float, ask table (Tropos about
+  $20,700, reserve about $2,300), first pair in stocked 2064 gray; board marks them settled when the tagline set is added.
