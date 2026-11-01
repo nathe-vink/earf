@@ -31,8 +31,14 @@ the brand from what they already are, and proposes what isn't yet decided. **Pro
 
 The site (`web.py`: `CLOUDS`, `SPEC`, `LAMPS`, `TT`, the copy), the project log (`../README.md`, the owner-notes table
 and rounds), `../companions/`, `../product.py` (the rating plate), and the bar's house book. "In light" color values
-are sampled from the site's rendered coins (`site/img/coins-light.jpg`); the cast references wait for the stock-color
-research. Every cost in `IDEAS.md` and `PACKAGING.md` is an estimate, not a quote.
+were sampled from the site's rendered coins (`site/img/coins-light.jpg`). Since the owner's ruling of 2026-11-01 ("I like
+the darker colors": stock TruCast sheet's deeper tints, `r33-speaker-horn` `asset/TINTS.md`), the Brand Book's swatches are a
+**draft**: Ember `#C92118`→`#920000`, Poison `#367424`→`#024800`, Haze `#5B3197`→`#330066`, Smoke `#57545F`→`#3A3741`;
+Dust, Acid, Ice and Fog unchanged. Method: the light through 20 mm of each stock sheet and of the site's sheet, computed with
+the horn lane's held TT and channel splits; the change in OKLab lightness, at 0.6, applied to the old swatch, with its
+chroma scaled by the change in chroma (floor 0.75); tints whose lightness moves less than 0.05 keep their swatch. Held
+until the chips are measured. The collateral's color strips, `pack_render.py` and the marks keep the old values until the
+owner approves the draft. Every cost in `IDEAS.md` and `PACKAGING.md` is an estimate, not a quote.
 
 ## Renders: where they stand
 
