@@ -640,3 +640,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   tagline "Have the world over."; budget A (about $55,000; ~$5,400 spare); colors F (white lining in the seven, Smoke black; Poison
   32.3 %, Haze 25.8 % through 20 mm; Ember and the rest stock). README rows added (with "they might be too dark now", 15:10). Next:
   lanes told; deck cover headline + ask slide; board settled; re-render the deck's pictures in F.
+- 23:00 after "Go": lanes told (speaker: F in TINTS.md/product.py, deck frames cover -> row -> room -> hero -> portrait, then the
+  site-set gate; four-pieces: -final-2092-sf-f day/dusk, Tropos only; site: COPY_NEXT h1 "Have the world over." on one line,
+  swatches per F, held; brand: Brand Book edition with the tagline; lamps and Mantle: FYI, report any mismatch). Deck v50: cover
+  "Have the world over."; ask $55,000 (contingency about 10 %, $5,400); plan "This raise, $55,000"; deck.json section description;
+  made/risks/ask asides: six colors stock, Poison and Haze lighter custom batches, Dust/Acid/Ice horns deeper, at volume (~$10-15k
+  each, estimate). Board v8: all three settled, F row shown, reply bar removed; my calls add the plinth light and horn hue.
+  Verification workflow wf_5e9bb724-4d6 running. Check-ins re-armed (send_later, ~00:30).
