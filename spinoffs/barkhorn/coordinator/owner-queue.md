@@ -433,3 +433,23 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
 - Asked the speaker lane (later): commit the $11,200 breakdown; re-run the $18,520 cash table (plinths; Smoke 2074 at 3/4 in
   is a mill run); update RFQ drafts (2074, 536 mouth, plinth, caldera, bronze posts). Nothing sent.
 - deck-line generator: Mantle label and the notes' troposphere line updated (spec_from_anchors.py).
+
+## Decision board v2 (11:45 UTC) and the darker tints' consequences
+- Fact-check wf_fbf4c876-14a (3 refuters + a completeness critic) on board v1: wrong T2 ("buyable today": only thin sheet; 2092 only to
+  1/4 in; no deep tint stocked at 3/4 in), T6 (site set not started), H2 (spread narrows 46-57 deg around 1-1.4 kHz, not only 65-72 at
+  1.8-2 kHz), C9 (B is a spec change); overstated T1, T3, T4, T5, T7, T10, M3, M8, C2, C8, C10, H8; unsupported M6, H4, H5. H7: the
+  horn-in-cabinet's-code default contradicted the owner's 2026-10-31 ruling "Deep, like the site" (README row 141) -> speaker lane told:
+  Dust, Acid, Ice horns use the site's deep horn (heavier batch); check the other five.
+- Completeness critic: 15 owner items missing; added now: the first pair's budget, YC W27 (Mon 2 Nov 8 pm PT; a16z SR008 1 Nov 11:59 pm
+  PT), Tropos close-ups, Core's charging dock; later: Amsterdam 7 Dec, design filings week of 7 Dec ($13-28k), Vienna 31 Dec (needs a
+  company), copyright ~15 Jan, site-deploy hidden choices (Planet EARF named publicly, waitlist provider), Mother EARF's look, lamp
+  redesigns, Hemisphere's listing, Mantle's cartridge/arm, brand choices, Planet EARF lantern, unsent drafts, editions.
+- Speaker lane: a682dc52 (stock tints default; forwarded to four-pieces, brand, biomes); 6e9c6150 parts about $12,058 a pair (deck v41:
+  "about $12,100"); 5947d8ca use of funds: Tropos line about $26,700 with a 2074 3/4 in mill run (est., $25,700-27,700; +$8,200) or about
+  $20,700 with stocked 2064 (lighter smoke) -> board card 04, pick: raise the ask to about $58,000; bbf21f36 RFQ drafts (2074, nothing sent).
+- Lamps 64e96820: at real thickness stock 2423/2092 make Core and Hemisphere near-black lit (deep calibration). Hemisphere: clear 0000
+  shell + 3 mm tinted skin approved as a proposal; Core: pricing custom pour vs two-layer vs stock code; both outcomes (held/deep) asked.
+- Four-pieces: its Poison was the site tint everywhere; -final-2092 re-render approved (Core and Hemisphere modeled as the lamps' fixes,
+  Mantle 2092 by the speaker calibration); held vs deep explained (known bracket; frames stand either way).
+- Board v2 published (MGUByhczqB2jUYDV7R4t3h): six decisions, three settled (darker colors, flush horn with corrected acoustics, black
+  lining), Smoke's go in its own session, later list with dates. Second check wf_ef6fe320-80f running (refuter + owner-eyed reader).
