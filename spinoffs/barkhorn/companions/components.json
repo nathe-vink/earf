@@ -705,7 +705,7 @@
  "core-holder-18650": {
   "kind": "power",
   "maker": "to make (in the milled base)",
-  "model": "No holder (review, 2026-11-01): bare spring contacts in the milled base. The − end has a nickel-plated conical spring in a pocket; the + end has a gold-flashed leaf at the bottom of an 8 mm shroud 1.5 deep, so only a button top reaches it. The bays are 18.6 wide and 67.5 between contact faces [E, to fit]; leads run in a milled channel to the board; the cells' NTC sits on one. Replaces the Keystone 1042, which is 77.1 long (its corners land outside the drum), not polarized (that is the 1042P) and surface-mount",
+  "model": "No holder (review, 2026-11-01): bare spring contacts in the milled base. The − end has a nickel-plated conical spring in a pocket; the + end has a gold-flashed leaf at the bottom of an 8 mm shroud 1.5 deep, so only a button top reaches it. The bays are 18.6 wide, 66.9 from the + leaf to the - wall (in the CAD); leads run in a milled channel to the board; the cells' NTC sits on one. Replaces the Keystone 1042, which is 77.1 long (its corners land outside the drum), not polarized (that is the 1042P) and surface-mount",
   "usd": 3.0,
   "estimate": true,
   "supplier": "Digi-Key",
@@ -808,6 +808,15 @@
   "usd": 12.0,
   "estimate": true,
   "supplier": "a sheet-metal shop",
+  "price_date": "2026-11-01"
+ },
+ "core-thermal-pad": {
+  "kind": "thermal",
+  "maker": "Bergquist or 3M (to choose)",
+  "model": "Review 2026-11-01: two silicone gap pads Ø8 x 0.5, about 3 W/m K, electrically insulating (over 5 kV/mm), between the chassis's posts and the touch ring",
+  "usd": 1.0,
+  "estimate": true,
+  "supplier": "Digi-Key",
   "price_date": "2026-11-01"
  }
 }

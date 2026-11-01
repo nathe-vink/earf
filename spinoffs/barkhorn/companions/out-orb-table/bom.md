@@ -7,12 +7,13 @@
 | base | lathe | 1 | Cast acrylic tube, tinted through | 130 x 130 x 40 | 112.04 |
 | ring | lathe | 1 | Aluminium 6061 | 130 x 130 x 18 | 52.61 |
 | window | lathe | 1 | Cast acrylic tube, tinted through | 40 x 40 x 16 | 45.98 |
-| chassis | mill | 1 | Aluminium 6061 | 60 x 60 x 12 | 46.04 |
+| chassis | mill | 1 | Aluminium 6061 | 67 x 93 x 29 | 49.52 |
+| pads | buy | 1 | Bergquist or 3M (to choose) Review 2026-11-01: two silicone gap pads Ø8 x 0.5, about 3 W/m K, electrically insulating (over 5 kV/mm), between the chassis's posts and the touch ring |  | 1.00 |
 | ballast | mill | 1 | Mild steel | 109 x 114 x 30 | 48.67 |
 | board | buy | 1 | to make (a contract PCB house) Core's board since round 41 (the 30 base), revised by the review of 2026-11-01: a USB PD sink at 9 V on the USB-C path and the dock's pins (an ideal diode on each input); the LTC4162-F LiFePO4 charger with power path (35 V max in), 1.5 A, 3.6 V; a coulomb counter (LTC2941 class [check]) for the gauge and the 90 % stop (4.05 of 4.5 Ah); per cell, back-to-back FETs under an ideal-diode controller (LTC4359 class [check]), off by default; the MCU on a diode-OR of the input and the cells; thermal foldback on a chassis NTC (55 C: LED to 70 %; 60 C: charge to 0.5 A) and the cells' NTC (no charge over 45 C); the warm-dim driver; capacitive touch with baseline tracking and a 50 ms debounce. Laid out as a 48 ring under the LED, the dock's pins on it (the axis and r 20), the USB-C on a flex to its small board in the corner at 170 deg |  | 34.00 |
 | led | buy | 1 | Nichia or Seoul (to choose) A 30 mm round warm-dim LED board, two channels (2200 K and 2700 K, CRI 90+), 130 lm/W or better: 200 lm at 1.5 W or less (review 2026-11-01; was 2.5 W), on the aluminum chassis's heat path to the touch ring; a second 4-LED ring at the column's foot (0.3 W) |  | 9.00 |
 | cells | buy | 1 | Power Sonic PSL-FP-IFR18650EC (round 42), three in parallel (1S3P): LiFePO4 18650 energy cell, 3.2 V, 1.5 Ah rated, 4.8 Wh each, 14.4 Wh the set; 2,000 cycles at 100 % depth of discharge; 65 x 18.2 mm (flat top on its datasheet: Core needs a button-top cell for its shrouded + contact, so confirm a button-top version with Power Sonic or qualify another maker [check], review 2026-11-01), about 40 g; charge 3.65 V cut-off, at most 1.5 A (1C); discharge cut-off 2.5 V; charge 0 to 45 C, discharge -20 to 60 C. Approvals on the datasheet: UL 1642 cell certificate, IEC 62133 cell certificate (the edition is not stated: ask Power Sonic for the IEC 62133-2 report), UN 38.3 certified (the test summary, which 49 CFR 173.185(a)(3) requires a cell maker to make available, to request). Each cell 4.8 Wh (at most 20 Wh), the set 14.4 Wh (at most 100 Wh): the small-battery exception (49 CFR 173.185(c), UN3481, contained in equipment) |  | 9.00 |
-| holder | buy | 1 | to make (in the milled base) No holder (review, 2026-11-01): bare spring contacts in the milled base. The − end has a nickel-plated conical spring in a pocket; the + end has a gold-flashed leaf at the bottom of an 8 mm shroud 1.5 deep, so only a button top reaches it. The bays are 18.6 wide and 67.5 between contact faces [E, to fit]; leads run in a milled channel to the board; the cells' NTC sits on one. Replaces the Keystone 1042, which is 77.1 long (its corners land outside the drum), not polarized (that is the 1042P) and surface-mount |  | 3.00 |
+| holder | buy | 1 | to make (in the milled base) No holder (review, 2026-11-01): bare spring contacts in the milled base. The − end has a nickel-plated conical spring in a pocket; the + end has a gold-flashed leaf at the bottom of an 8 mm shroud 1.5 deep, so only a button top reaches it. The bays are 18.6 wide, 66.9 from the + leaf to the - wall (in the CAD); leads run in a milled channel to the board; the cells' NTC sits on one. Replaces the Keystone 1042, which is 77.1 long (its corners land outside the drum), not polarized (that is the 1042P) and surface-mount |  | 3.00 |
 | hatch | mill | 1 | Aluminium 6061 | 122 x 122 x 12 | 49.55 |
 | usb | buy | 1 | Two EPDM O-rings (the window, the chassis to the drum), a silicone foot ring 110 x 2 (Shore 40, non-slip), a sealed USB-C receptacle (IP67 rated, e.g. GCT USB4135 kind): IP44 |  | 5.00 |
 | seat | buy | 1 | A silicone seat ring 92 x 84 x 1.5 (Shore 40, black) in the base's cup: the ball rests on it, and it stops a nudge rolling it |  | 1.50 |
@@ -23,10 +24,10 @@
 
 | | USD |
 |---|---|
-| buy | 78 |
+| buy | 79 |
 | formed | 1,547 |
 | lathe | 257 |
-| mill | 144 |
-| total | 2,026 |
+| mill | 148 |
+| total | 2,030 |
 
 Budget figures: bought parts from the component library (dated retailer listings), made parts from the kit's stock rates: 25 % offcut on sheet parts, a handling charge a print, and a setup a machined line spread over its pieces. A shop's quote replaces them.

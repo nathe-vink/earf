@@ -368,18 +368,19 @@ def orb_parts(p=O):
     # the cells: three chords, their normals at -10, 110 and 230 deg (the corner at 170 holds the USB-C)
     a, d, L = 27.0, 18.4, 65.2
     z0c = hz + 0.9
-    cells = holder = None
+    # review 2026-11-01: no holders. Each cell (button-top: the 65.2 includes a 7 x 0.8 button at its + end) lies in a
+    # bay milled 18.6 wide; its + button reaches a gold-flashed leaf at the bottom of an 8 shroud milled 1.5 into the
+    # bay's end wall (only a button top reaches it), its - end bears on a nickel-plated conical spring 1.7 deep
+    cells = holder = bay = None
+    ax = (a + d / 2, z0c + d / 2)
     for k in range(3):
         ang = -10.0 + 120.0 * k
-        c = at(ang, cyl('y', (a + d / 2, z0c + d / 2), d, -L / 2, L / 2))
-        h = at(ang, box(a - 0.8, -L / 2 - 2.0, hz + 0.1, a + d + 0.8, L / 2 + 2.0, z0c + d * 0.6) -
-               box(a, -L / 2 - 0.2, z0c - 0.05, a + d, L / 2 + 0.2, z0c + d + 1))
+        c = at(ang, cyl('y', ax, d, -L / 2 + 0.8, L / 2) + cyl('y', ax, 7.0, -L / 2, -L / 2 + 0.8))
+        h = at(ang, cyl('y', ax, 6.0, -L / 2 - 0.7, -L / 2) + cyl('y', ax, 12.0, L / 2, L / 2 + 1.7))
+        b = at(ang, box(a - 0.1, -L / 2 + 0.8, -1, a + d + 0.1, L / 2 + 1.7, z0c + d + 0.5) +
+               cyl('y', ax, 8.0, -L / 2 - 0.7, -L / 2 + 0.9))
         cells = c if cells is None else cells + c
         holder = h if holder is None else holder + h
-    bay = None
-    for k in range(3):
-        ang = -10.0 + 120.0 * k
-        b = at(ang, box(a - 1.0, -L / 2 - 2.2, -1, a + d + 1.0, L / 2 + 2.2, z0c + d + 0.5))
         bay = b if bay is None else bay + b
     # the ballast: steel in the three corners between the chords, out to 54, a 2 web of acrylic round each
     corner = cyl('z', (0, 0), 108.0, hz + 0.1, z0c + d + 0.4) - cyl('z', (0, 0), 54.0, 0, 30) - _chords(a, L, d, 0.0)
@@ -390,7 +391,22 @@ def orb_parts(p=O):
     notch = at(uang, box(46, -6.5, -1, bd / 2 + 2, 6.5, 7.0))
     usb = at(uang, box(43.0, -5.0, 3.0, 50.5, 5.0, 10.0))
     corner = corner - at(uang, box(30, -8, 0, 70, 8, 30))
-    ballast = corner
+    # review 2026-11-01, the heat path: the chassis grows two arms (8 x 1.6) along the bisectors of the cell-free corners
+    # at 50 and 290 deg out to r 44, and a Ø8 post at each up to 0.5 under the touch ring; a 0.5 electrically insulating
+    # silicone thermal pad (3 W/m K) between each post and the ring keeps the ring free for touch. The corners' steel and
+    # the acrylic are slotted from below so the chassis goes in from underneath. LED board to chassis to posts to the ring,
+    # the one metal face open to the room; the cells' bays are 0.9 or more from any of it
+    heat = pads = None
+    slot = None
+    for ang in (50.0, 290.0):
+        h = at(ang, box(24.0, -4.0, cz0, 44.0, 4.0, cz1) + cyl('z', (44.0, 0), 8.0, cz0, bh - 0.5))
+        pd = at(ang, cyl('z', (44.0, 0), 8.0, bh - 0.5, bh))
+        sl = at(ang, box(24.0, -4.3, -1, 44.0, 4.3, cz1 + 0.3) + cyl('z', (44.0, 0), 8.6, -1, bh - 0.5))
+        heat = h if heat is None else heat + h
+        pads = pd if pads is None else pads + pd
+        slot = sl if slot is None else slot + sl
+    chassis = chassis + heat
+    ballast = corner - slot
     plug = at(uang, box(51, -6.0, 0.6, 62, 6.0, 6.6))
     cable = orb_cable(ux, uy)
     zs = zc - math.sqrt(R ** 2 - 42 ** 2) - 0.3
@@ -406,6 +422,7 @@ def orb_parts(p=O):
     base = base - (cyl('z', (0, 0), 118, -1, 2) - cyl('z', (0, 0), 114, -2, 3)) - cyl('z', (0, 0), 92.4, zs - 2, zs + 0.01)
     ring = eased(bd, bh, z_top, 2.0, bottom=False) - cup
     ring = ring - (cyl('z', (0, 0), 92.4, zs - 2, zs + 0.01) - cyl('z', (0, 0), 83.6, zs - 3, zs + 1))
+    base = base - slot - pads
     return [
         Part('shell', shell, Machined('acrylic-formed', 'formed', setup_usd=1500.0), finish='body', group='ball',
              pieces={'shell': (shell_r, 'body'), 'frost': (frost_r, 'liner')},
@@ -427,15 +444,22 @@ def orb_parts(p=O):
              notes=['a clear acrylic plug, sealed with an O-ring: the LED under it, the base IP44 with the ball off']),
         Part('chassis', chassis, Machined('aluminium', 'mill'), finish='steel', group='base', inside=True,
              notes=['aluminium 6061, 50 across: the LED\'s heat spreader and the board\'s carrier, screwed up into the '
-                    'base on threaded inserts, an O-ring between']),
+                    'base on threaded inserts, an O-ring between. Review 2026-11-01: two arms 8 x 1.6 out to r 44 in '
+                    'the cell-free corners and a Ø8 post at each up to the touch ring (on a 0.5 insulating thermal pad): '
+                    'about 0.4 W/K to the ring, so about 4 K across the path at 1.5 W; the ring\'s 9,500 mm2 to the room '
+                    'about 16 K more [E]: the chassis about 20 K over the room at full while charging, to prove on the '
+                    'bench']),
+        Part('pads', pads, Bought('core-thermal-pad'), finish='silicone', group='base', inside=True),
         Part('ballast', ballast, Machined('steel', 'mill'), finish='steel', group='base', inside=True,
              notes=['mild steel, zinc-plated: three corner pieces between the cells\' bays, screwed up into the base']),
         Part('board', board, Bought('core-board-18650'), finish='steel', group='base', inside=True, render=False),
         Part('led', led, Bought('moon-led-table'), finish='led', group='base', inside=True),
         Part('cells', cells, Bought('core-cells-18650'), finish='steel', group='battery', inside=True, render=False),
         Part('holder', holder, Bought('core-holder-18650'), finish='trim', group='battery', inside=True,
-             notes=['three single-cell holders in a triangle round the middle: spring contacts (no exposed contact '
-                    'outside the hatch), keyed so a cell cannot go in backwards, the NTC on one']),
+             notes=['review 2026-11-01: no holders. Per cell, a gold-flashed + leaf Ø6 x 0.7 at the bottom of an 8 '
+                    'shroud milled 1.5 into the bay\'s end wall (only a button top reaches it: a reversed or flat-top cell '
+                    'makes no contact) and a nickel-plated conical - spring Ø12, 1.7 at rest; leads in a milled channel '
+                    'to the board, the NTC on one cell; no exposed contact outside the hatch']),
         Part('hatch', hatch, Machined('aluminium', 'mill'), finish='anodised', group='battery',
              notes=['black anodised aluminium, 2.3 thick, in a counterbore under the base: four captive M3 screws '
                     '(Phillips or Torx: commercially available tools), an O-ring (IP44); a label inside: the cells\' '
@@ -518,9 +542,9 @@ NOTES_ORB = [
     'Cordless (the owner, 2026-10-31): three button-top LiFePO4 18650 cells (Power Sonic PSL-FP-IFR18650EC class, 14.4 Wh) '
     'on bare spring contacts in bays milled round the LED, behind a hatch underneath on four captive screws, the user\'s '
     'to replace with standard cells. It charges on its dock or from USB-C underneath at 9 V (USB PD, the 20 W adapter '
-    'in the box; CORE-RECHARGE.md), and charges while it runs, about 2.7 hours to 90 % at 1.5 A. About 7.8 hours at '
-    'full brightness (1.5 W) at the default charge limit (90 %, counted by a coulomb counter), 8.6 at a full charge; '
-    'about 9.7 at the bar setting (1.2 W).',
+    'in the box; CORE-RECHARGE.md), and charges while it runs, about 2.7 hours to 90 % at 1.5 A. About five hours a '
+    'charge (the copy until the bench proves more: computed, about 7.8 hours at full brightness, 1.5 W, at the default '
+    'charge limit of 90 %, counted by a coulomb counter).',
     'Long life: LiFePO4 keeps about 80 % of its capacity after about 2,000 cycles (ordinary Li-ion about 500); the '
     'charge limit, a battery-management circuit (protection, a coulomb counter, each cell behind back-to-back FETs off '
     'until checked, charging held off below 0 C and above 45 C by the cells\' NTC, thermal foldback) and no exposed '
@@ -537,7 +561,7 @@ TOUCHING_ORB = [('grommet', 'shell'), ('window', 'base'), ('seat', 'base'), ('ri
                 ('chassis', 'base'), ('ballast', 'chassis'), ('ballast', 'base'), ('cable', 'base'), ('board', 'chassis'),
                 ('foot-ring', 'base'), ('cells', 'holder'), ('hatch', 'base'), ('usb', 'base'), ('cable', 'hatch'),
                 ('led', 'chassis'), ('holder', 'base'), ('holder', 'hatch'), ('ballast', 'hatch'), ('chassis', 'board'),
-                ('window', 'led'), ('usb', 'hatch')]
+                ('window', 'led'), ('usb', 'hatch'), ('pads', 'chassis'), ('pads', 'ring'), ('pads', 'base')]
 
 
 # Hemisphere South, DROPPED (the owner, 2026-10-25: "Get rid of south altogether and just call it hemisphere."). Kept as a record.
