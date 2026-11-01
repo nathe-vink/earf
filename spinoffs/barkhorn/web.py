@@ -183,6 +183,57 @@ TT = dict(name='Mantle', kind='Record player', route='mantle',             # rou
                  ('Phono stage', 'Built in, for moving-magnet cartridges, with a line out and a switch to bypass it'),
                  ('Cover', 'Tinted acrylic, hinged'), ('Size', '470 wide, 380 deep, 194 high with the lid down (mm)'),
                  ('Weight', 'About 15.5 kg'), CARE, ('Figures', 'Design figures; they may change before production')])
+
+# round 47: the owner's decisions of 2026-11-01 (r46-owner-notes 5b63e05b), drafted and held (the coordinator: "Draft the
+# copy changes ... Nothing goes live"). Mantle is Strata Float v3 (r48-mantle-design, companions/mantle-r48/README.md
+# section 10); Core charges on a contact dock, a disc of polished black acrylic; Hemisphere's shade has its color on the
+# outside, over clear. COPY_NEXT False keeps today's words everywhere; it goes on with the speaker lane's new picture set,
+# because the pictures on the site still show the old Mantle (a motor pod, clear posts) and the old shade.
+COPY_NEXT = False
+TT_NEXT = dict(
+    line='A record player that floats over a pool of its own light.',
+    facts=[('Plinth', 'Laminated cast acrylic, 24 mm, in tinted and clear layers; the color is the plinth&rsquo;s'),
+           ('Posts', 'Four solid posts of polished stainless steel, 30 mm across'),
+           ('Base', 'Smoked cast acrylic, 12.7 mm, with a loop of light in a slot beneath it; at dusk the light pools on the shelf'),
+           ('Drive', 'Belt, from Rega&rsquo;s 24 V motor, fixed beneath the plinth'),
+           ('Speeds', '33 and 45, by a button'), ('Arm', 'Rega RB330'), ('Cartridge', 'Ortofon 2M Black'),
+           ('Phono stage', 'Built in, for moving-magnet cartridges, with a line out and a switch to bypass it'),
+           ('Cover', 'Smoked acrylic, 3 mm, on friction hinges'), ('Size', '470 wide, 380 deep, about 200 high with the lid down (mm)'),
+           ('Weight', 'About 15 kg'), CARE, ('Figures', 'Design figures; they may change before production')])
+NEXT_TEXT = {   # today's words -> the drafts (each must be found exactly once in the page when COPY_NEXT is on)
+    # Mantle's band on the home page
+    'acrylic. Its tinted plinth floats 40&nbsp;mm over a base that glows at its edge. The motor stands apart in a pod of its '
+    'own, and the phono stage is built in.':
+        'acrylic, laid up in layers. Its tinted plinth floats on four polished steel posts over a smoked base, and at dusk a '
+        'loop of light beneath it pools on the shelf. The motor is fixed under the plinth, and the phono stage is built in.',
+    'The lid raised. Its hinges sit on brass inserts, so no screw cuts the acrylic.':
+        'The lid raised, on friction hinges. They sit on threaded inserts, so no screw cuts the acrylic.',
+    'The motor stands apart, in a brass pod on soft feet, so its hum stays out of the plinth.':
+        'The motor, fixed under the plinth, in the gap the plinth floats over.',
+    # Mantle's page: the view of the motor
+    "'The motor in its own pod, standing clear of the plinth.'": "'The motor, fixed under the plinth.'",
+    # Core: the lamps band's note
+    'About five hours a charge at full brightness, longer dimmed, and it charges in two to three hours.':
+        'About five hours a charge at full brightness, longer dimmed. Set it back on its dock, a disc of polished black '
+        'acrylic, and it charges in two to three hours.',
+}
+
+
+def copy_next():
+    """Put the drafted words in place of today's (the data here; the page's own words through NEXT_TEXT at build)."""
+    TT.update(TT_NEXT)
+    for i, (k, name, kind, line, alt, facts) in enumerate(LAMPS):
+        f = dict(facts)
+        if k == 'dome':
+            f['Shade'] = 'Cast acrylic in three layers: its color on the outside, over a clear shell and an opal diffuser within'
+        if k == 'orb':
+            f['Power'] = ('Cordless: about five hours a charge at full brightness, longer dimmed; it charges in two to three hours '
+                          'on its dock, on three standard LiFePO4 cells you can replace yourself')
+            f = {**{a: b for a, b in f.items() if a not in ('Rating', 'Shades', 'Care', 'Figures')},
+                 'Dock': 'A disc of polished black acrylic, 150 mm across; Core charges by contact, through two stainless rings',
+                 **{a: b for a, b in f.items() if a in ('Rating', 'Shades', 'Care', 'Figures')}}
+        LAMPS[i] = (k, name, kind, line, alt, list(f.items()))
+
 # round 34's final (companions/README.md "Round 34: the record player, final (Mantle)", r32-turntable-final)
 LINES = [  # the shop's three lines: key, name, what's in it, its line
     ('speakers', 'Speakers', 'Tropos', 'A powered horn loudspeaker in eight colors of cast acrylic.'),
@@ -3145,9 +3196,15 @@ def build():
         shutil.rmtree(d3)
     if VIEW3D and os.path.exists(src3):
         shutil.copytree(src3, d3)
+    if COPY_NEXT:
+        copy_next()
     make_editorial()
     share_pages()
     head, rest = body()
+    if COPY_NEXT:
+        for old, new in NEXT_TEXT.items():
+            assert rest.count(old) == 1, ('COPY_NEXT: not found once', old[:60])
+            rest = rest.replace(old, new)
     open(os.path.join(SITE, 'index.html'), 'w').write(HEAD + head.strip() + '\n</head>\n<body>\n' + rest.strip() + '\n</body>\n</html>\n')
     favicons()
     open(os.path.join(SITE, 'robots.txt'), 'w').write('User-agent: *\nDisallow: /\n')

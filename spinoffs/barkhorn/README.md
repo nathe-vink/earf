@@ -160,6 +160,11 @@ brand"). Not live: main needs the owner's yes.
 - **Campaign slots** (`CAMPAIGN` in `web.py`, empty): one entry per picture (product, source render, per colour or
   shared, where it sits in the gallery, its label, caption and alt) and `web.py --images` puts the product sessions'
   finals into the galleries; tested with a stand-in on a scratch copy. Nothing goes in before the owner picks.
+- **The owner's decisions of 2026-11-01, drafted and held** (`COPY_NEXT` in `web.py`, off): Mantle as Strata Float v3
+  (its line, particulars, band and captions), Core's contact dock (its Power fact, a Dock fact, the lamps' note) and
+  Hemisphere's shade with its color outside, over clear. Off, the page is byte for byte today's. It goes on with the speaker
+  lane's new picture set, whose alts will describe the new Mantle; the pictures on the site still show the old one.
+  Close-ups go beside a whole-product picture when that set is laid out.
 
 ## Round 31: every picture final, the amplifier's plate as it is, and pictures for a launch (the owner's notes of 2026-10-18; in progress)
 
