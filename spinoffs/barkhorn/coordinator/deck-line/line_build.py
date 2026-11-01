@@ -127,7 +127,7 @@ def build(spec, ground):
     if f:
         fb = (f['x'], f['y'] - 4, f['x'] + f['w'], f['y'] + 26)
         ink, cr, st = ground.ink(fb, f.get('ink'))
-        col = 'rgba(28,26,24,0.8)' if ink == 'dark' else 'rgba(244,241,236,0.86)'
+        col = f.get('color') or ('rgba(28,26,24,0.8)' if ink == 'dark' else 'rgba(244,241,236,0.86)')
         report.append(('foot', ink, cr, st))
         parts.append(
             f'<p style="position:absolute;left:{f["x"]}px;top:{f["y"]}px;width:{f["w"]}px;text-align:{f.get("align", "right")};'

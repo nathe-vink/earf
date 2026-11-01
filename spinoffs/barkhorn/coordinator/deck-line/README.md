@@ -29,3 +29,8 @@ measures 7.0 to 13.3:1 on the labels and 4.7:1 on the corner note.
 
 The stock-tint dusk frame (specs/spec-final2092-dusk.json, the four-pieces lane's final-2092 dusk, 416eb5e6, near-black Tropos
 cabinets with deep green horns): same zones, inks and halo; 7.0 to 13.3:1 on the labels and 4.7:1 on the corner note. Deck v46.
+
+The Strata Float day frame (specs/spec-final2092sf-day.json, the four-pieces lane's final-2092-sf day, 11a1d8bf; slide kept as
+specs/line-day-sf.html, image /_blob/1506c4659a39015266edad449a224397): dark ink, no halo; 7.7 to 12.2:1 on the labels. The corner note
+sits on the rug's mid tone, where the builder's muted ink measured 3.9:1, so a spec can now set `foot.color` (here #1C1A18: 5.5:1).
+Kept as the alternative; the deck shows the lights-on room.

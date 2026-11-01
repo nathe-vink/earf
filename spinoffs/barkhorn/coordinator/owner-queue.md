@@ -527,3 +527,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   the chosen designs follow (the -sf frames: day ~13:45, dusk ~14:25).
 - Check-in 19 (13:34): board v5 up and the owner asked (tagline, budget); deck v46 line interim in. Speaker row rendering since 12:44
   (~13:45), then cover, room + portrait; four-pieces -sf day ~13:45, dusk ~14:25. Next check-in 14:35 (trig_01F1p2PA46C4JnqFbT8eF61k).
+- 13:55 four-pieces -sf day landed (11a1d8bf): Strata Float v3 and Hemisphere v3 (color outside), all four in stock 2092, both
+  speakers whole. Built as the line slide's day alternative (specs/line-day-sf.html; effective 7.7-12.2:1, corner note 5.5:1 with
+  solid ink); not published, the deck keeps the lights-on room. -sf dusk ~14:30 -> line.html final.
