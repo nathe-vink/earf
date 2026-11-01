@@ -30,6 +30,7 @@ BEST = {
  'relief': ('60782879', 6.5, 'look 2, round 1'),
  'meridian': ('12a088d4', 6.5, 'look 2, round 2'),
  'lithos': ('d6f98b8a', 6.0, 'look 2, round 3'),
+ 'ionos': ('e0ef68fc', 5.5, 'look 2, round 3'),
 }
 
 def frame(k):
