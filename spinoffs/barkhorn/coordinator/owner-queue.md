@@ -668,3 +668,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   out pale. Corrected (my call, per the morning ruling that site and brand swatches follow the line's tints via the brand lane):
   MARK_NEXT mirrors all eight marks in marks.py at r47-brand f6e3dc12 (Poison #376621, Haze #543287, the other six as the brand has
   them); new before/after strip asked. Brand lane: colors F complete (6254153e, lamps pack render).
+- 23:10 site lane MARK_NEXT = brand marks at f6e3dc12 (d06b3a79): Poison #376621, Haze #543287, and Ember #9B0000 (the brand's
+  morning stock-tint mark, which the site's marks.py predated); Dust, Acid, Ice, Fog, Smoke unchanged. Strip launch/swatches-F.png;
+  flag-on sweep passed. Held, no deploy.
