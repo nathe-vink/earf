@@ -633,3 +633,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   Tested-and-not-adopted list in BASES.md (lower strength, opal 90, 6 mm reveal, sealed 90, sealed 40; a real pool needs ~50 mm feet,
   the owner's to ask for); sealed channel switchable (variants.py PLINTH_LIGHT['sealed']). Stability (0662ee73): 84.6 kg, CoM 520 mm,
   +19 / +14 / +14 %, passes. Speaker lane now holding everything for card 03; four-pieces idle.
+- Check-in 24 (22:39): plinth already settled and closed (21:04). No lane is running: the speaker and four-pieces lanes are holding
+  for card 03; the owner has been quiet since 15:10. Check-ins stopped (none armed); the owner's reply or a lane message brings the
+  coordinator back. On the reply: board v6's three cards (tagline, budget, colors) as in check-in 23's notes.
