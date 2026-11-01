@@ -514,3 +514,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   71d3163e, Core dock post and ring). Coordinator's calls (to the board): plate back right; one fixed brightness. Tagline workflow:
   writers and two judges done. Waiting on the owner: budget (A ~$55,000 / B keep $50,000 ~$400 spare / C make room). Next check-in 13:33.
 - 12:50 deck v45: Tropos slide = the speaker lane hero 39d580bb (final design, stock Ember 2423, whole speaker and plinth; /_blob/4b7fac1f6169271d6581eb3cc3dcd050); subtitle: the horn stepped in 22 layers and flush with the cabinet, on a plinth lit from underneath. Row (eight) rendering, then cover, room + portrait.
+- 13:00 tagline workflow wf_9bb8d840-719 done (four writers from four angles: the room after dark, listening, the Earth, living with
+  the pieces; 38 lines; three judges; an editor's five). The set: "Have the world over." (my pick: the only line all three judges scored
+  7+), "Light to listen by.", "Low light, long play." (two vinyl bars use "Long Play" as a name), "The room keeps late hours.", "The room
+  has a center now." A web search found none in use as a slogan; not a trademark search. Board v5
+  (https://claude.ai/artifact/MGUByhczqB2jUYDV7R4t3h): 01 tagline (cover samples, "none: another round"), 02 budget correction
+  (A ~$55,000 my pick / B keep $50,000 ~$400 spare / C make room), the owner's 12:10 picks and my calls as settled (horn depth: Ember,
+  Poison, Haze, Fog and Smoke stock; Dust, Acid and Ice deep), Smoke's go needed in the biomes session. Asked the owner both.
