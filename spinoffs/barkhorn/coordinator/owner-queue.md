@@ -608,3 +608,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   front-off-wide proof at 20. If it reads as a pool: show the owner, adopt unless they object.
 - Check-in 22 (18:36): owner quiet since 15:10; board v6's three cards open. Speaker lane modelling the plinth reveal (b). Next
   check-in ~20:36 (send_later).
+- 18:37 speaker correction: the bottom frame is one 1/2 in sheet, so a 15 mm reveal can't be cut. Modelling a 6 mm rebate in its
+  underside instead (outside edge in 70 mm to the diffuser; 6.7 mm lip; 18 mm gap at the step's edge; feet, height, outline unchanged);
+  tip test rerun; rows at 20/40 + Ice proof. Told: go; if still a line, say which of a 3/4 in bottom frame or taller feet before modelling.
