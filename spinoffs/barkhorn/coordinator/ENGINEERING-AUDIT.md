@@ -132,5 +132,10 @@ was found to be fake.
   - "575 lumens" is the LED's figure.
 - **Site and brand lanes:** asked to sweep the same claims.
 
-## Completeness pass
-(to add when wf_32ea5a79-234's last agent returns)
+## Completeness pass (what no review had checked)
+
+- **HIGH: Core's battery compartment as a drop-safe and fire-safe enclosure: UL 153 Supplement SA's drop programme and the acrylic around the cells** (Core, including the Core ball, which is sold separately). Documented: Core's listing route is UL 153 with Supplement SA (r32-lamps-final:spinoffs/barkhorn/companions/launch/certification.md; PARTICULARS.md). Full text in completeness.json.
+- **MEDIUM: Chemical compatibility and stress cracking beyond the cleaning card: thread-locker on stressed acrylic, bar spirits and sanitisers, and cement vapour sealed into cemented cavities** (Hemisphere, Core, Mantle (Tropos already has a control)). Documented FOR TROPOS ONLY: crazing is risk A1 in r33-speaker-horn:spinoffs/barkhorn/make/horn-risks.md. Full text in completeness.json.
+- **MEDIUM: Transit, packaging and owner set-up: the shipping plan hands the owner the joints the reviews found weakest** (Tropos, Mantle, Core, Hemisphere, Mother desk globe). Documented ONLY AS A CONCEPT: r47-brand:spinoffs/barkhorn/brandbook/PACKAGING.md proposes crates and ISTA 3A/3B tests ('every size, stock and test below is a proposal'). Full text in completeness.json.
+- **MEDIUM: Lithium transport mode for Core: four documents, two answers, and the 2026 air state-of-charge rule** (Core (sales, spare cells, returns and warranty shipments)). Documented, AND CONTRADICTORY. Full text in completeness.json.
+- **LOW: ESD and EMC design inside acrylic bodies that give no shielding** (Core, Mantle, Tropos, Hemisphere, Mother desk globe). No review examined this. Full text in completeness.json.
