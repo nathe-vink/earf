@@ -593,3 +593,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   fails. HF lead (the "streak", pending a hide test) routed up the rear inside corner on the rib, sleeved in the lining's color. The
   "blue rectangle" is the grip pocket, real. Deep horns in the cabinet's hue done (332c9e5d: Dust #F25508, Acid #FFB101, Ice #2981E7);
   side-view flag removed (64282aa1).
+- 18:00 speaker: Ice in matched hue (91b37ff0, proofs/front-off-tall-ice-hue.png): the horn loses its cobalt-violet cast, one blue;
+  render models rebuilt (cloud 48629908, variants 4c3111e0). Soft pool in source (ab25ea36): strip 90 mm in behind a 40 x 3 mm opal
+  diffuser flush with the frame's underside; feet, footprint, outline unchanged; strip 1.94 m a speaker, 9.3 W at full; BASES.md,
+  components.json and the draft RFQ line updated; deck-row comparison at 20/40 next. The streak is not the HF lead (hide test);
+  next suspect the top cable gland / tie-rod pad; report before any change. Site frames: LED 20 day, 40 dusk.
