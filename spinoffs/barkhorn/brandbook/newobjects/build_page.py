@@ -16,7 +16,7 @@ CAP = {
  'moho': 'Render. Moho on Mantle\'s platter, at true size against a 12-inch record: Dust, Acid and Ice under a Clear top, the brass core seen through them. Lighter custom pours of Dust, Acid and Ice (est.), as is Mantle\'s Dust plinth here; in stock sheet the puck reads darker.',
  'lithos': 'Render. Lithos in a room, books for scale, its banded colored shadow on the wall behind: the filament shows only at the clear guides, which glow warm between the eight bands, buffed clear and satin in turn at Core Sample\'s 12.7 mm pitch. The colored bands are lighter custom pours (est.); in stock sheet the deep ones read near-black.',
  'ionos': 'Render. Ionos in a lighter custom pour of Ice (est.), its near-clear middle layer unlit; the top disc turns to tune, 24 detents read against the lit index at the front. The electronics tray shows through the bottom layers, as it would.',
- 'cairn': 'Render. A pair of Cairns in Fog with one layer of Dust (a lighter custom pour, est.; stock reads brick red edge-on); faces as cast, sides flame-polished, on silicone feet.',
+ 'cairn': 'Render. A Cairn in Fog with one layer of Dust (a lighter custom pour, est.; stock reads brick red edge-on), books trailing behind it; faces as cast, sides flame-polished, on silicone feet. Fog at 120 to 160 mm edge-on reads teal.',
  'bedrock': 'Render. Bedrock in a lighter custom pour of Dust (est.): in stock 2422 an inch of it reads red. The end-plates stepped, three steel rails; low daylight from behind throws the amber onto the floor.',
  'relief': 'Render. Relief in Fog, lit by its own bar along the top edge: the green deepens with each of the twelve layers, like a sea chart in glass.',
  'meridian': 'Render. Meridian at ten past two: the Acid hour disc and the Ice minute disc cross, and where they overlap the light is green.',
@@ -30,6 +30,7 @@ BEST = {
  'relief': ('60782879', 6.5, 'look 2, round 1'),
  'meridian': ('12a088d4', 6.5, 'look 2, round 2'),
  'lithos': ('d6f98b8a', 6.0, 'look 2, round 3'),
+ 'cairn': ('984415d9', 5.0, 'look 2, round 2'),
  'bedrock': ('11a30938', 6.3, 'look 2, round 1'),
  'ionos': ('e0ef68fc', 5.5, 'look 2, round 3'),
 }
