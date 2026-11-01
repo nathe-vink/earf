@@ -123,7 +123,7 @@ while lanes run. Deck: https://claude.ai/artifact/3sihYaT4ckNTF6WE7SWR7x (v29). 
 
 ## Owner questions, in order (one at a time)
 1. Tagline A-D (asked, waiting).
-2. TROPOS: adopt Strata (the stepped laminated horn with the caldera)? It won all three blind duels (8.0 vs 7.0; studio
+2. (DONE 02:20, saved 29fe44a6) TROPOS: adopt Strata (the stepped laminated horn with the caldera)? It won all three blind duels (8.0 vs 7.0; studio
    7.0 vs 5.5; room 7.0 vs 5.0). Finals: r33-speaker-horn renders/2026-10-31/barkhorn/design-pass/design-strata.png (Ember
    studio) and design-strata-room.png (Poison pair). Same build facts (22 layers of 1/2 in stock sheet + the boss; about
    74 kg a speaker). Condition: the audit puts Strata's tipping margin near zero (fix: wider or heavier base).
@@ -298,3 +298,8 @@ Not questions (FYI with pictures when there's a natural moment): Core's contact 
   light type with a soft halo (worst raw ground 4.0:1 at Hemisphere, halo lifts it). The day version is kept as the
   alternative (coordinator/deck-line/specs/line-day.html, /_blob/11da3b53...). Four-pieces lane DONE. Owner shown it;
   they can ask for day instead.
+- 04:10 UTC OWNER (saved ae44c19f): horn overhang "a little goofy" -> flush horn (both horns) after an acoustic check;
+  footprint = A, the stepped plinth, LIT FROM UNDERNEATH ("or something like that"); "Are the footprints optional?" ->
+  no for a listed product (the 20 % push must pass in normal use) unless the lab accepts anchoring; it can ship separately.
+  Speaker lane: lit plinth design + flush horn + proofs; A-vs-B duel stopped.
+  Owner questions now: tagline (asked); color depth; Mantle A/B; later: lining sleeves, Mother EARF armature, editions pictures.
