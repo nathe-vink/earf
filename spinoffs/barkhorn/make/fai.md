@@ -19,7 +19,7 @@ copy of this list, with the lots' numbers and the photographs. The forming risks
 | D8 | The horn's wall, 30 points | 4.0 or more everywhere | Hall-effect gauge |
 | D9 | The step at the flare's joint | 0.1 or less | feeler and borescope |
 | D10 | The horn's rim | 10 ±0.5, full round | gauge and eye |
-| D11 | The posts' sockets: the horn sits on all four without rocking | no rock | by hand; the sleeves fitted |
+| D11 | The posts' sockets: the horn sits on all four without rocking, the front feet hooked under their keyhole sockets' lips (the engineering audit, 2026-11-01) | no rock; the horn cannot slide forward with the tie done up | by hand; the rear sleeves fitted |
 
 ## Finish and colour
 
@@ -36,11 +36,11 @@ copy of this list, with the lots' numbers and the photographs. The forming risks
 
 | # | check | limit | how |
 |---|---|---|---|
-| M1 | Inserts | a sample of each size holds 2 x its fitting torque with no turn | torque wrench, on a coupon cemented with the cabinet |
-| M2 | The back's seal | no air leak at 1 kPa | the ports plugged, a 20 Hz tone at 100 dB: no whistle or chuff at the back's edge (smoke pencil) |
-| M3 | Rattles and buzzes | none from 20 to 200 Hz at 100 dB/1 m | a slow sine sweep, listened to at 0.3 m all round |
-| M4 | The horn's tie-down | the horn cannot be lifted with the tie rod done up | by hand |
-| M5 | Stability | the speaker with its horn tips back to upright from 10° in every direction (IEC 62368-1's push, round 35) | inclinometer and push gauge |
+| M1 | Inserts | a sample of each size holds 2 x its fitting torque with no turn (the woofer's M6 at 5 N m, so 10 N m; the tie's M6 at 2 N m, so 4 N m; not the 30 N m of 2 x the old 15) and a 2 kN pull on the tie's and the keyhole sockets' fittings | torque wrench and a pull gauge, on a coupon cemented with the cabinet |
+| M2 | The back's seal | static pressure decay: the box at 200 Pa, ports plugged, holds above 100 Pa for 30 s (est.; set on the first sealed sample) | a hand pump and a manometer through a fitting in one port's plug. 200 Pa moves the woofer 4.1 mm, inside its Xmax 5.75; 1 kPa would move it 20 mm, and the old 20 Hz tone at 100 dB about 10.9 mm (the audit) |
+| M3 | Rattles and buzzes | none from 35 to 200 Hz at 100 dB/1 m, and from 30 Hz at 94 dB | a slow sine sweep, listened to at 0.3 m all round. From 20 Hz at 100 dB the woofer would need about 28.7 mm (the audit), past Xmax |
+| M4 | The horn's retention | the tie nut at 2 N m; the horn does not lift or slide under 150 N at its top in any direction | torque key, push gauge |
+| M5 | Stability | IEC 62368-1 8.6.2.2: 20 % of the weight (about 150 N) at the horn's top in every horizontal direction: no tip; and the 10° tilt | push gauge, inclinometer. Today's footprint fails (`stability/README.md`): this waits for the base the owner chooses |
 
 ## Electrical and acoustic
 
@@ -51,9 +51,9 @@ copy of this list, with the lots' numbers and the photographs. The forming risks
 | E3 | Impedance, each driver | within 10 % of the first sample's curve | an impedance sweep |
 | E4 | Response, on axis at 1 m | within ±1.5 dB of the reference, 60 Hz to 16 kHz; a pair within ±1 dB | measurement microphone, gated |
 | E5 | Distortion | horn below 1 % at 1 kHz, 100 dB/1 m | measurement microphone |
-| E6 | The preset | loaded, the version recorded, the standby and the limiter on (round 35) | HFD |
+| E6 | The preset | the same verified preset in all three slots (the 28 Hz high-pass, the limiters, soft clip on, the HF channel limited to 10 V), its version recorded; Hypex's filter password set and recorded in this file, not on the speaker | HFD |
 | E7 | The remote (the master) | volume, mute and power from the listening seat, through the front panel | the Hypex remote at 3 m, 30° off axis |
-| E8 | Heat | the compartment below its limit after 4 hours at full program (round 35) | thermocouple |
+| E8 | Heat | the compartment below its limit after 4 hours at full program (round 35); and the abnormal case: a full-scale HF sine with the limiter defeated (up to about 26 to 31 W in the L-pad) until steady, the compartment's metal and the back's acrylic below their limits, no smoke | thermocouples on the resistors, the capacitor, the pan and the back |
 
 ## Labels and paperwork
 

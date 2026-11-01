@@ -9,9 +9,10 @@ lib = next((x for x in sys.argv if x.endswith('.blend') and 'link_example' not i
     os.path.join(os.path.dirname(os.path.abspath(__file__)), 'tropos-strata.blend' if strata else 'tropos.blend')
 out = sys.argv[-1]
 bpy.ops.wm.read_factory_settings(use_empty=True)
-names = [('Tropos Strata ' if strata else 'Tropos ') + t for t in ('Ember', 'Smoke', 'Poison', 'Ice')]
 with bpy.data.libraries.load(lib, link=True, assets_only=True) as (src, dst):
     print('collections in the library:', src.collections)
+    pre = min(src.collections, key=len).rsplit(' ', 1)[0]          # 'Tropos', 'Tropos Strata' or 'Tropos Strata Smooth'
+    names = [f'{pre} {t}' for t in ('Ember', 'Smoke', 'Poison', 'Ice')]
     dst.collections = list(names)
 sc = bpy.context.scene
 for i, n in enumerate(names):

@@ -80,11 +80,11 @@ KINDS = {
         ('horn-tool', 'forming plug, production (a later line)', 'aluminum, cast near shape (A356) and machined', '628 x 273 x 364', '-', 'machined all over on 5 axes, polished; oil channels for 85 C; vents 0.6; cored', 'surface ±0.05'),
     ],
     'c-metal': [
-        ('amp-box', 'amplifier compartment', 'aluminum 5052 or 6061 sheet', '1.5', 'black anodized', 'folded, corners welded, flange; 3 gland holes; an earth stud on a bared spot', '±0.3'),
+        ('amp-box', 'amplifier compartment', 'aluminum 5052-H32 sheet (not 6061: it cracks at tight folds)', '1.5', 'black anodized', 'folded, corners welded, flange; 3 gland holes; an earth stud on a bared spot', '±0.3'),
         ('hf-adaptor', 'driver adaptor ring', 'aluminum 6061', 'ø184 x 10', 'black anodized', 'turned; 4 countersunk M6 on 101.6; 4 x 5.5 on 170', '±0.1'),
-        (('post-1', 'post-2'), 'front horn posts', 'stainless 304 tube 10 x 7', 'ø10', 'natural, satin', 'cut to length, threaded M10 x 1 at the top, deburred', 'length ±0.2'),
-        (('post-3', 'post-4'), 'rear horn posts', 'stainless 304 tube 10 x 7', 'ø10', 'natural, satin', 'cut to length, threaded M10 x 1 at the top, deburred', 'length ±0.2'),
-        ('post-sockets', 'post sockets and inserts (a set of 8)', 'brass C360', 'ø15 x 15 cups; M10 x 1 inserts 13 x 12', 'natural', 'turned, knurled; cups bored 12 on a 2 floor', '±0.05 on the bore'),
+        (('post-1', 'post-2'), 'front horn posts', 'stainless 304 tube 10 x 7', 'ø10', 'natural, satin', 'cut to length, threaded M10 x 1 at the top; the foot plugged and turned to a head 14 across, 4 thick, on an 8 neck, to hook under its keyhole socket', 'length ±0.2'),
+        (('post-3', 'post-4'), 'rear horn posts', 'stainless 304 tube 10 x 7', 'ø10', 'natural, satin', 'cut to length, threaded M10 x 1 at the top; the foot plugged and turned to a head 14 across, 4 thick, on an 8 neck, to hook under its keyhole socket', 'length ±0.2'),
+        ('post-sockets', 'post sockets and inserts (a set of 8)', 'brass C360; the front pair bronze', 'ø15 x 15 cups (rear); keyhole sockets ø30 x 15 (front); M10 x 1 inserts 13 x 12', 'natural', 'turned, knurled; rear cups bored 12 on a 2 floor; front: a 15 hole and a 9 slot 10 long with a 3 lip over a 15 x 4 undercut', '±0.05 on the bore and slot'),
         ('rating-plate', 'rating plate', 'aluminum', '70 x 40 x 1', 'black anodized', 'laser-marked (model, serial, ratings, WEEE bin)', '±0.2'),
     ],
     'd-other': [
@@ -94,7 +94,8 @@ KINDS = {
         ('mark-back', 'EARF on the back', 'laser etch into the back panel', '0.1 deep', 'etch filled in the speaker\'s color, deeper', 'frosted, 140 wide, from our vector file', '±0.2'),
         ('back-seal', 'back seal', 'EPDM cord 4 mm, 60 Shore A', '4', 'black', 'about 2.7 m a speaker, its ends vulcanized into a loop', 'length ±5'),
         ('amp-box-gasket', 'amplifier compartment gasket', 'EPDM sponge, closed cell', '3', 'black', 'die-cut frame, 15 wide', '±0.5'),
-        ('post-sleeves', 'post sleeves (a set of 4)', 'polyurethane, Shore A 90', 'ø12 x 10 x 13', 'black', 'cast or cut', '±0.1'),
+        ('post-sleeves', 'post sleeves (a pair, the rear posts)', 'polyurethane, Shore A 90', 'ø12 x 10 x 13', 'black', 'cast or cut', '±0.1'),
+        ('mains-cord', 'mains cord set (one a speaker)', 'NEMA 5-15P to IEC 60320 C13, 18 AWG SJT, UL listed (UL 817)', '2 m', 'black', 'listed; bought, not made: quote if you stock it', '-'),
     ],
 }
 

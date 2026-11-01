@@ -84,3 +84,16 @@ is not committed: rebuild it in about 30 s.
 Collapsing the lining meshes broke the top batt, a 48-face box, into a pale wedge. The four-pieces room showed it. A
 mesh under 2,000 faces is now never collapsed (`MIN_FACES`), and both files are rebuilt. See
 `renders/2026-11-01/barkhorn/top-batt/NOTES.md`.
+
+## Strata's two horns (the owner, 2026-11-01)
+
+"I love the stepping in the loudspeaker but not sure about the horn. Would like to keep both options for the horn but
+happy to start with the stepped version." So Strata is the design, and the stepped horn is its lead version.
+`tropos-strata.blend` carries the stepped horn.
+
+The smooth formed horn is an option on the same cabinet, caldera and bronze posts:
+
+    python3.11 spinoffs/barkhorn/asset/make_blend.py --design strata --horn smooth --out …/tropos-strata-smooth.blend
+
+The collections are then "Tropos Strata Smooth <tint>". `link_example_strata_smooth.png` shows four. That file is not
+committed: it rebuilds in about 30 s.

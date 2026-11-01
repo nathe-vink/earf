@@ -1,0 +1,36 @@
+{
+ "current": {
+  "horn_kg": 8.56,
+  "horn_com": [
+   0.0003,
+   0.0424,
+   1.1062
+  ],
+  "push_N": 137.8,
+  "post_load_static_N": 21.0,
+  "lift_push_min_N": 13.1,
+  "lift_direction_deg": 300,
+  "fixed_feet": {
+   "max_tension_N": 121.0,
+   "max_compression_N": 146.6,
+   "max_bending_MPa": 54.8
+  }
+ },
+ "strata": {
+  "horn_kg": 11.4,
+  "horn_com": [
+   0.0002,
+   0.0071,
+   1.0999
+  ],
+  "push_N": 147.6,
+  "post_load_static_N": 28.0,
+  "lift_push_min_N": 23.2,
+  "lift_direction_deg": 300,
+  "fixed_feet": {
+   "max_tension_N": 124.5,
+   "max_compression_N": 171.1,
+   "max_bending_MPa": 11.1
+  }
+ }
+}

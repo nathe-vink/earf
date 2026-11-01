@@ -41,6 +41,11 @@ STRATA_HIDE = ['cloth-disc', 'horn-throat', 'post-*', 'post-sleeves', 'post-sock
 DESIGNS = {'current': [('studio/products/barkhorn-cloud.json', [])],
            'strata': [('studio/products/barkhorn-cloud.json', STRATA_HIDE),
                       ('studio/products/barkhorn-variants.json', ['horn-topo*'])]}
+# the owner (2026-11-01): "I love the stepping in the loudspeaker but not sure about the horn. Would like to keep both
+# options for the horn but happy to start with the stepped version": Strata's cabinet and caldera with either horn, on
+# Strata's bronze posts. --horn smooth puts the formed horn (the Cloud's waveguide and throat) on them instead
+HORNS = {'stepped': {}, 'smooth': {'studio/products/barkhorn-cloud.json': ['waveguide', 'horn-throat'],
+                                   'studio/products/barkhorn-variants.json': ['horn-strata']}}
 TINTS = [('Ember', 'cloud-red'), ('Dust', 'cloud-orange'), ('Acid', 'cloud-amber'), ('Poison', 'eucalyptus-y2k-green'),
          ('Ice', 'cloud-blue'), ('Haze', 'cloud-violet'), ('Fog', 'birch-fog-clear'), ('Smoke', 'cloud-black')]
 
@@ -91,7 +96,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--out', default=str(HERE / 'tropos.blend'))
     ap.add_argument('--design', default='current', choices=sorted(DESIGNS))
-    ap.add_argument('--name', default=None, help='the collections\' prefix (default Tropos, or Tropos Strata)')
+    ap.add_argument('--name', default=None, help='the collections\' prefix (default Tropos, Tropos Strata, or Tropos Strata Smooth)')
+    ap.add_argument('--horn', default='stepped', choices=sorted(HORNS), help='Strata\'s horn: stepped (the lead) or smooth (the option)')
     ap.add_argument('--full', action='store_true', help='keep every triangle (no LIGHTER)')
     ap.add_argument('--tints', default='site', choices=['site', 'trucast'],
                     help="the site's tints (default) or stock TruCast sheet's (tints-trucast.json, TINTS.md)")
@@ -100,9 +106,13 @@ def main():
     import product as Pr
 
     bpy.ops.wm.read_factory_settings(use_empty=True)
-    a.name = a.name or ('Tropos' if a.design == 'current' else f'Tropos {a.design.title()}')
+    a.name = a.name or ('Tropos' if a.design == 'current' else f'Tropos {a.design.title()}'
+                        + (' Smooth' if a.horn == 'smooth' else ''))
     objs, part_of = [], {}
     for prod_path, hide in DESIGNS[a.design]:
+        if a.design != 'current':                 # the smooth horn: its parts shown, the stepped one hidden
+            unhide = HORNS[a.horn].get('studio/products/barkhorn-cloud.json', []) if 'cloud' in prod_path else []
+            hide = [h for h in hide if h not in unhide] + (HORNS[a.horn].get(prod_path, []) if 'variants' in prod_path else [])
         tints = json.load(open(HERE / 'tints-trucast.json')) if a.tints == 'trucast' else None
         o, p = load_product(bpy, Pr, prod_path, hide, a.full, tints)
         objs += o; part_of.update(p)
@@ -127,11 +137,12 @@ def main():
         col['tint'] = tint; col['flavour'] = flavour; col['tints'] = a.tints
         col['note'] = (f'{a.name} in {tint} ({flavour}): EARF\'s horn loudspeaker in tinted cast acrylic, 1293 mm tall, '
                        'metres, z up, front -y, feet on z = 0. Materials are Cycles (volume absorption in the acrylic).'
-                     + ('' if a.design == 'current' else f' The {a.design.title()} proposal (spinoffs/barkhorn/variants/'
-                                                         f'{a.design.upper()}.md), not the design on sale.'))
+                     + ('' if a.design == 'current' else f' {a.design.title()} (spinoffs/barkhorn/variants/{a.design.upper()}.md, '
+                        f'adopted by the owner 2026-11-01) with the {a.horn} horn'
+                        + (' (the lead version).' if a.horn == 'stepped' else ' (the option).')))
         col.asset_mark()
         col.asset_data.description = col['note']
-        for t in ['EARF', 'Tropos', tint] + ([a.design.title(), 'proposal'] if a.design != 'current' else []):
+        for t in ['EARF', 'Tropos', tint] + ([a.design.title(), f'{a.horn} horn'] if a.design != 'current' else []):
             col.asset_data.tags.new(t)
         if i:
             bpy.context.view_layer.layer_collection.children[col.name].exclude = True

@@ -85,3 +85,49 @@ cabinet is PMMA, rated UL 94 HB at best, so it cannot be that enclosure.
 - ask Hypex for any CB report on the FA122 first.
 
 All figures are R3's estimates.
+
+## 3. The ground loop: RCA and S/PDIF together (the engineering audit, 2026-11-01)
+
+**The loop.** The FA122s are class I: each is earthed through its mains cord. Hypex's link joins the master and the
+slave with a coax on S/PDIF, so the two speakers' grounds are joined twice: through the mains earth and through the
+link's shield. A source connected to both speakers by RCA adds a third path. A loop of mains earth, coax shield and RCA
+grounds picks up hum, worst with a turntable or a TV on another socket.
+
+**The fix, in the manual and in the box:**
+- **The source goes to the master only.** One RCA pair (or the XLRs, balanced, which reject the loop) into the master;
+  the slave takes its channel over the link. No RCA to the slave.
+- **A 75 Ω S/PDIF isolation transformer in the link** (an inline coax isolator, shipped with the link cable). It breaks
+  the shield path between the speakers without touching the safety earth. About $20 to $40 (est.).
+- **Never lift the mains earth.** The guidance says so in words. An earth-lift on the mains is a shock hazard and
+  voids the listing. Any ground-lift is on the signal side only.
+
+**To check on the first pair:** the hum at the listening seat with a turntable on another socket, with and without the
+isolator.
+
+## 4. The FA122 has no CB or UL report on file; the end product needs its own listing
+
+- **Ask Hypex** for the FA122's CB test certificate and report (IEC 62368-1, with the US national differences) and any
+  UL or NRTL recognition. The draft request is `rfq/tropos/h-hypex/letter.md`; nothing has been sent.
+- **Plan for the end product's listing.** Tropos is sold as a finished mains product, so it needs its own
+  IEC/UL 62368-1 evaluation by an NRTL (UL, Intertek ETL, TÜV, CSA). A CB report on the FA122 shortens that work but
+  does not replace it. The listed cord set (`mains-cord-nema`) and the metal compartment as fire enclosure (section 2)
+  are part of it.
+- **The lab's pre-check (January) also covers:** its reading of stability, 8.6.2.2 (the 20 % push) and 8.6.5
+  (`stability/README.md`; both designs fail on today's feet); and the L-pad's abnormal heat (section 5).
+
+## 5. The L-pad's heat in the abnormal case
+
+The L-pad's two resistors can dissipate up to about 26 to 31 W with a full-scale HF sine. That is 25.6 W by this
+file's arithmetic at 22.4 V (the FA122's 125 W into 4 Ω), and 30.6 W by the audit's. It all sits inside the sealed
+compartment, with the capacitor on the resistors' plate.
+
+- **The audit asked for the resistors to be sunk to the FA122's outer plate. As drawn, they cannot be.** The module
+  fills the plate's inside face (236 to 324 by 380 to 660 in the CAD), leaving margins of 16 and 18 mm.
+- **What is done instead:**
+  - The preset limits the HF channel to 10 V, so in use the pad dissipates at most about 5 W (3.2 W in the series
+    resistor, 1.9 W across the driver).
+  - The capacitor is stood off 3 mm on nylon spacers.
+  - The abnormal case (limiter defeated) is tested in FAI E8. The aluminium compartment is the fire enclosure that
+    contains it.
+- **If the lab wants the abnormal case cooler:** a heatsink plate through the back beside the FA122, with the
+  resistors bolted to its inside. That shows on the back, so it is a look change for the owner.

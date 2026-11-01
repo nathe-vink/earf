@@ -113,9 +113,11 @@ lip is about **10.2 kg**, so it is just over that allowance, not under it.
 - The caldera's 2.1 kg is low on the front, below the woofer's center, and moves the center of mass forward by about
   3 mm (est.).
 
-The margin was about 124 N·m forward against a push of 118 N·m. **Re-run S7 with Strata's masses before the first
-pair**, and confirm it with the push gauge at first-article inspection. If the margin is short, the front feet move out
-by 5 mm.
+The margin was about 124 N·m forward against a push of 118 N·m. **Superseded (2026-11-01):** the engineering audit
+showed S7's basis was wrong. IEC 62368-1 8.6.2.2 pushes with 20 % of the weight, and at that both designs fail in every
+direction on today's feet (`stability/README.md`). Moving the feet 5 mm cannot fix it: the feet need about a
+600 x 600 mm footprint, and the base is the owner's choice. The measured figures replace the estimates above: Strata
+weighs 75.2 kg with its center of mass 222 mm behind the front, and the horn assembly with its posts 11.4 kg.
 
 ## How it is made
 

@@ -95,7 +95,10 @@ def parts(P):
     out.append(product.Part('strata-posts', Compound(children=[r for r, _, _ in ps]), product.Machined('bronze', 'lathe', setup_usd=60.0),
                             finish='brass', group='horn',
                             notes=['Strata: four ø16 bronze rods (C93200 or C544), threaded M12 at the top into inserts in the horn\'s '
-                                   'pads and seated in the top plate\'s sockets on PU sleeves, at the four reviewed post positions']))
+                                   'pads, at the four reviewed post positions. The engineering audit (2026-11-01): the front pair\'s feet are '
+                                   'turned heads (14 across, 4 thick, on an 8 neck) hooked under keyhole sockets bonded through the top into '
+                                   'the front panel\'s edge; the rear pair seated in sleeved sockets, the tie rod in rear post 3 at 2 N m; '
+                                   'held at three points, the horn cannot lift (make/engineering-audit.md)']))
     out.append(product.Part('strata-collars', Compound(children=[c for _, b, t in ps for c in (b, t)]), product.Machined('bronze', 'lathe', setup_usd=40.0),
                             finish='brass', group='horn',
                             notes=['Strata: a turned bronze collar on the top plate at each post (ø28 x 8) and one under each pad '

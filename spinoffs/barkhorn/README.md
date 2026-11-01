@@ -453,7 +453,7 @@ prototype "as close to production as possible. The whole point of a prototype is
 - **The crossover (S6, the owner's question).** 1 kHz, LR4, in the shipping preset. Speakers of this size cross where
   their horns let them: JBL's 4367 (941 x 560 x 425, nearly this box) at 700 Hz and its M2 at 800 on deeper waveguides,
   Altec's A7 at 800 (500 on its bigger horn), JBL's 4430 at 1 kHz, Klipsch's Jubilee at 340 on a horn several times
-  this one's size. This horn is 170 mm deep, and its simulation loads the driver fully only from about 900 Hz, so 900 Hz
+  this one's size. This horn is 278 mm deep (170 was an earlier flare's; the engineering audit, 2026-11-01), and its simulation loads the driver fully only from about 900 Hz, so 900 Hz
   to 1 kHz suits it; 800 only if the first sample's distortion at 100 dB/1 m stays low. The earlier rounds' "lower limit
   near 210 Hz" (round 5 and the photograph's table) was a mouth-size rule of thumb, and the simulation overrules it.
 - **Tipping (S7).** The front and back feet move out to 25 mm from the edges (the sides' stay 50): with 10 kg of horn on

@@ -185,8 +185,9 @@ adaptor. With the front and back feet 25 mm from the edges, IEC 62368-1's push a
 - The formed and smooth horns, at about 8 kg, add a little to it.
 - Confirm on the first pair with a push gauge at the top (`fai.md`).
 
-The four 20 mm stainless posts carry the extra 1.6 kg easily: about 14 N on each post. The pads' 12 mm inserts are
-unchanged.
+The four posts carry the horn's weight: about 21 N each for the formed horn and 28 N for Strata's stepped one (with
+its driver, posts and collars: 11.4 kg), not 14 (the engineering audit, 2026-11-01; `stability/horn.json`). The pads'
+12 mm inserts are unchanged. The horn's retention and the tipping check are reworked in `make/engineering-audit.md`.
 
 The smooth horn, at 3.9 kg, is lighter than the formed one.
 
