@@ -680,3 +680,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   card "stock cast sheet ... the first pair in the stocked gray"; "published minimums run about a pallet a color" (was "the only
   published figure"); tropos aside horn sourcing; Haze's horn needs its own pour (no clear violet stocked at 1/2 in) in made/risks and
   board v10. Speaker lane asked for a per-color cabinet/horn sourcing table in TINTS.md (Haze horn; is 2092 stocked at 1/2 in?).
+- 23:21 speaker: per-color sourcing table in TINTS.md (c3b55b21, cites R1): custom batches 6 (Poison and Haze cabinets; Dust, Acid,
+  Ice and Haze horns); mill runs 6 (Ember, Dust, Acid, Ice, Smoke cabinets; Poison's horn: 2092 not stocked at 1/2 in); stock: Fog's
+  cabinet (clear 3/4), Ember, Fog and Smoke horns; first pair's cabinet 2064 3/4 (3 left). Calderas/plinths at 1/2: stocked for
+  Ember, Dust (1 left), Ice, Fog, Smoke; Acid needs a 9097 run; Poison/Haze from their batches. Unverified: Acid's cabinet as a
+  9097 run at 20 mm. Deck v53 risks aside adds Poison's horn mill run and Acid-thick unconfirmed. Four-pieces -sf-f: dusk ~00:00,
+  day ~00:40; speaker deck cover in F rendering.
