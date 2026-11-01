@@ -606,3 +606,5 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   diffuser shows as a lit band, and the eye-level deck camera foreshortens any pool. Asked for option (b): a 15 mm reveal on the bottom
   frame's underside (feet stay 12, diffuser 90 in, hidden from a low eye), tip test re-checked; rows at 20/40 + a half-size Ice
   front-off-wide proof at 20. If it reads as a pool: show the owner, adopt unless they object.
+- Check-in 22 (18:36): owner quiet since 15:10; board v6's three cards open. Speaker lane modelling the plinth reveal (b). Next
+  check-in ~20:36 (send_later).
