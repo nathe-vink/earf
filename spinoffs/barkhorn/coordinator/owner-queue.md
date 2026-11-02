@@ -767,3 +767,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   light moved off the mark panel (the glare). Approved with: three blind readers per size (pass = 3/3 EARF at 440 px and >= 2/3 at
   330 px); if both pass take A (B risks the opaque back the round-3 critic flagged). Order: hero-light (~09:10), the tests (~25 min),
   Ice's back re-rendered, contact sheet + critic pass with the blind read, then Dust.
+- 09:20 speaker: Ice hero-light landed (6d77082ae28d8931f9fc6aff41053d8e704ac15c, 2400 x 1350, 256 samples; checked: whole speaker,
+  margins 170 top / 158 bottom, finish pass, clean). Back finish added for every back (bc348adccfc034b0f7c69a0ae49b83f11ae93667).
+  Back mark tests (aeeff6094752b2a05c9d390aa55402052d4b44a3; readings aa137e08c9c9615856a09e00ed391e7eabc9727b): neither passed the
+  blind rule. A (etch rake off) 440 px 1/3 EARF, others "EA?F"; 330 px 2/3. B (low raking light) 440 px 1/3; 330 px 0/3 ("?ADE"),
+  and a glare streak back on the mark panel. No reader saw BARF in either. The lane had paused Dust waiting for me.
+  My call: A for every back (no misread; reads EARF at full size; "?" at phone size is fine for a back view); no model change and
+  nothing to the owner. Re-render Ice's back with A, contact sheet + critic pass (mark read kept for the record, not a gate),
+  then Dust. If a close-up shows the back plate, frame the mark into it and blind-read it at 440 px.
