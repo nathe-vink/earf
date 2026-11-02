@@ -19,3 +19,18 @@ denoiser's smear at that count is expected; the finals are at 256). Up to three 
 **For the coordinator:** three of five critics read Ice's deep horn as a dark, saturated mass beside the cabinet, which
 the white lining made a paler mid blue. Round 2 puts light through the horn. If that does not close it, the deep horn's
 depth against an F cabinet is a material question.
+
+## Round 2 (proofs `*-ice-r2`, fresh critics)
+
+| frame | r1 | r2 | if fixed | main notes | what was done (`_siteF_round2`) |
+|---|---|---|---|---|---|
+| front-off-tall | 5.0 | 5.5 | 7.0 | horn an opaque navy block (54 against the cabinet's 149); the lining clipping through the walls (3 %); floats; no blue on the floor | rim 260 W straight behind the horn; key 3.8, larger; contact 1.7 / 0.4; floor off; a small hard light behind for blue on the floor; wall_left 2.6, bg-high 0.6; fill with sheen. Not taken: led.glow 12 |
+| front-off-wide | 5.0 | 5.5 | 7.5 | no shadow at the plinth's sides (242 to 245); no blue pool; a grey wedge lower left; backdrop flat; the upper cabinet clipping | floor 0.2, wash 0.3, contact 4.0 / 0.45 / core 7.0; the back light small and low, 5.0; paper glow 12; bg lamps lower; key 4.2, topline 1.2; rim broader, 22 W; contrast 0.28. Not taken: caustics |
+| hero-light | 5.5 | 6.0 | 7.4 | no contact (245 = open floor); the blue cast detached far left; background flat; a green cast | contact 4.5 / core 14; key 6.5 at 46 deg, 2.4 m; bg lamps aimed lower; the bounce lights the floor; scrim 2.8; tint 0.5 |
+| side | 5.5 | 5.0 | 6.8 | horn near-black (3.8 % crushed) with moiré; the side wall a painted board (181 to 91 top to bottom, blue clipped); lower cabinet muddy; a band lower left | rim 240 W through the horn; back 6.0; side sheen even (ramp 0.45 to 0.8, 1.1); kick lower, 3.4; bg-left 0.6, wall_left 1.1, floor 0.15; horn light rakes the cap. Not taken: caustics |
+| back | 5.5 | 5.0 | 7.0 | the white sweep makes the speaker a cut-out; horn and cabinet opaque; the mark (22 levels); the plate crushed; LED clipped | glow 9; a light through the cabinet from behind; d-wall off, a low wash behind; key smaller at -55 / 28; the etch light lower, 2.8; a strip for the plate; exposure -0.5. Not taken: a mid-stone backdrop (#B9B0A5: the site's light ground is the coordinator's) |
+
+**Sent to the coordinator (2026-11-02):** Ice's deep horn reads as a different material from its F cabinet in six
+of ten passes, and two rounds of light through it barely moved it (median 33 to 59 against 130 to 150). Options:
+keep it as the design, stock 2069 at 1/2 in (the pale horn "Deep, like the site" ruled out), or a middle depth
+(about 30 % through 12.7 mm) for the three deep horns. Finals wait on the answer.

@@ -430,7 +430,55 @@ def site(frame, tint):
     _site_round2(s, frame)
     _site_round3(s, frame)
     _siteF_round1(s, frame)
+    _siteF_round2(s, frame)
     return s
+
+
+def _siteF_round2(s, frame):
+    """The fresh gate in colors F, round 2 (2026-11-02; CRITIC.md): the horn still a navy block, the lining clipping
+    through the walls, the speakers still light on the floor. Light, set and camera only (not caustics, the LED, or a
+    darker backdrop: the coordinator's)."""
+    L = s['lights']; c = s['set'].setdefault('contact', {})
+    if frame == 'front-off-tall':
+        L['rim'].update(position=[0.0, 0.7, 1.35], power_w=260, size_m=[1.2, 0.8], target=[0.05, -0.05, 1.12])
+        L['key'].update(irradiance=3.8, size_m=[1.4, 1.8])                  # the lining burnt through the walls
+        c.update(strength=1.7, distance_m=0.4, core_strength=2.2); L['floor']['irradiance'] = 0.0
+        L['through'] = {'type': 'area', 'size_m': [0.25, 0.25], 'orbit': {'azimuth_deg': 165, 'elevation_deg': 28, 'distance_m': 2.2},
+                        'target': [0.0, -0.35, 0.0], 'irradiance': 3.0, 'color': '#FFF8F0'}   # blue light onto the floor
+        L['wall_left']['irradiance'] = 2.6; L['bg-high']['irradiance'] = 0.6
+        L['fill']['specular'] = 1.0; L['fill']['orbit'].update(azimuth_deg=15, elevation_deg=40)
+    elif frame == 'side':
+        L['rim'].update(power_w=240, position=[0.3, 0.6, 1.25]); L['back']['irradiance'] = 6.0
+        L['sidesheen']['strength'] = 1.1; L['sidesheen']['ramp'] = {**L['sidesheen']['ramp'], 'values': [0.45, 0.8]}
+        L['kick'].update(target=[0.28, 0.0, 0.35], irradiance=3.4)
+        L['bg-left']['irradiance'] = 0.6; L['wall_left']['irradiance'] = 1.1; L['floor']['irradiance'] = 0.15
+        L['horn'].update(position=[1.2, -0.9, 1.3], irradiance=6.0)
+    elif frame == 'back':
+        L['glow']['irradiance'] = 9.0
+        L['cab-back'] = {'type': 'area', 'size_m': [0.6, 1.0], 'position': [-0.35, 0.55, 0.7], 'target': [0.0, 0.0, 0.6],
+                         'irradiance': 4.0, 'color': '#FFF1DC', 'specular': 0.0, 'transmission': True}   # through the cabinet
+        L['d-wall']['irradiance'] = 0.0
+        L['wash'].update(irradiance=0.35, position=[0.0, 1.2, 1.4], target=[0.0, 1.5, 0.3])
+        L['key'].update(size_m=[1.0, 0.8], irradiance=2.6); L['key']['orbit'].update(azimuth_deg=-55, elevation_deg=28)
+        L['etch-rake'].update(irradiance=2.8, position=[0.30, -0.20, 0.86])
+        L['plate-strip'] = {'type': 'area', 'size_m': [0.6, 0.08], 'position': [0.35, -0.9, 0.9], 'target': [0.1, -0.17, 0.55],
+                            'irradiance': 1.0, 'color': '#FFF3E1'}
+        s['render']['exposure'] = -0.5
+    elif frame == 'front-off-wide':
+        L['floor']['irradiance'] = 0.2; L['wash']['irradiance'] = 0.3
+        c.update(strength=4.0, distance_m=0.45, core_strength=7.0, core_distance_m=0.015)
+        L['back'].update(size_m=[0.5, 0.4], irradiance=5.0); L['back']['orbit']['elevation_deg'] = 24
+        L['paper']['power_w'] = 12.0
+        L['bg-left']['irradiance'] = 0.6; L['bg-right']['irradiance'] = 0.9; L['bg-high']['irradiance'] = 0.2
+        L['key']['irradiance'] = 4.2; L['topline']['strength'] = 1.2
+        L['rim'].update(size_m=[1.4, 0.8], power_w=22)
+        s['finish'].update(contrast=0.28, white_in=240)
+    elif frame == 'hero-light':
+        c.update(strength=4.5, distance_m=0.35, core_strength=14.0, core_distance_m=0.02)
+        L['key'].update(irradiance=6.5, size_m=[2.4, 2.4]); L['key']['orbit']['elevation_deg'] = 46
+        L['bg-left'].update(irradiance=2.6, target=[-2.6, 6.0, 0.6]); L['bg-right'].update(irradiance=0.7, target=[3.5, 6.0, 0.8])
+        s['set']['bounces'][0]['reflect_only'] = False
+        L['scrim']['irradiance'] = 2.8; s['render']['white_balance_tint'] = 0.5
 
 
 def _siteF_round1(s, frame):

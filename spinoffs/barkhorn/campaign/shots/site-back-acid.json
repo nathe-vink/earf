@@ -54,12 +54,12 @@
   "key": {
    "type": "area",
    "size_m": [
-    1.6,
-    1.2
+    1.0,
+    0.8
    ],
    "orbit": {
-    "azimuth_deg": -35,
-    "elevation_deg": 40,
+    "azimuth_deg": -55,
+    "elevation_deg": 28,
     "distance_m": 4.0
    },
    "target": [
@@ -97,15 +97,15 @@
    ],
    "position": [
     0.0,
-    0.8,
-    2.9
+    1.2,
+    1.4
    ],
    "target": [
     0.0,
-    0.5,
-    1.2
+    1.5,
+    0.3
    ],
-   "irradiance": 0.15,
+   "irradiance": 0.35,
    "color": "#FFF7EA"
   },
   "glow": {
@@ -124,7 +124,7 @@
     0.0,
     1.1
    ],
-   "irradiance": 5.0,
+   "irradiance": 9.0,
    "color": "#FFF1DC",
    "specular": 0,
    "transmission": true
@@ -145,7 +145,7 @@
     1.5,
     1.2
    ],
-   "irradiance": 0.1,
+   "irradiance": 0.0,
    "color": "#FFF4E8",
    "specular": 0.0,
    "receivers": [
@@ -202,16 +202,56 @@
     0.05
    ],
    "position": [
-    0.165,
-    -0.236,
-    0.95
+    0.3,
+    -0.2,
+    0.86
    ],
    "target": [
     0.12,
     -0.17,
     0.8
    ],
-   "irradiance": 1.2,
+   "irradiance": 2.8,
+   "color": "#FFF3E1"
+  },
+  "cab-back": {
+   "type": "area",
+   "size_m": [
+    0.6,
+    1.0
+   ],
+   "position": [
+    -0.35,
+    0.55,
+    0.7
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.6
+   ],
+   "irradiance": 4.0,
+   "color": "#FFF1DC",
+   "specular": 0.0,
+   "transmission": true
+  },
+  "plate-strip": {
+   "type": "area",
+   "size_m": [
+    0.6,
+    0.08
+   ],
+   "position": [
+    0.35,
+    -0.9,
+    0.9
+   ],
+   "target": [
+    0.1,
+    -0.17,
+    0.55
+   ],
+   "irradiance": 1.0,
    "color": "#FFF3E1"
   }
  },
@@ -222,7 +262,7 @@
   "clamp": 6,
   "bounces": 12,
   "view": "Khronos PBR Neutral",
-  "exposure": -0.35,
+  "exposure": -0.5,
   "white_balance_k": 5600,
   "white_balance_tint": 3.0
  },

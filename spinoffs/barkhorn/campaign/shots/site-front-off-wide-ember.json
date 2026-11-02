@@ -40,10 +40,10 @@
   "radius": 3.6,
   "height": 9.0,
   "contact": {
-   "strength": 2.6,
-   "distance_m": 0.3,
-   "core_strength": 5.0,
-   "core_distance_m": 0.012
+   "strength": 4.0,
+   "distance_m": 0.45,
+   "core_strength": 7.0,
+   "core_distance_m": 0.015
   },
   "flags": [
    {
@@ -138,7 +138,7 @@
     0.0,
     0.9
    ],
-   "irradiance": 5.2,
+   "irradiance": 4.2,
    "color": "#FFF5E8",
    "spread_deg": 50
   },
@@ -165,12 +165,12 @@
   "back": {
    "type": "area",
    "size_m": [
-    1.2,
-    1.0
+    0.5,
+    0.4
    ],
    "orbit": {
     "azimuth_deg": 180,
-    "elevation_deg": 38,
+    "elevation_deg": 24,
     "distance_m": 2.0
    },
    "target": [
@@ -178,7 +178,7 @@
     -0.3,
     0.3
    ],
-   "irradiance": 3.0,
+   "irradiance": 5.0,
    "color": "#FFF8F0",
    "receivers": [
     "right",
@@ -358,7 +358,7 @@
     -0.1,
     0.9
    ],
-   "strength": 1.8,
+   "strength": 1.2,
    "color": "#FFFFFF",
    "diffuse": 0.0
   },
@@ -425,7 +425,7 @@
    "type": "area",
    "size_m": [
     1.4,
-    0.3
+    0.8
    ],
    "position": [
     0.3,
@@ -437,7 +437,7 @@
     0.0,
     1.2
    ],
-   "power_w": 30,
+   "power_w": 22,
    "color": "#FFFFFF",
    "diffuse": 0.1,
    "receivers": [
@@ -482,7 +482,7 @@
     2.4,
     2.4
    ],
-   "power_w": 0.0,
+   "power_w": 12.0,
    "color": "#FFF0E2",
    "receivers": [
     "sweep"
@@ -527,7 +527,7 @@
     -0.4,
     0.0
    ],
-   "irradiance": 0.6,
+   "irradiance": 0.3,
    "color": "#FFF0E2",
    "receivers": [
     "sweep"
@@ -549,7 +549,7 @@
     6.0,
     1.2
    ],
-   "irradiance": 0.9,
+   "irradiance": 0.6,
    "color": "#FFF4E8",
    "specular": 0.0,
    "receivers": [
@@ -572,7 +572,7 @@
     6.0,
     1.6
    ],
-   "irradiance": 1.4,
+   "irradiance": 0.9,
    "color": "#FFF4E8",
    "specular": 0.0,
    "receivers": [
@@ -618,7 +618,7 @@
     5.5,
     5.0
    ],
-   "irradiance": 0.4,
+   "irradiance": 0.2,
    "color": "#FFF4E8",
    "specular": 0.0,
    "receivers": [
@@ -641,7 +641,7 @@
     0.5,
     0.0
    ],
-   "irradiance": 0.45,
+   "irradiance": 0.2,
    "spread_deg": 80,
    "color": "#FFF4E8",
    "specular": 0.0,
@@ -711,9 +711,9 @@
  },
  "finish": {
   "enabled": true,
-  "white_in": 236,
+  "white_in": 240,
   "white_out": 236,
-  "contrast": 0.2,
+  "contrast": 0.28,
   "clarity": 0.05,
   "sharpen": 0.08,
   "sharpen_px": 0.7,

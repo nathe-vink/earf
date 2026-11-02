@@ -13,10 +13,10 @@
   "radius": 5.0,
   "height": 9.0,
   "contact": {
-   "strength": 3.0,
-   "distance_m": 0.3,
-   "core_strength": 6.0,
-   "core_distance_m": 0.035
+   "strength": 4.5,
+   "distance_m": 0.35,
+   "core_strength": 14.0,
+   "core_distance_m": 0.02
   },
   "flags": [
    {
@@ -71,7 +71,7 @@
      0.95,
      0.1
     ],
-    "reflect_only": true
+    "reflect_only": false
    }
   ]
  },
@@ -106,7 +106,7 @@
   "view": "Khronos PBR Neutral",
   "exposure": 0.0,
   "white_balance_k": 5900,
-  "white_balance_tint": 2.0
+  "white_balance_tint": 0.5
  },
  "finish": {
   "enabled": true,
@@ -140,9 +140,9 @@
    "target": [
     -2.6,
     6.0,
-    1.2
+    0.6
    ],
-   "irradiance": 2.9,
+   "irradiance": 2.6,
    "color": "#FFF4E8",
    "camera": false,
    "specular": 0.0
@@ -161,9 +161,9 @@
    "target": [
     3.5,
     6.0,
-    2.0
+    0.8
    ],
-   "irradiance": 1.0,
+   "irradiance": 0.7,
    "color": "#FFF4E8",
    "camera": false,
    "specular": 0.0
@@ -184,19 +184,19 @@
     0.0,
     0.8
    ],
-   "irradiance": 4.0,
+   "irradiance": 2.8,
    "color": "#FFFAF4",
    "camera": false
   },
   "key": {
    "type": "area",
    "size_m": [
-    1.8,
-    1.8
+    2.4,
+    2.4
    ],
    "orbit": {
     "azimuth_deg": -20,
-    "elevation_deg": 32,
+    "elevation_deg": 46,
     "distance_m": 4.5
    },
    "target": [
@@ -204,7 +204,7 @@
     0.0,
     0.6
    ],
-   "irradiance": 6.0,
+   "irradiance": 6.5,
    "color": "#FFFAF4",
    "camera": false,
    "specular": 1.0
