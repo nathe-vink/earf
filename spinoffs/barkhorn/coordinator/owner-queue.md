@@ -715,3 +715,5 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 01:30 deck v57: line.html = four-pieces F dusk with Mantle's lid closed (ce6d7ae8; /_blob/53825688...): the lid reads as clear green
   glass over the deck, matching the speakers; notes say so; Mantle label y 476; effective contrast 7.0-13.4:1, corner 4.7:1. The
   four-pieces lane is idle. Speaker golden-hour room in F ~02:00 -> home.html.
+- 02:00 deck v58: home.html = speaker F golden-hour room (dc4e4d5c; /_blob/cb24a6a8...): the Poison pair as sunlit green glass, both
+  whole on the slide's 1920x900 crop (checked); alt and aside describe F. Ember hero in F rendering (~02:40), then the portrait.
