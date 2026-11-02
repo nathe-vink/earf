@@ -56,7 +56,65 @@ It lifts the cabinet 20 mm.
 - **They change the look.** The owner chooses, after a blind duel judged on looks alone (the critic sees no
   stability numbers).
 
-## A, lit: the plinth's light (2026-11-01)
+## A, uplit: the light goes up through the speaker (2026-11-02)
+
+**The owner, 2026-11-02 20:38** (README 41581a57): "The light in the base is meant to go upward through the speaker. The intent is to provide a way to light up the speaker from below, like in the underlit promo images." On 2026-11-01 "light up from underneath" was read as a strip under the plinth facing the floor. That was the wrong way round. **The uplight below replaces the floor line**, which stays documented after it as superseded. The model is `UPLIGHT` in `variants.py` (option "Plinth uplight"); the renders are in `renders/2026-11-02/barkhorn/uplight/`.
+
+**What the light has to get past** (the uplit set of 2026-10-18, `renders/2026-10-18/barkhorn/uplight31/README.md`): the bottom batt stops light going straight up. The colour leaves through the tinted walls and through the strip of the bottom panel by the ports, where the batt stops short. So the uplight lights the walls themselves, and the inside round the batt.
+
+**The light:**
+- **Edge strips** (`uplight-strip`): COB, dotless, 24 V, 10 W/m, **4000 K**, CRI 90+, 8 mm, 1.84 m a speaker in four lengths. Each sits under a wall's bottom edge, in a 16 x 8 groove in the plinth's top frame.
+  - The sides' own edges: x 0 to 20 and 540 to 560, two strips of 360.
+  - The front and back panels' edges, which stand on the bottom panel: two strips of 480. Their light crosses the 20 mm bottom panel first, through the cemented joint.
+  - Each strip in a black aluminium U-channel (12 x 7, `uplight-channel`) on three M3 nylon standoffs, so **neither the channel nor the strip touches the acrylic**: 2 mm of air to the groove's sides, 0.5 mm under the channel.
+  - The frosted lens sits 0.6 mm under the wall's edge. Light entering the edge is caught in the wall by total internal reflection and carried up it. The wall glows in its own colour from the foot up and fades with height as the dye absorbs it.
+- **The centre panel** (`uplight-panel`): a 400 x 260 aluminium-core LED board, 24 V, 16 W, 4000 K, on a 2 mm black anodised plate on four brackets in the plinth's opening, under a 3 mm opal PMMA diffuser (420 x 280) held **10 mm under the cabinet's bottom**, as the uplit set's flat panel. It lights the inside of the cabinet through the bottom panel round the batt: the ports, the lining's faces and the woofer's frame, seen through the front as the speaker's colour.
+- **Why 4000 K, not 2700 K:** a neutral white lets each tint show its own colour. Behind blue acrylic, 2700 K reads teal-green and dim; behind clear Fog it reads amber. The floor line's 2700 K was for a warm accent, not for colour.
+
+**How far the light carries up a wall** depends on the tint. This is the e-fold length of the tint's dominant channel, from its 20 mm colour; the wall glows over about two of these:
+
+| tint | dominant channel | e-fold | the wall glows |
+|---|---|---|---|
+| Dust | red-orange | about 700 mm | nearly its full height |
+| Fog | clear | none | full height, white |
+| Ice | blue | about 345 mm | the lower 40 % or so |
+| Ember | red | about 53 mm | the bottom 10 cm |
+| Smoke | grey | about 10 mm | barely; Smoke passes least |
+
+**The bottom batt.** A window in it (the batt cut back to a frame, or lifted) would let the centre panel's light straight up the middle. That spine is dark in the uplit set. `ice-night-window.png` shows the batt removed, as the upper limit of what a window adds.
+- Acoustically it costs **no bass**. The batts do not set the box's tuning, and the bottom batt is about 6 L of a 164 L box, so the port's tuning moves well under 1 Hz.
+- What it does change: the bottom batt helps damp the cabinet's vertical standing wave, about 210 Hz for the 0.82 m inside height. The 100 mm top batt stays and damps the same mode at the other end. Expect at most a 1 to 2 dB ripple near 210 Hz.
+- That is to measure on the first sample before the window is adopted. If it rings, a voile-only panel keeps the look with the batt back.
+- **My call: keep the batt for now.** The walls and the ports carry the colour.
+
+**Power:**
+- **At full:** edges 18.4 W, panel 16 W, **34 W**.
+- **At the default 50 %:** 17 W.
+- **The supply:** grows to a **24 V, 60 W** Class 2 / PS1 plug-in (`plinth-supply`), still outside the FA122's mains.
+
+**Control:** as before. On with the amplifier, off in standby. Dimmable in four steps (off, 25, 50, 100 %, 50 % by default) on the touch pad under the plinth's back edge. PWM at about 20 kHz. Two channels now, the edges and the panel, so the walls and the inside can be balanced at the factory.
+
+**Heat** (estimates, to check with thermocouples after 4 h at full on the first plinth):
+- **The edge channels:** about 20 K over room at full, in the groove under the cabinet. The acrylic beside them stays about 10 K over room, behind its 2 mm of air: under 40 °C in a 25 °C room.
+- **The panel's plate:** about 15 to 20 K over room, vented round its edges. The diffuser is about 10 K over room.
+- **The limit:** cast PMMA is good to about 80 °C. At the default 50 % the rises halve.
+
+**How much of the light you see** (rough optical estimates, not measured):
+- **The edge strips:** about 85 % of their light enters the walls (a 0.6 mm air gap; the 8 mm lens under a 20 mm edge). Of that, the share that leaves the walls where you can see it is about 60 % in Fog and Dust, 30 to 40 % in Ice, 15 to 20 % in Ember and under 5 % in Smoke. It leaves at the walls' faces wherever the light's trap is broken: the lining's tape dots, the joints, and the top edge in the light tints. The rest warms the dye, under 1 W a wall.
+- **The centre panel:**
+  - About half its light is under the bottom batt and stops there.
+  - The rest crosses the bottom panel (about 58 % in Ice, 14 % in Ember, a few % in Smoke) into the cabinet, by the ports.
+  - Seen from outside, about 20 % in Ice, 5 % in Ember and 1 to 2 % in Smoke.
+- **On a wall behind:** the colour fans up it from both, as the night frames show.
+
+**Is a trace of the floor line worth keeping?** No separate strip. The plinth's own frames pick up some of the uplight at their polished edges, which gives a faint coloured line at the step without a second light. The owner's intent is upward. The floor strip, its 2700 K, and its four-run layout are superseded.
+
+**The renders** (`renders/2026-11-02/barkhorn/uplight/`, front-off-tall framing, the current deep horn, 0.6 scale, 128 samples):
+- `ice-day.png`, `ember-day.png`: the site's studio, the uplight at 50 %.
+- `ice-night.png`, `ember-night.png`, `smoke-night.png`: night, a grey wall 0.75 m behind, a dim moon, the uplight at 100 %.
+- `ice-night-window.png`: the bottom batt removed.
+
+## A, lit: the plinth's light (2026-11-01; superseded on 2026-11-02 by the uplight above)
 
 The idea is the same as Mantle floating on its own light: a soft, warm glow from under the lowest step onto the floor.
 The steps' polished edges catch some of it.
