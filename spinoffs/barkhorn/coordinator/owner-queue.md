@@ -940,3 +940,16 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   Ice and Ember frames and close-ups, A's side view; costs and weights; the judges' doubts; the base's light moved to "later" as
   designed and rendering. Reply bar on: order [['horn','Horn']], KEY earf-decisions-v17. Checked at 1280 and 390 px: 9 images load,
   no sideways scroll, "Use my pick" builds "Horn: A, smooth, satin outside".
+- 22:18 speaker: the uplight (2f848e654151af8644ba3c52a25b68d9b66b88b6; sheet 64efa75802f50b0f518a185b59bb8ef420760c7e; CAD e5d0ee48,
+  render model 381304f6, BASES.md "A, uplit" 48cd2228cca0c713d7148bbe99cf34ab7af9c69d, first frames 91b61d61). Design: COB edge strips
+  (24 V, 10 W/m, 4000 K, 1.84 m) in 16 x 8 grooves under each wall's foot, in black U-channels on nylon standoffs, 2 mm air; a 16 W
+  centre panel under a 3 mm opal 10 mm below the bottom; 4000 K so each tint shows true; two channels; 34 W full, 17 W at the 50 %
+  default; a 24 V 60 W Class 2 plug-in supply; heat est. ~20 K over room at the channels, acrylic ~10 K. Light climbs the walls by dye:
+  Dust ~700 mm, Fog full, Ice ~345, Ember ~53, Smoke ~10. Floor line dropped.
+  My check: by day it hardly shows; at night Ember's red fans up the wall, Ice fainter, Smoke almost nothing; the glow sits in the
+  bottom third and the top and horn stay dark, short of the uplit promo look. ice-night-window.png is byte-identical to ice-night.png
+  (blob 2e105fec2c7149451c2b971c92e8089433e5dacd): the hide list names "lining-bottom-1" but the part is "lining-bottom-1-web", so the
+  window was never rendered and the "a little more glow" claim is unsupported. Asked the lane: fix and re-render, correct the text;
+  Ice and Ember at night at full power with the uplit set's exposure, side by side with uplight31; the honest way to light the full
+  height from the base (the window first; if not enough, one option for the owner: a strip at the cabinet's foot washing up behind the
+  lining, fed from the plinth's 24 V through a foot-pad connector); one line on which is closest for the least change.
