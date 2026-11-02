@@ -1,0 +1,674 @@
+{
+ "sun": {
+  "azimuth_deg": 180,
+  "elevation_deg": 30.0,
+  "irradiance": 32.0,
+  "angle_deg": 1.5,
+  "color": 5200
+ },
+ "set": {
+  "kind": "sweep",
+  "color": "#EEECE7",
+  "width": 34.0,
+  "front": 16.0,
+  "depth": 12.0,
+  "radius": 3.0,
+  "height": 16.0,
+  "cast_shadow": false,
+  "contact": {
+   "strength": 0.6,
+   "distance_m": 0.08,
+   "core_strength": 0.4,
+   "core_distance_m": 0.012
+  }
+ },
+ "materials": {
+  "sweep": {
+   "tooth": 2.2,
+   "tooth_mm": 0.9,
+   "mottle": 0.06,
+   "roughness": 0.9
+  },
+  "led": {
+   "glow": 20.0
+  }
+ },
+ "lights": {
+  "cyc": {
+   "type": "area",
+   "size_m": [
+    30.0,
+    5.0
+   ],
+   "position": [
+    0.0,
+    5.0,
+    2.0
+   ],
+   "target": [
+    0.0,
+    12.0,
+    2.0
+   ],
+   "irradiance": 21.0,
+   "color": 5200,
+   "spread_deg": 120,
+   "transmission": false
+  },
+  "top": {
+   "type": "area",
+   "size_m": [
+    24.0,
+    6.0
+   ],
+   "position": [
+    0.0,
+    7.0,
+    8.0
+   ],
+   "target": [
+    0.0,
+    7.5,
+    0.0
+   ],
+   "irradiance": 4.0,
+   "color": 5200,
+   "spread_deg": 90,
+   "transmission": false
+  },
+  "over": {
+   "type": "area",
+   "size_m": [
+    16.0,
+    8.0
+   ],
+   "position": [
+    0.0,
+    -5.0,
+    8.0
+   ],
+   "target": [
+    0.0,
+    -5.0,
+    0.0
+   ],
+   "irradiance": 3.0,
+   "color": 5200,
+   "spread_deg": 90,
+   "transmission": false
+  },
+  "fill": {
+   "type": "area",
+   "size_m": [
+    8.0,
+    2.0
+   ],
+   "position": [
+    0.0,
+    -16.5,
+    2.0
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.7
+   ],
+   "irradiance": 3.5,
+   "color": 5200,
+   "specular": 0.0
+  },
+  "side_l": {
+   "type": "area",
+   "size_m": [
+    0.6,
+    3.0
+   ],
+   "position": [
+    -6.0,
+    -3.0,
+    1.4
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.7
+   ],
+   "irradiance": 14.0,
+   "color": 5200,
+   "receivers": [
+    "left",
+    "right",
+    "top",
+    "bottom",
+    "front-panel",
+    "back",
+    "brace*",
+    "rib-*",
+    "land-*"
+   ]
+  },
+  "side_r": {
+   "type": "area",
+   "size_m": [
+    0.6,
+    3.0
+   ],
+   "position": [
+    7.0,
+    -1.0,
+    1.6
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.7
+   ],
+   "irradiance": 20.0,
+   "color": 5200,
+   "receivers": [
+    "left",
+    "right",
+    "top",
+    "bottom",
+    "front-panel",
+    "back",
+    "brace*",
+    "rib-*",
+    "land-*"
+   ]
+  },
+  "face": {
+   "type": "area",
+   "size_m": [
+    4.0,
+    2.0
+   ],
+   "position": [
+    0.0,
+    -12.5,
+    2.6
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.7
+   ],
+   "irradiance": 5.5,
+   "color": 5200,
+   "receivers": [
+    "left",
+    "right",
+    "top",
+    "bottom",
+    "front-panel",
+    "back",
+    "brace*",
+    "rib-*",
+    "land-*",
+    "lining-*",
+    "woofer-ring"
+   ],
+   "specular": 0
+  },
+  "edge": {
+   "type": "area",
+   "size_m": [
+    4.0,
+    0.6
+   ],
+   "position": [
+    0.0,
+    -9.5,
+    3.2
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.9
+   ],
+   "irradiance": 6.0,
+   "color": 5200,
+   "receivers": [
+    "left",
+    "right",
+    "top",
+    "bottom",
+    "front-panel",
+    "back",
+    "brace*",
+    "rib-*",
+    "land-*"
+   ]
+  },
+  "smoke": {
+   "type": "area",
+   "size_m": [
+    0.6,
+    2.5
+   ],
+   "position": [
+    4.0,
+    0.5,
+    2.0
+   ],
+   "target": [
+    2.6006666666666667,
+    0.7,
+    0.8
+   ],
+   "irradiance": 80.0,
+   "color": 5200,
+   "receivers": [
+    "left#7",
+    "right#7",
+    "top#7",
+    "bottom#7",
+    "front-panel#7",
+    "back#7",
+    "brace*#7",
+    "rib-*#7",
+    "land-*#7",
+    "waveguide#7"
+   ]
+  },
+  "strip": {
+   "type": "area",
+   "size_m": [
+    9.0,
+    0.5
+   ],
+   "position": [
+    0.0,
+    -4.0,
+    2.6
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.62
+   ],
+   "irradiance": 70.0,
+   "color": 5200,
+   "receivers": [
+    "woofer-cone",
+    "woofer-surround",
+    "woofer-cap",
+    "woofer-gasket",
+    "hf-motor",
+    "hf-frame",
+    "hf-adaptor",
+    "hf-plug",
+    "hf-exit",
+    "hf-band"
+   ]
+  }
+ },
+ "render": {
+  "samples": 128,
+  "adaptive": 0.01,
+  "denoise": true,
+  "clamp": 10,
+  "bounces": 24,
+  "transmission_bounces": 16,
+  "transparent_bounces": 64,
+  "view": "Khronos PBR Neutral",
+  "exposure": -2.5,
+  "white_balance_k": 5250,
+  "white_balance_tint": 3.0
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 228,
+  "white_out": 230,
+  "peak": 246,
+  "contrast": 0.18,
+  "clarity": 0.1,
+  "sharpen": 0.45,
+  "sharpen_px": 0.7,
+  "dream": {
+   "saturation": 0.4
+  }
+ },
+ "title": "Tropos, the deck cover: the eight on a curve (Strata on the lit plinth)",
+ "size": [
+  3840,
+  1360
+ ],
+ "camera": {
+  "position": [
+   0.0,
+   -15.0,
+   2.3
+  ],
+  "target": [
+   0.0,
+   0.5,
+   0.62
+  ],
+  "lens_mm": 56.0,
+  "level": true,
+  "shift_y": 0.05,
+  "fstop": 5.6,
+  "focus": [
+   0.0,
+   0.3,
+   0.7
+  ]
+ },
+ "sky": {
+  "kind": "hdri",
+  "file": "studio_small_03_1k",
+  "rotation_deg": 0.0,
+  "strength": 0.15
+ },
+ "products": [
+  {
+   "def": "studio/products/barkhorn-cloud.json",
+   "flavour": "cloud-red",
+   "instances": [
+    {
+     "position": [
+      -3.43,
+      0.2529,
+      0.0385
+     ],
+     "rotate_z": -12.67,
+     "flavour": "cloud-red",
+     "hide": [
+      "cloth-disc",
+      "feet-base",
+      "feet-stem",
+      "horn-throat",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "waveguide",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      -2.45,
+      0.5699,
+      0.0385
+     ],
+     "rotate_z": -8.94,
+     "flavour": "cloud-orange",
+     "hide": [
+      "cloth-disc",
+      "feet-base",
+      "feet-stem",
+      "horn-throat",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "waveguide",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      -1.47,
+      0.7812,
+      0.0385
+     ],
+     "rotate_z": -5.32,
+     "flavour": "cloud-amber",
+     "hide": [
+      "cloth-disc",
+      "feet-base",
+      "feet-stem",
+      "horn-throat",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "waveguide",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      -0.49,
+      0.8868,
+      0.0385
+     ],
+     "rotate_z": -1.77,
+     "flavour": "eucalyptus-y2k-green",
+     "hide": [
+      "cloth-disc",
+      "feet-base",
+      "feet-stem",
+      "horn-throat",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "waveguide",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      0.49,
+      0.8868,
+      0.0385
+     ],
+     "rotate_z": 1.77,
+     "flavour": "cloud-blue",
+     "hide": [
+      "cloth-disc",
+      "feet-base",
+      "feet-stem",
+      "horn-throat",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "waveguide",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      1.47,
+      0.7812,
+      0.0385
+     ],
+     "rotate_z": 5.32,
+     "flavour": "cloud-violet",
+     "hide": [
+      "cloth-disc",
+      "feet-base",
+      "feet-stem",
+      "horn-throat",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "waveguide",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      2.45,
+      0.5699,
+      0.0385
+     ],
+     "rotate_z": 8.94,
+     "flavour": "birch-fog-clear",
+     "hide": [
+      "cloth-disc",
+      "feet-base",
+      "feet-stem",
+      "horn-throat",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "waveguide",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      3.43,
+      0.2529,
+      0.0385
+     ],
+     "rotate_z": 12.67,
+     "flavour": "cloud-black",
+     "hide": [
+      "cloth-disc",
+      "feet-base",
+      "feet-stem",
+      "horn-throat",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "waveguide",
+      "woofer-ring"
+     ]
+    }
+   ]
+  },
+  {
+   "def": "studio/products/barkhorn-variants.json",
+   "flavour": "cloud-red",
+   "instances": [
+    {
+     "position": [
+      -3.43,
+      0.2529,
+      0.0385
+     ],
+     "rotate_z": -12.67,
+     "flavour": "cloud-red",
+     "hide": [
+      "horn-topo*",
+      "base-out*"
+     ],
+     "options": [
+      "Plinth",
+      "Plinth light"
+     ]
+    },
+    {
+     "position": [
+      -2.45,
+      0.5699,
+      0.0385
+     ],
+     "rotate_z": -8.94,
+     "flavour": "cloud-orange",
+     "hide": [
+      "horn-topo*",
+      "base-out*"
+     ],
+     "options": [
+      "Plinth",
+      "Plinth light"
+     ]
+    },
+    {
+     "position": [
+      -1.47,
+      0.7812,
+      0.0385
+     ],
+     "rotate_z": -5.32,
+     "flavour": "cloud-amber",
+     "hide": [
+      "horn-topo*",
+      "base-out*"
+     ],
+     "options": [
+      "Plinth",
+      "Plinth light"
+     ]
+    },
+    {
+     "position": [
+      -0.49,
+      0.8868,
+      0.0385
+     ],
+     "rotate_z": -1.77,
+     "flavour": "eucalyptus-y2k-green",
+     "hide": [
+      "horn-topo*",
+      "base-out*"
+     ],
+     "options": [
+      "Plinth",
+      "Plinth light"
+     ]
+    },
+    {
+     "position": [
+      0.49,
+      0.8868,
+      0.0385
+     ],
+     "rotate_z": 1.77,
+     "flavour": "cloud-blue",
+     "hide": [
+      "horn-topo*",
+      "base-out*"
+     ],
+     "options": [
+      "Plinth",
+      "Plinth light"
+     ]
+    },
+    {
+     "position": [
+      1.47,
+      0.7812,
+      0.0385
+     ],
+     "rotate_z": 5.32,
+     "flavour": "cloud-violet",
+     "hide": [
+      "horn-topo*",
+      "base-out*"
+     ],
+     "options": [
+      "Plinth",
+      "Plinth light"
+     ]
+    },
+    {
+     "position": [
+      2.45,
+      0.5699,
+      0.0385
+     ],
+     "rotate_z": 8.94,
+     "flavour": "birch-fog-clear",
+     "hide": [
+      "horn-topo*",
+      "base-out*"
+     ],
+     "options": [
+      "Plinth",
+      "Plinth light"
+     ]
+    },
+    {
+     "position": [
+      3.43,
+      0.2529,
+      0.0385
+     ],
+     "rotate_z": 12.67,
+     "flavour": "cloud-black",
+     "hide": [
+      "horn-topo*",
+      "base-out*"
+     ],
+     "options": [
+      "Plinth",
+      "Plinth light"
+     ]
+    }
+   ]
+  }
+ ]
+}
