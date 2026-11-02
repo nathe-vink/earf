@@ -475,6 +475,10 @@ def _siteF_round3(s, frame):
         L['cab-back'].update(irradiance=7.0, position=[-0.25, 0.6, 1.0]); L['fill']['irradiance'] = 1.3
         c.update(distance_m=0.3); L['key']['size_m'] = [1.6, 1.2]; L['key']['orbit']['elevation_deg'] = 22
         L['etch-rake'].update(irradiance=5.0, position=[0.32, -0.12, 0.84], size_m=[0.6, 0.03])
+        # The mark test (2026-11-02, variant A, the coordinator's pick): the etch rake off, so the R no longer
+        # reads as a B; the plate strip lowered so its glare clears the mark panel.
+        L['etch-rake']['irradiance'] = 0.0
+        L['plate-strip'].update(position=[0.35, -0.9, 0.55], target=[0.1, -0.17, 0.45])
         s['set']['flags'][-2].update(center_m=[-0.8, 0.3, 0.9], size_m=[1.6, 2.2])
 
 
