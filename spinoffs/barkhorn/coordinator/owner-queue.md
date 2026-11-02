@@ -821,3 +821,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   (a53c2aee91d4ddaf64227caa422c63dab9601746). Fog's front-off-wide still rendering (from ~12:15; last commit 13:20, not a stall). Then
   the deck row (160 samples, ~63 min) and cover (128 samples, ~63 min) with the new horns: row ~15:30, cover ~16:30. Nothing to act on.
   Next check-in ~17:00 (send_later).
+- 15:36 speaker: the deck row with the color-matched horns (6c147ca8fc28eaf2b632525339ced86e4d4340fd, blob
+  f92e51db2ef78f5c8de57d8992adfe88dc3800f5, 3328 x 1040, 160 samples, same shot as 16641879). Fog front-off-wide final
+  581c0358e232f74687b1359f17799cbf7cc4df81. Cover rendering (~63 min), then Fog's side, back and hero.
+  My check: horn vs cabinet hue Dust 31/26, Acid 55/49, Ice 203/209 (all within 6); stock horns unchanged (Ember 0, Poison +5,
+  Haze +5); mean abs difference outside the horn boxes 0.31/255 (nothing else moved); all eight whole.
+  Deck v63: colours.html shows the new row (/_blob/3f9eaa6e35f1891df52a569e60080626); aside: "Dust, Acid and Ice have deeper horns,
+  each matched to its cabinet's color." The cover follows when it lands.
