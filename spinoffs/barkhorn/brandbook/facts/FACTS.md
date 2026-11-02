@@ -107,18 +107,21 @@ Eight, in this order, numbered 01–08:
 - **Not** a sphere, and no continents.
 - **Sources:** bar `planet/README.md:339-373`, `r42/housebook/index.html:352`; brand `festival/amsterdam/`.
 
-## Money: the deck's $50,000 use of funds (as now in the deck)
+## Money: the deck's $55,000 use of funds (ask slide, v64; budget A, the owner's "Go", 2026-11-01)
 
 | Line | Amount |
 |---|---|
-| Tropos (the prototype pair) | $18,500 |
-| Hemisphere, Core and Mantle (one of each) | $14,400 |
-| Tropos testing | $5,000 |
-| Trademarks | $3,600 |
-| The debut (crating, transport, photographs) | $4,000 |
-| Contingency | $4,500 |
-| **Total** | **$50,000** |
+| Tropos prototype pair, on lit plinths: parts and shop work | $20,700 |
+| Hemisphere, Core and Mantle, one of each, molds included | $16,300 |
+| Tropos testing: emissions pre-scan, safety check, FCC* | $5,000 |
+| Trademark search* and filings ($350 a class) | $3,600 |
+| The debut: crating, transport, photographs* | $4,000 |
+| Contingency, about 10% | $5,400 |
+| **Total** | **$55,000** |
 
+\* Allowances, until quotes replace them.
+
+- The deck's earlier $50,000 split ($18,500 / $14,400 / $5,000 / $3,600 / $4,000 / $4,500) is **superseded**.
 - An older split is recorded in owner README:139 ($19,200 / $10,400 / $8,000 / $3,600 / $2,000 / $4,000 / $2,800).
   **Superseded.**
 - **Costs of record:**

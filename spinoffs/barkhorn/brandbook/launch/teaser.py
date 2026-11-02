@@ -110,7 +110,7 @@ class Teaser:
         if t < 0.9:
             im = Image.blend(Image.new('RGB', im.size, NIGHT), im, ease(t / 0.9))
         self.label(im, 'EARF · San Francisco', alpha=ease((t - 0.8) / 0.6))
-        self.line(im, "[LINE: owner's pick]", t, 1.3)
+        self.line(im, 'A world of sound, in color.', t, 1.3)   # the tagline (owner, 2026-11-02)
         return im
 
     def b_turn(self, t):

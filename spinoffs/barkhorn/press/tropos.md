@@ -1,6 +1,6 @@
 # Tropos
 
-**A powered horn loudspeaker in eight colors of cast acrylic.** "Eight things in the air."
+**A powered horn loudspeaker in eight colors of cast acrylic.** "Eight colors, Ember to Smoke."
 
 Each cabinet is cast acrylic, 20 mm thick and tinted all the way through. The horn is formed from the same tinted
 acrylic as its cabinet, its driver in a pod whose cap twists off by hand. Above 1 kHz the horn carries the music;

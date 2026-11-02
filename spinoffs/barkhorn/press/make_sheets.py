@@ -32,7 +32,7 @@ SHEETS = [
        'The horn and the bass were worked out by simulation before any acrylic was cut. Next, the first pair, built as '
        'production will build it; then measured, by ear and by microphone. The lamps and Mantle follow the same way'),
       ('Founder', '[FOUNDER]')]),
-    ('tropos', 'Tropos', 'Powered horn loudspeaker', 'Eight things in the air.', 'red-studio-light.jpg',
+    ('tropos', 'Tropos', 'Powered horn loudspeaker', 'Eight colors, Ember to Smoke.', 'red-studio-light.jpg',
      'Each cabinet is cast acrylic, 20 mm thick and tinted all the way through. The horn is formed from the same tinted '
      'acrylic, its driver in a pod whose cap twists off by hand. Above 1 kHz the horn carries the music; below, a 15-inch '
      'woofer takes it, each on its own channel of the amplifier inside. The lining shows through the walls, so it is '
