@@ -725,3 +725,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   group onto Mantle's label (overlapping), the label halos and the title's text-wrap dropped, the corner note made italic, alt text
   cut. Taken as accidental except the italic: deck v62 restores v57's line.html with the italic note (the page's version kept as
   scratchpad deck/line-page-edit-v60.html). All five deck pictures now in colors F. Portrait (last frame) ~03:15, then the site gate.
+- 03:16 speaker: deck frame 5, the room portrait in F (47d127a4, 1200x1500), not on a slide (kept for the site/brand). All five deck
+  frames in F: cover f729451f, row 16641879, room dc4e4d5c, hero 7bd998f3, portrait 47d127a4. Next: the site set (round-3 light
+  notes folded in, a fresh 3-round gate on Ice at half size, then finals at 256 samples).
