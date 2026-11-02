@@ -2687,6 +2687,18 @@ if os.path.exists(TRUCAST_FILE):
             _v['horn_deep'] = _e['strata_horn_deep']
         _v['tint'] = _e['cabinet']
 
+# 2026-11-02 (the coordinator; asset/TINTS.md, "Color-matched by eye"): the stock code's split made deeper shifts warm
+# horns toward red and blue toward violet (Dust's horn named "red", Acid's "orange"), so the three deep horns are
+# matched by eye to their cabinets at the kept depth, from front-off-tall proxies: hue within 4 degrees of the cabinet's,
+# luminance within 7 % (renders/2026-11-02/barkhorn/site-strata-F/horn-hue/). The dye-scaled colour stays as horn_deep_dye
+HORN_MATCHED = {'cloud-orange': '#DFA934', 'cloud-amber': '#DFD710', 'cloud-blue': '#369BCA'}
+for _f, _c in HORN_MATCHED.items():
+    _v = VARIANTS.get(_f)
+    if _v is not None and 'horn-lot' in _v.get('materials', {}):
+        _v['horn_deep_dye'] = _v['materials']['horn-lot']['deep']
+        _v['materials']['horn-lot'] = {**_v['materials']['horn-lot'], 'deep': _c}
+        _v['horn_deep'] = _c
+
 # colors F (the owner's "Go", 2026-11-01 about 22:45, taken as the coordinator's picks: owner note 68adc2c3 on
 # r46-owner-notes; asset/TINTS.md). Through the clear walls the lining showed more than the tint, so:
 # - a white voile lining (the batting preset's own, as the site had) in the seven colors; Smoke keeps its black lining;
