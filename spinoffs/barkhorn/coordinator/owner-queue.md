@@ -784,3 +784,18 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   My check: the side's backdrop is the odd one out. Mean backdrop luminance (3 corner/wall patches): tall ~215, wide ~237, back ~212,
   hero-light ~235, side ~166. Asked the lane to lift the side's backdrop to ~215 (backdrop light only), proxy-check it before Dust's
   side, and re-render Ice's side at the end of the run. The hero-light's cooler white stays (set on purpose in round 3).
+- 11:01 speaker: side backdrop fix in (b4b3e5d8479cc2a54e8fe182e382247113f88b8b; sweep lights only x2.1, proxy ~215; all eight side
+  shots regenerated). Dust front-off-tall final c5cc46dffbdd82676f435b1261c2cfeaf07037a5: whole (same margins as Ice), but its deep
+  horn reads red.
+- 11:10 the deep horns are off-hue. Median hue, horn vs cabinet: deck row 16641879 Dust 5/26, Acid 19/49, Ice 222/210 (stock horns
+  Ember -2/-2, Poison 128/121, Haze 263/259); deck cover f729451f Dust 8/27, Acid 27/49, Ice 219/206; Dust's tall final ~2/~21.
+  Blind naming wf_83a5da8b-930 (3 viewers, row crops): Dust horn "red" 3/3 vs cabinet "orange" 3/3 (the same word as Ember);
+  Acid horn "orange" 2/3 vs cabinet "yellow" 3/3; Ice horn "royal blue" 3/3 vs "sky blue" 3/3. So Dust's horn reads as Ember and
+  Acid's as Dust: against "in the cabinet's own hue, only deeper". Cause: TINTS.md scales the stock code's channel split to the site
+  depth; a deeper dye shifts warm tints toward red (blue toward violet), in a real pour too.
+  Asked the lane: kill Dust's wide render; render the stock-horn tints next (Fog, Ember, Poison, Haze, Smoke); recalibrate the three
+  deep horns by appearance (hue within 8 of the cabinet's, luminance within ~10 % of now; blind naming 2/3: Dust orange, Acid
+  yellow/amber, Ice sky blue/blue); proxies to me before any deep-horn final; then Dust, Acid, Ice again, the deck row and cover in
+  F, then shared frames and close-ups; TINTS.md: the deep-horn custom batches are color-matched to look like the cabinet at 12.7 mm.
+  If Dust's orange turns brown at the site depth: a depth-vs-hue trade-off for the owner. The deck's cover and colours slide show
+  the off-hue horns until the new frames land (since v55/v56).
