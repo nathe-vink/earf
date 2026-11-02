@@ -865,3 +865,14 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   grid post 3 and social post 3 "Eight colors, / Ember to Smoke." (post 3's Fog speaker now whole, clear of the title); the teaser's
   beat 1 opens on "Eight colors, Ember to Smoke.", beat 6 (the hero pull-out of the eight) keeps the tagline once, beat 7 (the globe
   end card: date and venue) no line. "[LINE: owner's pick]" 0 times in the repo. Checked edition2-slots.jpg. Edition 2 done; holding.
+- 17:08 speaker: the cover with the color-matched horns (b803c9a4f77e01429310d69b3ceaf0feaa4bf104, blob
+  fd8c82c9989cd06ef992194dbb37d2b5fbbac116, 3840 x 1360, 128 samples, same shot as f729451f). My check: horn vs cabinet hue Dust 33/27,
+  Acid 54/49, Ice 202/206; stock horns as before; mean abs difference outside the horns 0.24/255; all eight whole. Deck v65: cover.html
+  shows it (/_blob/71e7119863b82263819294c1bbc9d838) under "A world of sound, in color.". Deck now fully on the matched horns.
+  Site finals paused (Fog tall and wide committed). Horn study started: geometry in variants/horn_study.py
+  (7fe39fb659dc3394a6fddcb79736d929feb2774c; product file 52442ce08027306fcd18fe1d1fee0e1c979cbc5e). The X's cause: Strata's air path is
+  smooth inside, the steps are outside; each layer is the air path's superellipse + 10 mm (exponent 2 at the throat to 7 at the mouth),
+  so the layers' corners line up on the two diagonals, seen through the tinted wall. Options: b rounded-rectangle layers (r 33 -> 85,
+  6 mm left at each corner; 4.89 kg); d "Strata laid flat", 29 horizontal slabs of stock 1/2 in, level terraces top and bottom, bond
+  lines level across the mouth, no stacked corners (5.06 kg); c the formed smooth horn on the bronze posts. Calibration proxies (horn
+  luminance = cabinet's, as a multiple of stock 1/2 in absorbance), then 0.5-scale 96-sample study frames.
