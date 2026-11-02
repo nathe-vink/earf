@@ -761,3 +761,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   Asked the lane to fix both on the render side (light, camera, how the etch reads; not the model), pass a blind read at 440 and
   330 px, re-render Ice's back before Dust, and check Smoke's back separately. If the render can't get there: a design option for
   the owner (e.g. a dark patch in the lining behind the mark), since the mark and lining are the owner's to sign.
+- 08:38 speaker: the back's missing finish was an omission (its rig came from finals31's back JSON, which had no finish block);
+  the same finish goes into shots.py for every back. Mark: two render-only tests at 128 samples, A = raking etch light off (flat
+  dark fills, open gaps), B = stronger lower grazing light with the through-cabinet light cut 7 -> 3; both with the plate-strip
+  light moved off the mark panel (the glare). Approved with: three blind readers per size (pass = 3/3 EARF at 440 px and >= 2/3 at
+  330 px); if both pass take A (B risks the opaque back the round-3 critic flagged). Order: hero-light (~09:10), the tests (~25 min),
+  Ice's back re-rendered, contact sheet + critic pass with the blind read, then Dust.
