@@ -59,6 +59,11 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .cover .in { display: grid; gap: 28px }
 .cover h1 { font-size: clamp(56px, 11vw, 168px); line-height: .9; letter-spacing: -.045em; font-weight: 600 }
 .cover h1 span { display: block; color: var(--muted); font-weight: 500 }
+.cover h1 span.tag { color: inherit; font-weight: inherit; font-size: clamp(36px, 9.2vw, 150px); line-height: .95 }
+.cover h1 span.tag .tg { display: block }   /* the tagline: two lines here, broken after its comma */
+.tg { white-space: nowrap }   /* the tagline breaks only after its comma */
+.cover h1 span.tag .tg, .lines q .tg, .scale .tg { display: inline; font: inherit; letter-spacing: inherit; text-transform: none; color: inherit }
+.cover h1 span.tag .tg { display: block }
 .cover .meta { display: flex; flex-wrap: wrap; gap: 10px 28px; justify-content: space-between; align-items: end }
 .spectrum { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: clamp(4px, .8vw, 10px); margin-top: 12px }
 .slab { aspect-ratio: 1 / 2.2; border-radius: 3px; position: relative; background: var(--t);
@@ -233,8 +238,8 @@ footer p { max-width: 76ch }
 
 <section class="cover band" id="cover">
   <div class="in">
-    <p class="eyebrow">EARF · San Francisco · the brand book, first edition, 31 October 2026</p>
-    <h1>Something<br>in the air.<span>The EARF brand book.</span></h1>
+    <p class="eyebrow">EARF · San Francisco · the brand book, second edition, 2 November 2026 (draft)</p>
+    <h1><span class="tag"><span class="tg">A world of sound,</span> <span class="tg">in color.</span></span><span>The EARF brand book.</span></h1>
     <div class="meta">
       <p class="lede">Hi-fi and light, cast in tinted acrylic, in eight colors from Ember to Smoke. This book is how EARF looks, sounds and arrives, so that everything made under the name feels like it came out of one room.</p>
     </div>
@@ -379,7 +384,7 @@ footer p { max-width: 76ch }
       <div><div class="mo">20 mm</div><p class="muted" style="margin-top:14px">IBM Plex Mono · 400 and 500 · labels, numbers, eyebrows, particulars; capitals with a little tracking</p></div>
     </div>
     <div class="scale">
-      <div><span class="k">Display · 600 · −4.5%</span><span style="font-size:clamp(40px,6vw,72px);font-weight:600;letter-spacing:-.045em;line-height:1">Something in the air.</span></div>
+      <div><span class="k">Display · 600 · −4.5%</span><span style="font-size:clamp(34px,6vw,72px);font-weight:600;letter-spacing:-.045em;line-height:1"><span class="tg">A world of sound,</span> <span class="tg">in color.</span></span></div>
       <div><span class="k">Headline · 600 · −3%</span><span style="font-size:clamp(28px,3.4vw,40px);font-weight:600;letter-spacing:-.03em;line-height:1.05">The oldest amplifier is a shape.</span></div>
       <div><span class="k">Lede · 400</span><span style="font-size:21px;line-height:1.45">Cast acrylic carries light to its edges, so a lamp underneath fills the whole cabinet with color.</span></div>
       <div><span class="k">Text · 400 · 17/1.6</span><span>Each cabinet is cast acrylic, 20 mm thick and tinted all the way through. The lining shows through the walls, so we dressed it in white voile.</span></div>
@@ -421,7 +426,7 @@ footer p { max-width: 76ch }
     <div class="head"><p class="no" style="color:var(--night-muted)">07 · Voice</p><h2>Cheeky, but reserved.</h2>
       <p class="lede" style="color:var(--night-muted)">The owner's brief: sophisticated, witty, never pleased with itself. Say what the thing is and what it does. Let one line per surface smile; let the rest be exact.</p></div>
     <div class="lines">
-      <div><q>Something in the air.</q><span>The headline</span></div>
+      <div><q><span class="tg">A world of sound,</span> <span class="tg">in color.</span></q><span>The tagline</span></div>
       <div><q>Eight things in the air.</q><span>Tropos, the eight</span></div>
       <div><q>The oldest amplifier is a shape.</q><span>The horn</span></div>
       <div><q>Put a light under it.</q><span>Lit from below</span></div>
@@ -429,6 +434,10 @@ footer p { max-width: 76ch }
       <div><q>A record player that floats on its own light.</q><span>Mantle</span></div>
       <div><q>Bottle green. Keep out of reach.</q><span>04 Poison</span></div>
       <div><q>Drawn to be made.</q><span>Progress</span></div>
+    </div>
+    <div class="cols">
+      <div><h3>The tagline, set</h3><p style="color:var(--night-muted)">"A world of sound, in color." Exactly so: sentence case, a comma after "sound", a period at the end. One line where it fits. Where it needs two, break after the comma and nowhere else: "A world of sound, / in color." On the web, keep each half together (<code>white-space: nowrap</code> on each), so the only place it can break is the comma.</p></div>
+      <div><h3>The record</h3><p style="color:var(--night-muted)">"Something in the air." was the headline from the first pictures until 2 November 2026, when the owner chose "A world of sound, in color." It is retired: don't set it on anything new. "Eight things in the air.", Tropos's own line, stays.</p></div>
     </div>
     <div class="cols">
       <div><h3>Exact</h3><p style="color:var(--night-muted)">Millimeters, kilograms, hertz. "About" when a figure is designed and not yet measured. Never a superlative a measurement hasn't earned.</p></div>
@@ -456,7 +465,7 @@ footer p { max-width: 76ch }
     <div class="app"><figure><img src="img/plate.jpg" alt="The rating plate: black anodized aluminum on red acrylic, laser-marked with EARF, Tropos, model, serial, ratings and marks" loading="lazy" width="1800" height="1125"></figure>
       <div class="txt"><h3>The rating plate</h3><p>The one place the brand is required by law, so it is the most carefully set. Black anodized aluminum, laser-marked white, two black pan heads, beside the amplifier on the back of every Tropos, in the cabinet's own color.</p>
         <dl><dt>Size</dt><dd>70 × 40 × 1 mm (the part in product.py)</dd><dt>Type</dt><dd>The wordmark, then Plex Mono</dd><dt>Ratings</dt><dd>As on the FA122's own plate</dd><dt>Marks</dt><dd>Drawn where they go; added only once tested</dd></dl></div></div>
-    <div class="app"><figure><img src="img/social.jpg" alt="Three social posts: the eight speakers with Something in the air; Poison in a forest with Bottle green, keep out of reach; Tropos in Fog, whole and cover off, with a placeholder for the owner's line" loading="lazy" width="1800" height="795"></figure>
+    <div class="app"><figure><img src="img/social.jpg" alt="Three social posts: the eight speakers with A world of sound, in color; Poison in a forest with Bottle green, keep out of reach; Tropos in Fog, whole and cover off, with a placeholder for the owner's line" loading="lazy" width="1800" height="795"></figure>
       <div class="txt"><h3>Social posts</h3><p>One picture, one line, the wordmark small in a corner. The line is always the site's, never a caption written for the feed. Three kinds rotate: the eight, a tint in its element, the material up close.</p>
         <dl><dt>Format</dt><dd>4:5, 1080 × 1350</dd><dt>Line</dt><dd>Instrument Sans 600, top-left or over sky</dd><dt>Label</dt><dd>Plex Mono, the tint's number and name</dd><dt>Never</dt><dd>Stickers, emoji, countdowns</dd></dl></div></div>
     <div class="app"><figure><img src="img/stationery.jpg" alt="A letterhead with the wordmark and the eight tints along its foot, an envelope, a black care card reading Care for cast acrylic, and a cotton tote printed with the globe" loading="lazy" width="1800" height="1125"></figure>
@@ -570,8 +579,8 @@ footer p { max-width: 76ch }
     <div class="head"><p class="no">13 · The debut and the raise</p><h2>Paper for the first night, and for the first check.</h2>
       <p class="lede">The investor one-pager, to attach to an outreach email, with every fact and figure from the investor deck; and the invitation to the debut night, Tuesday 19 January 2027, in FOG week, in a hired or lent room at or near Fort Mason (a listening room after it, in February and March, is planned, not yet funded), as a printed card and an email. Placeholders in brackets; nothing is sent from here.</p></div>
     <div class="three">
-      <figure><img src="img/earf-investor-one-pager.jpg" alt="The investor one-pager: Something in the air, the eight speakers, the four products with prices, three market facts, the plan and the $50,000 ask" loading="lazy" width="1400" height="1812"><figcaption><b>The one-pager.</b> US Letter, one side: what EARF is, the four pieces, why now, the plan, the $50,000 ask and its use, done and not yet. launch/out/earf-investor-one-pager.pdf</figcaption></figure>
-      <figure><img src="img/earf-debut-invitation-card.jpg" alt="The printed invitation: Tropos in Ember in a dark studio, Something in the air, Tuesday 19 January 2027, and the back with when, where, hear, see and at the door" loading="lazy" width="960" height="2688"><figcaption><b>The card.</b> 5 × 7 in, front and back, letterpress on 600 gsm, the tints on its foot. launch/out/earf-debut-invitation-card.pdf</figcaption></figure>
+      <figure><img src="img/earf-investor-one-pager.jpg" alt="The investor one-pager: A world of sound, in color, the eight speakers, the four products with prices, three market facts, the plan and the $50,000 ask" loading="lazy" width="1400" height="1812"><figcaption><b>The one-pager.</b> US Letter, one side: what EARF is, the four pieces, why now, the plan, the $50,000 ask and its use, done and not yet. launch/out/earf-investor-one-pager.pdf</figcaption></figure>
+      <figure><img src="img/earf-debut-invitation-card.jpg" alt="The printed invitation: Tropos in Ember in a dark studio, A world of sound, in color, Tuesday 19 January 2027, and the back with when, where, hear, see and at the door" loading="lazy" width="960" height="2688"><figcaption><b>The card.</b> 5 × 7 in, front and back, letterpress on 600 gsm, the tints on its foot. launch/out/earf-debut-invitation-card.pdf</figcaption></figure>
       <figure><img src="img/earf-debut-invitation-email.jpg" alt="The invitation as an email: the same picture and line, the details in a table and a Reply to come button" loading="lazy" width="1360" height="2400"><figcaption><b>The email.</b> 600 px, tables and inline styles for mail clients, the picture captioned as a render. launch/invite-email.html</figcaption></figure>
     </div>
   </div>
@@ -584,7 +593,7 @@ footer p { max-width: 76ch }
     <figure><video src="img/earf-teaser-16x9.mp4" controls playsinline preload="metadata" poster="img/earf-teaser-storyboard.jpg" style="width:100%;max-width:100%;border-radius:4px;background:#0E0D10" aria-label="The EARF teaser, 25 seconds, silent"></video><figcaption><b>The teaser, 16:9.</b> 25 s, silent; launch/out/earf-teaser-16x9.mp4 and earf-teaser-4x5.mp4. Every picture is a render, and the end card says so.</figcaption></figure>
     <div class="two">
       <figure><img src="img/earf-teaser-storyboard.jpg" alt="The teaser's storyboard: seven beats from Ember in the dark to the globe and the date" loading="lazy" width="1400" height="1705"><figcaption><b>The board.</b> Seven beats, with their pictures, moves and lines (launch/STORYBOARD.md).</figcaption></figure>
-      <figure><img src="img/launch-grid.jpg" alt="Nine social posts in a three by three grid, from It played to Something in the air" loading="lazy" width="1400" height="1815"><figcaption><b>The grid.</b> Three a week from 20 January; posts marked stand-in wait for photographs from the room.</figcaption></figure>
+      <figure><img src="img/launch-grid.jpg" alt="Nine social posts in a three by three grid, from It played to A world of sound, in color" loading="lazy" width="1400" height="1815"><figcaption><b>The grid.</b> Three a week from 20 January; posts marked stand-in wait for photographs from the room.</figcaption></figure>
     </div>
   </div>
 </section>
@@ -606,7 +615,7 @@ footer p { max-width: 76ch }
     <div class="head"><p class="no">16 · The money pack</p><h2>Turning the brand into partners, grants and deposits.</h2>
       <p class="lede">Drafts only: nothing sent, submitted or signed. The partner brief and its three emails (money/PARTNERS.md); applications for the Awesome Foundation, HIGH END Vienna's Start-Up Area and IDSA IDEA, with Emergent Ventures left for the owner to write because it rejects AI-written applications (money/applications/); six gallery letters proposing a numbered edition (money/GALLERY-LETTERS.md); and the Founding Hundred's terms, one page for counsel.</p></div>
     <div class="three">
-      <figure><img src="img/brief-preview-1.jpg" alt="The partner brief's cover: Something in the air, the eight lit from below, the night, the week, the room and the guests" loading="lazy" width="935" height="1210"><figcaption><b>The partner brief, page 1.</b> money/out/earf-debut-partner-brief.pdf</figcaption></figure>
+      <figure><img src="img/brief-preview-1.jpg" alt="The partner brief's cover: A world of sound, in color, the eight lit from below, the night, the week, the room and the guests" loading="lazy" width="935" height="1210"><figcaption><b>The partner brief, page 1.</b> money/out/earf-debut-partner-brief.pdf</figcaption></figure>
       <figure><img src="img/brief-preview-2.jpg" alt="The partner brief's second page: what every partner gets, what a hotel, a drinks brand and a record label are asked for, the timeline" loading="lazy" width="935" height="1210"><figcaption><b>Page 2.</b> What a partner gets and is asked for; the timeline; drinks and the law.</figcaption></figure>
       <figure><img src="img/terms-preview-1.jpg" alt="The Founding Hundred terms sheet for counsel: a table of proposed terms with their legal basis and seven questions" loading="lazy" width="935" height="1210"><figcaption><b>The terms, for counsel.</b> Stages, ship estimate, delays, canceling, disclosures, holding the money; seven questions, Q1 to Q7.</figcaption></figure>
     </div>

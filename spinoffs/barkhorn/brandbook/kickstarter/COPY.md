@@ -47,7 +47,7 @@ February 2027.*
 
 **Lead image:** photograph, both lamps lit in a dark room, one Ember, one Ice. *Prototypes, photographed.*
 
-**Something in the air. And on the table.**
+**A world of sound, in color.**
 
 EARF makes hi-fi and light in cast acrylic, tinted all the way through. Everything comes in the same eight colors,
 from Ember to Smoke, so a room can be one color, or three. Our first product is a horn loudspeaker, Tropos. These are

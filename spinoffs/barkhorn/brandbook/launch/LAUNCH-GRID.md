@@ -16,6 +16,6 @@ alt text until the real pieces are photographed. Mockup: `out/launch-grid.png` (
 | 6 | Sun 31 Jan | `bar-listening.jpg` | One album, start to finish. | This week's Session: [Album] by [Artist], start to finish, in the listening room. Six chairs. No talking. Ask at the room for a place. |
 | 7 | Wed 3 Feb | `room-portrait.jpg` (the pair, whole, covers off; horn lane) | The oldest amplifier is a shape. | Long before amplifiers, a horn was how a small sound filled a large room. Ours is formed from the same tinted acrylic as its cabinet. |
 | 8 | Fri 5 Feb | `tt-violet-dusk-1200.jpg` | Floats on its own light. | Mantle's tinted plinth floats 40 mm over a base that glows at its edge. It is playing in the room now. |
-| 9 | Sun 7 Feb | `hero-portrait.jpg` | Something in the air. | Everything in the room is made to order, in any of eight colors. Reserve a place in line at the room, or write to hello@earf.world. |
+| 9 | Sun 7 Feb | `hero-portrait.jpg` | A world of sound, in color. | Everything in the room is made to order, in any of eight colors. Reserve a place in line at the room, or write to hello@earf.world. |
 
 Fill before posting: the Session's album, artist and date (post 6). Post 1 waits for a photograph from the night.

@@ -155,7 +155,10 @@ class Teaser:
         im = cover(self.hero, self.W, self.H, 1.10 - 0.10 * ease(k), 0.5, 0.42)
         m = int(80 * self.u)
         a = ease((t - 19.0) / 0.7)
-        self.text(im, (m, m + int(12 * self.u * (1 - a))), 'Something in the air.', self.f_mid, INK, a)
+        tag = 'A world of sound, in color.'               # the tagline (owner, 2026-11-02); breaks only after its comma
+        if self.f_mid.getlength(tag) > self.W - 2 * m:
+            tag = 'A world of sound,\nin color.'
+        self.text(im, (m, m + int(12 * self.u * (1 - a))), tag, self.f_mid, INK, a)
         self.label(im, 'Tropos · the eight, Ember to Smoke', dark=False, alpha=a, top=False)
         return im
 

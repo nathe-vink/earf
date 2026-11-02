@@ -51,7 +51,7 @@ And it makes Planet EARF a label as well as a bar, which is easier to fund than 
 
 ## (b) A debut room: San Francisco in FOG week, then Vienna, then Milan
 
-**Mockup:** `out/idea-milan.png`: the invitation ("Something in the air.", the uplit eight), the room in plan (eight
+**Mockup:** `out/idea-milan.png`: the invitation ("A world of sound, in color.", the uplit eight), the room in plan (eight
 Tropos lit from below on a curved wall, Mother EARF overhead, a bench, Mantle and the coins by the door). The same room
 works at any of the three.
 
