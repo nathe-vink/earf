@@ -855,3 +855,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   My answers: retire "Eight things in the air." (it keeps the retired phrase alive; use the deck's "Eight colors, Ember to Smoke.";
   the naming idea "things the air holds" stays; the deck never carried the line). The one-pager's ask goes to the deck's $55,000 table
   (v64 ask slide); the Kickstarter beat-1 / post-3 "[LINE: owner's pick]" slots take the tagline (once per screen).
+- 16:01 brand lane follow-ups (r47-brand f3d944969392151cb1d1853ddec72a67236687c9; content a5b3381069d1d2d878b1b9da8ebfb7a962450a8e):
+  "Eight things in the air." retired (Book voice lines and do/don't, press sheet and PDFs -> "Eight colors, Ember to Smoke."; the
+  record explains); the one-pager's ask is the v64 $55,000 table (fits its box), the Book's three $50,000 read $55,000, FACTS.md's
+  money table updated (the $50,000 split marked superseded); teaser beat 1 took the tagline. Checked the contact sheet. My calls on
+  the last slots: grid post 3 and social post 3 -> "Eight colors, Ember to Smoke."; the teaser keeps the tagline once, on the end card
+  (beat 6), and beat 1 opens on "Eight colors, Ember to Smoke."; then no "[LINE: owner's pick]" should remain.
