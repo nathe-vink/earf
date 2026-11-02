@@ -743,3 +743,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   about 5.7 h a tint, about 45 h for all eight. Asked for one contact sheet a tint with full SHAs, whole uncropped speakers checked
   before moving on, and one scores-only critic pass on Ice's full-size finals (no more rounds unless a frame is under 6.0 or has a
   real defect). Site code untouched, nothing deployed.
+- Check-in 28 (05:32): no owner reply (tagline round 3 still open; page-edit question still open). Speaker lane on the F finals:
+  Ice front-off-tall landed at bf45a4e01977faf4feeeafb2c901918f9504e153 (1000 x 1250, 384 samples, ~56 min). Checked by eye: the
+  whole speaker is in frame with clear margins (horn top ~185 px, plinth ~140 px from the bottom); clean, no fireflies; the deep
+  horn reads royal blue now, the cabinet a lighter clear blue over the white lining, a blue pool on the floor. Front-off-wide
+  rendering (shot f885a58d41fa9e79b87fbdda783608897c9c6159, ~95 min, to ~06:36), then side, back and hero-light. The lane's order:
+  Ice, Dust, Acid, Fog, Ember, Poison, Haze, Smoke, then the shared frames and the three close-ups. Next check-in ~08:30 (send_later).
