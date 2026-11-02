@@ -710,3 +710,5 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 00:45 four-pieces F day landed (its message said 7c3a83e0; the actual commit is e79b118d6dc34501df807a08e74864a205c81995): Tropos
   as bright green glass, Mantle's deck dark. Built as the day alternative (specs/line-day-sf-f.html, /_blob/5d910dec...), not
   published. Lid-closed dusk ~01:25.
+- 01:25 deck v56: colours.html = speaker F row (16641879; /_blob/6d099de8...): every colored cabinet as clear tinted glass over the
+  white lining, Smoke dark; all whole; alt and aside now describe F. Golden-hour room in F rendering (~02:00); four-pieces lid dusk ~01:25.
