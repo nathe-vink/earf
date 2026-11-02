@@ -40,10 +40,10 @@
   "radius": 2.8,
   "height": 5.5,
   "contact": {
-   "strength": 1.0,
+   "strength": 1.4,
    "distance_m": 0.35,
-   "core_strength": 1.4,
-   "core_distance_m": 0.03
+   "core_strength": 2.6,
+   "core_distance_m": 0.05
   },
   "flags": [
    {
@@ -207,7 +207,7 @@
     -0.4,
     0.0
    ],
-   "irradiance": 0.4,
+   "irradiance": 0.2,
    "color": "#FFF8F0",
    "specular": 0.0,
    "receivers": [
@@ -339,7 +339,7 @@
     -0.1,
     0.9
    ],
-   "strength": 1.8,
+   "strength": 1.2,
    "color": "#FFFFFF",
    "diffuse": 0.0
   },
@@ -359,7 +359,7 @@
     -0.1,
     0.55
    ],
-   "strength": 2.2,
+   "strength": 1.6,
    "color": "#FFFFFF",
    "diffuse": 0.0,
    "ramp": {
@@ -409,16 +409,16 @@
     0.3
    ],
    "position": [
-    0.7,
-    -0.6,
-    1.6
+    0.5,
+    0.4,
+    1.5
    ],
    "target": [
     0.15,
     0.0,
     1.12
    ],
-   "power_w": 55,
+   "power_w": 95,
    "color": "#FFFFFF",
    "diffuse": 0.1,
    "receivers": [
@@ -443,7 +443,7 @@
     0.0,
     1.12
    ],
-   "irradiance": 3.2,
+   "irradiance": 5.5,
    "color": "#FFF8F0",
    "spread_deg": 40,
    "specular": 1.0
@@ -531,7 +531,7 @@
     6.0,
     1.2
    ],
-   "irradiance": 1.061,
+   "irradiance": 0.85,
    "color": "#FFF4E8",
    "specular": 0.0,
    "receivers": [
@@ -554,7 +554,7 @@
     6.0,
     1.0
    ],
-   "irradiance": 0.5,
+   "irradiance": 0.2,
    "color": "#FFF4E8",
    "specular": 0.0,
    "receivers": [
@@ -577,7 +577,7 @@
     5.5,
     4.7
    ],
-   "irradiance": 2.1,
+   "irradiance": 1.5,
    "color": "#FFF0E2",
    "specular": 0.0,
    "receivers": [
@@ -623,7 +623,7 @@
     0.5,
     0.0
    ],
-   "irradiance": 0.15,
+   "irradiance": 0.08,
    "spread_deg": 50,
    "color": "#FFF4E8",
    "specular": 0.0,

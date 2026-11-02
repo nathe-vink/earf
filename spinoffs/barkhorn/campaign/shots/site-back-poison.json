@@ -1,15 +1,15 @@
 {
  "set": {
   "kind": "sweep",
-  "color": "#F7F0E8",
+  "color": "#EDE6DC",
   "width": 6.0,
   "front": 5.0,
   "depth": 1.5,
   "radius": 1.2,
   "height": 4.0,
   "contact": {
-   "strength": 0.9,
-   "distance_m": 0.06
+   "strength": 1.0,
+   "distance_m": 0.12
   },
   "flags": [
    {
@@ -29,6 +29,24 @@
     ],
     "reflect_only": true,
     "color": "#060606"
+   },
+   {
+    "center_m": [
+     1.2,
+     0.3,
+     0.9
+    ],
+    "size_m": [
+     1.0,
+     2.0
+    ],
+    "normal": [
+     -0.97,
+     -0.24,
+     0.0
+    ],
+    "reflect_only": true,
+    "color": "#060606"
    }
   ]
  },
@@ -36,8 +54,8 @@
   "key": {
    "type": "area",
    "size_m": [
-    2.5,
-    2.0
+    1.6,
+    1.2
    ],
    "orbit": {
     "azimuth_deg": -35,
@@ -55,12 +73,12 @@
   "fill": {
    "type": "area",
    "size_m": [
-    2.0,
-    2.0
+    1.2,
+    1.6
    ],
    "orbit": {
-    "azimuth_deg": 20,
-    "elevation_deg": 18,
+    "azimuth_deg": 5,
+    "elevation_deg": 25,
     "distance_m": 4.0
    },
    "target": [
@@ -68,7 +86,7 @@
     0.0,
     0.6
    ],
-   "irradiance": 1.8,
+   "irradiance": 2.2,
    "color": "#FFF7EA"
   },
   "wash": {
@@ -125,9 +143,9 @@
    "target": [
     0.0,
     1.5,
-    0.2
+    1.2
    ],
-   "irradiance": 0.15,
+   "irradiance": 0.1,
    "color": "#FFF4E8",
    "specular": 0.0,
    "receivers": [
@@ -150,7 +168,7 @@
     -0.5,
     0.0
    ],
-   "irradiance": 0.08,
+   "irradiance": 0.0,
    "spread_deg": 60,
    "color": "#FFF4E8",
    "specular": 0.0,
@@ -161,20 +179,39 @@
   "horn-rim": {
    "type": "area",
    "size_m": [
-    1.2,
-    0.15
+    1.0,
+    0.4
    ],
    "position": [
-    -0.3,
-    0.6,
-    1.6
+    0.0,
+    0.7,
+    1.35
    ],
    "target": [
     0.0,
     0.0,
     1.2
    ],
-   "irradiance": 1.5,
+   "irradiance": 3.5,
+   "color": "#FFF3E1"
+  },
+  "etch-rake": {
+   "type": "area",
+   "size_m": [
+    0.8,
+    0.05
+   ],
+   "position": [
+    0.165,
+    -0.236,
+    0.95
+   ],
+   "target": [
+    0.12,
+    -0.17,
+    0.8
+   ],
+   "irradiance": 1.2,
    "color": "#FFF3E1"
   }
  },
@@ -182,10 +219,10 @@
   "samples": 96,
   "adaptive": 0.02,
   "denoise": true,
-  "clamp": 8,
+  "clamp": 6,
   "bounces": 12,
   "view": "Khronos PBR Neutral",
-  "exposure": -0.2,
+  "exposure": -0.35,
   "white_balance_k": 5600,
   "white_balance_tint": 3.0
  },
@@ -203,9 +240,9 @@
   "target": [
    0.0,
    0.02,
-   0.52
+   0.55
   ],
-  "lens_mm": 70.2,
+  "lens_mm": 62.0,
   "level": true
  },
  "sky": {

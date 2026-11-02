@@ -429,7 +429,56 @@ def site(frame, tint):
     _site_round1(s, frame)
     _site_round2(s, frame)
     _site_round3(s, frame)
+    _siteF_round1(s, frame)
     return s
+
+
+def _siteF_round1(s, frame):
+    """The fresh gate in colors F, round 1 (2026-11-02; renders/2026-11-02/barkhorn/site-strata-F/CRITIC.md): still light
+    on the floor; Ice's deep horn a dark mass beside the paler cabinet (three critics), so a light behind the horn
+    through its layers; the sweeps flat or uneven. Light, set and camera only."""
+    L = s['lights']; c = s['set'].setdefault('contact', {})
+    if frame == 'front-off-tall':
+        L['rim'].update(position=[0.0, 0.6, 1.6], target=[0.05, 0.0, 1.15], power_w=80, size_m=[1.0, 0.6])
+        L['horn']['size_m'] = [2.5, 1.6]
+        c.update(strength=1.0, distance_m=0.25, core_strength=1.6, core_distance_m=0.012); L['pool']['irradiance'] = 0.0
+        L['bg-right']['irradiance'] = 0.35; L['bg-left']['irradiance'] = 1.4; L['wall_left']['irradiance'] = 3.8
+        L['scrim']['strength'] = 0.25; L['topline']['strength'] = 1.6
+        L['kick']['irradiance'] = 1.6; L['kick']['orbit'].update(azimuth_deg=75, elevation_deg=40)
+    elif frame == 'side':
+        c.update(strength=1.4, core_strength=2.6, core_distance_m=0.05)
+        L['pool']['irradiance'] = 0.2; L['floor']['irradiance'] = 0.08
+        L['horn']['irradiance'] = 5.5; L['rim'].update(power_w=95, position=[0.5, 0.4, 1.5])
+        L['bg-right']['irradiance'] = 0.2; L['wall_left']['irradiance'] = 1.5; L['bg-left']['irradiance'] = 0.85
+        L['topline']['strength'] = 1.2; L['sidesheen']['strength'] = 1.6
+    elif frame == 'back':
+        L['d-floor']['irradiance'] = 0.0; L['d-wall'].update(irradiance=0.10, target=[0.0, 1.5, 1.2])
+        s['set']['color'] = '#EDE6DC'
+        c.update(strength=1.0, distance_m=0.12); L['key']['size_m'] = [1.6, 1.2]
+        L['etch-rake'] = {'type': 'area', 'size_m': [0.8, 0.05], 'position': [0.165, -0.236, 0.95], 'target': [0.12, -0.17, 0.80],
+                          'irradiance': 1.2, 'color': '#FFF3E1'}          # the etched mark, at a grazing angle
+        L['horn-rim'].update(irradiance=3.5, position=[0.0, 0.7, 1.35], size_m=[1.0, 0.4])
+        L['fill'].update(irradiance=2.2, size_m=[1.2, 1.6]); L['fill']['orbit'].update(azimuth_deg=5, elevation_deg=25)
+        s['render'].update(exposure=-0.35, clamp=6)
+        s['set']['flags'].append({'center_m': [1.2, 0.3, 0.9], 'size_m': [1.0, 2.0], 'normal': [-0.97, -0.24, 0.0],
+                                  'reflect_only': True, 'color': '#060606'})
+        s['camera'].update(lens_mm=62.0, target=[s['camera']['target'][0], s['camera']['target'][1], 0.55])
+    elif frame == 'front-off-wide':
+        c.update(strength=2.6, distance_m=0.30, core_strength=5.0, core_distance_m=0.012)
+        L['cove_far']['target'] = [-7.0, 3.5, 0.3]; L['floor'].update(size_m=[10.0, 6.0], position=[-1.0, -2.0, 4.5])
+        s['set']['radius'] = 3.6
+        L['back'].update(irradiance=3.0); L['back']['orbit']['elevation_deg'] = 38
+        L['back']['receivers'] = L['back']['receivers'] + ['sweep']    # the blue through the cabinet onto the floor
+        L['bg-left']['irradiance'] = 0.9; L['wash'].update(irradiance=0.6, position=[0.8, -1.4, 3.0])
+        L['sidesheen'].update(strength=0.9, size_m=[1.4, 2.4]); s['finish']['sharpen'] = 0.08
+    elif frame == 'hero-light':
+        c.update(strength=3.0, distance_m=0.30, core_strength=6.0, core_distance_m=0.035)
+        s['render'].update(white_balance_k=5900, white_balance_tint=2.0)  # the set read cool against its #F3F1EE
+        L['bg-right']['irradiance'] = 1.0; L['bg-left']['irradiance'] = 2.9
+        L['key']['irradiance'] = 6.0; L['key']['orbit'].update(azimuth_deg=-20, elevation_deg=32)
+        L['front-strip']['strength'] = 6.0; L['front-strip']['orbit']['azimuth_deg'] = -32
+        L['back-top']['irradiance'] = 26.0; L['back-top']['orbit']['azimuth_deg'] = 140
+        s['materials']['sweep']['roughness'] = 0.25; L['scrim']['irradiance'] = 4.0; s['finish']['clarity'] = 0.0
 
 
 def _site_round3(s, frame):
