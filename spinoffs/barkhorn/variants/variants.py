@@ -58,6 +58,17 @@ PLINTH = dict(layer=12.7, gap=0.1, outer=[(-20.0, -20.0, 580.0, 440.0), (-35.0, 
 # tested and is kept as an alternative (variants/BASES.md)
 PLINTH_LIGHT = dict(inset=40.0, w=10.0, t=2.0, brk=30.0,
                     sealed=None)   # dict(inset=90.0, diffuser_w=40.0, diffuser_t=3.0, channel_wall=1.5) for the sealed channel
+# the uplight (the owner, 2026-11-02 20:38: "The light in the base is meant to go upward through the speaker ... like in
+# the underlit promo images"; variants/BASES.md): in place of the floor line, light aimed up into the cabinet from inside
+# its footprint. `edges`: an LED strip in a groove in the top frame under each wall's bottom edge (x0, y0, x1, y1 of its
+# line): the sides' own edges, and the front and back panels' edges through the bottom panel they stand on, so each wall
+# carries its tint's light up from its foot. `groove` (w, depth) in the top frame; `channel` (w, h) the aluminium
+# U-channel on nylon standoffs, clear of the acrylic all round; its frosted lens `gap` under the wall's edge. `panel`: an
+# opal diffuser (w, d, t) `panel_under` under the cabinet's bottom, over an LED plate `board_gap` below it, as the uplit
+# set's flat panel; it lights the cabinet's inside through the bottom panel round the bottom batt (by the ports)
+UPLIGHT = dict(edges=[(10.0, 30.0, 10.0, 390.0), (550.0, 30.0, 550.0, 390.0), (40.0, 34.0, 520.0, 34.0), (40.0, 410.0, 520.0, 410.0)],
+               groove=(16.0, 8.0), channel=(12.0, 7.0), wall=1.5, lens_t=1.0, gap=0.6,
+               panel=(420.0, 280.0, 3.0), panel_under=10.0, plate_t=2.0, board_gap=8.0, centre=(280.0, 210.0))
 OUTRIG = dict(w=30.0, h=20.0, inner=[(95.0, 80.0), (465.0, 80.0), (95.0, 340.0), (465.0, 340.0)])
 
 
@@ -168,7 +179,12 @@ def parts(P):
                             notes=['Strata: a turned bronze collar on the top plate at each post (ø28 x 8) and one under each pad '
                                    '(ø24 x 6), so the horn reads as mounted, not hovering']))
     from build123d import Compound as _C
+    from build123d import Box
     layers, zp = plinth(PLINTH)
+    U = UPLIGHT; gw, gd = U['groove']
+    seg = lambda ax, ay, bx, by, w, z0, z1: Pos((ax + bx) / 2, (ay + by) / 2, (z0 + z1) / 2) * Box(max(abs(bx - ax) + w, w), max(abs(by - ay) + w, w), z1 - z0)
+    for (ax, ay, bx, by) in U['edges']:              # the uplight's grooves in the top frame, under the walls
+        layers[0] = layers[0] - seg(ax, ay, bx, by, gw, -gd - 0.1, 1.0)
     for k, ring in enumerate(layers):
         out.append(product.Part(f'base-plinth-{k + 1}', ring, product.Machined('stock-cast-sheet', 'cnc-mill', setup_usd=60.0),
                                 finish='bark', group='base', option='Plinth',
@@ -208,6 +224,29 @@ def parts(P):
                                 option='Plinth light', notes=['the sealed alternative\'s black U-channel, screwed, not bonded (variants/BASES.md)']))
     for nm, key in (('base-plinth-supply', 'plinth-supply'), ('base-plinth-controller', 'plinth-controller')):
         out.append(product.Part(nm, None, product.Bought(key), group='base', option='Plinth light'))
+    # the uplight: the strips' lenses and channels in the grooves, the centre panel and its LED plate in the opening
+    cw, ch = U['channel']; t_ = U['wall']; zl1 = -U['gap']; zl0 = zl1 - U['lens_t']; zc0 = zl1 - ch
+    lens, chan = [], []
+    for (ax, ay, bx, by) in U['edges']:
+        lens.append(seg(ax, ay, bx, by, cw - 2 * t_ - 0.2, zl0, zl1))
+        u = seg(ax, ay, bx, by, cw, zc0, zl1)
+        chan.append(u - seg(ax, ay, bx, by, cw - 2 * t_, zc0 + t_, zl1 + 1.0))
+    pw, pd, pt = U['panel']; cx, cy = U['centre']; zp1 = -U['panel_under']; zp0 = zp1 - pt
+    panel = Pos(cx, cy, (zp0 + zp1) / 2) * Box(pw, pd, pt)
+    zb1 = zp0 - U['board_gap']; plate = Pos(cx, cy, zb1 - U['plate_t'] / 2) * Box(pw + 14.0, pd + 14.0, U['plate_t'])
+    out.append(product.Part('base-uplight-edge', _C(children=lens), product.Bought('uplight-strip'), finish='uplight-edge', group='base',
+                            option='Plinth uplight',
+                            notes=['the uplight\'s edge strips: COB, 24 V, 4000 K, under each wall\'s bottom edge in a groove in the top '
+                                   f'frame ({gw:g} x {gd:g}), in an aluminium channel on nylon standoffs clear of the acrylic, its frosted '
+                                   f'lens {U["gap"]:g} under the wall (variants/BASES.md)']))
+    out.append(product.Part('base-uplight-channel', _C(children=chan), product.Bought('uplight-channel'), finish='channel', group='base',
+                            option='Plinth uplight', notes=['the edge strips\' aluminium U-channels, on nylon standoffs in the grooves']))
+    out.append(product.Part('base-uplight-panel', panel, product.Bought('uplight-panel'), finish='uplight-panel', group='base',
+                            option='Plinth uplight',
+                            notes=[f'the uplight\'s centre panel: an opal PMMA diffuser {pw:g} x {pd:g} x {pt:g}, {U["panel_under"]:g} under the '
+                                   'cabinet\'s bottom, lit from an aluminium-core LED plate below it (4000 K)']))
+    out.append(product.Part('base-uplight-plate', plate, product.Bought('uplight-panel'), finish='channel', group='base',
+                            option='Plinth uplight', notes=['the centre panel\'s LED plate, black anodised aluminium, on brackets in the opening']))
     pf = [foot(x, y, zp - 0.1) for x, y in BASE['feet']]
     out.append(product.Part('base-plinth-feet', _C(children=[c for f in pf for c in f]), product.Bought('levelling-feet'),
                             finish='foot', group='base', option='Plinth', notes=['four M8 levelling feet under the plinth\'s corners']))
@@ -238,7 +277,12 @@ PRODUCT = dataclasses.replace(
                # the plinth light's diffuser: frosted, lit from within at 2700 K (a shot may turn `glow` up or down)
                'led': {'preset': 'frosted', 'color': '#FFF1E0', 'absorb': '#FFE9D2', 'glow': 40.0, 'glow_color': '#FFB46B'},
                # the plinth light's channel: black anodised aluminium, light tight
-               'channel': {'preset': 'plastic', 'color': '#111111', 'roughness': 0.55}},
+               'channel': {'preset': 'plastic', 'color': '#111111', 'roughness': 0.55},
+               # the uplight (variants/BASES.md): 4000 K, so each tint shows its own colour; `glow` W/m2 of emitting face
+               # at the default 50 %: the strips about 3 W/m of light (10 W/m electrical) through an 8 mm lens at full,
+               # 375 W/m2; the panel about 5 W of light (16 W electrical) over 0.118 m2 at full, 42 W/m2
+               'uplight-edge': {'preset': 'frosted', 'color': '#F4F2EE', 'absorb': '#F0EEEA', 'glow': 188.0, 'glow_color': '#FFCEA6'},
+               'uplight-panel': {'preset': 'frosted', 'color': '#F4F2EE', 'absorb': '#F0EEEA', 'glow': 21.0, 'glow_color': '#FFCEA6'}},
     kind='Tropos design-pass proposals: Strata\'s caldera and the Topo horn',
     notes=['Proposals beside the current design (variants/README.md); the Cloud\'s CAD is unchanged.'],
     origin=(280.0, 213.7, -12.0), drawing_prefix='BHV')
