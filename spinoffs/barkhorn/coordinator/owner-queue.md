@@ -809,3 +809,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   site"), not a different color; turning it further toward cyan would trade a word for a real hue mismatch (teal on sky blue). Rule
   amended: for Ice any blue word passes with the hue within 8. Asked for the proxies, readings and the TINTS.md note committed with
   SHAs before the go.
+- 12:44 speaker: deep horns committed (d349b86d8c29956dbebc2c69d00d902a69c6a7c8: horn-hue/ proxies, READINGS.md, hornhue.py,
+  before-after.png 74a72deea6ed8b2957099072088aaab6cc9e9c53; TINTS.md "Color-matched by eye, not the dye made deeper": the custom
+  batches matched to a chip against the cabinet's sheet at 12.7 mm, with the Ice ruling). My own measure on the proxies (horn hue /
+  cabinet hue / horn Y): Dust 26/21/0.170 (was 4, 0.177); Acid 52/47/0.323 (was 13, 0.299); Ice 210/211/0.056 (was 227, 0.063;
+  ~11 % lighter, fine). Fog front-off-tall checked: whole, clean (margins as Ice). Go given: product.py + rebuild; after Fog's wide,
+  the deck row (3328 x 1040) and cover (3840 x 1360) in F first (the deck shows the wrong horns; the site is held); then the rest of
+  Fog, Dust, Acid, Ember, Poison, Haze, Smoke, Ice's five again, shared frames, close-ups.
