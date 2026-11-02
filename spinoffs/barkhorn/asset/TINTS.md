@@ -64,6 +64,32 @@ horn.
   site-set critics, round 3). Each deep horn now keeps its stock code's channel split, with the absorbance scaled so its
   luminance after 10 mm matches the site horn's. Dust #E0661C becomes #F25508, Acid #F2B705 becomes #FFB101, Ice
   #3C86C2 becomes #2981E7. The site's color stays on each flavor as `horn_deep_site_hue`, for reference.
+- **Color-matched by eye, not the dye made deeper** (the coordinator, 2026-11-02). Scaling the stock code's channel
+  split up to the site's depth deepens the same dye, and a deeper dye shifts a warm tint toward red and blue toward
+  violet. A real pour made that way would do the same, so this is a spec fix, not only a render fix. Measured as the
+  median hue of the saturated mid-tones in the horn's mouth against the cabinet's front panel above the woofer:
+
+  - the deck row (16641879): Dust 5 against 26, Acid 19 against 49, Ice 222 against 210; the stock horns sit on
+    their cabinets (Ember -2 against -2, Poison 128 against 121, Haze 263 against 259);
+  - the deck cover (f729451f): Dust 8 against 27, Acid 27 against 49, Ice 219 against 206;
+  - blind naming from the row: Dust's horn "red" 3/3 against "orange" (Ember's word), Acid's "orange" 2/3 against
+    "yellow", Ice's "royal blue" 3/3 against "sky blue".
+
+  So **the three deep-horn custom batches are color-matched to look like the cabinet, at 12.7 mm, at the site's
+  depth**: the caster matches each to a chip we approve against the cabinet's sheet, not to a multiple of its dye. In
+  the model, each horn-lot `deep` (reached in 10 mm) is set by front-off-tall proxies until the horn's hue is within
+  8 degrees of its cabinet's in the same render and its luminance within 10 % of the depth before:
+
+  | tint | was | now | horn hue against cabinet | horn luminance | blind naming (3 viewers) |
+  |---|---|---|---|---|---|
+  | Dust | #F25508 (4 against 25) | **#DFA934** | 25 against 25 | 0.142 against 0.152 (-7 %) | "orange" 3/3, the cabinet "orange" 3/3 |
+  | Acid | #FFB101 (14 against 50) | **#DFD710** | 52 against 50 | 0.272 against 0.265 (+3 %) | "yellow" 3/3, the cabinet "yellow" 3/3 |
+  | Ice | #2981E7 (229 against 208) | **#369BCA** | 211 against 208 | 0.054 against 0.055 (-2 %) | "royal blue" 2/3, "blue" 1/3; the cabinet "sky blue" 3/3 |
+
+  Ice passes on the coordinator's ruling: "royal blue" is the word for a deep blue at that hue, the depth the owner
+  asked for, not another color; turning it further toward cyan would make a teal horn on a sky-blue cabinet. Dust's
+  first match at full depth (#B68006) read brown; lightened slightly, it reads orange. The proxies and readings are
+  in `renders/2026-11-02/barkhorn/site-strata-F/horn-hue/`.
 - **The other five keep their stock codes** (the coordinator's reading of the ruling, 2026-11-01, which the owner may
   overrule). The ruling's intent is that no horn reads pale, and at 12.7 mm, seen through several stepped layers, these
   five read deep. The owner chose the darker colors from `link_example_strata_trucast.png`, which shows stock-code
