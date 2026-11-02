@@ -843,3 +843,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
     its own idea if buildable), each at a depth no darker than its cabinet (stock sheet if near), with luminance numbers, a line on
     the X, acoustics, cost/build and weight. No product.py default change, no site change.
   - Board v14: the tagline settled; the horn "next, options rendering"; reply bar hidden until there is a question; header 15:50.
+- 15:55 site lane: TAGLINE_NEXT = "A world of sound, in color." on r47-site-next at b633df51785290e35d06cf446ace769b26427928 (origin/main
+  an ancestor; COPY_NEXT off, the built index.html byte-identical with it off; nothing promoted or deployed). One line at 13 widths,
+  320-2560 px (22.7 px at 320, 28.2 at 390, 80 at 1920+; never below the 17 px body); screenshots in launch/tagline/. Checked 390 and
+  1440 by eye: one line, inside the gutters. (The site's hero still shows today's set: smooth horns, the old look; the new set waits
+  on the horn.) Holding.
