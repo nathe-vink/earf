@@ -876,3 +876,18 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   6 mm left at each corner; 4.89 kg); d "Strata laid flat", 29 horizontal slabs of stock 1/2 in, level terraces top and bottom, bond
   lines level across the mouth, no stacked corners (5.06 kg); c the formed smooth horn on the bronze posts. Calibration proxies (horn
   luminance = cabinet's, as a multiple of stock 1/2 in absorbance), then 0.5-scale 96-sample study frames.
+- 18:40 speaker: horn options study done (renders/2026-11-02/barkhorn/horn-study/, a6a251e7caec2901cdfc0a10cad4281c5565d669; sheets
+  sheet-ice.png 9937a2ca30c813ad38d0314415003e985c05213f, sheet-ember.png 3a82c462c61c50a86e35631e270b40b8939365d8; geometry
+  7fe39fb659dc3394a6fddcb79736d929feb2774c). The X's cause: the steps are outside a smooth air path; layer corners line up on the
+  diagonals. All four share the air path, so no step diffraction. At the cabinet's luminance the horns go pale (Ice near clear, Ember
+  pink); a, b, d would need pale custom batches in all eight colors; c (10 mm formed) works on stock in Ice (lighter than its cabinet),
+  Ember stock ~40 % darker. Cost/weight: a $1,483 + $1,650 setup, 4.18 kg; b same, 4.89 kg; c ~$1,119 + ~$1,100 tool, 3.17 kg (may ring
+  more); d ~+20 %, 5.06 kg. Lane's pick: c.
+- 18:55 blind judges (wf_93f8e057-198; designer, buyer, color specialist, skeptic; labels hidden): a today the favorite of all four,
+  overall 7.4 (color 9.0, reads as a horn 8.0, match 7.1, X 6.0); faults: navy over cobalt in Ice (clearly darker), a moderate X with a
+  bright top-right streak; in Ember a near match. a/b matched 4.8/4.3 (frosted headlamp lenses: silver in Ice, pink in Ember); d 2.4
+  (hourglass X, stair-stepped edge); c matched 3.3 with "reads as a horn" 1.8 (a flat sign or tablet with an eyeball pod and two
+  drip-like tubes). So c at matched depth fails on form; its middle depth (and the driver pod's look) decides it. Asked the lane for, in
+  Ice: a on stock 2069 1/2 in, and a at ~0.5 x the cabinet's luminance (a fair middle option for the stepped horn), plus c with a darker
+  cap or hidden cable route if honest to the build. My own measure agrees with the lane's on a (Ice horn/cabinet ~0.1, Ember ~0.25);
+  on c my box reads lighter (method), not decision-changing.
