@@ -703,3 +703,5 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   lid-closed dusk after the day; a white layer under the deck listed on board v12 "Later" as an owner option (hides bearing/motor).
 - 00:10 four-pieces: -sf-f-lid dusk queued behind the F day (day ~00:45, lid ~01:25); with the lid Mantle stands 199 mm, its label
   zone moves up 11 px to [770,458,1150,588] (label y 476); layout OK.
+- 00:25 deck v55: cover.html = speaker F cover (f729451f; /_blob/d51f532b...): all eight as lit colored glass, Poison green, Haze
+  violet, Smoke near-black; all whole; same sweep (#F0ECE5), no seam. Row of eight in F rendering (~01:20).
