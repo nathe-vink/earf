@@ -799,3 +799,13 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   F, then shared frames and close-ups; TINTS.md: the deep-horn custom batches are color-matched to look like the cabinet at 12.7 mm.
   If Dust's orange turns brown at the site depth: a depth-vs-hue trade-off for the owner. The deck's cover and colours slide show
   the off-hue horns until the new frames land (since v55/v56).
+- 12:42 speaker, deep horns (interim, not yet committed): Dust's wide render killed (PID 26098); Fog front-off-tall committed
+  (f062d5036e47095e1268e3f66a694abcdc65099d), Fog wide rendering. 25 proxies at 0.3 scale / 32 samples, my boxes; its numbers on the
+  old finals agree (Dust 4 vs 23, Ice 230 vs 209). Each candidate turns the current deep color in hue and rescales absorbance to
+  restore the luminance. Dust #F25508 -> #DFA934 (+15 deg, x0.55): hue 25 vs 25, Y -7 %, "orange" 3/3 (brown only at full depth,
+  Y 0.048). Acid #FFB101 -> #DFD710 (+15, x0.65): 52 vs 50, Y +3 %, "yellow" 3/3. Ice #2981E7 -> #369BCA (-12, x0.8): 211 vs 208,
+  Y -2 %, but "royal blue" 2/3, "blue" 1/3.
+  My call: all three pass. For Ice, "royal blue" is the depth word for a deep blue at the cabinet's hue (the owner's "Deep, like the
+  site"), not a different color; turning it further toward cyan would trade a word for a real hue mismatch (teal on sky blue). Rule
+  amended: for Ice any blue word passes with the hue within 8. Asked for the proxies, readings and the TINTS.md note committed with
+  SHAs before the go.
