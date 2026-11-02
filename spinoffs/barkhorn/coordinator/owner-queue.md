@@ -816,3 +816,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   ~11 % lighter, fine). Fog front-off-tall checked: whole, clean (margins as Ice). Go given: product.py + rebuild; after Fog's wide,
   the deck row (3328 x 1040) and cover (3840 x 1360) in F first (the deck shows the wrong horns; the site is held); then the rest of
   Fog, Dust, Acid, Ember, Poison, Haze, Smoke, Ice's five again, shared frames, close-ups.
+- Check-in 30 (14:08): no owner reply. Speaker lane: product.py with the color-matched horns (e2ceeadbe1c92b5ed02fd9d249b1bc0c897e2134),
+  variants model rebuilt (434e9ef13ad2f6992daf943d9e019b282c5da11a; carries #DFA934 / #DFD710 / #369BCA), cloud render model rebuilt
+  (a53c2aee91d4ddaf64227caa422c63dab9601746). Fog's front-off-wide still rendering (from ~12:15; last commit 13:20, not a stall). Then
+  the deck row (160 samples, ~63 min) and cover (128 samples, ~63 min) with the new horns: row ~15:30, cover ~16:30. Nothing to act on.
+  Next check-in ~17:00 (send_later).
