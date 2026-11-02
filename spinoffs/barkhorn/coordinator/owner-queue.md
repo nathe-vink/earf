@@ -712,3 +712,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   published. Lid-closed dusk ~01:25.
 - 01:25 deck v56: colours.html = speaker F row (16641879; /_blob/6d099de8...): every colored cabinet as clear tinted glass over the
   white lining, Smoke dark; all whole; alt and aside now describe F. Golden-hour room in F rendering (~02:00); four-pieces lid dusk ~01:25.
+- 01:30 deck v57: line.html = four-pieces F dusk with Mantle's lid closed (ce6d7ae8; /_blob/53825688...): the lid reads as clear green
+  glass over the deck, matching the speakers; notes say so; Mantle label y 476; effective contrast 7.0-13.4:1, corner 4.7:1. The
+  four-pieces lane is idle. Speaker golden-hour room in F ~02:00 -> home.html.

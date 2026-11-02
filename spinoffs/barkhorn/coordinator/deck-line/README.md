@@ -42,3 +42,7 @@ Mantle's label 10 px lower with its zone; 7.0 to 13.3:1 on the labels, 4.7:1 on 
 **Current (deck v54):** the colors F dusk frame (specs/spec-final2092sf-f-dusk.json; four-pieces cebd67c8, Tropos from the speaker
 lane's F build 2bf9b217; image /_blob/4ea7f045fc25019c094415bb41e7b366): Tropos as lit green glass over the white lining; Mantle and
 the lamps still stock Poison (their match is being checked). Same zones and inks; 7.0 to 13.4:1 on the labels, 4.7:1 corner note.
+
+**Current (deck v57):** the colors F dusk with Mantle's lid closed (specs/spec-final2092sf-f-lid-dusk.json; four-pieces ce6d7ae8;
+image /_blob/5382568849d7733492761d7568065ba1): the 3 mm Poison lid reads as the speakers' green; Mantle's label 11 px higher with its
+zone (y 476). 7.0 to 13.4:1 on the labels, 4.7:1 corner note. The open-lid F dusk (line-dusk-sf-f.html) is kept as an alternative.
