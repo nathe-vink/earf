@@ -717,3 +717,5 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   four-pieces lane is idle. Speaker golden-hour room in F ~02:00 -> home.html.
 - 02:00 deck v58: home.html = speaker F golden-hour room (dc4e4d5c; /_blob/cb24a6a8...): the Poison pair as sunlit green glass, both
   whole on the slide's 1920x900 crop (checked); alt and aside describe F. Ember hero in F rendering (~02:40), then the portrait.
+- Check-in 26 (01:58): its items done (v56 row, v57 line lid-closed, v58 golden-hour room). Ember hero ~02:40, then the portrait and
+  the site-set gate. Next check-in ~03:28 (send_later).
