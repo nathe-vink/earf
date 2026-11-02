@@ -728,3 +728,5 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 03:16 speaker: deck frame 5, the room portrait in F (47d127a4, 1200x1500), not on a slide (kept for the site/brand). All five deck
   frames in F: cover f729451f, row 16641879, room dc4e4d5c, hero 7bd998f3, portrait 47d127a4. Next: the site set (round-3 light
   notes folded in, a fresh 3-round gate on Ice at half size, then finals at 256 samples).
+- Check-in 27 (03:30): its items done (hero v61, portrait logged). Deck complete in F. Speaker lane on the site-set gate. Owner quiet
+  since ~23:00; open: tagline; asked about the page edits. Next check-in ~05:30 (send_later).
