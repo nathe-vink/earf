@@ -220,10 +220,10 @@ NEXT_TEXT = {   # today's words -> the drafts (each must be found exactly once i
         'acrylic, and it charges in two to three hours.',
 }
 
-# the headline, once a new one is picked (the owner, 2026-11-01: "Tagline: none: another round"): None keeps today's.
+# the headline the owner picked (2026-11-02), held: None would keep today's.
 # Set, it replaces the home h1, the debut's and the debut's preview title, on one line at every width (no-break spaces,
 # nowrap, clamp(): checked from 320 to 2560 px for "Have the world over." on d0212727, reverted in 734e3229)
-TAGLINE, TAGLINE_NEXT = 'Something in the air.', None
+TAGLINE, TAGLINE_NEXT = 'Something in the air.', 'A world of sound, in color.'   # the owner, 2026-11-02 15:48 (r46-owner-notes 8707ec61)
 
 
 def tagline_css(line):
