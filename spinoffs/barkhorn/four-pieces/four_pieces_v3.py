@@ -261,6 +261,15 @@ def main():
             sh['title'] += ', Tropos in colours F'
             json.dump(sh, open(os.path.join(SHOTS, f'v3sff-{v}.json'), 'w'), indent=1)
             print(f'v3sff-{v}')
+        if 'v3sffl' in only and v == 'dusk':  # -final-2092-sf-f-lid: Mantle's lid closed (the lid as built, 3 mm in
+            # stock 2092: the Mantle lane's proofs read it a clear mid-green beside the speakers' new Poison)
+            sh = strata_float_v3(hemisphere_v3(stock2092(strata(shot(v)))), v)
+            sh['tropos_glow'] = 40.0
+            sh['products'][0]['hide'] = []
+            sh['mantle_box'] = [0.225, 0.185, 0.199]          # 199 mm with the lid
+            sh['title'] += ', Tropos in colours F, Mantle lid closed'
+            json.dump(sh, open(os.path.join(SHOTS, f'v3sffl-{v}.json'), 'w'), indent=1)
+            print(f'v3sffl-{v}')
         if 'v3sf' in only:                    # -final-2092-sf: Hemisphere v3 and Strata Float v3
             json.dump(strata_float_v3(hemisphere_v3(stock2092(strata(shot(v)))), v),
                       open(os.path.join(SHOTS, f'v3sf-{v}.json'), 'w'), indent=1)
