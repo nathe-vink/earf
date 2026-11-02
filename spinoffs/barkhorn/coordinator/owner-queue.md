@@ -707,3 +707,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   violet, Smoke near-black; all whole; same sweep (#F0ECE5), no seam. Row of eight in F rendering (~01:20).
 - Check-in 25 (00:27): its prompt predated the tagline reversal; state now: tagline round 3 on the board, budget and colors done;
   deck v55; speaker row ~01:20, four-pieces day ~00:45 and lid-closed dusk ~01:25. Next check-in ~01:57 (send_later).
+- 00:45 four-pieces F day landed (its message said 7c3a83e0; the actual commit is e79b118d6dc34501df807a08e74864a205c81995): Tropos
+  as bright green glass, Mantle's deck dark. Built as the day alternative (specs/line-day-sf-f.html, /_blob/5d910dec...), not
+  published. Lid-closed dusk ~01:25.
