@@ -49,3 +49,24 @@ Each row gives the horn against the cabinet (median luminance), the hue differen
 - **a, stepped, with satin risers:** each layer's edge bead-blasted or sanded to about 400 grit before bonding, in place of today's edge polish. The front faces and the air path stay polished. Cost: about the same as today, or a little less, since the blast replaces a polish step. It also takes most of the X away.
 - **c, smooth, with a satin outside and a polished air path:** the formed shell bead-blasted outside with the air path masked. Cost: about $60 to $120 a horn for the masking and the blast. It also hides the pod and the pads (the "face"). The reverse, a satin air path, would keep the outside glossy and so keep the flat look: not recommended.
 - **What did not help:** a darker pod, cap and throat piece (black stock cast sheet), and bronze pads (`ice-e-mid`, `ember-e-mid`, `ice-f-mid`, `ember-f-mid`, one folder up). Seen through the tinted shell, the pads still read as two dark tubes. They are structural, so only a satin shell honestly hides them.
+
+## Round 2: c-satin with its colour fixed (2026-11-02, late)
+
+The coordinator's second blind round (wf_4a38dc3d-256) put a-satin first (6.8). c-satin came second (5.8), held back only by colour: turquoise in Ice, coral in Ember, and a little milky. This round fixes the formed horn's chip and finish, with the lighting unchanged.
+
+Each row gives the horn against the cabinet (median luminance), the hue difference and the share of saturated pixels in the mouth:
+
+| frame | horn deep | horn / cabinet Y | hue diff | saturated |
+|---|---|---|---|---|
+| ice-c-satin2 | **#0A52B8** | 0.148 / 0.582 = 0.25 | +2 | 90 % |
+| ember-c-satin2 | **#C50206** | 0.161 / 0.372 = 0.43 | 0 | 88 % |
+| ice-a-satin (round 1, for comparison) | #369BCA | 0.095 / 0.581 = 0.16 | -2 | 89 % |
+| ember-a-satin (round 1) | #E02B3A | 0.140 / 0.371 = 0.38 | -3 | 78 % |
+
+- **The chips in sheet terms** (the formed horn is 10 mm sheet):
+  - Ice #0A52B8 is a **deep custom blue batch**, about 10 % TT through 10 mm (stock 2069 3/8 in is about 64 %). It carries a little more green than a straight concentration of the dye: darker chips drifted violet (#033EB8 +8, #0021A2 +16), so Ice lands at 0.25 of its cabinet, a little lighter than a-satin's 0.16, to keep the hue.
+  - Ember #C50206 is about 11 % TT through 10 mm, roughly 1.5 to 2 times stock 2423's dye: **a custom batch** (or a deeper stock red, if TruCast makes one; not checked).
+- **The finest satin that hides the pod and the pads** is roughness 0.25, a **fine glass-bead blast, about a 400 to 600 grit finish**, on the outside, with the air path masked and left polished. On Ember proxies, 0.08 shows the pod and the pads plainly, 0.2 still shows the pads faintly, and 0.3 hides everything but begins to read milky.
+- **a-satin's pale wedge on the right wall is not a light.** Halving the horn light, moving it to the left, and a dark reflection-only card back left all left it unchanged. It is the white backdrop seen through the horn's right wall, where the light crosses the least acrylic. The only studio fix would be a darker backdrop, which would break the set, so a-satin is unchanged and both options are lit alike.
+- **c's side view in Ember** (`ember-c-side-satin2.png`), satin, deep: the flare reads plainly as a horn.
+- The sheen on both: gone. The X on c: none; on a-satin: much weaker.
