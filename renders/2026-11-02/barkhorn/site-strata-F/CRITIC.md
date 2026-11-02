@@ -50,3 +50,19 @@ smear at 48 proof samples (all fifteen passes), the deep horn's contrast with th
 the design, `asset/TINTS.md`), and grounding that light alone only partly fixed. The contact sheet is
 `contact-ice-r3.png`. The finals carry round 3's notes above and render at full size with more samples, as the
 critics asked.
+
+## Finals pass, Ice (2026-11-02): scores only, the full-size finals
+
+Fresh critics, one per frame, the image and its card only; stage 1 blind, stage 2 with the card. The back is the 384 re-render with mark variant A.
+
+| Frame | Stage 1 | Stage 2 | Notes (none a model or framing defect) |
+|---|---|---|---|
+| front-off-tall | 6.5 | 6.5 | a grey bar at the top front under the posts (the top rib's end, real geometry); the deep horn; the LED line |
+| front-off-wide | 6.0 | 6.0 | a floor shadow at odds with the key; a weak contact under the plinth; a hard highlight on the horn's terraces; the horn deeper than the cabinet (the design) |
+| side | 6.0 | 6.0 | the deep horn; the LED line clips (2.1 %) with an orange spill; cyan edges on the plinth frames; flat lining; gold posts |
+| back | 6.0 | 6.0 | the mark soft (accepted, the coordinator); the plate's small legends soft; a white highlight on the left edge; cyan plinth edges; flat lining |
+| hero-light | 6.5 | 6.5 | a weak contact shadow; the tint's blue spill across the floor; a plain sweep; dark edges at the cabinet's top |
+
+No frame under 6.0; no re-render. Every frame shows the whole speaker, uncropped (the contact sheet, `contact-ice.png`).
+
+Blind mark read on the back final at 440 px (for the record only; it doesn't gate): EA?F 35, EA?F 35, EA?F 40. No reader saw BARF.
