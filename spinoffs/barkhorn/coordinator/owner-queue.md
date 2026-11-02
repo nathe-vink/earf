@@ -828,3 +828,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   Haze +5); mean abs difference outside the horn boxes 0.31/255 (nothing else moved); all eight whole.
   Deck v63: colours.html shows the new row (/_blob/3f9eaa6e35f1891df52a569e60080626); aside: "Dust, Acid and Ice have deeper horns,
   each matched to its cabinet's color." The cover follows when it lands.
+- 15:40 board v13: the settled "Colors: F" figure is the new row (img/row-f.jpg from 6c147ca8, 1200 x 375; the old one kept as
+  scratchpad decide/img/row-f-v12.jpg); its note says the three deeper horns now match their cabinets' colors (made deeper in the
+  same dye they had drifted toward red; Dust's read as Ember); header 15:35 UTC. Tagline still the open card.
