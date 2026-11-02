@@ -861,3 +861,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   money table updated (the $50,000 split marked superseded); teaser beat 1 took the tagline. Checked the contact sheet. My calls on
   the last slots: grid post 3 and social post 3 -> "Eight colors, Ember to Smoke."; the teaser keeps the tagline once, on the end card
   (beat 6), and beat 1 opens on "Eight colors, Ember to Smoke."; then no "[LINE: owner's pick]" should remain.
+- 16:04 brand lane: last slots filled (r47-brand 44f049e6d98b6e73d87a9946623b1847264a008b; slot text dd696b7625942aa6b97c6152e14a17413faab85a):
+  grid post 3 and social post 3 "Eight colors, / Ember to Smoke." (post 3's Fog speaker now whole, clear of the title); the teaser's
+  beat 1 opens on "Eight colors, Ember to Smoke.", beat 6 (the hero pull-out of the eight) keeps the tagline once, beat 7 (the globe
+  end card: date and venue) no line. "[LINE: owner's pick]" 0 times in the repo. Checked edition2-slots.jpg. Edition 2 done; holding.
