@@ -891,3 +891,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   Ice: a on stock 2069 1/2 in, and a at ~0.5 x the cabinet's luminance (a fair middle option for the stepped horn), plus c with a darker
   cap or hidden cable route if honest to the build. My own measure agrees with the lane's on a (Ice horn/cabinet ~0.1, Ember ~0.25);
   on c my box reads lighter (method), not decision-changing.
+- 19:30 OWNER: "The darker option in those examples looks better I think, except like to smooth one also, granted it looks flattened
+  and not coned. But they have a metallic sheen to them which looks cheap and bad." Saved verbatim first (README 741149d5; time fixed
+  9ccabeff). Read as: keep the horns deep (today's depth; matched-luminance dropped); the smooth formed horn stays in the running but
+  must read as a cone; the silvery, chrome-like sheen must go (studio and/or finish). Matches the blind judges (deep stepped horn
+  the favorite; c "a flat sign"). Lane: finish what's rendering, skip c/a on stock; c deep lit to show the flare (side view in Ember),
+  pod/cables honest; find the sheen's cause and test a studio fix and a finish fix (satin risers / satin outside), color kept rich;
+  deliverables a deep and c deep (Ice, Ember) with the sheen fixed, finish variants only where they beat the studio fix, two
+  middle-depth references in Ice. Then: a second blind round, the board card, one question to the owner (stepped or smooth).
