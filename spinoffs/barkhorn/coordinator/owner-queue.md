@@ -848,3 +848,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   320-2560 px (22.7 px at 320, 28.2 at 390, 80 at 1920+; never below the 17 px body); screenshots in launch/tagline/. Checked 390 and
   1440 by eye: one line, inside the gutters. (The site's hero still shows today's set: smooth horns, the old look; the new set waits
   on the horn.) Holding.
+- 15:57 brand lane: Brand Book edition 2 (draft) with "A world of sound, in color." at r47-brand dd4a00d734d687e0b974cceaf3babd9c4680de87
+  (on aaf7d6068e985e9648d4f0605d5f3358083012b3, both on the revert 640d6469): cover, type scale, voice and usage note (break after the
+  comma only), the record retires "Something in the air."; mockups (social, launch grid post 9, one-pager, invitation card and email,
+  partner brief, Milan poster, teaser beat 6) and copy files. Contact sheet checked. Nothing published.
+  My answers: retire "Eight things in the air." (it keeps the retired phrase alive; use the deck's "Eight colors, Ember to Smoke.";
+  the naming idea "things the air holds" stays; the deck never carried the line). The one-pager's ask goes to the deck's $55,000 table
+  (v64 ask slide); the Kickstarter beat-1 / post-3 "[LINE: owner's pick]" slots take the tagline (once per screen).
