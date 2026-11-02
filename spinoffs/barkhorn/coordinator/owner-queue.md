@@ -736,3 +736,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   horn and (c) ~30 % middle both break it); contrast is the design; a middle depth noted in TINTS.md as the fallback if the owner asks.
   Mid-stone backdrop for the back view declined. Round 3 (stronger light through the horn, denser contact shadows, softer key, falloff,
   hero WB 0.5) then finals at 256.
+- 04:05 speaker site-set gate in F (Ice, half size) ended at round 3 below 7.0: front-off-tall 6.0, front-off-wide 5.5, hero-light
+  5.5, side 5.0, back 5.0 (contact-ice-r3.png 486a3ac06b6130dbaf4449da6f2286794b939176; round-3 notes in the finals at
+  90c0f3fe766eee1aba8ae066c69f78ee1245ae97). The blocker the critics named most is denoiser smear at proof samples. Per my rule
+  (256 if the critics pass, 384 if not): finals at 384 for tall, wide, side and back, 256 for hero-light (the 2-hour job limit);
+  about 5.7 h a tint, about 45 h for all eight. Asked for one contact sheet a tint with full SHAs, whole uncropped speakers checked
+  before moving on, and one scores-only critic pass on Ice's full-size finals (no more rounds unless a frame is under 6.0 or has a
+  real defect). Site code untouched, nothing deployed.
