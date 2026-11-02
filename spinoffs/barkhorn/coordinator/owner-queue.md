@@ -719,3 +719,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   whole on the slide's 1920x900 crop (checked); alt and aside describe F. Ember hero in F rendering (~02:40), then the portrait.
 - Check-in 26 (01:58): its items done (v56 row, v57 line lid-closed, v58 golden-hour room). Ember hero ~02:40, then the portrait and
   the site-set gate. Next check-in ~03:28 (send_later).
+- 02:58 deck v61: tropos.html = speaker F Ember hero (7bd998f3; /_blob/18710da1...): clear red glass over the white lining, whole,
+  2:3 = the 720x1080 box. The publish warned that v59/v60 were saved from the deck's page (~02:28): my tropos.html replaced whatever
+  the page had (unknown; can't read the old version) -> told the owner. The page edit to line.html: the Tropos h3 moved out of its
+  group onto Mantle's label (overlapping), the label halos and the title's text-wrap dropped, the corner note made italic, alt text
+  cut. Taken as accidental except the italic: deck v62 restores v57's line.html with the italic note (the page's version kept as
+  scratchpad deck/line-page-edit-v60.html). All five deck pictures now in colors F. Portrait (last frame) ~03:15, then the site gate.
