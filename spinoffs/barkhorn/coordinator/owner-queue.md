@@ -689,3 +689,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 00:05 deck v54: line.html = four-pieces -sf-f dusk (cebd67c8; /_blob/4ea7f045...): Tropos in F reads as lit green glass, woofers
   showing; both speakers whole; Mantle's deck (stock 2092) and the lamps unchanged, so the notes say their match is being checked.
   Effective contrast 7.0-13.4:1, corner 4.7:1. Mantle lane has the paths. Day ~00:45.
+- 00:15 tagline round 3 (wf_334f3225-e4a: five writers on sound, color and light, 50 lines, three judges, the owner's own line
+  judged too): five + the owner's line on board v11 (same URL), reply bar for the tagline only. 1 "A world of sound, in color." (my
+  pick; avg 6.33; no one found using the whole line; Disney's World of Color nearby; "in color" faintly echoes "Cast in color."),
+  2 "The world, a shade louder." (6.33), 3 "A world of sound and shade." (5.67), 4 "Sound, in its best light." (5.33; Red Dot concept
+  "Sound in the Light"), 5 "An ear for color." (6.0; 2002 Washington Post headline). The owner's "A world of sound": 5.0; a stock
+  phrase in audio (Dolby 2018 "The World of Sound", GN Hearing 2023 "World of Sound", Smithsonian Folkways catalog, an expired
+  1977 trademark); leaves out color and light. Not a trademark search. Asking the owner in plain text.
