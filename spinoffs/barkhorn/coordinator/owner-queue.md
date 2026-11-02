@@ -920,3 +920,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   hides the pod and pads (Ice 0.376/0.582 but hue -13: teal, needs its own bluer chip; Ember 0.226/0.372, -5). c's side view reads
   plainly as a horn. Stock 2069 alone gives a its middle depth (0.45). Checked the sheet and the satin frames by eye: both good; c
   lighter than a. Blind round 2 running (wf_4a38dc3d-256: 5 judges, one briefed with the owner's notes).
+- 21:10 blind round 2 (wf_4a38dc3d-256; designer, buyer, color, skeptic blind; one judge briefed with the owner's two notes):
+  a-satin (stepped, satin risers) the favorite of all four blind judges, overall 6.8 (hue and depth of the cabinet, reads as a horn,
+  X mostly gone; faults: busy rings, a pale wedge on the short right wall); c-satin (smooth, satin outside) the owner-brief judge's
+  pick and runner-up for three, 5.8 (a real cone, no X/steps/glint; held back only by color: lighter, turquoise in Ice ~196 vs 211-216,
+  coral in Ember; satin read as milky by two); a-studio 4.0, c-studio 2.6. Asked the lane for c-satin deep (hue within 5 of the cabinet,
+  luminance near a-satin's; Ice its own bluer chip; the finest satin that still hides the pod), a-satin with the right-wall wedge tamed if
+  honest, c's side view in satin deep; then the uplight. Then the board card: stepped (satin risers) vs smooth (satin outside), my pick.
