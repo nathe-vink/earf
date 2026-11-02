@@ -902,3 +902,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - Check-in 31 (19:32, fired late): its items already done (study checked, judges run, owner answered at 19:30, lane briefed, board v15
   "What you said" and "What's rendering" updated, header 19:30). Next check-in ~22:30 (send_later), a safety net for the revised horn
   renders.
+- 20:38 OWNER: "The light in the base is meant to go upward through the speaker. The intent is to provide a way to light up the speaker
+  from below, like in the underlit promo images" Saved verbatim first (README 41581a5734c85736672da2974ff8bca6a67f7ab0). Read as: the
+  plinth's light is an uplight through the speaker, like the uplit set (renders/2026-10-18/barkhorn/uplight31/: the speaker on a light,
+  the cabinet glowing from inside, its color fanning up the wall); BASES.md (2026-11-01) has it the wrong way round (a strip under the
+  plinth facing the floor, a warm line under the lowest step). Lane briefed (after the horn frames): an uplight inside the cabinet's
+  footprint under the bottom (as uplight31's flat panel on a lens 10 mm under it); past the bottom batts via the walls' edges, the port
+  strip, or an acoustically honest bottom window; day and dusk/night frames in Ice and Ember (+ Smoke at night) with the current deep
+  horn; BASES.md rewritten; power, heat, visible share of the light. Deck/site lit pictures to follow once horn and light are settled.
