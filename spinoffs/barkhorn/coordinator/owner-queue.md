@@ -749,3 +749,15 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   horn reads royal blue now, the cabinet a lighter clear blue over the white lining, a blue pool on the floor. Front-off-wide
   rendering (shot f885a58d41fa9e79b87fbdda783608897c9c6159, ~95 min, to ~06:36), then side, back and hero-light. The lane's order:
   Ice, Dust, Acid, Fog, Ember, Poison, Haze, Smoke, then the shared frames and the three close-ups. Next check-in ~08:30 (send_later).
+- Check-in 29 (08:33): no owner reply (tagline round 3 and the page-edit question still open). Speaker lane: Ice front-off-wide
+  b1d0562a3d7afe4422637b4e25c2acb7dd3fcb9a (1800 x 1200), side a5302836faced49c7efb21975fff4873d522cab2 (1000 x 1250) and back
+  c4d8bd45670ab5eccbe1be7527cdd1d63c34f48e (880 x 1100) landed, all 384 samples; hero-light rendering (~09:16). Part boxes from the
+  reports: the whole speaker is in every frame (smallest margin 91 px, the back's bottom). Tall, wide and side look right by eye.
+  The back has two problems:
+  1. Its raised mark reads "BARF" at phone size. Blind test wf_227dca62-b31, 3 readers per size, not told the word: 880 px EARF
+     3/3 (0.6-0.7, BARF runner-up); 440 px BARF 3/3; 330 px BARP 3/3. Cause: F's white lining. In finals31 (black lining) the
+     letters read white on a dark band; now dark blue relief on light blue, and the shading closes the E into a B.
+  2. Its report has finish: null; the other three went through the finish pass.
+  Asked the lane to fix both on the render side (light, camera, how the etch reads; not the model), pass a blind read at 440 and
+  330 px, re-render Ice's back before Dust, and check Smoke's back separately. If the render can't get there: a design option for
+  the owner (e.g. a dark patch in the lining behind the mark), since the mark and lining are the owner's to sign.
