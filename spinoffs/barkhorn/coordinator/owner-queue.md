@@ -910,3 +910,13 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   footprint under the bottom (as uplight31's flat panel on a lens 10 mm under it); past the bottom batts via the walls' edges, the port
   strip, or an acoustically honest bottom window; day and dusk/night frames in Ice and Ember (+ Smoke at night) with the current deep
   horn; BASES.md rewritten; power, heat, visible share of the light. Deck/site lit pictures to follow once horn and light are settled.
+- 20:39 speaker: the deep round (renders/2026-11-02/barkhorn/horn-study/deep/, 90a4ef306c3ebe8c745d5913ecae56741889fdf8; sheet
+  9a99fee4a24c76c70c020097ae50bfdaac21b079; earlier e534ac98, 0a80722a, e997f7b1, e2391bd7, 99230c81, 821f3f70). The sheen's cause: on
+  the stepped horn it is the horn itself (22 polished layer edges + light coming back out of the stack), so no studio change fixes it;
+  on the smooth horn the flat look was the 260 W rim light from behind (off, the walls shade to the throat: a cone). Studio fix on
+  every frame (cards, horn/fill specular, rim off; dark flags). Satin beats studio on both: a-satin (risers bead-blasted/sanded ~400
+  grit, faces and air path polished; about today's cost or a little less): sheen gone, rich color, X much weaker (Ice 0.095/0.581, 89 %
+  saturated; Ember 0.140/0.371). c-satin (satin outside, air path masked polished; ~$60-120 a horn): no sheen, no X, reads as a cone,
+  hides the pod and pads (Ice 0.376/0.582 but hue -13: teal, needs its own bluer chip; Ember 0.226/0.372, -5). c's side view reads
+  plainly as a horn. Stock 2069 alone gives a its middle depth (0.45). Checked the sheet and the satin frames by eye: both good; c
+  lighter than a. Blind round 2 running (wf_4a38dc3d-256: 5 judges, one briefed with the owner's notes).
