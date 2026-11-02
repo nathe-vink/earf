@@ -775,3 +775,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   My call: A for every back (no misread; reads EARF at full size; "?" at phone size is fine for a back view); no model change and
   nothing to the owner. Re-render Ice's back with A, contact sheet + critic pass (mark read kept for the record, not a gate),
   then Dust. If a close-up shows the back plate, frame the mark into it and blind-read it at 440 px.
+- 09:52 speaker: Ice complete. Back with variant A at 384 (7aae3659c97341b485dd859309b33d996215db7d, blob
+  fd47a6e65bfb6b735f11898a5c667e177ca106fb, finish on); A is the back setup for all tints (4f05e0be0838683f617a5bafc5c31cb998b6a752).
+  Contact sheet 58c6e33f17eb20921264a85822bf788844b3666e (blob 9a59f4fa166556459295e06f5480b4e2e01bc364): checked, all five whole and
+  uncropped, glare gone. Critic pass at full size (03b97f1da57bb151643c5dd356ae6aa93a61abd3): tall 6.5, wide 6.0, side 6.0, back 6.0,
+  hero-light 6.5; no frame under 6.0, no defect; notes are look notes. Back mark at 440 px: EA?F x3, no BARF. No close-up shows the
+  back plate, so the close-ups stay as planned. Dust started (front-off-tall at 384).
+  My check: the side's backdrop is the odd one out. Mean backdrop luminance (3 corner/wall patches): tall ~215, wide ~237, back ~212,
+  hero-light ~235, side ~166. Asked the lane to lift the side's backdrop to ~215 (backdrop light only), proxy-check it before Dust's
+  side, and re-render Ice's side at the end of the run. The hero-light's cooler white stays (set on purpose in round 3).
