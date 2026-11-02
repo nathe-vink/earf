@@ -40,10 +40,10 @@
   "radius": 3.6,
   "height": 9.0,
   "contact": {
-   "strength": 4.0,
-   "distance_m": 0.45,
-   "core_strength": 7.0,
-   "core_distance_m": 0.015
+   "strength": 5.0,
+   "distance_m": 0.3,
+   "core_strength": 10.0,
+   "core_distance_m": 0.025
   },
   "flags": [
    {
@@ -236,8 +236,8 @@
   "kick": {
    "type": "area",
    "size_m": [
-    1.2,
-    1.8
+    1.6,
+    2.4
    ],
    "orbit": {
     "azimuth_deg": 100,
@@ -249,7 +249,7 @@
     0.0,
     0.6
    ],
-   "irradiance": 2.6,
+   "irradiance": 1.8,
    "color": "#FFF8F0",
    "receivers": [
     "right",
@@ -296,7 +296,7 @@
     -2.0,
     2.0
    ],
-   "strength": 0.4,
+   "strength": 0.7,
    "color": "#FFFFFF",
    "diffuse": 0.0,
    "ramp": {
@@ -307,7 +307,7 @@
     ],
     "values": [
      1.0,
-     0.25
+     0.6
     ]
    }
   },
@@ -358,7 +358,7 @@
     -0.1,
     0.9
    ],
-   "strength": 1.2,
+   "strength": 1.8,
    "color": "#FFFFFF",
    "diffuse": 0.0
   },
@@ -527,7 +527,7 @@
     -0.4,
     0.0
    ],
-   "irradiance": 0.3,
+   "irradiance": 0.15,
    "color": "#FFF0E2",
    "receivers": [
     "sweep"
@@ -632,8 +632,8 @@
     6.0
    ],
    "position": [
-    -1.0,
-    -2.0,
+    -1.6,
+    -2.4,
     4.5
    ],
    "target": [
@@ -641,7 +641,7 @@
     0.5,
     0.0
    ],
-   "irradiance": 0.2,
+   "irradiance": 0.35,
    "spread_deg": 80,
    "color": "#FFF4E8",
    "specular": 0.0,
@@ -714,8 +714,8 @@
   "white_in": 240,
   "white_out": 236,
   "contrast": 0.28,
-  "clarity": 0.05,
-  "sharpen": 0.08,
+  "clarity": 0.02,
+  "sharpen": 0.04,
   "sharpen_px": 0.7,
   "grain": 1.5,
   "grain_px": 1.0

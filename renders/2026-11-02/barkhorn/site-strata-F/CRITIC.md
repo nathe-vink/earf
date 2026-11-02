@@ -34,3 +34,19 @@ depth against an F cabinet is a material question.
 of ten passes, and two rounds of light through it barely moved it (median 33 to 59 against 130 to 150). Options:
 keep it as the design, stock 2069 at 1/2 in (the pale horn "Deep, like the site" ruled out), or a middle depth
 (about 30 % through 12.7 mm) for the three deep horns. Finals wait on the answer.
+
+## Round 3 (proofs `*-ice-r3`, fresh critics): the last round; carried into the finals
+
+| frame | r1 | r2 | r3 | if fixed | main notes | carried into the finals (`_siteF_round3`) |
+|---|---|---|---|---|---|---|
+| front-off-tall | 5.0 | 5.5 | **6.0** | 7.4 | the light through the cabinet onto the floor "the right idea"; the front washed to pale cyan (B 250) beside the navy horn; right background a white void | key 2.9, topline 0.9; horn light 8.0, nearer the mouth; a black card cutting the right sweep; the through light smaller and stronger; background evened; kick 1.1. Not taken: rim 450 W (the side view's 240 W blew its throat) |
+| front-off-wide | 5.0 | 5.5 | 5.5 | 7.3 | a grey wedge front-left from no source; no contact on the right; the side panel clipping; horn flat blue | contact 5.0 / core 10; wash 0.15; scrim 0.7, ramp 1.0 to 0.6; the floor lamp moved to fill front-left; kick 1.8, larger; sharpen 0.04 |
+| hero-light | 5.5 | 6.0 | 5.5 | 7.5 | still no contact (239 under the plinth); the blue cast a long smear into the type area; wall and floor alike; a green cast | contact 7.0 / core 30 at 0.012; key at 60 deg, 3.0 m; bg lamps lower; scrim forward, 4.2; tint -0.5 |
+| side | 5.5 | 5.0 | 5.0 | 7.0 | **the horn's throat a flat white wedge (248)** from the 240 W light behind it; the side panels matte boards; no contact | horn 3.0, rim 120 W; side sheen at its mirror position, 2.2, ramp 0.2 to 1.0; contact core 3.6; bg-right 0.45; fill 1.6; topline and scrim softer |
+| back | 5.5 | 5.0 | 5.0 | 6.8 | the cabinet's back flat opaque panels; the mark barely legible (14 levels); short contact | the light behind the cabinet higher and 7.0; fill 1.3; contact longer; key lower and larger; the etch light grazing, 5.0; the black card moved for the left wall. Not taken: a greige backdrop, a lower camera |
+
+**Result:** no frame type reached 7.0; every "if fixed" is 6.8 to 7.5. What holds them, per the critics: the denoiser's
+smear at 48 proof samples (all fifteen passes), the deep horn's contrast with the F cabinet (the coordinator's call:
+the design, `asset/TINTS.md`), and grounding that light alone only partly fixed. The contact sheet is
+`contact-ice-r3.png`. The finals carry round 3's notes above and render at full size with more samples, as the
+critics asked.

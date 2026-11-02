@@ -40,10 +40,10 @@
   "radius": 2.8,
   "height": 5.5,
   "contact": {
-   "strength": 1.4,
-   "distance_m": 0.35,
-   "core_strength": 2.6,
-   "core_distance_m": 0.05
+   "strength": 1.8,
+   "distance_m": 0.4,
+   "core_strength": 3.6,
+   "core_distance_m": 0.025
   },
   "flags": [
    {
@@ -131,8 +131,8 @@
     2.0
    ],
    "orbit": {
-    "azimuth_deg": 40,
-    "elevation_deg": 15,
+    "azimuth_deg": 20,
+    "elevation_deg": 18,
     "distance_m": 4.0
    },
    "target": [
@@ -140,7 +140,7 @@
     0.0,
     0.6
    ],
-   "irradiance": 1.1,
+   "irradiance": 1.6,
    "color": "#FFF2E6",
    "specular": 0.3
   },
@@ -277,7 +277,7 @@
     -2.0,
     2.0
    ],
-   "strength": 0.9,
+   "strength": 0.6,
    "color": "#FFFFFF",
    "diffuse": 0.0,
    "ramp": {
@@ -326,8 +326,8 @@
   "topline": {
    "type": "panel",
    "size_m": [
-    1.8,
-    0.5
+    2.4,
+    0.8
    ],
    "position": [
     -1.0,
@@ -339,7 +339,7 @@
     -0.1,
     0.9
    ],
-   "strength": 1.2,
+   "strength": 0.7,
    "color": "#FFFFFF",
    "diffuse": 0.0
   },
@@ -350,16 +350,16 @@
     2.2
    ],
    "position": [
-    2.2,
-    -1.2,
-    0.7
+    2.0,
+    -1.6,
+    0.8
    ],
    "target": [
     0.28,
     -0.1,
     0.55
    ],
-   "strength": 1.1,
+   "strength": 2.2,
    "color": "#FFFFFF",
    "diffuse": 0.0,
    "ramp": {
@@ -369,8 +369,8 @@
      1.6
     ],
     "values": [
-     0.45,
-     0.8
+     0.2,
+     1.0
     ]
    }
   },
@@ -418,7 +418,7 @@
     0.0,
     1.12
    ],
-   "power_w": 240,
+   "power_w": 120,
    "color": "#FFFFFF",
    "diffuse": 0.1,
    "receivers": [
@@ -443,10 +443,10 @@
     0.0,
     1.12
    ],
-   "irradiance": 6.0,
+   "irradiance": 3.0,
    "color": "#FFF8F0",
    "spread_deg": 40,
-   "specular": 1.0
+   "specular": 0.6
   },
   "paper": {
    "type": "area",
@@ -554,7 +554,7 @@
     6.0,
     1.0
    ],
-   "irradiance": 0.2,
+   "irradiance": 0.45,
    "color": "#FFF4E8",
    "specular": 0.0,
    "receivers": [

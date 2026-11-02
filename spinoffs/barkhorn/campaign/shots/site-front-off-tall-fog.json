@@ -117,6 +117,23 @@
     ],
     "reflect_only": true,
     "color": "#080808"
+   },
+   {
+    "center_m": [
+     1.9,
+     -0.6,
+     1.2
+    ],
+    "size_m": [
+     2.0,
+     2.5
+    ],
+    "normal": [
+     -0.9,
+     0.4,
+     0.0
+    ],
+    "color": "#060606"
    }
   ],
   "color": "#F7F0E8"
@@ -138,7 +155,7 @@
     0.0,
     0.9
    ],
-   "irradiance": 3.8,
+   "irradiance": 2.9,
    "color": "#FFF5E8",
    "spread_deg": 50
   },
@@ -248,7 +265,7 @@
     0.0,
     0.6
    ],
-   "irradiance": 1.6,
+   "irradiance": 1.1,
    "color": "#FFF8F0",
    "receivers": [
     "right",
@@ -357,7 +374,7 @@
     -0.1,
     0.9
    ],
-   "strength": 1.6,
+   "strength": 0.9,
    "color": "#FFFFFF",
    "diffuse": 0.0
   },
@@ -451,16 +468,16 @@
     1.6
    ],
    "position": [
-    0.6,
-    -1.5,
-    1.7
+    0.5,
+    -1.4,
+    1.45
    ],
    "target": [
     0.05,
     0.0,
     1.12
    ],
-   "irradiance": 6.5,
+   "irradiance": 8.0,
    "color": "#FFF8F0",
    "spread_deg": 40,
    "specular": 0.6
@@ -548,7 +565,7 @@
     4.5,
     0.6
    ],
-   "irradiance": 1.4,
+   "irradiance": 1.8,
    "color": "#FFF4E8",
    "specular": 0.0,
    "receivers": [
@@ -594,7 +611,7 @@
     5.5,
     4.7
    ],
-   "irradiance": 2.6,
+   "irradiance": 2.2,
    "color": "#FFF0E2",
    "specular": 0.0,
    "receivers": [
@@ -651,8 +668,8 @@
   "through": {
    "type": "area",
    "size_m": [
-    0.25,
-    0.25
+    0.12,
+    0.12
    ],
    "orbit": {
     "azimuth_deg": 165,
@@ -664,7 +681,7 @@
     -0.35,
     0.0
    ],
-   "irradiance": 3.0,
+   "irradiance": 4.5,
    "color": "#FFF8F0"
   }
  },

@@ -431,7 +431,47 @@ def site(frame, tint):
     _site_round3(s, frame)
     _siteF_round1(s, frame)
     _siteF_round2(s, frame)
+    _siteF_round3(s, frame)
     return s
+
+
+def _siteF_round3(s, frame):
+    """The fresh gate's round 3 (2026-11-02; CRITIC.md), carried into the finals (no further critic round): the
+    clipped light through the side view's horn pulled back, the cabinets' fronts off clipping, the contact denser, the
+    backgrounds evened. The deep horn's contrast stays (the coordinator: the design)."""
+    L = s['lights']; c = s['set'].setdefault('contact', {})
+    if frame == 'front-off-tall':
+        L['key']['irradiance'] = 2.9; L['topline']['strength'] = 0.9         # the front off clipping (pale cyan)
+        L['horn'].update(irradiance=8.0, position=[0.5, -1.4, 1.45])
+        s['set']['flags'].append({'center_m': [1.9, -0.6, 1.2], 'size_m': [2.0, 2.5], 'normal': [-0.9, 0.4, 0.0], 'color': '#060606'})
+        L['through'].update(size_m=[0.12, 0.12], irradiance=4.5)
+        L['bg-left']['irradiance'] = 1.8; L['wall_left']['irradiance'] = 2.2; L['kick']['irradiance'] = 1.1
+    elif frame == 'front-off-wide':
+        c.update(strength=5.0, distance_m=0.30, core_strength=10.0, core_distance_m=0.025); L['wash']['irradiance'] = 0.15
+        L['scrim'].update(strength=0.7); L['scrim']['ramp'] = {**L['scrim']['ramp'], 'values': [1.0, 0.6]}
+        L['floor'].update(irradiance=0.35, position=[-1.6, -2.4, 4.5])     # the grey wedge front-left
+        L['kick'].update(irradiance=1.8, size_m=[1.6, 2.4])
+        L['topline']['strength'] = 1.8
+        s['finish'].update(sharpen=0.04, clarity=0.02)
+    elif frame == 'hero-light':
+        c.update(strength=7.0, distance_m=0.25, core_strength=30.0, core_distance_m=0.012)
+        L['key'].update(size_m=[3.0, 3.0]); L['key']['orbit']['elevation_deg'] = 60   # the blue cast pools near the plinth
+        L['bg-left']['irradiance'] = 1.8; L['bg-right']['irradiance'] = 0.9
+        L['scrim'].update(position=[0.1, -0.5, 2.6], irradiance=4.2)
+        s['render']['white_balance_tint'] = -0.5
+    elif frame == 'side':
+        L['horn'].update(irradiance=3.0, specular=0.6); L['rim']['power_w'] = 120     # the blown white wedge in the throat
+        L['sidesheen'].update(strength=2.2, position=[2.0, -1.6, 0.8])
+        L['sidesheen']['ramp'] = {**L['sidesheen']['ramp'], 'values': [0.2, 1.0]}
+        c.update(strength=1.8, distance_m=0.4, core_strength=3.6, core_distance_m=0.025)
+        L['bg-right']['irradiance'] = 0.45
+        L['fill'].update(irradiance=1.6); L['fill']['orbit'].update(azimuth_deg=20, elevation_deg=18)
+        L['topline'].update(strength=0.7, size_m=[2.4, 0.8]); L['scrim']['strength'] = 0.6
+    elif frame == 'back':
+        L['cab-back'].update(irradiance=7.0, position=[-0.25, 0.6, 1.0]); L['fill']['irradiance'] = 1.3
+        c.update(distance_m=0.3); L['key']['size_m'] = [1.6, 1.2]; L['key']['orbit']['elevation_deg'] = 22
+        L['etch-rake'].update(irradiance=5.0, position=[0.32, -0.12, 0.84], size_m=[0.6, 0.03])
+        s['set']['flags'][-2].update(center_m=[-0.8, 0.3, 0.9], size_m=[1.6, 2.2])
 
 
 def _siteF_round2(s, frame):
