@@ -10,7 +10,7 @@ analog, no vocal, that lands its last note on the end card at 21.5 s. Until then
 
 | Beat | Time | Picture | Move | Type |
 |---|---|---|---|---|
-| 1 | 0.0–3.2 s | Tropos in Ember alone in the dark (`red-studio.jpg`) | fade up from black, push in 10% | EARF · San Francisco; "A world of sound, in color." |
+| 1 | 0.0–3.2 s | Tropos in Ember alone in the dark (`red-studio.jpg`) | fade up from black, push in 10% | EARF · San Francisco; "Eight colors, Ember to Smoke." |
 | 2 | 3.0–7.7 s | Tropos in Acid, whole, cover off (`book/img/amber-studio-light.jpg`) | a slow push, 4% (the site's turn sprite crops the cabinet, so it is out) | Tropos · the horn, formed from its own acrylic; "The oldest amplifier is a shape." |
 | 3 | 7.5–11.7 s | The eight lit from below on a concrete wall (`facade.jpg`) | a slow pan left to right | "Put a light under it." |
 | 4 | 11.5–15.7 s | The eight tints in their elements (`*-habitat.jpg`) | a cut every half second, a slight push on each | 01 Ember … 08 Smoke |

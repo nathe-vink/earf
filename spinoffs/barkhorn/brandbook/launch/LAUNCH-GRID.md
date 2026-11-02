@@ -10,7 +10,7 @@ alt text until the real pieces are photographed. Mockup: `out/launch-grid.png` (
 |---|---|---|---|---|
 | 1 | Wed 20 Jan | `red-studio-1200.jpg` | It played. | Tuesday night, a pair of Tropos played for the first time. Thank you for coming. [If the room goes ahead:] The room is open Thursday to Sunday, 1 to 8 pm, for the next eight weeks. |
 | 2 | Fri 22 Jan | `green-habitat-portrait.jpg` | Bottle green. Keep out of reach. | 04 Poison. One of eight colors, cast all the way through. All eight are in the room this week, as samples you can hold up to the window. |
-| 3 | Sun 24 Jan | `ice-studio-light.jpg` (whole speaker, cover off) | [LINE: owner's pick] | A Tropos cabinet: two 20 mm walls of tinted cast acrylic, cemented. Nothing is painted on, so nothing wears off. |
+| 3 | Sun 24 Jan | `ice-studio-light.jpg` (whole speaker, cover off) | Eight colors, Ember to Smoke. | A Tropos cabinet: two 20 mm walls of tinted cast acrylic, cemented. Nothing is painted on, so nothing wears off. |
 | 4 | Wed 27 Jan | `bar-decks.jpg` | One coin, one song. | Everyone who comes in gets a coin. Hand it in with a song, and it goes into the column at the decks. The column is the queue. |
 | 5 | Fri 29 Jan | `lamp-orb.jpg` (cordless) | Goes where the conversation is. | Core is cordless. It runs from three standard LiFePO4 cells in its base: about five hours a charge at full brightness, longer dimmed, and two to three hours to charge. When the cells tire, you change the cells, not the lamp. |
 | 6 | Sun 31 Jan | `bar-listening.jpg` | One album, start to finish. | This week's Session: [Album] by [Artist], start to finish, in the listening room. Six chairs. No talking. Ask at the room for a place. |
