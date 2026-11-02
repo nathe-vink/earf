@@ -426,6 +426,10 @@ def site(frame, tint):
     if frame == 'back':
         # (its first proof put the plinth's near corner on the frame's bottom edge: a little wider)
         s['camera']['lens_mm'] = round(s['camera']['lens_mm'] * 0.9, 1)
+        # finals31's back rig had no finish block, so the backs skipped the finish the other frames get (the
+        # coordinator caught it on Ice's back final, 2026-11-02): the same pass
+        s['finish'] = {'enabled': True, 'white_in': 236, 'white_out': 236, 'contrast': 0.2, 'clarity': 0.05,
+                       'sharpen': 0.3, 'sharpen_px': 0.7, 'grain': 1.5, 'grain_px': 1.0}
     _site_round1(s, frame)
     _site_round2(s, frame)
     _site_round3(s, frame)
