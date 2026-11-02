@@ -57,6 +57,13 @@
    "absorb": "#F0EEEA",
    "glow": 21.0,
    "glow_color": "#FFCEA6"
+  },
+  "uplight-wash": {
+   "preset": "frosted",
+   "color": "#F4F2EE",
+   "absorb": "#F0EEEA",
+   "glow": 188.0,
+   "glow_color": "#FFCEA6"
   }
  },
  "assign": [
@@ -95,6 +102,10 @@
   {
    "match": "base-uplight-panel",
    "material": "uplight-panel"
+  },
+  {
+   "match": "cabinet-wash",
+   "material": "uplight-wash"
   }
  ],
  "flavours": {
@@ -1708,6 +1719,9 @@
    "base-uplight-channel",
    "base-uplight-panel",
    "base-uplight-plate"
+  ],
+  "Cabinet wash": [
+   "cabinet-wash"
   ],
   "Outriggers": [
    "base-outriggers",
