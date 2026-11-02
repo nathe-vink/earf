@@ -2,8 +2,8 @@
  "shot": "spinoffs/barkhorn/campaign/shots/site-back-ice.json",
  "image": "renders/2026-11-02/barkhorn/site-strata-F/back-ice.png",
  "seconds": {
-  "build": 31.3,
-  "render": 1589.6
+  "build": 31.7,
+  "render": 1624.7
  },
  "samples": 384,
  "size": [
@@ -1613,5 +1613,19 @@
    ],
    "depth_m": 2.823
   }
+ },
+ "finish": {
+  "white_in": 236,
+  "white_out": 236,
+  "peak": 251.0,
+  "contrast": 0.2,
+  "clarity": 0.05,
+  "sharpen": 0.3,
+  "sharpen_px": 0.7,
+  "grain": [
+   1.5,
+   1.0
+  ],
+  "gain": 1.0
  }
 }
