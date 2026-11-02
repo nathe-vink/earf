@@ -428,7 +428,54 @@ def site(frame, tint):
         s['camera']['lens_mm'] = round(s['camera']['lens_mm'] * 0.9, 1)
     _site_round1(s, frame)
     _site_round2(s, frame)
+    _site_round3(s, frame)
     return s
+
+
+def _site_round3(s, frame):
+    """The Ice gate's third round (2026-11-01, renders/2026-11-01/barkhorn/site-strata/CRITIC.md): its notes, logged but
+    not applied then, carried into the fresh gate in colors F (the coordinator, 2026-11-02). Light, set and camera only."""
+    L = s['lights']; c = s['set'].setdefault('contact', {})
+    if frame == 'front-off-tall':
+        L['edge']['power_w'] = 0.3                                            # the front-right edge a flat white bar
+        L['kick']['irradiance'] = 1.3; L['kick']['orbit']['elevation_deg'] = 35
+        L['horn'].update(size_m=[2.0, 1.2], irradiance=6.5, specular=0.6, position=[0.6, -1.5, 1.7])
+        c.update(strength=0.8, distance_m=0.35, core_strength=1.0, core_distance_m=0.025)
+        L['fill'].update(irradiance=1.6, specular=0.5); L['fill']['orbit'].update(azimuth_deg=25, elevation_deg=30)
+        L['bg-left'].update(irradiance=1.2, target=[-1.5, 4.5, 0.6])      # the dark band on the left sweep
+        L['scrim']['strength'] = 0.5
+    elif frame == 'front-off-wide':
+        c.update(strength=1.6, core_strength=2.5, core_distance_m=0.025, distance_m=0.22)
+        L['pool']['irradiance'] = 0.15; L['floor']['irradiance'] = 0.45
+        L['cove_far'].update(irradiance=4.2, target=[-8.0, 4.5, 1.4]); L['wall_left']['irradiance'] = 3.2   # the cove band
+        L['horn'].update(irradiance=2.6, spread_deg=25, position=[1.1, -1.0, 1.6]); L['rim']['power_w'] = 30
+        L['edge']['power_w'] = 0.8; L['sidesheen']['strength'] = 1.4
+        L['bg-right']['irradiance'] = 1.4; L['bg-high']['irradiance'] = 0.4
+        L['scrim']['strength'] = 0.4; L['topline']['strength'] = 1.8
+    elif frame == 'hero-light':
+        L['bg-left']['irradiance'] = 2.6; L['bg-right'].update(irradiance=1.6, target=[3.5, 6.0, 2.0])
+        c.update(strength=2.0, distance_m=0.35, core_strength=3.2, core_distance_m=0.02)
+        L['back-top']['irradiance'] = 22.0; L['back-top']['orbit'].update(azimuth_deg=160, elevation_deg=55)   # the floor streak
+        s['render'].update(white_balance_tint=0.0, white_balance_k=5600)      # the plinth violet from a magenta tint
+        L['key'].update(irradiance=5.5, size_m=[1.8, 1.8]); L['key']['orbit'].update(azimuth_deg=-40, elevation_deg=30)
+        L['scrim']['irradiance'] = 4.5
+        s['finish'].update(white_in=245, contrast=0.15)
+    elif frame == 'side':
+        L['sidesheen']['strength'] = 2.2; L['rim']['power_w'] = 55
+        c.update(core_distance_m=0.03, core_strength=1.4)
+        L['floor']['irradiance'] = 0.15; L['wall_left']['irradiance'] = 2.1
+    elif frame == 'back':
+        # the left side and the top mirrored the bright sweep: a black card off the left face, out of frame
+        s['set'].setdefault('flags', []).append({'center_m': [-1.0, 0.75, 0.9], 'size_m': [1.2, 2.0], 'normal': [0.66, -0.76, 0.0],
+                                                  'reflect_only': True, 'color': '#060606'})
+        L['key']['orbit'].update(azimuth_deg=-35, elevation_deg=40)
+        L['d-wall'].update(irradiance=0.15, target=[0.0, 1.5, 0.2])
+        L['wash'].update(irradiance=0.15, position=[0.0, 0.8, 2.9], size_m=[3.0, 0.6])
+        s['render']['exposure'] = s['render'].get('exposure', 0.0) - 0.2
+        c.update(strength=0.9, distance_m=0.06); L['d-floor']['irradiance'] = 0.08
+        L['fill'].update(irradiance=1.8, size_m=[2.0, 2.0]); L['fill']['orbit'].update(azimuth_deg=20, elevation_deg=18)
+        L['horn-rim'] = {'type': 'area', 'size_m': [1.2, 0.15], 'position': [-0.3, 0.6, 1.6], 'target': [0.0, 0.0, 1.2],
+                         'irradiance': 1.5, 'color': '#FFF3E1'}           # the horn's layer edges
 
 
 def _site_round2(s, frame):

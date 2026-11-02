@@ -42,8 +42,8 @@
   "contact": {
    "strength": 1.0,
    "distance_m": 0.35,
-   "core_strength": 1.0,
-   "core_distance_m": 0.015
+   "core_strength": 1.4,
+   "core_distance_m": 0.03
   },
   "flags": [
    {
@@ -359,7 +359,7 @@
     -0.1,
     0.55
    ],
-   "strength": 1.4,
+   "strength": 2.2,
    "color": "#FFFFFF",
    "diffuse": 0.0,
    "ramp": {
@@ -418,7 +418,7 @@
     0.0,
     1.12
    ],
-   "power_w": 30,
+   "power_w": 55,
    "color": "#FFFFFF",
    "diffuse": 0.1,
    "receivers": [
@@ -577,7 +577,7 @@
     5.5,
     4.7
    ],
-   "irradiance": 2.6,
+   "irradiance": 2.1,
    "color": "#FFF0E2",
    "specular": 0.0,
    "receivers": [
@@ -623,7 +623,7 @@
     0.5,
     0.0
    ],
-   "irradiance": 0.25,
+   "irradiance": 0.15,
    "spread_deg": 50,
    "color": "#FFF4E8",
    "specular": 0.0,

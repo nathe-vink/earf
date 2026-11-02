@@ -8,9 +8,29 @@
   "radius": 1.2,
   "height": 4.0,
   "contact": {
-   "strength": 0.6,
-   "distance_m": 0.12
-  }
+   "strength": 0.9,
+   "distance_m": 0.06
+  },
+  "flags": [
+   {
+    "center_m": [
+     -1.0,
+     0.75,
+     0.9
+    ],
+    "size_m": [
+     1.2,
+     2.0
+    ],
+    "normal": [
+     0.66,
+     -0.76,
+     0.0
+    ],
+    "reflect_only": true,
+    "color": "#060606"
+   }
+  ]
  },
  "lights": {
   "key": {
@@ -20,8 +40,8 @@
     2.0
    ],
    "orbit": {
-    "azimuth_deg": -60,
-    "elevation_deg": 32,
+    "azimuth_deg": -35,
+    "elevation_deg": 40,
     "distance_m": 4.0
    },
    "target": [
@@ -35,12 +55,12 @@
   "fill": {
    "type": "area",
    "size_m": [
-    1.5,
-    1.5
+    2.0,
+    2.0
    ],
    "orbit": {
-    "azimuth_deg": 10,
-    "elevation_deg": 10,
+    "azimuth_deg": 20,
+    "elevation_deg": 18,
     "distance_m": 4.0
    },
    "target": [
@@ -48,18 +68,18 @@
     0.0,
     0.6
    ],
-   "irradiance": 1.1,
+   "irradiance": 1.8,
    "color": "#FFF7EA"
   },
   "wash": {
    "type": "area",
    "size_m": [
-    5.0,
-    1.0
+    3.0,
+    0.6
    ],
    "position": [
     0.0,
-    -1.0,
+    0.8,
     2.9
    ],
    "target": [
@@ -67,7 +87,7 @@
     0.5,
     1.2
    ],
-   "irradiance": 0.3,
+   "irradiance": 0.15,
    "color": "#FFF7EA"
   },
   "glow": {
@@ -105,9 +125,9 @@
    "target": [
     0.0,
     1.5,
-    0.6
+    0.2
    ],
-   "irradiance": 0.25,
+   "irradiance": 0.15,
    "color": "#FFF4E8",
    "specular": 0.0,
    "receivers": [
@@ -130,13 +150,32 @@
     -0.5,
     0.0
    ],
-   "irradiance": 0.0,
+   "irradiance": 0.08,
    "spread_deg": 60,
    "color": "#FFF4E8",
    "specular": 0.0,
    "receivers": [
     "sweep"
    ]
+  },
+  "horn-rim": {
+   "type": "area",
+   "size_m": [
+    1.2,
+    0.15
+   ],
+   "position": [
+    -0.3,
+    0.6,
+    1.6
+   ],
+   "target": [
+    0.0,
+    0.0,
+    1.2
+   ],
+   "irradiance": 1.5,
+   "color": "#FFF3E1"
   }
  },
  "render": {
@@ -146,7 +185,7 @@
   "clamp": 8,
   "bounces": 12,
   "view": "Khronos PBR Neutral",
-  "exposure": 0.0,
+  "exposure": -0.2,
   "white_balance_k": 5600,
   "white_balance_tint": 3.0
  },

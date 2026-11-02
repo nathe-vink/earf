@@ -13,10 +13,10 @@
   "radius": 5.0,
   "height": 9.0,
   "contact": {
-   "strength": 1.4,
-   "distance_m": 0.5,
-   "core_strength": 2.2,
-   "core_distance_m": 0.025
+   "strength": 2.0,
+   "distance_m": 0.35,
+   "core_strength": 3.2,
+   "core_distance_m": 0.02
   },
   "flags": [
    {
@@ -105,14 +105,14 @@
   "bounces": 16,
   "view": "Khronos PBR Neutral",
   "exposure": 0.0,
-  "white_balance_k": 5900,
-  "white_balance_tint": 7.0
+  "white_balance_k": 5600,
+  "white_balance_tint": 0.0
  },
  "finish": {
   "enabled": true,
-  "white_in": 235,
+  "white_in": 245,
   "white_out": 238,
-  "contrast": 0.1,
+  "contrast": 0.15,
   "clarity": 0.03,
   "sharpen": 0.12,
   "sharpen_px": 0.7
@@ -142,7 +142,7 @@
     6.0,
     1.2
    ],
-   "irradiance": 3.4,
+   "irradiance": 2.6,
    "color": "#FFF4E8",
    "camera": false,
    "specular": 0.0
@@ -159,11 +159,11 @@
     3.4
    ],
    "target": [
-    0.9,
+    3.5,
     6.0,
-    0.6
+    2.0
    ],
-   "irradiance": 2.8,
+   "irradiance": 1.6,
    "color": "#FFF4E8",
    "camera": false,
    "specular": 0.0
@@ -184,19 +184,19 @@
     0.0,
     0.8
    ],
-   "irradiance": 3.6,
+   "irradiance": 4.5,
    "color": "#FFFAF4",
    "camera": false
   },
   "key": {
    "type": "area",
    "size_m": [
-    1.2,
-    1.2
+    1.8,
+    1.8
    ],
    "orbit": {
-    "azimuth_deg": -30,
-    "elevation_deg": 38,
+    "azimuth_deg": -40,
+    "elevation_deg": 30,
     "distance_m": 4.5
    },
    "target": [
@@ -204,7 +204,7 @@
     0.0,
     0.6
    ],
-   "irradiance": 4.0,
+   "irradiance": 5.5,
    "color": "#FFFAF4",
    "camera": false,
    "specular": 1.0
@@ -250,8 +250,8 @@
     0.8
    ],
    "orbit": {
-    "azimuth_deg": 190,
-    "elevation_deg": 35,
+    "azimuth_deg": 160,
+    "elevation_deg": 55,
     "distance_m": 2.5
    },
    "target": [
@@ -259,7 +259,7 @@
     -0.5,
     0.0
    ],
-   "irradiance": 45.0,
+   "irradiance": 22.0,
    "color": "#FFF8F0",
    "camera": false
   },
