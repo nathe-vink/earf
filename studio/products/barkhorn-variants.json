@@ -16,6 +16,11 @@
    "color": "#C9A660",
    "roughness": 0.3
   },
+  "channel": {
+   "preset": "plastic",
+   "color": "#111111",
+   "roughness": 0.55
+  },
   "clear-cast": {
    "preset": "clear_resin",
    "color": "#FFFFFF",
@@ -38,6 +43,20 @@
    "absorb": "#FFE9D2",
    "glow": 40.0,
    "glow_color": "#FFB46B"
+  },
+  "uplight-edge": {
+   "preset": "frosted",
+   "color": "#F4F2EE",
+   "absorb": "#F0EEEA",
+   "glow": 188.0,
+   "glow_color": "#FFCEA6"
+  },
+  "uplight-panel": {
+   "preset": "frosted",
+   "color": "#F4F2EE",
+   "absorb": "#F0EEEA",
+   "glow": 21.0,
+   "glow_color": "#FFCEA6"
   }
  },
  "assign": [
@@ -48,6 +67,10 @@
   {
    "match": "strata-posts|strata-collars|base-outriggers",
    "material": "brass"
+  },
+  {
+   "match": "base-uplight-channel|base-uplight-plate",
+   "material": "channel"
   },
   {
    "match": "horn-topo-clear",
@@ -64,6 +87,14 @@
   {
    "match": "base-plinth-light",
    "material": "led"
+  },
+  {
+   "match": "base-uplight-edge",
+   "material": "uplight-edge"
+  },
+  {
+   "match": "base-uplight-panel",
+   "material": "uplight-panel"
   }
  ],
  "flavours": {
@@ -1671,6 +1702,12 @@
   ],
   "Plinth light": [
    "base-plinth-light"
+  ],
+  "Plinth uplight": [
+   "base-uplight-edge",
+   "base-uplight-channel",
+   "base-uplight-panel",
+   "base-uplight-plate"
   ],
   "Outriggers": [
    "base-outriggers",
