@@ -730,3 +730,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   notes folded in, a fresh 3-round gate on Ice at half size, then finals at 256 samples).
 - Check-in 27 (03:30): its items done (hero v61, portrait logged). Deck complete in F. Speaker lane on the site-set gate. Owner quiet
   since ~23:00; open: tagline; asked about the page edits. Next check-in ~05:30 (send_later).
+- 03:50 speaker site-set gate in F (Ice, half size): r1 -> r2 5.0-5.5 -> 5.0-6.0 (hero-light 6.0 best); "if fixed" 6.8-7.5;
+  site-strata-F/CRITIC.md. Finding: Ice's deep horn (site depth ~14 %) now reads as a different material from the F cabinet (lifted by
+  the white lining); same for Dust and Acid. My call: keep the deep horns (the owner's "Deep, like the site" ruling; (b) stock pale
+  horn and (c) ~30 % middle both break it); contrast is the design; a middle depth noted in TINTS.md as the fallback if the owner asks.
+  Mid-stone backdrop for the back view declined. Round 3 (stronger light through the horn, denser contact shadows, softer key, falloff,
+  hero WB 0.5) then finals at 256.
