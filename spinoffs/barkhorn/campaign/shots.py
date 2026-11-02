@@ -471,6 +471,10 @@ def _siteF_round3(s, frame):
         L['bg-right']['irradiance'] = 0.45
         L['fill'].update(irradiance=1.6); L['fill']['orbit'].update(azimuth_deg=20, elevation_deg=18)
         L['topline'].update(strength=0.7, size_m=[2.4, 0.8]); L['scrim']['strength'] = 0.6
+        # The backdrop up to the set's level (the coordinator, 2026-11-02: 166 against the tall's 215): the sweep's own
+        # lights x2.1, the speaker's untouched (proxies: x1.6 gives 195, x2.0 gives 211)
+        for n in ('bg-left', 'bg-right', 'wall_left'):
+            L[n]['irradiance'] = round(L[n]['irradiance'] * 2.1, 3)
     elif frame == 'back':
         L['cab-back'].update(irradiance=7.0, position=[-0.25, 0.6, 1.0]); L['fill']['irradiance'] = 1.3
         c.update(distance_m=0.3); L['key']['size_m'] = [1.6, 1.2]; L['key']['orbit']['elevation_deg'] = 22
