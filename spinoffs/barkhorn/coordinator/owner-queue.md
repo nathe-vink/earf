@@ -899,3 +899,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   pod/cables honest; find the sheen's cause and test a studio fix and a finish fix (satin risers / satin outside), color kept rich;
   deliverables a deep and c deep (Ice, Ember) with the sheen fixed, finish variants only where they beat the studio fix, two
   middle-depth references in Ice. Then: a second blind round, the board card, one question to the owner (stepped or smooth).
+- Check-in 31 (19:32, fired late): its items already done (study checked, judges run, owner answered at 19:30, lane briefed, board v15
+  "What you said" and "What's rendering" updated, header 19:30). Next check-in ~22:30 (send_later), a safety net for the revised horn
+  renders.
