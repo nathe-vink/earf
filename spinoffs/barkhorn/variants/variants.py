@@ -69,6 +69,12 @@ PLINTH_LIGHT = dict(inset=40.0, w=10.0, t=2.0, brk=30.0,
 UPLIGHT = dict(edges=[(10.0, 30.0, 10.0, 390.0), (550.0, 30.0, 550.0, 390.0), (40.0, 34.0, 520.0, 34.0), (40.0, 410.0, 520.0, 410.0)],
                groove=(16.0, 8.0), channel=(12.0, 7.0), wall=1.5, lens_t=1.0, gap=0.6,
                panel=(420.0, 280.0, 3.0), panel_under=10.0, plate_t=2.0, board_gap=8.0, centre=(280.0, 210.0))
+# the cabinet wash (a proposal for the owner, 2026-11-02, after the uplight fell short of the underlit promo look): a COB
+# strip on the bottom panel at the foot of each side wall and the front panel, inside the cabinet, between the wall and
+# its lining, aimed up the wall's inner face so the whole wall and the lining's white voile behind it glow in the tint;
+# fed from the plinth's 24 V through a sealed connector in the bottom panel at a foot pad. (x0, y0, x1, y1) of each run
+# on the bottom panel's top face (z 20); the back is left out (its land strip and the amplifier's compartment)
+WASH = dict(runs=[(24.0, 60.0, 24.0, 370.0), (536.0, 60.0, 536.0, 370.0), (60.0, 48.0, 500.0, 48.0)], w=8.0, t=2.0, z=20.0)
 OUTRIG = dict(w=30.0, h=20.0, inner=[(95.0, 80.0), (465.0, 80.0), (95.0, 340.0), (465.0, 340.0)])
 
 
@@ -247,6 +253,12 @@ def parts(P):
                                    'cabinet\'s bottom, lit from an aluminium-core LED plate below it (4000 K)']))
     out.append(product.Part('base-uplight-plate', plate, product.Bought('uplight-panel'), finish='channel', group='base',
                             option='Plinth uplight', notes=['the centre panel\'s LED plate, black anodised aluminium, on brackets in the opening']))
+    wash = [seg(ax, ay, bx, by, WASH['w'], WASH['z'] + 0.1, WASH['z'] + 0.1 + WASH['t']) for (ax, ay, bx, by) in WASH['runs']]
+    out.append(product.Part('cabinet-wash', _C(children=wash), product.Bought('cabinet-wash'), finish='uplight-wash', group='base',
+                            option='Cabinet wash',
+                            notes=['the cabinet wash (a proposal): COB strips on the bottom panel at the foot of each side wall and the front '
+                                   'panel, between the wall and its lining, aimed up the wall; fed from the plinth through a sealed connector '
+                                   'at a foot pad (variants/BASES.md)']))
     pf = [foot(x, y, zp - 0.1) for x, y in BASE['feet']]
     out.append(product.Part('base-plinth-feet', _C(children=[c for f in pf for c in f]), product.Bought('levelling-feet'),
                             finish='foot', group='base', option='Plinth', notes=['four M8 levelling feet under the plinth\'s corners']))
@@ -282,6 +294,7 @@ PRODUCT = dataclasses.replace(
                # at the default 50 %: the strips about 3 W/m of light (10 W/m electrical) through an 8 mm lens at full,
                # 375 W/m2; the panel about 5 W of light (16 W electrical) over 0.118 m2 at full, 42 W/m2
                'uplight-edge': {'preset': 'frosted', 'color': '#F4F2EE', 'absorb': '#F0EEEA', 'glow': 188.0, 'glow_color': '#FFCEA6'},
+               'uplight-wash': {'preset': 'frosted', 'color': '#F4F2EE', 'absorb': '#F0EEEA', 'glow': 188.0, 'glow_color': '#FFCEA6'},
                'uplight-panel': {'preset': 'frosted', 'color': '#F4F2EE', 'absorb': '#F0EEEA', 'glow': 21.0, 'glow_color': '#FFCEA6'}},
     kind='Tropos design-pass proposals: Strata\'s caldera and the Topo horn',
     notes=['Proposals beside the current design (variants/README.md); the Cloud\'s CAD is unchanged.'],
