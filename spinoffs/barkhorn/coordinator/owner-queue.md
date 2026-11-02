@@ -927,3 +927,16 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   coral in Ember; satin read as milky by two); a-studio 4.0, c-studio 2.6. Asked the lane for c-satin deep (hue within 5 of the cabinet,
   luminance near a-satin's; Ice its own bluer chip; the finest satin that still hides the pod), a-satin with the right-wall wedge tamed if
   honest, c's side view in satin deep; then the uplight. Then the board card: stepped (satin risers) vs smooth (satin outside), my pick.
+- 21:36 speaker: c-satin round 2 (9dc6574525bc616f8836278bfce1213821794185): Ice #0A52B8 0.25 of the cabinet, hue +2, 90 % saturated (a
+  deep custom batch, ~10 % TT through 10 mm; darker chips drift violet); Ember #C50206 0.43, hue 0, 88 % (~11 % TT at 10 mm, a custom
+  batch unless TruCast stocks a deeper red). Satin 0.25 (fine glass-bead blast, ~400-600 grit, outside only, air path masked and
+  polished): the finest that hides the pod and pads. a-satin's pale wedge is the white backdrop through the right wall's thinnest
+  acrylic, not a light; unchanged, both lit identically. Side view in satin reads as a horn. The uplight is modeled
+  (e5d0ee48bc04ac2a8c19f879975a413d2de84fda; render model 381304f623c74f24afc34f1f569905ee9ecaffc9); its frames next.
+- 21:50 final blind pair (wf_1054537d-45b): smooth satin 6.9 vs stepped satin 6.1; designer, color specialist and the owner-brief
+  judge for smooth (clear, clear, strong), buyer and skeptic for stepped (clear). Smooth's doubt: the dark ring at the throat reads
+  heavy (a plug, a lens, an eye); stepped's: busy rings, read as print lines.
+- Board v17 (header 21:45): one card, "Which horn goes on Tropos?": A smooth, satin outside (my pick) vs B stepped, satin edges;
+  Ice and Ember frames and close-ups, A's side view; costs and weights; the judges' doubts; the base's light moved to "later" as
+  designed and rendering. Reply bar on: order [['horn','Horn']], KEY earf-decisions-v17. Checked at 1280 and 390 px: 9 images load,
+  no sideways scroll, "Use my pick" builds "Horn: A, smooth, satin outside".
