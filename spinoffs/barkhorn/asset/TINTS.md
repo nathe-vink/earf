@@ -13,6 +13,12 @@ the tint: through the clear walls you saw the black lining, the woofer and the i
   horn is unchanged** (Dust, Acid and Ice deep in their cabinet's hue; the other five their stock code).
 - In `product.py` (`LINING_WHITE`, `COLORS_F_DEPTH`) after the stock tints, so every engine render and asset carries it.
 - **The lamps and Mantle keep their parts as they are**, unless their lanes report a mismatch with these colors.
+- **The deep horns against F's cabinets** (the coordinator's call, 2026-11-02). The white lining lifted the colored
+  cabinets, but Ice's, Dust's and Acid's deep horns did not change, so in the site set's critics the horn reads much
+  darker than its cabinet: Ice's horn median about 33 to 59 against the cabinet's 130 to 150, named in six of ten passes.
+  Light through the horn barely moves it. **The contrast is the design** ("the horn is the jewel"): the owner's "Deep,
+  like the site" stands, and stock 1/2 in sheet would break it. **The fallback, if the owner asks:** a middle depth for
+  the three deep horns, about 30 % through 12.7 mm in each cabinet's hue, still a custom batch.
 
 **Sourcing per color in colors F** (the coordinator asked, 2026-11-01; the source lines are R1,
 `spinoffs/barkhorn/research/2026-10-31/R1-stock-colours.md` on r46-owner-notes, its stock counts as of 2026-10-31).
