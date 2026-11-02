@@ -705,3 +705,5 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   zone moves up 11 px to [770,458,1150,588] (label y 476); layout OK.
 - 00:25 deck v55: cover.html = speaker F cover (f729451f; /_blob/d51f532b...): all eight as lit colored glass, Poison green, Haze
   violet, Smoke near-black; all whole; same sweep (#F0ECE5), no seam. Row of eight in F rendering (~01:20).
+- Check-in 25 (00:27): its prompt predated the tagline reversal; state now: tagline round 3 on the board, budget and colors done;
+  deck v55; speaker row ~01:20, four-pieces day ~00:45 and lid-closed dusk ~01:25. Next check-in ~01:57 (send_later).
