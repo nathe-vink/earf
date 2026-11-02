@@ -831,3 +831,15 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 15:40 board v13: the settled "Colors: F" figure is the new row (img/row-f.jpg from 6c147ca8, 1200 x 375; the old one kept as
   scratchpad decide/img/row-f-v12.jpg); its note says the three deeper horns now match their cabinets' colors (made deeper in the
   same dye they had drifted toward red; Dust's read as Ember); header 15:35 UTC. Tagline still the open card.
+- 15:48 OWNER: "Tagline: A world of sound, in color. I don’t like that the stepped horns are now making an X shape in the light
+  reflection. The horns also look darker than the speaker. Not sure if I like the stepping anymore." Saved verbatim first (README
+  8707ec61e6c3510987b7e0600baac86d7a5aeda2).
+  - Tagline applied: deck v64 cover h1 "A world of sound, in color." (one line, 1355 of 1664 px; flow unchanged; no other copy of
+    the old line in the deck). Site lane: TAGLINE_NEXT in the held slot, one line at every width, no deploy, SHA + screenshots.
+    Brand lane: edition 2 from 640d6469, break after the comma where a mockup needs two lines, SHA + contact sheet.
+  - The horn reopened ("the stepping" read as the horn's; the caldera and plinth keep their steps unless the owner says otherwise;
+    "Deep, like the site" reopened with it). Speaker lane: cover finishes, then the site finals pause; horn options in Ice and Ember
+    at front-off-tall (stepped as now + at today's depth; stepped with softened corners; the smooth formed horn kept since 11-01;
+    its own idea if buildable), each at a depth no darker than its cabinet (stock sheet if near), with luminance numbers, a line on
+    the X, acoustics, cost/build and weight. No product.py default change, no site change.
+  - Board v14: the tagline settled; the horn "next, options rendering"; reply bar hidden until there is a question; header 15:50.
