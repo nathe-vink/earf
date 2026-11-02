@@ -38,3 +38,7 @@ Kept as the alternative; the deck shows the lights-on room.
 **Current (deck v49):** the Strata Float dusk frame (specs/spec-final2092sf-dusk.json; the four-pieces lane's final-2092-sf dusk,
 02877dad; slide kept as specs/line-dusk-sf.html, image /_blob/43138711dfedd8f3150f6dddaa84a527): Strata Float v3 and Hemisphere v3,
 Mantle's label 10 px lower with its zone; 7.0 to 13.3:1 on the labels, 4.7:1 on the corner note. Day alternative: line-day-sf.html.
+
+**Current (deck v54):** the colors F dusk frame (specs/spec-final2092sf-f-dusk.json; four-pieces cebd67c8, Tropos from the speaker
+lane's F build 2bf9b217; image /_blob/4ea7f045fc25019c094415bb41e7b366): Tropos as lit green glass over the white lining; Mantle and
+the lamps still stock Poison (their match is being checked). Same zones and inks; 7.0 to 13.4:1 on the labels, 4.7:1 corner note.

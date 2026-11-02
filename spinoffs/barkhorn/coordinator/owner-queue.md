@@ -686,3 +686,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   Ember, Dust (1 left), Ice, Fog, Smoke; Acid needs a 9097 run; Poison/Haze from their batches. Unverified: Acid's cabinet as a
   9097 run at 20 mm. Deck v53 risks aside adds Poison's horn mill run and Acid-thick unconfirmed. Four-pieces -sf-f: dusk ~00:00,
   day ~00:40; speaker deck cover in F rendering.
+- 00:05 deck v54: line.html = four-pieces -sf-f dusk (cebd67c8; /_blob/4ea7f045...): Tropos in F reads as lit green glass, woofers
+  showing; both speakers whole; Mantle's deck (stock 2092) and the lamps unchanged, so the notes say their match is being checked.
+  Effective contrast 7.0-13.4:1, corner 4.7:1. Mantle lane has the paths. Day ~00:45.
