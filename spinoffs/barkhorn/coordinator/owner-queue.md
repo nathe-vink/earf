@@ -696,3 +696,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   "Sound in the Light"), 5 "An ear for color." (6.0; 2002 Washington Post headline). The owner's "A world of sound": 5.0; a stock
   phrase in audio (Dolby 2018 "The World of Sound", GN Hearing 2023 "World of Sound", Smithsonian Folkways catalog, an expired
   1977 trademark); leaves out color and light. Not a trademark search. Asking the owner in plain text.
+- 00:20 Mantle lane on the two Poisons (cebd67c8): Tropos face rgb(0,36,10) green, Mantle's deck edge rgb(13,12,8) black. A matched
+  custom deck lot (same loading per mm; ~31 % through 25.4) proofs only slightly greener: seen edge-on through 360-450 mm with nothing
+  white beneath. Cost: stock deck ~$113/unit; custom run ~$12.5k minimum (~15 sheets, ~90 decks, +$27/unit) or 1 in sheet ~$16.6k.
+  My calls: no custom lot; the room shows Mantle with its lid closed (3 mm stock 2092 reads mid-green): four-pieces asked for a
+  lid-closed dusk after the day; a white layer under the deck listed on board v12 "Later" as an owner option (hides bearing/motor).
