@@ -701,3 +701,5 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   white beneath. Cost: stock deck ~$113/unit; custom run ~$12.5k minimum (~15 sheets, ~90 decks, +$27/unit) or 1 in sheet ~$16.6k.
   My calls: no custom lot; the room shows Mantle with its lid closed (3 mm stock 2092 reads mid-green): four-pieces asked for a
   lid-closed dusk after the day; a white layer under the deck listed on board v12 "Later" as an owner option (hides bearing/motor).
+- 00:10 four-pieces: -sf-f-lid dusk queued behind the F day (day ~00:45, lid ~01:25); with the lid Mantle stands 199 mm, its label
+  zone moves up 11 px to [770,458,1150,588] (label y 476); layout OK.
