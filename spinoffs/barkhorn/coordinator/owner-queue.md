@@ -3232,3 +3232,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   then wait for chunks 4 and 5. To the speaker lane: the plan agreed (a honeycomb grid is a real control); chunk 2 becomes tall Ember and
   Dust only; the amp bay a later proposal if a model change. To the biomes lane: the Haze cabinet at spec (25.8 %) unless 28.1 % is the
   same material on another measure.
+- 20:33 biomes lane: the Haze tint is on spec: 28.1 % was the volume term alone; the spec's TT includes the two surfaces (stock_tints.py
+  SURFACE 0.92), so 0.92 x 28.1 = 25.9 % against 25.8 %. Same check (Y x 0.92 against spec): Dust 59.1/59.1, Ice 57.4/57.6, Poison 32.3/32.3,
+  Acid 77.7/77.6, Ember 14.1/14.1, Smoke 11.6/11.7, all within 0.2 points. The asset stays. (Its message was stamped 20:35, ahead of its
+  queue time of 20:33.)
