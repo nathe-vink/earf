@@ -2010,3 +2010,26 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 15:15 walkthrough item 3 shown: the site's two uplit night pictures (scratchpad/walkthrough/03-site-uplit.jpg; the owner's own site
   images, the speaker glowing on a lit plinth): keep them as styled mood shots, or replace them with the new no-light pictures (my
   pick: replace; "technically possible trumps looks cool").
+- 15:13 Mantle lane: C after the 14:21 gate. Source 72ce1e0a3a102916483138ae4eaf184afb1ff9f1 (scene.py, render_lantern.sh block c2,
+  README section 13 "Option C, gate 1", mantle_strata_v5.py notes, the label); frames and v5 rebuild 95c2c6e3649bbe57f21be0829bbf49418a2e2173
+  (0 clashes, $3,897): a5-night-ember-2423-c2.png (192 samples), a5-day-ember-2423-c2.png. Its finding: the leak is the glow
+  itself, through the clear gaps (glow off, or every gap backed, matches A); an AR top barely helps (floor R 16.8 to 16.0): near-
+  critical light reflected back down by the top leaves the bare gaps almost flat; "lit glass you can see through always sends some
+  light down". So the whole printed field is backed black (A's black flood), nothing printed under the platter, the border ring
+  clear: THE SEE-THROUGH OUTER DECK IS GONE; C keeps the centre feed (no lit edge or strip) and the radial grade. The leak (red of
+  255): base top C2 4.5 / A 4.7 / old C 8.1; base spots 0,0 / 0,0 / 10.8,7.2; floor in front L/R 6.3,4.8 / 6.5,4.9 / 15.8,16.0; the
+  C2-minus-A difference (x8) red only on the deck. The grade flatter (55 % at the platter's foot to a peak ~35 mm out, 55 % at 280
+  mm; the foot 92, A 134, old crescent 163). The floor: the rim deep Ember at night (R 75.5; A 71, old C 60); by day an even 18 %
+  print. The amber glint was the strip's aluminium channel (now behind the backer, flat black); the label's wordmark moved. Cost
+  unchanged (+$130-150 over v3; one more screen pass, the black flood). The options table's "little leaks down" for C was wrong (the
+  README says so). Its question for the owner: without the see-through field, C differs from A only in the centre feed and the
+  grade: still worth pursuing?
+- 15:15 biomes lane (its message said 15:16): a slip: the 14:46 proxies never ran (argparse rejected the flag order, the output
+  unchecked), ~30 min lost; running now at 15:15, polished. 1f77fccf15be48546a09c7bf3bd84cfc30b9431b: habitats.py passes --horn-rough
+  0.05 to every habitat; Ice beds 22 mm. Plan, one job at a time: the polished proxies (Haze sun 100, Fog sun 110, Poison sunfleck;
+  ~15 min, measured, the horn checked for X or seams against the sky); finals owner-facing first: Dust and Ice polished (64 samples,
+  ~10 and ~20 min), then Haze, Fog, Poison, Ember polished (96), Acid (sink 0.03). Rough end ~18:30 UTC.
+- 15:16 my gate wf_1b32c9cb-e77 on C2 night and day (A g5's pair and the first C night as comparisons). Sent to the Mantle lane: the
+  question goes to the owner as its own walkthrough item; a short README note with numbers (the physics plainly with the size of
+  the leak; what C2 still gives over A by day and night; a middle path such as a narrower clear zone with a measured leak, worth a
+  proxy or not; the cost of each against v3 and v4); nothing to render until the gate is back.
