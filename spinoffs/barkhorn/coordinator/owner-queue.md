@@ -2146,3 +2146,23 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   the border ring as clear tinted glass by day, dark at night with no lit line; clean edges; a deeper ruby day top with depth; the
   underside rechecked with the shadows lifted); proxy, then night and day in full with the numbers. The owner's Mantle item waits
   for C3.
+- 15:41 speaker lane: phase 2 planned at 9db8da171425bd5ca89ad439f9e0aeecda211c7b (`rollout.py --phase 2 --base A --horn polished --hold
+  smoke`; each picture its old rig turned into the final design by strata_lit; HELPERS.md has the table). With Smoke held: 211 shots,
+  ~15.8 h, 10 chunks: (7) the front arc x 8, Ice first for Sound (9 + 54 shots; 0.5 h + 3.3 h; spin47.py's recipe from 24770e2b:
+  nine frames, -20 to +60 degrees, 32 samples, 0.75 scale, the same crop); (2) the dark-ground studio, Ember, one (1.1 h); (3) the
+  amplifier plate, one, Ember (the same on all eight; 0.3 h); (4) horn A from behind x 8 (each tint's horn its own depth; 7 shots,
+  2.3 h); (5) the inside, one, Ice (0.5 h); (6) the turning sprite x 8, 24 frames at the arc's 32 samples (168 shots, 4.6 h; the rig's
+  128 would be ~18.6 h); (10) the close-ups with rigs: horn mouth Acid, cabinet edge Ember, plate Dust, grip Poison (4 shots, 3.1 h).
+  Can't do as asked: (1) covers on x 8 is not renderable as designed (horn A's woofer sits in the caldera, which the cloth cover
+  doesn't fit): the owner's call, drop the site's cover switch or design a cover for the caldera; (9) the room is already phase 1
+  (deck-home and its portrait: room31's golden-hour pair, horn A, no base; two cable props checked in the proof round); (10) "back
+  mark" and "coin" have no rig and no audit found. Fold: ~36.4 h in all, ~9 h a container: c2 phase-2 chunks 1 (Sound and two other
+  arcs), 4, 9 (9.3 h); c3 2, 5, 10 (9.6 h); c4 3 (with the dark studio), 6 (8.9 h); c1 the lane 7, 8 (8.6 h). (d) The GA drawing is
+  the lane's CAD (the Cloud's fab build makes its 17-sheet set with horn A; missing: Strata's bronze posts and caldera on the GA
+  sheets; ~1 h build + ~2 h). Running: the Smoke final (horn #B6B6B6, light path checked); then the deck-hero proof, chunks 2-4.
+- 15:44 sent: the speaker lane: phase 2 approved as proposed; covers on goes to the owner (a new walkthrough item: drop the site's
+  cover switch, or design a cover for the caldera); the close-ups' joinery, back mark and coin to be defined by the site lane (back
+  mark: variant A from 4f05e0be, blind-read at 440 px); the GA after its phase-1 chunks; a "Phase 2" section in HELPERS.md (bringing
+  a helper's branch from 5295e58f to 9db8da17 by merge, rebuild or not, the run command) before the helpers get their chunks. The
+  site lane: define joinery, back mark and coin (what, tint, framing, source) in PICTURES-2026-11-03.md (row 18 lists the audit's six:
+  horn mouth, cabinet edge, joinery, back mark, plate, coin, each beside a whole speaker, "the owner").
