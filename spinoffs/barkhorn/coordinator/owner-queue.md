@@ -3495,3 +3495,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   cabinet_deep #F1EE7F); the full SHA to follow. Queue: the Fog final (nearly done), the Haze and Acid proxies (sun 120, seated 3 mm, the sky
   turned right, the new split), the Poison final, then the Acid and Haze finals. (Its stamp read 22:27 at a 22:24 queue time.)
 - 22:24 biomes lane: the Acid split commit is fd70a7b0749918ebd72d4ff633a5b838c1a8c54f (its "18d..." was wrong).
+- 22:27 biomes lane: the Fog final with real cards (placed right: the sun-side card out, the other 2.2 m out of frame; no slabs) HELD by its
+  own gate: the left side face a flat pale-cream sheet (luma ~194 against 128 for the fog beside it: the white side batt behind clear
+  acrylic); Fog was never turned in the 10-degree pass (rotate_z 10 against the camera's -10: 20 degrees off); crease 12.5; the side face b*
+  11 (the batt under the dusk light). Fix: rotate_z -5 (5 off, as Haze and Ice) at 594ceacf4e2ffc00f798a10a810ea173cb1bc201; the held frame
+  kept in renders/2026-11-03/barkhorn/held/. Queue: the Haze and Acid proxies (running), the Poison final, the Fog final at -5. (Its stamps
+  read 22:32 and 22:33 for messages queued at 22:27.)
