@@ -93,3 +93,13 @@ if [ "$1" = g5 ]; then
 r a4-night-ember-2423-g5 --model out-strata-v4 --colour ember-2423 --strip 0 --cct 4000 --ambient 0.003 --exposure -1.5 --grade --grade-edge-mid 1.0 0.8 --grade-fall 0.1 --night-room 35 --glass-shadows --wall-wash 6 --samples 192 --core-glow 1.9 --look "AgX - Base Contrast" $G5
 r a4-day-ember-2423-g5 --model out-strata-v4 --colour ember-2423 --day --strip 0 --core-glow 7 --strip-color 0.848 0.124 0.168 --exposure -2.0 --grade --grade-edge-mid 0.15 1.0 --grade-fall 0.07 --border-glow 0.4 $G5
 fi
+# option C (the coordinator, 13:26; mantle_strata_v5.py, out-strata-v5): the print graded by distance from the
+# spindle, dense under the platter, clear glass by 230 (--radial 0.150 0.230); the strip in an octagonal groove at r 78
+# under the platter (fed from the center, so nothing shows); the border clear tinted glass; glass shadows on, so the
+# float is lit through the clear deck by day and the glow reaches the hardware at night. Night as v4's g5 (3 W/m2 at
+# the dense center); day the room's light on the dots baked as before (7 at the dense center, falling with the cover)
+C5="--pan 0.05 --blacken --wear 0 --platter-edge 0.15 --edge-frost 0.08 --grain 0.004 --radial 0.150 0.230 --glass-shadows"
+if [ "$1" = c ]; then
+r a5-night-ember-2423-c --model out-strata-v5 --colour ember-2423 --strip 0 --cct 4000 --ambient 0.003 --exposure -1.5 --night-room 35 --wall-wash 6 --samples 192 --core-glow 3 --look "AgX - Base Contrast" $C5
+r a5-day-ember-2423-c --model out-strata-v5 --colour ember-2423 --day --strip 0 --core-glow 7 --strip-color 0.848 0.124 0.168 --exposure -2.0 $C5
+fi

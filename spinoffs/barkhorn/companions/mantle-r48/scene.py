@@ -408,7 +408,24 @@ def make_label(path):
     im.save(path)
 
 
-def core_material(name, box, cover=(0.05, 0.35), ramp=0.14, glow=0.0, glow_col=(1.0, 0.55, 0.25)):
+def radial_cover(nt, geo, radial):
+    """v5 (option C): the print's cover by distance from the spindle: radial = (sx, sy, r_in, r_out, cmax), metres;
+    cmax inside r_in, falling linearly to 0 (clear glass) at r_out."""
+    sx, sy, r_in, r_out, cmax = radial
+    sep = nt.nodes.new('ShaderNodeSeparateXYZ'); nt.links.new(geo.outputs['Position'], sep.inputs['Vector'])
+    def mth(op, a, bval=None, b_in=None):
+        n_ = nt.nodes.new('ShaderNodeMath'); n_.operation = op
+        if isinstance(a, float): n_.inputs[0].default_value = a
+        else: nt.links.new(a, n_.inputs[0])
+        if b_in is not None: nt.links.new(b_in, n_.inputs[1])
+        elif bval is not None: n_.inputs[1].default_value = bval
+        return n_.outputs[0]
+    r = mth('SQRT', mth('ADD', mth('POWER', mth('SUBTRACT', sep.outputs['X'], sx), 2.0), b_in=mth('POWER', mth('SUBTRACT', sep.outputs['Y'], sy), 2.0)))
+    t = mth('MINIMUM', mth('MAXIMUM', mth('DIVIDE', mth('SUBTRACT', r_out, b_in=r), r_out - r_in), 0.0), 1.0)
+    return mth('MULTIPLY', t, cmax)
+
+
+def core_material(name, box, cover=(0.05, 0.35), ramp=0.14, glow=0.0, glow_col=(1.0, 0.55, 0.25), radial=None):
     """v4's light guide (2026-11-03): clear cast acrylic, no tint. Slots: 0-2 clear faces (its top, under the tinted
     top; its perimeter, cemented to the tinted ring), 3 painted walls (white toward the acrylic, black outside), 4 the
     groove's bead-blasted ceiling, 5 its underside: a white dot print over a reflector, sparse near the edge (cover[0])
@@ -470,12 +487,20 @@ def core_material(name, box, cover=(0.05, 0.35), ramp=0.14, glow=0.0, glow_col=(
             mx = nt.nodes.new('ShaderNodeMixShader')
             nt.links.new(geo.outputs['Backfacing'], mx.inputs['Fac'])
             nt.links.new(black.outputs['BSDF'], mx.inputs[1]); nt.links.new(inside, mx.inputs[2])
-            nt.links.new(mx.outputs['Shader'], out.inputs['Surface'])
+            if slot == 5 and radial:
+                # v5: between the dots the underside is bare, glossy acrylic; the dots thin to nothing toward the rim
+                gl = nt.nodes.new('ShaderNodeBsdfPrincipled'); gl.inputs['Transmission Weight'].default_value = 1.0
+                gl.inputs['IOR'].default_value = 1.49; gl.inputs['Roughness'].default_value = 0.004
+                cv = nt.nodes.new('ShaderNodeMixShader'); nt.links.new(radial_cover(nt, geo, radial), cv.inputs['Fac'])
+                nt.links.new(shadow_pass(nt, gl.outputs['BSDF']), cv.inputs[1]); nt.links.new(mx.outputs['Shader'], cv.inputs[2])
+                nt.links.new(cv.outputs['Shader'], out.inputs['Surface'])
+            else:
+                nt.links.new(mx.outputs['Shader'], out.inputs['Surface'])
         mats.append(m)
     return mats
 
 
-def core_glow_sheet(core, strength, col, box=None, grade=(1.4, 0.8), fall=0.05, occl=None, cct=0.0, ceil_k=1.0, tilt=0.0):
+def core_glow_sheet(core, strength, col, box=None, grade=(1.4, 0.8), fall=0.05, occl=None, cct=0.0, ceil_k=1.0, tilt=0.0, radial=None):
     """The guide's output (see core_material): a copy of the print's faces 0.3 up inside the core, facing up,
     transparent to rays and emitting upward only, so the opaque print under it keeps every path to the shelf dark."""
     me = core.data
@@ -542,8 +567,13 @@ def core_glow_sheet(core, strength, col, box=None, grade=(1.4, 0.8), fall=0.05, 
     # underside cannot both be seen along one ray (they doubled into a bright band at the rim); the print is opaque anyway
     bk_ = nt.nodes.new('ShaderNodeBsdfDiffuse'); bk_.inputs['Color'].default_value = (0.0, 0.0, 0.0, 1)
     ad = nt.nodes.new('ShaderNodeAddShader'); nt.links.new(bk_.outputs['BSDF'], ad.inputs[0]); nt.links.new(em.outputs['Emission'], ad.inputs[1])
+    front = ad.outputs['Shader']
+    if radial:
+        # v5: the dots only, by cover; between them the sheet is clear, so the float shows through the outer deck
+        cv = nt.nodes.new('ShaderNodeMixShader'); nt.links.new(radial_cover(nt, geo, radial), cv.inputs['Fac'])
+        nt.links.new(tr.outputs['BSDF'], cv.inputs[1]); nt.links.new(ad.outputs['Shader'], cv.inputs[2]); front = cv.outputs['Shader']
     mx = nt.nodes.new('ShaderNodeMixShader'); nt.links.new(geo.outputs['Backfacing'], mx.inputs['Fac'])
-    nt.links.new(ad.outputs['Shader'], mx.inputs[1]); nt.links.new(tr.outputs['BSDF'], mx.inputs[2])
+    nt.links.new(front, mx.inputs[1]); nt.links.new(tr.outputs['BSDF'], mx.inputs[2])
     nt.links.new(mx.outputs['Shader'], out.inputs['Surface'])
     m.cycles.emission_sampling = 'FRONT'
     me2.materials.append(m)
@@ -551,7 +581,7 @@ def core_glow_sheet(core, strength, col, box=None, grade=(1.4, 0.8), fall=0.05, 
     return ob
 
 
-def classify_layer(obj, kind):
+def classify_layer(obj, kind, clear_border=False):
     """v4 gate 2: the deck's tinted skin and rings apart. Skin: its top glossy (0), its underside over the core an
     index-matched joint (5), over the rings printed black (7), its outer edge satin (1), its holes painted (6). Rings:
     their tops (under the skin), their undersides and their inner walls (against the core's reflector tape) black (7),
@@ -566,9 +596,9 @@ def classify_layer(obj, kind):
         de = min(c.x - x0, x1 - c.x, c.y - y0, y1 - c.y)
         if abs(n.z) > 0.7:
             if kind == 'skin':
-                f.material_index = 0 if n.z > 0 else (5 if abs(c.z - zbot) < 1e-5 else 6)   # gate 4: the border white up, black down
+                f.material_index = 0 if n.z > 0 else (5 if (abs(c.z - zbot) < 1e-5 or clear_border) else 6)   # gate 4: the border white up, black down
             else:
-                f.material_index = 7
+                f.material_index = (5 if n.z > 0 else 7) if clear_border else 7      # v5: the rings' tops a clear joint
         else:
             if de < 0.0015:
                 # gate 3: the skin's own edges painted black, so it cannot pipe light out as a stripe; the rings' satin
@@ -632,7 +662,7 @@ def border_glow_sheet(skin, strength, col, box, fall, cct=0.0):
     return ob
 
 
-def classify_core(obj):
+def classify_core(obj, groove=None):
     me = obj.data
     bm = bmesh.new(); bm.from_mesh(me)
     bm.transform(obj.matrix_world)           # the world's frame (the mesh is Y-up)
@@ -654,6 +684,8 @@ def classify_core(obj):
             de = min(c.x - x0, x1 - c.x, c.y - y0, y1 - c.y)
             if de < 0.0015:
                 f.material_index = 6      # gate 3: black edge tape round the core (was white reflector tape)
+            elif groove and c.z - zbot < 0.0075 and abs(math.hypot(c.x - groove[0], c.y - groove[1]) - groove[2]) < 0.008:
+                f.material_index = 2      # v5: the central groove's sides, clear: the strip's light enters here
             elif c.z - zbot < 0.0022 and de > 0.03:
                 f.material_index = 2      # gate 4: the posts' 2 mm seats' walls, clear (a ring of paint read as a control)
             elif de < 0.0095 and c.z - zbot < 0.0075:
@@ -1049,7 +1081,8 @@ def build(args):
             finish.update({'bearing-nut': 'blackened', 'bearing-washer': 'blackened', 'bearing-housing': 'blackened'})
         if 'plinth-L1-core' in objs:
             o0, rw_ = meta['P']['margin'] * mm, meta['P']['tint_ring'] * mm
-            M['core'] = core_material('core', (o0 + rw_, o0 + rw_, o0 + meta['W0'] * mm - rw_, o0 + meta['D0'] * mm - rw_))
+            RAD = (meta['S'][0] * mm, meta['S'][1] * mm, args.radial[0], args.radial[1], args.cover_max) if args.radial else None
+            M['core'] = core_material('core', (o0 + rw_, o0 + rw_, o0 + meta['W0'] * mm - rw_, o0 + meta['D0'] * mm - rw_), radial=RAD)
             finish['plinth-L1-core'] = 'core'
         for k in range(1, 5):
             finish[f'post-{k}'] = 'steel' if meta['P'].get('post_material') == 'stainless' else 'post'
@@ -1067,7 +1100,7 @@ def build(args):
         if n in ('plinth-L1-skin', 'plinth-L1-rings'):
             for m_ in M['plinth']:
                 o.data.materials.append(m_)
-            classify_layer(o, 'skin' if n.endswith('skin') else 'rings'); o['caustic'] = True
+            classify_layer(o, 'skin' if n.endswith('skin') else 'rings', clear_border=bool(args.radial)); o['caustic'] = True
             if n.endswith('skin') and args.core_glow > 0 and args.border_glow > 0:
                 o0b, rwb = meta['P']['margin'] * mm, meta['P']['tint_ring'] * mm
                 border_glow_sheet(o, args.core_glow * args.border_glow, tuple(args.strip_color),
@@ -1079,13 +1112,14 @@ def build(args):
         if f == 'core':
             for m_ in M['core']:
                 o.data.materials.append(m_)
-            classify_core(o); o['caustic'] = True
+            classify_core(o, groove=(meta['S'][0] * mm, meta['S'][1] * mm, meta['P']['glow_r'] * mm) if args.radial else None); o['caustic'] = True
             if args.core_glow > 0:
                 o0_, rw2 = meta['P']['margin'] * mm, meta['P']['tint_ring'] * mm
                 core_glow_sheet(o, args.core_glow, tuple(args.strip_color),
                                 box=(o0_ + rw2, o0_ + rw2, o0_ + meta['W0'] * mm - rw2, o0_ + meta['D0'] * mm - rw2) if (args.grade or args.day) else None,
                                 grade=tuple(args.grade_edge_mid) if args.grade else (1.0, 1.0), fall=args.grade_fall, cct=args.cct,
                                 ceil_k=args.ceil_k, tilt=args.tilt,
+                                radial=(meta['S'][0] * mm, meta['S'][1] * mm, args.radial[0], args.radial[1], 1.0) if args.radial else None,
                                 occl=[(meta['S'][0] * mm, meta['S'][1] * mm, meta['P']['platter_d'] / 2 * mm, 0.6, 0.035),
                                       (meta['A'][0] * mm, meta['A'][1] * mm, meta['P']['puck_d'] / 2 * mm, 0.5, 0.018)] if args.day else None)
             for p in o.data.polygons:
@@ -1456,6 +1490,7 @@ if __name__ == '__main__':
     ap.add_argument('--wall-wash', type=float, default=0.0)
     ap.add_argument('--look', default='AgX - Medium High Contrast'); ap.add_argument('--grain', type=float, default=0.012)
     ap.add_argument('--rim2', type=float, default=0.0)
+    ap.add_argument('--radial', type=float, nargs=2, default=None); ap.add_argument('--cover-max', type=float, default=0.6)
     ap.add_argument('--core-glow', type=float, default=0.0)
     ap.add_argument('--day', action='store_true'); ap.add_argument('--ambient', type=float, default=0.05)
     ap.add_argument('--base-tint', default='smoke')

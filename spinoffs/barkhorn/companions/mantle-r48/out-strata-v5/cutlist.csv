@@ -1,0 +1,14 @@
+part,qty per set,width mm,height mm,thickness mm,material,through cuts,pockets (depth mm),underside pockets (depth mm),not in the 2D file
+plinth-L1,1,450.0,360.0,9.5,trucast-tint,0,,,"the opening at 70, 355 rounded over from the outer face (1 faces, 0 to 0 deg off the sheet); the opening at 380, 355 rounded over from the outer face (1 faces, 0 to 0 deg off the sheet); the opening at 90, 355 rounded over from the outer face (1 faces, 0 to 0 deg off the sheet)"
+plinth-L1-inlay,1,430.0,340.0,9.5,trucast-clear,6,,2 7,"the opening at 60, 338 rounded over from the outer face (1 faces, 0 to 0 deg off the sheet); the opening at 80, 338 rounded over from the outer face (1 faces, 0 to 0 deg off the sheet); the opening at 350, 338 rounded over from the outer face (1 faces, 0 to 0 deg off the sheet)"
+plinth-L2,1,450.0,360.0,9.5,trucast-tint,0,,,"the opening at 70, 355 rounded over from the outer face (1 faces, 0 to 0 deg off the sheet); the opening at 380, 355 rounded over from the outer face (1 faces, 0 to 0 deg off the sheet); the opening at 90, 355 rounded over from the outer face (1 faces, 0 to 0 deg off the sheet)"
+plinth-L2-inlay,1,430.0,340.0,9.5,trucast-clear,6,0.4 6.4 8.4,,"the opening at 60, 338 rounded over from the outer face (1 faces, 0 to 0 deg off the sheet); the opening at 80, 338 rounded over from the outer face (1 faces, 0 to 0 deg off the sheet); the opening at 350, 338 rounded over from the outer face (1 faces, 0 to 0 deg off the sheet)"
+plinth-L3,1,450.0,360.0,5.6,trucast-tint,3,5,,
+base-L1,1,380.0,290.0,12.7,trucast-tint,4,,,
+motor-plate,1,90.0,90.0,3,aluminium,1,,,
+rear-plate,1,110.0,47.7,2,brass-sheet,10,,,
+lid-top,1,448.0,358.0,3,trucast-tint,0,,,
+lid-front,1,448.0,97.0,3,trucast-tint,0,,,
+lid-back,1,448.0,97.0,3,trucast-tint,0,,,
+lid-left,1,352.0,97.0,3,trucast-tint,0,,,
+lid-right,1,352.0,97.0,3,trucast-tint,0,,,
