@@ -1807,3 +1807,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   speaker d8f613ec) is a one-line re-render if the owner picks it; no polished renders yet.
 - 14:14 check-in #42 (due 14:11, not yet fired) moved to 15:04 as #43 with the current state. The base question is still with the
   owner (asked 12:52); the horn question waits behind it.
+- 14:14 biomes lane: reordered; when Haze lands, Ice renders next (64 samples, as Dust v2, ~15 min), then Fog, the Poison sunfleck
+  proxy, Acid (sink 0.03), Poison's final if the proxy reads. It will check the Ice batt is clearly visible and send a crop with the
+  frame. Polished is one flag (habitat.py `--horn-rough 0.05` on the horn-satin material, added to habitats.py's command); nothing
+  polished renders until I say.
