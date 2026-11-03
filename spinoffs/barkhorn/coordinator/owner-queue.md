@@ -1654,3 +1654,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   lane: E built (bb0b27eb), E-night proxies at 14 cm and 0.75 m next. Lamps lane: four frames rendering after caaacb27 (Core day and
   night with the frost, the Hemisphere pair on one camera). Biomes: the feet fixed (936ae297), set props dropped per habitat
   (aaec2b9d: Dust's tumbleweed), Ember proxies, then all seven. Re-armed for 13:21 (#41) with the current threads.
+- 12:32 Mantle g4 gate wf_3919563b-3fc (3 critics, 16 min): all HOLD 3/3. The underglow fixed again (floor, base, gap identical); the
+  deck sides dark at night; off/on works. The day REGRESSED to 0/3 (the white-up border made "a bright red-pink lip with a black line
+  beside it": "a red trim stripe"; the sides flat mid-grey "plastic"). Ember night: "one even pure red plane" ~164-176/4-6/1-3, a
+  lightbox; one critic found the arm rest, pillar and base disc unlit. Poison night: a yellow-lime line along the right and front-right
+  inner edges (the strip showing), 1/3-40 % of Ember's glow, blotchy.
+- 12:33 sent g5: the Ember pair first; the border printed like the field (sparse dots + black overprint) so by day it matches the
+  field; the painted and taped edges as glossy black, the smoked base glossy and faintly see-through; Ember night down a third with
+  reflections, a gentle real falloff, the colour off pure sRGB red (view transform), the arm lit, a neutral rim, no arcs. And the
+  design question: is "lacquer by day, lightbox at night" inherent to the v4 layered deck? If so, the options and costs go to the owner.
