@@ -2106,7 +2106,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   four plinth lamps gone, horn polished; also feeds launch post 6 and Sessions); (3) a dark-field Ember hero, only if the invitation
   card and teaser beat 1 keep the dark look. idea-milan re-shot from the facade replacement or the row; the brief PDF, grid, social,
   teaser, invitation and one-pager follow their sources.
-- 15:25 sent to the bar lane (session_01F92PeyfLNoJKA3GtzQwjAe, idle since 2026-10-31): re-render bar-listening.jpg (Tropos on own
+- 15:24 sent to the bar lane (my message said 15:25, ahead of the clock) (session_01F92PeyfLNoJKA3GtzQwjAe, idle since 2026-10-31): re-render bar-listening.jpg (Tropos on own
   feet, horn A polished from r33-speaker-horn 5295e58f per HELPERS.md; the four plinth lamps removed; the room's lights kept; a proxy,
   then the final; one render at a time; commit on r33-planet-world, SHA to me for the gate) and list every other bar or Planet EARF
   picture with Tropos on a lit plinth, lit from below or with the stepped horn. facade.jpg waits on the owner's item 3; the dark-field
