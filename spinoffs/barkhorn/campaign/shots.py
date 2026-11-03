@@ -374,7 +374,29 @@ def deck_row():
     return s
 
 
-SHOTS['deck-row'] = deck_row
+def _row_gate3(s):
+    """The deck row's fixes (the coordinator's blind critics, 2026-11-03, 2 HOLD 1 SHOW): the camera-right side faces
+    mirrored the white sweep and the key (Smoke's a silver panel, Ice and Haze milky) and each its neighbour (Poison a blue
+    stripe from Ice). A black card behind and right of the row, seen only in reflections (no shadow, no bounce), where the
+    side faces' mirror rays go (about +0.75 x, +0.66 y from a face turned -24 deg); the units a little wider apart; and the
+    sweep's falloff at the bottom left lifted by a soft lamp on the sweep alone."""
+    blk = s['products'][0]
+    n = len(blk['instances'])
+    for k, i in enumerate(blk['instances']):
+        i['position'] = [round((k - (n - 1) / 2) * 1.0, 4)] + list(i['position'][1:])
+    for blk2 in s['products'][1:]:
+        for k, i in enumerate(blk2['instances']):
+            i['position'] = [round((k - (n - 1) / 2) * 1.0, 4)] + list(i['position'][1:])
+    s['set'].setdefault('flags', []).append({'center_m': [2.2, 2.6, 0.9], 'size_m': [13.0, 2.6], 'normal': [-0.75, -0.66, 0.0],
+                                             'reflect_only': True, 'color': '#050505'})
+    s['lights']['sweep-left'] = {'type': 'area', 'size_m': [6.0, 4.0], 'position': [-4.5, -5.0, 4.0], 'target': [-3.5, -2.5, 0.0],
+                                 'irradiance': 1.2, 'color': '#FFFFFF', 'receivers': ['sweep']}
+    # (its proxy: the glossy sweep at the bottom right mirrors the card, 237 to 215; the same lamp on the right)
+    s['lights']['sweep-right'] = {**s['lights']['sweep-left'], 'position': [4.5, -5.0, 4.0], 'target': [3.5, -2.5, 0.0]}
+    return s
+
+
+SHOTS['deck-row'] = lambda: _row_gate3(deck_row())
 
 
 def deck_cover():
@@ -405,8 +427,44 @@ def deck_cover():
 
 SHOTS['deck-cover'] = deck_cover
 # the deck's Home slide: the golden-hour room (754e16a9's scene, covers off) with the pair turned into the final design
-SHOTS['deck-home'] = lambda: dict(strata_lit(room_off(), glow=20.0), title='Tropos at home, golden hour, Poison (the final design)')
-SHOTS['deck-home-portrait'] = lambda: dict(strata_lit(room_off_portrait(), glow=20.0),
+def _room_gate3(s):
+    """The room's fixes (the coordinator's blind critics on the portrait, 2026-11-03, 2 HOLD 1 SHOW): the low sun raked
+    both bottom chambers at floor level, so the bottoms glowed green, the brightest part of each speaker, which reads as
+    a base light by day (the owner: no light). The windows get a sill at 0.9 m (their tops stay at 2.75) and the sun
+    goes down to 8 deg, so it reaches the left unit only above about 0.77 m and the right above about 0.41 m: the bottom
+    40 cm in shade, the light through the upper cabinets and the horns onto the wall behind. AgX in place of PBR
+    Neutral so the greens roll off, and 2/3 of a stop down; the left unit turned so its right side shows its green; the
+    right a little more, off the woofer's pinwheel shadow. The two leads (one to each unit's own outlet, behind it)
+    are kept."""
+    for w in s['set'].get('windows', []):
+        top = w['sill'] + w['size'][1]
+        w['sill'] = 0.9
+        w['size'] = [w['size'][0], round(top - 0.9, 3)]
+    # (its proof at -1.37: the fronts still dark boxes, the left 11 and the right 22 against the row's Poison front at
+    # 48.6. The sun at azimuth -68 reaches the left unit through the window nearest the back wall (along 2.75) and the
+    # right through the next (along 1.15), so that one window alone gets a lower sill, 0.55: the sun reaches the left
+    # unit from about 0.42 m up, its middle, while the right keeps its 0.41 m and both bottoms stay in shade)
+    for w in s['set'].get('windows', []):
+        if abs(w.get('along', 0) - 2.75) < 1e-6:
+            top = w['sill'] + w['size'][1]
+            w['sill'] = 0.55
+            w['size'] = [w['size'][0], round(top - 0.55, 3)]
+    s['sun']['elevation_deg'] = 8.0
+    s['render']['view'] = 'AgX'
+    # (its proxy: AgX sits about half a stop under PBR Neutral, so -2/3 left the cabinets near black: -2/3 + 1/2)
+    s['render']['exposure'] = round(s['render'].get('exposure', 0.0) - 0.17, 2)
+    for blk in s['products']:
+        for i in blk['instances']:
+            x = i['position'][0]
+            if x < 0:
+                i['rotate_z'] = 1.0
+            else:
+                i['rotate_z'] = -8.0
+    return s
+
+
+SHOTS['deck-home'] = lambda: dict(_room_gate3(strata_lit(room_off(), glow=20.0)), title='Tropos at home, golden hour, Poison (the final design)')
+SHOTS['deck-home-portrait'] = lambda: dict(_room_gate3(strata_lit(room_off_portrait(), glow=20.0)),
                                            title='Tropos at home, golden hour, Poison, portrait (the final design)')
 
 
@@ -464,7 +522,51 @@ def site(frame, tint):
     # rather than a cone (renders/2026-11-02/barkhorn/horn-study/deep/README.md): off; the rest of the rig as it was
     if 'rim' in s.get('lights', {}):
         s['lights']['rim']['power_w'] = 0.0
+    _siteG_round1(s, frame, tint)
     return s
+
+
+def _siteG_round1(s, frame, tint):
+    """The roll-out's gate on front-off-tall (the coordinator's blind critics, 2026-11-03): a hard white reflection over
+    the lower half of the right side face in every tint, the owner's "spray painted white". It is `sidesheen`, a
+    specular-only panel behind and right of the speaker put there so the side would read; tall, wide and side share it
+    (back and hero-light do not). It goes off, and a black card that only reflections see takes its place, where the
+    right face's mirror ray goes from this camera, so the face shows its own tint. The top light comes down a little so the
+    top batt keeps its tint, the key turns a little so no caustic starts at a foot, and Fog loses the -0.6 its old rig
+    carried, to match the other six."""
+    import math
+    if frame not in ('front-off-tall', 'front-off-wide', 'side'):
+        return
+    L = s['lights']
+    if 'sidesheen' in L:
+        L['sidesheen']['strength'] = 0.0
+    # (the proxies: with sidesheen off the lower right face still read pale, 226 to 220. The rest was `through`, a small
+    # lamp behind the speaker aimed through it at the floor, whose image sat in that face: off, 220 to 156 and the
+    # face's saturation 0.47 to 0.58; the floor's coloured light is the key's and stays. Only the tall rig has it)
+    if 'through' in L:
+        L['through']['irradiance'] = 0.0
+    if 'horn' in L and L['horn'].get('irradiance'):
+        L['horn']['irradiance'] = round(L['horn']['irradiance'] * 0.65, 3)
+    if frame == 'front-off-wide' and 'topline' in L:
+        L['topline']['strength'] = round(L['topline']['strength'] * 0.65, 3)
+    if 'key' in L and 'orbit' in L['key']:
+        L['key']['orbit']['azimuth_deg'] = L['key']['orbit']['azimuth_deg'] - 5.0
+    if tint == 'fog':
+        s['render']['exposure'] = 0.0
+    # the card: from the camera to the middle of the right face, mirrored in the face, 1.2 m on
+    cam = s['camera']['position']
+    i = s['products'][0]['instances'][0]
+    a = math.radians(i.get('rotate_z', 0.0))
+    nx, ny = math.cos(a), math.sin(a)                       # the right face's normal, turned with the speaker
+    px = i['position'][0] + 0.28 * nx; py = i['position'][1] + 0.28 * ny; pz = 0.45
+    dx, dy, dz = px - cam[0], py - cam[1], pz - cam[2]
+    m = math.sqrt(dx * dx + dy * dy + dz * dz); dx, dy, dz = dx / m, dy / m, dz / m
+    k = dx * nx + dy * ny
+    rx, ry, rz = dx - 2 * k * nx, dy - 2 * k * ny, dz
+    h = math.sqrt(rx * rx + ry * ry) or 1.0
+    rx, ry = rx / h, ry / h
+    s['set'].setdefault('flags', []).append({'center_m': [round(px + 1.2 * rx, 3), round(py + 1.2 * ry, 3), 0.5], 'size_m': [1.8, 1.3],
+                                             'normal': [round(-rx, 3), round(-ry, 3), 0.0], 'reflect_only': True, 'color': '#050505'})
 
 
 def _siteF_round3(s, frame):
