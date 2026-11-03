@@ -1486,3 +1486,14 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   critic: "a stray dark mark"). Sent to the lane (low priority): set the channel back behind the brace's lip or recess it, noted in
   BASES.md. The horn noted by all three as satin by spec: "carries the tint but not the depth... a different material from the
   glass-clear cabinet" (evidence for the horn-finish question).
+- 11:02 lamps lane round 5 at c523bc190d4826a74bff25704ee1d5e89a9955e1 (both 5700 K). Core frosted: a dim window glint on the outer
+  gloss (a camera-invisible card), the frosted inner sphere as its own layer with a darker band at the rim; the frost 30 % diffuse
+  transmission (was 50 %), brightest low over the LED; the LED raised to 24 W [E]; a soft, honestly faint blue wash on the wall and
+  table at 0.55 m (closer, ~0.3 m, would show more); the "liquid line" is the table edge through the ball. Hemisphere: the spill
+  down ~1.8 stops (1.2 to 0.35 W), the face Ice blue; the rim fix modelled (05bf9afe: the opal ends 4 mm inside the rim, the rim's
+  face bead-blasted satin, ~+$3-5 a shade); the day frame's camera with a 30 mm lens, the whole cable and the pool, a stoneware bowl;
+  the pendant still ~13 % of the width (bigger needs a new shared camera). A faint cool halo on the wall.
+- 11:03 gate wf_9a7d02a8-b7c on the two nights with their day frames (sha256 core 76a245a6, hemi 7d56740f). Sent: start a new shared
+  steeper, closer camera for Hemisphere's day AND night (pendant 25-35 % of the width) in parallel; Core keeps its position. The rim
+  fix and Mantle's blackened skin edges go to the owner together as one small finishing call (the same physics: polished edges pipe
+  light).
