@@ -37,7 +37,9 @@ SETS = {
     # cabinet sits in its own shadow (a near-black box). The key from the side, as in Dust (sun at 118, passed)
     # (the sun lamp at 1.5 deg is lost in the grass and hills: 6 deg as Dust's; the sky's own sun disk turned with it,
     # 248.3 -> 187.8, so the sky and the lamp agree and nothing bright sits behind the speaker)
-    'acid_b': {'product.instances.0.rotate_z': -8.0},   # 28 deg off mirrored a wedge (crease 26.7), 10 deg off 13.7: 4 deg, as Ice
+    # ruling 2 (the coordinator, 20:21): no part-links; the shot's rim lit the speaker's 99 parts alone, so it now lights
+    # whatever it reaches
+    'acid_b': {'product.instances.0.rotate_z': -8.0, 'lights.rim.receivers': None},   # 28 deg off mirrored a wedge (crease 26.7), 10 deg off 13.7: 4 deg, as Ice
     # the polished horn mirrors the bright sky in one wall as a pale wedge (half an X) when it's turned far from the
     # camera; turned to about 10 deg off the camera's line it reads clean, as Ice's does (front-on gives a symmetric X)
     # (at -5, 10 deg off, Haze's narrow side face, seen near grazing, mirrored the bright sky as a flat lavender sheet;
@@ -54,7 +56,8 @@ SETS = {
     # (the gap's lamp mirrored in the polished horn's rim as a white check-mark glint and green flecks by the pod: a wider,
     # softer gap at the same irradiance, so its radiance, and so its reflection, is about a quarter; reflections at full)
     # (at 5 the real sun, from azimuth -100, caught the rim's lower-left lip as a white check-mark glint: 9 moves it off)
-    'poison_g5': {'product.instances.0.rotate_z': 9.0, 'lights.skygap': {'type': 'area', 'size_m': [3.0, 3.0], 'target': [0.0, 0.0, 0.6], 'irradiance': 12.0,
+    # ruling 1: the shot's litter bounce had specular 0 (hidden in reflections); at full now
+    'poison_g5': {'product.instances.0.rotate_z': 9.0, 'lights.litter.specular': 1.0, 'lights.skygap': {'type': 'area', 'size_m': [3.0, 3.0], 'target': [0.0, 0.0, 0.6], 'irradiance': 12.0,
                                     'color': '#EEF2E2', 'orbit': {'azimuth_deg': 30, 'elevation_deg': 55, 'distance_m': 3.5},
                                     'specular': 1.0}},
 }
