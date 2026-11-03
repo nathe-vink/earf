@@ -1296,3 +1296,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   a 0.3 W warm kicker for the hardware; the base top fine satin (no red bar); the camera panned 50 mm; floor neutral. +$120-150 a
   unit, $3,897; ~3 W; the deck 24.6 mm (0.6 under spec 25.4: an owner sign-off). Gate running on Mantle g1 + the four lamp frames
   (wf_97dd1b84-14a).
+- 08:57 speaker lane: A polished (a47ae365561e4d7048527bf744a35b89af6c63e4, gate2/A-ice.png); the built-in light modelled
+  (baa6803e, 5824a851, 12ae24ae). First D-night proxy (28 W) against proxy 5 (plate + brace): the wall behind 39 vs 0 (the speaker's
+  own blue up the wall, from the top and upper walls); the horn a silhouette; floor pool 22 vs 23; front edge 37 vs 35; up/port 0.28
+  vs 0.38. Next: the floor 10 W/m, the brace 30 W/m (~30 W), aiming 0.5. Then B day, B night 4, B night 5, D proxy, D day, D night,
+  Smoke-D black, Smoke-D white: ~1 h 45 min.
