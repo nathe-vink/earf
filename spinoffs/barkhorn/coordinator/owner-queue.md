@@ -2666,3 +2666,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 18:09 sent to the bar lane: r44-lantern passed 2/3 at 17:25; its whole queue after r43-window: the r44 polish (the left speaker's
   upper body to ~45-55 by a soft room light, no floor pool; the side-edge red line; the woofer glints), the r43-listening polish, r43-shop
   v3; a proxy then the final for each; SHAs and paths.
+- 18:15 biomes lane (its message said 18:16): the Fog reframe proxy at bde3bec8dd75c3120c2d233d54270ba5630347f6
+  (renders/2026-11-03/barkhorn/fog-reframe/fog-proxy-before-after.jpg, 0.5 scale): the crease contrast (flare right of the driver, L*
+  p5-p95) 35.5 to 20.3 (target 20 or less); the sky b* 2.7 to -1.2; the cut-edge b* p90 22.1 to 17.3 (target 5 or less). The horn on
+  plain sky with the fog bank's top just under its lip; one soft diagonal from the throat to the lower right remains, much weaker; the
+  right rock now clear of the cabinet's top. The sheet is colourless (T 1.0), so the warmth is the light: the final's sun neutral white
+  (#FFFFFF); if still above 5, a white-point grade (the camera's white balance), not the sheet. My look at the pair agrees: the fan is
+  down to one soft line. Running: Acid, Haze, Poison finals, then the Fog final; done ~20:45 UTC.
