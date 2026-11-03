@@ -3039,3 +3039,15 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   to mirror, not more turn); a soft amber reflection outside the ring at 4-5 o'clock (a foreground lava crack mirrored). The biomes item now
   holds Dust, Ice and Ember (each 3/3); Haze, Acid, Poison and Fog in progress.
 - 19:43 sent to the biomes lane: Ember passed 3/3, no change; the two optional notes; carry on.
+- 19:43 speaker lane: the deck hero's honest fix (no links, no multipliers in the fix): crop tests on the top chamber (as before 205,63,63, 26 %
+  clipped; key at -60 azimuth 170,1,2, 0 %; key at -52 180,4,5, 0 %; key at elevation 10 worse, 64 %; key 0.6 with more fill 192,46,46, 0 %;
+  AgX 0 % but pink); taken: the key at -60, the fill (unlinked, specular 1.0) 1.6 to 2.4. Proxy against 67f795ab: the lower right face
+  saturation 0.22 to 0.97 (the upper 0.58 to 0.90); the top chamber 176,1,2, 0 % clipped; the lid strip 28,10,8. Honest costs: the front 110 to
+  75, the woofer 88 to 59, the horn 195 to 170 (still saturated red); the floor's through pool on the right gone. At ad14099b59fa30cce5cd9b78014d66811814d6b9.
+  Next: the cover proxy (side_l moved, no links), then the hero's full render (~84 min). Audit: the turn rig (c4's chunk 6) has no sidesheen or
+  through, but its `glow` lamp (irradiance 1.6) is at specular 0 (the multiplier kind); studio31 has front-strip linked to '*#0' and ring-card
+  linked to the woofer ring; bg-left and bg-right at specular 0.
+- 19:44 sent to the speaker lane: confirm the hero and cover rigs carry the 19:32 rulings (horn specular 1.0, kick and back unlinked), else fold
+  them in; the fix1 proof and SHA next (three helpers idle); the hero's full render and the cover chunk as plain lines for c4, not on the
+  lane's machine; the turn rig's glow to specular 1.0 (or dropped) before c4's phase-2 chunk 6; studio31's front-strip and ring-card links fixed
+  with the hero-light pass; bg-left and bg-right at specular 0 stand if they light only the sweep.
