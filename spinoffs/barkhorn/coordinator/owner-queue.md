@@ -1190,3 +1190,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   cards, glossy-only) still on Smoke; Mantle round 2 source 3b2aed4d (06:50, the deck as a lantern), renders pending; lamps Ice
   pictures 275b22c8 (07:19) and their own critics failed all four (2d1c3bca, 07:20), iterating; site holding; review-room cards done,
   its skeptic running. Re-armed #35 for 08:13.
+- 07:29 biomes lane (interim; code 394a8fa77fc26a29054f6282aa6253ed4827018b): ROOT CAUSE of opaque speakers: the asset's acrylic is a
+  Volume Absorption inside panel meshes that don't close, so rays never leave and absorb across the whole 0.4 m cabinet (black and
+  white linings rendered identically; a 120 backlight and 2064 changed nothing); and Cycles' refractive caustics are off. Their
+  wrapper fix: the tint on the faces (sqrt of each wall's TT; 2074 about 35 % a face) and shadow rays tinted through walls (like the
+  lamps' tint_caustic). Done too: horn A built from 4ec3bc96, the M8 feet settled with contact and reflection, a black flag and side
+  cards, the right rim and all front fills off (the fills lit the white lining through the glass = the white veil). Their last proof's
+  blind 4-test: grounded PASS, no light down PASS, smooth horn PASS, see-through FAIL; the passing proof is rendering (~30 min).
+  Note: horn A's build gives Smoke a white lining (0.8); colors F says black. Speaker lane told (07:30): verify the asset (closed
+  meshes, outward normals), test B-ice with the fix, re-check the F rows and frame A, Smoke's lining, then re-render A/B/C/B-smoke.
