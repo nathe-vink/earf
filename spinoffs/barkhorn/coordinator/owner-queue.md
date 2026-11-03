@@ -2474,3 +2474,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   r44-lantern was rendered before my staging note but has the lit oak slat wall behind and the pair's spots as key.
 - 17:11 bar lane: the re-staged r43-listening's SHA is df0c7394f73fcdade5afb2ca5af384ba98328612 ("7a58e9b7" was a slip). My gate on it
   (the held version and the old House Book version as context) started 17:12.
+- 17:23 speaker lane: Smoke target v2 at 36ccca60d912e790a190c7d8d87fbc4402b13fe9 (renders/2026-11-03/barkhorn/smoke-target/Smoke-target-look-v2.png;
+  NOTES.md updated): (1) the flare (horn-satin) one notch deeper, #A6A9AE at 10 mm, ~38 % through (a real sheet: a grey of ~40 % at
+  3/8 in, held); horn mean 147 (v1 156), p10/p90 38/192 (v1 38/203), more shading; the cabinet 115. (2) The cool cast: horn RGB
+  145,147,148 (v1 157,155,151). (3) The tabs average 72 with a near-black core: each front pad is a solid acrylic block with the post's
+  bronze insert bonded inside, the insert the dark core; the thick parts lightened (horn-formed #C8CBD0; the pad 68 to 72); a uniform
+  45-50 needs a build change (a shorter insert, or one in clear or smoked acrylic): noted. Chunk 1 (the deck hero) rendering, then 3,
+  4. My gate on v2 (2064 white, v1 and Ice polished as context) started 17:23.
