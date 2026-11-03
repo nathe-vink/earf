@@ -1799,3 +1799,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   looking part at phone size, with the only near-white streak of the pair (top-right corner into the throat). Caption by finish (the
   satin file is named A-polish-ice.png). Side-by-side built: scratchpad/for-owner/horn-satin-vs-polished.jpg. The horn question goes
   right after the base answer (one question at a time).
+- 14:11 biomes lane (its message said 14:12): Ice failed to render: killed (signal 9) when the lane's Poison proxy ran beside it and the
+  pair ran out of the 15 GB (its slip; nothing runs beside the chain any more). Haze rendering alone. Its queue, one at a time: Fog, the
+  Poison sunfleck proxy, Ice, Acid (sink 0.03), Poison's final if the proxy reads. The set now ~17:15 (was ~15:45).
+- 14:13 sent: Ice right after Haze (the owner's batt note is about Ice; the batt clearly in frame), then Fog, the Poison proxy, Acid and
+  Poison's final in its order. Keep each habitat's scene at its committed state, so a polished horn (the outside at roughness 0.05, as
+  speaker d8f613ec) is a one-line re-render if the owner picks it; no polished renders yet.
+- 14:14 check-in #42 (due 14:11, not yet fired) moved to 15:04 as #43 with the current state. The base question is still with the
+  owner (asked 12:52); the horn question waits behind it.
