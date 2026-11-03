@@ -3192,3 +3192,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   Haze A/B, Acid unlinked with real cards against its proxy; then the Acid final (with the critics' notes), then Poison's.
 - 20:23 sent to the speaker lane: glow accepted (noise), chunks 4 and 05 stand, no re-run; chunk 6 held until the two black side flags are in
   the turn rig and proved on 01 and 05; inside-ice's fixes on the same SHA (inside-ice alone re-rendered); the floor patch first.
+- 20:2x Haze habitat gate wf_fc7fc743-83d (3 critics, ~22 min): HOLD 3/3. Grounded, no light down, no milky face, the horn smooth; but the
+  box's upper two-thirds crushed to sRGB 4-8 (~0.5 % of the sky in linear light, the passed three 5-22 %), see-into only in the lower third,
+  no voile visible: a navy block at phone size. The horn ultramarine/cobalt (hue ~243, 43,36,149) against the box's violet, ~5x the box's
+  brightness (the set 0.9-1.7x), so it reads as a second blue next to Ice. The upper front face's red median 0 (no honest sheen; the flag
+  behind the camera suspected). The horn top at 46 % of frame height (the set 31-36 %). Minor: a blue LED-like mark on the left side face's
+  top-left (x~612, y~930); a faint X on the horn's right half at Ember's level.
+- 20:28 sent to the biomes lane: the five fixes (real sun through a side or back wall, no lightened material or hidden fill, a global tone
+  change allowed; horn and box to one violet checked against TINTS.md, #4512D0 and 2287's split; an honest sheen on the front face, the flag
+  smaller or moved; the horn top near one third; the blue mark and the faint X); after the Haze A/B, a proxy with numbers, then its final.
