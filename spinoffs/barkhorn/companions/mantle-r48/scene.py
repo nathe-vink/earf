@@ -1274,9 +1274,8 @@ def build(args):
             o['caustic'] = True
         elif f:
             o.data.materials.append(M[f])
-            if n == 'led-channel' and args.matte_channel:
-                # C3: the backer film runs across the groove's opening, so the channel cannot be seen from below
-                o.visible_camera = False; o.visible_glossy = False; o.visible_transmission = False
+            # (C3 had hidden the channel from camera, glossy and transmission rays; the groove film below it hides it
+            # physically since C3d, so the ray hiding is gone: ruling 3, nothing hidden from views through the resin)
     # the cover: on, off (hidden), or stood on its back edge beside the deck (the frame for the sleeve)
     cov = objs.get('cover-C1-stack') or bpy.data.objects.new('nocover', None)
     if args.shot in ('hero', 'macro', 'macro-stylus', 'use', 'dusk') and cov.type == 'MESH':

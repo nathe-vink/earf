@@ -879,6 +879,18 @@ the parts list stays at $3,897.
 - **The night "gaming" read**, black chassis and red field, stays as the coordinator's named residual risk. The set
   is unchanged.
 
+**Rulings 1-3 (the coordinator, 20:06), checked against the C3d rig.**
+- **The lamps** are area lights and one spot: key, strip, side, fill, bg, top, spot and the night wall-wash. At night
+  the room's lamps are scaled to 0.3 % and tinted navy.
+  - None has its specular factor below 1; none is light-linked to some parts only; none has transmission off.
+  - The wall-wash is hidden from camera rays only. It sits out of frame, lighting the wall.
+- **The glow** is an emitting sheet inside the deck, seen by every ray through the resin. Its shadow visibility is off
+  so that it doesn't block light; it emits upward only, as the dot print does. The LED strip itself is drawn unlit,
+  with its output carried by the sheet; it sits behind the groove film.
+- **One mesh had a ray-visibility hide:** the strip's aluminum channel (camera, glossy and transmission off since C3).
+  It is not a lamp, and since C3d the groove film hides it physically, so the hide is removed.
+  - Re-proxied on the under-deck crop (64 samples): no amber pixels, against none in C3d. The C3d frames stand.
+
 ### The render (how the light is drawn)
 
 The guide's output is drawn as an even Lambertian glow just above the print: 9 W/m2. That figure follows from the
