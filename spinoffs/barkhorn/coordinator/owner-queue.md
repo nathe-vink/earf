@@ -2683,3 +2683,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   or rock, or the sky or camera turned), the material, tint and polish unchanged; the hot spot by a real change (a small yaw, the lava
   moved), not retouching; optional more mist glow behind the upper cabinet within spec. For every remaining final (Acid, Haze, Poison,
   the Ember re-render): a proxy crease measure first (target 20 L or less), fixed the same way if over, the number sent with the final.
+- 18:22 c3: chunk 10 landed (site-hero-light dust and acid, 2400 x 1350, 20.5 and 20.4 min; 17:37-18:19) at
+  fd81e8730361c7cf6fc66e4d6368023eaf4a27c7 (the push ~3 min); chunk 15 (back haze, fog) started 18:20. The sets as they complete:
+  front-off-wide with c4's chunk 09 (fog); side with c2's chunk 14 (haze, fog); hero-light with c4's chunks 09 (ember) and 12 (haze,
+  fog); back with c2's chunk 14 (ember to ice) and c3's chunk 15 (haze, fog).
