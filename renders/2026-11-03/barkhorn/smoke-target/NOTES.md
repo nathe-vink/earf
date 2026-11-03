@@ -28,3 +28,16 @@ The horn now reads as smoked glass, like the cabinet: the throat dark, the lip a
 So the walls do cut the light. The batt is bright because the studio's top light is strong: without the tint, the batt clips. The frame does not oversell the sheet.
 
 **The sheet itself:** none in our data. The one real candidate is Chemcast's 2064 ("Light Smoke" at TAP, 57.07 % at 0.118 in, R1 l.203). Held at 3/4 in, it would sit just above the 45-55 % band, and only off-cuts or a sample settle that.
+
+## v2 (2026-11-03, after the gate's HOLD on the horn)
+
+`Smoke-target-look-v2.png`, on the same set, camera and exposure:
+- **The flare** (`horn-satin`, the polished shell) is one notch deeper, with the cabinet's slight cool cast: `#A6A9AE` at the horn's 10 mm, about 38 % through the wall. Before it was `#B6B6B6`, neutral.
+- **The throat, pod, cap and pads** (`horn-formed`) are lighter, `#C8CBD0`, so the thick parts don't go black.
+
+| | horn mean | horn 10th / 90th percentile | horn RGB | cabinet |
+|---|---|---|---|---|
+| v1 | 156 | 38 / 203 | 157, 155, 151 (a little warm) | 115 |
+| v2 | 147 | 38 / 192 | 145, 147, 148 (cool, like the cabinet) | 115 |
+
+**The tabs** (the front pads under the horn) average 72, with a near-black core. The pad is a solid acrylic block, and the post's bronze insert is bonded inside it. That insert is the dark core: the post's fixing seen through the pad, not a dark material. Lightening the pad's sheet further leaves the core, so no setting gives a uniform 45-50. A shorter or a clear insert is a build change.
