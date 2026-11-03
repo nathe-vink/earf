@@ -2637,3 +2637,14 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   pictures, the helpers on pinned SHAs); TINTS.md to say plainly the edges render coral-red where the real 9097's glow yellow; a 9097
   chip photographed edge-on added to the samples list for the owner (with Smoke's chips). Smoke v3 agreed; on its proxy the posts, the
   body and the tab insert's hue.
+- 18:05 r43-shop v2 gate wf_58a4dd5a-08b (3 critics, ~20 min): HOLD 3/3 on test 3's look. On the product the best version yet: the
+  Ember pair see-through red acrylic on its own feet, hard attached shadows, the horns the same polished red glass (darker only by the
+  window behind; no 2.2 m eye needed). The hold: the display spots' floor pools at the feet are the frame's brightest, hardest shapes
+  (~0.85 between the cabinets, ~2.5x the tops), red rims from both bases, a red wedge at the front cabinet's right foot: physically
+  right (filtered light), but with no fixture in frame it reads as light thrown down from the speakers. Also: the window's ghost horn
+  (~70 % of the real one, on its mouth: a third speaker), the cut-off table lower left the brightest object, flat upper faces, noise.
+- 18:06 sent to the bar lane: shop v3 after its queue (r43-window, the r44 polish, the r43-listening polish): the key moved to the shop
+  side, high (behind the camera or camera-left), so the coloured shadows fall behind the pair toward the glass, at most a soft street
+  rim (not just narrower street spots); targets: the floor at the feet darker than the red faces, no red at a base, the pair the
+  brightest thing; the ghost hidden behind the right horn; the table cropped or darkened; a soft shop-side fill for the upper faces,
+  the left horn carrying Ember; more samples; optional a spot head in frame. Proxy, then final; SHA and path.
