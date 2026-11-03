@@ -3752,6 +3752,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   6. The turn, arc, inside-ice, EARF finish.
   Round 2's edge-off and 40° key/kick are kept.
 - 23:41 sent to c3: hold; its next job is the honest horn close-up when the lane's line comes.
-- 23:43 sent to the biomes lane (item 5's Ice included), the Mantle lane (C3e, and the night pictures from now on) and the lamps
+- 23:42 sent to the biomes lane (item 5's Ice included), the Mantle lane (C3e, and the night pictures from now on) and the lamps
   lane: run the whole-rectangle card test (cardcast.py or an equivalent) on their passed and in-flight rigs, report any card's
   share of the frame, and note ruling 4 (sets cast shadows; light only through real openings).
+  (Time fix: those three messages were stamped "23:43" but sent at about 23:42, before a 23:42:22 `date -u`. My error: `date -u`
+  before every stamp. The correction rides on my next message to each of those lanes.)
