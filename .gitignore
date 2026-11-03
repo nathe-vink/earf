@@ -76,3 +76,5 @@ spinoffs/barkhorn/variants/out/step/
 
 # the roll-out's shot files and queues: rollout.py writes them from the code at any SHA (HELPERS.md)
 spinoffs/barkhorn/campaign/rollout/*-*/
+# the roll-out's unfinished renders (the finish is re-run from them; never committed, HELPERS.md)
+renders/*/barkhorn/rollout/**/*.raw.png
