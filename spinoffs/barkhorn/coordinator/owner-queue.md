@@ -1186,3 +1186,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   (wf_6bf1d731-d0d: three blind critics, the owner's six tests, the site's uplit-blue and uplit-black as references). My own read:
   A good; B/C glow mostly at the bottom (ports), the top half dim, faint blue on the floor at the base, no wall V like the promo;
   the Smoke frames still very dark. Glassy-horn study started.
+- 07:22 check-in #34: speaker frames in, the gate running (wf_6bf1d731-d0d); biomes 75412453 (06:33: a larger black flag and side
+  cards, glossy-only) still on Smoke; Mantle round 2 source 3b2aed4d (06:50, the deck as a lantern), renders pending; lamps Ice
+  pictures 275b22c8 (07:19) and their own critics failed all four (2d1c3bca, 07:20), iterating; site holding; review-room cards done,
+  its skeptic running. Re-armed #35 for 08:13.
