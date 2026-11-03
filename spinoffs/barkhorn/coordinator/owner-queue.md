@@ -3845,3 +3845,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   - c2: keep the rebuilt file; don't commit or revert it.
   - Lamps: ruling 4 bans light through solid set pieces, not lights on an open side, so keep the ambient, the fill and the kicker
     (unlinked, out of frame), with the dome plainly the main light at night (report the fill's share on the wall).
+- 23:49 biomes lane: the order is Haze (rendering, already with real cards), the Acid sun-35 proxy, Ice, Dust, Ember, then the Acid final;
+  each with an A/B (mean and largest local change). Poison: habitat.py `--real-set` (257bb1e98ac57328905ece7feeb7e24fff97524d) turns on
+  every ray type for any set mesh that had some off. The canopy (a 220 m sheet at z 16) becomes real with the shot's own openings
+  (noise gaps plus nine holes along the sun's shafts), the mist casts shadows, and the gap lamp is dropped. The proxy comes after the
+  three re-renders; the final is held. Its question: the low warm `litter` fill (specular 1, unlinked)?
+- 23:50 sent to the biomes lane: the litter fill may stay (a photographer's real fill, out of frame, unlinked, at specular 1, modest,
+  in the open). If the real canopy reads as a flat ceiling, report it; don't hide it.
