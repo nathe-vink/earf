@@ -53,7 +53,8 @@ SETS = {
     # any light from behind: a sunfleck from the back-left left the cabinet at L 2)
     # (the gap's lamp mirrored in the polished horn's rim as a white check-mark glint and green flecks by the pod: a wider,
     # softer gap at the same irradiance, so its radiance, and so its reflection, is about a quarter; reflections at full)
-    'poison_g5': {'product.instances.0.rotate_z': 5.0, 'lights.skygap': {'type': 'area', 'size_m': [3.0, 3.0], 'target': [0.0, 0.0, 0.6], 'irradiance': 12.0,
+    # (at 5 the real sun, from azimuth -100, caught the rim's lower-left lip as a white check-mark glint: 9 moves it off)
+    'poison_g5': {'product.instances.0.rotate_z': 9.0, 'lights.skygap': {'type': 'area', 'size_m': [3.0, 3.0], 'target': [0.0, 0.0, 0.6], 'irradiance': 12.0,
                                     'color': '#EEF2E2', 'orbit': {'azimuth_deg': 30, 'elevation_deg': 55, 'distance_m': 3.5},
                                     'specular': 1.0}},
 }
