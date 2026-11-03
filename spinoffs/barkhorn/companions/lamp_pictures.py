@@ -153,19 +153,20 @@ def build(frame, samples, scale):
             sphere('core-in', ri - 3.0, zi, frosted(acrylic('core-in', inner, 'Clear')), inward=True)
             # round 9 PROPOSAL (the gate: the LED hotspot): a white dot printed inside the core over the LED, Ø50, that
             # sends about half the near light back up into the core, as LED globes do
-            bm = bmesh.new(); bmesh.ops.create_uvsphere(bm, u_segments=128, v_segments=64, radius=(ri - 3.5) * MM)
-            zcut = -math.sqrt((ri - 3.5) ** 2 - 25.0 ** 2) * MM
-            bmesh.ops.delete(bm, geom=[v for v in bm.verts if v.co.z > zcut], context='VERTS')
-            for f_ in bm.faces:
-                f_.smooth = True
-            me = bpy.data.meshes.new('dot'); bm.to_mesh(me); bm.free()
-            do = bpy.data.objects.new('dot', me); bpy.context.scene.collection.objects.link(do); do.location = (0, 0, zi)
-            dm = bpy.data.materials.new('dot'); dm.use_nodes = True; nt = dm.node_tree; nt.nodes.clear()
-            o_ = nt.nodes.new('ShaderNodeOutputMaterial'); t_ = nt.nodes.new('ShaderNodeBsdfTranslucent')
-            d_ = nt.nodes.new('ShaderNodeBsdfDiffuse'); m_ = nt.nodes.new('ShaderNodeMixShader'); m_.inputs[0].default_value = 0.45
-            t_.inputs['Color'].default_value = (0.95, 0.95, 0.95, 1); d_.inputs['Color'].default_value = (0.92, 0.92, 0.92, 1)
-            nt.links.new(d_.outputs[0], m_.inputs[1]); nt.links.new(t_.outputs[0], m_.inputs[2]); nt.links.new(m_.outputs[0], o_.inputs['Surface'])
-            me.materials.append(dm)
+            if os.environ.get('CORE_DOT', '1') == '1':
+                bm = bmesh.new(); bmesh.ops.create_uvsphere(bm, u_segments=128, v_segments=64, radius=(ri - 3.5) * MM)
+                zcut = -math.sqrt((ri - 3.5) ** 2 - 25.0 ** 2) * MM
+                bmesh.ops.delete(bm, geom=[v for v in bm.verts if v.co.z > zcut], context='VERTS')
+                for f_ in bm.faces:
+                    f_.smooth = True
+                me = bpy.data.meshes.new('dot'); bm.to_mesh(me); bm.free()
+                do = bpy.data.objects.new('dot', me); bpy.context.scene.collection.objects.link(do); do.location = (0, 0, zi)
+                dm = bpy.data.materials.new('dot'); dm.use_nodes = True; nt = dm.node_tree; nt.nodes.clear()
+                o_ = nt.nodes.new('ShaderNodeOutputMaterial'); t_ = nt.nodes.new('ShaderNodeBsdfTranslucent')
+                d_ = nt.nodes.new('ShaderNodeBsdfDiffuse'); m_ = nt.nodes.new('ShaderNodeMixShader'); m_.inputs[0].default_value = 0.45
+                t_.inputs['Color'].default_value = (0.95, 0.95, 0.95, 1); d_.inputs['Color'].default_value = (0.92, 0.92, 0.92, 1)
+                nt.links.new(d_.outputs[0], m_.inputs[1]); nt.links.new(t_.outputs[0], m_.inputs[2]); nt.links.new(m_.outputs[0], o_.inputs['Surface'])
+                me.materials.append(dm)
         else:
             sphere('ball', 80.0, zc, acrylic('ball', 0.0, loading=1 / 3))
             sphere('ball-in', 71.0, zc, frosted(acrylic('ball-in', inner, loading=1 / 3)), inward=True)
