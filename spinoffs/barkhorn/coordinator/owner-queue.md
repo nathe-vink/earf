@@ -3433,3 +3433,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 21:58 sent: to the speaker lane, the hero and row accepted; the turn's darker backdrop (#BDB9B3, the row's) proxied on 01/05 with 02/04 as
   controls, phase-2 chunk 6 held; then the room rig, the 9097 fix, the amp plate, back, hero-light. To c3: the deck hero (phase-1 chunk 1)
   on 5957b9f9 after fix1 chunk 5. To c2: the row (fix1 chunk 1) on 5957b9f9 after chunk 7, in place of the held room.
+- 22:0x Core B pair gate wf_6daa1676-c18 (3 critics, ~17 min): day HOLD 0/3 (the opal core not legible, the same teal as the rind; the sun
+  shadow solid brown with no Ice tint; a water-line reflection across the middle; the window reflection a flat card; the base's swirling
+  wood reflections); night HOLD 0/3 (a flat milky pale disc in a near-black ring; crown fireflies and a ragged seat; the light lands nowhere
+  on the wall or table; the base crushed black; one critic read the crown-brightest gradient as top-lit).
+- 22:04 sent to the lamps lane: the ten findings with physics notes (core legibility by day is the honest limit at 1.05; the dark rind at
+  night largely real for clear acrylic, but internal reflections to check and the disc's exposure to hold Ice; the crown-brightest gradient
+  right for an upward LED); render cleanliness, the room's response and the shadow's tint to fix; if the nested core can't read, report it
+  as a design result for item 89.
