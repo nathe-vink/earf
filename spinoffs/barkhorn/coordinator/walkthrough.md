@@ -52,9 +52,11 @@ Show one item with its pictures, wait for the answer, save the owner's words ver
     cabinets clipped to coral lightboxes, the horn streaks, the last window ghost); window v3 held 3/3 (20:47: better than v2, see-into
     and clean at the feet, but its front light clips the fronts and the window-head spot leaves hard white marks on the left horn). Order:
     listening v4, r44 v4, shop v4, window v4.
-  - The deck (state at 21:01): the row (fix1 chunk 1) stopped at 20:58: its 13 x 2.6 m reflect-only black card sits in frame (a card the
-    camera sees through but the speakers mirror black); it re-renders on the speaker lane's next SHA. The home portrait on c3 since 20:35
-    (the room's rig; asked whether any in-frame card). The deck hero to be re-proxied with the rulings folded in; the cover needs a real re-light
+  - The deck (state at 21:59): the row re-staged honestly at 5957b9f9 (its in-frame black card and two in-frame white bounce cards gone;
+    the units turned to -12 on a light-grey sweep, #BDB9B3, so each side face carries its own tint): a VISIBLE change to tell the owner
+    with the deck. The hero staged (turned 6, the camera 0.15 m lower: the lid strip deep red, the top unclipped). The cover honest
+    (e0bbdcd3: brighter, softer shadows). The home portrait held 3/3 (dark lower cabinets, a beige side face); the room rig is being fixed.
+    Renders: the cover on c4, the hero on c3, the row on c2; the room after the room-rig SHA. The deck hero to be re-proxied with the rulings folded in; the cover needs a real re-light
     (e81c1a4a, unproved). Deck v69 waits for them.
   - The roll-out's site set (state at 21:01): fix1 (honest_lights) at 1e79f362; its in-frame floor patch replaced by the `back` lamp off
     (a real move); the in-frame reflect-only cards (tall, wide, side, back, hero-light, the deck hero) slid out of frame along their rays
