@@ -184,7 +184,7 @@ byte for byte as before; on, every change is an asserted replacement, so a moved
 - **Light stage:** one full-bleed frame, name and line lower left, the coins lower right, a snap per color (8 x 20svh),
   then the uplit eight at full height; reduced motion, no script and print get the eight with their names and lines.
 - **Sound** after the hero: Tropos turning (today's frames), "The oldest amplifier is a shape.", three design figures
-  (today's particulars until the speaker lane sends horn A's), footnoted and linked to the horn.
+  (unchanged by horn A, the speaker lane, bea94882), footnoted and linked to the horn. Horn A in the particulars; the weight "to follow" until the build reruns. No copy that depends on the base or its light (it is in doubt): "Put a light under it." goes.
 - **Pairings:** a product page recommends only the other lines (the owner's rule), the same color first.
 - **Real addresses:** /tropos, /tropos/{color}, /lighting, /mantle, /colors/{color}, /contact, each with its own title and
   card; old #addresses answer; in-page links don't reload. Slots: /studio, /journal, /press.

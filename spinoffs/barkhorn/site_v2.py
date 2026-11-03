@@ -9,12 +9,12 @@ and the journal (their links and the home's journal band go while V2 is on; thei
 production deploy."""
 import re
 
-# the three design figures for the Sound band: today's particulars until the speaker lane sends horn A's
-# (asked 2026-11-03; FIGURES_FROM names the commit they came from once they arrive)
+# the three design figures for the Sound band: unchanged by horn A (the speaker lane, 2026-11-03, r33-speaker-horn
+# bea94882: the same woofer, box, ports, compression driver and amplifier; the formed horn keeps the approved air path)
 FIGURES = [('51', 'Hz', 'to about 51 Hz at &minus;3&nbsp;dB, before the room'),
            ('115', 'dB', 'up to about 115 dB at 1&nbsp;m, each'),
            ('2&thinsp;&times;&thinsp;125', 'W', 'built in, crossed at 1&nbsp;kHz')]
-FIGURES_FROM = None
+FIGURES_FROM = 'bea94882c60f0ea75c3575ea7a7c2c593a2a85a4'
 SOUND_KEY = 'blue'          # the turning view's color (Ice): today's front-arc frames, until the new set
 HELD_HABITATS = ('red', 'orange')   # Ember's lava and the Dust mesa read as CG (the audit); the biomes lane is rebuilding them
 NIGHT = '#13110F'           # the night ground, warmed to the paper's hue (was #0B0C10)
@@ -77,6 +77,21 @@ def pairings(p):
   if (mono) out.push(block(`${box.id}-mono`, 'Monochromatic', `${c.name} in the other lines.`, picks([k], pid, k)));""",
           """      : `${names(r.ana)}, either side of it on the wheel.`, picks(r.ana, pid, k, 4, mono))];
   if (mono) out.unshift(block(`${box.id}-mono`, 'Monochromatic', `${c.name} in the other lines.`, picks([k], pid, k, 4, true)));""")
+
+
+def particulars(p):
+    """Horn A (the speaker lane, bea94882): its row in Tropos's particulars; the weight pending until the build reruns
+    (the formed horn is about 1.3 kg lighter, an estimate, and the footing is reopened)."""
+    horn = 'A smooth horn thermoformed from 10 mm cast acrylic in the speaker&rsquo;s own color, satin outside, its air path polished, on four bronze posts'
+    for old, new, at_least in (("The same tinted cast acrylic as its cabinet; the cabinet&rsquo;s full depth", horn, 1),
+                               ("About 72 kg; 62 kg with the horn lifted off", 'To follow with the final horn', 0),
+                               ("['Weight', 'About 72 kg']", "['Weight', 'To follow with the final horn']", 1),
+                               ("['Horn', 'The same tinted acrylic as the cabinet']", "['Horn', 'Thermoformed cast acrylic, 10 mm, in the cabinet&rsquo;s color; satin outside']", 1),
+                               ("ask: 'Inquire about a pair'", "ask: 'Ask about a pair'", 0),
+                               ("ask: 'Inquire',", "ask: 'Ask about it',", 0)):
+        n = p.rest.count(old)
+        assert n >= at_least, ('site_v2: particulars', old[:50])
+        p.rest = p.rest.replace(old, new)
 
 
 def words(p):
@@ -207,9 +222,9 @@ def light(p):
     in print: the uplit eight, with the eight names and lines beneath."""
     # the explainer and the number go; the section's line stays, small, at the top of the frame
     p.sub('<div class="wrap light-head"><p class="eyebrow">Lit from below</p><h2>Put a light under it.</h2><p>Cast acrylic carries light to its edges, so a lamp underneath fills the whole cabinet with color.</p></div>',
-          '<i class="anchor" id="colors"></i><div class="wrap light-head"><h2 class="vh">Put a light under it.</h2></div>')
+          '<i class="anchor" id="colors"></i><div class="wrap light-head"><h2 class="vh">After dark</h2></div>')
     p.sub('<div class="light-intro"><p class="eyebrow">Lit from below</p><h2>Put a light under it.</h2><p>Cast acrylic carries light to its edges, so a lamp underneath fills the whole cabinet with color.</p></div>',
-          '<div class="light-intro"><p class="light-kicker" aria-hidden="true">Put a light under it.</p></div>')
+          '<div class="light-intro"><p class="light-kicker" aria-hidden="true"></p></div>')
     p.sub('<p class="num" id="light-num">Tropos 01</p>', '<p class="num" id="light-num" hidden>Tropos 01</p>')
     # snap points, one per color, then the eight
     snaps = ''.join(f'<i class="snap" style="--s:{i}" aria-hidden="true"></i>' for i in range(8))
@@ -471,8 +486,7 @@ def home_v2(p, web):
 def render_word(p):
     """'Render', quietly, once per picture: the hero, Sound, the habitats and the room carry it in their captions
     (above); here the light stage, the uplit eight and the lines' tiles. The footer says it once for the site."""
-    p.sub('<p class="light-kicker" aria-hidden="true">Put a light under it.</p>',
-          '<p class="light-kicker" aria-hidden="true">Put a light under it.</p><i class="render on-dark">Render</i>')
+    p.sub('<p class="light-kicker" aria-hidden="true"></p>', '<p class="light-kicker" aria-hidden="true"></p><i class="render on-dark">Render</i>')
     p.sub('<i class="snap-eight" aria-hidden="true"></i>', '<i class="snap-eight" aria-hidden="true"></i><i class="render on-dark eight-render">Render</i>')
     for line in ('A powered horn loudspeaker.', 'A pendant and a table lamp.', 'A turntable, lit from underneath.'):
         p.sub(f'<span class="t-line">{line}</span>', f'<span class="t-line">{line} <i class="render">Render</i></span>')
@@ -506,6 +520,7 @@ def apply(web, head, rest):
     p = Page(head, rest)
     if web.V2 or web.HOME_V2:                 # HOME_V2 is built on the fixes
         pairings(p)
+        particulars(p)
         words(p)
         kit(p)
         tokens(p, web)
