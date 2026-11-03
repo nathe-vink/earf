@@ -1305,3 +1305,19 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   D day, D night, Smoke-D black and white; ~10:45); biomes lane on the seven habitats in the volume material (2229cb7c, 08:36);
   the joint gate (Mantle g1 + the four lamp frames, wf_97dd1b84-14a) two judges working since 08:58, none back. Site held at
   743be0cb; board v23; deck v68. Nothing new for the owner. Re-armed for 09:58 (#37).
+- 09:22 joint gate wf_97dd1b84-14a (3 blind critics; 25 min): Mantle g1: the underglow FIXED (3/3: no colour on the floor or
+  base; the floor pixels identical between Ember and Poison) but night Ember 0/3, night Poison 0/3 (both fail "not cheap": two
+  hot lines along every deck edge, an inset outline on the top; Poison's top only L 12-15 %; the white key makes the record silver,
+  L 82-91 %), day Ember 1/3 (a stray amber glint under the deck; one critic: "a red insert in a clear grey tray"). Lamps: Hemisphere
+  Ice day 3/3 PASS, Core Ice day 2/3 PASS; Core Ice night 0/3 (a milky opal globe; teal ~170 vs the day's ~200; lights nothing;
+  dim), Hemisphere Ice night 1/3 (all notes pass, the mouth's glow included, but the teal drift and its light lands nowhere).
+  The lane's own critics had passed core-ice-night at 7.0: the blind gate is stricter. Crops: scratchpad/critic-crops/,
+  scratchpad/blind-gate2-crops/.
+- 09:30 fixes sent. Mantle g2: reflector perimeter on the lit core (edges dark), no inset outline (tint full-bleed or the border
+  printed black), the top carries the glow, the night key killed, the day glint out; all three frames again. Lamps: the teal is
+  real (2700 K through blue): test 2700/3000/3500/4000 K and take the lowest that holds Ice within ~10 degrees (the speakers'
+  light is already 4000 K "so each tint shows its own colour"), a proposal in the BOM, and a table of every tint's lit hue;
+  Core night clear (no opal scatter; the bead-blast stays an unseen proposal), its light reaching the wall and table, brighter;
+  Hemisphere night: the light landing on a table under it. The Hemisphere "shoot from above" question is dropped (the critics
+  passed the mouth's glow); Core's ball stays "held" until the chips; Haze waits with the chip order. Nothing to the owner
+  until the nights pass; then Mantle and the lamps go as day/night pairs.
