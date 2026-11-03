@@ -2437,3 +2437,13 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   can't be seen (the street proxy at 79426d5d came out the same as the old frame); INVENTORY.md corrected. Finals: r43-listening
   7cdce50f, r43-shop e518e55f, r43-window e29bd63b, r44-lantern d4cc2713. Smoke still waiting: bar-listening, door-hero/bar-door,
   bar-street, bar-decks, bar-smoke, r42 counter/night/shop. (Its message did not yet acknowledge my 16:30 re-stage note.)
+- 17:04 r43 shop and window gate wf_0c7eee9d-d07 (3 critics, 30 min): r43-WINDOW SHOW 2/3 ("see-through deep-ruby Ember acrylic"; better
+  than the old on every test; the HOLD: the bulkhead's top edge lands exactly on both cabinets' bottoms, so the feet aren't shown;
+  polish: raise the camera ~15-20 cm or move the pair ~30 cm back; soften the left horn's near-white streak; tone down a pink patch
+  in the left cabinet's lower-right side face). r43-SHOP HOLD 3/3 (seen from behind against the black night window: the backs solid
+  red panelled boxes; the horns near-black, ~0.16 vs the cabinets' 0.41; the amp plate's bright green LED the strongest gadget cue;
+  fix: the window bay's display spot from above on the street side, or the camera 1-2 m to one side against the lit shelves, the
+  pair larger in frame, the horns at least as bright as the cabinets, the LED dimmed).
+- 17:05 sent to the bar lane: those fixes (window: show the feet, soften the streak and the pink patch; shop: the display spot or a
+  side camera, the horns, the LED) and the 16:30 listening re-stage; order listening, shop, window, a proxy each. My gate on
+  r44-lantern (the old version as context) started 17:05.
