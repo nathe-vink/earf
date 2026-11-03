@@ -3331,3 +3331,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   then (d) or (a)+(d) if the sides stay under ~0.6; (b) to the owner only if both fail; numbers before any final.
 - 21:1x item 6 prepared: scratchpad/walkthrough/06-horn-honest.jpg (the frame the owner chose from beside the honest one, the horn enlarged
   below each; mean absolute difference ~1.1-1.3 per channel); the honest frame gated (context: the original, passed 2/3).
+- 21:06 check-in #49 fired (trig_0126nezqcJCDVCai4xUsbE1d); its gates were all collected before it fired.
+- 21:08 the three helpers restarted on f7f03850: c2 merged (7adfe696ce03377c14dda63b8f84f08e3904b738), fix1 chunk 6 (wide Fog; side Ember,
+  Dust, Acid, Poison; ~97 min) from 21:08, then chunk 7. c3 merged (5af3587ebd79184cdf6c02ded63464fb64198be3), chunk 4 (wide Ember, Dust,
+  Acid; ~87 min) from 21:09, then chunk 5. c4 merged (b153d35f926bf83a19d06fe16df81f5045d7323f), chunk 3 (tall Acid, Poison, Ice, Haze,
+  Fog; ~84 min) from 21:09, then chunk 2's tall Ember and Dust. The row and phase-2 chunk 6 held.
