@@ -2673,3 +2673,13 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   right rock now clear of the cabinet's top. The sheet is colourless (T 1.0), so the warmth is the light: the final's sun neutral white
   (#FFFFFF); if still above 5, a white-point grade (the camera's white balance), not the sheet. My look at the pair agrees: the fan is
   down to one soft line. Running: Acid, Haze, Poison finals, then the Fog final; done ~20:45 UTC.
+- 18:21 Ember polished gate wf_deb38cbd-e5d (3 critics, ~20 min): HOLD 2/3 (test 5), one SHOW. The cabinet see-into garnet glass at the
+  deep spec (the woofer ring, braces and ports; the lava through the side face); grounded, its own darker red-filtered shadow in front
+  (not an underglow); the horn the cabinet's red, filtering not glowing, the pod and posts through it. The hold: a pale, hard-edged
+  grey-pink wedge on the horn's left inner wall (~73,19,24, ~1.6-1.7x the walls around it) from the mouth's left corners into the
+  throat: half an X, 3-4x the passed Dust and Ice horns, visible at phone size; the lavender sky mirrored. Also: an orange hot spot at 12
+  o'clock on the woofer ring (~564, 826) that reads as a status LED; a glint low on the right side face.
+- 18:21 sent to the biomes lane: Ember's wedge fixed by what the wall reflects (a few degrees toward frontal, an out-of-frame dark card
+  or rock, or the sky or camera turned), the material, tint and polish unchanged; the hot spot by a real change (a small yaw, the lava
+  moved), not retouching; optional more mist glow behind the upper cabinet within spec. For every remaining final (Acid, Haze, Poison,
+  the Ember re-render): a proxy crease measure first (target 20 L or less), fixed the same way if over, the number sent with the final.
