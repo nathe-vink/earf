@@ -1837,3 +1837,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   with the white lining on the 83c03b3d set, plus the stock sheets that give it under "held" (~50 % chart) and "deep" (~83-85 % at
   3 mm) from TINTS.md; (3) a ready-to-run roll-out queue (every deck, site and brand shot that changes with A/D and satin/polished,
   one command for either answer; no renders).
+- 14:23 biomes lane: Haze on horn A (5 of 7 rendered; 3 passed its own gate) at 437d47daaaa049d48a3e7c5cd22c1b41dadbe054
+  (renders/2026-11-03/barkhorn/habitats/haze_b-portrait-1200x1500.jpg; sha256 803bdab9; M8 feet bedded 12 mm, --horn-front, 96
+  samples). Its gate: all four pass (dark violet acrylic, the woofer, ring, ports, braces and left frame through, no milky face; a
+  continuous contact shadow with blades over the lower edge; no light down; no X). It expects the horn flagged as on Ember: the low sun
+  behind it, so the satin horn glows pale lavender above a darker cabinet, the driver and struts a dark shape (held for the finish
+  call). Ice rendering. My gate wf_bb3e4346-c81 on Haze (Dust v2 as context) started 14:25.
