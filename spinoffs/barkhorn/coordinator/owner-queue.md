@@ -2939,3 +2939,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   lit only by the room (EARF's own lamps can do it), the brand's wall picture re-rendered the same way (my pick; ~9 renders after the
   running fixes, each gated; about half a day); or 2, day pictures only, the night section dropped, the brand's wall picture retired (the
   deck's line-up of eight stands in).
+- 19:25 c3 (its message said 19:26): phase-2 chunk 05 landed at 52ad76bab1feb14c988c1aaaf67f3d61b452428c (18:38-19:23: horn-back ice 7.6 min,
+  haze 7.2, fog 9.3; inside-ice 12.7; turn-ember 00-04 at 640 x 576, 0.6-0.8 each); its flag: in turn-ember-01 (~3/4 from the back) the back
+  face, nearly edge-on, renders pale grey-white instead of red (00 and 02 red). The variants file reset with `git checkout --`; merged
+  aed49790 at 4df9bebc861b732dbfab99a47a3b4d436e485580; fix1 chunk 4 (wide ember, dust, acid, ~87 min) started 19:26, then 5, then it waits.
+- 19:27 my gate on inside-ice and turn-ember 00-04 (wf_c262a578-fea) started: a rig check before the sprite's 168 frames render; frame
+  01's pale face put to the critics. The horn-back set gates when c2's chunk 4 (ember, dust, acid, poison) lands.
