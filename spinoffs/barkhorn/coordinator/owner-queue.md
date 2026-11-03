@@ -2697,3 +2697,25 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 18:25 sent to the biomes lane: agreed; the measure calibrated on the passed Ice and Dust (the same box on the flare clear of the
   driver) and used as the target in place of a fixed 20; each proxy's number beside theirs; at ~10 degrees check the woofer and braces
   still read through and the set still looks like one family.
+- 18:27 front-off-tall gate wf_e8ed175c-b80 (3 critics, ~47 min, seven frames): HELD as a set; Ice and Haze 1/3 each, the other five 0/3.
+  All seven pass grounding (feet, attached shadows), no light in or under them (the floor colour the key's coloured shadow), smooth horns
+  with no X, the Ice batt kept, one camera, light and floor for the six tints; Poison, Haze and Ember see-into glass whose darkness is
+  the tint (bottom-batt luminance Acid 0.72, Dust 0.45, Ice 0.42, Poison 0.23, Ember 0.15, Haze 0.13, in the transmissions' order).
+  Blockers: (1) a hard-edged white reflection over the lower ~40-47 % of the right side face in all six tints (from ~(625,840) to (705,790)
+  down): milky on Ember, Poison, Haze, Ice; (2) the top batt band clipped to pastel in every frame; (3) Fog ~0.6 stop darker and greyer,
+  its woofer half as bright; (4) Dust's and Acid's thick edges and bottom band red (Dust ~167,20,18; Acid ~211,67,49): "red trim" (two
+  critics fail Acid on not-cheap, one Dust); (5) one critic: Dust's horn amber-orange (hue 27) against its coral cabinet; (6) an orange
+  caustic line from the front-right foot (Dust, Acid). My brief erred: it called Acid "yellow-green" and Dust "warm sand" (TINTS.md:
+  yellow and orange), which drew two tint fails on Acid; fixed for the re-gate.
+- 18:29 the inventory workflow wf_314ae1f9-899 completed (nine agents): 153 items, 127 for the walkthrough ((a) 2, (b) 3, (c) 37, (d) 37,
+  (e) 25, (f) 23) and a closed tail of 26; scratchpad/walkthrough/inventory.md and .json.
+- 18:30 my look at the other site types (one frame each): front-off-wide Ice shows a paler lower right side too, a hard white swoosh on
+  its horn's lower left and a bright line along the bottom front edge; side Ice and Poison: the handle slot glows bright (an LED-strip
+  risk, for the side set's gate); hero-light Dust clean at a glance.
+- 18:31 sent to the speaker lane: the tall set's blockers in order (a reflect-only black card camera-right, or the mirrored light moved;
+  the top batt's exposure; Fog matched; Dust's red-pass checked, red's absorption set from the makers' curves if they exist, else the
+  model kept and said; Dust's horn checked against spec; the caustic off the foot); first, the scope: which rigs share the light (wide,
+  hero-light, side, back, phase 2); proxies of tall Ice and Ember; a new SHA and a fix chunk to route.
+- 18:31 sent to c2, c3, c4: report the current phase-1 chunk as usual, then wait for my go before phase 2 (a fix chunk on a new SHA, or
+  phase 2 re-pinned); nothing changed in their checkouts meanwhile.
+- 18:32 spinoffs/barkhorn/coordinator/walkthrough.md: the inventory, reconciled with everything since 18:09, committed.
