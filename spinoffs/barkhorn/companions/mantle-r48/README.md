@@ -737,6 +737,51 @@ All figures are red of 255, measured in fixed patches on the same set and camera
 
    Each costs $3,897 in parts.
 
+### Option C3 (2026-11-03, the coordinator's 15:34 fixes; `render_lantern.sh c3`)
+
+The gate held C2 3/3. Its black backer-only disc under the platter showed as a black crescent in front of it, the
+grade read flat, and the border read as a black bezel.
+
+**What changed.**
+1. **No crescent.** The black disc stopped at r 150, the platter's own radius. Seen through the 24 mm deck at the
+   camera's angle, its edge lands about 17 mm in front of the platter. The print and the glow now begin at r 105, so
+   the black center sits well inside the platter's footprint. The glow runs right up to the platter (the foot 140,
+   against C2's 92) and lights the platter's acrylic rim from below.
+2. **A center-out falloff.** The print's cover runs from about 24 % at r 105 to 5 % by 280, backed black throughout,
+   with no boundary.
+   - Across the field, the 10th to 90th percentile spread is 101-151. That compares with A's 121-138, C2's 117-150
+     and the first C's 81-174. The field CV is 18 % (A 13 %, C2 16 %, the first C 26 %).
+   - At the left rim the glow is 54.8, against A's 71. The rim is darker, as a center-fed guide is.
+3. **The glow lights what sits on it.** The platter's rim, the record's edge and the arm pillars are lit through the
+   deck's top. They are lit from under the platter now too.
+4. **The border is clear tinted glass.** The 5.6 top is two pieces cut from one sheet: the field, and a 10 wide frame
+   over the rings, bonded edge to edge with black-pigmented ACRIFIX. The rings' undersides are left bare and polished.
+   - By day the border shows its thickness and its tint, with one black line at the bond.
+   - At night it stays dark. A ×8-lifted difference against A shows only a faint line on the lower front edge.
+5. **Clean edges.** The edges are polished, and the shader bevel on them, which rippled their highlight, is dropped.
+   By day the print is even (15 %) and the room's light on it is baked lower (5, from 7), for a deeper ruby.
+   - A real 2.5 mm dot screen was tried for depth. On the full frames it read as a mesh, like perforated metal, so the
+     print is drawn as a tone again.
+6. **Underneath, as clean as C2.** Red of 255:
+
+   | | C3 | C2 | A |
+   |---|---|---|---|
+   | base top | 4.7 | 4.5 | 4.7 |
+   | base spots near the posts | 0 / 0 | 0 / 0 | 0 / 0 |
+   | floor in front | 6.4 / 4.8 | 6.3 / 4.8 | 6.5 / 4.9 |
+
+   - The glint under the deck had come back: the glow, unfiltered in the clear core, left the strip groove's clear
+     sides. The backer film now runs across the groove's opening, so the groove and its channel are hidden.
+   - Against A, 6.8 % of C3's pixels differ by more than 4 levels, mean 1.35. For C2 that was 5.1 %, mean 2.17.
+
+**Cost.** About +$15-25 a unit over C2, for the extra cut, the black bond line and the polishing. C3 is then about
++$145-175 a unit over v3 (v4 as gated: +$140-170). $3,897 in the parts list: the sheets are the same.
+
+| frame | what |
+|---|---|
+| `a5-night-ember-2423-c3.png` | C3 at night: the glow up to the platter, falling off outward; the border dark |
+| `a5-day-ember-2423-c3.png` | C3 by day: deeper ruby over an even print; the border clear tinted glass |
+
 ### The render (how the light is drawn)
 
 The guide's output is drawn as an even Lambertian glow just above the print: 9 W/m2. That figure follows from the
