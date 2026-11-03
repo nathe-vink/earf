@@ -2269,3 +2269,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   unchanged (the frost is the finding). Other colours on hold.
 - 15:53 gates started: the Smoke target (wf_39a2255a-4e0; 2064 white, the deep-horn 50 % frame and Ice polished as context); the lamps
   round 8 (wf_4f3c151b-a95; Hemisphere day and night, Core A day and night, Core B proxy day and night).
+- 15:53 helpers (their messages said 15:54-15:55): c2 set up (r33-rollout-c2 pushed at 5295e58f; setup.sh 9 s; barkhorn-cloud.glb 73.4 MB,
+  858 s, 15:22-15:36; barkhorn-variants.glb 16.4 MB, 15:36-15:53, ~17 min); PIL fixed with `python3.11 -m pip install --user
+  --ignore-installed pillow` (Pillow 13.0.0 in ~/.local; a plain install was "already satisfied" by the broken 3.12 copy); chunk 11
+  started. c4: r33-rollout-c4 pushed; the cloud model 15:31:46-15:48:15 (988 s); the variants build running from ~15:49; Poly Haven 200;
+  PIL fixed with --user --ignore-installed --no-deps. c3: fixed with `env PIP_BREAK_SYSTEM_PACKAGES=1 python3.11 -m pip install
+  --ignore-installed --no-deps pillow` (/usr/local/lib/python3.11/dist-packages ahead of the apt copy; numpy 1.26.4, bpy and scipy
+  import); chunk 5 restarted from deck-home-portrait. All three leave the kit build's rewritten out-cloud/ files uncommitted.
+- 15:55 sent to the speaker lane: the working install form for setup.sh (--user --ignore-installed --no-deps, then the real import).
