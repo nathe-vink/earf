@@ -1245,3 +1245,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   the brace strip, ~10-12 W: the proposal); light leaving the cabinet upward to wash the wall is wanted (the owner's "like the site
   images with the light cast upward"), only floor-level leaks and pools are out; no moon fill; the woofer a silhouette in comparison
   frames. Asked: could the whole uplight live inside the speaker (no plate): heat, the acoustic volume, service, cost.
+- 07:59 speaker lane: rendering A polish, B day, B night 4 (aimed 40 degrees, no strips), B night 5 (60 degrees + an 11 W brace
+  strip), Smoke at night (black/white sleeves, 6500 K, +1 stop), ~15 min each. Built in (no plate), in words: COB strips in black
+  channels on standoffs on the port chamber's free floor (~1 m, ~10 W) aimed up, plus the brace strip (~11 W); nothing enters a panel
+  edge (no blaze, no pool); ~14 W of heat, inside air ~+5 K (the S8 heat test with the light on); ~0.1 L of 135.6 L (fb 38 Hz
+  unchanged), rattle the risk (screwed to bonded inserts, leads tied, a buzz sweep); power from an external 24 V Class 2 plug-in
+  (~$25) through the back's gland (no new mains inside); service through the woofer opening (~20 min a strip, not a customer job);
+  ~$80-100 a speaker against ~$350-400 for plate + brace strip, 5.6 kg less; against: in every speaker unless a build option, one
+  more thing in the box, the owner's separate lit base goes. My call (08:00): render D built in (night; day with the light off to show
+  the channels), Smoke with D's light, drop C. D is the likely pick if it passes the gate.
