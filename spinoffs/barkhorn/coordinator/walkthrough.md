@@ -46,12 +46,13 @@ Show one item with its pictures, wait for the answer, save the owner's words ver
     cabinets clipped to coral lightboxes, the horn streaks, the last window ghost); window v3 held 3/3 (20:47: better than v2, see-into
     and clean at the feet, but its front light clips the fronts and the window-head spot leaves hard white marks on the left horn). Order:
     listening v4, r44 v4, shop v4, window v4.
-  - The deck (state at 20:47): the row (fix1 chunk 1) rendering on c4 since 20:21 on the honest rig (1e79f362); the home portrait on c3
-    since 20:35 (the room's rig, clean). The deck hero to be re-proxied with the rulings folded in; the cover needs a real re-light
+  - The deck (state at 21:01): the row (fix1 chunk 1) stopped at 20:58: its 13 x 2.6 m reflect-only black card sits in frame (a card the
+    camera sees through but the speakers mirror black); it re-renders on the speaker lane's next SHA. The home portrait on c3 since 20:35
+    (the room's rig; asked whether any in-frame card). The deck hero to be re-proxied with the rulings folded in; the cover needs a real re-light
     (e81c1a4a, unproved). Deck v69 waits for them.
-  - The roll-out's site set (state at 20:47): fix1 (honest_lights) at 1e79f362, but its in-frame reflect-only floor patch was sent back;
-    the speaker lane is choosing a real fix (no patch, kick at half, or a honeycomb grid), then the SHA for c2 and c3 and c4's chunks 3
-    and 2. Phase 2: the glow lamp dropped (noise-only difference), so chunks 4 and 05 stand; the six horn-backs passed (Acid's held on its
+  - The roll-out's site set (state at 21:01): fix1 (honest_lights) at 1e79f362; its in-frame floor patch replaced by the `back` lamp off
+    (a real move); the in-frame reflect-only cards (tall, wide, side, back, hero-light, the deck hero) slid out of frame along their rays
+    or removed; one SHA with both, then c2, c3 and c4 restart. Phase 2: the glow lamp dropped (noise-only difference), so chunks 4 and 05 stand; the six horn-backs passed (Acid's held on its
     edge colour; the amplifier close-up held on the stale rating plate, its softbox and the inlet's pins); turn 00, 02, 03, 04 passed,
     turn-01 held (a grey face), the side flags (e81c1a4a) to prove on 01 and 05 before chunk 6; inside-ice held (the base cut off).
   - The lamps (state at 20:47): Hemisphere day passed 3/3 (rig clean). The night rig was rebuilt under rulings 1-3 (dc60ce44): the
