@@ -157,7 +157,19 @@ def build(frame, samples, scale):
             # round 9: the core open at its base, Ø40 over the window, seated on the grommet's ring: the LED lights the
             # frost directly (closed, all its light reached the frost through the polished shell, a caustic: noise)
             sphere('core', ri, zi, acrylic('core', 0.0, 'Clear', scratch=0.0), hole_below=20.0)
-            cm = frosted(acrylic('core-in', inner, 'Clear', scratch=0.0))
+            if os.environ.get('CORE_OPAL', '1') == '1':
+                # round 11 PROPOSAL (the gate on B's day: the core lost, within 10 % of its surround): the core in 3 mm
+                # opal (white, volume-diffusing) cast acrylic, as Hemisphere's liner, rather than bead-blasted clear: it
+                # scatters daylight back and reads as a pale core inside the tinted glass, and glows evenly at night
+                cm = bpy.data.materials.new('core-opal'); cm.use_nodes = True; nt = cm.node_tree; nt.nodes.clear()
+                o_ = nt.nodes.new('ShaderNodeOutputMaterial'); tr_ = nt.nodes.new('ShaderNodeBsdfTranslucent')
+                df_ = nt.nodes.new('ShaderNodeBsdfDiffuse'); m1_ = nt.nodes.new('ShaderNodeMixShader')
+                m1_.inputs[0].default_value = float(os.environ.get('CORE_OPAL_T', '0.5'))
+                tr_.inputs['Color'].default_value = (0.93, 0.93, 0.92, 1); df_.inputs['Color'].default_value = (0.90, 0.90, 0.88, 1)
+                nt.links.new(df_.outputs[0], m1_.inputs[1]); nt.links.new(tr_.outputs[0], m1_.inputs[2])
+                nt.links.new(m1_.outputs[0], o_.inputs['Surface'])
+            else:
+                cm = frosted(acrylic('core-in', inner, 'Clear', scratch=0.0))
             # round 9: the printed dot over the LED, modelled in the frost itself (a separate surface beside the frost
             # made hard paths that the denoiser blotched): within 25 of the axis at the bottom the frost passes about
             # 40 %, the rest going back into the core (here: absorbed, a conservative stand-in)
@@ -170,7 +182,9 @@ def build(frame, samples, scale):
             mr_.inputs['From Min'].default_value = zd - 0.001; mr_.inputs['From Max'].default_value = zd + 0.006
             mr_.inputs['To Min'].default_value = 0.6; mr_.inputs['To Max'].default_value = 0.0
             nt.links.new(sx.outputs['Z'], mr_.inputs['Value'])
-            dk = nt.nodes.new('ShaderNodeBsdfDiffuse'); dk.inputs['Color'].default_value = (0.03, 0.03, 0.03, 1)
+            # round 11 (the gate: a navy petal at the seat by day): the dot is white, so a white diffuse face, which by
+            # night sends the LED's light back up into the core rather than through
+            dk = nt.nodes.new('ShaderNodeBsdfDiffuse'); dk.inputs['Color'].default_value = (0.88, 0.88, 0.86, 1)
             mx2 = nt.nodes.new('ShaderNodeMixShader')
             nt.links.new(mr_.outputs['Result'], mx2.inputs[0]); nt.links.new(prev.outputs[0], mx2.inputs[1])
             nt.links.new(dk.outputs[0], mx2.inputs[2]); nt.links.new(mx2.outputs[0], outn.inputs['Surface'])
@@ -208,7 +222,7 @@ def build(frame, samples, scale):
             b = em.node_tree.nodes['Principled BSDF']; b.inputs['Emission Color'].default_value = (*blackbody(cct), 1)
             b.inputs['Emission Strength'].default_value = 8.0
             led.materials.append(em); lo.visible_diffuse = False; lo.visible_shadow = False
-        cam = ((0.12, -1.02, tz + 0.235), (0.0, 0.0, tz + 0.098), 85.0)
+        cam = ((0.12, -1.02, tz + float(os.environ.get('CORE_CAM_Z', '0.29'))), (0.0, 0.0, tz + 0.098), 85.0)
     else:
         rim = tz + 0.70                                                 # the rim 700 above the table
         H = 48.2                                  # the collar's hole (round 1: the closed tops left a dark seam)
@@ -302,6 +316,12 @@ def build(frame, samples, scale):
         SC.window_gobo(-1.3, -1.3, 0.9, 0.75, 2.4, panes=(2, 2))
         SC.area('window-sky', (-1.25, -0.2, 1.55), (0, -90, 0), (1.5, 2.0), 90.0, '#DCE6F5')
         SC.sun_lamp('sun', (0.86, -0.25, -0.34), strength=10.0, color='#FFE7C8', angle=1.5)
+        if prod == 'core' and var == 'nested':
+            # round 11 (the gate's lever: glass is shot with a side-back light): a tall soft strip behind and to the left,
+            # a real light seen in the glass for what it is, so the edges and the gap read
+            from mathutils import Vector
+            sb = SC.area('side-back', (-0.45, 0.40, tz + 0.30), (0, 0, 0), (0.18, 0.7), float(os.environ.get('SIDEBACK_W', '6')), '#F2EEE6')
+            sb.rotation_euler = (Vector((0.0, 0.0, tz + 0.10)) - sb.location).to_track_quat('-Z', 'Y').to_euler()
         exposure = 0.0
     SC.render_settings(1800, 1200, samples, scale, exposure=exposure, look='AgX - Medium High Contrast')
     bpy.context.scene.cycles.caustics_refractive = True
