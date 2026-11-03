@@ -127,28 +127,46 @@ def build(frame, samples, scale):
         # round 4 (the coordinator, 2026-11-03): by night the ball clear inside, as the coordinator reads the design, or
         # ('frost' variant) with the fine bead-blast; by day as passed in round 2
         inner = 0.6   # round 6: the CAD's coarse bead-blast, by day and by night (the pair one object)
-        sphere('ball', 80.0, zc, acrylic('ball', 0.0, loading=1 / 3))
-        inner_mat = acrylic('ball-in', inner, loading=1 / 3)
-        if True:
+
+        def frosted(m):
             # bead-blasted acrylic diffuses nearly evenly: half of the frosted face a diffuse transmission (round 4;
             # rough glass alone only blurs forward)
-            nt = inner_mat.node_tree; outn = next(n for n in nt.nodes if n.type == 'OUTPUT_MATERIAL')
+            nt = m.node_tree; outn = next(n for n in nt.nodes if n.type == 'OUTPUT_MATERIAL')
             glass = outn.inputs['Surface'].links[0].from_node
             tl = nt.nodes.new('ShaderNodeBsdfTranslucent'); tl.inputs['Color'].default_value = (0.9, 0.9, 0.9, 1)
             mx = nt.nodes.new('ShaderNodeMixShader'); mx.inputs[0].default_value = float(os.environ.get('FROST_MIX', '0.5'))   # round 6: more forward, a gradient
             nt.links.new(glass.outputs[0], mx.inputs[1]); nt.links.new(tl.outputs[0], mx.inputs[2])
             nt.links.new(mx.outputs[0], outn.inputs['Surface'])
-        sphere('ball-in', 71.0, zc, inner_mat, inward=True)
+            return m
+        if var == 'nested':
+            # round 8 PROPOSAL (the coordinator, 2026-11-03: the frosted-inside ball reads as milk glass by day and a
+            # flat disc lit; launch/core-frost-options.md): a ball in a ball. The outer ball 6 mm tinted cast, polished
+            # both faces (the existing mould); inside it, with a clear air gap, a 3 mm clear diffuser ball R 45 frosted
+            # inside, seated on the grommet's ring (its centre 27.8 below the outer's) and captive once the outer
+            # halves are joined round it
+            sphere('ball', 80.0, zc, acrylic('ball', 0.0, loading=1 / 3))
+            sphere('ball-in', 74.0, zc, acrylic('ball-in', 0.0, loading=1 / 3), inward=True)
+            zi = zc - 27.8 * MM
+            sphere('core', 45.0, zi, acrylic('core', 0.0, 'Clear'))
+            sphere('core-in', 42.0, zi, frosted(acrylic('core-in', inner, 'Clear')), inward=True)
+        else:
+            sphere('ball', 80.0, zc, acrylic('ball', 0.0, loading=1 / 3))
+            sphere('ball-in', 71.0, zc, frosted(acrylic('ball-in', inner, loading=1 / 3)), inward=True)
         if night:   # round 4: the LED itself under the window (its face 14.8 above the base's foot), about 620 lm
             # at full: a real light, up into the ball; its light reaches the room only through the acrylic
-            light('led', 'SPOT', (0, 0, z0 + 0.0148), LED_W, 0.012, spot=160.0)
+            # round 8 (the gate: a hotspot cone at the base): the LED behind the window as a Lambertian disc the
+            # window's size, not a 160 deg spot
+            ld = bpy.data.lights.new('led', 'AREA'); ld.shape = 'DISK'; ld.size = 0.0296; ld.energy = LED_W * 0.45   # the spot's cone held about 45 %
+            ld.color = blackbody(cct); ld.cycles.is_caustics_light = True
+            ob = bpy.data.objects.new('led', ld); bpy.context.scene.collection.objects.link(ob)
+            ob.location = (0, 0, z0 + 0.0150)
             led = bpy.data.meshes.new('led-face'); bm = bmesh.new()
             bmesh.ops.create_circle(bm, cap_ends=True, segments=48, radius=0.013); bm.to_mesh(led); bm.free()
             lo = bpy.data.objects.new('led-face', led); bpy.context.scene.collection.objects.link(lo)
             lo.location = (0, 0, z0 + 0.0147)
             em = bpy.data.materials.new('led-em'); em.use_nodes = True
             b = em.node_tree.nodes['Principled BSDF']; b.inputs['Emission Color'].default_value = (*blackbody(cct), 1)
-            b.inputs['Emission Strength'].default_value = 40.0
+            b.inputs['Emission Strength'].default_value = 8.0
             led.materials.append(em); lo.visible_diffuse = False; lo.visible_shadow = False
         cam = ((0.12, -1.02, tz + 0.235), (0.0, 0.0, tz + 0.098), 85.0)
     else:
@@ -174,9 +192,15 @@ def build(frame, samples, scale):
         oc = 4.0                                 # round 6: both frames of the pair show the same (proposed) rim
         sphere('opal', 89.0, rim, opal, cut=oc, hole=H)
         sphere('opal-in', 86.0, rim, opal, inward=True, cut=oc, hole=H)
-        part('out-dome-pendant', 'rim', acrylic('rim', 0.6, loading=2.0), rim)   # round 6: satin, a deeper shade, never bright
+        part('out-dome-pendant', 'rim', acrylic('rim', 0.6, loading=3.0), rim)   # round 6: satin, a deeper shade, never bright
+        cap = SC.principled('cap-matte', '#1B1B1D', 0.85, metallic=0.3, bump=(4000.0, 0.15))   # round 8: no glints
         for nm in ('collar', 'clamp', 'crown', 'gland', 'hub'):
-            part('out-dome-pendant', nm, an, rim)
+            part('out-dome-pendant', nm, cap, rim)
+        # round 8 (the gate: two "LED eyes" on the cap): the PEEK pin carrier, its pins and the silicone gaskets were
+        # missing, so the lit bore showed through the collar's slots
+        part('out-dome-pendant', 'ring', SC.principled('peek', '#151515', 0.6), rim)
+        part('out-dome-pendant', 'pins', steel, rim)
+        part('out-dome-pendant', 'gaskets', SC.principled('silicone', '#111111', 0.7), rim)
         part('out-dome-pendant', 'reflector', steel, rim)
         part('out-dome-pendant', 'cord', SC.principled('braid', '#121212', 0.75, bump=(1200.0, 0.5)), rim)
         if night:
@@ -187,11 +211,11 @@ def build(frame, samples, scale):
             # opal from the crown, so the dome glows in its tint and lights the wall
             # round 6: the table lit from a disc the size of the opal's mouth (a broad source: a soft bowl shadow), within
             # the louvre's cut-off
-            ld = bpy.data.lights.new('cob', 'AREA'); ld.shape = 'DISK'; ld.size = 0.17; ld.energy = COB_W * 1.6
+            ld = bpy.data.lights.new('cob', 'AREA'); ld.shape = 'DISK'; ld.size = 0.17; ld.energy = float(os.environ.get('COB_W', '2.0')) * 1.6   # round 8: the pool under the lamp
             ld.spread = math.radians(92.0); ld.color = blackbody(cct)
             ob = bpy.data.objects.new('cob', ld); bpy.context.scene.collection.objects.link(ob)
             ob.location = (0, 0, rim + 0.004); ob.visible_glossy = False
-            light('spill', 'POINT', (0, 0, rim + 0.050), SPILL_W, 0.03)
+            light('spill', 'POINT', (0, 0, rim + 0.050), float(os.environ.get('SPILL_W', '0.3')), 0.03)
             pass
         # round 6 (the coordinator, 2026-11-03: the pendant too small): one shared camera for the day and the night,
         # steeper and closer: about 45 deg down from 0.95 m out and 0.93 m above the rim, a 54 mm lens, so the
@@ -211,9 +235,13 @@ def build(frame, samples, scale):
         # round 4: a white ceiling at 2.5 m, so the lamp's light that leaves upward comes back into the room, as at home
         SC.plane('ceiling', (4.3, 4.0), (0.85, 0.0, 2.5), (180, 0, 0), SC.principled('ceiling', '#E8E4DC', 0.9))
         SC.world(hdri='kiara_9_dusk', strength=0.003 if prod == 'core' else 0.02, rotation=200)   # round 6: Core's room lit by Core
+        w = bpy.context.scene.world
+        vis = getattr(w, 'visibility', None) or getattr(w, 'cycles_visibility', None)
+        if vis is not None:
+            vis.glossy = False; vis.transmission = False   # round 8: no daylight-window shapes on the glass at night
         moon = SC.area('moon', (-1.3, -0.4, 1.6), (0, -70, 0), (1.2, 1.6), 0.25 if prod == 'core' else 2.0, '#9FB2D6')   # the lamp leads
         moon.visible_glossy = False               # round 1: no daylight-window shapes reflected at night
-        if prod == 'core':   # round 5: a crisp, dim window in the outer gloss, so the clear skin reads as its own layer
+        if False:   # round 5's glint in the outer gloss; round 8 (the gate: a white pin-dot): gone
             win = SC.area('window-glint', (-0.7, -1.2, tz + 0.7), (58, 0, -30), (0.09, 0.09), 0.05, '#C9D3E2')   # round 7: a small round glint, dim
             win.data.shape = 'DISK'; win.visible_diffuse = False
         # round 3: a large soft fill far off, for a curved soft reflection on the glass (round 2's small one read as a
