@@ -3412,3 +3412,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   the right side face's front edge (Ember less); in all three, a bright white glowing line along the cabinet's bottom edge at the floor.
   Then merged 3b541d9d (6dc089a965f0f3a6d060a545b0c6a1e787a97055), regenerated, chunk 5 (wide Poison, Ice, Haze, ~87 min) from 21:53.
 - 21:53 the fix1 wide gate (Ember, Dust, Acid) launched (context: the honest A-ice-polished).
+- 21:5x Hemisphere r10 gate wf_f0493e6d-678 (3 critics, ~19 min): day SHOW 2/3 (one critic: a big window reflection on the dome's left
+  third, the cap like grey primer, two tiny black notches on the collar); night (a) HOLD 0/3 (turquoise, ~196 against the day's 204; a
+  hard white bar on the shade's left: the strip card's reflection, unmotivated at night); night (b) HOLD 0/3 (the same bar; its colour holds,
+  ~201, dE2000 4-7 to the day against (a)'s 8-12). Both: a pale oval on the dome's right (the bowl's reflection). (b) to be shown as a
+  liner proposal; the table pool white. A check: the dome is deep saturated azure (the owner's Ice-chip photo settles it).
+- 21:56 sent to the lamps lane: both nights re-rendered with the strip removed or replaced by a broad, dim, motivated reflection, the oval
+  softened by a real move (optional faint cool spill on the wall); the day stands (its notes for a re-render if (b) is taken).
