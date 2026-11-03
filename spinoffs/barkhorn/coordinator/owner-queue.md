@@ -964,3 +964,13 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   Checked: all 14 frames distinct blobs now; the sheet by eye. My calls: adopt base uplight + window (the 210 Hz ripple measured on
   the first sample); the wash recorded as not adopted; try the ~40 W panel like for like with honest heat (adopt only with a clear
   margin on the plinth's PMMA); regenerate or mark superseded the first sheet (64efa758, still showing the duplicate).
+- 00:33 speaker: BASES.md (f2c2b399d5ac536d15a381952bbd64901741b5da): adopted the base uplight with the bottom-batt window (the ~210 Hz
+  ripple measured on the first sample; the batt goes back whole if it rings; the Cloud's CAD keeps the whole batt until then); the
+  cabinet wash "not adopted", kept in the CAD as an option. 40 W centre panel like for like (04b1ce19e335fcd68274c975a60442c397c5a8b2;
+  sheet-p40 1f60d3555ed7483be89d8f1750fb992c2cdde184; frames 8322cf83, 6cd1402c): cabinet/wall luminance Ice 0.132/0.036 -> 0.158/0.048,
+  Ember 0.059/0.020 -> 0.076/0.025 (promo 0.211/0.086, 0.167/0.052): a modest gain, the wall about half the promo's (its V needs ~10x
+  the plinth's light). Heat at full, 25 C room (est.; thermocouples after 4 h on the first plinth): ~26 W into a finned black heat sink
+  (no acrylic contact), sink 40-45 C (~60 C if the cavity breathes poorly), diffuser and frames 35-40 C (~45 C), ~40 K under PMMA's
+  ~80 C, 25-30 K under its ~70 C long-term limit; halved at the 50 % default. Adopted by the lane: 40 W panel; 24 V 90 W Class 2
+  supply (59 W at full); ~+$72 a speaker. First sheet regenerated (c2893b0b7ad0e3b15e0ad631dc07c4e7b2dab33c). Checked the sheet and
+  blobs (distinct). Cost note for the deck's ask once the horn is picked (the horn changes the shop costs too; within the contingency).
