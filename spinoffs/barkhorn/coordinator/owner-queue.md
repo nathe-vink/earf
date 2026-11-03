@@ -2319,3 +2319,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   reflection; the cap pure black); Core A day HOLD (pastel milky, painted-looking); Core A night HOLD (a flat frosted disc, a hard
   inner circle, the LED cone, smudges, the base lost in black); Core B (truncated). Both resumed for the missing critics (cached
   results replay).
+- 16:07 helper c4 (its message said 16:08): both models built (barkhorn-cloud.glb 73 MB, 988 s, 15:31:46-15:48:15; barkhorn-variants.glb
+  16 MB, 1129 s, 15:48:22-16:07:11; one at a time). Chunk 7 (site-front-off-wide Ember, Dust, Acid; ~87 min) started as a tracked task.
+  All four containers now rendering.
