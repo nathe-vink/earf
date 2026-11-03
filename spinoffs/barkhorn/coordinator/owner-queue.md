@@ -1843,3 +1843,23 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   continuous contact shadow with blades over the lower edge; no light down; no X). It expects the horn flagged as on Ember: the low sun
   behind it, so the satin horn glows pale lavender above a darker cabinet, the driver and struts a dark shape (held for the finish
   call). Ice rendering. My gate wf_bb3e4346-c81 on Haze (Dust v2 as context) started 14:24.
+- 14:26 speaker lane, progress on the three items. (3) The roll-out queue at 08bef050a0398be6c36940f506843f26dadd3020, nothing
+  rendered: shots.py's strata_lit takes base (A/D; default the old plinth, so existing shots are unchanged) and horn (satin/polished);
+  `python3 spinoffs/barkhorn/campaign/rollout.py --base A --horn satin` (A/D x satin/polished; --list to print only) writes
+  campaign/rollout/<base>-<horn>/ (a JSON per shot, queue-NN.sh chunks of ~100 estimated minutes, a README table). A: 45 shots, ~22.6 h
+  (deck hero, row, cover, home, home portrait, plus 5 site frames x 8 tints); D: 53 shots, ~24.7 h (plus a night lantern per tint from
+  D night v2; Smoke at 6500 K, +1 stop). Polished = the waveguide's outside at 0.05. Flag: shots.py's deck_hero still built the old
+  stepped Strata on the lit plinth, so rollout.py makes it from gate 2's A (its studio, camera, polish) in Ember at 1440 x 2160; the
+  2:3 crop wants one framing proof. (1) The HF lead as the design says (product.py: "up the cable post (7 bore) into the pod"): a new
+  part lead-hf-pod (5 mm two-core) from rear post 2 at (240, 353) up through the horn's pad and the pod's floor, along the pod's back
+  to the driver's terminals; the Cloud's lead-hf already carries it inside the cabinet to the gland under that post. Outside the horn
+  the only cable is inside the bronze post. Through polished: the driver, its rear body, this lead and the two rear posts; the
+  critics' "two lines" were most likely the rear posts. Model rebuilding (~20 min), then the satin/polished close-up pair (1000 x 800).
+  (2) Smoke at ~50 % through 20 mm with the white lining rendering on the 83c03b3d set (absorption #B6B6B6 at the material's 25 mm,
+  from 50 % total with the 8 % surface loss; 2064's 29.3 % gives #818181 the same way). Sheets: "held": the only grey near it in R1
+  is Chemcast's 2064, 57.1 % at 3 mm (TAP's "Light Smoke"; held at 20 mm ~57 %); TruCast 2064 29.3 %, 2074 11.7 %; "deep" (~83-85 %
+  at 3 mm): nothing in R1 (Chemcast's 2064 deep is ~4 % at 20 mm). No code named that it hasn't seen.
+- 14:28 sent: brand = the brand lane's Book (draws on deck and site renders; nothing to add); Chemcast 2064 is the one real
+  candidate (R1 l.203; R1 §1.2: Chemcast lists LT at 0.118 in only, so the off-cuts settle it); yes to one deck-hero framing proof at
+  proxy samples after items 1 and 2; asked (a) the queue's sample counts and the total with the site frames at 128 + denoiser, (b)
+  what 3-4 parallel containers would each need (the repo SHA, assets outside git, Blender version), to plan helper sessions.
