@@ -2795,3 +2795,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 18:45 c4: chunk 09 landed (site-front-off-wide fog 19.7 min, site-hero-light ember 23.2; 18:00-18:44) at
   ed2dd145802fee6e227a6b4ffc368147a967b0ba; chunk 12 (hero-light haze, fog) started 18:45; then the 9db8da17 merge and phase-2 chunks 3
   and 6 unless told to wait. The front-off-wide set is complete in seven tints but goes to the sidesheen re-render, so it isn't gated now.
+- 18:48 my look at the deck-fix proofs (00682ac4): the row's right side faces now hold their tints (Smoke's side dark glass, no silver
+  panel; Ice blue, Poison green without the stripe), the sweep clean: ready to render. The room and portrait: the bottoms fixed, but at the
+  proof's exposure the lower cabinets sit in the sill's shade as dark green boxes; a second portrait proof at the new exposure asked
+  (18:46), with the fronts' mean against the row's Poison, before the fix chunk goes to c2 after its chunk 14.
