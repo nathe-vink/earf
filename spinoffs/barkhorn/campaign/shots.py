@@ -463,11 +463,10 @@ def deck_cover():
     s['render']['samples'] = 128
     # (its proxy after the hero's hold, 2026-11-03: Ember, at the left end turned to the camera, mirrored side_l in its
     # front, a pale pink patch on the upper left, (197, 156, 155), 12 % at 250. Its mirror ray from the front reaches
-    # x -6 at y -3, z 0.2, inside that lamp's 0.6 x 3 m face. The side lamps light the sides; the fronts come off their
-    # receivers, so no front sees or mirrors them, at either end)
-    for k in ('side_l', 'side_r'):
-        if k in s['lights'] and s['lights'][k].get('receivers'):
-            s['lights'][k]['receivers'] = [r for r in s['lights'][k]['receivers'] if r != 'front-panel']
+    # x -6 at y -3, z 0.2, inside that lamp's 0.6 x 3 m face. The lamp moves back to y -1.5, off that ray; Smoke's ray
+    # at the other end reaches x 7 at about y -4.2, well clear of side_r at y -1. No links: the coordinator's rule)
+    if 'side_l' in s['lights']:
+        s['lights']['side_l']['position'] = [-6.0, -1.5, 1.4]
     return s
 
 
