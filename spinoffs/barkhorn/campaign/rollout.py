@@ -195,6 +195,8 @@ def main():
     ap.add_argument('--date', default='2026-11-04', help="the renders' folder date")
     ap.add_argument('--list', action='store_true', help='print the list only; write nothing')
     ap.add_argument('--phase', type=int, default=1, choices=[1, 2], help='1: the deck and the 40 site frames; 2: the rest of the site (phase2())')
+    ap.add_argument('--only', default='', help="keep only the shots whose names contain any of these, comma-separated (a fix chunk)")
+    ap.add_argument('--tag', default='', help='a suffix for the folder and the queue (e.g. fix1), so a fix set does not overwrite its phase')
     ap.add_argument('--hold', default='', help="leave out the shots whose names contain any of these, comma-separated (e.g. 'smoke' while Smoke's sheet is open)")
     ap.add_argument('--chunks', default=None, help="after writing, print the commands for these chunks, e.g. '1-4' or '2,5,7'")
     ap.add_argument('--split', type=int, default=0, help='propose a split of the chunks across N containers (the deck first, in container 1)')
@@ -204,12 +206,14 @@ def main():
         env = {**os.environ, 'TROPOS_ROLLOUT_CHILD': '1'}
         sys.exit(subprocess.call([sys.executable, __file__] + sys.argv[1:], env=env))
     shots_ = build(a.base, a.horn) if a.phase == 1 else phase2(a.base, a.horn)
+    if a.only:
+        shots_ = {n: v for n, v in shots_.items() if any(o and o in n for o in a.only.split(','))}
     held = [n for n in shots_ if any(h and h in n for h in a.hold.split(','))]
     for n in held:
         shots_.pop(n)
     if held:
         print(f'held back ({len(held)}): {", ".join(held)}')
-    tag = f'{a.base}-{a.horn}' + ('' if a.phase == 1 else '-p2')
+    tag = f'{a.base}-{a.horn}' + ('' if a.phase == 1 else '-p2') + (f'-{a.tag}' if a.tag else '')
     rows = [(n, s.get('size'), s.get('render', {}).get('samples'), minutes(s)) for n, s in shots_.items()]
     total = sum(r[3] for r in rows)
     print(f'{tag}: {len(rows)} shots, about {total / 60:.1f} h of rendering')
