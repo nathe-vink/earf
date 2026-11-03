@@ -1022,3 +1022,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   scratchpad/siteaudit/) and the owner's 28 earlier site notes; running a five-lens critique (creative director, UX, copy, investor and
   press credibility, skeptic) with a synthesis into no-regret fixes and three directions (wf_83a7e502-2f9). Then: directions to the owner
   with examples, the site lane on the no-regret fixes.
+- 03:59 biomes lane: the owner typed "Go" there; working. Dark Smoke portrait proof (9707959172100f9e9adbbe96e84aa25fdd1afe65,
+  renders/2026-11-03/barkhorn/smoke-dark/smoke-dark-portrait-1200x1500.jpg, 48 samples): checked, Smoke reads smoked (dark glassy
+  speaker, fire rim light, plume behind, wet road); cause of the old paleness: the old shot's front fills (off now). Stand-in speaker
+  r33-speaker-horn a6dc9296 (Strata, stepped horn, old floor-line plinth); finals wait for the final model. Next: the 2400 x 1600
+  landscape (~35 min), the eight-panel strip, then the biome rebuild on stand-ins (habitat.py 145e3b7c).
