@@ -10,9 +10,21 @@ Show one item with its pictures, wait for the answer, save the owner's words ver
   23:03, README 39c8a341: new night pictures, each colour on its own feet plus the eight at the wall, lit only by the room's own
   lights; the Mantle lane builds them, an Ice proxy first; the site and brand lanes send the formats; nothing swaps until they pass).
 - **Open in front of the owner:** item 5, the Ice batt in the Ice habitat, asked 23:05 with scratchpad/walkthrough/05-ice-batt.jpg.
-- **Next, in order:** item 6 (the polished horn close-up, with the disclosure: scratchpad/walkthrough/06-horn-honest.jpg); item 7 (the
-  throat-ring correction); the new bottom-edge question (once its comparison is rendered); then (c) from item 8. Time-bound in (c):
-  Plastimagen, Mexico City, 10-13 November (next week).
+- **Next, in order (re-ordered 23:4x, because items 6-9 and 13 have no honest picture yet):**
+  - Item 11 first: Plastimagen, Mexico City, 10-13 November, next week. It is time-bound and needs no picture.
+  - Then items 10, 12 and 14 onward, in order, skipping any item whose picture fails the rulings.
+  - Items 6, 7, 8, 9 and 13 come back as soon as their honest re-renders pass the critics, with the bottom-edge question after
+    item 7.
+  - Tell the owner in one line why the order changed.
+- **BLOCKED 23:4x (the audit, card-audit-2026-11-03.md):** the pictures behind items 6, 7, 8, 9 and 13 fail the rulings.
+  - The horn close-ups (a381aefb): `horn` at specular 0.3, `back` and `kick` linked to the product's parts, `edge` linked.
+  - gate2 A-ice-polished (d8f613ec) and its "honest" re-render (f7f03850): a reflect-only black card covering 34 % of the frame
+    (the right third), `edge` linked, and in the original `horn` at 0.3 with `back`/`kick` linked.
+  - Smoke-target-look v1/v2 and Smoke-day-2064 (item 9 and the Smoke question): the same rig faults.
+  - Honest re-renders needed: the horn close-up, polished and satin; tall Ice as the honest A-ice-polished.
+  - Item 6's disclosure grows. The pictures the owner chose "polished" from (15:14) had the horn lamp at 30 % in reflections, lamps
+    linked to the product only, and a hidden black card darkening the right face's reflections. Show the honest re-render beside the
+    old one and say all of it plainly.
 - **A disclosure owed before item 6 (the polished horn close-up), found 19:30:** the site's studio rig (gate 2's A rig, the tall front's)
   showed one lamp (`horn`) at 30 % in reflections while it lit at full, so the polished horn's highlights in the frames the owner chose
   from were dimmer than a real lamp gives. The speaker lane renders an honest A-ice-polished (that lamp at full in reflections, nothing
@@ -78,7 +90,12 @@ Show one item with its pictures, wait for the answer, save the owner's words ver
       disc-softbox key. It is gating for looks.
     - Rendering: deck-home-portrait (c3, from 23:13) and deck-home (c4, from 23:21). The speaker lane is checking both for in-frame
       cards and `edge`.
-  - The roll-out's site set (state at 22:59): the honest fix1 frames are in: tall Ice and tall Fog PASSED 3/3. Held: tall Poison and Haze
+  - The roll-out's site set (23:4x, the card audit): NOTHING in the studio set stands.
+    - Tall Ice and Fog (which passed 3/3) carry a reflect-only card covering 34 % of the frame, as does every tall frame.
+    - The wide frames' cards cover 44-47 %, the fix1 side frames' 100 %, the phase-1 backs' 45 %.
+    - Hero-light, the horn-backs, amp plate, inside-ice and turn 00-04 are clean of cards.
+    - The fix1 re-renders on round 2 (f6d0eda7) wait for the speaker lane's whole-card test.
+    EARLIER STATE (22:59): the honest fix1 frames are in: tall Ice and tall Fog PASSED 3/3. Held: tall Poison and Haze
     (the right side and the top edge mirror the bright set; real black cards out of frame to come), the three side views (a pale line
     along the polished bottom edge), the seven wide views (a white band at the base, likely the same edge), and Acid (re-rendering on the
     9097 tint fix). The back set is fixed (a5736434: the plate reads TROPOS); phase 2's horn-backs passed (six) earlier. Phase 2: the glow lamp dropped (noise-only difference), so chunks 4 and 05 stand; the six horn-backs passed (Acid's held on its

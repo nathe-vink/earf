@@ -3703,3 +3703,41 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   - Thin-shell shadows on the day too.
   - The face's median held at ~190-200 to keep its colour (the owner likes the darker colours), with chroma reported against the day.
   - (b) rendered as a proposal. Then all three gated together.
+- 23:32 speaker lane, SITE ROUND 2 at f6d0eda74e9683438d3001ac78a819821a5c1f49 (checked by the lane on the remote).
+  In tall, wide and side:
+  - `edge` off: wide Ember's stripe is gone (that strip's saturation 0.38 to 0.79).
+  - The key and kick go from ~20 to 40°.
+  - Out-of-frame cards: the overhead card in front stays in all three. The camera-right low card is removed in tall and wide and
+    moved out (x1.3) in side, by the corner test.
+  THE FLOOR BAND, finally:
+  - With key and kick at 40° it falls to the floor's own level, but it still shows as a pale rounded line between the feet and the
+    shadow: the product's polished 3 mm-rounded bottom edge over a white floor.
+  - The honest remedy is a build detail for the owner: a satin outer edge, or a dark rail or gasket. That's the same as Dust's edge
+    bar; the lane can render both.
+  - The lane's own crop numbers don't match the images, so it asks for judgement from the images.
+  The remaining fix1 frames "can re-render on f6d0eda7". Its list: the turn backdrop, the arc's proxy, the EARF finish and
+  bottom-edge proposals, inside-ice.
+- 23:33 c3 (stamped 23:35 at a 23:33 queue time): deck-home-portrait (fix1, on 95876493) landed at
+  2076c1fb3e3004990fa9fa29d6abf34799ffa365: 1600x2000, 4.38 MB, 21.3 min; the left side face now reads green. Idle, waiting.
+- 23:3x deck-home-portrait rig: clean (no reflect-only cards; a sun through windows in a walled room; no links). Gate launched
+  (wf_f9ac827f-410).
+- 23:3x THE CARD AUDIT (tools/cardcast.py ray-casts the frame against each reflect-only card's rectangle; card-audit-2026-11-03.md).
+  75 rendered rigs were checked:
+  - Deck hero: 16-20 %.
+  - Every tall frame, phase 1 and fix1, including tall Ice and Fog (which passed): 34.1 %.
+  - The gate2 A-ice-polished and its "honest" re-render (f7f03850, whose commit says "no in-frame reflect-only cards"): 34.1 %.
+  - Phase-1 wide: 46.6 + 9.1 + 2.2 %. Fix1 wide: 43.8 %. Fix1 side: 100 % (the card between the camera and the speaker). Phase-1
+    back: 44.9 %.
+  - Clean: the row, the cover, the portrait, phase-1 side, hero-light, horn-backs, amp plate, inside, turn 00-04, the horn
+    close-ups.
+  - Round 2's new overhead card: 0.0 %.
+  The corner-and-centre test misses big cards near the camera.
+- 23:4x WALKTHROUGH PICTURES AUDIT: 39 cited pictures were checked.
+  - Fail: the horn close-ups (a381aefb: horn specular 0.3, back/kick part-linked, edge linked); gate2 A-ice-polished (d8f613ec,
+    34 % card, plus those); Smoke-day-2064 black/white and Smoke-target-look v1/v2 (the same); design-topo-p1 (34 % card, links);
+    site-strata-F back-ice (45 % card, cab-back at specular <1); the old deck-row (front-strip linked).
+  - Clean: the bar's r43 listening/shop/window and r44 lantern; the old deck-home portrait (c659ce9f).
+  - No rig file to check (other lanes' pipelines): the habitats (item 5's included), lamps, Mantle, four-pieces, smoke-dark, site
+    facade.
+  So items 6, 7, 8, 9 and 13 are blocked until honest re-renders pass. The order after item 5: item 11 (Plastimagen, time-bound),
+  then 10, 12, 14 onward; 6-9 and 13 return when their pictures pass, with the bottom-edge question after 7. Item 6's disclosure grows.
