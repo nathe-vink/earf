@@ -39,7 +39,10 @@ SETS = {
     # 248.3 -> 187.8, so the sky and the lamp agree and nothing bright sits behind the speaker)
     # ruling 2 (the coordinator, 20:21): no part-links; the shot's rim lit the speaker's 99 parts alone, so it now lights
     # whatever it reaches
-    'acid_b': {'product.instances.0.rotate_z': -8.0, 'lights.rim.receivers': None},   # 28 deg off mirrored a wedge (crease 26.7), 10 deg off 13.7: 4 deg, as Ice
+    # (the coordinator's gate on 43ad3a3f: the lining near-black, 77 % of the cabinet; the same voile as Ice's, so the light:
+    # the low sun behind at 148 deg, the batts block it. To three-quarter back, 120, as Dust's 118, the sky turned with it)
+    'acid_b': {'product.instances.0.rotate_z': -8.0, 'lights.rim.receivers': None, 'sun.azimuth_deg': 120.0,
+               'sky.rotation_deg': 237.1},   # 28 deg off mirrored a wedge (crease 26.7), 10 deg off 13.7: 4 deg, as Ice
     # the polished horn mirrors the bright sky in one wall as a pale wedge (half an X) when it's turned far from the
     # camera; turned to about 10 deg off the camera's line it reads clean, as Ice's does (front-on gives a symmetric X)
     # (at -5, 10 deg off, Haze's narrow side face, seen near grazing, mirrored the bright sky as a flat lavender sheet;
@@ -74,7 +77,8 @@ MODIFY = {'haze_b': {'sundisk': {'azimuth': 135.0, 'elevation': 6.0}}}
 FLAG = {'haze_b': (4.0, 3.0)}
 # feet bedding per habitat (m; default 0.012, the cabinet on the ground). Acid stands in a puddle: at 12 mm its bottom sat
 # exactly on the water, and the water reflected a band of sky between the edge and its reflection (the gate: "hovers")
-SINK = {'acid_b': 0.03, 'ice': 0.022}   # Ice ~1 cm deeper: light showed under its left front corner in the snow
+SINK = {'acid_b': 0.015,   # 3 mm under the water (at 18 mm the submerged part showed through, below the reflection's start)
+        'acid_b_old': 0.03, 'ice': 0.022}   # Ice ~1 cm deeper: light showed under its left front corner in the snow
 # the horn's outside: polished (the owner, 2026-11-03 15:14: "Horn: polished"; satin was 0.25)
 HORN_ROUGH = 0.05
 SAMPLES = {'ember': 96, 'poison_g5': 96, 'haze_b': 96, 'fog_b': 96}
