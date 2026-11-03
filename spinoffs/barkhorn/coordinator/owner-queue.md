@@ -1901,3 +1901,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   report (a fact for the owner); (4) the corner floor glows down, a faint sky sheen and top edge. The same rule for Fog, Acid and
   Poison before they render (key from the side or camera side, no strong sun behind, Dust's angle; proxies checked on hue, L and the
   background through the cabinet). Its queue order its call, one job at a time; Haze's fix may follow Fog.
+- 14:44 biomes lane: Ice on horn A at d7194381cbd3d54502e417a14dc9ede57bfb8237 (habitats/ice-portrait-1200x1500.jpg, sha256 2a983779,
+  plus ice-portrait-batt-crop.jpg at 2x; M8 feet bedded 12 mm, --horn-front, 64 samples). The bottom batt plainly visible: a white
+  block between the two port tubes with its notch for the lead, under the woofer. Its gate passed all four (the internals through the
+  front, the cabin's window through the side, no milky wall; a dark contact line; the snow in front 120.7 vs 121.1 and 120.3 either
+  side; a soft haze at the throat, no pattern). Fog rendering, then the Poison proxy, then Acid. My look: a saturated cobalt-blue
+  see-through cabinet at dusk by a lit cabin, the horn blue satin with the driver a dark disc at the throat (a near-frontal camera).
+- 14:45 my gate wf_c76b4689-d68 on Ice (the batt crop and Dust v2 as context). Asked the lane whether the 14:43 lighting rule reached
+  it before Fog started: if Fog is lit from behind, stop it (PID), proxy a side or camera-side key at Dust's angle, then the final.
