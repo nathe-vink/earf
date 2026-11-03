@@ -296,6 +296,8 @@ def altar(bpy, kit, p, objs):
     for role, colour, x, y, z, rot in R.speakers():
         fe.box(L - 0.105, y - 0.55, Z['z'] + 0.25, L - 0.080, y + 0.55, Z['z'] + 2.05)
     objs.append(fe.object(bpy, velvet_deep(bpy, C['velvet'], 'velvet-' + p.get('colourway', 'green')), bevel=0.012))
+    if p.get('tropos_feet'):                                         # the owner, 2026-11-03: Tropos on its own feet, no plinth
+        return
     pl = Mesh('altar-plinths'); S = R.PAIR36
     for role, colour, x, y, z, rot in R.speakers():
         _obox(pl.bm, x, y, Z['z'], S['plinth_d'], S['plinth_w'], S['plinth'], math.radians(rot + 90))

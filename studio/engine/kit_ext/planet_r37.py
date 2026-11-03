@@ -62,6 +62,8 @@ def ledges(bpy, kit, p, objs):
         x0, x1, yf, yb, z0, z1 = R.niche_box(xc)
         oak.box(x0 - 0.012, yf - 0.012, B['low'], x1 + 0.012, yb, z0)
     objs.append(oak.object(bpy, K.dark_oak(bpy, name='oak-spk-ledge'), bevel=0.003))
+    if p.get('tropos_feet'):                                         # the owner, 2026-11-03: no lit wedge, no plinth light
+        return
     # the light plinth (the owner: "Lights under the speakers could be cool too"): the wedge under each cabinet in
     # frosted acrylic lit from within, so light rises into the tinted cabinet's base; its glow `plinth` (0 = an unlit
     # frosted wedge), its colour the configuration's (warm amber in Smoke, red in Ember, blue in Ice)
@@ -302,7 +304,8 @@ def zone_life(bpy, kit, p, objs):
     Z = R.ZONE; z0 = Z['z']; P = R.PAIR36; T = R.TUB
     sl = K.Mesh('zone-sleeves')
     (role, c, sx, sy, sz, rot) = R.speakers()[0]
-    _tilted_box(sl.bm, sx - P['plinth_d'] / 2 - 0.10, sy + 0.12, z0, 0.314, 0.004, 0.314, math.radians(90) - 0.0, math.radians(14))
+    if not p.get('tropos_feet'):                                     # it leaned on the plinth, gone on 2026-11-03
+        _tilted_box(sl.bm, sx - P['plinth_d'] / 2 - 0.10, sy + 0.12, z0, 0.314, 0.004, 0.314, math.radians(90) - 0.0, math.radians(14))
     tx, ty = R.TUB_TABLES[0]                          # the zone's middle table
     K._obox(sl.bm, tx - 0.04, ty + 0.06, z0 + R.TUB_TABLE['h'] + 0.0005, 0.314, 0.314, 0.003, math.radians(-20))
     objs.append(sl.object(bpy, K.principled(bpy, 'sleeve-zone', '#C9B79A', rough=0.6)))
@@ -466,7 +469,8 @@ def room(bpy, name, p, kit):
     objs = K.room(bpy, name, p, kit)
     niches(bpy, kit, p, objs)
     ledges(bpy, kit, p, objs)
-    altar_plinths(bpy, kit, p, objs)
+    if not p.get('tropos_feet'):                                     # 2026-11-03: Tropos stands on its own feet
+        altar_plinths(bpy, kit, p, objs)
     ginza(bpy, kit, p, objs)
     if p.get('zone_life'):
         zone_life(bpy, kit, p, objs)
