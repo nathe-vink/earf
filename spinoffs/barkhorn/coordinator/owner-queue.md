@@ -1863,3 +1863,17 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   candidate (R1 l.203; R1 §1.2: Chemcast lists LT at 0.118 in only, so the off-cuts settle it); yes to one deck-hero framing proof at
   proxy samples after items 1 and 2; asked (a) the queue's sample counts and the total with the site frames at 128 + denoiser, (b)
   what 3-4 parallel containers would each need (the repo SHA, assets outside git, Blender version), to plan helper sessions.
+- 14:28 speaker lane: the queue's samples (the denoiser on in every rig, adaptive 0.01; ~9 min per megapixel per 64 samples on its CPU
+  Cycles): deck hero 1440 x 2160 at 192 (84 min), row 3328 x 1040 at 160 (78), cover 3840 x 1360 at 128 (94), home 2880 x 1620 at 128
+  (84), home portrait 1600 x 2000 at 128 (58); 40 site frames (5 x 8 tints, 1200 x 1500) at 96, 16.0 h (70 % of A's 22.6 h); D's 8
+  lanterns at 64, 2.1 h. Site frames at 128: A 27.9 h; at 64: A 17.3 h. Split: rollout.py already cuts ~14-16 independent ~100-min
+  chunks; each container needs the repo at 08bef050 or later, studio/setup.sh (the bpy wheel, Blender 5.0, CPU Cycles; the .venv-fab
+  CAD venv), the two gitignored models (barkhorn-cloud.glb 73 MB via fabkit build.py, untimed; barkhorn-variants.glb 16 MB via
+  render_model.py, ~21 min; or ~90 MB transferred, no shared disk), the Poly Haven cache (433 MB, CC0, fetched on demand; room31 for
+  deck-home and its portrait); one render at a time, each under 13.5 GiB. With 4 containers A is ~6 h each plus 30-60 min setup.
+  Running: the model rebuild with the pod lead, then the close-ups; the Smoke ~50 % frame rendering alongside.
+- 14:29 sent: keep the samples (site 96, as the passing habitats); a memory warning (biomes lost Ice to an OOM with two jobs side by
+  side; its rebuild and the Smoke render run together: check headroom, else serialise); the plan for the answer: 3 helper sessions in
+  this environment plus the lane, A in ~6-7 h wall. Asked: campaign/rollout/HELPERS.md (fresh-container steps, chunk runs, commit
+  rules, one branch per helper, the report), a chunk picker in rollout.py if missing, and a 4-way split of A's and D's chunks with
+  the deck frames first in one set. No roll-out renders until I say.
