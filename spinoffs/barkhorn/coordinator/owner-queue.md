@@ -1671,3 +1671,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   driver through backlit satin (the horn-finish question). Dust's honest hue: 36 degrees through 3 mm, 33 through one 20 mm wall, 29
   through two; the deep-lot horn 9 at 20 mm; the frame's 19-20 is the deep horn plus the white lining under a low warm sun: the honest
   lever for a warmer orange is the light, not the tint.
+- 12:42 biomes lane: the Dust proxy seats with the feet bedded 12 mm (the settle ray casts saw flat ground: the crust and ripples are
+  displaced at render time), so every habitat beds 12 mm, the cabinet bottom on the ground; Dust gets sand bounce 0.35, no tumbleweed.
+  7d70ac757ba4362d78e8b6a16503ed7d85aab2ac; the chain restarted 12:42: Ember (~13:07), Dust, Acid, Poison, Ice, Haze, Fog; the set ~15:45.
+  Each checked at 390 px for contact and hot reflections at the foot, then the lane's gate, then mine.
