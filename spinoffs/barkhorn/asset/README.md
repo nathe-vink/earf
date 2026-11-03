@@ -104,7 +104,7 @@ committed: it rebuilds in about 30 s.
 
 ## Horn A (2026-11-03): `tropos-strata.blend` rebuilt
 
-The owner's pick on 2026-11-03 ("Horn: A, smooth, satin outside") is now the default. `tropos-strata.blend` carries the
+The owner's pick on 2026-11-03 ("Horn: A, smooth", its outside polished since 15:14) is now the default. `tropos-strata.blend` carries the
 smooth formed horn (the waveguide in satin, the throat, pod, cap, pads and saddle formed) on Strata's bronze posts, with
 the caldera, on base A (the plinth) with its uplight (option `Plinth uplight`; the base question is open, see
 `variants/BASES.md`). The collections keep the plain names, **Tropos Strata Ember** through **Smoke**. `--horn stepped`
@@ -121,6 +121,19 @@ so light would leak out of the horn. The biomes lane asked whether the acrylic v
 So the file is 42 MB, not 23. The plates' print, the screws and the lining's voile webs are still collapsed.
 
 ## Horn A's outside: satin or polished (a feasibility note, 2026-11-03)
+
+> **Decided: polished** (the owner, 2026-11-03 15:14: "Can we do satin on the horn interior and polish on the exterior,
+> or does that add build complexity? If so just go polished"). A satin inside would need the outside masked and an even
+> blast into the narrowing throat, a step on every horn. So the horn is polished outside and in. `FORMED_HORN_SATIN` in
+> `product.py` is 0.05; the material keeps its name, `horn-satin`.
+>
+> **The inside, plainly:** it is the face that touches the plug, so it takes the plug's finish. It comes off glossy only
+> if the plug is. The risk register already asks for the plug sealed, sanded to 600 and polished, and wiped before every
+> shot (F3). On the prototype's tooling-board plug, expect a slightly duller, faintly textured inside, with any dust or vent
+> marks printed into it. On the production aluminium tool, polished, expect a good gloss. No extra step on the horn
+> itself, but the plug's polish is now a look item, not only an acoustic one. Buffing the inside afterwards is possible
+> only near the mouth, never into the throat or near the joint. The forming trial should judge the inside's gloss under a
+> raking light against a limit sample.
 
 **Why this matters.** The owner misses "the old renderings of the horn where the thicker parts of the acrylic got darker, almost giving it a glassy feel".
 - The biomes lane's proxies show where that depth comes from: a polished outside. With the satin outside, the horn glows evenly, and thick and thin look the same. Closing the mesh changes nothing (63.2 against 63.4 mean luminance).

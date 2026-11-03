@@ -2728,14 +2728,18 @@ if os.path.exists(TRUCAST_FILE):
 # the owner, 2026-11-03 03:00 (README 468c1058: "Horn: A, smooth, satin outside"): the formed horn is the line's horn,
 # Strata's stepped horn the documented alternative. Each formed horn is matched by eye to its cabinet and kept deep, from
 # front-off-tall proxies in the site's studio (renders/2026-11-02/barkhorn/horn-study/; asset/TINTS.md): the colour of
-# the horn's 10 mm sheet (`deep` reached in 10 mm). Its shell is fine glass-bead blasted outside (roughness 0.25, about a
-# 400 to 600 grit finish), the air path masked and left polished; the throat piece, pod, cap and pads polished
+# the horn's 10 mm sheet (`deep` reached in 10 mm). Its shell's outside is POLISHED, as it comes off the press (the owner,
+# 2026-11-03 15:14: "Can we do satin on the horn interior and polish on the exterior, or does that add build complexity?
+# If so just go polished"; satin inside would need the outside masked and a blast into the narrowing throat, a step on
+# every horn), so it is polished outside and in. Until then it was fine glass-bead blasted outside (roughness 0.25, the
+# owner's "satin outside" of 03:00). The material keeps its name, `horn-satin`, so the shots' overrides still find it;
+# the throat piece, pod, cap and pads polished as before
 FORMED_HORN = {'cloud-red': '#C50206', 'cloud-orange': '#B85010', 'cloud-amber': '#B88E00', 'eucalyptus-y2k-green': '#0E6A06',
                'cloud-blue': '#0A52B8', 'cloud-violet': '#4512D0', 'birch-fog-clear': '#FFFFFF', 'cloud-black': '#424548'}
 # measured in the site's front-off-tall (rim lamp off), horn against cabinet (median luminance, hue difference): Ember 0.45 0,
 # Dust 0.46 +2, Acid 0.56 -1 (its cabinet is the brightest; deeper turns orange), Poison 0.34 +1, Ice 0.29 +3, Haze 0.25 0,
 # Smoke 0.36 (grey), Fog clear (asset/TINTS.md, "The formed horn")
-FORMED_HORN_SATIN = 0.25
+FORMED_HORN_SATIN = 0.05        # the shell's outside: polished since 2026-11-03 15:14 (was 0.25, bead-blasted)
 for _f, _v in VARIANTS.items():
     _m = _v.get('materials', {})
     if 'horn-lot' in _m:
@@ -2763,8 +2767,8 @@ PRODUCT = Product(
     # wrapped in bark, and the light's catch on it shows where one panel meets the next
     materials={'bark': {'preset': '$bark', 'bevel_mm': 1.0}, 'raw': {'preset': 'birch'},
                'horn-lot': {'preset': '$bark', 'bevel_mm': 1.0},     # round 36: the formed horn's own dye lot (HORN_DEPTH_M)
-               # the owner, 2026-11-03 03:00 ("Horn: A, smooth, satin outside"): the formed horn in its own colour
-               # (FORMED_HORN), its shell bead-blasted outside (`horn-satin`), its turned and rolled parts polished
+               # the owner, 2026-11-03 03:00 ("Horn: A, smooth"): the formed horn in its own colour (FORMED_HORN); its
+               # shell polished outside since 15:14 (`horn-satin`, the name kept), its turned and rolled parts polished
                'horn-satin': {'preset': '$bark', 'bevel_mm': 1.0}, 'horn-formed': {'preset': '$bark', 'bevel_mm': 1.0},
                'cloth': {'preset': 'cloth', 'color': '$cloth'}, 'disc': {'preset': 'cloth', 'color': '$disc'},
                'grille-paint': {'preset': 'satin_paint', 'color': '$panel', 'roughness': 0.6, 'specular': 0.3},

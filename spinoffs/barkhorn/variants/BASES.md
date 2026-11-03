@@ -2,7 +2,8 @@
 
 > **Decided (the owner, 2026-11-03 15:11: "No light"): the product is A. Tropos stands on its own four swivel feet, with
 > no plinth, no plate and no light.** It passes IEC 62368-1:2018's stability tests on its own feet
-> (`stability/standard-2018.md`). Everything below is the record of how the base was decided: the plinth, the plate,
+> (`stability/standard-2018.md`). Its horn is polished outside and in (the owner, 2026-11-03 15:14; `asset/README.md`).
+> Everything below is the record of how the base was decided: the plinth, the plate,
 > the uplight, D (the light built in), D+ and E. None of it is in the product.
 
 **The owner chose A, lit from underneath** (2026-11-01: "can we make them light up from underneath? If so I'd go with

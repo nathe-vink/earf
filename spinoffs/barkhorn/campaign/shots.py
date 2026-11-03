@@ -333,7 +333,7 @@ D_GLOW = {'builtin-led': 450.0, 'builtin-led-brace': 1020.0}
 
 def strata_lit(s, glow=None, horn='smooth'):
     """Any shot's Tropos instances turned into the owner's final design, everything lifted onto the stepped plinth:
-    since 2026-11-03 (the owner: "Horn: A, smooth, satin outside") the Cloud's formed horn, satin, on Strata's bronze
+    since 2026-11-03 (the owner: "Horn: A, smooth"; polished outside since 15:14) the Cloud's formed horn on Strata's bronze
     posts, with the caldera, and the plinth's uplight (the owner, 2026-11-02: the light goes up through the speaker);
     `horn='stepped'` gives Strata's stepped horn, the documented alternative. `glow` keeps the old shots' meaning: 20 (by
     day) leaves the uplight at its default 50 %, 40 (at dusk) runs it at full."""

@@ -131,7 +131,7 @@ def main():
     ap.add_argument('--out', default=str(HERE / 'tropos.blend'))
     ap.add_argument('--design', default='current', choices=sorted(DESIGNS))
     ap.add_argument('--name', default=None, help='the collections\' prefix (default Tropos, Tropos Strata, or Tropos Strata Stepped)')
-    ap.add_argument('--horn', default='smooth', choices=sorted(HORNS), help='Strata\'s horn: smooth (the owner\'s pick, 2026-11-03: "Horn: A, smooth, satin outside") or stepped (the alternative)')
+    ap.add_argument('--horn', default='smooth', choices=sorted(HORNS), help='Strata\'s horn: smooth (the owner\'s pick, 2026-11-03: "Horn: A, smooth"; polished since 15:14) or stepped (the alternative)')
     ap.add_argument('--full', action='store_true', help='keep every triangle (no LIGHTER)')
     ap.add_argument('--tints', default='line', choices=['line', 'site', 'trucast'],
                     help="the line's own (default: the product files as product.py writes them, colors F since "

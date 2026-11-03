@@ -47,7 +47,7 @@ A **mill run** is a standard code poured to a thickness nobody stocks (a minimum
   custom batches and 6 mill runs.)
 - Stock counts move. Recheck each line against the vendor before an order. These are R1's counts of 2026-10-31.
 
-**The formed horn (horn A; the owner, 2026-11-03 03:00: "Horn: A, smooth, satin outside").** Each of the eight is
+**The formed horn (horn A; the owner, 2026-11-03 03:00: "Horn: A, smooth"; polished outside since 15:14: "if so just go polished").** Each of the eight is
 matched by eye to its cabinet and kept deep, as Ice and Ember were in the horn study (`renders/2026-11-02/barkhorn/
 horn-study/deep/README.md`, round 2). The method: front-off-tall proxies in the site's studio (the rim lamp off), the horn's
 colour moved until its median hue sits within 5 degrees of the cabinet's and its median luminance near round 2's, a
