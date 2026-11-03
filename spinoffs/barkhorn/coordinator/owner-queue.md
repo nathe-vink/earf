@@ -1774,3 +1774,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   it, so only darkening the backdrop (a habitat change) or a camera putting it against the sky would bring it to the side face. Agreed
   13:48: hold Ember's horn until the owner's horn-finish call (polished would read dark and glassy in this light, 2.5x darker by the
   morning's proxy). The chain continues: Poison, Ice, Haze, Fog, then Acid at sink 0.03.
+- 13:54 speaker lane: the D night re-render isn't good enough (not committed). Right: the brace runs on the rear member, the floor film,
+  no neon line, no violet dot, 0 % clipped. Wrong: the room (the fill moved to 3.5 m at 55 degrees, the floor #1E2125 and -0.67 stop gave
+  49 % black pixels; horn 1.8, wall 2.7, wall saturation 0.99), changed without a proxy. Fix: the fill ~3x and a less saturated slate
+  #4A5566; one proxy (horn >= 20, wall >= horn, no pinwheel, saturation), then the full frame, ~20 min. Told 13:54: go ahead (needed if
+  the owner says "lantern"; dropped on "no light").
