@@ -2506,3 +2506,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 17:29 sent: agreed; the Haze horizon disk traced and removed or moved to the sun lamp's azimuth out of frame (one light source),
   noted in CHECK.md. The densities go to the owner as an item with the lane's numbers (colours F already made Poison and Haze a step
   lighter; a further step is the owner's call).
+- 17:30 biomes lane (its message said 17:32): Haze's disk is a `sundisk` prop (an emitter, emit 18, at azimuth 160.5, 1.5 degrees up,
+  296 m out); moved, not removed, to azimuth 100 and 6 degrees up (the sun lamp's position, out of frame) by a per-habitat prop modifier
+  in habitats.py at 98916e051c6c6251d4660ed6e3699f359e0c60e8; to be confirmed in the Haze log and noted in CHECK.md.
