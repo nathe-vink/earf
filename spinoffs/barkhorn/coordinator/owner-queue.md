@@ -953,3 +953,14 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   Ice and Ember at night at full power with the uplit set's exposure, side by side with uplight31; the honest way to light the full
   height from the base (the window first; if not enough, one option for the owner: a strip at the cabinet's foot washing up behind the
   lining, fed from the plinth's 24 V through a foot-pad connector); one line on which is closest for the least change.
+- 00:10 speaker: uplight follow-up (bbdd646be270da312b8b8b72729291f86455ac8d; like-for-like sheet 92dd8838aba8eb90e881865cfe6672863e443fc1;
+  wash commits 7b0a93bf, 2fd99ec7; like frames 327ef739). The window frame fixed (9ce10460ed3fc9c3c0c15c56a8a03acd37c2c981; the lane
+  owned the mistake; BASES.md corrected): the lower cabinet brighter and more even, the wall barely changes. Like for like on the uplit
+  stage (its camera, moon, haze, exposure; the set's 135 W lamp removed; a floor-height bug fixed before anything was sent): the base
+  light alone glows the whole cabinet top to bottom in its own color (deeper than the promo's near-white inside); what it can't reach
+  is the promo's tall V up the wall (~10 W of light vs ~135 W): close in Ember, paler in Ice; the horn dark as in the promo. Cabinet
+  wash (a strip at the wall feet inside, behind the lining, fed at a foot pad; ~$60, +11 W, 45 W total) brightens inside, little on
+  the wall. Lane's line: base + window is closest for the least change; the next step for the wall is a ~40 W centre panel.
+  Checked: all 14 frames distinct blobs now; the sheet by eye. My calls: adopt base uplight + window (the 210 Hz ripple measured on
+  the first sample); the wash recorded as not adopted; try the ~40 W panel like for like with honest heat (adopt only with a clear
+  margin on the plinth's PMMA); regenerate or mark superseded the first sheet (64efa758, still showing the duplicate).
