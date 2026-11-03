@@ -74,6 +74,21 @@ After each chunk, one short message:
 
 At the end, a list of your shots with the SHA for each.
 
+## The run: A, polished, Smoke held (the owner, 2026-11-03 15:11 and 15:14)
+
+    python3 spinoffs/barkhorn/campaign/rollout.py --base A --horn polished --hold smoke --chunks <yours>
+
+Smoke's five site frames are held back (`--hold smoke`) while its sheet is open, which leaves 40 shots, about 20.6 h, in 15 chunks:
+
+| container | chunks | shots | est. |
+|---|---|---|---|
+| 1 (the speaker lane) | 1-4 | the deck: hero, row, cover, home | 5.7 h, after the deck hero's framing proof |
+| 2 | 11, 13, 14 | hero-light poison and ice; side ember to ice; side haze and fog, back ember to ice | 4.5 h |
+| 3 | 5, 6, 10, 15 | deck home portrait, front-off-tall (all but smoke), hero-light dust and acid, back haze and fog | 4.8 h |
+| 4 | 7, 8, 9, 12 | front-off-wide (all but smoke), hero-light ember, haze and fog | 5.6 h |
+
+The held shots: site-front-off-tall-smoke, site-front-off-wide-smoke, site-hero-light-smoke, site-side-smoke and site-back-smoke. Run them later, with `--hold ''`, once Smoke's sheet is set.
+
 ## The proposed split (`rollout.py --split 4`; estimates, about 9 min per megapixel per 64 samples)
 
 The chunk numbers are the same for satin and polished. The deck's four chunks go to container 1, so the deck lands first.
