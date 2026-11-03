@@ -1475,3 +1475,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   Mantle g3 in work (README 3e0e1a19, 10:37). Lamps round 5 in work (05bf9afe, 10:42: the opal ends inside Hemisphere's rim). Biomes'
   seven rendering on hornA2 since 10:44. The owner's questions, in order: the base (~noon UTC), the horn finish (satin or polished),
   then Smoke. Site held at 743be0cb; board v23; deck v68. Re-armed for 11:41 (#39).
+- 11:00 biomes lane: Ember (1 of 7) at 3de248cdb4af17ded4619e345be78fe6999b3af3 (renders/2026-11-03/barkhorn/habitats/
+  ember-portrait-1200x1500.jpg; hornA2 closed, satin by spec, welded volume, own feet, light off; 48 samples, 15 min). The lane's
+  single agent: cabinet passes all four; the horn fails see-through ("an opaque, mottled, frosted red sheet", median 169/22/8; "a dark
+  sooty stain at the throat with two drips" = the driver and inner posts as soft shadows through the satin). The rest ~15 min each,
+  done ~12:45 (Dust, acid_b, poison_g5, ice, haze_b, fog_b). My gate wf_603287f2-d2f (spec-aware brief) on Ember started 11:01.
