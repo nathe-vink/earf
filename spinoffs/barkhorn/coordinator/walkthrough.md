@@ -30,6 +30,12 @@ Show one item with its pictures, wait for the answer, save the owner's words ver
   Ice's thin-wall hue: the model, fitted to the chart, reads cyan-aqua (OKLCH ~225) through Core B's 6 mm shell, and reaches the
   chip's azure only at about 2.5 chips of path. Core B's core is now proposed in 3 mm white opal (like Hemisphere's liner) instead of
   clear bead-blasted; by day it reads only when the sun lights it and the wall behind is in shade (the lamps lane's numbers, 20:43).
+- **NEW OWNER QUESTION, found 23:01 (raise right after item 4; it blocks renders): the bottom panel's polished front edge glows.**
+  Light inside the cabinet is guided through the bottom panel to its polished edge (real physics for cast acrylic; red in Dust by
+  Beer's law). No studio move removes it (the speaker lane's crop tests: scrim, key, strips, a black mat). It reads like a light in the
+  base, against the owner's "No light". Options to show side by side on Dust: (a) the polished edge as built, (b) a satin (sanded)
+  bottom-front edge, (c) a dark gasket or foot rail along it; the speaker lane renders them. The side views' pale bottom line and
+  perhaps the wide views' white band may be the same edge; one answer would cover them.
 - **State changes since 18:09 (the (e) items and others):**
   - Mantle A or C3: C3b night passed 3/3 (17:55) with the C3 day 3/3; the C3d pair passed (night 2/3, day 2/3, 1a958c02); checked
     against rulings 1-3 (clean; one mesh hide removed) and re-rendered from that build as C3e at 41232b56c60d1980a5ee3de0dddd8344ffb85fee

@@ -3552,3 +3552,16 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 23:01 speaker lane: a second PLACEHOLDER SHA (e0d4f2f1..., "NOT real, DISREGARD") for hero-light and the amp plate, stamped 23:09 at a 23:01
   queue time. Sent: no SHA until git returns it and it's checked on the remote; `date -u` first; the priority after that SHA is the
   bottom-edge line and floor band and the flags (22:14, 22:44, 22:46, 22:59), with the row/hero/cover question.
+- 23:01 speaker lane (correction: the real SHA 69c8f11c71566f58466f454e94d1d7ee28846bbb holds the proofs; the hero-light code in a5736434):
+  HERO-LIGHT under the rules (back-top off; the mirror card slid out x8.8 at 5.4 m; bg-left/right on the sweep; front-strip and ring-card
+  unlinked at specular 1): the tinted floor fringe gone; Poison's right face deep green (its crop 0.60 to 0.55, taking in the front's edge;
+  the front 0.55 to 0.48 with the front strip now seen in it); Dust's right face 0.52 to 0.68. DUST'S BOTTOM-FRONT EDGE BAR REMAINS:
+  (247,122,109) to (241,129,93); no studio move removes it (scrim, key at 35, strip off, ring card off, a black mat under the cabinet);
+  the light is guided through the bottom panel to its polished front edge, red by Beer's law: real physics; options are build changes for
+  the owner (a satin front edge; a dark gasket or foot rail). Hero-light chunk: --only site-hero-light --tag hlfix on a5736434 after the
+  Cloud rebuild; the arc unproved (proxy spin-ice-00 and -04 first). The amp plate on the rebuilt model: the pink corner gone, the pins
+  read (proof back-fix-proofs/amp-plate-ember-proof.png); its line: phase-2 --only amp-plate-ember on a5736434.
+- 23:02 sent: the edge comparison for the owner (Dust, hero-light view: polished / satin / dark gasket or rail; cost noted; whether the side
+  line and wide band are the same edge) first; then the flags (re-proved on tall Poison, side Ember, wide Ember); the turn's backdrop,
+  inside-ice, the EARF finish. Hero-light, the back and the amp plate grouped on one helper after its deck job (hero-light waits for the
+  owner's edge answer if it changes the panel). Walkthrough: the new owner question, to raise right after item 4.
