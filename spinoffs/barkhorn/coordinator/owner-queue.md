@@ -2192,3 +2192,22 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   (Ember), back mark (Fog, variant A from 4f05e0be, blind-read at 440 px) and the colour coin (Ember, its own reflection; all eight if
   the rig renders them, each with its own) into whichever phase-2 queue frees first; the edge glow = its cabinet-edge macro; the
   uplit base dropped. The owner's coin note joins the walkthrough as a check-back item when the coins land.
+- 15:48 speaker lane: the three close-up rigs in phase 2 at 8bd6cd5e (full hash to follow), a new chunk 11 (~97 min, its own; chunks
+  1-10 unchanged): joinery-ember (the cabinet-edge macro's daylight studio, 100 mm, the front right vertical corner where the side
+  wall's polished 20 mm edge meets the front panel set 24 mm behind it, 1280 x 1600, 128 samples); back-mark-fog (site()'s Fog back,
+  mark variant A from 4f05e0be, square-on at 100 mm, the 140 mm word ~2/3 of the width, 4:5, 96 samples; blind-read at 440 px by a
+  fresh reader before its final); coin-ember (one Ember coin, the site's blank face, reeded edge, on its edge turned 25 degrees, ~half
+  the frame, 1:1 1200 x 1200, the paper seamless; reflections from studio_small_03 and one broad 1.0 x 0.7 m soft key, not the small
+  square softbox that put the same square on every coin; the shadow tinted by the coin's volume). Proxies first.
+- 15:49 the polished close-up gate wf_8650471b-a9c (3 critics, 17 min): SHOW 2/3 (critic 1 HOLD, "one re-render away"). Honest and
+  premium, "the best the horn has looked as a material"; no X, no rings, no wash, no wire. Busy notes: the pod's outline lobed by
+  refraction ("a dark glass knot"), bulging ~13 px past the right rim from this angle; the driver's ringed throat part a bright silver
+  "lens"; the right rear post's top out of focus (a smudge; a render artifact); the posts read dark blue, not bronze, through Ice; a
+  narrow white streak at the lower-left corner toward the throat; the cabinet top seen through reads pale lavender. Caption when shown
+  (the pod, the posts, the lid). Build proposals: one round pod centred and flush to the throat, matte black or dark bronze, a crisp
+  edge or thin bronze ring; a matte-black sleeve over the driver; a dark or bronze throat ring; generous corner radii at the throat
+  end; posts one clean diameter into the pod with bronze ferrules, behind the flatter middle of the bottom wall.
+- 15:49 sent to the speaker lane: the coin row of eight too (each turned differently, no shared reflection: the owner's coins note);
+  the close-up's build proposals into the asset README as proposals for the owner (which are already true in the model?); no model
+  change while the roll-out renders from 5295e58f. The close-up goes to the owner with a caption as its own walkthrough item; the pod
+  proposals become a walkthrough item.
