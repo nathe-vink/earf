@@ -20,7 +20,7 @@ The owner set Tropos on 2026-11-03: base A (its own feet, no plinth, no light) a
 | `door-hero.jpg` | House Book (the hero) | `renders/2026-10-22/barkhorn/planet41/finals/door-mother-colour-p3.png` | Smoke (cloud-black) | lit plinth, back kick, stepped horn |
 | `r42-counter.jpg`, `r42-night.jpg`, `r42-shop.jpg` | House Book (round 42, the 2,800 sq ft house) | `renders/2026-10-31/barkhorn/planet42/finals/{counter,night,shop}.png` | Smoke (cloud-black); shop also one Ember | lit plinth, back kick, stepped horn |
 | `r43-listening.jpg`, `r43-shop.jpg`, `r43-window.jpg` | House Book (round 43, the pop-up) | `renders/2026-10-31/barkhorn/planet43/proofs/listening-p3.png`, `shop-p2.png`, `window-p2.png` (matched by image) | Ember (cloud-red) | plinth (unlit, 0.26–0.40 m), stepped horn |
-| `r44-street.jpg`, `r44-bar.jpg`, `r44-lantern.jpg` | House Book v11 (round 44, the lantern) | `renders/2026-10-31/barkhorn/planet44/finals/{street-p4,bar-p4,lantern-p3}.png` | Ember (cloud-red) | plinth (terrazzo, unlit, 0.40 m), stepped horn, cover off |
+| `r44-street.jpg`, `r44-bar.jpg`, `r44-lantern.jpg` | House Book v11 (round 44, the lantern) | `renders/2026-10-31/barkhorn/planet44/finals/{street-p4,bar-p4,lantern-p3}.png` | Ember (cloud-red) | the pair only in r44-lantern (plinth, terrazzo, unlit, 0.40 m; stepped horn; cover off). In r44-street and r44-bar it stands inside the closed lantern, out of sight: nothing to change (`r44-street-proxy.png`, 2026-11-03, matches the old frame) |
 
 ## The archive (finals and owner reviews, not linked from the books today)
 
