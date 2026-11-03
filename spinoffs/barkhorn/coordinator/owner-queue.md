@@ -2882,3 +2882,14 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   through glass. Sent to c4, c3, c2: merge aed49790 (it contains c305795f) for all fix1 work; c4 runs fix1 chunk 2 in full (portrait, tall
   ember, dust) after chunks 1 and 3. Sent to the speaker lane: the routing; if my 19:02 note came after the cover started, check one early
   frame for the hero's two faults and stop it if it carries them.
+- 19:04 hero-light gate wf_c53243f3-e85 (3 critics, ~29 min; dust, acid, poison, ice): all four HELD by majority (one critic would show Ice,
+  and Acid with its caveat). One consistent set (same camera, light, floor), no clipped lining, clean horns matching their fronts, feet
+  grounded, Ice's batt kept. Two studio faults from an all-white surround with no flags: (1) every right side face mirrors the studio, Poison
+  worst (grey-green at saturation 0.24-0.31 against 0.98 on its own left strip), Dust salmon, Acid apricot, Ice 0.48-0.60 against the passed
+  frame's 0.76; (2) the bottom-front edge glows as a saturated bar with a tinted floor fringe (Dust ~241,93,90; Acid coral; Ice ~33,44,216,
+  twice the passed navy), starting at an abrupt notch: an LED underglow read in a no-light picture.
+- 19:05 sent to the speaker lane: studio31's set-wide fix (a black card camera-right; a dark card low behind and under the speaker; the batt
+  checked for touching the bottom panel; the key kept off the front edge), proxies on Poison and Dust, a new SHA and a hero-light fix chunk
+  in seven tints; which phase-2 chunks use studio31 (the arc 1-3; 9, 10?); the deck hero's fix can share the kit.
+- 19:05 sent to c3: phase-2 chunks 1 and 2 (the arc) held; after chunk 5 and fix1 4 and 5, report and wait. Sent to c4: phase-2 chunk 3 held;
+  after fix1 1, 3, 2, phase-2 chunk 6 (the turning sprite, finals31), then wait.
