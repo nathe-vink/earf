@@ -989,3 +989,18 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   planet-earf-pano-2400.jpg (1bd8d42222e3f4cae150480b24efd792b97daa24; master 4800 c70820b7) and proof7-planet.png (262734fb); sent to
   the owner. Its blind score was 3.5 (the single habitat pictures 6.0-6.7); the lane stopped below the bar; it shows the older speaker
   and colors. Board v20: the horn settled (kept for the record), reply bar hidden, header 03:00.
+- 03:10 OWNER: "I’m also not loving the footing on the speaker. Why is it that we need it? Is there a way to make it less top heavy,
+  or perhaps a way to tilt it back without such a wide footprint? Or a separate base that people can optionally purchase?" Saved
+  first (README 393c3dcebb69e8b3d3bab031ef8bcfe1c1b4f5a6). Why (stability/README.md): IEC 62368-1 8.6.2.2 as the lane reads it, a push
+  of 20 % of the weight (max 250 N) at the top: geometric, so the center of mass must sit 0.2 x the push height (261-267 mm) inside each
+  tipping edge; on its own feet Strata fails -24 % forward, -34 % back, -12 % sideways; ballast doesn't help. My calc under the other
+  reading (13 % / 100 N, which the lane's earlier check used): passes on its own feet (fwd +16 %, back +2 %, side +36 %), +10-20 kg low
+  ballast gives +11-24 % at the back; tilting back hurts the back margin unless a rear foot steps ~100 mm out. Research workflow
+  wf_a73d7898-d30 running to settle which test applies (with a skeptic checking sources).
+- 03:12 OWNER: "Go on all of the biome work / Make it look amazing / And yes, redo with the latest speaker. All of the images need to be
+  redone then" Saved first (README 75f6cc52a84d2e12421cc2f026fcf821f14b087b). Sequencing so nothing renders twice: the speaker model first
+  (horn A default; the footing), then the deck, the site set, the biomes and the Brand Book's pictures. Speaker lane: model work on, all
+  final renders held until the footing is settled; asked for the model commit and asset path the biomes pipeline should link. Biomes
+  session (idle, its Smoke render held for the owner's own go typed there): briefed with the owner's words; prepare the worlds to look
+  amazing with a stand-in speaker (modeled foreground ground under every speaker, joins, light), blind critics, bar 8, a plan and time;
+  no speaker finals until the final model. Asked the owner to type "go" in the biomes session for the held Smoke render.
