@@ -3023,3 +3023,13 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   degrees off (rendering), the Acid final, the Poison proxy at 9 (the glint checked), the Fog final, the Poison final.
 - 19:38 sent to the speaker lane: its order with three helpers idle: the fix1 rig proof and new SHA first; the audit list (turn, then amp
   and horn-back); the honest A-ice-polished; the deck hero and cover; the back rig and studio31 (hero-light complete in seven).
+- 19:41 r44-lantern v3 gate wf_761ff194-8bf (3 critics, ~22 min): HOLD 3/3, "close", better than both earlier versions: the big left speaker
+  see-into Ember (its side face 202,68,71 against 42,7,5 in v2), the floor at the feet clean, the red line under the top edge gone. The
+  new softbox's faults: both horns mirror it (the left a near-white streak along its lower flare, 358 px with all channels above 170 against
+  9; the right the lower half of an X, a white throat dot, a near-white lip); the top lining bands ~50 % red-clipped, flat salmon (saturation
+  0.46-0.54 against 0.83-0.90), the left handle slot pink; the right cabinet's left side face mirroring the bright counter as a beige strip.
+  And the woofer glints are NOT gone (a pale dash at ~10 o'clock, a pink spot at 5, as in v2; the lane had reported them gone).
+- 19:42 sent to the bar lane: r44 v4 (the softbox raised and swung left or flagged along its lower edge, no horn pixel above 170 in all
+  channels, nothing hidden render-side; down 2/3 to 1 stop or feathered, the tops at R 235 or less and saturation 0.8 or more; the counter
+  dimmed or flagged, or the right speaker toed in; the woofer glints' real source found and reported plainly); its order: listening v4,
+  r44 v4, then shop v3 and window v3 together.
