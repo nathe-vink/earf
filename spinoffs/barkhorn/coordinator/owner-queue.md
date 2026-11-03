@@ -3101,3 +3101,29 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   is sun and sky only). To the bar lane: shop v3 at the gate, its rig clean; ruling 3 and the hidden_point exception; check r44, listening
   and window. To the lamps lane: ruling 3 and its helpers (which fitting each sits in; any light reaching the camera through clear resin
   alone). To the Mantle lane: ruling 3; the underglow must reach the camera through the resin; check the passed C3d rig against rulings 1-3.
+- 19:58 Mantle lane: the optional day polish tried on 64-sample crops and not taken; the C3d pair stands as passed (1a958c026a8ff67df9cd498ab27e73550f3aa2b2,
+  a5-night-ember-2423-c3d.png, a5-day-ember-2423-c3d.png); the write-up and the new scene.py options (off by default) at
+  9bde0c8c340a350fe9e54b4deb28a6f8d99d8816 (r48-mantle-design), README section 13. The ring's inner faces polished (black, or clear with an
+  air gap) read glassier by day but add night edge light (a red line along the deck's lower front edge, an arc by the arm board, up to 58
+  levels over C3d): the diffuse dark grey (10 %) is the only finish that holds at night, and it draws the faint pinstripe by day. The front
+  face's ramp and the right face's haze are optics, not finish. The night "gaming" read stays the named risk. Nothing rendering.
+- 20:00 lamps lane: Core B pair at e0c71540805ac98240be6d51398aeeabc38ece76 (r32-lamps-final; the night rendered at 25d9b391): core-ice-day-nested.png,
+  core-ice-night-nested.png, 1800 x 1200, 5700 K. The core now 120 mm (was 90), 3 mm, frosted inside, open at its base (a 40 mm opening over
+  the window; closed, the LED reached the frost only by a caustic path, which rendered as noise); a printed dot over the LED (PROPOSAL, ~+$1);
+  the night in the shared evening room, "Core's room fill is kept out of the glass"; hues OKLCH 226 day / 222 night. Left to judge: the
+  core's lower edge at the cup, faint speckle in the core's reflection at the crown. Costs in core-frost-options.md (prices parked).
+  Hemisphere round 10 still rendering (day; night with the cool-white liner; night with a faint-blue liner: 4 degrees from the day in OKLCH
+  in the low-res check, the cool-white 15).
+- 20:08 biomes lane: ruling 3 checked against every habitat's lamps (none sets transmission). Declared: habitat.py's black flag behind the
+  camera and two side cards are visible to glossy rays only (hidden from camera, diffuse, shadow and transmission): out of frame, the only
+  difference from real their missing light loss and shadow (the speaker "a touch darker" with real ones); every passed habitat has them.
+  Asked: (a) leave as declared, or (b) real objects for every remaining final and re-render. The Acid final rendering with the current cards.
+- 20:11 audit of lamp_pictures.py (e0c71540) against rulings 1-3: the night branch hides the world from glossy and transmission rays, the
+  moon and the fill from glossy rays (the "room fill kept out of the glass"); Hemisphere's kicker is linked to the cap alone and its cob
+  hidden from glossy rays. Standing: the strip with diffuse off (a specular-only card, dimmed as a whole) and Core's led-face (the LED's
+  visible face; the led spot lights). The day branch is clean (so is the passed Hemisphere day).
+- 20:11 sent to the lamps lane: the night list above; Core B day to the gate now; let round 10's day finish, stop its night renders by PID
+  if on this rig, fix the night rig, proxy Core B night and one Hemisphere night against the current ones, then finals; prices parked.
+  To the biomes lane: (b) from the next final on (real flag and side cards, every ray type, out of frame); Acid's running final finishes;
+  then a Haze proxy with real cards against the current: under ~2 levels anywhere on the speaker, Dust, Ice, Ember, Haze and Acid stand,
+  else the numbers. To the Mantle lane: C3d stands, the polish stays off; the 20:06 rig check (rulings 1-3) still asked.
