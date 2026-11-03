@@ -177,7 +177,7 @@ def black_flag(bpy_, linked, size):
     # real cards are seen by the camera, so each is pushed out sideways until no corner falls in the frame (Blender's own
     # projection, lens shift included; the first real-card Fog final had them in frame at the old fixed 1.8 m)
     from bpy_extras.object_utils import world_to_camera_view
-    sc.view_layer.update()
+    bpy_.context.view_layer.update()
     offs = []
     for k, sgn in enumerate((1, -1)):
         c_ = f.copy(); c_.data = me; sc.collection.objects.link(c_)
@@ -187,7 +187,7 @@ def black_flag(bpy_, linked, size):
             p_ = Vector((t.x, t.y, 0.9)) + side * sgn * off - d * 0.6
             c_.location = p_
             c_.rotation_euler = (Vector((t.x, t.y, 0.7)) - p_).to_track_quat('Z', 'Y').to_euler()
-            sc.view_layer.update()
+            bpy_.context.view_layer.update()
             corners = [c_.matrix_world @ Vector((x, y, 0.0)) for x in (-0.5, 0.5) for y in (-0.5, 0.5)]
             uv = [world_to_camera_view(sc, cam, q) for q in corners]
             xs = [q.x for q in uv]
