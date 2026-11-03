@@ -253,29 +253,6 @@
     "kind": "kit",
     "shape": "ext",
     "module": "dust_el",
-    "fn": "tumbleweed",
-    "diameter": 0.6,
-    "seed": 11,
-    "position": [
-     2.4,
-     1.3,
-     0.27
-    ],
-    "snap": 0.02,
-    "stems": 30,
-    "branches": 8,
-    "twigs": 6,
-    "rotate": [
-     8,
-     14,
-     30
-    ],
-    "color": "#8C7454"
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "dust_el",
     "fn": "dust",
     "size": [
      2.6,
@@ -350,7 +327,27 @@
    }
   ]
  },
- "lights": {},
+ "lights": {
+  "bounce": {
+   "type": "area",
+   "size_m": [
+    8.0,
+    3.0
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.55
+   ],
+   "irradiance": 0.77,
+   "color": "#F2B07E",
+   "orbit": {
+    "azimuth_deg": -25,
+    "elevation_deg": 6,
+    "distance_m": 4.0
+   }
+  }
+ },
  "render": {
   "samples": 512,
   "adaptive": 0.02,

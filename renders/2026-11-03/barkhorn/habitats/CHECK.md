@@ -20,3 +20,4 @@ Withdrawn:
 | Habitat | see_through | grounded | no_light_down | smooth_horn | Notes |
 |---|---|---|---|---|---|
 | Ember | PASS | PASS | PASS | PASS | rotate_z -1, crack_r on the speaker at 2.0, camera at 0.8 m, 96 samples. At 390 px the ground under the base is 14.8, the base 13.6 and open ground 45.9. The peak along the foot is 60 (it was 181). The woofer, surround, braces, posts and ports show through the front and side, and the driver shows through the horn. The contact band is continuous. |
+| Dust | PASS | PASS | PASS | PASS | Sand bounce at 0.35 (0.77), tumbleweed dropped, 64 samples. The bottom edge is in the ripples with a dark contact line: luma 62-69 under the base against 90+ for open sand, and no feet or gap show. The woofer, ring, braces, ports, amp box and screws show through. The red in the shadow is light through the tint. The horn is smooth, with faint soft creases toward the corners and no bold X. |
