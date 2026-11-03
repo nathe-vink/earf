@@ -3401,3 +3401,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   speaker (body 0.15 of the scene) and Haze's bright sky behind it too; fixed at 6d2f7e17eab4460808bc93aa6ad52a9ca221a954 (Haze sky 338.8,
   Acid 292.9); the sun-70 and gap settings and the proxy crops at 8dbcab725d7110f04534ac16e1ce6a3c9ca74e56 (proxies-2140/). Queue: the Fog
   final (rendering), Haze and Acid proxies with the sky right, Poison's final, Haze's final if its proxy holds; Acid's waits for the tint fix.
+- 21:45 lamps lane: the Core B pair at a8b24760499aae24811ebbaecccc798d86dbc7aa (core-ice-day-nested.png at 384, core-ice-night-nested.png at
+  1024, 1800 x 1200, 5700 K). Day: the sun through the window's front part on the ball's face, the wall behind in shade; the opal core
+  (PROPOSAL) a pale sphere with a clear edge, core/gap 1.05 (the gate's 1.3-1.6 not reached in this room); OKLCH 226; the seat clean; the
+  lower-edge streaks are the oak table refracted through the Ice tint (physical, not painted out). Night: the new rig; the opal core glowing
+  evenly in dark clear tint, no cone, the white dot in; OKLCH 221; left to judge: faint speckle in the core's reflection at the crown.
