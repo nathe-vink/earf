@@ -29,7 +29,8 @@ HABITATS = {
 SETS = {
     # the coordinator's gate on Ember (2026-11-03): a three-quarter view so the side panel carries the lava through the
     # red (the right crack's lamp, on that crack, aimed at the speaker), the camera lower so the horn clears the ridge
-    'ember': {'product.instances.0.rotate_z': -5, 'camera.position': [2.4349, -6.0267, 0.8],
+    # rotate_z -1, not -5: at -5 the side panel's foot mirrored a lava patch as a hot streak, read as an LED strip
+    'ember': {'product.instances.0.rotate_z': -1, 'camera.position': [2.4349, -6.0267, 0.8],
               'lights.crack_r.target': [0.0, 0.0, 0.5], 'lights.crack_r.irradiance': 2.0},
 }
 # set props left out (the coordinator's gate on Dust, 2026-11-03: the tumbleweed floats, its shadow detached)
@@ -55,7 +56,7 @@ def main():
             json.dump(sh, open(shot, 'w'), indent=1)
         # horn A on its own M8 feet (base A and its light left out), direct light stopped at the horn
         cmd = [sys.executable, os.path.join(HERE, 'habitat.py'), shot, tint, '--out', out,
-               '--samples', str(max(a.samples, SAMPLES.get(n, 0))), '--scale', str(a.scale), '--stand', 'feet',
+               '--samples', str(max(a.samples, SAMPLES.get(n, 0))), '--scale', str(a.scale), '--stand', 'feet', '--sink', '0.006',
                '--horn-front'] + [x for k, v in lights.items() for x in ('--light', f'{k}={v}')] \
             + [x for k, v in SETS.get(n, {}).items() for x in ('--set', f'{k}={json.dumps(v)}')]
         with open(out.replace('.png', '.log'), 'w') as log:
