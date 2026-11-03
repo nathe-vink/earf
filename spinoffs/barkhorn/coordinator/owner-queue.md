@@ -1497,3 +1497,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   steeper, closer camera for Hemisphere's day AND night (pendant 25-35 % of the width) in parallel; Core keeps its position. The rim
   fix and Mantle's blackened skin edges go to the owner together as one small finishing call (the same physics: polished edges pipe
   light).
+- 11:03 Mantle lane g3 (frames 6c909be641f970612d9b24b2bb7f1148790c6f3e; model 84e38df8; README 3e0e1a19): (1a) confirmed the 5.6
+  skin was a light guide (TIR out of its polished edges): the skin's four perimeter edges painted black after polishing (masked, one
+  coat of black acrylic lacquer, ~$8-12 a deck in labour); (1b) the rim band came from the print over the groove's ceiling over the
+  strip: that ceiling now printed black (a ~19 mm dark tinted frame), the core's perimeter tape black, the glow graded 0.5 rim to
+  1.1 inside; measured flat to the edge (Ember ~188-194, Poison ~78-85); the strip's own emitter off (it double-counted). (2) Colour
+  derived: a 4000 K blackbody through the 5.6 skin's own absorption (the lamps' note wasn't at the path on their branch);
+  exposure -1.5; the speaker lane's night set; 128 samples. (3) The pool was the low rim light, now gone; floors identical. Day
+  re-rendered (black edges, masked band). Cost now ~+$130-160 a unit over v3 (edge paint ~$10); $3,897 in parts; deck 24.6 mm awaits
+  sign-off. Gate wf_8d0bd1ae-140 on all three started 11:04 (sha256 day 0fadf553, Ember 70f508d2, Poison 274171b9).
