@@ -3315,3 +3315,17 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   Waiting for the next SHA (chunks 4, 5).
 - 21:02 the fix1 deck-home-portrait gate launched wf_3d3ee524-9ea (context: the earlier portrait, held 2/3); the room rig's in-frame card
   question still open with the speaker lane.
+- 21:06 speaker lane: FIX1 HONEST at f7f03850edb54dfc9ccbe0cc2655b194cafc1232: cards_out_of_frame() (a 25-point grid per card against the
+  frustum; an in-frame card slides out along the line through the speaker, grown to hold its angle, or is removed if it can't or is a
+  floor card): tall's mirror card out (x4.3), side's out (x1.3), wide's one old card out (x1.4) and three removed. The floor patch gone,
+  `back` off. Proxies 0.3 scale, old linked against honest (right face / lower / floor right / horn >=250): tall Ice 0.79/0.56/176/2.2 %
+  to 0.74/0.49/201/1.0 %; tall Ember 0.77/0.49/173/2.6 % to 0.71/0.40/199/1.7 %; wide Ice face 0.72 to 0.66; side Ice 0.72 to 0.67. Proofs
+  site-fix-proofs/tall-honest-ice-ember-old-new.png and wide-side-honest-ice-old-new.png. Chunks 2-7 to go on it, not the row. The row:
+  without its 13 m in-frame card the right sides go milky (card / none: Ember 0.96/0.94, Dust 0.89/0.80, Acid 0.87/0.69, Poison 0.84/0.25,
+  Ice 0.72/0.33, Haze 0.71/0.19, Smoke 0.33/0.05); no out-of-frame card can fix it; options (a) the units more square (-24 to -12), (b) a
+  visible dark band on the sweep, (c) accept, (d) a darker sweep. The honest A-ice-polished at full size in the same commit
+  (base-question/gate2/A-ice-polished-honest.png; the horn lamp 0.3 to 1.0 only): horn >=250 3.9 % to 4.6 %, mean (43,114,184) to
+  (47,117,187), nearly identical. The deck hero's in-frame cards go the same way (a re-proxy next).
+- 21:06 sent: c4 fix1 chunk 3, then chunk 2's tall Ember and Dust (not the portrait, not the row); c3 chunks 4, 5; c2 chunks 6, 7 (its chunk-4
+  frames stand); all on f7f03850 (discard barkhorn-variants.json, merge, rollout). To the speaker lane: the row proxy (a) at -12 first,
+  then (d) or (a)+(d) if the sides stay under ~0.6; (b) to the owner only if both fail; numbers before any final.
