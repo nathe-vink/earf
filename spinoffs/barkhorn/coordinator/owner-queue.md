@@ -3467,3 +3467,20 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   Hypothesis sent to the speaker lane: a set-only lamp (pool, floor or d-floor) whose link also drops the speaker as a shadow caster; if so,
   allowance 1 gets a condition: a set-only lamp keeps the product as a blocker (it casts its shadow), as a flagged background light does.
   (Time fix: that message to the speaker lane was stamped "22:17" but sent at 22:15; my error.)
+- 22:11 c4: fix1 chunk 3 landed at 6115761a2d995a696a180c5fbce8f481266e95bd (tall Acid 12.9 min 1.40 MB, Poison 9.7/1.34, Ice 12.1/1.39, Haze
+  11.2/1.37, Fog 13.2/1.36); no white sheen on the right faces; Acid's edges red-orange. Merged 3b541d9d (02dca9b8c7fcc42467256a549075fc6a2be001e6)
+  and started chunk 2's tall Ember and Dust at 22:12 (before my 22:14 re-order).
+- 22:13 speaker lane: THE 9097 FIX in the shared model at 732a8671ae7086b9ccf47f7508f17ce93123461b: the TT pins ~12 % lost outside the blue,
+  all of it put in green, so red alone survived long paths (hue 52 at 20 mm, 43 at 100, 21 at 300, 6 at 600); now shared between red and
+  green, the split (0.085, 0.10, 1.00): hue 59, 57, 53, 44; the faces lemon, the long paths amber, edges within ~6 degrees up to 300 mm;
+  luminance at 20 mm unchanged; the cabinet deep #FFEB6C to #F1EE7F; the formed horn keeps #B88E00. A documented approximation (real 9097
+  fluoresces; TINTS.md asks for the chart and off-cut check). Proof tint-proofs/horn-back-acid-old-new.png (hue<30 saturated 7 % to 2 %).
+  Dust (2422) unchanged and stands (Beer's law gives its red long path; the off-cut is the check). horn-back-acid to re-render on it.
+- 22:16 c2: fix1 chunk 6 landed at 5cb7c44568c355a1df294b6caed68ec11c853165 (wide Fog 18.4 min 2.04 MB; side Ember 10.9/1.28, Dust 12.2/1.33,
+  Acid 12.4/1.33, Poison 10.0/1.28); the wide Fog shows the floor ring, the side frames clean; chunk 7 skipped; merged 5957b9f9
+  (acc62c52d883024b1ff4cc3c33463e41b0939587); the row (fix1 chunk 1, ~78 min) from 22:16.
+- 22:22 my look: tall Ice and Acid and side Ember and Acid show no floor plate at preview size (the fault is the wide view's); Acid's red
+  edges as expected before the 9097 fix. Gate launched wf_6936b3e8-817: tall Ice, Poison, Haze, Fog and side Ember, Dust, Poison (Acid's
+  frames left out: they re-render on 732a8671; wide Fog left out: the ring).
+- 22:23 sent: c4 to let chunk 2 finish if running (the tall frames clean), then the cover and deck-home. The biomes lane: Acid's split
+  (0.085, 0.10, 1.00) into its own tints.json from 732a8671, then Acid's proxy and final.
