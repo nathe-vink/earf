@@ -16,6 +16,9 @@ Show one item with its pictures, wait for the answer, save the owner's words ver
   - Items 6, 7, 8, 9 and 13 come back as soon as their honest re-renders pass the critics, with the bottom-edge question after
     item 7.
   - Tell the owner in one line why the order changed.
+- **NEW OWNER QUESTION (23:38, the lamps lane), for the Hemisphere finals:** the cap shows a dark 5 mm notch. It is the bayonet's
+  entry, open at the collar's top end so the pin can enter. The crown (80 mm) is smaller than the collar (96), so the collar's top
+  ring is bare. Options: a crown at least 96 mm across, or a thin cover ring. Show it with the Hemisphere finals once they pass.
 - **BLOCKED 23:4x (the audit, card-audit-2026-11-03.md):** the pictures behind items 6, 7, 8, 9 and 13 fail the rulings.
   - The horn close-ups (a381aefb): `horn` at specular 0.3, `back` and `kick` linked to the product's parts, `edge` linked.
   - gate2 A-ice-polished (d8f613ec) and its "honest" re-render (f7f03850): a reflect-only black card covering 34 % of the frame

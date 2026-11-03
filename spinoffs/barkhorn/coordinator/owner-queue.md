@@ -3757,3 +3757,29 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   share of the frame, and note ruling 4 (sets cast shadows; light only through real openings).
   (Time fix: those three messages were stamped "23:43" but sent at about 23:42, before a 23:42:22 `date -u`. My error: `date -u`
   before every stamp. The correction rides on my next message to each of those lanes.)
+- 23:34 biomes lane: the Fog final at 5c0f8509b5803f0ae0397d1e47f1b3b8fed53864.
+  - Reframed (camera 0.85 m, rise 0.18, az -10, f/4), turned 5° off, a neutral sun at 110°, real flag and card (one out of frame
+    at 2.2 m), 96 samples.
+  - Crease 1.9/2.3. Ivory not met (the left cut edge b* 9.7 against <=5: the dawn HDRI's warmth). Its own gate passed all four.
+- 23:37 biomes lane: Acid proxy at +0.75 EV and sun 18: lit face L* 40 (from 26.7), khaki not lemon. The sky is at its limit (p99 205).
+  Options: (a) the final as is; (b) proxy sun 35 (its pick); (c) accept khaki.
+- 23:38 lamps lane (d1ca125c4770ea183debf36547e489e4f1423ba9): the nights in flight were stopped; three finals rendering on one build
+  (day, night (a), night (b)); Core B in parallel.
+  - The notch has a BUILD REASON: it's the bayonet's entry, open at the collar's top end. It shows because the crown (80 mm) is
+    smaller than the collar (96), so the top annulus is bare. For the owner: a crown >=96 across or a thin cover ring.
+  - The camera is low (0.62 m, 1.0 m out, 60 mm). The dome leads at ~33 % of the width with a glimpse of the liner, a second
+    dusk-curtain panel glows at the left, and the table, pool and bowl drop out of frame.
+  - Thin-shell shadows on the day too. −3.0 EV (proxy at −2.5: face 200, chroma 0.056 against the day's 0.100). Red 0 on 4 %.
+- 23:39 check-in #52 fired (its prompt was stale: it still had item 4 open). Its process is followed, and #53 is re-armed below.
+- 23:40 speaker lane (3121d1d6157b107c877f48f65cbbebf5fef02b4d): THE TURN on the row's grey sweep doesn't help. Saturation pink to grey:
+  01 0.22 to 0.19; 04 0.29 to 0.26; 05 0.11 to 0.04. Edge-on polished faces mirror the surround at near-total Fresnel. Its pick: keep
+  the pink sweep with no flags and accept the pale edge-on frames (real), or a dark studio for the whole turn.
+- 23:4x audits: the Fog (5c0f8509) and Ice (27911a44, item 5's) rigs are clean (sky/sun only, real props, no reflect-only cards, no
+  links). The turn rig since 3b1fed96: no glow lamp, no cards. Fog's gate launched (wf_b69d81f5-6c8).
+- 23:45 sent:
+  - Biomes: the Fog ivory stays (physics) unless the critics say it reads tinted; Acid (b), proxy sun 35; the card check is done
+    for Fog and Ice, confirm the rest as they land; my 23:43-stamp time fix.
+  - Lamps: the low camera, −3 EV and the notch accepted (the notch to the owner's list); my time fix.
+  - Speaker lane: the turn accepted, chunk 6 to c4; the 23:41 order stands.
+  - c3: merge f6d0eda7 and rebuild both models, then wait for the close-up line.
+  - c4: after deck-home, phase-2 chunk 6 (the turn) on its branch, list first. Its row chunk is dropped (c2 did it).
