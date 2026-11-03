@@ -1353,3 +1353,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   cabinet 203.8 (8.5 toward cyan), D night wall wash 197.6-198.0 (14-15), B night 5 cabinet 206.3 (6). The 20 mm walls pull the
   light back to Ice's blue, unlike the lamps' 3 mm. D night stays 4000 K (rendering); D day done. If the critics read the wash as
   cyan: D night again at 5000 K.
+- 10:09 biomes lane: the three Smoke options at 3223e41f7df4b45c3f00edcb46625e495e579ec3 (renders/2026-11-03/barkhorn/smoke-dark/,
+  CHECK.md), all in the welded volume glass, one frame and light (horn A on its M8 feet, fire backlight 40): 2074 black FAILS
+  see-through ("a near-black opaque box"); 2064 black PASSES all four (woofer, frames, braces and ports read through the front);
+  2064 white PASSES "only just" (at phone size close to a black box; little light reaches the white lining). The lane's read: 2064
+  black. Seven habitats rendering, ~30 min each. My blind gate on the three (wf_cf9743bf-e44, speaker gate v2; sha256 2074-black
+  7a70b256, 2064-black 75a3cc96, 2064-white b04904e5) started 10:10. The Smoke question waits until the base question is answered.
