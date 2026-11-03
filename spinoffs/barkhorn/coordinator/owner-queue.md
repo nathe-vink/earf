@@ -3393,4 +3393,4 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   84/77, lip 70/65, cap 35/35, table 152/152, bowl 211/211 (the COB in its glaze). For the owner: the liner now ends 1.5 mm inside the rim,
   not 4 mm, to close the dark seam at the lip (walks back part of the accepted rim-fix proposal; the day shows it too). Core B day and night
   still rendering.
-- 21:37 the Hemisphere r10 gate launched wf_f0493e6d-678 (day; night (a) cool-white liner; night (b) faint-blue liner, a proposal).
+- 21:36 the Hemisphere r10 gate launched wf_f0493e6d-678 (day; night (a) cool-white liner; night (b) faint-blue liner, a proposal).
