@@ -1,6 +1,6 @@
 # Bar and Planet EARF pictures that show the old Tropos (2026-11-03)
 
-The owner set Tropos on 2026-11-03: base A (its own feet, no plinth, no light) and horn A polished. Every Planet EARF picture made before that shows the earlier cabinet with its stepped horn. Many also stand it on a plinth, and from round 37 most light it from below. This list is for the coordinator; nothing here has been changed yet. `bar-listening.jpg`'s replacement is in `renders/2026-11-03/barkhorn/planet-tropos-a/`.
+The owner set Tropos on 2026-11-03: base A (its own feet, no plinth, no light) and horn A polished. Every Planet EARF picture made before that shows the earlier cabinet with its stepped horn. Many also stand it on a plinth, and from round 37 most light it from below. This list is for the coordinator. The coordinator, 15:58 UTC: the Smoke pictures wait for the Smoke sheet with the listening frame; the others are re-rendered with base A, horn A polished and no light from below, a proxy then a final each, House Book first. `bar-listening.jpg`'s replacement is in `renders/2026-11-03/barkhorn/planet-tropos-a/`.
 
 **Legend:**
 - **lit plinth:** a frosted, glowing plinth or wedge, plus the lamps aimed up under the cabinet (`plinthl*`, `plinthb*`).
@@ -10,17 +10,17 @@ The owner set Tropos on 2026-11-03: base A (its own feet, no plinth, no light) a
 
 ## In use outside the archive
 
-| Picture | Where it is used | Source on r33-planet-world | Shows |
-|---|---|---|---|
-| `bar-listening.jpg` | Brand book (r47-brand): `book/img`, `assets`, the Sessions mockup (`scenes/idea-sessions.html`) and launch grid post 6 (Sun 31 Jan) | `renders/2026-10-20/barkhorn/planet38/finals-best/listening-smoke.png` | lit plinth, back kick, stepped horn. **Replaced by this job.** |
-| `bar-door.jpg` | Brand book (r47-brand): `book/img` and `assets` | `renders/2026-10-22/barkhorn/planet41/finals/door-mother-colour-p3-1200.jpg` | lit plinth, back kick, stepped horn |
-| `bar-street.jpg` | Brand book (r47-brand), `make_book.py` | `renders/2026-10-22/barkhorn/planet39/finals/street-1200.jpg` | lit plinth, back kick, stepped horn |
-| `bar-decks.jpg` | Brand book (r47-brand): `book/img` and `assets` | `renders/2026-10-20/barkhorn/planet38/finals-best/coins-decks.png` | lit plinth, back kick, stepped horn |
-| `bar-smoke.jpg` | Brand book (r47-brand) `assets` (the Sessions mockup's copies) | `renders/2026-10-20/barkhorn/planet38/finals-best/bar-smoke.png` | lit plinth, back kick, stepped horn |
-| `door-hero.jpg` | House Book (the hero) | `renders/2026-10-22/barkhorn/planet41/finals/door-mother-colour-p3.png` | lit plinth, back kick, stepped horn |
-| `r42-counter.jpg`, `r42-night.jpg`, `r42-shop.jpg` | House Book (round 42, the 2,800 sq ft house) | `renders/2026-10-31/barkhorn/planet42/finals/{counter,night,shop}.png` | lit plinth, back kick, stepped horn |
-| `r43-listening.jpg`, `r43-shop.jpg`, `r43-window.jpg` | House Book (round 43, the pop-up) | `renders/2026-10-31/barkhorn/planet43/proofs/listening-p3.png`, `shop-p2.png`, `window-p2.png` (matched by image) | plinth (unlit, 0.26–0.40 m), stepped horn |
-| `r44-street.jpg`, `r44-bar.jpg`, `r44-lantern.jpg` | House Book v11 (round 44, the lantern) | `renders/2026-10-31/barkhorn/planet44/finals/{street-p4,bar-p4,lantern-p3}.png` | plinth (terrazzo, unlit, 0.40 m), stepped horn, cover off |
+| Picture | Where it is used | Source on r33-planet-world | Tropos tint | Shows |
+|---|---|---|---|---|
+| `bar-listening.jpg` | Brand book (r47-brand): `book/img`, `assets`, the Sessions mockup (`scenes/idea-sessions.html`) and launch grid post 6 (Sun 31 Jan) | `renders/2026-10-20/barkhorn/planet38/finals-best/listening-smoke.png` | Smoke (cloud-black) | lit plinth, back kick, stepped horn. **Replaced by this job.** |
+| `bar-door.jpg` | Brand book (r47-brand): `book/img` and `assets` | `renders/2026-10-22/barkhorn/planet41/finals/door-mother-colour-p3-1200.jpg` | Smoke (cloud-black) | lit plinth, back kick, stepped horn |
+| `bar-street.jpg` | Brand book (r47-brand), `make_book.py` | `renders/2026-10-22/barkhorn/planet39/finals/street-1200.jpg` | Smoke (cloud-black) | lit plinth, back kick, stepped horn |
+| `bar-decks.jpg` | Brand book (r47-brand): `book/img` and `assets` | `renders/2026-10-20/barkhorn/planet38/finals-best/coins-decks.png` | Smoke (cloud-black) | lit plinth, back kick, stepped horn |
+| `bar-smoke.jpg` | Brand book (r47-brand) `assets` (the Sessions mockup's copies) | `renders/2026-10-20/barkhorn/planet38/finals-best/bar-smoke.png` | Smoke (cloud-black) | lit plinth, back kick, stepped horn |
+| `door-hero.jpg` | House Book (the hero) | `renders/2026-10-22/barkhorn/planet41/finals/door-mother-colour-p3.png` | Smoke (cloud-black) | lit plinth, back kick, stepped horn |
+| `r42-counter.jpg`, `r42-night.jpg`, `r42-shop.jpg` | House Book (round 42, the 2,800 sq ft house) | `renders/2026-10-31/barkhorn/planet42/finals/{counter,night,shop}.png` | Smoke (cloud-black); shop also one Ember | lit plinth, back kick, stepped horn |
+| `r43-listening.jpg`, `r43-shop.jpg`, `r43-window.jpg` | House Book (round 43, the pop-up) | `renders/2026-10-31/barkhorn/planet43/proofs/listening-p3.png`, `shop-p2.png`, `window-p2.png` (matched by image) | Ember (cloud-red) | plinth (unlit, 0.26–0.40 m), stepped horn |
+| `r44-street.jpg`, `r44-bar.jpg`, `r44-lantern.jpg` | House Book v11 (round 44, the lantern) | `renders/2026-10-31/barkhorn/planet44/finals/{street-p4,bar-p4,lantern-p3}.png` | Ember (cloud-red) | plinth (terrazzo, unlit, 0.40 m), stepped horn, cover off |
 
 ## The archive (finals and owner reviews, not linked from the books today)
 

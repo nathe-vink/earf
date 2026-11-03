@@ -181,9 +181,10 @@ def popup(bpy, name, p, kit):
                                                emit='#FFD8A8', strength=p.get('name_glow', 0.15))))
     # the window plinth
     Pw = Q.WINDOW_PLINTH
-    pl = Mesh('popup-plinths')
-    pl.box(Pw['x'] - Pw['d'] / 2, Pw['y'] - Pw['w'] / 2, 0.0, Pw['x'] + Pw['d'] / 2, Pw['y'] + Pw['w'] / 2, Pw['h'])
-    objs.append(pl.object(bpy, principled(bpy, 'popup-plinth', '#1E1D1B', rough=0.55), bevel=0.004))
+    if not p.get('tropos_feet'):                                     # 2026-11-03: Tropos on its own feet, no plinth
+        pl = Mesh('popup-plinths')
+        pl.box(Pw['x'] - Pw['d'] / 2, Pw['y'] - Pw['w'] / 2, 0.0, Pw['x'] + Pw['d'] / 2, Pw['y'] + Pw['w'] / 2, Pw['h'])
+        objs.append(pl.object(bpy, principled(bpy, 'popup-plinth', '#1E1D1B', rough=0.55), bevel=0.004))
     # the shop's own Tropos, on a low oak plinth at the end of the right wall's shelves
     if p.get('shop_plinth', True):
         sp = Mesh('popup-shop-plinth'); sp.box(5.58, 0.45, 0.0, 6.22, 1.05, 0.26)
@@ -268,10 +269,11 @@ def popup(bpy, name, p, kit):
     objs.append(wood.object(bpy, oakc, bevel=0.004))
     objs.append(uph.object(bpy, principled(bpy, 'popup-chair-wool', p.get('chair_wool', '#2E2C2A'), rough=0.95, spec=0.1),
                            bevel=0.01))
-    pk = Mesh('popup-stack-plinths')
-    for (x, y) in Q.STACKS:
-        pk.box(x - 0.36, y - 0.36, 0.0, x + 0.36, y + 0.36, 0.40)
-    objs.append(pk.object(bpy, K.dark_oak(bpy, name='oak-popup-plinth'), bevel=0.005))
+    if not p.get('tropos_feet'):
+        pk = Mesh('popup-stack-plinths')
+        for (x, y) in Q.STACKS:
+            pk.box(x - 0.36, y - 0.36, 0.0, x + 0.36, y + 0.36, 0.40)
+        objs.append(pk.object(bpy, K.dark_oak(bpy, name='oak-popup-plinth'), bevel=0.005))
     Dk = Q.DECKS
     dk = Mesh('popup-decks'); dk.box(Dk['x0'], Dk['y0'], 0.0, Dk['x1'], Dk['y1'], 0.86)
     objs.append(dk.object(bpy, principled(bpy, 'popup-decks', '#1F1E1C', rough=0.55), bevel=0.004))
