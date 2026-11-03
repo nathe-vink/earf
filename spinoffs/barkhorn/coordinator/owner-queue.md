@@ -2349,3 +2349,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 16:16 bar lane: the r43-shop final at e518e55f3c88a83f22576c7fd82645815a64cbad (renders/2026-11-03/barkhorn/planet-tropos-a/r43-shop.png;
   1200 x 800, 128 samples, 212 s, 2.4 GiB): the window pair on its own feet (the black window plinth gone), Ember, horn A polished,
   nothing lit from below. Next r43-window. I'll gate shop and window together when the window lands (r43-listening's gate running).
+- 16:16 Dust polished gate wf_be9b18c7-951 (resumed; all 3 back): SHOW 3/3, "better than the satin version" (the horn the same clear
+  Dust acrylic as the cabinet, same hue, crisp, the pod and posts through it; the X gone, wall-to-wall difference 14.7 vs 31.6; no seam
+  against the sky; only the horn region changed). Optional: a contact shadow or slight sand berm at the bottom-right; tiny rim specks
+  at 4x. Satin's one advantage: a more sculpted, centred funnel. Ready for its turn in the walkthrough (the biomes item).
