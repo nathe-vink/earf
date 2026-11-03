@@ -143,7 +143,7 @@ def black_flag(bpy_, linked, size):
     t = linked[0].location
     c = cam.location
     d = (c - Vector((t.x, t.y, c.z))).normalized()
-    pos = c + d * 1.2 + Vector((0, 0, 0.6))
+    pos = c + d * 1.2 + Vector((0, 0, 1.4))
     w, h = size
     bm = bmesh.new(); bmesh.ops.create_grid(bm, x_segments=1, y_segments=1, size=0.5)
     me = bpy_.data.meshes.new('black-flag'); bm.to_mesh(me); bm.free()
@@ -157,10 +157,19 @@ def black_flag(bpy_, linked, size):
     f.visible_camera = False; f.visible_diffuse = False; f.visible_shadow = False
     f.visible_transmission = False; f.visible_volume_scatter = False
     print(f'black flag: {w} x {h} m at {[round(v, 2) for v in pos]}')
+    # and a card each side of the speaker, square to the camera's line, out of frame: the side walls mirror them, not
+    # the sky, at the grazing angles where acrylic reflects most
+    side = Vector((-d.y, d.x, 0.0))
+    for k, sgn in enumerate((1, -1)):
+        p_ = Vector((t.x, t.y, 0.9)) + side * sgn * 1.8 - d * 0.6
+        c_ = f.copy(); c_.data = me; sc.collection.objects.link(c_)
+        c_.location = p_; c_.scale = (2.6, 2.4, 1.0)
+        c_.rotation_euler = (Vector((t.x, t.y, 0.7)) - p_).to_track_quat('Z', 'Y').to_euler()
+    print('side cards: 2.6 x 2.4 m, 1.8 m each side')
 
 
 def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extra=(), stand='feet', tt=None,
-        up=0.0, glass_from=0.12, ground=True, flag=(5.0, 4.0), lining=None):
+        up=0.0, glass_from=0.12, ground=True, flag=(8.0, 6.0), lining=None):
     """Render a prepared shot file through `root`'s engine with the asset in. stand 'feet' leaves the stand-in plinth
     out and stands the speaker on four feet; 'plinth' keeps the asset as it is (linked). tt: the cabinet's and horn's
     transmission through 20 mm to render at, from `glass_from` (Smoke's 2074 is 0.12); up: the night uplight (W)."""
@@ -263,7 +272,7 @@ def main():
     ap.add_argument('--uplight', type=float, default=0.0, help='the night uplight, W (0: off, the day)')
     ap.add_argument('--no-ground', action='store_true', help="don't settle the speaker onto the set")
     ap.add_argument('--lining', help="the lining's color, hex (colors F: Smoke '#0B0B0B')")
-    ap.add_argument('--flag', type=float, nargs=2, default=(5.0, 4.0), help='the black flag behind the camera, m (0 0: none)')
+    ap.add_argument('--flag', type=float, nargs=2, default=(8.0, 6.0), help='the black flag behind the camera, m (0 0: none)')
     a = ap.parse_args()
     sh = json.load(open(a.shot))
     scale_lights(sh, {k: float(v) for k, v in (x.split('=', 1) for x in a.light)})
