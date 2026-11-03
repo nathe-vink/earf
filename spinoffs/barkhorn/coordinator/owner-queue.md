@@ -3362,3 +3362,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 21:24 biomes lane: Poison's check-mark found: the canopy-gap lamp (gap off: the glint gone; sun off: unchanged; the lip's peak 235 base,
   222 sun off). Fix as a real light would sit: the gap moved to where the canopy opens, on the sun's side (front-left, azimuth -60, 50 up),
   same 3 x 3 m, same 12, specular 1.0, nothing hidden; one proxy after the Haze A/B and the Acid proxy, then the Fog final, then Poison's.
+- 21:2x fix1 deck-home-portrait gate wf_3d3ee524-9ea (3 critics, ~25 min): HOLD 3/3. Cleaner than before (the horn streaks and green floor
+  lines gone, grounded, the sun coherent, the horns green glass with no X); but the lower ~40 % of both cabinets near-black (65 % of cabinet
+  pixels under L 20, against 24-32 %; the new sill shades below mid-height); the left speaker's face toward the sideboard a beige panel
+  with no green (a grazing reflection of the sunlit wall, also in the previous version); the right one's sideboard face black below; the
+  left horn's green on the wall reaching the right speaker; an unexplained white sun stripe on the sideboard's middle door; the right top
+  chamber brighter than the sunlit left (check no emitter); the right horn's right half murky; a dead lower frame.
+- 21:28 sent to the speaker lane: the room rig's fixes (honest daylight into the lower cabinets: a lower sill or a sunlit floor patch, and
+  the bounce checked; the side face by geometry or light; the green on the wall moved; the door stripe; the emitter check), after the
+  hero and row proxies, with the portrait and deck-home proxied together. To c2: the room (phase-1 chunk 4) held until that SHA.
