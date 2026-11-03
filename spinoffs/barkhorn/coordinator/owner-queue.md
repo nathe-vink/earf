@@ -2493,6 +2493,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   woofer ring. Critics also asked to confirm polished (their brief still said satin).
 - 17:26 the speaker gate script's test 5 updated to the polished horn (the owner's 15:14 choice); gates launched before this edit
   used the satin wording (their meant lines said polished).
-- 17:27 sent to the bar lane: one polish pass on r44-lantern before the owner sees it (a soft room light on the pair's upper bodies to
+- 17:26 sent to the bar lane (my message said 17:27, ahead of the clock): one polish pass on r44-lantern before the owner sees it (a soft room light on the pair's upper bodies to
   ~45-55, no floor pool; the side-edge red line softened; the woofer glints removed); polished confirmed; then the r43 shop and window
   fixes; a proxy each; SHAs.
