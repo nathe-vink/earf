@@ -2228,3 +2228,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   14.6 min; both exit 0); r33-rollout-c3 at 5295e58f. The cloud kit build rewrites tracked files under out-cloud/ (bom.csv,
   build.json, drawings), left uncommitted per the rules. Chunk 5 (deck-home-portrait, front-off-tall Ember and Dust, ~91 min) started
   15:51; phase-2 instructions noted.
+- 15:52 biomes lane: Dust with the polished horn (roughness 0.05, confirmed in the log) at 0a356de1864487f6827c28f7457093c1b29448cb
+  (habitats/dust-portrait-1200x1500.jpg, sha256 64fc5d82; CHECK.md marks the earlier satin rows; bedded 12 mm, sand bounce 0.35, no
+  tumbleweed, 64 samples). Its gate passed all four (amber-red, the internals and the desert through it; the rail on the ripples, luma
+  81 under the front edge vs 107 open sand, a weak contact shadow: polish note 1 still open; the red patch is the tinted shadow; "a
+  smooth glassy shell, the driver a smooth bulb, no X or seams"). Ice polished rendering (bedded 22 mm). My gate on Dust polished
+  (the satin Dust and Ice as context) started 15:53.
