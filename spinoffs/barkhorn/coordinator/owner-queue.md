@@ -1751,3 +1751,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   red glint on the woofer frame. Sent 13:34: re-light the scene (no hot haze behind the horn; soft light from the camera side), the
   same principle for every backlit habitat; identify the glint (the amp's LED at real brightness, or lava); and don't over-tune the satin,
   since the horn-finish question may change every habitat.
+- 13:35 biomes lane (its message said 13:37): Ember proxies h1 (the river point behind at 0.3, the amp LED off to identify the glint)
+  and h2 (+ soft dusk light from the camera side, 5 x 4 m, 35 degrees up, 0.5, #9C92C8). Facts: the horn uses its own deep lot (density
+  621 on 12.7 mm vs the cabinet's 236 on 20 mm: "the formed horn keeps its deep lot", the spec as built); the asset's LED at strength 6 is
+  ~2x a real 5 mcd 3 mm LED (to render at 3 if the glint is it); Ember's final at 160 samples; satin not tuned further. Acid rendering.
