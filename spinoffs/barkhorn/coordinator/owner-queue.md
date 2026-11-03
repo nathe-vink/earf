@@ -1259,3 +1259,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   a4-night-poison-2092-r2 65a9248c, day d3984071 unchanged; the room 0.3 -> 0.6 % of day so the record and arm read; nothing on the
   floor. Checked by eye: right direction. Gate running (wf_d32497c9-acc: three blind judges with the owner's Mantle note and the
   rejected floor-pool frame as the reference).
+- 08:02 speaker lane correction: the brace light's "6 W / 11 W" were light out, not electrical; at ~30 % efficiency an 11 W-light
+  brace strip is ~35 W electrical. D (built in) is now modelled (variants.py option 'Built-in light'; builtin-strip,
+  builtin-standoffs): 1.42 m of 20 W/m COB in black U-channels on M3 nylon standoffs into bonded inserts, aimed up; 440 mm behind
+  the batt and 110 mm behind each port on the floor; two 380 mm runs on the brace; 28 W electrical (13 floor, 15 brace), ~8.5 W
+  light. Heat: 28 W -> +6-7 K inside; ~45 W if needed -> +10 K; the S8 four-hour test with the light at full. Cost ~ $100 a speaker
+  (strip $36, standoffs $6, channels $25, a 24 V 60 W plug-in $30, a connector $10). Queue: A polished; D-night and Smoke-D proxies;
+  B day, B night 4, B night 5 full size; D day, D night, Smoke-D black and white. My 08:00 message to the owner said the inner light
+  was "about 10-12 W": to correct to "about 30-45 W" in the base question.
