@@ -1205,3 +1205,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   41ed6ea9, Poison 57bee998), red glass over white by day (d3984071); about +$120-150 a unit, parts $3,907; (b) a lighter pour
   (+$12.5k batch) still an outline. Critic 5.5 ("gaming-PC LED panel"; the top clips salmon). Checked: (a) is the owner's idea;
   asked (07:39) for the night a stop down, no added floor light, then my gate.
+- 07:41 base gate (wf_6bf1d731-d0d; photographer and owner's-notes judges in, the skeptic running): A PASS (show-ready; optional:
+  the horn's corner streaks, a black flag for the lower side face). B FAILS the reference look (glow trapped in the port chamber,
+  137 vs 11-17 above; the woofer pure black; a lavender wall patch; the site's uplit-blue is a lantern, lining 107-189 to the top
+  brace, woofer 30-45, a blue fan on the wall). C FAILS light-down (each tier edge a neon line, a blue rim on the floor ~69). Smoke
+  B both sleeves FAIL (black above the port bay, sepia, a stop under). Both judges: A the most attractive; of the lit options B beats
+  C; the night frames don't achieve the reference look. Speaker lane told (07:42): the asset fix first; B again with no extra fills,
+  honest about what the real 40 W reaches; C only with masked tiers; Smoke cool white, neutral, +1 stop, both sleeves; A's polish.
