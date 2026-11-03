@@ -70,11 +70,13 @@ SETS = {
     # any light from behind: a sunfleck from the back-left left the cabinet at L 2)
     # (the gap's lamp mirrored in the polished horn's rim as a white check-mark glint and green flecks by the pod: a wider,
     # softer gap at the same irradiance, so its radiance, and so its reflection, is about a quarter; reflections at full;
-    # then moved where the canopy opens, on the sun's side, front-left: the rim's check-mark was this gap mirrored)
+    # then moved where the canopy opens, on the sun's side, front-left: the rim's check-mark was this gap mirrored;
+    # then wider, softer and higher (5 x 5 m at 7, 65 deg up): at 3 m and 12 it lit the top batt to a khaki sheet and
+    # drew a bright propeller in the horn's throat (my gate on the 3 m final, kept in held/))
     # (at 5 the real sun, from azimuth -100, caught the rim's lower-left lip as a white check-mark glint: 9 moves it off)
     # ruling 1: the shot's litter bounce had specular 0 (hidden in reflections); at full now
-    'poison_g5': {'product.instances.0.rotate_z': 9.0, 'lights.litter.specular': 1.0, 'lights.skygap': {'type': 'area', 'size_m': [3.0, 3.0], 'target': [0.0, 0.0, 0.6], 'irradiance': 12.0,
-                                    'color': '#EEF2E2', 'orbit': {'azimuth_deg': -60, 'elevation_deg': 50, 'distance_m': 3.5},
+    'poison_g5': {'product.instances.0.rotate_z': 9.0, 'lights.litter.specular': 1.0, 'lights.skygap': {'type': 'area', 'size_m': [5.0, 5.0], 'target': [0.0, 0.0, 0.6], 'irradiance': 7.0,
+                                    'color': '#EEF2E2', 'orbit': {'azimuth_deg': -60, 'elevation_deg': 65, 'distance_m': 4.0},
                                     'specular': 1.0}},
 }
 # set props left out (the coordinator's gate on Dust, 2026-11-03: the tumbleweed floats, its shadow detached)
