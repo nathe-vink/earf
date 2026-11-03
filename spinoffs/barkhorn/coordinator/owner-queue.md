@@ -1877,3 +1877,13 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   this environment plus the lane, A in ~6-7 h wall. Asked: campaign/rollout/HELPERS.md (fresh-container steps, chunk runs, commit
   rules, one branch per helper, the report), a chunk picker in rollout.py if missing, and a 4-way split of A's and D's chunks with
   the deck frames first in one set. No roll-out renders until I say.
+- 14:30 speaker lane: the helper plan at 5a2db1f5b91a53b09bae3122c9f3af66003e85fd (read in full 14:31; sound). HELPERS.md: its own
+  branch from the named SHA (never main, another helper's branch, a force-push or a PR); studio/setup.sh; the two model builds one
+  after the other (the variants ~21 min, the Cloud kit untimed, budget an hour); the Poly Haven cache on demand (report a block, don't
+  work around it); chunks via `rollout.py --base X --horn Y --chunks 5-7,11`, each a tracked background task, one render at a time,
+  the next only when the last landed, kill by PID only; renders to renders/2026-11-04/barkhorn/rollout/<base>-<horn>/ (PNG + shot +
+  report; never *.raw.png; under 5 MB, lossless recompress if over); a report per chunk with the full SHA and minutes. Split (`--split
+  4`), deck chunks 1-4 in container 1: A 1-4 (5.7 h) / 5,6,7,11 (5.6) / 10,13,15,16 (5.5) / 8,9,12,14 (5.8); D 1-4,7 (6.9) /
+  9,12,14,16 (6.0) / 6,8,11,17 (5.9) / 5,10,13,15 (5.9); plus up to an hour of setup each. A deck-hero framing proof first (2:3 from
+  gate 2's 4:5 A). Memory: the rebuild plus the Smoke render use ~2 GB of 15, safe. Running: the rebuild (then the close-up pair) and
+  the Smoke ~50 % frame.
