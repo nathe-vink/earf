@@ -1267,3 +1267,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   (strip $36, standoffs $6, channels $25, a 24 V 60 W plug-in $30, a connector $10). Queue: A polished; D-night and Smoke-D proxies;
   B day, B night 4, B night 5 full size; D day, D night, Smoke-D black and white. My 08:00 message to the owner said the inner light
   was "about 10-12 W": to correct to "about 30-45 W" in the base question.
+- 08:14 check-in #35: speaker baa6803e (the built-in light modelled), set rendering; biomes 1aace0ce (--weld and --volume-glass to
+  compare against the surface tint); lamps 680238d7 (round 2 fixes); site holding. Mantle gate (wf_d32497c9-acc, two of three judges):
+  note 1 solved (nothing thrown down; the shelf neutral at 8x), but all three frames fail: the day top matches the night within one
+  unit (emission not zero, or the white print acting as a backer: coral lacquer, not glass; grey edge haze); the night is a flat
+  near-clipped lightbox in primary colors; neon lines at the inset groove and the bottom arris. Fixes sent (08:15): day emission 0
+  and a finer/sparser print or deeper skin; night -1 to -1.5 stops, graded, real tinted colors, a glossy skin with a long soft
+  reflection; mask the groove from above and black out the arris. Re-armed #36 for 09:06.
