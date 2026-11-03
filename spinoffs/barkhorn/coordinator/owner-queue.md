@@ -1637,3 +1637,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   g1 (feet fixed, sunk), g2 (rotate_z -1, the lava's reflection off the panel's foot), g3 (+ the foreground-lava face lamp at 0.48);
   checked at 390 px; then all seven restart, each checked for contact and hot reflections at the foot. My Dust gate (wf_329e2471-34a)
   is on the withdrawn frame; its notes may still help the re-render.
+- 12:26 speaker lane: the Smoke day comparison at 83c03b3d1622880498e90c4980179c6dc867a795 (A's set, camera, light and exposure, one
+  exposure): means (cabinet / top chamber / side) Ice A 122/142/139; 2064 white 80/88/93; 2064 black 67/34/90; 2074 white 62/41/88. The
+  lane: 2064 + white "reads as smoked glass, not a black box" (woofer, basket, brace, ports, IR board and batts through the front);
+  black lining a dark interior; 2074 a stop darker. Its Smoke horn "the same glossy, see-through volume as the cabinet" (check against
+  the satin spec). Closer to Ice's openness would need ~45-55 % at 3/4 in; TINTS.md lists only 2064 (29.3 %) and 2074 (11.7 %): the
+  supplier's chart must be checked. E being built at bb0b27eb162366e6c374586085b05b1af1c50b8a (side strips x 32/528, y 45-355, z 28,
+  45 degrees up and out; a white film on the bays' bare floor; the brace runs on the rear member, y 318 and 332); the model rebuilding,
+  then two E-night proxies (wall 14 cm and 0.75 m). Gate wf_e7fbd2d6-f92 on the Smoke day trio (A as context) started 12:26.
