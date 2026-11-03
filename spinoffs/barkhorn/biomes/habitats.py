@@ -40,7 +40,9 @@ SETS = {
     'acid_b': {'product.instances.0.rotate_z': -8.0},   # 28 deg off mirrored a wedge (crease 26.7), 10 deg off 13.7: 4 deg, as Ice
     # the polished horn mirrors the bright sky in one wall as a pale wedge (half an X) when it's turned far from the
     # camera; turned to about 10 deg off the camera's line it reads clean, as Ice's does (front-on gives a symmetric X)
-    'haze_b': {'product.instances.0.rotate_z': -5.0, 'sun.azimuth_deg': 100.0, 'sun.elevation_deg': 6.0, 'sky.rotation_deg': 187.8},
+    # (at -5, 10 deg off, Haze's narrow side face, seen near grazing, mirrored the bright sky as a flat lavender sheet;
+    # -10, 5 deg off, as Ice's 4: the side barely shows)
+    'haze_b': {'product.instances.0.rotate_z': -10.0, 'sun.azimuth_deg': 100.0, 'sun.elevation_deg': 6.0, 'sky.rotation_deg': 187.8},
     # Fog (the coordinator's gate on 45a190d1): the clear polished horn refracted the fog bank's top edge into an X.
     # The camera 0.30 m lower (lens rise 0.06 -> 0.18 keeps the framing) puts the whole horn on plain sky, and it is
     # turned 5 deg toward the front (-15 -> -10, not front-on). f/4 for a softer background; the sun's colour cooled
