@@ -56,6 +56,36 @@ It lifts the cabinet 20 mm.
 - **They change the look.** The owner chooses, after a blind duel judged on looks alone (the critic sees no
   stability numbers).
 
+## The base reopened: a slim light plate, or no base (2026-11-03)
+
+**The owner, 2026-11-03 03:10:** "I'm also not loving the footing on the speaker. Why is it that we need it? ... Or a separate base that people can optionally purchase?" And at 04:27: the light "should cast up through the speaker. Off in the day, on in night images. But I'm also not convinced we need it."
+
+**Why the wide plinth was drawn, and why it is not needed:**
+- It was drawn for a 20 % push at the top, which Tropos fails on its own feet.
+- That rule is the 2014 text and IEC 60950's. Under IEC 62368-1:2018/2023, Tropos (MS3, no front controls) needs a 10° tilt and 800 N on its top.
+- **Horn A passes both on its own feet:** it tips at 17.5° at the least, and the 800 N load passes 4.1 times over (`stability/standard-2018.md`).
+- A base becomes optional. A lab's written pre-assessment confirms this before anything is tooled.
+
+**The slim light plate** (option "Light plate", `LPLATE` in `variants.py`), sold separately:
+- **Footprint:** the cabinet's own, 560 x 420; **50 mm tall** to the cabinet's bottom.
+- **Top frame:** 1/2 in sheet in the cabinet's colour, round a 440 x 300 opening, grooved for the uplight's edge strips under the walls.
+- **Tray:** black anodised aluminium (2 mm, folded and welded), holding the centre panel's board and heat sink on nylon brackets, slotted round its floor to vent.
+- **Feet:** four M8 levelling feet, 20 mm in from its corners.
+- It carries the uplight as the plinth did (the edge strips and the 40 W centre panel), with the bottom-batt window.
+- **Mass:** about **5.3 kg**: 4.4 kg modelled (the frame 1.3, the tray 1.5, the heat-sink plate 0.7, the diffuser 0.4, the feet 0.3, the channels 0.2), plus the heat sink's fins, the board and the wiring.
+- **Cost, a speaker (est.):** the frame about $170 (sheet and cutting, grooving, polishing), the tray about $140, the feet $18, and the uplight about $246 (strips $46, channels $18, board and heat sink $120, controller $22, the 90 W supply $40): **about $570**.
+- **Heat, at full in a 25 °C room** (estimates, to check with thermocouples):
+  - The tray is a tighter cavity than the plinth's opening: the heat sink runs about 20 to 30 K over room, 45 to 55 °C, or about 65 °C if it breathes poorly.
+  - The acrylic frame screwed to the tray runs about 40 to 45 °C (50 °C in the poor case).
+  - **Margin: 30 K or more under PMMA's 80 °C**, about 20 K under its 70 °C long-term limit, in the poor case.
+  - Tighter than the plinth's 35 to 40 K. At the default 50 % the rises halve, so I would cap the panel at 75 % on the plate if the first plate's thermocouples read near the poor case.
+- **Stability on the plate** (8.10, as a stand Tropos is sold with): 78.2 kg (5.6 kg taken for the plate, conservative). It tips at **17.8°** back at the plate's feet centres (19.6° at its edges), 20.8° forward and 25.6° sideways, so it passes 8.6.5 by the 15° tilt and 8.6.3 at 15°.
+- **The frames for the owner** (`renders/2026-11-03/barkhorn/base-question/`, one camera, Ice, 1200 x 1500, 64 samples):
+  - `A-ice.png`: on its own feet, day, no light;
+  - `B-ice.png`: on the plate, night, the light up through the cabinet;
+  - `C-ice.png`: on the stepped plinth, night, the same light;
+  - `B-smoke.png`: Smoke on the plate at night.
+
 ## A, uplit: the light goes up through the speaker (2026-11-02)
 
 **The owner, 2026-11-02 20:38** (README 41581a57): "The light in the base is meant to go upward through the speaker. The intent is to provide a way to light up the speaker from below, like in the underlit promo images." On 2026-11-01 "light up from underneath" was read as a strip under the plinth facing the floor. That was the wrong way round. **The uplight below replaces the floor line**, which stays documented after it as superseded. The model is `UPLIGHT` in `variants.py` (option "Plinth uplight"); the renders are in `renders/2026-11-02/barkhorn/uplight/`.

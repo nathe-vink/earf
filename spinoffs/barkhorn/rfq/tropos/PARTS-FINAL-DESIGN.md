@@ -38,3 +38,30 @@ $860.
   (`make/schedule.md`, the cash table);
 - the bonding of the plinth's frames and the caldera, polishing and assembly (`make/assembly.md`);
 - freight, duties and contingency.
+
+## Horn A and the uplight (2026-11-03)
+
+The owner, 03:00: "Horn: A, smooth, satin outside" (README 468c1058). The plinth's light now goes up through the speaker (the owner, 2026-11-02 and 04:27). The base is reopened (`variants/BASES.md`, "The base reopened"). Against the deck's **$20,700** for the first pair (stocked 2064 Smoke; `make/schedule.md`), whose cabinet and horn shops are about $7,750 ($3,750 and $4,000). Estimates.
+
+| line, for the pair | change |
+|---|---|
+| the laminated stepped horn out (`horn-plan-b`, 2 x $1,482.62) and the formed horn in (`waveguide` and `horn-throat`, 2 x $962.57) | −$1,040 |
+| the satin outside: masking the air path and a fine glass-bead blast, about $90 a horn | +$180 |
+| the horn shop: the laminated horn's 22 layers, bonding, 5-axis air path and polish ($4,000) become forming, trimming, annealing and cementing, mostly in the parts' rates; the shop's fitting and finishing about $1,000 | −$3,000 |
+| **the forming tool, once:** the prototype's tooling-board plug and base (`horn-tool-prototype`, `horn-tool-base`) | **+$6,925** |
+| the first pair's Smoke horn in stock 2074 3/8 in (it reads at 0.48 of its cabinet), so no custom batch yet; the other seven tints need one each (`asset/TINTS.md`) | $0 |
+| the uplight in place of the floor strip: $246 a speaker (the edge strips, channels, the 40 W board and heat sink, the controller, the 90 W supply) against the strip's $74 | +$344 |
+| **the Tropos line, on the stepped plinth** | **about $24,100** |
+
+**If the base becomes optional:**
+- **On the slim light plate** instead of the plinth: the plinth's sheet ($876) and its bonding ($800) out, the plate's frame and tray in (about $328 a speaker): **about $23,100**.
+- **On its own feet, with no base and no light:** the plinth, its bonding and its floor strip out: **about $22,000**, with the plate sold separately at about $570 a speaker.
+- **The shops:**
+  - The cabinet shop is unchanged at $3,750 (plus the plinth's $800 if it stays).
+  - The horn shop drops to about $1,000.
+  - The forming tool, $6,925, goes to a pattern shop, once. The production aluminium tool ($14,465) waits for orders.
+
+**Weight a speaker** (the press sheet's 74 kg was Strata's stepped horn):
+- **72.6 kg** with horn A on its own feet (`stability/standard-2018.md`; the render models' volumes and the parts list's masses). The formed horn is about 2 kg lighter than the laminated one.
+- **The stepped plinth:** 10.4 kg more.
+- **The slim light plate:** about 5.3 kg more.
