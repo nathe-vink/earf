@@ -319,6 +319,19 @@ def deck_hero():
     return s
 
 
+def _hero_gate3(s):
+    """The deck hero's fixes (the coordinator's blind critics on 67f795ab, 2026-11-03, 3 HOLD): the same family as the
+    tall front's, on the same rig. The lower right side face mirrored the lit floor (pale pink, saturation about 0.2), the
+    top chamber clipped flat coral, and the lid's front edge read as a neutral grey strip. The tall front's fix carries
+    over whole (_siteG_round1: sidesheen and through off, a reflect-only black card where the right face's mirror ray
+    goes from this camera, the top light x0.65, the key 5 deg round), and the topline, the panel that put the lid's edge
+    line there, comes down to a third, so the edge reads dark red with a glint like the vertical edges."""
+    _siteG_round1(s, 'front-off-tall', 'ember')
+    if 'topline' in s['lights']:
+        s['lights']['topline']['strength'] = round(s['lights']['topline']['strength'] / 3, 3)
+    return s
+
+
 SHOTS['deck-hero'] = deck_hero
 
 
