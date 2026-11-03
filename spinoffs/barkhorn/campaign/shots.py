@@ -634,6 +634,8 @@ def site(frame, tint):
     if frame == 'back':
         _siteB_round1(s)
     honest_lights(s)
+    if frame in ('front-off-tall', 'front-off-wide', 'side'):
+        _siteG_round2(s)
     if frame in ('front-off-tall', 'front-off-wide', 'side') and 'back' in s['lights']:
         # (the honest rig's proxies, tall Ice and Ember: unlinked, the `back` lamp, behind the speaker and aimed through
         # it at the floor, lit the floor beside it (176 to 229), and the lower right face, mirroring it, fell from
@@ -829,6 +831,29 @@ def _floor_patch(s, z_lo=0.06, z_hi=0.42, margin=0.15):
     s['set'].setdefault('flags', []).append({'center_m': [round((min(xs) + max(xs)) / 2, 3), round((min(ys) + max(ys)) / 2, 3), 0.004],
                                              'size_m': [round(max(xs) - min(xs) + 2 * margin, 3), round(max(ys) - min(ys) + 2 * margin, 3)],
                                              'normal': [0.0, 0.0, 1.0], 'reflect_only': True, 'color': '#050505'})
+
+
+def _siteG_round2(s):
+    """The fix1 gates (the coordinator's critics, 2026-11-03 22:14 and 22:59). 1. A full-height cool white stripe on the
+    right face behind the front corner (wide): `edge`, the specular-only glint lamp; with it off, the stripe is gone.
+    Off. 2. A white rounded 'plate' at the floor (wide) and a pale line along the bottom edge (side): the cabinet's own
+    bottom panel (hiding the part takes the band from 203 to 26 px at 240; the feet and the lower lining change
+    nothing), its polished edge mirroring and piping the light round it. With the floor darker (the row's sweep) the band
+    stands further above it; with the key and kick off it still stands 25 levels above the floor. The key and the kick
+    raised from about 20 to 40 deg take it down to the floor's own level (0 px more than 25 above it): their lower edges
+    no longer sit at the bottom edge's height. 3. For the dark tints: a black card camera-right down to floor level (the
+    right face's lower third and front stripe) and one overhead in front (the top front edge), real cards, kept only
+    where they fall out of frame (cards_out_of_frame)."""
+    L = s['lights']
+    if 'edge' in L:
+        L['edge']['power_w'] = 0.0
+    for k in ('key', 'kick'):
+        if k in L and 'orbit' in L[k]:
+            L[k]['orbit']['elevation_deg'] = 40.0
+    _mirror_card(s, dist=1.2, size=(1.8, 1.0), z=0.3)
+    s['set'].setdefault('flags', []).append({'center_m': [0.0, -1.0, 2.2], 'size_m': [2.0, 1.2], 'normal': [0.0, 0.42, -0.91],
+                                             'reflect_only': True, 'color': '#050505'})
+    return s
 
 
 def _siteB_round1(s):
