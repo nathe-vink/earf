@@ -43,6 +43,7 @@ def scale_lights(sh, scales):
                 L[key] = L[key] * f
 
 
+SURFACE_GLASS = True                    # the glass's tint on its faces, not in a leaking volume
 TT_SURFACE = 0.92                       # the two faces' reflection loss, as tints.py has it
 
 
@@ -169,7 +170,7 @@ def black_flag(bpy_, linked, size):
 
 
 def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extra=(), stand='feet', tt=None,
-        up=0.0, glass_from=0.12, ground=True, flag=(8.0, 6.0), lining=None):
+        up=0.0, glass_from=0.12, ground=True, flag=(8.0, 6.0), lining=None, glass_shadows=True):
     """Render a prepared shot file through `root`'s engine with the asset in. stand 'feet' leaves the stand-in plinth
     out and stands the speaker on four feet; 'plinth' keeps the asset as it is (linked). tt: the cabinet's and horn's
     transmission through 20 mm to render at, from `glass_from` (Smoke's 2074 is 0.12); up: the night uplight (W)."""
@@ -179,7 +180,7 @@ def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extr
     import render, product as Pr, lights as Lt
     linked = []
     place0 = Pr.place
-    editable = stand == 'feet' or tt or up or lining      # 'own' and 'plinth': the asset as it is, linked
+    editable = stand == 'feet' or tt or up or lining or glass_shadows   # else the asset as it is, linked
 
     def place(bpy_, pdef, templates, shot_, root_):
         objs, part_of = place0(bpy_, pdef, templates, shot_, root_)
@@ -210,6 +211,43 @@ def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extr
                         if n.type in ('VOLUME_ABSORPTION', 'PRINCIPLED_VOLUME') and 'Density' in n.inputs:
                             n.inputs['Density'].default_value *= f
             print(f'glass: {glass_from:.0%} -> {tt:.0%} through 20 mm (absorption x {f:.3f}) on', sorted(done))
+        if glass_shadows:
+            # light through the glass: Cycles renders without refractive caustics, so no lamp lights anything inside or
+            # behind a clear wall and the inside reads black whatever the tint. Shadow rays pass each acrylic wall
+            # tinted by what that wall transmits (its absorption over its thickness), the rest of the shading untouched
+            done = {}
+            for o in col.all_objects:
+                for sl in getattr(o, 'material_slots', []):
+                    m = sl.material
+                    base = m.name.split('@')[0] if m else ''
+                    if not m or not m.node_tree or base not in ('bark', 'horn-formed', 'horn-satin', 'horn-lot') or m.name in done:
+                        continue
+                    nt = m.node_tree
+                    out = next((n for n in nt.nodes if n.type == 'OUTPUT_MATERIAL' and n.is_active_output), None)
+                    absn = next((n for n in nt.nodes if n.type == 'VOLUME_ABSORPTION'), None)
+                    if out is None or absn is None or not out.inputs['Surface'].links:
+                        continue
+                    mm = 0.020 if base == 'bark' else 0.0127
+                    c = absn.inputs['Color'].default_value; dens = absn.inputs['Density'].default_value
+                    tr = [math.exp(-(1 - c[i]) * dens * mm) for i in range(3)]
+                    if SURFACE_GLASS:
+                        # the tint on the faces instead of in a volume: the asset's panels don't close the volume
+                        # (rays inside the cabinet stay "in the glass" and the inside reads black whatever the
+                        # tint); each face takes the square root of its wall's transmission, two faces a wall
+                        for l in list(out.inputs['Volume'].links):
+                            nt.links.remove(l)
+                        bs = next((n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED'), None)
+                        if bs is not None:
+                            bs.inputs['Base Color'].default_value = (*[math.sqrt(x) for x in tr], 1)
+                    src = out.inputs['Surface'].links[0].from_socket
+                    lp = nt.nodes.new('ShaderNodeLightPath'); tp = nt.nodes.new('ShaderNodeBsdfTransparent')
+                    tp.inputs['Color'].default_value = (*tr, 1)
+                    mx = nt.nodes.new('ShaderNodeMixShader')
+                    nt.links.new(lp.outputs['Is Shadow Ray'], mx.inputs[0])
+                    nt.links.new(src, mx.inputs[1]); nt.links.new(tp.outputs[0], mx.inputs[2])
+                    nt.links.new(mx.outputs[0], out.inputs['Surface'])
+                    done[m.name] = [round(x, 3) for x in tr]
+            print('glass shadows:', done)
         if lining:
             # the lining's color (colors F: Smoke on black, the others white): the asset, appended, takes it
             h = lining.lstrip('#'); rgb = [int(h[i:i + 2], 16) / 255 for i in (0, 2, 4)]
