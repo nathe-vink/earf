@@ -3607,3 +3607,28 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   ~2.3:1) shows only about y 0.35-0.79 of its height. The lane's y 0.30-0.85 box would cut the feet, and today's frames
   (y 0.35-0.82) may already be cut on those screens. A measuring workflow (Playwright replica of the V2 stage at 15 viewports,
   an independent check, a skeptic; wf_ade8d9aa-482) is running before anything goes to the render lane.
+- 23:08 brand lane (nothing swapped): the wall picture's six brand uses, measured. The Book (full width, 2.4:1, >=2400x1000, 3200x1333
+  for 2x); the partner brief cover (2.5:1 cover at 50% 45%, >=2550x1020; feet and horns >=4 % from top and bottom); teaser beat 3 16:9
+  (its pan shows only the middle ~66 %: the end speakers always cut; needs a 16:9 frame >=3840x2160, all eight with >=5 % side margin,
+  a 4 % push instead of the pan); teaser 4:5 (needs a 4:5 >=1440x1800); the Milan poster (744x420 cover at 50% 60%: the outer speakers
+  cut today; needs the 16:9); press (>=2400x1000 landscape, 1440x1800 portrait, the master). So: 2.4:1 >=3200x1333, 16:9 >=3840x2160,
+  4:5 >=1440x1800. The eight whole in every frame, never touching an edge; no text on the picture. Its two fixes when the picture
+  passes: the teaser's pan becomes a 4 % push; Milan takes the 16:9.
+- 23:11 c3: the deck hero landed (on 5957b9f9) at 569006681818f77dfeea4d07146953c24a8fc854 (36.9 min, 1440x2160, 3.13 MB). Merged
+  95876493 (fc529bd6b59f1f451bf2dc0049bcbb704bbb1dbd); deck-home-portrait from 23:13 (~25 min), overwriting b5dd5ebd's at the same path.
+- 23:11 Mantle lane: the night pictures under way. Sources r33 at 69c8f11c (contains a5736434 and 732a8671) and r32 at df3794f6
+  (contains dc60ce44). It commits only to r48-mantle-design. The Cloud model is building (up to an hour), then the variants model.
+  First deliverable: an Ice-on-its-own-feet proxy for the gate.
+- 23:12 c2: fix1 chunk 1 landed on 5957b9f9: deck-row (55.0 min, 2.80 MB) at 3963f1978ec272df0e9b6221f202d38258ed18f6
+  (r33-rollout-c2). Held: fix1 chunk 7, phase-1 chunk 4 (room), phase-2 chunk 9.
+- 23:16 RIG AUDIT. deck-row: clean (set-only background lamps, a spec-only front strip unlinked, no part-links). deck-hero: `edge` (area,
+  diffuse 0, 0.1 W) is still linked to six parts (right, left, front-panel, top, bottom, back): ruling 2. The cause is in shots.py
+  honest_lights at 69c8f11c: `if spec_only: continue` comes before the receivers are removed, so spec-only AREA lamps keep their links
+  (panels lose theirs).
+- 23:16 gate launched: deck hero + deck row (earf-speaker-gate-v2, wf_3eaf3f72-df3; day frames, no light in any base, test 4 skipped).
+- 23:18 sent to the speaker lane: the honest_lights fix (spec-only area lamps unlinked), one SHA. The negligible A/B on the deck hero
+  (`edge` unlinked; noise means it stands). Whether the cover (c4), deck-home-portrait (c3) and deck-home (c4) carry `edge` linked, and
+  whether to stop any. c2's lines for the a5736434 group.
+- 23:18 sent to c2: merge 69c8f11c (contains 5957b9f9, 95876493, a5736434, 732a8671) and rebuild both models. Then, on the speaker lane's
+  edge-fix SHA (no rebuild), --only site-back --tag backfix, and --phase 2 --only amp-plate-ember,horn-back-acid --tag backfix, each
+  list sent first. Hero-light held for the owner's bottom-edge answer.
