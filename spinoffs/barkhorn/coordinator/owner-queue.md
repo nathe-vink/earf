@@ -3508,3 +3508,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 22:32 my look at the proxies: Haze reads well; Acid's yellow reads olive-khaki at that luminance in the dark storm, the linings not glowing.
   Sent: before Acid's final, a global exposure lift (half to one stop, allowed) or more low sun into the box, so the lit faces read clearly
   yellow and the linings pale yellow; the lit-face L* with the final; tell me first if the sky can't take it.
+- 22:33 biomes lane: Acid before its final: the sky has room (top half p50 105, p95 156, p99 170, max 233, none clipped); the lit right face
+  sRGB (70,67,32), olive; exposure alone (+0.75 EV) reaches only ~(95,91,45); so both levers at c906e16d1955483ebe8a10b7e3f8c503175360ef: the
+  camera's global exposure -0.1 to 0.65 (+0.75 EV) and the low sun 10 to 18 (a break in the rain cloud). One Acid proxy after the Poison and
+  Fog finals and the Haze final; the lit-face L* and the sky's top end reported before Acid's final; it stops if the sky would clip.
