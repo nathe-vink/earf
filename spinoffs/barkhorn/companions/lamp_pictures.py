@@ -76,8 +76,8 @@ def build(frame, samples, scale):
         ob.location = (loc[0], loc[1], z); me.materials.append(mat)
         return ob
 
-    def acrylic(nm, rough, which=None, loading=1.0):
-        return SC.acrylic_material(nm, [(-1e4, 1e4, which or tname)], rough, 'polished', loading=loading, scratch=0.25,
+    def acrylic(nm, rough, which=None, loading=1.0, scratch=0.25):
+        return SC.acrylic_material(nm, [(-1e4, 1e4, which or tname)], rough, 'polished', loading=loading, scratch=scratch,
                                    bond=False)
 
     def light(nm, kind, loc, watts, radius, rot=(0, 0, 0), spot=None):
@@ -144,13 +144,15 @@ def build(frame, samples, scale):
             # both faces (the existing mould); inside it, with a clear air gap, a 3 mm clear diffuser ball R 45 frosted
             # inside, seated on the grommet's ring (its centre 27.8 below the outer's) and captive once the outer
             # halves are joined round it
-            sphere('ball', 80.0, zc, acrylic('ball', 0.0, loading=1 / 3))
-            sphere('ball-in', 74.0, zc, acrylic('ball-in', 0.0, loading=1 / 3), inward=True)
+            # (round 9: no hairline wear here; at 1024 samples the light bouncing between the two balls drew it as a
+            # crumpled caustic net over the core)
+            sphere('ball', 80.0, zc, acrylic('ball', 0.0, loading=1 / 3, scratch=0.0))
+            sphere('ball-in', 74.0, zc, acrylic('ball-in', 0.0, loading=1 / 3, scratch=0.0), inward=True)
             # round 9 (the gate: the Ø90 core too small, "an LED orb in a black bubble"): Ø120, its center 12 below the
             # outer's, on a short spacer ring on the grommet; a 13 gap at its equator
             ri = float(os.environ.get('CORE_IN_R', '60.0')); zi = zc - float(os.environ.get('CORE_IN_DZ', '12.0')) * MM
-            sphere('core', ri, zi, acrylic('core', 0.0, 'Clear'))
-            cm = frosted(acrylic('core-in', inner, 'Clear'))
+            sphere('core', ri, zi, acrylic('core', 0.0, 'Clear', scratch=0.0))
+            cm = frosted(acrylic('core-in', inner, 'Clear', scratch=0.0))
             # round 9: the printed dot over the LED, modelled in the frost itself (a separate surface beside the frost
             # made hard paths that the denoiser blotched): within 25 of the axis at the bottom the frost passes about
             # 40 %, the rest going back into the core (here: absorbed, a conservative stand-in)
