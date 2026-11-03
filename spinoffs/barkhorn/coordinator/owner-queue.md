@@ -2322,3 +2322,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 16:07 helper c4 (its message said 16:08): both models built (barkhorn-cloud.glb 73 MB, 988 s, 15:31:46-15:48:15; barkhorn-variants.glb
   16 MB, 1129 s, 15:48:22-16:07:11; one at a time). Chunk 7 (site-front-off-wide Ember, Dust, Acid; ~87 min) started as a tracked task.
   All four containers now rendering.
+- 16:09 bar lane: the first final, the House Book's r43-listening (the pop-up's listening room) at r33-planet-world
+  7cdce50f9d95eeaea0d57c5ed56f8db4adc19fc6 (renders/2026-11-03/barkhorn/planet-tropos-a/r43-listening.png; 1200 x 800, 128 samples, 213 s,
+  2.4 GiB): Ember on its own feet (the oak stack plinths gone), horn A polished, nothing glowing at its feet; the proxy passed its
+  own check. Tints now in INVENTORY.md: SMOKE (waiting): door-hero/bar-door, bar-street, bar-decks, bar-smoke, r42 counter/night/shop
+  (the shop also has one Ember speaker); EMBER (re-rendering): the three r43 and the three r44 frames. So the door-hero and the brand
+  book's bar pictures are all Smoke and wait. The r44 frames render from look 1's kit (7ae9f488, restored as
+  spinoffs/barkhorn/planet/r44l1/, only the no-plinth switch changed) to keep the House Book's architecture (kit44.py now draws look
+  2). Next r43-shop.
+- 16:09 my gate on r43-listening started (the old version as context). Look 1 for r44 kept (it is what the House Book shows).
