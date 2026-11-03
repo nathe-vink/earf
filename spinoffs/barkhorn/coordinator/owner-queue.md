@@ -2991,3 +2991,14 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   deck hero, cover and hero-light under the same rules; phase-2 1-3, 9, 10 held.
 - 19:32 sent to c3: stop fix1 chunk 4 by PID, delete its partial, report and wait. To c4: after chunk 12, report and wait (no fix1, no phase
   2). To c2: finish phase-2 chunk 4, then wait (no fix1 on aed49790).
+- 19:34 back set gate wf_19056f34-acf (3 critics, ~36 min, seven tints): HELD 7/7 by all three. Consistent staging, all on their feet with
+  contact shadows, no light in or under, the cabinets' darkness following the transmissions (batt L*: Fog 68, Acid 60, Dust 45, Ice 40,
+  Poison 26, Ember 21, Haze 18). Three shared faults: (1) the horn from behind clipped (its main channel ~250 on 54-93 % of the horn; brighter
+  than the backdrop behind it; Ember coral-pink, Dust salmon, Ice periwinkle, Haze lavender, Poison glowing lime, Fog milky white; its
+  lightness ignoring the tints, so a lamp on the horn is suspected); (2) a hard-edged softbox patch on the upper-left back panel (~x 270-415,
+  y 540-590); (3) the lower-left side face near-white below a razor line (~y 795). And the EARF mark at phone size reads only on Fog (+25 L*):
+  faint on Acid and Dust (~8-11), weak on Ice (~5.6), invisible on Ember, Poison, Haze (2-4).
+- 19:35 sent to the speaker lane: the back rig into the audit (`horn-rim` and `glow` checked for patterns 1 and 2 first); the horn below
+  clipping and following its tint, honestly lit; the softbox patch moved or flagged; the lower-left face flagged or the cyc extended; the
+  EARF mark: first a raking light across the back panel (proved on Ember and Poison), else a frosted, light or bronze letter face rendered
+  as a proposal for the owner (a build change, not adopted); proxies on Ember and Poison; a SHA and a back fix chunk for the seven tints.
