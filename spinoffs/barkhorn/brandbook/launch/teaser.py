@@ -125,7 +125,6 @@ class Teaser:
         s = self.H / self.facade.height * 1.12
         w = int(self.facade.width * s)
         im = cover(self.facade, self.W, self.H, 1.12, 0.38 + 0.24 * ease(k), 0.55)
-        self.line(im, 'Put a light under it.', t, 8.3)
         return im
 
     def b_tints(self, t):

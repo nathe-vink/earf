@@ -12,7 +12,7 @@ Color keys in file names: `red` Ember, `orange` Dust, `amber` Acid, `green` Pois
 | Tropos | `spinoffs/barkhorn/site/img/hero.jpg` | 2400 × 1200 | The eight Tropos in a row on a pale floor, Ember to Smoke, each throwing a colored shadow |
 | Tropos | `spinoffs/barkhorn/site/img/lineup.jpg` | 2400 × 1000 | The eight in a row on a white seamless |
 | Tropos | `spinoffs/barkhorn/brandbook/book/img/room.jpg` | 1600 × 900 | A pair in Poison, covers off, by a tall window at golden hour (master: `tropos-room-golden-hour-off.png`, horn lane) |
-| Tropos | `spinoffs/barkhorn/site/img/facade.jpg` | 2400 × 1000 | The eight at night, lit from below, their colors thrown up a concrete wall |
+| Tropos | `spinoffs/barkhorn/site/img/facade.jpg` | 2400 × 1000 | The eight at night, lit from below, their colors thrown up a concrete wall. **To swap:** it shows the uplight Tropos no longer has (the owner, 2026-11-03) |
 | Tropos | `spinoffs/barkhorn/site/img/red-studio.jpg` | 2400 × 1350 | Tropos in Ember alone, on a dark seamless |
 | Tropos | `spinoffs/barkhorn/site/img/red-studio-light.jpg` | 2400 × 1350 | Tropos in Ember alone, on a pale seamless (each color: <key>-studio-light.jpg) |
 | Tropos | `spinoffs/barkhorn/site/img/green-habitat.jpg` | 2400 × 1600 | Tropos in Poison in its element, a forest (each color: <key>-habitat.jpg) |

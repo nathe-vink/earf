@@ -22,8 +22,7 @@ SHEETS = [
      'lineup.jpg',
      'EARF is a San Francisco maker of hi-fi and lighting in tinted cast acrylic. Every product comes '
      'in the same eight colors, from Ember to Smoke, so a room can be one color or three. Each is named for a layer of '
-     'the Earth. Cast acrylic carries light to its edges, so a light from below shines up through it and fills a whole cabinet with color, and a '
-     'wall 20 mm thick shows what is inside it.',
+     'the Earth. A wall of tinted acrylic 20 mm thick shows what is inside it.',
      [('Where', 'San Francisco, California'), ('Site', 'earf.world'), ('Inquiries', 'hello@earf.world; trade and stockists the same'),
       ('Products', 'Tropos, a powered horn loudspeaker · Hemisphere, a pendant · Core, a table lamp · Mantle, a record player'),
       ('Colors', '01 Ember · 02 Dust · 03 Acid · 04 Poison · 05 Ice · 06 Haze · 07 Fog · 08 Smoke'),
@@ -34,7 +33,7 @@ SHEETS = [
       ('Founder', '[FOUNDER]')]),
     ('tropos', 'Tropos', 'Powered horn loudspeaker', 'Eight colors, Ember to Smoke.', 'red-studio-light.jpg',
      'Each cabinet is tinted cast acrylic, 20 mm thick. The horn is one sheet of 10 mm acrylic in the cabinet’s own color, '
-     'formed over a plug and satin outside, its driver in a pod whose cap twists off by hand. Above 1 kHz the horn carries the music; below, a 15-inch '
+     'formed over a plug and polished, its driver in a pod whose cap twists off by hand. Above 1 kHz the horn carries the music; below, a 15-inch '
      'woofer takes it, each on its own channel of the amplifier inside. The lining shows through the walls, so it is '
      'dressed in white voile. The name: the troposphere, the air we live in, from the Greek tropos, a turn.',
      [('Height', '1293 mm'), ('Width', '560 mm, the cabinet, with the horn flush'), ('Depth', '423 mm overall, 420 mm at the cabinet'),

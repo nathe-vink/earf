@@ -61,7 +61,7 @@ Eight, in this order, numbered 01–08:
 | 20 Jan / **21–24 Jan** | FOG Design+Art: its gala / the fair, at Fort Mason. Now for meetings with galleries, **without a show** | fixed | owner R5; bar `research-popup.md:144`; owner b3211a43 |
 | Week of 2 Nov 2026 | Quote requests sent | planned | lamps `first-articles.md`; horn `make/schedule.md:32` |
 | By 16 Nov | Lamp molds ordered (critical path) | planned | lamps `first-articles.md` |
-| — | The horn is A: one 10 mm sheet formed over a plug, satin outside, the throat turned from a solid block, in the cabinet's own color (replaces the stepped 22-layer horn) | decided | owner, r46-owner-notes 468c1058 |
+| — | The horn is A: one 10 mm sheet formed over a plug, **polished** (no longer satin, 2026-11-03, about 15:14: the same tinted glass as the cabinet, the driver and posts seen through it), the throat turned from a solid block, in the cabinet's own color (replaces the stepped 22-layer horn) | decided | owner, r46-owner-notes 468c1058, 0d8bdeb4 |
 | **7 Dec 2026, 23:59 CET** | Amsterdam Light Festival Ed. 16 call closes | fixed | owner R10; the festival's FAQ |
 | 6 weeks before the debut | US Park Police alcohol permit, if the venue is at Fort Mason | moves with the date | bar `DEBUT-ROOM.md` |
 | **31 Dec 2026** | HIGH END Vienna's Start-Up Area closes; it needs a registered company | fixed | owner R5, R9 |
@@ -89,7 +89,7 @@ Eight, in this order, numbered 01–08:
 
 | Product | Of record | Source |
 |---|---|---|
-| **Tropos** | 1293 mm tall; **560 mm wide**, the cabinet, with the horn flush; 423 deep. **72.6 kg on its own feet** (coordinator, 2026-11-03; no 74 kg, no 625 mm, no 85 kg). **The base is open**: none is described; the research (wf_a73d7898-d30) found it passes the tip test on its own feet, and a lab confirms in writing before tooling. Cabinet 20 mm. FaitalPRO 15PR400 woofer; B&C DE1085TN 2-inch driver; Hypex FusionAmp FA122, 2 × 125 W; crossover 1 kHz. **Horn A:** one 10 mm sheet formed over a plug, satin outside, the throat turned from a solid block, in the cabinet's own color (owner, r46-owner-notes 468c1058) | coordinator 2026-11-03; owner 468c1058 |
+| **Tropos** | 1293 mm tall; **560 mm wide**, the cabinet, with the horn flush; 423 deep. **72.6 kg on its own feet** (coordinator, 2026-11-03; no 74 kg, no 625 mm, no 85 kg). **The base: no light** (the owner, 2026-11-03, about 15:11): Tropos stands on its own feet with no light in it, day or night: no plinth, no uplight, no glow. The research (wf_a73d7898-d30) found it passes the tip test on its own feet; a lab confirms in writing before tooling. Cabinet 20 mm. FaitalPRO 15PR400 woofer; B&C DE1085TN 2-inch driver; Hypex FusionAmp FA122, 2 × 125 W; crossover 1 kHz. **Horn A:** one 10 mm sheet formed over a plug, polished, the throat turned from a solid block, in the cabinet's own color (owner, r46-owner-notes 468c1058) | coordinator 2026-11-03; owner 468c1058 |
 | **Hemisphere** | 200 mm across; about 1.6 kg hanging; 2700 K, CRI 90; **a 575-lumen LED** in public copy (590 at the LED, about 500 out of the shade; lamps aa78e0c7). 1,100 lm was the original spec and isn't supported on the low top that was built | owner README:135; lamps `companions/README.md` |
 | **Core** | 160 mm ball, 180 mm tall; **about 1.46 kg** ("about 1.5 kg" in public copy; lamps aa78e0c7, from the current CAD; 2.0 and 2.2 kg were older rounds); **4.7 h** at full brightness at the 90% limit (5.2 h from full, 5.8 h at the bar setting). Public copy: "about five hours" | lamps `first-articles.md`, README round 42; site `web.py:166-168` |
 | **Mantle** | 470 × 380 × 194 mm, lid down; about 15.5 kg; Rega RB330 arm; first build with a 2M Blue (the 2M Black for the show unit is open) | brand `press/mantle.md`; lamps `mantle-drive.md:74` |
@@ -111,7 +111,7 @@ Eight, in this order, numbered 01–08:
 
 | Line | Amount |
 |---|---|
-| Tropos prototype pair: parts and shop work (the deck's line says "on lit plinths"; the base is now open) | $20,700 |
+| Tropos prototype pair: parts and shop work (the deck's line said "on lit plinths"; there is no plinth and no light now) | $20,700 |
 | Hemisphere, Core and Mantle, one of each, molds included | $16,300 |
 | Tropos testing: emissions pre-scan, safety check, FCC* | $5,000 |
 | Trademark search* and filings ($350 a class) | $3,600 |

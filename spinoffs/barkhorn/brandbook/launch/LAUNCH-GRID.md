@@ -14,7 +14,7 @@ alt text until the real pieces are photographed. Mockup: `out/launch-grid.png` (
 | 4 | D+8 | `bar-decks.jpg` | One coin, one song. | Everyone who comes in gets a coin. Hand it in with a song, and it goes into the column at the decks. The column is the queue. |
 | 5 | D+10 | `lamp-orb.jpg` (cordless) | Goes where the conversation is. | Core is cordless. It runs from three standard LiFePO4 cells in its base: about five hours a charge at full brightness, longer dimmed, and two to three hours to charge. When the cells tire, you change the cells, not the lamp. |
 | 6 | D+12 | `bar-listening.jpg` | One album, start to finish. | This week's Session: [Album] by [Artist], start to finish, in the listening room. Six chairs. No talking. Ask at the room for a place. |
-| 7 | D+15 | `room-portrait.jpg` (the pair, whole, covers off; horn lane) | [no line: the horn's line was retired, 2026-11-03] | The horn: one sheet of 10 mm acrylic formed over a plug, satin outside, in the cabinet's own color. |
+| 7 | D+15 | `room-portrait.jpg` (the pair, whole, covers off; horn lane) | [no line: the horn's line was retired, 2026-11-03] | The horn: one sheet of 10 mm acrylic in the cabinet's own color, formed over a plug and polished, so the driver and posts show through it. |
 | 8 | D+17 | `tt-violet-dusk-1200.jpg` | Floats on its own light. | Mantle's tinted plinth floats 40 mm over a base that glows at its edge. It is playing in the room now. |
 | 9 | D+19 | `hero-portrait.jpg` | A world of sound, in color. | Everything in the room is made to order, in any of eight colors. Reserve a place in line at the room, or write to hello@earf.world. |
 

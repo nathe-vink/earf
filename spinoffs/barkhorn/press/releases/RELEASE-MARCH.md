@@ -23,11 +23,10 @@ order in San Francisco [OWNER: confirm "in San Francisco" once the shops are cho
 
 **Tropos** is a powered horn loudspeaker, 1.3 m tall:
 - **The cabinet** is 20 mm tinted cast acrylic.
-- **The horn** is one sheet of 10 mm acrylic in the cabinet's own color, formed over a plug and satin outside; its
-  throat is turned from a solid block.
+- **The horn** is one sheet of 10 mm acrylic in the cabinet's own color, formed over a plug and polished, so the driver and
+  posts show through it; its throat is turned from a solid block.
 - **Above 1 kHz** a 2-inch compression driver plays through the horn; **below**, a 15-inch woofer. Each has its own
   channel of the amplifier inside.
-- **A light from below** shines up through the acrylic and fills the whole cabinet with color.
 
 **Hemisphere** is a pendant, half a globe hung mouth down, in three layers of acrylic with a frosted layer between. A
 quarter turn takes its shade off, and another puts a new color on.
@@ -60,7 +59,7 @@ Each product is named for a layer of the Earth.
   Order Rule.]
 
 **Pictures.**
-- [PHOTO 1: the pair lit from below.]
+- [PHOTO 1: the pair in the room.]
 - [PHOTO 2: Hemisphere and Core, lit.]
 - [PHOTO 3: the eight tints as cast samples.]
 - High resolution at [LINK]. Every picture is a photograph of a prototype unless captioned otherwise. Credit:

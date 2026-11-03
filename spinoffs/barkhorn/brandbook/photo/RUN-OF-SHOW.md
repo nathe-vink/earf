@@ -45,7 +45,7 @@ everything to the contract the room gives.
 | 7:50 | Applause (recorded on its own tracks); doors open | | |
 | **7:55** | **A few words**, three minutes at most: thanks; the artist; partners by name; what comes next (the listening room planned after it; the Kickstarter; the Founding Hundred) | Owner | One bounced light for the face, nothing on the products. List D |
 | **8:00** | **Listening.** Tropos plays records. The coin buys a song: hand it over, and the record goes on the list | Selector or the owner | The room's main hour. List E |
-| **8:45** | **"Lights."** For ten minutes, every house light off: only the lamps, and the pair lit from below. Announced in one sentence ("for ten minutes, just the lamps") | Owner, the room's technician | The picture of the night: List F |
+| **8:45** | **"Lights."** For ten minutes, every house light off: only the lamps. Announced in one sentence ("for ten minutes, just the lamps") | Owner, the room's technician | The picture of the night: List F |
 | 8:55 | House back to 20–30% | | |
 | **9:30** | **Last call**; the bar closes | Bar | Firehouse policy |
 | **10:00** | **The event ends.** The coin is the souvenir; the invitation card's line ("a listening room follows") is said once more at the door | Door host | |

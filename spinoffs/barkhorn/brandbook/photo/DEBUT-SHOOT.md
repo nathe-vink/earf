@@ -53,7 +53,7 @@ Each shot names its main use: **KS** (Kickstarter), **Press**, **Partner** (the 
 | # | Shot | Use |
 |---|---|---|
 | A1 | **The room wide**, from the door, at the night's level: the pair, the long table, the stations | Press, Site, Partner (Ace) |
-| A2 | **The pair lit from below**, square on, at listening height; then three-quarter | Press, Partner (Klipsch), Site |
+| A2 | **The pair**, square on, at listening height; then three-quarter | Press, Partner (Klipsch), Site |
 | A3 | **The line of shades** down the long table, from its end (Full and Middle) | KS, Press, Partner (Ace) |
 | A4 | A Core on a high-top, the table's candle, close | KS, Social |
 | A5 | **Mantle's base glowing under a record**, the arm down | Press, Partner (Pro-Ject) |
@@ -89,7 +89,7 @@ Each shot names its main use: **KS** (Kickstarter), **Press**, **Partner** (the 
 ### F. "Lights" (8:45–8:55)
 
 - F1: **the room by the lamps alone**: a tripod wide, 1/4–1 s, people soft, the lamps sharp.
-- F2: the pair lit from below in the dark, with silhouettes in front.
+- F2: the pair in the dark, lit only by the lamps, with silhouettes in front.
 - F3 (film): one slow push-in across the room, 20 seconds, for the teaser's last frame.
 
 ## Releases

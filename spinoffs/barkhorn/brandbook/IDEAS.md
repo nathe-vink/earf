@@ -51,12 +51,11 @@ And it makes Planet EARF a label as well as a bar, which is easier to fund than 
 
 ## (b) A debut room: San Francisco, then Vienna, then Milan
 
-**Mockup:** `out/idea-milan.png`: the invitation ("A world of sound, in color.", the uplit eight), the room in plan (eight
-Tropos lit from below on a curved wall, Mother EARF overhead, a bench, Mantle and the coins by the door). The same room
+**Mockup:** `out/idea-milan.png`: the invitation ("A world of sound, in color.", the eight in a row; the picture shows the retired uplight and is to swap), the room in plan (eight
+Tropos on a curved wall, Mother EARF overhead, a bench, Mantle and the coins by the door). The same room
 works at any of the three.
 
-**What.** One dark room. The speakers lit from below, throwing their colors up a wall, the picture on the site made
-real at full size. A Session each night. The coin at the door. Every piece wears its tag, and the first run's orders and
+**What.** One dark room. The eight speakers along a wall, the lamps the only light. A Session each night. The coin at the door. Every piece wears its tag, and the first run's orders and
 deposits are taken there.
 
 **The calendar** (from the coordinator's research; dates, not plans already made):
@@ -75,7 +74,7 @@ deposits are taken there.
    rent for downtown pop-ups); if it lands, the debut room is that pop-up's first week.
 2. **Vienna, High End (May 2027).** Apply to the Start-Up Area by 31 December. It is free, it is the hi-fi trade's
    own show (dealers, distributors and the hi-fi press), and it comes after the first pair has been measured. The
-   uplit pair is the stand.
+   pair is the stand.
 3. **Milan (April 2028), not 2027.** Without Alcova or SaloneSatellite, Milan 2027 means a venue found and paid for
    in the design districts, for a product not yet in production; the €2,000 Fuorisalone package only lists an event
    someone else hosts. In 2028 the full eight can go, with a batch behind them and the press from 2027.
@@ -193,7 +192,7 @@ run's materials, and the first hundred owners are the brand's first ambassadors,
 ## A note on the name Strata
 
 The stacked, laminated horn that suggested the name is set aside: the horn is A, one 10 mm sheet formed over a plug,
-satin outside (the owner, 2026-11-03; r46-owner-notes 468c1058). Strata stays in reserve as a name only. Nothing is
+polished (the owner, 2026-11-03; r46-owner-notes 468c1058, 0d8bdeb4). Strata stays in reserve as a name only. Nothing is
 renamed here.
 
 ## Not done here

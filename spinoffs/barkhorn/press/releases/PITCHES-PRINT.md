@@ -27,7 +27,7 @@ first look has been offered elsewhere.
 >
 > EARF makes a horn loudspeaker, two lamps and a record player in tinted cast acrylic, in the same eight colors, from
 > Ember to Smoke, so a room can be one color or three. The horn is one sheet of the cabinet's own color, formed over a
-> plug. A light from below shines up through the acrylic and fills the whole speaker with color.
+> plug and polished, so you see the driver through it.
 >
 > The first pair played in San Francisco at our debut, [DATE]. We'd like Wallpaper\* to have the first look,
 > exclusively in print, ahead of our announcement on [DATE]. Photographs of the prototypes, the eight colors as cast
@@ -68,7 +68,7 @@ first look has been offered elsewhere.
 >
 > What if the speakers, the lamps and the record player were all the same color? EARF, in San Francisco, makes all
 > four in tinted cast acrylic, in eight shades. In Smoke, a room goes quiet and dark; in
-> Ember, it glows. Core, the table lamp, runs cordless for about five hours and moves through the house with you.
+> Ember, it warms. Core, the table lamp, runs cordless for about five hours and moves through the house with you.
 >
 > Photographs of the prototypes, and of [the pair at home, when shot], are under embargo until [DATE]: [LINK]. A first
 > look has gone to one title in print.

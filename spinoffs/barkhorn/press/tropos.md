@@ -3,7 +3,7 @@
 **A powered horn loudspeaker in eight colors of cast acrylic.** "Eight colors, Ember to Smoke."
 
 Each cabinet is tinted cast acrylic, 20 mm thick. The horn is one sheet of 10 mm acrylic in the cabinet's own color,
-formed over a plug and satin outside, its throat turned from a solid block, its driver in a pod whose cap twists off by hand. Above 1 kHz the horn carries the music;
+formed over a plug and polished, so the driver and posts show through it, its throat turned from a solid block, its driver in a pod whose cap twists off by hand. Above 1 kHz the horn carries the music;
 below, a 15-inch woofer takes it, each on its own channel of the amplifier inside. The lining shows through the walls,
 so it is dressed in white voile. A cloth cover goes on over the woofer.
 

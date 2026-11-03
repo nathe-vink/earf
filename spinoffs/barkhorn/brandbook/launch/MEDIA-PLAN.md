@@ -21,7 +21,7 @@ published editors.
 
 - **The eight tints.** Hi-fi and light in tinted cast acrylic, the same eight in everything; a
   room in one color or three. The design press's angle.
-- **The horn.** One sheet of 10 mm acrylic formed over a plug, satin outside, in the cabinet's own color; the throat
+- **The horn.** One sheet of 10 mm acrylic formed over a plug and polished, in the cabinet's own color, the driver seen through it; the throat
   turned from a solid block. The hi-fi and object press's angle.
 - **The listening bar where everything is for sale.** The pop-up, then Planet EARF: a room you can buy, one coin one
   song, Sessions pressed to vinyl. The lifestyle and city press's angle.

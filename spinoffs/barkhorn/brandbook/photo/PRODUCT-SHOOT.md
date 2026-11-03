@@ -49,7 +49,7 @@ and a pallet. The other six tints don't exist as products yet.
 
 The Brand Book's look, made with real light:
 - **Night:** a black set, one hard key, the object's own light doing the work. Hemisphere and Core lit by themselves;
-  Tropos lit from below, as on the site; Mantle's base glowing.
+  Mantle's base glowing. (Tropos has no light in it: the owner, 2026-11-03.)
 - **Paper:** the brand's paper (#ECE8E1, a warm off-white seamless) under one soft source, for clean catalog and
   press frames, and the tints' colored shadows on the paper.
 - **Acrylic needs edges, not fronts:**
@@ -70,7 +70,7 @@ on paper and on black); **Partner** (the three packs).
 
 | # | Shot | Set | Use |
 |---|---|---|---|
-| T1 | The pair, three-quarter, lit from below | Night | Site, Press, Partner (Klipsch) |
+| T1 | The pair, three-quarter, lit by the lamps around it | Night | Site, Press, Partner (Klipsch) |
 | T2 | One cabinet square on, the horn on top | Paper | Press |
 | T3 | The horn's mouth and edge, macro, the light caught in the cast | Night | Press, Partner (Klipsch) |
 | T4 | The horn lifted off (two people), the cabinet's top | Paper | Press: "how it's built" |

@@ -17,6 +17,5 @@
 | Pictures | Every picture is a render until the first are built |
 | Founded by | [FOUNDER] |
 
-**The idea in one paragraph.** Cast acrylic carries light to its edges, so a light from below shines up through it and
-fills a whole cabinet with color, and a wall 20 mm thick shows what is inside it. EARF builds everything from that one material, in one
+**The idea in one paragraph.** A wall of tinted acrylic 20 mm thick shows what is inside it. EARF builds everything from that one material, in one
 set of eight tints, so the speaker, the lamps and the record player in a room can match, or not, by choice.

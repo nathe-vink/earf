@@ -128,8 +128,8 @@ Dear [Name / the gallery],
 The strand of your program where light and technology meet craft is exactly where these pieces belong.
 
 I'm [Your name], and I make EARF in San Francisco: a horn loudspeaker, two lamps and a record player in tinted cast
-acrylic, in eight colors. A light from below shines up through each loudspeaker and fills the whole cabinet with
-color; the pendant is the same acrylic lit from within. On [DATE] the first pair plays for the first time,
+acrylic, in eight colors. The pendant is the same acrylic,
+lit from within. On [DATE] the first pair plays for the first time,
 at a debut night in San Francisco. I'd be glad to welcome you.
 
 I'd like to propose an edition: Hemisphere at a larger scale, eight pieces, one in each color, with two artist's proofs;
