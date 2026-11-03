@@ -1404,3 +1404,14 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   see-through volume glass in every tint); the fire frame is a habitat picture, not the decision picture. Speaker lane, after D
   night and Smoke-D: a fair day comparison on A's set at one exposure (2064 white, 2064 black, and 2074 white if time allows), and
   check its own Smoke horn. The Smoke question to the owner waits for Smoke-D and that comparison.
+- 10:32 biomes lane (its message said 10:45, ahead of the clock): the seven paused to settle the horn. (1) The waveguide shell is
+  `horn-satin` (transmissive, roughness 0.25, the same volume tint): the owner's own spec, README row 171, "Horn: A, smooth, satin
+  outside" (03:00 today), so "a matte shell, nothing seen through it" is partly the spec. Gloss would be a product change. (2) A real
+  bug: after the weld the horn shells are still open meshes (horn-throat 1330 open edges, 0.64 m of seam; waveguide 85, 1.1 m;
+  waveguide-cap 757, 0.66 m), so the horn's glass volume leaks; a fill-the-holes option added to habitat.py. Proxies on Ember: (a) as
+  is, (b) seams closed, (c) closed + roughness 0.05, comparison only.
+- 10:33 sent. Biomes: run the seven with (b) (satin by spec, seams closed); (c) labelled a departure, for the glassy-horn study;
+  send (a), (b) and (c) with numbers: does closing the seams bring back thick-darker-than-thin? Speaker lane, after the base set and
+  the Smoke comparison: close the horn's shells at the source (not now: D must match A) and report whether the horn's look changes.
+  The owner's 05:11 note (misses the glassy feel, thick parts darker; "technically possible trumps cool") may be partly this bug.
+  The speaker gate's brief now says the horn is satin by spec (judge how it reads, don't fail the spec).
