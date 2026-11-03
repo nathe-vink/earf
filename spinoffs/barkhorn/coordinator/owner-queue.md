@@ -2353,3 +2353,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   Dust acrylic as the cabinet, same hue, crisp, the pod and posts through it; the X gone, wall-to-wall difference 14.7 vs 31.6; no seam
   against the sky; only the horn region changed). Optional: a contact shadow or slight sand berm at the bottom-right; tiny rim specks
   at 4x. Satin's one advantage: a more sculpted, centred funnel. Ready for its turn in the walkthrough (the biomes item).
+- 16:18 biomes lane: the second Haze and Poison proxies still dark. (1) Its bug: the engine reads the HDRI's turn from
+  sky.rotation_deg, it had set world.rotation_deg, so Haze's sky sun stayed behind; fixed at 1e29e29d2a9122cb41dfeb74607c59ad87651c25
+  (Poison's canopy-gap light raised 4 to 12 too); the proxies queued after Fog's final (rendering). (2) A FACT FOR THE OWNER (from
+  the asset's absorption; front panel luminous transmission Y): one 20 mm wall / two walls (a view through the box) / hue: Acid
+  0.845/0.748/52; Dust 0.642/0.448/33; Ice 0.624/0.412/205; Poison 0.351/0.167/128; Haze 0.281/0.111/270; Ember 0.153/0.100/356;
+  Smoke 2074 0.126/0.016/210; Fog clear 1.0. Through the box Haze passes 11 %, Poison 17 %, against Dust's 45 %: in the same light
+  2.5-4x darker, the tint, not the light. Haze's hue is violet (270), the navy is the dusk light on a dense violet; the lane won't
+  lighten the tint; nearer Dust's look would need a lighter Haze batch, the owner's call. Noted for the walkthrough's biomes item
+  (the owner's "I like the darker colors", 2026-11-01, chose these densities; Smoke's "more transparent" note is the exception).
