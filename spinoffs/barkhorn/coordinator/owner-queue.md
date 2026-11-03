@@ -1872,7 +1872,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   render_model.py, ~21 min; or ~90 MB transferred, no shared disk), the Poly Haven cache (433 MB, CC0, fetched on demand; room31 for
   deck-home and its portrait); one render at a time, each under 13.5 GiB. With 4 containers A is ~6 h each plus 30-60 min setup.
   Running: the model rebuild with the pod lead, then the close-ups; the Smoke ~50 % frame rendering alongside.
-- 14:29 sent: keep the samples (site 96, as the passing habitats); a memory warning (biomes lost Ice to an OOM with two jobs side by
+- 14:28 sent (my message said 14:29, ahead of the clock again): keep the samples (site 96, as the passing habitats); a memory warning (biomes lost Ice to an OOM with two jobs side by
   side; its rebuild and the Smoke render run together: check headroom, else serialise); the plan for the answer: 3 helper sessions in
   this environment plus the lane, A in ~6-7 h wall. Asked: campaign/rollout/HELPERS.md (fresh-container steps, chunk runs, commit
   rules, one branch per helper, the report), a chunk picker in rollout.py if missing, and a 4-way split of A's and D's chunks with
