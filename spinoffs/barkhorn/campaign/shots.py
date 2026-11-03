@@ -355,6 +355,7 @@ def _hero_gate3(s):
     # white bar a little in from its front edge, hidden before under the face's pale reflection: to a third)
     if 'edge' in L and L['edge'].get('power_w'):
         L['edge']['power_w'] = round(L['edge']['power_w'] / 3, 3)
+    honest_lights(s)                                       # the owner's rule (horn to specular 1, kick and back unlinked)
     return s
 
 
