@@ -81,10 +81,12 @@ WASH = dict(runs=[(24.0, 60.0, 24.0, 370.0), (536.0, 60.0, 536.0, 370.0), (60.0,
 # lining, which starts at z 50) and behind each port; `brace`: on the brace's top face (z 220), clear of the side linings,
 # the ribs and the back's bosses. (x0, y0, x1, y1) of each run, mm in the cabinet's frame. Fed from an external 24 V plug-in
 # supply through a panel connector in the back's cable gland (variants/BASES.md)
-BUILTIN = dict(floor=[(60.0, 360.0, 250.0, 360.0), (310.0, 360.0, 500.0, 360.0),   # split round the bottom rib's end, so the
-                      (50.0, 295.0, 160.0, 295.0), (400.0, 295.0, 510.0, 295.0)],      # batt's notch shows no strip (gate 2)
+BUILTIN = dict(floor=[(60.0, 360.0, 230.0, 360.0), (330.0, 360.0, 500.0, 360.0),   # split wide of the bottom rib's end, so the
+                      (50.0, 295.0, 160.0, 295.0), (400.0, 295.0, 510.0, 295.0)],      # batt's notch shows no strip (gate 2, 3)
                z_floor=20.0,
-               brace=[(90.0, 250.0, 470.0, 250.0), (90.0, 300.0, 470.0, 300.0)], z_brace=220.0,
+               # the brace runs 40 clear of the side ribs (x 80 and 480), so no light pipes up the clear ribs to
+               # their front edges (gate 3: a neon line down the right side)
+               brace=[(126.0, 250.0, 434.0, 250.0), (126.0, 300.0, 434.0, 300.0)], z_brace=220.0,
                channel=(12.0, 7.0), wall=1.5, lens_t=1.0, lens_down=0.6, standoff=(6.0, 3.0))
 # D+'s top batt (the Cloud's lining-top-3-web: its box, x0 y0 z0 x1 y1 z1 mm; the top rib's notch x0 x1 from z0 up)
 TOPWIN = dict(box=(71.0, 44.5, 759.5, 489.0, 339.5, 859.5), frame=80.0, rib=(270.0, 290.0, 800.0))
