@@ -50,7 +50,7 @@
       5.99,
       0.0
      ],
-     "rotate_z": 59.95,
+     "rotate_z": 54.0,
      "hide": [
       "cloth-disc",
       "post-*",
@@ -85,7 +85,7 @@
       5.99,
       0.0
      ],
-     "rotate_z": 59.95,
+     "rotate_z": 54.0,
      "hide": [
       "horn-topo*",
       "base-out*",
@@ -934,20 +934,20 @@
   "pairfill0": {
    "type": "area",
    "position": [
-    17.7,
-    2.3,
-    2.4
+    17.0,
+    2.0,
+    3.25
    ],
    "target": [
     15.5,
     3.19,
-    1.15
+    0.75
    ],
    "size_m": [
     1.5,
     1.5
    ],
-   "irradiance": 0.07,
+   "irradiance": 0.045,
    "color": 2700,
    "camera": false,
    "spread_deg": 30.0
@@ -968,7 +968,7 @@
     1.5,
     1.5
    ],
-   "irradiance": 0.042,
+   "irradiance": 0.027,
    "color": 2700,
    "camera": false,
    "spread_deg": 30.0
