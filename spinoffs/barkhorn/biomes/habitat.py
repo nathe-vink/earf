@@ -174,12 +174,31 @@ def black_flag(bpy_, linked, size):
     # and a card each side of the speaker, square to the camera's line, out of frame: the side walls mirror them, not
     # the sky, at the grazing angles where acrylic reflects most
     side = Vector((-d.y, d.x, 0.0))
+    # real cards are seen by the camera, so each is pushed out sideways until no corner falls in the frame (Blender's own
+    # projection, lens shift included; the first real-card Fog final had them in frame at the old fixed 1.8 m)
+    from bpy_extras.object_utils import world_to_camera_view
+    sc.view_layer.update()
+    offs = []
     for k, sgn in enumerate((1, -1)):
-        p_ = Vector((t.x, t.y, 0.9)) + side * sgn * 1.8 - d * 0.6
         c_ = f.copy(); c_.data = me; sc.collection.objects.link(c_)
-        c_.location = p_; c_.scale = (2.6, 2.4, 1.0)
-        c_.rotation_euler = (Vector((t.x, t.y, 0.7)) - p_).to_track_quat('Z', 'Y').to_euler()
-    print('side cards: 2.6 x 2.4 m, 1.8 m each side')
+        c_.scale = (2.6, 2.4, 1.0)
+        off = 1.8
+        for _ in range(60):
+            p_ = Vector((t.x, t.y, 0.9)) + side * sgn * off - d * 0.6
+            c_.location = p_
+            c_.rotation_euler = (Vector((t.x, t.y, 0.7)) - p_).to_track_quat('Z', 'Y').to_euler()
+            sc.view_layer.update()
+            corners = [c_.matrix_world @ Vector((x, y, 0.0)) for x in (-0.5, 0.5) for y in (-0.5, 0.5)]
+            uv = [world_to_camera_view(sc, cam, q) for q in corners]
+            xs = [q.x for q in uv]
+            # the whole card beside the frame: left of its left edge, or right of its right edge (corners alone could
+            # sit above and below a frame the card's middle crosses)
+            inside = not (max(xs) < -0.02 or min(xs) > 1.02) and any(q.z > 0 for q in uv)
+            if not inside or GLOSSY_FLAG[0]:
+                break
+            off += 0.2
+        offs.append(round(off, 1))
+    print(f'side cards: 2.6 x 2.4 m, out of frame at {offs} m each side')
 
 
 def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extra=(), stand='feet', tt=None,
