@@ -61,8 +61,10 @@ Show one item with its pictures, wait for the answer, save the owner's words ver
     or removed; one SHA with both, then c2, c3 and c4 restart. Phase 2: the glow lamp dropped (noise-only difference), so chunks 4 and 05 stand; the six horn-backs passed (Acid's held on its
     edge colour; the amplifier close-up held on the stale rating plate, its softbox and the inlet's pins); turn 00, 02, 03, 04 passed,
     turn-01 held (a grey face), the side flags (e81c1a4a) to prove on 01 and 05 before chunk 6; inside-ice held (the base cut off).
-  - The lamps (state at 20:47): Hemisphere day passed 3/3 (rig clean). The night rig was rebuilt under rulings 1-3 (dc60ce44): the
-    Hemisphere day and both night liners rendering at full size. Core B day held 3/3 (20:2x: the core lost, the shell reading dense
+  - The lamps (state at 21:36): the Hemisphere finals under rulings 1-3 at bac5fc08 (the day with the new satin dark-grey cap; night (a)
+    the cool-white liner, 14 degrees off the day's hue; night (b) the faint-blue liner, a PROPOSAL, 4 degrees off), at the gate. For items
+    87/88, ask the owner too: the liner now ends 1.5 mm inside the rim, not the accepted 4 mm, to close the dark seam at the lip (a partial
+    walk-back of the rim fix they accepted). Core B day held 3/3 (20:2x: the core lost, the shell reading dense
     aqua, a muddled seat, a "fill line"); the night final stopped; next the opal core (a proposal) lit by a real sun with the wall in
     shade, then B day and night.
   - Acid's coral-red edges are a model limit (its amber passes red completely; the real 9097's fluorescent edges glow yellow): written in
