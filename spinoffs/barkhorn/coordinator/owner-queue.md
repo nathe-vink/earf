@@ -2007,6 +2007,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   satin to polished; flag pictures; nothing published, prices untouched). Site lane (words-only on r47-site-next, production held at
   743be0cb; list the pictures with a lit plinth, uplight or satin horn, no swaps until the owner answers the uplit-pictures item).
   My own deck (v68) words to follow (the ask's "on lit plinths", the base and horn lines), after the walkthrough moves on.
-- 15:16 walkthrough item 3 shown: the site's two uplit night pictures (scratchpad/walkthrough/03-site-uplit.jpg; the owner's own site
+- 15:15 walkthrough item 3 shown: the site's two uplit night pictures (scratchpad/walkthrough/03-site-uplit.jpg; the owner's own site
   images, the speaker glowing on a lit plinth): keep them as styled mood shots, or replace them with the new no-light pictures (my
   pick: replace; "technically possible trumps looks cool").
