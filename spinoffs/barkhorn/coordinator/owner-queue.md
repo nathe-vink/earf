@@ -1162,3 +1162,16 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   frosted ball), no fix; Haze won't match in stock 2287 (translucent): want about 25.8 % at 3 mm, a stock transparent violet if one
   exists, else pour the lamps' 1/8 in in the speakers' Haze campaign; picture script lamp_pictures.py; Ice pictures next. Workflows:
   the audit's critic (resumed) and the review-room cards (editions done) running.
+- 06:39 the audit's completeness critic (wf_ccc99873-066 done): 15 findings. Most urgent: my replies of ~05:59 (the Smoke miss and
+  its fixes), ~06:01 (the stepped horn; the unreviewed work with links) and ~06:17 (the verifier's corrections) are NOT in the
+  transcript: only each turn's last text reached the owner. RULE FROM NOW: everything the owner must see goes in the LAST text of
+  the turn; mid-turn text may be lost. Re-sent at ~06:46 in one message. Other findings: the lantern drops the owner's showroom
+  (the second pair at counter height, EARF lamps over the bar, the record player; its bar view shows no EARF product); the
+  founder-only decisions before a deposit (deposits, returns, warranty, delivery, where built/played, listening, the light sold or
+  not; launch-readiness.md s4, policies-draft.md) never asked since 25 Oct; the five 22 Oct evening answers missing from the README
+  (added 74281029 from the Overnight page); the close-ups rule (two of three show gone/doubtful parts) and the board's stale settled
+  list; Kickstarter, photography money, debut room and lighting lost in the 31 Oct restart; dates not on the board (Plastimagen
+  10-13 Nov, Alcova/Fuorisalone by 8 Feb, IDSA Jan-Feb, Port of SF 27 Feb, SF Design Week, two grant drafts); flagship vs small bar
+  never asked (the deck prices the big one); "Put a light under it" vs the open base; Topo (the one Tropos edition idea) never
+  reported; the stepped ring round the woofer assumed, never asked; the back mark reads BARF at phone size, closed without the owner;
+  four more lost questions (electronics early order, Core cells shipped beside, the owner's name across drafts, and others).
