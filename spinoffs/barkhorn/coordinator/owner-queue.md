@@ -3452,3 +3452,13 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   deck-home-portrait-sill-proof.png and deck-home-sill-proof.png. Next there: the 9097 tint fix.
 - 22:10 sent: c3, after the deck hero, the portrait re-rendered on 95876493 (fix1 chunk 2's portrait line); c4, after the cover, deck-home
   (phase-1 chunk 4) on 95876493.
+- 22:1x fix1 wide gate wf_ade15f60-537 (3 critics, ~18 min): Ember, Dust, Acid HOLD 0/3. The fronts see-into and the horns smooth, each its
+  own tint (0, 26-28, 45-47); but two rig faults: (1) a clipped near-white band (~250, above any floor pixel ~218) wrapping the footprint at
+  the floor along the front, round the right corner and down the side, 3-10 px tall ("a thin white plate with rounded corners, 15-20 px
+  wider than the footprint"), reading as an LED underglow; (2) a full-height untinted stripe on the right side face behind the front corner
+  (~22 px, saturation 0.05-0.11), a strip lamp's reflection. Also Dust's and Acid's red long-path edges, Ember's grey top front edges, the
+  handle recesses cream-white.
+- 22:14 sent to the speaker lane (urgent, before the 9097 fix): diagnose the floor band first (a model part, the floor lit by the kick, a
+  bottom edge piping light?) and which rigs carry 1 and 2 (tall, side, row, hero, cover, room). Re-ordered the helpers: c4 after chunk 3
+  skips chunk 2 and goes to the cover then deck-home; c2 after chunk 6 skips chunk 7 and goes to the row; c3 finishes chunk 5, then the
+  hero and the portrait; any of them stopped if the deck rigs carry the fault.
