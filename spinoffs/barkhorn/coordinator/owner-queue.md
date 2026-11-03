@@ -2281,3 +2281,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   Image, ImageDraw, ImageFont; import scipy`; on failure it installs Pillow with --ignore-installed into /usr/local, ahead of the apt
   copy; bash -n checked. HELPERS.md: a "check Pillow on the render Python" step with the fix). Its own container loads Pillow 13.0.0
   for 3.11, so chunk 4 (deck-home, room31) is safe. The deck-hero proof rendering.
+- 15:55 speaker lane: setup.sh at 8ca73abdba86f5c0ed67d8afd81da692eb3268d3 installs Pillow with --user --ignore-installed --no-deps (with
+  PIP_BREAK_SYSTEM_PACKAGES=1, as its pip already runs), re-runs the real import and stops with a pointer to HELPERS.md if it still
+  fails; numpy stays 1.x (no deps pulled, the numpy 1 pin follows); HELPERS.md's fix line the same form; bash -n checked.
