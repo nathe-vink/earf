@@ -3377,3 +3377,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   5f4116fe830e958d59e56ebde7562f3b700aadb3 (the far card stays). Haze at sun 135: horn max 144 (hue 247), upper box 38 (was 26; target 45-60,
   hue 241), lower box 18; horn and box one violet (6 degrees apart); horn-to-box 13.7x (the set 0.9-1.7). Next: the sun to the front side
   (azimuth 70) so daylight reaches the batts through the front; if the box still won't reach 45, the density question goes to the owner.
+- 21:31 the honest A-ice-polished gate wf_1c51c968-aa1 (3 critics, ~22 min): SHOW 3/3. Under the honest lamp the polished horn still reads as
+  smooth, clear Ice glass with no X and no streak across the face; small honest changes: a thin near-white glint along the left lip (near-white
+  pixels in the horn 214 to 935, on the rim), the phase plug a lit silver rosette (58 to 157 px), the lower-right ray ~60 % stronger, the
+  woofer a lighter grey; the cabinet, floor, grounding and batt unchanged. "Use this version rather than the 30 % one." Optional only:
+  for a tight horn crop, move or enlarge the lamp (never dim its reflections). Item 6 ready with the disclosure.
