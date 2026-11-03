@@ -3783,3 +3783,5 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   - Speaker lane: the turn accepted, chunk 6 to c4; the 23:41 order stands.
   - c3: merge f6d0eda7 and rebuild both models, then wait for the close-up line.
   - c4: after deck-home, phase-2 chunk 6 (the turn) on its branch, list first. Its row chunk is dropped (c2 did it).
+- 23:46 check-in #53 armed for 00:37 (trig_01TstoAAB5yKenbnUFAKVE2e) with the current state: item 5 open; 6-9 and 13 blocked; the
+  gates in flight; the speaker lane's 23:41 order; the helpers' jobs.
