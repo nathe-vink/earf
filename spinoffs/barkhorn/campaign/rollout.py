@@ -121,8 +121,10 @@ def _final(shots, rig, fl, title, size=None, samples=None, rotate=None):
     if rig.startswith(FIN) and 'glow' in s.get('lights', {}):
         del s['lights']['glow']
     shots.honest_lights(s)
-    if rig.startswith(FIN + 'turn/'):
-        _turn_flags(s)
+    # (the turn's side flags, _turn_flags, proved on 01/02/04/05, 2026-11-03: no change to the incoming face (01's back
+    # face 0.22 to 0.23 saturation; 04 0.29, 05 0.11 both ways) and a shadow band on the backdrop's left edge (210 to
+    # 162). At 75 deg the face's mirror ray runs nearly along the camera's line, onto the backdrop beside the speaker,
+    # in frame, where no out-of-frame flag reaches. Not applied)
     s['title'] = title
     if size:
         s['size'] = size

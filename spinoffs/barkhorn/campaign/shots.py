@@ -356,6 +356,15 @@ def _hero_gate3(s):
     if 'edge' in L and L['edge'].get('power_w'):
         L['edge']['power_w'] = round(L['edge']['power_w'] / 3, 3)
     honest_lights(s)                                       # the owner's rule (horn to specular 1, kick and back unlinked)
+    if 'back' in L:                                        # as the site frames: unlinked, it lit the floor the face mirrors
+        L['back']['irradiance'] = 0.0
+    # (the honest proxy: the lower right face 0.38, mirroring the lit floor right of the speaker, and the lid's strip
+    # (101, 93, 87), its top mirroring the sweep at grazing. Staging, as a photographer would (the coordinator, 21:14):
+    # the speaker turned 6 deg toward the camera and the camera 0.15 m lower)
+    for blk in s['products']:
+        for i in blk['instances']:
+            i['rotate_z'] = i.get('rotate_z', 0.0) - 6.0
+    s['camera']['position'][2] = round(s['camera']['position'][2] - 0.15, 3)
     cards_out_of_frame(s)
     return s
 
@@ -437,7 +446,27 @@ def _row_gate3(s):
     return s
 
 
-SHOTS['deck-row'] = lambda: cards_out_of_frame(honest_lights(_row_gate3(deck_row())))
+def _row_turn(s, deg=-12.0):
+    """The row without its in-frame card (the coordinator's rule, 20:17): at -24 deg the right sides mirrored the white
+    sweep behind the row (Poison 0.84 to 0.25 without the card). The units turned more square to the camera, (a) of the
+    four options (the coordinator, 21:06), so the sides show less and mirror further round."""
+    for blk in s['products']:
+        for i in blk['instances']:
+            i['rotate_z'] = deg
+    return s
+
+
+def _row_sweep(s, color='#BDB9B3'):
+    """(d) of the row's four options (the coordinator, 21:06): (a), the units at -12 deg, washed the fronts (Ember's
+    saturation 0.76 to 0.60) without saving the sides. A darker sweep for the row: what the sides mirror is darker."""
+    s['set']['color'] = color
+    return s
+
+
+# (the proxies, 0.3 scale, right-side saturation Ember..Smoke: the in-frame card 0.96 .89 .87 .84 .72 .71 .01 .33; no card
+# .94 .80 .69 .25 .33 .19 .01 .05; (a) alone washed the fronts (Ember 0.76 to 0.60); (d) alone, the sides .32 .39 .23 for
+# Poison, Ice, Haze; (a) and (d) together .53 .57 .51 .83 .83 .86 .06 .42, the fronts deep (whole Poison .55, Ice .53))
+SHOTS['deck-row'] = lambda: cards_out_of_frame(honest_lights(_row_turn(_row_sweep(_row_gate3(deck_row())))))
 
 
 def deck_cover():
@@ -482,6 +511,10 @@ def deck_cover():
         L['smoke'].update(target=[sm[0], sm[1], 0.5], spread_deg=30)
     if 'strip' in L:
         L['strip']['irradiance'] = 6.0
+    # (its proxy, 0.25 scale: the cyc, top and over lamps through glass, and the side lamps unlinked, lift the fronts by
+    # about a third and fill the long shadows; Dust's and Acid's tops clipped on 12 and 11 %. 0.3 stop down: 4 and 6 %,
+    # as before the rule, the fronts' saturation within 0.05 of it, the sweep 238)
+    s['render']['exposure'] = round(s['render'].get('exposure', 0.0) - 0.3, 2)
     return s
 
 
@@ -661,13 +694,14 @@ def _in_frame(s, pts):
     f /= np.linalg.norm(f); r = np.cross(f, [0.0, 0.0, 1.0]); r /= np.linalg.norm(r); u = np.cross(r, f)
     W, H = s['size']; lens = cam['lens_mm']
     hx, hy = (18.0, 18.0 * H / W) if W >= H else (18.0 * W / H, 18.0)
-    sx, sy = cam.get('shift_x', 0.0) * 2, cam.get('shift_y', 0.0) * 2
+    # (a lens shift moves the frame by up to a few per cent; the test is padded to 1.15 of the half-frame both ways
+    # rather than trusting the shift's sign and scale)
     for p in pts:
         d = np.array(p, float) - c; z = d @ f
         if z <= 0:
             continue
-        x = (d @ r) / z * lens / hx - sx; y = (d @ u) / z * lens / hy - sy
-        if abs(x) <= 1.02 and abs(y) <= 1.02:
+        x = (d @ r) / z * lens / hx; y = (d @ u) / z * lens / hy
+        if abs(x) <= 1.15 and abs(y) <= 1.15:
             return True
     return False
 
@@ -694,6 +728,16 @@ def cards_out_of_frame(s, log=None):
     st = s.get('set', {}); out = []
     i0 = s['products'][0]['instances'][0]['position'] if s.get('products') else [0, 0, 0]
     depth = st.get('depth', 1e9) - 0.2; half_w = st.get('width', 1e9) / 2 - 0.2
+    # (the set's reflect-only `bounces`, white cards seen only in reflections, fall under the same rule: removed if in
+    # frame; they are not slid out, a bounce card's place is set by what it lights)
+    bk = []
+    for b in st.get('bounces', []):
+        if b.get('reflect_only') and _in_frame(s, _card_points(b)):
+            out.append(f"reflect-only bounce at {b['center_m']} in frame: removed")
+        else:
+            bk.append(b)
+    if 'bounces' in st:
+        st['bounces'] = bk
     keep = []
     for fl in st.get('flags', []):
         if not fl.get('reflect_only') or not _in_frame(s, _card_points(fl)):
