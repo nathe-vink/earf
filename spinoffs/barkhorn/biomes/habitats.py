@@ -37,7 +37,7 @@ SETS = {
     # cabinet sits in its own shadow (a near-black box). The key from the side, as in Dust (sun at 118, passed)
     # (the sun lamp at 1.5 deg is lost in the grass and hills: 6 deg as Dust's; the sky's own sun disk turned with it,
     # 248.3 -> 187.8, so the sky and the lamp agree and nothing bright sits behind the speaker)
-    'acid_b': {'product.instances.0.rotate_z': -2.0},   # 28 deg off the camera's line mirrored a wedge (crease 26.7)
+    'acid_b': {'product.instances.0.rotate_z': -8.0},   # 28 deg off mirrored a wedge (crease 26.7), 10 deg off 13.7: 4 deg, as Ice
     # the polished horn mirrors the bright sky in one wall as a pale wedge (half an X) when it's turned far from the
     # camera; turned to about 10 deg off the camera's line it reads clean, as Ice's does (front-on gives a symmetric X)
     'haze_b': {'product.instances.0.rotate_z': -5.0, 'sun.azimuth_deg': 100.0, 'sun.elevation_deg': 6.0, 'sky.rotation_deg': 187.8},
