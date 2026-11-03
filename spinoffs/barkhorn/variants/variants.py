@@ -81,14 +81,15 @@ WASH = dict(runs=[(24.0, 60.0, 24.0, 370.0), (536.0, 60.0, 536.0, 370.0), (60.0,
 # lining, which starts at z 50) and behind each port; `brace`: on the brace's top face (z 220), clear of the side linings,
 # the ribs and the back's bosses. (x0, y0, x1, y1) of each run, mm in the cabinet's frame. Fed from an external 24 V plug-in
 # supply through a panel connector in the back's cable gland (variants/BASES.md)
-BUILTIN = dict(floor=[(60.0, 360.0, 230.0, 360.0), (330.0, 360.0, 500.0, 360.0),   # split wide of the bottom rib's end, so the
-                      (50.0, 295.0, 160.0, 295.0), (400.0, 295.0, 510.0, 295.0)],      # batt's notch shows no strip (gate 2, 3)
+BUILTIN = dict(floor=[(60.0, 360.0, 230.0, 360.0), (330.0, 360.0, 500.0, 360.0)],  # split wide of the bottom rib's end, so the
+                      # batt's notch shows no strip (gate 2, 3); none behind the ports since gate 4: those lit the bays' clear
+                      # side walls, a blade of light on the floor beside the base and two bare bars seen through the side
                z_floor=20.0,
                # the brace runs on the brace's REAR member (y 311-339; its window is y 72-311, x 70-490, so the
                # earlier runs at y 250 / 300 stood over the open window: not buildable, the coordinator, gate 3), the
                # second run short of the back's bosses (x 102-138, 422-458 from y 327)
                brace=[(80.0, 318.0, 480.0, 318.0), (145.0, 332.0, 415.0, 332.0)], z_brace=220.0,
-               channel=(12.0, 7.0), wall=1.5, lens_t=1.0, lens_down=0.6, standoff=(6.0, 3.0))
+               channel=(12.0, 7.0), wall=1.5, lens_t=1.0, lens_down=3.0, standoff=(6.0, 3.0))   # the lens 3 below the rim (gate 4: no bare module from the side)
 # E's side light: each strip's centre x (left, right), its run in y, the centre's height; the film's rectangles on the
 # bay floors (x0, y0, x1, y1), clear of the bottom batt (x 180-380), and its thickness
 SIDELIGHT = dict(x=(32.0, 528.0), y=(45.0, 355.0), z=28.0, film=[(20.0, 44.0, 179.0, 379.0), (381.0, 44.0, 540.0, 379.0)], film_t=0.2)
