@@ -1994,3 +1994,19 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   close-up pair slipped ~15 min (its waiter matched "render_model.py" in its own next chain's command line and blocked; that chain
   killed). The satin close-up rendering now, polished right after (~8 min each), sent as it lands; then Smoke's horn with the
   light-path check, then the deck-hero proof on A.
+- 15:14 OWNER: "Can we do satin on the horn interior and polish on the exterior, or does that add build complexity? If so just go
+  polished." Saved verbatim first (README 0d8bdeb4). It does (the outside masked while the inside is blasted, the blast reaching evenly
+  into the narrowing throat: an extra masked step on every horn; polished needs none), so by the owner's rule THE HORN IS DECIDED:
+  POLISHED (roughness 0.05), replacing "satin outside" (03:00).
+- 15:14-15:15 sent: speaker lane (the spec from satin to polished in product.py, TINTS.md, BASES.md, citing the owner; does the inside
+  come off the press glossy or does the mould face need a step; finish the close-up pair, the polished one gated and shown as its own
+  item; for the roll-out A + polished: the SHA with lead-hf-pod and the spec, the split with Smoke's 5 site frames held for the
+  Smoke question, its own first chunks the deck after the framing proof; Smoke's horn and the light-path check after). Biomes lane
+  (every proxy and final polished; Ember unheld, polished, relit; Dust and Ice re-rendered polished, Ice bedded ~1 cm deeper, before
+  Acid; check no X or seam lines against bright sky). Brand lane (words-only: no light in or under the speaker, "on lit plinths",
+  satin to polished; flag pictures; nothing published, prices untouched). Site lane (words-only on r47-site-next, production held at
+  743be0cb; list the pictures with a lit plinth, uplight or satin horn, no swaps until the owner answers the uplit-pictures item).
+  My own deck (v68) words to follow (the ask's "on lit plinths", the base and horn lines), after the walkthrough moves on.
+- 15:16 walkthrough item 3 shown: the site's two uplit night pictures (scratchpad/walkthrough/03-site-uplit.jpg; the owner's own site
+  images, the speaker glowing on a lit plinth): keep them as styled mood shots, or replace them with the new no-light pictures (my
+  pick: replace; "technically possible trumps looks cool").
