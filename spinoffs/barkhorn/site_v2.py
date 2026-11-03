@@ -40,7 +40,7 @@ class Page:
         said = re.findall(r'\b(?:alt|title|content|aria-label)="([^"]*)"', page)    # words in attributes a visitor meets
         text = re.sub(r'<[^>]+>', ' ', page) + ' '.join(said)
         bad = re.findall(r"(?i)colour|enquir|stockist|microfibre|something in the air|eight things in the air|oldest amplifier"
-                         r"|amplifier(?:&rsquo;|\u2019|')s job|pool of its own light|light pools", text)
+                         r"|amplifier(?:&rsquo;|\u2019|')s job|pool of its own light|light pools|light under it|on a light|on lights|lit from below|satin", text)
         assert not bad, ('site_v2: retired words', sorted(set(b.lower() for b in bad)))
 
     def done(self):
@@ -83,11 +83,11 @@ def pairings(p):
 def particulars(p):
     """Horn A (the speaker lane, bea94882): its row in Tropos's particulars; the weight pending until the build reruns
     (the formed horn is about 1.3 kg lighter, an estimate, and the footing is reopened)."""
-    horn = 'A smooth horn thermoformed from 10 mm cast acrylic in the speaker&rsquo;s own color, satin outside, its air path polished, on four bronze posts'
+    horn = 'A smooth horn thermoformed from 10 mm cast acrylic in the speaker&rsquo;s own color, polished inside and out, on four bronze posts'
     for old, new, at_least in (("The same tinted cast acrylic as its cabinet; the cabinet&rsquo;s full depth", horn, 1),
                                ("About 72 kg; 62 kg with the horn lifted off", 'To follow with the final horn', 0),
                                ("['Weight', 'About 72 kg']", "['Weight', 'To follow with the final horn']", 1),
-                               ("['Horn', 'The same tinted acrylic as the cabinet']", "['Horn', 'Thermoformed cast acrylic, 10 mm, in the cabinet&rsquo;s color; satin outside']", 1),
+                               ("['Horn', 'The same tinted acrylic as the cabinet']", "['Horn', 'Thermoformed cast acrylic, 10 mm, in the cabinet&rsquo;s color; polished']", 1),
                                ("ask: 'Inquire about a pair'", "ask: 'Ask about a pair'", 0),
                                ("ask: 'Inquire',", "ask: 'Ask about it',", 0)):
         n = p.rest.count(old)
@@ -117,6 +117,27 @@ def no_light_down(p):
     m = re.search(r'<li><figure><img src="img/tt-violet-dusk-1200\.jpg".*?</li>', p.rest, re.S)   # the press kit's (held) copy
     if m:
         p.rest = p.rest[:m.start()] + p.rest[m.end():]
+
+
+def no_base_light(p):
+    """The owner (2026-11-03): Tropos stands on its own feet, no light in it or under it. The words that say otherwise
+    go; the pictures that show the uplight stay as stand-ins until the owner says whether they stay as styled mood shots,
+    and their alt text still says what they show, without calling it a light under the speaker."""
+    n = 0
+    for k, num, name, *_ in CLOUDS_:
+        old = f'alt="{name} standing on a light, its color thrown up the wall behind it"'
+        n += p.rest.count(old)
+        p.rest = p.rest.replace(old, f'alt="{name} at night before a concrete wall, its color on the wall behind it"')
+    assert n >= 8, ('site_v2: the light stage alts', n)
+    p.sub("['reel', 'Lit from below', c => `${c.name} on a light, its color thrown up the wall behind it.`]",
+          "['reel', 'At night', c => `${c.name} at night, before a concrete wall.`]")
+    p.sub('alt="A concrete wall by a river at night, the eight standing along its foot on lights, their colors washing up the wall and running into one another"',
+          'alt="A concrete wall by a river at night, the eight along its foot, their colors on the wall and running into one another"')
+    p.rest = p.rest.replace('The eight on lights at the foot of a concrete wall by a river at night',
+                            'The eight at the foot of a concrete wall by a river at night')
+
+
+CLOUDS_ = []
 
 
 def words(p):
@@ -247,9 +268,9 @@ def light(p):
     in print: the uplit eight, with the eight names and lines beneath."""
     # the explainer and the number go; the section's line stays, small, at the top of the frame
     p.sub('<div class="wrap light-head"><p class="eyebrow">Lit from below</p><h2>Put a light under it.</h2><p>Cast acrylic carries light to its edges, so a lamp underneath fills the whole cabinet with color.</p></div>',
-          '<i class="anchor" id="colors"></i><div class="wrap light-head"><h2 class="vh">Put a light under it.</h2></div>')
+          '<i class="anchor" id="colors"></i><div class="wrap light-head"><h2 class="vh">After dark</h2></div>')
     p.sub('<div class="light-intro"><p class="eyebrow">Lit from below</p><h2>Put a light under it.</h2><p>Cast acrylic carries light to its edges, so a lamp underneath fills the whole cabinet with color.</p></div>',
-          '<div class="light-intro"><p class="light-kicker" aria-hidden="true">Put a light under it.</p></div>')
+          '<div class="light-intro"><p class="light-kicker" aria-hidden="true"></p></div>')
     p.sub('<p class="num" id="light-num">Tropos 01</p>', '<p class="num" id="light-num" hidden>Tropos 01</p>')
     # snap points, one per color, then the eight
     snaps = ''.join(f'<i class="snap" style="--s:{i}" aria-hidden="true"></i>' for i in range(8))
@@ -558,7 +579,7 @@ def share_words(web):
 def render_word(p):
     """'Render', quietly, once per picture: the hero, Sound, the habitats and the room carry it in their captions
     (above); here the light stage, the uplit eight and the lines' tiles. The footer says it once for the site."""
-    p.sub('<p class="light-kicker" aria-hidden="true">Put a light under it.</p>', '<p class="light-kicker" aria-hidden="true">Put a light under it.</p><i class="render on-dark">Render</i>')
+    p.sub('<p class="light-kicker" aria-hidden="true"></p>', '<p class="light-kicker" aria-hidden="true"></p><i class="render on-dark">Render</i>')
     p.sub('<i class="snap-eight" aria-hidden="true"></i>', '<i class="snap-eight" aria-hidden="true"></i><i class="render on-dark eight-render">Render</i>')
     for line in ('A powered horn loudspeaker.', 'A pendant and a table lamp.', 'A turntable in cast acrylic.'):
         p.sub(f'<span class="t-line">{line}</span>', f'<span class="t-line">{line} <i class="render">Render</i></span>')
@@ -595,6 +616,8 @@ def apply(web, head, rest):
         particulars(p)
         horn_words(p)
         no_light_down(p)
+        CLOUDS_[:] = web.CLOUDS
+        no_base_light(p)
         words(p)
         kit(p)
         tokens(p, web)
