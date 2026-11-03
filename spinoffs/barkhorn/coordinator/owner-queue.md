@@ -1313,7 +1313,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   dim), Hemisphere Ice night 1/3 (all notes pass, the mouth's glow included, but the teal drift and its light lands nowhere).
   The lane's own critics had passed core-ice-night at 7.0: the blind gate is stricter. Crops: scratchpad/critic-crops/,
   scratchpad/blind-gate2-crops/.
-- 09:30 fixes sent. Mantle g2: reflector perimeter on the lit core (edges dark), no inset outline (tint full-bleed or the border
+- 09:26 fixes sent (the messages said 09:30: written before checking the clock). Mantle g2: reflector perimeter on the lit core (edges dark), no inset outline (tint full-bleed or the border
   printed black), the top carries the glow, the night key killed, the day glint out; all three frames again. Lamps: the teal is
   real (2700 K through blue): test 2700/3000/3500/4000 K and take the lowest that holds Ice within ~10 degrees (the speakers'
   light is already 4000 K "so each tint shows its own colour"), a proposal in the BOM, and a table of every tint's lit hue;
