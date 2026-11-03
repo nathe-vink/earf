@@ -2928,4 +2928,4 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   saturation 0.42 milky; 0.25: 93, 0.49; 0.08: 56, 0.67); at 0.07 the left cabinet's mean 56 (v1 18, v2 51), near-black 45 % (the ribs and
   gaps), the linings saturated red (0.67, ~204/68/73), the floor beside the base 48 (v1 40: an even lift, no pool); the spots, Mother's spot and
   clamp 4 kept, the woofer glints gone. Next, it says, shop v3 and window v3 with one window-bay setup (my 19:11 note puts listening v4 first).
-- 19:20 my gate on r44-lantern v3 (wf_761ff194-8bf; v1 and the older picture as context) started.
+- 19:19 my gate on r44-lantern v3 (wf_761ff194-8bf; v1 and the older picture as context) started.
