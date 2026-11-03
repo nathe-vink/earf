@@ -2582,3 +2582,26 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   sheet's colour unchanged); the left face quieted (a few degrees toward the front, or the sun higher or more frontal); the lip, the
   rock; Acid's horn checked the same way before its final; the measurements to me if the X stays. A Fog proxy at its next gap; the
   final after its queue or sooner.
+- 17:53 Smoke target v2 gate wf_99e55ef5-a1c (3 critics, ~30 min): HOLD 3/3 (test 5; two also on not-cheap or technically-possible).
+  All three: the cabinet answers "Smoke should be more transparent", clearly better than 2064 at phone size (the lining, woofer,
+  ports, braces read; the sides see-through grey, not a black mirror); grounded; light off. The horn still reads as a paler,
+  different glass: v1 to v2 ~dE 5, invisible at phone size; the polished lip a white bezel with a black inner line; the tabs black
+  plastic clips (cores ~20-35, no bronze). They split on the cure (deepen ~3x the step; don't deepen, flag the lip; re-render with
+  honest filtering). One technical fail: the posts through the horn wall at open-air brightness. My crop (scratchpad
+  smoke-target/crop-horn-3up.jpg) confirms it: v2's posts stay gold behind the horn's lower wall (~192,166,100 vs 182,152,90 in
+  open air) where Ice's go dark blue; the body shows the 236 wall at ~185, ~58 % linear where 38 % predicts ~150. So: physics first.
+  The lining doubt is answered by the lane's 15:52 check (0.348 vs 0.295 predicted, bounces the rest; L ~210 predicted, 214 shown).
+- 17:55 Mantle C3b night gate wf_62f13455-efb (3 critics, ~23 min): C3b night SHOW 3/3; C3 day SHOW 3/3 as its pair; C3 night HOLD 3/3
+  (its red lines, fixed in C3b); A night HOLD 2/3 (a faint red line inside the back-right border; an even, panel-like field). Polish:
+  the day from the C3b build (two critics); a small red tick right of the tonearm pillar (all three night renders); one critic: the
+  pillar, lift post and arm-board disc get no red (10,16,28), so the field acts like paint, not light; faint arcs in front of the
+  platter; optional a cool strip catch on the ring. Residual risk for the owner: at night the ring, edges and base read gloss black,
+  the Ember only in the lit field.
+- 17:57 sent to the speaker lane (Smoke v3): fix the horn material to its stated 38 % (posts behind the wall ~117 from 182; the body
+  ~150 against 236), measured at proxy size, no further notch ("as deep as the cabinet"); the roll-out's polished horns confirmed
+  unaffected; the lip by black flags only the lip sees, the same on a 2064 re-render; the tabs' insert warm bronze through the smoke,
+  the build as is (the shorter or smoked insert to the owner with the pod proposals); the 15:52 lining numbers in NOTES.md; the
+  caption kept. The check and a proxy at its next gap; v3 and 2064 after chunk 4 unless sooner.
+- 17:57 sent to the Mantle lane: the day from the C3b build; the red tick removed; the field's emission counted as indirect light (the
+  pillar base and the platter's underside a little red, none on the floor), or the numbers if it already is; the arcs checked; an
+  optional cool strip catch on the ring; the centre feed and the set (navy ambient) kept for a fair A comparison; full SHAs.
