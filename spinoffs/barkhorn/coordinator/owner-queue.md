@@ -1645,3 +1645,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   supplier's chart must be checked. E being built at bb0b27eb162366e6c374586085b05b1af1c50b8a (side strips x 32/528, y 45-355, z 28,
   45 degrees up and out; a white film on the bays' bare floor; the brace runs on the rear member, y 318 and 332); the model rebuilding,
   then two E-night proxies (wall 14 cm and 0.75 m). Gate wf_e7fbd2d6-f92 on the Smoke day trio (A as context) started 12:26.
+- 12:29 gate wf_329e2471-34a on the withdrawn Dust: HOLD (grounded fails: a 14-15 px float over "four chips", the feet bug). Notes sent
+  12:30 for the re-render: the tumbleweed floats too; the driver behind the satin throat reads as a sooty halo (light the horn from the
+  front or side); a faint X of wall shading at 1x (lift the bottom wall with sand bounce); Dust reads red-orange (~19-20 degrees): the
+  honest 20 mm hue to be stated. The horn as "a peach satin shell, paler and chalkier than the cabinet" is the satin spec (evidence for
+  the horn-finish question).
