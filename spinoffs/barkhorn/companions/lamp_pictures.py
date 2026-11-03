@@ -319,9 +319,8 @@ def build(frame, samples, scale):
     bpy.context.scene.cycles.caustics_refractive = True
     if night and prod == 'core':   # round 8: rare bright caustic paths speckled the frost (the denoiser blotched them)
         bpy.context.scene.cycles.sample_clamp_indirect = 100.0; bpy.context.scene.cycles.blur_glossy = 1.0
-        # round 9: through two clear balls the denoiser's albedo and normal guides are noise themselves; at 1024
-        # samples they drew a crumpled net over the core. The colour alone is clean enough to denoise
-        bpy.context.scene.cycles.denoising_input_passes = 'RGB'
+        # (round 9: the crumpled net was caustic noise, the core lit through its own shell; with the core open at its
+        # base the default guides are clean again)
     SC.camera(cam[0], cam[1], lens=cam[2], fstop=5.6)
     os.makedirs(OUT, exist_ok=True)
     out = os.environ.get('LAMP_OUT') or os.path.join(OUT, frame + '.png')
