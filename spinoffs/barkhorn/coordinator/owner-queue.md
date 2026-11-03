@@ -1375,3 +1375,13 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   past the rib: the run is split round the rib (model rebuilding, ~20 min). Can't fix by render: the edge glow of the clear caldera
   rings and the polished cabinet edges (the "neon tube") is real acrylic; masking or frosting edges is a cabinet change, the owner's
   call, flagged if it remains. Then a D-night proxy with numbers, then D night and Smoke-D black and white.
+- 10:14 Mantle g2 gate wf_e731b155-c40 (3 critics, 18 min): DAY Ember SHOW 3/3. Nights HOLD 3/3: the underglow fixed (floor and
+  base identical in Ember and Poison, even 6x brightened) but notes 3 and 5 fail: Ember a red stripe along the front face under a
+  black hairline (the skin's edge glowing, likely the 5.6 mm skin acting as a light guide), Poison a lime band inside the rim at
+  1.5-1.75x the field; both tops a flat near-pure on-screen primary (Ember R190-205 G12-20, Poison G68-77) with no reflection or
+  depth ("an LED panel / screen"); a studio-lamp pool on the floor under the right corner (identical in both: not the product, but
+  where an underglow would be); the right side face washed grey; the base and posts unreadable.
+- 10:16 sent g3 fixes: blacken or cover the skin's edges (price it); grade the dots so the field falls off to the rim; derive the
+  glow colour from the LED's spectrum through 5.6 mm of each tint (state the CCT), half to one stop down; the speaker lane's new
+  night set (wall behind, dark glossy floor, low navy ambient) for real reflections; the corner pool removed; a rim or ambient so
+  the object reads. Day kept (optional polish). Mantle goes to the owner only as a pair.
