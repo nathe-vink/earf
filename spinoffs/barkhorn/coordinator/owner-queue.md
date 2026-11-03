@@ -3216,3 +3216,19 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   To the bar lane: shop v3's five fixes (the key down 1-1.5 stops on the cabinets and off axis, targets R 150-190, G/B < 30, falloff, check
   the view transform; soften the horn streaks; the last ghost; the floor pink; the table corner and contact shadow) into shop v4 with
   kit43's strips; order listening v4, r44 v4, shop v4, window v4.
+- 20:31 biomes lane (Haze, at 3bf4f46e0d00d909a8175d438f14286021fbcd56): the sun to a three-quarter back position (azimuth 135, through the
+  right wall, as in Dust; the sky's disk and HDRI turned with it, out of frame; no fill, no material change); the real flag behind the camera
+  8x6 to 4x3 m for an honest sheen; lens rise -0.13 (the horn top 46 % to ~33 %). Tints: the cabinet asset 28.1 % through 20 mm (Y; hue 270)
+  against the spec's 25.8 %; the horn #4512D0 as specified (TINTS.md: horn 263 against cabinet 259). The blue mark and the faint X to be
+  traced on the proxy. Queue: Fog final, Poison diagnosis (3), Haze A/B, Acid proxy, then this Haze proxy with the numbers; then finals.
+- 20:31 speaker lane: the hero's full render stopped at 19:49 (PIDs 16611, 16614; nothing written). deck-home-portrait uses the room's rig
+  (clean; no honest_lights needed). The turn flags are NOT in 3b1fed96 but in e81c1a4afb1edeb4d0863c903b9de4904834b3ea (pushed, unproved: two
+  real black flags 0.8 x 1.1 m, z 0.55-1.65, 1.5 m beyond the speaker each side, 30 degrees off axis, casting shadows), with the cover's
+  re-light (unlinked; smoke on a 30-degree grid aimed at Smoke; strip 70 to 6), unproved. The floor patch goes: after the honest
+  A-ice-polished (full size, 64 samples, started 20:05, due ~20:38), tall Ice and Ember three ways (no patch; kick at half; kick on a
+  25-degree honeycomb grid), then the SHA. Then the turn flags on 01 and 05 and inside-ice's pull-back (the amp-bay board a frozen model
+  change: to look first), the hero re-proxy, cover proxy, back, hero-light.
+- 20:32 sent to c3: deck-home-portrait alone now on 1e79f362 (merge, regenerate fix1, run only the portrait's line from chunk 2's queue),
+  then wait for chunks 4 and 5. To the speaker lane: the plan agreed (a honeycomb grid is a real control); chunk 2 becomes tall Ember and
+  Dust only; the amp bay a later proposal if a model change. To the biomes lane: the Haze cabinet at spec (25.8 %) unless 28.1 % is the
+  same material on another measure.
