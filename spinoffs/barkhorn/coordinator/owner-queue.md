@@ -1004,3 +1004,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   session (idle, its Smoke render held for the owner's own go typed there): briefed with the owner's words; prepare the worlds to look
   amazing with a stand-in speaker (modeled foreground ground under every speaker, joins, light), blind critics, bar 8, a plan and time;
   no speaker finals until the final model. Asked the owner to type "go" in the biomes session for the held Smoke render.
+- 03:15 biomes lane: will not start on a relayed go (its user's stop covered the whole session, not only Smoke); starts the moment the
+  owner types go in that session. Plan: (1) modeled near-field ground under each speaker (~6 m disc, 4k scan textures with displacement:
+  Ember crusted pahoehoe, Dust rippled sand, Acid wet basalt, Poison duff and moss, Ice wind-packed snow, Haze dry grass, Fog lichen rock,
+  Smoke wet asphalt; true contact shadows, feet sunk 5-10 mm, tint bounce); (2) per-habitat proofs with blind critics; (3) the panorama
+  and planet rebuilt on those foregrounds, joins along physical dividers. Time: grounds and proofs 6-8 h; finals with the final speaker
+  (8 habitats x 2 frames, ~128 samples) 8-10 h; panorama ~4 h + 2.5 h render; planet ~2 h; 2-3 working days (helpers would halve the
+  render share). Bar 8: habitats likely 7-7.5 (8 possible for Ember, Fog, Acid); the panorama format capped near 6.5-7. Reaching 8 across
+  the board needs more samples, Megascans-class scanned assets (not only CC0) and a hero lighting pass per speaker with retouching.
