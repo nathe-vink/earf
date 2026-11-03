@@ -2288,3 +2288,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   inventory workflow wf_314ae1f9-899: 4 of 5 sweeps back (log-1 49 items, log-2 78, notes 64, board 44), the lanes sweep running,
   then merge, two checks and the final pass. Gates running: Dust polished (wf_be9b18c7-951), the Smoke target (wf_39a2255a-4e0), the
   lamps round 8 (wf_4f3c151b-a95). Re-armed for 16:46 as #45 with the current state.
+- 15:56 speaker lane: the deck-hero framing proof at 9832ee2b9314fcbe5db900b7fd34a7139a5f8cc3 (renders/2026-11-03/barkhorn/deck-hero-proof/
+  deck-hero-proof.png; A + polished, Ember, 2:3, 720 x 1080, 32 samples, gate 2's A camera and studio): the whole speaker in frame,
+  headroom above the horn, floor below, a little right of centre, the key's streak at lower left; the polished horn red glass with the
+  pod and posts through it; at 2:3 the 4:5 frame gains sky and floor, crops nothing. Chunk 2 (the deck row) rendering.
+- 15:57 my look at the proof: framing right. Sent: confirmed; chunk 1 (the hero) straight after chunk 2, then 3 and 4.
