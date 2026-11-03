@@ -1919,3 +1919,18 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   edge noted for Haze's final.
 - 14:46 biomes lane: my Haze message reached it ~2 min after Fog started; Fog (sun -150 against the camera's -15) killed by PID at
   14:45; its side-sun proxy (110) queued after Haze's, then Poison's. Committed 881625f785cfd321679e455045469e45937f64ec.
+- 14:46 D night v2 gate wf_813317a4-ff8 (3 critics, 26 min): 1 SHOW, 2 HOLD, so not yet. All three: honest in the main (the light
+  inside and rising, the batts' undersides brightest; no underglow; see-through; grounded; the batt there, the violet dot gone; no
+  LED lines; premium at phone size). Test 4 fails as expected and far (no wall fan: the wall ~1.0x beside the cabinet vs the blue
+  site image's ~2.7x; "about halfway to the black site image, nowhere near the blue one"). The holds: a hard shadow of the horn and
+  cabinet on the wall at the right shoulder ("a second speaker"); a fill-lit blue studio rather than a lamp in a dark room (floor L 46,
+  wall 39; the refs' floor 12-19, a near-white core 5.5-8x the wall); a blade of blue light on the floor right of the base (one
+  critic: the base strip through the clear side of the bottom chamber); the horn a dead navy lid darker than the wall; warm peach
+  disks in the ports' floor reflections (the only warm colour, under the speaker); stray rods and a glint behind the right rear
+  corner (not in the day frame); the wall beside the lit side panel the darkest (unphysical); the brace bar's white sliver and two
+  white bars in the bottom chamber (LED-module cues).
+- 14:46 sent to the speaker lane as item 4 (after the close-ups, the Smoke frame and the deck-hero proof; needed only on "lantern"):
+  the seven fixes (one soft re-aimed room light, no outline beside the speaker; floor ~15-20, wall ~25, the core's p90 ~200 unclipped;
+  the glow's physical wash on the wall, the floor blade fixed in the design (shield or mask, noted in BASES.md); the horn modelled
+  by the soft fill, its lip's lantern blue kept; the port reflections matched and the ports as clear Ice tubes; the rods gone; the
+  brace sliver and bottom bars tamed), proxy first, with the measures.
