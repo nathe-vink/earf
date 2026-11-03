@@ -1760,3 +1760,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   a 1-3 px contact crease and slight sand bedding along the right half of the base; a tiny glint on the crossover box corner. To tell the
   owner: under the low sun Dust reads red-orange (16-22 degrees, honest), and the satin horn reads paler and peachier than the cabinet
   (the same hue): evidence for the horn-finish question. Sent to the owner as a sample (6b2c1243).
+- 13:45 biomes lane (its message said 13:47): Acid (3 of 7) failed its own gate on grounded only (it stood ON the puddle's water, so a
+  pale band of reflected sky sat between the bottom edge and its reflection); fix: 18 mm into the water (3f6f91a4), re-render after the
+  chain. Poison rendering; the Ember relight proxies half done.
