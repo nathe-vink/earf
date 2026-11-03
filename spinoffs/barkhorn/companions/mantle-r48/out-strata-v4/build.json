@@ -1,0 +1,25 @@
+{
+ "product": "mantle-strata-v4",
+ "title": "Mantle: Strata Float v4, the lit deck (proposal A)",
+ "parts": 53,
+ "seconds": 49,
+ "sheets": {
+  "trucast-tint-12.7": 1,
+  "trucast-clear-12.7": 1,
+  "trucast-tint-9.5": 1,
+  "trucast-clear-9.5": 1,
+  "trucast-tint-3": 1,
+  "aluminium-3": 1,
+  "brass-sheet-2": 1
+ },
+ "budget_usd": {
+  "cut": 229,
+  "buy": 2869,
+  "lathe": 763,
+  "cnc-mill": 47
+ },
+ "options_usd": {},
+ "checks_ok": true,
+ "drawings": "spinoffs/barkhorn/companions/mantle-r48/out-strata-v4/drawings/mantle-strata-v4-sheets.pdf",
+ "render": "spinoffs/barkhorn/companions/mantle-r48/out-strata-v4/render/mantle-strata-v4.glb"
+}

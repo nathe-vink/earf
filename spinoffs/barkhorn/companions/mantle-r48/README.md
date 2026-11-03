@@ -381,6 +381,60 @@ about 2.2 % through the 25.4 deck, so even lit from inside the deck reads as a b
 critic's "whole slab as a red lantern" needs the lighter deck of open question 8. It also asked for a red pool on the
 floor, which the owner has ruled out.
 
+## 13. Round 2: the deck as a lantern (2026-11-03)
+
+The coordinator, on section 12: "Neon outlines on a black slab aren't what the owner means." At night the whole deck
+should glow evenly in its color, like a lantern. It should have no outline, no inset line and no floor pool, and it
+should stay good by day. All of this is a proposal until the owner signs.
+
+### (a) v4, the lit deck (`mantle_strata_v4.py`, `out-strata-v4/`; v3 stays as it was)
+
+| layer | what |
+|---|---|
+| top, 3 | the flavor's stock tint, through: a thin skin, as Tropos's color sits over its white lining |
+| core, 9.5 + 12.7 | two clear inlays, each cemented edge to edge into a 10 wide ring of the same tint, so the deck's edge reads tinted all round; together a 22.2 light guide |
+| the core's underside | screen-printed white dots, about 10 % cover near the strip rising to about 70 % at 140 in (graded, as a backlight's guide is, so the glow is even), then overprinted black; the print runs over the posts' seats |
+| the strip | in a 7.4 x 7 groove routed into the core from below, 11.5 in from the deck's edge (just inside the ring), on its black U-channel, facing up under a bead-blasted ceiling |
+| the holes' walls | the bearing, the arm's bore, the motor pocket and the puck screws, painted white toward the acrylic, then black |
+
+- **How it works.** The light spreads through the clear core and scatters off the dots. It leaves up through the 3 mm
+  skin, so the deck glows in its color all over, from within. The black overprint and the channel's floor keep all
+  of it out of the gap and off the shelf.
+- **Overall** the deck is 25.2 mm (3 + 9.5 + 12.7), about 25.4 with its bond lines, as before.
+- **Bonding.** The rings and the inlays are cemented edge to edge (ACRIFIX 2R 0190). The top is cemented over both
+  in a vacuum press. The print stays on the core's underside, not in a bond line.
+- **The float's look.** From above, the deck no longer shows what is under it. The bearing and the motor are hidden
+  by the print, though in stock Ember they barely showed before. The float seen from the side, through the gap, is
+  unchanged: the posts, the motor's can and the S2.
+- **By day** the deck reads as colored glass over white, not black glass. Tropos does the same with its colors F.
+  This is the owner's parked question ("should its deck read like the speakers' green glass?").
+- **Tried first.**
+  - 12.7 of stock tint over a 12.7 core passed too little. The glow left by the edges, as a line at the bond.
+  - A strip on the base's top facing up showed through the gap as a bright line (section 12).
+
+| | (a) v4 |
+|---|---|
+| power | the same strip, about 1.50 m at 4 W/m: about 6.0 W (7.5 W at most at 5 W/m), on its own listed Class 2 12 W adapter (unchanged; the phono stage has its own) |
+| heat | as section 12: about 10-15 K over the room at the channel (an estimate); a thermocouple on the first sample |
+| cost per unit | about +$120-150 over v3 (estimates): the sheets (a clear 12.7 and 9.5 and a tinted 3 in place of a tinted 12.7) about +$57 in the parts list; cementing two rings to their inlays about +$40; the screen print and its black overprint about +$20-30 a unit, plus about $150 for the screen; painting the holes about +$10 |
+| the deck needs | the rings and inlays, the print, the painted holes, the groove in the core; the satin edge as before |
+| the base needs | nothing |
+
+### (b) a lighter deck pour, as a comparison (open question 8; a custom batch, the owner's yes needed)
+
+v3's edge-lit deck, its two 12.7 sheets in Ember 2423's hue poured to about 40 % TT per 1/2 in (scene.py `ember-40`,
+#F5A0AB after 10 mm). The cost is the estimate of 2026-11-02 (the Poison reconcile): a custom 12.7 run is about $12.5k at the pour's minimum,
+for about 90 decks, about +$27 a deck.
+
+### The render (how the light is drawn)
+
+The guide's output is drawn as an even Lambertian glow just above the print: 9 W/m2. That figure follows from the
+strip's power, not from the picture: 6 W in, about 2.25 W of light, about 80 % into the core and 70 % out, over about
+0.136 m2. Cycles cannot sample the real path (a diffuse bounce inside glass, then glass, then the strip) in useful
+time. By day the room's light on the print is baked the same way, at the strength the albedos give, within about half a
+stop. The scene's face classification had read the meshes' own frame, which is Y-up, as the world's. It is fixed for
+v4's deck and left as it was for the frames already made.
+
 ## Open questions for the owner
 
 1. **A or B,** or B's cover on A's float. *(Answered 2026-11-01: A, Strata Float v3.)*

@@ -46,7 +46,8 @@ CUSTOM = {'ember-custom': '#F2A29C', 'ice-custom': '#B5D9EE', 'haze-custom': '#B
 # the line's stock tints since 2026-11-01 (the owner: "I like the darker colors"; r33-speaker-horn
 # spinoffs/barkhorn/asset/tints-trucast.json): each code's TruCast TT held at its own 1/2 in sheet, given as the color
 # after 10 mm (`strata_horn_deep`, horn_radius_m 0.01)
-STOCK_HELD = {'ember-2423': '#E02B3A', 'poison-2092': '#0DA41C', 'smoke-2074': '#787B7E', 'haze-2287': '#9C5DE3', 'ice-2069': '#B4DEFA'}
+STOCK_HELD = {'ember-40': '#F5A0AB',   # option (b), 2026-11-03: Ember 2423's hue poured to about 40 % TT per 1/2 in (a custom batch)
+              'ember-2423': '#E02B3A', 'poison-2092': '#0DA41C', 'smoke-2074': '#787B7E', 'haze-2287': '#9C5DE3', 'ice-2069': '#B4DEFA'}
 
 
 def sigma_tint(key):
@@ -127,13 +128,27 @@ def wear(nt, strength=1.0, scale=1.0):
     return sc.outputs[0], ds.outputs[0]
 
 
+GLASS_SHADOWS = False     # --glass-shadows (v4's lit deck): shadow rays pass flat acrylic, tinted by its volume
+
+
+def shadow_pass(nt, surf):
+    """Let shadow rays through flat glass (a plate does not focus light, so this stands in for the refractive caustic
+    Cycles cannot sample: the room's light reaching a white face inside the acrylic)."""
+    if not GLASS_SHADOWS:
+        return surf
+    lp = nt.nodes.new('ShaderNodeLightPath'); tr = nt.nodes.new('ShaderNodeBsdfTransparent')
+    mx = nt.nodes.new('ShaderNodeMixShader'); nt.links.new(lp.outputs['Is Shadow Ray'], mx.inputs['Fac'])
+    nt.links.new(surf, mx.inputs[1]); nt.links.new(tr.outputs['BSDF'], mx.inputs[2])
+    return mx.outputs['Shader']
+
+
 def acrylic(name, bands, tint, rough=0.004, wear_on=True, ring=None, edge_rough=0.010):
     """`bands`: [(z0, z1, 'tint'|'clear')] in metres. The material has slots: 0 glassy (cast faces), 1 polished edge,
     2 buffed tread, 3 machined satin, 4 bead-blasted (a frosted band). One node tree per slot, the volume shared."""
     st = sigma_tint(tint)
     D = max(st) * 1.0001
     mats = []
-    for slot, (r, wr) in enumerate(((rough, True), (edge_rough, False), (0.045, False), (0.07, False), (0.55, False))):   # bores vapor-polished
+    for slot, (r, wr) in enumerate(((rough, True), (edge_rough, False), (0.045, False), (0.07, False), (0.55, False), (0.0, False), (0.0, False))):   # bores vapor-polished
         m, nt, out = node_tree(f'{name}-{slot}')
         b = nt.nodes.new('ShaderNodeBsdfPrincipled')
         b.inputs['Base Color'].default_value = (1, 1, 1, 1)
@@ -154,6 +169,20 @@ def acrylic(name, bands, tint, rough=0.004, wear_on=True, ring=None, edge_rough=
             surf = mx.outputs['Shader']
         else:
             surf = b.outputs['BSDF']
+        if slot == 5:
+            # a cemented joint between two pieces of the same acrylic (v4's core under its top): index-matched, so a
+            # ray crosses it unbent; the pieces sit 0.05 apart in the model (coplanar faces render black). The volume
+            # below stays, so a ray that enters here is tinted as any other
+            tr = nt.nodes.new('ShaderNodeBsdfTransparent'); surf = tr.outputs['BSDF']
+        elif slot != 6:
+            surf = shadow_pass(nt, surf)
+        if slot == 6:
+            # v4: a hole's wall painted white toward the acrylic, black outside, so the lit deck's light stays in it
+            g_ = nt.nodes.new('ShaderNodeNewGeometry')
+            bk = nt.nodes.new('ShaderNodeBsdfDiffuse'); bk.inputs['Color'].default_value = (0.012, 0.012, 0.012, 1)
+            wh = nt.nodes.new('ShaderNodeBsdfDiffuse'); wh.inputs['Color'].default_value = (0.88, 0.88, 0.86, 1)
+            mx_ = nt.nodes.new('ShaderNodeMixShader'); nt.links.new(g_.outputs['Backfacing'], mx_.inputs['Fac'])
+            nt.links.new(bk.outputs['BSDF'], mx_.inputs[1]); nt.links.new(wh.outputs['BSDF'], mx_.inputs[2]); surf = mx_.outputs['Shader']
         nt.links.new(surf, out.inputs['Surface'])
         # the volume: absorption by height (the strata), as constant ramps: one says tinted or clear, one the band's
         # inset from the outline; with `ring`, a tinted lamina is tinted only within `ring` of its own edge
@@ -371,14 +400,137 @@ def make_label(path):
     im.save(path)
 
 
+def core_material(name, box, cover=(0.10, 0.70), ramp=0.14, glow=0.0, glow_col=(1.0, 0.55, 0.25)):
+    """v4's light guide (2026-11-03): clear cast acrylic, no tint. Slots: 0-2 clear faces (its top, under the tinted
+    top; its perimeter, cemented to the tinted ring), 3 painted walls (white toward the acrylic, black outside), 4 the
+    groove's bead-blasted ceiling, 5 its underside: a white dot print over a reflector, sparse near the edge (cover[0])
+    and dense inside (cover[1], reached `ramp` m in), overprinted black (seen from below). `box`: (x0, y0, x1, y1) of
+    the core in metres."""
+    mats = []
+    x0, y0, x1, y1 = box
+    cx, cy, hw, hd = (x0 + x1) / 2, (y0 + y1) / 2, (x1 - x0) / 2, (y1 - y0) / 2
+    for slot in range(6):
+        m, nt, out = node_tree(f'{name}-{slot}')
+        if slot in (0, 1):
+            tr = nt.nodes.new('ShaderNodeBsdfTransparent'); nt.links.new(tr.outputs['BSDF'], out.inputs['Surface'])
+            mats.append(m); continue
+        if slot in (2, 4):
+            b = nt.nodes.new('ShaderNodeBsdfPrincipled')
+            b.inputs['Base Color'].default_value = (1, 1, 1, 1); b.inputs['Transmission Weight'].default_value = 1.0
+            b.inputs['IOR'].default_value = 1.49; b.inputs['Roughness'].default_value = 0.55 if slot == 4 else 0.004
+            nt.links.new(shadow_pass(nt, b.outputs['BSDF']), out.inputs['Surface'])
+        else:
+            geo = nt.nodes.new('ShaderNodeNewGeometry')
+            black = nt.nodes.new('ShaderNodeBsdfDiffuse'); black.inputs['Color'].default_value = (0.012, 0.012, 0.012, 1)
+            white = nt.nodes.new('ShaderNodeBsdfDiffuse'); white.inputs['Color'].default_value = (0.88, 0.88, 0.86, 1)
+            inside = white.outputs['BSDF']
+            if slot == 5:
+                # between the dots: total internal reflection (the bare face over an air gap and a reflector), as a mirror
+                mir = nt.nodes.new('ShaderNodeBsdfGlossy'); mir.inputs['Roughness'].default_value = 0.02
+                mir.inputs['Color'].default_value = (0.96, 0.96, 0.96, 1)
+                sep = nt.nodes.new('ShaderNodeSeparateXYZ'); nt.links.new(geo.outputs['Position'], sep.inputs['Vector'])
+                def mth(op, a, bval=None, b_in=None):
+                    n_ = nt.nodes.new('ShaderNodeMath'); n_.operation = op
+                    if isinstance(a, float): n_.inputs[0].default_value = a
+                    else: nt.links.new(a, n_.inputs[0])
+                    if b_in is not None: nt.links.new(b_in, n_.inputs[1])
+                    elif bval is not None: n_.inputs[1].default_value = bval
+                    return n_.outputs[0]
+                dx = mth('SUBTRACT', hw, b_in=mth('ABSOLUTE', mth('SUBTRACT', sep.outputs['X'], cx)))
+                dy = mth('SUBTRACT', hd, b_in=mth('ABSOLUTE', mth('SUBTRACT', sep.outputs['Y'], cy)))
+                d = mth('MINIMUM', dx, b_in=dy)
+                fac = mth('ADD', mth('MULTIPLY', mth('MINIMUM', mth('DIVIDE', d, ramp), 1.0), cover[1] - cover[0]), cover[0])
+                dots = nt.nodes.new('ShaderNodeMixShader')
+                nt.links.new(fac, dots.inputs['Fac']); nt.links.new(mir.outputs['BSDF'], dots.inputs[1]); nt.links.new(white.outputs['BSDF'], dots.inputs[2])
+                inside = dots.outputs['Shader']
+                if glow > 0:
+                    # the guide's output: the strip's flux, once it has spread through the core and scattered off the dots,
+                    # leaves the print as an even Lambertian glow of `glow` W/m2 (the print is graded to make it even). Cycles
+                    # cannot sample the real path (a diffuse bounce, then glass, then the strip) in useful time, so the
+                    # print emits what the strip's power gives it: 6 W in, about 2.25 W of light, 80 % into the core, 70 %
+                    # out over 0.136 m2, about 9 W/m2
+                    em = nt.nodes.new('ShaderNodeEmission'); em.inputs['Color'].default_value = tuple(glow_col) + (1,)
+                    em.inputs['Strength'].default_value = glow
+                    ad = nt.nodes.new('ShaderNodeAddShader'); nt.links.new(inside, ad.inputs[0]); nt.links.new(em.outputs['Emission'], ad.inputs[1])
+                    inside = ad.outputs['Shader']
+                    # it emits into the core only (its back side; the face's normal points down and out)
+                    m.cycles.emission_sampling = 'BACK'
+            mx = nt.nodes.new('ShaderNodeMixShader')
+            nt.links.new(geo.outputs['Backfacing'], mx.inputs['Fac'])
+            nt.links.new(black.outputs['BSDF'], mx.inputs[1]); nt.links.new(inside, mx.inputs[2])
+            nt.links.new(mx.outputs['Shader'], out.inputs['Surface'])
+        mats.append(m)
+    return mats
+
+
+def core_glow_sheet(core, strength, col):
+    """The guide's output (see core_material): a copy of the print's faces 0.3 up inside the core, facing up,
+    transparent to rays and emitting upward only, so the opaque print under it keeps every path to the shelf dark."""
+    me = core.data
+    bm = bmesh.new(); bm.from_mesh(me)
+    bm.transform(core.matrix_world)
+    bm.normal_update()
+    keep = [f for f in bm.faces if f.material_index == 5]
+    bm2 = bmesh.new()
+    vmap = {}
+    for f in keep:
+        vs = []
+        for v in f.verts:
+            if v.index not in vmap:
+                vmap[v.index] = bm2.verts.new((v.co.x, v.co.y, v.co.z + 0.0003))
+            vs.append(vmap[v.index])
+        bm2.faces.new(list(reversed(vs)))
+    me2 = bpy.data.meshes.new('core-glow'); bm2.to_mesh(me2); bm.free(); bm2.free()
+    ob = bpy.data.objects.new('core-glow', me2); bpy.context.collection.objects.link(ob)
+    m, nt, out = node_tree('core-glow')
+    geo = nt.nodes.new('ShaderNodeNewGeometry')
+    tr = nt.nodes.new('ShaderNodeBsdfTransparent')
+    em = nt.nodes.new('ShaderNodeEmission'); em.inputs['Color'].default_value = tuple(col) + (1,); em.inputs['Strength'].default_value = strength
+    ad = nt.nodes.new('ShaderNodeAddShader'); nt.links.new(tr.outputs['BSDF'], ad.inputs[0]); nt.links.new(em.outputs['Emission'], ad.inputs[1])
+    mx = nt.nodes.new('ShaderNodeMixShader'); nt.links.new(geo.outputs['Backfacing'], mx.inputs['Fac'])
+    nt.links.new(ad.outputs['Shader'], mx.inputs[1]); nt.links.new(tr.outputs['BSDF'], mx.inputs[2])
+    nt.links.new(mx.outputs['Shader'], out.inputs['Surface'])
+    m.cycles.emission_sampling = 'FRONT'
+    me2.materials.append(m)
+    ob.visible_shadow = False
+    return ob
+
+
+def classify_core(obj):
+    me = obj.data
+    bm = bmesh.new(); bm.from_mesh(me)
+    bm.transform(obj.matrix_world)           # the world's frame (the mesh is Y-up)
+    bm.normal_update()
+    xs = [v.co.x for v in bm.verts]; ys = [v.co.y for v in bm.verts]; zs = [v.co.z for v in bm.verts]
+    x0, x1, y0, y1, ztop, zbot = min(xs), max(xs), min(ys), max(ys), max(zs), min(zs)
+    for f in bm.faces:
+        n = f.normal; c = f.calc_center_median()
+        if n.z > 0.7:
+            f.material_index = 0
+        elif n.z < -0.7:
+            # the underside and the posts' 2 mm seats printed (the print runs over the seats' floors); the groove's ceiling blasted
+            f.material_index = 4 if c.z - zbot > 0.004 else 5
+        else:
+            edge = min(c.x - x0, x1 - c.x, c.y - y0, y1 - c.y) < 0.0015
+            f.material_index = 1 if edge else 3
+    bm.transform(obj.matrix_world.inverted())
+    bm.to_mesh(me); bm.free()
+
+
 # ---------------------------------------------------------------- geometry helpers
-def classify_faces(obj, bands_inset, edge_band=0.0012, frost=None):
+def classify_faces(obj, bands_inset, edge_band=0.0012, frost=None, cavity=None, world=False):
     """Material slots by how a shop leaves each face: 0 the sheet's cast face (horizontal, on the very top), 1 a
     polished outer edge, 2 a buffed tread (horizontal, not the top), 3 machined (holes, pockets, grooves, undersides
     of cut-outs)."""
+    # `world`: classify in the world's frame. The importer leaves the meshes Y-up and turns them at the object, so the
+    # mesh's own z is the world's -y: without it, 'horizontal' here means facing front or back (found 2026-11-03; kept
+    # off for the frames already made, on for v4's lit deck)
     me = obj.data
     bm = bmesh.new(); bm.from_mesh(me)
     bm.faces.ensure_lookup_table()
+    if world:
+        bm.transform(obj.matrix_world)
+        bm.normal_update()
     xs = [v.co.x for v in bm.verts]; ys = [v.co.y for v in bm.verts]; zs = [v.co.z for v in bm.verts]
     x0, x1, y0, y1, ztop, zbot = min(xs), max(xs), min(ys), max(ys), max(zs), min(zs)
     cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
@@ -389,6 +541,8 @@ def classify_faces(obj, bands_inset, edge_band=0.0012, frost=None):
                 f.material_index = 0
             elif n.z < 0 and abs(c.z - zbot) < 1e-4:
                 f.material_index = 0
+            elif cavity and n.z < 0 and abs(c.z - cavity) < 3e-4:
+                f.material_index = 5          # v4: the joint over the core, cemented (index-matched)
             elif frost and n.z < 0 and abs(c.z - (zbot + frost)) < 1e-4:
                 f.material_index = 4          # the bead-blasted band over the light (Strata, 2026-11-03)
             else:
@@ -400,6 +554,12 @@ def classify_faces(obj, bands_inset, edge_band=0.0012, frost=None):
             outward = (c.x - cx) * n.x / max(abs(c.x - cx), 1e-6) * (abs(c.x - cx) > 0) + (c.y - cy) * n.y / max(abs(c.y - cy), 1e-6)
             near = min(dx, dy) < bands_inset + 0.003
             f.material_index = 1 if (near and outward > 0.2) else 3
+            if cavity and c.z < cavity and outward <= 0.2 and min(dx, dy) > 0.008:
+                f.material_index = 5      # v4: the ring's inner wall, cemented to the core
+            elif cavity and c.z > cavity and outward <= 0.2 and min(dx, dy) > 0.008:
+                f.material_index = 6      # v4: a hole's wall through the skin, painted
+    if world:
+        bm.transform(obj.matrix_world.inverted())
     bm.to_mesh(me); bm.free()
 
 
@@ -643,6 +803,8 @@ def hand(mats, at, yaw):
 
 # ---------------------------------------------------------------- the scene
 def build(args):
+    global GLASS_SHADOWS
+    GLASS_SHADOWS = bool(getattr(args, 'glass_shadows', False))
     bpy.ops.wm.read_factory_settings(use_empty=True)
     sc = bpy.context.scene
     model = os.path.join(HERE, args.model)
@@ -730,6 +892,10 @@ def build(args):
         nt_.links.new(em.outputs['Emission'], out_.inputs['Surface'])
         finish.update({'plinth-L1-stack': 'plinth', 'base-L1-stack': 'base', 'studs': 'steel', 'phono-pads': 'felt', 'hinges': 'arm',
                        'hinge-blocks': 'lid', 'led-strip': 'strip', 'led-channel': 'alu-black'})
+        if 'plinth-L1-core' in objs:
+            o0, rw_ = meta['P']['margin'] * mm, meta['P']['tint_ring'] * mm
+            M['core'] = core_material('core', (o0 + rw_, o0 + rw_, o0 + meta['W0'] * mm - rw_, o0 + meta['D0'] * mm - rw_))
+            finish['plinth-L1-core'] = 'core'
         for k in range(1, 5):
             finish[f'post-{k}'] = 'steel' if meta['P'].get('post_material') == 'stainless' else 'post'
         if meta['P'].get('post_material') == 'stainless':
@@ -743,6 +909,15 @@ def build(args):
         if (n.startswith('lid-') or n == 'hinges') and args.shot != 'closed':
             o.hide_render = True
         f = finish.get(n)
+        if f == 'core':
+            for m_ in M['core']:
+                o.data.materials.append(m_)
+            classify_core(o); o['caustic'] = True
+            if args.core_glow > 0:
+                core_glow_sheet(o, args.core_glow, tuple(args.strip_color))
+            for p in o.data.polygons:
+                p.use_smooth = False
+            continue
         if f in ('deck', 'cover', 'platter', 'plinth', 'base', 'lid', 'post'):
             for m in M[f]:
                 o.data.materials.append(m)
@@ -752,7 +927,9 @@ def build(args):
                 pass
             else:
                 classify_faces(o, (meta['o'] * mm if f in ('deck', 'plinth') else 0.0) + (0.03 if f == 'cover' else 0.0),
-                               frost=(meta['P'].get('frost_d', 0) * mm or None) if f == 'plinth' else None)
+                               frost=(meta['P'].get('frost_d', 0) * mm or None) if (f == 'plinth' and 'plinth-L1-core' not in objs) else None,
+                               cavity=(max(l['z1'] for l in meta['lams'] if l['kind'] == 'tint') * mm) if (f == 'plinth' and 'plinth-L1-core' in objs) else None,
+                               world=(f in ('plinth', 'base') and 'plinth-L1-core' in objs))
             for p in o.data.polygons:
                 p.use_smooth = False
             o['caustic'] = True
@@ -935,7 +1112,7 @@ def setup_world(args, meta):
     for o in bpy.data.objects:
         if o.type == 'MESH':
             o.visible_shadow = True
-            if o.get('caustic'):
+            if o.get('caustic') and not GLASS_SHADOWS:     # MNEE casters stop ordinary shadow rays
                 o.cycles.is_caustics_caster = True
             if o.get('receiver'):
                 o.cycles.is_caustics_receiver = True
@@ -980,7 +1157,11 @@ def setup_world(args, meta):
     cy_.device = 'CPU'; cy_.samples = args.samples; cy_.use_adaptive_sampling = True; cy_.adaptive_threshold = 0.01
     cy_.use_denoising = True; cy_.denoiser = 'OPENIMAGEDENOISE'
     cy_.max_bounces = 24; cy_.transmission_bounces = 24; cy_.glossy_bounces = 12; cy_.volume_bounces = 2
-    cy_.caustics_reflective = False; cy_.caustics_refractive = False
+    cy_.caustics_reflective = False; cy_.caustics_refractive = bool(args.caustics)
+    if args.caustics:
+        # v4's lit deck (2026-11-03): its light scatters off the dot print (diffuse) and reaches the eye through glass,
+        # a refractive caustic path; without these the print can never light up. Glossy filtering tames the noise
+        cy_.blur_glossy = 1.0
     cy_.sample_clamp_indirect = 8.0
     cy_.use_light_tree = True
     r.resolution_x = int(args.size[0] * args.scale); r.resolution_y = int(args.size[1] * args.scale)
@@ -1047,6 +1228,9 @@ if __name__ == '__main__':
     ap.add_argument('--tint-mode', default='stock', choices=('stock', 'wide', 'custom'))
     ap.add_argument('--front-strip', type=float, default=0.0)
     ap.add_argument('--edge-frost', type=float, default=0.0)
+    ap.add_argument('--caustics', action='store_true')
+    ap.add_argument('--glass-shadows', action='store_true')
+    ap.add_argument('--core-glow', type=float, default=0.0)
     ap.add_argument('--day', action='store_true'); ap.add_argument('--ambient', type=float, default=0.05)
     ap.add_argument('--base-tint', default='smoke')
     ap.add_argument('--strip-color', type=float, nargs=3, default=(1.0, 0.62, 0.30))
