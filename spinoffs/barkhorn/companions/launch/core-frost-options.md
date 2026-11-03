@@ -129,3 +129,17 @@ linear transmission against a neutral 0.93.
 with the same opal, so the pair stays one object.
 
 **To confirm:** the grade with the former. Opal acrylic comes in warm and cool whites [check the maker's range].
+
+**Two round-9 changes:**
+- **The core is open at its base:** a Ø40 opening over the window, seated on the grommet's ring. The LED lights the
+  frost directly, and the core glows evenly with no cone. Closed, every ray from the LED reached the frost only through
+  the core's polished shell.
+- **The printed dot over the LED** is modeled as a Ø64 ring round that opening, the frost passing about 40 % there.
+
+**Hue (in the full-scale pair):**
+| Frame | OKLCH | CIELAB | HSV |
+|---|---|---|---|
+| Day | 226° | 238° | 194° |
+| Night | 222° | 233° | 193° |
+
+The two frames are within 5° on all three.
