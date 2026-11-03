@@ -1791,3 +1791,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   a dense green in canopy shade, the shot's fills off because they lit the white lining). Fix under test by scene light: a sunfleck from
   the shot's own sun direction (azimuth -100, 42 degrees up, #FFE6B8, a 0.9 m patch) on the speaker's back-left, as through a canopy gap,
   passing through the green toward the camera; Poison re-renders after the chain. Ice rendering.
+- 14:10 satin vs polished gate wf_630f6086-2d5 (3 critics, 24 min): BOTH SHOW 3/3, a clean controlled pair (pixel-identical outside the
+  horn). All three: POLISHED wins on both counts: it reads as the same tinted glass as the cabinet (a sharp dark line inside the rim, the
+  thick throat boss darker, see-through: the glassy depth the owner misses) and brings back no X or white streak (only faint fine
+  crease lines and one soft diamond reflection); its honest cost: the driver, its rear body and two wire pairs show through (a dark
+  round shape with two lines; model the real cable routing before production pictures). SATIN reads as a separate opaque, painted-
+  looking part at phone size, with the only near-white streak of the pair (top-right corner into the throat). Caption by finish (the
+  satin file is named A-polish-ice.png). Side-by-side built: scratchpad/for-owner/horn-satin-vs-polished.jpg. The horn question goes
+  right after the base answer (one question at a time).
