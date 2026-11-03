@@ -148,6 +148,9 @@ def shadow_pass(nt, surf):
 NO_EDGE_BEVEL = False
 RING_WHITE = False
 RING_ALBEDO = 0.88
+RING_GLOSS = False
+RING_CLEAR = False
+NO_TOP_BEVEL = False
 
 
 def acrylic(name, bands, tint, rough=0.004, wear_on=True, ring=None, edge_rough=0.010, ar=None):
@@ -167,7 +170,7 @@ def acrylic(name, bands, tint, rough=0.004, wear_on=True, ring=None, edge_rough=
             # C gate 1: an anti-reflective coat on the cast faces (the deck's top), a thin film of `ar` = (nm, index); it
             # cuts the inner reflection that sends the dots' light back down through the clear gaps
             b.inputs['Thin Film Thickness'].default_value = ar[0]; b.inputs['Thin Film IOR'].default_value = ar[1]
-        if not (NO_EDGE_BEVEL and slot == 1):
+        if not (NO_EDGE_BEVEL and slot == 1) and not (NO_TOP_BEVEL and slot == 0 and name == 'plinth'):
             # C3 (--no-edge-bevel): the polished edges keep their true flat normal; the shader bevel's sampled normal
             # rippled their highlight ("chewed")
             bv = bevel(nt, 0.0005 if slot != 3 else 0.0003)
@@ -207,6 +210,10 @@ def acrylic(name, bands, tint, rough=0.004, wear_on=True, ring=None, edge_rough=
             bk = nt.nodes.new('ShaderNodeBsdfDiffuse'); bk.inputs['Color'].default_value = (0.012, 0.012, 0.012, 1)
             wv_ = RING_ALBEDO if (RING_WHITE and name == 'plinth') else 0.88
             wh = nt.nodes.new('ShaderNodeBsdfDiffuse'); wh.inputs['Color'].default_value = (wv_, wv_, wv_ * 0.98, 1)
+            if RING_GLOSS and name == 'plinth':
+                # C3 polish: the ring's side of the bond line polished black (a gloss black film), the field's side matte
+                wh = nt.nodes.new('ShaderNodeBsdfPrincipled'); wh.inputs['Base Color'].default_value = (0.008, 0.008, 0.008, 1)
+                wh.inputs['Roughness'].default_value = 0.05
             mx_ = nt.nodes.new('ShaderNodeMixShader'); nt.links.new(g_.outputs['Backfacing'], mx_.inputs['Fac'])
             nt.links.new(bk.outputs['BSDF'], mx_.inputs[1]); nt.links.new(wh.outputs['BSDF'], mx_.inputs[2]); surf = mx_.outputs['Shader']
         nt.links.new(surf, out.inputs['Surface'])
@@ -694,14 +701,14 @@ def classify_layer(obj, kind, clear_border=False, clear_ring=False):
                 # C3 (--clear-ring): the rings' undersides bare polished glass, so the border is clear tinted glass
         else:
             if kind == 'skinring':
-                f.material_index = 1 if de < 0.0015 else (6 if RING_WHITE else 8)      # C3: its outer edge polished, its inner edge the bond line
+                f.material_index = 1 if de < 0.0015 else (1 if RING_CLEAR else (6 if RING_WHITE else 8))      # C3: its outer edge polished, its inner edge the bond line
             elif de < 0.0015:
                 # gate 3: the skin's own edges painted black, so it cannot pipe light out as a stripe; the rings' satin
                 f.material_index = (8 if clear_ring else 7) if kind == 'skin' else 1
             elif kind == 'skin' and c.z - zbot < 0.0005:
                 f.material_index = 6      # the 0.02 step between the joint and the border print: part of the print
             else:
-                f.material_index = 6 if kind == 'skin' else ((6 if RING_WHITE else 8) if clear_ring else 7)
+                f.material_index = 6 if kind == 'skin' else ((1 if RING_CLEAR else (6 if RING_WHITE else 8)) if clear_ring else 7)
                 # C3 pair (--ring-white): the ring's inner faces painted white toward the ring, black toward the field,
                 # as the core's holes are: by day the room's light comes back through the tint, at night the glow is held
     bm.transform(obj.matrix_world.inverted())
@@ -1626,6 +1633,7 @@ if __name__ == '__main__':
     ap.add_argument('--clear-ring', action='store_true'); ap.add_argument('--no-edge-bevel', action='store_true')
     ap.add_argument('--edge-fade', type=float, default=0.0); ap.add_argument('--ring-white', action='store_true')
     ap.add_argument('--ring-albedo', type=float, default=0.88)
+    ap.add_argument('--ring-gloss', action='store_true'); ap.add_argument('--ring-clear', action='store_true'); ap.add_argument('--no-top-bevel', action='store_true')
     ap.add_argument('--matte-channel', action='store_true'); ap.add_argument('--label-near', action='store_true')
     ap.add_argument('--core-glow', type=float, default=0.0)
     ap.add_argument('--day', action='store_true'); ap.add_argument('--ambient', type=float, default=0.05)
@@ -1635,7 +1643,7 @@ if __name__ == '__main__':
     ap.add_argument('--crop', type=float, nargs=4, default=None)
     a = ap.parse_args(argv)
     NO_EDGE_BEVEL = a.no_edge_bevel
-    RING_WHITE = a.ring_white; RING_ALBEDO = a.ring_albedo
+    RING_WHITE = a.ring_white; RING_ALBEDO = a.ring_albedo; RING_GLOSS = a.ring_gloss; RING_CLEAR = a.ring_clear; NO_TOP_BEVEL = a.no_top_bevel
     build(a)
     if a.debug_emit:
         # debugging only: paint the named objects (prefix match) flat green, to find what a glint is

@@ -859,6 +859,26 @@ the parts list stays at $3,897.
 | `a5-night-ember-2423-c3d.png` | the C3 pair at night |
 | `a5-day-ember-2423-c3d.png` | the C3 pair by day, the same build |
 
+**The optional day polish (the coordinator, 19:37), tried on crops and not taken.** The pair stands as passed (night
+2/3, day 2/3). Each crop was rendered at 64 samples on the same camera and compared with C3d.
+
+- **The ring's inner faces polished black toward the ring** (`--ring-gloss`), or **polished clear with an air gap**
+  to the field's matte black edge (`--ring-clear`).
+  - By day both read as glassier: the ring less charcoal, the front face more even, and the pinstripe along the
+    field's edge gone.
+  - At night both add new edge light: a red line along the deck's lower front edge and an arc by the arm board,
+    up to 58 levels over C3d.
+  - Any reflective face inside the ring carries the glow that reaches the ring. The diffuse dark grey (10 %) is the
+    one finish that holds at night, and it is what draws the faint pinstripe by day.
+- **No shader bevel on the top faces** (`--no-top-bevel`): it adds no night light, but it does not remove the
+  pinstripe, so it is left out.
+- **The front face's charcoal-to-brick ramp, and the right face's grey-pink haze, are the optics, not a finish.** The
+  ring is clear tinted glass: through its faces you see down to the white studio floor below (bright) and up into the
+  dark ring top. The rings' outer edges are already polished (roughness 0.012). The bands are not visible layers; the
+  ring is tint throughout.
+- **The night "gaming" read**, black chassis and red field, stays as the coordinator's named residual risk. The set
+  is unchanged.
+
 ### The render (how the light is drawn)
 
 The guide's output is drawn as an even Lambertian glow just above the print: 9 W/m2. That figure follows from the
