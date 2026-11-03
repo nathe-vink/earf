@@ -3549,3 +3549,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 22:59 sent to the speaker lane: these results; the hypothesis that the wide frames' "white plate" is the same bottom edge from the wide
   angle (test first, one-lamp-off crops and a low card); one SHA with the flags for tall, side and wide, re-proved on tall Poison, side
   Ember and wide Ember; the remaining fix1 frames re-render on it.
+- 23:01 speaker lane: a second PLACEHOLDER SHA (e0d4f2f1..., "NOT real, DISREGARD") for hero-light and the amp plate, stamped 23:09 at a 23:01
+  queue time. Sent: no SHA until git returns it and it's checked on the remote; `date -u` first; the priority after that SHA is the
+  bottom-edge line and floor band and the flags (22:14, 22:44, 22:46, 22:59), with the row/hero/cover question.
