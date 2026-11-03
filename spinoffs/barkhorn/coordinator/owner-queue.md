@@ -2509,3 +2509,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 17:30 biomes lane (its message said 17:32): Haze's disk is a `sundisk` prop (an emitter, emit 18, at azimuth 160.5, 1.5 degrees up,
   296 m out); moved, not removed, to azimuth 100 and 6 degrees up (the sun lamp's position, out of frame) by a per-habitat prop modifier
   in habitats.py at 98916e051c6c6251d4660ed6e3699f359e0c60e8; to be confirmed in the Haze log and noted in CHECK.md.
+- 17:31 Mantle lane: the C3 night fix at dcc04d1e49cabab9c5833eb841f93022b6f94a72 (source f2c4f32c; a5-night-ember-2423-c3b.png, 1800 x 1200,
+  192 samples, the same camera; the day frame unchanged). Cause: the border frame's inner cut face drawn as glossy black lacquer,
+  mirroring the field's glow; fix: the bond lines (frame to field, rings to core) matte black, as index-matched black cement looks.
+  At 100 %: the back-left line gone (C3 37,26,36; C3b 21,25,35, the border's black); the front face's lower-edge line gone. The rest
+  matches C3 (base top 2.7 vs 4.7; spots 0/0; floor 6.1/4.8 vs 6.4/4.8; the platter foot 140; field 129; p10-p90 101-151). Cost
+  unchanged (~+$145-175 over v3; $3,897 parts). README section 13, "C3's night gate".
+- 17:32 my gate on C3b night (C3 day, the C3 night with the line, and A night as comparisons) started.
