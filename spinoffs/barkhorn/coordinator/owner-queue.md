@@ -2396,3 +2396,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   Next r44 from look 1's kit.
 - 16:34 my gate wf_0c7eee9d-d07 on r43-shop and r43-window (the old versions as context). Sent: r43-listening's re-stage first; shop
   and window held until this gate is back, re-staged only if they fail; r44 with the staging principle built in.
+- 16:43 helper c3: chunk 05 landed at r33-rollout-c3 c659ce9f85e25d8bd1d533dee4d1191c199b0f73 (renders/2026-11-04/barkhorn/rollout/A-polished/):
+  deck-home-portrait (1600 x 2000, 4.91 MB, 26.3 min), site-front-off-tall-ember (9.3 min), -dust (11.2 min); the chunk 15:53:54-16:42:24,
+  48.5 min against ~91 estimated. Chunk 06 (front-off-tall acid, poison, ice, haze, fog) started 16:43. My look at the home portrait:
+  the Poison pair on its own feet in room31's golden hour, polished horns, see-through green, a credenza and rug; a power lead to the
+  left speaker's wall outlet shows (honest for an active speaker). Gating plan: by sets as they complete (the deck set; each site
+  frame type across its seven tints).
