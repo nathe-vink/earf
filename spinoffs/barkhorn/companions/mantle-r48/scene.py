@@ -443,6 +443,10 @@ def radial_cover(nt, geo, radial, parts=False):
         # C gate 2: the glow rises from the platter's foot over `rise` m (from 55 %), so its peak sits clear of the foot
         rise = mth('MINIMUM', mth('ADD', mth('MULTIPLY', mth('MAXIMUM', mth('SUBTRACT', r, bval=r_back), 0.0), 0.45 / radial[7]), 0.55), 1.0)
         cov = mth('MULTIPLY', cov, b_in=rise)
+    if len(radial) > 8 and radial[8] and len(radial) > 9 and radial[9]:
+        # the middle path: backed and printed inside r_clear, clear unprinted glass (no dots, no glow) beyond it
+        inside = mth('LESS_THAN', r, radial[9])
+        return mth('MULTIPLY', cov, b_in=inside), inside, inner
     if len(radial) > 8 and radial[8]:
         # C gate 1 (the check showed clear gaps send the glow down at grazing angles): the whole field backed black
         return cov, mth('MAXIMUM', 1.0, bval=1.0), inner
@@ -1132,7 +1136,7 @@ def build(args):
             o0, rw_ = meta['P']['margin'] * mm, meta['P']['tint_ring'] * mm
             RAD = (meta['S'][0] * mm, meta['S'][1] * mm, args.radial[0], args.radial[1], args.cover_max) if args.radial else None
             if args.radial and args.back_r:
-                RAD = RAD + (args.cover_floor, args.back_r, 0.0, 1.0 if args.backed else 0.0)
+                RAD = RAD + (args.cover_floor, args.back_r, 0.0, 1.0 if args.backed else 0.0, args.clear_r)
             M['core'] = core_material('core', (o0 + rw_, o0 + rw_, o0 + meta['W0'] * mm - rw_, o0 + meta['D0'] * mm - rw_), radial=RAD)
             finish['plinth-L1-core'] = 'core'
         for k in range(1, 5):
@@ -1171,7 +1175,7 @@ def build(args):
                                 grade=tuple(args.grade_edge_mid) if args.grade else (1.0, 1.0), fall=args.grade_fall, cct=args.cct,
                                 ceil_k=args.ceil_k, tilt=args.tilt,
                                 radial=((meta['S'][0] * mm, meta['S'][1] * mm, args.radial[0], args.radial[1], args.cover_max, args.cover_floor, args.back_r,
-                                         args.rise, 1.0 if args.backed else 0.0)
+                                         args.rise, 1.0 if args.backed else 0.0, args.clear_r)
                                         if args.back_r else (meta['S'][0] * mm, meta['S'][1] * mm, args.radial[0], args.radial[1], 1.0)) if args.radial else None,
                                 occl=[(meta['S'][0] * mm, meta['S'][1] * mm, meta['P']['platter_d'] / 2 * mm, 0.6, 0.035),
                                       (meta['A'][0] * mm, meta['A'][1] * mm, meta['P']['puck_d'] / 2 * mm, 0.5, 0.018)] if args.day else None)
@@ -1547,6 +1551,7 @@ if __name__ == '__main__':
     ap.add_argument('--cover-floor', type=float, default=0.0); ap.add_argument('--back-r', type=float, default=0.0)
     ap.add_argument('--ar-top', type=float, nargs=2, default=None)
     ap.add_argument('--rise', type=float, default=0.0); ap.add_argument('--backed', action='store_true')
+    ap.add_argument('--clear-r', type=float, default=0.0)
     ap.add_argument('--matte-channel', action='store_true'); ap.add_argument('--label-near', action='store_true')
     ap.add_argument('--core-glow', type=float, default=0.0)
     ap.add_argument('--day', action='store_true'); ap.add_argument('--ambient', type=float, default=0.05)

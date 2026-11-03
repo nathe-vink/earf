@@ -701,6 +701,42 @@ Red, of 255, in fixed patches. "Base spots" are the two patches near the posts; 
 | `a5-night-ember-2423-c2.png` | C, gate 1, at night: backed field, flattened radial glow, a lit rim |
 | `a5-day-ember-2423-c2.png` | C, gate 1, by day: an evenly tinted sheet over an even print |
 
+### For the owner: C or A (2026-11-03, one walkthrough item)
+
+All figures are red of 255, measured in fixed patches on the same set and camera.
+
+1. **The physics.** A lit deck you can see through always sends some light down. The light leaves the bare glass
+   almost flat, near the critical angle, onto the base and the floor in front. No coating stops it. In numbers, the
+   floor in front read about 16 with C's clear field against about 5 with A; the base's top near the posts read 7-11
+   against 0. Backing the field black brings both back to A's: floor 6.3 / 4.8, base 0.
+2. **What C2 still gives over A**:
+   - **The light source.** C2 is fed from the center, from a strip under the platter, so no lit edge or strip shows
+     anywhere. A is fed from the rim.
+   - **The grade at night.** C2's glow rises off the platter's foot and falls gently outward: the foot is 92, the
+     field 128 and the left rim 75.5. A runs from a lit edge inward (foot 134, field 132, rim 71).
+   - **By day they are close.** Both are tinted glass over an opaque print; C2's print is even.
+   - **What C2 gives up.** It no longer shows the float through the deck, which was C's reason to exist.
+3. **A middle path**, proxied cheaply (900 x 600, 48 samples; not a gate frame): backed and lit out to 235 mm from the
+   spindle, clear unprinted glass beyond, so the corners and the arm side are see-through and unlit.
+   - **The leak is small.** Floor 6.4 / 5.9 against A's 6.6 / 5.0; base 0. Clear glass with no print and no glow in
+     it keeps its guided light by total internal reflection.
+   - **But the look is weak.**
+     - At night it reads as a lit disc with dark corners and a hard round edge. A soft edge would bring some leak
+       back.
+     - By day the clear corners read dark, because under them is the black base and its shadow, not a lit float.
+     - So it does not give the see-through depth C was for. Not worth a gate frame unless the owner wants the lit
+       disc as a look.
+4. **Cost per unit, over v3:**
+
+   | option | cost per unit over v3 |
+   |---|---|
+   | v4 as gated (A, g5) | about +$140-170 |
+   | C as gated | about +$130-150 |
+   | C2 | about +$130-150 (the black flood is in the print's estimate) |
+   | the middle path | the same as C2 (a different screen) |
+
+   Each costs $3,897 in parts.
+
 ### The render (how the light is drawn)
 
 The guide's output is drawn as an even Lambertian glow just above the print: 9 W/m2. That figure follows from the
