@@ -1745,3 +1745,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   the face, the hue gap noted as a fact); Core: an honest design note (inherent to the frost? a ball-in-ball: a clear tinted shell over a
   smaller frosted inner diffuser; partial frost; finer frost; costs; the emitter's visibility) with a proxy pair of the best option, and
   the pin-dot, nub and hotspot fixed regardless. Core's frosted-vs-new goes to the owner with the facts.
+- 13:33 Ember v2 gate wf_2956fd08-cfc (3 critics, 22 min): HOLD 3/3, but the two fixes WORKED (planted at 390 px with a contact line,
+  no gap; only small unclipped lava patches at the foot; see-through deep ruby, no milky faces). Held for the horn ("a glowing scarlet
+  lens, like a tail-light", 3-5x the cabinet, the driver and two struts as "a black blot with two drips"; cloudy mottling) and an LED-like
+  red glint on the woofer frame. Sent 13:34: re-light the scene (no hot haze behind the horn; soft light from the camera side), the
+  same principle for every backlit habitat; identify the glint (the amp's LED at real brightness, or lava); and don't over-tune the satin,
+  since the horn-finish question may change every habitat.
