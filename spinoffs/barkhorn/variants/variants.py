@@ -75,6 +75,12 @@ UPLIGHT = dict(edges=[(10.0, 30.0, 10.0, 390.0), (550.0, 30.0, 550.0, 390.0), (4
 # fed from the plinth's 24 V through a sealed connector in the bottom panel at a foot pad. (x0, y0, x1, y1) of each run
 # on the bottom panel's top face (z 20); the back is left out (its land strip and the amplifier's compartment)
 WASH = dict(runs=[(24.0, 60.0, 24.0, 370.0), (536.0, 60.0, 536.0, 370.0), (60.0, 48.0, 500.0, 48.0)], w=8.0, t=2.0, z=20.0)
+# the slim light plate (the coordinator, 2026-11-03, for the owner's question about the footing: "a separate base that
+# people can optionally purchase"): the cabinet's own footprint, `h` tall to the cabinet's bottom; a top frame of the
+# cabinet's 1/2 in sheet carrying the uplight's grooves and the centre panel's opening (as the plinth's top frame), over a
+# black anodised aluminium tray (`tray_t` walls) holding the centre panel's board and heat sink, vented to the floor; four
+# levelling feet `feet_in` from its corners. Under IEC 62368-1 Tropos passes on its own feet (stability/standard-2018.md)
+LPLATE = dict(h=50.0, frame=12.7, tray_t=2.0, feet_in=20.0, foot=(40.0, 6.0, 16.0, 6.0))
 OUTRIG = dict(w=30.0, h=20.0, inner=[(95.0, 80.0), (465.0, 80.0), (95.0, 340.0), (465.0, 340.0)])
 
 
@@ -259,6 +265,26 @@ def parts(P):
                             notes=['the cabinet wash (a proposal): COB strips on the bottom panel at the foot of each side wall and the front '
                                    'panel, between the wall and its lining, aimed up the wall; fed from the plinth through a sealed connector '
                                    'at a foot pad (variants/BASES.md)']))
+    # the slim light plate (option 'Light plate'; the uplight's parts are the plinth's, in the same places)
+    L = LPLATE; zf = -L['frame'] - 0.1; d_ = L['foot'][1] + L['foot'][3]; zb = -L['h'] + d_
+    frame = Pos(280.0, 210.0, zf / 2) * Box(560.0, 420.0, -zf - 0.1) - Pos(280.0, 210.0, zf / 2) * Box(440.0, 300.0, -zf + 2)
+    for (ax, ay, bx, by) in U['edges']:
+        frame = frame - seg(ax, ay, bx, by, gw, -gd - 0.1, 1.0)
+    tw = L['tray_t']
+    tray = Pos(280.0, 210.0, (zb + zf - 0.1) / 2) * Box(560.0, 420.0, zf - 0.1 - zb) - \
+        Pos(280.0, 210.0, (zb + zf) / 2 + tw) * Box(560.0 - 2 * tw, 420.0 - 2 * tw, zf - zb)
+    out.append(product.Part('base-lplate-frame', frame, product.Machined('stock-cast-sheet', 'cnc-mill', setup_usd=60.0), finish='bark',
+                            group='base', option='Light plate',
+                            notes=['the slim light plate\'s top frame: 1/2 in stock sheet in the cabinet\'s colour, 560 x 420 round a 440 x 300 '
+                                   'opening, grooved for the uplight\'s edge strips under the walls, its edges polished']))
+    out.append(product.Part('base-lplate-tray', tray, product.Machined('aluminium', 'cnc-mill', setup_usd=80.0), finish='channel',
+                            group='base', option='Light plate',
+                            notes=[f'the plate\'s tray: {tw:g} mm aluminium, folded and welded, black anodised, holding the centre panel\'s board '
+                                   'and heat sink on nylon brackets, slotted round its floor\'s edge to vent; the frame screwed to it']))
+    fi = L['feet_in']
+    lf = [foot(x, y, zb - 0.1) for x, y in ((fi, fi), (560 - fi, fi), (fi, 420 - fi), (560 - fi, 420 - fi))]
+    out.append(product.Part('base-lplate-feet', _C(children=[c for f in lf for c in f]), product.Bought('levelling-feet'),
+                            finish='foot', group='base', option='Light plate', notes=['four M8 levelling feet under the plate\'s corners']))
     pf = [foot(x, y, zp - 0.1) for x, y in BASE['feet']]
     out.append(product.Part('base-plinth-feet', _C(children=[c for f in pf for c in f]), product.Bought('levelling-feet'),
                             finish='foot', group='base', option='Plinth', notes=['four M8 levelling feet under the plinth\'s corners']))
