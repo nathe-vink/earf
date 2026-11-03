@@ -86,6 +86,8 @@ BUILTIN = dict(floor=[(60.0, 360.0, 250.0, 360.0), (310.0, 360.0, 500.0, 360.0),
                z_floor=20.0,
                brace=[(90.0, 250.0, 470.0, 250.0), (90.0, 300.0, 470.0, 300.0)], z_brace=220.0,
                channel=(12.0, 7.0), wall=1.5, lens_t=1.0, lens_down=0.6, standoff=(6.0, 3.0))
+# D+'s top batt (the Cloud's lining-top-3-web: its box, x0 y0 z0 x1 y1 z1 mm; the top rib's notch x0 x1 from z0 up)
+TOPWIN = dict(box=(71.0, 44.5, 759.5, 489.0, 339.5, 859.5), frame=80.0, rib=(270.0, 290.0, 800.0))
 # the slim light plate (the coordinator, 2026-11-03, for the owner's question about the footing: "a separate base that
 # people can optionally purchase"): the cabinet's own footprint, `h` tall to the cabinet's bottom; a top frame of the
 # cabinet's 1/2 in sheet carrying the uplight's grooves and the centre panel's opening (as the plinth's top frame), over a
@@ -289,6 +291,17 @@ def parts(P):
         out.append(product.Part(f'builtin-{key}-standoffs', _C(children=bs), product.Bought('builtin-standoffs'), finish='foot', group='base',
                                 option='Built-in light', notes=[f'nylon standoffs, M3, screwed into inserts bonded in the {key}, three a run']))
     wash = [seg(ax, ay, bx, by, WASH['w'], WASH['z'] + 0.1, WASH['z'] + 0.1 + WASH['t']) for (ax, ay, bx, by) in WASH['runs']]
+    # D+ (the coordinator's study, 2026-11-03, wf_6f2b81e0-333): the top batt as a frame, 80 wide, round a central
+    # window over the brace light (about 28 % of its area open); the back's top band (back-c, -e, -h) is left out by
+    # the shot. Option 'Top window': hide the Cloud's lining-top-3-web with it
+    tx0, ty0, tz0, tx1, ty1, tz1 = TOPWIN['box']; fw = TOPWIN['frame']; rx0, rx1, rz0 = TOPWIN['rib']
+    tframe = Pos((tx0 + tx1) / 2, (ty0 + ty1) / 2, (tz0 + tz1) / 2) * Box(tx1 - tx0, ty1 - ty0, tz1 - tz0)
+    tframe = tframe - Pos((tx0 + tx1) / 2, (ty0 + ty1) / 2, (tz0 + tz1) / 2) * Box(tx1 - tx0 - 2 * fw, ty1 - ty0 - 2 * fw, tz1 - tz0 + 2)
+    tframe = tframe - Pos((rx0 + rx1) / 2, (ty0 + ty1) / 2, (rz0 + tz1 + 1) / 2) * Box(rx1 - rx0, ty1 - ty0 + 2, tz1 + 1 - rz0)
+    out.append(product.Part('lining-top-window', tframe, product.Sheet(P['lining']['stock'], tz1 - tz0), finish='lining', group='lining',
+                            option='Top window',
+                            notes=['D+ (a proposal): the top batt cut to an 80 mm frame round a central window over the brace '
+                                   'light, its voile sleeve kept across the window (variants/BASES.md)']))
     out.append(product.Part('cabinet-wash', _C(children=wash), product.Bought('cabinet-wash'), finish='uplight-wash', group='base',
                             option='Cabinet wash',
                             notes=['the cabinet wash (a proposal): COB strips on the bottom panel at the foot of each side wall and the front '
