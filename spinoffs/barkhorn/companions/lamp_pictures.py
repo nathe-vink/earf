@@ -230,13 +230,14 @@ def build(frame, samples, scale):
         # round 5 (the gate: an electric-blue line at the mouth, the diffuser's light piping out of the polished cut
         # edge): the proposed fix, modelled at night: the opal ends 4 inside the rim, as the clear shell does, and the
         # rim's exposed edge is satin (bead-blasted), so no lit polished edge faces the room
-        oc = 4.0                                 # round 6: both frames of the pair show the same (proposed) rim
+        oc = float(os.environ.get('OPAL_CUT', '1.5'))   # round 6: 4 (the proposed rim); round 10 (the gate: close the dark seam at the lip): 1.5
         sphere('opal', 89.0, rim, opal, cut=oc, hole=H)
         sphere('opal-in', 86.0, rim, opal, inward=True, cut=oc, hole=H)
-        part('out-dome-pendant', 'rim', acrylic('rim', 0.6, loading=float(os.environ.get('RIM_LOAD', '1.0'))), rim)   # round 9: backed off (the gate: a royal-blue outline)   # round 6: satin, a deeper shade, never bright
+        part('out-dome-pendant', 'rim', acrylic('rim', 0.6, loading=float(os.environ.get('RIM_LOAD', '0.5'))), rim)   # round 9: backed off (the gate: a royal-blue outline)   # round 6: satin, a deeper shade, never bright
+        capobs = []
         cap = SC.principled('cap-matte', '#2E2E32', 0.6, metallic=0.3, bump=(4000.0, 0.15))   # round 8: no glints; round 9: lifted off black
         for nm in ('collar', 'clamp', 'crown', 'gland', 'hub'):
-            part('out-dome-pendant', nm, cap, rim)
+            capobs.append(part('out-dome-pendant', nm, cap, rim))
         # round 8 (the gate: two "LED eyes" on the cap): the PEEK pin carrier, its pins and the silicone gaskets were
         # missing, so the lit bore showed through the collar's slots
         part('out-dome-pendant', 'ring', SC.principled('peek', '#151515', 0.6), rim)
@@ -263,7 +264,7 @@ def build(frame, samples, scale):
         # pendant is about a quarter of the width, the crown clear of the top with the cable running out of it, and
         # the table's pool and a stoneware bowl below
         cam = ((0.0, -0.95, tz + 1.55), (0.0, 0.0, tz + 0.566), 54.0)
-        bowl_m = SC.principled('stoneware', '#A8A196', 0.5, bump=(1500.0, 0.25))   # round 9: under the lamp
+        bowl_m = SC.principled('stoneware', '#A8A196', 0.28, bump=(1500.0, 0.25))   # round 10: a glaze, so its inside shades   # round 9: under the lamp
         bm = bmesh.new(); bmesh.ops.create_uvsphere(bm, u_segments=96, v_segments=48, radius=0.11)
         bmesh.ops.delete(bm, geom=[v for v in bm.verts if v.co.z > -0.035], context='VERTS')
         bmesh.ops.solidify(bm, geom=bm.faces[:], thickness=0.005)
@@ -291,7 +292,22 @@ def build(frame, samples, scale):
         # hard square sticker)
         fill = SC.area('fill', (1.4, -2.2, 1.9), (55, 0, 32), (1.4, 0.9), 2.0 * k, '#8FA0BE')
         fill.data.shape = 'ELLIPSE'               # round 9: seen in the glass again as a soft round room highlight
-        fill.visible_glossy = prod != 'core'      # (in Core's two balls it doubled into a spot at the crown)
+        fill.visible_glossy = False               # round 10: its oval read as a smudge on the dome
+        if prod != 'core':
+            # round 10 (the gate: the lit face a flat matte field): a dim softbox strip at the upper left, in the room,
+            # seen in the dome's gloss as one crisp reflection; it lights almost nothing
+            st = SC.area('strip', (-0.9, -0.6, tz + 1.5), (60, 0, -55), (0.12, 0.9), 1.2, '#E9E4DA')
+            st.visible_diffuse = False
+            from mathutils import Vector
+            def aim(ob, at):
+                ob.rotation_euler = (Vector(at) - ob.location).to_track_quat('-Z', 'Y').to_euler()
+            aim(st, (0.0, 0.0, tz + 0.75))
+            # and a faint kicker from behind and above for the cap's tiers, linked to the cap alone
+            kc = bpy.data.collections.new('cap'); bpy.context.scene.collection.children.link(kc)
+            for o in capobs:
+                kc.objects.link(o)
+            kk = SC.area('kicker', (0.25, 0.45, tz + 1.05), (-120, 0, 150), (0.25, 0.25), 0.6, '#D8DCE4')
+            kk.light_linking.receiver_collection = kc; kk.visible_glossy = True; aim(kk, (0.0, 0.0, tz + 0.80))
         exposure = ev   # round 4: exposed for the lamp, as a night photograph is
     else:
         SC.world(hdri='kiara_9_dusk', strength=0.35, rotation=200)
