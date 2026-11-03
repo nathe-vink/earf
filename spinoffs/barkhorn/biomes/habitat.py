@@ -45,6 +45,7 @@ def scale_lights(sh, scales):
 
 SURFACE_GLASS = False                   # --surface-glass: the tint on the faces (not adopted: the speaker lane's volume is the line's material)
 WELD = [True]                           # the asset's split vertices welded so its glass volumes close (--no-weld: off)
+LED = [1.0]                             # --led F: the amp plate's power LED's emission scaled (1: the asset's)
 SINK = [0.002]                          # --sink M: the feet bedded this far into the ground (ash, sand). The sets' crust and
                                         # ripples are displaced at render time, so the ray cast sees flat ground and can't seat
                                         # the feet in them: habitats.py beds them a full 12 mm, the cabinet on the ground
@@ -188,7 +189,7 @@ def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extr
     linked = []
     place0 = Pr.place
     editable = (stand == 'feet' or tt or up or lining or glass_shadows or HORN['close'] or HORN['rough'] is not None
-                or not HORN['shadows'])   # else the asset as it is, linked
+                or not HORN['shadows'] or LED[0] != 1.0)   # else the asset as it is, linked
 
     def place(bpy_, pdef, templates, shot_, root_):
         objs, part_of = place0(bpy_, pdef, templates, shot_, root_)
@@ -258,6 +259,13 @@ def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extr
                         if n.type == 'BSDF_PRINCIPLED':
                             n.inputs['Roughness'].default_value = HORN['rough']
             print('horn satin roughness ->', HORN['rough'])
+        if LED[0] != 1.0:
+            for m in {sl.material for o in col.all_objects for sl in getattr(o, 'material_slots', []) if sl.material}:
+                if m.name.split('@')[0] == 'led-on' and m.node_tree:
+                    for n in m.node_tree.nodes:
+                        if n.type == 'EMISSION':
+                            n.inputs['Strength'].default_value *= LED[0]
+            print('led-on emission x', LED[0])
         if not HORN['shadows']:
             # the horn lit from the front (the coordinator, 2026-11-03, Ember): the asset's shadow rays pass the horn
             # untinted, so a lamp or bright sky behind a backlit satin horn makes it a lampshade, out-shining the
@@ -379,6 +387,7 @@ def main():
     ap.add_argument('--no-ground', action='store_true', help="don't settle the speaker onto the set")
     ap.add_argument('--no-weld', action='store_true'); ap.add_argument('--surface-glass', action='store_true')
     ap.add_argument('--lining', help="the lining's color, hex (colors F: Smoke '#0B0B0B')")
+    ap.add_argument('--led', type=float, default=1.0, help="scale the amp's power LED (the asset's strength is 6)")
     ap.add_argument('--sink', type=float, default=0.002, help='bed the feet this far into the ground, m')
     ap.add_argument('--horn-front', action='store_true', help='direct light stops at the horn (no lampshade from behind)')
     ap.add_argument('--horn-close', action='store_true'); ap.add_argument('--horn-rough', type=float)
@@ -386,7 +395,7 @@ def main():
     a = ap.parse_args()
     global SURFACE_GLASS
     WELD[0] = not a.no_weld; SURFACE_GLASS = a.surface_glass
-    SINK[0] = a.sink
+    SINK[0] = a.sink; LED[0] = a.led
     HORN['close'] = a.horn_close; HORN['rough'] = a.horn_rough; HORN['shadows'] = not a.horn_front
     sh = json.load(open(a.shot))
     scale_lights(sh, {k: float(v) for k, v in (x.split('=', 1) for x in a.light)})
