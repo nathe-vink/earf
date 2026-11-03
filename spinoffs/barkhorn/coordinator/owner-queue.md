@@ -2277,3 +2277,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   --ignore-installed --no-deps pillow` (/usr/local/lib/python3.11/dist-packages ahead of the apt copy; numpy 1.26.4, bpy and scipy
   import); chunk 5 restarted from deck-home-portrait. All three leave the kit build's rewritten out-cloud/ files uncommitted.
 - 15:55 sent to the speaker lane: the working install form for setup.sh (--user --ignore-installed --no-deps, then the real import).
+- 15:55 speaker lane: the Pillow fix at 65a1cbbc786674a654638bc314aa06760b5355f2 (setup.sh: the bpy Python's check is now `from PIL import
+  Image, ImageDraw, ImageFont; import scipy`; on failure it installs Pillow with --ignore-installed into /usr/local, ahead of the apt
+  copy; bash -n checked. HELPERS.md: a "check Pillow on the render Python" step with the fix). Its own container loads Pillow 13.0.0
+  for 3.11, so chunk 4 (deck-home, room31) is safe. The deck-hero proof rendering.
