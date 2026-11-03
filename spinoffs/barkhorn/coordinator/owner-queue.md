@@ -1321,3 +1321,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   Hemisphere night: the light landing on a table under it. The Hemisphere "shoot from above" question is dropped (the critics
   passed the mouth's glow); Core's ball stays "held" until the chips; Haze waits with the chip order. Nothing to the owner
   until the nights pass; then Mantle and the lamps go as day/night pairs.
+- 09:44 speaker lane: B day, B night 4 (the panel aimed 40 degrees, no edge strips, no moon) and B night 5 (the panel at 60
+  degrees + the brace strip) at 28dcae01fe31064a9c46b6fbfb7f3ca3c69b4653; D's notes for the owner in BASES.md at
+  b79d7cd94b1560a4ef02a4c8bc8dd82ef858f0bf. Corrections: built in is about $130 a speaker (the dimmer counted), the plate with
+  its light and a brace strip about $540 (not $350-400), so built in saves about $410 and 5.3 kg; the full D runs the floor
+  15 W/m and the brace 30 W/m, about 33 W electrical, +7 K inside (the display ratio 0.5 was unfair once the port chamber clips).
+  D day, D night, Smoke-D black and white (6500 K for Smoke) rendering one at a time, about an hour. The owner was told "about
+  $100", "28 W" and "6-7 degrees" at 08:02: correct to $130, 33 W, +7 degrees in the next owner message.
+- 09:46 gate wf_4f6468e4-f67 (earf-speaker-gate-v2: per-frame "meant to show", test 7 "not cheap", the site's uplit refs) on
+  A (a47ae365, sha256 9f1c0076), B day (a7decd22), B night 4 (ace4ede3), B night 5 (061cb51e). Ack sent to the lane 09:47.
