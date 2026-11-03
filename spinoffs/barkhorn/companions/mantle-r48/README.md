@@ -426,6 +426,25 @@ v3's edge-lit deck, its two 12.7 sheets in Ember 2423's hue poured to about 40 %
 #F5A0AB after 10 mm). The cost is the estimate of 2026-11-02 (the Poison reconcile): a custom 12.7 run is about $12.5k at the pour's minimum,
 for about 90 decks, about +$27 a deck.
 
+### The frames and the critic
+
+`renders/2026-11-03/barkhorn/mantle-r48/`, the camera of 2026-11-01's `a-dusk-ember-2423.png` (`render_lantern.sh`):
+
+| frame | what |
+|---|---|
+| `a4-night-ember-2423.png` | (a) at night: the whole deck glows red, evenly, from within; no outline, no inset line, nothing on the shelf |
+| `a4-day-ember-2423.png` | (a) by day: red glass over white |
+| `a4-night-poison-2092.png` | (a) at night in Poison: an even green glow |
+| `b-night-ember-40.png` | (b) at night: still a neon outline. A lighter pour alone does not make a lantern; the light needs the white print to leave by the face |
+| `b-day-ember-40.png` | (b) by day: a lighter red glass, the parts under the deck showing through |
+
+**The blind critic, one round:** 5.5 on (a)'s night frame, the same score as section 12's for other reasons. The outline
+is gone, and the critic now reads "an acrylic deck lit like a gaming-PC LED panel" (`critic/LOG.md`). Two of its notes
+are settings or the renderer:
+- the top clips (the night exposure, a stop over the day's): a stop down keeps it deep red;
+- the shelf gets no red from the glowing deck (a caustic path Cycles drops here). A real deck would throw a faint red
+  spill, which the owner allows.
+
 ### The render (how the light is drawn)
 
 The guide's output is drawn as an even Lambertian glow just above the print: 9 W/m2. That figure follows from the

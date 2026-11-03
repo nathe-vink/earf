@@ -117,3 +117,18 @@ Below the owner's bar of about 6.5. Most of the gap is the stock tint: Ember 242
 deck, so lit from inside it still reads as a black slab with a glowing rim. A lit "red lantern" needs the lighter deck
 of open question 8. The critic also asked for a red pool on the floor, which the owner has ruled out, so that note is
 not a fix. It would score 7.5 with its notes applied (its estimate). No second round was run.
+
+## Round 2: the deck as a lantern (2026-11-03; one round, as asked)
+
+| frame | blind | reads as | the critic's main notes |
+|---|---|---|---|
+| `renders/2026-11-03/barkhorn/mantle-r48/a4-night-ember-2423.png` (v4, the lit deck) | **5.5** | "a Pro-Ject or Rega-style acrylic deck lit like a gaming-PC LED panel" | the glowing slab throws no red on the floor; the top a flat, clipped salmon field (25 % clipped); the edge reads as thin parallel bands; the support, arm and cartridge read generic |
+
+The same score as round 1, for other reasons. The outline is gone, and the critic now sees a lit panel. Two of its notes
+are settings or the renderer, not the design:
+- the top's clipping is the night exposure (a stop over the day's): a stop down keeps the red deep;
+- the shelf gets no red because light leaving the glass to reach a diffuse face is a caustic path Cycles drops here. A
+  real deck would throw a faint red spill under its edges, which the owner allows (a pool he does not).
+
+Its "cooler" list asks for the edge-lit look of round 1 again ("the face deep red and the perimeter burns"), the
+opposite of what the owner asked for. No second round was run.

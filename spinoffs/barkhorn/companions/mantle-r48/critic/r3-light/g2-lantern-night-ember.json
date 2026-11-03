@@ -1,0 +1,8 @@
+{"frame": "renders/2026-11-03/barkhorn/mantle-r48/a4-night-ember-2423.png", "card": "night, the room dark, its own light on (the tint is a red)",
+ "stage1": {"score": 5.5, "impression": "A moody low-key shot of a turntable whose red acrylic plinth seems to glow from inside. It has drama, but the top face is a flat, clipped salmon slab with no depth or caustics. The emitted light lands on nothing: the floor under a glowing slab stays neutral grey-blue. The sub-chassis and feet are lost in black, and the arm reads as a generic tube-and-ball arm. It reads as a good CG render, not a night photograph."},
+ "reads_as": "a Pro-Ject or Rega-style acrylic deck lit like a gaming-PC LED panel",
+ "unreal_top3": ["the glowing slab throws no red on the floor beneath (R18 G19 B23): no spill, no bounce",
+                 "the top face is one uniform salmon field, 25% clipped, no gradient or depth",
+                 "the edge reads as a stack of thin parallel bands (the rings and skin)"],
+ "score_if_fixed": 7.5,
+ "note": "the top's clipping is the night exposure (0.0, a stop over the day's), a setting; the missing red on the shelf is the renderer (light leaving glass to reach a diffuse face is a caustic path Cycles drops here); a real deck would throw a faint red spill, which the owner allows"}
