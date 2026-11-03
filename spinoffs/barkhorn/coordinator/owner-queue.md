@@ -3515,3 +3515,13 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 22:33 c3: fix1 chunk 5 landed on 3b541d9d at fa56103efc1eb94d562e1e5354ef58d92627db65 (21:52-22:33; wide Poison 12.1 min 2.01 MB, Ice 13.8/2.06,
   Haze 12.9/2.03; no errors; likely the same floor band and side strip, not gated); merged 5957b9f9 (05443be742a3e5029dd103eb499a2b5d759ee770);
   the deck hero (phase-1 chunk 1, ~84 min) from 22:35; the portrait on 95876493 after it. (Its stamp read 22:35 at a 22:33 queue time.)
+- 22:44 speaker lane: THE BACK SET and the model's TROPOS plate at a57364346784acc86fe0351b65cd7f30f15a383f: (1) the clipped horn was `cab-back`
+  (7 W/m2 behind, through the cabinet and horn at specular 0): gone (Ember's horn >=250 53 % to 2 %); `glow` gone; horn-rim 3.5 to 1.0; (2) the
+  softbox patch was `plate-strip`'s reflection: gone; (3) the lower left face stays pale (~0.3, an honest residue: its mirror card can't
+  leave the frame); proxies horn >=250 Ember 56 % to 2 %, Poison 29 % to 0 %, the patch 0.42 to 0.69, the cabinets deeper (Ember 76 to 55);
+  proof back-fix-proofs/back-ember-poison-old-new.png; (4) the EARF mark 0.3 to 7.9 L* (Ember), 1.8 to 9.7 (Poison), short of ~15: light alone
+  can't; a finish proposal (frosted letter faces, then bronze) to render for the owner, not adopted. The model: the plate reads "TROPOS ·
+  HORN LOUDSPEAKER, ACTIVE / MODEL TR-1 S/N TR1-26-000127" (TR-1 and the SF line for the owner); the C14 pins at 0.4 mm; the Cloud model
+  rebuilt (anything on a5736434 needs the Cloud rebuild first, 20-60 min). Back fix: --only site-back --tag backfix, 7 frames, ~2 chunks.
+- 22:44 sent to the speaker lane: the back agreed (on a helper after its deck job, with the rebuild); but the 22:14/22:15 floor-band
+  diagnosis FIRST, with whether the row, hero and cover (rendering now on c2, c3, c4) carry it, so they can be stopped if so.
