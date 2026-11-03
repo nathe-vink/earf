@@ -1977,3 +1977,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   frame doesn't oversell. Caption: "the target look, pending the physical sample".
 - 15:09 sent to the speaker lane: the new order (the close-ups; D night v3 next, since item 1 offers the lantern at night; then
   Smoke's horn and the light-path check; then the deck-hero proof) and the Smoke fixes above.
+- 15:11 OWNER: "No light" (walkthrough item 1, the base). Saved verbatim first (README 9c645c74, time fix d4f240f2). THE BASE IS
+  DECIDED: A, own feet, no plinth, no light. Sent to the speaker lane 15:11: stop D night v3 (by PID if running) and drop it; D and
+  225f128a stay in BASES.md marked "not chosen"; BASES.md to say the product is A. The roll-out now waits only on the horn answer
+  (item 2, next). Lane order: the close-up pair (the honest polished view with the HF lead; helps item 2), Smoke's horn in the ~50 %
+  sheet with the light-path check, the deck-hero proof on A. Later walkthrough item added: do the site's uplit pictures (a lit plinth)
+  stay as styled mood shots, or go. The board's base card to mark decided with the horn answer (one republish).
