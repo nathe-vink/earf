@@ -2893,3 +2893,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   in seven tints; which phase-2 chunks use studio31 (the arc 1-3; 9, 10?); the deck hero's fix can share the kit.
 - 19:05 sent to c3: phase-2 chunks 1 and 2 (the arc) held; after chunk 5 and fix1 4 and 5, report and wait. Sent to c4: phase-2 chunk 3 held;
   after fix1 1, 3, 2, phase-2 chunk 6 (the turning sprite, finals31), then wait.
+- 19:10 r43-listening v3 gate wf_4677aaca-15e (3 critics, ~21 min): HOLD 3/3, "one prop move away"; better than v2 and the old picture on
+  every owner test (the doorway clear of the horn by ~30 px; a soft floor ramp, no glow at the feet; the left face deep maroon; the surround
+  dark; the horn the cabinet's red glass, no X). Holds: the slide put the bottom-right foot on the two foreground chairs (the near chair's
+  lit top edge, the frame's brightest hard line, ends at the cabinet's corner); the horn's clipped white (a ~22 px lower-right slash, a flat
+  bar on the bottom lip, the top rim at 240-247); the cabinet's left edge 8-10 px from the doorway jamb (a near-tangent).
+- 19:11 sent to the bar lane: v4 first (the chairs 20-30 px or more clear of the base; the horn's white brought to ~L 200-215 glints by a
+  larger or re-aimed spot or a degree's turn, no retouching; the jamb gap 20-40 px; optional the spot more frontal), then r44 v3, shop v3,
+  window v3.
