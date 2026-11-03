@@ -1609,3 +1609,24 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   $3,897 parts; (7) the front disc was a post's bonded seat (walls now clear); the platter rim satin. Honest notes: a glow fading into
   the border rendered as a yellow line on Poison (dropped); the glow over the groove's ceiling rendered 1.6x the field (scaled 0.6,
   noted). Deck 24.6 mm awaits sign-off. Gate wf_3919563b-3fc started 12:16 (sha256 day 4704ecdd, Ember 1c59bcdf, Poison 0e379c57).
+- 12:21 study wf_6f2b81e0-333 complete (4 agents, 93 min); the skeptic's brief: D as built can't give the site's look (the wall
+  beside the cabinet ~2 % of the cabinet's brightness on D night vs ~45 % on the site's Ice slide). The site's V came from light
+  rising into the PORTS' BAY, whose side walls carry no batts, and leaving up and out through those lower side walls onto a wall ~9 cm
+  behind; the lined upper box made the dark spine. So D+ (my 11:42 idea: a top window and the back's top band) opens the WRONG places
+  (expected: a lit horn underside and a glow behind the top, where the site is dark; whole top open moves the wall's share 10.9 to
+  11.4 %). The honest route: "E", a strip at the foot of each side wall inside the ports' bay aimed 45 degrees up and out (louvred
+  ~+/-40), a white film over the bare floor strips, the brace runs on the brace's rear member; no lining change, ~$130-150 a speaker,
+  ~9-10 K at ~41 W; the model draws the V (wings ~0.5-1x the front) on a wall within ~10-15 cm; much dimmer than the pictures' ~135 W
+  lamp. Corrections found: D sends ~7.5 % of its light DOWN through the bare floor strips beside the ports (BASES.md 99 wrong); the
+  brace runs' standoffs stand over the brace's open window (unbuildable as drawn); BASES.md stale (6 runs 1.36 m; 0.84 m, 204 Hz;
+  155.5 L gross); the voile colour unsettled (black in BOM/product.py since 11-01, white in colors F and the site; black cuts D's
+  output ~44 to 24 %). And MY over-reading corrected: at 10:45 I logged the site's V as "the light this morning's rule now calls thrown
+  down". It isn't: the V is light cast up and out through the acrylic, which the owner asked for; only B's floor pool was down.
+  The skeptic's pick: no light unless the side-light test shows the V.
+- 12:22 Ember on horn A gate wf_6e5b9742-7b1 (3 critics): HOLD 3/3, "one quick fix away": the corners hover over a pale sky-lit
+  sliver (feet read as loose pebbles) and a hot lava reflection streak at the foot of the right side panel reads as a base LED. Sent
+  12:23: seat it with a dark contact line; turn it or move the lava patch; check every habitat for both.
+- 12:23 sent to the speaker lane: STOP D+ (finish its proxy for the record only); build E with the white floor film and the brace runs
+  on the rear member; an E proxy at 14 cm and 0.75 m with the V metrics; E night and day if it draws the V without a hot line; BASES.md
+  corrections and the voile colour flagged. The base question: A (no light) or E (the site's look, honestly, near a wall), after E's
+  test; the owner told now with the option to say "no light".
