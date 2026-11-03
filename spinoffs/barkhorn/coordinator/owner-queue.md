@@ -2125,3 +2125,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 15:26 sent to the speaker lane: plan roll-out phase 2 from that list (in rollout.py, A + polished, --hold smoke, item 8 held for
   the owner; hours per item; x 8 or one with reasons; folded into the four containers after phase 1, the most-seen first: Sound's
   one colour, covers on, the room; who makes the GA drawing and how long), after its current items; no phase-2 renders until I confirm.
+- 15:31 speaker lane: the close-up pair at a381aefb9ea2e4349be3703d78a9ad319ab9132c (renders/2026-11-03/barkhorn/horn-closeup/
+  horn-A-polished.png, the product's look; horn-A-satin.png; NOTES.md): Ice, A's studio, 70 mm, front three-quarter from a little
+  above, 1000 x 800, 64 samples. Through the polished flare: the pod round the driver (a dark round shape) and the two rear bronze
+  posts down to the cabinet's top (the critics' "two lines"); lead-hf-pod runs inside the post and the pod, unseen; the satin shows
+  nothing behind its face. Honest note: the crop is tight (the left and lower flare cut; a detail, not the whole horn; for the whole
+  horn polished use gate2/A-ice-polished.png). Next, running: the Smoke proxies (two horn sheets, a light-path control), one Smoke
+  final, the deck-hero proof, then chunks 2-4.
+- 15:32 my gate on the polished close-up started (the satin close-up and the whole polished A as context): an honest premium detail
+  for the owner, anything cheap through the horn, the crop.
