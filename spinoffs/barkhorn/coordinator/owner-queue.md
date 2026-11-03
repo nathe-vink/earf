@@ -1175,3 +1175,14 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   never asked (the deck prices the big one); "Put a light under it" vs the open base; Topo (the one Tropos edition idea) never
   reported; the stepped ring round the woofer assumed, never asked; the back mark reads BARF at phone size, closed without the owner;
   four more lost questions (electronics early order, Core cells shipped beside, the owner's name across drafts, and others).
+- 06:46 re-sent the three lost replies to the owner in one last-text message (Smoke miss and fixes; the stepped stand-in; the
+  unreviewed work with links; the verifier's corrections; the lantern's missing showroom; the deposit decisions; Plastimagen).
+- 07:18 speaker lane: the base-question frames corrected at d5da71cbe266f2145191d9b9d1e62af7694a67ef (Ice, front-off-tall camera,
+  1200 x 1500, 64 samples, horn A with the full ring): A-ice eb7f1c19 (own feet, day), B-ice 1ae84ea1 (plate, night, light up),
+  C-ice 57279d3b (plinth, night), B-smoke-2064 622a598d (black sleeves) and -white 57e4aa8b; sheet 66f55b46. Blob hashes checked:
+  all distinct, match the message. The owner had typed in that session at 06:00: "Smoke should be more transparent what the heck.
+  And shouldn't the ice one have the insulation on the bottom there?" (saved: README 09c627c6, time fixed 13ea5573): the batt is
+  back in every night frame; Smoke re-rendered in 2064 (the first pair's sheet) with black and white sleeves. Gate running
+  (wf_6bf1d731-d0d: three blind critics, the owner's six tests, the site's uplit-blue and uplit-black as references). My own read:
+  A good; B/C glow mostly at the bottom (ports), the top half dim, faint blue on the floor at the base, no wall V like the promo;
+  the Smoke frames still very dark. Glassy-horn study started.
