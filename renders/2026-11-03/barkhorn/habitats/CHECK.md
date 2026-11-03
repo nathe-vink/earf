@@ -16,3 +16,4 @@ see_through that names only the horn is recorded as "horn: satin by spec". The c
 | Habitat | see_through | grounded | no_light_down | smooth_horn | Notes |
 |---|---|---|---|---|---|
 | Ember | FAIL (horn only; cabinet PASS) | PASS | PASS | PASS | The cabinet reads dark and tinted, with braces, frames, ports and the lava seen through it. The horn reads as a frosted red sheet. The "sooty stain and drips" at the throat are the driver and inner posts seen as soft shadows through the satin. |
+| Dust | PASS | PASS | PASS | PASS | The woofer, frames, posts, the amp box and both ports show through, and no face is milky. The base sits on the sand and its shadow starts at the base edge. A red-tinted shadow (luminance 43-57, against 100 for open sand) is sun through the tint, not a glow. The horn is a smooth flare. |
