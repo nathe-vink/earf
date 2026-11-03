@@ -979,3 +979,13 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   running, so the check-ins stop here; the owner's reply restarts the work. On the reply: README first; speaker lane sets the default
   horn and finish (chips per color; slim the throat ring if A), updated pair cost for the deck's ask (horn and uplight); then the site
   finals and the deck's pictures with the chosen horn and the uplight.
+- 03:00 OWNER: "Horn: A, smooth, satin outside. What else are we updating? Where’s that pic with the blended biomes?" Saved verbatim
+  first (README 468c10586ffb9a78243762964620a5c972f0ed81). Speaker lane told: horn A default in product.py and both render models
+  (stepped Strata horn the documented alternative; caldera and stepped plinth stay); all eight formed horns matched to their cabinets
+  by eye, deep, in sheet terms (TINTS.md horn column, sourcing); slim the throat ring (before/after in Ember); costs for the deck (the
+  pair's Tropos line with the formed horns and the uplight, against $20,700) and the new weight (press sheet says 74 kg); then the
+  deck's five pictures + the portrait with horn A and the uplight, each sent with its SHA; then the site set.
+  The blended biomes picture: Planet EARF, the owner's 2026-10-31 idea, on r48-biomes (d6721991acf499acee3f1cd0a72157b3c6ccd694):
+  planet-earf-pano-2400.jpg (1bd8d42222e3f4cae150480b24efd792b97daa24; master 4800 c70820b7) and proof7-planet.png (262734fb); sent to
+  the owner. Its blind score was 3.5 (the single habitat pictures 6.0-6.7); the lane stopped below the bar; it shows the older speaker
+  and colors. Board v20: the horn settled (kept for the record), reply bar hidden, header 03:00.
