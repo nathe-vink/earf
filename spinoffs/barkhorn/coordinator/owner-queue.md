@@ -3066,3 +3066,38 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   flags where needed; hero-light's reflect-only card allowed; `back-top` off or at 0.4 with the edge's numbers, since the owner's "No light"
   for the base (item 1) means no underglow-looking bar. Order: stop and confirm rulings 1/2; the fix1 proof and SHA; the turn rig's glow; the
   cover unlink proxy; plain lines for the hero and cover; then the audit, the honest A-ice-polished, the back rig, studio31/hero-light.
+- 19:51 biomes lane: Haze final, polished, keyed from the side, at df201486d823030c1d512f4354b3830add18b7bc
+  (renders/2026-11-03/barkhorn/habitats/haze_b-portrait-1200x1500.jpg): rotate_z -10 (5 degrees off), the sun at azimuth 100, 6 degrees up,
+  the set's sun disk moved with it (one source), 96 samples; crease 6.6 / 5.6 (Dust 7.8, Ice 7.2); its own blind check passed all four,
+  the interior legible mainly in the lower third (dark violet, ~11 % through the box: the owner's density question). Next: the Acid final
+  (4 degrees off, crease 4.8 in proxy), the Poison proxy at rotate_z 9, the Fog final, the Poison final.
+- 19:51 bar lane: r43-shop v3 at 8d5ae87c790f251a758a16aa69506cc8f66dde1d (1200 x 800, 512 samples, 439 s): the key a 55 W spot high above
+  and behind the camera on the shop side (the red through-light and coloured shadows now fall behind the pair, toward the glass); the
+  street spots down to an 18 W rim (was 90 W); no red pool or wedge at either base; the camera moved 0.4 m so the ghost horn hides behind
+  the real right horn (a faint dark-red sliver above it); a 40 mm lens takes the table out (a corner at the lower left; its spot 8 to 2 W);
+  a low gridded fill (0.06, 40 degrees) from the shop side. Its shot record: no multipliers, links or hidden-through lamps. Next: window v3.
+- 19:52 c2: phase-2 chunk 4 landed (18:55-19:51) at 06b829ceaa38f6b9112e8053462f9c6b7eac02a3 on r33-rollout-c2: amp-plate-ember, horn-back
+  ember, dust, acid, poison; exit 0. Holding (no merge of aed49790, no fix1, no chunk 9); barkhorn-variants.json still the rebuilt 0.05.
+- ~19:59 inside-ice and turn gate wf_c262a578-fea (3 critics, ~30 min): turn-ember 00, 02, 03, 04 SHOW 3/3; turn-ember 01 HOLD 3/3 (the back
+  face entering at ~75 degrees goes grey, 152,121,117, saturation 0.14 against 0.95 in 02: Fresnel off the bright sweep; 04's right face
+  already veiling, 0.97 to 0.61, so 05, 07, 11, 13 would follow; the fix all three named: two tall matte-black flags either side behind the
+  turntable just outside frame, 20-40 degrees off axis, proved on 01 and 05 with 02 and 04 as controls, pass mark saturation 0.4+);
+  inside-ice HOLD 3/3 (the base cut off by the frame: pull back ~15 %; the amp bay a blank slab; a lavender refraction shard above the woofer).
+- 20:0x audit from the shot records: every phase-2 rig so far (inside, turn, horn-back, amp-plate) carries frames.py's GLOW5 (1.6 W/m² at
+  0, 0.66, 1.12; specular 0; transmission False), so chunks 4 and 05 carry it; d-wall and d-floor are sweep-only (allowed). The phase-1
+  site-side rig (pre-fix1) shows the known patterns (fill 0.3, back and kick linked, edge linked, horn 0.6). A third pattern found:
+  `transmission: False` (lights.py: "not seen through a clear part"), in hero31.py (the cover: key, cyc, top, over; also fill_spec 0.0
+  and side_l/side_r, face, edge, the Smoke kick and strip linked), room31/room.py (kickL/kickR, also specular 0), frames.py (GLOW5; the
+  room shot's glowL/glowR and its linked 'speakers' lamp), campaign/shots.py:539 (specular 0, "through the cabinet"), and the practical
+  helpers in companions (bar_lamps.py hidden_point, crystal_promo, crystal_shots, shots.py).
+- by 20:06 three gates launched: Haze habitat wf_fc7fc743-83d (context: Dust, Ice, Ember passed); r43-shop v3 wf_f8480bf3-253 (context v2);
+  the seven horn-backs and amp-plate-ember wf_afa41f44-383 (a pre-gate: their rig carries GLOW5, so any re-render can carry every fix).
+- 20:06 RULING 3 sent to every rendering lane: `transmission: False` hides a lamp from every view through clear resin, which no real lamp
+  does: set it True; if the lamp then shows through, move it or flag it; one exception, a practical's bulb inside its own frosted or opal
+  fitting. To the speaker lane: the chunk-05 gate (turn flags proved on 01 and 05; inside reframed, the amp bay, the shard); the GLOW5
+  proxy (horn-back-ember with the glow dropped: under ~2 levels on the speaker, the horn-back and amp frames stand; else re-render); the
+  hits list for the audit; the 19:51 order stands (stop the hero render, the fix1 proof first). To c2: hold; chunks 4 and 05 wait on the
+  GLOW5 proxy; discard barkhorn-variants.json before merging the fix1 SHA. To the biomes lane: Haze at the gate; carry on; ruling 3 (Haze
+  is sun and sky only). To the bar lane: shop v3 at the gate, its rig clean; ruling 3 and the hidden_point exception; check r44, listening
+  and window. To the lamps lane: ruling 3 and its helpers (which fitting each sits in; any light reaching the camera through clear resin
+  alone). To the Mantle lane: ruling 3; the underglow must reach the camera through the resin; check the passed C3d rig against rulings 1-3.
