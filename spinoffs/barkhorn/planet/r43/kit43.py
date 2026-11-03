@@ -54,7 +54,8 @@ def _shelving(bpy, p, objs, name, x0, x1, side, shelves, d=0.40):
     objs.append(oak.object(bpy, K.dark_oak(bpy, name='oak-popup'), bevel=0.003))
     objs.append(bk.object(bpy, principled(bpy, 'popup-shelfback', '#2A2420', rough=0.85)))
     lamp = led.object(bpy, emitter(bpy, f'popup-led-{p.get("led", 3.0)}', '#FFB565', p.get('led', 3.0)))
-    lamp.visible_camera = False; lamp.visible_glossy = False
+    if p.get('led_hidden', False):                                   # ruling 3 (2026-11-03): a real strip shows; hiding it is
+        lamp.visible_camera = False; lamp.visible_glossy = False     # kept only to re-render the old frames as they were
     objs.append(lamp)
 
 
@@ -261,8 +262,9 @@ def popup(bpy, name, p, kit):
     objs.append(rg.object(bpy, principled(bpy, 'popup-rug', p.get('rug', '#5A5249'), rough=0.96, spec=0.1,
                                           bump=(0.004, 0.5, 0.001))))
     stl, wood, uph = Mesh('popup-chair-steel'), Mesh('popup-chair-oak'), Mesh('popup-chair-wool')
+    sdx, sdy = p.get('seats_offset', (0.0, 0.0))                    # 2026-11-03: the rows nudged clear of a moved speaker
     for (x, y) in Q.SEATS:
-        _chair(stl, wood, uph, x, y, 0.0)
+        _chair(stl, wood, uph, x + sdx, y + sdy, 0.0)
     objs.append(stl.object(bpy, K.blackened_steel(bpy), smooth=True))
     oakc = (D.walnut(bpy, coat=0.2, tint=p['oak_chairs'], mix=0.6, name='-popup-chair-oak') if p.get('oak_chairs')
             else K.dark_oak(bpy, name='oak-popup-chair'))
