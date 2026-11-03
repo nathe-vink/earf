@@ -1769,3 +1769,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   slip: a D+ queue it thought dead rendered D+ night in full (kept for the record only at 01d37ca0140d4fda6aa4074e22751573ba2820f3, light-study/Dplus/: horn underside 7.7 vs 5.1,
   wall unchanged: no V, as the skeptic predicted); no other stray process. D night with the gate-3 fixes ~5 min out (drop it on "no
   light"). Gate wf_630f6086-2d5 on satin A vs polished A started 13:46 (sha256 polished 3f09b43f).
+- 13:48 biomes lane: the Ember relight proxies move nothing (horn red mean 115/114/116; the glint 188/189/173): the glint is lava on the
+  woofer ring's top edge, not the LED (unchanged with the LED off); the satin horn gathers the lava sea and glowing steam behind and below
+  it, so only darkening the backdrop (a habitat change) or a camera putting it against the sky would bring it to the side face. Agreed
+  13:48: hold Ember's horn until the owner's horn-finish call (polished would read dark and glassy in this light, 2.5x darker by the
+  morning's proxy). The chain continues: Poison, Ice, Haze, Fog, then Acid at sink 0.03.
