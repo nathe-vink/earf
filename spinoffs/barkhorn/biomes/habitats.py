@@ -50,8 +50,10 @@ SETS = {
     # (the coordinator's gate on df201486: the box a dark block, the upper two thirds at sRGB 4-8. The low sun to a
     # three-quarter back position, 135, through the right wall, as Dust's, the disk still out of frame; the sky turned
     # with it, 248.3 - (160.5 - 135); framed lower, so the horn's top sits near a third of the frame, not 46 %)
-    'haze_b': {'product.instances.0.rotate_z': -10.0, 'sun.azimuth_deg': 135.0, 'sun.elevation_deg': 6.0,
-               'sky.rotation_deg': 222.8, 'camera.shift_y': -0.13},
+    # (then the sun round to the front side, 70, the disk and sky with it: the upper box 26 -> 38 (at 135) -> 41, the
+    # horn-to-box ratio 13.7 -> 4.5, horn and box one violet, 239 / 238 deg)
+    'haze_b': {'product.instances.0.rotate_z': -10.0, 'sun.azimuth_deg': 70.0, 'sun.elevation_deg': 6.0,
+               'sky.rotation_deg': 157.8, 'camera.shift_y': -0.13},
     # Fog (the coordinator's gate on 45a190d1): the clear polished horn refracted the fog bank's top edge into an X.
     # The camera 0.30 m lower (lens rise 0.06 -> 0.18 keeps the framing) puts the whole horn on plain sky, and it is
     # turned 5 deg toward the front (-15 -> -10, not front-on). f/4 for a softer background; the sun's colour cooled
@@ -61,18 +63,19 @@ SETS = {
     # Poison under the canopy: light through a canopy gap from the camera side and above (the opaque lining batts block
     # any light from behind: a sunfleck from the back-left left the cabinet at L 2)
     # (the gap's lamp mirrored in the polished horn's rim as a white check-mark glint and green flecks by the pod: a wider,
-    # softer gap at the same irradiance, so its radiance, and so its reflection, is about a quarter; reflections at full)
+    # softer gap at the same irradiance, so its radiance, and so its reflection, is about a quarter; reflections at full;
+    # then moved where the canopy opens, on the sun's side, front-left: the rim's check-mark was this gap mirrored)
     # (at 5 the real sun, from azimuth -100, caught the rim's lower-left lip as a white check-mark glint: 9 moves it off)
     # ruling 1: the shot's litter bounce had specular 0 (hidden in reflections); at full now
     'poison_g5': {'product.instances.0.rotate_z': 9.0, 'lights.litter.specular': 1.0, 'lights.skygap': {'type': 'area', 'size_m': [3.0, 3.0], 'target': [0.0, 0.0, 0.6], 'irradiance': 12.0,
-                                    'color': '#EEF2E2', 'orbit': {'azimuth_deg': 30, 'elevation_deg': 55, 'distance_m': 3.5},
+                                    'color': '#EEF2E2', 'orbit': {'azimuth_deg': -60, 'elevation_deg': 50, 'distance_m': 3.5},
                                     'specular': 1.0}},
 }
 # set props left out (the coordinator's gate on Dust, 2026-11-03: the tumbleweed floats, its shadow detached)
 DROP = {'dust': ['tumbleweed']}
 # set props changed per habitat, by fn: Haze's visible sun disk (an emitter in the set) moved with the key to the sun
 # lamp's azimuth and elevation, out of frame, so the light in the picture has one source (the coordinator, 17:29)
-MODIFY = {'haze_b': {'sundisk': {'azimuth': 135.0, 'elevation': 6.0}}}
+MODIFY = {'haze_b': {'sundisk': {'azimuth': 70.0, 'elevation': 6.0}}}
 # the black flag behind the camera, per habitat (m; default 8 x 6): Haze's front mirrored it as a dead black upper half
 FLAG = {'haze_b': (4.0, 3.0)}
 # feet bedding per habitat (m; default 0.012, the cabinet on the ground). Acid stands in a puddle: at 12 mm its bottom sat
