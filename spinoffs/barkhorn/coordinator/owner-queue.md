@@ -1137,3 +1137,13 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   19 January removed, "run with AI"); nothing published. Lamps lane: the Poison/Haze match check on the room frames; Hemisphere
   (color outside) and Core on its dock in Ice, day off / night on through the acrylic, blind critic with the owner's tests; the
   other seven held.
+- ~06:12 container restart: both workflows stopped. The audit's six strands and its verifier had finished (journal); resumed
+  wf_ccc99873-066 for the completeness critic. The review-room workflow re-run as wf_c276a4da-e43 (nothing had finished).
+- 06:20 the verifier's corrections (44 confirmed, 19 partly, 6 wrong), told to the owner: the editions (names and one line each,
+  31 Oct 22:27; captions for three, 1 Nov 02:56), the lantern (31 Oct 20:05, 21:48 with House Book v11, 23:53), the lamp redesign
+  scores (31 Oct 21:06, 22:32) and the New Objects link (1 Nov 02:03) WERE told in chat; never pictures, never the editions write-up,
+  never asked as decisions. Amsterdam has brand drafts (cb3dcf04, 621f0201, 8d1ff7f9) and its checklist allows entering as a person.
+  Packaging was told "nothing needs you" (1 Nov 11:45). Root cause: the 31 Oct ~21:44 restart wiped my 1-27 owner-question list;
+  the rebuild dropped (20) Tint Library and coins, (21) Kickstarter, (22) Session 00, (6) the debut room, (8) debut lighting, (25) the
+  photography money gap. The live site (856f80d7) still shows "The oldest amplifier is a shape." and "Something in the air." The
+  six-color bar globe as the owner's choice rests only on the bar team's log (README row 135 says the Smoke globe): unconfirmed.
