@@ -1,0 +1,24 @@
+{
+ "impression": "A clean, believable daylight product render with good wood, shadow and black gloss, but the ball reads as a solid, glossy blue billiard-ball plastic, not see-through glass. Score 6.0.",
+ "score": 6.0,
+ "tests": {
+  "acrylic": {
+   "pass": false,
+   "why": "The sphere is a uniform, saturated, opaque blue. Nothing behind it shows through: no wall, no table edge, no refraction or caustic. Its depth shows no darker edges or brighter core, and no frosted inner face can be seen. The only detail is surface reflections of the table and window, so it reads as lacquered opaque plastic. Its lower half also looks slightly milky and lavender-washed."
+  },
+  "grounded": {
+   "pass": true,
+   "why": "The dock sits flat on the wood. It has a dark contact line all round and a long, consistent cast shadow to the right. The base sits down inside the dock with a visible seated reveal, and the ball sits down inside the top ring."
+  },
+  "no_light_down": {
+   "pass": true,
+   "why": "The lamp is off and the table under and around the dock shows only daylight and shadow. There is no blue or warm pool, and no colored caustic on the wood."
+  },
+  "todays_design": {
+   "pass": false,
+   "why": "The parts and proportions match. Against the ball, the dock is about 150 across and thin, the base about 120 across and short, and there is a matte dark top ring above a polished black base. There is no cable, and it is daylight. But the ball's material does not match 'tinted cast acrylic, see-through, frosted on its inside face': it renders as opaque solid colour."
+  }
+ },
+ "verdict": "FAIL",
+ "fix_if_fail": "Make the ball a transmissive tinted dielectric (IOR about 1.49) with a lighter tint and much less absorption or scatter density, plus a thin rough or frosted inner shell, so the wall and table show through, refracted and inverted, with darker tinted rims. Keep the lamp off and add nothing that throws light down."
+}

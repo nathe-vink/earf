@@ -1,0 +1,24 @@
+{
+ "impression": "A clean, well-grounded night shot of a glowing cyan orb on a black base, but the ball reads as opaque milky opal glass, a CG lamp rather than see-through tinted acrylic. Score 5.5/10.",
+ "score": 5.5,
+ "tests": {
+  "acrylic": {
+   "pass": false,
+   "why": "The ball is a uniform, opaque, milky cyan from edge to edge. You can't see through it: no inner far wall, no internal refraction, no darker thickness at the rim, no view of the frosted inner face as a separate layer behind clear material. The only cues of a glossy shell are two softbox reflections. It looks like white-washed opal or painted plastic, not tinted glass-like acrylic."
+  },
+  "grounded": {
+   "pass": true,
+   "why": "The dock disc sits flat on the wood table with a dark contact shadow under its edge. The base sits inside the dock, and nothing floats."
+  },
+  "no_light_down": {
+   "pass": true,
+   "why": "The table around and in front of the dock keeps its neutral dark wood tone (about RGB 26-32), with no cyan pool. The only spill is a faint tint on the very front edge of the dock, which is a reflection, not light thrown onto the table."
+  },
+  "todays_design": {
+   "pass": false,
+   "why": "The parts are right: a ball, a short black polished base, a thin black disc dock about as wide as the ball, no cable. The materials are not: the ball is opaque milky rather than see-through tinted cast acrylic frosted only on its inside face. The black anodised top ring doesn't read as a separate matte metal ring either; the top lip reads as a glowing cyan rim continuous with the base's gloss."
+  }
+ },
+ "verdict": "FAIL",
+ "fix_if_fail": "Make the shell a clear, tinted transmissive material with real thickness, and put the frost or diffusion only on its inner surface, so the outer layer shows refraction, rim darkening and some depth through the ball. Give the top ring a distinct matte anodised black so it reads apart from the glossy acrylic base."
+}

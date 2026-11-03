@@ -1,0 +1,24 @@
+{
+ "impression": "A clean, convincing blue glass dome under a stepped black crown against a soft grey wall; it looks expensive but a little too perfect, like a well-lit CG catalogue shot.",
+ "score": 6.5,
+ "tests": {
+  "acrylic": {
+   "pass": true,
+   "why": "The shell reads as glossy tinted glass with crisp reflections. The pale area on the left is a window reflection, not a milky face. The body is a deep, even blue and you can barely see through it, which fits an opal layer behind the tint."
+  },
+  "grounded": {
+   "pass": true,
+   "why": "It hangs plumb from a black cord that runs out of the top of the frame, with no gap between the cord and the crown."
+  },
+  "no_light_down": {
+   "pass": true,
+   "why": "The lamp is off, no floor or table is in frame, and there is no pool or spill of light anywhere."
+  },
+  "todays_design": {
+   "pass": false,
+   "why": "The black stepped crown, cap, cord and hemispherical proportion of about 200 across match. But the camera is at eye level, so the opal white layer is never seen from below. At the mouth the layers merge into one saturated blue band, so the tinted, clear and opal acrylic (3+6+3 mm) cannot be told apart. There is also a thin dark vertical seam on the dome just below the crown at the centre."
+  }
+ },
+ "verdict": "FAIL",
+ "fix_if_fail": "Lower the camera a few degrees so it looks slightly up into the mouth. That shows the white opal underside and a rim cross-section where the tinted, clear and opal layers read as three distinct bands. Remove the dark seam under the crown."
+}

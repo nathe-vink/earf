@@ -1,0 +1,24 @@
+{
+ "impression": "A clean, graphic night shot of a glowing hemispherical pendant with crisp stepped black hardware, but the shade reads as a flat, opaque teal plastic dome with stray daylight-window reflections rather than lit layered glass, and the glow lights nothing around it. Score 5.0/10.",
+ "score": 5.0,
+ "tests": {
+  "acrylic": {
+   "pass": false,
+   "why": "The glowing body is one flat, uniform teal fill with no depth, refraction or thickness cues. It reads as opaque painted plastic, not see-through coloured glass. The outer tinted 3 mm shell shows only as a near-black navy fringe at the silhouette. The 6 mm clear shell cannot be told apart from it. The two pale rectangular reflections are hard-edged daylight-window shapes, which is odd at night, and they wash those patches milky blue-grey."
+  },
+  "grounded": {
+   "pass": true,
+   "why": "The shade hangs from a continuous black cord that exits the top of the frame into the stepped crown. It does not float."
+  },
+  "no_light_down": {
+   "pass": true,
+   "why": "Below the rim the background stays at RGB about 25-30 from y 760 down to the bottom, flat and neutral. There is no pool or cone of light under the mouth, only a hairline warm edge at the rim. In fact the lamp lights almost nothing: no halo on the wall and no spill on the crown."
+  },
+  "todays_design": {
+   "pass": true,
+   "why": "Mostly matches: a hemispherical shade hanging mouth-down on a black cord, with black stepped crown and cap hardware on top, switched on, at night. Proportions look plausible: the crown is about 0.6 of the shade diameter and the shade height is close to its radius. Three caveats. The three-layer stack does not read: the clear 6 mm layer is invisible and the tinted outer layer looks black-navy, not a tint that matches the teal glow. The camera is almost level, so the opal layer is not really 'seen from below'; only a thin blue band shows at the mouth."
+  }
+ },
+ "verdict": "FAIL",
+ "fix_if_fail": "Make the outer tinted and clear shells actually transmissive and refractive, so the opal glow is seen through visible thickness: coloured edge brightening at the rim, a gradient across the dome instead of a flat fill. Replace the hard rectangular window reflections with a dim, small night reflection. Let the glow put a faint halo on the wall and an underlight on the crown, and drop the camera slightly so the opal mouth reads from below."
+}
