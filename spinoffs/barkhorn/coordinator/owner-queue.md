@@ -1480,3 +1480,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   single agent: cabinet passes all four; the horn fails see-through ("an opaque, mottled, frosted red sheet", median 169/22/8; "a dark
   sooty stain at the throat with two drips" = the driver and inner posts as soft shadows through the satin). The rest ~15 min each,
   done ~12:45 (Dust, acid_b, poison_g5, ice, haze_b, fog_b). My gate wf_603287f2-d2f (spec-aware brief) on Ember started 11:00.
+- 11:01 D day gate wf_4c76247f-752 (3 critics, 13 min): SHOW 3/3, every note passes. Against A: the horn, faces, top, feet, floor,
+  shadow and bottom batt pixel-identical; nothing glows; "at phone size D and A cannot be told apart"; the channels "honest, neutral
+  engineering detail, not clutter". The one cost: the brace channel as a short near-black bar under the woofer's lower right (one
+  critic: "a stray dark mark"). Sent to the lane (low priority): set the channel back behind the brace's lip or recess it, noted in
+  BASES.md. The horn noted by all three as satin by spec: "carries the tint but not the depth... a different material from the
+  glass-clear cabinet" (evidence for the horn-finish question).
