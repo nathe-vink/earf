@@ -3236,3 +3236,5 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   SURFACE 0.92), so 0.92 x 28.1 = 25.9 % against 25.8 %. Same check (Y x 0.92 against spec): Dust 59.1/59.1, Ice 57.4/57.6, Poison 32.3/32.3,
   Acid 77.7/77.6, Ember 14.1/14.1, Smoke 11.6/11.7, all within 0.2 points. The asset stays. (Its message was stamped 20:35, ahead of its
   queue time of 20:33.)
+- 20:35 c3: merged 1e79f362 (2ee8fdc82318cb88a42fa5ed1ac3828c7835b7b2, pushed; the variants file was unmodified), generated fix1 chunk 2,
+  started only deck-home-portrait at 20:35 as a tracked task (tall Ember and Dust skipped).
