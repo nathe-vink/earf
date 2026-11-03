@@ -231,6 +231,15 @@ speakers' light, still reads cyan, 36° off.
 - **Cost:** about the same price for each [E].
 - **Heat and lumens:** at the same current they rise slightly, since cool white LEDs are a little more efficient.
 - **Owner's call:** a 5700 K lamp at home is clinical, and warm-dim is lost for Ice.
+- **The coordinator's proposal (2026-11-03):** tunable white in both lamps, each tint's default set so the lamp shows
+  its own color. Ice about 5700 K; Haze about 4000 K; Ember, Dust, Acid and Poison 2700 K; warm always available.
+  - **Core:** its two-channel 2700/5700 K board does it as is.
+  - **Hemisphere:** a tunable-white COB doesn't fit the same holder, driver and cost.
+    - Bridgelux's Vesta tunable 9 mm arrays come in 2700–5000 K and 2700–6500 K, but the Vesta SE has its own holder,
+      about 36 mm across, against the hub's 28.4 seat.
+    - They need a two-channel driver and a second control, roughly +$40 to +$80 a lamp [E].
+    - So Hemisphere takes one fixed Vero 10 per tint: 2700 K for the warm and green tints, about 4000 K for Haze, and
+      5000 to 5700 K for Ice. Tunable stays a later option (BOM note on `hemi-cob`).
 
 **Every tint's lit hue, by the model:** blackbody light through 3 mm of each tint, CIELAB hue, with the day hue as D65
 white through the same tint. The model overstates the drift by about a quarter against the Ice render (−83 against
