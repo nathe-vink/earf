@@ -11,7 +11,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..', '..', '..', '..'))
 PROMPT = os.path.join(HERE, 'PROMPT-realism.md')
 DUEL = os.path.join(ROOT, 'critic', 'ab', 'PROMPT-DUEL.txt')
-CARD = ('Card: a belt-drive record player in through-tinted cast acrylic (the Smoke tint), to sell at about $6,500. '
+CARD = ('Card: a belt-drive record player in through-tinted cast acrylic, to sell at about $6,500. '
         'This frame: {}. The record and the sleeve are props.\n')
 
 

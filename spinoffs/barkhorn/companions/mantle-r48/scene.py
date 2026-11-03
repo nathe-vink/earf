@@ -129,11 +129,11 @@ def wear(nt, strength=1.0, scale=1.0):
 
 def acrylic(name, bands, tint, rough=0.004, wear_on=True, ring=None, edge_rough=0.010):
     """`bands`: [(z0, z1, 'tint'|'clear')] in metres. The material has slots: 0 glassy (cast faces), 1 polished edge,
-    2 buffed tread, 3 machined satin. One node tree per slot, the volume shared."""
+    2 buffed tread, 3 machined satin, 4 bead-blasted (a frosted band). One node tree per slot, the volume shared."""
     st = sigma_tint(tint)
     D = max(st) * 1.0001
     mats = []
-    for slot, (r, wr) in enumerate(((rough, True), (edge_rough, False), (0.045, False), (0.07, False))):   # bores vapor-polished
+    for slot, (r, wr) in enumerate(((rough, True), (edge_rough, False), (0.045, False), (0.07, False), (0.55, False))):   # bores vapor-polished
         m, nt, out = node_tree(f'{name}-{slot}')
         b = nt.nodes.new('ShaderNodeBsdfPrincipled')
         b.inputs['Base Color'].default_value = (1, 1, 1, 1)
@@ -372,7 +372,7 @@ def make_label(path):
 
 
 # ---------------------------------------------------------------- geometry helpers
-def classify_faces(obj, bands_inset, edge_band=0.0012):
+def classify_faces(obj, bands_inset, edge_band=0.0012, frost=None):
     """Material slots by how a shop leaves each face: 0 the sheet's cast face (horizontal, on the very top), 1 a
     polished outer edge, 2 a buffed tread (horizontal, not the top), 3 machined (holes, pockets, grooves, undersides
     of cut-outs)."""
@@ -389,6 +389,8 @@ def classify_faces(obj, bands_inset, edge_band=0.0012):
                 f.material_index = 0
             elif n.z < 0 and abs(c.z - zbot) < 1e-4:
                 f.material_index = 0
+            elif frost and n.z < 0 and abs(c.z - (zbot + frost)) < 1e-4:
+                f.material_index = 4          # the bead-blasted band over the light (Strata, 2026-11-03)
             else:
                 # a tread if it lies in the outer ring of the terraces, else a pocket's floor
                 dx = min(c.x - x0, x1 - c.x); dy = min(c.y - y0, y1 - c.y)
@@ -749,7 +751,8 @@ def build(args):
             elif f == 'lid':
                 pass
             else:
-                classify_faces(o, (meta['o'] * mm if f in ('deck', 'plinth') else 0.0) + (0.03 if f == 'cover' else 0.0))
+                classify_faces(o, (meta['o'] * mm if f in ('deck', 'plinth') else 0.0) + (0.03 if f == 'cover' else 0.0),
+                               frost=(meta['P'].get('frost_d', 0) * mm or None) if f == 'plinth' else None)
             for p in o.data.polygons:
                 p.use_smooth = False
             o['caustic'] = True
@@ -921,11 +924,12 @@ def setup_world(args, meta):
         # edge and light into the slabs' faces, so the fronts open up (round 48's last critics)
         area('front-strip', (1.6, 0.10), (cx - 0.55, cy - 0.85, 0.10), (cx, cy - 0.15, 0.06), args.front_strip, col=(1.0, 0.98, 0.95), spread=40)
         area('front-card', (1.2, 0.30), (cx + 0.35, cy - 0.75, 0.03), (cx, cy, 0.07), args.front_strip * 0.4, col=(1.0, 0.99, 0.97), spread=80, caust=False)
-    if args.shot == 'dusk':
-        # dusk: the room's light down to a blue evening, the base's loop the brightest thing
+    if args.shot == 'dusk' and not args.day:
+        # dusk: the room's light down to a blue evening (--ambient of the day's), the base's loop the brightest thing;
+        # --day keeps the dusk camera in the day's light, the loop off
         for o in bpy.data.objects:
             if o.type == 'LIGHT':
-                o.data.energy *= 0.05; o.data.color = (0.70, 0.78, 1.0)
+                o.data.energy *= args.ambient; o.data.color = (0.70, 0.78, 1.0)
         bg.inputs['Color'].default_value = (0.010, 0.013, 0.025, 1)
     # mark casters and receivers for MNEE
     for o in bpy.data.objects:
@@ -1043,6 +1047,7 @@ if __name__ == '__main__':
     ap.add_argument('--tint-mode', default='stock', choices=('stock', 'wide', 'custom'))
     ap.add_argument('--front-strip', type=float, default=0.0)
     ap.add_argument('--edge-frost', type=float, default=0.0)
+    ap.add_argument('--day', action='store_true'); ap.add_argument('--ambient', type=float, default=0.05)
     ap.add_argument('--base-tint', default='smoke')
     ap.add_argument('--strip-color', type=float, nargs=3, default=(1.0, 0.62, 0.30))
     a = ap.parse_args(argv)

@@ -331,6 +331,41 @@ The owner picked A, Strata Float v3, at about 12:10 UTC (r46-owner-notes 5b63e05
 | size | 450 W x about 370 D (with the hinges) x 94 H to the deck's top, about 199 H with the lid closed |
 | weight | about 12.9 kg with the lid (11.8 without); the supplies are outside it |
 
+## 12. The light up through the acrylic (2026-11-03)
+
+The owner (r46-owner-notes 15c15784): "I think mantle has the same issue where the underglow is projected down instead
+of casting through the acrylic." A light must shine through the acrylic so the piece glows from within: on in night
+pictures, off in day ones. Section 1 had already named the fault ("an emissive stripe, not light travelling through
+acrylic"), and 2026-11-01's `a-dusk-ember-2423.png` shows it: warm light pooled on the shelf.
+
+**What changed (a proposal until the owner signs it).** The deck is now edge-lit, the way an acrylic sign is.
+- The strip lies in a groove routed into the deck's underside, 10 mm in from its edge: 7.4 wide x 7 deep, one loop of
+  four straight runs.
+- It sits on the floor of a black U-channel, open face up, and faces up into the slab.
+- The groove's ceiling is bead-blasted, so the light spreads into the acrylic rather than beaming straight up.
+- The slab carries the light to the satin outer edge, already bead-blasted since v3. The edge glows, and a soft line
+  shows through the top over the groove.
+- Below, only the channel's black floor shows. Nothing falls on the shelf but a faint spill.
+- The base has no light now, and its slot is gone. That leaves the base solid except for the feet's studs and the
+  rear plate's inserts.
+- The lead leaves the groove at the back right and drops 4 mm onto the rear plate, under the deck's overhang.
+
+**Tried first, and dropped.** A strip in a groove on the base's top, facing up through the gap into a frosted band
+under the deck. From any normal eye height it shows through the float's gap as a bright line: the stripe again.
+
+**Supply.** The light keeps its own: a listed Class 2 24 V 12 W adapter into the rear plate's 2.5 mm inlet, through its
+SPST. FAULTS.md item 9 (the light and the phono stage sharing one adapter on a Y lead) was fixed by the rear plate
+(9d617c0c): the S2 has its own listed 18 V adapter on its own 2.1 mm inlet.
+
+| | |
+|---|---|
+| parts | the strip, 5 mm 24 V dotless COB, 2700 K, CRI 90+, 5 W/m or less (about 4 W/m chosen): about 1.51 m in four runs, soldered jumpers at the corners; the U-channel 7 x 7, black anodized, about 1.5 m, mitred, bonded with neutral-cure silicone; the adapter and SPST as before |
+| power | about 6.0 W at 4 W/m (7.6 W at most at 5 W/m), 0.25 A at 24 V: half the 12 W adapter's rating, a PS1 circuit |
+| heat | about 4 W/m inside acrylic, which spreads heat poorly: about 10-15 K over the room at the channel (an estimate). Acrylic is good to about 80 C; check with a thermocouple on the first sample after an hour on |
+| the deck | a groove 7.4 x 7 routed into its underside, 10 in from the edge, its ceiling bead-blasted (the same blast as its satin edge); clear of the post seats, the arm's bore and puck screws, the motor pocket and the hinge inserts by 2.7 or more |
+| the base | nothing; its slot is gone |
+| cost per unit | strip and channel about +$10 (1.5 m against 1.2 m); the groove is one more pass on the deck's routing and the ceiling's blast goes with the edge's, about +$10-15; the base's slot (about -$5) is gone: about **+$15-20** in all, an estimate |
+
 ## Open questions for the owner
 
 1. **A or B,** or B's cover on A's float. *(Answered 2026-11-01: A, Strata Float v3.)*

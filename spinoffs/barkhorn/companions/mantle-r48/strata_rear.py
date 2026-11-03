@@ -122,22 +122,30 @@ def wiring(ax):
 
 
 def light(ax):
-    ax.set_title('D  The light: section through the slot (4:1) and a corner, plan (1:1)', fontsize=FS + 1, loc='left')
+    ax.set_title('D  The light, the deck edge-lit: section through the groove (4:1) and a corner, plan (1:1)', fontsize=FS + 1, loc='left')
     s = 4.0
-    si, sw, sh = P['slot_in'], P['slot_w'], P['slot_h']
-    # section: x outward to the base's edge, z up; the base's bottom at 0
-    R(ax, 0, 0, s * 30, s * 12.7, fc=ACR, ec='k')
-    R(ax, s * (30 - si - sw), 0, s * (30 - si), s * sh, fc='white', ec='k')           # the slot
-    cx0, cx1 = s * (30 - si - sw + 0.2), s * (30 - si - 0.2)
-    ax.add_patch(Polygon([(cx0, 0.3 * s), (cx0, s * 6.8), (cx1, s * 6.8), (cx1, 0.3 * s), (cx1 - 0.6 * s, 0.3 * s), (cx1 - 0.6 * s, s * 6.2),
-                          (cx0 + 0.6 * s, s * 6.2), (cx0 + 0.6 * s, 0.3 * s)], closed=True, fc=BLACK, ec='k', lw=0.5))
-    R(ax, cx0 + 0.8 * s, s * 5.2, cx1 - 0.8 * s, s * 6.2, fc='#f6efd8', ec='k', lw=0.5)
-    for k in range(4):
-        ax.annotate('', (cx0 + (1.6 + 1.3 * k) * s, -3 * s), (cx0 + (1.6 + 1.3 * k) * s, 5.0 * s), arrowprops=dict(arrowstyle='->', lw=0.4, color='#d08a2a'))
-    ax.text(s * 31, s * 6.3, 'base, 12.7 Smoke', fontsize=FS - 2)
-    ax.text(s * 31, s * 3, f'slot {sw:g} x {sh:g} from below,\n{si:g} in from the edge', fontsize=FS - 2)
-    ax.text(-2, s * 16.5, 'U-channel 7 x 7, black anodized,\nopen face down, closed back up;\nstrip 5 mm on its back, facing down', fontsize=FS - 2)
-    ax.text(cx0, -4.5 * s, 'light onto the shelf', fontsize=FS - 2, color='#b06a10')
+    gi, gw, gd = P['glow_in'], P['glow_w'], P['glow_d']
+    T = 25.4
+    # section: x outward to the deck's edge (at 30), z up from the deck's underside
+    R(ax, 0, 0, s * 30, s * T, fc='#e9c9c9', ec='k')
+    ax.plot([0, s * 30], [s * T / 2] * 2, color='#999', lw=0.4, ls='--')               # the bond line
+    ax.plot([s * 30] * 2, [0, s * T], color='#b06a10', lw=2.2)                        # the satin edge
+    g0, g1 = s * (30 - gi - gw), s * (30 - gi)
+    R(ax, g0, 0, g1, s * gd, fc='white', ec='k')                                       # the groove
+    ax.plot([g0, g1], [s * gd] * 2, color='k', lw=1.6, ls=(0, (1, 1)))                 # its bead-blasted ceiling
+    cx0, cx1 = g0 + 0.2 * s, g1 - 0.2 * s
+    ax.add_patch(Polygon([(cx0, 0.2 * s), (cx0, s * (gd - 0.1)), (cx0 + 0.9 * s, s * (gd - 0.1)), (cx0 + 0.9 * s, 1.1 * s), (cx1 - 0.9 * s, 1.1 * s),
+                          (cx1 - 0.9 * s, s * (gd - 0.1)), (cx1, s * (gd - 0.1)), (cx1, 0.2 * s)], closed=True, fc=BLACK, ec='k', lw=0.5))
+    R(ax, cx0 + 1.0 * s, s * 1.1, cx1 - 1.0 * s, s * 2.1, fc='#f6efd8', ec='k', lw=0.5)
+    mid = (g0 + g1) / 2
+    for dx, dz in ((0, 1), (0.9, 0.6), (-0.9, 0.6), (1.0, 0.25)):
+        ax.annotate('', (mid + dx * s * 9, s * (gd + 1.5 + dz * 9)), (mid, s * (gd + 0.3)), arrowprops=dict(arrowstyle='->', lw=0.5, color='#d43'))
+    ax.annotate('', (s * 33, s * 12), (s * 29.6, s * 12), arrowprops=dict(arrowstyle='->', lw=0.8, color='#b06a10'))
+    ax.text(s * 33.5, s * 12, 'glows: light out\nthrough the satin edge', fontsize=FS - 2, va='center', color='#b06a10')
+    ax.text(-2, s * (T + 2), f'deck, 25.4 (two 12.7, bond line dashed); the groove {gw:g} x {gd:g} from below, {gi:g} in from the edge,\n'
+            'its ceiling bead-blasted (dotted) so the light spreads into the slab', fontsize=FS - 2)
+    ax.text(-2, -3 * s, 'U-channel 7 x 7, black anodized, open face up; the strip 5 mm on its floor, facing up.\n'
+            'Below, only the channel\'s black floor shows: nothing falls on the shelf but a faint spill.', fontsize=FS - 2, va='top')
     # corner plan
     ox, oy = s * 46, s * 2
     W = 40.0
@@ -147,9 +155,9 @@ def light(ax):
                           (ox + W - a - w, oy)], closed=True, fc=BLACK, ec='k', lw=0.4))
     ax.plot([ox + W - a, ox + W - a - w], [oy + W - a, oy + W - a - w], color='w', lw=0.8)
     ax.plot([ox + W - a - 3.7, ox + W - a - 3.7, ox + W - a - 6], [oy + 2, oy + W - a - 4.5, oy + W - a - 3.7], color='#d43', lw=0.8)
-    ax.text(ox, oy - 3, 'a corner from below:\nthe channel mitred at 45,\nthe strip\'s runs joined by\na soldered jumper (red):\nCOB strip does not bend\nin its own plane',
+    ax.text(ox, oy - 3, 'a corner from below\n(in the deck):\nthe channel mitred at 45,\nthe strip\'s runs joined by\na soldered jumper (red):\nCOB strip does not bend\nin its own plane',
             fontsize=FS - 2, va='top')
-    ax.set_xlim(-6, ox + W + 4); ax.set_ylim(-14 * s, s * 21); ax.set_aspect('equal'); ax.axis('off')
+    ax.set_xlim(-6, ox + W + 4); ax.set_ylim(-14 * s, s * 32); ax.set_aspect('equal'); ax.axis('off')
 
 
 def main():
@@ -159,9 +167,10 @@ def main():
     wiring(fig.add_subplot(gs[1, 0])); light(fig.add_subplot(gs[1, 1]))
     fig.text(0.03, 0.96, 'Mantle: Strata Float v3, rear plate, wiring and earth, rating, the light (round 48)', fontsize=14, weight='bold')
     fig.text(0.03, 0.935, 'mm. A proposal until the owner signs it. The audit\'s Strata items (ENGINEERING-AUDIT.md, r46-owner-notes): no rear panel, no wiring or '
-             'earth drawing, no rating label; an 8 mm strip in a 5 mm slot with 2 mm corners; a 25 W supply.', fontsize=FS + 1)
-    loop = 2 * ((D['Wb'] - 2 * (P['slot_in'] + P['slot_w'] / 2)) + (D['Db'] - 2 * (P['slot_in'] + P['slot_w'] / 2))) / 1000
-    notes = (f'The light: {loop:.2f} m of 5 mm 24 V COB strip at about 4 W/m (5 W/m at most) is about {4 * loop:.1f} W ({5 * loop:.1f} W at most), 0.2 A, on a listed Class 2 / LPS 24 V adapter of 12 W:\n'
+             'earth drawing, no rating label; an 8 mm strip in a 5 mm slot with 2 mm corners; a 25 W supply. The light moved into the deck on 2026-11-03.', fontsize=FS + 1)
+    cl = P['glow_in'] + P['glow_w'] / 2
+    loop = 2 * ((D['W0'] - 2 * cl) + (D['D0'] - 2 * cl)) / 1000
+    notes = (f'The light: {loop:.2f} m of 5 mm 24 V COB strip at about 4 W/m (5 W/m at most) is about {4 * loop:.1f} W ({5 * loop:.1f} W at most), 0.25 A, on a listed Class 2 / LPS 24 V adapter of 12 W:\n'
              'under half its rating, and a PS1 circuit under UL 62368-1. No PWM dimmer inside (its FCC Part 15B status was open): one brightness, set by the strip\'s choice,\n'
              'and an SPST on the plate. If the owner wants it dimmable, a listed Class 2 dimmer in the adapter\'s lead, outside the record player, keeps the plate free of clocked circuits.\n'
              'First-sample checks: hum and noise at the out in both switch positions, into an outside phono stage, with the light on and off and the motor running (A-weighted, against the S2\'s\n'
