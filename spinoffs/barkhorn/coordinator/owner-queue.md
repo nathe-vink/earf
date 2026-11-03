@@ -2331,3 +2331,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   spinoffs/barkhorn/planet/r44l1/, only the no-plinth switch changed) to keep the House Book's architecture (kit44.py now draws look
   2). Next r43-shop.
 - 16:09 my gate on r43-listening started (the old version as context). Look 1 for r44 kept (it is what the House Book shows).
+- 16:11 biomes lane: Ice with the polished horn at 27911a44f2da2764886ed179d80cb42960f248fb (habitats/ice-portrait-1200x1500.jpg and
+  ice-portrait-batt-crop.jpg; bedded 22 mm, roughness 0.05 in the log, 64 samples). Its gate passed all four (the internals and the
+  cabin window through it; a dark contact band, luma 108 under the base vs 121-123 open snow, no light under the left front corner at
+  3x; no light down; "a smooth glassy shell with the driver at its throat, no X or seams", but "a fairly flat, shallow mouth rather
+  than a deep flare"). The batt plainly in view. Next, one at a time: the Haze and Poison proxies, then Fog's final.
+- 16:11 my gate on Ice polished started (the batt crop, the satin Ice and the polished Dust as context).
