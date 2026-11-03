@@ -190,6 +190,10 @@ TT = dict(name='Mantle', kind='Record player', route='mantle',             # rou
 # outside, over clear. COPY_NEXT False keeps today's words everywhere; it goes on with the speaker lane's new picture set,
 # because the pictures on the site still show the old Mantle (a motor pod, clear posts) and the old shade.
 COPY_NEXT = False
+# round 48: the site audit's no-regret fixes (site_v2.py), and the audit's recommended home order ("launch film"),
+# each off until the owner compares them with today's (the coordinator, 2026-11-03)
+V2 = False
+HOME_V2 = False
 TT_NEXT = dict(
     line='A record player that floats over a pool of its own light.',
     # the Mantle lane's spec as built (r48-mantle-design 71d3163e, companions/mantle-r48/README.md section 11)
@@ -3242,6 +3246,9 @@ def build():
             rest = rest.replace(f'<h1>{TAGLINE}</h1>', '<h1 class="tagline">' + TAGLINE_NEXT.replace(' ', '&nbsp;') + '</h1>')
             i = head.rindex('</style>')
             head = head[:i] + tagline_css(TAGLINE_NEXT) + head[i:]
+    if V2 or HOME_V2:
+        import site_v2
+        head, rest = site_v2.apply(sys.modules[__name__], head, rest)
     open(os.path.join(SITE, 'index.html'), 'w').write(HEAD + head.strip() + '\n</head>\n<body>\n' + rest.strip() + '\n</body>\n</html>\n')
     favicons()
     open(os.path.join(SITE, 'robots.txt'), 'w').write('User-agent: *\nDisallow: /\n')
