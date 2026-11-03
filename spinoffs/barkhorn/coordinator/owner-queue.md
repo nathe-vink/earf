@@ -1392,5 +1392,5 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   reflector's spill lights the opal so the dome glows and lights the wall; the mouth near-white, not salmon). Hemisphere's tunable
   check (d6b5b76a): a Vesta tunable array doesn't fit the 28.4 seat, the one-channel phase-cut driver or the cost (+$40-80), so one
   fixed Vero 10 per tint (2700 K warm and green, ~4000 K Haze, 5000-5700 K Ice); Core's 2700/5700 K board covers the tunable plan.
-  Gate wf_eb405d5e-e30 started 10:17 on the two day frames plus the three nights (sha256 clear 4be242dd, frost a6b7619f, hemi
+  Gate wf_eb405d5e-e30 started 10:16 on the two day frames plus the three nights (sha256 clear 4be242dd, frost a6b7619f, hemi
   88bcf5d8).
