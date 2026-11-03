@@ -179,7 +179,18 @@ def black_flag(bpy_, linked, size):
     from bpy_extras.object_utils import world_to_camera_view
     bpy_.context.view_layer.update()
     offs = []
+    # a real card on the low sun's side stands between the sun and the set and throws a long shadow across the frame (the
+    # Haze A/B: the field in front went dark), as no photographer would place one: that card is left out
+    sun_dir = None
+    for o in sc.objects:
+        if o.type == 'LIGHT' and o.data.type == 'SUN' and not o.hide_render:
+            z = o.matrix_world.to_3x3() @ Vector((0, 0, 1))          # toward the sun
+            if z.z < 0.5 and not GLOSSY_FLAG[0]:
+                sun_dir = Vector((z.x, z.y, 0.0)).normalized()
     for k, sgn in enumerate((1, -1)):
+        if sun_dir is not None and (side * sgn).dot(sun_dir) > 0.2:
+            offs.append('left out (sun side)')
+            continue
         c_ = f.copy(); c_.data = me; sc.collection.objects.link(c_)
         c_.scale = (2.6, 2.4, 1.0)
         off = 1.8
