@@ -128,7 +128,7 @@ The same score as round 1, for other reasons. The outline is gone, and the criti
 are settings or the renderer, not the design:
 - the top's clipping is the night exposure (a stop over the day's): a stop down keeps the red deep;
 - the shelf gets no red because light leaving the glass to reach a diffuse face is a caustic path Cycles drops here. A
-  real deck would throw a faint red spill under its edges, which the owner allows (a pool he does not).
+  real deck would throw a faint red spill under its edges, which the owner allows (a pool they do not).
 
 Its "cooler" list asks for the edge-lit look of round 1 again ("the face deep red and the perimeter burns"), the
 opposite of what the owner asked for. No second round was run.
