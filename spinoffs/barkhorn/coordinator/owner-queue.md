@@ -1594,3 +1594,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   fill, the side seam closed or the brace edge satin, the slot's strip end hidden, strays and the leak removed, highlights held, the
   ambient toward slate, a sharper floor reflection); Smoke black dropped; add a lighter grey sheet to the day comparison if 2064 reads
   dark. The base question slips to about 14:00 UTC.
+- 12:16 speaker lane, folding the fixes: the fill a broad 6 x 6 m soft area from above-front (55 degrees, 3.5 m) in slate #3E5678
+  (sat ~0.5) with a slate sky; the neon line came from the brace strips ending 4 mm from the clear vertical ribs (piping light to their
+  front edges): the runs now stop 40 mm clear (x 126-434), a build note to follow; the back floor run split wide of the rib's notch
+  (x 230 / 330); the floor strips down to ~13 W/m; exposure -0.67 stop; a darker floor #1E2125 at roughness 0.06; Smoke's black lining
+  dropped. The model rebuilding (~20 min), then D+ proxy, D+ night, D+ day, D night re-render, polished A. The Smoke day comparison on
+  its last frame.
