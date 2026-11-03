@@ -1917,3 +1917,5 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   10 degrees) and the background through it. Haze's camera next if the struts stay on the rim; if Haze stays navy under side light, it
   stops and reports a fact for the owner. Acid measured the same way before its sink-0.03 re-render. The corner glows, sheen and top
   edge noted for Haze's final.
+- 14:46 biomes lane: my Haze message reached it ~2 min after Fog started; Fog (sun -150 against the camera's -15) killed by PID at
+  14:45; its side-sun proxy (110) queued after Haze's, then Poison's. Committed 881625f785cfd321679e455045469e45937f64ec.
