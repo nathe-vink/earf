@@ -2431,3 +2431,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 16:50 the deck (3sihYaT4ckNTF6WE7SWR7x, v68; source scratchpad/deck/project/slides/*.html, deck-remote/ from 06:03): words and pictures
   to be updated together as v69 once the deck set (hero, row, cover, home, home portrait) lands and passes its gate, so the deck is
   never half-updated; read the live artifact first.
+- 16:49 bar lane: the r44-lantern final at d4cc27134f9e0a349f44bcd99b8e628790c333e4 (1200 x 800, 128 samples, 344 s, 2.4 GiB; look 1's kit
+  r44l1 7ae9f488; the Ember pair on the end-grain floor on its own feet, the terrazzo stack plinths gone, horn A polished, nothing
+  from below; Mother keeps her own plinth). r44-street and r44-bar get no new finals: Tropos stands inside the closed lantern and
+  can't be seen (the street proxy at 79426d5d came out the same as the old frame); INVENTORY.md corrected. Finals: r43-listening
+  7cdce50f, r43-shop e518e55f, r43-window e29bd63b, r44-lantern d4cc2713. Smoke still waiting: bar-listening, door-hero/bar-door,
+  bar-street, bar-decks, bar-smoke, r42 counter/night/shop. (Its message did not yet acknowledge my 16:30 re-stage note.)
