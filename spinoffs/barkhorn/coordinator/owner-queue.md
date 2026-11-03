@@ -1983,3 +1983,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   (item 2, next). Lane order: the close-up pair (the honest polished view with the HF lead; helps item 2), Smoke's horn in the ~50 %
   sheet with the light-path check, the deck-hero proof on A. Later walkthrough item added: do the site's uplit pictures (a lit plinth)
   stay as styled mood shots, or go. The board's base card to mark decided with the horn answer (one republish).
+- 15:12 walkthrough item 2 shown: the horn finish (horn-satin-vs-polished.jpg re-sent with an "Item 2" caption; both passed 3/3 in
+  wf_630f6086-2d5, all three favouring polished). The facts given: polished reads as the cabinet's tinted glass (the glassy depth the
+  owner missed), costs nothing extra (the forming press's own face), shows the driver and the two rear posts through it (the HF lead
+  runs inside a post; a close-up pair is coming), shows fingerprints, more rejects; satin reads as a separate frosted part, a
+  bead-blast at ~$15-30, can't be buffed, glows like a lightbox when backlit (Ember, Haze), reads as "sea glass" in soft light (Ice).
