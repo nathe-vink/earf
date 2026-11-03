@@ -97,6 +97,12 @@ def _final(shots, rig, fl, title, size=None, samples=None, rotate=None):
     s = shots.strata_lit(s, glow=20.0)
     if 'rim' in s.get('lights', {}):
         s['lights']['rim']['power_w'] = 0.0               # as site(): the rim lamp made the formed horn read flat
+    # the owner's rule on light (shots.honest_lights). finals31's `glow`, a small lamp behind the horn at specular 0 and
+    # held off transmission, goes: on turn frames 00 and 06 it changed nothing past the noise (mean 0.4 of 255), and made
+    # honest it put clipped hot spots on the horn and the cabinet's top (2.7 % and 10 % at 250)
+    if rig.startswith(FIN) and 'glow' in s.get('lights', {}):
+        del s['lights']['glow']
+    shots.honest_lights(s)
     s['title'] = title
     if size:
         s['size'] = size

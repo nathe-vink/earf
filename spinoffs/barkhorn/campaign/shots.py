@@ -612,6 +612,9 @@ def honest_lights(s, log=None):
             if recv:     # a reflection card shown in some parts only: a part-link all the same
                 out.append(f'{name}: panel receivers {recv} removed')
                 del L['receivers']
+            if not spec_only and 'specular' in L and L['specular'] != 1.0:   # a lit panel hidden from reflections
+                out.append(f"{name}: panel specular {L['specular']} to 1.0")
+                L['specular'] = 1.0
             continue
         if spec_only:
             continue
