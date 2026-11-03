@@ -91,6 +91,19 @@ The held shots: site-front-off-tall-smoke, site-front-off-wide-smoke, site-hero-
 
 ## Phase 2: the rest of the site (proposed 2026-11-03; no renders until the coordinator confirms)
 
+**Approved** by the coordinator, 2026-11-03 15:44. To move a helper from phase 1 to phase 2, after its last phase-1 chunk has landed and been pushed:
+
+    git fetch origin r33-speaker-horn
+    git merge --no-edit 9db8da171425bd5ca89ad439f9e0aeecda211c7b     # on your own branch: a merge, never a rebase or a force-push
+    git push -q -u origin <your-branch>
+    python3 spinoffs/barkhorn/campaign/rollout.py --phase 2 --base A --horn polished --hold smoke --chunks <yours>
+    bash spinoffs/barkhorn/campaign/rollout/A-polished-p2/queue-NN.sh      # each chunk its own tracked task, one at a time
+
+- **The models need no rebuild.** Between 5295e58f and 9db8da17 only `rollout.py`, this file and some committed renders changed. No product file and no CAD source changed, so the two `.glb` models built at 5295e58f are still right.
+- **The merge can't conflict:** a helper's branch holds only its own renders under `renders/2026-11-04/barkhorn/rollout/`.
+- **Where phase 2's renders go:** `renders/2026-11-04/barkhorn/rollout/A-polished-p2/`. Commit and report them as in phase 1.
+- **Your chunks:** c2: 1, 4, 9. c3: 2, 5, 10. c4: 3, 6. The speaker lane: 7, 8. Chunk 1 holds Sound's Ice arc; if your container is the first to finish phase 1, say so, and the coordinator may give you chunk 1 first.
+
     python3 spinoffs/barkhorn/campaign/rollout.py --phase 2 --base A --horn polished --hold smoke --chunks <yours>
 
 The site lane's list (`r47-site-next`, `spinoffs/barkhorn/launch/PICTURES-2026-11-03.md`), each built from its old rig by `strata_lit`, as the site frames are. With Smoke held: 211 shots, about 15.8 h, in 10 chunks:
