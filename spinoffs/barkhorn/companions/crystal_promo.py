@@ -1,4 +1,8 @@
-"""Round 32e, Dome and Orb for earf.world (the owner, 2026-10-19: "sick lamps. Add them to the site as well and work
+"""NOT TO RULINGS 1-3 (the coordinator, 2026-11-03): hidden_point's pools are stand-ins in open air outside the
+ball, hidden from the camera, from transmission and from reflections. When these shots are next needed, replace them
+with the real lamp inside the fitting, as lamp_pictures.py's Core B does.
+
+Round 32e, Dome and Orb for earf.world (the owner, 2026-10-19: "sick lamps. Add them to the site as well and work
 on some product images"). The site is pale paper (#F4F1EC, pictures on #F1EDE8), so every frame stands on a pale,
 warm studio ground, dim enough that the glow reads, with no black voids. The lamps are placed by Planet's kit piece
 (earf_moon.py, fns "dome" and "orb"), as everywhere else.

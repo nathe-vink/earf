@@ -1,4 +1,8 @@
-"""Round 32d's frames: the Orb on the table and the Dome over it, placed by Planet's kit piece (earf_moon.py, fns "orb"
+"""NOT TO RULINGS 1-3 (the coordinator, 2026-11-03): orbpool0/1 are stand-ins in open air outside the Orb's equator,
+hidden from the camera, from transmission and from reflections. When these shots are next needed, replace them with
+the real lamp inside the fitting, as lamp_pictures.py's Core B does ('domepool' inside the hub may stay).
+
+Round 32d's frames: the Orb on the table and the Dome over it, placed by Planet's kit piece (earf_moon.py, fns "orb"
 and "dome"), in Moon's bar frame (moon_shots.py) in smoked and in Ember; the swap (a Dome lowered off its fixture, spare
 covers in three tints on the counter); and the catch, close.
 

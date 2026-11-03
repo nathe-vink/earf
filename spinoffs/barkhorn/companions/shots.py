@@ -1,4 +1,8 @@
-"""Round 31's companion shots for the engine: each product in the eight Atmosphere colours on the look book's sweep
+"""NOT TO RULINGS 1-3 (the coordinator, 2026-11-03): bell_lights' three points are stand-ins just outside Bell's opal
+sleeve, hidden from the camera and from reflections (and from transmission unless asked). When these shots are next
+needed, replace them with the real lamp inside the sleeve, as lamp_pictures.py's Core B does.
+
+Round 31's companion shots for the engine: each product in the eight Atmosphere colours on the look book's sweep
 (lookbook21's sweep colour for each, its key, fill and wash), a hero of each beside a Cloud in the same colour, and a
 detail of each. Writes studio/shots/barkhorn/companions/*.json; render them with
 
