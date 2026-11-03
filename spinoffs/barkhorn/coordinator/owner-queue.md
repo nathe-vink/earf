@@ -1859,7 +1859,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   from 50 % total with the 8 % surface loss; 2064's 29.3 % gives #818181 the same way). Sheets: "held": the only grey near it in R1
   is Chemcast's 2064, 57.1 % at 3 mm (TAP's "Light Smoke"; held at 20 mm ~57 %); TruCast 2064 29.3 %, 2074 11.7 %; "deep" (~83-85 %
   at 3 mm): nothing in R1 (Chemcast's 2064 deep is ~4 % at 20 mm). No code named that it hasn't seen.
-- 14:28 sent: brand = the brand lane's Book (draws on deck and site renders; nothing to add); Chemcast 2064 is the one real
+- 14:27 sent (my message said 14:28, a minute ahead of the clock): brand = the brand lane's Book (draws on deck and site renders; nothing to add); Chemcast 2064 is the one real
   candidate (R1 l.203; R1 §1.2: Chemcast lists LT at 0.118 in only, so the off-cuts settle it); yes to one deck-hero framing proof at
   proxy samples after items 1 and 2; asked (a) the queue's sample counts and the total with the site frames at 128 + denoiser, (b)
   what 3-4 parallel containers would each need (the repo SHA, assets outside git, Blender version), to plan helper sessions.
