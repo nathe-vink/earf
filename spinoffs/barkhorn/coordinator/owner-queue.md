@@ -2180,3 +2180,15 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   conflict possible; renders to renders/2026-11-04/barkhorn/rollout/A-polished-p2/).
 - 15:45 sent each helper its phase-2 chunks, to run on its own after phase 1 per 852b338f: c2 1, 4, 9 (chunk 1, Sound's Ice arc,
   first); c3 2, 5, 10; c4 3, 6 (3 with the dark-ground studio). Reports as before.
+- 15:46 site lane: the close-up definitions at r47-site-next 7a8b5297f8ef15c3d62e922f6da97769a7ea7f96 (fcd7d2ab adds them; the next
+  corrects a citation). A correction: the audit's six are "horn mouth, edge glow, uplit base, joinery, back mark, coin" (plan.json l.4;
+  critiques.json l.16, critic:ux); "cabinet edge" and "plate" were its substitutions; with "No light" the uplit base falls away and
+  the edge glow can only be the daylight edge. Proposals (no tint or framing in the audit): joinery Ember, tight on a vertical corner,
+  4:5; back mark Fog, square-on, the word ~2/3 of the width, raking daylight, 4:5 (the mark: README l.285, round 29 l.527); coin Ember,
+  on edge or angled, its own reflection and tinted shadow, 4:5 or 1:1 (plan.json l.11 "so each has its own reflection"; the OWNER,
+  owner-site-notes.txt l.27: "The existing coin render needs to be updated. Each coin has the same square reflection on it, which
+  makes them look flat all over again."); the open choice: the EARFcoin instead ("EARFcoin: A, engraved, reeded edge", l.31).
+- 15:47 my call: the colour coin (the owner's coin note is about the colour coins). Sent to the speaker lane: rigs for joinery
+  (Ember), back mark (Fog, variant A from 4f05e0be, blind-read at 440 px) and the colour coin (Ember, its own reflection; all eight if
+  the rig renders them, each with its own) into whichever phase-2 queue frees first; the edge glow = its cabinet-edge macro; the
+  uplit base dropped. The owner's coin note joins the walkthrough as a check-back item when the coins land.
