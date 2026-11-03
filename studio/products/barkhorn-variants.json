@@ -58,6 +58,18 @@
    "glow": 40.0,
    "glow_color": "#FFB46B"
   },
+  "lining": {
+   "preset": "batting",
+   "color": "#18181B",
+   "sheen": 0.5,
+   "subsurface": 0.0,
+   "cloud": 0.03
+  },
+  "reflector-film": {
+   "preset": "plastic",
+   "color": "#F2F2EF",
+   "roughness": 0.6
+  },
   "uplight-edge": {
    "preset": "frosted",
    "color": "#F4F2EE",
@@ -90,7 +102,7 @@
    "material": "brass"
   },
   {
-   "match": "builtin-floor-led",
+   "match": "builtin-floor-led|side-light-led",
    "material": "builtin-led"
   },
   {
@@ -98,7 +110,7 @@
    "material": "builtin-led-brace"
   },
   {
-   "match": "base-uplight-channel|base-uplight-plate|builtin-floor-channel|builtin-brace-channel|base-lplate-tray",
+   "match": "base-uplight-channel|base-uplight-plate|builtin-floor-channel|builtin-brace-channel|side-light-channel|base-lplate-tray",
    "material": "channel"
   },
   {
@@ -116,6 +128,14 @@
   {
    "match": "base-plinth-light",
    "material": "led"
+  },
+  {
+   "match": "lining-top-window",
+   "material": "lining"
+  },
+  {
+   "match": "floor-film",
+   "material": "reflector-film"
   },
   {
    "match": "base-uplight-edge",
@@ -1977,13 +1997,25 @@
    "base-uplight-panel",
    "base-uplight-plate"
   ],
-  "Built-in light": [
+  "Built-in floor": [
    "builtin-floor-led",
    "builtin-floor-channel",
-   "builtin-floor-standoffs",
+   "builtin-floor-standoffs"
+  ],
+  "Built-in light": [
    "builtin-brace-led",
    "builtin-brace-channel",
    "builtin-brace-standoffs"
+  ],
+  "Side light": [
+   "side-light-led",
+   "side-light-channel"
+  ],
+  "Floor film": [
+   "floor-film"
+  ],
+  "Top window": [
+   "lining-top-window"
   ],
   "Cabinet wash": [
    "cabinet-wash"
