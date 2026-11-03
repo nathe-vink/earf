@@ -29,14 +29,17 @@ HABITATS = {
 SETS = {
     # the coordinator's gate on Ember (2026-11-03): a three-quarter view so the side panel carries the lava through the
     # red (the right crack's lamp, on that crack, aimed at the speaker), the camera lower so the horn clears the ridge
-    # rotate_z -1, not -5: at -5 the side panel's foot mirrored a lava patch as a hot streak, read as an LED strip
-    'ember': {'product.instances.0.rotate_z': -1, 'camera.position': [2.4349, -6.0267, 0.8],
+    # rotate_z: -5 mirrored a lava patch in the side panel's foot (an LED strip); -1 left the polished horn's left wall
+    # mirroring the sky as a pale wedge (the gate on 8fe79529); 12 (10 deg off the camera's line) is under test
+    'ember': {'product.instances.0.rotate_z': 12, 'camera.position': [2.4349, -6.0267, 0.8],
               'lights.crack_r.target': [0.0, 0.0, 0.5], 'lights.crack_r.irradiance': 2.0},
     # the coordinator's gate on Haze (2026-11-03): with the sun behind, the lining batts block the backlight and the
     # cabinet sits in its own shadow (a near-black box). The key from the side, as in Dust (sun at 118, passed)
     # (the sun lamp at 1.5 deg is lost in the grass and hills: 6 deg as Dust's; the sky's own sun disk turned with it,
     # 248.3 -> 187.8, so the sky and the lamp agree and nothing bright sits behind the speaker)
-    'haze_b': {'sun.azimuth_deg': 100.0, 'sun.elevation_deg': 6.0, 'sky.rotation_deg': 187.8},
+    # the polished horn mirrors the bright sky in one wall as a pale wedge (half an X) when it's turned far from the
+    # camera; turned to about 10 deg off the camera's line it reads clean, as Ice's does (front-on gives a symmetric X)
+    'haze_b': {'product.instances.0.rotate_z': -5.0, 'sun.azimuth_deg': 100.0, 'sun.elevation_deg': 6.0, 'sky.rotation_deg': 187.8},
     # Fog (the coordinator's gate on 45a190d1): the clear polished horn refracted the fog bank's top edge into an X.
     # The camera 0.30 m lower (lens rise 0.06 -> 0.18 keeps the framing) puts the whole horn on plain sky, and it is
     # turned 5 deg toward the front (-15 -> -10, not front-on). f/4 for a softer background; the sun's colour cooled
@@ -45,7 +48,7 @@ SETS = {
               'camera.fstop': 4.0},
     # Poison under the canopy: light through a canopy gap from the camera side and above (the opaque lining batts block
     # any light from behind: a sunfleck from the back-left left the cabinet at L 2)
-    'poison_g5': {'lights.skygap': {'type': 'area', 'size_m': [1.6, 1.6], 'target': [0.0, 0.0, 0.6], 'irradiance': 12.0,
+    'poison_g5': {'product.instances.0.rotate_z': 5.0, 'lights.skygap': {'type': 'area', 'size_m': [1.6, 1.6], 'target': [0.0, 0.0, 0.6], 'irradiance': 12.0,
                                     'color': '#EEF2E2', 'orbit': {'azimuth_deg': 30, 'elevation_deg': 55, 'distance_m': 3.0},
                                     'specular': 1.0}},
 }
