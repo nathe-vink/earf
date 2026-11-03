@@ -1967,3 +1967,13 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 15:04 check-in moved to 15:55 as #44 (the walkthrough mode). Item 1 shown: scratchpad/walkthrough/01-base.jpg (A by day, passed
   3/3 in wf_630f6086-2d5; D by day, passed 3/3 in wf_4c76247f-752; the owner's own site uplit image), the base question, one answer
   asked. The lantern's night picture is not shown (v2 held 2 of 3; v3 coming).
+- 15:09 Smoke ~50 % gate wf_f3111455-c52 (3 critics, 20 min): HOLD 3/3, all on the horn; the cabinet answers the owner's note (3/3:
+  see-through smoked glass at phone size, clearly better than 2064: the inside ~2x brighter, the side face's braces instead of a
+  black mirror, the woofer ring as glass; front ~114 against Ice's 120). The horn (the unchanged deep grey sheet, ~85-90) now reads
+  as a separate gunmetal/anodised part with a chrome-like lip, the heaviest mass; fix: the horn in the cabinet's ~50 % sheet or one
+  step deeper (body ~L 110-150, the throat dark, the lip a grey glass edge), a real material change (a tone lift made brushed
+  aluminium). One critic's physics flag: the top white lining renders as white as the backdrop (~240-244) behind a ~50 % wall
+  (expected nearer ~170-200 after the light's double pass): check the light-path settings and report expected vs rendered, so the
+  frame doesn't oversell. Caption: "the target look, pending the physical sample".
+- 15:09 sent to the speaker lane: the new order (the close-ups; D night v3 next, since item 1 offers the lantern at night; then
+  Smoke's horn and the light-path check; then the deck-hero proof) and the Smoke fixes above.
