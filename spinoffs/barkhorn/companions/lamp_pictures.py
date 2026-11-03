@@ -83,6 +83,22 @@ def build(frame, samples, scale):
         return SC.acrylic_material(nm, [(-1e4, 1e4, which or tname)], rough, 'polished', loading=loading, scratch=scratch,
                                    bond=False)
 
+    def thin_shadow(m, T):
+        """Round 12: a thin clear shell lets light through to what's behind it; Cycles' shadow rays stop at glass, so a
+        lamp shut in a glass ball lit nothing outside (the coordinator's gate, point 7). For shadow rays only, the shell
+        passes its own transmission T (per channel); camera and bounce rays still refract. It drops only the shell's
+        small refractive offset."""
+        nt = m.node_tree; outn = next(n for n in nt.nodes if n.type == 'OUTPUT_MATERIAL')
+        prev = outn.inputs['Surface'].links[0].from_node
+        lp = nt.nodes.new('ShaderNodeLightPath'); tb = nt.nodes.new('ShaderNodeBsdfTransparent')
+        tb.inputs['Color'].default_value = (*T, 1); mx = nt.nodes.new('ShaderNodeMixShader')
+        nt.links.new(lp.outputs['Is Shadow Ray'], mx.inputs[0]); nt.links.new(prev.outputs[0], mx.inputs[1])
+        nt.links.new(tb.outputs[0], mx.inputs[2]); nt.links.new(mx.outputs[0], outn.inputs['Surface'])
+        return m
+
+    def shell_T(tint, loading, mm):
+        return tuple(math.exp(-a * mm / 1000.0) * 0.96 for a in SC.absorption(tint, loading))   # 4 % lost at each face
+
     def light(nm, kind, loc, watts, radius, rot=(0, 0, 0), spot=None):
         """A real light at the LED's colour temperature (round 4, 2026-11-03, the coordinator's brief: the light reaches
         the room through the acrylic; the tint's lit hue is the source's through the glass)."""
@@ -149,14 +165,15 @@ def build(frame, samples, scale):
             # halves are joined round it
             # (round 9: no hairline wear here; at 1024 samples the light bouncing between the two balls drew it as a
             # crumpled caustic net over the core)
-            sphere('ball', 80.0, zc, acrylic('ball', 0.0, loading=1 / 3, scratch=0.0))
-            sphere('ball-in', 74.0, zc, acrylic('ball-in', 0.0, loading=1 / 3, scratch=0.0), inward=True)
+            Tb = shell_T(tname, 1 / 3, 3.0)        # each face carries half the 6 mm wall's absorption
+            sphere('ball', 80.0, zc, thin_shadow(acrylic('ball', 0.0, loading=1 / 3, scratch=0.0), Tb))
+            sphere('ball-in', 74.0, zc, thin_shadow(acrylic('ball-in', 0.0, loading=1 / 3, scratch=0.0), Tb), inward=True)
             # round 9 (the gate: the Ø90 core too small, "an LED orb in a black bubble"): Ø120, its center 12 below the
             # outer's, on a short spacer ring on the grommet; a 13 gap at its equator
-            ri = float(os.environ.get('CORE_IN_R', '60.0')); zi = zc - float(os.environ.get('CORE_IN_DZ', '12.0')) * MM
+            ri = float(os.environ.get('CORE_IN_R', '60.0')); zi = zc - float(os.environ.get('CORE_IN_DZ', '10.0')) * MM
             # round 9: the core open at its base, Ø40 over the window, seated on the grommet's ring: the LED lights the
             # frost directly (closed, all its light reached the frost through the polished shell, a caustic: noise)
-            sphere('core', ri, zi, acrylic('core', 0.0, 'Clear', scratch=0.0), hole_below=20.0)
+            sphere('core', ri, zi, thin_shadow(acrylic('core', 0.0, 'Clear', scratch=0.0), shell_T('Clear', 1.0, 3.0)), hole_below=20.0)
             if os.environ.get('CORE_OPAL', '1') == '1':
                 # round 11 PROPOSAL (the gate on B's day: the core lost, within 10 % of its surround): the core in 3 mm
                 # opal (white, volume-diffusing) cast acrylic, as Hemisphere's liner, rather than bead-blasted clear: it
@@ -188,6 +205,25 @@ def build(frame, samples, scale):
             mx2 = nt.nodes.new('ShaderNodeMixShader')
             nt.links.new(mr_.outputs['Result'], mx2.inputs[0]); nt.links.new(prev.outputs[0], mx2.inputs[1])
             nt.links.new(dk.outputs[0], mx2.inputs[2]); nt.links.new(mx2.outputs[0], outn.inputs['Surface'])
+            if night:
+                # round 12 (the gate, point 7: the lamp's light landed nowhere): the core's lit opal face is the light,
+                # as the coordinator's ruling 3 allows for a bulb inside its own opal fitting (the LED below stays as its
+                # visible face only). Brightest at the crown, as the LED aims up (point 10); the dot's ring dimmer
+                outn = next(n for n in nt.nodes if n.type == 'OUTPUT_MATERIAL'); prev = outn.inputs['Surface'].links[0].from_node
+                emn = nt.nodes.new('ShaderNodeEmission'); emn.inputs['Color'].default_value = (*blackbody(cct), 1)
+                gz = nt.nodes.new('ShaderNodeMapRange'); gz.clamp = True
+                gz.inputs['From Min'].default_value = -(ri - 3.0) * MM; gz.inputs['From Max'].default_value = (ri - 3.0) * MM
+                E = float(os.environ.get('CORE_EMIT', '6.0'))
+                gz.inputs['To Min'].default_value = 0.75 * E; gz.inputs['To Max'].default_value = 1.15 * E
+                nt.links.new(sx.outputs['Z'], gz.inputs['Value'])
+                dim = nt.nodes.new('ShaderNodeMath'); dim.operation = 'MULTIPLY'
+                inv = nt.nodes.new('ShaderNodeMath'); inv.operation = 'SUBTRACT'; inv.inputs[0].default_value = 1.0
+                nt.links.new(mr_.outputs['Result'], inv.inputs[1])
+                nt.links.new(gz.outputs['Result'], dim.inputs[0]); nt.links.new(inv.outputs[0], dim.inputs[1])
+                nt.links.new(dim.outputs[0], emn.inputs['Strength'])
+                ad = nt.nodes.new('ShaderNodeAddShader')
+                nt.links.new(prev.outputs[0], ad.inputs[0]); nt.links.new(emn.outputs[0], ad.inputs[1])
+                nt.links.new(ad.outputs[0], outn.inputs['Surface'])
             sphere('core-in', ri - 3.0, zi, cm, inward=True, hole_below=20.0)
             # round 9 PROPOSAL (the gate: the LED hotspot): a white dot printed inside the core over the LED, Ø50, that
             # sends about half the near light back up into the core, as LED globes do
@@ -213,7 +249,8 @@ def build(frame, samples, scale):
             # round 8 (the gate: a hotspot cone at the base): the LED behind the window as a Lambertian disc the
             # window's size, not a 160 deg spot
             # (the disc speckled at full samples: back to a point source, a full hemisphere with a soft edge)
-            light('led', 'SPOT', (0, 0, z0 + 0.0148), LED_W, 0.012, spot=160.0)
+            if var != 'nested':   # round 12: in B the core's opal face is the light (above)
+                light('led', 'SPOT', (0, 0, z0 + 0.0148), LED_W, 0.012, spot=160.0)
             led = bpy.data.meshes.new('led-face'); bm = bmesh.new()
             bmesh.ops.create_circle(bm, cap_ends=True, segments=48, radius=0.013); bm.to_mesh(led); bm.free()
             lo = bpy.data.objects.new('led-face', led); bpy.context.scene.collection.objects.link(lo)
@@ -222,7 +259,7 @@ def build(frame, samples, scale):
             b = em.node_tree.nodes['Principled BSDF']; b.inputs['Emission Color'].default_value = (*blackbody(cct), 1)
             b.inputs['Emission Strength'].default_value = 8.0
             led.materials.append(em); lo.visible_diffuse = False; lo.visible_shadow = False
-        cam = ((0.12, -1.02, tz + float(os.environ.get('CORE_CAM_Z', '0.29'))), (0.0, 0.0, tz + 0.098), 85.0)
+        cam = ((0.12, -1.02, tz + float(os.environ.get('CORE_CAM_Z', '0.36'))), (0.0, 0.0, tz + 0.098), 85.0)
     else:
         rim = tz + 0.70                                                 # the rim 700 above the table
         H = 48.2                                  # the collar's hole (round 1: the closed tops left a dark seam)
@@ -290,7 +327,7 @@ def build(frame, samples, scale):
     if night:
         # round 4: a white ceiling at 2.5 m, so the lamp's light that leaves upward comes back into the room, as at home
         SC.plane('ceiling', (4.3, 4.0), (0.85, 0.0, 2.5), (180, 0, 0), SC.principled('ceiling', '#E8E4DC', 0.9))
-        ev = float(os.environ.get('NIGHT_EV', '2.5' if prod == 'core' else '0.6'))
+        ev = float(os.environ.get('NIGHT_EV', '1.8' if prod == 'core' else '0.6'))
         k = 2.0 ** (0.6 - ev)                     # round 9: one evening room for the family, the same fill at each exposure
         # round 11 (the coordinator's rulings 1 to 3, 2026-11-03: nothing in the room hidden from the glass's
         # reflections or from view through it; no light linking): the night room is a flat, dim evening ambient (no
@@ -334,8 +371,9 @@ def build(frame, samples, scale):
             # front part of the left wall, and the sun in through it from the front left, onto the ball's face; the
             # wall behind the ball takes no sun (the window wall shades it), as a room by a window does
             SC.window_gobo(-1.3, -1.3, -0.35, 0.75, 2.4, panes=(1, 2))
-            SC.area('window-sky', (-1.25, -0.82, 1.55), (0, -90, 0), (0.9, 1.6), float(os.environ.get('CSKY', '60')), '#DCE6F5')
-            SC.sun_lamp('sun', (0.75, 0.45, -0.45), strength=float(os.environ.get('CSUN', '10')), color='#FFE7C8', angle=1.5)
+            # round 12 (the gate: the window a flat grey card in the glass): the sky behind the frame, so its bars show
+            SC.area('window-sky', (-1.45, -0.82, 1.55), (0, -90, 0), (0.9, 1.6), float(os.environ.get('CSKY', '60')), '#DCE6F5')
+            SC.sun_lamp('sun', (0.75, 0.45, -0.45), strength=float(os.environ.get('CSUN', '10')), color='#FFE7C8', angle=3.0)
         else:
             SC.window_gobo(-1.3, -1.3, 0.9, 0.75, 2.4, panes=(2, 2))
             SC.area('window-sky', (-1.25, -0.2, 1.55), (0, -90, 0), (1.5, 2.0), 90.0, '#DCE6F5')
@@ -350,7 +388,7 @@ def build(frame, samples, scale):
     SC.render_settings(1800, 1200, samples, scale, exposure=exposure, look='AgX - Medium High Contrast')
     bpy.context.scene.cycles.caustics_refractive = True
     if night and prod == 'core':   # round 8: rare bright caustic paths speckled the frost (the denoiser blotched them)
-        bpy.context.scene.cycles.sample_clamp_indirect = 100.0; bpy.context.scene.cycles.blur_glossy = 1.0
+        bpy.context.scene.cycles.sample_clamp_indirect = float(os.environ.get('CLAMP', '20')); bpy.context.scene.cycles.blur_glossy = 1.0
         # (round 9: the crumpled net was caustic noise, the core lit through its own shell; with the core open at its
         # base the default guides are clean again)
     SC.camera(cam[0], cam[1], lens=cam[2], fstop=5.6)
