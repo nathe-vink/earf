@@ -119,3 +119,36 @@ so light would leak out of the horn. The biomes lane asked whether the acrylic v
 - the clear material's shadow rays cross its surface and still absorb in the volume.
 
 So the file is 42 MB, not 23. The plates' print, the screws and the lining's voile webs are still collapsed.
+
+## Horn A's outside: satin or polished (a feasibility note, 2026-11-03)
+
+**Why this matters.** The owner misses "the old renderings of the horn where the thicker parts of the acrylic got darker, almost giving it a glassy feel".
+- The biomes lane's proxies show where that depth comes from: a polished outside. With the satin outside, the horn glows evenly, and thick and thin look the same. Closing the mesh changes nothing (63.2 against 63.4 mean luminance).
+- Polished (roughness 0.05), it is about 2.5 times darker. The throat reads deep, and the posts show through.
+- Satin is the owner's own spec ("Horn: A, smooth, satin outside", 2026-11-03 03:00), so this is the owner's question. The manufacturing answer, plainly:
+
+**Which face touches the tool.**
+- The horn is pressure-formed from 10 mm cell-cast acrylic over a **male plug** (`make/horn-risks.md`). The plug touches the **inside**, the air face.
+- The **outside is the free side**: it touches only air at about 4 bar. So the outside comes off the press with the cast sheet's own gloss. A polished outside is the formed part as it is; satin is the extra step (a bead blast).
+
+**What would show on a gloss outside.**
+- Dust that lands on the free side before or during forming prints as small pits or specks. Gloss shows them; satin hides them. The press needs the clean room the risk register already asks for (F3).
+- Slight ripple or orange peel from uneven heating, mostly at the mouth's corners, which form last. Gloss shows it under a raking light.
+- Webbing (F2) is a reject either way.
+- Mark-off from the plug's vents and texture (F3) is on the inside and doesn't change.
+- Handling scuffs after forming: trimming, annealing and assembly need a protective film or soft cradles.
+
+**Polishing a formed part.**
+- **Flame polishing** isn't used on a large formed face. It stresses cast acrylic and risks crazing near the cemented joints (A1); it's for edges only, away from the cement.
+- A gloss outside is kept as formed and touched up locally by hand buffing, a few minutes of compound on a soft wheel, about **$10-20 a horn**. A full hand buff of the whole shell, if the free side comes off hazy, is about 0.5-1 h, **$30-60 a horn**.
+- The bead blast for satin is about **$15-30 a horn** plus masking. Gloss, kept as formed, costs about the same as satin or less, but its reject rate for specks and ripples is higher. The forming trial (`make/forming-trial.md`) should judge the free side as well as the corners.
+
+**Why satin was chosen.** It was the owner's look ("smooth, satin outside"). It also hides the free side's specks and ripples, fingerprints and fine scratches. That second reason is real, but it's a by-product: satin was not chosen to hide defects.
+
+**In use.**
+- **Gloss** shows fingerprints and fine swirl scratches. Both polish out with plastic polish, as on any acrylic speaker.
+- **Satin** hides fingerprints, but oil can leave darker patches, and a scratch shows as a shiny line that can't be buffed out without re-blasting the panel.
+
+**Tooling.** No change. The plug shapes the inside either way: $6,925 for the prototype plug and base, $14,465 for the production aluminium tool.
+
+**What it changes in the light.** On a gloss outside, the volume's absorption reads: thick parts (the throat, the pod) darker, the mouth's thin lip lighter, and the posts and the woofer's top visible through it. On satin the surface scatters first, and the horn glows evenly in its colour. The frame pair is in `renders/2026-11-03/barkhorn/base-question/gate2/`: `A-ice.png` (satin) and `A-ice-polished.png`.
