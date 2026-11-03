@@ -3411,3 +3411,4 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   13.2 min 2.02 MB, Dust 14.0 min 2.06 MB, Acid 14.3 min 2.07 MB. Its looks: Dust and Acid still show a thin bright white vertical strip on
   the right side face's front edge (Ember less); in all three, a bright white glowing line along the cabinet's bottom edge at the floor.
   Then merged 3b541d9d (6dc089a965f0f3a6d060a545b0c6a1e787a97055), regenerated, chunk 5 (wide Poison, Ice, Haze, ~87 min) from 21:53.
+- 21:53 the fix1 wide gate (Ember, Dust, Acid) launched (context: the honest A-ice-polished).
