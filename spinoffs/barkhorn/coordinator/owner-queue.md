@@ -3880,7 +3880,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 23:55 sent: the LED flag to the lamps lane (check whether that spot is live in Core B; if it points down it lights the dock from
   inside, which is wrong physics and an underglow risk; stop and fix if so). To the Mantle lane: C3e stands; send the Ice proxy with
   its audit.
-- 23:55 Mantle lane (stamped 23:57 at a 23:55:55 queue time; within clock skew): scene_audit.py widened (c12d9b8a). It casts every
+- 23:55 Mantle lane (stamped 23:57 at a 23:55:55 queue time; within clock skew): scene_audit.py widened (3662d16276737d51a1fc357747eb307557e256e4; the lane first quoted "c12d9b8a" before its commit returned, and corrected it at 23:56). It casts every
   camera-hidden mesh and every camera-hidden area lamp's real rectangle or disk through the scene's own camera, on the saved .blend.
   C3e night and day: flag-r, flag-top, bg/fill/key/side/strip/top and wall-wash (night) all 0.0 %. No glossy-only props, no links,
   no specular <1, transmission on, every mesh casts shadows. It runs on every night picture from now on.
