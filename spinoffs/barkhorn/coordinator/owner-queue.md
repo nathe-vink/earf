@@ -2213,3 +2213,18 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   proposals become a walkthrough item.
 - 15:49 speaker lane: the close-up rigs' commit is 70ae89ad3bb4db828e8dd8e3d8c12530813b65f4 ("8bd6cd5e" was written before git
   answered; it now sends only after the commit returns its hash).
+- 15:51 speaker lane: (1) the coins at e5c72dc5d6793ec912d609073a42992e5ce5e8cf: coins-eight, the eight on their edges in a row, each at
+  its own turn (8, 52, -24, 31, -47, 14, 66, -9 degrees), under the studio HDRI and one broad key, no two with the same reflection;
+  3700 x 528 (half the old strip's 7400 x 1056; can double for the final); chunk 12 (~44 min), its own. (2) The build proposals at
+  c9fcd1aee36bfef398f91435c1489a62fce11d42 (asset README, "The polished horn's see-through"). Already true: the pod IS one simple round
+  pod, 200 mm, centred on the throat, but CLEAR, in the horn's own tinted acrylic, so the lobes and rings are refraction (the driver's
+  dark body through the flare's fillets and the clear pod wall); a matte black or dark-bronze pod, or a black sleeve on the driver,
+  would make it one dark round shape; more generous fillets at the throat change the plug (tooling). The "silver lens" is the
+  driver's own bright exit and band (driver-bright), as bought: darkening it means a finished part or a dark ring. The posts are
+  already one 16 mm bronze diameter into the pads with bronze collars at both ends, the rear pair near the middle (x 240 and 320 of
+  560); they read blue because they're seen through 10 mm of Ice. Deep focus (f/16) in future close-ups. No model change until after
+  the roll-out and the owner's yes. The Smoke final ~5 min out.
+- 15:51 helper c3: setup done (barkhorn-cloud.glb 73,429,624 B, 15:24-15:36, 12.6 min; barkhorn-variants.glb 16,447,340 B, 15:36-15:51,
+  14.6 min; both exit 0); r33-rollout-c3 at 5295e58f. The cloud kit build rewrites tracked files under out-cloud/ (bom.csv,
+  build.json, drawings), left uncommitted per the rules. Chunk 5 (deck-home-portrait, front-off-tall Ember and Dust, ~91 min) started
+  15:51; phase-2 instructions noted.
