@@ -1,0 +1,662 @@
+{
+ "critic:ux": {
+  "issues": [
+   {
+    "severity": "high",
+    "area": "information architecture",
+    "where": "desk-01.jpg (nav), desk-02.jpg and desk-03.jpg (line cards and their 'See the \u2026' links), desk-10.jpg and phone-10.jpg (where the page ends)",
+    "problem": "Both captures end at 'Write to us.' and the footer. The Tropos detail, close-ups, turning view, specs, lamps and record player sit after the contact block in the one long page, and none of them appears in either capture, so I couldn't judge them. The nav (Speakers, Lighting, Turntable, Colours, Enquire) and the cards' 'See the speakers / lighting / record player' links all point into that same document. No address exists that a buyer, journalist or retailer could land on, bookmark or send for 'Tropos in Poison'. The richest product content sits below the sign-off. The founder's own brief (a home page that introduces each line, then product pages where you browse colors) is still unbuilt.",
+    "fix": "Build real pages, each with its own title, description and share image: / (home), /tropos, /lighting (Hemisphere and Core), /mantle, /colors with /colors/ember \u2026 /colors/smoke, /studio (who, where, progress, press) and /inquire. Put the color in the URL (/tropos?color=poison) so every product in every color can be linked and the inquiry opens pre-filled. Move every product section off the home page. The home keeps tiles that link out, and the footer becomes a sitemap. Until Mantle and the cordless Core are rendered, their pages are one-screen 'in the works' pages, not full pages for designs that are being replaced."
+   },
+   {
+    "severity": "high",
+    "area": "product imagery",
+    "where": "desk-01.jpg, desk-02.jpg, desk-04.jpg, desk-06.jpg, desk-07.jpg, desk-09.jpg; phone-01.jpg to phone-03.jpg, phone-07.jpg, phone-08.jpg",
+    "problem": "Every speaker picture shows the outgoing Tropos (horn on posts, dark-lined cabinet), not the coming design with its smooth horn, white lines and uplit base. The whole site will look out of date the day the new speaker is shown. The Mantle card shows an almost colorless deck on white, so the one card whose line says 'in the same eight colours' shows no color, and it is the old Mantle. The same deck sits on the sideboard in the room. 'Hemisphere and Core' shows only Hemisphere. The three line cards come from three unrelated settings: a dusk meadow, a peach gradient and a white seamless. Nowhere on the home page is a product shown large, sharp and alone, the way Apple introduces a product.",
+    "fix": "Write one shot list and render it once with the new Tropos, the redesigned Mantle and the cordless Core, in this order. (1) The hero lineup, as separate desktop 16:9 and phone 4:5 frames. (2) Studio singles of each product in all eight colors on one seamless, front and three-quarter, at the same camera height and light; these feed the product galleries and the line cards. (3) Six close-ups: the horn mouth, the glow at the acrylic's edge, the uplit base, the joinery, the mark on the back, a coin. (4) The uplit eight. (5) The room. The line cards use (2) at 4:5, each product in a different color. Anything not yet re-rendered shows an 'in the works' frame, never the superseded design."
+   },
+   {
+    "severity": "high",
+    "area": "hero",
+    "where": "desk-01.jpg, phone-01.jpg, top of phone-02.jpg",
+    "problem": "The product is small. On desktop the speakers stand about 270 px tall in a 900 px window. On the phone each is about 50 px wide, the colored shadows outweigh the speakers, and about 170 px of empty backdrop sits above them. The headline sits on its own band above the picture. About 165 px of bare floor separates the shadows from the line and buttons, and the fold cuts the render note. A murky gray band behind the horns shows where the render's backdrop meets the page's paper. The eyebrow 'EARF \u00b7 TROPOS' repeats the logo, and the line under it describes what the picture already shows. The speakers' name labels ('Ember 01' \u2026 'Smoke 08', which are in the page text) don't show, so the lineup doesn't teach the color names and a separate dot legend below has to.",
+    "fix": "Make the hero one composed, full-height frame. Set 'A world of sound, in color.' at about 96\u2013112 px on the picture's own backdrop; sample the render's background as the page color so there's no seam. Scale the lineup so the speakers fill about 55% of the window height. Put each color's name in small type at its speaker's foot, and make each speaker a link to Tropos in that color. Inside the frame, one primary button ('Explore Tropos') and one quiet link ('Colors'). Make a separate phone render with the camera lower and closer, speakers at least 80 px wide with legible horns, and little sky. Replace the descriptive sentence with one line about the speaker, such as 'Tropos, a horn loudspeaker you can see through.' Delete the eyebrow and the dot legend (top of desk-02.jpg, phone-02.jpg)."
+   },
+   {
+    "severity": "high",
+    "area": "color choice and product detail",
+    "where": "desk-02.jpg (dot legend), desk-03.jpg and phone-03.jpg (coins), desk-04.jpg and phone-04.jpg (dots in the dark band), desk-08.jpg and desk-09.jpg (room)",
+    "problem": "The only working color choice in view is inside the dark band. It changes only the night picture and is forgotten on the next scroll: the room stays 'A pair in Poison.', the cards keep their own colors, and the contact block knows nothing of the choice. The 'By colour' coins look like controls, but nothing shows them selecting anything. 'A room can be one colour or three', the founder's idea of same-color and opposite-color pairings, is promised in a sentence and never shown. The colors are drawn three different ways with different hues: flat dots, rendered coins, and darker flat dots in the dark band, where Fog turns mid-gray and Smoke turns black.",
+    "fix": "Use one swatch component everywhere: the rendered acrylic coin with a hit area of at least 44 px, the name and tagline on focus or hover, a ring for the selected state, and hues from one token set. On each product page the coins sit under the main picture and drive everything: the main picture, an eight-view gallery, the 360, the in-room shot, the button ('Inquire about Tropos in Poison') and the form's color field. Keep the choice in the URL. Below the coins, add 'Goes with': the same color a shade deeper in another line (monochromatic: Mantle in Poison) and the opposite color (complementary: Hemisphere in Ember), each linking to that product in that color. Each /colors page carries the habitat, the tagline, the color in every product, its pairings and 'Request the coin'."
+   },
+   {
+    "severity": "high",
+    "area": "the 'Put a light under it' interaction",
+    "where": "desk-03.jpg (bottom) to desk-07.jpg (top); phone-03.jpg (bottom) to phone-07.jpg",
+    "problem": "The pinned section runs about three screens on both layouts, and in both captures two of those screens are solid near-black: the lower half of desk-04.jpg, all of desk-05.jpg and the upper half of desk-06.jpg; all of phone-05.jpg and phone-06.jpg. Wherever the pin or its script doesn't hold (an in-app browser, reduced motion, a slow phone, any full-page capture that gets passed around), that black is the page. Where it does hold, scrolling drives eight separate color changes that the coins already make, which is the 'too sparse and slow' the founder called out. And 'Ember', at about 96 px, is louder than the hero's headline.",
+    "fix": "Unpin it. Make one full-height stage: the uplit photograph full-bleed and centered, the color's name and tagline beside it, and the coins as the only control (click, tap, swipe, arrow keys). Cross-fade in about 400 ms. Auto-advance every 4 s or so only while the stage is in view, and stop at the first touch. Show a static first frame for reduced motion. If scroll does anything here, it does one continuous thing, once: the room goes dark and the light comes up. Follow straight on with the uplit eight as the payoff (desk-06.jpg; the receding crop in phone-07.jpg is the best picture on the site). With the new uplit base, 'put a light under it' becomes a feature of the speaker, so move the stage to the Tropos page and keep the uplit eight on the home."
+   },
+   {
+    "severity": "high",
+    "area": "conversion and credibility",
+    "where": "desk-10.jpg and phone-10.jpg (Write to us, footer); desk-01.jpg and phone-02.jpg (render note)",
+    "problem": "The only next step is an email address with a 'Copy address' button. It sits under 'From launch, write here for prices and lead times', which tells today's visitor there's no reason to write. There is no interest list, no form, no sample, no named founder, no studio and no press. The render note appears twice, under the hero and in the footer, and reads as a hedge. For a 1.3 m speaker made to order and sold on request, nothing tells a buyer who they would be dealing with.",
+    "fix": "(a) An inquiry form on /inquire and at the foot of each product page: name, email, city, product, color (coins as checkboxes) and 'for home / trade / press', with hello@earf.world beside it for people who'd rather write. On sending it says 'We'll write when the first pair is built.' (b) A one-field 'Hear first' sign-up in the footer and a thin top bar: 'The first pair is being built. Hear first \u2192'. (c) A /studio page: who is behind EARF, San Francisco, why cast acrylic, the milestones, and at least one real photograph, such as cast acrylic chips in the eight colors on a light table. One real photo does more for trust than twenty renders. (d) The render note once, as an Apple-style footnote: a marker on the first picture and the note at the end of the page. (e) The eight acrylic coins as a sample set for serious inquirers, trade and press, so there is something real to hold."
+   },
+   {
+    "severity": "medium",
+    "area": "visual system and page rhythm",
+    "where": "desk-01.jpg to desk-10.jpg; phone-01.jpg to phone-10.jpg",
+    "problem": "The eight colors appear six times on the home page: the hero lineup, the dot legend, the coins, the dark-band dots, the uplit eight and the habitat carousel. The names are spelled out in two separate rows before the dark band. Eight sections open the same way, a mono eyebrow over a large headline ending in a full stop, so the page reads like a landing-page template. The hero headline (about 78 px) is smaller than the dark band's 'Ember' (about 96 px), and section headlines (about 50 px) are close behind, so the page has no peak. In the captures, roughly a quarter to a third of the desktop scroll is empty ground: the black run plus gaps of about 150\u2013170 px between sections.",
+    "fix": "Show the colors only twice on the home: the named lineup, and one color chapter where a coin fills the section with that color's habitat and tagline and recolors the trio (Tropos, Hemisphere, Mantle) below it. That chapter replaces 'By colour', the dot legend and the carousel. Drop the mono eyebrows and keep mono for numbers and specs. Widen the type scale so the hero is the loudest thing on the page: hero about 104 px, sections 56\u201364 px, body 19\u201321 px. Vary section layouts: a full-bleed picture with its headline set on it, a tight two-up, a quiet text beat. Aim for a home page of about six screens."
+   },
+   {
+    "severity": "medium",
+    "area": "copy and naming",
+    "where": "desk-01.jpg, desk-02.jpg, desk-03.jpg, desk-09.jpg, desk-10.jpg; live-text.txt",
+    "problem": "The 'reserved' pass went too far toward plain description. 'A powered horn loudspeaker in eight colours of cast acrylic.', 'A record player in the same eight colours, lit from underneath.', 'One acrylic, three ways to use it.' and 'Eight colours, every line.' are the stating-the-obvious the founder objected to. Meanwhile the best lines ('The last light of the fire.', 'The oldest amplifier is a shape.') are buried in the dark band or not on the page. Names wobble: Turntable, record player and Mantle for one product, 'Speakers' for one model. 'Colours', 'Enquire', 'Enquiries', 'stockists' and eleven uses of 'colour' are still British ahead of the switch to American English, and the only dimensions are metric.",
+    "fix": "One wink per page; facts go in the small type. Write to the standard of 'The oldest amplifier is a shape.', 'Put a light under it.' and the color taglines, which should show on each coin's selected state. Examples of the register: lighting tile 'Also available in lamp.'; Mantle tile 'For the records.'; inquiry 'Prices on request. Requests welcome.' Use American English throughout: Colors, Inquire, retailers rather than stockists. Put inches first and millimeters after: '50.9 in tall, 22 in wide (1293 \u00d7 560 mm)'. Use one name per thing: 'Mantle, a turntable', and 'Tropos' rather than 'Speakers' in the nav."
+   },
+   {
+    "severity": "medium",
+    "area": "habitats ('In their element')",
+    "where": "desk-07.jpg, desk-08.jpg, phone-07.jpg, phone-08.jpg",
+    "problem": "The habitats are the brand's wit made visible (a speaker standing in a lava field), but they're hidden in a slider that shows one of eight. It has no count or index, a single arrow laid over the picture's right edge (on the phone, right beside the speaker), a faded sliver of the next slide, and captions that only repeat the color's name. 'Each colour, where it began.' promises a story that nothing tells.",
+    "fix": "Use them as full-bleed moments, not a slider. On the home, put them inside the color chapter (the selected coin's habitat fills the section) and use one or two as interludes between sections. Put all eight on their /colors pages, captioned with the tagline ('Ember. The last light of the fire.'). Wherever a scroller remains on the phone, use native swipe with scroll-snap, a visible 01/08 count, the coins as the index, arrows below the picture rather than on it, and no fade over the next slide."
+   },
+   {
+    "severity": "medium",
+    "area": "sound (Tropos)",
+    "where": "absent from desk-01.jpg to desk-10.jpg and phone-01.jpg to phone-10.jpg",
+    "problem": "For a hi-fi brand whose new tagline is 'A world of sound, in color.', the home page says nothing about sound. It doesn't explain the horn, driver or woofer, gives no figures, and shows nothing of how the speaker works. Everything on the page is color and light, which audio buyers and the hi-fi press will read as a lamp that plays music.",
+    "fix": "On the Tropos page, add a sound chapter headed 'The oldest amplifier is a shape.' It holds a clean cross-section drawing (driver, horn, woofer, cabinet), three design figures as big numerals (sensitivity, bandwidth, amplifier power) labeled 'simulated, to be measured', and the simulated frequency response plot. On the home, the Tropos tile carries one fact about the sound and links to that chapter."
+   },
+   {
+    "severity": "medium",
+    "area": "the room ('At home') and scale",
+    "where": "desk-08.jpg, desk-09.jpg, phone-08.jpg, phone-09.jpg",
+    "problem": "The room is the only picture that shows the scale of a 1.3 m speaker. Yet the top third of the roughly 810 px desktop frame is bare wall, the pair takes up about half its height, and the size is given only in a small metric caption ('Each stands 1293 mm tall, 560 mm wide at the cabinet.'). The turntable on the sideboard is the old clear deck.",
+    "fix": "Re-render the room with the new Tropos and Mantle. On desktop crop to 21:9 so the pair fills about 65% of the frame height, horn to floor; on the phone crop to 4:5 with one speaker and the sideboard. Move the dimensions to the Tropos specs, with a to-scale front and side drawing next to a 5 ft 9 in figure, inches first."
+   },
+   {
+    "severity": "medium",
+    "area": "phone experience",
+    "where": "phone-01.jpg to phone-10.jpg",
+    "problem": "The phone layout is the desktop layout squeezed. The hero speakers are about 50 px wide. The line cards shrink to about 140 px thumbnails beside text, so the Tropos becomes a speck in a meadow (phone-02.jpg). The visible dots in the dark band are about 24 px. The slider's arrow sits on the picture. There is no persistent way to inquire. The light section leaves about two screens of black in the capture (phone-05.jpg, phone-06.jpg).",
+    "fix": "Design for the phone first. Product pictures at least 80% of the screen width. Cards stacked full-width, picture above and name with one line below, the whole card tappable. Coins with 44 px hit areas, in two rows of four where needed. Swipe galleries with counters. A sticky bottom bar on product pages ('Tropos \u00b7 Poison \u00b7 Inquire'). Test every animated section in iOS Safari and in Instagram's in-app browser before shipping."
+   },
+   {
+    "severity": "medium",
+    "area": "progress",
+    "where": "desk-09.jpg, desk-10.jpg, phone-09.jpg, phone-10.jpg",
+    "problem": "About 140 words of earnest process text in three columns, with no pictures, no status and no evidence, sitting in the shopper's path. 'Drawn to be made.' is a good headline, but the rest reads like reassurance written for investors.",
+    "fix": "On the home, use a three-step strip (Drawn / The first pair / Measured), each step with a status (done, now, next) and one picture: a fabrication drawing, the simulated horn, a real acrylic sample. Link to the full story on /studio, and later to the journal."
+   },
+   {
+    "severity": "low",
+    "area": "navigation and footer",
+    "where": "desk-01.jpg, desk-10.jpg, phone-01.jpg, phone-10.jpg",
+    "problem": "The nav is five equal-weight text links with no current-page state, and the one action that matters ('Enquire') looks like the rest. The footer offers only 'Progress' and 'Enquiries': no products, colors, studio, press, Instagram, sign-up or privacy policy.",
+    "fix": "Desktop nav: Tropos, Lighting, Mantle, Colors and Studio, with 'Inquire' as the only filled button and the current page underlined. Phone menu: a full-screen sheet showing the products as pictures in the visitor's chosen color, then Colors, Studio and Inquire. Footer: columns for Products, Colors, Studio and press, and Journal, plus the 'Hear first' field, Instagram, privacy and 'Designed in San Francisco'."
+   },
+   {
+    "severity": "low",
+    "area": "opening and header motion",
+    "where": "none (not visible in the captures; described in owner-site-notes.txt)",
+    "problem": "Every page load holds the globe intro for at least 0.9 s until the hero picture is ready, so the most important frame always arrives late, and returning visitors wait every time. After that the header globe turns every 4 s, keeping constant motion next to everything a visitor reads.",
+    "fix": "Keep the intro, but play it once per session with no minimum hold: the hero shows as soon as it's ready and the globe lands over it. Slow the header globe to one turn every 20\u201330 s, or turn it only on load, hover and page change, and never when the visitor has asked for reduced motion."
+   }
+  ],
+  "top_five": [
+   "Split the one long page into real pages (home, /tropos, /lighting, /mantle, /colors/{name}, /studio, /inquire), with the color in the URL. Make /tropos the flagship: coins that recolor every picture, an eight-view gallery, the 360, sound, the uplit base, specs in inches, 'Goes with', and an inquiry pre-filled with the chosen color.",
+   "Render one consistent set of pictures with the new Tropos, the redesigned Mantle and the cordless Core: the hero lineup in desktop and phone frames, studio shots of each product in all eight colors on one seamless, close-ups, the uplit eight and the room. Take every superseded design off the site.",
+   "Rebuild the hero as one full-height frame: 'A world of sound, in color.' set on the picture, the speakers filling about 55% of the window and named at their feet, a single 'Explore Tropos' button, a separate phone render where the speakers are legible, and a line about the speaker instead of a description of the picture.",
+   "Replace the three-screen pinned light section with one coin-driven stage followed by the uplit eight. Cut the colors from six appearances in three swatch styles to one coin component used in two places on the home.",
+   "Give visitors something to do and someone to trust: an inquiry form, a 'Hear first' sign-up, a Studio page with the people and one real photograph of the acrylic, a sample set of the acrylic coins, and the render note as a single footnote."
+  ],
+  "direction": "I'd build a small, fast site of several pages: a home page that plays like a launch film, and product pages that work like a design store. The home has six beats: the named lineup under 'A world of sound, in color.'; the uplit eight at night; three product tiles; one color chapter, where a coin fills the screen with that color's habitat and tagline and recolors the trio; the room, for scale; and 'Hear first'. Tropos gets the flagship page: coins that recolor every picture, a gallery, the 360, 'The oldest amplifier is a shape.', the uplit base, specs with a to-scale drawing, 'Goes with', and an inquiry pre-filled with the chosen color. Each color gets its own page, and Studio carries the people, the progress and the real material. From Apple's 24-inch iMac page (apple.com/imac), take how to sell one object in many colors: the lineup hero, a color picker that swaps the product in place, full-bleed color moments, one idea per section, disclosures as footnotes, and specs on a page of their own. From Teenage Engineering (teenage.engineering, the OP\u20131 field and OB\u20134 pages), take the voice (dry, exact, quietly funny), plain studio photography on one ground, and spec pages that make hardware feel serious and lovable. From Farrow & Ball's color pages (farrow-ball.com), take the idea that every color is a named, numbered page with a short story, suggested pairings and a sample you can order. That maps onto EARF's eight colors, the founder's same-color and opposite-color pairings, and the acrylic coin as the sample.",
+  "score_now": 4.5
+ },
+ "critic:creative-director": {
+  "issues": [
+   {
+    "severity": "high",
+    "area": "imagery / art direction",
+    "where": "desk-01.jpg, desk-02.jpg, desk-04.jpg, desk-06.jpg, desk-07.jpg, desk-09.jpg; phone-01.jpg, phone-02.jpg, phone-07.jpg, phone-08.jpg",
+    "problem": "There are seven unrelated picture worlds on one page: a paper-studio lineup (hero), a pink-dusk grass field (Tropos card), a peach gradient void (Hemisphere card), a white e-commerce packshot (Mantle card), uplit concrete at night (light section), CG lava and desert (habitats) and a sunlit living room. Camera height, lens, light direction, color temperature and grade change from frame to frame. Each product line is shot in a different visual language, so the range never reads as one family cut from one material. Several frames read as renders rather than photographs: the lava in desk-07, the smeared, blobby mesa in the Dust card beside it, and the Mantle floating on white in desk-02. Vitra's or B&O's pages look like the work of one photographer; this looks like seven separate briefs.",
+    "fix": "Write a one-page shot bible and re-render every home-page picture to it with the new speaker. Nothing goes live that breaks it. STUDIO, for every product and line picture: a seamless in the page's own paper (#F4F1EC) so the frame edge disappears; one large soft key high left plus a weak fill, from the same direction in every frame; camera at product mid-height; about an 85 mm lens; the product filling 70% of the frame height. NIGHT, for everything after dark: exactly the uplit board-formed concrete set in desk-06 and phone-07. WORLD, for the habitats: one film grade (filmic tone curve, fine grain, real lens depth of field, atmospheric haze, a little halation). Run all three through one color pipeline so Ember is the same red everywhere. For how to light tinted transparent material (the color living in the light it throws, caustics on the ground), study Sabine Marcelis's photographs of her resin work. Retire the grass field, the gradient void and the white packshot."
+   },
+   {
+    "severity": "high",
+    "area": "light section (pinned scroll)",
+    "where": "desk-04.jpg, desk-05.jpg, desk-06.jpg; phone-04.jpg, phone-05.jpg, phone-06.jpg",
+    "problem": "Most of the section is empty. In desk-04 the uplit Ember fills only the left half of the upper half of the screen, with its horn cut off at the top edge. Then comes a screen and a half of solid black (all of desk-05 and the top of desk-06) before the eight-speaker lineup appears. On the phone the color dots sit on the bottom edge of the screen (phone-04/05), followed by two entire screens of black (phone-05, phone-06). The cause may be the sticky stage over a long scroll run or the way full-page captures render it. Either way, a press screenshot, an in-app browser or a fast thumb meets two screens of nothing in the middle of the page. The color taglines, the best copy on the site, live only here, and only Ember's is ever seen. The selector also uses a second palette: Fog is #726F68 and Smoke #000000 here, against #CBD2CF and #53505A in the legend and coins.",
+    "fix": "Rebuild the stage as exactly one viewport (100svh minus the header). The uplit picture covers it edge to edge with no feathering (object-fit: cover, horn never cropped, a dedicated 9:16 render on phone). Set the color name, its Tropos number and its tagline over the picture at lower left, and put the eight coins inside the frame at lower right. Cut the run to 8 \u00d7 20svh with scroll-snap on each color. End on the all-eight uplit lineup, using phone-07's oblique render on desktop too because it is the strongest picture on the site, so that no scroll position ever shows an empty frame. Add a non-pinned fallback for reduced motion, no JS and print: the lineup, then the eight names and taglines as a list. Before shipping, check it in a full-page capture, in iOS Safari and in the Instagram in-app browser."
+   },
+   {
+    "severity": "high",
+    "area": "hero",
+    "where": "desk-01.jpg, desk-02.jpg; phone-01.jpg, phone-02.jpg",
+    "problem": "The hero is built like a landing page, not a product reveal. The headline sits on the paper above the picture like a blog title. The eight speakers are small: about 120 px wide on desktop, and about 50 px on the phone, where they huddle in the middle third of a mostly empty frame. Their feet zigzag front and back by up to 40 px, so the row looks jostled rather than placed. A dead band of paper separates the picture from a literal explainer sentence, two SaaS-style pill buttons ('See the speakers', 'See the colours'), a disclaimer cut off by the fold, and a flat-dot legend that repeats the picture. The picture also shows the outgoing speaker.",
+    "fix": "Make the hero one 100svh frame: the new Tropos lineup on the paper ground, perfectly level and evenly spaced, filling about 55% of the frame height, with every colored shadow falling the same way. Set 'A world of sound, in color.' inside the picture's quiet upper third at clamp(44px, 7vw, 112px), with only a small caption at lower right ('Tropos. Render.'). Delete the explainer sentence, both pill buttons and the legend; the next screen opens the first chapter. On the phone, render a dedicated portrait composition (the eight in a tight two-row arc that fills the width) instead of shrinking the landscape one. Don't polish the current picture: build the layout now and drop in the new speaker set once it is rendered."
+   },
+   {
+    "severity": "high",
+    "area": "copy",
+    "where": "desk-01.jpg, desk-02.jpg, desk-03.jpg, desk-09.jpg, desk-10.jpg; phone-01.jpg to phone-03.jpg, phone-09.jpg, phone-10.jpg; live-text.txt",
+    "problem": "The copy still does what the founder ruled out: it states the obvious ('Tropos is a horn loudspeaker cast in tinted acrylic, in eight colours from Ember to Smoke', 'A powered horn loudspeaker in eight colours of cast acrylic', 'A record player in the same eight colours', 'Eight colours, every line', 'Covers on, by a tall window'). On one page, 'eight colours' appears four times and 'acrylic' seven times. Every eyebrow repeats its own headline ('LIT FROM BELOW / Put a light under it', 'IN THEIR ELEMENT / Each colour, where it began', 'ENQUIRIES / Write to us'), and all eight headlines share one rhythm: a short phrase and a full stop. The only wit is 'Put a light under it' and 'A pair in Poison'. The lines that had more of it ('Bottle green, with a hint of menace.', 'The oldest amplifier is a shape.') are hidden or gone. The contact copy even says 'From launch, write here', which tells people not to write yet.",
+    "fix": "Rewrite everything to one rule: one fact per chapter, said once, and never what the picture already shows. Drop every eyebrow and use American English throughout. A starting set: hero, 'A world of sound, in color.'; Tropos, 'The oldest amplifier is a shape.'; Hemisphere and Core, 'One hangs. One wanders.'; the light chapter, 'Leave a light on.' over 'A light in the base fills the cabinet to its edges.' (the new uplit base makes 'Put a light under it' wrong); each habitat captioned with its color's line ('Ember. The last light of the fire.', 'Poison. Bottle green, with a hint of menace.'); at home, 'A pair in Poison.' with the size as the only caption; contact, 'Write to us.' over 'Each pair is made to order. Ask about colors, lead times and prices.' Cut 'One acrylic, three ways to use it.', 'Eight colours, every line.' and 'Covers on, by a tall window.' outright."
+   },
+   {
+    "severity": "high",
+    "area": "typography and UI kit",
+    "where": "desk-01.jpg, desk-02.jpg, desk-03.jpg, desk-07.jpg, desk-09.jpg, desk-10.jpg; phone-01.jpg, phone-02.jpg, phone-08.jpg, phone-10.jpg",
+    "problem": "The interface uses a tech-startup kit, not a design house's: black and outlined pill buttons ('See the speakers', 'Copy address', 'Menu'), letter-spaced monospace eyebrows over every headline, rounded cards with gray caption panels, a round carousel chevron sitting on a photograph, and the email address in monospace next to a copy button. 'PROGRESS' is set in a bolder proportional sans while every other eyebrow is monospace. Every headline is the same bold, tightly tracked grotesk at about the same size and position, so nothing is ever loud and nothing is ever quiet; the largest word on the page is 'Ember' in the dark band. Image corners are rounded in the cards and habitats but square in the room.",
+    "fix": "Strip the kit. Replace the pill buttons with text links in the body face, underlined at 1 px with a 4 px offset. Use no monospace on the home page (keep it, if anywhere, for the spec table). Show images square-cut or full-bleed only, put captions on the page ground with no gray panels, and remove the carousel chrome. Rebuild the type scale around real contrast: display at clamp(48px, 8vw, 128px), in Regular rather than Bold and tracked about \u22121%, used for only three moments (the hero, the light chapter and the contact). Set everything else at 18 px for text and 13 px for captions, in the same family. If a second voice is wanted, add one high-contrast serif for display only (something like GT Super or Editorial New), and never pair a serif with a mono."
+   },
+   {
+    "severity": "high",
+    "area": "habitats ('In their element')",
+    "where": "desk-07.jpg, desk-08.jpg; phone-07.jpg, phone-08.jpg",
+    "problem": "The most ownable idea on the site is each color shown in its own world. That is exactly what 'A world of sound, in color', the name EARF and the globe mark all promise, and it is buried in a carousel. One card and a sliver of the next are visible, and six of the eight sit behind a chevron few visitors will press. The peeking Dust card is washed out by a white gradient that looks like a rendering fault, over a mesa with blobby, smeared edges. The one visible frame (Ember on lava) looks like a game level, not a film still.",
+    "fix": "Make the habitats the spine of the page: eight full-bleed frames in sequence (100svh on desktop, 4:5 at full width on phone). Set each color's name and line small at lower left, and run a quiet index of the eight names along the edge to show where you are. If eight screens is too long for the home page, use a gutterless 4 \u00d7 2 mosaic (2 \u00d7 4 on phone) whose tiles open full screen. Grade every habitat to the shot bible's WORLD look, and hold back any frame that still reads as CG rather than ship it."
+   },
+   {
+    "severity": "high",
+    "area": "contact and conversion",
+    "where": "desk-10.jpg; phone-10.jpg",
+    "problem": "The only action on this pre-launch site is copying an email address. There is no way to register interest, choose a color or be told when the first pair exists, so the site collects nothing. Named interest by product and color is the evidence investors and a manufacturer will ask for, and the best guide to which tints to cast first. The monospace address with a 'Copy address' button reads like a developer's portfolio.",
+    "fix": "Put a short form under 'Write to us.': email (required), name, product toggles (Tropos, Hemisphere, Core, Mantle), the eight acrylic coins as a multi-select, an optional message and a single 'Send'. Write the confirmation in the brand's voice ('Noted. We'll write when there's something to hear.'). Show hello@earf.world beneath it as a plain mailto link in the body face, and add a one-field 'News, rarely.' sign-up in the footer. Keep a weekly count of interest by color."
+   },
+   {
+    "severity": "high",
+    "area": "credibility",
+    "where": "desk-01.jpg, desk-09.jpg, desk-10.jpg; phone-02.jpg, phone-09.jpg, phone-10.jpg",
+    "problem": "There is not one real photograph, person or object on the site, and the site says so twice (under the hero and in the footer). There is no founder, no studio, no material in a hand, no drawing and no figure. The progress chapter is three columns of gray text asking to be believed, and it refers to 'the design figures on these pages' when the home page shows none. A brand that only has renders has to earn belief with evidence of making.",
+    "fix": "Add a short Studio chapter before the contact, with three pieces. First, a real macro photograph of the eight cast-acrylic chips held up to window light, which would be the first real photograph on the site. Second, an excerpt of a Tropos fabrication drawing in thin black lines on paper, with three dimension callouts, in the manner of Teenage Engineering's drawings. Third, one sentence from the founder, signed with a name and 'San Francisco'. Turn Progress into a dated three-step line (Drawn, with its date; First pair, in progress; Measured, next) and update it as things move."
+   },
+   {
+    "severity": "medium",
+    "area": "sound",
+    "where": "desk-01.jpg to desk-10.jpg; phone-01.jpg to phone-10.jpg (absent throughout)",
+    "problem": "The brand is about to say 'A world of sound, in color', and the home page never mentions sound: no story about the horn, no figure, no reason a horn sounds different. It is a hi-fi company that talks only about tint.",
+    "fix": "Add a Sound chapter right after the hero, on the night ground. Show the new horn in section, either as a white-line cutaway or as the new Tropos turning slowly and silently, with no instructions. Add the line 'The oldest amplifier is a shape.' and three design figures set large: sensitivity (dB, 1 W/1 m), low-frequency extension (Hz) and amplifier power (W). Footnote them 'Design figures, to be replaced by measured ones.'"
+   },
+   {
+    "severity": "medium",
+    "area": "colors section (palette shown three times)",
+    "where": "desk-02.jpg, desk-03.jpg, desk-04.jpg; phone-02.jpg, phone-03.jpg, phone-04.jpg",
+    "problem": "The palette appears three times in four screens: a flat-dot legend under the hero, the 'By colour' coin row and the light section's dots, and the last uses different values. The 'By colour' chapter is just a headline and eight 62 px coins in an empty field, a swatch card rather than a chapter. The Fog coin nearly disappears against the paper, and eight saturated interface dots spread the color thin when it should belong to the products.",
+    "fix": "Show the palette once on the home page, as the selector inside the light stage. Delete the hero legend and the 'By colour' chapter, and move its one good idea ('a room can be one color or three') into the At Home caption. Let color live only in the acrylic and the light it throws, so the interface itself stays paper, ink and night. Define the eight colors once as tokens (a value sampled from the lit render, a rendered acrylic coin at 24 px and up, a flat dot below that, and a hairline ring on Fog so it holds on paper) and use only those."
+   },
+   {
+    "severity": "medium",
+    "area": "the lines (product range)",
+    "where": "desk-02.jpg, desk-03.jpg; phone-02.jpg, phone-03.jpg",
+    "problem": "Three small, equal cards stand in for the whole range; on the phone they become list rows with 143 px thumbnails, like a settings screen. Each picture contradicts its caption: 'Hemisphere and Core' shows only Hemisphere, and Mantle, 'lit from underneath', is shown clear and unlit on white, and that model is about to be replaced. The nav says 'Turntable' while the copy says 'record player', and every link is a variation of 'See the \u2026'.",
+    "fix": "Give each line its own full-bleed chapter in the STUDIO look, with its name at display size, one line of copy and a link that is simply the product's name. Show Hemisphere and the cordless Core lit together in one frame (the pendant above, Core on the table beneath it). Keep Mantle off the home page until the redesign is rendered. Use 'Turntable' everywhere."
+   },
+   {
+    "severity": "medium",
+    "area": "at home (room)",
+    "where": "desk-08.jpg, desk-09.jpg; phone-08.jpg, phone-09.jpg",
+    "problem": "This is the best-lit frame on the page (raking sun on plaster), but its details let it down. The Poison acrylic glows neon lime in daylight, as if lit from inside. Beside each speaker, a white wall plate with a black plug and a cord dangling to the floor sits at mid-wall. The credenza and vase look like catalog stock, and the turntable is the outgoing Mantle. A headline sits above the picture, and the captions describe what the picture already shows.",
+    "fix": "Re-render the room with the new speaker and the new Mantle. Set the tint at its true daylight density, matched to a real chip photographed in the same light. Run the cables down behind the cabinets to an outlet out of frame, and put one object with a maker's hand on the credenza (a ceramic, or a record sleeve leaning on the wall). Run it full-bleed at 100svh with no headline above, and let the caption carry it: 'A pair in Poison. 51 in (1293 mm) tall.'"
+   },
+   {
+    "severity": "medium",
+    "area": "pacing",
+    "where": "desk-01.jpg, desk-03.jpg, desk-07.jpg, desk-08.jpg, desk-09.jpg; phone-03.jpg, phone-09.jpg",
+    "problem": "The page is eight blocks of the same shape (eyebrow, headline, content) separated by identical gaps of about 150 to 170 px, and only one picture (the room) is at the scale of the screen. Nothing builds. The index of lines and the swatch row come before anything has earned the visitor's interest, the strongest picture (the uplit lineup) arrives half-hidden after a void, and the page ends on a monospace email address.",
+    "fix": "Order the page as a crescendo that alternates full-bleed pictures with one-line interludes: hero, Sound, after dark (the light stage ending on the lineup), the world (habitats), at home, Hemisphere and Core, Mantle when it is ready, Studio, then Write to us. Close on one last full-bleed picture above the form (the pair uplit at dusk in the room). Use only three spacings: 0 between pictures, 160 px between a picture and text, and 240 px between chapters."
+   },
+   {
+    "severity": "medium",
+    "area": "mobile",
+    "where": "phone-01.jpg to phone-10.jpg",
+    "problem": "The phone page is the desktop page squeezed down rather than composed for the phone. The speakers are about 50 px wide in the middle of an empty hero, and the product lines are thumbnail list rows. The light stage is taller than the screen, so its dots split across two screens, and two screens are entirely black. The habitats are a 300 px card with a desktop chevron, and the email address and copy button are crammed onto one line.",
+    "fix": "Art-direct the phone separately. Render a portrait version (4:5 or 9:16) of every picture rather than cropping the landscape ones. Make each line full width, and fit the light stage, coins included, within 100svh. Make the habitats a full-width swipe with scroll-snap and a quiet '1 / 8' counter instead of a chevron, and stack the contact form."
+   },
+   {
+    "severity": "medium",
+    "area": "navigation and footer",
+    "where": "desk-01.jpg, desk-10.jpg; phone-01.jpg, phone-10.jpg",
+    "problem": "The header lists generic categories (Speakers, Lighting, Turntable, Colours, Enquire) instead of the product names, which are the brand's assets, and 'Colours' leads to a row of swatches. The footer has two links (Progress, Enquiries) and no place for press, a journal, Instagram or a newsletter.",
+    "fix": "Header: Tropos, Hemisphere, Core, Mantle, Studio, Contact; on the phone, 'Menu' as plain text that opens a full-screen sheet. Footer in four short columns: the products; Studio (Progress, Journal, Press); Contact (email, Instagram); and 'News, rarely.' with an email field. Below them, one legal line in sentence case. Build the Journal and Press slots now so they appear when the held work is released."
+   },
+   {
+    "severity": "low",
+    "area": "pre-launch disclaimers",
+    "where": "desk-01.jpg, desk-02.jpg, desk-10.jpg; phone-02.jpg, phone-10.jpg",
+    "problem": "'In development and not yet for sale; until the first are built, every picture here is a render' takes the prime spot under the hero buttons and comes back in the footer in uppercase monospace. It reads as an apology before the visitor has fallen for anything.",
+    "fix": "Keep the honesty, but move it and say it more quietly: 'Render' in each picture's caption, and one footer line in sentence case ('Designed in San Francisco. Pictures are renders until the first pairs are built.')."
+   },
+   {
+    "severity": "low",
+    "area": "page grounds and logo lockup",
+    "where": "desk-01.jpg, desk-03.jpg, desk-07.jpg; phone-01.jpg",
+    "problem": "The warm paper (#F4F1EC) cuts hard to a cool blue-black (#0B0C10), so the two grounds don't look like one family. In the header, the multicolor globe beside a heavy notched wordmark is the loudest thing on the first screen, and at about 40 px the globe's six tints read as a beach ball.",
+    "fix": "Warm the night ground to a near-black of about #13110F, in the same hue as the paper. Keep the turning globe (the founder's call), but shrink the lockup by about 20% (globe 30 px, wordmark cap height 16 px), add space between them, and serve the globe at 3\u00d7 so the acrylic edges stay crisp."
+   },
+   {
+    "severity": "low",
+    "area": "American English and units",
+    "where": "desk-01.jpg to desk-10.jpg; phone-01.jpg to phone-10.jpg; live-text.txt",
+    "problem": "Besides 'colours' and 'Enquire', the live text has 'BY COLOUR', 'ENQUIRIES', 'Enquiries' in the footer and 'stockists', plus metric-only dimensions ('1293 mm') on a San Francisco brand's site.",
+    "fix": "In the American English pass, also use 'Contact' rather than 'Inquire', 'Trade and retail' instead of 'stockists', and give dimensions as '51 in (1293 mm)'. Before release, grep the build for 'colour', 'enquir' and 'stockist'."
+   }
+  ],
+  "top_five": [
+   "Write one shot bible (STUDIO on the page's own paper, NIGHT on the uplit concrete, WORLD for the habitats, all in one grade) and re-render every home-page picture to it with the new speaker. Retire the grass field, gradient and white packshot in desk-02 so the range reads as one family.",
+   "Rebuild the hero as one 100svh frame for 'A world of sound, in color.': the new lineup level and filling the frame, the line set inside the picture, a portrait composition for the phone, and nothing else above the fold but a 'Render' caption (desk-01, phone-01).",
+   "Get rid of the empty screens. Make the light stage exactly one screen tall, never empty and ending on the uplit lineup (desk-05 and phone-05/06 are black), show the eight habitats as full-bleed chapters instead of a carousel, and show the palette once instead of three times.",
+   "Rewrite every line to say one thing, once, with a wink: no eyebrows, no 'eight colours'/'acrylic' refrain, the color taglines and 'The oldest amplifier is a shape.' back in view, a Sound chapter to back the new tagline, and American English throughout.",
+   "Swap the startup kit for a design house's (no pill buttons, mono, cards, chevrons or rounded corners; lighter display type with real contrast in scale). Close on a Studio chapter of real evidence (acrylic chips in window light, a drawing, the founder's name) and a form that records interest by product and color."
+  ],
+  "direction": "I'd build a slower, quieter page led by pictures: one full-bleed image per screen and at most one line of words with it. The order: the new Tropos lineup on warm paper carrying 'A world of sound, in color.'; Sound (the horn in section or turning silently, 'The oldest amplifier is a shape.', three design figures); after dark (a one-screen uplit stage, color by color, ending on the eight lit against concrete); the world (the eight habitats full-bleed, each with its line); at home (the pair in a room, then Hemisphere and the cordless Core in one frame, then the new Mantle once it exists); Studio (real chips in window light, a fabrication drawing, the founder's name, a dated progress line); and Write to us, with a form. Keep the paper ground, the lineup in spectrum order, the uplit concrete set, the color names and the honest tone. Lose the pill buttons, the mono, the cards, the carousels and the eyebrows. From Apple's iMac page (apple.com/imac, the 2021 color launch), take the mechanic: color is the interface, choosing one swaps the full-frame picture in place, and each screen holds one idea at heroic scale. From Aesop (aesop.com), take the voice and the restraint: dry, literate lines said once, captions doing the work, text links instead of buttons, no ornament. From Bang & Olufsen (bang-olufsen.com, the Beolab 90 and Beolab 50 pages), take the scale and the sound story: the product at architectural size in every frame, material in close-up, and sound told one figure at a time.",
+  "score_now": 4.5
+ },
+ "critic:credibility": {
+  "issues": [
+   {
+    "severity": "high",
+    "area": "credibility: people and story",
+    "where": "desk-10.jpg and phone-10.jpg (footer: the only identity is 'EARF \u00b7 SAN FRANCISCO'); absent from desk-01 to desk-10",
+    "problem": "Nobody is behind this company on the page. There is no founder name or face, no background, no studio and no collaborators, nothing says why the company exists, and the name EARF is never explained. An investor backs people and an editor needs a designer to name and quote. Both leave with nothing to go on.",
+    "fix": "Add a Studio section between Progress and the sign-up, plus a /studio page. It needs one real photograph of the founder at work (a photo, not a render), their name and a 50-word bio with the relevant experience, three sentences on why a horn and why cast acrylic, one line on the name, and the people already committed (acoustic engineer, fabricator), named where they agree. Put 'Designed in San Francisco by [Name]' in the footer."
+   },
+   {
+    "severity": "high",
+    "area": "waitlist and contact",
+    "where": "desk-10.jpg, phone-10.jpg ('Write to us.'); desk-01.jpg, phone-01.jpg (hero buttons, nav 'Enquire')",
+    "problem": "The only action anywhere is a bare email address, and its copy contradicts itself: 'Write to us.' and then 'From launch, write here for prices and lead times', which means not yet. There is no way to register interest, so the company collects no demand signal (the first number an investor asks for), and press and trade have no route of their own. Both hero buttons only take the reader further into the site. Neither lets them act.",
+    "fix": "Replace the block with a 'Hear first' sign-up: email, an optional color (the eight coins as a radio group) and 'I'm buying / press / trade / other'. The confirmation should be in the house voice, e.g. 'One email when the first pair is built. Maybe two.' Keep hello@earf.world under it and add press@ and trade@. Make 'Hear first' the hero's primary button and a pill at the right of the nav, and report sign-ups by color: that is the demand chart for investors."
+   },
+   {
+    "severity": "high",
+    "area": "progress and proof",
+    "where": "desk-09.jpg, phone-09.jpg, phone-10.jpg ('Drawn to be made.')",
+    "problem": "Three paragraphs and no evidence. There are no dates, no partner names, no pictures, and one number ('more than eighty' parts). 'Before any acrylic was cut' reads as if nothing has been cut yet, and 'A prototype is there to test the making' says nothing. Every image on the site is a render, so this is the one section that could prove the company is real, and it is text only.",
+    "fix": "Rebuild it as a dated timeline where each step has an artifact and a status (Done / Now / Next). Drawn: one real fabrication drawing or the exploded view of the 80-plus parts. Simulated: the horn and bass response plot, labeled 'simulated'. Color: a photograph of the cast acrylic samples on a light table, as soon as they exist. Next: 'The first pair, [month year], built with [fabricator, city]'. Then: 'Measured, and published here'. Stamp it 'Updated [date]' and publish the held journal with three dated posts so the page visibly moves."
+   },
+   {
+    "severity": "high",
+    "area": "press kit",
+    "where": "desk-01.jpg (nav), desk-10.jpg and phone-10.jpg (footer links: only Progress, Enquiries)",
+    "problem": "Nothing on the site is for an editor: no press page, no downloadable pictures, no fact sheet, no press contact. With the kit built but held, covering EARF means writing in and waiting, and an editor on deadline moves on to the next story.",
+    "fix": "Publish /press and link it in the footer and the contact block. Include: 10 to 12 pictures at 3000 px or more with plain file names (EARF_Tropos_Poison_room.jpg), each captioned 'Render'; a one-page fact sheet (products, material, dimensions in inches and millimeters, drivers and power as design targets, the eight colors, status and dates, 'Made to order. Price on request.'); the founder's bio and portrait; logo and globe files; press@ with a stated reply time. If the kit must stay held, have the sign-up's 'press' option send it automatically."
+   },
+   {
+    "severity": "high",
+    "area": "sound",
+    "where": "absent from desk-01 to desk-10; the only audio facts are 'powered' (desk-02.jpg) and 'simulation' (desk-09.jpg)",
+    "problem": "A hi-fi company's home page says nothing about how the speaker sounds or why it is built this way: no drivers, amplification, inputs or efficiency, and no reason for the horn. The coming tagline 'A world of sound, in color.' promises sound, and the page delivers only color and light. An audio editor's first question goes unanswered, and an investor cannot tell whether this is serious audio or a lamp shaped like a speaker.",
+    "fix": "Add a Sound band directly after the hero. It holds the founder's one line on why a horn; the cutaway render (compression driver, horn, woofer, port, amplifier); four figures set large in the mono face (driver sizes, amplifier power, sensitivity or maximum level, low-frequency extension), marked 'design target, to be measured'; and the inputs. Link it to the full specs on the Tropos page."
+   },
+   {
+    "severity": "high",
+    "area": "imagery: one art direction, current designs only",
+    "where": "desk-02.jpg, phone-02.jpg, phone-03.jpg (line cards); desk-07.jpg, desk-08.jpg, phone-08.jpg (habitats); desk-01.jpg and desk-09.jpg (old speaker)",
+    "problem": "The pictures do not read as one brand. The three line cards are three unrelated worlds: Haze in a misty meadow, the pendant on a peach gradient, Mantle cut out on white. The habitats (Ember in a lava field, Dust in a desert) look like CG concept art, which in 2026 is easily mistaken for AI imagery and undercuts 'sophisticated', and an acrylic speaker standing in lava invites the obvious joke. The Mantle card shows a design that is being replaced, the lighting card shows only one of its two lamps, and the hero and room show the old speaker. Press reuse whatever pictures are on the page, so superseded designs will keep circulating after the change.",
+    "fix": "Set one system and swap every picture in a single release once the new speaker set is rendered. Studio: every product on the same warm-gray seamless, with one key light, one camera height and lens, and one floor shadow, for cards and product pages. Interior: one room, reused for every line. Night: the uplit set. Until Mantle's new render exists, show its drawing marked 'In design'. The lighting card shows the Hemisphere and the cordless Core together. Move the habitats below the product story, or into the journal as a campaign ('Eight colors, eight places'): full-bleed, one per screen, each with its color's line rather than a bare name in a carousel."
+   },
+   {
+    "severity": "high",
+    "area": "hero",
+    "where": "desk-01.jpg, phone-01.jpg, phone-02.jpg",
+    "problem": "'Something in the air.' could sell a perfume or an air purifier, and 'EARF \u00b7 TROPOS' above it repeats the logo. The lineup is shot like a product configurator: high camera, even spacing, eight identical objects. About 160 px of empty floor sits between the shadows and the copy, which pushes the buttons onto the fold and the render note below it. On a phone each of the eight cabinets is under 50 px wide, sitting in the middle third of a mostly empty frame.",
+    "fix": "Launch 'A world of sound, in color.' with the new lineup. Put the camera at cabinet height and closer, with the eight on a gentle arc so their colored shadows run toward the copy; the speakers should fill about 70% of the width, with the empty floor cropped. Make a dedicated phone composition (a tight arc or two staggered rows filling the width) instead of scaling down the desktop render. Buttons: 'Hear first' and 'See Tropos'. Drop the eyebrow. Put the render note on the image as a small dated caption: 'Renders. First pair due [season year].'"
+   },
+   {
+    "severity": "medium",
+    "area": "focus and sequencing",
+    "where": "desk-02.jpg, desk-03.jpg, phone-02.jpg, phone-03.jpg ('One acrylic, three ways to use it.')",
+    "problem": "Four products shown as equals before the first speaker exists looks scattered to an investor and like a catalog to an editor, who wants one story. Progress already says 'The lamps and Mantle come next'; the cards don't.",
+    "fix": "Make Tropos the flagship (first and larger card) and tag each line with the status Progress uses: Tropos 'First pair in build' (once true), Hemisphere and Core 'Drawn', Mantle 'In design'. The editor's story then fits in one sentence: a horn loudspeaker in tinted acrylic, with lights and a turntable to follow."
+   },
+   {
+    "severity": "medium",
+    "area": "colors section and repetition",
+    "where": "desk-02.jpg / phone-02.jpg (legend row under the hero), desk-03.jpg / phone-03.jpg ('BY COLOUR' coins), desk-04.jpg / phone-04.jpg (radio coins), desk-08.jpg / phone-08.jpg (habitat captions)",
+    "problem": "The eight colors appear four times in about five screens: a legend under the hero that reads like a chart key, coins that look flat at about 64 px with nothing to show they lead anywhere, the light section's radio coins, and the habitat captions. 'Eight colours' is also said in four separate sentences. The brand's strongest idea starts to feel like filler.",
+    "fix": "Delete the legend row. Make 'Eight colors, every line.' the one color moment. Render the coins as real acrylic at 120 px or more, with light through them and a tinted shadow, and link each to a color page (/color/poison) that holds its line, Tropos, the lamps and Mantle in that tint, its habitat, and the founder's 'what goes with it' pairing. Fold the light section into this so choosing a coin lights the speaker. Say 'eight' once on the page."
+   },
+   {
+    "severity": "medium",
+    "area": "light section (pinned scroll)",
+    "where": "desk-04.jpg (lower half), desk-05.jpg, desk-06.jpg (upper half), phone-05.jpg, phone-06.jpg",
+    "problem": "In both full-page captures the pinned 'Put a light under it.' section leaves about two screens of solid black: the pin holds one frame and the rest of the runway is empty. Live, it is still the longest stretch on the page for a single idea. Anyone who saves or forwards the page as a full-page capture, prints it, or loads it without scripts sees a void.",
+    "fix": "Give it a static form. Outside a live scroll (reduced motion, print, no script, capture), show the eight lit speakers as the row in desk-06.jpg / phone-07.jpg, each with its color's line, instead of black. Live, cut the runway to about 1.5 screens, or unpin it and let the coins swap the picture in place."
+   },
+   {
+    "severity": "medium",
+    "area": "copy",
+    "where": "live-text.txt lines 53-65 and 116-126; desk-02.jpg, desk-03.jpg, desk-09.jpg, desk-10.jpg",
+    "problem": "The good lines ('Put a light under it.', 'The last light of the fire.', 'Covers on, by a tall window.') sit among spec-sheet sentences that state the obvious, which the founder has asked twice to remove: 'One acrylic, three ways to use it.', 'A powered horn loudspeaker in eight colours of cast acrylic.', 'A record player in the same eight colours, lit from underneath.' Progress reads awkwardly ('drawn for making', 'A prototype is there to test the making'). The same product is 'Turntable' in the nav and heading and 'record player' in its card text and link.",
+    "fix": "Line-edit to one rule: each sentence tells the reader something the picture can't. Cards get a name and one line each, for instance Tropos: 'A horn loudspeaker with nothing to hide.'; Lighting: 'Overhead, and within reach.'; Mantle: 'Plays records. Glows a little.' Materials move to the spec tables. Pick one noun (turntable) and use it in nav, headings and links. Ship the American English pass at the same time (color, Inquire, Inquiries, inches before millimeters)."
+   },
+   {
+    "severity": "medium",
+    "area": "type and layout system",
+    "where": "desk-02.jpg, desk-03.jpg, desk-07.jpg, desk-08.jpg, desk-09.jpg, desk-10.jpg (every section header)",
+    "problem": "Every section uses the same scaffold: a spaced monospace eyebrow (THE LINES, BY COLOUR, LIT FROM BELOW, IN THEIR ELEMENT, AT HOME, PROGRESS, ENQUIRIES), a bold, tightly spaced sans headline, a gray paragraph, then a block. It is the default pattern of SaaS and AI-built landing pages. The page type never picks up the character of the heavy EARF wordmark or the globe, and the pace never changes.",
+    "fix": "Drop the eyebrows and keep the mono only for figures, specs and captions. Vary the sections: a full-bleed picture with its line set over it, a split with one large number, a text-only pause. Add one display face with a point of view for headlines or numerals (a high-contrast serif such as Instrument Serif, or a cut drawn from the wordmark) and use it sparingly. Let the globe be the one recurring motif between sections."
+   },
+   {
+    "severity": "medium",
+    "area": "navigation and footer",
+    "where": "desk-01.jpg (nav), phone-01.jpg (Menu), desk-10.jpg, phone-10.jpg (footer)",
+    "problem": "The nav is product categories plus 'Enquire' as plain text: no Studio, Journal or Press, and no action. The footer has two links and a disclaimer in capitals ('THE PICTURES ARE RENDERS'). It has none of what a cautious reader checks to see whether a company exists: Instagram, a newsletter, a privacy policy, the company's name.",
+    "fix": "Nav: Speakers, Lighting, Turntable, Colors, Studio, with 'Hear first' as a pill at the right. Footer in four columns: Products; Company (Studio, Journal, Press, Inquiries); Follow (Instagram, the sign-up); Legal (Privacy, the registered company name, San Francisco). Say 'render' once, as a caption on the images, not in capitals in the footer."
+   },
+   {
+    "severity": "medium",
+    "area": "mobile",
+    "where": "phone-01.jpg, phone-02.jpg, phone-08.jpg, phone-09.jpg",
+    "problem": "The phone page is the desktop page shrunk. The hero speakers are specks in a mostly empty frame. The line cards put a 140 px thumbnail beside the text, so the Haze speaker in its meadow is unreadable. The room crop cuts both speakers through the cabinet, and the habitat arrow sits on top of the picture.",
+    "fix": "Use phone-specific art and layout: a vertical hero composition; stacked full-width cards with 4:5 pictures; a vertical room crop centered on one speaker and the console; habitats you swipe, with dots under the picture instead of an arrow on it. Check at 390 px and 360 px."
+   },
+   {
+    "severity": "low",
+    "area": "the room ('A pair in Poison.')",
+    "where": "desk-08.jpg, desk-09.jpg, phone-08.jpg, phone-09.jpg",
+    "problem": "This is the best lifestyle picture on the site, but after the speakers the most noticeable details are the wall outlets and cords beside each one. The console and vase are generic, and the record player on the console looks like the old Mantle. 'Each stands 1293 mm tall' gives a US reader no feel for the size.",
+    "fix": "Re-render with the new Tropos: cords routed out of sight, the new Mantle on the console, a Hemisphere overhead and a Core beside it, so one room sells all three lines in one color. Caption: 'Each stands 51 in (1293 mm) tall.'"
+   },
+   {
+    "severity": "low",
+    "area": "link previews and search",
+    "where": "not visible in the captures; owner-site-notes.txt says the site is kept out of search engines until launch",
+    "problem": "Investors and editors meet the site as a link in email, iMessage or Slack, and an editor who hears 'EARF' will search for it. If the share preview is generic and search finds nothing, the first impression is lost before the page loads.",
+    "fix": "Set the share image to the lineup at 1200x630 with the tagline, the title 'EARF. A world of sound, in color.' and a one-sentence description. Once the press page is live, let search engines index the home, Studio and Press pages."
+   }
+  ],
+  "top_five": [
+   "Show the people behind it: a Studio section and page with the founder's name, a real photograph, a short bio, why a horn and why cast acrylic, what EARF means, and named collaborators, plus 'Designed in San Francisco by [Name]' in the footer.",
+   "Replace 'Write to us' with a 'Hear first' sign-up (email, optional color, buying / press / trade). Make it the hero's primary button and a pill in the nav, keep hello@ beneath it, add press@ and trade@, and report sign-ups by color to investors.",
+   "Turn 'Drawn to be made' into dated proof: a fabrication drawing, the simulated response plot, a photograph of the real acrylic samples, 'First pair, [month year], with [fabricator]', an 'Updated' date, and the held journal published with three dated posts.",
+   "Publish /press from the held kit: labeled renders at print size, a one-page fact sheet, the founder's bio and portrait, logo files and press@, linked from the footer and the contact block.",
+   "Back up 'A world of sound, in color.' with a Sound band after the hero (why a horn, the cutaway, four design-target figures, inputs). Launch it in one release with the new tagline, American English and the new speaker set, all on one art direction, so no superseded design stays on the page."
+  ],
+  "direction": "Today it reads as a capable designer's render portfolio rather than a company: strong pictures, but no people, no dates, no way to sign up and nothing about sound. I would build a shorter, more confident site in three layers. The home page runs about six screens: the new lineup under 'A world of sound, in color.' with one action, Hear first; a Sound band (why a horn, the cutaway, four design-target figures); one color moment where choosing a coin lights the speaker and opens a color page with every line in that tint; the room, re-rendered with three lines in one color; a dated Progress strip with real artifacts; Studio; and the sign-up. The uplit row and the room stay, since they are the strongest pictures. Next comes a page per line: a hero on the shared seamless, a color selector, six consistent views, materials and making, a specs table in inches and millimeters, and 'Made to order. Price on request.' Last, Studio, Journal and Press pages, so the company can be checked and covered, with the habitats living in the journal as a campaign. From Analogue (analogue.co), take the product discipline, especially how it presents its tinted transparent editions: one object on a flat ground, each color treated as a named product, specs as a clean table, and a calm notify-me state before anything is for sale. From Teenage Engineering (teenage.engineering), take the voice and the type: dry, precise, quietly funny copy where every line carries a fact, and specs set as part of the design. From Playdate (play.date), take the pre-launch playbook of a small team with a colorful object: the makers named and pictured, honest dated updates, a newsletter as the main action until orders open, and press material an editor can use without writing in. Use Apple-style scroll choreography once, for the turning view and cutaway on the Tropos page, not on the home page.",
+  "score_now": 5
+ },
+ "critic:copy": {
+  "issues": [
+   {
+    "severity": "high",
+    "area": "light section: layout",
+    "where": "desk-04.jpg (lower half), desk-05.jpg, desk-06.jpg (upper half), desk-07.jpg (top band); phone-05.jpg, phone-06.jpg",
+    "problem": "In these captures the \u201cPut a light under it.\u201d section scrolls its photograph and text away with the page and leaves the rest of its run empty. That is about two screens of flat black on the desk and two full black screens on the phone, where only the color dots show at the top edge of phone-05. The capture may simply have failed to hold the pin, or the pin may have failed. Either way, the section has no finished state without the pin, so a screenshot, a print, a fast flick or a broken pin shows a hole in the middle of the page. This is the section the founder already called \u201ctoo sparse and slow.\u201d The uplit eight, the best picture on the site, then arrives as a band at the bottom of a black screen (desk-06).",
+    "fix": "Make the section's base layout a finished grid of the eight uplit photographs, each with its name and line (4 \u00d7 2 on the desk, 2 \u00d7 4 on the phone). It then reads complete with no pin and no script, and it is what reduced motion gets. Turn it into the pinned, timed scene only once the pin is live: frame at 100svh, the photograph filling it, text set over its dark side. Size the run from the scene, about 1.5 screens, instead of reserving empty height. Close the section on the uplit eight at full screen height, with nothing over it."
+   },
+   {
+    "severity": "high",
+    "area": "hero: copy",
+    "where": "desk-01.jpg; phone-01.jpg, phone-02.jpg (top)",
+    "problem": "The line under the picture, \u201cTropos is a horn loudspeaker cast in tinted acrylic, in eight colours from Ember to Smoke.\u201d, is nearly the sentence the founder already cut (\u201ceight horned speakers in colored acrylic\u201d). It captions the picture directly above it. \u201cCast in\u201d also suggests a molded speaker, when Tropos is built from more than eighty parts. Under the coming headline it will say color twice in two lines. \u201cEARF \u00b7 TROPOS\u201d repeats the header. Two buttons split the first click. The fold goes to a disclaimer (\u201cIn development and not yet for sale; until the first are built, every picture here is a render.\u201d), which desk-01 cuts in half.",
+    "fix": "Headline: \u201cA world of sound, in color.\u201d Under it, one plain line that tells a stranger what EARF makes without describing the picture: \u201cHi-fi and lighting in tinted cast acrylic, from San Francisco.\u201d One button, \u201cTropos\u201d, to the speaker's page. Delete the eyebrow, \u201cSee the colours\u201d and the color legend under the hero. Say the disclaimer once, in the footer of every page: \u201cRenders, until the first pair is built.\u201d"
+   },
+   {
+    "severity": "high",
+    "area": "sound",
+    "where": "the whole page: desk-01.jpg to desk-10.jpg, phone-01.jpg to phone-10.jpg; live-text.txt",
+    "problem": "This is a hi-fi brand's home page, and it never says sound, music or listen (zero of each in the live text). \u201cHorn\u201d appears only as a part name. Color gets five modules and sound gets none. The incoming tagline promises \u201ca world of sound\u201d, and nothing on the page gives a reason to want to hear one. The turning view the founder asked to follow the hero isn't on the home page.",
+    "fix": "Right after the hero, show one Tropos, large, on the studio seamless, turning with the scroll and with no instruction text. Set it under the line from the earlier draft, \u201cThe oldest amplifier is a shape.\u201d, then \u201cTropos keeps a modern one inside, too.\u201d Below that, three figures set large: height in inches, \u201cAmplifier inside,\u201d and one acoustic figure marked \u201cdesign target\u201d until it is measured. End the section with a link to the Tropos page."
+   },
+   {
+    "severity": "high",
+    "area": "colors",
+    "where": "desk-01.jpg, desk-02.jpg (legend), desk-03.jpg (coins), desk-04.jpg (dots), desk-07.jpg (carousel); phone-02.jpg, phone-03.jpg, phone-04.jpg",
+    "problem": "The eight names run five times in seven screens: the hero lineup, the flat legend under it, the coins, the light section's dots and the habitat carousel. \u201cEight colours\u201d is said four times (\u201cin eight colours from Ember to Smoke\u201d, \u201cin eight colours of cast acrylic\u201d, \u201cin the same eight colours\u201d, \u201cEight colours, every line.\u201d). The rows don't even agree on the colors. The light section's dots use different values from the legend and the coins: Fog turns mid-gray (#716E67 against #CCD2D0), Smoke turns pure black and nearly vanishes on the dark ground (#000000 against #535059), and Poison and Haze shift brighter.",
+    "fix": "Keep one control, the acrylic coins, and give it a job. Pick a coin and everything below changes with it: the uplit speaker, its habitat and line, and Hemisphere, Core and Mantle in the same color. Delete the legend under the hero and the flat dots in the light section; the coins become its radio group. Define the eight once as tokens sampled from the coin renders and use them everywhere. Say \u201ceight\u201d once at most; the picture does the counting."
+   },
+   {
+    "severity": "high",
+    "area": "copy: voice",
+    "where": "desk-01.jpg, desk-02.jpg, desk-03.jpg, desk-07.jpg, desk-08.jpg, desk-09.jpg, desk-10.jpg; phone-02.jpg to phone-10.jpg",
+    "problem": "Every section comes from one mold: a monospace caps eyebrow over a headline in two halves split by a comma. \u201cTHE LINES / One acrylic, three ways to use it.\u201d, \u201cBY COLOUR / Eight colours, every line.\u201d, \u201cIN THEIR ELEMENT / Each colour, where it began.\u201d, \u201cPROGRESS / Drawn to be made.\u201d Some eyebrows say the headline before it does (\u201cLIT FROM BELOW / Put a light under it.\u201d, \u201cENQUIRIES / Write to us.\u201d). The body copy leans on three habits. \u201cX, so Y\u201d appears three times. Colons set up reveals (\u201cpart by part: more than eighty of them\u201d, \u201cBuilt as production will build it:\u201d, \u201cTrade and stockists: the same address.\u201d). And the phrasing goes stiff (\u201cfrosted within\u201d, \u201cA prototype is there to test the making.\u201d, \u201cThe design figures on these pages give way to measured ones.\u201d). Read top to bottom, that repetition is what sounds machine-written. The \u201cSee the\u2026\u201d links add five more of the same.",
+    "fix": "Drop the eyebrows. Vary the shape of the headlines: a full sentence, a two-word line, a reply. Keep what already works: \u201cPut a light under it.\u201d, \u201cThe last light of the fire.\u201d, \u201cA pair in Poison.\u201d, \u201cWrite to us.\u201d and \u201cEverything is made to order, so we quote rather than list.\u201d Replace \u201cOne acrylic, three ways to use it.\u201d with \u201cCut from the same sheet.\u201d Replace \u201cEight colours, every line.\u201d and its sentence with \u201cOne color for the room, or three. Both are correct.\u201d Allow one \u201cso\u201d sentence and one colon per page."
+   },
+   {
+    "severity": "high",
+    "area": "contact and sign-up",
+    "where": "desk-10.jpg; phone-10.jpg",
+    "problem": "The page closes on a mailto set in monospace, the kind of type used for code, with a \u201cCopy address\u201d pill. That is the only way to register interest. Nobody can leave an address and hear when the first pair exists, and that is the one conversion a pre-launch brand needs. \u201cFrom launch, write here for prices and lead times.\u201d leaves the reader unsure whether to write now. The footer offers two links (\u201cProgress\u201d, \u201cEnquiries\u201d) and a caps line of disclaimers.",
+    "fix": "Keep \u201cWrite to us.\u201d and \u201cEverything is made to order, so we quote rather than list.\u201d Follow them with \u201cPrices and lead times from launch. Designers, dealers, and press: same address.\u201d Make hello@earf.world a plain link in the text face, with at most a small copy icon. Add one field and one button, \u201cEmail\u201d and \u201cWrite to me\u201d, with \u201cWe'll write when there's something to hear.\u201d beneath. Footer: the four products, Colors, Contact, Instagram if there is one, Press once the kit is out, and \u201cRenders, until the first pair is built. EARF, San Francisco. \u00a9 2026.\u201d"
+   },
+   {
+    "severity": "high",
+    "area": "credibility",
+    "where": "desk-01.jpg, desk-09.jpg, desk-10.jpg; phone-02.jpg, phone-09.jpg, phone-10.jpg",
+    "problem": "The renders are disclaimed twice in full (\u201cevery picture here is a render\u201d under the hero, \u201cTHE PICTURES ARE RENDERS\u201d in the footer), and nothing real appears to balance them: no person, no photograph of a physical part, no date. Progress is the one section that could earn trust, and it is three columns of gray text with no evidence.",
+    "fix": "Use one disclaimer, once (in the footer, as above). Put one real photograph beside the three Progress steps: a fabrication drawing, a cut test piece, or the eight acrylic chips against a window, whichever exists first. Give each step a month as soon as it is known. Sign the contact block or Progress with the founder's name. When the journal is released, link it from Progress."
+   },
+   {
+    "severity": "high",
+    "area": "American English and naming",
+    "where": "desk-01.jpg (nav, buttons), desk-03.jpg, desk-04.jpg, desk-09.jpg (caption), desk-10.jpg (contact, footer); phone-01.jpg, phone-03.jpg, phone-09.jpg, phone-10.jpg",
+    "problem": "\u201cColour\u201d in some form appears eleven times. \u201cEnquire\u201d is in the nav, and \u201cENQUIRIES\u201d and \u201cEnquiries\u201d appear below it. \u201cStockists\u201d is a British trade word. Sizes are in millimeters only (\u201cEach stands 1293 mm tall, 560 mm wide at the cabinet.\u201d). The same product is \u201cTurntable\u201d in the nav and eyebrow but \u201ca record player\u201d in its card and link, and to an American ear \u201crecord player\u201d means an all-in-one box. The nav also says \u201cSpeakers\u201d for a single speaker, and it lists categories when the brand's real assets are its four product names.",
+    "fix": "Use \u201ccolor\u201d everywhere, including alt text and headings. Use \u201cContact\u201d in the nav and footer, and \u201cDesigners, dealers, and press\u201d in place of \u201cTrade and stockists\u201d. Put inches first and millimeters in parentheses, on spec lines only (\u201c51 in. (1293 mm)\u201d). Use \u201cturntable\u201d throughout. Nav: \u201cTropos, Hemisphere, Core, Mantle, Colors\u201d, with \u201cContact\u201d set apart at the right. On the phone, the menu opens to the four products as pictures, each with its category in small type (Loudspeaker, Pendant, Table lamp, Turntable). Use the serial comma throughout."
+   },
+   {
+    "severity": "medium",
+    "area": "hero: picture and layout",
+    "where": "desk-01.jpg; phone-01.jpg",
+    "problem": "The hero is a catalog lineup boxed between a headline band and a copy band. On the desk the speakers fill about a third of the screen's height, and some 150 px of empty floor separates their shadows from the copy. On the phone the eight shrink to a cluster, each about 50 px wide, taking up about a seventh of the screen's height below a band of blank backdrop. It also shows the outgoing speaker.",
+    "fix": "With the new picture set, make the hero one full-bleed frame at 100svh. Set the headline on the quiet top of the picture, and have the speakers fill at least half the frame's height. Render a crop made for the phone (two rows of four, or a tight arc) instead of shrinking the desk frame. If the speakers are links, give each a hover and focus label with its name and line; that replaces the legend row."
+   },
+   {
+    "severity": "medium",
+    "area": "the lines (product cards)",
+    "where": "desk-02.jpg, desk-03.jpg (top); phone-02.jpg, phone-03.jpg",
+    "problem": "Three cards use three art directions: Tropos small in a dusk meadow, Hemisphere on a peach gradient, Mantle on a white seamless. The Mantle shown is the superseded design. \u201cHemisphere and Core\u201d shows no Core, and Core's best new fact, that it is cordless, isn't mentioned. The cards say \u201ceight colours\u201d twice more. On the phone the pictures shrink to 143 px thumbnails, with Tropos about 80 px tall.",
+    "fix": "Shoot all three in one studio language: the same seamless, light, camera height and scale, one color each. Make the whole card the link, with the product name as the only label. Copy: \u201cTropos. A powered horn loudspeaker. Nothing to hide.\u201d / \u201cHemisphere and Core. A pendant, and a table lamp that doesn't need the wall.\u201d / \u201cMantle. A turntable, lit from below.\u201d Use the new Mantle's render as soon as it exists; until then, a card with type only beats showing the design you've replaced. On the phone, stack the cards full width with the product at about 60 percent of the frame's width."
+   },
+   {
+    "severity": "medium",
+    "area": "progress: copy",
+    "where": "desk-09.jpg, desk-10.jpg (top); phone-09.jpg, phone-10.jpg",
+    "problem": "The facts are right but stiffly said: \u201cTropos is drawn for making, part by part: more than eighty of them, each with its fabrication drawing.\u201d; \u201cA prototype is there to test the making.\u201d; \u201cThe design figures on these pages give way to measured ones.\u201d \u201cDrawn to be made.\u201d is abstract, and \u201cthe back screwed to the braces\u201d is workshop detail on a home page.",
+    "fix": "Headline: \u201cWhere Tropos stands.\u201d Steps: \u201cDrawn. More than eighty parts, each with its own fabrication drawing. The horn and the bass were settled in simulation before any acrylic was cut.\u201d / \u201cNext, the first pair. Built the way production will build them, down to the screws.\u201d / \u201cThen, measured. In a room, by ear and by microphone. Until then, every figure here is a design target. The lamps and Mantle follow.\u201d"
+   },
+   {
+    "severity": "medium",
+    "area": "habitats",
+    "where": "desk-07.jpg, desk-08.jpg; phone-07.jpg, phone-08.jpg",
+    "problem": "\u201cEach colour, where it began.\u201d promises eight origin stories, then captions each picture with its name alone (\u201cEmber\u201d, \u201cDust\u201d). The lines that would tell the story are stranded in the light section. The only control is a small gray arrow on the picture, with no count and no way back, and the next slide peeks in under a white fade that washes it out (desk-07). It is also the second one-color-at-a-time browser in a row, straight after the light section.",
+    "fix": "Fold it into the coin picker: pick a coin, see the speaker lit, then its habitat with its line. If it stays a carousel, caption each picture with its line (\u201cEmber. The last light of the fire.\u201d), put previous, next and \u201c1 / 8\u201d under the picture, support swipe and the arrow keys, and drop the white fade. Keep the headline, spelled \u201ccolor.\u201d"
+   },
+   {
+    "severity": "medium",
+    "area": "light section: copy",
+    "where": "desk-03.jpg (bottom), desk-04.jpg; phone-03.jpg, phone-04.jpg",
+    "problem": "\u201cLIT FROM BELOW\u201d says the headline before the headline does. The body, \u201cCast acrylic carries light to its edges, so a lamp underneath fills the whole cabinet with colour.\u201d, explains what the picture already shows. \u201cTROPOS 01\u201d reads like a model number, as if there were eight models. And once the new speaker's uplit base is in the pictures, the headline stops being a suggestion and becomes a feature the copy never claims.",
+    "fix": "Keep \u201cPut a light under it.\u201d Once the base light is in the pictures, answer it underneath with \u201cWe did.\u201d Cut the body. Drop \u201cTROPOS 01\u201d, or number the colors everywhere (\u201c01 Ember\u201d) like a paint chart. Keep every color's line; they are the best writing on the site."
+   },
+   {
+    "severity": "medium",
+    "area": "pictures: the speaker set",
+    "where": "desk-01.jpg, desk-02.jpg, desk-04.jpg, desk-06.jpg, desk-07.jpg, desk-09.jpg; phone-01.jpg, phone-07.jpg, phone-08.jpg",
+    "problem": "Every speaker on the page is the outgoing design, and the new set isn't rendered. In the hero the Fog speaker has a white ring around its woofer that no other color shows, so it reads as a different product. The pictures also come from different worlds: a studio row, a lava field that looks like a video game, a sunlit room, a peach gradient and a white seamless.",
+    "fix": "Swap the speaker as one set, never piecemeal: an old horn in the habitats under a new one in the hero is worse than either alone. Ship the copy, spelling and structure changes now, on the current pictures. Then render the site set in this order: the hero lineup, the eight uplit singles and the uplit eight, the Tropos studio single, the room pair, then the habitats. Before anything goes up, check all eight colors for the same parts and finishes (woofer ring, handles, base light)."
+   },
+   {
+    "severity": "low",
+    "area": "at home (room)",
+    "where": "desk-08.jpg, desk-09.jpg; phone-08.jpg, phone-09.jpg",
+    "problem": "\u201cA pair in Poison.\u201d is exactly right. Its captions aren't. \u201cCovers on, by a tall window.\u201d describes what we can see, and \u201cEach stands 1293 mm tall, 560 mm wide at the cabinet.\u201d is a spec line, in metric. Against the plain wall, the two outlets at cabinet height with cords hanging are the first thing the eye finds after the speakers.",
+    "fix": "Use one caption: \u201cCovers on. A little over four feet tall.\u201d (51 in. is 4 ft 3 in.) Leave the dimensions to the spec table. In the re-render, put the outlets at baseboard height and run the cords behind the cabinets."
+   },
+   {
+    "severity": "low",
+    "area": "type and layout system",
+    "where": "desk-02.jpg, desk-03.jpg, desk-09.jpg, desk-10.jpg; phone-10.jpg",
+    "problem": "Monospace for the eyebrows, the email address and the footer line is the look of a software-tool site. With beige card panels and the same gap before every section, the page reads as a well-made template rather than a house style.",
+    "fix": "Use one family, the grotesk, in three or four sizes, with any labels in its small caps. Drop the card panels: picture and caption sit directly on the page background. Pace the spacing: tight within an idea, a full screen between acts."
+   }
+  ],
+  "top_five": [
+   "Make the light section finished without its pin. In these captures it leaves about two screens of black on the desk and two on the phone (desk-04 to desk-06, phone-05, phone-06). Build it as a grid of the eight uplit pictures with names and lines, add the pin and the timed change on top, cap the run near 1.5 screens, and close on the uplit eight at full height.",
+   "Rebuild the hero for \u201cA world of sound, in color.\u201d: the new lineup full-bleed, one plain line (\u201cHi-fi and lighting in tinted cast acrylic, from San Francisco.\u201d) and one button (\u201cTropos\u201d). Cut \u201cEARF \u00b7 TROPOS\u201d, the \u201ceight colours from Ember to Smoke\u201d sentence (nearly the one the founder already cut), the second button, the legend row and the render disclaimer.",
+   "Give sound a section; the page never says sound, music or listen. Right after the hero, put one Tropos on the studio seamless, turning with the scroll, under \u201cThe oldest amplifier is a shape. Tropos keeps a modern one inside, too.\u201d, with three figures and a link to its page.",
+   "Collapse the five color rows into one coin picker that drives the uplit speaker, its habitat, and the lamp and turntable in the same color. Use one set of color values: today the light section's dots turn Fog mid-gray and Smoke black. Say \u201ceight\u201d once at most.",
+   "Do one pass for voice, American English and the close. No eyebrows, no \u201cSee the\u2026\u201d links, no \u201cX, so Y\u201d habit. Use color, Contact, dealers, inches first and \u201cturntable\u201d throughout. End on a sign-up (\u201cWe'll write when there's something to hear.\u201d / \u201cWrite to me\u201d) instead of a mailto with a \u201cCopy address\u201d pill."
+  ],
+  "direction": "I would build a shorter home page in three acts and leave the detail to the product pages. Open on the new eight, lit from behind, full screen, with \u201cA world of sound, in color.\u201d and one plain line. Act two is sound: one Tropos on the studio seamless, turning as you scroll, \u201cThe oldest amplifier is a shape.\u201d, three figures and a way to its page. Act three is light and color: the uplit eight, then one row of acrylic coins that recolors everything below it (the speaker lit, its habitat and line, and Hemisphere, Core and Mantle in the same color), replacing today's five rows. Then the room, Progress with one real photograph, and a sign-up to close. From Apple's iMac page (apple.com/imac), take the system for one object in many colors: a picker that changes the product where it stands, a short headline followed by one plain sentence, and scroll-driven motion that is a finished picture wherever it stops. From Teenage Engineering (teenage.engineering), take the house discipline and the deadpan: every object on the same ground in the same light, products listed by name, specs stated flatly, and copy that is funny because it never tries to be. From Aesop (aesop.com), take the restraint: few words, no instructions, wide margins, and a page that trusts the reader to get the joke.",
+  "score_now": 5
+ },
+ "critic:skeptic": {
+  "issues": [
+   {
+    "severity": "high",
+    "area": "information architecture / product depth",
+    "where": "desk-10.jpg, phone-10.jpg, live-text.txt (ends at line 133)",
+    "problem": "The page ends at 'Write to us.' and the footer. The Tropos detail, close-ups, turning view, specs, lamps and record player that the brief lists after the contact block are in neither the capture nor the page text, so the deepest a visitor gets is one dimension line under the room. The owner asked for the turning view straight after the hero, and it isn't there at all. The copy even points at what's missing: 'The design figures on these pages give way to measured ones' (line 120), on a page with no figures. Unless the nav's Speakers/Lighting/Turntable and the cards' 'See the\u2026' links lead to other pages, they have nothing to land on, and the footer links none of them.",
+    "fix": "Give each object its own page (/tropos, /hemisphere, /core, /mantle), linked from the nav, the cards and the footer, all built to one pattern: name and one line; color chips that swap the main picture in place; an eight-view gallery; three or four close-ups (the horn's mouth, a lit acrylic edge, the base light, the mark on the back); the turning view; a particulars table (height, width, depth and weight in in/lb with mm/kg, drivers, amplification, inputs, power, lead time); and a 'Price on request' button that opens the inquiry form. On the home page, put the turning view right after the hero with no instruction text, and keep anything else that stays there above Progress and the ask."
+   },
+   {
+    "severity": "high",
+    "area": "hero",
+    "where": "desk-01.jpg, phone-01.jpg",
+    "problem": "On a 1440x900 laptop the eight speakers are about 280 px tall, with a ~150 px band of empty floor under them (y\u2248650\u2013790). The hero runs past the fold, so the render disclaimer is sliced in half at the bottom edge. On the phone the cast is about 120 px tall, packed into two overlapping rows, with ~150 px of blank seamless above it; the colored shadows take more of the screen than the speakers do.",
+    "fix": "Fit the hero to one screen (100svh including the 64 px header) and crop the render so the cast fills at least 40% of its height: cut the dead floor, keep the colored pools, and bring the intro and buttons inside the screen. Give the phone its own 4:5 render through <picture>, with the eight in two staggered rows filling the width at 35% or more of the screen height. Set 'A world of sound, in color.' at ~96 px on two lines on desktop and 40\u201344 px on the phone."
+   },
+   {
+    "severity": "high",
+    "area": "sound",
+    "where": "live-text.txt (whole page); desk-01.jpg to desk-10.jpg",
+    "problem": "A loudspeaker brand whose home page never says what Tropos sounds like or why it's a horn. The only nod to listening is 'In a room, by ear and by microphone' in a Progress column. Nothing on drivers, amplification, sensitivity or bass. The coming tagline promises 'a world of sound'; today the page only delivers the color.",
+    "fix": "Add a Sound section after the lit lineup. One cutaway render of the cabinet and horn (horn profile, compression driver, woofer, amplifier) with three short callouts, then three large figures (sensitivity in dB, bass extension in Hz, amplifier power in W) marked 'design target' until measured, and one line on why a horn. The builder already wrote one: 'The oldest amplifier is a shape.' Once the first pair is tested, the measured frequency response replaces the targets in Progress."
+   },
+   {
+    "severity": "high",
+    "area": "copy",
+    "where": "desk-01.jpg, desk-02.jpg, desk-03.jpg, desk-09.jpg, desk-10.jpg; live-text lines 35, 53, 56, 60, 64, 69, 109, 118, 126",
+    "problem": "What the owner banned is still live. The hero intro ('a horn loudspeaker cast in tinted acrylic, in eight colours from Ember to Smoke') is close to word for word the owner's own example of stating the obvious, and the Tropos card repeats it two screens on. 'Eight colours' appears four times, and the eight names are listed four times. 'Covers on, by a tall window.' captions what's in the picture. Every headline has the same cadence, a short sentence and a full stop, so none of them lands. Some lines are compressed until they're stilted: 'A prototype is there to test the making.', 'Trade and stockists: the same address.', 'frosted within'.",
+    "fix": "Rewrite against four rules. Say 'eight colors' once, in the color section. Never caption what the picture already shows. Make every line add something the picture can't: sound, scale, making, how to order. Allow two or three lines of wit on the page and keep plain labels everywhere else. The register to aim for: 'Same acrylic, different jobs.' (the lines); 'We put a light under it.' (once the base is lit); '51 in tall. Covers optional.' (the room); 'Each pair is made to order. Leave your email and a color; we'll write when the first are built.' (the ask)."
+   },
+   {
+    "severity": "high",
+    "area": "conversion / the ask",
+    "where": "desk-01.jpg, desk-10.jpg, phone-01.jpg, phone-10.jpg",
+    "problem": "There's no way to register interest. The hero's two buttons ('See the speakers', 'See the colours') only move you around the page, and 'See the speakers' turns up again two screens later. The one real next step is at the very bottom: an address in monospace with a 'Copy address' button, under a sentence telling people to wait ('From launch, write here for prices and lead times'). No email, color preference or city is ever captured, so launch day starts with no list.",
+    "fix": "Add a 'Join the first run' form: email, the eight chips to pick a color, an optional product. Send it to a list (a Vercel function into Loops, Resend or Mailchimp) and confirm inline, naming the chosen color. Make it the hero's primary button with 'Explore Tropos' as the secondary, and swap the header's 'Enquire' for it. Keep hello@earf.world as a mailto link under the form for trade and press. Nothing's Phone (1) pre-launch is the model here: the waitlist was the event."
+   },
+   {
+    "severity": "high",
+    "area": "colors section",
+    "where": "desk-02.jpg, desk-03.jpg, desk-04.jpg, phone-02.jpg, phone-03.jpg, phone-04.jpg",
+    "problem": "Color is the whole proposition, and it's shown as flat UI dots in three rows within about two screens: the legend under the hero, the 'By colour' discs, and the radio dots in the dark band. The rows disagree with each other. Fog is a pale gray-green in desk-02/03 and a mid gray in desk-04; Smoke is dark gray, then pure black. The legend doesn't sit under the speakers it names (Ember's dot is at x\u2248127, its speaker at x\u2248190). 'By colour' is eight dots and a claim ('a room can be one colour or three') that no picture backs up.",
+    "fix": "Keep one token file for the eight colors and use it everywhere. Replace the dots with rendered acrylic chips: a slight angle, a bright polished edge, a tinted shadow on the cream. Flat circles only below 24 px. Delete the hero legend. Make 'By colour' a family viewer: tap a chip and one studio frame shows Tropos, Hemisphere, Core and Mantle together in that color, with its line beneath. That's the first step toward the owner's monochromatic/complementary pairing idea."
+   },
+   {
+    "severity": "high",
+    "area": "light section (pacing)",
+    "where": "desk-03.jpg to desk-07.jpg; phone-03.jpg to phone-07.jpg",
+    "problem": "One idea takes up the dark band for 3.7 screens on desktop (desk-03 y=512 to desk-07 y=260) and 3.9 on the phone. In this capture the scroll runway renders as solid black: a full desktop screen (desk-05) and two phone screens (phone-05, phone-06). That is also what a visitor gets whenever the pin doesn't engage, and what full-page screenshots will show. On the phone the panel runs about 760\u2013900 px from heading to dots in an 844 px viewport, so with Safari's bars up the dots, its only control, likely sit under the toolbar; phone-04 already cuts them off at the bottom edge. The payoff is weak too: in desk-06 all eight lit are dim, about 190 px tall, at the bottom of a black frame. The band then ends in a hard cut to cream (desk-07 y=260; phone-07 y=575).",
+    "fix": "Halve it. Cut the runway to 0.15 screen per color (1.2 screens). Or drop the pin: show the lit lineup full-bleed with the chips under it, and let a tap or hover light one speaker and dim the rest (nine preloaded frames, 250 ms crossfade). On the phone, size the panel to 100svh with the chips above the name. Re-render the lineup brighter and closer, with the speakers at least 35% of the frame height. Fade into the cream over ~160 px. When the pin is off, fall back to a stacked static set, not empty runway."
+   },
+   {
+    "severity": "high",
+    "area": "credibility",
+    "where": "desk-09.jpg, desk-10.jpg, phone-09.jpg, phone-10.jpg",
+    "problem": "Nothing on the page shows that a real person is making a made-to-order, price-on-request object seen only in renders. No founder or studio name, no fabricator, no dates, no photograph of anything physical. 'Drawn to be made.' is three gray paragraphs with no drawing in them. The footer is a wordmark and two links: no Instagram, press, journal or privacy.",
+    "fix": "Put the drawing in 'Drawn.': the exploded axonometric of the 80-odd parts as a fine full-width line drawing. Give each of the three steps a month or season, so the page shows momentum. The day the acrylic chips arrive, add one real photograph (the eight chips in a hand on the cream) captioned 'Photograph' as the counterpart to 'Render'. Add a two-line studio note: the founder's name, San Francisco, and who cuts the acrylic. Link the press kit and journal from the footer once they're released."
+   },
+   {
+    "severity": "medium",
+    "area": "product lines (cards)",
+    "where": "desk-02.jpg, desk-03.jpg, phone-02.jpg, phone-03.jpg",
+    "problem": "The three doors into the range come from three different worlds: Haze in a field at dusk, an Ember pendant on a peach backdrop, and a colorless Mantle on white with its lid up that looks like a stock photo. 'Hemisphere and Core' shows only Hemisphere. Mantle appears in the outgoing design and in no color at all, under 'in the same eight colours'. The cards are a stock template: beige box, label, title, gray line, underlined link. On the phone the image column is about 143 px wide, so Tropos is about 80 px tall.",
+    "fix": "Shoot the three as one set: the same seamless, the same light, the same camera height, each object in a different color (e.g., Tropos in Haze; Hemisphere and the cordless Core together in Ember; the new Mantle in Ice). Until the redesigned Mantle is rendered, its card shows a lit silhouette and 'Next', not the old model. Make the image the whole card, with the name over it and no box. On the phone, stack full-width 4:5 cards."
+   },
+   {
+    "severity": "medium",
+    "area": "habitats carousel",
+    "where": "desk-07.jpg, desk-08.jpg, phone-07.jpg, phone-08.jpg",
+    "problem": "Eight of the most ambitious pictures on the site sit in a one-at-a-time carousel. One frame shows. The next is washed out by a white fade that looks like it's still loading. A gray arrow sits on the lava itself, with no Previous and no count. The captions are just the color names. The peeking Dust frame shows a blobby, half-melted rock that reads unfinished. The headline 'Each colour, where it began.' repeats the eyebrow and claims something that isn't true.",
+    "fix": "A horizontal scroll-snap strip of eight 4:5 frames at ~70vh: 2.5 visible on desktop, 1.15 on the phone. No fade. Arrows outside the images and on desktop only, with an '03 / 08' count. Caption each with its name and line ('Ember. The last light of the fire.') and link each to that color on the Tropos page. Re-render the Dust rock. Headline: 'In their element.', with no eyebrow."
+   },
+   {
+    "severity": "medium",
+    "area": "imagery / outgoing design",
+    "where": "desk-01.jpg, desk-03.jpg, desk-04.jpg, desk-06.jpg, desk-07.jpg, desk-09.jpg, phone-01.jpg, phone-04.jpg, phone-07.jpg, phone-08.jpg",
+    "problem": "Every Tropos picture shows the outgoing design: the stepped horn with the black driver 'eye' and no lit base. In the hero, Acid's horn throat reads maroon against a yellow cabinet (desk-01, third speaker). 'Put a light under it' describes a lamp you add yourself, and the new design lights itself. The new set will replace about two dozen images, most in two crops.",
+    "fix": "Before the new set renders, move the builder onto one image manifest (view x color x breakpoint crop) so the swap is a single commit and no layout gets tuned to an old picture. Render in order of exposure: the hero (desktop and phone), the eight studio singles, the lit lineup, the room, then the habitats. When the base light ships, rewrite the section around it ('We put a light under it.')."
+   },
+   {
+    "severity": "medium",
+    "area": "page structure",
+    "where": "desk-01.jpg to desk-10.jpg; phone-01.jpg to phone-10.jpg",
+    "problem": "The page is a run of vignettes, not a story. Four of its eight sections show Tropos in its colors (hero, light, habitats, room) and a fifth is the colors as dots. The lamps and Mantle get one card each, sound and buying get nothing, and the making gets three paragraphs. It takes 9.6 desktop screens and about 10 phone screens to say about eight things, then ends on an email address.",
+    "fix": "Rebuild it as one arc of about seven screens: the cast (hero), one Tropos turning, the eight lit, sound, color families across all four objects, at home, made (drawing, dates, a real photo), join the first run. Everything else goes to the object pages."
+   },
+   {
+    "severity": "medium",
+    "area": "typography",
+    "where": "desk-01.jpg, desk-02.jpg, desk-07.jpg, desk-08.jpg, desk-10.jpg, phone-10.jpg",
+    "problem": "Every section opens on a letterspaced monospace eyebrow that repeats its headline ('AT HOME / A pair in Poison.', 'ENQUIRIES / Write to us.', 'IN THEIR ELEMENT / Each colour, where it began.'). With the monospace email and the mono caps footer, the page reads 'developer tool' rather than 'design object'. Scale contrast is low: the H1 is about 75 px and section heads about 48 px. The contact paragraph puts all 149 characters on a single line (desk-10). Body copy is a light gray throughout, so every paragraph reads like fine print.",
+    "fix": "Drop the eyebrows where the headline carries the section; keep two or three for wayfinding. Use monospace only for numbers and particulars, and set the email in the text face as a link. Scale: H1 ~96 px, section heads 48\u201356 px, body 18\u201319 px. Cap measure at 60ch. Body text no lighter than #2E2A27 on the cream."
+   },
+   {
+    "severity": "medium",
+    "area": "copy: spelling and names",
+    "where": "desk-01.jpg, desk-02.jpg, desk-03.jpg, desk-04.jpg, desk-10.jpg; live-text lines 4, 5, 37, 57, 62\u201365, 88, 122, 131",
+    "problem": "A San Francisco brand writes 'colour' 11 times, plus 'Enquire' and 'Enquiries'. Mantle is a 'Turntable' in the nav and card label and a 'record player' in the card copy and link. 'See the speakers' is plural for a single model. 'TROPOS 01'\u2026'08' reads like eight model generations, not color numbers.",
+    "fix": "American English throughout: color, Contact (or Inquire), Inquiries. Pick one name for Mantle's category ('record player' suits the voice) and use it in the nav, label and links. 'See Tropos' for the button. Number the colors 'No. 01 Ember' or drop the numbers."
+   },
+   {
+    "severity": "medium",
+    "area": "disclaimers",
+    "where": "desk-01.jpg, desk-10.jpg, phone-02.jpg, phone-10.jpg",
+    "problem": "'In development and not yet for sale; until the first are built, every picture here is a render.' is sliced at the fold on desktop and is the first thing after the hero on the phone; the footer says it again in mono caps. It's honest, but it comes across as an apology, twice.",
+    "fix": "Credit each picture with a small 'Render' in its corner, the way a magazine credits a photograph, and keep one sentence-case line in the footer: 'In development. Pictures are renders until the first pair is built.' Take it out from under the hero."
+   },
+   {
+    "severity": "medium",
+    "area": "the room",
+    "where": "desk-08.jpg, desk-09.jpg, phone-08.jpg, phone-09.jpg",
+    "problem": "The top ~45% of the frame is blank wall, so the pair sits low, and on desktop the heading and the picture never fit on one screen. A black plug in a white outlet beside each speaker, at eye level, pulls focus. The room is the stock sideboard-vase-books set. The captions say what's already visible ('Covers on, by a tall window.') and give sizes in millimeters only.",
+    "fix": "Crop desktop to 16:9 with the pair and the sideboard filling the frame, and the phone to 4:5 on one speaker and the sideboard. Route the cords out of sight. Add a second, more particular listening room in another color; the owner's bar references (Ginza Music Bar, Jazz Spot Bokunen) point the way. Caption: '51 in tall, 22 in wide (1293 x 560 mm).'"
+   },
+   {
+    "severity": "medium",
+    "area": "footer",
+    "where": "desk-10.jpg, phone-10.jpg",
+    "problem": "The footer is a wordmark, 'Progress', 'Enquiries' and a mono caps line that wraps to three lines on the phone. No objects, colors, social links, press, journal or privacy, so a visitor who reaches the bottom has nowhere to go.",
+    "fix": "Four short columns. Objects: Tropos, Hemisphere, Core, Mantle. Colors: the eight chips, each linking to that color. Studio: Progress, Journal, Press. Contact: email, Instagram and the 'Join the first run' field. Below them, one sentence-case legal line with Privacy, and the globe beside the wordmark."
+   },
+   {
+    "severity": "low",
+    "area": "opening and header motion",
+    "where": "desk-01.jpg, phone-01.jpg; owner-site-notes.txt line 17",
+    "problem": "Per the owner's notes, every visit is held for at least 0.9 s while the globe intro plays before the hero appears, and the header globe turns every 4 s indefinitely, a constant movement beside the text people are reading.",
+    "fix": "Play the intro once per session (a sessionStorage flag), skip it when the hero image is already cached, and cap it at 1.2 s. Slow the header globe to one turn every ~20 s, pause it once the hero is off screen, and stop it for prefers-reduced-motion."
+   },
+   {
+    "severity": "low",
+    "area": "accessibility (dark band controls)",
+    "where": "desk-04.jpg, phone-04.jpg",
+    "problem": "On the near-black band the Smoke chip is a black dot with a hairline ring and nearly disappears; Haze and Poison are faint. The selected ring is the only state shown.",
+    "fix": "Give every chip on dark a 1.5 px light rim. Lift the selected one 2 px with a white ring and its name beneath it, and add a visible focus ring for keyboard users."
+   },
+   {
+    "severity": "low",
+    "area": "phone lineup render",
+    "where": "phone-07.jpg",
+    "problem": "The phone's oblique lineup is the best phone composition on the page, but its top-right corner opens onto a misty gray void where the wall ends, which looks like the edge of the 3D scene. Fog and Smoke, at the far end, disappear into the dark.",
+    "fix": "Re-render with the wall running out of frame, or with a darker environment, and raise exposure on the far third so all eight read."
+   }
+  ],
+  "top_five": [
+   "Show the product big and close. Make the hero one screen with the cast at 40% or more of its height, plus its own phone render (today the cast is about 120 px tall on a phone). Put the owner's turning view right after it, and build object pages with close-ups, particulars and 'Price on request'. The live page ends at 'Write to us.' without any of them.",
+   "Sell the sound: a cutaway of the horn, three design-target figures and one line on why a horn ('The oldest amplifier is a shape.'). Today there isn't a word about sound on a speaker brand's page, and 'A world of sound, in color.' can't stand on that.",
+   "Make color one system instead of three dot rows: rendered acrylic chips from one token set, the hero legend gone, 'By colour' turned into a family viewer with all four objects in the chosen color, and the light band cut from 3.7 screens to under 2 with no black runway.",
+   "Rewrite the copy to rules: 'eight colors' once, no caption that restates the picture, every line adds sound, scale, making or how to order, American English throughout, and the render disclaimer moved into quiet per-image credits.",
+   "Give the launch a list and a face: a 'Join the first run' form (email plus color) in the hero, header and footer; Progress with the exploded drawing, dates and the first real photograph; a founder and studio line; and a full footer."
+  ],
+  "direction": "Two layers instead of one long scroll: a home page of about seven screens that tells one story, and a page for each object that carries the depth. Home, in order: the cast, at full presence, under 'A world of sound, in color.' with one button, 'Join the first run'; one Tropos turning, with chips beneath; the eight lit, full-bleed; Sound (a cutaway, three figures, 'The oldest amplifier is a shape.'); color families, where a chip swaps one studio frame of Tropos, Hemisphere, Core and Mantle in that color; one room, cropped tight; Made (the exploded drawing, dated steps, the first real photograph) and the sign-up again. Object pages: sticky chips, gallery, close-ups, turning view, particulars, 'Price on request'. From Apple's AirPods Max and iPhone pages, take the color picker that recolors the product in place, one idea per screen, and specs kept on their own page so the story stays short. From Teenage Engineering's OP\u20131 field pages, take objects shot full size on a plain ground, particulars set as a design element (the one honest use for the monospace), and wit kept to a word or two. From Devialet's Phantom pages, take how to make sound visible: an exploded view and the physics reduced to one big image and a few numbers.",
+  "score_now": 5
+ }
+}
