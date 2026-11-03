@@ -2481,3 +2481,18 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   bronze insert bonded inside, the insert the dark core; the thick parts lightened (horn-formed #C8CBD0; the pad 68 to 72); a uniform
   45-50 needs a build change (a shorter insert, or one in clear or smoked acrylic): noted. Chunk 1 (the deck hero) rendering, then 3,
   4. My gate on v2 (2064 white, v1 and Ice polished as context) started 17:23.
+- 17:23 biomes lane: Fog with the polished horn at 45a190d10e0dd204e29a94b36c7fa11d0b33fdc9 (habitats/fog_b-portrait-1200x1500.jpg; the sun
+  at 110, the side; bedded 12 mm; 96 samples, 48 min). Its gate passed all four (clear birch, the internals and the rock and grass
+  behind through it; down in the grass, the contact line mostly hidden by blades; no light down; "faint corner creases and
+  refraction, not a bold X": the first bright-sky test of the polished horn, flagged for my critics). Running: the Haze and Poison
+  proxies (~10 min), then their finals, Ember polished, Acid; the remaining set ~20:00 UTC. My gate on Fog (Dust and Ice polished as
+  context) started 17:25.
+- 17:25 r44-lantern gate wf_4b6b89b9-7f9 (3 critics, 20 min): SHOW 2/3 (better than the old on setup; the lit wood wall works; the horn
+  deep red glass). The HOLD and one SHOW's top note: the big left speaker still dark (~17 without the woofer vs ~53 in the old; ~65 %
+  near-black). Optional: a thin clipped red line under the left cabinet's side top edge (an LED-strip risk); 2-3 px glints on the
+  woofer ring. Critics also asked to confirm polished (their brief still said satin).
+- 17:26 the speaker gate script's test 5 updated to the polished horn (the owner's 15:14 choice); gates launched before this edit
+  used the satin wording (their meant lines said polished).
+- 17:27 sent to the bar lane: one polish pass on r44-lantern before the owner sees it (a soft room light on the pair's upper bodies to
+  ~45-55, no floor pool; the side-edge red line softened; the woofer glints removed); polished confirmed; then the r43 shop and window
+  fixes; a proxy each; SHAs.
