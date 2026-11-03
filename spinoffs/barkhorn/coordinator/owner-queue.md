@@ -3386,3 +3386,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   honest A-ice-polished pushed in f7f03850 with its .shot.json and .report.json; the turn-flag test (01, 02, 04, 05 with and without flags at
   640 x 576) 5 of 8 frames done; its order: the hero proxy, the row (a), the room rig, the 9097 fix, the turn result, the amp plate, back,
   hero-light.
+- 21:34 lamps lane: the Hemisphere finals under rulings 1-3 at bac5fc088155c5a82e5f71f7714272b9a362c4bb (lamp-pictures/, 1800 x 1200, 5700 K,
+  one camera): hemi-ice-day.png (the cap in the new satin dark grey, the liner 1.5 mm inside the rim, the rim dye at 0.5);
+  hemi-ice-night.png ((a) the cool-white liner); hemi-ice-night-blueliner.png ((b) the faint-blue liner, a PROPOSAL, transmission ~0.62/0.80/1.0).
+  Lit-face hues OKLCH/CIELAB/HSV: day 246/268/204; (a) 232/248/196 (14 off the day); (b) 242/263/202 (4 off). Night medians (a)/(b): face
+  84/77, lip 70/65, cap 35/35, table 152/152, bowl 211/211 (the COB in its glaze). For the owner: the liner now ends 1.5 mm inside the rim,
+  not 4 mm, to close the dark seam at the lip (walks back part of the accepted rim-fix proposal; the day shows it too). Core B day and night
+  still rendering.
