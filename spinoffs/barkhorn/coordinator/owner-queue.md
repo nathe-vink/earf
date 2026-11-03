@@ -2092,3 +2092,22 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   wall), not only the two shown. Sent to the site lane: a picture table (every Tropos picture on the site, its files and uses, its
   source, which roll-out shot replaces it or "none", and what new render each "none" needs: likely Sound's turning frames, the room
   and the reels); no swaps until the owner answers.
+- 15:24 brand lane: the picture table at r47-brand 7ddc228eff62192a2ce411e313246c3815a71180 (2026-11-03-words-2.md). Verdicts from the
+  shot files' lights and pixels: facade.jpg: a lamp under each speaker (uplight31/facade.shot.json, site lane round 31, 9790b429:
+  up0-up7 at each speaker's x, z 0.082, aimed up); bar-listening.jpg: lit plinths (r33-planet-world e7149388, planet38
+  finals-b/listening-smoke.shot.json: plinthb0/b1, plinthl0/l1 aimed up); idea-milan.jpg: uplit only via the facade picture it
+  carries; red-studio.jpg: NO lamp (a backdrop light behind; the cabinet's lower band 23 vs middle 50; the red is the glossy floor
+  mirroring the backlit cabinet); the eight *-studio-light.jpg: NO lamp (room light through the acrylic: Ember's floor cast in green
+  and blue only; Fog's foot no cast); hero, hero-portrait, lineup: NO lamp (the sun behind; the coloured patches are shadows).
+  Replaced by the roll-out: studio-light x 8 by site-hero-light x 8; hero by the deck hero/home; hero-portrait by the home portrait;
+  lineup by the deck row; red-studio only partly (no dark-field hero in the 40; site-front-off-wide Ember nearest). NEED A NEW
+  RENDER: (1) facade.jpg: retire, or the eight at night on their own feet against the wall, room light only (meanwhile the deck row
+  can stand in on the partner brief cover and teaser beat 3); (2) bar-listening.jpg: a bar-lane re-render (the pair on own feet, the
+  four plinth lamps gone, horn polished; also feeds launch post 6 and Sessions); (3) a dark-field Ember hero, only if the invitation
+  card and teaser beat 1 keep the dark look. idea-milan re-shot from the facade replacement or the row; the brief PDF, grid, social,
+  teaser, invitation and one-pager follow their sources.
+- 15:25 sent to the bar lane (session_01F92PeyfLNoJKA3GtzQwjAe, idle since 2026-10-31): re-render bar-listening.jpg (Tropos on own
+  feet, horn A polished from r33-speaker-horn 5295e58f per HELPERS.md; the four plinth lamps removed; the room's lights kept; a proxy,
+  then the final; one render at a time; commit on r33-planet-world, SHA to me for the gate) and list every other bar or Planet EARF
+  picture with Tropos on a lit plinth, lit from below or with the stepped horn. facade.jpg waits on the owner's item 3; the dark-field
+  hero goes on the walkthrough list as a small item.
