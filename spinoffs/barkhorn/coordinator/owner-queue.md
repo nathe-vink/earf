@@ -3525,3 +3525,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   rebuilt (anything on a5736434 needs the Cloud rebuild first, 20-60 min). Back fix: --only site-back --tag backfix, 7 frames, ~2 chunks.
 - 22:44 sent to the speaker lane: the back agreed (on a helper after its deck job, with the rebuild); but the 22:14/22:15 floor-band
   diagnosis FIRST, with whether the row, hero and cover (rendering now on c2, c3, c4) carry it, so they can be stopped if so.
+- 22:47 my check of studio/engine/lights.py and render.py (a5736434) and the wide-ember shot record: light linking by receivers alone keeps
+  the speaker as a blocker, and the wide shot uses no `shadow_on_set` or scoped flag, so my 22:15 hypothesis may be wrong; candidates for
+  the band: the set-only `paper` (12.0), `floor` (0.35) and `pool` (0.15) reaching under the raised cabinet, or another cause. Found: `edge`
+  (diffuse 0) still linked to 6 parts (ruling 2: unlink it); the engine's `split_set_shadow` (a lamp copy lighting the set through the
+  product) and `scope_flag` (a flag shading only some lamps) are shadow-linking tricks of ruling 2's family, not allowed. Sent all three to
+  the speaker lane, with the row/hero/cover question standing.
