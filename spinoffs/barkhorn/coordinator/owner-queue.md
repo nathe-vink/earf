@@ -2346,3 +2346,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   The lane had said the same ("one notch deeper would put it inside").
 - 16:13 sent to the speaker lane: that one pass after the chunk now running (same set, camera, exposure), then the chunks; the
   failed critics not re-run (the frame changes); the new frame gets a full gate.
+- 16:16 bar lane: the r43-shop final at e518e55f3c88a83f22576c7fd82645815a64cbad (renders/2026-11-03/barkhorn/planet-tropos-a/r43-shop.png;
+  1200 x 800, 128 samples, 212 s, 2.4 GiB): the window pair on its own feet (the black window plinth gone), Ember, horn A polished,
+  nothing lit from below. Next r43-window. I'll gate shop and window together when the window lands (r43-listening's gate running).
