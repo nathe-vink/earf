@@ -2077,3 +2077,18 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   soft edge brings leak back; by day the clear corners read dark, not depth); not worth a gate frame unless the owner wants a lit
   disc. (4) Cost over v3: A (v4, g5) ~+$140-170; C ~+$130-150; C2 ~+$130-150; the middle path the same as C2; all $3,897 in parts.
   Waiting on the gate (wf_1b32c9cb-e77).
+- 15:22 site lane: the words-only pass at r47-site-next bbb755e5ffbf9f0f1b5e101e69c0f641c62ef6e1 (a fast-forward from origin/main; no
+  pictures swapped; both flags off, the flag-off index.html byte-identical, production held). Changed (V2 and HOME_V2): "Put a light
+  under it." gone (the hidden heading now "After dark"); the light stage's eight alts and the gallery's "Lit from below" to "At
+  night" with night/wall captions; the uplit eight's alt and the held press kit's caption without lights; the horn "polished inside
+  and out" (particulars) and "; polished" (product page); the build now fails on "light under it", "on a light", "on lights", "lit
+  from below" and "satin". Kept on purpose: "frosted" for the lamps' shades and the bar's acrylic; the journal's edge-light line;
+  no Tropos plinth wording left (Mantle's plinth is its deck). FLAGGED (for the owner's mood-shot question): the light stage and the
+  gallery's "At night" view: img/{red,orange,amber,green,blue,violet,ice,black}-reel.jpg (+ webp, thumbs, V2 copies); the uplit
+  eight at the wall: img/facade*.jpg (+ V2 webp). No picture shows horn A: EVERY speaker picture on the site (hero, studio, gallery,
+  Sound's turning frames, habitats, room) shows the superseded stepped horn (glassy, not satin); none shows a plinth or a light
+  except the reels and the facade. Sweep with HOME_V2 on passed (57 routes at 1440 and 390).
+- 15:22 item 3's scope corrected for the owner: the whole light stage (eight colours each on a light, plus the eight together at the
+  wall), not only the two shown. Sent to the site lane: a picture table (every Tropos picture on the site, its files and uses, its
+  source, which roll-out shot replaces it or "none", and what new render each "none" needs: likely Sound's turning frames, the room
+  and the reels); no swaps until the owner answers.
