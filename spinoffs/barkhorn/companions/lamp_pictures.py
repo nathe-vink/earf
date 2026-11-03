@@ -146,9 +146,26 @@ def build(frame, samples, scale):
             # halves are joined round it
             sphere('ball', 80.0, zc, acrylic('ball', 0.0, loading=1 / 3))
             sphere('ball-in', 74.0, zc, acrylic('ball-in', 0.0, loading=1 / 3), inward=True)
-            zi = zc - 27.8 * MM
-            sphere('core', 45.0, zi, acrylic('core', 0.0, 'Clear'))
-            sphere('core-in', 42.0, zi, frosted(acrylic('core-in', inner, 'Clear')), inward=True)
+            # round 9 (the gate: the Ø90 core too small, "an LED orb in a black bubble"): Ø120, its center 12 below the
+            # outer's, on a short spacer ring on the grommet; a 13 gap at its equator
+            ri = float(os.environ.get('CORE_IN_R', '60.0')); zi = zc - float(os.environ.get('CORE_IN_DZ', '12.0')) * MM
+            sphere('core', ri, zi, acrylic('core', 0.0, 'Clear'))
+            sphere('core-in', ri - 3.0, zi, frosted(acrylic('core-in', inner, 'Clear')), inward=True)
+            # round 9 PROPOSAL (the gate: the LED hotspot): a white dot printed inside the core over the LED, Ø50, that
+            # sends about half the near light back up into the core, as LED globes do
+            bm = bmesh.new(); bmesh.ops.create_uvsphere(bm, u_segments=128, v_segments=64, radius=(ri - 3.5) * MM)
+            zcut = -math.sqrt((ri - 3.5) ** 2 - 25.0 ** 2) * MM
+            bmesh.ops.delete(bm, geom=[v for v in bm.verts if v.co.z > zcut], context='VERTS')
+            for f_ in bm.faces:
+                f_.smooth = True
+            me = bpy.data.meshes.new('dot'); bm.to_mesh(me); bm.free()
+            do = bpy.data.objects.new('dot', me); bpy.context.scene.collection.objects.link(do); do.location = (0, 0, zi)
+            dm = bpy.data.materials.new('dot'); dm.use_nodes = True; nt = dm.node_tree; nt.nodes.clear()
+            o_ = nt.nodes.new('ShaderNodeOutputMaterial'); t_ = nt.nodes.new('ShaderNodeBsdfTranslucent')
+            d_ = nt.nodes.new('ShaderNodeBsdfDiffuse'); m_ = nt.nodes.new('ShaderNodeMixShader'); m_.inputs[0].default_value = 0.45
+            t_.inputs['Color'].default_value = (0.95, 0.95, 0.95, 1); d_.inputs['Color'].default_value = (0.92, 0.92, 0.92, 1)
+            nt.links.new(d_.outputs[0], m_.inputs[1]); nt.links.new(t_.outputs[0], m_.inputs[2]); nt.links.new(m_.outputs[0], o_.inputs['Surface'])
+            me.materials.append(dm)
         else:
             sphere('ball', 80.0, zc, acrylic('ball', 0.0, loading=1 / 3))
             sphere('ball-in', 71.0, zc, frosted(acrylic('ball-in', inner, loading=1 / 3)), inward=True)
@@ -180,7 +197,8 @@ def build(frame, samples, scale):
         gl = nt.nodes.new('ShaderNodeBsdfGlossy'); gl.inputs['Roughness'].default_value = 0.08
         df = nt.nodes.new('ShaderNodeBsdfDiffuse'); m1 = nt.nodes.new('ShaderNodeMixShader'); m1.inputs[0].default_value = 0.5
         m2 = nt.nodes.new('ShaderNodeMixShader'); m2.inputs[0].default_value = 0.06
-        for n_, c in ((tr, (0.93, 0.93, 0.92, 1)), (df, (0.90, 0.90, 0.88, 1))):
+        oc_ = tuple(float(x) for x in os.environ.get('OPAL', '0.80,0.89,0.98').split(','))   # round 9: a cool-white opal grade (PROPOSAL)
+        for n_, c in ((tr, (*oc_, 1)), (df, (*(v * 0.97 for v in oc_), 1))):
             n_.inputs['Color'].default_value = c
         nt.links.new(df.outputs[0], m1.inputs[1]); nt.links.new(tr.outputs[0], m1.inputs[2])
         nt.links.new(m1.outputs[0], m2.inputs[1]); nt.links.new(gl.outputs[0], m2.inputs[2]); nt.links.new(m2.outputs[0], o.inputs['Surface'])
@@ -190,8 +208,8 @@ def build(frame, samples, scale):
         oc = 4.0                                 # round 6: both frames of the pair show the same (proposed) rim
         sphere('opal', 89.0, rim, opal, cut=oc, hole=H)
         sphere('opal-in', 86.0, rim, opal, inward=True, cut=oc, hole=H)
-        part('out-dome-pendant', 'rim', acrylic('rim', 0.6, loading=3.0), rim)   # round 6: satin, a deeper shade, never bright
-        cap = SC.principled('cap-matte', '#1B1B1D', 0.85, metallic=0.3, bump=(4000.0, 0.15))   # round 8: no glints
+        part('out-dome-pendant', 'rim', acrylic('rim', 0.6, loading=float(os.environ.get('RIM_LOAD', '1.0'))), rim)   # round 9: backed off (the gate: a royal-blue outline)   # round 6: satin, a deeper shade, never bright
+        cap = SC.principled('cap-matte', '#2E2E32', 0.6, metallic=0.3, bump=(4000.0, 0.15))   # round 8: no glints; round 9: lifted off black
         for nm in ('collar', 'clamp', 'crown', 'gland', 'hub'):
             part('out-dome-pendant', nm, cap, rim)
         # round 8 (the gate: two "LED eyes" on the cap): the PEEK pin carrier, its pins and the silicone gaskets were
@@ -220,7 +238,7 @@ def build(frame, samples, scale):
         # pendant is about a quarter of the width, the crown clear of the top with the cable running out of it, and
         # the table's pool and a stoneware bowl below
         cam = ((0.0, -0.95, tz + 1.55), (0.0, 0.0, tz + 0.566), 54.0)
-        bowl_m = SC.principled('stoneware', '#C9C2B6', 0.5, bump=(1500.0, 0.25))
+        bowl_m = SC.principled('stoneware', '#A8A196', 0.5, bump=(1500.0, 0.25))   # round 9: under the lamp
         bm = bmesh.new(); bmesh.ops.create_uvsphere(bm, u_segments=96, v_segments=48, radius=0.11)
         bmesh.ops.delete(bm, geom=[v for v in bm.verts if v.co.z > -0.035], context='VERTS')
         bmesh.ops.solidify(bm, geom=bm.faces[:], thickness=0.005)
@@ -232,21 +250,24 @@ def build(frame, samples, scale):
     if night:
         # round 4: a white ceiling at 2.5 m, so the lamp's light that leaves upward comes back into the room, as at home
         SC.plane('ceiling', (4.3, 4.0), (0.85, 0.0, 2.5), (180, 0, 0), SC.principled('ceiling', '#E8E4DC', 0.9))
-        SC.world(hdri='kiara_9_dusk', strength=0.003 if prod == 'core' else 0.02, rotation=200)   # round 6: Core's room lit by Core
+        ev = float(os.environ.get('NIGHT_EV', '3.6' if prod == 'core' else '0.6'))
+        k = 2.0 ** (0.6 - ev)                     # round 9: one evening room for the family, the same fill at each exposure
+        SC.world(hdri='kiara_9_dusk', strength=0.02 * k, rotation=200)
         w = bpy.context.scene.world
         vis = getattr(w, 'visibility', None) or getattr(w, 'cycles_visibility', None)
         if vis is not None:
             vis.glossy = False; vis.transmission = False   # round 8: no daylight-window shapes on the glass at night
-        moon = SC.area('moon', (-1.3, -0.4, 1.6), (0, -70, 0), (1.2, 1.6), 0.25 if prod == 'core' else 2.0, '#9FB2D6')   # the lamp leads
+        moon = SC.area('moon', (-1.3, -0.4, 1.6), (0, -70, 0), (1.2, 1.6), 2.0 * k, '#9FB2D6')   # the lamp leads
         moon.visible_glossy = False               # round 1: no daylight-window shapes reflected at night
         if False:   # round 5's glint in the outer gloss; round 8 (the gate: a white pin-dot): gone
             win = SC.area('window-glint', (-0.7, -1.2, tz + 0.7), (58, 0, -30), (0.09, 0.09), 0.05, '#C9D3E2')   # round 7: a small round glint, dim
             win.data.shape = 'DISK'; win.visible_diffuse = False
         # round 3: a large soft fill far off, for a curved soft reflection on the glass (round 2's small one read as a
         # hard square sticker)
-        fill = SC.area('fill', (1.4, -2.2, 1.9), (55, 0, 32), (1.4, 0.9), 0.2 if prod == 'core' else 2.0, '#8FA0BE')
-        fill.visible_glossy = False
-        exposure = float(os.environ.get('NIGHT_EV', '3.0' if prod == 'core' else '0.6'))   # round 4: exposed for the lamp, as a night photograph is
+        fill = SC.area('fill', (1.4, -2.2, 1.9), (55, 0, 32), (1.4, 0.9), 2.0 * k, '#8FA0BE')
+        fill.data.shape = 'ELLIPSE'               # round 9: seen in the glass again as a soft round room highlight
+        fill.visible_glossy = prod != 'core'      # (in Core's two balls it doubled into a spot at the crown)
+        exposure = ev   # round 4: exposed for the lamp, as a night photograph is
     else:
         SC.world(hdri='kiara_9_dusk', strength=0.35, rotation=200)
         SC.window_gobo(-1.3, -1.3, 0.9, 0.75, 2.4, panes=(2, 2))
