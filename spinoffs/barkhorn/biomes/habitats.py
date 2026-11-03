@@ -40,8 +40,8 @@ SETS = {
     # Fog (the coordinator's gate on 45a190d1): the clear polished horn refracted the fog bank's top edge into an X.
     # The camera 0.30 m lower (lens rise 0.06 -> 0.18 keeps the framing) puts the whole horn on plain sky, and it is
     # turned 5 deg toward the front (-15 -> -10, not front-on). f/4 for a softer background; the sun's colour cooled
-    # (#FEEA98 -> #FFF1D6), a photographer's white balance: the cut edges read ivory
-    'fog_b': {'sun.azimuth_deg': 110.0, 'sun.color': '#FFF1D6', 'camera.position': [-1.0072, -5.7119, 0.85], 'camera.shift_y': 0.18,
+    # (#FEEA98 -> #FFFFFF, neutral), a photographer's white balance: the cut edges read ivory (b* 22 -> 17 at #FFF1D6)
+    'fog_b': {'sun.azimuth_deg': 110.0, 'sun.color': '#FFFFFF', 'camera.position': [-1.0072, -5.7119, 0.85], 'camera.shift_y': 0.18,
               'camera.fstop': 4.0},
     # Poison under the canopy: light through a canopy gap from the camera side and above (the opaque lining batts block
     # any light from behind: a sunfleck from the back-left left the cabinet at L 2)
