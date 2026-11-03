@@ -2375,3 +2375,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   bowl not outshining); Core: A not rendered again; B's inner diffuser enlarged (cost, weight, tooling vs 90 mm); one dim evening-room
   staging for both Core nights and the Hemisphere night (base and table via reflections and faint fill, no pool); no night windows,
   crown spot or hotspot; the B pair at full scale; proxies first; other colours on hold.
+- 16:27 Ice polished gate wf_687dc2b8-150 (3 critics, 16 min): SHOW 3/3, "better than the satin version" (the horn the same clear Ice
+  glass as the cabinet, hue within ~2 degrees, not darker, no X or seams; the pod and posts crisp behind it; the deeper bedding closed
+  the pale strip; the bottom batt plain at phone width). Optional: a faint dark broken line inside the top lip and on the bottom lip
+  (refraction in the rolled lip, as on Dust), a hairline glint upper right, a touch more contact shadow under the right third.
+  Ready for the walkthrough's biomes item (with Dust polished).
