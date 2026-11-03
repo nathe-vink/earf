@@ -3251,3 +3251,14 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   in renders/2026-11-03/barkhorn/mantle-r48/) at 41232b56c60d1980a5ee3de0dddd8344ffb85fee; full-frame diff against C3d: night 99.99 %
   identical, max 1, none over 10; day 99.91 %, max 2, none over 10: noise only, so the C3e files are the pair, no new gate. Walkthrough
   item 82's state updated: ready.
+- 20:43 lamps lane on the Core B day hold: the Core B night final stopped by PID (the same shell); proxies at
+  2a022a61eec2012e6e8218d29640e673dead03a4 (proxies/core-b-day-r11-proxies.png). The model: the shell 80/74 (6 mm) at loading 1/3, each wall
+  = 2 mm of the 3 mm chart chip; the core Clear; a ray crosses 4 mm of chip (~1.33 chips): not dense by spec. The hue is the calibration:
+  the Ice stand-in (#2E8CCE fitted to 57.6 % per 3 mm, blue capped) reads 220 at one chip, 225 at 1.33 (as the frame), 236 at 2, 255 at 4;
+  the real 2069 under daylight would settle it. Core visibility (core/gap): bead-blasted clear 1.03; opal core (PROPOSAL, 3 mm white opal
+  like Hemisphere's liner) 0.93 with its outline reading; opal + a 6 W side-back strip 0.68; denser opal 0.64: no lever reaches 1.3-1.6x
+  while the gap shows a sunlit wall; levers (a) a darker or shaded wall, (b) the sun on the ball's front-right, (c) accept the outline. The
+  navy petal was the printed dot's stand-in (now white diffuse); the camera raised 55 mm (the horizon off the equator); the streaks to check.
+- 20:44 sent to the lamps lane: the opal core as a proposal with (b) and (a) together (the sun on the front-right through the window, the
+  wall behind in shade), or (b) alone if staged; then full-scale B day and night on the new rig; the hue kept to the chart until the owner's
+  daylight photo of today's Core beside a 2069 chip (noted for item 89 in the walkthrough).

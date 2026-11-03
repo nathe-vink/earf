@@ -22,6 +22,10 @@ Show one item with its pictures, wait for the answer, save the owner's words ver
   LOUDSPEAKER, ACTIVE" and "MODEL AT-1, S/N AT1-26-000127" (product.py). Proposed: TROPOS, MODEL TR-1, S/N TR1-26-000127; and its
   line "DESIGNED IN SAN FRANCISCO, CALIFORNIA" to confirm. Ask with the back and amplifier pictures. The six horn-backs that passed
   20:38 (Ice, Haze, Fog, Ember, Poison 3/3; Dust 2/3) show no plate; Acid's waits on its edge colour, the amplifier close-up on the plate.
+- **For item 89 (Core's ball), found 20:44:** ask the owner for a daylight photo of today's Core ball beside a 2069 chip. It calibrates
+  Ice's thin-wall hue: the model, fitted to the chart, reads cyan-aqua (OKLCH ~225) through Core B's 6 mm shell, and reaches the
+  chip's azure only at about 2.5 chips of path. Core B's core is now proposed in 3 mm white opal (like Hemisphere's liner) instead of
+  clear bead-blasted; by day it reads only when the sun lights it and the wall behind is in shade (the lamps lane's numbers, 20:43).
 - **State changes since 18:09 (the (e) items and others):**
   - Mantle A or C3: C3b night passed 3/3 (17:55) with the C3 day 3/3; the C3d pair passed (night 2/3, day 2/3, 1a958c02); checked
     against rulings 1-3 (clean; one mesh hide removed) and re-rendered from that build as C3e at 41232b56c60d1980a5ee3de0dddd8344ffb85fee
