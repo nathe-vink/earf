@@ -1,0 +1,89 @@
+{
+  "heading": "Everything made for you that you haven't reviewed",
+  "lede": "Nothing here is moving until you look. Go through it at your own pace. Each card says what it needs from you and gives my pick. To answer, reply in chat with the card's name and your call, or just \"your pick\". Every picture is a render, and most were made before your horn, color and light decisions of 1 to 3 November.",
+  "cards": {
+    "bar-lantern": {
+      "suggested_pick": "Make the lantern the plan, but put your showroom back into it: the second Tropos pair at the bar, EARF's lamps over the bar and tables, the record player at the decks, and the acrylic pieces. Then rewrite the House Book and redo its pictures with today's speaker."
+    },
+    "bar-dropped-acrylic": {
+      "title": "What the lantern dropped",
+      "one_line": "The lantern leaves out the showroom you described on 20 October: a second Tropos pair at counter height, EARF's lamps over the bar and tables, and the record player at the decks. It also drops three acrylic pieces: the frosted picture screens, the smoked sink and the lit coin column. Nobody asked you.",
+      "needs_from_owner": "Which of these come back into the bar.",
+      "suggested_pick": "All of the showroom, plus the frosted screens and the lit coin column. Keep the smoked sink for the restrooms only."
+    },
+    "mother-look": {
+      "out_of_date": ["On 19 October you said \"I also don't love the overt rainbow coloring. It's too Castro for SF.\" On 22 October you chose the six colors. In blind side-by-sides, the one-tint Smoke globe has beaten the six-color one every time."]
+    },
+    "packaging": {
+      "needs_from_owner": "A yes or no on the idea: a door that becomes a ramp, a separate horn case, and dyed boxes. On 1 November I told you this needed nothing from you; it is here only as a quick yes or no. Sizes wait for the final speaker and a crate maker's quote."
+    }
+  },
+  "groups": [
+    {"id": "editions", "title": "Special editions", "items": [
+      "editions-six",
+      "editions-bench-tests",
+      {"id": "topo", "title": "Topo, the one edition of Tropos itself",
+       "one_line": "On 31 October I pitched a Tropos edition whose horn layers trace the contour lines of a real place, such as Twin Peaks, so a pair carries a place. It lost the blind judging, and I never told you. With the smooth horn now standard, it could only come back as a numbered edition built on the stepped horn.",
+       "needs": "Whether you want an edition of Tropos itself.",
+       "pick": "Not now. Revisit after the first pair has been heard."}
+    ]},
+    {"id": "bar", "title": "Planet EARF, the bar", "items": ["bar-lantern", "bar-dropped-acrylic", "bar-road-to-opening", "bar-coin-extras"]},
+    {"id": "mother", "title": "Mother EARF", "items": ["mother-buildable", "mother-look", "mother-amsterdam", "mother-desk-globe"]},
+    {"id": "lamps", "title": "The lamps", "items": ["lamps-terrace", "lamps-halo", "lamps-contour-core", "lamps-hemisphere-listing", "lamps-poison-haze-check", "lamps-tint-library"]},
+    {"id": "brand", "title": "The brand", "items": ["brand-book-ed2", "new-objects", "big-ideas", "teaser-films", "launch-posts", "reserve-names", "packaging"]},
+    {"id": "deposit", "title": "Before anyone pays a deposit", "items": [
+      {"id": "deposit-decisions", "title": "Decisions only you can make before a first deposit",
+       "one_line": "The deck promises deposits from this raise. None can be taken until these are settled and a lawyer has read them. A first draft of the terms, the warranty and the returns policy has been in the repo since 22 October, with a suggested default for each choice.",
+       "items": ["The deposit: when, how much, and whether it is refundable (draft: 25%, free cancellation until work begins).",
+                 "Returns on a made-to-order piece.",
+                 "The warranty, and in-home service for a 72 kg speaker (draft: 5 years on the acrylic, 2 on the rest).",
+                 "Delivery and placing (draft: California at launch).",
+                 "Where each pair is built, and whether every pair is played before it ships.",
+                 "Whether people can hear one by appointment.",
+                 "Which test lab, and who signs the FCC declaration."],
+       "needs": "Nothing today. These have to be settled before the first deposit.",
+       "pick": "Start from the drafted defaults, and have a lawyer read them before any deposit."}
+    ]},
+    {"id": "business", "title": "Business, money and dates", "items": [
+      {"id": "dates", "title": "Dates that pass on their own",
+       "one_line": "None of these waits for us.",
+       "items": ["Plastimagen, Mexico City, 10 to 13 November: a chance to meet Plastiglas, your chosen sheet maker, in person.",
+                 "Amsterdam Light Festival: the call closes 7 December, 23:59 Amsterdam time (2:59 pm in San Francisco). See Mother EARF above.",
+                 "HIGH END Vienna's start-up area: applications by 31 December, and it needs a registered company.",
+                 "Copyright registration for the renders first published 17 to 22 October: by 15 January.",
+                 "Milan Design Week, 12 to 18 April: Alcova is taking applications now, and the Fuorisalone guide needs a contract by 8 February.",
+                 "IDSA's design awards: January to February. The Port of San Francisco's storefront call: 27 February.",
+                 "Design-protection filings: before the debut, and by 15 October 2027 at the latest. They cost about $13,000 to $28,000, which is not in the $55,000."],
+       "needs": "Which of these you want to act on. Plastimagen is next week.",
+       "pick": "Plastimagen if you can go (or a call with Plastiglas instead), the copyright registration (cheap and quick), and a go or no-go on Amsterdam by mid-November."},
+      {"id": "small-starts", "title": "Small things only you can start",
+       "one_line": "Each one is cheap or quick, and each one unblocks something.",
+       "items": ["Color chips and offcuts, about $150 to $200. They settle how dark thick sheet really is, which decides Core's ball, the horns' depth and the lamps' Haze.",
+                 "The trademark search for EARF and Tropos. $3,600 for searches and filings is already in the ask.",
+                 "Registering EARF as a company. Vienna needs it, and so do the deck's terms.",
+                 "A mailbox for hello@earf.world. Mail sent there today bounces, and the live site shows the address.",
+                 "The quote requests, lab letters, outreach emails and the Hypex letter. All are unsent and out of date (they predate horn A and say files are attached when none are). They get rewritten before anything is sent."],
+       "needs": "A yes to any of them.",
+       "pick": "The color chips and the mailbox first."},
+      {"id": "money-gaps", "title": "Money the $55,000 doesn't cover",
+       "one_line": "Things the plan needs that aren't in the ask.",
+       "items": ["Horn A's forming tool is $6,925, not the $1,100 the board showed. That leaves a cushion of about $2,000 to $4,100, not $5,400.",
+                 "The debut's lighting (about $9,400) and its photography. The deck's $4,000 debut line covers neither.",
+                 "The lamps' Kickstarter, which needs real photographs to launch.",
+                 "Core's circuit-board design, about $12,000 to $20,000, planned for the next raise."],
+       "needs": "Whether to raise the ask or trim the plan, once the base is settled.",
+       "pick": "Hold the $55,000 for now, and decide after the base and the debut date."}
+    ]},
+    {"id": "calls", "title": "Calls I made or assumed without asking", "items": [
+      {"id": "my-calls", "title": "Say if you'd change any of these",
+       "one_line": "Small calls I made on my own. Each is easy to reverse now and costly once the new pictures are made.",
+       "items": ["The stepped ring around the woofer stays. I read your \"not sure if I like the stepping anymore\" as being about the horn only.",
+                 "The EARF mark on the speaker's back reads as \"BARF\" at phone size against the white lining. I kept a lighting tweak and closed the matter. The real fix is a small design change, a dark patch behind the mark, and that's yours to approve.",
+                 "Close-ups: two of the three planned (the horn's layers and the plinth's glow) show parts that are gone or in doubt. Unless you say otherwise, I'll replace them with the throat ring and the woofer ring.",
+                 "Mantle is called \"a turntable\" on the new site, following the site review's rule. You've called it a record player.",
+                 "Smoke's lining: colors F has Smoke on black, but black hides the inside. Pictures of black and white side by side are coming with the base question."],
+       "needs": "Only if you disagree.",
+       "pick": "As listed."}
+    ]}
+  ]
+}

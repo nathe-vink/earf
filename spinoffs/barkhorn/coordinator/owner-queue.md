@@ -1228,3 +1228,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 07:46 biomes lane told: their open volumes were most likely unwelded glTF split vertices in their own build; weld on import,
   keep the asset's volume material, take horn A from the speaker lane's rebuilt asset (f75f58a), compare against their
   surface-tint version and keep the one that matches the speaker lane's renders; Smoke on black.
+- 07:51 board v23 (MGUByhczqB2jUYDV7R4t3h, version 1793692268-f798): "Waiting for your review", 29 cards in eight groups (editions
+  with Topo; the bar with what the lantern dropped, the showroom included; Mother EARF; the lamps; the brand; before a deposit;
+  business, money and dates; calls I made), 63 pictures (3.4 MB) from wf_c276a4da-e43, the card skeptic's 47 corrections applied
+  (the six-color globe as the owner's pick; the lamps' day frame had the lamps on; AI review, not engineers; the final coin column;
+  prices parked; the Firn edition wording; the deposit and company points), each picture's out-of-date note shown. Also: the horn
+  card's tool cost corrected to $6,925 (it said $1,100); the base card's state (A passed; the night frames failed; a second light on
+  the shelf being tested); the settled close-ups and the horns' depth; the Later list pointed at the review section. Checked at 1280
+  and 390 (no horizontal scroll).
