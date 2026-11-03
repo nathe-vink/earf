@@ -1650,3 +1650,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   front or side); a faint X of wall shading at 1x (lift the bottom wall with sand bounce); Dust reads red-orange (~19-20 degrees): the
   honest 20 mm hue to be stated. The horn as "a peach satin shell, paler and chalkier than the cabinet" is the satin spec (evidence for
   the horn-finish question).
+- 12:31 check-in #40. Running: the Mantle g4 gate (wf_3919563b-3fc, 2 of 3 back) and the Smoke day gate (wf_e7fbd2d6-f92). Speaker
+  lane: E built (bb0b27eb), E-night proxies at 14 cm and 0.75 m next. Lamps lane: four frames rendering after caaacb27 (Core day and
+  night with the frost, the Hemisphere pair on one camera). Biomes: the feet fixed (936ae297), set props dropped per habitat
+  (aaec2b9d: Dust's tumbleweed), Ember proxies, then all seven. Re-armed for 13:21 (#41) with the current threads.
