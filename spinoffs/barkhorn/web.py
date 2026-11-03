@@ -195,11 +195,13 @@ COPY_NEXT = False
 V2 = False
 HOME_V2 = False
 TT_NEXT = dict(
-    line='A record player that floats over a pool of its own light.',
+    # the owner, 2026-11-03 05:11: Mantle's light must shine through the acrylic, not down; it is being redrawn, so
+    # until it is shown, no words about light from its base (the coordinator)
+    line='A turntable in cast acrylic.', kind='Turntable',
     # the Mantle lane's spec as built (r48-mantle-design 71d3163e, companions/mantle-r48/README.md section 11)
     facts=[('Plinth', 'Two sheets of cast acrylic in its color, cemented into one, 25.4 mm, tinted through; it floats 40 mm over the base'),
            ('Posts', 'Four solid posts of polished stainless steel, 30 mm across'),
-           ('Base', 'Smoke cast acrylic, 12.7 mm, set in 35 mm all round, with a loop of light beneath it; at dusk the light pools on the shelf'),
+           ('Base', 'Smoke cast acrylic, 12.7 mm, set in 35 mm all round'),
            ('Drive', 'Belt, from Rega&rsquo;s 24 V motor, fixed beneath the plinth'),
            ('Speeds', '33 and 45, by a button'), ('Arm', 'Rega RB330'), ('Cartridge', 'Ortofon 2M Black'),
            ('Phono stage', 'Built in, for moving-magnet cartridges, with a line out and a switch to bypass it'),
@@ -210,8 +212,8 @@ NEXT_TEXT = {   # today's words -> the drafts (each must be found exactly once i
     # Mantle's band on the home page
     'acrylic. Its tinted plinth floats 40&nbsp;mm over a base that glows at its edge. The motor stands apart in a pod of its '
     'own, and the phono stage is built in.':
-        'acrylic. Its tinted plinth floats 40&nbsp;mm over a smoked base on four polished steel posts, and at dusk a '
-        'loop of light beneath it pools on the shelf. The motor is fixed under the plinth, and the phono stage is built in.',
+        'acrylic. Its tinted plinth floats 40&nbsp;mm over a smoked base on four polished steel posts. The motor is fixed '
+        'under the plinth, and the phono stage is built in.',
     'The lid raised. Its hinges sit on brass inserts, so no screw cuts the acrylic.':
         'The lid raised, on friction hinges. They sit on threaded inserts, so no screw cuts the acrylic.',
     'The motor stands apart, in a brass pod on soft feet, so its hum stays out of the plinth.':

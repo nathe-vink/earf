@@ -39,7 +39,8 @@ class Page:
         page = re.sub(r'<script\b.*?</script>|<style\b.*?</style>', ' ', self.head + self.rest, flags=re.S)
         said = re.findall(r'\b(?:alt|title|content|aria-label)="([^"]*)"', page)    # words in attributes a visitor meets
         text = re.sub(r'<[^>]+>', ' ', page) + ' '.join(said)
-        bad = re.findall(r'(?i)colour|enquir|stockist|microfibre|something in the air|eight things in the air', text)
+        bad = re.findall(r"(?i)colour|enquir|stockist|microfibre|something in the air|eight things in the air|oldest amplifier"
+                         r"|amplifier(?:&rsquo;|\u2019|')s job|pool of its own light|light pools", text)
         assert not bad, ('site_v2: retired words', sorted(set(b.lower() for b in bad)))
 
     def done(self):
@@ -94,6 +95,30 @@ def particulars(p):
         p.rest = p.rest.replace(old, new)
 
 
+def horn_words(p):
+    """The owner (2026-11-03 05:11): the line about the oldest amplifier is silly. It goes from the horn's chapter, the
+    journal post's standfirst and its body."""
+    p.sub('<p class="eyebrow">The horn</p><h2>The oldest amplifier is a shape.</h2>', '<h2>The horn.</h2>')
+    p.sub("""Long before there were amplifiers, a horn was how a small sound filled a large room: the gramophone&rsquo;s, or a
+          cupped hand&rsquo;s. """, '')
+    dek = 'A horn is a shape that does an amplifier&rsquo;s job. Here is one way to make ours.'
+    p.sub(dek, 'How Tropos&rsquo;s horn is made, from one sheet.', n=p.rest.count(dek))
+    p.sub('Long before amplifiers, a horn was how a small sound filled a large room. ', '')
+
+
+def no_light_down(p):
+    """Nothing on the held site shows or says light thrown down from a base (the owner, 05:11): Mantle's dusk view and
+    figure go, and the words that say its base glows."""
+    p.sub("['dusk', 'At dusk', c => `${D.tt.name} in ${c.name} at dusk, its base glowing.`],", '')
+    m = re.search(r'<figure><img src="img/tt-violet-dusk\.jpg".*?</figure>', p.rest, re.S)
+    assert m, 'site_v2: the turntable band\'s dusk figure'
+    p.rest = p.rest[:m.start()] + p.rest[m.end():]
+    p.rest = p.rest.replace(', its base glowing', '')
+    m = re.search(r'<li><figure><img src="img/tt-violet-dusk-1200\.jpg".*?</li>', p.rest, re.S)   # the press kit's (held) copy
+    if m:
+        p.rest = p.rest[:m.start()] + p.rest[m.end():]
+
+
 def words(p):
     """Every line says one thing, once: the explainers, eyebrows and 'See the ...' links go; one name per thing
     (Tropos, Lighting, Mantle; a turntable, never a record player); Contact for Inquire."""
@@ -111,7 +136,7 @@ def words(p):
     p.sub('<span class="t-line">A pendant and a table lamp in the speakers&rsquo; acrylic, frosted within.</span><span class="t-go">See the lighting</span>',
           '<span class="t-line">A pendant and a table lamp.</span>')
     p.sub('<span class="t-line">A record player in the same eight colors, lit from underneath.</span><span class="t-go">See the record player</span>',
-          '<span class="t-line">A turntable, lit from underneath.</span>')
+          '<span class="t-line">A turntable in cast acrylic.</span>')
     p.sub('<div class="head"><div><p class="eyebrow">The lines</p><h2>One acrylic, three ways to use it.</h2></div></div>',
           '<h2 class="vh">The lines</h2>')
     # the speaker line: the brand lane's line for the eight
@@ -292,7 +317,7 @@ def sound(p, web):
   <section class="band sound" id="sound"><div class="wrap sound-grid">
     <figure class="sound-turn" data-frames='{",".join(frames)}'><img src="{frames[2]}" width="600" height="746" loading="lazy"
       alt="Tropos in Ice, turning slowly on a pale seamless"><figcaption><i class="render">Render</i></figcaption></figure>
-    <div class="sound-words"><h2>The oldest amplifier is a shape.</h2>
+    <div class="sound-words"><h2>Tropos.</h2><p class="beat-line">A horn speaker in cast acrylic.</p>
       <ul class="figures">{figs}</ul>
       <p class="foot-note">Design figures; measured ones follow with the first pair. <a href="#turn">The horn</a></p></div>
   </div></section>
@@ -370,6 +395,8 @@ def pages(web):
     """Write the static addresses (V2 on), or take them away (V2 off)."""
     import os, html
     idx = os.path.join(web.SITE, 'index.html')
+    if web.V2 or web.HOME_V2:
+        share_words(web)
     if not (web.V2 or web.HOME_V2) and os.path.isdir(os.path.join(web.IMG, 'v2')):
         import shutil
         shutil.rmtree(os.path.join(web.IMG, 'v2'))
@@ -449,8 +476,8 @@ def lighten(p, web):
     p.sub('<div class="lines"><a class="tile" href="#speakers"><img src=', '<div class="lines"><a class="tile" href="#speakers"><img decoding="async" src=')
 
 
-MANTLE_SRC = 'renders/2026-11-01/barkhorn/mantle-r48/a-dusk-ember-2423.png'
-MANTLE = {'wide': 'img/v2/mantle-dusk-1200.webp', 'full': 'img/v2/mantle-dusk.webp', 'tile': 'img/v2/mantle-dusk-tile.webp'}
+MANTLE_SRC = 'renders/2026-11-01/barkhorn/mantle-r48/a-studio-ember-2423.png'   # by day, its light off (not the dusk frame: its light falls on the floor)
+MANTLE = {'wide': 'img/v2/mantle-studio-1200.webp', 'full': 'img/v2/mantle-studio.webp', 'tile': 'img/v2/mantle-studio-tile.webp'}
 
 
 def mantle(p, web):
@@ -473,7 +500,7 @@ def mantle(p, web):
     m = re.search(r'<a class="tile" href="#turntable"><img [^>]*>', p.rest)
     if m:
         p.rest = p.rest[:m.start()] + ('<a class="tile" href="#turntable"><img decoding="async" src="' + MANTLE['tile'] +
-                                       '" width="1200" height="1500" loading="lazy" alt="Mantle in Ember at dusk, its deck floating over a lit base">') + p.rest[m.end():]
+                                       '" width="1200" height="1500" loading="lazy" alt="Mantle in Ember, its deck floating over a smoked base">') + p.rest[m.end():]
 
 
 def home_v2(p, web):
@@ -492,9 +519,9 @@ def home_v2(p, web):
   </section>"""
     mantle = f"""
   <section class="band beat" id="mantle-beat">
-    <div class="wrap"><h2><a href="#turntable">Mantle.</a></h2><p class="beat-line">A turntable, lit from underneath.</p></div>
+    <div class="wrap"><h2><a href="#turntable">Mantle.</a></h2><p class="beat-line">A turntable in cast acrylic.</p></div>
     <figure class="strip mantle-pic"><img src="{MANTLE['wide']}" srcset="{MANTLE['wide']} 1200w, {MANTLE['full']} 1800w" sizes="100vw" width="1800" height="1200"
-      loading="lazy" alt="Mantle in Ember at dusk, its tinted deck floating over a smoked base, light pooling beneath it">
+      loading="lazy" alt="Mantle in Ember in the studio, its tinted deck floating over a smoked base">
       <figcaption class="wrap"><i class="render">Render</i></figcaption></figure>
   </section>"""
     i = p.rest.index('<main id="home">') + len('<main id="home">')
@@ -507,11 +534,25 @@ def home_v2(p, web):
 /* round 48 (HOME_V2): the launch film */
 .beat h2 a { color: inherit; text-decoration: none } .beat h2 a:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px }
 .strip { margin: 32px 0 0 } .strip img { display: block; width: 100%; height: auto } .strip figcaption { padding-top: 12px; color: var(--muted); font-size: 15px }
-.beat-line { color: var(--muted); margin: 8px 0 0 } .mantle-pic { background: #0E0D0F } .mantle-pic figcaption { text-align: right; padding-bottom: 10px } .mantle-pic .render { color: #A39E95 }
+.beat-line { color: var(--muted); margin: 8px 0 0 } .mantle-pic { background: #F1EFEB } .mantle-pic figcaption { text-align: right; padding-bottom: 10px } 
 .type-only { min-height: 60svh; display: grid; align-content: center } .type-only h2 { font-size: clamp(48px, 7vw, 104px) }
 .type-only p { color: var(--muted); max-width: 36ch }
 #sound, #habitats, #room, #lamps-beat, #mantle-beat, #progress, #contact { scroll-margin-top: var(--header) }
 """)
+
+
+def share_words(web):
+    """The link previews web.py writes (s/): the horn post's standfirst, while V2 is on."""
+    import os
+    f = os.path.join(web.SITE, 's', 'journal-the-horn.html')
+    if os.path.exists(f):
+        s = open(f).read()
+        for old in ('A horn is a shape that does an amplifier&rsquo;s job. Here is one way to make ours.',
+                    'A horn is a shape that does an amplifier&#x27;s job. Here is one way to make ours.',
+                    "A horn is a shape that does an amplifier’s job. Here is one way to make ours."):
+            s = s.replace(old, 'How Tropos&rsquo;s horn is made, from one sheet.')
+        assert not re.search(r"(?i)amplifier(?:&rsquo;|&#x27;|’|')s job|oldest amplifier", s), 'site_v2: s/journal-the-horn'
+        open(f, 'w').write(s)
 
 
 def render_word(p):
@@ -519,7 +560,7 @@ def render_word(p):
     (above); here the light stage, the uplit eight and the lines' tiles. The footer says it once for the site."""
     p.sub('<p class="light-kicker" aria-hidden="true">Put a light under it.</p>', '<p class="light-kicker" aria-hidden="true">Put a light under it.</p><i class="render on-dark">Render</i>')
     p.sub('<i class="snap-eight" aria-hidden="true"></i>', '<i class="snap-eight" aria-hidden="true"></i><i class="render on-dark eight-render">Render</i>')
-    for line in ('A powered horn loudspeaker.', 'A pendant and a table lamp.', 'A turntable, lit from underneath.'):
+    for line in ('A powered horn loudspeaker.', 'A pendant and a table lamp.', 'A turntable in cast acrylic.'):
         p.sub(f'<span class="t-line">{line}</span>', f'<span class="t-line">{line} <i class="render">Render</i></span>')
     p.css("""
 .light-intro { display: flex; justify-content: space-between; align-items: baseline }
@@ -552,6 +593,8 @@ def apply(web, head, rest):
     if web.V2 or web.HOME_V2:                 # HOME_V2 is built on the fixes
         pairings(p)
         particulars(p)
+        horn_words(p)
+        no_light_down(p)
         words(p)
         kit(p)
         tokens(p, web)
