@@ -1091,3 +1091,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   supply fixed, Ember night/day frames (+ Poison night), blind critic. Speaker lane: after the A/B/C base frames, horn A in the
   journal's side view, Acid, variants a-e (as now; full throat; gloss; the journal's dye lot with gloss; satin at that depth) + the same
   in Ember 3/4; what's real for each (same tool? the sheen under gloss? cost, weight); the ring slimming not adopted yet.
+- 05:16 site lane a9634aef (crossed my 05:20 note): Mantle's screen from a-dusk-ember-2423 (the downward glow); "Put a light under
+  it." back per my 05:08 note. Superseded by 743be0cb1485253142fe0f7dc19b9148501cc5f8 (05:23): Sound is "Tropos." / "A horn speaker
+  in cast acrylic."; the /tropos horn chapter "The horn."; the journal dek "How Tropos's horn is made, from one sheet."; "Long before
+  amplifiers" cut; the build fails on "oldest amplifier", "amplifier's job", "pool of its own light", "light pools"; Mantle by day
+  (a-studio-ember-2423, "A turntable in cast acrylic."), the dusk frame used nowhere; Mantle's dusk gallery view, the line page's Haze
+  dusk figure, the press kit's dusk picture and "its base glowing" alt text removed; COPY_NEXT's Mantle drafts rewritten. Kept: the
+  uplit stage, "Put a light under it.", the speaker's "Lit from below" (light up the wall). Checked frames 2 and 8 of the new sheet: right.
+- 05:28 Mantle lane: corrected my 05:20 brief: FAULTS item 9 (shared adapter) was the first Mantle's; v3 has its own inlets (9d617c0c).
