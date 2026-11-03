@@ -86,6 +86,54 @@ It lifts the cabinet 20 mm.
   - `C-ice.png`: on the stepped plinth, night, the same light;
   - `B-smoke.png`: Smoke on the plate at night.
 
+## D. The light built in, no base (a proposal, 2026-11-03)
+
+**Why:** the owner doubted the base and wants the light cast up through the speaker, like the site's images. A light under the floor can't do that honestly:
+- **It stays at the bottom.** The 40 W panel lights the port chamber and fades upward; the top chamber stays several times darker. The acrylic isn't trapping it: hiding the brace changes nothing (`renders/2026-11-03/barkhorn/base-question/light-study/`).
+- **It leaks out low.** Light from under the floor gets out through the bottom panel's edges and the plate onto the floor, which the owner rejected.
+
+So the light moves inside the speaker (option "Built-in light", `BUILTIN` in `variants.py`). Tropos then stands on its own four feet, which pass the stability tests (`stability/standard-2018.md`).
+
+**What's inside, and where:**
+- COB LED strip (24 V, 4000 K, CRI 90+), 1.42 m a speaker, in five runs. Each run sits in a black aluminium U-channel (12 x 7) with a frosted lens, aimed straight up.
+- **On the bottom panel:** one run of 440 behind the bottom batt, under the back lining, and one of 110 behind each port. They light the port chamber from inside, so nothing goes down through the bottom panel and its edges stay dark.
+- **On the brace:** two runs of 380, between the woofer and the back. They light the woofer chamber and the top. That light leaves through the top and the upper walls and washes the wall behind the speaker in its own colour.
+- Each channel stands on three M3 nylon standoffs, screwed into brass inserts bonded in the acrylic. Nothing touches the acrylic but the standoffs, and nothing is held by tape.
+
+**Power:**
+- An external 24 V plug-in supply (Class 2 / PS1, 60 W) runs to a panel connector in the back's cable gland, so there is no new mains wiring inside.
+- A small dimmer (`plinth-controller`, the same board) sits in the amplifier's compartment, its enable from the FA122's on/standby state (to be confirmed with Hypex).
+- As rendered: the floor runs at 15 W/m and the brace at 30 W/m, about **33 W electrical**, about 10 W of light. By day it's off.
+
+**Heat (estimates, to check):**
+- About 23 W of the 33 W stays inside the sealed box. The box loses heat through 2.2 m² of 20 mm acrylic, partly lined, about 3 W/K, so the air inside rises about **+7 K** at full.
+- The strips run cool on their channels. The amplifier's heat still leaves through the back plate.
+- The four-hour heat test (S8) runs with the light at full.
+
+**Sound:**
+- The strips and channels take about 0.1 L of 135.6 L net: the tuning (38 Hz) doesn't move.
+- The risk is rattle. Mitigations: screwed channels (no adhesive, which creeps), every lead tied down, and the light's parts on the sweep test for buzzes.
+
+**Service:**
+- Through the woofer's opening: eight screws, the woofer out.
+- Each run is on its own connector, so a strip swaps in about 20 minutes.
+- COB strips last 30,000 to 50,000 hours at these temperatures. Not a customer job.
+
+**Cost, a speaker (estimates):**
+- Built in, about **$130**: strip $36, channels about $25, standoffs and inserts $6, dimmer $22, supply $30, connector $10, plus about half an hour's assembly.
+- The plate with its light and a brace strip, about **$540**: frame $170, tray $140, feet $18, board and heat sink $120, dimmer $22, supply $40, brace strip about $30.
+- Built in saves about $410 and the plate's 5.3 kg, and there is one product, not two.
+
+**Against it:**
+- The light is in every speaker unless it's a build option, and it can't be added later.
+- There is one more thing inside the box to test (heat, rattle).
+- The idea of a separate lit base goes away.
+
+**The frames** (`renders/2026-11-03/barkhorn/base-question/gate2/`, A's camera, Ice):
+- `D-day-ice.png`: light off, so the channels and standoffs show through the walls;
+- `D-night-ice.png`: light on;
+- `D-smoke-black.png`, `D-smoke-white.png`: Smoke at night, the light 6500 K, black and white sleeves.
+
 ## A, uplit: the light goes up through the speaker (2026-11-02)
 
 **The owner, 2026-11-02 20:38** (README 41581a57): "The light in the base is meant to go upward through the speaker. The intent is to provide a way to light up the speaker from below, like in the underlit promo images." On 2026-11-01 "light up from underneath" was read as a strip under the plinth facing the floor. That was the wrong way round. **The uplight below replaces the floor line**, which stays documented after it as superseded. The model is `UPLIGHT` in `variants.py` (option "Plinth uplight"); the renders are in `renders/2026-11-02/barkhorn/uplight/`.

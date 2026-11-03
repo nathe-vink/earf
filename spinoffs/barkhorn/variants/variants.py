@@ -76,7 +76,7 @@ UPLIGHT = dict(edges=[(10.0, 30.0, 10.0, 390.0), (550.0, 30.0, 550.0, 390.0), (4
 # on the bottom panel's top face (z 20); the back is left out (its land strip and the amplifier's compartment)
 WASH = dict(runs=[(24.0, 60.0, 24.0, 370.0), (536.0, 60.0, 536.0, 370.0), (60.0, 48.0, 500.0, 48.0)], w=8.0, t=2.0, z=20.0)
 # the built-in light (a proposal for the owner, 2026-11-03, the coordinator: "could the whole uplight live inside the
-# speaker, with no plate at all?"): COB strips, 24 V, 20 W/m, 4000 K, in black aluminium U-channels on nylon standoffs,
+# speaker, with no plate at all?"): COB strips, 24 V, 4000 K (as rendered: 15 W/m on the floor, 30 W/m on the brace), in black aluminium U-channels on nylon standoffs,
 # aimed straight up, inside the cabinet. `floor`: on the bottom panel's top face (z 20), behind the batt (under the back
 # lining, which starts at z 50) and behind each port; `brace`: on the brace's top face (z 220), clear of the side linings,
 # the ribs and the back's bosses. (x0, y0, x1, y1) of each run, mm in the cabinet's frame. Fed from an external 24 V plug-in
