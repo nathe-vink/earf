@@ -3861,3 +3861,13 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   - It takes my 23:41 order now: the horn close-up line, the whole-rectangle card test with honest_lights in one SHA, tall Ice, the
     bottom-edge comparison; then the hero, the cover's key, the row.
 - 23:51 sent to c4: chunk 6 is a go after deck-home (merge 732a8671 alone, no rebuild, the list checked first).
+- 23:52 COVER GATE (wf_fc3d8208-b91, 3 critics, ~30 min): HOLD 3/3.
+  - Smoke is an opaque black lacquer box (face ~RGB 37-47), and its horn reads more see-through than its cabinet.
+  - Fog and Smoke cast essentially NO shadow under the hard backlight (Fog "almost hovering"). Red's shadow is hollow (its internals
+    cast nothing), shadow density drifts along the row, and there is a pink haze by red's base.
+  - Critic 1: "No real light could produce this picture." Suspects: shadow casting off on some objects, and the cover's `smoke` lamp
+    (80 W/m² aimed at the Smoke unit) filling Fog's and Smoke's shadows.
+  - Minor: a check-mark swoosh on the green horn, corner streaks on the Smoke and red horns, yellow's and orange's coral edges.
+- 23:54 sent to the speaker lane: fold all of it into the cover's re-light. One key with consistent physics; every object casts
+  shadows, internals included (added to its audit); no lamp for one unit's looks; the cover held for Smoke's sheet like the row; Fog
+  grounded by its real shadow.
