@@ -1684,3 +1684,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   the owner's own condition ("If we do have it though, it's meant to look more like the site images"), my pick is A, no light; D (the
   lantern: a glow from inside, no wall light, ~$130 a speaker, 33 W, +7 K, by day indistinguishable from A) is the alternative. The
   speaker lane reordered: polished A first (the horn question next), then the D night re-render (only if the owner picks the lantern).
+- 12:52 Smoke day gate wf_e7fbd2d6-f92 (3 critics, 26 min): 2064 + white lining ranks first (front 0.131 linear, the batts and parts
+  legible through the front) but is NOT good enough to show as the answer: the side faces stay a black mirror (Y <= 0.035), at phone
+  size "a black box with a grey band" next to Ice; 2064 + black and 2074 + white are black gloss boxes (0.057 and 0.049; on 2074 the
+  white batts read as dark as black). The lining matters a lot by day on 2064 (white ~2.3x). A grey at ~45-55 % through 20 mm (~83-85 %
+  at 3 mm, a very pale chip) is needed to truly answer the note. The horn reads as grey metal with a silver lip, the same material in
+  all three. The critics' key flag: are 2064's 29.3 % and 2074's 11.7 % really 20 mm figures? TINTS.md uses the "held" method (the
+  seller's TT held at the sheet's own thickness); if the charts are 3 mm figures and thick sheet runs "deep", a 20 mm wall passes well
+  under 1 % and none of these looks is possible. That is task #12 (held vs deep), which only physical 3/4 in off-cuts settle: the
+  board's small-starts item (chips and off-cuts, ~$150-200, awaiting the owner's yes). The Smoke question will carry that.
