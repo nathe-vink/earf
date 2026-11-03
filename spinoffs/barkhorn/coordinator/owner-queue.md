@@ -1949,3 +1949,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   (scratchpad/basefr2/smoke-2064-vs-50pct-preview.jpg): the 50 % frame reads clearly lighter and open.
 - 14:49 speaker lane: confirmed the 50 % Smoke commit is 5be29cac68e47735bed12cc87bf80260c5d9b5ae ("51fd7aab" was a placeholder), as
   found by path.
+- 14:54 OWNER: "What do I need to weigh in on?" Saved verbatim first (README 99661a37). Answered with the full list in order: (1) the
+  base (no light, my pick, or the lantern); (2) the horn finish (polished, my pick; horn-satin-vs-polished.jpg sent 14:55 as the
+  example); then, once ready, Smoke (the ~50 % target in gate wf_f3111455-c52; the chips and 3/4 in off-cuts ~$150-200), Mantle
+  (A or C once C passes), Core and Hemisphere's hue (lamps lane), and a heads-up on 3 helper render machines (~6-7 h instead of
+  ~22 h). The board's "Waiting for your review" section for the rest (29 cards, none urgent).
