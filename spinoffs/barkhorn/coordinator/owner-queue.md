@@ -2916,3 +2916,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   plate ~$5 a unit; C3 ~+$150-180 over v3; parts $3,897. Build changes for the owner's signature: the seatless butt-bonded posts and the ring's
   inner-face finish.
 - 19:15 my gate on the C3d pair (wf_700c6e26-934) started.
+- 19:17 biomes lane: Ember polished at 10 degrees off the camera line (rotate_z 12) at 45225a2918d5a5e4e919bbff980e9f1c8057c2f6
+  (renders/2026-11-03/barkhorn/habitats/ember-portrait-1200x1500.jpg; otherwise as 8fe79529): the crease at full size 8.3 left of the driver,
+  4.3 right (Dust 7.8, Ice 7.2), the sky wedge gone; the ring's 12 o'clock glint gone (red max 233 to 62); the low-right zone now only the lava
+  beyond the narrower side face, soft. Its own gate passed all four. Haze's final rendering, then the Poison proxy (the honest gap), the Acid
+  proxy at 4 degrees.
+- 19:18 my gate on Ember v2 (wf_f93f142c-e14; v1, Dust and Ice polished as context) started.
