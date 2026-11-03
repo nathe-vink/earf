@@ -611,6 +611,37 @@ truest "glows from within" at night, but it breaks the owner's rule unless it is
 
 This is the owner's decision, not a matter of repainting. The g5 frames are v4 at its best as built.
 
+### Option C, rendered (2026-11-03, the coordinator's request after the gate's fifth pass; `mantle_strata_v5.py`)
+
+The gate held v4's Ember pair on tinted glass alone, as predicted, so v4 stops at g5 as option A. Option C is a design
+exploration for the owner. Every part of it is a proposal.
+
+**The layout.**
+- **The print** is graded by distance from the spindle. It is dense under the platter (60 % cover) and thins
+  linearly to clear glass by 230 mm out. The outer deck and the border are clear tinted glass.
+- **The light is fed from the center, not the rim.** The strip runs in an octagonal groove at r 78, eight straight
+  runs, under the platter, where nothing sees it. Its corners clear the posts.
+  - I changed the coordinator's layout here, and this is why: fed from the rim, the strip would sit under the clear
+    outer glass and show as a line by day and a lit line at night, the rejected edge strip again.
+  - From the center, the light spreads outward. At night the glow is a halo round the platter fading into clear
+    glass, with no source, band or outline anywhere.
+- **The edges:** the skin's black edge paint and the core's black edge tape stay, so the light that reaches the rim dies
+  there.
+- **Power:** 0.54 m of strip at 4 W/m, about 2.2 W, on the same adapter.
+- **Cost:** about the same as v4 (the same print in a new layout; the border print is gone), so about +$130-150 a unit
+  over v3. $3,897 in the parts list.
+
+**The leak, measured.** Light guided into the clear zone stays in the slab by total internal reflection, top and
+bottom alike. It leaves the bottom only by scatter, from dust and polish marks, a few percent. What the render does
+show is the Fresnel share: a few percent of the glow is reflected back down at the inside of the top surface, and in
+the clear zone nothing stops it. It falls on the base under the clear zone at about R 11 of 255, about 4 % of the
+field. The floor in front stays dark (4,6,14). That is a real, faint spill, not a pool.
+
+| frame | what |
+|---|---|
+| `a5-night-ember-2423-c.png` | option C at night: a halo round the platter fading into clear glass |
+| `a5-day-ember-2423-c.png` | option C by day: the outer deck clear tinted glass, the float seen through it |
+
 ### The render (how the light is drawn)
 
 The guide's output is drawn as an even Lambertian glow just above the print: 9 W/m2. That figure follows from the
