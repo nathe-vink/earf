@@ -101,3 +101,21 @@ The smooth formed horn is an option on the same cabinet, caldera and bronze post
 
 The collections are then "Tropos Strata Smooth <tint>". `link_example_strata_smooth.png` shows four. That file is not
 committed: it rebuilds in about 30 s.
+
+## Horn A (2026-11-03): `tropos-strata.blend` rebuilt
+
+The owner's pick on 2026-11-03 ("Horn: A, smooth, satin outside") is now the default. `tropos-strata.blend` carries the
+smooth formed horn (the waveguide in satin, the throat, pod, cap, pads and saddle formed) on Strata's bronze posts, with
+the caldera, on base A (the plinth) with its uplight (option `Plinth uplight`; the base question is open, see
+`variants/BASES.md`). The collections keep the plain names, **Tropos Strata Ember** through **Smoke**. `--horn stepped`
+builds the stepped horn as "Tropos Strata Stepped <tint>".
+
+**The horn is never collapsed any more.** Horn A is clear acrylic with an absorbing volume. A collapsed mesh can open it,
+so light would leak out of the horn. The biomes lane asked whether the acrylic volumes close, and the rebuilt file was checked:
+- every clear panel (front, back, sides, top, bottom, both braces) closes once its glTF split vertices are welded: no
+  open edges, a positive volume, so the normals face out;
+- the waveguide, pod and cap close the same way. The throat has 222 edges shared by three faces but no open edge, so it
+  is watertight;
+- the clear material's shadow rays cross its surface and still absorb in the volume.
+
+So the file is 42 MB, not 23. The plates' print, the screws and the lining's voile webs are still collapsed.
