@@ -2065,3 +2065,15 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 15:20 sent to the brand lane: per flagged picture, its source (path, SHA, scene, lane), the "to check" verdicts with pixel evidence,
   whether a roll-out shot replaces it, and for the rest (facade's eight, bar-listening, idea-milan...) the new render each needs. A
   gap noted: some brand pictures are scenes outside the 40-shot roll-out.
+- 15:21 Mantle lane: the owner's note for C at r48-mantle-design c157ae1950ae9eed5ff071aa32ea0e7d44ea4a88 (companions/mantle-r48/
+  README.md section 13, "For the owner: C or A"; scene.py --clear-r added; the gate frames unchanged). (1) Physics: a lit deck you
+  can see through always sends some light down, out of the bare glass almost flat onto the base and the floor in front; no coating
+  stops it; floor in front ~16 with C's clear field against ~5 for A, the base near the posts 7-11 against 0; backed, C2 matches A
+  (6.3/4.8, 0). (2) C2 over A: the source (fed from the centre, a strip under the platter, no lit edge or strip anywhere; A is fed from
+  the rim); the night grade (C2 foot 92, field 128, left rim 75.5; A 134, 132, 71: A runs from its lit edge inward); by day they are
+  close (both tinted glass over an opaque print, C2's print even); C2 gives up the float seen through the deck, C's point. (3) A middle
+  path proxy (900 x 600, 48 samples, ~2 min, not committed: backed and lit to 235 mm from the spindle, clear unlit glass beyond): the
+  leak small (floor 6.4/5.9 vs A's 6.6/5.0, base 0) but the look weak (a lit disc with dark corners and a hard round edge at night; a
+  soft edge brings leak back; by day the clear corners read dark, not depth); not worth a gate frame unless the owner wants a lit
+  disc. (4) Cost over v3: A (v4, g5) ~+$140-170; C ~+$130-150; C2 ~+$130-150; the middle path the same as C2; all $3,897 in parts.
+  Waiting on the gate (wf_1b32c9cb-e77).
