@@ -271,7 +271,7 @@ def parts(P):
             out.append(Part(f'plinth-L{i + 1}', s - band, tint[l['t']], finish='acrylic', group='plinth', render=False,
                             notes=['the deck\'s lower sheet: a 10 wide ring of the flavor\'s stock tint (12.7) round the clear core; the ring and the core cemented edge to edge with ACRIFIX 2R 0190, then the top sheet cemented over both in a vacuum press (the core\'s print stays on its underside, not in a bond line); annealed, fly-cut, the outline routed as one; the outer edge bead-blasted satin'] if i == 0 else []))
             out.append(Part(f'plinth-L{i + 1}-inlay', s & band, clr[l['t']], finish='clear', group='plinth', render=False,
-                            notes=['the core: a clear inlay cemented edge to edge into the 10 wide tinted ring, the light guide; its underside screen-printed (v5 gate 1) with an even white dot pattern (about 18 % cover) from the platter's edge out, and overprinted black over the whole field, the area under the platter black only, before the top is cemented on; the walls of its holes painted white then black']))
+                            notes=['the core: a clear inlay cemented edge to edge into the 10 wide tinted ring, the light guide; its underside screen-printed (v5 gate 1) with an even white dot pattern (about 18 % cover) from the platter edge out, and overprinted black over the whole field, the area under the platter black only, before the top is cemented on; the walls of its holes painted white then black']))
         else:
             # a plain lamina ('clear' in P: no inlay ring): since the stock line (2026-11-01), the flavor's stock tinted sheet
             out.append(Part(f'plinth-L{i + 1}', s, tint[l['t']], finish='clear', group='plinth', render=False,
