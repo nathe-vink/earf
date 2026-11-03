@@ -3785,3 +3785,28 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   - c4: after deck-home, phase-2 chunk 6 (the turn) on its branch, list first. Its row chunk is dropped (c2 did it).
 - 23:46 check-in #53 armed for 00:37 (trig_01TstoAAB5yKenbnUFAKVE2e) with the current state: item 5 open; 6-9 and 13 blocked; the
   gates in flight; the speaker lane's 23:41 order; the helpers' jobs.
+- 23:45 c4: the row dropped from its held list; branch 8202ce2a (contains 3b1fed96). Chunk-6 list: 60 frames, ~100 min (turn-ember-05..23,
+  turn-dust-00..23, turn-acid-00..16; Smoke held). It starts after deck-home lands.
+- 23:45 BIOMES AUDIT (its own whole-rectangle cast over the camera rebuilt from each shot.json; the cards are placed by code, black_flag(),
+  and are not in the JSON, so MY audit had wrongly called Ice clean at 23:4x). Reflect-only (glossy-only) cards IN frame:
+  - Dust 10.1 % and 5.6 %; Ice (27911a44, item 5's picture) 11.1 %; Ember 4.5 % and 4.5 %; Haze 11.8 %; Acid 4.9 % and 4.9 %.
+  - Fog (5c0f8509) is clean: real cards, out of frame.
+  - Swapping to real cards out of frame changes the speaker by ~1.6 levels on average (the lane's A/B).
+  - Poison breaks ruling 4: a canopy blocker that only casts shadows (invisible to camera, glossy, diffuse and transmission), its
+    gap lamp under the canopy, and a shadowless mist volume.
+  - No `transmission: False` and no specular <1 anywhere; Acid's linked rim existed only in 43ad3a3f. The panorama and the planet are
+    obsolete (to be redone on horn A).
+- 23:45 c3: merged f6d0eda7 at 3f3f8e6bcf7e91d703bc7fc6c209a26bb1fcfae1 (ls-remote 23:45:42); the Cloud build from 23:46, then
+  render_model.py.
+- 23:47 sent:
+  - Biomes: re-render with real cards out of frame (0.0 %), Ice first, then Dust, Ember, Haze, Acid (Acid with its sun-35 proxy
+    folded in), each with an A/B (mean and largest local change); the new frames replace the old, and anything past noise returns to
+    the critics. Poison: a real canopy seen by every ray with a real opening cut in it, the lamp dropped, the mist casting shadows,
+    its final held until a proxy.
+  - c4: merge 732a8671 (the Acid tint, a single commit on 95876493) before chunk 6, no rebuild; stop if more comes in.
+  - Speaker lane: does 732a8671 need a model rebuild?
+  - Mantle and lamps: count objects placed by code too (glossy-only props, flags not in the JSON).
+  - Bar: the same audit and the four rulings for its v4s.
+- 23:48 CORRECTION OWED TO THE OWNER: at 23:46 I told them the Ice habitat picture (item 5) was clean. It is not: it carries a
+  glossy-only card covering 11.1 % of the frame. The honest re-render (real cards out of frame) is first in the biomes lane's queue.
+  Item 5's question (the batt) stands, since the card doesn't touch the batt. Told in the turn's last text.

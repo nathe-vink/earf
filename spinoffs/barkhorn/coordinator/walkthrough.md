@@ -10,6 +10,9 @@ Show one item with its pictures, wait for the answer, save the owner's words ver
   23:03, README 39c8a341: new night pictures, each colour on its own feet plus the eight at the wall, lit only by the room's own
   lights; the Mantle lane builds them, an Ice proxy first; the site and brand lanes send the formats; nothing swaps until they pass).
 - **Open in front of the owner:** item 5, the Ice batt in the Ice habitat, asked 23:05 with scratchpad/walkthrough/05-ice-batt.jpg.
+  Its picture carries a glossy-only black card covering 11.1 % of the frame (the biomes lane's audit, 23:45). At 23:46 I wrongly told
+  the owner it was clean, and corrected that at 23:48. The honest re-render (real cards out of frame) is first in the biomes queue.
+  Show it beside the old one when it lands, with the A/B.
 - **Next, in order (re-ordered 23:4x, because items 6-9 and 13 have no honest picture yet):**
   - Item 11 first: Plastimagen, Mexico City, 10-13 November, next week. It is time-bound and needs no picture.
   - Then items 10, 12 and 14 onward, in order, skipping any item whose picture fails the rulings.
