@@ -16,7 +16,7 @@ import argparse, json, math, os, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(HERE)))
-ASSET = os.path.join(HERE, 'assets', 'horn3', 'tropos-strata.blend')   # r33-speaker-horn a6dc9296; not in git
+ASSET = os.path.join(HERE, 'assets', 'hornA', 'tropos.blend')   # horn A, built from r33-speaker-horn 4ec3bc96 (make_blend.py --design current); not in git
 
 
 def set_path(d, path, value):
@@ -100,7 +100,7 @@ def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extr
     import render, product as Pr, lights as Lt
     linked = []
     place0 = Pr.place
-    editable = stand != 'plinth' or tt or up
+    editable = stand == 'feet' or tt or up      # 'own' and 'plinth': the asset as it is, linked
 
     def place(bpy_, pdef, templates, shot_, root_):
         objs, part_of = place0(bpy_, pdef, templates, shot_, root_)
@@ -160,10 +160,10 @@ def main():
     ap.add_argument('--out', required=True); ap.add_argument('--samples', type=int, default=64)
     ap.add_argument('--scale', type=float, default=1.0)
     ap.add_argument('--asset', default=ASSET)
-    ap.add_argument('--collection', default='Tropos Strata {tint}')
+    ap.add_argument('--collection', default='Tropos {tint}')
     ap.add_argument('--light', action='append', default=[])
     ap.add_argument('--set', action='append', default=[], dest='sets')
-    ap.add_argument('--stand', choices=['feet', 'plinth'], default='feet')
+    ap.add_argument('--stand', choices=['own', 'feet', 'plinth'], default='own')
     ap.add_argument('--tt', type=float, help="the glass's transmission through 20 mm to render at (e.g. 0.29)")
     ap.add_argument('--glass-from', type=float, default=0.12, help="the asset's own (Smoke 2074: 0.12)")
     ap.add_argument('--uplight', type=float, default=0.0, help='the night uplight, W (0: off, the day)')

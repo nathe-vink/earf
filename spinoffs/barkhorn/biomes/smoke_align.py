@@ -22,8 +22,8 @@ Tropos Smoke stands in its place in each lamp's light linking.
 import argparse, json, math, os, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ASSET = os.path.join(HERE, 'assets', 'horn3', 'tropos-strata.blend')   # r33-speaker-horn a6dc9296 (Strata, horn A, uplit plinth, stock tints); not in git
-COLLECTION = 'Tropos Strata Smoke'
+ASSET = os.path.join(HERE, 'assets', 'hornA', 'tropos.blend')   # horn A on its own feet, built from r33-speaker-horn 4ec3bc96; not in git
+COLLECTION = 'Tropos Smoke'
 LIGHT_SCALE = {}                       # --light NAME=FACTOR
 BACKLIGHT = [0.0]                      # --backlight irradiance
 BLACK_LINING = False                  # --black-lining
@@ -59,8 +59,8 @@ def compose(sh, frame):
         # the fire's light through the speaker, from behind: a warm panel between the speaker and the crater, lighting
         # only the speaker (the kicker's receivers), so its glass is seen into, not as a block
         rec = sh['lights']['kicker'].get('receivers')
-        sh['lights']['fireback'] = {'type': 'area', 'size_m': [1.2, 1.6], 'position': [SPOT[0] + 0.2, SPOT[1] + 1.1, 0.75],
-                                    'target': [SPOT[0], SPOT[1], 0.7], 'irradiance': BACKLIGHT[0], 'color': '#FF9A55',
+        sh['lights']['fireback'] = {'type': 'area', 'size_m': [1.2, 0.8], 'position': [SPOT[0] + 0.2, SPOT[1] + 1.1, 0.45],
+                                    'target': [SPOT[0], SPOT[1], 0.45], 'irradiance': BACKLIGHT[0], 'color': '#FF9A55',
                                     'receivers': rec}
     for k, f in LIGHT_SCALE.items():                 # the shot's fills were set for the old near-black model
         if k in sh.get('lights', {}):
@@ -95,7 +95,7 @@ def main():
     ap.add_argument('--refinish', help='a raw render (.raw.png) to finish again, no render')
     ap.add_argument('--black-lining', action='store_true')
     ap.add_argument('--light', action='append', default=[], help='NAME=FACTOR scales a shot lamp (0 drops it)')
-    ap.add_argument('--stand', choices=['feet', 'plinth'], default='feet')
+    ap.add_argument('--stand', choices=['own', 'feet', 'plinth'], default='own')
     ap.add_argument('--tt', type=float, help="the glass at this transmission through 20 mm (Smoke 2074 is 0.12)")
     ap.add_argument('--uplight', type=float, default=0.0, help='the night uplight (W); 0 is off')
     ap.add_argument('--backlight', type=float, default=0.0, help="the fire's light through the speaker from behind")
