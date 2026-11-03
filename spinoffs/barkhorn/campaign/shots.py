@@ -355,6 +355,8 @@ def _hero_gate3(s):
     # white bar a little in from its front edge, hidden before under the face's pale reflection: to a third)
     if 'edge' in L and L['edge'].get('power_w'):
         L['edge']['power_w'] = round(L['edge']['power_w'] / 3, 3)
+    honest_lights(s)                                       # the owner's rule (horn to specular 1, kick and back unlinked)
+    cards_out_of_frame(s)
     return s
 
 
@@ -435,7 +437,7 @@ def _row_gate3(s):
     return s
 
 
-SHOTS['deck-row'] = lambda: honest_lights(_row_gate3(deck_row()))
+SHOTS['deck-row'] = lambda: cards_out_of_frame(honest_lights(_row_gate3(deck_row())))
 
 
 def deck_cover():
@@ -467,6 +469,19 @@ def deck_cover():
     # at the other end reaches x 7 at about y -4.2, well clear of side_r at y -1. No links: the coordinator's rule)
     if 'side_l' in s['lights']:
         s['lights']['side_l']['position'] = [-6.0, -1.5, 1.4]
+    # the owner's rule on light (the coordinator, 19:32 and 19:51): the cover's lamps linked to the panels or the drivers
+    # are unlinked, the cyc, top and over lamps light through glass, the fill and face show in reflections. Two lamps
+    # were only ever safe because of their links, so they get real controls instead: `smoke`, 80, linked to Smoke's parts
+    # alone, gets a honeycomb grid (30 deg) and aims at Smoke, so it does not wash Fog and its neighbours; `strip`, 70,
+    # linked to the drivers, lit nothing else, and unlinked at 70 it would light every front at ten times the face lamp:
+    # down to the face lamp's level, 6
+    L = s['lights']
+    honest_lights(s)
+    sm = s['products'][0]['instances'][-1]['position']
+    if 'smoke' in L:
+        L['smoke'].update(target=[sm[0], sm[1], 0.5], spread_deg=30)
+    if 'strip' in L:
+        L['strip']['irradiance'] = 6.0
     return s
 
 
@@ -571,10 +586,16 @@ def site(frame, tint):
     if frame == 'hero-light':
         _siteH_round1(s)
     honest_lights(s)
-    if frame in ('front-off-tall', 'front-off-wide', 'side'):
-        # (the honest rig's proxies, tall Ice and Ember: kick and back unlinked lit the floor beside the speaker, and the
-        # lower right face, mirroring it, fell from saturation 0.56 to 0.46 (Ice) and 0.49 to 0.35 (Ember))
-        _floor_patch(s)
+    if frame in ('front-off-tall', 'front-off-wide', 'side') and 'back' in s['lights']:
+        # (the honest rig's proxies, tall Ice and Ember: unlinked, the `back` lamp, behind the speaker and aimed through
+        # it at the floor, lit the floor beside it (176 to 229), and the lower right face, mirroring it, fell from
+        # saturation 0.56 to 0.46 (Ice) and 0.49 to 0.35 (Ember). A reflect-only patch on that floor is not allowed (the
+        # camera sees the floor: the coordinator, 20:17). Tests: the kick at half, floor 224, face 0.47; the kick on a
+        # 25 deg grid, 244 and 0.43; `back` at half, 215 and 0.49; `back` off, 197 and 0.51 (Ember 195 and 0.42), the
+        # front unchanged. `back` goes off)
+        s['lights']['back']['irradiance'] = 0.0
+        s['lights']['back'].pop('power_w', None)
+    cards_out_of_frame(s)
     return s
 
 
@@ -612,6 +633,9 @@ def honest_lights(s, log=None):
             if recv:     # a reflection card shown in some parts only: a part-link all the same
                 out.append(f'{name}: panel receivers {recv} removed')
                 del L['receivers']
+            if not spec_only and 'specular' in L and L['specular'] != 1.0:   # a lit panel hidden from reflections
+                out.append(f"{name}: panel specular {L['specular']} to 1.0")
+                L['specular'] = 1.0
             continue
         if spec_only:
             continue
@@ -624,6 +648,76 @@ def honest_lights(s, log=None):
         if L.get('transmission') is False:
             out.append(f'{name}: transmission false removed')
             del L['transmission']
+    if log is not None:
+        log.extend(out)
+    return s
+
+
+def _in_frame(s, pts):
+    """Whether any of the points lies inside the camera's frustum (no occlusion test: a card hidden behind the speaker
+    from one view is still in the frame)."""
+    import numpy as np
+    cam = s['camera']; c = np.array(cam['position'], float); f = np.array(cam['target'], float) - c
+    f /= np.linalg.norm(f); r = np.cross(f, [0.0, 0.0, 1.0]); r /= np.linalg.norm(r); u = np.cross(r, f)
+    W, H = s['size']; lens = cam['lens_mm']
+    hx, hy = (18.0, 18.0 * H / W) if W >= H else (18.0 * W / H, 18.0)
+    sx, sy = cam.get('shift_x', 0.0) * 2, cam.get('shift_y', 0.0) * 2
+    for p in pts:
+        d = np.array(p, float) - c; z = d @ f
+        if z <= 0:
+            continue
+        x = (d @ r) / z * lens / hx - sx; y = (d @ u) / z * lens / hy - sy
+        if abs(x) <= 1.02 and abs(y) <= 1.02:
+            return True
+    return False
+
+
+def _card_points(fl):
+    import math
+    cx, cy, cz = fl['center_m']; w, h = fl['size_m']; n = fl['normal']
+    if abs(n[2]) > 0.9:                                    # on the floor (or a ceiling): its plane is horizontal
+        ax, ay, az, bx, by, bz = 1.0, 0.0, 0.0, 0.0, 1.0, 0.0
+    else:
+        L = math.hypot(n[0], n[1]) or 1.0
+        ax, ay, az = -n[1] / L, n[0] / L, 0.0; bx, by, bz = 0.0, 0.0, 1.0
+    g = (-1.0, -0.5, 0.0, 0.5, 1.0)
+    return [(cx + a * w / 2 * ax + b * h / 2 * bx, cy + a * w / 2 * ay + b * h / 2 * by, cz + a * w / 2 * az + b * h / 2 * bz)
+            for a in g for b in g]
+
+
+def cards_out_of_frame(s, log=None):
+    """The coordinator's rule (2026-11-03 20:17): a reflect-only card is an out-of-frame flag or nothing. Each one inside
+    the camera's frustum slides away from the speaker along the line through it, growing in proportion so it holds the
+    same angle from the speaker, until no part of it is in frame, staying inside the studio (the sweep's depth and
+    width, or the room). A card on the floor cannot leave a frame that sees the floor, and goes; so does one that
+    cannot get out of frame inside the studio."""
+    st = s.get('set', {}); out = []
+    i0 = s['products'][0]['instances'][0]['position'] if s.get('products') else [0, 0, 0]
+    depth = st.get('depth', 1e9) - 0.2; half_w = st.get('width', 1e9) / 2 - 0.2
+    keep = []
+    for fl in st.get('flags', []):
+        if not fl.get('reflect_only') or not _in_frame(s, _card_points(fl)):
+            keep.append(fl); continue
+        if abs(fl['normal'][2]) > 0.9:
+            out.append(f"floor card at {fl['center_m']} in frame: removed"); continue
+        cx, cy, cz = fl['center_m']; rx, ry = cx - i0[0], cy - i0[1]
+        done = None
+        for k10 in range(11, 81):
+            k = k10 / 10
+            nc = [round(i0[0] + k * rx, 3), round(i0[1] + k * ry, 3), cz]
+            if nc[1] > depth or abs(nc[0]) > half_w:
+                break
+            cand = {**fl, 'center_m': nc, 'size_m': [round(fl['size_m'][0] * k, 3), round(fl['size_m'][1] * k, 3)]}
+            if cand['center_m'][2] - cand['size_m'][1] / 2 < -0.5:   # grown far below the floor: lift it to stand on it
+                cand['center_m'][2] = round(cand['size_m'][1] / 2 - 0.5, 3)
+            if not _in_frame(s, _card_points(cand)):
+                done = cand; break
+        if done:
+            out.append(f"card at {fl['center_m']} moved to {done['center_m']} at x{round(done['size_m'][0] / fl['size_m'][0], 1)}")
+            keep.append(done)
+        else:
+            out.append(f"card at {fl['center_m']} cannot leave the frame inside the studio: removed")
+    st['flags'] = keep
     if log is not None:
         log.extend(out)
     return s
