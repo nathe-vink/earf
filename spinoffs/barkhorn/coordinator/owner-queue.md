@@ -3683,3 +3683,23 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 23:20 c2 (reached me 23:27): merged 69c8f11c at 69d7c10cef8e70fbe0905e81df73f4b22bcba29c (r33-rollout-c2; checked with ls-remote
   23:27). The variants file was clean. The Cloud build started 23:20 as a tracked task, then render_model.py. No renders until the
   speaker lane's shots.py SHA.
+- 23:32 lamps lane (script at ac600793306145dedeb81ebfed657b5823342daf, checked by the lane with ls-remote; both nights rendering at
+  full scale): Core's two fixes applied.
+  - The thin shells pass shadow rays at their own transmission.
+  - The liner's lit face is the light. The COB is 3.2 W for ~490 lm out of the fitting (575 x 0.85). The liner takes the reflector's
+    spill, ~145 lm over 0.041 m2 (11.5 W/m2 average; 0.6x at the rim, 1.4x at the crown). The liner's transmittance is its emission
+    colour. The spill point light is gone; nothing is above its real number.
+  - Proxies at -2.0 EV: face 214, lip 196, bowl 121, table 57, wall 16-19, so the dome leads. Red <=2 on 0 % of the face (was 84-94 %).
+    Hue OKLCH ~234-235 (a). The bright face reads paler (AgX roll-off).
+  - The pool: the COB's downlight leaves through the open mouth, so (b) cools it only slightly (physical).
+  - The notch is real geometry: the bayonet's cut runs out through the collar (crystal.py line 204).
+  - The room: a camera move means re-rendering the day too. The day doesn't carry the thin-shell shadows (its wall shadow would go
+    tinted). Core B finals still rendering.
+- 23:33 sent to the lamps lane:
+  - Stop the two nights in flight and re-render all three on one final build.
+  - The notch made blind, unless there's a build reason (then it goes to the owner).
+  - A new shared camera: lower, the dome and a glimpse of the liner leading, a sliver of the dusk curtain in frame, the floor lifted by
+    real light.
+  - Thin-shell shadows on the day too.
+  - The face's median held at ~190-200 to keep its colour (the owner likes the darker colours), with chroma reported against the day.
+  - (b) rendered as a proposal. Then all three gated together.
