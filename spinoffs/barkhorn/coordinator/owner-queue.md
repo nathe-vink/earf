@@ -1766,6 +1766,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 13:45 speaker lane: polished A at d8f613ec71a393e8b8631074d935b97c436282ad (gate2/A-ice-polished.png; identical to a47ae365 but the
   waveguide's outside at roughness 0.05): horn 84 to 69, throat 51 to 29, lip 84 to 75; "the horn reads as glass; thick parts go darker;
   the throat ring and pod read deep blue; the posts and the HF driver's body show through". BASES.md D+/E record f0c41058. An honest
-  slip: a D+ queue it thought dead rendered D+ night in full (kept for the record only, light-study/Dplus/: horn underside 7.7 vs 5.1,
+  slip: a D+ queue it thought dead rendered D+ night in full (kept for the record only at 01d37ca0140d4fda6aa4074e22751573ba2820f3, light-study/Dplus/: horn underside 7.7 vs 5.1,
   wall unchanged: no V, as the skeptic predicted); no other stray process. D night with the gate-3 fixes ~5 min out (drop it on "no
   light"). Gate wf_630f6086-2d5 on satin A vs polished A started 13:46 (sha256 polished 3f09b43f).
