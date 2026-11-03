@@ -2971,3 +2971,23 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   reads as paint (honest Fresnel). The trade on the turn (20+ degrees brings the wedge back, front-on the symmetric X): Haze to 5 degrees
   off (rotate_z -10, like Ice's 4) at de1688a52a7d8765ad0839f1a3626f2e7357a277, re-rendered after the Poison and Acid proxies; Poison's and
   Acid's sides watched on their proxies (Ember's side carries the lava, so it reads as glass).
+- 19:30 speaker lane: the hero's render stopped by PID (15240, 15243), its partial deleted, the committed deck-hero files untouched; the key
+  split out; an honest top-chamber fix to be proved (a key move or a real flag, else the key down). `edge` is a specular-only area lamp
+  (diffuse 0, 0.3 W) linked to the cabinet's six panels: "to a third" dims the whole lamp. The cover's first fix (side_l and side_r taken off
+  the fronts' receivers, a21f2a6052530e14d40cb471460c8eebb9d865ad, unused) is the forbidden kind; to be replaced by moving side_l (y -3 to
+  ~-1.5) so Ember's mirror ray misses it. FIX1'S RIG: the fix (6f73a18c) adds no links or multipliers, but the finals31 front-off base rig
+  under it (passed in earlier gates) carries three patterns: (1) `horn` (irradiance 8, 5.2 after the fix) at specular 0.3: it lights the horn
+  fully but shows at 0.3 in reflections; (2) `kick`, `back` and `edge` linked to the product's parts, not the linings (kick and back the key
+  split's shape, smaller); (3) background lamps linked to the sweep alone, specular 0. The 23 fix1 shots carry all three, as every earlier
+  site frame did. Phase 2 on studio31: chunks 1-3 (the arc from hero-light; studio-dark-ember in 3 is the dark-ground studio), 9
+  (macro-horn-acid, macro-corner-ember), 10 (macro-amp-dust, macro-grip-poison), its chunk 11 (joinery); hold 9 and 10 too (side-face
+  close-ups in the white studio). Chunks 4-8 on finals31's own rigs; the turn rig being checked.
+- 19:32 RULINGS sent to the speaker lane: (1) `horn` to specular 1.0 in every rig; a hard highlight fixed by moving or flagging the lamp; the
+  owner chose polished from frames lit this way (gate 2's A rig), so an honest A-ice-polished (horn specular 1.0, nothing else changed) at
+  full size, for disclosure before the close-up item; (2) kick and back unlinked, lighting everything they reach, lowered if the linings
+  wash out, the honest numbers; (3) background lamps on the sweep stand (a flagged background light); (4) `edge` stands (a dimmer reflection
+  card). Order: proxies of tall Ice and Ember old against new (the horn's peak, the right face's and lining's saturation), a new fix1 SHA,
+  an audit list of every other rig (back; finals31 amp, horn-back, inside, turn; row; room; studio31 and its arc and macros; cover); the
+  deck hero, cover and hero-light under the same rules; phase-2 1-3, 9, 10 held.
+- 19:32 sent to c3: stop fix1 chunk 4 by PID, delete its partial, report and wait. To c4: after chunk 12, report and wait (no fix1, no phase
+  2). To c2: finish phase-2 chunk 4, then wait (no fix1 on aed49790).
