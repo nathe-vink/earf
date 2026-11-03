@@ -1428,3 +1428,14 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   throat has 222 edges on more than two faces but is closed). habitat.py and smoke_align.py point at hornA2 (1ab17eef on r48-biomes).
   The stale seven stopped; proxies (a) old, (b) hornA2 satin, (c) hornA2 at roughness 0.05 (comparison only) with thick-against-thin
   numbers in ~15 min; then the seven with (b).
+- 10:37 lamps round 4 gate wf_eb405d5e-e30 (3 critics, 21 min): Core day SHOW 3/3, Hemisphere day SHOW 3/3. 5700 K holds Ice
+  (frosted Core 196 at night vs 202 by day); no frame throws a coloured pool. Core CLEAR hold 3/3 (no glow: face ~14/255, darker than
+  the wall; an LED puck in a cyan ring): dropped, no owner question (the drawings' frosted design is right). Core FROSTED hold 3/3 on
+  see-through only ("a flat teal disc": rim as bright as centre; dim, ~45 vs the wall's 27; lights nothing: wall and table within
+  one level of the clear frame). Hemisphere night hold 3/3 (the face washed out, saturation 0.29 vs 0.94 by day; a 4-6 px electric-
+  blue line at the mouth from the diffuser's light piping out of the dome's cut edge; the pendant 13 % of frame width, jammed at the
+  top; the dome's colour reaches nothing). The table pool is right.
+- 10:38 sent round 5 (the two nights): Core's depth (the rim band through the thickness, a dim crisp reflection, a gradient from
+  the emitter, brighter, its blue reaching wall and table); Hemisphere exposed for the dome (1.5-2 stops), the rim line fixed for
+  real (diffuser inside the rim, or a satin or dark edge: the lane to propose and cost), reframed closer to match the day camera, a
+  cool halo.
