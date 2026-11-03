@@ -2785,3 +2785,13 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   the fill reaches everything it would, only the floor excluded (a cutter's stand-in); the level where the linings stay saturated (lower,
   larger, softer), the honest number if darker; the spots, clamp and glints kept. Restated: shop v2 held (18:05), window v2 held (18:34);
   its queue: r43-listening, r44 v3, shop v3, window v3 (shop and window may share one setup).
+- 18:42 speaker lane: the Smoke v3b proxy (both horn materials #989A9E, 50 % through the model's 6 mm wall, "as deep as the cabinet"; the
+  panels linked off the horn): the flare body 181 to 167; the posts behind the lower wall 109 against 148 in open air (~74 %: 50 % through
+  the wall plus the oblique path and light around it); the tab insert hue 41, saturation 0.02 (a trace of bronze); the lip unchanged
+  (234/207): it mirrors the bright wall high behind the horn, above the back card, not the panels. The final adds a reflect-only card
+  there (3.0 x 1.8 m, centred 1.9 m up, 1.1 m behind, tilted to the lip) on Smoke and on 2064; part of the lip stays a bright line by
+  the material (a polished 6 mm edge seen edge-on carries light along itself; Ice's dye filters that path). It stops at the owner's
+  spec, not chasing 150. The v3 final and the 2064 re-render after chunk 4.
+- 18:45 c4: chunk 09 landed (site-front-off-wide fog 19.7 min, site-hero-light ember 23.2; 18:00-18:44) at
+  ed2dd145802fee6e227a6b4ffc368147a967b0ba; chunk 12 (hero-light haze, fog) started 18:45; then the 9db8da17 merge and phase-2 chunks 3
+  and 6 unless told to wait. The front-off-wide set is complete in seven tints but goes to the sidesheen re-render, so it isn't gated now.
