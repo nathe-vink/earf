@@ -2719,3 +2719,33 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 18:31 sent to c2, c3, c4: report the current phase-1 chunk as usual, then wait for my go before phase 2 (a fix chunk on a new SHA, or
   phase 2 re-pinned); nothing changed in their checkouts meanwhile.
 - 18:32 spinoffs/barkhorn/coordinator/walkthrough.md: the inventory, reconciled with everything since 18:09, committed.
+- 18:28 speaker lane: chunk 1 landed at 67f795ababb952ec616caca3cfb94625da35a41f (renders/2026-11-04/barkhorn/rollout/A-polished/deck-hero.png;
+  Ember, 1440 x 2160, 192 samples, 64 min, framed as the confirmed proof); the room and row proxies running, then the Smoke v3 proxy.
+- 18:32 check-in #47 (handled in the turn running).
+- 18:32 speaker lane, the scope answer: the cause is `sidesheen`, a specular-only panel (diffuse 0) behind and right of the speaker (~[1.1,
+  2.3, 0.6], a vertical ramp), placed so the right side would mirror a highlight. It is in front-off-tall (0.9), front-off-wide (0.9, plus
+  a topline 1.8 and a `paper` lamp 12, the likely sources of the horn's swoosh and the bottom-edge line) and side (2.2, the strongest).
+  Not in back (its own rig), hero-light (studio31) or phase 2 (the arc from hero-light; horn-back, inside, amp and turn from finals31;
+  joinery from studio31; the back mark from back), whose rigs still need their own gates. So: re-render tall, wide and side in seven
+  tints; back and hero-light stand; phase 2 can start on its SHA. The fix for those three: sidesheen off, a reflect-only black card
+  camera-right, the top light (`horn` 8.0 in tall) down, the key off the feet, wide's topline and paper checked. Proxies (tall Ice and
+  Ember, the Fog check) after the room, row and Smoke v3 proxies; a new SHA once they hold.
+- 18:34 r43-window v2 gate wf_48a96798-318 (3 critics, ~26 min): HOLD 3/3. The set-back worked (both pairs of feet and a 59-73 px floor strip;
+  the side-face pink patch and v1's red floor wedges gone), but the larger spot sources made bigger reflections: the left horn's streak
+  ~3x (264 px above L150 vs 84), near-white and doubled (a leg of the X); a new milky wedge on the left cabinet's top face; a white
+  hairline along the right speaker's lip and top front (an LED-strip read); one critic a red line at each base's floor contact; the
+  fronts dark (~10-26 vs the old 36-49).
+- 18:35 my gate on the four landed hero-light frames (dust, acid, poison, ice; wf_c53243f3-e85) started: phase 2's arc builds on studio31.
+  Acid and Dust described as TINTS.md has them (yellow, orange), Acid's edge limit stated.
+- 18:36 sent to the bar lane: window v3 (the spots' intensity per area cut and re-aimed, e.g. to the window head, so their reflections miss
+  the left horn's crease and the top faces; no near-white on either speaker, the streak no bigger than v1's; a street-side front light for
+  the fronts; the red base line out physically, the gap pool dimmer; the camera, set-back and floor strip kept; the shop and window lit to
+  work together); its queue: the r44 polish, the r43-listening polish, shop v3, window v3.
+- 18:36 phase 2 released on 9db8da171425bd5ca89ad439f9e0aeecda211c7b (HELPERS.md's steps: merge, push, --phase 2 A polished --hold smoke):
+  c3 after chunk 15: 5 (horn from behind, the inside), 1 (Sound's Ice arc; it finishes phase 1 first), 2, 10, unless I hold 1 or 2;
+  c2 after chunk 14: 4, 9; c4 after chunk 12: 3, 6 (3 builds on hero-light, gating). A fix chunk of the re-rendered phase-1 site frames
+  to be slotted in on a newer SHA.
+- 18:36 sent to the speaker lane: the scope and fix agreed (tall, wide, side only; back and hero-light stand); phase 2's assignments; when
+  the proxies hold: the new SHA, the fix chunk lines (21 site shots plus deck-row and deck-home-portrait) and the merge step for a helper on
+  9db8da17; the deck hero to my gate.
+- 18:37 my gate on the deck hero (wf_45416aa0-452; the framing proof and Ice polished as context) started.
