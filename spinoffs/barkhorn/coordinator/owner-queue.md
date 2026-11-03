@@ -2404,3 +2404,18 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   frame type across its seven tints).
 - 16:43 helper c2: chunk 11 landed at r33-rollout-c2 c171e299ce66d29f59fed457278258076b60992e: site-hero-light-poison (22.8 min, 2.26 MB),
   site-hero-light-ice (25.3 min, 2.31 MB); exit 0 (only the usual no-GPU CUEW warning). Chunk 13 started 16:43.
+- 16:46 Mantle lane: C3 at r48-mantle-design 7b877ca1cf0f7e62509c78e5379e8f1d39f210d3 (source 88dd2457, 2476a429; v5 rebuilt, 0 clashes,
+  $3,897; README section 13 "Option C3"; a5-night/day-ember-2423-c3.png, 1800 x 1200, the night at 192 samples). (1) The crescent: C2's
+  backer-only disc stopped at r 150 (the platter's radius), its edge seen ~17 mm in front of the platter through the 24 mm deck; the
+  print and glow now start at r 105 inside the footprint: the foot 140 (C2 92, A 134). (2) The falloff: cover 24 % at r 105 to 5 % by
+  280, backed throughout, no boundary; field p10-p90 C3 101-151 (A 121-138, C2 117-150, first C 81-174); CV C3 18 % (A 13, C2 16, first
+  C 26); the left rim 54.8 (A 71); against A 6.8 % of pixels differ > 4 levels, mean 1.35. (3) The glow reaches under the platter's
+  rim (its acrylic edge lit from below); the record edge and arm pillars lit through the top. (4) The border: a build change: the
+  5.6 mm top now two pieces from one sheet (the field plus a 10 mm frame over the rings) bonded with black-pigmented ACRIFIX, the
+  rings' undersides bare (one sheet piped glow out as lit lines along the front edge in a proxy); by day clear tinted glass with its
+  thickness and one black bond line; at night dark (only a faint line on the lower front edge at x8). (5) The chewed edge was the
+  shader bevel (now polished, no bevel); the day print an even 15 %, room bake 5 (was 7) for a deeper ruby; a real 2.5 mm dot screen
+  read as perforated metal, so the print stays a tone. (6) Underneath as C2: base top 4.7 (C2 4.5, A 4.7), spots 0/0, floor 6.4/4.8
+  (A 6.5/4.9); the amber glint (unfiltered glow out of the strip groove's clear sides) fixed with the backer across the groove.
+  Cost ~+$15-25 over C2: C3 ~+$145-175 a unit over v3 (v4 as gated +$140-170); parts $3,897.
+- 16:46 my gate on C3 night and day (A g5's pair and C2 night as comparisons) started.
