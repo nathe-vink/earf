@@ -3741,3 +3741,17 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
     facade.
   So items 6, 7, 8, 9 and 13 are blocked until honest re-renders pass. The order after item 5: item 11 (Plastimagen, time-bound),
   then 10, 12, 14 onward; 6-9 and 13 return when their pictures pass, with the bottom-edge question after 7. Item 6's disclosure grows.
+- 23:41 sent to the speaker lane: the audit (the report and tools on r46-owner-notes 8ca6a850). Hold the fix1 re-renders on f6d0eda7.
+  New order:
+  1. The horn close-up honest, polished and satin (items 6-8; a line for c3).
+  2. cards_out_of_frame on the whole rectangle (0.0 % or removed; the residue by real means), with honest_lights for spec-only area
+     lamps, in one SHA with a cardcast table.
+  3. Tall Ice as the honest A-ice-polished.
+  4. The bottom-edge comparison for the owner.
+  5. The deck hero line, then the cover's key.
+  6. The turn, arc, inside-ice, EARF finish.
+  Round 2's edge-off and 40° key/kick are kept.
+- 23:41 sent to c3: hold; its next job is the honest horn close-up when the lane's line comes.
+- 23:43 sent to the biomes lane (item 5's Ice included), the Mantle lane (C3e, and the night pictures from now on) and the lamps
+  lane: run the whole-rectangle card test (cardcast.py or an equivalent) on their passed and in-flight rigs, report any card's
+  share of the frame, and note ruling 4 (sets cast shadows; light only through real openings).
