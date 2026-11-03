@@ -45,6 +45,7 @@ def scale_lights(sh, scales):
 
 SURFACE_GLASS = False                   # --surface-glass: the tint on the faces (not adopted: the speaker lane's volume is the line's material)
 WELD = [True]                           # the asset's split vertices welded so its glass volumes close (--no-weld: off)
+HORN = {'close': False, 'rough': None}  # --horn-close: fill the horn shells' open seams; --horn-rough R: the satin's roughness (test only)
 TT_SURFACE = 0.92                       # the two faces' reflection loss, as tints.py has it
 
 
@@ -181,7 +182,7 @@ def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extr
     import render, product as Pr, lights as Lt
     linked = []
     place0 = Pr.place
-    editable = stand == 'feet' or tt or up or lining or glass_shadows   # else the asset as it is, linked
+    editable = stand == 'feet' or tt or up or lining or glass_shadows or HORN['close'] or HORN['rough'] is not None   # else the asset as it is, linked
 
     def place(bpy_, pdef, templates, shot_, root_):
         objs, part_of = place0(bpy_, pdef, templates, shot_, root_)
@@ -231,6 +232,26 @@ def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extr
                     o.data.polygons.foreach_set('use_smooth', [not flat] * len(o.data.polygons))
                 bm.free()
             print(f'weld: {nw} meshes welded')
+        if HORN['close']:
+            # the horn's shells (throat, waveguide, cap) stay open after the weld (seams 0.6-1.1 m long): a glass volume
+            # with a gap leaks, rays inside stay "in the resin". Fill each hole so the volume closes
+            import bmesh
+            for o in col.all_objects:
+                if o.type == 'MESH' and any(k in o.name for k in ('horn-throat', 'waveguide')):
+                    bm = bmesh.new(); bm.from_mesh(o.data)
+                    bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=1e-4)
+                    r = bmesh.ops.holes_fill(bm, edges=bm.edges, sides=0)
+                    bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+                    left = sum(1 for e in bm.edges if len(e.link_faces) == 1)
+                    bm.to_mesh(o.data); bm.free()
+                    print('horn close:', o.name, len(r['faces']), 'faces filled,', left, 'open edges left')
+        if HORN['rough'] is not None:
+            for m in {sl.material for o in col.all_objects for sl in getattr(o, 'material_slots', []) if sl.material}:
+                if m.name.split('@')[0] == 'horn-satin' and m.node_tree:
+                    for n in m.node_tree.nodes:
+                        if n.type == 'BSDF_PRINCIPLED':
+                            n.inputs['Roughness'].default_value = HORN['rough']
+            print('horn satin roughness ->', HORN['rough'])
         if glass_shadows:
             # light through the glass: Cycles renders without refractive caustics, so no lamp lights anything inside or
             # behind a clear wall and the inside reads black whatever the tint. Shadow rays pass each acrylic wall
@@ -331,10 +352,12 @@ def main():
     ap.add_argument('--no-ground', action='store_true', help="don't settle the speaker onto the set")
     ap.add_argument('--no-weld', action='store_true'); ap.add_argument('--surface-glass', action='store_true')
     ap.add_argument('--lining', help="the lining's color, hex (colors F: Smoke '#0B0B0B')")
+    ap.add_argument('--horn-close', action='store_true'); ap.add_argument('--horn-rough', type=float)
     ap.add_argument('--flag', type=float, nargs=2, default=(8.0, 6.0), help='the black flag behind the camera, m (0 0: none)')
     a = ap.parse_args()
     global SURFACE_GLASS
     WELD[0] = not a.no_weld; SURFACE_GLASS = a.surface_glass
+    HORN['close'] = a.horn_close; HORN['rough'] = a.horn_rough
     sh = json.load(open(a.shot))
     scale_lights(sh, {k: float(v) for k, v in (x.split('=', 1) for x in a.light)})
     for kv in a.sets:
