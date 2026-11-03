@@ -7,7 +7,7 @@
   "position": [
    1.2,
    -2.5,
-   1.0
+   0.85
   ],
   "target": [
    0.0,
@@ -84,13 +84,13 @@
    },
    {
     "center_m": [
-     1.6,
-     -1.2,
+     1.76,
+     -1.32,
      1.2
     ],
     "size_m": [
-     2.0,
-     2.0
+     2.2,
+     2.2
     ],
     "normal": [
      -0.8,
@@ -134,6 +134,24 @@
      0.0
     ],
     "color": "#060606"
+   },
+   {
+    "center_m": [
+     2.915,
+     4.729,
+     2.23
+    ],
+    "size_m": [
+     7.56,
+     5.46
+    ],
+    "normal": [
+     -0.345,
+     -0.938,
+     0.0
+    ],
+    "reflect_only": true,
+    "color": "#050505"
    }
   ],
   "color": "#F7F0E8"
@@ -146,7 +164,7 @@
     1.8
    ],
    "orbit": {
-    "azimuth_deg": -35,
+    "azimuth_deg": -60.0,
     "elevation_deg": 22,
     "distance_m": 2.2
    },
@@ -175,7 +193,7 @@
     0.0,
     0.6
    ],
-   "irradiance": 1.6,
+   "irradiance": 2.4,
    "color": "#FFF2E6",
    "specular": 1.0
   },
@@ -195,36 +213,8 @@
     -0.3,
     0.3
    ],
-   "irradiance": 1.6,
-   "color": "#FFF8F0",
-   "receivers": [
-    "right",
-    "left",
-    "front-panel",
-    "top",
-    "bottom",
-    "back",
-    "rib-*",
-    "brace*",
-    "land-*",
-    "waveguide*",
-    "hf-*",
-    "grip-*",
-    "post*",
-    "port*",
-    "woofer*",
-    "cloth-disc",
-    "amp*",
-    "feet*",
-    "tie-rod*",
-    "top-pad",
-    "cap-o-ring",
-    "cable-glands",
-    "lead-*",
-    "mark-back",
-    "rating-plate*",
-    "back-*"
-   ]
+   "irradiance": 0.0,
+   "color": "#FFF8F0"
   },
   "pool": {
    "type": "area",
@@ -266,35 +256,7 @@
     0.6
    ],
    "irradiance": 1.1,
-   "color": "#FFF8F0",
-   "receivers": [
-    "right",
-    "left",
-    "front-panel",
-    "top",
-    "bottom",
-    "back",
-    "rib-*",
-    "brace*",
-    "land-*",
-    "waveguide*",
-    "hf-*",
-    "grip-*",
-    "post*",
-    "port*",
-    "woofer*",
-    "cloth-disc",
-    "amp*",
-    "feet*",
-    "tie-rod*",
-    "top-pad",
-    "cap-o-ring",
-    "cable-glands",
-    "lead-*",
-    "mark-back",
-    "rating-plate*",
-    "back-*"
-   ]
+   "color": "#FFF8F0"
   },
   "scrim": {
    "type": "panel",
@@ -374,7 +336,7 @@
     -0.1,
     0.9
    ],
-   "strength": 0.5,
+   "strength": 0.167,
    "color": "#FFFFFF",
    "diffuse": 0.0
   },
@@ -394,7 +356,7 @@
     0.0,
     0.5
    ],
-   "strength": 0.9,
+   "strength": 0.0,
    "color": "#FFFFFF",
    "diffuse": 0.0,
    "ramp": {
@@ -425,7 +387,7 @@
     -0.21,
     0.6
    ],
-   "power_w": 0.3,
+   "power_w": 0.1,
    "color": "#FFFFFF",
    "diffuse": 0.0,
    "receivers": [
@@ -455,11 +417,7 @@
    ],
    "power_w": 0.0,
    "color": "#FFFFFF",
-   "diffuse": 0.1,
-   "receivers": [
-    "waveguide",
-    "waveguide-cap"
-   ]
+   "diffuse": 0.1
   },
   "horn": {
    "type": "area",
@@ -477,10 +435,10 @@
     0.0,
     1.12
    ],
-   "irradiance": 8.0,
+   "irradiance": 3.12,
    "color": "#FFF8F0",
    "spread_deg": 40,
-   "specular": 0.3
+   "specular": 1.0
   },
   "paper": {
    "type": "area",
@@ -681,7 +639,7 @@
     -0.35,
     0.0
    ],
-   "irradiance": 4.5,
+   "irradiance": 0.0,
    "color": "#FFF8F0"
   },
   "flag_right": {
@@ -740,7 +698,7 @@
       0,
       0.0
      ],
-     "rotate_z": 0,
+     "rotate_z": -6.0,
      "flavour": "cloud-red",
      "hide": [
       "cloth-disc",
@@ -762,7 +720,7 @@
       0,
       0.0
      ],
-     "rotate_z": 0,
+     "rotate_z": -6.0,
      "flavour": "cloud-red",
      "hide": [
       "horn-topo*",
