@@ -1532,3 +1532,19 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   (0936e6d) and "Tropos Strata <tint>" (dcddf036147de9477879a0f58dcad15f6efff1e6); feet mode drops the plinth and the uplight parts
   (their edge and panel emitters). The LED is the asset's emitter at strength 6 (~1,300 cd/m2 over a 3 mm die), to be measured in the
   Strata frame. Proxies e0/e1/e2 on Strata (~10 min), then Ember at 96 samples, then the other six on Strata.
+- 11:25 Mantle g3 gate wf_8d0bd1ae-140 (3 critics, 21 min): the underglow and the edge lines GONE (below the deck the nights match
+  within 1-5 levels; floor, base, posts 0-4/255); Ember's glow holds the day hue (CIELAB ~41). Nights HOLD 3/3 on note 3 (a flat
+  lightbox in a black bezel; the glow lights nothing standing on it: the satin pillar and arm rest at R ~1 beside deck pixels ~210;
+  Poison a pure sRGB green ~2,96-105,5; crinkle/mottle artifacts; the base 0-2/255). Day now 1/3 (was 3/3 at g2): the black edges and
+  masked band read as "a lacquer inlay in a black tray".
+- 11:25 lamps round 5 gate wf_9a7d02a8-b7c (3 critics, 23 min): both days SHOW 3/3; Core night 1/3 (dimmer lit than unlit: body
+  ~0,51-55,71-80 vs day 0,100,145; an even opaque teal globe; the room's grey fill makes "a darkened day render"; the day ball reads
+  clear, the night frosted: one object?); Hemisphere night 1/3 (a thin electric-blue line on the lip, ~183,216,252; aqua ~57,153,172
+  vs day azure 0,93,139; flat; the bowl's hard shadow "a hidden spotlight"; too small; the pair's cameras differ).
+- 11:26 sent. Mantle g4: the glow a REAL emitter (diffuse rays: it must light the pillar, arm, cartridge, platter sides), depth (down
+  0.5-1 stop, a broad gradient, a broad soft reflection, a short vignette not a 3 px step), Poison's green from the sheet's real
+  absorption (day hue ~122), denoise, a faint cool rim so the base and float read; the day tray: a white-up/black-down print under
+  the border (as the field's dots) for the lane to check. Lamps: Core brighter than by day and the room's main light, the clear outer
+  band over the frost, a gradient, a night reflection, the day ball's frost checked; Hemisphere in the new shared camera with no lip
+  line, the lit hue within ~10 degrees of day (exposure or view transform), a gradient, the table lit by an opal-sized area (soft
+  shadow).
