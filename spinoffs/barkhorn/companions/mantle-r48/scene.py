@@ -525,6 +525,33 @@ def core_glow_sheet(core, strength, col, box=None, grade=(1.4, 0.8), fall=0.05, 
     return ob
 
 
+def classify_layer(obj, kind):
+    """v4 gate 2: the deck's tinted skin and rings apart. Skin: its top glossy (0), its underside over the core an
+    index-matched joint (5), over the rings printed black (7), its outer edge satin (1), its holes painted (6). Rings:
+    their tops (under the skin), their undersides and their inner walls (against the core's reflector tape) black (7),
+    the outer edge satin (1)."""
+    me = obj.data
+    bm = bmesh.new(); bm.from_mesh(me)
+    bm.transform(obj.matrix_world); bm.normal_update()
+    xs = [v.co.x for v in bm.verts]; ys = [v.co.y for v in bm.verts]; zs = [v.co.z for v in bm.verts]
+    x0, x1, y0, y1, ztop, zbot = min(xs), max(xs), min(ys), max(ys), max(zs), min(zs)
+    for f in bm.faces:
+        n = f.normal; c = f.calc_center_median()
+        de = min(c.x - x0, x1 - c.x, c.y - y0, y1 - c.y)
+        if abs(n.z) > 0.7:
+            if kind == 'skin':
+                f.material_index = 0 if n.z > 0 else (5 if abs(c.z - zbot) < 1e-5 else 7)
+            else:
+                f.material_index = 7
+        else:
+            if de < 0.0015:
+                f.material_index = 1
+            else:
+                f.material_index = 6 if kind == 'skin' else 7
+    bm.transform(obj.matrix_world.inverted())
+    bm.to_mesh(me); bm.free()
+
+
 def classify_core(obj):
     me = obj.data
     bm = bmesh.new(); bm.from_mesh(me)
@@ -542,7 +569,7 @@ def classify_core(obj):
         else:
             de = min(c.x - x0, x1 - c.x, c.y - y0, y1 - c.y)
             if de < 0.0015:
-                f.material_index = 1
+                f.material_index = 3      # gate 2: reflector tape round the core (white in, black out)
             elif de < 0.0095 and c.z - zbot < 0.0075:
                 f.material_index = 2      # the groove's sides, clear: the strip's light enters the core here
             else:
@@ -908,7 +935,7 @@ def build(args):
               'phono-stage': 'alu-black', 'phono-runners': 'felt', 'back-plate': 'brass-brushed', 'back-hardware': 'steel',
               'dowels': 'steel', 'mark': 'etch'}
     # proposal A's parts (mantle_strata.py)
-    if 'plinth-L1-stack' in objs:
+    if 'plinth-L1-stack' in objs or 'plinth-L1-skin' in objs:
         bands_pl = remap([(l['z0'] * mm, l['z1'] * mm, l['kind'], l['inset'] * mm) for l in meta['lams']])
         o0 = meta['P']['margin'] * mm
         M['plinth'] = acrylic('plinth', bands_pl, tint, ring=(o0, o0, o0 + (meta['W0']) * mm, o0 + meta['D0'] * mm, rw * mm) if rw else None,
@@ -927,6 +954,12 @@ def build(args):
         nt_.links.new(em.outputs['Emission'], out_.inputs['Surface'])
         finish.update({'plinth-L1-stack': 'plinth', 'base-L1-stack': 'base', 'studs': 'steel', 'phono-pads': 'felt', 'hinges': 'arm',
                        'hinge-blocks': 'lid', 'led-strip': 'strip', 'led-channel': 'alu-black'})
+        if 'plinth-L1-skin' in objs:
+            finish.update({'plinth-L1-skin': 'plinth', 'plinth-L1-rings': 'plinth'})
+        if args.blacken:
+            # gate 2: the bearing's brass under the deck chemically blackened, so it does not glint like a light left on
+            M['blackened'] = metal('blackened', '#2B2724', 0.35)
+            finish.update({'bearing-nut': 'blackened', 'bearing-washer': 'blackened', 'bearing-housing': 'blackened'})
         if 'plinth-L1-core' in objs:
             o0, rw_ = meta['P']['margin'] * mm, meta['P']['tint_ring'] * mm
             M['core'] = core_material('core', (o0 + rw_, o0 + rw_, o0 + meta['W0'] * mm - rw_, o0 + meta['D0'] * mm - rw_))
@@ -944,6 +977,13 @@ def build(args):
         if (n.startswith('lid-') or n == 'hinges') and args.shot != 'closed':
             o.hide_render = True
         f = finish.get(n)
+        if n in ('plinth-L1-skin', 'plinth-L1-rings'):
+            for m_ in M['plinth']:
+                o.data.materials.append(m_)
+            classify_layer(o, 'skin' if n.endswith('skin') else 'rings'); o['caustic'] = True
+            for p in o.data.polygons:
+                p.use_smooth = False
+            continue
         if f == 'core':
             for m_ in M['core']:
                 o.data.materials.append(m_)
@@ -952,7 +992,7 @@ def build(args):
                 o0_, rw2 = meta['P']['margin'] * mm, meta['P']['tint_ring'] * mm
                 core_glow_sheet(o, args.core_glow, tuple(args.strip_color),
                                 box=(o0_ + rw2, o0_ + rw2, o0_ + meta['W0'] * mm - rw2, o0_ + meta['D0'] * mm - rw2) if (args.grade or args.day) else None,
-                                grade=(1.4, 0.8) if args.grade else (1.0, 1.0),
+                                grade=tuple(args.grade_edge_mid) if args.grade else (1.0, 1.0),
                                 occl=[(meta['S'][0] * mm, meta['S'][1] * mm, meta['P']['platter_d'] / 2 * mm, 0.6, 0.035),
                                       (meta['A'][0] * mm, meta['A'][1] * mm, meta['P']['puck_d'] / 2 * mm, 0.5, 0.018)] if args.day else None)
             for p in o.data.polygons:
@@ -1148,12 +1188,16 @@ def setup_world(args, meta):
             if o.type == 'LIGHT':
                 o.data.energy *= args.ambient; o.data.color = (0.70, 0.78, 1.0)
         bg.inputs['Color'].default_value = (0.010, 0.013, 0.025, 1)
-        if args.kicker > 0:
+        if args.kicker > 0 or args.rim > 0:
             # gate 1: a low warm kicker from the front right and a rim from behind left, small and tight, so the arm,
             # the posts, the base's edge and the feet read at night; warm white, nothing colored on the floor
-            kk = area('kicker', (0.25, 0.08), (cx + 0.55, cy - 0.55, 0.16), (cx + 0.10, cy + 0.02, 0.07), args.kicker, col=(1.0, 0.86, 0.70), spread=15, caust=False)
-            kk.visible_camera = False
-            rr = area('rim', (0.30, 0.06), (cx - 0.45, cy + 0.55, 0.14), (cx + 0.05, cy, 0.06), args.kicker * 0.8, col=(1.0, 0.88, 0.74), spread=15, caust=False)
+            if args.kicker > 0:
+                kk = area('kicker', (0.25, 0.08), (cx + 0.55, cy - 0.55, 0.16), (cx + 0.10, cy + 0.02, 0.07), args.kicker, col=(1.0, 0.86, 0.70), spread=15, caust=False)
+                kk.visible_camera = False
+            rim_e = args.rim if args.rim > 0 else args.kicker * 0.8
+            # gate 2: low (under the record's plane, so the vinyl cannot mirror it) and behind right: it rakes the posts,
+            # the base's edge and the feet
+            rr = area('rim', (0.30, 0.04), (cx + 0.40, cy + 0.50, 0.045), (cx - 0.02, cy - 0.02, 0.035), rim_e, col=(1.0, 0.88, 0.74), spread=15, caust=False)
             rr.visible_camera = False
         if args.reflector > 0:
             # gate 1: one large, dim, soft source behind the deck, at the camera's mirror over the deck's top, so a long
@@ -1293,6 +1337,8 @@ if __name__ == '__main__':
     ap.add_argument('--grade', action='store_true'); ap.add_argument('--reflector', type=float, default=0.0)
     ap.add_argument('--kicker', type=float, default=0.0); ap.add_argument('--base-rough', type=float, default=0.0)
     ap.add_argument('--pan', type=float, default=0.0)
+    ap.add_argument('--rim', type=float, default=0.0); ap.add_argument('--blacken', action='store_true')
+    ap.add_argument('--grade-edge-mid', type=float, nargs=2, default=(1.4, 0.8))
     ap.add_argument('--core-glow', type=float, default=0.0)
     ap.add_argument('--day', action='store_true'); ap.add_argument('--ambient', type=float, default=0.05)
     ap.add_argument('--base-tint', default='smoke')

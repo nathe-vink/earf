@@ -42,3 +42,14 @@ r a4-night-ember-2423-g1 --model out-strata-v4 --colour ember-2423 $NIGHT3 --cor
 r a4-night-poison-2092-g1 --model out-strata-v4 --colour poison-2092 $NIGHT3 --core-glow 8
 r a4-day-ember-2423-g1 --model out-strata-v4 --colour ember-2423 --day --strip 0 --core-glow 7 --strip-color 0.848 0.124 0.168 --exposure -2.0 $G
 fi
+# the gate's second pass (09:30, three judges): reflector tape round the core (no light out of the edges), the rings'
+# tops printed black under the skin (no lit border), the glow graded brighter in the field than at the rim
+# (--grade-edge-mid 0.75 1.1), Poison's glow 12; at night no reflector and no front kicker, only a low rim under the
+# record's plane (--rim 0.6) and the room at 0.3 %; the bearing's brass blackened under the deck (--blacken)
+G2="--pan 0.05 --base-rough 0.12 --blacken"
+NIGHT4="--strip 150 --strip-color 1.0 0.55 0.25 --ambient 0.003 --exposure -1.0 --grade --grade-edge-mid 0.75 1.1 --rim 0.6 $G2"
+if [ "$1" = g2 ]; then
+r a4-night-ember-2423-g2 --model out-strata-v4 --colour ember-2423 $NIGHT4 --core-glow 4
+r a4-night-poison-2092-g2 --model out-strata-v4 --colour poison-2092 $NIGHT4 --core-glow 12
+r a4-day-ember-2423-g2 --model out-strata-v4 --colour ember-2423 --day --strip 0 --core-glow 7 --strip-color 0.848 0.124 0.168 --exposure -2.0 $G2
+fi

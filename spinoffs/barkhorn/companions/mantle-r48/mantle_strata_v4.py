@@ -18,6 +18,11 @@ flat lightbox, and the groove and the bottom arris as lines. So: the skin is 5.6
 the dots sparser (about 5 % near the strip to 35 % inside); the groove's ceiling printed white over black (opaque from
 above; the light enters the core through the groove's clear sides); the rings' undersides printed white over black (no
 light leaves by the bottom arris); the strip 2 W/m.
+The gate's second pass (09:30): light left by the edges as two lines, and the tinted border lit as an outline. So: a
+reflector tape round the core's perimeter (white toward the core, black outside: 3M or Oracal white-backed, about
+$1 a deck), so the core's light leaves only up, through the dots; the rings' tops printed black before the skin is
+cemented on, so no light reaches the border, which reads as dark tinted glass; the bearing's nut, washer and housing
+blackened (chemical black on the brass) so they do not glint under the deck.
 v3's notes follow.
 
 Mantle, proposal A, v3: STRATA FLOAT, the detail pass (round 48). The coordinator's duels (v2 over v1 3-1; v2 and
@@ -236,7 +241,13 @@ def parts(P):
     l0 = D['lams'][0]; zc = max(l['z1'] for l in D['lams'] if l['kind'] == 'tint')
     core_full = prism(poutline(P, D, l0['inset'] + rw), 'z', l0['z0'], zc)
     core_vis = cut(prism(poutline(P, D, l0['inset'] + rw + 0.05), 'z', l0['z0'], zc - 0.05), cuts)
-    out[0].pieces = {'stack': (plinth_one - core_full, 'acrylic-strata'), 'core': (core_vis, 'acrylic-core')}; out[0].render = True
+    # gate 2: the rings and the skin apart too, so the render can give the rings' tops and the skin's underside over
+    # them their black print; the skin's underside over the rings 0.02 higher than over the core, so they are faces apart
+    ztop = D['top']
+    rings_vis = cut(prism(poutline(P, D, 0.0), 'z', l0['z0'], zc) - prism(poutline(P, D, l0['inset'] + rw), 'z', l0['z0'] - 1, zc + 1), cuts)
+    skin_vis = cut(union(prism(poutline(P, D, l0['inset'] + rw), 'z', zc + 0.05, ztop),
+                         prism(poutline(P, D, 0.0), 'z', zc + 0.07, ztop) - prism(poutline(P, D, l0['inset'] + rw), 'z', zc, ztop + 1)), cuts)
+    out[0].pieces = {'rings': (rings_vis, 'acrylic-strata'), 'skin': (skin_vis, 'acrylic-strata'), 'core': (core_vis, 'acrylic-core')}; out[0].render = True
 
     # ---- the base: one 9.5 sheet, 35 in from the deck; the light's slot from below; the feet under the posts ----
     feet = list(posts)

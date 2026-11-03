@@ -1,9 +1,17 @@
 {
  "parts": {
-  "plinth-L1-stack": [
+  "plinth-L1-rings": [
    10.0,
    10.0,
    68.7,
+   460.0,
+   370.0,
+   87.7
+  ],
+  "plinth-L1-skin": [
+   10.0,
+   10.0,
+   87.7,
    460.0,
    370.0,
    93.3
@@ -354,7 +362,8 @@
   ]
  },
  "finishes": {
-  "plinth-L1-stack": "acrylic-strata",
+  "plinth-L1-rings": "acrylic-strata",
+  "plinth-L1-skin": "acrylic-strata",
   "plinth-L1-core": "acrylic-core",
   "base-L1-stack": "acrylic-base",
   "led-channel": "black",
