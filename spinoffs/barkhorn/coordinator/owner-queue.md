@@ -3406,3 +3406,4 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   (PROPOSAL) a pale sphere with a clear edge, core/gap 1.05 (the gate's 1.3-1.6 not reached in this room); OKLCH 226; the seat clean; the
   lower-edge streaks are the oak table refracted through the Ice tint (physical, not painted out). Night: the new rig; the opal core glowing
   evenly in dark clear tint, no cone, the white dot in; OKLCH 221; left to judge: faint speckle in the core's reflection at the crown.
+- 21:46 the Core B pair gate launched wf_6daa1676-c18 (the day with the sun on the ball and the wall in shade; the night on the honest rig).
