@@ -40,7 +40,9 @@ Show one item with its pictures, wait for the answer, save the owner's words ver
     with red-orange edges under a golden horn, the 9097 long-path model, being fixed in the shared tint model; linings near-black; the
     base 27 px above its reflection; its rim light was linked to the speaker alone, now unlinked). Poison: the lip's white check-mark
     being traced (its litter lamp was at specular 0, now 1.0). Fog's final rendering (the first with real flag and cards). The flag and
-    cards are real objects from 18893298 on; a Haze A/B decides whether the passed frames stand (under ~2 levels on the speaker).
+    cards are real objects from 18893298 on (out of frame from 3fdd6d22; the sun-side card left out under a low sun from 5f4116fe). The
+    Haze A/B (21:30): reflection-only against real cards differs only by noise on the speaker (mean 1.57, p95 4), so the passed Dust, Ice
+    and Ember stand as rendered.
     Every habitat tint is on spec within 0.2 points (20:33).
   - The tint densities (Haze, Poison) wait for those finals.
   - The bar pictures (state at 20:47): every r43 frame hid kit43's shelf LED strips from camera and gloss (ruling 1): fixed from

@@ -3371,3 +3371,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 21:28 sent to the speaker lane: the room rig's fixes (honest daylight into the lower cabinets: a lower sill or a sunlit floor patch, and
   the bounce checked; the side face by geometry or light; the green on the wall moved; the door stripe; the emitter check), after the
   hero and row proxies, with the portrait and deck-home proxied together. To c2: the room (phase-1 chunk 4) held until that SHA.
+- 21:30 biomes lane: the Haze A/B (the new Haze settings; reflection-only cards against real cards out of frame): noise on the speaker
+  (horn mean 1.57, p95 4, 101.4 against 100.9; cabinet mean 1.57, p95 4, 15.5 against 14.8), so the passed Dust, Ice, Ember (and Haze v1)
+  stand as rendered. The real card on a low sun's side threw a long shadow over the foreground: left out under a low sun from
+  5f4116fe830e958d59e56ebde7562f3b700aadb3 (the far card stays). Haze at sun 135: horn max 144 (hue 247), upper box 38 (was 26; target 45-60,
+  hue 241), lower box 18; horn and box one violet (6 degrees apart); horn-to-box 13.7x (the set 0.9-1.7). Next: the sun to the front side
+  (azimuth 70) so daylight reaches the batts through the front; if the box still won't reach 45, the density question goes to the owner.
