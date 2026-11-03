@@ -3540,3 +3540,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   sheet, it's the white voile behind dense green, to be reported with numbers.
 - 22:49 check-in #51 fired (trig_01GAD9XFgdv8MALVR8RgobEM); its two gates were already collected. Check-in #52 armed for 23:39 with the
   current state (the floor-band diagnosis open; the deck renders running; the pending fix1, Acid, back and turn work).
+- 22:5x fix1 tall + side gate wf_6936b3e8-817 (3 critics, ~36 min): tall Ice SHOW 3/3; tall Fog SHOW 3/3 (they stand). Tall Poison HOLD 0/3
+  and tall Haze HOLD 0/3: the right side face's front-edge stripe and lower third grey (Poison S 0.09-0.18; mirroring the bright sweep and
+  lit floor) and the top panel's front edge neutral grey (S 0.02-0.07, reflection only); fix: real black cards out of frame, camera-right
+  down to the floor and overhead in front. Side Ember, Dust, Poison HOLD 0/3: a pale ~6 px line along the bottom edge and round the front
+  corner (the polished bottom edge reflecting or piping the bright floor; a lit strip or plate at the base); also the pod's clipped
+  highlight, the handle slot like a lit pill.
+- 22:59 sent to the speaker lane: these results; the hypothesis that the wide frames' "white plate" is the same bottom edge from the wide
+  angle (test first, one-lamp-off crops and a low card); one SHA with the flags for tall, side and wide, re-proved on tall Poison, side
+  Ember and wide Ember; the remaining fix1 frames re-render on it.
