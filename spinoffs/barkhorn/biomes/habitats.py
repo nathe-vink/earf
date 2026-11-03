@@ -34,13 +34,15 @@ SETS = {
               'lights.crack_r.target': [0.0, 0.0, 0.5], 'lights.crack_r.irradiance': 2.0},
     # the coordinator's gate on Haze (2026-11-03): with the sun behind, the lining batts block the backlight and the
     # cabinet sits in its own shadow (a near-black box). The key from the side, as in Dust (sun at 118, passed)
-    'haze_b': {'sun.azimuth_deg': 100.0},
+    # (the sun lamp at 1.5 deg is lost in the grass and hills: 6 deg as Dust's; the sky's own sun disk turned with it,
+    # 248.3 -> 187.8, so the sky and the lamp agree and nothing bright sits behind the speaker)
+    'haze_b': {'sun.azimuth_deg': 100.0, 'sun.elevation_deg': 6.0, 'world.rotation_deg': 187.8},
     'fog_b': {'sun.azimuth_deg': 110.0},
-    # Poison under the canopy: a sunfleck from the shot's own sun (azimuth -100, 42 deg up), as through a canopy gap,
-    # on the speaker's back-left, its light through the green toward the camera (the fills that lit the lining are off)
-    'poison_g5': {'lights.sunfleck': {'type': 'area', 'size_m': [0.9, 0.9], 'target': [0.0, 0.0, 0.6], 'irradiance': 12.0,
-                                      'color': '#FFE6B8', 'orbit': {'azimuth_deg': -100, 'elevation_deg': 42, 'distance_m': 3.0},
-                                      'specular': 1.0}},
+    # Poison under the canopy: light through a canopy gap from the camera side and above (the opaque lining batts block
+    # any light from behind: a sunfleck from the back-left left the cabinet at L 2)
+    'poison_g5': {'lights.skygap': {'type': 'area', 'size_m': [1.6, 1.6], 'target': [0.0, 0.0, 0.6], 'irradiance': 4.0,
+                                    'color': '#EEF2E2', 'orbit': {'azimuth_deg': 30, 'elevation_deg': 55, 'distance_m': 3.0},
+                                    'specular': 1.0}},
 }
 # set props left out (the coordinator's gate on Dust, 2026-11-03: the tumbleweed floats, its shadow detached)
 DROP = {'dust': ['tumbleweed']}
