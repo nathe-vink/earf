@@ -2389,3 +2389,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   against the sheet (Ember passes ~10 % through two walls).
 - 16:30 sent to the bar lane: those fixes, and the same staging for r43-shop, r43-window and r44 before sending (a lit background, a
   camera-side key, no doorway or window behind); a proxy each; I'll gate each.
+- 16:33 bar lane: the r43-window final at e29bd63bce8b05c6a251087d5915fd891996cf10 (1200 x 800, 128 samples, 285 s, 3.1 GiB). One camera
+  change: with the window plinth gone the pair stands 0.7 m behind the shopfront's 0.30 m bulkhead, which hid the bottom third from the
+  old camera (3.8 m out, eye 1.35 m, 40 mm); now 2.6 m out, eye 1.80 m, 28 mm, the pair whole above the bulkhead (recorded in the
+  shot's title; moving the pair deeper would be a layout change). The r43 set: listening 7cdce50f, shop e518e55f, window e29bd63b.
+  Next r44 from look 1's kit.
+- 16:34 my gate wf_0c7eee9d-d07 on r43-shop and r43-window (the old versions as context). Sent: r43-listening's re-stage first; shop
+  and window held until this gate is back, re-staged only if they fail; r44 with the staging principle built in.
