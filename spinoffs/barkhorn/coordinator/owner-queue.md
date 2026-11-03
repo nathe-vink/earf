@@ -3382,3 +3382,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   pixels in the horn 214 to 935, on the rim), the phase plug a lit silver rosette (58 to 157 px), the lower-right ray ~60 % stronger, the
   woofer a lighter grey; the cabinet, floor, grounding and batt unchanged. "Use this version rather than the 30 % one." Optional only:
   for a tight horn crop, move or enlarge the lamp (never dim its reflections). Item 6 ready with the disclosure.
+- 21:30 speaker lane: the room and the portrait have no flags or cards (set.flags empty), so the portrait was clean on that count; the
+  honest A-ice-polished pushed in f7f03850 with its .shot.json and .report.json; the turn-flag test (01, 02, 04, 05 with and without flags at
+  640 x 576) 5 of 8 frames done; its order: the hero proxy, the row (a), the room rig, the 9097 fix, the turn result, the amp plate, back,
+  hero-light.
