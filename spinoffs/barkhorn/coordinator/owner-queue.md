@@ -3512,3 +3512,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   sRGB (70,67,32), olive; exposure alone (+0.75 EV) reaches only ~(95,91,45); so both levers at c906e16d1955483ebe8a10b7e3f8c503175360ef: the
   camera's global exposure -0.1 to 0.65 (+0.75 EV) and the low sun 10 to 18 (a break in the rain cloud). One Acid proxy after the Poison and
   Fog finals and the Haze final; the lit-face L* and the sky's top end reported before Acid's final; it stops if the sky would clip.
+- 22:33 c3: fix1 chunk 5 landed on 3b541d9d at fa56103efc1eb94d562e1e5354ef58d92627db65 (21:52-22:33; wide Poison 12.1 min 2.01 MB, Ice 13.8/2.06,
+  Haze 12.9/2.03; no errors; likely the same floor band and side strip, not gated); merged 5957b9f9 (05443be742a3e5029dd103eb499a2b5d759ee770);
+  the deck hero (phase-1 chunk 1, ~84 min) from 22:35; the portrait on 95876493 after it. (Its stamp read 22:35 at a 22:33 queue time.)
