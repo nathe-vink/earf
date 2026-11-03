@@ -1704,3 +1704,17 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   bowl shadow); not met: the lit dome 180 vs 203 by day (23 degrees); a sweep gives 186 at 6500 K and 192 at 8000 K, so it is the
   dye at full strength through 3 mm shifting toward cyan, not exposure; closable only with a lighter shell dye or a bluer day
   reference (an owner call if the gate cares). Gate wf_286ca581-a1f on both pairs started 13:05.
+- 13:09 Mantle lane g5 (Ember pair; frames 8c57366dc800ee56c4a04ab7e6405d29118962ba; design answer README s13 4faa9d61; scene 3f5d2679):
+  the border and groove ceiling carry the field's own sparse dots (5 % at the rim) with the black overprint, the day bake following
+  the real ramp (no lip line, dark at night); the lacquered edges and black print glossy, the rings' edges polished (the sides read as
+  see-through dark red glass by day), the base glossy; Ember night glow a third down (1.9) with a gentle falloff 1.0 rim to 0.8 inside,
+  AgX base contrast, reflections over the glow, no arcs; a neutral rim light threw a floor glare (out). The arm: the shadow-ray change
+  works (a white diffuse test arm reads red 91 vs 77); the real arm, pillar and rest are near-black anodized, so they stay near black:
+  physics. THE DESIGN ANSWER: "lacquer by day, lightbox at night" is mostly inherent to v4 (a backlight: a light guide with a printed
+  backer under a tinted skin). Options per unit over v4: A as is (+$0); B a thicker skin 9.5-12.7 (deeper colour, darkening at grazing
+  angles, still opaque; a half to one stop dimmer at night; +$15-25); C a partly clear field (print only in a rim band or pattern,
+  clear windows elsewhere: by day you see down into the float, posts, motor, base, real depth; at night a lit frame or pattern round a
+  dark clear centre; +$0 plus design time); D a light-diffusing core (EndLighten-type: the truest glow from within, but it emits down as
+  much as up, so it breaks the floor rule unless backed, and backed it is opaque again; +$40-60); E a stronger graded print (+$0, still
+  a panel). The lane's reading: only C gives real depth by day and keeps the floor dark. v4 as is: +$140-160 over v3, $3,897 in parts;
+  deck 24.6 mm awaiting sign-off. Gate wf_9e88ad0b-a0f on the Ember pair started 13:09.
