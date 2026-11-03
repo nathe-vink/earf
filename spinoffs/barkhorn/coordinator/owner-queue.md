@@ -3313,3 +3313,5 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 21:01 c3: fix1 deck-home-portrait landed at b5dd5ebd82c8e5006a0a28fa5a09054dd1370e97 (23.7 min, 1600 x 2000, 4.27 MB, no errors); noted:
   the left speaker's right side face (toward the cabinet) reads pale cream, not green (the sunlit wall mirrored, or the side sheen).
   Waiting for the next SHA (chunks 4, 5).
+- 21:04 the fix1 deck-home-portrait gate launched wf_3d3ee524-9ea (context: the earlier portrait, held 2/3); the room rig's in-frame card
+  question still open with the speaker lane.
