@@ -2472,3 +2472,5 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   70-80 target (more key puts a hot pool on the floor and curtain; exposure unchanged). Ember matches the sheet (TruCast 2423, #CF0913
   at 25 mm: ~15 % through one 20 mm wall, ~10 % through two; TINTS.md stock 2423 14.1 %): deep by spec, see-into rather than open.
   r44-lantern was rendered before my staging note but has the lit oak slat wall behind and the pair's spots as key.
+- 17:11 bar lane: the re-staged r43-listening's SHA is df0c7394f73fcdade5afb2ca5af384ba98328612 ("7a58e9b7" was a slip). My gate on it
+  (the held version and the old House Book version as context) started 17:12.
