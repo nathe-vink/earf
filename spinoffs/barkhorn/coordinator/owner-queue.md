@@ -1693,3 +1693,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   seller's TT held at the sheet's own thickness); if the charts are 3 mm figures and thick sheet runs "deep", a 20 mm wall passes well
   under 1 % and none of these looks is possible. That is task #12 (held vs deep), which only physical 3/4 in off-cuts settle: the
   board's small-starts item (chips and off-cuts, ~$150-200, awaiting the owner's yes). The Smoke question will carry that.
+- 12:53 speaker lane: the E study's commit is a32a250d76947ec28eaeafc4168a9c97f0846b3f (its message had a placeholder). Polished A
+  rendering (~15 min, gate2/A-ice-polished.png), then the D night re-render. BASES.md: 26c334ee (D's runs as built: six runs ~1.23 m, the
+  brace's rear member, the floor film and its 7.5 % reason; 155.5 L gross; 0.84 m, 204 Hz; the voile colour flagged, tied to Smoke's
+  lining); 7c6d272d (the neon-line build note: strips 40 mm from any clear rib, batts butted at the ribs); the D+ and E section next.
