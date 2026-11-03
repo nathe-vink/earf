@@ -329,6 +329,35 @@ def _hero_gate3(s):
     _siteG_round1(s, 'front-off-tall', 'ember')
     if 'topline' in s['lights']:
         s['lights']['topline']['strength'] = round(s['lights']['topline']['strength'] / 3, 3)
+    # (its proxy: the side face deep red, 0.58 to 0.83 saturation above, but the top chamber still clipped on 38 % and
+    # the lid's strip still grey, 170: from this camera, 0.4 m above the lid, the strip is the lid's top at a grazing
+    # angle mirroring the bright sweep behind, about 1.5 m left of the speaker at 2.6 m back. A reflect-only black card
+    # there, and the top light down again, to 0.4 of the rig's)
+    if 'horn' in s['lights'] and s['lights']['horn'].get('irradiance'):
+        s['lights']['horn']['irradiance'] = round(s['lights']['horn']['irradiance'] * 0.6, 3)
+    s['set'].setdefault('flags', []).append({'center_m': [-1.2, 2.5, 1.1], 'size_m': [2.6, 1.6], 'normal': [0.46, -0.88, -0.16],
+                                             'reflect_only': True, 'color': '#050505'})
+    # (the second proxy: the lid's strip 170 to 105 and red, but the top chamber still clipped on 30 %. Crop tests on it:
+    # the fill at half 25 to 23 %, the key at 0.6 25 to 0 %, (204, 63, 63) to (188, 45, 46). The key it is, but the key
+    # at 0.6 everywhere took the front from 110 to 71 and the floor right of the speaker from 245 to 155. So the key is
+    # split: 0.6 of it lights everything, and the other 0.4 everything but the top chamber's linings (left-3, right-3 and
+    # top-3), the coral; crop tests with the lower and back linings given it again kept the chamber at 0 % clipped)
+    # (the fourth proxy: the lower right face still brownish, saturation 0.45: from 0.4 m down, its mirror rays fall to
+    # the floor within a metre behind and right of the speaker, short of the card. A reflect-only black patch there)
+    s['set']['flags'].append({'center_m': [0.62, 0.75, 0.004], 'size_m': [0.9, 1.5], 'normal': [0.0, 0.0, 1.0],
+                              'reflect_only': True, 'color': '#050505'})
+    L = s['lights']
+    # (the fifth proxy: the right face deep red, (52, 1, 1) low and (82, 23, 26) high, which shows the `edge` glint as a
+    # white bar a little in from its front edge, hidden before under the face's pale reflection: to a third)
+    if 'edge' in L and L['edge'].get('power_w'):
+        L['edge']['power_w'] = round(L['edge']['power_w'] / 3, 3)
+    if 'key' in L and L['key'].get('irradiance') and 'kick' in L:
+        k = L['key']['irradiance']
+        L['key-rest'] = {**L['key'], 'irradiance': round(k * 0.4, 3),
+                         'receivers': [r for r in L['kick']['receivers'] if r != 'cloth-disc']
+                                      + ['sweep', 'horn-*', 'caldera*', 'strata-*', 'mark-*', 'feet*',
+                                         'lining-bottom-*', 'lining-*-2*', 'lining-back-*']}
+        L['key']['irradiance'] = round(k * 0.6, 3)
     return s
 
 
