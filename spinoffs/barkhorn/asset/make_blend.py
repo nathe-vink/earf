@@ -40,7 +40,7 @@ COVER = ('cloth-disc', 'disc-frame')
 STRATA_HIDE = ['cloth-disc', 'horn-throat', 'post-*', 'post-sleeves', 'post-sockets', 'waveguide', 'woofer-ring', 'feet-*']
 # Strata stands on base A, the stepped plinth lit from underneath (the owner, 2026-11-01): the variants' options, and
 # everything lifted by the plinth's height so its feet stand on z = 0 (variants/BASES.md)
-STRATA_OPTIONS, STRATA_LIFT = ['Plinth', 'Plinth light'], 0.0385
+STRATA_OPTIONS, STRATA_LIFT = ['Plinth', 'Plinth uplight'], 0.0385   # the uplight since 2026-11-02 (the owner: the light goes up)
 DESIGNS = {'current': [('studio/products/barkhorn-cloud.json', [])],
            'strata': [('studio/products/barkhorn-cloud.json', STRATA_HIDE),
                       ('studio/products/barkhorn-variants.json', ['horn-topo*'])]}
@@ -129,8 +129,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--out', default=str(HERE / 'tropos.blend'))
     ap.add_argument('--design', default='current', choices=sorted(DESIGNS))
-    ap.add_argument('--name', default=None, help='the collections\' prefix (default Tropos, Tropos Strata, or Tropos Strata Smooth)')
-    ap.add_argument('--horn', default='stepped', choices=sorted(HORNS), help='Strata\'s horn: stepped (the lead) or smooth (the option)')
+    ap.add_argument('--name', default=None, help='the collections\' prefix (default Tropos, Tropos Strata, or Tropos Strata Stepped)')
+    ap.add_argument('--horn', default='smooth', choices=sorted(HORNS), help='Strata\'s horn: smooth (the owner\'s pick, 2026-11-03: "Horn: A, smooth, satin outside") or stepped (the alternative)')
     ap.add_argument('--full', action='store_true', help='keep every triangle (no LIGHTER)')
     ap.add_argument('--tints', default='line', choices=['line', 'site', 'trucast'],
                     help="the line's own (default: the product files as product.py writes them, colors F since "
@@ -142,7 +142,7 @@ def main():
 
     bpy.ops.wm.read_factory_settings(use_empty=True)
     a.name = a.name or ('Tropos' if a.design == 'current' else f'Tropos {a.design.title()}'
-                        + (' Smooth' if a.horn == 'smooth' else ''))
+                        + (' Stepped' if a.horn == 'stepped' else ''))   # the owner's horn (smooth) keeps the plain name
     objs, part_of = [], {}
     for prod_path, hide in DESIGNS[a.design]:
         if a.design != 'current':                 # the smooth horn: its parts shown, the stepped one hidden
