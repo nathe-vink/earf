@@ -23,6 +23,13 @@
    "glow": 680.0,
    "glow_color": "#FFCEA6"
   },
+  "builtin-led-brace": {
+   "preset": "frosted",
+   "color": "#F4F2EE",
+   "absorb": "#F0EEEA",
+   "glow": 680.0,
+   "glow_color": "#FFCEA6"
+  },
   "channel": {
    "preset": "plastic",
    "color": "#111111",
@@ -83,8 +90,12 @@
    "material": "brass"
   },
   {
-   "match": "builtin-floor-led|builtin-brace-led",
+   "match": "builtin-floor-led",
    "material": "builtin-led"
+  },
+  {
+   "match": "builtin-brace-led",
+   "material": "builtin-led-brace"
   },
   {
    "match": "base-uplight-channel|base-uplight-plate|builtin-floor-channel|builtin-brace-channel|base-lplate-tray",

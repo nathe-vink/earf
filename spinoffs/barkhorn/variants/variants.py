@@ -278,7 +278,7 @@ def parts(P):
             for f in (0.08, 0.5, 0.92):           # three nylon standoffs a run
                 x, y = ax + f * (bx - ax), ay + f * (by - ay)
                 bs.append(Pos(x, y, z0 + sh / 2 + 0.05) * Box(sw, sw, sh - 0.1))
-        out.append(product.Part(f'builtin-{key}-led', _C(children=bl), product.Bought('builtin-strip'), finish='builtin-led', group='base',
+        out.append(product.Part(f'builtin-{key}-led', _C(children=bl), product.Bought('builtin-strip'), finish='builtin-led' if key == 'floor' else 'builtin-led-brace', group='base',
                                 option='Built-in light',
                                 notes=[f'the built-in light ({key}): COB strip, 24 V, 20 W/m, 4000 K, its frosted lens in a black U-channel, '
                                        'aimed straight up inside the cabinet (a proposal; variants/BASES.md)']))
@@ -350,7 +350,8 @@ PRODUCT = dataclasses.replace(
                'uplight-wash': {'preset': 'frosted', 'color': '#F4F2EE', 'absorb': '#F0EEEA', 'glow': 188.0, 'glow_color': '#FFCEA6'},
                'uplight-panel': {'preset': 'frosted', 'color': '#F4F2EE', 'absorb': '#F0EEEA', 'glow': 52.0, 'glow_color': '#FFCEA6'},
                # the built-in light: 20 W/m electrical, about 6 W/m of light through an 8.6 mm lens, 680 W/m2 at full
-               'builtin-led': {'preset': 'frosted', 'color': '#F4F2EE', 'absorb': '#F0EEEA', 'glow': 680.0, 'glow_color': '#FFCEA6'}},
+               'builtin-led': {'preset': 'frosted', 'color': '#F4F2EE', 'absorb': '#F0EEEA', 'glow': 680.0, 'glow_color': '#FFCEA6'},
+               'builtin-led-brace': {'preset': 'frosted', 'color': '#F4F2EE', 'absorb': '#F0EEEA', 'glow': 680.0, 'glow_color': '#FFCEA6'}},
     kind='Tropos design-pass proposals: Strata\'s caldera and the Topo horn',
     notes=['Proposals beside the current design (variants/README.md); the Cloud\'s CAD is unchanged.'],
     origin=(280.0, 213.7, -12.0), drawing_prefix='BHV')
