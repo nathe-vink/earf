@@ -59,13 +59,16 @@ def build(frame, samples, scale):
     MM = SC.MM
     tz = 0.62                                                           # the table's top
 
-    def sphere(nm, r, z, mat, inward=False, cut=None, loc=(0, 0), hole=None):
+    def sphere(nm, r, z, mat, inward=False, cut=None, loc=(0, 0), hole=None, hole_below=None):
         bm = bmesh.new()
         bmesh.ops.create_uvsphere(bm, u_segments=256, v_segments=128, radius=r * MM)
         if cut is not None:
             bmesh.ops.delete(bm, geom=[v for v in bm.verts if v.co.z < cut * MM - 1e-9], context='VERTS')
         if hole is not None:                      # the collar's hole at the crown (the CAD's: Ø96.4)
             bmesh.ops.delete(bm, geom=[v for v in bm.verts if math.hypot(v.co.x, v.co.y) < hole * MM and v.co.z > 0],
+                             context='VERTS')
+        if hole_below is not None:                # an opening at the bottom (Core B's core over the window)
+            bmesh.ops.delete(bm, geom=[v for v in bm.verts if math.hypot(v.co.x, v.co.y) < hole_below * MM and v.co.z < 0],
                              context='VERTS')
         if inward:
             bmesh.ops.reverse_faces(bm, faces=bm.faces)
@@ -151,7 +154,9 @@ def build(frame, samples, scale):
             # round 9 (the gate: the Ø90 core too small, "an LED orb in a black bubble"): Ø120, its center 12 below the
             # outer's, on a short spacer ring on the grommet; a 13 gap at its equator
             ri = float(os.environ.get('CORE_IN_R', '60.0')); zi = zc - float(os.environ.get('CORE_IN_DZ', '12.0')) * MM
-            sphere('core', ri, zi, acrylic('core', 0.0, 'Clear', scratch=0.0))
+            # round 9: the core open at its base, Ø40 over the window, seated on the grommet's ring: the LED lights the
+            # frost directly (closed, all its light reached the frost through the polished shell, a caustic: noise)
+            sphere('core', ri, zi, acrylic('core', 0.0, 'Clear', scratch=0.0), hole_below=20.0)
             cm = frosted(acrylic('core-in', inner, 'Clear', scratch=0.0))
             # round 9: the printed dot over the LED, modelled in the frost itself (a separate surface beside the frost
             # made hard paths that the denoiser blotched): within 25 of the axis at the bottom the frost passes about
@@ -161,7 +166,7 @@ def build(frame, samples, scale):
             tc_ = nt.nodes.new('ShaderNodeTexCoord'); sx = nt.nodes.new('ShaderNodeSeparateXYZ')
             nt.links.new(tc_.outputs['Object'], sx.inputs[0])
             mr_ = nt.nodes.new('ShaderNodeMapRange'); mr_.clamp = True
-            zd = -math.sqrt((ri - 3.0) ** 2 - 25.0 ** 2) * MM
+            zd = -math.sqrt((ri - 3.0) ** 2 - 32.0 ** 2) * MM   # the dot Ø64 round the opening
             mr_.inputs['From Min'].default_value = zd - 0.001; mr_.inputs['From Max'].default_value = zd + 0.006
             mr_.inputs['To Min'].default_value = 0.6; mr_.inputs['To Max'].default_value = 0.0
             nt.links.new(sx.outputs['Z'], mr_.inputs['Value'])
@@ -169,7 +174,7 @@ def build(frame, samples, scale):
             mx2 = nt.nodes.new('ShaderNodeMixShader')
             nt.links.new(mr_.outputs['Result'], mx2.inputs[0]); nt.links.new(prev.outputs[0], mx2.inputs[1])
             nt.links.new(dk.outputs[0], mx2.inputs[2]); nt.links.new(mx2.outputs[0], outn.inputs['Surface'])
-            sphere('core-in', ri - 3.0, zi, cm, inward=True)
+            sphere('core-in', ri - 3.0, zi, cm, inward=True, hole_below=20.0)
             # round 9 PROPOSAL (the gate: the LED hotspot): a white dot printed inside the core over the LED, Ø50, that
             # sends about half the near light back up into the core, as LED globes do
             if os.environ.get('CORE_DOT', '0') == '1':   # round 9: as a surface it blotched (see below)
@@ -270,7 +275,7 @@ def build(frame, samples, scale):
     if night:
         # round 4: a white ceiling at 2.5 m, so the lamp's light that leaves upward comes back into the room, as at home
         SC.plane('ceiling', (4.3, 4.0), (0.85, 0.0, 2.5), (180, 0, 0), SC.principled('ceiling', '#E8E4DC', 0.9))
-        ev = float(os.environ.get('NIGHT_EV', '4.0' if prod == 'core' else '0.6'))
+        ev = float(os.environ.get('NIGHT_EV', '2.5' if prod == 'core' else '0.6'))
         k = 2.0 ** (0.6 - ev)                     # round 9: one evening room for the family, the same fill at each exposure
         SC.world(hdri='kiara_9_dusk', strength=0.02 * k, rotation=200)
         w = bpy.context.scene.world
