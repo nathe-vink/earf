@@ -1301,3 +1301,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   own blue up the wall, from the top and upper walls); the horn a silhouette; floor pool 22 vs 23; front edge 37 vs 35; up/port 0.28
   vs 0.38. Next: the floor 10 W/m, the brace 30 W/m (~30 W), aiming 0.5. Then B day, B night 4, B night 5, D proxy, D day, D night,
   Smoke-D black, Smoke-D white: ~1 h 45 min.
+- 09:06 check-in #36: speaker lane on the comparison set (last head 12ae24ae, 08:56: B day, B night 4, B night 5, D proxy,
+  D day, D night, Smoke-D black and white; ~10:45); biomes lane on the seven habitats in the volume material (2229cb7c, 08:36);
+  the joint gate (Mantle g1 + the four lamp frames, wf_97dd1b84-14a) two judges working since 08:58, none back. Site held at
+  743be0cb; board v23; deck v68. Nothing new for the owner. Re-armed for 09:58 (#37).
