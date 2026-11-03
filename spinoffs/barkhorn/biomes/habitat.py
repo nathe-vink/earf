@@ -16,7 +16,7 @@ import argparse, json, math, os, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(HERE)))
-ASSET = os.path.join(HERE, 'assets', 'hornA2', 'tropos.blend')   # horn A, built from r33-speaker-horn b9758dd9 (make_blend.py --design current; the horn uncollapsed, its volumes closed); not in git
+ASSET = os.path.join(HERE, 'assets', 'hornA3', 'tropos-strata.blend')   # horn A: Strata's cabinet, caldera and bronze posts with the smooth formed horn, satin outside (r33-speaker-horn 0936e6d, the horn uncollapsed, its volumes closed); not in git
 
 
 def set_path(d, path, value):
@@ -197,7 +197,7 @@ def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extr
         if stand == 'feet':
             drop = []
             for o in list(col.all_objects):
-                if 'base-plinth' in o.name:
+                if 'base-plinth' in o.name or 'base-uplight' in o.name:   # base A and its light: the base is open
                     col.objects.unlink(o); drop.append(o)
             feet(bpy_, col)
             print('stand: on four feet; left out', [o.name for o in drop])
@@ -364,7 +364,7 @@ def main():
     ap.add_argument('--out', required=True); ap.add_argument('--samples', type=int, default=64)
     ap.add_argument('--scale', type=float, default=1.0)
     ap.add_argument('--asset', default=ASSET)
-    ap.add_argument('--collection', default='Tropos {tint}')
+    ap.add_argument('--collection', default='Tropos Strata {tint}')
     ap.add_argument('--light', action='append', default=[])
     ap.add_argument('--set', action='append', default=[], dest='sets')
     ap.add_argument('--stand', choices=['own', 'feet', 'plinth'], default='own')
