@@ -2749,3 +2749,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   the proxies hold: the new SHA, the fix chunk lines (21 site shots plus deck-row and deck-home-portrait) and the merge step for a helper on
   9db8da17; the deck hero to my gate.
 - 18:37 my gate on the deck hero (wf_45416aa0-452; the framing proof and Ice polished as context) started.
+- 18:41 the lamps lane's round 9 (975c37374c350df4214866857bbc07f0c08924be, 17:36, not reported to me: the Hemisphere pair with a cool-white
+  opal liner, night 195 against day 203 degrees; Core B day at full scale with the 120 core), then Core B night work to 18:30 (the printed dot
+  in the frost; no hairline wear on the nested balls; colour-only denoise; the core open over the window, c6729fc5). My gate on the
+  Hemisphere pair (wf_f2d79c77-58c) started; Core B waits for the lane's word that its night is done.
