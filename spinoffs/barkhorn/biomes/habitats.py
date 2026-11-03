@@ -39,10 +39,12 @@ SETS = {
     # 248.3 -> 187.8, so the sky and the lamp agree and nothing bright sits behind the speaker)
     # ruling 2 (the coordinator, 20:21): no part-links; the shot's rim lit the speaker's 99 parts alone, so it now lights
     # whatever it reaches
+    # (the sky's turn: a larger rotation_deg moves the HDRI's features to smaller azimuths (Acid's proxy at 237.1 put the
+    # bright sunset behind the speaker), so the sky turns by +delta where the sun turns by -delta)
     # (the coordinator's gate on 43ad3a3f: the lining near-black, 77 % of the cabinet; the same voile as Ice's, so the light:
     # the low sun behind at 148 deg, the batts block it. To three-quarter back, 120, as Dust's 118, the sky turned with it)
     'acid_b': {'product.instances.0.rotate_z': -8.0, 'lights.rim.receivers': None, 'sun.azimuth_deg': 120.0,
-               'sky.rotation_deg': 237.1},   # 28 deg off mirrored a wedge (crease 26.7), 10 deg off 13.7: 4 deg, as Ice
+               'sky.rotation_deg': 292.9},   # 28 deg off mirrored a wedge (crease 26.7), 10 deg off 13.7: 4 deg, as Ice
     # the polished horn mirrors the bright sky in one wall as a pale wedge (half an X) when it's turned far from the
     # camera; turned to about 10 deg off the camera's line it reads clean, as Ice's does (front-on gives a symmetric X)
     # (at -5, 10 deg off, Haze's narrow side face, seen near grazing, mirrored the bright sky as a flat lavender sheet;
@@ -53,7 +55,7 @@ SETS = {
     # (then the sun round to the front side, 70, the disk and sky with it: the upper box 26 -> 38 (at 135) -> 41, the
     # horn-to-box ratio 13.7 -> 4.5, horn and box one violet, 239 / 238 deg)
     'haze_b': {'product.instances.0.rotate_z': -10.0, 'sun.azimuth_deg': 70.0, 'sun.elevation_deg': 6.0,
-               'sky.rotation_deg': 157.8, 'camera.shift_y': -0.13},
+               'sky.rotation_deg': 338.8, 'camera.shift_y': -0.13},
     # Fog (the coordinator's gate on 45a190d1): the clear polished horn refracted the fog bank's top edge into an X.
     # The camera 0.30 m lower (lens rise 0.06 -> 0.18 keeps the framing) puts the whole horn on plain sky, and it is
     # turned 5 deg toward the front (-15 -> -10, not front-on). f/4 for a softer background; the sun's colour cooled
