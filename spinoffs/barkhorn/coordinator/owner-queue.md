@@ -2945,3 +2945,23 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   aed49790 at 4df9bebc861b732dbfab99a47a3b4d436e485580; fix1 chunk 4 (wide ember, dust, acid, ~87 min) started 19:26, then 5, then it waits.
 - 19:28 my gate on inside-ice and turn-ember 00-04 (wf_c262a578-fea) started: a rig check before the sprite's 168 frames render; frame
   01's pale face put to the critics. The horn-back set gates when c2's chunk 4 (ember, dust, acid, poison) lands.
+- 19:25 site lane: noted, holding (production at 743be0cb; r47-site-next at 7a8b5297f8ef15c3d62e922f6da97769a7ea7f96, no new commits). What
+  each item-4 option touches: new night pictures drop straight into the light stage's eight frames and the closing eight, the layout kept,
+  the gallery's "At night" view taking the new frames; day only drops HOME_V2's after-dark beat, the palette then needs a new home (the
+  coins on the hero, or a color chapter), the #colors anchor moves, the gallery's "At night" view goes.
+- 19:26 brand lane: holding; the wall picture's six brand uses listed in review/2026-11-03-words-2.md (the Book's images chapter, the partner
+  brief's cover and brief-preview-1.jpg, teaser beat 3, the Milan invitation's scenes/idea-milan.html and idea-milan.jpg, press/images.md);
+  all six swapped in one pass on the answer, their outputs regenerated.
+- 19:28 speaker lane: chunk 3 (the cover) stopped by PID within a minute of my 19:02 note, its partial output deleted. The deck hero's fix
+  proved at 0.3 scale (8a0161167977c5d5c4b097395f7bfac72e1c3560; the rollout hook a27e934c): the lower right face 0.22 to 0.98 saturation;
+  the top chamber's clip 71 % to 0 %; the lid strip (176,169,164) to (82,68,65). The fix: the tall front's round (sidesheen and through off,
+  the card, the top light down, the key 5 degrees round) plus reflect-only black cards behind-left and a black floor patch behind-right, the
+  top light at 0.4, THE KEY SPLIT (0.6 lights everything, 0.4 everything but the top chamber's linings), and "the edge glint to a third".
+  The cost: the through lamp's floor pool gone, the front 110 to ~75. The hero's full render started (~84 min). The cover's proxy (hero31's
+  rig, no sidesheen): no milky sides, but a pale pink patch on Ember's front upper left (mirroring a lamp above the camera), to fix before
+  chunk 3; chunk 4 after.
+- 19:29 sent to the speaker lane: stop the hero's render; the key split refused (a light linked off the linings behind the walls is one no
+  real lamp gives; the bar lane was held to the same rule); honest options: a real cutter (a blocker shading the whole top band), the key
+  lower with a little fill, the key moved, a gentler roll-off; "the edge glint to a third" kept only if it's a card's own strength, back to
+  1.0 if it's a specular multiplier; the cards, floor patch, top light and key turn fine; confirm the fix1 site rig (6f73a18c) has no such
+  link; the cover's lamp found and proved under the same rule; the new hero proof's numbers and SHA before its full render.
