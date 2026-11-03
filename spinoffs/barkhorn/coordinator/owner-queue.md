@@ -1012,3 +1012,13 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   (8 habitats x 2 frames, ~128 samples) 8-10 h; panorama ~4 h + 2.5 h render; planet ~2 h; 2-3 working days (helpers would halve the
   render share). Bar 8: habitats likely 7-7.5 (8 possible for Ember, Fog, Acid); the panorama format capped near 6.5-7. Reaching 8 across
   the board needs more samples, Megascans-class scanned assets (not only CC0) and a hero lighting pass per speaker with retouching.
+- 03:20 OWNER: "How come nothing from all of the update sessions has been updated, like across the site and such?" Checked: production
+  is main 856f80d70b55aac98853f23ea8fc44571e1adda7, deployed 2026-10-29 ~16:25 UTC (Vercel prj_XEC8Zp3D0V98Ldi6X7qWQ389MjGz, dpl_BvSJ8w7x);
+  33 commits wait on r47-site-next (American English, press kit, journal, mobile speed, link previews, cover-off, the held COPY_NEXT
+  drafts and the tagline); the new picture set was never rendered (paused through colors, horn, footing). Told the owner why (their yes
+  for production, and words held so they don't go up beside old pictures) and asked: publish the ready part now, or wait.
+- 03:26 OWNER: "The site can be improved greatly still" Saved verbatim first (README 51349380765b84a9400b75e37e72c034d8047da2). Read as:
+  don't publish as it stands; improve the site greatly first. Captured the live site (full page at 1440 and 390 px, in
+  scratchpad/siteaudit/) and the owner's 28 earlier site notes; running a five-lens critique (creative director, UX, copy, investor and
+  press credibility, skeptic) with a synthesis into no-regret fixes and three directions (wf_83a7e502-2f9). Then: directions to the owner
+  with examples, the site lane on the no-regret fixes.
