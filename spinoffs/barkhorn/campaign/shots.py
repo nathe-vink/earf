@@ -391,6 +391,8 @@ def _row_gate3(s):
                                              'reflect_only': True, 'color': '#050505'})
     s['lights']['sweep-left'] = {'type': 'area', 'size_m': [6.0, 4.0], 'position': [-4.5, -5.0, 4.0], 'target': [-3.5, -2.5, 0.0],
                                  'irradiance': 1.2, 'color': '#FFFFFF', 'receivers': ['sweep']}
+    # (its proxy: the glossy sweep at the bottom right mirrors the card, 237 to 215; the same lamp on the right)
+    s['lights']['sweep-right'] = {**s['lights']['sweep-left'], 'position': [4.5, -5.0, 4.0], 'target': [3.5, -2.5, 0.0]}
     return s
 
 
@@ -440,7 +442,8 @@ def _room_gate3(s):
         w['size'] = [w['size'][0], round(top - 0.9, 3)]
     s['sun']['elevation_deg'] = 8.0
     s['render']['view'] = 'AgX'
-    s['render']['exposure'] = round(s['render'].get('exposure', 0.0) - 0.67, 2)
+    # (its proxy: AgX sits about half a stop under PBR Neutral, so -2/3 left the cabinets near black: -2/3 + 1/2)
+    s['render']['exposure'] = round(s['render'].get('exposure', 0.0) - 0.17, 2)
     for blk in s['products']:
         for i in blk['instances']:
             x = i['position'][0]
