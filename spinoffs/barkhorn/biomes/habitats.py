@@ -32,6 +32,15 @@ SETS = {
     # rotate_z -1, not -5: at -5 the side panel's foot mirrored a lava patch as a hot streak, read as an LED strip
     'ember': {'product.instances.0.rotate_z': -1, 'camera.position': [2.4349, -6.0267, 0.8],
               'lights.crack_r.target': [0.0, 0.0, 0.5], 'lights.crack_r.irradiance': 2.0},
+    # the coordinator's gate on Haze (2026-11-03): with the sun behind, the lining batts block the backlight and the
+    # cabinet sits in its own shadow (a near-black box). The key from the side, as in Dust (sun at 118, passed)
+    'haze_b': {'sun.azimuth_deg': 100.0},
+    'fog_b': {'sun.azimuth_deg': 110.0},
+    # Poison under the canopy: a sunfleck from the shot's own sun (azimuth -100, 42 deg up), as through a canopy gap,
+    # on the speaker's back-left, its light through the green toward the camera (the fills that lit the lining are off)
+    'poison_g5': {'lights.sunfleck': {'type': 'area', 'size_m': [0.9, 0.9], 'target': [0.0, 0.0, 0.6], 'irradiance': 12.0,
+                                      'color': '#FFE6B8', 'orbit': {'azimuth_deg': -100, 'elevation_deg': 42, 'distance_m': 3.0},
+                                      'specular': 1.0}},
 }
 # set props left out (the coordinator's gate on Dust, 2026-11-03: the tumbleweed floats, its shadow detached)
 DROP = {'dust': ['tumbleweed']}
@@ -45,6 +54,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('out'); ap.add_argument('names', nargs='*')
     ap.add_argument('--samples', type=int, default=64); ap.add_argument('--scale', type=float, default=0.75)
+    ap.add_argument('--proxy', action='store_true', help='16 samples at half scale, whatever the habitat')
     ap.add_argument('--frame', choices=['portrait', 'landscape'], default='portrait')
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
@@ -59,7 +69,8 @@ def main():
             json.dump(sh, open(shot, 'w'), indent=1)
         # horn A on its own M8 feet (base A and its light left out), direct light stopped at the horn
         cmd = [sys.executable, os.path.join(HERE, 'habitat.py'), shot, tint, '--out', out,
-               '--samples', str(max(a.samples, SAMPLES.get(n, 0))), '--scale', str(a.scale), '--stand', 'feet', '--sink', str(SINK.get(n, 0.012)),
+               '--samples', '16' if a.proxy else str(max(a.samples, SAMPLES.get(n, 0))),
+               '--scale', '0.5' if a.proxy else str(a.scale), '--stand', 'feet', '--sink', str(SINK.get(n, 0.012)),
                '--horn-front'] + [x for k, v in lights.items() for x in ('--light', f'{k}={v}')] \
             + [x for k, v in SETS.get(n, {}).items() for x in ('--set', f'{k}={json.dumps(v)}')]
         with open(out.replace('.png', '.log'), 'w') as log:
