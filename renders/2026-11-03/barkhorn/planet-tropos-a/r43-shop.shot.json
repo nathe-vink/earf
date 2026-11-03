@@ -1,27 +1,27 @@
 {
- "title": "Planet EARF pop-up (round 43), shop: Tropos on its own feet, horn A polished (2026-11-03)",
+ "title": "Planet EARF pop-up (round 43), shop: Tropos on its own feet, horn A polished (2026-11-03) [gate 1 HOLD, re-staged: from behind against the black window the backs read solid. The camera moves to the shop's side, so the pair is seen three-quarter against the lit shelves and larger. The window bay's display spots move to the street side, steep onto the fronts (40 W to 90 W). The amp plate's green LED goes from 6 to 1; the eye at 1.85 m so the clear horns read against the lit floor and sill, and a track spot on the horns from the shop side (80 W)]",
  "size": [
   2400,
   1600
  ],
  "camera": {
   "position": [
-   8.0,
-   1.95,
-   1.45
+   3.1,
+   6.0,
+   1.85
   ],
   "target": [
    0.6,
-   2.9,
-   1.1
+   2.95,
+   0.45
   ],
-  "lens_mm": 28,
+  "lens_mm": 32,
   "level": true,
   "fstop": 4.0,
   "focus": [
-   3.6,
-   3.5,
-   0.9
+   0.7,
+   2.9,
+   0.7
   ]
  },
  "products": [
@@ -793,17 +793,17 @@
   "win0": {
    "type": "spot",
    "position": [
-    0.2,
+    0.08,
     2.42,
     3.3
    ],
    "target": [
-    0.8,
+    0.42,
     2.42,
-    0.95
+    0.55
    ],
-   "power_w": 40.0,
-   "cone_deg": 26.0,
+   "power_w": 90.0,
+   "cone_deg": 30.0,
    "blend": 0.7,
    "radius_m": 0.03,
    "color": 2600,
@@ -812,17 +812,17 @@
   "win1": {
    "type": "spot",
    "position": [
-    0.2,
+    0.08,
     3.38,
     3.3
    ],
    "target": [
-    0.8,
+    0.42,
     3.38,
-    0.95
+    0.55
    ],
-   "power_w": 40.0,
-   "cone_deg": 26.0,
+   "power_w": 90.0,
+   "cone_deg": 30.0,
    "blend": 0.7,
    "radius_m": 0.03,
    "color": 2600,
@@ -1002,6 +1002,25 @@
    "irradiance": 0.05,
    "color": 2200,
    "spread_deg": 80.0
+  },
+  "hornkey": {
+   "type": "spot",
+   "position": [
+    2.2,
+    4.6,
+    3.7
+   ],
+   "target": [
+    0.7,
+    2.9,
+    1.45
+   ],
+   "power_w": 80.0,
+   "cone_deg": 22.0,
+   "blend": 0.7,
+   "radius_m": 0.03,
+   "color": 2700,
+   "camera": false
   }
  },
  "haze": {
@@ -1054,6 +1073,9 @@
   },
   "builtin-led-brace": {
    "glow": 0.0
+  },
+  "led-on": {
+   "strength": 1.0
   }
  },
  "finish": {
