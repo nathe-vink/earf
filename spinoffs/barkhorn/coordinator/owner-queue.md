@@ -1675,3 +1675,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   displaced at render time), so every habitat beds 12 mm, the cabinet bottom on the ground; Dust gets sand bounce 0.35, no tumbleweed.
   7d70ac757ba4362d78e8b6a16503ed7d85aab2ac; the chain restarted 12:42: Ember (~13:07), Dust, Acid, Poison, Ice, Haze, Fog; the set ~15:45.
   Each checked at 390 px for contact and hot reflections at the foot, then the lane's gate, then mine.
+- 12:51 speaker lane: E does NOT draw the V (a32a250d; light-study/E/NOTES.md; model 9b1abf0b). Proxies on D night's set with the gate-3
+  fixes: wings/front D 0.06-0.10, E at 14 cm 0.13-0.21, E at 0.75 m 0.08-0.12 (the model said 0.5-1; the site's Ice slide ~0.45); the
+  light leaves the lower side walls but grazes the wall and lands mostly on the floor beside the cabinet; a hot line where the side
+  lens shows through the lower right side wall; more power moves front and wings together. E stopped.
+- 12:52 THE BASE QUESTION goes to the owner now. The site's uplit look can't come honestly from a light in the speaker: tested three
+  ways (under-plate B: fails at night; top/back openings D+: the skeptic's analysis, the wrong places; side light E: rendered, no V). By
+  the owner's own condition ("If we do have it though, it's meant to look more like the site images"), my pick is A, no light; D (the
+  lantern: a glow from inside, no wall light, ~$130 a speaker, 33 W, +7 K, by day indistinguishable from A) is the alternative. The
+  speaker lane reordered: polished A first (the horn question next), then the D night re-render (only if the owner picks the lantern).
