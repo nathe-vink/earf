@@ -1580,3 +1580,5 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   its uplight out; --horn-front, three-quarter view, crack_r on the speaker at 2.0, camera 0.8 m; 96 samples, 24 min). The Cloud Dust
   removed and the Cloud Ember replaced (CHECK.md records both withdrawn). The lane's agent passed all four (the contact shadow "weak,
   dark-on-dark"). Dust rendering. My gate wf_6e5b9742-7b1 on Ember (horn A) started 11:59.
+- 12:06 biomes lane: Dust on horn A (2 of 7) at 426996f1bbc28c52ac2f59627adf708f8a1f218f (64 samples, 8 min); its agent passed all four
+  ("a faint hint of the corner creases" on the horn, no bold X). Acid rendering. My gate wf_329e2471-34a on Dust started 12:07.
