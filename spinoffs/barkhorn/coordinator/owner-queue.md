@@ -3494,3 +3494,4 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   horn 12.7 mm; habitats.py passes Acid (0.085, 0.10, 1.00); biomes/tints.py and tints.json to the same split, 77.6 % TT at 20 mm,
   cabinet_deep #F1EE7F); the full SHA to follow. Queue: the Fog final (nearly done), the Haze and Acid proxies (sun 120, seated 3 mm, the sky
   turned right, the new split), the Poison final, then the Acid and Haze finals. (Its stamp read 22:27 at a 22:24 queue time.)
+- 22:24 biomes lane: the Acid split commit is fd70a7b0749918ebd72d4ff633a5b838c1a8c54f (its "18d..." was wrong).
