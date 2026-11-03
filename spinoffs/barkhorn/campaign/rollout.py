@@ -86,6 +86,24 @@ SPIN = dict(frames=9, step=10.0, start=-20.0, samples=32, scale=0.75, crop=[0.29
 TURN_SAMPLES = 32                         # spin47's, which passed for the site's spin; the rig's 128 would be about 4x
 
 
+def _turn_flags(s, off_deg=30.0, dist=1.5, width=0.8, z=(0.55, 1.65)):
+    """The turn's gate (the coordinator's critics on phase-2 chunk 05, 2026-11-03): a face coming into view at about 75
+    deg went grey, Fresnel off the bright sweep behind (saturation 0.95 to 0.14). Two tall matte-black flags, one each
+    side, behind the turntable just outside the 125 mm frame, `off_deg` off the camera's axis, from the cabinet's top to
+    above the horn: real flags (they cast shadows), the photographer's answer."""
+    import math
+    cx, cy, _ = s['camera']['position']; tx, ty, _ = s['camera']['target']
+    bx, by = tx - cx, ty - cy
+    h = math.hypot(bx, by); bx, by = bx / h, by / h          # the camera's axis, onward past the speaker
+    for sgn in (-1, 1):
+        a = math.radians(sgn * off_deg)
+        dx, dy = bx * math.cos(a) - by * math.sin(a), bx * math.sin(a) + by * math.cos(a)
+        px, py = tx + dist * dx, ty + dist * dy
+        s['set'].setdefault('flags', []).append({'center_m': [round(px, 3), round(py, 3), round((z[0] + z[1]) / 2, 3)],
+                                                 'size_m': [width, round(z[1] - z[0], 3)], 'normal': [round(-dx, 3), round(-dy, 3), 0.0],
+                                                 'color': '#050505'})
+
+
 def _final(shots, rig, fl, title, size=None, samples=None, rotate=None):
     s = shots.load(rig)
     blk = s['product'] if 'product' in s else s['products'][0]
@@ -97,6 +115,14 @@ def _final(shots, rig, fl, title, size=None, samples=None, rotate=None):
     s = shots.strata_lit(s, glow=20.0)
     if 'rim' in s.get('lights', {}):
         s['lights']['rim']['power_w'] = 0.0               # as site(): the rim lamp made the formed horn read flat
+    # the owner's rule on light (shots.honest_lights). finals31's `glow`, a small lamp behind the horn at specular 0 and
+    # held off transmission, goes: on turn frames 00 and 06 it changed nothing past the noise (mean 0.4 of 255), and made
+    # honest it put clipped hot spots on the horn and the cabinet's top (2.7 % and 10 % at 250)
+    if rig.startswith(FIN) and 'glow' in s.get('lights', {}):
+        del s['lights']['glow']
+    shots.honest_lights(s)
+    if rig.startswith(FIN + 'turn/'):
+        _turn_flags(s)
     s['title'] = title
     if size:
         s['size'] = size
