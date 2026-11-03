@@ -2821,3 +2821,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 18:54 sent to the biomes lane: if 0.25 is a specular multiplier (full light, a quarter in reflections), back to 1.0: a real opening shows
   in a polished rim at its true brightness (the same rule the bar lane was held to); the larger source at the same irradiance already
   dims its reflection to roughly a quarter honestly.
+- 18:54 biomes lane (its message said 18:55): yes, 0.25 was a specular multiplier (a trick); back to 1.0, the 3 x 3 m gap at the same
+  irradiance dimming the reflection honestly (~a quarter of the radiance). Its message named "20d1ccd", which doesn't exist; the commit
+  by path is 2c25b791ce6fb38123d3e2f4fbb537f8451fe68d (18:54). The Poison proxy follows the Haze final, with the honest light.
