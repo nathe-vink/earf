@@ -161,6 +161,53 @@ plus the gaps.
 **Parked with logistics, nobody calls yet:** the chips (1/8 and 3/8 in, 2423 and 2092 first), whether 3/8 in is
 stocked in the eight codes, and whether 2287 is transparent. AC Plastics, (888) 702-6028. They are on the owner's list.
 
+## Matching the speakers' colors F (2026-11-03)
+
+Colors F (the owner's "Go", 2026-11-01, r46-owner-notes 68adc2c3) gives the speakers:
+- a white lining in seven colors, with Smoke on black;
+- Poison and Haze as lighter custom batches: 32.3 % and 25.8 % through 20 mm.
+
+The lamps keep their parts. This check uses the four-pieces room frames on `r48-four-pieces`, all in Poison:
+- dusk cebd67c8;
+- day e79b118d;
+- lid-closed dusk ce6d7ae854c5cff34cf5f8d47b86b0abff160fd0.
+
+Each region below is the median of its green-dominant pixels, in CIELAB (L, chroma C, hue h).
+
+| Frame | Tropos cabinet | Tropos horn | Hemisphere | Core |
+|---|---|---|---|---|
+| Day (lamps off) | L 51, C 65, h 142° | L 36, C 54, h 139° | **L 47, C 60, h 139°** | L 80, C 85, h 141° |
+| Dusk (lamps on) | L 28, C 42, h 144° (lit by its plinth) | L 14, C 28, h 145° | L 62, C 64, h 149° (glowing) | L 89, C 68, h 147° (glowing) |
+| Lid-closed dusk | the same as dusk (only Mantle's lid changed) | | | |
+
+**Poison: they read as one color.**
+- **Hue:** all four pieces sit within 139° to 149° in every frame: one green.
+- **Hemisphere:** by day it matches the cabinet closely (ΔL about 4, ΔC about 4, Δh about 2°; ΔE about 7).
+- **Core:** by day it reads a step lighter and brighter than the cabinets (L 80 against 51) at the same hue. That is its
+  frosted ball, lit by the window, seen through one 9 mm wall: the frost sends daylight back out.
+- **At dusk** both lamps glow lighter than the cabinets, as lit glass does. The hue holds.
+- **Proposed fix: none.** Core's real ball waits on the chips anyway ("held" against "deep"). Under "deep", Core's
+  Poison ball goes two-layer and reads deeper, closer to the cabinets.
+
+**Haze: it is not in any frame, and the stock lamp Haze won't match.**
+- The owner's note says Haze "needed [a custom batch] anyway". Stock 2287 is listed as "Violet – Translucent", a
+  diffusing violet, not see-through glass (above).
+- The lamps' Haze is still drawn in 2287 (13.5 %). It would read as a chalky violet beside the speakers' clear violet.
+- **The match condition:** unlit, light crosses the lamp's 3 mm tint twice (in and back out off the opal) and the
+  cabinet's 20 mm wall twice (off the white lining). So the lamps' Haze layer wants about the cabinet's transmission at
+  its own thickness: **about 25.8 % at 3 mm**. The same syrup as the cabinets would be far too light at 3 mm (about
+  80 %). It needs its own dye loading.
+
+**Proposed fixes for Haze, cheapest first:**
+1. **A stock transparent violet near 25 % at 1/8 in, if one exists.** It costs nothing over 2287. Ask in the parked
+   chip call; it applies to Hemisphere's shell and Core's Haze skin, if Core goes two-layer.
+2. **The lamps' 1/8 in Haze in the speakers' Haze campaign.** Ask the caster quoting the cabinets' custom batch to
+   also pour 1/8 in sheet at a loading for about 25.8 % at 3 mm in the same run [check whether they will, and the
+   minimum]. That costs the run's extra sheet if they will; it costs a separate lot (about $10k to $15k [E], a pallet's
+   minimum) if they won't, which is not worth it for the lamps alone.
+3. **Until one of these lands,** the lamps' Haze stays unresolved. A Haze room frame from the four-pieces lane would
+   confirm the match once the sheet is chosen.
+
 ## Sources (public pages, not quotes)
 
 - AC Plastics' TruCast transmission table: https://www.acplasticsinc.com/wp-content/uploads/2026/08/Trucast-Acrylic-Light-Transmissions-5.26.26-1.pdf
