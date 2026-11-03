@@ -114,7 +114,8 @@ def main():
     shot = os.path.splitext(os.path.abspath(a.out))[0] + '.in.json'
     json.dump(sh, open(shot, 'w'), indent=1)
     import habitat
-    habitat.run(shot, COLLECTION, a.out, a.samples, a.scale, ASSET, root=W, stand=a.stand, tt=a.tt, up=a.uplight)
+    habitat.run(shot, COLLECTION, a.out, a.samples, a.scale, ASSET, root=W, stand=a.stand, tt=a.tt, up=a.uplight,
+                lining='#0B0B0B')   # colors F: Smoke on black
 
 
 if __name__ == '__main__':

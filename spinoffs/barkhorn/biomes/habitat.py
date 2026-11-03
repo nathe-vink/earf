@@ -89,8 +89,78 @@ def uplight(bpy_, col, watts=40.0, color=(1.0, 0.9, 0.8)):
     o.rotation_euler = (math.pi, 0, 0)
 
 
+def settle(bpy_, linked, sink=0.002):
+    """Stand each speaker on the ground under it: a ray down through each of its feet (the asset's lowest points) onto
+    the set, and the instance raised or lowered so the lowest foot touches the highest hit, sunk `sink` m."""
+    from mathutils import Vector
+    dg = bpy_.context.evaluated_depsgraph_get()
+    sc = bpy_.context.scene
+    for e in linked:
+        col = e.instance_collection
+        pts = []
+        for o in col.all_objects:
+            if o.type != 'MESH':
+                continue
+            for v in o.bound_box:
+                w = o.matrix_world @ Vector(v)
+                pts.append(w)
+        if not pts:
+            continue
+        zmin = min(p.z for p in pts)
+        feet_ = [p for p in pts if p.z < zmin + 0.01]
+        xs = [p.x for p in feet_]; ys = [p.y for p in feet_]
+        corners = [(min(xs), min(ys)), (min(xs), max(ys)), (max(xs), min(ys)), (max(xs), max(ys)), (sum(xs) / len(xs), sum(ys) / len(ys))]
+        # the speaker itself, the hidden engine copy and the volumes out of the rays' way while they look for ground
+        hide = [o for o in sc.objects if o.hide_render or o.get('volume') or o in linked]
+        was = [(o, o.hide_viewport) for o in hide]
+        for o in hide:
+            o.hide_viewport = True
+        dg = bpy_.context.evaluated_depsgraph_get(); dg.update()
+        hits = []
+        for cx, cy in corners:
+            wp = e.matrix_world @ Vector((cx, cy, 0.0))
+            ok, loc, nrm, idx, obj, mat = sc.ray_cast(dg, Vector((wp.x, wp.y, wp.z + 3.0)), Vector((0, 0, -1)), distance=6.0)
+            if ok:
+                hits.append(loc.z)
+        for o, v in was:
+            o.hide_viewport = v
+        if hits:
+            z_new = max(hits) - zmin - sink
+            print(f'ground: {e.name} feet on the set at z {max(hits):.4f} (from {e.location.z:.4f} to {z_new:.4f}; hits {[round(h, 4) for h in hits]})')
+            e.location.z = z_new
+
+
+def black_flag(bpy_, linked, size):
+    """A photographer's negative fill: a large black card behind and above the camera, out of frame, seen only in
+    reflections (glossy rays), so the speaker's front faces mirror black instead of the bright sky; it casts no
+    shadow and lights nothing."""
+    import bmesh
+    from mathutils import Vector
+    sc = bpy_.context.scene
+    cam = sc.camera
+    if not linked or cam is None:
+        return
+    t = linked[0].location
+    c = cam.location
+    d = (c - Vector((t.x, t.y, c.z))).normalized()
+    pos = c + d * 1.2 + Vector((0, 0, 0.6))
+    w, h = size
+    bm = bmesh.new(); bmesh.ops.create_grid(bm, x_segments=1, y_segments=1, size=0.5)
+    me = bpy_.data.meshes.new('black-flag'); bm.to_mesh(me); bm.free()
+    m = bpy_.data.materials.new('black-flag'); m.use_nodes = True
+    bs = m.node_tree.nodes['Principled BSDF']; bs.inputs['Base Color'].default_value = (0.0, 0.0, 0.0, 1)
+    bs.inputs['Roughness'].default_value = 1.0; bs.inputs['Specular IOR Level'].default_value = 0.0
+    me.materials.append(m)
+    f = bpy_.data.objects.new('black-flag', me); sc.collection.objects.link(f)
+    f.location = pos; f.scale = (w, h, 1.0)
+    f.rotation_euler = (Vector((t.x, t.y, t.z + 0.7)) - pos).to_track_quat('Z', 'Y').to_euler()
+    f.visible_camera = False; f.visible_diffuse = False; f.visible_shadow = False
+    f.visible_transmission = False; f.visible_volume_scatter = False
+    print(f'black flag: {w} x {h} m at {[round(v, 2) for v in pos]}')
+
+
 def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extra=(), stand='feet', tt=None,
-        up=0.0, glass_from=0.12):
+        up=0.0, glass_from=0.12, ground=True, flag=(5.0, 4.0), lining=None):
     """Render a prepared shot file through `root`'s engine with the asset in. stand 'feet' leaves the stand-in plinth
     out and stands the speaker on four feet; 'plinth' keeps the asset as it is (linked). tt: the cabinet's and horn's
     transmission through 20 mm to render at, from `glass_from` (Smoke's 2074 is 0.12); up: the night uplight (W)."""
@@ -100,7 +170,7 @@ def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extr
     import render, product as Pr, lights as Lt
     linked = []
     place0 = Pr.place
-    editable = stand == 'feet' or tt or up      # 'own' and 'plinth': the asset as it is, linked
+    editable = stand == 'feet' or tt or up or lining      # 'own' and 'plinth': the asset as it is, linked
 
     def place(bpy_, pdef, templates, shot_, root_):
         objs, part_of = place0(bpy_, pdef, templates, shot_, root_)
@@ -131,6 +201,20 @@ def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extr
                         if n.type in ('VOLUME_ABSORPTION', 'PRINCIPLED_VOLUME') and 'Density' in n.inputs:
                             n.inputs['Density'].default_value *= f
             print(f'glass: {glass_from:.0%} -> {tt:.0%} through 20 mm (absorption x {f:.3f}) on', sorted(done))
+        if lining:
+            # the lining's color (colors F: Smoke on black, the others white): the asset, appended, takes it
+            h = lining.lstrip('#'); rgb = [int(h[i:i + 2], 16) / 255 for i in (0, 2, 4)]
+            rgb = [c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4 for c in rgb]
+            done = set()
+            for o in col.all_objects:
+                for sl in getattr(o, 'material_slots', []):
+                    m = sl.material
+                    if m and m.name.split('@')[0] == 'lining' and m.name not in done and m.node_tree:
+                        done.add(m.name)
+                        for n in m.node_tree.nodes:
+                            if n.type == 'BSDF_PRINCIPLED':
+                                n.inputs['Base Color'].default_value = (*rgb, 1)
+            print('lining:', lining, sorted(done))
         if up:
             uplight(bpy_, col, up)
         for inst in shot_['product']['instances']:
@@ -150,6 +234,16 @@ def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extr
             if e.name not in col.objects:
                 col.objects.link(e)
     Lt.link_receivers = link_receivers
+    world0 = Lt.world
+
+    def world(bpy_, sky, sun_spec=None):
+        r = world0(bpy_, sky, sun_spec)
+        if ground:
+            settle(bpy_, linked)
+        if flag:
+            black_flag(bpy_, linked, flag)
+        return r
+    Lt.world = world
     sys.argv = ['render.py', shot_path, '--out', os.path.abspath(out), '--samples', str(samples), '--scale', str(scale), *extra]
     render.main()
 
@@ -167,6 +261,9 @@ def main():
     ap.add_argument('--tt', type=float, help="the glass's transmission through 20 mm to render at (e.g. 0.29)")
     ap.add_argument('--glass-from', type=float, default=0.12, help="the asset's own (Smoke 2074: 0.12)")
     ap.add_argument('--uplight', type=float, default=0.0, help='the night uplight, W (0: off, the day)')
+    ap.add_argument('--no-ground', action='store_true', help="don't settle the speaker onto the set")
+    ap.add_argument('--lining', help="the lining's color, hex (colors F: Smoke '#0B0B0B')")
+    ap.add_argument('--flag', type=float, nargs=2, default=(5.0, 4.0), help='the black flag behind the camera, m (0 0: none)')
     a = ap.parse_args()
     sh = json.load(open(a.shot))
     scale_lights(sh, {k: float(v) for k, v in (x.split('=', 1) for x in a.light)})
@@ -176,7 +273,8 @@ def main():
     prepared = os.path.splitext(os.path.abspath(a.out))[0] + '.in.json'
     json.dump(sh, open(prepared, 'w'), indent=1)
     run(prepared, a.collection.format(tint=a.tint), a.out, a.samples, a.scale, os.path.abspath(a.asset), stand=a.stand,
-        tt=a.tt, up=a.uplight, glass_from=a.glass_from)
+        tt=a.tt, up=a.uplight, glass_from=a.glass_from, ground=not a.no_ground, flag=tuple(a.flag) if a.flag[0] > 0 else None,
+        lining=a.lining)
 
 
 if __name__ == '__main__':
