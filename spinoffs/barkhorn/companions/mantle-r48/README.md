@@ -890,6 +890,20 @@ the parts list stays at $3,897.
 - **One mesh had a ray-visibility hide:** the strip's aluminum channel (camera, glossy and transmission off since C3).
   It is not a lamp, and since C3d the groove film hides it physically, so the hide is removed.
   - Re-proxied on the under-deck crop (64 samples): no amber pixels, against none in C3d. The C3d frames stand.
+- **The pair re-rendered from this build** (`render_lantern.sh c3e`, the coordinator's 20:17 ask; scene and model as
+  c2e255e3) and diffed full frame against C3d:
+
+  | | pixels identical | max difference | pixels over 10 | 15 px box mean, max |
+  |---|---|---|---|---|
+  | night | 99.99 % | 1 level | 0 | 0.03 |
+  | day | 99.91 % | 2 levels | 0 | 0.14 |
+
+  That is noise only, so the C3e files are the pair, with no new gate:
+
+  | frame | what |
+  |---|---|
+  | `a5-night-ember-2423-c3e.png` | the C3 pair at night, from the build after rulings 1-3 |
+  | `a5-day-ember-2423-c3e.png` | the C3 pair by day, the same build |
 
 ### The render (how the light is drawn)
 
