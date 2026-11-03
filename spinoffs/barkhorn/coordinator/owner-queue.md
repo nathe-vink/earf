@@ -1147,3 +1147,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   the rebuild dropped (20) Tint Library and coins, (21) Kickstarter, (22) Session 00, (6) the debut room, (8) debut lighting, (25) the
   photography money gap. The live site (856f80d7) still shows "The oldest amplifier is a shape." and "Something in the air." The
   six-color bar globe as the owner's choice rests only on the bar team's log (README row 135 says the Smoke globe): unconfirmed.
+- 06:18 brand lane: the words-only pass at 79598335fc72d857e904dcc88d979efee4ff1e0a (63 files, 287 lines; list in
+  brandbook/review/2026-11-03-words.md): horn A wording; no base described ("a light from below shines up through the acrylic");
+  72.6 kg / 560 mm; "The oldest amplifier is a shape." and "amplifier's job" gone (Book headline now "Bottle green. Keep out of
+  reach."; post 7 has no line); "all the way through" gone (chapter headline "Eight colors, Ember to Smoke."); 19 January gone
+  ("the debut", "spring 2027", [DATE]/[VENUE], D+n schedules). Nothing published or re-rendered; prices untouched. Flags: the
+  $55,000 table's "on lit plinths" (deck ask.html still has it; fixed with the base answer); Kickstarter prices and delivery months;
+  Ember's old hex in a vinyl color-match request.
