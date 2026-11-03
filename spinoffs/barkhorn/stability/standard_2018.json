@@ -1,0 +1,186 @@
+{
+ "mass_kg": 72.6,
+ "com_m": [
+  0.0,
+  0.0136,
+  0.5328
+ ],
+ "top_m": 1.2951,
+ "horn_overhang": {
+  "front_mm": 0,
+  "back_mm": 0,
+  "sides_mm": 0
+ },
+ "tilt": {
+  "feet centres": {
+   "forward": {
+    "arm_mm": 202,
+    "tips_at_deg": 20.8
+   },
+   "back": {
+    "arm_mm": 168,
+    "tips_at_deg": 17.5
+   },
+   "left": {
+    "arm_mm": 230,
+    "tips_at_deg": 23.4
+   },
+   "right": {
+    "arm_mm": 230,
+    "tips_at_deg": 23.3
+   }
+  },
+  "pad edges": {
+   "forward": {
+    "arm_mm": 222,
+    "tips_at_deg": 22.6
+   },
+   "back": {
+    "arm_mm": 188,
+    "tips_at_deg": 19.4
+   },
+   "left": {
+    "arm_mm": 250,
+    "tips_at_deg": 25.1
+   },
+   "right": {
+    "arm_mm": 250,
+    "tips_at_deg": 25.1
+   }
+  }
+ },
+ "push_13pct": {
+  "F_N": 92.6,
+  "at_m": 1.295,
+  "feet": {
+   "forward": {
+    "restoring_Nm": 144.0,
+    "overturning_Nm": 119.9,
+    "ratio": 1.2
+   },
+   "back": {
+    "restoring_Nm": 119.4,
+    "overturning_Nm": 119.9,
+    "ratio": 1.0
+   },
+   "left": {
+    "restoring_Nm": 163.8,
+    "overturning_Nm": 119.9,
+    "ratio": 1.37
+   },
+   "right": {
+    "restoring_Nm": 163.7,
+    "overturning_Nm": 119.9,
+    "ratio": 1.37
+   }
+  }
+ },
+ "push_20pct_old": {
+  "F_N": 142.4,
+  "at_m": 1.295,
+  "feet": {
+   "forward": {
+    "restoring_Nm": 144.0,
+    "overturning_Nm": 184.4,
+    "ratio": 0.78
+   },
+   "back": {
+    "restoring_Nm": 119.4,
+    "overturning_Nm": 184.4,
+    "ratio": 0.65
+   },
+   "left": {
+    "restoring_Nm": 163.8,
+    "overturning_Nm": 184.4,
+    "ratio": 0.89
+   },
+   "right": {
+    "restoring_Nm": 163.7,
+    "overturning_Nm": 184.4,
+    "ratio": 0.89
+   }
+  }
+ },
+ "load_800N": {
+  "surface": "the cabinet top, 560 x 420",
+  "height_m": 0.892,
+  "applies": true,
+  "edges": {
+   "front": {
+    "edge_past_feet_mm": 25,
+    "overturning_Nm": 20.0,
+    "restoring_Nm": 144.0,
+    "ratio": 7.2
+   },
+   "back": {
+    "edge_past_feet_mm": 25,
+    "overturning_Nm": 20.0,
+    "restoring_Nm": 119.4,
+    "ratio": 6.0
+   },
+   "left": {
+    "edge_past_feet_mm": 50,
+    "overturning_Nm": 40.0,
+    "restoring_Nm": 163.8,
+    "ratio": 4.1
+   },
+   "right": {
+    "edge_past_feet_mm": 50,
+    "overturning_Nm": 40.0,
+    "restoring_Nm": 163.7,
+    "ratio": 4.1
+   }
+  }
+ },
+ "lean_back_5deg": {
+  "arm_mm_before": 168,
+  "arm_mm_after": 121,
+  "tips_back_at_deg": 17.5
+ },
+ "on_plate": {
+  "mass_kg": 78.2,
+  "com_m": [
+   0.0,
+   0.0126,
+   0.5425
+  ],
+  "tilt": {
+   "plate feet centres": {
+    "forward": {
+     "arm_mm": 206,
+     "tips_at_deg": 20.8
+    },
+    "back": {
+     "arm_mm": 174,
+     "tips_at_deg": 17.8
+    },
+    "left": {
+     "arm_mm": 260,
+     "tips_at_deg": 25.6
+    },
+    "right": {
+     "arm_mm": 260,
+     "tips_at_deg": 25.6
+    }
+   },
+   "plate edges": {
+    "forward": {
+     "arm_mm": 226,
+     "tips_at_deg": 22.6
+    },
+    "back": {
+     "arm_mm": 194,
+     "tips_at_deg": 19.6
+    },
+    "left": {
+     "arm_mm": 280,
+     "tips_at_deg": 27.3
+    },
+    "right": {
+     "arm_mm": 280,
+     "tips_at_deg": 27.3
+    }
+   }
+  }
+ }
+}
