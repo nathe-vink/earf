@@ -1059,3 +1059,17 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   mass, cost, heat and 8.10 stability; deck/site renders held until the owner answers. (My messages said 04:40; sent ~04:33.)
 - 04:34 board v22 (MGUByhczqB2jUYDV7R4t3h): the base card (why it can go; A, B, C coming with pictures), the site settled, the
   Smoke "type go" item and the stale plinth and light lines removed or updated; reply bar hidden (no open question).
+- 04:36-04:37 speaker lane: stability/standard-2018.md (1c391c9aa9cddcdc0e8e06057bef411f9fab4250): horn A 72.6 kg, centre of mass
+  533 mm up, no horn overhang, no front controls; on its own feet it tips at 17.5° back / 20.8° forward / 23.4° side (feet centres),
+  so 8.6.2.2 and 8.6.3 pass by the 10° tilt; 800 N on the cabinet's top (0.892 m) passes 4.1-7.2x; the 13% option back 1.0, just.
+  The slim light plate (140c11e505c78bcbbc7b6cb7fe6c2ead2ba4263d): 560 x 420 x 50 mm, 5.6 kg, feet 20 mm in; with it 78.2 kg,
+  8.6.5 by the 15° tilt and 8.6.3 at 15° pass (17.8° back, 2.8° spare). Frames A/B/C rendering.
+- 04:38 OWNER: "What became of the special edition exploration, the planet EARF improvements, and everything else we worked through
+  recently?" Saved verbatim first (README aea06ed6). Running a status audit (wf_ccc99873-066: six strand readers, a completeness
+  critic, an adversarial verifier).
+- 05:02 site lane: round 48 built and held on r47-site-next, HEAD 34b101d74ec63dc4d78825cfb7165e32ddf81789 (four commits: 156494ec,
+  23c05668, 9c0eb19f, 34b101d7). Two flags, both off: V2 (the 11 no-regret fixes) and HOME_V2 (the launch-film order). Flags off ->
+  byte-identical build. Mobile Lighthouse 95/95/96, CLS 0; 57 routes x 2 widths clean. Sheets in spinoffs/barkhorn/launch/r48/.
+  Checked the sheets: reads as one film; stand-in pictures still show the superseded speaker (swap with the new set). One fix asked
+  (05:08): Mantle's type-only screen said "Pictures when the new one is drawn", but Strata Float is drawn: use
+  renders/2026-11-01/barkhorn/mantle-r48/a-dusk-ember-2423.png (r48-mantle-design), drop the clause.
