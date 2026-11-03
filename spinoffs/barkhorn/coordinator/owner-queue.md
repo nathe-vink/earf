@@ -3011,3 +3011,15 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 19:37 sent to the Mantle lane: passed; optional polish (the day ring's inner faces polished black or clear, the black band kept; crisp
   layer bands instead of the ramp; the right face's roughness checked; the field-edge glint rounded or darkened), both frames re-rendered from
   one build if the build changes; the set kept (no added fill) for a fair comparison with A; the gaming-echo risk named to the owner.
+- 19:33 c3: fix1 chunk 4 stopped by PID (the queue 7247, the render 7250, wide ember ~7.5 min in) at 19:32:56; nothing written, the fix1 folder
+  removed, nothing committed; its branch at 4df9bebc (aed49790 merged), clean; waiting.
+- 19:38 c4: chunk 12 landed (site-hero-light haze 24.0 min, fog 27.0; 18:45-19:37) at cdc4078316a647c2b89e5a5179a049661b495b12; phase 1 done
+  (wide ember-acid cef6f871, wide poison-haze a0c4ef84, wide fog and hero-light ember ed2dd145, hero-light haze and fog cdc40783); not merged,
+  idle until the new SHA. The hero-light set is complete in seven tints (held with studio31's fix).
+- 19:38 biomes lane (its messages said 19:39 and 19:40): Acid at 4 degrees off: crease 4.8 / 3.9, the horn clean, the inside reading through;
+  its final after Haze's. Poison with the honest gap (specular 1.0): the cabinet reads (the green, the woofer and ring through the front),
+  crease 8.0 / 2.3, but the lower-left lip's white glint stays (peak 200): the real sun (azimuth -100, 42 degrees up) on the curved lip; the
+  fix a turn, rotate_z 9 (~10 degrees off on the other side) at 5284d3d3bb1bcad60cd2b87beda2e74c6307d36d. Queue: the Haze final at 5
+  degrees off (rendering), the Acid final, the Poison proxy at 9 (the glint checked), the Fog final, the Poison final.
+- 19:39 sent to the speaker lane: its order with three helpers idle: the fix1 rig proof and new SHA first; the audit list (turn, then amp
+  and horn-back); the honest A-ice-polished; the deck hero and cover; the back rig and studio31 (hero-light complete in seven).
