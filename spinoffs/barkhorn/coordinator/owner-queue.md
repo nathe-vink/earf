@@ -2548,5 +2548,5 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   brightest, hardest shapes, with red patches at the bases (the display spots through the acrylic): a risk against the owner's
   "cast up through the speaker", put to the critics. A horn's reflection shows in the dark window glass.
 - 17:46 my gate on r43-shop v2 (wf_58a4dd5a-08b; the held v1 and the older picture as context) started.
-- 17:47 sent to the bar lane: r43-window next, then the r44-lantern polish, then the r43-listening polish; the 2.2 m eye held until the
+- 17:46 sent to the bar lane: r43-window next, then the r44-lantern polish, then the r43-listening polish; the 2.2 m eye held until the
   gate.
