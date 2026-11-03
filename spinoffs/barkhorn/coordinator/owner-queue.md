@@ -3166,3 +3166,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   pre-gates; listening v3 and r44 v3 already gated. To the Mantle lane: re-render the C3d pair from c2e255e3 and diff full frame (noise only:
   swap without a gate). To the biomes lane: Acid to the gate; the Poison source reported, moved as a real light, not hidden.
 - 20:18 check-in #49 armed for 21:06 (trig_0126nezqcJCDVCai4xUsbE1d).
+- 20:20 audit of the habitat shot records (43ad3a3f): Acid's `rim` (area, 2.7 W/m²) is linked to the speaker's 99 parts alone (ruling 2);
+  Dust's bounce and Ember's crack_l, crack_r, river and vent are unlinked; Fog, Haze and Ice are sun and sky only; Poison's not in the tree
+  yet. r43-window v3's shot record: no links or multipliers (its kit43 shelf strips are the known break).
+- 20:21 two more gates launched: the Acid final wf_56a28c46-563 (a pre-gate: its rim link; context Dust, Ice, Ember) and r43-window v3
+  wf_bed58229-1f6 (a pre-gate: kit43's strips; context v2).
+- 20:21 sent to the biomes lane: Acid's rim unlinked (flag or move if it spills wrongly), proxy old against new, Acid's final again with the
+  pre-gate's findings; Poison's litter and skygap checked the same way; rulings 1-3 in full with what stands.
