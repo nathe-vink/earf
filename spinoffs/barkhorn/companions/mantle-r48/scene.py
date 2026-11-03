@@ -549,7 +549,8 @@ def core_material(name, box, cover=(0.05, 0.35), ramp=0.14, glow=0.0, glow_col=(
     return mats
 
 
-def core_glow_sheet(core, strength, col, box=None, grade=(1.4, 0.8), fall=0.05, occl=None, cct=0.0, ceil_k=1.0, tilt=0.0, radial=None):
+def core_glow_sheet(core, strength, col, box=None, grade=(1.4, 0.8), fall=0.05, occl=None, cct=0.0, ceil_k=1.0, tilt=0.0, radial=None,
+                    edge_fade=0.0):
     """The guide's output (see core_material): a copy of the print's faces 0.3 up inside the core, facing up,
     transparent to rays and emitting upward only, so the opaque print under it keeps every path to the shelf dark."""
     me = core.data
@@ -567,6 +568,7 @@ def core_glow_sheet(core, strength, col, box=None, grade=(1.4, 0.8), fall=0.05, 
                 vmap[v.index] = bm2.verts.new((v.co.x, v.co.y, v.co.z + 0.0003))
             vs.append(vmap[v.index])
         bm2.faces.new(list(reversed(vs)))
+    sheet_box = (min(v.co.x for v in bm2.verts), min(v.co.y for v in bm2.verts), max(v.co.x for v in bm2.verts), max(v.co.y for v in bm2.verts))
     me2 = bpy.data.meshes.new('core-glow'); bm2.to_mesh(me2); bm.free(); bm2.free()
     ob = bpy.data.objects.new('core-glow', me2); bpy.context.collection.objects.link(ob)
     m, nt, out = node_tree('core-glow')
@@ -624,7 +626,26 @@ def core_glow_sheet(core, strength, col, box=None, grade=(1.4, 0.8), fall=0.05, 
         k_ = nt.nodes.new('ShaderNodeMath'); k_.operation = 'DIVIDE'; nt.links.new(cov, k_.inputs[0]); k_.inputs[1].default_value = radial[4]
         k2 = nt.nodes.new('ShaderNodeMath'); k2.operation = 'SUBTRACT'; k2.inputs[0].default_value = 1.0; nt.links.new(inner, k2.inputs[1])
         k3 = nt.nodes.new('ShaderNodeMath'); k3.operation = 'MULTIPLY'; nt.links.new(k_.outputs[0], k3.inputs[0]); nt.links.new(k2.outputs[0], k3.inputs[1])
-        k4 = nt.nodes.new('ShaderNodeMath'); k4.operation = 'MULTIPLY'; nt.links.new(k3.outputs[0], k4.inputs[0])
+        k4 = nt.nodes.new('ShaderNodeMath'); k4.operation = 'MULTIPLY'
+        if edge_fade:
+            # C3 pair: the glow fades over the last `edge_fade` m before the core's edge, inside the black band, so no
+            # lit sliver can show past the field's edge (a tick by the arm pillar)
+            sx_ = nt.nodes.new('ShaderNodeSeparateXYZ'); nt.links.new(geo.outputs['Position'], sx_.inputs['Vector'])
+            def mth2(op, a, bval=None, b_in=None):
+                n_ = nt.nodes.new('ShaderNodeMath'); n_.operation = op
+                if isinstance(a, float): n_.inputs[0].default_value = a
+                else: nt.links.new(a, n_.inputs[0])
+                if b_in is not None: nt.links.new(b_in, n_.inputs[1])
+                elif bval is not None: n_.inputs[1].default_value = bval
+                return n_.outputs[0]
+            ex0, ey0, ex1, ey1 = sheet_box
+            ecx, ecy, ehw, ehd = (ex0 + ex1) / 2, (ey0 + ey1) / 2, (ex1 - ex0) / 2, (ey1 - ey0) / 2
+            edx = mth2('SUBTRACT', ehw, b_in=mth2('ABSOLUTE', mth2('SUBTRACT', sx_.outputs['X'], ecx)))
+            edy = mth2('SUBTRACT', ehd, b_in=mth2('ABSOLUTE', mth2('SUBTRACT', sx_.outputs['Y'], ecy)))
+            efac = mth2('MINIMUM', mth2('MAXIMUM', mth2('DIVIDE', mth2('MINIMUM', edx, b_in=edy), edge_fade), 0.0), 1.0)
+            nt.links.new(mth2('MULTIPLY', k3.outputs[0], b_in=efac), k4.inputs[0])
+        else:
+            nt.links.new(k3.outputs[0], k4.inputs[0])
         if em.inputs['Strength'].is_linked:
             nt.links.new(em.inputs['Strength'].links[0].from_socket, k4.inputs[1])
         else:
@@ -1217,6 +1238,7 @@ def build(args):
                                 radial=((meta['S'][0] * mm, meta['S'][1] * mm, args.radial[0], args.radial[1], args.cover_max, args.cover_floor, args.back_r,
                                          args.rise, 1.0 if args.backed else 0.0, args.clear_r, args.dot_pitch)
                                         if args.back_r else (meta['S'][0] * mm, meta['S'][1] * mm, args.radial[0], args.radial[1], 1.0)) if args.radial else None,
+                                edge_fade=args.edge_fade,
                                 occl=[(meta['S'][0] * mm, meta['S'][1] * mm, meta['P']['platter_d'] / 2 * mm, 0.6, 0.035),
                                       (meta['A'][0] * mm, meta['A'][1] * mm, meta['P']['puck_d'] / 2 * mm, 0.5, 0.018)] if args.day else None)
             for p in o.data.polygons:
@@ -1596,6 +1618,7 @@ if __name__ == '__main__':
     ap.add_argument('--rise', type=float, default=0.0); ap.add_argument('--backed', action='store_true')
     ap.add_argument('--clear-r', type=float, default=0.0); ap.add_argument('--dot-pitch', type=float, default=0.0)
     ap.add_argument('--clear-ring', action='store_true'); ap.add_argument('--no-edge-bevel', action='store_true')
+    ap.add_argument('--edge-fade', type=float, default=0.0)
     ap.add_argument('--matte-channel', action='store_true'); ap.add_argument('--label-near', action='store_true')
     ap.add_argument('--core-glow', type=float, default=0.0)
     ap.add_argument('--day', action='store_true'); ap.add_argument('--ambient', type=float, default=0.05)

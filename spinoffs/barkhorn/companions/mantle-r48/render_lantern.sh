@@ -134,3 +134,11 @@ fi
 if [ "$1" = c3b ]; then
 r a5-night-ember-2423-c3b --model out-strata-v5 --colour ember-2423 --strip 0 --cct 4000 --ambient 0.003 --exposure -1.5 --night-room 35 --wall-wash 6 --samples 192 --core-glow 2.6 --cover-max 0.24 --cover-floor 0.05 --look "AgX - Base Contrast" $C9
 fi
+# the C3 pair (the coordinator, 17:57), night and day from one build: as c3b, plus no post seats in the light guide
+# (out-strata-v5 rebuilt: the posts butt-bond to the backed underside; the seat's wall had drawn a ring in the glow in
+# front of the platter) and the glow faded over the last 8 mm before the core's edge (--edge-fade), inside the black
+# band (a lit tick showed by the arm pillar). Set, camera and centre feed unchanged
+if [ "$1" = c3c ]; then
+r a5-night-ember-2423-c3c --model out-strata-v5 --colour ember-2423 --strip 0 --cct 4000 --ambient 0.003 --exposure -1.5 --night-room 35 --wall-wash 6 --samples 192 --core-glow 2.6 --cover-max 0.24 --cover-floor 0.05 --look "AgX - Base Contrast" $C9 --edge-fade 0.008
+r a5-day-ember-2423-c3c --model out-strata-v5 --colour ember-2423 --day --strip 0 --core-glow 5 --cover-max 0.15 --cover-floor 0.15 --strip-color 0.848 0.124 0.168 --exposure -2.0 $C9 --edge-fade 0.008
+fi

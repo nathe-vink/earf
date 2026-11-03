@@ -76,7 +76,7 @@ Outcrop 2-2, distinctiveness 6.0 to 4.75): every judge named the same details un
 v2 stays as it was:
 1. the base recedes: stock smoked 2064, 12.7 (heavier, against the deck's top-heaviness), the deck's corner radius, the
    same 35 setback on all four sides; the strip's channel is lost in the smoke, and the whole edge glows;
-2. solid posts: turned 303 stainless, polished, 30 across; each bonded under the deck in a 2 mm seat (a structural
+2. solid posts: turned 303 stainless, polished, 30 across; each bonded under the deck (C3: butt-bonded, no seat) (a structural
    methacrylate, Plexus MA310 kind) and held from below by its foot's M8 stud through the base into a tapped hole in
    the post; no fixing shows; the isolation is the foot's Sorbothane pad;
 3. the mark is a polished recess, tone on tone, on the deck's back edge.
@@ -254,7 +254,8 @@ def parts(P):
     cuts += [cyl('z', M, P['motor_pocket'] + 16, top - 6, top + 1), cyl('z', M, P['motor_pocket'], z0 - 1, top + 1)]
     cuts += [cyl('z', (M[0] + 42 * math.cos(math.radians(a)), M[1] + 42 * math.sin(math.radians(a))), 4.6, top - 14, top - 5.5)
              for a in (30, 150, 270)]   # the plate's three M3 inserts
-    cuts += [cyl('z', p, P['post_d'] + 0.3, z0 - 1, z0 + 2.0) for p in posts]          # the posts' 2 mm bonded seats
+    # C3 pair: no seats. A 30 pocket in the light guide's underside was a step in the print, a ring in the glow in front
+    # of the platter; the posts butt-bond to the backed underside instead, located by a jig
     # the light's groove, routed into the deck's underside 10 in from its edge: one closed loop of straight runs, its
     # corners squared by the cutter (r1.5 inside); the ceiling bead-blasted
     gi, gw, gd = P['glow_in'], P['glow_w'], P['glow_d']
@@ -338,8 +339,8 @@ def parts(P):
 
     # ---- the posts: solid 303 stainless, polished; bonded into a 2 mm seat under the deck, a tapped M8 x 16 hole from below ----
     for i, p in enumerate(posts):
-        out.append(Part(f'post-{i + 1}', cyl('z', p, P['post_d'], b1, z0 + 2.0) - cyl('z', p, 6.8, b1 - 1, b1 + 16), Machined('stainless', 'lathe', stock=(35.0, 35.0, 46.0)),
-                        finish='steel', group='float', notes=['solid 303 stainless 30 x 42, turned, ends faced, polished to a mirror; tapped M8 x 16 from below; bonded 2 mm up into a seat under the deck with a structural methacrylate (Plexus MA310 kind, which bonds acrylic to stainless); the foot\'s stud holds it to the base from below: nothing shows'] if i == 0 else []))
+        out.append(Part(f'post-{i + 1}', cyl('z', p, P['post_d'], b1, z0 - 0.1) - cyl('z', p, 6.8, b1 - 1, b1 + 16), Machined('stainless', 'lathe', stock=(35.0, 35.0, 46.0)),
+                        finish='steel', group='float', notes=['solid 303 stainless 30 x 40, turned, ends faced, polished to a mirror; tapped M8 x 16 from below; butt-bonded (C3) flat to the deck\'s backed underside with a structural methacrylate (Plexus MA310 kind, which bonds acrylic to stainless; a 0.1 bond line, 700 mm2), located by a drilled jig plate on the deck\'s outline, so no seat breaks the print; the foot\'s stud holds it to the base from below: nothing shows'] if i == 0 else []))
 
     # ---- the bearing, platter, hub, spindle (as Outcrop) ----
     hz0 = z0 - 20.0
@@ -493,7 +494,7 @@ NOTES = [
     'one bond line at mid-edge), annealed, fly-cut, the outline routed as one; the outer edge bead-blasted satin, the faces glassy. '
     '450 x 360, corners R4. (v1\'s tinted-ring / clear-inlay strata, 24.3, are gone.)',
     'The base: one 12.7 sheet of stock Smoke 2074, 380 x 290, corners R6, 35 in from the deck all round; the deck floats 40 over it.',
-    'The float: four solid 303 stainless posts bonded into 2 mm seats under the plinth, held to the base by the feet\'s M8 studs: '
+    'The float: four solid 303 stainless posts butt-bonded under the plinth (no seats, so nothing breaks the print), held to the base by the feet\'s M8 studs: '
     'rigid. The four feet (stainless on Sorbothane, levelled and locked) locate and level it; no isolation is claimed. For isolation, a platform at 3-5 Hz.',
     'The light: the deck edge-lit, as a sign is: a 5 mm dotless 24 V COB strip of 5 W/m or less, in straight runs on a black '
     'U-channel in a 7.4 x 7 groove routed into the deck\'s underside 10 in from its edge, facing up into the slab under a '
