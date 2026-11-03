@@ -171,10 +171,10 @@ def build(frame, samples, scale):
         # round 5 (the gate: an electric-blue line at the mouth, the diffuser's light piping out of the polished cut
         # edge): the proposed fix, modelled at night: the opal ends 4 inside the rim, as the clear shell does, and the
         # rim's exposed edge is satin (bead-blasted), so no lit polished edge faces the room
-        oc = 4.0 if night else 0.0
+        oc = 4.0                                 # round 6: both frames of the pair show the same (proposed) rim
         sphere('opal', 89.0, rim, opal, cut=oc, hole=H)
         sphere('opal-in', 86.0, rim, opal, inward=True, cut=oc, hole=H)
-        part('out-dome-pendant', 'rim', acrylic('rim', 0.45 if night else 0.0), rim)
+        part('out-dome-pendant', 'rim', acrylic('rim', 0.45), rim)
         for nm in ('collar', 'clamp', 'crown', 'gland', 'hub'):
             part('out-dome-pendant', nm, an, rim)
         part('out-dome-pendant', 'reflector', steel, rim)
@@ -187,20 +187,21 @@ def build(frame, samples, scale):
             # opal from the crown, so the dome glows in its tint and lights the wall
             light('cob', 'SPOT', (0, 0, rim + 0.060), COB_W, 0.014, spot=92.0)
             light('spill', 'POINT', (0, 0, rim + 0.050), SPILL_W, 0.03)
-            # round 5: the day frame's viewpoint (the pair one scene), a wider lens to keep the table's pool and the
-            # whole cable; a stoneware bowl on the table
-            cam = ((0.0, -1.22, rim - 0.17), (0.0, 0.0, tz + 0.40), 30.0)
-            bowl_m = SC.principled('stoneware', '#C9C2B6', 0.5, bump=(1500.0, 0.25))
-            bm = bmesh.new(); bmesh.ops.create_uvsphere(bm, u_segments=96, v_segments=48, radius=0.11)
-            bmesh.ops.delete(bm, geom=[v for v in bm.verts if v.co.z > -0.035], context='VERTS')
-            bmesh.ops.solidify(bm, geom=bm.faces[:], thickness=0.005)
-            for f in bm.faces:
-                f.smooth = True
-            me = bpy.data.meshes.new('bowl'); bm.to_mesh(me); bm.free()
-            bo = bpy.data.objects.new('bowl', me); bpy.context.scene.collection.objects.link(bo)
-            bo.location = (0.06, 0.04, tz + 0.11); me.materials.append(bowl_m)
-        else:
-            cam = ((0.0, -1.22, rim - 0.17), (0.0, 0.0, rim + 0.02), 85.0)   # round 2: a little below, into the mouth
+            pass
+        # round 6 (the coordinator, 2026-11-03: the pendant too small): one shared camera for the day and the night,
+        # steeper and closer: about 45 deg down from 0.95 m out and 0.93 m above the rim, a 54 mm lens, so the
+        # pendant is about a quarter of the width, the crown clear of the top with the cable running out of it, and
+        # the table's pool and a stoneware bowl below
+        cam = ((0.0, -0.95, tz + 1.55), (0.0, 0.0, tz + 0.566), 54.0)
+        bowl_m = SC.principled('stoneware', '#C9C2B6', 0.5, bump=(1500.0, 0.25))
+        bm = bmesh.new(); bmesh.ops.create_uvsphere(bm, u_segments=96, v_segments=48, radius=0.11)
+        bmesh.ops.delete(bm, geom=[v for v in bm.verts if v.co.z > -0.035], context='VERTS')
+        bmesh.ops.solidify(bm, geom=bm.faces[:], thickness=0.005)
+        for f in bm.faces:
+            f.smooth = True
+        me = bpy.data.meshes.new('bowl'); bm.to_mesh(me); bm.free()
+        bo = bpy.data.objects.new('bowl', me); bpy.context.scene.collection.objects.link(bo)
+        bo.location = (0.05, 0.13, tz + 0.11); me.materials.append(bowl_m)   # round 6: in frame
     if night:
         # round 4: a white ceiling at 2.5 m, so the lamp's light that leaves upward comes back into the room, as at home
         SC.plane('ceiling', (4.3, 4.0), (0.85, 0.0, 2.5), (180, 0, 0), SC.principled('ceiling', '#E8E4DC', 0.9))
