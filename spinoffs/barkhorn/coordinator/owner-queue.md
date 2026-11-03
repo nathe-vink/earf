@@ -3002,3 +3002,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   clipping and following its tint, honestly lit; the softbox patch moved or flagged; the lower-left face flagged or the cyc extended; the
   EARF mark: first a raking light across the back panel (proved on Ember and Poison), else a frosted, light or bronze letter face rendered
   as a proposal for the owner (a build change, not adopted); proxies on Ember and Poison; a SHA and a back fix chunk for the seven tints.
+- 19:37 Mantle C3d pair gate wf_700c6e26-934 (3 critics, ~22 min): NIGHT SHOW 2/3, DAY SHOW 2/3: the pair passes. Night: the light rises
+  through the field only, nothing red on the base, posts or floor even brightened 2.2x, no strips, one build (one critic held it as a flat
+  lightbox wanting a stronger radial falloff and a cool rim on the dark acrylic). Day: one critic held it (the ring a neutral charcoal band
+  from above, blamed on the dark-grey inner faces; an airbrushed charcoal-to-brick ramp on the front face; a hazy right side face ~129,109,104;
+  a pink-white glint pinstriping the field's edge). Residual risk named by two: at night the black chassis plus the red field still echoes the
+  "gaming" look. Mantle's item can go to the owner with this pair against A (A night held 2/3 at 17:55).
+- 19:37 sent to the Mantle lane: passed; optional polish (the day ring's inner faces polished black or clear, the black band kept; crisp
+  layer bands instead of the ramp; the right face's roughness checked; the field-edge glint rounded or darkened), both frames re-rendered from
+  one build if the build changes; the set kept (no added fill) for a fair comparison with A; the gaming-echo risk named to the owner.
