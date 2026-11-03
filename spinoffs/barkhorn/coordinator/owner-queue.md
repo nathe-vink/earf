@@ -1448,3 +1448,17 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 10:46 sent to the speaker lane (the message said 10:47) (after D, Smoke-D and the Smoke day comparison): A with the horn's outside polished, identical to
   a47ae365 otherwise, as a pair with A; and a plain feasibility note (which face touches the tool, forming marks on a polished
   outside, polish cost per horn, why satin was chosen, fingerprints and scratches, any tooling change).
+- 10:45 speaker lane: D day at 4b23a91ab99f35e12bda4d723fbf759375cd9be9 (A's camera, light and exposure, light off; the channels and
+  standoffs read as thin dark lines through the walls). The night set from three proxies: a close wall alone and a dark glossy
+  floor alone made it worse (78 % black, the horn at 0); a low navy room fill (2 x 2 m soft area from the front, #2E4A78, 6 W/m2 in
+  the finals) brings black pixels to 12 %, the horn a navy silhouette, the cone and surround visible, a floor reflection not a pool.
+  THE PHYSICS: the V fan on the wall can't come from Tropos as built: the batts line the sides, back and top, so D's light leaves
+  through the front and the polished edges, not backward or upward; the wall behind stays dim (~8). A fan like the site's needs an
+  unlined or voile-only top or back: a design change, the owner's call; not faked with a wall light. Checked against uplight31's
+  README: its V came from a flat panel 10 mm UNDER the cabinet, the colour leaving round the bottom batts through the walls and the
+  bottom panel's strip by the ports (the light this morning's rule now calls thrown down). Rendering ~90 min: D night, Smoke-D
+  black and white, then the Smoke day comparison.
+- 10:48 study wf_6f2b81e0-333 started (the lining's acoustic job with mode maths; light-passing damping such as clear
+  micro-perforated panels; the light path with an unlined top or back; then a skeptic writes the brief). 10:49 gate wf_4c76247f-752
+  on D day with A as context. My pick for the base question may change: if D can't give the site's look as built, its value is a
+  lantern glow the owner didn't ask for, and A (no light) becomes the natural pick unless the study finds an honest top.
