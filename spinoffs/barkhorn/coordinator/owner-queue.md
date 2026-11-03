@@ -1394,3 +1394,13 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   fixed Vero 10 per tint (2700 K warm and green, ~4000 K Haze, 5000-5700 K Ice); Core's 2700/5700 K board covers the tunable plan.
   Gate wf_eb405d5e-e30 started 10:16 on the two day frames plus the three nights (sha256 clear 4be242dd, frost a6b7619f, hemi
   88bcf5d8).
+- 10:28 Smoke options gate wf_cf9743bf-e44 (3 critics, 19 min): all three HOLD 3/3 (see-through fails; two critics also fail
+  "not cheap"). 2064 is the right direction (bottom ports 1.8-3.2x brighter, the top brace and port tubes show) but the lined middle
+  is the same black in all three; the white-lining frame is pixel-identical to the black on the speaker (mean difference 0.33/255:
+  nothing lights the lining's camera side with the fire behind), so the lining question is untested; the horn reads as "an opaque
+  matte taupe shell", identical in all three; the fire-backlit scene is "not a fair test of transparency". Physics: 12 % and 29 %
+  a wall is about 1.4 % and 8 % through front and back. The lane's single agent had passed 2064 black and white.
+- 10:30 sent. Biomes: check the horn's material in habitats.py (0c139863) before the seven finish (it must be the cabinet's glossy
+  see-through volume glass in every tint); the fire frame is a habitat picture, not the decision picture. Speaker lane, after D
+  night and Smoke-D: a fair day comparison on A's set at one exposure (2064 white, 2064 black, and 2074 white if time allows), and
+  check its own Smoke horn. The Smoke question to the owner waits for Smoke-D and that comparison.
