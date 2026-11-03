@@ -1630,3 +1630,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   on the rear member; an E proxy at 14 cm and 0.75 m with the V metrics; E night and day if it draws the V without a hot line; BASES.md
   corrections and the voile colour flagged. The base question: A (no light) or E (the site's look, honestly, near a wall), after E's
   test; the owner told now with the option to say "no light".
+- 12:24 biomes lane: the grounding was its bug on every Strata habitat: feet() put the M8 feet at z 0-12 mm, but Strata's cabinet sits
+  38.5 mm up (where base A was), so with the plinth dropped the feet hung 26 mm below the cabinet (the "pebbles") and the cabinet
+  floated. Fixed at 936ae297258b2227d214eafde4a24a81c3e61b67 (the feet hang from the cabinet's own bottom; --sink beds them 6 mm into
+  ash and sand). Dust 426996f1 WITHDRAWN too (both gates had passed its grounding); the chain stopped (Acid mid-render). Ember proxies
+  g1 (feet fixed, sunk), g2 (rotate_z -1, the lava's reflection off the panel's foot), g3 (+ the foreground-lava face lamp at 0.48);
+  checked at 390 px; then all seven restart, each checked for contact and hot reflections at the foot. My Dust gate (wf_329e2471-34a)
+  is on the withdrawn frame; its notes may still help the re-render.
