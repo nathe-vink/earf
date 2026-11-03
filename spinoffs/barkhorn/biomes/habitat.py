@@ -43,8 +43,8 @@ def scale_lights(sh, scales):
                 L[key] = L[key] * f
 
 
-SURFACE_GLASS = True                    # the glass's tint on its faces, not in a leaking volume (--volume-glass: off)
-WELD = [False]                          # --weld: weld the asset's split vertices so its glass volumes close
+SURFACE_GLASS = False                   # --surface-glass: the tint on the faces (not adopted: the speaker lane's volume is the line's material)
+WELD = [True]                           # the asset's split vertices welded so its glass volumes close (--no-weld: off)
 TT_SURFACE = 0.92                       # the two faces' reflection loss, as tints.py has it
 
 
@@ -329,12 +329,12 @@ def main():
     ap.add_argument('--glass-from', type=float, default=0.12, help="the asset's own (Smoke 2074: 0.12)")
     ap.add_argument('--uplight', type=float, default=0.0, help='the night uplight, W (0: off, the day)')
     ap.add_argument('--no-ground', action='store_true', help="don't settle the speaker onto the set")
-    ap.add_argument('--weld', action='store_true'); ap.add_argument('--volume-glass', action='store_true')
+    ap.add_argument('--no-weld', action='store_true'); ap.add_argument('--surface-glass', action='store_true')
     ap.add_argument('--lining', help="the lining's color, hex (colors F: Smoke '#0B0B0B')")
     ap.add_argument('--flag', type=float, nargs=2, default=(8.0, 6.0), help='the black flag behind the camera, m (0 0: none)')
     a = ap.parse_args()
     global SURFACE_GLASS
-    WELD[0] = a.weld; SURFACE_GLASS = not a.volume_glass
+    WELD[0] = not a.no_weld; SURFACE_GLASS = a.surface_glass
     sh = json.load(open(a.shot))
     scale_lights(sh, {k: float(v) for k, v in (x.split('=', 1) for x in a.light)})
     for kv in a.sets:
