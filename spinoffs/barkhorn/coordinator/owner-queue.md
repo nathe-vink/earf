@@ -1954,3 +1954,16 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   example); then, once ready, Smoke (the ~50 % target in gate wf_f3111455-c52; the chips and 3/4 in off-cuts ~$150-200), Mantle
   (A or C once C passes), Core and Hemisphere's hue (lamps lane), and a heads-up on 3 helper render machines (~6-7 h instead of
   ~22 h). The board's "Waiting for your review" section for the rest (29 cards, none urgent).
+- 15:01 OWNER: "You need to show me everything one at a time and let me answer questions, and don't miss anything." Saved verbatim
+  first (README 388ce649, time fix 9a870125). A standing rule from now: one item at a time, each shown with its pictures; the next only
+  after the owner answers or asks; nothing missed. Inventory workflow wf_314ae1f9-899 started 15:02 (five sweeps: the log in two
+  halves, the README owner notes, the board v23 and its 29 review cards, every lane branch; a merge; a completeness critic and an
+  accuracy critic; a final pass writing scratchpad/walkthrough/inventory.md and .json).
+- 15:03 Ice gate wf_c76b4689-d68 (3 critics, 17 min): SHOW 3/3. See-through clear cobalt with every internal visible, the bottom batt
+  plain at phone size, the horn the cabinet's hue within ~3 degrees ("frosted tinted acrylic, like sea glass"), no X, no light down,
+  premium. Optional polish: bed the base ~1 cm into the snow (a pale 7-8 px strip under the cabinet at full size, a hairline of light
+  under the left front corner); a little more shape on the horn. All three: polished would change the horn (glassier, the driver
+  and posts through it), and this soft dusk light is a fair place to test it. Waits its turn in the walkthrough.
+- 15:04 check-in moved to 15:55 as #44 (the walkthrough mode). Item 1 shown: scratchpad/walkthrough/01-base.jpg (A by day, passed
+  3/3 in wf_630f6086-2d5; D by day, passed 3/3 in wf_4c76247f-752; the owner's own site uplit image), the base question, one answer
+  asked. The lantern's night picture is not shown (v2 held 2 of 3; v3 coming).
