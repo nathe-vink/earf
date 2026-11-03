@@ -1470,3 +1470,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   fingerprints and swirls (polish out); satin hides prints but a scratch can't be buffed out. Satin was the owner's look, not a cover
   for defects. Tooling unchanged ($6,925 / $14,465). The polished-A pair frame (gate2/A-ice-polished.png) after the six now
   rendering, ~1 h 45 min.
+- 10:51 check-in #38. Running: D day gate wf_4c76247f-752 (A as context) and the unlined-top study wf_6f2b81e0-333. Speaker lane
+  rendering D night, Smoke-D black and white, the Smoke day comparison (2064 white, 2064 black, 2074 white), then A polished (~12:35).
+  Mantle g3 in work (README 3e0e1a19, 10:37). Lamps round 5 in work (05bf9afe, 10:42: the opal ends inside Hemisphere's rim). Biomes'
+  seven rendering on hornA2 since 10:44. The owner's questions, in order: the base (~noon UTC), the horn finish (satin or polished),
+  then Smoke. Site held at 743be0cb; board v23; deck v68. Re-armed for 11:41 (#39).
