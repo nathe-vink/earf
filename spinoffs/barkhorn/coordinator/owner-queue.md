@@ -2605,3 +2605,35 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 17:57 sent to the Mantle lane: the day from the C3b build; the red tick removed; the field's emission counted as indirect light (the
   pillar base and the platter's underside a little red, none on the floor), or the numbers if it already is; the arcs checked; an
   optional cool strip catch on the ring; the centre feed and the set (navy ambient) kept for a fair A comparison; full SHAs.
+- 17:50 c2: chunk 13 landed (site-side ember, dust, acid, poison, ice; 16:43-17:48; 10.8-13.8 min each) at
+  854623c86eb203818897651ab1f1e93ebeabce01 (r33-rollout-c2; the push ~2 min); chunk 14 started 17:49.
+- 17:53 speaker lane: the deck shot fixes at 5d1dc9c373cc58763bdbb45185d5c6c8faed30c1 (shots.py; the roll-out's shot files
+  regenerated). The room (deck-home and the portrait): window sills at 0.9 m (tops 2.75 m) and the sun 17 to 8 degrees, so it reaches
+  the left unit only above ~0.77 m and the right above ~0.41 m; AgX for PBR Neutral, -2/3 stop; the left unit's toe-in 6 to 1 degrees,
+  the right -6 to -8 (off the pinwheel); two leads already, each from its own outlet, hidden behind the units. The row: a reflect-only
+  black card behind and right of the row (the side faces' rays go toward the sweep, the backdrop lamp or the next unit), spacing 0.95
+  to 1.0 m, a lamp linked only to the sweep for the corner. Acid's coral edges: an artefact (the model's amber passes red completely,
+  so on the edges' 0.3-0.42 m paths only red survives, 9-22x the green); the stock, TruCast 9097 Fluorescent Yellow, would glow
+  yellow at its polished edges; fluorescence isn't modelled; an interim (a slight red absorption, toward orange) offered. Proxies
+  (0.3 scale, 32 samples) after chunk 1 (~25 min); then chunk 3, chunk 4 with the room fix; the fix chunk's lines once they pass.
+- 17:54 biomes lane (its message said 17:56): Fog reframed at db521d8d102bf7e6bf8f8cccc83af03a86ae69ae (the camera 0.30 m lower, 1.15 to
+  0.85 m, lens rise 0.06 to 0.18; 5 degrees toward the front; f/5.6 to f/4; the sun's colour #FEEA98 to #FFF1D6, the sheet unchanged;
+  the right rock to check). Queue: Ember, the Fog proxy (the crease number, the edges' b*), Acid, Haze, Poison, the Fog final; Acid's
+  horn sits on even overcast cloud (to confirm on its final).
+- 17:56 biomes lane (its message said 17:57): Ember polished at 8fe79529ceab37b1aecfbfe4549aac43d821509b
+  (renders/2026-11-03/barkhorn/habitats/ember-portrait-1200x1500.jpg; as 069ee400, roughness 0.05): the horn's red mean/p90 120/165
+  satin vs 57/76 polished, the side face 69: at or under the side face, the glowing lens gone. Its own gate passed all four.
+- 17:58 speaker lane: Smoke's horn found, its own v2 change: the flare (horn-satin) was #A6A9AE as stated, but v2 lightened horn-formed
+  (the throat, pod, cap, pads, saddle) to #C8CBD0, ~58 % per 10 mm, to stop the tabs going black; the posts rise behind the throat and
+  pod, so the bright region sat over the lighter thick parts (tint per volume by depth; polish changes only the surface). v3: both at
+  #A6A9AE, no further notch; four reflect-only black cards behind, beside and above the horn at its height, so the lip mirrors black
+  and the cabinet's sides don't; the same on a 2064 re-render. The tabs go darker again (the honest sheet); the insert's warmth on the
+  proxy; the build change not rendered. The Ice roll-out unaffected (only the Smoke shots carried the override). NOTES.md: the
+  light-path proof and the caption.
+- 18:01 my gate on Ember polished (wf_deb38cbd-e5d; Dust and Ice polished as context) started.
+- 18:01 sent to the speaker lane: the room and row plans agreed (the reflect-only card and the sweep-only lamp as an out-of-frame flag and
+  a flagged lamp: they only darken reflections and lift the sweep, nothing brightening the product); confirm the regeneration touched
+  only deck-home, deck-home-portrait and deck-row. Acid: no interim (still not the real look; a mid-roll-out change would split Acid's
+  pictures, the helpers on pinned SHAs); TINTS.md to say plainly the edges render coral-red where the real 9097's glow yellow; a 9097
+  chip photographed edge-on added to the samples list for the owner (with Smoke's chips). Smoke v3 agreed; on its proxy the posts, the
+  body and the tab insert's hue.
