@@ -1099,3 +1099,16 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   dusk figure, the press kit's dusk picture and "its base glowing" alt text removed; COPY_NEXT's Mantle drafts rewritten. Kept: the
   uplit stage, "Put a light under it.", the speaker's "Lit from below" (light up the wall). Checked frames 2 and 8 of the new sheet: right.
 - 05:28 Mantle lane: corrected my 05:20 brief: FAULTS item 9 (shared adapter) was the first Mantle's; v3 has its own inlets (9d617c0c).
+- 05:47 biomes lane: two Smoke proofs at b05a0130734384f32fade68598d742c5b9a848fe (1200 x 1500, 48 samples): 2074 on its own feet
+  (no plinth, uplight layer off, fireback panel behind) reads as smoked glass; 2064 (test only) clearly see-through; black lining kept.
+  Checked against 97079591: big step. But the stand-in still has the stepped horn and its X shows. Told (~05:49; my message said
+  05:52): link the horn A default model r33-speaker-horn 4ec3bc96898f313b26c3d7dd5e7613d009d0810d (full throat ring, own feet, no
+  base) for every proof; re-render Smoke 2074 on it with the pale right wall down a step; uplight off until the base answer; then
+  the other seven, day frames.
+- 05:50 Mantle lane: the light through the acrylic, round 1 (source 8a20b821e7062f8931adfd5b18f7a0958e209a13, renders and critic
+  b2613bf9c4c41e2d7ad156e311c54632738de5f2): COB strip in a groove under the deck's edge, facing up into the slab; ~6 W; +$15-20 a
+  unit; the base's slot gone; supplies as v3. Night Ember reads as neon edges on a black slab (critic 5.5, "gaming-PC"); the deck
+  tint passes ~2.2 % through 25.4 mm. Day frame good. Not shown to the owner. Round 2 asked (~05:51; my message said 05:57): a layered
+  deck (tint outside over a clear light-guide core with a white/frosted diffuser, like Hemisphere's color outside and the speakers'
+  F lining), a lighter pour only as a comparison, Ember night/day + Poison night, one critic round, no floor pool.
+- Note to self: three times today my messages carried times ahead of the clock. Run date before writing any time.
