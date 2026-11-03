@@ -3271,3 +3271,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   the posts' bronze; a few beads; then the horn re-matched; all in the planned Acid proxy, the final after the tint fix. To the speaker
   lane: the 9097 long-path fix in the shared tint model with a SHA for both lanes (hue 40-55, edges within ~10 of the faces; any
   approximation documented in TINTS.md), after the floor-patch SHA.
+- 20:4x r43-window v3 gate wf_bed58229-1f6 (3 critics, ~25 min): HOLD 3/3, clearly better than v2 (see-into top to bottom; grounded; the red at
+  the feet gone); but the street-side front light clips ~10 % of each front (flat salmon, self-lit, no longer the horns' red); the
+  window-head spot leaves a new white chevron and the old white diagonal on the left horn and two block glints on the left woofer ring;
+  the milky corner on the left top unchanged; the floor between the speakers still the brightest (1.4-1.65x). All six gates of this round
+  collected.
+- 20:47 sent to the bar lane: window v3's fixes (the front light down 1-1.5 stops or feathered, lining R 150-200, G/B < 30; the spot moved,
+  flagged, softened or the speaker turned, never hidden from gloss; the top's sheen; the floor between even; contact shadow) into window v4
+  with kit43's strips. Walkthrough header: the habitats, bar, deck, roll-out and lamps bullets brought to 20:47.

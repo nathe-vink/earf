@@ -33,20 +33,31 @@ Show one item with its pictures, wait for the answer, save the owner's words ver
     255). READY: show the C3e pair at item 82. The optional ring polish was tried and not taken (a glassier day ring adds night edge light).
   - Smoke: v2 held 3/3 (17:53): its horn's thick parts were lightened to ~58 % in v2 (the lane's own change). v3 puts the whole horn on one
     sheet at #A6A9AE (~38 %), black cards for the lip, and a 2064 re-render for a fair pair; after the speaker lane's chunks 3 and 4.
-  - The habitats: Ember passed 3/3 at 10 degrees off (19:43, 45225a29), joining Dust and Ice. Fog's reframe proxy cut the horn's crease
-    from 35.5 to 20.3 L (18:15); Ember had been held 2/3 (18:21) on a sky wedge in the horn.
-    The cause across Ember, Haze and Poison: the speaker turned 23-38 degrees off the camera's line (Ice, clean, ~4). All turned to ~10
-    degrees (c3e199ca); the measure calibrated on the passed Ice and Dust. Acid's final, then the Ember, Haze and Poison proxies, their
-    finals, then Fog; done ~21:30 UTC.
+  - The habitats (state at 20:47): Dust, Ice and Ember passed 3/3. Haze held 3/3 (20:2x: a dark navy block, a cobalt horn ~5x the box;
+    re-lit with the sun through the right wall, a smaller real flag, the horn top to ~33 %, proxy next). Acid held 3/3 (20:4x: an amber box
+    with red-orange edges under a golden horn, the 9097 long-path model, being fixed in the shared tint model; linings near-black; the
+    base 27 px above its reflection; its rim light was linked to the speaker alone, now unlinked). Poison: the lip's white check-mark
+    being traced (its litter lamp was at specular 0, now 1.0). Fog's final rendering (the first with real flag and cards). The flag and
+    cards are real objects from 18893298 on; a Haze A/B decides whether the passed frames stand (under ~2 levels on the speaker).
+    Every habitat tint is on spec within 0.2 points (20:33).
   - The tint densities (Haze, Poison) wait for those finals.
-  - The bar pictures: r43-listening v2 passed 2/3 (polish queued); r43-window v1 passed 2/3, its polish (v2, 9056fafc) is gating; r44-lantern
-    passed 2/3 (polish queued); r43-shop v2 held 3/3 (18:05) on the display spots' floor pools at the feet, v3 (the key to the shop side)
-    queued.
-  - The deck: the row and the home portrait held 2/3 (17:47); the room's sun (a sill, a lower sun, AgX) and the row's flag are in the shots
-    (5d1dc9c3); proxies after the speaker lane's chunk 1; a fix chunk for a helper. Deck v69 waits for them.
-  - The roll-out's site set: front-off-tall (seven tints) held at 18:27: a white reflection on the lower right side face in all six tints,
-    the top batt clipped to pastel, Fog lit 0.6 stop darker, Dust's and Acid's long-path edges red. The speaker lane is tracing which rigs
-    share the light; the helpers wait before phase 2 for a fixed SHA.
+  - The bar pictures (state at 20:47): every r43 frame hid kit43's shelf LED strips from camera and gloss (ruling 1): fixed from
+    listening v4 on. listening v3 held 3/3 (19:10, "one prop move away"); r44-lantern v3 held 3/3 (19:41); shop v3 held 3/3 (20:2x: the
+    cabinets clipped to coral lightboxes, the horn streaks, the last window ghost); window v3 held 3/3 (20:47: better than v2, see-into
+    and clean at the feet, but its front light clips the fronts and the window-head spot leaves hard white marks on the left horn). Order:
+    listening v4, r44 v4, shop v4, window v4.
+  - The deck (state at 20:47): the row (fix1 chunk 1) rendering on c4 since 20:21 on the honest rig (1e79f362); the home portrait on c3
+    since 20:35 (the room's rig, clean). The deck hero to be re-proxied with the rulings folded in; the cover needs a real re-light
+    (e81c1a4a, unproved). Deck v69 waits for them.
+  - The roll-out's site set (state at 20:47): fix1 (honest_lights) at 1e79f362, but its in-frame reflect-only floor patch was sent back;
+    the speaker lane is choosing a real fix (no patch, kick at half, or a honeycomb grid), then the SHA for c2 and c3 and c4's chunks 3
+    and 2. Phase 2: the glow lamp dropped (noise-only difference), so chunks 4 and 05 stand; the six horn-backs passed (Acid's held on its
+    edge colour; the amplifier close-up held on the stale rating plate, its softbox and the inlet's pins); turn 00, 02, 03, 04 passed,
+    turn-01 held (a grey face), the side flags (e81c1a4a) to prove on 01 and 05 before chunk 6; inside-ice held (the base cut off).
+  - The lamps (state at 20:47): Hemisphere day passed 3/3 (rig clean). The night rig was rebuilt under rulings 1-3 (dc60ce44): the
+    Hemisphere day and both night liners rendering at full size. Core B day held 3/3 (20:2x: the core lost, the shell reading dense
+    aqua, a muddled seat, a "fill line"); the night final stopped; next the opal core (a proposal) lit by a real sun with the wall in
+    shade, then B day and night.
   - Acid's coral-red edges are a model limit (its amber passes red completely; the real 9097's fluorescent edges glow yellow): written in
     TINTS.md (6cbd9e37), the model unchanged; a 9097 chip photographed edge-on is added to the samples list (item: the chips and off-cuts).
     The colour-names item ("is 'Acid' right for a golden yellow?") stands as written: TINTS.md calls Acid yellow, Dust orange.
