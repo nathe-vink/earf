@@ -466,7 +466,7 @@ def core_material(name, box, cover=(0.05, 0.35), ramp=0.14, glow=0.0, glow_col=(
     return mats
 
 
-def core_glow_sheet(core, strength, col, box=None, grade=(1.4, 0.8), fall=0.05):
+def core_glow_sheet(core, strength, col, box=None, grade=(1.4, 0.8), fall=0.05, occl=None):
     """The guide's output (see core_material): a copy of the print's faces 0.3 up inside the core, facing up,
     transparent to rays and emitting upward only, so the opaque print under it keeps every path to the shelf dark."""
     me = core.data
@@ -508,7 +508,13 @@ def core_glow_sheet(core, strength, col, box=None, grade=(1.4, 0.8), fall=0.05):
         dy = mth('SUBTRACT', hd, b_in=mth('ABSOLUTE', mth('SUBTRACT', sep.outputs['Y'], cy)))
         d = mth('MAXIMUM', mth('MINIMUM', dx, b_in=dy), 0.0)
         g = mth('ADD', mth('MULTIPLY', mth('EXPONENT', mth('DIVIDE', d, -fall)), grade[0] - grade[1]), grade[1])
-        nt.links.new(mth('MULTIPLY', g, strength / mean), em.inputs['Strength'])
+        val = mth('MULTIPLY', g, strength / mean)
+        for (ox, oy, R0, depth, w) in (occl or []):
+            # by day: the platter and the arm plate shade the room's light from the print under and round them
+            r_ = mth('MAXIMUM', mth('SUBTRACT', mth('SQRT', mth('ADD', mth('POWER', mth('SUBTRACT', sep.outputs['X'], ox), 2.0),
+                                                                   b_in=mth('POWER', mth('SUBTRACT', sep.outputs['Y'], oy), 2.0))), R0), 0.0)
+            val = mth('MULTIPLY', val, b_in=mth('SUBTRACT', 1.0, b_in=mth('MULTIPLY', mth('EXPONENT', mth('DIVIDE', r_, -w)), depth)))
+        nt.links.new(val, em.inputs['Strength'])
     ad = nt.nodes.new('ShaderNodeAddShader'); nt.links.new(tr.outputs['BSDF'], ad.inputs[0]); nt.links.new(em.outputs['Emission'], ad.inputs[1])
     mx = nt.nodes.new('ShaderNodeMixShader'); nt.links.new(geo.outputs['Backfacing'], mx.inputs['Fac'])
     nt.links.new(ad.outputs['Shader'], mx.inputs[1]); nt.links.new(tr.outputs['BSDF'], mx.inputs[2])
@@ -911,7 +917,8 @@ def build(args):
         M['base'] = acrylic('base', bands_b, tint, ring=(0.0, 0.0, meta['Wb'] * mm, meta['Db'] * mm, rw * mm) if rw else None)
         if meta['P'].get('post_material') == 'stainless':
             # v3: the base is stock smoked 2064 in every version, the posts polished stainless, the mark a polished recess
-            M['base'] = acrylic('base', [(l['z0'] * mm, l['z1'] * mm, 'tint') for l in meta['base']], args.base_tint)
+            M['base'] = acrylic('base', [(l['z0'] * mm, l['z1'] * mm, 'tint') for l in meta['base']], args.base_tint,
+                                rough=args.base_rough if args.base_rough else 0.004)
             M['etch-tone'] = dielectric('etch-tone', '#101012', 0.12, spec=0.5)
         M['lid'] = acrylic('lid', [(0.0, 0.5, 'tint')], tint if args.tint_mode != 'custom' else tint, rough=0.004)
         M['post'] = acrylic('post', [(0.0, 0.5, 'clear')], tint, wear_on=False)
@@ -944,7 +951,10 @@ def build(args):
             if args.core_glow > 0:
                 o0_, rw2 = meta['P']['margin'] * mm, meta['P']['tint_ring'] * mm
                 core_glow_sheet(o, args.core_glow, tuple(args.strip_color),
-                                box=(o0_ + rw2, o0_ + rw2, o0_ + meta['W0'] * mm - rw2, o0_ + meta['D0'] * mm - rw2) if args.grade else None)
+                                box=(o0_ + rw2, o0_ + rw2, o0_ + meta['W0'] * mm - rw2, o0_ + meta['D0'] * mm - rw2) if (args.grade or args.day) else None,
+                                grade=(1.4, 0.8) if args.grade else (1.0, 1.0),
+                                occl=[(meta['S'][0] * mm, meta['S'][1] * mm, meta['P']['platter_d'] / 2 * mm, 0.6, 0.035),
+                                      (meta['A'][0] * mm, meta['A'][1] * mm, meta['P']['puck_d'] / 2 * mm, 0.5, 0.018)] if args.day else None)
             for p in o.data.polygons:
                 p.use_smooth = False
             continue
@@ -1138,6 +1148,13 @@ def setup_world(args, meta):
             if o.type == 'LIGHT':
                 o.data.energy *= args.ambient; o.data.color = (0.70, 0.78, 1.0)
         bg.inputs['Color'].default_value = (0.010, 0.013, 0.025, 1)
+        if args.kicker > 0:
+            # gate 1: a low warm kicker from the front right and a rim from behind left, small and tight, so the arm,
+            # the posts, the base's edge and the feet read at night; warm white, nothing colored on the floor
+            kk = area('kicker', (0.25, 0.08), (cx + 0.55, cy - 0.55, 0.16), (cx + 0.10, cy + 0.02, 0.07), args.kicker, col=(1.0, 0.86, 0.70), spread=15, caust=False)
+            kk.visible_camera = False
+            rr = area('rim', (0.30, 0.06), (cx - 0.45, cy + 0.55, 0.14), (cx + 0.05, cy, 0.06), args.kicker * 0.8, col=(1.0, 0.88, 0.74), spread=15, caust=False)
+            rr.visible_camera = False
         if args.reflector > 0:
             # gate 1: one large, dim, soft source behind the deck, at the camera's mirror over the deck's top, so a long
             # graded reflection lies across the glossy skin (light inside glass, not a lightbox); unseen by the camera
@@ -1171,6 +1188,12 @@ def setup_world(args, meta):
         'stand': dict(pos=(cx + 0.30, cy - 1.6, 0.55), tgt=(cx - 0.20, cy + 0.10, 0.12), lens=60, f=8.0, focus=(cx, cy - 0.1, 0.08)),
     }
     s = shots[args.shot]
+    if args.pan:
+        # gate 1: move the camera and its target along its right vector, so the deck sits with room on both sides
+        dx_, dy_ = s['tgt'][0] - s['pos'][0], s['tgt'][1] - s['pos'][1]; L_ = math.hypot(dx_, dy_)
+        rx_, ry_ = dy_ / L_, -dx_ / L_
+        mv = lambda p: (p[0] + rx_ * args.pan, p[1] + ry_ * args.pan, p[2]) if p else p
+        s = dict(s, pos=mv(s['pos']), tgt=mv(s['tgt']), focus=mv(s['focus']))
     co.location = s['pos']
     co.rotation_euler = (Vector(s['tgt']) - Vector(s['pos'])).to_track_quat('-Z', 'Y').to_euler()
     cam.lens = s['lens']; cam.sensor_width = 36
@@ -1268,6 +1291,8 @@ if __name__ == '__main__':
     ap.add_argument('--caustics', action='store_true')
     ap.add_argument('--glass-shadows', action='store_true')
     ap.add_argument('--grade', action='store_true'); ap.add_argument('--reflector', type=float, default=0.0)
+    ap.add_argument('--kicker', type=float, default=0.0); ap.add_argument('--base-rough', type=float, default=0.0)
+    ap.add_argument('--pan', type=float, default=0.0)
     ap.add_argument('--core-glow', type=float, default=0.0)
     ap.add_argument('--day', action='store_true'); ap.add_argument('--ambient', type=float, default=0.05)
     ap.add_argument('--base-tint', default='smoke')

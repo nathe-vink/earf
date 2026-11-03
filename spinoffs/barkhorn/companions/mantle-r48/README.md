@@ -474,8 +474,24 @@ How the new frames are drawn (`render_lantern.sh g1`):
   One large, dim, soft source behind the deck, unseen by the camera, lays a long reflection across the glossy skin.
 - **Day:** the room's light on the print is baked for the new build, at about half the old strength. The sparser dots
   and the deeper skin account for that.
-- `a4-day-ember-2423-g1-zero.png` has no emission at all, for reference. Cycles leaves a print sealed under glass
-  unlit, so the deck reads black there, which the real deck would not.
+- With no room-light term at all, the deck reads black by day. Cycles leaves a print sealed under glass unlit; the real
+  deck would not read black.
+
+The third judge (08:17) added five fixes. All of them are in the frames:
+- **Hardware at night:** a low warm kicker and rim, small and tight and unseen by the camera, so the arm, the posts,
+  the base's edge and the feet read. The floor stays neutral.
+- **The red bar on the base's top** (its mirror of the deck's lit end): the base's top is now a fine satin, a real
+  finish (machined, then fine-blasted).
+- **Poison:** its glow a stop up, so the top is the light source and its edges read as see-through green glass.
+- **Framing:** the camera panned 50 mm, the same for the set, so the deck has room on both sides.
+- **Day:** the print's room light is shaded round the platter and the arm plate, and baked a little lower (7). The top
+  reads as deeper ruby with depth, clearly unlike the lit night face.
+
+| frame | what |
+|---|---|
+| `a4-night-ember-2423-g1.png` | Ember at night after the gate's fixes |
+| `a4-night-poison-2092-g1.png` | Poison at night after the gate's fixes |
+| `a4-day-ember-2423-g1.png` | Ember by day after the gate's fixes |
 
 ### The render (how the light is drawn)
 
