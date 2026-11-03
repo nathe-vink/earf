@@ -1,0 +1,24 @@
+{
+ "impression": "A clean, well-proportioned blue glass pendant against a plain warm-grey wall: tidy and believable, but the flat backdrop, the lack of any setting and the very even light make it read as a studio CG render, not a photograph.",
+ "score": 6.5,
+ "tests": {
+  "acrylic": {
+   "pass": true,
+   "why": "The shell reads as glossy, saturated tinted glass. It has crisp reflections, a deeper blue band where the rim edge thickens, and visible layered edges at the mouth (the tinted outer shell, the clear middle shell and the opal inner layer). The pale area at lower left is a softbox reflection, not a milky face. One weakness: the dome is so dense that nothing behind it shows through, so it reads closer to solid blue plastic than to see-through glass."
+  },
+  "grounded": {
+   "pass": true,
+   "why": "It hangs plumb from a black cord that runs out of the top of the frame into a stepped crown. It does not float."
+  },
+  "no_light_down": {
+   "pass": true,
+   "why": "The lamp is off, as it should be by day. There is no glow and no pool of light anywhere, and no table or floor in frame. The opal underside is lit only by ambient light."
+  },
+  "todays_design": {
+   "pass": true,
+   "why": "It matches the description: a roughly hemispherical shade hanging mouth-down, a black cord, black matte anodised hardware with a stepped crown and cap, a tinted outer shell, a clear rim layer, and a white opal inner layer seen from below, switched off in daylight. Small flaws: a thin dark vertical seam just under the crown at centre, and a black ring at the very rim lip that reads as a gasket not in the description."
+  }
+ },
+ "verdict": "PASS",
+ "fix_if_fail": "Not required. To raise the score: lighten the tint's density so some of the wall and the inner opal glow through the sides, remove the seam under the crown, and add some context (a table edge below, or a wall with a gradient) so the frame reads as a photograph."
+}

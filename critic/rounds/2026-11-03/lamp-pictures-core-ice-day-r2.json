@@ -1,0 +1,24 @@
+{
+ "impression": "A clean, believable daylight product shot of a deep blue glossy ball on a black base and dock, with good table shadows and grain; it still reads slightly as CG because the ball is almost opaque and its reflections are a little too smooth.",
+ "score": 7.0,
+ "tests": {
+  "acrylic": {
+   "pass": true,
+   "why": "The ball reads as saturated tinted glass. It has crisp specular windows, some depth where the frosted inner face shows as lighter cyan at lower right, and no white-washed or milky faces. It is close to opaque, though: almost no wall or table shows through the edge, so the see-through quality is weak."
+  },
+  "grounded": {
+   "pass": true,
+   "why": "The dock lies flat on the table with a dark contact line and a long cast shadow to the right. The base sits inside the dock and the ball sits down in the base ring, so nothing floats."
+  },
+  "no_light_down": {
+   "pass": true,
+   "why": "The lamp is off. The only light on the table is warm window daylight with a shadow cast away from the sun, and there is no coloured or bright pool under or around the lamp."
+  },
+  "todays_design": {
+   "pass": true,
+   "why": "Every described part is there. At about 4.06 px/mm from the 160 mm ball, the dock measures about 150 mm across and roughly 8 to 10 mm thick, and the short polished black base has a matte black top ring. There is no cable and the lamp is off in daylight. The top ring looks dark grey and satin rather than clearly anodised, which is acceptable."
+  }
+ },
+ "verdict": "PASS",
+ "fix_if_fail": ""
+}

@@ -720,3 +720,7 @@ its finals from the best rig, and put them to a blind duel against the runner-up
 | Lamp pictures, Ice: Core, night | r1 | 5.5 | FAIL (acrylic, design) | | an even glow made the ball read as milky opal; the top ring didn't read as metal |
 | Lamp pictures, Ice: Hemisphere v3, day | r1 | 6.5 | FAIL (design) | "a convincing blue glass dome" | eye level hid the opal underside and the layer stack; a dark seam under the crown (the shade's spheres closed at the top) |
 | Lamp pictures, Ice: Hemisphere v3, night | r1 | 5.0 | FAIL (acrylic) | | a flat teal fill, hard window reflections at night, the glow lighting nothing |
+| Lamp pictures, Ice: Core on its dock, day | r2 | 7.0 | **PASS** (all four tests) | "a clean, believable daylight product shot" | the ball near opaque, see-through weak; the ring satin rather than clearly anodised |
+| Lamp pictures, Ice: Core, night | r2 | 5.5 | FAIL (acrylic, design) | | the glow still milky at the bottom; a hard square highlight (the small fill); "the dock wider than the ball" is perspective (CAD: dock Ø150, ball Ø160, the dock nearer the lens) |
+| Lamp pictures, Ice: Hemisphere v3, day | r2 | 6.5 | **PASS** (all four tests) | "a clean, well-proportioned blue glass pendant" | studio-plain; the dome dense |
+| Lamp pictures, Ice: Hemisphere v3, night | r2 | 6.0 | FAIL (acrylic) | | the lit dome a flat teal, no depth through the layers |

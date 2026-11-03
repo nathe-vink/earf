@@ -1,0 +1,24 @@
+{
+ "impression": "A calm, well-exposed night shot of a teal orb glowing on a black base, let down by a hard little square specular floating in the middle of the ball and a sphere that reads as solid milky opal rather than see-through glass; 5.5/10.",
+ "score": 5.5,
+ "tests": {
+  "acrylic": {
+   "pass": false,
+   "why": "The ball is an even, opaque glowing body with no transparency, depth, refraction, rim thickness or visible inner frosted face. The lower half washes out to a pale milky mint (luminance peak below centre), so it reads as frosted opal or painted glass, not tinted see-through cast acrylic. The crisp square highlight at centre (about 25 px, sharp-edged) is an obvious CG area-light reflection and sits on the surface like a sticker."
+  },
+  "grounded": {
+   "pass": true,
+   "why": "The dock sits flat on the wood with a dark contact edge and a faint glint at its front lip. The base sits in the dock and the ball sits in the base's ring. Nothing floats."
+  },
+  "no_light_down": {
+   "pass": true,
+   "why": "The table around and in front of the dock is no brighter than the table at the frame edges (luminance about 25-35 everywhere). There is no teal pool or spill on the wood. The light stays in the ball and the inner lip of the ring."
+  },
+  "todays_design": {
+   "pass": false,
+   "why": "The parts are all there: ball, short black base, a top ring with a teal-lit lip, a thin black disc dock and no cable. But the dock looks wider than the ball (about 760 px against about 650 px for the 160 mm ball, so about 185 mm), where it should be about 150 mm across and so narrower than the ball. The dock also looks thicker than 8 mm at the front. The top ring isn't visibly distinct as anodised metal from the polished base body."
+  }
+ },
+ "verdict": "FAIL",
+ "fix_if_fail": "Make the ball's acrylic read as clear tinted glass: lower the volume scattering or emission density so the frosted inner face shows behind a clear wall with a visible bright rim and refraction, and replace the hard square reflection with a soft, curved, larger window reflection off-centre. Then resize the dock to about 150 mm across and 8 mm thick so it sits inside the ball's silhouette, and give the top ring a satin metallic sheen distinct from the polished base."
+}

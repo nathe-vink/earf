@@ -1,0 +1,24 @@
+{
+ "impression": "A clean, moody pendant on a dark wall with a nice stepped crown and a glowing opal mouth, but the dome reads as a solid painted teal bowl rather than lit, layered glass; a competent CG render at about 6/10.",
+ "score": 6.0,
+ "tests": {
+  "acrylic": {
+   "pass": false,
+   "why": "Only the thin outer rim and the silhouette edge read as see-through blue glass. The main dome face is a flat, even, opaque teal (around RGB 20,114,102) with a soft milky reflection and no depth, refraction or visible shell layering, so it looks like opaque coloured plastic or an opal face tinted green. You cannot see the 6 mm clear shell or the opal layer through the tint."
+  },
+  "grounded": {
+   "pass": true,
+   "why": "The shade hangs from a black cord that runs out of the top of the frame, and the stepped crown sits on the dome. It reads as suspended, not floating."
+  },
+  "no_light_down": {
+   "pass": true,
+   "why": "There is no floor or table in frame and no pool of light below; the background under the lamp stays an even dark grey (around RGB 27,27,30)."
+  },
+  "todays_design": {
+   "pass": true,
+   "why": "A mouth-down hemisphere, black cord, black stepped crown, a blue tinted outer shell visible at the rim, and an opal layer glowing from below all match the description, and the proportions look plausible for a 200 mm shade. A separate cap above the crown is not clearly distinct, and the 6 mm clear layer is barely legible except as a dark band at the lip."
+  }
+ },
+ "verdict": "FAIL",
+ "fix_if_fail": "Make the dome face read as transparent tinted glass: lower the tint density or scattering on the outer and clear shells so the glowing opal inner layer shows through with depth, varying in brightness from crown to rim. Add rim and edge refraction across the dome, not just at the lip, so it does not read as a flat opaque teal surface."
+}
