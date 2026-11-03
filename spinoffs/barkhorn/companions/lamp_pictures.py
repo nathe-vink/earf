@@ -263,10 +263,14 @@ def build(frame, samples, scale):
     else:
         rim = tz + 0.70                                                 # the rim 700 above the table
         H = 48.2                                  # the collar's hole (round 1: the closed tops left a dark seam)
-        sphere('tint', 100.0, rim, acrylic('tint', 0.0), cut=0.0, hole=H)
-        sphere('tint-in', 97.0, rim, acrylic('tint-in', 0.0), inward=True, cut=0.0, hole=H)
-        sphere('clear', 96.0, rim, acrylic('clear', 0.0, 'Clear'), cut=4.0, hole=H)
-        sphere('clear-in', 90.0, rim, acrylic('clear-in', 0.0, 'Clear'), inward=True, cut=4.0, hole=H)
+        # round 13 (the coordinator: the dome lit nothing, Core's renderer gap): at night the thin shells pass shadow
+        # rays at their own transmission (the tint 3 mm at full dye, the clear 6 mm; half each face)
+        tsh = (lambda m, T: thin_shadow(m, T)) if night else (lambda m, T: m)
+        Tt, Tc = shell_T(tname, 1.0, 1.5), shell_T('Clear', 1.0, 3.0)
+        sphere('tint', 100.0, rim, tsh(acrylic('tint', 0.0), Tt), cut=0.0, hole=H)
+        sphere('tint-in', 97.0, rim, tsh(acrylic('tint-in', 0.0), Tt), inward=True, cut=0.0, hole=H)
+        sphere('clear', 96.0, rim, tsh(acrylic('clear', 0.0, 'Clear'), Tc), cut=4.0, hole=H)
+        sphere('clear-in', 90.0, rim, tsh(acrylic('clear-in', 0.0, 'Clear'), Tc), inward=True, cut=4.0, hole=H)
         opal = bpy.data.materials.new('opal'); opal.use_nodes = True
         nt = opal.node_tree; nt.nodes.clear()
         o = nt.nodes.new('ShaderNodeOutputMaterial'); tr = nt.nodes.new('ShaderNodeBsdfTranslucent')
@@ -282,7 +286,29 @@ def build(frame, samples, scale):
         # edge): the proposed fix, modelled at night: the opal ends 4 inside the rim, as the clear shell does, and the
         # rim's exposed edge is satin (bead-blasted), so no lit polished edge faces the room
         oc = float(os.environ.get('OPAL_CUT', '1.5'))   # round 6: 4 (the proposed rim); round 10 (the gate: close the dark seam at the lip): 1.5
-        sphere('opal', 89.0, rim, opal, cut=oc, hole=H)
+        opal_out = opal
+        if night:
+            # round 13 (ruling 3's exception: the bulb inside its own opal fitting): the liner's lit face is the
+            # reflector's spill, about a quarter of the COB's 575 lm (145 lm), on one photometric scale with the COB
+            # (3.2 W for its 490 lm out of the fitting: 0.0065 W a lumen). The liner's outer face, 0.041 m2, emits both
+            # ways: 145 lm x 0.0065 / (2 x 0.041) = 11.5 W/m2 on average, brighter at the crown, where the reflector
+            # throws it, than at the rim; in the liner's own colour (its transmittance)
+            lm = float(os.environ.get('SPILL_LM', '145')); Wlm = 3.2 / 490.0
+            S0 = lm * Wlm / (2 * 0.041)
+            opal_out = opal.copy(); opal_out.name = 'opal-lit'; nt2 = opal_out.node_tree
+            outn = next(n for n in nt2.nodes if n.type == 'OUTPUT_MATERIAL'); prev = outn.inputs['Surface'].links[0].from_node
+            emn = nt2.nodes.new('ShaderNodeEmission')
+            bb = blackbody(cct); emn.inputs['Color'].default_value = (*(bb[i] * oc_[i] for i in range(3)), 1)
+            tc2 = nt2.nodes.new('ShaderNodeTexCoord'); sx2 = nt2.nodes.new('ShaderNodeSeparateXYZ')
+            nt2.links.new(tc2.outputs['Object'], sx2.inputs[0])
+            gz2 = nt2.nodes.new('ShaderNodeMapRange'); gz2.clamp = True
+            gz2.inputs['From Min'].default_value = oc * MM; gz2.inputs['From Max'].default_value = 0.075
+            gz2.inputs['To Min'].default_value = 0.6 * S0; gz2.inputs['To Max'].default_value = 1.4 * S0
+            nt2.links.new(sx2.outputs['Z'], gz2.inputs['Value']); nt2.links.new(gz2.outputs['Result'], emn.inputs['Strength'])
+            ad2 = nt2.nodes.new('ShaderNodeAddShader')
+            nt2.links.new(prev.outputs[0], ad2.inputs[0]); nt2.links.new(emn.outputs[0], ad2.inputs[1])
+            nt2.links.new(ad2.outputs[0], outn.inputs['Surface'])
+        sphere('opal', 89.0, rim, opal_out, cut=oc, hole=H)
         sphere('opal-in', 86.0, rim, opal, inward=True, cut=oc, hole=H)
         part('out-dome-pendant', 'rim', acrylic('rim', 0.6, loading=float(os.environ.get('RIM_LOAD', '0.5'))), rim)   # round 9: backed off (the gate: a royal-blue outline)   # round 6: satin, a deeper shade, never bright
         capobs = []
@@ -308,7 +334,7 @@ def build(frame, samples, scale):
             ld.spread = math.radians(92.0); ld.color = blackbody(cct)
             ob = bpy.data.objects.new('cob', ld); bpy.context.scene.collection.objects.link(ob)
             ob.location = (0, 0, rim + 0.004)   # round 11: seen in the glaze and the glass (ruling 1)
-            light('spill', 'POINT', (0, 0, rim + 0.050), float(os.environ.get('SPILL_W', '0.3')), 0.03)
+            # (round 13: the spill is now the liner's own emission, above)
             pass
         # round 6 (the coordinator, 2026-11-03: the pendant too small): one shared camera for the day and the night,
         # steeper and closer: about 45 deg down from 0.95 m out and 0.93 m above the rim, a 54 mm lens, so the
@@ -327,7 +353,7 @@ def build(frame, samples, scale):
     if night:
         # round 4: a white ceiling at 2.5 m, so the lamp's light that leaves upward comes back into the room, as at home
         SC.plane('ceiling', (4.3, 4.0), (0.85, 0.0, 2.5), (180, 0, 0), SC.principled('ceiling', '#E8E4DC', 0.9))
-        ev = float(os.environ.get('NIGHT_EV', '1.8' if prod == 'core' else '0.6'))
+        ev = float(os.environ.get('NIGHT_EV', '1.8' if prod == 'core' else '-2.0'))
         k = 2.0 ** (0.6 - ev)                     # round 9: one evening room for the family, the same fill at each exposure
         # round 11 (the coordinator's rulings 1 to 3, 2026-11-03: nothing in the room hidden from the glass's
         # reflections or from view through it; no light linking): the night room is a flat, dim evening ambient (no
