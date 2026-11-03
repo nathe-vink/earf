@@ -1423,3 +1423,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 10:35 sent to biomes: build the seven from the closed source (0936e6df, or make_blend.py at f75f58a0+), A-consistent (own feet, no
   plinth, no built-in light), then re-proxy (a)/(b)/(c). Correct the owner: at 10:34 I told them the horn's model had open seams
   "that may be part of why thick areas don't darken"; it was only the habitat team's old copy.
+- 10:37 biomes lane: horn A rebuilt with make_blend.py --design current at r33-speaker-horn b9758dd9 (after f75f58a0): the Cloud
+  product file only (no built-in light, no plinth), on its own feet, the satin waveguide unchanged; 0 open edges at 10 um (the
+  throat has 222 edges on more than two faces but is closed). habitat.py and smoke_align.py point at hornA2 (1ab17eef on r48-biomes).
+  The stale seven stopped; proxies (a) old, (b) hornA2 satin, (c) hornA2 at roughness 0.05 (comparison only) with thick-against-thin
+  numbers in ~15 min; then the seven with (b).
