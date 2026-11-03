@@ -36,7 +36,9 @@ Run each build as a tracked background task, one after the other, never side by 
         # writes spinoffs/barkhorn/variants/out/render/barkhorn-variants.glb (about 16 MB); about 21 min alone,
         # 30 or more beside another job
 
-Check both files exist before you render. Don't rebuild a model while a render runs: a render reads the models only in its first minute, but a half-written file breaks it.
+Check both files exist before you render.
+
+**The build rewrites a tracked file: `studio/products/barkhorn-variants.json`** (c2 saw this, 2026-11-03). `render_model.py` writes it from `product.py`, so its 17 `horn-satin` entries come out at roughness 0.05. That is the polished horn (the owner, 15:14): `FORMED_HORN_SATIN = 0.05`, and the material keeps its old name. Before 0.05 was committed (the commit that adds this note), the file in git still said 0.25, from a build made before the decision. The shots set 0.05 for polished anyway (`strata_lit`), so no render was affected. Since this commit, your build should leave the file unchanged. **Never commit the file from a helper branch, and never revert it.** If your copy shows the diff before a merge, discard your copy first, so the merge doesn't stop on a local change: `git checkout -- studio/products/barkhorn-variants.json`. Don't rebuild a model while a render runs: a render reads the models only in its first minute, but a half-written file breaks it.
 
 ## 4. The Poly Haven cache (not in git)
 
