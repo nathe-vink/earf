@@ -1787,3 +1787,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   a unit over v3. The leak: TIR keeps the clear zone's light in; the base top under it gets the Fresnel share, ~R 11 (~4 % of the field),
   "a faint spill, not a pool"; the glossy night floor mirrors the lit top (a reflection a judge may misread). Gate wf_34897c83-4f0 on C
   (night, day) with A's g5 pair for comparison started 14:02.
+- 14:03 biomes lane: Poison (4 of 7) failed its own gate on see-through ("an opaque black box at phone size; the side face solid black":
+  a dense green in canopy shade, the shot's fills off because they lit the white lining). Fix under test by scene light: a sunfleck from
+  the shot's own sun direction (azimuth -100, 42 degrees up, #FFE6B8, a 0.9 m patch) on the speaker's back-left, as through a canopy gap,
+  passing through the green toward the camera; Poison re-renders after the chain. Ice rendering.
