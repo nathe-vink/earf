@@ -157,6 +157,26 @@ figcaption, .cap, .t-line {{ font-size: 15px }}
 """)
 
 
+def tokens(p, web):
+    """One color token set: each color's value (the brand mark, MARK_NEXT under COPY_NEXT) as --c-<key>, used wherever
+    a color is drawn flat (the dark band's coins, the static list); rendered coins stay for 24 px and up on paper, with a
+    hairline ring on Fog so it holds on the page."""
+    marks = dict(web.MARK)
+    if getattr(web, 'COPY_NEXT', False):
+        marks.update(getattr(web, 'MARK_NEXT', {}) or {})
+    root = '; '.join(f'--c-{k}: {v}' for k, v in marks.items())
+    coins = '\n'.join(f'.light-coins [data-k="{k}"] .coin-dot, .light-list .t-{k} {{ background: var(--c-{k}) }}' for k in marks)
+    p.css(f"""
+/* round 48 (V2): one color token set */
+:root {{ {root} }}
+.light-coins .coin-dot {{ background-image: none !important; mix-blend-mode: normal !important; box-shadow: inset 0 0 0 1px rgb(255 255 255 / .28) }}
+{coins}
+.coin-dot[style*="--i:6"] {{ box-shadow: inset 0 0 0 1px rgb(0 0 0 / .22) }}
+.lightband .coin-dot[style*="--i:6"] {{ box-shadow: none }}
+.light-list .tok {{ display: inline-block; width: 14px; height: 14px; border-radius: 50%; margin-right: 8px; vertical-align: -1px }}
+""")
+
+
 def hero(p):
     """One frame, the height of the screen: the tagline in the picture's quiet upper third, the speakers each a link
     (the hotspots), one small line and 'Render' beneath. No pills, no legend, no explainer."""
@@ -242,7 +262,7 @@ html { scroll-snap-type: y proximity; scroll-padding-top: var(--header) }
 
 
 def light_list(p, web):
-    items = ''.join(f'<li><b>{name}</b><span>{line}</span></li>' for k, num, name, icon, acr, line, *_ in web.CLOUDS)
+    items = ''.join(f'<li><b><i class="tok t-{k}" aria-hidden="true"></i>{name}</b><span>{line}</span></li>' for k, num, name, icon, acr, line, *_ in web.CLOUDS)
     p.sub('__LIGHT_LIST__', f'<ul class="light-list" aria-label="The eight colors">{items}</ul>')
     p.rest += '\n<noscript><style>.light-run { display: none } .light-list { display: grid !important }</style></noscript>'
 
@@ -302,10 +322,97 @@ def habitats(p, web):
     p.sub('<ul class="habitats" id="hab"', '<ul class="habitats v2" id="hab"')
 
 
+def paths(p, web):
+    """Clean addresses in the bar: a view with a real address shows it (/tropos/poison, not /#speaker-poison); in-page
+    links move without a reload; back and forward return to the view."""
+    m = {h: path for path, (h, *_) in addresses(web).items()}
+    m['top'] = '/'
+    import json
+    p.head = '<base href="/">\n' + p.head        # every page's pictures from the root, whatever its address
+    p.sub("const LINE_NAME = { speakers: 'Speakers', lighting: 'Lighting', turntable: 'Turntable' };",
+          "const LINE_NAME = { speakers: 'Tropos', lighting: 'Lighting', turntable: 'Mantle' };")
+    p.sub("const TITLE0 = document.title;", "const TITLE0 = 'EARF · Tropos';")
+    p.sub("const url = `${location.origin}/s/${location.hash.slice(1)}`", "const url = location.hash ? `${location.origin}/s/${location.hash.slice(1)}` : location.href")
+    p.rest += """
+<script>
+// round 48 (V2): real addresses
+(() => { const P = %s, R = Object.fromEntries(Object.entries(P).map(([h, p]) => [p, h]));
+  const clean = () => { const h = location.hash.slice(1); if (P[h] !== undefined) history.replaceState(null, '', P[h]); };
+  const visit = (path, h, push) => { history[push ? 'pushState' : 'replaceState'](null, '', path + '#' + h); dispatchEvent(new HashChangeEvent('hashchange')); clean(); };
+  addEventListener('hashchange', () => setTimeout(clean, 60));
+  document.addEventListener('click', e => { const a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a || e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    const h = a.getAttribute('href').slice(1); e.preventDefault(); visit(P[h] !== undefined ? P[h] : '/', h, true); }, true);
+  // a fragment step fires popstate before its own hashchange: route it, and leave the address alone until that has run
+  addEventListener('popstate', () => { if (location.hash) { const u = location.href; dispatchEvent(new HashChangeEvent('hashchange'));
+      setTimeout(() => { if (location.href === u) clean(); }, 60); }
+    else visit(location.pathname, R[location.pathname.replace(/\\/$/, '') || '/'] || '', false); });
+  clean(); })();
+</script>""" % json.dumps(m)
+
+
+def pages(web):
+    """Write the static addresses (V2 on), or take them away (V2 off)."""
+    import os, html
+    idx = os.path.join(web.SITE, 'index.html')
+    for path, (h, title, desc, img, alt) in addresses(web).items():
+        f = os.path.join(web.SITE, path.strip('/') + '.html')
+        if not web.V2:
+            if os.path.exists(f):
+                os.remove(f)
+            d = os.path.dirname(f)
+            if d != web.SITE and os.path.isdir(d) and not os.listdir(d):
+                os.rmdir(d)
+            continue
+        page = open(idx).read()
+        if title is None:                                          # from its link preview page
+            s = open(os.path.join(web.SITE, 's', h + '.html')).read()
+            title = html.unescape(re.search(r'<title>(.*?)</title>', s).group(1))
+            desc = html.unescape(re.search(r'<meta name="description" content="([^"]*)"', s).group(1))
+            img = re.search(r'<meta property="og:image" content="[^"]*?/(img/[^"]+)"', s).group(1)
+            alt = html.unescape(re.search(r'<meta property="og:image:alt" content="([^"]*)"', s).group(1))
+        e = lambda x: html.escape(x, quote=True)
+        url = web.URL + path
+        page = page.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n'
+                            f'<script>if (!location.hash) history.replaceState(null, "", location.pathname + "#{h}")</script>', 1)
+        page = re.sub(r'<title>.*?</title>', f'<title>{e(title)}</title>', page, count=1)
+        page = re.sub(r'<meta name="description" content="[^"]*">', f'<meta name="description" content="{e(desc)}">', page, count=1)
+        page = re.sub(r'<meta property="og:title" content="[^"]*">', f'<meta property="og:title" content="{e(title)}">', page, count=1)
+        page = re.sub(r'<meta property="og:description" content="[^"]*">', f'<meta property="og:description" content="{e(desc)}">', page, count=1)
+        page = re.sub(r'<meta property="og:url" content="[^"]*">', f'<meta property="og:url" content="{url}">\n<link rel="canonical" href="{url}">', page, count=1)
+        page = re.sub(r'<meta property="og:image" content="[^"]*">', f'<meta property="og:image" content="{web.URL}/{img}">\n'
+                      f'<meta property="og:image:alt" content="{e(alt)}">', page, count=1)
+        page = page.replace('<meta name="twitter:card" content="summary_large_image">', '<meta name="twitter:card" content="summary_large_image">\n'
+                            f'<meta name="twitter:title" content="{e(title)}">\n<meta name="twitter:description" content="{e(desc)}">\n'
+                            f'<meta name="twitter:image" content="{web.URL}/{img}">', 1)
+        assert 'noindex' in page
+        os.makedirs(os.path.dirname(f), exist_ok=True)
+        open(f, 'w').write(page)
+
+
 def render_word(p):
     """'Render', quietly, once per picture where a caption carries it; the room's caption has it (words()); the
     footer says it once for the site."""
     pass
+
+
+# real addresses (the audit): each a static copy of the page that opens on its view, with its own title, description
+# and preview card; the old #addresses still answer, and in-page links keep the page from reloading. Slots, not yet
+# written: /studio (the progress beat, once it is a page), /journal and /press (held until the owner releases them)
+def addresses(web):
+    out = {'/tropos': ('speakers', 'Tropos · EARF', 'A powered horn loudspeaker, cast in tinted acrylic. Eight colors, Ember to Smoke. In development, not yet for sale.',
+                       'img/og/speaker-green.jpg', 'Tropos in Poison'),
+           '/lighting': ('lighting', 'Lighting · EARF', 'Hemisphere, a pendant, and Core, a cordless table lamp, in the eight colors. In development.',
+                         'img/og/dome-red.jpg', 'Hemisphere in Ember'),
+           '/mantle': ('turntable', 'Mantle · EARF', 'A turntable, lit from underneath, in the eight colors. In development.',
+                       'img/og/tt-red.jpg', 'Mantle in Ember'),
+           '/contact': ('contact', 'Contact · EARF', 'Write to us: hello@earf.world. Everything is made to order, so we quote rather than list.',
+                        'img/hero-1200.jpg', 'The eight Tropos speakers on a curve')}
+    for k, num, name, *_ in web.CLOUDS:
+        low = name.lower()
+        out[f'/tropos/{low}'] = (f'speaker-{low}', None, None, None, None)     # its title, words and card from its /s/ page
+        out[f'/colors/{low}'] = (f'color-{low}', None, None, None, None)
+    return out
 
 
 def apply(web, head, rest):
@@ -314,9 +421,11 @@ def apply(web, head, rest):
         pairings(p)
         words(p)
         kit(p)
+        tokens(p, web)
         hero(p)
         light(p)
         light_list(p, web)
         sound(p, web)
         habitats(p, web)
+        paths(p, web)
     return p.done()

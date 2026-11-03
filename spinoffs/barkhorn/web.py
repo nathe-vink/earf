@@ -3250,6 +3250,8 @@ def build():
         import site_v2
         head, rest = site_v2.apply(sys.modules[__name__], head, rest)
     open(os.path.join(SITE, 'index.html'), 'w').write(HEAD + head.strip() + '\n</head>\n<body>\n' + rest.strip() + '\n</body>\n</html>\n')
+    import site_v2
+    site_v2.pages(sys.modules[__name__])          # round 48's real addresses: written while V2 is on, removed while off
     favicons()
     open(os.path.join(SITE, 'robots.txt'), 'w').write('User-agent: *\nDisallow: /\n')
     json.dump({
