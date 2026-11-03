@@ -95,9 +95,10 @@ It lifts the cabinet 20 mm.
 So the light moves inside the speaker (option "Built-in light", `BUILTIN` in `variants.py`). Tropos then stands on its own four feet, which pass the stability tests (`stability/standard-2018.md`).
 
 **What's inside, and where:**
-- COB LED strip (24 V, 4000 K, CRI 90+), 1.42 m a speaker, in five runs. Each run sits in a black aluminium U-channel (12 x 7) with a frosted lens, aimed straight up.
-- **On the bottom panel:** one run of 440 behind the bottom batt, under the back lining, and one of 110 behind each port. They light the port chamber from inside, so nothing goes down through the bottom panel and its edges stay dark.
-- **On the brace:** two runs of 380, between the woofer and the back. They light the woofer chamber and the top. That light leaves through the top and the upper walls and washes the wall behind the speaker in its own colour.
+- COB LED strip (24 V, 4000 K, CRI 90+), about 1.23 m a speaker, in six runs. Each run sits in a black aluminium U-channel (12 x 7) with a frosted lens, aimed straight up. (Corrected 2026-11-03; it was five runs and 1.42 m before the brace runs moved.)
+- **On the bottom panel:** two runs of 170 behind the bottom batt, under the back lining, split wide of the bottom rib's notch (x 60-230 and 330-500), and one of 110 behind each port. They light the port chamber from inside.
+- **A white reflector film on the bays' bare floor** (option "Floor film"): in the coordinator's model, about 7.5 % of D's light otherwise goes down through the bare floor beside the ports and onto the floor under the speaker. The film sends it back up. It is a real fix for D, not only for E.
+- **On the brace's rear member:** two runs, of 400 at y 318 and 270 at y 332, the second short of the back's bosses. The brace is a frame round a window (y 72-311, x 70-490), so the earlier runs at y 250 and 300 stood over open air and could not be built (the coordinator, gate 3). These runs light the woofer chamber and the top. The batting lines the sides, the back and the top, so the light leaves through the front and the polished edges, not onto the wall behind (gate 3; `renders/2026-11-03/barkhorn/base-question/light-study/E/`).
 - Each channel stands on three M3 nylon standoffs, screwed into brass inserts bonded in the acrylic. Nothing touches the acrylic but the standoffs, and nothing is held by tape.
 
 **Power:**
@@ -129,7 +130,9 @@ So the light moves inside the speaker (option "Built-in light", `BUILTIN` in `va
 - There is one more thing inside the box to test (heat, rattle).
 - The idea of a separate lit base goes away.
 
-**For the build (gate 2, D by day, 3/3 pass):** by day, the brace channel at y 250 shows from the front three-quarter view as a short dark bar under the woofer's lower right, where A shows a pale brace-edge highlight. One critic read it as a stray mark. Two fixes:
+**Open: the voile colour.** The batts' sleeves are black voile in the parts list and in `product.py` (since 2026-11-01), but white in colors F and the site's copy. In the coordinator's model, black sleeves cut D's light leaving the cabinet from about 44 % to 24 %. It is tied to Smoke's lining question (gate 3: white reads, black reads as "a PC case with a window"). Owner's call.
+
+**For the build (gate 2, D by day, 3/3 pass; done since gate 3, the runs are on the rear member):** by day, the brace channel at y 250 shows from the front three-quarter view as a short dark bar under the woofer's lower right, where A shows a pale brace-edge highlight. One critic read it as a stray mark. Two fixes:
 - Move the brace runs back, to y 315 and 330, behind the woofer's basket and clear of the back's bosses, which start at y 327 only at x 102-138 and 422-458, so the runs stop short of them. The camera then sees them only past the magnet.
 - Or recess each channel into a 7 mm pocket milled in the brace's top face, so its rim sits flush and only the lens line shows.
 The first costs nothing. The second costs a machining operation on the brace and thins it locally from 20 to 13 mm, which the brace's stiffness should be checked for. Either one comes after the light's power is set, since moving the runs back changes how much light reaches the top chamber.
@@ -166,9 +169,9 @@ The first costs nothing. The second costs a machining operation on the brace and
 
 **The bottom batt.** A window in it (the batt cut back to a frame, or lifted) lets the centre panel's light straight up the middle. `ice-night-window.png` and `like/*-window.png` show the batt removed, the upper limit of what a window adds. (Corrected 2026-11-03: the first `ice-night-window.png` hid a part name that did not exist, `lining-bottom-1` for `lining-bottom-1-web`, so it was byte-identical to `ice-night.png`. The note that it "gives a little more" could not have been seen in it. Re-rendered with the batt really out.)
 - **What it does:** the bottom bay and the lower cabinet get brighter, and the cabinet a little more evenly lit. The wall changes little. A real but small gain.
-- **What it costs acoustically:** **no bass**. The batts do not set the box's tuning, and the bottom batt is about 6 L of a 164 L box, so the port's tuning moves well under 1 Hz. It does weaken the damping of the cabinet's vertical standing wave, about 210 Hz for the 0.82 m inside height. The 100 mm top batt stays and damps the same mode at the other end. Expect at most a 1 to 2 dB ripple near 210 Hz, to measure on the first sample before the window is adopted. If it rings, a voile-only panel keeps the look with the batt back.
+- **What it costs acoustically:** **no bass**. The batts do not set the box's tuning, and the bottom batt is about 6 L of a 155.5 L box (gross; corrected 2026-11-03, it said 164), so the port's tuning moves well under 1 Hz. It does weaken the damping of the cabinet's vertical standing wave, about 210 Hz for the 0.82 m inside height. The 100 mm top batt stays and damps the same mode at the other end. Expect at most a 1 to 2 dB ripple near 210 Hz, to measure on the first sample before the window is adopted. If it rings, a voile-only panel keeps the look with the batt back.
 
-**Adopted (the coordinator, 2026-11-03): the base uplight with the bottom-batt window.** The window is the bottom batt cut back to a frame round the centre panel's light. **Measure the ripple near 210 Hz on the first sample** before it ships; if it rings, the batt goes back whole. (The Cloud's CAD, `cloud.py`, still carries the whole bottom batt until that measurement.)
+**Adopted (the coordinator, 2026-11-03): the base uplight with the bottom-batt window.** The window is the bottom batt cut back to a frame round the centre panel's light. **Measure the ripple near 204 Hz (the inside height is 0.84 m; corrected 2026-11-03, it said 210 Hz) on the first sample** before it ships; if it rings, the batt goes back whole. (The Cloud's CAD, `cloud.py`, still carries the whole bottom batt until that measurement.)
 
 **Against the underlit promo images** (`like/`, the uplit set's own stage, camera, moon, haze and exposure, only the plinth's own light at full; `like/sheet-like.png`: the uplit frame, then base, window and wash, Ice on top and Ember below):
 - **The base uplight lights the whole cabinet**, top to bottom, in its own colour, deeper than the promo's near-white interior.
