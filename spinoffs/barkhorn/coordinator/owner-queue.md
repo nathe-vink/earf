@@ -1517,3 +1517,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 11:16 sent to biomes: check for a hidden horn light or emission; light the horn only with the scene, in the cabinet's hue, from the
   front or side; denoise or more samples on the horn; Ember re-lit with real lava light through the cabinet and a three-quarter view;
   check the dark habitats still to render before they go. Dust batched with Acid for my gate.
+- 11:17 biomes lane: no hidden horn lamp. The asset's glass lets shadow rays pass UNTINTED (a white transparent BSDF on shadow rays)
+  and the wrapper adds a tinted pass, so the river point (120 W, 3.2 m behind), the vent and the sky lit the satin horn from behind
+  like a lampshade. A new --horn-front switch stops direct light at the horn only (the cabinet keeps its light-through; the horn's
+  refracted paths still trace). Ember proxies: e1 (horn-front) and e2 (+ turned ~27 degrees to three-quarter, crack_r aimed at the
+  speaker at 2.0, camera 0.95 to 0.8 m). The red window and square are the amp plate's real LED and the remote's eye; the posts are
+  steel rods (0.58 grey) in their Cloud-only build.
+- 11:19 sent: --horn-front fine if it removes only the untinted shortcut (honest tinted backlight may still glow; measure the hue);
+  the posts must be BRONZE as in A (asset README: "the four ø16 bronze posts", horn A "on Strata's bronze posts"), so build with
+  Strata's posts; the LED and the remote's eye at real brightness (a pinpoint, not a window).
