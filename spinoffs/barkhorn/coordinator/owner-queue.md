@@ -2111,3 +2111,17 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   then the final; one render at a time; commit on r33-planet-world, SHA to me for the gate) and list every other bar or Planet EARF
   picture with Tropos on a lit plinth, lit from below or with the stepped horn. facade.jpg waits on the owner's item 3; the dark-field
   hero goes on the walkthrough list as a small item.
+- 15:24 site lane: the picture inventory at r47-site-next d3efffc33cafdd45a7eac4d031fd43d80b77c7e9 (spinoffs/barkhorn/launch/PICTURES-
+  2026-11-03.md; 19 families across the live page, V2, HOME_V2, the /s/ cards, the held press kit and journal; every one shows the
+  superseded stepped horn). Sources: most renders/2026-10-18/barkhorn/{hero31,finals31,studio31,uplight31,element31} at 9790b429;
+  Poison's habitat 6a12db77, Smoke's 7f720604; the room d6cc6b7c; the front-arc frames git-ignored, made by spin47.py at 24770e2b.
+  Replaced by the roll-out: hero desktop (home), hero phone (home portrait), covers-off fronts and cards (site-front-off-tall/-wide;
+  Smoke later), the studio on the light ground and the og/color cards (site-hero-light), back (site-back), horn side (site-side;
+  the gallery view becomes "Side"), habitats (the biomes lane). NONE (new renders): (1) covers on, front, tall and wide x 8; (2) the
+  dark-ground studio, Ember (the held debut page); (3) the amplifier plate close-up on horn A's back; (4) horn A from behind x 8 or
+  one; (5) the inside cutaway with horn A x 8 or one; (6) the horn-turning sprite x 8; (7) the nine-frame front arc x 8 (Sound needs
+  one colour first); (8) the reels and the uplit eight: the owner's item 3; (9) the room again (horn A, no base, desk and phone, cables
+  hidden); (10) the audit's six close-ups beside a whole speaker; (11) the GA drawing (ga-front, ga-right) from the fab model.
+- 15:26 sent to the speaker lane: plan roll-out phase 2 from that list (in rollout.py, A + polished, --hold smoke, item 8 held for
+  the owner; hours per item; x 8 or one with reasons; folded into the four containers after phase 1, the most-seen first: Sound's
+  one colour, covers on, the room; who makes the GA drawing and how long), after its current items; no phase-2 renders until I confirm.
