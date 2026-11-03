@@ -182,7 +182,28 @@ def main():
     import sets as St
     St.sweep = night_set                      # the engine's set builder for kind 'sweep': the evening room instead
     import render as R
-    sys.argv = [os.path.join(eng, 'render.py')] + sys.argv[2:]
+    args = sys.argv[2:]
+    blend = None
+    if '--save-blend' in args:
+        # the scene as it will render, saved first for scene_audit.py (the coordinator's card and rig checks)
+        i = args.index('--save-blend'); blend = os.path.abspath(args[i + 1]); del args[i:i + 2]
+        real_ops = bpy.ops
+
+        class _Render:
+            def __getattr__(self, n):
+                if n != 'render':
+                    return getattr(real_ops.render, n)
+
+                def render(*a, **k):
+                    real_ops.wm.save_as_mainfile(filepath=blend, copy=True)
+                    return real_ops.render.render(*a, **k)
+                return render
+
+        class _Ops:
+            def __getattr__(self, n):
+                return _Render() if n == 'render' else getattr(real_ops, n)
+        bpy.ops = _Ops()
+    sys.argv = [os.path.join(eng, 'render.py')] + args
     R.main()
 
 
