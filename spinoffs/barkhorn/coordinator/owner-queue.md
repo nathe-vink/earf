@@ -2284,3 +2284,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 15:55 speaker lane: setup.sh at 8ca73abdba86f5c0ed67d8afd81da692eb3268d3 installs Pillow with --user --ignore-installed --no-deps (with
   PIP_BREAK_SYSTEM_PACKAGES=1, as its pip already runs), re-runs the real import and stops with a pointer to HELPERS.md if it still
   fails; numpy stays 1.x (no deps pulled, the numpy 1 pin follows); HELPERS.md's fix line the same form; bash -n checked.
+- 15:55 check-in #44 fired (written at 15:04; items 1 and 2 since answered). State: item 3 open (the after-dark pictures). The
+  inventory workflow wf_314ae1f9-899: 4 of 5 sweeps back (log-1 49 items, log-2 78, notes 64, board 44), the lanes sweep running,
+  then merge, two checks and the final pass. Gates running: Dust polished (wf_be9b18c7-951), the Smoke target (wf_39a2255a-4e0), the
+  lamps round 8 (wf_4f3c151b-a95). Re-armed for 16:46 as #45 with the current state.
