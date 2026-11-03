@@ -817,8 +817,8 @@
   "stack0": {
    "type": "spot",
    "position": [
-    16.5,
-    3.69,
+    15.4,
+    3.5,
     3.35
    ],
    "target": [
@@ -848,7 +848,7 @@
    "power_w": 30.0,
    "cone_deg": 20.0,
    "blend": 0.6,
-   "radius_m": 0.25,
+   "radius_m": 0.6,
    "color": 2600,
    "camera": false
   },
@@ -887,7 +887,7 @@
     0.15,
     4.6
    ],
-   "irradiance": 0.5,
+   "irradiance": 0.25,
    "color": 2600,
    "camera": false
   },
@@ -955,14 +955,14 @@
   "pairfill1": {
    "type": "area",
    "position": [
-    17.7,
-    4.6,
-    2.4
+    17.0,
+    7.18,
+    3.25
    ],
    "target": [
     15.5,
     5.99,
-    1.15
+    0.75
    ],
    "size_m": [
     1.5,
