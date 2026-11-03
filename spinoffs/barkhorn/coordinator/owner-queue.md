@@ -1569,3 +1569,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   bottom batt whole): a proxy with numbers (wall fan, horn underside, top chamber), D+ night and D+ day; before A polished and the
   Smoke frames. The base question moves to about 13:00 so it can be one complete question: A (no light), D (lantern), D+ (the
   site's look). Lamps round 7 (caaacb27, 11:37) and Mantle g4 notes (e3de62e6, 11:38) pushed; frames to follow. Re-armed for 12:31.
+- 11:44 speaker lane: D-night-ice, D-smoke-black and D-smoke-white (2064) at 62f6619ba5ed411873627d2b07640d63bcf25068 on the new night
+  set (a wall 14 cm behind, dark glossy floor #2A2D33 r0.15, navy room fill #2E4A78 6 W/m2 from the front; floor 15 W/m, brace 30 W/m;
+  Smoke 6500 K, +1 stop). Measured: black pixels D 4 %, Smoke black 13 %, white 9 % (B was 59-69 %); the horn a navy silhouette with a
+  sheen; the floor a reflection, no pool; D's top chamber 71 vs the port chamber's 169; Smoke's top chamber 16 (black lining) vs 48
+  (white), port 40 vs 155; the wall behind navy ~15-21, no fan (as stated: the batting lines top and back). D+ underway (lining-top-
+  window, back-c/-e/-h left out; the model rebuilding ~20 min), then the D+ proxy, D+ night and day; the Smoke day frames finish
+  first; polished A after D+. Gate wf_62b05808-38e on D night and the two Smoke-D frames (A and D day as context) started 11:45.
