@@ -145,6 +145,9 @@ def shadow_pass(nt, surf):
     return mx.outputs['Shader']
 
 
+NO_EDGE_BEVEL = False
+
+
 def acrylic(name, bands, tint, rough=0.004, wear_on=True, ring=None, edge_rough=0.010, ar=None):
     """`bands`: [(z0, z1, 'tint'|'clear')] in metres. The material has slots: 0 glassy (cast faces), 1 polished edge,
     2 buffed tread, 3 machined satin, 4 bead-blasted (a frosted band). One node tree per slot, the volume shared."""
@@ -162,8 +165,11 @@ def acrylic(name, bands, tint, rough=0.004, wear_on=True, ring=None, edge_rough=
             # C gate 1: an anti-reflective coat on the cast faces (the deck's top), a thin film of `ar` = (nm, index); it
             # cuts the inner reflection that sends the dots' light back down through the clear gaps
             b.inputs['Thin Film Thickness'].default_value = ar[0]; b.inputs['Thin Film IOR'].default_value = ar[1]
-        bv = bevel(nt, 0.0005 if slot != 3 else 0.0003)
-        nt.links.new(bv.outputs['Normal'], b.inputs['Normal'])
+        if not (NO_EDGE_BEVEL and slot == 1):
+            # C3 (--no-edge-bevel): the polished edges keep their true flat normal; the shader bevel's sampled normal
+            # rippled their highlight ("chewed")
+            bv = bevel(nt, 0.0005 if slot != 3 else 0.0003)
+            nt.links.new(bv.outputs['Normal'], b.inputs['Normal'])
         if wear_on and wr:
             scr, dust = wear(nt, WEAR)
             ad = nt.nodes.new('ShaderNodeMath'); ad.operation = 'MULTIPLY_ADD'
@@ -436,6 +442,15 @@ def radial_cover(nt, geo, radial, parts=False):
     r = mth('SQRT', mth('ADD', mth('POWER', mth('SUBTRACT', sep.outputs['X'], sx), 2.0), b_in=mth('POWER', mth('SUBTRACT', sep.outputs['Y'], sy), 2.0)))
     t = mth('MINIMUM', mth('MAXIMUM', mth('DIVIDE', mth('SUBTRACT', r_out, b_in=r), r_out - r_in), 0.0), 1.0)
     cov = mth('ADD', mth('MULTIPLY', t, cmax - cfloor), cfloor)
+    if len(radial) > 10 and radial[10]:
+        # C3: the print as a real dot screen (square grid, `pitch` m), each dot's area the local cover, so the print
+        # reads as a pattern lying under the glass, not as a tone on its surface
+        pitch = radial[10]
+        def cell(c_):
+            return mth('SUBTRACT', mth('FRACT', mth('DIVIDE', c_, pitch)), 0.5)
+        dd = mth('SQRT', mth('ADD', mth('POWER', cell(sep.outputs['X']), 2.0), b_in=mth('POWER', cell(sep.outputs['Y']), 2.0)))
+        rad = mth('SQRT', mth('DIVIDE', mth('MAXIMUM', cov, 0.0), math.pi))
+        cov = mth('LESS_THAN', dd, b_in=rad)
     if not parts:
         return cov
     inner = mth('LESS_THAN', r, r_back)
@@ -627,7 +642,7 @@ def core_glow_sheet(core, strength, col, box=None, grade=(1.4, 0.8), fall=0.05, 
     return ob
 
 
-def classify_layer(obj, kind, clear_border=False):
+def classify_layer(obj, kind, clear_border=False, clear_ring=False):
     """v4 gate 2: the deck's tinted skin and rings apart. Skin: its top glossy (0), its underside over the core an
     index-matched joint (5), over the rings printed black (7), its outer edge satin (1), its holes painted (6). Rings:
     their tops (under the skin), their undersides and their inner walls (against the core's reflector tape) black (7),
@@ -641,12 +656,17 @@ def classify_layer(obj, kind, clear_border=False):
         n = f.normal; c = f.calc_center_median()
         de = min(c.x - x0, x1 - c.x, c.y - y0, y1 - c.y)
         if abs(n.z) > 0.7:
-            if kind == 'skin':
+            if kind == 'skinring':
+                f.material_index = 0 if n.z > 0 else 5      # C3: the skin's border frame, its top glossy, its underside cemented to the rings
+            elif kind == 'skin':
                 f.material_index = 0 if n.z > 0 else (5 if (abs(c.z - zbot) < 1e-5 or clear_border) else 6)   # gate 4: the border white up, black down
             else:
-                f.material_index = (5 if n.z > 0 else 7) if clear_border else 7      # v5: the rings' tops a clear joint
+                f.material_index = (5 if n.z > 0 else (0 if clear_ring else 7)) if clear_border else 7      # v5: the rings' tops a clear joint
+                # C3 (--clear-ring): the rings' undersides bare polished glass, so the border is clear tinted glass
         else:
-            if de < 0.0015:
+            if kind == 'skinring':
+                f.material_index = 1 if de < 0.0015 else 7      # C3: its outer edge polished, its inner edge the black bond line
+            elif de < 0.0015:
                 # gate 3: the skin's own edges painted black, so it cannot pipe light out as a stripe; the rings' satin
                 f.material_index = 7 if kind == 'skin' else 1
             elif kind == 'skin' and c.z - zbot < 0.0005:
@@ -1121,7 +1141,7 @@ def build(args):
         finish.update({'plinth-L1-stack': 'plinth', 'base-L1-stack': 'base', 'studs': 'steel', 'phono-pads': 'felt', 'hinges': 'arm',
                        'hinge-blocks': 'lid', 'led-strip': 'strip', 'led-channel': 'alu-black'})
         if 'plinth-L1-skin' in objs:
-            finish.update({'plinth-L1-skin': 'plinth', 'plinth-L1-rings': 'plinth'})
+            finish.update({'plinth-L1-skin': 'plinth', 'plinth-L1-rings': 'plinth', 'plinth-L1-skinring': 'plinth'})
         if args.blacken:
             # gate 2: the bearing's brass under the deck chemically blackened, so it does not glint like a light left on
             M['blackened'] = metal('blackened', '#2B2724', 0.35)
@@ -1136,7 +1156,7 @@ def build(args):
             o0, rw_ = meta['P']['margin'] * mm, meta['P']['tint_ring'] * mm
             RAD = (meta['S'][0] * mm, meta['S'][1] * mm, args.radial[0], args.radial[1], args.cover_max) if args.radial else None
             if args.radial and args.back_r:
-                RAD = RAD + (args.cover_floor, args.back_r, 0.0, 1.0 if args.backed else 0.0, args.clear_r)
+                RAD = RAD + (args.cover_floor, args.back_r, 0.0, 1.0 if args.backed else 0.0, args.clear_r, args.dot_pitch)
             M['core'] = core_material('core', (o0 + rw_, o0 + rw_, o0 + meta['W0'] * mm - rw_, o0 + meta['D0'] * mm - rw_), radial=RAD)
             finish['plinth-L1-core'] = 'core'
         for k in range(1, 5):
@@ -1152,10 +1172,11 @@ def build(args):
         if (n.startswith('lid-') or n == 'hinges') and args.shot != 'closed':
             o.hide_render = True
         f = finish.get(n)
-        if n in ('plinth-L1-skin', 'plinth-L1-rings'):
+        if n in ('plinth-L1-skin', 'plinth-L1-rings', 'plinth-L1-skinring'):
             for m_ in M['plinth']:
                 o.data.materials.append(m_)
-            classify_layer(o, 'skin' if n.endswith('skin') else 'rings', clear_border=bool(args.radial)); o['caustic'] = True
+            classify_layer(o, 'skinring' if n.endswith('skinring') else ('skin' if n.endswith('skin') else 'rings'), clear_border=bool(args.radial),
+                           clear_ring=args.clear_ring); o['caustic'] = True
             if n.endswith('skin') and args.core_glow > 0 and args.border_glow > 0:
                 o0b, rwb = meta['P']['margin'] * mm, meta['P']['tint_ring'] * mm
                 border_glow_sheet(o, args.core_glow * args.border_glow, tuple(args.strip_color),
@@ -1175,7 +1196,7 @@ def build(args):
                                 grade=tuple(args.grade_edge_mid) if args.grade else (1.0, 1.0), fall=args.grade_fall, cct=args.cct,
                                 ceil_k=args.ceil_k, tilt=args.tilt,
                                 radial=((meta['S'][0] * mm, meta['S'][1] * mm, args.radial[0], args.radial[1], args.cover_max, args.cover_floor, args.back_r,
-                                         args.rise, 1.0 if args.backed else 0.0, args.clear_r)
+                                         args.rise, 1.0 if args.backed else 0.0, args.clear_r, args.dot_pitch)
                                         if args.back_r else (meta['S'][0] * mm, meta['S'][1] * mm, args.radial[0], args.radial[1], 1.0)) if args.radial else None,
                                 occl=[(meta['S'][0] * mm, meta['S'][1] * mm, meta['P']['platter_d'] / 2 * mm, 0.6, 0.035),
                                       (meta['A'][0] * mm, meta['A'][1] * mm, meta['P']['puck_d'] / 2 * mm, 0.5, 0.018)] if args.day else None)
@@ -1551,7 +1572,8 @@ if __name__ == '__main__':
     ap.add_argument('--cover-floor', type=float, default=0.0); ap.add_argument('--back-r', type=float, default=0.0)
     ap.add_argument('--ar-top', type=float, nargs=2, default=None)
     ap.add_argument('--rise', type=float, default=0.0); ap.add_argument('--backed', action='store_true')
-    ap.add_argument('--clear-r', type=float, default=0.0)
+    ap.add_argument('--clear-r', type=float, default=0.0); ap.add_argument('--dot-pitch', type=float, default=0.0)
+    ap.add_argument('--clear-ring', action='store_true'); ap.add_argument('--no-edge-bevel', action='store_true')
     ap.add_argument('--matte-channel', action='store_true'); ap.add_argument('--label-near', action='store_true')
     ap.add_argument('--core-glow', type=float, default=0.0)
     ap.add_argument('--day', action='store_true'); ap.add_argument('--ambient', type=float, default=0.05)
@@ -1560,6 +1582,7 @@ if __name__ == '__main__':
     ap.add_argument('--debug-emit', default='')
     ap.add_argument('--crop', type=float, nargs=4, default=None)
     a = ap.parse_args(argv)
+    NO_EDGE_BEVEL = a.no_edge_bevel
     build(a)
     if a.debug_emit:
         # debugging only: paint the named objects (prefix match) flat green, to find what a glint is

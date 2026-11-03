@@ -20,6 +20,17 @@ angle is reflected back down at the top and leaves the bare gaps at grazing angl
   falls from the center by the guide's own fall-off, to about half at the rim, never to black, its peak about 35 off
   the platter's foot (the exact ramp set on the first panel with a luminance meter);
 - the cost is A's print again (one more screen pass than v5 as gated): C stays at about +$130-150 a unit over v3.
+C3 (the coordinator, 15:34; README section 13): C2's black disc under the platter showed in front of it (seen through
+the 24 mm deck at the camera's angle it reaches about 17 mm past the platter's edge), its grade read flat, and its border
+read as a black bezel. So:
+- the print and the glow begin at r 105, well under the platter, so the black center is hidden and the glow lights the
+  platter's rim; the print a real dot screen, 2.5 mm pitch, from about 24 % cover there to 5 % by 280, backed black
+  throughout, so the glow falls off from the center, visibly and without a boundary;
+- the 5.6 top in two pieces cut from one sheet: the field over the core and a 10 wide frame over the rings, bonded edge
+  to edge with black-pigmented ACRIFIX, so the field's light cannot enter the border; the rings' undersides left bare
+  and polished, so the border is clear tinted glass top to bottom by day and dark at night, with one black line;
+- every edge polished, not satin; about +$15-25 a unit (the extra cut, the black bond line, the polishing), so C3 is
+  about +$145-175 a unit over v3; $3,897 in the parts list (the sheets are the same).
 v4's notes follow.
 
 Mantle, proposal A, v4: STRATA FLOAT with a LAYERED, LIT DECK (2026-11-03, round 2 of the light; a proposal until
@@ -286,9 +297,13 @@ def parts(P):
     # them their black print; the skin's underside over the rings 0.02 higher than over the core, so they are faces apart
     ztop = D['top']
     rings_vis = cut(prism(poutline(P, D, 0.0), 'z', l0['z0'], zc) - prism(poutline(P, D, l0['inset'] + rw), 'z', l0['z0'] - 1, zc + 1), cuts)
-    skin_vis = cut(union(prism(poutline(P, D, l0['inset'] + rw), 'z', zc + 0.05, ztop),
-                         prism(poutline(P, D, 0.0), 'z', zc + 0.07, ztop) - prism(poutline(P, D, l0['inset'] + rw), 'z', zc, ztop + 1)), cuts)
-    out[0].pieces = {'rings': (rings_vis, 'acrylic-strata'), 'skin': (skin_vis, 'acrylic-strata'), 'core': (core_vis, 'acrylic-core')}; out[0].render = True
+    # C3 (the coordinator, 15:34): the skin in two pieces, the field over the core and a 10 wide frame over the rings,
+    # bonded edge to edge with black-pigmented cement, so the field's light cannot enter the border and the border is
+    # clear tinted glass from top to bottom (0.05 apart in the render)
+    skin_vis = cut(prism(poutline(P, D, l0['inset'] + rw + 0.05), 'z', zc + 0.05, ztop), cuts)
+    skinring_vis = cut(prism(poutline(P, D, 0.0), 'z', zc + 0.07, ztop) - prism(poutline(P, D, l0['inset'] + rw), 'z', zc, ztop + 1), cuts)
+    out[0].pieces = {'rings': (rings_vis, 'acrylic-strata'), 'skin': (skin_vis, 'acrylic-strata'), 'skinring': (skinring_vis, 'acrylic-strata'),
+                     'core': (core_vis, 'acrylic-core')}; out[0].render = True
 
     # ---- the base: one 9.5 sheet, 35 in from the deck; the light's slot from below; the feet under the posts ----
     feet = list(posts)

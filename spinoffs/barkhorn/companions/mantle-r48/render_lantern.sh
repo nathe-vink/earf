@@ -114,3 +114,14 @@ if [ "$1" = c2 ]; then
 r a5-night-ember-2423-c2 --model out-strata-v5 --colour ember-2423 --strip 0 --cct 4000 --ambient 0.003 --exposure -1.5 --night-room 35 --wall-wash 6 --samples 192 --core-glow 2.6 --cover-max 0.22 --cover-floor 0.12 --rise 0.035 --look "AgX - Base Contrast" $C7
 r a5-day-ember-2423-c2 --model out-strata-v5 --colour ember-2423 --day --strip 0 --core-glow 7 --cover-max 0.18 --cover-floor 0.18 --strip-color 0.848 0.124 0.168 --exposure -2.0 $C7
 fi
+# option C3 (the coordinator, 15:34; out-strata-v5 rebuilt with the skin's border as its own frame): the print and the
+# glow begin at r 105, well under the platter (--back-r 0.105), so no black crescent shows in front of it and the glow
+# lights the platter's rim; a center-out falloff, cover 0.24 to 0.05 by 280 (--radial 0.105 0.280), backed throughout;
+# the print a real 2.5 mm dot screen (--dot-pitch); the border clear tinted glass, the rings' undersides bare
+# (--clear-ring), the frame bonded to the field with black cement; the edges polished (--edge-frost 0.012) with no
+# shader bevel on them (--no-edge-bevel); by day an even print (0.15) and the room's light on it baked at 5 (deeper)
+C9="--pan 0.05 --blacken --wear 0 --platter-edge 0.15 --edge-frost 0.012 --grain 0.004 --radial 0.105 0.280 --back-r 0.105 --backed --matte-channel --label-near --glass-shadows --clear-ring --dot-pitch 0.0025 --no-edge-bevel"
+if [ "$1" = c3 ]; then
+r a5-night-ember-2423-c3 --model out-strata-v5 --colour ember-2423 --strip 0 --cct 4000 --ambient 0.003 --exposure -1.5 --night-room 35 --wall-wash 6 --samples 192 --core-glow 2.6 --cover-max 0.24 --cover-floor 0.05 --look "AgX - Base Contrast" $C9
+r a5-day-ember-2423-c3 --model out-strata-v5 --colour ember-2423 --day --strip 0 --core-glow 5 --cover-max 0.15 --cover-floor 0.15 --strip-color 0.848 0.124 0.168 --exposure -2.0 $C9
+fi
