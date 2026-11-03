@@ -2943,5 +2943,5 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   haze 7.2, fog 9.3; inside-ice 12.7; turn-ember 00-04 at 640 x 576, 0.6-0.8 each); its flag: in turn-ember-01 (~3/4 from the back) the back
   face, nearly edge-on, renders pale grey-white instead of red (00 and 02 red). The variants file reset with `git checkout --`; merged
   aed49790 at 4df9bebc861b732dbfab99a47a3b4d436e485580; fix1 chunk 4 (wide ember, dust, acid, ~87 min) started 19:26, then 5, then it waits.
-- 19:27 my gate on inside-ice and turn-ember 00-04 (wf_c262a578-fea) started: a rig check before the sprite's 168 frames render; frame
+- 19:28 my gate on inside-ice and turn-ember 00-04 (wf_c262a578-fea) started: a rig check before the sprite's 168 frames render; frame
   01's pale face put to the critics. The horn-back set gates when c2's chunk 4 (ember, dust, acid, poison) lands.
