@@ -1,5 +1,5 @@
 {
- "title": "Planet EARF pop-up (round 43), window: Tropos on its own feet, horn A polished (2026-11-03) [camera 1.2 m nearer and 0.45 m higher than round 43 so the pair clears the 0.30 m bulkhead: without the plinth its feet hid behind it]",
+ "title": "Planet EARF pop-up (round 43), window: Tropos on its own feet, horn A polished (2026-11-03) [camera 1.2 m nearer and 0.45 m higher than round 43 so the pair clears the 0.30 m bulkhead: without the plinth its feet hid behind it; gate 1 (SHOW 2/3) polish: the pair 0.30 m further back in the bay (x 1.00) and the eye at 2.05 m, so the feet and a strip of floor show above the bulkhead; the window spots follow the pair, a 0.30 m source, softer on the horns]",
  "size": [
   2400,
   1600
@@ -8,18 +8,18 @@
   "position": [
    -2.6,
    2.4,
-   1.8
+   2.05
   ],
   "target": [
    2.4,
    3.2,
-   0.5
+   0.4
   ],
   "lens_mm": 28,
   "level": true,
   "fstop": 5.6,
   "focus": [
-   0.7,
+   1.0,
    2.9,
    1.0
   ]
@@ -31,7 +31,7 @@
    "instances": [
     {
      "position": [
-      0.7,
+      1.0,
       2.42,
       0.0
      ],
@@ -46,7 +46,7 @@
     },
     {
      "position": [
-      0.7,
+      1.0,
       3.38,
       0.0
      ],
@@ -67,7 +67,7 @@
    "instances": [
     {
      "position": [
-      0.7,
+      1.0,
       2.42,
       0.0
      ],
@@ -81,7 +81,7 @@
     },
     {
      "position": [
-      0.7,
+      1.0,
       3.38,
       0.0
      ],
@@ -794,38 +794,38 @@
   "win0": {
    "type": "spot",
    "position": [
-    0.2,
+    0.5,
     2.42,
     3.3
    ],
    "target": [
-    0.8,
+    1.1,
     2.42,
-    0.95
+    0.8
    ],
    "power_w": 60.0,
    "cone_deg": 26.0,
    "blend": 0.7,
-   "radius_m": 0.03,
+   "radius_m": 0.3,
    "color": 2600,
    "camera": false
   },
   "win1": {
    "type": "spot",
    "position": [
-    0.2,
+    0.5,
     3.38,
     3.3
    ],
    "target": [
-    0.8,
+    1.1,
     3.38,
-    0.95
+    0.8
    ],
    "power_w": 60.0,
    "cone_deg": 26.0,
    "blend": 0.7,
-   "radius_m": 0.03,
+   "radius_m": 0.3,
    "color": 2600,
    "camera": false
   },
