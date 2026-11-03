@@ -179,7 +179,9 @@ def acrylic(name, bands, tint, rough=0.004, wear_on=True, ring=None, edge_rough=
             tr = nt.nodes.new('ShaderNodeBsdfTransparent'); surf = tr.outputs['BSDF']
         elif slot == 7:
             # v4 (gate 1): the rings' undersides printed black, so no light leaves by the bottom arris
-            bk7 = nt.nodes.new('ShaderNodeBsdfDiffuse'); bk7.inputs['Color'].default_value = (0.012, 0.012, 0.012, 1); surf = bk7.outputs['BSDF']
+            # gate 5: black lacquer and black print are glossy, not matte
+            bk7 = nt.nodes.new('ShaderNodeBsdfPrincipled'); bk7.inputs['Base Color'].default_value = (0.008, 0.008, 0.008, 1)
+            bk7.inputs['Roughness'].default_value = 0.08; surf = bk7.outputs['BSDF']
         elif slot != 6:
             surf = shadow_pass(nt, surf)
         if slot == 6:
@@ -1290,6 +1292,11 @@ def setup_world(args, meta):
                 # glossy top and shows the skin over the light; aimed at the wall, off the floor
                 ww = area('wall-wash', (1.2, 0.3), (cx + 0.2, cy - 0.1, 0.9), (cx - 0.1, cy + 0.42, 0.35), args.wall_wash, col=(0.85, 0.88, 1.0), spread=35, caust=False)
                 ww.visible_camera = False
+        if args.rim2 > 0:
+            # gate 5: a neutral low rim from behind left, below the record's plane, raking the base, the posts and the
+            # deck's sides toward the camera; small and tight, aimed past the floor in front
+            r2 = area('rim2', (0.40, 0.03), (cx - 0.50, cy + 0.45, 0.055), (cx + 0.10, cy - 0.15, 0.045), args.rim2, col=(0.95, 0.97, 1.0), spread=18, caust=False)
+            r2.visible_camera = False
         if args.kicker > 0 or args.rim > 0:
             # gate 1: a low warm kicker from the front right and a rim from behind left, small and tight, so the arm,
             # the posts, the base's edge and the feet read at night; warm white, nothing colored on the floor
@@ -1372,7 +1379,7 @@ def setup_world(args, meta):
     cy_.use_light_tree = True
     r.resolution_x = int(args.size[0] * args.scale); r.resolution_y = int(args.size[1] * args.scale)
     r.film_transparent = False
-    sc.view_settings.view_transform = 'AgX'; sc.view_settings.look = 'AgX - Medium High Contrast'
+    sc.view_settings.view_transform = 'AgX'; sc.view_settings.look = args.look
     sc.view_settings.exposure = args.exposure
     r.image_settings.file_format = 'PNG'; r.image_settings.color_depth = '16'
 
@@ -1419,7 +1426,7 @@ if __name__ == '__main__' and bpy is None:
     elif sys.argv[1] == '--sleeve':
         make_sleeve(sys.argv[2])
     elif sys.argv[1] == '--post':
-        post(sys.argv[2])
+        post(sys.argv[2], grain=float(sys.argv[3]) if len(sys.argv) > 3 else 0.012)
     sys.exit(0)
 
 if __name__ == '__main__':
@@ -1447,6 +1454,8 @@ if __name__ == '__main__':
     ap.add_argument('--ceil-k', type=float, default=1.0); ap.add_argument('--tilt', type=float, default=0.0)
     ap.add_argument('--border-glow', type=float, default=0.0); ap.add_argument('--border-fall', type=float, default=0.006)
     ap.add_argument('--wall-wash', type=float, default=0.0)
+    ap.add_argument('--look', default='AgX - Medium High Contrast'); ap.add_argument('--grain', type=float, default=0.012)
+    ap.add_argument('--rim2', type=float, default=0.0)
     ap.add_argument('--core-glow', type=float, default=0.0)
     ap.add_argument('--day', action='store_true'); ap.add_argument('--ambient', type=float, default=0.05)
     ap.add_argument('--base-tint', default='smoke')
@@ -1458,5 +1467,5 @@ if __name__ == '__main__':
     bpy.context.scene.render.filepath = a.out
     bpy.ops.render.render(write_still=True)
     import subprocess
-    subprocess.run(['python3', os.path.abspath(__file__), '--post', a.out], check=True)
+    subprocess.run(['python3', os.path.abspath(__file__), '--post', a.out, str(a.grain)], check=True)
     print('wrote', a.out)

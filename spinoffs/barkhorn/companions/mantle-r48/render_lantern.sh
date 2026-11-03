@@ -10,7 +10,7 @@
 cd "$(dirname "$0")"
 OUT=../../../../renders/2026-11-03/barkhorn/mantle-r48
 mkdir -p $OUT
-C="--edge-frost 0.35 --base-tint smoke-2074 --scale 0.75 --samples 80 --paper #7A7570 --tint-mode custom"
+C="--edge-frost 0.35 --base-tint smoke-2074 --scale 0.75 --samples 80 --paper #7A7570 --tint-mode custom"   # per-frame options follow and win
 r() { n=$1; shift; python3.11 scene.py dusk $C "$@" --out $OUT/$n.png > /tmp/mantle-r48-$n.log 2>&1; echo "$n $(grep -c ^wrote /tmp/mantle-r48-$n.log)"; }
 NIGHT="--strip 300 --strip-color 1.0 0.55 0.25 --ambient 0.003 --exposure 0.0"
 if [ -z "$1" ]; then
@@ -81,4 +81,15 @@ if [ "$1" = g4 ]; then
 r a4-night-ember-2423-g4 --model out-strata-v4 --colour ember-2423 $NIGHT6 --core-glow 2.8
 r a4-night-poison-2092-g4 --model out-strata-v4 --colour poison-2092 $NIGHT6 --core-glow 6
 r a4-day-ember-2423-g4 --model out-strata-v4 --colour ember-2423 --day --strip 0 --core-glow 7 --strip-color 0.848 0.124 0.168 --exposure -2.0 --border-glow 1.0 $G4
+fi
+# the gate's fifth pass (12:33), the Ember pair first: by day the border and the groove's ceiling carry the field's own
+# sparse dots (5 % at the rim), so the day bake follows the real dot ramp (--grade-edge-mid 0.15 1.0 --grade-fall 0.07)
+# and the border continues the field's tone (--border-glow 0.4, the field's rim value); the skin's lacquered edges and
+# the black print glossy, the rings' edges polished (--edge-frost 0.08), the smoked base glossy; at night the glow a third
+# down (1.9), falling gently from the lit edge (--grade-edge-mid 1.0 0.8 --grade-fall 0.1), AgX at base contrast (the
+# medium-high look clipped it to a flat red), no wear arcs, little film grain
+G5="--pan 0.05 --blacken --wear 0 --platter-edge 0.15 --ceil-k 0.6 --edge-frost 0.08 --grain 0.004"
+if [ "$1" = g5 ]; then
+r a4-night-ember-2423-g5 --model out-strata-v4 --colour ember-2423 --strip 0 --cct 4000 --ambient 0.003 --exposure -1.5 --grade --grade-edge-mid 1.0 0.8 --grade-fall 0.1 --night-room 35 --glass-shadows --wall-wash 6 --samples 192 --core-glow 1.9 --look "AgX - Base Contrast" $G5
+r a4-day-ember-2423-g5 --model out-strata-v4 --colour ember-2423 --day --strip 0 --core-glow 7 --strip-color 0.848 0.124 0.168 --exposure -2.0 --grade --grade-edge-mid 0.15 1.0 --grade-fall 0.07 --border-glow 0.4 $G5
 fi
