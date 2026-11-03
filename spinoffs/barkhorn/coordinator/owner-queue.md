@@ -1934,3 +1934,16 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   the glow's physical wash on the wall, the floor blade fixed in the design (shield or mask, noted in BASES.md); the horn modelled
   by the soft fill, its lip's lantern blue kept; the port reflections matched and the ports as clear Ice tubes; the rods gone; the
   brace sliver and bottom bars tamed), proxy first, with the measures.
+- 14:48 speaker lane: Smoke at ~50 % through 20 mm at 5be29cac68e47735bed12cc87bf80260c5d9b5ae (its message gave a garbled SHA;
+  found by path) (base-question/gate2/Smoke-day-50pct-white.png, sha256 76da5b8f; absorption #B6B6B6, white lining, the 83c03b3d
+  set). Means (cabinet / top chamber / side face / horn): Ice A 122/142/139/84; 2064 white 80/88/93/74; 50 % white 115/153/124/74.
+  "Light smoked glass", the whole interior plain, the side face mid grey, not a black mirror; the horn unchanged (its own sheet).
+  Item 4 set up: design 225f128a5a74469bfec80e49becbbec31c495aa3 (floor runs only behind the batt: the runs behind the ports lit the
+  bays' clear sides, the floor blade and the bare bars; every lens 3 mm below its channel's rim); the shot: a 9 x 9 m fill more
+  overhead (el 72, ~0.55x) against the ghost; a dim slate soft light linked only to the horn; a darker, rougher floor (#16181C, 0.12)
+  against the rods' reflection; the lantern ~1.3x at 5000 K (the peach port reflections were the 4000 K strips seen down the tubes;
+  5000 K also roughly halves Ice's hue drift, by the lamps lane's numbers: a spec change for D, a proposal). Order: the close-up pair
+  (after the rebuild), the deck-hero proof, a second rebuild with 225f128a, the v3 proxy with the numbers, then the full frame.
+- 14:49 my gate wf_f3111455-c52 on the Smoke ~50 % frame (2064 white and Ice A as context): does it answer the owner's note; is
+  the deep grey horn now a separate grey-metal part next to the lighter cabinet. Side-by-side preview built
+  (scratchpad/basefr2/smoke-2064-vs-50pct-preview.jpg): the 50 % frame reads clearly lighter and open.
