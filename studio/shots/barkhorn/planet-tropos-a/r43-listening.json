@@ -565,12 +565,12 @@
     "lamp_w": 0.2,
     "lamp_k": 2700,
     "shade_glow": 0.005,
-    "noshadow": "shell|liner|skin",
     "materials": {
      "liner": {
       "glow_color": "#FFA060"
      }
-    }
+    },
+    "lamp_specular": 1.0
    },
    {
     "kind": "kit",
@@ -581,7 +581,6 @@
     "lamp_w": 4.0,
     "lamp_k": 2700,
     "shade_glow": 0.006,
-    "noshadow": "shell|liner|skin",
     "spots": [
      {
       "position": [
@@ -639,7 +638,8 @@
       ],
       "flavour": "smoke"
      }
-    ]
+    ],
+    "lamp_specular": 1.0
    },
    {
     "kind": "kit",

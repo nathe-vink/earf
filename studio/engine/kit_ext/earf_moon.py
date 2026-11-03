@@ -22,7 +22,8 @@ piece: `hide` (a pattern of part names, e.g. "hub|pins|cob|gland|cord|canopy" fo
 (m) and `cover_turn` (deg) to show the swap, and `lamp`: false for no light. `noshadow` (a pattern of part names, e.g.
 COVER) makes those parts cast no shadow, so the hidden lamp lights the room through them (Cycles passes a lamp's light
 through glass only as caustics; Planet's loft, f7c99a4); unset, every part casts its shadow, as before. (Planet r38:
-restored here; round 32f's kit had dropped it, and the bar went dark, 25.6 to 6.5.)
+restored here; round 32f's kit had dropped it, and the bar went dark, 25.6 to 6.5.) `lamp_specular` (default 0, as
+every frame before 2026-11-03 was made): the coordinator's rulings of 2026-11-03 want 1, and `noshadow` unset.
 
 Round 32f: the hardware is black (black anodised aluminium, black polished acrylic), in the GLBs themselves. The Orb
 plugs in over USB-C as standard; for a spot or the piece, `cable` (default true: its black fabric cable, dressed
@@ -68,10 +69,10 @@ def _templates(bpy, which):
     return _CACHE[key]
 
 
-def _lamp(bpy, name, pos, watts, kelvin):
+def _lamp(bpy, name, pos, watts, kelvin, specular=0.0):
     import lights as L
     d = bpy.data.lights.new(name, 'POINT')
-    d.energy = watts; d.shadow_soft_size = 0.02; d.specular_factor = 0.0
+    d.energy = watts; d.shadow_soft_size = 0.02; d.specular_factor = specular   # ruling 2026-11-03: 1 (`lamp_specular`); 0 only to re-render old frames
     L.set_color(d, kelvin)
     ob = bpy.data.objects.new(name, d); bpy.context.scene.collection.objects.link(ob)
     ob.location = pos
@@ -136,7 +137,8 @@ def _place(bpy, which, name, p, kit):
         if s.get('lamp', p.get('lamp', True)) is False:
             continue
         pos = T @ (Vector(LIGHT_MM[which]) / 1000)
-        objs.append(_lamp(bpy, f'{name}-lamp#{i}', pos, p.get('lamp_w', LAMP_W[which]), p.get('lamp_k', 2700)))
+        objs.append(_lamp(bpy, f'{name}-lamp#{i}', pos, p.get('lamp_w', LAMP_W[which]), p.get('lamp_k', 2700),
+                          p.get('lamp_specular', 0.0)))
     return objs
 
 
