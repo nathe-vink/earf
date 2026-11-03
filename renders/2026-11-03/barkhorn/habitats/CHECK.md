@@ -1,19 +1,20 @@
-# Habitats on horn A (hornA2, r33-speaker-horn b9758dd9), blind four-test gate
+# Habitats on horn A, blind four-test gate
 
-The seven habitats are rendered by `spinoffs/barkhorn/biomes/habitats.py`, with:
+Horn A is `tropos-strata.blend` from r33-speaker-horn 0936e6d: Strata's cabinet, the caldera, the bronze posts, and the
+smooth formed horn, satin outside, with closed volumes.
+
+The habitats are rendered by `spinoffs/barkhorn/biomes/habitats.py`, with:
+- the speaker on its own M8 feet, settled onto the set, with base A and its uplight left out;
 - the welded volume glass;
-- the horn closed, in satin per the spec;
-- the speaker on its own M8 feet, settled onto the set;
+- `--horn-front`;
 - the black flag and side cards;
-- the speaker fills off and the light off.
+- the speaker fills off and the light off by day.
 
-Each habitat is rendered at 1200 x 1500 with 48 samples. Each image is checked blind by a fresh agent that sees only
-that image (`scratchpad/check/PROMPT.md`).
+Each is rendered at 1200 x 1500, with 96 samples for the dark scenes and 64 for the rest. Each image is checked blind
+by a fresh agent that sees only that image (`scratchpad/check/PROMPT.md`).
 
-The gate's prompt doesn't know the horn is satin by spec. A bead-blasted horn can't be seen through, so a FAIL on
-see_through that names only the horn is recorded as "horn: satin by spec". The cabinet is judged on its own.
+Withdrawn: the first Ember (3de248cd) and Dust (c96fb96a) were rendered on the Cloud design, not horn A.
 
 | Habitat | see_through | grounded | no_light_down | smooth_horn | Notes |
 |---|---|---|---|---|---|
-| Ember | FAIL (horn only; cabinet PASS) | PASS | PASS | PASS | The cabinet reads dark and tinted, with braces, frames, ports and the lava seen through it. The horn reads as a frosted red sheet. The "sooty stain and drips" at the throat are the driver and inner posts seen as soft shadows through the satin. |
-| Dust | PASS | PASS | PASS | PASS | The woofer, frames, posts, the amp box and both ports show through, and no face is milky. The base sits on the sand and its shadow starts at the base edge. A red-tinted shadow (luminance 43-57, against 100 for open sand) is sun through the tint, not a glow. The horn is a smooth flare. |
+| Ember | PASS | PASS | PASS | PASS | Three-quarter view (rotate_z -5), crack_r on the speaker at 2.0, camera at 0.8 m. The woofer, frame, ports, braces and the side panel's frame show through, with lava through the side. The contact shadow is dark on dark and only just reads at phone size. A bright strip at the bottom right is lava light inside the side panel, not a spill. The dark disc in the horn is the driver seen through it. |
