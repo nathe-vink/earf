@@ -2362,3 +2362,16 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   2.5-4x darker, the tint, not the light. Haze's hue is violet (270), the navy is the dusk light on a dense violet; the lane won't
   lighten the tint; nearer Dust's look would need a lighter Haze batch, the owner's call. Noted for the walkthrough's biomes item
   (the owner's "I like the darker colors", 2026-11-01, chose these densities; Smoke's "more transparent" note is the exception).
+- 16:22 lamps round 8 gate wf_4f3c151b-a95 (resumed; 2 of 3 back, the third lost to API 500s twice; the two agree): HEMISPHERE day SHOW
+  2/2 (ready); night HOLD 2/2, "one round away" (the light right: the warm downlight is the pendant's job, no tinted underglow; but
+  the lip an electric royal-blue line ~29 degrees bluer than the body with a dark gap and outline, "a neon/LED edge ring"; a flat
+  matte face, no reflection, faint window ghosts; the cap pure black; Ice teal at night ~189 vs azure ~201 by day; the bowl outshines
+  the lamp). CORE A (frost) HOLD 2/2 both ("render work won't rescue it": milky by day; at night a moon-lamp disc, a hard inner
+  circle, an LED hotspot, smudges, the base lost in black). CORE B day: 1 SHOW, 1 HOLD with no failed test ("the only Core frame that
+  reads as tinted glass"); B night HOLD 2/2 (the clear outer goes black: "a small LED orb in a black bubble"; the day's window
+  reflections; a smudgy crown spot; an LED hotspot; one critic: the inner diffuser too small, a design problem).
+- 16:23 sent to the lamps lane: Hemisphere night's four fixes (the lip a deeper teal with no gap, the rim-dye raise backed off; night
+  reflections (the lit table as a warm band, a faint room highlight, no windows); the cap lifted off black; the night glow bluer, the
+  bowl not outshining); Core: A not rendered again; B's inner diffuser enlarged (cost, weight, tooling vs 90 mm); one dim evening-room
+  staging for both Core nights and the Hemisphere night (base and table via reflections and faint fill, no pool); no night windows,
+  crown spot or hotspot; the B pair at full scale; proxies first; other colours on hold.
