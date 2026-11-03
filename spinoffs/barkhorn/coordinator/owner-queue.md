@@ -2965,3 +2965,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   lower with a little fill, the key moved, a gentler roll-off; "the edge glint to a third" kept only if it's a card's own strength, back to
   1.0 if it's a specular multiplier; the cards, floor patch, top light and key turn fine; confirm the fix1 site rig (6f73a18c) has no such
   link; the cover's lamp found and proved under the same rule; the new hero proof's numbers and SHA before its full render.
+- 19:30 biomes lane: the Haze final at 10 degrees off held by its own gate (not a deliverable): the sun disk now moves with the key (the disk
+  and the sun lamp at 100, the sky 187.8); the front reads (woofer, rings, braces, posts, ports, bottom block); crease 7.3 / 11.0; grounded,
+  no light down; but the narrow LEFT side face, near grazing, mirrors the bright lavender sky as a flat grey-lavender sheet (luma 62) that
+  reads as paint (honest Fresnel). The trade on the turn (20+ degrees brings the wedge back, front-on the symmetric X): Haze to 5 degrees
+  off (rotate_z -10, like Ice's 4) at de1688a52a7d8765ad0839f1a3626f2e7357a277, re-rendered after the Poison and Acid proxies; Poison's and
+  Acid's sides watched on their proxies (Ember's side carries the lava, so it reads as glass).
