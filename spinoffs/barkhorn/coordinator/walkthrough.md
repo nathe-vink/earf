@@ -23,7 +23,11 @@ Show one item with its pictures, wait for the answer, save the owner's words ver
   little stronger, the woofer a lighter grey). Show it as the close-up, beside the old one, and say so plainly. Every rig now follows the rule: no lamp lights at full while
   reflecting less, and no lamp lights a part while skipping what sits behind it in its path. Added 20:06 (ruling 3): no lamp is
   hidden from views through clear resin (`transmission: False`), except a practical's bulb inside its own frosted or opal fitting.
-  A picture passed before these rulings is re-checked against all three before it is shown.
+  Added 23:24 (ruling 4): every part of a set casts shadows, and light reaches the product only through a real opening (no
+  `cast_shadow: false`, no sun through the paper; the deck cover's key was one). Added 23:29: a reflect-only card counts as in
+  frame if any part of its rectangle crosses the frame, tested by ray-casting the frame against the card, not its corners (the deck
+  hero's near card covered 19.9 % of the frame with every corner outside).
+  A picture passed before these rulings is re-checked against all of them before it is shown.
 - **Found 20:38, for item 14 (the close-ups) and the back pictures:** the rating plate on the back still reads "ATMOSPHERE · HORN
   LOUDSPEAKER, ACTIVE" and "MODEL AT-1, S/N AT1-26-000127" (product.py). Proposed: TROPOS, MODEL TR-1, S/N TR1-26-000127; and its
   line "DESIGNED IN SAN FRANCISCO, CALIFORNIA" to confirm. Ask with the back and amplifier pictures. The six horn-backs that passed
@@ -66,12 +70,26 @@ Show one item with its pictures, wait for the answer, save the owner's words ver
     (e0bbdcd3: brighter, softer shadows). The home portrait held 3/3 (dark lower cabinets, a beige side face); the room rig is being fixed.
     Renders: the cover on c4, the hero on c3, the row on c2; the room after the room-rig SHA. The deck hero to be re-proxied with the rulings folded in; the cover needs a real re-light
     (e81c1a4a, unproved). Deck v69 waits for them.
+    STATE AT 23:29:
+    - The row landed (c2, 3963f197). Its rig is clean; it is gating.
+    - The hero landed (c3, 56900668) but needs a re-render: `edge` linked to six parts (ruling 2), and an in-frame reflect-only card
+      covering ~20 % of the frame. It is gating for looks.
+    - The cover landed (c4, 97f8dcdc). Its key is a sun through the paper (ruling 4), so it gets a re-light with hero31's own
+      disc-softbox key. It is gating for looks.
+    - Rendering: deck-home-portrait (c3, from 23:13) and deck-home (c4, from 23:21). The speaker lane is checking both for in-frame
+      cards and `edge`.
   - The roll-out's site set (state at 22:59): the honest fix1 frames are in: tall Ice and tall Fog PASSED 3/3. Held: tall Poison and Haze
     (the right side and the top edge mirror the bright set; real black cards out of frame to come), the three side views (a pale line
     along the polished bottom edge), the seven wide views (a white band at the base, likely the same edge), and Acid (re-rendering on the
     9097 tint fix). The back set is fixed (a5736434: the plate reads TROPOS); phase 2's horn-backs passed (six) earlier. Phase 2: the glow lamp dropped (noise-only difference), so chunks 4 and 05 stand; the six horn-backs passed (Acid's held on its
     edge colour; the amplifier close-up held on the stale rating plate, its softbox and the inlet's pins); turn 00, 02, 03, 04 passed,
     turn-01 held (a grey face), the side flags (e81c1a4a) to prove on 01 and 05 before chunk 6; inside-ice held (the base cut off).
+  - The lamps (23:24): the Hemisphere nights were re-rendered without the strip (df3794f6) and HELD 0/3, both (a) and (b).
+    - The dome is a flat, gamut-clipped field (red 0 on 84-94 %), dimmer than the table it lights.
+    - It lights nothing (Core's renderer gap: shadow rays stop at glass).
+    - The room is absent, and there is a notch on the cap.
+    Sent: Core's two fixes (thin-shell shadow transmission; the opal liner as the light at a real output), a roll-off or chroma
+    check, the room in the shell's reflections, and (b) only with its effect on the downlight rendered. The day frame stands.
   - The lamps (state at 21:56): the Hemisphere finals under rulings 1-3 at bac5fc08: the day PASSED 2/3; night (a) cool-white held 0/3
     (turquoise, a different colourway) and night (b) faint-blue held 0/3, both only for a hard white bar (the strip card's reflection, at
     night unmotivated) and a pale oval (the bowl's reflection); (b) keeps the day's Ice (201 against 204; dE2000 4-7 against 8-12 for (a)).

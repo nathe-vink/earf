@@ -3646,3 +3646,35 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   #BDB9B3 for the site studio too; (3) out-of-frame black cards for the dark tints (camera-right at floor level; overhead-front), each
   through cards_out_of_frame. Numbers and a SHA to follow. (My 23:18 points stand: honest_lights to unlink spec-only area lamps in code,
   and the A/B on the landed deck hero, which carries edge at 0.1 W.)
+- 23:20 c4 (its stamp 23:21 at a 23:20 queue time): the deck cover landed (phase-1 chunk 3, 22:22-23:19, on ad12099d/e0bbdcd3) at
+  97f8dcdc0fcc610814ecfdb73cd82cd142593154 (r33-rollout-c4): 3840x1360, 4.36 MB, 56.8 min, all eight including Smoke, coloured shadows.
+  Merged 95876493 (8202ce2a1997f4a747bc434a5bcb5895dd59f99c); deck-home (phase-1 chunk 4, ~84 min) from 23:21. Then it is idle. Its
+  held list still names fix1 chunk 1 (the row), which c2 has rendered.
+- 23:2x Hemisphere nights gate (wf_e1fee199-fbc, 3 critics, ~13 min): (a) HOLD 0/3, (b) HOLD 0/3.
+  Both pass 1, 2, 4 and 5. Both fail 3:
+  - The dome is a flat, gamut-clipped field (red 0 on 84 % (a), 94 % (b); ~10 % variation; one streak), so it reads as a painted bowl.
+  - Its face (84 (a) / 75 (b)) is dimmer than the table (~155) and the bowl (~230).
+  - It lights nothing: the liner swap moves the wall 0.1 level; a dark opaque-shade arch; a black collar under the cap.
+  - The room is absent (a bare wall over a 2/2/2 floor), and there is a black notch on the cap.
+  - (b) is a step back (dimmer, more clipped, azure). Its table is pixel-identical to (a), so the liner's cost isn't shown.
+- 23:22 COVER RIG: the key is a sun at azimuth 180 (from behind), 30°, 32 W/m2, reaching the units through the paper. hero31.py sets
+  'cast_shadow': not p['sun'], and its card says "the paper casts no shadow, so it reaches the floor". The paper is 16 m high and 12 m
+  behind, so a real studio blocks it. RULING 4 (23:24): every part of a set casts shadows; light reaches the product only through a
+  real opening. The cover gate launched for looks (wf_fc3d8208-b91). rigaudit.py now flags set.cast_shadow false, scoped flags
+  (`lights`/`see_through`), linked spec-only lamps, `transmission: False` and reflect-only cards.
+- 23:24 sent to the lamps lane: the gate. My read: the dome lights nothing because of Core's renderer gap, so Core's two fixes apply:
+  thin-shell shadow transmission, and the opal liner as the light at a real output (lumens and transmittance named). Also a roll-off
+  or chroma check against the chip, the room in the shell's reflections, the floor off black, and the notch fixed or explained. (b)
+  goes ahead only with its effect on the downlight rendered. The day stands.
+- 23:24 sent to the speaker lane: the cover's sun through the paper (ruling 4). The fix is hero31's own disc-softbox key behind the line,
+  inside the set (small, far back, a deeper set if needed), proved on a proxy against the landed cover, then a line. Also: list the
+  p['sun']/cast_shadow-false shots and any `cutters` (flags only the key meets: ruling 2's family), and add both checks to
+  honest_lights.
+- 23:27 DECK HERO RIG: five reflect-only cards. By ray-casting the frame (every 12 px) against each rectangle, four cover 0.0 %. The card
+  at [1.76, -1.32, 1.2], 2.2 x 2.2, normal [-0.8, 0.6, 0], covers 19.9 % (x 1140-1428 px, full height): its near edge passes 0.3 m from
+  the camera, seen 11° off its plane. The lane's _in_frame tests only corners and the centre, which all lie outside.
+- 23:29 sent to the speaker lane: the hero's in-frame card; the test fixed to check the rectangle (ray-cast or clip); re-run on every rig
+  with reflect-only cards (tall, side, wide, back, hero-light, cover, deck-home, deck-home-portrait in flight, the room), reporting
+  which have one and stopping any render in flight that does. The hero re-renders regardless (card out, edge off, the A/B for the
+  record). Order: the owner's edge comparison; this test fix with the edge-fix SHA (c2 waits on it); then the cover's key and the
+  flags.
