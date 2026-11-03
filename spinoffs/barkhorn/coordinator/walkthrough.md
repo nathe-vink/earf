@@ -11,6 +11,11 @@ Show one item with its pictures, wait for the answer, save the owner's words ver
   19:24 with scratchpad/walkthrough/04-after-dark-replacement.jpg.
 - **Next, in order, once item 3 is answered:** (b) items 5-7 (the Ice batt in the Ice habitat; the polished horn close-up; the throat-ring
   correction), then (c) from item 8. Time-bound in (c): Plastimagen, Mexico City, 10-13 November (next week).
+- **A disclosure owed before item 6 (the polished horn close-up), found 19:30:** the site's studio rig (gate 2's A rig, the tall front's)
+  showed one lamp (`horn`) at 30 % in reflections while it lit at full, so the polished horn's highlights in the frames the owner chose
+  from were dimmer than a real lamp gives. The speaker lane renders an honest A-ice-polished (that lamp at full in reflections, nothing
+  else changed); show it beside the old one with item 6, plainly. Every rig now follows the rule: no lamp lights at full while
+  reflecting less, and no lamp lights a part while skipping what sits behind it in its path.
 - **State changes since 18:09 (the (e) items and others):**
   - Mantle A or C3: C3b night passed 3/3 (17:55) with the C3 day 3/3; the Mantle lane is rendering the day from the C3b build, removing a
     red tick and checking that the field's light reaches what stands on it. Ready after that pass.
