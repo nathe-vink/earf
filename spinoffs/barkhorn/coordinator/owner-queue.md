@@ -1523,6 +1523,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   refracted paths still trace). Ember proxies: e1 (horn-front) and e2 (+ turned ~27 degrees to three-quarter, crack_r aimed at the
   speaker at 2.0, camera 0.95 to 0.8 m). The red window and square are the amp plate's real LED and the remote's eye; the posts are
   steel rods (0.58 grey) in their Cloud-only build.
-- 11:19 sent: --horn-front fine if it removes only the untinted shortcut (honest tinted backlight may still glow; measure the hue);
+- 11:18 sent (the message said 11:19): --horn-front fine if it removes only the untinted shortcut (honest tinted backlight may still glow; measure the hue);
   the posts must be BRONZE as in A (asset README: "the four ø16 bronze posts", horn A "on Strata's bronze posts"), so build with
   Strata's posts; the LED and the remote's eye at real brightness (a pinpoint, not a window).
