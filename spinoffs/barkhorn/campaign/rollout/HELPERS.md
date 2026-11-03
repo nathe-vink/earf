@@ -89,6 +89,36 @@ Smoke's five site frames are held back (`--hold smoke`) while its sheet is open,
 
 The held shots: site-front-off-tall-smoke, site-front-off-wide-smoke, site-hero-light-smoke, site-side-smoke and site-back-smoke. Run them later, with `--hold ''`, once Smoke's sheet is set.
 
+## Phase 2: the rest of the site (proposed 2026-11-03; no renders until the coordinator confirms)
+
+    python3 spinoffs/barkhorn/campaign/rollout.py --phase 2 --base A --horn polished --hold smoke --chunks <yours>
+
+The site lane's list (`r47-site-next`, `spinoffs/barkhorn/launch/PICTURES-2026-11-03.md`), each built from its old rig by `strata_lit`, as the site frames are. With Smoke held: 211 shots, about 15.8 h, in 10 chunks:
+
+| item | shots | est. | chunk |
+|---|---|---|---|
+| the front arc in Ice (the home's Sound), first | 9 | 0.5 h | 1 |
+| the front arc, the other six | 54 | 3.3 h | 1-3 |
+| the dark-ground studio, Ember | 1 | 1.1 h | 3 |
+| the amplifier plate, Ember (one: the plate is the same on all eight) | 1 | 0.3 h | 4 |
+| horn A from behind, x 8 (seven with Smoke held): each tint's horn has its own depth, and polished shows it | 7 | 2.3 h | 4-5 |
+| the inside, one (Ice): the same build in every tint | 1 | 0.5 h | 5 |
+| the turning sprite, 24 frames x 7, at the arc's 32 samples (the rig's 128 would be about 4x) | 168 | 4.6 h | 6-8 |
+| the close-ups with rigs: horn mouth (Acid), cabinet edge (Ember), plate (Dust), grip (Poison) | 4 | 3.1 h | 9-10 |
+
+After phase 1, each container takes these. The container that finishes phase 1 first takes Sound:
+- c2: 1, 4, 9 (9.3 h in all);
+- c3: 2, 5, 10 (9.6 h);
+- c4: 3, 6 (8.9 h);
+- c1: 7, 8 (8.6 h).
+
+Not in phase 2:
+- **Covers on (x 8): not renderable as designed.** Horn A's woofer sits in the caldera, which the cloth cover does not fit (`asset/README.md`). The owner's call: drop the cover switch, or design a cover for the caldera.
+- **The room:** that is phase 1's `deck-home` and `deck-home-portrait`. Its two cable props are checked in the deck hero's proof round.
+- **The reels and the uplit eight:** held for the owner.
+- **The back mark and the coin close-ups:** no rig yet; to be defined.
+- **The GA drawing:** CAD, from the Cloud's fab build, with Strata's posts and caldera added.
+
 ## The proposed split (`rollout.py --split 4`; estimates, about 9 min per megapixel per 64 samples)
 
 The chunk numbers are the same for satin and polished. The deck's four chunks go to container 1, so the deck lands first.
