@@ -2293,3 +2293,21 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   headroom above the horn, floor below, a little right of centre, the key's streak at lower left; the polished horn red glass with the
   pod and posts through it; at 2:3 the 4:5 frame gains sky and floor, crops nothing. Chunk 2 (the deck row) rendering.
 - 15:57 my look at the proof: framing right. Sent: confirmed; chunk 1 (the hero) straight after chunk 2, then 3 and 4.
+- 15:58 bar lane: bar-listening.jpg BLOCKED at the proxy check (r33-planet-world head 386eff96f1023135a94c73be8473ba092e078dee). Done:
+  both models rebuilt from 5295e58 in a separate worktree (the cloud 533 s, 73 MB; variants 16 MB; not in git; the two product defs
+  copied in); the shot builder spinoffs/barkhorn/planet/tropos-a/make_listening.py (from planet38 finals-b/listening-smoke at e7149388:
+  gate 2's A on both pairs, the horn polished, every uplight and LED at glow 0, the pairs on their own feet, the plinth lamps deleted,
+  a new room switch tropos_feet dropping the altar plinths, their lit tops and the lit wedges; the room's lights unchanged); one proxy
+  (1200 x 800, 48 samples, 181 s, 4.3 GiB). The block: Smoke on 5295e58 is 2074 Dark Gray (~12 % through 20 mm, black voile inside);
+  the old picture's internals showed only because the lit plinth glowed inside; without it, in this dark room, a black box (key and
+  kick raised 4-8x, the felt panels lit 4x: neither makes the walls read see-through). Options: (1) 2074 as is (fails see-through);
+  (2) wait for the Smoke sheet; (3) a lighter tint (Ice, Ember), changing the brand book's Smoke picture. Inventory
+  (spinoffs/barkhorn/planet/tropos-a/INVENTORY.md): the brand book's bar-listening, bar-door, bar-street, bar-decks, bar-smoke and the
+  House Book's door-hero, r42 counter/night/shop, r43 listening/shop/window, r44 street/bar/lantern all show the stepped horn (most
+  the lit plinth and back kick; r43 an unlit plinth; r44 a terrazzo plinth); the archive finals too. The back kick (spkb0/1) kept,
+  moved to the cabinet's middle and aimed level.
+- 15:58 sent: option 2 (wait for the Smoke sheet; render at once when set); meanwhile tints into INVENTORY.md and the non-Smoke book
+  pictures re-rendered with the same changes (door-hero first, then bar-door, bar-street, bar-decks, then r42-r44), a proxy each, one
+  at a time, each final to me for the gate; Smoke pictures wait; the back kick kept (a room light), not relied on for see-through.
+  The Smoke question now blocks several pictures (the site's five Smoke frames, the bar's listening and bar-smoke, the Smoke habitat):
+  it comes soon in the walkthrough.
