@@ -1548,3 +1548,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   band over the frost, a gradient, a night reflection, the day ball's frost checked; Hemisphere in the new shared camera with no lip
   line, the lit hue within ~10 degrees of day (exposure or view transform), a gradient, the table lit by an opal-sized area (soft
   shadow).
+- 11:32 biomes lane, Strata proxies (Ember, 0.35 scale, 16 samples): the first Strata proxies still had base A and its uplight (the CLI
+  stand defaulted to "own"); habitats.py now always passes --stand feet (plinth and uplight parts out, the speaker on its M8 feet at
+  z 0). --horn-front changes nothing measurable (horn linear Y 0.0793 to 0.0776): the glow is refracted light, the satin face gathering
+  the lava field behind and below (its red ~2.5x the sky's), in the tint's own hue (horn 0-1 degrees, cabinet 352-354): honest
+  physics for a bead-blasted red horn before a lava field. The three-quarter view (f2) helps: horn 0.0776 to 0.0463, front 0.0037 to
+  0.0059, side 0.0094; horn-to-cabinet 21x to 8x (5x against the side); the horn clears the ridge. Further would need a product
+  change (a lighter horn lot or less satin) or a fake. Chain restarted 11:32 on Strata (b34d08c414030ce358a3e96715b56e99ae5dc172):
+  Ember ~12:05 (f2, 96 samples), then Dust, Acid (64), Poison (96), Ice (64), Haze, Fog (96); the set ~15:00.
