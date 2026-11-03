@@ -68,7 +68,7 @@
  },
  "assign": [
   {
-   "match": "base-plinth-1|base-plinth-2|base-plinth-3|caldera-1|caldera-2|caldera-3",
+   "match": "base-plinth-1|base-plinth-2|base-plinth-3|base-lplate-frame|caldera-1|caldera-2|caldera-3",
    "material": "bark"
   },
   {
@@ -76,7 +76,7 @@
    "material": "brass"
   },
   {
-   "match": "base-uplight-channel|base-uplight-plate",
+   "match": "base-uplight-channel|base-uplight-plate|base-lplate-tray",
    "material": "channel"
   },
   {
@@ -84,7 +84,7 @@
    "material": "clear-cast"
   },
   {
-   "match": "base-plinth-feet|base-outrigger-feet",
+   "match": "base-lplate-feet|base-plinth-feet|base-outrigger-feet",
    "material": "foot"
   },
   {
@@ -1957,6 +1957,11 @@
   ],
   "Cabinet wash": [
    "cabinet-wash"
+  ],
+  "Light plate": [
+   "base-lplate-frame",
+   "base-lplate-tray",
+   "base-lplate-feet"
   ],
   "Outriggers": [
    "base-outriggers",
