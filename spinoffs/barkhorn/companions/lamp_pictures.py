@@ -93,7 +93,7 @@ def build(frame, samples, scale):
         sphere('ball-frost', 71.0, zc, acrylic('ball-frost', 0.3, loading=1 / 3), inward=True)
         if night:   # the LED under the window: brightest at the bottom, falling off up the ball; it lights the wall
             # and the base, never the table (light linking)
-            g = sphere('glow', 70.4, zc, glow('glow', '#FFC890', 0.9, -0.07, 0.07, 1.8, 0.15))
+            g = sphere('glow', 70.4, zc, glow('glow', '#FFC890', 0.55, -0.07, 0.07, 1.6, 0.08))
             lit = bpy.data.collections.new('glow-lights'); bpy.context.scene.collection.children.link(lit)
             for nm in ('wall', 'dock', 'base', 'ring', 'grommet', 'seat', 'ball', 'ball-frost'):
                 if nm in bpy.data.objects:
@@ -130,13 +130,16 @@ def build(frame, samples, scale):
         if night:
             # the reflector's spill lights the opal from the crown: brightest at the top, falling to the rim; it may
             # light the wall and the crown, and there is no table or floor in frame
-            sphere('glow', 85.4, rim, glow('glow', '#FFC890', 3.0, 0.0, 0.085, 0.35, 1.5), cut=2.0, hole=H)
+            sphere('glow', 85.4, rim, glow('glow', '#FFC890', 1.9, 0.0, 0.085, 0.12, 1.7), cut=2.0, hole=H)
         cam = ((0.0, -1.22, rim - 0.17), (0.0, 0.0, rim + 0.02), 85.0)   # round 2: a little below, into the mouth
     if night:
-        SC.world(strength=0.03, color='#1B2230')
+        SC.world(hdri='kiara_9_dusk', strength=0.05, rotation=200)   # round 3: soft natural reflections, no shapes
         moon = SC.area('moon', (-1.3, -0.4, 1.6), (0, -70, 0), (1.2, 1.6), 9.0, '#9FB2D6')
         moon.visible_glossy = False               # round 1: no daylight-window shapes reflected at night
-        SC.area('fill', (0.6, -1.4, 1.5), (60, 0, 25), (0.25, 0.25), 4.0, '#8FA0BE')   # small: one soft highlight
+        # round 3: a large soft fill far off, for a curved soft reflection on the glass (round 2's small one read as a
+        # hard square sticker)
+        fill = SC.area('fill', (1.4, -2.2, 1.9), (55, 0, 32), (1.4, 0.9), 9.0, '#8FA0BE')
+        fill.visible_glossy = False
         exposure = 0.0
     else:
         SC.world(hdri='kiara_9_dusk', strength=0.35, rotation=200)
