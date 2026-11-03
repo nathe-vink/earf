@@ -23,8 +23,10 @@ Show one item with its pictures, wait for the answer, save the owner's words ver
   line "DESIGNED IN SAN FRANCISCO, CALIFORNIA" to confirm. Ask with the back and amplifier pictures. The six horn-backs that passed
   20:38 (Ice, Haze, Fog, Ember, Poison 3/3; Dust 2/3) show no plate; Acid's waits on its edge colour, the amplifier close-up on the plate.
 - **State changes since 18:09 (the (e) items and others):**
-  - Mantle A or C3: C3b night passed 3/3 (17:55) with the C3 day 3/3; the Mantle lane is rendering the day from the C3b build, removing a
-    red tick and checking that the field's light reaches what stands on it. Ready after that pass.
+  - Mantle A or C3: C3b night passed 3/3 (17:55) with the C3 day 3/3; the C3d pair passed (night 2/3, day 2/3, 1a958c02); checked
+    against rulings 1-3 (clean; one mesh hide removed) and re-rendered from that build as C3e at 41232b56c60d1980a5ee3de0dddd8344ffb85fee
+    (renders/2026-11-03/barkhorn/mantle-r48/a5-night-ember-2423-c3e.png and a5-day-ember-2423-c3e.png; a noise-only diff, max 1 and 2 of
+    255). READY: show the C3e pair at item 82. The optional ring polish was tried and not taken (a glassier day ring adds night edge light).
   - Smoke: v2 held 3/3 (17:53): its horn's thick parts were lightened to ~58 % in v2 (the lane's own change). v3 puts the whole horn on one
     sheet at #A6A9AE (~38 %), black cards for the lip, and a 2064 re-render for a fair pair; after the speaker lane's chunks 3 and 4.
   - The habitats: Ember passed 3/3 at 10 degrees off (19:43, 45225a29), joining Dust and Ice. Fog's reframe proxy cut the horn's crease

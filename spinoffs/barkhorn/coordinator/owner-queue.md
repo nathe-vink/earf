@@ -3247,3 +3247,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   documented approximation checked against the chart and the off-cuts); Dust stands if its red edge is what 2422 does; the plate to TROPOS
   in the next model build (TR-1 and TR1- proposed; the model code and "DESIGNED IN SAN FRANCISCO, CALIFORNIA" to the owner); the softbox
   flagged; the inlet's pins. Walkthrough: the plate proposal noted for item 14 and the back pictures.
+- 20:42 Mantle lane: the C3d pair re-rendered from c2e255e3's scene and model as C3e (a5-night-ember-2423-c3e.png, a5-day-ember-2423-c3e.png
+  in renders/2026-11-03/barkhorn/mantle-r48/) at 41232b56c60d1980a5ee3de0dddd8344ffb85fee; full-frame diff against C3d: night 99.99 %
+  identical, max 1, none over 10; day 99.91 %, max 2, none over 10: noise only, so the C3e files are the pair, no new gate. Walkthrough
+  item 82's state updated: ready.
