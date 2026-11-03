@@ -2536,3 +2536,17 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   doorway cleared: the speaker a cabinet width right or the camera swung left, so the horn and the cabinet's top sit on the lit
   plaster; the spot feathered, aimed higher, a little fill; the left face's sheen flagged off; the woofer crescent, the horn-mouth
   streak and the clipped inside); a proxy, then the final; the full SHA and the path; v2 kept until the new one is gated.
+- 17:44 bar lane: r43-shop re-staged after its 3/3 hold, at 71e6483f3f95f6f9987df337ee4de97ff6680471
+  (renders/2026-11-03/barkhorn/planet-tropos-a/r43-shop.png, 1200 x 800, 256 samples; the proxy beside it). (1) The window bay's
+  display spots moved to the street side, above, aimed steeply at the fronts (40 to 90 W); the light through the acrylic lands red on
+  the floor under and behind each cabinet. (2) The camera ~3 m across to the shop's side ((3.1, 6.0, 1.85), 32 mm; was (8.0, 1.95,
+  1.45), 28 mm): three-quarter against the lit shelves, the pair about twice the size. (3) The horns the cabinets' red (hue 1-3
+  degrees) at value 0.30 vs the cabinets' 0.41 (was 0.16); a horn track spot (80 W, 22 degrees) barely moves clear horns; a 2.2 m eye
+  gives 0.33 vs 0.42 (offered). (4) The amp plate's green LED 6 to 1. Next: r43-window (the feet and a floor strip above the bulkhead;
+  the left horn's lower-left streak; the pink patch on the left cabinet's lower-right side face).
+- 17:45 my look: the pair reads as vivid see-through Ember, large, grounded; the floor pools around their feet are the frame's
+  brightest, hardest shapes, with red patches at the bases (the display spots through the acrylic): a risk against the owner's
+  "cast up through the speaker", put to the critics. A horn's reflection shows in the dark window glass.
+- 17:46 my gate on r43-shop v2 (wf_58a4dd5a-08b; the held v1 and the older picture as context) started.
+- 17:47 sent to the bar lane: r43-window next, then the r44-lantern polish, then the r43-listening polish; the 2.2 m eye held until the
+  gate.
