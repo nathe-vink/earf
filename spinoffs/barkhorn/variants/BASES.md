@@ -130,6 +130,11 @@ So the light moves inside the speaker (option "Built-in light", `BUILTIN` in `va
 - There is one more thing inside the box to test (heat, rattle).
 - The idea of a separate lit base goes away.
 
+**For the build (gate 3): no neon line down the side.** D's first night frame showed a bright line down the right side face. The brace runs ended 4 mm from the clear vertical ribs (x 80 and 480), which piped the light up to their front edges. Two rules for the build:
+- Keep the strips at least 40 mm from any clear rib or clear wall edge.
+- Butt or overlap the side batts at each rib, so no slit of light shows at the seam.
+If a line still shows, satin the ribs' front edges or set them back 2 mm behind the front panel's inner face.
+
 **Open: the voile colour.** The batts' sleeves are black voile in the parts list and in `product.py` (since 2026-11-01), but white in colors F and the site's copy. In the coordinator's model, black sleeves cut D's light leaving the cabinet from about 44 % to 24 %. It is tied to Smoke's lining question (gate 3: white reads, black reads as "a PC case with a window"). Owner's call.
 
 **For the build (gate 2, D by day, 3/3 pass; done since gate 3, the runs are on the rear member):** by day, the brace channel at y 250 shows from the front three-quarter view as a short dark bar under the woofer's lower right, where A shows a pale brace-edge highlight. One critic read it as a stray mark. Two fixes:
