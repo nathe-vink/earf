@@ -440,6 +440,15 @@ def _room_gate3(s):
         top = w['sill'] + w['size'][1]
         w['sill'] = 0.9
         w['size'] = [w['size'][0], round(top - 0.9, 3)]
+    # (its proof at -1.37: the fronts still dark boxes, the left 11 and the right 22 against the row's Poison front at
+    # 48.6. The sun at azimuth -68 reaches the left unit through the window nearest the back wall (along 2.75) and the
+    # right through the next (along 1.15), so that one window alone gets a lower sill, 0.55: the sun reaches the left
+    # unit from about 0.42 m up, its middle, while the right keeps its 0.41 m and both bottoms stay in shade)
+    for w in s['set'].get('windows', []):
+        if abs(w.get('along', 0) - 2.75) < 1e-6:
+            top = w['sill'] + w['size'][1]
+            w['sill'] = 0.55
+            w['size'] = [w['size'][0], round(top - 0.55, 3)]
     s['sun']['elevation_deg'] = 8.0
     s['render']['view'] = 'AgX'
     # (its proxy: AgX sits about half a stop under PBR Neutral, so -2/3 left the cabinets near black: -2/3 + 1/2)
