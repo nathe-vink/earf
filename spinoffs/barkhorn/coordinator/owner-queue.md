@@ -3289,3 +3289,16 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   the opal core in (PROPOSAL, same sheet cost, no blasting); the white dot and the raised camera in. Proxy: core/gap 1.06 (was 1.03; opal in
   the old light 0.93); OKLCH 226; the core a pale sphere with a clear edge, short of 1.3 (the gap and the core scale together in this rig).
   Full scale rendering: B day (384) and B night (1024); the Hemisphere finals still running.
+- 20:57 speaker lane (STOP-WORTHY): projecting every reflect-only card into its frame (corners and mid-points against the frustum, no
+  occlusion test), several are IN FRAME: deck-row's 13 x 2.6 m black card behind the row (_row_gate3; c4 rendering it); the mirror card
+  1.2 m beyond the right face in tall, wide and side (_siteG_round1, 6f73a18c); three older cards in wide; one in back; the new one in
+  hero-light; the deck hero's mirror card, lid card and floor patch. Out of frame: the tall rig's others, the hero's four inherited, the
+  back's second. The fix: each mirror card slid out along its own ray, grown to subtend the same angle, until no corner is in the
+  frustum (a flag further out of shot); floor cards in frame removed, the cost reported. The floor patch replaced by `back` off (the lamp
+  behind the speaker aimed through it at the floor): tall Ice 0.51 / 197, Ember 0.42 / 195 (lower right face saturation / floor), against
+  the old linked rig 0.56 / 176 and 0.49 / 173, honest-no-patch 0.46 / 229 and 0.35 / 228; the front unchanged; wide Ice face 0.72 to 0.74,
+  side 0.72 to 0.68. One SHA with both to come; fix1 waits. The honest A-ice-polished landed (base-question/gate2/A-ice-polished-honest.png,
+  the horn lamp 0.3 to 1.0, nothing else); its numbers come with the SHA.
+- 20:58 sent to c4: stop fix1 chunk 1 (the row) by PID, discard the partial, wait for the next SHA. To the speaker lane: both fixes agreed
+  (the slid-out cards are flags further out of shot; `back` off a real move); asked whether the room or the portrait has an in-frame
+  reflect-only card (c3 renders the portrait); the honest A-ice-polished to be pushed with its path and SHA.
