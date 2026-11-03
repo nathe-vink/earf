@@ -3419,3 +3419,17 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   liner proposal; the table pool white. A check: the dome is deep saturated azure (the owner's Ice-chip photo settles it).
 - 21:56 sent to the lamps lane: both nights re-rendered with the strip removed or replaced by a broad, dim, motivated reflection, the oval
   softened by a real move (optional faint cool spill on the wall); the day stands (its notes for a re-render if (b) is taken).
+- 21:58 speaker lane at 5957b9f9d0535393501f178753be45863efdc4d4: (1) the deck hero staged (turned 6 toward the camera, the camera 0.15 m
+  lower): lid strip (101,93,87) sat 0.48 to (184,4,7) sat 0.98; lower right face 0.38 to 0.49 (held 0.22); upper face 0.90 to 0.84; top
+  chamber (170,1,1) to (106,3,5), 0 % clipped; proof deck-fix-proofs/deck-hero-gate3-proof.png; line: phase-1 chunk 1 (1440 x 2160, ~84 min).
+  (2) The row: two reflect-only white bounce cards in front of the row were also in frame (the rule now covers bounces; gone). Right-side
+  saturation Ember..Smoke: in-frame card .96 .89 .87 .84 .72 .71 .01 .33; none .94 .80 .69 .25 .33 .19 .01 .05; (a) -12 alone washed the
+  fronts; (d) sweep #BDB9B3 .96 .86 .77 .32 .39 .23 .04 .16; (a)+(d) .53 .57 .51 .83 .83 .86 .06 .42 (sides narrower, each its own tint,
+  fronts deep). Taken (a)+(d): a visible change (the sweep light grey, ~196 at the top against 241; the units squarer); proof
+  deck-fix-proofs/deck-row-honest-card-d-ad.png; fix1 chunk 1 can go on it. (3) The turn flags don't work (01's incoming face 0.22 to 0.23;
+  04 0.29; 05 0.11; a shadow band on the backdrop's left edge, 210 to 162): at 75 degrees the mirror ray runs along the camera's line onto
+  the backdrop in frame; removed at 5957b9f9; options: a darker backdrop for the turn, or accept turn-01's grey.
+- 21:58 check-in #50 fired; check-in #51 armed for 22:48 (trig_01GAD9XFgdv8MALVR8RgobEM).
+- 21:58 sent: to the speaker lane, the hero and row accepted; the turn's darker backdrop (#BDB9B3, the row's) proxied on 01/05 with 02/04 as
+  controls, phase-2 chunk 6 held; then the room rig, the 9097 fix, the amp plate, back, hero-light. To c3: the deck hero (phase-1 chunk 1)
+  on 5957b9f9 after fix1 chunk 5. To c2: the row (fix1 chunk 1) on 5957b9f9 after chunk 7, in place of the held room.
