@@ -30,6 +30,11 @@
    "glow": 680.0,
    "glow_color": "#FFCEA6"
   },
+  "cable": {
+   "preset": "rubber",
+   "color": "#141414",
+   "roughness": 0.5
+  },
   "channel": {
    "preset": "plastic",
    "color": "#111111",
@@ -108,6 +113,10 @@
   {
    "match": "builtin-brace-led",
    "material": "builtin-led-brace"
+  },
+  {
+   "match": "lead-hf-pod",
+   "material": "cable"
   },
   {
    "match": "base-uplight-channel|base-uplight-plate|builtin-floor-channel|builtin-brace-channel|side-light-channel|base-lplate-tray",
