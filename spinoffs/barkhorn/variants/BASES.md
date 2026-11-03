@@ -81,11 +81,25 @@ It lifts the cabinet 20 mm.
 | Ember | red | about 53 mm | the bottom 10 cm |
 | Smoke | grey | about 10 mm | barely; Smoke passes least |
 
-**The bottom batt.** A window in it (the batt cut back to a frame, or lifted) would let the centre panel's light straight up the middle. That spine is dark in the uplit set. `ice-night-window.png` shows the batt removed, as the upper limit of what a window adds.
-- Acoustically it costs **no bass**. The batts do not set the box's tuning, and the bottom batt is about 6 L of a 164 L box, so the port's tuning moves well under 1 Hz.
-- What it does change: the bottom batt helps damp the cabinet's vertical standing wave, about 210 Hz for the 0.82 m inside height. The 100 mm top batt stays and damps the same mode at the other end. Expect at most a 1 to 2 dB ripple near 210 Hz.
-- That is to measure on the first sample before the window is adopted. If it rings, a voile-only panel keeps the look with the batt back.
-- **My call: keep the batt for now.** The walls and the ports carry the colour.
+**The bottom batt.** A window in it (the batt cut back to a frame, or lifted) lets the centre panel's light straight up the middle. `ice-night-window.png` and `like/*-window.png` show the batt removed, the upper limit of what a window adds. (Corrected 2026-11-03: the first `ice-night-window.png` hid a part name that did not exist, `lining-bottom-1` for `lining-bottom-1-web`, so it was byte-identical to `ice-night.png`. The note that it "gives a little more" could not have been seen in it. Re-rendered with the batt really out.)
+- **What it does:** the bottom bay and the lower cabinet get brighter, and the cabinet a little more evenly lit. The wall changes little. A real but small gain.
+- **What it costs acoustically:** **no bass**. The batts do not set the box's tuning, and the bottom batt is about 6 L of a 164 L box, so the port's tuning moves well under 1 Hz. It does weaken the damping of the cabinet's vertical standing wave, about 210 Hz for the 0.82 m inside height. The 100 mm top batt stays and damps the same mode at the other end. Expect at most a 1 to 2 dB ripple near 210 Hz, to measure on the first sample before the window is adopted. If it rings, a voile-only panel keeps the look with the batt back.
+
+**Against the underlit promo images** (`like/`, the uplit set's own stage, camera, moon, haze and exposure, only the plinth's own light at full; `like/sheet-like.png`: the uplit frame, then base, window and wash, Ice on top and Ember below):
+- **The base uplight lights the whole cabinet**, top to bottom, in its own colour, deeper than the promo's near-white interior.
+- **The promo's tall V up the wall is out of reach.** Its lamp put about 135 W of light under the speaker; the plinth's uplight gives about 10 W of light at full (34 W electrical). The wall here gets a shorter, dimmer fan: close in Ember, paler in Ice.
+- **The window** adds a little more glow low in the cabinet.
+- **The cabinet wash** (below) adds a brighter inside and a stronger glow at the ports and walls, and a little more on the wall.
+- **Closest to the promo look for the least change:** the base uplight with the bottom-batt window. No parts, and its glow already fills the cabinet. The next step toward the promo's wall is more light from the centre panel (a 40 W board in place of the 16 W one), not the wash.
+
+**The cabinet wash** (a proposal for the owner; `WASH` in `variants.py`, option "Cabinet wash", `cabinet-wash` in `components.json`):
+- **What it is:** COB strips, 24 V, 10 W/m, 4000 K, 1.06 m a speaker, bonded to the bottom panel inside the cabinet at the foot of each side wall and of the front panel, between the wall and its lining, aimed up the wall. The back is left out (its land strip and the amplifier's compartment).
+- **How it is fed:** from the plinth's 24 V through a sealed, potted 2-pin connector in the bottom panel at a foot pad, mating with a spring contact in the plinth's top frame. The cabinet still lifts off its plinth with nothing to unplug.
+- **Cost:** about $60 a speaker (the strip $34, the connector and the spring contact about $15, fitting).
+- **Power:** +11 W at full (+6 W at 50 %), so 45 W in all. The 60 W supply still covers it.
+- **Heat:** about 11 W at full inside the acoustic box, 5 mm clear of the lining, the ports breathing. The inside air runs a few K warmer, near the woofer's magnet, well within its rating. To check with a thermocouple on the first sample.
+- **Acoustics:** two millimetres of strip on the floor change nothing measurable.
+- **What it buys:** a brighter inside, not the promo's wall. Worth it only if the owner wants the cabinet itself to glow harder.
 
 **Power:**
 - **At full:** edges 18.4 W, panel 16 W, **34 W**.
