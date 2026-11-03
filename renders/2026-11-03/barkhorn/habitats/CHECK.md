@@ -18,3 +18,4 @@ Withdrawn: the first Ember (3de248cd) and Dust (c96fb96a) were rendered on the C
 | Habitat | see_through | grounded | no_light_down | smooth_horn | Notes |
 |---|---|---|---|---|---|
 | Ember | PASS | PASS | PASS | PASS | Three-quarter view (rotate_z -5), crack_r on the speaker at 2.0, camera at 0.8 m. The woofer, frame, ports, braces and the side panel's frame show through, with lava through the side. The contact shadow is dark on dark and only just reads at phone size. A bright strip at the bottom right is lava light inside the side panel, not a spill. The dark disc in the horn is the driver seen through it. |
+| Dust | PASS | PASS | PASS | PASS | Orange acrylic throughout: the woofer, its ring, braces, ports and the amp box show through. It stands on four short feet with faint contact shadows. The red streak in the shadow is sun through the tint, darker than the sand. The horn is smooth, with soft diagonal shading from the throat toward the corners and no X. |
