@@ -45,6 +45,7 @@ def scale_lights(sh, scales):
 
 SURFACE_GLASS = False                   # --surface-glass: the tint on the faces (not adopted: the speaker lane's volume is the line's material)
 WELD = [True]                           # the asset's split vertices welded so its glass volumes close (--no-weld: off)
+SINK = [0.002]                          # --sink M: the feet bedded this far into the ground (ash, sand)
 HORN = {'close': False, 'rough': None, 'shadows': True}  # --horn-close: fill the horn shells' open seams; --horn-rough R: the satin's roughness (test only)
 TT_SURFACE = 0.92                       # the two faces' reflection loss, as tints.py has it
 
@@ -59,12 +60,12 @@ def feet(bpy_, col, r=0.016, h=0.012, inset=0.05):
     final model: the owner, 2026-11-03, isn't convinced a base is needed)."""
     import bmesh
     from mathutils import Vector
-    lo = [1e9, 1e9]; hi = [-1e9, -1e9]
+    lo = [1e9, 1e9]; hi = [-1e9, -1e9]; zb = 1e9
     for o in col.all_objects:
         if o.type == 'MESH' and not o.name.split(' ')[-1].startswith('base-plinth') and o.name.split(' ')[-1] in ('bottom', 'left', 'right', 'front-panel', 'back'):
             for v in o.bound_box:
                 w = o.matrix_world @ Vector(v)
-                lo = [min(lo[0], w.x), min(lo[1], w.y)]; hi = [max(hi[0], w.x), max(hi[1], w.y)]
+                lo = [min(lo[0], w.x), min(lo[1], w.y)]; hi = [max(hi[0], w.x), max(hi[1], w.y)]; zb = min(zb, w.z)
     m = bpy_.data.materials.new('foot-rubber'); m.use_nodes = True
     bs = m.node_tree.nodes['Principled BSDF']; bs.inputs['Base Color'].default_value = (0.02, 0.02, 0.02, 1)
     bs.inputs['Roughness'].default_value = 0.8
@@ -72,7 +73,10 @@ def feet(bpy_, col, r=0.016, h=0.012, inset=0.05):
         for y in (lo[1] + inset, hi[1] - inset):
             bm = bmesh.new(); bmesh.ops.create_cone(bm, cap_ends=True, segments=24, radius1=r, radius2=r, depth=h)
             me = bpy_.data.meshes.new('foot'); bm.to_mesh(me); bm.free(); me.materials.append(m)
-            f = bpy_.data.objects.new('foot', me); f.location = (x, y, h / 2); col.objects.link(f)
+            # under the cabinet's own bottom (Strata's sits 38.5 mm up, where base A was), not at z 0: the feet must
+            # touch the cabinet, or they hang below it as pebbles and it floats (the coordinator's gate, Ember, 12:23)
+            f = bpy_.data.objects.new('foot', me); f.location = (x, y, zb - h / 2); col.objects.link(f)
+    print(f'feet: four, {2 * r * 1000:.0f} x {h * 1000:.0f} mm, under the cabinet bottom at z {zb:.4f}')
 
 
 def uplight(bpy_, col, watts=40.0, color=(1.0, 0.9, 0.8)):
@@ -349,7 +353,7 @@ def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extr
     def world(bpy_, sky, sun_spec=None):
         r = world0(bpy_, sky, sun_spec)
         if ground:
-            settle(bpy_, linked)
+            settle(bpy_, linked, SINK[0])
         if flag:
             black_flag(bpy_, linked, flag)
         return r
@@ -374,12 +378,14 @@ def main():
     ap.add_argument('--no-ground', action='store_true', help="don't settle the speaker onto the set")
     ap.add_argument('--no-weld', action='store_true'); ap.add_argument('--surface-glass', action='store_true')
     ap.add_argument('--lining', help="the lining's color, hex (colors F: Smoke '#0B0B0B')")
+    ap.add_argument('--sink', type=float, default=0.002, help='bed the feet this far into the ground, m')
     ap.add_argument('--horn-front', action='store_true', help='direct light stops at the horn (no lampshade from behind)')
     ap.add_argument('--horn-close', action='store_true'); ap.add_argument('--horn-rough', type=float)
     ap.add_argument('--flag', type=float, nargs=2, default=(8.0, 6.0), help='the black flag behind the camera, m (0 0: none)')
     a = ap.parse_args()
     global SURFACE_GLASS
     WELD[0] = not a.no_weld; SURFACE_GLASS = a.surface_glass
+    SINK[0] = a.sink
     HORN['close'] = a.horn_close; HORN['rough'] = a.horn_rough; HORN['shadows'] = not a.horn_front
     sh = json.load(open(a.shot))
     scale_lights(sh, {k: float(v) for k, v in (x.split('=', 1) for x in a.light)})
