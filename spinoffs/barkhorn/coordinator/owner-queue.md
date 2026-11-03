@@ -1736,3 +1736,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   clear toward the rim (no lit band or outline, which would risk the rejected "red LED edge strip"); report any leak down from the
   clear zone. The Mantle question (v4 as is vs C, with B/D/E noted) goes to the owner after the base, horn and Smoke questions, with C's
   frames if they pass.
+- 13:27 lamps round 7 gate wf_286ca581-a1f (3 critics, 22 min): Hemisphere day SHOW 3/3 ("ready"); Hemisphere night 1/3, close (the
+  light behaves right; held for a blown-out bowl and a pool brighter than the lamp, daytime window reflections on the dome, two cap glints
+  like "LED eyes", one critic's electric-blue lip, the teal hue ~187 vs ~201). Core day hold 3/3 (now frosted like the night: "milk glass
+  / lacquered plastic", the silhouette lighter not deeper); Core night hold 3/3 ("a flat cyan disc", an LED hotspot cone, a pin-dot, a
+  nub, a seam ring): the same finding as Mantle's, inherent to a frosted-inside ball.
+- 13:28 sent: Hemisphere night one more pass (the bowl and table exposure, night reflections, matte cap glints, the lip no brighter than
+  the face, the hue gap noted as a fact); Core: an honest design note (inherent to the frost? a ball-in-ball: a clear tinted shell over a
+  smaller frosted inner diffuser; partial frost; finer frost; costs; the emitter's visibility) with a proxy pair of the best option, and
+  the pin-dot, nub and hotspot fixed regardless. Core's frosted-vs-new goes to the owner with the facts.
