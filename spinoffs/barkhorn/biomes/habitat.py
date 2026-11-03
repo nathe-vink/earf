@@ -45,7 +45,7 @@ def scale_lights(sh, scales):
 
 SURFACE_GLASS = False                   # --surface-glass: the tint on the faces (not adopted: the speaker lane's volume is the line's material)
 WELD = [True]                           # the asset's split vertices welded so its glass volumes close (--no-weld: off)
-HORN = {'close': False, 'rough': None}  # --horn-close: fill the horn shells' open seams; --horn-rough R: the satin's roughness (test only)
+HORN = {'close': False, 'rough': None, 'shadows': True}  # --horn-close: fill the horn shells' open seams; --horn-rough R: the satin's roughness (test only)
 TT_SURFACE = 0.92                       # the two faces' reflection loss, as tints.py has it
 
 
@@ -182,7 +182,8 @@ def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extr
     import render, product as Pr, lights as Lt
     linked = []
     place0 = Pr.place
-    editable = stand == 'feet' or tt or up or lining or glass_shadows or HORN['close'] or HORN['rough'] is not None   # else the asset as it is, linked
+    editable = (stand == 'feet' or tt or up or lining or glass_shadows or HORN['close'] or HORN['rough'] is not None
+                or not HORN['shadows'])   # else the asset as it is, linked
 
     def place(bpy_, pdef, templates, shot_, root_):
         objs, part_of = place0(bpy_, pdef, templates, shot_, root_)
@@ -252,6 +253,25 @@ def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extr
                         if n.type == 'BSDF_PRINCIPLED':
                             n.inputs['Roughness'].default_value = HORN['rough']
             print('horn satin roughness ->', HORN['rough'])
+        if not HORN['shadows']:
+            # the horn lit from the front (the coordinator, 2026-11-03, Ember): the asset's shadow rays pass the horn
+            # untinted, so a lamp or bright sky behind a backlit satin horn makes it a lampshade, out-shining the
+            # backdrop, the driver and posts as silhouettes. Direct light stops at the horn; its paths still refract
+            done = set()
+            for o in col.all_objects:
+                for sl in getattr(o, 'material_slots', []):
+                    m = sl.material
+                    if not m or not m.node_tree or not m.name.split('@')[0].startswith('horn-') or m.name in done:
+                        continue
+                    nt = m.node_tree
+                    out = next((n for n in nt.nodes if n.type == 'OUTPUT_MATERIAL' and n.is_active_output), None)
+                    bs = next((n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED'), None)
+                    if out is not None and bs is not None:
+                        for l in list(out.inputs['Surface'].links):
+                            nt.links.remove(l)
+                        nt.links.new(bs.outputs[0], out.inputs['Surface'])
+                        done.add(m.name)
+            print('horn: direct light stops at it (no shadow transparency):', sorted(done))
         if glass_shadows:
             # light through the glass: Cycles renders without refractive caustics, so no lamp lights anything inside or
             # behind a clear wall and the inside reads black whatever the tint. Shadow rays pass each acrylic wall
@@ -262,6 +282,8 @@ def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extr
                     m = sl.material
                     base = m.name.split('@')[0] if m else ''
                     if not m or not m.node_tree or base not in ('bark', 'horn-formed', 'horn-satin', 'horn-lot') or m.name in done:
+                        continue
+                    if base.startswith('horn-') and not HORN['shadows']:
                         continue
                     nt = m.node_tree
                     out = next((n for n in nt.nodes if n.type == 'OUTPUT_MATERIAL' and n.is_active_output), None)
@@ -352,12 +374,13 @@ def main():
     ap.add_argument('--no-ground', action='store_true', help="don't settle the speaker onto the set")
     ap.add_argument('--no-weld', action='store_true'); ap.add_argument('--surface-glass', action='store_true')
     ap.add_argument('--lining', help="the lining's color, hex (colors F: Smoke '#0B0B0B')")
+    ap.add_argument('--horn-front', action='store_true', help='direct light stops at the horn (no lampshade from behind)')
     ap.add_argument('--horn-close', action='store_true'); ap.add_argument('--horn-rough', type=float)
     ap.add_argument('--flag', type=float, nargs=2, default=(8.0, 6.0), help='the black flag behind the camera, m (0 0: none)')
     a = ap.parse_args()
     global SURFACE_GLASS
     WELD[0] = not a.no_weld; SURFACE_GLASS = a.surface_glass
-    HORN['close'] = a.horn_close; HORN['rough'] = a.horn_rough
+    HORN['close'] = a.horn_close; HORN['rough'] = a.horn_rough; HORN['shadows'] = not a.horn_front
     sh = json.load(open(a.shot))
     scale_lights(sh, {k: float(v) for k, v in (x.split('=', 1) for x in a.light)})
     for kv in a.sets:
