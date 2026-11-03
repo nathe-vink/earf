@@ -84,10 +84,14 @@ WASH = dict(runs=[(24.0, 60.0, 24.0, 370.0), (536.0, 60.0, 536.0, 370.0), (60.0,
 BUILTIN = dict(floor=[(60.0, 360.0, 230.0, 360.0), (330.0, 360.0, 500.0, 360.0),   # split wide of the bottom rib's end, so the
                       (50.0, 295.0, 160.0, 295.0), (400.0, 295.0, 510.0, 295.0)],      # batt's notch shows no strip (gate 2, 3)
                z_floor=20.0,
-               # the brace runs 40 clear of the side ribs (x 80 and 480), so no light pipes up the clear ribs to
-               # their front edges (gate 3: a neon line down the right side)
-               brace=[(126.0, 250.0, 434.0, 250.0), (126.0, 300.0, 434.0, 300.0)], z_brace=220.0,
+               # the brace runs on the brace's REAR member (y 311-339; its window is y 72-311, x 70-490, so the
+               # earlier runs at y 250 / 300 stood over the open window: not buildable, the coordinator, gate 3), the
+               # second run short of the back's bosses (x 102-138, 422-458 from y 327)
+               brace=[(80.0, 318.0, 480.0, 318.0), (145.0, 332.0, 415.0, 332.0)], z_brace=220.0,
                channel=(12.0, 7.0), wall=1.5, lens_t=1.0, lens_down=0.6, standoff=(6.0, 3.0))
+# E's side light: each strip's centre x (left, right), its run in y, the centre's height; the film's rectangles on the
+# bay floors (x0, y0, x1, y1), clear of the bottom batt (x 180-380), and its thickness
+SIDELIGHT = dict(x=(32.0, 528.0), y=(45.0, 355.0), z=28.0, film=[(20.0, 44.0, 179.0, 379.0), (381.0, 44.0, 540.0, 379.0)], film_t=0.2)
 # D+'s top batt (the Cloud's lining-top-3-web: its box, x0 y0 z0 x1 y1 z1 mm; the top rib's notch x0 x1 from z0 up)
 TOPWIN = dict(box=(71.0, 44.5, 759.5, 489.0, 339.5, 859.5), frame=80.0, rib=(270.0, 290.0, 800.0))
 # the slim light plate (the coordinator, 2026-11-03, for the owner's question about the footing: "a separate base that
@@ -285,13 +289,35 @@ def parts(P):
                 x, y = ax + f * (bx - ax), ay + f * (by - ay)
                 bs.append(Pos(x, y, z0 + sh / 2 + 0.05) * Box(sw, sw, sh - 0.1))
         out.append(product.Part(f'builtin-{key}-led', _C(children=bl), product.Bought('builtin-strip'), finish='builtin-led' if key == 'floor' else 'builtin-led-brace', group='base',
-                                option='Built-in light',
+                                option='Built-in light' if key == 'brace' else 'Built-in floor',
                                 notes=[f'the built-in light ({key}): COB strip, 24 V, 20 W/m, 4000 K, its frosted lens in a black U-channel, '
                                        'aimed straight up inside the cabinet (a proposal; variants/BASES.md)']))
         out.append(product.Part(f'builtin-{key}-channel', _C(children=bc), product.Bought('uplight-channel'), finish='channel', group='base',
-                                option='Built-in light', notes=[f'the built-in light\'s {key} channels: aluminium U, 12 x 7, black anodised']))
+                                option='Built-in light' if key == 'brace' else 'Built-in floor', notes=[f'the built-in light\'s {key} channels: aluminium U, 12 x 7, black anodised']))
         out.append(product.Part(f'builtin-{key}-standoffs', _C(children=bs), product.Bought('builtin-standoffs'), finish='foot', group='base',
-                                option='Built-in light', notes=[f'nylon standoffs, M3, screwed into inserts bonded in the {key}, three a run']))
+                                option='Built-in light' if key == 'brace' else 'Built-in floor', notes=[f'nylon standoffs, M3, screwed into inserts bonded in the {key}, three a run']))
+    # E, the side light (the coordinator, 2026-11-03, after the study's skeptic): a strip at the foot of each side
+    # wall in the ports' bay, whose side walls carry no batts, tilted 45 deg up and outward, so its light leaves through
+    # the lower side walls and rises on the wall behind as the site's V; with a white film on the bay's bare floor
+    E_ = SIDELIGHT; L_ = E_['y'][1] - E_['y'][0]; ym_ = sum(E_['y']) / 2
+    el, ec = [], []
+    for cx, tilt in ((E_['x'][0], -45.0), (E_['x'][1], 45.0)):
+        chan = Box(bcw, L_, bch) - Pos(0, 0, bt) * Box(bcw - 2 * bt, L_ + 2, bch)
+        lens = Pos(0, 0, bch / 2 - B_['lens_down'] - B_['lens_t'] / 2) * Box(bcw - 2 * bt - 0.2, L_, B_['lens_t'])
+        place = Pos(cx, ym_, E_['z']) * Rot(0, tilt, 0)
+        ec.append(place * chan); el.append(place * lens)
+    out.append(product.Part('side-light-led', _C(children=el), product.Bought('builtin-strip'), finish='builtin-led', group='base',
+                            option='Side light',
+                            notes=['E, the side light (a proposal): COB strip in a black U-channel at the foot of each side wall in '
+                                   'the ports\' bay, tilted 45 deg up and outward on an aluminium bracket, its lens or louvre limiting it '
+                                   'to about +/-40 deg (variants/BASES.md)']))
+    out.append(product.Part('side-light-channel', _C(children=ec), product.Bought('uplight-channel'), finish='channel', group='base',
+                            option='Side light', notes=['the side light\'s channels, aluminium U, 12 x 7, black anodised, on 45 deg brackets']))
+    film = [Pos((x0 + x1) / 2, (y0 + y1) / 2, 20.0 + E_['film_t'] / 2) * Box(x1 - x0, y1 - y0, E_['film_t']) for (x0, y0, x1, y1) in E_['film']]
+    out.append(product.Part('floor-film', _C(children=film), product.Bought('reflector-film'), finish='reflector-film', group='base',
+                            option='Floor film',
+                            notes=['a white reflector film (PET, about 0.2) bonded on the bottom panel\'s bare floor in each ports\' bay, '
+                                   'so the light inside goes back up instead of down through the floor (variants/BASES.md)']))
     wash = [seg(ax, ay, bx, by, WASH['w'], WASH['z'] + 0.1, WASH['z'] + 0.1 + WASH['t']) for (ax, ay, bx, by) in WASH['runs']]
     # D+ (the coordinator's study, 2026-11-03, wf_6f2b81e0-333): the top batt as a frame, 80 wide, round a central
     # window over the brace light (about 28 % of its area open); the back's top band (back-c, -e, -h) is left out by
@@ -368,6 +394,7 @@ PRODUCT = dataclasses.replace(
                'uplight-panel': {'preset': 'frosted', 'color': '#F4F2EE', 'absorb': '#F0EEEA', 'glow': 52.0, 'glow_color': '#FFCEA6'},
                # the built-in light: 20 W/m electrical, about 6 W/m of light through an 8.6 mm lens, 680 W/m2 at full
                'builtin-led': {'preset': 'frosted', 'color': '#F4F2EE', 'absorb': '#F0EEEA', 'glow': 680.0, 'glow_color': '#FFCEA6'},
+               'reflector-film': {'preset': 'plastic', 'color': '#F2F2EF', 'roughness': 0.6},
                'builtin-led-brace': {'preset': 'frosted', 'color': '#F4F2EE', 'absorb': '#F0EEEA', 'glow': 680.0, 'glow_color': '#FFCEA6'}},
     kind='Tropos design-pass proposals: Strata\'s caldera and the Topo horn',
     notes=['Proposals beside the current design (variants/README.md); the Cloud\'s CAD is unchanged.'],
