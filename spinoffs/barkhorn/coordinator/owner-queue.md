@@ -2687,3 +2687,13 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   fd81e8730361c7cf6fc66e4d6368023eaf4a27c7 (the push ~3 min); chunk 15 (back haze, fog) started 18:20. The sets as they complete:
   front-off-wide with c4's chunk 09 (fog); side with c2's chunk 14 (haze, fog); hero-light with c4's chunks 09 (ember) and 12 (haze,
   fog); back with c2's chunk 14 (ember to ice) and c3's chunk 15 (haze, fog).
+- 18:23 biomes lane (its message said 18:24): Haze's and Poison's polished proxies show the wedge too (Haze a pale wedge from the upper
+  left into the throat, Poison a bright diagonal). Its own box numbers weren't consistent (Ice 30.9, the box taking in the driver), so
+  it measures on the flare clear of the driver from now. The pattern: the speaker's turn off the camera's line: Ice ~4 degrees off and
+  clean; Ember 23, Haze 25, Poison 38. Turned to ~10 degrees off (Ember rotate_z 12, Haze -5, Poison 5; not front-on) at
+  c3e199ca32afe31bbde9665752a4c5bc63832c7b; Ember's ring glint and side-face glint to move with it. Queue: the Acid final (gated and
+  measured), the Haze and Poison finals stopped before they start, Ember, Haze and Poison proxies at the new turns (~15 min), the finals
+  that measure clean, then Fog; done ~21:30 UTC.
+- 18:25 sent to the biomes lane: agreed; the measure calibrated on the passed Ice and Dust (the same box on the flare clear of the
+  driver) and used as the target in place of a fixed 20; each proxy's number beside theirs; at ~10 degrees check the woofer and braces
+  still read through and the set still looks like one family.
