@@ -136,6 +136,7 @@ def main():
     eng = os.path.join(root, 'studio', 'engine')
     sys.path.insert(0, eng)
     os.chdir(root)
+    import bpy  # noqa: F401  (bmesh, which the engine's modules import, loads only after bpy)
     import sets as St
     St.sweep = night_set                      # the engine's set builder for kind 'sweep': the evening room instead
     import render as R
