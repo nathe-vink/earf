@@ -2805,4 +2805,4 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   at the top and horn (z 1.05), 240 W, the room fill doubled (0.15 to 0.30): the pool soft-edged; turned 8 degrees toward the camera (the
   left face's upper third deep red); the woofer surround matt (the crescent gone); the horn-mouth streak gone and the inside's top band and
   brace red, not salmon; the exposure as v2. It had still not read my shop, window and r44 results.
-- 18:50 my gate on r43-listening v3 (wf_4677aaca-15e; v2 and the older picture as context) started.
+- 18:49 my gate on r43-listening v3 (wf_4677aaca-15e; v2 and the older picture as context) started.
