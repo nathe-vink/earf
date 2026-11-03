@@ -75,6 +75,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('out'); ap.add_argument('names', nargs='*')
     ap.add_argument('--samples', type=int, default=64); ap.add_argument('--scale', type=float, default=0.75)
+    ap.add_argument('--glossy-flag', action='store_true', help='the earlier reflection-only flag and cards (comparison)')
     ap.add_argument('--proxy', action='store_true', help='16 samples at half scale, whatever the habitat')
     ap.add_argument('--frame', choices=['portrait', 'landscape'], default='portrait')
     a = ap.parse_args()
@@ -94,7 +95,8 @@ def main():
                '--samples', '16' if a.proxy else str(max(a.samples, SAMPLES.get(n, 0))),
                '--scale', '0.5' if a.proxy else str(a.scale), '--stand', 'feet', '--sink', str(SINK.get(n, 0.012)),
                '--horn-front', '--horn-rough', str(HORN_ROUGH)] + [x for k, v in lights.items() for x in ('--light', f'{k}={v}')] \
-            + [x for k, v in SETS.get(n, {}).items() for x in ('--set', f'{k}={json.dumps(v)}')]
+            + [x for k, v in SETS.get(n, {}).items() for x in ('--set', f'{k}={json.dumps(v)}')] \
+            + (['--glossy-flag'] if a.glossy_flag else [])
         with open(out.replace('.png', '.log'), 'w') as log:
             r = subprocess.run(cmd, stdout=log, stderr=subprocess.STDOUT)
         print(n, 'ok' if r.returncode == 0 else f'failed ({r.returncode})', flush=True)

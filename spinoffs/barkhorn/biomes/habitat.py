@@ -45,6 +45,7 @@ def scale_lights(sh, scales):
 
 SURFACE_GLASS = False                   # --surface-glass: the tint on the faces (not adopted: the speaker lane's volume is the line's material)
 WELD = [True]                           # the asset's split vertices welded so its glass volumes close (--no-weld: off)
+GLOSSY_FLAG = [False]                   # --glossy-flag: the flag and cards seen in reflections only (the earlier trick)
 LED = [1.0]                             # --led F: the amp plate's power LED's emission scaled (1: the asset's)
 SINK = [0.002]                          # --sink M: the feet bedded this far into the ground (ash, sand). The sets' crust and
                                         # ripples are displaced at render time, so the ray cast sees flat ground and can't seat
@@ -140,9 +141,9 @@ def settle(bpy_, linked, sink=0.002):
 
 
 def black_flag(bpy_, linked, size):
-    """A photographer's negative fill: a large black card behind and above the camera, out of frame, seen only in
-    reflections (glossy rays), so the speaker's front faces mirror black instead of the bright sky; it casts no
-    shadow and lights nothing."""
+    """A photographer's negative fill: a large black card behind and above the camera, out of frame, so the speaker's
+    front faces mirror black instead of the bright sky. A real object (every ray type) since 2026-11-03 20:11;
+    --glossy-flag keeps the earlier reflection-only card."""
     import bmesh
     from mathutils import Vector
     sc = bpy_.context.scene
@@ -163,8 +164,12 @@ def black_flag(bpy_, linked, size):
     f = bpy_.data.objects.new('black-flag', me); sc.collection.objects.link(f)
     f.location = pos; f.scale = (w, h, 1.0)
     f.rotation_euler = (Vector((t.x, t.y, t.z + 0.7)) - pos).to_track_quat('Z', 'Y').to_euler()
-    f.visible_camera = False; f.visible_diffuse = False; f.visible_shadow = False
-    f.visible_transmission = False; f.visible_volume_scatter = False
+    if GLOSSY_FLAG[0]:
+        # (until 2026-11-03 20:11) seen only in reflections: hidden from the camera, diffuse, shadow and transmission
+        f.visible_camera = False; f.visible_diffuse = False; f.visible_shadow = False
+        f.visible_transmission = False; f.visible_volume_scatter = False
+    # otherwise real objects, every ray type, as a real set's flag and cards (the coordinator, 20:11): out of frame,
+    # they block a little sky and cast shade like the real thing
     print(f'black flag: {w} x {h} m at {[round(v, 2) for v in pos]}')
     # and a card each side of the speaker, square to the camera's line, out of frame: the side walls mirror them, not
     # the sky, at the grazing angles where acrylic reflects most
@@ -387,6 +392,7 @@ def main():
     ap.add_argument('--no-ground', action='store_true', help="don't settle the speaker onto the set")
     ap.add_argument('--no-weld', action='store_true'); ap.add_argument('--surface-glass', action='store_true')
     ap.add_argument('--lining', help="the lining's color, hex (colors F: Smoke '#0B0B0B')")
+    ap.add_argument('--glossy-flag', action='store_true', help='the flag and side cards in reflections only (before 20:11)')
     ap.add_argument('--led', type=float, default=1.0, help="scale the amp's power LED (the asset's strength is 6)")
     ap.add_argument('--sink', type=float, default=0.002, help='bed the feet this far into the ground, m')
     ap.add_argument('--horn-front', action='store_true', help='direct light stops at the horn (no lampshade from behind)')
@@ -395,7 +401,7 @@ def main():
     a = ap.parse_args()
     global SURFACE_GLASS
     WELD[0] = not a.no_weld; SURFACE_GLASS = a.surface_glass
-    SINK[0] = a.sink; LED[0] = a.led
+    SINK[0] = a.sink; LED[0] = a.led; GLOSSY_FLAG[0] = a.glossy_flag
     HORN['close'] = a.horn_close; HORN['rough'] = a.horn_rough; HORN['shadows'] = not a.horn_front
     sh = json.load(open(a.shot))
     scale_lights(sh, {k: float(v) for k, v in (x.split('=', 1) for x in a.light)})
