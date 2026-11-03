@@ -22,7 +22,9 @@ Tropos Smoke stands in its place in each lamp's light linking.
 import argparse, json, math, os, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ASSET = os.path.join(HERE, 'assets', 'horn2', 'tropos.blend')
+ASSET = os.path.join(HERE, 'assets', 'horn3', 'tropos-strata.blend')   # r33-speaker-horn a6dc9296 (Strata, horn A, uplit plinth, stock tints); not in git
+COLLECTION = 'Tropos Strata Smoke'
+LIGHT_SCALE = {}                       # --light NAME=FACTOR
 BLACK_LINING = False                  # --black-lining
 SPOT = (0.0, -2.4)                    # where the speaker now stands (the crater is at the origin)
 TURN = -22.0                          # its front turned toward the camera's side
@@ -52,6 +54,15 @@ def compose(sh, frame):
     sh['camera'] = cam
     sh['size'] = [2400, 1600] if frame == 'landscape' else [1200, 1500]
     sh['title'] = 'Smoke in its element, aligned with the other seven (r48)'
+    for k, f in LIGHT_SCALE.items():                 # the shot's fills were set for the old near-black model
+        if k in sh.get('lights', {}):
+            if f == 0:
+                sh['lights'].pop(k)
+            else:
+                L = sh['lights'][k]
+                for key in ('irradiance', 'power_w', 'energy'):
+                    if key in L:
+                        L[key] = L[key] * f
     # the heat shimmer (a 2D haze in the finish) keeps off the speaker where it now stands, a margin round it
     hz = (sh.get('finish') or {}).get('dream', {}).get('haze')
     if hz:
@@ -75,9 +86,11 @@ def main():
     ap.add_argument('--scale', type=float, default=1.0)
     ap.add_argument('--refinish', help='a raw render (.raw.png) to finish again, no render')
     ap.add_argument('--black-lining', action='store_true')
+    ap.add_argument('--light', action='append', default=[], help='NAME=FACTOR scales a shot lamp (0 drops it)')
     a = ap.parse_args()
     global BLACK_LINING
     BLACK_LINING = a.black_lining
+    LIGHT_SCALE.update({k: float(v) for k, v in (x.split('=') for x in a.light)})
     W = os.path.abspath(a.worktree)
     if a.refinish:
         sys.path.insert(0, os.path.join(W, 'studio', 'engine'))
@@ -98,7 +111,7 @@ def main():
         for o in objs:
             o.hide_render = True
         with bpy_.data.libraries.load(ASSET, link=not BLACK_LINING) as (s_, d_):
-            d_.collections = ['Tropos Smoke']
+            d_.collections = [COLLECTION]
         col = d_.collections[0]
         if BLACK_LINING:
             # black lining sleeves (the coordinator's recommendation, 2026-11-01, awaiting the owner): the asset is
@@ -126,7 +139,7 @@ def main():
                         sl.material = site['horn@cloud-black']
             print('site look:', sorted(k for k in site if k.startswith(('bark', 'horn'))))
         for inst in shot_['product']['instances']:
-            e = bpy_.data.objects.new('Tropos Smoke', None)
+            e = bpy_.data.objects.new(COLLECTION, None)
             e.instance_type = 'COLLECTION'; e.instance_collection = col
             e.location = inst['position']; e.rotation_euler = (0, 0, math.radians(inst['rotate_z']))
             bpy_.context.scene.collection.objects.link(e)
