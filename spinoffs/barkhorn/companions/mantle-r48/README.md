@@ -642,6 +642,65 @@ field. The floor in front stays dark (4,6,14). That is a real, faint spill, not 
 | `a5-night-ember-2423-c.png` | option C at night: a halo round the platter fading into clear glass |
 | `a5-day-ember-2423-c.png` | option C by day: the outer deck clear tinted glass, the float seen through it |
 
+### Option C, gate 1 (2026-11-03, the coordinator's 14:21 fixes)
+
+The gate held C 3/3 at night: red on the base's top (R 13-16) and a red pool on the floor in front, a crescent at the
+platter's foot, a black outer zone, an amber glint under the deck, and the label's wordmark behind the spindle.
+
+**Where the downward light came from, measured on proxies (900 x 600) against A's g5 on the same settings.**
+Red, of 255, in fixed patches. "Base spots" are the two patches near the posts; "floor" is in front of the base.
+
+| run | base top | base spots | floor L / R | platter foot |
+|---|---|---|---|---|
+| A, g5 | 4.7 | 0 / 0 | 6.6 / 5.0 | 135 |
+| C as gated | 8.1 | 10.8 / 7.2 | 15.8 / 16.0 | 163 |
+| C, solid backer under the platter, backed dots, clear gaps | 4.4 | 15.4 / 12.0 | 16.8 / 14.6 | 109 |
+| the same, with a thin-film AR coat on the top (MgF2, 100 nm) | | 13.8 / 11.2 | 16.0 / 14.0 | |
+| the same, glow off (room light only) | | 0 / 0 | 6.7 / 5.5 | |
+| the same, every gap backed (a control) | | 0 / 0 | 6.4 / 4.9 | |
+
+- It is the glow, and only through the clear gaps: with the glow off, or with every gap backed, the base and floor
+  match A.
+- It is not mostly the top's ordinary Fresnel reflection: the AR coat cut little. Most of it is the light near the
+  critical angle (about 38-42° inside). The top reflects a large share of that back down. Leaving through a bare gap,
+  it refracts out almost flat, at grazing angles, onto the base's glossy top and the floor in front: the spots and the
+  pools. No coating removes that. Any patch of lit glass you can see through sends some light down.
+  - The options table's line for C ("little leaks down") was wrong about this. Light guided past the dots stays in,
+    but the light the dots scatter does not.
+- So a clear see-through window and no downward light cannot both hold where the glass is lit. C keeps the floor
+  dark, as the owner ruled, and gives up the see-through field.
+
+**The fixes, as rendered (`render_lantern.sh c2`).**
+1. **Downward light:** the whole printed field is backed black: the white dot print, then a black flood over it, as on
+   A. Nothing is printed under the platter: there is only the backer, which also hides the strip and its channel. The
+   clear border ring stays as it was. On the proxies the base and the floor now match A: base top 4.4 against 4.7,
+   base spots 0, floor 6.4 / 4.9 against 6.6 / 5.0. The lifted difference shows red only on the deck itself.
+2. **The grade:** flatter, and peaking about 35 mm off the platter's foot. The glow rises from 55 % at the foot to its
+   peak, then falls to 55 % at 280 mm out. The platter foot now reads about 96, against A's 135 and C's old crescent at
+   163.
+3. **The outer zone's floor:** the print never thins to nothing. At night the rim glows deep Ember (R 77 at the left
+   rim, against A's 72), not black. By day the print is even (18 %), so the deck is an evenly tinted sheet, not a
+   vignette. The night grade is then the guide's own fall-off: light fed from the center thins outward, so an even
+   print would fall off by itself. The rendered grade stands for that; the print's exact ramp is set on the first
+   panel with a luminance meter.
+4. **The glint** was the strip's aluminum channel, seen through the clear underside (found by painting parts flat green,
+   `scene.py --debug-emit`). It is now behind the backer and drawn in the backer's flat black. **The label's**
+   wordmark is moved to the label's near half, so the spindle no longer stands in front of it from this camera
+   (`--label-near`, `out-outcrop/render/label-near.png`; the prop only).
+
+**Build and cost against C's +$130-150 a unit over v3.**
+- The print gains the black flood over the field, one more screen pass. A already has this layer, so C is back at A's
+  print: **no change to the +$130-150**.
+- Nothing else changes. The backer is the print's own layer, not a part, and the strip, groove and channel stay as
+  in v5. The parts list stays at $3,897.
+- What C gives up is the see-through field. What it keeps over A: the light is fed from the center, under the platter,
+  so the glow has no lit edge or strip anywhere, and the print can be graded radially.
+
+| frame | what |
+|---|---|
+| `a5-night-ember-2423-c2.png` | C, gate 1, at night: backed field, flattened radial glow, a lit rim |
+| `a5-day-ember-2423-c2.png` | C, gate 1, by day: an evenly tinted sheet over an even print |
+
 ### The render (how the light is drawn)
 
 The guide's output is drawn as an even Lambertian glow just above the print: 9 W/m2. That figure follows from the

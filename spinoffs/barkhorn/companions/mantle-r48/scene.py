@@ -145,7 +145,7 @@ def shadow_pass(nt, surf):
     return mx.outputs['Shader']
 
 
-def acrylic(name, bands, tint, rough=0.004, wear_on=True, ring=None, edge_rough=0.010):
+def acrylic(name, bands, tint, rough=0.004, wear_on=True, ring=None, edge_rough=0.010, ar=None):
     """`bands`: [(z0, z1, 'tint'|'clear')] in metres. The material has slots: 0 glassy (cast faces), 1 polished edge,
     2 buffed tread, 3 machined satin, 4 bead-blasted (a frosted band). One node tree per slot, the volume shared."""
     st = sigma_tint(tint)
@@ -158,6 +158,10 @@ def acrylic(name, bands, tint, rough=0.004, wear_on=True, ring=None, edge_rough=
         b.inputs['Transmission Weight'].default_value = 1.0
         b.inputs['IOR'].default_value = 1.49
         b.inputs['Roughness'].default_value = r
+        if ar and slot == 0:
+            # C gate 1: an anti-reflective coat on the cast faces (the deck's top), a thin film of `ar` = (nm, index); it
+            # cuts the inner reflection that sends the dots' light back down through the clear gaps
+            b.inputs['Thin Film Thickness'].default_value = ar[0]; b.inputs['Thin Film IOR'].default_value = ar[1]
         bv = bevel(nt, 0.0005 if slot != 3 else 0.0003)
         nt.links.new(bv.outputs['Normal'], b.inputs['Normal'])
         if wear_on and wr:
@@ -388,7 +392,7 @@ def make_sleeve(path):
     im.save(path)
 
 
-def make_label(path):
+def make_label(path, near=False):
     from PIL import Image, ImageDraw, ImageFont
     S = 1600
     im = Image.new('RGB', (S, S), (168, 160, 146))
@@ -401,17 +405,26 @@ def make_label(path):
     # a thin printed ring and the type, as a plain test-pressing label
     d.ellipse([c - 760, c - 760, c + 760, c + 760], outline=(60, 56, 52), width=6)
     d.ellipse([c - 700, c - 700, c + 700, c + 700], outline=(150, 70, 52), width=3)
-    for txt, f, y in (('STRATA', f1, c - 380), ('SIDE A  ·  33⅓ RPM', f2, c - 210), ('1. Lithosphere   2. Asthenosphere', f3, c + 200),
-                      ('3. Transition Zone   4. Lower Mantle', f3, c + 260), ('TEST PRESSING  ·  NOT FOR SALE', f3, c + 420)):
+    rows = (('STRATA', f1, c - 380), ('SIDE A  ·  33⅓ RPM', f2, c - 210), ('1. Lithosphere   2. Asthenosphere', f3, c + 200),
+            ('3. Transition Zone   4. Lower Mantle', f3, c + 260), ('TEST PRESSING  ·  NOT FOR SALE', f3, c + 420))
+    if near:
+        # C gate 4: the wordmark on the label's near half, so the spindle does not stand in front of it from the camera
+        rows = (('TEST PRESSING  ·  NOT FOR SALE', f3, c - 470), ('1. Lithosphere   2. Asthenosphere', f3, c - 330),
+                ('3. Transition Zone   4. Lower Mantle', f3, c - 270), ('STRATA', f1, c + 150), ('SIDE A  ·  33⅓ RPM', f2, c + 320))
+    for txt, f, y in rows:
         w = d.textlength(txt, font=f)
         d.text((c - w / 2, y), txt, font=f, fill=(42, 38, 34))
     im.save(path)
 
 
-def radial_cover(nt, geo, radial):
-    """v5 (option C): the print's cover by distance from the spindle: radial = (sx, sy, r_in, r_out, cmax), metres;
-    cmax inside r_in, falling linearly to 0 (clear glass) at r_out."""
-    sx, sy, r_in, r_out, cmax = radial
+def radial_cover(nt, geo, radial, parts=False):
+    """v5 (option C): the print's cover by distance from the spindle: radial = (sx, sy, r_in, r_out, cmax[, cfloor,
+    r_back]), metres; cmax inside r_in, falling linearly to cfloor (0: clear glass) at r_out and holding it beyond.
+    C gate 1 (2026-11-03): inside r_back the underside is a solid black backer (under the platter, unseen). With parts,
+    returns (cover, opacity, inner): opacity = max(cover, inner), inner = 1 inside r_back."""
+    sx, sy, r_in, r_out, cmax = radial[:5]
+    cfloor = radial[5] if len(radial) > 5 else 0.0
+    r_back = radial[6] if len(radial) > 6 else 0.0
     sep = nt.nodes.new('ShaderNodeSeparateXYZ'); nt.links.new(geo.outputs['Position'], sep.inputs['Vector'])
     def mth(op, a, bval=None, b_in=None):
         n_ = nt.nodes.new('ShaderNodeMath'); n_.operation = op
@@ -422,7 +435,18 @@ def radial_cover(nt, geo, radial):
         return n_.outputs[0]
     r = mth('SQRT', mth('ADD', mth('POWER', mth('SUBTRACT', sep.outputs['X'], sx), 2.0), b_in=mth('POWER', mth('SUBTRACT', sep.outputs['Y'], sy), 2.0)))
     t = mth('MINIMUM', mth('MAXIMUM', mth('DIVIDE', mth('SUBTRACT', r_out, b_in=r), r_out - r_in), 0.0), 1.0)
-    return mth('MULTIPLY', t, cmax)
+    cov = mth('ADD', mth('MULTIPLY', t, cmax - cfloor), cfloor)
+    if not parts:
+        return cov
+    inner = mth('LESS_THAN', r, r_back)
+    if len(radial) > 7 and radial[7]:
+        # C gate 2: the glow rises from the platter's foot over `rise` m (from 55 %), so its peak sits clear of the foot
+        rise = mth('MINIMUM', mth('ADD', mth('MULTIPLY', mth('MAXIMUM', mth('SUBTRACT', r, bval=r_back), 0.0), 0.45 / radial[7]), 0.55), 1.0)
+        cov = mth('MULTIPLY', cov, b_in=rise)
+    if len(radial) > 8 and radial[8]:
+        # C gate 1 (the check showed clear gaps send the glow down at grazing angles): the whole field backed black
+        return cov, mth('MAXIMUM', 1.0, bval=1.0), inner
+    return cov, mth('MAXIMUM', cov, b_in=inner), inner
 
 
 def core_material(name, box, cover=(0.05, 0.35), ramp=0.14, glow=0.0, glow_col=(1.0, 0.55, 0.25), radial=None):
@@ -491,7 +515,8 @@ def core_material(name, box, cover=(0.05, 0.35), ramp=0.14, glow=0.0, glow_col=(
                 # v5: between the dots the underside is bare, glossy acrylic; the dots thin to nothing toward the rim
                 gl = nt.nodes.new('ShaderNodeBsdfPrincipled'); gl.inputs['Transmission Weight'].default_value = 1.0
                 gl.inputs['IOR'].default_value = 1.49; gl.inputs['Roughness'].default_value = 0.004
-                cv = nt.nodes.new('ShaderNodeMixShader'); nt.links.new(radial_cover(nt, geo, radial), cv.inputs['Fac'])
+                # C gate 1: each dot backed black (seen from below), a solid backer inside r_back; the gaps bare glass
+                cv = nt.nodes.new('ShaderNodeMixShader'); nt.links.new(radial_cover(nt, geo, radial, parts=True)[1], cv.inputs['Fac'])
                 nt.links.new(shadow_pass(nt, gl.outputs['BSDF']), cv.inputs[1]); nt.links.new(mx.outputs['Shader'], cv.inputs[2])
                 nt.links.new(cv.outputs['Shader'], out.inputs['Surface'])
             else:
@@ -568,7 +593,24 @@ def core_glow_sheet(core, strength, col, box=None, grade=(1.4, 0.8), fall=0.05, 
     bk_ = nt.nodes.new('ShaderNodeBsdfDiffuse'); bk_.inputs['Color'].default_value = (0.0, 0.0, 0.0, 1)
     ad = nt.nodes.new('ShaderNodeAddShader'); nt.links.new(bk_.outputs['BSDF'], ad.inputs[0]); nt.links.new(em.outputs['Emission'], ad.inputs[1])
     front = ad.outputs['Shader']
-    if radial:
+    if radial and len(radial) > 5:
+        # C gate 1: opaque where the print or the backer is, clear between the dots; the dots emit by their cover,
+        # normalized to cmax, and the backer under the platter (no dots) emits nothing
+        cov, opa, inner = radial_cover(nt, geo, radial, parts=True)
+        k_ = nt.nodes.new('ShaderNodeMath'); k_.operation = 'DIVIDE'; nt.links.new(cov, k_.inputs[0]); k_.inputs[1].default_value = radial[4]
+        k2 = nt.nodes.new('ShaderNodeMath'); k2.operation = 'SUBTRACT'; k2.inputs[0].default_value = 1.0; nt.links.new(inner, k2.inputs[1])
+        k3 = nt.nodes.new('ShaderNodeMath'); k3.operation = 'MULTIPLY'; nt.links.new(k_.outputs[0], k3.inputs[0]); nt.links.new(k2.outputs[0], k3.inputs[1])
+        k4 = nt.nodes.new('ShaderNodeMath'); k4.operation = 'MULTIPLY'; nt.links.new(k3.outputs[0], k4.inputs[0])
+        if em.inputs['Strength'].is_linked:
+            nt.links.new(em.inputs['Strength'].links[0].from_socket, k4.inputs[1])
+        else:
+            k4.inputs[1].default_value = strength
+        nt.links.new(k4.outputs[0], em.inputs['Strength'])
+        cv = nt.nodes.new('ShaderNodeMixShader'); nt.links.new(opa, cv.inputs['Fac'])
+        nt.links.new(tr.outputs['BSDF'], cv.inputs[1]); nt.links.new(bk_.outputs['BSDF'], cv.inputs[2])
+        ad2 = nt.nodes.new('ShaderNodeAddShader'); nt.links.new(cv.outputs['Shader'], ad2.inputs[0]); nt.links.new(em.outputs['Emission'], ad2.inputs[1])
+        front = ad2.outputs['Shader']
+    elif radial:
         # v5: the dots only, by cover; between them the sheet is clear, so the float shows through the outer deck
         cv = nt.nodes.new('ShaderNodeMixShader'); nt.links.new(radial_cover(nt, geo, radial), cv.inputs['Fac'])
         nt.links.new(tr.outputs['BSDF'], cv.inputs[1]); nt.links.new(ad.outputs['Shader'], cv.inputs[2]); front = cv.outputs['Shader']
@@ -1058,6 +1100,7 @@ def build(args):
         bands_pl = remap([(l['z0'] * mm, l['z1'] * mm, l['kind'], l['inset'] * mm) for l in meta['lams']])
         o0 = meta['P']['margin'] * mm
         M['plinth'] = acrylic('plinth', bands_pl, tint, ring=(o0, o0, o0 + (meta['W0']) * mm, o0 + meta['D0'] * mm, rw * mm) if rw else None,
+                              ar=tuple(args.ar_top) if args.ar_top else None,
                               edge_rough=args.edge_frost if args.edge_frost else 0.010)
         bands_b = remap([(l['z0'] * mm, l['z1'] * mm, l['kind'], 0.0) for l in meta['base']])
         M['base'] = acrylic('base', bands_b, tint, ring=(0.0, 0.0, meta['Wb'] * mm, meta['Db'] * mm, rw * mm) if rw else None)
@@ -1079,9 +1122,17 @@ def build(args):
             # gate 2: the bearing's brass under the deck chemically blackened, so it does not glint like a light left on
             M['blackened'] = metal('blackened', '#2B2724', 0.35)
             finish.update({'bearing-nut': 'blackened', 'bearing-washer': 'blackened', 'bearing-housing': 'blackened'})
+        if args.matte_channel:
+            # C gate 4: the strip's channel is behind the backer; drawn as the backer's flat black, so it cannot glint
+            M['backer'], nt_b, out_b = node_tree('backer')
+            bkd = nt_b.nodes.new('ShaderNodeBsdfDiffuse'); bkd.inputs['Color'].default_value = (0.012, 0.012, 0.012, 1)
+            nt_b.links.new(bkd.outputs['BSDF'], out_b.inputs['Surface'])
+            finish['led-channel'] = 'backer'
         if 'plinth-L1-core' in objs:
             o0, rw_ = meta['P']['margin'] * mm, meta['P']['tint_ring'] * mm
             RAD = (meta['S'][0] * mm, meta['S'][1] * mm, args.radial[0], args.radial[1], args.cover_max) if args.radial else None
+            if args.radial and args.back_r:
+                RAD = RAD + (args.cover_floor, args.back_r, 0.0, 1.0 if args.backed else 0.0)
             M['core'] = core_material('core', (o0 + rw_, o0 + rw_, o0 + meta['W0'] * mm - rw_, o0 + meta['D0'] * mm - rw_), radial=RAD)
             finish['plinth-L1-core'] = 'core'
         for k in range(1, 5):
@@ -1119,7 +1170,9 @@ def build(args):
                                 box=(o0_ + rw2, o0_ + rw2, o0_ + meta['W0'] * mm - rw2, o0_ + meta['D0'] * mm - rw2) if (args.grade or args.day) else None,
                                 grade=tuple(args.grade_edge_mid) if args.grade else (1.0, 1.0), fall=args.grade_fall, cct=args.cct,
                                 ceil_k=args.ceil_k, tilt=args.tilt,
-                                radial=(meta['S'][0] * mm, meta['S'][1] * mm, args.radial[0], args.radial[1], 1.0) if args.radial else None,
+                                radial=((meta['S'][0] * mm, meta['S'][1] * mm, args.radial[0], args.radial[1], args.cover_max, args.cover_floor, args.back_r,
+                                         args.rise, 1.0 if args.backed else 0.0)
+                                        if args.back_r else (meta['S'][0] * mm, meta['S'][1] * mm, args.radial[0], args.radial[1], 1.0)) if args.radial else None,
                                 occl=[(meta['S'][0] * mm, meta['S'][1] * mm, meta['P']['platter_d'] / 2 * mm, 0.6, 0.035),
                                       (meta['A'][0] * mm, meta['A'][1] * mm, meta['P']['puck_d'] / 2 * mm, 0.5, 0.018)] if args.day else None)
             for p in o.data.polygons:
@@ -1169,10 +1222,10 @@ def build(args):
         pass
 
     # the record (a prop): 0.1505 radius, 1.8 thick, its edge bead
-    label = os.path.join(HERE, 'out-outcrop', 'render', 'label.png')  # shared by both proposals
+    label = os.path.join(HERE, 'out-outcrop', 'render', 'label-near.png' if args.label_near else 'label.png')  # shared by both proposals
     if not os.path.exists(label):
         import subprocess
-        subprocess.run(['python3', os.path.abspath(__file__), '--label', label], check=True)
+        subprocess.run(['python3', os.path.abspath(__file__), '--label-near' if args.label_near else '--label', label], check=True)
     S = [c * mm for c in meta['S']]
     rz = meta['pz1'] * mm
     rec = lathe('record', [(0.0036, 0), (0.1495, 0), (0.1505, 0.0006), (0.1505, 0.0013), (0.1490, 0.0018), (0.050, 0.0016),
@@ -1455,8 +1508,8 @@ def post(path, grain=0.012, vignette=0.12):
 
 
 if __name__ == '__main__' and bpy is None:
-    if sys.argv[1] == '--label':
-        make_label(sys.argv[2])
+    if sys.argv[1] in ('--label', '--label-near'):
+        make_label(sys.argv[2], near=sys.argv[1] == '--label-near')
     elif sys.argv[1] == '--sleeve':
         make_sleeve(sys.argv[2])
     elif sys.argv[1] == '--post':
@@ -1491,12 +1544,29 @@ if __name__ == '__main__':
     ap.add_argument('--look', default='AgX - Medium High Contrast'); ap.add_argument('--grain', type=float, default=0.012)
     ap.add_argument('--rim2', type=float, default=0.0)
     ap.add_argument('--radial', type=float, nargs=2, default=None); ap.add_argument('--cover-max', type=float, default=0.6)
+    ap.add_argument('--cover-floor', type=float, default=0.0); ap.add_argument('--back-r', type=float, default=0.0)
+    ap.add_argument('--ar-top', type=float, nargs=2, default=None)
+    ap.add_argument('--rise', type=float, default=0.0); ap.add_argument('--backed', action='store_true')
+    ap.add_argument('--matte-channel', action='store_true'); ap.add_argument('--label-near', action='store_true')
     ap.add_argument('--core-glow', type=float, default=0.0)
     ap.add_argument('--day', action='store_true'); ap.add_argument('--ambient', type=float, default=0.05)
     ap.add_argument('--base-tint', default='smoke')
     ap.add_argument('--strip-color', type=float, nargs=3, default=(1.0, 0.62, 0.30))
+    ap.add_argument('--debug-emit', default='')
+    ap.add_argument('--crop', type=float, nargs=4, default=None)
     a = ap.parse_args(argv)
     build(a)
+    if a.debug_emit:
+        # debugging only: paint the named objects (prefix match) flat green, to find what a glint is
+        dm, dnt, dout = node_tree('debug-green')
+        de = dnt.nodes.new('ShaderNodeEmission'); de.inputs['Color'].default_value = (0, 1, 0, 1); de.inputs['Strength'].default_value = 5
+        dnt.links.new(de.outputs['Emission'], dout.inputs['Surface'])
+        for ob in bpy.data.objects:
+            if any(ob.name.startswith(k) for k in a.debug_emit.split(',')) and ob.type == 'MESH':
+                ob.data.materials.clear(); ob.data.materials.append(dm)
+    if a.crop:
+        r_ = bpy.context.scene.render; r_.use_border = True; r_.use_crop_to_border = True
+        r_.border_min_x, r_.border_max_x, r_.border_min_y, r_.border_max_y = a.crop
     if a.blend:
         bpy.ops.wm.save_as_mainfile(filepath=a.blend)
     bpy.context.scene.render.filepath = a.out

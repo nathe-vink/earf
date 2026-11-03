@@ -11,6 +11,15 @@ lacquer by day and as a lit panel at night. Option C makes the field partly clea
   core's black edge tape stay, so the light that reaches the rim dies there;
 - in the clear zone the guided light stays in the slab by total internal reflection: it leaves only where a dot
   scatters it, or as a little stray scatter (dust, polish marks), a few percent, downward toward the base.
+Gate 1 (the coordinator, 14:21; README section 13): that last point was wrong. Light the dots scatter near the critical
+angle is reflected back down at the top and leaves the bare gaps at grazing angles, onto the base and the floor in front
+(base R 13-16 against A's 5). A thin-film AR top cut little. So:
+- the field is backed: the white dot print, then a black flood over it (as on v4), nothing printed under the platter
+  (only the backer, which hides the strip and its channel); the border ring stays clear tinted glass;
+- the print is even (about 18 % cover) out to the rim, so by day the deck is an evenly tinted sheet; at night the glow
+  falls from the center by the guide's own fall-off, to about half at the rim, never to black, its peak about 35 off
+  the platter's foot (the exact ramp set on the first panel with a luminance meter);
+- the cost is A's print again (one more screen pass than v5 as gated): C stays at about +$130-150 a unit over v3.
 v4's notes follow.
 
 Mantle, proposal A, v4: STRATA FLOAT with a LAYERED, LIT DECK (2026-11-03, round 2 of the light; a proposal until
@@ -137,7 +146,7 @@ P = dict(
     rpm_motor=300.0,                                  # PROPOSAL until benched: the US Neo at 60 Hz (STOCK-AND-AUDIT.md 3.1)
     glow_in=11.5, glow_w=7.4, glow_d=7.0,             # (v4's rim groove, not used in v5)
     glow_r=78.0,                                      # v5: the octagonal groove's mid-radius from the spindle, under the platter
-    print_r=(150.0, 230.0),                           # v5: the print dense inside the first radius, clear beyond the second
+    print_r=(150.0, 280.0),                           # v5 gate 1: the backer alone inside the first radius; the glow falls to about half by the second
     frost_d=7.0,                                      # the bead-blasted face, this far up from the deck's underside: the groove's ceiling
     lid_t=3.0, lid_h=100.0, bumper=5.0,
     housing_d=30.0, flange_d=50.0, flange_t=5.0,
@@ -262,7 +271,7 @@ def parts(P):
             out.append(Part(f'plinth-L{i + 1}', s - band, tint[l['t']], finish='acrylic', group='plinth', render=False,
                             notes=['the deck\'s lower sheet: a 10 wide ring of the flavor\'s stock tint (12.7) round the clear core; the ring and the core cemented edge to edge with ACRIFIX 2R 0190, then the top sheet cemented over both in a vacuum press (the core\'s print stays on its underside, not in a bond line); annealed, fly-cut, the outline routed as one; the outer edge bead-blasted satin'] if i == 0 else []))
             out.append(Part(f'plinth-L{i + 1}-inlay', s & band, clr[l['t']], finish='clear', group='plinth', render=False,
-                            notes=['the core: a clear inlay cemented edge to edge into the 10 wide tinted ring, the light guide; its underside screen-printed with a white dot pattern (about 5 % cover near the strip rising to about 35 % inside) and overprinted black before the top is cemented on; the walls of its holes painted white then black']))
+                            notes=['the core: a clear inlay cemented edge to edge into the 10 wide tinted ring, the light guide; its underside screen-printed (v5 gate 1) with an even white dot pattern (about 18 % cover) from the platter's edge out, and overprinted black over the whole field, the area under the platter black only, before the top is cemented on; the walls of its holes painted white then black']))
         else:
             # a plain lamina ('clear' in P: no inlay ring): since the stock line (2026-11-01), the flavor's stock tinted sheet
             out.append(Part(f'plinth-L{i + 1}', s, tint[l['t']], finish='clear', group='plinth', render=False,

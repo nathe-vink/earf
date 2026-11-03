@@ -103,3 +103,14 @@ if [ "$1" = c ]; then
 r a5-night-ember-2423-c --model out-strata-v5 --colour ember-2423 --strip 0 --cct 4000 --ambient 0.003 --exposure -1.5 --night-room 35 --wall-wash 6 --samples 192 --core-glow 3 --look "AgX - Base Contrast" $C5
 r a5-day-ember-2423-c --model out-strata-v5 --colour ember-2423 --day --strip 0 --core-glow 7 --strip-color 0.848 0.124 0.168 --exposure -2.0 $C5
 fi
+# option C, gate 1 (the coordinator, 14:21): the glow sent down through the clear gaps at grazing angles, near the
+# critical angle (a control with every gap backed matched A on the base and floor; a thin-film AR top cut little), so
+# the whole field is backed black (--backed) with nothing printed under the platter (--back-r 0.150), the border clear;
+# at night the glow rises off the platter's foot over 35 mm (--rise) and falls to 55 % at the rim (cover 0.22 to 0.12
+# by 280), not to black; by day an even print (0.18); the strip's channel the backer's flat black (--matte-channel);
+# the label's wordmark on its near half (--label-near)
+C7="--pan 0.05 --blacken --wear 0 --platter-edge 0.15 --edge-frost 0.08 --grain 0.004 --radial 0.150 0.280 --back-r 0.150 --backed --matte-channel --label-near --glass-shadows"
+if [ "$1" = c2 ]; then
+r a5-night-ember-2423-c2 --model out-strata-v5 --colour ember-2423 --strip 0 --cct 4000 --ambient 0.003 --exposure -1.5 --night-room 35 --wall-wash 6 --samples 192 --core-glow 2.6 --cover-max 0.22 --cover-floor 0.12 --rise 0.035 --look "AgX - Base Contrast" $C7
+r a5-day-ember-2423-c2 --model out-strata-v5 --colour ember-2423 --day --strip 0 --core-glow 7 --cover-max 0.18 --cover-floor 0.18 --strip-color 0.848 0.124 0.168 --exposure -2.0 $C7
+fi
