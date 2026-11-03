@@ -16,7 +16,7 @@ import argparse, json, math, os, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(HERE)))
-ASSET = os.path.join(HERE, 'assets', 'hornA', 'tropos.blend')   # horn A, built from r33-speaker-horn 4ec3bc96 (make_blend.py --design current); not in git
+ASSET = os.path.join(HERE, 'assets', 'hornA2', 'tropos.blend')   # horn A, built from r33-speaker-horn b9758dd9 (make_blend.py --design current; the horn uncollapsed, its volumes closed); not in git
 
 
 def set_path(d, path, value):

@@ -22,7 +22,7 @@ Tropos Smoke stands in its place in each lamp's light linking.
 import argparse, json, math, os, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ASSET = os.path.join(HERE, 'assets', 'hornA', 'tropos.blend')   # horn A on its own feet, built from r33-speaker-horn 4ec3bc96; not in git
+ASSET = os.path.join(HERE, 'assets', 'hornA2', 'tropos.blend')   # horn A on its own feet, built from r33-speaker-horn b9758dd9 (the horn uncollapsed, its volumes closed); not in git
 COLLECTION = 'Tropos Smoke'
 LIGHT_SCALE = {}                       # --light NAME=FACTOR
 BACKLIGHT = [0.0]                      # --backlight irradiance
