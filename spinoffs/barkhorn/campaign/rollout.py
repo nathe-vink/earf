@@ -52,6 +52,7 @@ def build(base, horn):
         mats['horn-satin'] = {**mats.get('horn-satin', {}), 'roughness': 0.05}
     h.update({'title': f'Tropos, the deck hero, Ember ({base}, {horn} horn)', 'size': [1440, 2160]})
     h['render']['samples'] = 192
+    h = shots._hero_gate3(h)                              # the critics' hold on 67f795ab (shots.py)
     out['deck-hero'] = h
     for name in ('deck-row', 'deck-cover', 'deck-home', 'deck-home-portrait'):
         out[name] = shots.SHOTS[name]()
@@ -117,6 +118,7 @@ def phase2(base, horn):
         for k in range(SPIN['frames']):
             a = SPIN['start'] + k * SPIN['step']
             sh = _final(shots, S31 + f'hero-light-{tint}.json', fl, f'Tropos, the front arc, {tint}, frame {k}', samples=SPIN['samples'], rotate=a)
+            shots._siteH_round1(sh)                        # hero-light's fix (shots.py): the card turns with the frame
             sh['size'] = [round(sh['size'][0] * SPIN['scale']), round(sh['size'][1] * SPIN['scale'])]
             sh['render']['crop'] = SPIN['crop']
             out[f'spin-{tint}-{k:02d}'] = sh

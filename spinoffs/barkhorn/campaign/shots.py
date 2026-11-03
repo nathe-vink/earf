@@ -319,6 +319,45 @@ def deck_hero():
     return s
 
 
+def _hero_gate3(s):
+    """The deck hero's fixes (the coordinator's blind critics on 67f795ab, 2026-11-03, 3 HOLD): the same family as the
+    tall front's, on the same rig. The lower right side face mirrored the lit floor (pale pink, saturation about 0.2), the
+    top chamber clipped flat coral, and the lid's front edge read as a neutral grey strip. The tall front's fix carries
+    over whole (_siteG_round1: sidesheen and through off, a reflect-only black card where the right face's mirror ray
+    goes from this camera, the top light x0.65, the key 5 deg round), and the topline, the panel that put the lid's edge
+    line there, comes down to a third, so the edge reads dark red with a glint like the vertical edges."""
+    _siteG_round1(s, 'front-off-tall', 'ember')
+    if 'topline' in s['lights']:
+        s['lights']['topline']['strength'] = round(s['lights']['topline']['strength'] / 3, 3)
+    # (its proxy: the side face deep red, 0.58 to 0.83 saturation above, but the top chamber still clipped on 38 % and
+    # the lid's strip still grey, 170: from this camera, 0.4 m above the lid, the strip is the lid's top at a grazing
+    # angle mirroring the bright sweep behind, about 1.5 m left of the speaker at 2.6 m back. A reflect-only black card
+    # there, and the top light down again, to 0.4 of the rig's)
+    if 'horn' in s['lights'] and s['lights']['horn'].get('irradiance'):
+        s['lights']['horn']['irradiance'] = round(s['lights']['horn']['irradiance'] * 0.6, 3)
+    s['set'].setdefault('flags', []).append({'center_m': [-1.2, 2.5, 1.1], 'size_m': [2.6, 1.6], 'normal': [0.46, -0.88, -0.16],
+                                             'reflect_only': True, 'color': '#050505'})
+    # (the fourth proxy: the lower right face still brownish, saturation 0.45: from 0.4 m down, its mirror rays fall to
+    # the floor within a metre behind and right of the speaker, short of the card. A reflect-only black patch there)
+    s['set']['flags'].append({'center_m': [0.62, 0.75, 0.004], 'size_m': [0.9, 1.5], 'normal': [0.0, 0.0, 1.0],
+                              'reflect_only': True, 'color': '#050505'})
+    L = s['lights']
+    # (the top chamber, clipped coral on 26 % in a crop with all of the above: the key's light through the front onto the
+    # top chamber's linings. Without links (the coordinator, 2026-11-03: no light a real lamp cannot give), crop tests:
+    # the key at -60 deg (from -40): (205, 63, 63), 26 % at 250, to (170, 1, 2), 0 %, the woofer 64 to 53; at -52
+    # (180, 4, 5); at elevation 10 the clip worse, 64 %; the key at 0.6 with more fill (192, 46, 46), 0 %; AgX no clip
+    # but pink, (183, 87, 77). The key goes round to -60 and the fill up from 1.6 to 2.4: (175, 1, 2), the woofer 58)
+    if 'key' in L and 'orbit' in L['key']:
+        L['key']['orbit']['azimuth_deg'] = -60.0
+    if 'fill' in L and L['fill'].get('irradiance'):
+        L['fill']['irradiance'] = 2.4
+    # (the fifth proxy: the right face deep red, (52, 1, 1) low and (82, 23, 26) high, which shows the `edge` glint as a
+    # white bar a little in from its front edge, hidden before under the face's pale reflection: to a third)
+    if 'edge' in L and L['edge'].get('power_w'):
+        L['edge']['power_w'] = round(L['edge']['power_w'] / 3, 3)
+    return s
+
+
 SHOTS['deck-hero'] = deck_hero
 
 
@@ -396,7 +435,7 @@ def _row_gate3(s):
     return s
 
 
-SHOTS['deck-row'] = lambda: _row_gate3(deck_row())
+SHOTS['deck-row'] = lambda: honest_lights(_row_gate3(deck_row()))
 
 
 def deck_cover():
@@ -422,6 +461,12 @@ def deck_cover():
     s['camera'] = {'position': [0.0, cam_y, 2.3], 'target': [0.0, 0.5, 0.62], 'lens_mm': 56.0, 'level': True,
                    'shift_y': 0.05, 'fstop': 5.6, 'focus': [0.0, 0.3, 0.7]}
     s['render']['samples'] = 128
+    # (its proxy after the hero's hold, 2026-11-03: Ember, at the left end turned to the camera, mirrored side_l in its
+    # front, a pale pink patch on the upper left, (197, 156, 155), 12 % at 250. Its mirror ray from the front reaches
+    # x -6 at y -3, z 0.2, inside that lamp's 0.6 x 3 m face. The lamp moves back to y -1.5, off that ray; Smoke's ray
+    # at the other end reaches x 7 at about y -4.2, well clear of side_r at y -1. No links: the coordinator's rule)
+    if 'side_l' in s['lights']:
+        s['lights']['side_l']['position'] = [-6.0, -1.5, 1.4]
     return s
 
 
@@ -523,6 +568,128 @@ def site(frame, tint):
     if 'rim' in s.get('lights', {}):
         s['lights']['rim']['power_w'] = 0.0
     _siteG_round1(s, frame, tint)
+    if frame == 'hero-light':
+        _siteH_round1(s)
+    honest_lights(s)
+    if frame in ('front-off-tall', 'front-off-wide', 'side'):
+        # (the honest rig's proxies, tall Ice and Ember: kick and back unlinked lit the floor beside the speaker, and the
+        # lower right face, mirroring it, fell from saturation 0.56 to 0.46 (Ice) and 0.49 to 0.35 (Ember))
+        _floor_patch(s)
+    return s
+
+
+_SET_NAMES = ('sweep', 'floor', 'wall', 'ceiling', 'cyc', 'room')
+
+
+def _set_only(recv):
+    return bool(recv) and all(any(r.startswith(n) for n in _SET_NAMES) for r in recv)
+
+
+def honest_lights(s, log=None):
+    """The owner's rule on light (the coordinator's rulings, 2026-11-03 19:32: "what's technically possible trumps what
+    looks cool"): no lamp lights something without also lighting, and showing in, everything else it reaches.
+    1. A lamp that lights the scene shows at full in reflections: a `specular` under 1 goes to 1.0, and a lamp held
+       off transmission (`transmission: false`) lights through glass again.
+    2. A lamp linked to some of the product's parts (receivers) lights everything it reaches: the link goes.
+    These stand: background lamps linked to the set alone (the sweep, the floor, a wall), at any specular (a background
+    light flagged off the subject, its head out of view); specular-only sources dimmed as a whole (an area lamp with
+    diffuse 0, such as `edge`; a panel with diffuse 0, a reflection card); flags. Returns the changes as text."""
+    out = []
+    for name, L in s.get('lights', {}).items():
+        if L.get('off') or L.get('type') == 'flag':
+            continue
+        recv = L.get('receivers')
+        if name.startswith('bg') and not recv and L.get('specular', 1.0) == 0.0:
+            # a background lamp lighting everything but showing in nothing: flagged off the subject instead, its light
+            # on the sweep alone (which stands), rather than at full in the side faces, which already mirror too much
+            out.append(f'{name}: unlinked at specular 0, now on the sweep alone')
+            L['receivers'] = ['sweep']
+            continue
+        spec_only = L.get('diffuse', 1.0) == 0.0
+        if _set_only(recv):
+            continue
+        if L.get('type') == 'panel':
+            if recv:     # a reflection card shown in some parts only: a part-link all the same
+                out.append(f'{name}: panel receivers {recv} removed')
+                del L['receivers']
+            continue
+        if spec_only:
+            continue
+        if recv:
+            out.append(f'{name}: receivers {recv[:3]}{"..." if len(recv) > 3 else ""} removed')
+            del L['receivers']
+        if 'specular' in L and L['specular'] != 1.0:
+            out.append(f"{name}: specular {L['specular']} to 1.0")
+            L['specular'] = 1.0
+        if L.get('transmission') is False:
+            out.append(f'{name}: transmission false removed')
+            del L['transmission']
+    if log is not None:
+        log.extend(out)
+    return s
+
+
+def _mirror_card(s, dist=1.2, size=(1.8, 1.3), z=0.5):
+    """A reflect-only black card where the right side face's mirror ray goes from this camera, turned with the speaker
+    (the first instance), `dist` m beyond the face: the face then shows its own tint, not the white studio."""
+    import math
+    cam = s['camera']['position']
+    i = s['products'][0]['instances'][0]
+    a = math.radians(i.get('rotate_z', 0.0))
+    nx, ny = math.cos(a), math.sin(a)
+    px = i['position'][0] + 0.28 * nx; py = i['position'][1] + 0.28 * ny; pz = 0.45
+    dx, dy, dz = px - cam[0], py - cam[1], pz - cam[2]
+    m = math.sqrt(dx * dx + dy * dy + dz * dz); dx, dy = dx / m, dy / m
+    k = dx * nx + dy * ny
+    rx, ry = dx - 2 * k * nx, dy - 2 * k * ny
+    h = math.sqrt(rx * rx + ry * ry) or 1.0
+    rx, ry = rx / h, ry / h
+    s['set'].setdefault('flags', []).append({'center_m': [round(px + dist * rx, 3), round(py + dist * ry, 3), z],
+                                             'size_m': list(size), 'normal': [round(-rx, 3), round(-ry, 3), 0.0],
+                                             'reflect_only': True, 'color': '#050505'})
+
+
+def _floor_patch(s, z_lo=0.06, z_hi=0.42, margin=0.15):
+    """A reflect-only black patch on the floor where the right side face's lower mirror rays land from this camera
+    (turned with the speaker): with the kick and back lamps unlinked (the owner's rule) the floor beside the speaker is
+    lit, and the lower face mirrored it pale. None if those rays never reach the floor."""
+    import math
+    cam = s['camera']['position']
+    i = s['products'][0]['instances'][0]
+    a = math.radians(i.get('rotate_z', 0.0))
+    nx, ny = math.cos(a), math.sin(a)
+    tx, ty = -ny, nx                                         # along the face, front to back
+    pts = []
+    for along in (-0.2, 0.0, 0.2):
+        for z in (z_lo, (z_lo + z_hi) / 2, z_hi):
+            px = i['position'][0] + 0.28 * nx + along * tx; py = i['position'][1] + 0.28 * ny + along * ty
+            dx, dy, dz = px - cam[0], py - cam[1], z - cam[2]
+            k = dx * nx + dy * ny
+            rx, ry, rz = dx - 2 * k * nx, dy - 2 * k * ny, dz
+            if rz >= 0:
+                continue
+            u = z / -rz
+            pts.append((px + u * rx, py + u * ry))
+    if not pts:
+        return
+    xs, ys = [p[0] for p in pts], [p[1] for p in pts]
+    s['set'].setdefault('flags', []).append({'center_m': [round((min(xs) + max(xs)) / 2, 3), round((min(ys) + max(ys)) / 2, 3), 0.004],
+                                             'size_m': [round(max(xs) - min(xs) + 2 * margin, 3), round(max(ys) - min(ys) + 2 * margin, 3)],
+                                             'normal': [0.0, 0.0, 1.0], 'reflect_only': True, 'color': '#050505'})
+
+
+def _siteH_round1(s):
+    """hero-light's fixes (the coordinator's blind critics, 2026-11-03: Dust, Acid, Poison and Ice held). Studio31 is
+    an all-white surround with no flags. 1. Every right side face mirrored the white floor and cove behind-right (Poison
+    grey-green, saturation 0.24-0.31): a reflect-only black card on its mirror ray, turned with the speaker, so the arc's
+    turned frames get theirs. 2. The bottom panel's front edge glowed as a saturated bar with a tinted fringe in front:
+    `back-top`, a lamp behind and above aimed at the floor in front of the speaker (the tall rig's `through` under
+    another name), its light crossing the tinted cabinet, pooling on the floor and running along the bottom panel to its
+    polished edge, an underglow by day. Off. No links: the coordinator's rule."""
+    L = s['lights']
+    if 'back-top' in L:
+        L['back-top']['irradiance'] = 0.0
+    _mirror_card(s)
     return s
 
 
