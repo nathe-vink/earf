@@ -3501,3 +3501,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   11 (the batt under the dusk light). Fix: rotate_z -5 (5 off, as Haze and Ice) at 594ceacf4e2ffc00f798a10a810ea173cb1bc201; the held frame
   kept in renders/2026-11-03/barkhorn/held/. Queue: the Haze and Acid proxies (running), the Poison final, the Fog final at -5. (Its stamps
   read 22:32 and 22:33 for messages queued at 22:27.)
+- 22:31 biomes lane: proxies with the sky turned right (proxies-2231/haze-acid.jpg at 29c04409f374e536800188589e6d82dfa95e019b): Haze (sun 70,
+  sky 338.8, the sun-side card out) upper box 47.8 (target 45-60), horn-to-box 2.9x (from 13.7), horn and box 239: into the final. Acid (sun
+  120, sky 292.9, seated 3 mm, rim unlinked, the 9097 split; luminance held: cabinet 0.845 through 20 mm, horn 0.2195 through 12.7 mm)
+  cabinet hue 51, horn 49, body to scene 0.25: into the final. Queue: Poison final (rendering), Fog at -5, the Haze and Acid finals.
+- 22:32 my look at the proxies: Haze reads well; Acid's yellow reads olive-khaki at that luminance in the dark storm, the linings not glowing.
+  Sent: before Acid's final, a global exposure lift (half to one stop, allowed) or more low sun into the box, so the lit faces read clearly
+  yellow and the linings pale yellow; the lit-face L* with the final; tell me first if the sky can't take it.
