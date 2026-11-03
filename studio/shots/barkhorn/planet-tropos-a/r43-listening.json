@@ -1,5 +1,5 @@
 {
- "title": "Planet EARF pop-up (round 43), listening: Tropos on its own feet, horn A polished (2026-11-03) [v3, after gate 2 (2/3): the speaker in frame slid 0.55 m (one cabinet width and a bit) to the right of frame and turned 8 deg toward the camera, so the horn and the cabinet top stand in front of the lit plaster and the left face's sheen goes; its spot feathered (34 deg, blend 0.95, a 0.25 m source), aimed at the cabinet top and horn, 240 W; room fill 0.15 to 0.30; the woofer surround matt (roughness 0.9). Camera as v2]",
+ "title": "Planet EARF pop-up (round 43), listening: Tropos on its own feet, horn A polished (2026-11-03) [v4, after gate 3 (3/3 HOLD, one prop move away): the chair rows 0.35 m toward the camera's side so both stop short of the base; the speaker 0.12 m further right of frame so the plaster gap to the jamb widens; its spot a 0.5 m source at 200 W, moved toward the speaker's front and aimed at z 0.95, against the clipped whites on the horn; the shelf LED strips visible (ruling 3)]",
  "size": [
   2400,
   1600
@@ -31,8 +31,8 @@
    "instances": [
     {
      "position": [
-      12.42,
-      1.35,
+      12.34,
+      1.26,
       0.0
      ],
      "rotate_z": 221.36,
@@ -67,8 +67,8 @@
    "instances": [
     {
      "position": [
-      12.42,
-      1.35,
+      12.34,
+      1.26,
       0.0
      ],
      "rotate_z": 221.36,
@@ -271,7 +271,11 @@
      ]
     ],
     "oak_chairs": "#8A6E52",
-    "tropos_feet": true
+    "tropos_feet": true,
+    "seats_offset": [
+     -0.35,
+     0.0
+    ]
    },
    {
     "kind": "kit",
@@ -877,19 +881,19 @@
   "stack0": {
    "type": "spot",
    "position": [
-    11.22,
-    1.75,
+    10.87,
+    2.16,
     3.7124
    ],
    "target": [
-    12.42,
-    1.35,
-    1.05
+    12.34,
+    1.26,
+    0.95
    ],
-   "power_w": 240.0,
+   "power_w": 200.0,
    "cone_deg": 34.0,
    "blend": 0.95,
-   "radius_m": 0.25,
+   "radius_m": 0.5,
    "color": 2600,
    "camera": false
   },
