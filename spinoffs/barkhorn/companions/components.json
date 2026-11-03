@@ -258,7 +258,7 @@
  "moon-led-table": {
   "kind": "led",
   "maker": "Nichia or Seoul (to choose)",
-  "model": "A 30 mm round warm-dim LED board, two channels (2200 K and 2700 K, CRI 90+), 130 lm/W or better: 200 lm at 1.5 W or less (review 2026-11-01; was 2.5 W), on the aluminum chassis's heat path to the touch ring; a second 4-LED ring at the column's foot (0.3 W)",
+  "model": "A 30 mm round warm-dim LED board, two channels (2200 K and 2700 K, CRI 90+), 130 lm/W or better: 200 lm at 1.5 W or less (review 2026-11-01; was 2.5 W), on the aluminum chassis's heat path to the touch ring; a second 4-LED ring at the column's foot (0.3 W) | PROPOSAL (2026-11-03, the Ice night test): warm 2700 K light through Ice glows teal (lit hue -64 deg from its day hue in the render, -36 at 4000 K); it holds within 10 deg only at about 5700 K. So the board's two channels become 2700 K and 5700 K, 95 CRI (tunable white on the same two-channel driver, in place of warm-dim 2200 to 2700 K), and Ice's default is 5700 K. The same 30 mm board family in 5700 K Ra 95 [check: Nichia or Seoul], about the same price ($9 [E])",
   "usd": 9,
   "estimate": true,
   "supplier": "an LED module house",
@@ -574,7 +574,7 @@
  "hemi-cob": {
   "kind": "led",
   "maker": "Bridgelux",
-  "model": "Bridgelux Gen 7 Vero 10 COB (not Vero SE 10), 2700 K, the 97 CRI array for JA8 margin: BXRC-27H1000-D-7x (R9 93 or more), datasheet DS90, on an Ideal Chip-Lok holder with a thermal pad, at the top of the hub's bore. At 180 mA: about 24.9 V typical cold and 24.2 V at Tc 85 C; a low-Vf bin about 23.0 V, under the ERP driver's 24 V floor at every temperature. ORDER BY BIN: only bins whose Vf at 180 mA and Tc 85 C is 24.5 V or more, or use a driver with headroom (north-driver-575's note) (review, 2026-11-01)",
+  "model": "Bridgelux Gen 7 Vero 10 COB (not Vero SE 10), 2700 K, the 97 CRI array for JA8 margin: BXRC-27H1000-D-7x (R9 93 or more), datasheet DS90, on an Ideal Chip-Lok holder with a thermal pad, at the top of the hub's bore. At 180 mA: about 24.9 V typical cold and 24.2 V at Tc 85 C; a low-Vf bin about 23.0 V, under the ERP driver's 24 V floor at every temperature. ORDER BY BIN: only bins whose Vf at 180 mA and Tc 85 C is 24.5 V or more, or use a driver with headroom (north-driver-575's note) (review, 2026-11-01) | PROPOSAL (2026-11-03, the Ice night test): Ice takes the same Gen 7 Vero 10 at 5000 to 5700 K (BXRC-50x1000 or the 5600 K code, 90 CRI or better [check DS90: whether the 97 CRI array is made that cool, and the Vf bins at 180 mA]), about the same price ($12 [E]); the other tints stay 2700 K unless the owner widens it (launch/stock-tints-lamps.md, the hue table)",
   "usd": 12,
   "estimate": true,
   "supplier": "Digi-Key",

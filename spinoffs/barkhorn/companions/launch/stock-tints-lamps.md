@@ -208,6 +208,51 @@ Each region below is the median of its green-dominant pixels, in CIELAB (L, chro
 3. **Until one of these lands,** the lamps' Haze stays unresolved. A Haze room frame from the four-pieces lane would
    confirm the match once the sheet is chosen.
 
+## The light's color temperature against the tint (2026-11-03)
+
+The coordinator noted lit Ice going teal-green (about hue 170 at night against about 200 by day). Warm light
+through a blue tint does that: the warm source's red and green pass where the tint lets them.
+
+**The test:** Core's frosted ball in Ice, rendered with Cycles' blackbody light at each temperature. The figure is the
+median hue of the ball, against the day frame's ball:
+
+| LED | 2700 K | 3000 K | 3500 K | 4000 K | 5000 K | 5700 K |
+|---|---|---|---|---|---|---|
+| Ice, lit hue (day 255°) | 191° (−64) | 194° (−61) | 206° (−49) | 219° (−36) | 237° (−19) | 246° (−10) |
+
+**The lowest temperature that holds Ice within about 10° is about 5700 K,** a cool daylight white. 4000 K, the
+speakers' light, still reads cyan, 36° off.
+
+**The proposal** (BOM notes, `components.json`):
+- **Core:** the LED board's two channels become 2700 K and 5700 K, 95 CRI. That makes it tunable white on the same
+  two-channel driver, in place of warm-dim 2200 to 2700 K. Ice defaults to 5700 K.
+- **Hemisphere:** for Ice, the same Gen 7 Vero 10 at 5000 to 5700 K [check DS90 for the 97 CRI array that cool, and
+  the Vf bins].
+- **Cost:** about the same price for each [E].
+- **Heat and lumens:** at the same current they rise slightly, since cool white LEDs are a little more efficient.
+- **Owner's call:** a 5700 K lamp at home is clinical, and warm-dim is lost for Ice.
+
+**Every tint's lit hue, by the model:** blackbody light through 3 mm of each tint, CIELAB hue, with the day hue as D65
+white through the same tint. The model overstates the drift by about a quarter against the Ice render (−83 against
+−64 at 2700 K), but it ranks the tints the same way.
+
+| Tint | Day | 2700 K | 4000 K | 5700 K |
+|---|---|---|---|---|
+| Ember | 28° | 39° (+11) | 35° (+7) | 30° (+2) |
+| Dust | 78° | 58° (−20) | 67° (−11) | 74° (−4) |
+| Acid | 92° | 67° (−25) | 79° (−13) | 88° (−4) |
+| Poison | 122° | 98° (−24) | 111° (−11) | 119° (−3) |
+| Ice | 229° | 146° (−83) | 183° (−46) | 222° (−7) |
+| Haze | 309° | 12° (+63) | 326° (+17) | 312° (+3) |
+| Fog | 168° | 75° (−93) | 88° (−80) | 118° (−50) |
+| Smoke dark | 110° | 69° (−41) | 75° (−35) | 71° (−39) |
+
+**How the tints group:**
+- **Holds at 2700 K** (within about 25°, scaled to the render): Ember, Dust, Acid and Poison, the warm and green tints.
+- **Drifts at 2700 K:** Ice and Haze. Haze turns red-violet at 2700 K and holds by about 4000 K.
+- **Near-neutral, can't hold:** Fog and Smoke. Clear and gray tints show the source's own color at any temperature,
+  so they read warm at 2700 K. That is expected for a white-ish lamp, and not a drift a CCT fixes.
+
 ## Sources (public pages, not quotes)
 
 - AC Plastics' TruCast transmission table: https://www.acplasticsinc.com/wp-content/uploads/2026/08/Trucast-Acrylic-Light-Transmissions-5.26.26-1.pdf

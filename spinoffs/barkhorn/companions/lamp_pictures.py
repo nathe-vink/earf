@@ -20,6 +20,28 @@ import math, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..', '..'))
 OUT = os.path.join(ROOT, 'renders', '2026-11-03', 'barkhorn', 'lamp-pictures')
+CCT = int(os.environ.get('LAMP_CCT', '2700'))       # the LED's colour temperature (K)
+LED_W = float(os.environ.get('LED_W', '10.0'))         # Core's LED, about 620 lm at full [E: radiant watts]
+COB_W = float(os.environ.get('COB_W', '8.0'))         # Hemisphere's COB beam, about 500 lm out of the fitting [E]
+SPILL_W = float(os.environ.get('SPILL_W', '1.2'))    # the reflector's spill onto the opal, about a quarter
+
+
+def blackbody(T):
+    """Linear sRGB of a blackbody at T K, its largest channel 1 (CIE 1931 fits, Wyman 2013)."""
+    def g(x, mu, s1, s2):
+        return math.exp(-0.5 * ((x - mu) / (s1 if x < mu else s2)) ** 2)
+    X = Y = Z = 0.0
+    for l in range(380, 781, 5):
+        p = 1.0 / ((l * 1e-9) ** 5 * (math.exp(1.4388e-2 / (l * 1e-9 * T)) - 1))
+        X += p * (1.056 * g(l, 599.8, 37.9, 31.0) + 0.362 * g(l, 442.0, 16.0, 26.7) - 0.065 * g(l, 501.1, 20.4, 26.2))
+        Y += p * (0.821 * g(l, 568.8, 46.9, 40.5) + 0.286 * g(l, 530.9, 16.3, 31.1))
+        Z += p * (1.217 * g(l, 437.0, 11.8, 36.0) + 0.681 * g(l, 459.0, 26.0, 13.8))
+    X, Z = X / Y, Z / Y
+    r = [3.2406 * X - 1.5372 - 0.4986 * Z, -0.9689 * X + 1.8758 + 0.0415 * Z, 0.0557 * X - 0.2040 + 1.0570 * Z]
+    m = max(r)
+    return tuple(max(v, 0.0) / m for v in r)
+
+
 TINT = {'ice': 'Ice', 'ember': 'Ember', 'dust': 'Dust', 'acid': 'Acid', 'poison': 'Poison', 'haze': 'Haze', 'fog': 'Fog',
         'smoke': 'Smoke dark'}
 
@@ -28,9 +50,11 @@ def build(frame, samples, scale):
     import bpy, bmesh
     sys.path.insert(0, os.path.join(HERE, 'strata'))
     import scene as SC
-    prod, tint, mode = frame.split('-')
+    prod, tint, mode, *var = frame.split('-')
+    var = var[0] if var else ''
     tname = TINT[tint]
     night = mode == 'night'
+    cct = CCT
     bpy.ops.wm.read_factory_settings(use_empty=True)
     MM = SC.MM
     tz = 0.62                                                           # the table's top
@@ -55,6 +79,17 @@ def build(frame, samples, scale):
     def acrylic(nm, rough, which=None, loading=1.0):
         return SC.acrylic_material(nm, [(-1e4, 1e4, which or tname)], rough, 'polished', loading=loading, scratch=0.25,
                                    bond=False)
+
+    def light(nm, kind, loc, watts, radius, rot=(0, 0, 0), spot=None):
+        """A real light at the LED's colour temperature (round 4, 2026-11-03, the coordinator's brief: the light reaches
+        the room through the acrylic; the tint's lit hue is the source's through the glass)."""
+        ld = bpy.data.lights.new(nm, kind); ld.energy = watts; ld.shadow_soft_size = radius
+        ld.color = blackbody(cct); ld.cycles.is_caustics_light = True
+        if spot:
+            ld.spot_size = math.radians(spot); ld.spot_blend = 0.6
+        ob = bpy.data.objects.new(nm, ld); bpy.context.scene.collection.objects.link(ob)
+        ob.location = loc; ob.rotation_euler = [math.radians(a) for a in rot]
+        return ob
 
     def glow(nm, color, strength, z_lo, z_hi, s_lo, s_hi):
         """An emitter whose strength runs from s_lo at z_lo to s_hi at z_hi (object space, m): the light source's side
@@ -89,19 +124,32 @@ def build(frame, samples, scale):
         # round 2: the ball at a third of the chip's dye per mm, as stock 3/8 in sheet is if the maker holds the chart's
         # figure at thickness ("held"; Ice is single-layer stock either way, launch/stock-tints-lamps.md), and the
         # inside a fine glass-bead blast (roughness 0.3) rather than a coarse one, so the far wall reads through it
+        # round 4 (the coordinator, 2026-11-03): by night the ball clear inside, as the coordinator reads the design, or
+        # ('frost' variant) with the fine bead-blast; by day as passed in round 2
+        inner = {'frost': 0.6, 'fine': 0.3}.get(var, 0.0) if night else 0.3   # 'frost': the CAD's coarse bead-blast
         sphere('ball', 80.0, zc, acrylic('ball', 0.0, loading=1 / 3))
-        sphere('ball-frost', 71.0, zc, acrylic('ball-frost', 0.3, loading=1 / 3), inward=True)
-        if night:   # the LED under the window: brightest at the bottom, falling off up the ball; it lights the wall
-            # and the base, never the table (light linking)
-            g = sphere('glow', 70.4, zc, glow('glow', '#FFC890', 0.55, -0.07, 0.07, 1.6, 0.08))
-            lit = bpy.data.collections.new('glow-lights'); bpy.context.scene.collection.children.link(lit)
-            for nm in ('wall', 'dock', 'base', 'ring', 'grommet', 'seat', 'ball', 'ball-frost'):
-                if nm in bpy.data.objects:
-                    lit.objects.link(bpy.data.objects[nm])
-            try:
-                g.light_linking.receiver_collection = lit
-            except Exception as e:
-                print('light linking unavailable', e)
+        inner_mat = acrylic('ball-in', inner, loading=1 / 3)
+        if night and var == 'frost':
+            # bead-blasted acrylic diffuses nearly evenly: half of the frosted face a diffuse transmission (round 4;
+            # rough glass alone only blurs forward)
+            nt = inner_mat.node_tree; outn = next(n for n in nt.nodes if n.type == 'OUTPUT_MATERIAL')
+            glass = outn.inputs['Surface'].links[0].from_node
+            tl = nt.nodes.new('ShaderNodeBsdfTranslucent'); tl.inputs['Color'].default_value = (0.9, 0.9, 0.9, 1)
+            mx = nt.nodes.new('ShaderNodeMixShader'); mx.inputs[0].default_value = 0.5
+            nt.links.new(glass.outputs[0], mx.inputs[1]); nt.links.new(tl.outputs[0], mx.inputs[2])
+            nt.links.new(mx.outputs[0], outn.inputs['Surface'])
+        sphere('ball-in', 71.0, zc, inner_mat, inward=True)
+        if night:   # round 4: the LED itself under the window (its face 14.8 above the base's foot), about 620 lm
+            # at full: a real light, up into the ball; its light reaches the room only through the acrylic
+            light('led', 'SPOT', (0, 0, z0 + 0.0148), LED_W, 0.012, spot=160.0)
+            led = bpy.data.meshes.new('led-face'); bm = bmesh.new()
+            bmesh.ops.create_circle(bm, cap_ends=True, segments=48, radius=0.013); bm.to_mesh(led); bm.free()
+            lo = bpy.data.objects.new('led-face', led); bpy.context.scene.collection.objects.link(lo)
+            lo.location = (0, 0, z0 + 0.0147)
+            em = bpy.data.materials.new('led-em'); em.use_nodes = True
+            b = em.node_tree.nodes['Principled BSDF']; b.inputs['Emission Color'].default_value = (*blackbody(cct), 1)
+            b.inputs['Emission Strength'].default_value = 40.0
+            led.materials.append(em); lo.visible_diffuse = False; lo.visible_shadow = False
         cam = ((0.12, -1.02, tz + 0.235), (0.0, 0.0, tz + 0.098), 85.0)
     else:
         rim = tz + 0.70                                                 # the rim 700 above the table
@@ -130,17 +178,25 @@ def build(frame, samples, scale):
         if night:
             # the reflector's spill lights the opal from the crown: brightest at the top, falling to the rim; it may
             # light the wall and the crown, and there is no table or floor in frame
-            sphere('glow', 85.4, rim, glow('glow', '#FFC890', 1.9, 0.0, 0.085, 0.12, 1.7), cut=2.0, hole=H)
-        cam = ((0.0, -1.22, rim - 0.17), (0.0, 0.0, rim + 0.02), 85.0)   # round 2: a little below, into the mouth
+            # round 4: real lights instead. The COB 22 up the bore, about 500 lm out of the fitting, down onto the
+            # table (a pendant's job) within the louvre's cut-off; the reflector's spill, about a quarter, lights the
+            # opal from the crown, so the dome glows in its tint and lights the wall
+            light('cob', 'SPOT', (0, 0, rim + 0.060), COB_W, 0.014, spot=92.0)
+            light('spill', 'POINT', (0, 0, rim + 0.050), SPILL_W, 0.03)
+            cam = ((0.0, -1.9, tz + 0.95), (0.0, 0.0, tz + 0.40), 45.0)   # round 4: the table under it in frame, from a little above
+        else:
+            cam = ((0.0, -1.22, rim - 0.17), (0.0, 0.0, rim + 0.02), 85.0)   # round 2: a little below, into the mouth
     if night:
-        SC.world(hdri='kiara_9_dusk', strength=0.05, rotation=200)   # round 3: soft natural reflections, no shapes
-        moon = SC.area('moon', (-1.3, -0.4, 1.6), (0, -70, 0), (1.2, 1.6), 9.0, '#9FB2D6')
+        # round 4: a white ceiling at 2.5 m, so the lamp's light that leaves upward comes back into the room, as at home
+        SC.plane('ceiling', (4.3, 4.0), (0.85, 0.0, 2.5), (180, 0, 0), SC.principled('ceiling', '#E8E4DC', 0.9))
+        SC.world(hdri='kiara_9_dusk', strength=0.02, rotation=200)   # round 3: soft natural reflections, no shapes
+        moon = SC.area('moon', (-1.3, -0.4, 1.6), (0, -70, 0), (1.2, 1.6), 2.0, '#9FB2D6')   # round 4: the lamp leads
         moon.visible_glossy = False               # round 1: no daylight-window shapes reflected at night
         # round 3: a large soft fill far off, for a curved soft reflection on the glass (round 2's small one read as a
         # hard square sticker)
-        fill = SC.area('fill', (1.4, -2.2, 1.9), (55, 0, 32), (1.4, 0.9), 9.0, '#8FA0BE')
+        fill = SC.area('fill', (1.4, -2.2, 1.9), (55, 0, 32), (1.4, 0.9), 2.0, '#8FA0BE')
         fill.visible_glossy = False
-        exposure = 0.0
+        exposure = float(os.environ.get('NIGHT_EV', '1.5'))   # round 4: exposed for the lamp, as a night photograph is
     else:
         SC.world(hdri='kiara_9_dusk', strength=0.35, rotation=200)
         SC.window_gobo(-1.3, -1.3, 0.9, 0.75, 2.4, panes=(2, 2))
@@ -151,7 +207,8 @@ def build(frame, samples, scale):
     bpy.context.scene.cycles.caustics_refractive = True
     SC.camera(cam[0], cam[1], lens=cam[2], fstop=5.6)
     os.makedirs(OUT, exist_ok=True)
-    bpy.context.scene.render.filepath = os.path.join(OUT, frame + '.png')
+    out = os.environ.get('LAMP_OUT') or os.path.join(OUT, frame + '.png')
+    bpy.context.scene.render.filepath = out
     bpy.ops.render.render(write_still=True)
 
 
