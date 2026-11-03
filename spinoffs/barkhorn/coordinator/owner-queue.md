@@ -1027,3 +1027,14 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   speaker, fire rim light, plume behind, wet road); cause of the old paleness: the old shot's front fills (off now). Stand-in speaker
   r33-speaker-horn a6dc9296 (Strata, stepped horn, old floor-line plinth); finals wait for the final model. Next: the 2400 x 1600
   landscape (~35 min), the eight-panel strip, then the biome rebuild on stand-ins (habitat.py 145e3b7c).
+- 04:20 site audit done (wf_83a7e502-2f9; committed at 3480947a8f17747d4e11193161574353e4f96247 in coordinator/site-audit-2026-11-03/:
+  plan.json, critiques.json, the owner's 28 site notes, the live captures). Scores: home 4.5-5/10 from all five; the product, color and
+  lighting views ~6. Biggest lever: one new picture set of the current products to one shot bible (studio, night, world), swapped in at
+  once. Recommended direction: 1, launch film (one picture and at most one line per screen; Apple iMac launch + B&O scale + Aesop voice),
+  on the existing product and color pages, Studio as one beat; two drops. Alternatives: 2, color library; 3, open studio. The credibility
+  and skeptic reviews (cut off in the synthesis's input) add: founder and studio, a sign-up that collects interest, dated proof, a press
+  page, a Sound band. Site lane briefed with 11 no-regret fixes on r47-site-next (words, one-screen light stage, hero, the pairings rule,
+  real addresses, one color token set, a design-house kit, a Sound band, the habitats without carousel chrome, phone weight, "Render" per
+  picture) and direction 1's home behind HOME_V2; held for the owner: a sign-up form (storage, privacy, live inbox), naming the founder,
+  publishing the press kit and journal, and any production deploy. Board v21: the site's direction card (1 launch film, my pick; 2 color
+  library; 3 open studio); reply bar order [['site','Site']], KEY earf-decisions-v21; checked at 1280 and 390 px.
