@@ -21,9 +21,9 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..', '..'))
 OUT = os.path.join(ROOT, 'renders', '2026-11-03', 'barkhorn', 'lamp-pictures')
 CCT = int(os.environ.get('LAMP_CCT', '2700'))       # the LED's colour temperature (K)
-LED_W = float(os.environ.get('LED_W', '10.0'))         # Core's LED, about 620 lm at full [E: radiant watts]
+LED_W = float(os.environ.get('LED_W', '24.0'))         # Core's LED, about 620 lm at full [E: radiant watts]
 COB_W = float(os.environ.get('COB_W', '8.0'))         # Hemisphere's COB beam, about 500 lm out of the fitting [E]
-SPILL_W = float(os.environ.get('SPILL_W', '1.2'))    # the reflector's spill onto the opal, about a quarter
+SPILL_W = float(os.environ.get('SPILL_W', '0.35'))    # the reflector's spill onto the opal, about a quarter
 
 
 def blackbody(T):
@@ -135,7 +135,7 @@ def build(frame, samples, scale):
             nt = inner_mat.node_tree; outn = next(n for n in nt.nodes if n.type == 'OUTPUT_MATERIAL')
             glass = outn.inputs['Surface'].links[0].from_node
             tl = nt.nodes.new('ShaderNodeBsdfTranslucent'); tl.inputs['Color'].default_value = (0.9, 0.9, 0.9, 1)
-            mx = nt.nodes.new('ShaderNodeMixShader'); mx.inputs[0].default_value = 0.5
+            mx = nt.nodes.new('ShaderNodeMixShader'); mx.inputs[0].default_value = 0.3   # round 5: more forward, a gradient
             nt.links.new(glass.outputs[0], mx.inputs[1]); nt.links.new(tl.outputs[0], mx.inputs[2])
             nt.links.new(mx.outputs[0], outn.inputs['Surface'])
         sphere('ball-in', 71.0, zc, inner_mat, inward=True)
@@ -168,9 +168,13 @@ def build(frame, samples, scale):
             n_.inputs['Color'].default_value = c
         nt.links.new(df.outputs[0], m1.inputs[1]); nt.links.new(tr.outputs[0], m1.inputs[2])
         nt.links.new(m1.outputs[0], m2.inputs[1]); nt.links.new(gl.outputs[0], m2.inputs[2]); nt.links.new(m2.outputs[0], o.inputs['Surface'])
-        sphere('opal', 89.0, rim, opal, cut=0.0, hole=H)
-        sphere('opal-in', 86.0, rim, opal, inward=True, cut=0.0, hole=H)
-        part('out-dome-pendant', 'rim', acrylic('rim', 0.0), rim)
+        # round 5 (the gate: an electric-blue line at the mouth, the diffuser's light piping out of the polished cut
+        # edge): the proposed fix, modelled at night: the opal ends 4 inside the rim, as the clear shell does, and the
+        # rim's exposed edge is satin (bead-blasted), so no lit polished edge faces the room
+        oc = 4.0 if night else 0.0
+        sphere('opal', 89.0, rim, opal, cut=oc, hole=H)
+        sphere('opal-in', 86.0, rim, opal, inward=True, cut=oc, hole=H)
+        part('out-dome-pendant', 'rim', acrylic('rim', 0.45 if night else 0.0), rim)
         for nm in ('collar', 'clamp', 'crown', 'gland', 'hub'):
             part('out-dome-pendant', nm, an, rim)
         part('out-dome-pendant', 'reflector', steel, rim)
@@ -183,7 +187,18 @@ def build(frame, samples, scale):
             # opal from the crown, so the dome glows in its tint and lights the wall
             light('cob', 'SPOT', (0, 0, rim + 0.060), COB_W, 0.014, spot=92.0)
             light('spill', 'POINT', (0, 0, rim + 0.050), SPILL_W, 0.03)
-            cam = ((0.0, -1.9, tz + 0.95), (0.0, 0.0, tz + 0.40), 45.0)   # round 4: the table under it in frame, from a little above
+            # round 5: the day frame's viewpoint (the pair one scene), a wider lens to keep the table's pool and the
+            # whole cable; a stoneware bowl on the table
+            cam = ((0.0, -1.22, rim - 0.17), (0.0, 0.0, tz + 0.40), 30.0)
+            bowl_m = SC.principled('stoneware', '#C9C2B6', 0.5, bump=(1500.0, 0.25))
+            bm = bmesh.new(); bmesh.ops.create_uvsphere(bm, u_segments=96, v_segments=48, radius=0.11)
+            bmesh.ops.delete(bm, geom=[v for v in bm.verts if v.co.z > -0.035], context='VERTS')
+            bmesh.ops.solidify(bm, geom=bm.faces[:], thickness=0.005)
+            for f in bm.faces:
+                f.smooth = True
+            me = bpy.data.meshes.new('bowl'); bm.to_mesh(me); bm.free()
+            bo = bpy.data.objects.new('bowl', me); bpy.context.scene.collection.objects.link(bo)
+            bo.location = (0.06, 0.04, tz + 0.11); me.materials.append(bowl_m)
         else:
             cam = ((0.0, -1.22, rim - 0.17), (0.0, 0.0, rim + 0.02), 85.0)   # round 2: a little below, into the mouth
     if night:
@@ -192,6 +207,9 @@ def build(frame, samples, scale):
         SC.world(hdri='kiara_9_dusk', strength=0.02, rotation=200)   # round 3: soft natural reflections, no shapes
         moon = SC.area('moon', (-1.3, -0.4, 1.6), (0, -70, 0), (1.2, 1.6), 2.0, '#9FB2D6')   # round 4: the lamp leads
         moon.visible_glossy = False               # round 1: no daylight-window shapes reflected at night
+        if prod == 'core':   # round 5: a crisp, dim window in the outer gloss, so the clear skin reads as its own layer
+            win = SC.area('window-glint', (-0.55, -0.95, tz + 0.55), (62, 0, -30), (0.35, 0.55), 1.2, '#B9C7DD')
+            win.visible_diffuse = False
         # round 3: a large soft fill far off, for a curved soft reflection on the glass (round 2's small one read as a
         # hard square sticker)
         fill = SC.area('fill', (1.4, -2.2, 1.9), (55, 0, 32), (1.4, 0.9), 2.0, '#8FA0BE')

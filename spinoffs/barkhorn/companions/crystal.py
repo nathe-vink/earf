@@ -253,7 +253,11 @@ def cover_parts(p=N):
     ]) + [
         Part('rim', rim, Machined('cast-acrylic', 'lathe'), finish='body', group='cover',
              notes=['closes the three layers at the mouth, bonded and polished with them; a press-in ePTFE vent in its '
-                    'face keeps the gaps between the layers at room pressure and dry']),
+                    'face keeps the gaps between the layers at room pressure and dry. PROPOSAL 2026-11-03 (the night '
+                    'pictures: a lit polished edge at the mouth pipes the diffuser\'s light out as a bright blue line): '
+                    'v3\'s opal ends 4 inside the rim, as the clear shell does, and the rim\'s exposed face is bead-blasted '
+                    'satin, not polished: no lit polished edge faces the room; about +$3 to +$5 a shade for the blasting '
+                    '[E], the opal\'s shorter trim free']),
         Part('collar', collar, Machined('aluminium', 'lathe'), finish='anodised', group='cover',
              notes=['aluminium 6061, black anodised, satin: a tube through the crown with a spherical flange under the '
                     'skin; three blind L-slots with T-ended notches (the quarter-turn bayonet, 30 deg) work either way up; '
