@@ -157,7 +157,7 @@ def build(frame, samples, scale):
             # round 8 (the gate: a hotspot cone at the base): the LED behind the window as a Lambertian disc the
             # window's size, not a 160 deg spot
             # (the disc speckled at full samples: back to a point source, a full hemisphere with a soft edge)
-            light('led', 'SPOT', (0, 0, z0 + 0.0148), LED_W, 0.012, spot=180.0).data.spot_blend = 1.0
+            light('led', 'SPOT', (0, 0, z0 + 0.0148), LED_W, 0.012, spot=160.0)
             led = bpy.data.meshes.new('led-face'); bm = bmesh.new()
             bmesh.ops.create_circle(bm, cap_ends=True, segments=48, radius=0.013); bm.to_mesh(led); bm.free()
             lo = bpy.data.objects.new('led-face', led); bpy.context.scene.collection.objects.link(lo)
@@ -255,6 +255,8 @@ def build(frame, samples, scale):
         exposure = 0.0
     SC.render_settings(1800, 1200, samples, scale, exposure=exposure, look='AgX - Medium High Contrast')
     bpy.context.scene.cycles.caustics_refractive = True
+    if night and prod == 'core':   # round 8: rare bright caustic paths speckled the frost (the denoiser blotched them)
+        bpy.context.scene.cycles.sample_clamp_indirect = 100.0; bpy.context.scene.cycles.blur_glossy = 1.0
     SC.camera(cam[0], cam[1], lens=cam[2], fstop=5.6)
     os.makedirs(OUT, exist_ok=True)
     out = os.environ.get('LAMP_OUT') or os.path.join(OUT, frame + '.png')
