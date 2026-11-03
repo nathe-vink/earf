@@ -1,5 +1,5 @@
 {
- "title": "Planet EARF, round 44 look 1 (the lantern), lantern: Tropos on its own feet, horn A polished (2026-11-03)",
+ "title": "Planet EARF, round 44 look 1 (the lantern), lantern: Tropos on its own feet, horn A polished (2026-11-03) [gate 1 (SHOW 2/3) polish: a soft fill from front-left on the pair's shells and horns only (light-linked, no floor pool; the left cabinet ~17 to ~50); the pair's spots a 0.25 m source and Mother's 0.04 m, clamp 4, against the edge line and the woofer glints]",
  "size": [
   2400,
   1600
@@ -829,7 +829,7 @@
    "power_w": 30.0,
    "cone_deg": 20.0,
    "blend": 0.6,
-   "radius_m": 0.03,
+   "radius_m": 0.25,
    "color": 2600,
    "camera": false
   },
@@ -848,7 +848,7 @@
    "power_w": 30.0,
    "cone_deg": 20.0,
    "blend": 0.6,
-   "radius_m": 0.03,
+   "radius_m": 0.25,
    "color": 2600,
    "camera": false
   },
@@ -867,7 +867,7 @@
    "power_w": 140.0,
    "cone_deg": 18.0,
    "blend": 0.2,
-   "radius_m": 0.01,
+   "radius_m": 0.04,
    "color": 3000,
    "camera": false
   },
@@ -930,6 +930,80 @@
    "irradiance": 0.6,
    "color": 2200,
    "spread_deg": 80.0
+  },
+  "pairfill0": {
+   "type": "area",
+   "position": [
+    17.7,
+    2.3,
+    2.4
+   ],
+   "target": [
+    15.5,
+    3.19,
+    1.0
+   ],
+   "size_m": [
+    1.2,
+    1.2
+   ],
+   "irradiance": 1.2,
+   "color": 2700,
+   "camera": false,
+   "receivers": [
+    "left#0",
+    "right#0",
+    "top#0",
+    "bottom#0",
+    "front-panel#0",
+    "back#0",
+    "brace*#0",
+    "rib-*#0",
+    "port-*#0",
+    "land-*#0",
+    "grip-*#0",
+    "waveguide*#0",
+    "horn-*#0",
+    "amp-*#0",
+    "feet-*#0"
+   ]
+  },
+  "pairfill1": {
+   "type": "area",
+   "position": [
+    17.7,
+    4.6,
+    2.4
+   ],
+   "target": [
+    15.5,
+    5.99,
+    1.0
+   ],
+   "size_m": [
+    1.2,
+    1.2
+   ],
+   "irradiance": 0.72,
+   "color": 2700,
+   "camera": false,
+   "receivers": [
+    "left#1",
+    "right#1",
+    "top#1",
+    "bottom#1",
+    "front-panel#1",
+    "back#1",
+    "brace*#1",
+    "rib-*#1",
+    "port-*#1",
+    "land-*#1",
+    "grip-*#1",
+    "waveguide*#1",
+    "horn-*#1",
+    "amp-*#1",
+    "feet-*#1"
+   ]
   }
  },
  "haze": {
@@ -949,7 +1023,7 @@
   "samples": 256,
   "adaptive": 0.02,
   "denoise": true,
-  "clamp": 10,
+  "clamp": 4.0,
   "bounces": 10,
   "view": "AgX",
   "look": "AgX - Medium High Contrast",
