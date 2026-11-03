@@ -1349,3 +1349,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   default set so it shows its own colour (Ice ~5700, Haze ~4000, warm and green tints 2700), warm always available; check a
   tunable COB for Hemisphere. Speaker: measure D night's Ice hue against day; if more than ~15 degrees off, render Ice at the CCT
   that holds it (as Smoke takes 6500 K). Re-armed for 10:50 (#38).
+- 10:00 speaker lane, Ice's hue at 4000 K (median over saturated pixels, matched proxies, against A's day cabinet 212.3): D night
+  cabinet 203.8 (8.5 toward cyan), D night wall wash 197.6-198.0 (14-15), B night 5 cabinet 206.3 (6). The 20 mm walls pull the
+  light back to Ice's blue, unlike the lamps' 3 mm. D night stays 4000 K (rendering); D day done. If the critics read the wash as
+  cyan: D night again at 5000 K.
