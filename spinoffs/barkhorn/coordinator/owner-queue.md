@@ -3575,3 +3575,20 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   evening room at dc60ce44 (today's Core, Hemisphere's cool-white liner); the bottom edge's glow rendered as built (an open owner question);
   an Ice proxy first for the gate.
 - 23:05 item 5 shown to the owner: scratchpad/walkthrough/05-ice-batt.jpg (the passed Ice habitat beside its batt, enlarged).
+- 23:03 lamps lane (r32-lamps-final df3794f6507289b4efb581cabf5942cacb1c7cf5, checked with ls-remote by the lane): HEMISPHERE NIGHTS
+  re-rendered at full scale, (a) cool-white liner and (b) faint-blue liner (a proposal). The strip is gone. Out of frame left there is
+  now a sheer curtain lit by the dusk outside, an emitting surface that gives the dome one long, soft reflection, with no bar. The pale
+  oval was the room fill's reflection, not the bowl (moving the bowl changed it by 0). The fill is now twice the size at the same power,
+  and the oval is +5 (a) and +3 (b) over the face, down from +8. Hue OKLCH (a) 232, (b) 242, day 246. Medians (a)/(b): face 83/76, lip
+  70/64, cap 35, table 152, bowl 211. The optional cool spill was left out. The day frame stands unless the owner takes (b).
+  CORE B, on my 22:04 points:
+  - The thin shells pass shadow rays at their own transmission, so the sun shadow carries a tinted rim (no caustic: the sun can't use MNEE).
+  - The camera is at 0.36 m.
+  - The sky panel is now behind the window frame, so the bars show. The sun's disc is 3°.
+  - The core is lifted 2 mm and the clamp is 20.
+  - The opal face is the light (ruling 3's exception). The lamp alone puts about 1-2/255 on the nearby table and wall, the expected
+    ratio for ~620 lm at 0.5 m.
+  - The cup's lip catches the light. The crown is kept brightest. The wood in the glossy base is physical.
+  - The full-scale B pair is rendering (day 384, night 1024). If the core still can't read by day, the lane will say so as a design
+    result for item 89.
+- 23:07 gate launched on the two Hemisphere nights (earf-gate-mantle-lamps, wf_e1fee199-fbc; files scratchpad/gate-lamps/r11/).
