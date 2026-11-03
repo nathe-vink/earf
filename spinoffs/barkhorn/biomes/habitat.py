@@ -47,6 +47,7 @@ SURFACE_GLASS = False                   # --surface-glass: the tint on the faces
 WELD = [True]                           # the asset's split vertices welded so its glass volumes close (--no-weld: off)
 GLOSSY_FLAG = [False]                   # --glossy-flag: the flag and cards seen in reflections only (the earlier trick)
 SPLIT = [None]                          # --split R G B: the tint's channel split, luminance held per part (the shared 9097 fix)
+REAL_SET = [False]                      # --real-set: every set object seen by every ray, casting shadows (ruling 4)
 LED = [1.0]                             # --led F: the amp plate's power LED's emission scaled (1: the asset's)
 SINK = [0.002]                          # --sink M: the feet bedded this far into the ground (ash, sand). The sets' crust and
                                         # ripples are displaced at render time, so the ray cast sees flat ground and can't seat
@@ -225,7 +226,7 @@ def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extr
     linked = []
     place0 = Pr.place
     editable = (stand == 'feet' or tt or up or lining or glass_shadows or HORN['close'] or HORN['rough'] is not None
-                or not HORN['shadows'] or LED[0] != 1.0 or SPLIT[0])   # else the asset as it is, linked
+                or not HORN['shadows'] or LED[0] != 1.0 or SPLIT[0] or REAL_SET[0])   # else the asset as it is, linked
 
     def place(bpy_, pdef, templates, shot_, root_):
         objs, part_of = place0(bpy_, pdef, templates, shot_, root_)
@@ -427,6 +428,23 @@ def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extr
             settle(bpy_, linked, SINK[0])
         if flag:
             black_flag(bpy_, linked, flag)
+        if REAL_SET[0]:
+            # ruling 4 (the coordinator, 2026-11-03 23:47): every part of a set casts shadows, and is seen by every ray
+            # type as the real thing would be (Poison's canopy was a shadow-only sheet, its mist shadowless); light
+            # reaches the subject only through the set's real openings
+            fixed = []
+            for o in bpy_.context.scene.objects:
+                if o.type != 'MESH' or o in linked or o.hide_render or o.name.startswith(('foot', 'black-flag')):
+                    continue
+                vis = ('visible_camera', 'visible_diffuse', 'visible_glossy', 'visible_transmission',
+                       'visible_volume_scatter', 'visible_shadow')
+                if not all(getattr(o, a) for a in vis):
+                    if o.name.split('.')[0] in ('camera',) or o.get('engine_light'):
+                        continue
+                    for a in vis:
+                        setattr(o, a, True)
+                    fixed.append(o.name)
+            print('real set: every ray type on for', fixed)
         return r
     Lt.world = world
     sys.argv = ['render.py', shot_path, '--out', os.path.abspath(out), '--samples', str(samples), '--scale', str(scale), *extra]
@@ -451,6 +469,7 @@ def main():
     ap.add_argument('--lining', help="the lining's color, hex (colors F: Smoke '#0B0B0B')")
     ap.add_argument('--glossy-flag', action='store_true', help='the flag and side cards in reflections only (before 20:11)')
     ap.add_argument('--split', type=float, nargs=3, help="the tint's channel split, R G B (luminance held per part)")
+    ap.add_argument('--real-set', action='store_true', help='every set object seen by every ray, casting shadows')
     ap.add_argument('--led', type=float, default=1.0, help="scale the amp's power LED (the asset's strength is 6)")
     ap.add_argument('--sink', type=float, default=0.002, help='bed the feet this far into the ground, m')
     ap.add_argument('--horn-front', action='store_true', help='direct light stops at the horn (no lampshade from behind)')
@@ -459,7 +478,7 @@ def main():
     a = ap.parse_args()
     global SURFACE_GLASS
     WELD[0] = not a.no_weld; SURFACE_GLASS = a.surface_glass
-    SINK[0] = a.sink; LED[0] = a.led; SPLIT[0] = a.split; GLOSSY_FLAG[0] = a.glossy_flag
+    SINK[0] = a.sink; LED[0] = a.led; REAL_SET[0] = a.real_set; SPLIT[0] = a.split; GLOSSY_FLAG[0] = a.glossy_flag
     HORN['close'] = a.horn_close; HORN['rough'] = a.horn_rough; HORN['shadows'] = not a.horn_front
     sh = json.load(open(a.shot))
     scale_lights(sh, {k: float(v) for k, v in (x.split('=', 1) for x in a.light)})

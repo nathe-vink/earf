@@ -75,9 +75,9 @@ SETS = {
     # drew a bright propeller in the horn's throat (my gate on the 3 m final, kept in held/))
     # (at 5 the real sun, from azimuth -100, caught the rim's lower-left lip as a white check-mark glint: 9 moves it off)
     # ruling 1: the shot's litter bounce had specular 0 (hidden in reflections); at full now
-    'poison_g5': {'product.instances.0.rotate_z': 9.0, 'lights.litter.specular': 1.0, 'lights.skygap': {'type': 'area', 'size_m': [5.0, 5.0], 'target': [0.0, 0.0, 0.6], 'irradiance': 7.0,
-                                    'color': '#EEF2E2', 'orbit': {'azimuth_deg': -60, 'elevation_deg': 65, 'distance_m': 4.0},
-                                    'specular': 1.0}},
+    # ruling 4 (23:47): the canopy real (every ray type), its own openings the only way light comes through; the gap lamp
+    # under it (in earlier commits) is gone. The mist casts shadows (--real-set, below)
+    'poison_g5': {'product.instances.0.rotate_z': 9.0, 'lights.litter.specular': 1.0},
 }
 # set props left out (the coordinator's gate on Dust, 2026-11-03: the tumbleweed floats, its shadow detached)
 DROP = {'dust': ['tumbleweed']}
@@ -94,6 +94,8 @@ SINK = {'acid_b': 0.015,   # 3 mm under the water (at 18 mm the submerged part s
 HORN_ROUGH = 0.05
 # a tint's channel split from the speaker lane's shared model where it changed after the asset was built (9097, 732a8671)
 SPLIT = {'acid_b': (0.085, 0.10, 1.00)}
+# habitats whose sets are made real: every object seen by every ray type, casting shadows (ruling 4)
+REAL_SET = {'poison_g5'}
 SAMPLES = {'ember': 96, 'poison_g5': 96, 'haze_b': 96, 'fog_b': 96}
 
 
@@ -124,7 +126,8 @@ def main():
             + [x for k, v in SETS.get(n, {}).items() for x in ('--set', f'{k}={json.dumps(v)}')] \
             + (['--glossy-flag'] if a.glossy_flag else []) \
             + (['--flag', *map(str, FLAG[n])] if n in FLAG else []) \
-            + (['--split', *map(str, SPLIT[n])] if n in SPLIT else [])
+            + (['--split', *map(str, SPLIT[n])] if n in SPLIT else []) \
+            + (['--real-set'] if n in REAL_SET else [])
         with open(out.replace('.png', '.log'), 'w') as log:
             r = subprocess.run(cmd, stdout=log, stderr=subprocess.STDOUT)
         print(n, 'ok' if r.returncode == 0 else f'failed ({r.returncode})', flush=True)
