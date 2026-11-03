@@ -510,7 +510,46 @@ def site(frame, tint):
     # rather than a cone (renders/2026-11-02/barkhorn/horn-study/deep/README.md): off; the rest of the rig as it was
     if 'rim' in s.get('lights', {}):
         s['lights']['rim']['power_w'] = 0.0
+    _siteG_round1(s, frame, tint)
     return s
+
+
+def _siteG_round1(s, frame, tint):
+    """The roll-out's gate on front-off-tall (the coordinator's blind critics, 2026-11-03): a hard white reflection over
+    the lower half of the right side face in every tint, the owner's "spray painted white". It is `sidesheen`, a
+    specular-only panel behind and right of the speaker put there so the side would read; tall, wide and side share it
+    (back and hero-light do not). It goes off, and a black card that only reflections see takes its place, where the
+    right face's mirror ray goes from this camera, so the face shows its own tint. The top light comes down a little so the
+    top batt keeps its tint, the key turns a little so no caustic starts at a foot, and Fog loses the -0.6 its old rig
+    carried, to match the other six."""
+    import math
+    if frame not in ('front-off-tall', 'front-off-wide', 'side'):
+        return
+    L = s['lights']
+    if 'sidesheen' in L:
+        L['sidesheen']['strength'] = 0.0
+    if 'horn' in L and L['horn'].get('irradiance'):
+        L['horn']['irradiance'] = round(L['horn']['irradiance'] * 0.65, 3)
+    if frame == 'front-off-wide' and 'topline' in L:
+        L['topline']['strength'] = round(L['topline']['strength'] * 0.65, 3)
+    if 'key' in L and 'orbit' in L['key']:
+        L['key']['orbit']['azimuth_deg'] = L['key']['orbit']['azimuth_deg'] - 5.0
+    if tint == 'fog':
+        s['render']['exposure'] = 0.0
+    # the card: from the camera to the middle of the right face, mirrored in the face, 1.2 m on
+    cam = s['camera']['position']
+    i = s['products'][0]['instances'][0]
+    a = math.radians(i.get('rotate_z', 0.0))
+    nx, ny = math.cos(a), math.sin(a)                       # the right face's normal, turned with the speaker
+    px = i['position'][0] + 0.28 * nx; py = i['position'][1] + 0.28 * ny; pz = 0.45
+    dx, dy, dz = px - cam[0], py - cam[1], pz - cam[2]
+    m = math.sqrt(dx * dx + dy * dy + dz * dz); dx, dy, dz = dx / m, dy / m, dz / m
+    k = dx * nx + dy * ny
+    rx, ry, rz = dx - 2 * k * nx, dy - 2 * k * ny, dz
+    h = math.sqrt(rx * rx + ry * ry) or 1.0
+    rx, ry = rx / h, ry / h
+    s['set'].setdefault('flags', []).append({'center_m': [round(px + 1.2 * rx, 3), round(py + 1.2 * ry, 3), 0.5], 'size_m': [1.8, 1.3],
+                                             'normal': [round(-rx, 3), round(-ry, 3), 0.0], 'reflect_only': True, 'color': '#050505'})
 
 
 def _siteF_round3(s, frame):
