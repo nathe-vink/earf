@@ -468,6 +468,19 @@ def deck_cover():
     # at the other end reaches x 7 at about y -4.2, well clear of side_r at y -1. No links: the coordinator's rule)
     if 'side_l' in s['lights']:
         s['lights']['side_l']['position'] = [-6.0, -1.5, 1.4]
+    # the owner's rule on light (the coordinator, 19:32 and 19:51): the cover's lamps linked to the panels or the drivers
+    # are unlinked, the cyc, top and over lamps light through glass, the fill and face show in reflections. Two lamps
+    # were only ever safe because of their links, so they get real controls instead: `smoke`, 80, linked to Smoke's parts
+    # alone, gets a honeycomb grid (30 deg) and aims at Smoke, so it does not wash Fog and its neighbours; `strip`, 70,
+    # linked to the drivers, lit nothing else, and unlinked at 70 it would light every front at ten times the face lamp:
+    # down to the face lamp's level, 6
+    L = s['lights']
+    honest_lights(s)
+    sm = s['products'][0]['instances'][-1]['position']
+    if 'smoke' in L:
+        L['smoke'].update(target=[sm[0], sm[1], 0.5], spread_deg=30)
+    if 'strip' in L:
+        L['strip']['irradiance'] = 6.0
     return s
 
 
