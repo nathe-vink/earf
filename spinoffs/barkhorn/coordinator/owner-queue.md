@@ -1254,3 +1254,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   ~$80-100 a speaker against ~$350-400 for plate + brace strip, 5.6 kg less; against: in every speaker unless a build option, one
   more thing in the box, the owner's separate lit base goes. My call (08:00): render D built in (night; day with the light off to show
   the channels), Smoke with D's light, drop C. D is the likely pick if it passes the gate.
+- 08:00 Mantle lane: the lit deck's nights a stop down (frames 6350f36b81955c9b200ef8304cc0a277752a6f27; script/README
+  4e964738d46d59290d6604e1db7588b6f4e833c6): a4-night-ember-2423-r2 2dbaf415 (deep red glass; clipped share 25 % -> 1.2 %),
+  a4-night-poison-2092-r2 65a9248c, day d3984071 unchanged; the room 0.3 -> 0.6 % of day so the record and arm read; nothing on the
+  floor. Checked by eye: right direction. Gate running (wf_d32497c9-acc: three blind judges with the owner's Mantle note and the
+  rejected floor-pool frame as the reference).
