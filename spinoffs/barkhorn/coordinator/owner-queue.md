@@ -2447,3 +2447,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 17:05 sent to the bar lane: those fixes (window: show the feet, soften the streak and the pink patch; shop: the display spot or a
   side camera, the horns, the LED) and the 16:30 listening re-stage; order listening, shop, window, a proxy each. My gate on
   r44-lantern (the old version as context) started 17:05.
+- 17:05 helper c4: chunk 07 landed (16:07-17:04) at r33-rollout-c4 cef6f871f30a19961f967544b43470e38df72be4: site-front-off-wide Ember
+  (16.9 min), Dust (19.1), Acid (19.4); 1800 x 1200, 1.9-2.0 MB; only the CUEW warning; its spot check: own feet, no plinth, polished
+  horn. Chunk 08 started 17:05.
