@@ -1274,6 +1274,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   near-clipped lightbox in primary colors; neon lines at the inset groove and the bottom arris. Fixes sent (08:15): day emission 0
   and a finer/sparser print or deeper skin; night -1 to -1.5 stops, graded, real tinted colors, a glossy skin with a long soft
   reflection; mask the groove from above and black out the arris. Re-armed #36 for 09:06.
-- 08:16 Mantle gate's third judge (wf_d32497c9-acc done): agrees; adds a low warm kicker for the arm, posts, base edge and feet; the
+- 08:22 Mantle gate's third judge (wf_d32497c9-acc done): agrees; adds a low warm kicker for the arm, posts, base edge and feet; the
   red reflection bar on the base under the deck's left end; Poison's top a stop up, off the screen primary, its edges deep-green glass;
-  the deck's right corner 8 px from the frame edge; the day top as the real stack. Sent (08:17).
+  the deck's right corner 8 px from the frame edge; the day top as the real stack. Sent (~08:22; the message said 08:17).
