@@ -2806,3 +2806,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   left face's upper third deep red); the woofer surround matt (the crescent gone); the horn-mouth streak gone and the inside's top band and
   brace red, not salmon; the exposure as v2. It had still not read my shop, window and r44 results.
 - 18:49 my gate on r43-listening v3 (wf_4677aaca-15e; v2 and the older picture as context) started.
+- 18:51 biomes lane: the proxies at ~10 degrees off at 4c7a21782787c7ceee86d2ee61ef7b278290664c (crops in
+  renders/2026-11-03/barkhorn/horn-turn/proxies-10deg-horns.jpg), the crease span by flare.py (worse side; Dust 7.8, Ice 7.2): Ember 7.7
+  clean; Haze 10.2 about clean; Poison 8.7 clean but a small white rim glint at the lower left; Acid 13.7, a weak diagonal at the lower
+  right. The fronts still show the woofers, rings and ports; the sides narrower; Poison's front lighter (the canopy light on the face);
+  Ember's ring glint gone at proxy size. The Ember, Haze and Poison finals started 18:51; then Acid's proxy at 4 degrees off (as Ice),
+  its final if clean; then Fog; done ~21:45 UTC. My look at the crops agrees (Ember and Haze even; Poison's glint the hardest highlight).
+- 18:52 sent to the biomes lane: Poison's lower-left rim glint fixed by a real change (an out-of-frame dark card, or a degree or two)
+  before its final starts, and its green flecks right of the pod checked at full size; the crease number with each final.
