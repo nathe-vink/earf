@@ -3810,3 +3810,38 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 23:48 CORRECTION OWED TO THE OWNER: at 23:46 I told them the Ice habitat picture (item 5) was clean. It is not: it carries a
   glossy-only card covering 11.1 % of the frame. The honest re-render (real cards out of frame) is first in the biomes lane's queue.
   Item 5's question (the batt) stands, since the card doesn't touch the batt. Told in the turn's last text.
+- 23:46 biomes lane (Acid (b) queued at a8508ba37ec79790de1346742e94da3c0c903cf5): the Haze final died silently at 23:37 and was
+  restarted at 23:46 (~15 min); then the Acid proxy. It confirms Ice 27911a44 was rendered at 16:11, before its cards became real
+  (18893298, 20:11), so the glossy-only cards are in that frame (one at 11.1 %). The same holds for Dust 0a356de1, Ember 45225a29,
+  Haze df201486 and Acid 43ad3a3f. (My 23:47 answer, re-render Ice first, crossed this.)
+- 23:47 lamps lane (26400e7c767bf626eb9e746e6141571aa8a431e5): its CARD_AUDIT mode (every camera-hidden mesh in the built scene, code-placed
+  included, cast on its own, 38,400 rays per frame).
+  - Before the fix: the Hemisphere day's window wall section wall-l-b was hidden from the camera and covered 22.7 %; Core B night's
+    led-face cast no shadow.
+  - The day frames' sky panels were inside the room (Hemisphere).
+  - Now: real walls; real openings with sheer curtains (translucent, not emissive) lit by a dim dusk sky; Core's LED face casts
+    shadows; no camera-hidden meshes; every mesh casts shadows.
+  - The three Hemisphere finals were stopped and re-rendered on one build, and Core B night re-renders at 768. Proxy face 185, chroma
+    0.067 (day 0.100), hue 227 (day 242).
+  - Its question: may the dim world ambient, the soft fill and the cap's kicker stay (the set has no front or side walls)?
+  (So the Hemisphere day frame that "passed 2/3" earlier had a hidden wall section in frame and a sky panel inside the room.)
+- 23:48 c2: both models rebuilt at 69d7c10c (cloud 73.6 MB, 23:20-23:33; variants 16.4 MB, 23:33-23:48). The rebuilt variants file
+  differs from git by one line: cloud-amber (Acid, 9097) "horn_deep_dye" "#CDC509" (build) against "#FFB101" (committed, which
+  looks stale after 732a8671).
+- 23:49 DECK GATE (wf_3eaf3f72-df3, 3 critics, ~32 min):
+  - HERO: SHOW 2/3. One HOLD for a soft X in the horn (the bell's corner seams catch the key). All three note that Ember renders pure
+    cherry red (hue 0-2°), not red-orange, and a grey shadow band at the right edge. It re-renders anyway (in-frame card, edge), with
+    these folded in.
+  - ROW: HOLD 3/3.
+    - Coloured pools on the floor in front of each unit (back-top through the glass) read as underglow.
+    - The green, violet and blue right faces wash grey-white.
+    - Smoke is an opaque black box (so hold until its sheet is decided), and Clear's batts read mid-grey.
+    - The yellow and blue horns are darker than their cabinets.
+    - The bottom edges show as coloured lines (the owner's bottom-edge question).
+- 23:49 sent:
+  - Speaker lane: the horn_deep_dye question (confirm #CDC509 and commit the regenerated line; does c4 need render_model.py?), and
+    both gates' findings, the row queued after the cover's key.
+  - c4: hold chunk 6's start (deck-home goes on) until the dye answer.
+  - c2: keep the rebuilt file; don't commit or revert it.
+  - Lamps: ruling 4 bans light through solid set pieces, not lights on an open side, so keep the ambient, the fill and the kicker
+    (unlinked, out of frame), with the dome plainly the main light at night (report the fill's share on the wall).
