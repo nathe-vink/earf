@@ -1811,3 +1811,29 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   proxy, Acid (sink 0.03), Poison's final if the proxy reads. It will check the Ice batt is clearly visible and send a crop with the
   frame. Polished is one flag (habitat.py `--horn-rough 0.05` on the horn-satin material, added to habitats.py's command); nothing
   polished renders until I say.
+- 14:18 speaker lane: D night v2 at 88d0ee8f09ef964ae69d4467c5d6336cc0754f8f (renders/2026-11-03/barkhorn/base-question/gate2/
+  D-night-ice-v2.png; sha256 e119c2f9; the gate-2 D-night-ice.png kept beside it). Proxied three rounds, then full. Horn 21.0 (RGB
+  3,21,66; ref ~2,34,53); wall 37.9 (20,41,64; ref ~18,40,56); no pinwheel (the fill a 6 x 6 m soft area from above-front, irradiance
+  72, near-neutral #686C72); wall saturation 0.68 (a little over 0.5-0.6: the Ice cast from the 4000 K light through the cabinet plus
+  the grade); 1.4 % black, 0 % clipped; front panel 78; floor reflection 75 (sharp, roughness 0.06); the fill casts a soft shadow of
+  the speaker on the wall to the right. Build fixes in it: the brace runs on the rear member, the white floor film in the ports' bays,
+  the back floor run clear of the batt's notch (no violet dot), no neon line (strips 40 mm or more from the clear ribs). Lane free.
+- 14:19 Mantle C gate wf_34897c83-4f0 (3 critics, 17 min): C NIGHT HOLD 3/3 on the owner's first note: light leaves the deck's
+  underside (the smoked base's top red ~13-16 vs A's 0; a deck-shaped floor pool, red ~14-18 vs 4-6, green and blue identical); the
+  glow peaks in a crescent at the platter's foot ("light from under the platter"); the near-black outer zone makes "a black slab with
+  a red hot spot", with the spill the "gaming-PC turntable" cue; an amber glint on the motor cable. C DAY: 1 SHOW, 1 HOLD only for
+  the pair, 1 HOLD (the outer zone black, the radial fade airbrushed: a vignette); "deep see-through ruby acrylic", the best of the
+  four. A g5 HOLD 3/3 both (a flat lightbox in a black bezel at night; candy-red lacquer by day, as bright as lit: on/off doesn't
+  read). All three: C is the right direction, don't revive A. Small: the record label's wordmark runs through the spindle.
+- 14:21 sent to the Mantle lane: the C fixes in order: (1) no downward light from the printed zone, the clear rim kept clear (its call:
+  a reflector behind the printed zone only, or opaque-backed print), checked by a C-minus-A difference with the shadows lifted; (2) a
+  flatter grade, the peak off the platter's foot; (3) a non-zero floor in the outer zone (deep Ember glass at night, an even sheet by
+  day; print density, not room light); (4) the cable glint, the label's wordmark. Proxies, then C night and day in full; cost and
+  build changes against C's +$130-150 over v3.
+- 14:21 D night v2 gate wf_813317a4-ff8 started (D day, the old D night and A day as context; the site's two uplit images as
+  references; test 4 expected to fail by physics). Sent to the speaker lane, in order, no hero renders until the base and horn
+  answers: (1) the polished horn's honest see-through: model the real cable routing (the driver's leads off the horn, down the posts
+  to the crossover), one close-up proxy polished with satin beside it; (2) Smoke's target look: one day frame at ~50 % through 20 mm
+  with the white lining on the 83c03b3d set, plus the stock sheets that give it under "held" (~50 % chart) and "deep" (~83-85 % at
+  3 mm) from TINTS.md; (3) a ready-to-run roll-out queue (every deck, site and brand shot that changes with A/D and satin/polished,
+  one command for either answer; no renders).
