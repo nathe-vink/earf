@@ -265,7 +265,7 @@ def build(frame, samples, scale):
         H = 48.2                                  # the collar's hole (round 1: the closed tops left a dark seam)
         # round 13 (the coordinator: the dome lit nothing, Core's renderer gap): at night the thin shells pass shadow
         # rays at their own transmission (the tint 3 mm at full dye, the clear 6 mm; half each face)
-        tsh = (lambda m, T: thin_shadow(m, T)) if night else (lambda m, T: m)
+        tsh = thin_shadow   # round 14 (the coordinator): by day too, so the dome's wall shadow is tinted
         Tt, Tc = shell_T(tname, 1.0, 1.5), shell_T('Clear', 1.0, 3.0)
         sphere('tint', 100.0, rim, tsh(acrylic('tint', 0.0), Tt), cut=0.0, hole=H)
         sphere('tint-in', 97.0, rim, tsh(acrylic('tint-in', 0.0), Tt), inward=True, cut=0.0, hole=H)
@@ -340,7 +340,11 @@ def build(frame, samples, scale):
         # steeper and closer: about 45 deg down from 0.95 m out and 0.93 m above the rim, a 54 mm lens, so the
         # pendant is about a quarter of the width, the crown clear of the top with the cable running out of it, and
         # the table's pool and a stoneware bowl below
-        cam = ((0.0, -0.95, tz + 1.55), (0.0, 0.0, tz + 0.566), 54.0)
+        # round 14 (the coordinator): one shared camera, low, just under the rim, so the dome and a glimpse of the
+        # white liner at the mouth lead; the table is below the frame
+        cam = (tuple(float(v) for v in os.environ.get('HCAM', '0.12,-1.0,0.62').split(',')),
+               tuple(float(v) for v in os.environ.get('HTGT', '0.0,0.0,0.69').split(',')), float(os.environ.get('HLENS', '60')))
+        cam = ((cam[0][0], cam[0][1], tz + cam[0][2]), (cam[1][0], cam[1][1], tz + cam[1][2]), cam[2])
         bowl_m = SC.principled('stoneware', '#A8A196', 0.28, bump=(1500.0, 0.25))   # round 10: a glaze, so its inside shades   # round 9: under the lamp
         bm = bmesh.new(); bmesh.ops.create_uvsphere(bm, u_segments=96, v_segments=48, radius=0.11)
         bmesh.ops.delete(bm, geom=[v for v in bm.verts if v.co.z > -0.035], context='VERTS')
@@ -353,7 +357,7 @@ def build(frame, samples, scale):
     if night:
         # round 4: a white ceiling at 2.5 m, so the lamp's light that leaves upward comes back into the room, as at home
         SC.plane('ceiling', (4.3, 4.0), (0.85, 0.0, 2.5), (180, 0, 0), SC.principled('ceiling', '#E8E4DC', 0.9))
-        ev = float(os.environ.get('NIGHT_EV', '1.8' if prod == 'core' else '-2.0'))
+        ev = float(os.environ.get('NIGHT_EV', '1.8' if prod == 'core' else '-3.0'))
         k = 2.0 ** (0.6 - ev)                     # round 9: one evening room for the family, the same fill at each exposure
         # round 11 (the coordinator's rulings 1 to 3, 2026-11-03: nothing in the room hidden from the glass's
         # reflections or from view through it; no light linking): the night room is a flat, dim evening ambient (no
@@ -368,23 +372,28 @@ def build(frame, samples, scale):
             from mathutils import Vector
             # (round 12: an area light's edge is hard in the glass; so a sheer curtain lit by the dusk outside, an emitting
             # surface brightest at its middle and fading to its edges, out of frame to the left)
-            cu = bpy.data.meshes.new('curtain'); bm_ = bmesh.new()
-            bmesh.ops.create_grid(bm_, x_segments=1, y_segments=1, size=0.5); bm_.to_mesh(cu); bm_.free()
-            co = bpy.data.objects.new('curtain', cu); bpy.context.scene.collection.objects.link(co)
-            co.location = (-1.6, -0.9, tz + 1.2); co.scale = (0.7, 2.2, 1.0)
-            co.rotation_euler = (Vector((0.0, 0.0, tz + 0.75)) - co.location).to_track_quat('Z', 'Y').to_euler()
-            cm_ = bpy.data.materials.new('curtain'); cm_.use_nodes = True; nt_ = cm_.node_tree; nt_.nodes.clear()
-            o_ = nt_.nodes.new('ShaderNodeOutputMaterial'); em_ = nt_.nodes.new('ShaderNodeEmission')
-            em_.inputs['Color'].default_value = (*SC.hex_lin('#9FB2D6'), 1)
-            tc_ = nt_.nodes.new('ShaderNodeTexCoord'); mp_ = nt_.nodes.new('ShaderNodeMapping')
-            mp_.inputs['Location'].default_value = (-1.0, -1.0, 0.0); mp_.inputs['Scale'].default_value = (2.0, 2.0, 0.0)
-            gr_ = nt_.nodes.new('ShaderNodeTexGradient'); gr_.gradient_type = 'QUADRATIC_SPHERE'
-            pw_ = nt_.nodes.new('ShaderNodeMath'); pw_.operation = 'POWER'; pw_.inputs[1].default_value = 1.5
-            mu_ = nt_.nodes.new('ShaderNodeMath'); mu_.operation = 'MULTIPLY'; mu_.inputs[1].default_value = float(os.environ.get('DUSK_E', '4.0'))
-            nt_.links.new(tc_.outputs['Generated'], mp_.inputs['Vector']); nt_.links.new(mp_.outputs['Vector'], gr_.inputs['Vector'])
-            nt_.links.new(gr_.outputs['Fac'], pw_.inputs[0]); nt_.links.new(pw_.outputs[0], mu_.inputs[0])
-            nt_.links.new(mu_.outputs[0], em_.inputs['Strength']); nt_.links.new(em_.outputs[0], o_.inputs['Surface'])
-            cu.materials.append(cm_)
+            def curtain(nm, loc, scl, at):
+                cu = bpy.data.meshes.new(nm); bm_ = bmesh.new()
+                bmesh.ops.create_grid(bm_, x_segments=1, y_segments=1, size=0.5); bm_.to_mesh(cu); bm_.free()
+                co = bpy.data.objects.new(nm, cu); bpy.context.scene.collection.objects.link(co)
+                co.location = loc; co.scale = scl
+                co.rotation_euler = (Vector(at) - co.location).to_track_quat('Z', 'Y').to_euler()
+                cm_ = bpy.data.materials.new(nm); cm_.use_nodes = True; nt_ = cm_.node_tree; nt_.nodes.clear()
+                o_ = nt_.nodes.new('ShaderNodeOutputMaterial'); em_ = nt_.nodes.new('ShaderNodeEmission')
+                em_.inputs['Color'].default_value = (*SC.hex_lin('#9FB2D6'), 1)
+                tc_ = nt_.nodes.new('ShaderNodeTexCoord'); mp_ = nt_.nodes.new('ShaderNodeMapping')
+                mp_.inputs['Location'].default_value = (-1.0, -1.0, 0.0); mp_.inputs['Scale'].default_value = (2.0, 2.0, 0.0)
+                gr_ = nt_.nodes.new('ShaderNodeTexGradient'); gr_.gradient_type = 'QUADRATIC_SPHERE'
+                pw_ = nt_.nodes.new('ShaderNodeMath'); pw_.operation = 'POWER'; pw_.inputs[1].default_value = 1.5
+                mu_ = nt_.nodes.new('ShaderNodeMath'); mu_.operation = 'MULTIPLY'; mu_.inputs[1].default_value = float(os.environ.get('DUSK_E', '4.0'))
+                nt_.links.new(tc_.outputs['Generated'], mp_.inputs['Vector']); nt_.links.new(mp_.outputs['Vector'], gr_.inputs['Vector'])
+                nt_.links.new(gr_.outputs['Fac'], pw_.inputs[0]); nt_.links.new(pw_.outputs[0], mu_.inputs[0])
+                nt_.links.new(mu_.outputs[0], em_.inputs['Strength']); nt_.links.new(em_.outputs[0], o_.inputs['Surface'])
+                cu.materials.append(cm_)
+            curtain('curtain', (-1.6, -0.9, tz + 1.2), (0.7, 2.2, 1.0), (0.0, 0.0, tz + 0.75))
+            # round 14 (the coordinator: a sliver of the dusk curtain in frame): a second sheer panel on the back wall,
+            # its edge at the frame's left
+            curtain('curtain-back', (-0.62, 0.70, tz + 0.80), (0.45, 1.5, 1.0), (-0.62, -1.0, tz + 0.80))
             # round 11: a small, dim real light behind and above the pendant, between it and the wall, facing the camera
             # side (no light linking): it catches the cap's tiers and is seen in the gloss for what it is
             kk = SC.area('kicker', (0.25, 0.45, tz + 1.05), (0, 0, 0), (0.25, 0.25), float(os.environ.get('KICK_W', '1.5')), '#D8DCE4')
