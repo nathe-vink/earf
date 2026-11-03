@@ -1439,3 +1439,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   the emitter, brighter, its blue reaching wall and table); Hemisphere exposed for the dome (1.5-2 stops), the rim line fixed for
   real (diffuser inside the rim, or a satin or dark edge: the lane to propose and cost), reframed closer to match the day camera, a
   cool halo.
+- 10:44 biomes lane horn proxies (c0854b99913db9b29a69d18316af30fbea4873e6, renders/2026-11-03/barkhorn/horn-check/): horn mean
+  luminance satin old 63.2, satin closed 63.4, polished (roughness 0.05, NOT spec) 25.0. Closing the seams changes nothing; with the
+  satin outside the horn glows evenly ("a light red box lighter than the cabinet"), thick and thin alike; only the polished face
+  gives the glassy depth (about 2.5x darker, the throat deep, the posts showing through). So the owner's 05:11 look conflicts
+  physically with their 03:00 "satin outside": an owner question (after the base question; then Smoke). The seven started 10:44 on
+  hornA2 with the spec satin (ember, dust, acid_b, poison_g5, ice, haze_b, fog_b; ~30 min each).
+- 10:47 sent to the speaker lane (after D, Smoke-D and the Smoke day comparison): A with the horn's outside polished, identical to
+  a47ae365 otherwise, as a pair with A; and a plain feasibility note (which face touches the tool, forming marks on a polished
+  outside, polish cost per horn, why satin was chosen, fingerprints and scratches, any tooling change).
