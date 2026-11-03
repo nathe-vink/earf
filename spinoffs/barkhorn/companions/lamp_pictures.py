@@ -99,6 +99,13 @@ def build(frame, samples, scale):
     def shell_T(tint, loading, mm):
         return tuple(math.exp(-a * mm / 1000.0) * 0.96 for a in SC.absorption(tint, loading))   # 4 % lost at each face
 
+    def gobo(*a, **k):
+        # round 14 (the card audit): the window wall is a real wall, seen by the camera too, not a reflect-only card
+        obs = SC.window_gobo(*a, **k)
+        for o_ in obs:
+            o_.visible_camera = True
+        return obs
+
     def light(nm, kind, loc, watts, radius, rot=(0, 0, 0), spot=None):
         """A real light at the LED's colour temperature (round 4, 2026-11-03, the coordinator's brief: the light reaches
         the room through the acrylic; the tint's lit hue is the source's through the glass)."""
@@ -258,7 +265,7 @@ def build(frame, samples, scale):
             em = bpy.data.materials.new('led-em'); em.use_nodes = True
             b = em.node_tree.nodes['Principled BSDF']; b.inputs['Emission Color'].default_value = (*blackbody(cct), 1)
             b.inputs['Emission Strength'].default_value = 8.0
-            led.materials.append(em); lo.visible_diffuse = False; lo.visible_shadow = False
+            led.materials.append(em); lo.visible_diffuse = False   # round 14 (ruling 4): it casts shadows
         cam = ((0.12, -1.02, tz + float(os.environ.get('CORE_CAM_Z', '0.36'))), (0.0, 0.0, tz + 0.098), 85.0)
     else:
         rim = tz + 0.70                                                 # the rim 700 above the table
@@ -372,28 +379,30 @@ def build(frame, samples, scale):
             from mathutils import Vector
             # (round 12: an area light's edge is hard in the glass; so a sheer curtain lit by the dusk outside, an emitting
             # surface brightest at its middle and fading to its edges, out of frame to the left)
-            def curtain(nm, loc, scl, at):
-                cu = bpy.data.meshes.new(nm); bm_ = bmesh.new()
-                bmesh.ops.create_grid(bm_, x_segments=1, y_segments=1, size=0.5); bm_.to_mesh(cu); bm_.free()
-                co = bpy.data.objects.new(nm, cu); bpy.context.scene.collection.objects.link(co)
-                co.location = loc; co.scale = scl
-                co.rotation_euler = (Vector(at) - co.location).to_track_quat('Z', 'Y').to_euler()
-                cm_ = bpy.data.materials.new(nm); cm_.use_nodes = True; nt_ = cm_.node_tree; nt_.nodes.clear()
-                o_ = nt_.nodes.new('ShaderNodeOutputMaterial'); em_ = nt_.nodes.new('ShaderNodeEmission')
-                em_.inputs['Color'].default_value = (*SC.hex_lin('#9FB2D6'), 1)
-                tc_ = nt_.nodes.new('ShaderNodeTexCoord'); mp_ = nt_.nodes.new('ShaderNodeMapping')
-                mp_.inputs['Location'].default_value = (-1.0, -1.0, 0.0); mp_.inputs['Scale'].default_value = (2.0, 2.0, 0.0)
-                gr_ = nt_.nodes.new('ShaderNodeTexGradient'); gr_.gradient_type = 'QUADRATIC_SPHERE'
-                pw_ = nt_.nodes.new('ShaderNodeMath'); pw_.operation = 'POWER'; pw_.inputs[1].default_value = 1.5
-                mu_ = nt_.nodes.new('ShaderNodeMath'); mu_.operation = 'MULTIPLY'; mu_.inputs[1].default_value = float(os.environ.get('DUSK_E', '4.0'))
-                nt_.links.new(tc_.outputs['Generated'], mp_.inputs['Vector']); nt_.links.new(mp_.outputs['Vector'], gr_.inputs['Vector'])
-                nt_.links.new(gr_.outputs['Fac'], pw_.inputs[0]); nt_.links.new(pw_.outputs[0], mu_.inputs[0])
-                nt_.links.new(mu_.outputs[0], em_.inputs['Strength']); nt_.links.new(em_.outputs[0], o_.inputs['Surface'])
-                cu.materials.append(cm_)
-            curtain('curtain', (-1.6, -0.9, tz + 1.2), (0.7, 2.2, 1.0), (0.0, 0.0, tz + 0.75))
-            # round 14 (the coordinator: a sliver of the dusk curtain in frame): a second sheer panel on the back wall,
-            # its edge at the frame's left
-            curtain('curtain-back', (-0.62, 0.70, tz + 0.80), (0.45, 1.5, 1.0), (-0.62, -1.0, tz + 0.80))
+            # round 14 (ruling 4: light reaches the subject only through a real opening): the dusk comes in through two
+            # real openings, each with a sheer curtain in it, lit by a dim dusk sky outside: the front part of the left
+            # wall (the day's window), and a narrow one in the back wall whose curtain shows at the frame's left
+            sheer = bpy.data.materials.new('sheer'); sheer.use_nodes = True; nts = sheer.node_tree; nts.nodes.clear()
+            os_ = nts.nodes.new('ShaderNodeOutputMaterial'); tl_ = nts.nodes.new('ShaderNodeBsdfTranslucent')
+            tp_ = nts.nodes.new('ShaderNodeBsdfTransparent'); mx_ = nts.nodes.new('ShaderNodeMixShader')
+            tl_.inputs['Color'].default_value = (0.86, 0.87, 0.88, 1); tp_.inputs['Color'].default_value = (0.55, 0.55, 0.55, 1)
+            mx_.inputs[0].default_value = 0.35
+            nts.links.new(tl_.outputs[0], mx_.inputs[1]); nts.links.new(tp_.outputs[0], mx_.inputs[2])
+            nts.links.new(mx_.outputs[0], os_.inputs['Surface'])
+            dW = float(os.environ.get('DUSK_W', '20'))
+            gobo(-1.3, -1.3, -0.35, 0.75, 2.4, panes=(1, 2))
+            SC.plane('sheer-left', (0.95, 1.65), (-1.27, -0.825, 1.575), (90, 0, 90), sheer)
+            dl = SC.area('dusk-left', (-1.75, -0.825, 1.575), (0, 0, 0), (1.0, 1.7), dW, '#9FB2D6')
+            dl.rotation_euler = (Vector((0.0, -0.825, 1.575)) - dl.location).to_track_quat('-Z', 'Y').to_euler()
+            wall = bpy.data.objects['wall']; wm = wall.active_material; wy = wall.location[1]
+            bpy.data.objects.remove(wall, do_unlink=True)
+            x0, x1, z0w, z1w = -1.05, -0.58, tz + 0.15, tz + 1.55
+            for nm_, xa, xb, za, zb in (('wall-a', -1.3, x0, -0.5, 3.5), ('wall-b', x1, 3.0, -0.5, 3.5),
+                                        ('wall-c', x0, x1, -0.5, z0w), ('wall-d', x0, x1, z1w, 3.5)):
+                SC.plane(nm_, (xb - xa, zb - za), ((xa + xb) / 2, wy, (za + zb) / 2), (90, 0, 0), wm)
+            SC.plane('sheer-back', (x1 - x0, z1w - z0w), ((x0 + x1) / 2, wy - 0.005, (z0w + z1w) / 2), (90, 0, 0), sheer)
+            db = SC.area('dusk-back', ((x0 + x1) / 2, wy + 0.35, (z0w + z1w) / 2), (0, 0, 0), (0.6, 1.5), dW * 0.25, '#9FB2D6')
+            db.rotation_euler = (Vector(((x0 + x1) / 2, 0.0, (z0w + z1w) / 2)) - db.location).to_track_quat('-Z', 'Y').to_euler()
             # round 11: a small, dim real light behind and above the pendant, between it and the wall, facing the camera
             # side (no light linking): it catches the cap's tiers and is seen in the gloss for what it is
             kk = SC.area('kicker', (0.25, 0.45, tz + 1.05), (0, 0, 0), (0.25, 0.25), float(os.environ.get('KICK_W', '1.5')), '#D8DCE4')
@@ -405,13 +414,13 @@ def build(frame, samples, scale):
             # round 11 (the coordinator: the core lit, the wall behind it in shade): the same window, its opening the
             # front part of the left wall, and the sun in through it from the front left, onto the ball's face; the
             # wall behind the ball takes no sun (the window wall shades it), as a room by a window does
-            SC.window_gobo(-1.3, -1.3, -0.35, 0.75, 2.4, panes=(1, 2))
+            gobo(-1.3, -1.3, -0.35, 0.75, 2.4, panes=(1, 2))
             # round 12 (the gate: the window a flat grey card in the glass): the sky behind the frame, so its bars show
             SC.area('window-sky', (-1.45, -0.82, 1.55), (0, -90, 0), (0.9, 1.6), float(os.environ.get('CSKY', '60')), '#DCE6F5')
             SC.sun_lamp('sun', (0.75, 0.45, -0.45), strength=float(os.environ.get('CSUN', '10')), color='#FFE7C8', angle=3.0)
         else:
-            SC.window_gobo(-1.3, -1.3, 0.9, 0.75, 2.4, panes=(2, 2))
-            SC.area('window-sky', (-1.25, -0.2, 1.55), (0, -90, 0), (1.5, 2.0), 90.0, '#DCE6F5')
+            gobo(-1.3, -1.3, 0.9, 0.75, 2.4, panes=(2, 2))
+            SC.area('window-sky', (-1.45, -0.2, 1.55), (0, -90, 0), (1.5, 2.0), 90.0, '#DCE6F5')   # round 14 (ruling 4): outside, through the opening
             SC.sun_lamp('sun', (0.86, -0.25, -0.34), strength=10.0, color='#FFE7C8', angle=1.5)
         if prod == 'core' and var == 'nested' and float(os.environ.get('SIDEBACK_W', '0')) > 0:
             # round 11 (the gate's lever: glass is shot with a side-back light): a tall soft strip behind and to the left,
@@ -427,6 +436,34 @@ def build(frame, samples, scale):
         # (round 9: the crumpled net was caustic noise, the core lit through its own shell; with the core open at its
         # base the default guides are clean again)
     SC.camera(cam[0], cam[1], lens=cam[2], fstop=5.6)
+    if os.environ.get('CARD_AUDIT'):
+        # round 14 (the coordinator's card audit): ray-cast the frame (every max(W,H)/240 px) and report, for each object
+        # hidden from the camera, the share of rays whose first hit it would be; then each object that casts no shadow
+        from mathutils import Vector
+        sc = bpy.context.scene; cam_ob = sc.camera
+        hidden = [o for o in sc.objects if o.type == 'MESH' and not o.visible_camera]
+        dg = bpy.context.evaluated_depsgraph_get()
+        W, H = sc.render.resolution_x, sc.render.resolution_y
+        step = max(W, H) / 240.0
+        fr = [cam_ob.matrix_world @ v for v in cam_ob.data.view_frame(scene=sc)]   # tr, br, bl, tl
+        o = cam_ob.matrix_world.translation
+        hits = {h.name: 0 for h in hidden}; n = 0
+        y = step / 2
+        while y < H:
+            x = step / 2
+            while x < W:
+                u, v = x / W, y / H
+                top = fr[3].lerp(fr[0], u); bot = fr[2].lerp(fr[1], u); pt = top.lerp(bot, v)
+                d = (pt - o).normalized(); n += 1
+                for h in hidden:   # each card alone, as a real card there would be: occlusion ignored
+                    mi = h.matrix_world.inverted(); lo = mi @ o; ld = (mi.to_3x3() @ d).normalized()
+                    if h.ray_cast(lo, ld)[0]:
+                        hits[h.name] += 1
+                x += step
+            y += step
+        print('CARD-AUDIT', frame, {k: round(100.0 * v / n, 1) for k, v in hits.items()}, 'rays', n)
+        print('NO-SHADOW', frame, [o.name for o in sc.objects if o.type == 'MESH' and not o.visible_shadow])
+        return
     os.makedirs(OUT, exist_ok=True)
     out = os.environ.get('LAMP_OUT') or os.path.join(OUT, frame + '.png')
     bpy.context.scene.render.filepath = out
