@@ -2901,3 +2901,18 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 19:11 sent to the bar lane: v4 first (the chairs 20-30 px or more clear of the base; the horn's white brought to ~L 200-215 glints by a
   larger or re-aimed spot or a degree's turn, no retouching; the jamb gap 20-40 px; optional the spot more frontal), then r44 v3, shop v3,
   window v3.
+- 19:14 Mantle lane: the C3 pair from one build, C3d (r48-mantle-design HEAD 1a958c026a8ff67df9cd498ab27e73550f3aa2b2; source
+  959b335fa9458dc25d8bb0f3e6cf11986ab36d43 and 86ff870a3fa689a03a7affba0757cb51150f91db; renders/2026-11-03/barkhorn/mantle-r48/
+  a5-night-ember-2423-c3d.png and a5-day-ember-2423-c3d.png, 1800 x 1200, night 192 samples, the set and camera of A g5 and C3; README section
+  13; the c3c take committed but not for use). (1) One build. (2) The tick was the glow sheet showing past the field's edge: the glow fades
+  over its last 20 mm inside the black band (at the tick: C3b 50,13,22, C3d 19,13,22, the border's black). (3) The glow does light what stands
+  on it, no light-path trick: glow on/off, red: the lift-post foot 22.6/7.0, the arm-pillar base 13.7/8.2 (black-anodized, so cool), the
+  arm-board disc edge 25.2/17.8, the counterweight 42.2/36.3. (4) The ellipse was a print edge from the front-right post's 2 mm seat in the
+  light guide's underside: the seats removed, the posts butt-bonded flat (MA310, 0.1 mm bond line, ~700 mm2) by a drilled jig plate, v5
+  rebuilt with 0 clashes, the posts 2 mm shorter (spread 7.4 to 3.1). (5) The strip catch not done (it needs a light; the set kept). By day
+  the matte bond line had taken the border's ruby, so the ring's inner faces are finished dark grey (10 %) toward the ring, black toward the
+  field: the front face's red 102 (C3 75); the right face's salmon band 120 (141); the night glow still held (white read as a lit edge). Night:
+  base top 2.9, spots 0/0, floor 6.1/4.8, field 89-151; a x4 difference against A shows red only in the field. Cost: the ring paint and jig
+  plate ~$5 a unit; C3 ~+$150-180 over v3; parts $3,897. Build changes for the owner's signature: the seatless butt-bonded posts and the ring's
+  inner-face finish.
+- 19:15 my gate on the C3d pair (wf_700c6e26-934) started.
