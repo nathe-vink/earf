@@ -45,7 +45,9 @@ def scale_lights(sh, scales):
 
 SURFACE_GLASS = False                   # --surface-glass: the tint on the faces (not adopted: the speaker lane's volume is the line's material)
 WELD = [True]                           # the asset's split vertices welded so its glass volumes close (--no-weld: off)
-SINK = [0.002]                          # --sink M: the feet bedded this far into the ground (ash, sand)
+SINK = [0.002]                          # --sink M: the feet bedded this far into the ground (ash, sand). The sets' crust and
+                                        # ripples are displaced at render time, so the ray cast sees flat ground and can't seat
+                                        # the feet in them: habitats.py beds them a full 12 mm, the cabinet on the ground
 HORN = {'close': False, 'rough': None, 'shadows': True}  # --horn-close: fill the horn shells' open seams; --horn-rough R: the satin's roughness (test only)
 TT_SURFACE = 0.92                       # the two faces' reflection loss, as tints.py has it
 
@@ -73,8 +75,7 @@ def feet(bpy_, col, r=0.016, h=0.012, inset=0.05):
         for y in (lo[1] + inset, hi[1] - inset):
             bm = bmesh.new(); bmesh.ops.create_cone(bm, cap_ends=True, segments=24, radius1=r, radius2=r, depth=h)
             me = bpy_.data.meshes.new('foot'); bm.to_mesh(me); bm.free(); me.materials.append(m)
-            # under the cabinet's own bottom (Strata's sits 38.5 mm up, where base A was), not at z 0: the feet must
-            # touch the cabinet, or they hang below it as pebbles and it floats (the coordinator's gate, Ember, 12:23)
+            # under the cabinet's own bottom (Strata's is at 12 mm, the feet's height, so they touch it)
             f = bpy_.data.objects.new('foot', me); f.location = (x, y, zb - h / 2); col.objects.link(f)
     print(f'feet: four, {2 * r * 1000:.0f} x {h * 1000:.0f} mm, under the cabinet bottom at z {zb:.4f}')
 

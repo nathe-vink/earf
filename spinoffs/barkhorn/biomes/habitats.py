@@ -18,7 +18,7 @@ SHOTS = os.path.join(ROOT, 'studio', 'shots', 'barkhorn', 'element31')
 # name -> (tint, {lamp: factor}); 0 drops a lamp
 HABITATS = {
     'ember':     ('Ember',  {'through': 0, 'horn': 0, 'face': 0}),
-    'dust':      ('Dust',   {'bounce': 0}),
+    'dust':      ('Dust',   {'bounce': 0.35}),   # the sand's bounce, low: lifts the bottom wall, no white faces
     'acid_b':    ('Acid',   {'bounce': 0, 'throat': 0, 'low': 0, 'rim': 0.3}),
     'poison_g5': ('Poison', {'reflector': 0, 'bounce': 0, 'card': 0}),
     'ice':       ('Ice',    {'bounce': 0, 'back': 0, 'throat': 0}),
@@ -56,7 +56,7 @@ def main():
             json.dump(sh, open(shot, 'w'), indent=1)
         # horn A on its own M8 feet (base A and its light left out), direct light stopped at the horn
         cmd = [sys.executable, os.path.join(HERE, 'habitat.py'), shot, tint, '--out', out,
-               '--samples', str(max(a.samples, SAMPLES.get(n, 0))), '--scale', str(a.scale), '--stand', 'feet', '--sink', '0.006',
+               '--samples', str(max(a.samples, SAMPLES.get(n, 0))), '--scale', str(a.scale), '--stand', 'feet', '--sink', '0.012',
                '--horn-front'] + [x for k, v in lights.items() for x in ('--light', f'{k}={v}')] \
             + [x for k, v in SETS.get(n, {}).items() for x in ('--set', f'{k}={json.dumps(v)}')]
         with open(out.replace('.png', '.log'), 'w') as log:
