@@ -2428,3 +2428,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   in chat); the glance list (01 the base: Settled, "No light: on its own feet"; 03 the horn: Settled, "A, smooth, polished"; both
   "The new pictures are rendering"); the base section Settled with the owner's pick; the horn section with polished and the reason.
   The 29 review cards unchanged (they come up one at a time in the walkthrough).
+- 16:51 the deck (3sihYaT4ckNTF6WE7SWR7x, v68; source scratchpad/deck/project/slides/*.html, deck-remote/ from 06:03): words and pictures
+  to be updated together as v69 once the deck set (hero, row, cover, home, home portrait) lands and passes its gate, so the deck is
+  never half-updated; read the live artifact first.
