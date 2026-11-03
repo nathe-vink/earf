@@ -2516,3 +2516,23 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   matches C3 (base top 2.7 vs 4.7; spots 0/0; floor 6.1/4.8 vs 6.4/4.8; the platter foot 140; field 129; p10-p90 101-151). Cost
   unchanged (~+$145-175 over v3; $3,897 parts). README section 13, "C3's night gate".
 - 17:32 my gate on C3b night (C3 day, the C3 night with the line, and A night as comparisons) started.
+- 17:36 r43-listening v2 gate wf_cb9d3dc3-545 (3 critics, ~25 min; launched before the brief's polished edit, its meant line said
+  polished): SHOW 2/3 (the founder's-collaborator and the photographer SHOW; the skeptic HOLD with no test failed). The Ember cabinet
+  reads as see-into deep red acrylic on its own feet with an attached red shadow; the lit lining frame, the woofer, the bottom brace and
+  the see-through horn read; the cabinet's near-black share fell from 47 % to 22 % (cabinet mean 40 to 63; horn 29 to 44). Polish all
+  three named: the dark doorway still behind the horn and the cabinet's top; the floor pool's hard oval edge; a grey-pink sheen on the
+  upper third of the left side face. Small: a white crescent on the woofer, a white streak at the horn mouth's lower right, the
+  inside's top band and bottom brace clipping to salmon.
+- 17:37 c3: chunk 06 landed at 31e1ecfaea4ce65bdf9bd3d0bb74c150c3870e5f (site-front-off-tall acid, poison, ice, haze, fog; 16:43-17:35);
+  chunk 10 started 17:36. With ember and dust (c659ce9f85e25d8bd1d533dee4d1191c199b0f73) the front-off-tall set is complete in seven
+  tints (Smoke held). My contact sheet (scratchpad/rollout/tall/contact.jpg): all seven see-through on their own feet, polished horns,
+  the studio.
+- 17:39 check-in #46. Still running: the inventory merge (wf_314ae1f9-899), Smoke v2 (wf_99e55ef5-a1c), Fog (wf_edc8deda-9af), the
+  deck row and home portrait (wf_c88bd48e-6a2), C3b night (wf_62f13455-efb). Item 3 (the site's after-dark pictures) still open.
+- 17:41 my gate on the seven front-off-tall frames (wf_e8ed175c-b80; the Ice and Dust polished habitats as context; the tints' share of
+  light through the box's two walls given as a fact: Acid 75 %, Dust 45 %, Ice 41 %, Poison 17 %, Haze 11 %, Ember 10 %, Fog clear)
+  started.
+- 17:41 sent to the bar lane: after the r44-lantern polish and the r43 shop and window fixes, one polish pass on r43-listening (the
+  doorway cleared: the speaker a cabinet width right or the camera swung left, so the horn and the cabinet's top sit on the lit
+  plaster; the spot feathered, aimed higher, a little fill; the left face's sheen flagged off; the woofer crescent, the horn-mouth
+  streak and the clipped inside); a proxy, then the final; the full SHA and the path; v2 kept until the new one is gated.
