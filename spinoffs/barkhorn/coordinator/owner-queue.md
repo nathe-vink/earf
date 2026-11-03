@@ -1359,3 +1359,13 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   2064 white PASSES "only just" (at phone size close to a black box; little light reaches the white lining). The lane's read: 2064
   black. Seven habitats rendering, ~30 min each. My blind gate on the three (wf_cf9743bf-e44, speaker gate v2; sha256 2074-black
   7a70b256, 2064-black 75a3cc96, 2064-white b04904e5) started 10:10. The Smoke question waits until the base question is answered.
+- 10:10 speaker gate wf_4f6468e4-f67 (3 critics, 24 min): A (a47ae365) SHOW 3/3, every note passes (optional: soften one
+  sheen streak into the horn's upper-right corner; flag the light above so the lid reflects less white). B day 2/3 (show only
+  beside A). B night 4 and night 5 HOLD 3/3: the horn and top third pure black (59-69 % of pixels at 0; "a headless box in a
+  void"), a diffuse floor pool L 15-29 (test 3 fails), a violet slot and base line (LED cues), the woofer a black hole in a
+  glowing ring, night 5's brace strip a hard bar. All three: the plate doesn't earn its place; A is the better picture; the
+  reference's look comes from the room (a wall washed up in a V, a glossy floor reflection, low ambient so the horn reads), and
+  light from under the floor stops at the upper brace (physics).
+- 10:11 sent to the speaker lane: the set lessons for D night before it finishes (wall close behind, dark glossy floor, low
+  ambient, nothing at 0; no pool; emitter hidden, Ice hue; lantern not ring light; no hard bar; the fan on the wall). Smoke-D the
+  same. The base question likely becomes "built in (D) or no light (A)", with B shown as tried and failed, if D passes.
