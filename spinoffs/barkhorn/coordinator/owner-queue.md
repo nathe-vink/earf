@@ -3632,3 +3632,17 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 23:18 sent to c2: merge 69c8f11c (contains 5957b9f9, 95876493, a5736434, 732a8671) and rebuild both models. Then, on the speaker lane's
   edge-fix SHA (no rebuild), --only site-back --tag backfix, and --phase 2 --only amp-plate-ember,horn-back-acid --tag backfix, each
   list sent first. Hero-light held for the owner's bottom-edge answer.
+- 23:17 speaker lane (no new SHA; the head still 69c8f11c; this crossed my 23:18 message). THE WHITE FLOOR BAND is the cabinet's own
+  bottom panel. Hiding `bottom` takes the band from 203 px at >=240 to 26; hiding the feet, land-bottom, rib-bottom, the bottom lining or
+  the back seal does nothing. No lamp feeds it alone: every lamp that lights the floor beside the speaker brightens it (key alone 203 to
+  105). The panel's polished 3 mm rounded outer edge mirrors the bright floor at grazing incidence (Fresnel near total), plus floor
+  light piped into the panel. Real physics, not a link. It is the same cause as the side frames' bottom-edge line.
+  THE DECK RIGS: no band in the lane's proxies of the hero (its base ends dark into its contact shadow), the row (a near-level camera)
+  or the cover (15 m back), so no reason to stop them. The tall frames end dark; the room is on a dark floor.
+  THE FULL-HEIGHT WHITE STRIPE (wide) is `edge`: with edge off it's gone. The lane takes `edge` off in tall, wide, side and the hero.
+  shadow_on_set and scope_flag: no live rig uses either.
+  ITS FIX, to prove on wide Ember, side Ember and tall Poison: (1) edge off; (2) the band, by real means, two to test: (a) the key on a
+  honeycomb grid aimed above the floor, with the set lamps that light the floor near the speaker turned down; (b) the row's darker sweep
+  #BDB9B3 for the site studio too; (3) out-of-frame black cards for the dark tints (camera-right at floor level; overhead-front), each
+  through cards_out_of_frame. Numbers and a SHA to follow. (My 23:18 points stand: honest_lights to unlink spec-only area lamps in code,
+  and the A/B on the landed deck hero, which carries edge at 0.1 W.)
