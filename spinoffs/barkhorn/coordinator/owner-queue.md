@@ -1726,3 +1726,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   tumbleweed, --horn-front, 64 samples): contact luma 62-69 under the base vs 90+ around, no feet or gap showing; the lane's gate
   passed all four ("faint soft creases toward the corners, not a bold X"); the throat's dark halo is the driver through satin (the
   bounce doesn't reach it). Acid rendering. My gate wf_79a58c1c-eeb on Dust started 13:20.
+- 13:22 check-in #41. The base question has been with the owner since 12:52 (no light, my pick, or the lantern); no answer yet.
+  Running: the lamps round 7 gate (wf_286ca581-a1f, 2 of 3), Mantle g5 Ember pair (wf_9e88ad0b-a0f, 2 of 3), Ember v2 (wf_2956fd08-cfc)
+  and Dust v2 (wf_79a58c1c-eeb). Polished A not committed yet (BASES.md D+/E section at f0c41058, 12:53). Biomes: Acid rendering.
+  Re-armed for 14:11 (#42).
