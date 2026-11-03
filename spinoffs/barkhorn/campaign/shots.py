@@ -322,6 +322,15 @@ def deck_hero():
 SHOTS['deck-hero'] = deck_hero
 
 
+# the two open answers (the coordinator, 2026-11-03): the base (A, its own feet and no light; D, the lantern built in;
+# 'plinth', the lit plinth every shot so far has used) and the horn's outside (satin, the owner's spec; polished).
+# rollout.py sets them for a whole set; the default keeps every existing shot as it was rendered
+ROLLOUT = {'base': os.environ.get('TROPOS_BASE', 'plinth'), 'horn': os.environ.get('TROPOS_HORN', 'satin')}
+D_OPTIONS = ['Built-in light', 'Built-in floor', 'Floor film']
+# D's light as gate 3 passed it (gate2/D-night-ice-v2.png): the floor runs about 13 W/m, the brace 30 W/m, 4000 K
+D_GLOW = {'builtin-led': 450.0, 'builtin-led-brace': 1020.0}
+
+
 def strata_lit(s, glow=None, horn='smooth'):
     """Any shot's Tropos instances turned into the owner's final design, everything lifted onto the stepped plinth:
     since 2026-11-03 (the owner: "Horn: A, smooth, satin outside") the Cloud's formed horn, satin, on Strata's bronze
@@ -329,8 +338,9 @@ def strata_lit(s, glow=None, horn='smooth'):
     `horn='stepped'` gives Strata's stepped horn, the documented alternative. `glow` keeps the old shots' meaning: 20 (by
     day) leaves the uplight at its default 50 %, 40 (at dusk) runs it at full."""
     blk = s.pop('product') if 'product' in s else s.pop('products')[0]
-    lift = BASES['plinth'][1]
-    hidden = {'cloth-disc', 'woofer-ring', 'post-*', 'post-sockets', 'post-sleeves', 'feet-base', 'feet-stem'}
+    on_feet = ROLLOUT['base'] in ('A', 'D')            # the cabinet on its own swivel feet, no plinth
+    lift = 0.0 if on_feet else BASES['plinth'][1]
+    hidden = {'cloth-disc', 'woofer-ring', 'post-*', 'post-sockets', 'post-sleeves'} | (set() if on_feet else {'feet-base', 'feet-stem'})
     if horn == 'stepped':
         hidden |= set(HORN_PARTS) - {'horn-pads'}
     inst = []
@@ -339,11 +349,19 @@ def strata_lit(s, glow=None, horn='smooth'):
         inst.append({**i, 'position': [x, y, z + lift], 'hide': sorted(set(i.get('hide', [])) | hidden)})
     keep = lambda i: {k: v for k, v in i.items() if k not in ('hide', 'options')}
     vhide = ['horn-topo*', 'base-out*'] + (['horn-strata'] if horn == 'smooth' else [])
+    opts = {'A': [], 'D': D_OPTIONS}.get(ROLLOUT['base'], ['Plinth', 'Plinth uplight'])
     s['products'] = [{**blk, 'instances': inst},
                      {'def': VARIANTS, 'flavour': blk.get('flavour', 'cloud-red'),
-                      'instances': [{**keep(i), 'hide': vhide, 'options': ['Plinth', 'Plinth uplight']} for i in inst]}]
-    if glow is not None and glow >= 40:
-        s.setdefault('materials', {}).update({'uplight-edge': {'glow': 375.0}, 'uplight-panel': {'glow': 105.0}})
+                      'instances': [{**keep(i), 'hide': vhide, 'options': opts} for i in inst]}]
+    mats = s.setdefault('materials', {})
+    if ROLLOUT['base'] == 'plinth':
+        if glow is not None and glow >= 40:
+            mats.update({'uplight-edge': {'glow': 375.0}, 'uplight-panel': {'glow': 105.0}})
+    else:                                              # A has no light; D's is off by day (the owner: off in day frames)
+        night = glow is not None and glow >= 40 and ROLLOUT['base'] == 'D'
+        mats.update({k: {'glow': (v if night else 0.0)} for k, v in D_GLOW.items()})
+    if ROLLOUT['horn'] == 'polished':                  # the waveguide's outside as formed, not bead-blasted (asset/README.md)
+        mats['horn-satin'] = {**mats.get('horn-satin', {}), 'roughness': 0.05}
     return s
 
 

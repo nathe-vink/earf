@@ -209,6 +209,14 @@ def parts(P):
                             finish='brass', group='horn',
                             notes=['Strata: a turned bronze collar on the top plate at each post (ø28 x 8) and one under each pad '
                                    '(ø24 x 6), so the horn reads as mounted, not hovering']))
+    # the HF lead's last run, inside the pod (the coordinator, 2026-11-03: the polished horn shows what is inside it): up
+    # the cable post's 7 mm bore (rear post 2, product.rod_places), out through the horn's pad into the pod's floor and up
+    # the pod's back to the driver's terminals; the Cloud's lead-hf carries it inside the cabinet up to the gland
+    gx, gy, gtop = POSTS['at'][2]
+    pod_path = [(gx, gy, gtop - 12.0), (gx, gy, gtop + 14.0), (gx, gy + 9.0, 1032.0), (gx + 4.0, 376.0, 1072.0), (245.0, 381.0, 1094.0)]
+    out.append(product.Part('lead-hf-pod', product.tube_along(pod_path, 5.0), product.Bought('hf-pair'), finish='cable', group='horn',
+                            notes=['the HF lead from the cable post\'s bore up through the pad and the pod\'s floor to the driver\'s '
+                                   'terminals, clipped to the pod\'s back wall; seen through a polished horn (asset/README.md)']))
     from build123d import Compound as _C
     from build123d import Box
     layers, zp = plinth(PLINTH)
