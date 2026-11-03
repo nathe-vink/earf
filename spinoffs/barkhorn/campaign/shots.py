@@ -542,6 +542,19 @@ def _room_gate3(s):
             top = w['sill'] + w['size'][1]
             w['sill'] = 0.55
             w['size'] = [w['size'][0], round(top - 0.55, 3)]
+    # (the fix1 portrait's gate, 2026-11-03 21:28, HOLD 3/3: the lower ~40 % of both cabinets near-black (65 % of cabinet
+    # pixels under 20), the left unit's face toward the sideboard a beige mirror of the sunlit wall, the left horn's green
+    # on the wall running up to the right horn. Both sills come down, so the low sun reaches each cabinet from about a
+    # quarter of its height up, the bottom chambers still in shade: the window nearest the back wall to 0.35 (the left
+    # unit lit from about 0.22 m), the next to 0.75 (the right from about 0.26 m); the sun 3 deg round, so the green
+    # cast moves off the right horn; the left unit turned to -6 deg, its face toward the sideboard mirroring the room)
+    for w in s['set'].get('windows', []):
+        for along, sill in ((2.75, 0.25), (1.15, 0.6)):
+            if abs(w.get('along', 0) - along) < 1e-6:
+                top = w['sill'] + w['size'][1]
+                w['sill'] = sill
+                w['size'] = [w['size'][0], round(top - sill, 3)]
+    s['sun']['azimuth_deg'] = s['sun'].get('azimuth_deg', -68.0) - 3.0
     s['sun']['elevation_deg'] = 8.0
     s['render']['view'] = 'AgX'
     # (its proxy: AgX sits about half a stop under PBR Neutral, so -2/3 left the cabinets near black: -2/3 + 1/2)
@@ -550,7 +563,7 @@ def _room_gate3(s):
         for i in blk['instances']:
             x = i['position'][0]
             if x < 0:
-                i['rotate_z'] = 1.0
+                i["rotate_z"] = -14.0
             else:
                 i['rotate_z'] = -8.0
     return s
@@ -618,6 +631,8 @@ def site(frame, tint):
     _siteG_round1(s, frame, tint)
     if frame == 'hero-light':
         _siteH_round1(s)
+    if frame == 'back':
+        _siteB_round1(s)
     honest_lights(s)
     if frame in ('front-off-tall', 'front-off-wide', 'side') and 'back' in s['lights']:
         # (the honest rig's proxies, tall Ice and Ember: unlinked, the `back` lamp, behind the speaker and aimed through
@@ -814,6 +829,30 @@ def _floor_patch(s, z_lo=0.06, z_hi=0.42, margin=0.15):
     s['set'].setdefault('flags', []).append({'center_m': [round((min(xs) + max(xs)) / 2, 3), round((min(ys) + max(ys)) / 2, 3), 0.004],
                                              'size_m': [round(max(xs) - min(xs) + 2 * margin, 3), round(max(ys) - min(ys) + 2 * margin, 3)],
                                              'normal': [0.0, 0.0, 1.0], 'reflect_only': True, 'color': '#050505'})
+
+
+def _siteB_round1(s):
+    """The back set's gate (the coordinator's critics, 2026-11-03, HOLD 7/7). 1. The horn from behind clipped (Ember 54-93 %
+    at 250, pastel): `cab-back`, a 7 W/m2 lamp on the far side of the speaker that lit through the cabinet and the horn,
+    hidden from reflections at specular 0. Crop tests on Ember's horn, one lamp off at a time: the key, fill, wash and
+    plate strip change nothing; cab-back off, 53 % to 2 %, (206, 106, 104) to (163, 41, 37). Lowered to the cabinet on a
+    35 deg grid it still left 11 %; off, the cabinet loses 75 to 72. It goes, and so does `glow` (finals31's, dropped from
+    phase 2 for the same reason), and the horn's rim lamp comes down from 3.5 to 1.0. 2. The softbox patch on the back
+    panel's upper left was partly cab-back's reflection: its saturation 0.42 to 0.69 with it gone. 3. The lower face
+    toward the camera's left mirrored the floor: a reflect-only card on its mirror ray, out of frame."""
+    L = s['lights']
+    for k in ('glow', 'cab-back'):
+        if k in L:
+            L[k]['irradiance'] = 0.0
+    if 'horn-rim' in L:
+        L['horn-rim']['irradiance'] = 1.0
+    # (the patch's crop tests on Ember: the key turned to -70 or -40, or grown to 2.4 x 2.0, left it as it was; with
+    # `plate-strip` off, the small strip lamp beside the amp plate, it is gone: its reflection, not the key's. It goes;
+    # the plate has its own close-up)
+    if 'plate-strip' in L:
+        L['plate-strip']['irradiance'] = 0.0
+    _mirror_card(s)
+    return s
 
 
 def _siteH_round1(s):
