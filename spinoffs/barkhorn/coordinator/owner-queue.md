@@ -3489,3 +3489,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   the deck cover (phase-1 chunk 3, ~94 min) from 22:22; deck-home on 95876493 next. (My 22:23 correction crossed; nothing lost but 3.5 min.)
   Pending fix1 work, waiting on the floor-band diagnosis: chunk 2 (tall Ember, Dust), chunk 7 (side Ice, Haze, Fog), the Acid re-renders on
   732a8671 (tall, side; wide after the fix), and all seven wide frames after the fix.
+- 22:24 biomes lane: the 9097 fix applied (the habitats render from the speaker lane's Strata asset 0936e6d, so habitat.py gains `--split R
+  G B`, re-splitting each acrylic part's absorption while holding its luminous transmission through its own thickness: cabinet 20 mm,
+  horn 12.7 mm; habitats.py passes Acid (0.085, 0.10, 1.00); biomes/tints.py and tints.json to the same split, 77.6 % TT at 20 mm,
+  cabinet_deep #F1EE7F); the full SHA to follow. Queue: the Fog final (nearly done), the Haze and Acid proxies (sun 120, seated 3 mm, the sky
+  turned right, the new split), the Poison final, then the Acid and Haze finals. (Its stamp read 22:27 at a 22:24 queue time.)
