@@ -2872,3 +2872,13 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   as a design question (by night one pass through the Ice skin, by day two, so lighter and greener): two nights for the owner, (a) the
   cool-white opal liner and (b) a faint-blue liner within ~10 degrees of the day, each hue measured; minor, the dome's spill on the wall and
   cable, the bowl's shading. Core B gated when its night is done.
+- 19:02 speaker lane: the room fix holds on both frames (0.3 scale, 32 samples, exposure -1.37; only the window nearest the back wall at a
+  0.55 m sill, the others 0.9): portrait left front 14.8 to 27.3 (its middle 12.5 to 29.7), right unchanged 27.8, the bottoms in shade
+  (12 and 8); deck-home left 13.7 to 23.9, right 27.9, bottoms 11 and 9; both woofers read at phone size (both still under the studio row's
+  Poison at 48.6: a golden-hour room against a lit studio; more exposure would burn the wall). The sun through the left unit lays a
+  green-and-gold stripe on the sideboard; deck-home's visible window shows the lower sill. At aed49790bb02002de4f98cc4d93b68f8fe110322
+  (with the variants note). Its chunk 3 (the cover) is rendering; chunk 4 (deck-home) after.
+- 19:04 my look at the sill proof: both woofers read, the left cabinet's middle catches the sun, the bottoms in shade; the stripe is sun
+  through glass. Sent to c4, c3, c2: merge aed49790 (it contains c305795f) for all fix1 work; c4 runs fix1 chunk 2 in full (portrait, tall
+  ember, dust) after chunks 1 and 3. Sent to the speaker lane: the routing; if my 19:02 note came after the cover started, check one early
+  frame for the hero's two faults and stop it if it carries them.
