@@ -23,7 +23,7 @@ Never install CAD packages into the system Python.
 
     python3.11 -c "from PIL import Image, ImageDraw, ImageFont"
 
-If it fails, run `python3.11 -m pip install --user --ignore-installed pillow` (or re-run `studio/setup.sh`, which does it since this fix). Ubuntu's `python3-pil` is built for 3.12 only, so a bare `import PIL` passes and hides the failure.
+If it fails, run `python3.11 -m pip install --user --ignore-installed --no-deps pillow` (what worked on c2 and c4; numpy stays 1.26.4) (or re-run `studio/setup.sh`, which does it since this fix). Ubuntu's `python3-pil` is built for 3.12 only, so a bare `import PIL` passes and hides the failure.
 
 ## 3. The two render models (not in git; both are rebuilt from the code at your SHA)
 

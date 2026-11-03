@@ -45,8 +45,9 @@ fi
 # 3.11 Pillow in /usr/local, ahead of it, which pip would otherwise skip as already installed)
 if ! "$BPY_PY" -c "from PIL import Image, ImageDraw, ImageFont; import scipy" >/dev/null 2>&1; then
   log "pip install Pillow and SciPy on $BPY_PY (the renderer's finish and room31's pieces)"
-  "${BPIP[@]}" --ignore-installed "pillow"
+  "${BPIP[@]}" --user --ignore-installed --no-deps "pillow"     # the helpers' fix: numpy stays 1.x
   "${BPIP[@]}" "scipy>=1.11,<1.14" "numpy>=1.26,<2.0"
+  "$BPY_PY" -c "from PIL import Image, ImageDraw, ImageFont" || { log "Pillow still fails on $BPY_PY: see HELPERS.md"; exit 1; }
 fi
 
 # 3. The CAD venv.
