@@ -3443,3 +3443,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   as a design result for item 89.
 - 22:09 speaker lane: the room's fix announced with a PLACEHOLDER SHA (46f2f7aa..., not real; not to be used), the real one to follow; the
   message stamped "22:20 UTC" though it arrived at 22:09. Sent: no placeholder SHAs, only verified ones; `date -u` before any time.
+- 22:09 speaker lane (correction: the placeholder void, the time 22:09): THE ROOM at 95876493be7e44f51b3a847847485b2169698c31: the back window's
+  sill 0.55 to 0.25 and the next 0.9 to 0.6 (the low sun reaches each cabinet from ~0.11 m; the feet in shade); the sun 3 degrees round
+  (-68 to -71, the left horn's green off the right horn); the left unit turned +1 to -14 (its sideboard face mirrors the camera side). Proxies:
+  cabinet pixels under L 20 portrait 62/64 % to 39/45 %, deck-home 67/65 % to 35/49 %; lower-40 % green roughly doubled; the left face beige
+  (70,63,54) to dark green (15,18,8); the floor 61 to 80; the sideboard stripe now a green-gold band (sun through the left cabinet), a new
+  thin sun line on the floor; the right top chamber has no emitter (sunlit through the second window). Proofs deck-fix-proofs/
+  deck-home-portrait-sill-proof.png and deck-home-sill-proof.png. Next there: the 9097 tint fix.
+- 22:10 sent: c3, after the deck hero, the portrait re-rendered on 95876493 (fix1 chunk 2's portrait line); c4, after the cover, deck-home
+  (phase-1 chunk 4) on 95876493.
