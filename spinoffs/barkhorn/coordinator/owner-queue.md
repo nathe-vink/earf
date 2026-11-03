@@ -3462,7 +3462,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   bottom edge piping light?) and which rigs carry 1 and 2 (tall, side, row, hero, cover, room). Re-ordered the helpers: c4 after chunk 3
   skips chunk 2 and goes to the cover then deck-home; c2 after chunk 6 skips chunk 7 and goes to the row; c3 finishes chunk 5, then the
   hero and the portrait; any of them stopped if the deck rigs carry the fault.
-- 22:17 my look at the wide Ember base (scratchpad/fix1/wide-ember-base-2x.png): the band is the floor UNDER the cabinet lit bright (a
+- 22:15 my look at the wide Ember base (scratchpad/fix1/wide-ember-base-2x.png): the band is the floor UNDER the cabinet lit bright (a
   white rounded plate between and beyond the feet, a red fringe at the bottom panel), where every real lamp's shadow is darkest.
   Hypothesis sent to the speaker lane: a set-only lamp (pool, floor or d-floor) whose link also drops the speaker as a shadow caster; if so,
   allowance 1 gets a condition: a set-only lamp keeps the product as a blocker (it casts its shadow), as a flagged background light does.
+  (Time fix: that message to the speaker lane was stamped "22:17" but sent at 22:15; my error.)
