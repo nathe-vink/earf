@@ -135,7 +135,7 @@ def kit(p):
 body {{ font-size: 18px }}
 .facts, .facts dt, .facts dd, .spec dl, .spec dt, .spec dd {{ font-family: var(--spec-mono) }}
 .eyebrow, .num {{ letter-spacing: 0.02em; text-transform: none }}
-p.eyebrow {{ display: none }}
+p.eyebrow, .t-body .eyebrow {{ display: none }}
 .btn, .btn.solid {{ background: none !important; border: 0 !important; border-radius: 0 !important; padding: 0 !important; min-height: 44px;
   color: var(--ink) !important; font: 500 18px/1.3 var(--sans); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px }}
 .btn:hover {{ text-decoration-thickness: 2px }}
@@ -355,9 +355,12 @@ def pages(web):
     """Write the static addresses (V2 on), or take them away (V2 off)."""
     import os, html
     idx = os.path.join(web.SITE, 'index.html')
+    if not (web.V2 or web.HOME_V2) and os.path.isdir(os.path.join(web.IMG, 'v2')):
+        import shutil
+        shutil.rmtree(os.path.join(web.IMG, 'v2'))
     for path, (h, title, desc, img, alt) in addresses(web).items():
         f = os.path.join(web.SITE, path.strip('/') + '.html')
-        if not web.V2:
+        if not (web.V2 or web.HOME_V2):
             if os.path.exists(f):
                 os.remove(f)
             d = os.path.dirname(f)
@@ -390,10 +393,94 @@ def pages(web):
         open(f, 'w').write(page)
 
 
+def lighten(p, web):
+    """Phone weight: the home's JPEGs as WebP (img/v2/, made here, removed while V2 is off), the light stage's eight
+    with a 900 px copy for phones, the rest loaded as they come near. Only the hero is fetched first (web.py's own
+    preload already does that, by route)."""
+    import os
+    from PIL import Image
+    out_dir = os.path.join(web.IMG, 'v2')
+    os.makedirs(out_dir, exist_ok=True)
+
+    def webp_of(rel, width=None):
+        src = os.path.join(web.SITE, rel)
+        name = os.path.splitext(os.path.basename(rel))[0] + (f'-{width}' if width else '') + '.webp'
+        dst = os.path.join(out_dir, name)
+        if not os.path.exists(dst) or os.path.getmtime(dst) < os.path.getmtime(src):
+            im = Image.open(src).convert('RGB')
+            if width and im.width > width:
+                im = im.resize((width, round(im.height * width / im.width)), Image.LANCZOS)
+            im.save(dst, 'WEBP', quality=80, method=6)
+        return 'img/v2/' + name
+
+    a = p.rest.index('<main id="home">')
+    b = p.rest.index('</main>', a)
+    home = p.rest[a:b]
+    # the light stage's eight: a phone copy and the full one, both WebP, through data-srcset (later() sets it)
+    def reel(m):
+        rel = m.group(1)
+        return f'data-src="{webp_of(rel)}" data-srcset="{webp_of(rel, 900)} 900w, {webp_of(rel)} 1600w" sizes="100vw"'
+    home = re.sub(r'data-src="(img/[a-z]+-reel\.jpg)"', reel, home)
+    # every other JPEG on the home (not the hero's, which has its own WebP): its WebP twin
+    def twin(m):
+        rel = m.group(0)
+        return webp_of(rel) if os.path.exists(os.path.join(web.SITE, rel)) else rel
+    home = re.sub(r'img/(?!hero)[\w-]+\.jpg', twin, home)
+    p.rest = p.rest[:a] + home + p.rest[b:]
+    p.sub("const show_ = img => { if (img.dataset.src) { img.src = img.dataset.src; delete img.dataset.src; } };",
+          "const show_ = img => { if (img.dataset.srcset) { img.srcset = img.dataset.srcset; delete img.dataset.srcset; } "
+          "if (img.dataset.src) { img.src = img.dataset.src; delete img.dataset.src; } };")
+    # the coins' sprite is not needed where the tokens draw them; the lines' tiles wait until they are near
+    p.sub('<div class="lines"><a class="tile" href="#speakers"><img src=', '<div class="lines"><a class="tile" href="#speakers"><img decoding="async" src=')
+
+
+def home_v2(p, web):
+    """The audit's recommended home ("launch film"): one picture and at most one line a screen, in an order that builds:
+    the lineup, Sound, after dark, the world, at home, the lamps, Mantle, Studio, contact. The lines' tiles go. Mantle
+    is a screen of type until the new Mantle is rendered (never the superseded design)."""
+    order = ['top', 'sound', 'light', 'habitats', 'room', 'progress', 'contact']
+    parts = {sid: p.section(sid) for sid in order + ['lines']}
+    lamps = """
+  <section class="band beat" id="lamps-beat">
+    <div class="wrap"><h2><a href="#lighting">One hangs. One wanders.</a></h2></div>
+    <figure class="strip"><img src="img/lamps-domes-1200.jpg" srcset="img/lamps-domes-1200.jpg 1200w, img/lamps-domes.webp 2400w" sizes="100vw"
+      width="2400" height="800" loading="lazy" alt="Eight Hemisphere pendants hung in a row, lit, one in each color">
+      <img src="img/lamps-orbs-1200.jpg" srcset="img/lamps-orbs-1200.jpg 1200w, img/lamps-orbs.webp 2400w" sizes="100vw" width="2400" height="800"
+      loading="lazy" alt="Eight Core lamps in a row, lit, in spectrum order"><figcaption class="wrap">Hemisphere and Core. <i class="render">Render</i></figcaption></figure>
+  </section>"""
+    mantle = """
+  <section class="band beat type-only" id="mantle-beat"><div class="wrap">
+    <h2><a href="#turntable">Mantle.</a></h2><p>A turntable, lit from underneath. Pictures when the new one is drawn.</p>
+  </div></section>"""
+    i = p.rest.index('<main id="home">') + len('<main id="home">')
+    j = p.rest.index('</main>', i)
+    leftover = p.rest[i:j].strip()
+    assert not re.search(r'<section\b', leftover), ('site_v2: home has a section HOME_V2 does not place', leftover[:120])
+    body = ''.join(parts[s] for s in order[:5]) + lamps + mantle + ''.join(parts[s] for s in order[5:])
+    p.rest = p.rest[:i] + body + '\n' + leftover + '\n' + p.rest[j:]
+    p.css("""
+/* round 48 (HOME_V2): the launch film */
+.beat h2 a { color: inherit; text-decoration: none } .beat h2 a:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px }
+.strip { margin: 32px 0 0 } .strip img { display: block; width: 100%; height: auto } .strip figcaption { padding-top: 12px; color: var(--muted); font-size: 15px }
+.type-only { min-height: 60svh; display: grid; align-content: center } .type-only h2 { font-size: clamp(48px, 7vw, 104px) }
+.type-only p { color: var(--muted); max-width: 36ch }
+#sound, #habitats, #room, #lamps-beat, #mantle-beat, #progress, #contact { scroll-margin-top: var(--header) }
+""")
+
+
 def render_word(p):
-    """'Render', quietly, once per picture where a caption carries it; the room's caption has it (words()); the
-    footer says it once for the site."""
-    pass
+    """'Render', quietly, once per picture: the hero, Sound, the habitats and the room carry it in their captions
+    (above); here the light stage, the uplit eight and the lines' tiles. The footer says it once for the site."""
+    p.sub('<p class="light-kicker" aria-hidden="true">Put a light under it.</p>',
+          '<p class="light-kicker" aria-hidden="true">Put a light under it.</p><i class="render on-dark">Render</i>')
+    p.sub('<i class="snap-eight" aria-hidden="true"></i>', '<i class="snap-eight" aria-hidden="true"></i><i class="render on-dark eight-render">Render</i>')
+    for line in ('A powered horn loudspeaker.', 'A pendant and a table lamp.', 'A turntable, lit from underneath.'):
+        p.sub(f'<span class="t-line">{line}</span>', f'<span class="t-line">{line} <i class="render">Render</i></span>')
+    p.css("""
+.light-intro { display: flex; justify-content: space-between; align-items: baseline }
+.render.on-dark { color: #A39E95 }
+.eight-render { position: absolute; right: max(16px, calc((100vw - 1240px) / 2 + 16px)); bottom: 14px; z-index: 1 }
+""")
 
 
 # real addresses (the audit): each a static copy of the page that opens on its view, with its own title, description
@@ -417,7 +504,7 @@ def addresses(web):
 
 def apply(web, head, rest):
     p = Page(head, rest)
-    if web.V2:
+    if web.V2 or web.HOME_V2:                 # HOME_V2 is built on the fixes
         pairings(p)
         words(p)
         kit(p)
@@ -428,4 +515,8 @@ def apply(web, head, rest):
         sound(p, web)
         habitats(p, web)
         paths(p, web)
+        lighten(p, web)
+        render_word(p)
+    if web.HOME_V2:
+        home_v2(p, web)
     return p.done()

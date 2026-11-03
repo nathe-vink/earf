@@ -171,6 +171,31 @@ brand"). Not live: main needs the owner's yes.
   the home h1, the debut's and its preview title, on one line at every width: no-break spaces, nowrap, and a size that
   shrinks with the line's length (checked 320-2560 px for three lines of 17 to 34 characters).
 
+## Round 48: the site audit's no-regret fixes, held (2026-11-03, `r47-site-next`)
+
+The coordinator's five-reviewer audit (r46-owner-notes 3480947a, `coordinator/site-audit-2026-11-03/`) scored the home
+4.5-5 of 10. Its no-regret fixes are built in `site_v2.py` behind **`V2`** (off), and its recommended home order, the
+"launch film", behind **`HOME_V2`** (off; it implies the fixes). Off, `web.py` never calls `site_v2.py` and the page is
+byte for byte as before; on, every change is an asserted replacement, so a moved target fails the build.
+- **Words:** no eyebrows, explainers or "See the ..." links; Tropos, Lighting, Mantle (a turntable), Colors, Contact;
+  "Eight colors, Ember to Smoke." for the line; the build fails on colour, enquir, stockist, microfibre and the old lines.
+- **Hero:** one frame, the tagline in the picture's quiet top, the speakers each a link, "Hi-fi and lighting, designed in
+  San Francisco." and "Render" beneath. No pills, no legend.
+- **Light stage:** one full-bleed frame, name and line lower left, the coins lower right, a snap per color (8 x 20svh),
+  then the uplit eight at full height; reduced motion, no script and print get the eight with their names and lines.
+- **Sound** after the hero: Tropos turning (today's frames), "The oldest amplifier is a shape.", three design figures
+  (today's particulars until the speaker lane sends horn A's), footnoted and linked to the horn.
+- **Pairings:** a product page recommends only the other lines (the owner's rule), the same color first.
+- **Real addresses:** /tropos, /tropos/{color}, /lighting, /mantle, /colors/{color}, /contact, each with its own title and
+  card; old #addresses answer; in-page links don't reload. Slots: /studio, /journal, /press.
+- **Kit and tokens:** text links, the grotesk everywhere but the spec tables, square pictures, no chevrons, a warmer night
+  (#13110F); one color token set (`--c-<key>`, the brand marks), the palette once (the light stage).
+- **Habitats:** no carousel chrome, each captioned with its line and a count; Ember's and Dust's held back as CG.
+- **Phone weight:** WebP twins (`img/v2/`, made only while on), a 900 px copy of the light stage's eight; images after a full
+  scroll on a phone 3.2 MB to 1.8 MB. Mobile Lighthouse, home, median of 3: 95 (today), 95 (V2), 96 (HOME_V2).
+- **Held:** the journal and press kit (their home band and links go while on), any sign-up form, the founder's name.
+- Before and after at 1440 and 390: `launch/r48/`.
+
 ## Round 31: every picture final, the amplifier's plate as it is, and pictures for a launch (the owner's notes of 2026-10-18; in progress)
 
 | the owner's note | what changes |
