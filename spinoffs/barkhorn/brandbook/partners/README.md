@@ -1,7 +1,7 @@
 # Pitch packs: Klipsch, Ace Hotel Group, Pro-Ject
 
 Brand lane, r47 (2026-10-31). **Drafts only. Nobody is contacted, and nothing is sent before the debut**, per R9: "Pitch
-nobody before 19 Jan." Every date is counted from the debut, Tuesday 19 January 2027.
+nobody before" the debut. The debut's date is parked, so every step is counted from it.
 
 **Source:** R9, `r46-owner-notes` a9aa15d3, `spinoffs/barkhorn/research/2026-10-31/R9-strategic-partners.md`. Its
 ranking, proposals ("What EARF proposes"), precedents (sections A and C), deal ranges (D1–D5) and draft letters (F).
@@ -46,8 +46,8 @@ Counsel reviews every line before a pack is sent.
 
 > Dear Klipsch team,
 >
-> I'm [Your name], founder of EARF in San Francisco: hi-fi and light in cast acrylic, tinted all the way through, in
-> eight colors. [N] weeks ago, at our debut in FOG Design+Art week, the first pair of Tropos, our powered horn
+> I'm [Your name], founder of EARF in San Francisco: hi-fi and light in tinted cast acrylic, in
+> eight colors. [N] weeks ago, at our debut in San Francisco, the first pair of Tropos, our powered horn
 > loudspeaker, played for the first time.
 >
 > The kO-R1 and kO-R2 showed that a designer's edition built in Hope finds its audience. I'd like to propose one in our
@@ -78,9 +78,8 @@ Counsel reviews every line before a pack is sent.
 
 > Hello Atelier Ace,
 >
-> I'm [Your name], founder of EARF in San Francisco. We make hi-fi and light in cast acrylic, tinted all the way
-> through, in eight colors from Ember red to Smoke. We showed the first pieces working at our debut, [N] weeks ago, in
-> FOG Design+Art week.
+> I'm [Your name], founder of EARF in San Francisco. We make hi-fi and light in tinted cast acrylic, in eight
+> colors from Ember red to Smoke. We showed the first pieces working at our debut, [N] weeks ago, in San Francisco.
 >
 > Ace has long treated sound as part of the building, from Devon Turnbull's lobby system at Ace New York to the radio
 > Tivoli made for Ace Sydney. In that line, I'd like to propose an EARF listening corner for one Ace lobby: a numbered
@@ -111,7 +110,7 @@ the team.
 
 > Dear Mr Lichtenegger and the Pro-Ject team,
 >
-> I'm [Your name], founder of EARF in San Francisco: hi-fi and light in cast acrylic, tinted all the way through, in
+> I'm [Your name], founder of EARF in San Francisco: hi-fi and light in tinted cast acrylic, in
 > eight colors. At our debut [N] weeks ago we showed Mantle, our record player, whose plinth floats over a base lit
 > at its edge.
 >
@@ -140,8 +139,8 @@ the team.
 
 - **No earlier than the debut.**
   - Klipsch goes 1 to 4 weeks after it.
-  - Ace goes 2 to 5 weeks after (February).
-  - Pro-Ject goes 3 to 8 weeks after (February to March), for a meeting at Vienna, 6 to 9 May.
+  - Ace goes 2 to 5 weeks after.
+  - Pro-Ject goes 3 to 8 weeks after, for a meeting at Vienna, 6 to 9 May.
   - Milan is 13 to 18 April (Salone; R9).
 - **Photographs in, renders out** of every pack.
 - **Counsel** reads page 2 of each.

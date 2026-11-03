@@ -1,5 +1,8 @@
 # The spring sequence: two candidate debut dates
 
+> **Parked (2026-11-03).** The owner has parked all dates, so this sequence is a record, not a plan. Nothing here is
+> current until a date is set; the brand material now says "the debut". The horn below is now horn A, formed (not laminated).
+
 Brand lane, r47, 31 October 2026. **A plan, not a booking; nothing is sent, booked or signed.**
 
 **The owner chose C (2026-10-31): the debut moves to spring 2027.** Date and venue are the owner's next question

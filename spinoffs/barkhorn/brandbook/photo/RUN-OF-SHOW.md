@@ -1,4 +1,4 @@
-# The debut night: run-of-show (Tuesday 19 January 2027)
+# The debut night: run-of-show
 
 Brand lane, r47 (2026-10-31). **Drafts only. Nothing is booked, and nobody is contacted.**
 
@@ -11,16 +11,16 @@ Brand lane, r47 (2026-10-31). **Drafts only. Nothing is booked, and nobody is co
 
 About 120 guests, invitation only.
 
-> **One date to fix:** the lamps lane's lighting plan says the debut is on **21 January**. Every other file (the
-> invitation, the bar lane, the partner brief) says **Tuesday 19 January**. This run-of-show uses the 19th.
+> **The date is parked** (2026-11-03). The deadlines below count back from the night (D); the venue stays a slot,
+> [VENUE], with the Firehouse's rules as the planning case.
 
 ## The room's rules that shape the night (Firehouse; from DEBUT-ROOM.md)
 
 - **The event ends one hour before the contract ends.**
 - **Bar service ends 30 minutes before the event ends** (FMCAC's policy with the National Park Service).
-- Alcohol needs a **US Park Police permit through FMCAC, due 6 weeks ahead (by 8 December 2026)**. A zero-proof bar
+- Alcohol needs a **US Park Police permit through FMCAC, due 6 weeks ahead (D − 6 weeks)**. A zero-proof bar
   needs none.
-- The vendor list, floor plan and timeline are due **4 weeks ahead (by 22 December)**.
+- The vendor list, floor plan and timeline are due **4 weeks ahead (D − 4 weeks)**.
 - Insurance: $500k general liability for the renter; $1M liquor liability for the pourer.
 
 If the room is **Arader Galleries** instead, music ends at **10 pm**. The timings below already end the event by then.
@@ -43,12 +43,12 @@ everything to the contract the room gives.
 | **7:00** | **Seats for Session 00.** Guests seated in front of the pair; the doors held | Host | The house lights down to the Session level |
 | **7:05–7:50** | **Session 00:** one album, start to finish, recorded. No talking, no phones, no flash | Artist | Photographer silent (electronic shutter), from two fixed spots. Video locked off. List C |
 | 7:50 | Applause (recorded on its own tracks); doors open | | |
-| **7:55** | **A few words**, three minutes at most: thanks; the artist; partners by name; what comes next (the listening room planned for February and March; the Kickstarter in April; the Founding Hundred) | Owner | One bounced light for the face, nothing on the products. List D |
+| **7:55** | **A few words**, three minutes at most: thanks; the artist; partners by name; what comes next (the listening room planned after it; the Kickstarter; the Founding Hundred) | Owner | One bounced light for the face, nothing on the products. List D |
 | **8:00** | **Listening.** Tropos plays records. The coin buys a song: hand it over, and the record goes on the list | Selector or the owner | The room's main hour. List E |
 | **8:45** | **"Lights."** For ten minutes, every house light off: only the lamps, and the pair lit from below. Announced in one sentence ("for ten minutes, just the lamps") | Owner, the room's technician | The picture of the night: List F |
 | 8:55 | House back to 20–30% | | |
 | **9:30** | **Last call**; the bar closes | Bar | Firehouse policy |
-| **10:00** | **The event ends.** The coin is the souvenir; the invitation card's line ("a listening room follows in February and March") is said once more at the door | Door host | |
+| **10:00** | **The event ends.** The coin is the souvenir; the invitation card's line ("a listening room follows") is said once more at the door | Door host | |
 | 10:00–11:00 | Load out. Recorders' drives copied twice before anyone leaves | Crew, engineer | The Session's audio and the photographs are the night's two assets; neither leaves the room on one drive |
 
 ## The three lighting versions
@@ -64,10 +64,10 @@ everything to the contract the room gives.
 
 | By | What | Who |
 |---|---|---|
-| 7 Dec | Lighting version chosen (lamps lane) | Owner |
-| **8 Dec** | Alcohol permit through FMCAC (6 weeks), or the zero-proof decision | Owner, bar lane |
-| 18 Dec | Photographer, filmmaker and engineer confirmed (`PHOTOGRAPHERS.md`, `../sessions/`) | Owner |
-| 22 Dec | Vendor list, floor plan and timeline to FMCAC (4 weeks) | Bar lane |
-| 4 Jan | Invitations out, with the photography notice line | Brand |
-| 12 Jan | The shot list agreed with the photographer; releases printed | Owner, photographer |
-| 14 Jan | Everything run for an evening in the workshop (the lamps lane's plan) | All |
+| D − 6 weeks | Lighting version chosen (lamps lane) | Owner |
+| **D − 6 weeks** | Alcohol permit through FMCAC (6 weeks), or the zero-proof decision | Owner, bar lane |
+| D − 4½ weeks | Photographer, filmmaker and engineer confirmed (`PHOTOGRAPHERS.md`, `../sessions/`) | Owner |
+| D − 4 weeks | Vendor list, floor plan and timeline to FMCAC (4 weeks) | Bar lane |
+| D − 2 weeks | Invitations out, with the photography notice line | Brand |
+| D − 1 week | The shot list agreed with the photographer; releases printed | Owner, photographer |
+| D − 5 days | Everything run for an evening in the workshop (the lamps lane's plan) | All |

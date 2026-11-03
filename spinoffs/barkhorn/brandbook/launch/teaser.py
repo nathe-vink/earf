@@ -118,7 +118,6 @@ class Teaser:
         # the whole speaker, cover off; a slow push of 4% about its center keeps it whole on both crops
         im = cover(self.horn, self.W, self.H, 1.0 + 0.04 * ease(k), 0.5, 0.5)
         self.label(im, 'Tropos · the horn, formed from its own acrylic', dark=False, alpha=ease((t - 3.4) / 0.6))
-        self.line(im, 'The oldest amplifier is a shape.', t, 4.4, dark=False)
         return im
 
     def b_facade(self, t):
@@ -172,7 +171,7 @@ class Teaser:
         w = self.word_w; layer = Image.new('RGBA', im.size, (0, 0, 0, 0))
         layer.paste(w, (cx - w.width // 2, int(self.H * 0.55)), w)
         layer.putalpha(layer.getchannel('A').point(lambda v: int(v * a))); im.paste(layer, (0, 0), layer)
-        self.text(im, (cx, int(self.H * 0.66)), 'Tuesday 19 January 2027', self.f_mid, NIGHT_INK, ease((t - 22.3) / 0.6), 'ma')
+        self.text(im, (cx, int(self.H * 0.66)), 'Spring 2027', self.f_mid, NIGHT_INK, ease((t - 22.3) / 0.6), 'ma')
         self.text(im, (cx, int(self.H * 0.66) + int(78 * self.u)), '[VENUE], SAN FRANCISCO  ·  EARF.WORLD', self.f_mono, MUTED, ease((t - 22.6) / 0.6), 'ma')
         self.text(im, (cx, self.H - int(60 * self.u)), 'EVERY PICTURE IS A RENDER  ·  ON THE NIGHT, THE REAL THING', self.f_mono, (110, 103, 94), ease((t - 23.0) / 0.6), 'ma')
         if t > 24.4:

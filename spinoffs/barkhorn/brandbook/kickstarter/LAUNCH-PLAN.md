@@ -1,13 +1,13 @@
 # The launch plan: the waitlist sequence and launch week
 
-Brand lane, r47 (2026-10-31). **Drafts only. No list exists and nothing is sent.** The dates assume a launch on
-**Tuesday 27 April 2027** (`README.md`). Every email ends:
+Brand lane, r47 (2026-10-31). **Drafts only. No list exists and nothing is sent.** The debut's date is parked, so the launch
+is a slot, **[LAUNCH DATE]**, and every step counts from it (L; `README.md`). Every email ends:
 
 > EARF · earf.world · [contact line] · [unsubscribe]
 
 ## Where the waitlist comes from (est.)
 
-- the debut night (19 January), on the cards at the door;
+- the debut night, on the cards at the door;
 - earf.world's sign-up;
 - the Kickstarter pre-launch page's followers;
 - Milan Design Week (12–18 April), in person.
@@ -15,40 +15,40 @@ Brand lane, r47 (2026-10-31). **Drafts only. No list exists and nothing is sent.
 The goal needs about 110 backers. Kickstarter's figure is that **32% of pre-launch followers pledge**
 (`README.md` §1). A waitlist converts at a rate of its own, unknown until it's measured. Planning figures (est.):
 - at least **350 followers on Kickstarter**;
-- **1,000 addresses** on the list by 26 April.
+- **1,000 addresses** on the list by the day before launch.
 
 ## The six emails
 
 ### 1. Welcome: the day someone signs up
 
 **Subject:** You're on the list
-**Preview:** Two lamps, eight colors, and a date in April.
+**Preview:** Two lamps, eight colors, and a date.
 
 > Thank you for signing up.
 >
-> EARF makes hi-fi and light in cast acrylic, tinted all the way through. This spring we're making our first run of
+> EARF makes hi-fi and light in tinted cast acrylic. This spring we're making our first run of
 > two lamps: Core, a table lamp that goes where you go, and Hemisphere, a pendant that changes color with a quarter
-> turn. They open on Kickstarter on Tuesday 27 April.
+> turn. They open on Kickstarter on [LAUNCH DATE].
 >
 > We'll write about five more times before then, and not again unless you ask. The first people in get the early-bird
 > price.
 >
 > [Button: Follow the project on Kickstarter]
 
-### 2. The making: about six weeks out (Tuesday 16 March)
+### 2. The making: about six weeks out (L − 6 weeks)
 
 **Subject:** How a shade is made
 **Preview:** Over a mold, by hand, three layers deep.
 
 > Hemisphere's shade is three layers of cast acrylic: a tinted shell, a frosted layer, and a tinted skin. Each is
 > formed from a flat sheet over an aluminum mold, then trimmed, bonded and polished. [Photograph: the shell coming
-> off its mold. *Prototype, February 2027.*]
+> off its mold. *Prototype.*]
 >
 > It takes [time, measured] a shade. That's why there's a run, and why it's made to order.
 >
 > [Button: See the pre-launch page]
 
-### 3. The colors: four weeks out (Tuesday 30 March)
+### 3. The colors: four weeks out (L − 4 weeks)
 
 **Subject:** Eight colors, one of them yours
 **Preview:** Ember to Smoke, cast, lit from behind.
@@ -59,7 +59,7 @@ The goal needs about 110 backers. Kickstarter's figure is that **32% of pre-laun
 >
 > Reply with the one you'd choose. We'll tell you how the list voted.
 
-### 4. The tests: two weeks out (Tuesday 13 April, Milan week)
+### 4. The tests: two weeks out (L − 2 weeks)
 
 **Subject:** We left it on for four hours
 **Preview:** And then in a hot room. The numbers.
@@ -68,14 +68,14 @@ The goal needs about 110 backers. Kickstarter's figure is that **32% of pre-laun
 > stayed at [MEASURED] °C, against our mark of 50. Core ran for [MEASURED] hours on its cells at full brightness.
 > All the tests, the marks and the figures are on the campaign page from the 27th.
 >
-> We're in Milan this week. [If you're there: where to find us.]
+> [If at Milan Design Week that week: where to find us.]
 
-### 5. The prices: the Friday before (Friday 23 April)
+### 5. The prices: the Friday before (L − 4 days)
 
 **Subject:** Tuesday at 9 am Pacific
 **Preview:** The early-bird prices, and how many there are.
 
-> We open on Tuesday 27 April at 9 am Pacific.
+> We open on [LAUNCH DATE] at 9 am Pacific.
 >
 > | | Early bird | Then | After the campaign |
 > |---|---|---|---|
@@ -87,7 +87,7 @@ The goal needs about 110 backers. Kickstarter's figure is that **32% of pre-laun
 >
 > [Button: Follow, to be told the minute it opens]
 
-### 6. Launch: Tuesday 27 April, 9 am Pacific
+### 6. Launch: [LAUNCH DATE], 9 am Pacific
 
 **Subject:** Open now
 **Preview:** Core and Hemisphere, on Kickstarter.
@@ -106,14 +106,14 @@ a project's visibility on Kickstarter, and backers back what others back (est., 
 
 | Day | Morning (Pacific) | Afternoon | Evening |
 |---|---|---|---|
-| **Mon 26 Apr** | Final check: rewards, limits, shipping, Pledge Over Time, late pledges on, the film, every caption reads *Prototype*, *Drawing* or *Sample* | Pre-written updates loaded as drafts | Early night |
-| **Tue 27 Apr, launch** | **9:00** launch. 9:05 email 6. 9:15 personal notes to the debut night's guests and the Founding Hundred's list (written in advance, sent one by one) | Answer every comment within the hour. Post on EARF's own channels: the A1 frame | A first update: thanks, and the count of tints chosen so far |
-| **Wed 28 Apr** | Press: the embargoed outlets from `../launch/MEDIA-PLAN.md` that agreed to cover the launch publish | Answer comments; fix anything unclear on the page | |
-| **Thu 29 Apr** | Hi-fi press and Core77, with the tests table | The partners from the debut (`../money/PARTNERS.md`) share it, if they offered | Update: the making, with a photograph from the bench |
-| **Fri 30 Apr** | If the early birds are gone, email the list that they are | | A Session in the studio, if Tropos plays: one album, six listeners, a few photographs |
-| **Sat 1 – Sun 2 May** | Quiet. Comments only | | |
-| **Mon 3 May** | Week one review: pledges against goal, by tier and by tint; which link brought whom | Adjust ads (`ECONOMICS.md`: $4,000 in all), only toward pages that convert | |
-| **6–9 May** | **High End, Vienna**: the lamps and the campaign at the stand, if the Start-Up Area application is accepted | | |
+| **L − 1** | Final check: rewards, limits, shipping, Pledge Over Time, late pledges on, the film, every caption reads *Prototype*, *Drawing* or *Sample* | Pre-written updates loaded as drafts | Early night |
+| **L, launch** | **9:00** launch. 9:05 email 6. 9:15 personal notes to the debut night's guests and the Founding Hundred's list (written in advance, sent one by one) | Answer every comment within the hour. Post on EARF's own channels: the A1 frame | A first update: thanks, and the count of tints chosen so far |
+| **L + 1** | Press: the embargoed outlets from `../launch/MEDIA-PLAN.md` that agreed to cover the launch publish | Answer comments; fix anything unclear on the page | |
+| **L + 2** | Hi-fi press and Core77, with the tests table | The partners from the debut (`../money/PARTNERS.md`) share it, if they offered | Update: the making, with a photograph from the bench |
+| **L + 3** | If the early birds are gone, email the list that they are | | A Session in the studio, if Tropos plays: one album, six listeners, a few photographs |
+| **L + 4 to L + 5** | Quiet. Comments only | | |
+| **L + 6** | Week one review: pledges against goal, by tier and by tint; which link brought whom | Adjust ads (`ECONOMICS.md`: $4,000 in all), only toward pages that convert | |
+| **6–9 May (the fair's own dates)** | **High End, Vienna**, if it falls in the campaign: the lamps and the campaign at the stand, if the Start-Up Area application is accepted | | |
 
 **Rules for the month:**
 - **Every update has a photograph of something real.** No renders, even in updates.

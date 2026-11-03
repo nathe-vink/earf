@@ -24,11 +24,11 @@ Dear Alex,
 I'd like to apply for a place in the Start-Up Area at HIGH END 2027 in Vienna.
 
 EARF is a young company in San Francisco, registered on [date of registration] as [legal form and name]. We make hi-fi and
-lighting in cast acrylic, tinted all the way through, in eight colors. Our first product is Tropos, a powered two-way
-horn loudspeaker: a 2-inch compression driver on a horn built from the same tinted acrylic as its 20 mm cabinet, a
+lighting in tinted cast acrylic, in eight colors. Our first product is Tropos, a powered two-way
+horn loudspeaker: a 2-inch compression driver on a horn formed from one 10 mm sheet in the color of its 20 mm cabinet, a
 15-inch woofer, and a Hypex FusionAmp built in. Mantle, a record player in the same acrylic, would stand beside it.
 
-The first pair is built in January and opens a listening room in San Francisco on 19 January 2027. By May it will have
+The first pair is built this winter and opens a listening room in San Francisco at its debut, in spring 2027. By May it will have
 been measured, and Vienna would be its first showing in Europe and its first in front of the hi-fi trade.
 
 Attached, as the Start-Up page asks: a copy of our business registration, and [documents showing the legal form and

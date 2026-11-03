@@ -19,22 +19,22 @@ colors, prices, lead time) should be ready to follow the first reply (R2 §4.7).
 ## 1. Marta, Los Angeles
 
 **To:** information@marta.la
-**Subject:** An invitation for FOG week, and an edition in eight colors
+**Subject:** An invitation to our debut, and an edition in eight colors
 
 Dear [Name / the Marta team],
 
 Marta's way of making room for objects that experiment with what design is for is the reason I'm writing to you first.
 
-I'm [Your name], and I make EARF in San Francisco: a horn loudspeaker, two lamps and a record player in cast acrylic,
-tinted all the way through, in eight colors from Ember to Smoke. On Tuesday 19 January, two days before FOG opens, the
+I'm [Your name], and I make EARF in San Francisco: a horn loudspeaker, two lamps and a record player in tinted cast
+acrylic, in eight colors from Ember to Smoke. On [DATE] the
 first pair of the loudspeaker plays for the first time, at a debut night in San Francisco.
 I would love you to be there.
 
 I'd also like to propose something for Marta: an edition of the pendant, Hemisphere, made larger than the production
-lamp, eight pieces, one in each color, with two artist's proofs. Lit, each one is the color of its acrylic all the way
-through; off, it's a polished stone of that color.
+lamp, eight pieces, one in each color, with two artist's proofs. Lit, each one glows in the color of its acrylic; off,
+it's a polished stone of that color.
 
-I'll be in the room all of FOG week. Could we find half an hour, there or at the fair?
+I'll be in the room that week. Could we find half an hour, there or at the gallery?
 
 With best wishes,
 [Your name]
@@ -45,20 +45,20 @@ EARF · earf.world · [contact line]
 ## 2. Patrick Parrish Studio, Brooklyn
 
 **To:** info@patrickparrish.com
-**Subject:** A listening room in FOG week, and a lamp in an edition of eight
+**Subject:** A listening room in San Francisco, and a lamp in an edition of eight
 
 Dear [Name / the studio],
 
 The artist-made lighting you show is the company I'd most like these pieces to keep.
 
-I'm [Your name]. I make EARF in San Francisco: hi-fi and light in cast acrylic, colored through, in eight tints. The
-first pair of our horn loudspeaker plays for the first time on Tuesday 19 January, at a debut night in the city, two days before FOG. I'd be glad to have you there, before or after a day at the fair.
+I'm [Your name]. I make EARF in San Francisco: hi-fi and light in tinted cast acrylic, in eight colors. The
+first pair of our horn loudspeaker plays for the first time on [DATE], at a debut night in the city. I'd be glad to have you there.
 
 What I'd like to propose is an edition of Hemisphere, our pendant: a larger form than the production lamp, eight
 pieces, one in each color, with two artist's proofs, each numbered and signed. I can send drawings and pictures now, and
 the first finished piece is [date].
 
-Would you have half an hour in FOG week?
+Would you have half an hour that week?
 
 With best wishes,
 [Your name]
@@ -69,23 +69,23 @@ EARF · earf.world · [contact line]
 ## 3. Hostler Burrows, New York and Los Angeles
 
 **To:** la@hostlerburrows.com (copy info@hostlerburrows.com)
-**Subject:** Tinted acrylic in eight colors: an invitation for FOG week
+**Subject:** Tinted acrylic in eight colors: an invitation
 
 Dear [Name / the gallery],
 
 Your program of Nordic and contemporary design, and of material handled with care, is close to what I'm trying to do
 in a material most people overlook.
 
-I'm [Your name], and I make EARF in San Francisco: a horn loudspeaker, lamps and a record player in cast acrylic, tinted
-all the way through. Twenty millimeters of it carries light to its edges and shows what's inside, so nothing is painted
-and nothing hidden. On Tuesday 19 January the first pair of the loudspeaker plays for the first time, at a debut night
-in the week of FOG. I'd be very glad to see you there.
+I'm [Your name], and I make EARF in San Francisco: a horn loudspeaker, lamps and a record player in tinted cast
+acrylic. Twenty millimeters of it carries light to its edges and shows what's inside, so nothing is painted
+and nothing hidden. On [DATE] the first pair of the loudspeaker plays for the first time, at a debut night
+in San Francisco. I'd be very glad to see you there.
 
 I'd also like to propose an edition: the pendant, Hemisphere, larger than its production form, eight pieces, one in each
 of the eight colors, plus two artist's proofs; and, if it interests you, a single unique pair of the loudspeaker in a
 colorway made only once.
 
-Could we talk during FOG week?
+Could we talk that week?
 
 With best wishes,
 [Your name]
@@ -96,22 +96,21 @@ EARF · earf.world · [contact line]
 ## 4. Gallery FUMI, London
 
 **To:** info@galleryfumi.com
-**Subject:** Cast acrylic, colored through: an invitation, and an edition
+**Subject:** Tinted cast acrylic: an invitation, and an edition
 
 Dear [Name / Gallery FUMI],
 
 Your designers' work with resin and cast material is why I'm writing: what I make is cast too, and the casting is the
 point.
 
-I'm [Your name]. EARF, in San Francisco, makes hi-fi and light in cast acrylic tinted all the way through, in eight
-colors. The first pair of our horn loudspeaker, its horn built from the same tinted sheet as its cabinet, plays for
-the first time on Tuesday 19 January, at a debut night in FOG week. If you are in San Francisco
-for the fair, I'd love you to come.
+I'm [Your name]. EARF, in San Francisco, makes hi-fi and light in tinted cast acrylic, in eight
+colors. The first pair of our horn loudspeaker, its horn formed from a sheet of the cabinet's own color, plays for
+the first time on [DATE], at a debut night in San Francisco. If you are in the city, I'd love you to come.
 
 I'd like to propose an edition for FUMI: the pendant, Hemisphere, at a larger scale, eight pieces, one per color, with
 two artist's proofs. I can send drawings, the colors and the first pictures.
 
-Would a call before the fair, or a coffee during it, suit you?
+Would a call, or a coffee in San Francisco, suit you?
 
 With best wishes,
 [Your name]
@@ -122,21 +121,21 @@ EARF · earf.world · [contact line]
 ## 5. Galerie Maria Wettergren, Paris
 
 **To:** info@mariawettergren.com
-**Subject:** Light and sound in tinted acrylic: an invitation for FOG week
+**Subject:** Light and sound in tinted acrylic: an invitation
 
 Dear [Name / the gallery],
 
 The strand of your program where light and technology meet craft is exactly where these pieces belong.
 
-I'm [Your name], and I make EARF in San Francisco: a horn loudspeaker, two lamps and a record player in cast acrylic,
-colored all the way through, in eight tints. A lamp underneath one of the loudspeakers fills the whole cabinet with
-color; the pendant is the same acrylic lit from within. On Tuesday 19 January the first pair plays for the first time,
-at a debut night in the week of FOG. I'd be glad to welcome you.
+I'm [Your name], and I make EARF in San Francisco: a horn loudspeaker, two lamps and a record player in tinted cast
+acrylic, in eight colors. A light from below shines up through each loudspeaker and fills the whole cabinet with
+color; the pendant is the same acrylic lit from within. On [DATE] the first pair plays for the first time,
+at a debut night in San Francisco. I'd be glad to welcome you.
 
 I'd like to propose an edition: Hemisphere at a larger scale, eight pieces, one in each color, with two artist's proofs;
 or, for a collector of sound, a unique pair of the loudspeaker in a single colorway.
 
-Would you have time to talk, before the fair or during it?
+Would you have time to talk in the next few weeks?
 
 With best wishes,
 [Your name]
@@ -147,15 +146,15 @@ EARF · earf.world · [contact line]
 ## 6. The Future Perfect, San Francisco
 
 **To:** the "Inquire" form at thefutureperfect.com/contact (no public email for the showroom)
-**Subject:** A neighbor's invitation: 19 January, and the eight colors
+**Subject:** A neighbor's invitation: our debut, and the eight colors
 
 Dear [Name / the team at Sacramento Street],
 
 You're the gallery in San Francisco I'd most like to see these pieces in, so I wanted you to hear about them first.
 
-I'm [Your name], and I make EARF here in the city: hi-fi and light in cast acrylic, tinted all the way through, in
-eight colors. On Tuesday 19 January the first pair of our horn loudspeaker plays for the first time, at a debut
-night in the week of FOG. Please come.
+I'm [Your name], and I make EARF here in the city: hi-fi and light in tinted cast acrylic, in
+eight colors. On [DATE] the first pair of our horn loudspeaker plays for the first time, at a debut
+night here in the city. Please come.
 
 I'd like to propose two things: Hemisphere, our pendant, in an edition of eight, one in each color, with two artist's
 proofs; and the production lamps, Hemisphere and Core, in your room in whichever colors suit it.

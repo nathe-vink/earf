@@ -32,7 +32,7 @@ p { margin: 0; font-size: 8.5pt; line-height: 1.4 } ul { margin: 0; padding-left
 p:first-of-type { font-family: 'IBM Plex Mono', monospace; font-size: 7.5pt; letter-spacing: .08em; text-transform: uppercase; color: #A8321F }
 .strip { position: absolute; left: 0; right: 0; bottom: 0; height: 5px; display: flex } .strip i { flex: 1 }
 .draft { position: absolute; right: .6in; bottom: .18in; font-family: 'IBM Plex Mono', monospace; font-size: 6.5pt; letter-spacing: .1em; color: #5E5A53; text-transform: uppercase }"""
-doc = (f'<!doctype html><meta charset="utf-8"><title>EARF · Release, March 2027 (draft)</title><style>{css}</style>'
+doc = (f'<!doctype html><meta charset="utf-8"><title>EARF · Release, spring 2027 (draft)</title><style>{css}</style>'
        f'<section class="page"><div class="top"><img src="../../brand/mark/earf-wordmark-black.svg" alt="EARF"><span class="k">Press release · draft · not for distribution</span></div>'
        f'{"".join(out)}<span class="draft">Draft 2026-10-31 · brackets and [COUNSEL] lines resolved before release</span><div class="strip">{strip}</div></section>')
 open('release-march.html', 'w').write(doc)

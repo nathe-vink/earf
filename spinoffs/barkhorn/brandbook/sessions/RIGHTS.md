@@ -9,7 +9,7 @@ a question, not a conclusion.
 | Term | Proposed | Why |
 |---|---|---|
 | **Parties** | EARF ([entity, once formed]) and [Artist] (and each performer on the night) | Every performer signs, or the leader signs with authority for the band. **[COUNSEL]** confirm what a side-musician's release needs |
-| **The performance** | One set on Tuesday 19 January 2027 at the EARF debut, [venue]: one album's worth of material, 35 to 50 minutes, played start to finish, before a seated audience | The Session's format: one album, start to finish |
+| **The performance** | One set at the EARF debut, [DATE], [VENUE]: one album's worth of material, 35 to 50 minutes, played start to finish, before a seated audience | The Session's format: one album, start to finish |
 | **The recording** | EARF records the performance (multitrack and room) at its cost, with an engineer it hires | EARF carries the cost and the risk of a recording that may not be released |
 | **Who owns the master** | **The artist keeps ownership of the master recording.** EARF gets an **exclusive license** to make and sell it on vinyl and as a download with each LP, for [5] years, worldwide | Artist-friendly and easy to agree; most candidates release their own records. EARF needs only the edition, not the catalog. **[COUNSEL]** the alternative, EARF owning the master, is the usual label deal and costs more goodwill than it's worth here |
 | **The edition** | 300 LPs, numbered, 180 g, in a tinted vinyl; a second pressing of up to [200] only with the artist's written consent | Scarcity is the product; the artist controls any repress |
@@ -20,7 +20,7 @@ a question, not a conclusion.
 | **The artist's share** | **Option A (recommended):** 50% of net receipts after EARF recoups the record's costs (recording, mixing, mastering, pressing, jackets, mechanicals), accounted every six months. **Option B:** a fixed royalty of $[6] for each LP sold, from the first copy, no recoupment | 50/50 of net profit is the common independent arrangement ([Performer Mag](https://performermag.com/band-management/independent-labels-whats-the-deal/); [MusicNSW](https://www.musicnsw.com/resources/labels-distribution-diy-releases-explained)). Option B is simpler and pays sooner, and suits an edition this small. **[COUNSEL]** under a 50/50 split, mechanicals on the artist's own songs are usually waived or folded in; say which |
 | **Artist's copies** | 25 LPs free; more at EARF's cost, to sell at their shows | Standard courtesy; it's also the artist's merch |
 | **Names and likeness** | Each party may use the other's name; the artist approves photographs of themself and the jacket's credits | |
-| **Credits** | "Recorded live at the EARF debut, San Francisco, 19 January 2027". Add "through the first Tropos pair" **only if the artist's sound actually went through the pair** (see `README.md`, The format) | The claim has to be true |
+| **Credits** | "Recorded live at the EARF debut, San Francisco, [DATE]". Add "through the first Tropos pair" **only if the artist's sound actually went through the pair** (see `README.md`, The format) | The claim has to be true |
 | **The audience** | A sign at the door and a line on the invitation: the Session is recorded and filmed | **[COUNSEL]** whether this is enough consent for a seated, identifiable audience in film |
 | **Unions** | If any performer is an AFM member, check what the union requires for a recording made for sale | **[COUNSEL]** |
 | **Law, term, notice** | California law; [5] years, and the license ends early if EARF hasn't released the LP within [12] months | The artist gets the recording back if EARF doesn't use it |
@@ -55,7 +55,7 @@ needs a mechanical license, at the statutory rate or by direct agreement.
   | One 14-minute ambient piece | 14 × $0.0252 × 300 | $106 | $16 | **$122** |
 
 - **When.** Licenses must be in place **before the records are made**, so they're obtained between the night and the
-  master going to the plant (February).
+  master going to the plant (about four weeks after the debut).
 
 ## 3. Also to clear
 

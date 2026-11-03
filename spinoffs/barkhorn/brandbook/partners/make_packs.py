@@ -44,10 +44,10 @@ td:first-child { font-weight: 600; width: 24% }
 .strip { position: absolute; left: 0; right: 0; bottom: 0; height: 5px; display: flex } .strip i { flex: 1 }
 """
 
-EARF_IS = ("EARF makes hi-fi and light in San Francisco, in cast acrylic tinted all the way through, in eight colors "
+EARF_IS = ("EARF makes hi-fi and light in San Francisco, in tinted cast acrylic, in eight colors "
            "from Ember to Smoke. Tropos is a powered horn loudspeaker; Mantle, a record player whose plinth floats over "
            "a base lit at its edge; Hemisphere, a pendant; Core, a cordless table lamp. The first pair of Tropos played "
-           "for the first time at our debut in San Francisco on 19 January 2027, in FOG Design+Art week.")
+           "for the first time at our debut in San Francisco, [DATE].")
 
 PACKS = [
     dict(slug='klipsch', who='Klipsch', file='earf-pitch-klipsch',
@@ -79,10 +79,10 @@ PACKS = [
                          "months."),
                 ("Prices", "A suggested retail price only: a licensor can’t set resale prices in California."),
                 ("Reports", "Quarterly statements, about three months in arrears; audit rights.")],
-         when=[("The debut, 19 January", "The first pair plays; photographed and filmed"),
+         when=[("The debut", "The first pair plays; photographed and filmed"),
                ("1–4 weeks after", "This letter, with the photographs and a short listening video"),
-               ("About 12 weeks after", "A meeting at Milan Design Week, 13–18 April, where the kO-R2 launched"),
-               ("About 16 weeks after", "HIGH END, Vienna, 6–9 May: the pair measured and heard"),
+               ("Spring 2027", "A meeting at Milan Design Week, where the kO-R2 launched"),
+               ("May 2027", "HIGH END, Vienna, 6–9 May: the pair measured and heard"),
                ("Then", "If both want it: design and tooling, about 12–18 months to an edition")],
          route='pr@klipsch.com (its press office), asking for the note to be passed to product partnerships'),
     dict(slug='ace', who='Ace Hotel Group', file='earf-pitch-ace-hotel',
@@ -112,9 +112,9 @@ PACKS = [
                 ("IP", "EARF keeps the design; a credit line such as “The Listening Corner by EARF”."),
                 ("Care", "Insurance and liability for loaned equipment in a public lobby; a service contract if bought."),
                 ("Prices", "A suggested retail price for the shop only: no resale price set (California).")],
-         when=[("The debut, 19 January", "The pieces seen working, photographed"),
-               ("2–5 weeks after", "This letter, with the photographs (February)"),
-               ("About 12 weeks after", "A meeting in Milan, 13–18 April, or at the property"),
+         when=[("The debut", "The pieces seen working, photographed"),
+               ("2–5 weeks after", "This letter, with the photographs"),
+               ("Spring 2027", "A meeting in Milan, at Design Week, or at the property"),
                ("Mid-2027", "The residency opens, in a city Ace chooses"),
                ("With the Core run", "The Ace edition of Core, numbered (est. fall 2027)")],
          route='business@acehotel.com (Atelier Ace business inquiries); press@acehotel.com in copy'),
@@ -145,9 +145,9 @@ PACKS = [
                          "production stops."),
                 ("Prices", "A suggested retail price only; channel terms, not resale prices (California)."),
                 ("Reports", "Quarterly statements; audit rights.")],
-         when=[("The debut, 19 January", "Mantle and the tints seen; photographed"),
-               ("3–8 weeks after", "This letter, through Pro-Ject’s contact form (February to March)"),
-               ("About 16 weeks after", "A meeting at HIGH END, Vienna, 6–9 May"),
+         when=[("The debut", "Mantle and the tints seen; photographed"),
+               ("3–8 weeks after", "This letter, through Pro-Ject’s contact form"),
+               ("May 2027", "A meeting at HIGH END, Vienna, 6–9 May"),
                ("Then", "If both want it: design and tooling, about 12–18 months to an edition")],
          route="the contact form at project-audio.com/en/contact/"),
 ]

@@ -4,7 +4,7 @@ Brand lane, r47 (2026-10-31). A draft for the owner. **Real prototypes only:**
 - no renders, no CGI and no simulated light;
 - nothing the prototypes can't do yet (Kickstarter: working prototypes, no photorealistic renderings; `README.md` §1).
 
-Shoot it in the week the lamps are photographed (mid-February 2027; `first-articles.md`).
+Shoot it in the week the lamps are photographed (about four weeks after the debut; `first-articles.md`).
 
 **Length:** about 2:00 (est.); the first 10 seconds carry the page.
 **Sound:** room sound and one track played through Tropos, if the first pair plays by then. Otherwise a record on any
@@ -24,7 +24,7 @@ for faces only (never on the lamps), and a lavalier.
 | 3 | 0:12–0:20 | Outside on a step at dusk, Core set down, still lit. Wide, 35 mm | Street, far off | none |
 | 4 | 0:20–0:30 | Inside, a dark room: Hemisphere over a table, Ice. A hand reaches up, a quarter turn, the shade comes off; the bare hub glows soft, the source hidden; another shade (Acid) goes on, a quarter turn back | The click of the catch | none |
 | 5 | 0:30–0:40 | The eight tints as cast samples standing on a lightbox, the camera sliding along them, Ember to Smoke | A record starts | EARF. Two lamps, in eight colors. |
-| 6 | 0:40–1:05 | The owner at the bench: forming a shade over its mold, a lathe turning a collar, a hand polishing an edge. Close, 85 mm | The owner: why acrylic, why tinted through, why eight colors | Captions name each step: *Forming*, *Turning*, *Polishing* |
+| 6 | 0:40–1:05 | The owner at the bench: forming a shade over its mold, a lathe turning a collar, a hand polishing an edge. Close, 85 mm | The owner: why acrylic, why tinted, why eight colors | Captions name each step: *Forming*, *Turning*, *Polishing* |
 | 7 | 1:05–1:20 | The tests: a thermocouple on a closed shade, the logger's screen; Core's run-time log (how it recharges waits for the lamps lane's redesign; no cord in frame); the splash test | The owner: the tests, planned with the first build, and their numbers (shot once they exist) | The pass marks and the measured figures, as text, from `COPY.md` |
 | 8 | 1:20–1:35 | Core dimmed by holding the ring, the color warming as it dims. Then Hemisphere on a wall dimmer, down to its lowest, no flicker | Room | *Hold to dim.* |
 | 9 | 1:35–1:50 | A table at night: four people, a Hemisphere over them in Haze, a Core in Poison between the glasses | Talk, glasses, the record | none |

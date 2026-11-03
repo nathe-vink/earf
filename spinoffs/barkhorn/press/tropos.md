@@ -2,17 +2,17 @@
 
 **A powered horn loudspeaker in eight colors of cast acrylic.** "Eight colors, Ember to Smoke."
 
-Each cabinet is cast acrylic, 20 mm thick and tinted all the way through. The horn is formed from the same tinted
-acrylic as its cabinet, its driver in a pod whose cap twists off by hand. Above 1 kHz the horn carries the music;
+Each cabinet is tinted cast acrylic, 20 mm thick. The horn is one sheet of 10 mm acrylic in the cabinet's own color,
+formed over a plug and satin outside, its throat turned from a solid block, its driver in a pod whose cap twists off by hand. Above 1 kHz the horn carries the music;
 below, a 15-inch woofer takes it, each on its own channel of the amplifier inside. The lining shows through the walls,
 so it is dressed in white voile. A cloth cover goes on over the woofer.
 
 | | |
 |---|---|
 | Height | 1293 mm |
-| Width | 625 mm at the horn, 560 mm at the cabinet |
+| Width | 560 mm, the cabinet, with the horn flush |
 | Depth | 423 mm overall, 420 mm at the cabinet |
-| Weight | About 74 kg with the stepped horn; 62 kg with the horn lifted off |
+| Weight | 72.6 kg on its own feet |
 | Woofer | FaitalPRO 15PR400, 15-inch, with two ports in the front's lower corners |
 | Horn driver | B&C DE1085TN, 2-inch compression driver |
 | Horn | Formed from the same tinted cast acrylic as its cabinet, a turned acrylic throat; the cabinet's full depth |

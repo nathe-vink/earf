@@ -11,12 +11,12 @@ analog, no vocal, that lands its last note on the end card at 21.5 s. Until then
 | Beat | Time | Picture | Move | Type |
 |---|---|---|---|---|
 | 1 | 0.0–3.2 s | Tropos in Ember alone in the dark (`red-studio.jpg`) | fade up from black, push in 10% | EARF · San Francisco; "Eight colors, Ember to Smoke." |
-| 2 | 3.0–7.7 s | Tropos in Acid, whole, cover off (`book/img/amber-studio-light.jpg`) | a slow push, 4% (the site's turn sprite crops the cabinet, so it is out) | Tropos · the horn, formed from its own acrylic; "The oldest amplifier is a shape." |
+| 2 | 3.0–7.7 s | Tropos in Acid, whole, cover off (`book/img/amber-studio-light.jpg`) | a slow push, 4% (the site's turn sprite crops the cabinet, so it is out) | Tropos · the horn, formed from its own acrylic (no line) |
 | 3 | 7.5–11.7 s | The eight lit from below on a concrete wall (`facade.jpg`) | a slow pan left to right | "Put a light under it." |
 | 4 | 11.5–15.7 s | The eight tints in their elements (`*-habitat.jpg`) | a cut every half second, a slight push on each | 01 Ember … 08 Smoke |
 | 5 | 15.5–18.7 s | The eight Core, cordless (`book/img/lamps-orbs.jpg`, the lamps lane's cordless set), then Mantle at dusk (`tt-violet-dusk.jpg`) | a pull, then a push | "Light, and a record player, in the same eight." (label: Core · cordless) |
 | 6 | 18.5–21.7 s | The eight (`hero.jpg`; `hero-portrait.jpg` on 4:5) | a slow pull out | "A world of sound, in color." (two lines on 4:5, broken after the comma) |
-| 7 | 21.5–25.0 s | The globe turning on night (`globe-turn-night.mp4`) | — | EARF; Tuesday 19 January 2027; [VENUE], San Francisco · earf.world; "Every picture is a render · on the night, the real thing"; fade to black |
+| 7 | 21.5–25.0 s | The globe turning on night (`globe-turn-night.mp4`) | — | EARF; spring 2027; [VENUE], San Francisco · earf.world; "Every picture is a render · on the night, the real thing"; fade to black |
 
 Each beat crossfades into the next over 0.2 to 0.4 s. Every picture is a render, and the end card says so.
 

@@ -52,7 +52,7 @@ The owner chooses one; Ember is the likelier match from stock (Ruby, T-4, Pirate
 >   (12 × 12, one sheet, two sides); shrink-wrapped
 > - **Numbering:** we'll hand-number the jackets ourselves; please tell us if you number, and the cost
 > - **Delivery:** to [address], San Francisco, CA
-> - **Timing:** the master will be ready by [about 15 February 2027]; we'd like the records by [late April 2027]. Is
+> - **Timing:** the master will be ready by [FILES DATE, about four weeks after the debut]; we'd like the records by [RECORDS DATE]. Is
 >   that possible, and could we hold a slot now?
 >
 > Thank you,
@@ -78,8 +78,8 @@ The owner chooses one; Ember is the likelier match from stock (Ruby, T-4, Pirate
 
 > Hello. We've used your generator for 300 and 500 × 12" in translucent Ruby. Please could you confirm the price at
 > **180 g**, which the generator doesn't show, and whether you can match a translucent color to Pantone [7621 C]
-> (#D2382F)? We'll hand-number the jackets ourselves. The files will be ready about 15 February 2027, and we'd like
-> the records in San Francisco by late April: what is your lead time from approved test pressings, and freight to
+> (#D2382F)? We'll hand-number the jackets ourselves. The files will be ready about [FILES DATE], and we'd like
+> the records in San Francisco by [RECORDS DATE]: what is your lead time from approved test pressings, and freight to
 > San Francisco?
 >
 > [Your name] · EARF · earf.world · [contact line]
@@ -104,8 +104,8 @@ The owner chooses one; Ember is the likelier match from stock (Ruby, T-4, Pirate
 > - **Numbering:** we'll number by hand
 > - **Freight:** to San Francisco, CA
 >
-> Your FAQ says to allow four months. Our files will be ready about 15 February 2027: can we reserve a slot now for
-> test pressings in early April and records by late May? What deposit holds it?
+> Your FAQ says to allow four months. Our files will be ready about [FILES DATE]: can we reserve a slot now for
+> test pressings about seven weeks later and records about four months after the files? What deposit holds it?
 >
 > [Your name] · EARF · earf.world · [contact line]
 
@@ -116,11 +116,11 @@ The owner chooses one; Ember is the likelier match from stock (Ruby, T-4, Pirate
 
 > Hello Jim,
 >
-> We're pressing a live album recorded in San Francisco in January and would like a quote and your current lead time:
+> We're pressing a live album recorded in San Francisco this spring and would like a quote and your current lead time:
 > 300 and 500 × 12" 33⅓ at **180 g**, in a **custom translucent color** matched to Pantone [7621 C] (#D2382F), with
 > cutting from our files (or lacquers if you prefer), 5 test pressings, full-color labels, printed single-pocket
 > jackets, poly-lined sleeves, a 12 × 12 insert and shrink, delivered to San Francisco. We'll number the jackets by hand.
-> Files ready about 15 February 2027; records wanted by late April. Is that possible?
+> Files ready about [FILES DATE]; records wanted by [RECORDS DATE]. Is that possible?
 >
 > [Your name] · EARF · earf.world · [contact line]
 

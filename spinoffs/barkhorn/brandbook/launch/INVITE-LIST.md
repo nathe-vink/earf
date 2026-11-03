@@ -1,4 +1,4 @@
-# The debut invitation list: Tuesday 19 January 2027
+# The debut invitation list
 
 Brand lane, r47 (2026-10-31). **Preparation only: nothing has been sent, no form submitted, nobody contacted.**
 Organizations only, with their public business contact routes as published on their own sites; a person is named only
@@ -6,7 +6,7 @@ where they are the published contact for an organization. **[verified]**: the ro
 site on 31 October 2026. **[unverified]**: seen only in a third-party listing or a search result, or the site refused
 access. Compiled by two research agents from public pages; re-check each route before sending, since contacts change.
 
-Who the room is for: collectors and the design trade (galleries in town for FOG Design+Art, 21–24 January, and the city's
+Who the room is for: collectors and the design trade (galleries that show at FOG Design+Art, and the city's
 studios and showrooms), the hi-fi and listening-bar crowd, records, hospitality, and press (the press list is
 `MEDIA-PLAN.md`).
 

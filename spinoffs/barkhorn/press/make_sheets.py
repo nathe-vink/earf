@@ -20,9 +20,9 @@ STANDING = ('In development and not yet for sale. Every picture is a render unti
 SHEETS = [
     ('company', 'EARF', 'The company', 'Hi-fi and light, cast in tinted acrylic, in eight colors from Ember to Smoke.',
      'lineup.jpg',
-     'EARF is a San Francisco maker of hi-fi and lighting in cast acrylic, tinted all the way through. Every product comes '
+     'EARF is a San Francisco maker of hi-fi and lighting in tinted cast acrylic. Every product comes '
      'in the same eight colors, from Ember to Smoke, so a room can be one color or three. Each is named for a layer of '
-     'the Earth. Cast acrylic carries light to its edges, so a lamp underneath fills a whole cabinet with color, and a '
+     'the Earth. Cast acrylic carries light to its edges, so a light from below shines up through it and fills a whole cabinet with color, and a '
      'wall 20 mm thick shows what is inside it.',
      [('Where', 'San Francisco, California'), ('Site', 'earf.world'), ('Inquiries', 'hello@earf.world; trade and stockists the same'),
       ('Products', 'Tropos, a powered horn loudspeaker · Hemisphere, a pendant · Core, a table lamp · Mantle, a record player'),
@@ -33,12 +33,12 @@ SHEETS = [
        'production will build it; then measured, by ear and by microphone. The lamps and Mantle follow the same way'),
       ('Founder', '[FOUNDER]')]),
     ('tropos', 'Tropos', 'Powered horn loudspeaker', 'Eight colors, Ember to Smoke.', 'red-studio-light.jpg',
-     'Each cabinet is cast acrylic, 20 mm thick and tinted all the way through. The horn is formed from the same tinted '
-     'acrylic, its driver in a pod whose cap twists off by hand. Above 1 kHz the horn carries the music; below, a 15-inch '
+     'Each cabinet is tinted cast acrylic, 20 mm thick. The horn is one sheet of 10 mm acrylic in the cabinet’s own color, '
+     'formed over a plug and satin outside, its driver in a pod whose cap twists off by hand. Above 1 kHz the horn carries the music; below, a 15-inch '
      'woofer takes it, each on its own channel of the amplifier inside. The lining shows through the walls, so it is '
      'dressed in white voile. The name: the troposphere, the air we live in, from the Greek tropos, a turn.',
-     [('Height', '1293 mm'), ('Width', '625 mm at the horn, 560 mm at the cabinet'), ('Depth', '423 mm overall, 420 mm at the cabinet'),
-      ('Weight', 'About 74 kg with the stepped horn; 62 kg with the horn lifted off'), ('Woofer', 'FaitalPRO 15PR400, 15-inch, two ports in the front’s lower corners'),
+     [('Height', '1293 mm'), ('Width', '560 mm, the cabinet, with the horn flush'), ('Depth', '423 mm overall, 420 mm at the cabinet'),
+      ('Weight', '72.6 kg on its own feet'), ('Woofer', 'FaitalPRO 15PR400, 15-inch, two ports in the front’s lower corners'),
       ('Horn driver', 'B&C DE1085TN, 2-inch compression driver'), ('Amplifier', 'Hypex FusionAmp FA122, built in: two channels of 125 W, crossed at 1 kHz in its DSP'),
       ('Bass', 'To about 51 Hz at −3 dB, before the room adds its own; ports tuned to 38 Hz'), ('Loudness', 'Up to about 115 dB at 1 m, each'),
       ('Inputs', 'XLR (and a link out), RCA, AES, S/PDIF coaxial and optical; USB to set it up'),
@@ -62,7 +62,7 @@ SHEETS = [
      'Its tinted plinth floats 40 mm over a base that glows at its edge. The motor stands apart in a pod of its own, on '
      'soft feet, so its hum stays out of the plinth, and the phono stage is built in. The lid’s hinges sit on brass '
      'inserts, so no screw cuts the acrylic. The name: the layer that moves beneath the crust.',
-     [('Plinth', 'Cast acrylic, 25 mm, tinted through; it floats 40 mm over the base'), ('Base', 'Cast acrylic, edge-lit from within, dimmable'),
+     [('Plinth', 'Tinted cast acrylic, 25 mm; it floats 40 mm over the base'), ('Base', 'Cast acrylic, edge-lit from within, dimmable'),
       ('Drive', 'Belt, its motor in a heavy pod of its own'), ('Speeds', '33 and 45, by a button'), ('Arm', 'Rega RB330'),
       ('Cartridge', 'Ortofon 2M Black'), ('Phono stage', 'Built in, for moving-magnet cartridges, with a line out and a bypass'),
       ('Cover', 'Tinted acrylic, hinged'), ('Size', '470 wide, 380 deep, 194 high with the lid down (mm)'), ('Weight', 'About 15.5 kg')]),

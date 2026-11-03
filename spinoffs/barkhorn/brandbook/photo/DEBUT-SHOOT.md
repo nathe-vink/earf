@@ -113,7 +113,7 @@ Each shot names its main use: **KS** (Kickstarter), **Press**, **Partner** (the 
 | When | What |
 |---|---|
 | **That night, by 11:30 pm** | 5–10 quick selects (phone-ready JPEGs) for the owner's own post the next morning; nothing to the press yet |
-| **Within 48 hours (by Thursday 21 January, 10 pm)** | **30–40 press selects**: color-corrected to the ColorChecker, captioned (what, which tint, "Prototype"), full resolution and 3,000 px. **Press release day: FOG opens on the 21st** |
+| **Within 48 hours (by D + 2 days, 10 pm)** | **30–40 press selects**: color-corrected to the ColorChecker, captioned (what, which tint, "Prototype"), full resolution and 3,000 px. |
 | Within 5 days | **The 60-second listening film** (C4 with the Session's audio, a few cutaways), for the Klipsch pack and social |
 | Within 7 days | The full edit: about 150–250 images |
 | Within 10 days | A 2–3 minute film of the night (the teaser's real successor) |
@@ -123,4 +123,4 @@ Each shot names its main use: **KS** (Kickstarter), **Press**, **Partner** (the 
 - what the object is;
 - "prototype";
 - the tint as cast. A stock color is named as stock (`PRODUCT-SHOOT.md`): "Hemisphere in stock red, nearest to
-  Ember. Prototype, January 2027."
+  Ember. Prototype."

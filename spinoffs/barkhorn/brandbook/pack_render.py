@@ -98,7 +98,7 @@ def mat_birch(name, decal=None, ink=None):
 
 
 def mat_board(name, tint, decal=None, deboss=None):
-    """Through-dyed board: the tint all the way through, a fine paper tooth; white print and a debossed globe."""
+    """Dyed board in the tint, a fine paper tooth; white print and a debossed globe."""
     m = mat_basic(name, tint, rough=0.78, bump=0.05, bump_scale=900.0)
     nt = m.node_tree; p = nt.nodes['Principled BSDF']
     if decal:
@@ -235,7 +235,8 @@ def camera(loc, target, lens=50, fstop=0.0):
 
 
 # the speaker -------------------------------------------------------------------------------------------------------
-# The speaker lane's asset, pinned: the owner's final Tropos (flush stepped horn, black sleeves, lit plinth) in the
+# The speaker lane's asset, pinned: Tropos as it stood on 2026-11-01 (a stepped horn and a lit plinth, both since
+# replaced: horn A, the base open; the picture waits for the new set), in the
 # stock TruCast tints (r33-speaker-horn a682dc52, spinoffs/barkhorn/asset/tropos-strata.blend). Read from git into a
 # cache outside the repo, so its 23 MB isn't copied onto this branch.
 ASSET = ('a682dc526010b04eca7deef6494b07d33b993c73', 'spinoffs/barkhorn/asset/tropos-strata.blend')
@@ -341,7 +342,7 @@ def crate(x, y, tint='ember', open_door=False, rot=0.0, name='crate', front_art=
                 objs.append(box('foam', fx, -D / 2 + 0.06, fz, fx + 0.07, D / 2 - T - 0.01, fz + 0.12, foam, bevel=0.004))
         # the sled, and the speaker on it: the speaker lane's asset (the owner's final Tropos in stock TruCast tints),
         # whole and uncovered (the owner, 2026-10-31: the cover off in every picture). Its horn travels in the horn
-        # case and its lit plinth (660 x 670) is packed apart, so the cabinet stands on the sled with its posts.
+        # case and the asset's plinth is left out, so the cabinet stands on the sled with its posts.
         objs.append(box('sled', -0.30, -D / 2 + 0.03, z0 + T, 0.30, D / 2 - T - 0.02, z0 + T + 0.03, ply, bevel=0.002))
         objs.append(tropos_cabinet(tint, z0 + T + 0.03))
         # its shipping sleeve, taken off and folded on the crate's top

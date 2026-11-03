@@ -43,7 +43,7 @@ From the FAQ and the open-call page; **confirm against the briefing**.
 | 6 | **Visualizations**: the 2 m globe at night by a canal, rims glowing; the hard spot's colored shadow on the quay. Renders, captioned as renders | Bar | to do |
 | 7 | **Technical sheet**: dimensions, weight, plan and elevation, the plinth and ballast, the light (LEDs, voltage, IP rating, watts), installation and removal, how it survives two months outdoors | Bar | **done**: TECH.md (2866f79f); its figures are now in `CONCEPT.md` |
 | 8 | **Budget estimate**: production, transport to Amsterdam, installation, removal (earlier rounds asked for one, per R10) | Bar | **done**: about €28,000–60,000 (est.), TECH.md |
-| 9 | **Previous work / portfolio** | Owner | to do. Photographs of real work after 19 January would be ideal, but the deadline is earlier, so show what exists, and label renders as renders |
+| 9 | **Previous work / portfolio** | Owner | to do. Photographs of real work after the debut would be ideal, but the deadline is earlier, so show what exists, and label renders as renders |
 | 10 | **Contact details, country, legal status** (a person, or a company, for the €4,000 fee) | Owner | to do. No company is registered yet; as a person is fine if the festival allows it |
 | 11 | **Existing or new work?** | Brand (answered: new, made for the festival at 2 m) | drafted |
 | 12 | **Confirmation of the rules**: two months outdoors, no smoke, sound or lasers, no nuisance to residents | Brand (covered in the text) + Owner (ticks the box) | covered |

@@ -13,7 +13,7 @@ Ranked by what each does for the odds, per dollar:
 | f | The Tint Library | about $10k to $25k for 100 kits | as soon as the sheet is chosen | trade specification; settles the cast colors |
 | a | EARF Sessions | about $5k to $9k a release | Session 00 once the first pair plays | content, a product, and the bar's reason to exist |
 | d | Hotel listening suites | trade-priced kits; one pilot suite | after the first pairs are measured | overnight demos to buyers; trade revenue |
-| b | A debut room: San Francisco in FOG week (January 2027), High End Vienna (May 2027), Milan in 2028 | $4k to $15k in SF; Vienna's stand free, $6k to $12k to get there; $80k to $200k for Milan | SF: 21–24 Jan 2027; Vienna: apply by 31 Dec 2026; Milan: April 2028 | collectors, then the hi-fi trade, then the design world |
+| b | A debut room: San Francisco at the debut, High End Vienna (May 2027), Milan in 2028 | $4k to $15k in SF; Vienna's stand free, $6k to $12k to get there; $80k to $200k for Milan | SF: the debut (date parked); Vienna: apply by 31 Dec 2026; Milan: April 2028 | collectors, then the hi-fi trade, then the design world |
 | e | Artist editions | a color batch's minimum plus the artist's share | 2027, after launch | a waitlist and a premium; the artist's audience |
 | c | Mother EARF as public art | about $150k to $300k at 4 m; less at 2 m | 12 to 18 months | the brand at city scale; sponsorship |
 
@@ -40,16 +40,16 @@ $5k to $9k a release before the artist's share. At about $40 each, 300 records r
 **What it needs first.** A license for every recording: the artist's agreement, and mechanical licenses for any songs
 they didn't write (from the publishers, or through a licensing service). The artist's share agreed in writing.
 
-**Timeline.** Session 00 in any good room the week the first pair plays (January 2027 at the latest, for the debut
-room); master to plant by February; the pressing in the spring, depending on the plant's queue. The press rhythm the
-coordinator relayed fits it: prototypes photographed by mid-February, print pitched under embargo by 1 March, online
-design press 22 to 29 March, the hi-fi press before May. Session 00's record is the thing to send the hi-fi press.
+**Timeline.** Session 00 in any good room the week the first pair plays (at the debut at the latest); master to plant
+within about four weeks; the pressing after, depending on the plant's queue. The press rhythm the coordinator relayed
+fits it: prototypes photographed about four weeks after the debut, print pitched under embargo, then the online design
+press, then the hi-fi press. Session 00's record is the thing to send the hi-fi press.
 
 **Why it raises the odds.** It is proof the speakers are serious, in the only form that can't be faked: a record made
 through them. It gives the press and social a recurring reason to write. It is a product with a margin from day one.
 And it makes Planet EARF a label as well as a bar, which is easier to fund than a bar alone.
 
-## (b) A debut room: San Francisco in FOG week, then Vienna, then Milan
+## (b) A debut room: San Francisco, then Vienna, then Milan
 
 **Mockup:** `out/idea-milan.png`: the invitation ("A world of sound, in color.", the uplit eight), the room in plan (eight
 Tropos lit from below on a curved wall, Mother EARF overhead, a bench, Mantle and the coins by the door). The same room
@@ -61,15 +61,16 @@ deposits are taken there.
 
 **The calendar** (from the coordinator's research; dates, not plans already made):
 - **FOG Design+Art, 21 to 24 January 2027, Fort Mason.** Design galleries (Marta, Patrick Parrish, Hostler Burrows)
-  are in San Francisco that week. The investor deck already plans a debut night in San Francisco.
+  are in San Francisco that week. The investor deck plans a debut night in San Francisco; its date is parked, so
+  whether it meets the fair is open.
 - **Milan Design Week, 12 to 18 April 2027.** Alcova has no open call (inquiries only); the Fuorisalone package is
   €2,000 + VAT, by 8 February 2027; SaloneSatellite 2027 is closed.
 - **High End, now in Vienna, 6 to 9 May 2027.** A free Start-Up Area for young registered companies; apply by
   31 December 2026.
 
 **The plan: San Francisco first, Vienna second, Milan in 2028.**
-1. **San Francisco, FOG week (January 2027).** The debut room with the first pair, one of each lamp and Mantle: a
-   lent or rented space near the fair for a few nights, a Session each night, reservations and deposits taken (g).
+1. **San Francisco, at the debut.** The debut room with the first pair, one of each lamp and Mantle: a
+   lent or rented space for a few nights, a Session each night, reservations and deposits taken (g).
    The bar lane is drawing a Planet EARF pop-up from San Francisco's Vacant to Vibrant program (up to six months'
    rent for downtown pop-ups); if it lands, the debut room is that pop-up's first week.
 2. **Vienna, High End (May 2027).** Apply to the Start-Up Area by 31 December. It is free, it is the hi-fi trade's
@@ -181,7 +182,7 @@ Deposits are kept in a separate account and spent only on that customer's order.
 C-corp before taking deposits, so customer money never sits with the founder personally.
 
 **Timeline.** Reservations can open as soon as the terms are written (the site lane would add the form); deposits
-after the first pair is built and heard, so around the San Francisco debut room in January 2027. The research's
+after the first pair is built and heard, so around the San Francisco debut room. The research's
 plan opens Tropos founders' deposits in that window and puts "at least 2 Tropos deposits, or at least 10 lamp
 deposits" as an early milestone.
 
@@ -191,11 +192,9 @@ run's materials, and the first hundred owners are the brand's first ambassadors,
 
 ## A note on the name Strata
 
-The Tropos lane has drawn a laminated horn as an alternative to the formed one: 14 to 22 stacked layers of the tinted
-acrylic whose cut edges read as contour rings, like strata (`r33-speaker-horn` at
-5f87928eefebe27bb9ee9ac39988b4fdaf2da205, `renders/2026-10-31/barkhorn/horn-plan-b/compare-formed-vs-laminated.png`).
-If the owner keeps Strata in reserve, that horn, or a laminated edition of Tropos, is a natural place for it. Nothing
-is renamed here.
+The stacked, laminated horn that suggested the name is set aside: the horn is A, one 10 mm sheet formed over a plug,
+satin outside (the owner, 2026-11-03; r46-owner-notes 468c1058). Strata stays in reserve as a name only. Nothing is
+renamed here.
 
 ## Not done here
 

@@ -18,13 +18,13 @@ free, but EARF is a company).
 | Project title * | One Coin, One Song: a free listening room downtown |
 | Project website | earf.world |
 
-**Tell us about your awesome project!** * (2,000 characters; this answer: 1307)
+**Tell us about your awesome project!** * (2,000 characters; this answer: 1261)
 
-From 19 January 2027 we plan to turn a vacant storefront in downtown San Francisco into a free listening room for eight weeks: a pair of hand-built horn loudspeakers, a wall of records and six chairs, open Thursday to Sunday, 1 to 8 pm. Anyone can walk in off the street and sit with a record start to finish, on a system most people never get to hear.
+In spring 2027 we plan to turn a vacant storefront in downtown San Francisco into a free listening room for eight weeks: a pair of hand-built horn loudspeakers, a wall of records and six chairs, open Thursday to Sunday, 1 to 8 pm. Anyone can walk in off the street and sit with a record start to finish, on a system most people never get to hear.
 
 The room runs on a small ritual. Everyone who comes in is handed a coin, cut from tinted cast acrylic in one of eight colors. Hand it over with the name of a song, and it drops into a clear column beside the turntable. The column is the queue: you can see how long the wait is, and when your coin reaches the bottom, your song plays for the whole room. One coin, one song. Keep the coin if you like.
 
-I design the speakers, lamps and record player in the room, in tinted acrylic, under the name EARF. This is their first public outing, and the room opens in FOG Design+Art week, when the city's design world is out. But the room is free and for anyone: commuters, neighbors, kids who have only heard music through earbuds. Once a week we play one album, start to finish, with no talking, and anyone can take a chair.
+I design the speakers, lamps and record player in the room, in tinted acrylic, under the name EARF. This is their first public outing, and the room opens with their debut. But the room is free and for anyone: commuters, neighbors, kids who have only heard music through earbuds. Once a week we play one album, start to finish, with no talking, and anyone can take a chair.
 
 The storefront comes through the city's Vacant to Vibrant program, so the room also puts life back into an empty shopfront for two months.
 
@@ -34,7 +34,7 @@ $1,000 pays for the coins: about 200 laser-cut acrylic coins in the eight colors
 
 **Tell us a little about yourself** * (500 characters; this answer: 264)
 
-I'm [Your name], a designer in San Francisco. I design hi-fi and lighting in cast acrylic, tinted all the way through, under the name EARF: a horn loudspeaker, two lamps and a record player, drawn here part by part. This room is the first time anyone will hear them.
+I'm [Your name], a designer in San Francisco. I design hi-fi and lighting in tinted cast acrylic, under the name EARF: a horn loudspeaker, two lamps and a record player, drawn here part by part. This room is the first time anyone will hear them.
 
 **Upload images of your project** (up to 5): the coin column at the decks; the eight coins; the listening room; Tropos;
 the storefront once chosen. Use photographs when they exist; caption renders as renders.

@@ -10,7 +10,7 @@ Please don't add facts that aren't true. If a sentence doesn't fit, cut it rathe
 
 ## Artist statement (about 200 words)
 
-I make objects in cast acrylic tinted all the way through: loudspeakers, lamps, a record player. I'm interested in a
+I make objects in tinted cast acrylic: loudspeakers, lamps, a record player. I'm interested in a
 material that holds light rather than reflecting it. A slab of tinted acrylic, lit at one edge, glows at the others;
 its faces stay dark and clear. The color isn't a coat on the surface. It is the thing.
 
@@ -31,7 +31,7 @@ someone to feel standing beside it on a canal in December.]
 
 [OWNER: full name] is a designer based in San Francisco. [OWNER TO FILL: training or background, in one clause, e.g.
 "Trained as …" or "After … years in …".] [He / She / They] make[s] hi-fi and lighting in tinted cast acrylic, in a
-palette of eight colors, and first showed the work in San Francisco in January 2027, during FOG Design+Art week.
+palette of eight colors, and first showed the work in San Francisco in [DATE] [once it has happened].
 [TITLE] is [his / her / their] first work for public space. [OWNER TO FILL: anything shown, published or awarded,
 only if true.] [He / She / They] live[s] and work[s] in [OWNER TO FILL: city].
 
@@ -43,7 +43,7 @@ only if true.] [He / She / They] live[s] and work[s] in [OWNER TO FILL: city].
   festival wants no branding. Ask, or give both.]
 - **Education:** [OWNER TO FILL]
 - **Selected work:**
-  - 2027: the first pair of a loudspeaker and two lamps in tinted cast acrylic, shown in San Francisco during FOG
-    Design+Art week (19 January) [once it has happened];
+  - 2027: the first pair of a loudspeaker and two lamps in tinted cast acrylic, shown in San Francisco at the
+    debut [once it has happened];
   - [OWNER TO FILL: anything earlier].
 - **Exhibitions, press, awards:** [OWNER TO FILL, only if true; "none yet" is fine for a first public work].

@@ -28,13 +28,13 @@ Source: the help article *What are the rules for hardware and product design pro
 | Question | The rule | What it means for EARF |
 |---|---|---|
 | **Can renders be shown?** | "We do not allow photorealistic renderings." | **No.** Every EARF picture so far is a photoreal path-traced render. None of them may appear on the campaign, the pre-launch page or the film. Technical drawings, CAD views and sketches have been allowed since Kickstarter clarified the rule in 2012 ([Core77](https://www.core77.com/posts/23506/Regarding-Kickstarter-n-Product-Design-Projects)). Use them, plainly drawn and never rendered to look real. |
-| **Is prototype evidence required?** | Creators must "show working prototypes of their projects." | **Yes.** A working Core and a working Hemisphere, filmed and photographed working. `first-articles.md` dates these: possible for 21 January, photographed by mid-February 2027. The campaign can't open before then. |
+| **Is prototype evidence required?** | Creators must "show working prototypes of their projects." | **Yes.** A working Core and a working Hemisphere, filmed and photographed working. `first-articles.md` dates these: working by the debut, photographed about four weeks after. The campaign can't open before then. |
 | **What else?** | Creators must "clearly detail for their backers how they'll produce their product", and say "whether they've produced anything like it before." | The campaign page carries a production section: who forms, turns and assembles, and in what order. It says plainly that this is EARF's first production run (`COPY.md`). |
 | **Honesty** | The Design & Technology article asks that projects be "honestly and clearly presented" ([help](https://help.kickstarter.com/en-us/articles/16236513-i-m-looking-to-run-a-design-technology-project)). The prototyping guide (kickstarter.com/honest) refused the request (403) and was not retried. | Label every image for what it is: *Prototype*, *Drawing* or *Sample of the tint*. Show no feature the prototype doesn't have. |
 | **Fees** | "Kickstarter collects a 5% fee from the funds collected"; Stripe takes "roughly 3-5%" (help, *What are the fees*, dated 2 September 2026). Fees apply only if the project funds. | Budgeted at **8.5%** of pledges (est.). |
 | **Pledge Over Time** | Pledges of $125 or more can be split into three payments, the last about two months after the deadline (R2, citing Kickstarter's help). | Offer it. Every EARF reward is over $125. |
 | **Late pledges** | Since 2024, creators can keep taking pledges after a funded campaign ends ([Kickstarter](https://updates.kickstarter.com/understanding-late-pledges-a-comprehensive-guide-for-creators/)). Third-party guides say it must be switched on before or during the campaign. | Switch it on in the draft. **Confirm on the live help page before launch.** |
-| **The pre-launch page** | Followers who click "Notify me on launch" get Kickstarter's email when it goes live; the follower count shows from 10 ([help](https://help.kickstarter.com/en-us/articles/16236379-setting-up-your-project-s-pre-launch-page)). Kickstarter's blog says 32% of pre-launch followers pledge, against 17% of followers who come later ([Kickstarter](https://updates.kickstarter.com/how-to-maximize-pre-launch-sign-ups-for-your-kickstarter-campaign/)). | The pre-launch page goes up when the first photographs exist (mid-February). Its pictures are photographs and drawings too. |
+| **The pre-launch page** | Followers who click "Notify me on launch" get Kickstarter's email when it goes live; the follower count shows from 10 ([help](https://help.kickstarter.com/en-us/articles/16236379-setting-up-your-project-s-pre-launch-page)). Kickstarter's blog says 32% of pre-launch followers pledge, against 17% of followers who come later ([Kickstarter](https://updates.kickstarter.com/how-to-maximize-pre-launch-sign-ups-for-your-kickstarter-campaign/)). | The pre-launch page goes up when the first photographs exist (about four weeks after the debut). Its pictures are photographs and drawings too. |
 
 ### Indiegogo, briefly
 
@@ -149,17 +149,17 @@ the molds, so that money comes back.
 
 ---
 
-## The calendar it assumes (est.)
+## The calendar it assumes (est.; the debut's date is parked, so D is the debut)
 
 | When | What |
 |---|---|
-| 19 January 2027 | The debut night: the first working lamps are seen |
-| By mid-February | **Photographed and filmed working**: the first pictures that aren't renders |
-| 1 March | The pre-launch page goes up; the waitlist sequence starts (`LAUNCH-PLAN.md`) |
+| D | The debut night: the first working lamps are seen |
+| D + 4 weeks | **Photographed and filmed working**: the first pictures that aren't renders |
+| D + 6 weeks | The pre-launch page goes up; the waitlist sequence starts (`LAUNCH-PLAN.md`) |
 | 12–18 April | Milan Design Week: sign-ups in person |
-| **Tuesday 27 April** | **Launch**: 30 days |
+| **D + 14 weeks** | **Launch**: 30 days |
 | 6–9 May | High End, Vienna, in the middle of the campaign |
-| Thursday 27 May | The campaign ends |
+| D + 18 weeks | The campaign ends |
 | June | Funds arrive, two to three weeks after the end (R2, citing Kickstarter); lab testing, planned with the first build, begins; run ordered |
 | June–September | Certification: 8 to 16 weeks for the listings (R3) |
 | August–October | The run: forming, turning, assembly |

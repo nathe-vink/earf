@@ -20,12 +20,12 @@ changes color with a quarter turn.
 
 **Category:** Design › Product Design. **Location:** San Francisco, CA.
 
-**Image:** a photograph of the two prototypes lit, side by side on the studio table. Caption: *The working prototypes,
-February 2027.*
+**Image:** a photograph of the two prototypes lit, side by side on the studio table. Caption: *The working
+prototypes.*
 
 **The short text (the page allows a little):**
 
-> Two lamps, cast in acrylic tinted all the way through, in the same eight colors as our loudspeakers: Ember, Dust,
+> Two lamps in tinted cast acrylic, in the same eight colors as our loudspeakers: Ember, Dust,
 > Acid, Poison, Ice, Haze, Fog and Smoke.
 >
 > **Core** is a ball of tinted acrylic sitting low on a black base. Cordless, it goes where the
@@ -49,7 +49,7 @@ February 2027.*
 
 **A world of sound, in color.**
 
-EARF makes hi-fi and light in cast acrylic, tinted all the way through. Everything comes in the same eight colors,
+EARF makes hi-fi and light in tinted cast acrylic. Everything comes in the same eight colors,
 from Ember to Smoke, so a room can be one color, or three. Our first product is a horn loudspeaker, Tropos. These are
 the two lamps that go with it, and they are the first things we're making in a run.
 
@@ -73,8 +73,8 @@ the two lamps that go with it, and they are the first things we're making in a r
 4. The eight tints as cast samples, lit from behind. *Samples of the sheet.*
 5. The drawing sheets: Hemisphere's section, Core's exploded view. *Drawings.*
 
-**Why acrylic.** Cast acrylic tinted through carries light to its edges. It's the color all the way in, so there's
-nothing painted to chip. A fine scratch polishes out.
+**Why acrylic.** Tinted cast acrylic carries light to its edges, and there's nothing painted on it to chip. A fine
+scratch polishes out.
 
 ### What you get
 

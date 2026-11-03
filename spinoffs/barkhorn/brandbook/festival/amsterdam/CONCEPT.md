@@ -27,7 +27,7 @@
 
 A globe two meters across, drawn in light: an armillary sphere of the Earth, made of color.
 
-It is made of six discs of cast acrylic, each tinted all the way through in one color:
+It is made of six discs of tinted cast acrylic, each in one color:
 - **Three meridians**, in green, orange and violet, stand on edge and cross at the poles.
 - **Three parallels**, in red, blue and yellow, ring them at the equator and at forty degrees north and south.
 
@@ -82,7 +82,7 @@ being shone onto it. Keep it in your voice; the jury reads this for "relation to
 
 ## Materials and making
 
-- **The discs.** Cell-cast acrylic sheet, 25 mm thick, tinted through in six colors. Each disc is cut flat by CNC
+- **The discs.** Cell-cast acrylic sheet, 25 mm thick, tinted in six colors. Each disc is cut flat by CNC
   (in two bonded halves where the sheet is narrower than the disc), slotted, grooved along its rim and edge-polished.
   The discs are about 485 kg together. On site they slot together on the armature, with 2 mm of play in each slot.
 - **The light.** A 24 V side-emitting LED strip, sealed to IP67, in a 6 mm groove along each rim under a polished
@@ -127,7 +127,7 @@ slotted on, the light commissioned at dusk. Removal takes half a day, and leaves
 | Title | [TITLE] |
 | Maker | [OWNER: full name], San Francisco |
 | Size | About 2 m across; the lowest point 0.55 m above the ground on a plinth 1.5 m across. About 485 kg in 25 mm sheet, plus 1.0–1.8 t of ballast in all (est.) |
-| Material | Cell-cast acrylic, 25 mm, tinted through in six colors; a blackened steel plinth, ballasted |
+| Material | Cell-cast acrylic, 25 mm, tinted in six colors; a blackened steel plinth, ballasted |
 | Light | 24 V rim-lit LED strip (IP67) and one hard spot for the shadow; about 0.4–0.6 kW connected, about 3.5 kWh a night |
 | New or existing | New: made for the festival, at 2 m. A [1.25] m version is [planned / built] [OWNER] |
 | Budget | About €28,000–60,000 (est.) for production, transport, installation and removal, with 15% contingency; low if made in the Netherlands. The artist fee is separate |

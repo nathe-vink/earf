@@ -25,12 +25,12 @@ research rates EV "a long shot (est.)" (R2 §4.6). One application per applicant
 
 ## Facts the owner can draw on (from this repository; all checkable)
 
-- Tropos: a powered horn loudspeaker in 20 mm cast acrylic tinted through; 15-inch woofer, 2-inch compression driver on
+- Tropos: a powered horn loudspeaker in 20 mm tinted cast acrylic; 15-inch woofer, 2-inch compression driver on
   a horn formed from the cabinet's own acrylic, Hypex FA122 built in; to about 51 Hz at −3 dB, up to about 115 dB at 1 m
   (design figures, by simulation; earf.world's particulars).
 - More than eighty parts drawn for making; the horn's profile and the bass worked out by simulation before any acrylic
   was cut (the site's "Progress").
-- The plan and money: the investor deck's $50,000 raise for the first pieces and a debut; a pop-up listening room from
-  19 January 2027.
+- The plan and money: the investor deck's $55,000 raise for the first pieces and a debut; a pop-up listening room after
+  the debut, in spring 2027.
 - What could be open and educational: the horn simulation (`spinoffs/barkhorn/horn_sim.py`, `acoustics/`), the method
   for acrylic cabinets, the parts lists.

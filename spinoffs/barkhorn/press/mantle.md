@@ -7,7 +7,7 @@ stays out of the plinth.
 
 | | |
 |---|---|
-| Plinth | Cast acrylic, 25 mm, tinted through; it floats 40 mm over the base |
+| Plinth | Tinted cast acrylic, 25 mm; it floats 40 mm over the base |
 | Base | Cast acrylic, edge-lit from within, dimmable |
 | Drive | Belt, its motor in a heavy pod of its own |
 | Speeds | 33 and 45, by a button |

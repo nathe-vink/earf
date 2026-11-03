@@ -56,16 +56,16 @@ Eight, in this order, numbered 01–08:
 
 | Date | What | Status | Source |
 |---|---|---|---|
-| **Spring 2027** | **The debut night: date and venue to be set** (the owner chose C, 2026-10-31). The candidates being sequenced are Thu 18 March and Thu 29 April (`SEQUENCE.md`; 25 March dropped: the Thursday before Easter). It was Tue 19 January; every brand file still says so (`CONTRADICTIONS.md`, row 0) | **owner-pending** | owner r46-owner-notes b3211a43 |
+| **Parked** | **The debut night: no date** (the owner, 2026-11-03: dates are parked). Brand material says "the debut", or "spring 2027" where a season is needed; [DATE] and [VENUE] are slots. The earlier candidates (Thu 18 March, Thu 29 April; `SEQUENCE.md`) are parked with it | **parked** | coordinator, 2026-11-03 |
 | 16–24 Jan | SF Art Week | fixed | owner R5 |
 | 20 Jan / **21–24 Jan** | FOG Design+Art: its gala / the fair, at Fort Mason. Now for meetings with galleries, **without a show** | fixed | owner R5; bar `research-popup.md:144`; owner b3211a43 |
 | Week of 2 Nov 2026 | Quote requests sent | planned | lamps `first-articles.md`; horn `make/schedule.md:32` |
 | By 16 Nov | Lamp molds ordered (critical path) | planned | lamps `first-articles.md` |
-| About 18 Dec | The first laminated horn | planned | horn `make/schedule.md`, `laminated-horn.md` |
+| — | The horn is A: one 10 mm sheet formed over a plug, satin outside, the throat turned from a solid block, in the cabinet's own color (replaces the stepped 22-layer horn) | decided | owner, r46-owner-notes 468c1058 |
 | **7 Dec 2026, 23:59 CET** | Amsterdam Light Festival Ed. 16 call closes | fixed | owner R10; the festival's FAQ |
-| 6 weeks before the debut | US Park Police alcohol permit, if the debut is at Fort Mason (was 8 Dec for 19 Jan) | moves with the date | bar `DEBUT-ROOM.md` |
+| 6 weeks before the debut | US Park Police alcohol permit, if the venue is at Fort Mason | moves with the date | bar `DEBUT-ROOM.md` |
 | **31 Dec 2026** | HIGH END Vienna's Start-Up Area closes; it needs a registered company | fixed | owner R5, R9 |
-| February–March 2027 | The listening room / pop-up: **planned, not funded** (Vacant to Vibrant's matching takes 2–6 months) | planned | bar `r43/V2V-APPLICATION.md` |
+| After the debut | The listening room / pop-up: **planned, not funded** (Vacant to Vibrant's matching takes 2–6 months) | planned | bar `r43/V2V-APPLICATION.md` |
 | Mid-February | Prototypes photographed: the first pictures that aren't renders | planned | lamps `first-articles.md` |
 | 8 Feb | Fuorisalone's package (€2,000 + VAT) due | fixed | coordinator's calendar facts |
 | **12–18 April** / **13–18 April** | Milan Design Week (Fuorisalone) / Salone del Mobile and Euroluce. **Both are right; name which** | fixed | owner R5, R9 |
@@ -89,7 +89,7 @@ Eight, in this order, numbered 01–08:
 
 | Product | Of record | Source |
 |---|---|---|
-| **Tropos** | 1293 mm tall; 625 mm wide at the horn, 560 at the cabinet; 423 deep. **About 74 kg with the stepped horn** (coordinator, 2026-11-01, after the engineering review; was 72); **62 kg with the horn lifted off** (the horn lifts off with its compression driver, 3.6 kg, and adaptor, 0.65 kg; the acrylic horn alone is 4.1–5.7 kg). Precisely: 71–73 kg with the horn, by route; 62–63 kg without (horn lane 858fa0c1). Cabinet 20 mm (the first pair: 19 mm stock 2064). FaitalPRO 15PR400 woofer; B&C DE1085TN 2-inch driver; Hypex FusionAmp FA122, 2 × 125 W; crossover 1 kHz. **Horn:** the first pair's is **laminated, 22 layers of 1/2 in**; production's route is the owner's | site `web.py:126`; brand `press/tropos.md`; horn `make/laminated-horn.md:22,35`, `stock-pair.md:12` |
+| **Tropos** | 1293 mm tall; **560 mm wide**, the cabinet, with the horn flush; 423 deep. **72.6 kg on its own feet** (coordinator, 2026-11-03; no 74 kg, no 625 mm, no 85 kg). **The base is open**: none is described; the research (wf_a73d7898-d30) found it passes the tip test on its own feet, and a lab confirms in writing before tooling. Cabinet 20 mm. FaitalPRO 15PR400 woofer; B&C DE1085TN 2-inch driver; Hypex FusionAmp FA122, 2 × 125 W; crossover 1 kHz. **Horn A:** one 10 mm sheet formed over a plug, satin outside, the throat turned from a solid block, in the cabinet's own color (owner, r46-owner-notes 468c1058) | coordinator 2026-11-03; owner 468c1058 |
 | **Hemisphere** | 200 mm across; about 1.6 kg hanging; 2700 K, CRI 90; **a 575-lumen LED** in public copy (590 at the LED, about 500 out of the shade; lamps aa78e0c7). 1,100 lm was the original spec and isn't supported on the low top that was built | owner README:135; lamps `companions/README.md` |
 | **Core** | 160 mm ball, 180 mm tall; **about 1.46 kg** ("about 1.5 kg" in public copy; lamps aa78e0c7, from the current CAD; 2.0 and 2.2 kg were older rounds); **4.7 h** at full brightness at the 90% limit (5.2 h from full, 5.8 h at the bar setting). Public copy: "about five hours" | lamps `first-articles.md`, README round 42; site `web.py:166-168` |
 | **Mantle** | 470 × 380 × 194 mm, lid down; about 15.5 kg; Rega RB330 arm; first build with a 2M Blue (the 2M Black for the show unit is open) | brand `press/mantle.md`; lamps `mantle-drive.md:74` |
@@ -111,7 +111,7 @@ Eight, in this order, numbered 01–08:
 
 | Line | Amount |
 |---|---|
-| Tropos prototype pair, on lit plinths: parts and shop work | $20,700 |
+| Tropos prototype pair: parts and shop work (the deck's line says "on lit plinths"; the base is now open) | $20,700 |
 | Hemisphere, Core and Mantle, one of each, molds included | $16,300 |
 | Tropos testing: emissions pre-scan, safety check, FCC* | $5,000 |
 | Trademark search* and filings ($350 a class) | $3,600 |
@@ -126,15 +126,14 @@ Eight, in this order, numbered 01–08:
   **Superseded.**
 - **Costs of record:**
   - BOMs: Tropos parts $9,577; Hemisphere $4,572; Core $2,027; Mantle $3,815.
-  - Tropos prototype pair to 18 January: **about $18,520**, or about $21,300 with contingency (horn `make/schedule.md:102`).
-  - Lamps and Mantle to 18 January: **about $15,500** (lamps `first-articles.md:175`).
+  - Tropos prototype pair to the debut: **about $18,520**, or about $21,300 with contingency (horn `make/schedule.md:102`).
+  - Lamps and Mantle to the debut: **about $15,500** (lamps `first-articles.md:175`).
   - Both run over their lines: see `CONTRADICTIONS.md`.
 
 ## Still the owner's to decide
 
 1. **Prices**, all four, and Tropos above all ($19,000 against R4's $32,000).
-2. **The horn's production route:** laminated (no tool) or formed over a tool (about $14,500–15,000). This decides what
-   the public copy says.
+2. ~~**The horn's production route.**~~ **Decided:** horn A, formed over a plug (the owner, 2026-11-03).
 3. **The first-run program:**
    - the Founding Hundred, as on the site (a number, no money);
    - or deposits (the money pack);

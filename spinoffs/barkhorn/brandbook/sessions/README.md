@@ -12,8 +12,7 @@ contacted, and nothing is booked or ordered.** Figures marked est. are estimates
 
 ## 1. The format
 
-**The night.** The debut, Tuesday 19 January 2027, in the hired or lent room at or near Fort Mason (venue not yet
-named). **Session 00 opens the evening:**
+**The night.** The debut (date parked, [DATE]), in a hired or lent room, [VENUE]. **Session 00 opens the evening:**
 - one album's worth of music, 35 to 50 minutes, played start to finish;
 - a seated audience of [30 to 60] invited guests, the doors held from the first note to the last;
 - then the room opens, and the party starts.
@@ -22,7 +21,7 @@ The house rule from the bar's book holds: no talking during the record.
 
 **The record.** That set, mixed and mastered for vinyl, pressed as **300 numbered LPs, 180 g, in a translucent tint**
 (Ember, or Smoke; the owner chooses), in a printed jacket with the room on the front. The jacket's line:
-"Recorded live at the EARF debut, San Francisco, 19 January 2027."
+"Recorded live at the EARF debut, San Francisco, [DATE]."
 
 **"Through the first Tropos pair": only if it's true.**
 - **Literally true** when the artist's sound goes through the pair: an electronic or ambient set, or amplified
@@ -122,8 +121,8 @@ International):
   request), **Precision** (the only published all-in price: translucent color, 300 for $2,396, 500 for $3,067,
   standard weight), **United Record Pressing** (custom translucent color +$0.99 a record; "allow four months") and
   **Hand Drawn** (Dallas). Fidelity in Oxnard is a fifth.
-- **The queue is the risk.** No plant publishes one, and URP says four months. **The master must be at the plant by
-  about 15 February** for records by late April, and only a fast plant makes that.
+- **The queue is the risk.** No plant publishes one, and URP says four months. **The master must be at the plant
+  within about four weeks of the debut** for records about fourteen weeks after it, and only a fast plant makes that.
 
 ## 6. Budget and revenue: summary (`BUDGET.md`)
 
@@ -139,22 +138,22 @@ International):
 **That is the record-label ask in `../money/PARTNERS.md`** ("a contribution toward the pressing"), now with a number on
 it. The partner's name goes on the jacket.
 
-## 7. The timeline, from booking to record in hand
+## 7. The timeline, from booking to record in hand (D is the debut; its date is parked)
 
 | When | What |
 |---|---|
-| Week of 2 Nov | The owner sends the quote requests (`QUOTES.md`), asks Wildplum for its availability on 19 January, and picks the first artist |
-| 9–20 Nov | The owner approaches artist 1. For Willits, Ghostly's consent is asked in the same week |
-| By 4 Dec | Terms agreed in principle; `RIGHTS.md` to counsel |
-| By 18 Dec | Agreement signed. The plant chosen and, if the owner decides, **a slot held with a deposit** (a decision, not done here) |
-| December | The set list: what's original, what's a cover; the publishers found for each |
+| Now | The owner sends the quote requests (`QUOTES.md`), asks Wildplum for its availability for the debut, and picks the first artist |
+| The next two weeks | The owner approaches artist 1. For Willits, Ghostly's consent is asked in the same week |
+| By D − 6 weeks | Terms agreed in principle; `RIGHTS.md` to counsel |
+| By D − 4 weeks | Agreement signed. The plant chosen and, if the owner decides, **a slot held with a deposit** (a decision, not done here) |
+| D − 4 to D − 2 weeks | The set list: what's original, what's a cover; the publishers found for each |
 | When the room is named | A recce with the engineer: power, HVAC, noise, where the pair and the audience sit |
-| **Tue 19 Jan** | Soundcheck in the afternoon; **Session 00 at the start of the evening**, 35 to 50 minutes; photographs for the jacket |
-| 20 Jan – 5 Feb | Mixed; the artist's approval (two rounds at most) |
-| 5 – 12 Feb | Mastered for vinyl. Songfile licenses bought. The jacket and label artwork |
-| **By 15 Feb** | **Files (or lacquers) and artwork to the plant** |
-| Early April | Test pressings. Approved within three days |
-| **Late April** (a fast plant) to **June** (URP's four months) | **The records in hand** |
+| **D** | Soundcheck in the afternoon; **Session 00 at the start of the evening**, 35 to 50 minutes; photographs for the jacket |
+| D + 1 day to D + 2½ weeks | Mixed; the artist's approval (two rounds at most) |
+| D + 2½ to D + 3½ weeks | Mastered for vinyl. Songfile licenses bought. The jacket and label artwork |
+| **By D + 4 weeks** | **Files (or lacquers) and artwork to the plant** |
+| About D + 11 weeks | Test pressings. Approved within three days |
+| **About D + 14 weeks** (a fast plant) to **D + 20 weeks** (URP's four months) | **The records in hand** |
 
 **Where the record works hardest:**
 - **Milan, 12–18 April.** Test pressings, if they've come, on the pair.
@@ -174,5 +173,5 @@ Say so on the order page from the start.
 1. Which artist first, and what fee (the budget assumes $1,500 for a trio)?
 2. Ember or Smoke for the vinyl?
 3. $40 or $50, and 300 or 500?
-4. Is a deposit to hold a pressing slot in December acceptable?
+4. Is a deposit to hold a pressing slot before the debut acceptable?
 5. Does the Session open the debut night, or have a night of its own that week? A night of its own is quieter and easier to record, but it's one more room to hire.

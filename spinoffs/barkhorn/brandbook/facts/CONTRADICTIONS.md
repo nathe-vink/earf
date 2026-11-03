@@ -1,5 +1,8 @@
 # The contradiction sweep: 31 October 2026
 
+> **A record (2026-11-03).** The rows below quote files as they stood on 31 October. Since then the dates are parked,
+> the horn is A (formed) and the base is open, so several rows (the debut date, the laminated horn) are moot.
+
 Brand lane, r47. **Read-only across the other lanes.** Nothing in another lane's files was edited; the coordinator
 routes those fixes. Paths are under `spinoffs/barkhorn/`.
 
