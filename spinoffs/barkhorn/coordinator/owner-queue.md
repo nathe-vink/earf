@@ -3394,3 +3394,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   not 4 mm, to close the dark seam at the lip (walks back part of the accepted rim-fix proposal; the day shows it too). Core B day and night
   still rendering.
 - 21:36 the Hemisphere r10 gate launched wf_f0493e6d-678 (day; night (a) cool-white liner; night (b) faint-blue liner, a proposal).
+- 21:39 biomes lane: Poison with the canopy gap moved (front-left, -60, 50 up): the lip's white check-mark gone; one softer green highlight at
+  the horn's upper right; the cabinet green, the woofer clear; its final queued. Haze with the sun at 70 (front side): the upper box 41
+  (26, 38, 41; target 45-60), horn-to-box 4.5x (from 13.7), horn 239 and box 238 (one violet), the interior reading through. A correction:
+  the HDRI turns went the wrong way (a larger rotation moves the sky's features to smaller azimuths), which swung Acid's sunset behind the
+  speaker (body 0.15 of the scene) and Haze's bright sky behind it too; fixed at 6d2f7e17eab4460808bc93aa6ad52a9ca221a954 (Haze sky 338.8,
+  Acid 292.9); the sun-70 and gap settings and the proxy crops at 8dbcab725d7110f04534ac16e1ce6a3c9ca74e56 (proxies-2140/). Queue: the Fog
+  final (rendering), Haze and Acid proxies with the sky right, Poison's final, Haze's final if its proxy holds; Acid's waits for the tint fix.
