@@ -1730,3 +1730,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   Running: the lamps round 7 gate (wf_286ca581-a1f, 2 of 3), Mantle g5 Ember pair (wf_9e88ad0b-a0f, 2 of 3), Ember v2 (wf_2956fd08-cfc)
   and Dust v2 (wf_79a58c1c-eeb). Polished A not committed yet (BASES.md D+/E section at f0c41058, 12:53). Biomes: Acid rendering.
   Re-armed for 14:11 (#42).
+- 13:25 Mantle g5 gate wf_9e88ad0b-a0f (3 critics, 16 min): both HOLD 3/3 on note 3 only (night "a flat backlit panel in a black
+  border"; day "opaque cherry-red lacquer"), as the lane predicted for v4. The underglow fix holds (4th round). v4 stays at g5 as option A.
+- 13:26 sent: render option C as a design exploration (Ember day + night): a GRADED print, densest under the platter, thinning to
+  clear toward the rim (no lit band or outline, which would risk the rejected "red LED edge strip"); report any leak down from the
+  clear zone. The Mantle question (v4 as is vs C, with B/D/E noted) goes to the owner after the base, horn and Smoke questions, with C's
+  frames if they pass.
