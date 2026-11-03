@@ -1947,3 +1947,5 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 14:49 my gate wf_f3111455-c52 on the Smoke ~50 % frame (2064 white and Ice A as context): does it answer the owner's note; is
   the deep grey horn now a separate grey-metal part next to the lighter cabinet. Side-by-side preview built
   (scratchpad/basefr2/smoke-2064-vs-50pct-preview.jpg): the 50 % frame reads clearly lighter and open.
+- 14:49 speaker lane: confirmed the 50 % Smoke commit is 5be29cac68e47735bed12cc87bf80260c5d9b5ae ("51fd7aab" was a placeholder), as
+  found by path.
