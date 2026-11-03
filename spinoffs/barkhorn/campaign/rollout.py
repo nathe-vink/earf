@@ -166,6 +166,18 @@ def phase2(base, horn):
     c['size'] = [1200, 1200]
     c['title'] = 'EARF coin, Ember, on its edge (its own reflection)'
     out['coin-ember'] = c
+    # the eight in a row (the owner's note was about the coins plural): each standing on its edge at its own turn, so the
+    # environment lands differently on each and no two carry the same reflection; the site's strip (7:1)
+    r = json.loads(json.dumps(c))
+    turns = [8.0, 52.0, -24.0, 31.0, -47.0, 14.0, 66.0, -9.0]
+    r['set']['props'][0]['spots'] = [{'position': [round(-0.175 + 0.05 * k, 4), 0.0, 0.0200], 'flavour': fl, 'rotate': [90.0, 0.0, t]}
+                                     for k, (fl, t) in enumerate(zip(['ember', 'dust', 'acid', 'poison', 'ice', 'haze', 'fog', 'smoke'], turns))]
+    r['camera'] = {'position': [0.0, -0.62, 0.11], 'target': [0.0, 0.0, 0.02], 'lens_mm': 50.0, 'level': False, 'fstop': 11.0,
+                   'focus': [0.0, 0.0, 0.02]}
+    r['lights']['key']['orbit']['distance_m'] = 1.8
+    r['size'] = [3700, 528]
+    r['title'] = 'EARF coins, the eight on their edges (each its own reflection)'
+    out['coins-eight'] = r
     return out
 
 
