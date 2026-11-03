@@ -129,6 +129,11 @@ So the light moves inside the speaker (option "Built-in light", `BUILTIN` in `va
 - There is one more thing inside the box to test (heat, rattle).
 - The idea of a separate lit base goes away.
 
+**For the build (gate 2, D by day, 3/3 pass):** by day, the brace channel at y 250 shows from the front three-quarter view as a short dark bar under the woofer's lower right, where A shows a pale brace-edge highlight. One critic read it as a stray mark. Two fixes:
+- Move the brace runs back, to y 315 and 330, behind the woofer's basket and clear of the back's bosses, which start at y 327 only at x 102-138 and 422-458, so the runs stop short of them. The camera then sees them only past the magnet.
+- Or recess each channel into a 7 mm pocket milled in the brace's top face, so its rim sits flush and only the lens line shows.
+The first costs nothing. The second costs a machining operation on the brace and thins it locally from 20 to 13 mm, which the brace's stiffness should be checked for. Either one comes after the light's power is set, since moving the runs back changes how much light reaches the top chamber.
+
 **The frames** (`renders/2026-11-03/barkhorn/base-question/gate2/`, A's camera, Ice):
 - `D-day-ice.png`: light off, so the channels and standoffs show through the walls;
 - `D-night-ice.png`: light on;
