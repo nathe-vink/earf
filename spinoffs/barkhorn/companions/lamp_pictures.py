@@ -150,10 +150,27 @@ def build(frame, samples, scale):
             # outer's, on a short spacer ring on the grommet; a 13 gap at its equator
             ri = float(os.environ.get('CORE_IN_R', '60.0')); zi = zc - float(os.environ.get('CORE_IN_DZ', '12.0')) * MM
             sphere('core', ri, zi, acrylic('core', 0.0, 'Clear'))
-            sphere('core-in', ri - 3.0, zi, frosted(acrylic('core-in', inner, 'Clear')), inward=True)
+            cm = frosted(acrylic('core-in', inner, 'Clear'))
+            # round 9: the printed dot over the LED, modelled in the frost itself (a separate surface beside the frost
+            # made hard paths that the denoiser blotched): within 25 of the axis at the bottom the frost passes about
+            # 40 %, the rest going back into the core (here: absorbed, a conservative stand-in)
+            nt = cm.node_tree; outn = next(n for n in nt.nodes if n.type == 'OUTPUT_MATERIAL')
+            prev = outn.inputs['Surface'].links[0].from_node
+            tc_ = nt.nodes.new('ShaderNodeTexCoord'); sx = nt.nodes.new('ShaderNodeSeparateXYZ')
+            nt.links.new(tc_.outputs['Object'], sx.inputs[0])
+            mr_ = nt.nodes.new('ShaderNodeMapRange'); mr_.clamp = True
+            zd = -math.sqrt((ri - 3.0) ** 2 - 25.0 ** 2) * MM
+            mr_.inputs['From Min'].default_value = zd - 0.001; mr_.inputs['From Max'].default_value = zd + 0.006
+            mr_.inputs['To Min'].default_value = 0.6; mr_.inputs['To Max'].default_value = 0.0
+            nt.links.new(sx.outputs['Z'], mr_.inputs['Value'])
+            dk = nt.nodes.new('ShaderNodeBsdfDiffuse'); dk.inputs['Color'].default_value = (0.03, 0.03, 0.03, 1)
+            mx2 = nt.nodes.new('ShaderNodeMixShader')
+            nt.links.new(mr_.outputs['Result'], mx2.inputs[0]); nt.links.new(prev.outputs[0], mx2.inputs[1])
+            nt.links.new(dk.outputs[0], mx2.inputs[2]); nt.links.new(mx2.outputs[0], outn.inputs['Surface'])
+            sphere('core-in', ri - 3.0, zi, cm, inward=True)
             # round 9 PROPOSAL (the gate: the LED hotspot): a white dot printed inside the core over the LED, Ø50, that
             # sends about half the near light back up into the core, as LED globes do
-            if os.environ.get('CORE_DOT', '1') == '1':
+            if os.environ.get('CORE_DOT', '0') == '1':   # round 9: as a surface it blotched (see below)
                 bm = bmesh.new(); bmesh.ops.create_uvsphere(bm, u_segments=128, v_segments=64, radius=(ri - 3.5) * MM)
                 zcut = -math.sqrt((ri - 3.5) ** 2 - 25.0 ** 2) * MM
                 bmesh.ops.delete(bm, geom=[v for v in bm.verts if v.co.z > zcut], context='VERTS')
@@ -251,7 +268,7 @@ def build(frame, samples, scale):
     if night:
         # round 4: a white ceiling at 2.5 m, so the lamp's light that leaves upward comes back into the room, as at home
         SC.plane('ceiling', (4.3, 4.0), (0.85, 0.0, 2.5), (180, 0, 0), SC.principled('ceiling', '#E8E4DC', 0.9))
-        ev = float(os.environ.get('NIGHT_EV', '3.6' if prod == 'core' else '0.6'))
+        ev = float(os.environ.get('NIGHT_EV', '4.0' if prod == 'core' else '0.6'))
         k = 2.0 ** (0.6 - ev)                     # round 9: one evening room for the family, the same fill at each exposure
         SC.world(hdri='kiara_9_dusk', strength=0.02 * k, rotation=200)
         w = bpy.context.scene.world
