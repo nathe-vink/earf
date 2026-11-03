@@ -3565,3 +3565,13 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   line and wide band are the same edge) first; then the flags (re-proved on tall Poison, side Ember, wide Ember); the turn's backdrop,
   inside-ice, the EARF finish. Hero-light, the back and the amp plate grouped on one helper after its deck job (hero-light waits for the
   owner's edge answer if it changes the panel). Walkthrough: the new owner question, to raise right after item 4.
+- 23:03 OWNER: "1" (answering walkthrough item 4: new night pictures). Saved verbatim in the README first (39c8a341).
+- 23:04 sent: to the site lane, the answer and a request for the exact formats (each *-reel picture, its variants, facade*.jpg) and a plan
+  for the night section (seven singles now, Smoke later, one wall picture), nothing built or swapped yet, the site held at 743be0cb; to the
+  brand lane, the wall picture re-rendered the same way, its uses swap only when it passes, the sizes and crops asked; to the Mantle lane
+  (idle), THE NIGHT PICTURES brief: Tropos base A on its own feet, no base light, polished horn, seven colours now (Smoke after its sheet),
+  then the eight at a wall; lit only by the room's lights (a Hemisphere pendant and Core lamps as practicals, a dim window at most); rulings
+  1-3, no reflect-only cards in frame; sources a5736434 (the TROPOS plate, the Cloud rebuild) and 732a8671 (the 9097 tint), the lamps lane's
+  evening room at dc60ce44 (today's Core, Hemisphere's cool-white liner); the bottom edge's glow rendered as built (an open owner question);
+  an Ice proxy first for the gate.
+- 23:05 item 5 shown to the owner: scratchpad/walkthrough/05-ice-batt.jpg (the passed Ice habitat beside its batt, enlarged).

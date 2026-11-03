@@ -6,11 +6,13 @@ Show one item with its pictures, wait for the answer, save the owner's words ver
 ## Reconciled at 18:32 UTC, 3 November 2026 (changes since the inventory below, built to 18:09)
 
 - **Answered:** item 1, the base ("No light", 15:11); item 2, the horn finish ("...If so just go polished", 15:14); item 3, the
-  site's after-dark pictures ("Replace", 19:22: they come down, the brand's wall picture with them).
-- **Open in front of the owner:** item 4, what replaces them (new night pictures lit only by the room, or day pictures only), asked
-  19:24 with scratchpad/walkthrough/04-after-dark-replacement.jpg.
-- **Next, in order, once item 3 is answered:** (b) items 5-7 (the Ice batt in the Ice habitat; the polished horn close-up; the throat-ring
-  correction), then (c) from item 8. Time-bound in (c): Plastimagen, Mexico City, 10-13 November (next week).
+  site's after-dark pictures ("Replace", 19:22: they come down, the brand's wall picture with them); item 4, what replaces them ("1",
+  23:03, README 39c8a341: new night pictures, each colour on its own feet plus the eight at the wall, lit only by the room's own
+  lights; the Mantle lane builds them, an Ice proxy first; the site and brand lanes send the formats; nothing swaps until they pass).
+- **Open in front of the owner:** item 5, the Ice batt in the Ice habitat, asked 23:05 with scratchpad/walkthrough/05-ice-batt.jpg.
+- **Next, in order:** item 6 (the polished horn close-up, with the disclosure: scratchpad/walkthrough/06-horn-honest.jpg); item 7 (the
+  throat-ring correction); the new bottom-edge question (once its comparison is rendered); then (c) from item 8. Time-bound in (c):
+  Plastimagen, Mexico City, 10-13 November (next week).
 - **A disclosure owed before item 6 (the polished horn close-up), found 19:30:** the site's studio rig (gate 2's A rig, the tall front's)
   showed one lamp (`horn`) at 30 % in reflections while it lit at full, so the polished horn's highlights in the frames the owner chose
   from were dimmer than a real lamp gives. The speaker lane renders an honest A-ice-polished (that lamp at full in reflections, nothing
