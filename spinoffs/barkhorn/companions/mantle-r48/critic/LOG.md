@@ -106,3 +106,14 @@ went, and both judges called v3's edges clean. Both orders together: v3 1-1, mea
 - the deck's front reads as a dark band;
 - faint marks on the top edge (the posts' bonded seats, seen through the deck).
 Stopped at the two rounds asked for.
+
+## The light up through the acrylic (2026-11-03; a new light, so a new count; one round, as asked)
+
+| frame | blind | reads as | the critic's main notes |
+|---|---|---|---|
+| `renders/2026-11-03/barkhorn/mantle-r48/a-night-ember-2423.png` | **5.5** | "a black gaming-PC-style turntable with red LED edge strips" | the slab reads opaque black, only its edges red (65 % of its pixels crushed); a neutral wash makes the floor the brightest area; the inset line over the groove has no visible cause; no red on the platter and arm |
+
+Below the owner's bar of about 6.5. Most of the gap is the stock tint: Ember 2423 passes about 2.2 % through the 25.4
+deck, so lit from inside it still reads as a black slab with a glowing rim. A lit "red lantern" needs the lighter deck
+of open question 8. The critic also asked for a red pool on the floor, which the owner has ruled out, so that note is
+not a fix. It would score 7.5 with its notes applied (its estimate). No second round was run.

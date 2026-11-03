@@ -1,0 +1,9 @@
+{"frame": "renders/2026-11-03/barkhorn/mantle-r48/a-night-ember-2423.png", "card": "night, the room dark, its own light on (the tint is a red)",
+ "stage1": {"score": 5.5, "impression": "A moody low-key render of a belt-drive turntable whose plinth is a black slab outlined by thin red edge glow, floating over a darker sub-plinth on chrome pillars. The light is mostly a neutral grey floor wash, so the product is a near-black silhouette and the red lines read as an LED strip on a gaming peripheral, not as lit, tinted cast acrylic. Edges are knife-sharp and the materials CG-clean. Nothing reads as made in a shop."},
+ "reads_as": "a black gaming-PC-style turntable with red LED edge strips",
+ "unreal_top3": ["the through-tinted red plinth renders as opaque black (65% of pixels crushed); only the edges carry red, as two thin lines",
+                 "the floor is the brightest large area (lum ~39, blue-leaning): a neutral key lights the set, not the product",
+                 "the record, platter and arm pick up no red spill from the slab below"],
+ "inset_line": "the second red line about 30 px in reads as an LED channel with no visible cause",
+ "score_if_fixed": 7.5,
+ "note": "the full reply is in the session's scratch (critic-glow); its 'cooler' list asks for the whole slab to glow as a red lantern, which needs a lighter deck (open question 8)"}

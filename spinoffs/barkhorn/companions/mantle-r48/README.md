@@ -366,6 +366,21 @@ SPST. FAULTS.md item 9 (the light and the phono stage sharing one adapter on a Y
 | the base | nothing; its slot is gone |
 | cost per unit | strip and channel about +$10 (1.5 m against 1.2 m); the groove is one more pass on the deck's routing and the ceiling's blast goes with the edge's, about +$10-15; the base's slot (about -$5) is gone: about **+$15-20** in all, an estimate |
 
+**The frames** (`renders/2026-11-03/barkhorn/mantle-r48/`; the dusk camera of 2026-11-01's `a-dusk-ember-2423.png`; the
+strip at its physical output, about 300 W/m2 off its 5 mm face, not set by eye; `render_glow.sh`):
+
+| frame | what |
+|---|---|
+| `a-night-ember-2423.png` | night, the light on, stock Ember: the rim and the edges glow red from inside; no pool on the shelf |
+| `a-day-ember-2423.png` | day, the light off: the groove barely shows through the deck |
+| `a-night-poison-2092.png` | night, stock Poison: a thinner green line (green travels less far in 2092) |
+
+**The blind critic, one round:** 5.5 on the Ember night frame, against the owner's bar of about 6.5. It reads as "a black
+gaming-PC-style turntable with red LED edge strips" (`critic/LOG.md`). Most of the gap is the stock tint: Ember passes
+about 2.2 % through the 25.4 deck, so even lit from inside the deck reads as a black slab with a glowing rim. The
+critic's "whole slab as a red lantern" needs the lighter deck of open question 8. It also asked for a red pool on the
+floor, which the owner has ruled out.
+
 ## Open questions for the owner
 
 1. **A or B,** or B's cover on A's float. *(Answered 2026-11-01: A, Strata Float v3.)*
