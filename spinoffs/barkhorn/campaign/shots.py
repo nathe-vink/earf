@@ -356,6 +356,8 @@ def _hero_gate3(s):
     if 'edge' in L and L['edge'].get('power_w'):
         L['edge']['power_w'] = round(L['edge']['power_w'] / 3, 3)
     honest_lights(s)                                       # the owner's rule (horn to specular 1, kick and back unlinked)
+    if 'back' in L:                                        # as the site frames: unlinked, it lit the floor the face mirrors
+        L['back']['irradiance'] = 0.0
     cards_out_of_frame(s)
     return s
 
@@ -661,13 +663,14 @@ def _in_frame(s, pts):
     f /= np.linalg.norm(f); r = np.cross(f, [0.0, 0.0, 1.0]); r /= np.linalg.norm(r); u = np.cross(r, f)
     W, H = s['size']; lens = cam['lens_mm']
     hx, hy = (18.0, 18.0 * H / W) if W >= H else (18.0 * W / H, 18.0)
-    sx, sy = cam.get('shift_x', 0.0) * 2, cam.get('shift_y', 0.0) * 2
+    # (a lens shift moves the frame by up to a few per cent; the test is padded to 1.15 of the half-frame both ways
+    # rather than trusting the shift's sign and scale)
     for p in pts:
         d = np.array(p, float) - c; z = d @ f
         if z <= 0:
             continue
-        x = (d @ r) / z * lens / hx - sx; y = (d @ u) / z * lens / hy - sy
-        if abs(x) <= 1.02 and abs(y) <= 1.02:
+        x = (d @ r) / z * lens / hx; y = (d @ u) / z * lens / hy
+        if abs(x) <= 1.15 and abs(y) <= 1.15:
             return True
     return False
 
