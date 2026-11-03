@@ -24,7 +24,7 @@ Show one item with its pictures, wait for the answer, save the owner's words ver
   reflecting less, and no lamp lights a part while skipping what sits behind it in its path. Added 20:06 (ruling 3): no lamp is
   hidden from views through clear resin (`transmission: False`), except a practical's bulb inside its own frosted or opal fitting.
   Added 23:24 (ruling 4): every part of a set casts shadows, and light reaches the product only through a real opening (no
-  `cast_shadow: false`, no sun through the paper; the deck cover's key was one). Added 23:29: a reflect-only card counts as in
+  `cast_shadow: false`, no sun through the paper; the deck cover's key was one). Added 23:26: a reflect-only card counts as in
   frame if any part of its rectangle crosses the frame, tested by ray-casting the frame against the card, not its corners (the deck
   hero's near card covered 19.9 % of the frame with every corner outside).
   A picture passed before these rulings is re-checked against all of them before it is shown.
@@ -70,7 +70,7 @@ Show one item with its pictures, wait for the answer, save the owner's words ver
     (e0bbdcd3: brighter, softer shadows). The home portrait held 3/3 (dark lower cabinets, a beige side face); the room rig is being fixed.
     Renders: the cover on c4, the hero on c3, the row on c2; the room after the room-rig SHA. The deck hero to be re-proxied with the rulings folded in; the cover needs a real re-light
     (e81c1a4a, unproved). Deck v69 waits for them.
-    STATE AT 23:29:
+    STATE AT 23:26:
     - The row landed (c2, 3963f197). Its rig is clean; it is gating.
     - The hero landed (c3, 56900668) but needs a re-render: `edge` linked to six parts (ruling 2), and an in-frame reflect-only card
       covering ~20 % of the frame. It is gating for looks.

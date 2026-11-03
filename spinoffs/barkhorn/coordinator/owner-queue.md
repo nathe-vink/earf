@@ -3670,11 +3670,13 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   inside the set (small, far back, a deeper set if needed), proved on a proxy against the landed cover, then a line. Also: list the
   p['sun']/cast_shadow-false shots and any `cutters` (flags only the key meets: ruling 2's family), and add both checks to
   honest_lights.
-- 23:27 DECK HERO RIG: five reflect-only cards. By ray-casting the frame (every 12 px) against each rectangle, four cover 0.0 %. The card
+- 23:25 DECK HERO RIG: five reflect-only cards. By ray-casting the frame (every 12 px) against each rectangle, four cover 0.0 %. The card
   at [1.76, -1.32, 1.2], 2.2 x 2.2, normal [-0.8, 0.6, 0], covers 19.9 % (x 1140-1428 px, full height): its near edge passes 0.3 m from
   the camera, seen 11° off its plane. The lane's _in_frame tests only corners and the centre, which all lie outside.
-- 23:29 sent to the speaker lane: the hero's in-frame card; the test fixed to check the rectangle (ray-cast or clip); re-run on every rig
+- 23:26 sent to the speaker lane: the hero's in-frame card; the test fixed to check the rectangle (ray-cast or clip); re-run on every rig
   with reflect-only cards (tall, side, wide, back, hero-light, cover, deck-home, deck-home-portrait in flight, the room), reporting
   which have one and stopping any render in flight that does. The hero re-renders regardless (card out, edge off, the A/B for the
   record). Order: the owner's edge comparison; this test fix with the edge-fix SHA (c2 waits on it); then the cover's key and the
   flags.
+  (Time fix: my message to the speaker lane about the hero's card was stamped "23:29" but sent at about 23:26, before a 23:27:09
+  `date -u`. My error again: `date -u` comes first. The log's entries are corrected to 23:25 and 23:26.)
