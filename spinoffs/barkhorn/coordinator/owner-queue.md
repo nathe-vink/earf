@@ -2933,8 +2933,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   PICTURES COME DOWN: the light stage's eight *-reel pictures (webp, thumbs, V2 copies) and the eight at the wall (facade*.jpg), all on the
   dropped base light with the old horn; the brand's uses of the wall picture follow (the Brand Book's images chapter, the partner brief's
   cover, teaser beat 3, the Milan invitation, the press images, idea-milan.jpg). Nothing swapped until item 4; the site held at 743be0cb.
-- 19:25 sent to the site lane and the brand lane: the answer; nothing swapped, nothing built on those pictures, until item 4's answer.
-- 19:25 item 4 shown (scratchpad/walkthrough/04-after-dark-replacement.jpg: the bar at night, lit only by the room, r44-lantern v1 passed 2/3;
+- 19:24 sent to the site lane and the brand lane: the answer; nothing swapped, nothing built on those pictures, until item 4's answer.
+- 19:24 item 4 shown (scratchpad/walkthrough/04-after-dark-replacement.jpg: the bar at night, lit only by the room, r44-lantern v1 passed 2/3;
   the Ice studio picture, passed 3/3): what replaces them: 1, new night pictures, each colour on its own feet plus the eight at the wall,
   lit only by the room (EARF's own lamps can do it), the brand's wall picture re-rendered the same way (my pick; ~9 renders after the
   running fixes, each gated; about half a day); or 2, day pictures only, the night section dropped, the brand's wall picture retired (the

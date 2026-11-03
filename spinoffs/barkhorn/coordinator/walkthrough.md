@@ -8,7 +8,7 @@ Show one item with its pictures, wait for the answer, save the owner's words ver
 - **Answered:** item 1, the base ("No light", 15:11); item 2, the horn finish ("...If so just go polished", 15:14); item 3, the
   site's after-dark pictures ("Replace", 19:22: they come down, the brand's wall picture with them).
 - **Open in front of the owner:** item 4, what replaces them (new night pictures lit only by the room, or day pictures only), asked
-  19:25 with scratchpad/walkthrough/04-after-dark-replacement.jpg.
+  19:24 with scratchpad/walkthrough/04-after-dark-replacement.jpg.
 - **Next, in order, once item 3 is answered:** (b) items 5-7 (the Ice batt in the Ice habitat; the polished horn close-up; the throat-ring
   correction), then (c) from item 8. Time-bound in (c): Plastimagen, Mexico City, 10-13 November (next week).
 - **State changes since 18:09 (the (e) items and others):**
