@@ -99,6 +99,7 @@ def main():
     ap.add_argument('--tt', type=float, help="the glass at this transmission through 20 mm (Smoke 2074 is 0.12)")
     ap.add_argument('--uplight', type=float, default=0.0, help='the night uplight (W); 0 is off')
     ap.add_argument('--backlight', type=float, default=0.0, help="the fire's light through the speaker from behind")
+    ap.add_argument('--weld', action='store_true'); ap.add_argument('--volume-glass', action='store_true')
     ap.add_argument('--lining', default='#0B0B0B', help="the lining's color; 'asset' keeps the asset's own")
     a = ap.parse_args()
     global BLACK_LINING
@@ -115,6 +116,7 @@ def main():
     shot = os.path.splitext(os.path.abspath(a.out))[0] + '.in.json'
     json.dump(sh, open(shot, 'w'), indent=1)
     import habitat
+    habitat.WELD[0] = a.weld; habitat.SURFACE_GLASS = not a.volume_glass
     habitat.run(shot, COLLECTION, a.out, a.samples, a.scale, ASSET, root=W, stand=a.stand, tt=a.tt, up=a.uplight,
                 lining=None if a.lining == 'asset' else a.lining)   # colors F: Smoke on black ('#0B0B0B'); none: the asset's own
 

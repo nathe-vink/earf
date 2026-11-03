@@ -43,7 +43,8 @@ def scale_lights(sh, scales):
                 L[key] = L[key] * f
 
 
-SURFACE_GLASS = True                    # the glass's tint on its faces, not in a leaking volume
+SURFACE_GLASS = True                    # the glass's tint on its faces, not in a leaking volume (--volume-glass: off)
+WELD = [False]                          # --weld: weld the asset's split vertices so its glass volumes close
 TT_SURFACE = 0.92                       # the two faces' reflection loss, as tints.py has it
 
 
@@ -211,6 +212,25 @@ def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extr
                         if n.type in ('VOLUME_ABSORPTION', 'PRINCIPLED_VOLUME') and 'Density' in n.inputs:
                             n.inputs['Density'].default_value *= f
             print(f'glass: {glass_from:.0%} -> {tt:.0%} through 20 mm (absorption x {f:.3f}) on', sorted(done))
+        if WELD[0]:
+            # the asset's panels arrive from glTF with their vertices split at every seam, which leaves each glass
+            # volume open (the speaker lane, 2026-11-03: welded, every panel closes, normals out); weld them
+            import bmesh
+            seen = set(); nw = 0
+            for o in col.all_objects:
+                if o.type != 'MESH' or o.data.name in seen:
+                    continue
+                seen.add(o.data.name)
+                bm = bmesh.new(); bm.from_mesh(o.data)
+                n0 = len(bm.verts)
+                bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=1e-5)
+                if len(bm.verts) < n0:
+                    nw += 1
+                    bm.to_mesh(o.data)
+                    flat = any(sl.material and sl.material.name.split('@')[0] == 'bark' for sl in o.material_slots)
+                    o.data.polygons.foreach_set('use_smooth', [not flat] * len(o.data.polygons))
+                bm.free()
+            print(f'weld: {nw} meshes welded')
         if glass_shadows:
             # light through the glass: Cycles renders without refractive caustics, so no lamp lights anything inside or
             # behind a clear wall and the inside reads black whatever the tint. Shadow rays pass each acrylic wall
@@ -309,9 +329,12 @@ def main():
     ap.add_argument('--glass-from', type=float, default=0.12, help="the asset's own (Smoke 2074: 0.12)")
     ap.add_argument('--uplight', type=float, default=0.0, help='the night uplight, W (0: off, the day)')
     ap.add_argument('--no-ground', action='store_true', help="don't settle the speaker onto the set")
+    ap.add_argument('--weld', action='store_true'); ap.add_argument('--volume-glass', action='store_true')
     ap.add_argument('--lining', help="the lining's color, hex (colors F: Smoke '#0B0B0B')")
     ap.add_argument('--flag', type=float, nargs=2, default=(8.0, 6.0), help='the black flag behind the camera, m (0 0: none)')
     a = ap.parse_args()
+    global SURFACE_GLASS
+    WELD[0] = a.weld; SURFACE_GLASS = not a.volume_glass
     sh = json.load(open(a.shot))
     scale_lights(sh, {k: float(v) for k, v in (x.split('=', 1) for x in a.light)})
     for kv in a.sets:
