@@ -1112,3 +1112,28 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   deck (tint outside over a clear light-guide core with a white/frosted diffuser, like Hemisphere's color outside and the speakers'
   F lining), a lighter pour only as a comparison, Ember night/day + Poison night, one critic round, no floor pool.
 - Note to self: three times today my messages carried times ahead of the clock. Run date before writing any time.
+- 05:57 OWNER: "Those smoke images still look awful. The reflection on the front makes everything except for the bottom of the
+  speaker look spray painted white. The speaker looks like it’s floating above the ground. All bad." Saved first (README 3bf99a5a).
+  My second miss on this picture today. Biomes told (~05:59): a black flag behind the camera so the front mirrors black, the right
+  wall's rim down, the real M8 feet touching with contact shadow and an unbroken wet-road reflection, horn A's model, and a blind
+  critic with the owner's four tests (see-through/no white-washed faces; grounded; no light thrown down; the current horn) before
+  sending. NEW RULE: nothing reaches the owner, or is called good, until blind critics with the owner's notes pass it.
+- ~06:00 status answer sent to the owner from the audit's six strands (the critic and verifier still running): editions and the
+  bar plan never shown (my miss); Mother EARF unbuildable as drawn, Amsterdam 7 Dec with no entry; lamps stalled (no pictures, no
+  Poison/Haze check, redesigns never shown, Tint Library never mentioned); brand idle and stale; deck stale in words; business
+  drafts unsent and stale. CORRECTION told: the board said horn A's forming tool was about $1,100; costed $6,925 (PARTS-FINAL-DESIGN
+  at f39f30d5); the first pair about $22,000 (no base) / $23,100 (plate) / $24,100 (plinth) against $20,700; cushion ~$2,000-4,100.
+  hello@earf.world has no mailbox.
+- 06:00 OWNER: "The horn is still stepped in that image too / Also what’s going on with the stuff I haven’t reviewed yet" Saved first
+  (README 710a489f). The base frames A/B/C (c5074ea8, 6626d0b9, 60ae2250) do have horn A; the Smoke proofs had the stepped stand-in.
+  Answered: nothing is moving on the unreviewed work; links given (House Book v11 21rpsCMdPvCXmgdXLmoMXB, New Objects
+  UUJtcAypMzj1y9VeQcgegZ, Brand Book WGpswpvvETozjgRAxBuUK3); one review section on the board coming (wf_2db8026c-753 gathering
+  pictures and cards, with a skeptic).
+- 06:03 deck v66-v68 (3sihYaT4ckNTF6WE7SWR7x), words only, read first (sha256 matched): risks (the horn formed from one sheet; seven
+  of eight horns custom at volume; the tip test passed on its own feet, a lab to confirm; "run with AI", not "independent"), stands
+  (AI review; names checked online; the trademark search still to run), plan (the forming tool: a tooling-board plug, then about
+  $14,465 aluminum). The ask, tropos, first, made, model, colours, line, cover and home wait for the base answer and new pictures.
+- 06:05 brand lane: words-only pass asked (horn A, no base described, 72.6 kg / 560 mm, the retired lines, "all the way through" out,
+  19 January removed, "run with AI"); nothing published. Lamps lane: the Poison/Haze match check on the room frames; Hemisphere
+  (color outside) and Core on its dock in Ice, day off / night on through the acrylic, blind critic with the owner's tests; the
+  other seven held.
