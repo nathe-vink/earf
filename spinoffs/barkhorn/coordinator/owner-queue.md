@@ -2922,3 +2922,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   beyond the narrower side face, soft. Its own gate passed all four. Haze's final rendering, then the Poison proxy (the honest gap), the Acid
   proxy at 4 degrees.
 - 19:18 my gate on Ember v2 (wf_f93f142c-e14; v1, Dust and Ice polished as context) started.
+- 19:18 bar lane: r44-lantern v3 at 19b7d3b928c66c8e6b7d16dc588202be471c9792 (renders/2026-11-03/barkhorn/planet-tropos-a/r44-lantern-v3.png,
+  256 samples; v2 kept beside it): the fill a real lamp, no light-linking at all (a 1.5 m gridded softbox, 30 degrees, front left on the camera
+  side, aimed at the upper bodies; the grid's spread does the cutter's work); the level set by measurement (fill 0.5: cabinet 110, lining
+  saturation 0.42 milky; 0.25: 93, 0.49; 0.08: 56, 0.67); at 0.07 the left cabinet's mean 56 (v1 18, v2 51), near-black 45 % (the ribs and
+  gaps), the linings saturated red (0.67, ~204/68/73), the floor beside the base 48 (v1 40: an even lift, no pool); the spots, Mother's spot and
+  clamp 4 kept, the woofer glints gone. Next, it says, shop v3 and window v3 with one window-bay setup (my 19:11 note puts listening v4 first).
+- 19:20 my gate on r44-lantern v3 (wf_761ff194-8bf; v1 and the older picture as context) started.
