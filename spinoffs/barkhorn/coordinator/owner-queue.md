@@ -3351,3 +3351,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 21:14 sent to the speaker lane: the running f7f03850 chunks stand; the hero proxy (-6, 0.15 m lower) approved; the row: (a) at -12 first,
   then (d) or (a)+(d), (b) only via the owner; the order: hero proxy, row proxy, the shared 9097 tint fix, the turn flags, the cover, the
   amp plate, back, hero-light. To c4, c3, c2: finish the current chunk; merge 3b541d9d and regenerate before the next (2, 5, 7).
+- 21:20 speaker lane: THE COVER honest and proved at e0bbdcd34df8a7da1713ae7ac7b3ce885c4d6b49: every lamp unlinked; cyc, top and over through
+  glass; fill and face at specular 1.0; side_l at y -1.5; smoke on a 30-degree honeycomb grid aimed at Smoke; strip 70 to 6; no reflect-only
+  cards. Proxy (0.25 scale, 0.3 stop down): fronts Ember..Smoke 39/73/92/34/76/57/131/26 to 59/83/106/40/90/65/146/38, saturation within
+  0.05, tops clipped at most 6 % (Acid), sweep 238; the long tinted shadows softer and shorter, the units brighter and less moody (the honest
+  cost). Proof deck-fix-proofs/deck-cover-proof.png. The cover's line (phase-1 chunk 3, ~94 min) and the room's (chunk 4, ~84 min, clean
+  since aed49790) offered for helpers.
+- 21:20 sent: c4 the cover after its fix1 chunk 2 (~23:05); c2 the room after its fix1 chunk 7; the speaker lane's order restated (the hero
+  and row proxies, the 9097 tint fix, the turn flags, the amp plate, back, hero-light).
