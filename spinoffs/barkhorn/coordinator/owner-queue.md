@@ -2824,3 +2824,14 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 18:54 biomes lane (its message said 18:55): yes, 0.25 was a specular multiplier (a trick); back to 1.0, the 3 x 3 m gap at the same
   irradiance dimming the reflection honestly (~a quarter of the radiance). Its message named "20d1ccd", which doesn't exist; the commit
   by path is 2c25b791ce6fb38123d3e2f4fbb537f8451fe68d (18:54). The Poison proxy follows the Haze final, with the honest light.
+- 18:55 biomes lane (its message said 18:56): its own correction: the specular 1.0 commit is 2c25b791 (as I'd found by path).
+- 18:55 c2: chunk 14 landed (side haze 11.5 min, fog 13.7; back ember, dust, acid, poison, ice 5.5-7.5; 17:49-18:52) at
+  a71f6581c20f007b813bee44017ecb3c9c2c756f; phase 1 done (chunks 11 c171e299, 13 854623c8, 14 a71f6581); merged 9db8da17 at
+  b4048ddd7f798c52810fdcbe214e28fa6a62d2d4; phase-2 chunk 4 started 18:55 (amp-plate-ember, horn-back ember, dust, acid, poison; ~97 min).
+  Its flag: the polished build rewrites the tracked studio/products/barkhorn-variants.json (horn-satin roughness 0.05 against the committed
+  0.25, 17 lines); its renders use 0.05; not committed.
+- 18:56 sent to c2: keep the rebuilt file (0.05 is the polished horn, the owner's choice; 0.25 the satin default the polished build
+  overwrites); don't commit it; chunk 4, then 9.
+- 18:56 sent to the speaker lane: confirm the rewrite is by design and note it in HELPERS.md; the back set is complete and gating.
+- 18:58 my gate on the back set, seven tints (wf_19056f34-acf; back has no sidesheen) started: the horn from behind (it looks pale on my
+  contact sheet), the EARF mark at phone size, a diagonal white streak on the back panels.
