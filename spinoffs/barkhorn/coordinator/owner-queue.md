@@ -1509,3 +1509,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 11:06 biomes lane (its message said 11:08): Dust (2 of 7) at c96fb96a95d23f84cced8a05699eb40654582b3a; its single agent passed all
   four, horn included ("clear orange-tinted acrylic", ports and frames through the walls; the red-tinted shadow is sun through the
   tint, not a glow). Acid rendering. I hold Dust until my Ember gate returns, then gate Dust with Acid as one batch.
+- 11:15 Ember habitat gate wf_603287f2-d2f (3 critics, 14 min): HOLD 3/3 (fails see-through, horn, not cheap). The horn glows like a
+  lampshade: brighter than the haze behind it (R 164-209), 30-50x its cabinet in linear light, orange against the cabinet's crimson,
+  mottled (fine noise 3-7 % vs 1-2 % on the sky); the throat a soft black blot with two "drips" (the driver and inner posts as
+  silhouettes through backlit satin); the cabinet a near-black oxblood slab (~9/255); two red points read as indicator LEDs; posts grey;
+  the horn touches the ridge. My own look: Dust (daylight, three-quarter-ish) reads far better than Ember (dark, backlit, face-on).
+- 11:16 sent to biomes: check for a hidden horn light or emission; light the horn only with the scene, in the cabinet's hue, from the
+  front or side; denoise or more samples on the horn; Ember re-lit with real lava light through the cabinet and a three-quarter view;
+  check the dark habitats still to render before they go. Dust batched with Acid for my gate.
