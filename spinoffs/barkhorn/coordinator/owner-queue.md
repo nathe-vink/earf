@@ -2134,3 +2134,15 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   final, the deck-hero proof, then chunks 2-4.
 - 15:32 my gate on the polished close-up started (the satin close-up and the whole polished A as context): an honest premium detail
   for the owner, anything cheap through the horn, the crop.
+- 15:34 Mantle C2 gate wf_1b32c9cb-e77 (3 critics, 18 min): C2 HOLD 3/3 night and day, all on see-through. C2 fixes the underglow (the
+  gap, base top and floor as clean as A: floor 5,11,23 vs the first C's red 13). But: a hard black crescent in front of the platter
+  in both frames (off the deck's front edge, splitting the field: "A with a black hole in it"); the grade invisible (flat, ~7 % vs
+  the first C's ~20 %; at night C2 ~ A, 1.3 % of pixels differ, mean < 1/255); the "clear" ring an opaque black bezel by day, gone at
+  night; the top edge chewed by day; red lacquer by day. A g5 this time: critic 0 SHOW both; critic 1 SHOW day, HOLD night (an even
+  field); critic 2 HOLD both (lacquer). The first C: HOLD on the downward spill. All three: keep C2's backing and bring back C's
+  centre-out falloff.
+- 15:34 sent to the Mantle lane: C3 (no crescent, the glow continuous to the platter, any unprinted centre under its footprint; a
+  soft visible radial falloff ~20 %, no hard boundary, the backing kept; faint bounce on the platter rim, record edge and arm pillars;
+  the border ring as clear tinted glass by day, dark at night with no lit line; clean edges; a deeper ruby day top with depth; the
+  underside rechecked with the shadows lifted); proxy, then night and day in full with the numbers. The owner's Mantle item waits
+  for C3.
