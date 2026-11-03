@@ -2423,3 +2423,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   Hemisphere day. The inventory workflow: all five sweeps back (log-1 49, log-2 78, notes 64, board 44, lanes 76: 311 items), the
   merge running. Re-armed for 17:38 as #46. To do next while lanes run: the board to v24 (the base and horn decided) and the deck's
   words (no light, the polished horn).
+- 16:49 board v24 published (MGUByhczqB2jUYDV7R4t3h, version 1793724572-d6f4; a copy of v23 kept as scratchpad/decide/earf-decisions-v23.html):
+  the header "Updated 3 November 2026, 16:49 UTC"; the lede (the base and horn settled today; the open questions now come one at a time
+  in chat); the glance list (01 the base: Settled, "No light: on its own feet"; 03 the horn: Settled, "A, smooth, polished"; both
+  "The new pictures are rendering"); the base section Settled with the owner's pick; the horn section with polished and the reason.
+  The 29 review cards unchanged (they come up one at a time in the walkthrough).
