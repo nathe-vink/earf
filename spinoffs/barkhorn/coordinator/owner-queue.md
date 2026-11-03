@@ -2166,3 +2166,17 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   a helper's branch from 5295e58f to 9db8da17 by merge, rebuild or not, the run command) before the helpers get their chunks. The
   site lane: define joinery, back mark and coin (what, tint, framing, source) in PICTURES-2026-11-03.md (row 18 lists the audit's six:
   horn mouth, cabinet edge, joinery, back mark, plate, coin, each beside a whole speaker, "the owner").
+- 15:44 biomes lane (its message said 15:45): the polished proxies measured (CIE L* / hue in boxes on the cabinet with the woofer, so
+  low absolutes; compare across): Dust (passed) cabinet 20.7/7, horn 51.6/11; Fog (sun 110) 33.4/46, 55.5/76: good (clear birch, the
+  internals visible), final queued; Haze (sun 100) 3.1/244, 22.3/243: still starved (the sun lamp at 1.5 degrees blocked by the grass
+  and hills, and the HDRI's own sun disk still behind the speaker at rotation 248.3); fix cb4e1bf73ca9b9709cde5c73287969af64b13c97:
+  the sun at 6 degrees (Dust's) and the HDRI at 187.8, its disk moved to azimuth 100 with the lamp, out of frame right; polished, the
+  horn reads as glass, no X or seam at proxy size. Poison (the back-left fleck) 2.2/79, 3.0/103: no effect (the batts block light from
+  behind, as predicted); replaced by soft light through a canopy gap from the camera side and above (1.6 m at 30 az, 55 up, 4.0,
+  #EEF2E2). Order: Dust and Ice polished finals rendering (Dust first), then the Haze and Poison proxies, then Fog's final.
+- 15:45 speaker lane: HELPERS.md's phase-2 steps at 852b338f7ae5750147380490fd7a31a1c207366b (after the last phase-1 chunk: git fetch,
+  git merge --no-edit 852b338f on the helper's own branch, never a rebase or force-push; push; rollout.py --phase 2 ... --chunks;
+  each queue-NN.sh one at a time; no model rebuild: only rollout.py, HELPERS.md and committed renders changed from 5295e58f; no
+  conflict possible; renders to renders/2026-11-04/barkhorn/rollout/A-polished-p2/).
+- 15:45 sent each helper its phase-2 chunks, to run on its own after phase 1 per 852b338f: c2 1, 4, 9 (chunk 1, Sound's Ice arc,
+  first); c3 2, 5, 10; c4 3, 6 (3 with the dark-ground studio). Reports as before.
