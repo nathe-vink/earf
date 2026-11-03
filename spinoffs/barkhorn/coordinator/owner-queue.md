@@ -3337,3 +3337,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   Acid; ~87 min) from 21:09, then chunk 5. c4 merged (b153d35f926bf83a19d06fe16df81f5045d7323f), chunk 3 (tall Acid, Poison, Ice, Haze,
   Fog; ~84 min) from 21:09, then chunk 2's tall Ember and Dust. The row and phase-2 chunk 6 held.
 - 21:10 check-in #50 armed for 21:58 (trig_01Sxcb3MSCYmbm1BVZ2Y82Dp), with the current gates, renders and lane queues.
+- 21:12 biomes lane: its out-of-frame card code crashed the Poison diagnosis and the Haze A/B (a missing scene attribute); fixed at
+  e9a1770e4d5bf6e9a2ca2266d5a518e081d58234, the queue restarted 21:10: the Poison diagnosis (base, gap off, sun off; old cards, ~10 min),
+  the Haze A/B (reflection-only cards against real cards out of frame; the new sun-135 Haze is its real arm), the Acid proxy, the Fog final.
