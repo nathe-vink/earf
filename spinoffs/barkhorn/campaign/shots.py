@@ -484,6 +484,10 @@ def deck_cover():
         L['smoke'].update(target=[sm[0], sm[1], 0.5], spread_deg=30)
     if 'strip' in L:
         L['strip']['irradiance'] = 6.0
+    # (its proxy, 0.25 scale: the cyc, top and over lamps through glass, and the side lamps unlinked, lift the fronts by
+    # about a third and fill the long shadows; Dust's and Acid's tops clipped on 12 and 11 %. 0.3 stop down: 4 and 6 %,
+    # as before the rule, the fronts' saturation within 0.05 of it, the sweep 238)
+    s['render']['exposure'] = round(s['render'].get('exposure', 0.0) - 0.3, 2)
     return s
 
 
