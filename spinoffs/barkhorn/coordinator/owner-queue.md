@@ -1462,3 +1462,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   micro-perforated panels; the light path with an unlined top or back; then a skeptic writes the brief). 10:49 gate wf_4c76247f-752
   on D day with A as context. My pick for the base question may change: if D can't give the site's look as built, its value is a
   lantern glow the owner didn't ask for, and A (no light) becomes the natural pick unless the study finds an honest top.
+- 10:47 speaker lane: the horn-finish note at 6ba64fef661b067b31e90c652099ec172a2e449f (spinoffs/barkhorn/asset/README.md, "Horn
+  A's outside: satin or polished"): pressure-formed over a male plug, so the outside is the free side and leaves the press with the
+  cast sheet's own gloss; polished is no extra work, satin is (a bead blast, ~$15-30 a horn). Gloss's cost: a higher reject rate
+  (dust specks and corner ripple show on gloss, hide under satin), so the press needs the clean room the risk register already asks
+  for; touch-up by hand buffing ~$10-20 a horn ($30-60 a full buff), never flame on the formed face (crazing). In use: gloss shows
+  fingerprints and swirls (polish out); satin hides prints but a scratch can't be buffed out. Satin was the owner's look, not a cover
+  for defects. Tooling unchanged ($6,925 / $14,465). The polished-A pair frame (gate2/A-ice-polished.png) after the six now
+  rendering, ~1 h 45 min.
