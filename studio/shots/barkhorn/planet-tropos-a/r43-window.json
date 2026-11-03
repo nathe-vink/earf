@@ -1,5 +1,5 @@
 {
- "title": "Planet EARF pop-up (round 43), window: Tropos on its own feet, horn A polished (2026-11-03) [camera 1.2 m nearer and 0.45 m higher than round 43 so the pair clears the 0.30 m bulkhead: without the plinth its feet hid behind it; gate 1 (SHOW 2/3) polish: the pair 0.30 m further back in the bay (x 1.00) and the eye at 2.05 m, so the feet and a strip of floor show above the bulkhead; the window spots follow the pair, a 0.30 m source, softer on the horns]",
+ "title": "Planet EARF pop-up (round 43), window: Tropos on its own feet, horn A polished (2026-11-03) [camera 1.2 m nearer and 0.45 m higher than round 43 so the pair clears the 0.30 m bulkhead: without the plinth its feet hid behind it; v3, after gate 2 (HOLD: the larger spot sources made larger reflections): the camera, the 0.30 m set-back and the floor strip as v2; the window-bay spots moved to the window head on the street side, 10 W with a 0.05 m source, aimed at the fronts, so their reflections miss the horn crease and the top faces and little light pipes to the bases; a 1.2 m gridded front light from the street side (0.075, 35 deg) lifts the fronts and throws the shadows behind the pair; 512 samples; the woofer surround matt]",
  "size": [
   2400,
   1600
@@ -794,38 +794,38 @@
   "win0": {
    "type": "spot",
    "position": [
-    0.5,
+    0.05,
     2.42,
-    3.3
+    3.0
    ],
    "target": [
-    1.1,
+    0.85,
     2.42,
-    0.8
+    0.75
    ],
-   "power_w": 60.0,
-   "cone_deg": 26.0,
+   "power_w": 10.0,
+   "cone_deg": 30.0,
    "blend": 0.7,
-   "radius_m": 0.3,
+   "radius_m": 0.05,
    "color": 2600,
    "camera": false
   },
   "win1": {
    "type": "spot",
    "position": [
-    0.5,
+    0.05,
     3.38,
-    3.3
+    3.0
    ],
    "target": [
-    1.1,
+    0.85,
     3.38,
-    0.8
+    0.75
    ],
-   "power_w": 60.0,
-   "cone_deg": 26.0,
+   "power_w": 10.0,
+   "cone_deg": 30.0,
    "blend": 0.7,
-   "radius_m": 0.3,
+   "radius_m": 0.05,
    "color": 2600,
    "camera": false
   },
@@ -1003,6 +1003,27 @@
    "irradiance": 0.05,
    "color": 2200,
    "spread_deg": 80.0
+  },
+  "streetfront": {
+   "type": "area",
+   "position": [
+    -1.6,
+    2.9,
+    2.4
+   ],
+   "target": [
+    1.0,
+    2.9,
+    0.75
+   ],
+   "size_m": [
+    1.2,
+    1.2
+   ],
+   "irradiance": 0.075,
+   "spread_deg": 35.0,
+   "color": 2900,
+   "camera": false
   }
  },
  "haze": {
@@ -1055,6 +1076,9 @@
   },
   "builtin-led-brace": {
    "glow": 0.0
+  },
+  "driver-surround": {
+   "roughness": 0.9
   }
  },
  "finish": {
