@@ -21,7 +21,8 @@ Show one item with its pictures, wait for the answer, save the owner's words ver
     red tick and checking that the field's light reaches what stands on it. Ready after that pass.
   - Smoke: v2 held 3/3 (17:53): its horn's thick parts were lightened to ~58 % in v2 (the lane's own change). v3 puts the whole horn on one
     sheet at #A6A9AE (~38 %), black cards for the lip, and a 2064 re-render for a fair pair; after the speaker lane's chunks 3 and 4.
-  - The habitats: Fog's reframe proxy cut the horn's crease from 35.5 to 20.3 L (18:15); Ember held 2/3 (18:21) on a sky wedge in the horn.
+  - The habitats: Ember passed 3/3 at 10 degrees off (19:43, 45225a29), joining Dust and Ice. Fog's reframe proxy cut the horn's crease
+    from 35.5 to 20.3 L (18:15); Ember had been held 2/3 (18:21) on a sky wedge in the horn.
     The cause across Ember, Haze and Poison: the speaker turned 23-38 degrees off the camera's line (Ice, clean, ~4). All turned to ~10
     degrees (c3e199ca); the measure calibrated on the passed Ice and Dust. Acid's final, then the Ember, Haze and Poison proxies, their
     finals, then Fog; done ~21:30 UTC.

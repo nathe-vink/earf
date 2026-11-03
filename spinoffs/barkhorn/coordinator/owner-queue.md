@@ -3033,3 +3033,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   channels, nothing hidden render-side; down 2/3 to 1 stop or feathered, the tops at R 235 or less and saturation 0.8 or more; the counter
   dimmed or flagged, or the right speaker toed in; the woofer glints' real source found and reported plainly); its order: listening v4,
   r44 v4, then shop v3 and window v3 together.
+- 19:43 Ember v2 gate wf_f93f142c-e14 (3 critics, ~24 min): SHOW 3/3. The wedge shrunk to a soft sky sheen (~3-10 % of the horn, near the passed
+  Ice horn's), no X; the ring glint gone (28,4,5 against v1's 133,19,17); see-into red at the smaller side view; grounded on its own red
+  shadow; no light down. Optional only if the owner flags them: the last rose patch on the horn's outer lower-left wall (a dark element for it
+  to mirror, not more turn); a soft amber reflection outside the ring at 4-5 o'clock (a foreground lava crack mirrored). The biomes item now
+  holds Dust, Ice and Ember (each 3/3); Haze, Acid, Poison and Fog in progress.
+- 19:43 sent to the biomes lane: Ember passed 3/3, no change; the two optional notes; carry on.
