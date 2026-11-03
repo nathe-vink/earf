@@ -81,7 +81,42 @@ def main():
         ext = (f'x {min(xs) / nx:.2f}-{max(xs) / nx:.2f} y {min(ys) / ny:.2f}-{max(ys) / ny:.2f} of the frame' if xs else '')
         print(('IN FRAME ' if hit else 'out      ') + f'{pct:5.1f} %  {ob.name} (hidden from camera) {ext}')
     if not hidden:
-        print('no mesh is hidden from the camera: no reflect-only cards')
+        print('no mesh is hidden from the camera')
+    # the coordinator, 23:47: every object hidden from the camera but seen in reflections. A camera-hidden area lamp is
+    # one: its rectangle (or disk) is cast as a card. Point and spot lamps have no surface a ray can meet, so are listed
+    for ob in sorted(bpy.data.objects, key=lambda x: x.name):
+        if ob.type != 'LIGHT' or ob.visible_camera or not (ob.visible_glossy or ob.visible_transmission):
+            continue
+        d = ob.data
+        if d.type != 'AREA':
+            print(f'lamp {ob.name}: {d.type}, hidden from the camera; no surface (a point source), not a card')
+            continue
+        M = ob.matrix_world
+        n = (M.to_3x3() @ Vector((0, 0, 1))).normalized()
+        ax = (M.to_3x3() @ Vector((1, 0, 0))); ay = (M.to_3x3() @ Vector((0, 1, 0)))
+        sx = d.size * ax.length; sy = (d.size_y if d.shape in ('RECTANGLE', 'ELLIPSE') else d.size) * ay.length
+        ax = ax.normalized(); ay = ay.normalized(); C = M.translation
+        disk = d.shape in ('DISK', 'ELLIPSE')
+        hit = tot = 0; xs, ys = [], []
+        for py in range(ny):
+            v = (py + 0.5) / ny
+            for px in range(nx):
+                u = (px + 0.5) / nx
+                p = tl.lerp(tr, u).lerp(bl.lerp(br, u), v)
+                dv = (p - o).normalized(); tot += 1
+                den = dv.dot(n)
+                if abs(den) < 1e-9:
+                    continue
+                t = (C - o).dot(n) / den
+                if t <= 0:
+                    continue
+                q = o + dv * t - C
+                qa, qb = q.dot(ax) / (sx / 2), q.dot(ay) / (sy / 2)
+                if (qa * qa + qb * qb <= 1.0) if disk else (abs(qa) <= 1 and abs(qb) <= 1):
+                    hit += 1; xs.append(px); ys.append(py)
+        pct = 100.0 * hit / tot
+        ext = (f'x {min(xs) / nx:.2f}-{max(xs) / nx:.2f} y {min(ys) / ny:.2f}-{max(ys) / ny:.2f} of the frame' if xs else '')
+        print(('IN FRAME ' if hit else 'out      ') + f'{pct:5.1f} %  lamp {ob.name} ({d.shape} {sx:.2f} x {sy:.2f} m, hidden from camera, seen in reflections) {ext}')
 
 
 if __name__ == '__main__':
