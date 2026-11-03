@@ -1755,3 +1755,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   and h2 (+ soft dusk light from the camera side, 5 x 4 m, 35 degrees up, 0.5, #9C92C8). Facts: the horn uses its own deep lot (density
   621 on 12.7 mm vs the cabinet's 236 on 20 mm: "the formed horn keeps its deep lot", the spec as built); the asset's LED at strength 6 is
   ~2x a real 5 mcd 3 mm LED (to render at 3 if the glint is it); Ember's final at 160 samples; satin not tuned further. Acid rendering.
+- 13:42 Dust v2 gate wf_79a58c1c-eeb (3 critics, 23 min): SHOW 3/3, the first habitat to pass (see-through Dust glass, no white-wash;
+  standing on the sand at phone and thumbnail size; no underglow; the horn smooth, no X at normal size; nothing cheap). Optional polish:
+  a 1-3 px contact crease and slight sand bedding along the right half of the base; a tiny glint on the crossover box corner. To tell the
+  owner: under the low sun Dust reads red-orange (16-22 degrees, honest), and the satin horn reads paler and peachier than the cabinet
+  (the same hue): evidence for the horn-finish question. Sent to the owner as a sample (6b2c1243).
