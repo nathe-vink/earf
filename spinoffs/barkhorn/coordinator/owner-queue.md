@@ -2033,3 +2033,20 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   question goes to the owner as its own walkthrough item; a short README note with numbers (the physics plainly with the size of
   the leak; what C2 still gives over A by day and night; a middle path such as a narrower clear zone with a measured leak, worth a
   proxy or not; the cost of each against v3 and v4); nothing to render until the gate is back.
+- 15:16 speaker lane: roll-out A + polished from 5295e58febd4e783b1d99103f5995b90b473b328 (lead-hf-pod, product c11e9097c891a78d1ab6894c8ab5fd5758c281ba;
+  BASES.md 44f0320f; the spec to polished 27cf86ea7a379fe5e93aaff85acd87772e3db34c: FORMED_HORN_SATIN 0.25 to 0.05, the material name
+  horn-satin kept, the same in barkhorn-cloud.json (17 flavours), TINTS.md, BASES.md, the asset README, make_blend's help and
+  shots.py, each citing the owner at 15:14; rollout.py --hold). The inside: the plug's face, so as glossy as the plug; no extra step
+  on the horn, the plug's polish a look item (register F3: sealed, sanded to 600, polished, wiped every shot); the prototype's
+  tooling-board plug gives a slightly duller, faintly textured inside, the production aluminium tool a good gloss; buffing only near
+  the mouth; the forming trial to judge the inside's gloss under raking light against a limit sample. Split with Smoke held (40
+  shots, ~20.6 h, 15 chunks): c1 the lane 1-4 (deck hero, row, cover, home; 5.7 h); c2 11,13,14 (4.5 h); c3 5,6,10,15 (4.8 h; the
+  home portrait in 5); c4 7,8,9,12 (5.6 h). Held: the five Smoke site shots (front-off-tall, front-off-wide, hero-light, side, back).
+- 15:17 sent to the speaker lane: its order (the close-ups, the polished one sent at once; the Smoke proxies then ONE Smoke final now,
+  the horn in the ~50 % sheet, the light path fixed if needed, expected vs rendered batt luminance; the deck-hero proof at 32 samples
+  sent, then straight on to chunks 2, 3, 4; chunk 1 after my framing OK).
+- 15:18 three helper sessions created (env_01JkRLwYDtUQbm1c1s7h5xz2, nathe-vink/earf at 5295e58f, blob limit 2 MB, auto mode, no PRs):
+  c2 session_01BAaPTnhSnPaN9pECXw9AqK (r33-rollout-c2: chunks 11, 13, 14); c3 session_01BAaPToS56NEnJnGaju1n5a (r33-rollout-c3: 5, 6, 10,
+  15); c4 session_01BAaPTkchUebW9qCg1JCih9 (r33-rollout-c4: 7, 8, 9, 12). Each follows HELPERS.md, reports after setup, each chunk
+  (full SHA, minutes) and at the end; stops and reports any block. Expected: setup ~30-60 min, then ~4.5-5.6 h each: the site set
+  ~21:00-22:00 UTC; the deck from the lane ~5.7 h after the Smoke final and the proof.
