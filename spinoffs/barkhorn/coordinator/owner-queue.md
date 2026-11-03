@@ -1199,3 +1199,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   blind 4-test: grounded PASS, no light down PASS, smooth horn PASS, see-through FAIL; the passing proof is rendering (~30 min).
   Note: horn A's build gives Smoke a white lining (0.8); colors F says black. Speaker lane told (07:30): verify the asset (closed
   meshes, outward normals), test B-ice with the fix, re-check the F rows and frame A, Smoke's lining, then re-render A/B/C/B-smoke.
+- 07:37 Mantle lane round 2 (source 3b2aed4d1ebce1065b63dfaeff6bcd65ff7506e4, renders c92327ecb114525030a7038340c76822ba681813, log
+  38790f07): (a) the layered deck (mantle_strata_v4.py): 3 mm stock-tint skin over a 22.2 mm clear light guide in a 10 mm tinted
+  ring, white graded dots + black overprint under it, the strip in a groove in the core: the whole deck glows evenly (night Ember
+  41ed6ea9, Poison 57bee998), red glass over white by day (d3984071); about +$120-150 a unit, parts $3,907; (b) a lighter pour
+  (+$12.5k batch) still an outline. Critic 5.5 ("gaming-PC LED panel"; the top clips salmon). Checked: (a) is the owner's idea;
+  asked (07:39) for the night a stop down, no added floor light, then my gate.
