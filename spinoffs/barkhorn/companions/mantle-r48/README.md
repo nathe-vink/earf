@@ -549,6 +549,43 @@ they read as cheap. The fixes (`render_lantern.sh g3`, all in the model or the l
 | `a4-night-poison-2092-g3.png` | Poison at night after the gate's third pass |
 | `a4-day-ember-2423-g3.png` | Ember by day after the gate's third pass |
 
+### The gate's fourth pass (11:26)
+
+The judges: the underglow and the edge lines are gone, and Ember's glow holds the day hue. The nights were still held
+on "tinted glass" (Poison read as "gaming"). By day the black edges and the masked band read as "a lacquer inlay in a
+black tray". The fixes (`render_lantern.sh g4`):
+
+- **The glow lights the world.** Shadow rays now pass the flat acrylic, tinted by it. The tonearm's pillar, the arm
+  rest, the tube and the platter's sides catch the glow from below. It stays upward only: the floor and the base keep
+  their dark.
+- **Depth:**
+  - the glow is half a stop down;
+  - a short vignette at the bezel, instead of a hard step;
+  - a broad gradient, brighter at the front and deeper toward the far corners;
+  - a dim wash on the wall behind, a lamp out of frame, lays a broad soft reflection across the glossy top.
+- **Poison's color.** The render's Poison passed too little red. Its day hue was 138 deg CIELAB, a screen green; the
+  lamps lane's table gives 122. Its red is matched to 122, so lit at 4000 K the brightest part leans yellow-green, as
+  the lamps' 111 deg says it should.
+- **Mottling.** The acrylic's wear is lighter (its fine scratches read as wrinkles under the glow), with more samples.
+- **The base and the float read.** The navy ambient is up.
+- **The tray, by day.** The coordinator's idea is physically right.
+  - The rings' tops are printed white up, black down, as the field's dots are. By day the border reads as tint over
+    white, ruby like the field.
+  - At night no light reaches it: the core's black edge tape and the rings' black inner walls stop it.
+  - The groove's ceiling has the same print, so by day there is no dark band.
+  - The skin's black edge paint stays: it is only 5.6.
+  - Cost: a second screen pass, about +$10. The line becomes about **+$140-170 a unit**, $3,897 in parts.
+- **Small:** the posts' seats' walls are clear, so the front disc no longer reads as a control (it was a post's
+  bonded seat seen through). The platter's polished rim is a soft satin, so there is no white ring.
+- **One honest note on the render.** The glow over the groove's ceiling rendered 1.6x the field at the same strength,
+  and I could not find why. It is scaled to the field, as the real white print there would be lit.
+
+| frame | what |
+|---|---|
+| `a4-night-ember-2423-g4.png` | Ember at night after the gate's fourth pass |
+| `a4-night-poison-2092-g4.png` | Poison at night after the gate's fourth pass |
+| `a4-day-ember-2423-g4.png` | Ember by day after the gate's fourth pass |
+
 ### The render (how the light is drawn)
 
 The guide's output is drawn as an even Lambertian glow just above the print: 9 W/m2. That figure follows from the

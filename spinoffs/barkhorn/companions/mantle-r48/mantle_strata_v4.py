@@ -28,6 +28,11 @@ just inside the rim. So: the skin's four perimeter edges painted black after pol
 acrylic lacquer, about $8-12 a deck in labor); the core's perimeter tape black, not white (it absorbs what reaches the
 rim); the groove's ceiling printed black, an opaque band over the strip, so the dark tinted frame reads about 19 wide.
 The strip a 4000 K COB (the speakers' CCT), 2 W/m.
+The gate's fourth pass (11:26): by day the black border read as a tray. So the rings' tops are printed white up,
+black down, as the field's dots are (a second screen pass, about $10 a deck): by day the border reads as tint over
+white, ruby like the field; at night no light reaches it from the core (the black tape, the rings' black inner
+walls). The groove's ceiling has the same print, white up, black down: lit from above like the field, opaque to
+the strip below.
 v3's notes follow.
 
 Mantle, proposal A, v3: STRATA FLOAT, the detail pass (round 48). The coordinator's duels (v2 over v1 3-1; v2 and
