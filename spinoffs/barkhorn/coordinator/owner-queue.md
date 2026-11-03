@@ -1506,3 +1506,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   exposure -1.5; the speaker lane's night set; 128 samples. (3) The pool was the low rim light, now gone; floors identical. Day
   re-rendered (black edges, masked band). Cost now ~+$130-160 a unit over v3 (edge paint ~$10); $3,897 in parts; deck 24.6 mm awaits
   sign-off. Gate wf_8d0bd1ae-140 on all three started 11:04 (sha256 day 0fadf553, Ember 70f508d2, Poison 274171b9).
+- 11:06 biomes lane (its message said 11:08): Dust (2 of 7) at c96fb96a95d23f84cced8a05699eb40654582b3a; its single agent passed all
+  four, horn included ("clear orange-tinted acrylic", ports and frames through the walls; the red-tinted shadow is sun through the
+  tint, not a glow). Acid rendering. I hold Dust until my Ember gate returns, then gate Dust with Acid as one batch.
