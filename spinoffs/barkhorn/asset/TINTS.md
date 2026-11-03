@@ -225,3 +225,18 @@ All TT figures are the "held" case, the central estimate until the chips are mea
 | TruCast 9097 Fluorescent Yellow, a chip with polished edges, photographed edge-on in daylight | Acid's edge colour (yellow glow, against the render's coral) |
 | Chemcast 2064 "Light Smoke" (TAP), an off-cut at 3/4 in | whether it passes about 45-55 % at 20 mm, the Smoke target (R1 gives 57.07 % at 0.118 in only) |
 | a Smoke horn sheet near 38 % through 10 mm | the Smoke horn's depth (`renders/2026-11-03/barkhorn/smoke-target/`) |
+
+## Acid's long path: an approximation for a fluorescent sheet (2026-11-03)
+
+The coordinator's gates on horn-back-acid and the biomes lane's Acid habitat held the same fault: Acid's edges and long paths rendered scarlet (236, 42, 15) on a yellow cabinet, the brightest thing on it. No fluorescent yellow sheet does that; its edges glow yellow or yellow-green.
+
+- **The cause:** 9097's published TT (77.6 % at 20 mm) needs about 12 % lost outside the blue. The split (0, 0.10, 1.00) put all of it in green. Beer's law then leaves red alone at long path: hue 52 at 20 mm, 43 at 100 mm, 21 at 300 mm, 6 at 600 mm.
+- **What the sheet really does:** its dye absorbs blue and re-emits it as yellow-green (fluorescence). The re-emitted light is guided to the edges, so the long path brightens in yellow-green rather than deepening to red. The renderer has no fluorescence.
+- **The approximation:** the same loss, shared between red and green. The split goes from (0, 0.10, 1.00) to (0.085, 0.10, 1.00), red at 0.85 of green.
+  - The faces stay lemon: hue 59 at 20 mm.
+  - The long paths deepen to amber: hue 57 at 100 mm, 53 at 300 mm, 44 at 600 mm.
+  - The edges stay within about 6° of the faces up to 300 mm.
+  - The luminance at 20 mm is unchanged; it is still fitted to the TT.
+  - Cabinet deep: #FFEB6C to #F1EE7F. Strata horn: #FFF296 to #F6F4A5. The formed horn keeps the site's deep lot, #B88E00, the deeper amber of the same glass.
+- **What it does not do:** brighten the edges, as fluorescence would. It is darker at long path than the real sheet. Check it against the TruCast chart and, when they arrive, the off-cuts.
+- **Dust (2422) is unchanged.** It is not fluorescent. An orange dye that absorbs green as well as blue does turn red at long path (hue 33 at 20 mm, 18 at 100 mm, about 0 at 300 mm). Its red top-back edge is what Beer's law gives for its TT and split, and is within what orange cast acrylic shows edge-on. No spectral curve is published to confirm the split; the off-cut is the check.

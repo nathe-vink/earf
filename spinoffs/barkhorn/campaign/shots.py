@@ -631,7 +631,11 @@ def site(frame, tint):
     _siteG_round1(s, frame, tint)
     if frame == 'hero-light':
         _siteH_round1(s)
+    if frame == 'back':
+        _siteB_round1(s)
     honest_lights(s)
+    if frame in ('front-off-tall', 'front-off-wide', 'side'):
+        _siteG_round2(s)
     if frame in ('front-off-tall', 'front-off-wide', 'side') and 'back' in s['lights']:
         # (the honest rig's proxies, tall Ice and Ember: unlinked, the `back` lamp, behind the speaker and aimed through
         # it at the floor, lit the floor beside it (176 to 229), and the lower right face, mirroring it, fell from
@@ -827,6 +831,53 @@ def _floor_patch(s, z_lo=0.06, z_hi=0.42, margin=0.15):
     s['set'].setdefault('flags', []).append({'center_m': [round((min(xs) + max(xs)) / 2, 3), round((min(ys) + max(ys)) / 2, 3), 0.004],
                                              'size_m': [round(max(xs) - min(xs) + 2 * margin, 3), round(max(ys) - min(ys) + 2 * margin, 3)],
                                              'normal': [0.0, 0.0, 1.0], 'reflect_only': True, 'color': '#050505'})
+
+
+def _siteG_round2(s):
+    """The fix1 gates (the coordinator's critics, 2026-11-03 22:14 and 22:59). 1. A full-height cool white stripe on the
+    right face behind the front corner (wide): `edge`, the specular-only glint lamp; with it off, the stripe is gone.
+    Off. 2. A white rounded 'plate' at the floor (wide) and a pale line along the bottom edge (side): the cabinet's own
+    bottom panel (hiding the part takes the band from 203 to 26 px at 240; the feet and the lower lining change
+    nothing), its polished edge mirroring and piping the light round it. With the floor darker (the row's sweep) the band
+    stands further above it; with the key and kick off it still stands 25 levels above the floor. The key and the kick
+    raised from about 20 to 40 deg take it down to the floor's own level (0 px more than 25 above it): their lower edges
+    no longer sit at the bottom edge's height. 3. For the dark tints: a black card camera-right down to floor level (the
+    right face's lower third and front stripe) and one overhead in front (the top front edge), real cards, kept only
+    where they fall out of frame (cards_out_of_frame)."""
+    L = s['lights']
+    if 'edge' in L:
+        L['edge']['power_w'] = 0.0
+    for k in ('key', 'kick'):
+        if k in L and 'orbit' in L[k]:
+            L[k]['orbit']['elevation_deg'] = 40.0
+    _mirror_card(s, dist=1.2, size=(1.8, 1.0), z=0.3)
+    s['set'].setdefault('flags', []).append({'center_m': [0.0, -1.0, 2.2], 'size_m': [2.0, 1.2], 'normal': [0.0, 0.42, -0.91],
+                                             'reflect_only': True, 'color': '#050505'})
+    return s
+
+
+def _siteB_round1(s):
+    """The back set's gate (the coordinator's critics, 2026-11-03, HOLD 7/7). 1. The horn from behind clipped (Ember 54-93 %
+    at 250, pastel): `cab-back`, a 7 W/m2 lamp on the far side of the speaker that lit through the cabinet and the horn,
+    hidden from reflections at specular 0. Crop tests on Ember's horn, one lamp off at a time: the key, fill, wash and
+    plate strip change nothing; cab-back off, 53 % to 2 %, (206, 106, 104) to (163, 41, 37). Lowered to the cabinet on a
+    35 deg grid it still left 11 %; off, the cabinet loses 75 to 72. It goes, and so does `glow` (finals31's, dropped from
+    phase 2 for the same reason), and the horn's rim lamp comes down from 3.5 to 1.0. 2. The softbox patch on the back
+    panel's upper left was partly cab-back's reflection: its saturation 0.42 to 0.69 with it gone. 3. The lower face
+    toward the camera's left mirrored the floor: a reflect-only card on its mirror ray, out of frame."""
+    L = s['lights']
+    for k in ('glow', 'cab-back'):
+        if k in L:
+            L[k]['irradiance'] = 0.0
+    if 'horn-rim' in L:
+        L['horn-rim']['irradiance'] = 1.0
+    # (the patch's crop tests on Ember: the key turned to -70 or -40, or grown to 2.4 x 2.0, left it as it was; with
+    # `plate-strip` off, the small strip lamp beside the amp plate, it is gone: its reflection, not the key's. It goes;
+    # the plate has its own close-up)
+    if 'plate-strip' in L:
+        L['plate-strip']['irradiance'] = 0.0
+    _mirror_card(s)
+    return s
 
 
 def _siteH_round1(s):
