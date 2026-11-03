@@ -3407,3 +3407,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   lower-edge streaks are the oak table refracted through the Ice tint (physical, not painted out). Night: the new rig; the opal core glowing
   evenly in dark clear tint, no cone, the white dot in; OKLCH 221; left to judge: faint speckle in the core's reflection at the crown.
 - 21:46 the Core B pair gate launched wf_6daa1676-c18 (the day with the sun on the ball and the wall in shade; the night on the honest rig).
+- 21:52 c3: fix1 chunk 4 landed on f7f03850 at 6b1cc31bf240e174fc3fba4d8afd463ae68d2bf9 (21:08-21:51, no errors, 1800 x 1200): wide Ember
+  13.2 min 2.02 MB, Dust 14.0 min 2.06 MB, Acid 14.3 min 2.07 MB. Its looks: Dust and Acid still show a thin bright white vertical strip on
+  the right side face's front edge (Ember less); in all three, a bright white glowing line along the cabinet's bottom edge at the floor.
+  Then merged 3b541d9d (6dc089a965f0f3a6d060a545b0c6a1e787a97055), regenerated, chunk 5 (wide Poison, Ice, Haze, ~87 min) from 21:53.
