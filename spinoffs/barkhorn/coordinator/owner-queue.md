@@ -974,3 +974,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   ~80 C, 25-30 K under its ~70 C long-term limit; halved at the 50 % default. Adopted by the lane: 40 W panel; 24 V 90 W Class 2
   supply (59 W at full); ~+$72 a speaker. First sheet regenerated (c2893b0b7ad0e3b15e0ad631dc07c4e7b2dab33c). Checked the sheet and
   blobs (distinct). Cost note for the deck's ask once the horn is picked (the horn changes the shop costs too; within the contingency).
+- Check-in 32 (02:32): quiet. No owner reply (the horn on board v19: A smooth satin, my pick, vs B stepped satin). Every lane is idle
+  or holding: speaker waits on the horn (site finals paused, uplight done), site and brand holding, the rest unchanged. Nothing is
+  running, so the check-ins stop here; the owner's reply restarts the work. On the reply: README first; speaker lane sets the default
+  horn and finish (chips per color; slim the throat ring if A), updated pair cost for the deck's ask (horn and uplight); then the site
+  finals and the deck's pictures with the chosen horn and the uplight.
