@@ -86,6 +86,8 @@ SINK = {'acid_b': 0.015,   # 3 mm under the water (at 18 mm the submerged part s
         'acid_b_old': 0.03, 'ice': 0.022}   # Ice ~1 cm deeper: light showed under its left front corner in the snow
 # the horn's outside: polished (the owner, 2026-11-03 15:14: "Horn: polished"; satin was 0.25)
 HORN_ROUGH = 0.05
+# a tint's channel split from the speaker lane's shared model where it changed after the asset was built (9097, 732a8671)
+SPLIT = {'acid_b': (0.085, 0.10, 1.00)}
 SAMPLES = {'ember': 96, 'poison_g5': 96, 'haze_b': 96, 'fog_b': 96}
 
 
@@ -115,7 +117,8 @@ def main():
                '--horn-front', '--horn-rough', str(HORN_ROUGH)] + [x for k, v in lights.items() for x in ('--light', f'{k}={v}')] \
             + [x for k, v in SETS.get(n, {}).items() for x in ('--set', f'{k}={json.dumps(v)}')] \
             + (['--glossy-flag'] if a.glossy_flag else []) \
-            + (['--flag', *map(str, FLAG[n])] if n in FLAG else [])
+            + (['--flag', *map(str, FLAG[n])] if n in FLAG else []) \
+            + (['--split', *map(str, SPLIT[n])] if n in SPLIT else [])
         with open(out.replace('.png', '.log'), 'w') as log:
             r = subprocess.run(cmd, stdout=log, stderr=subprocess.STDOUT)
         print(n, 'ok' if r.returncode == 0 else f'failed ({r.returncode})', flush=True)

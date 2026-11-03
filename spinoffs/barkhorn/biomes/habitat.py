@@ -46,6 +46,7 @@ def scale_lights(sh, scales):
 SURFACE_GLASS = False                   # --surface-glass: the tint on the faces (not adopted: the speaker lane's volume is the line's material)
 WELD = [True]                           # the asset's split vertices welded so its glass volumes close (--no-weld: off)
 GLOSSY_FLAG = [False]                   # --glossy-flag: the flag and cards seen in reflections only (the earlier trick)
+SPLIT = [None]                          # --split R G B: the tint's channel split, luminance held per part (the shared 9097 fix)
 LED = [1.0]                             # --led F: the amp plate's power LED's emission scaled (1: the asset's)
 SINK = [0.002]                          # --sink M: the feet bedded this far into the ground (ash, sand). The sets' crust and
                                         # ripples are displaced at render time, so the ray cast sees flat ground and can't seat
@@ -224,7 +225,7 @@ def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extr
     linked = []
     place0 = Pr.place
     editable = (stand == 'feet' or tt or up or lining or glass_shadows or HORN['close'] or HORN['rough'] is not None
-                or not HORN['shadows'] or LED[0] != 1.0)   # else the asset as it is, linked
+                or not HORN['shadows'] or LED[0] != 1.0 or SPLIT[0])   # else the asset as it is, linked
 
     def place(bpy_, pdef, templates, shot_, root_):
         objs, part_of = place0(bpy_, pdef, templates, shot_, root_)
@@ -294,6 +295,32 @@ def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extr
                         if n.type == 'BSDF_PRINCIPLED':
                             n.inputs['Roughness'].default_value = HORN['rough']
             print('horn satin roughness ->', HORN['rough'])
+        if SPLIT[0]:
+            # a tint's channel split changed in the speaker lane's shared model (9097, 732a8671): each acrylic part keeps
+            # its luminous transmission through its own thickness (cabinet 20 mm, horn 12.7 mm), the absorption re-split
+            import math as _m
+            LUMW = (0.2126, 0.7152, 0.0722); sp = SPLIT[0]; mx = max(sp); done = {}
+            for o in col.all_objects:
+                for sl in getattr(o, 'material_slots', []):
+                    m = sl.material
+                    base = m.name.split('@')[0] if m else ''
+                    if not m or not m.node_tree or m.name in done or base not in ('bark', 'horn-formed', 'horn-satin', 'horn-lot'):
+                        continue
+                    absn = next((n for n in m.node_tree.nodes if n.type == 'VOLUME_ABSORPTION'), None)
+                    if absn is None:
+                        continue
+                    t = 0.020 if base == 'bark' else 0.0127
+                    c = absn.inputs['Color'].default_value; D = absn.inputs['Density'].default_value
+                    L0 = sum(w * _m.exp(-(1 - c[i]) * D * t) for i, w in enumerate(LUMW))
+                    lo, hi = 0.0, 5000.0
+                    for _ in range(100):
+                        k = (lo + hi) / 2
+                        L = sum(w * _m.exp(-k * (sp[i] / mx) * t) for i, w in enumerate(LUMW))
+                        lo, hi = (k, hi) if L > L0 else (lo, k)
+                    absn.inputs['Color'].default_value = (*[1 - sp[i] / mx for i in range(3)], 1)
+                    absn.inputs['Density'].default_value = k
+                    done[m.name] = (round(L0, 4), round(k, 1))
+            print('split', sp, '(luminance held):', done)
         if LED[0] != 1.0:
             for m in {sl.material for o in col.all_objects for sl in getattr(o, 'material_slots', []) if sl.material}:
                 if m.name.split('@')[0] == 'led-on' and m.node_tree:
@@ -423,6 +450,7 @@ def main():
     ap.add_argument('--no-weld', action='store_true'); ap.add_argument('--surface-glass', action='store_true')
     ap.add_argument('--lining', help="the lining's color, hex (colors F: Smoke '#0B0B0B')")
     ap.add_argument('--glossy-flag', action='store_true', help='the flag and side cards in reflections only (before 20:11)')
+    ap.add_argument('--split', type=float, nargs=3, help="the tint's channel split, R G B (luminance held per part)")
     ap.add_argument('--led', type=float, default=1.0, help="scale the amp's power LED (the asset's strength is 6)")
     ap.add_argument('--sink', type=float, default=0.002, help='bed the feet this far into the ground, m')
     ap.add_argument('--horn-front', action='store_true', help='direct light stops at the horn (no lampshade from behind)')
@@ -431,7 +459,7 @@ def main():
     a = ap.parse_args()
     global SURFACE_GLASS
     WELD[0] = not a.no_weld; SURFACE_GLASS = a.surface_glass
-    SINK[0] = a.sink; LED[0] = a.led; GLOSSY_FLAG[0] = a.glossy_flag
+    SINK[0] = a.sink; LED[0] = a.led; SPLIT[0] = a.split; GLOSSY_FLAG[0] = a.glossy_flag
     HORN['close'] = a.horn_close; HORN['rough'] = a.horn_rough; HORN['shadows'] = not a.horn_front
     sh = json.load(open(a.shot))
     scale_lights(sh, {k: float(v) for k, v in (x.split('=', 1) for x in a.light)})

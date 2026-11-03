@@ -22,7 +22,7 @@ IOR = 1.49
 TINTS = {
     'Ember':  ('cloud-red',            '2423', 'Red',               14.1, (0.08, 1.00, 0.85)),
     'Dust':   ('cloud-orange',         '2422', 'Orange (amber)',    59.1, (0.02, 0.40, 1.00)),
-    'Acid':   ('cloud-amber',          '9097', 'Fluorescent Yellow', 77.6, (0.00, 0.10, 1.00)),
+    'Acid':   ('cloud-amber',          '9097', 'Fluorescent Yellow', 77.6, (0.085, 0.10, 1.00)),   # the shared fix, 732a8671
     'Poison': ('eucalyptus-y2k-green', '2092', 'Green',             18.6, (1.00, 0.18, 0.80)),
     'Ice':    ('cloud-blue',           '2069', 'Tinted Blue',       57.6, (1.00, 0.40, 0.06)),
     'Haze':   ('cloud-violet',         '2287', 'Violet',            13.5, (0.50, 1.00, 0.12)),
