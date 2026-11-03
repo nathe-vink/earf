@@ -1277,3 +1277,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 08:22 Mantle gate's third judge (wf_d32497c9-acc done): agrees; adds a low warm kicker for the arm, posts, base edge and feet; the
   red reflection bar on the base under the deck's left end; Poison's top a stop up, off the screen primary, its edges deep-green glass;
   the deck's right corner 8 px from the frame edge; the day top as the real stack. Sent (~08:22; the message said 08:17).
+- 08:34 biomes lane: Smoke on horn A gated at e890ed76e30ba0ad86777f5fc507803f9f1fdd3e (renders/2026-11-03/barkhorn/smoke-dark/,
+  CHECK.md): surface glass (tint on the faces, shadow rays tinted) PASSES all four; the welded volume glass (the speaker lane's
+  material) FAILS see-through only ("a near-black opaque box": two 12 % walls pass ~1.4 %, the black lining takes the rest). My call
+  (08:36): one material for everything, the volume (physically faithful; "technically possible trumps cool"); the seven habitats now
+  on it; Smoke waits for the owner, shown honestly in the volume material as 2074 black, 2064 black and 2064 white lining (gated on
+  grounded, no light down, smooth horn only).
