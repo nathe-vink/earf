@@ -14,7 +14,9 @@ Show one item with its pictures, wait for the answer, save the owner's words ver
 - **A disclosure owed before item 6 (the polished horn close-up), found 19:30:** the site's studio rig (gate 2's A rig, the tall front's)
   showed one lamp (`horn`) at 30 % in reflections while it lit at full, so the polished horn's highlights in the frames the owner chose
   from were dimmer than a real lamp gives. The speaker lane renders an honest A-ice-polished (that lamp at full in reflections, nothing
-  else changed); show it beside the old one with item 6, plainly. Every rig now follows the rule: no lamp lights at full while
+  else changed); show it beside the old one with item 6, plainly. LANDED 21:06 (f7f03850, base-question/gate2/A-ice-polished-honest.png):
+  nearly identical (horn >=250 on 3.9 % to 4.6 %, mean (43,114,184) to (47,117,187)); the side-by-side with the horn enlarged is
+  scratchpad/walkthrough/06-horn-honest.jpg; the honest frame is at the gate (21:1x). Every rig now follows the rule: no lamp lights at full while
   reflecting less, and no lamp lights a part while skipping what sits behind it in its path. Added 20:06 (ruling 3): no lamp is
   hidden from views through clear resin (`transmission: False`), except a practical's bulb inside its own frosted or opal fitting.
   A picture passed before these rulings is re-checked against all three before it is shown.

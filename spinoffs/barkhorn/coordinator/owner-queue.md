@@ -3329,3 +3329,5 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 21:06 sent: c4 fix1 chunk 3, then chunk 2's tall Ember and Dust (not the portrait, not the row); c3 chunks 4, 5; c2 chunks 6, 7 (its chunk-4
   frames stand); all on f7f03850 (discard barkhorn-variants.json, merge, rollout). To the speaker lane: the row proxy (a) at -12 first,
   then (d) or (a)+(d) if the sides stay under ~0.6; (b) to the owner only if both fail; numbers before any final.
+- 21:1x item 6 prepared: scratchpad/walkthrough/06-horn-honest.jpg (the frame the owner chose from beside the honest one, the horn enlarged
+  below each; mean absolute difference ~1.1-1.3 per channel); the honest frame gated (context: the original, passed 2/3).
