@@ -2,8 +2,8 @@
  "shot": "/tmp/claude-0/-home-user-earf/e9eacb03-86e9-502d-ab9f-ed75453cbf0d/scratchpad/abc/shot-C-ice.json",
  "image": "renders/2026-11-03/barkhorn/base-question/C-ice.png",
  "seconds": {
-  "build": 43.2,
-  "render": 880.0
+  "build": 44.9,
+  "render": 966.9
  },
  "samples": 64,
  "size": [
@@ -884,6 +884,20 @@
     648
    ],
    "depth_m": 2.844
+  },
+  "lining-bottom-1-web#0": {
+   "part": "lining-bottom-1-web",
+   "centre_px": [
+    610.0,
+    1133.4
+   ],
+   "box_px": [
+    493,
+    1060,
+    720,
+    1217
+   ],
+   "depth_m": 2.753
   },
   "lining-left-2a-web#0": {
    "part": "lining-left-2a-web",
