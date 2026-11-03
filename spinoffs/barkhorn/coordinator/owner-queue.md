@@ -3532,3 +3532,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   product) and `scope_flag` (a flag shading only some lamps) are shadow-linking tricks of ruling 2's family, not allowed. Sent all three to
   the speaker lane, with the row/hero/cover question standing.
   (Time fix: that message to the speaker lane was stamped "22:47" but sent at about 22:45; my error again: `date -u` comes first.)
+- 22:48 biomes lane: Poison's final (the gap front-left, 3 x 3 m at 12) HELD by its own gate (kept in held/poison_g5-gap3m-held.jpg): the upper
+  third of the front a flat khaki sheet (~28/31/6: the white top batt lit through the green by the gap); a bold green diagonal "propeller"
+  through the throat (the gap mirrored and refracted in the flare); passes: the check-mark gone, grounded, no light down, the cards out of
+  frame at 2.4 m. Fix: a larger, softer canopy opening, 5 x 5 m at 7 (from 3 x 3 at 12), higher at 65 (from 50), still -60, specular 1.0, at
+  05338ea151f9e06f59eef8c159a96e35955b5bcc; its proxy after the Fog final, the Acid proxy and the Haze final; if the batt still reads as a
+  sheet, it's the white voile behind dense green, to be reported with numbers.
