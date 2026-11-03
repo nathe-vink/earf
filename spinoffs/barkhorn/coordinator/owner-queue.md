@@ -3441,3 +3441,5 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   night largely real for clear acrylic, but internal reflections to check and the disc's exposure to hold Ice; the crown-brightest gradient
   right for an upward LED); render cleanliness, the room's response and the shadow's tint to fix; if the nested core can't read, report it
   as a design result for item 89.
+- 22:09 speaker lane: the room's fix announced with a PLACEHOLDER SHA (46f2f7aa..., not real; not to be used), the real one to follow; the
+  message stamped "22:20 UTC" though it arrived at 22:09. Sent: no placeholder SHAs, only verified ones; `date -u` before any time.
