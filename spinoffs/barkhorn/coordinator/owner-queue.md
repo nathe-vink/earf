@@ -2050,3 +2050,18 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   15); c4 session_01BAaPTkchUebW9qCg1JCih9 (r33-rollout-c4: 7, 8, 9, 12). Each follows HELPERS.md, reports after setup, each chunk
   (full SHA, minutes) and at the end; stops and reports any block. Expected: setup ~30-60 min, then ~4.5-5.6 h each: the site set
   ~21:00-22:00 UTC; the deck from the lane ~5.7 h after the Smoke final and the proof.
+- 15:20 brand lane: the words-only pass at r47-brand 13176733179c7cd45c1adfd9be404d4313f0f01a (20 files, 37 lines; the list and the
+  flagged pictures in spinoffs/barkhorn/brandbook/review/2026-11-03-words-2.md; nothing published or re-rendered, no price touched,
+  only release-march.html rebuilt from its source). Light in or under Tropos removed across the Book (the type-scale lede, the "Put a
+  light under it" voice line, idea b, the timeline), press (company.md, make_sheets.py, RELEASE-MARCH, the Wallpaper and Ace pitches),
+  money (the gallery letter), photo (DEBUT-SHOOT A2/F2 "lit only by the lamps", RUN-OF-SHOW, PRODUCT-SHOOT T1), launch (the teaser's
+  beat 3), IDEAS, the Milan labels, FACTS (the base row "No light", the $55,000 note: no plinth, no light; $20,700 unchanged). Satin
+  to polished across the Book's Tropos sheet, FACTS, IDEAS, post 7, the media plan, press and the release. Pictures flagged: clear:
+  facade.jpg/-1200 (the eight lit from below; Book images chapter, the partner brief's cover, teaser beat 3, the Milan invitation,
+  press images), bar-listening.jpg (the pair on lit plinths; the bar chapter, post 6, Sessions), idea-milan.jpg, and the outputs
+  built from them (the partner-brief PDF, both teasers' beat 3, launch-grid.png); to check (a coloured glow at the foot): red-studio.jpg,
+  the eight *-studio-light.jpg, hero/hero-portrait/lineup. No satin horn in any brand picture. Mantle's lit base, the lamps' glow and
+  Mother EARF's rims untouched.
+- 15:20 sent to the brand lane: per flagged picture, its source (path, SHA, scene, lane), the "to check" verdicts with pixel evidence,
+  whether a roll-out shot replaces it, and for the rest (facade's eight, bar-listening, idea-milan...) the new render each needs. A
+  gap noted: some brand pictures are scenes outside the 40-shot roll-out.
