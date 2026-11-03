@@ -2835,3 +2835,40 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 18:56 sent to the speaker lane: confirm the rewrite is by design and note it in HELPERS.md; the back set is complete and gating.
 - 18:58 my gate on the back set, seven tints (wf_19056f34-acf; back has no sidesheen) started: the horn from behind (it looks pale on my
   contact sheet), the EARF mark at phone size, a diagonal white streak on the back panels.
+- 18:57 speaker lane: room proofs at exposure -1.37: the cabinet fronts' mean, against the row's Poison front at 48.6: the portrait left 11,
+  right 22 (were 7.7, 17.3); deck-home left 10.2, right 22.2; at phone size the right woofer reads, the left is still a dark green box. The
+  fix for the middle: only the window nearest the back wall (which lights the left unit) gets a 0.55 m sill (its top 2.75 m), so the sun
+  reaches the left unit from ~0.42 m up, the right unchanged (from ~0.41 m); proofs of the portrait then deck-home, committed only if both
+  hold (dd230578, proof pending); its chunk 3 waits. The site fix at 6f73a18cf65c11799adde3bd5d052eae8b0341fb (the `through` lamp off too:
+  the right face's pale patch 220 to 156, saturation 0.47 to 0.58 on the proxy); the proofs at 0457f57450d412f7d03e3d955096c32be53448fc
+  (tall Ice old/new/no kick/no through/no back; Ember; Fog). The fix chunk: 23 shots (~9.6 h, 7 chunks, tag fix1, renders to
+  A-polished-fix1/): 1 deck-row; 2 deck-home-portrait, tall ember, dust (the portrait held for the room); 3 tall acid to fog; 4 wide ember,
+  dust, acid; 5 wide poison, ice, haze; 6 wide fog, side ember to poison; 7 side ice, haze, fog. Dust: its red is lin 0.965 (passes nearly
+  all red), no published curves, the model kept; its horn on spec. Fog was at exposure -0.6, now 0.
+- 18:58 speaker lane: 0.05 confirmed as the design (render_model.py writes the variants file from product.py, FORMED_HORN_SATIN = 0.05; the
+  committed 0.25 was stale from its 14:56 build, before the owner's 15:14 call; no render affected: strata_lit sets 0.05 in every polished
+  shot). Committed at 0.05 with a HELPERS.md note (helpers never commit or revert it; `git checkout --` it before merging) at
+  c305795fb984cb1b1a9c5f5cae048324094e8d4c, which carries the site fix and the room sill too.
+- 18:59 deck hero gate wf_45416aa0-452 (3 critics, ~23 min): HOLD 3/3. See-into red at slide and phone size, grounded, no light, the polished
+  horn the same red glass (no X, no white streak, no glowing lens). The holds: the lower ~40 % of the right side face mirrors the lit floor
+  or sweep (pale pink, saturation ~0.2 against 0.99 above, a hard diagonal); the top chamber clipped flat coral (R 250+ on 82-85 %); the
+  lid's front edge a neutral grey strip (~155,159,159).
+- 19:00 Hemisphere round 9 gate wf_f2d79c77-58c (3 critics, ~20 min): the day SHOW 3/3 (glossy tinted acrylic over the white liner, clearly
+  off); the night HOLD 3/3 (passes underglow, on and grounded): the lip an electric-blue line reading as an LED ring; the lit face flat and
+  matte (one blurred oval); the cap 66 % pure black; the hue turquoise to the eye against the day's azure (OKLCH ~230 vs 246; CIELAB ~240 vs
+  265-270), though HSV reads 195 vs 203.
+- 19:00 my look at the site fix proofs (0457f574): tall Ember's right face deep red again (the pale lower patch gone), Fog brought to the
+  set's exposure; tall Ice's variants show the pale patch shrinking lamp by lamp. Good enough to route.
+- 19:01 fix1 routed on c305795f (each: `git checkout --` the variants file if modified, merge, push; rollout.py --only ... --tag fix1):
+  c4 after its phase-1 chunk 12: fix1 1 (row), 3 (tall acid to fog), then chunk 2's two tall lines (ember, dust), then phase-2 3, 6;
+  c3 after its phase-2 chunk 5: fix1 4, 5 (wide), then phase-2 1 (Sound; checking the hero-light gate first), 2, 10;
+  c2 after its phase-2 chunk 4: fix1 6, 7 (wide fog, side), then phase-2 9. The portrait line waits for the room proof.
+- 19:02 sent to the speaker lane: the routing; the deck hero's fixes (a black card camera-right from floor to mid height, or the key's floor
+  spill cut, or a few degrees' turn, the face at saturation ~0.7+; the top chamber out of clip, R under ~240, G/B under ~40; the lid's
+  front edge dark red with a glint; optional the pink line at the shadow's edge); chunks 3 and 4 checked for the same before rendering;
+  a proxy, then the hero re-render.
+- 19:02 sent to the lamps lane: Hemisphere night in order: the lip's glow to or below the face and in its hue (keep the lip); real
+  reflections on the skin (a dim window or soft-box strip, the table in the lower dome); the cap's tiers caught faintly (no glow); the hue
+  as a design question (by night one pass through the Ice skin, by day two, so lighter and greener): two nights for the owner, (a) the
+  cool-white opal liner and (b) a faint-blue liner within ~10 degrees of the day, each hue measured; minor, the dome's spill on the wall and
+  cable, the bowl's shading. Core B gated when its night is done.
