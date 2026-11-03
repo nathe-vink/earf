@@ -2753,3 +2753,35 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   opal liner, night 195 against day 203 degrees; Core B day at full scale with the 120 core), then Core B night work to 18:30 (the printed dot
   in the frost; no hairline wear on the nested balls; colour-only denoise; the core open over the window, c6729fc5). My gate on the
   Hemisphere pair (wf_f2d79c77-58c) started; Core B waits for the lane's word that its night is done.
+- 18:34 c3: chunk 15 landed (site-back haze 5.4 min, fog 6.0; 18:21-18:33) at 0819637bf4db33ca7742c7e6587ccbcab8b13582; phase 1 done (its
+  shots: c659ce9f, 31e1ecfa, fd81e873, 0819637b).
+- 18:34 bar lane: the r44-lantern polish at c2d6fba2c2e1b3048fcf373f1d5194739734e6be (256 samples): a soft area fill per speaker from front
+  left (1.2 m square, 2700 K) light-linked to the shells, horns, ribs, feet and amp plate only (the linings, woofer and floor take no
+  direct light): the left cabinet's mean 51 (was 18), the floor 42 (40), near-black 46 %; at a fill giving 110 the linings went milky pink;
+  the spots 0.25 m sources and clamp 4 (the thin red line gone, the lining's red band near clipping); Mother's spot 0.04 m (the woofer
+  glints gone). It had not yet read my 18:06 and 18:36 results.
+- 18:36 speaker lane: the room and row proxies at 00682ac4d891c47e6da49d1e2a1e1329bd3e1ebf (renders/2026-11-03/barkhorn/deck-fix-proofs/,
+  0.3 scale, 32 samples). Room: the bottoms unlit (blocks 4,11,3 and 3,9,2, peaks ~38-44, against 1,128,21 peaking 50,244,80); the sun on the
+  horns and upper cabinets, the right horn's green on the wall; too dark (each unit ~18,37,16; AgX ~1/2 stop under PBR Neutral), so -1/6
+  net; no neon lines; both outlets show beside the units with their leads; the vase's green much less, the credenza in shade. Row:
+  Smoke's side dark glass; Ice's side saturation 0.53 (0.39), Poison's 0.35 (0.12) with no blue stripe, Haze's 0.31; the sweep's
+  bottom-left 241 (231) but its bottom-right fell to 215 (it sees the card), so a sweep-only lamp on the right too. The fix chunk for the
+  first free helper: merge 00682ac4 (shots.py only, no model rebuild), regenerate, render deck-row (~70 min) and deck-home-portrait
+  (~60 min); deck-home stays in the lane's chunk 4, from this SHA.
+- 18:37 biomes lane (its message said 18:38): Acid polished at 33ecb6b2a74bf9030ec50140b0a53708865450e4 passed its own four but has the
+  wedge (horn-held, not offered). The measure calibrated (spinoffs/barkhorn/biomes/flare.py, L* p5-p95 on the flare clear of the
+  driver): Dust 7.8, Ice 7.2 (passed); Ember 12.6; Acid 26.7. The target ~8-10, not 20. Acid 28 degrees off the camera line, turned to 10
+  in the same commit; its proxy after Ember, Haze and Poison (running), each with its number and a see-through check.
+- 18:38 c3: merged 9db8da17 into r33-rollout-c3 (no conflicts, no model rebuild) at f02b51d52e4b11b472c30cb11848d9a5e76e77ee; phase 2
+  generated (245 shots, 34 Smoke held); chunk 5 started 18:38 (horn-back ice, haze, fog; inside-ice; turn-ember 00-04; ~99 min); then 1, 2, 10.
+- 18:38 speaker lane: the Smoke v3 proxy: the posts behind the lower wall 137 to 126 (in open air 163 to 158: still ~80 %); the flare body
+  181 in both; the tab insert neutral (hue 79-89, saturation 0.01); the lip unchanged (the cards did nothing). Its two errors: (1) the
+  model's flare wall is 6 mm (the CAD's formed shell), not the 10 mm sheet, so #A6A9AE passes ~56 % through it (the 58 % measured); "as
+  deep as the cabinet" (~50 %, as the cabinet's 20 mm wall) wants #989A9E at 6 mm; (2) the lip mirrors the studio's specular-only panels
+  (scrim, sheen, topline) directly, which cards can't block: the panels light-linked away from the horn's six parts (a flag between
+  panel and lip). v3b: #989A9E on both horn materials, the panels unlinked from the horn, the cards kept; the same on 2064. Its proxy
+  after the tall Ice, Ember and Fog proxies.
+- 18:44 sent to the bar lane: r44 v3, as the fill's linking is a light no real lamp gives (the linings sit behind the shells in its path):
+  the fill reaches everything it would, only the floor excluded (a cutter's stand-in); the level where the linings stay saturated (lower,
+  larger, softer), the honest number if darker; the spots, clamp and glints kept. Restated: shop v2 held (18:05), window v2 held (18:34);
+  its queue: r43-listening, r44 v3, shop v3, window v3 (shop and window may share one setup).
