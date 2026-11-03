@@ -1154,3 +1154,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   ("the debut", "spring 2027", [DATE]/[VENUE], D+n schedules). Nothing published or re-rendered; prices untouched. Flags: the
   $55,000 table's "on lit plinths" (deck ask.html still has it; fixed with the base answer); Kickstarter prices and delivery months;
   Ember's old hex in a vinyl color-match request.
+- 06:31 check-in #33 fired with a stale prompt (deck renders before the base answer); rewritten as #34 and re-armed for 07:22
+  (trig_018qRNvKz4o5UVPZMdqTTmgy): the blind-critic gate rule, the eight open threads. Lanes: speaker re-rendering A/B/C with the
+  full ring (last commit 05:56); biomes b07a56a9 at 06:19 (the speaker settled onto the set with rays through its feet, a black flag
+  behind the camera seen only in reflections, a --lining switch); Mantle round 2 not in yet; lamps fd0b3f6d3f1f3d28b4b9b3fbf945587539012b9f:
+  Poison reads as one green across all four pieces (hue 139-149 degrees; Hemisphere dE about 7 by day; Core lighter by day, its
+  frosted ball), no fix; Haze won't match in stock 2287 (translucent): want about 25.8 % at 3 mm, a stock transparent violet if one
+  exists, else pour the lamps' 1/8 in in the speakers' Haze campaign; picture script lamp_pictures.py; Ice pictures next. Workflows:
+  the audit's critic (resumed) and the review-room cards (editions done) running.
