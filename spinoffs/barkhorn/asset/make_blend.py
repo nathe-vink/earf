@@ -31,8 +31,9 @@ sys.path.insert(0, str(ROOT / 'studio' / 'engine'))
 # threads): collapsed to these ratios, so the file stays small enough to keep in git; --full keeps everything
 LIGHTER = {'amp-plate-print': 0.15, 'rating-plate-print': 0.15, 'amp-plate-ink': 0.25, 'back-screws': 0.1,
            'amp-plate-screws': 0.25, 'woofer-screws': 0.25, 'woofer-spider': 0.5, 'woofer-cap': 0.5,
-           # and, for a speaker seen across a landscape, the horn's dense tessellation and the lining's voile webs
-           'waveguide': 0.35, 'horn-throat': 0.4, 'waveguide-cap': 0.4, 'lining-*-web': 0.3}
+           # and, for a speaker seen across a landscape, the lining's voile webs. The horn is never collapsed (2026-11-03):
+           # horn A is clear acrylic with an absorbing volume, and a collapsed mesh can open it, so light would leak out
+           'lining-*-web': 0.3}
 MIN_FACES = 2000                          # below this a part is never collapsed
 COVER = ('cloth-disc', 'disc-frame')
 # the designs: each a list of (engine file, parts hidden). Strata (variants/STRATA.md) is the Cloud with its formed
