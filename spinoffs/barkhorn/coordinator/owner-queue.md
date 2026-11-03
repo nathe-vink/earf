@@ -2648,3 +2648,21 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   rim (not just narrower street spots); targets: the floor at the feet darker than the red faces, no red at a base, the pair the
   brightest thing; the ghost hidden behind the right horn; the table cropped or darkened; a soft shop-side fill for the upper faces,
   the left horn carrying Ember; more samples; optional a spot head in frame. Proxy, then final; SHA and path.
+- 18:00 c4: chunk 08 landed (site-front-off-wide poison, ice, haze; 17:05-17:59; 16.3-18.4 min) at
+  a0c4ef84fe6cdaac18b6c5f416f2907b66d108ea (r33-rollout-c4); chunk 09 (front-off-wide fog, hero-light ember) started 18:00. The
+  front-off-wide set completes with fog.
+- 18:02 speaker lane: the regeneration check: the 40 A-polished shots regenerated from 5295e58f's own shots.py and rollout.py and compared
+  byte for byte: exactly three differ (deck-home-portrait, deck-home, deck-row), the other 37 identical. Acid at
+  6cbd9e3709fdf48dc232be84477ec4f22d51ac7a: TINTS.md says plainly the polished edges render coral-red (the model's amber #FFEB6C passes
+  red completely, no fluorescence) where the real 9097's glow yellow; the model unchanged in every shot. A sample table: a 9097 chip
+  with polished edges photographed edge-on in daylight; a Chemcast 2064 "Light Smoke" off-cut at 3/4 in (the 45-55 % target); a Smoke
+  horn sheet near 38 % through 10 mm. The order stands.
+- 18:05 bar lane: r43-window polished at 9056fafc7da90743e42835a10dfb640a4d2e138f (renders/2026-11-03/barkhorn/planet-tropos-a/r43-window.png,
+  1200 x 800, 256 samples): the pair 0.30 m back in the bay (x 0.70 to 1.00) and the eye at 2.05 m (1.80), so both pairs of feet and a
+  strip of floor show above the bulkhead (1.90 m alone gave 10-15 px; nearer the glass put the feet on the frame's edge); the window
+  spots follow the pair with a 0.30 m source (0.03), softer on the horns. It thought r44-lantern was still in my gate (my 17:26 result
+  had crossed).
+- 18:08 my gate on r43-window v2 (wf_48a96798-318; v1 and the older picture as context; the shop's floor-pool risk named) started.
+- 18:09 sent to the bar lane: r44-lantern passed 2/3 at 17:25; its whole queue after r43-window: the r44 polish (the left speaker's
+  upper body to ~45-55 by a soft room light, no floor pool; the side-edge red line; the woofer glints), the r43-listening polish, r43-shop
+  v3; a proxy then the final for each; SHAs and paths.
