@@ -1,5 +1,5 @@
 {
- "title": "Planet EARF, round 44 look 1 (the lantern), lantern: Tropos on its own feet, horn A polished (2026-11-03) [gate 1 (SHOW 2/3) polish: a soft fill from front-left on the pair's shells and horns only (light-linked, no floor pool; the left cabinet ~17 to ~50); the pair's spots a 0.25 m source and Mother's 0.04 m, clamp 4, against the edge line and the woofer glints]",
+ "title": "Planet EARF, round 44 look 1 (the lantern), lantern: Tropos on its own feet, horn A polished (2026-11-03) [v3, after the coordinator's 18:44 note: the fill is a real light. No light-linking; a 1.5 m gridded softbox from front-left (30 deg spread), aimed at the upper bodies, reaching the linings and woofer as a real lamp would, at the level where the linings stay saturated red (0.07). The pair's spots a 0.25 m source and Mother's 0.04 m, clamp 4]",
  "size": [
   2400,
   1600
@@ -941,32 +941,16 @@
    "target": [
     15.5,
     3.19,
-    1.0
+    1.15
    ],
    "size_m": [
-    1.2,
-    1.2
+    1.5,
+    1.5
    ],
-   "irradiance": 1.2,
+   "irradiance": 0.07,
    "color": 2700,
    "camera": false,
-   "receivers": [
-    "left#0",
-    "right#0",
-    "top#0",
-    "bottom#0",
-    "front-panel#0",
-    "back#0",
-    "brace*#0",
-    "rib-*#0",
-    "port-*#0",
-    "land-*#0",
-    "grip-*#0",
-    "waveguide*#0",
-    "horn-*#0",
-    "amp-*#0",
-    "feet-*#0"
-   ]
+   "spread_deg": 30.0
   },
   "pairfill1": {
    "type": "area",
@@ -978,32 +962,16 @@
    "target": [
     15.5,
     5.99,
-    1.0
+    1.15
    ],
    "size_m": [
-    1.2,
-    1.2
+    1.5,
+    1.5
    ],
-   "irradiance": 0.72,
+   "irradiance": 0.042,
    "color": 2700,
    "camera": false,
-   "receivers": [
-    "left#1",
-    "right#1",
-    "top#1",
-    "bottom#1",
-    "front-panel#1",
-    "back#1",
-    "brace*#1",
-    "rib-*#1",
-    "port-*#1",
-    "land-*#1",
-    "grip-*#1",
-    "waveguide*#1",
-    "horn-*#1",
-    "amp-*#1",
-    "feet-*#1"
-   ]
+   "spread_deg": 30.0
   }
  },
  "haze": {
