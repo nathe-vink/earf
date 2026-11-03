@@ -1,5 +1,10 @@
 # Strata's base: A, a stepped plinth, and B, outrigger feet (2026-11-01)
 
+> **Decided (the owner, 2026-11-03 15:11: "No light"): the product is A. Tropos stands on its own four swivel feet, with
+> no plinth, no plate and no light.** It passes IEC 62368-1:2018's stability tests on its own feet
+> (`stability/standard-2018.md`). Everything below is the record of how the base was decided: the plinth, the plate,
+> the uplight, D (the light built in), D+ and E. None of it is in the product.
+
 **The owner chose A, lit from underneath** (2026-11-01: "can we make them light up from underneath? If so I'd go with
 the one on the left"). B is kept below as the alternative drawn; the blind duel between them was not run.
 
@@ -86,7 +91,9 @@ It lifts the cabinet 20 mm.
   - `C-ice.png`: on the stepped plinth, night, the same light;
   - `B-smoke.png`: Smoke on the plate at night.
 
-## D. The light built in, no base (a proposal, 2026-11-03)
+## D. The light built in, no base (a proposal, 2026-11-03; not chosen: the owner, 2026-11-03 15:11, "No light")
+
+Kept as the record: the design, its build notes (the brace's rear member, the floor film, the strips clear of the ribs and of the ports' bays, 225f128a) and its frames in `renders/2026-11-03/barkhorn/base-question/gate2/`.
 
 **Why:** the owner doubted the base and wants the light cast up through the speaker, like the site's images. A light under the floor can't do that honestly:
 - **It stays at the bottom.** The 40 W panel lights the port chamber and fades upward; the top chamber stays several times darker. The acrylic isn't trapping it: hiding the brace changes nothing (`renders/2026-11-03/barkhorn/base-question/light-study/`).
