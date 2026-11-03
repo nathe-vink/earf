@@ -542,6 +542,19 @@ def _room_gate3(s):
             top = w['sill'] + w['size'][1]
             w['sill'] = 0.55
             w['size'] = [w['size'][0], round(top - 0.55, 3)]
+    # (the fix1 portrait's gate, 2026-11-03 21:28, HOLD 3/3: the lower ~40 % of both cabinets near-black (65 % of cabinet
+    # pixels under 20), the left unit's face toward the sideboard a beige mirror of the sunlit wall, the left horn's green
+    # on the wall running up to the right horn. Both sills come down, so the low sun reaches each cabinet from about a
+    # quarter of its height up, the bottom chambers still in shade: the window nearest the back wall to 0.35 (the left
+    # unit lit from about 0.22 m), the next to 0.75 (the right from about 0.26 m); the sun 3 deg round, so the green
+    # cast moves off the right horn; the left unit turned to -6 deg, its face toward the sideboard mirroring the room)
+    for w in s['set'].get('windows', []):
+        for along, sill in ((2.75, 0.25), (1.15, 0.6)):
+            if abs(w.get('along', 0) - along) < 1e-6:
+                top = w['sill'] + w['size'][1]
+                w['sill'] = sill
+                w['size'] = [w['size'][0], round(top - sill, 3)]
+    s['sun']['azimuth_deg'] = s['sun'].get('azimuth_deg', -68.0) - 3.0
     s['sun']['elevation_deg'] = 8.0
     s['render']['view'] = 'AgX'
     # (its proxy: AgX sits about half a stop under PBR Neutral, so -2/3 left the cabinets near black: -2/3 + 1/2)
@@ -550,7 +563,7 @@ def _room_gate3(s):
         for i in blk['instances']:
             x = i['position'][0]
             if x < 0:
-                i['rotate_z'] = 1.0
+                i["rotate_z"] = -14.0
             else:
                 i['rotate_z'] = -8.0
     return s
