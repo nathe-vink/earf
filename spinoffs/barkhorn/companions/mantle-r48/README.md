@@ -586,6 +586,31 @@ black tray". The fixes (`render_lantern.sh g4`):
 | `a4-night-poison-2092-g4.png` | Poison at night after the gate's fourth pass |
 | `a4-day-ember-2423-g4.png` | Ember by day after the gate's fourth pass |
 
+### Is "lacquer by day, lightbox at night" inherent to v4? (the coordinator's question, 12:33)
+
+**Mostly, yes.** v4 is a backlight. It is a light guide with a printed backer: white dots on black, under a tinted skin.
+
+- **By day** the eye sees the tint over the backer. The backer is mostly black, with 5-35 % white dots, so the slab reads
+  as color on an opaque ground: lacquer, or an inlay. Nothing below it shows, so it has no depth.
+- **At night** the print exists to make the output even. Even output is the definition of a lightbox.
+
+Renders can soften both, with grading, reflections, exposure and gloss, but they cannot remove them. What would give
+real depth, with what each does to the night look and to the cost (all estimates, all proposals):
+
+| option | by day | at night | cost per unit over v4 |
+|---|---|---|---|
+| **A. v4 as is** | tint over an opaque backer: lacquer, no see-through | even, graded glow: a lit panel | — |
+| **B. a thicker skin** (9.5 or 12.7 of tint, the core thinner) | deeper color; it darkens toward grazing angles (the path through the tint grows), a real depth cue; still opaque | about half to one stop dimmer; deeper red; still a panel | about +$15-25 (sheet) |
+| **C. a partly clear field**: the print only in a band round the rim, or in a pattern, with clear windows elsewhere | through the windows you see down into the float: the posts, the motor, the base, the bearing. That is real depth | the glow only where it is printed: a lit frame or pattern round a dark clear center. Guided light stays in the clear windows (total internal reflection), so little leaks down | ±$0 (the same print, a new layout); design time |
+| **D. a light-diffusing core** (an edge-lit diffusing acrylic, Acrylite EndLighten or Plexiglas LED kind, its particles scattering light through its whole volume, with no print) | tinted glass with a faint haze; you see into it if nothing opaque is under it | the whole volume glows, soft and deep, not a flat panel. **But** it emits down as much as up, so without a backer it lights the base and the shelf, which the owner ruled out. With a backer it is opaque again by day | about +$40-60 (the sheet), plus a backer if the floor must stay dark |
+| **E. a stronger graded print** | a visible tone gradient under the tint; still opaque | a visible falloff from the lit edge: some depth, no line; still a panel | ±$0 |
+
+**My reading.** Only C gives real see-through depth by day while keeping the floor dark at night. It costs the
+"whole deck glows" look: at night it becomes a lit frame or pattern. B and E soften v4 but keep its nature. D is the
+truest "glows from within" at night, but it breaks the owner's rule unless it is backed.
+
+This is the owner's decision, not a matter of repainting. The g5 frames are v4 at its best as built.
+
 ### The render (how the light is drawn)
 
 The guide's output is drawn as an even Lambertian glow just above the print: 9 W/m2. That figure follows from the
