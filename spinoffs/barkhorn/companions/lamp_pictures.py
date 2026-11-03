@@ -255,8 +255,6 @@ def build(frame, samples, scale):
         exposure = 0.0
     SC.render_settings(1800, 1200, samples, scale, exposure=exposure, look='AgX - Medium High Contrast')
     bpy.context.scene.cycles.caustics_refractive = True
-    if night and prod == 'core':   # round 8: the denoiser drew dark blotches round rare bright paths in the frost
-        bpy.context.scene.cycles.sample_clamp_indirect = 10.0; bpy.context.scene.cycles.blur_glossy = 1.0
     SC.camera(cam[0], cam[1], lens=cam[2], fstop=5.6)
     os.makedirs(OUT, exist_ok=True)
     out = os.environ.get('LAMP_OUT') or os.path.join(OUT, frame + '.png')
