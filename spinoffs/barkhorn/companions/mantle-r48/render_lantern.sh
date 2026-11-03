@@ -65,3 +65,20 @@ r a4-night-ember-2423-g3 --model out-strata-v4 --colour ember-2423 $NIGHT5 --cor
 r a4-night-poison-2092-g3 --model out-strata-v4 --colour poison-2092 $NIGHT5 --core-glow 12
 r a4-day-ember-2423-g3 --model out-strata-v4 --colour ember-2423 --day --strip 0 --core-glow 7 --strip-color 0.848 0.124 0.168 --exposure -2.0 $G3
 fi
+# the gate's fourth pass (11:26): the glow lights the world (--glass-shadows: shadow rays pass the flat acrylic, so the
+# arm, the pillar and the platter's sides catch it from below); the glow down half a stop (Ember 2.8, Poison 6), a
+# short vignette at the bezel and a broad front-to-back gradient (--grade-edge-mid 0.35 1.0 --grade-fall 0.025 --tilt
+# 0.15); a dim wash on the wall behind for a broad soft reflection across the top (--wall-wash 6); the navy ambient up
+# (--night-room 35) so the base, the posts and the float read; Poison's red matched to the lamps' day hue (scene.py
+# STOCK_HELD); the acrylic's wear at 0.3 (it read as wrinkles under the glow), 192 samples; the border's underside
+# printed white up, black down (by day it reads as tint over white, as the field does: --border-glow 1.0, its room
+# light baked as the field's; at night it gets no light of its own); the groove's ceiling the same print, its glow
+# scaled to the field (--ceil-k 0.6: it rendered 1.6x at the same strength, cause not found); the posts' seats' walls
+# clear; the platter's rim a soft satin (--platter-edge 0.15)
+G4="--pan 0.05 --base-rough 0.12 --blacken --wear 0.3 --platter-edge 0.15 --ceil-k 0.6"
+NIGHT6="--strip 0 --cct 4000 --ambient 0.003 --exposure -1.5 --grade --grade-edge-mid 0.35 1.0 --grade-fall 0.025 --tilt 0.15 --night-room 35 --glass-shadows --wall-wash 6 --samples 192 $G4"
+if [ "$1" = g4 ]; then
+r a4-night-ember-2423-g4 --model out-strata-v4 --colour ember-2423 $NIGHT6 --core-glow 2.8
+r a4-night-poison-2092-g4 --model out-strata-v4 --colour poison-2092 $NIGHT6 --core-glow 6
+r a4-day-ember-2423-g4 --model out-strata-v4 --colour ember-2423 --day --strip 0 --core-glow 7 --strip-color 0.848 0.124 0.168 --exposure -2.0 --border-glow 1.0 $G4
+fi

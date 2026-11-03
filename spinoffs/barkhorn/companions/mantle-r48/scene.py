@@ -46,8 +46,10 @@ CUSTOM = {'ember-custom': '#F2A29C', 'ice-custom': '#B5D9EE', 'haze-custom': '#B
 # the line's stock tints since 2026-11-01 (the owner: "I like the darker colors"; r33-speaker-horn
 # spinoffs/barkhorn/asset/tints-trucast.json): each code's TruCast TT held at its own 1/2 in sheet, given as the color
 # after 10 mm (`strata_horn_deep`, horn_radius_m 0.01)
+# poison-2092 (gate 4, 2026-11-03): red raised from #0DA41C so its day hue is the lamps lane's 122 deg (CIELAB; r32-lamps-
+# final, stock-tints-lamps.md); the old value read 138 deg, a screen green
 STOCK_HELD = {'ember-40': '#F5A0AB',   # option (b), 2026-11-03: Ember 2423's hue poured to about 40 % TT per 1/2 in (a custom batch)
-              'ember-2423': '#E02B3A', 'poison-2092': '#0DA41C', 'smoke-2074': '#787B7E', 'haze-2287': '#9C5DE3', 'ice-2069': '#B4DEFA'}
+              'ember-2423': '#E02B3A', 'poison-2092': '#6EA41C', 'smoke-2074': '#787B7E', 'haze-2287': '#9C5DE3', 'ice-2069': '#B4DEFA'}
 
 
 def sigma_tint(key):
@@ -128,6 +130,7 @@ def wear(nt, strength=1.0, scale=1.0):
     return sc.outputs[0], ds.outputs[0]
 
 
+WEAR = 1.0             # --wear: the acrylic's scratches and dust (gate 4: they read as wrinkles under the glow)
 GLASS_SHADOWS = False     # --glass-shadows (v4's lit deck): shadow rays pass flat acrylic, tinted by its volume
 
 
@@ -158,7 +161,7 @@ def acrylic(name, bands, tint, rough=0.004, wear_on=True, ring=None, edge_rough=
         bv = bevel(nt, 0.0005 if slot != 3 else 0.0003)
         nt.links.new(bv.outputs['Normal'], b.inputs['Normal'])
         if wear_on and wr:
-            scr, dust = wear(nt, 1.0)
+            scr, dust = wear(nt, WEAR)
             ad = nt.nodes.new('ShaderNodeMath'); ad.operation = 'MULTIPLY_ADD'
             nt.links.new(scr, ad.inputs[0]); ad.inputs[1].default_value = 0.10; ad.inputs[2].default_value = r
             nt.links.new(ad.outputs[0], b.inputs['Roughness'])
@@ -470,7 +473,7 @@ def core_material(name, box, cover=(0.05, 0.35), ramp=0.14, glow=0.0, glow_col=(
     return mats
 
 
-def core_glow_sheet(core, strength, col, box=None, grade=(1.4, 0.8), fall=0.05, occl=None, cct=0.0):
+def core_glow_sheet(core, strength, col, box=None, grade=(1.4, 0.8), fall=0.05, occl=None, cct=0.0, ceil_k=1.0, tilt=0.0):
     """The guide's output (see core_material): a copy of the print's faces 0.3 up inside the core, facing up,
     transparent to rays and emitting upward only, so the opaque print under it keeps every path to the shelf dark."""
     me = core.data
@@ -478,6 +481,7 @@ def core_glow_sheet(core, strength, col, box=None, grade=(1.4, 0.8), fall=0.05, 
     bm.transform(core.matrix_world)
     bm.normal_update()
     keep = [f for f in bm.faces if f.material_index == 5]
+    zfloor = min(v.co.z for v in bm.verts)
     bm2 = bmesh.new()
     vmap = {}
     for f in keep:
@@ -517,6 +521,15 @@ def core_glow_sheet(core, strength, col, box=None, grade=(1.4, 0.8), fall=0.05, 
         d = mth('MAXIMUM', mth('MINIMUM', dx, b_in=dy), 0.0)
         g = mth('ADD', mth('MULTIPLY', mth('EXPONENT', mth('DIVIDE', d, -fall)), grade[0] - grade[1]), grade[1])
         val = mth('MULTIPLY', g, strength / mean)
+        if tilt:
+            # gate 4: a broad gradient, brighter at the front (the camera's side), deeper toward the far corners
+            ty = mth('DIVIDE', mth('SUBTRACT', sep.outputs['Y'], cy), hd)
+            val = mth('MULTIPLY', val, b_in=mth('SUBTRACT', 1.0, b_in=mth('MULTIPLY', ty, tilt)))
+        if ceil_k != 1.0:
+            # gate 4: the sheet over the groove's ceiling rendered 1.6x the field at the same strength (cause not found);
+            # scaled to match the field, as the white print there would be lit as the field is
+            z_hi = mth('GREATER_THAN', sep.outputs['Z'], zfloor + 0.004)
+            val = mth('MULTIPLY', val, b_in=mth('ADD', mth('MULTIPLY', z_hi, ceil_k - 1.0), 1.0))
         for (ox, oy, R0, depth, w) in (occl or []):
             # by day: the platter and the arm plate shade the room's light from the print under and round them
             r_ = mth('MAXIMUM', mth('SUBTRACT', mth('SQRT', mth('ADD', mth('POWER', mth('SUBTRACT', sep.outputs['X'], ox), 2.0),
@@ -551,7 +564,7 @@ def classify_layer(obj, kind):
         de = min(c.x - x0, x1 - c.x, c.y - y0, y1 - c.y)
         if abs(n.z) > 0.7:
             if kind == 'skin':
-                f.material_index = 0 if n.z > 0 else (5 if abs(c.z - zbot) < 1e-5 else 7)
+                f.material_index = 0 if n.z > 0 else (5 if abs(c.z - zbot) < 1e-5 else 6)   # gate 4: the border white up, black down
             else:
                 f.material_index = 7
         else:
@@ -559,11 +572,62 @@ def classify_layer(obj, kind):
                 # gate 3: the skin's own edges painted black, so it cannot pipe light out as a stripe; the rings' satin
                 f.material_index = 7 if kind == 'skin' else 1
             elif kind == 'skin' and c.z - zbot < 0.0005:
-                f.material_index = 7      # the 0.02 step between the joint and the black print: part of the print
+                f.material_index = 6      # the 0.02 step between the joint and the border print: part of the print
             else:
                 f.material_index = 6 if kind == 'skin' else 7
     bm.transform(obj.matrix_world.inverted())
     bm.to_mesh(me); bm.free()
+
+
+def border_glow_sheet(skin, strength, col, box, fall, cct=0.0):
+    """gate 4: the border's white print (under the skin, over the rings) as a sheet 0.3 inside the skin, facing up.
+    By day it carries the room's light as the field's print does (`fall` 0: even); at night only the light already
+    in the skin reaches it, so it glows `strength` at the field's edge and fades outward over `fall`."""
+    me = skin.data
+    bm = bmesh.new(); bm.from_mesh(me); bm.transform(skin.matrix_world); bm.normal_update()
+    zb = min(v.co.z for v in bm.verts)
+    keep = [f for f in bm.faces if f.material_index == 6 and f.normal.z < -0.7]
+    bm2 = bmesh.new(); vmap = {}
+    for f in keep:
+        vs = []
+        for v in f.verts:
+            if v.index not in vmap:
+                vmap[v.index] = bm2.verts.new((v.co.x, v.co.y, v.co.z + 0.0003))
+            vs.append(vmap[v.index])
+        bm2.faces.new(list(reversed(vs)))
+    me2 = bpy.data.meshes.new('border-glow'); bm2.to_mesh(me2); bm.free(); bm2.free()
+    ob = bpy.data.objects.new('border-glow', me2); bpy.context.collection.objects.link(ob)
+    m, nt, out = node_tree('border-glow')
+    geo = nt.nodes.new('ShaderNodeNewGeometry')
+    em = nt.nodes.new('ShaderNodeEmission'); em.inputs['Color'].default_value = tuple(col) + (1,)
+    if cct:
+        bb = nt.nodes.new('ShaderNodeBlackbody'); bb.inputs['Temperature'].default_value = cct; nt.links.new(bb.outputs['Color'], em.inputs['Color'])
+    if fall > 0:
+        x0, y0, x1, y1 = box
+        cx, cy, hw, hd = (x0 + x1) / 2, (y0 + y1) / 2, (x1 - x0) / 2, (y1 - y0) / 2
+        sep = nt.nodes.new('ShaderNodeSeparateXYZ'); nt.links.new(geo.outputs['Position'], sep.inputs['Vector'])
+        def mth(op, a, bval=None, b_in=None):
+            n_ = nt.nodes.new('ShaderNodeMath'); n_.operation = op
+            if isinstance(a, float): n_.inputs[0].default_value = a
+            else: nt.links.new(a, n_.inputs[0])
+            if b_in is not None: nt.links.new(b_in, n_.inputs[1])
+            elif bval is not None: n_.inputs[1].default_value = bval
+            return n_.outputs[0]
+        ox = mth('SUBTRACT', mth('ABSOLUTE', mth('SUBTRACT', sep.outputs['X'], cx)), hw)
+        oy = mth('SUBTRACT', mth('ABSOLUTE', mth('SUBTRACT', sep.outputs['Y'], cy)), hd)
+        d = mth('MAXIMUM', mth('MAXIMUM', ox, b_in=oy), 0.0)
+        nt.links.new(mth('MULTIPLY', mth('EXPONENT', mth('DIVIDE', d, -fall)), strength), em.inputs['Strength'])
+    else:
+        em.inputs['Strength'].default_value = strength
+    bk_ = nt.nodes.new('ShaderNodeBsdfDiffuse'); bk_.inputs['Color'].default_value = (0.0, 0.0, 0.0, 1)
+    tr = nt.nodes.new('ShaderNodeBsdfTransparent')
+    ad = nt.nodes.new('ShaderNodeAddShader'); nt.links.new(bk_.outputs['BSDF'], ad.inputs[0]); nt.links.new(em.outputs['Emission'], ad.inputs[1])
+    mx = nt.nodes.new('ShaderNodeMixShader'); nt.links.new(geo.outputs['Backfacing'], mx.inputs['Fac'])
+    nt.links.new(ad.outputs['Shader'], mx.inputs[1]); nt.links.new(tr.outputs['BSDF'], mx.inputs[2])
+    nt.links.new(mx.outputs['Shader'], out.inputs['Surface'])
+    m.cycles.emission_sampling = 'FRONT'
+    me2.materials.append(m); ob.visible_shadow = False
+    return ob
 
 
 def classify_core(obj):
@@ -581,11 +645,15 @@ def classify_core(obj):
             # the underside, the posts' 2 mm seats and (gate 1) the groove's ceiling all printed: opaque from above
             # gate 3: the groove's ceiling printed black (it sits right over the strip: lit, it was a hot band at the
             # rim); the field's print starts beyond it, so the border reads about 19 wide, one deep tinted frame
-            f.material_index = 6 if c.z - zbot > 0.004 else 5
+            # gate 4: the groove's ceiling printed white up, black down, as the field: lit like it from above (by day no
+            # dark stripe), opaque to the strip below
+            f.material_index = 5
         else:
             de = min(c.x - x0, x1 - c.x, c.y - y0, y1 - c.y)
             if de < 0.0015:
                 f.material_index = 6      # gate 3: black edge tape round the core (was white reflector tape)
+            elif c.z - zbot < 0.0022 and de > 0.03:
+                f.material_index = 2      # gate 4: the posts' 2 mm seats' walls, clear (a ring of paint read as a control)
             elif de < 0.0095 and c.z - zbot < 0.0075:
                 f.material_index = 2      # the groove's sides, clear: the strip's light enters the core here
             else:
@@ -880,7 +948,8 @@ def hand(mats, at, yaw):
 
 # ---------------------------------------------------------------- the scene
 def build(args):
-    global GLASS_SHADOWS
+    global GLASS_SHADOWS, WEAR
+    WEAR = args.wear
     GLASS_SHADOWS = bool(getattr(args, 'glass_shadows', False))
     bpy.ops.wm.read_factory_settings(use_empty=True)
     sc = bpy.context.scene
@@ -927,7 +996,7 @@ def build(args):
     if 'deck-L1-stack' in objs:
         M['deck'] = acrylic('deck', bands_deck, tint, ring=(0.0, 0.0, meta['W1'] * mm, meta['D1'] * mm, rw * mm) if rw else None)
         M['cover'] = acrylic('cover', bands_cover, tint)
-    M['platter'] = acrylic('platter', bands_platter, tint, wear_on=False)
+    M['platter'] = acrylic('platter', bands_platter, tint, wear_on=False, edge_rough=args.platter_edge if args.platter_edge else 0.010)
     M['brass'] = metal('brass', '#C8A15E', 0.22, bump=0.15)
     M['brass-brushed'] = metal('brass-brushed', '#C9A563', 0.30, aniso=0.6)
     M['steel'] = metal('steel', '#D0D0CC', 0.12)
@@ -997,6 +1066,11 @@ def build(args):
             for m_ in M['plinth']:
                 o.data.materials.append(m_)
             classify_layer(o, 'skin' if n.endswith('skin') else 'rings'); o['caustic'] = True
+            if n.endswith('skin') and args.core_glow > 0 and args.border_glow > 0:
+                o0b, rwb = meta['P']['margin'] * mm, meta['P']['tint_ring'] * mm
+                border_glow_sheet(o, args.core_glow * args.border_glow, tuple(args.strip_color),
+                                  (o0b + rwb, o0b + rwb, o0b + meta['W0'] * mm - rwb, o0b + meta['D0'] * mm - rwb),
+                                  0.0 if args.day else args.border_fall, cct=args.cct)
             for p in o.data.polygons:
                 p.use_smooth = False
             continue
@@ -1009,6 +1083,7 @@ def build(args):
                 core_glow_sheet(o, args.core_glow, tuple(args.strip_color),
                                 box=(o0_ + rw2, o0_ + rw2, o0_ + meta['W0'] * mm - rw2, o0_ + meta['D0'] * mm - rw2) if (args.grade or args.day) else None,
                                 grade=tuple(args.grade_edge_mid) if args.grade else (1.0, 1.0), fall=args.grade_fall, cct=args.cct,
+                                ceil_k=args.ceil_k, tilt=args.tilt,
                                 occl=[(meta['S'][0] * mm, meta['S'][1] * mm, meta['P']['platter_d'] / 2 * mm, 0.6, 0.035),
                                       (meta['A'][0] * mm, meta['A'][1] * mm, meta['P']['puck_d'] / 2 * mm, 0.5, 0.018)] if args.day else None)
             for p in o.data.polygons:
@@ -1210,6 +1285,11 @@ def setup_world(args, meta):
             wallm = dielectric('night-wall', '#3A3D44', 0.55, spec=0.3)
             boxo('night-wall', (3.0, 0.04, 1.6), (cx, cy + 0.42, 0.8), wallm, bev=0)
             bg.inputs['Color'].default_value = (0.020, 0.028, 0.060, 1); bg.inputs['Strength'].default_value = args.night_room
+            if args.wall_wash > 0:
+                # gate 4: a dim wash on the wall behind (a lamp out of frame), so a broad soft reflection lies across the
+                # glossy top and shows the skin over the light; aimed at the wall, off the floor
+                ww = area('wall-wash', (1.2, 0.3), (cx + 0.2, cy - 0.1, 0.9), (cx - 0.1, cy + 0.42, 0.35), args.wall_wash, col=(0.85, 0.88, 1.0), spread=35, caust=False)
+                ww.visible_camera = False
         if args.kicker > 0 or args.rim > 0:
             # gate 1: a low warm kicker from the front right and a rim from behind left, small and tight, so the arm,
             # the posts, the base's edge and the feet read at night; warm white, nothing colored on the floor
@@ -1363,6 +1443,10 @@ if __name__ == '__main__':
     ap.add_argument('--grade-edge-mid', type=float, nargs=2, default=(1.4, 0.8))
     ap.add_argument('--grade-fall', type=float, default=0.05); ap.add_argument('--cct', type=float, default=0.0)
     ap.add_argument('--night-room', type=float, default=0.0)
+    ap.add_argument('--wear', type=float, default=1.0); ap.add_argument('--platter-edge', type=float, default=0.0)
+    ap.add_argument('--ceil-k', type=float, default=1.0); ap.add_argument('--tilt', type=float, default=0.0)
+    ap.add_argument('--border-glow', type=float, default=0.0); ap.add_argument('--border-fall', type=float, default=0.006)
+    ap.add_argument('--wall-wash', type=float, default=0.0)
     ap.add_argument('--core-glow', type=float, default=0.0)
     ap.add_argument('--day', action='store_true'); ap.add_argument('--ambient', type=float, default=0.05)
     ap.add_argument('--base-tint', default='smoke')
