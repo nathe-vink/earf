@@ -146,6 +146,8 @@ def shadow_pass(nt, surf):
 
 
 NO_EDGE_BEVEL = False
+RING_WHITE = False
+RING_ALBEDO = 0.88
 
 
 def acrylic(name, bands, tint, rough=0.004, wear_on=True, ring=None, edge_rough=0.010, ar=None):
@@ -203,7 +205,8 @@ def acrylic(name, bands, tint, rough=0.004, wear_on=True, ring=None, edge_rough=
             # v4: a hole's wall painted white toward the acrylic, black outside, so the lit deck's light stays in it
             g_ = nt.nodes.new('ShaderNodeNewGeometry')
             bk = nt.nodes.new('ShaderNodeBsdfDiffuse'); bk.inputs['Color'].default_value = (0.012, 0.012, 0.012, 1)
-            wh = nt.nodes.new('ShaderNodeBsdfDiffuse'); wh.inputs['Color'].default_value = (0.88, 0.88, 0.86, 1)
+            wv_ = RING_ALBEDO if (RING_WHITE and name == 'plinth') else 0.88
+            wh = nt.nodes.new('ShaderNodeBsdfDiffuse'); wh.inputs['Color'].default_value = (wv_, wv_, wv_ * 0.98, 1)
             mx_ = nt.nodes.new('ShaderNodeMixShader'); nt.links.new(g_.outputs['Backfacing'], mx_.inputs['Fac'])
             nt.links.new(bk.outputs['BSDF'], mx_.inputs[1]); nt.links.new(wh.outputs['BSDF'], mx_.inputs[2]); surf = mx_.outputs['Shader']
         nt.links.new(surf, out.inputs['Surface'])
@@ -691,14 +694,16 @@ def classify_layer(obj, kind, clear_border=False, clear_ring=False):
                 # C3 (--clear-ring): the rings' undersides bare polished glass, so the border is clear tinted glass
         else:
             if kind == 'skinring':
-                f.material_index = 1 if de < 0.0015 else 8      # C3: its outer edge polished, its inner edge the matte black bond line
+                f.material_index = 1 if de < 0.0015 else (6 if RING_WHITE else 8)      # C3: its outer edge polished, its inner edge the bond line
             elif de < 0.0015:
                 # gate 3: the skin's own edges painted black, so it cannot pipe light out as a stripe; the rings' satin
                 f.material_index = (8 if clear_ring else 7) if kind == 'skin' else 1
             elif kind == 'skin' and c.z - zbot < 0.0005:
                 f.material_index = 6      # the 0.02 step between the joint and the border print: part of the print
             else:
-                f.material_index = 6 if kind == 'skin' else (8 if clear_ring else 7)
+                f.material_index = 6 if kind == 'skin' else ((6 if RING_WHITE else 8) if clear_ring else 7)
+                # C3 pair (--ring-white): the ring's inner faces painted white toward the ring, black toward the field,
+                # as the core's holes are: by day the room's light comes back through the tint, at night the glow is held
     bm.transform(obj.matrix_world.inverted())
     bm.to_mesh(me); bm.free()
 
@@ -780,8 +785,9 @@ def classify_core(obj, groove=None):
                 f.material_index = 2      # v5: the central groove's sides, clear: the strip's light enters here
             elif c.z - zbot < 0.0022 and de > 0.03:
                 f.material_index = 2      # gate 4: the posts' 2 mm seats' walls, clear (a ring of paint read as a control)
-            elif de < 0.0095 and c.z - zbot < 0.0075:
+            elif de < 0.0095 and c.z - zbot < 0.0075 and not groove:
                 f.material_index = 2      # the groove's sides, clear: the strip's light enters the core here
+                # (v4's edge groove only: in v5 this caught the arm puck's hole near the edge, a lit tick by the pillar)
             else:
                 f.material_index = 3
     bm.transform(obj.matrix_world.inverted())
@@ -1618,7 +1624,8 @@ if __name__ == '__main__':
     ap.add_argument('--rise', type=float, default=0.0); ap.add_argument('--backed', action='store_true')
     ap.add_argument('--clear-r', type=float, default=0.0); ap.add_argument('--dot-pitch', type=float, default=0.0)
     ap.add_argument('--clear-ring', action='store_true'); ap.add_argument('--no-edge-bevel', action='store_true')
-    ap.add_argument('--edge-fade', type=float, default=0.0)
+    ap.add_argument('--edge-fade', type=float, default=0.0); ap.add_argument('--ring-white', action='store_true')
+    ap.add_argument('--ring-albedo', type=float, default=0.88)
     ap.add_argument('--matte-channel', action='store_true'); ap.add_argument('--label-near', action='store_true')
     ap.add_argument('--core-glow', type=float, default=0.0)
     ap.add_argument('--day', action='store_true'); ap.add_argument('--ambient', type=float, default=0.05)
@@ -1628,6 +1635,7 @@ if __name__ == '__main__':
     ap.add_argument('--crop', type=float, nargs=4, default=None)
     a = ap.parse_args(argv)
     NO_EDGE_BEVEL = a.no_edge_bevel
+    RING_WHITE = a.ring_white; RING_ALBEDO = a.ring_albedo
     build(a)
     if a.debug_emit:
         # debugging only: paint the named objects (prefix match) flat green, to find what a glint is

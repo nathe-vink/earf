@@ -142,3 +142,11 @@ if [ "$1" = c3c ]; then
 r a5-night-ember-2423-c3c --model out-strata-v5 --colour ember-2423 --strip 0 --cct 4000 --ambient 0.003 --exposure -1.5 --night-room 35 --wall-wash 6 --samples 192 --core-glow 2.6 --cover-max 0.24 --cover-floor 0.05 --look "AgX - Base Contrast" $C9 --edge-fade 0.008
 r a5-day-ember-2423-c3c --model out-strata-v5 --colour ember-2423 --day --strip 0 --core-glow 5 --cover-max 0.15 --cover-floor 0.15 --strip-color 0.848 0.124 0.168 --exposure -2.0 $C9 --edge-fade 0.008
 fi
+# the C3 pair, second take: C3c's matte black bond line took the day border's ruby away (C3's glossy black had mirrored
+# the room inside the ring). The ring's inner faces are now painted dark grey (10 %) toward the ring and black toward
+# the field (--ring-white --ring-albedo 0.10), so by day the room's light comes back through the tint and at night the
+# glow is still held. The tick by the arm pillar was still faint at an 8 mm edge fade; 20 mm takes it to the border's black
+if [ "$1" = c3d ]; then
+r a5-night-ember-2423-c3d --model out-strata-v5 --colour ember-2423 --strip 0 --cct 4000 --ambient 0.003 --exposure -1.5 --night-room 35 --wall-wash 6 --samples 192 --core-glow 2.6 --cover-max 0.24 --cover-floor 0.05 --look "AgX - Base Contrast" $C9 --edge-fade 0.02 --ring-white --ring-albedo 0.10
+r a5-day-ember-2423-c3d --model out-strata-v5 --colour ember-2423 --day --strip 0 --core-glow 5 --cover-max 0.15 --cover-floor 0.15 --strip-color 0.848 0.124 0.168 --exposure -2.0 $C9 --edge-fade 0.02 --ring-white --ring-albedo 0.10
+fi
