@@ -1271,8 +1271,10 @@ def rating_plate_pieces(cx, D, az, pw):
                       (rx + u0 - nu, rz + v0 - nv)], 'y', y, y + 0.05)
     L = 25.0                                               # the text's left edge, clear of the left screw
     prn.append(text('EARF', L, 13.2, size=4.2, bold=True))
-    prn.append(text('ATMOSPHERE  ·  HORN LOUDSPEAKER, ACTIVE', L, 7.4))
-    prn.append(text('MODEL AT-1        S/N  AT1-26-000127', L, 4.1))
+    # (the product's name since the roll-out: Tropos; the model code TR-1 is the coordinator's proposal, 2026-11-03, for
+    # the owner to confirm, as is the line below)
+    prn.append(text('TROPOS  ·  HORN LOUDSPEAKER, ACTIVE', L, 7.4))
+    prn.append(text('MODEL TR-1        S/N  TR1-26-000127', L, 4.1))
     prn.append(text('100-120V~ / 200-240V~    50-60 Hz    350 W MAX', L, 0.8))
     prn.append(text('DESIGNED IN SAN FRANCISCO, CALIFORNIA', L, -2.5))
     prn.append(bar(L, -5.6, -25.0, -5.6, 0.25))
@@ -1448,8 +1450,10 @@ def amp_plate_pieces(amp, cx, D, az):
     mouth = [(cx + cu - 8.25, az + cv - 12.45), (cx + cu + 4.25, az + cv - 12.45), (cx + cu + 8.25, az + cv - 8.45),
              (cx + cu + 8.25, az + cv + 8.45), (cx + cu + 4.25, az + cv + 12.45), (cx + cu - 8.25, az + cv + 12.45)]
     P['black'].append(slab(rr(18.6, 26.8, 1.2, cu, cv), D - 9, D + 1.0) - slab(mouth, D - 8, D + 1.1))
+    # the three blade pins (line, neutral, earth), brought forward to 0.4 mm inside the mouth (2026-11-03: at 2.2 mm in, in
+    # the black recess, the critics read the inlet as an empty socket; an IEC C14's pins stand nearly to its face)
     for (bu, bv), (w, h) in (((-1.15, 7.0), (4.0, 2.0)), ((-1.15, -7.0), (4.0, 2.0)), ((5.35, 0.0), (2.0, 4.0))):
-        P['metal'].append(box(cx + cu + bu - w / 2, D - 8, az + cv + bv - h / 2, cx + cu + bu + w / 2, D - 1.2, az + cv + bv + h / 2))
+        P['metal'].append(box(cx + cu + bu - w / 2, D - 8, az + cv + bv - h / 2, cx + cu + bu + w / 2, D + 0.6, az + cv + bv + h / 2))
     ru, rv = ROCKER                                    # the rocker in its bezel, rocked to I (its lower half proud)
     P['black'].append(slab(rr(15.0, 20.9, 1.2, ru, rv), D + 0.6, D + 2.4) - slab(rr(11.4, 15.1, 0.8, ru, rv), D, D + 2.5))
     P['black'].append(prism([(D + 0.8, az + rv + 7.15), (D + 1.6, az + rv + 7.15), (D + 3.8, az + rv - 7.15), (D + 0.8, az + rv - 7.15)],

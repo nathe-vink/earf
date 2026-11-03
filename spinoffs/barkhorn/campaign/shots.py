@@ -631,6 +631,8 @@ def site(frame, tint):
     _siteG_round1(s, frame, tint)
     if frame == 'hero-light':
         _siteH_round1(s)
+    if frame == 'back':
+        _siteB_round1(s)
     honest_lights(s)
     if frame in ('front-off-tall', 'front-off-wide', 'side') and 'back' in s['lights']:
         # (the honest rig's proxies, tall Ice and Ember: unlinked, the `back` lamp, behind the speaker and aimed through
@@ -827,6 +829,30 @@ def _floor_patch(s, z_lo=0.06, z_hi=0.42, margin=0.15):
     s['set'].setdefault('flags', []).append({'center_m': [round((min(xs) + max(xs)) / 2, 3), round((min(ys) + max(ys)) / 2, 3), 0.004],
                                              'size_m': [round(max(xs) - min(xs) + 2 * margin, 3), round(max(ys) - min(ys) + 2 * margin, 3)],
                                              'normal': [0.0, 0.0, 1.0], 'reflect_only': True, 'color': '#050505'})
+
+
+def _siteB_round1(s):
+    """The back set's gate (the coordinator's critics, 2026-11-03, HOLD 7/7). 1. The horn from behind clipped (Ember 54-93 %
+    at 250, pastel): `cab-back`, a 7 W/m2 lamp on the far side of the speaker that lit through the cabinet and the horn,
+    hidden from reflections at specular 0. Crop tests on Ember's horn, one lamp off at a time: the key, fill, wash and
+    plate strip change nothing; cab-back off, 53 % to 2 %, (206, 106, 104) to (163, 41, 37). Lowered to the cabinet on a
+    35 deg grid it still left 11 %; off, the cabinet loses 75 to 72. It goes, and so does `glow` (finals31's, dropped from
+    phase 2 for the same reason), and the horn's rim lamp comes down from 3.5 to 1.0. 2. The softbox patch on the back
+    panel's upper left was partly cab-back's reflection: its saturation 0.42 to 0.69 with it gone. 3. The lower face
+    toward the camera's left mirrored the floor: a reflect-only card on its mirror ray, out of frame."""
+    L = s['lights']
+    for k in ('glow', 'cab-back'):
+        if k in L:
+            L[k]['irradiance'] = 0.0
+    if 'horn-rim' in L:
+        L['horn-rim']['irradiance'] = 1.0
+    # (the patch's crop tests on Ember: the key turned to -70 or -40, or grown to 2.4 x 2.0, left it as it was; with
+    # `plate-strip` off, the small strip lamp beside the amp plate, it is gone: its reflection, not the key's. It goes;
+    # the plate has its own close-up)
+    if 'plate-strip' in L:
+        L['plate-strip']['irradiance'] = 0.0
+    _mirror_card(s)
+    return s
 
 
 def _siteH_round1(s):
