@@ -50,10 +50,10 @@ SETS = {
     # Poison under the canopy: light through a canopy gap from the camera side and above (the opaque lining batts block
     # any light from behind: a sunfleck from the back-left left the cabinet at L 2)
     # (the gap's lamp mirrored in the polished horn's rim as a white check-mark glint and green flecks by the pod: a wider,
-    # softer gap, its reflection dim, as a bright canopy opening is soft and big, not a small hard source)
+    # softer gap at the same irradiance, so its radiance, and so its reflection, is about a quarter; reflections at full)
     'poison_g5': {'product.instances.0.rotate_z': 5.0, 'lights.skygap': {'type': 'area', 'size_m': [3.0, 3.0], 'target': [0.0, 0.0, 0.6], 'irradiance': 12.0,
                                     'color': '#EEF2E2', 'orbit': {'azimuth_deg': 30, 'elevation_deg': 55, 'distance_m': 3.5},
-                                    'specular': 0.25}},
+                                    'specular': 1.0}},
 }
 # set props left out (the coordinator's gate on Dust, 2026-11-03: the tumbleweed floats, its shadow detached)
 DROP = {'dust': ['tumbleweed']}
