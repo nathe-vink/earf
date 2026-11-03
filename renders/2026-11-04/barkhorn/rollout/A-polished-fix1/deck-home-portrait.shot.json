@@ -28,10 +28,10 @@
    {
     "wall": "left",
     "along": 2.75,
-    "sill": 0.55,
+    "sill": 0.25,
     "size": [
      1.45,
-     2.2
+     2.5
     ],
     "mullions": [
      1,
@@ -42,10 +42,10 @@
    {
     "wall": "left",
     "along": 1.15,
-    "sill": 0.9,
+    "sill": 0.6,
     "size": [
      1.45,
-     1.85
+     2.15
     ],
     "mullions": [
      2,
@@ -504,7 +504,7 @@
   ]
  },
  "sun": {
-  "azimuth_deg": -68.0,
+  "azimuth_deg": -71.0,
   "elevation_deg": 8.0,
   "irradiance": 48.0,
   "angle_deg": 1.0,
@@ -631,7 +631,7 @@
       0.3,
       0.0
      ],
-     "rotate_z": 1.0,
+     "rotate_z": -14.0,
      "hide": [
       "cloth-disc",
       "post-*",
@@ -669,7 +669,7 @@
       0.3,
       0.0
      ],
-     "rotate_z": 1.0,
+     "rotate_z": -14.0,
      "hide": [
       "horn-topo*",
       "base-out*",
