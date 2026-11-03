@@ -18,6 +18,10 @@ Show one item with its pictures, wait for the answer, save the owner's words ver
   reflecting less, and no lamp lights a part while skipping what sits behind it in its path. Added 20:06 (ruling 3): no lamp is
   hidden from views through clear resin (`transmission: False`), except a practical's bulb inside its own frosted or opal fitting.
   A picture passed before these rulings is re-checked against all three before it is shown.
+- **Found 20:38, for item 14 (the close-ups) and the back pictures:** the rating plate on the back still reads "ATMOSPHERE · HORN
+  LOUDSPEAKER, ACTIVE" and "MODEL AT-1, S/N AT1-26-000127" (product.py). Proposed: TROPOS, MODEL TR-1, S/N TR1-26-000127; and its
+  line "DESIGNED IN SAN FRANCISCO, CALIFORNIA" to confirm. Ask with the back and amplifier pictures. The six horn-backs that passed
+  20:38 (Ice, Haze, Fog, Ember, Poison 3/3; Dust 2/3) show no plate; Acid's waits on its edge colour, the amplifier close-up on the plate.
 - **State changes since 18:09 (the (e) items and others):**
   - Mantle A or C3: C3b night passed 3/3 (17:55) with the C3 day 3/3; the Mantle lane is rendering the day from the C3b build, removing a
     red tick and checking that the field's light reaches what stands on it. Ready after that pass.

@@ -3238,3 +3238,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   queue time of 20:33.)
 - 20:35 c3: merged 1e79f362 (2ee8fdc82318cb88a42fa5ed1ac3828c7835b7b2, pushed; the variants file was unmodified), generated fix1 chunk 2,
   started only deck-home-portrait at 20:35 as a tracked task (tall Ember and Dust skipped).
+- 20:3x horn-back x7 + amp-plate-ember gate wf_afa41f44-383 (3 critics, ~30 min): horn-back Ice, Haze, Fog, Ember, Poison SHOW 3/3; Dust SHOW
+  2/3 (a red top-back edge, 192,3,1, and a hot end cap: one critic held); Acid HOLD 0/3 (a hot scarlet top-back edge, 236,42,15 at V 0.93,
+  "a red neon strip on a yellow box", not what a fluorescent yellow edge does; the end cap hot); amp-plate-ember HOLD 0/3 (the rating plate
+  reads "ATMOSPHERE · HORN LOUDSPEAKER, ACTIVE / MODEL AT-1, S/N AT1-26-000127", product.py ~1274; a softbox's hard pale reflection washes
+  the top-left corner pink; the IEC C14 inlet has no pins). One set: the same geometry, each horn within ~3 degrees of its cabinet's hue.
+- 20:38 sent to the speaker lane: Acid's long-path colour (model the fluorescent edge honestly, or limit the hue shift to deep amber as a
+  documented approximation checked against the chart and the off-cuts); Dust stands if its red edge is what 2422 does; the plate to TROPOS
+  in the next model build (TR-1 and TR1- proposed; the model code and "DESIGNED IN SAN FRANCISCO, CALIFORNIA" to the owner); the softbox
+  flagged; the inlet's pins. Walkthrough: the plate proposal noted for item 14 and the back pictures.
