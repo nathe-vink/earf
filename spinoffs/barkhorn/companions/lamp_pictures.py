@@ -235,7 +235,7 @@ def build(frame, samples, scale):
         sphere('opal-in', 86.0, rim, opal, inward=True, cut=oc, hole=H)
         part('out-dome-pendant', 'rim', acrylic('rim', 0.6, loading=float(os.environ.get('RIM_LOAD', '0.5'))), rim)   # round 9: backed off (the gate: a royal-blue outline)   # round 6: satin, a deeper shade, never bright
         capobs = []
-        cap = SC.principled('cap-matte', '#2E2E32', 0.6, metallic=0.3, bump=(4000.0, 0.15))   # round 8: no glints; round 9: lifted off black
+        cap = SC.principled('cap-matte', os.environ.get('CAP', '#4A4A50'), 0.5, metallic=0.2, bump=(4000.0, 0.15))   # round 11: a satin dark grey (no kicker)   # round 8: no glints; round 9: lifted off black
         for nm in ('collar', 'clamp', 'crown', 'gland', 'hub'):
             capobs.append(part('out-dome-pendant', nm, cap, rim))
         # round 8 (the gate: two "LED eyes" on the cap): the PEEK pin carrier, its pins and the silicone gaskets were
@@ -256,7 +256,7 @@ def build(frame, samples, scale):
             ld = bpy.data.lights.new('cob', 'AREA'); ld.shape = 'DISK'; ld.size = 0.17; ld.energy = float(os.environ.get('COB_W', '2.0')) * 1.6   # round 8: the pool under the lamp
             ld.spread = math.radians(92.0); ld.color = blackbody(cct)
             ob = bpy.data.objects.new('cob', ld); bpy.context.scene.collection.objects.link(ob)
-            ob.location = (0, 0, rim + 0.004); ob.visible_glossy = False
+            ob.location = (0, 0, rim + 0.004)   # round 11: seen in the glaze and the glass (ruling 1)
             light('spill', 'POINT', (0, 0, rim + 0.050), float(os.environ.get('SPILL_W', '0.3')), 0.03)
             pass
         # round 6 (the coordinator, 2026-11-03: the pendant too small): one shared camera for the day and the night,
@@ -278,36 +278,24 @@ def build(frame, samples, scale):
         SC.plane('ceiling', (4.3, 4.0), (0.85, 0.0, 2.5), (180, 0, 0), SC.principled('ceiling', '#E8E4DC', 0.9))
         ev = float(os.environ.get('NIGHT_EV', '2.5' if prod == 'core' else '0.6'))
         k = 2.0 ** (0.6 - ev)                     # round 9: one evening room for the family, the same fill at each exposure
-        SC.world(hdri='kiara_9_dusk', strength=0.02 * k, rotation=200)
-        w = bpy.context.scene.world
-        vis = getattr(w, 'visibility', None) or getattr(w, 'cycles_visibility', None)
-        if vis is not None:
-            vis.glossy = False   # round 8: no daylight-window shapes on the glass at night (ruling 3, 2026-11-03: seen through the resin)
-        moon = SC.area('moon', (-1.3, -0.4, 1.6), (0, -70, 0), (1.2, 1.6), 2.0 * k, '#9FB2D6')   # the lamp leads
-        moon.visible_glossy = False               # round 1: no daylight-window shapes reflected at night
-        if False:   # round 5's glint in the outer gloss; round 8 (the gate: a white pin-dot): gone
-            win = SC.area('window-glint', (-0.7, -1.2, tz + 0.7), (58, 0, -30), (0.09, 0.09), 0.05, '#C9D3E2')   # round 7: a small round glint, dim
-            win.data.shape = 'DISK'; win.visible_diffuse = False
-        # round 3: a large soft fill far off, for a curved soft reflection on the glass (round 2's small one read as a
-        # hard square sticker)
-        fill = SC.area('fill', (1.4, -2.2, 1.9), (55, 0, 32), (1.4, 0.9), 2.0 * k, '#8FA0BE')
-        fill.data.shape = 'ELLIPSE'               # round 9: seen in the glass again as a soft round room highlight
-        fill.visible_glossy = False               # round 10: its oval read as a smudge on the dome
+        # round 11 (the coordinator's rulings 1 to 3, 2026-11-03: nothing in the room hidden from the glass's
+        # reflections or from view through it; no light linking): the night room is a flat, dim evening ambient (no
+        # dusk HDRI, so no daylight windows to mirror), one large soft fill that the glass mirrors as it is, and no
+        # moon (its 1.2 x 1.6 panel would mirror as a window)
+        SC.world(color=os.environ.get('NIGHT_SKY', '#8A96B0'), strength=float(os.environ.get('NIGHT_AMB', '0.15')) * k)
+        fill = SC.area('fill', (1.4, -2.2, 1.9), (55, 0, 32), (2.4, 1.6), float(os.environ.get('NIGHT_FILL', '3.5')) * k, '#8FA0BE')
+        fill.data.shape = 'ELLIPSE'               # a soft round room highlight in the glass
         if prod != 'core':
             # round 10 (the gate: the lit face a flat matte field): a dim softbox strip at the upper left, in the room,
-            # seen in the dome's gloss as one crisp reflection; it lights almost nothing
+            # seen in the dome's gloss as one crisp reflection; it lights almost nothing (diffuse off: allowed)
             st = SC.area('strip', (-0.9, -0.6, tz + 1.5), (60, 0, -55), (0.12, 0.9), 1.2, '#E9E4DA')
             st.visible_diffuse = False
             from mathutils import Vector
-            def aim(ob, at):
-                ob.rotation_euler = (Vector(at) - ob.location).to_track_quat('-Z', 'Y').to_euler()
-            aim(st, (0.0, 0.0, tz + 0.75))
-            # and a faint kicker from behind and above for the cap's tiers, linked to the cap alone
-            kc = bpy.data.collections.new('cap'); bpy.context.scene.collection.children.link(kc)
-            for o in capobs:
-                kc.objects.link(o)
-            kk = SC.area('kicker', (0.25, 0.45, tz + 1.05), (-120, 0, 150), (0.25, 0.25), 0.6, '#D8DCE4')
-            kk.light_linking.receiver_collection = kc; kk.visible_glossy = True; aim(kk, (0.0, 0.0, tz + 0.80))
+            st.rotation_euler = (Vector((0.0, 0.0, tz + 0.75)) - st.location).to_track_quat('-Z', 'Y').to_euler()
+            # round 11: a small, dim real light behind and above the pendant, between it and the wall, facing the camera
+            # side (no light linking): it catches the cap's tiers and is seen in the gloss for what it is
+            kk = SC.area('kicker', (0.25, 0.45, tz + 1.05), (0, 0, 0), (0.25, 0.25), float(os.environ.get('KICK_W', '1.5')), '#D8DCE4')
+            kk.rotation_euler = (Vector((0.0, 0.0, tz + 0.80)) - kk.location).to_track_quat('-Z', 'Y').to_euler()
         exposure = ev   # round 4: exposed for the lamp, as a night photograph is
     else:
         SC.world(hdri='kiara_9_dusk', strength=0.35, rotation=200)
