@@ -313,14 +313,22 @@ def build(frame, samples, scale):
         exposure = ev   # round 4: exposed for the lamp, as a night photograph is
     else:
         SC.world(hdri='kiara_9_dusk', strength=0.35, rotation=200)
-        SC.window_gobo(-1.3, -1.3, 0.9, 0.75, 2.4, panes=(2, 2))
-        SC.area('window-sky', (-1.25, -0.2, 1.55), (0, -90, 0), (1.5, 2.0), 90.0, '#DCE6F5')
-        SC.sun_lamp('sun', (0.86, -0.25, -0.34), strength=10.0, color='#FFE7C8', angle=1.5)
         if prod == 'core' and var == 'nested':
+            # round 11 (the coordinator: the core lit, the wall behind it in shade): the same window, its opening the
+            # front part of the left wall, and the sun in through it from the front left, onto the ball's face; the
+            # wall behind the ball takes no sun (the window wall shades it), as a room by a window does
+            SC.window_gobo(-1.3, -1.3, -0.35, 0.75, 2.4, panes=(1, 2))
+            SC.area('window-sky', (-1.25, -0.82, 1.55), (0, -90, 0), (0.9, 1.6), float(os.environ.get('CSKY', '60')), '#DCE6F5')
+            SC.sun_lamp('sun', (0.75, 0.45, -0.45), strength=float(os.environ.get('CSUN', '10')), color='#FFE7C8', angle=1.5)
+        else:
+            SC.window_gobo(-1.3, -1.3, 0.9, 0.75, 2.4, panes=(2, 2))
+            SC.area('window-sky', (-1.25, -0.2, 1.55), (0, -90, 0), (1.5, 2.0), 90.0, '#DCE6F5')
+            SC.sun_lamp('sun', (0.86, -0.25, -0.34), strength=10.0, color='#FFE7C8', angle=1.5)
+        if prod == 'core' and var == 'nested' and float(os.environ.get('SIDEBACK_W', '0')) > 0:
             # round 11 (the gate's lever: glass is shot with a side-back light): a tall soft strip behind and to the left,
             # a real light seen in the glass for what it is, so the edges and the gap read
             from mathutils import Vector
-            sb = SC.area('side-back', (-0.45, 0.40, tz + 0.30), (0, 0, 0), (0.18, 0.7), float(os.environ.get('SIDEBACK_W', '6')), '#F2EEE6')
+            sb = SC.area('side-back', (-0.45, 0.40, tz + 0.30), (0, 0, 0), (0.18, 0.7), float(os.environ.get('SIDEBACK_W', '0')), '#F2EEE6')
             sb.rotation_euler = (Vector((0.0, 0.0, tz + 0.10)) - sb.location).to_track_quat('-Z', 'Y').to_euler()
         exposure = 0.0
     SC.render_settings(1800, 1200, samples, scale, exposure=exposure, look='AgX - Medium High Contrast')
