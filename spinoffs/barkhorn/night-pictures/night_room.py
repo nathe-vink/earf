@@ -76,7 +76,7 @@ def _curtain(bpy, nb, hexc, strength, loc, size, target):
 _ROOM = ('wall', 'floor', 'table', 'leg', 'ceiling', 'fill', 'kicker', 'dusk', 'bowl', 'camera', 'sun', 'side-back', 'curtain')
 
 
-def _append_lamp(bpy, blend, offset, keep_table=False):
+def _append_lamp(bpy, blend, offset, keep_table=False, led_up=False):
     with bpy.data.libraries.load(blend, link=False) as (src, dst):
         dst.objects = list(src.objects)
     got = []
@@ -90,6 +90,10 @@ def _append_lamp(bpy, blend, offset, keep_table=False):
         bpy.context.scene.collection.objects.link(o)
         if o.parent is None:
             o.location = (o.location[0] + offset[0], o.location[1] + offset[1], o.location[2] + offset[2])
+        if led_up and o.type == 'LIGHT' and o.data.type == 'SPOT' and o.name.startswith('led'):
+            # the Core's LED shines up through the dock's window into the ball; lamp_pictures.py creates the spot with
+            # no rotation, which in Blender points it down (-Z), into the dock (flagged to the coordinator, 2026-11-03)
+            o.rotation_euler = (math.pi, 0.0, 0.0)
         got.append(o.name)
     return got
 
@@ -118,7 +122,45 @@ def night_set(bpy, spec, mats):
     _box(bpy, 'night-floor', ((x0 + x1) / 2, (yb + yf) / 2, -t / 2), (x1 - x0 + 2 * t, yb - yf + 2 * t, t), floor_m)
     _box(bpy, 'night-ceiling', ((x0 + x1) / 2, (yb + yf) / 2, h + t / 2), (x1 - x0 + 2 * t, yb - yf + 2 * t, t), ceil_m)
     _box(bpy, 'night-wall-back', ((x0 + x1) / 2, yb + t / 2, h / 2), (x1 - x0 + 2 * t, t, h), wall_m)
-    _box(bpy, 'night-wall-left', (x0 - t / 2, (yb + yf) / 2, h / 2), (t, yb - yf, h), wall_m)
+    op = n.get('opening')
+    if op:
+        # ruling 4 (the coordinator, 23:43): light reaches the room only through a real opening. The left wall is
+        # built round a window (y0..y1, z0..z1); outside it the evening sky, an emitting plane; in it a sheer curtain
+        oy0, oy1, oz0, oz1 = op['y0'], op['y1'], op['z0'], op['z1']
+        _box(bpy, 'night-wall-left-front', (x0 - t / 2, (oy0 + yf) / 2, h / 2), (t, oy0 - yf, h), wall_m)
+        _box(bpy, 'night-wall-left-back', (x0 - t / 2, (yb + oy1) / 2, h / 2), (t, yb - oy1, h), wall_m)
+        _box(bpy, 'night-wall-left-sill', (x0 - t / 2, (oy0 + oy1) / 2, oz0 / 2), (t, oy1 - oy0, oz0), wall_m)
+        _box(bpy, 'night-wall-left-head', (x0 - t / 2, (oy0 + oy1) / 2, (h + oz1) / 2), (t, oy1 - oy0, h - oz1), wall_m)
+        # the evening sky outside: an emitting plane facing the window, a little larger than it, 0.6 m out
+        sky = bpy.data.materials.new('evening-sky'); sky.use_nodes = True
+        snt = sky.node_tree; snt.nodes.clear()
+        so = snt.nodes.new('ShaderNodeOutputMaterial'); se = snt.nodes.new('ShaderNodeEmission')
+        hx = op.get('sky_color', '#9FB2D6').lstrip('#'); rgb = [int(hx[i:i + 2], 16) / 255 for i in (0, 2, 4)]
+        se.inputs['Color'].default_value = (*[c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4 for c in rgb], 1)
+        se.inputs['Strength'].default_value = op['sky_strength']
+        snt.links.new(se.outputs[0], so.inputs['Surface'])
+        sx = x0 - 0.6; m_ = 0.5
+        _mesh(bpy, 'evening-sky', [(sx, oy0 - m_, oz0 - m_), (sx, oy1 + m_, oz0 - m_), (sx, oy1 + m_, oz1 + m_), (sx, oy0 - m_, oz1 + m_)],
+              [(0, 1, 2, 3)], sky)
+        if op.get('curtain', True):
+            # a sheer curtain in the opening: a thin cloth that lets the sky through, diffused (translucent), a little
+            # straight through (the weave's gaps), its room side a pale fabric
+            cm = bpy.data.materials.new('sheer'); cm.use_nodes = True
+            cnt = cm.node_tree; cnt.nodes.clear()
+            co = cnt.nodes.new('ShaderNodeOutputMaterial'); tl = cnt.nodes.new('ShaderNodeBsdfTranslucent')
+            tl.inputs['Color'].default_value = (0.80, 0.80, 0.78, 1)
+            df = cnt.nodes.new('ShaderNodeBsdfDiffuse'); df.inputs['Color'].default_value = (0.55, 0.55, 0.53, 1)
+            tp = cnt.nodes.new('ShaderNodeBsdfTransparent')
+            m1 = cnt.nodes.new('ShaderNodeMixShader'); m1.inputs[0].default_value = 0.35
+            cnt.links.new(tl.outputs[0], m1.inputs[1]); cnt.links.new(df.outputs[0], m1.inputs[2])
+            m2 = cnt.nodes.new('ShaderNodeMixShader'); m2.inputs[0].default_value = op.get('curtain_open', 0.15)
+            cnt.links.new(m1.outputs[0], m2.inputs[1]); cnt.links.new(tp.outputs[0], m2.inputs[2])
+            cnt.links.new(m2.outputs[0], co.inputs['Surface'])
+            cx_ = x0 + 0.06
+            _mesh(bpy, 'sheer-curtain', [(cx_, oy0 - 0.05, oz0 - 0.05), (cx_, oy1 + 0.05, oz0 - 0.05), (cx_, oy1 + 0.05, oz1 + 0.05),
+                                          (cx_, oy0 - 0.05, oz1 + 0.05)], [(0, 1, 2, 3)], cm)
+    else:
+        _box(bpy, 'night-wall-left', (x0 - t / 2, (yb + yf) / 2, h / 2), (t, yb - yf, h), wall_m)
     _box(bpy, 'night-wall-right', (x1 + t / 2, (yb + yf) / 2, h / 2), (t, yb - yf, h), wall_m)
     _box(bpy, 'night-wall-front', ((x0 + x1) / 2, yf - t / 2, h / 2), (x1 - x0 + 2 * t, t, h), wall_m)
     w = n.get('window')
@@ -127,7 +169,7 @@ def night_set(bpy, spec, mats):
     for f in n.get('furniture', []):
         _box(bpy, f['name'], f['center'], f['size'], _principled(bpy, f['name'], f['color'], f.get('rough', 0.5)))
     for L in n.get('lamps', []):
-        got = _append_lamp(bpy, L['blend'], L['offset'], L.get('keep_table', False))
+        got = _append_lamp(bpy, L['blend'], L['offset'], L.get('keep_table', False), L.get('led_up', False))
         print('night_room: lamp', os.path.basename(L['blend']), 'objects:', ', '.join(sorted(got)), flush=True)
 
 

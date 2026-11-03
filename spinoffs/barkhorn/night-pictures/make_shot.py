@@ -42,15 +42,16 @@ def shot(root, tint, lamp_dir):
         'room': ROOM,
         'floor_pbr': 'american_walnut_veneer', 'floor_rough_mul': 0.9,
         # the lamps lane's dusk curtain, at its own colour and strength (lamp_pictures.py, round 12)
-        # on the left wall, out of frame (as in the lamps lane's own night): a dim cool evening light from the left
-        'window': {'loc': [ROOM['x0'] + 0.03, -1.6, 1.30], 'size': [1.1, 2.0], 'target': [0.0, -1.6, 1.30],
-                   'color': '#9FB2D6', 'strength': 4.0},
+        # ruling 4: a real window in the left wall, out of frame, a sheer curtain in it and the evening sky outside
+        'opening': {'y0': -2.2, 'y1': -1.0, 'z0': 0.75, 'z1': 2.15, 'sky_color': '#9FB2D6', 'sky_strength': 6.0,
+                    'curtain': True, 'curtain_open': 0.15},
         # a small side table behind the speaker's left (camera's left), its top at the Core picture's table height
         'furniture': [{'name': 'side-table', 'center': [SIDE[0], SIDE[1], 0.31], 'size': [0.42, 0.42, 0.62],
                        'color': '#2A211B', 'rough': 0.35}],
         'lamps': [
             # the Core on the side table, behind the speaker's left: its light comes through the tinted cabinet
-            {'blend': os.path.join(lamp_dir, 'core-fog-night.blend'), 'offset': [SIDE[0], SIDE[1], 0.0], 'keep_table': False},
+            {'blend': os.path.join(lamp_dir, 'core-fog-night.blend'), 'offset': [SIDE[0], SIDE[1], 0.0], 'keep_table': False,
+             'led_up': True},
             # the Hemisphere hung behind the speaker's right, 0.35 higher than in its own picture so its cord meets the
             # ceiling (its rim 1.67 up): a pool on the floor behind and a wash on the wall the cabinet stands against
             {'blend': os.path.join(lamp_dir, 'hemi-fog-night.blend'), 'offset': [HEMI[0], HEMI[1], 0.35], 'keep_table': False},
