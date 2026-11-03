@@ -1988,3 +1988,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   owner missed), costs nothing extra (the forming press's own face), shows the driver and the two rear posts through it (the HF lead
   runs inside a post; a close-up pair is coming), shows fingerprints, more rejects; satin reads as a separate frosted part, a
   bead-blast at ~$15-30, can't be buffed, glows like a lightbox when backlit (Ember, Haze), reads as "sea glass" in soft light (Ice).
+- 15:12 speaker lane: D stopped (the v3 chain killed by PID before it started anything; nothing of D running). BASES.md at
+  44f0320fe1a9ef853352d9c80dd82f3b16396c93: a top note says the product is A (own feet, no plinth, no light; passes IEC 62368-1:2018 on
+  its own feet); D's section headed "not chosen (the owner, 2026-11-03 15:11, 'No light')", its build notes kept. An admission: the
+  close-up pair slipped ~15 min (its waiter matched "render_model.py" in its own next chain's command line and blocked; that chain
+  killed). The satin close-up rendering now, polished right after (~8 min each), sent as it lands; then Smoke's horn with the
+  light-path check, then the deck-hero proof on A.
