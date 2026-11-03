@@ -1385,3 +1385,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   glow colour from the LED's spectrum through 5.6 mm of each tint (state the CCT), half to one stop down; the speaker lane's new
   night set (wall behind, dark glossy floor, low navy ambient) for real reflections; the corner pool removed; a rim or ambient so
   the object reads. Day kept (optional polish). Mantle goes to the owner only as a pair.
+- 10:15 lamps lane round 4 nights at 4859713683fe0655dbe5ca0264b6cd079417078f (renders/2026-11-03/barkhorn/lamp-pictures/), all at
+  5700 K with real lights (no emitters), a white ceiling at 2.5 m, light reaching the room only through the acrylic: Core clear
+  (honest: a clear ball doesn't glow; the LED a hot spot in the window, the light through to the room), Core frosted (the CAD's
+  bead-blast, coarse: glows evenly in its tint), Hemisphere over its table (the COB lights the table within its cut-off; the
+  reflector's spill lights the opal so the dome glows and lights the wall; the mouth near-white, not salmon). Hemisphere's tunable
+  check (d6b5b76a): a Vesta tunable array doesn't fit the 28.4 seat, the one-channel phase-cut driver or the cost (+$40-80), so one
+  fixed Vero 10 per tint (2700 K warm and green, ~4000 K Haze, 5000-5700 K Ice); Core's 2700/5700 K board covers the tunable plan.
+  Gate wf_eb405d5e-e30 started 10:17 on the two day frames plus the three nights (sha256 clear 4be242dd, frost a6b7619f, hemi
+  88bcf5d8).
