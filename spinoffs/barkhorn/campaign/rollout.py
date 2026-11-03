@@ -88,6 +88,8 @@ def main():
     ap.add_argument('--horn', required=True, choices=['satin', 'polished'])
     ap.add_argument('--date', default='2026-11-04', help="the renders' folder date")
     ap.add_argument('--list', action='store_true', help='print the list only; write nothing')
+    ap.add_argument('--chunks', default=None, help="after writing, print the commands for these chunks, e.g. '1-4' or '2,5,7'")
+    ap.add_argument('--split', type=int, default=0, help='propose a split of the chunks across N containers (the deck first, in container 1)')
     a = ap.parse_args()
     # each answer pair in its own process, so shots.py reads its own answers at import
     if os.environ.get('TROPOS_ROLLOUT_CHILD') != '1':
@@ -129,6 +131,27 @@ def main():
         md.append(f'| {n} | {size[0]} x {size[1]} | {smp} | {m:.0f} | {where[n]:02d} |')
     open(os.path.join(od, 'README.md'), 'w').write('\n'.join(md) + '\n')
     print(f'wrote {od}: {len(rows)} shot files, {len(chunks)} queue chunks')
+    cmin = [sum(minutes(shots_[n]) for n in names) for names in chunks]
+    if a.split:
+        # the deck's chunks to container 1 first, then each chunk to the container with the least time so far
+        load = [0.0] * a.split; own = [[] for _ in range(a.split)]
+        deck = [k for k, names in enumerate(chunks) if all(n.startswith('deck-') for n in names)]
+        for k in deck:
+            own[0].append(k + 1); load[0] += cmin[k]
+        for k in sorted((k for k in range(len(chunks)) if k not in deck), key=lambda k: -cmin[k]):   # largest first
+            c = min(range(a.split), key=lambda i: load[i])
+            own[c].append(k + 1); load[c] += cmin[k]
+        own = [sorted(o) for o in own]
+        print(f'split across {a.split} containers:')
+        for i in range(a.split):
+            print(f'  container {i + 1}: chunks {",".join(str(x) for x in own[i])}  ~{load[i] / 60:.1f} h')
+    if a.chunks:
+        pick = []
+        for part in a.chunks.split(','):
+            lo, _, hi = part.partition('-')
+            pick += list(range(int(lo), int(hi or lo) + 1))
+        for k in pick:
+            print(f'bash spinoffs/barkhorn/campaign/rollout/{tag}/queue-{k:02d}.sh   # {", ".join(chunks[k - 1])}  ~{cmin[k - 1]:.0f} min')
 
 
 if __name__ == '__main__':

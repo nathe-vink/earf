@@ -1,0 +1,92 @@
+# Rendering the roll-out in a helper container (2026-11-03)
+
+Use this when the owner has answered both questions: the base (A, or D) and the horn's outside (satin, or polished). Up to 4 containers can each render a share of the queue. Every step below is for one fresh container in this environment. **Don't start until the coordinator names your answers, your SHA, your branch and your chunks.**
+
+## 1. The repo at the SHA
+
+    git fetch origin r33-speaker-horn
+    git checkout -b <your-branch> <SHA>          # e.g. r33-rollout-c2, branched from the SHA the coordinator names
+
+Work only on your own branch. Never push to `main` or to another helper's branch, never force-push, and open no pull request.
+
+## 2. The tools
+
+    studio/setup.sh            # idempotent; --doctor also checks Chromium, Cycles, the CAD venv
+
+This installs two Pythons, on purpose:
+- Blender's `bpy` wheel (Blender 5.0, Cycles on the CPU, numpy 1) on the system Python, `python3`;
+- the CAD venv `.venv-fab` (build123d, numpy 2), for the model builds.
+
+Never install CAD packages into the system Python.
+
+## 3. The two render models (not in git; both are rebuilt from the code at your SHA)
+
+Run each build as a tracked background task, one after the other, never side by side:
+
+    .venv-fab/bin/python studio/fabkit/build.py spinoffs/barkhorn/cloud.py --out spinoffs/barkhorn/out-cloud
+        # writes spinoffs/barkhorn/out-cloud/render/barkhorn-cloud.glb (about 73 MB). The full kit build: the
+        # drawings and checks too. Its time is not measured; budget up to an hour
+    .venv-fab/bin/python spinoffs/barkhorn/variants/render_model.py
+        # writes spinoffs/barkhorn/variants/out/render/barkhorn-variants.glb (about 16 MB); about 21 min alone,
+        # 30 or more beside another job
+
+Check both files exist before you render. Don't rebuild a model while a render runs: a render reads the models only in its first minute, but a half-written file breaks it.
+
+## 4. The Poly Haven cache (not in git)
+
+`studio/assets/cache/` (about 430 MB, all CC0) fills itself on demand: `studio/engine/assets.py` fetches what a shot needs from polyhaven.com, with no login. The deck's home frames need room31's models and textures from it. Nothing to do, unless the network blocks polyhaven.com. If it does, report it; don't work around it.
+
+## 5. Your chunks
+
+    python3 spinoffs/barkhorn/campaign/rollout.py --base A --horn satin --chunks 5-7,11
+        # writes the shot files and queue-NN.sh into spinoffs/barkhorn/campaign/rollout/A-satin/ (not committed)
+        # and prints one line for each of your chunks:
+    bash spinoffs/barkhorn/campaign/rollout/A-satin/queue-05.sh
+
+Rules:
+- **Run each chunk as its own tracked background task**, never with setsid, nohup or `&`. Each chunk is about 100 estimated minutes, under the 2-hour task limit.
+- **One chunk at a time, one render at a time.** Two renders side by side have run out of memory here (the biomes lane, 2026-11-03). Each render stays under 13.5 GiB alone.
+- **Start the next chunk only when the last one has landed.** If a chunk dies part way through, re-run only the shots without a PNG. The queue's lines are plain commands; copy the missing ones.
+- **Kill a process only by its PID.**
+
+`--split 4` prints the proposed split for all four containers (below).
+
+## 6. Where the renders go, and committing them
+
+The renders land in `renders/2026-11-04/barkhorn/rollout/<base>-<horn>/<shot>.png`, each with `.shot.json` and `.report.json` beside it. After each chunk:
+
+    ls -la renders/2026-11-04/barkhorn/rollout/A-satin/          # every PNG under about 5 MB
+    git add renders/2026-11-04/barkhorn/rollout/A-satin/<shot>.png renders/2026-11-04/barkhorn/rollout/A-satin/<shot>.shot.json renders/2026-11-04/barkhorn/rollout/A-satin/<shot>.report.json
+    git commit -m "Tropos roll-out <base>-<horn>, chunk NN: <shots>" -m "<the session's trailers>"
+    git push -q -u origin <your-branch>
+
+Rules for committing:
+- **Stage only those paths.** Never commit `*.raw.png` (the unfinished render beside each PNG), the shot folders under `campaign/rollout/<tag>/`, or the models.
+- **A PNG over 5 MB:** the deck's cover (3840 x 1360) was 4.7 MB last time. If one is over, recompress it losslessly (`convert in.png -strip -define png:compression-level=9 out.png`), check it again, and say so in your report.
+
+## 7. What to report to the coordinator
+
+After each chunk, one short message:
+- the chunk's number and its shots;
+- the commit's full SHA, copied from git's output;
+- each shot's render minutes, from its `.report.json` `seconds.render`;
+- anything wrong. A failed or killed render is reported with its error line, never hidden.
+
+At the end, a list of your shots with the SHA for each.
+
+## The proposed split (`rollout.py --split 4`; estimates, about 9 min per megapixel per 64 samples)
+
+The chunk numbers are the same for satin and polished. The deck's four chunks go to container 1, so the deck lands first.
+
+| | A (45 shots, about 22.6 h) | D (53 shots, about 24.7 h: A's, plus 8 night lanterns) |
+|---|---|---|
+| container 1 | chunks 1-4: the deck hero, row, cover and home (about 5.7 h) | chunks 1-4 and 7 (about 6.9 h) |
+| container 2 | chunks 5, 6, 7, 11 (about 5.6 h) | chunks 9, 12, 14, 16 (about 6.0 h) |
+| container 3 | chunks 10, 13, 15, 16 (about 5.5 h) | chunks 6, 8, 11, 17 (about 5.9 h) |
+| container 4 | chunks 8, 9, 12, 14 (about 5.8 h) | chunks 5, 10, 13, 15 (about 5.9 h) |
+
+Before the deck's finals, one framing proof of the deck hero at proxy samples:
+
+    python3 studio/engine/render.py spinoffs/barkhorn/campaign/rollout/<tag>/deck-hero.json --out <scratch>/deck-hero-proof.png --scale 0.5 --samples 32
+
+The deck hero is built from gate 2's A frame at 2:3, not the 4:5 it passed at.
