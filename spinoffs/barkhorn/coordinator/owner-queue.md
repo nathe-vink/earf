@@ -1887,3 +1887,17 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   9,12,14,16 (6.0) / 6,8,11,17 (5.9) / 5,10,13,15 (5.9); plus up to an hour of setup each. A deck-hero framing proof first (2:3 from
   gate 2's 4:5 A). Memory: the rebuild plus the Smoke render use ~2 GB of 15, safe. Running: the rebuild (then the close-up pair) and
   the Smoke ~50 % frame.
+- 14:43 Haze gate wf_bb3e4346-c81 (3 critics, 19 min): HOLD 3/3, on the cabinet more than the horn. See-through fails 3/3: a
+  near-black navy box (L ~5-14, sRGB ~2,6,44, hue ~235-242), ~1 % of the hills behind it through it (Dust ~15 %), nothing through it
+  even gamma-lifted; where light gets in (the inner floor, the right edge) it is the horn's violet (~258-272), so the material may be
+  right and the box starved: the sun behind, the opaque batts blocking it (Dust passed with the sun side/front-side). Horn fails 3/3:
+  a pale frosted lilac panel (L ~199, 20-150x the cabinet), the steep angle putting the driver and the two rear posts on its left rim
+  as "a creature with legs"; all three: polished wouldn't fix the main failure (so Haze says nothing either way on the finish). Two
+  of three fail "not cheap" too. Small: the two violet floor glows at the bottom corners (read as the base light left on); no sky
+  sheen or top-edge line (reads matte); a faint seam throat-to-top-right (high-pass only). Grounded 3/3.
+- 14:43 sent to the biomes lane: the Haze fixes in order: (1) the sun to the side or front-side as Dust (a backlight only as a weak
+  rim), the cabinet L ~40-60 and its hue within ~10 degrees of the horn's, the internals visible; (2) camera near-frontal (Dust's
+  angle), the driver behind the throat; (3) prove the cabinet's hue in a proxy, and if the batch truly turns navy at 20 mm, stop and
+  report (a fact for the owner); (4) the corner floor glows down, a faint sky sheen and top edge. The same rule for Fog, Acid and
+  Poison before they render (key from the side or camera side, no strong sun behind, Dust's angle; proxies checked on hue, L and the
+  background through the cabinet). Its queue order its call, one job at a time; Haze's fix may follow Fog.
