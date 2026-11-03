@@ -3127,3 +3127,42 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   To the biomes lane: (b) from the next final on (real flag and side cards, every ray type, out of frame); Acid's running final finishes;
   then a Haze proxy with real cards against the current: under ~2 levels anywhere on the speaker, Dust, Ice, Ember, Haze and Acid stand,
   else the numbers. To the Mantle lane: C3d stands, the polish stays off; the 20:06 rig check (rulings 1-3) still asked.
+- 20:08 speaker lane: FIX1 HONEST at 1e79f362f0250d3838ca70a1e1d4b06c96892c80 (r33-speaker-horn): honest_lights() on every site frame and the row
+  (lighting lamps to specular 1.0: horn 0.6 to 1.0, wide's fill 0.3 to 1.0; transmission false off; part-links off: kick, back, rim, '*#N'
+  panels; bg lamps at specular 0 onto the sweep alone; set-only lamps, specular-only sources and flags stand); plus a reflect-only black floor
+  patch where the lower right face's mirror rays land (kick unlinked lit that floor: lower right face saturation Ice 0.56 to 0.46, Ember
+  0.49 to 0.35). Proxies 0.3 scale: tall Ice horn peak 252 both, >=250 2.2 to 2.6 %, right face 0.79 to 0.92 (lower 0.56 to 0.87), lining
+  0.58 to 0.57; tall Ember right face 0.77 to 0.92 (lower 0.49 to 0.87); wide Ice face 0.72 to 0.79; side Ice 0.72 to 0.73; row unchanged
+  to 0.01; the floor right of the speaker 175 to 229. Proofs site-fix-proofs/tall-honest-ice-ember-old-new.png, deck-fix-proofs/
+  deck-row-honest-proof.png. Audit: tall/wide/side fixed; back (glow, cab-back specular 0) in code, unproved; hero-light (studio31), its arc
+  and macros 9-10 (front-strip '*#0', ring-card; bg-left/right) partly in code; studio-dark-ember (chunk 3: glow specular 0; seven lamps
+  linked to '*#0'); finals31 amp, horn-back, inside, turn (glow specular 0, transmission false: c2's 4, c3's 5, c4's 6); the cover needs a
+  real re-light; the deck hero carries the tall rig's patterns (to fold into ad14099b and re-proxy); the room clean. Next: phase 2's glow.
+- 20:09 biomes lane: Acid polished, 4 degrees off, at 43ad3a3fcb6e64aab5fd805abb70b1dcd326f048 (rotate_z -8, sink 0.03, 64 samples; crease 5.9 /
+  10.8, was 26.7 at 28 degrees off); its blind check passed all four. 20:13: (b) done, real flag and side cards by default at
+  18893298c3fc10cbd9f5f01e75c09344eaac832b. 20:15: the Poison proxy at rotate_z 9 keeps the white check-mark on the horn's lower-left lip
+  (peak 234; 211 at 5): likely a camera-fixed source, the canopy-gap orbit lamp; two diagnosis proxies (gap off; sun off) after the Fog
+  final (running, ~50 min), then the Haze A/B, then Poison fixed and its final.
+- 20:09 lamps lane on ruling 3: no lamp in lamp_pictures.py has transmission off; the night sky map's transmission was off, now on at
+  e7a14ee58f2a1539bda7b5ab22658acf27af4437 (the Hemisphere v10 frames rendering started before it); rulings 1 and 2 never reached it. The older
+  helpers: bar_lamps.py's points inside the frosted parts (fit, unverified); crystal_promo's pools, crystal_shots' orbpool0/1 and shots.py's
+  bell_lights sit OUTSIDE their fittings with transmission off (not the exception); offered to fix with test renders.
+- 20:11 bar lane: r43-window v3 at 21ab232512e49b2e18f6827a62492808f0231ade (512 samples, 467 s): the window spots to the window head (10 W,
+  0.05 m source; was 60 W, 0.30 m), no near-white on either speaker; a 1.2 m gridded street-side light lifts the fronts to 49 and 51 (v2 10-26);
+  the pool between the speakers gone; the woofer surround matt. 20:12 its audit: the shot files clean; the scene code: earf_moon._lamp and
+  planet_r36._lamp within the exception; kit43's shelf LED strips (emitters with camera and glossy off) BREAK the rules in all three r43
+  frames: fixed in listening v4 and carried into shop and window; kit39's votive candles within the exception (unused); kit44 clean.
+- 20:11-20:13 Mantle lane: rulings 1-3 clean on the C3d rig (no lamp below specular 1, none linked, none transmission off; the night
+  wall-wash hidden from camera only, out of frame; the underglow sheet seen by every ray, shadow off, emitting up); one mesh hide removed
+  (the strip's aluminium channel; the groove film hides it physically); the under-deck crop re-proxied, no amber; the passed pair stands at
+  1a958c02; head c2e255e3b8868372b3604adb08271e82e155ad91 (8541ee15 void, written before the commit finished). Offered a ~45 min re-render.
+- 20:14 check-in #48 fired (trig_018qRNvKz4o5UVPZMdqTTmgy); its four gates were already collected.
+- 20:17 sent to the speaker lane: the floor patch can't stand (reflect-only on floor the camera sees): a real flag cutting the kick off that
+  floor, a lower kick, or no patch with the honest numbers; out-of-frame patches may stay; re-proxy, new SHA before phase 2's glow; c4 on
+  chunk 1 meanwhile; asked whether the hero render stopped and whether deck-home-portrait runs through honest_lights. To c4: fix1 chunk 1
+  (row) on 1e79f362 now (discard barkhorn-variants.json, merge, rollout --chunks 1), then wait. To the lamps lane: rulings 1 and 2 in full
+  with what stands; the 20:11 list goes; the older helpers not rendered tonight, marked as not meeting rulings 1-3, fixed when next needed
+  with the real lamp inside. To the bar lane: window v3 to the gate; kit43 strips fixed from listening v4 on; shop v3 and window v3 are
+  pre-gates; listening v3 and r44 v3 already gated. To the Mantle lane: re-render the C3d pair from c2e255e3 and diff full frame (noise only:
+  swap without a gate). To the biomes lane: Acid to the gate; the Poison source reported, moved as a real light, not hidden.
+- 20:18 check-in #49 armed for 21:06 (trig_0126nezqcJCDVCai4xUsbE1d).
