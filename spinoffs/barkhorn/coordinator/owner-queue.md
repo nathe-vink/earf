@@ -2458,3 +2458,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 17:07 sent to the Mantle lane: break the light path into the ring (an opaque black joint or spacer, or the inner wall masked or
   frost-blacked; the ring evenly dark at night); nothing else changed; the night only re-rendered, the same camera, the two edges
   checked at 100 %; any cost change.
+- 17:08 speaker lane: chunk 2 landed at 388e1b79be9201453a4e396e30f77f0553b5fffd (renders/2026-11-04/barkhorn/rollout/A-polished/deck-row.png,
+  3328 x 1040, 160 samples, 70 min, 2.8 MB): the eight on their own feet with polished horns on the white line-up rig, every horn glass
+  with its pod and posts showing. Flag: Smoke in the row is the current 2074 sheet (only the site's Smoke frames are held); when the
+  sheet is set, the row re-renders or that speaker is comped. Running: the revised Smoke-target proxy, then its full frame, then
+  chunk 1 (the hero), then 3 and 4.
+- 17:09 my gate on the deck row and the deck home portrait (c3's chunk 05) started (Ice polished as context).
