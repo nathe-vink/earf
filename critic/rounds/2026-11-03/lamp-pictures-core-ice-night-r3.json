@@ -1,0 +1,24 @@
+{
+ "impression": "A quiet, convincing night shot of a teal glowing glass orb on a black base, on a wood table; it holds together well but the glow is muted and the black base parts merge into one dark mass.",
+ "score": 7.0,
+ "tests": {
+  "acrylic": {
+   "pass": true,
+   "why": "The ball reads as tinted, glossy glass with depth: a darker blue clear rim at the silhouette, a specular highlight upper left, and a refracted horizon band across the middle. The colour is saturated teal, not white-washed or milky, though the lower half is fairly uniform and leans slightly toward opal."
+  },
+  "grounded": {
+   "pass": true,
+   "why": "The dock sits flat on the table with a clear reflected edge and contact shadow, and the base sits in the dock. Nothing floats."
+  },
+  "no_light_down": {
+   "pass": true,
+   "why": "The table around and in front of the dock keeps its neutral brown wood tone (sampled RGB about 30-40, 25-36, 17-27). There is no teal pool or bright spill on the table, and the light stays inside the ball."
+  },
+  "todays_design": {
+   "pass": true,
+   "why": "Ball, short black polished base and a thin wider disc dock all match. Scaled from the ~160 mm ball, the dock is about 150 mm across and thin, and the base is about 120 mm across and 30 mm tall. No cable. The black anodised top ring barely separates from the polished base: only a faint rim at the top edge shows, so the two materials hardly read as different."
+  }
+ },
+ "verdict": "PASS",
+ "fix_if_fail": "Not required. To improve: give the anodised top ring a slightly different matte sheen or a faint rim light so it reads as its own part, and lift the glow a little so the frosted inner face shows more gradation inside the clear shell."
+}

@@ -1,0 +1,24 @@
+{
+ "impression": "A clean, moody studio render of a teal-and-blue dome pendant with a warm glowing mouth. It is well composed, but the dome looks like dim, solid teal plastic rather than lit glass, so it reads as CG.",
+ "score": 6.0,
+ "tests": {
+  "acrylic": {
+   "pass": true,
+   "why": "There is no white-washed or milky face. The blue outer shell is visibly see-through at the rim and on the left flank, where the layers separate into a clear tinted band. The body of the dome reads as a fairly opaque, flat teal (about RGB 10,85,82 at centre) rather than deep coloured glass, so this is a marginal pass."
+  },
+  "grounded": {
+   "pass": true,
+   "why": "It hangs plumb from a black cord that runs out of the top of the frame, and there is no sign of floating."
+  },
+  "no_light_down": {
+   "pass": true,
+   "why": "The background below the lamp is an even dark grey (about 33,33,37, against 38,38,43 higher up). There is no pool of light or warm spill under the mouth. Only the opal disc itself glows."
+  },
+  "todays_design": {
+   "pass": false,
+   "why": "Most of the parts match: a hemispherical shade about 200 wide hung mouth-down, a black cord, a stepped black crown, a tinted outer shell over a clear layer with a visible rim band, and opal seen from below. But the lamp is meant to be switched on with the light glowing through the acrylic, and here the dome is dark. Almost all of the light comes from the opal at the mouth (about 192,157,123), while the curved shell carries only a dim teal and reflections. The cap above the crown cannot be told apart from the crown's steps in this light, and the opal reads as a nearly flat disc rather than a concave bowl."
+  }
+ },
+ "verdict": "FAIL",
+ "fix_if_fail": "Let the lit opal transmit through the clear and tinted shells so the whole dome glows evenly in its tint, clearly brighter than now and graded from crown to rim, rather than only the mouth glowing. Add a faint rim or edge light on the black hardware so the cap separates from the stepped crown."
+}
