@@ -23,6 +23,11 @@ reflector tape round the core's perimeter (white toward the core, black outside:
 $1 a deck), so the core's light leaves only up, through the dots; the rings' tops printed black before the skin is
 cemented on, so no light reaches the border, which reads as dark tinted glass; the bearing's nut, washer and housing
 blackened (chemical black on the brass) so they do not glint under the deck.
+The gate's third pass (10:16): the 5.6 skin piped light out of its polished edges as a stripe, and a bright band ran
+just inside the rim. So: the skin's four perimeter edges painted black after polishing (masked, one coat of black
+acrylic lacquer, about $8-12 a deck in labor); the core's perimeter tape black, not white (it absorbs what reaches the
+rim); the groove's ceiling printed black, an opaque band over the strip, so the dark tinted frame reads about 19 wide.
+The strip a 4000 K COB (the speakers' CCT), 2 W/m.
 v3's notes follow.
 
 Mantle, proposal A, v3: STRATA FLOAT, the detail pass (round 48). The coordinator's duels (v2 over v1 3-1; v2 and

@@ -11,7 +11,7 @@ cd "$(dirname "$0")"
 OUT=../../../../renders/2026-11-03/barkhorn/mantle-r48
 mkdir -p $OUT
 C="--edge-frost 0.35 --base-tint smoke-2074 --scale 0.75 --samples 80 --paper #7A7570 --tint-mode custom"
-r() { n=$1; shift; python3.11 scene.py dusk "$@" --out $OUT/$n.png $C > /tmp/mantle-r48-$n.log 2>&1; echo "$n $(grep -c ^wrote /tmp/mantle-r48-$n.log)"; }
+r() { n=$1; shift; python3.11 scene.py dusk $C "$@" --out $OUT/$n.png > /tmp/mantle-r48-$n.log 2>&1; echo "$n $(grep -c ^wrote /tmp/mantle-r48-$n.log)"; }
 NIGHT="--strip 300 --strip-color 1.0 0.55 0.25 --ambient 0.003 --exposure 0.0"
 if [ -z "$1" ]; then
 r a4-night-ember-2423 --model out-strata-v4 --colour ember-2423 $NIGHT --core-glow 9
@@ -52,4 +52,16 @@ if [ "$1" = g2 ]; then
 r a4-night-ember-2423-g2 --model out-strata-v4 --colour ember-2423 $NIGHT4 --core-glow 4
 r a4-night-poison-2092-g2 --model out-strata-v4 --colour poison-2092 $NIGHT4 --core-glow 12
 r a4-day-ember-2423-g2 --model out-strata-v4 --colour ember-2423 --day --strip 0 --core-glow 7 --strip-color 0.848 0.124 0.168 --exposure -2.0 $G2
+fi
+# the gate's third pass (10:16): the skin's edges painted black, black edge tape round the core, the groove's ceiling
+# printed black; the guide's glow a 4000 K blackbody (the speakers' CCT; the tint comes from the skin's absorption,
+# not a picked color), graded darker at the rim (--grade-edge-mid 0.5 1.1 --grade-fall 0.08); the strip's own
+# emitter off (the glow sheet is its whole output; on, it doubled at the groove); exposure -1.5; the speaker lane's night
+# set (--night-room 20: a wall close behind, the floor #2A2D33 at 0.15, a low navy ambient), no rim, no kicker
+G3="--pan 0.05 --base-rough 0.12 --blacken"
+NIGHT5="--strip 0 --cct 4000 --ambient 0.003 --exposure -1.5 --grade --grade-edge-mid 0.5 1.1 --grade-fall 0.08 --night-room 20 --samples 128 $G3"
+if [ "$1" = g3 ]; then
+r a4-night-ember-2423-g3 --model out-strata-v4 --colour ember-2423 $NIGHT5 --core-glow 4
+r a4-night-poison-2092-g3 --model out-strata-v4 --colour poison-2092 $NIGHT5 --core-glow 12
+r a4-day-ember-2423-g3 --model out-strata-v4 --colour ember-2423 --day --strip 0 --core-glow 7 --strip-color 0.848 0.124 0.168 --exposure -2.0 $G3
 fi
