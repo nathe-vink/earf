@@ -3484,3 +3484,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   frames left out: they re-render on 732a8671; wide Fog left out: the ring).
 - 22:23 sent: c4 to let chunk 2 finish if running (the tall frames clean), then the cover and deck-home. The biomes lane: Acid's split
   (0.085, 0.10, 1.00) into its own tints.json from 732a8671, then Acid's proxy and final.
+- 22:17 c4: my 22:14 re-order reached it after chunk 2 had started (22:12); it stopped tall Ember (PID 2198, ~3.5 min in; Dust never started;
+  nothing written or committed); chunk 2 held. 22:21: a slow fetch (~4.5 min, no error); merged e0bbdcd3 (ad12099d047ab12ef66f5aee0de1eca2b6f5c008);
+  the deck cover (phase-1 chunk 3, ~94 min) from 22:22; deck-home on 95876493 next. (My 22:23 correction crossed; nothing lost but 3.5 min.)
+  Pending fix1 work, waiting on the floor-band diagnosis: chunk 2 (tall Ember, Dust), chunk 7 (side Ice, Haze, Fog), the Acid re-renders on
+  732a8671 (tall, side; wide after the fix), and all seven wide frames after the fix.
