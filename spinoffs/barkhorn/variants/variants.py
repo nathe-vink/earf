@@ -81,7 +81,9 @@ WASH = dict(runs=[(24.0, 60.0, 24.0, 370.0), (536.0, 60.0, 536.0, 370.0), (60.0,
 # lining, which starts at z 50) and behind each port; `brace`: on the brace's top face (z 220), clear of the side linings,
 # the ribs and the back's bosses. (x0, y0, x1, y1) of each run, mm in the cabinet's frame. Fed from an external 24 V plug-in
 # supply through a panel connector in the back's cable gland (variants/BASES.md)
-BUILTIN = dict(floor=[(60.0, 360.0, 500.0, 360.0), (50.0, 295.0, 160.0, 295.0), (400.0, 295.0, 510.0, 295.0)], z_floor=20.0,
+BUILTIN = dict(floor=[(60.0, 360.0, 250.0, 360.0), (310.0, 360.0, 500.0, 360.0),   # split round the bottom rib's end, so the
+                      (50.0, 295.0, 160.0, 295.0), (400.0, 295.0, 510.0, 295.0)],      # batt's notch shows no strip (gate 2)
+               z_floor=20.0,
                brace=[(90.0, 250.0, 470.0, 250.0), (90.0, 300.0, 470.0, 300.0)], z_brace=220.0,
                channel=(12.0, 7.0), wall=1.5, lens_t=1.0, lens_down=0.6, standoff=(6.0, 3.0))
 # the slim light plate (the coordinator, 2026-11-03, for the owner's question about the footing: "a separate base that
