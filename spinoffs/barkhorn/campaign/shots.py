@@ -568,6 +568,43 @@ def site(frame, tint):
     if 'rim' in s.get('lights', {}):
         s['lights']['rim']['power_w'] = 0.0
     _siteG_round1(s, frame, tint)
+    if frame == 'hero-light':
+        _siteH_round1(s)
+    return s
+
+
+def _mirror_card(s, dist=1.2, size=(1.8, 1.3), z=0.5):
+    """A reflect-only black card where the right side face's mirror ray goes from this camera, turned with the speaker
+    (the first instance), `dist` m beyond the face: the face then shows its own tint, not the white studio."""
+    import math
+    cam = s['camera']['position']
+    i = s['products'][0]['instances'][0]
+    a = math.radians(i.get('rotate_z', 0.0))
+    nx, ny = math.cos(a), math.sin(a)
+    px = i['position'][0] + 0.28 * nx; py = i['position'][1] + 0.28 * ny; pz = 0.45
+    dx, dy, dz = px - cam[0], py - cam[1], pz - cam[2]
+    m = math.sqrt(dx * dx + dy * dy + dz * dz); dx, dy = dx / m, dy / m
+    k = dx * nx + dy * ny
+    rx, ry = dx - 2 * k * nx, dy - 2 * k * ny
+    h = math.sqrt(rx * rx + ry * ry) or 1.0
+    rx, ry = rx / h, ry / h
+    s['set'].setdefault('flags', []).append({'center_m': [round(px + dist * rx, 3), round(py + dist * ry, 3), z],
+                                             'size_m': list(size), 'normal': [round(-rx, 3), round(-ry, 3), 0.0],
+                                             'reflect_only': True, 'color': '#050505'})
+
+
+def _siteH_round1(s):
+    """hero-light's fixes (the coordinator's blind critics, 2026-11-03: Dust, Acid, Poison and Ice held). Studio31 is
+    an all-white surround with no flags. 1. Every right side face mirrored the white floor and cove behind-right (Poison
+    grey-green, saturation 0.24-0.31): a reflect-only black card on its mirror ray, turned with the speaker, so the arc's
+    turned frames get theirs. 2. The bottom panel's front edge glowed as a saturated bar with a tinted fringe in front:
+    `back-top`, a lamp behind and above aimed at the floor in front of the speaker (the tall rig's `through` under
+    another name), its light crossing the tinted cabinet, pooling on the floor and running along the bottom panel to its
+    polished edge, an underglow by day. Off. No links: the coordinator's rule."""
+    L = s['lights']
+    if 'back-top' in L:
+        L['back-top']['irradiance'] = 0.0
+    _mirror_card(s)
     return s
 
 
