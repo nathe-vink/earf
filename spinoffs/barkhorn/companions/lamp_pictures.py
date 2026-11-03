@@ -213,7 +213,7 @@ def build(frame, samples, scale):
                 emn = nt.nodes.new('ShaderNodeEmission'); emn.inputs['Color'].default_value = (*blackbody(cct), 1)
                 gz = nt.nodes.new('ShaderNodeMapRange'); gz.clamp = True
                 gz.inputs['From Min'].default_value = -(ri - 3.0) * MM; gz.inputs['From Max'].default_value = (ri - 3.0) * MM
-                E = float(os.environ.get('CORE_EMIT', '6.0'))
+                E = float(os.environ.get('CORE_EMIT', '0.05'))
                 gz.inputs['To Min'].default_value = 0.75 * E; gz.inputs['To Max'].default_value = 1.15 * E
                 nt.links.new(sx.outputs['Z'], gz.inputs['Value'])
                 dim = nt.nodes.new('ShaderNodeMath'); dim.operation = 'MULTIPLY'
