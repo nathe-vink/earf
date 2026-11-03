@@ -1526,3 +1526,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 11:18 sent (the message said 11:19): --horn-front fine if it removes only the untinted shortcut (honest tinted backlight may still glow; measure the hue);
   the posts must be BRONZE as in A (asset README: "the four ø16 bronze posts", horn A "on Strata's bronze posts"), so build with
   Strata's posts; the LED and the remote's eye at real brightness (a pinpoint, not a window).
+- 11:19 biomes lane: hornA2 was the CLOUD design (Cloud cabinet, stainless posts, dyed woofer ring, no caldera), not horn A (Strata's
+  cabinet, caldera and bronze posts with the smooth satin horn = tropos-strata.blend 0936e6d). Ember 3de248cd and Dust c96fb96a
+  WITHDRAWN; the chain stopped (Acid mid-render). habitat.py and smoke_align.py now default to assets/hornA3/tropos-strata.blend
+  (0936e6d) and "Tropos Strata <tint>" (dcddf036147de9477879a0f58dcad15f6efff1e6); feet mode drops the plinth and the uplight parts
+  (their edge and panel emitters). The LED is the asset's emitter at strength 6 (~1,300 cd/m2 over a 3 mm die), to be measured in the
+  Strata frame. Proxies e0/e1/e2 on Strata (~10 min), then Ember at 96 samples, then the other six on Strata.
