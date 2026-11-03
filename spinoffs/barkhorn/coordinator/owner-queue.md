@@ -1415,3 +1415,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   the Smoke comparison: close the horn's shells at the source (not now: D must match A) and report whether the horn's look changes.
   The owner's 05:11 note (misses the glassy feel, thick parts darker; "technically possible trumps cool") may be partly this bug.
   The speaker gate's brief now says the horn is satin by spec (judge how it reads, don't fail the spec).
+- 10:34 speaker lane: its horn A asset (tropos-strata.blend 0936e6df568e1a3ac5673bbba29093fe2f294cb1, built without collapsing) has
+  0 open edges at welds of 0.1, 1 and 10 um; the biomes counts match a COLLAPSED horn. Checked: 4ec3bc96 (05:21) predates f75f58a0
+  (07:40, "never collapse the horn") and 0936e6df (07:46, rebuilt closed). So the open shells were only the biomes lane's old copy:
+  the speaker lane's A and D frames are unaffected, and the bug doesn't explain the owner's 05:11 glassy note for those. The
+  thick-is-darker check against A stays queued after the Smoke day frames.
+- 10:35 sent to biomes: build the seven from the closed source (0936e6df, or make_blend.py at f75f58a0+), A-consistent (own feet, no
+  plinth, no built-in light), then re-proxy (a)/(b)/(c). Correct the owner: at 10:34 I told them the horn's model had open seams
+  "that may be part of why thick areas don't darken"; it was only the habitat team's old copy.
