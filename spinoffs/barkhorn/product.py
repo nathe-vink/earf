@@ -2094,7 +2094,7 @@ def formed_parts(P, wg):
     c = P['horn']['cast']; F = c['formed']; fm = wg['formed']; n = fm['nums']
     lock = c['lock']
     return [
-        Part('waveguide', wg['shell'], Machined('cast-acrylic-thermoformed', 'formed', setup_usd=F['run_usd']), finish='horn-lot', group='horn',
+        Part('waveguide', wg['shell'], Machined('cast-acrylic-thermoformed', 'formed', setup_usd=F['run_usd']), finish='horn-satin', group='horn',
              notes=[f'mouth {c["mouth_w"]:g} x {c["mouth_h"]:g}, {c["d"]:g} deep, 2 in throat, the air path as the simulation approved it; '
                     f'pressure-formed from {F["sheet"]:g} mm cast sheet tinted in the horn\'s own heavier dye lot (about {F["dye"]} times the '
                     'cabinet\'s dye, matched to a chip we approve, so its 5 to 8.5 mm wall reads deep and nearly opaque, as the '
@@ -2107,18 +2107,18 @@ def formed_parts(P, wg):
                     f'the {c["rim"]:g} rim; trimmed at {F["trim"]:g} from the throat on the 5-axis router, its end cemented into the '
                     f'throat piece\'s socket; annealed after forming; {n["flare_cm3"] * 1.19 / 1000:.1f} kg']),
         Part('horn-throat', fm['piece'], Machined('cast-acrylic-horn-lot', 'cnc-mill', stock=(210.0, 210.0, 75.0), setup_usd=F['throat_usd']),
-             finish='horn-lot', group='horn',
+             finish='horn-formed', group='horn',
              notes=[f'turned and milled from a 75 mm block of the horn\'s lot: its bore the air path from the driver\'s 51 exit to the '
                     f'trim, {F["neck"]:g} of neck outside it rising out of the flange on an R{F["cove"]:g} cove, a {F["socket"]:g} deep socket '
                     f'for the flare\'s end (its bore the flare\'s outside, {F["cement"]:g} clear for the cement; the two air faces meet with '
                     'no step, the throat\'s bore machined to the same surface as the tool), and a collar round it; its flange the driver\'s '
                     f'boss, {c["boss"]["t"]:g} thick, its spigot in the pod; {c["boss"]["bolts"]} M5 inserts bonded in blind holes on '
                     f'{c["boss"]["bolt_d"]:g} take the adaptor ring']),
-        Part('horn-pod', fm['pod'], Machined('cast-acrylic-horn-lot', 'formed', setup_usd=F['pod_usd']), finish='horn-lot', group='horn',
+        Part('horn-pod', fm['pod'], Machined('cast-acrylic-horn-lot', 'formed', setup_usd=F['pod_usd']), finish='horn-formed', group='horn',
              notes=[f'rolled from the horn lot\'s {c["wall"]:g} mm sheet over a heated mandrel to {2 * c["pod_r"]:g} across, its seam '
                     'scarfed and cemented underneath, between the rear posts; annealed, its bore turned true; cemented over the throat '
                     f'piece\'s spigot; the twist-lock\'s {lock["lugs"]} L-slots milled in its bore; holed for the HF lead and the tie rod']),
-        Part('waveguide-cap', wg['cap'], Machined('cast-acrylic-horn-lot', 'cnc-mill', stock=(210.0, 210.0, 35.0), setup_usd=150.0), finish='horn-lot',
+        Part('waveguide-cap', wg['cap'], Machined('cast-acrylic-horn-lot', 'cnc-mill', stock=(210.0, 210.0, 35.0), setup_usd=150.0), finish='horn-formed',
              group='horn',
              notes=['turned from the horn lot\'s 30 mm sheet, its three lugs left on the spigot and milled; closes the pod behind the '
                     f'driver on the twist-lock as before: an eighth of a turn ({lock["turn"]:g} degrees, clockwise from behind), an O-ring '
@@ -2133,13 +2133,13 @@ def formed_later(P, wg):
     pads = fm['pads']
     tool_note = 'one tool makes every horn (the line\'s quantity is one)'
     return [
-        Part('horn-pads', Compound(children=pads), Machined('cast-acrylic-horn-lot', 'lathe', stock=(30.0, 30.0, 110.0), setup_usd=80.0), finish='horn-lot', group='horn',
+        Part('horn-pads', Compound(children=pads), Machined('cast-acrylic-horn-lot', 'lathe', stock=(30.0, 30.0, 110.0), setup_usd=80.0), finish='horn-formed', group='horn',
              notes=[f'four pucks {pp["pad_d"]:g} across, turned from the horn lot\'s 30 mm sheet, their tops milled to the flare\'s (the rear '
                     f'pair\'s to the pod\'s) underside and cemented on through a jig taken off the cabinet\'s sockets; each foot '
                     f'{pp["pad_h"]:g} below the shell\'s lowest point over it, so the M10 x 1 insert ({pp["insert_d"]:g} x '
                     f'{F["insert_depth"]:g}, bonded) stays wholly in the pad; the rear pair bored {pp["bore"]:g} on through the pod for '
                     'the HF lead and the tie rod']),
-        Part('horn-saddle', fm['saddle'], Machined('cast-acrylic-horn-lot', 'lathe', setup_usd=20.0), finish='horn-lot', group='horn', inside=True,
+        Part('horn-saddle', fm['saddle'], Machined('cast-acrylic-horn-lot', 'lathe', setup_usd=20.0), finish='horn-formed', group='horn', inside=True,
              notes=['a puck 16 across cemented on the pod\'s floor inside at the tie post, its top flat for the tie rod\'s washer and '
                     'thumb nut; bored 6.5']),
         Part('horn-tool-prototype', fm['plug'], Machined('tooling-board', 'cnc-mill', setup_usd=F['tool']['board_usd']), qty=0.5,
@@ -2725,6 +2725,21 @@ if os.path.exists(TRUCAST_FILE):
                 f'{max(0, min(255, round(255 * _srgb(math.exp(-_k * s * 25.0))))):02X}' for s in _e['split'])
             _v['tint'] = f"{_e['cabinet']} depth, custom batch at {COLORS_F_DEPTH[_e['flavour']]:g} % through 20 mm"
 
+# the owner, 2026-11-03 03:00 (README 468c1058: "Horn: A, smooth, satin outside"): the formed horn is the line's horn,
+# Strata's stepped horn the documented alternative. Each formed horn is matched by eye to its cabinet and kept deep, from
+# front-off-tall proxies in the site's studio (renders/2026-11-02/barkhorn/horn-study/; asset/TINTS.md): the colour of
+# the horn's 10 mm sheet (`deep` reached in 10 mm). Its shell is fine glass-bead blasted outside (roughness 0.25, about a
+# 400 to 600 grit finish), the air path masked and left polished; the throat piece, pod, cap and pads polished
+FORMED_HORN = {'cloud-blue': '#0A52B8', 'cloud-red': '#C50206'}     # the rest filled from calibration below
+FORMED_HORN_SATIN = 0.25
+for _f, _v in VARIANTS.items():
+    _m = _v.get('materials', {})
+    if 'horn-lot' in _m:
+        _d = FORMED_HORN.get(_f, _m['horn-lot']['deep'])
+        _m['horn-formed'] = {**_m['horn-lot'], 'deep': _d, 'radius': HORN_DEPTH_M, 'roughness': 0.05}
+        _m['horn-satin'] = {**_m['horn-formed'], 'roughness': FORMED_HORN_SATIN}
+        _v['horn_formed'] = _d
+
 PRODUCT = Product(
     'barkhorn', 'barkhorn', 'Two-way horn loudspeaker after Friendly Pressure, in birch bark or eucalyptus bark', params=P, parts=parts,
     notes=['Bark on the shell (sides, top, bottom and back): real birch bark sheet (Betula papyrifera, from fallen or felled trees) laminated to the plywood with PVA in a vacuum bag and sealed with a matt waterborne lacquer, wrapped round the shell\'s front edges; for eucalyptus, the shed bark of a smooth-barked gum (spotted or snow gum) pressed flat and laminated the same way, or a UV-printed veneer of it. Approve a sample board first.',
@@ -2744,6 +2759,9 @@ PRODUCT = Product(
     # wrapped in bark, and the light's catch on it shows where one panel meets the next
     materials={'bark': {'preset': '$bark', 'bevel_mm': 1.0}, 'raw': {'preset': 'birch'},
                'horn-lot': {'preset': '$bark', 'bevel_mm': 1.0},     # round 36: the formed horn's own dye lot (HORN_DEPTH_M)
+               # the owner, 2026-11-03 03:00 ("Horn: A, smooth, satin outside"): the formed horn in its own colour
+               # (FORMED_HORN), its shell bead-blasted outside (`horn-satin`), its turned and rolled parts polished
+               'horn-satin': {'preset': '$bark', 'bevel_mm': 1.0}, 'horn-formed': {'preset': '$bark', 'bevel_mm': 1.0},
                'cloth': {'preset': 'cloth', 'color': '$cloth'}, 'disc': {'preset': 'cloth', 'color': '$disc'},
                'grille-paint': {'preset': 'satin_paint', 'color': '$panel', 'roughness': 0.6, 'specular': 0.3},
                'grille-timber': {'preset': 'birch', 'color': '#8E6E4E', 'roughness': 0.55},

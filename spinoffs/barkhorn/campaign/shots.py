@@ -322,22 +322,28 @@ def deck_hero():
 SHOTS['deck-hero'] = deck_hero
 
 
-def strata_lit(s, glow=None):
-    """Any shot's Tropos instances turned into the owner's final design: Strata (its horn, posts, caldera; the Cloud's
-    formed horn, posts, cloth disc, ring and feet hidden) on the lit stepped plinth, everything lifted onto it."""
+def strata_lit(s, glow=None, horn='smooth'):
+    """Any shot's Tropos instances turned into the owner's final design, everything lifted onto the stepped plinth:
+    since 2026-11-03 (the owner: "Horn: A, smooth, satin outside") the Cloud's formed horn, satin, on Strata's bronze
+    posts, with the caldera, and the plinth's uplight (the owner, 2026-11-02: the light goes up through the speaker);
+    `horn='stepped'` gives Strata's stepped horn, the documented alternative. `glow` keeps the old shots' meaning: 20 (by
+    day) leaves the uplight at its default 50 %, 40 (at dusk) runs it at full."""
     blk = s.pop('product') if 'product' in s else s.pop('products')[0]
     lift = BASES['plinth'][1]
+    hidden = {'cloth-disc', 'woofer-ring', 'post-*', 'post-sockets', 'post-sleeves', 'feet-base', 'feet-stem'}
+    if horn == 'stepped':
+        hidden |= set(HORN_PARTS) - {'horn-pads'}
     inst = []
     for i in blk['instances']:
         x, y, z = (list(i.get('position', [0, 0, 0])) + [0, 0, 0])[:3]
-        inst.append({**i, 'position': [x, y, z + lift],
-                     'hide': sorted(set(i.get('hide', [])) | set(HORN_PARTS) - {'horn-pads'} | {'cloth-disc', 'woofer-ring', 'post-*', 'post-sockets', 'post-sleeves', 'feet-base', 'feet-stem'})})
+        inst.append({**i, 'position': [x, y, z + lift], 'hide': sorted(set(i.get('hide', [])) | hidden)})
     keep = lambda i: {k: v for k, v in i.items() if k not in ('hide', 'options')}
+    vhide = ['horn-topo*', 'base-out*'] + (['horn-strata'] if horn == 'smooth' else [])
     s['products'] = [{**blk, 'instances': inst},
                      {'def': VARIANTS, 'flavour': blk.get('flavour', 'cloud-red'),
-                      'instances': [{**keep(i), 'hide': ['horn-topo*', 'base-out*'], 'options': ['Plinth', 'Plinth light']} for i in inst]}]
-    if glow is not None:
-        s.setdefault('materials', {})['led'] = {'glow': glow}
+                      'instances': [{**keep(i), 'hide': vhide, 'options': ['Plinth', 'Plinth uplight']} for i in inst]}]
+    if glow is not None and glow >= 40:
+        s.setdefault('materials', {}).update({'uplight-edge': {'glow': 375.0}, 'uplight-panel': {'glow': 105.0}})
     return s
 
 
@@ -436,6 +442,10 @@ def site(frame, tint):
     _siteF_round1(s, frame)
     _siteF_round2(s, frame)
     _siteF_round3(s, frame)
+    # horn A (the owner, 2026-11-03): the rim lamp that lit the formed horn's shell from behind made it read flat, a sign
+    # rather than a cone (renders/2026-11-02/barkhorn/horn-study/deep/README.md): off; the rest of the rig as it was
+    if 'rim' in s.get('lights', {}):
+        s['lights']['rim']['power_w'] = 0.0
     return s
 
 

@@ -61,7 +61,11 @@ P['feet']['inset_y'] = 25.0
 # (the owner, 2026-10-22, "as deep as the cabinet", then 2026-10-31, "Deep, like the site"): every horn part in the
 # horn's own heavier dye lot, about `dye` times the cabinet's dye (product.HORN_DEPTH_M draws it: the site's resin horn's tint)
 P['horn']['cast']['formed'] = dict(
-    sheet=10.0, trim=40.0, cement=0.2, socket=12.0, collar=4.0, neck=7.0, cove=10.0, lip=6.0, lip_run=8.0,
+    # the throat ring slimmed (2026-11-03, the judges' one doubt about the smooth horn: "a plug", "a camera lens"): the neck
+    # 7 to 4 outside the air path, its cove R10 to R4, the collar round the flare's socket 4 to 2.5 (the throat piece is
+    # held by the boss's four inserts, the flare carried by its pads, so the neck carries no load but its own; 4 of cast
+    # PMMA round a 51 to 90 bore is still stiffer than the 6 mm pod it joins)
+    sheet=10.0, trim=40.0, cement=0.2, socket=12.0, collar=2.5, neck=4.0, cove=4.0, lip=6.0, lip_run=8.0,
     thin=dict(throat=0.85, mouth=0.60, corner=0.18), insert_depth=12.0, dye='6 to 10', flange=dict(shoulder=4.0), saddle=(8.0, -78.0),
     run_usd=600.0, throat_usd=400.0, pod_usd=250.0,
     tool=dict(nose=15.0, base=(900.0, 640.0, 40.0), beside=1500.0, plug_usd=14000.0, base_usd=2000.0,
