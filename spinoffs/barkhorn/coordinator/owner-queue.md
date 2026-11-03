@@ -3852,3 +3852,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   three re-renders; the final is held. Its question: the low warm `litter` fill (specular 1, unlinked)?
 - 23:50 sent to the biomes lane: the litter fill may stay (a photographer's real fill, out of frame, unlinked, at specular 1, modest,
   in the open). If the real canopy reads as a flat ceiling, report it; don't hide it.
+- 23:51 speaker lane:
+  - 732a8671 needs no model rebuild: renders read each flavour's materials from the product JSON at render time, and the glb is
+    geometry and part names only.
+  - horn_deep_dye is a record field no render reads. #CDC509 committed to match the build at c1cc1a68b430b07c4f53c3ae4d3248428e956cf9
+    (checked on the remote 23:51). Also on the remote: 6947351b (the card rule on every phase-2 frame, and the arc after hero-light's
+    fix: the arc's mirror card had stayed in frame; proof pending).
+  - It takes my 23:41 order now: the horn close-up line, the whole-rectangle card test with honest_lights in one SHA, tall Ice, the
+    bottom-edge comparison; then the hero, the cover's key, the row.
+- 23:51 sent to c4: chunk 6 is a go after deck-home (merge 732a8671 alone, no rebuild, the list checked first).
