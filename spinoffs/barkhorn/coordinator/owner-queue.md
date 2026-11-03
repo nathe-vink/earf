@@ -3359,3 +3359,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   since aed49790) offered for helpers.
 - 21:20 sent: c4 the cover after its fix1 chunk 2 (~23:05); c2 the room after its fix1 chunk 7; the speaker lane's order restated (the hero
   and row proxies, the 9097 tint fix, the turn flags, the amp plate, back, hero-light).
+- 21:24 biomes lane: Poison's check-mark found: the canopy-gap lamp (gap off: the glint gone; sun off: unchanged; the lip's peak 235 base,
+  222 sun off). Fix as a real light would sit: the gap moved to where the canopy opens, on the sun's side (front-left, azimuth -60, 50 up),
+  same 3 x 3 m, same 12, specular 1.0, nothing hidden; one proxy after the Haze A/B and the Acid proxy, then the Fog final, then Poison's.
