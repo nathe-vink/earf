@@ -154,7 +154,7 @@ def acrylic(name, bands, tint, rough=0.004, wear_on=True, ring=None, edge_rough=
     st = sigma_tint(tint)
     D = max(st) * 1.0001
     mats = []
-    for slot, (r, wr) in enumerate(((rough, True), (edge_rough, False), (0.045, False), (0.07, False), (0.55, False), (0.0, False), (0.0, False), (0.0, False))):   # bores vapor-polished
+    for slot, (r, wr) in enumerate(((rough, True), (edge_rough, False), (0.045, False), (0.07, False), (0.55, False), (0.0, False), (0.0, False), (0.0, False), (0.0, False))):   # bores vapor-polished
         m, nt, out = node_tree(f'{name}-{slot}')
         b = nt.nodes.new('ShaderNodeBsdfPrincipled')
         b.inputs['Base Color'].default_value = (1, 1, 1, 1)
@@ -192,6 +192,11 @@ def acrylic(name, bands, tint, rough=0.004, wear_on=True, ring=None, edge_rough=
             # gate 5: black lacquer and black print are glossy, not matte
             bk7 = nt.nodes.new('ShaderNodeBsdfPrincipled'); bk7.inputs['Base Color'].default_value = (0.008, 0.008, 0.008, 1)
             bk7.inputs['Roughness'].default_value = 0.08; surf = bk7.outputs['BSDF']
+        elif slot == 8:
+            # C3 night gate: a black-pigmented bond line (the border frame to the field, the rings to the core): the
+            # cement is index-matched, so the face shows no gloss from either side, only a matte black
+            bk8 = nt.nodes.new('ShaderNodeBsdfDiffuse'); bk8.inputs['Color'].default_value = (0.004, 0.004, 0.004, 1)
+            surf = bk8.outputs['BSDF']
         elif slot != 6:
             surf = shadow_pass(nt, surf)
         if slot == 6:
@@ -665,14 +670,14 @@ def classify_layer(obj, kind, clear_border=False, clear_ring=False):
                 # C3 (--clear-ring): the rings' undersides bare polished glass, so the border is clear tinted glass
         else:
             if kind == 'skinring':
-                f.material_index = 1 if de < 0.0015 else 7      # C3: its outer edge polished, its inner edge the black bond line
+                f.material_index = 1 if de < 0.0015 else 8      # C3: its outer edge polished, its inner edge the matte black bond line
             elif de < 0.0015:
                 # gate 3: the skin's own edges painted black, so it cannot pipe light out as a stripe; the rings' satin
-                f.material_index = 7 if kind == 'skin' else 1
+                f.material_index = (8 if clear_ring else 7) if kind == 'skin' else 1
             elif kind == 'skin' and c.z - zbot < 0.0005:
                 f.material_index = 6      # the 0.02 step between the joint and the border print: part of the print
             else:
-                f.material_index = 6 if kind == 'skin' else 7
+                f.material_index = 6 if kind == 'skin' else (8 if clear_ring else 7)
     bm.transform(obj.matrix_world.inverted())
     bm.to_mesh(me); bm.free()
 
