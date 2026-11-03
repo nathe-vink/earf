@@ -2550,3 +2550,21 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 17:46 my gate on r43-shop v2 (wf_58a4dd5a-08b; the held v1 and the older picture as context) started.
 - 17:46 sent to the bar lane: r43-window next, then the r44-lantern polish, then the r43-listening polish; the 2.2 m eye held until the
   gate.
+- 17:53 deck gate wf_c88bd48e-6a2 (3 critics, ~38 min): both frames HOLD 2/3.
+  - deck-row (chunk 2, 388e1b79b): one SHOW, two HOLD on see-through. Fronts, grounding (four feet, soft contact shadow), no light,
+    the polished horns (each within 2-5 degrees of its cabinet's hue) all pass; the camera-right side faces mirror the white sweep:
+    Smoke's a silver panel (153, p95 215, vs 43 on its front), Ice's and Haze's milky (saturation 0.39 and 0.22 vs 0.80 in the passed
+    studio frame), a blue stripe on Poison's from the Ice beside it. Best Dust, Acid, Ember; worst Smoke (the 2074 sheet: an opaque
+    black box with a silver side, under a lighter horn), then Haze. Also: a grey sweep falloff bottom left; Acid's coral-red edges
+    (two critics; one calls it the thick yellow sheet's natural edge); Fog nearly vanishes on white.
+  - deck-home-portrait (c3's chunk 05, c659ce9f): one SHOW, two HOLD (light-up and not-cheap fail). Cabinets see-through, grounded, the
+    horns the same green glass, a premium room; but the low sun rakes through both bottom chambers, which glow neon green (the right
+    block 1,128,21, peaks 50,244,80), the brightest part of each speaker: at phone size the base light on in a day picture. Also: neon
+    glint lines on the horns, a green line on the floor, a third of each speaker clipped to screen green (vs 12 % for the row's
+    Poison), the vase two-tone, a flat grey right side on the left unit, a pinwheel shadow on the right cone, only one power lead.
+  - My look agrees on both. The deck's v69 waits for the re-renders.
+- 17:53 sent to the speaker lane: room31's sun restaged before chunk 4 renders (deck-home shares it), the bottom ~40 cm in shade and the
+  sun through the upper cabinet and horn onto the wall; AgX or Filmic, the greens rolling off; the glint lines; the vase and credenza
+  out of the green; the left unit turned; the pinwheel; both leads. The row: black flags camera-right and a little spacing; the sweep
+  corner; Acid's edge checked against the measured spectrum (kept if physical); Fog left; Smoke on 2074. Proxies between its renders;
+  chunk 4 with the fix; the row and portrait re-renders as one fix chunk for me to route to the first free helper; full SHAs.
