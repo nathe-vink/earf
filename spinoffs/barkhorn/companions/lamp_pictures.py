@@ -286,7 +286,7 @@ def build(frame, samples, scale):
             f.smooth = True
         me = bpy.data.meshes.new('bowl'); bm.to_mesh(me); bm.free()
         bo = bpy.data.objects.new('bowl', me); bpy.context.scene.collection.objects.link(bo)
-        bo.location = (0.05, 0.13, tz + 0.11); me.materials.append(bowl_m)   # round 6: in frame
+        bo.location = tuple(float(v) for v in os.environ.get('BOWL_XY', '0.05,0.13').split(',')) + (tz + 0.11,); me.materials.append(bowl_m)   # round 6: in frame
     if night:
         # round 4: a white ceiling at 2.5 m, so the lamp's light that leaves upward comes back into the room, as at home
         SC.plane('ceiling', (4.3, 4.0), (0.85, 0.0, 2.5), (180, 0, 0), SC.principled('ceiling', '#E8E4DC', 0.9))
@@ -297,15 +297,31 @@ def build(frame, samples, scale):
         # dusk HDRI, so no daylight windows to mirror), one large soft fill that the glass mirrors as it is, and no
         # moon (its 1.2 x 1.6 panel would mirror as a window)
         SC.world(color=os.environ.get('NIGHT_SKY', '#8A96B0'), strength=float(os.environ.get('NIGHT_AMB', '0.15')) * k)
-        fill = SC.area('fill', (1.4, -2.2, 1.9), (55, 0, 32), (2.4, 1.6), float(os.environ.get('NIGHT_FILL', '3.5')) * k, '#8FA0BE')
+        fill = SC.area('fill', (1.4, -2.2, 1.9), (55, 0, 32), tuple(float(v) for v in os.environ.get('FILL_SIZE', '5.0,3.4').split(',')), float(os.environ.get('NIGHT_FILL', '3.5')) * k, '#8FA0BE')
         fill.data.shape = 'ELLIPSE'               # a soft round room highlight in the glass
         if prod != 'core':
-            # round 10 (the gate: the lit face a flat matte field): a dim softbox strip at the upper left, in the room,
-            # seen in the dome's gloss as one crisp reflection; it lights almost nothing (diffuse off: allowed)
-            st = SC.area('strip', (-0.9, -0.6, tz + 1.5), (60, 0, -55), (0.12, 0.9), 1.2, '#E9E4DA')
-            st.visible_diffuse = False
+            # round 12 (the gate: round 10's strip read as a hard white bar, a lit tube, in a dark room): instead a dim
+            # dusk window far off to the left, broad and tall, a real light, so the dome shows one long soft reflection
             from mathutils import Vector
-            st.rotation_euler = (Vector((0.0, 0.0, tz + 0.75)) - st.location).to_track_quat('-Z', 'Y').to_euler()
+            # (round 12: an area light's edge is hard in the glass; so a sheer curtain lit by the dusk outside, an emitting
+            # surface brightest at its middle and fading to its edges, out of frame to the left)
+            cu = bpy.data.meshes.new('curtain'); bm_ = bmesh.new()
+            bmesh.ops.create_grid(bm_, x_segments=1, y_segments=1, size=0.5); bm_.to_mesh(cu); bm_.free()
+            co = bpy.data.objects.new('curtain', cu); bpy.context.scene.collection.objects.link(co)
+            co.location = (-1.6, -0.9, tz + 1.2); co.scale = (0.7, 2.2, 1.0)
+            co.rotation_euler = (Vector((0.0, 0.0, tz + 0.75)) - co.location).to_track_quat('Z', 'Y').to_euler()
+            cm_ = bpy.data.materials.new('curtain'); cm_.use_nodes = True; nt_ = cm_.node_tree; nt_.nodes.clear()
+            o_ = nt_.nodes.new('ShaderNodeOutputMaterial'); em_ = nt_.nodes.new('ShaderNodeEmission')
+            em_.inputs['Color'].default_value = (*SC.hex_lin('#9FB2D6'), 1)
+            tc_ = nt_.nodes.new('ShaderNodeTexCoord'); mp_ = nt_.nodes.new('ShaderNodeMapping')
+            mp_.inputs['Location'].default_value = (-1.0, -1.0, 0.0); mp_.inputs['Scale'].default_value = (2.0, 2.0, 0.0)
+            gr_ = nt_.nodes.new('ShaderNodeTexGradient'); gr_.gradient_type = 'QUADRATIC_SPHERE'
+            pw_ = nt_.nodes.new('ShaderNodeMath'); pw_.operation = 'POWER'; pw_.inputs[1].default_value = 1.5
+            mu_ = nt_.nodes.new('ShaderNodeMath'); mu_.operation = 'MULTIPLY'; mu_.inputs[1].default_value = float(os.environ.get('DUSK_E', '4.0'))
+            nt_.links.new(tc_.outputs['Generated'], mp_.inputs['Vector']); nt_.links.new(mp_.outputs['Vector'], gr_.inputs['Vector'])
+            nt_.links.new(gr_.outputs['Fac'], pw_.inputs[0]); nt_.links.new(pw_.outputs[0], mu_.inputs[0])
+            nt_.links.new(mu_.outputs[0], em_.inputs['Strength']); nt_.links.new(em_.outputs[0], o_.inputs['Surface'])
+            cu.materials.append(cm_)
             # round 11: a small, dim real light behind and above the pendant, between it and the wall, facing the camera
             # side (no light linking): it catches the cap's tiers and is seen in the gloss for what it is
             kk = SC.area('kicker', (0.25, 0.45, tz + 1.05), (0, 0, 0), (0.25, 0.25), float(os.environ.get('KICK_W', '1.5')), '#D8DCE4')
