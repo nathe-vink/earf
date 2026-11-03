@@ -24,8 +24,9 @@ C3 (the coordinator, 15:34; README section 13): C2's black disc under the platte
 the 24 mm deck at the camera's angle it reaches about 17 mm past the platter's edge), its grade read flat, and its border
 read as a black bezel. So:
 - the print and the glow begin at r 105, well under the platter, so the black center is hidden and the glow lights the
-  platter's rim; the print a real dot screen, 2.5 mm pitch, from about 24 % cover there to 5 % by 280, backed black
-  throughout, so the glow falls off from the center, visibly and without a boundary;
+  platter's rim; the dots from about 24 % cover there to 5 % by 280, fine enough to read as a tone (a 2.5 mm screen
+  rendered as a mesh, like perforated metal), backed black throughout, so the glow falls off from the center, visibly
+  and without a boundary; the backer film runs across the strip's groove, so the groove and its channel are hidden;
 - the 5.6 top in two pieces cut from one sheet: the field over the core and a 10 wide frame over the rings, bonded edge
   to edge with black-pigmented ACRIFIX, so the field's light cannot enter the border; the rings' undersides left bare
   and polished, so the border is clear tinted glass top to bottom by day and dark at night, with one black line;

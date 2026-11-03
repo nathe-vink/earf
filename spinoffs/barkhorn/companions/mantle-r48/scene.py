@@ -1189,6 +1189,20 @@ def build(args):
             for m_ in M['core']:
                 o.data.materials.append(m_)
             classify_core(o, groove=(meta['S'][0] * mm, meta['S'][1] * mm, meta['P']['glow_r'] * mm) if args.radial else None); o['caustic'] = True
+            if args.matte_channel and args.radial:
+                # C3: the backer film runs across the groove's opening (0.1 under the core's underside), so neither the
+                # groove's clear sides nor the channel can be seen from below
+                zb_ = min((o.matrix_world @ v.co).z for v in o.data.vertices) - 0.0001
+                gr_ = meta['P']['glow_r'] * mm
+                bmf = bmesh.new()
+                bmesh.ops.create_circle(bmf, cap_ends=True, segments=96, radius=gr_ + 0.012)
+                for v in bmf.verts:
+                    v.co.x += meta['S'][0] * mm; v.co.y += meta['S'][1] * mm; v.co.z = zb_
+                mef = bpy.data.meshes.new('groove-film'); bmf.to_mesh(mef); bmf.free()
+                obf = bpy.data.objects.new('groove-film', mef); bpy.context.collection.objects.link(obf)
+                fm, fnt, fout = node_tree('groove-film')
+                fd = fnt.nodes.new('ShaderNodeBsdfDiffuse'); fd.inputs['Color'].default_value = (0.012, 0.012, 0.012, 1)
+                fnt.links.new(fd.outputs['BSDF'], fout.inputs['Surface']); mef.materials.append(fm)
             if args.core_glow > 0:
                 o0_, rw2 = meta['P']['margin'] * mm, meta['P']['tint_ring'] * mm
                 core_glow_sheet(o, args.core_glow, tuple(args.strip_color),
@@ -1220,6 +1234,9 @@ def build(args):
             o['caustic'] = True
         elif f:
             o.data.materials.append(M[f])
+            if n == 'led-channel' and args.matte_channel:
+                # C3: the backer film runs across the groove's opening, so the channel cannot be seen from below
+                o.visible_camera = False; o.visible_glossy = False; o.visible_transmission = False
     # the cover: on, off (hidden), or stood on its back edge beside the deck (the frame for the sleeve)
     cov = objs.get('cover-C1-stack') or bpy.data.objects.new('nocover', None)
     if args.shot in ('hero', 'macro', 'macro-stylus', 'use', 'dusk') and cov.type == 'MESH':
