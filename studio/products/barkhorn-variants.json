@@ -16,6 +16,13 @@
    "color": "#C9A660",
    "roughness": 0.3
   },
+  "builtin-led": {
+   "preset": "frosted",
+   "color": "#F4F2EE",
+   "absorb": "#F0EEEA",
+   "glow": 680.0,
+   "glow_color": "#FFCEA6"
+  },
   "channel": {
    "preset": "plastic",
    "color": "#111111",
@@ -76,7 +83,11 @@
    "material": "brass"
   },
   {
-   "match": "base-uplight-channel|base-uplight-plate|base-lplate-tray",
+   "match": "builtin-floor-led|builtin-brace-led",
+   "material": "builtin-led"
+  },
+  {
+   "match": "base-uplight-channel|base-uplight-plate|builtin-floor-channel|builtin-brace-channel|base-lplate-tray",
    "material": "channel"
   },
   {
@@ -84,7 +95,7 @@
    "material": "clear-cast"
   },
   {
-   "match": "base-lplate-feet|base-plinth-feet|base-outrigger-feet",
+   "match": "builtin-floor-standoffs|builtin-brace-standoffs|base-lplate-feet|base-plinth-feet|base-outrigger-feet",
    "material": "foot"
   },
   {
@@ -1954,6 +1965,14 @@
    "base-uplight-channel",
    "base-uplight-panel",
    "base-uplight-plate"
+  ],
+  "Built-in light": [
+   "builtin-floor-led",
+   "builtin-floor-channel",
+   "builtin-floor-standoffs",
+   "builtin-brace-led",
+   "builtin-brace-channel",
+   "builtin-brace-standoffs"
   ],
   "Cabinet wash": [
    "cabinet-wash"
