@@ -3340,3 +3340,14 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 21:12 biomes lane: its out-of-frame card code crashed the Poison diagnosis and the Haze A/B (a missing scene attribute); fixed at
   e9a1770e4d5bf6e9a2ca2266d5a518e081d58234, the queue restarted 21:10: the Poison diagnosis (base, gap off, sun off; old cards, ~10 min),
   the Haze A/B (reflection-only cards against real cards out of frame; the new sun-135 Haze is its real arm), the Acid proxy, the Fog final.
+- 21:14 speaker lane: use 3b541d9dfb5807cbf5ada11290973254690458e4 for fix1 2-7 (the frame test padded to 1.15 of the half-frame, as a lens
+  shift let an edge card count as out; tall's mirror card now removed): tall Ice and Ember render identically to f7f03850 (0.74 / 0.49 /
+  201 / 1.0 %; 0.71 / 0.40 / 199 / 1.7 %); wide and side unchanged. The deck hero honest at 3b541d9d (proof
+  deck-fix-proofs/deck-hero-gate3-proof.png: horn specular 1.0, kick unlinked, back off, key -60, fill 2.4, top 0.4, the edge glint at a
+  third; the in-frame lid card and floor patch gone, the mirror card out): top chamber (219,89,89) 71 % clipped (held) / (176,1,2) / now
+  (170,1,1) 0 %; upper right face 0.58 / 0.90 / 0.90; lower right face 0.22 / 0.97 / now 0.38 (mirrors the lit floor in frame); the lid
+  strip (176,169,164) / (28,10,8) / now (101,93,87), saturation 0.48 (the sweep at grazing). Options: turn 5-10 toward the camera, drop
+  the camera ~0.2 m, or accept; proposed a -6 turn with the camera 0.15 m lower on one proxy.
+- 21:14 sent to the speaker lane: the running f7f03850 chunks stand; the hero proxy (-6, 0.15 m lower) approved; the row: (a) at -12 first,
+  then (d) or (a)+(d), (b) only via the owner; the order: hero proxy, row proxy, the shared 9097 tint fix, the turn flags, the cover, the
+  amp plate, back, hero-light. To c4, c3, c2: finish the current chunk; merge 3b541d9d and regenerate before the next (2, 5, 7).
