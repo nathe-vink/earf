@@ -447,6 +447,36 @@ are settings or the renderer:
 - the shelf gets no red from the glowing deck (a caustic path Cycles drops here). A real deck would throw a faint red
   spill, which the owner allows.
 
+### The coordinator's gate, pass 1 (08:15): what the judges found and what changed
+
+The judges found three things:
+- by day the top matched the lit night top, reading as "coral lacquer": a 3 skin over a dense white print reads as an
+  opaque white backer;
+- at night the top was a flat, near-clipped lightbox in primary colors;
+- the groove and the bottom arris read as neon lines.
+
+What changed (`mantle_strata_v4.py`, rebuilt with 0 clashes, **$3,897** in the parts list):
+
+| | before | now |
+|---|---|---|
+| skin | 3 of the stock tint | **5.6** of the stock tint: deeper color by day and by night |
+| core | 9.5 + 12.7 | 9.5 + 9.5; the deck **24.6** (about 24.8 with bonds), 0.6 under the spec's 25.4, a change for the owner to sign |
+| dots | 10 % rising to 70 % | **5 % rising to 35 %**: by day the skin reads as color inside glass, not over a white backer |
+| groove | its ceiling bead-blasted (seen from above as a line) | its ceiling printed white over black, opaque from above; the strip's light enters the core through the groove's clear sides |
+| the rings' undersides | glossy | printed black: no light leaves by the bottom arris |
+| strip | 4 W/m | **2 W/m** (about 3 W): the glow about a stop under before, 4 W/m2 |
+
+The cost stays about +$120-150 a unit over v3. Printing the groove's ceiling and the rings' undersides goes with the
+dot print, and the skin and core sheets net about -$10 in the parts list.
+
+How the new frames are drawn (`render_lantern.sh g1`):
+- **Night:** the guide's glow is graded, brighter at the strip's edge and softer inside, as a gentle dot ramp gives.
+  One large, dim, soft source behind the deck, unseen by the camera, lays a long reflection across the glossy skin.
+- **Day:** the room's light on the print is baked for the new build, at about half the old strength. The sparser dots
+  and the deeper skin account for that.
+- `a4-day-ember-2423-g1-zero.png` has no emission at all, for reference. Cycles leaves a print sealed under glass
+  unlit, so the deck reads black there, which the real deck would not.
+
 ### The render (how the light is drawn)
 
 The guide's output is drawn as an even Lambertian glow just above the print: 9 W/m2. That figure follows from the

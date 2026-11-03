@@ -11,7 +11,14 @@ no floor pool. v3's edge-lit deck read as "neon outlines on a black slab". v4 ch
   light guide is (so the glow is even), then overprinted black: light scatters up through the tint and none goes down;
 - the walls of the holes through the core (bearing, arm, motor pocket, puck screws) painted white, then black, so they
   return the light and do not glow as rings.
-Overall the deck is 25.2 (3 + 9.5 + 12.7) and about 25.4 with its bond lines, as before. v3's notes follow.
+Overall the deck is 24.6 (5.6 + 9.5 + 9.5), about 24.8 with its bond lines: 0.6 under v3's 25.4 (a change to the spec
+line, the owner's to sign).
+The coordinator's gate (08:15): the day top read as coral lacquer (a 3 skin over a dense white print), the night top as a
+flat lightbox, and the groove and the bottom arris as lines. So: the skin is 5.6 (deeper color, by day colored glass);
+the dots sparser (about 5 % near the strip to 35 % inside); the groove's ceiling printed white over black (opaque from
+above; the light enters the core through the groove's clear sides); the rings' undersides printed white over black (no
+light leaves by the bottom arris); the strip 2 W/m.
+v3's notes follow.
 
 Mantle, proposal A, v3: STRATA FLOAT, the detail pass (round 48). The coordinator's duels (v2 over v1 3-1; v2 and
 Outcrop 2-2, distinctiveness 6.0 to 4.75): every judge named the same details under the float, and v3 answers them;
@@ -86,7 +93,7 @@ from mantle_outcrop import *                                           # noqa: E
 P = dict(
     W=450.0, D=360.0, R=4.0,                  # the plinth's top: the baseline's footprint
     step=0.0,
-    plinth=(('tint', 12.7), ('tint', 9.5), ('clear', 3.0)),   # v4: the core (clear inlays in tinted rings) under a 3 tinted skin
+    plinth=(('tint', 9.5), ('tint', 9.5), ('clear', 5.6)),    # v4 (gate 1): the core (clear inlays in tinted rings) under a 5.6 tinted skin
     base=(('tint', 12.7),), base_inset=35.0,
     margin=10.0, Rb=6.0, post_material='stainless',
     feet_h=16.0, gap=40.0,
@@ -218,7 +225,7 @@ def parts(P):
             out.append(Part(f'plinth-L{i + 1}', s - band, tint[l['t']], finish='acrylic', group='plinth', render=False,
                             notes=['the deck\'s lower sheet: a 10 wide ring of the flavor\'s stock tint (12.7) round the clear core; the ring and the core cemented edge to edge with ACRIFIX 2R 0190, then the top sheet cemented over both in a vacuum press (the core\'s print stays on its underside, not in a bond line); annealed, fly-cut, the outline routed as one; the outer edge bead-blasted satin'] if i == 0 else []))
             out.append(Part(f'plinth-L{i + 1}-inlay', s & band, clr[l['t']], finish='clear', group='plinth', render=False,
-                            notes=['the core: a clear inlay cemented edge to edge into the 10 wide tinted ring, the light guide; its underside screen-printed with a white dot pattern (about 10 % cover near the strip rising to about 60 % at the middle) and overprinted black before the top is cemented on; the walls of its holes painted white then black']))
+                            notes=['the core: a clear inlay cemented edge to edge into the 10 wide tinted ring, the light guide; its underside screen-printed with a white dot pattern (about 5 % cover near the strip rising to about 35 % inside) and overprinted black before the top is cemented on; the walls of its holes painted white then black']))
         else:
             # a plain lamina ('clear' in P: no inlay ring): since the stock line (2026-11-01), the flavor's stock tinted sheet
             out.append(Part(f'plinth-L{i + 1}', s, tint[l['t']], finish='clear', group='plinth', render=False,

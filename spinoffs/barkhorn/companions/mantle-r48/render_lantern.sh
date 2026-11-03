@@ -13,7 +13,7 @@ mkdir -p $OUT
 C="--edge-frost 0.35 --base-tint smoke-2074 --scale 0.75 --samples 80 --paper #7A7570 --tint-mode custom"
 r() { n=$1; shift; python3.11 scene.py dusk "$@" --out $OUT/$n.png $C > /tmp/mantle-r48-$n.log 2>&1; echo "$n $(grep -c ^wrote /tmp/mantle-r48-$n.log)"; }
 NIGHT="--strip 300 --strip-color 1.0 0.55 0.25 --ambient 0.003 --exposure 0.0"
-if [ "$1" != r2 ]; then
+if [ -z "$1" ]; then
 r a4-night-ember-2423 --model out-strata-v4 --colour ember-2423 $NIGHT --core-glow 9
 r a4-day-ember-2423 --model out-strata-v4 --colour ember-2423 --day --strip 0 --core-glow 20 --strip-color 0.915 0.33 0.38 --exposure -2.0
 r a4-night-poison-2092 --model out-strata-v4 --colour poison-2092 $NIGHT --core-glow 9
@@ -26,4 +26,17 @@ NIGHT2="--strip 300 --strip-color 1.0 0.55 0.25 --ambient 0.006 --exposure -1.0"
 if [ "$1" = r2 ]; then
 r a4-night-ember-2423-r2 --model out-strata-v4 --colour ember-2423 $NIGHT2 --core-glow 9
 r a4-night-poison-2092-r2 --model out-strata-v4 --colour poison-2092 $NIGHT2 --core-glow 9
+fi
+# gate 1 (the coordinator, 08:15): v4 rebuilt with a 5.6 skin, sparser dots (5 to 35 %), the groove's ceiling printed and
+# the rings' undersides black. Night: the strip at 2 W/m (the guide's glow 4 W/m2, about a stop under before), graded
+# brighter at the strip's edge (--grade), one large dim soft source behind the deck for a long reflection across the
+# skin (--reflector 3, unseen by the camera, not thrown down). Day: the room's light on the print baked for the new
+# build (10, in the 5.6 skin's downward tint); the -zero frame has no emission at all, for reference (Cycles leaves a
+# print sealed under glass unlit, so it reads black, which the real deck would not)
+NIGHT3="--strip 150 --strip-color 1.0 0.55 0.25 --ambient 0.006 --exposure -1.0 --core-glow 4 --grade --reflector 3"
+if [ "$1" = g1 ]; then
+r a4-night-ember-2423-g1 --model out-strata-v4 --colour ember-2423 $NIGHT3
+r a4-night-poison-2092-g1 --model out-strata-v4 --colour poison-2092 $NIGHT3
+r a4-day-ember-2423-g1 --model out-strata-v4 --colour ember-2423 --day --strip 0 --core-glow 10 --strip-color 0.848 0.124 0.168 --exposure -2.0
+r a4-day-ember-2423-g1-zero --model out-strata-v4 --colour ember-2423 --day --strip 0 --core-glow 0 --exposure -2.0
 fi

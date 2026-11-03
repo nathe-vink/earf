@@ -2,11 +2,11 @@
 
 | item | make | qty | what | size | each, USD |
 |---|---|---|---|---|---|
-| plinth-L1 | cut | 1 | 12.7 mm Cell-cast acrylic sheet, stock tint in the line codes (TruCast 2423 Ember, 2092 Poison, 2287 Haze, 2069 Ice, 2074 Smoke), 4 x 8 ft | 450 x 360 | 56.58 |
-| plinth-L1-inlay | cut | 1 | 12.7 mm Cell-cast acrylic sheet, water-clear, 4 x 8 ft | 430 x 340 | 27.85 |
+| plinth-L1 | cut | 1 | 9.5 mm Cell-cast acrylic sheet, stock tint in the line codes (TruCast 2423 Ember, 2092 Poison, 2287 Haze, 2069 Ice, 2074 Smoke), 4 x 8 ft | 450 x 360 | 42.32 |
+| plinth-L1-inlay | cut | 1 | 9.5 mm Cell-cast acrylic sheet, water-clear, 4 x 8 ft | 430 x 340 | 20.83 |
 | plinth-L2 | cut | 1 | 9.5 mm Cell-cast acrylic sheet, stock tint in the line codes (TruCast 2423 Ember, 2092 Poison, 2287 Haze, 2069 Ice, 2074 Smoke), 4 x 8 ft | 450 x 360 | 42.32 |
 | plinth-L2-inlay | cut | 1 | 9.5 mm Cell-cast acrylic sheet, water-clear, 4 x 8 ft | 430 x 340 | 20.83 |
-| plinth-L3 | cut | 1 | 3 mm Cell-cast acrylic sheet, stock tint in the line codes (TruCast 2423 Ember, 2092 Poison, 2287 Haze, 2069 Ice, 2074 Smoke), 4 x 8 ft | 450 x 360 | 13.37 |
+| plinth-L3 | cut | 1 | 5.6 mm Cell-cast acrylic sheet, stock tint in the line codes (TruCast 2423 Ember, 2092 Poison, 2287 Haze, 2069 Ice, 2074 Smoke), 4 x 8 ft | 450 x 360 | 24.95 |
 | base-L1 | cut | 1 | 12.7 mm Cell-cast acrylic sheet, stock tint in the line codes (TruCast 2423 Ember, 2092 Poison, 2287 Haze, 2069 Ice, 2074 Smoke), 4 x 8 ft | 380 x 290 | 38.49 |
 | led-channel | buy | 1 | any (Klus / Muzata kind) Black anodized aluminum U-channel about 7 x 7 (inside 5.2) for 5 mm strip, cut to four straight runs and mitred at 45 at the corners, bonded open face up into the deck's groove with a neutral-cure silicone; about 1.5 m |  | 30.00 |
 | led-strip | buy | 1 | any (Waveform, LEDSupply, BTF kind) 24 V COB LED strip, dotless, 5 mm wide, 2700 K, CRI 90+, 5 W/m or less (about 4 W/m chosen; confirm on its data sheet), cut to four straight runs in the deck's groove; about 1.51 m used (about 6.0 W) |  | 40.00 |
@@ -15,8 +15,8 @@
 | platter-hub | lathe | 1 | Brass C69300 (Eco Brass, lead-free) or C27450 | 80 x 80 x 27 | 70.92 |
 | platter-screws | buy | 1 | Six M4 x 10 stainless socket button screws (ISO 7380), up through the hub into the platter's inserts |  | 6.00 |
 | platter-inserts | buy | 1 | any (E-Z Lok / Tappex kind) Six M4 brass threaded inserts for bonding into plastics, 5.6 OD x 8, epoxy-bonded into the platter from below (no thread-locker near acrylic) |  | 9.00 |
-| spindle | lathe | 1 | Stainless steel 440C, hardened 58 HRC and ground | 20 x 20 x 85 | 127.04 |
-| bearing-housing | lathe | 1 | Brass C69300 (Eco Brass, lead-free) or C27450 | 60 x 60 x 55 | 74.81 |
+| spindle | lathe | 1 | Stainless steel 440C, hardened 58 HRC and ground | 20 x 20 x 85 | 127.03 |
+| bearing-housing | lathe | 1 | Brass C69300 (Eco Brass, lead-free) or C27450 | 60 x 60 x 55 | 74.48 |
 | bearing-nut | lathe | 1 | Brass C69300 (Eco Brass, lead-free) or C27450 | 56 x 56 x 18 | 53.23 |
 | bearing-spring | buy | 1 | Schnorr / Mubea / Christianson kind One DIN 2093 group 2 series C disc spring 63 x 31 x 1.8 (51CrV4), under the bearing nut; load and rate to confirm in the maker's table |  | 6.00 |
 | bearing-washer | lathe | 1 | Brass C69300 (Eco Brass, lead-free) or C27450 | 74 x 74 x 13 | 55.68 |
@@ -55,8 +55,8 @@
 |---|---|
 | buy | 2,869 |
 | cnc-mill | 47 |
-| cut | 229 |
-| lathe | 763 |
-| total | 3,907 |
+| cut | 220 |
+| lathe | 762 |
+| total | 3,897 |
 
 Budget figures: bought parts from the component library (dated retailer listings), made parts from the kit's stock rates: 25 % offcut on sheet parts, a handling charge a print, and a setup a machined line spread over its pieces. A shop's quote replaces them.

@@ -489,7 +489,7 @@ $SKPOLY
   9
 $TDCREATE
  40
-2461348.2563194446
+2461348.3461689814
   9
 $TDUCREATE
  40
@@ -497,7 +497,7 @@ $TDUCREATE
   9
 $TDUPDATE
  40
-2461348.2563194446
+2461348.3461689814
   9
 $TDUUPDATE
  40
@@ -929,11 +929,11 @@ $PSTYLEMODE
   9
 $FINGERPRINTGUID
   2
-{175F090D-2802-4A6E-8E66-771B8A683846}
+{C71B230C-E0E7-4716-87E2-6A3D30678CA8}
   9
 $VERSIONGUID
   2
-{934696F9-C63C-4BA5-B7BF-0D55DD297D95}
+{22522514-4AF8-42C4-9E30-834947E82772}
   9
 $EXTNAMES
 290
@@ -1323,9 +1323,9 @@ ISM
   0
 CLASS
   1
-ACDBPLACEHOLDER
+LAYOUT
   2
-AcDbPlaceHolder
+AcDbLayout
   3
 ObjectDBX Classes
  90
@@ -1339,9 +1339,9 @@ ObjectDBX Classes
   0
 CLASS
   1
-LAYOUT
+ACDBPLACEHOLDER
   2
-AcDbLayout
+AcDbPlaceHolder
   3
 ObjectDBX Classes
  90
@@ -2167,11 +2167,11 @@ AcDbPolyline
  20
 360.0
  10
-382.9983328701114
+381.077032961415
  20
 360.0
  10
-382.998332870113
+381.07703296142694
  20
 350.0
  10
@@ -2319,11 +2319,11 @@ AcDbPolyline
  20
 350.00000000000006
  10
-67.00166712988698
+68.92296703857306
  20
 350.0
  10
-67.00166712988701
+68.92296703857305
  20
 360.0
  10
@@ -2439,7 +2439,7 @@ AcDbText
  40
 6.0
   1
-plinth-L1  12.7 mm trucast-tint, outer face
+plinth-L1  9.5 mm trucast-tint, outer face
  11
 2.0
  21
@@ -2529,7 +2529,7 @@ AcDbText
  40
 4.0
   1
-not in this file: the opening at 360, 355 rounded over from the outer face (1 faces, 0 to 0 deg off the sheet)
+not in this file: the opening at 90, 355 rounded over from the outer face (1 faces, 0 to 0 deg off the sheet)
  11
 2.0
  21
@@ -2559,7 +2559,7 @@ AcDbText
  40
 4.0
   1
-not in this file: the opening at 90, 355 rounded over from the outer face (1 faces, 0 to 0 deg off the sheet)
+not in this file: the opening at 360, 355 rounded over from the outer face (1 faces, 0 to 0 deg off the sheet)
  11
 2.0
  21
@@ -3601,7 +3601,7 @@ DictionaryVariables
 280
 0
   1
-1.4.5 @ 2026-11-03T06:09:06.205750+00:00
+1.4.5 @ 2026-11-03T08:18:29.727820+00:00
   0
 DICTIONARYVAR
   5
@@ -3613,7 +3613,7 @@ DictionaryVariables
 280
 0
   1
-1.4.5 @ 2026-11-03T06:09:06.207907+00:00
+1.4.5 @ 2026-11-03T08:18:29.730438+00:00
   0
 ENDSEC
   0
