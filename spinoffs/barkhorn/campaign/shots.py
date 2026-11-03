@@ -531,6 +531,11 @@ def _siteG_round1(s, frame, tint):
     L = s['lights']
     if 'sidesheen' in L:
         L['sidesheen']['strength'] = 0.0
+    # (the proxies: with sidesheen off the lower right face still read pale, 226 to 220. The rest was `through`, a small
+    # lamp behind the speaker aimed through it at the floor, whose image sat in that face: off, 220 to 156 and the
+    # face's saturation 0.47 to 0.58; the floor's coloured light is the key's and stays. Only the tall rig has it)
+    if 'through' in L:
+        L['through']['irradiance'] = 0.0
     if 'horn' in L and L['horn'].get('irradiance'):
         L['horn']['irradiance'] = round(L['horn']['irradiance'] * 0.65, 3)
     if frame == 'front-off-wide' and 'topline' in L:
