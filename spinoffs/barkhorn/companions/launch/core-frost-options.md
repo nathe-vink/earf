@@ -86,3 +86,46 @@ fact.
 **C is not recommended:** it puts the LED in view.
 
 **D is not recommended:** it doesn't change the finding.
+
+## Round 9: B with a larger core (2026-11-03)
+
+The gate on round 8:
+- **A is out:** "render work won't rescue it".
+- **B is the right direction:** its day frame is "the only Core frame that reads as tinted glass".
+- **B's Ø90 core was too small:** at night it read as "a small LED orb in a black bubble".
+
+So the core grows to **Ø120**:
+- **Size:** R 60 outside, 3 mm, frosted inside; its center 12 below the outer's.
+- **Seat:** a short spacer ring on the grommet.
+- **Gap to the outer wall:** about 13 at its equator, about 2 at the seat.
+- **Frames:** `core-ice-day-nested.png` and `core-ice-night-nested.png`, now at full scale.
+
+| | Ø90 core (round 8) | Ø120 core (round 9) |
+|---|---|---|
+| The core, a ball [E] | $15 to $25 formed | $25 to $40 formed (the sheet's area × 1.8), or a stock Ø120 clear sphere pair [check] |
+| Its mould [E] | about $1,200 | about $1,300, or $0 with stock spheres |
+| The core's mass | 85 g | 154 g |
+| Core's ball, all told | about 620 g | about 690 g (754 today) |
+| A ball, all told [E] | about $55 to $70 | about $65 to $85 (today $47) |
+
+**A PROPOSAL against the LED hotspot:**
+- A white dot, Ø50, printed inside the core over the LED, sends about half the near light back up into the core.
+- LED globe bulbs use the same trick.
+- About +$1 a core [E].
+
+**Staging:**
+- The three night frames now share one evening room: the same fill at each exposure, and no pool of light at the lamp.
+- Core's room fill is kept out of the glass: in two nested balls its reflection doubled into a spot at the crown.
+
+## Hemisphere at night: the opal (PROPOSAL, round 9)
+
+**Why:** lit, Ice's dome read teal (about 180 to 190°) against azure by day (about 203°). The cause is the dye's
+transmission, not the light; 8000 K still left 11°.
+
+**The proposal:** a cool-white opal grade for the liner. Modeled as a slight blue bias, about 0.80 / 0.89 / 0.98 in
+linear transmission against a neutral 0.93.
+
+**Effect:** in a low-res check the lit dome measured about 195°, within 10° of the day. The day frame is re-rendered
+with the same opal, so the pair stays one object.
+
+**To confirm:** the grade with the former. Opal acrylic comes in warm and cool whites [check the maker's range].
