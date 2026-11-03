@@ -25,6 +25,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ASSET = os.path.join(HERE, 'assets', 'horn3', 'tropos-strata.blend')   # r33-speaker-horn a6dc9296 (Strata, horn A, uplit plinth, stock tints); not in git
 COLLECTION = 'Tropos Strata Smoke'
 LIGHT_SCALE = {}                       # --light NAME=FACTOR
+BACKLIGHT = [0.0]                      # --backlight irradiance
 BLACK_LINING = False                  # --black-lining
 SPOT = (0.0, -2.4)                    # where the speaker now stands (the crater is at the origin)
 TURN = -22.0                          # its front turned toward the camera's side
@@ -54,6 +55,13 @@ def compose(sh, frame):
     sh['camera'] = cam
     sh['size'] = [2400, 1600] if frame == 'landscape' else [1200, 1500]
     sh['title'] = 'Smoke in its element, aligned with the other seven (r48)'
+    if BACKLIGHT[0] > 0 and 'kicker' in sh.get('lights', {}):
+        # the fire's light through the speaker, from behind: a warm panel between the speaker and the crater, lighting
+        # only the speaker (the kicker's receivers), so its glass is seen into, not as a block
+        rec = sh['lights']['kicker'].get('receivers')
+        sh['lights']['fireback'] = {'type': 'area', 'size_m': [1.2, 1.6], 'position': [SPOT[0] + 0.2, SPOT[1] + 1.1, 0.75],
+                                    'target': [SPOT[0], SPOT[1], 0.7], 'irradiance': BACKLIGHT[0], 'color': '#FF9A55',
+                                    'receivers': rec}
     for k, f in LIGHT_SCALE.items():                 # the shot's fills were set for the old near-black model
         if k in sh.get('lights', {}):
             if f == 0:
@@ -87,10 +95,15 @@ def main():
     ap.add_argument('--refinish', help='a raw render (.raw.png) to finish again, no render')
     ap.add_argument('--black-lining', action='store_true')
     ap.add_argument('--light', action='append', default=[], help='NAME=FACTOR scales a shot lamp (0 drops it)')
+    ap.add_argument('--stand', choices=['feet', 'plinth'], default='feet')
+    ap.add_argument('--tt', type=float, help="the glass at this transmission through 20 mm (Smoke 2074 is 0.12)")
+    ap.add_argument('--uplight', type=float, default=0.0, help='the night uplight (W); 0 is off')
+    ap.add_argument('--backlight', type=float, default=0.0, help="the fire's light through the speaker from behind")
     a = ap.parse_args()
     global BLACK_LINING
     BLACK_LINING = a.black_lining
     LIGHT_SCALE.update({k: float(v) for k, v in (x.split('=') for x in a.light)})
+    BACKLIGHT[0] = a.backlight
     W = os.path.abspath(a.worktree)
     if a.refinish:
         sys.path.insert(0, os.path.join(W, 'studio', 'engine'))
@@ -100,63 +113,8 @@ def main():
     sh = compose(json.load(open(src)), a.frame)
     shot = os.path.splitext(os.path.abspath(a.out))[0] + '.in.json'
     json.dump(sh, open(shot, 'w'), indent=1)
-    os.chdir(W)
-    sys.path.insert(0, os.path.join(W, 'studio', 'engine'))
-    import bpy, render, product as Pr, lights as Lt
-    linked = []
-    place0 = Pr.place
-
-    def place(bpy_, pdef, templates, shot_, root):
-        objs, part_of = place0(bpy_, pdef, templates, shot_, root)
-        for o in objs:
-            o.hide_render = True
-        with bpy_.data.libraries.load(ASSET, link=not BLACK_LINING) as (s_, d_):
-            d_.collections = [COLLECTION]
-        col = d_.collections[0]
-        if BLACK_LINING:
-            # black lining sleeves (the coordinator's recommendation, 2026-11-01, awaiting the owner): the asset is
-            # appended, not linked, so its lining's material can change; everything else is the asset's own
-            black = bpy_.data.materials.new('lining-black'); black.use_nodes = True
-            b = black.node_tree.nodes['Principled BSDF']
-            b.inputs['Base Color'].default_value = (0.012, 0.012, 0.012, 1); b.inputs['Roughness'].default_value = 0.95
-            # and the acrylic at the site's Smoke look: the engine's own cloud-black cabinet and horn materials (the
-            # model the site's pictures were made with), built for the hidden copy, put on the asset's parts
-            site = {}
-            for o in objs:
-                for sl in o.material_slots:
-                    if sl.material:
-                        site[sl.material.name] = sl.material
-            for o in col.all_objects:
-                for sl in o.material_slots:
-                    if not sl.material:
-                        continue
-                    base = sl.material.name.split('.')[0]
-                    if base.startswith('lining@'):
-                        sl.material = black
-                    elif base.startswith('bark@') and 'bark@cloud-black' in site:
-                        sl.material = site['bark@cloud-black']
-                    elif base.startswith('horn-lot@') and 'horn@cloud-black' in site:
-                        sl.material = site['horn@cloud-black']
-            print('site look:', sorted(k for k in site if k.startswith(('bark', 'horn'))))
-        for inst in shot_['product']['instances']:
-            e = bpy_.data.objects.new(COLLECTION, None)
-            e.instance_type = 'COLLECTION'; e.instance_collection = col
-            e.location = inst['position']; e.rotation_euler = (0, 0, math.radians(inst['rotate_z']))
-            bpy_.context.scene.collection.objects.link(e)
-            linked.append(e)
-        return objs, part_of
-    Pr.place = place
-    link0 = Lt.link_receivers
-
-    def link_receivers(bpy_, light_ob, objects):
-        link0(bpy_, light_ob, objects)
-        col = light_ob.light_linking.receiver_collection
-        for e in linked:
-            if e.name not in col.objects:
-                col.objects.link(e)
-    Lt.link_receivers = link_receivers
-    sys.argv = ['render.py', shot, '--out', os.path.abspath(a.out), '--samples', str(a.samples), '--scale', str(a.scale)]
-    render.main()
+    import habitat
+    habitat.run(shot, COLLECTION, a.out, a.samples, a.scale, ASSET, root=W, stand=a.stand, tt=a.tt, up=a.uplight)
 
 
 if __name__ == '__main__':
