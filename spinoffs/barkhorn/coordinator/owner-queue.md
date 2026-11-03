@@ -2234,3 +2234,38 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   81 under the front edge vs 107 open sand, a weak contact shadow: polish note 1 still open; the red patch is the tinted shadow; "a
   smooth glassy shell, the driver a smooth bulb, no X or seams"). Ice polished rendering (bedded 22 mm). My gate on Dust polished
   (the satin Dust and Ice as context) started 15:52.
+- 15:52 helper c3: BLOCKED. Chunk 5's first shot (deck-home-portrait) failed 15:51:29-15:52:18, exit 1, nothing committed: "ImportError:
+  cannot import name '_imaging' from 'PIL' (/usr/lib/python3/dist-packages/PIL/__init__.py)" from room31/pieces.py:221 (_spine_png;
+  sets.py:196 room, kit.py, pieces.books). render.py re-execs on python3.11 (bpy's Python), where Ubuntu's python3-pil 10.2.0 has
+  only cpython-312 .so files; setup.sh l.43's `import PIL, scipy` check passes on __init__ alone. 15:53 sent: c3 to install Pillow
+  for python3.11 (pip --user), verify `from PIL import Image, ImageDraw, ImageFont`, re-run chunk 5 from its first shot; c2 and c4 to
+  check python3.11's PIL before their first render and install if needed; 15:54 the speaker lane to fix setup.sh (install Pillow for
+  the bpy Python; the check as a real import) and HELPERS.md, and to confirm its own container before chunk 4 (deck-home, room31).
+- 15:52 speaker lane: Smoke's target look at 6d1d32a12c4f6e79b5c0e3cc228c9429dcf604e9 (renders/2026-11-03/barkhorn/smoke-target/Smoke-target-
+  look.png, captioned "the target look, pending the physical sample", NOTES.md; the 2064 set). The horn in the same family: proxied at
+  the cabinet's sheet (#DEDEDE at 10 mm: body L 191, too pale), one step deeper (#C3C3C3: 168), final ~the cabinet's colour per mm
+  (#B6B6B6): body 156, throat 74, lip 176 (the old deep horn 67, 33, 70); "smoked glass like the cabinet: dark throat, a grey glass lip,
+  the pod and posts through it"; a touch above 110-150 (one notch deeper would put it inside). The light path: 2 stops under, the
+  finish off, the top batt behind the 50 % wall reads 0.348 of the unabsorbed batt; two passes predict 0.295 (0.543 squared), the
+  box's inner bounces the rest; at the frame's exposure L ~210 predicted, 214 shown: the walls do cut the light; the studio's top
+  light is strong; the frame doesn't oversell. The sheet: still Chemcast 2064 "Light Smoke", a sample settles it.
+- 15:52 lamps lane (session_01VCPNDaozJgar2mVTSvis3A): round 8 on r32-lamps-final at afee07ad36c06b7b117feb879d7980ef32e8b4d0 (5700 K).
+  HEMISPHERE day and night re-rendered: the downlight cut to a quarter (COB 8 to 2), the dome's own light raised (the table median
+  ~220 to 144; the day ~166-173, so night now darker than day; the bowl ~224, unclipped, a soft shadow); the dome the brightest
+  coloured thing (face ~82, was ~51); no sky map in night reflections; the "LED eyes" were the missing PEEK pin carrier, pins and
+  gaskets (the lit bore through the collar's slots): all modelled, the cap matte black; the rim's dye raised (loading 2 to 3: the lip
+  53 vs the face 82). The hue: round 7's lit dome ~180 vs ~203 by day (~23 degrees); a light-colour sweep reaches 186 at 6500 K and
+  192 at 8000 K, still 11 short: the dye's transmission through the 3 mm full-dye shell, not exposure (round 8 not re-measured).
+  CORE: the design note spinoffs/barkhorn/companions/launch/core-frost-options.md: inherent for any frost on the ball's wall (the frost
+  only 9 mm behind the polished face of a 160 mm ball reads as the skin, milk glass; lit inside, an even disc; the cone at the base is
+  the frost's near field; the "seam" is the clear outer 9 mm edge-on). B, a ball in a ball (recommended): a 6 mm tinted outer, clear
+  and polished both faces; a 90 mm clear diffuser ball inside, 3 mm, frosted inside, across an air gap, on the grommet's ring, captive
+  once the halves join (the hand swap unchanged); ~$55-70 a ball vs $47; tooling $0-1,200 for the inner (a mould or stock spheres,
+  to check); the outer's mould to confirm with the former; ~620 g vs 754; the LED hidden; risk: the outer's equator joint against
+  the glow. C (lower half frosted, +$3-5: the LED shows from above, a ceiling hot spot) and D (finer frost, $0: no change, a larger
+  cone) not recommended. B proxies (0.6 scale): core-ice-day-nested.png (depth, a pale core floating low), core-ice-night-nested.png (a
+  glowing core in dark clear tint; a reflected spot at the crown and refracted wedges, untuned). A's fixes: no window glint, no caustic
+  speckle (an indirect clamp, glossy blur, 1024 samples), the LED a 160-degree spot; the nub a sub-mm grazing refraction. Core day
+  unchanged (the frost is the finding). Other colours on hold.
+- 15:53 gates started: the Smoke target (wf_39a2255a-4e0; 2064 white, the deep-horn 50 % frame and Ice polished as context); the lamps
+  round 8 (wf_4f3c151b-a95; Hemisphere day and night, Core A day and night, Core B proxy day and night).
