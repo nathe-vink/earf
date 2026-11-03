@@ -2402,3 +2402,5 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   the Poison pair on its own feet in room31's golden hour, polished horns, see-through green, a credenza and rug; a power lead to the
   left speaker's wall outlet shows (honest for an active speaker). Gating plan: by sets as they complete (the deck set; each site
   frame type across its seven tints).
+- 16:43 helper c2: chunk 11 landed at r33-rollout-c2 c171e299ce66d29f59fed457278258076b60992e: site-hero-light-poison (22.8 min, 2.26 MB),
+  site-hero-light-ice (25.3 min, 2.31 MB); exit 0 (only the usual no-GPU CUEW warning). Chunk 13 started 16:43.
