@@ -1445,6 +1445,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   gives the glassy depth (about 2.5x darker, the throat deep, the posts showing through). So the owner's 05:11 look conflicts
   physically with their 03:00 "satin outside": an owner question (after the base question; then Smoke). The seven started 10:44 on
   hornA2 with the spec satin (ember, dust, acid_b, poison_g5, ice, haze_b, fog_b; ~30 min each).
-- 10:47 sent to the speaker lane (after D, Smoke-D and the Smoke day comparison): A with the horn's outside polished, identical to
+- 10:46 sent to the speaker lane (the message said 10:47) (after D, Smoke-D and the Smoke day comparison): A with the horn's outside polished, identical to
   a47ae365 otherwise, as a pair with A; and a plain feasibility note (which face touches the tool, forming marks on a polished
   outside, polish cost per horn, why satin was chosen, fingerprints and scratches, any tooling change).
