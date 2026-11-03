@@ -2496,3 +2496,13 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 17:26 sent to the bar lane (my message said 17:27, ahead of the clock): one polish pass on r44-lantern before the owner sees it (a soft room light on the pair's upper bodies to
   ~45-55, no floor pool; the side-edge red line softened; the woofer glints removed); polished confirmed; then the r43 shop and window
   fixes; a proxy each; SHAs.
+- 17:29 biomes lane (its message said 17:31): third Haze and Poison proxies (polished; luma on the lower cabinet below the woofer):
+  prox1 (sun behind / sunfleck back-left) Haze 15.1, Poison 8.0; prox2 (sun 100 el 6 / canopy gap 4) 22.7, 3.1; prox3 (+ the sky
+  turned / canopy gap 12) 22.8, 7.5. Haze gains ~50 % with the side key, then saturates; a bright disk on the right horizon didn't move
+  with the sun lamp or sky.rotation_deg (some other element of the Haze set), now inconsistent with the side light. Poison barely
+  moves under a canopy (17 % through the box). Both are the tint facts (Haze 11 %, Poison 17 % through two walls vs Dust 45 %); no
+  lightening. Finals with their best honest light, gated and reported plainly; a lighter Haze or Poison batch is the owner's question.
+  Order: Ember polished (now, 96 samples), Acid (sink 0.03), Haze, Poison; done ~20:15 UTC.
+- 17:29 sent: agreed; the Haze horizon disk traced and removed or moved to the sun lamp's azimuth out of frame (one light source),
+  noted in CHECK.md. The densities go to the owner as an item with the lane's numbers (colours F already made Poison and Haze a step
+  lighter; a further step is the owner's call).
