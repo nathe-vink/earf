@@ -3680,3 +3680,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   flags.
   (Time fix: my message to the speaker lane about the hero's card was stamped "23:29" but sent at about 23:26, before a 23:27:09
   `date -u`. My error again: `date -u` comes first. The log's entries are corrected to 23:25 and 23:26.)
+- 23:20 c2 (reached me 23:27): merged 69c8f11c at 69d7c10cef8e70fbe0905e81df73f4b22bcba29c (r33-rollout-c2; checked with ls-remote
+  23:28). The variants file was clean. The Cloud build started 23:20 as a tracked task, then render_model.py. No renders until the
+  speaker lane's shots.py SHA.
