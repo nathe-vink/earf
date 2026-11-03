@@ -147,6 +147,27 @@ The first costs nothing. The second costs a machining operation on the brace and
 - `D-night-ice.png`: light on;
 - `D-smoke-black.png`, `D-smoke-white.png`: Smoke at night, the light 6500 K, black and white sleeves.
 
+## D+ and E: tried for the site's upward V, and dropped (2026-11-03)
+
+The site's uplit images show a V of the speaker's colour rising on the wall behind it. Two ways to get it honestly were tried. Neither gives the site's look.
+
+**D+, a window in the top batt and the back's top band opened** (option "Top window"; the coordinator's acoustic study puts it nearly free):
+- The coordinator's skeptic checked it against the site's uplight31 render: the V there comes from the ports' bay, whose side walls carry no batts. D+ opens the top and the back instead.
+- That gives a lit horn underside and a glow behind the top of the speaker, which are dark in the site's images. With the whole top open, the model moves the wall's share of light only from 10.9 % to 11.4 %.
+- **Not the site's look.** Stopped before any frame was rendered. The part stays in the model as an option.
+
+**E, a side light** (option "Side light"): a strip at the foot of each side wall in the ports' bay, tilted 45° up and outward, with the brace runs:
+- On the wall it reaches only 0.13-0.21 of the front panel's brightness, against 0.5-1 in the model and about 0.45 on the site's Ice slide.
+- Its lens shows through the side wall as a hot line at the lower right.
+- More power raises the front and the wall together, so the ratio doesn't move.
+- **Dropped.** The proxies and numbers are in `renders/2026-11-03/barkhorn/base-question/light-study/E/`.
+
+**What's left for the owner:**
+- **A**, no light: the coordinator's pick.
+- **D**, the lantern, the light built in: it lights the cabinet, not the room.
+
+The site's V needs an unlined lower side, and that would give up the lining's control of the side panels' modes.
+
 ## A, uplit: the light goes up through the speaker (2026-11-02)
 
 **The owner, 2026-11-02 20:38** (README 41581a57): "The light in the base is meant to go upward through the speaker. The intent is to provide a way to light up the speaker from below, like in the underlit promo images." On 2026-11-01 "light up from underneath" was read as a strip under the plinth facing the floor. That was the wrong way round. **The uplight below replaces the floor line**, which stays documented after it as superseded. The model is `UPLIGHT` in `variants.py` (option "Plinth uplight"); the renders are in `renders/2026-11-02/barkhorn/uplight/`.
