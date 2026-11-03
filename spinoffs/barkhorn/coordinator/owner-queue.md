@@ -1697,3 +1697,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   rendering (~15 min, gate2/A-ice-polished.png), then the D night re-render. BASES.md: 26c334ee (D's runs as built: six runs ~1.23 m, the
   brace's rear member, the floor film and its 7.5 % reason; 155.5 L gross; 0.84 m, 204 Hz; the voile colour flagged, tied to Smoke's
   lining); 7c6d272d (the neon-line build note: strips 40 mm from any clear rib, batts butted at the ribs); the D+ and E section next.
+- 13:04 lamps lane round 7 at ab1e48fad1d2d2fc5758ea62d8c8db66a754409b (all 5700 K): Core day now frosted like the night (one
+  object); Core night the room's main light (fill cut to a quarter), brightest at the base, a small dim round glint; hue 198 day vs 193
+  night; not met: the clear outer band reads lighter not deeper (geometry), no halo (the wall too far). Hemisphere: one steep camera for
+  the pair (~23 % of the width), the rim fix on both (the lip a darker blue line at night), the table lit by an opal-sized disc (soft
+  bowl shadow); not met: the lit dome 180 vs 203 by day (23 degrees); a sweep gives 186 at 6500 K and 192 at 8000 K, so it is the
+  dye at full strength through 3 mm shifting toward cyan, not exposure; closable only with a lighter shell dye or a bluer day
+  reference (an owner call if the gate cares). Gate wf_286ca581-a1f on both pairs started 13:05.
