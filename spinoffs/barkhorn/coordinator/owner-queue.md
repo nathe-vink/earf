@@ -1600,3 +1600,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   (x 230 / 330); the floor strips down to ~13 W/m; exposure -0.67 stop; a darker floor #1E2125 at roughness 0.06; Smoke's black lining
   dropped. The model rebuilding (~20 min), then D+ proxy, D+ night, D+ day, D night re-render, polished A. The Smoke day comparison on
   its last frame.
+- 12:16 Mantle lane g4 (frames dd20b4aba86c598a95eecdabcda20fde0022f6f0; scene 0b0e2252; notes e3de62e6): (1) the glow is now a real
+  light (shadow rays pass the flat acrylic tinted by its volume): the pillar, arm rest, tube and platter sides catch it; floor identical
+  in both nights, darker under the deck than beside it; (2) glow down half a stop, a 25 mm vignette at the bezel, a broad +/-15 %
+  gradient, a dim off-frame lamp's broad reflection across the top; (3) Poison's red matched to the lamps' table (day 122, lit leaning
+  yellow-green); (4) the acrylic's wear 0.3, 192 samples; (5) night ambient 35 (was 20); (6) the border printed white-up/black-down (the
+  same as the dots): ruby by day, dark at night; the groove's ceiling the same; ~+$10 a second screen pass: now ~+$140-170 a unit,
+  $3,897 parts; (7) the front disc was a post's bonded seat (walls now clear); the platter rim satin. Honest notes: a glow fading into
+  the border rendered as a yellow line on Poison (dropped); the glow over the groove's ceiling rendered 1.6x the field (scaled 0.6,
+  noted). Deck 24.6 mm awaits sign-off. Gate wf_3919563b-3fc started 12:16 (sha256 day 4704ecdd, Ember 1c59bcdf, Poison 0e379c57).
