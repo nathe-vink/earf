@@ -3173,3 +3173,22 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   wf_bed58229-1f6 (a pre-gate: kit43's strips; context v2).
 - 20:21 sent to the biomes lane: Acid's rim unlinked (flag or move if it spills wrongly), proxy old against new, Acid's final again with the
   pre-gate's findings; Poison's litter and skygap checked the same way; rulings 1-3 in full with what stands.
+- 20:16 speaker lane: PHASE-2 GLOW at 3b1fed96d8a91a0dbbc5e324a02864c741c265e2 (contains 1e79f362's fix1): finals31's glow tested on turn 00
+  and 06 (Ember, 0.5 scale): dropped, mean absolute difference 0.4-0.5 of 255 (99.9th percentile 6, denoise noise); made honest, hot spots
+  at 250 on 2.7 % and 10 % of the frame. Dropped from every finals31 rig (amp, horn-back, inside, turn); the frames already rendered with it
+  stand. phase2()'s builder runs honest_lights on every rig (a lit panel at specular 0 goes to 1.0; studio31's arc, macros and studio-dark
+  changed in code, held, unproved). Offered c4's chunk 6 on it. Next: the honest A-ice-polished, the hero re-proxy, the cover, back, hero-light.
+- 20:20-20:21 lamps lane: the night rig rebuilt under rulings 1-3 at dc60ce442a7dbd69d7b26d704be14d01e1f0a446 (round 10's two night renders
+  stopped by PID; the day re-rendering with the new cap): the world a flat dim evening colour seen by glass and transmission; the moon gone;
+  one larger soft fill seen in the glass; the kicker a small real unlinked light; the COB mirrored by the bowl; the strip and led-face kept.
+  Proxies: Core B night core 138 to 144, silhouette band 3 to 13, hue 222/233/193 to 220/230/193; Hemisphere night (cool-white liner) face
+  80 to 84, lip 67 to 70, cap 10 to 34, table 145 to 152, hue 231/246/196 to 232/247/196 (day 245/267/204; liner b 242/263/201 at low res).
+  Finals rendering: Hemisphere day, nights (a) and (b) at 384, Core B night at 1024. Rulings 1 and 2 received; the rig matches; the three
+  helper headers marked at 1086cebf1631e5b63e2e29a777fe67559f426d33.
+- 20:21 c4: barkhorn-variants.json restored, 1e79f362 merged (de0dc50d95087a0424ba1a57ca41a999cba7090d on r33-rollout-c4, no model code),
+  fix1 generated (23 shots, 7 chunks), chunk 1 (deck-row, ~78 min) started 20:21; then waits.
+- 20:23 biomes lane: rulings 1-3 received; Acid's rim unlinked; Poison's litter specular 0 to 1.0 (skygap unlinked at 1.0); at
+  2bca1b5789232ca66ec39b9f6c6db062e3fcf6a0. After the Fog final: the Poison glint diagnosis (base, gap off, sun off, litter at full), the
+  Haze A/B, Acid unlinked with real cards against its proxy; then the Acid final (with the critics' notes), then Poison's.
+- 20:23 sent to the speaker lane: glow accepted (noise), chunks 4 and 05 stand, no re-run; chunk 6 held until the two black side flags are in
+  the turn rig and proved on 01 and 05; inside-ice's fixes on the same SHA (inside-ice alone re-rendered); the floor patch first.
