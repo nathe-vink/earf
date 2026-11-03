@@ -1283,3 +1283,16 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   (08:36): one material for everything, the volume (physically faithful; "technically possible trumps cool"); the seven habitats now
   on it; Smoke waits for the owner, shown honestly in the volume material as 2074 black, 2064 black and 2064 white lining (gated on
   grounded, no light down, smooth horn only).
+- 08:56 lamps lane (head 90fba479a94f50df54457b3bdd3df44d53801b8b): the color check as before (Poison one green; Haze needs a
+  stock transparent violet ~25 % at 1/8 in or the speakers' Haze run); Ice pictures with blind critics on the owner's tests:
+  core-ice-day 7.0 (b62bed41), hemi-ice-day 6.5 (b62bed41), core-ice-night 7.0 (82b883f6) PASS; hemi-ice-night held after three
+  rounds (5.0, 6.0, 6.0: the open mouth outshines the dome through 3 mm of tint): an owner call, shoot from slightly above or allow
+  the mouth's glow. Flags: Core's ball in the "held" case; a fine bead-blast inside (a finish proposal); warm light through Ice glows
+  teal (real). Other seven held.
+- 08:57 Mantle lane g1 (frames b7ec7a0afbeb532acf58debf6bdf2e9f8397ae11; scene a2dc0f0a; model 77c1f2ad): day reads deeper ruby
+  glass (a 5.6 skin, sparser 5-35 % dots, core 9.5 + 9.5; with emission 0 Cycles renders the print black, so the room's light on the
+  print is a baked term at a third of before); night 2 W/m, glow 4 W/m2, graded, a soft unseen source laying a reflection on the
+  gloss; no outlines (the groove's ceiling printed opaque from above, the rings' undersides black; top ~199 vs brightest edge ~171);
+  a 0.3 W warm kicker for the hardware; the base top fine satin (no red bar); the camera panned 50 mm; floor neutral. +$120-150 a
+  unit, $3,897; ~3 W; the deck 24.6 mm (0.6 under spec 25.4: an owner sign-off). Gate running on Mantle g1 + the four lamp frames
+  (wf_97dd1b84-14a).
