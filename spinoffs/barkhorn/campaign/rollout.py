@@ -137,6 +137,35 @@ def phase2(base, horn):
     for name, rig, fl in (('macro-horn-acid', 'macro-horn-acid', 'cloud-amber'), ('macro-corner-ember', 'macro-corner-ember', 'cloud-red'),
                           ('macro-amp-dust', 'macro-amp-dust', 'cloud-orange'), ('macro-grip-poison', 'macro-grip-poison', 'eucalyptus-y2k-green')):
         out[name] = _final(shots, S31 + f'{rig}.json', fl, f'Tropos, {name}')
+    # 8. the audit's other close-ups (the site lane, r47-site-next 7a8b5297): joinery, the back mark, the coin
+    # joinery, Ember: tight on the front right vertical corner, where the side wall's polished edge meets the front panel
+    # set back 24 behind it; the cabinet-edge macro's studio by daylight, 4:5 (the Cloud's frame: x 0.28, y -0.2137)
+    j = _final(shots, S31 + 'macro-corner-ember.json', 'cloud-red', 'Tropos, joinery: two 20 mm walls meeting, Ember', size=[1280, 1600])
+    j['camera'] = {'position': [0.58, -0.52, 0.53], 'target': [0.275, -0.205, 0.46], 'lens_mm': 100.0, 'level': True,
+                   'fstop': 8.0, 'focus': [0.28, -0.214, 0.46]}
+    out['joinery-ember'] = j
+    # the back mark, Fog: site()'s back frame (mark variant A, 4f05e0be) square on to the back, the word about two thirds
+    # of the frame's width (the mark is 140 mm across at z 0.80 on the back's face, y 0.2063), 4:5. Blind-read at 440 px
+    b = shots.site('back', 'fog')
+    b['title'] = 'Tropos, the back mark, Fog (variant A)'
+    b['size'] = [1280, 1600]
+    b['camera'] = {'position': [0.0, 0.79, 0.80], 'target': [0.0, 0.2063, 0.80], 'lens_mm': 100.0, 'level': True,
+                   'fstop': 8.0, 'focus': [0.0, 0.2063, 0.80]}
+    out['back-mark-fog'] = b
+    # the coin, Ember: one coin standing on its edge, turned to the camera, about half the frame, 1:1, on the site's
+    # paper seamless. Its reflections come from a studio environment and one broad soft key, not the small square
+    # softbox that put the same square on every coin (the owner: "makes them look flat all over again")
+    c = shots.load('studio/shots/barkhorn/coin/site-coins-paper.json')
+    kit = c['set']['props'][0]
+    kit['spots'] = [{'position': [0.0, 0.0, 0.0200], 'flavour': 'ember', 'rotate': [90.0, 0.0, 25.0]}]
+    c['sky'] = {'kind': 'hdri', 'file': 'studio_small_03_1k', 'strength': 0.6, 'rotation_deg': 140.0}
+    c['lights'] = {'key': {'type': 'area', 'size_m': [1.0, 0.7], 'orbit': {'azimuth_deg': -40, 'elevation_deg': 35, 'distance_m': 1.4},
+                           'target': [0.0, 0.0, 0.02], 'irradiance': 2.0, 'color': '#FFF6EC', 'spread_deg': 60}}
+    c['camera'] = {'position': [0.10, -0.20, 0.075], 'target': [0.0, 0.0, 0.02], 'lens_mm': 100.0, 'level': False,
+                   'fstop': 11.0, 'focus': [0.0, 0.0, 0.02]}
+    c['size'] = [1200, 1200]
+    c['title'] = 'EARF coin, Ember, on its edge (its own reflection)'
+    out['coin-ember'] = c
     return out
 
 
