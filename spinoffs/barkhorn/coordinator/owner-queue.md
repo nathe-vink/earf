@@ -2311,3 +2311,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   at a time, each final to me for the gate; Smoke pictures wait; the back kick kept (a room light), not relied on for see-through.
   The Smoke question now blocks several pictures (the site's five Smoke frames, the bar's listening and bar-smoke, the Smoke habitat):
   it comes soon in the walkthrough.
+- 16:00 gates with server errors: Dust polished (wf_be9b18c7-951) returned 2 of 3 (the skeptic failed on an API 500): both SHOW ("better
+  than the satin version": the horn the cabinet's hue, crisp, the pod and posts through it, the X gone; the ground pixel-identical
+  to the passed satin frame; optional: a contact shadow or slight sand berm at the bottom-right; tiny rim specks at 4x). The lamps
+  round 8 (wf_4f3c151b-a95) returned 1 of 3 (two failed on API 500s); that one: Hemisphere day SHOW; Hemisphere night HOLD (the lip
+  an electric royal-blue line ~29 degrees bluer than the teal body, "a neon/LED edge ring"; the face a flat matte field with no
+  reflection; the cap pure black); Core A day HOLD (pastel milky, painted-looking); Core A night HOLD (a flat frosted disc, a hard
+  inner circle, the LED cone, smudges, the base lost in black); Core B (truncated). Both resumed for the missing critics (cached
+  results replay).
