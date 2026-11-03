@@ -85,6 +85,8 @@ It lifts the cabinet 20 mm.
 - **What it does:** the bottom bay and the lower cabinet get brighter, and the cabinet a little more evenly lit. The wall changes little. A real but small gain.
 - **What it costs acoustically:** **no bass**. The batts do not set the box's tuning, and the bottom batt is about 6 L of a 164 L box, so the port's tuning moves well under 1 Hz. It does weaken the damping of the cabinet's vertical standing wave, about 210 Hz for the 0.82 m inside height. The 100 mm top batt stays and damps the same mode at the other end. Expect at most a 1 to 2 dB ripple near 210 Hz, to measure on the first sample before the window is adopted. If it rings, a voile-only panel keeps the look with the batt back.
 
+**Adopted (the coordinator, 2026-11-03): the base uplight with the bottom-batt window.** The window is the bottom batt cut back to a frame round the centre panel's light. **Measure the ripple near 210 Hz on the first sample** before it ships; if it rings, the batt goes back whole. (The Cloud's CAD, `cloud.py`, still carries the whole bottom batt until that measurement.)
+
 **Against the underlit promo images** (`like/`, the uplit set's own stage, camera, moon, haze and exposure, only the plinth's own light at full; `like/sheet-like.png`: the uplit frame, then base, window and wash, Ice on top and Ember below):
 - **The base uplight lights the whole cabinet**, top to bottom, in its own colour, deeper than the promo's near-white interior.
 - **The promo's tall V up the wall is out of reach.** Its lamp put about 135 W of light under the speaker; the plinth's uplight gives about 10 W of light at full (34 W electrical). The wall here gets a shorter, dimmer fan: close in Ember, paler in Ice.
@@ -92,7 +94,7 @@ It lifts the cabinet 20 mm.
 - **The cabinet wash** (below) adds a brighter inside and a stronger glow at the ports and walls, and a little more on the wall.
 - **Closest to the promo look for the least change:** the base uplight with the bottom-batt window. No parts, and its glow already fills the cabinet. The next step toward the promo's wall is more light from the centre panel (a 40 W board in place of the 16 W one), not the wash.
 
-**The cabinet wash** (a proposal for the owner; `WASH` in `variants.py`, option "Cabinet wash", `cabinet-wash` in `components.json`):
+**The cabinet wash: not adopted** (the coordinator, 2026-11-03: it adds glow inside but not on the wall, puts 11 W into the box, and needs a connector through the bottom; kept in the CAD as an option; `WASH` in `variants.py`, option "Cabinet wash", `cabinet-wash` in `components.json`):
 - **What it is:** COB strips, 24 V, 10 W/m, 4000 K, 1.06 m a speaker, bonded to the bottom panel inside the cabinet at the foot of each side wall and of the front panel, between the wall and its lining, aimed up the wall. The back is left out (its land strip and the amplifier's compartment).
 - **How it is fed:** from the plinth's 24 V through a sealed, potted 2-pin connector in the bottom panel at a foot pad, mating with a spring contact in the plinth's top frame. The cabinet still lifts off its plinth with nothing to unplug.
 - **Cost:** about $60 a speaker (the strip $34, the connector and the spring contact about $15, fitting).
