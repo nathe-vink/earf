@@ -1369,3 +1369,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 10:11 sent to the speaker lane: the set lessons for D night before it finishes (wall close behind, dark glossy floor, low
   ambient, nothing at 0; no pool; emitter hidden, Ice hue; lantern not ring light; no hard bar; the fan on the wall). Smoke-D the
   same. The base question likely becomes "built in (D) or no light (A)", with B shown as tried and failed, if D passes.
+- 10:12 speaker lane: D night on the old set kept as a reference only (not gated); the queue stopped before Smoke. New set: the
+  wall 0.34 m behind with a tight cove, floor and wall dark glossy (#2A2D33, roughness 0.15), a low navy ambient (tuned so the
+  horn, posts, lid and right side read L 20-40, nothing at 0). The violet slot was the back floor strip seen down the batt's notch
+  past the rib: the run is split round the rib (model rebuilding, ~20 min). Can't fix by render: the edge glow of the clear caldera
+  rings and the polished cabinet edges (the "neon tube") is real acrylic; masking or frosting edges is a cabinet change, the owner's
+  call, flagged if it remains. Then a D-night proxy with numbers, then D night and Smoke-D black and white.
