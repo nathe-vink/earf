@@ -1212,3 +1212,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   B both sleeves FAIL (black above the port bay, sepia, a stop under). Both judges: A the most attractive; of the lit options B beats
   C; the night frames don't achieve the reference look. Speaker lane told (07:38; the message said 07:42): the asset fix first; B again with no extra fills,
   honest about what the real 40 W reaches; C only with masked tiers; Smoke cool white, neutral, +1 stop, both sleeves; A's polish.
+- 07:40 the base gate's third judge (skeptic) agrees: only A shows; B also fails light-down narrowly (the bottom panel's front edge a
+  white-blue line, a blue pool in front, the port chamber ~5x the top where the references run ~2x); C the worst underglow; Smoke
+  black above the ports, sepia. And the set is unfair (bright day A vs dim night B/C). Speaker lane told (07:41): shield the source,
+  the top chamber toward half the bottom if the real light can; B by day (and C by day if kept) on A's camera and light; the plate a
+  faint edge line.
