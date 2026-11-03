@@ -213,3 +213,15 @@ because 1/2 in 2064 would be a pale gray horn.
 - Under the owner's ruling, no starting color is promised: Smoke stays the pricing reference only.
 
 All TT figures are the "held" case, the central estimate until the chips are measured (`make/stock_tints.py`).
+
+## Acid's edges, and the physical samples to order (2026-11-03)
+
+**Acid's polished edges render coral-red** because the model's amber passes red completely: its absorption colour `#FFEB6C` has a red channel of 1.0, so along an edge's long path (0.3-0.42 m) only red survives, at 9 to 22 times the green. Fluorescence isn't modelled either. The real TruCast 9097 Fluorescent Yellow's edges glow yellow. A non-fluorescent amber would go orange at its edges, but 9097 doesn't. The model stays as it is in every shot (the coordinator, 2026-11-03: one look across the roll-out), so treat Acid's edges in any render as the model's, not the sheet's.
+
+**The samples to order** (the coordinator puts this list to the owner, with Smoke's):
+
+| sample | what it settles |
+|---|---|
+| TruCast 9097 Fluorescent Yellow, a chip with polished edges, photographed edge-on in daylight | Acid's edge colour (yellow glow, against the render's coral) |
+| Chemcast 2064 "Light Smoke" (TAP), an off-cut at 3/4 in | whether it passes about 45-55 % at 20 mm, the Smoke target (R1 gives 57.07 % at 0.118 in only) |
+| a Smoke horn sheet near 38 % through 10 mm | the Smoke horn's depth (`renders/2026-11-03/barkhorn/smoke-target/`) |

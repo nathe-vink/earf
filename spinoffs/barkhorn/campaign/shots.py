@@ -319,6 +319,47 @@ def deck_hero():
     return s
 
 
+def _hero_gate3(s):
+    """The deck hero's fixes (the coordinator's blind critics on 67f795ab, 2026-11-03, 3 HOLD): the same family as the
+    tall front's, on the same rig. The lower right side face mirrored the lit floor (pale pink, saturation about 0.2), the
+    top chamber clipped flat coral, and the lid's front edge read as a neutral grey strip. The tall front's fix carries
+    over whole (_siteG_round1: sidesheen and through off, a reflect-only black card where the right face's mirror ray
+    goes from this camera, the top light x0.65, the key 5 deg round), and the topline, the panel that put the lid's edge
+    line there, comes down to a third, so the edge reads dark red with a glint like the vertical edges."""
+    _siteG_round1(s, 'front-off-tall', 'ember')
+    if 'topline' in s['lights']:
+        s['lights']['topline']['strength'] = round(s['lights']['topline']['strength'] / 3, 3)
+    # (its proxy: the side face deep red, 0.58 to 0.83 saturation above, but the top chamber still clipped on 38 % and
+    # the lid's strip still grey, 170: from this camera, 0.4 m above the lid, the strip is the lid's top at a grazing
+    # angle mirroring the bright sweep behind, about 1.5 m left of the speaker at 2.6 m back. A reflect-only black card
+    # there, and the top light down again, to 0.4 of the rig's)
+    if 'horn' in s['lights'] and s['lights']['horn'].get('irradiance'):
+        s['lights']['horn']['irradiance'] = round(s['lights']['horn']['irradiance'] * 0.6, 3)
+    s['set'].setdefault('flags', []).append({'center_m': [-1.2, 2.5, 1.1], 'size_m': [2.6, 1.6], 'normal': [0.46, -0.88, -0.16],
+                                             'reflect_only': True, 'color': '#050505'})
+    # (the fourth proxy: the lower right face still brownish, saturation 0.45: from 0.4 m down, its mirror rays fall to
+    # the floor within a metre behind and right of the speaker, short of the card. A reflect-only black patch there)
+    s['set']['flags'].append({'center_m': [0.62, 0.75, 0.004], 'size_m': [0.9, 1.5], 'normal': [0.0, 0.0, 1.0],
+                              'reflect_only': True, 'color': '#050505'})
+    L = s['lights']
+    # (the top chamber, clipped coral on 26 % in a crop with all of the above: the key's light through the front onto the
+    # top chamber's linings. Without links (the coordinator, 2026-11-03: no light a real lamp cannot give), crop tests:
+    # the key at -60 deg (from -40): (205, 63, 63), 26 % at 250, to (170, 1, 2), 0 %, the woofer 64 to 53; at -52
+    # (180, 4, 5); at elevation 10 the clip worse, 64 %; the key at 0.6 with more fill (192, 46, 46), 0 %; AgX no clip
+    # but pink, (183, 87, 77). The key goes round to -60 and the fill up from 1.6 to 2.4: (175, 1, 2), the woofer 58)
+    if 'key' in L and 'orbit' in L['key']:
+        L['key']['orbit']['azimuth_deg'] = -60.0
+    if 'fill' in L and L['fill'].get('irradiance'):
+        L['fill']['irradiance'] = 2.4
+    # (the fifth proxy: the right face deep red, (52, 1, 1) low and (82, 23, 26) high, which shows the `edge` glint as a
+    # white bar a little in from its front edge, hidden before under the face's pale reflection: to a third)
+    if 'edge' in L and L['edge'].get('power_w'):
+        L['edge']['power_w'] = round(L['edge']['power_w'] / 3, 3)
+    honest_lights(s)                                       # the owner's rule (horn to specular 1, kick and back unlinked)
+    cards_out_of_frame(s)
+    return s
+
+
 SHOTS['deck-hero'] = deck_hero
 
 
@@ -374,7 +415,29 @@ def deck_row():
     return s
 
 
-SHOTS['deck-row'] = deck_row
+def _row_gate3(s):
+    """The deck row's fixes (the coordinator's blind critics, 2026-11-03, 2 HOLD 1 SHOW): the camera-right side faces
+    mirrored the white sweep and the key (Smoke's a silver panel, Ice and Haze milky) and each its neighbour (Poison a blue
+    stripe from Ice). A black card behind and right of the row, seen only in reflections (no shadow, no bounce), where the
+    side faces' mirror rays go (about +0.75 x, +0.66 y from a face turned -24 deg); the units a little wider apart; and the
+    sweep's falloff at the bottom left lifted by a soft lamp on the sweep alone."""
+    blk = s['products'][0]
+    n = len(blk['instances'])
+    for k, i in enumerate(blk['instances']):
+        i['position'] = [round((k - (n - 1) / 2) * 1.0, 4)] + list(i['position'][1:])
+    for blk2 in s['products'][1:]:
+        for k, i in enumerate(blk2['instances']):
+            i['position'] = [round((k - (n - 1) / 2) * 1.0, 4)] + list(i['position'][1:])
+    s['set'].setdefault('flags', []).append({'center_m': [2.2, 2.6, 0.9], 'size_m': [13.0, 2.6], 'normal': [-0.75, -0.66, 0.0],
+                                             'reflect_only': True, 'color': '#050505'})
+    s['lights']['sweep-left'] = {'type': 'area', 'size_m': [6.0, 4.0], 'position': [-4.5, -5.0, 4.0], 'target': [-3.5, -2.5, 0.0],
+                                 'irradiance': 1.2, 'color': '#FFFFFF', 'receivers': ['sweep']}
+    # (its proxy: the glossy sweep at the bottom right mirrors the card, 237 to 215; the same lamp on the right)
+    s['lights']['sweep-right'] = {**s['lights']['sweep-left'], 'position': [4.5, -5.0, 4.0], 'target': [3.5, -2.5, 0.0]}
+    return s
+
+
+SHOTS['deck-row'] = lambda: cards_out_of_frame(honest_lights(_row_gate3(deck_row())))
 
 
 def deck_cover():
@@ -400,13 +463,68 @@ def deck_cover():
     s['camera'] = {'position': [0.0, cam_y, 2.3], 'target': [0.0, 0.5, 0.62], 'lens_mm': 56.0, 'level': True,
                    'shift_y': 0.05, 'fstop': 5.6, 'focus': [0.0, 0.3, 0.7]}
     s['render']['samples'] = 128
+    # (its proxy after the hero's hold, 2026-11-03: Ember, at the left end turned to the camera, mirrored side_l in its
+    # front, a pale pink patch on the upper left, (197, 156, 155), 12 % at 250. Its mirror ray from the front reaches
+    # x -6 at y -3, z 0.2, inside that lamp's 0.6 x 3 m face. The lamp moves back to y -1.5, off that ray; Smoke's ray
+    # at the other end reaches x 7 at about y -4.2, well clear of side_r at y -1. No links: the coordinator's rule)
+    if 'side_l' in s['lights']:
+        s['lights']['side_l']['position'] = [-6.0, -1.5, 1.4]
+    # the owner's rule on light (the coordinator, 19:32 and 19:51): the cover's lamps linked to the panels or the drivers
+    # are unlinked, the cyc, top and over lamps light through glass, the fill and face show in reflections. Two lamps
+    # were only ever safe because of their links, so they get real controls instead: `smoke`, 80, linked to Smoke's parts
+    # alone, gets a honeycomb grid (30 deg) and aims at Smoke, so it does not wash Fog and its neighbours; `strip`, 70,
+    # linked to the drivers, lit nothing else, and unlinked at 70 it would light every front at ten times the face lamp:
+    # down to the face lamp's level, 6
+    L = s['lights']
+    honest_lights(s)
+    sm = s['products'][0]['instances'][-1]['position']
+    if 'smoke' in L:
+        L['smoke'].update(target=[sm[0], sm[1], 0.5], spread_deg=30)
+    if 'strip' in L:
+        L['strip']['irradiance'] = 6.0
     return s
 
 
 SHOTS['deck-cover'] = deck_cover
 # the deck's Home slide: the golden-hour room (754e16a9's scene, covers off) with the pair turned into the final design
-SHOTS['deck-home'] = lambda: dict(strata_lit(room_off(), glow=20.0), title='Tropos at home, golden hour, Poison (the final design)')
-SHOTS['deck-home-portrait'] = lambda: dict(strata_lit(room_off_portrait(), glow=20.0),
+def _room_gate3(s):
+    """The room's fixes (the coordinator's blind critics on the portrait, 2026-11-03, 2 HOLD 1 SHOW): the low sun raked
+    both bottom chambers at floor level, so the bottoms glowed green, the brightest part of each speaker, which reads as
+    a base light by day (the owner: no light). The windows get a sill at 0.9 m (their tops stay at 2.75) and the sun
+    goes down to 8 deg, so it reaches the left unit only above about 0.77 m and the right above about 0.41 m: the bottom
+    40 cm in shade, the light through the upper cabinets and the horns onto the wall behind. AgX in place of PBR
+    Neutral so the greens roll off, and 2/3 of a stop down; the left unit turned so its right side shows its green; the
+    right a little more, off the woofer's pinwheel shadow. The two leads (one to each unit's own outlet, behind it)
+    are kept."""
+    for w in s['set'].get('windows', []):
+        top = w['sill'] + w['size'][1]
+        w['sill'] = 0.9
+        w['size'] = [w['size'][0], round(top - 0.9, 3)]
+    # (its proof at -1.37: the fronts still dark boxes, the left 11 and the right 22 against the row's Poison front at
+    # 48.6. The sun at azimuth -68 reaches the left unit through the window nearest the back wall (along 2.75) and the
+    # right through the next (along 1.15), so that one window alone gets a lower sill, 0.55: the sun reaches the left
+    # unit from about 0.42 m up, its middle, while the right keeps its 0.41 m and both bottoms stay in shade)
+    for w in s['set'].get('windows', []):
+        if abs(w.get('along', 0) - 2.75) < 1e-6:
+            top = w['sill'] + w['size'][1]
+            w['sill'] = 0.55
+            w['size'] = [w['size'][0], round(top - 0.55, 3)]
+    s['sun']['elevation_deg'] = 8.0
+    s['render']['view'] = 'AgX'
+    # (its proxy: AgX sits about half a stop under PBR Neutral, so -2/3 left the cabinets near black: -2/3 + 1/2)
+    s['render']['exposure'] = round(s['render'].get('exposure', 0.0) - 0.17, 2)
+    for blk in s['products']:
+        for i in blk['instances']:
+            x = i['position'][0]
+            if x < 0:
+                i['rotate_z'] = 1.0
+            else:
+                i['rotate_z'] = -8.0
+    return s
+
+
+SHOTS['deck-home'] = lambda: dict(_room_gate3(strata_lit(room_off(), glow=20.0)), title='Tropos at home, golden hour, Poison (the final design)')
+SHOTS['deck-home-portrait'] = lambda: dict(_room_gate3(strata_lit(room_off_portrait(), glow=20.0)),
                                            title='Tropos at home, golden hour, Poison, portrait (the final design)')
 
 
@@ -464,7 +582,252 @@ def site(frame, tint):
     # rather than a cone (renders/2026-11-02/barkhorn/horn-study/deep/README.md): off; the rest of the rig as it was
     if 'rim' in s.get('lights', {}):
         s['lights']['rim']['power_w'] = 0.0
+    _siteG_round1(s, frame, tint)
+    if frame == 'hero-light':
+        _siteH_round1(s)
+    honest_lights(s)
+    if frame in ('front-off-tall', 'front-off-wide', 'side') and 'back' in s['lights']:
+        # (the honest rig's proxies, tall Ice and Ember: unlinked, the `back` lamp, behind the speaker and aimed through
+        # it at the floor, lit the floor beside it (176 to 229), and the lower right face, mirroring it, fell from
+        # saturation 0.56 to 0.46 (Ice) and 0.49 to 0.35 (Ember). A reflect-only patch on that floor is not allowed (the
+        # camera sees the floor: the coordinator, 20:17). Tests: the kick at half, floor 224, face 0.47; the kick on a
+        # 25 deg grid, 244 and 0.43; `back` at half, 215 and 0.49; `back` off, 197 and 0.51 (Ember 195 and 0.42), the
+        # front unchanged. `back` goes off)
+        s['lights']['back']['irradiance'] = 0.0
+        s['lights']['back'].pop('power_w', None)
+    cards_out_of_frame(s)
     return s
+
+
+_SET_NAMES = ('sweep', 'floor', 'wall', 'ceiling', 'cyc', 'room')
+
+
+def _set_only(recv):
+    return bool(recv) and all(any(r.startswith(n) for n in _SET_NAMES) for r in recv)
+
+
+def honest_lights(s, log=None):
+    """The owner's rule on light (the coordinator's rulings, 2026-11-03 19:32: "what's technically possible trumps what
+    looks cool"): no lamp lights something without also lighting, and showing in, everything else it reaches.
+    1. A lamp that lights the scene shows at full in reflections: a `specular` under 1 goes to 1.0, and a lamp held
+       off transmission (`transmission: false`) lights through glass again.
+    2. A lamp linked to some of the product's parts (receivers) lights everything it reaches: the link goes.
+    These stand: background lamps linked to the set alone (the sweep, the floor, a wall), at any specular (a background
+    light flagged off the subject, its head out of view); specular-only sources dimmed as a whole (an area lamp with
+    diffuse 0, such as `edge`; a panel with diffuse 0, a reflection card); flags. Returns the changes as text."""
+    out = []
+    for name, L in s.get('lights', {}).items():
+        if L.get('off') or L.get('type') == 'flag':
+            continue
+        recv = L.get('receivers')
+        if name.startswith('bg') and not recv and L.get('specular', 1.0) == 0.0:
+            # a background lamp lighting everything but showing in nothing: flagged off the subject instead, its light
+            # on the sweep alone (which stands), rather than at full in the side faces, which already mirror too much
+            out.append(f'{name}: unlinked at specular 0, now on the sweep alone')
+            L['receivers'] = ['sweep']
+            continue
+        spec_only = L.get('diffuse', 1.0) == 0.0
+        if _set_only(recv):
+            continue
+        if L.get('type') == 'panel':
+            if recv:     # a reflection card shown in some parts only: a part-link all the same
+                out.append(f'{name}: panel receivers {recv} removed')
+                del L['receivers']
+            if not spec_only and 'specular' in L and L['specular'] != 1.0:   # a lit panel hidden from reflections
+                out.append(f"{name}: panel specular {L['specular']} to 1.0")
+                L['specular'] = 1.0
+            continue
+        if spec_only:
+            continue
+        if recv:
+            out.append(f'{name}: receivers {recv[:3]}{"..." if len(recv) > 3 else ""} removed')
+            del L['receivers']
+        if 'specular' in L and L['specular'] != 1.0:
+            out.append(f"{name}: specular {L['specular']} to 1.0")
+            L['specular'] = 1.0
+        if L.get('transmission') is False:
+            out.append(f'{name}: transmission false removed')
+            del L['transmission']
+    if log is not None:
+        log.extend(out)
+    return s
+
+
+def _in_frame(s, pts):
+    """Whether any of the points lies inside the camera's frustum (no occlusion test: a card hidden behind the speaker
+    from one view is still in the frame)."""
+    import numpy as np
+    cam = s['camera']; c = np.array(cam['position'], float); f = np.array(cam['target'], float) - c
+    f /= np.linalg.norm(f); r = np.cross(f, [0.0, 0.0, 1.0]); r /= np.linalg.norm(r); u = np.cross(r, f)
+    W, H = s['size']; lens = cam['lens_mm']
+    hx, hy = (18.0, 18.0 * H / W) if W >= H else (18.0 * W / H, 18.0)
+    sx, sy = cam.get('shift_x', 0.0) * 2, cam.get('shift_y', 0.0) * 2
+    for p in pts:
+        d = np.array(p, float) - c; z = d @ f
+        if z <= 0:
+            continue
+        x = (d @ r) / z * lens / hx - sx; y = (d @ u) / z * lens / hy - sy
+        if abs(x) <= 1.02 and abs(y) <= 1.02:
+            return True
+    return False
+
+
+def _card_points(fl):
+    import math
+    cx, cy, cz = fl['center_m']; w, h = fl['size_m']; n = fl['normal']
+    if abs(n[2]) > 0.9:                                    # on the floor (or a ceiling): its plane is horizontal
+        ax, ay, az, bx, by, bz = 1.0, 0.0, 0.0, 0.0, 1.0, 0.0
+    else:
+        L = math.hypot(n[0], n[1]) or 1.0
+        ax, ay, az = -n[1] / L, n[0] / L, 0.0; bx, by, bz = 0.0, 0.0, 1.0
+    g = (-1.0, -0.5, 0.0, 0.5, 1.0)
+    return [(cx + a * w / 2 * ax + b * h / 2 * bx, cy + a * w / 2 * ay + b * h / 2 * by, cz + a * w / 2 * az + b * h / 2 * bz)
+            for a in g for b in g]
+
+
+def cards_out_of_frame(s, log=None):
+    """The coordinator's rule (2026-11-03 20:17): a reflect-only card is an out-of-frame flag or nothing. Each one inside
+    the camera's frustum slides away from the speaker along the line through it, growing in proportion so it holds the
+    same angle from the speaker, until no part of it is in frame, staying inside the studio (the sweep's depth and
+    width, or the room). A card on the floor cannot leave a frame that sees the floor, and goes; so does one that
+    cannot get out of frame inside the studio."""
+    st = s.get('set', {}); out = []
+    i0 = s['products'][0]['instances'][0]['position'] if s.get('products') else [0, 0, 0]
+    depth = st.get('depth', 1e9) - 0.2; half_w = st.get('width', 1e9) / 2 - 0.2
+    keep = []
+    for fl in st.get('flags', []):
+        if not fl.get('reflect_only') or not _in_frame(s, _card_points(fl)):
+            keep.append(fl); continue
+        if abs(fl['normal'][2]) > 0.9:
+            out.append(f"floor card at {fl['center_m']} in frame: removed"); continue
+        cx, cy, cz = fl['center_m']; rx, ry = cx - i0[0], cy - i0[1]
+        done = None
+        for k10 in range(11, 81):
+            k = k10 / 10
+            nc = [round(i0[0] + k * rx, 3), round(i0[1] + k * ry, 3), cz]
+            if nc[1] > depth or abs(nc[0]) > half_w:
+                break
+            cand = {**fl, 'center_m': nc, 'size_m': [round(fl['size_m'][0] * k, 3), round(fl['size_m'][1] * k, 3)]}
+            if cand['center_m'][2] - cand['size_m'][1] / 2 < -0.5:   # grown far below the floor: lift it to stand on it
+                cand['center_m'][2] = round(cand['size_m'][1] / 2 - 0.5, 3)
+            if not _in_frame(s, _card_points(cand)):
+                done = cand; break
+        if done:
+            out.append(f"card at {fl['center_m']} moved to {done['center_m']} at x{round(done['size_m'][0] / fl['size_m'][0], 1)}")
+            keep.append(done)
+        else:
+            out.append(f"card at {fl['center_m']} cannot leave the frame inside the studio: removed")
+    st['flags'] = keep
+    if log is not None:
+        log.extend(out)
+    return s
+
+
+def _mirror_card(s, dist=1.2, size=(1.8, 1.3), z=0.5):
+    """A reflect-only black card where the right side face's mirror ray goes from this camera, turned with the speaker
+    (the first instance), `dist` m beyond the face: the face then shows its own tint, not the white studio."""
+    import math
+    cam = s['camera']['position']
+    i = s['products'][0]['instances'][0]
+    a = math.radians(i.get('rotate_z', 0.0))
+    nx, ny = math.cos(a), math.sin(a)
+    px = i['position'][0] + 0.28 * nx; py = i['position'][1] + 0.28 * ny; pz = 0.45
+    dx, dy, dz = px - cam[0], py - cam[1], pz - cam[2]
+    m = math.sqrt(dx * dx + dy * dy + dz * dz); dx, dy = dx / m, dy / m
+    k = dx * nx + dy * ny
+    rx, ry = dx - 2 * k * nx, dy - 2 * k * ny
+    h = math.sqrt(rx * rx + ry * ry) or 1.0
+    rx, ry = rx / h, ry / h
+    s['set'].setdefault('flags', []).append({'center_m': [round(px + dist * rx, 3), round(py + dist * ry, 3), z],
+                                             'size_m': list(size), 'normal': [round(-rx, 3), round(-ry, 3), 0.0],
+                                             'reflect_only': True, 'color': '#050505'})
+
+
+def _floor_patch(s, z_lo=0.06, z_hi=0.42, margin=0.15):
+    """A reflect-only black patch on the floor where the right side face's lower mirror rays land from this camera
+    (turned with the speaker): with the kick and back lamps unlinked (the owner's rule) the floor beside the speaker is
+    lit, and the lower face mirrored it pale. None if those rays never reach the floor."""
+    import math
+    cam = s['camera']['position']
+    i = s['products'][0]['instances'][0]
+    a = math.radians(i.get('rotate_z', 0.0))
+    nx, ny = math.cos(a), math.sin(a)
+    tx, ty = -ny, nx                                         # along the face, front to back
+    pts = []
+    for along in (-0.2, 0.0, 0.2):
+        for z in (z_lo, (z_lo + z_hi) / 2, z_hi):
+            px = i['position'][0] + 0.28 * nx + along * tx; py = i['position'][1] + 0.28 * ny + along * ty
+            dx, dy, dz = px - cam[0], py - cam[1], z - cam[2]
+            k = dx * nx + dy * ny
+            rx, ry, rz = dx - 2 * k * nx, dy - 2 * k * ny, dz
+            if rz >= 0:
+                continue
+            u = z / -rz
+            pts.append((px + u * rx, py + u * ry))
+    if not pts:
+        return
+    xs, ys = [p[0] for p in pts], [p[1] for p in pts]
+    s['set'].setdefault('flags', []).append({'center_m': [round((min(xs) + max(xs)) / 2, 3), round((min(ys) + max(ys)) / 2, 3), 0.004],
+                                             'size_m': [round(max(xs) - min(xs) + 2 * margin, 3), round(max(ys) - min(ys) + 2 * margin, 3)],
+                                             'normal': [0.0, 0.0, 1.0], 'reflect_only': True, 'color': '#050505'})
+
+
+def _siteH_round1(s):
+    """hero-light's fixes (the coordinator's blind critics, 2026-11-03: Dust, Acid, Poison and Ice held). Studio31 is
+    an all-white surround with no flags. 1. Every right side face mirrored the white floor and cove behind-right (Poison
+    grey-green, saturation 0.24-0.31): a reflect-only black card on its mirror ray, turned with the speaker, so the arc's
+    turned frames get theirs. 2. The bottom panel's front edge glowed as a saturated bar with a tinted fringe in front:
+    `back-top`, a lamp behind and above aimed at the floor in front of the speaker (the tall rig's `through` under
+    another name), its light crossing the tinted cabinet, pooling on the floor and running along the bottom panel to its
+    polished edge, an underglow by day. Off. No links: the coordinator's rule."""
+    L = s['lights']
+    if 'back-top' in L:
+        L['back-top']['irradiance'] = 0.0
+    _mirror_card(s)
+    return s
+
+
+def _siteG_round1(s, frame, tint):
+    """The roll-out's gate on front-off-tall (the coordinator's blind critics, 2026-11-03): a hard white reflection over
+    the lower half of the right side face in every tint, the owner's "spray painted white". It is `sidesheen`, a
+    specular-only panel behind and right of the speaker put there so the side would read; tall, wide and side share it
+    (back and hero-light do not). It goes off, and a black card that only reflections see takes its place, where the
+    right face's mirror ray goes from this camera, so the face shows its own tint. The top light comes down a little so the
+    top batt keeps its tint, the key turns a little so no caustic starts at a foot, and Fog loses the -0.6 its old rig
+    carried, to match the other six."""
+    import math
+    if frame not in ('front-off-tall', 'front-off-wide', 'side'):
+        return
+    L = s['lights']
+    if 'sidesheen' in L:
+        L['sidesheen']['strength'] = 0.0
+    # (the proxies: with sidesheen off the lower right face still read pale, 226 to 220. The rest was `through`, a small
+    # lamp behind the speaker aimed through it at the floor, whose image sat in that face: off, 220 to 156 and the
+    # face's saturation 0.47 to 0.58; the floor's coloured light is the key's and stays. Only the tall rig has it)
+    if 'through' in L:
+        L['through']['irradiance'] = 0.0
+    if 'horn' in L and L['horn'].get('irradiance'):
+        L['horn']['irradiance'] = round(L['horn']['irradiance'] * 0.65, 3)
+    if frame == 'front-off-wide' and 'topline' in L:
+        L['topline']['strength'] = round(L['topline']['strength'] * 0.65, 3)
+    if 'key' in L and 'orbit' in L['key']:
+        L['key']['orbit']['azimuth_deg'] = L['key']['orbit']['azimuth_deg'] - 5.0
+    if tint == 'fog':
+        s['render']['exposure'] = 0.0
+    # the card: from the camera to the middle of the right face, mirrored in the face, 1.2 m on
+    cam = s['camera']['position']
+    i = s['products'][0]['instances'][0]
+    a = math.radians(i.get('rotate_z', 0.0))
+    nx, ny = math.cos(a), math.sin(a)                       # the right face's normal, turned with the speaker
+    px = i['position'][0] + 0.28 * nx; py = i['position'][1] + 0.28 * ny; pz = 0.45
+    dx, dy, dz = px - cam[0], py - cam[1], pz - cam[2]
+    m = math.sqrt(dx * dx + dy * dy + dz * dz); dx, dy, dz = dx / m, dy / m, dz / m
+    k = dx * nx + dy * ny
+    rx, ry, rz = dx - 2 * k * nx, dy - 2 * k * ny, dz
+    h = math.sqrt(rx * rx + ry * ry) or 1.0
+    rx, ry = rx / h, ry / h
+    s['set'].setdefault('flags', []).append({'center_m': [round(px + 1.2 * rx, 3), round(py + 1.2 * ry, 3), 0.5], 'size_m': [1.8, 1.3],
+                                             'normal': [round(-rx, 3), round(-ry, 3), 0.0], 'reflect_only': True, 'color': '#050505'})
 
 
 def _siteF_round3(s, frame):

@@ -19,6 +19,12 @@ This installs two Pythons, on purpose:
 
 Never install CAD packages into the system Python.
 
+**Check Pillow on the render Python before you render** (2026-11-03: c3's room31 shot failed with `cannot import name '_imaging' from 'PIL'`):
+
+    python3.11 -c "from PIL import Image, ImageDraw, ImageFont"
+
+If it fails, run `python3.11 -m pip install --user --ignore-installed --no-deps pillow` (what worked on c2 and c4; numpy stays 1.26.4) (or re-run `studio/setup.sh`, which does it since this fix). Ubuntu's `python3-pil` is built for 3.12 only, so a bare `import PIL` passes and hides the failure.
+
 ## 3. The two render models (not in git; both are rebuilt from the code at your SHA)
 
 Run each build as a tracked background task, one after the other, never side by side:
@@ -30,7 +36,9 @@ Run each build as a tracked background task, one after the other, never side by 
         # writes spinoffs/barkhorn/variants/out/render/barkhorn-variants.glb (about 16 MB); about 21 min alone,
         # 30 or more beside another job
 
-Check both files exist before you render. Don't rebuild a model while a render runs: a render reads the models only in its first minute, but a half-written file breaks it.
+Check both files exist before you render.
+
+**The build rewrites a tracked file: `studio/products/barkhorn-variants.json`** (c2 saw this, 2026-11-03). `render_model.py` writes it from `product.py`, so its 17 `horn-satin` entries come out at roughness 0.05. That is the polished horn (the owner, 15:14): `FORMED_HORN_SATIN = 0.05`, and the material keeps its old name. Before 0.05 was committed (the commit that adds this note), the file in git still said 0.25, from a build made before the decision. The shots set 0.05 for polished anyway (`strata_lit`), so no render was affected. Since this commit, your build should leave the file unchanged. **Never commit the file from a helper branch, and never revert it.** If your copy shows the diff before a merge, discard your copy first, so the merge doesn't stop on a local change: `git checkout -- studio/products/barkhorn-variants.json`. Don't rebuild a model while a render runs: a render reads the models only in its first minute, but a half-written file breaks it.
 
 ## 4. The Poly Haven cache (not in git)
 
@@ -90,6 +98,19 @@ Smoke's five site frames are held back (`--hold smoke`) while its sheet is open,
 The held shots: site-front-off-tall-smoke, site-front-off-wide-smoke, site-hero-light-smoke, site-side-smoke and site-back-smoke. Run them later, with `--hold ''`, once Smoke's sheet is set.
 
 ## Phase 2: the rest of the site (proposed 2026-11-03; no renders until the coordinator confirms)
+
+**Approved** by the coordinator, 2026-11-03 15:44. To move a helper from phase 1 to phase 2, after its last phase-1 chunk has landed and been pushed:
+
+    git fetch origin r33-speaker-horn
+    git merge --no-edit 9db8da171425bd5ca89ad439f9e0aeecda211c7b     # on your own branch: a merge, never a rebase or a force-push
+    git push -q -u origin <your-branch>
+    python3 spinoffs/barkhorn/campaign/rollout.py --phase 2 --base A --horn polished --hold smoke --chunks <yours>
+    bash spinoffs/barkhorn/campaign/rollout/A-polished-p2/queue-NN.sh      # each chunk its own tracked task, one at a time
+
+- **The models need no rebuild.** Between 5295e58f and 9db8da17 only `rollout.py`, this file and some committed renders changed. No product file and no CAD source changed, so the two `.glb` models built at 5295e58f are still right.
+- **The merge can't conflict:** a helper's branch holds only its own renders under `renders/2026-11-04/barkhorn/rollout/`.
+- **Where phase 2's renders go:** `renders/2026-11-04/barkhorn/rollout/A-polished-p2/`. Commit and report them as in phase 1.
+- **Your chunks:** c2: 1, 4, 9. c3: 2, 5, 10. c4: 3, 6. The speaker lane: 7, 8. Chunk 1 holds Sound's Ice arc; if your container is the first to finish phase 1, say so, and the coordinator may give you chunk 1 first.
 
     python3 spinoffs/barkhorn/campaign/rollout.py --phase 2 --base A --horn polished --hold smoke --chunks <yours>
 
