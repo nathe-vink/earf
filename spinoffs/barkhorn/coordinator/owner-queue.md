@@ -1330,3 +1330,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   $100", "28 W" and "6-7 degrees" at 08:02: correct to $130, 33 W, +7 degrees in the next owner message.
 - 09:46 gate wf_4f6468e4-f67 (earf-speaker-gate-v2: per-frame "meant to show", test 7 "not cheap", the site's uplit refs) on
   A (a47ae365, sha256 9f1c0076), B day (a7decd22), B night 4 (ace4ede3), B night 5 (061cb51e). Ack sent to the lane 09:47.
+- 09:56 Mantle lane g2 (frames b7687c4819b924e972d1c52bce4fc318087d4f19; model 5c3c96a6; README 48cc53eb): reflector tape round
+  the core (white in, black out, about $1 a deck), edges dark; the 10 mm tinted border kept (truer to Strata Float), the rings'
+  tops printed black so no light reaches it (full-bleed would show a grey band behind the tape); the top graded 0.75 rim to 1.1
+  field, Poison's glow 8 to 12; the night key and kicker gone, one 0.6 W warm rim below the record's plane (the record stays
+  black; the room 0.3 % of day); the day glint was the bearing's brass nut and washer, now chemically blackened. Floor neutral and
+  identical in both nights. Cost unchanged (+$120-150, $3,897); deck 24.6 mm awaits sign-off. Gate wf_e731b155-c40 started
+  (same script and tests as g1; sha256 night Ember 2a961826, night Poison e7e4d48a, day 4130c44c).
