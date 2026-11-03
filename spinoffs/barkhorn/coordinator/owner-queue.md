@@ -1779,3 +1779,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   49 % black pixels; horn 1.8, wall 2.7, wall saturation 0.99), changed without a proxy. Fix: the fill ~3x and a less saturated slate
   #4A5566; one proxy (horn >= 20, wall >= horn, no pinwheel, saturation), then the full frame, ~20 min. Told 13:54: go ahead (needed if
   the owner says "lantern"; dropped on "no light").
+- 14:01 Mantle lane: option C rendered (frames aa588ccf0d981e9d41954a7882cfd68d177ac4de; model e9d91609; README 0f259761;
+  mantle_strata_v5.py, 0 clashes, $3,897 parts): the print graded by distance from the spindle (60 % under the platter, thinning to clear
+  by 230 mm); the border clear tinted glass; the black edge paint and tape kept. Fed from the CENTRE, not the rim (a rim strip would show
+  as a line by day and a lit line at night): an octagonal groove at r 78 under the platter (eight straight COB runs, 0.54 m at 4 W/m,
+  ~2.2 W); at night a halo centred under the platter fading into clear glass; by day the outer zone clear, the float visible. ~+$130-150
+  a unit over v3. The leak: TIR keeps the clear zone's light in; the base top under it gets the Fresnel share, ~R 11 (~4 % of the field),
+  "a faint spill, not a pool"; the glossy night floor mirrors the lit top (a reflection a judge may misread). Gate wf_34897c83-4f0 on C
+  (night, day) with A's g5 pair for comparison started 14:02.
