@@ -150,3 +150,9 @@ if [ "$1" = c3d ]; then
 r a5-night-ember-2423-c3d --model out-strata-v5 --colour ember-2423 --strip 0 --cct 4000 --ambient 0.003 --exposure -1.5 --night-room 35 --wall-wash 6 --samples 192 --core-glow 2.6 --cover-max 0.24 --cover-floor 0.05 --look "AgX - Base Contrast" $C9 --edge-fade 0.02 --ring-white --ring-albedo 0.10
 r a5-day-ember-2423-c3d --model out-strata-v5 --colour ember-2423 --day --strip 0 --core-glow 5 --cover-max 0.15 --cover-floor 0.15 --strip-color 0.848 0.124 0.168 --exposure -2.0 $C9 --edge-fade 0.02 --ring-white --ring-albedo 0.10
 fi
+# the C3d pair re-rendered from the build after rulings 1-3 (the strip channel's ray hiding removed; the coordinator,
+# 20:17): the same settings as c3d, diffed against it full frame; it replaces the pair only if the difference is noise
+if [ "$1" = c3e ]; then
+r a5-night-ember-2423-c3e --model out-strata-v5 --colour ember-2423 --strip 0 --cct 4000 --ambient 0.003 --exposure -1.5 --night-room 35 --wall-wash 6 --samples 192 --core-glow 2.6 --cover-max 0.24 --cover-floor 0.05 --look "AgX - Base Contrast" $C9 --edge-fade 0.02 --ring-white --ring-albedo 0.10
+r a5-day-ember-2423-c3e --model out-strata-v5 --colour ember-2423 --day --strip 0 --core-glow 5 --cover-max 0.15 --cover-floor 0.15 --strip-color 0.848 0.124 0.168 --exposure -2.0 $C9 --edge-fade 0.02 --ring-white --ring-albedo 0.10
+fi
