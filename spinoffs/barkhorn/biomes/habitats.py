@@ -46,6 +46,9 @@ SETS = {
 }
 # set props left out (the coordinator's gate on Dust, 2026-11-03: the tumbleweed floats, its shadow detached)
 DROP = {'dust': ['tumbleweed']}
+# set props changed per habitat, by fn: Haze's visible sun disk (an emitter in the set) moved with the key to the sun
+# lamp's azimuth and elevation, out of frame, so the light in the picture has one source (the coordinator, 17:29)
+MODIFY = {'haze_b': {'sundisk': {'azimuth': 100.0, 'elevation': 6.0}}}
 # feet bedding per habitat (m; default 0.012, the cabinet on the ground). Acid stands in a puddle: at 12 mm its bottom sat
 # exactly on the water, and the water reflected a band of sky between the edge and its reflection (the gate: "hovers")
 SINK = {'acid_b': 0.03, 'ice': 0.022}   # Ice ~1 cm deeper: light showed under its left front corner in the snow
@@ -66,9 +69,10 @@ def main():
         tint, lights = HABITATS[n]
         shot = os.path.join(SHOTS, f'{n}-portrait.json' if a.frame == 'portrait' else f'{n}.json')
         out = os.path.join(a.out, f'{n}-{a.frame}.png')
-        if n in DROP:
+        if n in DROP or n in MODIFY:
             sh = json.load(open(shot))
-            sh['set']['props'] = [p for p in sh['set']['props'] if p.get('fn') not in DROP[n]]
+            sh['set']['props'] = [dict(p, **MODIFY.get(n, {}).get(p.get('fn'), {})) for p in sh['set']['props']
+                                  if p.get('fn') not in DROP.get(n, [])]
             shot = out.replace('.png', '.src.json')
             json.dump(sh, open(shot, 'w'), indent=1)
         # horn A on its own M8 feet (base A and its light left out), direct light stopped at the horn
