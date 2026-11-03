@@ -493,6 +493,28 @@ The third judge (08:17) added five fixes. All of them are in the frames:
 | `a4-night-poison-2092-g1.png` | Poison at night after the gate's fixes |
 | `a4-day-ember-2423-g1.png` | Ember by day after the gate's fixes |
 
+### The gate's second pass (09:30)
+
+The three judges found the underglow fixed: there is no colored light on the floor or the base in either night. Five
+notes were left; each is fixed in the model or the scene, not per frame (`render_lantern.sh g2`).
+
+- **No light out of the edges.** A white-backed reflector tape now runs round the core's perimeter, white toward the
+  core and black outside (3M or Oracal kind, about $1 a deck). The core's light leaves only up, through the dots, and
+  the four edge faces read as dark tinted glass at night.
+- **No lit border.** I kept the 10 mm tinted border, which is truer to Strata Float, since the deck's edge stays tinted
+  glass, not a clear core edge. The rings' tops are printed black before the skin is cemented on, so no light reaches
+  the border.
+  - The cost of that: by day the border and the edges read as dark tinted glass round a ruby field, not as the
+    richest red.
+  - Taking the tint full-bleed would mean a clear core edge behind reflector tape, a grey band on every edge. I chose
+    the border.
+- **The top carries the glow.** It is graded brighter in the field than at the rim. Poison's glow is raised, so its
+  top is the light source.
+- **No white key at night.** The large reflector and the front kicker are gone. A single low rim sits behind and
+  under the record's plane, so the vinyl cannot mirror it, and gives the posts, the base and the feet their shape.
+- **No amber glint by day.** The bearing's nut, washer and housing under the deck are chemically blackened on the
+  brass, so they no longer read as a light left on.
+
 ### The render (how the light is drawn)
 
 The guide's output is drawn as an even Lambertian glow just above the print: 9 W/m2. That figure follows from the
