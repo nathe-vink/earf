@@ -608,8 +608,19 @@
      "deep": "#5A5854",
      "radius": 0.01,
      "roughness": 0.05
+    },
+    "horn-formed": {
+     "deep": "#5A5854",
+     "radius": 0.01,
+     "roughness": 0.05
+    },
+    "horn-satin": {
+     "deep": "#5A5854",
+     "radius": 0.01,
+     "roughness": 0.25
     }
-   }
+   },
+   "horn_formed": "#5A5854"
   },
   "eucalyptus-y2k-green": {
    "bark": "clear_resin",
@@ -643,9 +654,22 @@
      "sheen": 0.7,
      "subsurface": 0.4,
      "cloud": 0.09
+    },
+    "horn-formed": {
+     "deep": "#0DA41C",
+     "radius": 0.01,
+     "roughness": 0.05,
+     "ior": 1.49
+    },
+    "horn-satin": {
+     "deep": "#0DA41C",
+     "radius": 0.01,
+     "roughness": 0.25,
+     "ior": 1.49
     }
    },
-   "tint": "TruCast 2092 Green depth, custom batch at 32.3 % through 20 mm"
+   "tint": "TruCast 2092 Green depth, custom batch at 32.3 % through 20 mm",
+   "horn_formed": "#0DA41C"
   },
   "birch-y2k-ice": {
    "bark": "clear_resin",
@@ -672,8 +696,21 @@
      "radius": 0.01,
      "roughness": 0.05,
      "milk": 0.0
+    },
+    "horn-formed": {
+     "deep": "#F1F1EE",
+     "radius": 0.01,
+     "roughness": 0.05,
+     "milk": 0.0
+    },
+    "horn-satin": {
+     "deep": "#F1F1EE",
+     "radius": 0.01,
+     "roughness": 0.25,
+     "milk": 0.0
     }
-   }
+   },
+   "horn_formed": "#F1F1EE"
   },
   "birch-stone-terrazzo": {
    "bark": "terrazzo",
@@ -775,8 +812,35 @@
       0.6
      ],
      "vein": "#3F4A1E"
+    },
+    "horn-formed": {
+     "deep": "#4C6A36",
+     "radius": 0.01,
+     "roughness": 0.05,
+     "milk": 0.12,
+     "cloud": 1.0,
+     "cloud_m": 0.13,
+     "cloud_edge": [
+      0.47,
+      0.6
+     ],
+     "vein": "#3F4A1E"
+    },
+    "horn-satin": {
+     "deep": "#4C6A36",
+     "radius": 0.01,
+     "roughness": 0.25,
+     "milk": 0.12,
+     "cloud": 1.0,
+     "cloud_m": 0.13,
+     "cloud_edge": [
+      0.47,
+      0.6
+     ],
+     "vein": "#3F4A1E"
     }
-   }
+   },
+   "horn_formed": "#4C6A36"
   },
   "birch-marbled": {
    "bark": "marbled_resin",
@@ -986,8 +1050,25 @@
      "cloud": 1.0,
      "vein": "#5E5B56",
      "cloud_m": 0.3
+    },
+    "horn-formed": {
+     "deep": "#E2E0DA",
+     "radius": 0.01,
+     "roughness": 0.05,
+     "cloud": 1.0,
+     "vein": "#5E5B56",
+     "cloud_m": 0.3
+    },
+    "horn-satin": {
+     "deep": "#E2E0DA",
+     "radius": 0.01,
+     "roughness": 0.25,
+     "cloud": 1.0,
+     "vein": "#5E5B56",
+     "cloud_m": 0.3
     }
-   }
+   },
+   "horn_formed": "#E2E0DA"
   },
   "eucalyptus-swirled": {
    "bark": "clear_resin",
@@ -1019,8 +1100,25 @@
      "cloud": 1.0,
      "vein": "#4F6A2C",
      "cloud_m": 0.3
+    },
+    "horn-formed": {
+     "deep": "#DCCB98",
+     "radius": 0.01,
+     "roughness": 0.05,
+     "cloud": 1.0,
+     "vein": "#4F6A2C",
+     "cloud_m": 0.3
+    },
+    "horn-satin": {
+     "deep": "#DCCB98",
+     "radius": 0.01,
+     "roughness": 0.25,
+     "cloud": 1.0,
+     "vein": "#4F6A2C",
+     "cloud_m": 0.3
     }
-   }
+   },
+   "horn_formed": "#DCCB98"
   },
   "birch-marbled-cobalt": {
    "bark": "marbled_resin",
@@ -1374,11 +1472,24 @@
      "sheen": 0.7,
      "subsurface": 0.4,
      "cloud": 0.09
+    },
+    "horn-formed": {
+     "deep": "#DFD710",
+     "radius": 0.01,
+     "roughness": 0.05,
+     "ior": 1.49
+    },
+    "horn-satin": {
+     "deep": "#DFD710",
+     "radius": 0.01,
+     "roughness": 0.25,
+     "ior": 1.49
     }
    },
    "horn_deep_site_hue": "#F2B705",
    "tint": "TruCast 9097 Fluorescent Yellow",
-   "horn_deep_dye": "#FFB101"
+   "horn_deep_dye": "#FFB101",
+   "horn_formed": "#DFD710"
   },
   "cloud-violet": {
    "bark": "clear_resin",
@@ -1412,9 +1523,22 @@
      "sheen": 0.7,
      "subsurface": 0.4,
      "cloud": 0.09
+    },
+    "horn-formed": {
+     "deep": "#9C5DE3",
+     "radius": 0.01,
+     "roughness": 0.05,
+     "ior": 1.49
+    },
+    "horn-satin": {
+     "deep": "#9C5DE3",
+     "radius": 0.01,
+     "roughness": 0.25,
+     "ior": 1.49
     }
    },
-   "tint": "TruCast 2287 Violet depth, custom batch at 25.8 % through 20 mm"
+   "tint": "TruCast 2287 Violet depth, custom batch at 25.8 % through 20 mm",
+   "horn_formed": "#9C5DE3"
   },
   "cloud-orange": {
    "bark": "clear_resin",
@@ -1448,11 +1572,24 @@
      "sheen": 0.7,
      "subsurface": 0.4,
      "cloud": 0.09
+    },
+    "horn-formed": {
+     "deep": "#DFA934",
+     "radius": 0.01,
+     "roughness": 0.05,
+     "ior": 1.49
+    },
+    "horn-satin": {
+     "deep": "#DFA934",
+     "radius": 0.01,
+     "roughness": 0.25,
+     "ior": 1.49
     }
    },
    "horn_deep_site_hue": "#E0661C",
    "tint": "TruCast 2422 Orange (amber)",
-   "horn_deep_dye": "#F25508"
+   "horn_deep_dye": "#F25508",
+   "horn_formed": "#DFA934"
   },
   "cloud-blue": {
    "bark": "clear_resin",
@@ -1486,11 +1623,24 @@
      "sheen": 0.7,
      "subsurface": 0.4,
      "cloud": 0.09
+    },
+    "horn-formed": {
+     "deep": "#0A52B8",
+     "radius": 0.01,
+     "roughness": 0.05,
+     "ior": 1.49
+    },
+    "horn-satin": {
+     "deep": "#0A52B8",
+     "radius": 0.01,
+     "roughness": 0.25,
+     "ior": 1.49
     }
    },
    "horn_deep_site_hue": "#3C86C2",
    "tint": "TruCast 2069 Tinted Blue",
-   "horn_deep_dye": "#2981E7"
+   "horn_deep_dye": "#2981E7",
+   "horn_formed": "#0A52B8"
   },
   "cloud-red": {
    "bark": "clear_resin",
@@ -1524,9 +1674,22 @@
      "sheen": 0.7,
      "subsurface": 0.4,
      "cloud": 0.09
+    },
+    "horn-formed": {
+     "deep": "#C50206",
+     "radius": 0.01,
+     "roughness": 0.05,
+     "ior": 1.49
+    },
+    "horn-satin": {
+     "deep": "#C50206",
+     "radius": 0.01,
+     "roughness": 0.25,
+     "ior": 1.49
     }
    },
-   "tint": "TruCast 2423 Red"
+   "tint": "TruCast 2423 Red",
+   "horn_formed": "#C50206"
   },
   "cloud-black": {
    "bark": "clear_resin",
@@ -1553,9 +1716,22 @@
      "radius": 0.01,
      "roughness": 0.05,
      "ior": 1.49
+    },
+    "horn-formed": {
+     "deep": "#787B7E",
+     "radius": 0.01,
+     "roughness": 0.05,
+     "ior": 1.49
+    },
+    "horn-satin": {
+     "deep": "#787B7E",
+     "radius": 0.01,
+     "roughness": 0.25,
+     "ior": 1.49
     }
    },
-   "tint": "TruCast 2074 Dark Gray"
+   "tint": "TruCast 2074 Dark Gray",
+   "horn_formed": "#787B7E"
   },
   "birch-fog-clear": {
    "bark": "clear_resin",
@@ -1589,9 +1765,22 @@
      "sheen": 0.7,
      "subsurface": 0.4,
      "cloud": 0.09
+    },
+    "horn-formed": {
+     "deep": "#FFFFFF",
+     "radius": 0.01,
+     "roughness": 0.05,
+     "ior": 1.49
+    },
+    "horn-satin": {
+     "deep": "#FFFFFF",
+     "radius": 0.01,
+     "roughness": 0.25,
+     "ior": 1.49
     }
    },
-   "tint": "TruCast 0000 Clear"
+   "tint": "TruCast 0000 Clear",
+   "horn_formed": "#FFFFFF"
   },
   "birch-fog-opal": {
    "bark": "clear_resin",
@@ -1618,8 +1807,21 @@
      "radius": 0.01,
      "roughness": 0.05,
      "milk": 0.18
+    },
+    "horn-formed": {
+     "deep": "#F1F1EE",
+     "radius": 0.01,
+     "roughness": 0.05,
+     "milk": 0.18
+    },
+    "horn-satin": {
+     "deep": "#F1F1EE",
+     "radius": 0.01,
+     "roughness": 0.25,
+     "milk": 0.18
     }
-   }
+   },
+   "horn_formed": "#F1F1EE"
   },
   "stock-smoke": {
    "bark": "clear_resin",
@@ -1644,8 +1846,19 @@
      "deep": "#787B7E",
      "radius": 0.01,
      "roughness": 0.05
+    },
+    "horn-formed": {
+     "deep": "#787B7E",
+     "radius": 0.01,
+     "roughness": 0.05
+    },
+    "horn-satin": {
+     "deep": "#787B7E",
+     "radius": 0.01,
+     "roughness": 0.25
     }
-   }
+   },
+   "horn_formed": "#787B7E"
   },
   "stock-ember": {
    "bark": "clear_resin",
@@ -1670,8 +1883,19 @@
      "deep": "#E02B3A",
      "radius": 0.01,
      "roughness": 0.05
+    },
+    "horn-formed": {
+     "deep": "#E02B3A",
+     "radius": 0.01,
+     "roughness": 0.05
+    },
+    "horn-satin": {
+     "deep": "#E02B3A",
+     "radius": 0.01,
+     "roughness": 0.25
     }
-   }
+   },
+   "horn_formed": "#E02B3A"
   },
   "stock-ember-trucast": {
    "bark": "clear_resin",
@@ -1696,8 +1920,19 @@
      "deep": "#E02B3A",
      "radius": 0.01,
      "roughness": 0.05
+    },
+    "horn-formed": {
+     "deep": "#E02B3A",
+     "radius": 0.01,
+     "roughness": 0.05
+    },
+    "horn-satin": {
+     "deep": "#E02B3A",
+     "radius": 0.01,
+     "roughness": 0.25
     }
-   }
+   },
+   "horn_formed": "#E02B3A"
   }
  },
  "options": {
