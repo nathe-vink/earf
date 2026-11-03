@@ -1663,3 +1663,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   field; the painted and taped edges as glossy black, the smoked base glossy and faintly see-through; Ember night down a third with
   reflections, a gentle real falloff, the colour off pure sRGB red (view transform), the arm lit, a neutral rim, no arcs. And the
   design question: is "lacquer by day, lightbox at night" inherent to the v4 layered deck? If so, the options and costs go to the owner.
+- 12:39 biomes lane, a correction to its 12:24: the feet were always under the cabinet (bottom at z 0.012); 936ae297 changes nothing in
+  practice. The real cause: settle() seats on the HIGHEST corner hit, so on displaced crust or rippled sand the other corners hang over
+  dips. Ember g2 (feet sunk 6 mm, rotate_z -1) seats (ground under the base 14.2 vs the base's 16.5 at 390 px; the side's hot streak
+  gone); g3's front lava lamp lit the white lining (an orange haze), left out. Dust needs 12 mm in the ripples (proxy running); if it
+  seats, every habitat gets 12 mm. Sand bounce 0.35 lifts the horn's bottom wall 54 to 60 without whitening; the throat's "soot" is the
+  driver through backlit satin (the horn-finish question). Dust's honest hue: 36 degrees through 3 mm, 33 through one 20 mm wall, 29
+  through two; the deep-lot horn 9 at 20 mm; the frame's 19-20 is the deep horn plus the white lining under a low warm sun: the honest
+  lever for a warmer orange is the light, not the tint.
