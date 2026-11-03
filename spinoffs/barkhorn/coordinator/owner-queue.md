@@ -1217,3 +1217,14 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   black above the ports, sepia. And the set is unfair (bright day A vs dim night B/C). Speaker lane told (07:41): shield the source,
   the top chamber toward half the bottom if the real light can; B by day (and C by day if kept) on A's camera and light; the plate a
   faint edge line.
+- 07:44 speaker lane's asset check: every clear panel closes once its glTF split vertices are welded (normals out); horn A closes
+  (the Nov 1 .blend's horn collapse fixed, f75f58a); the clear material passes shadow rays. Measured B-ice proxies on the right
+  lining, port chamber to top: 186, 88 | 9, 12, 16, 14, 13; brace removed: no change; caustics on: top +5, the gain on the wall and
+  floor (forbidden). So the top chamber is 7-14x darker from distance (40 W under the floor, the bottom batt, the woofer basket):
+  physics, not the mesh. No asset fix makes the 40 W panel reach the lantern look. Smoke's lining is black in the product and the
+  asset. Testing: a hidden source on the brace aimed up into the woofer chamber (0.40 x 0.20 m, a few W); if it gets the top to
+  about half the bottom, the honest design is a second LED strip on the brace (a proposal, the owner's call). Then B with no fills,
+  Smoke cool/neutral +1 stop, B by day, the plate's edge line, A's polish, C masked if cheap.
+- 07:46 biomes lane told: their open volumes were most likely unwelded glTF split vertices in their own build; weld on import,
+  keep the asset's volume material, take horn A from the speaker lane's rebuilt asset (f75f58a), compare against their
+  surface-tint version and keep the one that matches the speaker lane's renders; Smoke on black.
