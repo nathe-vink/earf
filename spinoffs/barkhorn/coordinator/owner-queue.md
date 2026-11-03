@@ -2464,3 +2464,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   sheet is set, the row re-renders or that speaker is comped. Running: the revised Smoke-target proxy, then its full frame, then
   chunk 1 (the hero), then 3 and 4.
 - 17:09 my gate on the deck row and the deck home portrait (c3's chunk 05) started (Ice polished as context).
+- 17:11 bar lane: r43-listening re-staged (renders/2026-11-03/barkhorn/planet-tropos-a/r43-listening.png; 1200 x 800 at 256 samples, 243 s,
+  2.4 GiB; the SHA in its next message): the camera 0.8 m across (y 5.30 to 6.05, re-aimed), the cabinet and horn now before the lit
+  plaster wall (mean 116), the doorway clear above-left; each pair's spot (stack0/1, from the room side, above) re-aimed from the old
+  plinth height (z 1.55) to the cabinet (z 0.70), 300 W at 26 degrees (was 80 W, 32); no new lamp; 256 samples for the lower chamber.
+  Measured (cabinet box 835-985 x 400-605): mean 60 (was 39), near-black 20 % (was 46-48), lower chamber 46 (was 21-26); short of the
+  70-80 target (more key puts a hot pool on the floor and curtain; exposure unchanged). Ember matches the sheet (TruCast 2423, #CF0913
+  at 25 mm: ~15 % through one 20 mm wall, ~10 % through two; TINTS.md stock 2423 14.1 %): deep by spec, see-into rather than open.
+  r44-lantern was rendered before my staging note but has the lit oak slat wall behind and the pair's spots as key.
