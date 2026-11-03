@@ -222,9 +222,9 @@ def light(p):
     in print: the uplit eight, with the eight names and lines beneath."""
     # the explainer and the number go; the section's line stays, small, at the top of the frame
     p.sub('<div class="wrap light-head"><p class="eyebrow">Lit from below</p><h2>Put a light under it.</h2><p>Cast acrylic carries light to its edges, so a lamp underneath fills the whole cabinet with color.</p></div>',
-          '<i class="anchor" id="colors"></i><div class="wrap light-head"><h2 class="vh">After dark</h2></div>')
+          '<i class="anchor" id="colors"></i><div class="wrap light-head"><h2 class="vh">Put a light under it.</h2></div>')
     p.sub('<div class="light-intro"><p class="eyebrow">Lit from below</p><h2>Put a light under it.</h2><p>Cast acrylic carries light to its edges, so a lamp underneath fills the whole cabinet with color.</p></div>',
-          '<div class="light-intro"><p class="light-kicker" aria-hidden="true"></p></div>')
+          '<div class="light-intro"><p class="light-kicker" aria-hidden="true">Put a light under it.</p></div>')
     p.sub('<p class="num" id="light-num">Tropos 01</p>', '<p class="num" id="light-num" hidden>Tropos 01</p>')
     # snap points, one per color, then the eight
     snaps = ''.join(f'<i class="snap" style="--s:{i}" aria-hidden="true"></i>' for i in range(8))
@@ -449,6 +449,33 @@ def lighten(p, web):
     p.sub('<div class="lines"><a class="tile" href="#speakers"><img src=', '<div class="lines"><a class="tile" href="#speakers"><img decoding="async" src=')
 
 
+MANTLE_SRC = 'renders/2026-11-01/barkhorn/mantle-r48/a-dusk-ember-2423.png'
+MANTLE = {'wide': 'img/v2/mantle-dusk-1200.webp', 'full': 'img/v2/mantle-dusk.webp', 'tile': 'img/v2/mantle-dusk-tile.webp'}
+
+
+def mantle(p, web):
+    """Mantle is drawn (Strata Float v3, the owner's pick of 1 November): its dusk frame wherever V2 shows Mantle on the
+    home, in place of the superseded white packshot."""
+    import os
+    from PIL import Image
+    src = os.path.join(web.ROOT, MANTLE_SRC)
+    os.makedirs(os.path.join(web.IMG, 'v2'), exist_ok=True)
+    im = Image.open(src).convert('RGB')
+    for key, w_ in (('full', 1800), ('wide', 1200)):
+        dst = os.path.join(web.SITE, MANTLE[key])
+        if not os.path.exists(dst) or os.path.getmtime(dst) < os.path.getmtime(src):
+            im.resize((w_, round(im.height * w_ / im.width)), Image.LANCZOS).save(dst, 'WEBP', quality=82, method=6)
+    dst = os.path.join(web.SITE, MANTLE['tile'])                  # 4:5 for the lines' tile, on the deck's middle
+    if not os.path.exists(dst) or os.path.getmtime(dst) < os.path.getmtime(src):
+        cw = round(im.height * 4 / 5)
+        x0 = max(0, min(im.width - cw, round(im.width * 0.52 - cw / 2)))
+        im.crop((x0, 0, x0 + cw, im.height)).resize((1200, 1500), Image.LANCZOS).save(dst, 'WEBP', quality=82, method=6)
+    m = re.search(r'<a class="tile" href="#turntable"><img [^>]*>', p.rest)
+    if m:
+        p.rest = p.rest[:m.start()] + ('<a class="tile" href="#turntable"><img decoding="async" src="' + MANTLE['tile'] +
+                                       '" width="1200" height="1500" loading="lazy" alt="Mantle in Ember at dusk, its deck floating over a lit base">') + p.rest[m.end():]
+
+
 def home_v2(p, web):
     """The audit's recommended home ("launch film"): one picture and at most one line a screen, in an order that builds:
     the lineup, Sound, after dark, the world, at home, the lamps, Mantle, Studio, contact. The lines' tiles go. Mantle
@@ -463,10 +490,13 @@ def home_v2(p, web):
       <img src="img/lamps-orbs-1200.jpg" srcset="img/lamps-orbs-1200.jpg 1200w, img/lamps-orbs.webp 2400w" sizes="100vw" width="2400" height="800"
       loading="lazy" alt="Eight Core lamps in a row, lit, in spectrum order"><figcaption class="wrap">Hemisphere and Core. <i class="render">Render</i></figcaption></figure>
   </section>"""
-    mantle = """
-  <section class="band beat type-only" id="mantle-beat"><div class="wrap">
-    <h2><a href="#turntable">Mantle.</a></h2><p>A turntable, lit from underneath. Pictures when the new one is drawn.</p>
-  </div></section>"""
+    mantle = f"""
+  <section class="band beat" id="mantle-beat">
+    <div class="wrap"><h2><a href="#turntable">Mantle.</a></h2><p class="beat-line">A turntable, lit from underneath.</p></div>
+    <figure class="strip mantle-pic"><img src="{MANTLE['wide']}" srcset="{MANTLE['wide']} 1200w, {MANTLE['full']} 1800w" sizes="100vw" width="1800" height="1200"
+      loading="lazy" alt="Mantle in Ember at dusk, its tinted deck floating over a smoked base, light pooling beneath it">
+      <figcaption class="wrap"><i class="render">Render</i></figcaption></figure>
+  </section>"""
     i = p.rest.index('<main id="home">') + len('<main id="home">')
     j = p.rest.index('</main>', i)
     leftover = p.rest[i:j].strip()
@@ -477,6 +507,7 @@ def home_v2(p, web):
 /* round 48 (HOME_V2): the launch film */
 .beat h2 a { color: inherit; text-decoration: none } .beat h2 a:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px }
 .strip { margin: 32px 0 0 } .strip img { display: block; width: 100%; height: auto } .strip figcaption { padding-top: 12px; color: var(--muted); font-size: 15px }
+.beat-line { color: var(--muted); margin: 8px 0 0 } .mantle-pic { background: #0E0D0F } .mantle-pic figcaption { text-align: right; padding-bottom: 10px } .mantle-pic .render { color: #A39E95 }
 .type-only { min-height: 60svh; display: grid; align-content: center } .type-only h2 { font-size: clamp(48px, 7vw, 104px) }
 .type-only p { color: var(--muted); max-width: 36ch }
 #sound, #habitats, #room, #lamps-beat, #mantle-beat, #progress, #contact { scroll-margin-top: var(--header) }
@@ -486,7 +517,7 @@ def home_v2(p, web):
 def render_word(p):
     """'Render', quietly, once per picture: the hero, Sound, the habitats and the room carry it in their captions
     (above); here the light stage, the uplit eight and the lines' tiles. The footer says it once for the site."""
-    p.sub('<p class="light-kicker" aria-hidden="true"></p>', '<p class="light-kicker" aria-hidden="true"></p><i class="render on-dark">Render</i>')
+    p.sub('<p class="light-kicker" aria-hidden="true">Put a light under it.</p>', '<p class="light-kicker" aria-hidden="true">Put a light under it.</p><i class="render on-dark">Render</i>')
     p.sub('<i class="snap-eight" aria-hidden="true"></i>', '<i class="snap-eight" aria-hidden="true"></i><i class="render on-dark eight-render">Render</i>')
     for line in ('A powered horn loudspeaker.', 'A pendant and a table lamp.', 'A turntable, lit from underneath.'):
         p.sub(f'<span class="t-line">{line}</span>', f'<span class="t-line">{line} <i class="render">Render</i></span>')
@@ -531,6 +562,7 @@ def apply(web, head, rest):
         habitats(p, web)
         paths(p, web)
         lighten(p, web)
+        mantle(p, web)
         render_word(p)
     if web.HOME_V2:
         home_v2(p, web)
