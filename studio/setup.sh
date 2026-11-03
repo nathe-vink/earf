@@ -40,9 +40,13 @@ if ! "$BPY_PY" -c "import numpy, sys; sys.exit(0 if numpy.__version__.startswith
   log "restoring numpy 1 for bpy (something installed numpy 2 on $BPY_PY)"
   "${BPIP[@]}" "numpy>=1.26,<2.0"
 fi
-if ! "$BPY_PY" -c "import PIL, scipy" >/dev/null 2>&1; then
-  log "pip install Pillow and SciPy on $BPY_PY (the renderer's finish)"
-  "${BPIP[@]}" "pillow" "scipy>=1.11,<1.14" "numpy>=1.26,<2.0"
+# (the check loads PIL's compiled core: Ubuntu's python3-pil in /usr/lib/python3/dist-packages is on 3.11's path too, but
+# built for 3.12 only, so `import PIL` passes and `from PIL import Image` fails, 2026-11-03; --ignore-installed puts a
+# 3.11 Pillow in /usr/local, ahead of it, which pip would otherwise skip as already installed)
+if ! "$BPY_PY" -c "from PIL import Image, ImageDraw, ImageFont; import scipy" >/dev/null 2>&1; then
+  log "pip install Pillow and SciPy on $BPY_PY (the renderer's finish and room31's pieces)"
+  "${BPIP[@]}" --ignore-installed "pillow"
+  "${BPIP[@]}" "scipy>=1.11,<1.14" "numpy>=1.26,<2.0"
 fi
 
 # 3. The CAD venv.

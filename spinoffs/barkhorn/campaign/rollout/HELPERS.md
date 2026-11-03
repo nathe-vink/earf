@@ -19,6 +19,12 @@ This installs two Pythons, on purpose:
 
 Never install CAD packages into the system Python.
 
+**Check Pillow on the render Python before you render** (2026-11-03: c3's room31 shot failed with `cannot import name '_imaging' from 'PIL'`):
+
+    python3.11 -c "from PIL import Image, ImageDraw, ImageFont"
+
+If it fails, run `python3.11 -m pip install --user --ignore-installed pillow` (or re-run `studio/setup.sh`, which does it since this fix). Ubuntu's `python3-pil` is built for 3.12 only, so a bare `import PIL` passes and hides the failure.
+
 ## 3. The two render models (not in git; both are rebuilt from the code at your SHA)
 
 Run each build as a tracked background task, one after the other, never side by side:
