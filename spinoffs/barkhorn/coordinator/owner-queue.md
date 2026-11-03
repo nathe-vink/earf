@@ -1722,3 +1722,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   2.0, camera 0.8 m, --horn-front, 96 samples): contact at 390 px 14.8 under vs 13.6 base (open ground 45.9), a continuous band; the
   foot's peak 60 (was 181); the lane's gate passed all four. The optional fill out (the front lava lamp lit the white lining), so the horn
   stays brighter than the cabinet. Dust ~13:20. My gate wf_2956fd08-cfc on Ember started 13:12.
+- 13:19 biomes lane: Dust on horn A re-rendered at 6b2c1243225af39d2b3dcbaf6ebe202fdebd88fb (feet bedded 12 mm, sand bounce 0.35, no
+  tumbleweed, --horn-front, 64 samples): contact luma 62-69 under the base vs 90+ around, no feet or gap showing; the lane's gate
+  passed all four ("faint soft creases toward the corners, not a bold X"); the throat's dark halo is the driver through satin (the
+  bounce doesn't reach it). Acid rendering. My gate wf_79a58c1c-eeb on Dust started 13:20.
