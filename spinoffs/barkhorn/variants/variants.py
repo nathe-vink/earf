@@ -75,6 +75,15 @@ UPLIGHT = dict(edges=[(10.0, 30.0, 10.0, 390.0), (550.0, 30.0, 550.0, 390.0), (4
 # fed from the plinth's 24 V through a sealed connector in the bottom panel at a foot pad. (x0, y0, x1, y1) of each run
 # on the bottom panel's top face (z 20); the back is left out (its land strip and the amplifier's compartment)
 WASH = dict(runs=[(24.0, 60.0, 24.0, 370.0), (536.0, 60.0, 536.0, 370.0), (60.0, 48.0, 500.0, 48.0)], w=8.0, t=2.0, z=20.0)
+# the built-in light (a proposal for the owner, 2026-11-03, the coordinator: "could the whole uplight live inside the
+# speaker, with no plate at all?"): COB strips, 24 V, 20 W/m, 4000 K, in black aluminium U-channels on nylon standoffs,
+# aimed straight up, inside the cabinet. `floor`: on the bottom panel's top face (z 20), behind the batt (under the back
+# lining, which starts at z 50) and behind each port; `brace`: on the brace's top face (z 220), clear of the side linings,
+# the ribs and the back's bosses. (x0, y0, x1, y1) of each run, mm in the cabinet's frame. Fed from an external 24 V plug-in
+# supply through a panel connector in the back's cable gland (variants/BASES.md)
+BUILTIN = dict(floor=[(60.0, 360.0, 500.0, 360.0), (50.0, 295.0, 160.0, 295.0), (400.0, 295.0, 510.0, 295.0)], z_floor=20.0,
+               brace=[(90.0, 250.0, 470.0, 250.0), (90.0, 300.0, 470.0, 300.0)], z_brace=220.0,
+               channel=(12.0, 7.0), wall=1.5, lens_t=1.0, lens_down=0.6, standoff=(6.0, 3.0))
 # the slim light plate (the coordinator, 2026-11-03, for the owner's question about the footing: "a separate base that
 # people can optionally purchase"): the cabinet's own footprint, `h` tall to the cabinet's bottom; a top frame of the
 # cabinet's 1/2 in sheet carrying the uplight's grooves and the centre panel's opening (as the plinth's top frame), over a
@@ -259,6 +268,24 @@ def parts(P):
                                    'cabinet\'s bottom, lit from an aluminium-core LED plate below it (4000 K)']))
     out.append(product.Part('base-uplight-plate', plate, product.Bought('uplight-panel'), finish='channel', group='base',
                             option='Plinth uplight', notes=['the centre panel\'s LED plate, black anodised aluminium, on brackets in the opening']))
+    B_ = BUILTIN; bcw, bch = B_['channel']; bt = B_['wall']; sw, sh = B_['standoff']
+    for key, z0 in (('floor', B_['z_floor']), ('brace', B_['z_brace'])):
+        bl, bc, bs = [], [], []
+        zc0 = z0 + sh; zc1 = zc0 + bch; zl1 = zc1 - B_['lens_down']; zl0 = zl1 - B_['lens_t']
+        for (ax, ay, bx, by) in B_[key]:
+            bl.append(seg(ax, ay, bx, by, bcw - 2 * bt - 0.2, zl0, zl1))
+            bc.append(seg(ax, ay, bx, by, bcw, zc0, zc1) - seg(ax, ay, bx, by, bcw - 2 * bt, zc0 + bt, zc1 + 1.0))
+            for f in (0.08, 0.5, 0.92):           # three nylon standoffs a run
+                x, y = ax + f * (bx - ax), ay + f * (by - ay)
+                bs.append(Pos(x, y, z0 + sh / 2 + 0.05) * Box(sw, sw, sh - 0.1))
+        out.append(product.Part(f'builtin-{key}-led', _C(children=bl), product.Bought('builtin-strip'), finish='builtin-led', group='base',
+                                option='Built-in light',
+                                notes=[f'the built-in light ({key}): COB strip, 24 V, 20 W/m, 4000 K, its frosted lens in a black U-channel, '
+                                       'aimed straight up inside the cabinet (a proposal; variants/BASES.md)']))
+        out.append(product.Part(f'builtin-{key}-channel', _C(children=bc), product.Bought('uplight-channel'), finish='channel', group='base',
+                                option='Built-in light', notes=[f'the built-in light\'s {key} channels: aluminium U, 12 x 7, black anodised']))
+        out.append(product.Part(f'builtin-{key}-standoffs', _C(children=bs), product.Bought('builtin-standoffs'), finish='foot', group='base',
+                                option='Built-in light', notes=[f'nylon standoffs, M3, screwed into inserts bonded in the {key}, three a run']))
     wash = [seg(ax, ay, bx, by, WASH['w'], WASH['z'] + 0.1, WASH['z'] + 0.1 + WASH['t']) for (ax, ay, bx, by) in WASH['runs']]
     out.append(product.Part('cabinet-wash', _C(children=wash), product.Bought('cabinet-wash'), finish='uplight-wash', group='base',
                             option='Cabinet wash',
@@ -321,7 +348,9 @@ PRODUCT = dataclasses.replace(
                # 375 W/m2; the panel about 12 W of light (40 W electrical, 2026-11-03; 16 W before) over 0.118 m2 at full, 105 W/m2
                'uplight-edge': {'preset': 'frosted', 'color': '#F4F2EE', 'absorb': '#F0EEEA', 'glow': 188.0, 'glow_color': '#FFCEA6'},
                'uplight-wash': {'preset': 'frosted', 'color': '#F4F2EE', 'absorb': '#F0EEEA', 'glow': 188.0, 'glow_color': '#FFCEA6'},
-               'uplight-panel': {'preset': 'frosted', 'color': '#F4F2EE', 'absorb': '#F0EEEA', 'glow': 52.0, 'glow_color': '#FFCEA6'}},
+               'uplight-panel': {'preset': 'frosted', 'color': '#F4F2EE', 'absorb': '#F0EEEA', 'glow': 52.0, 'glow_color': '#FFCEA6'},
+               # the built-in light: 20 W/m electrical, about 6 W/m of light through an 8.6 mm lens, 680 W/m2 at full
+               'builtin-led': {'preset': 'frosted', 'color': '#F4F2EE', 'absorb': '#F0EEEA', 'glow': 680.0, 'glow_color': '#FFCEA6'}},
     kind='Tropos design-pass proposals: Strata\'s caldera and the Topo horn',
     notes=['Proposals beside the current design (variants/README.md); the Cloud\'s CAD is unchanged.'],
     origin=(280.0, 213.7, -12.0), drawing_prefix='BHV')
