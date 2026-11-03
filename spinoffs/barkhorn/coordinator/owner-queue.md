@@ -1842,4 +1842,4 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   samples). Its gate: all four pass (dark violet acrylic, the woofer, ring, ports, braces and left frame through, no milky face; a
   continuous contact shadow with blades over the lower edge; no light down; no X). It expects the horn flagged as on Ember: the low sun
   behind it, so the satin horn glows pale lavender above a darker cabinet, the driver and struts a dark shape (held for the finish
-  call). Ice rendering. My gate wf_bb3e4346-c81 on Haze (Dust v2 as context) started 14:25.
+  call). Ice rendering. My gate wf_bb3e4346-c81 on Haze (Dust v2 as context) started 14:24.
