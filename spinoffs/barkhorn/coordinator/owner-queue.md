@@ -2419,3 +2419,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   (A 6.5/4.9); the amber glint (unfiltered glow out of the strip groove's clear sides) fixed with the backer across the groove.
   Cost ~+$15-25 over C2: C3 ~+$145-175 a unit over v3 (v4 as gated +$140-170); parts $3,897.
 - 16:46 my gate on C3 night and day (A g5's pair and C2 night as comparisons) started.
+- 16:46 check-in #45 fired. State: item 3 open; passed and waiting their turn: Dust polished, Ice polished, the polished close-up,
+  Hemisphere day. The inventory workflow: all five sweeps back (log-1 49, log-2 78, notes 64, board 44, lanes 76: 311 items), the
+  merge running. Re-armed for 17:38 as #46. To do next while lanes run: the board to v24 (the base and horn decided) and the deck's
+  words (no light, the polished horn).
