@@ -13,8 +13,17 @@ mkdir -p $OUT
 C="--edge-frost 0.35 --base-tint smoke-2074 --scale 0.75 --samples 80 --paper #7A7570 --tint-mode custom"
 r() { n=$1; shift; python3.11 scene.py dusk "$@" --out $OUT/$n.png $C > /tmp/mantle-r48-$n.log 2>&1; echo "$n $(grep -c ^wrote /tmp/mantle-r48-$n.log)"; }
 NIGHT="--strip 300 --strip-color 1.0 0.55 0.25 --ambient 0.003 --exposure 0.0"
+if [ "$1" != r2 ]; then
 r a4-night-ember-2423 --model out-strata-v4 --colour ember-2423 $NIGHT --core-glow 9
 r a4-day-ember-2423 --model out-strata-v4 --colour ember-2423 --day --strip 0 --core-glow 20 --strip-color 0.915 0.33 0.38 --exposure -2.0
 r a4-night-poison-2092 --model out-strata-v4 --colour poison-2092 $NIGHT --core-glow 9
 r b-night-ember-40 --model out-strata-v3 --colour ember-40 $NIGHT
 r b-day-ember-40 --model out-strata-v3 --colour ember-40 --day --strip 0 --exposure -2.0
+fi
+# the coordinator's pass (07:39 UTC): (a)'s nights a stop down (-1.0), so the top reads as deep red and deep green
+# glass, not a flat salmon field (its clipped share 25 % to about 1 %); nothing added on the floor
+NIGHT2="--strip 300 --strip-color 1.0 0.55 0.25 --ambient 0.006 --exposure -1.0"   # the room at 0.6 %, so the record and arm keep their read
+if [ "$1" = r2 ]; then
+r a4-night-ember-2423-r2 --model out-strata-v4 --colour ember-2423 $NIGHT2 --core-glow 9
+r a4-night-poison-2092-r2 --model out-strata-v4 --colour poison-2092 $NIGHT2 --core-glow 9
+fi

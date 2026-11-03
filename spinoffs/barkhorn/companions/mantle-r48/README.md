@@ -435,6 +435,8 @@ for about 90 decks, about +$27 a deck.
 | `a4-night-ember-2423.png` | (a) at night: the whole deck glows red, evenly, from within; no outline, no inset line, nothing on the shelf |
 | `a4-day-ember-2423.png` | (a) by day: red glass over white |
 | `a4-night-poison-2092.png` | (a) at night in Poison: an even green glow |
+| `a4-night-ember-2423-r2.png` | (a) at night, a stop down (the coordinator's pass, 07:39): the top deep red glass, not a flat salmon field (its clipped share 25 % to about 1 %); the room at 0.6 % so the record and arm read; nothing added on the floor |
+| `a4-night-poison-2092-r2.png` | the same in Poison: deep green glass |
 | `b-night-ember-40.png` | (b) at night: still a neon outline. A lighter pour alone does not make a lantern; the light needs the white print to leave by the face |
 | `b-day-ember-40.png` | (b) by day: a lighter red glass, the parts under the deck showing through |
 
