@@ -3279,3 +3279,13 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 20:47 sent to the bar lane: window v3's fixes (the front light down 1-1.5 stops or feathered, lining R 150-200, G/B < 30; the spot moved,
   flagged, softened or the speaker turned, never hidden from gloss; the top's sheen; the floor between even; contact shadow) into window v4
   with kit43's strips. Walkthrough header: the habitats, bar, deck, roll-out and lamps bullets brought to 20:47.
+- 20:48 biomes lane (Acid proxy set, not run, at 063c8411ac7718217e399fae27550c810c611e91): the tint untouched (waits for the shared fix); the
+  linings are Ice's material (white 0.8, roughness 0.95), so it's the light: the sun from 148 degrees, 2.6 up, behind the batts under a dim
+  sky, moves to 120 (three-quarter back, Dust's 118), the HDRI turned with it; the rim unlinked; sink 0.03 to 0.015 (at 18 mm the submerged
+  part showed below the waterline: likely the 27 px); rain rings are set-wide (flagged if contact still reads weak); the posts are Ice's
+  bronze, mirroring the dark overcast (the side sun should catch them); beads on the speaker would be a product-look change, left out.
+- 20:49 lamps lane: Core B day set at 7e6f5e8f162034f247c8e9c916f115e921f32117: the sun through the left wall's window from the front left
+  onto the ball's face; the window opening only the front of that wall, so the wall behind the ball takes no sun; the side-back strip off;
+  the opal core in (PROPOSAL, same sheet cost, no blasting); the white dot and the raised camera in. Proxy: core/gap 1.06 (was 1.03; opal in
+  the old light 0.93); OKLCH 226; the core a pale sphere with a clear edge, short of 1.3 (the gap and the core scale together in this rig).
+  Full scale rendering: B day (384) and B night (1024); the Hemisphere finals still running.
