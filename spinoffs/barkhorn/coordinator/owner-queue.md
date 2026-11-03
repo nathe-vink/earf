@@ -3201,3 +3201,18 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 20:28 sent to the biomes lane: the five fixes (real sun through a side or back wall, no lightened material or hidden fill, a global tone
   change allowed; horn and box to one violet checked against TINTS.md, #4512D0 and 2287's split; an honest sheen on the front face, the flag
   smaller or moved; the horn top near one third; the blue mark and the faint X); after the Haze A/B, a proxy with numbers, then its final.
+- 20:2x Core B day gate wf_c19c7c55-3bb (3 critics, ~14 min): HOLD 3/3. Light off, no underglow, grounded, a clean crown, not cheap; but the
+  frosted core is lost (within ~10 % of its surround: a crystal ball on a plinth), the shell dense (red 0-34, one flat aqua field, the wall
+  never shows through; deep aqua, not Ice), the seat at the cup muddled (navy crescents and petal, copper slivers), a wavy "fill line" across
+  mid-ball (the reflected horizon), oily streaks on the lower rim.
+- 20:2x r43-shop v3 gate wf_f8480bf3-253 (3 critics, ~23 min): HOLD 3/3. v2's red pool and wedge gone (floor a* 36-45 to 7-14), grounded, the
+  horns smooth, no impossible lamp; but the cabinets clipped into flat pale coral panels from the lids down (62 % of cabinet pixels R>=225,
+  27 % >=245, G/B ~74, front and side equally bright: self-lit lanterns, the "spray painted" note in coral; v2 deep crimson R~157, G/B~18);
+  a hard near-white streak on each horn; the window ghost's rim still 7-12 px above the right horn; faint pink on the floor toward the
+  camera; the table corner the brightest block.
+- 20:30 sent to the lamps lane: Core B day's five findings; check the model against the real ball (the 80/74 shell at loading 1/3; is the
+  core tinted; the Ice chip 2069); the critics' levers (a lighter thin-wall shell, a frost 1.3-1.6x the gap, a side-back light; no caustic
+  pool by day); a whiter frost as a proposal with its cost; stop the Core B night final by PID if it carries the same shell.
+  To the bar lane: shop v3's five fixes (the key down 1-1.5 stops on the cabinets and off axis, targets R 150-190, G/B < 30, falloff, check
+  the view transform; soften the horn streaks; the last ghost; the floor pink; the table corner and contact shadow) into shop v4 with
+  kit43's strips; order listening v4, r44 v4, shop v4, window v4.
