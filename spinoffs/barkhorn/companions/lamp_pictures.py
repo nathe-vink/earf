@@ -21,9 +21,9 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..', '..'))
 OUT = os.path.join(ROOT, 'renders', '2026-11-03', 'barkhorn', 'lamp-pictures')
 CCT = int(os.environ.get('LAMP_CCT', '2700'))       # the LED's colour temperature (K)
-LED_W = float(os.environ.get('LED_W', '24.0'))         # Core's LED, about 620 lm at full [E: radiant watts]
+LED_W = float(os.environ.get('LED_W', '55.0'))         # Core's LED, about 620 lm at full [E: radiant watts]
 COB_W = float(os.environ.get('COB_W', '8.0'))         # Hemisphere's COB beam, about 500 lm out of the fitting [E]
-SPILL_W = float(os.environ.get('SPILL_W', '0.35'))    # the reflector's spill onto the opal, about a quarter
+SPILL_W = float(os.environ.get('SPILL_W', '0.08'))    # the reflector's spill onto the opal, about a quarter
 
 
 def blackbody(T):
@@ -126,16 +126,16 @@ def build(frame, samples, scale):
         # inside a fine glass-bead blast (roughness 0.3) rather than a coarse one, so the far wall reads through it
         # round 4 (the coordinator, 2026-11-03): by night the ball clear inside, as the coordinator reads the design, or
         # ('frost' variant) with the fine bead-blast; by day as passed in round 2
-        inner = {'frost': 0.6, 'fine': 0.3}.get(var, 0.0) if night else 0.3   # 'frost': the CAD's coarse bead-blast
+        inner = 0.6   # round 6: the CAD's coarse bead-blast, by day and by night (the pair one object)
         sphere('ball', 80.0, zc, acrylic('ball', 0.0, loading=1 / 3))
         inner_mat = acrylic('ball-in', inner, loading=1 / 3)
-        if night and var == 'frost':
+        if True:
             # bead-blasted acrylic diffuses nearly evenly: half of the frosted face a diffuse transmission (round 4;
             # rough glass alone only blurs forward)
             nt = inner_mat.node_tree; outn = next(n for n in nt.nodes if n.type == 'OUTPUT_MATERIAL')
             glass = outn.inputs['Surface'].links[0].from_node
             tl = nt.nodes.new('ShaderNodeBsdfTranslucent'); tl.inputs['Color'].default_value = (0.9, 0.9, 0.9, 1)
-            mx = nt.nodes.new('ShaderNodeMixShader'); mx.inputs[0].default_value = 0.3   # round 5: more forward, a gradient
+            mx = nt.nodes.new('ShaderNodeMixShader'); mx.inputs[0].default_value = float(os.environ.get('FROST_MIX', '0.5'))   # round 6: more forward, a gradient
             nt.links.new(glass.outputs[0], mx.inputs[1]); nt.links.new(tl.outputs[0], mx.inputs[2])
             nt.links.new(mx.outputs[0], outn.inputs['Surface'])
         sphere('ball-in', 71.0, zc, inner_mat, inward=True)
@@ -174,7 +174,7 @@ def build(frame, samples, scale):
         oc = 4.0                                 # round 6: both frames of the pair show the same (proposed) rim
         sphere('opal', 89.0, rim, opal, cut=oc, hole=H)
         sphere('opal-in', 86.0, rim, opal, inward=True, cut=oc, hole=H)
-        part('out-dome-pendant', 'rim', acrylic('rim', 0.45), rim)
+        part('out-dome-pendant', 'rim', acrylic('rim', 0.6, loading=2.0), rim)   # round 6: satin, a deeper shade, never bright
         for nm in ('collar', 'clamp', 'crown', 'gland', 'hub'):
             part('out-dome-pendant', nm, an, rim)
         part('out-dome-pendant', 'reflector', steel, rim)
@@ -185,7 +185,12 @@ def build(frame, samples, scale):
             # round 4: real lights instead. The COB 22 up the bore, about 500 lm out of the fitting, down onto the
             # table (a pendant's job) within the louvre's cut-off; the reflector's spill, about a quarter, lights the
             # opal from the crown, so the dome glows in its tint and lights the wall
-            light('cob', 'SPOT', (0, 0, rim + 0.060), COB_W, 0.014, spot=92.0)
+            # round 6: the table lit from a disc the size of the opal's mouth (a broad source: a soft bowl shadow), within
+            # the louvre's cut-off
+            ld = bpy.data.lights.new('cob', 'AREA'); ld.shape = 'DISK'; ld.size = 0.17; ld.energy = COB_W * 1.6
+            ld.spread = math.radians(92.0); ld.color = blackbody(cct)
+            ob = bpy.data.objects.new('cob', ld); bpy.context.scene.collection.objects.link(ob)
+            ob.location = (0, 0, rim + 0.004); ob.visible_glossy = False
             light('spill', 'POINT', (0, 0, rim + 0.050), SPILL_W, 0.03)
             pass
         # round 6 (the coordinator, 2026-11-03: the pendant too small): one shared camera for the day and the night,
@@ -205,17 +210,17 @@ def build(frame, samples, scale):
     if night:
         # round 4: a white ceiling at 2.5 m, so the lamp's light that leaves upward comes back into the room, as at home
         SC.plane('ceiling', (4.3, 4.0), (0.85, 0.0, 2.5), (180, 0, 0), SC.principled('ceiling', '#E8E4DC', 0.9))
-        SC.world(hdri='kiara_9_dusk', strength=0.02, rotation=200)   # round 3: soft natural reflections, no shapes
-        moon = SC.area('moon', (-1.3, -0.4, 1.6), (0, -70, 0), (1.2, 1.6), 2.0, '#9FB2D6')   # round 4: the lamp leads
+        SC.world(hdri='kiara_9_dusk', strength=0.003 if prod == 'core' else 0.02, rotation=200)   # round 6: Core's room lit by Core
+        moon = SC.area('moon', (-1.3, -0.4, 1.6), (0, -70, 0), (1.2, 1.6), 0.25 if prod == 'core' else 2.0, '#9FB2D6')   # the lamp leads
         moon.visible_glossy = False               # round 1: no daylight-window shapes reflected at night
         if prod == 'core':   # round 5: a crisp, dim window in the outer gloss, so the clear skin reads as its own layer
-            win = SC.area('window-glint', (-0.55, -0.95, tz + 0.55), (62, 0, -30), (0.35, 0.55), 1.2, '#B9C7DD')
-            win.visible_diffuse = False
+            win = SC.area('window-glint', (-0.7, -1.2, tz + 0.7), (58, 0, -30), (0.09, 0.09), 0.05, '#C9D3E2')   # round 7: a small round glint, dim
+            win.data.shape = 'DISK'; win.visible_diffuse = False
         # round 3: a large soft fill far off, for a curved soft reflection on the glass (round 2's small one read as a
         # hard square sticker)
-        fill = SC.area('fill', (1.4, -2.2, 1.9), (55, 0, 32), (1.4, 0.9), 2.0, '#8FA0BE')
+        fill = SC.area('fill', (1.4, -2.2, 1.9), (55, 0, 32), (1.4, 0.9), 0.2 if prod == 'core' else 2.0, '#8FA0BE')
         fill.visible_glossy = False
-        exposure = float(os.environ.get('NIGHT_EV', '1.5'))   # round 4: exposed for the lamp, as a night photograph is
+        exposure = float(os.environ.get('NIGHT_EV', '3.0' if prod == 'core' else '0.6'))   # round 4: exposed for the lamp, as a night photograph is
     else:
         SC.world(hdri='kiara_9_dusk', strength=0.35, rotation=200)
         SC.window_gobo(-1.3, -1.3, 0.9, 0.75, 2.4, panes=(2, 2))
