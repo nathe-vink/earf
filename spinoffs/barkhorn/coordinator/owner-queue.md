@@ -3021,5 +3021,5 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   crease 8.0 / 2.3, but the lower-left lip's white glint stays (peak 200): the real sun (azimuth -100, 42 degrees up) on the curved lip; the
   fix a turn, rotate_z 9 (~10 degrees off on the other side) at 5284d3d3bb1bcad60cd2b87beda2e74c6307d36d. Queue: the Haze final at 5
   degrees off (rendering), the Acid final, the Poison proxy at 9 (the glint checked), the Fog final, the Poison final.
-- 19:39 sent to the speaker lane: its order with three helpers idle: the fix1 rig proof and new SHA first; the audit list (turn, then amp
+- 19:38 sent to the speaker lane: its order with three helpers idle: the fix1 rig proof and new SHA first; the audit list (turn, then amp
   and horn-back); the honest A-ice-polished; the deck hero and cover; the back rig and studio31 (hero-light complete in seven).
