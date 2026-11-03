@@ -2211,3 +2211,5 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   the close-up's build proposals into the asset README as proposals for the owner (which are already true in the model?); no model
   change while the roll-out renders from 5295e58f. The close-up goes to the owner with a caption as its own walkthrough item; the pod
   proposals become a walkthrough item.
+- 15:49 speaker lane: the close-up rigs' commit is 70ae89ad3bb4db828e8dd8e3d8c12530813b65f4 ("8bd6cd5e" was written before git
+  answered; it now sends only after the commit returns its hash).
