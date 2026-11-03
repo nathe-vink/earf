@@ -1556,3 +1556,16 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   0.0059, side 0.0094; horn-to-cabinet 21x to 8x (5x against the side); the horn clears the ridge. Further would need a product
   change (a lighter horn lot or less satin) or a fake. Chain restarted 11:32 on Strata (b34d08c414030ce358a3e96715b56e99ae5dc172):
   Ember ~12:05 (f2, 96 samples), then Dust, Acid (64), Poison (96), Ice (64), Haze, Fog (96); the set ~15:00.
+- 11:41 check-in #39. Study wf_6f2b81e0-333: acoustics and materials lines back, the light line and the skeptic running.
+  Acoustics (on the repo's lining.py method, reproducing round 21's Qs within 5 %): the top batt does ~half the vertical modes'
+  damping (204/408/612 Hz); voile-only top: acceptable WITH compensation (an 80 mm batt frame round a window, 28 % open: Q 204 Hz
+  6.0 to 6.9, 408 Hz 4.0 to 4.5, margins within 0.5 dB, "nearly free"); voile-only back: acceptable with compensation (open only the
+  back's top band above the upper brace, back-c/-e/-h, ~0.04 m2, "close to free"); both: not advisable; never combine a weakened top
+  with the bottom-batt window (204 Hz Q ~28). Materials: fibre and voile can't pass light and damp at once; a rigid clear
+  micro-perforated 2 mm acrylic (0.3-0.4 mm holes, 1-1.5 %) over a sealed gap could match the batts 160-630 Hz and pass ~90 % of
+  the light (~$70-300 a speaker est., coupon-test first); Barrisol's Microsorber foil is weak at 200 Hz. Either way the openings
+  show the inside (HF lead, tie rod, amp compartment): a design call for the owner.
+- 11:42 sent to the speaker lane, top priority after D night: "D+" (D with the 28 % top window and the back's top band open,
+  bottom batt whole): a proxy with numbers (wall fan, horn underside, top chamber), D+ night and D+ day; before A polished and the
+  Smoke frames. The base question moves to about 13:00 so it can be one complete question: A (no light), D (lantern), D+ (the
+  site's look). Lamps round 7 (caaacb27, 11:37) and Mantle g4 notes (e3de62e6, 11:38) pushed; frames to follow. Re-armed for 12:31.
