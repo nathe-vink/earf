@@ -1073,3 +1073,21 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   Checked the sheets: reads as one film; stand-in pictures still show the superseded speaker (swap with the new set). One fix asked
   (05:08): Mantle's type-only screen said "Pictures when the new one is drawn", but Strata Float is drawn: use
   renders/2026-11-01/barkhorn/mantle-r48/a-dusk-ember-2423.png (r48-mantle-design), drop the clause.
+- 05:09 site lane checkpoint 9a58f13ebeeca06a71d4ed814ade2ca3c1c47b9b (crossed my 05:08 note): horn A in the particulars
+  ("thermoformed from 10 mm cast acrylic ... satin outside"), weight "to follow", "Put a light under it." removed (the beat's hidden
+  heading "After dark"), "Ask about it" / "Ask about a pair", sweep clean; Sound figures unchanged by horn A (speaker bea94882).
+- 05:11 OWNER: "I think mantle has the same issue where the underglow is projected down instead of casting through the acrylic. The
+  headline about the oldest amplifier being a shape is silly. And I kind of miss the old renderings of the horn where the thicker
+  parts of the acrylic got darker, almost giving it a glassy feel. But maybe I haven’t seen enough of the new horn yet. What’s
+  technically possible trumps what looks cool, so perhaps ignore me if that’s the case." (with the journal's macro-horn.jpg crop)
+  Saved verbatim first (README 15c15784; time fixed a6d7370b). Read: the journal horn IS a formed horn (10 mm sheet, a dye lot about
+  3x the cabinet's, gloss outside, the throat turned from a solid block, the pod behind); its glassy depth came from gloss, a lighter
+  dye and the thick throat and pod. Horn A today: deep batches (~10 % TT through 10 mm), satin outside, the throat ring slimmed
+  (68cea72c), each pulling away from it.
+- 05:20 lanes told. Site: "Tropos." + "A horn speaker in cast acrylic." for the Sound beat; the journal's "amplifier's job" dek and
+  "Long before amplifiers" line cut; the build to fail on both; Mantle's screen to use a-studio-ember-2423.png (light off), NOT the
+  dusk frame (light thrown down), with "A turntable in cast acrylic." for now. Mantle lane (session_01BAaPTkQRnfd37XJHVyiVJC,
+  r48-mantle-design): redraw the light to travel through the acrylic (its own README lines 52/57 name it), FAULTS item 9's shared
+  supply fixed, Ember night/day frames (+ Poison night), blind critic. Speaker lane: after the A/B/C base frames, horn A in the
+  journal's side view, Acid, variants a-e (as now; full throat; gloss; the journal's dye lot with gloss; satin at that depth) + the same
+  in Ember 3/4; what's real for each (same tool? the sheen under gloss? cost, weight); the ring slimming not adopted yet.
