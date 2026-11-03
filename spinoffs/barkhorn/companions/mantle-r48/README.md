@@ -807,6 +807,58 @@ border's black. Everything else matches C3:
 |---|---|
 | `a5-night-ember-2423-c3b.png` | C3 at night, the bond lines matte black: no line inside the border |
 
+**The C3 pair for the owner (C3d, 2026-11-03, the coordinator's 17:57 pass).** Night and day from one build.
+The set, the camera, the center feed and the grade are unchanged.
+
+- **The red tick by the arm pillar was the glow sheet itself,** seen in a sliver past the field's edge (found by
+  painting parts flat green). The glow now fades over the last 20 mm before the core's edge, inside the black band
+  (`--edge-fade 0.02`). An 8 mm fade (C3c) only halved it. At x 1482-1496, y 497-503 the patch reads RGB:
+
+  | C3b | C3c | C3d |
+  |---|---|---|
+  | 50, 13, 22 | 27, 13, 22 | 19, 13, 22 (the border's black) |
+
+  The left rim is 53.7, against C3b's 54.4.
+- **The ellipse in front of the platter was a print edge:** the front-right post's 2 mm seat in the light guide's
+  underside. The seats are gone (`mantle_strata_v5.py`). The posts butt-bond flat to the backed underside with MA310,
+  on a 0.1 bond line over about 700 mm2, located by a drilled jig plate. Rebuilt with 0 clashes; the posts are 2
+  shorter (30 x 40).
+- **The day border.** C3c's matte black bond line took away the day border's ruby: C3's glossy black had mirrored the
+  room inside the ring. The ring's inner faces are now painted dark grey (10 %) toward the ring and black toward the
+  field, so the glow is still held at night (`--ring-white --ring-albedo 0.10`). White read as a lit edge by day.
+  - The front face's red pixels average 102 (C3: 75).
+  - The right face's salmon band is not brighter: its red pixels average 120 (C3: 141).
+- **Glow on what stands on the deck,** checked on a crop, glow on against off, red of 255:
+
+  | | glow on | glow off |
+  |---|---|---|
+  | the lift post's foot | 22.6 | 7.0 |
+  | the arm pillar's base | 13.7 | 8.2 |
+  | the arm-board disc's edge | 25.2 | 17.8 |
+  | the counterweight | 42.2 | 36.3 |
+
+  Green and blue do not change. No light-path setting hides it: the glow reaches them as direct light through the
+  deck's top, tinted by it, and in their reflections. The arm pillar is black anodized, not steel, so it stays cool;
+  the disc's top faces away from the field.
+- **Not done:** the cool strip reflection along the ring's top edge. It would add a light, and the set stays as it
+  is for the comparison with A.
+- **Underneath, unchanged:**
+
+  | | C3d |
+  |---|---|
+  | base top | 2.9 |
+  | base spots near the posts | 0 / 0 |
+  | floor in front | 6.1 / 4.8 |
+  | field spread (10th to 90th percentile) | 89-151 |
+
+**Cost:** the paint on the ring's inner faces and the jig plate, about +$5 a unit. C3 is about +$150-180 a unit over v3;
+the parts list stays at $3,897.
+
+| frame | what |
+|---|---|
+| `a5-night-ember-2423-c3d.png` | the C3 pair at night |
+| `a5-day-ember-2423-c3d.png` | the C3 pair by day, the same build |
+
 ### The render (how the light is drawn)
 
 The guide's output is drawn as an even Lambertian glow just above the print: 9 W/m2. That figure follows from the
