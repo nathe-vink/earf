@@ -68,7 +68,7 @@ It lifts the cabinet 20 mm.
   - The front and back panels' edges, which stand on the bottom panel: two strips of 480. Their light crosses the 20 mm bottom panel first, through the cemented joint.
   - Each strip in a black aluminium U-channel (12 x 7, `uplight-channel`) on three M3 nylon standoffs, so **neither the channel nor the strip touches the acrylic**: 2 mm of air to the groove's sides, 0.5 mm under the channel.
   - The frosted lens sits 0.6 mm under the wall's edge. Light entering the edge is caught in the wall by total internal reflection and carried up it. The wall glows in its own colour from the foot up and fades with height as the dye absorbs it.
-- **The centre panel** (`uplight-panel`): a 400 x 260 aluminium-core LED board, 24 V, 16 W, 4000 K, on a 2 mm black anodised plate on four brackets in the plinth's opening, under a 3 mm opal PMMA diffuser (420 x 280) held **10 mm under the cabinet's bottom**, as the uplit set's flat panel. It lights the inside of the cabinet through the bottom panel round the batt: the ports, the lining's faces and the woofer's frame, seen through the front as the speaker's colour.
+- **The centre panel** (`uplight-panel`): a 400 x 260 aluminium-core LED board, 24 V, **40 W** (2026-11-03; 16 W before), 4000 K, on a finned black anodised aluminium heat sink (a 3 mm plate, 15 mm fins down into the floor gap, vented to it) on four glass-filled nylon brackets in the plinth's opening, none of it touching the acrylic, under a 3 mm opal PMMA diffuser (420 x 280) held **10 mm under the cabinet's bottom**, as the uplit set's flat panel. It lights the inside of the cabinet through the bottom panel round the batt: the ports, the lining's faces and the woofer's frame, seen through the front as the speaker's colour.
 - **Why 4000 K, not 2700 K:** a neutral white lets each tint show its own colour. Behind blue acrylic, 2700 K reads teal-green and dim; behind clear Fog it reads amber. The floor line's 2700 K was for a warm accent, not for colour.
 
 **How far the light carries up a wall** depends on the tint. This is the e-fold length of the tint's dominant channel, from its 20 mm colour; the wall glows over about two of these:
@@ -92,21 +92,41 @@ It lifts the cabinet 20 mm.
 - **The promo's tall V up the wall is out of reach.** Its lamp put about 135 W of light under the speaker; the plinth's uplight gives about 10 W of light at full (34 W electrical). The wall here gets a shorter, dimmer fan: close in Ember, paler in Ice.
 - **The window** adds a little more glow low in the cabinet.
 - **The cabinet wash** (below) adds a brighter inside and a stronger glow at the ports and walls, and a little more on the wall.
-- **Closest to the promo look for the least change:** the base uplight with the bottom-batt window. No parts, and its glow already fills the cabinet. The next step toward the promo's wall is more light from the centre panel (a 40 W board in place of the 16 W one), not the wash.
+- **Closest to the promo look for the least change:** the base uplight with the bottom-batt window. No parts, and its glow already fills the cabinet. The next step toward the promo's wall was more light from the centre panel, not the wash. **Adopted 2026-11-03: the centre panel at 40 W** (below).
+
+**The centre panel at 40 W** (`like/ice-window-p40.png`, `like/ember-window-p40.png`, `like/sheet-p40.png`: the uplit frame, the window at 16 W, the window at 40 W; Ice on top, Ember below). Mean linear luminance on the cabinet's front and on the wall either side, against the promo:
+
+| | cabinet | wall |
+|---|---|---|
+| Ice, the promo | 0.211 | 0.086 |
+| Ice, window, 16 W | 0.132 | 0.036 |
+| Ice, window, **40 W** | **0.158** (+20 %) | **0.048** (+33 %) |
+| Ember, the promo | 0.167 | 0.052 |
+| Ember, window, 16 W | 0.059 | 0.020 |
+| Ember, window, **40 W** | **0.076** (+29 %) | **0.025** (+24 %) |
+
+- **What 40 W buys:** a brighter cabinet and wall. The wall reaches about half the promo's, so the gain is real but modest; the promo's V needs about ten times the plinth's light.
+- **The heat, at full in a 25 °C room** (estimates, to check with thermocouples after 4 h at full on the first plinth):
+  - **The board:** of its 40 W, about 14 W leaves as light and 26 W as heat in the heat sink.
+  - **The heat sink:** about 0.5 m2 of finned, black anodised surface, convecting into the vented floor gap and radiating. It runs about 15 to 20 K over room, 40 to 45 °C. If the cavity breathes poorly, about 35 K over, near 60 °C.
+  - **The acrylic round it:** it touches nothing but the nylon brackets. The diffuser and the plinth's frames see its radiation and the warm air, about 10 to 15 K over room, so **35 to 40 °C** (about 45 °C in the poor case).
+  - **The cabinet's bottom panel** absorbs some of the light (most in Ember): about 3 K more.
+- **The margin:** about **40 K under cast PMMA's 80 °C** (35 K in the poor case), and 25 to 30 K under its long-term service limit of about 70 °C. That is a clear margin, so **adopted**. At the default 50 % the rises halve.
+- **Supply and cost:** the uplight draws about **59 W at full** (edges 18.4, panel 40), so the supply grows to **24 V, 90 W, Class 2** (at 24 V Class 2 allows up to 100 VA). Cost: the board and heat sink about $120 (from $64), the supply about $40 (from $24): **about +$72 a speaker**.
 
 **The cabinet wash: not adopted** (the coordinator, 2026-11-03: it adds glow inside but not on the wall, puts 11 W into the box, and needs a connector through the bottom; kept in the CAD as an option; `WASH` in `variants.py`, option "Cabinet wash", `cabinet-wash` in `components.json`):
 - **What it is:** COB strips, 24 V, 10 W/m, 4000 K, 1.06 m a speaker, bonded to the bottom panel inside the cabinet at the foot of each side wall and of the front panel, between the wall and its lining, aimed up the wall. The back is left out (its land strip and the amplifier's compartment).
 - **How it is fed:** from the plinth's 24 V through a sealed, potted 2-pin connector in the bottom panel at a foot pad, mating with a spring contact in the plinth's top frame. The cabinet still lifts off its plinth with nothing to unplug.
 - **Cost:** about $60 a speaker (the strip $34, the connector and the spring contact about $15, fitting).
-- **Power:** +11 W at full (+6 W at 50 %), so 45 W in all. The 60 W supply still covers it.
+- **Power:** +11 W at full (+6 W at 50 %), on top of the uplight (70 W in all with the 40 W panel, within the 90 W supply).
 - **Heat:** about 11 W at full inside the acoustic box, 5 mm clear of the lining, the ports breathing. The inside air runs a few K warmer, near the woofer's magnet, well within its rating. To check with a thermocouple on the first sample.
 - **Acoustics:** two millimetres of strip on the floor change nothing measurable.
 - **What it buys:** a brighter inside, not the promo's wall. Worth it only if the owner wants the cabinet itself to glow harder.
 
 **Power:**
-- **At full:** edges 18.4 W, panel 16 W, **34 W**.
+- **At full:** edges 18.4 W, panel 40 W (2026-11-03; 16 W before), **59 W**.
 - **At the default 50 %:** 17 W.
-- **The supply:** grows to a **24 V, 60 W** Class 2 / PS1 plug-in (`plinth-supply`), still outside the FA122's mains.
+- **The supply:** grows to a **24 V, 90 W** Class 2 / PS1 plug-in (60 W with the first 16 W panel) (`plinth-supply`), still outside the FA122's mains.
 
 **Control:** as before. On with the amplifier, off in standby. Dimmable in four steps (off, 25, 50, 100 %, 50 % by default) on the touch pad under the plinth's back edge. PWM at about 20 kHz. Two channels now, the edges and the panel, so the walls and the inside can be balanced at the factory.
 

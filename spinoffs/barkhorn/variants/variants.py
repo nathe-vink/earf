@@ -292,10 +292,10 @@ PRODUCT = dataclasses.replace(
                'channel': {'preset': 'plastic', 'color': '#111111', 'roughness': 0.55},
                # the uplight (variants/BASES.md): 4000 K, so each tint shows its own colour; `glow` W/m2 of emitting face
                # at the default 50 %: the strips about 3 W/m of light (10 W/m electrical) through an 8 mm lens at full,
-               # 375 W/m2; the panel about 5 W of light (16 W electrical) over 0.118 m2 at full, 42 W/m2
+               # 375 W/m2; the panel about 12 W of light (40 W electrical, 2026-11-03; 16 W before) over 0.118 m2 at full, 105 W/m2
                'uplight-edge': {'preset': 'frosted', 'color': '#F4F2EE', 'absorb': '#F0EEEA', 'glow': 188.0, 'glow_color': '#FFCEA6'},
                'uplight-wash': {'preset': 'frosted', 'color': '#F4F2EE', 'absorb': '#F0EEEA', 'glow': 188.0, 'glow_color': '#FFCEA6'},
-               'uplight-panel': {'preset': 'frosted', 'color': '#F4F2EE', 'absorb': '#F0EEEA', 'glow': 21.0, 'glow_color': '#FFCEA6'}},
+               'uplight-panel': {'preset': 'frosted', 'color': '#F4F2EE', 'absorb': '#F0EEEA', 'glow': 52.0, 'glow_color': '#FFCEA6'}},
     kind='Tropos design-pass proposals: Strata\'s caldera and the Topo horn',
     notes=['Proposals beside the current design (variants/README.md); the Cloud\'s CAD is unchanged.'],
     origin=(280.0, 213.7, -12.0), drawing_prefix='BHV')
