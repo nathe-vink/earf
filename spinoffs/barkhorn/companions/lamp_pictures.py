@@ -282,7 +282,7 @@ def build(frame, samples, scale):
         w = bpy.context.scene.world
         vis = getattr(w, 'visibility', None) or getattr(w, 'cycles_visibility', None)
         if vis is not None:
-            vis.glossy = False; vis.transmission = False   # round 8: no daylight-window shapes on the glass at night
+            vis.glossy = False   # round 8: no daylight-window shapes on the glass at night (ruling 3, 2026-11-03: seen through the resin)
         moon = SC.area('moon', (-1.3, -0.4, 1.6), (0, -70, 0), (1.2, 1.6), 2.0 * k, '#9FB2D6')   # the lamp leads
         moon.visible_glossy = False               # round 1: no daylight-window shapes reflected at night
         if False:   # round 5's glint in the outer gloss; round 8 (the gate: a white pin-dot): gone
