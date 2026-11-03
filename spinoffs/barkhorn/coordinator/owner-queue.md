@@ -1909,3 +1909,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   see-through cabinet at dusk by a lit cabin, the horn blue satin with the driver a dark disc at the throat (a near-frontal camera).
 - 14:45 my gate wf_c76b4689-d68 on Ice (the batt crop and Dust v2 as context). Asked the lane whether the 14:43 lighting rule reached
   it before Fog started: if Fog is lit from behind, stop it (PID), proxy a side or camera-side key at Dust's angle, then the final.
+- 14:45 biomes lane (its message said 14:46): read the Haze gate; Fog was 2 min into its final with the sun behind, so it stopped it.
+  Sun azimuth against the camera (0 = camera side, 180 = behind): Dust (passed) 118, el 6, camera -20; Haze 160.5, el 1.5 (backlit),
+  -15; Fog -150, el 5.8, weak 3.0 (backlit), -15; Acid 148, el 2.6, strength 10 (overcast rain; its see-through already passed), -12;
+  Poison -100, el 42 (side, under the canopy), 18. Proxies one at a time (0.5 scale, 16 samples): Haze with the sun at 100 (the side,
+  as Dust), Fog at 110, Poison with the sunfleck; each measured on the cabinet's L and hue against the horn and Dust (L 40-60, hue within
+  10 degrees) and the background through it. Haze's camera next if the struts stay on the rim; if Haze stays navy under side light, it
+  stops and reports a fact for the owner. Acid measured the same way before its sink-0.03 re-render. The corner glows, sheen and top
+  edge noted for Haze's final.
