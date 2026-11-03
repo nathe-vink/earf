@@ -2799,3 +2799,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   panel; Ice blue, Poison green without the stripe), the sweep clean: ready to render. The room and portrait: the bottoms fixed, but at the
   proof's exposure the lower cabinets sit in the sill's shade as dark green boxes; a second portrait proof at the new exposure asked
   (18:46), with the fronts' mean against the row's Poison, before the fix chunk goes to c2 after its chunk 14.
+- 18:48 bar lane: r43-listening v3 at 2e0f36d3426caabc88c7a4a3e33093f29fa15d9e (renders/2026-11-03/barkhorn/planet-tropos-a/r43-listening-v3.png,
+  256 samples; v2 kept beside it): the speaker slid 0.55 m right (the horn and the cabinet top on the lit plaster, the doorway just clear to
+  the left; the camera not moved, the other speaker would enter the frame); the spot 34 degrees (26), blend 0.95, a 0.25 m source, aimed
+  at the top and horn (z 1.05), 240 W, the room fill doubled (0.15 to 0.30): the pool soft-edged; turned 8 degrees toward the camera (the
+  left face's upper third deep red); the woofer surround matt (the crescent gone); the horn-mouth streak gone and the inside's top band and
+  brace red, not salmon; the exposure as v2. It had still not read my shop, window and r44 results.
+- 18:50 my gate on r43-listening v3 (wf_4677aaca-15e; v2 and the older picture as context) started.
