@@ -3592,3 +3592,18 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   - The full-scale B pair is rendering (day 384, night 1024). If the core still can't read by day, the lane will say so as a design
     result for item 89.
 - 23:07 gate launched on the two Hemisphere nights (earf-gate-mantle-lamps, wf_e1fee199-fbc; files scratchpad/gate-lamps/r11/).
+- 23:07 site lane (nothing built; the site held at 743be0cb): the night formats and plan.
+  TODAY: the singles are uplight31/uplit-<k>.png, 1600 square, made into <k>-reel.jpg/.webp, a 168 thumb, and the V2 1600/900 WebP. V2
+  crops them full-bleed: desks 50% 62%, phones 50% 60%, by the lane's numbers. The wall is facade.png 2880x1200 and facade-portrait.png
+  1440x1800; desks contain, phones cover.
+  ASK: singles 2400 square, the speaker inside x 0.30-0.70, y 0.30-0.85 (about 55 % of the height), camera at cabinet mid-height, the
+  room's lights only, named night-<k>.png. Better: art-directed desk 16:9 2400x1350 and phone 9:16 1080x1920 (14 frames). The wall: desk
+  16:9 3200x1800 and phone 9:16 1440x2560 (night-wall.png, night-wall-portrait.png). PNGs under 5 MB.
+  PLAN: seven snaps of 20svh, then the wall. Seven coins, Smoke's drawn only when its frame exists, frames keyed by colour. Each frame
+  carries the colour's name and line; "Render" at lower right; no line about light. The gallery's "At night" views take the singles. The
+  build fails if a drawn coin has no frame. The old *-reel and facade* are removed on the swap. "The same off-then-on change between
+  colors stays" (to check against "No light").
+- 23:13 CHECK before forwarding: my crop maths says a square picture on common laptops (1366x768, 1536x864, 1280x720; the frame
+  ~2.3:1) shows only about y 0.35-0.79 of its height. The lane's y 0.30-0.85 box would cut the feet, and today's frames
+  (y 0.35-0.82) may already be cut on those screens. A measuring workflow (Playwright replica of the V2 stage at 15 viewports,
+  an independent check, a skeptic; wf_ade8d9aa-482) is running before anything goes to the render lane.
