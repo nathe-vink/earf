@@ -3262,3 +3262,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 20:44 sent to the lamps lane: the opal core as a proposal with (b) and (a) together (the sun on the front-right through the window, the
   wall behind in shade), or (b) alone if staged; then full-scale B day and night on the new rig; the hue kept to the chart until the owner's
   daylight photo of today's Core beside a 2069 chip (noted for item 89 in the walkthrough).
+- 20:4x Acid habitat gate wf_56a28c46-563 (3 critics, ~24 min): HOLD 3/3. Grounded (marginally), no light down, premium, the horn smooth with no
+  X, the rain shore strong; but the cabinet dark amber-brown (hue ~33) inside a red-orange outline (hue 10-26, Dust's orange) under a
+  golden horn (46, ~3.6x brighter): two glasses, a second orange; the linings near-black (L 15-34; ~77 % of the cabinet near-black against
+  Dust's ~30 %); the reflection's bottom edge ~27 px below the base; the outer posts black; a dry speaker in hard rain.
+- 20:46 sent to the biomes lane: the tint waits for the speaker lane's shared 9097 fix (no local tuning); the lining assignment checked
+  against Ice's and daylight into the interior (body >= ~0.4 of the scene mean); the base seated with rain rings, the corner sliver gone;
+  the posts' bronze; a few beads; then the horn re-matched; all in the planned Acid proxy, the final after the tint fix. To the speaker
+  lane: the 9097 long-path fix in the shared tint model with a SHA for both lanes (hue 40-55, edges within ~10 of the faces; any
+  approximation documented in TINTS.md), after the floor-patch SHA.
