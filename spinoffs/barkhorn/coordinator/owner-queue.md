@@ -2380,3 +2380,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   the pale strip; the bottom batt plain at phone width). Optional: a faint dark broken line inside the top lip and on the bottom lip
   (refraction in the rolled lip, as on Dust), a hairline glint upper right, a touch more contact shadow under the right third.
   Ready for the walkthrough's biomes item (with Dust polished).
+- 16:29 bar r43-listening gate wf_c21a5827-a46 (3 critics, 20 min): HOLD 3/3 on see-through only. Better than the old on the owner's
+  decisions (the plinth gone, on the floor; the pink wash gone; the horn smooth and glassy; nothing at its feet) but a dark red box:
+  the room exposed as before (wall 126 vs 125), the cabinet half as bright (mean 39 vs 80; ~46-48 % below 30), the lower chamber murky
+  (denoiser mottling), the left side a dark slab, a dark doorway (~37) behind the cabinet and horn. Fixes: a lit background (the
+  beige wall behind it); room light from the camera side or front-above (a ceiling spot re-aimed; mean ~70-80, under 20 % near-black;
+  a faint soft front reflection); a clean lower chamber; the faint curtain red and floor fringe kept faint; check the Ember density
+  against the sheet (Ember passes ~10 % through two walls).
+- 16:30 sent to the bar lane: those fixes, and the same staging for r43-shop, r43-window and r44 before sending (a lit background, a
+  camera-side key, no doorway or window behind); a proxy each; I'll gate each.
