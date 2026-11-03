@@ -3871,3 +3871,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 23:54 sent to the speaker lane: fold all of it into the cover's re-light. One key with consistent physics; every object casts
   shadows, internals included (added to its audit); no lamp for one unit's looks; the cover held for Smoke's sheet like the row; Fog
   grounded by its real shadow.
+- 23:55 Mantle lane (scene_audit.py at 401309d20e853c8402d22bffe0cea0233e9c1cdf: cardcast's 240-wide grid through the .blend's own camera,
+  every camera-hidden mesh at its real geometry, lamp visibility and links, meshes with no shadow): C3e has two camera-hidden flags at
+  0.0 % (out), clean lamps (rulings 1-3), and every mesh casts shadows (ruling 4). So C3e (item 82) stands. The night room's window is
+  now a real opening with a sheer curtain and an emitting evening-sky plane 0.6 m outside. The Ice proxy was restarted after the fix
+  (1800x1200, 128 samples, ~20 min), to be audited before it's sent. Its flag: r32 lamp_pictures.py l.253, Core's LED is a 160° spot
+  with no rotation, so it points down into the dock.
+- 23:55 sent: the LED flag to the lamps lane (check whether that spot is live in Core B; if it points down it lights the dock from
+  inside, which is wrong physics and an underglow risk; stop and fix if so). To the Mantle lane: C3e stands; send the Ice proxy with
+  its audit.
