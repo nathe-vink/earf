@@ -1582,3 +1582,15 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   dark-on-dark"). Dust rendering. My gate wf_6e5b9742-7b1 on Ember (horn A) started 11:59.
 - 12:06 biomes lane: Dust on horn A (2 of 7) at 426996f1bbc28c52ac2f59627adf708f8a1f218f (64 samples, 8 min); its agent passed all four
   ("a faint hint of the corner creases" on the horn, no bold X). Acid rendering. My gate wf_329e2471-34a on Dust started 12:07.
+- 12:13 D night + Smoke-D gate wf_62b05808-38e (3 critics, 29 min): all HOLD 3/3. D night (Ice): "a believable, premium lantern",
+  "physically honest", grounded, no underglow; fails 4 (no light cast upward: the wall beside it L ~8 vs the reference's fan ~2.6x its
+  far wall; the horn unlit), 5 (the horn a near-black indigo slab, L ~4, hue ~236 vs the cabinet's ~215, with a pinwheel/X of streaks
+  from the room light's shape) and 7 (a neon line down the right side from the seam between the side batts or the brace edge; a violet
+  dot in the bottom slot; strays: top-right glow, an orb, a cove streak, a white hot spot on the wall from the speaker's own leak).
+  "Worth showing only beside D+." Smoke at night: white lining clearly better ("nearly the black site image"); black "a PC case with a
+  window"; neither makes 2064 "more transparent" at night (faces not backlit go black): the Smoke answer rests on the day comparison,
+  or a lighter grey sheet.
+- 12:14 sent to the speaker lane: the fixes for D+ (night and day) and a D night re-render (the horn lit honestly and a broad soft
+  fill, the side seam closed or the brace edge satin, the slot's strip end hidden, strays and the leak removed, highlights held, the
+  ambient toward slate, a sharper floor reflection); Smoke black dropped; add a lighter grey sheet to the day comparison if 2064 reads
+  dark. The base question slips to about 14:00 UTC.
