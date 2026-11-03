@@ -374,7 +374,27 @@ def deck_row():
     return s
 
 
-SHOTS['deck-row'] = deck_row
+def _row_gate3(s):
+    """The deck row's fixes (the coordinator's blind critics, 2026-11-03, 2 HOLD 1 SHOW): the camera-right side faces
+    mirrored the white sweep and the key (Smoke's a silver panel, Ice and Haze milky) and each its neighbour (Poison a blue
+    stripe from Ice). A black card behind and right of the row, seen only in reflections (no shadow, no bounce), where the
+    side faces' mirror rays go (about +0.75 x, +0.66 y from a face turned -24 deg); the units a little wider apart; and the
+    sweep's falloff at the bottom left lifted by a soft lamp on the sweep alone."""
+    blk = s['products'][0]
+    n = len(blk['instances'])
+    for k, i in enumerate(blk['instances']):
+        i['position'] = [round((k - (n - 1) / 2) * 1.0, 4)] + list(i['position'][1:])
+    for blk2 in s['products'][1:]:
+        for k, i in enumerate(blk2['instances']):
+            i['position'] = [round((k - (n - 1) / 2) * 1.0, 4)] + list(i['position'][1:])
+    s['set'].setdefault('flags', []).append({'center_m': [2.2, 2.6, 0.9], 'size_m': [13.0, 2.6], 'normal': [-0.75, -0.66, 0.0],
+                                             'reflect_only': True, 'color': '#050505'})
+    s['lights']['sweep-left'] = {'type': 'area', 'size_m': [6.0, 4.0], 'position': [-4.5, -5.0, 4.0], 'target': [-3.5, -2.5, 0.0],
+                                 'irradiance': 1.2, 'color': '#FFFFFF', 'receivers': ['sweep']}
+    return s
+
+
+SHOTS['deck-row'] = lambda: _row_gate3(deck_row())
 
 
 def deck_cover():
@@ -405,8 +425,34 @@ def deck_cover():
 
 SHOTS['deck-cover'] = deck_cover
 # the deck's Home slide: the golden-hour room (754e16a9's scene, covers off) with the pair turned into the final design
-SHOTS['deck-home'] = lambda: dict(strata_lit(room_off(), glow=20.0), title='Tropos at home, golden hour, Poison (the final design)')
-SHOTS['deck-home-portrait'] = lambda: dict(strata_lit(room_off_portrait(), glow=20.0),
+def _room_gate3(s):
+    """The room's fixes (the coordinator's blind critics on the portrait, 2026-11-03, 2 HOLD 1 SHOW): the low sun raked
+    both bottom chambers at floor level, so the bottoms glowed green, the brightest part of each speaker, which reads as
+    a base light by day (the owner: no light). The windows get a sill at 0.9 m (their tops stay at 2.75) and the sun
+    goes down to 8 deg, so it reaches the left unit only above about 0.77 m and the right above about 0.41 m: the bottom
+    40 cm in shade, the light through the upper cabinets and the horns onto the wall behind. AgX in place of PBR
+    Neutral so the greens roll off, and 2/3 of a stop down; the left unit turned so its right side shows its green; the
+    right a little more, off the woofer's pinwheel shadow. The two leads (one to each unit's own outlet, behind it)
+    are kept."""
+    for w in s['set'].get('windows', []):
+        top = w['sill'] + w['size'][1]
+        w['sill'] = 0.9
+        w['size'] = [w['size'][0], round(top - 0.9, 3)]
+    s['sun']['elevation_deg'] = 8.0
+    s['render']['view'] = 'AgX'
+    s['render']['exposure'] = round(s['render'].get('exposure', 0.0) - 0.67, 2)
+    for blk in s['products']:
+        for i in blk['instances']:
+            x = i['position'][0]
+            if x < 0:
+                i['rotate_z'] = 1.0
+            else:
+                i['rotate_z'] = -8.0
+    return s
+
+
+SHOTS['deck-home'] = lambda: dict(_room_gate3(strata_lit(room_off(), glow=20.0)), title='Tropos at home, golden hour, Poison (the final design)')
+SHOTS['deck-home-portrait'] = lambda: dict(_room_gate3(strata_lit(room_off_portrait(), glow=20.0)),
                                            title='Tropos at home, golden hour, Poison, portrait (the final design)')
 
 
