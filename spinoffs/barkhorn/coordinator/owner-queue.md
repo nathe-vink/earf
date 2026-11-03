@@ -3302,3 +3302,14 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 20:58 sent to c4: stop fix1 chunk 1 (the row) by PID, discard the partial, wait for the next SHA. To the speaker lane: both fixes agreed
   (the slid-out cards are flags further out of shot; `back` off a real move); asked whether the room or the portrait has an in-frame
   reflect-only card (c3 renders the portrait); the honest A-ice-polished to be pushed with its path and SHA.
+- 21:00 c4: the row stopped (PID 641, render.py on deck-row.json; PID 638, its queue-01.sh; the wrapper 636 left to exit); ~37 of ~78
+  minutes rendered; no output written, nothing committed; r33-rollout-c4 stays at de0dc50d. Waiting.
+- 21:00 biomes lane: the new Fog final (the reframe, the first with real cards) is NOT deliverable: the real side cards (1.8 m out, 2.6 m
+  wide, inner edges ~0.5 m from the axis inside a ~1.1 m half-frame) stand in shot as black slabs; its own gate missed them, its own look
+  caught them. Fix at 3fdd6d225314366462365c8f6e45b6cf9929107c: each card pushed sideways until wholly beside the frame (Blender's own
+  projection, lens shift included). So the passed habitats (Dust, Ice, Ember; Haze df201486, Acid 43ad3a3f) used reflection-only side
+  cards INSIDE the frame; the Haze A/B now compares those against real cards out of frame (the true test of whether they stand). The Fog
+  final re-renders after the Haze proxy; "nothing foreign in frame" added to its pre-send look.
+- 21:01 c3: fix1 deck-home-portrait landed at b5dd5ebd82c8e5006a0a28fa5a09054dd1370e97 (23.7 min, 1600 x 2000, 4.27 MB, no errors); noted:
+  the left speaker's right side face (toward the cabinet) reads pale cream, not green (the sunlit wall mirrored, or the side sheen).
+  Waiting for the next SHA (chunks 4, 5).
