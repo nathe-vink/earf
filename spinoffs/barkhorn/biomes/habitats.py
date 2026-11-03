@@ -32,6 +32,8 @@ SETS = {
     'ember': {'product.instances.0.rotate_z': -5, 'camera.position': [2.4349, -6.0267, 0.8],
               'lights.crack_r.target': [0.0, 0.0, 0.5], 'lights.crack_r.irradiance': 2.0},
 }
+# set props left out (the coordinator's gate on Dust, 2026-11-03: the tumbleweed floats, its shadow detached)
+DROP = {'dust': ['tumbleweed']}
 SAMPLES = {'ember': 96, 'poison_g5': 96, 'haze_b': 96, 'fog_b': 96}
 
 
@@ -46,6 +48,11 @@ def main():
         tint, lights = HABITATS[n]
         shot = os.path.join(SHOTS, f'{n}-portrait.json' if a.frame == 'portrait' else f'{n}.json')
         out = os.path.join(a.out, f'{n}-{a.frame}.png')
+        if n in DROP:
+            sh = json.load(open(shot))
+            sh['set']['props'] = [p for p in sh['set']['props'] if p.get('fn') not in DROP[n]]
+            shot = out.replace('.png', '.src.json')
+            json.dump(sh, open(shot, 'w'), indent=1)
         # horn A on its own M8 feet (base A and its light left out), direct light stopped at the horn
         cmd = [sys.executable, os.path.join(HERE, 'habitat.py'), shot, tint, '--out', out,
                '--samples', str(max(a.samples, SAMPLES.get(n, 0))), '--scale', str(a.scale), '--stand', 'feet',
