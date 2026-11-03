@@ -1337,3 +1337,15 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   black; the room 0.3 % of day); the day glint was the bearing's brass nut and washer, now chemically blackened. Floor neutral and
   identical in both nights. Cost unchanged (+$120-150, $3,897); deck 24.6 mm awaits sign-off. Gate wf_e731b155-c40 started
   (same script and tests as g1; sha256 night Ember 2a961826, night Poison e7e4d48a, day 4130c44c).
+- 09:58 check-in #37. Two gates running: speaker A/B (wf_4f6468e4-f67, 1 of 3 back) and Mantle g2 (wf_e731b155-c40). Lamps lane
+  (r32-lamps-final ed50b4933aebbf6637e9fd4ce9f3c2c7e845afcb, 09:48): lit Ice holds within ~10 degrees only at ~5700 K (render:
+  2700 K -64, 3500 K -49, 4000 K -36, 5000 K -19, 5700 K -10); Haze drifts red-violet at 2700 K and holds by ~4000 K; Ember, Dust,
+  Acid, Poison hold at 2700 K; Fog and Smoke show the source's colour at any CCT. Proposal in the BOM notes: Core's board 2700/5700 K
+  tunable (Ice default 5700 K); Hemisphere Ice a 5000-5700 K Vero 10. Core's ball is frosted inside in the CAD (not the lane's
+  proposal; a clear ball shows the LED as a hot spot); three nights rendering at 5700 K: Core clear, Core frosted, Hemisphere over a
+  table. Biomes: full renders queued (idle turn since 09:12).
+- 10:00 sent. Lamps: no conflict with the owner's rule (it is about a base or stand throwing a pool down instead of through the
+  acrylic; a pendant lighting its table is its job); my call (a proposal to the owner): tunable white in both lamps, each tint's
+  default set so it shows its own colour (Ice ~5700, Haze ~4000, warm and green tints 2700), warm always available; check a
+  tunable COB for Hemisphere. Speaker: measure D night's Ice hue against day; if more than ~15 degrees off, render Ice at the CCT
+  that holds it (as Smoke takes 6500 K). Re-armed for 10:50 (#38).
