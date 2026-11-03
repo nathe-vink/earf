@@ -2337,3 +2337,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   3x; no light down; "a smooth glassy shell with the driver at its throat, no X or seams", but "a fairly flat, shallow mouth rather
   than a deep flare"). The batt plainly in view. Next, one at a time: the Haze and Poison proxies, then Fog's final.
 - 16:11 my gate on Ice polished started (the batt crop, the satin Ice and the polished Dust as context).
+- 16:12 Smoke target gate wf_39a2255a-4e0: 1 of 3 back (two died on API 500s); that one (photo lens) HOLD on the horn only: the
+  cabinet answers the note (clearly better than 2064; the side grey glass, braces through, true blacks, no veil, daylight through it
+  into the shadow); the horn now too pale (mean 169 vs the cabinet's 114; the funnel nearly flat, 188-204; "a flat clear visor with a
+  black outline and a black driver eye"; the tabs near-black ~23-35, "black plastic clips"; a perfectly neutral tint vs the cabinet's
+  ~3 % cooler smoke, so a little beige over the cream wall). Fix: one notch deeper only (the flare ~175-180 on the wall, ~50 % through
+  vs 69 %, the horn's mean ~150-155, still lighter than the cabinet), the cabinet's cool cast, the tabs dark see-through grey ~45-50.
+  The lane had said the same ("one notch deeper would put it inside").
+- 16:13 sent to the speaker lane: that one pass after the chunk now running (same set, camera, exposure), then the chunks; the
+  failed critics not re-run (the frame changes); the new frame gets a full gate.
