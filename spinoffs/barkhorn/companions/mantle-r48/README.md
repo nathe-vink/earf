@@ -782,6 +782,31 @@ grade read flat, and the border read as a black bezel.
 | `a5-night-ember-2423-c3.png` | C3 at night: the glow up to the platter, falling off outward; the border dark |
 | `a5-day-ember-2423-c3.png` | C3 by day: deeper ruby over an even print; the border clear tinted glass |
 
+**C3's night gate (17:07).** The gate showed C3 by day 3/3, and held it at night 3/3 on one fault. A thin red line
+ran inside the border along the back-left edge, with a fainter one low on the front face. It was the border frame's
+inner cut face, drawn as glossy black lacquer, mirroring the field's glow.
+
+The bond lines are now matte black: the frame to the field, and the rings to the core. That is what an index-matched
+black cement looks like from either side. Nothing else changed, and the day frame stands.
+
+On the line's own pixels (back-left crop at 100 %, 884 px), C3 read RGB 37, 26, 36 and C3b reads 21, 25, 35, the
+border's black. Everything else matches C3:
+
+| | C3b |
+|---|---|
+| base top | 2.7 |
+| base spots near the posts | 0 / 0 |
+| floor in front | 6.1 / 4.8 |
+| platter foot | 140 |
+| field | 129 |
+| field spread (10th to 90th percentile) | 101-151 |
+
+**Cost:** none. The black cement was already in C3's bond-line estimate.
+
+| frame | what |
+|---|---|
+| `a5-night-ember-2423-c3b.png` | C3 at night, the bond lines matte black: no line inside the border |
+
 ### The render (how the light is drawn)
 
 The guide's output is drawn as an even Lambertian glow just above the print: 9 W/m2. That figure follows from the
