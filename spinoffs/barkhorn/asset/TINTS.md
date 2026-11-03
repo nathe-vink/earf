@@ -26,24 +26,47 @@ The cabinet is 20 mm in the model (3/4 in, 19 mm, at order). The horn, caldera a
 A **mill run** is a standard code poured to a thickness nobody stocks (a minimum of about 8 to 10 sheets, no color fee;
 `make/stock-pair.md`). A **custom batch** is a new tint or depth (a color match and a pour minimum).
 
-| tint | cabinet (3/4 in) | source | horn (1/2 in layers) | source |
+| tint | cabinet (3/4 in) | source | horn: formed, 10 mm (horn A, since 2026-11-03) | horn chip, TT through 10 mm, against the stock code at 10 mm |
 |---|---|---|---|---|
-| Ember | **mill run**, 2423 at 3/4 in | not stocked above 1/2 in (R1 l.133; `make/stock-pair.md` l.12) | **stock**, TruCast 2423 1/2 in | AC Plastics, 19 in stock (R1 l.133) |
-| Dust | **mill run**, 2422 at 3/4 in | stocked only to 1/2 in (R1 l.134) | **custom batch**, the deep horn in 2422's hue | the coordinator's call (above): deeper than stock 2422 1/2 in (59.1 %) |
-| Acid | **mill run**, 9097 at 3/4 in (to confirm: a fluorescent at 20 mm is unverified) | TruCast 9097 stocked only to .220 (R1 l.161) | **custom batch**, the deep horn in 9097's hue | as Dust; 9097 is not stocked at 1/2 in at all (R1 l.161) |
-| Poison | **custom batch**, 32.3 % through 20 mm in 2092's hue | colors F (above) | **mill run**, 2092 at 1/2 in | **2092 is not stocked at 1/2 in**: AC only to .220, Canal, eStreet, Delvie's and US Plastic to 1/4 in (R1 l.168) |
-| Ice | **mill run**, 2069 at 3/4 in | stocked to 1/2 in, AC 42 in stock (R1 l.176) | **custom batch**, the deep horn in 2069's hue | as Dust; stock 2069 1/2 in (57.6 %) is the pale one |
-| Haze | **custom batch**, 25.8 % through 20 mm in 2287's hue, transparent | colors F (above); 2287 is stocked nowhere in R1's lists, and is translucent (R1 l.259: a chip only) | **custom batch**, a transparent pour in 2287's hue at 13.5 % through 12.7 mm, as the model renders it | **no transparent violet at 1/2 in**: 373 Purple is .220 only and far deeper (7.4 %), 3730 1/8 in only, 1020 1/8 to 1/4 in (R1 ll.25, 186, 187). A 373 mill run would be the wrong depth and hue, so the custom pour is the route |
-| Fog | **stock**, clear cell cast 3/4 in | Canal stocks clear to 1 in (R1 l.195) | **stock**, clear 1/2 in | clear is stocked in every thickness to 1 in (R1 l.195) |
-| Smoke | **mill run**, 2074 at 3/4 in; the first pair stocked 2064 3/4 in | 2074 only to 1/2 in (R1 l.204); 2064 3/4 in, 3 left (R1 l.203) | **stock**, TruCast 2074 1/2 in | AC, eStreet, ePlastics (R1 l.204) |
+| Ember | **mill run**, 2423 at 3/4 in | not stocked above 1/2 in (R1 l.133; `make/stock-pair.md` l.12) | **custom batch**, deep red | #C50206, 11 % against 2423's 36 % |
+| Dust | **mill run**, 2422 at 3/4 in | stocked only to 1/2 in (R1 l.134) | **custom batch**, deep orange | #B85010, 15 % against 2422's 74 % |
+| Acid | **mill run**, 9097 at 3/4 in (to confirm: a fluorescent at 20 mm is unverified) | TruCast 9097 stocked only to .220 (R1 l.161) | **custom batch**, deep amber | #B88E00, 27 % against 9097's 85 % |
+| Poison | **custom batch**, 32.3 % through 20 mm in 2092's hue | colors F (above) | **custom batch**, deep green | #0E6A06, 10 % against the cabinet batch's 55 % |
+| Ice | **mill run**, 2069 at 3/4 in | stocked to 1/2 in, AC 42 in stock (R1 l.176) | **custom batch**, deep blue (a little more green than 2069 made deeper, which drifts violet) | #0A52B8, 9 % against 2069's 73 % |
+| Haze | **custom batch**, 25.8 % through 20 mm in 2287's hue, transparent | colors F (above); 2287 is stocked nowhere in R1's lists, and is translucent (R1 l.259: a chip only) | **custom batch**, deep violet | #4512D0, 6 % against the cabinet batch's 49 % |
+| Fog | **stock**, clear cell cast 3/4 in | Canal stocks clear to 1 in (R1 l.195) | **stock**, clear 3/8 in | clear, 92 %: clear is stocked in every thickness to 1 in (R1 l.195) |
+| Smoke | **mill run**, 2074 at 3/4 in; the first pair stocked 2064 3/4 in | 2074 only to 1/2 in (R1 l.204); 2064 3/4 in, 3 left (R1 l.203) | **custom batch**, deep grey; **the first pair on stock 2074 3/8 in** (it reads at 0.48 of its cabinet, still deep) | #424548, 5 % against 2074's 33 % |
 
 - **The caldera and the plinth** are 1/2 in in the cabinet's tint (`variants/BASES.md`). They follow the cabinet's code
   at 1/2 in: stocked for Ember (2423), Dust (2422, 1 left), Ice (2069), Fog (clear) and Smoke (2074; the first pair 2064,
   stocked). Acid (9097) needs a mill run at 1/2 in. Poison and Haze come from their custom batches, poured at 1/2 in too.
-- **Count:** custom batches 6, the cabinets of Poison and Haze and the horns of Dust, Acid, Ice and Haze. Mill runs 6,
-  the cabinets of Ember, Dust, Acid, Ice and Smoke, and Poison's horn. Plus Acid's caldera and plinth at 1/2 in, in the
-  same 9097 run if the mill pours both thicknesses. Stock: Fog's cabinet, and the horns of Ember, Fog and Smoke.
+- **Count (horn A, 2026-11-03):** custom batches 9, the cabinets of Poison and Haze and seven formed horns (all but
+  Fog's), each poured as 10 mm sheet for the forming. Mill runs 5, the cabinets of Ember, Dust, Acid, Ice and Smoke,
+  plus Acid's caldera and plinth at 1/2 in in the same 9097 run if the mill pours both thicknesses. Stock: Fog's
+  cabinet and horn, and the first pair's Smoke horn (2074 3/8 in). (With Strata's stepped horn, the alternative, it was 6
+  custom batches and 6 mill runs.)
 - Stock counts move. Recheck each line against the vendor before an order. These are R1's counts of 2026-10-31.
+
+**The formed horn (horn A; the owner, 2026-11-03 03:00: "Horn: A, smooth, satin outside").** Each of the eight is
+matched by eye to its cabinet and kept deep, as Ice and Ember were in the horn study (`renders/2026-11-02/barkhorn/
+horn-study/deep/README.md`, round 2). The method: front-off-tall proxies in the site's studio (the rim lamp off), the horn's
+colour moved until its median hue sits within 5 degrees of the cabinet's and its median luminance near round 2's, a
+quarter to a half of the cabinet's. Five rounds in all, chips and depths in `FORMED_HORN` (`product.py`):
+
+| tint | chip | horn against cabinet (luminance) | hue difference | in sheet terms |
+|---|---|---|---|---|
+| Ember | #C50206 | 0.45 | 0 | custom, about 2.3 times 2423's dye |
+| Dust | #B85010 | 0.46 | +2 | custom deep orange (2422 made deeper drifts red, so the chip is its own) |
+| Acid | #B88E00 | 0.56 | -1 | custom deep amber; its cabinet is the brightest, and deeper turned orange |
+| Poison | #0E6A06 | 0.34 | +1 | custom deep green |
+| Ice | #0A52B8 | 0.29 | +3 | custom deep blue |
+| Haze | #4512D0 | 0.25 | 0 | custom deep violet |
+| Fog | clear | 0.92 | (clear) | stock clear 3/8 in |
+| Smoke | #424548 | 0.36 | (grey) | custom deep grey; stock 2074 3/8 in reads 0.48, deep enough for the first pair |
+
+**Every formed horn is a custom batch but Fog's.** Stock tinted sheet, through a formed horn's single 10 mm wall, reads
+pale against its 20 mm cabinet: the formed horn needs more dye a millimetre than any stocked code. The stepped horn hid
+this by stacking 22 layers. The batch minimum is the caster's, to quote (the RFQ).
 
 The rest of this file is the stock-tint record it builds on.
 

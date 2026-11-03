@@ -2730,7 +2730,11 @@ if os.path.exists(TRUCAST_FILE):
 # front-off-tall proxies in the site's studio (renders/2026-11-02/barkhorn/horn-study/; asset/TINTS.md): the colour of
 # the horn's 10 mm sheet (`deep` reached in 10 mm). Its shell is fine glass-bead blasted outside (roughness 0.25, about a
 # 400 to 600 grit finish), the air path masked and left polished; the throat piece, pod, cap and pads polished
-FORMED_HORN = {'cloud-blue': '#0A52B8', 'cloud-red': '#C50206'}     # the rest filled from calibration below
+FORMED_HORN = {'cloud-red': '#C50206', 'cloud-orange': '#B85010', 'cloud-amber': '#B88E00', 'eucalyptus-y2k-green': '#0E6A06',
+               'cloud-blue': '#0A52B8', 'cloud-violet': '#4512D0', 'birch-fog-clear': '#FFFFFF', 'cloud-black': '#424548'}
+# measured in the site's front-off-tall (rim lamp off), horn against cabinet (median luminance, hue difference): Ember 0.45 0,
+# Dust 0.46 +2, Acid 0.56 -1 (its cabinet is the brightest; deeper turns orange), Poison 0.34 +1, Ice 0.29 +3, Haze 0.25 0,
+# Smoke 0.36 (grey), Fog clear (asset/TINTS.md, "The formed horn")
 FORMED_HORN_SATIN = 0.25
 for _f, _v in VARIANTS.items():
     _m = _v.get('materials', {})
