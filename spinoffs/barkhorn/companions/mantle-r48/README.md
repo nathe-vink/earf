@@ -515,6 +515,40 @@ notes were left; each is fixed in the model or the scene, not per frame (`render
 - **No amber glint by day.** The bearing's nut, washer and housing under the deck are chemically blackened on the
   brass, so they no longer read as a light left on.
 
+### The gate's third pass (10:16)
+
+The day frame passed 3/3, and the underglow stays fixed. Both nights were held: they did not read as tinted glass and
+they read as cheap. The fixes (`render_lantern.sh g3`, all in the model or the light):
+
+- **The edge stripe** was the 5.6 skin acting as a light guide. Light trapped in it by total internal reflection left
+  through its polished edges. The skin's four perimeter edges are now painted black after polishing: masked, one coat
+  of black acrylic lacquer, about **$8-12 a deck** in labor.
+- **The bright band just inside the rim** was the print over the groove's ceiling. It sits right over the strip.
+  - That ceiling is now printed black, an opaque band over the strip.
+  - The core's perimeter tape is black, not white, so it absorbs what reaches the rim.
+  - The dark tinted frame now reads about 19 mm wide.
+  - The glow is graded darker toward the rim: 0.5 at the rim, rising to 1.1 inside.
+- **The color is derived, not picked.**
+  - The strip is a 4000 K COB, the speakers' CCT, drawn as a blackbody at 4000 K.
+  - The tint comes from the 5.6 skin's own absorption on the way out.
+  - The lamps lane's note (r32-lamps-final, `launch/stock-tints-lamps.md`) was not found at that path, so the
+    derivation is the render's own.
+- **The light:**
+  - exposure down half a stop;
+  - the speaker lane's night set: a wall close behind, the floor #2A2D33 at roughness 0.15, a low navy ambient, so the
+    record, the platter and the arm read and the top has a room to reflect;
+  - no rim and no kicker, so there is no lamp pool on the floor and no grey wash on the deck's side;
+  - more samples, for less grain.
+- **The strip's own emitter is off in the render.** The glow sheet is the strip's whole output once it has spread; with
+  both on, the light counted twice at the groove.
+- **The day frame** is re-rendered, because the black skin edges and the masked band change it.
+
+| frame | what |
+|---|---|
+| `a4-night-ember-2423-g3.png` | Ember at night after the gate's third pass |
+| `a4-night-poison-2092-g3.png` | Poison at night after the gate's third pass |
+| `a4-day-ember-2423-g3.png` | Ember by day after the gate's third pass |
+
 ### The render (how the light is drawn)
 
 The guide's output is drawn as an even Lambertian glow just above the print: 9 W/m2. That figure follows from the
