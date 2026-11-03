@@ -1718,3 +1718,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   much as up, so it breaks the floor rule unless backed, and backed it is opaque again; +$40-60); E a stronger graded print (+$0, still
   a panel). The lane's reading: only C gives real depth by day and keeps the floor dark. v4 as is: +$140-160 over v3, $3,897 in parts;
   deck 24.6 mm awaiting sign-off. Gate wf_9e88ad0b-a0f on the Ember pair started 13:09.
+- 13:11 biomes lane: Ember on horn A re-rendered at 069ee400bb194eab7016d3ee289dce65adb5c416 (feet bedded 12 mm, rotate_z -1, crack_r
+  2.0, camera 0.8 m, --horn-front, 96 samples): contact at 390 px 14.8 under vs 13.6 base (open ground 45.9), a continuous band; the
+  foot's peak 60 (was 181); the lane's gate passed all four. The optional fill out (the front lava lamp lit the white lining), so the horn
+  stays brighter than the cabinet. Dust ~13:20. My gate wf_2956fd08-cfc on Ember started 13:12.
