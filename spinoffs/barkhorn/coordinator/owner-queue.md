@@ -2550,7 +2550,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 17:46 my gate on r43-shop v2 (wf_58a4dd5a-08b; the held v1 and the older picture as context) started.
 - 17:46 sent to the bar lane: r43-window next, then the r44-lantern polish, then the r43-listening polish; the 2.2 m eye held until the
   gate.
-- 17:53 deck gate wf_c88bd48e-6a2 (3 critics, ~38 min): both frames HOLD 2/3.
+- 17:47 deck gate wf_c88bd48e-6a2 (3 critics, ~38 min): both frames HOLD 2/3.
   - deck-row (chunk 2, 388e1b79b): one SHOW, two HOLD on see-through. Fronts, grounding (four feet, soft contact shadow), no light,
     the polished horns (each within 2-5 degrees of its cabinet's hue) all pass; the camera-right side faces mirror the white sweep:
     Smoke's a silver panel (153, p95 215, vs 43 on its front), Ice's and Haze's milky (saturation 0.39 and 0.22 vs 0.80 in the passed
@@ -2563,8 +2563,22 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
     glint lines on the horns, a green line on the floor, a third of each speaker clipped to screen green (vs 12 % for the row's
     Poison), the vase two-tone, a flat grey right side on the left unit, a pinwheel shadow on the right cone, only one power lead.
   - My look agrees on both. The deck's v69 waits for the re-renders.
-- 17:53 sent to the speaker lane: room31's sun restaged before chunk 4 renders (deck-home shares it), the bottom ~40 cm in shade and the
+- 17:49 sent to the speaker lane: room31's sun restaged before chunk 4 renders (deck-home shares it), the bottom ~40 cm in shade and the
   sun through the upper cabinet and horn onto the wall; AgX or Filmic, the greens rolling off; the glint lines; the vase and credenza
   out of the green; the left unit turned; the pinwheel; both leads. The row: black flags camera-right and a little spacing; the sweep
   corner; Acid's edge checked against the measured spectrum (kept if physical); Fog left; Smoke on 2074. Proxies between its renders;
   chunk 4 with the fix; the row and portrait re-renders as one fix chunk for me to route to the first free helper; full SHAs.
+- 17:50 Fog gate wf_edc8deda-9af (3 critics, ~25 min): HOLD 2/3 (test 5). The base down in the grass, the clear cabinet real premium
+  acrylic (glowing edges; woofer, braces, ports crisp), no light down; but the first bright-sky test of the polished horn fails: its
+  corner creases read as an X (a lopsided fan) on the throat, still at phone size; right of the driver the flare spans ~94 grey levels
+  (p5-p95) vs 25 in Dust and 39 in Ice; crease contrast 34-55 L vs 20 or less on the passed ones. Cause: the fog bank's top edge and the
+  dark ridge behind mid-horn, each wall refracting a different tone, no tint to absorb it. Also: an ivory cast (edges and batt faces
+  b* 12-15 vs the horn 2-6, the sky -3); the sunlit left side batt a flat cream panel (L* ~75); bubble-like blobs on the horn's top lip;
+  the right rock's peak at the cabinet's top edge. The SHOW: soft facets, not an X. One critic: if re-framing can't clear it, it is
+  evidence for the owner that the clear tint is the polished horn's worst case, the finish unchanged without the owner. My look: the
+  fan reads at full size; the background edge behind the horn is the cause.
+- 17:53 sent to the biomes lane: the whole horn on one even tone (the camera ~8 % lower or lens rise; more defocus; not front-on), the
+  crease contrast re-measured at proxy size (target 20 L or less); a photographer's white balance toward b* 5 or less on the edges (the
+  sheet's colour unchanged); the left face quieted (a few degrees toward the front, or the sun higher or more frontal); the lip, the
+  rock; Acid's horn checked the same way before its final; the measurements to me if the X stays. A Fog proxy at its next gap; the
+  final after its queue or sooner.
