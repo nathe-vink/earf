@@ -1,0 +1,1091 @@
+{
+  "summary": "Verify IEC/UL 62368-1 stability requirements and options for a tall active floor speaker",
+  "agentCount": 4,
+  "logs": [],
+  "result": {
+    "research": [
+      {
+        "key": "clause",
+        "findings": [
+          {
+            "claim": "Source caveat: I could not get the English IEC text of clause 8.6 from a licensed copy. Full copies on file-sharing sites were deliberately not used. The clause wording below comes from Korea's KC 62368-1, a translation notified to the WTO. That translation states it adopts KS C IEC 62368-1 (2021) 'without changing the technical content' of IEC 62368-1. Its text matches the 3rd edition (2018): it has outdoor equipment (3.3.3.5) and wireless power transmitters (3.3.3.12), and the 8.6.2.2 and 8.6.5 wording matches UL's and TÜV's descriptions of the Ed. 3 changes. JEITA summaries and UL, TÜV and CEPREI analyses back it up. Quotes are in the original Korean or Japanese, with my English rendering in the claims.",
+            "source_url": "https://members.wto.org/crnattachments/2021/TBT/KOR/21_3774_00_x.pdf",
+            "source_quote": "이 안전기준은 IEC 62368-1, Audio/video, information and communication equipment – Part 1: Safety requirements 를 기초로, 기술적 내용 및 대응 국제표준의 구성을 변경하지 않고 작성한 KS C IEC 62368-1 (2021.xx)을 인용 채택한다.",
+            "confidence": "high"
+          },
+          {
+            "claim": "8.6.1 (2018): stability classification uses Table 35, line 5, which is based on mass only: MS1 ≤ 7 kg, MS2 ≤ 25 kg, MS3 > 25 kg. Consumables or media shipped in the equipment count toward the mass. There is no height threshold in the classification. Tropos at 74 kg alone, or 84.6 kg on the plinth, is MS3. In the 2023 edition the same classification is Table 34, line 5 (JEITA's 2026 check sheet: '機器の分類 (表34の行5)').",
+            "source_url": "https://members.wto.org/crnattachments/2021/TBT/KOR/21_3774_00_x.pdf",
+            "source_quote": "기기의 안정성 측정을 위한 제품 분류는 표 35, 행 5에 따른다. … 5 기기 중량 f ≤ 7 kg ≤ 25 kg > 25 kg",
+            "confidence": "high"
+          },
+          {
+            "claim": "8.6.1 (2018): units fixed together are classed by their total mass; units that can be separated for relocation are classed by their individual masses. This matters if the plinth is bolted to the speaker. The equipment must meet 8.6.2 to 8.6.5 as Table 36 directs, where an 'X' marks an applicable test.",
+            "source_url": "https://members.wto.org/crnattachments/2021/TBT/KOR/21_3774_00_x.pdf",
+            "source_quote": "장치들이 함께 고정되는 경우, MS 등급은 장치의 전체 중량에 따라 결정된다. 장치가 재배치를 위해 분리할 수 있는 경우, MS 등급은 각각의 중량에 의해 결정된다. … 기기는 표 36에 따라 8.6.2, 8.6.3, 8.6.4 및 8.6.5에 주어진 요구 사항 및 시험에 적합해야 한다.",
+            "confidence": "high"
+          },
+          {
+            "claim": "Table 36 (2018), 'Overview of requirements and tests', as read from the rendered KC table (KC page 163). MS1, all equipment: no stability requirements. MS2 floor-standing: 8.6.3 only. MS2 non-floor-standing: 8.6.2.2. MS2 equipment with controls or displays: 8.6.4. MS3 floor-standing: 8.6.2.2 (static stability), 8.6.2.3 (downward force) and 8.6.3 (relocation), with no X under 8.6.4 or 8.6.5. MS3 non-floor-standing: 8.6.2.2. MS3 equipment with controls or displays: 8.6.2.2, 8.6.4 and 8.6.5. Fixed equipment (MS2 and MS3): no stability requirements. Rows can overlap, so a floor-standing MS3 unit that also has front controls collects both sets of tests, minus the glass slide. So the 20%/250 N test (8.6.5) is not required for a floor-standing MS3 unit purely because it is floor-standing.",
+            "source_url": "https://members.wto.org/crnattachments/2021/TBT/KOR/21_3774_00_x.pdf",
+            "source_quote": "표 36 — 요구 사항 및 시험의 개요 … MS3 바닥 직립형 기기 x x x 비바닥 직립형 기기 x 컨트롤 또는 디스플레이 기기 a x x x 고정 기기 b 안정성 요구 사항 없음",
+            "confidence": "high"
+          },
+          {
+            "claim": "Table 36 footnote a (2018) defines 'equipment with controls or displays' as: equipment with front-mounted accessible user controls, and equipment with moving-image displays likely to be used in the home or similar places where children can reach it. UL's English paraphrase is 'equipment with front mounted accessible user controls and equipment having displays with moving images likely to be used in the home…'. A loudspeaker therefore lands in the MS3 row that includes 8.6.5 only if it has front-mounted, accessible user controls (or a video display).",
+            "source_url": "https://members.wto.org/crnattachments/2021/TBT/KOR/21_3774_00_x.pdf",
+            "source_quote": "전면에 장착된 접근 가능한 사용자 컨트롤을 갖고 있는 기기 및 기기에 어린이들이 접근할 수 있는 집이나 이와 유사한 환경에서 사용될 가능성이 있는 동영상 디스플레이를 가진 기기",
+            "confidence": "high"
+          },
+          {
+            "claim": "UL Solutions' Ed. 3 analysis describes the 2018 Table 36 change: MS2 equipment with front-mounted accessible user controls, or with moving-image displays likely to be used where children are present, now gets a static stability test instead of the horizontal force test. It also says Table 36 now uses the defined term 'Fixed Equipment' and that the glass slide test no longer applies to floor-standing equipment.",
+            "source_url": "https://collateral-library-production.s3.amazonaws.com/uploads/asset_file/attachment/56784/62368-1_Ed_3_UL_Analysis_2021-10-22.pdf",
+            "source_quote": "A static stability test now is required instead of the horizontal force test for class MS2 equipment with front mounted accessible user controls and equipment having displays with moving images likely to be used in the home or similar installation environments where the equipment may be accessible to children (aka, TV, but possibly other equipment).",
+            "confidence": "high"
+          },
+          {
+            "claim": "Independent confirmation of who gets 8.6.3 and 8.6.5 under GB 4943.1-2022, China's adoption of IEC 62368-1:2018. A CCC transition document compares it with GB 8898-2011, China's adoption of IEC 60065. It says 8.6.5 (horizontal force, 20% of weight or 250 N, whichever is smaller) applies to MS3 equipment with controls or displays. It says 8.6.3 (relocation) applies to MS2/MS3 floor-standing equipment. The old 60065-based 19.3 test applied 13% or 100 N (whichever is smaller) to equipment of 25 kg or more. The document is CEPREI's; this copy is a mirror.",
+            "source_url": "https://yzvideo-c.yizimg.com/335356/2023328-103841516.pdf",
+            "source_quote": "8.6.5 水平力试验，适用于MS3级的控制或显示设备。力的大小等于设备重量的20%，或250N，取较小者。 | 19.3 水平力试验，适用于质量 ≥ 25kg的设备。力的大小为设备重量的13%或100N，取较小者。 | 8.6.3 更换位置的稳定性（适用于MS2,MS3级的落地式设备）",
+            "confidence": "high"
+          },
+          {
+            "claim": "A test-equipment maker's explainer of IEC 62368-1:2018 says the same thing. A floor-standing TV over 25 kg is MS3 and needs 8.6.2.2 static stability, 8.6.2.3 downward force and 8.6.3 relocation; 8.6.5 is not listed. It also says passing any one of the three static stability methods is enough.",
+            "source_url": "https://www.kingpocn.com/news/300.html",
+            "source_quote": "若尺寸很大（重量大于25kg）的电视机设计成落地式设备，则该电视机为MS3，除了进行§8.6.2.2的静态稳定性试验还需要进行§8.6.2.3的向下力的试验和§8.6.3更换位置的稳定性试验。",
+            "confidence": "medium"
+          },
+          {
+            "claim": "8.6.2.2 static stability test (2018/2023) is passed by ANY ONE of three methods. (1) Tilt the equipment up to 10° in all directions. (2) Put it on a 10° inclined plane and rotate it slowly through 360°. (3) Put it on a horizontal non-skid surface and apply two forces. One is 50% of its weight but no more than 100 N, vertically downward; if the support surface stops it overturning, the test is repeated so that it does not. The other is 13% of its weight in all horizontal directions, capped at 250 N according to this translation. The forces go on through a test tool of about 125 × 200 mm at the worst point, to give the greatest overturning moment, at any height up to 1.5 m above the base. The force is removed once the equipment has tilted 10° and is still stable. There is no 20%/250 N force and no 2 m height anywhere in 2018/2023 8.6.2.2.",
+            "source_url": "https://members.wto.org/crnattachments/2021/TBT/KOR/21_3774_00_x.pdf",
+            "source_quote": "기기는 다음중 하나의 시험을 적용한다. — 기기의 바닥을 기준으로 모든 방향에서 10°까지 기울인다. — 기기는 수평에서 10°의 평판에 놓이고, 기준 수직 축 기준으로 천천히 360° 회전한다. — 기기는 수평 미끄럼 방지 표면에 놓이고 다음 힘을 적용한다: ∙수직으로 기기 무게의 50%이나 100N 이하. … ∙모든 수평 방향으로 무게의 13%이나 250N 이하 … 시험은 기기 바닥에서 1.5 m를 넘지 않는 높이에 적용한다. 기기가 수직으로부터 10° 기울어 진 후에도 안정적으로 유지된다면 힘은 중단되어야 한다.",
+            "confidence": "high"
+          },
+          {
+            "claim": "Conflict on the cap for the 13% horizontal option in 2018 8.6.2.2. KC 62368-1 and the Kingpo explainer say 250 N. TÜV Rheinland's 3rd-edition sheet says 100 N. TÜV also confirms that in Ed. 2 (2014), 8.6.2.2 used 20% of weight capped at 250 N in any direction except upward, and that Ed. 3 replaced it with 50%/100 N downward plus 13% horizontal, or a 10° tilt with 360° rotation.",
+            "source_url": "https://www.tuv.com/content-media-files/korea/pdfs/tuv-rheinland-iec62368-1-3rd-edition-productsheet-en.pdf",
+            "source_quote": "27. (8.6.2.2) Modify the test method for the static stability test, except for tilt 10° not changed, e.g. changed from a 20% of the weight but limited to 250N in any direction except upwards to a 50% of the weight vertical downwards but limited to 100N and a 13% of the weight in all horizontal directions but limited to 100N, or a tilt 10° at 360° rotation.",
+            "confidence": "medium"
+          },
+          {
+            "claim": "UL says the Ed. 3 static stability requirements were restructured but that equipment which passed before is expected to keep passing. For the option with 50% of weight (max 100 N) downward on a non-skid surface, it added: if the supporting surface prevents overturning, the test is repeated so the surface is not used to pass.",
+            "source_url": "https://collateral-library-production.s3.amazonaws.com/uploads/asset_file/attachment/56784/62368-1_Ed_3_UL_Analysis_2021-10-22.pdf",
+            "source_quote": "For the test option where the equipment is placed on a horizontal non-skid surface and subjected to a force equal to 50 % of the weight of the unit vertical downwards, but not more than 100 N, a new provision has been added that “If, during the test, the supporting surface prevents the equipment from overturning, the test shall be repeated such that the supporting surface is not used to pass the test.”",
+            "confidence": "high"
+          },
+          {
+            "claim": "8.6.2.1 test setup (2018): the equipment is held against sliding by small stops. Doors, drawers, casters, adjustable feet and other parts an ordinary person can move are set in whatever combination is least stable. Adjustable feet or spikes on Tropos would be tested at their worst setting.",
+            "source_url": "https://members.wto.org/crnattachments/2021/TBT/KOR/21_3774_00_x.pdf",
+            "source_quote": "일반인이 사용하는 모든 문, 서랍, 캐스터, 조절 가능한 다리 및 다른 부속물은 최소 안정성을 초래하는 조합으로 배치된다.",
+            "confidence": "high"
+          },
+          {
+            "claim": "8.6.2.3 downward force test (2018/2023; same figures in 2014), which applies to MS3 floor-standing equipment. A constant 800 N downward force goes on any horizontal surface of at least 125 × 200 mm, at any height up to 1 m above the floor, at the point of maximum moment, using a flat tool of about 125 × 200 mm; the equipment must not overturn. Equipment whose surfaces are unlikely to be used as a step or ladder is exempt. A force applied inside the footprint, such as on the plinth steps, cannot tip the unit.",
+            "source_url": "https://members.wto.org/crnattachments/2021/TBT/KOR/21_3774_00_x.pdf",
+            "source_quote": "800 N의 일정한 하향력이 기기의 바닥에서 1 m까지의 임의 높이에서 … 계단 또는 사다리로 이용될 가능성이 없는 표면의 형상을 가진 기기는 시험에서 제외된다.",
+            "confidence": "high"
+          },
+          {
+            "claim": "JEITA's check sheets for JIS C 62368-1 summarize the downward force test the same way for both the 2018 and the 2023 IEC editions. They also note that the glass slide test does not apply to floor-standing equipment even when it has controls or a display.",
+            "source_url": "https://home.jeita.or.jp/ite/itestc/data/JIS_C_62368-1_2021_Test_Report.docx",
+            "source_quote": "機器の設置面から1 mまでのあらゆる高さの面に、800 Nの一定の下向きの力を加え転倒しない。 … 制御部又は表示部を備えていても、ガラススライド試験は床置き型機器には適用しない。",
+            "confidence": "high"
+          },
+          {
+            "claim": "8.6.3 relocation stability (2018/2023) applies to MS2 and MS3 floor-standing equipment. It is met either by wheels at least 100 mm in diameter, or by the 8.6.3.2 test. That test tilts the equipment up to 10° in any direction from upright, or puts it on a plane at 10° and rotates it through 360°, without overturning. For equipment an ordinary person is likely to move, unlatched doors and drawers, casters and adjustable feet are set in the least stable combination.",
+            "source_url": "https://members.wto.org/crnattachments/2021/TBT/KOR/21_3774_00_x.pdf",
+            "source_quote": "— 최소 직경이 100 mm 인 바퀴가 장착되어야 한다; 또는 — 8.6.3.2을 만족한다. … 기기는 기준 수직 위치를 기준으로 임의 방향으로 10°까지 기울인다. … 다른 방법으로, 기기는 평면에 놓이고, 기준 수직 축 기준으로 10° 기울임과 동시에 360° 회전한다.",
+            "confidence": "high"
+          },
+          {
+            "claim": "8.6.4 glass slide test (2018/2023) applies only to MS2/MS3 equipment with controls or displays and, per Table 36 footnote b, never to floor-standing equipment. The equipment stands on clean, dry glass on its supports only; the glass is tilted up to 10° in the worst direction; the equipment must not slide or overturn.",
+            "source_url": "https://members.wto.org/crnattachments/2021/TBT/KOR/21_3774_00_x.pdf",
+            "source_quote": "유리로 덮힌 표면은 가장 불리한 방향으로 10°까지 기울인다. 시험 중, 기기가 미끄러지거나 전복되어서는 안된다. … 유리 경사면 시험은 기기에 컨트롤 또는 디스플레이가 있어도 바닥 직립형 기기에는 적용하지 않는다.",
+            "confidence": "high"
+          },
+          {
+            "claim": "8.6.5 horizontal force test (2018/2023). This is the only place the 20%/250 N figure appears in the current editions. The equipment sits on a horizontal non-skid surface with movable parts in their least stable combination, and ONE of three tests is applied. (a) A horizontal force of 20% of its weight or 250 N, whichever is less, at the least-stable point but no higher than 1.5 m above the support surface. (b) Tilting up to 15° from vertical in any direction. (c) Setting it on a plane tilted 15° and rotating it through 360°. It must not overturn. It is required for MS3 equipment with front controls or a moving-image display (Table 36) and for MS3 equipment on a specified cart or stand (8.10.1). It is not required for plain MS3 floor-standing equipment.",
+            "source_url": "https://members.wto.org/crnattachments/2021/TBT/KOR/21_3774_00_x.pdf",
+            "source_quote": "기기는 다음 시험 중 하나를 적용하며 … — 기기가 최소한의 안정성을 초래하는 지점에 기기 중량의 20 % 또는 250 N 중 작은 힘을 외부 수평력으로 가한다. 힘은 지지 표면에서 1.5 m를 넘지 않아야 한다. — 기기를 수직에서 어떤 방향으로든 15°까지 기울여야 한다. — 기기를 평면에 놓고, 15° 기울어진 상태에서 기준 수직축에 대해 360° 회전한다. 시험 중, 기기는 전복되지 않아야 한다.",
+            "confidence": "high"
+          },
+          {
+            "claim": "JEITA's conformity check sheet for JIS C 62368-1:2021 (the IEC 62368-1 3rd edition, 2018) confirms that 8.6.5 offers three alternatives. Doing any one, with no overturning, passes: a force of 20% of weight or 250 N (whichever is smaller), a tilt to any angle up to 15°, or a 15° incline with 360° rotation. JEITA's 2026 sheet for JIS C 62368-1:2026 (the IEC 4th edition, 2023) has the same text.",
+            "source_url": "https://home.jeita.or.jp/ite/itestc/data/JIS_C_62368-1_2021_Test_Report.docx",
+            "source_quote": "次のいずれかを実施して、機器は転倒しない。- 適用する力(機器の重量の20%又は250N のいずれか小さい方) - 15°以下のあらゆる角度に動かす - 水平に対し15°傾けた面に置き，更に傾斜面に対して垂直な軸を中心に360°回転させる。",
+            "confidence": "high"
+          },
+          {
+            "claim": "UL Solutions' Ed. 3 analysis: from 2014 to 2018, the 8.6.5 horizontal force went from 13% to 20% of weight and its cap from 100 N to 250 N, with the lesser value used. UL rates this as more onerous.",
+            "source_url": "https://collateral-library-production.s3.amazonaws.com/uploads/asset_file/attachment/56784/62368-1_Ed_3_UL_Analysis_2021-10-22.pdf",
+            "source_quote": "The applied horizontal force considerations have been revised from 13% to 20% of the weight of the equipment, and from 100 N to 250 N maximum value. The value that is less is used.",
+            "confidence": "high"
+          },
+          {
+            "claim": "TÜV Rheinland's 3rd-edition summary gives the same 8.6.5 change, and notes that floor-standing equipment with controls or a display no longer needs the glass slide test.",
+            "source_url": "https://www.tuv.com/content-media-files/korea/pdfs/tuv-rheinland-iec62368-1-3rd-edition-productsheet-en.pdf",
+            "source_quote": "28. (8.6.5) Modify the test method for the Horizontal force test from 13% or 100N to 20% or 250N, whichever is less.",
+            "confidence": "high"
+          },
+          {
+            "claim": "8.10.1, carts and stands (2018/2023): this is what an optional plinth would trigger if treated as a stand specified for the speaker. Classification uses the combined mass of the equipment and the specified stand. The stand is tested alone and again with the equipment on it. MS3 equipment not moved in normal operation, together with its supporting cart or stand, must pass the 8.6.5 horizontal force test. MS2/MS3 equipment 1 m or taller on a specified stand must pass the 8.6.3 relocation test with the tip angle raised to 15°.",
+            "source_url": "https://members.wto.org/crnattachments/2021/TBT/KOR/21_3774_00_x.pdf",
+            "source_quote": "기기와 기기로 규정된 카트 또는 스탠드의 결합된 무게(질량)을 사용하여 표 35의 5행의 분류가 적용된다. … 기기를 지탱하는 지지 카트, 스탠드 및 이와 유사한 캐리어를 포함한, 정상 동작 상태의 일부로서 이동되지 않는 MS3 기기는 8.6.5의 수평력 시험에 적합해야 한다. 규정된 카트, 스탠드 또는 캐리어 상에 장착된 기기를 포함한 높이가 1 m 이상인 MS2나 MS3 기기는 팁 각도가 15°가 된다는 것을 제외하고 8.6.3의 재배치 안정성 시험에 적합해야 한다.",
+            "confidence": "high"
+          },
+          {
+            "claim": "8.10.5 mechanical stability (2018/2023): the stand, including floor-standing ones, is tested with 8.6.3 and 8.6.5 alone and together with its MS2/MS3 equipment. The weight used is equipment plus stand. The horizontal force goes where it gives the greatest overturning moment, up to 1.5 m above the floor. If the equipment starts to slide or tip relative to the stand, only the horizontal force test is repeated, at 13% of the equipment's weight or 100 N, whichever is less. This is the only place 13%/100 N survives in the 2018/2023 editions. A stand sold separately also needs an instructional safeguard under 8.10.2 ('Caution', 'for use only with [maker/model]', and a warning that using it with other equipment may cause instability and injury). It also needs the 8.10.3 load tests (220 N for 1 min at child-accessible graspable points within 750 mm of the floor, plus shelf loads) and the 8.10.4 impact test.",
+            "source_url": "https://members.wto.org/crnattachments/2021/TBT/KOR/21_3774_00_x.pdf",
+            "source_quote": "8.6.3 및 8.6.5의 시험 중, 기기가 카트, 스탠드나 캐리어에 대비해 미끄러지거나 기울기 시작하는 경우, 기기 중량의 13 %로 힘을 줄이거나, 100 N 중에 작은 힘으로 수평력 시험만 반복해야 한다.",
+            "confidence": "high"
+          },
+          {
+            "claim": "The 2023 (4th) edition did not change clause 8.6 or 8.10 technically. JEITA's Ed. 2/3/4 comparison (Ver. 4.00, April 2024) marks every 8.6 and 8.10 sub-clause '＝' (technically equivalent) from Ed. 3 to Ed. 4. From Ed. 2 to Ed. 3 it records the 8.6.2.2 force conditions changing, the 10°-tilt-with-360°-rotation option being added, and the 8.6.5 force conditions changing. UL's Ed. 4 analysis lists no 8.6 changes; its Clause 8 entries cover only 8.12 (antennas) and 8.5.4.3.1 (shredders). The 2023 foreword's list of significant changes does not mention stability.",
+            "source_url": "https://home.jeita.or.jp/ite/itestc/data/IEC%2062368%20ed.2-3-4%E5%AF%BE%E6%AF%94%E8%A1%A8.xlsx",
+            "source_quote": "8.6.2.2 … △ 加える力の条件が変更。10度傾けて360度回転させる方法も選択可能。 ＝ … 8.6.5 … △ 加える力の条件が変更。 ＝",
+            "confidence": "high"
+          },
+          {
+            "claim": "Table numbering moved in 2023. In 2018, Table 35 is the mechanical energy source classification and Table 36 the stability overview. In 2023 they are Table 34 and Table 35. The 2023 foreword's significant technical changes are external circuits, fire-enclosure openings, liquid-filled components and battery charging.",
+            "source_url": "https://assets.vde-verlag.de/iec-normen/preview-pdf/info_iec62368-1%7Bed4.0.RLV%7Den.pdf",
+            "source_quote": "Table 34 – Classification for various categories of mechanical energy sources … Table 35 – Overview of requirements and tests",
+            "confidence": "high"
+          },
+          {
+            "claim": "US status: UL 62368-1:2025 Ed. 4 (with CSA C22.2 No. 62368-1:2025, based on IEC 62368-1:2023) takes effect on February 15, 2027. It replaces UL 62368-1:2019 Ed. 3, which is based on IEC 62368-1:2018 and was revised on Oct 22, 2021. Intertek's change list for Ed. 4 does not mention stability. Separately, UL's Ed. 4 analysis gives 2027-02-15 as the date superseded standards are withdrawn under EN IEC 62368-1:2024/A11:2024.",
+            "source_url": "https://preview.intertek-br.com/siteassets/resources/sun/2026/ul-62368-1-csa-c22-2-no-62368-1-cc-sun-rev-7-31-2025-ed-2-17-2027.pdf",
+            "source_quote": "[UL 62368-1:2025 Ed.4] … Previous Standard ID: … [UL 62368-1:2019 Ed.3+R:22Oct2021] … Effective Date: February 15, 2027",
+            "confidence": "high"
+          },
+          {
+            "claim": "In the 2014 (2nd) edition, the 20%/250 N force sat in 8.6.2.2 (static stability): a force of 20% of the unit's weight, max 250 N, in any direction except upward, applied to give the greatest overturning moment, and the unit must not overturn. This matches the design team's reading, but the edition is superseded.",
+            "source_url": "https://home.jeita.or.jp/ite/itestc/data/JIS_C_62368-1_2018_Test_Report.docx",
+            "source_quote": "ユニットの質量の20 %に等しく，ただし250 Nを超えない力を，上方を除くあらゆる方向に，最大転倒モーメントをかけ転倒しない。",
+            "confidence": "high"
+          },
+          {
+            "claim": "The '2 m' height is from IEC 60950-1, clause 4.1, not from IEC 62368-1. JEITA's comparison of IEC 62368-1:2014 with 60950-1 says 8.6.2.2 is technically equivalent to 60950-1 4.1 except that the maximum height of the force moved from 2 m to 1.5 m, which JEITA calls a relaxation. IEC 62368-1 uses a 1.5 m ceiling in 2014 8.6.2.2, 2018/2023 8.6.2.2 and 8.6.5, and 8.10.5. For a 1.30-1.34 m product the ceiling does not bind; the top of the horn is a legitimate force point for the 8.6.5 force option.",
+            "source_url": "https://home.jeita.or.jp/ite/itestc/data/taihi_62368-1-2vs60950-1-2.pdf",
+            "source_quote": "技術的要件は以下を除き同等。 ・力を加える場所の高さを変更(2m から1.5m)＜緩和＞",
+            "confidence": "high"
+          },
+          {
+            "claim": "In the 2014 edition, 13%/100 N was the 8.6.5 horizontal force, and a 15° tilt could be used instead. JEITA's 2014-based summary of the cart/stand clause gives 8.6.5 as 13% of weight or 100 N, or a 15° tilt. It says 8.10.5 applies the lesser of 13% and 100 N at heights up to 1.5 m. JEITA's check sheet for JIS C 62368-1:2018 (the IEC 2014-based version) lists the 8.6.5 alternatives as a force, a tilt up to 15°, or a 15° incline with 360° rotation.",
+            "source_url": "https://home.jeita.or.jp/ite/itestc/data/taihi_62368-1-2vs60950-1-2.pdf",
+            "source_quote": "① MS3:8.6.5 の水平試験に適合（13%重量 or100N, or15 度傾斜） … 印加する荷重は1.5m までの高さに対し、次の小さい方を適用。 ① 機器重量の13% or ② 100N",
+            "confidence": "high"
+          },
+          {
+            "claim": "A published CB report shows the tilt alternative in use under the 2014 edition. For a 50.5 kg TV, the lab ran 8.6.5 as a 15° tilt instead of applying a force.",
+            "source_url": "https://s3-ap-southeast-2.amazonaws.com/wc-prod-pim/Asset_Documents/55KUE30G%20and%2055KUE50G%20Safety%20Test%20Report.pdf",
+            "source_quote": "The equipment moved through any angle of tilt up to 15°from the vertical. During the test, the EUT did not tip over.",
+            "confidence": "high"
+          },
+          {
+            "claim": "A published UL-CCIC CB report under IEC 62368-1:2014 covers a floor-standing unit of 63 kg (high stand) or 83.26 kg (adjustable stand). The 8.6.2.2 force was 123.5 N and 163.2 N, i.e. 20% of weight (0.2 × 63 × 9.8 and 0.2 × 83.26 × 9.8). The 8.6.2.3 800 N downward test passed; 8.6.3 was a 10° tilt; 8.6.4 was N/A because the unit is floor-standing; 8.6.5 used 100 N (the 13% value hits the 100 N cap). So under 2014, labs applied both the 20% static force and the 13%/100 N horizontal test to a floor-standing MS3 product. This scanner probably also has front controls.",
+            "source_url": "https://contex.com/wp-content/uploads/2018/05/E323749-A6002-CB-1-Original-RB67GRC67GRC67R.pdf",
+            "source_quote": "For High Stand: 123.5N; For Adjustable stand: 163.2 N … Floor-standing unit does not overbalance when a downward force of 800 N is applied. … 8.6.4 Glass slide test Floor-standing equipment. N/A … 8.6.5 Horizontal force test (Applied Force) ..................... : 100",
+            "confidence": "high"
+          },
+          {
+            "claim": "Definitions (2018): 'fixed equipment' is equipment specified to be secured only at the location and by the method the manufacturer's installation instructions define. Note 1 says screw holes or other means that let an ordinary person fix it to a table or against earthquakes do NOT make it fixed equipment. Fixed equipment has no stability requirements in Table 36, but a tip-over strap does not qualify a speaker. 'Floor-standing' is not a defined term in 3.3. 'Movable equipment' is equipment of 18 kg or less, or with wheels, casters or similar. 'Stationary equipment' includes equipment that, because of its physical characteristics, is normally not moved.",
+            "source_url": "https://members.wto.org/crnattachments/2021/TBT/KOR/21_3774_00_x.pdf",
+            "source_quote": "설치 설명서에 제조자가 정의한 방법과 위치에만 고정되도록 규정된 기기 … 테이블에 고정하거나 지진으로부터 보호하기 위해서 일반인이 기기를 고정하도록 나사 구멍 또는 기타 수단이 있는 기기는 고정형 기기로 간주하지 않는다.",
+            "confidence": "high"
+          },
+          {
+            "claim": "DERIVED from the 2018/2023 criteria above (my arithmetic, not a source statement). A tilt test at angle θ passes if the horizontal distance d from the centre of mass to each tipping edge is at least h_CoM × tanθ. For h_CoM = 0.553 m, 10° needs d ≥ 98 mm and 15° needs d ≥ 148 mm. The 560 × 420 cabinet with a centred CoM and tipping edges at the outline gives d = 210 mm front/back and 280 mm side to side. Its tip angles are about 20.8° and 26.9°, so it passes 8.6.2.2, 8.6.3, the 15° options of 8.6.5 and the 15° relocation of 8.10.1. The 13% option of 8.6.2.2 at the horn top (1.32 m) needs d ≥ 0.13 × 1.32 ≈ 172 mm, which also passes. The only test the bare cabinet fails is the 8.6.5 FORCE option at the horn top, which needs d ≥ 0.2 × 1.32 ≈ 264 mm (≥ 528 mm depth). That option is required only if the lab insists on it and 8.6.5 applies at all.",
+            "source_url": "https://members.wto.org/crnattachments/2021/TBT/KOR/21_3774_00_x.pdf",
+            "source_quote": "",
+            "confidence": "high"
+          },
+          {
+            "claim": "DERIVED (my arithmetic). Under the 8.6.5 force option, F = 0.2 W until W reaches 1250 N (about 127 kg), so the pass condition F × H ≤ W × d reduces to d ≥ 0.2 × H. That depends only on the force height, not on mass or CoM height: ballast or a lower CoM does nothing for this option below about 127 kg. The tilt options (10° and 15°) depend on d ÷ h_CoM, so lowering the CoM or moving the feet outward helps them directly. The 600 × 600 plinth (d = 300 mm) passes even the force option at 1.34 m (needs 268 mm).",
+            "source_url": "https://members.wto.org/crnattachments/2021/TBT/KOR/21_3774_00_x.pdf",
+            "source_quote": "",
+            "confidence": "high"
+          },
+          {
+            "claim": "Low-confidence lead to verify in the English text. KC 8.6.1 says that units designed to be fixed together on site and not used individually, OR stationary equipment, are evaluated by inspection after installation per the manufacturer's instructions and tested to 8.6.2.2 only if necessary. A 74 kg speaker without wheels is arguably stationary equipment, but labs normally still apply the Table 36 rows.",
+            "source_url": "https://members.wto.org/crnattachments/2021/TBT/KOR/21_3774_00_x.pdf",
+            "source_quote": "기계적으로 사이트에 함께 고정되도록 설계되어 있고 개별적으로 사용되지 않는 각 장치, 또는 거치형 기기는 제조자의 지침서에 따라 설치한 후, 검사로 평가한다. 필요하다면, 8.6.2.2에 따라 시험한다.",
+            "confidence": "low"
+          }
+        ],
+        "open_questions": [
+          "Exact English wording of IEC 62368-1:2018/2023 clause 8.6 was not read from a licensed copy; quotes come from the official Korean KC 62368-1 translation and JEITA/UL/TÜV/CEPREI summaries. Before freezing the footprint, someone with a licensed copy of IEC 62368-1:2023 (or UL 62368-1:2025) should confirm Table 35 (Table 36 in 2018) and 8.6.5.",
+          "Cap on the 13% horizontal option in 2018/2023 8.6.2.2: 250 N (KC and Kingpo) or 100 N (TÜV Rheinland summary)? It does not change the result for Tropos: 13% of 74 kg is 94 N, and 13% of 84.6 kg is 108 N, or 100 N if capped.",
+          "Does Tropos have 'front mounted accessible user controls' in the sense of Table 36 footnote a? If its controls are only on the rear panel, a remote or an app, the 8.6.5 row arguably does not apply to the speaker alone. Get the CB lab's and the NRTL's written classification early.",
+          "Will the chosen CB lab and US NRTL accept the 15° tilt alternative for 8.6.5 (and for 8.10.1), rather than the 20%/250 N force at the top of the horn? The text says 'one of the following tests', but confirm before relying on it.",
+          "If the stepped plinth is sold separately, will it be treated as a 'stand specified for use with the equipment' under 8.10? That would bring in 8.6.5 and 8.6.3 at 15° for the speaker-plus-plinth combination, the 8.10.3 load tests, the 8.10.4 impact test, 8.10.5 (including the 13%/100 N repeat), and the 8.10.2 instructional safeguards. Will the plinth be bolted to the speaker (classed by total mass under 8.6.1) or separable?",
+          "2014 edition details not verified from primary text. Did the 2014 Table 36 require 8.6.5 (13%/100 N) for MS3 floor-standing equipment without controls or displays? Was the 10° tilt an alternative to, or an addition to, the 20%/250 N force in 2014 8.6.2.2? This matters only if a lab still certifies to the 2014 edition, which current CB/UL practice (2018/2023, UL Ed. 3/Ed. 4) makes unlikely.",
+          "Are there US/Canadian national differences in UL 62368-1 (2019 Ed. 3 or 2025 Ed. 4) that affect clause 8.6 or 8.10 for a floor-standing audio product? None appear in UL's Ed. 3 or Ed. 4 impact analyses or in Intertek's Ed. 4 notice, but that was not checked against the ND annex itself.",
+          "Verify in the English text the KC 8.6.1 sentence saying stationary equipment is evaluated by inspection after installation and tested to 8.6.2.2 only if necessary.",
+          "Product-specific inputs the margins depend on: where the feet or spikes actually are (they define the tipping edges, which may sit inside the 560 × 420 outline); the least stable setting of any adjustable feet (8.6.2.1, 8.6.5); how far the CoM sits off centre toward the horn; and whether any horizontal surface of at least 125 × 200 mm below 1 m overhangs a tipping edge (8.6.2.3, 800 N)."
+        ]
+      },
+      {
+        "key": "exempt",
+        "findings": [
+          {
+            "claim": "In IEC 62368-1:2018 (3rd ed.), Table 36 'Overview of requirements and tests' sets which stability tests apply. MS3 floor-standing equipment gets only static stability (8.6.2.2), downward force (8.6.2.3) and relocation (8.6.3). The horizontal force test (8.6.5) is marked only for MS3 'equipment with controls or display'. Footnote a defines that as equipment with front-mounted accessible user controls, or with moving-image displays, likely to be used in the home or similar places where children can reach it. 'Fixed equipment' rows (MS2 and MS3) read 'no stability requirements'. So whether 8.6.5 applies to Tropos at all depends on whether it has front-mounted accessible user controls. Source: the Korean identical adoption (KC 62368-1 draft, notified to the WTO in 2021); the X marks were checked on the rendered page, and the translation is mine.",
+            "source_url": "https://members.wto.org/crnattachments/2021/TBT/KOR/21_3774_00_x.pdf",
+            "source_quote": "고정 기기 b 안정성 요구 사항 없음 [...] 전면에 장착된 접근 가능한 사용자 컨트롤을 갖고 있는 기기 및 기기에 어린이들이 접근할 수 있는 집이나 이와 유사한 환경에서 사용될 가능성이 있는 동영상 디스플레이를 가진 기기",
+            "confidence": "high"
+          },
+          {
+            "claim": "Stability class comes from mass (Table 35 row 5 in the 2018 numbering; Table 34 in 2023): MS1 ≤ 7 kg, MS2 ≤ 25 kg, MS3 > 25 kg. Consumables count toward the mass. Tropos is MS3 in every configuration: ~74 kg alone, 84.6 kg with the plinth.",
+            "source_url": "https://members.wto.org/crnattachments/2021/TBT/KOR/21_3774_00_x.pdf",
+            "source_quote": "기기 중량 f ≤ 7 kg ≤ 25 kg > 25 kg",
+            "confidence": "high"
+          },
+          {
+            "claim": "In the 2018-based text, the 8.6.5 horizontal force test is passed by any ONE of three methods: (1) an external horizontal force of 20% of the equipment's weight or 250 N, whichever is smaller, at the least-stable point but no higher than 1.5 m above the supporting surface; (2) tilting the equipment up to 15° from vertical in any direction; or (3) placing it on a 15° incline and rotating it 360°. It must not overturn. The 20%/250 N push is therefore not mandatory, and its height limit is 1.5 m, not 2 m. Translation is mine.",
+            "source_url": "https://members.wto.org/crnattachments/2021/TBT/KOR/21_3774_00_x.pdf",
+            "source_quote": "기기는 다음 시험 중 하나를 적용하며 [...] — 기기가 최소한의 안정성을 초래하는 지점에 기기 중량의 20 % 또는 250 N 중 작은 힘을 외부 수평력으로 가한다. 힘은 지지 표면에서 1.5 m를 넘지 않아야 한다. — 기기를 수직에서 어떤 방향으로든 15°까지 기울여야 한다. — 기기를 평면에 놓고, 15° 기울어진 상태에서 기준 수직축에 대해 360° 회전한다.",
+            "confidence": "high"
+          },
+          {
+            "claim": "In the 2018-based text, the 8.6.2.2 static stability test is also passed by any one of three methods: tilting up to 10° in all directions; a 10° incline with 360° rotation; or a force method on a non-skid surface (50% of weight downward, max 100 N, plus 13% of weight horizontally). The force is applied no higher than 1.5 m and is stopped once the unit stays stable at 10° tilt. The TÜV summary gives a 100 N cap on the 13% horizontal force, while the KC text says 250 N. This does not matter for Tropos, since 13% of its weight is 94 N.",
+            "source_url": "https://members.wto.org/crnattachments/2021/TBT/KOR/21_3774_00_x.pdf",
+            "source_quote": "기기는 다음중 하나의 시험을 적용한다. — 기기의 바닥을 기준으로 모든 방향에서 10°까지 기울인다. [...] 시험은 기기 바닥에서 1.5 m를 넘지 않는 높이에 적용한다. 기기가 수직으로부터 10° 기울어 진 후에도 안정적으로 유지된다면 힘은 중단되어야 한다.",
+            "confidence": "high"
+          },
+          {
+            "claim": "UL Solutions' certification impact analysis for IEC/UL 62368-1 Ed. 3 confirms the 2018 change to 8.6.5. The horizontal force rose from 13% to 20% of equipment weight, and the cap from 100 N to 250 N (the lesser value is used). UL rated this 'more onerous' and expected some designs to need changes. This is where the 20%/250 N figure now sits: it is 8.6.5, not 8.6.2.2.",
+            "source_url": "https://collateral-library-production.s3.amazonaws.com/uploads/asset_file/attachment/56784/62368-1_Ed_3_UL_Analysis_2021-10-22.pdf",
+            "source_quote": "The applied horizontal force considerations have been revised from 13% to 20% of the weight of the equipment, and from 100 N to 250 N maximum value. The value that is less is used.",
+            "confidence": "high"
+          },
+          {
+            "claim": "The same UL analysis says the 2018 stability changes in 8.6.1/Table 36 targeted TVs and similar equipment with front controls or moving-image displays used where children may be present. It also notes the glass slide test no longer applies to floor-standing equipment, even with controls or a display.",
+            "source_url": "https://collateral-library-production.s3.amazonaws.com/uploads/asset_file/attachment/56784/62368-1_Ed_3_UL_Analysis_2021-10-22.pdf",
+            "source_quote": "A static stability test now is required instead of the horizontal force test for class MS2 equipment with front mounted accessible user controls and equipment having displays with moving images likely to be used in the home or similar installation environments where the equipment may be accessible to children (aka, TV, but possibly other equipment).",
+            "confidence": "high"
+          },
+          {
+            "claim": "The UL Ed. 3 analysis says 2018 introduced a defined term 'fixed equipment' (3.3.3.2), which Table 36 now uses. It describes fixed equipment as typically wall, ceiling or floor mounted.",
+            "source_url": "https://collateral-library-production.s3.amazonaws.com/uploads/asset_file/attachment/56784/62368-1_Ed_3_UL_Analysis_2021-10-22.pdf",
+            "source_quote": "Table 36 now refers to a defined term, Fixed Equipment, rather than just the word, Fixed.",
+            "confidence": "high"
+          },
+          {
+            "claim": "TÜV Rheinland's summary of 3rd-edition changes independently lists the 8.6.5 change from 13%/100 N to 20%/250 N. It also says the 8.6.2.2 static stability test was rewritten, with the 10° tilt option left unchanged.",
+            "source_url": "https://www.tuv.com/content-media-files/korea/pdfs/tuv-rheinland-iec62368-1-3rd-edition-productsheet-en.pdf",
+            "source_quote": "Modify the test method for the Horizontal force test from 13% or 100N to 20% or 250N, whichever is less.",
+            "confidence": "high"
+          },
+          {
+            "claim": "In the 2014 (2nd) edition, as adopted in JIS C 62368-1 (IEC 62368-1:2014, MOD), 8.6.2.2 was the 20%-of-weight, max 250 N push in any direction except upward. Even then it had limits: it was not applied above 1.5 m, the push stopped once the unit stayed stable at 10° tilt, and a tilt of up to 10° could replace the force. In that edition 8.6.5 was 13% or 100 N (applied at no more than 1.5 m), or a 15° tilt. The team's reading ('8.6.2.2 = 20%/250 N up to 2 m, purely geometric') matches neither the 2014 nor the 2018/2023 text. Translation is mine.",
+            "source_url": "https://kikakurui.com/c60/C62368-1-2019-01.html",
+            "source_quote": "機器は，ユニットの質量の20 %に相当する力，ただし，250 N以下を上方を除くあらゆる方向に，最大転倒モーメントがかかるように加えたとき，転倒してはならない。試験は，機器の設置面から1.5 mを超える高さには適用しない。機器が鉛直から10°傾いた後でも安定性を保つ場合は，試験の力をそれ以上加え続けない。力を加える代わりに，鉛直から10°以下のあらゆる角度で，機器を傾けてもよい。",
+            "confidence": "high"
+          },
+          {
+            "claim": "Lab precedent for the tilt route: a CB-format report (EMTEK Shenzhen, IEC 62368-1:2014) covers a 50.5 kg, 55-inch 4K floor kiosk with a display. It passed 8.6.5 by the 15° tilt alternative instead of a push force, and passed 8.6.2.2 and 8.6.3 by rotating it 360° on a 10° incline.",
+            "source_url": "https://s3-ap-southeast-2.amazonaws.com/wc-prod-pim/Asset_Documents/55KUE30G%20and%2055KUE50G%20Safety%20Test%20Report.pdf",
+            "source_quote": "The equipment moved through any angle of tilt up to 15°from the vertical. During the test, the EUT did not tip over.",
+            "confidence": "high"
+          },
+          {
+            "claim": "Precedent under UL 62368-1 itself (3rd ed., 2021-07 revision): Element Materials Technology (Irvine) recorded a pass for the 8.6.2.2 static stability test using a 10° incline with 360° rotation (on an MS2 product).",
+            "source_url": "https://www.eac.gov/sites/default/files/2024-08/PRVV0001-R1_UL%2062368-1%202019.pdf",
+            "source_quote": "10° / 360 ° rotation",
+            "confidence": "high"
+          },
+          {
+            "claim": "My own calculation for Tropos, using the stated figures and assuming the CoM is centered and the feet sit at the 560 × 420 mm outline. Weight is 74 kg ≈ 726 N, CoM 0.52–0.553 m up, horn top 1.30–1.34 m. A 20% push (145 N) at the horn top needs the CoM 260–268 mm inside the tipping edge; that is why the base grew to ~600 × 600 mm. The alternatives need much less: the 15° tilt in 8.6.5 needs h·tan15° = 139–148 mm, the 10° tilts in 8.6.2.2 and 8.6.3 need 92–98 mm, and the 2018 13% force option at 1.34 m needs ~174 mm. The bare cabinet gives ~210 mm front/back, a tip angle of about 21–22°. It would pass every tilt-based option without the plinth and fail only the 20% push at the top. Tilting the speaker back 5° moves the CoM ~45–48 mm rearward, leaving ~162 mm at the rear, still above the 148 mm a 15° tilt needs.",
+            "source_url": "https://members.wto.org/crnattachments/2021/TBT/KOR/21_3774_00_x.pdf",
+            "source_quote": "— 기기를 수직에서 어떤 방향으로든 15°까지 기울여야 한다.",
+            "confidence": "medium"
+          },
+          {
+            "claim": "IEC 62368-1:2023 (4th ed.) lists four significant technical changes: an external-circuit table, fire-enclosure openings, liquid-filled components and battery charging. Stability is not among them. UL's Ed. 4 impact analysis lists only 8.12 (antennas) and 8.5.4.3.1 under Clause 8, so the 2018 stability scheme appears to carry over. In 2023 numbering the stability overview is Table 35 ('Overview of requirements and tests') and mass classification is Table 34.",
+            "source_url": "https://www.en-standard.eu/publicdoc/iec_previews/3243774.pdf",
+            "source_quote": "a) new table with requirements for external circuits; [...] Table 35 – Overview of requirements and tests",
+            "confidence": "medium"
+          },
+          {
+            "claim": "A test lab's plain-language summary of 62368-1 Clause 8 (Keystone Compliance) says fixed equipment needs no stability tests. Floor-standing equipment may need relocation tests, and equipment with controls or displays may need glass slide and horizontal force tests.",
+            "source_url": "https://keystonecompliance.com/iec-62368-8/",
+            "source_quote": "Fixed – no stability tests are requirements",
+            "confidence": "medium"
+          },
+          {
+            "claim": "In the 2018-based text, 'fixed equipment' (3.3.3.2) is equipment that the installation instructions say is to be secured only by a method, and at a location, defined by the manufacturer. Note 1: equipment with screw holes or other means that let an ordinary person fix it to a table or protect it against earthquakes is NOT fixed equipment. Note 2: fixed equipment is typically wall-, ceiling- or floor-mounted. This indicates that a wall strap the owner fits does not by itself make Tropos 'fixed' and exempt from the stability tests. Translation is mine.",
+            "source_url": "https://members.wto.org/crnattachments/2021/TBT/KOR/21_3774_00_x.pdf",
+            "source_quote": "설치 설명서에 제조자가 정의한 방법과 위치에만 고정되도록 규정된 기기 [...] 테이블에 고정하거나 지진으로부터 보호하기 위해서 일반인이 기기를 고정하도록 나사 구멍 또는 기타 수단이 있는 기기는 고정형 기기로 간주하지 않는다.",
+            "confidence": "high"
+          },
+          {
+            "claim": "The 2014 edition's Table 36 footnote b (JIS adoption) says the same: equipment meant to be installed by an ordinary person that has screw holes or other fixings for desk fixing or earthquake protection is not fixed equipment. It adds that such fixing counts as a supplementary safeguard. An owner-fitted anchor is credited as an extra layer, not as a substitute for passing the stability tests.",
+            "source_url": "https://kikakurui.com/c60/C62368-1-2019-01.html",
+            "source_quote": "機器を一般人が設置することが想定され，机への固定，地震保護などのために，ねじ穴又はその他の固定手段を備えた機器は，固定した機器とはみなさない。このような固定は，付加セーフガードとみなす。",
+            "confidence": "high"
+          },
+          {
+            "claim": "IEC 62368-1:2023 clarified the 'fixed equipment' definition to include equipment fastened to a support, or otherwise secured in a specific location by a means defined by the manufacturer in the installation instructions. UL rates the impact 'None': consistent with how most users already applied it. I could not check whether Note 1, which excludes anti-tip or earthquake fixings an ordinary person fits, is still in the 2023 text.",
+            "source_url": "https://delivery-p133222-e1298791.adobeaemcloud.com/adobe/assets/urn:aaid:aem:0ebe019a-7626-41c4-9d7f-a9c2530b4a24/original/as/62368-1_Ed4_Impact_Analysis_Update_2024_05_10.pdf",
+            "source_quote": "The definition for fixed equipment has been clarified to state that it includes “equipment fastened to a support, or otherwise secured in a specific location by a means defined by the manufacturer in the installation instructions.”",
+            "confidence": "high"
+          },
+          {
+            "claim": "IEC 62368-1:2023 clause 0.5 gives bolting to the floor for stability as its example of an 'installation safeguard'. It ranks installation safeguards below equipment safeguards, classes them as supplementary safeguards, and says the standard sets no requirements for them.",
+            "source_url": "https://www.en-standard.eu/publicdoc/iec_previews/3243774.pdf",
+            "source_quote": "installation safeguards are useful when a safety characteristic can only be provided after installation (for example, the equipment shall be bolted to the floor to provide stability); [...] Generally, with respect to equipment, an installation safeguard is a supplementary safeguard. [...] Requirements for installation safeguards are not addressed in this document.",
+            "confidence": "high"
+          },
+          {
+            "claim": "IEC 62368-1:2023 clause 0.9 lists 'means to stabilize the equipment' as a basic safeguard against mechanically-caused injury, and 'instructional safeguards' only as supplementary safeguards. It also names 'equipment motion due to cart or stand instability or failure' as a hazard source. This is the standard's reasoning for why a stable base, not a warning, is the primary safeguard.",
+            "source_url": "https://www.en-standard.eu/publicdoc/iec_previews/3243774.pdf",
+            "source_quote": "Basic safeguards may include: [...] – means to stabilize the equipment; [...] Supplementary safeguards may include: – instructional safeguards;",
+            "confidence": "high"
+          },
+          {
+            "claim": "8.6.1 (2018-based) says stationary equipment, and units designed to be mechanically fixed together on site, are assessed by inspection after installation per the manufacturer's instructions, and tested to 8.6.2.2 if necessary. A 74 kg unit without wheels is 'stationary' by definition. This could be argued for a product whose instructions require anchoring, but Table 36 still lists the free-standing tests for MS3 floor-standing equipment, so this route is uncertain. Translation is mine.",
+            "source_url": "https://members.wto.org/crnattachments/2021/TBT/KOR/21_3774_00_x.pdf",
+            "source_quote": "기계적으로 사이트에 함께 고정되도록 설계되어 있고 개별적으로 사용되지 않는 각 장치, 또는 거치형 기기는 제조자의 지침서에 따라 설치한 후, 검사로 평가한다. 필요하다면, 8.6.2.2에 따라 시험한다.",
+            "confidence": "medium"
+          },
+          {
+            "claim": "If the equipment is intended to be fastened in place, Annex F.4 requires the instructions to explain how to fasten it securely. CB report forms list this as F.4 item 'Equipment intended to be fastened in place'.",
+            "source_url": "https://members.wto.org/crnattachments/2021/TBT/KOR/21_3774_00_x.pdf",
+            "source_quote": "기기가 제자리에 고정되도록 의도되는 경우, 사용 설명서는 기기를 단단히 고정하는 방법을 설명해야 한다.",
+            "confidence": "high"
+          },
+          {
+            "claim": "Clause 8.7 (equipment mounted to a wall, ceiling or other structure) tests only how the mount attaches to the equipment, not how it is fixed into the wall. With a manufacturer-specified mount, an extra downward force (the lesser of 3× weight or weight + 880 N) is applied for 1 min, then 50 N sideways. With only attachment points such as hooks or threaded holes, a force (the lesser of 4× weight or 2× weight + 880 N, divided by the number of points) is applied to each point in shear, push and pull. Whether a lab would apply this to Tropos tether points is unclear.",
+            "source_url": "https://members.wto.org/crnattachments/2021/TBT/KOR/21_3774_00_x.pdf",
+            "source_quote": "시험은 기기에 장착 수단의 고정을 시험하기 위한 것이고 벽이나 천장에 고정을 시험하기 위한 것은 아니다.",
+            "confidence": "high"
+          },
+          {
+            "claim": "A benchmark for how a regulator frames the 'secure it to the building' route: the AS/NZS 62368.1 deviations (Australia/New Zealand, TVs and displays only) exempt TVs designed only for wall, ceiling or rack fixing from stability tests, but only with an instructional safeguard saying the set 'must be securely attached to the floor/wall'. Non-fixed TVs should get a restraining point that withstands a 100 N pull in all directions. This does not apply to a loudspeaker; it is a useful design target for a strap point.",
+            "source_url": "https://s3-ap-southeast-2.amazonaws.com/wc-prod-pim/Asset_Documents/55KUE30G%20and%2055KUE50G%20Safety%20Test%20Report.pdf",
+            "source_quote": "201 MS2 and MS3 television sets and display devices, designed only for fixing to a wall, ceiling or equipment rack, are not subjected to stability requirements only if the instructional safeguard of Clause 8.6.1.201 is provided.",
+            "confidence": "medium"
+          },
+          {
+            "claim": "Market precedent: REL's Planar powered subwoofer ships with an anti-tip wall restraint. Its manual warns that when not wall-mounted it may tip if pushed, struck or climbed, including on its accessory cart, and strongly recommends the restraint in every freestanding setup. The manual does not show how this was treated in safety certification.",
+            "source_url": "https://www.musicdirect.com/content/pdfs/ARELPLCRT1GW-manual.pdf",
+            "source_quote": "When Planar is not mounted to a wall, it may tip if subjected to force, impact, or climbing. [...] REL strongly recommends installing this restraint in all freestanding applications.",
+            "confidence": "high"
+          },
+          {
+            "claim": "8.10.1 (2018-based) on carts, stands and similar carriers: every stand the manufacturer specifies for use with the equipment is tested alone and again with the equipment on it, classified by combined mass. MS3 equipment not moved in normal use must pass the 8.6.5 horizontal force test together with its supporting stand. MS2/MS3 equipment 1 m or taller on its specified stand must pass the relocation test at 15° instead of 10°. If a lab treats a separate Tropos plinth as a 'stand', 8.6.5 (with its tilt options) and the 15° relocation tilt apply to the combination, even without front controls. Translation is mine.",
+            "source_url": "https://members.wto.org/crnattachments/2021/TBT/KOR/21_3774_00_x.pdf",
+            "source_quote": "기기와 함께 사용하도록 규정된 모든 카트 및 스탠드는 다음 항에서 설명된 해당 시험을 받아야 한다. 카트, 스탠드 또는 캐리어는 단독으로 시험을 받고 다시 제조자가 지정한 기기를 카트나 스탠드에 올려놓은 상태에서 시험을 받아야 한다. [...] 기기를 지탱하는 지지 카트, 스탠드 및 이와 유사한 캐리어를 포함한, 정상 동작 상태의 일부로서 이동되지 않는 MS3 기기는 8.6.5의 수평력 시험에 적합해야 한다.",
+            "confidence": "high"
+          },
+          {
+            "claim": "8.10.2: a stand specified for particular equipment but packed and sold separately must carry an instructional safeguard, on the stand or in its instructions, in this order: 'CAUTION'; 'This (stand) is intended for use only with (manufacturer), (model or series), (equipment)'; 'Use with other equipment may result in instability causing injury'. Equipment shipped for use with a specific stand needs the matching caution naming the stand. This is the standard's mechanism for an optional base sold separately. Translation is mine.",
+            "source_url": "https://members.wto.org/crnattachments/2021/TBT/KOR/21_3774_00_x.pdf",
+            "source_quote": "특정 기기와 함께 사용을 위해 제조자에 의해 지정되며, 기기와 별도로 포장되고 판매되는 카트, 스탠드 또는 이와 유사한 캐리어는 F.5에 따라 지침 보호수단과 함께 제공되어야 한다. [...] “다른 기기와 함께 사용하는 제품의 불안정으로 상해를 불러 올 수 있다.”",
+            "confidence": "high"
+          },
+          {
+            "claim": "8.10.3 to 8.10.5 add tests for the stand itself. 8.10.3 loads: 220 N for 1 min at child-graspable points within 750 mm of the floor; on support surfaces, 4× the intended load or 100 N, whichever is larger, capped at 440 N. 8.10.4: a 7 J impact. 8.10.5: 8.6.3 and 8.6.5 tests on the stand alone and with the equipment, using combined mass and a horizontal force applied up to 1.5 m. If the equipment starts to slide or tilt on the stand, the horizontal force test is repeated at 13% of the equipment's weight or 100 N, whichever is less. Nothing may overturn.",
+            "source_url": "https://members.wto.org/crnattachments/2021/TBT/KOR/21_3774_00_x.pdf",
+            "source_quote": "8.6.3 및 8.6.5의 시험 중, 기기가 카트, 스탠드나 캐리어에 대비해 미끄러지거나 기울기 시작하는 경우, 기기 중량의 13 %로 힘을 줄이거나, 100 N 중에 작은 힘으로 수평력 시험만 반복해야 한다.",
+            "confidence": "high"
+          },
+          {
+            "claim": "8.6.2.1 has stability tested in the least stable arrangement an ordinary person can create, and multi-position equipment in its most unfavourable position. With an optional base, the bare speaker is a configuration the instructions permit, so it must pass on its own. An optional base can add a configuration, but it cannot be what makes the product compliant.",
+            "source_url": "https://members.wto.org/crnattachments/2021/TBT/KOR/21_3774_00_x.pdf",
+            "source_quote": "위치 조정 기능을 갖고 있는 기기는 구조에 따라 가장 불리한 위치에서 시험되어야 한다.",
+            "confidence": "medium"
+          },
+          {
+            "claim": "Precedent for optional stands: UL's CB report (IEC 62368-1:2014) on the Contex/HP wide-format scanner, sold with optional High, Low and Adjustable stands, tested stability in each stand configuration. The 8.6.2.2 forces were 123.5 N on the High Stand and 163.2 N on the Adjustable stand (20% of 63 kg and 83.3 kg). The lab applied 100 N for 8.6.5 and ran the 8.10 stand tests: a 440 N load and 100 N mechanical stability.",
+            "source_url": "https://contex.com/wp-content/uploads/2018/05/E323749-A6002-CB-1-Original-RB67GRC67GRC67R.pdf",
+            "source_quote": "For High Stand: 123.5N; For Adjustable stand: 163.2 N",
+            "confidence": "high"
+          },
+          {
+            "claim": "8.6.1 (2018-based): where thermoplastic material affects stability, the stability tests are done after T.8 stress-relief conditioning, once the unit is back at room temperature. This matters for a cast-acrylic (PMMA) cabinet. 8.10.6 likewise requires an acrylic stand or plinth to come through T.8 without distortion that would make it fail the 8.10.3, 8.10.4 or 8.10.5 tests.",
+            "source_url": "https://members.wto.org/crnattachments/2021/TBT/KOR/21_3774_00_x.pdf",
+            "source_quote": "열가소성 물질이 기기의 안정성에 영향을 미치는 경우, T.8 응력경감 시험 후 기기가 실온에 도달했을 때 관련 안정성 시험을 한다.",
+            "confidence": "high"
+          },
+          {
+            "claim": "The 8.6.2.3 downward force test (800 N at up to 1 m on any surface at least 125 × 200 mm and within 10° of horizontal) does not apply where surfaces are unlikely to be used as a step or ladder. The note's examples include products combined with a cart or stand.",
+            "source_url": "https://members.wto.org/crnattachments/2021/TBT/KOR/21_3774_00_x.pdf",
+            "source_quote": "계단 또는 사다리로 이용될 가능성이 없는 표면의 형상을 가진 기기는 시험에서 제외된다.",
+            "confidence": "high"
+          },
+          {
+            "claim": "The tip-over warning that 62368-1 requires (element 2 'Stability hazard'; the set may fall, causing serious injury or death; placement precautions) applies only to MS2/MS3 television sets. Nothing in 8.6 requires a tip-over warning on a loudspeaker that passes the tests, though the same wording could be used voluntarily.",
+            "source_url": "https://members.wto.org/crnattachments/2021/TBT/KOR/21_3774_00_x.pdf",
+            "source_quote": "MS2 및 MS3 텔레비전 세트는 F.5에 따른 지침 보호수단을 가져야 하며, 지침 보호수단은 설치 설명서 또는 기기에 동반된 문서에 포함될 수 있다.",
+            "confidence": "medium"
+          },
+          {
+            "claim": "The official IECEE US/Canada national-differences checklist for CSA/UL 62368-1:2019 (form US_CA_ND_IEC62368_1E, master dated 2022-03-04, attached to an xFusion CB report) lists differences for Clause 1, 4.1, 4.6, 4.8, 5.x, 6.5.1 and Annexes F, G, H, Q and DVA–DVJ. It lists none for 8.6 (stability), 8.7 (wall mounting) or 8.10 (carts and stands). UL's Ed. 4 analysis likewise shows no CAN/U.S. difference on stability. UL 62368-1 therefore applies the IEC stability tests unchanged.",
+            "source_url": "https://www.xfusion.com/wp-content/uploads/2025/04/CN23Y1WW-002__2288H-V7-CB-%EF%BC%88-IEC-62368-1-2018%EF%BC%89.pdf",
+            "source_quote": "IEC 62368-1 - US and Canadian National Differences",
+            "confidence": "high"
+          },
+          {
+            "claim": "UL 62368-1:2025 / CSA C22.2 No. 62368-1:2025 (Ed. 4, based on IEC 62368-1:2023) takes effect for new certifications on 15 February 2027, per Intertek's Standards Update Notice. Its listed changes (external circuits, fire-enclosure openings, liquid-filled components, battery charging, and no more acceptance of 60065/60950-1 components) do not touch stability. One test house, SIQ, cites an earlier Canadian date of 30 April 2026 that I could not confirm.",
+            "source_url": "https://preview.intertek-br.com/siteassets/resources/sun/2026/ul-62368-1-csa-c22-2-no-62368-1-cc-sun-rev-7-31-2025-ed-2-17-2027.pdf",
+            "source_quote": "Effective Date: February 15, 2027",
+            "confidence": "high"
+          },
+          {
+            "claim": "In Europe, EN IEC 62368-1:2024/A11:2024 is based on IEC 62368-1:2023. The date of withdrawal for the superseded 2018-based EN is 2027-02-15.",
+            "source_url": "https://delivery-p133222-e1298791.adobeaemcloud.com/adobe/assets/urn:aaid:aem:0ebe019a-7626-41c4-9d7f-a9c2530b4a24/original/as/62368-1_Ed4_Impact_Analysis_Update_2024_05_10.pdf",
+            "source_quote": "The Date of Withdrawal (DOW) of superseded standards associated with EN IEC 62368-1:2024 / A11:2024 is 2027-02-15.",
+            "confidence": "high"
+          },
+          {
+            "claim": "The only mandatory US tip-over rule, 16 CFR part 1261 (STURDY Act), covers only clothing storage units: free-standing furniture intended for storing clothing, typical of bedroom furniture. It adopts ASTM F2057-23 (16 CFR 1261.2). It does not reach a loudspeaker.",
+            "source_url": "https://www.law.cornell.edu/cfr/text/16/1261.1",
+            "source_quote": "Clothing storage unit means any free-standing furniture item manufactured in the United States or imported for use in the United States that is intended for the storage of clothing, typical of bedroom furniture.",
+            "confidence": "high"
+          },
+          {
+            "claim": "ASTM F3096 is the tip-restraint performance specification required by ASTM F2057-23 for clothing storage units. The 2023 revision raised its static load from 50 lb to 60 lb (27.22 kg), and it tests only the restraint's strength, not how it performs once installed. I found no ASTM or CPSC tip-restraint standard that covers audio equipment; F3096 is a usable benchmark for a speaker strap.",
+            "source_url": "https://www.cps.bureauveritas.com/newsroom/astm-f3096-standard-performance-specification-tipover-restraints-used-clothing-storage",
+            "source_quote": "assesses the strength of the tipover restraint only, and does not address the in situ performance of the tipover restraint.",
+            "confidence": "medium"
+          },
+          {
+            "claim": "CPSC staff (2015) noted that TVs must pass a UL stability test but no standard requires a restraint to be included. They found anchoring rarely happens: restraints are 'not usually installed by consumers', only 9% of surveyed TVs were anchored, and 91% of respondents had not anchored the furniture holding their TV. A design that depends on a strap therefore shifts real-world risk onto a step most owners skip.",
+            "source_url": "https://www.cpsc.gov/s3fs-public/pdfs/Tipover-Prevention-Project-Anchors-without-Tools.pdf",
+            "source_quote": "One of the problems is that such restraint systems are not usually installed by consumers.",
+            "confidence": "high"
+          },
+          {
+            "claim": "CPSC's 2022 tip-over report (February 2023) lists among the causes of instability 'unstable design (small footprint, top heavy)' and non-use of tip-over restraints. It estimates about 19,400 emergency-department-treated tip-over injuries a year (2019–2021) from TVs, furniture and appliances. Speakers are not counted separately; they appear among the excluded electronics.",
+            "source_url": "https://www.cpsc.gov/s3fs-public/2022_Tip_Over_Report_Final.pdf",
+            "source_quote": "Product instability that can lead to a tip-over incident can be caused or affected by an unstable design (small footprint, top heavy), use on a sloped or unstable surface (carpet), non-use of a tip-over restraint device or use of a defective tip-over restraint device",
+            "confidence": "high"
+          },
+          {
+            "claim": "Even without a speaker-specific rule, US manufacturers, importers, distributors and retailers must report to CPSC within 24 hours information that a product has a defect that could create a substantial risk of injury, or creates an unreasonable risk of serious injury or death. A tip-over defect would fall under this.",
+            "source_url": "https://www.cpsc.gov/Business--Manufacturing/Recall-Guidance/Duty-to-Report-to-the-CPSC-Your-Rights-and-Responsibilities",
+            "source_quote": "A company must report to the Commission within 24 hours of obtaining reportable information.",
+            "confidence": "high"
+          },
+          {
+            "claim": "CPSC has recalled AV furniture for falling short of voluntary industry stability standards, with no injuries reported. Example: about 6,700 Studio RTA TV stands in 2008.",
+            "source_url": "https://www.cpsc.gov/Recalls/2008/studio-rta-recalls-tv-stands-due-to-tv-tip-over-hazard",
+            "source_quote": "The stability of the stand does not meet industry standards to prevent TV tip-over, posing a risk of injury or death to consumers.",
+            "confidence": "high"
+          },
+          {
+            "claim": "US furnishing standards reportedly route manufacturer-supplied stands to UL 62368-1. UL 962 is said to state that a cart, stand or support surface supplied with AV equipment by that equipment's manufacturer is evaluated to UL 62368-1, while stand-alone AV carts and stands fall under UL 1678. I saw this only in a search-engine excerpt of a GlobalSpec datasheet; the page itself returned 403.",
+            "source_url": "https://datasheets.globalspec.com/ds/uls/ul-962/87bd13b6-8dd0-43c4-aec2-f12e31329592",
+            "source_quote": "If a cart, stand or support surface is supplied with the audio or video equipment by the manufacturer of the audio or video equipment, the requirements specified in UL 62368-1 applies.",
+            "confidence": "low"
+          }
+        ],
+        "open_questions": [
+          "Verify the English wording of IEC 62368-1:2023 / UL 62368-1:2025 for 8.6.2.2, 8.6.5, Table 35 (overview) and 3.3.3.2 (including whether Note 1 survives) against a licensed copy. The clause text above comes from the Korean KC 62368-1 draft (2018-based) and the Japanese JIS C 62368-1 (2014-based), cross-checked with UL and TÜV summaries; local copies are at /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/dl/kc/kc.pdf and /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/dl/jis/jis01.html.",
+          "Does Tropos have front-mounted accessible user controls, or any display? If its controls are on the rear plate or in an app or remote, it may not fall in the 'controls or display' row, and 8.6.5 would not apply to the bare speaker at all.",
+          "Will the chosen CB lab or NRTL accept the 15° tilt alternative in 8.6.5 (and the 10° tilt in 8.6.2.2/8.6.3) instead of the 20% push at the horn top? Get a written pre-assessment before tooling the 600 × 600 base.",
+          "What is the true support polygon? Where do the feet or glides sit relative to the 560 × 420 outline, where is the CoM in plan, does the horn overhang the base, and what tilt-back angle is planned? The margins above assume a centred CoM and support at the outline.",
+          "Would a removable 10 kg plinth be treated as a 'stand' under 8.10, bringing in 8.6.5 for the combination, the 15° relocation tilt, the 8.10.3–8.10.6 tests and the caution markings? Or would it count as part of the equipment if screwed on permanently? If the plinth always ships in the box, would the lab still require the bare speaker to pass?",
+          "Does the cast-acrylic construction trigger T.8 stress-relief conditioning before the stability tests (8.6.1), and 8.10.6 for an acrylic plinth?",
+          "Does Tropos have any surface of at least 125 × 200 mm, below 1 m, that could be stood on and overhangs the base? That would bring in the 800 N downward-force test of 8.6.2.3.",
+          "For the 'secure to the building' route: would a lab ever treat a consumer-fitted wall strap as making Tropos 'fixed equipment' under the clarified 2023 definition? And would 8.7 Test 2 (lesser of 4× weight or 2× weight + 880 N, divided by the number of points) be applied to the tether points?",
+          "Where does the team's '2 m' force height come from? It is not in IEC 62368-1, which uses 1.5 m; it is likely carried over from the withdrawn IEC 60950-1 clause 4.1, but I could not confirm this.",
+          "The rationale in IEC TR 62368-2 for the 8.6 forces and tilt angles, and any IECEE CTL decision sheets on 8.6 or 8.10, were not found.",
+          "Confirm the US effective date for UL 62368-1 Ed. 4: Intertek says 2027-02-15, while SIQ cites a Canadian date of 2026-04-30. Which edition will the US certification be issued against?"
+        ]
+      },
+      {
+        "key": "practice",
+        "findings": [
+          {
+            "claim": "KEF LS60 Wireless (active, mains-powered): 1,090 mm tall on its plinth. The plinth is 212 x 394 mm (W x D), while the cabinet is 130 x 321 mm. KEF says the plinth cannot be removed, so the wider base is a fixed, standard part of the speaker and not an optional extra.",
+            "source_url": "https://assets.kef.com/product-support/ls60-wireless/LS60W_Product_Manual_EN.pdf",
+            "source_quote": "Dimensions (H x W x D per speaker) 1,090 x 212 x 394 mm (42.9 x 8.3 x 15.5 in.) with plinth 1,042 x 130 x 321 mm (41.0 x 5.1 x 12.6 in.) without plinth ... Note: The plinth cannot be removed.",
+            "confidence": "high"
+          },
+          {
+            "claim": "KEF LS60 Wireless weighs 62.4 kg per set (about 31 kg per speaker). It ships with flat feet fitted, and floor spikes are in the box to fit if wanted. The user manual has no anti-tip strap or wall-fixing instruction. Its safety information is in a separate booklet, which I did not find.",
+            "source_url": "https://assets.kef.com/product-support/ls60-wireless/LS60W_Product_Manual_EN.pdf",
+            "source_quote": "Weight (per set) 62.4 kg (138 lbs) ... The speakers are pre-installed with flat feet. To further enhance listening experience, the flat feet can be replaced with the provided floor spikes to isolate vibrations.",
+            "confidence": "high"
+          },
+          {
+            "claim": "KEF also uses the LS60 plinth for cooling, so the wide base does a second job beyond stability.",
+            "source_url": "https://us.kef.com/products/ls60-wireless",
+            "source_quote": "The well-considered design of the back panel and plinth incorporates a cooling mechanism for sufficient air circulation.",
+            "confidence": "medium"
+          },
+          {
+            "claim": "Bang & Olufsen Beolab 90 (active): 735 W x 1,253 H x 747 D mm, 137 kg, floor placement. Its own body is very wide (footprint about 0.74 x 0.75 m). The product sheet lists no separate base, stand or strap.",
+            "source_url": "https://av.malibuwired.com/wp-content/uploads/2025/01/Beolab_90_Product_Sheet__EN_Aug2022.pdf",
+            "source_quote": "Product Dimensions ( W x H x D ) 73.5 x 125.3 x 74.7 cm ... Placement Floor ... Weight 137 kg",
+            "confidence": "high"
+          },
+          {
+            "claim": "Bang & Olufsen Beolab 50 (active): 61 kg, 103.6 cm tall, with floor placement only. The B&O drawing adds 5.2 cm when the Acoustic Lens rises. The sheet gives 28.5 cm as the width, but the drawing also shows a 45.5 cm dimension, which B&O copy calls its widest point. No separate base or strap is listed. (This copy of the B&O sheet is hosted by a dealer.)",
+            "source_url": "https://lenwallisaudio.com/wp-content/uploads/2021/05/ps-beolab50-a4-en.pdf",
+            "source_quote": "Dimensions: 28.5 x 103.6 cm W x H ... Weight: 61 kg ... Placement options: Floor",
+            "confidence": "medium"
+          },
+          {
+            "claim": "Bang & Olufsen Beolab 28 (active): 18.6 kg. On the floor it is 1,370 mm tall on a 253 x 253 mm footprint. The same speaker is also sold wall-mounted (1,400 mm). B&O's answer for this tall, slim speaker is a slim floor stand or a wall bracket, not a wide base.",
+            "source_url": "https://av.malibuwired.com/wp-content/uploads/2025/01/Product_Sheet_Beolab_28_EN_Sep2024.pdf",
+            "source_quote": "On the floor: 25.3 x 137 x 25.3 cm ... Wall mounted: 21.2 x 140 x 25.3 cm ... Weight 18.6 kg ... Slender form, can be placed on a wall or on the floor.",
+            "confidence": "high"
+          },
+          {
+            "claim": "Bang & Olufsen Beolab 18 (active): 1,324 mm tall on its floor stand, with a 200 x 200 mm footprint. The speaker weight is quoted without the base or wall bracket, which are separate parts. An older sheet lists the placement options as wall bracket or floor stand.",
+            "source_url": "https://av.malibuwired.com/wp-content/uploads/2025/01/Beolab_18_Product_Sheet_EN_Sep2024.pdf",
+            "source_quote": "On the floor: 20 x 132.4 x 20 cm ... Wall mounted: 15.5 x 132.6 x 13.5 cm ... 9.2 kg (without base or wall bracket)",
+            "confidence": "high"
+          },
+          {
+            "claim": "B&O support says that for Beolab 8 all stands and brackets are optional accessories. This shows B&O's pattern of selling the base or bracket separately for its slimmer speakers. I saw this only in a search snippet; the page refused a direct fetch.",
+            "source_url": "https://support.bang-olufsen.com/hc/en-us/articles/19044910782225-Which-stand-and-bracket-options-are-available-for-Beolab-8",
+            "source_quote": "All stands and brackets are sold as optional accessories.",
+            "confidence": "medium"
+          },
+          {
+            "claim": "Genelec 8381A (active main monitor, two stacked MDF enclosures): 1,458 mm tall, 500 x 694 mm (W x D), 162 kg. Its footprint is simply the cabinet itself; the page shows no plinth or outriggers.",
+            "source_url": "https://www.genelec.com/8381a",
+            "source_quote": "H 1458 x W 500 x D 694 mm ... 162 kg (357.1 lb) ... Enclosure 1 dimensions: 880 x 694 x 500 mm ... Enclosure 2 dimensions: 570 x 694 x 500 mm",
+            "confidence": "high"
+          },
+          {
+            "claim": "Genelec 8381A stands free on the floor with no strap or wall fixing. To aim it, Genelec tilts only the top enclosure, 4 or 8 degrees downward, using wedges that are included and fitted between the two enclosures. Genelec says these wedges keep the stack at maximum stability when tilted. A 300 mm pedestal is optional and only raises the speaker. This is a documented way to angle the sound without tilting the whole cabinet or widening the base.",
+            "source_url": "https://assets.ctfassets.net/4zjnzn055a4v/3Qz0YaBS9ZImcREJpvzUaB/3cb6200045e452d8fc6f029aad9fcd87/8381A_Operating_Manual.pdf",
+            "source_quote": "The 8381A monitor is designed to be placed free-standing on the floor. ... either a 4 or 8 degree tilt-down angle. These wedges are included with the 8381A. ... Genelec does not recommend using any other method for tilting the top enclosure as the wedges are designed to create structural rigidity and ensure that the enclosure stack has maximum stability when tilted. ... An optional 300 mm (12 in) height extension block is available from Genelec.",
+            "confidence": "high"
+          },
+          {
+            "claim": "Genelec also sells an optional floor stand (8000-400) for its smaller monitors. It gets its stability from a heavy cast base: 420 x 420 mm, stand weight 13.4 kg, height 1,100-1,700 mm.",
+            "source_url": "https://www.genelec.com/accessories/8000-400-genelec-design-stand",
+            "source_quote": "The strong steel stand combines a 420 x 420 mm cast base with an oversized shaft, making it incredibly stable. ... The stand weighs 13.4 kg.",
+            "confidence": "high"
+          },
+          {
+            "claim": "Meridian DSP8000 XE (active): 110.5 kg, 1,305 mm tall without feet or spikes. The brochure's own [53.2 in] equals about 1,350 mm. The cabinet tapers from 158 to 400 mm wide and from 210 to 528 mm deep, so the footprint is 400 x 528 mm. The base is widened by the cabinet's shape, with no separate plinth, and no strap is mentioned.",
+            "source_url": "https://www.meridian-audio.com/media/3uhiazv3/meridian-product-brochure-feb-2026-web-version.pdf",
+            "source_quote": "Height*: 1305mm [53.2in] • Width:158mm [6.2in] tapering to 400mm [15.7in] • Depth: 210mm [8.3in] tapering to 528mm [20.8in] • Footprint (W x D): 400mm [15.7in] x 528mm [20.8in] • Weight: 110.5kg [243lbs] ... * Without feet/spikes",
+            "confidence": "high"
+          },
+          {
+            "claim": "Meridian's other active floorstanders use the same tapered shape. DSP9: 68 kg, 1,011 mm, footprint 392 x 511 mm (narrowing to 158 x 187 mm). Special Edition DSP7200: 55 kg, 1,072 mm, footprint 350 x 422 mm. Special Edition DSP5200: 35 kg, 903 mm, footprint 300 x 360 mm. All heights are without feet or spikes.",
+            "source_url": "https://www.meridian-audio.com/media/3uhiazv3/meridian-product-brochure-feb-2026-web-version.pdf",
+            "source_quote": "Width: 392mm [15.43in] tapering to 158mm [6.2in] • Depth: 511mm [20.1in] tapering to 187mm [7.4in] • Footprint (W x D): 392mm [15.43in] x 511mm [20.1in] • Weight: 68kg [149.9lbs] ... Height*: 1072mm [42.2in] ... Footprint (W x D): 350mm [13.8in] x 422mm [16.6in] • Weight: 55kg [121lbs] ... Height*: 903mm [35.6in] ... Weight: 35kg [77.1lbs]",
+            "confidence": "high"
+          },
+          {
+            "claim": "Linn 360 Exakt (fully active 4-way floorstander, the closest in weight to Tropos): 1,141 x 411 x 484 mm (H x W x D) and 70 kg, both including its stand. LinnDocs gives every figure 'with stand', meaning the stand is part of the product.",
+            "source_url": "https://docs.linn.co.uk/wiki/index.php/Technical_Specification:360_Exakt_Integrated/0",
+            "source_quote": "4-way Floor-standing Fully integrated Aktiv loudspeaker with Exakt technology ... (H) 1141 mm x (W) 411 mm x (D) 484 mm with stand ... 70 kg / 154.4 lb (with stand)",
+            "confidence": "high"
+          },
+          {
+            "claim": "The Linn 360 stands ship in their own package but are part of the delivery. Four spikes screw into the corners of each stand. The setup page has no anti-tip strap or wall fixing.",
+            "source_url": "https://docs.linn.co.uk/wiki/index.php/360_pwab/0_/Setup",
+            "source_quote": "Loudspeakers are packed individually, with a separate package containing both speaker stands. ... The loudspeakers should be level with all four spikes in contact with the floor. ... Screw the spikes into the corners of the stand.",
+            "confidence": "high"
+          },
+          {
+            "claim": "Linn Exakt Akubarik (active): 46.2 kg and 1,050 mm tall including its stand. The included stand widens the footprint from the cabinet's 246 x 435 mm to 351 x 450 mm. This is an integral base plate, not an optional one.",
+            "source_url": "https://docs.linn.co.uk/wiki/images/9/99/Akubarik_Exakt_quick_tech_spec.pdf",
+            "source_quote": "Weight (including stand) 46.2 kg / 102 lb Dimensions (including stand) 1050 mm (H) x 351 mm (W) x 450 mm (D) ... Dimensions (excluding stand) 246 mm (W) x 435 mm (D)",
+            "confidence": "high"
+          },
+          {
+            "claim": "Kii Three BXT (active, the Kii Three on top of the BXT bass module): 1,200 x 200 x 400 mm (H x W x D) and 51 kg each, per the Hi-Fi News lab data that Kii republishes. That is a very slim footprint for a 1.2 m, 51 kg unit.",
+            "source_url": "https://www.kiiaudio.com/wp-content/uploads/2024/01/hfnybkiiaudiothreebxtreprintlow.pdf",
+            "source_quote": "Dimensions (HWD) / Weight (each) 1200x200x400mm / 51kg",
+            "confidence": "high"
+          },
+          {
+            "claim": "Kii's support centre lists the full BXT stack at 20 x 117 x 40 cm and 56 kg per speaker. The BXT stands on a footplate with felt gliders, with optional spikes. The BXT is a modular add-on, so a Kii Three stand-mount becomes a floorstander by buying it later. The plain Kii Three uses a separate stand, 67 cm plus spikes. No strap or wall fixing is called for.",
+            "source_url": "https://www.support.kiiaudio.com/support-center",
+            "source_quote": "20x117x40cm, 8\"x46\"x16\" (WxHxD) - single speaker, fullstack ... Weight: 56kg (123lbs) ... Height: 67cm + spikes ... Make sure the cabinet stands upright and does not tilt forward or backward.",
+            "confidence": "medium"
+          },
+          {
+            "claim": "Dutch & Dutch 8c (active, built to sit close to the wall): 485 x 270 x 380 mm (H x W x D), 26 kg. It is a stand-mount speaker, not a floorstander. I saw these figures only in search snippets; the official spec page returned a 404 when fetched directly.",
+            "source_url": "https://dutchdutch.com/pages/8c-specifications",
+            "source_quote": "Dimensions: 485 x 270 x 380 mm 19,1 x 10,6 x 15 in ... 26 kg / 57,3 lb",
+            "confidence": "medium"
+          },
+          {
+            "claim": "The Dutch & Dutch 8c stand is sold separately at €1,149 per pair. It is 600 x 230 x 360 mm (H x W x D), the speaker bolts to it, and it can be filled with sand. On the stand the 26 kg speaker stands about 1.08 m tall on a 230 x 360 mm footprint. No floor fixing or strap is mentioned.",
+            "source_url": "https://dutchdutch.com/products/speaker-stands-per-pair",
+            "source_quote": "8c. stand dimensions (HxWxD) 600 x 230 x 360 MM (24 x 9 x 14 IN) ... The 8c loudspeaker is bolted to the stand so that a sturdy and stable platform is created. ... sand filling the stand is possible for minimum resonances.",
+            "confidence": "high"
+          },
+          {
+            "claim": "Avantgarde Acoustic UNO XD is the closest match to Tropos: a horn loudspeaker with a 500 mm spherical midrange horn at the top and an integrated 2 x 500 W bass amplifier, so it is mains-powered. It is 1,380 mm tall (±15 mm), 500 mm wide and 590 mm deep, and weighs 73.5 kg, almost Tropos's height and weight. This comes from the official fact sheet, in a copy hosted by a dealer.",
+            "source_url": "https://static-ru.insales.ru/files/1/6449/13252913/original/UNO-XD_Factsheet_engl_V1-4.pdf",
+            "source_quote": "width 500 mm / 20 in ... depth 590 mm / 23 in ... height (+/– 15 mm) 1.380 mm / 54 in ... Weight 73,5 kg / 162 lbs ... This integrated amplifier consists of a 2 x 500 watt amplifier.",
+            "confidence": "high"
+          },
+          {
+            "claim": "The Avantgarde UNO XD sits on a standard cast-aluminium base frame with 55 mm adjustable spikes. Its stability comes from an included metal base under the cabinet; no strap or wall fixing is mentioned.",
+            "source_url": "https://static-ru.insales.ru/files/1/6449/13252913/original/UNO-XD_Factsheet_engl_V1-4.pdf",
+            "source_quote": "The entire loudspeaker system is placed on a solid cast aluminium base frame. The spike assembly of the base frame – featuring solid 55 mm spikes and massive adjusting handles – are easily accessib- le from the top.",
+            "confidence": "high"
+          },
+          {
+            "claim": "Buchardt A700 (active, 4 x 150 W per speaker, 100-240 V mains): 1,035 mm tall with feet, 180 x 280 mm footprint, 28 kg each (56 kg per pair). It stands on an aluminium base block with decoupling feet, which are included; spikes are also supplied. There are no outriggers, plinth widening, strap or wall fixing.",
+            "source_url": "https://buchardtaudio.com/pages/a700-detailed-description",
+            "source_quote": "1000 (1035 with feet) x 180 x 280 mm (39.3” x 7” x 11”) ... 56 kg / pair (123 lb) ... Decoupling feets included ... 4 x 150/330 watt RMS/Peak class D (each speaker)",
+            "confidence": "high"
+          },
+          {
+            "claim": "ATC SCM50ASLT (active tower): 1,003 x 304 x 470 mm, 51 kg. Spikes are the only stability hardware supplied; there is no plinth, outrigger or strap.",
+            "source_url": "https://atc.audio/?p=160",
+            "source_quote": "1003 x 304 x 470mm / 39.49 x 11.97 x 18.50″ ... 51kg ... 2 x fabric wrapped grills, 8 x M8 x 1.25mm stand spikes and nuts, 2 x IEC Power Cables.",
+            "confidence": "high"
+          },
+          {
+            "claim": "Klipsch Jubilee is a passive horn speaker with an external active DSP crossover, so it has no mains power in the cabinet. It is a counter-example: 1,753 mm tall, 1,270 mm wide and 762 mm deep, about 185 kg across its two cabinets. Its wide footprint comes from the bass horn itself, not from a stability base.",
+            "source_url": "https://assets.klipsch.com/product-specsheets/Jubilee-Spec-Sheet-v04.pdf",
+            "source_quote": "HEIGHT 69.5” (175.26 cm) WIDTH 50.25” (127 cm) DEPTH 30.25” (76.2 cm) WEIGHT LF - 330 lbs (149.68 kg) HF - 78 lbs (35.38 kg) ... The Klipsch Jubilee features an external active DSP crossover network",
+            "confidence": "high"
+          },
+          {
+            "claim": "REL Planar (a slim powered subwoofer meant for wall mounting) is the one audio product I found that uses an included anti-tip tether as its main safeguard when free-standing. The kit is a wall-tether block, wall anchors and a tether, and the cart accessory is optional. REL says the tether is the primary method of preventing tip-over.",
+            "source_url": "https://www.musicdirect.com/content/pdfs/ARELPLCRT1GW-manual.pdf",
+            "source_quote": "Planar is designed to be mounted to a wall or used in close relationship with a wall for optimal performance. When used in a freestanding position, it may tip if subjected to sufficient force. ... To reduce the risk of tip-over, an anti-tip restraint system is included. REL strongly recommends installing this restraint in all freestanding applications. ... Use of the anti-tip restraint is the primary method of preventing tip-over when Planar is used in a freestanding position.",
+            "confidence": "high"
+          },
+          {
+            "claim": "JBL (HARMAN) sells an optional stand, the JS-120, that tilts its L100 Classic speaker back 7 degrees. It is low: the speaker's underside sits 143-180 mm off the floor. It is packed and sold in pairs. This is a documented example of an optional base that tilts the speaker back, though for a passive speaker.",
+            "source_url": "https://www.ambertech.com.au/Documents/brochures/JB-CLAJS120STAND.pdf",
+            "source_quote": "Rear Height (bottom of speaker): 5.65\" (143.4mm) ... Front Height (bottom of speaker): 7.075\" (179.7mm) ... Tilt-back angle: 7 degrees ... Packed and sold in pairs",
+            "confidence": "high"
+          },
+          {
+            "claim": "Bose sells OmniJewel floor stands as a pair, as an accessory for its small Lifestyle speakers. They are slim aluminium columns, 96.5 cm tall, with tempered-glass bases. Bose's page makes no tip-over or fixing statement.",
+            "source_url": "https://www.bose.ca/en_ca/products/speakers/speaker_accessories/omnijewel_floor_stands.html",
+            "source_quote": "Slender extruded aluminum stands with tempered glass bases ... Height: 38\" (96.5 cm) ... Sold as a pair.",
+            "confidence": "medium"
+          },
+          {
+            "claim": "Sonos sells its floor stands as separate accessories, for example the Era 300 Stand at $149, the Era 100 Stand at $139 and the One Stand pair at $249. The speakers themselves are tabletop units. The fetched page gave no base size or stability details.",
+            "source_url": "https://www.sonos.com/en-us/shop/era-300-floor-stand",
+            "source_quote": "Sonos Era 300 Stand ... $149 ... Accessory",
+            "confidence": "medium"
+          },
+          {
+            "claim": "My own arithmetic from the published sizes (not stated by any manufacturer). For a unit with its centre of mass in the middle, the largest sideways push at the top it can resist is (half its narrowest base dimension ÷ height) × its weight. That gives about 8-10% of weight for Kii Three BXT (200/1170-1200 mm), Buchardt A700 (180/1035), Beolab 28 (253/1370) and KEF LS60 (212/1090). It gives 15-19% for ATC SCM50ASLT (304/1003), the Meridian DSP8000 XE, DSP9, DSP7200 and DSP5200, Linn Akubarik (351/1050), Linn 360 (411/1141) and Avantgarde UNO XD (500/1380). Only Beolab 90 (29%) and Genelec 8381A clear a 20%-of-weight push at the top. The 8381A gets there only through the 250 N cap: it resists about 272 N. Under 13% (max 100 N) at the top, the 15-19% group would pass but the four slimmest would not. Tropos's 420 mm-deep cabinet at 1.30-1.32 m comes out at about 16%, in the same band as the Meridian, Linn, ATC and Avantgarde units. The proposed 600 mm base gives about 22%.",
+            "source_url": "https://static-ru.insales.ru/files/1/6449/13252913/original/UNO-XD_Factsheet_engl_V1-4.pdf",
+            "source_quote": "",
+            "confidence": "medium"
+          },
+          {
+            "claim": "Pattern across the documents I checked. Bases sold separately (Dutch & Dutch, Kii Three stand, Genelec 8000-400, Bose, Sonos, JBL JS-120) are for stand-mount or tabletop speakers that are stable on their own. On every floor-standing active speaker I found, the base that widens the footprint is standard: the KEF plinth cannot be removed, Linn's figures are 'with stand', and Avantgarde's base frame is part of the system. B&O's tall, slim models instead come with a floor stand or a wall bracket. None of the floorstander documents I checked (KEF, Genelec, Linn, Kii, Buchardt, ATC) calls for an anti-tip strap or wall fixing; REL's Planar subwoofer was the only product with an included tether.",
+            "source_url": "https://assets.kef.com/product-support/ls60-wireless/LS60W_Product_Manual_EN.pdf",
+            "source_quote": "Note: The plinth cannot be removed.",
+            "confidence": "medium"
+          }
+        ],
+        "open_questions": [
+          "Which IEC 62368-1 stability tests actually apply to a 74 kg floor-standing audio product: the static stability test in 8.6.2.2 (20% of weight, max 250 N, applied up to 2 m) or the horizontal force test in 8.6.5 (13%, max 100 N)? And at what height do labs apply the force? Several slim active floorstanders on sale could not withstand a 20% push at the top on geometry alone, so either they are tested differently or the force is applied lower. A CB lab, or the CB test reports for comparators in the IECEE database, would settle this.",
+          "Would a certifier accept an included anti-tip tether or wall fixing (REL's approach), or a choice of floor stand or wall bracket (B&O's approach), as meeting clause 8.6 for a free-standing floor unit? Or does a tether count only as an instruction, with the bare speaker still tested on its own?",
+          "If the plinth were sold as an optional extra, the speaker would presumably be tested without it. None of the floor-standing comparators sells its stabilising base as an option; the optional stands found are all for stand-mount or tabletop speakers.",
+          "Published footprints are mostly overall cabinet sizes. Foot and spike spacing is not published for the Kii BXT footplate, ATC spikes, Meridian feet or the Avantgarde base frame, so the computed tipping figures are approximate.",
+          "Conflicting figures. Kii BXT: 51 kg and 1,200 mm (BXT page, Hi-Fi News) versus 56 kg and 1,170 mm (Kii support centre). Linn 360: 70 kg on LinnDocs versus 66.4 kg reported for linn.co.uk. Meridian DSP8000 XE: 1,305 mm, but the brochure's [53.2 in] equals about 1,351 mm. Beolab 50: 28.5 x 103.6 cm is labelled W x H, but B&O also gives 45.5 cm at the widest point.",
+          "Several official pages refused direct fetching (403 or a bot check): B&O support, Devialet, avantgarde-acoustic.de and linn.co.uk. The B&O and Avantgarde figures come from dealer-hosted copies of manufacturer sheets, and the Beolab 8 'optional accessories' line comes from a search snippet. Devialet Tree figures are unverified: retailers list the Phantom I Tree, sold separately, at about a 340 mm base, about 660 mm tall and about 4.15 kg.",
+          "KEF's separate LS60 safety booklet was not found online. The user manual has no anti-tip instruction, but the booklet might.",
+          "For tilting Tropos back without a wider base: Genelec's documented method tilts only the top enclosure, using included wedges. Could the horn alone be angled on Tropos instead of the whole cabinet?"
+        ]
+      }
+    ],
+    "verified": {
+      "checked": [
+        {
+          "claim": "[clause] KC 62368-1 (notified to the WTO in 2021) adopts KS C IEC 62368-1 'without changing the technical content', and its text is the 3rd edition (2018): it has 3.3.3.5 outdoor equipment and 3.3.3.12 wireless power transmitter.",
+          "verdict": "confirmed",
+          "note": "The adoption sentence is verbatim on KC p.2 and both definitions are present. The one detail that does not match TÜV's Ed.3 summary is the cap on the 13% option in 8.6.2.2 (see that row)."
+        },
+        {
+          "claim": "[clause+exempt] Stability class comes from Table 35 row 5 (2018), which is Table 34 row 5 in 2023: MS1 ≤7 kg, MS2 ≤25 kg, MS3 >25 kg, with consumables counted. Tropos is MS3 in every configuration.",
+          "verdict": "confirmed",
+          "note": "KC Table 35 row 5 and footnote f. JEITA's May 2026 check sheet for IEC 62368-1:2023 reads '機器の分類 (表34の行5)'."
+        },
+        {
+          "claim": "[clause] 8.6.1: units fixed together are classed by total mass and separable units by their own masses; the equipment must meet 8.6.2 to 8.6.5 as Table 36 directs.",
+          "verdict": "confirmed",
+          "note": "KC 8.6.1 verbatim."
+        },
+        {
+          "claim": "[clause+exempt] Table 36 (2018): MS3 floor-standing gets 8.6.2.2, 8.6.2.3 and 8.6.3 only. MS3 controls/displays gets 8.6.2.2, 8.6.4 and 8.6.5. Fixed equipment has no requirements. So 8.6.5 is not triggered just by being floor-standing.",
+          "verdict": "confirmed",
+          "note": "I rendered KC PDF page 171 (printed p.163) and read the X marks myself. The 2014 JIS Table 36 page image has the same MS3 rows, and Kingpo and the CCC comparison agree."
+        },
+        {
+          "claim": "[clause+exempt] Table 36 footnote a: front-mounted accessible user controls, or moving-image displays likely to be used in the home where children can reach them.",
+          "verdict": "confirmed",
+          "note": "Same wording in KC (2018), JIS (2014) and UL's English paraphrase."
+        },
+        {
+          "claim": "[clause+exempt] UL Ed.3 analysis: MS2 equipment with controls or displays now gets static stability instead of the horizontal force test; Table 36 uses the defined term Fixed Equipment; the glass slide test no longer applies to floor-standing equipment; the change is aimed at TVs on dressers.",
+          "verdict": "confirmed",
+          "note": "Verbatim on UL analysis pp.30-31 (revised 2023-08-29). UL also says fixed equipment is typically wall, ceiling or floor mounted."
+        },
+        {
+          "claim": "[clause] CCC transition annex (GB 4943.1-2022 vs GB 8898-2011): 8.6.5 (20%/250 N) applies to MS3 equipment with controls or a display; 8.6.3 applies to MS2/MS3 floor-standing; the old 19.3 test was 13%/100 N for equipment of 25 kg or more.",
+          "verdict": "confirmed",
+          "note": "Annex 2 rows 19 and 21 match the quotes. The file names no issuer, so the CEPREI attribution is unverified."
+        },
+        {
+          "claim": "[clause] Kingpo explainer: a floor-standing TV over 25 kg is MS3 and needs 8.6.2.2, 8.6.2.3 and 8.6.3 (no 8.6.5); passing any one of the three static methods is enough.",
+          "verdict": "confirmed",
+          "note": "Verbatim on the 2021-07-06 page. Its worked example uses 180 N for a 21 kg set, so treat it as a secondary source."
+        },
+        {
+          "claim": "[clause+exempt] 2018/2023 8.6.2.2 is passed by any one of: a 10° tilt; a 10° incline with 360° rotation; or 50% of weight (≤100 N) down plus 13% horizontal through a ~125x200 mm tool at ≤1.5 m, stopped once the unit is stable at 10°. There is no 20%/250 N and no 2 m in 8.6.2.2.",
+          "verdict": "confirmed",
+          "note": "KC 8.6.2.2 verbatim. JEITA's comparison marks 8.6.2.2 '＝' (technically equivalent) from Ed.3 to Ed.4."
+        },
+        {
+          "claim": "[clause+exempt] Cap on the 13% horizontal option: KC and Kingpo say 250 N, TÜV says 100 N. TÜV also confirms that 2014 8.6.2.2 was 20% of weight, max 250 N, in any direction except upward.",
+          "verdict": "confirmed",
+          "note": "The conflict is real: TÜV item 27 says 100 N. No English text was found to settle it. It does not matter for Tropos: 13% is about 94 N bare and 108 N on the plinth."
+        },
+        {
+          "claim": "[clause] UL: the static stability requirements were restructured, but equipment that complied before is expected to keep complying. A new rule stops the supporting surface from being what passes the 50%-down option.",
+          "verdict": "confirmed",
+          "note": "UL pp.30-31 verbatim."
+        },
+        {
+          "claim": "[clause] 8.6.2.1: small stops prevent sliding; doors, drawers, casters, adjustable feet and other movable parts are set in the least stable combination.",
+          "verdict": "confirmed",
+          "note": "KC 8.6.2.1. Any adjustable feet or spikes on Tropos would be tested at their worst setting."
+        },
+        {
+          "claim": "[clause+exempt] 8.6.2.3: a constant 800 N downward force at up to 1 m, on surfaces at least 125x200 mm and within 10° of horizontal. Equipment unlikely to be used as a step or ladder is exempt (the example given is products combined with a cart or stand).",
+          "verdict": "confirmed",
+          "note": "KC, JIS 2014 and JEITA 2021/2026 agree. That the plinth steps cannot tip the unit is physics, and it holds only if the steps lie inside the tipping edges."
+        },
+        {
+          "claim": "[clause] JEITA's check sheets give the same 800 N summary and the same 'no glass slide for floor-standing equipment' note for both the 2018 and the 2023 editions.",
+          "verdict": "confirmed",
+          "note": "I checked both the 2021 sheet (IEC 2018) and the 2026 sheet (IEC 2023)."
+        },
+        {
+          "claim": "[clause] 8.6.3 is met by wheels at least 100 mm in diameter, or by a 10° tilt or a 10° incline with 360° rotation, with movable parts in the least stable combination.",
+          "verdict": "confirmed",
+          "note": "KC 8.6.3.1-8.6.3.2 verbatim."
+        },
+        {
+          "claim": "[clause] The 8.6.4 glass slide test applies only to the controls/displays rows and never to floor-standing equipment (footnote b).",
+          "verdict": "confirmed",
+          "note": "KC footnote b text, UL, TÜV item 26 and JEITA all agree. KC prints the 'b' marker next to 'fixed equipment', which looks like a layout quirk."
+        },
+        {
+          "claim": "[clause+exempt] 2018/2023 8.6.5 is passed by any one of: a force of 20% of weight or 250 N (whichever is less) at the least stable point, no higher than 1.5 m; a 15° tilt; or a 15° incline with 360° rotation. It is required for MS3 equipment with controls or displays and, through 8.10.1, for equipment on a cart or stand, but not for plain MS3 floor-standing equipment.",
+          "verdict": "confirmed",
+          "note": "KC 8.6.5 verbatim. The JEITA 2021 and 2026 sheets list the same three alternatives ('次のいずれかを実施して', i.e. carry out any one)."
+        },
+        {
+          "claim": "[clause+exempt] UL: the 8.6.5 force went from 13% to 20% of weight and from 100 N to 250 N, with the lesser value used; UL rates this as more onerous.",
+          "verdict": "confirmed",
+          "note": "UL p.31 impact column: 'Minor (+) ... more onerous ... some designs may need to be altered'."
+        },
+        {
+          "claim": "[clause+exempt] TÜV Ed.3 sheet: 8.6.5 changed from 13%/100 N to 20%/250 N, and floor-standing equipment with controls or a display needs no glass slide test.",
+          "verdict": "confirmed",
+          "note": "TÜV items 28 and 26 verbatim."
+        },
+        {
+          "claim": "[clause+exempt] 8.10.1: classification uses the combined mass; the stand is tested alone and with the equipment; MS3 equipment not moved in normal use, together with its stand, must pass 8.6.5; MS2/MS3 equipment 1 m or taller on a specified stand must pass 8.6.3 at 15°.",
+          "verdict": "confirmed",
+          "note": "KC 8.10.1. JEITA 2021/2026 say the same, though JEITA reads 'over 1 m' where KC reads '1 m or more'."
+        },
+        {
+          "claim": "[clause] 8.10.5: the stand is tested alone and with the equipment to 8.6.3 and 8.6.5, with the force no higher than 1.5 m; if the equipment slides or tilts on the stand, the test is repeated at 13% or 100 N. This is said to be the only place 13%/100 N survives in 2018/2023.",
+          "verdict": "partly",
+          "note": "The text is confirmed in KC and JEITA 2021/2026. 'Only place' holds only if KC's 250 N cap on the 8.6.2.2 13% option is right; TÜV says 100 N."
+        },
+        {
+          "claim": "[exempt] 8.10.2: a stand sold separately carries 'Caution / for use only with (maker, model) / use with other equipment may cause instability and injury', in the order 2, 4, 3; equipment meant for a specific stand carries the matching caution.",
+          "verdict": "confirmed",
+          "note": "KC 8.10.2 verbatim."
+        },
+        {
+          "claim": "[exempt] 8.10.3-8.10.5: 220 N for 1 min at child-graspable points within 750 mm of the floor; support surfaces get 4x the intended load or 100 N, capped at 440 N; 8.10.4 is a 7 J impact; 8.10.5 repeats at 13%/100 N.",
+          "verdict": "partly",
+          "note": "The loads and 8.10.5 are confirmed. '7 J' is the 2014 wording: JEITA's comparison says Ed.3 replaced it with the T.6 test (500 g ball dropped 1.3 m). It also omits the intended load + 440 N case for surfaces holding a display."
+        },
+        {
+          "claim": "[clause+exempt] IEC 62368-1:2023 made no technical change to 8.6 or 8.10: JEITA Ver.4.00 (April 2024) marks them all '＝', UL's Ed.4 analysis lists only 8.12 and 8.5.4.3.1 under Clause 8, and the foreword's significant changes leave out stability.",
+          "verdict": "confirmed",
+          "note": "All three checked. JEITA's revision history dates Ver.4 to 2024.04."
+        },
+        {
+          "claim": "[clause+exempt] Tables were renumbered in 2023: Table 34 is the mechanical classification and Table 35 the stability overview (35 and 36 in 2018).",
+          "verdict": "confirmed",
+          "note": "Seen in the tables of contents of the VDE and en-standard 2023 previews; KC uses 35/36."
+        },
+        {
+          "claim": "[clause+exempt] US: UL 62368-1:2025 Ed.4 (with CSA 2025) takes effect on 15 Feb 2027, replacing UL 62368-1:2019 Ed.3+R:22Oct2021; its change list leaves out stability; in Europe the superseded standards are withdrawn on 2027-02-15.",
+          "verdict": "confirmed",
+          "note": "Intertek SUN (issued 2026-01-13) and UL's Ed.4 analysis, verbatim. SIQ's Canadian date was not checked."
+        },
+        {
+          "claim": "[clause+exempt] 2014 (Ed.2) 8.6.2.2: 20% of mass, max 250 N, in any direction except upward, no higher than 1.5 m, stopped at 10°; a tilt of up to 10° may be used instead of the force. The team's reading matches neither the 2014 nor the 2018/2023 text.",
+          "verdict": "confirmed",
+          "note": "JEITA's 2018 sheet and the JIS C 62368-1:2018 text (IEC 2014, MOD). TÜV's 'tilt 10° not changed' backs up the tilt alternative."
+        },
+        {
+          "claim": "[clause] The '2 m' comes from IEC 60950-1 clause 4.1. IEC 62368-1 uses 1.5 m in 2014 8.6.2.2, in 2018/2023 8.6.2.2 and 8.6.5, and in 8.10.5.",
+          "verdict": "confirmed",
+          "note": "JEITA's 62368-1 Ed.2 vs 60950-1 table says '力を加える場所の高さを変更(2m から1.5m)＜緩和＞' (force height changed from 2 m to 1.5 m, a relaxation); extracting it needed MuPDF because the PDF fonts are not embedded. The 1.5 m limit is confirmed in JIS 2014 and KC."
+        },
+        {
+          "claim": "[clause+exempt] 2014 8.6.5: 13% of weight or 100 N (whichever is less) at no higher than 1.5 m, or a tilt of up to 15°, or a 15° incline with 360° rotation. The 2014 8.10.1 and 8.10.5 used 13%/100 N.",
+          "verdict": "confirmed",
+          "note": "JIS 2014 8.6.5, JEITA's 2018 sheet, and JEITA's Ed.2 vs 60950 table (8.10.1, 8.10.5)."
+        },
+        {
+          "claim": "[clause+exempt] EMTEK CB report (IEC 62368-1:2014) on a 50.5 kg, 55-inch 4K kiosk: 8.6.5 was passed by a tilt of up to 15°, and 8.6.2.2 and 8.6.3 by a 10° incline with 360° rotation.",
+          "verdict": "confirmed",
+          "note": "Verbatim in the report. The product is a floor kiosk display, not a TV set."
+        },
+        {
+          "claim": "[exempt] UL-CCIC CB report (IEC 62368-1:2014) on the Contex scanner with optional stands: 8.6.2.2 at 123.5 N and 163.2 N (20% of 63 kg and 83.26 kg); 8.6.5 at 100 N; 8.10.3 at 440 N; 8.10.5 at 100 N.",
+          "verdict": "confirmed",
+          "note": "All figures are verbatim and the 20% arithmetic checks."
+        },
+        {
+          "claim": "[clause] Same report: the 800 N test passed, 8.6.3 was a 10° tilt, 8.6.4 was N/A as floor-standing, and 8.6.5 used 100 N because 13% hits the 100 N cap.",
+          "verdict": "partly",
+          "note": "The figures are confirmed, but 13% of 63 kg is 80 N, so the cap explains 100 N only for the 83.26 kg configuration. That the scanner has front controls was not verified."
+        },
+        {
+          "claim": "[clause+exempt] 2018 definitions: fixed equipment is secured only as the maker's installation instructions define. Note 1: screw holes or earthquake fixings a consumer uses do not make it fixed. Note 2: typically wall, ceiling or floor mounted. Movable means 18 kg or less, or with wheels. Stationary includes equipment normally not moved. 'Floor-standing' is not defined.",
+          "verdict": "confirmed",
+          "note": "KC 3.3.3.2, 3.3.3.4 and 3.3.3.10 verbatim; clause 3 has no 'floor-standing' definition."
+        },
+        {
+          "claim": "[exempt] 2014 Table 36 footnote b: fixing means a consumer uses do not make equipment fixed; such fixing counts as a supplementary safeguard.",
+          "verdict": "confirmed",
+          "note": "JIS 2014 Table 36 note b) verbatim; I checked the page image."
+        },
+        {
+          "claim": "[exempt] 2023 clarified fixed equipment to include equipment fastened to a support, or secured by means the maker defines; UL rates the impact 'None'. Whether Note 1 is still in the 2023 text is unknown.",
+          "verdict": "confirmed",
+          "note": "UL Ed.4 analysis verbatim. The definitions are not in the 2023 previews, so Note 1 in 2023 remains unverified."
+        },
+        {
+          "claim": "[clause+exempt] 8.6.1: stationary equipment, or units fixed together on site, are assessed by inspection after installation and tested to 8.6.2.2 only if necessary; a 74 kg unit without wheels counts as stationary.",
+          "verdict": "partly",
+          "note": "The sentence is in both KC (2018) and JIS (2014). No source shows a lab using it for a free-standing speaker, Table 36 has an explicit MS3 floor-standing row, and 'stationary' is arguable."
+        },
+        {
+          "claim": "[exempt] IEC 62368-1:2023 clause 0.5: installation safeguards (example: bolted to the floor) are supplementary, rank below equipment safeguards in preference, and are not addressed by the standard.",
+          "verdict": "confirmed",
+          "note": "Preview clauses 0.5.1 and 0.5.3 verbatim."
+        },
+        {
+          "claim": "[exempt] 2023 clause 0.9: 'means to stabilize the equipment' is a basic safeguard, instructional safeguards are supplementary, and cart or stand instability is a listed hazard.",
+          "verdict": "confirmed",
+          "note": "Preview clause 0.9 verbatim."
+        },
+        {
+          "claim": "[exempt] F.4: if the equipment is intended to be fastened in place, the instructions must explain how to fasten it.",
+          "verdict": "confirmed",
+          "note": "KC F.4 verbatim."
+        },
+        {
+          "claim": "[exempt] 8.7: Test 1 applies the lesser of 3x weight or weight + 880 N, then 50 N sideways. Test 2 applies the lesser of 4x weight or 2x weight + 880 N, divided by the number of points, in shear, push and pull. Both test the mount's fixing to the equipment, not to the wall.",
+          "verdict": "confirmed",
+          "note": "KC 8.7.1-8.7.2 verbatim. Whether a lab would apply this to strap points is not addressed."
+        },
+        {
+          "claim": "[exempt] AS/NZS deviation (TVs and displays only): sets designed only for wall or rack mounting are exempt if they carry an instructional safeguard; the restraining device must withstand a 100 N pull in all directions.",
+          "verdict": "confirmed",
+          "note": "Found in the AS/NZS annex of both the EMTEK and Contex reports. The restraint point itself is 'should be provided', not 'shall'."
+        },
+        {
+          "claim": "[exempt] With an optional base, the bare speaker must pass on its own; the base cannot be what makes the product compliant.",
+          "verdict": "partly",
+          "note": "The quoted text is about multi-position equipment. The conclusion follows from 8.6.1 (separable units classed individually) and the least-stable rule, but no source states it for optional plinths."
+        },
+        {
+          "claim": "[exempt] Thermoplastic construction (cast acrylic): stability is tested after T.8 stress relief, and 8.10.6 covers thermoplastic stands.",
+          "verdict": "confirmed",
+          "note": "KC 8.6.1 and 8.10.6; JEITA's comparison notes the T.8 clarification in Ed.3."
+        },
+        {
+          "claim": "[exempt] The tip-over instructional safeguard is required only for MS2/MS3 television sets.",
+          "verdict": "confirmed",
+          "note": "The TV-set paragraph in KC 8.6.1."
+        },
+        {
+          "claim": "[exempt] The US/Canadian national differences for CSA/UL 62368-1:2019 (form US_CA_ND_IEC62368_1E, master 2022-03-04) list nothing in clause 8.",
+          "verdict": "confirmed",
+          "note": "The xFusion CB attachment lists only 1, 4.1, 4.6, 4.8, 5.4.2.3.2, 5.5.9, 5.6.3, 5.7.8, 6.5.1 and Annexes F, G, H, Q and DVA-DVJ."
+        },
+        {
+          "claim": "[exempt] Element (Irvine) report to UL 62368-1 3rd ed. (2021-07): 8.6.2.2 passed by a 10° incline with 360° rotation on an MS2 product.",
+          "verdict": "confirmed",
+          "note": "A 10.5 kg unit; 8.6.5 marked N/A."
+        },
+        {
+          "claim": "[exempt] Keystone Compliance summary: fixed equipment needs no stability tests.",
+          "verdict": "unsupported",
+          "note": "The page returned an empty reply or an HTTP/2 error from here, so it was not verified. The claim is consistent with Table 36 anyway."
+        },
+        {
+          "claim": "[clause+exempt] Derived geometry: a 10° tilt needs 92-98 mm and 15° needs 139-148 mm. The bare cabinet gives 210 mm and 280 mm, so it tips at about 20.8-22°. The 13% option at the horn top needs about 172-174 mm. The 20% force needs 260-268 mm (a depth of at least 528 mm). A 5° tilt-back leaves about 162 mm at the rear.",
+          "verdict": "confirmed",
+          "note": "Arithmetic re-checked. It holds only for a centred CoM, tipping edges at the 560x420 outline and no horn overhang, and it ignores the 50%-down force in the 8.6.2.2 force option."
+        },
+        {
+          "claim": "[clause] Derived: the 20% force stays at 0.2W up to 1250 N (about 127 kg), so passing needs d ≥ 0.2H whatever the mass or CoM height; the tilt options depend on d/h; the 600x600 plinth (d = 300 mm) passes at 1.34 m.",
+          "verdict": "confirmed",
+          "note": "The statics are correct (F x H ≤ W x d). Ballast or a lower CoM cannot rescue the force option for this product."
+        },
+        {
+          "claim": "[exempt] REL Planar: it may tip when freestanding, including on its cart, and REL strongly recommends the included anti-tip restraint.",
+          "verdict": "confirmed",
+          "note": "Planar-Cart manual verbatim; it calls the restraint 'the primary method of preventing tip-over'. Nothing about certification."
+        },
+        {
+          "claim": "[exempt] 16 CFR 1261 (STURDY Act) covers only clothing storage units and adopts ASTM F2057-23.",
+          "verdict": "confirmed",
+          "note": "1261.1(b) definition, and 1261.2: 'shall comply with ASTM F2057-23'."
+        },
+        {
+          "claim": "[exempt] ASTM F3096-23 raised the restraint's static load from 50 to 60 lb and tests strength only, not performance once installed.",
+          "verdict": "confirmed",
+          "note": "Bureau Veritas page verbatim."
+        },
+        {
+          "claim": "[exempt] CPSC 2015: TVs must pass a UL stability test but need not come with restraints; restraints are not usually installed; 9% of TVs were anchored; 91% of the furniture holding TVs was not anchored.",
+          "verdict": "confirmed",
+          "note": "CPSC/EXHR/TR-15/001 verbatim. The standard it names is UL 1492."
+        },
+        {
+          "claim": "[exempt] CPSC 2022 tip-over report: 'unstable design (small footprint, top heavy)'; about 19,400 emergency-department injuries a year in 2019-21; speakers excluded.",
+          "verdict": "confirmed",
+          "note": "Speakers are listed under 'Unstable items not included in the counts'."
+        },
+        {
+          "claim": "[exempt] CPSC duty to report within 24 hours.",
+          "verdict": "confirmed",
+          "note": "Fetched page, verbatim."
+        },
+        {
+          "claim": "[exempt] 2008 Studio RTA recall: about 6,700 TV stands whose stability fell short of industry standards; no injuries.",
+          "verdict": "confirmed",
+          "note": "Recall page verbatim."
+        },
+        {
+          "claim": "[exempt] UL 962 sends AV carts and stands supplied by the AV maker to UL 62368-1, and stand-alone AV furniture to UL 1678.",
+          "verdict": "unsupported",
+          "note": "The GlobalSpec page returns 403 here too. Search-engine summaries agree, but the claim was not read from the standard."
+        }
+      ],
+      "answer_20_vs_13": "As the sources show it, neither test is the deciding test for a plain floor-standing speaker under the editions Tropos will be certified to.\n\nTropos is MS3 at 74 kg alone or 84.6 kg on the plinth. The relevant editions are IEC 62368-1:2018 and IEC 62368-1:2023. The 2018 edition is UL 62368-1:2019 Ed.3, the US basis until 15 Feb 2027. The 2023 edition becomes UL 62368-1:2025 Ed.4 from 15 Feb 2027. The 2023 edition made no technical change to 8.6 or 8.10, and neither edition has US/Canadian national differences in clause 8.\n\nUnder both, Table 36 gives MS3 floor-standing equipment only three tests:\n- 8.6.2.2 static stability, passed by any one of three methods: a 10° tilt; a 10° incline with 360° rotation; or 50% of weight (max 100 N) downward plus 13% horizontal, applied no higher than 1.5 m. The cap on the 13% force is 250 N in the Korean text and 100 N per TÜV.\n- 8.6.2.3: 800 N downward at up to 1 m, on surfaces that could be used as a step.\n- 8.6.3: a 10° tilt.\n\nThe 20%-or-250 N force exists only in 8.6.5. Table 36 applies 8.6.5 to MS3 equipment with front-mounted accessible user controls or a moving-image display (footnote a). Clause 8.10.1 also applies it to MS3 equipment on a cart or stand the maker specifies. Even then, 8.6.5 can be met instead by a 15° tilt or a 15° incline with 360° rotation, and the force goes no higher than 1.5 m.\n\nThe team's reading has two sources. The '2 m' is from IEC 60950-1 clause 4.1, per JEITA. The '20%/250 N in 8.6.2.2' is the superseded 2014 text, and that text also allowed a 10° tilt instead of the force.\n\n13%/100 N was the 2014 8.6.5 force. It was also the test in China's IEC 60065-based GB 8898-2011, clause 19.3, for equipment of 25 kg or more. In 2018/2023 it survives only in 8.10.5, as the repeat run when equipment slides or tilts on its stand, plus as the 13% part of the 8.6.2.2 force option. Even the 2014 Table 36 did not apply 8.6.5 to plain MS3 floor-standing equipment.\n\nConfidence is high on this structure. It rests on the Korean Table 36 rendered as an image, JEITA check sheets for both the 2018 and the 2023 editions, UL's and TÜV's change analyses, the Chinese CCC comparison, the 2014 Japanese text, and CB reports where labs used the 10° and 15° tilt options. Confidence is medium on the exact English wording, because no licensed English copy was read.\n\nThe deciding product fact is not in the brief: does Tropos have front-mounted accessible user controls?\n- Without them, 8.6.5 does not apply to the bare speaker.\n- With them, 8.6.5 applies. By the derived geometry, the bare 560x420 cabinet tips at about 21-22° with its centre of mass at 520-553 mm, so it should pass the 15° tilt option and fails only the 20% push at the horn top.\n\nEither way, the real feet positions, any horn overhang, and the CB lab's and NRTL's written acceptance of the tilt route still need to be confirmed.",
+      "can_base_be_optional": "**An optional base.** The standard deals with an optional base as a stand the maker specifies (8.10):\n- **Classification:** by the combined mass of speaker and stand.\n- **8.6.5 on the combination:** the stand is tested alone and again with the speaker on it. MS3 equipment not moved in normal use must pass 8.6.5 together with its stand, by the 20%/250 N force at no more than 1.5 m, a 15° tilt, or a 15° incline with 360° rotation.\n- **8.6.3 at 15°:** combinations 1 m or taller must pass the relocation test at 15°.\n- **8.10.3 loads:** 220 N for 1 min at points a child can grab within 750 mm of the floor; support surfaces get 4x the intended load or 100 N, capped at 440 N.\n- **8.10.4 impact:** the T.6 steel-ball test.\n- **8.10.5:** 8.6.3 and 8.6.5 on the combination; if the speaker slides or tilts on the plinth, the force test is repeated at 13% or 100 N, whichever is less.\n- **8.10.6:** T.8 conditioning, which matters for cast acrylic.\n- **8.10.2 markings:** a stand sold separately must carry 'Caution / for use only with (maker, model) / use with other equipment may result in instability causing injury', and the speaker must carry the matching caution.\n\nA plinth fixed to the speaker is instead classed with it by total mass; separable units are classed by their own masses (8.6.1). There is precedent: UL-CCIC tested a 63-83 kg scanner on each of its optional stands.\n\nThe bare speaker would then be a permitted configuration, so it must pass 8.6 on its own. This follows from 8.6.1 and 8.6.2.1, but no source says it outright for a plinth.\n\nBy the derived geometry, the bare cabinet passes every tilt-based option. So the base could be optional if either:\n- Tropos has no front-mounted accessible user controls or video display, so that 8.6.5 does not apply to the speaker alone; or\n- the lab accepts the 15° tilt route in 8.6.5.\n\nThe bare cabinet fails only the 20% force option at the horn top.\n\n**Anchoring.** A strap, screw holes or earthquake fixings that an ordinary person fits do not make equipment 'fixed equipment':\n- The 2018 definition says so in 3.3.3.2 Note 1.\n- The 2014 Table 36 footnote b goes further and calls such fixing a supplementary safeguard.\n\nSo a strap cannot replace the stability tests.\n\nTrue fixed equipment has no stability requirements. That means equipment whose installation instructions require securing only by the maker's method at the maker's location, typically wall, ceiling or floor mounting. The 2023 edition clarified this to include equipment fastened to a support by means the maker defines; UL rates the impact 'None'. Whether Note 1 survives in the 2023 text could not be checked.\n\nOther clauses bear on anchoring:\n- IEC 2023 clause 0.5 treats installation safeguards, such as bolting to the floor, as supplementary and below equipment safeguards in preference, and the standard sets no requirements for them.\n- Clause 0.9 names 'means to stabilize the equipment' as a basic safeguard.\n- F.4 requires fastening instructions if the product is meant to be fastened in place.\n- 8.7 tests only how a mount attaches to the equipment, not how it holds in the wall.\n\n**Practice.**\n- The AS/NZS deviation (TVs only) asks for a restraint point that withstands a 100 N pull.\n- ASTM F3096-23 (furniture) uses a 60 lb load.\n- CPSC found restraints are rarely installed: only 9% of TVs in its survey were anchored.\n- REL ships a wall restraint for its freestanding Planar subwoofer and calls it the primary safeguard, but the manual says nothing about certification.\n\nNo source was found showing a lab accepting a consumer-fitted strap as 'fixed equipment' for a home speaker.",
+      "summary": "I checked 57 claims against fresh downloads of the sources. 50 are confirmed, 5 partly, 2 unsupported because the pages could not be opened, and none is contradicted outright. The '7 J' impact figure inside one partly claim is 2014 wording that the 2018 edition replaced.\n\n**What I checked directly.**\n- I rendered the Korean (KC) Table 36 page and the 2014 Japanese (JIS) Table 36 image myself. Both show 8.6.5 only for MS3 equipment with controls or displays, not for plain MS3 floor-standing equipment.\n- KC 8.6.2.2, 8.6.5 and 8.10 match the JEITA check sheets for the 2018 edition (2021 sheet) and the 2023 edition (2026 sheet).\n- UL's and TÜV's Ed.3 analyses confirm that 20%/250 N moved into 8.6.5, and UL rates it more onerous.\n- JEITA's Ed.2/3/4 comparison and UL's Ed.4 analysis show no stability change in 2023.\n- JEITA's 62368-1 vs 60950-1 table traces the '2 m' to IEC 60950-1 clause 4.1. I had to extract it with MuPDF because the PDF's fonts are not embedded.\n- The US/Canadian national differences list nothing in clause 8.\n- CB reports show labs accepting the 15° and 10°/360° tilt routes (EMTEK under the 2014 edition, Element under UL 62368-1 Ed.3).\n\n**Partly correct.**\n- The cap on the 13% option in 8.6.2.2 is still unresolved: 250 N per KC, 100 N per TÜV. So the claim that 8.10.5 is 'the only place 13%/100 N survives' is uncertain.\n- In the Contex report, the 13% value hits the 100 N cap only for the 83 kg configuration; for 63 kg it is 80 N.\n- 8.10.4 is the T.6 steel-ball test in 2018, not a 7 J impact.\n- The 'stationary equipment inspected after installation' route appears in both translations, but no source shows it used for a free-standing speaker.\n- 'The bare speaker must pass on its own with an optional base' is a sound inference, not text.\n\n**Could not open.** The Keystone Compliance page gave no response, and the GlobalSpec UL 962 page returned 403.\n\n**Answers to two open questions.** The 2014 Table 36 also did not require 8.6.5 for plain MS3 floor-standing equipment, and 2014 8.6.2.2 already allowed a 10° tilt instead of the 20% force. So even the superseded edition never required the wide base. The team's reading mixes IEC 60950-1 clause 4.1 (2 m) with the 2014 8.6.2.2 force, without its tilt alternative.\n\n**Gaps.**\n- No licensed English text of clause 8.6 was read; the wording comes from the Korean and Japanese translations and from UL, TÜV and JEITA summaries.\n- The 2023 definitions, including whether Note 1 survives, are not in the public previews.\n- The input JSON was cut off and held findings from only two of the three researchers, so the third set was not checked.\n\n**Product facts the answer depends on.** Whether Tropos has front-mounted accessible user controls, where the feet actually sit, and whether the horn overhangs the base.\n\nVerified copies are in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/verify2:\n- KC Table 36: kc/kc.pdf, PDF page 171\n- JEITA 2026 sheet: jeita26/j26.docx\n- JEITA 62368-1 vs 60950-1 text: taihi/taihi_mu.txt\n- JIS 2014 Table 36: kik/page-130.png"
+    }
+  },
+  "workflowProgress": [
+    {
+      "type": "workflow_phase",
+      "index": 1,
+      "title": "Research"
+    },
+    {
+      "type": "workflow_phase",
+      "index": 2,
+      "title": "Verify"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 1,
+      "label": "research:clause",
+      "phaseIndex": 1,
+      "phaseTitle": "Research",
+      "agentId": "a65af0fd16dabf329",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1793675514848,
+      "queuedAt": 1793675514811,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "promptPreview": "Product: Tropos, an active (mains-powered, built-in Hypex FA122 class-D amplifier) floor-standing horn loudspeaker in cast acrylic. About 1.30-1.34 m tall to the top of its horn, about 74 kg on its own and 84.6 kg on an optional-looking 10 kg stepped plinth. Cabinet footprint 560 x 420 mm; center of mass about 520-553 mm up, near the middle of the footprint. It will be certified to IEC 62368-1 (CB…",
+      "promptFramed": true,
+      "lastProgressAt": 1793677407177,
+      "tokens": 380807,
+      "toolCalls": 137,
+      "durationMs": 1892327,
+      "resultPreview": "{\"findings\":[{\"claim\":\"Source caveat: I could not get the English IEC text of clause 8.6 from a licensed copy. Full copies on file-sharing sites were deliberately not used. The clause wording below comes from Korea's KC 62368-1, a translation notified to the WTO. That translation states it adopts KS C IEC 62368-1 (2021) 'without changing the technical content' of IEC 62368-1. Its text matches the …"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 2,
+      "label": "research:exempt",
+      "phaseIndex": 1,
+      "phaseTitle": "Research",
+      "agentId": "ad3f573cf4679d79f",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1793675514849,
+      "queuedAt": 1793675514812,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "promptPreview": "Product: Tropos, an active (mains-powered, built-in Hypex FA122 class-D amplifier) floor-standing horn loudspeaker in cast acrylic. About 1.30-1.34 m tall to the top of its horn, about 74 kg on its own and 84.6 kg on an optional-looking 10 kg stepped plinth. Cabinet footprint 560 x 420 mm; center of mass about 520-553 mm up, near the middle of the footprint. It will be certified to IEC 62368-1 (CB…",
+      "promptFramed": true,
+      "lastProgressAt": 1793677659975,
+      "tokens": 421073,
+      "toolCalls": 185,
+      "durationMs": 2144244,
+      "resultPreview": "{\"findings\":[{\"claim\":\"In IEC 62368-1:2018 (3rd ed.), Table 36 'Overview of requirements and tests' sets which stability tests apply. MS3 floor-standing equipment gets only static stability (8.6.2.2), downward force (8.6.2.3) and relocation (8.6.3). The horizontal force test (8.6.5) is marked only for MS3 'equipment with controls or display'. Footnote a defines that as equipment with front-mounted…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 3,
+      "label": "research:practice",
+      "phaseIndex": 1,
+      "phaseTitle": "Research",
+      "agentId": "a059a87223d95bc10",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1793677409061,
+      "queuedAt": 1793675514812,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "promptPreview": "Product: Tropos, an active (mains-powered, built-in Hypex FA122 class-D amplifier) floor-standing horn loudspeaker in cast acrylic. About 1.30-1.34 m tall to the top of its horn, about 74 kg on its own and 84.6 kg on an optional-looking 10 kg stepped plinth. Cabinet footprint 560 x 420 mm; center of mass about 520-553 mm up, near the middle of the footprint. It will be certified to IEC 62368-1 (CB…",
+      "promptFramed": true,
+      "lastProgressAt": 1793678807718,
+      "tokens": 280089,
+      "toolCalls": 112,
+      "durationMs": 1398657,
+      "resultPreview": "{\"findings\":[{\"claim\":\"KEF LS60 Wireless (active, mains-powered): 1,090 mm tall on its plinth. The plinth is 212 x 394 mm (W x D), while the cabinet is 130 x 321 mm. KEF says the plinth cannot be removed, so the wider base is a fixed, standard part of the speaker and not an optional extra.\",\"source_url\":\"https://assets.kef.com/product-support/ls60-wireless/LS60W_Product_Manual_EN.pdf\",\"source_quot…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 4,
+      "label": "verify:skeptic",
+      "phaseIndex": 2,
+      "phaseTitle": "Verify",
+      "agentId": "a6462f92100df897a",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1793678810172,
+      "queuedAt": 1793678810142,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "As the sources show it, neither test is the deciding test f…",
+      "promptPreview": "Product: Tropos, an active (mains-powered, built-in Hypex FA122 class-D amplifier) floor-standing horn loudspeaker in cast acrylic. About 1.30-1.34 m tall to the top of its horn, about 74 kg on its own and 84.6 kg on an optional-looking 10 kg stepped plinth. Cabinet footprint 560 x 420 mm; center of mass about 520-553 mm up, near the middle of the footprint. It will be certified to IEC 62368-1 (CB…",
+      "promptFramed": true,
+      "lastProgressAt": 1793680079430,
+      "tokens": 301365,
+      "toolCalls": 114,
+      "durationMs": 1269257,
+      "resultPreview": "{\"checked\":[{\"claim\":\"[clause] KC 62368-1 (notified to the WTO in 2021) adopts KS C IEC 62368-1 'without changing the technical content', and its text is the 3rd edition (2018): it has 3.3.3.5 outdoor equipment and 3.3.3.12 wireless power transmitter.\",\"verdict\":\"confirmed\",\"note\":\"The adoption sentence is verbatim on KC p.2 and both definitions are present. The one detail that does not match TÜV'…"
+    }
+  ],
+  "totalTokens": 1383334,
+  "totalToolCalls": 548
+}

@@ -1038,3 +1038,24 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   picture) and direction 1's home behind HOME_V2; held for the owner: a sign-up form (storage, privacy, live inbox), naming the founder,
   publishing the press kit and journal, and any production deploy. Board v21: the site's direction card (1 launch film, my pick; 2 color
   library; 3 open studio); reply bar order [['site','Site']], KEY earf-decisions-v21; checked at 1280 and 390 px.
+- 04:27 OWNER: "Site: 1, launch film. For the smoke image, the speaker doesn’t look transparent in the image, and the underglow
+  from the stand is wrong. I didn’t mean that the light should cast down from the stand. It should cast up through the speaker.
+  Off in the day, on in night images. But I’m also not convinced we need it as I mentioned before. If we do have it though, it’s
+  meant to look more like the site images with the light cast upward." Saved verbatim first (README bd8d5220). My miss: I passed the
+  dark Smoke proof as "reads smoked"; it reads opaque.
+- 04:29 stability research done (wf_a73d7898-d30; stability-standard-2026-11-03/). Under IEC 62368-1:2018/2023 a plain MS3
+  floor-standing speaker gets 8.6.2.2 (10° tilt, or the 10° incline, or 13% + 50% down at 1.5 m), 8.6.2.3 (800 N) and 8.6.3
+  (10° tilt). The 20%/250 N push lives only in 8.6.5 (front controls or display, or a maker's stand under 8.10), and a 15° tilt
+  stands in for it. The team's reading mixed IEC 60950-1's 2 m with the 2014 8.6.2.2 force. On its own feet Tropos tips at about
+  17.3° back / 20° forward / 22.8° side (com.json strata), so the base isn't needed for safety; a lab's written pre-assessment
+  comes before tooling.
+- 04:33 lanes told. Site (session_01BAaPTnZ3md8RoquoqYWJkd): direction 1, HOME_V2 is the plan on r47-site-next, held; nothing that
+  depends on the plinth or its light. Biomes (session_01BAaPTnGwdpP4WKGVD3vbqx): the speakers must read see-through (backlight,
+  less front fill, colors-F Smoke; a Smoke 2064 test only to show me); no downward glow, light up through the speaker, off by day,
+  on at night; build on the speaker on its own feet, the light as a switchable layer; no finals until the base is settled.
+  Speaker (session_01CsZ9sPVytkpnrfV4BgTgfB): the clause table; re-run com.py on horn A (10°/15° tilt, 13%, 800 N surfaces,
+  overhang, 5° tilt-back) as stability/standard-2018.md; three frames for the owner (A own feet by day; B a slim cabinet-size
+  light plate at night, lit up through the speaker like uplight31; C the stepped plinth at night, lit up); the plate's height,
+  mass, cost, heat and 8.10 stability; deck/site renders held until the owner answers. (My messages said 04:40; sent ~04:33.)
+- 04:34 board v22 (MGUByhczqB2jUYDV7R4t3h): the base card (why it can go; A, B, C coming with pictures), the site settled, the
+  Smoke "type go" item and the stale plinth and light lines removed or updated; reply bar hidden (no open question).
