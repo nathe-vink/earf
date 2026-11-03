@@ -1576,3 +1576,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   (white), port 40 vs 155; the wall behind navy ~15-21, no fan (as stated: the batting lines top and back). D+ underway (lining-top-
   window, back-c/-e/-h left out; the model rebuilding ~20 min), then the D+ proxy, D+ night and day; the Smoke day frames finish
   first; polished A after D+. Gate wf_62b05808-38e on D night and the two Smoke-D frames (A and D day as context) started 11:45.
+- 11:58 biomes lane: Ember on horn A (1 of 7) at fa1271ef81304f2b708d3a6afd0507925601310e (Strata 0936e6d on its M8 feet, base A and
+  its uplight out; --horn-front, three-quarter view, crack_r on the speaker at 2.0, camera 0.8 m; 96 samples, 24 min). The Cloud Dust
+  removed and the Cloud Ember replaced (CHECK.md records both withdrawn). The lane's agent passed all four (the contact shadow "weak,
+  dark-on-dark"). Dust rendering. My gate wf_6e5b9742-7b1 on Ember (horn A) started 11:59.
