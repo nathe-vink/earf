@@ -10,7 +10,7 @@
      0.0,
      -0.015
     ],
-    "rotate_z": 10.0,
+    "rotate_z": -5.0,
     "hide": [
      "cloth-disc"
     ]
@@ -444,9 +444,9 @@
  ],
  "camera": {
   "position": [
-   -1.5012,
-   -5.6024,
-   1.15
+   -1.0072,
+   -5.7119,
+   0.85
   ],
   "target": [
    0.0,
@@ -455,14 +455,14 @@
   ],
   "lens_mm": 85.0,
   "level": true,
-  "fstop": 5.6,
+  "fstop": 4.0,
   "focus": [
    0.0,
    -0.21,
    0.66
   ],
   "shift_x": 0.0,
-  "shift_y": 0.06,
+  "shift_y": 0.18,
   "clip_end": 12000.0
  },
  "sky": {
@@ -477,7 +477,7 @@
   "elevation_deg": 5.8,
   "irradiance": 3.0,
   "angle_deg": 0.53,
-  "color": "#FEEA98"
+  "color": "#FFFFFF"
  },
  "finish": {
   "enabled": true,
