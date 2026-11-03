@@ -2814,3 +2814,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   its final if clean; then Fog; done ~21:45 UTC. My look at the crops agrees (Ember and Haze even; Poison's glint the hardest highlight).
 - 18:52 sent to the biomes lane: Poison's lower-left rim glint fixed by a real change (an out-of-frame dark card, or a degree or two)
   before its final starts, and its green flecks right of the pod checked at full size; the crease number with each final.
+- 18:53 biomes lane (its message said 18:54): Poison's glint (and likely the flecks) is the canopy-gap lamp it added (a 1.6 m area at
+  specular 1.0) mirrored in the rim; at f00651d1cccd95b1d52b0ef949c19329b99c180e the gap is wider and softer (3 x 3 m at 3.5 m, the same
+  irradiance 12) "with its reflection at 0.25", the 10-degree turn kept. Queue: the Ember and Haze finals, the Poison proxy (the glint,
+  the flecks, the crease), the Acid proxy at 4 degrees off, then the Poison, Acid and Fog finals with their numbers.
+- 18:54 sent to the biomes lane: if 0.25 is a specular multiplier (full light, a quarter in reflections), back to 1.0: a real opening shows
+  in a polished rim at its true brightness (the same rule the bar lane was held to); the larger source at the same irradiance already
+  dims its reflection to roughly a quarter honestly.
