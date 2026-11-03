@@ -1236,3 +1236,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   card's tool cost corrected to $6,925 (it said $1,100); the base card's state (A passed; the night frames failed; a second light on
   the shelf being tested); the settled close-ups and the horns' depth; the Later list pointed at the review section. Checked at 1280
   and 390 (no horizontal scroll).
+- 07:55 speaker lane, the light measured: the asset rebuilt for horn A (0936e6df568e1a3ac5673bbba29093fe2f294cb1); the light study
+  (a3c307e1ea4f1f7d452d021ff03ea1e78bb8b525). No asset fix: the top is dark by distance (B as gated: up/port 0.2-0.3). The lavender
+  patch = the moon fill; the pale wall = the 4000 K edge strips leaking through the plate's frame and the walls' feet. Aiming the
+  panel (louvre film, 40 degrees) halves the front-edge blaze (60 -> 33), cuts the floor pool (31 -> 18), up/port 0.28, but the wall
+  and horn go black. A 6 W strip on the brace aimed up reaches 0.38; 10-12 W should reach 0.5 (a design proposal). The woofer's face
+  stays black without room light. My calls (07:57): B night as 4 (aimed, no edge strips: the honest base-only light) and 5 (aimed +
+  the brace strip, ~10-12 W: the proposal); light leaving the cabinet upward to wash the wall is wanted (the owner's "like the site
+  images with the light cast upward"), only floor-level leaks and pools are out; no moon fill; the woofer a silhouette in comparison
+  frames. Asked: could the whole uplight live inside the speaker (no plate): heat, the acoustic volume, service, cost.
