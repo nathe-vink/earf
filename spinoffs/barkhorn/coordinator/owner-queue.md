@@ -3051,3 +3051,18 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   them in; the fix1 proof and SHA next (three helpers idle); the hero's full render and the cover chunk as plain lines for c4, not on the
   lane's machine; the turn rig's glow to specular 1.0 (or dropped) before c4's phase-2 chunk 6; studio31's front-strip and ring-card links fixed
   with the hero-light pass; bg-left and bg-right at specular 0 stand if they light only the sweep.
+- 19:48 speaker lane (crossed my 19:44): the cover proved without links: side_l moved from y -3 to -1.5, off Ember's mirror ray; proxy at 0.25
+  scale: Ember's front top (197,156,155), 12 % at 250, to (110,23,20), 0 %; Ember's side unchanged (108,37,27); Smoke's front unchanged. Proof
+  renders/2026-11-03/barkhorn/deck-fix-proofs/deck-cover-proof.png, at 42db3dbfce62552f3dc3b9c43af486520ab0b155 (it carries the hero fix
+  ad14099b). Flagged for the audit: the cover rig (hero31) still links its side, face and edge lamps to the cabinet panels and its strip to the
+  drivers. The hero's full render on ad14099b's rig reported as "started at about 19:55" (a time later than its own 19:48 message), ~84 min, then
+  chunks 3 (cover) and 4 (room). Hero-light read: the right face mirrors the floor and cove behind-right (fix: a per-frame reflect-only card);
+  the bottom-front edge bar is `back-top` (26 W/m², behind and above, aimed at the floor in front: the `through` lamp under another name), to
+  be tested off and at 0.4, and against a low dark card on Dust's edge; the arc frames (phase-2 chunks 1-3) load studio31's rig directly, so
+  they take the same fix. The 19:44 asks were not yet answered.
+- 19:51 sent to the speaker lane: the 19:44 note stands; the time error flagged; stop the hero render by PID (the lane's machine is needed for the
+  fix1 proof, and the hero rig may still carry gate 2's horn specular 0.3 and kick/back links), then send it as a plain line for c4 once rulings
+  1/2 are in; the cover's side, face, edge and strip links are part-links under ruling 2: unlink all four and re-proxy, with real moves or
+  flags where needed; hero-light's reflect-only card allowed; `back-top` off or at 0.4 with the edge's numbers, since the owner's "No light"
+  for the base (item 1) means no underglow-looking bar. Order: stop and confirm rulings 1/2; the fix1 proof and SHA; the turn rig's glow; the
+  cover unlink proxy; plain lines for the hero and cover; then the audit, the honest A-ice-polished, the back rig, studio31/hero-light.
