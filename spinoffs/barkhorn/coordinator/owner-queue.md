@@ -4069,3 +4069,13 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 00:33 sent to the speaker lane: kill the X by real means (move, soften or flag the seam lamp, or nudge the camera); flag light out of
   the throat (the plug's finish stays as built, since darkening it is item 8); optionally a white card for the cabinet top's edge.
   Re-render both close-ups on the new rig right after the bottom-edge comparison.
+- 00:33 speaker lane (stamped 00:35 at a 00:33:49 queue time): its queue is the bottom-edge comparison (~01:00), the Haze pour
+  comparison (two small proxies), then the close-up's one-lamp-off tests. Its suspect for the X and the throat is `horn` (8 W/m2,
+  2.5 x 1.6 m, close front-right, now at specular 1.0 where it used to show at 0.3). Then a real fix and both close-ups re-rendered.
+  THE (b) POUR TARGETS at 12.7 mm (the current lightness at the cabinet's face hue):
+  - Dust 0.50/0.106/72, #885704 (now #B85010 deep)
+  - Acid 0.61/0.125/107, #8B8712 (#B88E00)
+  - Ice 0.40/0.089/239, #034D73 (#0A52B8)
+  - Haze 0.39/0.200/305, #600498 (#4512D0)
+  Dust (ochre-brown) and Ice (dark teal) go duller; Haze and Acid keep most of their chroma. Cost and lead time need a caster's quote.
+- 00:3x WALKTHROUGH item 15b updated. My pick: (b) for Haze and Acid; Ice and Dust as poured. The quote is noted as needed.
