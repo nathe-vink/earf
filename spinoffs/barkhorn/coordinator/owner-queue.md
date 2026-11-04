@@ -3922,3 +3922,15 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   - c3: after its builds, merge 6692fae3, render the two honest close-ups, then the seven tall frames (--only site-front-off-tall
     --tag fix1, list first). Wide and side wait for the owner's bottom-edge answer.
   - c2: merge 6692fae3 (variants checkout first; no rebuild), then the backfix and amp-plate/horn-back-acid lists, then render.
+- 00:05 biomes lane:
+  - ACID: at sun 35, lit face L* 47.9 (from 40); sky p99 220, max 246 (the sun lights the falling rain); still short of lemon (60-70).
+    Its pick: the final at 35 and an owner note.
+  - FOG: the material is neutral (bark base and absorption (1,1,1) at density 0; lining 0.8), so the warmth is light. Fixed at
+    62d4d4e8860a133c3df1a51779e1d1d8157e95cd: the boulder moved aside so the bright fog sits behind the box, and a modest neutral fill from
+    camera-left (2 x 2 m, az -55, 15° up, 3.5 m out, irradiance 1.0, #F2F4F8, specular 1, unlinked, out of frame). The specks and the
+    crease are to be traced on the proxy.
+  - Queue: Ice finishing, the Fog proxy, Dust, Ember, the Poison proxy, the Acid final.
+- 00:06 sent to the biomes lane: Acid final at 35. The owner note: 9097 is fluorescent and the renderer can't model it, so a real
+  sheet reads brighter and more lemon than any render; the colour chips (item 10) settle it. The Fog fix is accepted.
+- WALKTHROUGH NOTE for Acid (with the habitats or item 10): say plainly that the Acid pictures under-show 9097, because its
+  fluorescence isn't modelled.
