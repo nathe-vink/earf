@@ -4036,3 +4036,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 00:28 sent to the biomes lane: real light into the box (the sun at three-quarter front or side, or a soft fill from the camera), then
   the horn matched. Check the horn uses Haze's absorption; if the gap is the thin sheet's short path (Beer's law), say so, since that's
   the owner's custom-pour question (item 15). A Haze proxy after the Fog proxy, Dust and Ember.
+- 00:29 biomes lane: it misread the azimuth convention (0 points to -y, the camera's side). The "front side 70" grazed the front face.
+  Fixed at 5d50bf69481d0d3af4504cf508321fb96991c925: the low sun at azimuth 30, 6° up (camera side, 45° off its line, behind the
+  photographer), with the HDRI and the sun disk turned with it. The Haze proxy follows the Fog proxy, Dust and Ember. The horn and box
+  are two materials by spec: the horn is the custom deep-violet pour (#4512D0), the cabinet 2287's violet split. The gap gets
+  quantified on the proxy.
+- 00:29 sent: biomes, if #4512D0 reads ultramarine against 2287's violet at their own thicknesses, the pour's target is off, not the
+  light (the owner: the horn tint "as deep as the cabinet"). Speaker lane, low priority: check every custom horn pour's target against
+  its cabinet's transmitted colour at their own thicknesses; Haze looks off.
