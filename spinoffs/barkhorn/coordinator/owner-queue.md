@@ -3934,3 +3934,25 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   sheet reads brighter and more lemon than any render; the colour chips (item 10) settle it. The Fog fix is accepted.
 - WALKTHROUGH NOTE for Acid (with the habitats or item 10): say plainly that the Acid pictures under-show 9097, because its
   fluorescence isn't modelled.
+- 00:06 speaker lane: THE ARC proved on the honest rig at 791915d7aba9050edf3d33f5031fad32ca940718 (spin-ice-00/04/08, 32 samples; contact
+  sheet renders/2026-11-04/barkhorn/honest/arc-ice-00-04-08-proof.png). Hero-light's fix is on every frame; the card rule now runs last
+  (a bug had left the arc's card in place). Phase-2 chunks 1-3 can render if released; the macros (9-10) are 0.0 % but unproved. On its
+  machine: tall Ice honest (~00:05, ~17 min), then the bottom-edge comparison (Dust hero-light and wide Ember: polished / satin bottom
+  panel / dark 22 mm rail; half scale, 64 samples, ~30 min).
+- 00:06 Mantle lane: THE ICE NIGHT PROXY at 527dab107b7f19e8cb6d08975f82cf4ae58fb90b (1800x1200, 128 samples, framed for the light).
+  - Rendered 23:49-00:05 on r33 at 69c8f11c (models rebuilt) and the lamps from df3794f6.
+  - The light: a Hemisphere behind the speaker washing the wall, a Core on a side table (both in Fog), and a real curtained window
+    out of frame. No studio lamp, a closed room. AgX MHC +2.2, 3800 K, caustics on.
+  - Audit: no camera-hidden mesh; the cob disk 0.0 %; the lamps unlinked at specular 1 with transmission on; led-face casts no shadow
+    (as df3794f6 built it). The bottom edge reads as a thin dark line, with no glow.
+- 00:06 c4 (stamped 00:08 at a 00:06:32 queue time): deck-home landed (23:21-00:05, 44.0 min, 2880x1620) at 7.34 MB, over 5 MB. The
+  best lossless PNG is 5.98 MB (RGB, pixel-identical); under 5 MB needs lossy, which c4 won't do without a word. Not committed.
+- 00:0x gates launched: the Ice night proxy (wf_bb8ec17f-4ee) and the arc proof (wf_ac7e99ff-38f).
+- 00:08 sent:
+  - c4: start chunk 6 now (after merging 732a8671). Deck-home as a lossless WebP if under 5 MB (pixel-identical), else a q95 JPEG
+    review copy, with the PNG kept uncommitted; the room will likely re-render.
+  - Mantle: #CDC509 confirmed (a record field, no pixels). For the finals, take the lamps from 26400e7c (Core's LED face casts
+    shadows; Hemisphere's liner as the light at a real output, with thin-shell shadows).
+  - Speaker lane: hold the arc (63 front views show the bottom edge) until the owner's bottom-edge answer; the macros stay held.
+    The comparison's satin option should sand only the bottom panel's exposed edge, unless the whole panel is needed (say why), with
+    cost under each option.
