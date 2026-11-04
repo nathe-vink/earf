@@ -4372,3 +4372,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   into the four-target re-check; SHA for c2's re-render.
 - WALKTHROUGH: the amplifier picture (amp-plate-ember, passed 3/3) is ready for the rating-plate wording question (with item 14's
   back pictures), with plate-crop.png.
+- 01:38 c4 (stamped 01:39): its container restarted ~01:37 during turn chunk 6; 57 of 60 frames landed and decode cleanly (with their
+  shot and report JSONs); turn-acid-14/-15/-16 re-running on the same checkout (3c0ad799 + 759ab035), then all 60 committed. Note
+  for its gate: the Acid frames' horn may be the old #B88E00 against the corrected cabinet (the speaker lane is listing which).
