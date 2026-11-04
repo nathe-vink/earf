@@ -4122,3 +4122,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   patch at 1.23), and the left unit's right side face is a near-black mirror of the sideboard (luma 13, no green). New: two visible
   power cords to the wall sockets (route or hide them). The lower chambers are dark but legible. This folds into the room fix the
   speaker lane has (thin-shell horn shadows, the side face, the bounce).
+- 00:43 HONEST ICE GATE (wf_66c04959-ad3): the full frame SHOW 2/3, the batt crop SHOW 3/3. The same picture: sky and background within
+  0.05 EV; the speaker about half a stop darker (cabinet -0.45 to -0.65 EV, horn -0.07, near snow -0.25; whole frame -0.06 EV). The
+  cabinet is more saturated (0.85-0.90 from 0.77-0.84) and now matches the horn. The batt reads as well or better (2.29x the compartment
+  above, from 2.04x). The third critic held the full frame for a straight darker step in the near snow behind the base (real-flag
+  shading per the others) and would show it alone. Composite built: scratchpad/walkthrough/05-ice-batt-honest.jpg.
+- 00:44 ITEM 5 RE-SHOWN to the owner with the honest picture beside the old, captioned accurately (the speaker half a stop darker, the
+  rest unchanged; the crop a 2x detail).
