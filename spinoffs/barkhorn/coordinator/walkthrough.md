@@ -22,6 +22,9 @@ Show one item with its pictures, wait for the answer, save the owner's words ver
 - **NEW OWNER QUESTION (23:38, the lamps lane), for the Hemisphere finals:** the cap shows a dark 5 mm notch. It is the bayonet's
   entry, open at the collar's top end so the pin can enter. The crown (80 mm) is smaller than the collar (96), so the collar's top
   ring is bare. Options: a crown at least 96 mm across, or a thin cover ring. Show it with the Hemisphere finals once they pass.
+- **SAY WITH ITEM 10 (the chips) and with any Acid picture (00:06):** 9097 (Acid) is fluorescent, and our renderer can't model
+  fluorescence (the split is a documented approximation). A real sheet turns some of the sky's blue into yellow-green and reads
+  brighter and more lemon than any render of it. The storm habitat shows it olive-yellow (lit face L* ~48). The chips settle it.
 - **BLOCKED 23:4x (the audit, card-audit-2026-11-03.md):** the pictures behind items 6, 7, 8, 9 and 13 fail the rulings.
   - The horn close-ups (a381aefb): `horn` at specular 0.3, `back` and `kick` linked to the product's parts, `edge` linked.
   - gate2 A-ice-polished (d8f613ec) and its "honest" re-render (f7f03850): a reflect-only black card covering 34 % of the frame
