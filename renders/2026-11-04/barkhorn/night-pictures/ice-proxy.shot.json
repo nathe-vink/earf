@@ -1,0 +1,175 @@
+{
+ "products": [
+  {
+   "def": "studio/products/barkhorn-cloud.json",
+   "flavour": "cloud-blue",
+   "instances": [
+    {
+     "position": [
+      0,
+      0,
+      0.0
+     ],
+     "rotate_z": 0,
+     "flavour": "cloud-blue",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    }
+   ]
+  },
+  {
+   "def": "studio/products/barkhorn-variants.json",
+   "flavour": "cloud-blue",
+   "instances": [
+    {
+     "position": [
+      0,
+      0,
+      0.0
+     ],
+     "rotate_z": 0,
+     "flavour": "cloud-blue",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    }
+   ]
+  }
+ ],
+ "materials": {
+  "uplight-edge": {
+   "glow": 0.0
+  },
+  "uplight-panel": {
+   "glow": 0.0
+  },
+  "horn-satin": {
+   "roughness": 0.05
+  }
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 236,
+  "white_out": 236,
+  "contrast": 0.2,
+  "clarity": 0.05,
+  "sharpen": 0.3,
+  "sharpen_px": 0.7,
+  "grain": 1.5,
+  "grain_px": 1.0
+ },
+ "title": "Tropos Ice, base A on its feet, polished horn A: night, lit by EARF lamps only",
+ "size": [
+  1800,
+  1200
+ ],
+ "camera": {
+  "position": [
+   0.62,
+   -3.2,
+   0.98
+  ],
+  "target": [
+   -0.2,
+   0.1,
+   0.7
+  ],
+  "lens_mm": 35.0,
+  "level": true,
+  "fstop": 4.0,
+  "focus": [
+   0.0,
+   -0.22,
+   0.65
+  ]
+ },
+ "sky": {
+  "kind": "none"
+ },
+ "lights": {},
+ "set": {
+  "kind": "sweep",
+  "night": {
+   "room": {
+    "x0": -2.6,
+    "x1": 2.2,
+    "y_back": 0.78,
+    "y_front": -4.2,
+    "height": 2.4
+   },
+   "floor_pbr": "american_walnut_veneer",
+   "floor_rough_mul": 0.9,
+   "opening": {
+    "y0": -2.2,
+    "y1": -1.0,
+    "z0": 0.75,
+    "z1": 2.15,
+    "sky_color": "#9FB2D6",
+    "sky_strength": 6.0,
+    "curtain": true,
+    "curtain_open": 0.15
+   },
+   "furniture": [
+    {
+     "name": "side-table",
+     "center": [
+      -0.68,
+      -0.12,
+      0.31
+     ],
+     "size": [
+      0.42,
+      0.42,
+      0.62
+     ],
+     "color": "#2A211B",
+     "rough": 0.35
+    }
+   ],
+   "lamps": [
+    {
+     "blend": "/home/user/night-work/core-fog-night.blend",
+     "offset": [
+      -0.68,
+      -0.12,
+      0.0
+     ],
+     "keep_table": false,
+     "led_up": true
+    },
+    {
+     "blend": "/home/user/night-work/hemi-fog-night.blend",
+     "offset": [
+      0.08,
+      0.4,
+      0.35
+     ],
+     "keep_table": false
+    }
+   ]
+  }
+ },
+ "render": {
+  "samples": 256,
+  "adaptive": 0.01,
+  "denoise": true,
+  "clamp": 8,
+  "bounces": 32,
+  "glossy_bounces": 16,
+  "transmission_bounces": 32,
+  "view": "AgX",
+  "exposure": 2.2,
+  "white_balance_k": 3800,
+  "white_balance_tint": 0.0,
+  "look": "AgX - Medium High Contrast",
+  "caustics_refractive": true
+ }
+}

@@ -1,0 +1,9 @@
+scene /home/user/night-work/ice-proxy.blend: 90 x 60 (as saved), camera camera at (0.62, -3.2, 0.98)
+lamp cob: AREA 3.2 W, visible {'cam': False, 'diff': True, 'gloss': True, 'trans': True, 'vol': True}
+lamp led: SPOT 55 W, visible {'cam': False, 'diff': True, 'gloss': True, 'trans': True, 'vol': True}
+mesh led-face: casts no shadow (visible_shadow off)
+lamp spill: POINT 0.3 W, visible {'cam': False, 'diff': True, 'gloss': True, 'trans': True, 'vol': True}
+no mesh is hidden from the camera
+IN FRAME   0.0 %  lamp cob (DISK 0.17 x 0.17 m, hidden from camera, seen in reflections) x 0.57-0.61 y 0.09-0.10 of the frame
+lamp led: SPOT, hidden from the camera; no surface (a point source), not a card
+lamp spill: POINT, hidden from the camera; no surface (a point source), not a card
