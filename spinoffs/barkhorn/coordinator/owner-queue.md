@@ -4044,3 +4044,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 00:29 sent: biomes, if #4512D0 reads ultramarine against 2287's violet at their own thicknesses, the pour's target is off, not the
   light (the owner: the horn tint "as deep as the cabinet"). Speaker lane, low priority: check every custom horn pour's target against
   its cabinet's transmitted colour at their own thicknesses; Haze looks off.
+- 00:30 speaker lane: THE SATIN CLOSE-UP at 14e1e50e4ea0e08ec6c63ef6ff92563b06b4a251 (checked on the remote 00:30): horn-satin roughness
+  0.25 (confirmed in its shot file), the same honest rig as the polished one, 64 samples, 00:22-00:29. Polished against satin: mean
+  difference 6/9/15 per channel, a real difference. A slip it owns: the bottom-edge comparison never started at 00:19 (its wait loop
+  matched its own command line). Killed by PID at 00:30; the six renders run now, done ~01:00. The custom-pour check runs meanwhile.
+- 00:31 satin gate launched (wf_ID below), with the polished honest close-up as context.
