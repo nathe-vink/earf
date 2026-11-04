@@ -4344,3 +4344,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   clear_resin split (top and bottom faces polished); (c) matte black (anodised extrusion or matte acrylic), labelled, the foot line
   checked; sheets rebuilt with a line on wood and dark floors; after the current crop test.
 - WALKTHROUGH: the bottom-edge question can come right after item 11 once the fixed sheets pass (it blocks the roll-out renders).
+- 01:31 CHECK-IN #54 (fired 01:29; its stored prompt dated from ~00:40, so mostly superseded). State: item 5 answered 01:13; item
+  11 OPEN (shown 01:15). Nine gates in flight: p2back wf_76840142-555, Haze pour wf_938a7cba-115, lamp-audit verification
+  wf_c283c264-343, c3 tall five wf_b0d46b04-626, Dust/Ember habitats wf_3f87fbc7-41d, Haze proxy wf_a47fb81b-ba2, Ice night proxy v2
+  wf_16d3d3dc-8f5, c3 Haze/Fog wf_3ed9ef22-dc3, bottom-edge sheets wf_f365f69f-fac. Done since: the crop check and spec (00:51), the
+  satin close-up (held, whole-shell finding), tall Ice honest (passed), the honest Ice habitat (passed; item 5), the Ice night
+  proxy (held; re-proxied), the seven backs (Fog, Dust, Ice pass; c2 re-lighting four). Not yet heard: c4's turn chunk 6 (due ~01:50),
+  the bar lane's v4s, the lamps lane's Hemisphere finals and Core B night, the Core A night (56059fe8) for item 89. Check-in #55
+  armed for ~02:20.
