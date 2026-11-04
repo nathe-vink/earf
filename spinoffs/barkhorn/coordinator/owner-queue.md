@@ -4529,3 +4529,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   100 V film cap in the HF line USD 12 (estimate). The core chain per speaker USD 1,128.40; per pair about USD 2,330 with the extras.
   The L-pad is no longer used (attenuation in the FA122's DSP). Item 16 noted for after the bottom-edge sheets (the datasheet
   can't be fetched from its container; it will mark which values stay unverified).
+- 02:08 biomes lane: the Poison look diagnostic queued after the Acid final: two proxies identical to 51c7eff2 except (1) 'AgX -
+  Punchy', (2) 'AgX - Base Contrast' at -0.5 EV (Filmic available if needed); upper-cabinet sRGB, box and floor reported for each.
+  Order: Acid final, the two Poison looks, Fog final (5400 K), Ember cam04 / cam04ev, Haze final. habitats.py passes --set and --tag
+  (b07eae52).
