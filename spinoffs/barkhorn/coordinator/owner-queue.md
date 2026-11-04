@@ -4305,3 +4305,14 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 01:27 my check: Haze and Fog share chunk 1's rig exactly (lights, set, camera, sky, render, size); seven reflect-only cards 0.0 %.
   Gate wf_3ed9ef22-dc3 launched (the passed tall Ice and the Ember frame as context; the bottom edge reported). Sent: c3, hold; next
   the re-lit close-ups (polished and satin-outside, front and rear-quarter) when the speaker lane's SHA comes.
+- 01:26 lamps lane (d2be16e1ead3bc174705125d1a59c1ff3d359708): THE HEMISPHERE'S REAL OUTPUT: Bridgelux Vero SE 10, 2700 K, CRI 90,
+  ~590 lm at 180 mA, 4.4 W electrical (ERP ESS010W-0180-42 driver; the datasheet page unconfirmed, supplier sites blocked); ~85 %
+  leaves the fitting (~490 lm); ~145 lm spills onto the liner. The right setting is the 2.0 default (3.2 W): COB_W 8.0 is a stale
+  round-4 global (now marked). Its one photometric scale: 3.2 W for ~490 lm (0.0065 W/lm), the liner's 145 lm at 11.5 W/m² on the
+  same scale; the scale itself was set by look (round 8), so the rule is one scale for every light in a picture. Its Core night
+  emitter (0.004 W) is ~900x too dim on that scale (Core's ~620 lm would be ~3.6 W): fine within the Core A/B pair, wrong in a
+  shared room.
+- 01:28 sent to the Mantle lane (hold for the verdict, then fold in): never scale one part of a lamp alone (the COB at 12.8 W with
+  the liner at 11.5 W/m² glows 4x too dim); either the lamps lane's file as is plus ~+2 EV, or COB and liner scaled together; say
+  which it did and the liner's emission; the window a dim night sky on the scale; any Core on the same scale (~3.6 W), its own
+  CORE_EMIT ~430 checked in lumens.
