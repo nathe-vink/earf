@@ -127,12 +127,14 @@ def main():
     ap.add_argument('--glossy-flag', action='store_true', help='the earlier reflection-only flag and cards (comparison)')
     ap.add_argument('--proxy', action='store_true', help='16 samples at half scale, whatever the habitat')
     ap.add_argument('--frame', choices=['portrait', 'landscape'], default='portrait')
+    ap.add_argument('--set', action='append', default=[], help='an extra key=value passed to habitat.py after the habitat\'s own (diagnostics)')
+    ap.add_argument('--tag', default='', help='suffix on the output name')
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
     for n in a.names or HABITATS:
         tint, lights = HABITATS[n]
         shot = os.path.join(SHOTS, f'{n}-portrait.json' if a.frame == 'portrait' else f'{n}.json')
-        out = os.path.join(a.out, f'{n}-{a.frame}.png')
+        out = os.path.join(a.out, f'{n}-{a.frame}{a.tag}.png')
         if n in DROP or n in MODIFY:
             sh = json.load(open(shot))
             sh['set']['props'] = [dict(p, **MODIFY.get(n, {}).get(p.get('fn') or p.get('model'), {})) for p in sh['set']['props']
@@ -145,6 +147,7 @@ def main():
                '--scale', '0.5' if a.proxy else str(a.scale), '--stand', 'feet', '--sink', str(SINK.get(n, 0.012)),
                '--horn-front', '--horn-rough', str(HORN_ROUGH)] + [x for k, v in lights.items() for x in ('--light', f'{k}={v}')] \
             + [x for k, v in SETS.get(n, {}).items() for x in ('--set', f'{k}={json.dumps(v)}')] \
+            + [x for kv in a.set for x in ('--set', kv)] \
             + (['--glossy-flag'] if a.glossy_flag else []) \
             + (['--flag', *map(str, FLAG[n])] if n in FLAG else []) \
             + (['--split', *map(str, SPLIT[n])] if n in SPLIT else []) \
