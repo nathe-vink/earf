@@ -4470,3 +4470,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   Tall Acid re-render from 01:52 (~9 min). Told 01:52: the merge is fine.
 - 01:51 c4 (stamped 01:56): cherry-picked a290fdc6 alone as 296686659ab793cdc1ee00e02c75f53c18de2a58 (conflicts only on the record
   field horn_deep_dye, resolved to a290fdc6's side); turn rig unchanged; turn-acid-00..16 re-rendering (~16 min).
+- 01:5x C3 HAZE/FOG TALL GATE (wf_3ed9ef22-dc3; 3 critics, 26 min): HAZE SHOW 3/3 (horn and cabinet within a degree of hue in this
+  frame: CIELAB 309.5 vs 308.9; no base glow); FOG SHOW 2/3 (pass). One critic held Fog for a broken lid edge (dark only on the left
+  third, a hard 2 px cut, then lost in the sweep, so the centre and right posts land on nothing) and a weak base read (the clear
+  bottom edge a pale 7 px sliver, the only bright base edge in the set). The tall set now passes for Ember, Dust, Poison, Ice, Haze
+  and Fog; Acid re-rendering (c3, a290fdc6 colours).
+- FOLD-IN LIST for the tall set's next re-render (after the bottom-edge answer, which re-renders the set if (b) or (c)): (1) the
+  lower third of each right side mirrors the lit floor below the black card's reach (extend or lower that card out of frame); (2)
+  Fog's lid edge one continuous dark line (extend the off-frame card); (3) Fog's bottom edge (a low black card behind at floor
+  level, out of frame). To the speaker lane with the bottom-edge outcome.
