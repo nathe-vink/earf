@@ -77,7 +77,7 @@ _ROOM = ('wall', 'floor', 'table', 'leg', 'ceiling', 'fill', 'kicker', 'dusk', '
          'mullion', 'transom', 'sheer')     # the lamps lane's window (26400e7c): its frame, its sheers and its sky lamps
 
 
-def _append_lamp(bpy, blend, offset, keep_table=False, led_up=False):
+def _append_lamp(bpy, blend, offset, keep_table=False, led_up=False, cord_to=None):
     with bpy.data.libraries.load(blend, link=False) as (src, dst):
         dst.objects = list(src.objects)
     got = []
@@ -96,6 +96,19 @@ def _append_lamp(bpy, blend, offset, keep_table=False, led_up=False):
             # no rotation, which in Blender points it down (-Z), into the dock (flagged to the coordinator, 2026-11-03)
             o.rotation_euler = (math.pi, 0.0, 0.0)
         got.append(o.name)
+    if cord_to is not None:
+        # a pendant's cord is cut to the room (the lamps lane's CAD gives one length): its mesh stretched along z
+        # from its bottom so its top meets the ceiling
+        c = next((bpy.data.objects[n] for n in got if n.startswith('cord')), None)
+        if c is not None:
+            from mathutils import Vector
+            Mw = c.matrix_world; Mi = Mw.inverted()
+            zs = [(Mw @ v.co).z for v in c.data.vertices]
+            z0, z1 = min(zs), max(zs)
+            k = (cord_to - z0) / (z1 - z0)
+            for v in c.data.vertices:
+                w = Mw @ v.co; w.z = z0 + (w.z - z0) * k; v.co = Mi @ w
+            c.data.update()
     return got
 
 
@@ -109,15 +122,19 @@ def night_set(bpy, spec, mats):
     x0, x1, yb, yf, h = r['x0'], r['x1'], r['y_back'], r['y_front'], r['height']
     import assets as PH
     try:
+        if n.get('wall_plain'):
+            raise RuntimeError('a plain wall asked for')
         wall_m = PH.pbr(bpy, 'beige_wall_001', '2k', bump=0.25, name='plaster')
     except Exception as e:                       # the cache or the network: a plain plaster, said in the log
-        print('night_room: plaster texture unavailable, plain colour:', e, flush=True)
-        wall_m = _principled(bpy, 'plaster', n.get('wall', '#CFC8BC'), 0.85, 0.3)
+        print('night_room: plain wall:', e, flush=True)
+        wall_m = _principled(bpy, 'plaster', n.get('wall', '#CFC8BC'), 0.88, 0.3)
     try:
+        if n.get('floor_plain'):
+            raise RuntimeError('a plain floor asked for')
         floor_m = PH.pbr(bpy, n.get('floor_pbr', 'american_walnut_veneer'), '2k', rough_mul=n.get('floor_rough_mul', 0.9), name='floor')
     except Exception as e:
-        print('night_room: floor texture unavailable, plain colour:', e, flush=True)
-        floor_m = _principled(bpy, 'floor', n.get('floor', '#3A3029'), 0.45)
+        print('night_room: plain floor:', e, flush=True)
+        floor_m = _principled(bpy, 'floor', n.get('floor', '#3A3029'), n.get('floor_rough', 0.45))
     ceil_m = _principled(bpy, 'ceiling', n.get('ceiling', '#E8E4DC'), 0.9, 0.2)
     t = 0.05
     _box(bpy, 'night-floor', ((x0 + x1) / 2, (yb + yf) / 2, -t / 2), (x1 - x0 + 2 * t, yb - yf + 2 * t, t), floor_m)
@@ -170,7 +187,8 @@ def night_set(bpy, spec, mats):
     for f in n.get('furniture', []):
         _box(bpy, f['name'], f['center'], f['size'], _principled(bpy, f['name'], f['color'], f.get('rough', 0.5)))
     for L in n.get('lamps', []):
-        got = _append_lamp(bpy, L['blend'], L['offset'], L.get('keep_table', False), L.get('led_up', False))
+        got = _append_lamp(bpy, L['blend'], L['offset'], L.get('keep_table', False), L.get('led_up', False),
+                           r['height'] if L.get('cord_to_ceiling') else None)
         print('night_room: lamp', os.path.basename(L['blend']), 'objects:', ', '.join(sorted(got)), flush=True)
 
 
