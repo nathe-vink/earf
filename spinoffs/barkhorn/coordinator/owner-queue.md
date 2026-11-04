@@ -4435,3 +4435,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 01:49 sent: c2 (merge a290fdc6; after the six rigB backs, back-acid on rigB and horn-back-acid), c3 (merge; re-render tall Acid
   on fix1), c4 (merge; re-render turn-acid-00..16), biomes (check biomes/tints.json's Acid against #F1EE7F / #A39700 / #81720E before
   the Acid final; say which it uses).
+- 01:4x HAZE PROXY GATE (wf_a47fb81b-ba2, resumed; 3 critics): all three: RENDER THE FULL FINAL from this setup (show_now false only
+  because it is a proxy). Every applicable test passes: the box violet glass you see into (median L* ~21, was 6), the horn no longer
+  brighter, the magenta post glints gone, no pool, the frontal sun believable. Tweaks: +1/3 stop whole-frame; an optional honest horn
+  lift by a real out-of-frame card (+4-6 L*); full-res checks (the phase-plug glint, creases not an X, posts dark wine, grass over the
+  bottom edge, lining not glowing slabs, a small dark nub on the left side face to identify).
+- 01:49 sent to the biomes lane: render the Haze final with those.
