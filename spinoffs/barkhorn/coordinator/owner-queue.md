@@ -3973,3 +3973,14 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   (roughness 0.4, same tint), with the visible difference stated plainly: the cabinet floor seen through the front reads slightly
   frosted. If the owner leans to (b), the edge band gets modelled exactly as a shop would make it before any re-renders. Build costs
   go under each option. (Accepted; no reply needed.)
+- 00:1x CONTAINER RESTART (my session): five background workflows stopped. Resumed from their journals at 00:15: the crop check
+  (wf_ade8d9aa-482; Measure and Verify cached, Refute to run), and the gates for Haze (wf_f0437845-fd3; one critic cached), the Ice night
+  proxy (wf_bb8ec17f-4ee), the arc proof (wf_ac7e99ff-38f) and deck-home (wf_bcc7def6-932). The scratchpad and the clone survived.
+- 00:13 c3: the honest horn-A-polished close-up landed at 7564619536fc90d2dcbb7cabd18f9487c170884d (5.1 min, 1000x800, 0.94 MB);
+  horn-A-satin from 00:13. The tall list: 7 shots (1000x1250, 96 samples, ~17 min each, ~2 h), to run after satin. Both close-ups get
+  gated together when satin lands.
+- 00:14 lamps lane (e2ab8290dc2c43139fe9d900a87c7085861b511a): my condition failed as the rig stood. The dome gave only 3-6 % of the
+  light on the wall around it, because the shared room fill scales with each lamp's exposure (x12 at −3 EV). Fixed: the room's fill,
+  ambient, dusk and kicker at 5 %, and both emitters sampled front and back. Lamp share: Hemisphere wall 55/65/68 %, Core table 67 %
+  (the Core wall is below one code value either way). Night (a) face 184, chroma 0.064, hue 226 (day 0.100/242). The room is darker
+  now. Rendering: Hemisphere day (unaffected), nights (a) and (b) at 384, Core B night at 768.
