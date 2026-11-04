@@ -4490,3 +4490,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   deep green; but the upper cabinet's batts read as a tan-cream (khaki) field (the sunfleck through the voile), and the forest
   reads thinner at +1.5 EV. Acid final rendering from 01:53.
 - 01:54 sent: (a') +0.75 EV with (d) the one explicit hole moved off the top batt; one proxy; numbers and a strip; (c) next if dark.
+- 01:55 OWNER: "Not yet" (walkthrough item 10, the chips). Saved verbatim first (README be155ef9). Nothing ordered, no shop
+  contacted. ORDER from here, by the owner's "concept first": concept questions first, execution items parked until the concept is
+  settled; 12 with 13; 14 after the close-up renders. Next: item 16 (the woofer's numbers against FaitalPRO's drawing).
