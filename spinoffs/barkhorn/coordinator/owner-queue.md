@@ -3992,3 +3992,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 00:16 sent to the lamps lane: list every Core picture live or queued for the owner (site 743be0cb, deck, brand book, press, the
   walkthrough's lamp items) that carried that spot. Say plainly whether the cordless set on the site (735e7593) came from another
   pipeline; for any that did carry it, give path, SHA and whether it shows at night.
+- 00:19 c3 (stamped 00:21 at a 00:19:30 queue time): horn-A-satin rendered (00:13:20-00:18:51) but HELD. It is pixel-identical to
+  horn-A-polished (the same md5, AE 0): since c305795f the variants file gives every horn-satin entry roughness 0.05, and only the polished
+  shot carries an override. The tall frames run on d649d2cc in two chunks; chunk 1 (ember, dust, acid, poison, ice) from 00:21.
+- 00:19 sent: c3, delete the satin PNG and carry on with the tall chunks. Speaker lane: give horn-A-satin.json an explicit satin
+  roughness (0.25, to confirm), one SHA with a line for c3, and check nothing else meant as satin now silently renders polished.
