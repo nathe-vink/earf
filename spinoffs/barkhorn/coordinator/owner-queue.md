@@ -4493,3 +4493,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 01:55 OWNER: "Not yet" (walkthrough item 10, the chips). Saved verbatim first (README be155ef9). Nothing ordered, no shop
   contacted. ORDER from here, by the owner's "concept first": concept questions first, execution items parked until the concept is
   settled; 12 with 13; 14 after the close-up renders. Next: item 16 (the woofer's numbers against FaitalPRO's drawing).
+- 01:57 biomes lane (stamped 01:58): POISON (a')+(d) at 6b4f2ad3395dcdd9ffa5f904d1089c808d8beb0d: +0.75 EV, 25 % open; the fleck hole
+  (hole 0, canopy-local (-16.36, -1.20), r 0.36) moved +1.0 m along x, so the fleck lands on the floor to the speaker's right; the
+  proxy rendering. The ACID FINAL DIED SILENTLY at 01:54 mid-build (after the rain streaks; no error), the same pattern as Haze's at
+  23:37; it restarts after the Poison proxy.
+- 01:58 sent: treat it as memory (Ice was killed by signal 9 beside a proxy at 14:11): one Blender job at a time; /usr/bin/time -v on
+  the final; if it dies alone, cut instance counts or texture sizes and turn persistent data off; report the peak memory.
