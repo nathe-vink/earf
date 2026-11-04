@@ -3997,3 +3997,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   shot carries an override. The tall frames run on d649d2cc in two chunks; chunk 1 (ember, dust, acid, poison, ice) from 00:21.
 - 00:19 sent: c3, delete the satin PNG and carry on with the tall chunks. Speaker lane: give horn-A-satin.json an explicit satin
   roughness (0.25, to confirm), one SHA with a line for c3, and check nothing else meant as satin now silently renders polished.
+- 00:2x the honest polished close-up (75646195) against the old (a381aefb): mean absolute difference 7/9/11 levels per channel, local
+  maxima above 220. A visible change, so item 6 shows both side by side with the disclosure. Gate launched (wf_1cb4304f-9d4), the old
+  as context. The satin re-render waits on the speaker lane's fix.
