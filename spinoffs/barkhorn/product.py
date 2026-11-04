@@ -2555,7 +2555,7 @@ for _k in ('birch-y2k-smoke', 'eucalyptus-y2k-green'):
 # colour, deeper. Amber takes the autumn birch's horn as it is; violet goes about as deep as Poison's bottle green
 VARIANTS.update({
     'cloud-amber': {**BIRCH, 'horn_preset': 'clear_resin', 'horn': '#FFFFFF', 'horn_deep': '#F2B705', 'horn_cloud': 0.0,
-                    'bark': 'clear_resin', 'disc': '#9A6A12',
+                    'bark': 'clear_resin', 'disc': '#81720E',   # EARF's tint, matched to the corrected cabinet (was #9A6A12)
                     'materials': {'bark': {'deep': '#F2D06B', 'radius': 0.025, 'roughness': 0.05}, 'horn': {'roughness': 0.03}}},
     'cloud-violet': {**BIRCH, 'horn_preset': 'clear_resin', 'horn': '#FFFFFF', 'horn_deep': '#5E3F8F', 'horn_cloud': 0.0,
                      'bark': 'clear_resin', 'disc': '#3F2A5E',
@@ -2734,7 +2734,10 @@ if os.path.exists(TRUCAST_FILE):
 # every horn), so it is polished outside and in. Until then it was fine glass-bead blasted outside (roughness 0.25, the
 # owner's "satin outside" of 03:00). The material keeps its name, `horn-satin`, so the shots' overrides still find it;
 # the throat piece, pod, cap and pads polished as before
-FORMED_HORN = {'cloud-red': '#C50206', 'cloud-orange': '#B85010', 'cloud-amber': '#B88E00', 'eucalyptus-y2k-green': '#0E6A06',
+# Acid's horn re-derived (2026-11-04, the coordinator's gate on horn-back-acid): #B88E00 was a hand-match to the old,
+# warmer cabinet (split red 0); from 732a8671's dye (red at 0.85 of green), one dye at the horn's loading, its 12.7 mm
+# luminance kept: #A39700, OKLCH hue 102 at 12.7 mm and 93 at the pod's 25 mm (was 81)
+FORMED_HORN = {'cloud-red': '#C50206', 'cloud-orange': '#B85010', 'cloud-amber': '#A39700', 'eucalyptus-y2k-green': '#0E6A06',
                'cloud-blue': '#0A52B8', 'cloud-violet': '#4512D0', 'birch-fog-clear': '#FFFFFF', 'cloud-black': '#424548'}
 # measured in the site's front-off-tall (rim lamp off), horn against cabinet (median luminance, hue difference): Ember 0.45 0,
 # Dust 0.46 +2, Acid 0.56 -1 (its cabinet is the brightest; deeper turns orange), Poison 0.34 +1, Ice 0.29 +3, Haze 0.25 0,
