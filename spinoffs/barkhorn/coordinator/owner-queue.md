@@ -4329,3 +4329,18 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   the window on the same 0.0065 W/lm scale. Its CORE_EMIT ~430 was wrong (~55 W, ~8,500 lm on the scale, ~15x the real ~560 lm out);
   on the scale Core is CORE_EMIT ~28 (3.6 W) for the wall picture. No Core in the singles. The gate in flight judges a proxy with
   this inconsistency; the re-proxy folds in the fix with the critics' asks.
+- 01:29 speaker lane: THE BOTTOM-EDGE COMPARISON at 0606ae050c4c0395e4d41531760cd91fe811e2ba (renders/2026-11-04/barkhorn/
+  bottom-edge/: the Dust hero-light and wide Ember sheets, 2x crops of four labelled options, and the full frames 2x2; half scale, 64
+  samples, the honest site rigs). PHYSICS (corrected by (d)): the band is the bottom panel's own polished edge, mirroring the bright
+  floor at a grazing angle and glowing with light carried inside the clear panel; NOT the floor under the cabinet. No lamp. The white
+  sweep exaggerates it; on wood or dark floors it is faint (the deck-home room frames don't show it). Numbers (wide Ember band px
+  >=240; Dust hot red edge px): (a) as built 257 / 28; (b) satin bottom panel 253 / 1; (c) 32 mm dark skirt to the floor 33 / 0 (a
+  thin pale line at its foot); (d) dark film under the panel 336 / 39 (fixes neither). Costs: (a) none; (b) one finishing step
+  (minutes, no new part; these renders frost the whole panel, a shop would do the edge only); (c) a new part and an assembly step,
+  and the cabinet no longer floats on its feet (a design call); (d) cheap but darkens the cabinet's floor and fixes nothing. The
+  lane's read: only (c) clears both in white-studio pictures; (b) fixes Dust's LED-like bar (the critics' main objection).
+  Next for it: the close-up re-light (horn off takes the throat's bright pixels 58 -> 6: the horn lamp lights the plug).
+- 01:30 gate wf_f365f69f-fac on both sheets (fairness, how lit each base reads, what misleads). Sent: (b) edge faces only via the
+  clear_resin split (top and bottom faces polished); (c) matte black (anodised extrusion or matte acrylic), labelled, the foot line
+  checked; sheets rebuilt with a line on wood and dark floors; after the current crop test.
+- WALKTHROUGH: the bottom-edge question can come right after item 11 once the fixed sheets pass (it blocks the roll-out renders).
