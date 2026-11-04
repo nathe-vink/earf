@@ -3962,3 +3962,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 00:07 c3: both models rebuilt on f6d0eda7 (Cloud 23:45:50-23:56:08; variants 23:56:13-00:07:09). The variants file was checked out,
   then 6692fae3 merged at d649d2cc9d9b223b0c42496104f2985b9a50a2bf (clean, #CDC509). The honest horn-A-polished close-up started 00:08;
   horn-A-satin follows. (Both SHAs checked with ls-remote just now.)
+- 00:09 c4 (stamped 00:10 at a 00:09:41 queue time): deck-home committed as a lossless WebP (4.11 MB, pixel-identical to the PNG) at
+  759ab035401ff42ff0ffbf610149e963f1a1b573 (head of r33-rollout-c4, on top of its merge of 732a8671, 3c0ad79968; the render itself was on
+  8202ce2a). c4 notes the right horn throws a dark, solid-looking wall shadow (the portrait's issue). Chunk 6 (60 turn frames) started
+  00:09 on 3c0ad799, its list unchanged. Held: fix1 chunk 2, phase-2 chunk 3.
+- 00:10 deck-home rig: clean by my audit (no cards, no ruling hits). Gate launched (wf_bcc7def6-932), with the portrait as context.
+  RULE OF THUMB from here: a frame over 5 MB as PNG ships as a pixel-identical lossless WebP master.
