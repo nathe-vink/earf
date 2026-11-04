@@ -21,9 +21,13 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..', '..'))
 OUT = os.path.join(ROOT, 'renders', '2026-11-03', 'barkhorn', 'lamp-pictures')
 CCT = int(os.environ.get('LAMP_CCT', '2700'))       # the LED's colour temperature (K)
-LED_W = float(os.environ.get('LED_W', '55.0'))         # Core's LED, about 620 lm at full [E: radiant watts]
-COB_W = float(os.environ.get('COB_W', '8.0'))         # Hemisphere's COB beam, about 500 lm out of the fitting [E]
-SPILL_W = float(os.environ.get('SPILL_W', '0.08'))    # the reflector's spill onto the opal, about a quarter
+# One photometric scale (round 13, 2026-11-03): the COB disc's 3.2 W (env COB_W 2.0 x 1.6, at the cob light below) stands
+# for its ~490 lm out of the fitting (Bridgelux Vero SE 10 at 180 mA, ~575 lm at the COB, crystal.py; x 0.85 out), so
+# 0.0065 W a lumen; the liner's spill (145 lm) is emitted on that scale. The three globals below are round-4 leftovers,
+# no longer read by the night rigs: do not take COB_W 8 as the Hemisphere's output.
+LED_W = float(os.environ.get('LED_W', '55.0'))         # (round 4, unused since round 12: Core's light is its emitter)
+COB_W = float(os.environ.get('COB_W', '8.0'))         # (round 4, stale: the cob light reads its own default, 2.0 x 1.6 W)
+SPILL_W = float(os.environ.get('SPILL_W', '0.08'))    # (round 4, unused since round 13: the spill is the liner's emission)
 
 
 def blackbody(T):
