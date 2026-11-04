@@ -4352,3 +4352,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   proxy (held; re-proxied), the seven backs (Fog, Dust, Ice pass; c2 re-lighting four). Not yet heard: c4's turn chunk 6 (due ~01:50),
   the bar lane's v4s, the lamps lane's Hemisphere finals and Core B night, the Core A night (56059fe8) for item 89. Check-in #55
   armed for ~02:20.
+- 01:31 HAZE POUR GATE (wf_938a7cba-115, resumed; 3 critics, ~7 min of the resumed run): HOLD 3/3. Fair and controlled, but the
+  two-dye target renders h 313-318 against the cabinet's ~292 (back view) and ~284-287 (this frame's corner): 21-26 degrees too red,
+  plum, hot-pink posts, no deeper. The current pour's thin walls are only 3-10 degrees bluer; its ultramarine is the long paths (pod,
+  right wall, the double path over the cabinet top ~269). Both pours render ~5-7 degrees redder than their 10 mm spec; the target
+  was matched to the 12.7 mm chart swatch (305), not the rendered cabinet. The magenta lean is uniform (least on the pod), so not
+  long-path drift.
+- 01:31 sent to the speaker lane: retarget Haze at the rendered cabinet (10 mm spec near h 282-286; walls within 5 degrees of 292,
+  long paths within 10); re-check Dust, Acid and Ice targets the same way; a cabinet-face strip in each half; on the re-lit close-up
+  rig, full scale, >=128 samples; after the bottom-edge (b)/(c) re-renders. Walkthrough 15b updated (my pick to revisit).
