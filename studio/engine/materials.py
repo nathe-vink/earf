@@ -1189,6 +1189,19 @@ def _clear_resin(nt, b, p, normal_in=None):
     c0 = tuple(1.0 - c / D for c in s0) + (1.0,)
     I['Base Color'].default_value = hex_lin(p['color'])
     I['Roughness'].default_value = p['roughness']; I['IOR'].default_value = p['ior']
+    if p.get('split'):
+        # one shell, two finishes (barkhorn's horn, 2026-11-04: satin outside, the air path masked and polished): in the
+        # part's own frame, a point's radial direction from an axis along y at (axis_x, axis_z), against its normal: a
+        # face turned toward the axis (the inner flare) takes `inner`, one turned away (the outside) `outer`
+        sp = p['split']
+        tc = node('ShaderNodeTexCoord')
+        sep = node('ShaderNodeSeparateXYZ'); nt.links.new(tc.outputs['Object'], sep.inputs[0])
+        rx = math_('SUBTRACT', sep.outputs['X'], sp.get('axis_x', 0.0)); rz = math_('SUBTRACT', sep.outputs['Z'], sp.get('axis_z', 0.0))
+        sn = node('ShaderNodeSeparateXYZ'); nt.links.new(tc.outputs['Normal'], sn.inputs[0])
+        dot = math_('ADD', math_('MULTIPLY', rx, sn.outputs['X']), math_('MULTIPLY', rz, sn.outputs['Z']))
+        side = math_('GREATER_THAN', dot, 0.0)                       # 1 outside, 0 inside
+        rough = math_('ADD', sp.get('inner', 0.05), math_('MULTIPLY', side, sp.get('outer', 0.25) - sp.get('inner', 0.05)))
+        nt.links.new(rough, I['Roughness'])
     I['Transmission Weight'].default_value = 1.0 - p['milk']
     if p['milk'] > 0:
         I['Subsurface Weight'].default_value = 1.0; I['Subsurface Scale'].default_value = 0.003
