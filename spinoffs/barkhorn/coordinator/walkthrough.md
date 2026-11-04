@@ -29,6 +29,15 @@ Show one item with its pictures, wait for the answer, save the owner's words ver
   THE DISCLOSURE'S WORDING (a critic's note): don't say 'nothing is linked'. Say that no lamp lights the speaker while skipping parts
   of it, and no hidden card sits in frame; the remaining backdrop lamps light the backdrop alone, as a studio's background lights do,
   and three reflection panels show only in reflections, as real cards would.
+  THE SATIN CLOSE-UP (00:5x, wf_53bafbd3-db3): HOLD 2 of 3. Fair as a rendering (background pixel-identical, hue within 0.5
+  degrees, smooth, no X), but `horn-satin` is the waveguide shell's only material, so roughness 0.25 frosted the inner flare (the
+  air path) too. The 03:00 spec was satin OUTSIDE, the air path masked and polished, and from the front we look into the inner flare,
+  so the frame overstates that option. Asked of the speaker lane (00:56): on the re-lit close-up rig, polished and satin-outside
+  (outer face 0.25, air path 0.05), plus a matched side or rear-quarter pair where the outside shows. Also asked: did item 2's satin
+  picture (a47ae365, A-polish-ice.png) frost the whole shell too? product.py reads that way. If so, item 6's disclosure adds: "the
+  satin picture you chose from also frosted the inside of the flare, which the spec kept polished; from the front, satin outside
+  looks closer to polished than it showed." The owner's call (polished) stands on its own rule (satin inside adds a masked step);
+  this is only the honest version of what they chose from.
 - **NEW OWNER QUESTION (23:38, the lamps lane), for the Hemisphere finals:** the cap shows a dark 5 mm notch. It is the bayonet's
   entry, open at the collar's top end so the pin can enter. The crown (80 mm) is smaller than the collar (96), so the collar's top
   ring is bare. Options: a crown at least 96 mm across, or a thin cover ring. Show it with the Hemisphere finals once they pass.
@@ -63,6 +72,17 @@ Show one item with its pictures, wait for the answer, save the owner's words ver
   LOUDSPEAKER, ACTIVE" and "MODEL AT-1, S/N AT1-26-000127" (product.py). Proposed: TROPOS, MODEL TR-1, S/N TR1-26-000127; and its
   line "DESIGNED IN SAN FRANCISCO, CALIFORNIA" to confirm. Ask with the back and amplifier pictures. The six horn-backs that passed
   20:38 (Ice, Haze, Fog, Ember, Poison 3/3; Dust 2/3) show no plate; Acid's waits on its edge colour, the amplifier close-up on the plate.
+- **NEW ITEM, found 00:53 (the site lane): lit-lamp pictures on the LIVE site.** earf.world (main's build at 856f80d7) shows
+  lamps-orbs (on #lighting and as Core's "row" view), which uses the stand-in pools that fail rulings 1-3 (flagged 20:09, 00:41).
+  Also live, not yet audited: orb-<color>.jpg and -card.jpg (Core lit, the older corded-era renders, on every Core page, the
+  colour pages' Core cards and the Lighting tiles), dome-<color>.jpg and -card.jpg (Hemisphere lit), lamps-domes (Hemisphere's
+  eight lit, #lighting). The lamps lane is auditing how each was lit (asked 00:56). V2 already drops lamp-orb and lamps-orbs.
+  The question for the owner, once audited: replace them when honest ones pass (as item 3's answer did for the uplit pictures), or
+  take the failing ones down now (and show the unlit or nothing). Nothing goes to main without the owner.
+- **Item 14's amplifier picture (00:58):** c2's backfix (488fbec9) dropped the hidden `glow` lamp (specular 0, transmission off)
+  from amp-plate-ember and horn-back-acid; my audit is clean (no flags, no cards; two backdrop-only lamps). The plate now reads
+  "TROPOS · HORN LOUDSPEAKER, ACTIVE / MODEL TR-1 S/N TR1-26-000127 / DESIGNED IN SAN FRANCISCO, CALIFORNIA" (the proposal, for
+  the owner to confirm). Gate wf_76840142-555 in flight.
 - **For item 89 (Core's ball), found 20:44:** ask the owner for a daylight photo of today's Core ball beside a 2069 chip. It calibrates
   Ice's thin-wall hue: the model, fitted to the chart, reads cyan-aqua (OKLCH ~225) through Core B's 6 mm shell, and reaches the
   chip's azure only at about 2.5 chips of path. Core B's core is now proposed in 3 mm white opal (like Hemisphere's liner) instead of

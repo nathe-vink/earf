@@ -4174,3 +4174,26 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   - Brand: the wall masters and the crops (2.4:1 and 4:5 cut from the masters; seven until Smoke).
   Waiting on: the satin close-up gate (wf_53bafbd3-db3), the seven honest backs (wf_dfce1fd6-dc4), the speaker lane's bottom-edge
   comparison (~01:00). The owner's open question is still item 5.
+- 00:53 received:
+  - Site lane (b948ad38 on r47-site-next, held; queued 00:50, before my 00:51 spec): lamps-orbs pulled from V2 (the Lighting page's
+    row figure, Core's "row" view, HOME_V2's lamps beat, now Hemisphere's row only); lamp-orb built but shown nowhere; the V2 sweep
+    passed 57 routes at 1440 and 390. The formats for the lamps lane. The night section's cross-fade is a plain 0.6 s (the dip to
+    dark gone). LIVE (earf.world = main 856f80d7): lamps-orbs is live (#lighting, Core's row view); also orb-<color> (corded-era
+    Core lit), dome-<color> (Hemisphere lit) and lamps-domes, lighting not checked. lamp-orb not live.
+  - c2: p2-backfix at 488fbec9 (amp-plate-ember 10.3 min, horn-back-acid 5.7 min). Done with its backfix list; holding.
+  - Brand lane: the six uses fit the two masters, with the 2.4:1 window at y 0.11-0.851 (not 0.10-0.84: the brief's 2.5:1 cut left
+    3.4 % under the row) and the 4:5 at y 0.125-0.828; the seven/eight word list; the Milan room plan's eight bays to leave.
+- 00:5x SATIN CLOSE-UP GATE (wf_53bafbd3-db3, 3 critics, 22 min): HOLD 2/3 (one SHOW, captioned "satin on every face"). Fair as a
+  rendering, but the shell's one material frosts the inner flare too; the 03:00 spec was satin outside with the air path polished.
+- 00:56 sent:
+  - Speaker lane: the satin fix (on the re-lit close-up rig: polished, and satin outside only, outer 0.25 / air path 0.05; a
+    matched side or rear-quarter pair); confirm whether item 2's satin (a47ae365) frosted the whole shell too.
+  - Lamps lane: the site's formats (lamps-orbs 2400x800 and 1200x400; lamp-orb 1600x2000 and 800x1000), and a read-only audit of
+    the live lit-lamp pictures (lamps-orbs, orb-<color>, dome-<color>, lamps-domes): commit, script, lamps, pass or fail.
+  - Site lane: formats forwarded; build from the 00:51 spec; the live site unchanged.
+  - Brand lane: its corrections taken; the Milan plan keeps eight bays (Smoke is the owner's call).
+- 00:58 spec updated with the brand's windows (2.4:1 at y 0.11-0.851; 4:5 at y 0.125-0.828) and its word list.
+- 00:58 c2's backfix audited (rigaudit, cardcast): the hidden `glow` lamp (specular 0, transmission off) removed; flags []; no cards;
+  two backdrop-only lamps. amp-plate-ember is near-identical to 06b829ce (mean diff 0.45); horn-back-acid moved (mean 2.4). The plate
+  now carries the proposed TROPOS / TR-1 wording. Gate wf_76840142-555 launched on both, the old ones as context.
+- WALKTHROUGH: item 6 note (the satin finding); a new item (the live lit-lamp pictures); item 14's amplifier picture.

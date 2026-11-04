@@ -106,9 +106,14 @@ CHECKED
 BRAND (the coordinator's addition)
 - Wide wall master, 16:9 3840x2160. The seven sit inside x 0.05-0.95 (5 % sides, for teaser beat 3's 4 % push) and y 0.16-0.80.
   - Teaser 16:9 and the Milan poster take it whole.
-  - The 2.4:1 crop for the Book, the partner brief and press landscape is 3840x1600. Place its window (e.g. y 0.10-0.84) so the
-    row keeps >=4 % top and bottom inside the brief's 2.5:1 cut.
+  - The 2.4:1 crop for the Book, the partner brief and press landscape is 3840x1600. Its window is y 0.11-0.851 (the brand lane's
+    correction, 00:53: with y 0.10-0.84 the brief's 2.5:1 cover at object-position 45 % left only 3.4 % under the row; with
+    0.11-0.851 the row keeps 6.8 % / 6.8 % in the 2.4:1 and 5.2 % / 4.8 % in the brief's cut). The row's 5 % sides survive.
 - Tall wall master, 9:16 1440x2560. The seven are staggered 4 + 3 inside x 0.05-0.95, y 0.17-0.78.
-  - The 4:5 crop (1440x1800, full width, a window holding y 0.17-0.78 with margin) serves teaser 4:5, the site's old
-    facade-portrait use and the press portrait.
+  - The 4:5 crop (1440x1800, full width, window y 0.125-0.828: 6.4 % top and 6.8 % bottom, about 4.4 % / 4.8 % after the
+    teaser's 4 % push) serves teaser 4:5, the site's old facade-portrait use and the press portrait.
 - Smoke is held: the wall shows seven until Smoke's sheet is decided. Any use that says "eight" changes its words, or waits.
+  The brand lane's list (00:53), changed only when the picture swaps: the Book's facade alt ("The eight Tropos at night...") and
+  Milan alt ("the uplit eight"), the brief-preview alt ("the eight lit from below"), STORYBOARD beat 3 ("The eight on a concrete
+  wall"), press/images.md ("The eight at night..."). The Milan room plan's eight bays stay: it plans the room, not the picture, and
+  Smoke's place is the owner's call (the Smoke question).
