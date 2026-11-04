@@ -4533,3 +4533,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   Punchy', (2) 'AgX - Base Contrast' at -0.5 EV (Filmic available if needed); upper-cabinet sRGB, box and floor reported for each.
   Order: Acid final, the two Poison looks, Fog final (5400 K), Ember cam04 / cam04ev, Haze final. habitats.py passes --set and --tag
   (b07eae52).
+- 02:09 speaker lane: THE FOUR RE-LIT CLOSE-UPS at 1bdbf2fc787428042921c1a03c8b7c9cbf2b22fc (horn-closeup-relit/: front and side,
+  polished and satin-outside; 1000x800, 64 samples): 6692fae3's honest close-up with the horn lamp as a 6 x 4 m softbox, nothing else
+  changed; satin outside by face orientation; polished vs satin-outside mean diff front 3.2/255, side 5.1. Its own crop: no lavender
+  px in the X zone, 80 throat px above 220. Next: the bottom-edge (b)/(c) re-renders (~25 min), then the sheets.
+- 02:1x my audit: no RULING lines; horn 8.0 at specular 1.0 (6 x 4 m), fill 1.6 at 1.0, edge a spec-only unlinked strip at 0.3 W,
+  back 0; cards all 0.0 % (front 4, side 2); polished vs satin differ only in materials; front vs side only in camera and set.
+  Gate wf_e92326ae-fdc launched (the earlier honest, the old one the owner chose from, and the satin-on-every-face as context).
