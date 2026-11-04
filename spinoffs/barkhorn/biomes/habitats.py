@@ -85,7 +85,9 @@ SETS = {
     # ruling 1: the shot's litter bounce had specular 0 (hidden in reflections); at full now
     # ruling 4 (23:47): the canopy real (every ray type), its own openings the only way light comes through; the gap lamp
     # under it (in earlier commits) is gone. The mist casts shadows (--real-set, below)
-    'poison_g5': {'product.instances.0.rotate_z': 9.0, 'lights.litter.specular': 1.0},
+    # (and option (a), the coordinator 01:16: the canopy a quarter open, its gaps real holes in the geometry (habitat.py
+    # --canopy-open), the sunfleck through one of the shot's own holes; the camera +1.5 EV for a forest floor)
+    'poison_g5': {'product.instances.0.rotate_z': 9.0, 'lights.litter.specular': 1.0, 'render.exposure': 1.5},
 }
 # set props left out (the coordinator's gate on Dust, 2026-11-03: the tumbleweed floats, its shadow detached)
 DROP = {'dust': ['tumbleweed']}
@@ -107,6 +109,7 @@ HORN_ROUGH = 0.05
 SPLIT = {'acid_b': (0.085, 0.10, 1.00)}
 # habitats whose sets are made real: every object seen by every ray type, casting shadows (ruling 4)
 REAL_SET = {'poison_g5'}
+CANOPY_OPEN = {'poison_g5': 0.25}
 SAMPLES = {'ember': 96, 'poison_g5': 96, 'haze_b': 96, 'fog_b': 96}
 
 
@@ -138,7 +141,8 @@ def main():
             + (['--glossy-flag'] if a.glossy_flag else []) \
             + (['--flag', *map(str, FLAG[n])] if n in FLAG else []) \
             + (['--split', *map(str, SPLIT[n])] if n in SPLIT else []) \
-            + (['--real-set'] if n in REAL_SET else [])
+            + (['--real-set'] if n in REAL_SET else []) \
+            + (['--canopy-open', str(CANOPY_OPEN[n])] if n in CANOPY_OPEN else [])
         with open(out.replace('.png', '.log'), 'w') as log:
             r = subprocess.run(cmd, stdout=log, stderr=subprocess.STDOUT)
         print(n, 'ok' if r.returncode == 0 else f'failed ({r.returncode})', flush=True)

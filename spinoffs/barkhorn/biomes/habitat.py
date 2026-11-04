@@ -47,6 +47,7 @@ SURFACE_GLASS = False                   # --surface-glass: the tint on the faces
 WELD = [True]                           # the asset's split vertices welded so its glass volumes close (--no-weld: off)
 GLOSSY_FLAG = [False]                   # --glossy-flag: the flag and cards seen in reflections only (the earlier trick)
 SPLIT = [None]                          # --split R G B: the tint's channel split, luminance held per part (the shared 9097 fix)
+CANOPY_OPEN = [None]                    # --canopy-open F: the canopy's gaps cut as real holes, F of it open (ruling 4)
 REAL_SET = [False]                      # --real-set: every set object seen by every ray, casting shadows (ruling 4)
 LED = [1.0]                             # --led F: the amp plate's power LED's emission scaled (1: the asset's)
 SINK = [0.002]                          # --sink M: the feet bedded this far into the ground (ash, sand). The sets' crust and
@@ -212,6 +213,46 @@ def black_flag(bpy_, linked, size):
             off += 0.2
         offs.append(round(off, 1))
     print(f'side cards: 2.6 x 2.4 m, out of frame at {offs} m each side')
+
+
+def canopy_holes(bpy_, open_frac, spec, cell=0.3):
+    """Ruling 4: the canopy's gaps as real holes in its geometry, not a transparency. The sheet is rebuilt as a grid of
+    `cell` m squares; a fractal noise at the shot's gap size picks the open ones (exactly `open_frac` of them), and every
+    cell inside one of the shot's explicit holes (placed so the sun reaches a spot) is cut too. The material is opaque."""
+    import bmesh
+    from mathutils import noise, Vector
+    can = None
+    for o in bpy_.context.scene.objects:
+        if o.type == 'MESH' and max(o.dimensions[:2]) > 100 and o.location.z > 8 and o.data.materials and o.data.materials[0].node_tree \
+                and any(n.type == 'BSDF_TRANSPARENT' for n in o.data.materials[0].node_tree.nodes):
+            can = o
+    if can is None or not spec:
+        print('canopy holes: no canopy found'); return
+    w, d = spec.get('size', [60.0, 60.0]); gap = spec.get('gap', 2.0)
+    nx, ny = int(w / cell), int(d / cell)
+    vals = []
+    for j in range(ny):
+        for i in range(nx):
+            x = -w / 2 + (i + 0.5) * cell; y = -d / 2 + (j + 0.5) * cell
+            vals.append(noise.fractal(Vector((x / gap, y / gap, 0.0)), 0.6, 2.0, 6))
+    thr = sorted(vals)[int(len(vals) * (1.0 - open_frac))]
+    holes = spec.get('holes', [])
+    bm = bmesh.new(); open_n = 0
+    vs = [[bm.verts.new((-w / 2 + i * cell, -d / 2 + j * cell, 0.0)) for i in range(nx + 1)] for j in range(ny + 1)]
+    for j in range(ny):
+        for i in range(nx):
+            x = -w / 2 + (i + 0.5) * cell; y = -d / 2 + (j + 0.5) * cell
+            if vals[j * nx + i] >= thr or any((x - hx) ** 2 + (y - hy) ** 2 <= hr * hr for hx, hy, hr in holes):
+                open_n += 1; continue
+            bm.faces.new((vs[j][i], vs[j][i + 1], vs[j + 1][i + 1], vs[j + 1][i]))
+    me = bpy_.data.meshes.new(can.name + '-holed'); bm.to_mesh(me); bm.free()
+    m = can.data.materials[0]; nt = m.node_tree
+    mix = next(n for n in nt.nodes if n.type == 'MIX_SHADER')
+    for l in list(mix.inputs['Fac'].links):
+        nt.links.remove(l)
+    mix.inputs['Fac'].default_value = 0.0                # all diffuse: opaque leaves, the light only through the holes
+    me.materials.append(m); can.data = me
+    print(f'canopy holes: {nx} x {ny} cells of {cell} m, {open_n / (nx * ny):.1%} open ({len(holes)} explicit holes cut)')
 
 
 def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extra=(), stand='feet', tt=None,
@@ -445,6 +486,9 @@ def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extr
                         setattr(o, a, True)
                     fixed.append(o.name)
             print('real set: every ray type on for', fixed)
+        if CANOPY_OPEN[0] is not None:
+            cs = next((q for q in json.load(open(shot_path))['set']['props'] if q.get('fn') == 'canopy'), None)
+            canopy_holes(bpy_, CANOPY_OPEN[0], cs)
         return r
     Lt.world = world
     sys.argv = ['render.py', shot_path, '--out', os.path.abspath(out), '--samples', str(samples), '--scale', str(scale), *extra]
@@ -469,6 +513,7 @@ def main():
     ap.add_argument('--lining', help="the lining's color, hex (colors F: Smoke '#0B0B0B')")
     ap.add_argument('--glossy-flag', action='store_true', help='the flag and side cards in reflections only (before 20:11)')
     ap.add_argument('--split', type=float, nargs=3, help="the tint's channel split, R G B (luminance held per part)")
+    ap.add_argument('--canopy-open', type=float, help="the canopy's gaps cut as real holes, this fraction open")
     ap.add_argument('--real-set', action='store_true', help='every set object seen by every ray, casting shadows')
     ap.add_argument('--led', type=float, default=1.0, help="scale the amp's power LED (the asset's strength is 6)")
     ap.add_argument('--sink', type=float, default=0.002, help='bed the feet this far into the ground, m')
@@ -478,7 +523,7 @@ def main():
     a = ap.parse_args()
     global SURFACE_GLASS
     WELD[0] = not a.no_weld; SURFACE_GLASS = a.surface_glass
-    SINK[0] = a.sink; LED[0] = a.led; REAL_SET[0] = a.real_set; SPLIT[0] = a.split; GLOSSY_FLAG[0] = a.glossy_flag
+    SINK[0] = a.sink; LED[0] = a.led; REAL_SET[0] = a.real_set; CANOPY_OPEN[0] = a.canopy_open; SPLIT[0] = a.split; GLOSSY_FLAG[0] = a.glossy_flag
     HORN['close'] = a.horn_close; HORN['rough'] = a.horn_rough; HORN['shadows'] = not a.horn_front
     sh = json.load(open(a.shot))
     scale_lights(sh, {k: float(v) for k, v in (x.split('=', 1) for x in a.light)})
