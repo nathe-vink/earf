@@ -4389,3 +4389,18 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 01:46 my check: the turn rig is plain and honest (key 2.2, fill 1.0, wash 0.8, sky 0.7; no flags, no cards; camera fixed, the
   product turns; the sweep tinted per colour). Contact sheets per colour; gate wf_57b250a0-dbb launched. Sent: c4, the Acid horn
   re-match means turn-acid re-renders from the speaker lane's SHA; hold.
+- 01:4x ICE NIGHT PROXY v2 GATE (wf_16d3d3dc-8f5; 3 critics, 20 min): HOLD 3/3. Fixed: Ice the only colour, no table lamp, no warm
+  side-face reflection. Not fixed or worse: the cabinet a near-black silhouette (median L 4/255, darker than the floor; woofer pure
+  black; the Ice batt black); red 0 on 71-73 %; the floor pool beside the feet; a CG box (floor_plain: a flat #3F3B36, no oak;
+  furniture []). Worst: the pendant reads as a dome lamp sitting on the horn (rim 2-3 px above it; no cord or canopy renders
+  although cord_to_ceiling is true), so its wash reads as light from the speaker. MY 00:44 "centre line behind it" WAS THE WRONG
+  CALL (it silhouettes the box).
+- 01:4x DUST/EMBER HABITAT GATE (wf_3f87fbc7-41d, resumed; 3 critics): DUST SHOW 3/3 (the Dust habitat from now on; 0a356de1
+  retired). EMBER HOLD 2/3: honest, but near-black (78 % of the front below L 10, was 49 %; box L 11 vs 13.8); an opaque maroon block
+  at phone size under a bright horn.
+- 01:47 sent: Mantle (my error owned; the pendant off-axis and forward, raised, its cord and canopy rendered; a camera-side window
+  fill; the lamp on one scale; ease the finish contrast and check AgX on blue; real oak, plaster, a real detail; text zones dark;
+  the COB's visibility at 0.40 m; commit the lamp .blend; targets: cabinet median L >= 25, batts pale, woofer cone readable, red off
+  0, horn and cabinet one blue, the pendant hanging; two 960x540 variants if needed). Biomes (Dust passes; Ember: a lava channel
+  behind the lower cabinet, turned 20-30 degrees, then a closer real card out of frame or a whole-frame +0.5 EV; if nothing honest
+  works, the owner is told and offered a daytime Ember).
