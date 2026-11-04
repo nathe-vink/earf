@@ -4421,3 +4421,17 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 01:48 sent: c2, rigB for all seven on one rig; the lid and side accepted as honest; _siteB_round2 as the rig commit with audits;
   six now, Acid held for the horn SHA. Speaker lane: the order (Acid horn re-derive now, code only, for c2/c3/c4; then the
   bottom-edge (b)/(c) re-renders; then the targets and the Haze pair; then deck hero, cover, room, row).
+- 01:48 biomes lane (stamped 01:49): Dust recorded as shown, 0a356de1 retired (11370e2af363652cb342b2138119bb8d1e98b799). Ember after
+  its queue: (1) camera 0.8 -> 0.4 m (the lava band drops behind the lower cabinet), (1)+(3) the same at +0.5 EV; rotate kept at 12
+  (at 23 degrees off the horn's sky wedge came back). Fog WB 5800 K: the cut edges' median b* +8.8/+4.1 -> +6.3/+0.8, panels +4.3,
+  sky -5.4, grass +1.9; 5400 K rendering; it picks the smallest that reaches +5.
+- 01:48 speaker lane (stamped 01:49): ACID at a290fdc6cddfa02889ae767304be903e1d0d96de (product-file values; no model rebuild).
+  #CDC509 is the horn_deep_dye record field, read by no render; the real cabinet change is 732a8671 (3 Nov 22:13; Acid's cabinet
+  deep #FFEB6C -> #F1EE7F, product-wide); every Acid frame on a SHA with 732a8671 has the new cabinet (c3's tall Acid and c2's
+  horn-back-acid do; phase-1 frames before 22:13 don't). The horn as poured (one dye, the corrected split at the old horn's
+  luminance): 10 mm deep #B88E00 -> #A39700 (6 mm 0.77/0.164/106; 12.7 mm 0.60/0.126/102, was hue 81; the pod at 25 mm
+  0.38/0.078/93). EARF letters #9A6A12 -> #81720E (OKLCH 0.55/0.11/100, a satin paint). Its order: the four close-ups (from 01:46,
+  ~30 min), the bottom-edge (b)/(c) re-renders and sheets, then the pour re-check with cabinet patches.
+- 01:49 sent: c2 (merge a290fdc6; after the six rigB backs, back-acid on rigB and horn-back-acid), c3 (merge; re-render tall Acid
+  on fix1), c4 (merge; re-render turn-acid-00..16), biomes (check biomes/tints.json's Acid against #F1EE7F / #A39700 / #81720E before
+  the Acid final; say which it uses).
