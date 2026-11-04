@@ -116,6 +116,21 @@ def main():
                     hit += 1; xs.append(px); ys.append(py)
         pct = 100.0 * hit / tot
         ext = (f'x {min(xs) / nx:.2f}-{max(xs) / nx:.2f} y {min(ys) / ny:.2f}-{max(ys) / ny:.2f} of the frame' if xs else '')
+        # the coordinator, 01:47 (point 6): would a real photo from this camera see the bare emitter? Points over the
+        # lamp's surface, each ray-cast from the camera against the scene; any that reaches the emitter unblocked is seen
+        seen = n_pts = 0
+        for i in range(-6, 7):
+            for j in range(-6, 7):
+                qa, qb = i / 6.0, j / 6.0
+                if disk and qa * qa + qb * qb > 1.0:
+                    continue
+                pt = C + ax * (qa * sx / 2 * 0.98) + ay * (qb * sy / 2 * 0.98)
+                dv = pt - o; dist = dv.length; dv.normalize(); n_pts += 1
+                ok, loc, *_ = sc.ray_cast(dg, o, dv, distance=dist - 1e-4)
+                if not ok:
+                    seen += 1
+        print(f'lamp {ob.name}: its emitting surface seen directly by the camera at {seen} of {n_pts} points'
+              + ('' if seen == 0 else '  <- a real photo would show the bare emitter'))
         print(('IN FRAME ' if hit else 'out      ') + f'{pct:5.1f} %  lamp {ob.name} ({d.shape} {sx:.2f} x {sy:.2f} m, hidden from camera, seen in reflections) {ext}')
 
 

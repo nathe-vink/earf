@@ -77,7 +77,7 @@ _ROOM = ('wall', 'floor', 'table', 'leg', 'ceiling', 'fill', 'kicker', 'dusk', '
          'mullion', 'transom', 'sheer')     # the lamps lane's window (26400e7c): its frame, its sheers and its sky lamps
 
 
-def _append_lamp(bpy, blend, offset, keep_table=False, led_up=False, cord_to=None):
+def _append_lamp(bpy, blend, offset, keep_table=False, led_up=False, cord_to=None, canopy=None):
     with bpy.data.libraries.load(blend, link=False) as (src, dst):
         dst.objects = list(src.objects)
     got = []
@@ -100,6 +100,7 @@ def _append_lamp(bpy, blend, offset, keep_table=False, led_up=False, cord_to=Non
         # a pendant's cord is cut to the room (the lamps lane's CAD gives one length): its mesh stretched along z
         # from its bottom so its top meets the ceiling
         c = next((bpy.data.objects[n] for n in got if n.startswith('cord')), None)
+        bpy.context.view_layer.update()        # the offsets above are not in matrix_world until the view layer updates
         if c is not None:
             from mathutils import Vector
             Mw = c.matrix_world; Mi = Mw.inverted()
@@ -109,6 +110,22 @@ def _append_lamp(bpy, blend, offset, keep_table=False, led_up=False, cord_to=Non
             for v in c.data.vertices:
                 w = Mw @ v.co; w.z = z0 + (w.z - z0) * k; v.co = Mi @ w
             c.data.update()
+            if canopy:
+                # the pendant's own ceiling canopy (the lamps lane's CAD: out-dome-pendant/stl/canopy.stl, which their
+                # picture rig leaves out), centred on the cord at the ceiling, in the cap's matte finish
+                bpy.ops.wm.stl_import(filepath=canopy, global_scale=0.001)     # the CAD's millimetres, as the lamps lane imports it
+                cn = bpy.context.selected_objects[0]; cn.name = 'canopy'
+                bpy.context.view_layer.update()
+                cz = [(cn.matrix_world @ v.co).z for v in cn.data.vertices]
+                cx_ = sum((cn.matrix_world @ v.co).x for v in cn.data.vertices) / len(cn.data.vertices)
+                cy_ = sum((cn.matrix_world @ v.co).y for v in cn.data.vertices) / len(cn.data.vertices)
+                cords = [Mw @ v.co for v in c.data.vertices]
+                ccx = sum(w.x for w in cords) / len(cords); ccy = sum(w.y for w in cords) / len(cords)
+                cn.location = (cn.location[0] + ccx - cx_, cn.location[1] + ccy - cy_, cn.location[2] + cord_to - max(cz))
+                cap = next((m for m in bpy.data.materials if m.name.startswith('cap-matte')), None)
+                if cap:
+                    cn.data.materials.clear(); cn.data.materials.append(cap)
+                got.append('canopy')
     return got
 
 
@@ -124,14 +141,16 @@ def night_set(bpy, spec, mats):
     try:
         if n.get('wall_plain'):
             raise RuntimeError('a plain wall asked for')
-        wall_m = PH.pbr(bpy, 'beige_wall_001', '2k', bump=0.25, name='plaster')
+        wall_m = PH.pbr(bpy, n.get('wall_pbr', 'beige_wall_001'), '2k', bump=0.25, name='plaster',
+                        tint=n.get('wall_tint'), tint_mix=n.get('wall_tint_mix', 0.0))
     except Exception as e:                       # the cache or the network: a plain plaster, said in the log
         print('night_room: plain wall:', e, flush=True)
         wall_m = _principled(bpy, 'plaster', n.get('wall', '#CFC8BC'), 0.88, 0.3)
     try:
         if n.get('floor_plain'):
             raise RuntimeError('a plain floor asked for')
-        floor_m = PH.pbr(bpy, n.get('floor_pbr', 'american_walnut_veneer'), '2k', rough_mul=n.get('floor_rough_mul', 0.9), name='floor')
+        floor_m = PH.pbr(bpy, n.get('floor_pbr', 'american_walnut_veneer'), '2k', rough_mul=n.get('floor_rough_mul', 0.9), name='floor',
+                         tint=n.get('floor_tint'), tint_mix=n.get('floor_tint_mix', 0.0))
     except Exception as e:
         print('night_room: plain floor:', e, flush=True)
         floor_m = _principled(bpy, 'floor', n.get('floor', '#3A3029'), n.get('floor_rough', 0.45))
@@ -196,7 +215,7 @@ def night_set(bpy, spec, mats):
         _box(bpy, f['name'], f['center'], f['size'], _principled(bpy, f['name'], f['color'], f.get('rough', 0.5)))
     for L in n.get('lamps', []):
         got = _append_lamp(bpy, L['blend'], L['offset'], L.get('keep_table', False), L.get('led_up', False),
-                           r['height'] if L.get('cord_to_ceiling') else None)
+                           r['height'] if L.get('cord_to_ceiling') else None, L.get('canopy'))
         print('night_room: lamp', os.path.basename(L['blend']), 'objects:', ', '.join(sorted(got)), flush=True)
 
 

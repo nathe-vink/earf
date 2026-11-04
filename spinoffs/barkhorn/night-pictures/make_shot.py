@@ -21,8 +21,14 @@ BASE = 'renders/2026-11-03/barkhorn/base-question/gate2/A-ice-polished-honest.sh
 # the speaker's centre line between it and the wall, so the brightest wall is seen through the horn and the cabinet;
 # a slim side table to the speaker's left with the Core on it; a rug edge and a sofa arm at the frame's left
 SIDE = (-0.70, -0.10)            # the side table's centre (0.40 square top, 0.62 high: the Core picture's table height)
-HEMI = (0.0, 0.50)               # where the Hemisphere hangs: on the speaker's centre line, 0.28 off the wall
-HEMI_DZ = 0.13                   # its rim 1.45 up, its cord cut to the ceiling: the wash's bright core behind the cabinet
+# gate 2 (the coordinator, 01:47: the centre-line pendant silhouetted the box and read as a dome on the horn): to the
+# camera's side and in front of the speaker's face, so its light rakes the cabinet's front and top; higher, so lit wall
+# separates its rim from the horn
+HEMI = (0.22, -0.48)             # where the Hemisphere hangs: 0.22 to the camera's side, about 0.27 in front of the face
+HEMI_DZ = 0.28                   # its rim 1.60 up (1.32 in its own picture), its cord cut to the ceiling
+# gate 2, point 6: the Hemisphere's mouth is open and its COB sits at the rim, so a camera below the rim sees the bare
+# COB (scene_audit: 106 of 113 points from 0.40 m). The camera stands above the rim, at eye height
+CAM_Z = 1.70
 ROOM = {'x0': -2.6, 'x1': 2.2, 'y_back': 0.78, 'y_front': -6.2, 'height': 2.40}
 # the formats (the coordinator's spec, r46-owner-notes 65ec7c5f: night-picture-spec-2026-11-04.md). The speaker with
 # its lamp inside the box; the text zones dark; light pools inside the speaker's column. The camera level at the
@@ -31,7 +37,7 @@ FORMATS = {
     'wide': {'size': [3840, 2160], 'lens_mm': 35.0, 'box_h': 0.54, 'dz': -0.05},
     'tall': {'size': [1440, 2560], 'lens_mm': 35.0, 'box_h': 0.31, 'dz': -0.02},
 }
-LAMP_TOP = 1.56                  # the Hemisphere's crown with its rim at 1.45: the top of 'the speaker with its lamp'
+LAMP_TOP = 1.72                  # the Hemisphere's crown with its rim at 1.60: the top of 'the speaker with its lamp'
 ROTATE = 10.0                    # the speaker turned toward the camera, off the wall's grazing reflection in its side
 
 
@@ -45,16 +51,17 @@ def _slim_table(cx, cy, top=0.62, w=0.40, t=0.018, leg=0.022, col='#5E5850'):
     return parts
 
 
-def _camera(fmt, az_deg=7.0, cam_z=0.40):
+def _camera(fmt, az_deg=7.0, cam_z=None):
     import math
     F = FORMATS[fmt]; W, H = F['size']
+    cam_z = CAM_Z if cam_z is None else cam_z
     # the engine's sensor is 36 mm across the frame's width (sensor_fit HORIZONTAL)
     sensor_h = 36.0 * H / W
     frame_h = LAMP_TOP / F['box_h']                       # metres the frame spans at the speaker
     d = frame_h * F['lens_mm'] / sensor_h
     zc = LAMP_TOP / 2 - 0.01 + F.get('dz', 0.0)       # a little lower, so speaker and shade sit inside the box
-    # the camera low (0.40 m) and level, the frame raised by lens shift to the speaker-plus-shade's middle: the wall's
-    # foot then sits above the lower text zones, and the cabinet's verticals stay vertical
+    # the camera level at CAM_Z, the frame moved by lens shift to the speaker-plus-shade's middle (gate 1's wide proxy
+    # had it at 0.40 m), so the cabinet's verticals stay vertical
     shift_y = F['lens_mm'] * (zc - cam_z) / d / 36.0
     a = math.radians(az_deg)
     return {'position': [round(d * math.sin(a), 3), round(-d * math.cos(a), 3), cam_z], 'target': [0.0, 0.0, cam_z],
@@ -78,14 +85,18 @@ def shot(root, tint, lamp_dir, fmt='wide', core=False):
     out['set'] = {'kind': 'sweep', 'night': {
         'room': ROOM,
         # gate 1: a neutral room, so Ice is the only colour: an off-white wall and ceiling, a grey oak floor
-        'wall_plain': True, 'wall': '#D6D4CF', 'ceiling': '#E4E2DE',
-        # (the formats: a dark oak, so the pendant's pool falls under the text zones' limit outside the column)
-        'floor_plain': True, 'floor': '#3F3B36', 'floor_rough': 0.6,
+        'ceiling': '#E4E2DE',
+        # gate 2: a real room. Oak planks with a soft sheen (Poly Haven wood_floor, CC0, tinted toward a neutral dark
+        # oak), the wall plaster (beige_wall_001 tinted toward off-white), a dark skirting
+        'floor_pbr': 'wood_floor', 'floor_tint': '#2C2824', 'floor_tint_mix': 0.6, 'floor_rough_mul': 0.55,
+        'wall_pbr': 'beige_wall_001', 'wall_tint': '#D6D4CF', 'wall_tint_mix': 0.6,
         'skirting': {'height': 0.15, 'color': '#2A2826'},
         # ruling 4: a real window in the left wall, out of frame, a sheer curtain in it and the evening sky outside;
         # gate 1: dimmer and near-neutral, so the room is not tinted Ice's blue
-        'opening': {'y0': -2.2, 'y1': -1.0, 'z0': 0.75, 'z1': 2.15, 'sky_color': '#C2C2BF', 'sky_strength': 1.0,
-                    'curtain': True, 'curtain_open': 0.15},
+        # gate 2: the curtain open, a soft cool fill on the speaker's face from the camera's side (a real opening; the
+        # night sky on the lamps' scale: about 30 cd/m2 of blue-hour sky, 0.0065 W a lumen, so about 0.6)
+        'opening': {'y0': -5.6, 'y1': -3.3, 'z0': 0.55, 'z1': 2.20, 'sky_color': '#AEB8C8', 'sky_strength': 0.6,
+                    'curtain': True, 'curtain_open': 0.75},
         # gate 1: a living room. A slim side table (the cube read as a second speaker), a rug's edge, a sofa's arm
         # gate 1: a living room (a slim side table, a rug's edge, a sofa's arm) when the Core is in; the singles'
         # formats keep the speaker's surroundings dark (the text zones), so for them the Core and its table are out
@@ -93,21 +104,27 @@ def shot(root, tint, lamp_dir, fmt='wide', core=False):
             {'name': 'rug', 'center': [-0.35, -0.95, 0.006], 'size': [3.2, 1.9, 0.012], 'color': '#8E8981', 'rough': 0.95},
             {'name': 'sofa-arm', 'center': [-1.62, -1.05, 0.33], 'size': [0.26, 1.0, 0.66], 'color': '#9A958C', 'rough': 0.9},
             {'name': 'sofa-seat', 'center': [-2.05, -1.05, 0.22], 'size': [0.62, 1.0, 0.44], 'color': '#9A958C', 'rough': 0.9}])
-                     if core else [],
+                     if core else [
+            # the singles: a dark charcoal wool rug in front of the speaker, where the pendant's pool lands (an honest
+            # 490 lm downlight 1.6 m up lights a pool about 1.6 m across; on oak it ran into the lower text zones)
+            {'name': 'rug-dark', 'center': [0.15, -1.42, 0.006], 'size': [3.3, 2.44, 0.012], 'color': '#24211E', 'rough': 0.98}],
         'lamps': ([
             # the Core on the side table: the lamps lane's honest Core at 26400e7c, its opal core the emitter (their
             # 'nested' build, Core B; the coordinator, 00:44: a real light, a pool, a halo, a little on the cabinet)
-            {'blend': os.path.join(lamp_dir, 'v4-core-fog-night-nested.blend'), 'offset': [SIDE[0], SIDE[1], 0.0], 'keep_table': False},
+            {'blend': os.path.join(lamp_dir, 'core-fog-night-nested.blend'), 'offset': [SIDE[0], SIDE[1], 0.0], 'keep_table': False},
         ] if core else []) + [
             # the Hemisphere on the speaker's centre line between it and the wall, 0.35 higher than in its own picture so
             # (its rim 1.45 up, its cord cut to reach the ceiling): the wall behind the horn and the cabinet the brightest
-            {'blend': os.path.join(lamp_dir, 'v4-hemi-fog-night.blend'), 'offset': [HEMI[0], HEMI[1], HEMI_DZ], 'keep_table': False,
-             'cord_to_ceiling': True},
+            {'blend': os.path.join(lamp_dir, 'hemi-fog-night.blend'), 'offset': [HEMI[0], HEMI[1], HEMI_DZ], 'keep_table': False,
+             'cord_to_ceiling': True, 'canopy': os.path.join(lamp_dir, 'hemi-canopy.stl')},
         ]}}
     out['render'] = dict(s['render'])
     # gate 1: a gentler view (the medium-high look clipped Ice's red to 0), white balance 4300 K, so the 3300 K lamps read a neutral warm white
-    out['render'].update({'samples': 256, 'view': 'AgX', 'look': 'AgX - Base Contrast', 'exposure': 0.6,
-                          'white_balance_k': 4300, 'white_balance_tint': 0.0,
+    # gate 2: the lamp as the lamps lane's file has it (COB 3.2 W, 2700 K), the brightness from exposure (+2 EV), white
+    # balance 1000 K above the lamp as before (a neutral warm white); the finish's contrast eased (red off 0)
+    out['finish']['contrast'] = 0.05
+    out['render'].update({'samples': 256, 'view': 'AgX', 'look': 'AgX - Base Contrast', 'exposure': 2.6,
+                          'white_balance_k': 3700, 'white_balance_tint': 0.0,
                           # the Core's light reaches the room through its own ball, the Hemisphere's through its liner:
                           # refractive caustic paths, as the lamps lane renders them
                           'caustics_refractive': True})
