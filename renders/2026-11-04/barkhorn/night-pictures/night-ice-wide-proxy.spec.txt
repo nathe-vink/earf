@@ -1,0 +1,7 @@
+box: speaker with its lamp x 0.445-0.559 y 0.252-0.756; the spec's x 0.418-0.582 y 0.2-0.78: INSIDE
+zone lower-left   mean 0.004  p99 0.037  ok
+zone lower-right  mean 0.003  p99 0.013  ok
+zone top-left     mean 0.013  p99 0.031  ok
+zone top-right    mean 0.015  p99 0.031  ok
+floor outside the column (y >= 0.78) p99 0.008; below y 0.88 p99 0.005  ok
+edges (4 %) mean 0.011 p99 0.047  ok
