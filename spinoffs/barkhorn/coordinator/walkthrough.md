@@ -96,6 +96,13 @@ Show one item with its pictures, wait for the answer, save the owner's words ver
   base, against the owner's "No light". Options to show side by side on Dust: (a) the polished edge as built, (b) a satin (sanded)
   bottom-front edge, (c) a dark gasket or foot rail along it; the speaker lane renders them. The side views' pale bottom line and
   perhaps the wide views' white band may be the same edge; one answer would cover them.
+  STATE 01:30: the comparison landed (0606ae05; Dust hero-light and wide Ember sheets). The band is the bottom panel's own polished
+  edge (mirroring the bright floor at grazing angle, plus light carried in the panel), not the floor under it; no lamp; faint on wood
+  or dark floors. (a) as built; (b) satin edge: Dust's red bar gone, the white-floor band stays (one finishing step); (c) a 32 mm dark
+  skirt: clears both, but the cabinet no longer floats on its feet (new part, design call); (d) a dark film: fixes nothing. Gating
+  (wf_f365f69f-fac); (b) re-rendered edge-only and (c) matte before it goes to the owner. Ask it right after item 11 once it passes.
+  My pick, pending the critics: (b), which removes the LED-like color and keeps the floating look; the pale line left on a white
+  floor is an honest reflection.
 - **State changes since 18:09 (the (e) items and others):**
   - Mantle A or C3: C3b night passed 3/3 (17:55) with the C3 day 3/3; the C3d pair passed (night 2/3, day 2/3, 1a958c02); checked
     against rulings 1-3 (clean; one mesh hide removed) and re-rendered from that build as C3e at 41232b56c60d1980a5ee3de0dddd8344ffb85fee
