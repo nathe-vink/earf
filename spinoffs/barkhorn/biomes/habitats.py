@@ -56,8 +56,11 @@ SETS = {
     # with it, 248.3 - (160.5 - 135); framed lower, so the horn's top sits near a third of the frame, not 46 %)
     # (then the sun round to the front side, 70, the disk and sky with it: the upper box 26 -> 38 (at 135) -> 41, the
     # horn-to-box ratio 13.7 -> 4.5, horn and box one violet, 239 / 238 deg)
-    'haze_b': {'product.instances.0.rotate_z': -10.0, 'sun.azimuth_deg': 70.0, 'sun.elevation_deg': 6.0,
-               'sky.rotation_deg': 338.8, 'camera.shift_y': -0.13},
+    # (the engine's azimuth: 0 toward -y, the camera's side; so 70 was front-right but grazing the front face, which sat
+    # in shade (the gate on 620c4bba: a near-black indigo block). 30: on the camera's side, 45 deg off its line, out of
+    # frame behind the photographer, the front face lit so light enters the box; the sky and the disk turned with it)
+    'haze_b': {'product.instances.0.rotate_z': -10.0, 'sun.azimuth_deg': 30.0, 'sun.elevation_deg': 6.0,
+               'sky.rotation_deg': 18.8, 'camera.shift_y': -0.13},
     # Fog (the coordinator's gate on 45a190d1): the clear polished horn refracted the fog bank's top edge into an X.
     # The camera 0.30 m lower (lens rise 0.06 -> 0.18 keeps the framing) puts the whole horn on plain sky, and it is
     # turned 5 deg toward the front (-15 -> -10, not front-on). f/4 for a softer background; the sun's colour cooled
@@ -88,7 +91,7 @@ SETS = {
 DROP = {'dust': ['tumbleweed']}
 # set props changed per habitat, by fn: Haze's visible sun disk (an emitter in the set) moved with the key to the sun
 # lamp's azimuth and elevation, out of frame, so the light in the picture has one source (the coordinator, 17:29)
-MODIFY = {'haze_b': {'sundisk': {'azimuth': 70.0, 'elevation': 6.0}},
+MODIFY = {'haze_b': {'sundisk': {'azimuth': 30.0, 'elevation': 6.0}},
           # Fog (the coordinator's gate on 5c0f8509: the clear cabinet read champagne): the brown boulder right behind it,
           # seen through the clear walls, moved aside, so the bright fog bank sits behind the box
           'fog_b': {'boulder_01': {'position': [2.6, 3.6, -0.12]}}}
