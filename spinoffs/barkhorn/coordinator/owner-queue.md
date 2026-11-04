@@ -4456,3 +4456,17 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   biomes, 5400 K accepted.
 - 01:5x gate launched on the lamps finals (wf_810dab76-43f, a new script: four lenses incl. a photometrist on the near-black rooms;
   the liner choice; the room balance; the cap's notch). Core A night joins the Core B pair for item 89 when it lands.
+- 01:50 biomes lane (stamped 01:51): the Acid habitat already carries the corrections: it re-splits Acid (--split 0.085 0.10 1.00,
+  fd70a7b0) on the cabinet and horn alike (horn 12.7 mm 0.601/0.126/101.8 = the lane's as-poured horn; cabinet 20 mm
+  0.941/0.117/107.4): one yellow, 5-6 degrees apart. The EARF letters don't appear in its front three-quarter frames. The Acid final
+  (sun 35, +0.75 EV, seated 3 mm) uses these.
+- 01:50 c2: RIG COMMIT 15626b642746040fcc9a8f4102381605f7402c75 (_siteB_round2: fill 3.9, key 1.3, sky 0.3, the back frame only);
+  my audits on all six shots clean (no RULING lines; cardcast 0.0 %); rendering six backs (~1.3 h) to A-polished-backrig/; Acid held.
+- 01:51 biomes lane (stamped 01:52): the Haze +1/3 stop folded as a relative lift (exposure -1.0 -> -0.67, 5dbf13e2; an absolute 0.33
+  caught before any render, 92210582 superseded); Acid +0.75 and Poison +1.5 checked as relative. The horn card skipped for now.
+  Queue: the Poison proxy, the Acid final, the Fog final (5400 K), the two Ember proxies, the Haze final.
+- 01:51 c3 (stamped 01:52/01:55): merged a290fdc6 at e77da80494c5d093ba3d6a487b06a807da7e377b before my note arrived; verified the
+  regenerated tall-acid shot JSON is identical to the other six's (empty json diff), models unchanged, only the Acid colours differ.
+  Tall Acid re-render from 01:52 (~9 min). Told 01:52: the merge is fine.
+- 01:51 c4 (stamped 01:56): cherry-picked a290fdc6 alone as 296686659ab793cdc1ee00e02c75f53c18de2a58 (conflicts only on the record
+  field horn_deep_dye, resolved to a290fdc6's side); turn rig unchanged; turn-acid-00..16 re-rendering (~16 min).
