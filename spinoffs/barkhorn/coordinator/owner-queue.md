@@ -4257,3 +4257,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   the product changes. Next: item 11 (Plastimagen). Facts checked first: plastimagen.com.mx gives 10-13 Nov 2026, Centro Banamex,
   12:00-19:00 each day; Plastiglas appears on no exhibitor list I could reach (the official pages don't name it; the Swapcard
   exhibitor app needs a login). The owner wrote "Plastiglas only" on 31 Oct (README row 146). Plain American English to the owner.
+- 01:1x SEVEN HONEST BACKS GATE (wf_dfce1fd6-dc4, 3 critics, 37 min): Fog SHOW 3/3; Dust 2/3 and Ice 2/3 (pass); HOLD Acid 1/3,
+  Ember 0/3, Poison 0/3, Haze 0/3. All grounded, nothing lit at or under a base, horns fixed (unclipped, smooth, no X). Faults: Ember,
+  Poison, Haze dark from behind (back face L* 10/12/8 vs the old Ember 15.7; EARF illegible on a phone); on all seven the lid and
+  left side mirror the cream sweep (chroma 2-8 vs 24-57). The plate's type is 2-3 px (don't caption it as reading TROPOS). Acid's
+  horn 16 degrees warmer than its cabinet (item 15b).
+- 01:15 sent: c2, the honest re-light (more light from outside the frame, a bounce card camera-left, black flags overhead and
+  camera-left; proxy Ember, Poison, Haze to back face L* 15-20 with numbers; then all seven on one rig; rigaudit/cardcast first).
+  Biomes lane: item 5 answered; 0f619953 is the Ice habitat; retire 27911a44.
