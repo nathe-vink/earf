@@ -4234,3 +4234,15 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 01:06 sent: lamps lane (verifying before the owner; its order stands; send the Core A night 56059fe8 for item 89); speaker lane
   (the sheet states the physics plainly, and whether the white sweep exaggerates it; an optional (d) dark underside if one line;
   costs for each).
+- 01:02 site lane: THE WALL CAP HOLDS; MY 01:00 "FAULT" WAS WRONG. I measured the photograph inside the placeholder (today's 2.4:1
+  facade inside the 16:9 master with its own night bands), not the layout's box. Its getBoundingClientRect boxes: 1366x641 1366x577
+  (2.367:1); 1536x730 1536x666 (2.306:1); 844x390 782x326 (2.400:1, 31 px of night each side); 2560x1080 2438x1016 (2.400:1);
+  1440x900 1440x836 (1.722:1). The rule (.lightband .facade picture max-width calc((100svh - header) * 2.4), margin-inline auto,
+  container-type size) covers the desk layout and the <=480 px fallback. Outlined screenshots at feac9e536ce97db82ea5bc901e55aaddf6068dc4
+  (checked: the red box is 2.4:1 at 844x390). No code change. Told 01:07 (my error owned). The gallery's "At night" view takes the
+  new singles in the same swap.
+- 01:04 c3: fix1 TALL CHUNK 1 at e624e13e51812301e0a5641ef4fb5b75488e82f1 (on d649d2cc; 00:19-01:03): site-front-off-tall-ember,
+  -dust, -acid, -poison, -ice (1000x1250, 7.1-9.6 min each). Chunk 2 (haze, fog) started 01:04.
+- 01:07 my audit (rigaudit, cardcast): clean, the tall-ice-honest rig (d9ba82c3): horn 5.2 at specular 1.0, fill 1.0; spec-only
+  panels unlinked; seven reflect-only cards all 0.0 %; five backdrop lamps linked to the sweep only; edge, back, rim, pool off; the
+  five share one rig. Gate wf_b0d46b04-626 launched on all five (the passed tall Ice as context; the bottom edge reported per frame).
