@@ -1195,12 +1195,19 @@ def _clear_resin(nt, b, p, normal_in=None):
         # face turned toward the axis (the inner flare) takes `inner`, one turned away (the outside) `outer`
         sp = p['split']
         tc = node('ShaderNodeTexCoord')
-        sep = node('ShaderNodeSeparateXYZ'); nt.links.new(tc.outputs['Object'], sep.inputs[0])
-        rx = math_('SUBTRACT', sep.outputs['X'], sp.get('axis_x', 0.0)); rz = math_('SUBTRACT', sep.outputs['Z'], sp.get('axis_z', 0.0))
         sn = node('ShaderNodeSeparateXYZ'); nt.links.new(tc.outputs['Normal'], sn.inputs[0])
-        dot = math_('ADD', math_('MULTIPLY', rx, sn.outputs['X']), math_('MULTIPLY', rz, sn.outputs['Z']))
-        side = math_('GREATER_THAN', dot, 0.0)                       # 1 outside, 0 inside
-        rough = math_('ADD', sp.get('inner', 0.05), math_('MULTIPLY', side, sp.get('outer', 0.25) - sp.get('inner', 0.05)))
+        if sp.get('mode') == 'updown':
+            # a panel's broad faces (normal up or down) at `faces`, its edges (normal sideways) at `edges`: a shop's
+            # sanded edge on a polished sheet (barkhorn's bottom panel, 2026-11-04)
+            side = math_('LESS_THAN', math_('ABSOLUTE', sn.outputs['Z']), 0.7)        # 1 on an edge
+            lo_, hi_ = sp.get('faces', 0.05), sp.get('edges', 0.4)
+        else:
+            sep = node('ShaderNodeSeparateXYZ'); nt.links.new(tc.outputs['Object'], sep.inputs[0])
+            rx = math_('SUBTRACT', sep.outputs['X'], sp.get('axis_x', 0.0)); rz = math_('SUBTRACT', sep.outputs['Z'], sp.get('axis_z', 0.0))
+            dot = math_('ADD', math_('MULTIPLY', rx, sn.outputs['X']), math_('MULTIPLY', rz, sn.outputs['Z']))
+            side = math_('GREATER_THAN', dot, 0.0)                   # 1 outside, 0 inside
+            lo_, hi_ = sp.get('inner', 0.05), sp.get('outer', 0.25)
+        rough = math_('ADD', lo_, math_('MULTIPLY', side, hi_ - lo_))
         nt.links.new(rough, I['Roughness'])
     I['Transmission Weight'].default_value = 1.0 - p['milk']
     if p['milk'] > 0:
