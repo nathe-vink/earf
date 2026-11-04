@@ -4441,3 +4441,18 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   lift by a real out-of-frame card (+4-6 L*); full-res checks (the phase-plug glint, creases not an X, posts dark wine, grass over the
   bottom edge, lining not glowing slabs, a small dark nub on the left side face to identify).
 - 01:49 sent to the biomes lane: render the Haze final with those.
+- 01:49 lamps lane: ROUND-14 FINALS (r32-lamps-final; renders/2026-11-03/barkhorn/lamp-pictures/, 1800x1200, 5700 K; audited on
+  26400e7c+): hemi-ice-day (f276bbe9; face L 125, C 0.104, h 242), hemi-ice-night liner (a) cool-white and -blueliner (b, a
+  PROPOSAL) (2fb64db3; faces L 184/178, C 0.064/0.072, h 226/234: (b) 8 degrees from the day hue, (a) 16), core-ice-night-nested
+  (Core B, 768 samples; L 118, C 0.067, h 212); Core B day unchanged since 26400e7c. The cost of the room at 5 %: the night rooms near
+  black (cable, cap tiers, curtain sliver barely read). Core A night (item 89) rendering at 768 samples (proxy L 73, C 0.081, h 223).
+- 01:49 biomes lane: Fog WB pair (3d3513c9): 5400 K is the smallest that brings every cut edge to <= +5 (left +4.6, top -1.4,
+  panels +2.4, block +4.1; sky -7.0, grass +0.7). Chosen 5400. Accepted 01:50.
+- 01:50 c4 (stamped 01:52): stopped before merging a290fdc6: it sits on 20 other speaker-lane commits (model changes to the amp
+  plate's IEC pins and the rating plate; clear_resin's split; shots.py's card rule and +142 lines; ~30 proof renders), so a merge
+  means rebuilding both models and a different turn rig from the 43 Ember and Dust frames.
+- 01:50 sent: c4, cherry-pick a290fdc6 alone (authorized exception to the merge rule; the turn frames show neither the plate nor
+  the pins, and the turn rig has no cards); c3 and c2, check git log HEAD..a290fdc6 and cherry-pick alone if it would bring more;
+  biomes, 5400 K accepted.
+- 01:5x gate launched on the lamps finals (wf_810dab76-43f, a new script: four lenses incl. a photometrist on the near-black rooms;
+  the liner choice; the room balance; the cap's notch). Core A night joins the Core B pair for item 89 when it lands.
