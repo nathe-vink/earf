@@ -4103,3 +4103,17 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 00:40 biomes lane: Fog (c) small. Two proxies of the same shot at white_balance_k 5800 and 5400 (the D65 default before). It takes the
   smallest shift that brings the cut-edge medians to ~+5 b* or below, reports edges, panels, sky and grass for both, then renders the
   final. They run after the Dust and Ember re-renders and the Poison and Haze proxies. (No reply needed.)
+- 00:41 lamps lane (stamped 00:3x): the downward spot lived only in lamp_pictures.py (round 4 on). It CARRIED it:
+  - core-ice-night-frost.png at afee07ad, QUEUED in walkthrough item 89 as the "frosted, as drawn" A night. Its glow is bounce from
+    the base pocket (an underglow in all but name). Round 8's disc light also faced down.
+  - Earlier copies (ab1e48fad, b2b6cd39f, the round-4/5 record) appear in nothing live or queued.
+  Not carried: core-ice-day (no LED by day), and Core B at every round. The site's Core pictures come from the studio engine (no such
+  spot), BUT the lit ones, lamp-orb and lamps-orbs (743be0cb), use stand-in pools (crystal_promo's hidden_point, flagged 20:09) that
+  fail rulings 1-3. The Mantle lane's night_room.py borrows the round-12 emitting curtain.
+- 00:42 sent:
+  - Lamps: re-render Core A's frosted night "as drawn" honestly for item 89 (spot up, B's night rig, the same camera and exposure),
+    then honest replacements for lamp-orb and lamps-orbs; both after the Hemisphere finals and Core B night.
+  - Site: pull lamp-orb and lamps-orbs from the next build, send their formats, and say whether any lit-lamp picture is on the LIVE
+    site; a plain cross-fade in the night section; the night spec soon (the square crop cuts the speaker on common laptops).
+  - Mantle: confirm its curtain doesn't emit; if it does, swap in 26400e7c's.
+- WALKTHROUGH item 89: the A frost night picture pulled and labelled as mislit; an honest A night queued.
