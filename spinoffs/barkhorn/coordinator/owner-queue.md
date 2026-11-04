@@ -4484,3 +4484,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   first, execution steps flagged. To mark skipped: the board's dates card, R6's manufacturing plan line (later, with the board).
   Next: item 10 (the chips, ~$150-200), framed as settling colors (held vs deep at thickness; Acid's fluorescence; the deep horns),
   noting it would be the first request to any shop. The bottom-edge question waits for its fixed sheets.
+- 01:53 biomes lane (stamped 01:54): POISON PROXY (a) at fde6c9cb3e45038c09321441c961751f939fd2ed (proxies-0153/): 733 x 733 cells of
+  0.3 m, 25.0 % open, nine explicit holes cut, opaque, real to every ray, +1.5 EV. Frame mean / floor / box: hidden 57.4/104/26.4;
+  real closed 7.5/8.2/13.0; real 25 % open +1.5 EV 86.5/97.7/50.4. The horn clean green glass, the woofer clear, the lower cabinet
+  deep green; but the upper cabinet's batts read as a tan-cream (khaki) field (the sunfleck through the voile), and the forest
+  reads thinner at +1.5 EV. Acid final rendering from 01:53.
+- 01:54 sent: (a') +0.75 EV with (d) the one explicit hole moved off the top batt; one proxy; numbers and a strip; (c) next if dark.
