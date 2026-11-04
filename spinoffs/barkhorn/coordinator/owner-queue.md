@@ -4213,3 +4213,24 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   says 4 %; at 2.4:1 it is 4.0 %). Sent 01:00: cap the width at 2.4x the capped height, centred; measured boxes at 1366x641,
   1536x730 and 844x390. The gallery's "At night" view: yes, the new singles when they land (the reel frames are item 3's uplit
   pictures).
+- 01:00 lamps lane (read-only audit of the LIVE lit-lamp pictures, main 856f80d7): the live orb-<colour>, dome-<colour>, their cards,
+  lamps-orbs and lamps-domes are pass 4 (48467e25e, 2026-10-29; renders/2026-10-29/barkhorn/lamps-pdp-r41/p4-*.png from
+  r32-lamps-final 5fde7f0dc, lamps_pdp_r41.py), not the corded-era set; one rig for all eight colours. Its verdict: orb (x8, cards):
+  R1, R2, R3, R4 FAIL (a hidden "pool" point light outside the ball at spec 0 and transmission off paints the table; part-linked
+  glints; bgwash at spec 0). lamps-orbs: R1, R3, R4 FAIL (8 pools outside the balls). dome (x8, cards): R1, R2, R4 FAIL (a 120-degree
+  cob for the bore's real 46-degree cut-off; a spill light behind the shade; part-linked glints; the bore's reflector hidden).
+  lamps-domes: R1, R4 FAIL (tinted down-spots and a spill standing in for a switched-off COB). Unchecked by the lane: whether
+  specular 0 and spot cam-off take effect in Cycles; whether the pools are in frame.
+- 01:01 speaker lane: THE HAZE POUR PAIR at 34320f756e1856eca232f40d68fead76b48b542f
+  (renders/2026-11-04/barkhorn/pour-targets/haze-horn-now-vs-two-dye-target.png; targets.json with all four (b) targets): as poured
+  (#4512D0 at 10 mm, ultramarine) against the two-dye target (#7710AA at 10 mm; swatch #600498; OKLCH 0.39/0.200/305, violet), on the
+  close-up rig held for the X and the plug (colour only). My check: only the horn differs (the cabinet patch (100,80,184) both).
+  THE BOTTOM EDGE: (a) and (b) rendered; (b) softens Dust's hot red edge bar to an orange band, but the wide Ember white band is
+  unchanged, so it is the floor UNDER the cabinet lit through the clear bottom panel, seen through the feet's 12 mm gap; (c) was
+  invalid (set flags are camera-invisible by default); the rail becomes a 32 mm skirt to the floor, re-rendering (~8 min).
+- 01:0x gates launched: the Haze pour pair (wf_938a7cba-115, the honest Haze back as context); and a verification workflow on the
+  lamps audit (wf_c283c264-343: provenance sweep incl. room scenes and a live-vs-main byte check, rig audit with my tools, Cycles
+  semantics of each setting, a skeptic, a completeness critic, a synthesis with the owner paragraph).
+- 01:06 sent: lamps lane (verifying before the owner; its order stands; send the Core A night 56059fe8 for item 89); speaker lane
+  (the sheet states the physics plainly, and whether the white sweep exaggerates it; an optional (d) dark underside if one line;
+  costs for each).
