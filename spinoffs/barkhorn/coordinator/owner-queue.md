@@ -4479,3 +4479,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   lower third of each right side mirrors the lit floor below the black card's reach (extend or lower that card out of frame); (2)
   Fog's lid edge one continuous dark line (extend the off-frame card); (3) Fog's bottom edge (a low black card behind at floor
   level, out of frame). To the speaker lane with the bottom-edge outcome.
+- 01:53 OWNER: "C skip for now I want to nail the concept first and then execute" (walkthrough item 11, Plastimagen). Saved
+  verbatim first (README 9b91174f). No trip, no call, no Plastiglas outreach now. The principle frames the rest: concept questions
+  first, execution steps flagged. To mark skipped: the board's dates card, R6's manufacturing plan line (later, with the board).
+  Next: item 10 (the chips, ~$150-200), framed as settling colors (held vs deep at thickness; Acid's fluorescence; the deep horns),
+  noting it would be the first request to any shop. The bottom-edge question waits for its fixed sheets.
