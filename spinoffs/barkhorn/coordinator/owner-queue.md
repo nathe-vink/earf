@@ -3890,3 +3890,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   own gate passed all four. The A/B isn't card-only (the sun, sky and framing all changed); the card effect alone was a mean 1.6 at
   21:26. Next: the Acid sun-35 proxy, then the Ice, Dust and Ember re-renders.
 - 00:02 Haze gate launched (wf_f0437845-fd3), with the horn-to-box question put to the critics.
+- 00:0x FOG GATE (wf_b69d81f5-6c8, 3 critics, ~19 min): HOLD 2/3 (1 SHOW).
+  - Passes see-through, grounded, no light at the base, and a smooth, polished, neutral horn with no X.
+  - Fails the clear brief: the horn is neutral (b* ~+2.7) but the cabinet is warm in the same light (edges ~+10, panels under the top
+    batt khaki +21, the bottom block's edge gold +20, upper cabinet mean +8.2), so it reads champagne-tinted next to Ice.
+  - Also two white specks in the grass (one by the base's corner) and a single diagonal crease in the horn.
+  My 23:45 call to leave the ivory as physics was wrong.
+- 00:03 sent to the biomes lane: check Fog's material body colour for yellow. If it's neutral, fix the warmth with real light (a less
+  warm sun, a neutral fill from the left, or the fog moved behind the cabinet). Move the specks, soften the crease, and send the
+  before and after b*. Order: after Ice, before the others.
