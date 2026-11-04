@@ -4252,3 +4252,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   level 27.8 -> 25.4. Past noise for both, so both come back through my critics. Its own gate passed both on all four. Now running:
   the Poison proxy (real canopy), the Haze proxy (sun 30), two Fog white-balance proxies, the Fog final, the Acid final.
 - 01:1x gate wf_3f87fbc7-41d launched on Dust and Ember (the old frames, the A/B and the side-face crop as context).
+- 01:13 OWNER: "Yes it looks right" (walkthrough item 5, the Ice batt, re-shown 00:44 with the honest Ice habitat). Saved verbatim
+  first (README 965f66af). Ice keeps its bottom batt; the honest Ice habitat (0f619953) is the Ice habitat from now on; nothing in
+  the product changes. Next: item 11 (Plastimagen). Facts checked first: plastimagen.com.mx gives 10-13 Nov 2026, Centro Banamex,
+  12:00-19:00 each day; Plastiglas appears on no exhibitor list I could reach (the official pages don't name it; the Swapcard
+  exhibitor app needs a login). The owner wrote "Plastiglas only" on 31 Oct (README row 146). Plain American English to the owner.
