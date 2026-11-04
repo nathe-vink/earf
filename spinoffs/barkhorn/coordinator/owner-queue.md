@@ -4096,5 +4096,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   ~+5 b* or below while the sky and grass keep their dawn; report their b* before and after; render the final, check the speck.
 - 00:4x ARC PROOF GATE (wf_ac7e99ff-38f, resumed): 00 and 08 SHOW 3/3. 04 HOLD 3/3: its right side face, edge-on, mirrors the white
   sweep (a 7 px full-height strip), and the handle recess floats as a chip.
-- 00:41 sent to the speaker lane: real flags out of frame, or square 04 to the front, then re-proof 03-05. The arc stays held for the
+- 00:40 sent to the speaker lane: real flags out of frame, or square 04 to the front, then re-proof 03-05. The arc stays held for the
   bottom-edge answer; this goes after the close-up re-light.
+  (Time fix: my arc message to the speaker lane was stamped "00:41" but sent at about 00:40:15, before a 00:40:26 `date -u`. My error
+  again. The correction rides on my next message to that lane.)
