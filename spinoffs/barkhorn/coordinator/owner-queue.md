@@ -4362,3 +4362,13 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   long paths within 10); re-check Dust, Acid and Ice targets the same way; a cabinet-face strip in each half; on the re-lit close-up
   rig, full scale, >=128 samples; after the bottom-edge (b)/(c) re-renders. Walkthrough 15b updated (my pick to revisit).
 - 01:32 check-in #55 armed: trig_011QFiwyaZZTNV29zkPRhJov, fires 02:23 (send_later, this session), with the current state.
+- 01:3x P2-BACKFIX GATE (wf_76840142-555, resumed; 3 critics): amp-plate-ember SHOW 3/3 (the plate reads TROPOS / MODEL TR-1 /
+  S/N TR1-26-000127 / DESIGNED IN SAN FRANCISCO, CALIFORNIA; nothing glows but the FA122's P1 LED; fixes for later: the IEC earth
+  blade turned 90 degrees, a pink soft-box reflection top-left; send plate-crop.png with the wording question). horn-back-acid HOLD
+  2/3: the cabinet moved to #CDC509 (hue ~103) but the horn stayed #B88E00 (flare 83-89, pod brown 71-77 at L 10) and the EARF
+  letters at 77; ΔE ~5 -> ~17; not a depth effect (the cabinet's own deepest edge only reaches ~93).
+- 01:38 sent to the speaker lane: where the #CDC509 change lives and which Acid frames carry old or new; re-derive Acid's horn
+  (one dye, from the corrected cabinet at the horn's depth; flare ~95-103, pod ~90-95 at L 20-30) and the EARF letters; fold Acid
+  into the four-target re-check; SHA for c2's re-render.
+- WALKTHROUGH: the amplifier picture (amp-plate-ember, passed 3/3) is ready for the rating-plate wording question (with item 14's
+  back pictures), with plate-crop.png.

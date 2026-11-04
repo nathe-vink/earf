@@ -85,7 +85,9 @@ Show one item with its pictures, wait for the answer, save the owner's words ver
 - **Item 14's amplifier picture (00:58):** c2's backfix (488fbec9) dropped the hidden `glow` lamp (specular 0, transmission off)
   from amp-plate-ember and horn-back-acid; my audit is clean (no flags, no cards; two backdrop-only lamps). The plate now reads
   "TROPOS · HORN LOUDSPEAKER, ACTIVE / MODEL TR-1 S/N TR1-26-000127 / DESIGNED IN SAN FRANCISCO, CALIFORNIA" (the proposal, for
-  the owner to confirm). Gate wf_76840142-555 in flight.
+  the owner to confirm). Gate wf_76840142-555: amp-plate-ember SHOW 3/3 (ready; show it with
+  scratchpad/gate-p2back/plate-crop.png; fixes after the wording answer: the IEC earth blade, a top-left reflection);
+  horn-back-acid HOLD 2/3 (the horn not re-matched to the corrected #CDC509 cabinet; sent to the speaker lane 01:38).
 - **For item 89 (Core's ball), found 20:44:** ask the owner for a daylight photo of today's Core ball beside a 2069 chip. It calibrates
   Ice's thin-wall hue: the model, fitted to the chart, reads cyan-aqua (OKLCH ~225) through Core B's 6 mm shell, and reaches the
   chip's azure only at about 2.5 chips of path. Core B's core is now proposed in 3 mm white opal (like Hemisphere's liner) instead of
