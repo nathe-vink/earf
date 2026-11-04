@@ -4246,3 +4246,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 01:07 my audit (rigaudit, cardcast): clean, the tall-ice-honest rig (d9ba82c3): horn 5.2 at specular 1.0, fill 1.0; spec-only
   panels unlinked; seven reflect-only cards all 0.0 %; five backdrop lamps linked to the sweep only; edge, back, rim, pool off; the
   five share one rig. Gate wf_b0d46b04-626 launched on all five (the passed tall Ice as context; the bottom edge reported per frame).
+- 01:09 biomes lane: DUST AND EMBER RE-RENDERED with real cards out of frame at 26493989e2b8f08fb2c359557034fc76ab234753 (replacing
+  0a356de1 and 45225a29; renders/2026-11-03/barkhorn/habitats/). A/B (speaker): Dust mean 4.6, p95 33, the largest block 64.3 on the
+  left side face (it mirrored the old black card; now sky, paler orange), level 98.0 -> 100.2; Ember mean 4.9, p95 14, block 16.0,
+  level 27.8 -> 25.4. Past noise for both, so both come back through my critics. Its own gate passed both on all four. Now running:
+  the Poison proxy (real canopy), the Haze proxy (sun 30), two Fog white-balance proxies, the Fog final, the Acid final.
+- 01:1x gate wf_3f87fbc7-41d launched on Dust and Ember (the old frames, the A/B and the side-face crop as context).
