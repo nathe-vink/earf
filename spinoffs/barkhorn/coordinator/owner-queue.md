@@ -4284,3 +4284,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   opened by fractal noise at the shot's 1.2 m gap size, the shot's nine holes kept, the cells deleted from the mesh, the material
   fully opaque; camera +1.5 EV. Also c457af2c: Ice 0f619953 approved (item 5), 27911a44 retired.
 - 01:18 gate wf_a47fb81b-ba2 on the Haze proxy (the earlier hold's three faults named). Sent: hold the Haze final for the verdict.
+- 01:2x CONTAINER RESTART stopped six workflows: the p2back gate (wf_76840142-555, 2 critics cached), the Haze pour gate
+  (wf_938a7cba-115, 2 cached), the lamp-audit verification (wf_c283c264-343, none cached), the c3 tall gate (wf_b0d46b04-626, 1
+  cached), the Dust/Ember habitat gate (wf_3f87fbc7-41d, none), the Haze proxy gate (wf_a47fb81b-ba2, none). The scratchpad and the
+  clone survived. All six resumed from their journals with identical args.
