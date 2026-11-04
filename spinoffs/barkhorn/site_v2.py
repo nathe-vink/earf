@@ -287,48 +287,62 @@ def light(p):
     p.sub('<p class="num" id="light-num">Tropos 01</p>', '<p class="num" id="light-num" hidden>Tropos 01</p>')
     p.sub('const N = pics.length, OFF = reduce ? 0 : 160, ON = reduce ? 150 : 560;', 'const N = pics.length, OFF = 0, ON = reduce ? 150 : 600;')
     # snap points, one per color, then the eight
-    snaps = ''.join(f'<i class="snap" style="--s:{i}" aria-hidden="true"></i>' for i in range(8))
+    snaps = ''.join(f'<i class="snap" style="--s:{i}" aria-hidden="true"></i>' for i in range(len(NIGHT_KEYS)))
     p.sub('<div class="light-run" id="light-run">', '<div class="light-run" id="light-run">' + snaps)
     p.sub('<figure class="facade">', '<figure class="facade" id="eight"><i class="snap-eight" aria-hidden="true"></i>')
     # the static version's names and lines
     p.rest = p.rest.replace('</figure>\n  </section>', '</figure>\n__LIGHT_LIST__\n  </section>', 1) if '__LIGHT_LIST__' not in p.rest else p.rest
     p.css("""
-/* round 48 (V2): the light stage, one frame */
+/* round 48 (V2): the night stage, to the night spec (r46-owner-notes 65ec7c5f, SITE LANE): seven colors, two
+   art-directed frames each chosen by shape (PORTRAIT = max-width 860px and max-aspect-ratio 4/5), capped at 2.4:1 */
 html { scroll-snap-type: y proximity; scroll-padding-top: var(--header) }
 /* a plain cross-fade between colors (the coordinator, 2026-11-04): no dip to dark, which read as a light switching */
 .light-pic img, .light-pic img.on, .light-pic.wake img.on { transition: opacity .6s ease }
-.lightband { padding: 0 }
+.lightband { padding: 0; background: #13110F }
 .light-head { display: none !important } .anchor { display: block; height: 0 }
-.light-run { height: calc(100svh - var(--header) + 8 * 20svh) }
+.light-run { height: calc(100svh - var(--header) + 7 * 20svh) }
 .light-run .snap { position: absolute; left: 0; width: 1px; height: 1px; top: calc(var(--s) * 20svh + 10svh); scroll-snap-align: start }
-.light-stage { display: block; position: sticky }
+.light-stage { display: block; position: sticky; background: #13110F }
 .light-glow { display: none }
-.light-pic { position: absolute; inset: 0; -webkit-mask-image: none !important; mask-image: none !important; height: 100% !important }
-.light-pic img { object-fit: cover; object-position: 50% 62% }
+.light-pic { position: absolute; inset: 0 max(0px, calc((100% - (100svh - var(--header)) * 2.4) / 2)); width: auto; overflow: hidden;
+  -webkit-mask-image: none !important; mask-image: none !important; height: 100% !important }
+.light-pic picture { display: contents }
+.light-pic img { object-fit: cover; object-position: 50% 50% }
 .light-text { position: absolute; inset: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto minmax(0, 1fr) auto;
-  padding: clamp(20px, 4vh, 40px) max(16px, calc((100vw - 1240px) / 2 + 16px)); gap: 0 24px; pointer-events: none;
-  background: linear-gradient(to top, rgb(19 17 15 / .55), transparent 34%) }
+  padding: clamp(20px, 4vh, 40px) max(16px, env(safe-area-inset-right, 0px), calc((100vw - 1240px) / 2 + 16px)) clamp(20px, 4vh, 40px)
+    max(16px, env(safe-area-inset-left, 0px), calc((100vw - 1240px) / 2 + 16px)); gap: 0 24px; pointer-events: none; background: none }
 .light-intro { grid-column: 1 / -1; grid-row: 1 } .light-kicker { margin: 0; font-size: 18px; font-weight: 500; color: #ECE8E1 }
 .light-colour { grid-column: 1 / -1; grid-row: 3; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 0 24px; pointer-events: auto }
 .light-name { grid-column: 1; font-size: clamp(40px, 4.6vw, 64px) }
 .light-line { grid-column: 1; min-height: 0; color: #CFCBC4 }
-.light-coins { grid-column: 2; grid-row: 1 / span 2; align-self: end; margin: 0 }
-.lightband .facade { opacity: 1 !important; height: calc(100svh - var(--header)); position: relative; -webkit-mask-image: none !important; mask-image: none !important }
-.lightband .facade picture { display: block; width: 100%; height: 100% }
-.lightband .facade img { width: 100%; height: 100%; object-fit: contain; border-radius: 0 }
+/* desk: no full-width scrim; a soft shadow behind the words and the coins only, the middle of the frame untouched */
+.light-name, .light-line, .light-kicker, .light-intro .render { text-shadow: 0 0 28px rgb(19 17 15 / .6), 0 0 10px rgb(19 17 15 / .5) }
+.light-coins { grid-column: 2; grid-row: 1 / span 2; align-self: end; margin: 0; border-radius: 40px;
+  background: radial-gradient(closest-side, rgb(19 17 15 / .55), rgb(19 17 15 / 0)); padding: 6px 10px }
+.lightband .facade { opacity: 1 !important; height: calc(100svh - var(--header)); position: relative; background: #13110F;
+  -webkit-mask-image: none !important; mask-image: none !important }
+.lightband .facade picture { display: block; width: 100%; height: 100%; max-width: calc((100svh - var(--header)) * 2.4); margin-inline: auto; container-type: size }
+.lightband .facade img { width: 100%; height: 100%; object-fit: contain; object-position: 50% 50%; border-radius: 0 }
+@container (min-aspect-ratio: 17/10) { .lightband .facade img { object-fit: cover } }
+.eight-render { right: max(16px, env(safe-area-inset-right, 0px), calc((100vw - 1240px) / 2 + 16px)) !important }
 .snap-eight { position: absolute; top: 0; scroll-snap-align: start }
-.light-list { display: none; list-style: none; margin: 0; padding: 32px max(16px, calc((100vw - 1240px) / 2 + 16px)) 72px;
+.light-list { display: none; list-style: none; margin: 0;
+  padding: 32px max(16px, env(safe-area-inset-right, 0px), calc((100vw - 1240px) / 2 + 16px)) 72px max(16px, env(safe-area-inset-left, 0px), calc((100vw - 1240px) / 2 + 16px));
   grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px 24px; color: #ECE8E1 }
 .light-list b { display: block; font-size: 20px } .light-list span { color: #A39E95; font-size: 15px }
-@media (max-width: 860px) {
-  .light-colour { grid-template-columns: minmax(0, 1fr) }
-  .light-coins { grid-column: 1; grid-row: auto; margin-top: 14px; justify-content: space-between }
+@media (max-width: 860px) { .light-list { grid-template-columns: repeat(2, minmax(0, 1fr)) } }
+@media (max-width: 860px) and (max-aspect-ratio: 4/5) {
+  .light-colour { grid-template-columns: minmax(0, 1fr); margin: 0 calc(-1 * max(16px, env(safe-area-inset-left, 0px))) calc(-1 * clamp(20px, 4vh, 40px));
+    padding: 28px max(16px, env(safe-area-inset-left, 0px)) clamp(20px, 4vh, 40px);
+    background: linear-gradient(to top, rgb(19 17 15 / .82) 55%, rgb(19 17 15 / .45) 85%, rgb(19 17 15 / 0)) }
+  .light-coins { grid-column: 1; grid-row: auto; margin-top: 14px; justify-content: space-between; background: none; padding: 0 }
+  .light-coins .ring { translate: calc(var(--at, 0) * (100vw - 32px - 44px) / 6) 0 }
   .light-name { font-size: 40px }
-  .light-pic img { object-position: 50% 60% }
-  .light-list { grid-template-columns: repeat(2, minmax(0, 1fr)) }
-  .light-text { background: linear-gradient(to top, rgb(19 17 15 / .8), rgb(19 17 15 / .35) 30%, transparent 46%) }
-  .lightband .facade img { object-fit: cover }
+  @container (min-aspect-ratio: 53/100) and (max-aspect-ratio: 81/100) { .lightband .facade img { object-fit: cover } }
 }
+@media (max-width: 860px) and (min-aspect-ratio: 801/1000) {
+  .light-coins { margin: 0; gap: 4px; justify-content: flex-start } .light-coins .ring { translate: calc(var(--at, 0) * 48px) 0 } }
+@media (max-height: 480px) { .light-run { display: none } .light-list { display: grid } }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-snap-type: none }
   .light-run { display: none }
@@ -338,9 +352,98 @@ html { scroll-snap-type: y proximity; scroll-padding-top: var(--header) }
 """)
 
 
+NIGHT_KEYS = ['red', 'orange', 'amber', 'green', 'blue', 'violet', 'ice']   # Smoke held until its sheet is decided
+NIGHT_SRC = None        # {key: (wide 16:9 3840x2160 png, tall 9:16 1440x2560 png), 'wall': (wide, tall)}: the new night renders
+PORTRAIT = '(max-width: 860px) and (max-aspect-ratio: 4/5)'
+WIDE_W, TALL_W, WALL_WIDE_W = (1920, 2880, 3840), (1080, 1440), (1920, 3840)
+
+
+def night_frames(web):
+    """The night frames as the site serves them (img/v2/night-*.webp), from NIGHT_SRC, or until those pass the critics
+    from placeholders: today's frames placed on the night ground in the spec's boxes (wide: the speaker in x 0.418-0.582,
+    y 0.20-0.78; tall: x 0.35-0.65, y 0.25-0.59; the wall in x 0.04-0.96, y 0.16-0.80 and x 0.05-0.95, y 0.17-0.78), each
+    marked PLACEHOLDER. Returns {key: (wide srcset, wide default, tall srcset)}."""
+    import os
+    from PIL import Image, ImageDraw
+    out = os.path.join(web.IMG, 'v2')
+    os.makedirs(out, exist_ok=True)
+    ground = (19, 17, 15)
+
+    def place(src, W, H, box, part):
+        """src scaled so its subject (the fraction `part` of it: x0, y0, x1, y1) fills the box's height, centred in it."""
+        im = Image.open(src).convert('RGB')
+        sx0, sy0, sx1, sy1 = part
+        bx0, by0, bx1, by1 = box
+        s = (by1 - by0) * H / ((sy1 - sy0) * im.height)
+        if (sx1 - sx0) * im.width * s > (bx1 - bx0) * W:
+            s = (bx1 - bx0) * W / ((sx1 - sx0) * im.width)
+        im = im.resize((round(im.width * s), round(im.height * s)), Image.LANCZOS)
+        cx = (bx0 + bx1) / 2 * W - (sx0 + sx1) / 2 * im.width
+        cy = (by0 + by1) / 2 * H - (sy0 + sy1) / 2 * im.height
+        can = Image.new('RGB', (W, H), ground)
+        can.paste(im, (round(cx), round(cy)))
+        d = ImageDraw.Draw(can)
+        d.text((W * 0.5 - 60, H * 0.05), 'PLACEHOLDER', fill=(120, 116, 110))
+        return can
+
+    def save(im, name, widths):
+        made = []
+        for wd in widths:
+            f = f'{name}-{wd}.webp'
+            if not os.path.exists(os.path.join(out, f)):
+                im.resize((wd, round(im.height * wd / im.width)), Image.LANCZOS).save(os.path.join(out, f), 'WEBP', quality=78, method=4)
+            made.append((f'img/v2/{f}', wd))
+        return made
+
+    frames = {}
+    for k in NIGHT_KEYS + ['wall']:
+        name = f'night-{k}'
+        if NIGHT_SRC and k in NIGHT_SRC:
+            wide, tall = (Image.open(os.path.join(web.ROOT, s)).convert('RGB') for s in NIGHT_SRC[k])
+        elif k == 'wall':
+            wide = place(os.path.join(web.IMG, 'facade.jpg'), 3840, 2160, (0.04, 0.16, 0.96, 0.80), (0.02, 0.30, 0.98, 0.80))
+            tall = place(os.path.join(web.IMG, 'facade-portrait.jpg'), 1440, 2560, (0.05, 0.17, 0.95, 0.78), (0.0, 0.10, 1.0, 0.95))
+        else:
+            src = os.path.join(web.IMG, f'{k}-reel.jpg')
+            wide = place(src, 3840, 2160, (0.418, 0.20, 0.582, 0.78), (0.38, 0.35, 0.62, 0.82))
+            tall = place(src, 1440, 2560, (0.35, 0.25, 0.65, 0.59), (0.38, 0.35, 0.62, 0.82))
+        ws = save(wide, name + '-wide', WALL_WIDE_W if k == 'wall' else WIDE_W)
+        ts = save(tall, name + '-tall', TALL_W)
+        frames[k] = (', '.join(f'{u} {wd}w' for u, wd in ws), ws[0][0], ', '.join(f'{u} {wd}w' for u, wd in ts))
+    return frames
+
+
+def night(p, web):
+    """The night stage and the wall to the spec: seven colors, each a <picture> whose tall source is chosen by shape;
+    Smoke's frame and coin left out until its sheet is decided; 'seven' wherever the words counted eight."""
+    f = night_frames(web)
+    names = {k: name for k, num, name, *_ in web.CLOUDS}
+    pics = ''.join(
+        f'<picture><source media="{PORTRAIT}" data-srcset="{f[k][2]}" sizes="100vw">'
+        f'<img data-src="{f[k][1]}" data-srcset="{f[k][0]}" sizes="max(100vw, calc((100vh - 64px) * 1.78))" width="3840" height="2160"'
+        f' alt="{names[k]} at night, lit by the room"{" class=on" if i == 0 else ""} decoding="async"></picture>'
+        for i, k in enumerate(NIGHT_KEYS))
+    m = re.search(r'(<figure class="light-pic">).*?(</figure>)', p.rest, re.S)
+    assert m, 'site_v2: the stage\'s figure'
+    p.rest = p.rest[:m.start()] + m.group(1) + pics + m.group(2) + p.rest[m.end():]
+    # Smoke's coin out; the group counts seven
+    m = re.search(r'<button type="button" role="radio"[^>]*aria-label="Smoke"[^>]*>.*?</button>', p.rest, re.S)
+    assert m, 'site_v2: Smoke\'s coin'
+    p.rest = p.rest[:m.start()] + p.rest[m.end():]
+    p.sub('<div class="light-coins" role="radiogroup" aria-label="The eight colors">', '<div class="light-coins" role="radiogroup" aria-label="The seven colors">')
+    # the wall
+    m = re.search(r'(<figure class="facade" id="eight">.*?)<picture>.*?</picture>(</figure>)', p.rest, re.S)
+    assert m, 'site_v2: the wall'
+    wall = (f'<picture><source media="{PORTRAIT}" srcset="{f["wall"][2]}" sizes="100vw">'
+            f'<img src="{f["wall"][1]}" srcset="{f["wall"][0]}" sizes="100vw" width="3840" height="2160" loading="lazy"'
+            ' alt="A concrete wall by a river at night, seven speakers along its foot, lit by the room"></picture>')
+    p.rest = p.rest[:m.start()] + m.group(1) + wall + m.group(2) + p.rest[m.end():]
+
+
 def light_list(p, web):
-    items = ''.join(f'<li><b><i class="tok t-{k}" aria-hidden="true"></i>{name}</b><span>{line}</span></li>' for k, num, name, icon, acr, line, *_ in web.CLOUDS)
-    p.sub('__LIGHT_LIST__', f'<ul class="light-list" aria-label="The eight colors">{items}</ul>')
+    items = ''.join(f'<li><b><i class="tok t-{k}" aria-hidden="true"></i>{name}</b><span>{line}</span></li>'
+                    for k, num, name, icon, acr, line, *_ in web.CLOUDS if k in NIGHT_KEYS)
+    p.sub('__LIGHT_LIST__', f'<ul class="light-list" aria-label="The seven colors">{items}</ul>')
     p.rest += '\n<noscript><style>.light-run { display: none } .light-list { display: grid !important }</style></noscript>'
 
 
@@ -507,7 +610,9 @@ def lighten(p, web):
     home = re.sub(r'img/(?!hero)[\w-]+\.jpg', twin, home)
     p.rest = p.rest[:a] + home + p.rest[b:]
     p.sub("const show_ = img => { if (img.dataset.src) { img.src = img.dataset.src; delete img.dataset.src; } };",
-          "const show_ = img => { if (img.dataset.srcset) { img.srcset = img.dataset.srcset; delete img.dataset.srcset; } "
+          "const show_ = img => { const pc = img.parentElement; if (pc && pc.tagName === 'PICTURE') pc.querySelectorAll('source[data-srcset]')"
+          ".forEach(s => { s.srcset = s.dataset.srcset; delete s.dataset.srcset; }); "
+          "if (img.dataset.srcset) { img.srcset = img.dataset.srcset; delete img.dataset.srcset; } "
           "if (img.dataset.src) { img.src = img.dataset.src; delete img.dataset.src; } };")
     # the coins' sprite is not needed where the tokens draw them; the lines' tiles wait until they are near
     p.sub('<div class="lines"><a class="tile" href="#speakers"><img src=', '<div class="lines"><a class="tile" href="#speakers"><img decoding="async" src=')
@@ -640,6 +745,7 @@ def apply(web, head, rest):
         hero(p)
         light(p)
         light_list(p, web)
+        night(p, web)
         sound(p, web)
         habitats(p, web)
         paths(p, web)
