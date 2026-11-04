@@ -3,6 +3,7 @@ through the box) and one horn sheet (12.7 mm), from the Strata asset's own absor
 
     python3.11 spinoffs/barkhorn/biomes/horn_hue.py
 """
+import bpy, math
 bpy.ops.wm.open_mainfile(filepath='spinoffs/barkhorn/biomes/assets/hornA3/tropos-strata.blend')
 def oklch(rgb_lin):
     r,g,b=rgb_lin
