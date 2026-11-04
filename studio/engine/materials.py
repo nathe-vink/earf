@@ -222,7 +222,7 @@ PRESET_DEFAULTS = {
     # inks (a hydrographic film, or tinted resin laid in the mould), `print_strength` of the way from clear to the
     # pattern's colours, `print_scale` its size (> 1 smaller); a stone or a marble too (round 11), its settings changed by
     # `print_params`
-    'clear_resin': dict(color='#FFFFFF', deep='#9A9C96', radius=0.01, roughness=0.16, ior=1.5, milk=0.0, cloud=0.0,
+    'clear_resin': dict(color='#FFFFFF', deep='#9A9C96', radius=0.01, roughness=0.16, ior=1.5, milk=0.0, cloud=0.0, split=None,
                         cloud_m=0.07, vein=None, cloud_edge=(0.42, 0.85), print=None, print_strength=0.7, print_scale=1.0),
     # terrazzo, opaque (round 6, a stone look): chips about `chip` across in a `share` of the cells, each its colour from
     # the palette, in a ground of `color`, honed satin (cast resin, Jesmonite or pressed recycled plastic chips)
