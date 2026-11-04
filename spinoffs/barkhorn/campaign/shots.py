@@ -412,6 +412,8 @@ def strata_lit(s, glow=None, horn='smooth'):
         mats.update({k: {'glow': (v if night else 0.0)} for k, v in D_GLOW.items()})
     if ROLLOUT['horn'] == 'polished':                  # the waveguide's outside as formed, not bead-blasted (asset/README.md)
         mats['horn-satin'] = {**mats.get('horn-satin', {}), 'roughness': 0.05}
+    else:   # satin, said outright: since the owner's 15:14 call the product files carry 0.05, so satin no longer falls back
+        mats['horn-satin'] = {**mats.get('horn-satin', {}), 'roughness': 0.25}
     return s
 
 
