@@ -64,7 +64,12 @@ SETS = {
     # (#FEEA98 -> #FFFFFF, neutral), a photographer's white balance: the cut edges read ivory (b* 22 -> 17 at #FFF1D6)
     # (rotate_z 10 left it 20 deg off the camera's line: the left side face, with the white batt behind clear acrylic, read
     # as a flat cream sheet (the gate on the real-card Fog). -5: 5 deg off, as Haze and Ice)
-    'fog_b': {'product.instances.0.rotate_z': -5.0, 'sun.azimuth_deg': 110.0, 'sun.color': '#FFFFFF', 'camera.position': [-1.0072, -5.7119, 0.85], 'camera.shift_y': 0.18,
+    # (and a modest neutral fill from camera-left, a real panel out of frame, specular 1, unlinked: the warm dawn and the
+    # golden grass were the only light on the white batts, so the clear cabinet read champagne)
+    'fog_b': {'lights.fill_l': {'type': 'area', 'size_m': [2.0, 2.0], 'target': [0.0, 0.0, 0.8], 'irradiance': 1.0,
+                                'color': '#F2F4F8', 'orbit': {'azimuth_deg': -55, 'elevation_deg': 15, 'distance_m': 3.5},
+                                'specular': 1.0},
+              'product.instances.0.rotate_z': -5.0, 'sun.azimuth_deg': 110.0, 'sun.color': '#FFFFFF', 'camera.position': [-1.0072, -5.7119, 0.85], 'camera.shift_y': 0.18,
               'camera.fstop': 4.0},
     # Poison under the canopy: light through a canopy gap from the camera side and above (the opaque lining batts block
     # any light from behind: a sunfleck from the back-left left the cabinet at L 2)
@@ -83,7 +88,10 @@ SETS = {
 DROP = {'dust': ['tumbleweed']}
 # set props changed per habitat, by fn: Haze's visible sun disk (an emitter in the set) moved with the key to the sun
 # lamp's azimuth and elevation, out of frame, so the light in the picture has one source (the coordinator, 17:29)
-MODIFY = {'haze_b': {'sundisk': {'azimuth': 70.0, 'elevation': 6.0}}}
+MODIFY = {'haze_b': {'sundisk': {'azimuth': 70.0, 'elevation': 6.0}},
+          # Fog (the coordinator's gate on 5c0f8509: the clear cabinet read champagne): the brown boulder right behind it,
+          # seen through the clear walls, moved aside, so the bright fog bank sits behind the box
+          'fog_b': {'boulder_01': {'position': [2.6, 3.6, -0.12]}}}
 # the black flag behind the camera, per habitat (m; default 8 x 6): Haze's front mirrored it as a dead black upper half
 FLAG = {'haze_b': (4.0, 3.0)}
 # feet bedding per habitat (m; default 0.012, the cabinet on the ground). Acid stands in a puddle: at 12 mm its bottom sat
@@ -114,7 +122,7 @@ def main():
         out = os.path.join(a.out, f'{n}-{a.frame}.png')
         if n in DROP or n in MODIFY:
             sh = json.load(open(shot))
-            sh['set']['props'] = [dict(p, **MODIFY.get(n, {}).get(p.get('fn'), {})) for p in sh['set']['props']
+            sh['set']['props'] = [dict(p, **MODIFY.get(n, {}).get(p.get('fn') or p.get('model'), {})) for p in sh['set']['props']
                                   if p.get('fn') not in DROP.get(n, [])]
             shot = out.replace('.png', '.src.json')
             json.dump(sh, open(shot, 'w'), indent=1)
