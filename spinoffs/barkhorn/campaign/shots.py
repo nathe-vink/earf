@@ -688,6 +688,10 @@ def honest_lights(s, log=None):
                 L['specular'] = 1.0
             continue
         if spec_only:
+            # a specular-only source may be dimmed as a whole, never linked (the coordinator, 23:18)
+            if recv:
+                out.append(f'{name}: specular-only, receivers {recv[:3]}... removed')
+                del L['receivers']
             continue
         if recv:
             out.append(f'{name}: receivers {recv[:3]}{"..." if len(recv) > 3 else ""} removed')
@@ -703,24 +707,47 @@ def honest_lights(s, log=None):
     return s
 
 
-def _in_frame(s, pts):
-    """Whether any of the points lies inside the camera's frustum (no occlusion test: a card hidden behind the speaker
-    from one view is still in the frame)."""
+def _frame_rays(s, nx=96, ny=96):
+    """Unit rays through a grid over the camera's frame (lens shift included, padded 3 % past each edge)."""
     import numpy as np
     cam = s['camera']; c = np.array(cam['position'], float); f = np.array(cam['target'], float) - c
     f /= np.linalg.norm(f); r = np.cross(f, [0.0, 0.0, 1.0]); r /= np.linalg.norm(r); u = np.cross(r, f)
     W, H = s['size']; lens = cam['lens_mm']
     hx, hy = (18.0, 18.0 * H / W) if W >= H else (18.0 * W / H, 18.0)
-    # (a lens shift moves the frame by up to a few per cent; the test is padded to 1.15 of the half-frame both ways
-    # rather than trusting the shift's sign and scale)
-    for p in pts:
-        d = np.array(p, float) - c; z = d @ f
-        if z <= 0:
-            continue
-        x = (d @ r) / z * lens / hx; y = (d @ u) / z * lens / hy
-        if abs(x) <= 1.15 and abs(y) <= 1.15:
-            return True
-    return False
+    sx, sy = cam.get('shift_x', 0.0), cam.get('shift_y', 0.0)
+    span = max(hx, hy) * 2
+    xs = np.linspace(-1.03, 1.03, nx); ys = np.linspace(-1.03, 1.03, ny)
+    X, Y = np.meshgrid(xs, ys)
+    px = X * hx + sx * span; py = Y * hy + sy * span                 # mm on the sensor
+    d = f[None, None, :] * lens + px[..., None] * r[None, None, :] + py[..., None] * u[None, None, :]
+    d /= np.linalg.norm(d, axis=-1, keepdims=True)
+    return c, d.reshape(-1, 3)
+
+
+def card_coverage(s, fl):
+    """The share of the frame's rays that hit the card's rectangle in front of the camera (the coordinator's cardcast,
+    2026-11-03: a test of corners alone missed a large card whose middle crossed the frame)."""
+    import numpy as np, math
+    c, d = _frame_rays(s)
+    cx, cy, cz = fl['center_m']; w, h = fl['size_m']
+    n = np.array(fl['normal'], float); n /= np.linalg.norm(n)
+    if abs(n[2]) > 0.9:
+        a = np.array([1.0, 0.0, 0.0]); b = np.array([0.0, 1.0, 0.0])
+    else:
+        L = math.hypot(n[0], n[1]) or 1.0
+        a = np.array([-n[1] / L, n[0] / L, 0.0]); b = np.cross(n, a); b /= np.linalg.norm(b)
+    o = np.array([cx, cy, cz])
+    den = d @ n
+    with np.errstate(divide='ignore', invalid='ignore'):
+        tt = ((o - c) @ n) / den
+    p = c[None, :] + tt[:, None] * d
+    q = p - o
+    hit = (tt > 0) & np.isfinite(tt) & (np.abs(q @ a) <= w / 2) & (np.abs(q @ b) <= h / 2)
+    return float(hit.mean())
+
+
+def _in_frame(s, fl):
+    return card_coverage(s, fl) > 0.0
 
 
 def _card_points(fl):
@@ -749,7 +776,7 @@ def cards_out_of_frame(s, log=None):
     # frame; they are not slid out, a bounce card's place is set by what it lights)
     bk = []
     for b in st.get('bounces', []):
-        if b.get('reflect_only') and _in_frame(s, _card_points(b)):
+        if b.get('reflect_only') and _in_frame(s, b):
             out.append(f"reflect-only bounce at {b['center_m']} in frame: removed")
         else:
             bk.append(b)
@@ -757,7 +784,7 @@ def cards_out_of_frame(s, log=None):
         st['bounces'] = bk
     keep = []
     for fl in st.get('flags', []):
-        if not fl.get('reflect_only') or not _in_frame(s, _card_points(fl)):
+        if not fl.get('reflect_only') or not _in_frame(s, fl):
             keep.append(fl); continue
         if abs(fl['normal'][2]) > 0.9:
             out.append(f"floor card at {fl['center_m']} in frame: removed"); continue
@@ -771,7 +798,7 @@ def cards_out_of_frame(s, log=None):
             cand = {**fl, 'center_m': nc, 'size_m': [round(fl['size_m'][0] * k, 3), round(fl['size_m'][1] * k, 3)]}
             if cand['center_m'][2] - cand['size_m'][1] / 2 < -0.5:   # grown far below the floor: lift it to stand on it
                 cand['center_m'][2] = round(cand['size_m'][1] / 2 - 0.5, 3)
-            if not _in_frame(s, _card_points(cand)):
+            if not _in_frame(s, cand):
                 done = cand; break
         if done:
             out.append(f"card at {fl['center_m']} moved to {done['center_m']} at x{round(done['size_m'][0] / fl['size_m'][0], 1)}")
