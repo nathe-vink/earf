@@ -4079,3 +4079,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   - Haze 0.39/0.200/305, #600498 (#4512D0)
   Dust (ochre-brown) and Ice (dark teal) go duller; Haze and Acid keep most of their chroma. Cost and lead time need a caster's quote.
 - 00:3x WALKTHROUGH item 15b updated. My pick: (b) for Haze and Acid; Ice and Dust as poured. The quote is noted as needed.
+- 00:36 c2: BACKFIX landed on 657e0832 (00:07-00:35) at ef6a7abe8581702c384e1684c634ff796d80de6c: seven site-back frames (Ember, Dust,
+  Acid, Poison, Ice, Haze, Fog), 3.1-4.0 min each (far under the ~13 min estimate), ~1.0-1.07 MB. c2 notes the cabinets read darker and
+  flatter at thumbnail than phase 1's backs (Ember, Poison). p2-backfix (amp-plate-ember, horn-back-acid, ~39 min) from 00:36.
+- 00:36 backfix rigs (Ember, Ice checked): glow and cab-back off, the one card at 0.0 %, no ruling hits. Gate launched on all seven
+  (wf_dfce1fd6-dc4), with the old Ember back as context, asking whether they've gone dark and flat, and whether the plate reads
+  TROPOS and the EARF mark is legible.
