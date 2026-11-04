@@ -24,7 +24,12 @@ IOR = 1.49
 TINTS = {
     'Ember':  ('cloud-red',            '2423', 'Red',                14.1, (0.08, 1.00, 0.85)),
     'Dust':   ('cloud-orange',         '2422', 'Orange (amber)',     59.1, (0.02, 0.40, 1.00)),
-    'Acid':   ('cloud-amber',          '9097', 'Fluorescent Yellow', 77.6, (0.00, 0.10, 1.00)),
+    # Acid: red at 0.85 of green (was 0.00), 2026-11-03. 9097 is fluorescent: it turns blue into yellow-green, and its
+    # edges glow yellow-green, which the renderer cannot model. Its TT (77.6 % at 20 mm) needs about 12 % lost in red
+    # and green; put in green alone, a long path (an edge, 300 mm) went scarlet (hue 21), which no fluorescent yellow
+    # does. Shared between red and green, the faces stay lemon (hue 59) and the long paths deepen to amber (53 at 300
+    # mm, 44 at 600). A documented approximation (TINTS.md), to check against the chart and the off-cuts
+    'Acid':   ('cloud-amber',          '9097', 'Fluorescent Yellow', 77.6, (0.085, 0.10, 1.00)),
     'Poison': ('eucalyptus-y2k-green', '2092', 'Green',              18.6, (1.00, 0.18, 0.80)),
     'Ice':    ('cloud-blue',           '2069', 'Tinted Blue',        57.6, (1.00, 0.40, 0.06)),
     'Haze':   ('cloud-violet',         '2287', 'Violet',             13.5, (0.50, 1.00, 0.12)),
