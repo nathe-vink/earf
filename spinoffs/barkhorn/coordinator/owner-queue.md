@@ -4149,3 +4149,20 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   cabinet); a neutral pendant, wall and floor with a reduced or neutral evening fill; a real table lamp (the honest Core from 26400e7c)
   or none; the side face flagged or the speaker turned; a gentler view transform; the pool off the base; dressing for the finals.
   Re-proxy Ice first. The formats follow the crop check.
+- 00:4x CROP CHECK done (wf_ade8d9aa-482: measure, verify, refute; ~34 min of agents).
+  - My laptop estimate holds. The site lane's square box fails all 15 viewports, and the held V2 already cuts today's horn and feet on
+    1366/1536/1280 laptops (743be0cb ships with V2 off).
+  - Recommended: A, two art-directed renders per colour.
+    - Wide 16:9 3840x2160: speaker box x 0.418-0.582, y 0.20-0.78.
+    - Tall 9:16 1440x2560: box x 0.35-0.65, y 0.25-0.59, corrected for 360x512 Androids.
+    - Both at object-position 50% 50%. The text zones in the renders stay dark and matte.
+  - The wall: wide 16:9 3840x2160 (box y 0.16-0.80); tall 9:16 1440x2560 (x 0.05-0.95, y 0.17-0.78, staggered 4 + 3).
+  - The skeptic found five majors and moderates in the first spec, now fixed:
+    - Landscape phones fall under phone rules, so the switch is by shape: PORTRAIT = max-width 860 and max-aspect 4/5.
+    - Unconditional cover on the desk wall cuts end speakers, so use container queries.
+    - Split windows get the desk layout.
+    - Ultrawides are capped at 2.4:1.
+    - The full-width scrim darkens the lamp, so use corner scrims.
+    - Plus a <=480 px-high fallback and safe-area insets.
+  Written to spinoffs/barkhorn/coordinator/night-picture-spec-2026-11-04.md, with the brand's crops (the wide wall's sides at 5 % for
+  the teaser's push; 2.4:1 and 4:5 cut from the masters; seven until Smoke).
