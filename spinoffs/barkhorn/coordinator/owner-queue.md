@@ -4383,3 +4383,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   lower third of each right side mirrors the lit floor below the black card's reach (deep tints go grey under a hard diagonal,
   worst on Poison and Ember); extend or lower that card out of frame, or flag the lamp off that floor patch. Fold it into the set's
   re-render after the bottom-edge answer (which re-renders the set anyway if (b) or (c)).
+- 01:43 c4: PHASE-2 CHUNK 6 (THE TURN) at 0a0a83bd5a742f268aee67b95bff8cb7d45c68a0 (r33-rollout-c4; rendered on 3c0ad799 with
+  732a8671): turn-ember-05..23, turn-dust-00..23, turn-acid-00..16; 640x576; 62 render minutes; the restart cost three frames,
+  re-rendered. Its note "Acid reads amber, as the tint fix intends" means the horn: the cabinet is the corrected #CDC509.
+- 01:46 my check: the turn rig is plain and honest (key 2.2, fill 1.0, wash 0.8, sky 0.7; no flags, no cards; camera fixed, the
+  product turns; the sweep tinted per colour). Contact sheets per colour; gate wf_57b250a0-dbb launched. Sent: c4, the Acid horn
+  re-match means turn-acid re-renders from the speaker lane's SHA; hold.
