@@ -4270,5 +4270,5 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   57.4 -> 7.5, floor 104 -> 8); the hidden canopy had let the whole sky dome light the floor; a 95 %-closed real canopy lets through
   only the shafts and one sunfleck (on the speaker's upper front; the top batt pale; the horn dark). The set was built around the
   hidden canopy. Options: (a) open 0.05 -> ~0.25 plus +1 to +2 EV; (b) closed, +3 EV or more, moody; (c) a bigger clearing.
-- 01:16 sent: (a), proxied at open 0.25 and +1.5 EV, the gaps as real holes, the sunfleck through one; numbers and the pair; a (c)
+- 01:15 sent (the message said 01:16, a few seconds ahead of the clock): (a), proxied at open 0.25 and +1.5 EV, the gaps as real holes, the sunfleck through one; numbers and the pair; a (c)
   proxy too if the speaker reads dark or the forest thin. I gate the proxy; Poison's final held.
