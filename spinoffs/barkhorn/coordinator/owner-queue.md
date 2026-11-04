@@ -4265,3 +4265,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 01:15 sent: c2, the honest re-light (more light from outside the frame, a bounce card camera-left, black flags overhead and
   camera-left; proxy Ember, Poison, Haze to back face L* 15-20 with numbers; then all seven on one rig; rigaudit/cardcast first).
   Biomes lane: item 5 answered; 0f619953 is the Ice habitat; retire 27911a44.
+- 01:14 biomes lane: POISON UNDER RULING 4 (--real-set; the canopy and mist real, the gap lamp gone) at
+  0ed02a598cca00f41a6672d371497ef55093ddcb (proxies-0113/poison-hidden-vs-real-canopy.jpg): the forest goes nearly black (frame mean
+  57.4 -> 7.5, floor 104 -> 8); the hidden canopy had let the whole sky dome light the floor; a 95 %-closed real canopy lets through
+  only the shafts and one sunfleck (on the speaker's upper front; the top batt pale; the horn dark). The set was built around the
+  hidden canopy. Options: (a) open 0.05 -> ~0.25 plus +1 to +2 EV; (b) closed, +3 EV or more, moody; (c) a bigger clearing.
+- 01:16 sent: (a), proxied at open 0.25 and +1.5 EV, the gaps as real holes, the sunfleck through one; numbers and the pair; a (c)
+  proxy too if the speaker reads dark or the forest thin. I gate the proxy; Poison's final held.
