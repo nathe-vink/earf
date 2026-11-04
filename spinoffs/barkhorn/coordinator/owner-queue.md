@@ -4020,3 +4020,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   backdrop. It offers to grid or move the lamp after the comparison.
 - 00:21 sent: speaker lane, render the satin close-up yourself after the comparison (same rig as the landed polished), and fix the
   backdrop only if the critics hold the polished close-up for it (then re-render both). c3: no satin; carry on with the tall chunks.
+- 00:22 biomes lane: ICE RE-RENDERED with real cards out of frame (1.8/2.4 m by projection; a real 8 x 6 flag behind the camera) at
+  0f619953f86129dc54183718e2c50419f37ab820, replacing 27911a44: the portrait, the batt crop, and an A/B strip. The A/B is NOT noise
+  (speaker mean change 11.4, p95 26, max 92; the largest block 24.2 on the front's lower right). The whole scene is ~-0.15 EV, because
+  the real flag and cards block part of the sky dome that lights Ice (sky unchanged). By eye the same picture, a touch deeper blue,
+  the batt as visible. Honest options if brighter is wanted: a smaller flag, or +0.15 EV on the camera. Its own gate passed all four.
+- 00:23 gate launched on the honest Ice and its batt crop (wf_66c04959-ad3), with the old picture and the A/B as context. When it
+  passes, item 5 is re-shown to the owner with old and new side by side (the correction already told).
