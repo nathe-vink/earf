@@ -4011,3 +4011,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   close-ups. The bottom-edge comparison is rendering (six frames, ~30 min).
 - 00:20 my audit of tall-ice-honest: clean (seven cards all 0.0 %; edge and back off; horn at specular 1.0, irradiance 5.2). Gate
   launched (wf_4102fa3c-507), with the old picture as context.
+- 00:20 speaker lane: THE SATIN FIX at 880db881cd44bc9b24e954a0b22091166d2d4ecd. Satin was roughness 0.25 (FORMED_HORN_SATIN until
+  27cf86ea, the owner's 15:14 call). horn-A-satin.json now carries 0.25. strata_lit also had the hole (a --horn satin run rendered
+  polished) and now sets 0.25 for satin outright. Satin pictures rendered before 27cf86ea are fine; only a re-render from an old shot
+  file would silently come out polished.
+- 00:21 speaker lane: the honest close-up with back off clips the backdrop (6 % to 53 %) and heats the horn (clipped 0.89 % to 3.42 %).
+  Back wasn't the cause; another newly unlinked lamp (likely kick) lights the seamless. It's still honest; the cost is a whiter
+  backdrop. It offers to grid or move the lamp after the comparison.
+- 00:21 sent: speaker lane, render the satin close-up yourself after the comparison (same rig as the landed polished), and fix the
+  backdrop only if the critics hold the polished close-up for it (then re-render both). c3: no satin; carry on with the tall chunks.
