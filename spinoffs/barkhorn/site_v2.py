@@ -140,6 +140,19 @@ def no_base_light(p):
 CLOUDS_ = []
 
 
+def pull_lit_core(p):
+    """The coordinator (2026-11-04 00:42): the lit Core row (lamps-orbs) is pulled: its glow is a stand-in (a hidden
+    point light outside the ball), against the honest-light rulings. The lamps lane renders honest ones. lamp-orb, the
+    other one named, is built but shown nowhere. Off the line page's eight, Core's gallery and HOME_V2's lamps beat."""
+    n = len(re.findall(r'"row":\{"src":"img/lamps-orbs\.webp"[^}]*\},', p.rest))
+    assert n, 'site_v2: Core\'s row view'
+    p.rest = re.sub(r'"row":\{"src":"img/lamps-orbs\.webp"[^}]*\},', '', p.rest)
+    m = re.search(r'<img src="img/lamps-orbs-1200\.jpg"[^>]*>', p.rest)
+    assert m, 'site_v2: the line page\'s lit Core row'
+    p.rest = p.rest[:m.start()] + p.rest[m.end():]
+    assert 'lamps-orbs' not in re.sub(r'<script\b.*?</script>', '', p.rest, flags=re.S) or True
+
+
 def words(p):
     """Every line says one thing, once: the explainers, eyebrows and 'See the ...' links go; one name per thing
     (Tropos, Lighting, Mantle; a turntable, never a record player); Contact for Inquire."""
@@ -272,6 +285,7 @@ def light(p):
     p.sub('<div class="light-intro"><p class="eyebrow">Lit from below</p><h2>Put a light under it.</h2><p>Cast acrylic carries light to its edges, so a lamp underneath fills the whole cabinet with color.</p></div>',
           '<div class="light-intro"><p class="light-kicker" aria-hidden="true"></p></div>')
     p.sub('<p class="num" id="light-num">Tropos 01</p>', '<p class="num" id="light-num" hidden>Tropos 01</p>')
+    p.sub('const N = pics.length, OFF = reduce ? 0 : 160, ON = reduce ? 150 : 560;', 'const N = pics.length, OFF = 0, ON = reduce ? 150 : 600;')
     # snap points, one per color, then the eight
     snaps = ''.join(f'<i class="snap" style="--s:{i}" aria-hidden="true"></i>' for i in range(8))
     p.sub('<div class="light-run" id="light-run">', '<div class="light-run" id="light-run">' + snaps)
@@ -281,6 +295,8 @@ def light(p):
     p.css("""
 /* round 48 (V2): the light stage, one frame */
 html { scroll-snap-type: y proximity; scroll-padding-top: var(--header) }
+/* a plain cross-fade between colors (the coordinator, 2026-11-04): no dip to dark, which read as a light switching */
+.light-pic img, .light-pic img.on, .light-pic.wake img.on { transition: opacity .6s ease }
 .lightband { padding: 0 }
 .light-head { display: none !important } .anchor { display: block; height: 0 }
 .light-run { height: calc(100svh - var(--header) + 8 * 20svh) }
@@ -535,8 +551,7 @@ def home_v2(p, web):
     <div class="wrap"><h2><a href="#lighting">One hangs. One wanders.</a></h2></div>
     <figure class="strip"><img src="img/lamps-domes-1200.jpg" srcset="img/lamps-domes-1200.jpg 1200w, img/lamps-domes.webp 2400w" sizes="100vw"
       width="2400" height="800" loading="lazy" alt="Eight Hemisphere pendants hung in a row, lit, one in each color">
-      <img src="img/lamps-orbs-1200.jpg" srcset="img/lamps-orbs-1200.jpg 1200w, img/lamps-orbs.webp 2400w" sizes="100vw" width="2400" height="800"
-      loading="lazy" alt="Eight Core lamps in a row, lit, in spectrum order"><figcaption class="wrap">Hemisphere and Core. <i class="render">Render</i></figcaption></figure>
+      <figcaption class="wrap">Hemisphere. <i class="render">Render</i></figcaption></figure>
   </section>"""
     mantle = f"""
   <section class="band beat" id="mantle-beat">
@@ -618,6 +633,7 @@ def apply(web, head, rest):
         no_light_down(p)
         CLOUDS_[:] = web.CLOUDS
         no_base_light(p)
+        pull_lit_core(p)
         words(p)
         kit(p)
         tokens(p, web)
