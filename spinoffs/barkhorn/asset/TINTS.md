@@ -240,3 +240,10 @@ The coordinator's gates on horn-back-acid and the biomes lane's Acid habitat hel
   - Cabinet deep: #FFEB6C to #F1EE7F. Strata horn: #FFF296 to #F6F4A5. The formed horn keeps the site's deep lot, #B88E00, the deeper amber of the same glass.
 - **What it does not do:** brighten the edges, as fluorescence would. It is darker at long path than the real sheet. Check it against the TruCast chart and, when they arrive, the off-cuts.
 - **Dust (2422) is unchanged.** It is not fluorescent. An orange dye that absorbs green as well as blue does turn red at long path (hue 33 at 20 mm, 18 at 100 mm, about 0 at 300 mm). Its red top-back edge is what Beer's law gives for its TT and split, and is within what orange cast acrylic shows edge-on. No spectral curve is published to confirm the split; the off-cut is the check.
+
+### Acid's horn and mark, re-derived from the corrected dye (2026-11-04)
+
+The horn-back-acid gate (2/3 held) found the horn left behind by 732a8671: the cabinet moved to the new split (hue 103-107), while the horn kept #B88E00, a hand-match to the old, warmer cabinet. Horn-to-cabinet ΔE went from about 5 to 17.
+- **The horn, as poured, one dye:** the same split (0.085, 0.10, 1.00) at the loading that keeps the old horn's luminance at 12.7 mm. Its deep at 10 mm is #A39700. OKLCH: 0.77 / 0.164 / 106 at 6 mm, 0.60 / 0.126 / 102 at 12.7 mm, 0.38 / 0.078 / 93 at 25 mm (the pod). The old horn was hue 81 at 12.7 mm.
+- **The EARF letters' tint (`disc`):** #81720E (OKLCH 0.55 / 0.11 / 100), the cabinet's own colour about 300 mm deep. It was #9A6A12 (hue about 77, orange).
+- **Which Acid frames carry which cabinet:** every frame rendered on a SHA containing 732a8671 (22:13, 2026-11-03) has the new cabinet. Every frame rendered before has the old one. Every frame before this note has the old horn and mark.
