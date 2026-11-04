@@ -121,6 +121,7 @@ def _final(shots, rig, fl, title, size=None, samples=None, rotate=None):
     if rig.startswith(FIN) and 'glow' in s.get('lights', {}):
         del s['lights']['glow']
     shots.honest_lights(s)
+    shots.cards_out_of_frame(s)
     # (the turn's side flags, _turn_flags, proved on 01/02/04/05, 2026-11-03: no change to the incoming face (01's back
     # face 0.22 to 0.23 saturation; 04 0.29, 05 0.11 both ways) and a shadow band on the backdrop's left edge (210 to
     # 162). At 75 deg the face's mirror ray runs nearly along the camera's line, onto the backdrop beside the speaker,
@@ -147,6 +148,8 @@ def phase2(base, horn):
             a = SPIN['start'] + k * SPIN['step']
             sh = _final(shots, S31 + f'hero-light-{tint}.json', fl, f'Tropos, the front arc, {tint}, frame {k}', samples=SPIN['samples'], rotate=a)
             shots._siteH_round1(sh)                        # hero-light's fix (shots.py): the card turns with the frame
+            shots.honest_lights(sh)
+            shots.cards_out_of_frame(sh)                   # (the card only where it falls out of this frame)
             sh['size'] = [round(sh['size'][0] * SPIN['scale']), round(sh['size'][1] * SPIN['scale'])]
             sh['render']['crop'] = SPIN['crop']
             out[f'spin-{tint}-{k:02d}'] = sh
