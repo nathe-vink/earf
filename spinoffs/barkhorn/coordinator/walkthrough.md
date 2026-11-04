@@ -34,9 +34,10 @@ Show one item with its pictures, wait for the answer, save the owner's words ver
   air path) too. The 03:00 spec was satin OUTSIDE, the air path masked and polished, and from the front we look into the inner flare,
   so the frame overstates that option. Asked of the speaker lane (00:56): on the re-lit close-up rig, polished and satin-outside
   (outer face 0.25, air path 0.05), plus a matched side or rear-quarter pair where the outside shows. Also asked: did item 2's satin
-  picture (a47ae365, A-polish-ice.png) frost the whole shell too? product.py reads that way. If so, item 6's disclosure adds: "the
-  satin picture you chose from also frosted the inside of the flare, which the spec kept polished; from the front, satin outside
-  looks closer to polished than it showed." The owner's call (polished) stands on its own rule (satin inside adds a masked step);
+  picture (a47ae365, A-polish-ice.png) frost the whole shell too? CONFIRMED 00:57: every satin picture before 15:14 frosted the
+  whole shell (one rule in barkhorn-cloud.json). So item 6's disclosure adds: "the satin picture you chose from also frosted the
+  inside of the flare, which the spec kept polished; from the front, satin outside looks closer to polished than it showed." The
+  lane splits the faces by normal (inner 0.05, outside 0.25) and renders a front pair and a rear-quarter pair on the re-lit rig. The owner's call (polished) stands on its own rule (satin inside adds a masked step);
   this is only the honest version of what they chose from.
 - **NEW OWNER QUESTION (23:38, the lamps lane), for the Hemisphere finals:** the cap shows a dark 5 mm notch. It is the bayonet's
   entry, open at the collar's top end so the pin can enter. The crown (80 mm) is smaller than the collar (96), so the collar's top
