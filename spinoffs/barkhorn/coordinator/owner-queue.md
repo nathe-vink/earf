@@ -4088,3 +4088,13 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 00:37 check-in #53 fired (trig_01TstoAAB5yKenbnUFAKVE2e). Its gate list was already collected (deck hero and row, cover, portrait,
   Fog). Eight gates are in flight: crop check, satin close-up, tall Ice honest, honest Ice habitat, Ice night proxy, arc proof,
   deck-home, the seven backs. Check-in #54 armed for 01:29 (trig_014f32sK89jZ9pjqFrLPWSzA) with the current state.
+- 00:39 biomes lane (stamped 00:41 at a 00:39:52 queue time): the Fog proxy. Edge b* medians before to after: left 9.8 to 8.8, top
+  3.4 to 4.1, the panels under the top batt 7.8 to 7.5, the bottom block's left edge 11.3 to 9.1, the sky -3.6 to -3.2. The fog now sits
+  behind the box. The "khaki panels" are the brace's cut edges piping the dawn horizon and golden grass: a clear sheet's honest edge
+  glow; the 1.0 fill is too weak. Options: (a) as is; (b) a stronger fill (~3); (c) a small global camera white balance (its pick).
+- 00:40 sent to the biomes lane: (c) small (my 23:45 condition met: the critics read the clear as tinted). The edge medians to
+  ~+5 b* or below while the sky and grass keep their dawn; report their b* before and after; render the final, check the speck.
+- 00:4x ARC PROOF GATE (wf_ac7e99ff-38f, resumed): 00 and 08 SHOW 3/3. 04 HOLD 3/3: its right side face, edge-on, mirrors the white
+  sweep (a 7 px full-height strip), and the handle recess floats as a chip.
+- 00:41 sent to the speaker lane: real flags out of frame, or square 04 to the front, then re-proof 03-05. The arc stays held for the
+  bottom-edge answer; this goes after the close-up re-light.
