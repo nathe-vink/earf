@@ -3884,3 +3884,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   camera-hidden mesh and every camera-hidden area lamp's real rectangle or disk through the scene's own camera, on the saved .blend.
   C3e night and day: flag-r, flag-top, bg/fill/key/side/strip/top and wall-wash (night) all 0.0 %. No glossy-only props, no links,
   no specular <1, transmission on, every mesh casts shadows. It runs on every night picture from now on.
+- 00:01 biomes lane: the Haze final at 620c4bba18941ab589e0c5621d7898e34cd0a654 (replaces df201486). Sun 70 at 6°, the HDRI at 338.8,
+  rotate_z -10 (5° off), rise -0.13, a 4 x 3 m real flag, real cards (the sun-side card left out, the other out of frame at 2.6 m),
+  96 samples. Upper box 47.5 (target 45-60). HORN TO BOX 2.8x, against a target of 0.9-1.7: missed. Hue 239/239, crease 6.1/7.3. Its
+  own gate passed all four. The A/B isn't card-only (the sun, sky and framing all changed); the card effect alone was a mean 1.6 at
+  21:26. Next: the Acid sun-35 proxy, then the Ice, Dust and Ember re-renders.
+- 00:02 Haze gate launched (wf_f0437845-fd3), with the horn-to-box question put to the critics.
