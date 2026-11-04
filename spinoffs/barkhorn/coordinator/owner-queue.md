@@ -4138,3 +4138,14 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   current build (0e714b30e8ffcd96218f885e50b41a1af02b12b2). The emitters are only the evening-sky plane outside the window, the Core's
   LED face inside its frosted ball, and (from 0e714b30) the Hemisphere's opal liner from the lamps lane's 26400e7c. The round-12 curtain
   function exists but never runs. Waiting on the gate and the formats; nothing rendering.
+- 00:44 ICE NIGHT PROXY GATE (wf_bb8ec17f-4ee, resumed): HOLD 3/3.
+  - The speaker is the darkest thing in the frame: the wash's core is hidden behind it, so no lit wall shows through.
+  - The pendant's wash is peach, and the evening fill is Ice's own blue, so Ice isn't the only colour.
+  - The table lamp glows but lights nothing.
+  - The right side face is a warm-wall reflection.
+  - The colour is clipped (red 0 on 59 % of the speaker; batts (0,50,107)).
+  - The pendant's pool hugs the back foot; the room reads as a CG box (the black cube).
+- 00:44 sent to the Mantle lane: the pendant on the speaker's centre line behind it (the wall's core seen through the horn and upper
+  cabinet); a neutral pendant, wall and floor with a reduced or neutral evening fill; a real table lamp (the honest Core from 26400e7c)
+  or none; the side face flagged or the speaker turned; a gentler view transform; the pool off the base; dressing for the finals.
+  Re-proxy Ice first. The formats follow the crop check.
