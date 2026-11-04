@@ -4048,4 +4048,4 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   0.25 (confirmed in its shot file), the same honest rig as the polished one, 64 samples, 00:22-00:29. Polished against satin: mean
   difference 6/9/15 per channel, a real difference. A slip it owns: the bottom-edge comparison never started at 00:19 (its wait loop
   matched its own command line). Killed by PID at 00:30; the six renders run now, done ~01:00. The custom-pour check runs meanwhile.
-- 00:31 satin gate launched (wf_ID below), with the polished honest close-up as context.
+- 00:31 satin gate launched (wf_53bafbd3-db3), with the polished honest close-up as context.
