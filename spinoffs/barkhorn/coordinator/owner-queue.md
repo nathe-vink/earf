@@ -4512,3 +4512,13 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   pair ($19,000 Cloud), prices parked.
 - 02:04 sent: speaker lane, item 16's rollout (the model and docs to FaitalPRO's figures; the predictions re-run; low priority after
   the bottom-edge sheets) and confirm the driver chain and BOM prices.
+- 01:58 biomes lane (stamped 01:59): the memory wrapper (memwrap.py: exit code and children's peak RSS) and a 20 s sampler
+  (mem.log); one Blender job at a time; the 01:54 Acid job died ALONE (after the Poison proxy finished).
+- 02:03 biomes lane: POISON (a')+(d) PROXY at 51c7eff28d92a1fa1c77a055b1331ba31f846e02 (proxies-0202/): frame/floor/box/upper-cabinet
+  sRGB: hidden 53.4/98.0/22.0/(15,32,7); 25 % +1.5 EV 82.9/93.3/43.5/(68,77,35); 25 % +0.75 EV hole moved 66.5/76.6/31.3/(51,55,24).
+  The fleck now on the floor; the horn clean green glass; but the upper cabinet still a pale olive (red ~ green, which a sheet
+  passing 1.7 % red per wall can't do alone): the lane suspects AgX pulling bright saturated green to yellow-white.
+- 02:03 c3: TALL ACID RE-RENDERED at 04d21c5cba15fe98bc77f0e0a38c8c015c357649 (10.9 min): the horn toward the cabinet's
+  lemon-olive, the letters darker; same rig as the six (checked). Gate wf_8fdaa10e-d99 launched (the held one as context).
+- 02:05 sent: biomes, the AgX diagnostic (one proxy with 'AgX - Punchy', a crop under a third transform if available; numbers;
+  a whole-frame look only if it suits the set; else (c)).
