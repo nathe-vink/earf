@@ -4272,3 +4272,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   hidden canopy. Options: (a) open 0.05 -> ~0.25 plus +1 to +2 EV; (b) closed, +3 EV or more, moody; (c) a bigger clearing.
 - 01:15 sent (the message said 01:16, a few seconds ahead of the clock): (a), proxied at open 0.25 and +1.5 EV, the gaps as real holes, the sunfleck through one; numbers and the pair; a (c)
   proxy too if the speaker reads dark or the forest thin. I gate the proxy; Poison's final held.
+- 01:16 c2: helpers don't change scene settings (HELPERS.md); asked whether the back re-light was meant for the speaker lane, or
+  for c2 explicitly as a rig commit. Held, checkout unchanged.
+- 01:17 sent: c2, explicitly cleared to do the back-rig work as a separate rig commit on r33-rollout-c2 (the rules listed; rigaudit
+  and cardcast pasted; proxy Ember, Poison, Haze; numbers; wait for my go before the seven). Speaker lane told (FYI): merge c2's
+  rig commit once it passes, so the back rig lives in one tree.
