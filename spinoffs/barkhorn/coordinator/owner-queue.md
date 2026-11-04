@@ -4166,3 +4166,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
     - Plus a <=480 px-high fallback and safe-area insets.
   Written to spinoffs/barkhorn/coordinator/night-picture-spec-2026-11-04.md, with the brand's crops (the wide wall's sides at 5 % for
   the teaser's push; 2.4:1 and 4:5 cut from the masters; seven until Smoke).
+- 00:51 the spec committed (65ec7c5f) and sent to three lanes.
+  - Mantle: 16 renders (wide and tall per colour, plus the two walls). Nothing final until the re-proxied Ice rig passes. Frame that
+    proxy to the wide box.
+  - Site: the headline changes (the shape switch, a <picture> per colour, range(7) snaps, the 2.4:1 cap, the <=480 px fallback,
+    container-query cover on the wall, corner scrims, safe-area insets, the 1600/2400 caps removed). Build against placeholder frames.
+  - Brand: the wall masters and the crops (2.4:1 and 4:5 cut from the masters; seven until Smoke).
+  Waiting on: the satin close-up gate (wf_53bafbd3-db3), the seven honest backs (wf_dfce1fd6-dc4), the speaker lane's bottom-edge
+  comparison (~01:00). The owner's open question is still item 5.
