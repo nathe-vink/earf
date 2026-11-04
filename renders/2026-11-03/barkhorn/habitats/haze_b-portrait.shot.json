@@ -212,7 +212,7 @@
     "shape": "ext",
     "module": "haze_b_el",
     "fn": "sundisk",
-    "azimuth": 100.0,
+    "azimuth": 70.0,
     "elevation": 6.0,
     "distance": 296.0,
     "eye": [
@@ -457,17 +457,17 @@
    1.26
   ],
   "shift_x": -0.12,
-  "shift_y": 0.0
+  "shift_y": -0.13
  },
  "sky": {
   "kind": "hdri",
   "polyhaven": "qwantani_dusk_2_puresky",
-  "rotation_deg": 187.8,
+  "rotation_deg": 338.8,
   "strength": 0.75,
   "res": "4k"
  },
  "sun": {
-  "azimuth_deg": 100.0,
+  "azimuth_deg": 70.0,
   "elevation_deg": 6.0,
   "irradiance": 24.0,
   "angle_deg": 0.6,
