@@ -4277,3 +4277,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 01:16 sent (the messages said 01:17, ahead of the clock; date -u read 01:16:43 after sending): c2, explicitly cleared to do the back-rig work as a separate rig commit on r33-rollout-c2 (the rules listed; rigaudit
   and cardcast pasted; proxy Ember, Poison, Haze; numbers; wait for my go before the seven). Speaker lane told (FYI): merge c2's
   rig commit once it passes, so the back rig lives in one tree.
+- 01:17 biomes lane (its message said 01:18): HAZE PROXY at 1921b6fadf5ba234fd5ad6513a86773e29dca023 (proxies-0116/
+  haze-sun70-vs-sun30.jpg): the sun at 30 on the camera's side; cabinet median L* 6.3 -> 21.1 (target 20-30), top 5.9 -> 18.5, horn
+  17.1 -> 14.0; the box glows violet, the internals read, the edges deep violet; no pool at the base; real cards. Its final queued
+  behind the Fog WB pair and the Poison proxy. POISON (a) at a02614453ae4bf75012a1493c7922e517fd9c1d9: --canopy-open, 0.3 m cells, 25 %
+  opened by fractal noise at the shot's 1.2 m gap size, the shot's nine holes kept, the cells deleted from the mesh, the material
+  fully opaque; camera +1.5 EV. Also c457af2c: Ice 0f619953 approved (item 5), 27911a44 retired.
+- 01:18 gate wf_a47fb81b-ba2 on the Haze proxy (the earlier hold's three faults named). Sent: hold the Haze final for the verdict.
