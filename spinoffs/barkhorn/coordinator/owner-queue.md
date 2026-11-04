@@ -4288,3 +4288,15 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   (wf_938a7cba-115, 2 cached), the lamp-audit verification (wf_c283c264-343, none cached), the c3 tall gate (wf_b0d46b04-626, 1
   cached), the Dust/Ember habitat gate (wf_3f87fbc7-41d, none), the Haze proxy gate (wf_a47fb81b-ba2, none). The scratchpad and the
   clone survived. All six resumed from their journals with identical args.
+- 01:24 Mantle lane: THE RE-PROXIED ICE NIGHT at e4fd6052e654f5bf821c1fd3b8f8a3593d9f8486 (r48-mantle-design;
+  renders/2026-11-04/barkhorn/night-pictures/night-ice-wide-proxy.png, 1920x1080 of the 3840x2160, 128 samples; render 01:07-01:24).
+  The Hemisphere (clear) on the speaker's centre line, 0.28 m off the wall, rim 1.45 m, cord to the ceiling, COB 12.8 W inside its
+  opal liner, hidden from camera rays only; a window as a real opening out of frame (curtain 85 % closed, dim neutral sky). Off-white
+  wall and ceiling, dark oak floor, dark skirting; lamps 3300 K under WB 4300 K; turned 10 degrees; camera 0.40 m with lens shift;
+  AgX base contrast; a mild global finish. No Core in the singles (its pool would land in a text zone; Core B was excluded by the
+  23:04 brief). Spec check: the speaker box x 0.445-0.559 y 0.252-0.756 (inside); text-zone p99 0.013-0.037 (limit 0.09). My rig
+  tools: the shot JSON has no lights (the room script makes them); the lane's scene_audit on the saved .blend: one lamp, no hidden
+  meshes. Flag: the pendant at the lamps lane's documented COB_W 8 (~500 lm, 12.8 W), not the code default 2.0 (3.2 W).
+- 01:26 gate wf_16d3d3dc-8f5 on the proxy (the 00:44 faults listed; does the pendant read as sitting on the horn?). Sent: Mantle
+  (gating; no Core in the singles is right; hold for the pendant's real output); lamps lane (the Hemisphere's real lm/W and the
+  matching setting, with the source).
