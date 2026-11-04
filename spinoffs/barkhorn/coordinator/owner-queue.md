@@ -4375,3 +4375,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 01:38 c4 (stamped 01:39): its container restarted ~01:37 during turn chunk 6; 57 of 60 frames landed and decode cleanly (with their
   shot and report JSONs); turn-acid-14/-15/-16 re-running on the same checkout (3c0ad799 + 759ab035), then all 60 committed. Note
   for its gate: the Acid frames' horn may be the old #B88E00 against the corrected cabinet (the speaker lane is listing which).
+- 01:4x C3 TALL FIVE GATE (wf_b0d46b04-626, resumed; 3 critics): Ember 2/3, Dust 2/3, Poison 2/3, Ice 3/3 PASS; Acid 1/3 HOLD (the
+  horn honey-gold on a lemon cabinet, ΔE ~18: the same Acid re-match sent at 01:38). Base glow per frame: Ember NONE (cavity V 14),
+  Poison NONE (V 13), Acid LOW (V 64), Ice LOW (V 90, as the passed honest Ice), Dust MODERATE (a vivid red strip from foot to foot,
+  V ~143, peak ~188; reads as a red light at phone size, so it belongs inside the bottom-edge question). The set is consistent (same
+  rig, sweep, framing; Ice equals the passed honest frame to noise). One critic's rig note for the next re-render of the set: the
+  lower third of each right side mirrors the lit floor below the black card's reach (deep tints go grey under a hard diagonal,
+  worst on Poison and Ember); extend or lower that card out of frame, or flag the lamp off that floor patch. Fold it into the set's
+  re-render after the bottom-edge answer (which re-renders the set anyway if (b) or (c)).
