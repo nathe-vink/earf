@@ -3908,3 +3908,17 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 00:04 sent to the speaker lane: apply the lamps lane's thin-shell shadow transmission to the formed horn in every rig with a hard
   light (the room, the cover, hero-light). Fix the side face (green shaded glass, or the left unit turned in), lift the lower chambers
   with real bounce. The room goes after the cover; c4's deck-home will likely need the same.
+- 00:04 speaker lane, at 6692fae3840ab394834c9496078cc8837b3f9383 (checked on the remote 00:05; contains f6d0eda7):
+  1. THE HONEST HORN CLOSE-UP. a381aefb's own shots went through honest_shot.py --back-off: back, kick, edge and rim unlinked, the horn
+     at specular 1.0, `back` off, the cards at 0.0 %. My audit agrees: no ruling hits, four cards 0.0 %, edge (0.3 W, specular-only)
+     unlinked. A proxy before back-off had clipped the backdrop to 51 %; the re-proxy with it is pending.
+  2. The whole-rectangle card test in shots.py: card_coverage(), a 96x96 grid with the lens shift, padded 3 %, over flags and bounces.
+     A card is kept only at 0.0 %; the rest slide out or are removed (the tall card: 34.9 % there, 34.1 % mine, slides to
+     [1.92,-1.44,1.2] at 0.0 %). honest_lights now unlinks specular-only area lamps. CARDCAST.md: every rig family at 0.0 %, no
+     part-links, no specular multipliers.
+  Next on its list: tall Ice honest for item 6, the bottom-edge comparison, then the hero, the cover (with a sun/cutters check) and
+  the row.
+- 00:05 sent:
+  - c3: after its builds, merge 6692fae3, render the two honest close-ups, then the seven tall frames (--only site-front-off-tall
+    --tag fix1, list first). Wide and side wait for the owner's bottom-edge answer.
+  - c2: merge 6692fae3 (variants checkout first; no rebuild), then the backfix and amp-plate/horn-back-acid lists, then render.
