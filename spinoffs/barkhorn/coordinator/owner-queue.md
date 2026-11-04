@@ -4404,3 +4404,20 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   0, horn and cabinet one blue, the pendant hanging; two 960x540 variants if needed). Biomes (Dust passes; Ember: a lava channel
   behind the lower cabinet, turned 20-30 degrees, then a closer real card out of frame or a whole-frame +0.5 EV; if nothing honest
   works, the owner is told and offered a daytime Ember).
+- 01:45 c2: BACK-RIG PROXIES at ae71b12c95809c6f4738bd9634bf690bc70fe4cb (backrig-proxies/, 440x550, 32 samples, part-mask
+  measures). rigA (fill x2, key x0.7, sky 0.4), rigB (fill x3, key x0.5, sky 0.3): the fill is the only lamp reaching the back face
+  head-on. Back L*: Ember 11.5 -> 15.5 (A) -> 18.6 (B); Poison 14.6 -> 19.0 (A; ~22 expected on B); Haze 9.0 -> 12.4 -> 15.4. Wall
+  holds (84.4/82.6/84.8); floor 74 -> 79 on B; no horn clipping. EARF on Ember B 22.7 on 10.3. The lid and side do NOT improve on any
+  honest rig: the side is a grazing mirror of the in-frame floor; the old colour came from the reflect-only flag plus cab-back; real
+  flags read as black slabs (the side goes black, not red), light through the side lifts the sweep, light from above clips the horn,
+  light on the back axis glares. Audits clean (my rigaudit and cardcast; its own).
+- 01:46 c4: corrected its "Acid reads amber, as the tint fix intends" (wrong: horn and cabinet are two yellows). Holding.
+- 01:47 speaker lane: THE CLOSE-UP RE-LIGHT at 4fd570030cdd1afd8a4e41216308807adc046502: the horn lamp enlarged to a 6 x 4 m softbox at
+  the same irradiance (seams lavender px 1009 -> 655, throat px >220 234 -> 39); the remaining X is the creases mirroring the bright
+  set (a faint crease). Satin OUTSIDE ONLY via clear_resin's split (inner flare 0.05 by normal toward the horn's axis, outside 0.25;
+  a preset key filter had silently dropped the new key, now registered): from the side the outside frosts; from the front the two
+  differ by a mean 3.5/255. The matched pair is a front-left side view (a rear quarter saw the void beyond the sweep). Four full
+  renders (front and side, polished and satin-outside; 1000x800, 64 samples, ~30 min) in horn-closeup-relit/.
+- 01:48 sent: c2, rigB for all seven on one rig; the lid and side accepted as honest; _siteB_round2 as the rig commit with audits;
+  six now, Acid held for the horn SHA. Speaker lane: the order (Acid horn re-derive now, code only, for c2/c3/c4; then the
+  bottom-edge (b)/(c) re-renders; then the targets and the Haze pair; then deck hero, cover, room, row).
