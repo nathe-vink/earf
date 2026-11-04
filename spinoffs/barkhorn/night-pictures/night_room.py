@@ -73,7 +73,8 @@ def _curtain(bpy, nb, hexc, strength, loc, size, target):
 
 
 # what lamp_export.py's scenes hold that is the lamps lane's room or rig, not the lamp: left behind
-_ROOM = ('wall', 'floor', 'table', 'leg', 'ceiling', 'fill', 'kicker', 'dusk', 'bowl', 'camera', 'sun', 'side-back', 'curtain')
+_ROOM = ('wall', 'floor', 'table', 'leg', 'ceiling', 'fill', 'kicker', 'dusk', 'bowl', 'camera', 'sun', 'side-back', 'curtain',
+         'mullion', 'transom', 'sheer')     # the lamps lane's window (26400e7c): its frame, its sheers and its sky lamps
 
 
 def _append_lamp(bpy, blend, offset, keep_table=False, led_up=False):

@@ -50,11 +50,11 @@ def shot(root, tint, lamp_dir):
                        'color': '#2A211B', 'rough': 0.35}],
         'lamps': [
             # the Core on the side table, behind the speaker's left: its light comes through the tinted cabinet
-            {'blend': os.path.join(lamp_dir, 'core-fog-night.blend'), 'offset': [SIDE[0], SIDE[1], 0.0], 'keep_table': False,
+            {'blend': os.path.join(lamp_dir, 'v2-core-fog-night.blend'), 'offset': [SIDE[0], SIDE[1], 0.0], 'keep_table': False,
              'led_up': True},
             # the Hemisphere hung behind the speaker's right, 0.35 higher than in its own picture so its cord meets the
             # ceiling (its rim 1.67 up): a pool on the floor behind and a wash on the wall the cabinet stands against
-            {'blend': os.path.join(lamp_dir, 'hemi-fog-night.blend'), 'offset': [HEMI[0], HEMI[1], 0.35], 'keep_table': False},
+            {'blend': os.path.join(lamp_dir, 'v2-hemi-fog-night.blend'), 'offset': [HEMI[0], HEMI[1], 0.35], 'keep_table': False},
         ]}}
     out['render'] = dict(s['render'])
     out['render'].update({'samples': 256, 'view': 'AgX', 'look': 'AgX - Medium High Contrast', 'exposure': 2.2,
