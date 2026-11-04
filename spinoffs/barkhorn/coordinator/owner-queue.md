@@ -4197,3 +4197,19 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   two backdrop-only lamps. amp-plate-ember is near-identical to 06b829ce (mean diff 0.45); horn-back-acid moved (mean 2.4). The plate
   now carries the proposed TROPOS / TR-1 wording. Gate wf_76840142-555 launched on both, the old ones as context.
 - WALKTHROUGH: item 6 note (the satin finding); a new item (the live lit-lamp pictures); item 14's amplifier picture.
+- 00:57 speaker lane: CONFIRMED, every satin picture before 15:14 (gate 2's satin A, item 2's) frosted the whole shell, the air path
+  too (barkhorn-cloud.json's one rule: waveguide -> horn-satin). Item 6's disclosure grows: "the satin option was shown satin on every
+  face, inside the flare too; the spec was satin outside only". Its fix: a per-face roughness in the engine's clear_resin by the
+  normal's side relative to the horn's axis (inner flare 0.05, outside 0.25, split at the lip), proved on a crop first; then the
+  front pair on the re-lit rig and a matched rear-quarter pair. Order: the bottom-edge comparison (last frame rendering), the Haze
+  pour pair, then the close-up re-light with the satin pair.
+- 00:58 site lane: the night spec's site section built at 493ab5a21390b494e38f02092b7a5a0c37885dc0 on r47-site-next (held; flag-off
+  index.html byte-identical; nothing deployed), on placeholder frames: seven colours (range(7), Smoke out, "The seven colors"), a
+  <picture> per colour by shape, object-position 50% 50%, the 2.4:1 cap, the <=480 px fallback, the wall's container-query cover,
+  corner scrims (text-shadow plus a radial behind the coins), safe-area insets; 57 routes passed at 1440 and 390. Asked: should the
+  gallery's "At night" view (the old uplit *-reel frames) take the new singles?
+- 01:00 my check of its six screenshots: the stage is right at 1366 and 390. FAULT: the wall's 2.4:1 cap fails when the viewport caps
+  the height (1366x641: 1309x520, 2.52:1; 844x390: 749x294, 2.55:1); cover then puts the row's top 1.3-1.8 % from the edge (the spec
+  says 4 %; at 2.4:1 it is 4.0 %). Sent 01:00: cap the width at 2.4x the capped height, centred; measured boxes at 1366x641,
+  1536x730 and 844x390. The gallery's "At night" view: yes, the new singles when they land (the reel frames are item 3's uplit
+  pictures).
