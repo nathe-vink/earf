@@ -3968,3 +3968,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   00:09 on 3c0ad799, its list unchanged. Held: fix1 chunk 2, phase-2 chunk 3.
 - 00:10 deck-home rig: clean by my audit (no cards, no ruling hits). Gate launched (wf_bcc7def6-932), with the portrait as context.
   RULE OF THUMB from here: a frame over 5 MB as PNG ships as a pixel-identical lossless WebP master.
+- 00:10 speaker lane: arc and macros held, noted. Option (b): the bottom panel is one part with one material, so edge-only satin
+  needs a model change (a split edge band, a Cloud rebuild ~20 min). Tonight (b) is rendered as the whole bottom panel at satin
+  (roughness 0.4, same tint), with the visible difference stated plainly: the cabinet floor seen through the front reads slightly
+  frosted. If the owner leans to (b), the edge band gets modelled exactly as a shop would make it before any re-renders. Build costs
+  go under each option. (Accepted; no reply needed.)
