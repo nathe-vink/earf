@@ -4061,3 +4061,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   and one Haze comparison render (as poured against the (b) target) on the honest close-up rig. Biomes: commit oklch.py; the Haze proxy
   goes ahead, with the horn's hue a known design question.
 - WALKTHROUGH: new item 15b (the deep horn pours shift colour), after item 15. My pick: (b), at least for Haze.
+- 00:32 HONEST POLISHED CLOSE-UP GATE (wf_1cb4304f-9d4, 3 critics, ~13 min): HOLD 3/3.
+  - Improved: the horn body's saturation 0.96-0.99, crisper glints, the cabinet top blue instead of milky (pale pixels 5.1 % to 2.2 %).
+  - Revealed: a pale lavender X at the seams right of the pod (~2x the horn body's brightness, visible at phone size), with arms at
+    the upper left and lower left. And the phase plug is now a bright silver coil (315 px >220 against 56), reading like a spring.
+  - The critics: the old look depended on lamps a real shoot can't have, so the honest render, fixed, should be the answer.
+- 00:33 sent to the speaker lane: kill the X by real means (move, soften or flag the seam lamp, or nudge the camera); flag light out of
+  the throat (the plug's finish stays as built, since darkening it is item 8); optionally a white card for the cabinet top's edge.
+  Re-render both close-ups on the new rig right after the bottom-edge comparison.
