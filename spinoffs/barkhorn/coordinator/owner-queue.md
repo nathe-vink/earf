@@ -4134,3 +4134,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   side has no milky pixels against 15 %); the old blue floor streak is gone. Optional: calm the faint spoke fan in the flare (a larger
   diffuse source), give the top rim its glint, even the right side's lower third. Wording note for the owner: not "nothing is linked"
   (backdrop-only lamps and reflection panels remain, each with a real-studio equivalent). Item 6 waits on the re-lit close-ups.
+- 00:43 Mantle lane (stamped 00:45 at a 00:43:48 queue time): confirmed, the curtain doesn't emit, in the gated proxy (527dab10) or the
+  current build (0e714b30e8ffcd96218f885e50b41a1af02b12b2). The emitters are only the evening-sky plane outside the window, the Core's
+  LED face inside its frosted ball, and (from 0e714b30) the Hemisphere's opal liner from the lamps lane's 26400e7c. The round-12 curtain
+  function exists but never runs. Waiting on the gate and the formats; nothing rendering.
