@@ -231,6 +231,7 @@ def build(frame, samples, scale):
                 ad = nt.nodes.new('ShaderNodeAddShader')
                 nt.links.new(prev.outputs[0], ad.inputs[0]); nt.links.new(emn.outputs[0], ad.inputs[1])
                 nt.links.new(ad.outputs[0], outn.inputs['Surface'])
+                cm.cycles.emission_sampling = os.environ.get('EMIS_SAMP', 'FRONT_BACK')   # round 14: it faces in; the room sees its back
             sphere('core-in', ri - 3.0, zi, cm, inward=True, hole_below=20.0)
             # round 9 PROPOSAL (the gate: the LED hotspot): a white dot printed inside the core over the LED, Ø50, that
             # sends about half the near light back up into the core, as LED globes do
@@ -315,6 +316,7 @@ def build(frame, samples, scale):
             ad2 = nt2.nodes.new('ShaderNodeAddShader')
             nt2.links.new(prev.outputs[0], ad2.inputs[0]); nt2.links.new(emn.outputs[0], ad2.inputs[1])
             nt2.links.new(ad2.outputs[0], outn.inputs['Surface'])
+            opal_out.cycles.emission_sampling = 'FRONT_BACK'
         sphere('opal', 89.0, rim, opal_out, cut=oc, hole=H)
         sphere('opal-in', 86.0, rim, opal, inward=True, cut=oc, hole=H)
         part('out-dome-pendant', 'rim', acrylic('rim', 0.6, loading=float(os.environ.get('RIM_LOAD', '0.5'))), rim)   # round 9: backed off (the gate: a royal-blue outline)   # round 6: satin, a deeper shade, never bright
@@ -366,6 +368,9 @@ def build(frame, samples, scale):
         SC.plane('ceiling', (4.3, 4.0), (0.85, 0.0, 2.5), (180, 0, 0), SC.principled('ceiling', '#E8E4DC', 0.9))
         ev = float(os.environ.get('NIGHT_EV', '1.8' if prod == 'core' else '-3.0'))
         k = 2.0 ** (0.6 - ev)                     # round 9: one evening room for the family, the same fill at each exposure
+        # round 14 (the coordinator: the dome must plainly be the room's main light): the room's fill scaled down until the
+        # lamp gives most of the light on the wall near it (measured: lamp only against all lights)
+        k *= float(os.environ.get('ROOM_K', '0.05'))
         # round 11 (the coordinator's rulings 1 to 3, 2026-11-03: nothing in the room hidden from the glass's
         # reflections or from view through it; no light linking): the night room is a flat, dim evening ambient (no
         # dusk HDRI, so no daylight windows to mirror), one large soft fill that the glass mirrors as it is, and no
@@ -389,7 +394,7 @@ def build(frame, samples, scale):
             mx_.inputs[0].default_value = 0.35
             nts.links.new(tl_.outputs[0], mx_.inputs[1]); nts.links.new(tp_.outputs[0], mx_.inputs[2])
             nts.links.new(mx_.outputs[0], os_.inputs['Surface'])
-            dW = float(os.environ.get('DUSK_W', '20'))
+            dW = float(os.environ.get('DUSK_W', '20')) * float(os.environ.get('ROOM_K', '0.05'))
             gobo(-1.3, -1.3, -0.35, 0.75, 2.4, panes=(1, 2))
             SC.plane('sheer-left', (0.95, 1.65), (-1.27, -0.825, 1.575), (90, 0, 90), sheer)
             dl = SC.area('dusk-left', (-1.75, -0.825, 1.575), (0, 0, 0), (1.0, 1.7), dW, '#9FB2D6')
@@ -405,7 +410,7 @@ def build(frame, samples, scale):
             db.rotation_euler = (Vector(((x0 + x1) / 2, 0.0, (z0w + z1w) / 2)) - db.location).to_track_quat('-Z', 'Y').to_euler()
             # round 11: a small, dim real light behind and above the pendant, between it and the wall, facing the camera
             # side (no light linking): it catches the cap's tiers and is seen in the gloss for what it is
-            kk = SC.area('kicker', (0.25, 0.45, tz + 1.05), (0, 0, 0), (0.25, 0.25), float(os.environ.get('KICK_W', '1.5')), '#D8DCE4')
+            kk = SC.area('kicker', (0.25, 0.45, tz + 1.05), (0, 0, 0), (0.25, 0.25), float(os.environ.get('KICK_W', '1.5')) * float(os.environ.get('ROOM_K', '0.05')), '#D8DCE4')
             kk.rotation_euler = (Vector((0.0, 0.0, tz + 0.80)) - kk.location).to_track_quat('-Z', 'Y').to_euler()
         exposure = ev   # round 4: exposed for the lamp, as a night photograph is
     else:
