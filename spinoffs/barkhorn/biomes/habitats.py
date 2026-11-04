@@ -72,6 +72,9 @@ SETS = {
     'fog_b': {'lights.fill_l': {'type': 'area', 'size_m': [2.0, 2.0], 'target': [0.0, 0.0, 0.8], 'irradiance': 1.0,
                                 'color': '#F2F4F8', 'orbit': {'azimuth_deg': -55, 'elevation_deg': 15, 'distance_m': 3.5},
                                 'specular': 1.0},
+              # (and the camera's white balance at 5400 K, the coordinator's (c): the smallest that brings the cut edges'
+              # medians to +5 b* or below; 5800 left them at +6)
+              'render.white_balance_k': 5400,
               'product.instances.0.rotate_z': -5.0, 'sun.azimuth_deg': 110.0, 'sun.color': '#FFFFFF', 'camera.position': [-1.0072, -5.7119, 0.85], 'camera.shift_y': 0.18,
               'camera.fstop': 4.0},
     # Poison under the canopy: light through a canopy gap from the camera side and above (the opaque lining batts block
