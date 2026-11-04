@@ -4522,3 +4522,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   lemon-olive, the letters darker; same rig as the six (checked). Gate wf_8fdaa10e-d99 launched (the held one as context).
 - 02:05 sent: biomes, the AgX diagnostic (one proxy with 'AgX - Punchy', a crop under a third transform if available; numbers;
   a whole-frame look only if it suits the set; else (c)).
+- 02:06 speaker lane: THE DRIVER CHAIN AS BUILT (product.py and the BOM's component files; its own figures and dates, not re-checked
+  tonight): woofer FaitalPRO 15PR400-8 USD 194 (Thomann US, 2026-10-10); HF B&C DE1085TN-16 USD 512 (Sonovente EUR 472 incl. VAT;
+  the 16 ohm price unconfirmed; 2026-10-12); amp Hypex FA122 USD 422.40 (Parts Express 221-006, 2026-10-08); the remote kit
+  H08U003549 USD 22 (master only); the remote H08U001537 USD 11 (one a pair); a 5 m 75 ohm link USD 15 (estimate, one a pair); a 33 uF
+  100 V film cap in the HF line USD 12 (estimate). The core chain per speaker USD 1,128.40; per pair about USD 2,330 with the extras.
+  The L-pad is no longer used (attenuation in the FA122's DSP). Item 16 noted for after the bottom-edge sheets (the datasheet
+  can't be fetched from its container; it will mark which values stay unverified).
