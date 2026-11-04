@@ -3984,3 +3984,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   ambient, dusk and kicker at 5 %, and both emitters sampled front and back. Lamp share: Hemisphere wall 55/65/68 %, Core table 67 %
   (the Core wall is below one code value either way). Night (a) face 184, chroma 0.064, hue 226 (day 0.100/242). The room is darker
   now. Rendering: Hemisphere day (unaffected), nights (a) and (b) at 384, Core B night at 768.
+- 00:15 lamps lane (bc6a4525841d4a812e46a65c1704319bfb716d75): on the Mantle lane's spot flag. Core B has no spot: it's created only for
+  Core A at night. Its audit lists every light (B day: the window sky outside the opening and the sun; B night: the fill at 5 % only, and
+  the opal face as the emitter). Core A's spot WAS live, pointing down into the base, so A's night frames from rounds 4-8 were lit by
+  bounce out of the base pocket (likely part of the "flat disc" and the cone at the base). A is retired and not re-rendered; the spot
+  now aims up for any later use.
+- 00:16 sent to the lamps lane: list every Core picture live or queued for the owner (site 743be0cb, deck, brand book, press, the
+  walkthrough's lamp items) that carried that spot. Say plainly whether the cordless set on the site (735e7593) came from another
+  pipeline; for any that did carry it, give path, SHA and whether it shows at night.
