@@ -3956,3 +3956,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   - Speaker lane: hold the arc (63 front views show the bottom edge) until the owner's bottom-edge answer; the macros stay held.
     The comparison's satin option should sand only the bottom panel's exposed edge, unless the whole panel is needed (say why), with
     cost under each option.
+- 00:07 c2: merged 6692fae3 at 657e083289b66fed073bddb638a06a2a0bc72cf3 (the variants file discarded first; after the merge it holds
+  #CDC509). Lists: A-polished-backfix, 7 site-back shots (880x1100, 96 samples, ~13 min each, ~1.5 h, Smoke held); A-polished-p2-backfix,
+  amp-plate-ember (1000x1250, 112 samples, ~20 min) and horn-back-acid (1200x900, 128 samples, ~19 min). Rendering now, backfix first.
+- 00:07 c3: both models rebuilt on f6d0eda7 (Cloud 23:45:50-23:56:08; variants 23:56:13-00:07:09). The variants file was checked out,
+  then 6692fae3 merged at d649d2cc9d9b223b0c42496104f2985b9a50a2bf (clean, #CDC509). The honest horn-A-polished close-up started 00:08;
+  horn-A-satin follows. (Both SHAs checked with ls-remote just now.)
