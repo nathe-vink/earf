@@ -4323,3 +4323,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   light from above through the clear lid and more frontal fill. It wrote its own audit script (my tools aren't on its branch).
 - 01:28 sent: my tools' location (origin/r46-owner-notes, coordinator/tools/), run both; a real in-frame black flag seen by every
   ray is allowed if it reads as part of the set, a reflect-only one is not.
+- 01:28 Mantle lane (stamped 01:31; queued 01:28): CONFIRMED the proxy scaled the COB alone (12.8 W) while the liner stayed at the
+  lamps lane's 11.5 W/m² (lamp_pictures computes it from 3.2 W/490 lm and never reads COB_W, l.303-304 at 26400e7c): the shade glows
+  4x too dim for the light it throws. After the verdict: the lamp as the lamps lane's file (COB 3.2 W, liner 11.5 W/m²), about +2 EV;
+  the window on the same 0.0065 W/lm scale. Its CORE_EMIT ~430 was wrong (~55 W, ~8,500 lm on the scale, ~15x the real ~560 lm out);
+  on the scale Core is CORE_EMIT ~28 (3.6 W) for the wall picture. No Core in the singles. The gate in flight judges a proxy with
+  this inconsistency; the re-proxy folds in the fix with the critics' asks.
