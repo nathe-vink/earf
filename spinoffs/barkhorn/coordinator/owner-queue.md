@@ -4000,3 +4000,14 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 00:2x the honest polished close-up (75646195) against the old (a381aefb): mean absolute difference 7/9/11 levels per channel, local
   maxima above 220. A visible change, so item 6 shows both side by side with the disclosure. Gate launched (wf_1cb4304f-9d4), the old
   as context. The satin re-render waits on the speaker lane's fix.
+- 00:20 c3 (stamped 00:22): deleted the satin outputs (never committed); the satin re-render comes after the running tall chunk, once the
+  SHA arrives.
+- 00:20 speaker lane: TALL ICE HONEST at full size at d9ba82c37714193b53fb1df626908d71aee38c2c
+  (renders/2026-11-04/barkhorn/honest/tall-ice-honest.png, 1000x1250, 96 samples): fix1's tall rig at 6692fae3, every lamp honest, back
+  and edge off, key and kick at 40°, every card at 0.0 %. Against gate 2's A-ice-polished (a look-alike, not pixel-for-pixel): right
+  face saturation 0.56 to 0.74 (lower part 0.32 to 0.46), horn clipped 2.2 % to 1.4 %, the floor right of the speaker 246 to 214.
+  NOTE: the lane calls f7f03850's honest A-ice-polished "the strict A/B for the polish question", but that rig still had the 34 %
+  card and a linked edge, so it isn't honest under the rulings. Item 6 uses the old A-ice-polished against tall-ice-honest, plus the
+  close-ups. The bottom-edge comparison is rendering (six frames, ~30 min).
+- 00:20 my audit of tall-ice-honest: clean (seven cards all 0.0 %; edge and back off; horn at specular 1.0, irradiance 5.2). Gate
+  launched (wf_4102fa3c-507), with the old picture as context.
