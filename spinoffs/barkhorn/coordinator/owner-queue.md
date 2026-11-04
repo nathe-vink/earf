@@ -4049,3 +4049,15 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   difference 6/9/15 per channel, a real difference. A slip it owns: the bottom-edge comparison never started at 00:19 (its wait loop
   matched its own command line). Killed by PID at 00:30; the six renders run now, done ~01:00. The custom-pour check runs meanwhile.
 - 00:31 satin gate launched (wf_53bafbd3-db3), with the polished honest close-up as context.
+- 00:30 biomes lane: the horn-pour numbers from the asset's own absorption (cabinet through two 20 mm walls, horn through 12.7 mm, OKLCH):
+  Ember Δh 0.0, Poison -0.4, Acid -16.8, Ice +16.0, Dust -20.8, Haze -22.6 (-31.4 through one wall). The deep or custom lots run off-hue;
+  Ice's +16 wasn't flagged by the critics (~15° may be near the edge of what reads).
+- 00:31 speaker lane (stamped 00:33 at a 00:31:13 queue time): the same check from barkhorn-cloud.json at 14e1e50e (cabinet at 19 mm
+  and at 300 mm, horn at 12.7 mm). Horn hue minus cabinet face hue: Ember +4, Dust -32, Acid -26, Poison -2, Ice +23, Haze -32,
+  Smoke +1. Each off pour sits near its cabinet's LONG-PATH hue (the same dye at heavier loading). Every horn is darker than its
+  cabinet's face (0.47-0.64) except Ember (0.86). Options for the owner: (a) accept the depth shift; (b) a two-dye custom pour holding
+  the face hue (Haze ~h 300, L 0.39, ~#5A1FB4); (c) lighter pours.
+- 00:31 sent: speaker lane, after its order: (b)'s targets for all four (L/C/h, a swatch, the cost or lead-time effect of a second dye),
+  and one Haze comparison render (as poured against the (b) target) on the honest close-up rig. Biomes: commit oklch.py; the Haze proxy
+  goes ahead, with the horn's hue a known design question.
+- WALKTHROUGH: new item 15b (the deep horn pours shift colour), after item 15. My pick: (b), at least for Haze.
