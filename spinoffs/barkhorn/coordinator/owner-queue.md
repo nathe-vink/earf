@@ -4499,3 +4499,16 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   23:37; it restarts after the Poison proxy.
 - 01:58 sent: treat it as memory (Ice was killed by signal 9 beside a proxy at 14:11): one Blender job at a time; /usr/bin/time -v on
   the final; if it dies alone, cut instance counts or texture sizes and turn persistent data off; report the peak memory.
+- 02:00 OWNER: "A. One thing I’m curious about is cost vs quality. Are our drivers best quality for the price? Compared to my Pitt
+  and Giblin speakers that I paid around $10K USD for, how do they stack up?" Saved verbatim first (README 6ec298ec). Item 16
+  answered (a): the woofer follows FaitalPRO's drawing. A new question: answered next, before item 18.
+- 02:0x A CONTAINER RESTART (the second) stopped four workflows: the lamp-audit verification (wf_c283c264-343, 1 cached), the
+  bottom-edge sheets (wf_f365f69f-fac, 2 cached), the turn chunk 6 (wf_57b250a0-dbb, 0), the lamps finals (wf_810dab76-43f, 0). All
+  four resumed with identical args.
+- 02:0x research workflow wf_a61bba67-c8e launched for the owner's question (three researchers: Tropos's parts and prices from the
+  repo and the web; Pitt & Giblin's company, models, drivers and prices, and the likely ~$10K model; the upgrade landscape per slot
+  and what matters more than drivers; then a fact-checker; then the owner-facing answer with sources). Repo facts: 15PR400-8 (99 dB),
+  DE1085TN-16 (100 mm titanium, 2 in), FA122 with DSP; 135 L at 38 Hz, f3 ~51 Hz; ~115-117 dB max; the old proposed price $16,000 a
+  pair ($19,000 Cloud), prices parked.
+- 02:04 sent: speaker lane, item 16's rollout (the model and docs to FaitalPRO's figures; the predictions re-run; low priority after
+  the bottom-edge sheets) and confirm the driver chain and BOM prices.
