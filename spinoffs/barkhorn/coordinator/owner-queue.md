@@ -4129,3 +4129,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   shading per the others) and would show it alone. Composite built: scratchpad/walkthrough/05-ice-batt-honest.jpg.
 - 00:44 ITEM 5 RE-SHOWN to the owner with the honest picture beside the old, captioned accurately (the speaker half a stop darker, the
   rest unchanged; the crop a 2x detail).
+- 00:44 TALL ICE HONEST GATE (wf_4102fa3c-507): SHOW 3/3. Against the old A-ice-polished: the horn is essentially the same (L 70
+  against 74, same hue and streak contrast); the cabinet is deeper and cleaner (front saturation 0.55-0.59 against 0.48-0.51; the right
+  side has no milky pixels against 15 %); the old blue floor streak is gone. Optional: calm the faint spoke fan in the flare (a larger
+  diffuse source), give the top rim its glint, even the right side's lower third. Wording note for the owner: not "nothing is linked"
+  (backdrop-only lamps and reflection panels remain, each with a real-studio equivalent). Item 6 waits on the re-lit close-ups.

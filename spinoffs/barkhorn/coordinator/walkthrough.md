@@ -22,6 +22,13 @@ Show one item with its pictures, wait for the answer, save the owner's words ver
   - Items 6, 7, 8, 9 and 13 come back as soon as their honest re-renders pass the critics, with the bottom-edge question after
     item 7.
   - Tell the owner in one line why the order changed.
+- **ITEM 6's PICTURES (00:44):** tall Ice honest (d9ba82c3) PASSED 3/3 (wf_4102fa3c-507). Against the old A-ice-polished: the horn is
+  essentially the same glassy blue (mean L 70 against 74); the cabinet is deeper and cleaner (no milky pixels against 15 %); the blue
+  floor streak is gone. A faint fan of spokes in the flare (not an X) and a darker top rim are optional fixes. The close-ups are
+  being re-lit for the X and the throat. When they pass, item 6 shows old against honest (tall and close-up).
+  THE DISCLOSURE'S WORDING (a critic's note): don't say 'nothing is linked'. Say that no lamp lights the speaker while skipping parts
+  of it, and no hidden card sits in frame; the remaining backdrop lamps light the backdrop alone, as a studio's background lights do,
+  and three reflection panels show only in reflections, as real cards would.
 - **NEW OWNER QUESTION (23:38, the lamps lane), for the Hemisphere finals:** the cap shows a dark 5 mm notch. It is the bayonet's
   entry, open at the collar's top end so the pin can enter. The crown (80 mm) is smaller than the collar (96), so the collar's top
   ring is bare. Options: a crown at least 96 mm across, or a thin cover ring. Show it with the Hemisphere finals once they pass.
