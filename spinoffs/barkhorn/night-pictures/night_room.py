@@ -181,6 +181,14 @@ def night_set(bpy, spec, mats):
         _box(bpy, 'night-wall-left', (x0 - t / 2, (yb + yf) / 2, h / 2), (t, yb - yf, h), wall_m)
     _box(bpy, 'night-wall-right', (x1 + t / 2, (yb + yf) / 2, h / 2), (t, yb - yf, h), wall_m)
     _box(bpy, 'night-wall-front', ((x0 + x1) / 2, yf - t / 2, h / 2), (x1 - x0 + 2 * t, t, h), wall_m)
+    sk = n.get('skirting')
+    if sk:
+        # a skirting board along the back and side walls, a dark matte paint (the formats: the pendant's cone meets
+        # the wall's foot beside the speaker, inside the lower text zones)
+        skm = _principled(bpy, 'skirting', sk.get('color', '#2A2826'), 0.9, 0.2)
+        hh, dd = sk.get('height', 0.15), 0.015
+        _box(bpy, 'skirting-back', ((x0 + x1) / 2, yb - dd / 2, hh / 2), (x1 - x0, dd, hh), skm)
+        _box(bpy, 'skirting-right', (x1 - dd / 2, (yb + yf) / 2, hh / 2), (dd, yb - yf, hh), skm)
     w = n.get('window')
     if w and w.get('strength', 0) > 0:
         _curtain(bpy, None, w.get('color', '#9FB2D6'), w['strength'], w['loc'], w['size'], w['target'])
