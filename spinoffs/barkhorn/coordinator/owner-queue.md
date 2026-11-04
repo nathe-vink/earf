@@ -4100,3 +4100,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   bottom-edge answer; this goes after the close-up re-light.
   (Time fix: my arc message to the speaker lane was stamped "00:41" but sent at about 00:40:15, before a 00:40:26 `date -u`. My error
   again. The correction rides on my next message to that lane.)
+- 00:40 biomes lane: Fog (c) small. Two proxies of the same shot at white_balance_k 5800 and 5400 (the D65 default before). It takes the
+  smallest shift that brings the cut-edge medians to ~+5 b* or below, reports edges, panels, sky and grass for both, then renders the
+  final. They run after the Dust and Ember re-renders and the Poison and Haze proxies. (No reply needed.)
