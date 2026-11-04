@@ -4300,3 +4300,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 01:26 gate wf_16d3d3dc-8f5 on the proxy (the 00:44 faults listed; does the pendant read as sitting on the horn?). Sent: Mantle
   (gating; no Core in the singles is right; hold for the pendant's real output); lamps lane (the Hemisphere's real lm/W and the
   matching setting, with the source).
+- 01:25 c3: fix1 TALL CHUNK 2 at 3d0b613f4321610d6436aae97918d9534f11d857 (01:03-01:25): site-front-off-tall-haze (9.2 min),
+  -fog (11.1 min). All seven tall frames done. Idle.
+- 01:27 my check: Haze and Fog share chunk 1's rig exactly (lights, set, camera, sky, render, size); seven reflect-only cards 0.0 %.
+  Gate wf_3ed9ef22-dc3 launched (the passed tall Ice and the Ember frame as context; the bottom edge reported). Sent: c3, hold; next
+  the re-lit close-ups (polished and satin-outside, front and rear-quarter) when the speaker lane's SHA comes.
