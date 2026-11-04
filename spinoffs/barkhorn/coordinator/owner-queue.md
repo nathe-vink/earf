@@ -3899,3 +3899,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 00:03 sent to the biomes lane: check Fog's material body colour for yellow. If it's neutral, fix the warmth with real light (a less
   warm sun, a neutral fill from the left, or the fog moved behind the cabinet). Move the specks, soften the crease, and send the
   before and after b*. Order: after Ice, before the others.
+- 00:0x DECK-HOME PORTRAIT GATE (wf_f9ac827f-410, 3 critics, ~27 min): HOLD 2/3 (1 SHOW). Both earlier holds have moved.
+  - The left horn casts an OPAQUE neutral-grey shadow on the wall (G-R -7 to -10), while the cabinets throw green: the renderer gap
+    (shadow rays stop at glass).
+  - The left unit's side face is now a near-black mirror of the credenza.
+  - The lower chambers are dim (one critic reads near-black).
+  - A matched pair (turn the left unit in), the driver's back cap past the left horn's rim, a CG-looking woofer reflection.
+- 00:04 sent to the speaker lane: apply the lamps lane's thin-shell shadow transmission to the formed horn in every rig with a hard
+  light (the room, the cover, hero-light). Fix the side face (green shaded glass, or the left unit turned in), lift the lower chambers
+  with real bounce. The room goes after the cover; c4's deck-home will likely need the same.
