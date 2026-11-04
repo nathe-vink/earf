@@ -4316,3 +4316,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   the liner at 11.5 W/m² glows 4x too dim); either the lamps lane's file as is plus ~+2 EV, or COB and liner scaled together; say
   which it did and the liner's emission; the window a dim night sky on the scale; any Core on the same scale (~3.6 W), its own
   CORE_EMIT ~430 checked in lumens.
+- 01:28 c2 (stamped 01:31; queued 01:28), back-rig progress: the Ember baseline back L* 11.5, lid C* 6.5, side C* 7.2, EARF 15.0 on
+  6.2; the old phase-1 Ember (back 16.2, lid C* 17.7, side C* 14.7) took its colour from the in-frame reflect-only flag beside the
+  cabinet plus cab-back. The side mirrors the floor behind-left (in frame); the lid strip is mostly its polished front edge
+  mirroring the open studio front. A bigger key or a side lamp adds ~1 L* and brightens the sweep, so not that route; testing
+  light from above through the clear lid and more frontal fill. It wrote its own audit script (my tools aren't on its branch).
+- 01:28 sent: my tools' location (origin/r46-owner-notes, coordinator/tools/), run both; a real in-frame black flag seen by every
+  ray is allowed if it reads as part of the set, a reflect-only one is not.
