@@ -250,14 +250,33 @@ def build(frame, samples, scale):
                 nt.links.new(d_.outputs[0], m_.inputs[1]); nt.links.new(t_.outputs[0], m_.inputs[2]); nt.links.new(m_.outputs[0], o_.inputs['Surface'])
                 me.materials.append(dm)
         else:
-            sphere('ball', 80.0, zc, acrylic('ball', 0.0, loading=1 / 3))
-            sphere('ball-in', 71.0, zc, frosted(acrylic('ball-in', inner, loading=1 / 3)), inward=True)
+            # round 15 (the coordinator: Core A "as drawn", fairly against B): the ball has its 40 port over the window,
+            # as in the CAD, and at night the same honest rig as B: the frosted face is the light (ruling 3's exception,
+            # the LED inside its own frosted fitting), at the same total power as B's core, near even (a Lambertian LED
+            # at the sphere's foot lights its inside about evenly); the outer wall passes shadow rays at its transmission
+            # the frost face emits on the wall's inner face, where the wall's absorption is not applied to it: so its
+            # colour carries the whole 9 mm wall's transmission, and the outer face passes shadow rays at its surface loss
+            T9 = shell_T(tname, 1 / 3, 9.0)
+            sphere('ball', 80.0, zc, thin_shadow(acrylic('ball', 0.0, loading=1 / 3), (0.96, 0.96, 0.96)), hole_below=20.0)
+            fm = frosted(acrylic('ball-in', inner, loading=1 / 3))
+            if night:
+                ntf = fm.node_tree; outf = next(n for n in ntf.nodes if n.type == 'OUTPUT_MATERIAL')
+                pf = outf.inputs['Surface'].links[0].from_node
+                ef = ntf.nodes.new('ShaderNodeEmission'); bbf = blackbody(cct)
+                ef.inputs['Color'].default_value = (*(bbf[i] * T9[i] / 0.96 for i in range(3)), 1)
+                # B's core: 0.05 W/m2 a side on 0.0408 m2; the same power on A's 0.0633 m2 frost
+                ef.inputs['Strength'].default_value = float(os.environ.get('CORE_EMIT', '0.05')) * 0.0408 / 0.0633
+                af = ntf.nodes.new('ShaderNodeAddShader')
+                ntf.links.new(pf.outputs[0], af.inputs[0]); ntf.links.new(ef.outputs[0], af.inputs[1])
+                ntf.links.new(af.outputs[0], outf.inputs['Surface'])
+                fm.cycles.emission_sampling = 'FRONT_BACK'
+            sphere('ball-in', 71.0, zc, fm, inward=True, hole_below=20.0)
         if night:   # round 4: the LED itself under the window (its face 14.8 above the base's foot), about 620 lm
             # at full: a real light, up into the ball; its light reaches the room only through the acrylic
             # round 8 (the gate: a hotspot cone at the base): the LED behind the window as a Lambertian disc the
             # window's size, not a 160 deg spot
             # (the disc speckled at full samples: back to a point source, a full hemisphere with a soft edge)
-            if var != 'nested':   # round 12: in B the core's opal face is the light (above)
+            if False:   # round 12: in B the core's opal face is the light; round 15: in A the frost's (above)
                 # (round 14, the Mantle lane's flag: a Blender spot points down, -Z; this one had no rotation, so in A it
                 # shone into the base, not the ball. Aimed up now. Core A's frames of rounds 4 to 8 carry that error)
                 light('led', 'SPOT', (0, 0, z0 + 0.0148), LED_W, 0.012, rot=(180, 0, 0), spot=160.0)
