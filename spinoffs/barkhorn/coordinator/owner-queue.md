@@ -4274,6 +4274,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   proxy too if the speaker reads dark or the forest thin. I gate the proxy; Poison's final held.
 - 01:16 c2: helpers don't change scene settings (HELPERS.md); asked whether the back re-light was meant for the speaker lane, or
   for c2 explicitly as a rig commit. Held, checkout unchanged.
-- 01:17 sent: c2, explicitly cleared to do the back-rig work as a separate rig commit on r33-rollout-c2 (the rules listed; rigaudit
+- 01:16 sent (the messages said 01:17, ahead of the clock; date -u read 01:16:43 after sending): c2, explicitly cleared to do the back-rig work as a separate rig commit on r33-rollout-c2 (the rules listed; rigaudit
   and cardcast pasted; proxy Ember, Poison, Haze; numbers; wait for my go before the seven). Speaker lane told (FYI): merge c2's
   rig commit once it passes, so the back rig lives in one tree.
