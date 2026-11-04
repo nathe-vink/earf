@@ -4117,3 +4117,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
     site; a plain cross-fade in the night section; the night spec soon (the square crop cuts the speaker on common laptops).
   - Mantle: confirm its curtain doesn't emit; if it does, swap in 26400e7c's.
 - WALKTHROUGH item 89: the A frost night picture pulled and labelled as mislit; an honest A night queued.
+- 00:4x DECK-HOME (landscape) GATE (wf_bcc7def6-932, resumed): HOLD (see the tally in the next entry). The same two faults as the
+  portrait, measured identical: the left horn's wall shadow is solid neutral brown (99/91/75, G/R 0.91, against the cabinet's green
+  patch at 1.23), and the left unit's right side face is a near-black mirror of the sideboard (luma 13, no green). New: two visible
+  power cords to the wall sockets (route or hide them). The lower chambers are dark but legible. This folds into the room fix the
+  speaker lane has (thin-shell horn shadows, the side face, the bounce).
