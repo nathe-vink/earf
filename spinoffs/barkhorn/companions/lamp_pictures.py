@@ -258,7 +258,9 @@ def build(frame, samples, scale):
             # window's size, not a 160 deg spot
             # (the disc speckled at full samples: back to a point source, a full hemisphere with a soft edge)
             if var != 'nested':   # round 12: in B the core's opal face is the light (above)
-                light('led', 'SPOT', (0, 0, z0 + 0.0148), LED_W, 0.012, spot=160.0)
+                # (round 14, the Mantle lane's flag: a Blender spot points down, -Z; this one had no rotation, so in A it
+                # shone into the base, not the ball. Aimed up now. Core A's frames of rounds 4 to 8 carry that error)
+                light('led', 'SPOT', (0, 0, z0 + 0.0148), LED_W, 0.012, rot=(180, 0, 0), spot=160.0)
             led = bpy.data.meshes.new('led-face'); bm = bmesh.new()
             bmesh.ops.create_circle(bm, cap_ends=True, segments=48, radius=0.013); bm.to_mesh(led); bm.free()
             lo = bpy.data.objects.new('led-face', led); bpy.context.scene.collection.objects.link(lo)
@@ -468,6 +470,7 @@ def build(frame, samples, scale):
             y += step
         print('CARD-AUDIT', frame, {k: round(100.0 * v / n, 1) for k, v in hits.items()}, 'rays', n)
         print('NO-SHADOW', frame, [o.name for o in sc.objects if o.type == 'MESH' and not o.visible_shadow])
+        print('LIGHTS', frame, [(o.name, o.data.type, round(o.data.energy, 3)) for o in sc.objects if o.type == 'LIGHT'])
         return
     os.makedirs(OUT, exist_ok=True)
     out = os.environ.get('LAMP_OUT') or os.path.join(OUT, frame + '.png')
