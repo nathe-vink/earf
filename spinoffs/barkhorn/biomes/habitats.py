@@ -61,7 +61,7 @@ SETS = {
     # frame behind the photographer, the front face lit so light enters the box; the sky and the disk turned with it)
     'haze_b': {'product.instances.0.rotate_z': -10.0, 'sun.azimuth_deg': 30.0, 'sun.elevation_deg': 6.0,
                'sky.rotation_deg': 18.8, 'camera.shift_y': -0.13,
-               'render.exposure': 0.33},   # +1/3 stop, whole frame (the critics on 1921b6fa: the box at the floor of 20-30)
+               'render.exposure': -0.67},   # +1/3 stop on the shot's -1.0, whole frame (the critics on 1921b6fa: the box at the floor of 20-30)
     # Fog (the coordinator's gate on 45a190d1): the clear polished horn refracted the fog bank's top edge into an X.
     # The camera 0.30 m lower (lens rise 0.06 -> 0.18 keeps the framing) puts the whole horn on plain sky, and it is
     # turned 5 deg toward the front (-15 -> -10, not front-on). f/4 for a softer background; the sun's colour cooled
