@@ -4027,3 +4027,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   the batt as visible. Honest options if brighter is wanted: a smaller flag, or +0.15 EV on the camera. Its own gate passed all four.
 - 00:23 gate launched on the honest Ice and its batt crop (wf_66c04959-ad3), with the old picture and the A/B as context. When it
   passes, item 5 is re-shown to the owner with old and new side by side (the correction already told).
+- 00:2x HAZE GATE (wf_f0437845-fd3, resumed after the restart; 3 critics): HOLD 3/3.
+  - The box is a near-black indigo block (median L* ~7-10 against Ice's ~32-35; a black frame at the top and right edges), so it
+    doesn't read as see-through violet. The front sits in shade (backlit, flat haze).
+  - The horn is a different material: 2.8x the luminance, 2.2x the chroma, ultramarine 272 against violet 284-291 (Ice: 1.3x, 1.08x,
+    4°).
+  - Magenta glints on the bronze posts.
+- 00:28 sent to the biomes lane: real light into the box (the sun at three-quarter front or side, or a soft fill from the camera), then
+  the horn matched. Check the horn uses Haze's absorption; if the gap is the thin sheet's short path (Beer's law), say so, since that's
+  the owner's custom-pour question (item 15). A Haze proxy after the Fog proxy, Dust and Ember.
