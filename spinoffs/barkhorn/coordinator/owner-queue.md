@@ -5484,3 +5484,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   shadow, seen by every ray type); proxies base / (a) silk T 0.7 1.4 x 2.0 m from 2 m / (b) the sun 6 -> 10 deg, after the Fog crop
   and two Acid proxies. The pink glint (758, 700-703; 4 px) is the bronze pod leg's warm highlight through the violet wall: honest.
   Its stamps corrected (it now reads the clock first).
+- 18:47 lamps lane (stamped "18:5x"): THE HEMISPHERE'S DROP: the documents disagree: crystal.py drop=600.0 and PARTICULARS.md line
+  19 "Standard drop 600 mm, cut to length (the rim 776 mm below the ceiling as supplied)" read as a 600 mm maximum; components.json
+  "hemi-cord ... 3 m cut to the drop" buys 3 m; the hanging guidance (rim 650-800 mm over a table or counter) needs more than 600 mm
+  under ceilings of 2.4 m or more. Its proposal for the owner: supply the 3 m cord, "drop up to 2.5 m, cut to length; standard 600 mm
+  as drawn".
+- 18:48 walkthrough items ADDED: 107 (the Hemisphere's cord: 600 mm as drawn or the 3 m cord cut to length; my pick yes to the 3 m)
+  and 108 (for information: the clear bottom panel pipes light to its front edge; the site pictures use a black card behind; my
+  pick keep as built). Sent: the lamps lane (on the owner's list; no copy change; every picture inside the 600 mm drawn drop); the
+  Mantle lane (the night room's ceiling ~2.25 m so the rim ~1.47 m is honest under both readings; a plausible room if seen).
