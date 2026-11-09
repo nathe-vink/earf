@@ -5722,3 +5722,13 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   before the Acid final; (1) a fill behind the camera only as fallback. The site lane and the brand lane: pull the Dust habitat (the
   site's Out view and /colors/dust; the Book's honest-dust-habitat.jpg) until a re-render passes.
 - 19:27 c4: rc1-real DUST tall (0310668b, 7.2 min, hiddencast clean); Poison started 19:27, then the wides.
+- 19:28 LAMPS AUDIT (7b8ac18c, launch/HIDDENCAST.md): lamps-unlit FAILS: four lamps hidden from the camera in frame (a bounce between
+  the lens and Core 100 %; the back light 9.9 %; two lamps behind the glass shining at the lens, thru_orb 6.7 % and thru_dome 8.0 %).
+  Rig fixed (lamps_cordless.py --unlit-real: the bounce moved out and grown 2.3x; the back and through-the-glass lamps removed; the
+  wash's specular 0 removed). Visible: Core's "pale core" was thru_orb, so its lower half now reads dark; a bright ring at Core's foot
+  is the contact dock in the CAD since 11-01. The round-2 site rig and the Core pairs are clean; hemi-ice-night (2fb64db3) FAILS (the
+  dusk sky 22.4 %, a kicker 4.1 %); the old cordless lit Core frames carry a hidden pool lamp (not in use). CORE's LED: the drawn
+  part is a 30 mm warm-dim board (2200/2700 K, CRI 90+), 200 lm at <= 1.5 W; the rigs used 620 lm, 3x the part. 19:28 sent: Ember
+  first; Core at its drawn 200 lm (~180 out of the ball) from round 3 on, never brighter than the part. 19:29 sent the site lane and
+  the brand lane: lamps-unlit out everywhere; the Ember pair goes in if it passes by ~20:20 ("Shown in Ember", "a pale core" dropped),
+  else no lamp picture (text only); the site in ONE push with the talls, the Dust pull and the lamps picture.
