@@ -4895,3 +4895,45 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   and amp plate for the galleries, and the coming re-rendered talls) at 17:24.
 - 17:25 asked the speaker lane for horn A's CAD height (1293 vs 1.295 m), the total weight with and without horn A (72.6 kg?), and
   the width wording; answer to me and the site lane at once.
+- 17:21 speaker lane: THE FLOOR-BAND FIX at cb62d1eba78894094897cd43b86914c3148c5ce3 (r33-speaker-horn tip; its "17:24" stamp
+  should have read 17:18): each contact term floored at 0; the Ember wide seam 464 -> 0 bright-against-dark px; the floor under the
+  bottom panel dark; the cabinet's lower inside a little darker (the false floor had glowed up through the clear bottom panel); the
+  shadow in front 37 -> 23. Frames on the sweep carry it (tall x7, the 11-03 hero-lights, deck frames); the room, turn and
+  horn-backs don't. Next: the bottom-edge sheets on the fix (as built first; the pre-fix frame a labelled test).
+- 17:21 brand lane: WAVE 1 DONE at e9eb285d (local, unpushed): chapters 12-20 and 21 parked in a closing "Parked: execution plans,
+  not updated to the 9 November decisions" (one line each); "The facts of record" now chapter 12 (Settled / The owner's to decide);
+  Smoke lines fixed; the release and signage gaps; Mantle neutral; idents 16:9 contain; the studio picture the passed Ice front;
+  Render badges on renders only; "designed in San Francisco"; Core's dock; Hemisphere v3; the Names lede rewritten; Mother EARF a
+  proposal; plates marked proposals ("none is held yet"); [contact line]; unused files to go (96 -> 37 + index.html); the footer.
+- 17:22 c2: stopped hero-light chunk 3 by PID at 17:21 (Ice finished 17:09, kept uncommitted as evidence; Haze killed); the lamps
+  AUDIT check passed exactly; waiting for the fix.
+- 17:24 biomes: the FOG RECORD corrected (5349ef28; one-scene strip fog-steps-5c0f-fill-wb5400-final.jpg): three changes against
+  5c0f8509 (the 3 Nov 23:34 commit): the boulder moved aside (62d4d4e8, per my 3 Nov gate), a neutral photographer's fill added (2 x 2
+  m area light, az -55, el 15, 3.5 m, irradiance 1.0, #F2F4F8, unlinked, out of frame), WB 5400 K (3d3513c9); the lining unchanged
+  (the asset's white felt, near-black before in front of the boulder with no fill). POISON TRACE, first pixel (left of the woofer):
+  20.3 mm of front-panel resin, then lining-left-2a-web; its mirror (11°, 3.9 % Fresnel) sees the black flag: NOT reflection.
+- 17:25 site lane: wave 1 received, ~75 min locally (blockers ~30, majors ~30, minors and the new pictures ~15); asking the speaker
+  lane for horn A's height ("about 1.3 m" meanwhile); the Hemisphere overflow and the lamp/Mantle 4:5 view fixed in base V2 too.
+- 17:26 cb62d1eb checked (MAXIMUM(result, 0) per term); sent c2 the go (merge cb62d1eb; the seven talls rc1-fix, Dust alone first,
+  then Ice and Acid, then Ember, Poison, Haze, Fog; then hero-light 3-4); told the speaker lane the assignments (c2 talls; c4 turns
+  -> wides -> sides; c3 turns -> hero-light 1-2) and that the bottom edge becomes a question only if the as-built edge still shows
+  something read as light (numbers asked).
+- 17:2x FOG RE-GATE launched with the accurate record (wf_8fce8023-90e; the one-scene steps, the 3 Nov final and the Ice habitat as
+  context; the fill judged for honesty).
+- 17:2x SITE RC REVIEW, the owner's-eye lens (wf_04126f94-84b): "not ready to show him": most change is removal (phone home 4,371
+  px vs live 8,396 with four pictures; galleries 1/11 -> 1/1; Lighting, color pages, pairings and copy unchanged). Blockers: eight
+  colors and the share card's text; Smoke live across lamps, Mantle and colors; the pairing grids (the Smoke lamp picture in 8 of 12
+  cards per speaker page, captioned with other colors); "Colors" in the nav goes nowhere; the bouncing address. Majors: dead links;
+  1/1 galleries with the passed pictures unused; 3:2 seams; the phone hero a 4+3 grid of ~95 px speakers; /tropos and /mantle grids;
+  Mantle's Ember caption; /lighting one picture three times; the weight; the names; the phone menu; repetition. Sent WAVE 2 (12
+  items, led by "add what's honest now, not only take away") at 17:27.
+- 17:2x BOOK REVIEW words + build lenses (wf_64e0f5e4-908): the build found THE PUBLISH BROKEN (three used pictures never uploaded:
+  release-march, ks-prelaunch-page, pitch-project show as broken images on the live Book; 12 of 43 shown pictures older than the
+  build, e.g. "BLACK ANODISED ALUMINIUM", "another colour"); the chapter strip overflow at 1440; slab label contrast; Render tags at
+  70 %; Smoke card stripes overridden; pending boxes 26 % of the page; the phone mark scroll. Words (new): the model code T-1 vs
+  TR-1; "USB" as an input; Smoke in the signage hours; Mantle's Strata Float v3 design figures exist (450 x 370 x 199, 12.9 kg);
+  the crate's weight wording; the Sessions costs disagree (use BUDGET.md verbatim); the press-kit hold lines; Voice's old brief;
+  January-plan dates; British forms (round, Ochre, wordmark-colour, "32.3 %"); typos. Sent WAVE 3 (17 items; the publish procedure
+  first: pass every used file, null the unused, verify by file listing) at 17:28.
+- 17:28 stopped the original Book review workflow (wf_996beee8-30d): its remaining lenses duplicated the parallel ones on a now-stale
+  version; a short re-review of the republished Book comes before the owner gets the link.
