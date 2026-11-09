@@ -662,6 +662,12 @@ def site(frame, tint):
         s['lights']['back'].pop('power_w', None)
     if frame in ('front-off-tall', 'front-off-wide', 'hero-light'):
         back_edge_card(s)
+    # a panel at strength 0 still stands in the set: unseen by the camera and casting no shadow, but in the glossy floor's
+    # reflections a black rectangle (the wide's critics, 2026-11-09: a straight, nearly horizontal seam on the floor at
+    # x 1650-1800, y 780-790 of 1800 x 1200, darker beyond it; the ray-cast puts it on `sidesheen`'s foot, y 2.4 m behind
+    # the speaker). An unlit panel is no lamp, whatever its ramp (a fraction of 0): it goes
+    for k in [k for k, L in s['lights'].items() if L.get('type') == 'panel' and float(L.get('strength', 1.0)) <= 0.0]:
+        s['lights'].pop(k)
     if frame == 'side' and 'kick' in s['lights']:
         # (the tall gates' fold-in (1), 2026-11-09: the lower third of the right side mirrored the floor between the speaker
         # and the black mirror card, which the card rule keeps 2.5 m out, too far to reach the lower face's reflections
