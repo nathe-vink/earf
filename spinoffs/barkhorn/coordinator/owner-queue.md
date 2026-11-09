@@ -5516,3 +5516,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   audit table, (f) the close-ups (front ~19:25 -> after; side ~20:10; satin ~21:15).
 - 18:52 sent: c2 (merge f14b24c7, wides Poison, Ice, Haze, Fog, tag rc1-card; hero-lights after the next SHA); c4 (after its talls,
   merge f14b24c7, wides Ember, Dust, Acid).
+- 18:53 c2 (stamped 18:54): merged f14b24c7 at 5ebea2fda212b987c0c76f135bf6f3de90a196c4 (no rebuild); rc1-card wides Poison, Ice, Haze,
+  Fog, one tracked task each, committing as they land (~1.9 h estimated: c2 runs ~2.8x slower than c4 on wides); hero-lights wait
+  for the next SHA. To re-plan at ~19:35: c3 (free after its talls ~19:20) takes the hero-lights; c4 (free after its wides ~19:35)
+  the sides.
