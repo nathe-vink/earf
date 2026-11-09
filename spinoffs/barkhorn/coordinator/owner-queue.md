@@ -5520,3 +5520,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   Fog, one tracked task each, committing as they land (~1.9 h estimated: c2 runs ~2.8x slower than c4 on wides); hero-lights wait
   for the next SHA. To re-plan at ~19:35: c3 (free after its talls ~19:20) takes the hero-lights; c4 (free after its wides ~19:35)
   the sides.
+- 18:53 GATE BOOK v21 decisions + pictures (wf_d19c3d59-f75, 32 min): 26 of 32 punch items fixed, 6 partly, none unfixed; no
+  sideways scroll; all chapter links land. BLOCKER: the Hemisphere press sheet shows the Smoke lamps pair under "SHADES All seven"
+  with no held mark (and "Hung low over the bar."). MAJORS: make_book.py still writes the old bright chips and the 17 Oct wordmark (the
+  v21 files were made outside the script): rerunning it for the swap would undo item 28; seven fronts across at 561-1023 px shrink
+  to ~85 px speakers (four columns there). Minors: "record player" in the re-shot card and hotel pictures; the certificate's caption
+  "the owner's to set"; "[PRICE] and [PAIR PRICE]" on the signs; the crate alt; "modelled" (fixed since, e24682bb) and '.,' in Voice;
+  "Mantle in the studio" still "to come"; Idea 6's "2027"; the Tint Library without a Render caption and its lid's lines refracting
+  through the tiles; social.jpg is composited from the fronts (re-shoot it with the swap); the Mantle/lamps pair's empty space.
+  Words + build and owner still running; one v22 list when they land.
