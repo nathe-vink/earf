@@ -309,6 +309,10 @@ def main():
     import render as R
     args = sys.argv[2:]
     blend = None
+    exr = None
+    if '--save-exr' in args:
+        # the beauty pass also saved scene-linear (no view transform, no white balance), for regrade.py
+        i = args.index('--save-exr'); exr = os.path.abspath(args[i + 1]); del args[i:i + 2]
     if '--save-blend' in args:
         # the scene as it will render, saved first for scene_audit.py (the coordinator's card and rig checks)
         i = args.index('--save-blend'); blend = os.path.abspath(args[i + 1]); del args[i:i + 2]
@@ -328,6 +332,33 @@ def main():
             def __getattr__(self, n):
                 return _Render() if n == 'render' else getattr(real_ops, n)
         bpy.ops = _Ops()
+    if exr:
+        inner = bpy.ops
+        state = {'done': False}
+
+        class _RenderX:
+            def __getattr__(self, n):
+                if n != 'render':
+                    return getattr(inner.render, n)
+
+                def render(*a, **k):
+                    r = inner.render.render(*a, **k)
+                    if not state['done']:
+                        # the first render is the beauty pass (the masks pass follows): its result, linear, as EXR
+                        state['done'] = True
+                        sc = bpy.context.scene; im = sc.render.image_settings
+                        fmt, depth = im.file_format, im.color_depth
+                        im.file_format = 'OPEN_EXR'; im.color_depth = '32'
+                        bpy.data.images['Render Result'].save_render(exr, scene=sc)
+                        im.file_format, im.color_depth = fmt, depth
+                        print('night_room: the beauty pass saved linear to', exr, flush=True)
+                    return r
+                return render
+
+        class _OpsX:
+            def __getattr__(self, n):
+                return _RenderX() if n == 'render' else getattr(inner, n)
+        bpy.ops = _OpsX()
     sys.argv = [os.path.join(eng, 'render.py')] + args
     R.main()
 

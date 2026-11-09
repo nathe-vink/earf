@@ -43,12 +43,13 @@ def run(lamp_dir, samples, bare):
             o = bpy.data.objects.get(n)
             if o is not None and o is not cob:
                 bpy.data.objects.remove(o, do_unlink=True)
-    zs = rim_z - 0.03
+    zs = rim_z - (float(sys.argv[sys.argv.index('--floor') + 1]) if '--floor' in sys.argv else 0.03)
+    half = 3.0 if '--floor' in sys.argv else 1.5     # a 6 x 6 m sensor at floor distance, 3 x 3 m under the rim
     sm = bpy.data.materials.new('sensor'); sm.use_nodes = True; nt = sm.node_tree; nt.nodes.clear()
     o_ = nt.nodes.new('ShaderNodeOutputMaterial'); tr = nt.nodes.new('ShaderNodeBsdfTranslucent')
     tr.inputs['Color'].default_value = (1, 1, 1, 1); nt.links.new(tr.outputs[0], o_.inputs['Surface'])
-    NR._mesh(bpy, 'sensor', [(-1.5, -1.5, zs), (1.5, -1.5, zs), (1.5, 1.5, zs), (-1.5, 1.5, zs)], [(0, 1, 2, 3)], sm)
-    cd = bpy.data.cameras.new('fluxcam'); cd.type = 'ORTHO'; cd.ortho_scale = 3.0
+    NR._mesh(bpy, 'sensor', [(-half, -half, zs), (half, -half, zs), (half, half, zs), (-half, half, zs)], [(0, 1, 2, 3)], sm)
+    cd = bpy.data.cameras.new('fluxcam'); cd.type = 'ORTHO'; cd.ortho_scale = 2 * half
     co = bpy.data.objects.new('fluxcam', cd); sc.collection.objects.link(co)
     co.location = (0, 0, zs - 1.0); co.rotation_euler = (math.pi, 0, 0); sc.camera = co
     sc.render.engine = 'CYCLES'; cy = sc.cycles; cy.device = 'CPU'; cy.samples = samples; cy.use_denoising = False
@@ -64,7 +65,16 @@ def run(lamp_dir, samples, bare):
     img = bpy.data.images.load(out); px = img.pixels[:]
     n = len(px) // 4
     Y = sum(0.2126 * px[4 * i] + 0.7152 * px[4 * i + 1] + 0.0722 * px[4 * i + 2] for i in range(n)) / n
-    return Y * math.pi * 9.0, cob.data.energy
+    if '--floor' in sys.argv:
+        # the radial profile of the irradiance on the floor, in 0.1 m rings round the point under the lamp
+        import numpy as np
+        a = np.array(px, dtype=np.float64).reshape(300, 300, 4)
+        yl = 0.2126 * a[..., 0] + 0.7152 * a[..., 1] + 0.0722 * a[..., 2]
+        c = (np.arange(300) + 0.5) / 300 * 2 * half - half
+        rr = np.hypot(*np.meshgrid(c, c))
+        prof = [(r0, float(yl[(rr >= r0) & (rr < r0 + 0.1)].mean())) for r0 in np.arange(0, 2.0, 0.1)]
+        print('PROFILE', ' '.join(f'{r0:.1f}:{v:.4f}' for r0, v in prof), flush=True)
+    return Y * math.pi * (2 * half) ** 2, cob.data.energy
 
 
 def main():
