@@ -1,0 +1,37 @@
+proxy 8 pendant sweep: crop [0.40, 0.0, 0.68, 0.46] of the 1920 x 1080 frame, 128 samples, regraded --blender --ev 4.6 --wb 3000 --shoulder-ev -3 --shoulder-from 0.65 (no shade, no halation). sNN-RRR: NN cm back toward the wall from proxy 7's (0.44, -0.36), rim RRR cm up. s00-147 is proxy 7's own position at these settings (proxy 7 at 512 samples measured 17/28/25/49). Clearance in px of this crop (= px of the 1920 frame).
+
+== s00-147: lamp bottom row 175, horn top row 249, clearance 74 px (crop at half scale; 148 px at 3840), cabinet top band L* median 36 p95 70
+horn: L* max 91 (target <= 90), p99.9 71, pixels over 90: 1
+X arms, L* p95: upper-left 19, upper-right 27, lower-left 26, lower-right 47 (proxy 4: about 10, 5, 19, 35)
+upper arms over the side walls: left 13, right 22 L* over (side walls median L* 6; target about 3 over)
+arc under the pod: L* p95 12, max 22 (target under about 30)
+== s20-147: lamp bottom row 170, horn top row 249, clearance 79 px (crop at half scale; 158 px at 3840), cabinet top band L* median 29 p95 70
+horn: L* max 73 (target <= 90), p99.9 72, pixels over 90: 0
+X arms, L* p95: upper-left 27, upper-right 36, lower-left 24, lower-right 55 (proxy 4: about 10, 5, 19, 35)
+upper arms over the side walls: left 22, right 31 L* over (side walls median L* 6; target about 3 over)
+arc under the pod: L* p95 13, max 73 (target under about 30)
+== s20-131: lamp bottom row 243, horn top row 249, clearance 6 px (crop at half scale; 12 px at 3840), cabinet top band L* median 23 p95 71
+horn: L* max 73 (target <= 90), p99.9 72, pixels over 90: 0
+X arms, L* p95: upper-left 26, upper-right 37, lower-left 20, lower-right 56 (proxy 4: about 10, 5, 19, 35)
+upper arms over the side walls: left 22, right 30 L* over (side walls median L* 7; target about 3 over)
+arc under the pod: L* p95 14, max 53 (target under about 30)
+== s40-147: lamp bottom row 165, horn top row 249, clearance 84 px (crop at half scale; 168 px at 3840), cabinet top band L* median 29 p95 70
+horn: L* max 73 (target <= 90), p99.9 72, pixels over 90: 0
+X arms, L* p95: upper-left 30, upper-right 39, lower-left 20, lower-right 56 (proxy 4: about 10, 5, 19, 35)
+upper arms over the side walls: left 27, right 34 L* over (side walls median L* 6; target about 3 over)
+arc under the pod: L* p95 14, max 25 (target under about 30)
+== s40-131: lamp bottom row 234, horn top row 249, clearance 15 px (crop at half scale; 30 px at 3840), cabinet top band L* median 27 p95 72
+horn: L* max 73 (target <= 90), p99.9 72, pixels over 90: 0
+X arms, L* p95: upper-left 29, upper-right 41, lower-left 21, lower-right 58 (proxy 4: about 10, 5, 19, 35)
+upper arms over the side walls: left 23, right 34 L* over (side walls median L* 8; target about 3 over)
+arc under the pod: L* p95 14, max 26 (target under about 30)
+== s80-147: lamp bottom row 156, horn top row 249, clearance 93 px (crop at half scale; 186 px at 3840), cabinet top band L* median 21 p95 71
+horn: L* max 73 (target <= 90), p99.9 69, pixels over 90: 0
+X arms, L* p95: upper-left 18, upper-right 36, lower-left 18, lower-right 52 (proxy 4: about 10, 5, 19, 35)
+upper arms over the side walls: left -3, right 13 L* over (side walls median L* 22; target about 3 over)
+arc under the pod: L* p95 19, max 25 (target under about 30)
+== s80-131: lamp bottom row 220, horn top row 249, clearance 29 px (crop at half scale; 58 px at 3840), cabinet top band L* median 21 p95 69
+horn: L* max 74 (target <= 90), p99.9 66, pixels over 90: 0
+X arms, L* p95: upper-left 13, upper-right 33, lower-left 16, lower-right 44 (proxy 4: about 10, 5, 19, 35)
+upper arms over the side walls: left -7, right 10 L* over (side walls median L* 21; target about 3 over)
+arc under the pod: L* p95 22, max 25 (target under about 30)

@@ -156,8 +156,9 @@ def shot(root, tint, lamp_dir, fmt='wide', core=False):
                      if core else _records(),
         # gate 3: the speaker clearly on a wool rug (curly_teddy_natural, CC0: a pile, its own relief), a bound edge,
         # 0.9 m of rug in front of the feet; a nightstand under the pendant and an armchair in shadow at the left edge
+        # proxy 8 (the coordinator, 20:49): 3.8 m wide, past the oak at the lower right and the wedge at the lower left
         'rug': None if core else {'pbr': 'curly_teddy_natural', 'tint': '#3A3836', 'tint_mix': 0.9, 'value': 0.014, 'bump': 1.0, 'matte': True, 'tile_m': 0.12,
-                                  'center': [0.0, -1.10], 'size': [3.0, 3.30], 'border_w': 0.035, 'border_color': '#24211E'},
+                                  'center': [0.0, -1.10], 'size': [3.8, 3.30], 'border_w': 0.035, 'border_color': '#24211E'},
         'models': [] if core else [
             {'id': 'modern_wooden_cabinet', 'location': [CONSOLE[0], CONSOLE[1], 0.0], 'rotation_deg': [0, 0, 0], 'name': 'console'},
             {'id': 'ArmChair_01', 'location': [CHAIR[0], CHAIR[1], 0.0], 'rotation_deg': [0, 0, -70], 'name': 'armchair', 'value': 0.3}],
