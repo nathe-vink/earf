@@ -4950,3 +4950,19 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   lamp caption "Shown in Smoke, a color on hold" (not "still to come": Smoke is undecided), once per view; prune every unreferenced
   file; depth 420 with height and weight from the speaker lane; no caption for Dust's base line (the render bug; the talls are being
   re-rendered).
+- 17:26 c2: merged cb62d1eb (a7948164; materials.py line 620 the MAXIMUM clamp); rc1-fix talls generated (7 shots, 1000x1250, 96
+  samples, ~17 min each); chunk 1 Dust alone from 17:27; then Ice and Acid, then the rest.
+- 17:27 brand lane: WAVE 2 DONE and pushed (bb4a3f47; main commit b2318096): the title capped; "New in this edition"; the slabs a
+  thin 40 px strip (Smoke striped "held"; names from 900 px); the seven fronts lead at ~330x410 (4+3 / 2 a row); a transparent header
+  mark; a Contents list after the cover and first in the bar; tables stacked below 600 px; the 26 dashed boxes down to 0 (Position:
+  the Ice and Dust habitats; Image direction "Through the wall": the seven rigB backs; "Up close": the Ember amp plate beside the
+  whole speaker; the rest one "PICTURES TO COME" line per chapter); Smoke rules fixed; Idea a "the proof"; the Sessions cost line
+  ($10,900, the $40/$50 and 186 break-even) and dates "with the owner"; process talk out; 61 non-breaking spaces; the footer. The page
+  uses 47 files; the publish removes the rest. Waiting for wave 3 (sent 17:28; it asks for BUDGET.md's figures verbatim).
+- 17:31 Mantle lane (df061d27, gate3-tries/: four 960x540 tries): gate 3's fixes conflict: a 92° downlight beside the speaker leaves
+  its face dark (cabinet L 10-20); in front of the face it reads as a spotlight; no EARF lamp washes a wall. Options A (the pendant
+  near the face over a low record console), B (aside, accept L ~20), C (an unseen lamp in front).
+- 17:31 sent the Mantle lane: A, on conditions: the console BESIDE the speaker (never between the camera and the cabinet), the
+  pendant over its near end 0.2-0.3 m aside and 0.3-0.4 m in front, cord, canopy, dome off clip; the pool on the console top, nothing
+  brighter than the walls at the feet; a believable console with records, no Mantle on it (open question); gate 3's room kept; fix 6
+  (glints, lip line); targets (cabinet L >= 25, horn L* 12-15 as glass, red 0 under ~15 %, text zones, edges <= 0.09); one Ice proxy.
