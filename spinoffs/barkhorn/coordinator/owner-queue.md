@@ -5851,3 +5851,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   leak closed on two paths (a flat grey diffuse lobe skipping the dye; daylight to the frost at 0.96 undyed), Core at 200 lm, Hemisphere
   studio x1 at -2 EV, a larger key and a kicker, the orb row at 22°. 19:44 GATE UNLIT EMBER launched (wf_3e232358-ab0, four lenses +
   tally); if it passes by ~20:20 it goes to the site and the Book tonight.
+- 19:44 BIOMES SKY-SUN CHECK (hdri_sun at 1k on each final's HDRI and rotation; the engine keeps the sky's sun, so a mismatch is two
+  suns): Ice PASS (kiara_9_dusk, no lamp); Dust PASS (qwantani_sunset, lamp matched at az 118, el 6.0, #FE9E29); FOG FAIL: the sky's
+  real hard sun at az -150 (peak 5249) and a WHITE sun lamp keying from az 110: two suns 100° apart (Fog is on the site); ACID: the lamp
+  at the sky's sun position but grey #E6E3DA against the sky's #FECC8B (my 18:42 grey-sun pick); POISON FAIL by 56° in azimuth; Haze
+  (held) FAIL as found. The silk is real (a mesh, all visibility on, unlinked; the grass at its foot -0.13 stop). 19:45 sent biomes: FOG
+  pulled from the site; re-render with the HDRI turned so its sun sits at 110 (~304.2) and the lamp in the sky's #FEEA98; ACID: stop
+  the current final (a grey lamp under a warm-sunned sky can't be a candidate), render with the lamp at #FECC8B (if the cast is wrong,
+  a storm sky with a grey sun, never a recoloured lamp); POISON: turn the HDRI ~56° later. Order: Dust final -> Fog -> Acid -> Poison.
+  19:45 sent the site lane: pull Fog's habitat too; Ice is the only habitat in the push.
