@@ -6057,3 +6057,18 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   /colors/fog (WebP 1200x1500, a 168x210 thumb; "In the grass on a hillside, in fog at dawn."); its key off the banned list; sweep clean.
 - 20:36 BIOMES: the Fresnel rule in glass_shadows (917754a3: tr = 0.92 x exp(-absorption x thickness), commented); FOG (2) rendering
   from 20:36:42, ETA ~21:02, then my gate (cd5aa4e6 ships if it can't land and pass in time); the Poison (i) proxies paused for it.
+- 20:37 MANTLE: proxy 7 side tests (29c03296): a 3 mm black felt runner on the top panel cuts the X arms (p95 19/27/26/47 ->
+  13/11/18/32) but shows in the gap between the horn and the front edge as a darker top; the floor beside the console is the
+  pendant's direct pool (the console mostly shades it). 20:37 sent my lean: no felt (it reads as part of the product); extend the rug
+  under the patch; the gate decides the arms.
+- 20:38-20:39 GATE ACID FINAL: the skeptic (wf_1768128d-15f) NO: the rain is a backdrop only (masked off the speaker's outline, none in
+  front, the speaker bone dry, no rings on the puddle), the storm sky a flat sepia haze with no structure and no sun presence, the
+  right rocks' glare reads as foam; the colour fix (olive 55° -> golden 45-47°) and the closed seam are real. Founder + photographer
+  pending (wf_235309b8-088).
+- 20:42 LAMPS: ROUND 3 PROXIES, the seven (57c76c36, r32-lamps-final; lamp-site/proxies/g3/): one dye per tint from the speaker's
+  tints-trucast.json at each shell's thickness (Acid now golden, Poison a deep bottle green, Fog clear, Ice cyan-leaning under 2700 K,
+  Dust/Acid dE 0.05-0.07, data-limited); Core A's frost bug fixed (its diffuse lobe now takes the wall's tint; shadow rays through the
+  9 mm tinted); CORE AT ITS DRAWN 200 lm (180 out of the ball); variant (c) holds the paper at ~0.37 (domes studio x0.55 at -2 EV;
+  orbs studio x2.3 at -3.2 EV); the pool honest for the drop (FWHM 0.76 m at 0.58 m, a 33° half-angle); a 4 m key (the twin dots
+  merge); a real kicker in the heroes only; 0 hidden in frame. 20:43 GATE LAMPS G3 (c) launched (wf_bc42d018-55d, four lenses +
+  tally; the brief's 620 lm corrected to 200); asked whether the 20:14 quick path started (skip it if not: words-only tonight).
