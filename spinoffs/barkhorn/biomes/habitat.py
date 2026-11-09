@@ -47,6 +47,7 @@ SURFACE_GLASS = False                   # --surface-glass: the tint on the faces
 WELD = [True]                           # the asset's split vertices welded so its glass volumes close (--no-weld: off)
 GLOSSY_FLAG = [False]                   # --glossy-flag: the flag and cards seen in reflections only (the earlier trick)
 SPLIT = [None]                          # --split R G B: the tint's channel split, luminance held per part (the shared 9097 fix)
+CARDS = [[]]                            # --card white|black W H Z SIDE_DEG: real cards round the speaker, pushed out of frame
 SCRIM = [None]                          # --scrim T W H D: a silk on the sun's line D m out, W x H m, passing T of the beam
 PLANT_ALPHA = [()]                      # --plant-alpha ID...: wire these Poly Haven plants' own Alpha maps into their cards
 CLEARING = [None]                       # --canopy-clearing D: a treefall gap D m across over the speaker (world 0, 0)
@@ -263,6 +264,40 @@ def canopy_holes(bpy_, open_frac, spec, cell=0.3):
     me.materials.append(m); can.data = me
     print(f'canopy holes: {nx} x {ny} cells of {cell} m, {open_n / (nx * ny):.1%} open ({len(holes)} explicit holes cut)'
           + (f', a clearing {2 * clr[2]:.0f} m across at canopy-local ({clr[0]:.1f}, {clr[1]:.1f}), rim +-{clr[3]} m' if clr else ''))
+
+
+def cards(bpy_, linked, specs):
+    """Real cards a grip would set: each W x H m, its centre Z m up, on the ground plan SIDE_DEG off the line from the
+    speaker to the camera (0: between them, under the lens; +90: camera-right), square to the speaker's middle, pushed
+    out along that bearing until no corner falls in the frame. 'white' is a bounce (diffuse, albedo 0.85), 'black' a
+    negative (albedo 0.02). Every ray type, casting shadow."""
+    import bmesh, math
+    from mathutils import Vector
+    from bpy_extras.object_utils import world_to_camera_view
+    sc = bpy_.context.scene; cam = sc.camera
+    if cam is None or not linked:
+        return
+    t = linked[0].location; mid = Vector((t.x, t.y, t.z + 0.6))
+    base = Vector((cam.location.x - t.x, cam.location.y - t.y, 0.0)).normalized()
+    for i, (kind, w, h, z, side) in enumerate(specs):
+        a = math.radians(side)
+        dirn = Vector((base.x * math.cos(a) - base.y * math.sin(a), base.x * math.sin(a) + base.y * math.cos(a), 0.0))
+        bm = bmesh.new(); bmesh.ops.create_grid(bm, x_segments=1, y_segments=1, size=0.5)
+        me = bpy_.data.meshes.new(f'card-{kind}-{i}'); bm.to_mesh(me); bm.free()
+        m = bpy_.data.materials.new(f'card-{kind}-{i}'); m.use_nodes = True
+        bs = m.node_tree.nodes['Principled BSDF']; v = 0.85 if kind == 'white' else 0.02
+        bs.inputs['Base Color'].default_value = (v, v, v, 1); bs.inputs['Roughness'].default_value = 1.0
+        bs.inputs['Specular IOR Level'].default_value = 0.0
+        me.materials.append(m)
+        f = bpy_.data.objects.new(f'card-{kind}-{i}', me); sc.collection.objects.link(f); f.scale = (w, h, 1.0)
+        for k in range(60):
+            f.location = Vector((t.x, t.y, z)) + dirn * (0.8 + 0.2 * k)
+            f.rotation_euler = (mid - f.location).to_track_quat('Z', 'Y').to_euler()
+            bpy_.context.view_layer.update()
+            pts = [world_to_camera_view(sc, cam, f.matrix_world @ Vector(c)) for c in ((-.5, -.5, 0), (.5, -.5, 0), (.5, .5, 0), (-.5, .5, 0))]
+            if not any(0 <= p.x <= 1 and 0 <= p.y <= 1 and p.z > 0 for p in pts):
+                break
+        print(f'card: {kind} {w} x {h} m, centre {z} m up, {side} deg off the camera line, at {[round(c, 2) for c in f.location]}')
 
 
 def scrim(bpy_, linked, spec):
@@ -568,6 +603,8 @@ def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extr
                         setattr(o, a, True)
                     fixed.append(o.name)
             print('real set: every ray type on for', fixed)
+        if CARDS[0]:
+            cards(bpy_, linked, CARDS[0])
         if SCRIM[0]:
             scrim(bpy_, linked, SCRIM[0])
         if PLANT_ALPHA[0]:
@@ -600,6 +637,8 @@ def main():
     ap.add_argument('--glossy-flag', action='store_true', help='the flag and side cards in reflections only (before 20:11)')
     ap.add_argument('--split', type=float, nargs=3, help="the tint's channel split, R G B (luminance held per part)")
     ap.add_argument('--canopy-open', type=float, help="the canopy's gaps cut as real holes, this fraction open")
+    ap.add_argument('--card', nargs=5, action='append', default=[], metavar=('KIND', 'W', 'H', 'Z', 'SIDE'),
+                    help='a real card: white|black, W H (m), centre Z (m), SIDE_DEG off the speaker-camera line')
     ap.add_argument('--scrim', type=float, nargs=4, help='a silk on the sun line: T (beam passed) W H (m) D (m out)')
     ap.add_argument('--plant-alpha', nargs='+', default=[], help="Poly Haven plants whose own Alpha map is wired in (their glTF has none)")
     ap.add_argument('--canopy-clearing', type=float, help='with --canopy-open: a treefall gap this many m across over the speaker')
@@ -612,7 +651,7 @@ def main():
     a = ap.parse_args()
     global SURFACE_GLASS
     WELD[0] = not a.no_weld; SURFACE_GLASS = a.surface_glass
-    SINK[0] = a.sink; LED[0] = a.led; REAL_SET[0] = a.real_set; CANOPY_OPEN[0] = a.canopy_open; CLEARING[0] = a.canopy_clearing; PLANT_ALPHA[0] = tuple(a.plant_alpha); SCRIM[0] = a.scrim; SPLIT[0] = a.split; GLOSSY_FLAG[0] = a.glossy_flag
+    SINK[0] = a.sink; LED[0] = a.led; REAL_SET[0] = a.real_set; CANOPY_OPEN[0] = a.canopy_open; CLEARING[0] = a.canopy_clearing; PLANT_ALPHA[0] = tuple(a.plant_alpha); SCRIM[0] = a.scrim; CARDS[0] = [(c[0], float(c[1]), float(c[2]), float(c[3]), float(c[4])) for c in a.card]; SPLIT[0] = a.split; GLOSSY_FLAG[0] = a.glossy_flag
     HORN['close'] = a.horn_close; HORN['rough'] = a.horn_rough; HORN['shadows'] = not a.horn_front
     sh = json.load(open(a.shot))
     scale_lights(sh, {k: float(v) for k, v in (x.split('=', 1) for x in a.light)})

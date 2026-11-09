@@ -140,6 +140,7 @@ def main():
     ap.add_argument('--tag', default='', help='suffix on the output name')
     ap.add_argument('--sink', type=float, help="the feet's bedding, m, in place of the habitat's (tests)")
     ap.add_argument('--scrim', type=float, nargs=4, help='a silk on the sun line: T W H D (tests)')
+    ap.add_argument('--card', nargs=5, action='append', default=[], help='a real card: KIND W H Z SIDE (tests)')
     ap.add_argument('--clearing', type=float, help='a treefall gap this many m across in the canopy over the speaker (tests)')
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
@@ -167,7 +168,8 @@ def main():
             + (['--canopy-open', str(CANOPY_OPEN[n])] if n in CANOPY_OPEN else []) \
             + (['--canopy-clearing', str(a.clearing)] if a.clearing else []) \
             + (['--plant-alpha', *PLANT_ALPHA[n]] if n in PLANT_ALPHA else []) \
-            + (['--scrim', *map(str, a.scrim)] if a.scrim else [])
+            + (['--scrim', *map(str, a.scrim)] if a.scrim else []) \
+            + [x for c in a.card for x in ('--card', *c)]
         with open(out.replace('.png', '.log'), 'w') as log:
             r = subprocess.run(cmd, stdout=log, stderr=subprocess.STDOUT)
         print(n, 'ok' if r.returncode == 0 else f'failed ({r.returncode})', flush=True)
