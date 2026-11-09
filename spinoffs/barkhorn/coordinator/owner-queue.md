@@ -6032,3 +6032,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 20:33 GATE FOG ONE-SUN complete: 3/3 SHOW (the skeptic, wf_05304716-6a0: one sun agrees in every cue; with the sun 5.8° up the
   speaker's shadow is ~10x its height and lands mostly out of frame on the left; the horn's faint diagonal not an X; label the A/B if it
   is ever shown). The shadow-setting check stands as a cheap confirmation.
+- 20:33 BIOMES: POISON proxies on je_gray_02 (579c8243; one sun at az -100, el 21.3, #FEF5DE; the (a) framing; litter 3.6x; a white
+  card camera-right out of frame) both fail: the set's edge shows (a window onto the HDRI's sunlit field, the canopy cells blocky at
+  grazing angle), and the top band stays black while the horn blazes in the low backlight. 20:34 sent: option (i), the original
+  framing (camera 18°) with je_gray_02's sun from camera-left-front (~az -40 at 21°) through a real canopy gap, out of the mirror line,
+  no set edge in frame; (ii) mossy_forest with no sun lamp as the fallback; the Fog shadow check first.
+- 20:34-20:35 BRAND: Fog's habitat in Position's row (5a9419b7; honest-fog-habitat.jpg = cd5aa4e6's one-sun final, pinned; an auto-fit
+  grid, three across at 1440, stacked on a phone, room for Acid as a fourth); 20:34 sent: its caption in the row's pattern; 37ca7ea7:
+  "In fog at dawn." + Render, the alt matched.
