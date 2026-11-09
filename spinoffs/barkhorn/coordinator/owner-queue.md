@@ -5844,3 +5844,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   confirm every silk is real, unlinked geometry that shades what lies under it.
 - 19:43 c2: the DUST HERO-LIGHT on ac9e5568 landed (e987f151, rc1-real, 19.8 min; the bottom edge a thin dark line). The hero-light rig
   passed its proxy 3/3; the finals gate as a batch later (not needed tonight). Ember hero-light started 19:43 (~20 min).
+- 19:43 LAMPS: the UNLIT PAIR IN EMBER and the fixed Smoke (23eaab33, r32-lamps-final; renders/2026-11-09/barkhorn/lamp-site/
+  lamps-unlit-ember.png and lamps-unlit.png, 1600x2000, 128 samples; 0 hidden in frame; lamps_cordless.py --unlit-real --tint ember;
+  only the tint changed). The dome reads Ember red; Core a deep wine red, darker, its lower half dark (no fake lamp behind the glass);
+  the dock's ring shows as drawn. Round 3's rig changes committed (5b0721a1): the speaker set's dyes per shell thickness, Core A's frost
+  leak closed on two paths (a flat grey diffuse lobe skipping the dye; daylight to the frost at 0.96 undyed), Core at 200 lm, Hemisphere
+  studio x1 at -2 EV, a larger key and a kicker, the orb row at 22°. 19:44 GATE UNLIT EMBER launched (wf_3e232358-ab0, four lenses +
+  tally); if it passes by ~20:20 it goes to the site and the Book tonight.
