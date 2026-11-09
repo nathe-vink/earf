@@ -4966,3 +4966,16 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   pendant over its near end 0.2-0.3 m aside and 0.3-0.4 m in front, cord, canopy, dome off clip; the pool on the console top, nothing
   brighter than the walls at the feet; a believable console with records, no Mantle on it (open question); gate 3's room kept; fix 6
   (glints, lip line); targets (cabinet L >= 25, horn L* 12-15 as glass, red 0 under ~15 %, text zones, edges <= 0.09); one Ice proxy.
+- 17:32 brand lane: THE BOOK PUBLISHED AS VERSION 20 (1794245481-6881; same link; b2ffb373 on r47-brand), waves 1-3 in one publish:
+  every used file passed explicitly (root=book/), 59 unused paths nulled; the listing 48 files (47 + index.html; was 96), 47 of 47
+  byte-identical to the build; make_book.py ends with prune(). Build items done (the strip fits at 1440 and wraps above 861; ink
+  labels on Dust and Acid; Render tags at full; Smoke's card striped; no dashed boxes; the mark's scroll margin). Words done (TR-1
+  proposed on the plate mockups; "USB to set it up"; "6 mm smoked gray stock"; Mantle's design figures from companions/mantle-r48/
+  README.md "The spec as built (mantle_strata_v3.py)": about 450 x 370 x 199 mm lid down, about 12.9 kg with the lid, Rega's 24 V
+  motor hung beneath, Rega RB330, Ortofon 2M Blue/Black the owner's call; the crate [KG]; Sessions verbatim from BUDGET.md ($10,917;
+  break-even 257 of 275 at $50, 186 with a partner paying the pressing); ideas G, F, A, D, B, E, C; "The press kit stays held until
+  the owner releases it."; Voice's lead the owner's brief; dates from the debut; American forms). Next: the Mantle press sheet and
+  mantle.md to the design figures.
+- 17:33 verified the artifact's file listing myself: 48 files, none stale. Exported b2ffb373's book/ to scratchpad/brandbook-v20.
+  REGRESSION REVIEW of v20 launched: decisions + pictures (wf_d7cd53dd-917), words + build (wf_0097dc03-eaf), the owner's eye
+  (wf_8f1d2030-29c), against the list of what was asked (rc-review/book-v20-asked.md).
