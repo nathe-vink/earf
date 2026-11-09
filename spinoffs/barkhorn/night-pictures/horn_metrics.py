@@ -52,6 +52,12 @@ def main():
         m = shell & q & ~pod
         arms.append(f'{name} {np.percentile(L[m], 95):.0f}')
     print('X arms, L* p95:', ', '.join(arms), '(proxy 4: about 10, 5, 19, 35)')
+    # the skeptic's measure (19:54 and 20:48): the upper creases against the horn's side walls, in L* over
+    side = shell & (np.abs(u) > 0.70) & (np.abs(v) < 0.30)
+    sw = np.median(L[side])
+    up = [np.percentile(L[shell & q & ~pod & (np.abs(u) < 0.70)], 95) for q in ((u < 0) & (v < -0.15), (u > 0) & (v < -0.15))]
+    print(f'upper arms over the side walls: left {up[0] - sw:.0f}, right {up[1] - sw:.0f} L* over '
+          f'(side walls median L* {sw:.0f}; target about 3 over)')
     arc = shell & (np.abs(u) < 0.45) & (v > 0.25) & (v < 0.65)
     print(f'arc under the pod: L* p95 {np.percentile(L[arc], 95):.0f}, max {L[arc].max():.0f} (target under about 30)')
 
