@@ -4578,3 +4578,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   lit lamps pulled, old-speaker-only slots dropped; 20 the build with V2, HOME_V2 and COPY_NEXT on, sweep and Lighthouse; 15 the
   preview branch r49-site-rc (Vercel builds previews from pushed branches; the URL confirmed read-only); 10 screenshots and the
   change list). main untouched.
+- 16:22 brand lane: on it; ~2 h to a link (20 min checking passed pictures and missed decisions; 60 the Book to the decisions; 30
+  publishing in place at the Book's existing claude.ai artifact link, checked at phone and desktop; 10 the change list; then ~15
+  the next pieces). Asked for a list of passed pictures.
+- 16:23 sent to the brand lane: the passed list (tall fronts six plus Acid pending; tall Ice honest; backs Fog/Dust/Ice on the old
+  rig; amp plate Ember; habitats Ice and Dust; Mantle C3e pending the owner's choice) and the not-passed list (all lit lamps; night
+  pictures; deck hero/cover/room/row; the horn close-ups; anything with the uplit base, stepped or satin horn, or Smoke); no
+  decisions during the pause; the owner's latest calls.
