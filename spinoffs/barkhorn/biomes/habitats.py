@@ -22,7 +22,7 @@ HABITATS = {
                                                  # (the audit, 2026-11-09: 100 % of the frame); off: the sand bounces for real (-0.1 stop)
     'acid_b':    ('Acid',   {'bounce': 0, 'throat': 0, 'low': 0, 'rim': 0}),   # rim off: the audit (2026-11-09) found the
                                                                              # hidden 1.5 m lamp in 5.4 % of the frame
-    'poison_g5': ('Poison', {'reflector': 0, 'bounce': 0, 'card': 0}),
+    'poison_g5': ('Poison', {'reflector': 0, 'bounce': 0, 'card': 0, 'litter': 0}),   # litter: a fill lamp (2026-11-09: none)
     'ice':       ('Ice',    {'bounce': 0, 'back': 0, 'throat': 0}),
     'haze_b':    ('Haze',   {'bounce': 0}),
     'fog_b':     ('Fog',    {'bounce': 0}),
@@ -80,9 +80,9 @@ SETS = {
     # as a flat cream sheet (the gate on the real-card Fog). -5: 5 deg off, as Haze and Ice)
     # (and a modest neutral fill from camera-left, a real panel out of frame, specular 1, unlinked: the warm dawn and the
     # golden grass were the only light on the white batts, so the clear cabinet read champagne)
-    'fog_b': {'lights.fill_l': {'type': 'area', 'size_m': [2.0, 2.0], 'target': [0.0, 0.0, 0.8], 'irradiance': 1.0,
-                                'color': '#F2F4F8', 'orbit': {'azimuth_deg': -55, 'elevation_deg': 15, 'distance_m': 3.5},
-                                'specular': 1.0},
+    # (fill_l, the 2 x 2 m fill lamp at az -55 el 15, 3.5 m, is gone: the only emitters in a habitat are the sun and the
+    # sky (the coordinator, 2026-11-09 23:42/23:48); in its place, at most, a white reflector board: REFLECT below)
+    'fog_b': {
               # (and the camera's white balance at 5400 K, the coordinator's (c): the smallest that brings the cut edges'
               # medians to +5 b* or below; 5800 left them at +6)
               'render.white_balance_k': 5400,
@@ -105,9 +105,8 @@ SETS = {
     # (and option (a), the coordinator 01:16: the canopy a quarter open, its gaps real holes in the geometry (habitat.py
     # --canopy-open), the sunfleck through one of the shot's own holes; the camera +1.5 EV for a forest floor)
     'poison_g5': {'product.instances.0.rotate_z': 9.0, 'sky.rotation_deg': 124.1,   # the sky's bright patch over the lamp (hdri_sun: -100.0, 43.3)
-                  'lights.litter.specular': 1.0, 'render.exposure': 0.75,
-                  # the litter fill off the front face's mirror line (at -5 the face mirrored it: the beige upper cabinet)
-                  'lights.litter.orbit.azimuth_deg': -40.0,
+                  'render.exposure': 0.75,
+                  # (the litter fill lamp is gone, 2026-11-09: the sun and the sky the only emitters; see HABITATS)
                   # the moss patch in the foreground sun fleck read as a hole (the gate, 18:58; the sun probe: moss_01 at 0.5, -2.5)
                   'set.props.4.avoid': [[0.0, 0.0, 0.3], [0.55, -2.5, 0.45]]},
 }
@@ -168,6 +167,7 @@ CANOPY_OPEN = {'poison_g5': 0.25}
 # the 0.38-flat domes of r2-r3, which barely read
 WET = {'acid_b': (260, 60, 3, 1, 3.0, 6.0, 0.3, 0.55, 2.2, 70.0)}
 MENISCUS = {'acid_b': 0.002}
+REFLECT = {}   # habitat -> [reflector specs] (W H AZ EL DIST TX TY TZ), white boards where fill lamps stood
 SAMPLES = {'ember': 96, 'poison_g5': 96, 'haze_b': 96, 'fog_b': 96}
 
 
@@ -183,6 +183,7 @@ def main():
     ap.add_argument('--sink', type=float, help="the feet's bedding, m, in place of the habitat's (tests)")
     ap.add_argument('--scrim', type=float, nargs=4, help='a silk on the sun line: T W H D (tests)')
     ap.add_argument('--meniscus', type=float)
+    ap.add_argument('--reflector', type=float, nargs=8, action='append', default=[], help='a white board: W H AZ EL DIST TX TY TZ')
     ap.add_argument('--crop', type=float, nargs=4, help='a region only, fractions X0 Y0 X1 Y1 (tests)')
     # the horn under the shadow rule as the cabinet, the standard for every habitat (the coordinator, 2026-11-09 22:15):
     # --horn-front was Ember's workaround (2026-11-03) for the asset's untinted shadow pass through the horn, from before
@@ -228,6 +229,7 @@ def main():
             + (['--scrim', *map(str, a.scrim)] if a.scrim else []) \
             + (['--wet', *map(str, a.wet or WET[n])] if (a.wet or n in WET) else []) \
             + (['--crop', *map(str, a.crop)] if a.crop else []) \
+            + [x for r in (a.reflector or REFLECT.get(n, [])) for x in ('--reflector', *map(str, r))] \
             + (['--meniscus', str(a.meniscus or MENISCUS[n])] if (a.meniscus or n in MENISCUS) else []) \
             + [x for c in a.card for x in ('--card', *c)] \
             + [x for d in a.dot for x in ('--dot', *d)]

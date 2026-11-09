@@ -50,6 +50,7 @@ GLOSSY_FLAG = [False]                   # --glossy-flag: the flag and cards seen
 SPLIT = [None]                          # --split R G B: the tint's channel split, luminance held per part (the shared 9097 fix)
 DOTS = [[]]                             # --dot D SIZE TX TY TZ: a grip's dot, SIZE m, D m out on the sun line from (TX, TY, TZ)
 CARDS = [[]]                            # --card white|black W H Z SIDE_DEG: real cards round the speaker, pushed out of frame
+REFLECTORS = [[]]                       # --reflector W H AZ EL DIST TX TY TZ: a white board where a fill lamp stood
 MENISCUS = [0.0]                        # --meniscus R: a water meniscus round the cabinet's walls, radius R m
 WET = [None]                            # --wet F L R SEED: rain beads on the front (F) and horn lip (L), R runnels
 SCRIM = [None]                          # --scrim T W H D: a silk on the sun's line D m out, W x H m, passing T of the beam
@@ -598,6 +599,33 @@ def schlick_face(nt, tp, n):
     nt.links.new(mu.outputs[0], tp.inputs['Color'])
 
 
+def reflectors(bpy_, specs):
+    """A grip's white reflector board where a fill lamp stood (the coordinator, 2026-11-09 23:48: the only emitters are
+    the sun and the sky; a passive board out of frame is honest): W x H m, at the lamp's orbit (azimuth, lights' convention
+    0 = -y, 90 = +x; elevation; distance) about its target, square to the target. Diffuse white (albedo 0.85), every ray
+    type, casting shadow, lit only by the sun and sky. Its frame position is printed (the camera's own projection)."""
+    import bmesh
+    from mathutils import Vector
+    from bpy_extras.object_utils import world_to_camera_view
+    sc = bpy_.context.scene; cam = sc.camera
+    for i, (w, h, az, el, dist, tx, ty, tz) in enumerate(specs):
+        bm = bmesh.new(); bmesh.ops.create_grid(bm, x_segments=1, y_segments=1, size=0.5)
+        me = bpy_.data.meshes.new(f'reflector-{i}'); bm.to_mesh(me); bm.free()
+        m = bpy_.data.materials.new(f'reflector-{i}'); m.use_nodes = True
+        bs = m.node_tree.nodes['Principled BSDF']; bs.inputs['Base Color'].default_value = (0.85, 0.85, 0.85, 1)
+        bs.inputs['Roughness'].default_value = 1.0; bs.inputs['Specular IOR Level'].default_value = 0.0
+        me.materials.append(m)
+        f = bpy_.data.objects.new(f'reflector-{i}', me); sc.collection.objects.link(f); f.scale = (w, h, 1.0)
+        a, e = math.radians(az), math.radians(el)
+        T = Vector((tx, ty, tz))
+        f.location = T + Vector((math.sin(a) * math.cos(e), -math.cos(a) * math.cos(e), math.sin(e))) * dist
+        f.rotation_euler = (T - f.location).to_track_quat('Z', 'Y').to_euler()
+        bpy_.context.view_layer.update()
+        pts = [world_to_camera_view(sc, cam, f.matrix_world @ Vector(c)) for c in ((-.5, -.5, 0), (.5, -.5, 0), (.5, .5, 0), (-.5, .5, 0))]
+        print(f'reflector: {w} x {h} m at {[round(c, 2) for c in f.location]} (az {az}, el {el}, {dist} m), frame x '
+              f'{[round(p.x, 2) for p in pts]}, out of frame sideways: {out_of_frame(pts)}')
+
+
 def plant_alpha(bpy_, aids, res='1k'):
     """Some Poly Haven plant glTFs (grass_bermuda_01) carry no alpha at all: the cards render whole, their black,
     semi-glossy surround mirroring the sky as pale flecks (the Fog gate: "litter"). Wire the asset's own Alpha map
@@ -882,6 +910,8 @@ def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extr
             scrim(bpy_, linked, SCRIM[0])
         if WET[0]:
             wet(bpy_, linked, WET[0])
+        if REFLECTORS[0]:
+            reflectors(bpy_, REFLECTORS[0])
         if MENISCUS[0]:
             meniscus(bpy_, linked, MENISCUS[0])
         if PLANT_ALPHA[0]:
@@ -918,6 +948,7 @@ def main():
                     help="a grip's dot: SIZE m, D m out on the sun line from the point TX TY TZ")
     ap.add_argument('--card', nargs=5, action='append', default=[], metavar=('KIND', 'W', 'H', 'Z', 'SIDE'),
                     help='a real card: white|black, W H (m), centre Z (m), SIDE_DEG off the speaker-camera line')
+    ap.add_argument('--reflector', type=float, nargs=8, action='append', default=[], metavar=('W', 'H', 'AZ', 'EL', 'DIST', 'TX', 'TY', 'TZ'))
     ap.add_argument('--crop', type=float, nargs=4, help='render a region only, fractions X0 Y0 X1 Y1 from the top left (tests)')
     ap.add_argument('--fresnel-angle', action='store_true', help="glass faces pass a shadow ray's 1 - F(theta) (Schlick, n 1.49)")
     ap.add_argument('--meniscus', type=float, default=0.0, help='a water meniscus round the walls, radius m')
@@ -935,7 +966,7 @@ def main():
     a = ap.parse_args()
     global SURFACE_GLASS
     WELD[0] = not a.no_weld; SURFACE_GLASS = a.surface_glass; FRESNEL_ANGLE[0] = a.fresnel_angle
-    SINK[0] = a.sink; LED[0] = a.led; REAL_SET[0] = a.real_set; CANOPY_OPEN[0] = a.canopy_open; CLEARING[0] = a.canopy_clearing; CLEARING_AT[0] = tuple(a.canopy_clearing_at); PLANT_ALPHA[0] = tuple(a.plant_alpha); SCRIM[0] = a.scrim; WET[0] = a.wet; MENISCUS[0] = a.meniscus; DOTS[0] = [tuple(d) for d in a.dot]; CARDS[0] = [(c[0], float(c[1]), float(c[2]), float(c[3]), float(c[4])) for c in a.card]; SPLIT[0] = a.split; GLOSSY_FLAG[0] = a.glossy_flag
+    SINK[0] = a.sink; LED[0] = a.led; REAL_SET[0] = a.real_set; CANOPY_OPEN[0] = a.canopy_open; CLEARING[0] = a.canopy_clearing; CLEARING_AT[0] = tuple(a.canopy_clearing_at); PLANT_ALPHA[0] = tuple(a.plant_alpha); SCRIM[0] = a.scrim; WET[0] = a.wet; REFLECTORS[0] = [tuple(r) for r in a.reflector]; MENISCUS[0] = a.meniscus; DOTS[0] = [tuple(d) for d in a.dot]; CARDS[0] = [(c[0], float(c[1]), float(c[2]), float(c[3]), float(c[4])) for c in a.card]; SPLIT[0] = a.split; GLOSSY_FLAG[0] = a.glossy_flag
     HORN['close'] = a.horn_close; HORN['rough'] = a.horn_rough; HORN['shadows'] = not a.horn_front
     sh = json.load(open(a.shot))
     scale_lights(sh, {k: float(v) for k, v in (x.split('=', 1) for x in a.light)})
