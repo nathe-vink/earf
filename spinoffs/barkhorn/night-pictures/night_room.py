@@ -304,6 +304,17 @@ def night_set(bpy, spec, mats):
         got = _append_lamp(bpy, L['blend'], L['offset'], L.get('keep_table', False), L.get('led_up', False),
                            r['height'] if L.get('cord_to_ceiling') else None, L.get('canopy'), L.get('honest_cob'))
         print('night_room: lamp', os.path.basename(L['blend']), 'objects:', ', '.join(sorted(got)), flush=True)
+        if L.get('liner_off'):
+            # the coordinator, 22:30 (the lamps lane's audit, 22:22): the Hemisphere as drawn. The kit's opal carries an
+            # emission (opal-lit, the liner glow) that is not in the CAD; off, the COB is the lamp's only light
+            for m in {s.material for nm in got for s in bpy.data.objects[nm].material_slots if s.material}:
+                if m.node_tree:
+                    for nd in m.node_tree.nodes:
+                        if nd.type == 'EMISSION':
+                            for l in list(nd.inputs['Strength'].links):
+                                m.node_tree.links.remove(l)
+                            nd.inputs['Strength'].default_value = 0.0
+                            print('night_room: liner emission off in', m.name, flush=True)
 
 
 def main():
