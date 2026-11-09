@@ -123,17 +123,30 @@ def main():
             print('rendered', n, flush=True)
     if '--unlit-real' in sys.argv:
         # the coordinator's 19:13 rule: lamps-unlit again with nothing in frame hidden (unlit_real)
-        u = unlit_real(cordless(P4.BUILD['p4-lamps-unlit']()))
-        u['render']['samples'] = 128
-        json.dump(u, open(os.path.join(SHOTS, 'lamps-unlit-real.json'), 'w'), indent=1)
         a_ = sys.argv[sys.argv.index('--unlit-real') + 1:]
+        tint = a_[a_.index('--tint') + 1] if '--tint' in a_ else 'smoke'
+        u = unlit_real(cordless(P4.BUILD['p4-lamps-unlit']()))
+        if tint != 'smoke':
+            # the coordinator, 19:19: the same picture with only the tint changed (both lamps), Core's ball at that
+            # tint's own scatter depth (lamps_pdp_r35.core_materials), as its lit pictures had it
+            import lamps_pdp_r35 as P35
+            for p in u['set']['props']:
+                if p.get('module') == 'earf_moon':
+                    p['flavour'] = tint
+                    if p.get('fn') == 'orb':
+                        p['materials'] = P35.core_materials(tint, p.get('materials'))
+            u['title'] = u['title'].replace('Smoke', tint.title()).replace('smoke', tint)
+        sname = 'lamps-unlit-real.json' if tint == 'smoke' else f'lamps-unlit-{tint}-real.json'
+        u['render']['samples'] = 128
+        json.dump(u, open(os.path.join(SHOTS, sname), 'w'), indent=1)
         out = os.path.join(ROOT, 'renders', '2026-11-09', 'barkhorn', 'lamp-site',
-                           a_[0] if a_ and a_[0].endswith('.png') else 'lamps-unlit.png')
+                           a_[0] if a_ and a_[0].endswith('.png') else
+                           ('lamps-unlit.png' if tint == 'smoke' else f'lamps-unlit-{tint}.png'))
         os.makedirs(os.path.dirname(out), exist_ok=True)
         extra = ['--scale', a_[a_.index('--scale') + 1]] if '--scale' in a_ else []
         sm = a_[a_.index('--samples') + 1] if '--samples' in a_ else '128'
         subprocess.run(['python3.11', os.path.join(ROOT, 'studio', 'engine', 'render.py'),
-                        os.path.join(SHOTS, 'lamps-unlit-real.json'), '--out', out, '--samples', sm] + extra,
+                        os.path.join(SHOTS, sname), '--out', out, '--samples', sm] + extra,
                        cwd=ROOT, check=True)
         print('rendered', os.path.relpath(out, ROOT), flush=True)
     if '--site' in sys.argv:
