@@ -6053,3 +6053,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   run hot; grid off + a 3.0 x 1.5 m cutter + -0.25 overshoots (floor 0.62). V1 rendering (Fog, Dust, Ember, half size, 64 samples):
   grid off, cutter 2.5 x 1.25 m, -0.2, a real white fill card camera-right (1.4 x 1.8 m) for Fog's right face; ~20:50. 20:36 sent:
   bracket it now on the idle helpers (c2: cutter 2.25 x 1.1, -0.15; c4: 2.75 x 1.4, -0.25), the best of three on the targets.
+- 20:36 SITE: Fog's habitat prepared locally (r47-site-next ec4f419a): cd5aa4e6's one-sun final as the "Out" view on /tropos/fog and
+  /colors/fog (WebP 1200x1500, a 168x210 thumb; "In the grass on a hillside, in fog at dawn."); its key off the banned list; sweep clean.
+- 20:36 BIOMES: the Fresnel rule in glass_shadows (917754a3: tr = 0.92 x exp(-absorption x thickness), commented); FOG (2) rendering
+  from 20:36:42, ETA ~21:02, then my gate (cd5aa4e6 ships if it can't land and pass in time); the Poison (i) proxies paused for it.
