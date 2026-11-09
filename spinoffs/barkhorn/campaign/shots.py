@@ -661,6 +661,14 @@ def site(frame, tint):
         # front unchanged. `back` goes off)
         s['lights']['back']['irradiance'] = 0.0
         s['lights']['back'].pop('power_w', None)
+    if frame in ('front-off-tall', 'front-off-wide', 'hero-light'):
+        back_edge_card(s)
+    # a panel at strength 0 still stands in the set: unseen by the camera and casting no shadow, but in the glossy floor's
+    # reflections a black rectangle (the wide's critics, 2026-11-09: a straight, nearly horizontal seam on the floor at
+    # x 1650-1800, y 780-790 of 1800 x 1200, darker beyond it; the ray-cast puts it on `sidesheen`'s foot, y 2.4 m behind
+    # the speaker). An unlit panel is no lamp, whatever its ramp (a fraction of 0): it goes
+    for k in [k for k, L in s['lights'].items() if L.get('type') == 'panel' and float(L.get('strength', 1.0)) <= 0.0]:
+        s['lights'].pop(k)
     if frame == 'side' and 'kick' in s['lights']:
         # (the tall gates' fold-in (1), 2026-11-09: the lower third of the right side mirrored the floor between the speaker
         # and the black mirror card, which the card rule keeps 2.5 m out, too far to reach the lower face's reflections
@@ -671,6 +679,29 @@ def site(frame, tint):
         s['lights']['kick']['irradiance'] = 0.0
         s['lights']['kick'].pop('power_w', None)
     cards_out_of_frame(s)
+    return s
+
+
+def back_edge_card(s, gap=0.004, h=0.045):
+    """A black card standing on the floor just behind the speaker's bottom panel (the bottom-edge gate, 2026-11-09).
+    The panel is clear and runs the cabinet's full depth, polished at both ends: from the front the camera looks into
+    its front edge and along it, by total internal reflection, out of its back edge to the bright studio behind, through
+    420 mm of dye: Dust's red bar at the foot, Fog's white streaks, Ice's blue band. Tests on the Dust hero-light base
+    crop: each lamp off in turn left the bar (3630 red px; the key off 3430), a card on the floor under the footprint
+    changed nothing, the background lamps off dimmed it, and a low black card behind the speaker took it to 0. A real
+    set object: seen by the camera and in reflections, casting shadows, no link; the cabinet's width, 45 mm tall, 4 mm
+    behind the back face, where the speaker hides it from the front."""
+    import math
+    for blk in s.get('products', []):
+        for i in blk['instances']:
+            x0, y0, z0 = i.get('position', [0, 0, 0]); r = math.radians(i.get('rotate_z', 0))
+            yb = 0.2063 + gap                                  # the back face, in the speaker's own frame (m)
+            cx, cy = x0 - math.sin(r) * yb, y0 + math.cos(r) * yb
+            s.setdefault('set', {}).setdefault('flags', []).append(
+                {'center_m': [round(cx, 4), round(cy, 4), round(z0 + h / 2, 4)], 'size_m': [0.56, h],
+                 'normal': [round(math.sin(r), 4), round(-math.cos(r), 4), 0.0], 'color': '#050505',
+                 'camera': True, 'glossy': True, 'name': 'back-edge card'})
+        break
     return s
 
 
