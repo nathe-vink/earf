@@ -5732,3 +5732,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   first; Core at its drawn 200 lm (~180 out of the ball) from round 3 on, never brighter than the part. 19:29 sent the site lane and
   the brand lane: lamps-unlit out everywhere; the Ember pair goes in if it passes by ~20:20 ("Shown in Ember", "a pale core" dropped),
   else no lamp picture (text only); the site in ONE push with the talls, the Dust pull and the lamps picture.
+- 19:29 GATE TALLS rc1-card Dust + Fog (wf_040e85e8-217) complete: 2/3 SHOW each (founder, skeptic yes; the photographer holds both for
+  one thing: the back-edge card's right end shows 2-6 px past the back-right corner at the floor, x 708-717, y 972-1002, a black nub,
+  most in Fog; fix: shorten it 8-10 mm). The foot fixed (Dust strip red px 1764 -> 0; Fog's streak mean L 176 -> 53); nothing above
+  y ~935 changed; the card not seen through Fog's panels or in reflections. Watch: Dust's top front edge pipes red (not blocking).
+  Ice + Haze (wf_a4b8b6dc-b4a) 2/2 SHOW so far. These validate the card on the rc1-card rig; the rc1-real talls get their own gate.
+  19:29 sent the speaker lane: the card trim, to prove with the gridded horn lamp after the backs (the next tall round).
+- 19:2x HAZE CROPS gate (wf_6d8712e8-76a): founder and photographer HOLD every crop, (a) and (c) included; the skeptic and the (d) gate
+  (wf_8595d630-0e7) still running.
