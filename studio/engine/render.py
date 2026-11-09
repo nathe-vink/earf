@@ -306,6 +306,14 @@ def main():
                 print(f'  {v["share"] * 100:5.1f}%  {what:34s} box {v["box_px"]}  az {v["az_deg"]}  el {v["el_deg"]}')
         return
     scene.render.filepath = str(out.resolve())
+    if os.environ.get('CASTCHECK'):
+        # the cast check with Blender's own camera (the lamps lane, 2026-11-09): each camera-hidden object alone, as
+        # a flat mask, everything else held out; the share of the frame each covers
+        sys.path.insert(0, str(Path(ROOT, 'spinoffs', 'barkhorn', 'companions', 'launch')))
+        from hiddencast_bpy import mask_check
+        r = mask_check(scene, str(out.with_suffix('.castcheck.png')))
+        print('CASTCHECK', a.shot, {k: round(v * 100, 2) for k, v in r.items()})
+        return
     t1 = time.time()
     if a.masks_only:
         if not out.exists():

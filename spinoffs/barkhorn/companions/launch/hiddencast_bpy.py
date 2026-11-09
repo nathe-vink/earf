@@ -61,6 +61,10 @@ def _hit_light(ob, o, d):
 
 def hiddencast(sc):
     """[(kind, name, share 0-1, practical)] for every object hidden from the camera."""
+    # 2026-11-09 23:40 (the cast check): the world matrices are stale until the depsgraph updates; without this the
+    # camera sat at its rest pose and the audit's numbers were wrong (the orb row's 4 m key: 0 % read, 24 % real)
+    import bpy
+    bpy.context.view_layer.update()
     o, rays = _rays(sc)
     rows = []
     for ob in sc.objects:
@@ -113,3 +117,73 @@ def slide_out(sc, ob, target, ok=lambda loc: True, kmax=8.0):
 def bpy_update(sc):
     import bpy
     bpy.context.view_layer.update()
+
+
+def mask_check(sc, out_png):
+    """The cast check with Blender's own camera (the coordinator, 2026-11-09 23:11, after the speaker lane's audit
+    built its camera differently from the renderer): every object hidden from the camera made visible (meshes as a
+    flat white emission, lamps as themselves), everything else held out, the world black, 1 sample, at the picture's
+    own resolution and crop; returns {name: share of the frame's pixels it covers} and writes the mask. Run it on a
+    built scene, in place of the render (it changes the scene)."""
+    import bpy
+    bpy.context.view_layer.update()
+    hidden = [o for o in sc.objects if (o.type == 'MESH' and not o.visible_camera)
+              or (o.type == 'LIGHT' and o.data.type != 'SUN' and not o.visible_camera)]
+    em = bpy.data.materials.new('castcheck'); em.use_nodes = True; nt = em.node_tree; nt.nodes.clear()
+    e = nt.nodes.new('ShaderNodeEmission'); e.inputs['Strength'].default_value = 1.0
+    o_ = nt.nodes.new('ShaderNodeOutputMaterial'); nt.links.new(e.outputs[0], o_.inputs['Surface'])
+    for o in sc.objects:
+        if o.type == 'MESH':
+            if o in hidden:
+                o.visible_camera = True; o.data.materials.clear(); o.data.materials.append(em)
+                for s in o.material_slots:
+                    s.link = 'DATA'
+            else:
+                o.is_holdout = True
+        elif o.type == 'LIGHT':
+            o.hide_render = True
+    # a hidden lamp as a two-sided card (or sphere) of its own shape at its own place: Cycles draws an area lamp only
+    # from its emitting side, so one facing away from the lens would read 0 % while it stands in frame
+    import bmesh
+    proxies = {}
+    for h in [o for o in hidden if o.type == 'LIGHT']:
+        L = h.data; bm = bmesh.new()
+        if L.type == 'AREA':
+            a = L.size / 2; b = (L.size_y if L.shape in ('RECTANGLE', 'ELLIPSE') else L.size) / 2
+            if L.shape in ('DISK', 'ELLIPSE'):
+                bmesh.ops.create_circle(bm, cap_ends=True, segments=48, radius=1.0)
+                for v in bm.verts:
+                    v.co.x *= a; v.co.y *= b
+            else:
+                bmesh.ops.create_grid(bm, x_segments=1, y_segments=1, size=1.0)
+                for v in bm.verts:
+                    v.co.x *= a; v.co.y *= b
+        else:
+            bmesh.ops.create_uvsphere(bm, u_segments=24, v_segments=12, radius=max(L.shadow_soft_size, 1e-3))
+        me = bpy.data.meshes.new('cc-' + h.name); bm.to_mesh(me); bm.free(); me.materials.append(em)
+        po = bpy.data.objects.new('cc-' + h.name, me); sc.collection.objects.link(po); po.matrix_world = h.matrix_world.copy()
+        proxies[h.name] = po
+    targets = [(h.name, proxies.get(h.name, h)) for h in hidden]
+    if sc.world:
+        sc.world.use_nodes = True
+        for n in sc.world.node_tree.nodes:
+            if n.type == 'BACKGROUND':
+                n.inputs['Strength'].default_value = 0.0
+    sc.cycles.samples = 1; sc.cycles.use_denoising = False; sc.render.film_transparent = True
+    sc.render.dither_intensity = 0.0                  # (the 8-bit dither set stray pixels to 1/255)
+    sc.render.image_settings.file_format = 'PNG'; sc.render.image_settings.color_mode = 'RGBA'
+    sc.view_settings.view_transform = 'Standard'; sc.view_settings.look = 'None'; sc.view_settings.exposure = 0.0
+    sc.render.filepath = out_png
+    res = {}
+    for name, h in targets:                           # one object at a time, so each one's share is its own
+        for _, o in targets:
+            o.hide_render = (o is not h)
+        f = out_png.rsplit('.', 1)[0] + '-' + name + '.png'       # each object's own mask
+        sc.render.filepath = f
+        bpy.ops.render.render(write_still=True)
+        img = bpy.data.images.load(f, check_existing=False); px = img.pixels[:]
+        n = len(px) // 4
+        lit = sum(1 for i in range(n) if max(px[4 * i], px[4 * i + 1], px[4 * i + 2]) > 0.02)
+        res[name] = lit / n
+        bpy.data.images.remove(img)
+    return res

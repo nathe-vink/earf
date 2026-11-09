@@ -530,6 +530,7 @@ def build(frame, samples, scale):
         # round 14 (the coordinator's card audit): ray-cast the frame (every max(W,H)/240 px) and report, for each object
         # hidden from the camera, the share of rays whose first hit it would be; then each object that casts no shadow
         from mathutils import Vector
+        bpy.context.view_layer.update()               # 2026-11-09: the world matrices are stale until updated
         sc = bpy.context.scene; cam_ob = sc.camera
         hidden = [o for o in sc.objects if o.type == 'MESH' and not o.visible_camera]
         dg = bpy.context.evaluated_depsgraph_get()
