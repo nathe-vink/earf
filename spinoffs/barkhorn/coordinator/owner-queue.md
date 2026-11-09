@@ -6086,3 +6086,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   3-5 cm left so the horn's shadow covers that wedge; only else lower it decisively below the top line; the lit wood beside the console
   (L* 32/44) and the plank strip brighter than the rug in front (14); the right post-top nub an electric-blue pip. 20:48 sent the Mantle
   lane the sweep (founder + photographer pending, wf_21969165-0ce).
+- 20:48 GATE EMBER UNLIT PAIR complete (wf_3e232358-ab0, four lenses + tally): 0/4 on both frames. All four: the rig honest, Hemisphere
+  a deep glassy Ember; Core blocks (a near-black ball, plum top L* ~6 h ~0 over brown L* ~9 h ~43, chroma ~15 against the brand's 48-72;
+  the line an honest reflection of the table's camera-side edge; the top reflects the dark blue room behind the camera, not the wall).
+  Also: Hemisphere's mouth rust (C2's channel test); Ember tints its own surface reflections (C3: Specular Tint?); the dock reads as a
+  bright metal disc against the copy's black acrylic (C4); the camera 0.45° off level; the collar's top face a pure-black void. Liner
+  choice: design A tonight 4/4; 3/4 call this the clearest case for B (an A/B day pair for the owner). 20:49 sent the lamps lane the
+  merged fixes (neutral surround at the same level; the liner's mouth >= 0.2 of the lip per channel; Specular Tint white, all tints;
+  the dock against the CAD and the copy; level; the collar a real black; Ember's reference #9B0000; every light named in the audit).
