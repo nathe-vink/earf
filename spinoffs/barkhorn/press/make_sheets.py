@@ -12,26 +12,29 @@ IMG = os.path.join(HERE, '..', 'site', 'img')
 # since the site's still show the cord.
 BOOK = os.path.join(HERE, '..', 'brandbook', 'book', 'img')
 FROM_BOOK = {'lamp-orb.jpg', 'lamps-orbs.jpg', 'lamps-unlit.jpg', 'room.jpg'}
+# Only pictures that passed the critics (2026-11-09): the seven tall fronts, in the Book's img. A sheet whose picture
+# has not passed gets a labelled gap.
+SEVEN = [f'honest-front-{t}.jpg' for t in ('ember', 'dust', 'acid', 'poison', 'ice', 'haze', 'fog')]
 OUT = os.path.join(HERE, 'out')
 MARK = os.path.join(HERE, '..', 'brand', 'mark', 'earf-wordmark-black.svg')
 STANDING = ('In development and not yet for sale. Every picture is a render until the first are built. Figures are '
             'design figures; measured ones follow with the first pair. Prices are set at launch.')
 
 SHEETS = [
-    ('company', 'EARF', 'The company', 'Hi-fi and light, cast in tinted acrylic, in eight colors from Ember to Smoke.',
-     'lineup.jpg',
+    ('company', 'EARF', 'The company', 'Hi-fi and light, cast in tinted acrylic, in seven colors, Ember to Fog.',
+     SEVEN,
      'EARF is a San Francisco maker of hi-fi and lighting in tinted cast acrylic. Every product comes '
-     'in the same eight colors, from Ember to Smoke, so a room can be one color or three. Each is named for a layer of '
+     'in the same seven colors, from Ember to Fog, so a room can be one color or three. Each is named for a layer of '
      'the Earth. A wall of tinted acrylic 20 mm thick shows what is inside it.',
      [('Where', 'San Francisco, California'), ('Site', 'earf.world'), ('Inquiries', 'hello@earf.world; trade and stockists the same'),
       ('Products', 'Tropos, a powered horn loudspeaker · Hemisphere, a pendant · Core, a table lamp · Mantle, a record player'),
-      ('Colors', '01 Ember · 02 Dust · 03 Acid · 04 Poison · 05 Ice · 06 Haze · 07 Fog · 08 Smoke'),
+      ('Colors', '01 Ember · 02 Dust · 03 Acid · 04 Poison · 05 Ice · 06 Haze · 07 Fog (an eighth, Smoke, held)'),
       ('Sells', 'Made to order; prices set at launch'),
       ('Where it stands', 'Tropos is drawn for making, part by part: more than eighty parts, each with its fabrication drawing. '
        'The horn and the bass were worked out by simulation before any acrylic was cut. Next, the first pair, built as '
        'production will build it; then measured, by ear and by microphone. The lamps and Mantle follow the same way'),
       ('Founder', '[FOUNDER]')]),
-    ('tropos', 'Tropos', 'Powered horn loudspeaker', 'Eight colors, Ember to Smoke.', 'red-studio-light.jpg',
+    ('tropos', 'Tropos', 'Powered horn loudspeaker', 'Seven colors, Ember to Fog.', 'honest-front-ember.jpg',
      'Each cabinet is tinted cast acrylic, 20 mm thick. The horn is one sheet of 10 mm acrylic in the cabinet’s own color, '
      'formed over a plug and polished, its driver in a pod whose cap twists off by hand. Above 1 kHz the horn carries the music; below, a 15-inch '
      'woofer takes it, each on its own channel of the amplifier inside. The lining shows through the walls, so it is '
@@ -41,23 +44,23 @@ SHEETS = [
       ('Horn driver', 'B&C DE1085TN, 2-inch compression driver'), ('Amplifier', 'Hypex FusionAmp FA122, built in: two channels of 125 W, crossed at 1 kHz in its DSP'),
       ('Bass', 'To about 51 Hz at −3 dB, before the room adds its own; ports tuned to 38 Hz'), ('Loudness', 'Up to about 115 dB at 1 m, each'),
       ('Inputs', 'XLR (and a link out), RCA, AES, S/PDIF coaxial and optical; USB to set it up'),
-      ('Lining', 'Polyester batts in white voile'), ('Colors', 'All eight; the cover cloth matched to each')]),
+      ('Lining', 'Polyester batts in white voile'), ('Colors', 'All seven; the cover cloth matched to each')]),
     ('hemisphere', 'Hemisphere', 'Pendant lamp', 'A quarter turn takes its shade off, and another puts a new color on.',
-     'lamp-dome.jpg',
+     None,
      'A pendant in the speakers’ acrylic, frosted within, so the color glows and the source never shows. Hung low over '
      'the bar. The shade comes off by hand to wash or to change color. The name: half a globe, hung mouth down.',
      [('Size', '200 mm across'), ('Shade', 'Cast acrylic in three layers, tinted, with a frosted layer between'),
       ('Light', 'A 575-lumen LED, 2700 K, CRI 90, shielded inside the hub'), ('Fitting', 'Black anodized aluminum, with a quarter-turn catch'),
       ('Hanging', 'A 600 mm drop as standard, cut to length; a black acrylic canopy 150 mm across'),
-      ('Mains', '120 V, dimmable; listing to UL 1598 to follow'), ('Shades', 'In all eight colors, sold singly')]),
-    ('core', 'Core', 'Table lamp', 'Goes where the conversation is.', 'lamp-orb.jpg',
+      ('Mains', '120 V, dimmable; listing to UL 1598 to follow'), ('Shades', 'In all seven colors, sold singly')]),
+    ('core', 'Core', 'Table lamp', 'Goes where the conversation is.', None,
      'A ball of tinted acrylic sitting low in a black acrylic base. Cordless, it goes where the '
      'conversation is. When the cells tire, you change the cells, not the lamp. The name: the glowing center.',
      [('Size', '160 mm ball, 180 mm tall'), ('Weight', 'About 1.5 kg'), ('Light', '2200 to 2700 K, warmer as it dims'),
       ('Control', 'Touch the black ring: tap to switch, hold to dim'),
       ('Power', 'Cordless: about five hours a charge on three standard LiFePO4 cells you can replace yourself; two to three hours to charge'),
-      ('Rating', 'Designed to meet IP44, for terraces and spilled drinks'), ('Shades', 'In all eight colors, sold singly')]),
-    ('mantle', 'Mantle', 'Record player', 'A record player that floats on its own light.', 'tt-amber-studio.jpg',
+      ('Rating', 'Designed to meet IP44, for terraces and spilled drinks'), ('Shades', 'In all seven colors, sold singly')]),
+    ('mantle', 'Mantle', 'Record player', 'A record player that floats on its own light.', None,
      'Its tinted plinth floats 40 mm over a base that glows at its edge. The motor stands apart in a pod of its own, on '
      'soft feet, so its hum stays out of the plinth, and the phono stage is built in. The lid’s hinges sit on brass '
      'inserts, so no screw cuts the acrylic. The name: the layer that moves beneath the crust.',
@@ -80,7 +83,12 @@ h1 { margin: 6px 0 0; font-size: 46pt; line-height: .95; letter-spacing: -.035em
 .line { font-size: 15pt; letter-spacing: -.01em; margin: 0 }
 .pic { height: 3.4in; border-radius: 3px; overflow: hidden; background: #F8F7F5 }
 .pic img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 42% }
+.pic.fit { background: #E4E0D9 }
 .pic.fit img { object-fit: contain }
+.pic.row { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; background: none; align-items: center }
+.pic.row img { height: auto; aspect-ratio: 4/5; border-radius: 2px }
+.pic.gap { display: grid; place-content: center; text-align: center; gap: 6px; border: 1px dashed #5E5A53; background: #ECE8E1; font-size: 13px; color: #5E5A53 }
+.pic.gap b { color: #1C1A18; font-size: 15px }
 .body { font-size: 10.5pt; line-height: 1.5; margin: 0; max-width: 6.6in }
 dl { margin: 0; display: grid; grid-template-columns: 1.35in 1fr; gap: 0; font-size: 9.5pt; line-height: 1.4; border-top: 1px solid #D6D0C6 }
 dt, dd { padding: 5px 0; border-bottom: 1px solid #D6D0C6; margin: 0 }
@@ -89,17 +97,27 @@ dt { font-family: 'IBM Plex Mono', monospace; font-size: 7.5pt; letter-spacing: 
 .strip { position: absolute; left: 0; right: 0; bottom: 0; height: 6px; display: flex }
 .strip i { flex: 1 }
 """
-TINTS = ['#920000', '#E06718', '#E2AA15', '#1C5B02', '#2584BE', '#44147B', '#D5DFE0', '#3A3741']
+TINTS = ['#920000', '#E06718', '#E2AA15', '#1C5B02', '#2584BE', '#44147B', '#D5DFE0']   # seven; Smoke held (the owner's call)
 
 
 def page(key, name, kind, line, pic, body, rows):
     esc = lambda s: s.replace('&', '&amp;').replace('<', '&lt;')
     dl = ''.join(f'<dt>{esc(k)}</dt><dd>{esc(v)}</dd>' for k, v in rows)
     strip = ''.join(f'<i style="background:{c}"></i>' for c in TINTS)
+    src = lambda f: f'file://{os.path.join(BOOK if f in FROM_BOOK or f.startswith("honest-") else IMG, f)}'
+    if isinstance(pic, list):
+        pic_html = '<div class="pic row">' + ''.join(f'<img src="{src(f)}" alt="">' for f in pic) + '</div>'
+        credit = 'Pictures: the seven, each its own studio render.'
+    elif pic:
+        pic_html = f'<div class="pic{" fit" if key in ("tropos",) else ""}"><img src="{src(pic)}" alt=""></div>'
+        credit = 'Picture: a render.'
+    else:
+        pic_html = f'<div class="pic gap"><span>PENDING</span><b>{esc(name)}: a new render</b><span>It goes here when it passes the critics.</span></div>'
+        credit = ''
     return (f'<section class="page"><div class="top"><img src="file://{MARK}" alt="EARF"><span class="k">Press · fact sheet · not for release</span></div>'
             f'<div><span class="k">{esc(kind)}</span><h1>{esc(name)}</h1></div><p class="line">{esc(line)}</p>'
-            f'<div class="pic{" fit" if key in ("tropos",) else ""}"><img src="file://{os.path.join(BOOK if pic in FROM_BOOK else IMG, pic)}" alt=""></div><p class="body">{esc(body)}</p><dl>{dl}</dl>'
-            f'<div class="foot"><span>{STANDING} Picture: {pic}, a render.</span><span>earf.world<br>hello@earf.world</span></div>'
+            f'{pic_html}<p class="body">{esc(body)}</p><dl>{dl}</dl>'
+            f'<div class="foot"><span>{STANDING} {credit}</span><span>earf.world<br>hello@earf.world</span></div>'
             f'<div class="strip">{strip}</div></section>')
 
 
