@@ -6046,3 +6046,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   inside a tinted box), which for clear Fog is (1,1,1) and omits the real ~4 %-per-face Fresnel loss: the clear box casts no shadow of
   its own. 20:35 sent: (2), the Fresnel loss in (x 0.92 per wall), Fog re-rendered now (~25 min; cd5aa4e6 the fallback for tonight if
   it can't land and pass before the push), the rule written into glass_shadows for Dust, Acid, Ice and Poison next round.
+- 20:36 SPEAKER LANE: THE POOL'S CAUSE: the horn lamp's 15° grid. Blender's area-light spread is a hard cone per point of the box with no
+  box-sized penumbra, so no real rig throws that edge (the critics were right); with the lamp above the camera its beam carried past the
+  horn onto the cove. Cutter removed alone: the wedge stays; grid removed: the backdrop smooth (upper-right -4 against passed, max diff
+  34). Grid off keeps the front's targets (Dust front 0.80, centre 0.83, blue 0.014, horn L* 53) but the wall 0.84 and the floor 0.94
+  run hot; grid off + a 3.0 x 1.5 m cutter + -0.25 overshoots (floor 0.62). V1 rendering (Fog, Dust, Ember, half size, 64 samples):
+  grid off, cutter 2.5 x 1.25 m, -0.2, a real white fill card camera-right (1.4 x 1.8 m) for Fog's right face; ~20:50. 20:36 sent:
+  bracket it now on the idle helpers (c2: cutter 2.25 x 1.1, -0.15; c4: 2.75 x 1.4, -0.25), the best of three on the targets.
