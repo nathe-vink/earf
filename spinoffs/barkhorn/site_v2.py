@@ -581,6 +581,15 @@ def pages(web):
         assert 'noindex' in page
         os.makedirs(os.path.dirname(f), exist_ok=True)
         open(f, 'w').write(page)
+    if getattr(web, 'RC', False):              # the candidate ships only the pictures its pages load
+        import glob
+        used = set()
+        for f in glob.glob(os.path.join(web.SITE, '**', '*.html'), recursive=True):
+            used |= set(re.findall(r'img/(?:v2|rc)/[\w.-]+', open(f).read()))
+        for d in ('v2', 'rc'):
+            for f in glob.glob(os.path.join(web.IMG, d, '*')):
+                if f'img/{d}/' + os.path.basename(f) not in used:
+                    os.remove(f)
 
 
 def lighten(p, web):
@@ -755,7 +764,8 @@ def apply(web, head, rest):
         hero(p)
         light(p)
         light_list(p, web)
-        night(p, web)
+        if not getattr(web, 'RC', False):     # the candidate hides the stage until the night renders pass
+            night(p, web)
         sound(p, web)
         habitats(p, web)
         paths(p, web)
