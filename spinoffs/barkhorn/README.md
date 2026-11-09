@@ -410,6 +410,15 @@ FaitalPRO's 8 Ω sheet (printed 2026-10-22, `components.json`): Fs 35, Re 5.1, Q
 move 0.5 mm). New: Bl 16.7 T m, Mms 85.2 g, Xdamage 15.5, minimum impedance 5.9 Ω, and 3.7 L displaced, now used in
 the net volume (4.5 estimated before).
 
+**Item 16 (2026-11-09).** The bolt circle (374) and Sd (857 cm²) have been in the model since round 36; the three
+hardware lines in `components.json` that still said "on 375" now say 374. The voice coil is now drawn at 77 mm, from
+FaitalPRO's drawing (`coil_d`; before, the model's default drew 56). The coil does not enter the lumped box model, so
+the figures below stand. Re-run on the Cloud's box (135.6 L, fb 38 Hz, 2 × 113 mm ports 222.7 long, 24.5 V = 75 W
+into 8 Ω): f3 50.9 Hz; peak excursion with the preset's LR4 high-pass at 28 Hz 4.41 mm at 59 Hz (Xmax 5.75); without
+it 6.34 mm at 30 Hz and 14.6 at 20 Hz (Xdamage 15.5); peak port air speed 9.1 m/s with the high-pass, 12.8 without.
+The other datasheet figures are round 36's reading of the sheet printed 2026-10-22 and were not re-checked: the sheet
+cannot be fetched from this container.
+
 ### The box at 75 W
 
 The FA122 gives 2 x 125 W into 4 Ω, so about 75 W into the 8 Ω woofer (24.5 V). The model is `speaker.box`:

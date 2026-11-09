@@ -613,7 +613,13 @@ def _contact(nt, I, col_lin, strength, distance, core=0.0, core_distance=0.025):
         mr = nt.nodes.new('ShaderNodeMapRange'); mr.clamp = True
         mr.inputs['To Min'].default_value = 1.0 - s; mr.inputs['To Max'].default_value = 1.0
         nt.links.new(ao.outputs['AO'], mr.inputs['Value'])
-        return mr.outputs['Result']
+        # floored at 0 (2026-11-09): with a strength over 1 the range runs below 0, and two negative terms multiplied
+        # came out positive, up to strength x core times the floor's colour, wherever both terms were deep in
+        # occlusion: the bright band on the floor under the speaker's bottom panel, seen through its 12 mm gap
+        # (Ember wide, the bottom-edge sheets). A single term's result is unchanged above 0
+        z = nt.nodes.new('ShaderNodeMath'); z.operation = 'MAXIMUM'; z.inputs[1].default_value = 0.0
+        nt.links.new(mr.outputs['Result'], z.inputs[0])
+        return z.outputs['Value']
     f = term(strength, distance) if strength > 0 else None
     if core > 0:
         c = term(core, core_distance)
