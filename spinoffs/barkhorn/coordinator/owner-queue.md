@@ -5800,3 +5800,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   4 Nov 01:48, both in studio/products/barkhorn-cloud.json). 19:39 sent biomes: before the Acid final, diff all seven tints' cabinet and
   horn materials against r33-speaker-horn HEAD, rebuild or patch to match, and say whether the passed Ice and Fog finals carry an
   out-of-date material.
+- 19:39 WALKTHROUGH: my 18:48 items were numbered 107 and 108, colliding with the parked items of those numbers; renumbered 130 (the
+  Hemisphere's cord) and 131 (for information: the bottom panel's light pipe). ADDED 132: Haze's horn, the deep custom pour reads cobalt
+  beside the violet box outdoors; options (a) the deep lot as drawn, (b) one glass (the cabinet's colour and per-mm density), (c) a
+  custom pour tuned toward the box's violet; my pick (c), proved first on swatches and one habitat proxy; pictures 4 Nov | (c) | (d).
