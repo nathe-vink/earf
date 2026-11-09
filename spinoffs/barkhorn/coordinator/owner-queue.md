@@ -5750,3 +5750,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   the cards and the dappled sun are exhausted. 19:30 sent: proxy two recompositions, (a) the camera swung so the bright mist sits
   behind the box (backlit), (b) the speaker moved into the sunlit clearing; after the Dust proxies, before the Acid final; I gate the
   Dust and Poison proxies together.
+- 19:30 VERCEL PATTERN: deployments at 18:45:23, 18:59:53, 19:14:36 and 19:29:20 (r47-brand 2596a79e), each from a push made right
+  then, about every 14.7 min; every other push in between got none (dropped, not queued). So the project is rate limited after the
+  afternoon's burst (41 deployments in the hour before 18:45). The next windows: ~19:44, ~19:59, ~20:13, ~20:28. PLAN: a push freeze
+  for every lane but the site from ~20:00 until the site's talls push has a deployment, so the next window's slot waits for it.
+  The Book doesn't need Vercel (an Artifact republish).
