@@ -5563,3 +5563,15 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   (certificate, card, hotel, the Tint Library lid lines + Render caption, social.jpg after the swap); the Mantle + lamps pair moved up
   into Position; the press grid; the words; all "Pictures to come" into one list under Facts. One republish after the four fronts
   pass my gate (~19:50).
+- 18:57 biomes, HAZE proxies (ea92efd3; horn_box.py): on broad regions neither the silk nor sun 10° closes the split (dH -15). On clean
+  glass only: horn mouth 276-277°, box top band 281°, the gap ~5° in every version; with the silk T 0.7 the horn sits 0.35 stop under the
+  band (target <= 0.5) and the band stays +2.7 stops over 4 Nov. What reads as "a violet box" is the side columns, 300-307° (the cut
+  edges glowing red-violet in the warm sun; the silk pushes them to 307), plus the warm woofer surround. Its proposal: the final with
+  the silk. 19:00 biomes, POISON: batts white by spec (one lining material, albedo 0.86); the bones prop dropped (caaabb3e); a sun probe
+  on the dark hole running. ITS OWN MISTAKE: the first bounce proxy had the white card IN frame (the out-of-frame test checked only
+  corners); fixed in 659e54ed (every corner past the same edge); --scrim had the same test, the Haze silk checked out of frame; nothing
+  from the bad proxies was sent. New Poison bounce: a white card 1.2 x 1.0 m at 35° camera-right off the mirror line, a low white strip
+  2.0 x 0.5 m under the lens, the black card 70° camera-left; exposures 1.5 and 1.25.
+- 19:02 sent biomes: Haze proxy (c) = silk + a real black card on the sun side at the grazing angle (as Acid), side columns to <= 290°;
+  crops of 4 Nov, base, (a), (c) to me for a critics' gate before the final; confirm with the corrected test that no passed final
+  (Ice 0f619953, Dust 26493989, Fog, ...) had a card or scrim crossing its frame. Order: sun probe -> Haze (c) -> Poison x2 -> Acid.
