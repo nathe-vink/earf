@@ -5836,3 +5836,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   gradient behind; or accept 03/05 as honest Fresnel. Also: cardcast/hiddencast now test a render crop as the frame shown. It reported
   the arc before reading my 19:32. 19:42 sent: PARK the arc; FIRST the tall horn lamp + the card trim + the wide's key, one SHA,
   proofs on Dust and Ember (the site and the Book wait on it; three helpers idle); then the close-ups.
+- 19:42 GATE HAZE (d) complete (wf_8595d630-0e7): 0/3 on every panel. "Under all four lights the horn stays at hue 270-272 while the
+  box swings from 271 to 305 with the light": (d) matches only by turning Haze cobalt and the morning pale gray; the horn's pour is the
+  founder's call (walkthrough 132). Caught: (a) is DISHONEST light (a 6° sun lamp under an after-sunset sky with no sun in it), and the
+  skeptic sees no half-stop drop on the grass under the silk (a silk acting on the speaker only?). 19:43 sent biomes, after the Dust
+  final: a sky-sun agreement check on every passed or pending final (Ice, Fog, Dust, Acid, Poison) with hdri_sun, one line each; and
+  confirm every silk is real, unlinked geometry that shades what lies under it.
