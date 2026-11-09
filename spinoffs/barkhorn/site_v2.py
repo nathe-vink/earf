@@ -612,7 +612,7 @@ def pages(web):
                 os.rmdir(d)
         left = [os.path.relpath(f, web.SITE) for f in glob.glob(os.path.join(web.SITE, '**', '*'), recursive=True)]
         bad = [f for f in left if re.search(r'(^press/|img/(?:(?:dome|orb)-|lamps-(?:orbs|domes)|lamp-(?:orb|dome)|hero[.-]|facade|room|macro-|turn-|spin/'
-                                            r'|tt-|ga-|icon-smoke-|(?:red|orange|amber|green|blue|violet|ice|black)-(?:on|off|studio|back|amp|horn|inside|reel|habitat))|-smoke\.html$)', f)]
+                                            r'|tt-|ga-|icon-smoke-|rc/(?:red|orange|amber|green|blue|violet|ice)-back[.-]|(?:red|orange|amber|green|blue|violet|ice|black)-(?:on|off|studio|back|amp|horn|inside|reel|habitat))|-smoke\.html$)', f)]
         assert not bad, ('site_v2: rc deploys', bad[:12])
 
 
@@ -808,6 +808,7 @@ def apply(web, head, rest):
         rc_fixes(p, web)
         rc_waves(p, web)
         rc3(p, web)
+        rc_turn(p, web)
         p.banned = BANNED_RC
     return p.done()
 
@@ -1131,12 +1132,9 @@ def rc_fixes(p, web):
     names = {k: name for k, num, name, *_ in web.CLOUDS}
     # the new pictures (r33-rollout-c2): rigB backs (39bf3f97; Acid a1322583), Acid's horn-back (a1322583), the plate (488fbec9)
     R = 'renders/2026-11-04/barkhorn/rollout/'
-    backs = {k: R + ('A-polished-backrig-acid/site-back-acid.png' if k == 'amber' else f'A-polished-backrig/site-back-{names[k].lower()}.png') for k in RC_KEYS}
-    extra = {}
-    for k, src in backs.items():
-        im = Image.open(os.path.join(web.ROOT, src)).convert('RGB'); rel = f'img/rc/{k}-back.webp'
-        im.save(os.path.join(web.SITE, rel), 'WEBP', quality=82); im.resize((168, 210)).save(os.path.join(web.SITE, f'img/rc/{k}-back-th.webp'), 'WEBP', quality=80)
-        extra.setdefault(k, {})['back'] = {'src': rel, 'w': im.width, 'h': im.height, 'th': f'img/rc/{k}-back-th.webp'}
+    # no Back view: the backs rig carries two lamps hidden from the camera standing in frame (the audit ac9e5568;
+    # the coordinator 2026-11-09 19:16). It comes back when the re-rendered backs pass.
+    extra = {k: {} for k in RC_KEYS}
     for k in RC_KEYS:        # the seven horn-backs: c2 06b829ce (Ember, Dust, Poison), c3 52ad76ba (Ice, Haze, Fog), Acid a1322583
         src = R + ('A-polished-p2-backrig-acid/horn-back-acid.png' if k == 'amber' else f'A-polished-p2/horn-back-{names[k].lower()}.png')
         im = Image.open(os.path.join(web.ROOT, src)).convert('RGB')
@@ -1153,6 +1151,7 @@ def rc_fixes(p, web):
     D['clouds'] = [c for c in D['clouds'] if c['k'] != 'black']          # seven: Smoke is not a current color
     for c in D['clouds']:
         c['views'].update(extra[c['k']])
+        c['views'].pop('back', None)
     smoke_tag = 'Shown in Smoke, still to come'
     for L in D['lamps'].values():
         L['colours'].pop('black', None)
@@ -1366,9 +1365,9 @@ def rc3(p, web):
               + '><figcaption>' + m.group(2) + '</figcaption></figure>'
               '<ul class="lamp-names"><li><a href="#hemisphere-ember">Hemisphere</a>, a pendant.</li>'
               '<li><a href="#core-ember">Core</a>, a cordless table lamp.</li></ul></div>' + p.rest[m.end():])
-    # --- 2. home: the Tropos block shows the back (a view the hero doesn't); the Ice habitat mirrored
+    # --- 2. home: the Tropos block shows the amplifier plate (a view the hero doesn't; its rig is clean); the Ice habitat mirrored
     p.sub('<figure class="sound-still"><img src="img/rc/blue-tall.webp" width="1000" height="1250" loading="lazy" alt="Tropos in Ice, its cover off, on a pale seamless">',
-          '<figure class="sound-still"><img src="img/rc/red-back.webp" width="880" height="1100" loading="lazy" alt="Tropos in Ember from behind: the amplifier plate on its back, the horn on four bronze posts">')
+          '<figure class="sound-still"><img src="img/rc/plate.webp" width="1000" height="1250" loading="lazy" alt="Tropos in Ember: the amplifier plate on its back, TROPOS &middot; TR-1">')   # the plate's rig is clean (the audit ac9e5568)
     p.sub('<div class="wrap hab-grid"><figure><img src="img/rc/blue-habitat.webp" width="1200" height="1500" loading="lazy" alt="Tropos in Ice, out in the snow at dusk"></figure>',
           '<div class="wrap hab-grid hab-mirror"><figure><img src="img/rc/blue-habitat.webp" width="1200" height="1500" loading="lazy" alt="' + HAB_ALT['blue'] + '"></figure>')
     p.sub('<p class="beat-line">' + next(line for k, num, name, icon, acr, line, *_ in web.CLOUDS if k == 'blue') + '</p><p class="foot-note"><i class="render">Render</i></p>',
@@ -1463,6 +1462,42 @@ def rc3(p, web):
 .sound-still, .mantle-pic { background: none !important }
 .hab-band .foot-note .render, .hero-cap .render { margin-left: 0 }
 """)
+
+
+TURN = {'red': 'A-polished-p2/turn-ember', 'orange': 'A-polished-p2/turn-dust', 'green': 'A-polished-p2-rc1/turn-poison',
+        'blue': 'A-polished-p2-rc1/turn-ice', 'violet': 'A-polished-p2-rc1/turn-haze', 'ice': 'A-polished-p2-rc1/turn-fog'}
+# the seven turns, passed (the coordinator 2026-11-09 18:51): Ember 00-04 r33-rollout-c3 52ad76ba, 05-23 and Dust c4 0a0a83bd;
+# Acid 00-16 c4 42fa8eee, 17-23 c3 66126d53 (A-polished-p2-rc1); Haze, Fog c3 66126d53; Poison, Ice c4 eef18db2
+
+
+def rc_turn(p, web):
+    """The turning horn back in each Tropos gallery: 24 frames at 15 degrees, one 6 x 4 sprite per color (the view
+    web.py already draws), fetched only when its view is opened; one turn on arrival on a desk, none on a phone."""
+    import json, os
+    from PIL import Image
+    R = os.path.join(web.ROOT, 'renders/2026-11-04/barkhorn/rollout/')
+    i = p.rest.index('const D = ') + len('const D = ')
+    j = p.rest.index(', BY = Object', i)
+    D = json.loads(p.rest[i:j])
+    for c in D['clouds']:
+        k = c['k']
+        files = [R + (f'A-polished-p2/turn-acid-{n:02d}.png' if n < 17 else f'A-polished-p2-rc1/turn-acid-{n:02d}.png') if k == 'amber'
+                 else R + f'{TURN[k]}-{n:02d}.png' for n in range(24)]
+        fr = [Image.open(f).convert('RGB') for f in files]
+        w, h = fr[0].size
+        assert all(f.size == (w, h) for f in fr), ('rc_turn: frame sizes', k)
+        sheet = Image.new('RGB', (w * 6, h * 4))
+        for n, f in enumerate(fr):
+            sheet.paste(f, ((n % 6) * w, (n // 6) * h))
+        rel = f'rc/turn-{k}.webp'
+        sheet.save(os.path.join(web.IMG, rel), 'WEBP', quality=72, method=6)
+        fr[0].resize((168, round(168 * h / w))).save(os.path.join(web.IMG, f'rc/turn-{k}-th.webp'), 'WEBP', quality=80)
+        c['views']['turn'] = dict(src=f'img/{rel}', w=w, h=h, th=f'img/rc/turn-{k}-th.webp', **web.ground(rel, (0, 0, w, h)))
+    p.rest = p.rest[:i] + json.dumps(D, separators=(',', ':')) + p.rest[j:]
+    # no words on how to work it (the owner); no turn on arrival on a phone
+    p.sub("role: 'img', 'aria-label': `${c.name}'s horn; drag to spin it`,", "role: 'img', 'aria-label': `${c.name}'s horn, all the way round`,")
+    p.sub("pic.style.backgroundPosition = frameAt(turnFrame); });\n    if (!reduce) {",
+          "pic.style.backgroundPosition = frameAt(turnFrame); });\n    if (!reduce && !matchMedia('(max-width: 860px)').matches) {")
 
 
 BANNED_RC = r'eight colors|to Smoke|Smoke as current'
