@@ -5977,3 +5977,17 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   bottom block +2.6 -> -5.4, the sky -7.1 -> -10.2; the foreground white flecks gone (the engine's alpha). Open polish: the plate's
   edge line, the horn diagonal. 20:19 GATE FOG ONE-SUN launched (wf_6d36d633-ccf founder + photographer, wf_05304716-6a0 skeptic);
   sent: the polish held for later; Acid final, then Poison.
+- 20:19-20:22 FIRST FINAL TALLS on 15931e00: Ember (c4 551ab3a9, 6.3 min) and Acid (c2 320402c1, 9.2 min), 1000x1250, 0 hidden in
+  frame; the back-right corners clean (the stub at the contact is the panel's own dark edge, not the card); at full size the woofer's
+  bolts, ribs and rings are crisp. The backdrop pool is in both: >=248 on 12.4 % (Ember) and 12.6 % (Acid) of the frame.
+- 20:22 GATE TALLFIX PROOFS: founder (wf_429d9349-d85) and skeptic (wf_fece0538-f07) both NO on Dust, Fog and Ember = HOLD (the
+  photographer pending). The speaker passes every test (see-through, deeper woofer blacks, a cleaner dark contact, the base-edge stripe
+  gone, no underglow, the horn the same glass). The blocker: a hard, arched light pool on the sweep (the edge climbs from the left
+  frame edge ~60 % down to the cabinet, then right of the cabinet top off the right edge; the upper wall 6-20 levels darker; the
+  floor pool near-clipped 249 and cooler, chroma 5 against the wall's 15); the skeptic: the edge goes dark to full in under half a
+  woofer-width, too sharp for a 2.5 x 1.6 m gridded box or a cutter at it: check which lamp draws it. Also: Fog's right side face grey
+  (0.83 -> 0.57); the horn flatter (its inner-flare rays gone; horn/front 0.58 vs 0.62 Dust, 0.76 vs 0.84 Ember); the proofs' softness
+  is their 32 samples (the finals are crisp). 20:23 sent the speaker lane the targets (no pool edge; the sweep smooth, upper wall
+  ~235-244; the floor <= ~245 in the wall's warm, >=248 under 1 %; Fog's right face back to ~0.8 with a real fill camera-right; keep
+  the front's fix; the horn's depth only if free), proofs at half size at 64 samples, c2/c4 free for variants; sent c2, c4, c3: finish
+  the render in progress as evidence, then hold for the next SHA (c3 resumes Fog's turn meanwhile).
