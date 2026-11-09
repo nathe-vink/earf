@@ -303,7 +303,8 @@ def pbr(bpy, aid, res='2k', scale=None, displace=0.0, tint=None, tint_mix=0.0, r
 def _alpha_maps(bpy, aid, res, objs):
     """Poly Haven's glTFs for plants cut their leaves out with an alpha mask but point the base colour at a JPG, which
     has no alpha, so the leaf cards render solid. Where a material takes its alpha from a JPG's alpha, wire in the
-    asset's own Alpha map instead (fetched once)."""
+    asset's own Alpha map instead (fetched once). Some (grass_bermuda_01) carry no alpha at all: where the asset
+    publishes an Alpha map and a material's alpha is unlinked, wire it in the base colour's coordinates."""
     mats = {m for o in objs if o.type == 'MESH' for m in o.data.materials if m and m.use_nodes}
     fix = []
     for m in mats:
@@ -312,9 +313,17 @@ def _alpha_maps(bpy, aid, res, objs):
             if (l.from_socket.name == 'Alpha' and n.type == 'TEX_IMAGE' and n.image
                     and n.image.filepath.lower().endswith(('.jpg', '.jpeg'))):
                 fix.append((m, l))
+    f = files(aid).get('Alpha', {})
+    if f:                                                    # no alpha in the glTF at all, but one is published
+        for m in mats:
+            bs = next((n for n in m.node_tree.nodes if n.type == 'BSDF_PRINCIPLED'), None)
+            if bs is None or bs.inputs['Alpha'].is_linked:
+                continue
+            col = next((l for l in bs.inputs['Base Color'].links if l.from_node.type == 'TEX_IMAGE'), None)
+            if col is not None:
+                fix.append((m, (col.from_node, bs.inputs['Alpha'])))
     if not fix:
         return
-    f = files(aid).get('Alpha', {})
     r = _pick_res(f.keys(), res) if f else None
     e = f[r].get('png') or f[r].get('jpg') if r else None
     if not e:
@@ -324,13 +333,16 @@ def _alpha_maps(bpy, aid, res, objs):
         _get(e['url'], path)
     img = bpy.data.images.load(path, check_existing=True); img.colorspace_settings.name = 'Non-Color'
     for m, l in fix:
-        nt = m.node_tree; src = l.from_node; to = l.to_socket
+        nt = m.node_tree
+        src, to = l if isinstance(l, tuple) else (l.from_node, l.to_socket)
         a = nt.nodes.new('ShaderNodeTexImage'); a.image = img; a.location = (src.location.x, src.location.y - 300)
         a.interpolation = src.interpolation; a.extension = src.extension
         for i in src.inputs:                                 # the same coordinates as the colour it pairs with
             for ll in i.links:
                 nt.links.new(ll.from_socket, a.inputs[i.name])
-        nt.links.remove(l); nt.links.new(a.outputs['Color'], to)
+        if not isinstance(l, tuple):
+            nt.links.remove(l)
+        nt.links.new(a.outputs['Color'], to)
 
 
 def place(bpy, aid, res='2k', location=(0, 0, 0), rotation_deg=(0, 0, 0), scale=1.0, name=None):

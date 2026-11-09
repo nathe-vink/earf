@@ -123,8 +123,8 @@ HORN_ROUGH = 0.05
 SPLIT = {'acid_b': (0.085, 0.10, 1.00)}
 # habitats whose sets are made real: every object seen by every ray type, casting shadows (ruling 4)
 REAL_SET = {'poison_g5'}
-# plants whose Poly Haven glTF has no alpha (the cards render whole; their glossy black surround reads as white flecks)
-PLANT_ALPHA = {'fog_b': ['grass_bermuda_01']}
+# plants whose Poly Haven glTF has no alpha: none needed since the engine's _alpha_maps wires the published map (2026-11-09)
+PLANT_ALPHA = {}
 CANOPY_OPEN = {'poison_g5': 0.25}
 SAMPLES = {'ember': 96, 'poison_g5': 96, 'haze_b': 96, 'fog_b': 96}
 
