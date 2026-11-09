@@ -649,6 +649,7 @@ def site(frame, tint):
     if frame == 'back':
         _siteB_round1(s)
         _siteB_round2(s)
+        _siteB_round3(s)
     honest_lights(s)
     if frame in ('front-off-tall', 'front-off-wide', 'side'):
         _siteG_round2(s)
@@ -701,6 +702,22 @@ def site(frame, tint):
         # all: shell 223/114/26 with it, 222/114/25 without; the stroke 655 px -> 54. A lamp dimmed as a whole: off)
         s['lights']['horn']['irradiance'] = 0.0
         s['lights']['horn'].pop('power_w', None)
+    if frame in ('front-off-tall', 'side'):
+        # (the tall gate's glint, 2026-11-09: a faint horizontal line on the right side face at mid-height, near the back
+        # edge, on Dust, Fog and Ember. The probe: the face mirrors the floor flag (finals31's, at 1.6, 1.8 on the floor,
+        # reaching y 3.0) below that line and the upright black card behind it (1.8, 2.7) above; the upright card runs
+        # on a slant and at its left end stands 0.1 m past the floor flag's far edge, so a strip of lit sweep showed
+        # between them. Not the cutter, the fill card or the flag's sheen: each off or velvet left the line. The floor
+        # flag reaches on under the upright card, y 0.6 to 3.5; still out of frame)
+        for f in (s.get('set') or {}).get('flags', []):
+            if f.get('center_m') == [1.6, 1.8, 0.005]:
+                f['center_m'] = [1.6, 2.05, 0.005]; f['size_m'] = [1.6, 2.9]
+    if frame in ('front-off-tall', 'side'):
+        # (the coordinator's 21:34 ruling, withdrawing specular-only sources: a panel at diffuse 0 shows in the glass and
+        # lights nothing, which no real lamp does. scrim 0.25, sheen 0.6 and topline 0.9 go; Dust half size: the veil box
+        # 78 -> 70 % under 0.5, front saturation 0.83, horn L* 52, the backdrop smooth, nothing at 248+)
+        for k in [k for k, L in s['lights'].items() if L.get('type') == 'panel' and float(L.get('diffuse', 1.0) or 0.0) == 0.0]:
+            s['lights'].pop(k)
     if frame in ('front-off-tall', 'front-off-wide', 'hero-light', 'side', 'back'):
         realize_hidden(s)
     # a panel at strength 0 still stands in the set: unseen by the camera and casting no shadow, but in the glossy floor's
@@ -1210,6 +1227,24 @@ def _siteB_round2(s):
     L['fill']['irradiance'] = 3.9
     L['key']['irradiance'] = 1.3
     s['sky']['strength'] = 0.3
+    return s
+
+
+def _siteB_round3(s, glow=4.0):
+    """The honest backs' gate (2026-11-09, wf_73733377-178, held 1/3): (1) a crisp light edge on the backdrop, the wash's
+    narrow 3.6 x 0.72 box close to the wall: twice the size at the same irradiance, a soft edge. (2) The horn's back went
+    flat once horn-rim left the frame (sample 132 -> 100): no camera-side lamp (it would show in the polished back and
+    top) and no more horn-rim; the photographer's way, bright-field: a lamp linked to the sweep alone, out of frame
+    camera-right, on the wall behind the horn, which the horn then shows through as glass does. (3) The amplifier
+    plate's green LED off in a frame with nothing on. Dust, half size, 64 samples: the horn sample 100 -> 111 at 2.0,
+    122 at 4.0 (the target 120-130; rigB as rendered 133), 131 at 6.0 (the wall 217-225); its hue 25 against the back
+    face's 25; the upper wall a smooth column, no 4 px step over 1."""
+    L = s['lights']
+    if 'wash' in L:
+        L['wash']['size_m'] = [round(x * 2, 3) for x in L['wash']['size_m']]
+    L['glow-wall'] = {'type': 'area', 'size_m': [1.6, 1.0], 'position': [1.8, 0.6, 2.2], 'target': [0.0, 1.45, 1.2],
+                      'irradiance': glow, 'color': '#FFF3E1', 'receivers': ['sweep']}
+    s.setdefault('materials', {})['led-on'] = {'strength': 0.0}
     return s
 
 
