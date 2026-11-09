@@ -60,11 +60,11 @@ SHEETS = [
       ('Control', 'Touch the black ring: tap to switch, hold to dim'),
       ('Power', 'Cordless: about five hours a charge on three standard LiFePO4 cells you can replace yourself; two to three hours to charge'),
       ('Rating', 'Designed to meet IP44, for terraces and spilled drinks'), ('Shades', 'In all seven colors, sold singly')]),
-    ('mantle', 'Mantle', 'Record player', 'A record player that floats on its own light.', None,
-     'Its tinted plinth floats 40 mm over a base that glows at its edge. The motor stands apart in a pod of its own, on '
+    ('mantle', 'Mantle', 'Record player', 'A turntable in cast acrylic.', None,
+     'A turntable in cast acrylic. The plinth floats 40 mm over its base. The motor stands apart in a pod of its own, on '
      'soft feet, so its hum stays out of the plinth, and the phono stage is built in. The lid’s hinges sit on brass '
      'inserts, so no screw cuts the acrylic. The name: the layer that moves beneath the crust.',
-     [('Plinth', 'Tinted cast acrylic, 25 mm; it floats 40 mm over the base'), ('Base', 'Cast acrylic, edge-lit from within, dimmable'),
+     [('Plinth', 'Tinted cast acrylic, 25 mm; it floats 40 mm over the base'), ('Base', 'Cast acrylic'),
       ('Drive', 'Belt, its motor in a heavy pod of its own'), ('Speeds', '33 and 45, by a button'), ('Arm', 'Rega RB330'),
       ('Cartridge', 'Ortofon 2M Black'), ('Phono stage', 'Built in, for moving-magnet cartridges, with a line out and a bypass'),
       ('Cover', 'Tinted acrylic, hinged'), ('Size', '470 wide, 380 deep, 194 high with the lid down (mm)'), ('Weight', 'About 15.5 kg')]),

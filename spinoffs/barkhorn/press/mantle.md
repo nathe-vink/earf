@@ -1,14 +1,13 @@
 # Mantle
 
-**A record player that floats on its own light.** A record player in the speakers' acrylic. Its tinted plinth floats
-40 mm over a base that glows at its edge. The motor stands apart in a pod of its own, and the phono stage is built in.
+**A turntable in cast acrylic.** The plinth floats 40 mm over its base. The motor stands apart in a pod of its own, and the phono stage is built in.
 The lid's hinges sit on brass inserts, so no screw cuts the acrylic; the motor's pod stands on soft feet, so its hum
 stays out of the plinth.
 
 | | |
 |---|---|
 | Plinth | Tinted cast acrylic, 25 mm; it floats 40 mm over the base |
-| Base | Cast acrylic, edge-lit from within, dimmable |
+| Base | Cast acrylic |
 | Drive | Belt, its motor in a heavy pod of its own |
 | Speeds | 33 and 45, by a button |
 | Arm | Rega RB330 |
