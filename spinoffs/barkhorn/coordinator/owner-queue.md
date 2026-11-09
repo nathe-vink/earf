@@ -5393,3 +5393,15 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   acrylic"; alts and aria-labels; habitat captions; Fog's dot; the hero snap; the Render strips; Mantle's base "Smoked"; "Drawn to
   be made" without the open horn pour; the color note; the smoke hashes; the 404 header; the prune). The four talls come later in
   one small push. Sent the brand lane: "(modeled)", not "(modelled)", everywhere (my slip).
+- 18:42 biomes: ACID grounded at sink 0.025 (955b3e1c; the bright strip under the edge 82 -> 56 against water 50; nothing submerged
+  shows); the rain-free box refitted to the horn ([0.022, 0, 0.27, 0, 1.25, 0.01]; a check proxy queued); THE CAST (3631300c): sun
+  #E6E3DA + WB tint 0: sky 93 deg / 0.04, ground and rocks 81-119 / 0.07-0.10, the speaker the only yellow; the puddle at the bottom
+  right still L 205 (mirrors the bright horizon) and the right rocks luma 110. FOG FLECKS traced: grass_bermuda_01 cards 6-11 cm up;
+  Poly Haven's glTF has no alpha (its Alpha map exists), so whole cards render, their black semi-glossy surrounds mirroring the
+  bright fog; --plant-alpha wires the published cut-out for Fog only (73ff3567); the shared engine's _alpha_maps not changed (it
+  would change approved frames). 18:43 site lane: RC3 ~20:00 (one push on cf5af9aa, the exit checked, the full suite; the web.py
+  source fixes behind COPY_NEXT, live byte-identical).
+- 18:42 sent: biomes (sink 0.025, the rain fit, sun #E6E3DA + tint 0, the HDRI turn first for the puddle, then the Acid final to
+  my gate; --plant-alpha for Fog; list which scenes use grass_bermuda_01 (Ice, Dust approved; Haze at my gate; Poison; Acid) and
+  whether the uncut cards show, before any engine change or re-render); the site lane (~20:00 noted; the four talls in the same
+  push if they pass first).
