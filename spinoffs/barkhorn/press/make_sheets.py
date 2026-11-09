@@ -49,25 +49,25 @@ SHEETS = [
      None,
      'A pendant in the speakers’ acrylic, frosted within, so the color glows and the source never shows. Hung low over '
      'the bar. The shade comes off by hand to wash or to change color. The name: half a globe, hung mouth down.',
-     [('Size', '200 mm across'), ('Shade', 'Cast acrylic in three layers, tinted, with a frosted layer between'),
+     [('Size', '200 mm across'), ('Shade', 'Three formed layers of cast acrylic: the color outside, a clear shell, an opal inside'),
       ('Light', 'A 575-lumen LED, 2700 K, CRI 90, shielded inside the hub'), ('Fitting', 'Black anodized aluminum, with a quarter-turn catch'),
       ('Hanging', 'A 600 mm drop as standard, cut to length; a black acrylic canopy 150 mm across'),
-      ('Mains', '120 V, dimmable; listing to UL 1598 to follow'), ('Shades', 'In all seven colors, sold singly')]),
+      ('Mains', 'To follow'), ('Shades', 'In all seven colors, sold singly')]),
     ('core', 'Core', 'Table lamp', 'Goes where the conversation is.', None,
      'A ball of tinted acrylic sitting low in a black acrylic base. Cordless, it goes where the '
      'conversation is. When the cells tire, you change the cells, not the lamp. The name: the glowing center.',
      [('Size', '160 mm ball, 180 mm tall'), ('Weight', 'About 1.5 kg'), ('Light', '2200 to 2700 K, warmer as it dims'),
       ('Control', 'Touch the black ring: tap to switch, hold to dim'),
-      ('Power', 'Cordless: about five hours a charge on three standard LiFePO4 cells you can replace yourself; two to three hours to charge'),
+      ('Power', 'Cordless: three standard LiFePO4 cells you can replace yourself, about five hours a charge; it charges on its dock, a polished black acrylic disc it sits in at any turn'),
       ('Rating', 'Designed to meet IP44, for terraces and spilled drinks'), ('Shades', 'In all seven colors, sold singly')]),
     ('mantle', 'Mantle', 'Record player', 'A turntable in cast acrylic.', None,
-     'A turntable in cast acrylic. The plinth floats 40 mm over its base. The motor stands apart in a pod of its own, on '
-     'soft feet, so its hum stays out of the plinth, and the phono stage is built in. The lid’s hinges sit on brass '
+     'A turntable in cast acrylic. The plinth floats 40 mm over its base. Rega’s 24 V motor hangs beneath the deck on Rega’s '
+     'grommets, and the phono stage is built in. The lid’s hinges sit on brass '
      'inserts, so no screw cuts the acrylic. The name: the layer that moves beneath the crust.',
      [('Plinth', 'Tinted cast acrylic, 25 mm; it floats 40 mm over the base'), ('Base', 'Cast acrylic'),
-      ('Drive', 'Belt, its motor in a heavy pod of its own'), ('Speeds', '33 and 45, by a button'), ('Arm', 'Rega RB330'),
-      ('Cartridge', 'Ortofon 2M Black'), ('Phono stage', 'Built in, for moving-magnet cartridges, with a line out and a bypass'),
-      ('Cover', 'Tinted acrylic, hinged'), ('Size', '470 wide, 380 deep, 194 high with the lid down (mm)'), ('Weight', 'About 15.5 kg')]),
+      ('Drive', 'Belt; Rega’s 24 V motor hung beneath the deck'), ('Speeds', '33 and 45, by a button'), ('Arm', 'Rega RB330'),
+      ('Cartridge', 'Ortofon 2M (Blue on the first build; Black is the owner’s call)'), ('Phono stage', 'Built in, for moving-magnet cartridges, with a line out and a bypass'),
+      ('Cover', 'Tinted acrylic, hinged'), ('Size', 'About 450 wide, 370 deep, 199 high with the lid down (mm; design figures)'), ('Weight', 'About 12.9 kg with the lid (design figure)')]),
 ]
 
 CSS = """
