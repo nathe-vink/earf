@@ -142,6 +142,11 @@ SPLIT = {'acid_b': (0.085, 0.10, 1.00)}
 REAL_SET = {'poison_g5'}
 # plants whose Poly Haven glTF has no alpha: none needed since the engine's _alpha_maps wires the published map (2026-11-09)
 PLANT_ALPHA = {}
+# set props added per habitat, after the shot's own (so no prop's index moves). Poison: two redwoods deep in the mist
+# where the camera saw out of the set to the sky (the trace of the bluish patch under je_gray_02, 2026-11-09)
+_RW = {"kind": "kit", "shape": "ext", "module": "poison_el", "fn": "redwood", "radius": 1.4, "height": 40.0, "tint": "#8A4126",
+       "tint_mix": 0.3, "tex_scale": 1.4, "bump": 1.6}
+ADD = {'poison_g5': [dict(_RW, position=[-5.0, 28.2, -0.1], seed=41, turn=40), dict(_RW, position=[-7.0, 32.9, -0.1], seed=42, turn=200)]}
 CANOPY_OPEN = {'poison_g5': 0.25}
 SAMPLES = {'ember': 96, 'poison_g5': 96, 'haze_b': 96, 'fog_b': 96}
 
@@ -166,10 +171,10 @@ def main():
         tint, lights = HABITATS[n]
         shot = os.path.join(SHOTS, f'{n}-portrait.json' if a.frame == 'portrait' else f'{n}.json')
         out = os.path.join(a.out, f'{n}-{a.frame}{a.tag}.png')
-        if n in DROP or n in MODIFY:
+        if n in DROP or n in MODIFY or n in ADD:
             sh = json.load(open(shot))
             sh['set']['props'] = [dict(p, **MODIFY.get(n, {}).get(p.get('fn') or p.get('model'), {})) for p in sh['set']['props']
-                                  if p.get('fn') not in DROP.get(n, [])]
+                                  if p.get('fn') not in DROP.get(n, [])] + ADD.get(n, [])
             shot = out.replace('.png', '.src.json')
             json.dump(sh, open(shot, 'w'), indent=1)
         # horn A on its own M8 feet (base A and its light left out), direct light stopped at the horn
