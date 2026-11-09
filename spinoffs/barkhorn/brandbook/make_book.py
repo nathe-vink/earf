@@ -18,7 +18,7 @@ SITE_PICS = ['hero-1200.jpg', 'hero-portrait.jpg', 'lineup-1200.jpg', 'facade-12
             [f'{k}-habitat-1200.jpg' for k in KEYS] + [f'{k}-studio-light-1200.jpg' for k in KEYS]
 BRAND = {'lockup-paper.jpg': 'brand/mark/earf-lockup-render.png', 'lockup-night.jpg': 'brand/mark/earf-lockup-render-night.png',
          'globe-paper.jpg': 'brand/mark/earf-globe-render.png', 'globe-night.jpg': 'brand/mark/earf-globe-render-night.png',
-         'globe-flat.png': 'brand/mark/earf-globe-colour.png', 'wordmark-colour.png': 'brand/mark/earf-wordmark-colour.png',
+         'globe-flat.png': 'brand/mark/earf-globe-colour.png', 'wordmark-color.png': 'brand/mark/earf-wordmark-colour.png',
          'lockup-black.png': 'brand/mark/earf-lockup-black.png', 'lockup-white.png': 'brand/mark/earf-lockup-white.png',
          'globe-real.jpg': 'brand/real/earf-real-colour.png', 'globe-real-night.jpg': 'brand/real/earf-real-colour-night.png'}
 BAR = {'bar-door.jpg': 'renders/2026-10-22/barkhorn/planet41/finals/door-mother-colour-p3-1200.jpg',
@@ -103,7 +103,20 @@ def main():
                      'ident-rise.mp4': 'brand/earth-ident-rise-acrylic-night.mp4'}.items():
         shutil.copy(os.path.join(B, src), os.path.join(IMG, dst))
     pinned()
+    prune()
     print(len(os.listdir(IMG)), 'pictures in', IMG)
+
+
+def prune():
+    """Keep only what book/index.html references (2026-11-09): anything else in img/ would be published with the page."""
+    import re
+    used = set(re.findall(r'img/([A-Za-z0-9._-]+)', open(os.path.join(HERE, 'book', 'index.html')).read()))
+    for f in os.listdir(IMG):
+        if f not in used:
+            os.remove(os.path.join(IMG, f))
+    missing = sorted(u for u in used if not os.path.exists(os.path.join(IMG, u)))
+    if missing:
+        raise SystemExit('missing from img/: ' + ', '.join(missing))
 
 
 if __name__ == '__main__':
