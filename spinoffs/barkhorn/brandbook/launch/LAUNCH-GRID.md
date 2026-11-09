@@ -1,6 +1,6 @@
 # The launch grid: nine posts after the debut
 
-**HELD (2026-11-09):** the mockup `out/launch-grid.png` shows a lit Core in post 5 (Core B's lit look is open, 133) and a glowing Mantle base in post 2 (waits on whether Mantle as drawn, Strata Float, has a light at all). Do not send it; redraw from the approved list. See `out/HELD.md`.
+**HELD (2026-11-09):** the mockup `out/launch-grid.png` shows a lit Core in post 5 (Core B's lit look is open, 133) and a glowing Mantle base in post 2, which doesn't match the locked design (Strata Float's light is in the deck, a halo round the platter through the printed dots, a black backer below, none in the base; the words may stay, no picture shows a glowing base). Do not send it; redraw from the approved list. See `out/HELD.md`.
 
 Three weeks, three posts a week, from the morning after the debut. Days count from the debut, D; no calendar dates
 until the owner sets the debut. Each post is one picture, one line, the wordmark small in a corner (the Brand Book's
