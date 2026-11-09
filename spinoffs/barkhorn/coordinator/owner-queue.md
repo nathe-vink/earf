@@ -5301,3 +5301,13 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   flags SHA finish the frame, the four talls first, then the rest); c2 (merge b00945ab, no rebuild; sides Haze and Fog; on the
   flags SHA, Fog hero-light + the warm re-renders); the speaker lane (A stands; 19:20 fine, word by 18:50; 8.9 kg; LR4; the flange
   after the close-ups).
+- 18:23 c4 (stamped 18:24): rc1 sides queue 01 started on 3d805120 (Ember, Dust, Acid, Poison, Ice, ~10 min each).
+- 18:2x GATE ARC 03-05 (wf_a973e665-cb8; 2 of 3 in, the majority set): 04 SHOW (the fault gone; centered; the slot inside each edge
+  band); 03 and 05 HOLD: the 10-deg side faces read as flat white slabs (03 ~232,238,250, luminance 237 vs the sweep's 248; 05
+  211,222,246; saturation 9-14 % vs 89 % on the front): honest Fresnel off a sweep lit well over white, "a white box with a blue
+  front"; 05 also crisp streaks at the horn's lower-right seam (the high camera-left key). Fix: real matte-black v-flats at the
+  right-rear and left-rear just out of frame (~20 deg off the lens axis); the sweep down to just white; soften/raise the key or a
+  real cutter; 04 re-rendered in the same set.
+- 18:24 sent: the speaker lane (the arc folded into the flags SHA: v-flats, the sweep, the key; proved on 03/05 with 04; the 19:20
+  ETA or word by 18:50); c3 (the arc held; push the turns, merge b00945ab, sides Poison and Ice; on the flags SHA hero-light 1-2
+  and the arc on my go); c4 (stop queue 01 after Acid; c3 takes Poison and Ice).
