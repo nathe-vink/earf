@@ -5244,3 +5244,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   horn 236, upper box 251, lower box 265 (the pour drift, an owner decision). Next: the Poison clearing proxies, the Fog passes, the
   Acid crops. 18:14 MY GATE on the Haze final launched (wf_7bec6be9-a06; 3 critics; the previous final, the A/B and the Ice habitat
   as context).
+- 18:17 lamps lane: CORE A/B ROUND 16 PROXIES at 86d225d09bd55609b4467009a26437dc79b8df4d (renders/2026-11-03/barkhorn/lamp-pictures/
+  proxies/coreAB-r16-proxy.png: night held, night +1 EV, day; A left, B right; coreAB-night-room60-proxy.png). Room 18 %, held: A face
+  58 (R=0 57 %), B 78 (93 %), table 2, pool 1; +1 EV: A 88 (0 %), B 118 (9 %), table 8-9, pool 3; room 60 % held: A 62, B 82, table
+  18-19, wall 16. The polished black base reads only by reflections (~1 at any room level). The 15-30 table target arrives only at
+  ~60 %, where the lamp is no longer the main light near the table. The dusk window reflected (a soft arc on A, faint on B); Punchy
+  on; B on A's dye path; both R 80 (B looks smaller at night: its dark edge); B's sliver is the LED seen through clear acrylic
+  (must show, ruling 3). Day: A pale-ice frosted; B a pale core in a deep blue shell (a cyan sun shadow).
+- 18:18 GATE CORE A/B ROUND 16 launched (wf_9459e462-b14; the four lamp critics + tally: room level, exposure, A vs B, the sliver,
+  show_now). Sent the lamps lane: hold the finals for the tally; the honest emitter and dome round 3 meanwhile.
