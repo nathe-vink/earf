@@ -5535,3 +5535,15 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   0.2 m smaller); POISON queued after the Haze proxies: a real white bounce 2.0 x 1.2 m under the lens aimed at the speaker's middle
   + a real black card 1.2 x 1.5 m 70 deg camera-left, both out of frame; exposures 1.5 and 1.0. Order: Haze base/silk/sun 10
   (running) -> Poison x2 -> Acid edge -> Acid final.
+- 18:57 TURNS (wf_c0448c65-cd3) complete: 3/3 SHOW on all five (Poison, Ice, Haze, Fog, Acid 17-23). ALL SEVEN TURNS PASS, 3/3.
+  One optional point (the skeptic): Fog's sweep is the same cool blue-gray as Ice's. A neutral light-gray sweep (same luma, 0-3 %
+  saturation, same rig) would make the clear horn read colorless and set Fog apart. Not blocking; it goes to the speaker lane as an
+  option unless the brand's Fog swatch is meant to be that blue-gray.
+- 18:57 POISON EXPOSURE (wf_2d4edec1-848) complete: HOLD 3/3 on all four frames. The skeptic adds:
+  - a dappled edge of the sun beam on the cabinet's top and left as a third honest light;
+  - the targets: upper box L 20 or more, horn:box at most 2-3x (today 13-23x);
+  - confirm the Poison batts are white by spec;
+  - find the source of the left-edge line and move it;
+  - risks: the green at the box's foot can read as a base light, and a pale skull-like object in the litter reads as a pun.
+  All three put the final exposure at about +1.5, and +2.35 is out. 18:58 sent biomes these as an addendum: the toe grade from the
+  EXR only as a second step after the box is lit, with the cone darker than its surround; the order unchanged.
