@@ -227,7 +227,7 @@ def build(frame, samples, scale):
                 emn = nt.nodes.new('ShaderNodeEmission'); emn.inputs['Color'].default_value = (*blackbody(cct), 1)
                 gz = nt.nodes.new('ShaderNodeMapRange'); gz.clamp = True
                 gz.inputs['From Min'].default_value = -(ri - 3.0) * MM; gz.inputs['From Max'].default_value = (ri - 3.0) * MM
-                E = float(os.environ.get('CORE_EMIT', '0.05'))
+                E = float(os.environ.get('CORE_EMIT', '44.6'))
                 gz.inputs['To Min'].default_value = 0.75 * E; gz.inputs['To Max'].default_value = 1.15 * E
                 nt.links.new(sx.outputs['Z'], gz.inputs['Value'])
                 dim = nt.nodes.new('ShaderNodeMath'); dim.operation = 'MULTIPLY'
@@ -272,7 +272,7 @@ def build(frame, samples, scale):
                 ef = ntf.nodes.new('ShaderNodeEmission'); bbf = blackbody(cct)
                 ef.inputs['Color'].default_value = (*(bbf[i] * T9[i] / 0.96 for i in range(3)), 1)
                 # B's core: 0.05 W/m2 a side on 0.0408 m2; the same power on A's 0.0633 m2 frost
-                ef.inputs['Strength'].default_value = float(os.environ.get('CORE_EMIT', '0.05')) * 0.0408 / 0.0633
+                ef.inputs['Strength'].default_value = float(os.environ.get('CORE_EMIT', '44.6')) * 0.0408 / 0.0633
                 af = ntf.nodes.new('ShaderNodeAddShader')
                 ntf.links.new(pf.outputs[0], af.inputs[0]); ntf.links.new(ef.outputs[0], af.inputs[1])
                 ntf.links.new(af.outputs[0], outf.inputs['Surface'])
@@ -293,7 +293,8 @@ def build(frame, samples, scale):
             lo.location = (0, 0, z0 + 0.0147)
             em = bpy.data.materials.new('led-em'); em.use_nodes = True
             b = em.node_tree.nodes['Principled BSDF']; b.inputs['Emission Color'].default_value = (*blackbody(cct), 1)
-            b.inputs['Emission Strength'].default_value = 8.0
+            # (on the one scale the night exposure fell 9.8 EV; the LED's visible face keeps its look with it)
+            b.inputs['Emission Strength'].default_value = 8.0 * 2.0 ** (1.8 - float(os.environ.get('NIGHT_EV', '-8.0')))
             led.materials.append(em); lo.visible_diffuse = False   # round 14 (ruling 4): it casts shadows
         cam = ((0.12, -1.02, tz + float(os.environ.get('CORE_CAM_Z', '0.36'))), (0.0, 0.0, tz + 0.098), 85.0)
     else:
@@ -400,7 +401,7 @@ def build(frame, samples, scale):
     if night:
         # round 4: a white ceiling at 2.5 m, so the lamp's light that leaves upward comes back into the room, as at home
         SC.plane('ceiling', (4.3, 4.0), (0.85, 0.0, 2.5), (180, 0, 0), SC.principled('ceiling', '#E8E4DC', 0.9))
-        ev = float(os.environ.get('NIGHT_EV', '1.8' if prod == 'core' else '-3.0'))
+        ev = float(os.environ.get('NIGHT_EV', '-8.0' if prod == 'core' else '-3.0'))
         k = 2.0 ** (0.6 - ev)                     # round 9: one evening room for the family, the same fill at each exposure
         # round 14 (the coordinator: the dome must plainly be the room's main light): the room's fill scaled down until the
         # lamp gives most of the light on the wall near it (measured: lamp only against all lights)
@@ -430,7 +431,8 @@ def build(frame, samples, scale):
         mx_.inputs[0].default_value = 0.35
         nts.links.new(tl_.outputs[0], mx_.inputs[1]); nts.links.new(tp_.outputs[0], mx_.inputs[2])
         nts.links.new(mx_.outputs[0], os_.inputs['Surface'])
-        dW = float(os.environ.get('DUSK_W', '20')) * rk
+        # the dusk outside follows the exposure as the fill does (k), so the room reads the same at any exposure
+        dW = float(os.environ.get('DUSK_W', '20')) * rk * 2.0 ** ({'core': 1.8, 'hemi': -3.0}[prod] - ev)   # tuned at those exposures
         gobo(-1.3, -1.3, -0.35, 0.75, 2.4, panes=(1, 2))
         SC.plane('sheer-left', (0.95, 1.65), (-1.27, -0.825, 1.575), (90, 0, 90), sheer)
         dl = SC.area('dusk-left', (-1.75, -0.825, 1.575), (0, 0, 0), (1.0, 1.7), dW, '#9FB2D6')
@@ -477,7 +479,7 @@ def build(frame, samples, scale):
     if prod == 'hemi':
         bpy.context.scene.cycles.caustics_reflective = True; bpy.context.scene.cycles.sample_clamp_indirect = 0.0
     if night and prod == 'core':   # round 8: rare bright caustic paths speckled the frost (the denoiser blotched them)
-        bpy.context.scene.cycles.sample_clamp_indirect = float(os.environ.get('CLAMP', '20')); bpy.context.scene.cycles.blur_glossy = 1.0
+        bpy.context.scene.cycles.sample_clamp_indirect = float(os.environ.get('CLAMP', '20')) * 2.0 ** (1.8 - exposure)   # a radiance: it follows the one scale; bpy.context.scene.cycles.blur_glossy = 1.0
         # (round 9: the crumpled net was caustic noise, the core lit through its own shell; with the core open at its
         # base the default guides are clean again)
     SC.camera(cam[0], cam[1], lens=cam[2], fstop=5.6)

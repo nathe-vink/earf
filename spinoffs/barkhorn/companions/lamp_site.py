@@ -270,7 +270,7 @@ def build(frame, samples, scale):
         raise SystemExit('unknown frame ' + frame)
     SC.render_settings(W, H, samples, scale, exposure=float(os.environ.get('EV', EVD)), look=os.environ.get('LOOK', 'AgX - Punchy'))   # round 2: AgX Punchy (the gate)
     sc = bpy.context.scene
-    sc.cycles.caustics_refractive = True; sc.cycles.sample_clamp_indirect = float(os.environ.get('CLAMP', '0' if kind0 == 'dome' else '20'))   # round 3: the clamp cut the bore reflector's share (78 % out unclamped, 57 % clamped); sc.cycles.blur_glossy = 1.0
+    sc.cycles.caustics_refractive = True; sc.cycles.sample_clamp_indirect = float(os.environ.get('CLAMP', '0' if kind0 == 'dome' else '20')) * 2.0 ** (-sc.view_settings.exposure)   # a radiance, in display terms   # round 3: the clamp cut the bore reflector's share (78 % out unclamped, 57 % clamped); sc.cycles.blur_glossy = 1.0
     # round 3 (the coordinator's photometry check): the bore's reflector sends light to the floor by reflection, a
     # reflective caustic; render_settings turns those off, which threw the reflector's share away
     sc.cycles.caustics_reflective = os.environ.get('REFL_CAUSTICS', '1') == '1'
