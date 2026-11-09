@@ -33,7 +33,9 @@ widths, not the larger side; the cast sat 54 rows high on the tall, and the tall
 pass now draws every camera-hidden mesh and lit area lamp as well as the equipment. Every "0 hidden in frame" below is being
 re-proven by that mask (the speaker lane, one render per distinct camera and set) and by the Mantle lane's gt_audit.py (b730fe6b)
 elsewhere; a picture with anything hidden in frame is pulled at once. Verified so far: Mantle by day (41232b56) and the Ice wide
-night final (78e440ba), 0 px hidden.
+night final (78e440ba), 0 px hidden. Lamps (23:34): the bpy rigs' audit read the camera at its rest pose (fixed; the mask check
+hiddencast_bpy.mask_check now rules); clean by the mask: the dome and orb heroes, lamps-domes-7, Core A/B day and night, Hemisphere
+night and day, the unlit Ember 4:5 and the full Ember pair; NOT clean: round 3's orb row (see Pulled).
 Lights audit (9 Nov 21:40, from each shot.json): the turning views, the horn-backs and the amp plate are lit by key, fill and wash
 (area lights) plus background lamps linked to the sweep (flagged background lights); chunks 4 and 05 (06b829ce, 52ad76ba) also carry
 the old glow lamp, which I let stand at 21:40 as noise-level. WRONG: it is camera-hidden, emits (irradiance 1.6) with specular 0, and
@@ -87,6 +89,7 @@ as-drawn variant (the COB alone: a downlight, the shade dark) follows about 23:5
 ## Pulled (do not use)
 | Picture | Why | Pulled |
 |---|---|---|
+| Lamps, round 3's orb-row proxies (lamps-orbs-7, a/, b/, c/) | the 4 m key stood in frame with its back to the camera (22.1 % by the mask), hidden from the camera; never approved, never to be used; the rows' key is now 3 m (0 % in frame) | 9 Nov 23:34 |
 | Horn from behind: Ember, Dust, Poison (06b829ce), Ice, Haze, Fog (52ad76ba) | the camera-hidden 'glow' area lamp (0.7 x 0.32 m at (0, 0.66, 1.12), irradiance 1.6, specular 0) standing in frame beside the horn mouth: 16.1 % by the corrected cast, 61,101 px by the mask on a horn-back; re-render without it queued | 9 Nov 23:27 |
 | Turning view, Ember frames 00-04 (52ad76ba) | the same glow lamp in frame (19.5 % by the corrected cast); Ember's turn held whole until the five are replaced | 9 Nov 23:27 |
 | The old talls (img/rc/<k>-tall.*) and wides | a lamp hidden from the camera standing in frame | 9 Nov |
