@@ -202,7 +202,7 @@ TT_NEXT = dict(
     # the Mantle lane's spec as built (r48-mantle-design 71d3163e, companions/mantle-r48/README.md section 11)
     facts=[('Plinth', 'Cast acrylic in its color, about 25 mm; it floats 40 mm over the base'),   # the 24.6 mm deck is an open owner question
            ('Posts', 'Four solid posts of polished stainless steel, 30 mm across'),
-           ('Base', 'Smoked cast acrylic, 12.7 mm, set in 35 mm all round'),
+           ('Base', 'Smoked cast acrylic, 12.7 mm, set in 35 mm all around'),
            ('Drive', 'Belt, from Rega&rsquo;s 24 V motor, fixed beneath the plinth'),
            ('Speeds', '33 and 45, by a button'), ('Arm', 'Rega RB330'), ('Cartridge', 'A moving-magnet cartridge, to be chosen'),   # 2M Blue or Black: an open owner question
            ('Phono stage', 'Built in, for moving-magnet cartridges, with a line out and a switch to bypass it'),
@@ -3189,7 +3189,8 @@ def share_pages():
                              product(lname, name, desc, img, ('Lighting',))))
         if os.path.exists(os.path.join(IMG, f'tt-{k}-studio-1200.jpg')):
             img = card(f'tt-{k}-studio-1200.jpg', f'tt-{k}.jpg')
-            desc = f'{TT["line"]} {TT["kind"]} in {name}. In development, not yet for sale.'
+            desc = (f'{TT["name"]} in {name}, a turntable in cast acrylic. In development, not yet for sale.' if COPY_NEXT else
+                    f'{TT["line"]} {TT["kind"]} in {name}. In development, not yet for sale.')
             made.append(page(f'mantle-{low}', f'{TT["name"]} in {name} · EARF', desc, img, f'{TT["name"]} in {name}', col, 'product',
                              product(TT['name'], name, desc, img, ('Turntables',))))
         img = card(f'{k}-studio-light-1200.jpg', f'color-{k}.jpg')
