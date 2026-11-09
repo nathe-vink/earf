@@ -4540,3 +4540,18 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 02:1x my audit: no RULING lines; horn 8.0 at specular 1.0 (6 x 4 m), fill 1.6 at 1.0, edge a spec-only unlinked strip at 0.3 W,
   back 0; cards all 0.0 % (front 4, side 2); polished vs satin differ only in materials; front vs side only in camera and set.
   Gate wf_e92326ae-fdc launched (the earlier honest, the old one the owner chose from, and the satin-on-every-face as context).
+
+## 9 November 2026
+
+- 15:04 THE WEEKLY USAGE LIMIT stopped everything at about 02:15 UTC on 4 November ("resets Nov 9, 1pm UTC"): every workflow agent
+  after ~02:10 failed with "You've hit your weekly limit", and every lane stopped (last commits 4 Nov 01:02-02:13). Lost or
+  unfinished: the driver research (wf_a61bba67-c8e, 0 of 5 agents); the re-lit close-ups gate (wf_e92326ae-fdc, 0 of 3); the tall
+  Acid gate (wf_8fdaa10e-d99, 0); the turn gate (wf_57b250a0-dbb, 0); the lamps finals gate (wf_810dab76-43f, 0 of 5); the lamp-audit
+  verification (wf_c283c264-343: the provenance sweep done, the other five failed); the bottom-edge sheets gate (wf_f365f69f-fac: 2 of
+  3 critics, both HOLD, with fixes). In the lanes, uncommitted work is likely lost: the speaker lane's bottom-edge (b)/(c)
+  re-renders; c2's six rigB backs; the lamps lane's Core A night (item 89); the biomes lane's Acid final and Poison look test;
+  the Mantle lane's next night proxy (its gate-2 fixes are committed as code at 8d753685, unrendered). Not yet gated: the bar's
+  r43-listening and r44-lantern v4r finals (75f824a9, 4 Nov 00:18).
+- 15:04 OWNER: "Where are we at with everything now that I have tokens again?" (a status question, no decision; logged here.)
+  The driver research relaunched (wf_a61bba67-c8e resumed; nothing cached). Plan put to the owner: concept questions first, the
+  execution renders (the site roll-out, habitats, site night pictures) paused; critics only on what goes to the owner.
