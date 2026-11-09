@@ -428,6 +428,13 @@ def _masks(bpy, scene, objs, part_of, out):
     for o in scene.objects:
         if o.type == 'MESH':
             o.pass_index = ids.get(part_of.get(o.name), 0)
+    # the studio's equipment (the set's flags and bounce cards), id 255 and seen by the camera for this pass, so any of
+    # it inside the frame and not behind the product shows in the mask: the equipment-in-frame audit (2026-11-09, the
+    # coordinator's third audit after floor cards that a cast read at 0 % showed at the tall's edge). Must read 0 px
+    kit = [o for o in scene.objects if o.type == 'MESH' and (o.name.startswith('flag') or o.name.startswith('bounce'))]
+    kit_cam = [(o, o.visible_camera) for o in kit]
+    for o in kit:
+        o.pass_index = 255; o.visible_camera = True
     m = bpy.data.materials.new('mask-id'); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
     oi = nt.nodes.new('ShaderNodeObjectInfo'); div = nt.nodes.new('ShaderNodeMath'); div.operation = 'DIVIDE'; div.inputs[1].default_value = 255.0
     nt.links.new(oi.outputs['Object Index'], div.inputs[0])
@@ -456,7 +463,18 @@ def _masks(bpy, scene, objs, part_of, out):
     bpy.ops.render.render(write_still=True)
     vl.material_override = None
     legend = {str(v): k for k, v in ids.items()}
+    for o, v in kit_cam:
+        o.visible_camera = v
+    legend['255'] = 'studio equipment'
     out.with_suffix('.mask.json').write_text(json.dumps(legend, indent=1) + '\n')
+    try:
+        import numpy as _np
+        im = bpy.data.images.load(str(mp.resolve())); px = _np.array(im.pixels[:]).reshape(im.size[1], im.size[0], im.channels)
+        n_kit = int((_np.round(px[..., 0] * 255) == 255).sum()); bpy.data.images.remove(im)
+        print(f'equipment in frame: {n_kit} px')
+        (out.with_suffix('.equipment.txt')).write_text(f'equipment in frame: {n_kit} px\n')
+    except Exception as e:
+        print('equipment audit failed:', e)
     # the swatch mask, for the retouch: each product pixel carries the id of its paint and copy (the materials a
     # flavour colours carry their swatch, product.build_materials), every other surface 0. Per slot, so a zoned part's
     # plinth is its accent; linked on the object for the pass, so copies sharing a mesh keep their own ids
