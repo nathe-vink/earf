@@ -160,7 +160,9 @@ CANOPY_OPEN = {'poison_g5': 0.25}
 # rain on the speaker (the coordinator, 20:46): beads on the front and the horn's lip, runnels; a meniscus at the waterline
 # round 3 (the coordinator, 22:21): bigger drops, 3-6 mm, more of them low on the front, longer runnels (r2: 150 at 1.2-4.7 mm,
 # 2 runnels 0.12-0.3 m, barely read at full size)
-WET = {'acid_b': (260, 60, 3, 1, 3.0, 6.0, 0.3, 0.55, 2.2)}
+# round 4 (the coordinator, 22:45): the drops as spherical caps at water's ~70 deg contact angle on PMMA (h ~ 0.7 r), not
+# the 0.38-flat domes of r2-r3, which barely read
+WET = {'acid_b': (260, 60, 3, 1, 3.0, 6.0, 0.3, 0.55, 2.2, 70.0)}
 MENISCUS = {'acid_b': 0.002}
 SAMPLES = {'ember': 96, 'poison_g5': 96, 'haze_b': 96, 'fog_b': 96}
 
@@ -177,6 +179,7 @@ def main():
     ap.add_argument('--sink', type=float, help="the feet's bedding, m, in place of the habitat's (tests)")
     ap.add_argument('--scrim', type=float, nargs=4, help='a silk on the sun line: T W H D (tests)')
     ap.add_argument('--meniscus', type=float)
+    ap.add_argument('--crop', type=float, nargs=4, help='a region only, fractions X0 Y0 X1 Y1 (tests)')
     # the horn under the shadow rule as the cabinet, the standard for every habitat (the coordinator, 2026-11-09 22:15):
     # --horn-front was Ember's workaround (2026-11-03) for the asset's untinted shadow pass through the horn, from before
     # the per-face rule; kept only to compare with the files made with it
@@ -220,6 +223,7 @@ def main():
             + (['--plant-alpha', *PLANT_ALPHA[n]] if n in PLANT_ALPHA else []) \
             + (['--scrim', *map(str, a.scrim)] if a.scrim else []) \
             + (['--wet', *map(str, a.wet or WET[n])] if (a.wet or n in WET) else []) \
+            + (['--crop', *map(str, a.crop)] if a.crop else []) \
             + (['--meniscus', str(a.meniscus or MENISCUS[n])] if (a.meniscus or n in MENISCUS) else []) \
             + [x for c in a.card for x in ('--card', *c)] \
             + [x for d in a.dot for x in ('--dot', *d)]

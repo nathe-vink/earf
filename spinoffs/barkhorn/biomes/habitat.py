@@ -429,6 +429,28 @@ def wet(bpy_, linked, spec):
         for v in vs:
             v.co = loc + M @ v.co - nrm * 0.00005
         bmesh.ops.delete(bm, geom=kill, context='VERTS')
+    def cap(loc, nrm, r, theta_deg=70.0, stretch=1.0, down=None):
+        """A drop as water really sits on PMMA: a spherical cap meeting the surface at its contact angle (about 70 deg,
+        height (1 - cos t) / sin t of its contact radius, about 0.7 r), r its contact radius (stretched along `down`),
+        its rim 0.05 mm under the surface."""
+        th = math.radians(theta_deg); R = 1.0 / math.sin(th)
+        t = (down - nrm * down.dot(nrm)).normalized() if down is not None else nrm.orthogonal().normalized()
+        b = nrm.cross(t)
+        M = Matrix((t * r * stretch, b * r, nrm * r)).transposed()
+        top = bm.verts.new(loc + M @ Vector((0, 0, R - R * math.cos(th))) - nrm * 0.00005)
+        rings = []
+        for k in range(1, 6):
+            ph = th * k / 5
+            rings.append([bm.verts.new(loc + M @ Vector((R * math.sin(ph) * math.cos(2 * math.pi * j / 14),
+                                                        R * math.sin(ph) * math.sin(2 * math.pi * j / 14),
+                                                        R * math.cos(ph) - R * math.cos(th))) - nrm * 0.00005)
+                          for j in range(14)])
+        for j in range(14):
+            bm.faces.new((top, rings[0][j], rings[0][(j + 1) % 14]))
+        for r0, r1 in zip(rings, rings[1:]):
+            for j in range(14):
+                bm.faces.new((r0[j], r1[j], r1[(j + 1) % 14], r0[(j + 1) % 14]))
+    CAP = len(spec) > 9 and spec[9] > 0                           # spec[9]: the contact angle, deg (0: the old dome)
     front = lambda n: n in ('front-panel',)
     hornp = lambda n: n.startswith('horn') or 'waveguide' in n
     nf = nl = 0
@@ -442,7 +464,10 @@ def wet(bpy_, linked, spec):
         if h is None:
             continue
         r = rlo + rnd.random() ** 3 * (rhi - rlo)                   # most near the small end, a few large
-        dome(h[0], h[1], r, stretch=1.0 + rnd.uniform(0.0, 0.35), down=Vector((0, 0, -1)))
+        if CAP:
+            cap(h[0], h[1], r, spec[9], stretch=1.0 + rnd.uniform(0.0, 0.35), down=Vector((0, 0, -1)))
+        else:
+            dome(h[0], h[1], r, stretch=1.0 + rnd.uniform(0.0, 0.35), down=Vector((0, 0, -1)))
         nf += 1
     for _ in range(n_lip * 40):
         if nl >= n_lip:
@@ -453,7 +478,10 @@ def wet(bpy_, linked, spec):
         if h is None or h[1].z < 0.25:
             continue
         r = 0.001 + rnd.random() ** 3 * 0.003
-        dome(h[0], h[1], r, flat=0.45)
+        if CAP:
+            cap(h[0], h[1], r, spec[9])
+        else:
+            dome(h[0], h[1], r, flat=0.45)
         nl += 1
     nr = 0
     for k in range(n_run * 30):
@@ -482,7 +510,10 @@ def wet(bpy_, linked, spec):
             continue
         for i, (q, n) in enumerate(pts):
             dome(q, n, w * (1.0 + 0.25 * math.sin(i * 0.37)), flat=0.5, stretch=1.6, down=Vector((0, 0, -1)))
-        dome(pts[-1][0], pts[-1][1], rnd.uniform(0.0025, 0.0035), flat=0.5, stretch=1.25, down=Vector((0, 0, -1)))
+        if CAP:
+            cap(pts[-1][0], pts[-1][1], rnd.uniform(0.0025, 0.0035) * max(1.0, rlo / 0.0025), spec[9], stretch=1.25, down=Vector((0, 0, -1)))
+        else:
+            dome(pts[-1][0], pts[-1][1], rnd.uniform(0.0025, 0.0035), flat=0.5, stretch=1.25, down=Vector((0, 0, -1)))
         nr += 1
     me = bpy_.data.meshes.new('wet'); bm.to_mesh(me); bm.free()
     for f in me.polygons:
@@ -887,6 +918,7 @@ def main():
                     help="a grip's dot: SIZE m, D m out on the sun line from the point TX TY TZ")
     ap.add_argument('--card', nargs=5, action='append', default=[], metavar=('KIND', 'W', 'H', 'Z', 'SIDE'),
                     help='a real card: white|black, W H (m), centre Z (m), SIDE_DEG off the speaker-camera line')
+    ap.add_argument('--crop', type=float, nargs=4, help='render a region only, fractions X0 Y0 X1 Y1 from the top left (tests)')
     ap.add_argument('--fresnel-angle', action='store_true', help="glass faces pass a shadow ray's 1 - F(theta) (Schlick, n 1.49)")
     ap.add_argument('--meniscus', type=float, default=0.0, help='a water meniscus round the walls, radius m')
     ap.add_argument('--wet', type=float, nargs='+', help='rain on the speaker: front beads, lip beads, runnels, seed [r_min r_max mm [run_min run_max m [low]]]')
@@ -914,7 +946,7 @@ def main():
     json.dump(sh, open(prepared, 'w'), indent=1)
     run(prepared, a.collection.format(tint=a.tint), a.out, a.samples, a.scale, os.path.abspath(a.asset), stand=a.stand,
         tt=a.tt, up=a.uplight, glass_from=a.glass_from, ground=not a.no_ground, flag=tuple(a.flag) if a.flag[0] > 0 else None,
-        lining=a.lining)
+        lining=a.lining, extra=(['--crop', *map(str, a.crop)] if a.crop else []))
 
 
 if __name__ == '__main__':
