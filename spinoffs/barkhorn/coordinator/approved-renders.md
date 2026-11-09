@@ -27,8 +27,13 @@ ASSETS OUT OF DATE (checked 9 Nov 22:33), not to be sent until rebuilt from this
 IN-FRAME AUDIT UNPROVEN (9 Nov 23:10): the speaker lane's cast (shots._frame_rays) built the camera differently from render.py
 (the sensor fitted to the larger side and the lens aimed, where render.py fits it horizontal and shifts a level camera). On portrait
 frames it was 20 % too narrow and pitched wrong: 0cbf23a5's floor cards cast 0 % and showed; two reflect-only back cards stood 4.9 %
-in the tall's frame. Fixed in 0c6acd5d. Every "0 hidden in frame" below is being re-proven against a Blender mask from the scene's
-own camera (all lanes asked 23:10-23:11); a picture with anything hidden in frame is pulled at once.
+in the tall's frame. Fixed in 0c6acd5d. A second error (23:23): with sensor_fit HORIZONTAL Blender measures lens shift in frame
+widths, not the larger side; the cast sat 54 rows high on the tall, and the tall's bg-left lamp (camera-hidden) stood in frame,
+441 px at the top-left, on every tall rig up to 3603508e. Fixed in fa7665dc (checked against bpy's world_to_camera_view), whose mask
+pass now draws every camera-hidden mesh and lit area lamp as well as the equipment. Every "0 hidden in frame" below is being
+re-proven by that mask (the speaker lane, one render per distinct camera and set) and by the Mantle lane's gt_audit.py (b730fe6b)
+elsewhere; a picture with anything hidden in frame is pulled at once. Verified so far: Mantle by day (41232b56) and the Ice wide
+night final (78e440ba), 0 px hidden.
 Lights audit (9 Nov 21:40, from each shot.json): the turning views, the horn-backs and the amp plate are lit by key, fill and wash
 (area lights) plus background lamps linked to the sweep (flagged background lights); chunks 4 and 05 (06b829ce, 52ad76ba) also carry
 the old glow lamp, tested to make only a noise-level difference. No specular-only source in any of them. The tallr2 fronts carried
@@ -36,7 +41,7 @@ three specular-only panels (scrim, sheen, topline at diffuse 0): withdrawn from 
 lights a real studio could use.
 | Picture | Source (branch @ commit: path) | Gate | Used by |
 |---|---|---|---|
-| Seven fronts ("talls"), honest rig round 2 | helpers r33-rollout-c2/c3/c4 and r33-speaker-horn, renders/2026-11-04/barkhorn/rollout/A-polished-tallr2/site-front-off-tall-<k>.png on 63d83f47 | FAILED 9 Nov 21:24: Ember, Acid, Ice 3/3 NO; Dust 1/3 (21:28); Fog 2/3 SHOW (founder, skeptic; photo NO), kept only as a fallback since the set is re-shot on one rig; Poison, Haze 0/3 (21:31: the lower side face milky, see-through fails). tallr3 FAILED 0/3 (22:39); tallr4 pulled as tests (23:05); next on 0c6acd5d (one floor card truly out of frame, the speaker turned 6°, the hidden back cards dropped), tag tallr5 | none until the re-shoot passes; the site and the Book wait for it |
+| Seven fronts ("talls"), honest rig round 2 | helpers r33-rollout-c2/c3/c4 and r33-speaker-horn, renders/2026-11-04/barkhorn/rollout/A-polished-tallr2/site-front-off-tall-<k>.png on 63d83f47 | FAILED 9 Nov 21:24: Ember, Acid, Ice 3/3 NO; Dust 1/3 (21:28); Fog 2/3 SHOW (founder, skeptic; photo NO), kept only as a fallback since the set is re-shot on one rig; Poison, Haze 0/3 (21:31: the lower side face milky, see-through fails). tallr3 FAILED 0/3 (22:39); tallr4 pulled as tests (23:05); tallr5 on 3603508e stopped (bg-left lamp hidden in frame); next on fa7665dc (one floor card out of frame, the speaker turned 6°, bg-left slid out, 0 px hidden and 0 px equipment by the mask), tag tallr6 | none until the re-shoot passes; the site and the Book wait for it |
 | Turning view, Ember, Dust, Acid, Poison, Ice, Haze | r33-rollout-c3 52ad76ba (Ember 00-04); c4 0a0a83bd (Ember 05-23, Dust); c4 42fa8eee (Acid 00-16); c3 66126d53 (Acid 17-23, Haze); c4 eef18db2 (Poison, Ice): renders/2026-11-04/barkhorn/rollout/A-polished-p2*/turn-<k>-NN.png | PASSED (wf_c0448c65-cd3) | site galleries |
 | Turning view, Fog, neutral ground | r33-rollout-c3 a688c59e: A-polished-p2-rc2/turn-fog-00..23.png | PASSED 3/3 (9 Nov 21:11; the stage at the rendered 211,212,207) | site gallery (FOG_TURN on) |
 | Horn from behind, seven | 06b829ce, 52ad76ba, a1322583 (not the failed Acid file), cut 4:5 at x 270-990 | PASSED, audited clean | site galleries; the home's Tropos block (Ember) |
