@@ -674,12 +674,25 @@ def site(frame, tint):
         # 0.94 / front saturation 0.65; grid 15, a 2.0 x 1.0 cutter and the frame -0.15 stop, wall 0.76 (0.77) / floor
         # 0.86 (0.87) / horn L* 50 (54) / front saturation 0.77 (0.70) / centre block 0.80, blue 0.026 linear / bottom
         # batt 0.85. (The horn lamp off moves the wall and floor 0.01: the rest of the lift is the frame's, hence -0.15)
-        L.update(position=[0.9, -2.3, 2.2], size_m=[2.5, 1.6], spread_deg=15)
-        L.pop('orbit', None)
+        # Round 2 (the gate held 15931e00 for the backdrop: a hard arched pool edge across the cyc). That edge was the
+        # 15 deg grid: Blender's area-light spread is a hard cone from every point of the box, with no penumbra the box's
+        # size, an edge no real grid throws (Fog: the cutter off left it, the grid off took it away). So no grid; a
+        # larger cutter (2.5 x 1.25) holds the foreground floor; the frame -0.1; the kick 2.5 (1.1) for the right side,
+        # which the in-frame lamp used to light; a white fill card camera-right, out of frame. Half size, 64 samples,
+        # against the passed talls: the backdrop at x 860 238-239 (240-244) and smooth, 0.0 % at 248+, the upper wall
+        # 239, the floor pool's p95 240-242; Dust front saturation 0.82 at V 0.54, horn L* 54 (54); Fog's right face
+        # V 0.65 (0.77; 0.60 before the kick)
+        L.update(position=[0.9, -2.3, 2.2], size_m=[2.5, 1.6])
+        L.pop('orbit', None); L.pop('spread_deg', None)
         s.setdefault('set', {}).setdefault('flags', []).append(
-            {'center_m': [0.76, -1.91, 1.47], 'size_m': [2.0, 1.0], 'normal': [0.0, 0.0, 1.0], 'color': '#050505',
+            {'center_m': [0.76, -1.91, 1.47], 'size_m': [2.5, 1.25], 'normal': [0.0, 0.0, 1.0], 'color': '#050505',
              'camera': True, 'glossy': True, 'name': 'horn cutter'})
-        s['render']['exposure'] = round((s['render'].get('exposure') or 0.0) - 0.15, 3)
+        s['set'].setdefault('bounces', []).append(
+            {'center_m': [1.4, 0.0, 0.6], 'size_m': [1.4, 1.8], 'normal': [-1.0, 0.0, 0.0], 'color': '#F2F2F2',
+             'camera': True, 'glossy': True, 'name': 'fill card right'})
+        if 'kick' in s['lights']:
+            s['lights']['kick']['irradiance'] = 2.5
+        s['render']['exposure'] = round((s['render'].get('exposure') or 0.0) - 0.1, 3)
     if frame == 'front-off-wide' and 'horn' in s['lights']:
         # (the honest wide's gate, 2026-11-09: a crisp near-white tapered stroke across 27 % of the horn's lip, read as a
         # logo. Not the key: the key 8 to 24 deg higher and 8 deg toward the lens changed nothing. It is the `horn` lamp,
