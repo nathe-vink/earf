@@ -663,7 +663,7 @@ def site(frame, tint):
         s['lights']['back'].pop('power_w', None)
     if frame in ('front-off-tall', 'front-off-wide', 'hero-light', 'side'):
         back_edge_card(s, sides=('back', 'left') if frame == 'side' else ('back',))
-    if frame in ('front-off-tall', 'front-off-wide', 'hero-light', 'side'):
+    if frame in ('front-off-tall', 'front-off-wide', 'hero-light', 'side', 'back'):
         realize_hidden(s)
     # a panel at strength 0 still stands in the set: unseen by the camera and casting no shadow, but in the glossy floor's
     # reflections a black rectangle (the wide's critics, 2026-11-09: a straight, nearly horizontal seam on the floor at
@@ -917,6 +917,7 @@ def realize_hidden(s, log=None):
     slides out of it along the line from the speaker, growing to hold its angle (cards_out_of_frame's walk), or goes if
     it cannot leave the studio or lies on the floor. (A practical's bulb inside its own fitting is the one exception;
     the site rigs have none.)"""
+    import math
     st = s.get('set', {}); out = []
     i0 = s['products'][0]['instances'][0]['position'] if s.get('products') else [0, 0, 0]
     depth = st.get('depth', 1e9) - 0.2; half_w = st.get('width', 1e9) / 2 - 0.2
@@ -967,6 +968,27 @@ def realize_hidden(s, log=None):
             rc = H._lamp_rect(cand)
             if rc and not _in_frame(s, rc) and rc['center_m'][1] < depth and abs(rc['center_m'][0]) < half_w:
                 moved = cand; break
+        if not moved and 'position' in L:
+            # cannot leave along its line inside the studio (a lamp behind the speaker, its line running into the cove):
+            # raised instead, at its own azimuth round its target, from its elevation up, at 1 to 2 times its distance
+            p0 = L['position']; v = [p0[i] - t[i] for i in range(3)]
+            d0 = math.sqrt(sum(x * x for x in v)) or 1.0
+            el0 = math.degrees(math.asin(max(-1.0, min(1.0, v[2] / d0)))); az0 = math.atan2(v[0], -v[1])
+            for el in range(int(el0) + 3, 88, 3):
+                for f in (1.0, 1.3, 1.6, 2.0):
+                    e = math.radians(el); d = d0 * f
+                    cand = {**L, 'position': [round(t[0] + d * math.cos(e) * math.sin(az0), 3),
+                                              round(t[1] - d * math.cos(e) * math.cos(az0), 3), round(t[2] + d * math.sin(e), 3)]}
+                    sz = L.get('size_m', [0.5, 0.5])
+                    cand['size_m'] = [round(x * f, 3) for x in sz] if isinstance(sz, list) else round(sz * f, 3)
+                    if 'power_w' in L:
+                        cand['power_w'] = round(L['power_w'] * f * f, 3)
+                    rc = H._lamp_rect(cand)
+                    if rc and not _in_frame(s, rc) and rc['center_m'][1] < depth:
+                        moved = cand; break
+                if moved:
+                    out.append(f"lamp {k}: raised from {round(el0)} to {el} deg at x{f}")
+                    break
         if moved:
             s['lights'][k] = moved
             out.append(f"lamp {k}, hidden, in frame: moved out at x{f}")
