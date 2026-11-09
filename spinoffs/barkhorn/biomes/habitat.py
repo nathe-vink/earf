@@ -271,8 +271,9 @@ def out_of_frame(pts):
     behind the camera or past the same edge (a corner test alone passes a card wider than the view that crosses it)."""
     if all(p.z <= 0 for p in pts):
         return True
-    return (all(p.x < 0 for p in pts) or all(p.x > 1 for p in pts) or all(p.y < 0 for p in pts)
-            or all(p.y > 1 for p in pts))
+    # sideways only: when the set is built the camera's final framing (lens shift, resolution) is not yet applied, so
+    # a vertical test lies (a strip under the lens tested out and rendered across the base, 2026-11-09)
+    return all(p.x < 0 for p in pts) or all(p.x > 1 for p in pts)
 
 
 def cards(bpy_, linked, specs):
