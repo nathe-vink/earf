@@ -5886,3 +5886,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   regrade from the EXR with a longer, softer highlight shoulder (+ only a real lens's halation; a darker exposure blended on the shade
   if needed; never a dimmer lamp, a clamp or a lower ceiling); the pendant 5 cm right for the X arms and blue arc (the over-lit cabinet
   top, L 48 vs 12); check the rug's gradient against the reflector's spread; then proxy 7.
+- 19:50 SITE (stamped 19:51, about a minute ahead of its queue time): pushes only on my "go"; the turn PNGs are only in the repository
+  (renders/2026-11-04/barkhorn/rollout/A-polished-p2*/), outside the deployed root (8.3 MB; its only PNGs the two icons; the turns ship
+  as seven ~240 KB WebP sprites and seven 168 px thumbs).
