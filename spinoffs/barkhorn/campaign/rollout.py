@@ -82,7 +82,10 @@ def build(base, horn):
 # not replace. Each is an old rig turned into the final design by shots.py's strata_lit, as the site frames are
 FIN = 'studio/shots/barkhorn/finals31/'
 S31 = 'studio/shots/barkhorn/studio31/'
-SPIN = dict(frames=9, step=10.0, start=-20.0, samples=32, scale=0.75, crop=[0.29, 0.04, 0.71, 0.97])  # spin47.py at 24770e2b
+# start -14 (2026-11-09, arc frame 04's hold): the hero-light camera stands 26 deg round from the front (2.85, -5.85), so
+# -20 gave -46 to +34 from square and left frame 04 6 deg short of it, its right face edge-on mirroring the sweep as a
+# full-height strip; -14 gives the site's -40 to +40 with frame 04 square to the camera
+SPIN = dict(frames=9, step=10.0, start=-14.0, samples=32, scale=0.75, crop=[0.29, 0.04, 0.71, 0.97])  # spin47.py at 24770e2b
 TURN_SAMPLES = 32                         # spin47's, which passed for the site's spin; the rig's 128 would be about 4x
 
 

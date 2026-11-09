@@ -51,7 +51,7 @@ copy of this list, with the lots' numbers and the photographs. The forming risks
 | E3 | Impedance, each driver | within 10 % of the first sample's curve | an impedance sweep |
 | E4 | Response, on axis at 1 m | within ±1.5 dB of the reference, 60 Hz to 16 kHz; a pair within ±1 dB | measurement microphone, gated |
 | E5 | Distortion | horn below 1 % at 1 kHz, 100 dB/1 m | measurement microphone |
-| E6 | The preset | the same verified preset in all three slots (the 28 Hz high-pass, the limiters, soft clip on, the HF channel 6 dB down in the DSP: there is no L-pad), its version recorded; Hypex's filter password set and recorded in this file, not on the speaker | HFD |
+| E6 | The preset | the same verified preset in all three slots (the 28 Hz high-pass, mandatory: Faital's Xdamage 15.5 may be peak-to-peak, and without it 75 W at 20 Hz reaches 14.6 mm; the limiters, soft clip on, the HF channel 6 dB down in the DSP: there is no L-pad), its version recorded; Hypex's filter password set and recorded in this file, not on the speaker | HFD |
 | E7 | The remote (the master) | volume, mute and power from the listening seat, through the front panel | the Hypex remote at 3 m, 30° off axis |
 | E8 | Heat | the compartment below its limit after 4 hours at full program (round 35); and the abnormal case: a full-scale HF sine with the preset's limiter defeated (31 W into the driver, within its 140 W rating; nothing in the compartment heats but the amplifier) until steady: the driver's pod and the horn's boss below their limits, no smoke | thermocouples on the pan, the back, the pod and the boss |
 
