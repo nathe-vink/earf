@@ -73,6 +73,7 @@ as-drawn variant (the COB alone: a downlight, the shade dark) follows about 23:5
 |---|---|---|
 | The old talls (img/rc/<k>-tall.*) and wides | a lamp hidden from the camera standing in frame | 9 Nov |
 | 15931e00 talls (tag tallfix) | a hard arched light pool on the backdrop (the grid's hard cone) | 9 Nov 20:25 |
+| tallr3 talls (A-polished-tallr3, rig 74f17d7c, all seven) | the same line (it was the wedge of rising cove between the upright card's foot and the floor flag, found 22:31; the floor-flag fix had missed it) and the same veil (the lower right face mirroring the lit floor at ~64-73 degrees); critics 0/3 on every color tested; the three reflection-only panels were removed in this round, which is kept | 9 Nov 22:39 |
 | tallr2 talls (A-polished-tallr2, all seven) | a thin white line on the right side face at mid-height (a strip of lit sweep between the floor flag and the slanted upright card), and a milky lower side face below a hard diagonal (the camera-right fill card in its mirror path) | 9 Nov 21:24 |
 | Backs (rigB, img/rc/<k>-back) | lamps hidden from the camera standing in frame | 9 Nov |
 | lamps-unlit (the Smoke pair) | hidden lamps in frame; Smoke is held | 9 Nov |
