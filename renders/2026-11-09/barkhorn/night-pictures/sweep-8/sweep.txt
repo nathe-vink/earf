@@ -35,3 +35,15 @@ horn: L* max 74 (target <= 90), p99.9 66, pixels over 90: 0
 X arms, L* p95: upper-left 13, upper-right 33, lower-left 16, lower-right 44 (proxy 4: about 10, 5, 19, 35)
 upper arms over the side walls: left -7, right 10 L* over (side walls median L* 21; target about 3 over)
 arc under the pod: L* p95 22, max 25 (target under about 30)
+
+decisive lower (rim 1.10; dNN-110: NN cm back). The lamp sits below the horn's top line, so 'lamp bottom -1' means no dome above it.
+== d00-110: lamp bottom row -1, horn top row 249, clearance 250 px (crop at half scale; 500 px at 3840), cabinet top band L* median 19 p95 69
+horn: L* max 80 (target <= 90), p99.9 73, pixels over 90: 0
+X arms, L* p95: upper-left 19, upper-right 9, lower-left 15, lower-right 23 (proxy 4: about 10, 5, 19, 35)
+upper arms over the side walls: left 9, right 3 L* over (side walls median L* 6; target about 3 over)
+arc under the pod: L* p95 9, max 24 (target under about 30)
+== d40-110: lamp bottom row -1, horn top row 249, clearance 250 px (crop at half scale; 500 px at 3840), cabinet top band L* median 30 p95 72
+horn: L* max 73 (target <= 90), p99.9 72, pixels over 90: 0
+X arms, L* p95: upper-left 15, upper-right 35, lower-left 16, lower-right 51 (proxy 4: about 10, 5, 19, 35)
+upper arms over the side walls: left 9, right 27 L* over (side walls median L* 9; target about 3 over)
+arc under the pod: L* p95 13, max 21 (target under about 30)

@@ -45,7 +45,7 @@ READING = False                  # tried (g3c): a downlight lights the chair und
 # the pool lands on the console's top. Poly Haven modern_wooden_cabinet (CC0), 2.44 x 0.52 x 0.68, a run of sleeves on it
 CONSOLE = (1.72, -0.30)          # its centre: the near end at x 0.52 (0.24 off the speaker's side), its front at y -0.32
 HEMI_A = (0.44, -0.36)           # proxy 7: 10 cm right of proxy 6 (horn crops: no horn pixel over L* 90)           # the pendant: over the console's near end, 0.35 in front of the speaker's face
-HEMI_A_DZ = 0.15                 # proxy 6: its rim 1.47 up (0.15 over proxy 4), off the horn's top line in frame
+HEMI_A_DZ = -0.22                # proxy 8: its rim 1.10 up, beside the horn below its top line (the sweep back 0.2-0.8 m at 1.47/1.31 lit the creases; 9195c0c6)
 # gate 2, point 6: the Hemisphere's mouth is open and its COB sits at the rim, so a camera below the rim sees the bare
 # COB (scene_audit: 106 of 113 points from 0.40 m). The camera stands above the rim, at eye height
 CAM_Z = 1.70
