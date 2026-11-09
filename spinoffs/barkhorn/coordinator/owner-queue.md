@@ -5440,3 +5440,18 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   ask the founder the pour with swatches first. A 2-3 px hot-pink glint on the right pod leg. 18:44 sent biomes: light first, two
   proxies ((a) a real scrim -1/2 stop on the speaker, (b) the sun 6 -> ~10 deg), measure hue and stops against the targets; don't
   retint the horn (the pour is the owner's); if neither closes it, the pour question goes to the owner with swatches.
+- 18:44 c2: rc1 sides Haze and Fog at 67ea15db2d1cdaeb44dfbb31e2215e43ff2db328 (944124c2; 8.8 / 10.3 min): clean at a glance. 18:44 c4:
+  rc1 sides Ember, Dust, Acid at 93e392726cbfd271809960e477cbeb0e8bd036e9 (3d805120; 6.2-6.9 min); the stop worked (no Poison/Ice
+  written); spot check: the right faces even, but at the base Dust and Acid show the bottom panel's edge as a lighter colored strip
+  with a dotted row of bright points (Ember much less): the light pipe; the side rig has no back-edge card yet.
+- 18:44 speaker lane: THE FLAGS SHA at 8e5e1da0 (r33-speaker-horn; includes cb62d1eb, 34b40201, b00945ab and LR4 in product.py):
+  shots.back_edge_card, a real black card on the floor behind the bottom panel's back edge (0.56 m x 45 mm, 4 mm off the back face;
+  seen by the camera and in reflections, casting shadows, no link) in front-off-tall, front-off-wide and hero-light (Ember too, one
+  rig). Proofs renders/2026-11-09/barkhorn/back-edge-card/ (from the rollout's own shot files): red-aware count Dust hero-light 3630
+  -> 5, Dust tall 1764 -> 11; Fog tall's white streaks gone (white px 2737 -> 1567, the rest the open floor); each bottom edge a dark
+  line like the corners; the card unseen at 390 px. Cardcast: reflect-only 0.0 %; the card 0.3-0.75 % of the frustum, hidden by the
+  cabinet. The hidden bounce and flag in the hero-light rig unchanged (my 18:37 ask crossed). Helpers: checkout the variants file,
+  merge 8e5e1da0, re-run rollout.py; no rebuild.
+- 18:45 sent: c4 (merge, tag rc1-card, talls Dust then Fog); c3 (merge, talls Ice then Haze); the speaker lane (one SHA next: (a)
+  the back-edge card in the side rig too, proved on a Dust side crop; (b) the hero-light hidden bounce and flag made real and out of
+  frame, no hero-light renders until then; (c) the wide's seam; then (d) the arc, (e) the cardcast audit table, (f) close-ups).
