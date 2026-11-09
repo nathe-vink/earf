@@ -5455,3 +5455,18 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 18:45 sent: c4 (merge, tag rc1-card, talls Dust then Fog); c3 (merge, talls Ice then Haze); the speaker lane (one SHA next: (a)
   the back-edge card in the side rig too, proved on a Dust side crop; (b) the hero-light hidden bounce and flag made real and out of
   frame, no hero-light renders until then; (c) the wide's seam; then (d) the arc, (e) the cardcast audit table, (f) close-ups).
+- 18:46 GATE NIGHT PROXIES complete (wf_d911c754-02f; 3 critics, 34 min): all three choose PROXY 4 (A); none shows yet; B dropped
+  (the face too dark, the room outshines the speaker, a white sliver over a hidden emitter). Fixes: the floor (a dark rug to the
+  frame's edge; the rug at the feet L* 38 ~4x the face's median); the armchair (the speaker's exact hue 207 vs 208, as bright as the
+  lit lining: the streetlight down 1-1.5 stops and warmer, the chair out of the light or a dark warm fabric); the shade's rim on the
+  horn's top line (raise ~0.15 m, the lamp whole in frame, under 1.65 m); a white slash in the horn's lower-left crease (find its
+  mirror source, move a few cm); the dome's roll-off; the face L >= 25; the drop (~0.9 m vs the site's "standard drop 600 mm, cut
+  to length") to confirm. Nothing faked found (the lights are the Hemisphere disk, the window sun and the sky glow).
+- 18:46 GATE SIDE PROXIES complete (wf_90f29ead-0b4; 3 critics, 24 min): SHOW 2/3 (founder, skeptic); the photographer HOLD (the top
+  grip slot clips, now the brightest thing on the cabinet; the pod's strip highlight like a printed band). Checks: keep the kick off
+  on all seven; Ice's bottom batt; the slot and the pod highlight at full size; Poison's dark cone a note for the owner.
+- 18:47 sent: the Mantle lane PROXY 6 BRIEF (the honest emitter with caustics on, no clamp, aluminium; the pendant ~1.45-1.50 m,
+  whole in frame, or toward the face / along the console; a dark rug to the edge; the armchair in shadow; the horn's slash; the
+  dome's roll-off; face L >= 25; glints and lip line; no second lamp); the lamps lane (the Hemisphere's real maximum drop as
+  supplied); the speaker lane (the sides re-render on its next SHA with the card; fold in the slot and pod highlight if cheap and
+  honest; Ice's bottom batt).
