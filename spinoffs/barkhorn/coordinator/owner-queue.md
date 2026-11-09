@@ -6079,3 +6079,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   and Poison's proxies); the site lane: no Acid habitat tonight; Fog (2) a possible one-file swap ~21:05.
 - 20:43 LAMPS: the 20:14 quick path reached it only at 20:42, mid-round-3: can't land tonight; the lamps words-only; the Ember unlit fix
   and the Hemisphere crop for the next push.
+- 20:47 GATE NIGHT PROXY 7: the skeptic (wf_608263ba-d00) HOLD for one more proxy: the regrade honest (no seam, ring or glow; the
+  dome max 249, p50 244, none at 250); the slash a plausible dome glint, no longer clipped (L* 78); the X: the upper creases lit
+  wedges at L* 22-24 over side walls at 4-5 (proxy 4: 2-3 over), mirroring the lit cabinet-top wedge, with the lower glints making
+  four arms; the founder's X rejection outranks the top-line clearance. Fix: a low-sample sweep moving the pendant 15-25 cm back and
+  3-5 cm left so the horn's shadow covers that wedge; only else lower it decisively below the top line; the lit wood beside the console
+  (L* 32/44) and the plank strip brighter than the rug in front (14); the right post-top nub an electric-blue pip. 20:48 sent the Mantle
+  lane the sweep (founder + photographer pending, wf_21969165-0ce).
