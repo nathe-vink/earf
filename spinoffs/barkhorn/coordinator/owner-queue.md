@@ -5811,3 +5811,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 19:38 SITE: the lamps picture prepared both ways (r47-site-next 050bf1ff): words only (no placeholder; "Shown in Smoke" and "pale at
   the center" gone; lamp share cards use the home's) or the Ember pair via LAMPS_PIC ("Hemisphere and Core, switched off. Shown in
   Ember."); the sweep, overflow and byte-identical checks pass. Vercel still nothing for 2490d9d3.
+- 19:40 BIOMES MATERIAL CHECK (the asset hornA3 from 0936e6df vs studio/products/barkhorn-cloud.json at r33-speaker-horn HEAD
+  61831645): only ACID changed since (bark deep #FFEB6C -> #F1EE7F; horn #B88E00 -> #A39700), and the scene's Acid --split (adopted
+  4 Nov) reproduces HEAD within 0.003 per channel at the wall (cabinet 0.901/0.884/0.292 vs HEAD 0.902/0.882/0.289; horn 0.280/0.224/
+  0.000 vs 0.279/0.225/0.000); horn-satin roughness 0.25 -> 0.05 everywhere, and every habitat render already passes --horn-rough 0.05.
+  So no rebuild; the passed Ice and Fog finals carry no out-of-date material. The per-tint horn lots (density 291-622) vs cabinets
+  (50-236) confirm every horn is a deep custom lot. The Acid final started (64 samples); 19:41 sent: let it run, then the Dust final (2).
