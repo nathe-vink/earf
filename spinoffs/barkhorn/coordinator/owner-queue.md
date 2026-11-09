@@ -5581,3 +5581,15 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   Dust's red strip gone, Fog's white streaks gone; whole-frame mean change 0.4/1.4 levels.
 - 19:04 GATE TALLS rc1-card Dust + Fog launched (wf_040e85e8-217): the two talls, before/after foot crops, the passed Ember and Poison
   as the set. Ice and Haze (c3) gate when they land (~19:20).
+- 19:04 c3: rc1-card talls Ice and Haze landed (08abf6ab, r33-rollout-c3; 8.9 / 8.2 min, 1000x1250; the card in the shot file). My
+  look at the foot (2x): Ice's blue strip and Haze's violet strip gone. 19:05 GATE TALLS rc1-card Ice + Haze launched (wf_a4b8b6dc-b4a).
+- 19:05 biomes: FRAME AUDIT clean: no passed final used --card or --scrim (both new today, 20d8f53b and 686e74c7); every final's side
+  cards come from black_flag (a correct x-range test). A SECOND frame bug of its own: the under-lens strip was in frame at 1.5 although
+  the test said out (the camera's final framing isn't applied at set build); since 8e4cac63 cards and the scrim are tested sideways
+  only, an under-lens card is hidden with a warning (i.e. not placed). A queue slip: two Poison proxies overlapped 10 s, both killed,
+  nothing used; one clean queue now. POISON with the cards at 1.5: upper cabinet mean 2.1 (median 1), horn/cabinet 26x, left edge
+  1.2x the face (fixed by the black card); the bounce cards stand in forest shade and have little to throw: the lower face and ring
+  lift (19.9 -> 43.5) but the upper box stays black. Next: the dappled sun edge (hole 0 back to -14.9 / -14.6), else recompose for
+  backlight. Order: Haze (c) rendering -> Poison hole x2 -> Acid edge -> Acid final.
+- 19:06 sent c3: merge f14b24c7, regenerate the rc1-card wides, render wides Fog then Haze before the rig SHA (~19:35); c2: Poison and
+  Ice wides only, then stop (saves about an hour on the seven wides).
