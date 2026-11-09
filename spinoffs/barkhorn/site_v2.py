@@ -612,7 +612,7 @@ def pages(web):
                 os.rmdir(d)
         left = [os.path.relpath(f, web.SITE) for f in glob.glob(os.path.join(web.SITE, '**', '*'), recursive=True)]
         bad = [f for f in left if re.search(r'(^press/|img/(?:(?:dome|orb)-|lamps-(?:orbs|domes)|lamp-(?:orb|dome)|hero[.-]|facade|room|macro-|turn-|spin/'
-                                            r'|tt-|ga-|icon-smoke-|rc/(?:red|orange|amber|green|blue|violet|ice)-back[.-]|rc/orange-habitat|(?:red|orange|amber|green|blue|violet|ice|black)-(?:on|off|studio|back|amp|horn|inside|reel|habitat))|-smoke\.html$)', f)]
+                                            r'|tt-|ga-|icon-smoke-|lamps-unlit|thumb/lamps-unlit|rc/(?:red|orange|amber|green|blue|violet|ice)-back[.-]|rc/orange-habitat|(?:red|orange|amber|green|blue|violet|ice|black)-(?:on|off|studio|back|amp|horn|inside|reel|habitat))|-smoke\.html$)', f)]
         assert not bad, ('site_v2: rc deploys', bad[:12])
 
 
@@ -761,7 +761,7 @@ def addresses(web):
                                                    'A powered horn loudspeaker, cast in tinted acrylic. Eight colors, Ember to Smoke. In development, not yet for sale.'),
                        'img/rc/og-green.jpg' if rc else 'img/og/speaker-green.jpg', 'Tropos in Poison'),
            '/lighting': ('lighting', 'Lighting · EARF', 'Hemisphere, a pendant, and Core, a cordless table lamp, in the %s colors. In development.' % ('seven' if rc else 'eight'),
-                         'img/rc/og-lamps.jpg' if rc else 'img/og/dome-red.jpg', 'A Core and a Hemisphere in Smoke' if rc else 'Hemisphere in Ember'),
+                         lamps_og()[0] if rc else 'img/og/dome-red.jpg', lamps_og()[1] if rc else 'Hemisphere in Ember'),
            '/mantle': ('turntable', 'Mantle · EARF', ('A turntable in cast acrylic. In development.' if rc else
                                                      'A turntable, lit from underneath, in the eight colors. In development.'),
                        'img/rc/og-mantle.jpg' if rc else 'img/og/tt-red.jpg', 'Mantle in Ember'),
@@ -809,6 +809,7 @@ def apply(web, head, rest):
         rc_waves(p, web)
         rc3(p, web)
         rc_turn(p, web)
+        rc_lamps(p, web)
         p.banned = BANNED_RC
     return p.done()
 
@@ -878,7 +879,7 @@ def rc_cards(web):
             k = keys.get(col)
             set_img(f, f'img/rc/og-{k}.jpg' if k in RC_KEYS else 'img/rc/og-home.jpg', f'Tropos in {col.title()}' if k in RC_KEYS else 'Tropos in seven colors')
         elif kind in ('hemisphere', 'core'):
-            set_img(f, 'img/rc/og-lamps.jpg', 'A Core and a Hemisphere in Smoke, switched off')
+            set_img(f, *lamps_og())
         elif kind == 'mantle':
             set_img(f, 'img/rc/og-mantle.jpg', 'Mantle in Ember')
 
@@ -949,7 +950,8 @@ def rc_images(web):
     og(hero.crop((0, 300, 2400, 1200)), 'img/rc/og-home.jpg')
     for k, im in frames.items():
         og(im, f'img/rc/og-{k}.jpg')
-    og(Image.open(os.path.join(web.IMG, 'lamps-unlit.jpg')).convert('RGB'), 'img/rc/og-lamps.jpg')
+    if LAMPS_PIC:                                   # the lamps' card from their honest picture, or none
+        og(Image.open(os.path.join(web.ROOT, LAMPS_PIC)).convert('RGB'), 'img/rc/og-lamps.jpg')
     og(Image.open(os.path.join(web.ROOT, MANTLE_SRC)).convert('RGB'), 'img/rc/og-mantle.jpg')
     return spots
 
@@ -1497,6 +1499,68 @@ def rc_turn(p, web):
     p.sub("role: 'img', 'aria-label': `${c.name}'s horn; drag to spin it`,", "role: 'img', 'aria-label': `${c.name}'s horn, all the way round`,")
     p.sub("pic.style.backgroundPosition = frameAt(turnFrame); });\n    if (!reduce) {",
           "pic.style.backgroundPosition = frameAt(turnFrame); });\n    if (!reduce && !matchMedia('(max-width: 860px)').matches) {")
+
+
+# the lamps' picture (the coordinator 2026-11-09 19:29): the Smoke pair was lit by lamps hidden in frame, so it goes.
+# Its replacement, the pair in Ember on the fixed rig, goes here once it passes; until then the lamps show no picture.
+LAMPS_PIC = None
+
+
+def lamps_og():
+    """The lamps' share card: their picture's, or the home's while they have none."""
+    return ('img/rc/og-lamps.jpg', 'A Core and a Hemisphere in Ember, switched off') if LAMPS_PIC else ('img/rc/og-home.jpg', 'Tropos in seven colors')
+
+
+def rc_lamps(p, web):
+    import json, os
+    from PIL import Image
+    i = p.rest.index('const D = ') + len('const D = ')
+    j = p.rest.index(', BY = Object', i)
+    D = json.loads(p.rest[i:j])
+    if LAMPS_PIC:
+        im = Image.open(os.path.join(web.ROOT, LAMPS_PIC)).convert('RGB')
+        if im.width > 1600:
+            im = im.resize((1600, round(im.height * 1600 / im.width)), Image.LANCZOS)
+        W, H = im.size
+        im.save(os.path.join(web.IMG, 'rc/lamps.webp'), 'WEBP', quality=82)
+        im.resize((800, round(H * 800 / W)), Image.LANCZOS).save(os.path.join(web.IMG, 'rc/lamps-800.webp'), 'WEBP', quality=82)
+        im.resize((168, round(H * 168 / W)), Image.LANCZOS).save(os.path.join(web.IMG, 'rc/lamps-th.webp'), 'WEBP', quality=80)
+        full = {'src': 'img/rc/lamps.webp', 'w': W, 'h': H, 'th': 'img/rc/lamps-th.webp'}
+        for L in D['lamps'].values():
+            for k, col in L['colours'].items():
+                col['views'] = {'unlit': dict(full, **({} if k == 'red' else {'tag': 'Shown in Ember'}))}
+                col['card'] = {'src': 'img/rc/lamps-800.webp', 'w': 800, 'h': round(H * 800 / W), 'alt': 'A Core and a Hemisphere in Ember, switched off',
+                               **({} if k == 'red' else {'tag': 'Shown in Ember'})}
+        p.rest = p.rest[:i] + json.dumps(D, separators=(',', ':')) + p.rest[j:]
+        def tag(m):
+            t = m.group(0).replace('img/lamps-unlit.webp', 'img/rc/lamps.webp').replace('img/lamps-unlit-800.jpg', 'img/rc/lamps-800.webp')
+            return re.sub(r'width="1600" height="2000"', f'width="{W}" height="{H}"', t)
+        p.rest = re.sub(r'<img [^>]*img/lamps-unlit[^>]*>', tag, p.rest)
+        for a, b in (('Shown in Smoke, a color on hold.', 'Shown in Ember.'), ('Shown in Smoke, a color on hold', 'Shown in Ember'),
+                     ('in Smoke, switched off', 'in Ember, switched off'), (': dark, polished acrylic, pale at the center', '')):
+            p.rest = p.rest.replace(a, b)
+    else:
+        for L in D['lamps'].values():
+            for col in L['colours'].values():
+                col['views'] = {}; col['card'] = None
+        p.rest = p.rest[:i] + json.dumps(D, separators=(',', ':')) + p.rest[j:]
+        n = len(re.findall(r'<figure class="lamps-day">.*?</figure>', p.rest, re.S))
+        p.rest = re.sub(r'<figure class="lamps-day">.*?</figure>', '', p.rest, flags=re.S)
+        p.rest = p.rest.replace('<div class="wrap lamps-home">', '<div class="wrap lamps-home no-pic">')
+        m = len(re.findall(r'<figure><img src="img/lamps-unlit\.webp".*?</figure>', p.rest, re.S))
+        p.rest = re.sub(r'<figure><img src="img/lamps-unlit\.webp".*?</figure>', '', p.rest, flags=re.S)
+        assert n == 1 and m == 1, ('rc_lamps: figures', n, m)
+        for a, b in ((' Shown in Smoke, a color on hold.', ''), (' in Smoke, switched off', ', switched off'), (': dark, polished acrylic, pale at the center', '')):
+            p.rest = p.rest.replace(a, b)       # the words for a picture that is no longer there
+        # a lamp's page: its words and particulars, no gallery
+        p.sub("  showView(shown(c)[0]);",
+              "  { const g = document.querySelector('#pdp .gallery'), n = shown(c).length; g.hidden = !n; document.querySelector('#pdp .pdp').classList.toggle('no-pic', !n); if (n) showView(shown(c)[0]); }")
+        p.css("""
+.lamps-home.no-pic { grid-template-columns: minmax(0, 1fr) } .lamps-home.no-pic .lamp-names { margin: 0 }
+.lamps-pair { grid-template-columns: minmax(0, 1fr) !important }
+@media (min-width: 1001px) { .pdp.no-pic { grid-template-columns: minmax(0, 720px) !important } }
+""")
+    assert 'lamps-unlit' not in p.rest, 'rc_lamps: the old pair is still named'
 
 
 BANNED_RC = r'eight colors|to Smoke|Smoke as current'
