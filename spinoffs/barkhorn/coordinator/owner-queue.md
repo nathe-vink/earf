@@ -5804,3 +5804,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   Hemisphere's cord) and 131 (for information: the bottom panel's light pipe). ADDED 132: Haze's horn, the deep custom pour reads cobalt
   beside the violet box outdoors; options (a) the deep lot as drawn, (b) one glass (the cabinet's colour and per-mm density), (c) a
   custom pour tuned toward the box's violet; my pick (c), proved first on swatches and one habitat proxy; pictures 4 Nov | (c) | (d).
+- 19:37 BIOMES DUST proxies (4a46cb8e, proxies-0202/dust-bounce-base-panel0-warmcard-*): (2) the panel at 0, the sand bouncing for real:
+  the bottom wall 130.9 -> 120.2 (~0.1 stop, same hue 39°), the upper box ~0.24 stop down, the see-into spread up; (3) a sunlit warm card
+  out of frame adds almost nothing to the box (its first placement stood in the speaker's own shadow; re-run). 19:40 sent: (2); order
+  Poison (c) (rendering) -> the materials check -> the Dust final at 64 samples on current materials -> the Acid final.
+- 19:38 SITE: the lamps picture prepared both ways (r47-site-next 050bf1ff): words only (no placeholder; "Shown in Smoke" and "pale at
+  the center" gone; lamp share cards use the home's) or the Ember pair via LAMPS_PIC ("Hemisphere and Core, switched off. Shown in
+  Ember."); the sweep, overflow and byte-identical checks pass. Vercel still nothing for 2490d9d3.
