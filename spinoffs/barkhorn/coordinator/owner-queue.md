@@ -4616,3 +4616,48 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   lamps; the mist casts shadows; check the HDRI above ~45° first (leaf canopy = more yellow-green light, tell me before rendering);
   box median 35-45; hue >= 90°, sat >= 0.55; strip 51c7eff2 | 20 m | 30 m. Queue: Fog final, the trace and passes, the Haze final,
   then the clearing (if still wanted) and the Ember proxies.
+- 16:28 speaker lane, item 1: THE RC's TROPOS FRAMES (from r47-site-next's PICTURES-2026-11-03.md and the helper branches at 16:25).
+  Done on base A + polished: tall x7 (c3 e624e13e / 3d0b613f; Acid 04d21c5c); back rigB x6 (c2 39bf3f97; Acid missing); amp plate
+  Ember (488fbec9, SHOW); horn-back Ember/Dust/Poison (c2) and Ice/Haze/Fog (c3) SHOW, Acid predates a290fdc6; turn Ember 00-23,
+  Dust 00-23, Acid 00-16 (c4 42fa8eee); deck hero/row/cover/home. Not done: wide x7 and side x7 (the fix1 frames predate round 2);
+  hero-light x7 (predates the honest hero-light rig, ~25 min each); the front arc (proof 00 and 08 SHOW, 04 HOLD; Sound needs Ice,
+  9 frames); turn Acid 17-23 + Poison/Ice/Haze/Fog (103 frames at ~1.7 min); horn-back and back Acid. Caveat: wide, side,
+  hero-light and the arc were held for the bottom-edge answer. Lines for c3 and c4 (16:29 fix: --chunks 1-20, not "all").
+- 16:33 brand lane: BRAND BOOK v18 published in place (https://claude.ai/artifact/WGpswpvvETozjgRAxBuUK3; b444f444): dated 9 Nov
+  (draft); the tagline; seven colors everywhere with Smoke striped "held"; own feet, no light, polished horn A; only passed pictures
+  (tall Ice d9ba82c3, A Ice polished f7f03850, Ice habitat 0f619953, Dust habitat 26493989, the Fog back); 21 older Tropos pictures
+  turned into labelled gaps; American English; no sideways scroll at 1440/390. Next proposed: social posts (45 min), press sheet
+  (45), invitation (60), deck cover as a proposal (30).
+- 16:35 brand lane: v19 (00c2f6e3) with my 16:23 list applied: the seven passed tall fronts lead the cover and the tint cards
+  (Acid "check pending"); lit lamp pictures, both old Mantle renders and the bar from the door turned into gaps; the press sheet's
+  picture the Ember front. Asked about bar-decks, pack-lamps and the eight-band graphics (with Smoke).
+- 16:35 lamps lane (fd1e02bf): CORE A NIGHT for item 89 (core-ice-night-frost.png: the CAD's 40 mm port, the frost face at B's
+  power, B's rig/camera/exposure; face L 73, C 0.081, h 223 vs B 118/0.067/212); THE SITE SET rig (lamp_site.py: a paper sweep
+  #EDE8E1 under a real key and fill, each lamp at real output on the one scale, 2700 K, all eight tints; Hemisphere studio x2 -1 EV,
+  Core studio x8 -3 EV) and proxies (heroes-proxy, rows-proxy). Starting the Hemisphere set at full scale (~4 h), then Core (~5 h).
+  At e616c1e3: the helper queue (launch/lamp-site-queue.md) and the 17 CAD meshes.
+- 16:3x my check of the Book: the Type chapter's rule says "Spelling: British, as the site has it: color, aluminum, meter" (must be
+  American). Vercel builds a preview for every pushed branch (mine included; item 37).
+- 16:4x sent c3 (session_01BAaPToS56NEnJnGaju1n5a) and c4 (session_01BAaPTkchUebW9qCg1JCih9), both idle since 4 Nov: merge
+  1bdbf2fc exactly (a290fdc6 + round 2 f6d0eda7 + the honest rigs; the tip 2a356869 changes components.json, so it's kept out of
+  this set), tag rc1, --chunks 1-20, one chunk at a time. c3: hero-light x7, the arc (spin-ice) after my go, turns Acid 17-23 +
+  Haze + Fog. c4: wide x7, turns Poison + Ice, side x7 after the speaker lane's card fix. c2 keeps back-acid and horn-back-acid.
+- 16:4x sent the speaker lane: dispatched; render now with the bottom edge as built (speed; re-render if (b) or (c)); the tall
+  gates for its record (Ember 2/3, Dust 2/3, Poison 2/3, Ice 3/3, Haze 3/3, Fog 2/3; Acid and the rigB backs gating); asks: (A) fold
+  the right-side card fix into the side rig, proved on a Poison side proxy, SHA to me and straight to c4; (B) why the arc's
+  frame 04 was held and whether 1bdbf2fc fixes it; then the bottom-edge sheets v2.
+- 16:4x GATE TALL ACID v2 (wf_8fdaa10e-d99): SHOW 3/3. The horn h 103 against the cabinet 106-110 (Delta E_ok ~0.015); the
+  honey-gold gone; the base edge glow weak (a dim caramel strip, the dye along the bottom plate's edge); renders more olive than the
+  fluorescent sheet. ALL SEVEN TALL FRONTS NOW PASS. Site and brand lanes told.
+- 16:5x sent brand lane: Acid passed (drop "check pending"); fix the Type chapter's "British" to American; bar-decks a gap;
+  pack-lamps only if today's unlit Core A and Hemisphere; the eight-band graphics stay (Smoke's band waits on the Smoke answer, one
+  line on the Smoke card); hold the publish for the review's fix list (~20-30 min); then the social posts, press sheet (numbers
+  traced to r33-speaker-horn's product.py and BOM), the invitation, the deck cover as a proposal.
+- 16:5x REVIEW of Brand Book v19 launched (wf_996beee8-30d: five lenses: decisions, pictures, words and facts, build at 1440/390,
+  the owner's eye; merge; skeptic verification of blockers and majors; a fix list and an owner summary). The book exported from
+  00c2f6e3 into scratchpad/brandbook-v19 (identical to the published page).
+- 16:5x LAMPS GATE launched (wf_a02e1a2a-b5e; four critics + tally) on heroes-proxy, rows-proxy and Core A night (B's night as
+  context). My own read: the lit faces pastel (Ember's Core pink; the domes coral, peach, lime, aqua, magenta), likely an
+  exposure / view-transform choice. Sent the lamps lane: hold the full-size Hemisphere set until the verdict; meanwhile item 90's
+  proxies (Hemisphere Ice at 5700 K, Haze at 4000 K, a per-tint rows proxy), EXRs beside the finals, all eight tints rendered
+  (the site shows seven).
