@@ -123,8 +123,13 @@ def regrade_blender(exr, out, ev, wb, shoulder_ev, shoulder_from, shade, shade_e
         m = np.zeros((H, Wd), bool); m[int(y0 * H):int(y1 * H), int(x0 * Wd):int(x1 * Wd)] = True
         m &= y > 0.80
         m = binary_dilation(m, iterations=max(1, int(2 * Wd / 1920)))
-        ws = gaussian_filter(m.astype(np.float64), 1.5 * Wd / 1920)[..., None]
+        ws = gaussian_filter(m.astype(np.float64), 1.5 * Wd / 1920)
+        # keyed by brightness (proxy 8, the critics: the feathered mask darkened the clear shell and lip into a ring at
+        # L 23-31 against a wall of about 60): only what the long exposure renders near white takes the darker layer,
+        # so the shell and the lip keep their own tone and no pixel goes darker than it was
+        ws = (ws * smooth(y, 0.85, 0.97))[..., None]
         g = g * (1 - ws) + sh * ws
+        g = np.maximum(g, np.minimum(hi, 0.80))     # never darker than the long exposure below near white
         if halation > 0:
             def s2l(c):
                 return np.where(c <= 0.04045, c / 12.92, ((c + 0.055) / 1.055) ** 2.4)

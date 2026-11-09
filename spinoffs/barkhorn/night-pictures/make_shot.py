@@ -87,8 +87,9 @@ def _records():
                     'color': cols[i % len(cols)], 'rough': 0.6})
         x += 0.0062
     for i in range(4):
+        # proxy 8: the stack in dark sleeves (the critics: its pale top read as a slab at luma 154 under the lamp)
         out.append({'name': f'stack{i}', 'center': [0.80, -0.32, top + 0.0025 + 0.005 * i], 'size': [0.315, 0.315, 0.005],
-                    'color': cols[(i * 3) % len(cols)], 'rough': 0.6})
+                    'color': ('#1E1C1A', '#26221F', '#1F2328', '#2A2622')[i], 'rough': 0.7})
     return out
 
 
@@ -155,7 +156,7 @@ def shot(root, tint, lamp_dir, fmt='wide', core=False):
                      if core else _records(),
         # gate 3: the speaker clearly on a wool rug (curly_teddy_natural, CC0: a pile, its own relief), a bound edge,
         # 0.9 m of rug in front of the feet; a nightstand under the pendant and an armchair in shadow at the left edge
-        'rug': None if core else {'pbr': 'curly_teddy_natural', 'tint': '#3A3836', 'tint_mix': 0.9, 'value': 0.014, 'bump': 0.6, 'matte': True,
+        'rug': None if core else {'pbr': 'curly_teddy_natural', 'tint': '#3A3836', 'tint_mix': 0.9, 'value': 0.014, 'bump': 1.0, 'matte': True, 'tile_m': 0.12,
                                   'center': [0.0, -1.10], 'size': [3.0, 3.30], 'border_w': 0.035, 'border_color': '#24211E'},
         'models': [] if core else [
             {'id': 'modern_wooden_cabinet', 'location': [CONSOLE[0], CONSOLE[1], 0.0], 'rotation_deg': [0, 0, 0], 'name': 'console'},
