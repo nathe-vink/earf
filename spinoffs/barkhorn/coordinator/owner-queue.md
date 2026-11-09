@@ -6126,3 +6126,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   both lamps now take the speaker's 2423 Ember dye; in the proxy Core reads a red ball, not near-black plum. Next: one proxy with the
   20:49 points, then the 128-sample pair and the Hemisphere crop, then Core A/B.
 - 20:58 BRAND: the freeze noted (no commits from 21:25; a republish from the working tree is fine, committed after the freeze).
+- 21:02 OWNER: "I kind of liked that dark border that used to be on the outside of the core renders. Is that not possible to achieve in
+  actuality?" Traced: the October Core renders (lamps-cordless site-img, 10-29/10-31; product earf-orb-table: a tinted "body" shell
+  over a frosted, glowing "liner", plus a hidden point light inside: camera off, transmission off, specular 0) show a dark ring = the
+  clear tinted outer ball's edge seen beyond the smaller glowing layer inside. Design A as drawn (one 9 mm tinted ball, frosted inside)
+  glows to its edge, so no ring (round 3, tonight). Core B (a 3 mm white opal ball nested inside the tinted ball) gives the ring back:
+  the 11-03 core-ice-night-nested render shows it. 21:06 answered: yes, it's real and comes from the construction (B), not the light;
+  B also answers the critics' day finding (A near-black by day; 3/4 called this the clearest case for B); the October renders' hidden
+  helper light noted; sent the October row and an A/B pair; asked one question: render a matched, honest A/B pair (day and night) for
+  him to choose?
