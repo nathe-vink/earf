@@ -5673,3 +5673,17 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   Dust proxy pair shows the same (floor 226 -> 249, horn 184 -> 209), not "a little less bright". 19:20 asked the speaker lane: is that
   the moved, grown horn lamp lighting the sweep; what offset restores the passed depth (about -1/3 stop?); re-tone from EXR or
   re-render. The critics judge the seven as a set first.
+- 19:19 MANTLE NIGHT PROXY 6 (52f80d0f; render 19:01-19:19, 512 samples): the honest COB (11 mm, 3.2 W, flux 79 % vs the lamps lane's
+  78 %), rim 1.47 m under a 2.25 m ceiling (the 600 mm drop), 0.36 m in front of the face; the charcoal rug to the bottom edge; the
+  armchair turned and darkened; the streetlight cut to 0.01 W/m2 at ~4000 K; exposure +4.3; cabinet L 23 (target 25), hue 212/207.
+  NOT fixed: the horn's slash (the lit dome or console reflected in the crease); the dome a flat clipped cut-out. Audit clean.
+  19:21 GATE NIGHT PROXY 6 launched (wf_c89a6b4d-ebc), with the slash, the dome's clipping and the face's 1/4 stop as the questions.
+- 19:20 LAMPS ROUND 2 TALLY (wf_5760aeac-7cd, 4 critics + tally): show_now 0/4 on heroes, rows-8 and rows-7; one more cheap proxy
+  round. Fixed since round 1: paper 0.80 -> 0.37, max 202, rims darker than faces, no LED ring, no floor bar, honest pool and spill.
+  Failing: Acid ochre (h 72, darker than Dust), Ice teal (h 201-204, R at 0 on 66-97 %), Fog mint, the Core orbs pastel (0.08-0.12 L
+  over their domes), Haze/Ember domes at or under the paper, Smoke unlit (dropped 4/4). 4/4 keep 2700 K lamps; 4/4 Core A on the site,
+  B the founder's question. 19:21 sent the lamps lane round 3: ONE MATERIAL PER TINT across the brand (the speaker set's dyes,
+  scaled to each shell's thickness: Acid, Ice, Poison, Fog); Ice off the gamut edge (<= 10 % at 0); Core A's frosting leaks undyed
+  light (a physics bug, found by both gates); Core -0.7 EV vs as-is; Hemisphere studio x1 at -2 EV; check the pool's height (C4: the
+  pool fits 0.30 m, the picture shows ~0.5 m); framing 40-50 %; rows as two images; a larger key and a kicker. Order: the audit ->
+  the unlit Ember pair -> round 3 -> Core A/B.
