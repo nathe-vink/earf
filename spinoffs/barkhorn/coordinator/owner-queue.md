@@ -4937,3 +4937,16 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   first: pass every used file, null the unused, verify by file listing) at 17:28.
 - 17:28 stopped the original Book review workflow (wf_996beee8-30d): its remaining lenses duplicated the parallel ones on a now-stale
   version; a short re-review of the republished Book comes before the owner gets the link.
+- 17:2x SITE RC REVIEW, decisions + pictures lenses (wf_2732ec2b-9c5): the claims checked (home TRUE; Tropos pictures, lamps,
+  Mantle, copy, held pages PARTLY TRUE; addresses MOSTLY TRUE; design kit TRUE); every Tropos picture the passed frames' own blobs
+  (72 distinct pictures crawled). New beyond waves 1-2: every Mantle picture from the 1 Nov board frame (a-studio-ember-2423.png,
+  never gated) instead of the passed C3e day frame; the 4:5 Mantle tile cut and upscaled; Mantle's cartridge (2M Black) and 25.4 mm
+  plinth stated as settled (items 25, 22 open); alt texts naming colors the pictures aren't in; 792 deployed files, ~69 used (439
+  of the unused 404 on live); Tropos depth 423 vs 420; one reviewer would take the Smoke lamp pair out, the other keep it once and
+  labelled.
+- 17:29 sent the site lane WAVE 3 (8 items): MANTLE_SRC to the passed C3e day frame (r48-mantle-design 41232b56,
+  a5-day-ember-2423-c3e.png; a noise-only re-render of the C3 day frame that passed SHOW 3/3, wf_eef64f6f-2ed and wf_62f13455-efb);
+  the whole Mantle frame in the tile; the cartridge "to be chosen" and the plinth "about 25 mm"; alts that name the shown color; the
+  lamp caption "Shown in Smoke, a color on hold" (not "still to come": Smoke is undecided), once per view; prune every unreferenced
+  file; depth 420 with height and weight from the speaker lane; no caption for Dust's base line (the render bug; the talls are being
+  re-rendered).
