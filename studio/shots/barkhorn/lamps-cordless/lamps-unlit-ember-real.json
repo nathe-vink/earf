@@ -99,7 +99,38 @@
      "liner": {
       "glow_color": "#FFDCB8"
      }
-    }
+    },
+    "extra_materials": {
+     "clear6": {
+      "preset": "clear_resin",
+      "color": "#FFFFFF",
+      "deep": "#F7F7F5",
+      "radius": 0.02,
+      "roughness": 0.04
+     }
+    },
+    "assign": [
+     {
+      "match": "liner",
+      "material": "clear6"
+     }
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "paper",
+    "color": "#DCD4C8",
+    "size": [
+     8.0,
+     0.03,
+     3.6
+    ],
+    "position": [
+     0.0,
+     -3.4,
+     0.0
+    ]
    }
   ]
  },

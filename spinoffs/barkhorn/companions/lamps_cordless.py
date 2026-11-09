@@ -80,6 +80,19 @@ def unlit_real(s, log=print):
         else:
             log(f"{k}: {p0} -> {s['lights'][k]['position']}, x{f:.1f}, size {s['lights'][k]['size_m']}")
     s['lights']['bgwash'].pop('specular', None); log('bgwash: specular 0 removed (ruling 1)')
+    # the Ember gate (2026-11-09 20:14, wf_3e232358-ab0):
+    # - Hemisphere's mouth read rust: the CAD's 6 mm `liner` shell (R 96-90), clear in v3, took the tinted body through
+    #   the product file's `shell|liner|rim` rule (in Smoke a neutral grey, unseen); it is clear acrylic now
+    # - Core's top read plum: it reflected the dim sky in front of the set; a real warm paper wall behind the camera,
+    #   lit by the studio, gives it a continuous lit surround (out of frame, seen in the glass)
+    for p in st['props']:
+        if p.get('module') == 'earf_moon' and p.get('fn') == 'dome':
+            p['extra_materials'] = {'clear6': {'preset': 'clear_resin', 'color': '#FFFFFF', 'deep': '#F7F7F5',
+                                               'radius': 0.02, 'roughness': 0.04}}
+            p['assign'] = [{'match': 'liner', 'material': 'clear6'}]
+    st['props'].append({'kind': 'kit', 'shape': 'box', 'material': 'paper', 'color': '#DCD4C8',
+                        'size': [8.0, 0.03, 3.6], 'position': [0.0, -3.4, 0.0]})
+    log('dome liner: clear; a warm paper wall behind the camera at y -3.4')
     bad = [r for r in SCAST.hidden(s) if r[3] > 0]
     assert not bad, bad
     s['title'] = s['title'] + ', nothing hidden in frame (2026-11-09)'

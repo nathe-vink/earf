@@ -95,6 +95,12 @@ def _lamp(bpy, name, pos, watts, kelvin, radius=0.02):
 
 def _place(bpy, which, name, p, kit):
     pdef, tpl = _templates(bpy, which)
+    # a piece may correct a part's finish (2026-11-09, the lamps lane: Hemisphere v3's 6 mm `liner` shell is clear, but
+    # the product file's `shell|liner|rim` rule gave it the tinted body): `assign` rules ahead of the product's, and
+    # `extra_materials` they name
+    if p.get('assign') or p.get('extra_materials'):
+        pdef = {**pdef, 'materials': {**pdef['materials'], **p.get('extra_materials', {})},
+                'assign': list(p.get('assign', [])) + list(pdef['assign'])}
     gm, g0 = GLOW[which]
     over = {gm: {'glow': p.get('shade_glow', g0)}}
     for k, v in p.get('materials', {}).items():
