@@ -702,6 +702,16 @@ def site(frame, tint):
         # all: shell 223/114/26 with it, 222/114/25 without; the stroke 655 px -> 54. A lamp dimmed as a whole: off)
         s['lights']['horn']['irradiance'] = 0.0
         s['lights']['horn'].pop('power_w', None)
+    if frame in ('front-off-tall', 'side'):
+        # (the tall gate's glint, 2026-11-09: a faint horizontal line on the right side face at mid-height, near the back
+        # edge, on Dust, Fog and Ember. The probe: the face mirrors the floor flag (finals31's, at 1.6, 1.8 on the floor,
+        # reaching y 3.0) below that line and the upright black card behind it (1.8, 2.7) above; the upright card runs
+        # on a slant and at its left end stands 0.1 m past the floor flag's far edge, so a strip of lit sweep showed
+        # between them. Not the cutter, the fill card or the flag's sheen: each off or velvet left the line. The floor
+        # flag reaches on under the upright card, y 0.6 to 3.5; still out of frame)
+        for f in (s.get('set') or {}).get('flags', []):
+            if f.get('center_m') == [1.6, 1.8, 0.005]:
+                f['center_m'] = [1.6, 2.05, 0.005]; f['size_m'] = [1.6, 2.9]
     if frame in ('front-off-tall', 'front-off-wide', 'hero-light', 'side', 'back'):
         realize_hidden(s)
     # a panel at strength 0 still stands in the set: unseen by the camera and casting no shadow, but in the glossy floor's
