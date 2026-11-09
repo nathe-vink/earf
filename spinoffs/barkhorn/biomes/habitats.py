@@ -175,6 +175,9 @@ def main():
     ap.add_argument('--sink', type=float, help="the feet's bedding, m, in place of the habitat's (tests)")
     ap.add_argument('--scrim', type=float, nargs=4, help='a silk on the sun line: T W H D (tests)')
     ap.add_argument('--meniscus', type=float)
+    # the horn under the shadow rule as the cabinet (the coordinator, 21:31): --horn-front was Ember's workaround
+    # (2026-11-03) for the asset's untinted shadow pass through the horn, from before the per-face rule
+    ap.add_argument('--horn-shadows', action='store_true', help='the horn passes shadow rays as the cabinet (no --horn-front)')
     ap.add_argument('--wet', type=float, nargs=4, help='rain on the speaker: front beads, lip beads, runnels, seed')
     ap.add_argument('--card', nargs=5, action='append', default=[], help='a real card: KIND W H Z SIDE (tests)')
     ap.add_argument('--dot', nargs=5, action='append', default=[], help="a grip's dot: D SIZE TX TY TZ (tests)")
@@ -196,7 +199,7 @@ def main():
         cmd = [sys.executable, os.path.join(HERE, 'habitat.py'), shot, tint, '--out', out,
                '--samples', '16' if a.proxy else str(max(a.samples, SAMPLES.get(n, 0))),
                '--scale', '0.5' if a.proxy else str(a.scale), '--stand', 'feet', '--sink', str(a.sink if a.sink is not None else SINK.get(n, 0.012)),
-               '--horn-front', '--horn-rough', str(HORN_ROUGH)] + [x for k, v in lights.items() for x in ('--light', f'{k}={v}')] \
+               *([] if a.horn_shadows else ['--horn-front']), '--horn-rough', str(HORN_ROUGH)] + [x for k, v in lights.items() for x in ('--light', f'{k}={v}')] \
             + [x for k, v in SETS.get(n, {}).items() for x in ('--set', f'{k}={json.dumps(v)}')] \
             + [x for kv in a.set for x in ('--set', kv)] \
             + (['--glossy-flag'] if a.glossy_flag else []) \

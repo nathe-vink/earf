@@ -43,6 +43,7 @@ def scale_lights(sh, scales):
                 L[key] = L[key] * f
 
 
+FRESNEL_ANGLE = [False]                 # --fresnel-angle: each face passes 1 - F(theta) (Schlick, n 1.49) of a shadow ray, not a flat sqrt(0.92)
 SURFACE_GLASS = False                   # --surface-glass: the tint on the faces (not adopted: the speaker lane's volume is the line's material)
 WELD = [True]                           # the asset's split vertices welded so its glass volumes close (--no-weld: off)
 GLOSSY_FLAG = [False]                   # --glossy-flag: the flag and cards seen in reflections only (the earlier trick)
@@ -543,6 +544,25 @@ def meniscus(bpy_, linked, r):
     print(f'meniscus: r {r * 1000:.1f} mm, {made} segments around the cabinet')
 
 
+def schlick_face(nt, tp, n):
+    """A glass face's share of a shadow ray by its incidence: 1 - F, F = R0 + (1 - R0)(1 - |cos|)^5, R0 = ((n-1)/(n+1))^2.
+    The same on entry and exit (|cos|): a shadow ray goes straight, so it leaves a parallel wall at the angle it came
+    in, and the exit is never a total internal reflection as it would be for that angle measured inside."""
+    r0 = ((n - 1) / (n + 1)) ** 2
+    geo = nt.nodes.new('ShaderNodeNewGeometry')
+    dot = nt.nodes.new('ShaderNodeVectorMath'); dot.operation = 'DOT_PRODUCT'
+    nt.links.new(geo.outputs['Incoming'], dot.inputs[0]); nt.links.new(geo.outputs['True Normal'], dot.inputs[1])
+    ab = nt.nodes.new('ShaderNodeMath'); ab.operation = 'ABSOLUTE'; nt.links.new(dot.outputs['Value'], ab.inputs[0])
+    om = nt.nodes.new('ShaderNodeMath'); om.operation = 'SUBTRACT'; om.inputs[0].default_value = 1.0; om.use_clamp = True
+    nt.links.new(ab.outputs[0], om.inputs[1])
+    pw = nt.nodes.new('ShaderNodeMath'); pw.operation = 'POWER'; pw.inputs[1].default_value = 5.0
+    nt.links.new(om.outputs[0], pw.inputs[0])
+    # T = 1 - R0 - (1 - R0) x^5
+    mu = nt.nodes.new('ShaderNodeMath'); mu.operation = 'MULTIPLY_ADD'
+    nt.links.new(pw.outputs[0], mu.inputs[0]); mu.inputs[1].default_value = -(1 - r0); mu.inputs[2].default_value = 1 - r0
+    nt.links.new(mu.outputs[0], tp.inputs['Color'])
+
+
 def plant_alpha(bpy_, aids, res='1k'):
     """Some Poly Haven plant glTFs (grass_bermuda_01) carry no alpha at all: the cards render whole, their black,
     semi-glossy surround mirroring the sky as pale flecks (the Fog gate: "litter"). Wire the asset's own Alpha map
@@ -753,6 +773,8 @@ def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extr
                     # each face carries sqrt of the whole wall's transmission
                     face = [math.sqrt(x) for x in tr] if SURFACE_GLASS else [math.sqrt(0.92)] * 3
                     tp.inputs['Color'].default_value = (*face, 1)
+                    if FRESNEL_ANGLE[0] and not SURFACE_GLASS:
+                        schlick_face(nt, tp, 1.49)
                     mx = nt.nodes.new('ShaderNodeMixShader')
                     nt.links.new(lp.outputs['Is Shadow Ray'], mx.inputs[0])
                     nt.links.new(src, mx.inputs[1]); nt.links.new(tp.outputs[0], mx.inputs[2])
@@ -861,6 +883,7 @@ def main():
                     help="a grip's dot: SIZE m, D m out on the sun line from the point TX TY TZ")
     ap.add_argument('--card', nargs=5, action='append', default=[], metavar=('KIND', 'W', 'H', 'Z', 'SIDE'),
                     help='a real card: white|black, W H (m), centre Z (m), SIDE_DEG off the speaker-camera line')
+    ap.add_argument('--fresnel-angle', action='store_true', help="glass faces pass a shadow ray's 1 - F(theta) (Schlick, n 1.49)")
     ap.add_argument('--meniscus', type=float, default=0.0, help='a water meniscus round the walls, radius m')
     ap.add_argument('--wet', type=float, nargs=4, help='rain on the speaker: front beads, lip beads, runnels, seed')
     ap.add_argument('--scrim', type=float, nargs=4, help='a silk on the sun line: T (beam passed) W H (m) D (m out)')
@@ -875,7 +898,7 @@ def main():
     ap.add_argument('--flag', type=float, nargs=2, default=(8.0, 6.0), help='the black flag behind the camera, m (0 0: none)')
     a = ap.parse_args()
     global SURFACE_GLASS
-    WELD[0] = not a.no_weld; SURFACE_GLASS = a.surface_glass
+    WELD[0] = not a.no_weld; SURFACE_GLASS = a.surface_glass; FRESNEL_ANGLE[0] = a.fresnel_angle
     SINK[0] = a.sink; LED[0] = a.led; REAL_SET[0] = a.real_set; CANOPY_OPEN[0] = a.canopy_open; CLEARING[0] = a.canopy_clearing; CLEARING_AT[0] = tuple(a.canopy_clearing_at); PLANT_ALPHA[0] = tuple(a.plant_alpha); SCRIM[0] = a.scrim; WET[0] = a.wet; MENISCUS[0] = a.meniscus; DOTS[0] = [tuple(d) for d in a.dot]; CARDS[0] = [(c[0], float(c[1]), float(c[2]), float(c[3]), float(c[4])) for c in a.card]; SPLIT[0] = a.split; GLOSSY_FLAG[0] = a.glossy_flag
     HORN['close'] = a.horn_close; HORN['rough'] = a.horn_rough; HORN['shadows'] = not a.horn_front
     sh = json.load(open(a.shot))
