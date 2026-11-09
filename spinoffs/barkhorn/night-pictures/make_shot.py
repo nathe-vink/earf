@@ -49,7 +49,9 @@ HEMI_A_DZ = 0.15                 # proxy 6: its rim 1.47 up (0.15 over proxy 4),
 # gate 2, point 6: the Hemisphere's mouth is open and its COB sits at the rim, so a camera below the rim sees the bare
 # COB (scene_audit: 106 of 113 points from 0.40 m). The camera stands above the rim, at eye height
 CAM_Z = 1.70
-ROOM = {'x0': -2.6, 'x1': 3.1, 'y_back': 0.78, 'y_front': -6.2, 'height': 2.40}
+# proxy 6 (the coordinator, 18:48): the Hemisphere's drawn drop is 600 mm, its rim 776 below the ceiling; a 2.25 m
+# ceiling puts the rim at 1.47 with that drop
+ROOM = {'x0': -2.6, 'x1': 3.1, 'y_back': 0.78, 'y_front': -6.2, 'height': 2.25}
 # the formats (the coordinator's spec, r46-owner-notes 65ec7c5f: night-picture-spec-2026-11-04.md). The speaker with
 # its lamp inside the box; the text zones dark; light pools inside the speaker's column. The camera level at the
 # middle of speaker-plus-shade (0 to about 1.55 m), its distance set so that height fills the box's height
@@ -129,7 +131,7 @@ def shot(root, tint, lamp_dir, fmt='wide', core=False):
         # oak), the wall plaster (beige_wall_001 tinted toward off-white), a dark skirting
         'floor_pbr': 'wood_floor', 'floor_tint': '#2C2824', 'floor_tint_mix': 0.6, 'floor_rough_mul': 0.55,
         # gate 3: a plaster with relief the light can graze (beige_wall_002), toned toward a limewash off-white
-        'wall_pbr': 'beige_wall_002', 'wall_tint': '#D2CFC8', 'wall_tint_mix': 0.5,
+        'wall_pbr': 'beige_wall_002', 'wall_tint': '#D2CFC8', 'wall_tint_mix': 0.5, 'wall_value': 0.62,
         'skirting': {'height': 0.15, 'color': '#2A2826'},
         # ruling 4: a real window in the left wall, out of frame, a sheer curtain in it and the evening sky outside;
         # gate 1: dimmer and near-neutral, so the room is not tinted Ice's blue
@@ -151,7 +153,7 @@ def shot(root, tint, lamp_dir, fmt='wide', core=False):
                      if core else _records(),
         # gate 3: the speaker clearly on a wool rug (curly_teddy_natural, CC0: a pile, its own relief), a bound edge,
         # 0.9 m of rug in front of the feet; a nightstand under the pendant and an armchair in shadow at the left edge
-        'rug': None if core else {'pbr': 'curly_teddy_natural', 'tint': '#3A3836', 'tint_mix': 0.9, 'value': 0.02, 'bump': 0.6,
+        'rug': None if core else {'pbr': 'curly_teddy_natural', 'tint': '#3A3836', 'tint_mix': 0.9, 'value': 0.014, 'bump': 0.6,
                                   'center': [0.0, -1.10], 'size': [3.0, 3.30], 'border_w': 0.035, 'border_color': '#24211E'},
         'models': [] if core else [
             {'id': 'modern_wooden_cabinet', 'location': [CONSOLE[0], CONSOLE[1], 0.0], 'rotation_deg': [0, 0, 0], 'name': 'console'},

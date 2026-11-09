@@ -191,6 +191,8 @@ def night_set(bpy, spec, mats):
     except Exception as e:
         print('night_room: plain floor:', e, flush=True)
         floor_m = _principled(bpy, 'floor', n.get('floor', '#3A3029'), n.get('floor_rough', 0.45))
+    if n.get('wall_value'):
+        _scale_base(wall_m, n['wall_value'])       # a darker limewash (proxy 6: the top zones and the top edge)
     ceil_m = _principled(bpy, 'ceiling', n.get('ceiling', '#E8E4DC'), 0.9, 0.2)
     t = 0.05
     _box(bpy, 'night-floor', ((x0 + x1) / 2, (yb + yf) / 2, -t / 2), (x1 - x0 + 2 * t, yb - yf + 2 * t, t), floor_m)
