@@ -1043,12 +1043,13 @@ def v2_fixes(p, web):
         p.rest = re.sub(pattern, new, p.rest)
     # 3. Tropos's size: horn A is flush (556 outside against the 560 cabinet; the owner's "Flush horn: flush", 1 Nov);
     # the height is about 1.3 m until the speaker lane gives horn A's CAD height
-    rx(r'<dt>Height</dt><dd>1293[\s ]mm</dd>', f'<dt>Height</dt><dd>About 1.3{NB}m</dd>')
+    rx(r'<dt>Height</dt><dd>1293[\s\u00a0]mm</dd>', f'<dt>Height</dt><dd>1295{NB}mm</dd>')
+    rx(r'423[\s\u00a0]mm overall, 420[\s\u00a0]mm at the cabinet', f'428{NB}mm overall, 420{NB}mm at the cabinet')
     rx(r'<dt>Width</dt><dd>625[\s ]mm at the horn, 560[\s ]mm at the cabinet</dd>', f'<dt>Width</dt><dd>560{NB}mm, the horn flush with the cabinet</dd>')
-    p.sub("['Size', '1293 high, 625 wide, 423 deep (mm)']", "['Size', 'About 1300 high, 560 wide, 423 deep (mm)']")
+    p.sub("['Size', '1293 high, 625 wide, 423 deep (mm)']", "['Size', '1295 high, 560 wide, 428 deep (mm)']")
     # 6. the weight: to follow, on every page
-    rx(r'About 72[\s ]kg; 62[\s ]kg with the horn lifted off', 'To follow')
-    p.rest = p.rest.replace("'To follow with the final horn'", "'To follow'")
+    rx(r'About 72[\s\u00a0]kg; 62[\s\u00a0]kg with the horn lifted off', f'About 73{NB}kg; about 64{NB}kg with the horn lifted off (modelled)')
+    p.rest = p.rest.replace("'To follow with the final horn'", "'About 73 kg (modelled)'")
     # 7. the power: 125 W a channel is the FA122 into 4 ohms; Tropos's woofer is 8 ohms (about 75 W)
     rx(r'Hypex FusionAmp FA122, built in: two channels of 125 W, crossed at 1 kHz in its DSP',
        'Hypex FusionAmp FA122, built in: 125 W a channel into 4 &Omega;, about 75 W into the 8 &Omega; woofer; crossed at 1 kHz in its DSP')
@@ -1114,9 +1115,12 @@ def rc_fixes(p, web):
         im = Image.open(os.path.join(web.ROOT, src)).convert('RGB'); rel = f'img/rc/{k}-back.webp'
         im.save(os.path.join(web.SITE, rel), 'WEBP', quality=82); im.resize((168, 210)).save(os.path.join(web.SITE, f'img/rc/{k}-back-th.webp'), 'WEBP', quality=80)
         extra.setdefault(k, {})['back'] = {'src': rel, 'w': im.width, 'h': im.height, 'th': f'img/rc/{k}-back-th.webp'}
-    im = Image.open(os.path.join(web.ROOT, R + 'A-polished-p2-backrig-acid/horn-back-acid.png')).convert('RGB')
-    im.save(os.path.join(web.SITE, 'img/rc/amber-horn-back.webp'), 'WEBP', quality=82); im.resize((224, 168)).save(os.path.join(web.SITE, 'img/rc/amber-horn-back-th.webp'), 'WEBP', quality=80)
-    extra['amber']['horn-back'] = {'src': 'img/rc/amber-horn-back.webp', 'w': im.width, 'h': im.height, 'th': 'img/rc/amber-horn-back-th.webp'}
+    for k in RC_KEYS:        # the seven horn-backs: c2 06b829ce (Ember, Dust, Poison), c3 52ad76ba (Ice, Haze, Fog), Acid a1322583
+        src = R + ('A-polished-p2-backrig-acid/horn-back-acid.png' if k == 'amber' else f'A-polished-p2/horn-back-{names[k].lower()}.png')
+        im = Image.open(os.path.join(web.ROOT, src)).convert('RGB')
+        im.save(os.path.join(web.SITE, f'img/rc/{k}-horn-back.webp'), 'WEBP', quality=82)
+        im.resize((224, 168)).save(os.path.join(web.SITE, f'img/rc/{k}-horn-back-th.webp'), 'WEBP', quality=80)
+        extra[k]['horn-back'] = {'src': f'img/rc/{k}-horn-back.webp', 'w': im.width, 'h': im.height, 'th': f'img/rc/{k}-horn-back-th.webp'}
     im = Image.open(os.path.join(web.ROOT, R + 'A-polished-p2-backfix/amp-plate-ember.png')).convert('RGB')
     im.save(os.path.join(web.SITE, 'img/rc/plate.webp'), 'WEBP', quality=82); im.resize((168, 210)).save(os.path.join(web.SITE, 'img/rc/plate-th.webp'), 'WEBP', quality=80)
     for k in RC_KEYS:
@@ -1182,7 +1186,10 @@ def rc_waves(p, web):
     ON_HOLD = 'Hemisphere and Core, switched off. Shown in Smoke, a color on hold.'
     # --- the passed habitats (biomes: Ice 0f619953, Dust 26493989), 4:5
     HAB = {'blue': 'renders/2026-11-03/barkhorn/habitats/ice-portrait-1200x1500.jpg',
-           'orange': 'renders/2026-11-03/barkhorn/habitats/dust-portrait-1200x1500.jpg'}
+           'orange': 'renders/2026-11-03/barkhorn/habitats/dust-portrait-1200x1500.jpg',
+           'ice': 'renders/2026-11-03/barkhorn/habitats/fog_b-portrait-1200x1500.jpg'}      # Fog: r48-biomes b61474c0
+    HAB_ALT = {'blue': 'Tropos in Ice, out in the snow at dusk', 'orange': 'Tropos in Dust, on rippled sand among desert buttes',
+               'ice': 'Tropos in Fog, standing in the grass on a foggy hillside at dawn'}
     for k, src in HAB.items():
         im = Image.open(os.path.join(web.ROOT, src)).convert('RGB')
         im.save(os.path.join(web.SITE, f'img/rc/{k}-habitat.webp'), 'WEBP', quality=82)
@@ -1212,7 +1219,7 @@ def rc_waves(p, web):
                     'card': {'src': f"img/rc/{c['k']}-card.webp", 'w': 625, 'h': 1250}}
         if c['k'] in HAB:
             v['habitat'] = {'src': f"img/rc/{c['k']}-habitat.webp", 'w': 1200, 'h': 1500, 'th': f"img/rc/{c['k']}-habitat-th.webp"}
-            c['hab'] = v['habitat']['src']
+            c['hab'] = v['habitat']['src']; c['hab_alt'] = HAB_ALT[c['k']]
     for L in D['lamps'].values():
         for col in L['colours'].values():
             col['views']['unlit'] = {k: x for k, x in col['views']['unlit'].items() if k != 'tag'}
@@ -1237,7 +1244,7 @@ def rc_waves(p, web):
     p.sub('<ul class="swatches" id="c-swatches" aria-label="Color"></ul>',
           '<ul class="swatches" id="c-swatches" aria-label="Color"></ul>\n    <figure class="c-hab" id="c-hab" hidden><img alt=""><figcaption><i class="render">Render</i></figcaption></figure>')
     p.sub("document.getElementById('c-line').textContent = c.line;",
-          "document.getElementById('c-line').textContent = c.line;\n  { const f = document.getElementById('c-hab'); f.hidden = !c.hab; if (c.hab) { const im = f.querySelector('img'); im.src = c.hab; im.alt = `Tropos in ${c.name}, out in its element`; } }")
+          "document.getElementById('c-line').textContent = c.line;\n  { const f = document.getElementById('c-hab'); f.hidden = !c.hab; if (c.hab) { const im = f.querySelector('img'); im.src = c.hab; im.alt = c.hab_alt; } }")
     # --- home: "Tropos." links to Tropos; Ice in its element after it; one caveat
     p.sub('<div class="sound-words"><h2>Tropos.</h2>', '<div class="sound-words"><h2><a href="#speakers">Tropos.</a></h2>')
     band = (f'\n  <section class="band beat hab-band" id="ice-band"><div class="wrap hab-grid"><figure><img src="img/rc/blue-habitat.webp" width="1200" height="1500" loading="lazy" '
@@ -1272,8 +1279,8 @@ def rc_waves(p, web):
                     f'<a class="ph mantle-wide" href="#mantle-ember"><img src="{MANTLE["full"]}" srcset="{MANTLE["wide"]} 1200w, {MANTLE["full"]} 1800w" '
                     'sizes="(max-width: 860px) 100vw, 62vw" width="1800" height="1200" loading="lazy" alt="Mantle in Ember"></a>', p.rest)
     # --- Tropos's size: depth 420 with the horn flush
-    p.rest = re.sub(r'423[\s ]mm overall, 420[\s ]mm at the cabinet', '420 mm', p.rest)
-    p.rest = p.rest.replace("'About 1300 high, 560 wide, 423 deep (mm)'", "'About 1300 high, 560 wide, 420 deep (mm)'")
+
+
     p.css("""
 /* the RC review, waves 2 and 3 */
 .hero { justify-content: flex-start; height: auto !important; min-height: 0 !important; padding-bottom: clamp(32px, 6vh, 64px) !important }
