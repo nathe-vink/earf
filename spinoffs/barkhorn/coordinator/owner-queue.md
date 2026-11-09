@@ -4997,3 +4997,16 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 17:37 sent the speaker lane (stamped 17:38, ahead of the clock: date -u read 17:37:26 after it went): no owner question until the
   verdict; priorities: (1) the height and weight answer (the site and the Book wait), (2) arc frame 04, (3) the close-up fixes,
   (4) the pour re-check; c2 has the talls.
+- 17:36 c3, 17:37 c4: both asked before merging cb62d1eb (its parent is 2a356869, the woofer commit kept out of rc1): merge, or
+  cherry-pick the fix alone? Both wait for their turns to land first. Sent both (17:38): merge cb62d1eb after the turns, no
+  rebuild (2a356869 is record-only for rendering: components.json feeds product.py, fabkit and horn_sim, not the engine; the coil
+  is inside the motor, the bolt circle moves 0.5 mm); c2 merged the same SHA, so one tree for all three.
+- 17:37 c2: rc1-fix Dust tall at 7987de3cc84a89876b3f683e6339be88adbd5418 (9.6 min): the floor clean, but a saturated red bar still
+  runs along the cabinet's bottom edge foot to foot, in the acrylic (the bottom panel's front edge). Chunk 2 (Ice, Acid) started.
+- 17:3x MEASURED: the rc1-fix Dust tall differs from the passed tall Dust by at most 3/255 (mean 0.002; no pixel over 10): the tall
+  camera never saw the bugged floor. The tall's red bar is the bottom panel's REAL edge glow (not the bug). Sent c2 (17:39): stop
+  the tall re-renders (kill chunk 2), the passed talls stand; next hero-light chunks 3-4 on the fixed tree (that camera sees the
+  band). Sent the speaker lane (17:39): the talls don't carry the bug; the bottom-edge question is real for warm tints in bright
+  light ((b) barely changes it by eye; the seam count misses a saturated red line); render option (e), the bottom panel's exposed
+  edges finished opaque black (like item 91's Mantle deck edges), on the Dust tall and hero-light base crops beside (a) and (c),
+  with the red bar's luminance and saturation, a cost per pair and the shop process.
