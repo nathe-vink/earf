@@ -69,7 +69,9 @@ the old rule are marked; each is re-rendered under the new rule and gated agains
 HEMISPHERE AS DRAWN DOES NOT GLOW (lamps lane photometry, 9 Nov 22:22; confirmed in the Mantle lane's scene 22:31): the COB sits at
 the top of its 46 mm bore and all its light leaves through the mouth; every lit Hemisphere picture so far took its glow from an
 added emitter on the liner ('opal-lit'). No lit Hemisphere picture may enter any asset until the owner answers walkthrough 135.
-None approved. Hemisphere switched off in Ember (the 4:5 crop): HOLD 0/4 (9 Nov 21:42): honest and clearly off, but the Ember reads
+None approved. Hemisphere switched off in Ember, native 4:5 (e7847359): HOLD 0/4 (9 Nov 23:49): the colour now right (hue 35, dE00 2.5 to the
+speaker's Ember; plum and violet gone), held for the backdrop (cream-peach, dE00 4.6 from the Tropos white), a rose key glint, the strip's
+neon-like arc, and the hub under the cap; fixes sent 23:50. Earlier: the 4:5 crop HOLD 0/4 (9 Nov 21:42): honest and clearly off, but the Ember reads
 crimson (a rose reflection over 28-44 % of the face; cool lights on the shell) and the right-rear strip was specular-only. The lit set,
 round 3: HOLD 0/3 (critic 4 out): the pale four read pastel, every Core B orb a milk-glass globe (walkthrough 133), no pools in the row.
 The owner's decision sheets (Hemisphere glow b/a1/a2/off; Core B Ø120 vs Ø90): HOLD from the honesty gate (9 Nov 23:09, critics 3-4):
