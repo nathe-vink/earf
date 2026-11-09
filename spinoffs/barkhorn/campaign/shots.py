@@ -674,7 +674,7 @@ def site(frame, tint):
             for i in blk['instances']:
                 i['rotate_z'] = i.get('rotate_z', 0) - 6.0
         s.setdefault('set', {}).setdefault('flags', []).append(
-            {'center_m': [1.55, 1.775, 0.006], 'size_m': [1.7, 2.45], 'normal': [0.0, 0.0, 1.0], 'color': '#060606',
+            {'center_m': [1.575, 1.775, 0.006], 'size_m': [1.65, 2.45], 'normal': [0.0, 0.0, 1.0], 'color': '#060606',
              'camera': True, 'glossy': True, 'name': 'floor card behind-right'})
     if frame in ('front-off-tall', 'front-off-wide', 'hero-light', 'side'):
         back_edge_card(s, sides=('back', 'left') if frame == 'side' else ('back',),
@@ -881,13 +881,13 @@ def _frame_rays(s, nx=96, ny=96):
     # as render.py builds the camera (2026-11-09, the veil's floor cards: the cast had fitted the sensor to the larger
     # side and aimed the lens at the target, so a portrait frame read 20 % too narrow and a level camera's frame sat
     # where a tilted one's would; cards cast at 0 % showed at the tall's right edge). The sensor is fitted HORIZONTAL,
-    # `sensor_mm` across; a `level` camera looks level and shifts the lens by the tilt; Blender's shift is in units of
-    # the larger frame dimension
+    # `sensor_mm` across; a `level` camera looks level and shifts the lens by render.py's formula; with that fit
+    # Blender's shift is in sensor widths (checked against bpy's world_to_camera_view on the tall: within 1 px)
     import math
     cam = s['camera']; c = np.array(cam['position'], float); t = np.array(cam.get('target', [0, 0, 0]), float)
     W, H = s['size']; lens = cam['lens_mm']; sw = cam.get('sensor_mm', 36.0)
     hx, hy = sw / 2, sw / 2 * H / W
-    span = max(hx, hy) * 2
+    span = sw            # a HORIZONTAL fit measures the shift in sensor widths (Blender's own projection, 2026-11-09)
     sx, sy = cam.get('shift_x', 0.0), cam.get('shift_y', 0.0)
     d0 = t - c
     if cam.get('level', True):
