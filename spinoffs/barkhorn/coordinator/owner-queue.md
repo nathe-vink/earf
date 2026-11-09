@@ -5010,3 +5010,27 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   light ((b) barely changes it by eye; the seam count misses a saturated red line); render option (e), the bottom panel's exposed
   edges finished opaque black (like item 91's Mantle deck edges), on the Dust tall and hero-light base crops beside (a) and (c),
   with the red bar's luminance and saturation, a cost per pair and the shop process.
+- 17:39 GATE rc1 WIDES 01 (wf_bcb2f28f-7a0; c4 80aa5bb3, Ember, Dust, Acid; pre-fix renders; 3 critics, 24 min): HOLD 3/3 on all
+  three. The clipped-white L band along the floor line reads as LED tape (tests 3 and 7): the bug's band, fixed at cb62d1eb. Notes for
+  the re-render: the contact pocket under the base 8-12 (to 40) for 13-18 px against 89+ in the talls (lift it toward the talls'
+  level); a faint straight diagonal seam on the right of the sweep's floor (soften or crop); Dust's red strip hotter than the tall's.
+- 17:37 speaker lane (stamped 17:43, ahead of its queue time 17:37:49): THE DIMENSIONS WITH HORN A: height 1295 mm (stability
+  standard_2018.json top_m 1.2951, 1c391c9a; the cabinet's top at 892); width 560 overall (the cabinet; horn A 556, flush); depth 420
+  at the cabinet, 428 overall (the amp plate's hardware); weight 72.6 kg with horn A (a model estimate: volumes x density + the parts
+  list's masses; not weighed); the horn as it lifts off 8.9 kg (formed horn 2.4, driver + adaptor 4.2, pod/throat/cap 1.3, posts and
+  collars 0.85, which sum to 8.75), so 63.7 without. The site's 1293/625/423 and 72/62 were the old horn's; the Book's 1293 and 423
+  too. I checked top_m and mass_kg on r33-speaker-horn. Item 16: the FaitalPRO figures to be marked verified (P/N 03803827, printed 9
+  Nov); Xdamage treated as +/-7.75, so the LR4 28 Hz high-pass is mandatory; the cut-out, depth and flange checked next. Its order: (1)
+  proofs (Dust tall, Dust hero-light 2318a4cc, Ember wide; whether the rigB backs and horn-backs use the contact term), (2) arc frame
+  04, (3) the side-rig card, (4) the close-ups.
+- 17:38 site lane: waves 2-3 received; wave 1 done locally on r47-site-next at 7ef9660a (flags off); waves 1-3 together ~100 min to
+  one r49 push; asked which horn-backs passed besides Acid (it saw A-polished-p2/horn-back-{ember,dust,poison,acid} on c2).
+- 17:40 c2: killed rc1-fix chunk 2 at 17:39 (mid-Ice; nothing written or committed); hero-light chunk 3 (Ice, Haze) on a7948164 from
+  17:40 (~87 min), chunk 4 (Fog) next; the pre-fix Ice hero-light kept as evidence in its scratch (evidence-prefix-ice/).
+- 17:44 sent: the site lane (the seven horn-backs and seven backs by path and commit; the trap: A-polished-p2/horn-back-acid.png at
+  06b829ce is the old Acid that failed 0/3, the passed one is A-polished-p2-backrig-acid/ at a1322583; the backs' bug check pending;
+  the dimensions as 1295 / 560 (flush) / 428 overall, 420 at the cabinet / "about 73 kg; about 64 kg with the horn lifted off",
+  modelled); the speaker lane (the 8.75 vs 8.9 sum; its stamp; the wides' notes (a)-(c) into its proof (1), by ~18:35 if it can);
+  c4 (after the turns and the merge, hold the wides for my go; if none yet, Ember wide alone and wait). 17:44 the brand lane (my
+  message said 17:45, ahead of the clock by under a minute): the
+  same dimensions for the Book (its 1293, 423 and 72.6), republish held for the regression punch list.
