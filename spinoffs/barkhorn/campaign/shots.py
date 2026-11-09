@@ -660,6 +660,15 @@ def site(frame, tint):
         # front unchanged. `back` goes off)
         s['lights']['back']['irradiance'] = 0.0
         s['lights']['back'].pop('power_w', None)
+    if frame == 'side' and 'kick' in s['lights']:
+        # (the tall gates' fold-in (1), 2026-11-09: the lower third of the right side mirrored the floor between the speaker
+        # and the black mirror card, which the card rule keeps 2.5 m out, too far to reach the lower face's reflections
+        # (they fall 12 to 21 deg and meet the floor first). The probe: 54 % of the right face mirrors the sweep at az 51
+        # to 60. In this view the kick lights that floor and next to nothing else: Poison proxy, the face's lower third
+        # 19/57/16 sat 0.72 with it, 5/47/4 sat 0.91 without; the upper face 116 to 115 green, the horn 139 to 133; the
+        # floor right of the speaker 243 to 201, the left 244 to 231. A lamp dimmed as a whole: the kick goes off here)
+        s['lights']['kick']['irradiance'] = 0.0
+        s['lights']['kick'].pop('power_w', None)
     cards_out_of_frame(s)
     return s
 
