@@ -97,11 +97,25 @@ SOLIDS.setdefault('acrylic-clear-formed', dict(title='Cast acrylic sheet, clear 
                                                'aluminium mould', density=1.19, usd_per_cm3=0.05))
 SOLIDS.setdefault('acrylic-opal-formed', dict(title='Cast acrylic sheet, volume-diffusing (opal), formed over an aluminium '
                                               'mould', density=1.19, usd_per_cm3=0.06))
+# Core B (2026-11-09): the outer ball in the speaker's TruCast code, the chart figure held at its 6 mm wall; the core
+# in Hemisphere's white opal, formed on its own mould (the 3 mm sphere's sheet about 1.8 x its area, and the forming:
+# about $25 to $40 a ball [E], the rate set for about $30)
+SOLIDS.setdefault('acrylic-trucast-formed', dict(title='Cast acrylic sheet 6 mm, tinted through in the speaker\'s TruCast '
+                                                 'code, drape-formed over an aluminium mould, polished both faces',
+                                                 density=1.19, usd_per_cm3=0.06))
+SOLIDS.setdefault('acrylic-opal-core', dict(title='Cast acrylic sheet 3 mm, white opal (Hemisphere\'s diffuser\'s), formed '
+                                            'over an aluminium core mould', density=1.19, usd_per_cm3=0.18))
 SOLIDS.setdefault('peek', dict(title='PEEK rod, unfilled', density=1.30, usd_per_cm3=0.35))
 
 GAP, LT, SKIN = 1.0, 2.5, 3.0          # the liner 1 mm in from the shell, 2.5 thick; the inner skin 3
 
 O = dict(R=80.0, shell=9.0, base=(120.0, 30.0), ring=8.0, rim_r=50.0, port=40.0)    # round 41: 30 again (48 in rounds 35 to 39)
+# Core B, the owner's choice (2026-11-09; launch/core-frost-options.md, round 9): a 6 mm outer ball polished both faces
+# round a Ø120 3 mm white opal core, its centre 12 below the outer's, its Ø40 opening on the grommet's top. The grommet
+# stays as drawn for A's 9 mm wall (its top at z 32.3). O_A is design A (the 9 mm ball frosted inside), the record:
+# orb_parts(O_A) builds it
+O_A = dict(O, design='A')
+O = dict(O, design='B', shell=6.0, core=(60.0, 3.0, 12.0), grommet_wall=9.0)   # core: R outside, wall, drop below
 
 ORB_LIGHT = None                       # set below from the ball's centre
 
@@ -391,12 +405,20 @@ def orb_parts(p=O):
     R, bd, bh, z_top, zc = orb_geometry(p)
     cup = Pos(0, 0, zc) * Sphere(R + 0.5)
     t = p['shell']
+    B_ = p.get('design', 'A') == 'B'
     port = cyl('z', (0, 0), p['port'], zc - R - 5, zc - R + 25)
     shell = ball(R, t, (0, 0, zc)) - port
     shell_r = ball(R, t - 0.4, (0, 0, zc)) - port
     frost_r = ball(R - t + 0.3, 0.3, (0, 0, zc)) - port
+    core = None
+    if B_:
+        # the core: R 60 outside, 3 thick, its centre 12 below the outer's, its own Ø40 opening at its foot over the
+        # window; the grommet's top (A's, z 32.3) stands 0.4 up into the opening (the core's outside meets r 20 at z 31.9)
+        rc, tc, dz = p['core']
+        zcc = zc - dz
+        core = ball(rc, tc, (0, 0, zcc)) - cyl('z', (0, 0), p['port'], zcc - rc - 5, zcc - rc + 25)
     gz0 = zc - math.sqrt(R ** 2 - (p['port'] / 2) ** 2)
-    gz1 = zc - math.sqrt((R - t) ** 2 - (p['port'] / 2) ** 2)
+    gz1 = zc - math.sqrt((R - p.get('grommet_wall', t)) ** 2 - (p['port'] / 2) ** 2)
     grommet = cyl('z', (0, 0), p['port'] - 0.4, gz0, gz1) - cyl('z', (0, 0), p['port'] - 6, gz0 - 1, gz1 + 1)
     hz = 2.5                                                  # the hatch's counterbore
     # the middle: the chassis (the LED's heat spreader, 50 across) under the board and the LED, the window above
@@ -482,14 +504,36 @@ def orb_parts(p=O):
     ring = eased(bd, bh, z_top, 2.0, bottom=False) - cup
     ring = ring - (cyl('z', (0, 0), 92.4, zs - 2, zs + 0.01) - cyl('z', (0, 0), 83.6, zs - 3, zs + 1))
     base = base - slot - pads
-    return [
-        Part('shell', shell, Machined('acrylic-formed', 'formed', setup_usd=1500.0), finish='body', group='ball',
-             pieces={'shell': (shell_r, 'body'), 'frost': (frost_r, 'liner')},
-             notes=['the ball: two hemispheres drape-formed from 10 mm tinted cast sheet on one aluminium mould (the '
-                    'production process; the prototypes are formed on it), their insides bead-blasted, joined at the '
-                    'equator with a polymerising acrylic cement (Acrifix 192 kind), the joint turned and polished: a '
-                    'faint line at the equator (to judge on the first sample); a 40 port cut at its underside. One part '
-                    'where there were three: the frost scatters because it faces air']),
+    if B_:
+        ball_parts = [
+            Part('shell', shell, Machined('acrylic-trucast-formed', 'formed', setup_usd=1500.0), finish='body', group='ball',
+                 notes=['Core B (the owner, 2026-11-09): the outer ball, R 80 outside, R 74 inside, polished both faces '
+                        '(no frost). Two hemispheres drape-formed from 6 mm (1/4 in) cast sheet in the speaker\'s TruCast '
+                        'code for the tint (Ember 2423, Dust 2422, Acid 9097, Poison 2092, Ice 2069, Haze 2287, Fog 0000, '
+                        'Smoke 2074), the chart figure held at the 6 mm wall, on the existing female mould [check with the '
+                        'former: the 6 mm wall must form on the 9 mm wall\'s mould]; joined at the equator round the core '
+                        'with a polymerising acrylic cement (Acrifix 192 kind), the joint turned and polished; the Ø40 '
+                        'port cut at its foot']),
+            Part('core', core, Machined('acrylic-opal-core', 'formed', setup_usd=1300.0), finish='liner', group='ball',
+                 notes=['Core B: the core, a Ø120 ball of 3 mm white opal cast acrylic (R 60 outside, R 57 inside), the '
+                        'same opal as Hemisphere\'s diffuser; its centre 12 below the outer ball\'s, its own Ø40 opening '
+                        'at its foot over the window, seated on the grommet\'s top. About 14 from the outer wall at its '
+                        'equator. Captive once the outer halves are joined round it; the grommet seals the gap for life. '
+                        'Formed: two halves on a core mould (about $1,300 [E]), about $25 to $40 a ball [E]. Or stock: '
+                        'a Ø120 x 3 opal acrylic sphere, if one is made [check a supplier], its opening cut to Ø40 '
+                        '(the BOM\'s option "stock core")']),
+        ]
+    else:
+        ball_parts = [
+            Part('shell', shell, Machined('acrylic-formed', 'formed', setup_usd=1500.0), finish='body', group='ball',
+                 pieces={'shell': (shell_r, 'body'), 'frost': (frost_r, 'liner')},
+                 notes=['the ball: two hemispheres drape-formed from 10 mm tinted cast sheet on one aluminium mould (the '
+                        'production process; the prototypes are formed on it), their insides bead-blasted, joined at the '
+                        'equator with a polymerising acrylic cement (Acrifix 192 kind), the joint turned and polished: a '
+                        'faint line at the equator (to judge on the first sample); a 40 port cut at its underside. One '
+                        'part where there were three: the frost scatters because it faces air']),
+        ]
+    return ball_parts + [
         Part('grommet', grommet, Machined('aluminium', 'lathe'), finish='anodised', group='ball',
              notes=['black anodised aluminium: lines the port, bonded with a two-part MMA adhesive (not cyanoacrylate). '
                     'Review 2026-11-01, to draw with the dock: it grows a Ø38 x 6 spigot under the ball with three 30 deg '
@@ -546,8 +590,8 @@ def orb_parts(p=O):
         Part('adapter', None, Bought('orb-adapter')),
         Part('screws', None, Bought('core-screws')),
         Part('tray', None, Bought('core-tray')),
-        Part('ball-two-layer', None, Bought('core-ball-two-layer'), option='two-layer ball'),
-    ]
+    ] + ([Part('core-stock', None, Bought('core-core-stock'), option='stock core')] if B_ else
+         [Part('ball-two-layer', None, Bought('core-ball-two-layer'), option='two-layer ball')])
 
 
 def orb_cable(ux, uy):
@@ -613,9 +657,16 @@ NOTES_DOME = [
 NOTES_ORB = [
     'Core (the Orb until round 35): a crystal ball, a 160 tinted ball low in the cup of a 120 x 30 base (round 41), 180 '
     'tall. The ball lifts off: the LED is under a sealed window in the base, so balls swap colour by hand.',
-    'One ball where there were three layers: tinted cast acrylic, two halves formed on one mould and joined at the '
-    'equator, their inside bead-blasted. The frost faces air, so it scatters; seen from outside it is behind the tint, '
-    'and the port that would show it faces the base.',
+    'Core B, the owner\'s choice (2026-11-09): a ball in a ball. The outer ball is 6 mm tinted cast acrylic, polished '
+    'both faces, two halves formed on the existing mould and joined at the equator; the Ø40 port at its foot. Inside it '
+    'the core, a Ø120 ball of 3 mm white opal acrylic (Hemisphere\'s opal), its centre 12 below the outer\'s, its own Ø40 '
+    'opening on the grommet\'s top: the LED lights the opal directly, and the core glows evenly. The core is captive '
+    'once the outer halves are joined round it, and the grommet seals the gap for life. Design A (one 9 mm ball frosted '
+    'inside) is in git and builds from orb_parts(O_A).',
+    'The same materials as the speakers: each tint\'s outer ball is cast in the speaker\'s TruCast code (Ember 2423, Dust '
+    '2422, Acid 9097, Poison 2092, Ice 2069, Haze 2287, Fog 0000, Smoke 2074), the chart figure held at the 6 mm wall: a '
+    'dosed batch per code, cast to match where stock will not hold it; the chips decide. Haze 2287 may be translucent '
+    '(Acme lists it "Violet - Translucent"): Haze is a custom cast for the speaker, and its outer ball would be too.',
     'Cordless (the owner, 2026-10-31): three button-top LiFePO4 18650 cells (Power Sonic PSL-FP-IFR18650EC class, 14.4 Wh) '
     'on bare spring contacts in bays milled round the LED, behind a hatch underneath on four captive screws, the user\'s '
     'to replace with standard cells. It charges on its dock or from USB-C underneath at 9 V (USB PD, the 20 W adapter '

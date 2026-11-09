@@ -1,6 +1,6 @@
 {
  "parts": {
-  "shell-shell": [
+  "shell": [
    -80.0,
    -80.0,
    23.0,
@@ -8,13 +8,13 @@
    80.0,
    180.4
   ],
-  "shell-frost": [
-   -71.3,
-   -71.3,
-   32.0,
-   71.3,
-   71.3,
-   171.7
+  "core": [
+   -60.0,
+   -60.0,
+   31.9,
+   60.0,
+   60.0,
+   148.4
   ],
   "grommet": [
    -19.8,
@@ -146,8 +146,8 @@
   ]
  },
  "finishes": {
-  "shell-shell": "body",
-  "shell-frost": "liner",
+  "shell": "body",
+  "core": "liner",
   "grommet": "anodised",
   "base": "trim",
   "ring": "anodised",

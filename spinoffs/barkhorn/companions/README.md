@@ -1720,7 +1720,16 @@ Code: `strata/scene.absorption` (the bpy rigs) and `lamps_cordless.speaker_deep`
     at its wall. It keeps the Ø40 port.
   - the inner ball is the core, Ø120 3 mm white opal (R 60-57), the same opal as Hemisphere's liner. Its centre is 12
     below the outer's, and its Ø40 opening seats on the grommet's top (`renders/2026-11-09/barkhorn/lamp-pictures-ab/core-b-section.png`).
-  - The CAD and BOM still draw A until they are rebuilt.
+  - The CAD and BOM draw B since 2026-11-09 (`crystal.orb_parts`, `out-orb-table`); A builds from `orb_parts(O_A)`
+    and stays in git. The grommet is A's, unchanged (top at z 32.3); the core's outside meets r 20 at z 31.9, so the
+    grommet's top stands 0.4 up into the core's opening (0.2 clear round it), and the core sits 2.6 off the outer wall
+    at its foot, about 14 at its equator.
+  - The BOM [E]: the outer ball about $34 (A's ball $47), the core about $30 formed on a core mould of about $1,300,
+    or about $12 as a stock Ø120 opal sphere if one exists (the option "stock core", in place of the formed core
+    [check a supplier]). Mass: outer 523 g, core 149 g, 672 g the two (A's ball 754 g).
+  - "The same materials" means the same TruCast codes as the speakers, the chart figure held at the wall: a dosed
+    batch per code, cast to match where stock will not hold it; the chips decide. Haze 2287 may be translucent (Acme
+    lists it "Violet - Translucent"): Haze is a custom cast for the speaker, and its outer ball would be the same.
 - **Core A (the record):**
   - the 9 mm ball is tinted at a third of the loading;
   - its inside face is bead-blasted. The frost's diffuse lobe carries the wall's own tint (`strata/scene.frosted`): no

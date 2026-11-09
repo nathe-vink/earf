@@ -2,7 +2,8 @@
 
 | item | make | qty | what | size | each, USD |
 |---|---|---|---|---|---|
-| shell | formed | 1 | Cast acrylic sheet, tinted through, drape-formed over an aluminium mould | 634 cm3, 170 x 170 x 167 | 1,546.84 |
+| shell | formed | 1 | Cast acrylic sheet 6 mm, tinted through in the speaker's TruCast code, drape-formed over an aluminium mould, polished both faces | 440 cm3, 170 x 170 x 167 | 1,534.01 |
+| core | formed | 1 | Cast acrylic sheet 3 mm, white opal (Hemisphere's diffuser's), formed over an aluminium core mould | 125 cm3, 130 x 130 x 127 | 1,329.78 |
 | grommet | lathe | 1 | Aluminium 6061 | 50 x 50 x 19 | 46.19 |
 | base | lathe | 1 | Cast acrylic tube, tinted through | 130 x 130 x 40 | 112.04 |
 | ring | lathe | 1 | Aluminium 6061 | 130 x 130 x 18 | 52.61 |
@@ -31,18 +32,18 @@
 | | USD |
 |---|---|
 | buy | 109 |
-| formed | 1,547 |
+| formed | 2,864 |
 | lathe | 360 |
 | mill | 148 |
-| total | 2,164 |
+| total | 3,481 |
 
 
 ## Options (each for 1, on top of the total above)
 
-### two-layer ball: about $28
+### stock core: about $12
 
 | item | make | qty | what | size | each, USD |
 |---|---|---|---|---|---|
-| ball-two-layer | buy | 1 | the shade former (to quote) OPTION (2026-11-01, launch/stock-tints-lamps.md), for Ember, Poison, Haze and Smoke if the chips show the 'deep' case or 3/8 in isn't stocked: the ball in two layers, 6 mm clear outside on the existing mould and a 3 mm (1/8 in) stock-tint inner ball, frosted inside, on a second, smaller mould, 1 mm apart, joined only at the equator joint and the port's grommet (no bond across the face). Per ball, on top of the single-layer ball: the inner ball's forming and sheet about $15 to $25, the second mould about $1,200 spread over a run of 200 (about $6) |  | 28.00 |
+| core-stock | buy | 1 | a lighting-globe maker (to find) [check] OPTION (Core B, 2026-11-09): IN PLACE OF the formed core line, not on top of it. A stock Ø120 x 3 mm white opal acrylic sphere (the kind sold as a replacement lamp globe), if one is made in a full sphere or with a neck that cuts back to the Ø40 opening [check a supplier: none confirmed, no part number]; about $8 to $15 a ball [E], with no core mould. Against the formed core (about $25 to $40 a ball [E] and a core mould of about $1,300): it saves about $20 to $25 a ball and the mould. The opal must match Hemisphere's diffuser [check the grade] |  | 12.00 |
 
 Budget figures: bought parts from the component library (dated retailer listings), made parts from the kit's stock rates: 25 % offcut on sheet parts, a handling charge a print, and a setup a machined line spread over its pieces. A shop's quote replaces them.
