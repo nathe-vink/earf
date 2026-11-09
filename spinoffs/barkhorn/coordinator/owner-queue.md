@@ -5158,3 +5158,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 18:01 sent the speaker lane: THE FLAGS ON BOTH RIGS (tall and hero-light), proved on Dust tall, Fog tall and Dust hero-light base
   crops, one SHA, now ahead of the wide rig (whose contact change is optional now; the seam stays); c4 to re-render the flagged
   talls Dust, Fog, Ice, Haze first. Sent c4 the same.
+- 18:02 GATE BOTTOM-EDGE SHEETS v2 complete (wf_7a92dd5b-f68; 3 judges, 25 min): EMBER WIDE (a) full frame SHOW 3/3 (0 px above
+  200 under the footprint; the bottom edge luminance <= 22; a red-black contact shadow ~30,0,0; one optional black card camera-right
+  for the grey-pink haze on the lower side face). DUST HERO-LIGHT HOLD 3/3: the red bar (hue 0-3, sat 0.70-0.94, ~15 px x ~250 px,
+  ~3,400-3,600 px; a pinker top highlight like a tube; an abrupt start 28 % in) reads as a lit strip at phone size; fix it with flags,
+  keep (a); (b) and (c) not to the founder. The third judge adds: the passed tall Dust has the same strip with the same hard start,
+  "so the same flag fix probably belongs there" (already sent at 18:01).
