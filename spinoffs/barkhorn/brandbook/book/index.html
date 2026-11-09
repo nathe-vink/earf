@@ -261,6 +261,8 @@ tr:last-child td { border-bottom: 0 }
 @media (min-width: 1240px) { .sheets { grid-template-columns: repeat(4, minmax(0, 1fr)) } }
 .sheet.co { grid-column: 1 / -1 }
 @media (min-width: 900px) { .sheet.co { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: start } }
+.habitats { display: grid; gap: clamp(14px, 2vw, 24px); grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)) }
+.habitats img { width: 100%; height: auto; display: block }
 .parked { list-style: none; margin: 0; padding: 0; display: grid; border-top: 1px solid var(--rule) }
 .parked li { display: grid; grid-template-columns: minmax(0, 12em) minmax(0, 1fr); gap: 4px 24px; padding: 14px 0; border-bottom: 1px solid var(--rule) }
 .parked li span { color: var(--muted) }
@@ -348,9 +350,10 @@ addEventListener('DOMContentLoaded', () => { if (matchMedia('(prefers-reduced-mo
       <div><h3>Why now</h3><p>Listening bars have spread from Tokyo to most large cities, and the habit has followed people home. Records came back to the living room. Interiors came back to color. And most high-end audio still arrives as a black box or a wood veneer. EARF answers them at once: color you can see through, a horn you can see into, light through the same material.</p></div>
     </div>
     <div class="pairml solo"><figure><img src="img/honest-mantle-day.jpg" alt="Mantle in Ember by day, on a pale seamless" loading="lazy" width="1600" height="1067"><figcaption><b>Mantle</b>, in development, shown in Ember. <span class="render">Render</span></figcaption></figure></div>
-    <div class="two">
+    <div class="habitats">
       <figure><img src="img/honest-ice-habitat.jpg" alt="Tropos in Ice standing in snow at dusk, a lit cabin and pines behind" loading="lazy" width="1200" height="1500"><figcaption><b>In snow.</b> Tropos in Ice, where its color began. <span class="render">Render</span></figcaption></figure>
       <figure><img src="img/honest-dust-habitat.jpg" alt="Tropos in Dust on a desert floor, mesas behind" loading="lazy" width="1200" height="1500"><figcaption><b>In the desert.</b> Tropos in Dust, the speaker set into the ground. <span class="render">Render</span></figcaption></figure>
+      <figure><img src="img/honest-fog-habitat.jpg" alt="Tropos in Fog on a grassy rise above a sea of mist, a rock beside it" loading="lazy" width="1200" height="1500"><figcaption><b>Above the mist.</b> Tropos in Fog, water-clear, almost not there. <span class="render">Render</span></figcaption></figure>
     </div>
     <div class="prose">
       <p class="eyebrow">What the brand holds to</p>
