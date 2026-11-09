@@ -266,6 +266,15 @@ def canopy_holes(bpy_, open_frac, spec, cell=0.3):
           + (f', a clearing {2 * clr[2]:.0f} m across at canopy-local ({clr[0]:.1f}, {clr[1]:.1f}), rim +-{clr[3]} m' if clr else ''))
 
 
+def out_of_frame(pts):
+    """True when a flat quad, its corners projected by world_to_camera_view, is wholly outside the frame: every corner
+    behind the camera or past the same edge (a corner test alone passes a card wider than the view that crosses it)."""
+    if all(p.z <= 0 for p in pts):
+        return True
+    return (all(p.x < 0 for p in pts) or all(p.x > 1 for p in pts) or all(p.y < 0 for p in pts)
+            or all(p.y > 1 for p in pts))
+
+
 def cards(bpy_, linked, specs):
     """Real cards a grip would set: each W x H m, its centre Z m up, on the ground plan SIDE_DEG off the line from the
     speaker to the camera (0: between them, under the lens; +90: camera-right), square to the speaker's middle, pushed
@@ -295,8 +304,10 @@ def cards(bpy_, linked, specs):
             f.rotation_euler = (mid - f.location).to_track_quat('Z', 'Y').to_euler()
             bpy_.context.view_layer.update()
             pts = [world_to_camera_view(sc, cam, f.matrix_world @ Vector(c)) for c in ((-.5, -.5, 0), (.5, -.5, 0), (.5, .5, 0), (-.5, .5, 0))]
-            if not any(0 <= p.x <= 1 and 0 <= p.y <= 1 and p.z > 0 for p in pts):
+            if out_of_frame(pts):
                 break
+        else:
+            print(f'card: {kind} could not be set out of frame on this bearing'); f.hide_render = True
         print(f'card: {kind} {w} x {h} m, centre {z} m up, {side} deg off the camera line, at {[round(c, 2) for c in f.location]}')
 
 
@@ -332,8 +343,10 @@ def scrim(bpy_, linked, spec):
         f.location = c0 + z * (d + 0.25 * k)
         bpy_.context.view_layer.update()
         pts = [world_to_camera_view(sc, cam, f.matrix_world @ Vector(v)) for v in ((-.5, -.5, 0), (.5, -.5, 0), (.5, .5, 0), (-.5, .5, 0))]
-        if not any(0 <= p.x <= 1 and 0 <= p.y <= 1 and p.z > 0 for p in pts):
+        if out_of_frame(pts):
             break
+    else:
+        print('scrim: could not be set out of frame'); f.hide_render = True
     print(f'scrim: {w} x {h} m passing {t} of the beam, {round((f.location - c0).length, 2)} m out on the sun line at {[round(v, 2) for v in f.location]}')
 
 
