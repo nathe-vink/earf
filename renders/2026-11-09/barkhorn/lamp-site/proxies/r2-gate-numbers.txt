@@ -1,0 +1,30 @@
+dome-red    Ember  L 0.380 paper 0.367 C 0.145 h  26.8 clip 0.000  h:PASS C:FAIL clip0:PASS face>paper:PASS
+dome-orange Dust   L 0.535 paper 0.368 C 0.102 h  48.2 clip 0.000  h:PASS clip0:PASS face>paper:PASS
+dome-amber  Acid   L 0.484 paper 0.367 C 0.079 h  72.2 clip 0.000  h:PASS clip0:PASS face>paper:PASS
+dome-green  Poison L 0.561 paper 0.368 C 0.116 h 139.7 clip 0.000  h:PASS C:PASS clip0:PASS face>paper:PASS
+dome-blue   Ice    L 0.489 paper 0.367 C 0.082 h 204.7 clip 0.000  h:PASS C:FAIL clip0:PASS face>paper:PASS
+dome-violet Haze   L 0.310 paper 0.367 C 0.095 h 307.6 clip 0.000  h:PASS C:PASS clip0:PASS face>paper:FAIL
+dome-ice    Fog    L 0.611 paper 0.368 C 0.020 h 138.0 clip 0.000  C:PASS clip0:PASS face>paper:PASS
+dome-black  Smoke  L 0.232 paper 0.367 C 0.013 h  75.5 clip 0.000  C:PASS clip0:PASS face>paper:FAIL
+  dE red-orange 0.167 PASS
+  dE orange-amber 0.067 FAIL
+  dE amber-green 0.136 PASS
+  dE green-blue 0.131 PASS
+  dE blue-violet 0.227 PASS
+  dE violet-ice 0.322 PASS
+  dE ice-black 0.380 PASS
+orb-red    Ember  L 0.500 paper 0.362 C 0.164 h  23.7 clip 0.000  h:FAIL C:PASS clip0:PASS face>paper:PASS
+orb-orange Dust   L 0.661 paper 0.365 C 0.098 h  48.1 clip 0.000  h:PASS clip0:PASS face>paper:PASS
+orb-amber  Acid   L 0.615 paper 0.364 C 0.086 h  71.9 clip 0.000  h:PASS clip0:PASS face>paper:PASS
+orb-green  Poison L 0.686 paper 0.365 C 0.109 h 138.2 clip 0.000  h:PASS C:PASS clip0:PASS face>paper:PASS
+orb-blue   Ice    L 0.605 paper 0.363 C 0.103 h 201.5 clip 0.000  h:PASS C:PASS clip0:PASS face>paper:PASS
+orb-violet Haze   L 0.431 paper 0.361 C 0.101 h 311.7 clip 0.000  h:PASS C:PASS clip0:PASS face>paper:PASS
+orb-ice    Fog    L 0.732 paper 0.367 C 0.019 h 129.3 clip 0.000  C:PASS clip0:PASS face>paper:PASS
+orb-black  Smoke  L 0.356 paper 0.361 C 0.017 h  76.5 clip 0.000  C:PASS clip0:PASS face>paper:FAIL
+  dE red-orange 0.182 PASS
+  dE orange-amber 0.060 FAIL
+  dE amber-green 0.130 PASS
+  dE green-blue 0.138 PASS
+  dE blue-violet 0.242 PASS
+  dE violet-ice 0.325 PASS
+  dE ice-black 0.377 PASS
