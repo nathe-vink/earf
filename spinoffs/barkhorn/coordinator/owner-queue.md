@@ -5875,3 +5875,14 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   My reading: the slots continue about every 15 min (18:45, 18:59, 19:14, 19:29, 19:46), the first push after each wins, and the site's
   pushes were never first: a rate limit. 19:49 sent: the freeze ~15 min before its one push, push on my "go", check within 2 min; if a
   clean freeze still gets nothing, it goes to the owner (his dashboard and plan); keep the turn PNGs out of the deployed root.
+- 19:50 GATE BACKS PROOF (wf_73733377-178), founder + photographer both HOLD (skeptic pending): the cabinet, mark and plate unchanged;
+  a crisp light edge on the backdrop (the wash); the horn's back flat and two-tone (upper-right 0.89 -> 0.64, rust 21-22° vs amber
+  27-29°; the photographer would accept it as honest, the founder wants the glow back; both: real lights only, not horn-rim higher;
+  the photographer's way: light the wall behind the horn, bright-field); a new pale line on the upper-right crease (+22). 19:50 sent
+  the speaker lane, after the tall/wide SHA: feather the wash's edge; a real lamp out of frame lighting the wall behind the horn; clean
+  the crease (check Poison and Ember); a check render with both lamp bodies visible, proving them out of frame.
+- 19:50 GATE NIGHT PROXY 6 (wf_c89a6b4d-ebc), founder + photographer both HOLD: "the right picture, made honestly, not yet ready". The
+  slash is a true reflection of the dome (core 252 = the dome's 251), clipped; the dome a flat 251 plateau. 19:50 sent the Mantle lane:
+  regrade from the EXR with a longer, softer highlight shoulder (+ only a real lens's halation; a darker exposure blended on the shade
+  if needed; never a dimmer lamp, a clamp or a lower ceiling); the pendant 5 cm right for the X arms and blue arc (the over-lit cabinet
+  top, L 48 vs 12); check the rug's gradient against the reflector's spread; then proxy 7.
