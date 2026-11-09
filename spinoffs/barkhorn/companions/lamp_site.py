@@ -122,6 +122,8 @@ def build(frame, samples, scale):
     black_acrylic = SC.principled('black-acrylic', '#0A0A0B', 0.04)
     an = SC.anodised()
     steel = SC.principled('steel', '#C9C9C6', 0.25, 1.0, bump=(2500.0, 0.6))
+    # the bore's reflector: high-reflectance aluminium, faceted (crystal.py): a bright, low-roughness metal
+    refl = SC.principled('reflector', os.environ.get('REFL_COL', '#F2F2F0'), float(os.environ.get('REFL_R', '0.12')), 1.0)
     cap = SC.principled('cap', '#3A3A3E', 0.45, metallic=0.3, bump=(4000.0, 0.15))
 
     def hemisphere(tint, x, rim_z, y=0.0):
@@ -163,12 +165,19 @@ def build(frame, samples, scale):
         part('out-dome-pendant', 'ring', SC.principled('peek', '#151515', 0.6), c)
         part('out-dome-pendant', 'pins', steel, c)
         part('out-dome-pendant', 'gaskets', SC.principled('silicone', '#111111', 0.7), c)
-        part('out-dome-pendant', 'reflector', steel, c)
+        if os.environ.get('HEMI_REFL', '1') == '1':   # (diagnostic switch)
+            part('out-dome-pendant', 'reflector', refl, c)
         part('out-dome-pendant', 'cord', SC.principled('braid', '#121212', 0.75, bump=(1200.0, 0.5)), c)
-        ld = bpy.data.lights.new(f'cob-{tint}', 'AREA'); ld.shape = 'DISK'; ld.size = 0.17; ld.energy = 490.0 * WLM
-        ld.spread = math.radians(92.0); ld.color = bb
+        # round 3 (the Mantle lane's flag, the coordinator 18:13): the COB as the CAD builds it, a Vero SE 10's ~11 mm
+        # emitting face at the top of the 46 bore (its face 82 above the rim, 22 up from the bore's mouth at 60), the
+        # faceted reflector round it, the cut-off from that geometry, not a spread setting. Of the COB's ~575 lm, the
+        # liner's 145 lm is its own emission above; the other ~430 lm leave the COB here, and the bore and reflector
+        # take what they really take
+        part('out-dome-pendant', 'cob', SC.principled('cob-body', '#2A2A2A', 0.5), c)
+        ld = bpy.data.lights.new(f'cob-{tint}', 'AREA'); ld.shape = 'DISK'; ld.size = 0.011; ld.energy = 430.0 * WLM
+        ld.color = bb
         ob = bpy.data.objects.new(f'cob-{tint}', ld); bpy.context.scene.collection.objects.link(ob)
-        ob.location = (x, y, rim_z + 0.004)
+        ob.location = (x, y, rim_z + 0.0815)
 
     def core(tint, x, floor_z, y=0.0, rot=0.0):
         """Core A as drawn, on its dock, lit, the dock's underside on floor_z at (x, y)."""

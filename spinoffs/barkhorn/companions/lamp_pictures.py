@@ -367,10 +367,14 @@ def build(frame, samples, scale):
             # opal from the crown, so the dome glows in its tint and lights the wall
             # round 6: the table lit from a disc the size of the opal's mouth (a broad source: a soft bowl shadow), within
             # the louvre's cut-off
-            ld = bpy.data.lights.new('cob', 'AREA'); ld.shape = 'DISK'; ld.size = 0.17; ld.energy = float(os.environ.get('COB_W', '2.0')) * 1.6   # round 8: the pool under the lamp
-            ld.spread = math.radians(92.0); ld.color = blackbody(cct)
+            # (2026-11-09, the Mantle lane's flag: the COB as the CAD builds it, not a 170 mm disc at the mouth: a Vero
+            # SE 10's ~11 mm face at the top of the 46 bore, 82 above the rim, the reflector round it giving the
+            # cut-off. Of ~575 lm, the liner's 145 is its emission; ~430 lm leave the COB here, 0.0065 W a lumen)
+            part('out-dome-pendant', 'cob', SC.principled('cob-body', '#2A2A2A', 0.5), rim)
+            ld = bpy.data.lights.new('cob', 'AREA'); ld.shape = 'DISK'; ld.size = 0.011; ld.energy = 430.0 * 3.2 / 490.0
+            ld.color = blackbody(cct)
             ob = bpy.data.objects.new('cob', ld); bpy.context.scene.collection.objects.link(ob)
-            ob.location = (0, 0, rim + 0.004)   # round 11: seen in the glaze and the glass (ruling 1)
+            ob.location = (0, 0, rim + 0.0815)
             # (round 13: the spill is now the liner's own emission, above)
             pass
         # round 6 (the coordinator, 2026-11-03: the pendant too small): one shared camera for the day and the night,

@@ -1,0 +1,15 @@
+dome-red    Ember  L 0.378 paper 0.365 C 0.144 h  26.9 clip 0.000  h:PASS C:FAIL clip0:PASS face>paper:PASS
+dome-orange Dust   L 0.533 paper 0.366 C 0.102 h  48.1 clip 0.000  h:PASS clip0:PASS face>paper:PASS
+dome-amber  Acid   L 0.483 paper 0.366 C 0.079 h  72.2 clip 0.000  h:PASS clip0:PASS face>paper:PASS
+dome-green  Poison L 0.560 paper 0.366 C 0.116 h 139.8 clip 0.000  h:PASS C:PASS clip0:PASS face>paper:PASS
+dome-blue   Ice    L 0.488 paper 0.366 C 0.082 h 204.9 clip 0.000  h:PASS C:FAIL clip0:PASS face>paper:PASS
+dome-violet Haze   L 0.308 paper 0.365 C 0.094 h 307.5 clip 0.000  h:PASS C:PASS clip0:PASS face>paper:FAIL
+dome-ice    Fog    L 0.609 paper 0.366 C 0.020 h 137.9 clip 0.000  C:PASS clip0:PASS face>paper:PASS
+dome-black  Smoke  L 0.231 paper 0.365 C 0.013 h  75.8 clip 0.000  C:PASS clip0:PASS face>paper:FAIL
+  dE red-orange 0.167 PASS
+  dE orange-amber 0.067 FAIL
+  dE amber-green 0.136 PASS
+  dE green-blue 0.132 PASS
+  dE blue-violet 0.226 PASS
+  dE violet-ice 0.322 PASS
+  dE ice-black 0.379 PASS
