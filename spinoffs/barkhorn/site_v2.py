@@ -47,8 +47,11 @@ class Page:
 
     def done(self):
         self.check()
-        if self.styles:
-            self.rest += '\n<style>' + ''.join(self.styles) + '</style>'
+        if self.styles:      # right after the page's own sheet, so the first paint has them (the hero moved: CLS 0.21)
+            i = self.rest.find('</style>')
+            assert 0 <= i < self.rest.find('<header'), 'site_v2: the page sheet'
+            i += len('</style>')
+            self.rest = self.rest[:i] + '\n<style>' + ''.join(self.styles) + '</style>' + self.rest[i:]
         return self.head, self.rest
 
     def section(self, sid):
@@ -587,7 +590,7 @@ def pages(web):
         os.makedirs(os.path.dirname(f), exist_ok=True)
         open(f, 'w').write(page)
     if web.V2 or web.HOME_V2:
-        open(os.path.join(web.SITE, '404.html'), 'w').write(NOT_FOUND)
+        open(os.path.join(web.SITE, '404.html'), 'w').write(not_found(open(os.path.join(web.SITE, 'index.html')).read()))
     elif os.path.exists(os.path.join(web.SITE, '404.html')):
         os.remove(os.path.join(web.SITE, '404.html'))
     if getattr(web, 'RC', False):              # the candidate ships only the files its pages load (every deployed file)
@@ -596,19 +599,20 @@ def pages(web):
             shutil.rmtree(os.path.join(web.SITE, 'press'))                 # the held press kit: not deployed
         text = ''.join(open(f).read() for f in glob.glob(os.path.join(web.SITE, '**', '*.html'), recursive=True))
         used = set(re.findall(r'img/[\w/.-]+\.(?:jpg|jpeg|png|webp|avif|svg|gif|mp4|webm)', text))
-        prefixes = set(re.findall(r'img/([\w/-]*)\$\{', text))           # pictures a script names from a pattern
+        pats = [re.compile('img/' + re.escape(a) + r'[\w-]+' + re.escape(b) + '$') for a, b in
+                set(re.findall(r'img/([\w/-]*)\$\{[^}]*\}([\w./-]*)', text))]   # pictures a script names from a pattern
         for f in glob.glob(os.path.join(web.IMG, '**', '*'), recursive=True):
             if os.path.isdir(f):
                 continue
             rel = 'img/' + os.path.relpath(f, web.IMG).replace(os.sep, '/')
-            if rel not in used and not any(x and rel.startswith('img/' + x) for x in prefixes) and not rel.endswith(('.mp4', '.webm')):   # the opening's film
+            if rel not in used and not any(x.match(rel) for x in pats) or re.search(r'img/icon-smoke-', rel):
                 os.remove(f)
         for d in sorted(glob.glob(os.path.join(web.IMG, '**', ''), recursive=True), reverse=True):
             if os.path.isdir(d) and not os.listdir(d):
                 os.rmdir(d)
         left = [os.path.relpath(f, web.SITE) for f in glob.glob(os.path.join(web.SITE, '**', '*'), recursive=True)]
         bad = [f for f in left if re.search(r'(^press/|img/(?:(?:dome|orb)-|lamps-(?:orbs|domes)|lamp-(?:orb|dome)|hero[.-]|facade|room|macro-|turn-|spin/'
-                                            r'|tt-|ga-|(?:red|orange|amber|green|blue|violet|ice|black)-(?:on|off|studio|back|amp|horn|inside|reel|habitat))|-smoke\.html$)', f)]
+                                            r'|tt-|ga-|icon-smoke-|(?:red|orange|amber|green|blue|violet|ice|black)-(?:on|off|studio|back|amp|horn|inside|reel|habitat))|-smoke\.html$)', f)]
         assert not bad, ('site_v2: rc deploys', bad[:12])
 
 
@@ -764,6 +768,8 @@ def addresses(web):
            '/contact': ('contact', 'Contact · EARF', 'Write to us: hello@earf.world. Everything is made to order, so we quote rather than list.',
                         'img/rc/og-home.jpg' if rc else 'img/hero-1200.jpg', 'Tropos in seven colors' if rc else 'The eight Tropos speakers on a curve')}
     for k, num, name, *_ in web.CLOUDS:
+        if rc and k == 'black':                  # Smoke is not a current color: no address
+            continue
         low = name.lower()
         out[f'/tropos/{low}'] = (f'speaker-{low}', None, None, None, None)     # its title, words and card from its /s/ page
         out[f'/colors/{low}'] = (f'color-{low}', None, None, None, None)
@@ -801,6 +807,7 @@ def apply(web, head, rest):
         rc(p, web)
         rc_fixes(p, web)
         rc_waves(p, web)
+        rc3(p, web)
         p.banned = BANNED_RC
     return p.done()
 
@@ -819,11 +826,26 @@ NOT_FOUND = """<!doctype html>
 <title>Nothing here · EARF</title><meta name="robots" content="noindex, nofollow"><link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <style>:root { --page: #F4F1EC; --ink: #1C1A18; --muted: #5E5A53 } body { margin: 0; background: var(--page); color: var(--ink);
 font: 18px/1.55 'Instrument Sans', 'Helvetica Neue', Arial, sans-serif } header, main { max-width: 1240px; margin: 0 auto; padding: 20px 16px }
-header a { color: var(--ink); font-weight: 700; letter-spacing: .06em; text-decoration: none } h1 { font-size: clamp(40px, 6vw, 72px); letter-spacing: -0.03em; margin: 18vh 0 24px }
+h1 { font-size: clamp(40px, 6vw, 72px); letter-spacing: -0.03em; margin: 18vh 0 24px }
 nav a { color: var(--ink); margin-right: 24px; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px }</style></head>
 <body><header><a href="/">EARF</a></header><main><h1>Nothing here.</h1>
 <nav><a href="/tropos">Tropos</a><a href="/lighting">Lighting</a><a href="/mantle">Mantle</a></nav></main></body></html>
 """
+
+
+def not_found(index):
+    """The 404: the site's header (the globe and the wordmark) and its font, taken from the built page, and the four links."""
+    fonts = '\n'.join(m.group(0).replace('url(fonts/', 'url(/fonts/') for m in re.finditer(r'@font-face \{[^}]*\}', index) if 'Instrument Sans' in m.group(0))
+    globe = re.search(r'\.brand \.globe \{ width: 42px[^}]*\}', index)
+    brand = re.search(r'<a class="brand" href="#top"[^>]*>.*?</a>', index, re.S)
+    assert fonts and globe and brand, 'not_found: header'
+    head = brand.group(0).replace('href="#top"', 'href="/"')
+    style = (fonts + '\n.brand { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none }\n'
+             + globe.group(0) + '\n.brand svg { display: block; height: 22px; width: auto }\n'
+             '@media (max-width: 700px) { .brand svg { height: 18px } .brand .globe { width: 36px; height: 36px } }')
+    return (NOT_FOUND.replace('<header><a href="/">EARF</a></header>', f'<header>{head}</header>')
+            .replace('<a href="/mantle">Mantle</a></nav>', '<a href="/mantle">Mantle</a><a href="/contact">Contact</a></nav>')
+            .replace('</style>', '\n' + style + '</style>'))
 
 
 def rc_cards(web):
@@ -1048,8 +1070,8 @@ def v2_fixes(p, web):
     rx(r'<dt>Width</dt><dd>625[\s ]mm at the horn, 560[\s ]mm at the cabinet</dd>', f'<dt>Width</dt><dd>560{NB}mm, the horn flush with the cabinet</dd>')
     p.sub("['Size', '1293 high, 625 wide, 423 deep (mm)']", "['Size', '1295 high, 560 wide, 428 deep (mm)']")
     # 6. the weight: to follow, on every page
-    rx(r'About 72[\s\u00a0]kg; 62[\s\u00a0]kg with the horn lifted off', f'About 73{NB}kg; about 64{NB}kg with the horn lifted off (modelled)')
-    p.rest = p.rest.replace("'To follow with the final horn'", "'About 73 kg (modelled)'")
+    rx(r'About 72[\s\u00a0]kg; 62[\s\u00a0]kg with the horn lifted off', f'About 73{NB}kg; about 64{NB}kg with the horn lifted off (modeled)')
+    p.rest = p.rest.replace("'To follow with the final horn'", "'About 73 kg (modeled)'")
     # 7. the power: 125 W a channel is the FA122 into 4 ohms; Tropos's woofer is 8 ohms (about 75 W)
     rx(r'Hypex FusionAmp FA122, built in: two channels of 125 W, crossed at 1 kHz in its DSP',
        'Hypex FusionAmp FA122, built in: 125 W a channel into 4 &Omega;, about 75 W into the 8 &Omega; woofer; crossed at 1 kHz in its DSP')
@@ -1326,6 +1348,120 @@ def rc_waves(p, web):
 .lamps-day { display: grid; justify-items: start; padding-inline: max(16px, calc((100vw - 1240px) / 2 + 16px)) } .lamps-day figcaption { padding-inline: 0 !important }
 /* Fog's swatch: a circle with a hairline */
 .swatches a, .swatches .coin-dot { border-radius: 50% } .swatches .coin-dot[style*="--i:6"] { box-shadow: inset 0 0 0 1px #9A958D }
+""")
+
+
+def rc3(p, web):
+    """The RC2 review (five lenses, the coordinator 2026-11-09 18:41): the punch list for RC3."""
+    import os
+    from PIL import Image
+    names = {k: name for k, num, name, *_ in web.CLOUDS}
+    HAB_ALT = {'blue': 'Tropos in Ice, out in the snow at dusk', 'orange': 'Tropos in Dust, on rippled sand among desert buttes',
+               'ice': 'Tropos in Fog, in the grass on a hillside, in fog at dawn'}
+    HAB_CAP = {'blue': 'Out in the snow at dusk.', 'orange': 'On rippled sand among desert buttes.', 'ice': 'In the grass on a hillside, in fog at dawn.'}
+    # --- 1. home, the lamps: the picture left, the two lamps' names beside it, one line each, as links
+    m = re.search(r'<figure class="strip lamps-day"><img (.*?)><figcaption class="wrap">(.*?)</figcaption></figure>', p.rest, re.S)
+    assert m, 'rc3: lamps-day'
+    p.rest = (p.rest[:m.start()] + '<div class="wrap lamps-home"><figure class="lamps-day"><img ' + m.group(1).replace('sizes="(max-width: 700px) 100vw, 50vw"', 'sizes="(max-width: 860px) 100vw, 540px"')
+              + '><figcaption>' + m.group(2) + '</figcaption></figure>'
+              '<ul class="lamp-names"><li><a href="#hemisphere-ember">Hemisphere</a>, a pendant.</li>'
+              '<li><a href="#core-ember">Core</a>, a cordless table lamp.</li></ul></div>' + p.rest[m.end():])
+    # --- 2. home: the Tropos block shows the back (a view the hero doesn't); the Ice habitat mirrored
+    p.sub('<figure class="sound-still"><img src="img/rc/blue-tall.webp" width="1000" height="1250" loading="lazy" alt="Tropos in Ice, its cover off, on a pale seamless">',
+          '<figure class="sound-still"><img src="img/rc/red-back.webp" width="880" height="1100" loading="lazy" alt="Tropos in Ember from behind: the amplifier plate on its back, the horn on four bronze posts">')
+    p.sub('<div class="wrap hab-grid"><figure><img src="img/rc/blue-habitat.webp" width="1200" height="1500" loading="lazy" alt="Tropos in Ice, out in the snow at dusk"></figure>',
+          '<div class="wrap hab-grid hab-mirror"><figure><img src="img/rc/blue-habitat.webp" width="1200" height="1500" loading="lazy" alt="' + HAB_ALT['blue'] + '"></figure>')
+    p.sub('<p class="beat-line">' + next(line for k, num, name, icon, acr, line, *_ in web.CLOUDS if k == 'blue') + '</p><p class="foot-note"><i class="render">Render</i></p>',
+          '<p class="beat-line">' + next(line for k, num, name, icon, acr, line, *_ in web.CLOUDS if k == 'blue') + '</p><p class="foot-note">' + HAB_CAP['blue'] + ' <i class="render">Render</i></p>')
+    # --- 3. a color's page: Tropos in its 4:5 tall frame, two columns, no 1:2 card in a 4:5 box; no "Every line" note
+    p.sub("document.getElementById('c-in-note').textContent = `Every line, in ${c.tint.toLowerCase()} acrylic.`;",
+          "document.getElementById('c-in-note').textContent = '';")
+    p.sub("document.getElementById('c-products').replaceChildren(...PRODUCTS.filter(Pr => Pr.id === 'speaker' && Pr.views(k)).map(Pr => pcard(Pr, k)));",
+          "{ const low = c.name.toLowerCase(), b = el('div', { class: 'c-tropos' },\n"
+          "    `<a class=\"ph\" href=\"#speaker-${low}\"><img src=\"img/rc/${k}-tall.webp\" width=\"1000\" height=\"1250\" alt=\"Tropos in ${c.name}\"></a>` +\n"
+          "    `<div><h3><a href=\"#speaker-${low}\">Tropos in ${c.name}</a></h3><p class=\"line\">A horn speaker in cast acrylic.</p><a class=\"more\" href=\"#speaker-${low}\">See Tropos in ${c.name}</a></div>`);\n"
+          "  document.getElementById('c-products').replaceChildren(b); }")
+    p.sub('<div class="pgrid" id="c-products"></div>', '<div id="c-products"></div>')
+    # --- 4. galleries: each view at its own ratio for Mantle (3:2, no bands); the horn-backs cut to 4:5
+    p.sub("stage.style.background = P.id === 'speaker' ? ground(v) : 'transparent';",
+          "stage.style.background = P.id === 'speaker' ? ground(v) : 'transparent'; if (P.id === 'turntable') stage.style.setProperty('aspect-ratio', '3 / 2', 'important'); else stage.style.removeProperty('aspect-ratio');")
+    for k in RC_KEYS:
+        src = 'renders/2026-11-04/barkhorn/rollout/' + ('A-polished-p2-backrig-acid/horn-back-acid.png' if k == 'amber' else f'A-polished-p2/horn-back-{names[k].lower()}.png')
+        im = Image.open(os.path.join(web.ROOT, src)).convert('RGB').crop((270, 0, 990, 900))
+        im.save(os.path.join(web.SITE, f'img/rc/{k}-horn-back.webp'), 'WEBP', quality=82)
+        im.resize((168, 210)).save(os.path.join(web.SITE, f'img/rc/{k}-horn-back-th.webp'), 'WEBP', quality=80)
+    n = p.rest.count('"w":1200,"h":900,"th":"img/rc/')
+    p.rest = re.sub(r'("src":"img/rc/[a-z]+-horn-back\.webp","w":)1200,"h":900', r'\g<1>720,"h":900', p.rest)
+    assert n == 7 and '-horn-back.webp","w":720' in p.rest, ('rc3: horn-backs', n)
+    # --- 5. words that repeat
+    p.sub('<div class="wrap hero-cap"><span>Hi-fi and lighting in cast acrylic.</span><i class="render">Render</i></div>',
+          '<div class="wrap hero-cap"><i class="render">Render</i></div>')
+    p.sub('<p>A pendant and a table lamp in the speakers&rsquo; acrylic, frosted inside, so the color glows and the source never shows. Every shade comes off by hand.</p>',
+          '<p>A pendant and a table lamp, frosted inside, so the color glows and the source never shows. Every shade comes off by hand.</p>')
+    p.sub('<div class="pt-body"><h3>Mantle<small>Turntable</small></h3><p class="line">A turntable in cast acrylic.</p>',
+          '<div class="pt-body"><h3>Mantle<small>Turntable</small></h3>')
+    # --- 6. one price line, in the particulars too
+    n = p.rest.count('Set at launch; each pair is made to order')
+    assert n >= 1, 'rc3: price row'
+    p.rest = p.rest.replace('Set at launch; each pair is made to order', 'Price on request. Each pair is made to order.')
+    # --- 7. the habitat reserves its space
+    p.sub('<figure class="c-hab" id="c-hab" hidden><img alt=""><figcaption><i class="render">Render</i></figcaption></figure>',
+          '<figure class="c-hab" id="c-hab" hidden><img alt="" width="1200" height="1500"><figcaption><span id="c-hab-cap"></span> <i class="render">Render</i></figcaption></figure>')
+    p.sub("if (c.hab) { const im = f.querySelector('img'); im.src = c.hab; im.alt = c.hab_alt; }",
+          "if (c.hab) { const im = f.querySelector('img'); im.src = c.hab; im.alt = c.hab_alt; document.getElementById('c-hab-cap').textContent = c.hab_cap; }")
+    # --- 8. American spelling
+    # --- 11. alts and labels
+    p.rest = re.sub(r'aria-label="([A-Z][a-z]+), up close"', r'aria-label="Tropos in \1"', p.rest)
+    p.rest = re.sub(r'(<img class="off" src="img/rc/[a-z]+-card\.webp" width="625" height="1250") alt="([A-Z][a-z]+) with its cover off"', r'\1 alt="Tropos in \2"', p.rest)
+    # --- 12. the habitats say what's shown, the same words everywhere
+    i = p.rest.index('const D = ') + len('const D = ')
+    j = p.rest.index(', BY = Object', i)
+    import json
+    D = json.loads(p.rest[i:j])
+    for c in D['clouds']:
+        if c.get('hab'):
+            c['hab_alt'] = HAB_ALT[c['k']]; c['hab_cap'] = HAB_CAP[c['k']]
+    for L in D['lamps'].values():          # 21. the lamps' thumb is the picture already shipped
+        for col in L['colours'].values():
+            col['views']['unlit']['th'] = 'img/lamps-unlit-800.jpg'
+    for col in D['tt']['colours'].values():
+        col['card'] = dict(col['card'], src=MANTLE['wide'], w=1200, h=800)
+    p.rest = p.rest[:i] + json.dumps(D, separators=(',', ':')) + p.rest[j:]
+    p.rest = re.sub(r"\['habitat', 'Out', c => `\$\{c\.name\}\. \$\{c\.line\}`\]",
+                    "['habitat', 'Out', c => c.hab_alt || `${c.name}, out`, c => c.hab_cap || `${c.name}. ${c.line}`]", p.rest, count=1)
+    assert 'c => c.hab_alt ||' in p.rest, 'rc3: habitat words'
+    # --- 17. drawn to be made
+    p.sub('Built to the drawings: the cabinet and its horn in the same tinted acrylic,\n        the back screwed to the braces. The first pair is made the way every pair will be.',
+          'Built to the drawings, the back screwed to the braces. The first pair is made the way every pair will be.')
+    # --- 19. an old Smoke address on a hash change goes where the first load sends it
+    p.sub("function route() {\n  let h = location.hash.slice(1);",
+          "function route() {\n  let h = location.hash.slice(1);\n"
+          "  const sm = /^(speaker|dome|orb|hemisphere|core|mantle|turntable|color|colour)-smoke$/.exec(h);   // Smoke: not a current color\n"
+          "  if (sm) { h = { speaker: 'speakers', mantle: 'turntable', turntable: 'turntable', color: 'top', colour: 'top' }[sm[1]] || 'lighting'; history.replaceState(null, '', '#' + h); }")
+    # --- 21. no dark-only pictures named where nothing dark is shown
+    p.rest = p.rest.replace('background-image: url(img/coins-dark.jpg)', 'background-image: none')
+    p.rest = re.sub(r'html\.globe-live header\.top\.on-dark \.brand \.globe \{ background-image: url\(img/globe-spin-dark\.webp\);\s*background-image: image-set\([^}]*\}', '', p.rest)
+    assert 'globe-spin-dark' not in p.rest and 'coins-dark' not in p.rest, 'rc3: dark pictures'
+    p.css("""
+/* RC3 */
+.lamps-home { margin-top: clamp(20px, 3vw, 36px); display: grid; grid-template-columns: minmax(0, 540px) minmax(0, 1fr); gap: 48px; align-items: end }
+.lamps-home .lamps-day { padding: 0 !important; margin: 0; display: block } .lamps-home .lamps-day img { width: 100% !important; height: auto; max-height: none; display: block }
+.lamps-home figcaption { margin: 0; padding: 8px 0 0 !important; max-width: 540px }
+.lamp-names { list-style: none; margin: 0 0 40px; padding: 0; display: grid; gap: 14px; font-size: clamp(22px, 2.4vw, 32px); letter-spacing: -0.01em }
+.lamp-names a { color: var(--ink); text-underline-offset: 6px; text-decoration-thickness: 1px }
+@media (max-width: 860px) { .lamps-home { grid-template-columns: minmax(0, 1fr); gap: 20px } .lamp-names { margin: 0 } }
+.hab-mirror { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr) } .hab-mirror figure { order: 2 }
+@media (max-width: 860px) { .hab-mirror { grid-template-columns: minmax(0, 1fr) } .hab-mirror figure { order: 0 } }
+.c-tropos { display: grid; grid-template-columns: minmax(0, 520px) minmax(0, 1fr); gap: 40px; align-items: end }
+.c-tropos .ph img { display: block; width: 100%; height: auto }
+.c-tropos h3 { font-size: clamp(28px, 3vw, 40px); margin: 0 0 8px } .c-tropos h3 a { color: inherit; text-decoration: none } .c-tropos h3 a:hover { text-decoration: underline; text-underline-offset: 6px }
+.c-tropos .more { color: var(--ink); text-underline-offset: 4px }
+@media (max-width: 860px) { .c-tropos { grid-template-columns: minmax(0, 1fr); gap: 16px } }
+.c-hab img { aspect-ratio: 4 / 5 }
+.dots-row .coin-dot { border-radius: 50% } .dots-row .coin-dot[style*="--i:6"] { box-shadow: inset 0 0 0 1px #9A958D }
+.hero-row ul { scroll-padding-inline: 16px }
+.sound-still, .mantle-pic { background: none !important }
+.hab-band .foot-note .render, .hero-cap .render { margin-left: 0 }
 """)
 
 
