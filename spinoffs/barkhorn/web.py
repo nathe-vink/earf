@@ -200,11 +200,11 @@ TT_NEXT = dict(
     # until it is shown, no words about light from its base (the coordinator)
     line='A turntable in cast acrylic.', kind='Turntable',
     # the Mantle lane's spec as built (r48-mantle-design 71d3163e, companions/mantle-r48/README.md section 11)
-    facts=[('Plinth', 'Two sheets of cast acrylic in its color, cemented into one, 25.4 mm, tinted through; it floats 40 mm over the base'),
+    facts=[('Plinth', 'Cast acrylic in its color, about 25 mm; it floats 40 mm over the base'),   # the 24.6 mm deck is an open owner question
            ('Posts', 'Four solid posts of polished stainless steel, 30 mm across'),
            ('Base', 'Smoke cast acrylic, 12.7 mm, set in 35 mm all round'),
            ('Drive', 'Belt, from Rega&rsquo;s 24 V motor, fixed beneath the plinth'),
-           ('Speeds', '33 and 45, by a button'), ('Arm', 'Rega RB330'), ('Cartridge', 'Ortofon 2M Black'),
+           ('Speeds', '33 and 45, by a button'), ('Arm', 'Rega RB330'), ('Cartridge', 'A moving-magnet cartridge, to be chosen'),   # 2M Blue or Black: an open owner question
            ('Phono stage', 'Built in, for moving-magnet cartridges, with a line out and a switch to bypass it'),
            ('Cover', 'Cast acrylic in its color, 3 mm, on friction hinges'),
            ('Size', '450 wide, about 370 deep with the hinges, about 199 high with the lid down (mm)'),

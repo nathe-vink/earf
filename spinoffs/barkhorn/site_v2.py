@@ -42,6 +42,8 @@ class Page:
         bad = re.findall(r"(?i)colour|enquir|stockist|microfibre|something in the air|eight things in the air|oldest amplifier"
                          r"|amplifier(?:&rsquo;|\u2019|')s job|pool of its own light|light pools|light under it|on a light|on lights|lit from below|satin", text)
         assert not bad, ('site_v2: retired words', sorted(set(b.lower() for b in bad)))
+        extra = re.findall('(?i)' + self.banned, text) if getattr(self, 'banned', None) else []
+        assert not extra, ('site_v2: retired in the candidate', sorted(set(x.lower() for x in extra)))
 
     def done(self):
         self.check()
@@ -653,8 +655,8 @@ def lighten(p, web):
     p.sub('<div class="lines"><a class="tile" href="#speakers"><img src=', '<div class="lines"><a class="tile" href="#speakers"><img decoding="async" src=')
 
 
-MANTLE_SRC = 'renders/2026-11-01/barkhorn/mantle-r48/a-studio-ember-2423.png'   # by day, its light off (not the dusk frame: its light falls on the floor)
-MANTLE = {'wide': 'img/v2/mantle-studio-1200.webp', 'full': 'img/v2/mantle-studio.webp', 'tile': 'img/v2/mantle-studio-tile.webp'}
+MANTLE_SRC = 'renders/2026-11-03/barkhorn/mantle-r48/a5-day-ember-2423-c3e.png'   # passed (r48-mantle-design 41232b56, SHOW 3/3); was the 1 Nov board frame,   # by day, its light off (not the dusk frame: its light falls on the floor)
+MANTLE = {'wide': 'img/v2/mantle-day-1200.webp', 'full': 'img/v2/mantle-day.webp', 'tile': 'img/v2/mantle-day-tile.webp'}
 
 
 def mantle(p, web):
@@ -671,9 +673,10 @@ def mantle(p, web):
             im.resize((w_, round(im.height * w_ / im.width)), Image.LANCZOS).save(dst, 'WEBP', quality=82, method=6)
     dst = os.path.join(web.SITE, MANTLE['tile'])                  # 4:5 for the lines' tile, on the deck's middle
     if not os.path.exists(dst) or os.path.getmtime(dst) < os.path.getmtime(src):
-        cw = round(im.height * 4 / 5)
-        x0 = max(0, min(im.width - cw, round(im.width * 0.52 - cw / 2)))
-        im.crop((x0, 0, x0 + cw, im.height)).resize((1200, 1500), Image.LANCZOS).save(dst, 'WEBP', quality=82, method=6)
+        tile = Image.new('RGB', (1200, 1500), (244, 241, 236))     # the whole frame, letterboxed on the paper
+        fr = im.resize((1200, round(im.height * 1200 / im.width)), Image.LANCZOS)
+        tile.paste(fr, (0, (1500 - fr.height) // 2))
+        tile.save(dst, 'WEBP', quality=82, method=6)
     m = re.search(r'<a class="tile" href="#turntable"><img [^>]*>', p.rest)
     if m:
         p.rest = p.rest[:m.start()] + ('<a class="tile" href="#turntable"><img decoding="async" src="' + MANTLE['tile'] +
@@ -797,6 +800,8 @@ def apply(web, head, rest):
     if getattr(web, 'RC', False):
         rc(p, web)
         rc_fixes(p, web)
+        rc_waves(p, web)
+        p.banned = BANNED_RC
     return p.done()
 
 
@@ -1166,3 +1171,155 @@ def rc_fixes(p, web):
 .pcard img, .pcard .tag { grid-area: 1 / 1 }
 .pcard .tag { position: static !important; align-self: end; justify-self: start; margin: 0 0 8px 8px; z-index: 1 }
 """)
+
+
+def rc_waves(p, web):
+    """The RC review, waves 2 and 3 (the coordinator, 2026-11-09 17:27, 17:29): add what's honest, not only take away."""
+    import json, os
+    from PIL import Image
+    names = {k: name for k, num, name, *_ in web.CLOUDS}
+    lines = {k: line for k, num, name, icon, acr, line, *_ in web.CLOUDS}
+    ON_HOLD = 'Hemisphere and Core, switched off. Shown in Smoke, a color on hold.'
+    # --- the passed habitats (biomes: Ice 0f619953, Dust 26493989), 4:5
+    HAB = {'blue': 'renders/2026-11-03/barkhorn/habitats/ice-portrait-1200x1500.jpg',
+           'orange': 'renders/2026-11-03/barkhorn/habitats/dust-portrait-1200x1500.jpg'}
+    for k, src in HAB.items():
+        im = Image.open(os.path.join(web.ROOT, src)).convert('RGB')
+        im.save(os.path.join(web.SITE, f'img/rc/{k}-habitat.webp'), 'WEBP', quality=82)
+        im.resize((168, 210)).save(os.path.join(web.SITE, f'img/rc/{k}-habitat-th.webp'), 'WEBP', quality=80)
+    # --- the hero: the seven, each its own picture, in a row (desk) or a swipeable row (phone)
+    for k in RC_KEYS:
+        im = Image.open(os.path.join(web.SITE, f'img/rc/{k}-tall.webp'))
+        im.crop((round(im.width * 0.14), 0, round(im.width * 0.86), im.height)).save(os.path.join(web.SITE, f'img/rc/{k}-hero.webp'), 'WEBP', quality=82)
+    hw, hh = round(1000 * 0.72), 1250
+    row = ''.join(f'<li><a href="#speaker-{names[k].lower()}"><img data-src="img/rc/{k}-hero.webp"{" fetchpriority=\"high\"" if i < 3 else ""} width="{hw}" height="{hh}" '
+                  f'alt="Tropos in {names[k]}"><span>{names[k]}</span></a></li>' for i, k in enumerate(RC_KEYS))
+    m = re.search(r'<div class="hero-photo has-tall">.*?</div>\n', p.rest, re.S)
+    assert m, 'rc_waves: hero'
+    p.rest = p.rest[:m.start()] + f'<div class="hero-photo hero-row"><ul aria-label="Tropos in seven colors">{row}</ul></div>\n' + p.rest[m.end():]
+    p.sub('<span>Hi-fi and lighting, designed in San Francisco.</span>', '<span>Hi-fi and lighting in cast acrylic.</span>')
+    # the preload: the row's first frames, not the old sheet
+    where = 'head' if "add('img/rc/hero-portrait.webp'" in p.head else 'rest'
+    p.sub("if (home) { add('img/rc/hero-portrait.webp', null, '(max-width: 700px)'); add(null, 'img/rc/hero-1200.webp 1200w, img/rc/hero.webp 2400w', '(min-width: 701px)'); }",
+          "if (home) { add('img/rc/red-hero.webp'); add('img/rc/orange-hero.webp'); }", where=where)
+    # --- data: the habitats in their galleries; Tropos's gallery in 4:5 at its own shape; lamps' and Mantle's alts
+    i = p.rest.index('const D = ') + len('const D = ')
+    j = p.rest.index(', BY = Object', i)
+    D = json.loads(p.rest[i:j])
+    for c in D['clouds']:
+        v = c['views']
+        v['off'] = {'src': f"img/rc/{c['k']}-tall.webp", 'w': 1000, 'h': 1250, 'th': f"img/rc/{c['k']}-thumb.webp",
+                    'card': {'src': f"img/rc/{c['k']}-card.webp", 'w': 625, 'h': 1250}}
+        if c['k'] in HAB:
+            v['habitat'] = {'src': f"img/rc/{c['k']}-habitat.webp", 'w': 1200, 'h': 1500, 'th': f"img/rc/{c['k']}-habitat-th.webp"}
+            c['hab'] = v['habitat']['src']
+    for L in D['lamps'].values():
+        for col in L['colours'].values():
+            col['views']['unlit'] = {k: x for k, x in col['views']['unlit'].items() if k != 'tag'}
+            col['card'] = dict(col['card'], tag='Shown in Smoke, a color on hold', alt='A Core and a Hemisphere in Smoke, switched off')
+    for k, col in D['tt']['colours'].items():
+        col['views']['studio'] = {'src': MANTLE['full'], 'w': 1800, 'h': 1200, 'th': MANTLE['wide']}
+        col['card'] = dict(col['card'], alt='Mantle in Ember' if k == 'red' else 'Mantle, shown in Ember')
+    p.rest = p.rest[:i] + json.dumps(D, separators=(',', ':')) + p.rest[j:]
+    p.sub("a.querySelector('img').alt = Pr.title(c);", "a.querySelector('img').alt = im.alt || Pr.title(c);")
+    p.rest = re.sub(r"\['unlit', '([^']*)', \(\) => '[^']*'\]", "['unlit', 'Off', () => '" + ON_HOLD + "']", p.rest)
+    p.rest = p.rest.replace('Hemisphere and Core in Smoke, a color still to come.', ON_HOLD)
+    # the habitat's view words
+    p.rest = re.sub(r"\['habitat', '[^']*', c => [^\]]*\]", "['habitat', 'Out', c => `${c.name}. ${c.line}`]", p.rest, count=1)
+    # --- 1. no pairing grids until the lamps and Mantle are pictured in the colors; a color's page shows Tropos only
+    p.sub("company(document.getElementById('p-company'), k, P.id, true);", "/* the pairings wait for pictures in the colors */")
+    p.rest = p.rest.replace("document.getElementById('c-products').replaceChildren(...PRODUCTS.filter(Pr => Pr.views(k)).map(Pr => pcard(Pr, k)));",
+                            "document.getElementById('c-products').replaceChildren(...PRODUCTS.filter(Pr => Pr.id === 'speaker' && Pr.views(k)).map(Pr => pcard(Pr, k)));")
+    p.rest = re.sub(r"company\(document\.getElementById\('c-company'\)[^;]*;", "/* the pairings wait for pictures */", p.rest)
+    # the color page: its habitat, where one has passed; no Colors in the crumb
+    p.sub('<p class="crumbs"><a href="#top">Home</a> / <a href="#colors">Colors</a> / <span id="c-crumb"></span></p>',
+          '<p class="crumbs"><a href="#top">Home</a> / <span id="c-crumb"></span></p>')
+    p.sub('<ul class="swatches" id="c-swatches" aria-label="Color"></ul>',
+          '<ul class="swatches" id="c-swatches" aria-label="Color"></ul>\n    <figure class="c-hab" id="c-hab" hidden><img alt=""><figcaption><i class="render">Render</i></figcaption></figure>')
+    p.sub("document.getElementById('c-line').textContent = c.line;",
+          "document.getElementById('c-line').textContent = c.line;\n  { const f = document.getElementById('c-hab'); f.hidden = !c.hab; if (c.hab) { const im = f.querySelector('img'); im.src = c.hab; im.alt = `Tropos in ${c.name}, out in its element`; } }")
+    # --- home: "Tropos." links to Tropos; Ice in its element after it; one caveat
+    p.sub('<div class="sound-words"><h2>Tropos.</h2>', '<div class="sound-words"><h2><a href="#speakers">Tropos.</a></h2>')
+    band = (f'\n  <section class="band beat hab-band" id="ice-band"><div class="wrap hab-grid"><figure><img src="img/rc/blue-habitat.webp" width="1200" height="1500" loading="lazy" '
+            f'alt="Tropos in Ice, out in the snow at dusk"></figure><div><h2><a href="#color-ice">Ice.</a></h2><p class="beat-line">{lines["blue"]}</p>'
+            f'<p class="foot-note"><i class="render">Render</i></p></div></div></section>')
+    k0 = p.rest.index('</section>', p.rest.index('<section class="band sound" id="sound">')) + len('</section>')
+    p.rest = p.rest[:k0] + band + p.rest[k0:]
+    p.rest = re.sub(r' The design figures on these pages give way to\s*measured ones\.', '', p.rest)
+    p.sub('<a href="#progress">Progress</a>', '<a href="#progress">Drawn to be made</a>')
+    # --- one price line
+    p.sub('<p class="price">Priced at launch <span id="p-unit">&middot; each pair made to order</span></p>',
+          '<p class="price">Price on request. <span id="p-unit">Each pair is made to order.</span></p>')
+    p.sub("document.getElementById('p-unit').innerHTML = `&middot; ${P.unit}`;", "document.getElementById('p-unit').innerHTML = P.unit;")
+    p.sub("unit: 'each pair made to order',", "unit: 'Each pair is made to order.',")
+    p.rest = p.rest.replace("unit: 'made to order',", "unit: 'Each is made to order.',")
+    p.rest = p.rest.replace('Everything is made to order, so we quote rather than list. Prices and lead times from launch. Designers, dealers\n      and press: the same address.',
+                            'Everything is made to order, so we quote rather than list. Designers, dealers and press: the same address.')
+    # --- /tropos: the card's picture and name are the link; no "Up close"
+    p.rest = re.sub(r'<a class="more" href="#speaker-[a-z]+">Up close</a>', '', p.rest)
+    p.rest = re.sub(r'<h3 class="named">([A-Za-z]+)<span', lambda m: f'<h3 class="named"><a href="#speaker-{m.group(1).lower()}">{m.group(1)}</a><span', p.rest)
+    # --- /lighting: the pair once, large; no lit headline
+    p.sub('<h2>The same seven, lit from within.</h2>', '<h2>Two lamps in the speakers&rsquo; acrylic.</h2>')
+    p.rest = re.sub(r'<a class="ph" href="#(?:hemisphere|core)-ember"><img [^>]*></a>', '', p.rest)
+    p.rest = re.sub(r'<div class="lamp-duo solo"><figure><img src="img/lamps-unlit-800\.jpg"[^>]*><figcaption>Off, in Smoke\.</figcaption></figure>',
+                    '<div class="lamp-duo solo lamps-pair"><figure><img src="img/lamps-unlit.webp" srcset="img/lamps-unlit-800.jpg 800w, img/lamps-unlit.webp 1600w" '
+                    'sizes="(max-width: 860px) 100vw, 560px" width="1600" height="2000" loading="lazy" alt="A Core and a Hemisphere in Smoke, switched off">'
+                    f'<figcaption>{ON_HOLD} <i class="render">Render</i></figcaption></figure>', p.rest)
+    p.rest = p.rest.replace('<figcaption class="wrap">Hemisphere and Core, switched off. <i class="render">Render</i></figcaption>',
+                            f'<figcaption class="wrap">{ON_HOLD} <i class="render">Render</i></figcaption>')
+    # --- /mantle: one full-width picture, the words beside it
+    p.rest = re.sub(r'<a class="ph" href="#mantle-ember"><img [^>]*></a>',
+                    f'<a class="ph mantle-wide" href="#mantle-ember"><img src="{MANTLE["full"]}" srcset="{MANTLE["wide"]} 1200w, {MANTLE["full"]} 1800w" '
+                    'sizes="(max-width: 860px) 100vw, 62vw" width="1800" height="1200" loading="lazy" alt="Mantle in Ember"></a>', p.rest)
+    # --- Tropos's size: depth 420 with the horn flush
+    p.rest = re.sub(r'423[\s ]mm overall, 420[\s ]mm at the cabinet', '420 mm', p.rest)
+    p.rest = p.rest.replace("'About 1300 high, 560 wide, 423 deep (mm)'", "'About 1300 high, 560 wide, 420 deep (mm)'")
+    p.css("""
+/* the RC review, waves 2 and 3 */
+.hero { justify-content: flex-start; height: auto !important; min-height: 0 !important; padding-bottom: clamp(32px, 6vh, 64px) !important }
+.hero-title .wrap { padding-block: clamp(20px, 4vh, 48px) 0 }
+.hero-pic { width: 100% !important; position: static }
+.hero-title { position: static !important }
+.hero-row { aspect-ratio: auto !important; background: none !important; overflow: visible; margin-top: clamp(16px, 4vh, 48px) }
+.hero-row ul { list-style: none; margin: 0 auto; padding: 0 16px; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px }
+.hero-row a { display: grid; gap: 8px; color: var(--ink); text-decoration: none; font-size: 15px }
+.hero-row img { width: 100%; height: auto; aspect-ratio: 72 / 125; object-fit: cover; display: block }
+.hero-row a:hover span { text-decoration: underline; text-underline-offset: 4px }
+@media (max-width: 860px) {
+  .hero { height: auto; min-height: 0 }
+  .hero-row ul { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 62vw; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 8px }
+  .hero-row ul::-webkit-scrollbar { display: none } .hero-row li { scroll-snap-align: start }
+  .hero-row img { max-height: none }
+}
+.sound-words h2 a, .hab-band h2 a { color: inherit; text-decoration: none } .sound-words h2 a:hover, .hab-band h2 a:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px }
+.hab-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 48px; align-items: end }
+.hab-grid figure { margin: 0 } .hab-grid img { display: block; width: 100%; height: auto }
+.hab-grid h2 { font-size: clamp(48px, 7vw, 104px) }
+@media (max-width: 860px) { .hab-grid { grid-template-columns: minmax(0, 1fr); gap: 20px } }
+.c-hab { margin: 28px 0 0; max-width: 560px } .c-hab img { display: block; width: 100%; height: auto } .c-hab figcaption { padding-top: 8px }
+/* galleries: a 4:5 picture column beside the particulars */
+@media (min-width: 1001px) { .pdp { grid-template-columns: minmax(0, 520px) minmax(0, 1fr) !important; justify-content: start } }
+.stage { aspect-ratio: 4 / 5 !important }
+/* /tropos: seven cards, the last row centered; on the phone, the seventh across */
+.cards { display: flex !important; flex-wrap: wrap; justify-content: center }
+.cards > .card { flex: 0 1 calc((100% - 3 * 18px) / 4) }
+@media (max-width: 860px) { .cards > .card { flex-basis: calc((100% - 18px) / 2) } .cards > .card:last-child:nth-child(odd) { flex-basis: 100% } }
+.card .named a { color: inherit; text-decoration: none }
+/* /lighting: the pair once */
+.lamps .ptile { grid-template-columns: minmax(0, 1fr) !important }
+.lamps-pair { grid-template-columns: minmax(0, 560px) minmax(0, 1fr) !important; align-items: end }
+.lamps-pair img { width: 100%; height: auto; display: block }
+@media (max-width: 860px) { .lamps-pair { grid-template-columns: minmax(0, 1fr) !important } }
+/* /mantle: the picture wide */
+.tt-duo { grid-template-columns: minmax(0, 1fr) !important } .tt-duo .ptile { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) !important; align-items: end }
+.mantle-wide img { width: 100%; height: auto; aspect-ratio: 3 / 2 !important; object-fit: cover }
+@media (max-width: 860px) { .tt-duo .ptile { grid-template-columns: minmax(0, 1fr) !important } }
+/* the lamps beat: picture and caption aligned, at most 75vh */
+.lamps-day img { max-height: 75vh; width: auto !important; max-width: 100%; margin: 0 }
+.lamps-day { display: grid; justify-items: start; padding-inline: max(16px, calc((100vw - 1240px) / 2 + 16px)) } .lamps-day figcaption { padding-inline: 0 !important }
+/* Fog's swatch: a circle with a hairline */
+.swatches a, .swatches .coin-dot { border-radius: 50% } .swatches .coin-dot[style*="--i:6"] { box-shadow: inset 0 0 0 1px #9A958D }
+""")
+
+
+BANNED_RC = r'eight colors|to Smoke|Smoke as current'
