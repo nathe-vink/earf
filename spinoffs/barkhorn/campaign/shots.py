@@ -412,6 +412,8 @@ def strata_lit(s, glow=None, horn='smooth'):
         mats.update({k: {'glow': (v if night else 0.0)} for k, v in D_GLOW.items()})
     if ROLLOUT['horn'] == 'polished':                  # the waveguide's outside as formed, not bead-blasted (asset/README.md)
         mats['horn-satin'] = {**mats.get('horn-satin', {}), 'roughness': 0.05}
+    else:   # satin, said outright: since the owner's 15:14 call the product files carry 0.05, so satin no longer falls back
+        mats['horn-satin'] = {**mats.get('horn-satin', {}), 'roughness': 0.25}
     return s
 
 
@@ -505,6 +507,19 @@ def deck_cover():
     # linked to the drivers, lit nothing else, and unlinked at 70 it would light every front at ten times the face lamp:
     # down to the face lamp's level, 6
     L = s['lights']
+    # (the coordinator, 23:24: the key was a sun from straight behind the row reaching it through the paper, which cast no
+    # shadow. The sweep now casts its shadow (honest_lights), so that sun lights nothing in the set; in its place a small
+    # disc softbox behind the row, inside the set and above the frame, on the sun's line and at its irradiance, so the
+    # coloured shadows keep their hard edges)
+    sun = s.pop('sun', None)
+    if sun and sun.get('irradiance'):
+        import math
+        az, el = math.radians(sun.get('azimuth_deg', 180)), math.radians(sun.get('elevation_deg', 30))
+        cx, cy, cz = 0.0, 0.5, 0.6
+        dist = 7.0
+        hx, hy = math.sin(az) * math.cos(el), -math.cos(az) * math.cos(el)
+        L['key-disc'] = {'type': 'area', 'size_m': [0.35, 0.35], 'position': [round(cx + dist * hx, 3), round(cy + dist * hy, 3), round(cz + dist * math.sin(el), 3)],
+                         'target': [cx, cy, cz], 'irradiance': sun['irradiance'], 'color': sun.get('color', 5200)}
     honest_lights(s)
     sm = s['products'][0]['instances'][-1]['position']
     if 'smoke' in L:
@@ -703,6 +718,23 @@ def honest_lights(s, log=None):
         if L.get('transmission') is False:
             out.append(f'{name}: transmission false removed')
             del L['transmission']
+    # every part of a set casts shadows, and light reaches the product only through a real opening (the coordinator,
+    # 23:24): no paper that lets a sun through, no cutter only some rays meet, no flag scoped to some lamps, no lamp whose
+    # shadow on the set is lightened
+    st = s.get('set', {})
+    if st.get('cast_shadow') is False:
+        out.append('set: cast_shadow false removed (the paper casts its shadow)')
+        del st['cast_shadow']
+    for fl in st.get('flags', []):
+        if fl.get('see_through'):
+            out.append(f"flag {fl.get('center_m')}: see_through removed"); del fl['see_through']
+    for name, L in s.get('lights', {}).items():
+        if L.get('type') == 'flag' and L.get('lights'):
+            out.append(f'{name}: flag scoped to {L["lights"]}: scope removed'); del L['lights']
+        if L.get('see_through'):
+            out.append(f'{name}: see_through removed'); del L['see_through']
+        if 'shadow_on_set' in L and L['shadow_on_set'] < 1.0:
+            out.append(f'{name}: shadow_on_set {L["shadow_on_set"]} removed'); del L['shadow_on_set']
     if log is not None:
         log.extend(out)
     return s
