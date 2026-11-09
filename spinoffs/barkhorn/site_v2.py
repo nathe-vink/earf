@@ -819,7 +819,7 @@ def apply(web, head, rest):
 # web.RC on (with V2, HOME_V2 and COPY_NEXT): every picture of Tropos is today's speaker or is left out; the night
 # stage and the wall hidden until the new night renders pass; every lit lamp picture pulled (their light was faked);
 # Mantle only in its new design.
-RC_TALL = 'renders/2026-11-04/barkhorn/rollout/A-polished-tallr3/site-front-off-tall-{name}.png'   # the fronts, rig 74f17d7c (2026-11-09 22:23): Ember c4 5aa0943b, Dust c4 0690b93c, Acid c2 b95319d3, Poison c2 766f299d, Ice c3 70e0f9f4, Haze c3 94b4534a, Fog r33-speaker-horn 62bc73a7. Before: tallr2 (failed: a light line on the side), then fix1 (r33-rollout-c3:
+RC_TALL = 'renders/2026-11-04/barkhorn/rollout/A-polished-tallr6/site-front-off-tall-{name}.png'   # the fronts, rig fa7665dc (2026-11-09 23:46): Ember c4 4fcc28f8, Dust c4 5c837147, Acid c2 7d741bd6, Poison c2 e7ca2e71, Ice c3 48dcfd29, Haze c3 817d2b4f, Fog r33-speaker-horn 4e89a834. Before: tallr3 and tallr2 (failed: a light line on the side), then fix1 (r33-rollout-c3:
 # Ember, Dust, Poison, Ice e624e13e; Haze, Fog 3d0b613f; Acid 04d21c5c (on the Acid horn fix). Smoke held.
 RC_KEYS = ['red', 'orange', 'amber', 'green', 'blue', 'violet', 'ice']
 HORN_BACKS = ['amber']   # the re-audit (the coordinator 2026-11-09 23:28): the other six had a camera-hidden lamp in frame
