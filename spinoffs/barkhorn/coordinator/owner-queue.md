@@ -5433,3 +5433,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   it with the light (a real scrim, or the sun higher) or show it only with the drift named as the open pour question). NIGHT
   PROXIES: both choose Proxy 4 (A); neither shows now (darken the rug to the frame's edge; the armchair Ice-hued and brighter than
   the speaker's face: the streetlight down ~1 stop and desaturated or 3500-4000 K; the pool below the speaker's interior).
+- 18:44 GATE HAZE HABITAT FINAL complete (wf_7bec6be9-a06; 3 critics, 30 min): HOLD 3/3 on one test: the horn reads as a different
+  glass (OKLab hue 270 vs the box 281-287; 1.3 stops darker; Ice matches within 2 deg / 0.3 stop); everything else passes ("the best
+  Haze so far": see-into, grounded, no base light, the horn smooth, the sun honest). Fixes split: close it with light (a real
+  scrim on the sun, or the sun higher; in the sky-lit 4 Nov final horn and box were 271 vs 268) / give the horn the cabinet's pour /
+  ask the founder the pour with swatches first. A 2-3 px hot-pink glint on the right pod leg. 18:44 sent biomes: light first, two
+  proxies ((a) a real scrim -1/2 stop on the speaker, (b) the sun 6 -> ~10 deg), measure hue and stops against the targets; don't
+  retint the horn (the pour is the owner's); if neither closes it, the pour question goes to the owner with swatches.
