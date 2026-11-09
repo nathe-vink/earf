@@ -91,7 +91,9 @@ SETS = {
     # under it (in earlier commits) is gone. The mist casts shadows (--real-set, below)
     # (and option (a), the coordinator 01:16: the canopy a quarter open, its gaps real holes in the geometry (habitat.py
     # --canopy-open), the sunfleck through one of the shot's own holes; the camera +1.5 EV for a forest floor)
-    'poison_g5': {'product.instances.0.rotate_z': 9.0, 'lights.litter.specular': 1.0, 'render.exposure': 0.75},
+    'poison_g5': {'product.instances.0.rotate_z': 9.0, 'lights.litter.specular': 1.0, 'render.exposure': 0.75,
+                  # the litter fill off the front face's mirror line (at -5 the face mirrored it: the beige upper cabinet)
+                  'lights.litter.orbit.azimuth_deg': -40.0},
 }
 # set props left out (the coordinator's gate on Dust, 2026-11-03: the tumbleweed floats, its shadow detached)
 DROP = {'dust': ['tumbleweed']}
@@ -133,6 +135,7 @@ def main():
     ap.add_argument('--set', action='append', default=[], help='an extra key=value passed to habitat.py after the habitat\'s own (diagnostics)')
     ap.add_argument('--tag', default='', help='suffix on the output name')
     ap.add_argument('--sink', type=float, help="the feet's bedding, m, in place of the habitat's (tests)")
+    ap.add_argument('--clearing', type=float, help='a treefall gap this many m across in the canopy over the speaker (tests)')
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
     for n in a.names or HABITATS:
@@ -156,7 +159,8 @@ def main():
             + (['--flag', *map(str, FLAG[n])] if n in FLAG else []) \
             + (['--split', *map(str, SPLIT[n])] if n in SPLIT else []) \
             + (['--real-set'] if n in REAL_SET else []) \
-            + (['--canopy-open', str(CANOPY_OPEN[n])] if n in CANOPY_OPEN else [])
+            + (['--canopy-open', str(CANOPY_OPEN[n])] if n in CANOPY_OPEN else []) \
+            + (['--canopy-clearing', str(a.clearing)] if a.clearing else [])
         with open(out.replace('.png', '.log'), 'w') as log:
             r = subprocess.run(cmd, stdout=log, stderr=subprocess.STDOUT)
         print(n, 'ok' if r.returncode == 0 else f'failed ({r.returncode})', flush=True)
