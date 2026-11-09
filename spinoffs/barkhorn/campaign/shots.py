@@ -665,20 +665,17 @@ def site(frame, tint):
     if frame == 'front-off-tall':
         # (the veil, tallr3's gate, 2026-11-09: the lower right face, near-grazing to the lens, mirrored lit floor behind
         # and right of the speaker: white over the tint 74-78 levels, saturation 0.16 (Poison) to 0.33 (Haze). Geometry
-        # puts the mirror on floor x 0.33-1.03, y -0.1 to 2.4, half of it out of frame. Two real black floor cards
-        # cover that half, cardcast 0 %, and the speaker turns 3 deg toward the lens (the face less edge-on); the back-edge
-        # card turns with it. Crops, lower face rows 800-1060: Haze 0.33 / 78 -> cards 0.55 / 14 -> cards + 3 deg
-        # 0.68 / 13 (+ 6 deg 0.70 / 12); Ember 0.32 / 74 -> cards 0.53 / 12; Poison 0.16 / 74 -> cards 0.39 / 12, dark
-        # there. Left: the lowest fifth mirrors floor beside the speaker that the camera sees, under a horizontal edge
-        # at the near card's mirrored edge (probe: below it the sweep, above it the card))
+        # puts the mirror on floor x 0.32-1.08, y -0.12 to 1.9; the floor flag takes a quarter of it, a real black floor
+        # card out of frame (the corrected cast, _frame_rays) a sixth more, and the speaker turns 6 deg toward the lens
+        # (the face less edge-on); the back-edge card turns with it. Haze crops, lower face rows 800-1060, sat / white:
+        # 0.33 / 78; the card + 3 deg 0.50 / 26, + 6 deg 0.61 / 16, + 10 deg 0.64 / 17. Turn only, Ember 6 deg 0.51 / 29,
+        # Poison 0.32 / 29. Left: the lowest part of the face mirrors floor beside the speaker that the camera sees)
         for blk in s['products']:
             for i in blk['instances']:
-                i['rotate_z'] = i.get('rotate_z', 0) - 3.0
-        for (x0, y0, x1, y1), nm in (((0.55, 0.6, 2.4, 3.0), 'floor card behind-right'),
-                                     ((0.75, -0.3, 2.4, 0.62), 'floor card right')):
-            s.setdefault('set', {}).setdefault('flags', []).append(
-                {'center_m': [round((x0 + x1) / 2, 3), round((y0 + y1) / 2, 3), 0.006], 'size_m': [round(x1 - x0, 3), round(y1 - y0, 3)],
-                 'normal': [0.0, 0.0, 1.0], 'color': '#060606', 'camera': True, 'glossy': True, 'name': nm})
+                i['rotate_z'] = i.get('rotate_z', 0) - 6.0
+        s.setdefault('set', {}).setdefault('flags', []).append(
+            {'center_m': [1.55, 1.775, 0.006], 'size_m': [1.7, 2.45], 'normal': [0.0, 0.0, 1.0], 'color': '#060606',
+             'camera': True, 'glossy': True, 'name': 'floor card behind-right'})
     if frame in ('front-off-tall', 'front-off-wide', 'hero-light', 'side'):
         back_edge_card(s, sides=('back', 'left') if frame == 'side' else ('back',))
     if frame == 'front-off-tall' and 'horn' in s['lights']:
@@ -878,12 +875,27 @@ def _frame_rays(s, nx=96, ny=96):
     """Unit rays through a grid over the camera's frame (lens shift included, padded 3 % past each edge), or over its
     render crop where it has one."""
     import numpy as np
-    cam = s['camera']; c = np.array(cam['position'], float); f = np.array(cam['target'], float) - c
-    f /= np.linalg.norm(f); r = np.cross(f, [0.0, 0.0, 1.0]); r /= np.linalg.norm(r); u = np.cross(r, f)
-    W, H = s['size']; lens = cam['lens_mm']
-    hx, hy = (18.0, 18.0 * H / W) if W >= H else (18.0 * W / H, 18.0)
-    sx, sy = cam.get('shift_x', 0.0), cam.get('shift_y', 0.0)
+    # as render.py builds the camera (2026-11-09, the veil's floor cards: the cast had fitted the sensor to the larger
+    # side and aimed the lens at the target, so a portrait frame read 20 % too narrow and a level camera's frame sat
+    # where a tilted one's would; cards cast at 0 % showed at the tall's right edge). The sensor is fitted HORIZONTAL,
+    # `sensor_mm` across; a `level` camera looks level and shifts the lens by the tilt; Blender's shift is in units of
+    # the larger frame dimension
+    import math
+    cam = s['camera']; c = np.array(cam['position'], float); t = np.array(cam.get('target', [0, 0, 0]), float)
+    W, H = s['size']; lens = cam['lens_mm']; sw = cam.get('sensor_mm', 36.0)
+    hx, hy = sw / 2, sw / 2 * H / W
     span = max(hx, hy) * 2
+    sx, sy = cam.get('shift_x', 0.0), cam.get('shift_y', 0.0)
+    d0 = t - c
+    if cam.get('level', True):
+        flat = np.array([d0[0], d0[1], 0.0]); tilt = math.atan2(d0[2], np.linalg.norm(flat))
+        f = flat / np.linalg.norm(flat)
+        sy += math.tan(tilt) * lens / sw * (1.0 if W >= H else W / H)
+    else:
+        f = d0 / np.linalg.norm(d0)
+    r = np.cross(f, [0.0, 0.0, 1.0]); r /= np.linalg.norm(r); u = np.cross(r, f)
+    if cam.get('roll_deg'):
+        a = math.radians(cam['roll_deg']); r, u = r * math.cos(a) + u * math.sin(a), u * math.cos(a) - r * math.sin(a)
     # a render crop (fractions of the frame from the top left; the arc's) is the frame that is shown (2026-11-09)
     x0, y0, x1, y1 = ((s.get('render') or {}).get('crop') or [0.0, 0.0, 1.0, 1.0])
     pad = 0.03
