@@ -5381,3 +5381,15 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   until then; extend cardcast to every camera-hidden object with its coverage, run it on every site rig (tall, wide, side, back,
   turn, horn-back, amp plate, inside, hero-light, arc, close-ups), send the table, fix them, and flag which passed pictures carried
   one for re-gating.
+- 18:40 RC2 REVIEW complete: words + build (wf_09ac720a-d6b, 44 min): words 28 of 33 fixed; partly: the /tropos price row, the
+  "cover off" alts, "up close" labels, product metas "cast in", "over the bar" in the share cards; new: three echo lines, the color
+  pages' "Every line" note, habitat captions repeating the line, Mantle's BASE "Smoke cast acrylic"; American English clean except
+  "(modelled)" in the next build (my 17:44 wording: American is "modeled"). Build: 1 major (the color pages' habitat reserves no
+  space: a layout jump) and minors (the smoke hash on hashchange, share cards, price row, the lamps caption, the hero snap, Fog's
+  dot, the 404 header and font, nine unused icons still shipped).
+- 18:41 sent the site lane THE RC3 PUNCH LIST (21 items, all five lenses merged; on cf5af9aa, one push, check the build exit):
+  majors (the lamps caption; Ice three times on home; the color pages' cut card; Mantle's 3:2 and the horn-backs cropped to 4:5; the
+  echo lines; one price line; the habitat's reserved space) and minors ("modeled"; share cards from the source; metas "in ... cast
+  acrylic"; alts and aria-labels; habitat captions; Fog's dot; the hero snap; the Render strips; Mantle's base "Smoked"; "Drawn to
+  be made" without the open horn pour; the color note; the smoke hashes; the 404 header; the prune). The four talls come later in
+  one small push. Sent the brand lane: "(modeled)", not "(modelled)", everywhere (my slip).
