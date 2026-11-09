@@ -5899,3 +5899,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   p95 at or below proxy 4's ~10/5/19/35); raise the pendant 5-8 cm (or 5 cm right; render both as horn crops); deepen the wall's paint
   (a darker material, not less light) so the speaker leads; keep the exposure; clear the fireflies; a tighter bottom crop optional.
   19:54 sent the Mantle lane the addendum; then proxy 7.
+- 19:56 GATE BACKS PROOF complete (wf_73733377-178): 1/3 (skeptic SHOW; founder and photographer HOLD) = HOLD. All three: no camera-side
+  lamp for the horn's glow (it would show in the polished back and top), no more horn-rim power; the honest route is a lamp out of frame
+  on the far side lighting the wall behind the horn. The founder's targets: horn sample ~120-130, facets back to ~27°, the horn <= ~5 L*
+  above the cabinet back, no new reflection on the back panel; the amp plate's green status LED is lit (G 255) in a "nothing on"
+  frame. 19:56 sent the speaker lane the addendum: the far-side lamp, the targets, the LED off, then full-size tests on Dust, Poison,
+  Ember, Ice, Fog (Ice keeps its bottom batt) before releasing the seven.
