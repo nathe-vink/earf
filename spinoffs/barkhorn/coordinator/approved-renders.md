@@ -20,7 +20,7 @@ Scenes (habitats, night pictures) use the locked models and can run alongside; e
 ## Tropos
 | Picture | Source (branch @ commit: path) | Gate | Used by |
 |---|---|---|---|
-| Seven fronts ("talls"), honest rig round 2 | helpers r33-rollout-c2/c3/c4 and r33-speaker-horn, renders/2026-11-04/barkhorn/rollout/A-polished-tallr2/site-front-off-tall-<k>.png on 63d83f47 | IN GATE 9 Nov ~21:10 | site (hero, cards, product, color, share), Book (fronts), social |
+| Seven fronts ("talls"), honest rig round 2 | helpers r33-rollout-c2/c3/c4 and r33-speaker-horn, renders/2026-11-04/barkhorn/rollout/A-polished-tallr2/site-front-off-tall-<k>.png on 63d83f47 | FAILED 9 Nov 21:24: Ember, Acid, Ice 3/3 NO (batch 2 the same flaw); re-shoot A-polished-glint under way (r33-speaker-horn) | none until the re-shoot passes; the site and the Book wait for it |
 | Turning view, Ember, Dust, Acid, Poison, Ice, Haze | r33-rollout-c3 52ad76ba (Ember 00-04); c4 0a0a83bd (Ember 05-23, Dust); c4 42fa8eee (Acid 00-16); c3 66126d53 (Acid 17-23, Haze); c4 eef18db2 (Poison, Ice): renders/2026-11-04/barkhorn/rollout/A-polished-p2*/turn-<k>-NN.png | PASSED (wf_c0448c65-cd3) | site galleries |
 | Turning view, Fog, neutral ground | r33-rollout-c3 a688c59e: A-polished-p2-rc2/turn-fog-00..23.png | PASSED 3/3 (9 Nov 21:11; the stage at the rendered 211,212,207) | site gallery (FOG_TURN on) |
 | Horn from behind, seven | 06b829ce, 52ad76ba, a1322583 (not the failed Acid file), cut 4:5 at x 270-990 | PASSED, audited clean | site galleries; the home's Tropos block (Ember) |
@@ -33,7 +33,7 @@ Scenes (habitats, night pictures) use the locked models and can run alongside; e
 |---|---|---|---|
 | Ice, "Out in the snow at dusk." | 0f619953 | PASSED | site (home band, /tropos/ice, /colors/ice), Book |
 | Dust, "On rippled sand among desert buttes." | r48-biomes 43c91242: renders/2026-11-03/barkhorn/habitats/dust-portrait-1200x1500-nopanel.jpg | PASSED 3/3 (9 Nov) | site, Book |
-| Fog, "In the grass on a hillside, in fog at dawn." | r48-biomes cd5aa4e6: habitats/fog_b-portrait-1200x1500-onesun.jpg (aa1ca856 re-render with the glass's Fresnel loss in its shadows: in gate) | PASSED 3/3 (9 Nov) | site, Book ("In fog at dawn.") |
+| Fog, "In the grass on a hillside, in fog at dawn." | r48-biomes aa1ca856: habitats/fog_b-portrait-1200x1500-onesun.jpg (sha256 9f1fa543...; the glass's Fresnel loss in its shadows: the inside a touch dimmer) | PASSED 2/2 (9 Nov 21:21, photo and skeptic) | site, Book ("In fog at dawn."), swapping in tonight's push |
 | Acid | r48-biomes 539c3772 | HOLD 1/3 (rain stops at the speaker; dry; dark cabinet) | none |
 | Poison, Ember, Haze | in progress / not started (Haze waits on the horn pour) | | none |
 
@@ -52,9 +52,11 @@ Night picture (Ice Tropos under a Hemisphere pendant): proxy 8 in progress, not 
 |---|---|---|
 | The old talls (img/rc/<k>-tall.*) and wides | a lamp hidden from the camera standing in frame | 9 Nov |
 | 15931e00 talls (tag tallfix) | a hard arched light pool on the backdrop (the grid's hard cone) | 9 Nov 20:25 |
+| tallr2 talls (A-polished-tallr2, all seven) | a thin white line on the right side face at mid-height (a strip of lit sweep between the floor flag and the slanted upright card), and a milky lower side face below a hard diagonal (the camera-right fill card in its mirror path) | 9 Nov 21:24 |
 | Backs (rigB, img/rc/<k>-back) | lamps hidden from the camera standing in frame | 9 Nov |
 | lamps-unlit (the Smoke pair) | hidden lamps in frame; Smoke is held | 9 Nov |
 | Dust habitat 26493989 | an 8 x 3 m bounce panel hidden from the camera in frame | 9 Nov |
 | Fog habitat b61474c0 | two suns 100° apart | 9 Nov |
 | Fog turn rc1 (pale blue ground) | read as Ice | 9 Nov |
+| Fog habitat cd5aa4e6 (same path) | superseded by aa1ca856, the same frame with the glass's real light loss in its shadows; not a fault | 9 Nov 21:21 |
 | Every picture in Smoke | Smoke is held | |
