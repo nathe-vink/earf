@@ -5417,3 +5417,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   strong. Strip r3b-dome-red-disc-clamped-unclamped.png; finals at 384-512 samples. Core nights on the one scale (560 lm = 3.64 W;
   exposure -8.0 EV; the room tied to it): the picture unchanged (A 58 -> 57, B 78, table 2). The site Core gains its LED face
   (9a3c1593). Waiting for the round-2 and Core-room tallies.
+- 18:43 sent the Mantle lane: its honest-emitter test (face L 17, the pool gone) carries the same render loss: reflective caustics
+  on, no indirect clamp on the Hemisphere's paths, the CAD's aluminium reflector, the COB at 3.2 W with nothing added; re-measure the
+  face and the floor by the feet before the exposure; proxy 6's brief after the night gate.
