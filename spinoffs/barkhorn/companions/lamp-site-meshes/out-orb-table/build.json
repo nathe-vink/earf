@@ -1,0 +1,22 @@
+{
+ "product": "earf-orb-table",
+ "title": "Core",
+ "parts": 26,
+ "seconds": 20,
+ "sheets": {},
+ "budget_usd": {
+  "formed": 1547,
+  "lathe": 360,
+  "mill": 148,
+  "buy": 109
+ },
+ "options_usd": {
+  "two-layer ball": {
+   "usd": 28,
+   "unpriced": 0
+  }
+ },
+ "checks_ok": true,
+ "drawings": "spinoffs/barkhorn/companions/out-orb-table/drawings/earf-orb-table-sheets.pdf",
+ "render": "spinoffs/barkhorn/companions/out-orb-table/render/earf-orb-table.glb"
+}

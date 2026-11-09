@@ -106,7 +106,9 @@ def build(frame, samples, scale):
         return ob
 
     def part(folder, name, mat, at):
-        ob = SC.stl(os.path.join(HERE, folder, 'stl', name + '.stl'), mat, name)
+        # the meshes ship with the branch (lamp-site-meshes/, a copy of the fabkit builds), so a helper needs no CAD venv
+        path = os.path.join(HERE, 'lamp-site-meshes', folder, 'stl', name + '.stl')
+        ob = SC.stl(path if os.path.exists(path) else os.path.join(HERE, folder, 'stl', name + '.stl'), mat, name)
         ob.location = (ob.location[0] + at[0], ob.location[1] + at[1], ob.location[2] + at[2])
         return ob
 
