@@ -5740,3 +5740,13 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   19:29 sent the speaker lane: the card trim, to prove with the gridded horn lamp after the backs (the next tall round).
 - 19:2x HAZE CROPS gate (wf_6d8712e8-76a): founder and photographer HOLD every crop, (a) and (c) included; the skeptic and the (d) gate
   (wf_8595d630-0e7) still running.
+- 19:28-19:29 BRAND: honest-dust-habitat out (31fc9529: Position loses its habitat row; "In its element" keeps the Ice habitat;
+  "Dust in its element." in Pictures in progress; social post 2 now the Ice habitat; the Book uses 41 files); lamps-unlit out
+  (2596a79e: Mantle alone in Position at 820 px; 40 files). SITE: the Dust habitat pulled (r47-site-next 317243db; its first SHA in the
+  message was wrong and it corrected itself); Vercel still nothing since 19:14; waiting on the talls' paths for one push.
+- 19:28 BIOMES: the Acid final stopped in its build stage (the Dust proxies first); --card warm (gold-sand albedo) at 3020c05d; Dust
+  proxies queued (base | panel 0 | panel 0 + a sunlit warm card 1.5 x 1.0 m at 50° camera-left, facing the sun at cos 0.99). POISON
+  dappled sun (5715dd47): the fleck lines the top-left edge but the top band stays black (upper cabinet 3.3-4.0, horn/cabinet 13-15x);
+  the cards and the dappled sun are exhausted. 19:30 sent: proxy two recompositions, (a) the camera swung so the bright mist sits
+  behind the box (backlit), (b) the speaker moved into the sunlit clearing; after the Dust proxies, before the Acid final; I gate the
+  Dust and Poison proxies together.
