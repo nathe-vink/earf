@@ -677,7 +677,8 @@ def site(frame, tint):
             {'center_m': [1.55, 1.775, 0.006], 'size_m': [1.7, 2.45], 'normal': [0.0, 0.0, 1.0], 'color': '#060606',
              'camera': True, 'glossy': True, 'name': 'floor card behind-right'})
     if frame in ('front-off-tall', 'front-off-wide', 'hero-light', 'side'):
-        back_edge_card(s, sides=('back', 'left') if frame == 'side' else ('back',))
+        back_edge_card(s, sides=('back', 'left') if frame == 'side' else ('back',),
+                       trim_right=0.008 if frame == 'front-off-tall' else 0.0)
     if frame == 'front-off-tall' and 'horn' in s['lights']:
         # (the honest tall's gate, 2026-11-09 19:32/19:41: the horn lamp, slid out of frame and grown 1.8x, lit the floor
         # in front, which the front face mirrored as a milky veil, and mirrored in the front and the horn mouth itself.
@@ -763,7 +764,7 @@ def site(frame, tint):
     return s
 
 
-def back_edge_card(s, gap=0.004, h=0.045, sides=('back',)):
+def back_edge_card(s, gap=0.004, h=0.045, sides=('back',), trim_right=0.0):
     """A black card standing on the floor just behind the speaker's bottom panel (the bottom-edge gate, 2026-11-09).
     The panel is clear and runs the cabinet's full depth, polished at both ends: from the front the camera looks into
     its front edge and along it, by total internal reflection, out of its back edge to the bright studio behind, through
@@ -779,7 +780,9 @@ def back_edge_card(s, gap=0.004, h=0.045, sides=('back',)):
     # each card in the speaker's own frame: its centre (x, y), its width, its outward normal (x, y)
     # (the back card's +x end 9 mm short, ending 9 mm inside the right side panel's outer face: the tall gate, 2026-11-09,
     # saw its end as a black nub 2-6 px past the back-right corner at the floor)
-    defs = {'back': ((-0.0045, 0.2063 + gap), 0.551, (0.0, 1.0)), 'left': ((-0.28 - gap, -0.004), 0.42, (-1.0, 0.0))}
+    # `trim_right`: that much more off the back card's +x end (the tall turned 6 deg: 3 px of it past the back-right
+    # corner by the equipment audit, 2026-11-09)
+    defs = {'back': ((-0.0045 - trim_right / 2, 0.2063 + gap), 0.551 - trim_right, (0.0, 1.0)), 'left': ((-0.28 - gap, -0.004), 0.42, (-1.0, 0.0))}
     for blk in s.get('products', []):
         for i in blk['instances']:
             x0, y0, z0 = i.get('position', [0, 0, 0]); r = math.radians(i.get('rotate_z', 0))
