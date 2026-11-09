@@ -1,0 +1,115 @@
+"""Hiddencast for the bpy-direct lamp rigs (the coordinator's rule, 2026-11-09 19:13): NO light, card or panel may stand
+in frame hidden from the camera, except a practical's bulb inside its own opal or frosted fitting. A hidden object
+outside the frame is fine.
+
+`hiddencast(scene)` ray-casts a 96 x 96 grid through the scene camera's frame, padded 3 % past each edge (as the speaker
+lane's shots.card_coverage), and returns, for every object the camera cannot see, the share of those rays that would hit
+its whole shape, occlusion ignored:
+  - meshes with camera visibility off (their own BVH);
+  - every lamp with camera visibility off: an AREA lamp as its square, rectangle, disc or ellipse; a POINT or SPOT lamp
+    as its sphere (shadow_soft_size); a SUN has no place and is left out. (A lamp with camera visibility on is drawn by
+    Cycles, as its shape, and is not hidden.)
+A lamp whose name starts with one of PRACTICAL is the practical's bulb inside its own fitting (the Hemisphere's COB in
+its reflector and liner, Core's LED under its frosted ball): reported, marked, not counted.
+
+    from hiddencast_bpy import hiddencast, report
+    print(report(frame, hiddencast(bpy.context.scene)))
+"""
+import math
+
+PRACTICAL = ('cob', 'led')                                            # cob, cob-<tint>, led-<tint>, ledface
+
+
+def _rays(sc, n=96, pad=0.03):
+    cam = sc.camera
+    mw = cam.matrix_world
+    fr = [mw @ v for v in cam.data.view_frame(scene=sc)]             # tr, br, bl, tl (lens shift included)
+    o = mw.translation.copy()
+    out = []
+    for j in range(n):
+        v = -pad + (1 + 2 * pad) * (j + 0.5) / n
+        for i in range(n):
+            u = -pad + (1 + 2 * pad) * (i + 0.5) / n
+            top = fr[3].lerp(fr[0], u); bot = fr[2].lerp(fr[1], u)
+            out.append((top.lerp(bot, v) - o).normalized())
+    return o, out
+
+
+def _hit_light(ob, o, d):
+    L = ob.data
+    mi = ob.matrix_world.inverted()
+    lo = mi @ o; ld = mi.to_3x3() @ d                                 # object space (scale carried in ld)
+    if L.type == 'AREA':
+        if abs(ld.z) < 1e-12:
+            return False
+        t = -lo.z / ld.z
+        if t <= 0:
+            return False
+        x = lo.x + t * ld.x; y = lo.y + t * ld.y
+        a = L.size / 2; b = (L.size_y if L.shape in ('RECTANGLE', 'ELLIPSE') else L.size) / 2
+        if L.shape in ('DISK', 'ELLIPSE'):
+            return (x / a) ** 2 + (y / b) ** 2 <= 1.0
+        return abs(x) <= a and abs(y) <= b
+    if L.type in ('POINT', 'SPOT'):
+        r = max(L.shadow_soft_size, 1e-4)
+        c = ob.matrix_world.translation
+        oc = o - c; bq = oc.dot(d); cq = oc.dot(oc) - r * r
+        disc = bq * bq - cq
+        return disc >= 0 and (-bq + math.sqrt(disc)) > 0
+    return None                                                       # SUN: nowhere
+
+
+def hiddencast(sc):
+    """[(kind, name, share 0-1, practical)] for every object hidden from the camera."""
+    o, rays = _rays(sc)
+    rows = []
+    for ob in sc.objects:
+        if ob.type == 'MESH' and not ob.visible_camera:
+            mi = ob.matrix_world.inverted(); lo = mi @ o; m3 = mi.to_3x3()
+            hit = sum(1 for d in rays if ob.ray_cast(lo, (m3 @ d).normalized())[0])
+            rows.append(('hidden mesh', ob.name, hit / len(rays), False))
+        elif ob.type == 'LIGHT' and ob.data.type != 'SUN' and not ob.visible_camera:
+            hit = sum(1 for d in rays if _hit_light(ob, o, d))
+            kind = f"{ob.data.type.lower()} lamp" + (f" ({ob.data.shape.lower()})" if ob.data.type == 'AREA' else '')
+            rows.append((kind, ob.name, hit / len(rays), ob.name.startswith(PRACTICAL)))
+    return rows
+
+
+def report(frame, rows):
+    bad = [r for r in rows if r[2] > 0 and not r[3]]
+    lines = [f"HIDDENCAST {frame}: {len(rows)} hidden, {len(bad)} in frame"]
+    for k, n, s, p in rows:
+        tag = 'IN FRAME' if s > 0 and not p else ('practical' if p else 'out')
+        lines.append(f"   {tag:9s} {s * 100:5.1f} %  {k} {n}")
+    return '\n'.join(lines)
+
+
+def coverage(sc, ob):
+    o, rays = _rays(sc)
+    return sum(1 for d in rays if _hit_light(ob, o, d)) / len(rays)
+
+
+def slide_out(sc, ob, target, ok=lambda loc: True, kmax=8.0):
+    """Slide a hidden AREA lamp away from `target` along the line through it until no ray of the frame meets it,
+    its size grown by k to hold its angle at the target and its power by k squared (its radiance, so the irradiance at
+    the target, held), as the speaker lane's realize_hidden. `ok(location)` keeps it inside the room. Returns k, or None
+    (the lamp left where it was) if it cannot leave the frame."""
+    from mathutils import Vector
+    t = Vector(target); p0 = ob.location.copy(); s0 = (ob.data.size, ob.data.size_y); e0 = ob.data.energy
+    for k10 in range(11, int(kmax * 10) + 1):
+        k = k10 / 10
+        loc = t + (p0 - t) * k
+        if not ok(loc):
+            break
+        ob.location = loc; ob.data.size, ob.data.size_y = s0[0] * k, s0[1] * k; ob.data.energy = e0 * k * k
+        bpy_update(sc)
+        if coverage(sc, ob) == 0.0:
+            return k
+    ob.location = p0; ob.data.size, ob.data.size_y = s0; ob.data.energy = e0
+    bpy_update(sc)
+    return None
+
+
+def bpy_update(sc):
+    import bpy
+    bpy.context.view_layer.update()

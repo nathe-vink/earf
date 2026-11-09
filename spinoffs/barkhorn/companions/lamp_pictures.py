@@ -450,6 +450,9 @@ def build(frame, samples, scale):
             SC.plane('sheer-back', (x1 - x0, z1w - z0w), ((x0 + x1) / 2, wy - 0.005, (z0w + z1w) / 2), (90, 0, 0), sheer)
             db = SC.area('dusk-back', ((x0 + x1) / 2, wy + 0.35, (z0w + z1w) / 2), (0, 0, 0), (0.6, 1.5), dW * 0.25, '#9FB2D6')
             db.rotation_euler = (Vector(((x0 + x1) / 2, 0.0, (z0w + z1w) / 2)) - db.location).to_track_quat('-Z', 'Y').to_euler()
+            # 2026-11-09 19:13 (the coordinator: no light in frame hidden from the camera): the dusk sky behind the back
+            # wall's opening stands in frame through it (22 % of the frame), so it is real: seen, as a sky through a sheer
+            db.visible_camera = True
             # round 11: a small, dim real light behind and above the pendant, between it and the wall, facing the camera
             # side (no light linking): it catches the cap's tiers and is seen in the gloss for what it is
             kk = SC.area('kicker', (0.25, 0.45, tz + 1.05), (0, 0, 0), (0.25, 0.25), float(os.environ.get('KICK_W', '1.5')) * rk, '#D8DCE4')
@@ -486,6 +489,20 @@ def build(frame, samples, scale):
         # (round 9: the crumpled net was caustic noise, the core lit through its own shell; with the core open at its
         # base the default guides are clean again)
     SC.camera(cam[0], cam[1], lens=cam[2], fstop=5.6)
+    if night and prod == 'hemi' and 'kicker' in bpy.data.objects:
+        # 2026-11-09 19:13 (no light in frame hidden from the camera): the kicker stood in frame (4 %); it slides away
+        # from the cap along the line through it, grown to hold its angle there, and stays under the ceiling and in front
+        # of the back wall (hiddencast_bpy.slide_out)
+        sys.path.insert(0, os.path.join(HERE, 'launch'))
+        from hiddencast_bpy import slide_out
+        kk_ = bpy.data.objects['kicker']
+        kf = slide_out(bpy.context.scene, kk_, (0.0, 0.0, tz + 0.80),
+                       ok=lambda p: p.z + kk_.data.size_y / 2 < ceil_z - 0.02 and p.y < wy - 0.05)
+        if kf is None:
+            bpy.data.objects.remove(kk_, do_unlink=True)
+            print('KICKER cannot leave the frame: removed')
+        else:
+            print('KICKER out of frame at x%.1f' % kf, tuple(round(v, 3) for v in kk_.location))
     if os.environ.get('CARD_AUDIT'):
         # round 14 (the coordinator's card audit): ray-cast the frame (every max(W,H)/240 px) and report, for each object
         # hidden from the camera, the share of rays whose first hit it would be; then each object that casts no shadow
@@ -512,6 +529,10 @@ def build(frame, samples, scale):
                 x += step
             y += step
         print('CARD-AUDIT', frame, {k: round(100.0 * v / n, 1) for k, v in hits.items()}, 'rays', n)
+        # the coordinator's 19:13 rule: the lamps too (hiddencast_bpy: every hidden mesh and lamp, by ray-cast)
+        sys.path.insert(0, os.path.join(HERE, 'launch'))
+        from hiddencast_bpy import hiddencast, report
+        print(report(frame, hiddencast(sc)))
         print('NO-SHADOW', frame, [o.name for o in sc.objects if o.type == 'MESH' and not o.visible_shadow])
         print('LIGHTS', frame, [(o.name, o.data.type, round(o.data.energy, 3)) for o in sc.objects if o.type == 'LIGHT'])
         return

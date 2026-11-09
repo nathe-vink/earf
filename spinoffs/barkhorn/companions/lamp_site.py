@@ -308,6 +308,10 @@ def build(frame, samples, scale):
         print('AUDIT', frame, 'hidden', [o.name for o in hidden],
               'no-shadow', [o.name for o in sc.objects if o.type == 'MESH' and not o.visible_shadow],
               'lights', [(o.name, o.data.type, round(o.data.energy, 3)) for o in sc.objects if o.type == 'LIGHT'])
+        # the coordinator's 19:13 rule: no light, card or panel in frame hidden from the camera (hiddencast_bpy)
+        sys.path.insert(0, os.path.join(HERE, 'launch'))
+        from hiddencast_bpy import hiddencast, report
+        print(report(frame, hiddencast(sc)))
         return
     os.makedirs(OUT, exist_ok=True)
     sc.render.filepath = os.environ.get('LAMP_OUT') or os.path.join(OUT, frame + '.png')

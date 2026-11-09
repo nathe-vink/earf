@@ -59,6 +59,33 @@ def on_dock(s):
     return s
 
 
+def unlit_real(s, log=print):
+    """lamps-unlit with nothing in frame hidden from the camera (the coordinator, 2026-11-09 19:13; launch/shotcast.py):
+    - thru_orb and thru_dome, small hidden lamps behind each lamp's glass shining at the camera, cannot leave the frame
+      and still do their job: they go;
+    - the bounce (in front of the lens, 100 % of the frame) and the back light (9.9 %) slide away from their targets
+      along the line through them, grown to hold their angle there (an irradiance holds), until out of frame;
+    - ruling 1 (no specular multipliers): the background wash is seen in reflections again (its specular 0 goes).
+    The edges lamp stays: a specular-only lamp, dimmed as a whole, out of frame (ruling 1's exception)."""
+    sys.path.insert(0, os.path.join(HERE, 'launch'))
+    import shotcast as SCAST
+    st = s['set']; depth = st.get('depth', 1e9) - 0.2; ceiling = st.get('height', 1e9) - 0.1
+    for k in ('thru_orb', 'thru_dome'):
+        s['lights'].pop(k, None); log(f'{k}: removed (cannot leave the frame)')
+    for k in ('bounce', 'back'):
+        p0 = list(s['lights'][k]['position'])
+        f = SCAST.slide_out(s, k, depth=depth, ceiling=ceiling)
+        if f is None:
+            s['lights'].pop(k); log(f'{k}: removed (cannot leave the set out of frame)')
+        else:
+            log(f"{k}: {p0} -> {s['lights'][k]['position']}, x{f:.1f}, size {s['lights'][k]['size_m']}")
+    s['lights']['bgwash'].pop('specular', None); log('bgwash: specular 0 removed (ruling 1)')
+    bad = [r for r in SCAST.hidden(s) if r[3] > 0]
+    assert not bad, bad
+    s['title'] = s['title'] + ', nothing hidden in frame (2026-11-09)'
+    return s
+
+
 def site():
     from PIL import Image
     out = os.path.join(RENDERS, 'site-img'); os.makedirs(out, exist_ok=True)
@@ -94,6 +121,21 @@ def main():
                             '--out', os.path.join(RENDERS, n + '.png'), '--samples', '128'], cwd=ROOT, check=True,
                            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             print('rendered', n, flush=True)
+    if '--unlit-real' in sys.argv:
+        # the coordinator's 19:13 rule: lamps-unlit again with nothing in frame hidden (unlit_real)
+        u = unlit_real(cordless(P4.BUILD['p4-lamps-unlit']()))
+        u['render']['samples'] = 128
+        json.dump(u, open(os.path.join(SHOTS, 'lamps-unlit-real.json'), 'w'), indent=1)
+        a_ = sys.argv[sys.argv.index('--unlit-real') + 1:]
+        out = os.path.join(ROOT, 'renders', '2026-11-09', 'barkhorn', 'lamp-site',
+                           a_[0] if a_ and a_[0].endswith('.png') else 'lamps-unlit.png')
+        os.makedirs(os.path.dirname(out), exist_ok=True)
+        extra = ['--scale', a_[a_.index('--scale') + 1]] if '--scale' in a_ else []
+        sm = a_[a_.index('--samples') + 1] if '--samples' in a_ else '128'
+        subprocess.run(['python3.11', os.path.join(ROOT, 'studio', 'engine', 'render.py'),
+                        os.path.join(SHOTS, 'lamps-unlit-real.json'), '--out', out, '--samples', sm] + extra,
+                       cwd=ROOT, check=True)
+        print('rendered', os.path.relpath(out, ROOT), flush=True)
     if '--site' in sys.argv:
         site()
 
