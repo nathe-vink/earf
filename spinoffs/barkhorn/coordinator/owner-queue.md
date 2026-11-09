@@ -5867,3 +5867,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   white felt top batt pressed 0.5 mm behind it; only light from the camera's hemisphere reaches that face, through the green twice
   (~40 mm). Levers: the litter fill at -40° x3-4 (out of frame, off the mirror line) or a large sunlit bounce in the camera's
   hemisphere. 19:46 sent: Poison's warm sun lamp breaks the same rule (no sun in that sky): the patch's colour, or a sunny forest sky.
+- 19:48 SITE: Fog's habitat pulled (r47-site-next 88997e2a): /tropos/fog's gallery Front, Plate, Horn behind, Turning; /colors/fog no
+  habitat; its file rc/ice-habitat ("ice" is Fog's internal key) banned with Dust's rc/orange-habitat; Ice's rc/blue-habitat the only
+  habitat left (home band, /tropos/ice, /colors/ice); grep clean, sweep clean, flags-off byte-identical.
