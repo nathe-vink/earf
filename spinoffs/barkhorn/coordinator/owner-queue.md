@@ -5202,3 +5202,13 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   rollout.py --base A --horn polished --hold smoke --phase 2 --only spin-ice --tag rc1 --chunks 1-20 (all nine frames fresh).
   Its next was A (the side rig: a flag shading the lit floor patch the side face mirrors); I re-sent the order (18:09): the flags
   first. 18:09 GATE ARC PROOFS 03-05 launched (wf_a973e665-cb8; the old 04 as context; the pale 10-deg side faces asked about).
+- 18:07 lamps lane: SITE RE-PROXIES ROUND 2 at ae16fd21a4edbd5bcbdae903f8056d0c41915dee (renders/2026-11-09/barkhorn/lamp-site/proxies/
+  r2-heroes-proxy.png (16 heroes), r2-rows-proxy.png, r2-rows7-proxy.png, r2-gate-numbers.txt; script companions/launch/
+  lamp_site_gate.py). Gates: no face clips anywhere; hues in window except the Ember orb h 23.7; C misses: Ember dome 0.145, Ice dome
+  0.082; Dust-Acid dE 0.067 domes / 0.060 orbs (data-limited: 2208 isn't on the TruCast chart, its figures estimated); Haze dome
+  and both Smokes darker than the paper (sRGB limit); every other neighbor 0.13-0.38. The paper sits at L 0.37 (keep; +1.5 EV to
+  reach 0.5 puts the faces back on AgX's shoulder; a +0.5 EV variant gives ~0.41). The Ice Core now B>G (h 201.5): the white point,
+  not the material; the ball is R 80 (16 cm). The two hero papers match (0.361-0.368). Core A/B nights ~19:00.
+- 18:10 GATE LAMPS SITE ROUND 2 launched (wf_5760aeac-7cd; the same four critics + tally; round 1 and the numbers as context). 18:11 sent
+  the lamps lane (my message said 18:12, ahead of the clock): received; c2 holds ae16fd21 until it passes; Dust/Acid waits for
+  the real chip; the paper at 0.37 unless asked.
