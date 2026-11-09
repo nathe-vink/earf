@@ -206,16 +206,28 @@ def build(frame, samples, scale):
             # PROPOSAL (2026-11-09, for the owner): a ring of mid-power LEDs, 2700 K, on a band round the hub's outside
             # (r 32, z 64 to 72 above the rim), facing out onto the opal liner's inside: the glow's own light, a real
             # part (in the CAD it would be a flex board on the hub, its driver beside the COB's)
-            bm = bmesh.new(); r_, z0r, z1r, n = 0.032, 0.064, 0.072, 64
-            vs = [(bm.verts.new((r_ * math.cos(2 * math.pi * i / n), r_ * math.sin(2 * math.pi * i / n), z0r)),
-                   bm.verts.new((r_ * math.cos(2 * math.pi * i / n), r_ * math.sin(2 * math.pi * i / n), z1r))) for i in range(n)]
-            for i in range(n):
-                a_, b_ = vs[i], vs[(i + 1) % n]
-                bm.faces.new((a_[0], b_[0], b_[1], a_[1]))
+            bm = bmesh.new(); r_, z0r, z1r = 0.032, 0.064, 0.072
+            nled = int(os.environ.get('RING_N', '24'))   # discrete LEDs (2835 class, 2.8 x 3.5 mm), even pitch
+            if nled > 0:
+                # each LED a small emitting face on the band (its light-emitting area), facing out; the band itself
+                # a white board between them (not emitting)
+                for i in range(nled):
+                    a0 = 2 * math.pi * i / nled; hw = 0.0014 / r_
+                    p_ = [bm.verts.new(((r_ + 0.0005) * math.cos(a0 + sa * hw), (r_ + 0.0005) * math.sin(a0 + sa * hw), 0.068 + sz * 0.00175))
+                          for sa, sz in ((-1, -1), (1, -1), (1, 1), (-1, 1))]
+                    bm.faces.new(p_)
+                area = nled * 0.0028 * 0.0035
+            else:
+                n = 64
+                vs = [(bm.verts.new((r_ * math.cos(2 * math.pi * i / n), r_ * math.sin(2 * math.pi * i / n), z0r)),
+                       bm.verts.new((r_ * math.cos(2 * math.pi * i / n), r_ * math.sin(2 * math.pi * i / n), z1r))) for i in range(n)]
+                for i in range(n):
+                    a_, b_ = vs[i], vs[(i + 1) % n]
+                    bm.faces.new((a_[0], b_[0], b_[1], a_[1]))
+                area = 2 * math.pi * r_ * (z1r - z0r)
             bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
             me = bpy.data.meshes.new(f'ring-led-{tint}'); bm.to_mesh(me); bm.free()
             ro = bpy.data.objects.new(f'ring-led-{tint}', me); bpy.context.scene.collection.objects.link(ro); ro.location = c
-            area = 2 * math.pi * r_ * (z1r - z0r)
             em = bpy.data.materials.new(f'ring-led-em-{tint}'); em.use_nodes = True
             bsdf = em.node_tree.nodes['Principled BSDF']; bsdf.inputs['Base Color'].default_value = (0.9, 0.9, 0.88, 1)
             bsdf.inputs['Emission Color'].default_value = (*bb, 1); bsdf.inputs['Emission Strength'].default_value = rl * WLM / area
@@ -335,6 +347,10 @@ def build(frame, samples, scale):
     if kick:
         kick.data.color = blackbody(3000)
         kick.rotation_euler = (Vector((0, 0, 0.05 if kind0 == 'orb' else 0.62)) - kick.location).to_track_quat('-Z', 'Y').to_euler()
+
+    for nm_ in os.environ.get('LIGHTS_OFF', '').split(','):      # a probe: a studio light switched off
+        if nm_ and nm_ in bpy.data.objects:
+            bpy.data.objects.remove(bpy.data.objects[nm_], do_unlink=True)
 
     # --- the frames ---------------------------------------------------------------------------------------------
     kind, _, tint = frame.partition('-')
