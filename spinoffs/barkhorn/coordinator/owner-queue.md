@@ -5842,3 +5842,5 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   skeptic sees no half-stop drop on the grass under the silk (a silk acting on the speaker only?). 19:43 sent biomes, after the Dust
   final: a sky-sun agreement check on every passed or pending final (Ice, Fog, Dust, Acid, Poison) with hdri_sun, one line each; and
   confirm every silk is real, unlinked geometry that shades what lies under it.
+- 19:43 c2: the DUST HERO-LIGHT on ac9e5568 landed (e987f151, rc1-real, 19.8 min; the bottom edge a thin dark line). The hero-light rig
+  passed its proxy 3/3; the finals gate as a batch later (not needed tonight). Ember hero-light started 19:43 (~20 min).
