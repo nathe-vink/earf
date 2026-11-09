@@ -5870,3 +5870,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 19:48 SITE: Fog's habitat pulled (r47-site-next 88997e2a): /tropos/fog's gallery Front, Plate, Horn behind, Turning; /colors/fog no
   habitat; its file rc/ice-habitat ("ice" is Fog's internal key) banned with Dust's rc/orange-habitat; Ice's rc/blue-habitat the only
   habitat left (home band, /tropos/ice, /colors/ice); grep clean, sweep clean, flags-off byte-identical.
+- 19:49 SITE: still no deployment for any site push since 19:00 (r49 9e7336bf, 2490d9d3; r47-site-next fed74ff3 .. 88997e2a), while
+  r47-brand 2596a79e (19:29) and r48-biomes 1374182c (19:46) deployed. It wondered about the 168 turn PNGs (77 MB) now on its branches.
+  My reading: the slots continue about every 15 min (18:45, 18:59, 19:14, 19:29, 19:46), the first push after each wins, and the site's
+  pushes were never first: a rate limit. 19:49 sent: the freeze ~15 min before its one push, push on my "go", check within 2 min; if a
+  clean freeze still gets nothing, it goes to the owner (his dashboard and plan); keep the turn PNGs out of the deployed root.
