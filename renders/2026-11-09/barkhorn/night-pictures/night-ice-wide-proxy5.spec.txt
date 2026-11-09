@@ -1,0 +1,7 @@
+box: speaker x 0.434-0.566 y 0.211-0.760; the spec's x 0.418-0.582 y 0.2-0.78: INSIDE
+zone lower-left   mean 0.015  p99 0.064  ok
+zone lower-right  mean 0.042  p99 0.126  TOO BRIGHT
+zone top-left     mean 0.013  p99 0.026  ok
+zone top-right    mean 0.015  p99 0.032  ok
+floor outside the column (y >= 0.78) p99 0.115; below y 0.88 p99 0.126  TOO BRIGHT
+edges (4 %) mean 0.027 p99 0.131  BRIGHT

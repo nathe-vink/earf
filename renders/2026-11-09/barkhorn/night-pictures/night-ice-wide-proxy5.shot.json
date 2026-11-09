@@ -1,0 +1,520 @@
+{
+ "products": [
+  {
+   "def": "studio/products/barkhorn-cloud.json",
+   "flavour": "cloud-blue",
+   "instances": [
+    {
+     "position": [
+      0,
+      0,
+      0.0
+     ],
+     "rotate_z": 0.0,
+     "flavour": "cloud-blue",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    }
+   ]
+  },
+  {
+   "def": "studio/products/barkhorn-variants.json",
+   "flavour": "cloud-blue",
+   "instances": [
+    {
+     "position": [
+      0,
+      0,
+      0.0
+     ],
+     "rotate_z": 0.0,
+     "flavour": "cloud-blue",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    }
+   ]
+  }
+ ],
+ "materials": {
+  "uplight-edge": {
+   "glow": 0.0
+  },
+  "uplight-panel": {
+   "glow": 0.0
+  },
+  "horn-satin": {
+   "roughness": 0.05
+  }
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 236,
+  "white_out": 236,
+  "contrast": 0.05,
+  "clarity": 0.05,
+  "sharpen": 0.3,
+  "sharpen_px": 0.7,
+  "grain": 1.5,
+  "grain_px": 1.0
+ },
+ "title": "Tropos Ice, base A on its feet, polished horn A: night, lit by EARF lamps only (proxy 5: the pendant raised, its rim about 1.80 m)",
+ "size": [
+  3840,
+  2160
+ ],
+ "camera": {
+  "position": [
+   0.0,
+   -4.353,
+   1.7
+  ],
+  "target": [
+   0.0,
+   0.0,
+   1.7
+  ],
+  "lens_mm": 35.0,
+  "level": true,
+  "shift_y": -0.2524,
+  "fstop": 5.6,
+  "focus": [
+   0.0,
+   -0.2,
+   0.65
+  ]
+ },
+ "sky": {
+  "kind": "none"
+ },
+ "lights": {},
+ "set": {
+  "kind": "sweep",
+  "night": {
+   "room": {
+    "x0": -2.6,
+    "x1": 3.1,
+    "y_back": 0.78,
+    "y_front": -6.2,
+    "height": 2.4
+   },
+   "ceiling": "#E4E2DE",
+   "floor_pbr": "wood_floor",
+   "floor_tint": "#2C2824",
+   "floor_tint_mix": 0.6,
+   "floor_rough_mul": 0.55,
+   "wall_pbr": "beige_wall_002",
+   "wall_tint": "#D2CFC8",
+   "wall_tint_mix": 0.5,
+   "skirting": {
+    "height": 0.15,
+    "color": "#2A2826"
+   },
+   "opening": {
+    "y0": -1.9,
+    "y1": -0.7,
+    "z0": 0.8,
+    "z1": 2.1,
+    "sky_color": "#AEB8C8",
+    "sky_strength": 0.6,
+    "curtain": true,
+    "curtain_open": 0.75
+   },
+   "outside_light": {
+    "direction": [
+     0.62,
+     0.62,
+     -0.48
+    ],
+    "irradiance": 0.025,
+    "angle_deg": 3.0,
+    "color": "#D2D8E2"
+   },
+   "furniture": [
+    {
+     "name": "sleeve0",
+     "center": [
+      2.2,
+      -0.3,
+      0.8375
+     ],
+     "size": [
+      0.005,
+      0.315,
+      0.315
+     ],
+     "color": "#2E2B28",
+     "rough": 0.6
+    },
+    {
+     "name": "sleeve1",
+     "center": [
+      2.2062000000000004,
+      -0.3,
+      0.8375
+     ],
+     "size": [
+      0.005,
+      0.315,
+      0.315
+     ],
+     "color": "#4A3F36",
+     "rough": 0.6
+    },
+    {
+     "name": "sleeve2",
+     "center": [
+      2.2124000000000006,
+      -0.3,
+      0.8375
+     ],
+     "size": [
+      0.005,
+      0.315,
+      0.315
+     ],
+     "color": "#1F2328",
+     "rough": 0.6
+    },
+    {
+     "name": "sleeve3",
+     "center": [
+      2.218600000000001,
+      -0.3,
+      0.8375
+     ],
+     "size": [
+      0.005,
+      0.315,
+      0.315
+     ],
+     "color": "#5B5249",
+     "rough": 0.6
+    },
+    {
+     "name": "sleeve4",
+     "center": [
+      2.224800000000001,
+      -0.3,
+      0.8375
+     ],
+     "size": [
+      0.005,
+      0.315,
+      0.315
+     ],
+     "color": "#2A2F2A",
+     "rough": 0.6
+    },
+    {
+     "name": "sleeve5",
+     "center": [
+      2.231000000000001,
+      -0.3,
+      0.8375
+     ],
+     "size": [
+      0.005,
+      0.315,
+      0.315
+     ],
+     "color": "#3C3430",
+     "rough": 0.6
+    },
+    {
+     "name": "sleeve6",
+     "center": [
+      2.2372000000000014,
+      -0.3,
+      0.8375
+     ],
+     "size": [
+      0.005,
+      0.315,
+      0.315
+     ],
+     "color": "#6A6158",
+     "rough": 0.6
+    },
+    {
+     "name": "sleeve7",
+     "center": [
+      2.2434000000000016,
+      -0.3,
+      0.8375
+     ],
+     "size": [
+      0.005,
+      0.315,
+      0.315
+     ],
+     "color": "#26221F",
+     "rough": 0.6
+    },
+    {
+     "name": "sleeve8",
+     "center": [
+      2.249600000000002,
+      -0.3,
+      0.8375
+     ],
+     "size": [
+      0.005,
+      0.315,
+      0.315
+     ],
+     "color": "#2E2B28",
+     "rough": 0.6
+    },
+    {
+     "name": "sleeve9",
+     "center": [
+      2.255800000000002,
+      -0.3,
+      0.8375
+     ],
+     "size": [
+      0.005,
+      0.315,
+      0.315
+     ],
+     "color": "#4A3F36",
+     "rough": 0.6
+    },
+    {
+     "name": "sleeve10",
+     "center": [
+      2.2620000000000022,
+      -0.3,
+      0.8375
+     ],
+     "size": [
+      0.005,
+      0.315,
+      0.315
+     ],
+     "color": "#1F2328",
+     "rough": 0.6
+    },
+    {
+     "name": "sleeve11",
+     "center": [
+      2.2682000000000024,
+      -0.3,
+      0.8375
+     ],
+     "size": [
+      0.005,
+      0.315,
+      0.315
+     ],
+     "color": "#5B5249",
+     "rough": 0.6
+    },
+    {
+     "name": "sleeve12",
+     "center": [
+      2.2744000000000026,
+      -0.3,
+      0.8375
+     ],
+     "size": [
+      0.005,
+      0.315,
+      0.315
+     ],
+     "color": "#2A2F2A",
+     "rough": 0.6
+    },
+    {
+     "name": "sleeve13",
+     "center": [
+      2.280600000000003,
+      -0.3,
+      0.8375
+     ],
+     "size": [
+      0.005,
+      0.315,
+      0.315
+     ],
+     "color": "#3C3430",
+     "rough": 0.6
+    },
+    {
+     "name": "sleeve14",
+     "center": [
+      2.286800000000003,
+      -0.3,
+      0.8375
+     ],
+     "size": [
+      0.005,
+      0.315,
+      0.315
+     ],
+     "color": "#6A6158",
+     "rough": 0.6
+    },
+    {
+     "name": "sleeve15",
+     "center": [
+      2.2930000000000033,
+      -0.3,
+      0.8375
+     ],
+     "size": [
+      0.005,
+      0.315,
+      0.315
+     ],
+     "color": "#26221F",
+     "rough": 0.6
+    },
+    {
+     "name": "stack0",
+     "center": [
+      0.8,
+      -0.32,
+      0.6825
+     ],
+     "size": [
+      0.315,
+      0.315,
+      0.005
+     ],
+     "color": "#2E2B28",
+     "rough": 0.6
+    },
+    {
+     "name": "stack1",
+     "center": [
+      0.8,
+      -0.32,
+      0.6875
+     ],
+     "size": [
+      0.315,
+      0.315,
+      0.005
+     ],
+     "color": "#5B5249",
+     "rough": 0.6
+    },
+    {
+     "name": "stack2",
+     "center": [
+      0.8,
+      -0.32,
+      0.6925
+     ],
+     "size": [
+      0.315,
+      0.315,
+      0.005
+     ],
+     "color": "#6A6158",
+     "rough": 0.6
+    },
+    {
+     "name": "stack3",
+     "center": [
+      0.8,
+      -0.32,
+      0.6975
+     ],
+     "size": [
+      0.315,
+      0.315,
+      0.005
+     ],
+     "color": "#4A3F36",
+     "rough": 0.6
+    }
+   ],
+   "rug": {
+    "pbr": "curly_teddy_natural",
+    "tint": "#5A534C",
+    "tint_mix": 0.9,
+    "value": 0.06,
+    "bump": 0.6,
+    "center": [
+     0.05,
+     -0.3
+    ],
+    "size": [
+     2.4,
+     1.7
+    ],
+    "border_w": 0.035,
+    "border_color": "#24211E"
+   },
+   "models": [
+    {
+     "id": "modern_wooden_cabinet",
+     "location": [
+      1.6,
+      -0.3,
+      0.0
+     ],
+     "rotation_deg": [
+      0,
+      0,
+      0
+     ],
+     "name": "console"
+    },
+    {
+     "id": "ArmChair_01",
+     "location": [
+      -1.75,
+      -0.1,
+      0.0
+     ],
+     "rotation_deg": [
+      0,
+      0,
+      -40
+     ],
+     "name": "armchair"
+    }
+   ],
+   "lamps": [
+    {
+     "blend": "/home/user/night-work/lamps-v5/hemi-fog-night.blend",
+     "offset": [
+      0.44,
+      -0.4,
+      0.48
+     ],
+     "keep_table": false,
+     "cord_to_ceiling": true,
+     "canopy": "/home/user/night-work/lamps-v5/hemi-canopy.stl"
+    }
+   ]
+  }
+ },
+ "render": {
+  "samples": 256,
+  "adaptive": 0.01,
+  "denoise": true,
+  "clamp": 8,
+  "bounces": 32,
+  "glossy_bounces": 16,
+  "transmission_bounces": 32,
+  "view": "AgX",
+  "exposure": 3.0,
+  "white_balance_k": 3000,
+  "white_balance_tint": 0.0,
+  "look": "AgX - Base Contrast",
+  "caustics_refractive": true
+ }
+}
