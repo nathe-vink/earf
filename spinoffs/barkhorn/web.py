@@ -202,7 +202,7 @@ TT_NEXT = dict(
     # the Mantle lane's spec as built (r48-mantle-design 71d3163e, companions/mantle-r48/README.md section 11)
     facts=[('Plinth', 'Cast acrylic in its color, about 25 mm; it floats 40 mm over the base'),   # the 24.6 mm deck is an open owner question
            ('Posts', 'Four solid posts of polished stainless steel, 30 mm across'),
-           ('Base', 'Smoke cast acrylic, 12.7 mm, set in 35 mm all round'),
+           ('Base', 'Smoked cast acrylic, 12.7 mm, set in 35 mm all round'),
            ('Drive', 'Belt, from Rega&rsquo;s 24 V motor, fixed beneath the plinth'),
            ('Speeds', '33 and 45, by a button'), ('Arm', 'Rega RB330'), ('Cartridge', 'A moving-magnet cartridge, to be chosen'),   # 2M Blue or Black: an open owner question
            ('Phono stage', 'Built in, for moving-magnet cartridges, with a line out and a switch to bypass it'),
@@ -3175,12 +3175,15 @@ def share_pages():
     for k, num, name, icon, tint, line, cover in CLOUDS:
         low, col = name.lower(), MARK[k]
         img = card(f'{k}-habitat-1200.jpg', f'speaker-{k}.jpg')
-        desc = f'{line} Tropos {num}, a powered horn loudspeaker cast in {tint.lower()} acrylic. In development, not yet for sale.'
+        desc = (f'{line} Tropos {num}, a powered horn loudspeaker in {tint.lower()} cast acrylic. In development, not yet for sale.' if COPY_NEXT else
+                f'{line} Tropos {num}, a powered horn loudspeaker cast in {tint.lower()} acrylic. In development, not yet for sale.')
         made.append(page(f'speaker-{low}', f'Tropos in {name} · EARF', desc, img, f'Tropos in {name}, {PLACES.get(ELEMENT[k], "on location")}',
                          col, 'product', product('Tropos', name, desc, img, ('Loudspeakers',))))
         for lk, lname, kind, lline, alt, facts in LAMPS:
             src = f'{lk}-{k}.jpg' if os.path.exists(os.path.join(IMG, f'{lk}-{k}.jpg')) else f'{lk}-red.jpg'
             img = card(src, f'{lk}-{k}.jpg', 'pad')
+            if COPY_NEXT:                   # the pendant hangs over a table (the review, 2026-11-09)
+                lline = lline.replace('Hung low over the bar.', 'Hung low over a table.')
             desc = f'{lline} {kind} in {name}. In development, not yet for sale.'
             made.append(page(f'{SLUG[lk]}-{low}', f'{lname} in {name} · EARF', desc, img, f'{lname} lit, in {name}', col, 'product',
                              product(lname, name, desc, img, ('Lighting',))))
