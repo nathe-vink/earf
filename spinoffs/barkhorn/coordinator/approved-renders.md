@@ -45,9 +45,9 @@ three times, the Fresnel loss twice). From now on each face carries √0.92 and 
 the old rule are marked; each is re-rendered under the new rule and gated against its passed file before it is swapped.
 | Picture | Source | Gate | Used by |
 |---|---|---|---|
-| Ice, "Out in the snow at dusk." | 0f619953 | PASSED (re-proxied under 3122f00c's rule 9 Nov 22:24: within noise, the file stays; the horn under the same rule (--horn-shadows) being checked) | site (home band, /tropos/ice, /colors/ice), Book |
-| Dust, "On rippled sand among desert buttes." | r48-biomes 43c91242: renders/2026-11-03/barkhorn/habitats/dust-portrait-1200x1500-nopanel.jpg | PASSED 3/3 (9 Nov; re-proxied under 3122f00c's rule 22:24: within noise, the file stays; --horn-shadows being checked) | site, Book |
-| Fog, "In the grass on a hillside, in fog at dawn." | r48-biomes aa1ca856: habitats/fog_b-portrait-1200x1500-onesun.jpg (sha256 9f1fa543...; the glass's Fresnel loss in its shadows: the inside a touch dimmer) | PASSED 2/2 (9 Nov 21:21, photo and skeptic) | site, Book ("In fog at dawn."), swapping in tonight's push |
+| Ice, "Out in the snow at dusk." | 0f619953 | PASSED (verified 9 Nov 22:56 under the current rules: tint once, the horn under the rule, angle-dependent Fresnel; within noise, the file stays) | site (home band, /tropos/ice, /colors/ice), Book |
+| Dust, "On rippled sand among desert buttes." | r48-biomes 43c91242: renders/2026-11-03/barkhorn/habitats/dust-portrait-1200x1500-nopanel.jpg | PASSED 3/3 (9 Nov; under the current rules 22:56 the table is within noise but the horn's pod changes: re-render with the horn under the rule queued; this file stays until it passes) | site, Book |
+| Fog, "In the grass on a hillside, in fog at dawn." | r48-biomes aa1ca856: habitats/fog_b-portrait-1200x1500-onesun.jpg (sha256 9f1fa543...; the glass's Fresnel loss in its shadows: the inside a touch dimmer) | PASSED 2/2 (9 Nov 21:21, photo and skeptic; verified 22:56 under the current rules, within noise) | site, Book ("In fog at dawn."), swapping in tonight's push |
 | Acid | r48-biomes 539c3772 | HOLD 1/3 (rain stops at the speaker; dry; dark cabinet) | none |
 | Poison, Ember, Haze | in progress / not started (Haze waits on the horn pour) | | none |
 
