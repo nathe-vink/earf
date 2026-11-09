@@ -1474,7 +1474,7 @@ TURN = {'red': 'A-polished-p2/turn-ember', 'orange': 'A-polished-p2/turn-dust', 
 # Acid 00-16 c4 42fa8eee, 17-23 c3 66126d53 (A-polished-p2-rc1); Haze c3 66126d53; Poison, Ice c4 eef18db2.
 # Fog's first turn read as Ice (its pale-blue ground; the RC3.1 review, P3). Its re-render on a neutral ground
 # (#DFDAD7; r33-rollout-c3 a688c59e, A-polished-p2-rc2) goes in when FOG_TURN is on, once it passes its gate.
-FOG_TURN = False
+FOG_TURN = True
 if FOG_TURN:
     TURN['ice'] = 'A-polished-p2-rc2/turn-fog'
 TURN_REST = 20        # three-quarter front: the mouth opens toward you and the cabinet's side shows (the addendum, 3)
