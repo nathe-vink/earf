@@ -680,6 +680,14 @@ def site(frame, tint):
             {'center_m': [0.76, -1.91, 1.47], 'size_m': [2.0, 1.0], 'normal': [0.0, 0.0, 1.0], 'color': '#050505',
              'camera': True, 'glossy': True, 'name': 'horn cutter'})
         s['render']['exposure'] = round((s['render'].get('exposure') or 0.0) - 0.15, 3)
+    if frame == 'front-off-wide' and 'horn' in s['lights']:
+        # (the honest wide's gate, 2026-11-09: a crisp near-white tapered stroke across 27 % of the horn's lip, read as a
+        # logo. Not the key: the key 8 to 24 deg higher and 8 deg toward the lens changed nothing. It is the `horn` lamp,
+        # the whole of it drawn into a line by the lip's curve (ray-cast from the stroke: its rays meet the lamp across
+        # u 0.01-0.75, v 0-1, so no edge flag can take it), and in this view that lamp lights the horn's shell not at
+        # all: shell 223/114/26 with it, 222/114/25 without; the stroke 655 px -> 54. A lamp dimmed as a whole: off)
+        s['lights']['horn']['irradiance'] = 0.0
+        s['lights']['horn'].pop('power_w', None)
     if frame in ('front-off-tall', 'front-off-wide', 'hero-light', 'side', 'back'):
         realize_hidden(s)
     # a panel at strength 0 still stands in the set: unseen by the camera and casting no shadow, but in the glossy floor's
