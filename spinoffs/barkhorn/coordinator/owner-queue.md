@@ -5761,3 +5761,14 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   wall 211 -> 216, the mark unchanged; the horn's back darker (132 -> 100). 19:31 GATE BACK PROOF launched (wf_73733377-178).
 - 19:32 sent every lane but the site: a PUSH FREEZE from 20:00 until lifted (~20:25): commit locally, no pushes, so the site's talls
   push gets the next Vercel slot (the talls, the Ember unlit pair and the proxies to be pushed before 20:00 where possible).
+- 19:32 GATE HIDDEN-REAL PROXIES (wf_0ae4c3fa-7c2), 2 of 3 in (founder, photographer), the same on both: HERO-LIGHT SHOW (unchanged);
+  SIDE SHOW (the base line gone, 604 -> 4 pure-red px; the paler body acceptable, S 0.81); the honest TALL HOLD: the moved horn lamp
+  lights the floor in front, which mirrors into the lower front as a veil (centre-block blue 0.05 -> 0.18 linear; cabinet median
+  saturation 0.82 -> 0.67; the bottom batt amber -> salmon; woofer 84 -> 99 L; the floor in front 229 -> 250, its soft shadow gone);
+  the WIDE HOLD: the lip highlight is a crisp near-white tapered stroke over 27 % of the horn's width, read as a logo at every size.
+  So the rc1-real talls won't pass as they stand. 19:32 sent the speaker lane (urgent, ahead of the arc): one SHA with (1) the tall's
+  horn lamp confined: a real 20-30° grid and a cutter under it, or raised out of the front's mirror path, real black flags below the
+  lens; targets: cabinet saturation >= 0.78 at V <= 0.82, batt S >= 0.68, woofer <= 88 L, floor ~229 with its halo, centre-block blue
+  <= ~0.06; (2) the card trim; (3) the wide's key 5-10° up, then toward the camera axis (a real flag or graded scrim if a point
+  remains). Proofs on Dust and Ember at half size. 19:33 c4, c3: no wides; push the tall in progress, then render the seven talls on
+  the fix. The 20:00 freeze CANCELLED (the site's push now ~21:00); a new freeze to be announced ~15 min before it.
