@@ -47,7 +47,7 @@ PINNED = {'room.jpg': ('754e16a9852f364fb2ebe8eb752c10ab6bdc0e23', 'renders/2026
           'honest-horn-ember.jpg': ('bc8f51b541de8bb3bb5c5a89065c9cdc8d3d796b', 'renders/2026-11-04/barkhorn/rollout/A-polished-p2/horn-back-ember.png'),
           'honest-mantle-day.jpg': ('41232b56c60d1980a5ee3de0dddd8344ffb85fee', 'renders/2026-11-03/barkhorn/mantle-r48/a5-day-ember-2423-c3e.png'),
           'honest-dust-habitat.jpg': ('43c91242f3d29b3da0bb4da4f16ddc0bc30616d1', 'renders/2026-11-03/barkhorn/habitats/dust-portrait-1200x1500-nopanel.jpg'),
-          'honest-fog-habitat.jpg': ('cd5aa4e683fe16c478c1b399db79e396d0c730da', 'renders/2026-11-03/barkhorn/habitats/fog_b-portrait-1200x1500-onesun.jpg')}
+          'honest-fog-habitat.jpg': ('aa1ca856b675784ab86ec66f4c93c5caf49b121b', 'renders/2026-11-03/barkhorn/habitats/fog_b-portrait-1200x1500-onesun.jpg')}
 
 
 def pinned():
