@@ -29,7 +29,9 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..', '..'))
 OUT = os.path.join(ROOT, 'renders', '2026-11-09', 'barkhorn', 'lamp-site')
 WLM = 3.2 / 490.0                                     # Blender W per lumen (the one scale)
-CCT = 2700
+CCT = int(os.environ.get('LAMP_CCT', '2700'))
+# item 90 (the coordinator's open proposal to the owner, PROPOSAL): each tint at its own colour temperature
+CCT_PER_TINT = {'blue': 5700, 'violet': 4000}         # the rest 2700
 # the site's colour keys (web.py HABITAT) to the tints
 COLOURS = {'red': 'Ember', 'orange': 'Dust', 'amber': 'Acid', 'green': 'Poison', 'blue': 'Ice', 'violet': 'Haze',
            'ice': 'Fog', 'black': 'Smoke dark'}
@@ -49,6 +51,9 @@ def build(frame, samples, scale):
     import scene as SC
     bpy.ops.wm.read_factory_settings(use_empty=True)
     MM = SC.MM
+    pertint = os.environ.get('CCT_MODE') == 'pertint'
+    def bbt(tint):
+        return blackbody(CCT_PER_TINT.get(tint, 2700) if pertint else CCT)
     bb = blackbody(CCT)
     kind0 = {'lamps-domes': 'dome', 'lamps-orbs': 'orb'}.get(frame, frame.split('-')[0])   # a row as its hero
     # the studio's brightness and the exposure move together, so the paper holds its tone while the lamp, at its real
@@ -119,7 +124,7 @@ def build(frame, samples, scale):
 
     def hemisphere(tint, x, rim_z, y=0.0):
         """Hemisphere v3 as drawn, lit, its rim's centre at (x, y, rim_z)."""
-        tname = COLOURS[tint]
+        tname = COLOURS[tint]; bb = bbt(tint)
         c = (x, y, rim_z); H = 48.2
         Tt, Tc = shell_T(tname, 1.0, 1.5), shell_T('Clear', 1.0, 3.0)
         sphere(f'tint-{tint}', 100.0, c, thin_shadow(acrylic(f'tint-{tint}', 0.0, tname), Tt), cut=0.0, hole=H)
@@ -163,7 +168,7 @@ def build(frame, samples, scale):
 
     def core(tint, x, floor_z, y=0.0, rot=0.0):
         """Core A as drawn, on its dock, lit, the dock's underside on floor_z at (x, y)."""
-        tname = COLOURS[tint]
+        tname = COLOURS[tint]; bb = bbt(tint)
         z0 = floor_z + 0.0065                         # the dock's underside on the floor (as lamp_pictures: the CAD's
                                                       # dock underside sits 6.5 below its origin)
         objs = []
@@ -240,6 +245,11 @@ def build(frame, samples, scale):
     os.makedirs(OUT, exist_ok=True)
     sc.render.filepath = os.environ.get('LAMP_OUT') or os.path.join(OUT, frame + '.png')
     bpy.ops.render.render(write_still=True)
+    # the scene-linear EXR beside the PNG, so exposure and look can change without a re-render (the coordinator)
+    if os.environ.get('EXR', '1') == '1':
+        img = bpy.data.images['Render Result']; fmt = sc.render.image_settings
+        fmt.file_format = 'OPEN_EXR'; fmt.color_depth = '16'; fmt.exr_codec = 'DWAA'
+        img.save_render(os.path.splitext(sc.render.filepath)[0] + '.exr', scene=sc)
 
 
 if __name__ == '__main__':
