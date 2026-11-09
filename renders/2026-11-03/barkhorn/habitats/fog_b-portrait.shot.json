@@ -346,8 +346,8 @@
     "shape": "asset",
     "model": "boulder_01",
     "position": [
-     0.55,
-     2.45,
+     2.6,
+     3.6,
      -0.12
     ],
     "rotate": [
@@ -426,7 +426,28 @@
    }
   ]
  },
- "lights": {},
+ "lights": {
+  "fill_l": {
+   "type": "area",
+   "size_m": [
+    2.0,
+    2.0
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.8
+   ],
+   "irradiance": 1.0,
+   "color": "#F2F4F8",
+   "orbit": {
+    "azimuth_deg": -55,
+    "elevation_deg": 15,
+    "distance_m": 3.5
+   },
+   "specular": 1.0
+  }
+ },
  "render": {
   "samples": 512,
   "adaptive": 0.02,
@@ -435,7 +456,8 @@
   "bounces": 12,
   "view": "AgX",
   "exposure": 0.0,
-  "look": "AgX - Base Contrast"
+  "look": "AgX - Base Contrast",
+  "white_balance_k": 5400
  },
  "title": "barkhorn, Fog: San Francisco fog over a Marin headland at dawn (4:5)",
  "size": [
