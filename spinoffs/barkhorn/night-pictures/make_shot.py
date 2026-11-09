@@ -56,7 +56,7 @@ ROOM = {'x0': -2.6, 'x1': 3.1, 'y_back': 0.78, 'y_front': -6.2, 'height': 2.25}
 # its lamp inside the box; the text zones dark; light pools inside the speaker's column. The camera level at the
 # middle of speaker-plus-shade (0 to about 1.55 m), its distance set so that height fills the box's height
 FORMATS = {
-    'wide': {'size': [3840, 2160], 'lens_mm': 35.0, 'box_h': 0.54, 'dz': -0.10},
+    'wide': {'size': [3840, 2160], 'lens_mm': 35.0, 'box_h': 0.54, 'dz': -0.075},
     'tall': {'size': [1440, 2560], 'lens_mm': 35.0, 'box_h': 0.31, 'dz': -0.02},
 }
 LAMP_TOP = 1.72                  # (gate 2: the Hemisphere's crown with its rim at 1.60)
@@ -131,7 +131,9 @@ def shot(root, tint, lamp_dir, fmt='wide', core=False):
         # oak), the wall plaster (beige_wall_001 tinted toward off-white), a dark skirting
         'floor_pbr': 'wood_floor', 'floor_tint': '#2C2824', 'floor_tint_mix': 0.6, 'floor_rough_mul': 0.55,
         # gate 3: a plaster with relief the light can graze (beige_wall_002), toned toward a limewash off-white
-        'wall_pbr': 'beige_wall_002', 'wall_tint': '#D2CFC8', 'wall_tint_mix': 0.5, 'wall_value': 0.62,
+        # proxy 7 (the skeptic, 19:54): the wall's paint deeper (a darker limewash, not less light), so the wall above
+        # the speaker falls well below its lit batts
+        'wall_pbr': 'beige_wall_002', 'wall_tint': '#D2CFC8', 'wall_tint_mix': 0.5, 'wall_value': 0.42,
         'skirting': {'height': 0.15, 'color': '#2A2826'},
         # ruling 4: a real window in the left wall, out of frame, a sheer curtain in it and the evening sky outside;
         # gate 1: dimmer and near-neutral, so the room is not tinted Ice's blue
