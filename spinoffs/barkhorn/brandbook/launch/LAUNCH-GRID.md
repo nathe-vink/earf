@@ -1,5 +1,7 @@
 # The launch grid: nine posts after the debut
 
+**HELD (2026-11-09):** the mockup `out/launch-grid.png` shows a lit Core in post 5 (Core B's lit look is open, 133) and a glowing Mantle base in post 2 (waits on whether Mantle as drawn, Strata Float, has a light at all). Do not send it; redraw from the approved list. See `out/HELD.md`.
+
 Three weeks, three posts a week, from the morning after the debut. Days count from the debut, D; no calendar dates
 until the owner sets the debut. Each post is one picture, one line, the wordmark small in a corner (the Brand Book's
 social rules); the caption below the post says what is true and useful, never "link in bio", no hashtag lists, no emoji.

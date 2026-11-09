@@ -1,5 +1,7 @@
 # The teaser: "A world of sound, in color." (25 s)
 
+**HELD (2026-11-09):** beat 6 shows lit lamps with a glowing Mantle, and beat 3 shows the uplit eight, which is no longer the product (base A has no light). The board and both films are not to be sent or posted until re-cut. See `out/HELD.md`.
+
 For the debut invitation's email, the site and the feed. Built by `teaser.py` from the existing renders, in the
 brand's type: `out/earf-teaser-16x9.mp4` (1920 × 1080, about 5 MB) and `out/earf-teaser-4x5.mp4` (1080 × 1350, about
 4 MB), 25 fps, H.264. The board: `out/earf-teaser-storyboard.jpg`; one still per beat in `out/teaser-*-beat*.jpg`.
