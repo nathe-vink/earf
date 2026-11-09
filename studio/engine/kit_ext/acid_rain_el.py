@@ -143,9 +143,12 @@ def rain(bpy, name, p, kit):
         perp = ax.cross(Vector((0, 0, 1))).normalized()
         hw, zl, zh, mg = ol[2] + ol[5], ol[3] - ol[5], ol[4] + ol[5], ol[5]
 
+        front_only = p.get('outline_front_only', False)   # mask only the streaks between the camera and the subject
+        mask_from = p.get('outline_from', 0.05)            # ... and no nearer than this (m): the soft, far-out-of-focus ones stay
+
         def in_outline(q):
             v = q - C; along = v.dot(ax)
-            if along <= 0.05:
+            if along <= mask_from or (front_only and along > D - 0.35):
                 return False
             return abs(v.dot(perp)) / along < hw / D and (zl - C.z) / D < (q.z - C.z) / along < (zh - C.z) / D
     bm = bmesh.new()

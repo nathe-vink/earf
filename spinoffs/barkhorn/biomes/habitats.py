@@ -20,7 +20,8 @@ HABITATS = {
     'ember':     ('Ember',  {'through': 0, 'horn': 0, 'face': 0}),
     'dust':      ('Dust',   {'bounce': 0}),   # the shot's 8 x 3 m 'bounce' panel stood hidden between the camera and the speaker
                                                  # (the audit, 2026-11-09: 100 % of the frame); off: the sand bounces for real (-0.1 stop)
-    'acid_b':    ('Acid',   {'bounce': 0, 'throat': 0, 'low': 0, 'rim': 0.3}),
+    'acid_b':    ('Acid',   {'bounce': 0, 'throat': 0, 'low': 0, 'rim': 0}),   # rim off: the audit (2026-11-09) found the
+                                                                             # hidden 1.5 m lamp in 5.4 % of the frame
     'poison_g5': ('Poison', {'reflector': 0, 'bounce': 0, 'card': 0}),
     'ice':       ('Ice',    {'bounce': 0, 'back': 0, 'throat': 0}),
     'haze_b':    ('Haze',   {'bounce': 0}),
@@ -46,8 +47,8 @@ SETS = {
     # the low sun behind at 148 deg, the batts block it. To three-quarter back, 120, as Dust's 118, the sky turned with it)
     # (the 9097 yellow read olive at that luminance: the camera's exposure up +0.75 EV (-0.1 -> 0.65, a global camera
     # change; the sky's p99 170 has room) and more of the low sun through a break in the rain cloud, 10 -> 18)
-    'acid_b': {'product.instances.0.rotate_z': -8.0, 'lights.rim.receivers': None, 'sun.azimuth_deg': 120.0,
-               'sky.rotation_deg': 292.9, 'render.exposure': 0.65, 'sun.irradiance': 35.0,
+    'acid_b': {'product.instances.0.rotate_z': -8.0, 'sun.azimuth_deg': 120.0,   # (no rim: its receivers key re-made it)
+               'sky.rotation_deg': 292.9, 'render.exposure': 1.0, 'sun.irradiance': 35.0,   # 0.65 -> 1.0 (the coordinator, 20:46: +0.5-0.7 if still dark; at +0.5 the sky washed out)
                # the gate on cc380fab (18:42): the storm neutral, the speaker the only yellow (a grey storm sun, no tint)
                # the lamp in the sky's own sun colour (hdri_sun: #FECC8B; a grey lamp under a warm-sunned sky is two suns' worth
                # of inconsistency, the coordinator 19:45); the white balance tint at 0 stays
@@ -120,9 +121,11 @@ MODIFY = {'haze_b': {'sundisk': {'azimuth': 30.0, 'elevation': 6.0}},
           # Fog (the coordinator's gate on 5c0f8509: the clear cabinet read champagne): the brown boulder right behind it,
           # seen through the clear walls, moved aside, so the bright fog bank sits behind the box
           'fog_b': {'boulder_01': {'position': [2.6, 3.6, -0.12]}},
-          # Acid (the coordinator's gate on cc380fab: a streak over the woofer read as a crack in the front panel): no rain,
-          # nearer or farther, inside the speaker's outline as the camera sees it (x, y, half width, z low, z high, margin)
-          'acid_b': {'rain': {'outline': [0.022, 0.0, 0.27, 0.0, 1.25, 0.01]}},   # fitted to the horn's edges in the frame
+          # Acid: the outline mask (no rain inside the speaker's outline, the gate on cc380fab) kept only in front of the
+          # speaker (the coordinator, 20:46: the rain behind shows through the clear horn, as it would; without the mask a
+          # near-focus streak 5-9 m out crossed the woofer again, proxy a2). The 2.5-5 m layer, soft, is not masked
+          'acid_b': {'rain': {'outline': [0.022, 0.0, 0.27, 0.0, 1.25, 0.01], 'outline_front_only': True,
+                              'outline_from': 5.1}},
           # Poison (d): the canopy's first explicit hole, whose sunfleck lit the top batt (the sun's line from the box's
           # top passes inside it), moved 1.0 m along the canopy's x, so its fleck falls on the floor 1 m to the right
           'poison_g5': {'canopy': {'holes': [[-15.362, -1.196, 0.36], [-11.625, 4.314, 0.7], [-8.031, 8.121, 0.8], [-5.531, 12.121, 0.7], [-14.125, 5.431, 0.6], [-16.615, 0.204, 0.4], [-16.306, 3.793, 0.1], [-17.438, -2.458, 0.16], [-16.55, -1.614, 0.18]]}}}
@@ -130,9 +133,11 @@ MODIFY = {'haze_b': {'sundisk': {'azimuth': 30.0, 'elevation': 6.0}},
 FLAG = {'haze_b': (4.0, 3.0)}
 # feet bedding per habitat (m; default 0.012, the cabinet on the ground). Acid stands in a puddle: at 12 mm its bottom sat
 # exactly on the water, and the water reflected a band of sky between the edge and its reflection (the gate: "hovers")
-SINK = {'acid_b': 0.025,   # at 0.015 a sky-bright strip (8-9 px) showed between the edge and its reflection (the gate on
+SINK = {'acid_b': 0.05,    # 2026-11-09: 0.025 left the bottom panel's 20 mm front edge above the water, mirrored as a
+                          # grey band 25-30 px under the cabinet (the trace); at 0.05 the reflection meets the walls
+        # (earlier: at 0.015 a sky-bright strip (8-9 px) showed between the edge and its reflection (the gate on
                           # cc380fab: "hovers"); the puddle's displacement sits above the ray-cast surface. 0.025 closes it
-                          # (strip peak 82 -> 56 against water 50); at 0.03 the submerged part showed through
+                          # (strip peak 82 -> 56 against water 50); at 0.03 the submerged part showed through)
         'acid_b_old': 0.03, 'ice': 0.022}   # Ice ~1 cm deeper: light showed under its left front corner in the snow
 # the horn's outside: polished (the owner, 2026-11-03 15:14: "Horn: polished"; satin was 0.25)
 HORN_ROUGH = 0.05
@@ -147,8 +152,14 @@ PLANT_ALPHA = {}
 _RW = {"kind": "kit", "shape": "ext", "module": "poison_el", "fn": "redwood", "radius": 1.4, "height": 40.0, "tint": "#8A4126",
        "tint_mix": 0.3, "tex_scale": 1.4, "bump": 1.6}
 ADD = {'poison_g5': [dict(_RW, position=[-5.0, 28.2, -0.1], seed=41, turn=40), dict(_RW, position=[-7.0, 32.9, -0.1], seed=42, turn=200),
-                      dict(_RW, position=[-3.6, 31.5, -0.1], seed=43, turn=310)]}
+                      dict(_RW, position=[-3.6, 31.5, -0.1], seed=43, turn=310)],
+       # Acid (the coordinator, 20:46): splash crowns in the puddle at the speaker's foot, lightly breaking its reflection
+       'acid_b': [{'kind': 'kit', 'shape': 'ext', 'module': 'acid_rain_el', 'fn': 'splashes', 'area': [-0.7, -1.6, 0.7, -0.22],
+                   'z': -0.11, 'count': 28, 'radius': [0.006, 0.016], 'avoid': [[0.0, 0.0, 0.34]], 'opacity': 0.85, 'seed': 17}]}
 CANOPY_OPEN = {'poison_g5': 0.25}
+# rain on the speaker (the coordinator, 20:46): beads on the front and the horn's lip, runnels; a meniscus at the waterline
+WET = {'acid_b': (150, 60, 2, 1)}
+MENISCUS = {'acid_b': 0.002}
 SAMPLES = {'ember': 96, 'poison_g5': 96, 'haze_b': 96, 'fog_b': 96}
 
 
@@ -163,6 +174,8 @@ def main():
     ap.add_argument('--tag', default='', help='suffix on the output name')
     ap.add_argument('--sink', type=float, help="the feet's bedding, m, in place of the habitat's (tests)")
     ap.add_argument('--scrim', type=float, nargs=4, help='a silk on the sun line: T W H D (tests)')
+    ap.add_argument('--meniscus', type=float)
+    ap.add_argument('--wet', type=float, nargs=4, help='rain on the speaker: front beads, lip beads, runnels, seed')
     ap.add_argument('--card', nargs=5, action='append', default=[], help='a real card: KIND W H Z SIDE (tests)')
     ap.add_argument('--dot', nargs=5, action='append', default=[], help="a grip's dot: D SIZE TX TY TZ (tests)")
     ap.add_argument('--clearing-at', type=float, nargs=2, help="the gap's centre, world X Y (tests)")
@@ -195,6 +208,8 @@ def main():
             + (['--canopy-clearing-at', *map(str, a.clearing_at)] if a.clearing_at else []) \
             + (['--plant-alpha', *PLANT_ALPHA[n]] if n in PLANT_ALPHA else []) \
             + (['--scrim', *map(str, a.scrim)] if a.scrim else []) \
+            + (['--wet', *map(str, a.wet or WET[n])] if (a.wet or n in WET) else []) \
+            + (['--meniscus', str(a.meniscus or MENISCUS[n])] if (a.meniscus or n in MENISCUS) else []) \
             + [x for c in a.card for x in ('--card', *c)] \
             + [x for d in a.dot for x in ('--dot', *d)]
         with open(out.replace('.png', '.log'), 'w') as log:

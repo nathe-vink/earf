@@ -49,6 +49,8 @@ GLOSSY_FLAG = [False]                   # --glossy-flag: the flag and cards seen
 SPLIT = [None]                          # --split R G B: the tint's channel split, luminance held per part (the shared 9097 fix)
 DOTS = [[]]                             # --dot D SIZE TX TY TZ: a grip's dot, SIZE m, D m out on the sun line from (TX, TY, TZ)
 CARDS = [[]]                            # --card white|black W H Z SIDE_DEG: real cards round the speaker, pushed out of frame
+MENISCUS = [0.0]                        # --meniscus R: a water meniscus round the cabinet's walls, radius R m
+WET = [None]                            # --wet F L R SEED: rain beads on the front (F) and horn lip (L), R runnels
 SCRIM = [None]                          # --scrim T W H D: a silk on the sun's line D m out, W x H m, passing T of the beam
 PLANT_ALPHA = [()]                      # --plant-alpha ID...: wire these Poly Haven plants' own Alpha maps into their cards
 CLEARING_AT = [(0.0, 0.0)]              # --canopy-clearing-at X Y: the gap's centre, world m (default over the speaker)
@@ -382,6 +384,165 @@ def scrim(bpy_, linked, spec):
     print(f'scrim: {w} x {h} m passing {t} of the beam, {round((f.location - c0).length, 2)} m out on the sun line at {[round(v, 2) for v in f.location]}')
 
 
+def wet(bpy_, linked, spec):
+    """Rain on the speaker: water beads on the cabinet's front and on the horn's lip, and runnels down the front, each
+    a low dome of clear water (IOR 1.33) sitting on the surface, seen by every ray type. spec: [front beads, lip beads,
+    runnels, seed]. The surface is found by ray casts against the placed speaker (its rotation from the instance)."""
+    import bmesh
+    import random
+    from mathutils import Vector, Matrix
+    sc = bpy_.context.scene
+    n_front, n_lip, n_run, seed = int(spec[0]), int(spec[1]), int(spec[2]), int(spec[3])
+    rnd = random.Random(seed)
+    dg = bpy_.context.evaluated_depsgraph_get()
+    e = linked[0]
+    R = e.matrix_world.to_3x3().normalized(); P = e.matrix_world.translation
+    fwd = (R @ Vector((0, -1, 0))).normalized()                    # the speaker's front faces -y before its turn
+    side = (R @ Vector((1, 0, 0))).normalized()
+
+    def part(ob):
+        return ob.name.split(' ')[-1].split('#')[0] if ob else ''   # welded parts are named 'front-panel#0'
+
+    def hit(o, d, want):
+        ok, loc, nrm, _i, ob, _m = sc.ray_cast(dg, o, d)
+        if not ok or not want(part(ob)):
+            return None
+        if nrm.dot(d) > 0:
+            nrm = -nrm
+        return loc, nrm.normalized()
+    bm = bmesh.new()
+
+    def dome(loc, nrm, r, flat=0.38, stretch=1.0, down=None):
+        """A drop on the surface: half an ellipsoid, r across (stretch along `down`), flat x r high, its rim 0.05 mm
+        under the surface so no air shows under it."""
+        g = bmesh.ops.create_uvsphere(bm, u_segments=12, v_segments=6, radius=1.0)
+        vs = g['verts']
+        kill = [v for v in vs if v.co.z < -1e-4]
+        t = (down - nrm * down.dot(nrm)).normalized() if down is not None else nrm.orthogonal().normalized()
+        b = nrm.cross(t)
+        M = Matrix((t * r * stretch, b * r, nrm * r * flat)).transposed()
+        for v in vs:
+            v.co = loc + M @ v.co - nrm * 0.00005
+        bmesh.ops.delete(bm, geom=kill, context='VERTS')
+    front = lambda n: n in ('front-panel',)
+    hornp = lambda n: n.startswith('horn') or 'waveguide' in n
+    nf = nl = 0
+    for _ in range(n_front * 20):
+        if nf >= n_front:
+            break
+        # over the front, more drops low (the splash-back) and toward the edges
+        u, v = rnd.uniform(-0.3, 0.3), rnd.uniform(0.02, 1.0) ** 1.6 * 1.0
+        o = P + side * u + Vector((0, 0, 0.05 + v)) + fwd * 1.0
+        h = hit(o, -fwd, front)
+        if h is None:
+            continue
+        r = 0.0012 + rnd.random() ** 3 * 0.0035                     # most 1-2 mm, a few to 4.7
+        dome(h[0], h[1], r, stretch=1.0 + rnd.uniform(0.0, 0.35), down=Vector((0, 0, -1)))
+        nf += 1
+    for _ in range(n_lip * 40):
+        if nl >= n_lip:
+            break
+        # the horn's lip from above and in front: drops collect on its upper faces
+        o = P + side * rnd.uniform(-0.32, 0.32) + fwd * rnd.uniform(-0.3, 0.35) + Vector((0, 0, 2.5))
+        h = hit(o, Vector((0, 0, -1)), hornp)
+        if h is None or h[1].z < 0.25:
+            continue
+        r = 0.001 + rnd.random() ** 3 * 0.003
+        dome(h[0], h[1], r, flat=0.45)
+        nl += 1
+    nr = 0
+    for k in range(n_run * 30):
+        if nr >= n_run:
+            break
+        # a runnel: from a drop high on the front straight down the face, a thin water line ending in a fat bead
+        o = P + side * rnd.uniform(-0.22, 0.22) + Vector((0, 0, rnd.uniform(0.75, 1.0))) + fwd * 1.0
+        h = hit(o, -fwd, front)
+        if h is None:
+            continue
+        loc, nrm = h
+        L = rnd.uniform(0.12, 0.3); step = 0.0012; w = rnd.uniform(0.0007, 0.001)
+        pts = []
+        p = loc.copy(); wob = 0.0
+        while (loc - p).length < L:
+            pts.append((p.copy(), nrm))
+            wob += rnd.uniform(-0.15, 0.15); wob *= 0.9
+            dn = Vector((0, 0, -1)); dn = (dn - nrm * dn.dot(nrm)).normalized()
+            tn = nrm.cross(dn)
+            q = p + (dn + tn * wob * 0.15).normalized() * step
+            h2 = hit(q + nrm * 0.01, -nrm, front)
+            if h2 is None:
+                break
+            p, nrm = h2
+        if len(pts) < 20:
+            continue
+        for i, (q, n) in enumerate(pts):
+            dome(q, n, w * (1.0 + 0.25 * math.sin(i * 0.37)), flat=0.5, stretch=1.6, down=Vector((0, 0, -1)))
+        dome(pts[-1][0], pts[-1][1], rnd.uniform(0.0025, 0.0035), flat=0.5, stretch=1.25, down=Vector((0, 0, -1)))
+        nr += 1
+    me = bpy_.data.meshes.new('wet'); bm.to_mesh(me); bm.free()
+    for f in me.polygons:
+        f.use_smooth = True
+    m = bpy_.data.materials.new('wet-water'); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+    out = nt.nodes.new('ShaderNodeOutputMaterial'); gl = nt.nodes.new('ShaderNodeBsdfGlass')
+    gl.inputs['IOR'].default_value = 1.333; gl.inputs['Roughness'].default_value = 0.0
+    nt.links.new(gl.outputs[0], out.inputs['Surface']); me.materials.append(m)
+    ob = bpy_.data.objects.new('wet', me); sc.collection.objects.link(ob)
+    print(f'wet: {nf} beads on the front, {nl} on the horn, {nr} runnels ({len(me.polygons)} faces)')
+
+
+def meniscus(bpy_, linked, r):
+    """A water meniscus where the cabinet stands in the puddle: a thin tube of water, radius r, around the four walls
+    at the water's own height (found by casting down beside each wall), half in the water, against the wall."""
+    import bmesh
+    from mathutils import Vector
+    sc = bpy_.context.scene; dg = bpy_.context.evaluated_depsgraph_get()
+    e = linked[0]; M = e.matrix_world
+    pts = []
+    for o in e.instance_collection.all_objects:
+        if o.type == 'MESH' and o.name.split(' ')[-1].split('#')[0] in ('front-panel', 'back', 'left', 'right', 'bottom'):
+            pts += [o.matrix_world @ Vector(c) for c in o.bound_box]
+    if not pts:
+        return
+    lo = Vector([min(p[i] for p in pts) for i in range(3)]); hi = Vector([max(p[i] for p in pts) for i in range(3)])
+    corners = [Vector((x, y, 0)) for x, y in ((lo.x, lo.y), (hi.x, lo.y), (hi.x, hi.y), (lo.x, hi.y))]
+    out_dirs = [Vector((0, -1, 0)), Vector((1, 0, 0)), Vector((0, 1, 0)), Vector((-1, 0, 0))]
+    bm = bmesh.new(); made = 0
+    for k in range(4):
+        a, b = M @ corners[k], M @ corners[(k + 1) % 4]
+        a.z = b.z = 0.0
+        out = (M.to_3x3().normalized() @ out_dirs[k]).normalized()
+        n = max(2, int((b - a).length / 0.004))
+        ring = []
+        for i in range(n + 1):
+            q = a + (b - a) * (i / n) + out * (r * 0.6)
+            # the first broad, flat surface down beside the wall: the water or the ground (past rain streaks, the horn)
+            o_, zc = Vector((q.x, q.y, 2.0)), 0.0
+            for _t in range(50):
+                ok, loc, _n, _i, hob, _m = sc.ray_cast(dg, o_, Vector((0, 0, -1)))
+                if not ok:
+                    break
+                if hob.dimensions.z < 1.0 and min(hob.dimensions.x, hob.dimensions.y) > 5.0:
+                    zc = loc.z
+                    break
+                o_ = loc - Vector((0, 0, 1e-4))
+            c = Vector((q.x, q.y, zc)); t = (b - a).normalized(); u = out.cross(t)
+            ring.append([bm.verts.new(c + (out * math.cos(2 * math.pi * j / 8) + Vector((0, 0, 1)) * math.sin(2 * math.pi * j / 8)) * r)
+                         for j in range(8)])
+        for r0, r1 in zip(ring, ring[1:]):
+            for j in range(8):
+                bm.faces.new((r0[j], r0[(j + 1) % 8], r1[(j + 1) % 8], r1[j]))
+        made += n
+    me = bpy_.data.meshes.new('meniscus'); bm.to_mesh(me); bm.free()
+    for f in me.polygons:
+        f.use_smooth = True
+    m = bpy_.data.materials.new('meniscus-water'); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+    o_ = nt.nodes.new('ShaderNodeOutputMaterial'); gl = nt.nodes.new('ShaderNodeBsdfGlass')
+    gl.inputs['IOR'].default_value = 1.333; gl.inputs['Roughness'].default_value = 0.0
+    nt.links.new(gl.outputs[0], o_.inputs['Surface']); me.materials.append(m)
+    ob = bpy_.data.objects.new('meniscus', me); sc.collection.objects.link(ob)
+    print(f'meniscus: r {r * 1000:.1f} mm, {made} segments around the cabinet')
+
+
 def plant_alpha(bpy_, aids, res='1k'):
     """Some Poly Haven plant glTFs (grass_bermuda_01) carry no alpha at all: the cards render whole, their black,
     semi-glossy surround mirroring the sky as pale flecks (the Fog gate: "litter"). Wire the asset's own Alpha map
@@ -662,6 +823,10 @@ def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extr
             dots(bpy_, DOTS[0])
         if SCRIM[0]:
             scrim(bpy_, linked, SCRIM[0])
+        if WET[0]:
+            wet(bpy_, linked, WET[0])
+        if MENISCUS[0]:
+            meniscus(bpy_, linked, MENISCUS[0])
         if PLANT_ALPHA[0]:
             plant_alpha(bpy_, PLANT_ALPHA[0])
         if CANOPY_OPEN[0] is not None:
@@ -696,6 +861,8 @@ def main():
                     help="a grip's dot: SIZE m, D m out on the sun line from the point TX TY TZ")
     ap.add_argument('--card', nargs=5, action='append', default=[], metavar=('KIND', 'W', 'H', 'Z', 'SIDE'),
                     help='a real card: white|black, W H (m), centre Z (m), SIDE_DEG off the speaker-camera line')
+    ap.add_argument('--meniscus', type=float, default=0.0, help='a water meniscus round the walls, radius m')
+    ap.add_argument('--wet', type=float, nargs=4, help='rain on the speaker: front beads, lip beads, runnels, seed')
     ap.add_argument('--scrim', type=float, nargs=4, help='a silk on the sun line: T (beam passed) W H (m) D (m out)')
     ap.add_argument('--plant-alpha', nargs='+', default=[], help="Poly Haven plants whose own Alpha map is wired in (their glTF has none)")
     ap.add_argument('--canopy-clearing-at', type=float, nargs=2, default=(0.0, 0.0), help="the gap's centre, world X Y (m)")
@@ -709,7 +876,7 @@ def main():
     a = ap.parse_args()
     global SURFACE_GLASS
     WELD[0] = not a.no_weld; SURFACE_GLASS = a.surface_glass
-    SINK[0] = a.sink; LED[0] = a.led; REAL_SET[0] = a.real_set; CANOPY_OPEN[0] = a.canopy_open; CLEARING[0] = a.canopy_clearing; CLEARING_AT[0] = tuple(a.canopy_clearing_at); PLANT_ALPHA[0] = tuple(a.plant_alpha); SCRIM[0] = a.scrim; DOTS[0] = [tuple(d) for d in a.dot]; CARDS[0] = [(c[0], float(c[1]), float(c[2]), float(c[3]), float(c[4])) for c in a.card]; SPLIT[0] = a.split; GLOSSY_FLAG[0] = a.glossy_flag
+    SINK[0] = a.sink; LED[0] = a.led; REAL_SET[0] = a.real_set; CANOPY_OPEN[0] = a.canopy_open; CLEARING[0] = a.canopy_clearing; CLEARING_AT[0] = tuple(a.canopy_clearing_at); PLANT_ALPHA[0] = tuple(a.plant_alpha); SCRIM[0] = a.scrim; WET[0] = a.wet; MENISCUS[0] = a.meniscus; DOTS[0] = [tuple(d) for d in a.dot]; CARDS[0] = [(c[0], float(c[1]), float(c[2]), float(c[3]), float(c[4])) for c in a.card]; SPLIT[0] = a.split; GLOSSY_FLAG[0] = a.glossy_flag
     HORN['close'] = a.horn_close; HORN['rough'] = a.horn_rough; HORN['shadows'] = not a.horn_front
     sh = json.load(open(a.shot))
     scale_lights(sh, {k: float(v) for k, v in (x.split('=', 1) for x in a.light)})
