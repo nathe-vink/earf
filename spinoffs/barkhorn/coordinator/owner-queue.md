@@ -5228,3 +5228,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   question: the audit's cob is a 0.17 m disk, while the Vero SE 10's emitter is ~10 mm and the mouth open (46 deg cut-off): the
   fitting's model or a stand-in? (the final uses the real size if a stand-in). Sent c4: no gate on Ember wide until the seam fix
   on the flags SHA; then merge, the four talls, the wides.
+- 18:12 Mantle lane (stamped 18:15, ahead of its queue time 18:12:56): the cob's 0.17 m disk is a STAND-IN the lamps lane chose for
+  the look (lamp_pictures.py l.338-341, round 6: "a disc the size of the opal's mouth (a broad source: a soft bowl shadow)"; AREA DISK
+  0.17, spread 92 deg, at the rim). The CAD (crystal.py): a Vero SE 10 (emitter ~10 mm) on its holder at the top of a 46 mm bore
+  lined with a faceted aluminium reflector, 22 mm up from the mouth; cut-off ~46 deg; nothing diffusing the mouth (the opal is a
+  sleeve round the shade). The apparent source is at most the 46 mm mouth: the real pool's shadows are much harder.
+- 18:13 sent: the Mantle lane (the honest emitter in its room now: a 10-12 mm disk at the top of the bore, 3.2 W, the reflector STL,
+  the cut-off from geometry, more samples; render nothing until the gate picks 4 or 5); the lamps lane (the same fix in every rig
+  that lights a Hemisphere, lamp_site.py and lamp_pictures.py; round 2's colour findings stand; the dome heroes and row again as
+  round 3 with the honest emitter; check the Core's LED against its CAD; times).
