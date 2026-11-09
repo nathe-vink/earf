@@ -194,6 +194,7 @@ COPY_NEXT = False
 # each off until the owner compares them with today's (the coordinator, 2026-11-03)
 V2 = False
 HOME_V2 = False
+RC = False         # the release candidate (2026-11-09): honest pictures only (site_v2.rc); with V2, HOME_V2 and COPY_NEXT
 TT_NEXT = dict(
     # the owner, 2026-11-03 05:11: Mantle's light must shine through the acrylic, not down; it is being redrawn, so
     # until it is shown, no words about light from its base (the coordinator)

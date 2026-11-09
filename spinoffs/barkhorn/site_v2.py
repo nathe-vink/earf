@@ -198,6 +198,7 @@ def words(p):
     p.section('from-journal')
     # the turntable is a turntable
     p.sub("kind: D.tt.kind,", "kind: 'Turntable',")
+    p.sub("lineName: 'Speakers'", "lineName: 'Tropos'")
 
 
 def kit(p):
@@ -537,10 +538,17 @@ def pages(web):
     idx = os.path.join(web.SITE, 'index.html')
     if web.V2 or web.HOME_V2:
         share_words(web)
+    if getattr(web, 'RC', False):
+        rc_cards(web)
+    if not getattr(web, 'RC', False) and os.path.isdir(os.path.join(web.IMG, 'rc')):
+        import shutil
+        shutil.rmtree(os.path.join(web.IMG, 'rc'))
     if not (web.V2 or web.HOME_V2) and os.path.isdir(os.path.join(web.IMG, 'v2')):
         import shutil
         shutil.rmtree(os.path.join(web.IMG, 'v2'))
     for path, (h, title, desc, img, alt) in addresses(web).items():
+        if getattr(web, 'RC', False) and path == '/tropos/smoke':     # no picture of today's speaker in Smoke yet
+            continue
         f = os.path.join(web.SITE, path.strip('/') + '.html')
         if not (web.V2 or web.HOME_V2):
             if os.path.exists(f):
@@ -714,14 +722,16 @@ def render_word(p):
 # and preview card; the old #addresses still answer, and in-page links keep the page from reloading. Slots, not yet
 # written: /studio (the progress beat, once it is a page), /journal and /press (held until the owner releases them)
 def addresses(web):
+    rc = getattr(web, 'RC', False)
     out = {'/tropos': ('speakers', 'Tropos · EARF', 'A powered horn loudspeaker, cast in tinted acrylic. Eight colors, Ember to Smoke. In development, not yet for sale.',
-                       'img/og/speaker-green.jpg', 'Tropos in Poison'),
+                       'img/rc/og-green.jpg' if rc else 'img/og/speaker-green.jpg', 'Tropos in Poison'),
            '/lighting': ('lighting', 'Lighting · EARF', 'Hemisphere, a pendant, and Core, a cordless table lamp, in the eight colors. In development.',
-                         'img/og/dome-red.jpg', 'Hemisphere in Ember'),
-           '/mantle': ('turntable', 'Mantle · EARF', 'A turntable, lit from underneath, in the eight colors. In development.',
-                       'img/og/tt-red.jpg', 'Mantle in Ember'),
+                         'img/rc/og-lamps.jpg' if rc else 'img/og/dome-red.jpg', 'A Core and a Hemisphere in Smoke' if rc else 'Hemisphere in Ember'),
+           '/mantle': ('turntable', 'Mantle · EARF', ('A turntable in cast acrylic. In development.' if rc else
+                                                     'A turntable, lit from underneath, in the eight colors. In development.'),
+                       'img/rc/og-mantle.jpg' if rc else 'img/og/tt-red.jpg', 'Mantle in Ember'),
            '/contact': ('contact', 'Contact · EARF', 'Write to us: hello@earf.world. Everything is made to order, so we quote rather than list.',
-                        'img/hero-1200.jpg', 'The eight Tropos speakers on a curve')}
+                        'img/rc/og-home.jpg' if rc else 'img/hero-1200.jpg', 'Tropos in seven colors' if rc else 'The eight Tropos speakers on a curve')}
     for k, num, name, *_ in web.CLOUDS:
         low = name.lower()
         out[f'/tropos/{low}'] = (f'speaker-{low}', None, None, None, None)     # its title, words and card from its /s/ page
@@ -754,4 +764,213 @@ def apply(web, head, rest):
         render_word(p)
     if web.HOME_V2:
         home_v2(p, web)
+    if getattr(web, 'RC', False):
+        rc(p, web)
     return p.done()
+
+
+# --- the release candidate (the coordinator, 2026-11-09): honest pictures only -------------------------------------
+# web.RC on (with V2, HOME_V2 and COPY_NEXT): every picture of Tropos is today's speaker or is left out; the night
+# stage and the wall hidden until the new night renders pass; every lit lamp picture pulled (their light was faked);
+# Mantle only in its new design.
+RC_TALL = 'renders/2026-11-04/barkhorn/rollout/A-polished-fix1/site-front-off-tall-{name}.png'   # r33-rollout-c3:
+# Ember, Dust, Poison, Ice e624e13e; Haze, Fog 3d0b613f; Acid 04d21c5c (on the Acid horn fix). Smoke held.
+RC_KEYS = ['red', 'orange', 'amber', 'green', 'blue', 'violet', 'ice']
+
+
+def rc_cards(web):
+    """The release candidate's link previews: the home's and every /s/ page's picture today's (or out), and the held
+    pages' previews (press, journal) and Smoke's Tropos preview taken out until they have honest pictures."""
+    import os, glob
+    keys = {name.lower(): k for k, num, name, *_ in web.CLOUDS}
+    def set_img(f, rel, alt):
+        s = open(f).read()
+        s = re.sub(r'(<meta (?:property="og:image"|name="twitter:image") content=")[^"]*(")', r'\g<1>' + web.URL + '/' + rel + r'\2', s)
+        s = re.sub(r'(<meta property="og:image:alt" content=")[^"]*(")', r'\g<1>' + alt + r'\2', s)
+        s = re.sub(r'("image":")[^"]*(")', r'\g<1>' + web.URL + '/' + rel + r'\2', s)
+        open(f, 'w').write(s)
+    set_img(os.path.join(web.SITE, 'index.html'), 'img/rc/og-home.jpg', 'Tropos in seven colors, Ember to Fog')
+    for f in glob.glob(os.path.join(web.SITE, 's', '*.html')):
+        n = os.path.basename(f)[:-5]
+        kind, _, col = n.partition('-')
+        if kind in ('press', 'journal') or n == 'speaker-smoke':
+            os.remove(f); continue
+        if kind in ('speaker', 'color'):
+            k = keys.get(col)
+            set_img(f, f'img/rc/og-{k}.jpg' if k in RC_KEYS else 'img/rc/og-home.jpg', f'Tropos in {col.title()}' if k in RC_KEYS else 'Tropos in seven colors')
+        elif kind in ('hemisphere', 'core'):
+            set_img(f, 'img/rc/og-lamps.jpg', 'A Core and a Hemisphere in Smoke, switched off')
+        elif kind == 'mantle':
+            set_img(f, 'img/rc/og-mantle.jpg', 'Mantle in Ember')
+
+
+def rc_images(web):
+    """The release candidate's pictures, in img/rc/: each color's tall frame, a 3:2 for the gallery's stage (the
+    frame's own seamless carried past its sides, as web.py's widen does), a 1:2 card, a thumbnail; the hero, desk (2:1)
+    and phone (4:5), laid out from the seven frames; and the link-preview cards. Returns the hero spots."""
+    import os
+    from PIL import Image, ImageFilter, ImageDraw
+    out = os.path.join(web.IMG, 'rc')
+    os.makedirs(out, exist_ok=True)
+    names = {k: name for k, num, name, *_ in web.CLOUDS}
+    frames = {k: Image.open(os.path.join(web.ROOT, RC_TALL.format(name=names[k].lower()))).convert('RGB') for k in RC_KEYS}
+
+    def save(im, rel, q=82):
+        im.save(os.path.join(web.SITE, rel), 'WEBP' if rel.endswith('.webp') else 'JPEG', quality=q)
+        return rel
+
+    for k, im in frames.items():
+        save(im, f'img/rc/{k}-tall.webp')
+        f = im.resize((960, 1200), Image.LANCZOS)          # 3:2: the frame's own seamless carried past its sides
+        wide = Image.new('RGB', (1800, 1200))
+        wide.paste(f.crop((0, 0, 8, 1200)).resize((420, 1200), Image.BILINEAR).filter(ImageFilter.GaussianBlur(12)), (0, 0))
+        wide.paste(f.crop((952, 0, 960, 1200)).resize((420, 1200), Image.BILINEAR).filter(ImageFilter.GaussianBlur(12)), (1380, 0))
+        wide.paste(f, (420, 0))
+        save(wide, f'img/rc/{k}-wide.webp')
+        cw = im.height // 2
+        save(im.crop(((im.width - cw) // 2, 0, (im.width + cw) // 2, im.height)), f'img/rc/{k}-card.webp')
+        save(im.resize((168, 210), Image.LANCZOS), f'img/rc/{k}-thumb.webp')
+    # the hero: the seven side by side (desk), four over three (phone), each frame whole but for its sides, as a contact
+    # sheet on the page's paper with a gutter between: the frames carry their own studio vignette, so they don't tile
+    ground = (244, 241, 236)                      # the page's paper, --page
+    x0, x1, gap = 0.14, 0.86, 14
+
+    def tile(im, w):
+        c = im.crop((round(im.width * x0), 0, round(im.width * x1), im.height))
+        return c.resize((w, round(c.height * w / c.width)), Image.LANCZOS)
+
+    spots = {'wide': [], 'tall': []}
+    W, H = 2400, 1200
+    hero = Image.new('RGB', (W, H), ground)
+    cw = (W - 6 * gap) // 7
+    for i, k in enumerate(RC_KEYS):
+        c = tile(frames[k], cw)
+        left, top = i * (cw + gap), H - c.height
+        hero.paste(c, (left, top))
+        spots['wide'].append((k, left / W, top / H, cw / W, c.height / H))
+    save(hero, 'img/rc/hero.webp'); save(hero.resize((1200, 600), Image.LANCZOS), 'img/rc/hero-1200.webp')
+    PW, PH = 1200, 1500
+    tall = Image.new('RGB', (PW, PH), ground)
+    tw = (PW - 3 * gap) // 4
+    th = None
+    for i, k in enumerate(RC_KEYS):
+        row, col = divmod(i, 4)
+        c = tile(frames[k], tw); th = c.height
+        left = col * (tw + gap) + ((tw + gap) // 2 if row else 0)
+        top = PH - 2 * c.height - gap + row * (c.height + gap)
+        tall.paste(c, (left, top))
+        spots['tall'].append((k, left / PW, top / PH, tw / PW, c.height / PH))
+    save(tall, 'img/rc/hero-portrait.webp')
+
+    def og(im, rel):                               # a 1200 x 630 link card
+        can = Image.new('RGB', (1200, 630), ground)
+        im = im.copy(); im.thumbnail((1200, 630), Image.LANCZOS)
+        can.paste(im, ((1200 - im.width) // 2, (630 - im.height) // 2))
+        can.save(os.path.join(web.SITE, rel), 'JPEG', quality=84)
+    og(hero.crop((0, 300, 2400, 1200)), 'img/rc/og-home.jpg')
+    for k, im in frames.items():
+        og(im, f'img/rc/og-{k}.jpg')
+    og(Image.open(os.path.join(web.IMG, 'lamps-unlit.jpg')).convert('RGB'), 'img/rc/og-lamps.jpg')
+    og(Image.open(os.path.join(web.ROOT, MANTLE_SRC)).convert('RGB'), 'img/rc/og-mantle.jpg')
+    return spots
+
+
+def rc(p, web):
+    import json
+    spots = rc_images(web)
+    names = {k: name for k, num, name, *_ in web.CLOUDS}
+    # --- the page's data: Tropos's views are the new frame only; Smoke has none yet; lamps unlit; Mantle new, in Ember
+    i = p.rest.index('const D = ') + len('const D = ')
+    j = p.rest.index(', BY = Object', i)
+    D = json.loads(p.rest[i:j])
+    for c in D['clouds']:
+        k = c['k']
+        c['views'] = ({'off': {'src': f'img/rc/{k}-wide.webp', 'w': 1800, 'h': 1200, 'fill': True,
+                               'tall': {'src': f'img/rc/{k}-tall.webp', 'w': 1000, 'h': 1250},
+                               'card': {'src': f'img/rc/{k}-card.webp', 'w': 625, 'h': 1250},
+                               'th': f'img/rc/{k}-thumb.webp'}} if k in RC_KEYS else None)   # Smoke: no page until its picture
+    unlit = {'src': 'img/lamps-unlit.webp', 'w': 1600, 'h': 2000, 'th': 'img/thumb/lamps-unlit.webp'}
+    for L in D['lamps'].values():
+        for k, col in L['colours'].items():
+            col['views'] = {'unlit': unlit}
+            col['card'] = {'src': 'img/lamps-unlit-800.jpg', 'w': 800, 'h': 1000, 'shown': 'black'}
+    mt = {'src': MANTLE['full'], 'w': 1800, 'h': 1200, 'th': MANTLE['wide']}
+    for k, col in D['tt']['colours'].items():
+        col['views'] = {'studio': mt}
+        col['card'] = {'src': MANTLE['tile'], 'w': 1200, 'h': 1500, 'shown': 'red'}
+    p.rest = p.rest[:i] + json.dumps(D, separators=(',', ':')) + p.rest[j:]
+    # the captions that would name a color the picture isn't in
+    p.sub("['studio', 'In the studio', c => `${D.tt.name} in ${c.name}, its lid raised.`],",
+          "['studio', 'In the studio', c => `${D.tt.name}, shown in Ember. ${c.name} to follow.`],")
+    p.rest = re.sub(r"\['unlit', '([^']*)', [^\]]*?\]", r"['unlit', '\1', () => 'A Core and a Hemisphere in Smoke, switched off.']", p.rest)
+    # --- the preloads: no old picture fetched first
+    where = 'head' if 'const L = ' in p.head else 'rest'
+    setattr(p, where, re.sub(r'const L = \{.*?\}, m = /', 'const L = {}, m = /', getattr(p, where), count=1, flags=re.S))
+    p.sub("if (home) { add('img/hero-portrait.webp', null, '(max-width: 700px)'); add(null, 'img/hero-1200.webp 1200w, img/hero.webp 2400w', '(min-width: 701px)'); }",
+          "if (home) { add('img/rc/hero-portrait.webp', null, '(max-width: 700px)'); add(null, 'img/rc/hero-1200.webp 1200w, img/rc/hero.webp 2400w', '(min-width: 701px)'); }", where=where)
+    # --- the hero: the seven, today's speaker
+    def spot_html(cls, k, l, t, w, h):
+        return (f'<a class="spot {cls}" href="#speaker-{names[k].lower()}" style="left:{l*100:.2f}%;top:{t*100:.2f}%;width:{w*100:.2f}%;height:{h*100:.2f}%">'
+                f'<span class="sr">{names[k]}</span></a>')
+    hs = ''.join(spot_html('wide-only', *s) for s in spots['wide']) + ''.join(spot_html('tall-only', *s) for s in spots['tall'])
+    m = re.search(r'<div class="hero-photo has-tall">.*?</div>\n', p.rest, re.S)
+    assert m, 'site_v2: rc hero'
+    p.rest = (p.rest[:m.start()] + '<div class="hero-photo has-tall">\n        <picture><source media="(max-width: 700px)" data-srcset="img/rc/hero-portrait.webp">'
+              '<img data-src="img/rc/hero.webp" fetchpriority="high" data-srcset="img/rc/hero-1200.webp 1200w, img/rc/hero.webp 2400w" sizes="100vw" width="2400" height="1200" '
+              'alt="Tropos in seven colors side by side, Ember to Fog, covers off"></picture>\n        ' + hs + '\n      </div>\n' + p.rest[m.end():])
+    # --- Sound: Ice's new frame, still
+    m = re.search(r'<figure class="sound-turn".*?</figure>', p.rest, re.S)
+    assert m, 'site_v2: rc sound'
+    p.rest = (p.rest[:m.start()] + '<figure class="sound-still"><img src="img/rc/blue-tall.webp" width="1000" height="1250" loading="lazy" '
+              'alt="Tropos in Ice, its cover off, on a pale seamless"><figcaption><i class="render">Render</i></figcaption></figure>' + p.rest[m.end():])
+    # --- out until their pictures show today's speaker (or pass): the night stage and wall, the habitats, the room
+    for sid in ('light', 'habitats', 'room'):
+        if re.search(r'<section [^>]*\bid="%s"' % sid, p.rest):
+            p.section(sid)
+    p.rest = p.rest.replace('<section class="hero" id="top">', '<section class="hero" id="top"><i class="anchor" id="colors"></i>', 1)
+    # the lamps beat: the unlit pair (day)
+    m = re.search(r'<figure class="strip">.*?</figure>', p.rest, re.S)
+    if m:
+        p.rest = (p.rest[:m.start()] + '<figure class="strip lamps-day"><img src="img/lamps-unlit-800.jpg" srcset="img/lamps-unlit-800.jpg 800w, img/lamps-unlit.webp 1600w" '
+                  'sizes="(max-width: 700px) 100vw, 50vw" width="1600" height="2000" loading="lazy" alt="A Core and a Hemisphere in Smoke, switched off">'
+                  '<figcaption class="wrap">Hemisphere and Core, switched off. <i class="render">Render</i></figcaption></figure>' + p.rest[m.end():])
+    # --- the Tropos line page: seven new cards, no covers-on, no turning horns, no old close-ups, no old drawing
+    for k in [c[0] for c in web.CLOUDS]:
+        m = re.search(r'<img class="on" src="img/%s-on\.jpg"[^>]*><img class="off" src="img/%s-off\.jpg"[^>]*>' % (k, k), p.rest)
+        assert m, ('site_v2: rc card', k)
+        if k in RC_KEYS:
+            p.rest = (p.rest[:m.start()] + f'<img class="off" src="img/rc/{k}-card.webp" width="625" height="1250" alt="{names[k]} with its cover off" loading="lazy">'
+                      + p.rest[m.end():])
+        else:                                   # Smoke's card goes with its picture
+            a = p.rest.rfind('<article class="card"', 0, m.start()); b = p.rest.index('</article>', m.end()) + len('</article>')
+            p.rest = p.rest[:a] + p.rest[b:]
+    for sid in ('turn', 'closer'):
+        if re.search(r'<section [^>]*\bid="%s"' % sid, p.rest):
+            p.section(sid)
+    p.rest = re.sub(r'<figure[^>]*>(?:(?!</figure>).)*img/ga-(?:front|right)\.png.*?</figure>', '', p.rest, flags=re.S)
+    # --- the lamps and Mantle line bands: no lit pictures, no old Mantle
+    p.rest = re.sub(r'<img src="img/(?:dome|orb)-red\.jpg" srcset="[^"]*"([^>]*?)alt="[^"]*"',
+                    r'<img src="img/lamps-unlit-800.jpg" srcset="img/lamps-unlit-800.jpg 800w, img/lamps-unlit.jpg 1600w"\1alt="A Core and a Hemisphere in Smoke, switched off"', p.rest)
+    p.rest = re.sub(r'<figure class="eight">.*?</figure>', '', p.rest, count=1, flags=re.S)
+    p.rest = re.sub(r'src="img/tt-ice-tall\.jpg"', f'src="{MANTLE["tile"]}"', p.rest)
+    p.rest = re.sub(r'<ul class="tt-eight".*?</ul>', '', p.rest, count=1, flags=re.S)
+    p.rest = re.sub(r'<div class="tt-details">.*?</div>\n', '', p.rest, count=1, flags=re.S)
+    # --- held pages carry old pictures: not in the candidate
+    for mid in ('press', 'journal'):
+        m = re.search(r'<main id="%s" hidden>.*?</main>' % mid, p.rest, re.S)
+        if m:
+            p.rest = p.rest[:m.start()] + p.rest[m.end():]
+    p.sub("document.getElementById('swatches').replaceChildren(...D.clouds.map(o => {",
+          "document.getElementById('swatches').replaceChildren(...D.clouds.filter(o => P.views(o.k)).map(o => {")   # only colors it is pictured in
+    p.css("""
+/* the release candidate */
+.sound-still { margin: 0; background: #F1EFEB } .sound-still img { display: block; width: 100%; height: auto } .sound-still figcaption { text-align: right; padding-top: 8px }
+.seg:has(#cover-off) { display: none }
+.lamps-day img { width: min(100%, 720px); margin-inline: auto }
+""")
+    # nothing old left: no picture of the superseded speaker, no lit lamp, no old Mantle anywhere a visitor can load
+    page = p.head + p.rest
+    old = re.findall(r'img/(?:(?:red|orange|amber|green|blue|violet|ice|black)-(?:on|off|studio|studio-light|back|amp|horn-side|horn-back|inside|reel|habitat)[\w-]*'
+                     r'|turn-\w+|spin/[\w-]+|hero(?:-1200|-portrait)?|facade[\w-]*|room[\w-]*|macro-\w+|(?:dome|orb)-\w+(?:-card)?|lamps-(?:orbs|domes)[\w-]*|lamp-(?:orb|dome)[\w-]*'
+                     r'|tt-[\w-]+|ga-\w+|v2/night-[\w-]+)\.(?:jpg|webp|png)', page)
+    assert not old, ('site_v2: rc still loads', sorted(set(old))[:20])
