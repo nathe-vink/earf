@@ -4869,5 +4869,5 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   before/after for the record); re-renders: the seven talls first (c2, rc1-fix), say whether the rigB backs need it; then arc 04
   and the close-ups.
 - 17:21 sent c2: stop hero-light chunk 3; after the fix SHA merge it and re-render the seven talls (rc1-fix), then hero-light 3-4.
-- 17:22 sent c4 and c3: the band is the bug; merge the fix when it comes; after the turns, c4 re-renders wide 01 and runs 02-03 (then
+- 17:21 sent c4 and c3 (the messages said 17:22, ahead of the clock; date -u read 17:21:36 after): the band is the bug; merge the fix when it comes; after the turns, c4 re-renders wide 01 and runs 02-03 (then
   the sides), c3 re-renders hero-light 1 and runs 2.
