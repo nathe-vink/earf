@@ -435,6 +435,23 @@ def _masks(bpy, scene, objs, part_of, out):
     kit_cam = [(o, o.visible_camera) for o in kit]
     for o in kit:
         o.pass_index = 255; o.visible_camera = True
+    # and the hidden-object audit's ground truth (the coordinator, 23:10): every other mesh the camera cannot see, and
+    # every area lamp drawn as its own rectangle, id 254 and visible for this pass. Must read 0 px but for a practical's
+    # bulb in its fitting
+    hid = [o for o in scene.objects if o.type == 'MESH' and o not in kit and not o.visible_camera and not o.hide_render]
+    kit_cam += [(o, o.visible_camera) for o in hid]
+    hid_ids = {}
+    nxt = 254
+    for o in hid:
+        o.pass_index = max(nxt, len(names) + 1); hid_ids[o.pass_index] = o.name; nxt -= 1; o.visible_camera = True
+    lamp_planes = []
+    for L in [o for o in scene.objects if o.type == 'LIGHT' and o.data.type == 'AREA' and not o.hide_render and o.data.energy > 0]:
+        sx = L.data.size; sy = L.data.size_y if L.data.shape in ('RECTANGLE', 'ELLIPSE') else L.data.size
+        me = bpy.data.meshes.new('audit-lamp-' + L.name)
+        me.from_pydata([(-sx / 2, -sy / 2, 0), (sx / 2, -sy / 2, 0), (sx / 2, sy / 2, 0), (-sx / 2, sy / 2, 0)], [], [(0, 1, 2, 3)])
+        ob = bpy.data.objects.new('audit-lamp-' + L.name, me); scene.collection.objects.link(ob)
+        ob.matrix_world = L.matrix_world.copy(); ob.pass_index = max(nxt, len(names) + 1); hid_ids[ob.pass_index] = 'lamp ' + L.name; nxt -= 1
+        lamp_planes.append(ob)
     m = bpy.data.materials.new('mask-id'); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
     oi = nt.nodes.new('ShaderNodeObjectInfo'); div = nt.nodes.new('ShaderNodeMath'); div.operation = 'DIVIDE'; div.inputs[1].default_value = 255.0
     nt.links.new(oi.outputs['Object Index'], div.inputs[0])
@@ -465,14 +482,21 @@ def _masks(bpy, scene, objs, part_of, out):
     legend = {str(v): k for k, v in ids.items()}
     for o, v in kit_cam:
         o.visible_camera = v
+    for ob in lamp_planes:
+        bpy.data.objects.remove(ob, do_unlink=True)
     legend['255'] = 'studio equipment'
+    for k, v in hid_ids.items():
+        legend[str(k)] = 'hidden: ' + v
     out.with_suffix('.mask.json').write_text(json.dumps(legend, indent=1) + '\n')
     try:
         import numpy as _np
         im = bpy.data.images.load(str(mp.resolve())); px = _np.array(im.pixels[:]).reshape(im.size[1], im.size[0], im.channels)
-        n_kit = int((_np.round(px[..., 0] * 255) == 255).sum()); bpy.data.images.remove(im)
-        print(f'equipment in frame: {n_kit} px')
-        (out.with_suffix('.equipment.txt')).write_text(f'equipment in frame: {n_kit} px\n')
+        ids_ = _np.round(px[..., 0] * 255)
+        n_kit = int((ids_ == 255).sum()); bpy.data.images.remove(im)
+        per = {v: int((ids_ == k).sum()) for k, v in hid_ids.items()}
+        n_hid = sum(per.values()); seen = ', '.join(f'{k} {v}' for k, v in sorted(per.items(), key=lambda kv: -kv[1]) if v)
+        print(f'equipment in frame: {n_kit} px; hidden in frame: {n_hid} px' + (f' ({seen})' if seen else ''))
+        (out.with_suffix('.equipment.txt')).write_text(f'equipment in frame: {n_kit} px\nhidden in frame: {n_hid} px' + (f' ({seen})' if seen else '') + '\n')
     except Exception as e:
         print('equipment audit failed:', e)
     # the swatch mask, for the retouch: each product pixel carries the id of its paint and copy (the materials a
