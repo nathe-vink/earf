@@ -5928,3 +5928,19 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   placeholder too; replace og-lamps.jpg with the lamps decision.
 - 20:08 sent c3: re-render Fog's 24 turn frames on a neutral warm gray (corner ~213,211,207, #D5D3CF), only the ground changed;
   the talls take priority the moment the rig fix lands; then its own gate.
+- 20:09 SPEAKER LANE: THE TALL FIX at r33-speaker-horn 15931e00: the horn lamp the same 2.5 x 1.6 m softbox, now above the camera at
+  24° (clear of the front's mirror zone), a 15° grid and a real 2.0 x 1.0 m black cutter under it (out of frame, casting shadows),
+  the frame -0.15 stop; the back card 9 mm short at its right end. Half-size proofs against the passed talls: Dust wall 0.76, floor
+  0.86, horn L* 50, woofer L* 26 (passed 34: watch), front saturation 0.77, centre 0.80, centre blue 0.026, bottom batt 0.85; Ember
+  and Fog likewise within the targets; all seven 0 hidden in frame, cardcast 0.0 %. The wide's swoosh is the wide's own horn lamp
+  (any small source drawn into a line by the lip), not the key; not fixed; not in tonight's push.
+- 20:03 c2: the Ember hero-light (9abae9e6), the Dust hero-light (e987f151) and the Acid tall (83bca94d) landed; for a later batch gate.
+- 20:09 the seven talls rebalanced so the helpers finish together: c2 Acid, Poison, Fog; c4 Ember, Dust; c3 Ice, Haze (then Fog's
+  turn). 20:10 sent all three GO on 15931e00 (tag "tallfix"), full size, a full-size look at the back-right corner on the first frame;
+  I check the proofs in parallel.
+- 20:12 MY CHECK OF THE PROOFS: a new soft diagonal light band crosses the backdrop (blurred, new minus passed: the upper-right wall
+  -11 to -27 levels, the cove at the left +12 to +40, the foreground floor -10 to -15 as intended): the grid and cutter draw a pool
+  with a visible edge across the cyc. 20:12 GATE TALLFIX PROOFS launched (wf_429d9349-d85 founder + photographer, wf_fece0538-f07
+  skeptic); sent the speaker lane, ahead of the wide and the backs: an honest way to make the backdrop as even as the passed frame's
+  (the cutter farther or its edge feathered, or a separate soft background light out of frame; not more horn-lamp power), tested on
+  Fog at half size, as the contingency the helpers re-render on if the gate holds.
