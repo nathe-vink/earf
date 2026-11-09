@@ -28,7 +28,7 @@ p { margin: 0 }
 .band { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)) }
 .in { max-width: var(--wide); margin: 0 auto }
 .night { background: var(--night); color: var(--night-ink) }
-.night .eyebrow, .night .muted, .night figcaption { color: var(--night-muted) }
+.night .eyebrow, .night .muted, .night figcaption, .night .no { color: var(--night-muted) }
 .night .rule { border-color: var(--night-rule) }
 .paper { background: var(--paper) }
 
@@ -48,8 +48,8 @@ figcaption b { font-weight: 600; color: var(--ink) }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--page) }
 .top .in { display: flex; align-items: center; gap: 24px; height: 56px }
 .top .mark { display: flex; align-items: center; gap: 10px; text-decoration: none; flex: none }
-.top .mark img { height: 26px; width: auto; mix-blend-mode: multiply }
-.top nav { display: flex; gap: 20px; overflow-x: auto; scrollbar-width: none; font: 500 12px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; min-width: 0 }
+.top .mark img { height: 22px; width: auto }
+.top nav { display: flex; gap: 20px; overflow-x: auto; -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); mask-image: linear-gradient(90deg, #000 85%, transparent); padding-right: 40px; scrollbar-width: none; font: 500 12px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; min-width: 0 }
 .top nav::-webkit-scrollbar { display: none }
 .top nav a { text-decoration: none; color: var(--muted); white-space: nowrap; padding: 8px 0 }
 .top nav a:hover { color: var(--ink) }
@@ -57,23 +57,32 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 /* the cover */
 .cover { padding-block: clamp(40px, 7vw, 96px) 0; overflow: hidden }
 .cover .in { display: grid; gap: 28px }
-.cover h1 { font-size: clamp(56px, 11vw, 168px); line-height: .9; letter-spacing: -.045em; font-weight: 600 }
+.cover h1 { font-size: clamp(30px, 4.2vw, 64px); line-height: .9; letter-spacing: -.045em; font-weight: 600 }
 .cover h1 span { display: block; color: var(--muted); font-weight: 500 }
-.cover h1 span.tag { color: inherit; font-weight: inherit; font-size: clamp(36px, 9.2vw, 150px); line-height: .95 }
+.cover h1 span.tag { color: inherit; font-weight: inherit; font-size: clamp(44px, 7vw, 112px); line-height: .95; margin-bottom: .25em }
 .cover h1 span.tag .tg { display: block }   /* the tagline: two lines here, broken after its comma */
 .tg { white-space: nowrap }   /* the tagline breaks only after its comma */
 .cover h1 span.tag .tg, .lines q .tg, .scale .tg { display: inline; font: inherit; letter-spacing: inherit; text-transform: none; color: inherit }
 .cover h1 span.tag .tg { display: block }
 .cover .meta { display: flex; flex-wrap: wrap; gap: 10px 28px; justify-content: space-between; align-items: end }
-.spectrum { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: clamp(4px, .8vw, 10px); margin-top: 12px }
-.slab { aspect-ratio: 1 / 2.2; border-radius: 3px; position: relative; background: var(--t);
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.35), inset 0 -40px 60px -30px rgba(0,0,0,.25), 0 18px 30px -18px var(--t); max-width: 100% }
+.spectrum { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: clamp(3px, .5vw, 6px); margin-top: 4px }
+.slab { aspect-ratio: auto; height: 40px; border-radius: 3px; position: relative; background: var(--t);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.35), inset 0 -20px 30px -20px rgba(0,0,0,.2); max-width: 100% }
 .slab::before { content: ""; position: absolute; inset: 0; border-radius: 3px; background: linear-gradient(105deg, rgba(255,255,255,0) 30%, rgba(255,255,255,.32) 42%, rgba(255,255,255,0) 56%) }
-.slab::after { content: ""; position: absolute; left: 6%; right: 6%; bottom: -26px; height: 18px; border-radius: 50%; background: var(--t); filter: blur(10px); opacity: .55 }
-.slab span { position: absolute; left: 10%; bottom: 8%; font: 500 11px/1.3 var(--mono); letter-spacing: .08em; color: rgba(255,255,255,.92); text-transform: uppercase }
+.slab::after { display: none; content: ""; position: absolute; left: 6%; right: 6%; bottom: -26px; height: 18px; border-radius: 50%; background: var(--t); filter: blur(10px); opacity: .55 }
+.slab span { position: absolute; left: 8px; top: 50%; transform: translateY(-50%); white-space: nowrap; font: 500 10.5px/1 var(--mono); letter-spacing: .08em; color: rgba(255,255,255,.92); text-transform: uppercase }
 .slab.light span { color: var(--ink) }
 .slab.held { background: repeating-linear-gradient(135deg, color-mix(in srgb, var(--t) 35%, transparent) 0 8px, transparent 8px 16px); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--t) 40%, transparent) }
 .slab.held span { color: var(--ink) }
+.slab span i { font-style: normal }
+@media (max-width: 900px) { .slab span i { display: none } }
+.cover .new { margin: 0; padding: 14px 18px; border-left: 3px solid var(--ink); background: var(--paper); display: grid; gap: 6px; max-width: 62ch }
+.cover .new p { margin: 0; font: 500 11px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted) }
+.cover .new ul { margin: 0; padding-left: 1.1em; display: grid; gap: 3px; font-size: 15px; line-height: 1.4 }
+.toc { columns: 3 14em; column-gap: 32px; margin: 0; padding: 0; list-style: none; font-size: 15px; counter-reset: c }
+.toc li { break-inside: avoid; padding: 7px 0; border-bottom: 1px solid var(--rule) }
+.toc a { text-decoration: none; color: var(--ink) }
+.toc span { font: 500 11px/1 var(--mono); color: var(--muted); margin-right: 10px; letter-spacing: .08em }
 .cover .hero { margin-top: clamp(36px, 5vw, 64px) }
 
 /* chapters */
@@ -95,6 +104,9 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .three figure img { aspect-ratio: 3 / 2; object-fit: cover; width: 100% }
 .three figure.tall img { aspect-ratio: 4 / 5 }
 .seven { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: clamp(6px, 1vw, 12px) }
+.cover .seven { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(10px, 1.6vw, 22px) }
+.cover .seven figcaption { font-size: 12px }
+@media (max-width: 560px) { .cover .seven { grid-template-columns: repeat(2, minmax(0, 1fr)) } }
 .seven figure { margin: 0; display: grid; gap: 6px; min-width: 0 }
 .seven img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 3px; display: block }
 .seven.mini { grid-template-columns: repeat(7, minmax(0, 1fr)) !important; gap: 4px; padding: 10px }
@@ -112,7 +124,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .tint .pic:has(.gap) .chip { opacity: .9 }
 .gap.held { background: repeating-linear-gradient(135deg, color-mix(in srgb, var(--t) 10%, var(--page)) 0 10px, var(--page) 10px 20px) }
 .stratum.reserve h3 { font-size: clamp(22px, 2.4vw, 28px) }
-.top .mark img { height: 30px }
+.top .mark img { height: 24px }
 @media (max-width: 860px) { .cols, .three { grid-template-columns: minmax(0, 1fr) } .four { grid-template-columns: repeat(2, minmax(0, 1fr)) } }
 @media (max-width: 620px) { .two { grid-template-columns: minmax(0, 1fr) } }
 .big-quote { font-size: clamp(30px, 4.6vw, 60px); line-height: 1.02; letter-spacing: -.035em; font-weight: 600; max-width: 18ch }
@@ -205,6 +217,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 @media (max-width: 480px) { .steps { grid-template-columns: minmax(0, 1fr) } }
 .scroll { overflow-x: auto; border: 1px solid var(--rule); border-radius: 4px; background: var(--page) }
 table { border-collapse: collapse; width: 100%; min-width: 680px; font-size: 14.5px }
+@media (max-width: 600px) { table { min-width: 0 } table thead { display: none } table tr { display: grid; gap: 4px; padding: 12px 0; border-bottom: 1px solid var(--rule) } table td { border: 0; padding: 0 } table td:first-child { font-size: 16px } }
 th, td { text-align: left; vertical-align: top; padding: 11px 14px; border-bottom: 1px solid var(--rule) }
 th { font: 500 11px/1.4 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); background: var(--paper) }
 tr:last-child td { border-bottom: 0 }
@@ -214,6 +227,10 @@ tr:last-child td { border-bottom: 0 }
 .decals img { border-radius: 2px; box-shadow: 0 10px 24px -14px rgba(0,0,0,.35) }
 
 .facts { margin: 0; padding-left: 1.1em; display: grid; gap: 8px; line-height: 1.45 }
+.app.nopic { grid-template-columns: minmax(0, 1fr) }
+.tocome { margin-top: 28px; padding-top: 14px; border-top: 1px dashed var(--rule); font-size: 14px; color: var(--muted); max-width: 70ch }
+.tocome b { font: 500 11px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; margin-right: 8px; color: var(--ink) }
+.night .tocome { border-color: var(--night-rule); color: var(--night-muted) } .night .tocome b { color: var(--night-ink) }
 .parked { list-style: none; margin: 0; padding: 0; display: grid; border-top: 1px solid var(--rule) }
 .parked li { display: grid; grid-template-columns: minmax(0, 12em) minmax(0, 1fr); gap: 4px 24px; padding: 14px 0; border-bottom: 1px solid var(--rule) }
 .parked li span { color: var(--muted) }
@@ -255,9 +272,9 @@ footer p { max-width: 76ch }
 
 <header class="top band">
   <div class="in">
-    <a class="mark" href="#cover" aria-label="EARF Brand Book, the start"><img src="img/lockup-paper.jpg" alt="EARF" width="1200" height="459"></a>
+    <a class="mark" href="#cover" aria-label="EARF Brand Book, the start"><img src="img/lockup-colour.png" alt="EARF" width="2048" height="599"></a>
     <nav aria-label="Chapters">
-      <a href="#position">Position</a><a href="#names">Names</a><a href="#identity">Identity</a><a href="#color">Color</a>
+      <a href="#contents">Contents</a><a href="#position">Position</a><a href="#names">Names</a><a href="#identity">Identity</a><a href="#color">Color</a>
       <a href="#type">Type</a><a href="#images">Images</a><a href="#voice">Voice</a><a href="#applications">Applications</a><a href="#packaging">Packaging</a><a href="#ideas">Ideas</a><a href="#press">Press</a><a href="#facts">Facts</a><a href="#parked">Parked</a>
     </nav>
   </div>
@@ -269,20 +286,28 @@ footer p { max-width: 76ch }
     <h1><span class="tag"><span class="tg">A world of sound,</span> <span class="tg">in color.</span></span><span>The EARF brand book.</span></h1>
     <div class="meta">
       <p class="lede">Hi-fi and light, cast in tinted acrylic, in seven colors, Ember to Fog. This book is how EARF looks, sounds and arrives, so that everything made under the name feels like it came out of one room.</p>
+      <div class="new"><p>New in this edition</p><ul><li>The line: "A world of sound, in color."</li><li>Seven colors, Ember to Fog; Smoke held for the owner's call.</li><li>Tropos on its own feet, no light in the base, the polished horn.</li><li>Only pictures that passed the critics; the execution plans parked.</li></ul></div>
     </div>
     <div class="spectrum" aria-label="The seven tints, Ember to Fog, and Smoke held">
-      <div class="slab" style="--t:#920000"><span>01<br>Ember</span></div>
-      <div class="slab" style="--t:#E06718"><span>02<br>Dust</span></div>
-      <div class="slab" style="--t:#E2AA15"><span>03<br>Acid</span></div>
-      <div class="slab" style="--t:#1C5B02"><span>04<br>Poison</span></div>
-      <div class="slab" style="--t:#2584BE"><span>05<br>Ice</span></div>
-      <div class="slab" style="--t:#44147B"><span>06<br>Haze</span></div>
-      <div class="slab light" style="--t:#D5DFE0"><span>07<br>Fog</span></div>
-      <div class="slab held" style="--t:#3A3741"><span>08<br>Smoke<br>held</span></div>
+      <div class="slab" style="--t:#920000"><span>01<i> Ember</i></span></div>
+      <div class="slab" style="--t:#E06718"><span>02<i> Dust</i></span></div>
+      <div class="slab" style="--t:#E2AA15"><span>03<i> Acid</i></span></div>
+      <div class="slab" style="--t:#1C5B02"><span>04<i> Poison</i></span></div>
+      <div class="slab" style="--t:#2584BE"><span>05<i> Ice</i></span></div>
+      <div class="slab" style="--t:#44147B"><span>06<i> Haze</i></span></div>
+      <div class="slab light" style="--t:#D5DFE0"><span>07<i> Fog</i></span></div>
+      <div class="slab held" style="--t:#3A3741"><span>08<i> Smoke, held</i></span></div>
     </div>
   </div>
   <div class="in hero full"><figure><div class="seven"><figure class="t7"><img src="img/honest-front-ember.jpg" alt="Tropos in Ember, whole, cover off, on its own feet on a pale seamless" width="1000" height="1250"><figcaption>01 Ember</figcaption></figure><figure class="t7"><img src="img/honest-front-dust.jpg" alt="Tropos in Dust, whole, cover off, on its own feet on a pale seamless" width="1000" height="1250"><figcaption>02 Dust</figcaption></figure><figure class="t7"><img src="img/honest-front-acid.jpg" alt="Tropos in Acid, whole, cover off, on its own feet on a pale seamless" width="1000" height="1250"><figcaption>03 Acid</figcaption></figure><figure class="t7"><img src="img/honest-front-poison.jpg" alt="Tropos in Poison, whole, cover off, on its own feet on a pale seamless" width="1000" height="1250"><figcaption>04 Poison</figcaption></figure><figure class="t7"><img src="img/honest-front-ice.jpg" alt="Tropos in Ice, whole, cover off, on its own feet on a pale seamless" width="1000" height="1250"><figcaption>05 Ice</figcaption></figure><figure class="t7"><img src="img/honest-front-haze.jpg" alt="Tropos in Haze, whole, cover off, on its own feet on a pale seamless" width="1000" height="1250"><figcaption>06 Haze</figcaption></figure><figure class="t7"><img src="img/honest-front-fog.jpg" alt="Tropos in Fog, whole, cover off, on its own feet on a pale seamless" width="1000" height="1250"><figcaption>07 Fog</figcaption></figure></div><figcaption>Tropos in the seven, each on its own feet, cover off. Seven studio renders side by side; the seven together in one frame come when that render passes. <span class="render">Render</span></figcaption></figure></div>
 </section>
+<section class="chap band" id="contents">
+  <div class="in">
+    <p class="eyebrow">Contents</p>
+    <ol class="toc"><li><a href="#position"><span>01</span>Position</a></li><li><a href="#names"><span>02</span>The naming system</a></li><li><a href="#identity"><span>03</span>Identity</a></li><li><a href="#color"><span>04</span>Color</a></li><li><a href="#type"><span>05</span>Type</a></li><li><a href="#images"><span>06</span>Image direction</a></li><li><a href="#voice"><span>07</span>Voice</a></li><li><a href="#applications"><span>08</span>Applications</a></li><li><a href="#packaging"><span>09</span>Packaging</a></li><li><a href="#ideas"><span>10</span>Big ideas</a></li><li><a href="#press"><span>11</span>Press kit</a></li><li><a href="#facts"><span>12</span>The facts of record</a></li><li><a href="#parked"><span>··</span>Parked plans</a></li></ol>
+  </div>
+</section>
+
 
 <section class="chap band" id="position">
   <div class="in">
@@ -293,8 +318,8 @@ footer p { max-width: 76ch }
       <div><h3>Why now</h3><p>Listening bars have spread from Tokyo to most large cities, and the habit has followed people home. Records came back to the living room. Interiors came back to color. And most high-end audio still arrives as a black box or a wood veneer. EARF answers all four at once: color you can see through, a horn you can see into, light through the same material.</p></div>
     </div>
     <div class="two">
-      <figure><div class="gap" role="img" aria-label="Pending: A pair at home, covers off, on their own feet" style="--ar:16/9"><span class="g1">Pending</span><b>A pair at home, covers off, on their own feet</b><span class="g2">A new render goes here when it passes the critics.</span></div><figcaption><b>At home.</b> A pair in Poison, covers off.</figcaption></figure>
-      <figure><div class="gap" role="img" aria-label="Pending: Planet EARF from the door" style="--ar:3/2"><span class="g1">Pending</span><b>Planet EARF from the door</b><span class="g2">A new render goes here when it passes the critics.</span></div><figcaption><b>At Planet EARF.</b> The listening bar where everything in the room is for sale.</figcaption></figure>
+      <figure><img src="img/honest-ice-habitat.jpg" alt="Tropos in Ice standing in snow at dusk, a lit cabin and pines behind" loading="lazy" width="1200" height="1500"><figcaption><b>In snow.</b> Tropos in Ice, where its color began. <span class="render">Render</span></figcaption></figure>
+      <figure><img src="img/honest-dust-habitat.jpg" alt="Tropos in Dust on a desert floor, mesas behind" loading="lazy" width="1200" height="1500"><figcaption><b>In the desert.</b> Tropos in Dust, the speaker set into the ground. <span class="render">Render</span></figcaption></figure>
     </div>
     <div class="prose">
       <p class="eyebrow">What the brand holds to</p>
@@ -313,9 +338,9 @@ footer p { max-width: 76ch }
       <div class="stratum"><h3>Tropos</h3><p class="what">Powered horn loudspeaker · the flagship</p><p class="why">From the troposphere, the layer of air we live in, named for the Greek <i>tropos</i>, a turn. The speaker fills the air of a room. Chosen on 29 October 2026 after Atmosphere was found taken in audio; a lawyer's search confirms before filing.</p></div>
       <div class="stratum"><h3>Hemisphere</h3><p class="what">Pendant lamp</p><p class="why">Half a globe, hung mouth down. A quarter turn takes its shade off and another puts a new color on.</p></div>
       <div class="stratum"><h3>Core</h3><p class="what">Cordless table lamp</p><p class="why">The glowing center. A ball of tinted acrylic sitting low in a black base, with no cord.</p></div>
-      <div class="stratum"><h3>Mantle</h3><p class="what">Record player</p><p class="why">The layer that moves under the crust. A turntable in cast acrylic; the plinth floats 40 mm over its base.</p></div>
-      <div class="stratum"><h3>Planet EARF</h3><p class="what">The listening bar, San Francisco · planned</p><p class="why">The whole world in one room: every object in it is for sale, and every one of them swaps tint.</p></div>
-      <div class="stratum"><h3>Mother EARF</h3><p class="what">The globe · a brand object</p><p class="why">Planned: the mark made real, six slotted discs of cast acrylic, each in its own tint, 1.25 m across. It would hang over the bar's banquette, and a Sunday afternoon session would share the name. A proposal, like the bar.</p></div>
+      <div class="stratum"><h3>Mantle</h3><p class="what">Record player</p><p class="why">The layer that moves under the crust. A turntable in cast acrylic; the plinth floats 40&nbsp;mm over its base.</p></div>
+      <div class="stratum"><h3>Planet EARF</h3><p class="what">A listening bar · a proposal</p><p class="why">The whole world in one room: every object in it would be for sale, and every one of them swaps tint.</p></div>
+      <div class="stratum"><h3>Mother EARF</h3><p class="what">The globe · a brand object</p><p class="why">Planned: the mark made real, six slotted discs of cast acrylic, each in its own tint, 1.25&nbsp;m across. It would hang over the bar's banquette, and a Sunday afternoon session would share the name. A proposal, like the bar.</p></div>
       <div class="stratum reserve"><h3>Crust · Strata · Ozone</h3><p class="what">Held for later · proposals</p><p class="why">Names kept in reserve for a stand, a rack and an air-moving product, if they come. Each needs the owner's yes and a trademark search first.</p></div>
     </div>
     <ul class="rules">
@@ -338,7 +363,7 @@ footer p { max-width: 76ch }
     <div class="four">
       <figure><div class="plate p"><img src="img/globe-paper.jpg" alt="The acrylic globe, rendered, on paper" loading="lazy" width="1200" height="1200"></div><figcaption><b>The globe, rendered.</b> The mark itself: on the site's header, turning, and on anything printed in color.</figcaption></figure>
       <figure><div class="plate p"><img src="img/globe-flat.png" alt="The globe drawn flat in the six colors" loading="lazy" width="1024" height="1024"></div><figcaption><b>Drawn flat.</b> For print where a render will not hold: screen printing, embroidery, small sizes in color.</figcaption></figure>
-      <figure><div class="plate p"><img src="img/globe-real.jpg" alt="The globe as a real object: six slotted acrylic discs" loading="lazy" width="1200" height="1200"><!-- the object --></div><figcaption><b>As an object.</b> The six discs cut and slotted: planned for Mother EARF at 1.25 m and the coin's face at 40 mm. <span class="render">Render</span></figcaption></figure>
+      <figure><div class="plate p"><img src="img/globe-real.jpg" alt="The globe as a real object: six slotted acrylic discs" loading="lazy" width="1200" height="1200"><!-- the object --></div><figcaption><b>As an object.</b> The six discs cut and slotted: planned for Mother EARF at 1.25&nbsp;m and the coin's face at 40&nbsp;mm. <span class="render">Render</span></figcaption></figure>
       <figure><div class="plate k"><img src="img/lockup-black.png" alt="The lockup in one color, black" loading="lazy" width="1600" height="468"></div><figcaption><b>One color.</b> Black, white, or any one tint. For etching, engraving, the rating plate and the door.</figcaption></figure>
     </div>
     <ul class="rules">
@@ -351,7 +376,7 @@ footer p { max-width: 76ch }
     </ul>
     <div class="three motion">
       <figure><video src="img/globe-turn.mp4" autoplay muted loop playsinline aria-label="The acrylic globe turning, as in the site's header"></video><figcaption><b>The turn.</b> The globe turning on its axis, as it does in the site's header; the only motion the mark makes at rest.</figcaption></figure>
-      <figure><video class="wide" src="img/ident-coin.mp4" autoplay muted loop playsinline aria-label="The coin ident: a coin spins and lands showing the globe"></video><figcaption><b>The coin.</b> An ident: a coin spins, wobbles and lands face up on the globe. Parked since round 27, kept for a launch film and EARFcoin.</figcaption></figure>
+      <figure><video class="wide" src="img/ident-coin.mp4" autoplay muted loop playsinline aria-label="The coin ident: a coin spins and lands showing the globe"></video><figcaption><b>The coin.</b> An ident: a coin spins, wobbles and lands face up on the globe. Kept for a launch film and the coin.</figcaption></figure>
       <figure><video class="wide" src="img/ident-rise.mp4" autoplay muted loop playsinline aria-label="The rise ident: the globe rises over a dark horizon"></video><figcaption><b>Earthrise.</b> An ident on night: the globe rises over its own horizon. Parked, for the bar's screens and the end of a film.</figcaption></figure>
     </div>
     <div class="two">
@@ -383,7 +408,7 @@ footer p { max-width: 76ch }
       <div class="tint" style="--t:#3A3741"><div class="pic"><div class="gap held" role="img" aria-label="Held: Smoke" style="--ar:4/5"><span class="g1">Held</span><b>Smoke waits for the owner's call</b><span class="g2">Seven colors until it is decided. Its values stay here for when it is, and the eight-band graphics (the card, the stationery, the tiles, the wordmark) keep its band until then.</span></div><img class="chip" src="img/icon-smoke.png" alt="" width="256" height="256"></div><h3>Smoke <small>08 · held</small></h3><p class="line">Smoked glass, for after dark.</p>
         <dl><dt>Acrylic</dt><dd>Smoked dark gray · TruCast 2074</dd><dt>Mark</dt><dd><i style="background:#34323A"></i><code>#34323A</code></dd><dt>In light</dt><dd><i style="background:#3A3741"></i><code>#3A3741</code></dd><dt>Cover</dt><dd>Black</dd></dl></div>
     </div>
-    <div class="prose"><p class="muted" style="font-size:15px">The line takes stock cast sheet's deeper tints (the owner, 1 November 2026: "I like the darker colors"): each cabinet in its TruCast code at 20 mm, and each horn a custom pour in its cabinet's hue, about six to ten times the dye, so a 10 mm sheet reads as deep as the 20 mm wall. Then the owner's colors F (1 November 2026, after "they might be too dark now"): a white lining behind the walls in seven colors (Smoke's lining, like its sheet, is the owner's open call), and Poison and Haze in lighter custom batches of their codes' hues (32.3 % and 25.8 % of light through 20 mm, against stock 18.6 % and 13.5 %). So Ember is about three times deeper than before, Poison and Haze about twice; Smoke would move to 2074 Dark Gray, if it stays; the rest change little. "In light" is the brand's display color for each: the earlier swatch, sampled from the rendered coins on earf.world, deepened by the change the stock sheet makes to light through the wall. The sheet figures are held until the chips are measured, and the swatches follow the chips. "Mark" is the flat color the marks and icons use (marks.py), deepened the same way; Smoke's stays #34323A, since deeper it meets the ink of the outlines and the acrylic construction disappears. The pictures above are the ones that passed the critics;</p></div>
+    <div class="prose"><p class="muted" style="font-size:15px">The line takes stock cast sheet's deeper tints (the owner, 1 November 2026: "I like the darker colors"): each cabinet in its TruCast code at 20&nbsp;mm, and each horn a custom pour in its cabinet's hue, about six to ten times the dye, so a 10&nbsp;mm sheet reads as deep as the 20&nbsp;mm wall. Then the owner's colors F (1 November 2026, after "they might be too dark now"): a white lining behind the walls in seven colors (Smoke's lining, like its sheet, is the owner's open call), and Poison and Haze in lighter custom batches of their codes' hues (32.3% and 25.8% of light through 20&nbsp;mm, against stock 18.6% and 13.5%). So Ember is about three times deeper than before, Poison and Haze about twice; Smoke would move to 2074 Dark Gray, if it stays; the rest change little. "In light" is the brand's display color for each: the earlier swatch, sampled from the rendered coins on earf.world, deepened by the change the stock sheet makes to light through the wall. The sheet figures are held until the chips are measured, and the swatches follow the chips. "Mark" is the flat color the marks and icons use (marks.py), deepened the same way; Smoke's stays #34323A, since deeper it meets the ink of the outlines and the acrylic construction disappears.</p></div>
     <div class="head" style="margin-top:12px"><p class="eyebrow">The neutrals</p><p class="lede">Paper and ink carry everything else, so the tints are always the loudest thing on the page. Night is for the bar and for the glow.</p></div>
     <div class="neutrals">
       <div class="neutral"><div class="sw" style="--c:#F4F1EC"></div><b>Page</b><span>#F4F1EC</span></div>
@@ -394,9 +419,9 @@ footer p { max-width: 76ch }
       <div class="neutral"><div class="sw" style="--c:#100F12"></div><b>Night</b><span>#100F12</span></div>
     </div>
     <ul class="rules">
-      <li><b>Order</b><span>Always the spectrum: Ember, Dust, Acid, Poison, Ice, Haze, Fog, Smoke (held). Never alphabetical, never by popularity.</span></li>
+      <li><b>Order</b><span>Always the spectrum: Ember, Dust, Acid, Poison, Ice, Haze, Fog. Never alphabetical, never by popularity.</span></li>
       <li><b>One at a time</b><span>A surface carries one tint, or all seven in order. Never two or three picked for a mood.</span></li>
-      <li><b>Pairs on the site</b><span>Where two are shown together, they pair by the painter's wheel, as earf.world's color pages do: Fog with the cool tints, Smoke (held) with the deep ones.</span></li>
+      <li><b>Pairs on the site</b><span>Where two are shown together, they pair by the painter's wheel, as earf.world's color pages do: Fog with the cool tints, the deep ones with each other.</span></li>
       <li><b>No gradients</b><span>The tints never blend into one another on a printed or digital surface. Where they meet, they overlap, as sheets do.</span></li>
     </ul>
   </div>
@@ -408,18 +433,18 @@ footer p { max-width: 76ch }
       <p class="lede">The site's two faces, both free and open: Instrument Sans for everything that speaks, IBM Plex Mono for everything that measures.</p></div>
     <div class="specimen">
       <div><div class="aa">Aa</div><p class="muted" style="margin-top:14px">Instrument Sans · 400 to 700 · headlines at 600, tight; text at 400</p></div>
-      <div><div class="mo">20 mm</div><p class="muted" style="margin-top:14px">IBM Plex Mono · 400 and 500 · labels, numbers, eyebrows, particulars; capitals with a little tracking</p></div>
+      <div><div class="mo">20&nbsp;mm</div><p class="muted" style="margin-top:14px">IBM Plex Mono · 400 and 500 · labels, numbers, eyebrows, particulars; capitals with a little tracking</p></div>
     </div>
     <div class="scale">
       <div><span class="k">Display · 600 · −4.5%</span><span style="font-size:clamp(34px,6vw,72px);font-weight:600;letter-spacing:-.045em;line-height:1"><span class="tg">A world of sound,</span> <span class="tg">in color.</span></span></div>
       <div><span class="k">Headline · 600 · −3%</span><span style="font-size:clamp(28px,3.4vw,40px);font-weight:600;letter-spacing:-.03em;line-height:1.05">Bottle green. Keep out of reach.</span></div>
       <div><span class="k">Lede · 400</span><span style="font-size:21px;line-height:1.45">Twenty millimeters of tinted acrylic shows what is inside: the lining, the driver, the amplifier's plate.</span></div>
-      <div><span class="k">Text · 400 · 17/1.6</span><span>Each cabinet is tinted cast acrylic, 20 mm thick. The lining shows through the walls, so we dressed it in white voile.</span></div>
-      <div><span class="k">Label · Mono 500 · +12%</span><span class="mono" style="font-size:12.5px;letter-spacing:.14em;text-transform:uppercase">Tropos 04 · Poison · 1293 mm</span></div>
+      <div><span class="k">Text · 400 · 17/1.6</span><span>Each cabinet is tinted cast acrylic, 20&nbsp;mm thick. The lining shows through the walls, so we dressed it in white voile.</span></div>
+      <div><span class="k">Label · Mono 500 · +12%</span><span class="mono" style="font-size:12.5px;letter-spacing:.14em;text-transform:uppercase">Tropos 04 · Poison · 1293&nbsp;mm</span></div>
     </div>
     <ul class="rules">
       <li><b>Sentence case</b><span>Headlines in sentence case with a period. Capitals only in the mono labels and on hardware.</span></li>
-      <li><b>Spelling</b><span>American, as the site has it: color, gray, aluminum, meter. Units in millimeters with a space, 20 mm; figures that are designed, not measured, say "about".</span></li>
+      <li><b>Spelling</b><span>American, as the site has it: color, gray, aluminum, meter. Units in millimeters with a space, 20&nbsp;mm; figures that are designed, not measured, say "about".</span></li>
       <li><b>On hardware</b><span>Plex Mono for every engraved or laser-marked word; the wordmark for the name. Nothing else.</span></li>
       <li><b>Fallbacks</b><span>Helvetica Neue, then Arial; Courier New for the mono. Never Inter, never a serif.</span></li>
     </ul>
@@ -430,21 +455,22 @@ footer p { max-width: 76ch }
   <div class="in">
     <div class="head"><p class="no">06 · Image direction</p><h2>Light through the material is the subject.</h2>
       <p class="lede">Five kinds of picture, each with one job. Until the first pieces are built, every one is a render and says so; the same rules carry over to the photographs.</p></div>
-    <div class="full"><figure><div class="gap" role="img" aria-label="Pending: The seven at night, on their own feet" style="--ar:2.4/1"><span class="g1">Pending</span><b>The seven at night, on their own feet</b><span class="g2">A new render goes here when it passes the critics.</span></div><figcaption><b>After dark.</b> The seven at night on their own feet, no light in the base. Its render is being made again; the space above holds its place.</figcaption></figure></div>
+    <div class="full"><figure><div class="seven"><figure class="t7"><img src="img/honest-back-ember.jpg" alt="Tropos in Ember from behind, the amplifier seen through the wall" loading="lazy" width="880" height="1100"><figcaption>01 Ember</figcaption></figure><figure class="t7"><img src="img/honest-back-dust.jpg" alt="Tropos in Dust from behind, the amplifier seen through the wall" loading="lazy" width="880" height="1100"><figcaption>02 Dust</figcaption></figure><figure class="t7"><img src="img/honest-back-acid.jpg" alt="Tropos in Acid from behind, the amplifier seen through the wall" loading="lazy" width="880" height="1100"><figcaption>03 Acid</figcaption></figure><figure class="t7"><img src="img/honest-back-poison.jpg" alt="Tropos in Poison from behind, the amplifier seen through the wall" loading="lazy" width="880" height="1100"><figcaption>04 Poison</figcaption></figure><figure class="t7"><img src="img/honest-back-ice.jpg" alt="Tropos in Ice from behind, the amplifier seen through the wall" loading="lazy" width="880" height="1100"><figcaption>05 Ice</figcaption></figure><figure class="t7"><img src="img/honest-back-haze.jpg" alt="Tropos in Haze from behind, the amplifier seen through the wall" loading="lazy" width="880" height="1100"><figcaption>06 Haze</figcaption></figure><figure class="t7"><img src="img/honest-back-fog.jpg" alt="Tropos in Fog from behind, the amplifier seen through the wall" loading="lazy" width="880" height="1100"><figcaption>07 Fog</figcaption></figure></div><figcaption><b>Through the wall.</b> The seven from behind: nothing painted on and nothing hidden, the amplifier's plate seen through the acrylic. <span class="render">Render</span></figcaption></figure></div>
     <div class="three">
       <figure class="tall"><img src="img/honest-front-ice.jpg" alt="Tropos in Ice alone on a pale seamless, on its own feet, the horn polished" loading="lazy" width="1000" height="1250"><figcaption><b>The studio.</b> One product, a pale seamless, a soft key: the product page and the press. No props. <span class="render">Render</span></figcaption></figure>
       <figure class="tall"><img src="img/honest-dust-habitat.jpg" alt="Tropos in Dust set into a desert floor" loading="lazy" width="1200" height="1500"><figcaption><b>In its element.</b> Each tint where it began: real places, real texture, the speaker set into the ground, never floating over it. <span class="render">Render</span></figcaption></figure>
-      <figure class="tall"><div class="gap" role="img" aria-label="Pending: Core up close, lit" style="--ar:4/5"><span class="g1">Pending</span><b>Core up close, lit</b><span class="g2">A new render goes here when it passes the critics.</span></div><figcaption><b>Up close.</b> The polished ball, the cut edge of the base: where the light gathers. Close-ups only beside the whole speaker, its cover off.</figcaption></figure>
-      <figure><div class="gap" role="img" aria-label="Pending: A pair at home, covers off, on their own feet" style="--ar:16/9"><span class="g1">Pending</span><b>A pair at home, covers off, on their own feet</b><span class="g2">A new render goes here when it passes the critics.</span></div><figcaption><b>At home.</b> A real room, daylight, the pair placed as an owner would place them, covers off.</figcaption></figure>
-      <figure><div class="gap" role="img" aria-label="Pending: Core in a row, lit" style="--ar:3/2"><span class="g1">Pending</span><b>Core in a row, lit</b><span class="g2">A new render goes here when it passes the critics.</span></div><figcaption><b>The row.</b> The whole spectrum in order, one product at a time.</figcaption></figure>
-      <figure><div class="gap" role="img" aria-label="Pending: Mantle after dark" style="--ar:3/2"><span class="g1">Pending</span><b>Mantle after dark</b><span class="g2">Waits for the owner's choice of Mantle, then the critics.</span></div><figcaption><b>After dark.</b> The product as the light in the room.</figcaption></figure>
+      <figure class="tall"><img src="img/honest-amp-ember.jpg" alt="The amplifier's plate seen through the back of Tropos in Ember, up close" loading="lazy" width="1000" height="1250"><figcaption><b>Up close.</b> The amplifier's plate through the Ember back. Close-ups only beside the whole speaker, its cover off. <span class="render">Render</span></figcaption></figure>
+      
+      
+      
     </div>
     <ul class="rules">
       <li><b>Always</b><span>Light passing through the acrylic. A colored shadow somewhere in the frame. The product's real proportions, from the drawings. A label, "Render", until it is a photograph.</span></li>
       <li><b>Never</b><span>Tilt-shift or dioramas. A setting that cannot look real (the owner stopped the Golden Gate for this). A product floating over its ground. Props that compete with it. Flare, haze or glow added after the fact.</span></li>
       <li><b>Crops</b><span>3:2 on the site, 4:5 on phones and posts, 1:1 for the icons. The product never touches the frame's edge, except up close.</span></li>
-      <li><b>Files</b><span>The finals are in site/img (from finals.py); the bar's in renders/…/planet*/finals on the bar's branch.</span></li>
+      
     </ul>
+    <p class="tocome"><b>Pictures to come</b> A pair at home, covers off, on their own feet; Core in a row, lit; Mantle after dark.</p>
   </div>
 </section>
 
@@ -485,35 +511,33 @@ footer p { max-width: 76ch }
     <div class="head"><p class="no">08 · Applications</p><h2>The same room, wherever the name goes.</h2>
       <p class="lede">Drawn mockups for review. Sizes and stocks are proposals; marks and prices stay placeholders until they are earned and set.</p></div>
     <div class="app"><figure><img src="img/card.jpg" alt="Three business cards: the front with the color globe and wordmark, the back with a line and the address, the eight tints along its foot, and a third cut from violet acrylic" loading="lazy" width="1800" height="1125"></figure>
-      <div class="txt"><h3>The house card</h3><p>One card for the company, not a person: the front the lockup, the back one line and the address. The tints run along its foot in order, printed on the edge of the stack, so a box of cards is a spectrum. A second card, cut from 1 mm cast acrylic in any tint and engraved, is for the bar and for the people who ask.</p>
-        <dl><dt>Size</dt><dd>89 × 51 mm</dd><dt>Stock</dt><dd>Uncoated 600 gsm, letterpress black; edge painted in seven bands</dd><dt>Acrylic</dt><dd>1 mm cast, laser-cut and engraved, corners 1 mm</dd></dl></div></div>
+      <div class="txt"><h3>The house card</h3><p>One card for the company, not a person: the front the lockup, the back one line and the address. The tints run along its foot in order, printed on the edge of the stack, so a box of cards is a spectrum. A second card, cut from 1&nbsp;mm cast acrylic in any tint and engraved, is for the bar and for the people who ask.</p>
+        <dl><dt>Size</dt><dd>89 × 51&nbsp;mm</dd><dt>Stock</dt><dd>Uncoated 600&nbsp;gsm, letterpress black; edge painted in seven bands</dd><dt>Acrylic</dt><dd>1&nbsp;mm cast, laser-cut and engraved, corners 1&nbsp;mm</dd></dl></div></div>
     <div class="app"><figure><img src="img/plate.jpg" alt="The rating plate: black anodized aluminum on red acrylic, laser-marked with EARF, Tropos, model, serial, ratings and marks" loading="lazy" width="1800" height="1125"></figure>
       <div class="txt"><h3>The rating plate</h3><p><b>A proposal; the wording is with the owner.</b> The marks shown are where they would go once earned: none is held yet. The one place the brand is required by law, so it is the most carefully set. Black anodized aluminum, laser-marked white, two black pan heads, beside the amplifier on the back of every Tropos, in the cabinet's own color.</p>
-        <dl><dt>Size</dt><dd>70 × 40 × 1 mm (the part in product.py)</dd><dt>Type</dt><dd>The wordmark, then Plex Mono</dd><dt>Ratings</dt><dd>As on the FA122's own plate</dd><dt>Marks</dt><dd>Drawn where they go; added only once tested</dd></dl></div></div>
+        <dl><dt>Size</dt><dd>70 × 40 × 1&nbsp;mm (the part in product.py)</dd><dt>Type</dt><dd>The wordmark, then Plex Mono</dd><dt>Ratings</dt><dd>As on the FA122's own plate</dd><dt>Marks</dt><dd>Drawn where they go; added only once tested</dd></dl></div></div>
     <div class="app"><figure><img src="img/social.jpg" alt="Three social posts: the seven Tropos in a grid under A world of sound, in color; Tropos in Dust in the desert with A long, dry afternoon; Tropos in Ice, whole and cover off, with Seven colors, Ember to Fog" loading="lazy" width="1800" height="795"></figure>
       <div class="txt"><h3>Social posts</h3><p>One picture, one line, the wordmark small in a corner. The line is always the site's, never a caption written for the feed. Three kinds rotate: the seven, a tint in its element, the material up close.</p>
         <dl><dt>Format</dt><dd>4:5, 1080 × 1350</dd><dt>Line</dt><dd>Instrument Sans 600, top-left or over sky</dd><dt>Label</dt><dd>Plex Mono, the tint's number and name</dd><dt>Never</dt><dd>Stickers, emoji, countdowns</dd></dl></div></div>
     <div class="app"><figure><img src="img/stationery.jpg" alt="A letterhead with the wordmark and the eight tints along its foot, an envelope, a black care card reading Care for cast acrylic, and a cotton tote printed with the globe" loading="lazy" width="1800" height="1125"></figure>
       <div class="txt"><h3>Paper, and the card in the box</h3><p>The letter says what the site says: made to order, so we quote rather than list. The care card ships in every box in the site's own words, because the one thing that harms acrylic is the wrong cleaner. The tote is the bar's: the globe in one color on heavy cotton.</p>
-        <dl><dt>Letter</dt><dd>US Letter, letterpress, the tints along its foot</dd><dt>Envelope</dt><dd>No. 10, the wordmark and the city only</dd><dt>Care card</dt><dd>Black, white print, 4 × 5.5 in</dd><dt>Tote</dt><dd>Heavy natural cotton, one-color screen print</dd></dl></div></div>
-    <div class="app"><figure><div class="gap" role="img" aria-label="Pending: The signs, set again with seven" style="--ar:16/10"><span class="g1">Pending</span><b>The signs, set again with seven</b><span class="g2">Its price tag read "in any of eight". Redrawn after the owner's Smoke answer.</span></div></figure>
+        <dl><dt>Letter</dt><dd>US Letter, letterpress, the tints along its foot</dd><dt>Envelope</dt><dd>No. 10, the wordmark and the city only</dd><dt>Care card</dt><dd>Black, white print, 4 × 5.5&nbsp;in</dd><dt>Tote</dt><dd>Heavy natural cotton, one-color screen print</dd></dl></div></div>
+    <div class="app nopic">
       <div class="txt"><h3>Planet EARF's signs</h3><p>The bar names itself once, quietly, on a side door. Inside, the brand's busiest application is a tag: everything in the room is for sale, so every object wears one, cut from Fog acrylic and hung on a black thread, its tint marked with a dot.</p>
-        <dl><dt>Door</dt><dd>Blackened steel, a 280 mm etched disc, unlit</dd><dt>Tag</dt><dd>90 × 50 mm Fog acrylic, engraved, filled black</dd><dt>Hours</dt><dd>6 mm Smoke, glazed to the window; as in the house book</dd><dt>Prices</dt><dd>[PRICE] and [PAIR PRICE] until set</dd></dl></div></div>
-    <div class="app"><figure><div class="gap" role="img" aria-label="Pending: The bar's decks and the coin column" style="--ar:3/2"><span class="g1">Pending</span><b>The bar's decks and the coin column</b><span class="g2">A new render goes here when it passes the critics.</span></div></figure>
-      <div class="txt"><h3>EARFcoin</h3><p>The brand you can hold. One coin a guest, one song a coin: cast acrylic in the seven tints, 40 mm across, the globe engraved on its back and read through the tint, GOOD FOR ONE SONG round the rim, reeded like money.</p>
-        <dl><dt>Size</dt><dd>40 × 6 mm, about 9 g</dd><dt>Made</dt><dd>Laser-cut, edges polished and reeded, engraved and filled</dd><dt>Ritual</dt><dd>A bowl at the door, a clear column at the decks</dd></dl></div></div>
+        <dl><dt>Door</dt><dd>Blackened steel, a 280&nbsp;mm etched disc, unlit</dd><dt>Tag</dt><dd>90 × 50&nbsp;mm Fog acrylic, engraved, filled black</dd><dt>Hours</dt><dd>6&nbsp;mm Smoke, glazed to the window; as in the house book</dd><dt>Prices</dt><dd>[PRICE] and [PAIR PRICE] until set</dd></dl></div></div>
+    <div class="app nopic">
+      <div class="txt"><h3>EARFcoin</h3><p>The brand you can hold. One coin a guest, one song a coin: cast acrylic in the seven tints, 40&nbsp;mm across, the globe engraved on its back and read through the tint, GOOD FOR ONE SONG round the rim, reeded like money.</p>
+        <dl><dt>Size</dt><dd>40 × 6&nbsp;mm, about 9&nbsp;g</dd><dt>Made</dt><dd>Laser-cut, edges polished and reeded, engraved and filled</dd><dt>Ritual</dt><dd>A bowl at the door, a clear column at the decks</dd></dl></div></div>
+    <p class="tocome"><b>Pictures to come</b> The signs, set again with seven; the bar's decks and the coin column.</p>
   </div>
 </section>
 
 <section class="chap band paper" id="packaging">
   <div class="in">
     <div class="head"><p class="no">09 · Packaging</p><h2>Arrives like an instrument. Opens like a gift.</h2>
-      <p class="lede">A 72.6 kg speaker in polished acrylic is a hard thing to ship and an easy thing to scratch. The crate is built so two people can open it and walk the speaker out without lifting it; the lamps come in boxes made of paper dyed the color of the shade inside.</p></div>
+      <p class="lede">A 72.6&nbsp;kg speaker in polished acrylic is a hard thing to ship and an easy thing to scratch. The crate is built so two people can open it and walk the speaker out without lifting it; the lamps come in boxes made of paper dyed the color of the shade inside.</p></div>
     <div class="full"><figure><img src="img/pack-pair.jpg" alt="A pair of birch crates printed 01 Ember and a long horn case in front" loading="lazy" width="1800" height="1200"><figcaption><b>A pair of Tropos, as it arrives.</b> Two upright crates and one horn case, printed in two inks: black and the tint. <span class="render">Render</span></figcaption></figure></div>
-    <div class="two">
-      <figure><div class="gap" role="img" aria-label="Pending: The crate opened, the speaker on its sled" style="--ar:3/2"><span class="g1">Pending</span><b>The crate opened, the speaker on its sled</b><span class="g2">A new render goes here when it passes the critics.</span></div><figcaption><b>The door is the ramp.</b> Hinged at its foot, it lowers to the floor; the speaker slides out on its sled, and the first thing read is printed on the inside.</figcaption></figure>
-      <figure><div class="gap" role="img" aria-label="Pending: The shade drums and Core A's box" style="--ar:3/2"><span class="g1">Pending</span><b>The shade drums and Core A's box</b><span class="g2">A new render goes here when it passes the critics.</span></div><figcaption><b>The drums and Core's box.</b> Each Hemisphere shade in a drum of its own color, the globe blind-debossed on the lid; Core's ball seated in molded pulp.</figcaption></figure>
-    </div>
+    
     <ol class="steps">
       <li><b>Unlatch</b>Four black over-center latches on the door. No screws, no tools, no crowbar.</li>
       <li><b>Lower</b>The door is hinged at its foot and comes down to the floor as a gentle ramp.</li>
@@ -529,14 +553,15 @@ footer p { max-width: 76ch }
     <div class="scroll"><table>
       <thead><tr><th>Piece</th><th>Outside</th><th>Built from</th><th>Protects with</th><th>Tested to <span class="prop">target</span></th></tr></thead>
       <tbody>
-        <tr><td><b>Tropos crate</b>, one a speaker</td><td>720 × 600 × 1160 mm on two 100 mm skids <span class="prop">proposal</span></td><td>18 mm birch ply, cleated; black steel corners and latches; the door hinged at its foot</td><td>Charcoal felt lining; cross-linked polyethylene corner blocks; the sled; the cotton sleeve against scuffs; tilt and shock indicators on two faces</td><td>ISTA 3B (freight, less than a truckload), plus a drop and tilt check on the crate</td></tr>
-        <tr><td><b>Horn case</b>, one a pair</td><td>1420 × 560 × 460 mm <span class="prop">proposal</span></td><td>18 mm birch ply, a lifting lid, two steel handles</td><td>Both horns face up in a cut foam bed, the throats unloaded; the pods' caps packed apart</td><td>ISTA 3B, with the crates</td></tr>
-        <tr><td><b>Hemisphere drum</b>, one a shade</td><td>260 mm across, 170 mm tall <span class="prop">proposal</span></td><td>Through-dyed board in the shade's tint, the globe blind-debossed on the lid; the fitting in a tray below</td><td>A molded pulp ring holds the shade by its collar, clear of every wall</td><td>ISTA 3A (parcel)</td></tr>
-        <tr><td><b>Core box</b></td><td>220 mm cube <span class="prop">proposal</span></td><td>Through-dyed board in the ball's tint; a lift-off lid</td><td>Molded pulp: the ball on top, the base and its charger beneath [RECHARGING: from the lamps lane’s redesign]</td><td>ISTA 3A (parcel)</td></tr>
+        <tr><td><b>Tropos crate</b>, one a speaker</td><td>720 × 600 × 1160&nbsp;mm on two 100&nbsp;mm skids <span class="prop">proposal</span></td><td>18&nbsp;mm birch ply, cleated; black steel corners and latches; the door hinged at its foot</td><td>Charcoal felt lining; cross-linked polyethylene corner blocks; the sled; the cotton sleeve against scuffs; tilt and shock indicators on two faces</td><td>ISTA 3B (freight, less than a truckload), plus a drop and tilt check on the crate</td></tr>
+        <tr><td><b>Horn case</b>, one a pair</td><td>1420 × 560 × 460&nbsp;mm <span class="prop">proposal</span></td><td>18&nbsp;mm birch ply, a lifting lid, two steel handles</td><td>Both horns face up in a cut foam bed, the throats unloaded; the pods' caps packed apart</td><td>ISTA 3B, with the crates</td></tr>
+        <tr><td><b>Hemisphere drum</b>, one a shade</td><td>260&nbsp;mm across, 170&nbsp;mm tall <span class="prop">proposal</span></td><td>Through-dyed board in the shade's tint, the globe blind-debossed on the lid; the fitting in a tray below</td><td>A molded pulp ring holds the shade by its collar, clear of every wall</td><td>ISTA 3A (parcel)</td></tr>
+        <tr><td><b>Core box</b></td><td>220&nbsp;mm cube <span class="prop">proposal</span></td><td>Through-dyed board in the ball's tint; a lift-off lid</td><td>Molded pulp: the ball on top, the base beneath, and its dock beside it</td><td>ISTA 3A (parcel)</td></tr>
         <tr><td><b>Mantle crate</b></td><td>To be drawn when Mantle's design is chosen (A or C3)</td><td>Birch ply, the lid printed with the tint</td><td>Platter and lid packed apart; the plinth on its own foam</td><td>ISTA 3A or 3B by weight</td></tr>
       </tbody>
     </table></div>
     <div class="prose"><p class="muted" style="font-size:15px">Why this raises the odds: one freight claim on a pair can erase the margin on several; a crate two people can open without tools is also a crate a dealer or a hotel can receive without a specialist. And the unboxing is the first piece of content most owners post. The full concept, materials and test plan are in spinoffs/barkhorn/brandbook/PACKAGING.md.</p></div>
+    <p class="tocome"><b>Pictures to come</b> The crate opened, the speaker on its sled; the shade drums and Core A's box.</p>
   </div>
 </section>
 
@@ -548,25 +573,26 @@ footer p { max-width: 76ch }
       <div class="ftxt"><p class="eyebrow">Idea g · the one most likely to raise money</p><h3>The Founding Hundred</h3><p class="lede" style="font-size:19px">The first hundred pairs of Tropos, reserved before the first is built, numbered on both plates and kept on a register at the bar. The number is the reward, not a discount.</p><p class="muted" style="font-size:14px">A proposal: the plate's wording, model and serial format are with the owner.</p>
         <div class="fcols"><div><p class="eyebrow">What a buyer gets</p><ul class="gets"><li>One of the first hundred pairs, in any of the seven tints, made to order</li><li>FOUNDING 037 / 100 laser-marked on both rating plates</li><li>A numbered certificate and a place on the register at Planet EARF</li><li>A seat at the first Session, and an EARFcoin for life</li></ul></div><dl><dt>Price</dt><dd>[PAIR PRICE], the launch price</dd><dt>Stage 1, now</dt><dd>A refundable reservation, about $1,000 a pair (lamps $100 to $250); "planned product; refundable any time"</dd><dt>Stage 2</dt><dd>After a working prototype: a 30 to 50% deposit with a stated delivery window</dd><dt>Stage 3</dt><dd>The balance before shipping</dd><dt>When</dt><dd>Reservations once terms are written; deposits around the debut in San Francisco</dd></dl></div>
         <p class="legal"><b>Before anything is taken:</b> counsel drafts the terms. The FTC's mail-order rule applies to made-to-order goods (shipping dates with a reasonable basis, delay notices, refunds within seven working days); California asks for the refund policy, legal name and street address before payment (B&amp;P §17538) and voids "non-refundable deposits" in consumer sales (Civil Code §1671). Deposits sit in a separate account, spent only on that order; the C-corp is formed first. From the funding research (R2, §4.4); amounts are its examples.</p></div></article>
-    <article class="feature"><figure><div class="gap" role="img" aria-label="Pending: The jacket, with the new room picture" style="--ar:16/10"><span class="g1">Pending</span><b>The jacket, with the new room picture</b><span class="g2">A new render goes here when it passes the critics.</span></div></figure>
-      <div class="ftxt"><p class="eyebrow">Idea a · the one most likely to raise money</p><h3>EARF Sessions</h3><p class="lede" style="font-size:19px">One album, start to finish, recorded live through the room's own pair in front of six listeners, pressed in the night's tint and numbered. Proof the speakers are serious, in the one form that can't be faked.</p>
-        <div class="fcols"><div><p class="eyebrow">What a buyer gets</p><ul class="gets"><li>A 12-inch LP, 180 g, pressed in the evening's tint, numbered</li><li>The jacket with the room on the front, and a download code</li><li>First copies to the night's six listeners</li><li>Session 00 recorded through the first pair, before the bar exists</li></ul></div><dl><dt>Price</dt><dd>[LP PRICE]; about $40 is typical for a numbered colored pressing (est.)</dd><dt>Cost</dt><dd>About $5k to $9k a release for 300 LPs: recording, mixing and mastering, cutting and pressing (est.)</dd><dt>Return</dt><dd>About $12k at $40 each, before the artist's share (est.)</dd><dt>When</dt><dd>Session 00 when the first pair plays; master to the plant by February; pressed in spring 2027</dd><dt>Press</dt><dd>The record goes to the hi-fi press before May, in the press rhythm the research set</dd></dl></div>
+    <article class="feature">
+      <div class="ftxt"><p class="eyebrow">Idea a · the proof</p><h3>EARF Sessions</h3><p class="lede" style="font-size:19px">One album, start to finish, recorded live through the room's own pair in front of six listeners, pressed in the night's tint and numbered. Proof the speakers are serious, in the one form that can't be faked.</p>
+        <div class="fcols"><div><p class="eyebrow">What a buyer gets</p><ul class="gets"><li>A 12-inch LP, 180&nbsp;g, pressed in the evening's tint, numbered</li><li>The jacket with the room on the front, and a download code</li><li>First copies to the night's six listeners</li><li>Session 00 recorded through the first pair, before the bar exists</li></ul></div><dl><dt>Price</dt><dd>[LP PRICE]; about $40 is typical for a numbered colored pressing (est.)</dd><dt>Cost</dt><dd>About $10,900 for 300 LPs: recording, mixing and mastering, cutting and pressing (est.)</dd><dt>Return</dt><dd>About $12k at $40 each before the artist's share; at $50, with the record partner paying the pressing, break-even at about 186 (est.)</dd><dt>When</dt><dd>Session 00 when the first pair plays; pressed in the months after (dates with the owner)</dd><dt>Press</dt><dd>The record goes to the hi-fi press once pressed</dd></dl></div>
         <p class="legal"><b>Before anything is taken:</b> the artist's agreement and share in writing, and mechanical licenses for any songs the artist didn't write.</p></div></article>
-    <div class="app"><figure><div class="gap" role="img" aria-label="Pending: The invitation, with the new night picture" style="--ar:16/10"><span class="g1">Pending</span><b>The invitation, with the new night picture</b><span class="g2">A new render goes here when it passes the critics.</span></div></figure>
+    <div class="app nopic">
       <div class="txt"><p class="eyebrow">Idea b</p><h3>A debut room: San Francisco, Vienna, then Milan</h3><p>One dark room, the speakers along a curved wall, a Session each night, every piece tagged. First San Francisco, at the debut, with the first pair; then High End in Vienna (6–9 May 2027), whose Start-Up Area is free (apply by 31 December 2026); Milan in 2028, with a batch behind it.</p>
         <dl><dt>Cost</dt><dd>$4k to $15k in SF; Vienna free to stand, $6k to $12k to get there; $80k to $200k for Milan <span class="prop">est.</span></dd><dt>When</dt><dd>Apply to Vienna by 31 December 2026</dd><dt>Why</dt><dd>Collectors and design press in January, the hi-fi trade in May, the design world once there is a batch to sell.</dd></dl></div></div>
     <div class="app"><figure><img src="img/idea-library.jpg" alt="Eight tinted acrylic tiles standing in a birch tray in spectrum order, the lid behind" loading="lazy" width="1800" height="1125"></figure>
-      <div class="txt"><p class="eyebrow">Idea f</p><h3>The Tint Library</h3><p>The seven tints as 100 × 100 × 20 mm cast tiles in a birch tray, sent to architects and designers who ask.</p>
+      <div class="txt"><p class="eyebrow">Idea f</p><h3>The Tint Library</h3><p>The seven tints as 100 × 100 × 20&nbsp;mm cast tiles in a birch tray, sent to architects and designers who ask.</p>
         <dl><dt>Cost</dt><dd>About $100 to $250 a kit <span class="prop">est.</span></dd><dt>When</dt><dd>As soon as the sheet is chosen</dd><dt>Why</dt><dd>Designers specify what they can hold; and making it fixes the cast colors manufacturing needs.</dd></dl></div></div>
     <div class="app"><figure><img src="img/idea-hotel.jpg" alt="A suite drawn in plan with its speakers, record player and lamps, an acrylic key card numbered 1204, and a card reading This room plays" loading="lazy" width="1800" height="1125"></figure>
       <div class="txt"><p class="eyebrow">Idea d</p><h3>Hotel listening suites</h3><p>A suite fitted as a complete EARF room in one tint, with records chosen for it; everything for sale at the front desk.</p>
         <dl><dt>Cost</dt><dd>Trade-priced kits; one pilot suite <span class="prop">est.</span></dd><dt>When</dt><dd>A season after a signed hotel</dd><dt>Why</dt><dd>A night with the speaker sells it better than a picture; trade revenue that doesn't wait for the bar.</dd></dl></div></div>
-    <div class="app"><figure><div class="gap" role="img" aria-label="Pending: An artist's color, on the polished horn" style="--ar:16/10"><span class="g1">Pending</span><b>An artist's color, on the polished horn</b><span class="g2">A new render goes here when it passes the critics.</span></div></figure>
-      <div class="txt"><p class="eyebrow">Idea e</p><h3>Artist editions</h3><p>An artist's tint each year, outside the seven, chosen and named with a musician or an artist, cast once, numbered, never again; with a Session pressed in the same color.</p>
+    <div class="app nopic">
+      <div class="txt"><p class="eyebrow">Idea e</p><h3>Artist editions</h3><p>An edition tint each year, outside the seven, chosen and named with a musician or an artist, cast once, numbered, never again; with a Session pressed in the same color.</p>
         <dl><dt>Cost</dt><dd>A color batch's minimum, and the artist's share <span class="prop">est.</span></dd><dt>When</dt><dd>2027, after the seven are in production</dd><dt>Why</dt><dd>A waitlist, a premium and the artist's audience. The picture is a hue study, not a cast.</dd></dl></div></div>
-    <div class="app"><figure><div class="gap" role="img" aria-label="Pending: Mother EARF at city scale" style="--ar:16/10"><span class="g1">Pending</span><b>Mother EARF at city scale</b><span class="g2">A new picture goes here when it passes the critics.</span></div></figure>
-      <div class="txt"><p class="eyebrow">Idea c</p><h3>Mother EARF, at city scale</h3><p>A proposal: the globe at 4 m on a low plinth, drawn as an architect would, an elevation at 1:50. Its earlier picture showed it lit and has not passed the critics.</p>
-        <dl><dt>Cost</dt><dd>About $150k to $300k at 4 m; far less at 2 m <span class="prop">est.</span></dd><dt>When</dt><dd>6 to 9 months temporary; 12 to 18 permanent</dd><dt>Why</dt><dd>The mark at the size of a building, and the idea someone else can pay for: a developer, a sponsor, a festival.</dd></dl></div></div>
+    <div class="app nopic">
+      <div class="txt"><p class="eyebrow">Idea c</p><h3>Mother EARF, at city scale</h3><p>A proposal: the globe at 4&nbsp;m on a low plinth, drawn as an architect would, an elevation at 1:50. Its earlier picture showed it lit and has not passed the critics.</p>
+        <dl><dt>Cost</dt><dd>About $150k to $300k at 4&nbsp;m; far less at 2&nbsp;m <span class="prop">est.</span></dd><dt>When</dt><dd>6 to 9 months temporary; 12 to 18 permanent</dd><dt>Why</dt><dd>The mark at the size of a building, and the idea someone else can pay for: a developer, a sponsor, a festival.</dd></dl></div></div>
+    <p class="tocome"><b>Pictures to come</b> The jacket, with the new room picture; the invitation, with the new night picture; an edition color, on the polished horn; Mother EARF at city scale.</p>
   </div>
 </section>
 
@@ -577,17 +603,18 @@ footer p { max-width: 76ch }
     <div class="boiler"><p class="eyebrow">Boilerplate</p><p>EARF designs hi-fi and lighting in tinted cast acrylic in San Francisco, in seven colors, Ember to Fog. Its products are named for the layers of the Earth: Tropos, a powered horn loudspeaker; Hemisphere, a pendant; Core, a table lamp; and Mantle, a record player. earf.world</p></div>
     <div class="sheets">
       <article class="sheet"><div class="seven mini"><img src="img/honest-front-ember.jpg" alt="Tropos in Ember" loading="lazy" width="1000" height="1250"><img src="img/honest-front-dust.jpg" alt="Tropos in Dust" loading="lazy" width="1000" height="1250"><img src="img/honest-front-acid.jpg" alt="Tropos in Acid" loading="lazy" width="1000" height="1250"><img src="img/honest-front-poison.jpg" alt="Tropos in Poison" loading="lazy" width="1000" height="1250"><img src="img/honest-front-ice.jpg" alt="Tropos in Ice" loading="lazy" width="1000" height="1250"><img src="img/honest-front-haze.jpg" alt="Tropos in Haze" loading="lazy" width="1000" height="1250"><img src="img/honest-front-fog.jpg" alt="Tropos in Fog" loading="lazy" width="1000" height="1250"></div><div class="sb"><p class="eyebrow">The company</p><h3>EARF</h3><p>Hi-fi and light, cast in tinted acrylic, in seven colors, Ember to Fog.</p><dl><dt>Where</dt><dd>San Francisco</dd><dt>Site</dt><dd>earf.world</dd><dt>Write</dt><dd>[contact line]</dd><dt>Products</dt><dd>Tropos, Hemisphere, Core, Mantle</dd><dt>Colors</dt><dd>Seven, the same in every product; an eighth, Smoke, held</dd><dt>Status</dt><dd>In development, not yet for sale; every picture a render</dd><dt>Sells</dt><dd>Made to order; prices set at launch</dd></dl></div></article>
-      <article class="sheet"><img src="img/honest-front-ember.jpg" alt="Tropos in Ember on a pale seamless" loading="lazy" width="1000" height="1250" style="aspect-ratio:4/5"><div class="sb"><p class="eyebrow">Powered horn loudspeaker</p><h3>Tropos</h3><p>Each cabinet tinted cast acrylic, 20 mm thick; the horn one 10 mm sheet in the cabinet's own color, formed over a plug and polished: the same tinted glass as the cabinet, the driver and posts seen through it.</p><dl><dt>Size</dt><dd>1293 mm tall; 560 wide, the horn flush with the cabinet; 423 deep</dd><dt>Weight</dt><dd>72.6 kg on its own feet</dd><dt>Drivers</dt><dd>FaitalPRO 15PR400 15-inch woofer; B&amp;C DE1085TN 2-inch compression driver</dd><dt>Amplifier</dt><dd>Hypex FA122 built in, 2 × 125 W, crossed at 1 kHz</dd><dt>Bass</dt><dd>To about 51 Hz at −3 dB; ports at 38 Hz</dd><dt>Loudness</dt><dd>Up to about 115 dB at 1 m, each</dd><dt>Inputs</dt><dd>XLR, RCA, AES, S/PDIF coaxial and optical; USB</dd></dl></div></article>
-      <article class="sheet"><div class="gap" role="img" aria-label="Pending: Hemisphere, lit" style="--ar:16/10"><span class="g1">Pending</span><b>Hemisphere, lit</b><span class="g2">A new render goes here when it passes the critics.</span></div><div class="sb"><p class="eyebrow">Pendant lamp</p><h3>Hemisphere</h3><p>Hung low over the bar. A quarter turn takes its shade off, and another puts a new color on.</p><dl><dt>Size</dt><dd>200 mm across</dd><dt>Shade</dt><dd>Three formed layers of cast acrylic: the color outside, a clear shell, an opal inside</dd><dt>Light</dt><dd>A 575-lumen LED, 2700 K, CRI 90, shielded in the hub</dd><dt>Fitting</dt><dd>Black anodized aluminum, quarter-turn catch</dd><dt>Mains</dt><dd>To follow</dd><dt>Shades</dt><dd>All seven, sold singly</dd></dl></div></article>
-      <article class="sheet"><div class="gap" role="img" aria-label="Pending: Core, lit" style="--ar:16/10"><span class="g1">Pending</span><b>Core, lit</b><span class="g2">A new render goes here when it passes the critics.</span></div><div class="sb"><p class="eyebrow">Table lamp</p><h3>Core</h3><p>A ball of tinted acrylic sitting low in a black acrylic base, with no cord.</p><dl><dt>Size</dt><dd>160 mm ball, 180 mm tall</dd><dt>Weight</dt><dd>About 1.5 kg</dd><dt>Light</dt><dd>2200 to 2700 K, warmer as it dims</dd><dt>Control</dt><dd>Touch the ring: tap to switch, hold to dim</dd><dt>Power</dt><dd>Cordless: three standard LiFePO4 cells, about five hours a charge; it charges on its dock, a polished black acrylic disc it sits in at any turn</dd><dt>Rating</dt><dd>Designed to meet IP44</dd></dl></div></article>
-      <article class="sheet"><div class="gap" role="img" aria-label="Pending: Mantle in the studio" style="--ar:16/10"><span class="g1">Pending</span><b>Mantle in the studio</b><span class="g2">Waits for the owner's choice of Mantle, then the critics.</span></div><div class="sb"><p class="eyebrow">Record player</p><h3>Mantle</h3><p>A turntable in cast acrylic. The plinth floats 40 mm over its base.</p><dl><dt>Plinth</dt><dd>25 mm tinted cast acrylic</dd><dt>Drive</dt><dd>Belt, the motor in a pod of its own</dd><dt>Arm · cartridge</dt><dd>Rega RB330 · Ortofon 2M Black</dd><dt>Phono</dt><dd>Built in, MM, with a bypass</dd><dt>Size</dt><dd>To follow, with the owner's choice of design</dd><dt>Weight</dt><dd>To follow</dd></dl></div></article>
+      <article class="sheet"><img src="img/honest-front-ember.jpg" alt="Tropos in Ember on a pale seamless" loading="lazy" width="1000" height="1250" style="aspect-ratio:4/5"><div class="sb"><p class="eyebrow">Powered horn loudspeaker</p><h3>Tropos</h3><p>Each cabinet tinted cast acrylic, 20&nbsp;mm thick; the horn one 10&nbsp;mm sheet in the cabinet's own color, formed over a plug and polished: the same tinted glass as the cabinet, the driver and posts seen through it.</p><dl><dt>Size</dt><dd>1293&nbsp;mm tall; 560 wide, the horn flush with the cabinet; 423 deep</dd><dt>Weight</dt><dd>72.6&nbsp;kg on its own feet</dd><dt>Drivers</dt><dd>FaitalPRO 15PR400 15-inch woofer; B&amp;C DE1085TN 2-inch compression driver</dd><dt>Amplifier</dt><dd>Hypex FA122 built in, 2 × 125&nbsp;W, crossed at 1&nbsp;kHz</dd><dt>Bass</dt><dd>To about 51&nbsp;Hz at −3&nbsp;dB; ports at 38&nbsp;Hz</dd><dt>Loudness</dt><dd>Up to about 115&nbsp;dB at 1&nbsp;m, each</dd><dt>Inputs</dt><dd>XLR, RCA, AES, S/PDIF coaxial and optical; USB</dd></dl></div></article>
+      <article class="sheet"><div class="sb"><p class="eyebrow">Pendant lamp</p><h3>Hemisphere</h3><p>Hung low over the bar. A quarter turn takes its shade off, and another puts a new color on.</p><dl><dt>Size</dt><dd>200&nbsp;mm across</dd><dt>Shade</dt><dd>Three formed layers of cast acrylic: the color outside, a clear shell, an opal inside</dd><dt>Light</dt><dd>A 575-lumen LED, 2700&nbsp;K, CRI 90, shielded in the hub</dd><dt>Fitting</dt><dd>Black anodized aluminum, quarter-turn catch</dd><dt>Mains</dt><dd>To follow</dd><dt>Shades</dt><dd>All seven, sold singly</dd></dl></div></article>
+      <article class="sheet"><div class="sb"><p class="eyebrow">Table lamp</p><h3>Core</h3><p>A ball of tinted acrylic sitting low in a black acrylic base, with no cord.</p><dl><dt>Size</dt><dd>160&nbsp;mm ball, 180&nbsp;mm tall</dd><dt>Weight</dt><dd>About 1.5&nbsp;kg</dd><dt>Light</dt><dd>2200 to 2700&nbsp;K, warmer as it dims</dd><dt>Control</dt><dd>Touch the ring: tap to switch, hold to dim</dd><dt>Power</dt><dd>Cordless: three standard LiFePO4 cells, about five hours a charge; it charges on its dock, a polished black acrylic disc it sits in at any turn</dd><dt>Rating</dt><dd>Designed to meet IP44</dd></dl></div></article>
+      <article class="sheet"><div class="sb"><p class="eyebrow">Record player</p><h3>Mantle</h3><p>A turntable in cast acrylic. The plinth floats 40&nbsp;mm over its base.</p><dl><dt>Plinth</dt><dd>25&nbsp;mm tinted cast acrylic</dd><dt>Drive</dt><dd>Belt, the motor in a pod of its own</dd><dt>Arm · cartridge</dt><dd>Rega RB330 · Ortofon 2M Black</dd><dt>Phono</dt><dd>Built in, MM, with a bypass</dd><dt>Size</dt><dd>To follow, with the owner's choice of design</dd><dt>Weight</dt><dd>To follow</dd></dl></div></article>
     </div>
     <p class="muted" style="font-size:15px;max-width:76ch">Every release carries the standing lines: in development and not yet for sale; every picture a render until the first are built; design figures until measured; prices set at launch. Planet EARF has an internal sheet only, since the bar isn't on the site.</p>
     <div class="three" style="margin-top:32px">
-      <figure><div class="gap" role="img" aria-label="Pending: The release, written again" style="--ar:935/1210"><span class="g1">Pending</span><b>The release, written again</b><span class="g2">The 31 October draft named eight colors and the stepped horn. It is written again from today's facts.</span></div><figcaption><b>The release.</b> One page, brackets for the date and prices. Held until it is written from the 9 November decisions.</figcaption></figure>
+      
       <div><p class="eyebrow">The pitches, about six weeks after the debut</p><p>Four embargoed pitches to the long-lead print titles, each under 150 words and written to its angle: Wallpaper* (offered the one exclusive first look, in print), Monocle (the listening room, and a radio interview), Dwell (a room in one color), Sunset (a West Coast maker). Kinfolk only if it asks.</p></div>
       <div><p class="eyebrow">The week before the debut</p><p>A local note for the debut (the SF Standard, SFist, Mission Local, KQED Arts; the Chronicle's Datebook and 7x7 by hand) with no pictures, since before the night every picture is a render, and a note asking design editors in town to come and see the room, not to write yet. All drafts, nothing sent: press/releases/.</p></div>
     </div>
+    <p class="tocome"><b>Pictures to come</b> Hemisphere, lit; Core, lit; Mantle in the studio; the release, written again.</p>
   </div>
 </section>
 
@@ -610,7 +637,7 @@ footer p { max-width: 76ch }
         <li>The line: "A world of sound, in color."</li>
         <li>Seven colors, Ember to Fog, in that order.</li>
         <li>Tropos stands on its own feet, with no light in its base; horn A, smooth and polished, one formed sheet in the cabinet's color.</li>
-        <li>Tropos: 1293 mm tall, 560 mm wide with the horn flush, 72.6 kg.</li>
+        <li>Tropos: 1293&nbsp;mm tall, 560&nbsp;mm wide with the horn flush, 72.6&nbsp;kg.</li>
         <li>Core is cordless and charges on its dock.</li>
         <li>Hemisphere's shade carries its color outside.</li>
         <li>American English. Pictures only once they pass the critics, and labeled "Render" until they are photographs.</li>
@@ -639,7 +666,7 @@ footer p { max-width: 76ch }
 
 <footer class="band">
   <div class="in">
-    <p class="eyebrow">EARF Brand Book · second edition (draft), 9 November 2026</p>
+    <p class="eyebrow">EARF Brand Book · second edition · 9 November 2026 (draft)</p>
     <p class="muted">Made from the site (earf.world, built by web.py), the project log (spinoffs/barkhorn/README.md and companions/), the marks (brand/, marks/) and the bar's house book. Every picture is a render; the mockups are drawn for review, and their sizes, stocks and the names held in reserve are proposals until the owner signs them. The sources and the mockups' files are in spinoffs/barkhorn/brandbook on the r47-brand branch.</p>
   </div>
 </footer>
