@@ -6094,3 +6094,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   choice: design A tonight 4/4; 3/4 call this the clearest case for B (an A/B day pair for the owner). 20:49 sent the lamps lane the
   merged fixes (neutral surround at the same level; the liner's mouth >= 0.2 of the lip per channel; Specular Tint white, all tints;
   the dock against the CAD and the copy; level; the collar a real black; Ember's reference #9B0000; every light named in the audit).
+- 20:49 GATE NIGHT PROXY 7 complete: 0/3 = HOLD for proxy 8. Founder: the X (the top wall L* 15 against 4-5 on the sides; the
+  cabinet top band L* 39 against proxy 4's 11); the -4 EV mask leaves a dark keyline 2-4 px outside the lamp (luma 30-49 against a
+  wall of ~62: the one thing that reads as retouched); the lower-right wood (luma 78, twice the rug); the blue crescent under the pod.
+  Photographer: the same, and the third way: move the pendant ~0.8 m back toward the wall (the 1.7 m camera looks down on the rim, so
+  further back sits higher in the frame and keeps ~40 px clearance even at proxy 4's rim; the pool leaves the cabinet top and the
+  floor). 20:49 sent the Mantle lane the merged proxy-8 brief (the sweep 0.2/0.4/0.8 m back at 1.47 and ~1.31 m; acceptance: the four
+  creases' p95 near 8/5/6/13, the top band <= ~15, no crescent, >= 30 px clearance; the mask 3-4 px inside the shell, no shell pixel
+  darker than the wall; the oak out of the pool or the rug 0.3 m wider; hold the regrade, <= +4.6, the slash <= 200).
