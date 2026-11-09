@@ -279,8 +279,8 @@ def out_of_frame(pts):
 def cards(bpy_, linked, specs):
     """Real cards a grip would set: each W x H m, its centre Z m up, on the ground plan SIDE_DEG off the line from the
     speaker to the camera (0: between them, under the lens; +90: camera-right), square to the speaker's middle, pushed
-    out along that bearing until no corner falls in the frame. 'white' is a bounce (diffuse, albedo 0.85), 'black' a
-    negative (albedo 0.02). Every ray type, casting shadow."""
+    out along that bearing until it is out of frame. 'white' is a bounce (diffuse, albedo 0.85), 'warm' a gold-sand
+    reflector (0.78, 0.62, 0.45), 'black' a negative (albedo 0.02). Every ray type, casting shadow."""
     import bmesh, math
     from mathutils import Vector
     from bpy_extras.object_utils import world_to_camera_view
@@ -295,8 +295,9 @@ def cards(bpy_, linked, specs):
         bm = bmesh.new(); bmesh.ops.create_grid(bm, x_segments=1, y_segments=1, size=0.5)
         me = bpy_.data.meshes.new(f'card-{kind}-{i}'); bm.to_mesh(me); bm.free()
         m = bpy_.data.materials.new(f'card-{kind}-{i}'); m.use_nodes = True
-        bs = m.node_tree.nodes['Principled BSDF']; v = 0.85 if kind == 'white' else 0.02
-        bs.inputs['Base Color'].default_value = (v, v, v, 1); bs.inputs['Roughness'].default_value = 1.0
+        bs = m.node_tree.nodes['Principled BSDF']
+        col = {'white': (0.85, 0.85, 0.85), 'black': (0.02, 0.02, 0.02), 'warm': (0.78, 0.62, 0.45)}[kind]   # warm: a gold-sand reflector
+        bs.inputs['Base Color'].default_value = (*col, 1); bs.inputs['Roughness'].default_value = 1.0
         bs.inputs['Specular IOR Level'].default_value = 0.0
         me.materials.append(m)
         f = bpy_.data.objects.new(f'card-{kind}-{i}', me); sc.collection.objects.link(f); f.scale = (w, h, 1.0)
