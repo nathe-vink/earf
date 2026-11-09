@@ -5497,3 +5497,13 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   Hemisphere night ceiling = rim + 0.776 m; Core's room keeps 2.5 m); no copy changes; waiting for the round-2 and Core-room tallies,
   then the findings, launch/lamp-site-queue.md (the SHA, 18 meshes, the caustics/no-clamp note) and the SHA for c2, then the full
   Hemisphere site set.
+- 18:5x partial gates: TURNS (wf_c0448c65-cd3) 2/2 SHOW on all five (Poison, Ice, Haze, Fog, Acid 17-23: smooth polished glass from
+  every angle, no X, no flicker, framing matching Ember and Dust to 0.1 %; Fog's clear horn clear, not milky): ALL SEVEN TURNS PASS.
+  I looked at Ember 00-05 (00-04 at c3 52ad76ba "to confirm"): frame 01's back face, nearly edge-on, reads pale grey (grazing
+  Fresnel off the bright sweep), the same geometry the other sets pass with: accepted. POISON EXPOSURE (wf_2d4edec1-848) 0/2 so
+  far on every frame: exposure isn't the fix; the box reads black at every exposure (the face 0-7/255 beside and above the woofer;
+  the horn lime, 17x the box); fixes: real light into the cabinet (a large white bounce low and out of frame catching the sun
+  patch, or daylight through the cabinet toward the camera: the bright mist or the gap behind the speaker), a black card left/low
+  for the left-edge green line, then about +1.5; never +2.35.
+- 18:51 sent the site lane (optional for RC3, else the next push): THE TURN VIEWER back, all seven sets with their sources; webp
+  ~40 KB, lazy per color, no autoplay loop on phones, no interaction caption ("Drag to turn" banned), a plain Render tag.
