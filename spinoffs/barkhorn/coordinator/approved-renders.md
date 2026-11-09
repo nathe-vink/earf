@@ -18,6 +18,11 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
 Scenes (habitats, night pictures) use the locked models and can run alongside; each enters an asset only after it passes.
 
 ## Tropos
+Lights audit (9 Nov 21:40, from each shot.json): the turning views, the horn-backs and the amp plate are lit by key, fill and wash
+(area lights) plus background lamps linked to the sweep (flagged background lights); chunks 4 and 05 (06b829ce, 52ad76ba) also carry
+the old glow lamp, tested to make only a noise-level difference. No specular-only source in any of them. The tallr2 fronts carried
+three specular-only panels (scrim, sheen, topline at diffuse 0): withdrawn from the re-shoot (21:34) so the fronts are lit only by
+lights a real studio could use.
 | Picture | Source (branch @ commit: path) | Gate | Used by |
 |---|---|---|---|
 | Seven fronts ("talls"), honest rig round 2 | helpers r33-rollout-c2/c3/c4 and r33-speaker-horn, renders/2026-11-04/barkhorn/rollout/A-polished-tallr2/site-front-off-tall-<k>.png on 63d83f47 | FAILED 9 Nov 21:24: Ember, Acid, Ice 3/3 NO; Dust 1/3 (21:28); Fog 2/3 SHOW (founder, skeptic; photo NO), kept only as a fallback since the set is re-shot on one rig; Poison, Haze 0/3 (21:31: the lower side face milky, see-through fails). Re-shoot A-polished-glint under way (r33-speaker-horn 4094b6ed + a flag for the lower-side veil) | none until the re-shoot passes; the site and the Book wait for it |
