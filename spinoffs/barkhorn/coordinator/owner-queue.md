@@ -4819,3 +4819,17 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 17:1x my rig audit of the wide: the round-2 rig as the talls (set-only lamps; spec-only panels unlinked; three reflect-only cards
   at 0.0 % by cardcast; none sits between a product-lighting lamp and the speaker). GATE launched on the three wides
   (wf_bcb2f28f-7a0; the passed talls as context; the band measured: an edge seen at the floor line, or light thrown down?).
+- 17:1x BOOK REVIEW, the first two lenses (wf_996beee8-30d: decisions, pictures) landed; spot-checked by grep in the exported HTML
+  (confirmed: "Eight colors, Ember to Smoke"; Mantle "lit at its edge", 470 mm, 15.5 kg; "Never a cropped"; "FIRST EDITION"; "drifts
+  through the air"; "maker of hi-fi"; "five hours"; "frosted between"; 99 files in img/, 46 used). Blockers: Smoke as a current color
+  in the Voice line, signage, the hotel idea, the Kickstarter and Pro-Ject mockups; the press release picture the 31 Oct draft (eight
+  colors, "22 layers" of the stepped horn); the old violet Mantle dusk render (glowing base) in the Pro-Ject pack; Mantle as the
+  superseded baseline in five places; the money pack on an undecided January debut; the coin and Earthrise idents cropped to "EAR".
+  Majors: the crate decal "ABOUT 74 KG" (72.6 now); "Never a cropped Tropos" vs the owner's "a few close-ups, beside the whole";
+  missing Render labels; "made in San Francisco"; Core's charging bracket (the owner signed the dock); Hemisphere's pre-decision
+  shade; the weather framing of the tints; a lit, ungated Mother EARF plaza; the rating plate's marks and wording (open); the
+  bouncing address; sliced page previews; 53 unused files (must-not-appear pictures among them) published with the Book.
+- 17:16 sent the brand lane WAVE 1 of the Book's fix list (25 items) and the big move: the execution chapters (launch, debut, teaser,
+  guests, money, Kickstarter, Session 00, partners, Amsterdam, media plan) into one closing section "Parked: execution plans, not
+  updated to the 9 November decisions" (collapsed or dropped), the core chapters fixed properly; publish only the files the page
+  uses; hold the publish for wave 2.
