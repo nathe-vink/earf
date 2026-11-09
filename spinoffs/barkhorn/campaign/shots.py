@@ -648,6 +648,7 @@ def site(frame, tint):
         _siteH_round1(s)
     if frame == 'back':
         _siteB_round1(s)
+        _siteB_round2(s)
     honest_lights(s)
     if frame in ('front-off-tall', 'front-off-wide', 'side'):
         _siteG_round2(s)
@@ -662,7 +663,24 @@ def site(frame, tint):
         s['lights']['back'].pop('power_w', None)
     if frame in ('front-off-tall', 'front-off-wide', 'hero-light', 'side'):
         back_edge_card(s, sides=('back', 'left') if frame == 'side' else ('back',))
-    if frame in ('front-off-tall', 'front-off-wide', 'hero-light', 'side'):
+    if frame == 'front-off-tall' and 'horn' in s['lights']:
+        # (the honest tall's gate, 2026-11-09 19:32/19:41: the horn lamp, slid out of frame and grown 1.8x, lit the floor
+        # in front, which the front face mirrored as a milky veil, and mirrored in the front and the horn mouth itself.
+        # The same 2.5 x 1.6 m softbox, not grown, at the same irradiance on the horn, raised above the camera clear of
+        # the front face's mirror zone (which reaches about 0.8 m up at the camera's distance), with a 25 deg grid, and a
+        # black cutter under its lower edge so it stops lighting the foreground floor: all out of frame)
+        L = s['lights']['horn']
+        # Dust proxy against the passed tall (half size, same pixels): grid 25 and a 1.4 x 0.7 cutter, wall 0.81 / floor
+        # 0.94 / front saturation 0.65; grid 15, a 2.0 x 1.0 cutter and the frame -0.15 stop, wall 0.76 (0.77) / floor
+        # 0.86 (0.87) / horn L* 50 (54) / front saturation 0.77 (0.70) / centre block 0.80, blue 0.026 linear / bottom
+        # batt 0.85. (The horn lamp off moves the wall and floor 0.01: the rest of the lift is the frame's, hence -0.15)
+        L.update(position=[0.9, -2.3, 2.2], size_m=[2.5, 1.6], spread_deg=15)
+        L.pop('orbit', None)
+        s.setdefault('set', {}).setdefault('flags', []).append(
+            {'center_m': [0.76, -1.91, 1.47], 'size_m': [2.0, 1.0], 'normal': [0.0, 0.0, 1.0], 'color': '#050505',
+             'camera': True, 'glossy': True, 'name': 'horn cutter'})
+        s['render']['exposure'] = round((s['render'].get('exposure') or 0.0) - 0.15, 3)
+    if frame in ('front-off-tall', 'front-off-wide', 'hero-light', 'side', 'back'):
         realize_hidden(s)
     # a panel at strength 0 still stands in the set: unseen by the camera and casting no shadow, but in the glossy floor's
     # reflections a black rectangle (the wide's critics, 2026-11-09: a straight, nearly horizontal seam on the floor at
@@ -697,7 +715,9 @@ def back_edge_card(s, gap=0.004, h=0.045, sides=('back',)):
     # hidden behind the cabinet from that camera
     import math
     # each card in the speaker's own frame: its centre (x, y), its width, its outward normal (x, y)
-    defs = {'back': ((0.0, 0.2063 + gap), 0.56, (0.0, 1.0)), 'left': ((-0.28 - gap, -0.004), 0.42, (-1.0, 0.0))}
+    # (the back card's +x end 9 mm short, ending 9 mm inside the right side panel's outer face: the tall gate, 2026-11-09,
+    # saw its end as a black nub 2-6 px past the back-right corner at the floor)
+    defs = {'back': ((-0.0045, 0.2063 + gap), 0.551, (0.0, 1.0)), 'left': ((-0.28 - gap, -0.004), 0.42, (-1.0, 0.0))}
     for blk in s.get('products', []):
         for i in blk['instances']:
             x0, y0, z0 = i.get('position', [0, 0, 0]); r = math.radians(i.get('rotate_z', 0))
@@ -790,7 +810,8 @@ def honest_lights(s, log=None):
 
 
 def _frame_rays(s, nx=96, ny=96):
-    """Unit rays through a grid over the camera's frame (lens shift included, padded 3 % past each edge)."""
+    """Unit rays through a grid over the camera's frame (lens shift included, padded 3 % past each edge), or over its
+    render crop where it has one."""
     import numpy as np
     cam = s['camera']; c = np.array(cam['position'], float); f = np.array(cam['target'], float) - c
     f /= np.linalg.norm(f); r = np.cross(f, [0.0, 0.0, 1.0]); r /= np.linalg.norm(r); u = np.cross(r, f)
@@ -798,7 +819,10 @@ def _frame_rays(s, nx=96, ny=96):
     hx, hy = (18.0, 18.0 * H / W) if W >= H else (18.0 * W / H, 18.0)
     sx, sy = cam.get('shift_x', 0.0), cam.get('shift_y', 0.0)
     span = max(hx, hy) * 2
-    xs = np.linspace(-1.03, 1.03, nx); ys = np.linspace(-1.03, 1.03, ny)
+    # a render crop (fractions of the frame from the top left; the arc's) is the frame that is shown (2026-11-09)
+    x0, y0, x1, y1 = ((s.get('render') or {}).get('crop') or [0.0, 0.0, 1.0, 1.0])
+    pad = 0.03
+    xs = np.linspace(2 * x0 - 1 - pad, 2 * x1 - 1 + pad, nx); ys = np.linspace(1 - 2 * y1 - pad, 1 - 2 * y0 + pad, ny)
     X, Y = np.meshgrid(xs, ys)
     px = X * hx + sx * span; py = Y * hy + sy * span                 # mm on the sensor
     d = f[None, None, :] * lens + px[..., None] * r[None, None, :] + py[..., None] * u[None, None, :]
@@ -916,9 +940,23 @@ def realize_hidden(s, log=None):
     slides out of it along the line from the speaker, growing to hold its angle (cards_out_of_frame's walk), or goes if
     it cannot leave the studio or lies on the floor. (A practical's bulb inside its own fitting is the one exception;
     the site rigs have none.)"""
+    import math
     st = s.get('set', {}); out = []
     i0 = s['products'][0]['instances'][0]['position'] if s.get('products') else [0, 0, 0]
     depth = st.get('depth', 1e9) - 0.2; half_w = st.get('width', 1e9) / 2 - 0.2
+    # a lamp-rig flag (lights.flag: a matte card the camera never sees) becomes a set flag, the camera's to see like any
+    # other card, and goes through the same walk below
+    import hiddencast as H0
+    for k, L in list((s.get('lights') or {}).items()):
+        if L.get('type') != 'flag':
+            continue
+        r = H0._lamp_rect(L)
+        if r:
+            st.setdefault('flags', []).append({'center_m': [round(x, 3) for x in r['center_m']], 'size_m': list(r['size_m']),
+                                               'normal': [round(x, 4) for x in r['normal']], 'color': L.get('color', '#000000'),
+                                               'name': k})
+            out.append(f"lamp-rig flag {k}: a set flag")
+        s['lights'].pop(k)
     for key in ('flags', 'bounces'):
         keep = []
         for fl in st.get(key, []) or []:
@@ -966,12 +1004,76 @@ def realize_hidden(s, log=None):
             rc = H._lamp_rect(cand)
             if rc and not _in_frame(s, rc) and rc['center_m'][1] < depth and abs(rc['center_m'][0]) < half_w:
                 moved = cand; break
+        if not moved and 'position' in L:
+            # cannot leave along its line inside the studio (a lamp behind the speaker, its line running into the cove):
+            # raised instead, at its own azimuth round its target, from its elevation up, at 1 to 2 times its distance
+            p0 = L['position']; v = [p0[i] - t[i] for i in range(3)]
+            d0 = math.sqrt(sum(x * x for x in v)) or 1.0
+            el0 = math.degrees(math.asin(max(-1.0, min(1.0, v[2] / d0)))); az0 = math.atan2(v[0], -v[1])
+            for el in range(int(el0) + 3, 88, 3):
+                for f in (1.0, 1.3, 1.6, 2.0):
+                    e = math.radians(el); d = d0 * f
+                    cand = {**L, 'position': [round(t[0] + d * math.cos(e) * math.sin(az0), 3),
+                                              round(t[1] - d * math.cos(e) * math.cos(az0), 3), round(t[2] + d * math.sin(e), 3)]}
+                    sz = L.get('size_m', [0.5, 0.5])
+                    cand['size_m'] = [round(x * f, 3) for x in sz] if isinstance(sz, list) else round(sz * f, 3)
+                    if 'power_w' in L:
+                        cand['power_w'] = round(L['power_w'] * f * f, 3)
+                    rc = H._lamp_rect(cand)
+                    if rc and not _in_frame(s, rc) and rc['center_m'][1] < depth:
+                        moved = cand; break
+                if moved:
+                    out.append(f"lamp {k}: raised from {round(el0)} to {el} deg at x{f}")
+                    break
         if moved:
             s['lights'][k] = moved
             out.append(f"lamp {k}, hidden, in frame: moved out at x{f}")
         else:
             s['lights'].pop(k)
             out.append(f"lamp {k}, hidden, in frame, cannot leave: removed")
+    if log is not None:
+        log.extend(out)
+    return s
+
+
+def arc_rig(s, bg=0.7, key_grow=2.5, off_deg=20.0, flats=False, bg_spread=None, log=None):
+    """The front arc's gate (2026-11-09, wf_a973e665-cb8): 03 and 05's 10 deg side faces read as flat white slabs (Fresnel
+    off a sweep lit well over white), and 05's horn corner mirrored the small high key as crisp streaks.
+    1. Two matte-black v-flats on the floor behind the speaker, `off_deg` either side of the lens axis, where a face at
+       80 deg to the camera sends its reflection; slid out along that line, grown to hold their angle, until out of frame
+       (from about 3.5 m behind the speaker at 20 deg): real, seen by the camera and in reflections, casting shadows.
+    2. The sweep from blown to just white: the background lamps (linked to the sweep alone) at `bg`.
+    3. The key `key_grow` times larger at the same irradiance: a broad soft source for the horn's corner seam to mirror."""
+    import math
+    out = []
+    cam = s['camera']['position']; tgt = s['camera'].get('target', [0, 0, 0.6])
+    i0 = s['products'][0]['instances'][0]['position'] if s.get('products') else [0, 0, 0]
+    ux, uy = tgt[0] - cam[0], tgt[1] - cam[1]; m = math.hypot(ux, uy); ux, uy = ux / m, uy / m
+    st = s.setdefault('set', {}); depth = st.get('depth', 1e9) - 0.2; half_w = st.get('width', 1e9) / 2 - 0.2
+    for side, a in ((('left', off_deg), ('right', -off_deg)) if flats else ()):
+        c, sn = math.cos(math.radians(a)), math.sin(math.radians(a))
+        dx, dy = c * ux - sn * uy, sn * ux + c * uy
+        w, h = 1.2, 2.4
+        fl = {'center_m': [round(i0[0] + 2.0 * dx, 3), round(i0[1] + 2.0 * dy, 3), h / 2], 'size_m': [w, h],
+              'normal': [round(-dx, 4), round(-dy, 4), 0.0], 'color': '#060606', 'camera': True, 'glossy': True,
+              'name': f'v-flat {side}'}
+        done = fl if not _in_frame(s, fl) else _slide_out(s, fl, i0, depth, half_w)
+        if done:
+            done['center_m'][2] = round(done['size_m'][1] / 2, 3)          # standing on the floor
+            st.setdefault('flags', []).append(done)
+            out.append(f"v-flat {side} at {done['center_m']} {done['size_m']}")
+        else:
+            out.append(f"v-flat {side}: cannot stand out of frame inside the studio")
+    for k, L in s['lights'].items():
+        if _set_only(L.get('receivers')) and str(k).startswith('bg'):
+            for x in ('irradiance', 'power_w'):
+                if x in L:
+                    L[x] = round(L[x] * bg, 3)
+            if bg_spread:
+                L['spread_deg'] = bg_spread
+    if 'key' in s['lights']:
+        sz = s['lights']['key'].get('size_m', [1.0, 1.0])
+        s['lights']['key']['size_m'] = [round(v * key_grow, 3) for v in sz] if isinstance(sz, list) else round(sz * key_grow, 3)
     if log is not None:
         log.extend(out)
     return s
@@ -1070,6 +1172,23 @@ def _siteB_round1(s):
     if 'plate-strip' in L:
         L['plate-strip']['irradiance'] = 0.0
     _mirror_card(s)
+    return s
+
+
+def _siteB_round2(s):
+    """The honest backs' gate (the coordinator's critics, 2026-11-04 01:15, wf_dfce1fd6-dc4: Ember, Poison, Haze and Acid
+    held, the dark colours sunk from behind, back face L* 8-12). The fill is the one lamp that meets the back face
+    near its normal (17 deg off; the key 89): x3, 1.3 to 3.9. The key and the sky, which light the sweep but hardly the
+    back, come down to hold it: key x0.5 (2.6 to 1.3), sky 0.7 to 0.3. Proxies (0.5 scale, 32 samples, part masks,
+    c2): back L* Ember 11.5 to 18.6, Haze 9.0 to 15.4; wall 84.4 to 84.8, floor 74 to 79; no clipping; EARF letters
+    on Ember 15.0 on 6.2 to 22.7 on 10.3. Rejected: a brighter or bigger key, a soft side lamp (back +1, sweep up), a
+    lamp over the lid (horn clips 4-5 %, floor 95), a soft lamp on the back's axis (mirrored as glare), real black
+    flags beside the cabinet (a black slab in the set; the side goes black, not coloured). The lid and the side
+    camera-left stay as they are: grazing mirrors of the in-frame floor (the coordinator, 01:48)."""
+    L = s['lights']
+    L['fill']['irradiance'] = 3.9
+    L['key']['irradiance'] = 1.3
+    s['sky']['strength'] = 0.3
     return s
 
 
