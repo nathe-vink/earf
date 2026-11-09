@@ -20,7 +20,7 @@ Scenes (habitats, night pictures) use the locked models and can run alongside; e
 ## Tropos
 | Picture | Source (branch @ commit: path) | Gate | Used by |
 |---|---|---|---|
-| Seven fronts ("talls"), honest rig round 2 | helpers r33-rollout-c2/c3/c4 and r33-speaker-horn, renders/2026-11-04/barkhorn/rollout/A-polished-tallr2/site-front-off-tall-<k>.png on 63d83f47 | FAILED 9 Nov 21:24: Ember, Acid, Ice 3/3 NO (batch 2 the same flaw); re-shoot A-polished-glint under way (r33-speaker-horn) | none until the re-shoot passes; the site and the Book wait for it |
+| Seven fronts ("talls"), honest rig round 2 | helpers r33-rollout-c2/c3/c4 and r33-speaker-horn, renders/2026-11-04/barkhorn/rollout/A-polished-tallr2/site-front-off-tall-<k>.png on 63d83f47 | FAILED 9 Nov 21:24: Ember, Acid, Ice 3/3 NO; Dust 1/3 (21:28); Fog 2/3 SHOW (founder, skeptic; photo NO), kept only as a fallback since the set is re-shot on one rig; Poison, Haze 0/3 (21:31: the lower side face milky, see-through fails). Re-shoot A-polished-glint under way (r33-speaker-horn 4094b6ed + a flag for the lower-side veil) | none until the re-shoot passes; the site and the Book wait for it |
 | Turning view, Ember, Dust, Acid, Poison, Ice, Haze | r33-rollout-c3 52ad76ba (Ember 00-04); c4 0a0a83bd (Ember 05-23, Dust); c4 42fa8eee (Acid 00-16); c3 66126d53 (Acid 17-23, Haze); c4 eef18db2 (Poison, Ice): renders/2026-11-04/barkhorn/rollout/A-polished-p2*/turn-<k>-NN.png | PASSED (wf_c0448c65-cd3) | site galleries |
 | Turning view, Fog, neutral ground | r33-rollout-c3 a688c59e: A-polished-p2-rc2/turn-fog-00..23.png | PASSED 3/3 (9 Nov 21:11; the stage at the rendered 211,212,207) | site gallery (FOG_TURN on) |
 | Horn from behind, seven | 06b829ce, 52ad76ba, a1322583 (not the failed Acid file), cut 4:5 at x 270-990 | PASSED, audited clean | site galleries; the home's Tropos block (Ember) |
@@ -29,10 +29,13 @@ Scenes (habitats, night pictures) use the locked models and can run alongside; e
 | Wides | r33-speaker-horn 89d95763 (the wide's horn lamp off) | NOT YET: renders and gate pending | none |
 
 ## Habitats (scenes)
+The shadow rule (9 Nov 21:25, biomes 3122f00c, proven by a slab test): until then a tinted wall passed tr² × volume to shadow rays (the tint
+three times, the Fresnel loss twice). From now on each face carries √0.92 and the welded volume gives the tint once. Files made under
+the old rule are marked; each is re-rendered under the new rule and gated against its passed file before it is swapped.
 | Picture | Source | Gate | Used by |
 |---|---|---|---|
-| Ice, "Out in the snow at dusk." | 0f619953 | PASSED | site (home band, /tropos/ice, /colors/ice), Book |
-| Dust, "On rippled sand among desert buttes." | r48-biomes 43c91242: renders/2026-11-03/barkhorn/habitats/dust-portrait-1200x1500-nopanel.jpg | PASSED 3/3 (9 Nov) | site, Book |
+| Ice, "Out in the snow at dusk." | 0f619953 | PASSED (old shadow rule: re-render under 3122f00c's rule queued; this file stays until it passes) | site (home band, /tropos/ice, /colors/ice), Book |
+| Dust, "On rippled sand among desert buttes." | r48-biomes 43c91242: renders/2026-11-03/barkhorn/habitats/dust-portrait-1200x1500-nopanel.jpg | PASSED 3/3 (9 Nov; old shadow rule: re-render under 3122f00c's rule queued; this file stays until it passes) | site, Book |
 | Fog, "In the grass on a hillside, in fog at dawn." | r48-biomes aa1ca856: habitats/fog_b-portrait-1200x1500-onesun.jpg (sha256 9f1fa543...; the glass's Fresnel loss in its shadows: the inside a touch dimmer) | PASSED 2/2 (9 Nov 21:21, photo and skeptic) | site, Book ("In fog at dawn."), swapping in tonight's push |
 | Acid | r48-biomes 539c3772 | HOLD 1/3 (rain stops at the speaker; dry; dark cabinet) | none |
 | Poison, Ember, Haze | in progress / not started (Haze waits on the horn pour) | | none |
