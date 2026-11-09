@@ -4812,3 +4812,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   back: wall 84.6 both); HORN-BACK SHOW 3/3 (the amber mismatch gone: horn 98-100 vs cabinet 100-103; the pod dark olive bottle
   glass). Optional: a camera-left black flag for all seven backs or none; the amp plate's green status LED off for a strict "nothing
   on" day shot (Ember too); captions: Acid renders olive (no fluorescence). ALL SEVEN BACKS AND ALL SEVEN HORN-BACKS NOW PASS.
+- 17:14 c4: rc1 WIDE chunk 01 at 80aa5bb355464ab5df491fe3905288447e2b1602 (Ember, Dust, Acid; 1800x1200; 9.8-10.7 min each; Acid one
+  yellow). Stopped before chunk 02 over a bright band along the floor under the bottom edge (front and right), weaker than on 3 Nov;
+  asked whether to go on. Sent (17:14): the band is the known edge glow of the clear panels' polished bottom edges (the owner's open
+  bottom-edge question: (b) satin edge, (c) matte skirt); start the turns (Poison, Ice) now; wides 02-03 wait for the verdict.
+- 17:1x my rig audit of the wide: the round-2 rig as the talls (set-only lamps; spec-only panels unlinked; three reflect-only cards
+  at 0.0 % by cardcast; none sits between a product-lighting lamp and the speaker). GATE launched on the three wides
+  (wf_bcb2f28f-7a0; the passed talls as context; the band measured: an edge seen at the floor line, or light thrown down?).
