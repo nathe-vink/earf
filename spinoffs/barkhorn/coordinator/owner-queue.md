@@ -6004,3 +6004,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   7); the turn rests on frame 20 (the thumb and placeholder too); the lamps words-only (no lamps-unlit built, banned; a text band; no
   stage on /lighting or the 14 views; og-lamps not made; the lamp cards on img/rc/og-home.jpg). 20:25 confirmed og-home (remade from
   the new talls); the talls ~21:15-21:30.
+- 20:26 BIOMES: THE ACID FINAL (539c3772, r48-biomes; habitats/acid_b-portrait-1200x1500.jpg, replacing the never-passed cc380fab):
+  one sun (the lamp at belfast_sunset's own sun turned to 292.9, az 120, el 2.6, #FECC8B), the seam closed (row peak 60 against the
+  water's 50), the rain off the speaker's outline, the corner wet rock; 64 samples; its own gate 4/4 (watch: faint radial shading on
+  the horn at 3x). The storm reads warm sepia (sky hue 36°/0.18) with the speaker 45°/0.83. 20:27 GATE ACID FINAL launched
+  (wf_235309b8-088 founder + photographer, wf_1768128d-15f skeptic). 20:27 sent: Poison on a forest HDRI with a real sun from Poly
+  Haven (hdri_sun-matched), not the patch's #A4BFFE; lowest priority.
