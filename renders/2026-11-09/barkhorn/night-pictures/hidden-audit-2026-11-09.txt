@@ -1,0 +1,81 @@
+== c3e-day
+scene /home/user/night-work/c3e-day.blend: 120 x 80 (as saved), camera cam at (1.013, -1.15, 0.48)
+lamp bg: AREA 90 W, visible {'cam': False, 'diff': True, 'gloss': True, 'trans': True, 'vol': True}
+lamp fill: AREA 12 W, visible {'cam': False, 'diff': True, 'gloss': True, 'trans': True, 'vol': True}
+lamp key: AREA 140 W, visible {'cam': False, 'diff': True, 'gloss': True, 'trans': True, 'vol': True}
+lamp side: AREA 160 W, visible {'cam': False, 'diff': True, 'gloss': True, 'trans': True, 'vol': True}
+lamp spot: SPOT 12 W, visible {'cam': False, 'diff': True, 'gloss': True, 'trans': True, 'vol': True}
+lamp strip: AREA 90 W, visible {'cam': False, 'diff': True, 'gloss': True, 'trans': True, 'vol': True}
+lamp top: AREA 22 W, visible {'cam': False, 'diff': True, 'gloss': True, 'trans': True, 'vol': True}
+out        0.0 %  flag-r (hidden from camera) 
+out        0.0 %  flag-top (hidden from camera) 
+lamp bg: its emitting surface seen directly by the camera at 169 of 169 points  <- a real photo would show the bare emitter
+out        0.0 %  lamp bg (RECTANGLE 3.00 x 1.00 m, hidden from camera, seen in reflections) 
+lamp fill: its emitting surface seen directly by the camera at 169 of 169 points  <- a real photo would show the bare emitter
+out        0.0 %  lamp fill (RECTANGLE 1.00 x 0.60 m, hidden from camera, seen in reflections) 
+lamp key: its emitting surface seen directly by the camera at 169 of 169 points  <- a real photo would show the bare emitter
+out        0.0 %  lamp key (RECTANGLE 1.20 x 0.90 m, hidden from camera, seen in reflections) 
+lamp side: its emitting surface seen directly by the camera at 156 of 169 points  <- a real photo would show the bare emitter
+out        0.0 %  lamp side (RECTANGLE 0.90 x 0.10 m, hidden from camera, seen in reflections) 
+lamp spot: SPOT, hidden from the camera; no surface (a point source), not a card
+lamp strip: its emitting surface seen directly by the camera at 169 of 169 points  <- a real photo would show the bare emitter
+out        0.0 %  lamp strip (RECTANGLE 1.60 x 0.18 m, hidden from camera, seen in reflections) 
+lamp top: its emitting surface seen directly by the camera at 169 of 169 points  <- a real photo would show the bare emitter
+out        0.0 %  lamp top (RECTANGLE 0.90 x 0.60 m, hidden from camera, seen in reflections) 
+== c3e-night
+scene /home/user/night-work/c3e-night.blend: 120 x 80 (as saved), camera cam at (1.013, -1.15, 0.48)
+lamp bg: AREA 0.27 W, visible {'cam': False, 'diff': True, 'gloss': True, 'trans': True, 'vol': True}
+lamp fill: AREA 0.036 W, visible {'cam': False, 'diff': True, 'gloss': True, 'trans': True, 'vol': True}
+lamp key: AREA 0.42 W, visible {'cam': False, 'diff': True, 'gloss': True, 'trans': True, 'vol': True}
+lamp side: AREA 0.48 W, visible {'cam': False, 'diff': True, 'gloss': True, 'trans': True, 'vol': True}
+lamp spot: SPOT 0.036 W, visible {'cam': False, 'diff': True, 'gloss': True, 'trans': True, 'vol': True}
+lamp strip: AREA 0.27 W, visible {'cam': False, 'diff': True, 'gloss': True, 'trans': True, 'vol': True}
+lamp top: AREA 0.066 W, visible {'cam': False, 'diff': True, 'gloss': True, 'trans': True, 'vol': True}
+lamp wall-wash: AREA 6 W, visible {'cam': False, 'diff': True, 'gloss': True, 'trans': True, 'vol': True}
+out        0.0 %  flag-r (hidden from camera) 
+out        0.0 %  flag-top (hidden from camera) 
+lamp bg: its emitting surface seen directly by the camera at 169 of 169 points  <- a real photo would show the bare emitter
+out        0.0 %  lamp bg (RECTANGLE 3.00 x 1.00 m, hidden from camera, seen in reflections) 
+lamp fill: its emitting surface seen directly by the camera at 169 of 169 points  <- a real photo would show the bare emitter
+out        0.0 %  lamp fill (RECTANGLE 1.00 x 0.60 m, hidden from camera, seen in reflections) 
+lamp key: its emitting surface seen directly by the camera at 169 of 169 points  <- a real photo would show the bare emitter
+out        0.0 %  lamp key (RECTANGLE 1.20 x 0.90 m, hidden from camera, seen in reflections) 
+lamp side: its emitting surface seen directly by the camera at 132 of 169 points  <- a real photo would show the bare emitter
+out        0.0 %  lamp side (RECTANGLE 0.90 x 0.10 m, hidden from camera, seen in reflections) 
+lamp spot: SPOT, hidden from the camera; no surface (a point source), not a card
+lamp strip: its emitting surface seen directly by the camera at 0 of 169 points
+out        0.0 %  lamp strip (RECTANGLE 1.60 x 0.18 m, hidden from camera, seen in reflections) 
+lamp top: its emitting surface seen directly by the camera at 169 of 169 points  <- a real photo would show the bare emitter
+out        0.0 %  lamp top (RECTANGLE 0.90 x 0.60 m, hidden from camera, seen in reflections) 
+lamp wall-wash: its emitting surface seen directly by the camera at 169 of 169 points  <- a real photo would show the bare emitter
+out        0.0 %  lamp wall-wash (RECTANGLE 1.20 x 0.30 m, hidden from camera, seen in reflections) 
+== night-ice-wide-proxy3
+scene /home/user/night-work/night-ice-wide-proxy3.blend: 1920 x 1080 (as saved), camera camera at (0.671, -5.464, 1.7)
+lamp cob: AREA 3.2 W, visible {'cam': False, 'diff': True, 'gloss': True, 'trans': True, 'vol': True}
+no mesh is hidden from the camera
+lamp cob: its emitting surface seen directly by the camera at 0 of 113 points
+out        0.0 %  lamp cob (DISK 0.17 x 0.17 m, hidden from camera, seen in reflections) 
+== night-ice-wide-proxy4
+scene /home/user/night-work/night-ice-wide-proxy4.blend: 1920 x 1080 (as saved), camera camera at (0.0, -4.353, 1.7)
+lamp cob: AREA 3.2 W, visible {'cam': False, 'diff': True, 'gloss': True, 'trans': True, 'vol': True}
+lamp outside-light: SUN 0.025 W, visible {'cam': False, 'diff': True, 'gloss': True, 'trans': True, 'vol': True}
+no mesh is hidden from the camera
+lamp cob: its emitting surface seen directly by the camera at 0 of 113 points
+IN FRAME   0.0 %  lamp cob (DISK 0.17 x 0.17 m, hidden from camera, seen in reflections) x 0.60-0.62 y 0.21-0.21 of the frame
+lamp outside-light: SUN, hidden from the camera; no surface (a point source), not a card
+== night-ice-wide-proxy5
+scene /home/user/night-work/night-ice-wide-proxy5.blend: 1920 x 1080 (as saved), camera camera at (0.0, -4.353, 1.7)
+lamp cob: AREA 3.2 W, visible {'cam': False, 'diff': True, 'gloss': True, 'trans': True, 'vol': True}
+lamp outside-light: SUN 0.025 W, visible {'cam': False, 'diff': True, 'gloss': True, 'trans': True, 'vol': True}
+no mesh is hidden from the camera
+lamp cob: its emitting surface seen directly by the camera at 5 of 113 points  <- a real photo would show the bare emitter
+out        0.0 %  lamp cob (DISK 0.17 x 0.17 m, hidden from camera, seen in reflections) 
+lamp outside-light: SUN, hidden from the camera; no surface (a point source), not a card
+== night-ice-wide-proxy6
+scene /home/user/night-work/night-ice-wide-proxy6.blend: 1920 x 1080 (as saved), camera camera at (0.0, -4.353, 1.7)
+lamp cob: AREA 3.2 W, visible {'cam': False, 'diff': True, 'gloss': True, 'trans': True, 'vol': True}
+lamp outside-light: SUN 0.01 W, visible {'cam': False, 'diff': True, 'gloss': True, 'trans': True, 'vol': True}
+no mesh is hidden from the camera
+lamp cob: its emitting surface seen directly by the camera at 0 of 113 points
+out        0.0 %  lamp cob (DISK 0.01 x 0.01 m, hidden from camera, seen in reflections) 
+lamp outside-light: SUN, hidden from the camera; no surface (a point source), not a card
