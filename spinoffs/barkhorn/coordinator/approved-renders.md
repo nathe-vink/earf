@@ -17,6 +17,12 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
 Scenes (habitats, night pictures) use the locked models and can run alongside; each enters an asset only after it passes.
 
+ASSETS OUT OF DATE (checked 9 Nov 22:33), not to be sent until rebuilt from this list:
+- the investor deck (artifact 3sihYaT4ckNTF6WE7SWR7x, v68): lit plinths, the stepped horn, Smoke as an eighth color, glowing
+  Hemisphere and Core (light.html, line.html), the uplit eight (cover, colours); rebuilt in step 3.
+- the brand lane's parked pieces: the investor one-pager (its lamp row), the launch grid (posts 2 and 5), the teaser (beats 3, 6):
+  marked held in their manifests.
+
 ## Tropos
 Lights audit (9 Nov 21:40, from each shot.json): the turning views, the horn-backs and the amp plate are lit by key, fill and wash
 (area lights) plus background lamps linked to the sweep (flagged background lights); chunks 4 and 05 (06b829ce, 52ad76ba) also carry
