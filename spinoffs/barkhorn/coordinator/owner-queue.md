@@ -6102,3 +6102,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   floor). 20:49 sent the Mantle lane the merged proxy-8 brief (the sweep 0.2/0.4/0.8 m back at 1.47 and ~1.31 m; acceptance: the four
   creases' p95 near 8/5/6/13, the top band <= ~15, no crescent, >= 30 px clearance; the mask 3-4 px inside the shell, no shell pixel
   darker than the wall; the oak out of the pool or the rug 0.3 m wider; hold the regrade, <= +4.6, the slash <= 200).
+- 20:55 SPEAKER LANE: THE TALL ROUND 2 at 63d83f47 (r33-speaker-horn): the grid off (its hard cone drew the edge), the cutter 2.5 x
+  1.25 m, the frame -0.1, the kick 2.5, a white fill card camera-right out of frame. Half-size proofs (tall-pool/): the sweep smooth
+  (x 860: 238-239 flat; x 40: 217-221, no edge; upper wall 239); the floor pool p95 240-242, 0.0 % at 248 or above; Fog's right face V
+  0.65 (passed 0.77; the card alone did nothing measurable; more kick lifts the floor past 245); the front's fix holds (Dust front sat
+  0.82 at V 0.54, centre 0.84, blue 0.010, horn L* 54, woofer L* 18 against passed 34); 0 hidden in frame, cardcast 0.0 %. Sent to
+  the helpers by the lane. My look: the backdrop even, no edge. 20:56 sent: the finals go straight to the gate; next the right-side
+  glint, then the backs; the freeze from 21:25.
