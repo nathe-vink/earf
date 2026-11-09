@@ -125,11 +125,16 @@ def main():
                 if disk and qa * qa + qb * qb > 1.0:
                     continue
                 pt = C + ax * (qa * sx / 2 * 0.98) + ay * (qb * sy / 2 * 0.98)
+                # only points inside the camera's frame count (a lamp out of frame is not seen, however open)
+                from bpy_extras.object_utils import world_to_camera_view
+                fc = world_to_camera_view(sc, cam, pt)
+                if not (0.0 <= fc.x <= 1.0 and 0.0 <= fc.y <= 1.0 and fc.z > 0):
+                    continue
                 dv = pt - o; dist = dv.length; dv.normalize(); n_pts += 1
                 ok, loc, *_ = sc.ray_cast(dg, o, dv, distance=dist - 1e-4)
                 if not ok:
                     seen += 1
-        print(f'lamp {ob.name}: its emitting surface seen directly by the camera at {seen} of {n_pts} points'
+        print(f'lamp {ob.name}: its emitting surface seen directly by the camera at {seen} of {n_pts} points in frame'
               + ('' if seen == 0 else '  <- a real photo would show the bare emitter'))
         print(('IN FRAME ' if hit else 'out      ') + f'{pct:5.1f} %  lamp {ob.name} ({d.shape} {sx:.2f} x {sy:.2f} m, hidden from camera, seen in reflections) {ext}')
 
