@@ -1,0 +1,20 @@
+cabinet: median L 28, luma 26  (target L >= 25)
+horn: median L 16
+woofer cone and surround: mean RGB [26. 42. 50.], L spread (p10-p90) 8-93
+red above 0: 41 % of the speaker (cabinet 53 %, horn 22 %)
+lower chamber: luma median 24, p90 75; the wall beside the speaker: luma median 22, p90 31
+hue: horn 220 deg (median RGB [ 0. 10. 30.]), cabinet 208 deg (median RGB [ 1. 29. 54.])
+floor near the feet (the speaker's base -2/+6 % of the frame, 5 % either side): p99 L 62, max 104; walls (y 0.25-0.45) median L 14, p90 32
+horn: L* max 95 (target <= 90), p99.9 81, pixels over 90: 12
+X arms, L* p95: upper-left 5, upper-right 3, lower-left 5, lower-right 17 (proxy 4: about 10, 5, 19, 35)
+upper arms over the side walls: left 1, right 1 L* over (side walls median L* 3; target about 3 over)
+arc under the pod: L* p95 3, max 30 (target under about 30)
+zone lower-left   mean 0.005  p99 0.021  ok
+zone lower-right  mean 0.012  p99 0.044  ok
+zone top-left     mean 0.014  p99 0.025  ok
+zone top-right    mean 0.005  p99 0.010  ok
+floor outside the column (y >= 0.78) p99 0.041; below y 0.88 p99 0.033  ok
+edges (4 %) mean 0.008 p99 0.025  ok
+console near end under the lamp: luma median 127 p99 197
+the stack: luma median 8
+pixels at 255 in any channel 40; outside the lamp box 40
