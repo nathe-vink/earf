@@ -5164,3 +5164,17 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   ~3,400-3,600 px; a pinker top highlight like a tube; an abrupt start 28 % in) reads as a lit strip at phone size; fix it with flags,
   keep (a); (b) and (c) not to the founder. The third judge adds: the passed tall Dust has the same strip with the same hard start,
   "so the same flag fix probably belongs there" (already sent at 18:01).
+- 18:00 site lane: r49-site-rc at cf5af9aac75b45076d4758e7d370b86256eba86c (code r47-site-next 9f289f55, flags off; deployment
+  earf-bxrrdtdb4, dpl_BhLrwPu21dPjpmXistanrpsaJrZ1, queued): RC2 + the three answers (1295; 560 flush; 428 overall / 420 at the
+  cabinet; "About 73 kg; about 64 kg with the horn lifted off (modelled)"; no 1293/625/423/72/62 left; the seven horn-backs (Acid
+  a1322583), five views a gallery; Fog's habitat with the alt; no tall swap). A slip: an intermediate push 148fb466 (igack5b50) was
+  a partial build (the RC prune had removed source pictures web.py reads; committed without checking the exit) -- never review it;
+  cf5af9aa rebuilt after restoring the sources (174 files, 8 MB; the sweep passed). 18:02: my 17:57 hold crossed these pushes; RC2
+  (6ov8pm7rv) is immutable; the branch alias moved off it; nothing more until the punch list. 18:03 sent: leave both; cf5af9aa is
+  the punch list's base; write the restore step into the r49 build notes; check the build exit before committing.
+- 18:02 lamps lane: the 17:57 recipe applied at 988e6ce4ace86a8521d40a854930796c58964f0d (c2 not to merge yet): the site rig at
+  3000 K key/fill/camera, lamps 2700 K; -2 EV with the studio unchanged (Hemisphere x2 -3 EV, Core x8 -5 EV); AgX Punchy; a 55 %
+  opal liner; rows with larger domes at 0.25 m, framed above the floor, cables cropped, the orbs row 15 deg up, -7 variants without
+  Smoke; full samples in finals. Core nights: the room at 18 %, the real dusk window with its sheer in Core's room (the ball
+  reflects it), Punchy, B's outer ball at A's dye path. Re-proxies: 18:20-18:30 all heroes at 0.25 scale + 4 rows with a script
+  measuring the gate numbers; 19:00 the Core A/B nights (both exposures) + the day pair.
