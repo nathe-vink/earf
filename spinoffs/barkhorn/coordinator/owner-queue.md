@@ -5420,3 +5420,16 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 18:43 sent the Mantle lane: its honest-emitter test (face L 17, the pool gone) carries the same render loss: reflective caustics
   on, no indirect clamp on the Hemisphere's paths, the CAD's aluminium reflector, the COB at 3.2 W with nothing added; re-measure the
   face and the floor by the feet before the exposure; proxy 6's brief after the night gate.
+- 18:43 biomes: THE ALPHA AUDIT (every Poly Haven model in every shot vs its cached glTF and Poly Haven's file list):
+  grass_bermuda_01 is used only by fog_b (the field and the base ring) and is the only model whose glTF lacks the published Alpha
+  map; Ice, Dust, Ember, Haze (its grass is the kit's own), Acid and Poison (fern, sorrel MASK, moss BLEND, wired) don't use it; no
+  other approved or pending frame carries the flaw. 18:44 sent: fix the shared engine's _alpha_maps for all future renders, with a
+  one-line test; its queue stands.
+- 18:44 c3: rc1 sides Poison and Ice at ce00d1939fb231a6edfe4b13d3144561fa73d42e (on b00945ab; 7.1 / 8.5 min; 1000x1250): a quick
+  look clean (the faces in their tint, no white lower third, no band at the base). Waiting for the flags SHA.
+- 18:4x partial gates: SIDE PROXIES 1-1 (photographer HOLD: the grip slot clips, the driver pod's strip highlight reads as a
+  printed white band, and "why did the top band brighten with the kick off"; founder SHOW); the third decides. HAZE HABITAT 0/2
+  (the horn-to-cabinet hue drift, 236 vs 251-265: the photographer says give the horn the cabinet's pour; the founder says close
+  it with the light (a real scrim, or the sun higher) or show it only with the drift named as the open pour question). NIGHT
+  PROXIES: both choose Proxy 4 (A); neither shows now (darken the rug to the frame's edge; the armchair Ice-hued and brighter than
+  the speaker's face: the streetlight down ~1 stop and desaturated or 3500-4000 K; the pool below the speaker's interior).
