@@ -5905,3 +5905,26 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   above the cabinet back, no new reflection on the back panel; the amp plate's green status LED is lit (G 255) in a "nothing on"
   frame. 19:56 sent the speaker lane the addendum: the far-side lamp, the targets, the LED off, then full-size tests on Dust, Poison,
   Ember, Ice, Fog (Ice keeps its bottom batt) before releasing the seven.
+- 20:07 RC3.1 REVIEW COMPLETE (2490d9d3, served locally from its exact 160 files; wf_5258dbc7-29c decisions+pictures, wf_98d65b8b-1ac
+  words+build, wf_460e7280-ce7 owner). All five: send it tonight once the talls are swapped. The 21 items: all fixed but item 13
+  (Fog's 96 px header coin still in a square box); the re-push as claimed (plate on the home, Back pulled everywhere, the turn viewer
+  lazy per color, one 2.6 s turn on desks, no loop, no interaction words). One MAJOR (owner + pictures lenses): a seam line across the
+  turn stage at each frame's top edge on 16-18 of 24 frames per color (the lossy WebP's loop filter and the browser's scaled sampling
+  bleed the cabinet's foot into the next row; 53-62/255 on a 3x phone). Minors: the turn still on phones and resting on its flattest
+  frame (00, side-on); it starts on the click, not the decode (blank stage on a slow link); Fog's turn on a pale-blue ground reads as
+  Ice; "round" for "around" (the turn caption; Mantle's base row, my own item-16 slip); the plate's alt claims "TR-1" (the plate's
+  wording is an open owner question) and differs from the gallery's; the color pages' Tropos block ("in Ice" three times in four
+  lines, 8 px above the footer, its habitat 40 px wider); the price row "Price ... Price"; Mantle's "See it beside the speakers"
+  (no such picture) and its /s/ previews ("turntable" twice); "drawn" six times on one screen; the 404's links can't wrap below
+  362 px; Back after a typed fragment shows the home under a clean address. 428 mm traced to the speaker lane's 17:37 figures.
+  Notes: the home's speaker section opened on a dark Hypex panel with the logo legible; RC3.1 is 8.75 MB, not 7.3.
+- 20:07 GATE DUST NOPANEL complete: 3/3 SHOW (founder, photographer wf_3145e175-58b; skeptic wf_9ebef83b-683). One honest sun, the
+  upper box -0.2 to -0.6 stop deeper, contact and horn unchanged, the panel's reflection wedge on the horn gone. Back on the site.
+- 20:06 sent the site lane the RC3.1 punch list (P1 Dust back; P2 the seam: re-pack with a 16 px edge-extruded gutter, clip-path only
+  as a fallback; P3 Fog's turn out until re-rendered; P4 a frame-0 placeholder and the turn started from the decode; P5 one turn on
+  phones too; W1-W7 the words; B1-B3 Fog's big coin, the 404 wrap, Back after a fragment), all in the ONE push with the talls, on my
+  "go". 20:08 the addendum: the home's Tropos block shows the Ember horn-back (passed, clean) with the gallery's caption and alt,
+  the plate stays in the galleries, no "TR-1" anywhere; rest the turn on a three-quarter front frame (~20-21) for the thumb and the
+  placeholder too; replace og-lamps.jpg with the lamps decision.
+- 20:08 sent c3: re-render Fog's 24 turn frames on a neutral warm gray (corner ~213,211,207, #D5D3CF), only the ground changed;
+  the talls take priority the moment the rig fix lands; then its own gate.
