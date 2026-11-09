@@ -5237,3 +5237,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   the cut-off from geometry, more samples; render nothing until the gate picks 4 or 5); the lamps lane (the same fix in every rig
   that lights a Hemisphere, lamp_site.py and lamp_pictures.py; round 2's colour findings stand; the dome heroes and row again as
   round 3 with the honest emitter; check the Core's LED against its CAD; times).
+- 18:14 biomes: HAZE FINAL at 0f0d59cba72bae3ed0c30234de31f02700cc943e (renders/2026-11-03/barkhorn/habitats/haze_b-portrait-1200x1500.jpg;
+  A/B haze-ab-620c4bba-sun30-ev033.jpg): four values changed against 620c4bba, verified in the shot file: the sun and its disk 70 ->
+  30 deg azimuth (6 up), the HDRI 338.8 -> 18.8, exposure -1.0 -> -0.67; the lane's own blind gate 4/4 (the world behind hardly
+  shows through the deep violet); crease 6.0 / 8.2; the upper box (11,15,53) -> (56,43,114) with the sun on the camera's side; hue
+  horn 236, upper box 251, lower box 265 (the pour drift, an owner decision). Next: the Poison clearing proxies, the Fog passes, the
+  Acid crops. 18:14 MY GATE on the Haze final launched (wf_7bec6be9-a06; 3 critics; the previous final, the A/B and the Ice habitat
+  as context).
