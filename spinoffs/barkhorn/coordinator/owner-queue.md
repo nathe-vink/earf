@@ -5470,3 +5470,17 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   dome's roll-off; face L >= 25; glints and lip line; no second lamp); the lamps lane (the Hemisphere's real maximum drop as
   supplied); the speaker lane (the sides re-render on its next SHA with the card; fold in the slot and pod highlight if cheap and
   honest; Ice's bottom batt).
+- 18:46 c3: merged 8e5e1da0 at fc0955cba782eced44b7404aa0184a4b53655d55 (no rebuild); rc1-card talls Ice, Haze from 18:46 (~34 min)
+  into renders/2026-11-04/barkhorn/rollout/A-polished-rc1-card/. 18:46 c4 (stamped 18:48): merged at 92f814b0625f309d74ea34d1fa7d179d5241995b;
+  rc1-card talls Dust, Fog (~7 min each; the card flag in both shot files), same folder.
+- 18:46 Mantle lane: the caustics/clamp/aluminium fixes at 13997e4641c8836dca4d3ef0a1afff0405d0c0fd: on proxy 4's setup (960x540, 64
+  samples; cob-test/ice-honest-cob-test2.*) the face 17 -> 18; woofer 4-40; lower chamber 14 / 40 vs the wall's 32; the floor by the
+  feet p99 66 / max 70 (proxy 4's stand-in 112) vs walls 22; all zones and edges pass. Exposure: +0.5 EV face ~22 (zones ~0.105), +0.3
+  EV face ~20. 18:47 sent: run the lamps lane's flux check on its scene first; proxy 6 at a cabinet median of 25 (~+0.8 EV; the
+  lower-right zone dropped, the others and the edges under 0.09; the dark rug helps).
+- 18:46 biomes: the engine's _alpha_maps fix at 020157978592f45d00a12fcb2b9e4f766f00d342 (wires a published Alpha map wherever a
+  plant's alpha is unlinked and its base colour is an image; check_alpha.py asserts grass_bermuda_01; Fog's --plant-alpha removed).
+  HAZE: --scrim at 686e74c7cc0defe23646923511a8ab3c762438d3 (a real silk on the sun line, square to the beam, out of frame, casting
+  shadow, seen by every ray type); proxies base / (a) silk T 0.7 1.4 x 2.0 m from 2 m / (b) the sun 6 -> 10 deg, after the Fog crop
+  and two Acid proxies. The pink glint (758, 700-703; 4 px) is the bronze pod leg's warm highlight through the violet wall: honest.
+  Its stamps corrected (it now reads the clock first).
