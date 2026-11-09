@@ -4792,3 +4792,18 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   phone size (weakest Ember and Haze, carried by the letters' shadows). Optional: a small real raking light on the EARF plate (the
   rig's etch-rake is at 0) for Ember and Haze; a 10-15° more turned camera if the gray left sliver is questioned. The backs go into
   the site's fix pass; the Acid back is in its own gate (wf_1aa80df2-c50).
+- 16:5x GATE RE-LIT CLOSE-UPS (wf_e92326ae-fdc, resumed; 3 critics): FRONT POLISHED SHOW 2/3 (the X down to soft creases at the old
+  picture's level; the plug a small glint, 54-81 px above 220 vs the old 55-80; near-identical to the old picture, horn mean 12/81/174
+  vs 14/79/174). The dissent, taken: the 6 x 4 m softbox sits behind two reflection-only cards that hide ~15 % of it in reflections
+  while it lights at full (ruling 1's spirit) -> re-render with ordinary cards. SIDE POLISHED HOLD 0/3 (a white seam bar from the
+  throat, ~8,700 px above 200, reads as a beam; a black card in the top-right corner; the horn's upper half navy against a dark
+  backdrop). SATIN-OUTSIDE FRONT and SIDE HOLD 0/3: not fair to satin (light leaving through the outer face isn't roughened: posts
+  and lid through the wall pixel-identical to polished; the split sets roughness by ray side, not by face) -> fix the split per
+  face; add a view with the outer walls toward the camera.
+- 16:5x GATE TURNS (wf_949e8d32-655; 3 critics): Ember 05-23 SHOW 2/3, Dust 00-23 SHOW 2/3, Acid v2 00-16 SHOW 2/3: PASS. Notes:
+  Ember 00-04 from p2 to confirm (same pass); Acid 17-23 via c3 rc1; one critic wants real black flags left and right for the
+  milky grazing faces (two call it correct Fresnel; kept as is for consistency); Dust's side frames 00/12/13/23 read brick
+  (hue ~38 vs 61): evidence for item 15b; Acid's fluorescence can't render (olive): a caption or an owner question.
+- 17:01 sent the speaker lane: the close-up fixes (front with ordinary cards + rigaudit/cardcast; side: block the seam's softbox
+  reflection, remove the corner card, lighten the backdrop; satin split per face + a true outer-wall view; re-check satin-outside
+  frames since 3 Nov 15:14) after asks A and B and the bottom-edge sheets v2; the turns' pass and notes; an order and times asked.
