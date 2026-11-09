@@ -1,6 +1,6 @@
 # Core
 
-**A table lamp in the speakers' acrylic, with no cord.** "A ball of tinted acrylic sitting low in a black acrylic
+**A table lamp in the speakers' acrylic, with no cord.** "A tinted ball over a white opal inner ball, sitting low in a black acrylic
 base. Cordless, it goes where the conversation is."
 
 | | |

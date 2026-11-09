@@ -54,7 +54,7 @@ SHEETS = [
       ('Hanging', 'A 600 mm drop as standard, cut to length; a black acrylic canopy 150 mm across'),
       ('Mains', 'To follow'), ('Shades', 'In all seven colors, sold singly')]),
     ('core', 'Core', 'Table lamp', 'Goes where the conversation is.', None,
-     'A ball of tinted acrylic sitting low in a black acrylic base. Cordless, it goes where the '
+     'A tinted ball over a white opal inner ball, sitting low in a black acrylic base. Cordless, it goes where the '
      'conversation is. When the cells tire, you change the cells, not the lamp. The name: the glowing center.',
      [('Size', '160 mm ball, 180 mm tall'), ('Weight', 'About 1.5 kg'), ('Light', '2200 to 2700 K, warmer as it dims'),
       ('Control', 'Touch the black ring: tap to switch, hold to dim'),
