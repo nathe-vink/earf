@@ -6147,3 +6147,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   founder + photographer, wf_ad01e8ce-eb3 skeptic). 21:04 BIOMES: Fog with the Fresnel shadows (aa1ca856; its own gate 4/4; cabinet
   -0.06 stop, the ground under it -0.07) -> my gate (wf_a249f7ac-65b, photographer + skeptic). 21:07 MANTLE: the proxy-8 sweep met no
   target (back 0.2-0.4 m brightens the upper creases; 0.8 m throws a scallop on the wall); lowering the rim to 1.10 m (two crops).
+- 21:11 GATE FOG TURN complete: 3/3 SHOW (founder and photographer wf_ee61bc04-411, skeptic wf_db9593d5-640): water-clear and neutral in
+  all 24 frames (blue-leaning pixels ~80 % -> under 1 %), nothing else changed (structure 0.999 at zero shift), one smooth turn (even
+  15° steps, the loop closes). The one note: the stage's surround at the rendered gray (~211,212,207), not the paint #DFDAD7 (the site
+  lane took it from the frames' edges). On the approved list; FOG_TURN on in tonight's push (sent 21:10). 21:10 sent every lane the
+  owner's sequencing rule and approved-renders.md (site and brand: tonight's push/republish is the batch for the Tropos fronts lock,
+  then no picture changes until the next lock; speaker lane: fronts -> backs round 3 -> close-ups -> wides; lamps: the materials lock
+  in its README, then the matched A/B pair for the owner, then the lamp set).
