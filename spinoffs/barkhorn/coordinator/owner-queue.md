@@ -6109,3 +6109,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   0.82 at V 0.54, centre 0.84, blue 0.010, horn L* 54, woofer L* 18 against passed 34); 0 hidden in frame, cardcast 0.0 %. Sent to
   the helpers by the lane. My look: the backdrop even, no edge. 20:56 sent: the finals go straight to the gate; next the right-side
   glint, then the backs; the freeze from 21:25.
+- 20:56 c4: holding for my word on 63d83f47 (fetched, not merged). 20:56 sent GO to c4 (Ember, Dust), c2 (Acid, Poison) and c3 (Ice,
+  Haze; the Fog turn paused), tag "tallr2"; 20:57 the speaker lane renders Fog's tall itself (full size, tallr2) so all seven land by
+  ~21:14. 20:57 sent the PUSH FREEZE (from 21:25 until lifted, ~22:00; commit locally) to the biomes, brand (its stop hook pushes every
+  commit: no commits or the hook's push off; the Book's republish is an Artifact publish, fine), lamps and Mantle lanes; the speaker
+  lane and the helpers had it at 20:56.
