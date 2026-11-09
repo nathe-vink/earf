@@ -5119,3 +5119,21 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   Mantle lane (render (b) now as proxy 5, the rest identical, with the lower-chamber line; the lower-right zone dropped for this
   frame; red-at-0 and edges for the critics' eyes; glints and lip in the final; 4 and 5 gated together); the site lane (RC2 under
   review, punch list in ~40-60 min; apply the 17:44/17:45/17:50 answers locally, no push until the punch list; RC2 untouched).
+- 17:5x GATE BOTTOM-EDGE SHEETS v2 (wf_7a92dd5b-f68; founder and photographer in, skeptic running; the majority is set): EMBER WIDE
+  (a) as built on the fixed renderer SHOW 2/2: nothing to decide (0 px above luminance 200 under the footprint; a near-black,
+  red-tinted contact shadow; nothing reads as light). DUST HERO-LIGHT (a) HOLD 2/2, fixed photographically and kept: the line is the
+  polished edge (the same family as the corner edges: L* 47.8 vs 53.8, chroma 76 vs 73, no white core, no floor light) but at phone
+  size a 2-5 px saturated red underline on the right two-thirds reads as a light at the base; the white seam count missed it ~80 to 1.
+  (b) satin: no real change (spreads the red into the left third; on Ember adds a dark-red line); (c) skirt: a worse product look
+  (hides the feet, ends the see-through base). Don't put (a)/(b)/(c) to the owner; a product change only if flagging fails.
+  THE FIX: a cutter on the hero light's low edge + a black card on the floor inside the footprint, both real set objects; target the
+  bottom line at L* <= 30 (48 now; corners 54), continuous; a red-aware count; checked at 390 px and in the portrait crop.
+- 17:58 GATE BOOK v20 owner lens (wf_8f1d2030-29c, 25 min): blockers: the house card and the Tint Library pictures show eight tints
+  with Smoke ("THE EIGHT TINTS ON ITS FOOT"; a tray engraved "01 - 08 EMBER TO SMOKE") beside "seven"; Voice's "The names are still
+  things the air holds" (the retired air idea). Majors: the cover opens on type (Tropos at y 880 on 1440x900, 81 px on a phone; the
+  live site opens on the whole line); seven fronts in a four-column grid leave an empty eighth cell under "08 SMOKE, HELD". The
+  decisions/pictures and words/build lenses still running; one merged punch list to the brand lane when they land.
+- 17:59 sent: the speaker lane (drop (e); the hero-light flags instead, proved on the Dust crop, one SHA; order B, the wide rig by
+  ~18:35 for c4, the flags by ~19:05, A, close-ups); c3 (after the turns and the merge, hold hero-light 1-2 for the flagged rig;
+  the Ice arc may come first if B's proof passes; its turns' ETA asked); c2 (finish chunk 3 Ice/Haze on a7948164, commit, then hold
+  Fog; one go for Fog + the warm re-renders on the flagged SHA ~19:05; Ice/Haze gated as they are).
