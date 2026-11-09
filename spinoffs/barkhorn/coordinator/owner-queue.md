@@ -5780,3 +5780,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   light change on the speaker fixes it: the founder judge says the horn's pour question goes to the founder with the strip, and the
   4 Nov frame stays meanwhile. (In the studio talls the Haze horn and box match, 262-264° vs 256-262°: it is the warm light on the
   lining that splits them.) Waiting for the skeptics before deciding.
+- 19:36 GATE HAZE CROPS complete (wf_6d8712e8-76a): 0/3 on base, (a), (c) and the 4 Nov crop. On the horn's body (not the rim) the gap
+  is ~10° and ~1 stop in base, (a), (c); the silk moves brightness, not hue; the horn ignores the sun (its colour is the sky through
+  it); (c)'s black card removes the hot-pink pod-leg glint (keep it); the skeptic: the columns' warmth comes mostly from the sunlit
+  haze and ground around the box; "confirm the horn and cabinet use one glass at one density in the scene; it is cheap and rules out a
+  scene error"; expects the pour question for the founder (4 Nov and (c) side by side). 19:36 sent biomes: hold the Haze final and
+  stop Haze light proxies; report both materials' definitions (one glass, one density per mm, as in the studio set, where the Haze
+  horn and box match 262-264° vs 256-262°); if they match, the pour goes to the founder with 4 Nov | (c) | (d).
