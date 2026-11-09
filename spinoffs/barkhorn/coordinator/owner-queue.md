@@ -6022,3 +6022,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   arms) against the critics' ask to clear the horn's top line. 20:29 GATE NIGHT PROXY 7 launched (wf_21969165-0ce founder +
   photographer, wf_608263ba-d00 skeptic); sent: try a real matte object on the cabinet top out of view (a felt runner or a sleeve),
   never the product's finish; what lights the floor beside the console.
+- 20:30 c2: the Poison tall on 15931e00 landed as evidence (ee0263c0, 7.6 min); Fog not started; holding.
+- 20:32 GATE FOG ONE-SUN (wf_6d36d633-ccf): founder and photographer both SHOW (2/3, the skeptic pending) = PASS: water-clear, not
+  tinted (the horn within ~6 levels of the sky beside it, the wings within 3 of the fog), grounded, one low sun from the right agrees
+  everywhere (the second sun's warm rock is gone), the horn smooth (a faint corner crease ~2-4 %, no X). Worse only in taste: ~7 %
+  darker and cooler, the left fog bank a slate band (never paint the warm rim back: it was the second sun). One check (founder): the
+  speaker's own cast shadow isn't visible; confirm every speaker object casts shadows. 20:33 sent the biomes lane the check ("shadows
+  on" ships it as is); the site lane and the brand lane: prepare Fog's habitat back (cd5aa4e6) locally, confirmation to follow.
