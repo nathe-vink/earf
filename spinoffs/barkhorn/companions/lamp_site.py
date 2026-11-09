@@ -206,16 +206,57 @@ def build(frame, samples, scale):
                       ('dock-cable', SC.principled('braid', '#121212', 0.75, bump=(1200.0, 0.5))), ('grommet', an)):
             objs.append(part('out-orb-table', nm, m, (x, y, z0)))
         zc = z0 + 100.45 * MM
-        T9 = shell_T(tname, 1 / 3, 9.0)
-        sphere(f'ball-{tint}', 80.0, (x, y, zc), thin_shadow(acrylic(f'ball-{tint}', 0.0, tname, 1 / 3), (0.96, 0.96, 0.96), T9), hole_below=20.0)
-        # round 3: the frost's diffuse lobe takes the wall's tint (SC.frosted; it was a flat grey: untinted light)
-        fm = SC.frosted(acrylic(f'frost-{tint}', 0.6, tname, 1 / 3))
-        # the drawn LED (out-orb-table bom, since the review of 2026-11-01): 200 lm at 1.5 W, warm-dim 2200/2700 K;
-        # about 90 % of it out of the ball (round 3, 2026-11-09: it was 620 lm at the LED, round 4's figure, three times
-        # the drawn part's output, against the rule "never brighten a lamp past its real output")
-        S = CORE_LM * CORE_OUT * WLM / (2 * 0.0633)
-        add_emission(fm, tuple(bb[i] * T9[i] / 0.96 for i in range(3)), S)
-        sphere(f'frost-{tint}', 71.0, (x, y, zc), fm, inward=True, hole_below=20.0)
+        if os.environ.get('CORE_DESIGN', 'B') == 'B':
+            # Core B, the owner's choice (2026-11-09 21:12; README, "The lamps' materials, locked"), as gated in
+            # lamp_pictures.py's `nested`: a 6 mm outer ball in the speaker's dye (half loading a face: the chart figure
+            # through the wall), polished both faces, its Ø40 port; inside, the Ø120 3 mm white opal core, its centre
+            # 12 below, its Ø40 opening on the grommet's top. The core's lit opal face is the light (ruling 3's
+            # exception), brightest at the crown, the printed ring round its opening dimmer
+            Tb = shell_T(tname, 0.5, 3.0)
+            sphere(f'ball-{tint}', 80.0, (x, y, zc), thin_shadow(acrylic(f'ball-{tint}', 0.0, tname, 0.5), Tb), hole_below=20.0)
+            sphere(f'ball-in-{tint}', 74.0, (x, y, zc), thin_shadow(acrylic(f'ball-in-{tint}', 0.0, tname, 0.5), Tb), inward=True, hole_below=20.0)
+            ri = 60.0; zi = zc - 12.0 * MM
+            sphere(f'core-{tint}', ri, (x, y, zi), thin_shadow(acrylic(f'core-{tint}', 0.0, 'Clear'), shell_T('Clear', 1.0, 3.0)), hole_below=20.0)
+            cm = bpy.data.materials.new(f'core-opal-{tint}'); cm.use_nodes = True; nt = cm.node_tree; nt.nodes.clear()
+            o_ = nt.nodes.new('ShaderNodeOutputMaterial'); tr_ = nt.nodes.new('ShaderNodeBsdfTranslucent')
+            df_ = nt.nodes.new('ShaderNodeBsdfDiffuse'); m1_ = nt.nodes.new('ShaderNodeMixShader'); m1_.inputs[0].default_value = 0.5
+            tr_.inputs['Color'].default_value = (0.93, 0.93, 0.92, 1); df_.inputs['Color'].default_value = (0.90, 0.90, 0.88, 1)
+            nt.links.new(df_.outputs[0], m1_.inputs[1]); nt.links.new(tr_.outputs[0], m1_.inputs[2])
+            tc_ = nt.nodes.new('ShaderNodeTexCoord'); sx = nt.nodes.new('ShaderNodeSeparateXYZ'); nt.links.new(tc_.outputs['Object'], sx.inputs[0])
+            mr_ = nt.nodes.new('ShaderNodeMapRange'); mr_.clamp = True
+            zd = -math.sqrt((ri - 3.0) ** 2 - 32.0 ** 2) * MM          # the printed ring, Ø64 round the opening
+            mr_.inputs['From Min'].default_value = zd - 0.001; mr_.inputs['From Max'].default_value = zd + 0.006
+            mr_.inputs['To Min'].default_value = 0.6; mr_.inputs['To Max'].default_value = 0.0
+            nt.links.new(sx.outputs['Z'], mr_.inputs['Value'])
+            dk = nt.nodes.new('ShaderNodeBsdfDiffuse'); dk.inputs['Color'].default_value = (0.88, 0.88, 0.86, 1)
+            mx2 = nt.nodes.new('ShaderNodeMixShader')
+            nt.links.new(mr_.outputs['Result'], mx2.inputs[0]); nt.links.new(m1_.outputs[0], mx2.inputs[1]); nt.links.new(dk.outputs[0], mx2.inputs[2])
+            emn = nt.nodes.new('ShaderNodeEmission'); emn.inputs['Color'].default_value = (*bb, 1)
+            E = CORE_LM * CORE_OUT * WLM / (2 * 4 * math.pi * ((ri - 3.0) * MM) ** 2)   # both faces of the core's 0.0408 m2
+            gz = nt.nodes.new('ShaderNodeMapRange'); gz.clamp = True
+            gz.inputs['From Min'].default_value = -(ri - 3.0) * MM; gz.inputs['From Max'].default_value = (ri - 3.0) * MM
+            gz.inputs['To Min'].default_value = 0.75 * E; gz.inputs['To Max'].default_value = 1.15 * E
+            nt.links.new(sx.outputs['Z'], gz.inputs['Value'])
+            inv = nt.nodes.new('ShaderNodeMath'); inv.operation = 'SUBTRACT'; inv.inputs[0].default_value = 1.0
+            nt.links.new(mr_.outputs['Result'], inv.inputs[1])
+            dim = nt.nodes.new('ShaderNodeMath'); dim.operation = 'MULTIPLY'
+            nt.links.new(gz.outputs['Result'], dim.inputs[0]); nt.links.new(inv.outputs[0], dim.inputs[1]); nt.links.new(dim.outputs[0], emn.inputs['Strength'])
+            ad = nt.nodes.new('ShaderNodeAddShader'); nt.links.new(mx2.outputs[0], ad.inputs[0]); nt.links.new(emn.outputs[0], ad.inputs[1])
+            nt.links.new(ad.outputs[0], o_.inputs['Surface']); cm.cycles.emission_sampling = 'FRONT_BACK'
+            sphere(f'core-in-{tint}', ri - 3.0, (x, y, zi), cm, inward=True, hole_below=20.0)
+        else:
+            # Core A, the record (CORE_DESIGN=A)
+            T9 = shell_T(tname, 1 / 3, 9.0)
+
+            sphere(f'ball-{tint}', 80.0, (x, y, zc), thin_shadow(acrylic(f'ball-{tint}', 0.0, tname, 1 / 3), (0.96, 0.96, 0.96), T9), hole_below=20.0)
+            # round 3: the frost's diffuse lobe takes the wall's tint (SC.frosted; it was a flat grey: untinted light)
+            fm = SC.frosted(acrylic(f'frost-{tint}', 0.6, tname, 1 / 3))
+            # the drawn LED (out-orb-table bom, since the review of 2026-11-01): 200 lm at 1.5 W, warm-dim 2200/2700 K;
+            # about 90 % of it out of the ball (round 3, 2026-11-09: it was 620 lm at the LED, round 4's figure, three times
+            # the drawn part's output, against the rule "never brighten a lamp past its real output")
+            S = CORE_LM * CORE_OUT * WLM / (2 * 0.0633)
+            add_emission(fm, tuple(bb[i] * T9[i] / 0.96 for i in range(3)), S)
+            sphere(f'frost-{tint}', 71.0, (x, y, zc), fm, inward=True, hole_below=20.0)
         # the LED's own face under the window (the CAD's Ø26), as in lamp_pictures: seen through the port where the
         # line of sight allows; it lights nothing itself (the frost face is the light, ruling 3's exception)
         bm = bmesh.new(); bmesh.ops.create_circle(bm, cap_ends=True, segments=48, radius=0.013)
