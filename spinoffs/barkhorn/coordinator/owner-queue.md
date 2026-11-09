@@ -4661,3 +4661,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   exposure / view-transform choice. Sent the lamps lane: hold the full-size Hemisphere set until the verdict; meanwhile item 90's
   proxies (Hemisphere Ice at 5700 K, Haze at 4000 K, a per-tint rows proxy), EXRs beside the finals, all eight tints rendered
   (the site shows seven).
+- 16:4x GATE ACID HABITAT FINAL (wf_c6da20d8-233, cc380fab): HOLD 0/3. The dye fix works (horn and cabinet one yellow glass, hue
+  55 vs 55-56; see-through; no light; smooth horn, no X; the old neon edges gone). Holds: GROUNDED fails 2/3 (an 8-9 px strip of
+  sky-bright water, y ~1082-1090, between the base and its reflection, no feet visible: reads as hovering; a regression from the
+  old frame's dark contact band); a rain streak across the woofer's upper left reads as a scratch (3/3). Recommended 2/3: pull the
+  yellow-olive cast out of the storm (sky hue ~60, ground sat ~0.30) so the speaker is the only yellow; tame the near-white puddle
+  and the silver rocks. Optional: sparse water beads.
+- 16:5x sent biomes: the Acid verdict and fixes (seat the base on its reflection by real means, proved on a base crop first; rain
+  out of the speaker's outline, re-rendered, no paint-out; the storm toward neutral gray); queue: Fog final, the Poison trace and
+  passes, the Haze final, the Acid re-render, then the Poison clearing (if wanted) and the Ember proxies.
