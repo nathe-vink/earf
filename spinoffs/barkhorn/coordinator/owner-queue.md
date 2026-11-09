@@ -5630,3 +5630,19 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   19:13 sent the brand lane: seven fronts (~20:15); pull the seven backs to "Pictures in progress"; audit its own Cycles renders
   (idea-library). Sent lamps, Mantle and biomes: audit their passed pictures in use (lamps-unlit; Mantle C3e day; Ice, Dust, Fog
   habitats) for hidden objects in frame, hiddencast-style.
+- 19:09-19:11 biomes: HAZE (d) (c8ea3bae): the dusk sky has no sun disc (an after-sunset sky), so (d) swaps in a real dawn capture of
+  the same site (qwantani_dawn_puresky, its sun measured at 8.8°), the sun lamp matched (#FFD8BE), the disk too, the silk T 0.7. Clean
+  glass: horn 274 / box band 272 (one glass), columns 286 (in target), horn 0.64 stop under the band, the band +3.5 over 4 Nov. Cost:
+  paler (frame 127 -> 146; sky 151 -> 179): dusk-violet becomes a pale morning; its proposal for the final: -1/3 stop, silk T 0.6.
+  POISON: its -14.9/-14.6 hole shifts went the wrong way; the probe puts the sun line at canopy-local (-16.08, -1.17); queued hole 0
+  at (-16.55, -1.12), r 0.36, so the fleck clips the top-left edge and left side.
+- 19:11 site lane (stamped 19:22, 10 min ahead; told): my 18:42/18:51 reached it at 19:08, after RC3; the TURN VIEWER is ready locally
+  (r47-site-next 38f0cd85): all 168 frames from the listed commits, one 6x4 WebP per color (~240 KB) fetched only when opened, the horn
+  turns once on a desk and not on a phone, no loop; caption "<Color>'s horn, all the way round." with "n / n · Render", no words on
+  how to work it. Goes in the small push with the talls.
+- 19:12-19:14 the helpers stopped cleanly (nothing written or committed) and merged ac9e5568: c3 30a01bd4, c2 8a5f0aba, c4 491cf886;
+  hiddencast on the rc1-real shot files: 0 in frame (c4: the horn lamp now at [0.86, -2.52, 1.714], above the camera at [1.2, -2.5, 1.0];
+  on its committed rc1-card Dust tall the horn lamp sat at [0.5, -1.4, 1.45] IN FRAME, 71.2 %). RENDERING rc1-real talls: c4 Ember
+  (then Dust, Poison), c3 Ice (then Haze, Fog), c2 Acid; all started ~19:13. c2 asks about the seven rigB backs: re-render after the
+  speaker lane's rigB fix passes my gate.
+- 19:14 GATE HAZE (d) launched (wf_8595d630-0e7): 4 Nov | (a) | (d), the (d) frame, the lane's -1/3 stop and T 0.6 proposal.
