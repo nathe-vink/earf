@@ -416,8 +416,16 @@ FaitalPRO's drawing (`coil_d`; before, the model's default drew 56). The coil do
 the figures below stand. Re-run on the Cloud's box (135.6 L, fb 38 Hz, 2 × 113 mm ports 222.7 long, 24.5 V = 75 W
 into 8 Ω): f3 50.9 Hz; peak excursion with the preset's LR4 high-pass at 28 Hz 4.41 mm at 59 Hz (Xmax 5.75); without
 it 6.34 mm at 30 Hz and 14.6 at 20 Hz (Xdamage 15.5); peak port air speed 9.1 m/s with the high-pass, 12.8 without.
-The other datasheet figures are round 36's reading of the sheet printed 2026-10-22 and were not re-checked: the sheet
-cannot be fetched from this container.
+**Verified 2026-11-09** (the coordinator, against FaitalPRO's own 8 Ω datasheet, P/N 03803827, faitalpro.com
+datasheet id 101060100, printed "November 9th, 2026", and the drawing 15PR400_drawing_8.pdf): Fs 35, Re 5.1, Qms 6.0,
+Qes 0.34, Qts 0.32, Vas 248.9 L, Le 0.72 mH, Xmax 5.75 mm one-way, Bl 16.7, Mms 85.2 g, Sd 857 cm², 99 dB 1 W/1 m,
+AES 400 W (800 W max), voice coil 77, bolt circle 374, Ø 393, depth 165, 3.6 kg, cut-out 356, eight slotted holes
+9.5 × 7.4 at 45°: all as the model has them. **Xdamage 15.5 mm** is not stated as one-way or peak-to-peak; until
+Faital confirms, read it as ±7.75. Without the high-pass, 75 W at 20 Hz drives the cone to 14.6 mm, past that reading,
+so **the preset's 28 Hz high-pass is mandatory**, not a refinement: every slot carries it (FAI E6). **One difference:**
+the sheet gives the flange plus its gasket as 13.1 mm; the model's rebate is 11.0 (a 10 mm flange and a 1 mm gasket),
+so the woofer would stand about 2 mm proud of the front panel. Deepening the rebate to 13.1 leaves 6.9 mm of the 20 mm
+panel behind it for the bonded inserts (9.0 today): a question for the owner, not changed here.
 
 ### The box at 75 W
 
