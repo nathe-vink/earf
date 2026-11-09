@@ -43,7 +43,8 @@ PINNED = {'room.jpg': ('754e16a9852f364fb2ebe8eb752c10ab6bdc0e23', 'renders/2026
           'honest-front-ice.jpg': ('e624e13e51812301e0a5641ef4fb5b75488e82f1', 'renders/2026-11-04/barkhorn/rollout/A-polished-fix1/site-front-off-tall-ice.png'),
           'honest-front-haze.jpg': ('3d0b613f4321610d6436aae97918d9534f11d857', 'renders/2026-11-04/barkhorn/rollout/A-polished-fix1/site-front-off-tall-haze.png'),
           'honest-front-fog.jpg': ('3d0b613f4321610d6436aae97918d9534f11d857', 'renders/2026-11-04/barkhorn/rollout/A-polished-fix1/site-front-off-tall-fog.png'),
-          'honest-front-acid.jpg': ('04d21c5cba15fe98bc77f0e0a38c8c015c357649', 'renders/2026-11-04/barkhorn/rollout/A-polished-fix1/site-front-off-tall-acid.png')}
+          'honest-front-acid.jpg': ('04d21c5cba15fe98bc77f0e0a38c8c015c357649', 'renders/2026-11-04/barkhorn/rollout/A-polished-fix1/site-front-off-tall-acid.png'),
+          'honest-ice-habitat.jpg': ('0f619953f86129dc54183718e2c50419f37ab820', 'renders/2026-11-03/barkhorn/habitats/ice-portrait-1200x1500.jpg')}
 
 
 def pinned():
