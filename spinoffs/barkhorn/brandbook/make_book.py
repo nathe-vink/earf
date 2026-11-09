@@ -37,7 +37,7 @@ PINNED = {'room.jpg': ('754e16a9852f364fb2ebe8eb752c10ab6bdc0e23', 'renders/2026
           'honest-a-ice.jpg': ('f7f03850edb54dfc9ccbe0cc2655b194cafc1232', 'renders/2026-11-03/barkhorn/base-question/gate2/A-ice-polished-honest.png'),
           'honest-front-ember.jpg': ('4fcc28f879d93486c22844a2630b17df1b2e6013', 'renders/2026-11-04/barkhorn/rollout/A-polished-tallr6/site-front-off-tall-ember.png'),
           'honest-front-dust.jpg': ('5c8371479a9a2fd63a497c7fc7d4ddb7d6e18ac2', 'renders/2026-11-04/barkhorn/rollout/A-polished-tallr6/site-front-off-tall-dust.png'),
-          'honest-front-poison.jpg': ('766f299df9326d6b77b3ab9a96d782aeb320329c', 'renders/2026-11-04/barkhorn/rollout/A-polished-tallr3/site-front-off-tall-poison.png'),
+          'honest-front-poison.jpg': ('e7ca2e7154d2fa834051ccc056f8202af82e5211', 'renders/2026-11-04/barkhorn/rollout/A-polished-tallr6/site-front-off-tall-poison.png'),
           'honest-front-ice.jpg': ('48dcfd298e39c6e36477a85a9d42e2ecce747968', 'renders/2026-11-04/barkhorn/rollout/A-polished-tallr6/site-front-off-tall-ice.png'),
           'honest-front-haze.jpg': ('94b4534a7684c55e0b3420728f09d12dc6c283f3', 'renders/2026-11-04/barkhorn/rollout/A-polished-tallr3/site-front-off-tall-haze.png'),
           'honest-front-fog.jpg': ('4e89a8340d5de6efbe02286b639d081432db84f1', 'renders/2026-11-04/barkhorn/rollout/A-polished-tallr6/site-front-off-tall-fog.png'),
