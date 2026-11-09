@@ -5823,3 +5823,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   black card: the same. Every light leaves one band black, so it suspects an opaque dark part (the amp module or a top rail) behind the
   front, not the white batt; a camera-only trace of four pixels after the Acid final. If opaque, the measure moves to the batt and ring
   below, and (a) is the candidate. 19:41 sent: Acid final -> the trace -> the Dust final; I gate Poison after the trace.
+- 19:41 GATE HIDDEN-REAL PROXIES complete (wf_0ae4c3fa-7c2): TALL 0/3 (the veil; the skeptic: the grown lamp mirrors in the front face
+  and horn mouth, front saturation 0.74 -> 0.60, centre batt 0.77 -> 0.58; the horn lighter, not dimmer; wall +10 %, floor near white);
+  WIDE 0/3 (the swoosh); HERO-LIGHT 3/3; SIDE 2/3 (the skeptic: the pod's crisp pale bar, the same lamp mirrored on the polished pod).
+  19:41 sent the speaker lane the skeptic's additions: raise the lamp out of the front's mirror zone (or a real black card at the camera
+  over it) with the grid and cutter; then match the passed tall's levels (wall 0.77, floor 0.86); the side's pod bar optional; proof
+  targets: front saturation >= 0.72, centre batt >= 0.75, horn L <= the passed tall's, wall and floor within 0.02.
