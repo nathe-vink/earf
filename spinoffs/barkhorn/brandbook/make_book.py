@@ -35,11 +35,15 @@ PINNED = {'room.jpg': ('754e16a9852f364fb2ebe8eb752c10ab6bdc0e23', 'renders/2026
           'lamp-orb.jpg': ('735e759304b00400750741d5038722a3d4d5f5fb', 'renders/2026-10-31/barkhorn/lamps-cordless/site-img/lamp-orb.jpg'),
           'lamps-orbs.jpg': ('735e759304b00400750741d5038722a3d4d5f5fb', 'renders/2026-10-31/barkhorn/lamps-cordless/site-img/lamps-orbs.jpg'),
           'lamps-unlit.jpg': ('735e759304b00400750741d5038722a3d4d5f5fb', 'renders/2026-10-31/barkhorn/lamps-cordless/site-img/lamps-unlit.jpg'),
-          'honest-tall-ice.jpg': ('d9ba82c37714193b53fb1df626908d71aee38c2c', 'renders/2026-11-04/barkhorn/honest/tall-ice-honest.png'),
           'honest-a-ice.jpg': ('f7f03850edb54dfc9ccbe0cc2655b194cafc1232', 'renders/2026-11-03/barkhorn/base-question/gate2/A-ice-polished-honest.png'),
-          'honest-ice-habitat.jpg': ('0f619953f86129dc54183718e2c50419f37ab820', 'renders/2026-11-03/barkhorn/habitats/ice-portrait-1200x1500.jpg'),
           'honest-dust-habitat.jpg': ('26493989e2b8f08fb2c359557034fc76ab234753', 'renders/2026-11-03/barkhorn/habitats/dust-portrait-1200x1500.jpg'),
-          'honest-back-fog.jpg': ('bc8f51b541de8bb3bb5c5a89065c9cdc8d3d796b', 'renders/2026-11-04/barkhorn/rollout/A-polished-backfix/site-back-fog.png')}
+          'honest-front-ember.jpg': ('e624e13e51812301e0a5641ef4fb5b75488e82f1', 'renders/2026-11-04/barkhorn/rollout/A-polished-fix1/site-front-off-tall-ember.png'),
+          'honest-front-dust.jpg': ('e624e13e51812301e0a5641ef4fb5b75488e82f1', 'renders/2026-11-04/barkhorn/rollout/A-polished-fix1/site-front-off-tall-dust.png'),
+          'honest-front-poison.jpg': ('e624e13e51812301e0a5641ef4fb5b75488e82f1', 'renders/2026-11-04/barkhorn/rollout/A-polished-fix1/site-front-off-tall-poison.png'),
+          'honest-front-ice.jpg': ('e624e13e51812301e0a5641ef4fb5b75488e82f1', 'renders/2026-11-04/barkhorn/rollout/A-polished-fix1/site-front-off-tall-ice.png'),
+          'honest-front-haze.jpg': ('3d0b613f4321610d6436aae97918d9534f11d857', 'renders/2026-11-04/barkhorn/rollout/A-polished-fix1/site-front-off-tall-haze.png'),
+          'honest-front-fog.jpg': ('3d0b613f4321610d6436aae97918d9534f11d857', 'renders/2026-11-04/barkhorn/rollout/A-polished-fix1/site-front-off-tall-fog.png'),
+          'honest-front-acid.jpg': ('04d21c5cba15fe98bc77f0e0a38c8c015c357649', 'renders/2026-11-04/barkhorn/rollout/A-polished-fix1/site-front-off-tall-acid.png')}
 
 
 def pinned():
