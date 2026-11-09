@@ -203,7 +203,23 @@ def main():
             # point 1: the rose over 36 % of the dome's face was the overhead wash's reflection (the probe: off, 1 %; the
             # bounce or the key off, unchanged); as a 6 x 0.8 strip, its irradiance on the set held, it covers 12.6 %
             # and the face holds L* 27 (proxies/probe-*.png)
-            u['lights']['bgwash']['size_m'] = [float(v) for v in os.environ.get('WASH_SIZE', '6,0.8').split(',')]
+            u['lights']['bgwash']['size_m'] = [float(v) for v in os.environ.get('WASH_SIZE', '6,0.3').split(',')]
+            # the 22:58 gate:
+            # 1. the cool fill was the sky: a neutral RGB grey reads blue under the 4300 K white point. The sky takes the
+            #    4300 K blackbody's colour at its old luminance (neutral in the picture)
+            u['sky'] = {**u['sky'], 'zenith': '#F3CBAB', 'horizon': '#F6CEAE', 'ground': '#F0C8A8'}
+            # 2 and 3. the kit's opal liner (`skin`) was 85 % clear: the hub and gland showed through it under the cap,
+            #    and the mouth's inside read orange-red. It is a white opal, diffusing, as drawn
+            dome_ = next(p for p in u['set']['props'] if p.get('module') == 'earf_moon' and p.get('fn') == 'dome')
+            dome_.setdefault('materials', {})['liner'] = {**dome_['materials'].get('liner', {}), 'clear': 0.05, 'color': '#F4F2EE'}
+            # 4. the arc and key reflections as white glints: the wash strip 6 x 0.3 (was 0.8), the key half its size,
+            #    each at the same irradiance on the set (its output held)
+            k_ = u['lights']['key']; k_['size_m'] = [v / 2 for v in k_['size_m']]
+            # 3. the mouth's inside lit from below by the oak (warm): a white card on the table under the lamp, out
+            #    of frame, a real neutral bounce, so the white liner reads pale (L* 55-65), well under the wall
+            dx_, dy_, dz_ = dome_['spots'][0]
+            u['set']['props'].append({'kind': 'kit', 'shape': 'box', 'material': 'paper', 'color': '#F2F0EC',
+                                      'size': [float(os.environ.get('CARD_W', '0.9')), 0.9, 0.004], 'position': [dx_, dy_, 0.04]})
             if os.environ.get('WARM_K'):           # the 21:44 test: the cool sources warmed (key, fill, strip)
                 for k_ in ('key', 'fill', 'edges'):
                     if k_ in u['lights']:

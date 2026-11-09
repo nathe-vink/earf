@@ -70,7 +70,9 @@
     "shade_glow": 0.0,
     "materials": {
      "liner": {
-      "glow_color": "#FFDCB8"
+      "glow_color": "#FFDCB8",
+      "clear": 0.05,
+      "color": "#F4F2EE"
      },
      "body": {
       "deep": "#D81724",
@@ -118,22 +120,38 @@
      -3.4,
      0.0
     ]
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "paper",
+    "color": "#F2F0EC",
+    "size": [
+     0.9,
+     0.9,
+     0.004
+    ],
+    "position": [
+     0.22,
+     0.35,
+     0.04
+    ]
    }
   ]
  },
  "sky": {
   "kind": "gradient",
-  "zenith": "#D8D2C8",
-  "horizon": "#DED8CE",
-  "ground": "#D6CEC2",
+  "zenith": "#F3CBAB",
+  "horizon": "#F6CEAE",
+  "ground": "#F0C8A8",
   "strength": 0.35
  },
  "lights": {
   "key": {
    "type": "area",
    "size_m": [
-    1.2,
-    0.6
+    0.6,
+    0.3
    ],
    "orbit": {
     "azimuth_deg": -40,
@@ -146,7 +164,7 @@
     0.27
    ],
    "irradiance": 0.9,
-   "color": 3500
+   "color": 4300
   },
   "fill": {
    "type": "area",
@@ -165,13 +183,13 @@
     0.27
    ],
    "irradiance": 0.25,
-   "color": 3500
+   "color": 4300
   },
   "bgwash": {
    "type": "area",
    "size_m": [
     6.0,
-    0.8
+    0.3
    ],
    "position": [
     0.08,
@@ -224,7 +242,7 @@
     0.3
    ],
    "irradiance": 1.2,
-   "color": 3500,
+   "color": 4300,
    "camera": false,
    "specular": 1.0,
    "diffuse": 1.0,
