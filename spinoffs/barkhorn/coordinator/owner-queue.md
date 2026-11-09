@@ -5889,3 +5889,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 19:50 SITE (stamped 19:51, about a minute ahead of its queue time): pushes only on my "go"; the turn PNGs are only in the repository
   (renders/2026-11-04/barkhorn/rollout/A-polished-p2*/), outside the deployed root (8.3 MB; its only PNGs the two icons; the turns ship
   as seven ~240 KB WebP sprites and seven 168 px thumbs).
+- 19:52 BIOMES: the DUST FINAL WITHOUT THE HIDDEN PANEL (43c91242; habitats/dust-portrait-1200x1500-nopanel.jpg; the only light the
+  sun lamp matched to the sky's own sun; 64 samples): bottom wall -0.13 stop at the same hue, upper box 134 -> 114, see-into spread up;
+  its own blind gate 4/4 (off-test: the throat sits left of the horn's centre, the asset's geometry). A queue slip (an older script
+  fired a second Dust final; killed after 6 s, nothing written). Now: Fog final (one sun) -> Acid final (#FECC8B).
+  19:52 GATE DUST NOPANEL launched, split for speed: founder + photographer (wf_3145e175-58b) and skeptic (wf_9ebef83b-683); if it
+  passes by ~20:20 it goes back on the site in the one push.
