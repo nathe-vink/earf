@@ -5178,3 +5178,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   Smoke; full samples in finals. Core nights: the room at 18 %, the real dusk window with its sheer in Core's room (the ball
   reflects it), Punchy, B's outer ball at A's dye path. Re-proxies: 18:20-18:30 all heroes at 0.25 scale + 4 rows with a script
   measuring the gate numbers; 19:00 the Core A/B nights (both exposures) + the day pair.
+- 18:05 biomes: POISON LITTER TEST at fda2ff73 (proxies-0202/poison-litter-base-off-az40-*): 51c7eff2 frame/floor/box 66.5/76.6/31.3,
+  upper cabinet 51,55,24 (hue 68, sat 0.56); (i) litter off 64.0/73.7/16.3, 22,29,12 (86/0.60); (ii) litter at az -40 65.0/75.5/17.7,
+  22,30,12 (86/0.61). The beige is gone in both (green glass; the woofer ring dark green); the floor barely moves; the box falls to
+  17.7 against the 35-45 target: honestly dark under 25 % canopy. Proposal: keep (ii), then the clearing proxies (c) per my 16:33 spec.
+  18:05 sent: (ii) adopted; (c) after the Haze final (rendering now); box 35-45, hue >= 90, sat >= 0.55, frame and floor reported.
