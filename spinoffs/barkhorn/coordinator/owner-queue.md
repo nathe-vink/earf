@@ -5605,3 +5605,28 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   (cover 189x315 at 1440x900, 4+3 at 561-1023, make_book.py fixed but not run, the certificate/card/hotel re-shot, the library lid
   lines gone, the pair in Position, the press grid, "Pictures in progress" under Facts). Waits for the four fronts; then one republish.
   19:08 sent: the paths about 19:35.
+- 19:08 SITE RC3 pushed: r49-site-rc 9e7336bf (code r47-site-next fed74ff3, on cf5af9aa + build notes bdad7ba7); build exit 0, 160 files,
+  7.3 MB; 57 routes x 2 widths clean, no sideways scroll 320-1536, Lighthouse mobile 98 (/, /colors/ice, /tropos/acid), CLS 0; all 21
+  items reported as built (home lamps with names at right; the Tropos block shows the Ember back; the Ice habitat mirrored; color
+  pages' 4:5 tall at 520 px; Mantle's stage 3:2; the seven horn-backs cut to 4:5; one price line; "(modeled)"; "Hung low over a
+  table"; the habitat captions; Smoke hashes routed; the 404; 14 pictures pruned) and one beyond: RC2 had CLS 0.21 on mobile
+  Lighthouse (the RC CSS at the body's end); the CSS moved after the page's sheet: CLS 0, 87 -> 98. Deployment URL to follow.
+- 19:08 SPEAKER LANE ac9e5568 (r33-speaker-horn): (a) the side gets the back card plus a left-edge card (the side's base line goes
+  dark; the side body reads paler: its horn lamp moved out and grew); (b) shots.realize_hidden in tall, wide, hero-light, side and
+  the arc: every hidden flag or bounce made real, any in frame slid out along its line and grown to hold its angle (irradiance held,
+  watts x k^2), or dropped if it can't leave the studio; all 28 site shots 0 hidden in frame; cardcast 0.0 %; (e) HIDDENCAST.md: EVERY
+  PASSED TALL carried the `horn` area lamp between the camera and the horn, 71.2 % of the frame; the wides eight lamps (key 11.3 %);
+  the sides horn 10.2 %; the hero-lights a white bounce 58.9 %; the arc flags; rigB backs horn-rim 8.6 % + wash 5.0 %; deck frames,
+  side close-ups, studio-dark, back-mark-fog, joinery-ember too. Clean: turns, horn-backs, amp plate, inside, macros, coins, front
+  close-ups. So the talls on the site and in the Book, the seven backs in the Book and the Ember back on RC3's home carry hidden lamps.
+- 19:11 sent c4, c3, c2: stop the wides (discard; d6773fe9 superseded), merge ac9e5568, re-run rollout.py, hiddencast 0 for the tall;
+  render the SEVEN TALLS on ac9e5568 into A-polished-rc1-real/ (c4 Ember, Dust, Poison; c3 Ice, Haze, Fog; c2 Acid); then wides (c4
+  Ember, Dust, Acid, Poison; c3 Ice, Haze, Fog) and hero-lights (c2 Dust, Ember). The rc1-card tall gates (wf_040e85e8-217,
+  wf_a4b8b6dc-b4a) keep running as a check of the back-edge card; the rc1-real talls get their own gate.
+- 19:11 GATE HIDDEN-REAL PROXIES launched (wf_0ae4c3fa-7c2): tall / wide / hero-light / side of Dust on ac9e5568, the side's base
+  and phone size; the wide's horn 'swoosh' (the key's reflection on the lower-left lip, seen on the Poison wide too).
+- 19:12 sent the speaker lane: the BACKS first (rigB realize_hidden, proof on Dust), ahead of the arc; back-mark and joinery wait.
+  Sent the site lane: all seven talls swap in the small push (~20:15), and the home's Ember back -> amp-plate-ember (488fbec9, clean).
+  19:13 sent the brand lane: seven fronts (~20:15); pull the seven backs to "Pictures in progress"; audit its own Cycles renders
+  (idea-library). Sent lamps, Mantle and biomes: audit their passed pictures in use (lamps-unlit; Mantle C3e day; Ice, Dust, Fog
+  habitats) for hidden objects in frame, hiddencast-style.
