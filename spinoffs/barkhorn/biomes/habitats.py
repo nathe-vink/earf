@@ -182,6 +182,9 @@ def main():
     # the per-face rule; kept only to compare with the files made with it
     ap.add_argument('--horn-front', action='store_true', help='direct light stops at the horn, as the files before 2026-11-09')
     ap.add_argument('--horn-shadows', action='store_true', help='(the default now; accepted for old queue lines)')
+    # each glass face passes a shadow ray's 1 - F(theta) (Schlick, n 1.49), the default from 2026-11-09 22:29 (the coordinator;
+    # the slab test: within 1.7 % of exact Fresnel at 0-75 deg, the flat sqrt(0.92) 64 % over at 75 deg)
+    ap.add_argument('--flat-fresnel', action='store_true', help='the flat sqrt(0.92) a face, as the files before 2026-11-09 22:29')
     ap.add_argument('--wet', type=float, nargs='+', help='rain on the speaker: front beads, lip beads, runnels, seed')
     ap.add_argument('--card', nargs=5, action='append', default=[], help='a real card: KIND W H Z SIDE (tests)')
     ap.add_argument('--dot', nargs=5, action='append', default=[], help="a grip's dot: D SIZE TX TY TZ (tests)")
@@ -203,7 +206,8 @@ def main():
         cmd = [sys.executable, os.path.join(HERE, 'habitat.py'), shot, tint, '--out', out,
                '--samples', '16' if a.proxy else str(max(a.samples, SAMPLES.get(n, 0))),
                '--scale', '0.5' if a.proxy else str(a.scale), '--stand', 'feet', '--sink', str(a.sink if a.sink is not None else SINK.get(n, 0.012)),
-               *(['--horn-front'] if a.horn_front else []), '--horn-rough', str(HORN_ROUGH)] + [x for k, v in lights.items() for x in ('--light', f'{k}={v}')] \
+               *(['--horn-front'] if a.horn_front else []), *([] if a.flat_fresnel else ['--fresnel-angle']),
+               '--horn-rough', str(HORN_ROUGH)] + [x for k, v in lights.items() for x in ('--light', f'{k}={v}')] \
             + [x for k, v in SETS.get(n, {}).items() for x in ('--set', f'{k}={json.dumps(v)}')] \
             + [x for kv in a.set for x in ('--set', kv)] \
             + (['--glossy-flag'] if a.glossy_flag else []) \
