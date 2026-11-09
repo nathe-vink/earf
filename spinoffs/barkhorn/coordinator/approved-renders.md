@@ -39,13 +39,16 @@ three times, the Fresnel loss twice). From now on each face carries √0.92 and 
 the old rule are marked; each is re-rendered under the new rule and gated against its passed file before it is swapped.
 | Picture | Source | Gate | Used by |
 |---|---|---|---|
-| Ice, "Out in the snow at dusk." | 0f619953 | PASSED (old shadow rule: re-render under 3122f00c's rule queued; this file stays until it passes) | site (home band, /tropos/ice, /colors/ice), Book |
-| Dust, "On rippled sand among desert buttes." | r48-biomes 43c91242: renders/2026-11-03/barkhorn/habitats/dust-portrait-1200x1500-nopanel.jpg | PASSED 3/3 (9 Nov; old shadow rule: re-render under 3122f00c's rule queued; this file stays until it passes) | site, Book |
+| Ice, "Out in the snow at dusk." | 0f619953 | PASSED (re-proxied under 3122f00c's rule 9 Nov 22:24: within noise, the file stays; the horn under the same rule (--horn-shadows) being checked) | site (home band, /tropos/ice, /colors/ice), Book |
+| Dust, "On rippled sand among desert buttes." | r48-biomes 43c91242: renders/2026-11-03/barkhorn/habitats/dust-portrait-1200x1500-nopanel.jpg | PASSED 3/3 (9 Nov; re-proxied under 3122f00c's rule 22:24: within noise, the file stays; --horn-shadows being checked) | site, Book |
 | Fog, "In the grass on a hillside, in fog at dawn." | r48-biomes aa1ca856: habitats/fog_b-portrait-1200x1500-onesun.jpg (sha256 9f1fa543...; the glass's Fresnel loss in its shadows: the inside a touch dimmer) | PASSED 2/2 (9 Nov 21:21, photo and skeptic) | site, Book ("In fog at dawn."), swapping in tonight's push |
 | Acid | r48-biomes 539c3772 | HOLD 1/3 (rain stops at the speaker; dry; dark cabinet) | none |
 | Poison, Ember, Haze | in progress / not started (Haze waits on the horn pour) | | none |
 
 ## Lamps
+HEMISPHERE AS DRAWN DOES NOT GLOW (lamps lane photometry, 9 Nov 22:22; confirmed in the Mantle lane's scene 22:31): the COB sits at
+the top of its 46 mm bore and all its light leaves through the mouth; every lit Hemisphere picture so far took its glow from an
+added emitter on the liner ('opal-lit'). No lit Hemisphere picture may enter any asset until the owner answers walkthrough 135.
 None approved. Hemisphere switched off in Ember (the 4:5 crop): HOLD 0/4 (9 Nov 21:42): honest and clearly off, but the Ember reads
 crimson (a rose reflection over 28-44 % of the face; cool lights on the shell) and the right-rear strip was specular-only. The lit set,
 round 3: HOLD 0/3 (critic 4 out): the pale four read pastel, every Core B orb a milk-glass globe (walkthrough 133), no pools in the row.
@@ -55,7 +58,9 @@ Core B, decided by the owner 9 Nov 21:12 (the dark border he liked comes from B'
 | Picture | Source | Gate | Used by |
 |---|---|---|---|
 | Mantle by day (C3e), shown in Ember | 41232b56 (three files) | PASSED | site (/mantle, the home's Mantle band) |
-Night picture (Ice Tropos under a Hemisphere pendant): proxy 8 in progress, not approved.
+Night picture (Ice Tropos under a Hemisphere pendant): proxy 9 seen (c256eb64); the final renders (about 22:50). Its pendant glows
+from the lamp kit's added liner emitter, which the drawing does not have (walkthrough 135), so it cannot pass as it stands; an
+as-drawn variant (the COB alone: a downlight, the shade dark) follows about 23:50. The owner's answer to 135 decides which can ship.
 
 ## Pulled (do not use)
 | Picture | Why | Pulled |
