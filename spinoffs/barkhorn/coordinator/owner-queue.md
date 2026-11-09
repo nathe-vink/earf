@@ -5860,3 +5860,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   the current final (a grey lamp under a warm-sunned sky can't be a candidate), render with the lamp at #FECC8B (if the cast is wrong,
   a storm sky with a grey sun, never a recoloured lamp); POISON: turn the HDRI ~56° later. Order: Dust final -> Fog -> Acid -> Poison.
   19:45 sent the site lane: pull Fog's habitat too; Ice is the only habitat in the push.
+- 19:46 BIOMES (1374182c): one sun per frame: FOG's HDRI turned to 304.2 (its sun at az 110, el 5.8, #FEEA98) and the lamp #FEEA98;
+  ACID's lamp #FECC8B (the sky's own); POISON's HDRI turned to 124.1 (its bright patch at the lamp's az -100, el 43.3; the patch is sky
+  through leaves, #A4BFFE, no sun disc). The Acid final stopped (nothing used). Queue: Dust final (2) rendering -> Fog final -> Acid
+  final -> Poison. THE POISON TRACE: the black top band is NOT an opaque part: four camera rays cross the 20.3 mm front and land on the
+  white felt top batt pressed 0.5 mm behind it; only light from the camera's hemisphere reaches that face, through the green twice
+  (~40 mm). Levers: the litter fill at -40° x3-4 (out of frame, off the mirror line) or a large sunlit bounce in the camera's
+  hemisphere. 19:46 sent: Poison's warm sun lamp breaks the same rule (no sun in that sky): the patch's colour, or a sunny forest sky.
