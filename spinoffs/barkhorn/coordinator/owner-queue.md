@@ -5270,3 +5270,21 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   wf_3903be85-9ab; the punch list, the claims and the v20 findings as inputs; the four fronts pending). 18:21 sent: the brand lane
   (hold for the reviewers and the fronts; the site's unlit file is the cordless one); the Mantle lane (the gate's non-pool findings
   plus proxy 4's hang, the honest emitter and ~+0.5 EV into one brief for proxy 6).
+- 18:19 biomes: POISON CLEARING at 2ab8a7cd49da4aaaae9c0feafcb8aa50d05bee01 (a first SHA 8be4a4f4 was typed before git returned;
+  corrected at once), exposure held +0.75, litter at -40: frame/floor/box/box median/hue-sat: no gap 65.0/75.5/17.7/9.7/86-0.61;
+  20 m 69.6/80.2/19.3/10.7/89-0.61; 30 m 74.8/85.2/20.9/12.0/89-0.61: the gap fixes the hue (~90) but lifts the box only +0.2-0.4
+  EV (the front faces the camera; the overhead light reaches the top); the floor rises twice as much. Queued on the 30 m gap:
+  exposure +1 EV and +1.6 EV proxies, after the short Fog khaki passes; then Acid.
+- 18:19 c2: HERO-LIGHT CHUNK 3 (Ice, Haze) at 7d599d6a96361411b746c8d9a92a03c5a2155032 (a7948164; 19.6 and 18.7 min): the white pads
+  at the feet gone (the fix); the colored line along the bottom panel's edge still there (blue on Ice, violet on Haze): the flags'
+  job. Fog (chunk 4) held for the flagged SHA; idle.
+- 18:21 speaker lane: A, THE SIDE RIG at b00945ab3c4091141c08c69108b1aa80faee6b69 (includes cb62d1eb and 34b40201): the lower third
+  of the right face mirrored the floor the kick lit (54 % of the face mirrors the sweep at az 51-60, falling 12-21 deg, short of the
+  card kept 2.5 m out); the side view turns the kick off (a lamp off as a whole): Poison lower third 19/57/16 sat 0.72 -> 5/47/4
+  sat 0.90, upper face 116 -> 115, horn 139 -> 133; Ember sat 0.82 -> 0.95. Cardcast on the seven side shots: reflect-only 0.0 %,
+  no part-links, no multipliers. No side or hero-light frame shows the IEC pins or the plate (no rebuild). Proxies in
+  renders/2026-11-09/barkhorn/side-fix/. It said "next: the close-ups" and sent c4 the SHA directly. I read the diff (shots.py
+  site(): kick irradiance 0 for frame 'side' only, the same way 'back' goes off): clean.
+- 18:21 sent: c4 (merge b00945ab, no rebuild, but no sides yet: the flags SHA, then the four talls, the wides, then the sides once
+  gated); the speaker lane (the FLAGS next, not the close-ups, as asked at 17:59/18:01/18:03/18:09; c2 and c4 idle on it; its time
+  within 10 min). 18:22 GATE SIDE PROXIES launched (wf_90f29ead-0b4; Poison and Ember after, befores as context).
