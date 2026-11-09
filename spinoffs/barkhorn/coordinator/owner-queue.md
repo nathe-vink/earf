@@ -5405,3 +5405,15 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   my gate; --plant-alpha for Fog; list which scenes use grass_bermuda_01 (Ice, Dust approved; Haze at my gate; Poison; Acid) and
   whether the uncut cards show, before any engine change or re-render); the site lane (~20:00 noted; the four talls in the same
   push if they pass first).
+- 18:42 brand lane: "modeled" everywhere at e24682bb2b2e8a20fa6d47ea1f401e8f791d81b7 (the Book's press sheet and Design figures,
+  make_sheets.py, tropos.md; PDFs rebuilt; no "modelled" left in the Book, press/ or launch/); not republished.
+- 18:42 lamps lane: THE PHOTOMETRY, case (a), the 490 lm stands (5c319549245954d4779a901ee93dbfe9b2a0b924; Core nights on the one
+  scale at 8f15e4128766fec52c428e42298e1a360f5b00ed). A FLUX mode (a 3 x 3 m sensor 30 mm under the rim, orthographic, linear, no
+  denoise, the liner's emission off): downward flux vs the bare COB: no reflector 53 % (sin^2 46 = 52 %; the CAD notes' "black
+  bore 52 %"); steel / bright aluminium clamped 56 / 57 %; caustics off 51 %; unclamped 69 / 78 % (the notes ~85 %). The render
+  lost the reflector's light twice: reflective caustics were off, and the indirect clamp (20) capped the COB's mirrored radiance
+  (~9,000). FIX in both rigs: reflective caustics on, no indirect clamp for the Hemisphere, the CAD's aluminium (#F2F2F0, 0.12), the
+  COB at 430 lm (2.81 W), nothing added. The Ember pool now 0.040 above the paper (pool/paper 1.82): the old disc was ~2.8x too
+  strong. Strip r3b-dome-red-disc-clamped-unclamped.png; finals at 384-512 samples. Core nights on the one scale (560 lm = 3.64 W;
+  exposure -8.0 EV; the room tied to it): the picture unchanged (A 58 -> 57, B 78, table 2). The site Core gains its LED face
+  (9a3c1593). Waiting for the round-2 and Core-room tallies.
