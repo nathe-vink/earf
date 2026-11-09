@@ -5366,3 +5366,18 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   05's hot streak from the throat to the mouth's lower-right corner, peak R ~217, tracing the X's right arms at +10 deg and likely to
   grow through +20 to +40). Already folded into the flags SHA (18:24): v-flats, the sweep to just white, the key softened or cut,
   03/05 as a matched pair, then +20 to +40 checked for X arms.
+- 18:36 speaker lane (stamped 18:42, ahead of its queue time 18:36:57): FLAGS INTERIM: no lamp lights the bar (lamp by lamp on the
+  Dust hero-light crop, red-aware count base 3630 px, key off 3430, the rest unchanged; Dust tall 1764 / 1671); a floor card under
+  the footprint changed nothing (3644). THE CAUSE: the clear bottom panel runs the cabinet's full 420 mm depth, polished at both
+  ends: from the front the camera looks into its front edge and, by total internal reflection, out of its back edge at the bright
+  studio behind, through 420 mm of dye (Dust's red bar, Fog's white streaks, Ice's blue band); background lamps off dims it (3417);
+  a low black card behind the speaker takes it to 0 red px. THE FIX: a real black card on the floor just behind the bottom panel's
+  back edge (0.56 m x 45 mm, 4 mm off the back face, hidden by the speaker from the front; shots.back_edge_card) in the tall, wide
+  and hero-light rigs; proofs rendering; SHA ~19:05. FOUND: studio31 (the hero-light rig) has a WHITE BOUNCE card at (0.4, -2.2,
+  0.6), 2 x 1 m, between the camera and the speaker, covering 58.9 % of the frame by ray-cast but HIDDEN FROM THE CAMERA and lighting
+  the speaker, plus a camera-hidden flag at (-1.4, 0.6, 1.2) (11.8 %); neither reflect-only, so cardcast never checked them.
+- 18:37 sent the speaker lane: the back-edge card approved (prove it unseen in the off-axis wide and hero-light views too, at full
+  size and 390 px); the hidden bounce and flag are a violation: real and out of frame in the same SHA, nothing on the hero-light rig
+  until then; extend cardcast to every camera-hidden object with its coverage, run it on every site rig (tall, wide, side, back,
+  turn, horn-back, amp plate, inside, hero-light, arc, close-ups), send the table, fix them, and flag which passed pictures carried
+  one for re-gating.
