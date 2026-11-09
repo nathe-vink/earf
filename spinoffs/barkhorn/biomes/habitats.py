@@ -93,7 +93,9 @@ SETS = {
     # --canopy-open), the sunfleck through one of the shot's own holes; the camera +1.5 EV for a forest floor)
     'poison_g5': {'product.instances.0.rotate_z': 9.0, 'lights.litter.specular': 1.0, 'render.exposure': 0.75,
                   # the litter fill off the front face's mirror line (at -5 the face mirrored it: the beige upper cabinet)
-                  'lights.litter.orbit.azimuth_deg': -40.0},
+                  'lights.litter.orbit.azimuth_deg': -40.0,
+                  # the moss patch in the foreground sun fleck read as a hole (the gate, 18:58; the sun probe: moss_01 at 0.5, -2.5)
+                  'set.props.4.avoid': [[0.0, 0.0, 0.3], [0.55, -2.5, 0.45]]},
 }
 # set props left out (the coordinator's gate on Dust, 2026-11-03: the tumbleweed floats, its shadow detached)
 DROP = {'dust': ['tumbleweed'],
