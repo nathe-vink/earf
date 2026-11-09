@@ -1,0 +1,6 @@
+cabinet: median L 24, luma 22  (target L >= 25)
+horn: median L 15
+woofer cone and surround: mean RGB [21. 27. 30.], L spread (p10-p90) 5-60
+red above 0: 49 % of the speaker (cabinet 62 %, horn 28 %)
+hue: horn 215 deg (median RGB [ 0. 12. 29.]), cabinet 206 deg (median RGB [ 1. 25. 43.])
+floor near the feet (the speaker's base -2/+6 % of the frame, 5 % either side): p99 L 112, max 119; walls (y 0.25-0.45) median L 20, p90 40
