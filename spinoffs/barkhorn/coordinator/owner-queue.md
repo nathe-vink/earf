@@ -5755,3 +5755,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   afternoon's burst (41 deployments in the hour before 18:45). The next windows: ~19:44, ~19:59, ~20:13, ~20:28. PLAN: a push freeze
   for every lane but the site from ~20:00 until the site's talls push has a deployment, so the next window's slot waits for it.
   The Book doesn't need Vercel (an Artifact republish).
+- 19:30 SPEAKER LANE: THE BACKS at 61831645 (rigB merged at fda445c7; realize_hidden on the back: wash slid out; horn-rim, whose line
+  out runs into the cove, raised round its target to 30° at 2x distance and size, same irradiance; all seven backs 0 hidden in frame;
+  the tall/wide/hero-light/side shots unchanged by the added move, so the rc1-real talls stay valid). Dust proof: back face 85 -> 87,
+  wall 211 -> 216, the mark unchanged; the horn's back darker (132 -> 100). 19:31 GATE BACK PROOF launched (wf_73733377-178).
+- 19:32 sent every lane but the site: a PUSH FREEZE from 20:00 until lifted (~20:25): commit locally, no pushes, so the site's talls
+  push gets the next Vercel slot (the talls, the Ember unlit pair and the proxies to be pushed before 20:00 where possible).
