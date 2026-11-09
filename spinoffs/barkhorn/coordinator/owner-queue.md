@@ -5083,3 +5083,39 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   a 0.1 mm "front-panel" double can't count), running. The first passes render wrote only Combined (compositing replaced the
   result); reruns with compositing off after trace2. Order: trace2, passes, Haze final, Fog scene save + khaki trace, Acid base
   crops, Acid colour proxies; one Blender job at a time (a stale queue briefly started a second Haze; killed within 15 s).
+- 17:53 site lane: THE FIXED RC (RC2) PUSHED, one push: r49-site-rc at 10a5282edecf029aa87ccc75ed5cafea0519d4ac (code on r47-site-next
+  7ef9660a wave 1, cf183116 waves 2-3, flags off there, byte-identical); deployment earf-6ov8pm7rv (dpl_BBdKeTyS88WwXMdWJSMg63HigziV,
+  READY, target null). Its checks: 57 routes at 1440/390 clean; no sideways scroll 320-1536; Lighthouse mobile home 97 (LCP 2.5 s,
+  CLS 0); 160 files, 7.6 MB (live ~800), every shipped picture loaded by a page; the build bans "eight colors"/"to Smoke" and fails
+  on any press, old-speaker, lit-lamp, old-Mantle or Smoke-page file. All three waves claimed done (seven colors; press kit and
+  unused files out; Mantle captions; weight "To follow"; 75 W; links; names; cover optional; 404; galleries 3-4 views with the
+  backs, Acid's horn-back and the plate; pairing grids hidden; Ice/Dust habitats; the hero as seven frames; /lighting and /mantle
+  re-laid; "a color on hold"; MANTLE_SRC = 41232b56). Pushed before my 17:44/17:45/17:50 answers: height "About 1.3 m", depth 420,
+  only Acid's horn-back, no Fog habitat.
+- 17:54 share link on RC2 (expires 10 Nov 16:54 UTC; kept in my scratch, never committed). RC2 REGRESSION REVIEW launched, five
+  lenses in three workflows (decisions+pictures wf_f54ef135-d4a, words+build wf_09ac720a-d6b, owner wf_a3a17c56-f04): every earlier
+  finding and wave item checked fixed / partly / not, then anything new; the three late answers and hello@ as known.
+- 17:53 Mantle lane: NIGHT ICE PROXY 4 (option A) at 6989fe3e (code fbef33ed; renders/2026-11-09/barkhorn/night-pictures/
+  night-ice-wide-proxy4.png, 1920x1080, 128 samples, 721 s): a Poly Haven console (CC0, 2.44 m) beside the speaker on the right,
+  never between; the pendant over its near end (0.16 m aside, 0.40 m in front, rim 1.32 m), cord and canopy; four plain sleeves; no
+  Mantle; gate 3's room kept; one lamp, +3.0 EV. Audit clean (two lights: the cob hidden from camera rays inside its liner, seen at
+  0/113 points; the streetlight sun; no linking, specular 1, transmission on; every mesh casts shadows). Metrics: cabinet L 24 (just
+  under 25), horn 15, batts pale, woofer reads, hue 215/206; MISSES: red at 0 on 51 % of the speaker (Ice under 3000 K), the
+  lower-right text zone 0.156, edges 0.138, the floor near the feet p99 L 112 against the walls' 20. Its physics: a 92 deg downlight
+  close enough to light the face puts its pool on the floor in front; over the console top the face falls to L 14. Options (a)
+  accept the pool, (b) hang it ~1.8 m (face ~L 20), (c) change the zones. I measured the lower chamber luma 26 (p90 66) against the
+  walls' 31: not glowing.
+- 17:56 GATE LAMPS SITE SET (wf_a02e1a2a-b5e; 4 critics + tally, 73 min): show_now 0/4 on the heroes, the rows and Core A Ice night.
+  Lighting honest and grounded (T1, T3 4/4); fails: glass not reading as glass, colours off the brand (Ember salmon, Ice mint, Haze
+  pink, Dust = Acid peach, Poison butter), the rows cheap (rim outlines, a full-width floor bar like LED strip, 3/4). Cause agreed
+  (4/4): faces 1-3.5 EV over the paper on AgX's shoulder + the 2700 K lamps under a daylight camera white point; not the dye. The
+  recipe: materials first (the site Core on night Core A's 9 mm wall; a real 50-60 % opal liner, the dome now 1.59x its pool; Acid
+  and Poison against the chips; the Core's diameter vs 560 lm); key, fill and camera at 3000 K; lamps stay 2700 K (4/4: the spec; no
+  per-tint CCT in pictures; Hemisphere never per-tint; Core's tunable board a product question, 2/4 for); camera -2 EV, studio
+  unchanged (Hemisphere x2 -3 EV, Core x8 -5 EV; the paper to L 0.5-0.6); AgX Punchy; rows camera up 15-20 deg, full samples, a
+  re-spaced seven-lamp frame; numeric gates per tint. Core A vs B: B reads more as tinted glass, A carries the deeper Ice; decide on
+  a matched re-render (room 15-20 %, a reflected real source, Punchy), plus a daylight pair.
+- 17:57 sent: the lamps lane (the whole recipe with the numbers and gates; c2's Core set waits for the re-proxy to pass); the
+  Mantle lane (render (b) now as proxy 5, the rest identical, with the lower-chamber line; the lower-right zone dropped for this
+  frame; red-at-0 and edges for the critics' eyes; glints and lip in the final; 4 and 5 gated together); the site lane (RC2 under
+  review, punch list in ~40-60 min; apply the 17:44/17:45/17:50 answers locally, no push until the punch list; RC2 untouched).
