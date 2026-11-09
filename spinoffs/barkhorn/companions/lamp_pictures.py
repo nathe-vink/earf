@@ -447,10 +447,13 @@ def build(frame, samples, scale):
         nts.links.new(mx_.outputs[0], os_.inputs['Surface'])
         # the dusk outside follows the exposure as the fill does (k), so the room reads the same at any exposure
         dW = float(os.environ.get('DUSK_W', '20')) * rk * 2.0 ** ({'core': 1.8, 'hemi': -3.0}[prod] - ev)   # tuned at those exposures
-        gobo(-1.3, -1.3, -0.35, 0.75, 2.4, panes=(1, 2))
-        SC.plane('sheer-left', (0.95, 1.65), (-1.27, -0.825, 1.575), (90, 0, 90), sheer)
-        dl = SC.area('dusk-left', (-1.75, -0.825, 1.575), (0, 0, 0), (1.0, 1.7), dW, '#9FB2D6')
-        dl.rotation_euler = (Vector((0.0, -0.825, 1.575)) - dl.location).to_track_quat('-Z', 'Y').to_euler()
+        # 2026-11-09 (the Core A/B tally, point 5: give B's shell something real to read against): WIN_DY slides the
+        # night window's opening back along the left wall, so its reflection moves out toward the ball's silhouette
+        wd = float(os.environ.get('WIN_DY', '0.9' if prod == 'core' else '0'))   # Core: its reflection on B's outer ring
+        gobo(-1.3, -1.3 + wd, -0.35 + wd, 0.75, 2.4, panes=(1, 2))
+        SC.plane('sheer-left', (0.95, 1.65), (-1.27, -0.825 + wd, 1.575), (90, 0, 90), sheer)
+        dl = SC.area('dusk-left', (-1.75, -0.825 + wd, 1.575), (0, 0, 0), (1.0, 1.7), dW, '#9FB2D6')
+        dl.rotation_euler = (Vector((0.0, -0.825 + wd, 1.575)) - dl.location).to_track_quat('-Z', 'Y').to_euler()
         if prod != 'core':
             wall = bpy.data.objects['wall']; wm = wall.active_material; wy = wall.location[1]
             bpy.data.objects.remove(wall, do_unlink=True)
