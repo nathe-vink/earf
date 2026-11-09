@@ -40,10 +40,16 @@ CHAIR = (-1.75, -0.10)
 HEMI_READ = (-0.95, -1.15)
 HEMI_READ_DZ = 0.25              # its rim 1.57 up, over the chair's seat
 READING = False                  # tried (g3c): a downlight lights the chair under it, not the speaker; left out
+# gate 3, option A (the coordinator, 17:31): a low record console beside the speaker, its near end just forward of the
+# speaker's face, and the pendant over that near end, 0.25 m off the speaker's side and 0.35 m in front of its face;
+# the pool lands on the console's top. Poly Haven modern_wooden_cabinet (CC0), 2.44 x 0.52 x 0.68, a run of sleeves on it
+CONSOLE = (1.60, -0.30)          # its centre: the near end at x 0.52 (0.24 off the speaker's side), its front at y -0.32
+HEMI_A = (0.44, -0.40)           # the pendant: over the console's near end, 0.35 in front of the speaker's face
+HEMI_A_DZ = 0.0                  # its rim 1.32 up (as in its own picture), 0.64 over the console's top
 # gate 2, point 6: the Hemisphere's mouth is open and its COB sits at the rim, so a camera below the rim sees the bare
 # COB (scene_audit: 106 of 113 points from 0.40 m). The camera stands above the rim, at eye height
 CAM_Z = 1.70
-ROOM = {'x0': -2.6, 'x1': 2.2, 'y_back': 0.78, 'y_front': -6.2, 'height': 2.40}
+ROOM = {'x0': -2.6, 'x1': 3.1, 'y_back': 0.78, 'y_front': -6.2, 'height': 2.40}
 # the formats (the coordinator's spec, r46-owner-notes 65ec7c5f: night-picture-spec-2026-11-04.md). The speaker with
 # its lamp inside the box; the text zones dark; light pools inside the speaker's column. The camera level at the
 # middle of speaker-plus-shade (0 to about 1.55 m), its distance set so that height fills the box's height
@@ -66,6 +72,22 @@ def _slim_table(cx, cy, top=0.62, w=0.40, t=0.018, leg=0.022, col='#5E5850'):
         parts.append({'name': f'side-table-leg{i}', 'center': [cx + dx, cy + dy, (top - t) / 2], 'size': [leg, leg, top - t],
                       'color': col, 'rough': 0.55})
     return parts
+
+
+def _records():
+    # a run of LP sleeves standing on the console's top toward its far end (31.5 cm square, 4-5 mm thick, muted spines)
+    # and a short stack by the pendant: generic boxes, no artwork
+    top = 0.68; out = []
+    cols = ('#2E2B28', '#4A3F36', '#1F2328', '#5B5249', '#2A2F2A', '#3C3430', '#6A6158', '#26221F')
+    x = 2.20
+    for i in range(16):
+        out.append({'name': f'sleeve{i}', 'center': [x, -0.30, top + 0.1575], 'size': [0.005, 0.315, 0.315],
+                    'color': cols[i % len(cols)], 'rough': 0.6})
+        x += 0.0062
+    for i in range(4):
+        out.append({'name': f'stack{i}', 'center': [0.80, -0.32, top + 0.0025 + 0.005 * i], 'size': [0.315, 0.315, 0.005],
+                    'color': cols[(i * 3) % len(cols)], 'rough': 0.6})
+    return out
 
 
 def _camera(fmt, az_deg=0.0, cam_z=None):     # gate 3: squared to the back wall (the skirting level)
@@ -125,13 +147,13 @@ def shot(root, tint, lamp_dir, fmt='wide', core=False):
             {'name': 'rug', 'center': [-0.35, -0.95, 0.006], 'size': [3.2, 1.9, 0.012], 'color': '#8E8981', 'rough': 0.95},
             {'name': 'sofa-arm', 'center': [-1.62, -1.05, 0.33], 'size': [0.26, 1.0, 0.66], 'color': '#9A958C', 'rough': 0.9},
             {'name': 'sofa-seat', 'center': [-2.05, -1.05, 0.22], 'size': [0.62, 1.0, 0.44], 'color': '#9A958C', 'rough': 0.9}])
-                     if core else [],
+                     if core else _records(),
         # gate 3: the speaker clearly on a wool rug (curly_teddy_natural, CC0: a pile, its own relief), a bound edge,
         # 0.9 m of rug in front of the feet; a nightstand under the pendant and an armchair in shadow at the left edge
-        'rug': None if core else {'pbr': 'curly_teddy_natural', 'tint': '#5A534C', 'tint_mix': 0.9, 'value': 0.18, 'bump': 0.6,
+        'rug': None if core else {'pbr': 'curly_teddy_natural', 'tint': '#5A534C', 'tint_mix': 0.9, 'value': 0.06, 'bump': 0.6,
                                   'center': [0.05, -0.30], 'size': [2.4, 1.70], 'border_w': 0.035, 'border_color': '#24211E'},
         'models': [] if core else [
-            {'id': 'ClassicNightstand_01', 'location': [STAND[0], STAND[1], 0.0], 'rotation_deg': [0, 0, 0], 'name': 'nightstand'},
+            {'id': 'modern_wooden_cabinet', 'location': [CONSOLE[0], CONSOLE[1], 0.0], 'rotation_deg': [0, 0, 0], 'name': 'console'},
             {'id': 'ArmChair_01', 'location': [CHAIR[0], CHAIR[1], 0.0], 'rotation_deg': [0, 0, -40], 'name': 'armchair'}],
         'lamps': ([
             # the Core on the side table: the lamps lane's honest Core at 26400e7c, its opal core the emitter (their
@@ -140,7 +162,7 @@ def shot(root, tint, lamp_dir, fmt='wide', core=False):
         ] if core else []) + [
             # the Hemisphere on the speaker's centre line between it and the wall, 0.35 higher than in its own picture so
             # (its rim 1.45 up, its cord cut to reach the ceiling): the wall behind the horn and the cabinet the brightest
-            {'blend': os.path.join(lamp_dir, 'hemi-fog-night.blend'), 'offset': [HEMI3[0], HEMI3[1], HEMI3_DZ], 'keep_table': False,
+            {'blend': os.path.join(lamp_dir, 'hemi-fog-night.blend'), 'offset': [HEMI_A[0], HEMI_A[1], HEMI_A_DZ], 'keep_table': False,
              'cord_to_ceiling': True, 'canopy': os.path.join(lamp_dir, 'hemi-canopy.stl')},
         ] + ([] if core or not READING else [
             {'blend': os.path.join(lamp_dir, 'hemi-fog-night.blend'), 'offset': [HEMI_READ[0], HEMI_READ[1], HEMI_READ_DZ],
@@ -150,9 +172,9 @@ def shot(root, tint, lamp_dir, fmt='wide', core=False):
     # gate 2: the lamp as the lamps lane's file has it (COB 3.2 W, 2700 K), the brightness from exposure (+2 EV), white
     # balance 1000 K above the lamp as before (a neutral warm white); the finish's contrast eased (red off 0)
     out['finish']['contrast'] = 0.05
-    out['render'].update({'samples': 256, 'view': 'AgX', 'look': 'AgX - Base Contrast', 'exposure': 2.6,
+    out['render'].update({'samples': 256, 'view': 'AgX', 'look': 'AgX - Base Contrast', 'exposure': 3.0,
                           # gate 3: white balance near the 2700 K lamp, so Ice's batts keep their red (pale blue-white)
-                          'white_balance_k': 2900, 'white_balance_tint': 0.0,
+                          'white_balance_k': 3000, 'white_balance_tint': 0.0,
                           # the Core's light reaches the room through its own ball, the Hemisphere's through its liner:
                           # refractive caustic paths, as the lamps lane renders them
                           'caustics_refractive': True})
