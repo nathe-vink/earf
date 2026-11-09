@@ -47,6 +47,7 @@ SURFACE_GLASS = False                   # --surface-glass: the tint on the faces
 WELD = [True]                           # the asset's split vertices welded so its glass volumes close (--no-weld: off)
 GLOSSY_FLAG = [False]                   # --glossy-flag: the flag and cards seen in reflections only (the earlier trick)
 SPLIT = [None]                          # --split R G B: the tint's channel split, luminance held per part (the shared 9097 fix)
+DOTS = [[]]                             # --dot D SIZE TX TY TZ: a grip's dot, SIZE m, D m out on the sun line from (TX, TY, TZ)
 CARDS = [[]]                            # --card white|black W H Z SIDE_DEG: real cards round the speaker, pushed out of frame
 SCRIM = [None]                          # --scrim T W H D: a silk on the sun's line D m out, W x H m, passing T of the beam
 PLANT_ALPHA = [()]                      # --plant-alpha ID...: wire these Poly Haven plants' own Alpha maps into their cards
@@ -279,6 +280,30 @@ def out_of_frame(pts):
     # sideways only: when the set is built the camera's final framing (lens shift, resolution) is not yet applied, so
     # a vertical test lies (a strip under the lens tested out and rendered across the base, 2026-11-09)
     return all(p.x < 0 for p in pts) or all(p.x > 1 for p in pts)
+
+
+def dots(bpy_, specs):
+    """A grip's dot: a small black card on the sun's line D m from a target point, square to the beam, casting a sharp
+    shadow on just that point (a woofer cone in full sun). Real: every ray type; out of frame is checked sideways."""
+    import bmesh
+    from mathutils import Vector
+    from bpy_extras.object_utils import world_to_camera_view
+    sc = bpy_.context.scene; cam = sc.camera
+    sun = next((o for o in sc.objects if o.type == 'LIGHT' and o.data.type == 'SUN' and not o.hide_render), None)
+    if sun is None:
+        return
+    z = (sun.matrix_world.to_3x3() @ Vector((0, 0, 1))).normalized()
+    for i, (d, size, tx, ty, tz) in enumerate(specs):
+        bm = bmesh.new(); bmesh.ops.create_circle(bm, cap_ends=True, segments=24, radius=0.5)
+        me = bpy_.data.meshes.new(f'dot-{i}'); bm.to_mesh(me); bm.free()
+        m = bpy_.data.materials.new(f'dot-{i}'); m.use_nodes = True
+        bs = m.node_tree.nodes['Principled BSDF']; bs.inputs['Base Color'].default_value = (0.02, 0.02, 0.02, 1)
+        bs.inputs['Roughness'].default_value = 1.0; me.materials.append(m)
+        f = bpy_.data.objects.new(f'dot-{i}', me); sc.collection.objects.link(f)
+        f.location = Vector((tx, ty, tz)) + z * d; f.scale = (size, size, 1.0); f.rotation_euler = z.to_track_quat('Z', 'Y').to_euler()
+        bpy_.context.view_layer.update()
+        pts = [world_to_camera_view(sc, cam, f.matrix_world @ Vector(c)) for c in ((-.5, -.5, 0), (.5, -.5, 0), (.5, .5, 0), (-.5, .5, 0))]
+        print(f'dot: {size} m, {d} m out on the sun line from {(tx, ty, tz)}, at {[round(c, 2) for c in f.location]}, out of frame: {out_of_frame(pts)}')
 
 
 def cards(bpy_, linked, specs):
@@ -627,6 +652,8 @@ def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extr
             print('real set: every ray type on for', fixed)
         if CARDS[0]:
             cards(bpy_, linked, CARDS[0])
+        if DOTS[0]:
+            dots(bpy_, DOTS[0])
         if SCRIM[0]:
             scrim(bpy_, linked, SCRIM[0])
         if PLANT_ALPHA[0]:
@@ -659,6 +686,8 @@ def main():
     ap.add_argument('--glossy-flag', action='store_true', help='the flag and side cards in reflections only (before 20:11)')
     ap.add_argument('--split', type=float, nargs=3, help="the tint's channel split, R G B (luminance held per part)")
     ap.add_argument('--canopy-open', type=float, help="the canopy's gaps cut as real holes, this fraction open")
+    ap.add_argument('--dot', type=float, nargs=5, action='append', default=[], metavar=('D', 'SIZE', 'TX', 'TY', 'TZ'),
+                    help="a grip's dot: SIZE m, D m out on the sun line from the point TX TY TZ")
     ap.add_argument('--card', nargs=5, action='append', default=[], metavar=('KIND', 'W', 'H', 'Z', 'SIDE'),
                     help='a real card: white|black, W H (m), centre Z (m), SIDE_DEG off the speaker-camera line')
     ap.add_argument('--scrim', type=float, nargs=4, help='a silk on the sun line: T (beam passed) W H (m) D (m out)')
@@ -674,7 +703,7 @@ def main():
     a = ap.parse_args()
     global SURFACE_GLASS
     WELD[0] = not a.no_weld; SURFACE_GLASS = a.surface_glass
-    SINK[0] = a.sink; LED[0] = a.led; REAL_SET[0] = a.real_set; CANOPY_OPEN[0] = a.canopy_open; CLEARING[0] = a.canopy_clearing; CLEARING_AT[0] = tuple(a.canopy_clearing_at); PLANT_ALPHA[0] = tuple(a.plant_alpha); SCRIM[0] = a.scrim; CARDS[0] = [(c[0], float(c[1]), float(c[2]), float(c[3]), float(c[4])) for c in a.card]; SPLIT[0] = a.split; GLOSSY_FLAG[0] = a.glossy_flag
+    SINK[0] = a.sink; LED[0] = a.led; REAL_SET[0] = a.real_set; CANOPY_OPEN[0] = a.canopy_open; CLEARING[0] = a.canopy_clearing; CLEARING_AT[0] = tuple(a.canopy_clearing_at); PLANT_ALPHA[0] = tuple(a.plant_alpha); SCRIM[0] = a.scrim; DOTS[0] = [tuple(d) for d in a.dot]; CARDS[0] = [(c[0], float(c[1]), float(c[2]), float(c[3]), float(c[4])) for c in a.card]; SPLIT[0] = a.split; GLOSSY_FLAG[0] = a.glossy_flag
     HORN['close'] = a.horn_close; HORN['rough'] = a.horn_rough; HORN['shadows'] = not a.horn_front
     sh = json.load(open(a.shot))
     scale_lights(sh, {k: float(v) for k, v in (x.split('=', 1) for x in a.light)})
