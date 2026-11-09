@@ -5715,3 +5715,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 19:26 this machine has 4 CPUs, so each workflow runs only 2 agents at a time (the third judge in every gate waits). The RC3.1 review
   was split so all five lenses run at once: decisions + pictures (wf_5258dbc7-29c), words + build (wf_98d65b8b-1ac), owner
   (wf_460e7280-ce7); the first launch (wf_f888f5ab-097) stopped at 3 minutes so no lens runs twice.
+- 19:26 BIOMES HIDDEN-IN-FRAME AUDIT (its hiddencast.py at 0f669b14, on each scene saved as rendered): Ice 0f619953 PASS (a point lamp
+  hidden, 0 % in frame); Fog b61474c0 PASS (fill_l 0 %); DUST 26493989 FAIL: its `bounce` area lamp (8 x 3 m, camera off) stands
+  between the speaker and the camera, 100 % of the frame, mirrored by the speaker's faces (the warm lift on the bottom wall). 19:27
+  sent: biomes to proxy (2) no panel, the sand bouncing for real, and (3) a real warm reflector card out of frame lit by the sun,
+  before the Acid final; (1) a fill behind the camera only as fallback. The site lane and the brand lane: pull the Dust habitat (the
+  site's Out view and /colors/dust; the Book's honest-dust-habitat.jpg) until a re-render passes.
+- 19:27 c4: rc1-real DUST tall (0310668b, 7.2 min, hiddencast clean); Poison started 19:27, then the wides.
