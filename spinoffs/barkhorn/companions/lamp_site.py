@@ -199,6 +199,16 @@ def build(frame, samples, scale):
         S = 560.0 * WLM / (2 * 0.0633)
         add_emission(fm, tuple(bb[i] * T9[i] / 0.96 for i in range(3)), S)
         sphere(f'frost-{tint}', 71.0, (x, y, zc), fm, inward=True, hole_below=20.0)
+        # the LED's own face under the window (the CAD's Ø26), as in lamp_pictures: seen through the port where the
+        # line of sight allows; it lights nothing itself (the frost face is the light, ruling 3's exception)
+        bm = bmesh.new(); bmesh.ops.create_circle(bm, cap_ends=True, segments=48, radius=0.013)
+        led = bpy.data.meshes.new(f'led-{tint}'); bm.to_mesh(led); bm.free()
+        lo = bpy.data.objects.new(f'led-{tint}', led); bpy.context.scene.collection.objects.link(lo)
+        lo.location = (x, y, z0 + 0.0147)
+        em = bpy.data.materials.new(f'led-em-{tint}'); em.use_nodes = True
+        b = em.node_tree.nodes['Principled BSDF']; b.inputs['Emission Color'].default_value = (*bb, 1)
+        b.inputs['Emission Strength'].default_value = 8.0
+        led.materials.append(em); lo.visible_diffuse = False
         if rot:
             for o in objs:   # turn the dock's cable away from the camera, about the lamp's axis (the parts' origin)
                 o.rotation_euler[2] = math.radians(rot)
