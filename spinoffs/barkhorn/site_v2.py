@@ -1400,7 +1400,7 @@ def rc3(p, web):
     p.sub('<div class="wrap hero-cap"><span>Hi-fi and lighting in cast acrylic.</span><i class="render">Render</i></div>',
           '<div class="wrap hero-cap"><i class="render">Render</i></div>')
     p.sub('<p>A pendant and a table lamp in the speakers&rsquo; acrylic, frosted inside, so the color glows and the source never shows. Every shade comes off by hand.</p>',
-          '<p>A pendant and a table lamp, frosted inside, so the color glows and the source never shows. Every shade comes off by hand.</p>')
+          '<p>A pendant and a table lamp, each with a white opal diffuser inside its color, so the color glows and the source never shows. Every shade comes off by hand.</p>')   # Core B (the owner, 2026-11-09)
     p.sub('<div class="pt-body"><h3>Mantle<small>Turntable</small></h3><p class="line">A turntable in cast acrylic.</p>',
           '<div class="pt-body"><h3>Mantle<small>Turntable</small></h3>')
     # --- 6. one price line, in the particulars too
