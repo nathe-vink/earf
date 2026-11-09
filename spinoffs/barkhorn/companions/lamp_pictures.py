@@ -187,11 +187,13 @@ def build(frame, samples, scale):
             # same dye path as A, 0.5 of the chip a mm over 6 mm)
             bl = float(os.environ.get('B_LOAD', '0.5'))
             Tb = shell_T(tname, bl, 3.0)        # each face carries half the 6 mm wall's absorption
-            sphere('ball', 80.0, zc, thin_shadow(acrylic('ball', 0.0, loading=bl, scratch=0.0), Tb))
-            sphere('ball-in', 74.0, zc, thin_shadow(acrylic('ball-in', 0.0, loading=bl, scratch=0.0), Tb), inward=True)
+            # 2026-11-09 (the Core A/B tally, point 7: how B's core is held): the outer keeps A's Ø40 port at its foot,
+            # as core-frost-options.md draws it; the core's own Ø40 opening seats on the grommet's upper ring through it
+            sphere('ball', 80.0, zc, thin_shadow(acrylic('ball', 0.0, loading=bl, scratch=0.0), Tb), hole_below=20.0)
+            sphere('ball-in', 74.0, zc, thin_shadow(acrylic('ball-in', 0.0, loading=bl, scratch=0.0), Tb), inward=True, hole_below=20.0)
             # round 9 (the gate: the Ø90 core too small, "an LED orb in a black bubble"): Ø120, its center 12 below the
             # outer's, on a short spacer ring on the grommet; a 13 gap at its equator
-            ri = float(os.environ.get('CORE_IN_R', '60.0')); zi = zc - float(os.environ.get('CORE_IN_DZ', '10.0')) * MM
+            ri = float(os.environ.get('CORE_IN_R', '60.0')); zi = zc - float(os.environ.get('CORE_IN_DZ', '12.0')) * MM   # as drawn (12): its Ø40 opening on the grommet's top (2026-11-09; at 10 it floated 1.6 above)
             # round 9: the core open at its base, Ø40 over the window, seated on the grommet's ring: the LED lights the
             # frost directly (closed, all its light reached the frost through the polished shell, a caustic: noise)
             sphere('core', ri, zi, thin_shadow(acrylic('core', 0.0, 'Clear', scratch=0.0), shell_T('Clear', 1.0, 3.0)), hole_below=20.0)
