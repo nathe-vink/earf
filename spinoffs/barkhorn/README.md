@@ -427,6 +427,12 @@ the sheet gives the flange plus its gasket as 13.1 mm; the model's rebate is 11.
 so the woofer would stand about 2 mm proud of the front panel. Deepening the rebate to 13.1 leaves 6.9 mm of the 20 mm
 panel behind it for the bonded inserts (9.0 today): a question for the owner, not changed here.
 
+**Horn A's overall size (2026-11-09)**, on its own feet, from the render model's bounding boxes (`out-cloud/render/barkhorn-cloud.json`, built 2026-11-03, the parts the site's pictures show): **1295 mm** tall (the feet's pads at
+-12 to the formed horn's top at 1283.1 in the Cloud's frame; `stability/standard_2018.json` top_m 1.2951), **560 mm** wide (the
+cabinet; the horn 556 across, flush inside it), **428 mm** deep overall (427.6: y -0.1 at the horn's front, flush with the cabinet's,
+to 427.5 at the amplifier plate's hardware on the back) and 420 at the cabinet. The site's earlier "423 mm overall" was round 14's
+horn. Mass 72.6 kg with horn A, 63.7 kg with it lifted off (the horn, its driver, pod and four posts: 8.9 kg); modelled, not weighed.
+
 ### The box at 75 W
 
 The FA122 gives 2 x 125 W into 4 Ω, so about 75 W into the 8 Ω woofer (24.5 V). The model is `speaker.box`:
