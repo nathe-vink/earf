@@ -101,6 +101,9 @@ MODIFY = {'haze_b': {'sundisk': {'azimuth': 30.0, 'elevation': 6.0}},
           # Fog (the coordinator's gate on 5c0f8509: the clear cabinet read champagne): the brown boulder right behind it,
           # seen through the clear walls, moved aside, so the bright fog bank sits behind the box
           'fog_b': {'boulder_01': {'position': [2.6, 3.6, -0.12]}},
+          # Acid (the coordinator's gate on cc380fab: a streak over the woofer read as a crack in the front panel): no rain,
+          # nearer or farther, inside the speaker's outline as the camera sees it (x, y, half width, z low, z high, margin)
+          'acid_b': {'rain': {'outline': [0.0, 0.0, 0.29, 0.0, 1.42, 0.03]}},
           # Poison (d): the canopy's first explicit hole, whose sunfleck lit the top batt (the sun's line from the box's
           # top passes inside it), moved 1.0 m along the canopy's x, so its fleck falls on the floor 1 m to the right
           'poison_g5': {'canopy': {'holes': [[-15.362, -1.196, 0.36], [-11.625, 4.314, 0.7], [-8.031, 8.121, 0.8], [-5.531, 12.121, 0.7], [-14.125, 5.431, 0.6], [-16.615, 0.204, 0.4], [-16.306, 3.793, 0.1], [-17.438, -2.458, 0.16], [-16.55, -1.614, 0.18]]}}}
@@ -129,6 +132,7 @@ def main():
     ap.add_argument('--frame', choices=['portrait', 'landscape'], default='portrait')
     ap.add_argument('--set', action='append', default=[], help='an extra key=value passed to habitat.py after the habitat\'s own (diagnostics)')
     ap.add_argument('--tag', default='', help='suffix on the output name')
+    ap.add_argument('--sink', type=float, help="the feet's bedding, m, in place of the habitat's (tests)")
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
     for n in a.names or HABITATS:
@@ -144,7 +148,7 @@ def main():
         # horn A on its own M8 feet (base A and its light left out), direct light stopped at the horn
         cmd = [sys.executable, os.path.join(HERE, 'habitat.py'), shot, tint, '--out', out,
                '--samples', '16' if a.proxy else str(max(a.samples, SAMPLES.get(n, 0))),
-               '--scale', '0.5' if a.proxy else str(a.scale), '--stand', 'feet', '--sink', str(SINK.get(n, 0.012)),
+               '--scale', '0.5' if a.proxy else str(a.scale), '--stand', 'feet', '--sink', str(a.sink if a.sink is not None else SINK.get(n, 0.012)),
                '--horn-front', '--horn-rough', str(HORN_ROUGH)] + [x for k, v in lights.items() for x in ('--light', f'{k}={v}')] \
             + [x for k, v in SETS.get(n, {}).items() for x in ('--set', f'{k}={json.dumps(v)}')] \
             + [x for kv in a.set for x in ('--set', kv)] \

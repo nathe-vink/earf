@@ -135,6 +135,19 @@ def rain(bpy, name, p, kit):
     fall = Vector((lx, ly, -1.0)).normalized()
     jit = math.tan(math.radians(p.get('lean_jitter_deg', 0.0)))
     avoid = [tuple(a) for a in p.get('avoid', [])]
+    # `outline` [x, y, half_width, z_low, z_high, margin]: no streak, nearer or farther, inside the subject's outline as
+    # the camera sees it (a box at x, y facing the camera; a streak over the clear glass reads as a scratch in it)
+    ol = p.get('outline')
+    if ol:
+        S = Vector((ol[0], ol[1], 0.0)); ax = Vector((S.x - C.x, S.y - C.y, 0.0)); D = ax.length; ax.normalize()
+        perp = ax.cross(Vector((0, 0, 1))).normalized()
+        hw, zl, zh, mg = ol[2] + ol[5], ol[3] - ol[5], ol[4] + ol[5], ol[5]
+
+        def in_outline(q):
+            v = q - C; along = v.dot(ax)
+            if along <= 0.05:
+                return False
+            return abs(v.dot(perp)) / along < hw / D and (zl - C.z) / D < (q.z - C.z) / along < (zh - C.z) / D
     bm = bmesh.new()
     layers = (bm.verts.layers.float.new('rain_op'), bm.verts.layers.float.new('rain_t'))
     n = 0
@@ -162,6 +175,8 @@ def rain(bpy, name, p, kit):
         f = fall
         if jit:                                            # gusts: each drop's fall a few degrees off the mean
             f = (fall + Vector((rnd.uniform(-jit, jit), rnd.uniform(-jit, jit), 0.0))).normalized()
+        if ol and any(in_outline(c + f * L * t) for t in (-0.5, -0.25, 0.0, 0.25, 0.5)):
+            continue
         _spindle(bm, c - f * L / 2, c + f * L / 2, r, rnd.uniform(o0, o1) ** 1.5 if o1 > o0 else o0, layers=layers)
         n += 1
     ob = _object(bpy, name, bm, _rain_water(bpy, f'{name}-water', p.get('rough', 0.0), p.get('scatter', 0.5)))
