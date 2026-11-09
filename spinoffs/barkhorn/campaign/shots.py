@@ -712,6 +712,16 @@ def site(frame, tint):
         for f in (s.get('set') or {}).get('flags', []):
             if f.get('center_m') == [1.6, 1.8, 0.005]:
                 f['center_m'] = [1.6, 2.05, 0.005]; f['size_m'] = [1.6, 2.9]
+        # (the line again, tallr3, 2026-11-09: it stayed, 65 over 16 on Ember at row 701. Lights off in turn only dimmed
+        # it; the floor flag off brightened everything below it, the upright card off everything above, so it is their
+        # junction. The sweep's cove rises from y 2.7 (depth 5.5 - radius 2.8); the upright card ran on a slant from
+        # (0.41, 3.25) to (3.2, 2.15), half of it standing on the rising cove, and the floor flag at z 0.005 goes under
+        # the cove past y 2.87: a wedge of lit cove between them. The card 0.6 m forward stands wholly on the flat
+        # floor (far end y 2.66), in front of the cove; the line 59 -> 16 on Ember, 56 -> 14 on Haze, field 16 / 14;
+        # still 0 % in frame)
+        for f in (s.get('set') or {}).get('flags', []):
+            if f.get('center_m') == [1.8, 2.7, 1.3]:
+                f['center_m'] = [1.8, 2.1, 1.3]
     if frame in ('front-off-tall', 'side'):
         # (the coordinator's 21:34 ruling, withdrawing specular-only sources: a panel at diffuse 0 shows in the glass and
         # lights nothing, which no real lamp does. scrim 0.25, sheen 0.6 and topline 0.9 go; Dust half size: the veil box
