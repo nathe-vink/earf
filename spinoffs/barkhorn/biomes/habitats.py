@@ -46,7 +46,13 @@ SETS = {
     # (the 9097 yellow read olive at that luminance: the camera's exposure up +0.75 EV (-0.1 -> 0.65, a global camera
     # change; the sky's p99 170 has room) and more of the low sun through a break in the rain cloud, 10 -> 18)
     'acid_b': {'product.instances.0.rotate_z': -8.0, 'lights.rim.receivers': None, 'sun.azimuth_deg': 120.0,
-               'sky.rotation_deg': 292.9, 'render.exposure': 0.65, 'sun.irradiance': 35.0},   # 28 deg off mirrored a wedge (crease 26.7), 10 deg off 13.7: 4 deg, as Ice
+               'sky.rotation_deg': 292.9, 'render.exposure': 0.65, 'sun.irradiance': 35.0,
+               # the gate on cc380fab (18:42): the storm neutral, the speaker the only yellow (a grey storm sun, no tint)
+               'sun.color': '#E6E3DA', 'render.white_balance_tint': 0.0,
+               # the near-white water in the bottom-right corner (L 205): the two dips nearest the camera 0.4 m left and
+               # 0.2 m smaller, so that corner is wet rock and the channel under the speaker's reflection stays water
+               'set.props.0.dips': [[0.0, 0.0, 1.1, 0.16], [-0.2, -1.2, 1.2, 0.2], [-0.95, -2.7, 1.3, 0.22],
+                                    [-1.25, -4.1, 1.4, 0.22], [-1.1, -5.4, 1.4, 0.2], [2.6, 2.4, 1.6, 0.18]]},   # 28 deg off mirrored a wedge (crease 26.7), 10 deg off 13.7: 4 deg, as Ice
     # the polished horn mirrors the bright sky in one wall as a pale wedge (half an X) when it's turned far from the
     # camera; turned to about 10 deg off the camera's line it reads clean, as Ice's does (front-on gives a symmetric X)
     # (at -5, 10 deg off, Haze's narrow side face, seen near grazing, mirrored the bright sky as a flat lavender sheet;
