@@ -130,6 +130,11 @@ def build(frame, samples, scale):
         """Hemisphere v3 as drawn, lit, its rim's centre at (x, y, rim_z)."""
         tname = COLOURS[tint]; bb = bbt(tint)
         c = (x, y, rim_z); H = 48.2
+        if os.environ.get('HEMI_BARE'):   # (flux check: the COB alone, no fitting: the 100 % reference)
+            ld = bpy.data.lights.new(f'cob-{tint}', 'AREA'); ld.shape = 'DISK'; ld.size = 0.011; ld.energy = 430.0 * WLM
+            ld.color = bb; ob = bpy.data.objects.new(f'cob-{tint}', ld); bpy.context.scene.collection.objects.link(ob)
+            ob.location = (x, y, rim_z + 0.0815)
+            return
         Tt, Tc = shell_T(tname, 1.0, 1.5), shell_T('Clear', 1.0, 3.0)
         sphere(f'tint-{tint}', 100.0, c, thin_shadow(acrylic(f'tint-{tint}', 0.0, tname), Tt), cut=0.0, hole=H)
         sphere(f'tint-in-{tint}', 97.0, c, thin_shadow(acrylic(f'tint-in-{tint}', 0.0, tname), Tt), inward=True, cut=0.0, hole=H)
@@ -265,10 +270,39 @@ def build(frame, samples, scale):
         raise SystemExit('unknown frame ' + frame)
     SC.render_settings(W, H, samples, scale, exposure=float(os.environ.get('EV', EVD)), look=os.environ.get('LOOK', 'AgX - Punchy'))   # round 2: AgX Punchy (the gate)
     sc = bpy.context.scene
-    sc.cycles.caustics_refractive = True; sc.cycles.sample_clamp_indirect = 20.0; sc.cycles.blur_glossy = 1.0
+    sc.cycles.caustics_refractive = True; sc.cycles.sample_clamp_indirect = float(os.environ.get('CLAMP', '0' if kind0 == 'dome' else '20'))   # round 3: the clamp cut the bore reflector's share (78 % out unclamped, 57 % clamped); sc.cycles.blur_glossy = 1.0
+    # round 3 (the coordinator's photometry check): the bore's reflector sends light to the floor by reflection, a
+    # reflective caustic; render_settings turns those off, which threw the reflector's share away
+    sc.cycles.caustics_reflective = os.environ.get('REFL_CAUSTICS', '1') == '1'
     vs = sc.view_settings; vs.use_white_balance = True; vs.white_balance_temperature = float(os.environ.get('WB', '3000'))
     vs.white_balance_tint = 0.0
     SC.camera(cam[0], cam[1], lens=cam[2], fstop=8.0)
+    if os.environ.get('FLUX'):
+        # the flux check: the sweep and studio gone, a 3 x 3 m translucent white sensor 30 mm under the rim, seen from
+        # below by an orthographic camera in linear light; flux (W) = mean radiance x pi x area
+        for o in list(sc.objects):
+            if o.name in ('sweep', 'key', 'fill'):
+                bpy.data.objects.remove(o, do_unlink=True)
+        sc.world.node_tree.nodes['Background'].inputs['Strength'].default_value = 0.0
+        sm = bpy.data.materials.new('sensor'); sm.use_nodes = True; nt = sm.node_tree; nt.nodes.clear()
+        o_ = nt.nodes.new('ShaderNodeOutputMaterial'); tr = nt.nodes.new('ShaderNodeBsdfTranslucent')
+        tr.inputs['Color'].default_value = (1, 1, 1, 1); nt.links.new(tr.outputs[0], o_.inputs['Surface'])
+        zs = float(os.environ.get('FLUX_Z', '0.47'))
+        SC.plane('sensor', (3.0, 3.0), (0, 0, zs), (0, 0, 0), sm)
+        cd = bpy.data.cameras.new('fluxcam'); cd.type = 'ORTHO'; cd.ortho_scale = 3.0
+        co = bpy.data.objects.new('fluxcam', cd); sc.collection.objects.link(co); co.location = (0, 0, zs - 1.0)
+        co.rotation_euler = (math.pi, 0, 0); sc.camera = co
+        sc.render.resolution_x = sc.render.resolution_y = 300; sc.render.resolution_percentage = 100
+        sc.view_settings.view_transform = 'Standard'; sc.view_settings.look = 'None'; sc.view_settings.exposure = 0
+        sc.view_settings.use_white_balance = False; sc.cycles.use_denoising = False
+        sc.render.image_settings.file_format = 'OPEN_EXR'
+        sc.render.filepath = os.environ.get('LAMP_OUT', '/tmp/flux.exr')
+        bpy.ops.render.render(write_still=True)
+        img = bpy.data.images.load(sc.render.filepath); px = img.pixels[:]
+        n = len(px) // 4
+        Y = sum(0.2126 * px[4 * i] + 0.7152 * px[4 * i + 1] + 0.0722 * px[4 * i + 2] for i in range(n)) / n
+        print('FLUX', frame, 'mean Y', round(Y, 5), 'flux W', round(Y * math.pi * 9.0, 4), 'emitted COB W', round(430 * WLM, 3))
+        return
     if os.environ.get('AUDIT'):
         hidden = [o for o in sc.objects if o.type == 'MESH' and not o.visible_camera]
         print('AUDIT', frame, 'hidden', [o.name for o in hidden],

@@ -357,7 +357,9 @@ def build(frame, samples, scale):
         part('out-dome-pendant', 'ring', SC.principled('peek', '#151515', 0.6), rim)
         part('out-dome-pendant', 'pins', steel, rim)
         part('out-dome-pendant', 'gaskets', SC.principled('silicone', '#111111', 0.7), rim)
-        part('out-dome-pendant', 'reflector', steel, rim)
+        # (2026-11-09: the bore's reflector in the CAD's high-reflectance aluminium; its light reaches the table only as a
+        # reflective caustic, so those are on and unclamped for Hemisphere, below)
+        part('out-dome-pendant', 'reflector', SC.principled('reflector', '#F2F2F0', 0.12, 1.0), rim)
         part('out-dome-pendant', 'cord', SC.principled('braid', '#121212', 0.75, bump=(1200.0, 0.5)), rim)
         if night:
             # the reflector's spill lights the opal from the crown: brightest at the top, falling to the rim; it may
@@ -472,6 +474,8 @@ def build(frame, samples, scale):
     SC.render_settings(1800, 1200, samples, scale, exposure=exposure,
                        look=os.environ.get('LOOK', 'AgX - Punchy' if prod == 'core' else 'AgX - Medium High Contrast'))   # 2026-11-09: Punchy for Core (the gate)
     bpy.context.scene.cycles.caustics_refractive = True
+    if prod == 'hemi':
+        bpy.context.scene.cycles.caustics_reflective = True; bpy.context.scene.cycles.sample_clamp_indirect = 0.0
     if night and prod == 'core':   # round 8: rare bright caustic paths speckled the frost (the denoiser blotched them)
         bpy.context.scene.cycles.sample_clamp_indirect = float(os.environ.get('CLAMP', '20')); bpy.context.scene.cycles.blur_glossy = 1.0
         # (round 9: the crumpled net was caustic noise, the core lit through its own shell; with the core open at its
