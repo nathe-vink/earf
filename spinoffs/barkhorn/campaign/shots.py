@@ -649,6 +649,7 @@ def site(frame, tint):
     if frame == 'back':
         _siteB_round1(s)
         _siteB_round2(s)
+        _siteB_round3(s)
     honest_lights(s)
     if frame in ('front-off-tall', 'front-off-wide', 'side'):
         _siteG_round2(s)
@@ -1210,6 +1211,24 @@ def _siteB_round2(s):
     L['fill']['irradiance'] = 3.9
     L['key']['irradiance'] = 1.3
     s['sky']['strength'] = 0.3
+    return s
+
+
+def _siteB_round3(s, glow=4.0):
+    """The honest backs' gate (2026-11-09, wf_73733377-178, held 1/3): (1) a crisp light edge on the backdrop, the wash's
+    narrow 3.6 x 0.72 box close to the wall: twice the size at the same irradiance, a soft edge. (2) The horn's back went
+    flat once horn-rim left the frame (sample 132 -> 100): no camera-side lamp (it would show in the polished back and
+    top) and no more horn-rim; the photographer's way, bright-field: a lamp linked to the sweep alone, out of frame
+    camera-right, on the wall behind the horn, which the horn then shows through as glass does. (3) The amplifier
+    plate's green LED off in a frame with nothing on. Dust, half size, 64 samples: the horn sample 100 -> 111 at 2.0,
+    122 at 4.0 (the target 120-130; rigB as rendered 133), 131 at 6.0 (the wall 217-225); its hue 25 against the back
+    face's 25; the upper wall a smooth column, no 4 px step over 1."""
+    L = s['lights']
+    if 'wash' in L:
+        L['wash']['size_m'] = [round(x * 2, 3) for x in L['wash']['size_m']]
+    L['glow-wall'] = {'type': 'area', 'size_m': [1.6, 1.0], 'position': [1.8, 0.6, 2.2], 'target': [0.0, 1.45, 1.2],
+                      'irradiance': glow, 'color': '#FFF3E1', 'receivers': ['sweep']}
+    s.setdefault('materials', {})['led-on'] = {'strength': 0.0}
     return s
 
 
