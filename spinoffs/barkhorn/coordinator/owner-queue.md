@@ -6072,3 +6072,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   orbs studio x2.3 at -3.2 EV); the pool honest for the drop (FWHM 0.76 m at 0.58 m, a 33° half-angle); a 4 m key (the twin dots
   merge); a real kicker in the heroes only; 0 hidden in frame. 20:43 GATE LAMPS G3 (c) launched (wf_bc42d018-55d, four lenses +
   tally; the brief's 620 lm corrected to 200); asked whether the 20:14 quick path started (skip it if not: words-only tonight).
+- 20:45 GATE ACID FINAL complete: 1/3 = HOLD (founder yes if Acid's lining is black; photographer no; skeptic no). Landed: olive ->
+  gold (hue 87-89), the seam closed, one honest sun, no X. Blockers: the rain stops at the speaker's outline (0 streaks in the horn
+  against 3-16 beside it; dry speaker; no rings), the cabinet dark bronze-khaki (L* 23 against the horn's 59: check Acid's lining
+  first), the ~25-30 px grey band under the base, the right rocks' glare. 20:46 sent the biomes lane the fixes in order (after Fog (2)
+  and Poison's proxies); the site lane: no Acid habitat tonight; Fog (2) a possible one-file swap ~21:05.
+- 20:43 LAMPS: the 20:14 quick path reached it only at 20:42, mid-round-3: can't land tonight; the lamps words-only; the Ember unlit fix
+  and the Hemisphere crop for the next push.
