@@ -662,6 +662,23 @@ def site(frame, tint):
         # front unchanged. `back` goes off)
         s['lights']['back']['irradiance'] = 0.0
         s['lights']['back'].pop('power_w', None)
+    if frame == 'front-off-tall':
+        # (the veil, tallr3's gate, 2026-11-09: the lower right face, near-grazing to the lens, mirrored lit floor behind
+        # and right of the speaker: white over the tint 74-78 levels, saturation 0.16 (Poison) to 0.33 (Haze). Geometry
+        # puts the mirror on floor x 0.33-1.03, y -0.1 to 2.4, half of it out of frame. Two real black floor cards
+        # cover that half, cardcast 0 %, and the speaker turns 3 deg toward the lens (the face less edge-on); the back-edge
+        # card turns with it. Crops, lower face rows 800-1060: Haze 0.33 / 78 -> cards 0.55 / 14 -> cards + 3 deg
+        # 0.68 / 13 (+ 6 deg 0.70 / 12); Ember 0.32 / 74 -> cards 0.53 / 12; Poison 0.16 / 74 -> cards 0.39 / 12, dark
+        # there. Left: the lowest fifth mirrors floor beside the speaker that the camera sees, under a horizontal edge
+        # at the near card's mirrored edge (probe: below it the sweep, above it the card))
+        for blk in s['products']:
+            for i in blk['instances']:
+                i['rotate_z'] = i.get('rotate_z', 0) - 3.0
+        for (x0, y0, x1, y1), nm in (((0.55, 0.6, 2.4, 3.0), 'floor card behind-right'),
+                                     ((0.75, -0.3, 2.4, 0.62), 'floor card right')):
+            s.setdefault('set', {}).setdefault('flags', []).append(
+                {'center_m': [round((x0 + x1) / 2, 3), round((y0 + y1) / 2, 3), 0.006], 'size_m': [round(x1 - x0, 3), round(y1 - y0, 3)],
+                 'normal': [0.0, 0.0, 1.0], 'color': '#060606', 'camera': True, 'glossy': True, 'name': nm})
     if frame in ('front-off-tall', 'front-off-wide', 'hero-light', 'side'):
         back_edge_card(s, sides=('back', 'left') if frame == 'side' else ('back',))
     if frame == 'front-off-tall' and 'horn' in s['lights']:
