@@ -5068,3 +5068,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   so; the 13.1 rebate: its engineering recommendation first (insert, pull-out at 6.9 vs 9.0 mm, a doubler ring or thinner gasket,
   2 mm proud in a crop), flush as the default to beat (the owner's flush horn, 1 Nov). Sent the brand lane: received; the press kit
   stays held.
+- 17:49 GATE FOG HABITAT RE-GATE on the corrected record (wf_8fce8023-90e; 3 critics, 23 min): SHOW 3/3. The champagne cast gone
+  (cabinet median b* +7.7 -> -2.6, warm pixels 37 % -> 3.5 %, horn face = sky), cool-neutral not cold (frame b* -1.8), the fill
+  honest (no softbox in reflections, grass up 4-6 L*), no X at full or phone size. Polish (not blocking): white flecks in the
+  foreground grass read as litter (2/3); the khaki band under the top batt (b* +8-10, peaks +16-20; all 3); the base plate's front
+  edge the brightest line at the foot at phone size (L* 49 vs 22; honest edge glow; grass across it or the fill flagged off); the
+  soft pod-to-corner diagonal (1). FOG HABITAT = b61474c0 renders/2026-11-03/barkhorn/habitats/fog_b-portrait-1200x1500.jpg.
+- 17:50 sent: biomes (the pass; the polish as one optional final pass after its queue, re-gated against this one if done); the
+  site lane (Fog's habitat for the Fog color page like Ice and Dust, this push if it costs minutes; the backs check closed: rigB
+  backs, horn-backs, amp plate and turns never carried the bug).
