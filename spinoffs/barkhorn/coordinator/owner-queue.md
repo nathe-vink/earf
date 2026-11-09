@@ -4979,3 +4979,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 17:33 verified the artifact's file listing myself: 48 files, none stale. Exported b2ffb373's book/ to scratchpad/brandbook-v20.
   REGRESSION REVIEW of v20 launched: decisions + pictures (wf_d7cd53dd-917), words + build (wf_0097dc03-eaf), the owner's eye
   (wf_8f1d2030-29c), against the list of what was asked (rc-review/book-v20-asked.md).
+- 17:33-17:34 brand lane: the press folder matched to the Book (d56a9d6d: Mantle's design figures, Core's dock, Hemisphere's shade,
+  seven colors; 53db986c: the press README, company.md, images.md listing only passed renders); LAUNCH-GRID.md done (51cd950c:
+  passed pictures only, seven colors, D+n dates, no bar hours, Core/sessions/Mantle "Waits"; its mockup PNG to be redrawn), pushed
+  because its repo hook requires every commit pushed before stopping. Holding for the regression punch list.
+- 17:34 sent the brand lane: go on LAUNCH-GRID (its rules) (crossed with its 17:34 message).
