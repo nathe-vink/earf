@@ -4786,3 +4786,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   cautious reading +/-7.75 mm). Sent the speaker lane (16:57): mark verified with the source and date; check the cut-out and depth
   clearance; the 28 Hz LR4 high-pass is mandatory (14.6 mm at 20 Hz without it breaks the cautious reading).
 - 16:5x GATE launched on the Fog final (wf_9ecc9b10-30f; the previous final, the A/B crop and the approved Ice habitat as context).
+- 16:5x GATE THE SIX rigB BACKS (wf_0a6af918-50d, c2 39bf3f97; 3 critics, 33 min): SHOW 3/3 EVERY ONE (Ember, Dust, Poison, Ice,
+  Haze, Fog). The dark tints now read into the cabinet from behind (batts L* Ember ~27, Poison ~33, Haze ~24); grounded; no glow;
+  horns matched (Ember 40 vs 38, Dust 59 vs 63, Poison 139 vs 140, Haze 310 vs 310); Ice keeps its bottom batt; EARF legible at
+  phone size (weakest Ember and Haze, carried by the letters' shadows). Optional: a small real raking light on the EARF plate (the
+  rig's etch-rake is at 0) for Ember and Haze; a 10-15° more turned camera if the gray left sliver is questioned. The backs go into
+  the site's fix pass; the Acid back is in its own gate (wf_1aa80df2-c50).
