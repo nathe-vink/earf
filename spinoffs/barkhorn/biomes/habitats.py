@@ -146,7 +146,8 @@ PLANT_ALPHA = {}
 # where the camera saw out of the set to the sky (the trace of the bluish patch under je_gray_02, 2026-11-09)
 _RW = {"kind": "kit", "shape": "ext", "module": "poison_el", "fn": "redwood", "radius": 1.4, "height": 40.0, "tint": "#8A4126",
        "tint_mix": 0.3, "tex_scale": 1.4, "bump": 1.6}
-ADD = {'poison_g5': [dict(_RW, position=[-5.0, 28.2, -0.1], seed=41, turn=40), dict(_RW, position=[-7.0, 32.9, -0.1], seed=42, turn=200)]}
+ADD = {'poison_g5': [dict(_RW, position=[-5.0, 28.2, -0.1], seed=41, turn=40), dict(_RW, position=[-7.0, 32.9, -0.1], seed=42, turn=200),
+                      dict(_RW, position=[-3.6, 31.5, -0.1], seed=43, turn=310)]}
 CANOPY_OPEN = {'poison_g5': 0.25}
 SAMPLES = {'ember': 96, 'poison_g5': 96, 'haze_b': 96, 'fog_b': 96}
 
