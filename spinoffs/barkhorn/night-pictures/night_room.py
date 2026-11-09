@@ -123,6 +123,13 @@ def _append_lamp(bpy, blend, offset, keep_table=False, led_up=False, cord_to=Non
         if cob and refl:
             zt = max((refl.matrix_world @ v.co).z for v in refl.data.vertices)
             cob.data.size = honest_cob; cob.data.spread = math.pi
+            # the reflector in the CAD's high-reflectance aluminium, not the picture rig's steel (the coordinator, 18:43;
+            # the lamps lane's flux check, r32 5c319549: about 78-85 % of the COB's light out of the bore)
+            al = bpy.data.materials.new('reflector-aluminium'); al.use_nodes = True
+            bs = al.node_tree.nodes['Principled BSDF']
+            bs.inputs['Base Color'].default_value = (0.888, 0.888, 0.871, 1.0)    # #F2F2F0, linear
+            bs.inputs['Metallic'].default_value = 1.0; bs.inputs['Roughness'].default_value = 0.12
+            refl.data.materials.clear(); refl.data.materials.append(al)
             cob.location = (cob.location[0], cob.location[1], zt - 0.0005)
             print(f'night_room: the COB a {honest_cob * 1000:.0f} mm disk at z {zt - 0.0005:.4f} (the bore\'s top), '
                   f'{cob.data.energy:.2f} W, spread 180 deg', flush=True)

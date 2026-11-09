@@ -180,7 +180,11 @@ def shot(root, tint, lamp_dir, fmt='wide', core=False):
                           'white_balance_k': 3000, 'white_balance_tint': 0.0,
                           # the Core's light reaches the room through its own ball, the Hemisphere's through its liner:
                           # refractive caustic paths, as the lamps lane renders them
-                          'caustics_refractive': True})
+                          'caustics_refractive': True,
+                          # the coordinator, 18:43 (the lamps lane's flux check, r32 5c319549): the floor lit by way of
+                          # the polished reflector is a reflective caustic, and the indirect clamp capped the mirrored
+                          # COB; both off, so the fitting puts out what it does (the COB stays at 3.2 W)
+                          'caustics_reflective': True, 'clamp': 0.0})
     return out
 
 
