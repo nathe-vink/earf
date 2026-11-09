@@ -10,6 +10,10 @@
   transmission off (ruling 3). Light objects have no specular factor in Blender 5 beyond `specular_factor`, listed.
 - Ruling 4: any object that casts no shadow.
 Prints one line per finding, then IN FRAME / out per hidden mesh.
+- Small sources (2026-11-09, after gt_audit.py found the Ice final's 11 mm COB, 10 px, between the grid's rays): every
+  hidden mesh's vertices and points over every hidden area lamp's surface are also projected through the camera
+  (bpy_extras' world_to_camera_view, the camera's own frame); any that lands in frame flags the object IN FRAME even
+  when no grid ray hit it ('below the grid'). Occlusion is ignored here too.
 """
 import math
 import sys
@@ -60,6 +64,15 @@ def main():
     # cardcast.py's grid: `div` rays across the frame's longer side, whatever the saved resolution
     nx, ny = (div, max(1, round(div * H / W))) if W >= H else (max(1, round(div * W / H)), div)
     dg = bpy.context.evaluated_depsgraph_get()
+    from bpy_extras.object_utils import world_to_camera_view
+
+    def in_frame(pts):
+        n = 0
+        for q in pts:
+            c = world_to_camera_view(sc, cam, q)
+            if c.z > 0 and 0.0 <= c.x <= 1.0 and 0.0 <= c.y <= 1.0:
+                n += 1
+        return n
     for ob in hidden:
         ev = ob.evaluated_get(dg)
         inv = ev.matrix_world.inverted()
@@ -79,7 +92,9 @@ def main():
                     hit += 1; xs.append(px); ys.append(py)
         pct = 100.0 * hit / tot
         ext = (f'x {min(xs) / nx:.2f}-{max(xs) / nx:.2f} y {min(ys) / ny:.2f}-{max(ys) / ny:.2f} of the frame' if xs else '')
-        print(('IN FRAME ' if hit else 'out      ') + f'{pct:5.1f} %  {ob.name} (hidden from camera) {ext}')
+        me = ev.to_mesh(); vin = in_frame([ev.matrix_world @ v.co for v in me.vertices]); nv = len(me.vertices); ev.to_mesh_clear()
+        small = '' if hit or not vin else f' (below the grid: {vin} of {nv} vertices in frame)'
+        print(('IN FRAME ' if hit or vin else 'out      ') + f'{pct:5.1f} %  {ob.name} (hidden from camera) {ext}{small}')
     if not hidden:
         print('no mesh is hidden from the camera')
     # the coordinator, 23:47: every object hidden from the camera but seen in reflections. A camera-hidden area lamp is
@@ -116,6 +131,9 @@ def main():
                     hit += 1; xs.append(px); ys.append(py)
         pct = 100.0 * hit / tot
         ext = (f'x {min(xs) / nx:.2f}-{max(xs) / nx:.2f} y {min(ys) / ny:.2f}-{max(ys) / ny:.2f} of the frame' if xs else '')
+        surf = [C + ax * (i / 6.0 * sx / 2) + ay * (j / 6.0 * sy / 2) for i in range(-6, 7) for j in range(-6, 7)
+                if not (disk and (i * i + j * j) > 36)]
+        pin = in_frame(surf)
         # the coordinator, 01:47 (point 6): would a real photo from this camera see the bare emitter? Points over the
         # lamp's surface, each ray-cast from the camera against the scene; any that reaches the emitter unblocked is seen
         seen = n_pts = 0
@@ -136,7 +154,8 @@ def main():
                     seen += 1
         print(f'lamp {ob.name}: its emitting surface seen directly by the camera at {seen} of {n_pts} points in frame'
               + ('' if seen == 0 else '  <- a real photo would show the bare emitter'))
-        print(('IN FRAME ' if hit else 'out      ') + f'{pct:5.1f} %  lamp {ob.name} ({d.shape} {sx:.2f} x {sy:.2f} m, hidden from camera, seen in reflections) {ext}')
+        small = '' if hit or not pin else f' (below the grid: {pin} of {len(surf)} points of its surface in frame)'
+        print(('IN FRAME ' if hit or pin else 'out      ') + f'{pct:5.1f} %  lamp {ob.name} ({d.shape} {sx:.2f} x {sy:.2f} m, hidden from camera, seen in reflections) {ext}{small}')
 
 
 if __name__ == '__main__':
