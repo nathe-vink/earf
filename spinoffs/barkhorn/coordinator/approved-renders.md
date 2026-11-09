@@ -46,7 +46,9 @@ the old rule are marked; each is re-rendered under the new rule and gated agains
 | Poison, Ember, Haze | in progress / not started (Haze waits on the horn pour) | | none |
 
 ## Lamps
-None approved. The unlit Ember pair: HOLD 0/4 (fixing: the liner, the dye, the surround). The lit set, round 3 proxies: in gate.
+None approved. Hemisphere switched off in Ember (the 4:5 crop): HOLD 0/4 (9 Nov 21:42): honest and clearly off, but the Ember reads
+crimson (a rose reflection over 28-44 % of the face; cool lights on the shell) and the right-rear strip was specular-only. The lit set,
+round 3: HOLD 0/3 (critic 4 out): the pale four read pastel, every Core B orb a milk-glass globe (walkthrough 133), no pools in the row.
 Core B, decided by the owner 9 Nov 21:12 (the dark border he liked comes from B's nested build). Every lamp picture is re-rendered as B.
 
 ## Mantle
