@@ -4588,3 +4588,15 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 16:2x gates re-launched (the limit killed them on 4 Nov): tall Acid (wf_8fdaa10e-d99 resumed), the re-lit close-ups for item 6
   (wf_e92326ae-fdc resumed), and a fresh turn gate with the re-rendered Acid sheet (wf_949e8d32-655; Ember, Dust, Acid v2 from
   c4's 42fa8eee). All three feed the site RC or the owner.
+- 16:23 c2 (stamped 16:24): NOTHING LOST: the six rigB backs had finished on 4 Nov; committed 39bf3f97a3aaa316ced9e9be401a1fad95ff42f0
+  (back L* Ember 18.2, Dust 42.4, Poison 21.6, Ice 36.5, Haze 15.2, Fog 72.3; wall 84.7, floor 79.4; clip 0-0.09 %). a290fdc6
+  cherry-picked alone as bc8f51b5; back-acid (rigB) and horn-back-acid rendering.
+- 16:23 biomes: NOTHING LOST: the ACID FINAL finished on 4 Nov (peak 10.4 GB): cc380fab6c08d5c264a62b5ca103a9651511a25b (sun 35, +0.75 EV,
+  the shared split, sink 0.015, 64 samples; its gate 4/4; A/B speaker RGB (85,65,24) -> (98,94,36), amber to the lane's yellow).
+  The 4 Nov Poison proxies never ran (argparse took --tag -punchy as a flag; fixed). Queue restarted 16:22.
+- 16:23 lamps lane: r32-lamps-final intact at 2fb64db3; the Core A night render lost (its script 56059fe8 committed); 4 CPU cores,
+  ~25-40 min a full frame. Plan: the site rig (~2 h; proxies first), Hemisphere 8 heroes + cards + the row (~6 h to the first SHA),
+  Core 8 + the row (~11-12 h in all), Core A as drawn on the site; Core A night now on a spare slot.
+- 16:25 my audit of the rigB backs: clean (key 1.3, fill 3.9; one reflect-only card 0.0 %; the six share one rig). Gates launched:
+  the six backs (wf_0a6af918-50d) and the Acid habitat (wf_c6da20d8-233). Sent to the lamps lane: Core A as drawn, yes; write the
+  render queue so c3 and c4 can split the full-size frames after the proxies pass.
