@@ -1,32 +1,30 @@
 # Image list
 
 Every picture is a **render** and is captioned "Render" wherever it runs, until the first pieces are photographed.
-Paths are from the repository root; the files are the site's own (`spinoffs/barkhorn/site/img/`, built by `web.py` from
-`finals.py`), except where a row points at the Brand Book's copies. **Two rules (owner, 2026-10-31):** Tropos is always
-shown whole with its cover off, never cropped (so the site's `macro-*.jpg` crops and its covers-on room are out); Core
-is cordless (so its pictures are the lamps lane's cordless set, `r32-lamps-final`; the site's still show the cord).
-Color keys in file names: `red` Ember, `orange` Dust, `amber` Acid, `green` Poison, `blue` Ice, `violet` Haze, `ice` Fog, `black` Smoke.
+Paths are from the repository root; the files are the Brand Book's copies of the passed renders. **Rules (owner):** Tropos
+is shown whole with its cover off; close-ups only beside the whole speaker; Core is cordless.
+
+**Only pictures that passed the critics (2026-11-09).** The earlier list (the uplit eight, the stepped horn, the lit lamps, the old Mantle and every Smoke picture) is withdrawn. The lamps and Mantle have no passed pictures yet: none goes out until one passes.
 
 | Product | File | Size | What it shows |
 |---|---|---|---|
-| Tropos | `spinoffs/barkhorn/site/img/hero.jpg` | 2400 × 1200 | The eight Tropos in a row on a pale floor, Ember to Smoke, each throwing a colored shadow |
-| Tropos | `spinoffs/barkhorn/site/img/lineup.jpg` | 2400 × 1000 | The eight in a row on a white seamless |
-| Tropos | `spinoffs/barkhorn/brandbook/book/img/room.jpg` | 1600 × 900 | A pair in Poison, covers off, by a tall window at golden hour (master: `tropos-room-golden-hour-off.png`, horn lane) |
-| Tropos | `spinoffs/barkhorn/site/img/facade.jpg` | 2400 × 1000 | The eight at night, lit from below, their colors thrown up a concrete wall. **To swap:** it shows the uplight Tropos no longer has (the owner, 2026-11-03) |
-| Tropos | `spinoffs/barkhorn/site/img/red-studio.jpg` | 2400 × 1350 | Tropos in Ember alone, on a dark seamless |
-| Tropos | `spinoffs/barkhorn/site/img/red-studio-light.jpg` | 2400 × 1350 | Tropos in Ember alone, on a pale seamless (each color: <key>-studio-light.jpg) |
-| Tropos | `spinoffs/barkhorn/site/img/green-habitat.jpg` | 2400 × 1600 | Tropos in Poison in its element, a forest (each color: <key>-habitat.jpg) |
-| Tropos | `spinoffs/barkhorn/site/img/inside.jpg` | 880 × 1100 | The cutaway: the lining, the woofer and the amplifier through the wall |
-| Hemisphere | `spinoffs/barkhorn/site/img/lamp-dome.jpg` | 1600 × 2000 | Hemisphere lit, its Ember shade glowing beneath a black hub |
-| Hemisphere | `spinoffs/barkhorn/site/img/lamps-domes.jpg` | 2400 × 800 | Eight Hemisphere pendants hung in a row, lit, one in each color |
-| Core | `spinoffs/barkhorn/brandbook/book/img/lamp-orb.jpg` | 1600 × 2000 | Core lit in Ember, sitting low in its black acrylic base, cordless |
-| Core | `spinoffs/barkhorn/brandbook/book/img/lamps-orbs.jpg` | 1600 × 533 | Eight Core lamps in a row, lit, in spectrum order |
-| Lighting | `spinoffs/barkhorn/brandbook/book/img/lamps-unlit.jpg` | 1600 × 2000 | A Core and a Hemisphere in Smoke, switched off |
-| Mantle | `spinoffs/barkhorn/site/img/tt-violet-dusk.jpg` | 2400 × 1600 | Mantle in Haze at dusk, its base glowing |
-| Mantle | `spinoffs/barkhorn/site/img/tt-amber-studio.jpg` | 2400 × 1600 | Mantle in Acid in the studio |
-| Mantle | `spinoffs/barkhorn/site/img/tt-open.jpg` | 2400 × 1600 | Mantle with its lid raised |
-| Mantle | `spinoffs/barkhorn/site/img/tt-pod.jpg` | 2400 × 1600 | Mantle's motor pod on its soft feet |
-| Brand | `spinoffs/barkhorn/site/img/coins-light.jpg` | 1024 × 128 | The eight colors as acrylic coins |
+| Tropos | `spinoffs/barkhorn/brandbook/book/img/honest-front-ember.jpg` | 1000 × 1250 | Tropos in Ember, whole, cover off, on its own feet, on a pale seamless |
+| Tropos | `spinoffs/barkhorn/brandbook/book/img/honest-front-dust.jpg` | 1000 × 1250 | Tropos in Dust, whole, cover off, on its own feet, on a pale seamless |
+| Tropos | `spinoffs/barkhorn/brandbook/book/img/honest-front-acid.jpg` | 1000 × 1250 | Tropos in Acid, whole, cover off, on its own feet, on a pale seamless |
+| Tropos | `spinoffs/barkhorn/brandbook/book/img/honest-front-poison.jpg` | 1000 × 1250 | Tropos in Poison, whole, cover off, on its own feet, on a pale seamless |
+| Tropos | `spinoffs/barkhorn/brandbook/book/img/honest-front-ice.jpg` | 1000 × 1250 | Tropos in Ice, whole, cover off, on its own feet, on a pale seamless |
+| Tropos | `spinoffs/barkhorn/brandbook/book/img/honest-front-haze.jpg` | 1000 × 1250 | Tropos in Haze, whole, cover off, on its own feet, on a pale seamless |
+| Tropos | `spinoffs/barkhorn/brandbook/book/img/honest-front-fog.jpg` | 1000 × 1250 | Tropos in Fog, whole, cover off, on its own feet, on a pale seamless |
+| Tropos | `spinoffs/barkhorn/brandbook/book/img/honest-back-ember.jpg` | 880 × 1100 | Tropos in Ember from behind, the amplifier seen through the wall |
+| Tropos | `spinoffs/barkhorn/brandbook/book/img/honest-back-dust.jpg` | 880 × 1100 | Tropos in Dust from behind, the amplifier seen through the wall |
+| Tropos | `spinoffs/barkhorn/brandbook/book/img/honest-back-acid.jpg` | 880 × 1100 | Tropos in Acid from behind, the amplifier seen through the wall |
+| Tropos | `spinoffs/barkhorn/brandbook/book/img/honest-back-poison.jpg` | 880 × 1100 | Tropos in Poison from behind, the amplifier seen through the wall |
+| Tropos | `spinoffs/barkhorn/brandbook/book/img/honest-back-ice.jpg` | 880 × 1100 | Tropos in Ice from behind, the amplifier seen through the wall |
+| Tropos | `spinoffs/barkhorn/brandbook/book/img/honest-back-haze.jpg` | 880 × 1100 | Tropos in Haze from behind, the amplifier seen through the wall |
+| Tropos | `spinoffs/barkhorn/brandbook/book/img/honest-back-fog.jpg` | 880 × 1100 | Tropos in Fog from behind, the amplifier seen through the wall |
+| Tropos | `spinoffs/barkhorn/brandbook/book/img/honest-ice-habitat.jpg` | 1200 × 1500 | Tropos in Ice in snow at dusk, a lit cabin behind |
+| Tropos | `spinoffs/barkhorn/brandbook/book/img/honest-dust-habitat.jpg` | 1200 × 1500 | Tropos in Dust on a desert floor |
+| Tropos | `spinoffs/barkhorn/brandbook/book/img/honest-amp-ember.jpg` | 1000 × 1250 | Up close: the amplifier's plate through the Ember back (run only beside a whole speaker) |
 
 **The marks** (for a press page or a stockist): `spinoffs/barkhorn/brand/mark/earf-lockup-render.png` (color, on paper),
 `earf-lockup-render-night.png` (on dark), `earf-lockup-black.svg`, `earf-lockup-white.svg`, `earf-globe-render.png`;

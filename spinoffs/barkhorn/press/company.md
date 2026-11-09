@@ -1,6 +1,6 @@
 # EARF: the company
 
-**Hi-fi and light, cast in tinted acrylic, in eight colors from Ember to Smoke.**
+**Hi-fi and light, cast in tinted acrylic, in seven colors, Ember to Fog.**
 
 | | |
 |---|---|
@@ -10,7 +10,7 @@
 | Inquiries | hello@earf.world (trade and stockists: the same address) |
 | What it makes | A horn loudspeaker, lamps and a record player, in tinted cast acrylic |
 | Products | Tropos, a powered horn loudspeaker; Hemisphere, a pendant lamp; Core, a table lamp; Mantle, a record player |
-| Colors | Eight, the same in every product, in spectrum order: 01 Ember, 02 Dust, 03 Acid, 04 Poison, 05 Ice, 06 Haze, 07 Fog, 08 Smoke |
+| Colors | Seven, the same in every product, in spectrum order: 01 Ember, 02 Dust, 03 Acid, 04 Poison, 05 Ice, 06 Haze, 07 Fog (an eighth, Smoke, held for the owner) |
 | The names | Each product is named for a layer of the Earth: the troposphere (the air we live in, from the Greek *tropos*, a turn), a hemisphere, the core, the mantle |
 | How it sells | Made to order; prices set at launch |
 | Where it stands | In development, not yet for sale. Tropos is drawn for making, part by part: more than eighty parts, each with its fabrication drawing. The horn's profile and the cabinet's bass were worked out by simulation before any acrylic was cut. Next, the first pair, built as production will build it; then measured, in a room, by ear and by microphone. The lamps and Mantle come next, the same way |
@@ -18,4 +18,4 @@
 | Founded by | [FOUNDER] |
 
 **The idea in one paragraph.** A wall of tinted acrylic 20 mm thick shows what is inside it. EARF builds everything from that one material, in one
-set of eight tints, so the speaker, the lamps and the record player in a room can match, or not, by choice.
+set of seven tints, so the speaker, the lamps and the record player in a room can match, or not, by choice.

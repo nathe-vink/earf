@@ -11,17 +11,17 @@ not on the site). Images: `images.md`. The same sheets are laid out one to a pag
 ## Boilerplate
 
 **Short (50 words).** EARF is a San Francisco maker of hi-fi and lighting in tinted cast acrylic,
-in eight colors from Ember to Smoke. Its products are named for the layers of the Earth: Tropos, a powered horn
+in seven colors, Ember to Fog. Its products are named for the layers of the Earth: Tropos, a powered horn
 loudspeaker; Hemisphere, a pendant; Core, a table lamp; and Mantle, a record player. earf.world
 
 **Long (100 words).** EARF is a San Francisco maker of hi-fi and lighting in tinted cast acrylic.
-Every product comes in the same eight colors, from Ember to Smoke, so a room can be one color or three. Tropos, the
+Every product comes in the same seven colors, from Ember to Fog, so a room can be one color or three. Tropos, the
 flagship, is a powered horn loudspeaker whose cabinet and horn are both cast in the tint; Hemisphere, a pendant, and
 Core, a cordless table lamp, light the room in the same acrylic; Mantle is a record player whose
 plinth floats over a base lit at its edge. Each piece is made to order. EARF is in development and not yet for sale.
 earf.world
 
-**One line.** Hi-fi and light, cast in tinted acrylic, in eight colors from Ember to Smoke.
+**One line.** Hi-fi and light, cast in tinted acrylic, in seven colors, Ember to Fog.
 
 ## Standing lines for every release
 
