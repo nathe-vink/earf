@@ -5183,3 +5183,22 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   22,30,12 (86/0.61). The beige is gone in both (green glass; the woofer ring dark green); the floor barely moves; the box falls to
   17.7 against the 35-45 target: honestly dark under 25 % canopy. Proposal: keep (ii), then the clearing proxies (c) per my 16:33 spec.
   18:05 sent: (ii) adopted; (c) after the Haze final (rendering now); box 35-45, hue >= 90, sat >= 0.55, frame and floor reported.
+- 18:06 GATE BOOK v20 words + build (wf_0097dc03-eaf, 33 min): words 5 major / 12 minor (pack-pair still prints ABOUT 74 KG;
+  "2 x 125 W"; "things the air holds"; social posts "the material up close" alone; process talk on the cover and in the Color note;
+  lockup-colour.png and British punctuation; PAIRS untraceable; eight-tint alts; FACTS.md sentence; Mantle's two words; design
+  figures without "about"; the horn "the same tinted glass"; Mother EARF "planned"; Parked "entered"/"sent"; "STAGE 1, NOW"; eleven
+  typos; Label spec vs sample; three plate wordings). Build 1 major (anchor jumps land 350-540 px short: six lazy .plate images at
+  0x0 until loaded, two wrong size attributes) and 6 minors.
+- 18:08 sent the brand lane THE v21 PUNCH LIST (32 items, all five lenses merged; saved as rc-review/book-v21-punch.md in my
+  scratch): blockers (the eight-tint card, stationery and library to seven or a pictures-to-come line; "things the air holds" out);
+  majors (the cover leads with the seven; no empty eighth cell; the 08 swatch off the cover strip; process talk and "the owner"
+  out; the Color note rewritten with what's open; COVER rows out (item 12); design figures; 75 W; the Founding Hundred a proposal;
+  Idea B's dates; Mother EARF proposed and standing; pack-pair; social posts; add the passed Mantle day frame and the unlit lamps
+  pair; the anchor jumps); minors 19-32. HOLD the republish until the four flagged talls pass (~19:45), then swap and republish once.
+- 18:06 speaker lane: B FIXED at 34b40201 (r33-speaker-horn): the hero-light camera stands 26 deg round, and the arc started at -20,
+  so its frames ran -46 to +34 and 04 stood 6 deg short of square (its right face 84 deg off the camera: the strip and the chip);
+  SPIN start -14 gives -40 to +40; 04 square; 03/05 show the side faces at 10 deg (~13 % of the front's width). Proofs
+  renders/2026-11-09/barkhorn/arc-fix/ spin-ice-03/-04/-05 + -04-before. For c3: merge 34b40201 (includes cb62d1eb), then
+  rollout.py --base A --horn polished --hold smoke --phase 2 --only spin-ice --tag rc1 --chunks 1-20 (all nine frames fresh).
+  Its next was A (the side rig: a flag shading the lit floor patch the side face mirrors); I re-sent the order (18:09): the flags
+  first. 18:09 GATE ARC PROOFS 03-05 launched (wf_a973e665-cb8; the old 04 as context; the pale 10-deg side faces asked about).
