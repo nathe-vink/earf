@@ -5954,3 +5954,18 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   at 128 samples, plus a Hemisphere-only crop at 4:5; both gated at once; by ~20:50 or the next push). 20:14 sent the site lane: build
   the lamps words-only as the default (the Smoke pair out of the home, /lighting and the 14 lamp views; a deliberate text band; no
   empty stage; og-lamps.jpg out, the lamp cards on the default og; lamps-unlit* banned), one file swap if a picture passes in time.
+- 20:12 HELPERS on 15931e00 (tag tallfix, full size): c2 Acid -> Poison -> Fog (merge 6bae8e7f; ~0.8 h); c3 Ice -> Haze (merge
+  a888ca78), then Fog's turn (ground calibrated: set.color #DFDAD7, corners 211,212,207 against the 213,211,207 target); c4 Ember ->
+  Dust (merge 1632ac39). hiddencast on every shot file: 27 hidden, 0 in frame. All into renders/2026-11-04/barkhorn/rollout/
+  A-polished-tallfix/.
+- 20:15 SPEAKER LANE: THE WIDE'S SWOOSH fixed at 89d95763 (carries 15931e00): a ray-cast puts the stroke's reflections across the whole
+  of the wide's horn lamp, which lights none of the horn's shell in that view (223/114/26 on, 222/114/25 off), so that lamp is off;
+  the stroke 655 pale px (peak 248) -> 54 (the lip's own edge); the key back as it was. The wides render later (not in tonight's push).
+  20:15 sent: next the backdrop band, then the backs, then the close-ups.
+- 20:15 SITE: the RC3.1 list in at r47-site-next 559d06fd (local; r47 pushed through 88997e2a): Dust back (43c91242); the sprites
+  re-packed with a 16 px edge-extruded gutter (tiles' top and bottom rows within 3.3 levels of the PNGs; at 2x no line on frames
+  15-19); Fog's turn out; a frame-0 still at once, the turn from the decode; one turn on phones too; the words W1-W7 (W2 as first
+  sent; the 20:08 addendum not yet read); B1-B3 (Fog's coin round; the 404 wraps at 320; Back after a fragment lands right). Checks:
+  57 x 2 routes, no sideways scroll 320-1536, Lighthouse 98, CLS 0, flags-off byte-identical.
+- 20:16 BRAND: head 2596a79e pushed, every v22 item and pull in (backs, Dust habitat, lamps-unlit out; two Cycles rigs re-rendered);
+  waiting on the fronts. 20:16 sent: the Dust habitat back (the 3/3 no-panel final) in Position's row.
