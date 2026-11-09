@@ -1367,9 +1367,9 @@ def rc3(p, web):
               + '><figcaption>' + m.group(2) + '</figcaption></figure>'
               '<ul class="lamp-names"><li><a href="#hemisphere-ember">Hemisphere</a>, a pendant.</li>'
               '<li><a href="#core-ember">Core</a>, a cordless table lamp.</li></ul></div>' + p.rest[m.end():])
-    # --- 2. home: the Tropos block shows the back (a view the hero doesn't); the Ice habitat mirrored
+    # --- 2. home: the Tropos block shows the amplifier plate (a view the hero doesn't; its rig is clean); the Ice habitat mirrored
     p.sub('<figure class="sound-still"><img src="img/rc/blue-tall.webp" width="1000" height="1250" loading="lazy" alt="Tropos in Ice, its cover off, on a pale seamless">',
-          '<figure class="sound-still"><img src="img/rc/red-back.webp" width="880" height="1100" loading="lazy" alt="Tropos in Ember from behind: the amplifier plate on its back, the horn on four bronze posts">')
+          '<figure class="sound-still"><img src="img/rc/plate.webp" width="1000" height="1250" loading="lazy" alt="Tropos in Ember: the amplifier plate on its back, TROPOS &middot; TR-1">')   # the plate's rig is clean (the audit ac9e5568)
     p.sub('<div class="wrap hab-grid"><figure><img src="img/rc/blue-habitat.webp" width="1200" height="1500" loading="lazy" alt="Tropos in Ice, out in the snow at dusk"></figure>',
           '<div class="wrap hab-grid hab-mirror"><figure><img src="img/rc/blue-habitat.webp" width="1200" height="1500" loading="lazy" alt="' + HAB_ALT['blue'] + '"></figure>')
     p.sub('<p class="beat-line">' + next(line for k, num, name, icon, acr, line, *_ in web.CLOUDS if k == 'blue') + '</p><p class="foot-note"><i class="render">Render</i></p>',
