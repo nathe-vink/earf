@@ -44,7 +44,6 @@ PINNED = {'room.jpg': ('754e16a9852f364fb2ebe8eb752c10ab6bdc0e23', 'renders/2026
           'honest-front-acid.jpg': ('b95319d3995fd290c0dbaf2905a601e6fdbdc149', 'renders/2026-11-04/barkhorn/rollout/A-polished-tallr3/site-front-off-tall-acid.png'),
           'honest-ice-habitat.jpg': ('0f619953f86129dc54183718e2c50419f37ab820', 'renders/2026-11-03/barkhorn/habitats/ice-portrait-1200x1500.jpg'),
           'honest-amp-ember.jpg': ('488fbec9ed6764c60893e0a2798a6feba9ad296f', 'renders/2026-11-04/barkhorn/rollout/A-polished-p2-backfix/amp-plate-ember.png'),
-          'honest-horn-ember.jpg': ('bc8f51b541de8bb3bb5c5a89065c9cdc8d3d796b', 'renders/2026-11-04/barkhorn/rollout/A-polished-p2/horn-back-ember.png'),
           'honest-mantle-day.jpg': ('41232b56c60d1980a5ee3de0dddd8344ffb85fee', 'renders/2026-11-03/barkhorn/mantle-r48/a5-day-ember-2423-c3e.png'),
           'honest-dust-habitat.jpg': ('43c91242f3d29b3da0bb4da4f16ddc0bc30616d1', 'renders/2026-11-03/barkhorn/habitats/dust-portrait-1200x1500-nopanel.jpg'),
           'honest-fog-habitat.jpg': ('aa1ca856b675784ab86ec66f4c93c5caf49b121b', 'renders/2026-11-03/barkhorn/habitats/fog_b-portrait-1200x1500-onesun.jpg')}
