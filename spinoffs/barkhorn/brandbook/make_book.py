@@ -39,7 +39,7 @@ PINNED = {'room.jpg': ('754e16a9852f364fb2ebe8eb752c10ab6bdc0e23', 'renders/2026
           'honest-front-dust.jpg': ('5c8371479a9a2fd63a497c7fc7d4ddb7d6e18ac2', 'renders/2026-11-04/barkhorn/rollout/A-polished-tallr6/site-front-off-tall-dust.png'),
           'honest-front-poison.jpg': ('e7ca2e7154d2fa834051ccc056f8202af82e5211', 'renders/2026-11-04/barkhorn/rollout/A-polished-tallr6/site-front-off-tall-poison.png'),
           'honest-front-ice.jpg': ('48dcfd298e39c6e36477a85a9d42e2ecce747968', 'renders/2026-11-04/barkhorn/rollout/A-polished-tallr6/site-front-off-tall-ice.png'),
-          'honest-front-haze.jpg': ('94b4534a7684c55e0b3420728f09d12dc6c283f3', 'renders/2026-11-04/barkhorn/rollout/A-polished-tallr3/site-front-off-tall-haze.png'),
+          'honest-front-haze.jpg': ('817d2b4fdf521154f32a89bc4f977c7825477e6a', 'renders/2026-11-04/barkhorn/rollout/A-polished-tallr6/site-front-off-tall-haze.png'),
           'honest-front-fog.jpg': ('4e89a8340d5de6efbe02286b639d081432db84f1', 'renders/2026-11-04/barkhorn/rollout/A-polished-tallr6/site-front-off-tall-fog.png'),
           'honest-front-acid.jpg': ('7d741bd64b16731318a1fc724dd5453aefefc66b', 'renders/2026-11-04/barkhorn/rollout/A-polished-tallr6/site-front-off-tall-acid.png'),
           'honest-ice-habitat.jpg': ('0f619953f86129dc54183718e2c50419f37ab820', 'renders/2026-11-03/barkhorn/habitats/ice-portrait-1200x1500.jpg'),
