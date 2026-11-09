@@ -53,6 +53,18 @@ def main():
               f'{np.percentile(L[woof], 10):.0f}-{np.percentile(L[woof], 90):.0f}')
     print(f'red above 0: {100 * (im[spk][:, 0] > 0).mean():.0f} % of the speaker '
           f'(cabinet {100 * (im[cab][:, 0] > 0).mean():.0f} %, horn {100 * (im[horn][:, 0] > 0).mean():.0f} %)')
+    # the lower chamber (the coordinator, 17:57): the cabinet below the woofer's lower edge, down to the bottom panel;
+    # its luma against the wall's beside the speaker (y 0.25-0.45 of the frame, x 0.30-0.70, the speaker masked out),
+    # so a glow from the base would show as the chamber brighter than the wall
+    cone = sel(lambda n: n == 'woofer-cone')
+    if cone.any():
+        y_lo = np.where(cone)[0].max(); y_bot = np.where(spk)[0].max()
+        rows = np.zeros_like(spk); rows[y_lo + 1:y_bot + 1] = True
+        ch_m = cab & rows
+        H, W = spk.shape
+        wm = np.zeros_like(spk); wm[int(0.25 * H):int(0.45 * H), int(0.30 * W):int(0.70 * W)] = True; wm &= ~spk
+        print(f'lower chamber: luma median {np.median(luma[ch_m]):.0f}, p90 {np.percentile(luma[ch_m], 90):.0f}; '
+              f'the wall beside the speaker: luma median {np.median(luma[wm]):.0f}, p90 {np.percentile(luma[wm], 90):.0f}')
     hh, hc = hue(horn); ch, cc = hue(cab)
     print(f'hue: horn {hh:.0f} deg (median RGB {np.round(hc)}), cabinet {ch:.0f} deg (median RGB {np.round(cc)})')
 
