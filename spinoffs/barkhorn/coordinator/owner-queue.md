@@ -4672,3 +4672,42 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   passes, the Haze final, the Acid re-render, then the Poison clearing (if wanted) and the Ember proxies.
 - 16:45 TIME FIX: my 16:4x messages to the site lane (Acid passed), the brand lane, the lamps lane and the biomes lane said
   "16:5x"; date -u read 16:44-16:45 when they went. The log lines are corrected. Rule kept: date -u before every stamp.
+- 16:36 speaker lane: ITEM 16 DONE at 2a356869: bolt circle 374 and Sd 857 in the model since round 36 (aac5542a); three hardware
+  lines in components.json 375 -> 374 (each hole moves 0.5 mm radially; no committed drawing changes); the voice coil drawn at 77
+  (was 56; internals only, next model rebuild). Box re-run (135.6 L net, fb 38, 2 x 113 mm ports 222.7 long, 24.5 V = 75 W into 8
+  ohm, LR4 high-pass 28 Hz): f3 50.9 Hz (47.6 with the old Vas 223 / Sd 805); 4.41 mm peak at 59 Hz vs Xmax 5.75 (23 % margin);
+  without the high-pass 6.34 mm at 30 Hz, 14.6 at 20 Hz vs Xdamage 15.5; port 9.1 m/s (12.8 without). T/S values not re-verified
+  (the sheet can't be fetched from that container). ITEM 2: the Ember wide band traced: light leaving the clear panels' polished
+  bottom edges (edge glow), not the floor, feet or frosted panel; nine crops for the v2 sheets rendering (~30 min), with (c) re-set
+  as the skirt to the floor and the proof frame labelled "test, not an option".
+- 16:36 c2: ALL BACKS at one SHA a1322583abb1b7447cdab1fc1b7b6f475dad35e0 (r33-rollout-c2): rig 15626b64; the six rigB backs
+  39bf3f97; bc8f51b5 (a290fdc6 cherry-picked); site-back-acid (rigB) and horn-back-acid. Back L* Acid 58.6; EARF letters/ground
+  Acid 50.8/23.8. Holding.
+- 16:37 biomes lane (stamped 16:47, queued 16:37): queue Fog final -> save the 51c7eff2 Poison scene -> the trace (three pixels,
+  surfaces, mm of resin, a Fresnel mirror check, 1500 cosine rays from the lining binned by resin crossed) -> passes (multilayer
+  EXR) -> Haze final -> clearing proxies if wanted -> Ember proxies. HDRI above 45°: mostly leaf canopy with 12-13 % open sky;
+  cosine-weighted mean (0.202, 0.229, 0.200), hue 115°, sat 0.13, near neutral. So a gap brings gray-white light, not yellow-green:
+  it can't pull the upper field to hue >= 90° (only green resin can), as my arithmetic said. Waiting for the trace.
+- 16:37 lamps lane: the helper queue at e616c1e3 (launch/lamp-site-queue.md; the 17 CAD meshes on the branch; bpy 5.0 wheel;
+  an AUDIT check line); proposed split c3 = orb-red/orange/amber/green + lamps-orbs, c4 = orb-blue/violet/ice/black; its own
+  container all of Hemisphere (~4 h, said to be running).
+- 16:41 c3: back; container state intact; merged 1bdbf2fc (6fbd688e); hero-light x7 ~5.1 h in 4 chunks (1 ember, dust; 2 acid,
+  poison; 3 ice, haze; 4 fog); chunk 1 from 16:41.
+- 16:41 Mantle lane: ICE NIGHT PROXY 3 at 9d85559e8f6fb59d7ae651a4e172ef491ce39e94 (r48-mantle-design; code 8d753685): pendant 0.22 m
+  to the camera's side and 0.27 m in front of the face, rim 1.60 m, cord and canopy render; camera 1.70 m; oak and plaster toned
+  neutral; a dark rug; window open out of frame (sky 0.6 on the scale); the lamp as the lamps lane builds it (COB 3.2 W, liner
+  11.5 W/m2, 2700 K); +2.6 EV, WB 3700 K. Metrics: cabinet median L 25 (just met); batts pale; cone readable; red 0 on 54 %; the
+  horn 212° / L 12 vs the cabinet 195° (the lane: the deep Ice horn dye, a material question). Variant B (pendant over the horn)
+  darker cabinet (L 20) and fails the edge check. Audit clean (the cob hidden from camera rays only; seen at 0 of 113 points).
+- 16:44 c4: back; merged 1bdbf2fc (a967e10c; 21 commits); front-off-wide x7 in 3 chunks (01 ember, dust, acid from 16:44).
+  Note: its prebuilt .glb models predate product.py geometry in that history (the IEC pins, the rating-plate text): invisible in
+  the wides; maybe visible from the side.
+- 16:4x gates launched: MANTLE ICE NIGHT PROXY 3 + variant B (wf_96255e8d-003; v2 and the day tall Ice as context; the horn's
+  hue judged as a material fact) and c2's ACID BACK + HORN-BACK (wf_1aa80df2-c50; my rig audit clean: rigB as the six; the
+  horn-back's d-wall and d-floor set-only).
+- 16:48 sent: c2 hero-light chunks 3-4 (Ice, Haze; Fog) after merging 1bdbf2fc; then the lamps' Core set from e616c1e3 after my go
+  (worktree and bpy 5.0 venv prepared now, the AUDIT check run, nothing rendered); c3 chunks 1-2 only, then the turns (the Ice arc
+  still waits); the Mantle lane: don't chase the horn with light (item 15b's Ice pour shift, ~20° bluer by day too); the speaker
+  lane: item 16 noted (T/S being checked from here), and for the side rig SHA say whether c4 must rebuild models (IEC pins, the
+  rating plate) and whether any hero-light angle shows the back; the lamps lane: c2 takes all of Core, c3/c4 not free.
+- 16:48 a background check of the FaitalPRO 15PR400-8 T/S figures against the maker's datasheet launched (an agent with web access).
