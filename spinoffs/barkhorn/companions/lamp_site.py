@@ -19,8 +19,9 @@ One photometric scale (lamp_pictures.py, round 13): 0.0065 W of Blender power fo
   Hemisphere: ~575 lm at the COB (crystal.py), 85 % out: ~490 lm down through the mouth (a 0.17 m disc at the mouth,
   92 deg spread, 3.2 W), and the reflector's spill, a quarter (145 lm), out through the liner (its lit face, ruling 3's
   exception: 11.5 W/m2 on average over its 0.041 m2 outer face, both ways, brighter at the crown).
-  Core: ~620 lm, ~560 lm out of the ball (3.6 W), as the lit frosted face (ruling 3's exception): 28.7 W/m2 on its
-  0.0633 m2, both ways, its colour through the whole 9 mm wall.
+  Core: its drawn LED, 200 lm at 1.5 W (out-orb-table bom since 2026-11-01; until round 3 the pictures used round 4's
+  620 lm), ~180 lm out of the ball (1.2 W), as the lit frosted face (ruling 3's exception): 9.3 W/m2 on its 0.0633 m2,
+  both ways, its colour through the whole 9 mm wall.
 The thin shells pass shadow rays at their own transmission (lamp_pictures.thin_shadow), so the lamps light the set.
 """
 import math, os, sys
@@ -29,6 +30,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..', '..'))
 OUT = os.path.join(ROOT, 'renders', '2026-11-09', 'barkhorn', 'lamp-site')
 WLM = 3.2 / 490.0                                     # Blender W per lumen (the one scale)
+CORE_LM = float(os.environ.get('CORE_LM', '200'))     # Core's LED as drawn (bom: 200 lm at 1.5 W)
+CORE_OUT = 0.9                                        # out of the ball (the frost's and the port's losses)
 CCT = int(os.environ.get('LAMP_CCT', '2700'))
 # item 90 (the coordinator's open proposal to the owner, PROPOSAL): each tint at its own colour temperature
 CCT_PER_TINT = {'blue': 5700, 'violet': 4000}         # the rest 2700
@@ -58,10 +61,12 @@ def build(frame, samples, scale):
     kind0 = 'dome' if frame.startswith('lamps-domes') else 'orb' if frame.startswith('lamps-orbs') else frame.split('-')[0]
     # the studio's brightness and the exposure move together, so the paper holds its tone while the lamp, at its real
     # output, comes out of clipping: a brighter studio, one scale
-    K = float(os.environ.get('STUDIO', {'dome': '2.0', 'orb': '8.0', 'lamps': '4.0'}[kind0]))
+    # round 3 (the gate, wf_5760aeac-7cd): Hemisphere's studio x1 with the camera at -2 EV (the lamp up 1 EV against the
+    # studio, the paper held at K x 2^EV = 0.25); Core's studio unchanged, its camera at -5 (b, as round 2) or -5.7 (a)
+    K = float(os.environ.get('STUDIO', {'dome': '1.0', 'orb': '8.0', 'lamps': '4.0'}[kind0]))
     # round 2 (the gate, 2026-11-09, wf_a02e1a2a-b5e): the camera 2 EV down, the studio unchanged, so the faces leave
     # AgX's shoulder and hold their tint; the paper falls to about L 0.5-0.6 (both heroes' papers K x 2^EV match)
-    EVD = {'dome': '-3.0', 'orb': '-5.0'}[kind0]
+    EVD = {'dome': '-2.0', 'orb': '-5.0'}[kind0]
 
     def acrylic(nm, rough, tname, loading=1.0):
         return SC.acrylic_material(nm, [(-1e4, 1e4, tname)], rough, 'polished', loading=loading, scratch=0.0, bond=False)
@@ -69,11 +74,18 @@ def build(frame, samples, scale):
     def shell_T(tint, loading, mm):
         return tuple(math.exp(-a * mm / 1000.0) * 0.96 for a in SC.absorption(tint, loading))
 
-    def thin_shadow(m, T):
+    def thin_shadow(m, T, T_back=None):
+        # round 3 (2026-11-09): T_back, if given, is what a shadow ray meets leaving the shell from inside (Backfacing):
+        # Core A's ball passes a studio light's or the sun's light to its frost only through the dye (T9), and the frost
+        # face's own light out at 0.96 (its emission already carries T9). At 0.96 both ways, A returned undyed light
         nt = m.node_tree; outn = next(n for n in nt.nodes if n.type == 'OUTPUT_MATERIAL')
         prev = outn.inputs['Surface'].links[0].from_node
         lp = nt.nodes.new('ShaderNodeLightPath'); tb = nt.nodes.new('ShaderNodeBsdfTransparent')
         tb.inputs['Color'].default_value = (*T, 1); mx = nt.nodes.new('ShaderNodeMixShader')
+        if T_back is not None:
+            gm = nt.nodes.new('ShaderNodeNewGeometry'); cm = nt.nodes.new('ShaderNodeMix'); cm.data_type = 'RGBA'
+            cm.inputs['A'].default_value = (*T, 1); cm.inputs['B'].default_value = (*T_back, 1)
+            nt.links.new(gm.outputs['Backfacing'], cm.inputs['Factor']); nt.links.new(cm.outputs['Result'], tb.inputs['Color'])
         nt.links.new(lp.outputs['Is Shadow Ray'], mx.inputs[0]); nt.links.new(prev.outputs[0], mx.inputs[1])
         nt.links.new(tb.outputs[0], mx.inputs[2]); nt.links.new(mx.outputs[0], outn.inputs['Surface'])
         return m
@@ -195,13 +207,13 @@ def build(frame, samples, scale):
             objs.append(part('out-orb-table', nm, m, (x, y, z0)))
         zc = z0 + 100.45 * MM
         T9 = shell_T(tname, 1 / 3, 9.0)
-        sphere(f'ball-{tint}', 80.0, (x, y, zc), thin_shadow(acrylic(f'ball-{tint}', 0.0, tname, 1 / 3), (0.96, 0.96, 0.96)), hole_below=20.0)
-        fm = acrylic(f'frost-{tint}', 0.6, tname, 1 / 3)
-        nt = fm.node_tree; outn = next(n for n in nt.nodes if n.type == 'OUTPUT_MATERIAL'); glass = outn.inputs['Surface'].links[0].from_node
-        tl = nt.nodes.new('ShaderNodeBsdfTranslucent'); tl.inputs['Color'].default_value = (0.9, 0.9, 0.9, 1)
-        mx = nt.nodes.new('ShaderNodeMixShader'); mx.inputs[0].default_value = 0.5
-        nt.links.new(glass.outputs[0], mx.inputs[1]); nt.links.new(tl.outputs[0], mx.inputs[2]); nt.links.new(mx.outputs[0], outn.inputs['Surface'])
-        S = 560.0 * WLM / (2 * 0.0633)
+        sphere(f'ball-{tint}', 80.0, (x, y, zc), thin_shadow(acrylic(f'ball-{tint}', 0.0, tname, 1 / 3), (0.96, 0.96, 0.96), T9), hole_below=20.0)
+        # round 3: the frost's diffuse lobe takes the wall's tint (SC.frosted; it was a flat grey: untinted light)
+        fm = SC.frosted(acrylic(f'frost-{tint}', 0.6, tname, 1 / 3))
+        # the drawn LED (out-orb-table bom, since the review of 2026-11-01): 200 lm at 1.5 W, warm-dim 2200/2700 K;
+        # about 90 % of it out of the ball (round 3, 2026-11-09: it was 620 lm at the LED, round 4's figure, three times
+        # the drawn part's output, against the rule "never brighten a lamp past its real output")
+        S = CORE_LM * CORE_OUT * WLM / (2 * 0.0633)
         add_emission(fm, tuple(bb[i] * T9[i] / 0.96 for i in range(3)), S)
         sphere(f'frost-{tint}', 71.0, (x, y, zc), fm, inward=True, hole_below=20.0)
         # the LED's own face under the window (the CAD's Ø26), as in lamp_pictures: seen through the port where the
@@ -234,12 +246,22 @@ def build(frame, samples, scale):
     so = bpy.data.objects.new('sweep', me); bpy.context.scene.collection.objects.link(so); me.materials.append(paper)
     SC.world(color='#C8C4BE', strength=0.02 * K)
     # round 2 (the gate): the studio at 3000 K, and the camera's white point at 3000 K; the lamps stay at 2700 K (spec)
-    key = SC.area('key', (-1.4, -1.6, 1.9), (0, 0, 0), (1.2, 1.2), 60.0 * K, '#FFF4E8'); key.data.shape = 'ELLIPSE'
+    # round 3 (the gate's polish): a larger, higher key, so the two round highlights (key and fill) read as one soft one:
+    # 2.0 m across (was 1.2), its centre higher and more frontal, its power grown with the square of its distance to
+    # hold the light at the lamps
+    kp = (-1.0, -2.1, 2.6); kd0 = (Vector((-1.4, -1.6, 1.9)) - Vector((0, 0.1, 0.5))).length
+    kd = (Vector(kp) - Vector((0, 0.1, 0.5))).length
+    key = SC.area('key', kp, (0, 0, 0), (2.0, 2.0), 60.0 * K * (kd / kd0) ** 2, '#FFF4E8'); key.data.shape = 'ELLIPSE'
     key.data.color = blackbody(3000)
     key.rotation_euler = (Vector((0, 0.1, 0.5)) - key.location).to_track_quat('-Z', 'Y').to_euler()
     fill = SC.area('fill', (1.8, -1.2, 1.2), (0, 0, 0), (1.6, 1.6), 20.0 * K, '#EEF2F8'); fill.data.shape = 'ELLIPSE'
     fill.data.color = blackbody(3000)
     fill.rotation_euler = (Vector((0, 0.1, 0.4)) - fill.location).to_track_quat('-Z', 'Y').to_euler()
+    # round 3 (the gate: 88 % of the dock's pixels at 3 or less): a kicker, low behind and to the right, out of frame
+    # (the audit holds it there), that draws the dock's and the cap's edges; real, unlinked, its own reflection honest
+    kick = SC.area('kicker', (0.9, 0.9, 0.35 if kind0 == 'orb' else 0.9), (0, 0, 0), (0.3, 0.6), 6.0 * K, '#FFF4E8')
+    kick.data.color = blackbody(3000)
+    kick.rotation_euler = (Vector((0, 0, 0.05 if kind0 == 'orb' else 0.62)) - kick.location).to_track_quat('-Z', 'Y').to_euler()
 
     # --- the frames ---------------------------------------------------------------------------------------------
     kind, _, tint = frame.partition('-')
@@ -257,7 +279,8 @@ def build(frame, samples, scale):
         row = ROW[:7] if frame.endswith('-7') else ROW
         for i, t in enumerate(row):
             core(t, (i - (len(row) - 1) / 2) * 0.22, 0.0)
-        cam = ((0.0, -4.4, 0.12 + 4.4 * math.tan(math.radians(15))), (0.0, 0.0, 0.10), 85.0)
+        # round 3 (the gate's base band): the camera at 22 deg, so the docks read from above
+        cam = ((0.0, -4.4, 0.10 + 4.4 * math.tan(math.radians(22))), (0.0, 0.0, 0.10), 85.0)
     elif kind == 'dome':
         W, H = 1600, 2000
         hemisphere(tint, 0.0, 0.50)                    # the rim 500 above the paper: the dome and its pool in one frame

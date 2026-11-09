@@ -38,9 +38,39 @@ def hex_lin(h):
     return [x / 12.92 if x <= 0.04045 else ((x + 0.055) / 1.055) ** 2.4 for x in c]
 
 
+# 2026-11-09, round 3 of the site pictures (the coordinator: ONE MATERIAL PER TINT ACROSS THE BRAND): each tint's dye is
+# the speaker set's (spinoffs/barkhorn/asset/tints-trucast.json at r33-speaker-horn ac9e5568, copied to
+# ../launch/tints-trucast.json): its TruCast code, its chart transmission and its stock code's channel split (Acid on
+# its corrected dye, red at 0.85 of green). As the speaker holds each code's chart figure at each part's own thickness
+# (the cabinet at 20 mm, the horn at 12.7 mm), a lamp's shell passes the chart figure through its own wall: at loading 1
+# the chart figure at 3 mm, as before (Hemisphere's 3 mm tint shell; Core's 9 mm ball at a third). LAMP_DYE=chart keeps
+# the old stand-ins (stack.TINTS).
+SPEAKER_DYE = {'Ember': 'Ember', 'Dust': 'Dust', 'Acid': 'Acid', 'Poison': 'Poison', 'Ice': 'Ice', 'Haze': 'Haze',
+               'Fog': 'Fog', 'Smoke dark': 'Smoke'}
+_SPK = None
+
+
+def _speaker(tint):
+    global _SPK
+    if _SPK is None:
+        import json
+        _SPK = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'launch', 'tints-trucast.json')))
+    e = _SPK[SPEAKER_DYE[tint]]
+    W = (0.2126, 0.7152, 0.0722)
+    lo, hi = 0.0, 50.0                    # the speaker's own fit (product.py): 0.92 x luminance at the depth is the chart's
+    for _ in range(80):
+        k = (lo + hi) / 2
+        L = 0.92 * sum(w * math.exp(-k * sp * 3.0) for w, sp in zip(W, e['split']))
+        lo, hi = (k, hi) if L > e['cabinet_tt_20mm'] / 100 else (lo, k)
+    return [k * sp * 1000.0 for sp in e['split']]       # 1/m
+
+
 def absorption(tint, loading=1.0):
-    """Per-channel absorption, 1/m, of a TruCast stand-in: its hue scaled so the luminance it passes at 3 mm (after the
-    two faces' 8 % reflection) is the chart's figure. `loading` scales the dye (0.25: a quarter-strength custom pour)."""
+    """Per-channel absorption, 1/m: the speaker set's dye (SPEAKER_DYE), or for the rest a TruCast stand-in, its hue
+    scaled so the luminance it passes at 3 mm (after the two faces' 8 % reflection) is the chart's figure. `loading`
+    scales the dye (0.25: a quarter-strength custom pour)."""
+    if tint in SPEAKER_DYE and os.environ.get('LAMP_DYE', 'speaker') != 'chart':
+        return [a * loading for a in _speaker(tint)]
     code, lt, hue = S.TINTS[tint]
     c = hex_lin(hue)
     y = 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]
@@ -224,6 +254,27 @@ def acrylic_material(name, layers, rough, kind='polished', loading=1.0, scratch=
     Lk(r, glass.inputs['Roughness'])
     shader = glass.outputs[0]
     Lk(shader, out.inputs['Surface'])
+    return m
+
+
+def frosted(m, share=0.5, white=0.9):
+    """A bead-blasted face on an acrylic_material: `share` of it a diffuse transmission (Translucent), the rest the rough
+    glass. The translucent lobe takes the glass's own ray-length tint (white on entry, the dye of the path just crossed
+    on exit), times `white`: round 3 of the site pictures (2026-11-09, the coordinator, C4 and the Core A/B critics) found
+    A returning light that never crossed the dye, which was this lobe at a flat grey, dropping the wall's absorption."""
+    nt = m.node_tree; outn = next(n for n in nt.nodes if n.type == 'OUTPUT_MATERIAL')
+    glass = outn.inputs['Surface'].links[0].from_node
+    tl = nt.nodes.new('ShaderNodeBsdfTranslucent')
+    src = glass.inputs['Color'].links[0].from_socket if glass.inputs['Color'].is_linked else None
+    if src is not None:
+        mul = nt.nodes.new('ShaderNodeMix'); mul.data_type = 'RGBA'; mul.blend_type = 'MULTIPLY'
+        mul.inputs['Factor'].default_value = 1.0; mul.inputs['B'].default_value = (white, white, white, 1)
+        nt.links.new(src, mul.inputs['A']); nt.links.new(mul.outputs['Result'], tl.inputs['Color'])
+    else:
+        tl.inputs['Color'].default_value = (white, white, white, 1)
+    mx = nt.nodes.new('ShaderNodeMixShader'); mx.inputs[0].default_value = share
+    nt.links.new(glass.outputs[0], mx.inputs[1]); nt.links.new(tl.outputs[0], mx.inputs[2])
+    nt.links.new(mx.outputs[0], outn.inputs['Surface'])
     return m
 
 

@@ -87,7 +87,10 @@ def build(frame, samples, scale):
         return SC.acrylic_material(nm, [(-1e4, 1e4, which or tname)], rough, 'polished', loading=loading, scratch=scratch,
                                    bond=False)
 
-    def thin_shadow(m, T):
+    def thin_shadow(m, T, T_back=None):
+        # round 3 (2026-11-09): T_back, if given, is what a shadow ray meets leaving the shell from inside (Backfacing):
+        # Core A's ball passes a studio light's or the sun's light to its frost only through the dye (T9), and the frost
+        # face's own light out at 0.96 (its emission already carries T9). At 0.96 both ways, A returned undyed light
         """Round 12: a thin clear shell lets light through to what's behind it; Cycles' shadow rays stop at glass, so a
         lamp shut in a glass ball lit nothing outside (the coordinator's gate, point 7). For shadow rays only, the shell
         passes its own transmission T (per channel); camera and bounce rays still refract. It drops only the shell's
@@ -96,6 +99,10 @@ def build(frame, samples, scale):
         prev = outn.inputs['Surface'].links[0].from_node
         lp = nt.nodes.new('ShaderNodeLightPath'); tb = nt.nodes.new('ShaderNodeBsdfTransparent')
         tb.inputs['Color'].default_value = (*T, 1); mx = nt.nodes.new('ShaderNodeMixShader')
+        if T_back is not None:
+            gm = nt.nodes.new('ShaderNodeNewGeometry'); cm = nt.nodes.new('ShaderNodeMix'); cm.data_type = 'RGBA'
+            cm.inputs['A'].default_value = (*T, 1); cm.inputs['B'].default_value = (*T_back, 1)
+            nt.links.new(gm.outputs['Backfacing'], cm.inputs['Factor']); nt.links.new(cm.outputs['Result'], tb.inputs['Color'])
         nt.links.new(lp.outputs['Is Shadow Ray'], mx.inputs[0]); nt.links.new(prev.outputs[0], mx.inputs[1])
         nt.links.new(tb.outputs[0], mx.inputs[2]); nt.links.new(mx.outputs[0], outn.inputs['Surface'])
         return m
@@ -161,13 +168,9 @@ def build(frame, samples, scale):
         def frosted(m):
             # bead-blasted acrylic diffuses nearly evenly: half of the frosted face a diffuse transmission (round 4;
             # rough glass alone only blurs forward)
-            nt = m.node_tree; outn = next(n for n in nt.nodes if n.type == 'OUTPUT_MATERIAL')
-            glass = outn.inputs['Surface'].links[0].from_node
-            tl = nt.nodes.new('ShaderNodeBsdfTranslucent'); tl.inputs['Color'].default_value = (0.9, 0.9, 0.9, 1)
-            mx = nt.nodes.new('ShaderNodeMixShader'); mx.inputs[0].default_value = float(os.environ.get('FROST_MIX', '0.5'))   # round 6: more forward, a gradient
-            nt.links.new(glass.outputs[0], mx.inputs[1]); nt.links.new(tl.outputs[0], mx.inputs[2])
-            nt.links.new(mx.outputs[0], outn.inputs['Surface'])
-            return m
+            # 2026-11-09 (round 3, the Core A/B critics): the diffuse lobe takes the wall's tint (SC.frosted); at a flat
+            # grey it returned light that never crossed the dye
+            return SC.frosted(m, float(os.environ.get('FROST_MIX', '0.5')))   # round 6: more forward, a gradient
         if var == 'nested':
             # round 8 PROPOSAL (the coordinator, 2026-11-03: the frosted-inside ball reads as milk glass by day and a
             # flat disc lit; launch/core-frost-options.md): a ball in a ball. The outer ball 6 mm tinted cast, polished
@@ -264,7 +267,7 @@ def build(frame, samples, scale):
             # the frost face emits on the wall's inner face, where the wall's absorption is not applied to it: so its
             # colour carries the whole 9 mm wall's transmission, and the outer face passes shadow rays at its surface loss
             T9 = shell_T(tname, 1 / 3, 9.0)
-            sphere('ball', 80.0, zc, thin_shadow(acrylic('ball', 0.0, loading=1 / 3), (0.96, 0.96, 0.96)), hole_below=20.0)
+            sphere('ball', 80.0, zc, thin_shadow(acrylic('ball', 0.0, loading=1 / 3), (0.96, 0.96, 0.96), shell_T(tname, 1 / 3, 9.0)), hole_below=20.0)
             fm = frosted(acrylic('ball-in', inner, loading=1 / 3))
             if night:
                 ntf = fm.node_tree; outf = next(n for n in ntf.nodes if n.type == 'OUTPUT_MATERIAL')
