@@ -5529,3 +5529,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   "Mantle in the studio" still "to come"; Idea 6's "2027"; the Tint Library without a Render caption and its lid's lines refracting
   through the tiles; social.jpg is composited from the fronts (re-shoot it with the swap); the Mantle/lamps pair's empty space.
   Words + build and owner still running; one v22 list when they land.
+- 18:54 biomes: check_alpha.py "ok: grass_bermuda_01 cards cut out"; the Fog foreground with the alpha (545d69a9; the flecks gone;
+  px over L 150 3018 -> 2164, the rest the plate and sunlit blade tips); Acid rain fitted (streaks reach the horn, no rain-free
+  box); the Acid puddle's HDRI turn failed (luma 204 unchanged): the wet edge pulled back next (the two nearest dips 0.4 m left,
+  0.2 m smaller); POISON queued after the Haze proxies: a real white bounce 2.0 x 1.2 m under the lens aimed at the speaker's middle
+  + a real black card 1.2 x 1.5 m 70 deg camera-left, both out of frame; exposures 1.5 and 1.0. Order: Haze base/silk/sun 10
+  (running) -> Poison x2 -> Acid edge -> Acid final.
