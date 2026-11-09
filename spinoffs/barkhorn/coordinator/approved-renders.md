@@ -58,9 +58,9 @@ three times, the Fresnel loss twice). From now on each face carries √0.92 and 
 the old rule are marked; each is re-rendered under the new rule and gated against its passed file before it is swapped.
 | Picture | Source | Gate | Used by |
 |---|---|---|---|
-| Ice, "Out in the snow at dusk." | 0f619953 | PASSED (verified 9 Nov 22:56 under the current rules: tint once, the horn under the rule, angle-dependent Fresnel; within noise, the file stays) | site (home band, /tropos/ice, /colors/ice), Book |
+| Ice, "Out in the snow at dusk." | 0f619953 | PASSED (verified 9 Nov 22:56 under the current rules: tint once, the horn under the rule, angle-dependent Fresnel; within noise, the file stays; gt_audit 23:40: no hidden object, no area lamp: sun and sky only) | site (home band, /tropos/ice, /colors/ice), Book |
 | Dust, "On rippled sand among desert buttes." | r48-biomes 43c91242: renders/2026-11-03/barkhorn/habitats/dust-portrait-1200x1500-nopanel.jpg | PASSED 3/3 (9 Nov; under the current rules 22:56 the table is within noise but the horn's pod changes: re-render with the horn under the rule queued; this file stays until it passes). GROUNDED FLAGGED 9 Nov 23:13: the biomes lane's gate on the re-render saw a 6-8 px band of lit sand between the front edge and the shadow's start (no dark contact line; lifted at phone size), and this file's base is identical; a deeper bed in the sand is in test, then the fixed final is gated against this file, "grounded" first | site, Book |
-| Fog, "In the grass on a hillside, in fog at dawn." | r48-biomes aa1ca856: habitats/fog_b-portrait-1200x1500-onesun.jpg (sha256 9f1fa543...; the glass's Fresnel loss in its shadows: the inside a touch dimmer) | PASSED 2/2 (9 Nov 21:21, photo and skeptic; verified 22:56 under the current rules, within noise) | site, Book ("In fog at dawn."), swapping in tonight's push |
+| Fog, "In the grass on a hillside, in fog at dawn." | PULLED 9 Nov 23:40, see Pulled; a re-render without the fill lamp follows | | none |
 | Acid | r48-biomes 539c3772 | HOLD 1/3 (rain stops at the speaker; dry; dark cabinet) | none |
 | Poison | r48-biomes P8 proxy (b60934b7, the horn under the rule) | PROXY PASSED for the final 2/3 (9 Nov 23:08; exposure 0.75 by all three; watch the horn's crease glint at full samples); the final queued after Dust | none |
 | Ember, Haze | not started (Haze waits on the horn pour) | | none |
@@ -89,6 +89,8 @@ as-drawn variant (the COB alone: a downlight, the shade dark) follows about 23:5
 ## Pulled (do not use)
 | Picture | Why | Pulled |
 |---|---|---|
+| Fog habitat aa1ca856 (fog_b-portrait-1200x1500-onesun.jpg) | a camera-hidden 2 x 2 m area lamp `fill_l` in frame (41 px seen by gt_audit, Blender's own camera; the lane's ray cast had read it out); and a fill lamp at all breaks the habitats' one-sun rule (the sun and the sky's own only) | 9 Nov 23:40 |
+| Poison habitat P8 scene (not yet a final) | a camera-hidden 1.2 x 0.4 m area lamp `litter` in frame (15 px); dropped before the final | 9 Nov 23:40 |
 | Lamps, round 3's orb-row proxies (lamps-orbs-7, a/, b/, c/) | the 4 m key stood in frame with its back to the camera (22.1 % by the mask), hidden from the camera; never approved, never to be used; the rows' key is now 3 m (0 % in frame) | 9 Nov 23:34 |
 | Horn from behind: Ember, Dust, Poison (06b829ce), Ice, Haze, Fog (52ad76ba) | the camera-hidden 'glow' area lamp (0.7 x 0.32 m at (0, 0.66, 1.12), irradiance 1.6, specular 0) standing in frame beside the horn mouth: 16.1 % by the corrected cast, 61,101 px by the mask on a horn-back; re-render without it queued | 9 Nov 23:27 |
 | Turning view, Ember frames 00-04 (52ad76ba) | the same glow lamp in frame (19.5 % by the corrected cast); Ember's turn held whole until the five are replaced | 9 Nov 23:27 |
