@@ -5817,3 +5817,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   0.000 vs 0.279/0.225/0.000); horn-satin roughness 0.25 -> 0.05 everywhere, and every habitat render already passes --horn-rough 0.05.
   So no rebuild; the passed Ice and Fog finals carry no out-of-date material. The per-tint horn lots (density 291-622) vs cabinets
   (50-236) confirm every horn is a deep custom lot. The Acid final started (64 samples); 19:41 sent: let it run, then the Dust final (2).
+- 19:41 BIOMES POISON recompositions (9d4f749b, 8ba13353; nothing hidden in frame): (a) backlit (camera at azimuth 80°, the litter
+  moved): the dark face halved (29 %), the left edge 1.1x, the moodiest (a misty shaft, a trunk behind), but the top band black and the
+  horn 46x; (b) the clearing's sun on the box: the lower box glows green, the floor washes (~135); (c) (b) + a sunlit white card + the
+  black card: the same. Every light leaves one band black, so it suspects an opaque dark part (the amp module or a top rail) behind the
+  front, not the white batt; a camera-only trace of four pixels after the Acid final. If opaque, the measure moves to the batt and ring
+  below, and (a) is the candidate. 19:41 sent: Acid final -> the trace -> the Dust final; I gate Poison after the trace.
