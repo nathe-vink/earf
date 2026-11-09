@@ -663,6 +663,23 @@ def site(frame, tint):
         s['lights']['back'].pop('power_w', None)
     if frame in ('front-off-tall', 'front-off-wide', 'hero-light', 'side'):
         back_edge_card(s, sides=('back', 'left') if frame == 'side' else ('back',))
+    if frame == 'front-off-tall' and 'horn' in s['lights']:
+        # (the honest tall's gate, 2026-11-09 19:32/19:41: the horn lamp, slid out of frame and grown 1.8x, lit the floor
+        # in front, which the front face mirrored as a milky veil, and mirrored in the front and the horn mouth itself.
+        # The same 2.5 x 1.6 m softbox, not grown, at the same irradiance on the horn, raised above the camera clear of
+        # the front face's mirror zone (which reaches about 0.8 m up at the camera's distance), with a 25 deg grid, and a
+        # black cutter under its lower edge so it stops lighting the foreground floor: all out of frame)
+        L = s['lights']['horn']
+        # Dust proxy against the passed tall (half size, same pixels): grid 25 and a 1.4 x 0.7 cutter, wall 0.81 / floor
+        # 0.94 / front saturation 0.65; grid 15, a 2.0 x 1.0 cutter and the frame -0.15 stop, wall 0.76 (0.77) / floor
+        # 0.86 (0.87) / horn L* 50 (54) / front saturation 0.77 (0.70) / centre block 0.80, blue 0.026 linear / bottom
+        # batt 0.85. (The horn lamp off moves the wall and floor 0.01: the rest of the lift is the frame's, hence -0.15)
+        L.update(position=[0.9, -2.3, 2.2], size_m=[2.5, 1.6], spread_deg=15)
+        L.pop('orbit', None)
+        s.setdefault('set', {}).setdefault('flags', []).append(
+            {'center_m': [0.76, -1.91, 1.47], 'size_m': [2.0, 1.0], 'normal': [0.0, 0.0, 1.0], 'color': '#050505',
+             'camera': True, 'glossy': True, 'name': 'horn cutter'})
+        s['render']['exposure'] = round((s['render'].get('exposure') or 0.0) - 0.15, 3)
     if frame in ('front-off-tall', 'front-off-wide', 'hero-light', 'side', 'back'):
         realize_hidden(s)
     # a panel at strength 0 still stands in the set: unseen by the camera and casting no shadow, but in the glossy floor's
@@ -698,7 +715,9 @@ def back_edge_card(s, gap=0.004, h=0.045, sides=('back',)):
     # hidden behind the cabinet from that camera
     import math
     # each card in the speaker's own frame: its centre (x, y), its width, its outward normal (x, y)
-    defs = {'back': ((0.0, 0.2063 + gap), 0.56, (0.0, 1.0)), 'left': ((-0.28 - gap, -0.004), 0.42, (-1.0, 0.0))}
+    # (the back card's +x end 9 mm short, ending 9 mm inside the right side panel's outer face: the tall gate, 2026-11-09,
+    # saw its end as a black nub 2-6 px past the back-right corner at the floor)
+    defs = {'back': ((-0.0045, 0.2063 + gap), 0.551, (0.0, 1.0)), 'left': ((-0.28 - gap, -0.004), 0.42, (-1.0, 0.0))}
     for blk in s.get('products', []):
         for i in blk['instances']:
             x0, y0, z0 = i.get('position', [0, 0, 0]); r = math.radians(i.get('rotate_z', 0))
@@ -925,6 +944,19 @@ def realize_hidden(s, log=None):
     st = s.get('set', {}); out = []
     i0 = s['products'][0]['instances'][0]['position'] if s.get('products') else [0, 0, 0]
     depth = st.get('depth', 1e9) - 0.2; half_w = st.get('width', 1e9) / 2 - 0.2
+    # a lamp-rig flag (lights.flag: a matte card the camera never sees) becomes a set flag, the camera's to see like any
+    # other card, and goes through the same walk below
+    import hiddencast as H0
+    for k, L in list((s.get('lights') or {}).items()):
+        if L.get('type') != 'flag':
+            continue
+        r = H0._lamp_rect(L)
+        if r:
+            st.setdefault('flags', []).append({'center_m': [round(x, 3) for x in r['center_m']], 'size_m': list(r['size_m']),
+                                               'normal': [round(x, 4) for x in r['normal']], 'color': L.get('color', '#000000'),
+                                               'name': k})
+            out.append(f"lamp-rig flag {k}: a set flag")
+        s['lights'].pop(k)
     for key in ('flags', 'bounces'):
         keep = []
         for fl in st.get(key, []) or []:
