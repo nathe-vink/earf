@@ -42,6 +42,8 @@ class Page:
         bad = re.findall(r"(?i)colour|enquir|stockist|microfibre|something in the air|eight things in the air|oldest amplifier"
                          r"|amplifier(?:&rsquo;|\u2019|')s job|pool of its own light|light pools|light under it|on a light|on lights|lit from below|satin", text)
         assert not bad, ('site_v2: retired words', sorted(set(b.lower() for b in bad)))
+        extra = re.findall('(?i)' + self.banned, text) if getattr(self, 'banned', None) else []
+        assert not extra, ('site_v2: retired in the candidate', sorted(set(x.lower() for x in extra)))
 
     def done(self):
         self.check()
@@ -547,7 +549,10 @@ def pages(web):
         import shutil
         shutil.rmtree(os.path.join(web.IMG, 'v2'))
     for path, (h, title, desc, img, alt) in addresses(web).items():
-        if getattr(web, 'RC', False) and path == '/tropos/smoke':     # no picture of today's speaker in Smoke yet
+        if getattr(web, 'RC', False) and path in ('/tropos/smoke', '/colors/smoke'):     # Smoke is not a current color yet
+            f = os.path.join(web.SITE, path.strip('/') + '.html')
+            if os.path.exists(f):
+                os.remove(f)
             continue
         f = os.path.join(web.SITE, path.strip('/') + '.html')
         if not (web.V2 or web.HOME_V2):
@@ -581,15 +586,30 @@ def pages(web):
         assert 'noindex' in page
         os.makedirs(os.path.dirname(f), exist_ok=True)
         open(f, 'w').write(page)
-    if getattr(web, 'RC', False):              # the candidate ships only the pictures its pages load
-        import glob
-        used = set()
-        for f in glob.glob(os.path.join(web.SITE, '**', '*.html'), recursive=True):
-            used |= set(re.findall(r'img/(?:v2|rc)/[\w.-]+', open(f).read()))
-        for d in ('v2', 'rc'):
-            for f in glob.glob(os.path.join(web.IMG, d, '*')):
-                if f'img/{d}/' + os.path.basename(f) not in used:
-                    os.remove(f)
+    if web.V2 or web.HOME_V2:
+        open(os.path.join(web.SITE, '404.html'), 'w').write(NOT_FOUND)
+    elif os.path.exists(os.path.join(web.SITE, '404.html')):
+        os.remove(os.path.join(web.SITE, '404.html'))
+    if getattr(web, 'RC', False):              # the candidate ships only the files its pages load (every deployed file)
+        import glob, shutil
+        if os.path.isdir(os.path.join(web.SITE, 'press')):
+            shutil.rmtree(os.path.join(web.SITE, 'press'))                 # the held press kit: not deployed
+        text = ''.join(open(f).read() for f in glob.glob(os.path.join(web.SITE, '**', '*.html'), recursive=True))
+        used = set(re.findall(r'img/[\w/.-]+\.(?:jpg|jpeg|png|webp|avif|svg|gif|mp4|webm)', text))
+        prefixes = set(re.findall(r'img/([\w/-]*)\$\{', text))           # pictures a script names from a pattern
+        for f in glob.glob(os.path.join(web.IMG, '**', '*'), recursive=True):
+            if os.path.isdir(f):
+                continue
+            rel = 'img/' + os.path.relpath(f, web.IMG).replace(os.sep, '/')
+            if rel not in used and not any(x and rel.startswith('img/' + x) for x in prefixes) and not rel.endswith(('.mp4', '.webm')):   # the opening's film
+                os.remove(f)
+        for d in sorted(glob.glob(os.path.join(web.IMG, '**', ''), recursive=True), reverse=True):
+            if os.path.isdir(d) and not os.listdir(d):
+                os.rmdir(d)
+        left = [os.path.relpath(f, web.SITE) for f in glob.glob(os.path.join(web.SITE, '**', '*'), recursive=True)]
+        bad = [f for f in left if re.search(r'(^press/|img/(?:(?:dome|orb)-|lamps-(?:orbs|domes)|lamp-(?:orb|dome)|hero[.-]|facade|room|macro-|turn-|spin/'
+                                            r'|tt-|ga-|(?:red|orange|amber|green|blue|violet|ice|black)-(?:on|off|studio|back|amp|horn|inside|reel|habitat))|-smoke\.html$)', f)]
+        assert not bad, ('site_v2: rc deploys', bad[:12])
 
 
 def lighten(p, web):
@@ -635,8 +655,8 @@ def lighten(p, web):
     p.sub('<div class="lines"><a class="tile" href="#speakers"><img src=', '<div class="lines"><a class="tile" href="#speakers"><img decoding="async" src=')
 
 
-MANTLE_SRC = 'renders/2026-11-01/barkhorn/mantle-r48/a-studio-ember-2423.png'   # by day, its light off (not the dusk frame: its light falls on the floor)
-MANTLE = {'wide': 'img/v2/mantle-studio-1200.webp', 'full': 'img/v2/mantle-studio.webp', 'tile': 'img/v2/mantle-studio-tile.webp'}
+MANTLE_SRC = 'renders/2026-11-03/barkhorn/mantle-r48/a5-day-ember-2423-c3e.png'   # passed (r48-mantle-design 41232b56, SHOW 3/3); was the 1 Nov board frame,   # by day, its light off (not the dusk frame: its light falls on the floor)
+MANTLE = {'wide': 'img/v2/mantle-day-1200.webp', 'full': 'img/v2/mantle-day.webp', 'tile': 'img/v2/mantle-day-tile.webp'}
 
 
 def mantle(p, web):
@@ -653,9 +673,10 @@ def mantle(p, web):
             im.resize((w_, round(im.height * w_ / im.width)), Image.LANCZOS).save(dst, 'WEBP', quality=82, method=6)
     dst = os.path.join(web.SITE, MANTLE['tile'])                  # 4:5 for the lines' tile, on the deck's middle
     if not os.path.exists(dst) or os.path.getmtime(dst) < os.path.getmtime(src):
-        cw = round(im.height * 4 / 5)
-        x0 = max(0, min(im.width - cw, round(im.width * 0.52 - cw / 2)))
-        im.crop((x0, 0, x0 + cw, im.height)).resize((1200, 1500), Image.LANCZOS).save(dst, 'WEBP', quality=82, method=6)
+        tile = Image.new('RGB', (1200, 1500), (244, 241, 236))     # the whole frame, letterboxed on the paper
+        fr = im.resize((1200, round(im.height * 1200 / im.width)), Image.LANCZOS)
+        tile.paste(fr, (0, (1500 - fr.height) // 2))
+        tile.save(dst, 'WEBP', quality=82, method=6)
     m = re.search(r'<a class="tile" href="#turntable"><img [^>]*>', p.rest)
     if m:
         p.rest = p.rest[:m.start()] + ('<a class="tile" href="#turntable"><img decoding="async" src="' + MANTLE['tile'] +
@@ -732,9 +753,10 @@ def render_word(p):
 # written: /studio (the progress beat, once it is a page), /journal and /press (held until the owner releases them)
 def addresses(web):
     rc = getattr(web, 'RC', False)
-    out = {'/tropos': ('speakers', 'Tropos · EARF', 'A powered horn loudspeaker, cast in tinted acrylic. Eight colors, Ember to Smoke. In development, not yet for sale.',
+    out = {'/tropos': ('speakers', 'Tropos · EARF', ('A powered horn loudspeaker in tinted cast acrylic. Seven colors, Ember to Fog. In development, not yet for sale.' if rc else
+                                                   'A powered horn loudspeaker, cast in tinted acrylic. Eight colors, Ember to Smoke. In development, not yet for sale.'),
                        'img/rc/og-green.jpg' if rc else 'img/og/speaker-green.jpg', 'Tropos in Poison'),
-           '/lighting': ('lighting', 'Lighting · EARF', 'Hemisphere, a pendant, and Core, a cordless table lamp, in the eight colors. In development.',
+           '/lighting': ('lighting', 'Lighting · EARF', 'Hemisphere, a pendant, and Core, a cordless table lamp, in the %s colors. In development.' % ('seven' if rc else 'eight'),
                          'img/rc/og-lamps.jpg' if rc else 'img/og/dome-red.jpg', 'A Core and a Hemisphere in Smoke' if rc else 'Hemisphere in Ember'),
            '/mantle': ('turntable', 'Mantle · EARF', ('A turntable in cast acrylic. In development.' if rc else
                                                      'A turntable, lit from underneath, in the eight colors. In development.'),
@@ -772,10 +794,14 @@ def apply(web, head, rest):
         lighten(p, web)
         mantle(p, web)
         render_word(p)
+        v2_fixes(p, web)
     if web.HOME_V2:
         home_v2(p, web)
     if getattr(web, 'RC', False):
         rc(p, web)
+        rc_fixes(p, web)
+        rc_waves(p, web)
+        p.banned = BANNED_RC
     return p.done()
 
 
@@ -786,6 +812,18 @@ def apply(web, head, rest):
 RC_TALL = 'renders/2026-11-04/barkhorn/rollout/A-polished-fix1/site-front-off-tall-{name}.png'   # r33-rollout-c3:
 # Ember, Dust, Poison, Ice e624e13e; Haze, Fog 3d0b613f; Acid 04d21c5c (on the Acid horn fix). Smoke held.
 RC_KEYS = ['red', 'orange', 'amber', 'green', 'blue', 'violet', 'ice']
+
+
+NOT_FOUND = """<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nothing here · EARF</title><meta name="robots" content="noindex, nofollow"><link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<style>:root { --page: #F4F1EC; --ink: #1C1A18; --muted: #5E5A53 } body { margin: 0; background: var(--page); color: var(--ink);
+font: 18px/1.55 'Instrument Sans', 'Helvetica Neue', Arial, sans-serif } header, main { max-width: 1240px; margin: 0 auto; padding: 20px 16px }
+header a { color: var(--ink); font-weight: 700; letter-spacing: .06em; text-decoration: none } h1 { font-size: clamp(40px, 6vw, 72px); letter-spacing: -0.03em; margin: 18vh 0 24px }
+nav a { color: var(--ink); margin-right: 24px; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px }</style></head>
+<body><header><a href="/">EARF</a></header><main><h1>Nothing here.</h1>
+<nav><a href="/tropos">Tropos</a><a href="/lighting">Lighting</a><a href="/mantle">Mantle</a></nav></main></body></html>
+"""
 
 
 def rc_cards(web):
@@ -800,10 +838,18 @@ def rc_cards(web):
         s = re.sub(r'("image":")[^"]*(")', r'\g<1>' + web.URL + '/' + rel + r'\2', s)
         open(f, 'w').write(s)
     set_img(os.path.join(web.SITE, 'index.html'), 'img/rc/og-home.jpg', 'Tropos in seven colors, Ember to Fog')
+    # the home's title and description: seven colors, a turntable
+    f = os.path.join(web.SITE, 'index.html'); s = open(f).read()
+    desc = ('Horn loudspeakers, lamps and a turntable in tinted cast acrylic, in seven colors from Ember to Fog. '
+            'In development at EARF, not yet for sale.')
+    s = re.sub(r'<title>[^<]*</title>', '<title>EARF · A world of sound, in color.</title>', s, count=1)
+    s = re.sub(r'(<meta (?:name="description"|property="og:description") content=")[^"]*(")', r'\g<1>' + desc + r'\2', s)
+    s = re.sub(r'(<meta property="og:title" content=")[^"]*(")', r'\g<1>EARF · A world of sound, in color.\2', s)
+    open(f, 'w').write(s)
     for f in glob.glob(os.path.join(web.SITE, 's', '*.html')):
         n = os.path.basename(f)[:-5]
         kind, _, col = n.partition('-')
-        if kind in ('press', 'journal') or n == 'speaker-smoke':
+        if kind in ('press', 'journal') or col == 'smoke':                # held pages, and Smoke (not a current color)
             os.remove(f); continue
         if kind in ('speaker', 'color'):
             k = keys.get(col)
@@ -984,3 +1030,296 @@ def rc(p, web):
                      r'|turn-\w+|spin/[\w-]+|hero(?:-1200|-portrait)?|facade[\w-]*|room[\w-]*|macro-\w+|(?:dome|orb)-\w+(?:-card)?|lamps-(?:orbs|domes)[\w-]*|lamp-(?:orb|dome)[\w-]*'
                      r'|tt-[\w-]+|ga-\w+|v2/night-[\w-]+)\.(?:jpg|webp|png)', page)
     assert not old, ('site_v2: rc still loads', sorted(set(old))[:20])
+
+
+def v2_fixes(p, web):
+    """The RC review's fix list, wave 1 (the coordinator, 2026-11-09 17:24): the facts, names, copy and layout that
+    hold for V2 as a whole (the candidate's pictures and its seven colors are in rc_fixes)."""
+    NB = ' '
+    def rx(pattern, new, n_min=1):
+        nonlocal p
+        k = len(re.findall(pattern, p.rest))
+        assert k >= n_min, ('site_v2: v2_fixes', pattern[:60], k)
+        p.rest = re.sub(pattern, new, p.rest)
+    # 3. Tropos's size: horn A is flush (556 outside against the 560 cabinet; the owner's "Flush horn: flush", 1 Nov);
+    # the height is about 1.3 m until the speaker lane gives horn A's CAD height
+    rx(r'<dt>Height</dt><dd>1293[\s ]mm</dd>', f'<dt>Height</dt><dd>About 1.3{NB}m</dd>')
+    rx(r'<dt>Width</dt><dd>625[\s ]mm at the horn, 560[\s ]mm at the cabinet</dd>', f'<dt>Width</dt><dd>560{NB}mm, the horn flush with the cabinet</dd>')
+    p.sub("['Size', '1293 high, 625 wide, 423 deep (mm)']", "['Size', 'About 1300 high, 560 wide, 423 deep (mm)']")
+    # 6. the weight: to follow, on every page
+    rx(r'About 72[\s ]kg; 62[\s ]kg with the horn lifted off', 'To follow')
+    p.rest = p.rest.replace("'To follow with the final horn'", "'To follow'")
+    # 7. the power: 125 W a channel is the FA122 into 4 ohms; Tropos's woofer is 8 ohms (about 75 W)
+    rx(r'Hypex FusionAmp FA122, built in: two channels of 125 W, crossed at 1 kHz in its DSP',
+       'Hypex FusionAmp FA122, built in: 125 W a channel into 4 &Omega;, about 75 W into the 8 &Omega; woofer; crossed at 1 kHz in its DSP')
+    p.sub("['Amplifier', 'Hypex FusionAmp FA122, built in: 2 &times; 125 W, crossed at 1 kHz']",
+          "['Amplifier', 'Hypex FA122, built in: about 75 W into the woofer, crossed at 1 kHz']")
+    rx(r'<li><b>2&thinsp;&times;&thinsp;125<small>W</small></b><span>built in, crossed at 1&nbsp;kHz</span></li>',
+       '<li><b>75<small>W</small></b><span>into the woofer, built in, crossed at 1&nbsp;kHz</span></li>')
+    # 8. no link to a section that isn't there
+    p.rest = p.rest.replace(' <a href="#turn">The horn</a>', '')
+    p.rest = re.sub(r"speaker: 'More on the speaker: [^']*',", "speaker: 'More on the speaker: <a href=\"#spec\">the particulars</a>.',", p.rest)
+    # 9. one name per thing
+    p.sub('<a href="#top">Home</a> / Speakers</p><h1 class="vh">Speakers</h1>', '<a href="#top">Home</a> / Tropos</p><h1 class="vh">Tropos</h1>')
+    p.sub('<a href="#top">Home</a> / Turntable</p><h1 class="vh">Turntable</h1>', '<a href="#top">Home</a> / Mantle</p><h1 class="vh">Mantle</h1>')
+    p.rest = p.rest.replace("lineName: 'Turntable'", "lineName: 'Mantle'")
+    p.sub("num: () => 'Turntable',", "num: () => 'Mantle',")
+    p.sub("P.id === 'speaker' ? c.name : P.title(c)", "P.id === 'speaker' || P.id === 'turntable' ? c.name : P.title(c)")
+    p.rest = p.rest.replace('<p>A record player in the speakers&rsquo; acrylic.', '<p>A turntable in the speakers&rsquo; acrylic.')
+    p.rest = p.rest.replace('<p class="eyebrow">Turntable</p><h2>Mantle.</h2>', '<h2>Mantle.</h2>')
+    # 10. the cover is an option, its fit an open question (item 12): not standard
+    p.rest = re.sub(r'<dt>Cover</dt><dd>[^<]*</dd>', '', p.rest)
+    p.sub("['Cover', `Cloth disc, ${c.cover.toLowerCase()}`],", "['Cover', 'A cloth disc, optional (to follow)'],")
+    p.sub("['off', 'Cover off', c => `Cover off: the 15-inch woofer, the two ports, and the lining showing through the walls.`],",
+          "['off', 'Front', c => `The 15-inch woofer, the two ports, and the lining showing through the walls.`],")
+    # 12. Hemisphere's page overflowed: the buy column's track, and an empty icon slot
+    # 15. the lamps' and Mantle's frames at their own shape, no blurred fill
+    # 16. no counter or thumbnails for a single view; 17. the phone menu's Contact in line
+    p.sub("stage.style.background = ground(v);", "stage.style.background = P.id === 'speaker' ? ground(v) : 'transparent';")
+    p.sub("document.getElementById('g-count').textContent = `${i + 1} / ${list.length} · Render`;",
+          "document.getElementById('g-count').textContent = list.length > 1 ? `${i + 1} / ${list.length} · Render` : 'Render'; "
+          "thumbs.hidden = list.length < 2;")
+    p.css("""
+/* the RC review, wave 1 */
+#p-icon:empty { display: none } aside.buy { min-width: 0 } .pdp-grid, .pdp > .wrap > div { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) }
+.stage .fit { object-fit: contain; max-height: 100%; -webkit-mask-image: none !important; mask-image: none !important }
+.top .contact-link { margin-left: 0 } @media (min-width: 861px) { .top .contact-link { margin-left: 24px } }
+""")
+    # 13. Contact's own title and nav mark; the home's title
+    p.sub('<li class="contact-link"><a href="#contact">Contact</a></li>', '<li class="contact-link"><a href="#contact" data-nav="contact">Contact</a></li>')
+    p.sub("page = 'home'; showMain('home'); document.title = TITLE0;", "page = 'home'; showMain('home'); document.title = h === 'contact' ? 'Contact · EARF' : TITLE0;")
+    p.sub("navAt(h === 'colors' ? 'colors' : null); ask();", "navAt(h === 'colors' ? 'colors' : h === 'contact' ? 'contact' : null); ask();")
+    p.rest = p.rest.replace("const TITLE0 = 'EARF · Tropos';", "const TITLE0 = 'EARF · A world of sound, in color.';")
+    # 19. copy
+    p.rest = p.rest.replace('Hung low over the bar.', 'Hung low over a table.')
+    rx(r'<p>Each cabinet is cast acrylic, 20 mm thick and tinted all the way through\. The lining shows through the walls,\s*so we dressed it in white voile\.</p>',
+       '<p>Each cabinet is 20&nbsp;mm cast acrylic, tinted through. The lining shows through the walls, so we dressed it in white voile.</p>')
+    rx(r' A prototype is there to test the making\.', ' The first pair is made the way every pair will be.')
+    rx(r'Tropos is drawn for making, part by part: more than eighty of them, each with its fabrication\s*drawing\.',
+       'Tropos is drawn for making, part by part, with a drawing for every piece we make.')
+    p.rest = p.rest.replace('a design figure, measured with the first pair', 'to be measured on the first pair')
+
+
+def rc_fixes(p, web):
+    """Wave 1's candidate-only items: seven colors, Smoke not current; the new backs, the Acid horn-back and the plate;
+    Mantle's Ember caption; the lamps' Smoke still to come; no Colors nav until /colors is a page."""
+    import json, os
+    from PIL import Image
+    names = {k: name for k, num, name, *_ in web.CLOUDS}
+    # the new pictures (r33-rollout-c2): rigB backs (39bf3f97; Acid a1322583), Acid's horn-back (a1322583), the plate (488fbec9)
+    R = 'renders/2026-11-04/barkhorn/rollout/'
+    backs = {k: R + ('A-polished-backrig-acid/site-back-acid.png' if k == 'amber' else f'A-polished-backrig/site-back-{names[k].lower()}.png') for k in RC_KEYS}
+    extra = {}
+    for k, src in backs.items():
+        im = Image.open(os.path.join(web.ROOT, src)).convert('RGB'); rel = f'img/rc/{k}-back.webp'
+        im.save(os.path.join(web.SITE, rel), 'WEBP', quality=82); im.resize((168, 210)).save(os.path.join(web.SITE, f'img/rc/{k}-back-th.webp'), 'WEBP', quality=80)
+        extra.setdefault(k, {})['back'] = {'src': rel, 'w': im.width, 'h': im.height, 'th': f'img/rc/{k}-back-th.webp'}
+    im = Image.open(os.path.join(web.ROOT, R + 'A-polished-p2-backrig-acid/horn-back-acid.png')).convert('RGB')
+    im.save(os.path.join(web.SITE, 'img/rc/amber-horn-back.webp'), 'WEBP', quality=82); im.resize((224, 168)).save(os.path.join(web.SITE, 'img/rc/amber-horn-back-th.webp'), 'WEBP', quality=80)
+    extra['amber']['horn-back'] = {'src': 'img/rc/amber-horn-back.webp', 'w': im.width, 'h': im.height, 'th': 'img/rc/amber-horn-back-th.webp'}
+    im = Image.open(os.path.join(web.ROOT, R + 'A-polished-p2-backfix/amp-plate-ember.png')).convert('RGB')
+    im.save(os.path.join(web.SITE, 'img/rc/plate.webp'), 'WEBP', quality=82); im.resize((168, 210)).save(os.path.join(web.SITE, 'img/rc/plate-th.webp'), 'WEBP', quality=80)
+    for k in RC_KEYS:
+        extra[k]['amp'] = {'src': 'img/rc/plate.webp', 'w': im.width, 'h': im.height, 'th': 'img/rc/plate-th.webp', **({} if k == 'red' else {'tag': 'Shown in Ember'})}
+    i = p.rest.index('const D = ') + len('const D = ')
+    j = p.rest.index(', BY = Object', i)
+    D = json.loads(p.rest[i:j])
+    D['clouds'] = [c for c in D['clouds'] if c['k'] != 'black']          # seven: Smoke is not a current color
+    for c in D['clouds']:
+        c['views'].update(extra[c['k']])
+    smoke_tag = 'Shown in Smoke, still to come'
+    for L in D['lamps'].values():
+        L['colours'].pop('black', None)
+        for col in L['colours'].values():
+            col['views']['unlit'] = dict(col['views']['unlit'], tag=smoke_tag)
+            col['card'] = {k: v for k, v in col['card'].items() if k != 'shown'}; col['card']['tag'] = smoke_tag
+        L['facts'] = [[a, b.replace('In all eight colors', 'In all seven colors')] for a, b in L['facts']]
+    D['tt']['colours'].pop('black', None)
+    D['hues'] = D.get('hues')
+    p.rest = p.rest[:i] + json.dumps(D, separators=(',', ':')) + p.rest[j:]
+    # the views' words
+    p.sub("['amp', 'The amplifier', c => `The built-in amplifier, a Hypex FusionAmp FA122: analogue and AES in on XLRs with links out, RCA, S/PDIF, optical, and the mains switch.`],",
+          "['amp', 'The amplifier', c => `The built-in amplifier, from behind.`],")
+    p.sub("['horn-back', 'Horn, behind', c => `The horn from behind, its cap twisted shut.`],",
+          "['horn-back', 'Horn, behind', c => `The horn from behind: its compression driver, on four bronze posts.`],")
+    p.rest = re.sub(r"\['unlit', '([^']*)', \(\) => '[^']*'\]", r"['unlit', '\1', () => 'Hemisphere and Core in Smoke, a color still to come.']", p.rest)
+    p.sub("if (s.shown) stage.appendChild(", "if (s.tag) stage.appendChild(el('span', { class: 'tag' }, s.tag));\n  if (s.shown) stage.appendChild(")
+    p.sub("(im.shown ? `<span class=\"tag\">Shown in ${BY[im.shown].name}</span>` : '')",
+          "(im.shown ? `<span class=\"tag\">Shown in ${BY[im.shown].name}</span>` : im.tag ? `<span class=\"tag\">${im.tag}</span>` : '')")
+    # Mantle: Ember is Ember
+    p.sub("['studio', 'In the studio', c => `${D.tt.name}, shown in Ember. ${c.name} to follow.`],",
+          "['studio', 'In the studio', c => c.k === 'red' ? `${D.tt.name} in Ember.` : `${D.tt.name}, shown in Ember. ${c.name} to follow.`],")
+    p.rest = p.rest.replace('alt="Mantle in Fog"', 'alt="Mantle in Ember"')
+    # Fog has no complement until Smoke is decided; an empty block is not drawn
+    p.sub("comp: [k === 'ice' ? 'black' : 'ice']", "comp: k === 'ice' ? [] : ['ice']")
+    p.sub("function block(id, title, note, cards) {", "function block(id, title, note, cards) {\n  if (!cards.length) return null;")
+    p.sub("  box.replaceChildren(...out);", "  box.replaceChildren(...out.filter(Boolean));")
+    # seven, everywhere
+    p.sub('<h2>Eight colors, Ember to Smoke.</h2>', '<h2>Seven colors, Ember to Fog.</h2>')
+    p.sub('<h2>The same eight, lit from within.</h2>', '<h2>The same seven, lit from within.</h2>')
+    p.rest = p.rest.replace('in the same eight.', 'in the same seven.')
+    p.sub("`Color ${c.num} of 8`", "`Color ${+c.num} of 7`")
+    p.rest = p.rest.replace('In all eight colors, sold singly', 'In all seven colors, sold singly')
+    # the hero spot list, cards and the colors' swatch rows come from D (seven now); the static Smoke rows go
+    p.rest = re.sub(r'<li><a href="#(?:speaker|hemisphere|core|mantle|turntable|color)-smoke"[^>]*>.*?</li>', '', p.rest, flags=re.S)
+    # an old Smoke address goes to its line, not to a page that isn't there
+    p.head = ('<script>(function () { var m = /^#(speaker|dome|orb|hemisphere|core|mantle|turntable|color|colour)-smoke$/.exec(location.hash);'
+              ' if (m) location.replace("/#" + ({ speaker: "speakers", mantle: "turntable", turntable: "turntable", color: "top", colour: "top" }[m[1]] || "lighting")); })()</script>\n') + p.head
+    # 14. no Colors in the nav until /colors is a page
+    p.sub('<li class="wide"><a href="#colors" data-nav="colors">Colors</a></li>', '')
+    p.css("""
+.pcard img, .pcard .tag { grid-area: 1 / 1 }
+.pcard .tag { position: static !important; align-self: end; justify-self: start; margin: 0 0 8px 8px; z-index: 1 }
+""")
+
+
+def rc_waves(p, web):
+    """The RC review, waves 2 and 3 (the coordinator, 2026-11-09 17:27, 17:29): add what's honest, not only take away."""
+    import json, os
+    from PIL import Image
+    names = {k: name for k, num, name, *_ in web.CLOUDS}
+    lines = {k: line for k, num, name, icon, acr, line, *_ in web.CLOUDS}
+    ON_HOLD = 'Hemisphere and Core, switched off. Shown in Smoke, a color on hold.'
+    # --- the passed habitats (biomes: Ice 0f619953, Dust 26493989), 4:5
+    HAB = {'blue': 'renders/2026-11-03/barkhorn/habitats/ice-portrait-1200x1500.jpg',
+           'orange': 'renders/2026-11-03/barkhorn/habitats/dust-portrait-1200x1500.jpg'}
+    for k, src in HAB.items():
+        im = Image.open(os.path.join(web.ROOT, src)).convert('RGB')
+        im.save(os.path.join(web.SITE, f'img/rc/{k}-habitat.webp'), 'WEBP', quality=82)
+        im.resize((168, 210)).save(os.path.join(web.SITE, f'img/rc/{k}-habitat-th.webp'), 'WEBP', quality=80)
+    # --- the hero: the seven, each its own picture, in a row (desk) or a swipeable row (phone)
+    for k in RC_KEYS:
+        im = Image.open(os.path.join(web.SITE, f'img/rc/{k}-tall.webp'))
+        im.crop((round(im.width * 0.14), 0, round(im.width * 0.86), im.height)).save(os.path.join(web.SITE, f'img/rc/{k}-hero.webp'), 'WEBP', quality=82)
+    hw, hh = round(1000 * 0.72), 1250
+    row = ''.join(f'<li><a href="#speaker-{names[k].lower()}"><img data-src="img/rc/{k}-hero.webp"{" fetchpriority=\"high\"" if i < 3 else ""} width="{hw}" height="{hh}" '
+                  f'alt="Tropos in {names[k]}"><span>{names[k]}</span></a></li>' for i, k in enumerate(RC_KEYS))
+    m = re.search(r'<div class="hero-photo has-tall">.*?</div>\n', p.rest, re.S)
+    assert m, 'rc_waves: hero'
+    p.rest = p.rest[:m.start()] + f'<div class="hero-photo hero-row"><ul aria-label="Tropos in seven colors">{row}</ul></div>\n' + p.rest[m.end():]
+    p.sub('<span>Hi-fi and lighting, designed in San Francisco.</span>', '<span>Hi-fi and lighting in cast acrylic.</span>')
+    # the preload: the row's first frames, not the old sheet
+    where = 'head' if "add('img/rc/hero-portrait.webp'" in p.head else 'rest'
+    p.sub("if (home) { add('img/rc/hero-portrait.webp', null, '(max-width: 700px)'); add(null, 'img/rc/hero-1200.webp 1200w, img/rc/hero.webp 2400w', '(min-width: 701px)'); }",
+          "if (home) { add('img/rc/red-hero.webp'); add('img/rc/orange-hero.webp'); }", where=where)
+    # --- data: the habitats in their galleries; Tropos's gallery in 4:5 at its own shape; lamps' and Mantle's alts
+    i = p.rest.index('const D = ') + len('const D = ')
+    j = p.rest.index(', BY = Object', i)
+    D = json.loads(p.rest[i:j])
+    for c in D['clouds']:
+        v = c['views']
+        v['off'] = {'src': f"img/rc/{c['k']}-tall.webp", 'w': 1000, 'h': 1250, 'th': f"img/rc/{c['k']}-thumb.webp",
+                    'card': {'src': f"img/rc/{c['k']}-card.webp", 'w': 625, 'h': 1250}}
+        if c['k'] in HAB:
+            v['habitat'] = {'src': f"img/rc/{c['k']}-habitat.webp", 'w': 1200, 'h': 1500, 'th': f"img/rc/{c['k']}-habitat-th.webp"}
+            c['hab'] = v['habitat']['src']
+    for L in D['lamps'].values():
+        for col in L['colours'].values():
+            col['views']['unlit'] = {k: x for k, x in col['views']['unlit'].items() if k != 'tag'}
+            col['card'] = dict(col['card'], tag='Shown in Smoke, a color on hold', alt='A Core and a Hemisphere in Smoke, switched off')
+    for k, col in D['tt']['colours'].items():
+        col['views']['studio'] = {'src': MANTLE['full'], 'w': 1800, 'h': 1200, 'th': MANTLE['wide']}
+        col['card'] = dict(col['card'], alt='Mantle in Ember' if k == 'red' else 'Mantle, shown in Ember')
+    p.rest = p.rest[:i] + json.dumps(D, separators=(',', ':')) + p.rest[j:]
+    p.sub("a.querySelector('img').alt = Pr.title(c);", "a.querySelector('img').alt = im.alt || Pr.title(c);")
+    p.rest = re.sub(r"\['unlit', '([^']*)', \(\) => '[^']*'\]", "['unlit', 'Off', () => '" + ON_HOLD + "']", p.rest)
+    p.rest = p.rest.replace('Hemisphere and Core in Smoke, a color still to come.', ON_HOLD)
+    # the habitat's view words
+    p.rest = re.sub(r"\['habitat', '[^']*', c => [^\]]*\]", "['habitat', 'Out', c => `${c.name}. ${c.line}`]", p.rest, count=1)
+    # --- 1. no pairing grids until the lamps and Mantle are pictured in the colors; a color's page shows Tropos only
+    p.sub("company(document.getElementById('p-company'), k, P.id, true);", "/* the pairings wait for pictures in the colors */")
+    p.rest = p.rest.replace("document.getElementById('c-products').replaceChildren(...PRODUCTS.filter(Pr => Pr.views(k)).map(Pr => pcard(Pr, k)));",
+                            "document.getElementById('c-products').replaceChildren(...PRODUCTS.filter(Pr => Pr.id === 'speaker' && Pr.views(k)).map(Pr => pcard(Pr, k)));")
+    p.rest = re.sub(r"company\(document\.getElementById\('c-company'\)[^;]*;", "/* the pairings wait for pictures */", p.rest)
+    # the color page: its habitat, where one has passed; no Colors in the crumb
+    p.sub('<p class="crumbs"><a href="#top">Home</a> / <a href="#colors">Colors</a> / <span id="c-crumb"></span></p>',
+          '<p class="crumbs"><a href="#top">Home</a> / <span id="c-crumb"></span></p>')
+    p.sub('<ul class="swatches" id="c-swatches" aria-label="Color"></ul>',
+          '<ul class="swatches" id="c-swatches" aria-label="Color"></ul>\n    <figure class="c-hab" id="c-hab" hidden><img alt=""><figcaption><i class="render">Render</i></figcaption></figure>')
+    p.sub("document.getElementById('c-line').textContent = c.line;",
+          "document.getElementById('c-line').textContent = c.line;\n  { const f = document.getElementById('c-hab'); f.hidden = !c.hab; if (c.hab) { const im = f.querySelector('img'); im.src = c.hab; im.alt = `Tropos in ${c.name}, out in its element`; } }")
+    # --- home: "Tropos." links to Tropos; Ice in its element after it; one caveat
+    p.sub('<div class="sound-words"><h2>Tropos.</h2>', '<div class="sound-words"><h2><a href="#speakers">Tropos.</a></h2>')
+    band = (f'\n  <section class="band beat hab-band" id="ice-band"><div class="wrap hab-grid"><figure><img src="img/rc/blue-habitat.webp" width="1200" height="1500" loading="lazy" '
+            f'alt="Tropos in Ice, out in the snow at dusk"></figure><div><h2><a href="#color-ice">Ice.</a></h2><p class="beat-line">{lines["blue"]}</p>'
+            f'<p class="foot-note"><i class="render">Render</i></p></div></div></section>')
+    k0 = p.rest.index('</section>', p.rest.index('<section class="band sound" id="sound">')) + len('</section>')
+    p.rest = p.rest[:k0] + band + p.rest[k0:]
+    p.rest = re.sub(r' The design figures on these pages give way to\s*measured ones\.', '', p.rest)
+    p.sub('<a href="#progress">Progress</a>', '<a href="#progress">Drawn to be made</a>')
+    # --- one price line
+    p.sub('<p class="price">Priced at launch <span id="p-unit">&middot; each pair made to order</span></p>',
+          '<p class="price">Price on request. <span id="p-unit">Each pair is made to order.</span></p>')
+    p.sub("document.getElementById('p-unit').innerHTML = `&middot; ${P.unit}`;", "document.getElementById('p-unit').innerHTML = P.unit;")
+    p.sub("unit: 'each pair made to order',", "unit: 'Each pair is made to order.',")
+    p.rest = p.rest.replace("unit: 'made to order',", "unit: 'Each is made to order.',")
+    p.rest = p.rest.replace('Everything is made to order, so we quote rather than list. Prices and lead times from launch. Designers, dealers\n      and press: the same address.',
+                            'Everything is made to order, so we quote rather than list. Designers, dealers and press: the same address.')
+    # --- /tropos: the card's picture and name are the link; no "Up close"
+    p.rest = re.sub(r'<a class="more" href="#speaker-[a-z]+">Up close</a>', '', p.rest)
+    p.rest = re.sub(r'<h3 class="named">([A-Za-z]+)<span', lambda m: f'<h3 class="named"><a href="#speaker-{m.group(1).lower()}">{m.group(1)}</a><span', p.rest)
+    # --- /lighting: the pair once, large; no lit headline
+    p.sub('<h2>The same seven, lit from within.</h2>', '<h2>Two lamps in the speakers&rsquo; acrylic.</h2>')
+    p.rest = re.sub(r'<a class="ph" href="#(?:hemisphere|core)-ember"><img [^>]*></a>', '', p.rest)
+    p.rest = re.sub(r'<div class="lamp-duo solo"><figure><img src="img/lamps-unlit-800\.jpg"[^>]*><figcaption>Off, in Smoke\.</figcaption></figure>',
+                    '<div class="lamp-duo solo lamps-pair"><figure><img src="img/lamps-unlit.webp" srcset="img/lamps-unlit-800.jpg 800w, img/lamps-unlit.webp 1600w" '
+                    'sizes="(max-width: 860px) 100vw, 560px" width="1600" height="2000" loading="lazy" alt="A Core and a Hemisphere in Smoke, switched off">'
+                    f'<figcaption>{ON_HOLD} <i class="render">Render</i></figcaption></figure>', p.rest)
+    p.rest = p.rest.replace('<figcaption class="wrap">Hemisphere and Core, switched off. <i class="render">Render</i></figcaption>',
+                            f'<figcaption class="wrap">{ON_HOLD} <i class="render">Render</i></figcaption>')
+    # --- /mantle: one full-width picture, the words beside it
+    p.rest = re.sub(r'<a class="ph" href="#mantle-ember"><img [^>]*></a>',
+                    f'<a class="ph mantle-wide" href="#mantle-ember"><img src="{MANTLE["full"]}" srcset="{MANTLE["wide"]} 1200w, {MANTLE["full"]} 1800w" '
+                    'sizes="(max-width: 860px) 100vw, 62vw" width="1800" height="1200" loading="lazy" alt="Mantle in Ember"></a>', p.rest)
+    # --- Tropos's size: depth 420 with the horn flush
+    p.rest = re.sub(r'423[\s ]mm overall, 420[\s ]mm at the cabinet', '420 mm', p.rest)
+    p.rest = p.rest.replace("'About 1300 high, 560 wide, 423 deep (mm)'", "'About 1300 high, 560 wide, 420 deep (mm)'")
+    p.css("""
+/* the RC review, waves 2 and 3 */
+.hero { justify-content: flex-start; height: auto !important; min-height: 0 !important; padding-bottom: clamp(32px, 6vh, 64px) !important }
+.hero-title .wrap { padding-block: clamp(20px, 4vh, 48px) 0 }
+.hero-pic { width: 100% !important; position: static }
+.hero-title { position: static !important }
+.hero-row { aspect-ratio: auto !important; background: none !important; overflow: visible; margin-top: clamp(16px, 4vh, 48px) }
+.hero-row ul { list-style: none; margin: 0 auto; padding: 0 16px; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px }
+.hero-row a { display: grid; gap: 8px; color: var(--ink); text-decoration: none; font-size: 15px }
+.hero-row img { width: 100%; height: auto; aspect-ratio: 72 / 125; object-fit: cover; display: block }
+.hero-row a:hover span { text-decoration: underline; text-underline-offset: 4px }
+@media (max-width: 860px) {
+  .hero { height: auto; min-height: 0 }
+  .hero-row ul { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 62vw; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 8px }
+  .hero-row ul::-webkit-scrollbar { display: none } .hero-row li { scroll-snap-align: start }
+  .hero-row img { max-height: none }
+}
+.sound-words h2 a, .hab-band h2 a { color: inherit; text-decoration: none } .sound-words h2 a:hover, .hab-band h2 a:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px }
+.hab-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 48px; align-items: end }
+.hab-grid figure { margin: 0 } .hab-grid img { display: block; width: 100%; height: auto }
+.hab-grid h2 { font-size: clamp(48px, 7vw, 104px) }
+@media (max-width: 860px) { .hab-grid { grid-template-columns: minmax(0, 1fr); gap: 20px } }
+.c-hab { margin: 28px 0 0; max-width: 560px } .c-hab img { display: block; width: 100%; height: auto } .c-hab figcaption { padding-top: 8px }
+/* galleries: a 4:5 picture column beside the particulars */
+@media (min-width: 1001px) { .pdp { grid-template-columns: minmax(0, 520px) minmax(0, 1fr) !important; justify-content: start } }
+.stage { aspect-ratio: 4 / 5 !important }
+/* /tropos: seven cards, the last row centered; on the phone, the seventh across */
+.cards { display: flex !important; flex-wrap: wrap; justify-content: center }
+.cards > .card { flex: 0 1 calc((100% - 3 * 18px) / 4) }
+@media (max-width: 860px) { .cards > .card { flex-basis: calc((100% - 18px) / 2) } .cards > .card:last-child:nth-child(odd) { flex-basis: 100% } }
+.card .named a { color: inherit; text-decoration: none }
+/* /lighting: the pair once */
+.lamps .ptile { grid-template-columns: minmax(0, 1fr) !important }
+.lamps-pair { grid-template-columns: minmax(0, 560px) minmax(0, 1fr) !important; align-items: end }
+.lamps-pair img { width: 100%; height: auto; display: block }
+@media (max-width: 860px) { .lamps-pair { grid-template-columns: minmax(0, 1fr) !important } }
+/* /mantle: the picture wide */
+.tt-duo { grid-template-columns: minmax(0, 1fr) !important } .tt-duo .ptile { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) !important; align-items: end }
+.mantle-wide img { width: 100%; height: auto; aspect-ratio: 3 / 2 !important; object-fit: cover }
+@media (max-width: 860px) { .tt-duo .ptile { grid-template-columns: minmax(0, 1fr) !important } }
+/* the lamps beat: picture and caption aligned, at most 75vh */
+.lamps-day img { max-height: 75vh; width: auto !important; max-width: 100%; margin: 0 }
+.lamps-day { display: grid; justify-items: start; padding-inline: max(16px, calc((100vw - 1240px) / 2 + 16px)) } .lamps-day figcaption { padding-inline: 0 !important }
+/* Fog's swatch: a circle with a hairline */
+.swatches a, .swatches .coin-dot { border-radius: 50% } .swatches .coin-dot[style*="--i:6"] { box-shadow: inset 0 0 0 1px #9A958D }
+""")
+
+
+BANNED_RC = r'eight colors|to Smoke|Smoke as current'
