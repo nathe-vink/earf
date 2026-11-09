@@ -87,9 +87,10 @@ def _records():
                     'color': cols[i % len(cols)], 'rough': 0.6})
         x += 0.0062
     for i in range(4):
-        # proxy 8: the stack in dark sleeves (the critics: its pale top read as a slab at luma 154 under the lamp)
-        out.append({'name': f'stack{i}', 'center': [0.80, -0.32, top + 0.0025 + 0.005 * i], 'size': [0.315, 0.315, 0.005],
-                    'color': ('#1E1C1A', '#26221F', '#1F2328', '#2A2622')[i], 'rough': 0.7})
+        # proxy 8: the stack in dark sleeves (the critics: its pale top read as a slab at luma 154 under the lamp); after
+        # proxy 8 (rim 1.10, the stack still luma 148, its sheen): rough 1.0 and 0.45 further along, out of the lamp's lobe
+        out.append({'name': f'stack{i}', 'center': [1.25, -0.32, top + 0.0025 + 0.005 * i], 'size': [0.315, 0.315, 0.005],
+                    'color': ('#1E1C1A', '#26221F', '#1F2328', '#2A2622')[i], 'rough': 1.0})
     return out
 
 
