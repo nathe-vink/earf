@@ -49,7 +49,9 @@ SETS = {
     'acid_b': {'product.instances.0.rotate_z': -8.0, 'lights.rim.receivers': None, 'sun.azimuth_deg': 120.0,
                'sky.rotation_deg': 292.9, 'render.exposure': 0.65, 'sun.irradiance': 35.0,
                # the gate on cc380fab (18:42): the storm neutral, the speaker the only yellow (a grey storm sun, no tint)
-               'sun.color': '#E6E3DA', 'render.white_balance_tint': 0.0,
+               # the lamp in the sky's own sun colour (hdri_sun: #FECC8B; a grey lamp under a warm-sunned sky is two suns' worth
+               # of inconsistency, the coordinator 19:45); the white balance tint at 0 stays
+               'sun.color': '#FECC8B', 'render.white_balance_tint': 0.0,
                # the near-white water in the bottom-right corner (L 205): the two dips nearest the camera 0.4 m left and
                # 0.2 m smaller, so that corner is wet rock and the channel under the speaker's reflection stays water
                'set.props.0.dips': [[0.0, 0.0, 1.1, 0.16], [-0.2, -1.2, 1.2, 0.2], [-0.95, -2.7, 1.3, 0.22],
@@ -83,7 +85,10 @@ SETS = {
               # (and the camera's white balance at 5400 K, the coordinator's (c): the smallest that brings the cut edges'
               # medians to +5 b* or below; 5800 left them at +6)
               'render.white_balance_k': 5400,
-              'product.instances.0.rotate_z': -5.0, 'sun.azimuth_deg': 110.0, 'sun.color': '#FFFFFF', 'camera.position': [-1.0072, -5.7119, 0.85], 'camera.shift_y': 0.18,
+              'product.instances.0.rotate_z': -5.0, 'sun.azimuth_deg': 110.0,
+              # one sun (the audit, 2026-11-09): the sky turned so its own sun sits at the lamp's 110 deg (hdri_sun at 304.2:
+              # az 110.0, el 5.8), the lamp in that sun's colour; before, the sky's sun shone from -150 and a white lamp from 110
+              'sky.rotation_deg': 304.2, 'sun.color': '#FEEA98', 'camera.position': [-1.0072, -5.7119, 0.85], 'camera.shift_y': 0.18,
               'camera.fstop': 4.0},
     # Poison under the canopy: light through a canopy gap from the camera side and above (the opaque lining batts block
     # any light from behind: a sunfleck from the back-left left the cabinet at L 2)
@@ -98,7 +103,8 @@ SETS = {
     # under it (in earlier commits) is gone. The mist casts shadows (--real-set, below)
     # (and option (a), the coordinator 01:16: the canopy a quarter open, its gaps real holes in the geometry (habitat.py
     # --canopy-open), the sunfleck through one of the shot's own holes; the camera +1.5 EV for a forest floor)
-    'poison_g5': {'product.instances.0.rotate_z': 9.0, 'lights.litter.specular': 1.0, 'render.exposure': 0.75,
+    'poison_g5': {'product.instances.0.rotate_z': 9.0, 'sky.rotation_deg': 124.1,   # the sky's bright patch over the lamp (hdri_sun: -100.0, 43.3)
+                  'lights.litter.specular': 1.0, 'render.exposure': 0.75,
                   # the litter fill off the front face's mirror line (at -5 the face mirrored it: the beige upper cabinet)
                   'lights.litter.orbit.azimuth_deg': -40.0,
                   # the moss patch in the foreground sun fleck read as a hole (the gate, 18:58; the sun probe: moss_01 at 0.5, -2.5)
