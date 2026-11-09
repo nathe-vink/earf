@@ -176,9 +176,12 @@ def build(frame, samples, scale):
             # halves are joined round it
             # (round 9: no hairline wear here; at 1024 samples the light bouncing between the two balls drew it as a
             # crumpled caustic net over the core)
-            Tb = shell_T(tname, 1 / 3, 3.0)        # each face carries half the 6 mm wall's absorption
-            sphere('ball', 80.0, zc, thin_shadow(acrylic('ball', 0.0, loading=1 / 3, scratch=0.0), Tb))
-            sphere('ball-in', 74.0, zc, thin_shadow(acrylic('ball-in', 0.0, loading=1 / 3, scratch=0.0), Tb), inward=True)
+            # (2026-11-09, the gate: B put out 1.36x A's light, its 6 mm outer carrying less dye than A's 9 mm wall: the
+            # same dye path as A, 0.5 of the chip a mm over 6 mm)
+            bl = float(os.environ.get('B_LOAD', '0.5'))
+            Tb = shell_T(tname, bl, 3.0)        # each face carries half the 6 mm wall's absorption
+            sphere('ball', 80.0, zc, thin_shadow(acrylic('ball', 0.0, loading=bl, scratch=0.0), Tb))
+            sphere('ball-in', 74.0, zc, thin_shadow(acrylic('ball-in', 0.0, loading=bl, scratch=0.0), Tb), inward=True)
             # round 9 (the gate: the Ø90 core too small, "an LED orb in a black bubble"): Ø120, its center 12 below the
             # outer's, on a short spacer ring on the grommet; a 13 gap at its equator
             ri = float(os.environ.get('CORE_IN_R', '60.0')); zi = zc - float(os.environ.get('CORE_IN_DZ', '10.0')) * MM
@@ -395,7 +398,9 @@ def build(frame, samples, scale):
         k = 2.0 ** (0.6 - ev)                     # round 9: one evening room for the family, the same fill at each exposure
         # round 14 (the coordinator: the dome must plainly be the room's main light): the room's fill scaled down until the
         # lamp gives most of the light on the wall near it (measured: lamp only against all lights)
-        k *= float(os.environ.get('ROOM_K', '0.05'))
+        # (2026-11-09, the gate: Core's room from 5 % to 15-20 %, so the dock and table read; Hemisphere's as gated)
+        rk = float(os.environ.get('ROOM_K', '0.18' if prod == 'core' else '0.05'))
+        k *= rk
         # round 11 (the coordinator's rulings 1 to 3, 2026-11-03: nothing in the room hidden from the glass's
         # reflections or from view through it; no light linking): the night room is a flat, dim evening ambient (no
         # dusk HDRI, so no daylight windows to mirror), one large soft fill that the glass mirrors as it is, and no
@@ -403,27 +408,28 @@ def build(frame, samples, scale):
         SC.world(color=os.environ.get('NIGHT_SKY', '#8A96B0'), strength=float(os.environ.get('NIGHT_AMB', '0.15')) * k)
         fill = SC.area('fill', (1.4, -2.2, 1.9), (55, 0, 32), tuple(float(v) for v in os.environ.get('FILL_SIZE', '5.0,3.4').split(',')), float(os.environ.get('NIGHT_FILL', '3.5')) * k, '#8FA0BE')
         fill.data.shape = 'ELLIPSE'               # a soft round room highlight in the glass
+        # (2026-11-09, the gate: one real source reflected in Core's glossy outer ball: the dusk window too)
+        # round 12 (the gate: round 10's strip read as a hard white bar, a lit tube, in a dark room): instead a dim
+        # dusk window far off to the left, broad and tall, a real light, so the dome shows one long soft reflection
+        from mathutils import Vector
+        # (round 12: an area light's edge is hard in the glass; so a sheer curtain lit by the dusk outside, an emitting
+        # surface brightest at its middle and fading to its edges, out of frame to the left)
+        # round 14 (ruling 4: light reaches the subject only through a real opening): the dusk comes in through two
+        # real openings, each with a sheer curtain in it, lit by a dim dusk sky outside: the front part of the left
+        # wall (the day's window), and a narrow one in the back wall whose curtain shows at the frame's left
+        sheer = bpy.data.materials.new('sheer'); sheer.use_nodes = True; nts = sheer.node_tree; nts.nodes.clear()
+        os_ = nts.nodes.new('ShaderNodeOutputMaterial'); tl_ = nts.nodes.new('ShaderNodeBsdfTranslucent')
+        tp_ = nts.nodes.new('ShaderNodeBsdfTransparent'); mx_ = nts.nodes.new('ShaderNodeMixShader')
+        tl_.inputs['Color'].default_value = (0.86, 0.87, 0.88, 1); tp_.inputs['Color'].default_value = (0.55, 0.55, 0.55, 1)
+        mx_.inputs[0].default_value = 0.35
+        nts.links.new(tl_.outputs[0], mx_.inputs[1]); nts.links.new(tp_.outputs[0], mx_.inputs[2])
+        nts.links.new(mx_.outputs[0], os_.inputs['Surface'])
+        dW = float(os.environ.get('DUSK_W', '20')) * rk
+        gobo(-1.3, -1.3, -0.35, 0.75, 2.4, panes=(1, 2))
+        SC.plane('sheer-left', (0.95, 1.65), (-1.27, -0.825, 1.575), (90, 0, 90), sheer)
+        dl = SC.area('dusk-left', (-1.75, -0.825, 1.575), (0, 0, 0), (1.0, 1.7), dW, '#9FB2D6')
+        dl.rotation_euler = (Vector((0.0, -0.825, 1.575)) - dl.location).to_track_quat('-Z', 'Y').to_euler()
         if prod != 'core':
-            # round 12 (the gate: round 10's strip read as a hard white bar, a lit tube, in a dark room): instead a dim
-            # dusk window far off to the left, broad and tall, a real light, so the dome shows one long soft reflection
-            from mathutils import Vector
-            # (round 12: an area light's edge is hard in the glass; so a sheer curtain lit by the dusk outside, an emitting
-            # surface brightest at its middle and fading to its edges, out of frame to the left)
-            # round 14 (ruling 4: light reaches the subject only through a real opening): the dusk comes in through two
-            # real openings, each with a sheer curtain in it, lit by a dim dusk sky outside: the front part of the left
-            # wall (the day's window), and a narrow one in the back wall whose curtain shows at the frame's left
-            sheer = bpy.data.materials.new('sheer'); sheer.use_nodes = True; nts = sheer.node_tree; nts.nodes.clear()
-            os_ = nts.nodes.new('ShaderNodeOutputMaterial'); tl_ = nts.nodes.new('ShaderNodeBsdfTranslucent')
-            tp_ = nts.nodes.new('ShaderNodeBsdfTransparent'); mx_ = nts.nodes.new('ShaderNodeMixShader')
-            tl_.inputs['Color'].default_value = (0.86, 0.87, 0.88, 1); tp_.inputs['Color'].default_value = (0.55, 0.55, 0.55, 1)
-            mx_.inputs[0].default_value = 0.35
-            nts.links.new(tl_.outputs[0], mx_.inputs[1]); nts.links.new(tp_.outputs[0], mx_.inputs[2])
-            nts.links.new(mx_.outputs[0], os_.inputs['Surface'])
-            dW = float(os.environ.get('DUSK_W', '20')) * float(os.environ.get('ROOM_K', '0.05'))
-            gobo(-1.3, -1.3, -0.35, 0.75, 2.4, panes=(1, 2))
-            SC.plane('sheer-left', (0.95, 1.65), (-1.27, -0.825, 1.575), (90, 0, 90), sheer)
-            dl = SC.area('dusk-left', (-1.75, -0.825, 1.575), (0, 0, 0), (1.0, 1.7), dW, '#9FB2D6')
-            dl.rotation_euler = (Vector((0.0, -0.825, 1.575)) - dl.location).to_track_quat('-Z', 'Y').to_euler()
             wall = bpy.data.objects['wall']; wm = wall.active_material; wy = wall.location[1]
             bpy.data.objects.remove(wall, do_unlink=True)
             x0, x1, z0w, z1w = -1.05, -0.58, tz + 0.15, tz + 1.55
@@ -435,7 +441,7 @@ def build(frame, samples, scale):
             db.rotation_euler = (Vector(((x0 + x1) / 2, 0.0, (z0w + z1w) / 2)) - db.location).to_track_quat('-Z', 'Y').to_euler()
             # round 11: a small, dim real light behind and above the pendant, between it and the wall, facing the camera
             # side (no light linking): it catches the cap's tiers and is seen in the gloss for what it is
-            kk = SC.area('kicker', (0.25, 0.45, tz + 1.05), (0, 0, 0), (0.25, 0.25), float(os.environ.get('KICK_W', '1.5')) * float(os.environ.get('ROOM_K', '0.05')), '#D8DCE4')
+            kk = SC.area('kicker', (0.25, 0.45, tz + 1.05), (0, 0, 0), (0.25, 0.25), float(os.environ.get('KICK_W', '1.5')) * rk, '#D8DCE4')
             kk.rotation_euler = (Vector((0.0, 0.0, tz + 0.80)) - kk.location).to_track_quat('-Z', 'Y').to_euler()
         exposure = ev   # round 4: exposed for the lamp, as a night photograph is
     else:
@@ -459,7 +465,8 @@ def build(frame, samples, scale):
             sb = SC.area('side-back', (-0.45, 0.40, tz + 0.30), (0, 0, 0), (0.18, 0.7), float(os.environ.get('SIDEBACK_W', '0')), '#F2EEE6')
             sb.rotation_euler = (Vector((0.0, 0.0, tz + 0.10)) - sb.location).to_track_quat('-Z', 'Y').to_euler()
         exposure = 0.0
-    SC.render_settings(1800, 1200, samples, scale, exposure=exposure, look='AgX - Medium High Contrast')
+    SC.render_settings(1800, 1200, samples, scale, exposure=exposure,
+                       look=os.environ.get('LOOK', 'AgX - Punchy' if prod == 'core' else 'AgX - Medium High Contrast'))   # 2026-11-09: Punchy for Core (the gate)
     bpy.context.scene.cycles.caustics_refractive = True
     if night and prod == 'core':   # round 8: rare bright caustic paths speckled the frost (the denoiser blotched them)
         bpy.context.scene.cycles.sample_clamp_indirect = float(os.environ.get('CLAMP', '20')); bpy.context.scene.cycles.blur_glossy = 1.0

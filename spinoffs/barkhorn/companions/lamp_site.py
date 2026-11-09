@@ -55,11 +55,13 @@ def build(frame, samples, scale):
     def bbt(tint):
         return blackbody(CCT_PER_TINT.get(tint, 2700) if pertint else CCT)
     bb = blackbody(CCT)
-    kind0 = {'lamps-domes': 'dome', 'lamps-orbs': 'orb'}.get(frame, frame.split('-')[0])   # a row as its hero
+    kind0 = 'dome' if frame.startswith('lamps-domes') else 'orb' if frame.startswith('lamps-orbs') else frame.split('-')[0]
     # the studio's brightness and the exposure move together, so the paper holds its tone while the lamp, at its real
     # output, comes out of clipping: a brighter studio, one scale
     K = float(os.environ.get('STUDIO', {'dome': '2.0', 'orb': '8.0', 'lamps': '4.0'}[kind0]))
-    EVD = {'dome': '-1.0', 'orb': '-3.0', 'lamps': '-2.0'}[kind0]
+    # round 2 (the gate, 2026-11-09, wf_a02e1a2a-b5e): the camera 2 EV down, the studio unchanged, so the faces leave
+    # AgX's shoulder and hold their tint; the paper falls to about L 0.5-0.6 (both heroes' papers K x 2^EV match)
+    EVD = {'dome': '-3.0', 'orb': '-5.0'}[kind0]
 
     def acrylic(nm, rough, tname, loading=1.0):
         return SC.acrylic_material(nm, [(-1e4, 1e4, tname)], rough, 'polished', loading=loading, scratch=0.0, bond=False)
@@ -144,7 +146,9 @@ def build(frame, samples, scale):
             return m
         oc = 4.0
         lit = opal(f'opal-lit-{tint}'); nt = lit.node_tree
-        S0 = 145.0 * WLM / (2 * 0.041)
+        # (round 2, the gate: the liner passed all 145 lm; a real opal of about 55 % passes about half outward, the rest
+        # back into the shade and out through the mouth)
+        S0 = 145.0 * float(os.environ.get('OPAL_T', '0.55')) * WLM / (2 * 0.041)
         tc = nt.nodes.new('ShaderNodeTexCoord'); sx = nt.nodes.new('ShaderNodeSeparateXYZ'); nt.links.new(tc.outputs['Object'], sx.inputs[0])
         gz = nt.nodes.new('ShaderNodeMapRange'); gz.clamp = True
         gz.inputs['From Min'].default_value = oc * MM; gz.inputs['From Max'].default_value = 0.075
@@ -205,23 +209,31 @@ def build(frame, samples, scale):
     me = bpy.data.meshes.new('sweep'); bm.to_mesh(me); bm.free()
     so = bpy.data.objects.new('sweep', me); bpy.context.scene.collection.objects.link(so); me.materials.append(paper)
     SC.world(color='#C8C4BE', strength=0.02 * K)
+    # round 2 (the gate): the studio at 3000 K, and the camera's white point at 3000 K; the lamps stay at 2700 K (spec)
     key = SC.area('key', (-1.4, -1.6, 1.9), (0, 0, 0), (1.2, 1.2), 60.0 * K, '#FFF4E8'); key.data.shape = 'ELLIPSE'
+    key.data.color = blackbody(3000)
     key.rotation_euler = (Vector((0, 0.1, 0.5)) - key.location).to_track_quat('-Z', 'Y').to_euler()
     fill = SC.area('fill', (1.8, -1.2, 1.2), (0, 0, 0), (1.6, 1.6), 20.0 * K, '#EEF2F8'); fill.data.shape = 'ELLIPSE'
+    fill.data.color = blackbody(3000)
     fill.rotation_euler = (Vector((0, 0.1, 0.4)) - fill.location).to_track_quat('-Z', 'Y').to_euler()
 
     # --- the frames ---------------------------------------------------------------------------------------------
     kind, _, tint = frame.partition('-')
-    if frame == 'lamps-domes':
+    if frame.startswith('lamps-domes'):
+        # round 2 (the gate: the pools merged into one bar that read as LED strip; small domes under a bare third of
+        # cable): framed above the floor, the domes larger, the cables cropped; '-7' leaves Smoke out, re-spaced
         W, H = 2400, 800
-        for i, t in enumerate(ROW):
-            hemisphere(t, (i - 3.5) * 0.30, 0.42, y=0.0)
-        cam = ((0.0, -3.9, 0.62), (0.0, 0.0, 0.40), 50.0)   # the eight with room, their pools on the paper
-    elif frame == 'lamps-orbs':
+        row = ROW[:7] if frame.endswith('-7') else ROW
+        for i, t in enumerate(row):
+            hemisphere(t, (i - (len(row) - 1) / 2) * 0.25, 0.45, y=0.0)
+        cam = ((0.0, -2.9, 0.47), (0.0, 0.0, 0.45), 50.0)
+    elif frame.startswith('lamps-orbs'):
+        # round 2 (the gate): the camera 15 deg up, so each lamp's glow on the paper is its own; '-7' leaves Smoke out
         W, H = 2400, 800
-        for i, t in enumerate(ROW):
-            core(t, (i - 3.5) * 0.22, 0.0)
-        cam = ((0.0, -5.0, 0.55), (0.0, 0.0, 0.12), 85.0)
+        row = ROW[:7] if frame.endswith('-7') else ROW
+        for i, t in enumerate(row):
+            core(t, (i - (len(row) - 1) / 2) * 0.22, 0.0)
+        cam = ((0.0, -4.4, 0.12 + 4.4 * math.tan(math.radians(15))), (0.0, 0.0, 0.10), 85.0)
     elif kind == 'dome':
         W, H = 1600, 2000
         hemisphere(tint, 0.0, 0.50)                    # the rim 500 above the paper: the dome and its pool in one frame
@@ -232,9 +244,11 @@ def build(frame, samples, scale):
         cam = ((0.10, -0.95, 0.22), (0.0, 0.0, 0.11), 70.0)
     else:
         raise SystemExit('unknown frame ' + frame)
-    SC.render_settings(W, H, samples, scale, exposure=float(os.environ.get('EV', EVD)), look='AgX - Medium High Contrast')
+    SC.render_settings(W, H, samples, scale, exposure=float(os.environ.get('EV', EVD)), look=os.environ.get('LOOK', 'AgX - Punchy'))   # round 2: AgX Punchy (the gate)
     sc = bpy.context.scene
     sc.cycles.caustics_refractive = True; sc.cycles.sample_clamp_indirect = 20.0; sc.cycles.blur_glossy = 1.0
+    vs = sc.view_settings; vs.use_white_balance = True; vs.white_balance_temperature = float(os.environ.get('WB', '3000'))
+    vs.white_balance_tint = 0.0
     SC.camera(cam[0], cam[1], lens=cam[2], fstop=8.0)
     if os.environ.get('AUDIT'):
         hidden = [o for o in sc.objects if o.type == 'MESH' and not o.visible_camera]
