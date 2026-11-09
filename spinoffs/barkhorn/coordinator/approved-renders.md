@@ -36,15 +36,16 @@ elsewhere; a picture with anything hidden in frame is pulled at once. Verified s
 night final (78e440ba), 0 px hidden.
 Lights audit (9 Nov 21:40, from each shot.json): the turning views, the horn-backs and the amp plate are lit by key, fill and wash
 (area lights) plus background lamps linked to the sweep (flagged background lights); chunks 4 and 05 (06b829ce, 52ad76ba) also carry
-the old glow lamp, tested to make only a noise-level difference. No specular-only source in any of them. The tallr2 fronts carried
+the old glow lamp, which I let stand at 21:40 as noise-level. WRONG: it is camera-hidden, emits (irradiance 1.6) with specular 0, and
+stands in frame (16-20 % by the corrected cast; 61,101 px on a horn-back by the mask, 23:27). Every picture carrying it is pulled below. No specular-only source in any of them. The tallr2 fronts carried
 three specular-only panels (scrim, sheen, topline at diffuse 0): withdrawn from the re-shoot (21:34) so the fronts are lit only by
 lights a real studio could use.
 | Picture | Source (branch @ commit: path) | Gate | Used by |
 |---|---|---|---|
 | Seven fronts ("talls"), honest rig round 2 | helpers r33-rollout-c2/c3/c4 and r33-speaker-horn, renders/2026-11-04/barkhorn/rollout/A-polished-tallr2/site-front-off-tall-<k>.png on 63d83f47 | FAILED 9 Nov 21:24: Ember, Acid, Ice 3/3 NO; Dust 1/3 (21:28); Fog 2/3 SHOW (founder, skeptic; photo NO), kept only as a fallback since the set is re-shot on one rig; Poison, Haze 0/3 (21:31: the lower side face milky, see-through fails). tallr3 FAILED 0/3 (22:39); tallr4 pulled as tests (23:05); tallr5 on 3603508e stopped (bg-left lamp hidden in frame); next on fa7665dc (one floor card out of frame, the speaker turned 6°, bg-left slid out, 0 px hidden and 0 px equipment by the mask), tag tallr6 | none until the re-shoot passes; the site and the Book wait for it |
-| Turning view, Ember, Dust, Acid, Poison, Ice, Haze | r33-rollout-c3 52ad76ba (Ember 00-04); c4 0a0a83bd (Ember 05-23, Dust); c4 42fa8eee (Acid 00-16); c3 66126d53 (Acid 17-23, Haze); c4 eef18db2 (Poison, Ice): renders/2026-11-04/barkhorn/rollout/A-polished-p2*/turn-<k>-NN.png | PASSED (wf_c0448c65-cd3) | site galleries |
+| Turning view, Dust, Acid, Poison, Ice, Haze (Ember HELD: its frames 00-04 pulled, see Pulled) | r33-rollout-c3 52ad76ba (Ember 00-04, PULLED); c4 0a0a83bd (Ember 05-23, Dust); c4 42fa8eee (Acid 00-16); c3 66126d53 (Acid 17-23, Haze); c4 eef18db2 (Poison, Ice): renders/2026-11-04/barkhorn/rollout/A-polished-p2*/turn-<k>-NN.png | PASSED (wf_c0448c65-cd3); clean by the corrected cast (23:26), masks running | site galleries (Ember's turn held whole) |
 | Turning view, Fog, neutral ground | r33-rollout-c3 a688c59e: A-polished-p2-rc2/turn-fog-00..23.png | PASSED 3/3 (9 Nov 21:11; the stage at the rendered 211,212,207) | site gallery (FOG_TURN on) |
-| Horn from behind, seven | 06b829ce, 52ad76ba, a1322583 (not the failed Acid file), cut 4:5 at x 270-990 | PASSED, audited clean | site galleries; the home's Tropos block (Ember) |
+| Horn from behind, Acid only | a1322583 (A-polished-p2-backrig-acid), cut 4:5 at x 270-990 | PASSED; clean by the corrected cast (23:26), mask running | site galleries (the other six PULLED 23:27, see Pulled) |
 | Amp plate, Ember | 488fbec9 (amp-plate-ember) | PASSED, audited clean | site galleries ("The built-in amplifier, from behind.") |
 | Backs (rear three-quarter) | r33-speaker-horn e85bd44f (round 3, bright-field glow) | NOT YET: full-size renders and gate pending | none |
 | Wides | r33-speaker-horn 89d95763 (the wide's horn lamp off) | NOT YET: renders and gate pending | none |
@@ -86,6 +87,8 @@ as-drawn variant (the COB alone: a downlight, the shade dark) follows about 23:5
 ## Pulled (do not use)
 | Picture | Why | Pulled |
 |---|---|---|
+| Horn from behind: Ember, Dust, Poison (06b829ce), Ice, Haze, Fog (52ad76ba) | the camera-hidden 'glow' area lamp (0.7 x 0.32 m at (0, 0.66, 1.12), irradiance 1.6, specular 0) standing in frame beside the horn mouth: 16.1 % by the corrected cast, 61,101 px by the mask on a horn-back; re-render without it queued | 9 Nov 23:27 |
+| Turning view, Ember frames 00-04 (52ad76ba) | the same glow lamp in frame (19.5 % by the corrected cast); Ember's turn held whole until the five are replaced | 9 Nov 23:27 |
 | The old talls (img/rc/<k>-tall.*) and wides | a lamp hidden from the camera standing in frame | 9 Nov |
 | 15931e00 talls (tag tallfix) | a hard arched light pool on the backdrop (the grid's hard cone) | 9 Nov 20:25 |
 | tallr4 talls (A-polished-tallr4, rig 0cbf23a5; Ember, Acid, Ice rendered as tests, the rest held) | two real black floor cards in frame at the right edge (rows ~850-1200; the cast's camera bug hid them), and a pale band in the lowest fifth of the right face (~70-80 levels of white under a hard edge at row ~905); the line itself is fixed (+0.8 L against +51.7) and the upper veil cleared (sat 0.65-0.72) | 9 Nov 23:05 |
