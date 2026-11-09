@@ -5706,3 +5706,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 19:24 RC3.1 REVIEW launched (wf_f888f5ab-097, five lenses) against a LOCAL server of the exact built files of r49-site-rc
   2490d9d3 (scratchpad/rc3-local; tools/vercel_local.py emulates vercel.json's cleanUrls, the /s/ redirects, the headers and the
   404), because Vercel hasn't deployed the commit. The deployed copy gets a separate header and picture check before the owner link.
+- 19:22-19:23 c2: rc1-real ACID tall (83bca94d, 9.4 min; hiddencast clean); Dust hero-light started (~20-40 min). c3: rc1-real ICE tall
+  (40219584, 9.8 min); Haze started 19:23. Speaker lane: my reading confirmed (the horn lamp is set as an irradiance at its target;
+  moved and grown 1.8x it runs 3.24x the watts and lights the sweep, floor and cabinet: +1/3 stop); no EXRs (the engine writes the
+  tone-mapped PNG), so any change is a re-render; its cleaner fix: the horn lamp out of frame, NOT grown, with a real grid (~40°),
+  proved on Dust and Ember proxies (~25 min). 19:25 sent: keep the rig; the seven rc1-real talls go to the critics as they stand;
+  backs first (~20:05), then the grid proof (urgent only if the critics hold the brighter talls), then the arc.
+- 19:26 this machine has 4 CPUs, so each workflow runs only 2 agents at a time (the third judge in every gate waits). The RC3.1 review
+  was split so all five lenses run at once: decisions + pictures (wf_5258dbc7-29c), words + build (wf_98d65b8b-1ac), owner
+  (wf_460e7280-ce7); the first launch (wf_f888f5ab-097) stopped at 3 minutes so no lens runs twice.
