@@ -5319,3 +5319,14 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   colour 0.039): not Poison's mirror mechanism; something warm seen through the clear glass (a batt or brace part, the back wall's
   view of the rock or ground, or the low sun on something). Next: a camera-only ray trace of three band pixels after the Poison
   +1 EV / +1.6 EV proxies, before the Acid crops.
+- 18:27 c3: TURNS LANDED at 66126d53e146640f7862d3be4e0b74f01509fcab (17:19-18:26; 55 frames 640x576: Acid 17-23, Haze 00-23, Fog
+  00-23; 0.57-1.04 min each; spot check of 12 clean: polished smooth horns, Acid olive on the fix); merged b00945ab at
+  3b00fdb2abbec6ec0c57e0d6eacdc476a3d779f7 (no rebuild); sides Poison and Ice from 18:27 (~34 min).
+- 18:29 GATE TURNS, the rest (wf_c0448c65-cd3; 3 critics; contact sheets Poison, Ice (c4 eef18db2), Haze, Fog, Acid 17-23 (c3
+  66126d53); the passed Ember and Acid 00-16 as context). With these all seven turns are rendered.
+- 18:29 RC2 REVIEW decisions + pictures in (wf_f54ef135-d4a, 31 min): 9 of 11 decisions findings FIXED; 32 of the team's 38 wave
+  claims true, 6 partly (5 findings); the brief's checks pass (seven colors, tagline, Tropos as it stands, lamps, Mantle C3e, Core
+  cordless, no prices, search off, nothing held shown). New: the wave-2 hero line "Hi-fi and lighting in cast acrylic." (a literal
+  material line, the owner's "stating the obvious") and two back-to-back repeats; partly: the /s/ previews and color metas missed
+  the copy notes ("Hung low over the bar.", "cast in translucent ... acrylic"). The words+build and owner lenses still running;
+  one merged punch list when they land.
