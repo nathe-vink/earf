@@ -712,6 +712,12 @@ def site(frame, tint):
         for f in (s.get('set') or {}).get('flags', []):
             if f.get('center_m') == [1.6, 1.8, 0.005]:
                 f['center_m'] = [1.6, 2.05, 0.005]; f['size_m'] = [1.6, 2.9]
+    if frame in ('front-off-tall', 'side'):
+        # (the coordinator's 21:34 ruling, withdrawing specular-only sources: a panel at diffuse 0 shows in the glass and
+        # lights nothing, which no real lamp does. scrim 0.25, sheen 0.6 and topline 0.9 go; Dust half size: the veil box
+        # 78 -> 70 % under 0.5, front saturation 0.83, horn L* 52, the backdrop smooth, nothing at 248+)
+        for k in [k for k, L in s['lights'].items() if L.get('type') == 'panel' and float(L.get('diffuse', 1.0) or 0.0) == 0.0]:
+            s['lights'].pop(k)
     if frame in ('front-off-tall', 'front-off-wide', 'hero-light', 'side', 'back'):
         realize_hidden(s)
     # a panel at strength 0 still stands in the set: unseen by the camera and casting no shadow, but in the glossy floor's
