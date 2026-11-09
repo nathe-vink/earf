@@ -123,6 +123,8 @@ HORN_ROUGH = 0.05
 SPLIT = {'acid_b': (0.085, 0.10, 1.00)}
 # habitats whose sets are made real: every object seen by every ray type, casting shadows (ruling 4)
 REAL_SET = {'poison_g5'}
+# plants whose Poly Haven glTF has no alpha (the cards render whole; their glossy black surround reads as white flecks)
+PLANT_ALPHA = {'fog_b': ['grass_bermuda_01']}
 CANOPY_OPEN = {'poison_g5': 0.25}
 SAMPLES = {'ember': 96, 'poison_g5': 96, 'haze_b': 96, 'fog_b': 96}
 
@@ -162,7 +164,8 @@ def main():
             + (['--split', *map(str, SPLIT[n])] if n in SPLIT else []) \
             + (['--real-set'] if n in REAL_SET else []) \
             + (['--canopy-open', str(CANOPY_OPEN[n])] if n in CANOPY_OPEN else []) \
-            + (['--canopy-clearing', str(a.clearing)] if a.clearing else [])
+            + (['--canopy-clearing', str(a.clearing)] if a.clearing else []) \
+            + (['--plant-alpha', *PLANT_ALPHA[n]] if n in PLANT_ALPHA else [])
         with open(out.replace('.png', '.log'), 'w') as log:
             r = subprocess.run(cmd, stdout=log, stderr=subprocess.STDOUT)
         print(n, 'ok' if r.returncode == 0 else f'failed ({r.returncode})', flush=True)

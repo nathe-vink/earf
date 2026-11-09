@@ -47,6 +47,7 @@ SURFACE_GLASS = False                   # --surface-glass: the tint on the faces
 WELD = [True]                           # the asset's split vertices welded so its glass volumes close (--no-weld: off)
 GLOSSY_FLAG = [False]                   # --glossy-flag: the flag and cards seen in reflections only (the earlier trick)
 SPLIT = [None]                          # --split R G B: the tint's channel split, luminance held per part (the shared 9097 fix)
+PLANT_ALPHA = [()]                      # --plant-alpha ID...: wire these Poly Haven plants' own Alpha maps into their cards
 CLEARING = [None]                       # --canopy-clearing D: a treefall gap D m across over the speaker (world 0, 0)
 CANOPY_OPEN = [None]                    # --canopy-open F: the canopy's gaps cut as real holes, F of it open (ruling 4)
 REAL_SET = [False]                      # --real-set: every set object seen by every ray, casting shadows (ruling 4)
@@ -261,6 +262,41 @@ def canopy_holes(bpy_, open_frac, spec, cell=0.3):
     me.materials.append(m); can.data = me
     print(f'canopy holes: {nx} x {ny} cells of {cell} m, {open_n / (nx * ny):.1%} open ({len(holes)} explicit holes cut)'
           + (f', a clearing {2 * clr[2]:.0f} m across at canopy-local ({clr[0]:.1f}, {clr[1]:.1f}), rim +-{clr[3]} m' if clr else ''))
+
+
+def plant_alpha(bpy_, aids, res='1k'):
+    """Some Poly Haven plant glTFs (grass_bermuda_01) carry no alpha at all: the cards render whole, their black,
+    semi-glossy surround mirroring the sky as pale flecks (the Fog gate: "litter"). Wire the asset's own Alpha map
+    (fetched once) into every material of that name, in the base colour's coordinates. The asset's own cut-out, as
+    published, not a paint-over."""
+    import assets as As
+    for aid in aids:
+        f = As.files(aid).get('Alpha', {})
+        r = As._pick_res(f.keys(), res) if f else None
+        e = (f[r].get('png') or f[r].get('jpg')) if r else None
+        if not e:
+            print('plant alpha: none published for', aid); continue
+        path = os.path.join(As.CACHE, 'models', f'{aid}_{r}', 'textures', os.path.basename(e['url']))
+        if not os.path.exists(path):
+            As._get(e['url'], path)
+        img = bpy_.data.images.load(path, check_existing=True); img.colorspace_settings.name = 'Non-Color'
+        done = []
+        for m in bpy_.data.materials:
+            if not (m.name.split('.')[0] == aid and m.node_tree):
+                continue
+            nt = m.node_tree
+            bs = next((n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED'), None)
+            if bs is None or bs.inputs['Alpha'].is_linked:
+                continue
+            src = next((l.from_node for l in bs.inputs['Base Color'].links if l.from_node.type == 'TEX_IMAGE'), None)
+            if src is None:
+                continue
+            a = nt.nodes.new('ShaderNodeTexImage'); a.image = img; a.interpolation = src.interpolation; a.extension = src.extension
+            for i in src.inputs:
+                for ll in i.links:
+                    nt.links.new(ll.from_socket, a.inputs[i.name])
+            nt.links.new(a.outputs['Color'], bs.inputs['Alpha']); done.append(m.name)
+        print(f'plant alpha: {aid} {r} wired into {len(done)} materials')
 
 
 def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extra=(), stand='feet', tt=None,
@@ -494,6 +530,8 @@ def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extr
                         setattr(o, a, True)
                     fixed.append(o.name)
             print('real set: every ray type on for', fixed)
+        if PLANT_ALPHA[0]:
+            plant_alpha(bpy_, PLANT_ALPHA[0])
         if CANOPY_OPEN[0] is not None:
             cs = next((q for q in json.load(open(shot_path))['set']['props'] if q.get('fn') == 'canopy'), None)
             canopy_holes(bpy_, CANOPY_OPEN[0], cs)
@@ -522,6 +560,7 @@ def main():
     ap.add_argument('--glossy-flag', action='store_true', help='the flag and side cards in reflections only (before 20:11)')
     ap.add_argument('--split', type=float, nargs=3, help="the tint's channel split, R G B (luminance held per part)")
     ap.add_argument('--canopy-open', type=float, help="the canopy's gaps cut as real holes, this fraction open")
+    ap.add_argument('--plant-alpha', nargs='+', default=[], help="Poly Haven plants whose own Alpha map is wired in (their glTF has none)")
     ap.add_argument('--canopy-clearing', type=float, help='with --canopy-open: a treefall gap this many m across over the speaker')
     ap.add_argument('--real-set', action='store_true', help='every set object seen by every ray, casting shadows')
     ap.add_argument('--led', type=float, default=1.0, help="scale the amp's power LED (the asset's strength is 6)")
@@ -532,7 +571,7 @@ def main():
     a = ap.parse_args()
     global SURFACE_GLASS
     WELD[0] = not a.no_weld; SURFACE_GLASS = a.surface_glass
-    SINK[0] = a.sink; LED[0] = a.led; REAL_SET[0] = a.real_set; CANOPY_OPEN[0] = a.canopy_open; CLEARING[0] = a.canopy_clearing; SPLIT[0] = a.split; GLOSSY_FLAG[0] = a.glossy_flag
+    SINK[0] = a.sink; LED[0] = a.led; REAL_SET[0] = a.real_set; CANOPY_OPEN[0] = a.canopy_open; CLEARING[0] = a.canopy_clearing; PLANT_ALPHA[0] = tuple(a.plant_alpha); SPLIT[0] = a.split; GLOSSY_FLAG[0] = a.glossy_flag
     HORN['close'] = a.horn_close; HORN['rough'] = a.horn_rough; HORN['shadows'] = not a.horn_front
     sh = json.load(open(a.shot))
     scale_lights(sh, {k: float(v) for k, v in (x.split('=', 1) for x in a.light)})
