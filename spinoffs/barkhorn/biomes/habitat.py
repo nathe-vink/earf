@@ -242,6 +242,7 @@ def canopy_holes(bpy_, open_frac, spec, cell=0.3):
             vals.append(noise.fractal(Vector((x / gap, y / gap, 0.0)), 0.6, 2.0, 6))
     thr = sorted(vals)[int(len(vals) * (1.0 - open_frac))]
     holes = spec.get('holes', [])
+    keep = spec.get('keep', [])   # canopy-local [x, y, r]: cells never cut (leaves left in a gap, a real shadow)
     # a treefall gap over the speaker: world (0, 0) is canopy-local (-px, -py); its rim broken by the shot's own gap
     # fractal (+-rim m), no soft edge (cells cut or kept)
     clr = None
@@ -254,6 +255,8 @@ def canopy_holes(bpy_, open_frac, spec, cell=0.3):
         for i in range(nx):
             x = -w / 2 + (i + 0.5) * cell; y = -d / 2 + (j + 0.5) * cell
             in_clr = clr and math.hypot(x - clr[0], y - clr[1]) <= clr[2] + clr[3] * noise.fractal(Vector((x / gap + 50.0, y / gap, 0.0)), 0.6, 2.0, 4)
+            if any((x - kx) ** 2 + (y - ky) ** 2 <= kr * kr for kx, ky, kr in keep):
+                bm.faces.new((vs[j][i], vs[j][i + 1], vs[j + 1][i + 1], vs[j + 1][i])); continue   # a leafy cluster left
             if in_clr or vals[j * nx + i] >= thr or any((x - hx) ** 2 + (y - hy) ** 2 <= hr * hr for hx, hy, hr in holes):
                 open_n += 1; continue
             bm.faces.new((vs[j][i], vs[j][i + 1], vs[j + 1][i + 1], vs[j + 1][i]))
