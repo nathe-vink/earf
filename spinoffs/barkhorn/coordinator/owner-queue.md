@@ -5944,3 +5944,13 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   skeptic); sent the speaker lane, ahead of the wide and the backs: an honest way to make the backdrop as even as the passed frame's
   (the cutter farther or its edge feathered, or a separate soft background light out of frame; not more horn-lamp power), tested on
   Fog at half size, as the contingency the helpers re-render on if the gate holds.
+- 20:13 GATE EMBER UNLIT PAIR (wf_3e232358-ab0), 2 of 4 in, both NO, so HOLD: the rig is clean (outside the lamps identical to Smoke
+  within 5/255, no clipping, matching reflections, both grounded). The Ember scene's two faults: Hemisphere's mouth reads rust
+  (~123,53,26; blue 0.02-0.05 of the white lip against Smoke's 0.3-0.4: the liner's inner face behaves as tinted, likely a material
+  assignment) and reads as a faint glow under "switched off"; Core a near-black two-tone ball (plum L* 6 over brown L* 9, cut by the
+  table's front edge reflected), honest physics (the top reflects the dark blue-ish room in front), which may stay so for design A by
+  day: the Core A/B question for the owner. Critic 1: Hemisphere alone is ready (deep glassy Ember on hue); a Hemisphere-only crop if a
+  lamp picture must go up. 20:14 sent the lamps lane the quick path (the liner fixed, the room behind the camera warm neutral, re-render
+  at 128 samples, plus a Hemisphere-only crop at 4:5; both gated at once; by ~20:50 or the next push). 20:14 sent the site lane: build
+  the lamps words-only as the default (the Smoke pair out of the home, /lighting and the 14 lamp views; a deliberate text band; no
+  empty stage; og-lamps.jpg out, the lamp cards on the default og; lamps-unlit* banned), one file swap if a picture passes in time.
