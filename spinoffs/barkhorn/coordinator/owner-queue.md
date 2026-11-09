@@ -5646,3 +5646,18 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   (then Dust, Poison), c3 Ice (then Haze, Fog), c2 Acid; all started ~19:13. c2 asks about the seven rigB backs: re-render after the
   speaker lane's rigB fix passes my gate.
 - 19:14 GATE HAZE (d) launched (wf_8595d630-0e7): 4 Nov | (a) | (d), the (d) frame, the lane's -1/3 stop and T 0.6 proposal.
+- 19:14 MANTLE hidden-object audit (d5ea655a; scene_audit.py on the saved scenes, cardcast's 240-wide grid): nothing hidden from the
+  camera in frame in C3e day or night or any night proxy (studio lamps and flags 0.0 %; the cob inside its own fitting, the bulb
+  exception). Its tool's "seen directly at 169 of 169 points" line ignores the frame's bounds (a false alarm; being fixed). Commit
+  139a507f carries another session's Claude-Session line (noted in d5ea655a, not rewritten). Proxy 6 ~25 min.
+- 19:14 biomes: ACID EDGE (0f669b14): the bottom-right corner's water 204/0.04 -> 39/0.10 (wet rock); the reflection's channel stays
+  water. Its own hiddencast.py (120 x 150 rays on the scene as rendered); Ice, Dust, Fog audited before the Acid final.
+- 19:15 BRAND: the seven backs pulled (f3b2ca26): "Through the wall" removed, the files pruned from book/img and PINNED, "The seven
+  backs, through the wall." first in Pictures in progress; the Image direction lede: "...three are shown here: the studio, in its
+  element, and up close." Its own 3D renders audited: the Tint Library's `back` area lamp IN FRAME 1.2 % (raised out, 60 -> 90 W);
+  the crate pair's flag-wall IN FRAME 9.5 % (moved above the frame) and flag-partner 4.2 % (deleted); both re-rendering.
+- 19:15 SITE: Vercel created no deployment for any branch from 18:59:53 to ~19:14 (a webhook gap): RC3 (pushed 19:07) has none. The
+  amp plate on the home done (r47-site-next 8fb9bf8a). Its question: every Tropos gallery's Back view (img/rc/<k>-back) comes from the
+  backs rig. 19:16 sent: (c) a normal push now without the talls: RC3 + the amp plate + the turn viewer + the Back view pulled from
+  every gallery (banned until re-rendered backs pass); the URL when READY; the seven talls in the next small push (~20:15). Neither an
+  API deployment nor an empty commit.
