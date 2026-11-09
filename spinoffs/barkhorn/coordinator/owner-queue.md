@@ -5829,3 +5829,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   19:41 sent the speaker lane the skeptic's additions: raise the lamp out of the front's mirror zone (or a real black card at the camera
   over it) with the grid and cutter; then match the passed tall's levels (wall 0.77, floor 0.86); the side's pod bar optional; proof
   targets: front saturation >= 0.72, centre batt >= 0.75, horn L <= the passed tall's, wall and floor within 0.02.
+- 19:41 SPEAKER LANE (d) THE ARC (5c169590; no frame's lighting changed; hiddencast 0, cardcast 0.0 % on all nine): v-flats can't
+  stand out of frame and catch the faces' reflections (they meet the sweep 0.6-3.9 m behind; a flat for 03 would cover 4.9-7.6 % of
+  the frame); no single lamp whitens 05's face (the sweep and cove mirrored at grazing Fresnel); the cheap levers move it little
+  (221 -> 218; exposure -0.25 -> 207). What would work: a grey cove (~2/3 stop down) with the pool on the speaker held, a visible
+  gradient behind; or accept 03/05 as honest Fresnel. Also: cardcast/hiddencast now test a render crop as the frame shown. It reported
+  the arc before reading my 19:32. 19:42 sent: PARK the arc; FIRST the tall horn lamp + the card trim + the wide's key, one SHA,
+  proofs on Dust and Ember (the site and the Book wait on it; three helpers idle); then the close-ups.
