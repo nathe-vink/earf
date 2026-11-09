@@ -585,7 +585,13 @@ def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extr
                             bs.inputs['Base Color'].default_value = (*[math.sqrt(x) for x in tr], 1)
                     src = out.inputs['Surface'].links[0].from_socket
                     lp = nt.nodes.new('ShaderNodeLightPath'); tp = nt.nodes.new('ShaderNodeBsdfTransparent')
-                    tp.inputs['Color'].default_value = (*tr, 1)
+                    # per FACE, not per wall: a shadow ray meets the transparency at each face it crosses (two a wall), and
+                    # through the welded volume Cycles applies the absorption itself. So with the volume the faces carry only
+                    # the Fresnel, sqrt(0.92) each; the tint comes once, from the volume (the slab test, 2026-11-09: tr at
+                    # each face plus the volume passed tr^2 x volume, the tint three times). Without a volume (SURFACE_GLASS)
+                    # each face carries sqrt of the whole wall's transmission
+                    face = [math.sqrt(x) for x in tr] if SURFACE_GLASS else [math.sqrt(0.92)] * 3
+                    tp.inputs['Color'].default_value = (*face, 1)
                     mx = nt.nodes.new('ShaderNodeMixShader')
                     nt.links.new(lp.outputs['Is Shadow Ray'], mx.inputs[0])
                     nt.links.new(src, mx.inputs[1]); nt.links.new(tp.outputs[0], mx.inputs[2])
