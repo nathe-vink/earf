@@ -6160,3 +6160,17 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   material table in writing; render the lamp set as B; the A/B pair dropped); the site lane: the push goes as planned (the freeze
   21:25, my "go" once the fronts pass) plus one copy fix (/lighting: "frosted inside" -> "each with a white opal diffuser inside its
   color"); the brand lane: Core described as B, A/B no longer open. The approved list: the lamps' design locked.
+- 21:12-21:14: c4's Dust front landed (86076eb8, 7.4 min); the speaker lane's Fog front (13607beb, 96 samples, from e85bd44f's tree,
+  whose tall rig is 63d83f47's); Poison and Haze due ~21:16. SITE: FOG_TURN on at r47-site-next f781d1a8 (the surround #D4D5D0 from
+  the frames' edges); the rule of work noted. LAMPS: the Ember unlit pair re-rendered (4f29ba00; 1600x2000, 128 samples) with every
+  fix (the liner clear via a per-piece assign; Specular Tint white on all tints; the dock as the CAD, a gloss black dielectric whose
+  bright face is grazing Fresnel; levelled within 0.1°; the collar satin black 3.7 %; both lamps on the speaker's 2423 dye: Core's
+  lower half h 36, its top h 26 (pinked by the cream room); every light named, all out of frame) and a Hemisphere-only 4:5 crop
+  (lamps-unlit-ember-hemisphere.png, x 660-1400). Core in the pair is design A, now superseded by B, so only the Hemisphere crop is
+  gated: 21:14 GATE HEMISPHERE CROP launched (wf_fb604641-e76 founder + photographer, wf_170d9b86-bcb skeptic + photometrist; the lamps
+  gate script now takes a lens subset). MANTLE: the rim at 1.10 m (the dome beside the horn, 36 px below its top line): creases
+  19/9/15/23 against 19/27/26/47; proxy 8 rendering (commit in the freeze). BIOMES: Poison (i) on je_gray_02 with the sun from the
+  front-left through a real gap (0fdfafd8): the top band lifted (median 41) with one honest sun; problems: the cone in direct sun, a
+  bluish set/sky edge, a sunlit mood; 21:15 agreed its next proxy. BRAND (21:11 question): 21:15 answered: keep Ice, the amp close-up,
+  Mantle by day and the HTML mockups (any embedded product picture must be on the list); the Tint Library and crate pair to Pictures
+  in progress until gated.
