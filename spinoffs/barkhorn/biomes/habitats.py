@@ -96,7 +96,9 @@ SETS = {
                   'lights.litter.orbit.azimuth_deg': -40.0},
 }
 # set props left out (the coordinator's gate on Dust, 2026-11-03: the tumbleweed floats, its shadow detached)
-DROP = {'dust': ['tumbleweed']}
+DROP = {'dust': ['tumbleweed'],
+        # Poison (the coordinator's gate, 18:58): the skull and ribs in the litter before the base read as a pun on the name
+        'poison_g5': ['bones']}
 # set props changed per habitat, by fn: Haze's visible sun disk (an emitter in the set) moved with the key to the sun
 # lamp's azimuth and elevation, out of frame, so the light in the picture has one source (the coordinator, 17:29)
 MODIFY = {'haze_b': {'sundisk': {'azimuth': 30.0, 'elevation': 6.0}},
