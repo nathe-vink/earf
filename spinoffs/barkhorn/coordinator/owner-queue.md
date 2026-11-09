@@ -4833,3 +4833,16 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   guests, money, Kickstarter, Session 00, partners, Amsterdam, media plan) into one closing section "Parked: execution plans, not
   updated to the 9 November decisions" (collapsed or dropped), the core chapters fixed properly; publish only the files the page
   uses; hold the publish for wave 2.
+- 17:16 c4: the turns started (Poison then Ice, 48 frames, ~80 min, on a967e10c + 80aa5bb3); wides 02-03 wait.
+- 17:1x GATE MANTLE ICE NIGHT PROXY 3 (wf_96255e8d-003; 3 critics, 30 min): HOLD 0/3; variant B HOLD 0/3 (cabinet L 20; the pool
+  centered like the old underglow). Fixed since v2: the pendant hangs on its cord ~0.3 m above the horn (no longer part of the
+  speaker); the cabinet reads (L 25); oak and baseboard; everything lit is consistent with the pendant and the dim window. Holding:
+  the room still a CG box (a flat rug slab, blank plaster, no furniture or window cue); the pendant staged at head height 27 cm in
+  front of the speaker, its dome clipped (251) and the brightest thing; the brightest floor touching the right foot and the rug's
+  edge along the front feet (reads as a glowing line at the base); the horn a navy block (L ~12, darker than the wall behind);
+  Ice's batts electric cyan with red 0 (WB 3700 K under a 2700 K lamp).
+- 17:18 sent the Mantle lane: the six fixes (a real rug or none, textured plaster, furniture in shadow, a window cue; the pendant
+  0.7-1.0 m aside over furniture, its dome off clip; the speaker clearly on the rug or the oak; lit wall behind the horn, a second
+  room light allowed only if clearly apart; WB toward 2700-3000 K so the batts read pale blue-white; square the camera, soften the
+  lip line and the woofer glints) and the rollout rule (proxy each color, deep tints first; the tall crop after the move). One
+  Ice proxy with metrics; I gate it.
