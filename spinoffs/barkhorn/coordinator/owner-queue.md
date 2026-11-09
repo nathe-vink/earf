@@ -5330,3 +5330,17 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   material line, the owner's "stating the obvious") and two back-to-back repeats; partly: the /s/ previews and color metas missed
   the copy notes ("Hung low over the bar.", "cast in translucent ... acrylic"). The words+build and owner lenses still running;
   one merged punch list when they land.
+- 18:28 lamps lane: ROUND 3, THE HONEST HEMISPHERE EMITTER at 940cd2913466c4b78645c2cc359cb976c1c6cb5a (lamp_site.py and
+  lamp_pictures.py): an 11 mm Lambertian disc at the Vero SE 10's face, 81.5 mm above the rim, at the top of the 46 mm bore (mouth at
+  60 mm); the CAD's COB body and faceted reflector (cob.stl, reflector.stl); no spread setting; ~430 lm leave the COB (2.81 W on the
+  one scale), the liner's 145 lm its own emission (55 % opal). Proxies r3-dome-red-old-vs-cob.png, r3-domes-heroes/rows-proxy.png,
+  r3-gate-numbers.txt. THE POOL fell ~5x (0.110 -> 0.023 linear above the paper's 0.048; ~+0.55 EV over the paper; faint; a hard
+  cut-off edge); the reflector made no difference (none / steel / bright aluminium 0.0229 / 0.0229 / 0.0230). Faces unchanged.
+  Core: the light is the lit frosted face (ruling 3's exception); the LED is the CAD's 26 mm disc under the 29.6 mm window in the
+  base's pocket; the site rig lacks the LED face (to add); the Core nights are set by B's level, not the one scale.
+- 18:30 sent the lamps lane: a photometry check before judging the faint pool: the spec says ~490 lm leave the mouth; a Lambertian
+  face behind a 46-47 deg cut-off sends sin^2 ~ 52 % (~224 of 430 lm) straight out, and a polished reflector should add much of the
+  rest, yet bright aluminium changed nothing (reflector.stl not where the rays go, or the dark hub bore wall): measure the flux on
+  a large floor or sensor plane for each reflector option against 430 lm; (a) fix the geometry if the render loses light, or (b)
+  correct the 490 lm figure everywhere if the CAD really loses half; no lamp brighter than the fitting. Core: add the LED face to the
+  site rig; the Core nights on the one scale (560 lm = 3.64 W).
