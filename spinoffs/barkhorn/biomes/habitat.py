@@ -394,6 +394,10 @@ def wet(bpy_, linked, spec):
     from mathutils import Vector, Matrix
     sc = bpy_.context.scene
     n_front, n_lip, n_run, seed = int(spec[0]), int(spec[1]), int(spec[2]), int(spec[3])
+    # optional: the drops' radius range, mm (default 1.2-4.7 on the front), and the runnels' length range, m
+    rlo, rhi = (spec[4] / 1000, spec[5] / 1000) if len(spec) > 5 else (0.0012, 0.0047)
+    llo, lhi = (spec[6], spec[7]) if len(spec) > 7 else (0.12, 0.3)
+    low = 1.6 if len(spec) <= 8 else spec[8]                    # >1: more drops low on the front
     rnd = random.Random(seed)
     dg = bpy_.context.evaluated_depsgraph_get()
     e = linked[0]
@@ -432,12 +436,12 @@ def wet(bpy_, linked, spec):
         if nf >= n_front:
             break
         # over the front, more drops low (the splash-back) and toward the edges
-        u, v = rnd.uniform(-0.3, 0.3), rnd.uniform(0.02, 1.0) ** 1.6 * 1.0
+        u, v = rnd.uniform(-0.3, 0.3), rnd.uniform(0.02, 1.0) ** low * 1.0
         o = P + side * u + Vector((0, 0, 0.05 + v)) + fwd * 1.0
         h = hit(o, -fwd, front)
         if h is None:
             continue
-        r = 0.0012 + rnd.random() ** 3 * 0.0035                     # most 1-2 mm, a few to 4.7
+        r = rlo + rnd.random() ** 3 * (rhi - rlo)                   # most near the small end, a few large
         dome(h[0], h[1], r, stretch=1.0 + rnd.uniform(0.0, 0.35), down=Vector((0, 0, -1)))
         nf += 1
     for _ in range(n_lip * 40):
@@ -461,7 +465,7 @@ def wet(bpy_, linked, spec):
         if h is None:
             continue
         loc, nrm = h
-        L = rnd.uniform(0.12, 0.3); step = 0.0012; w = rnd.uniform(0.0007, 0.001)
+        L = rnd.uniform(llo, lhi); step = 0.0012; w = rnd.uniform(0.0007, 0.001) * max(1.0, rlo / 0.0012) ** 0.5
         pts = []
         p = loc.copy(); wob = 0.0
         while (loc - p).length < L:
@@ -885,7 +889,7 @@ def main():
                     help='a real card: white|black, W H (m), centre Z (m), SIDE_DEG off the speaker-camera line')
     ap.add_argument('--fresnel-angle', action='store_true', help="glass faces pass a shadow ray's 1 - F(theta) (Schlick, n 1.49)")
     ap.add_argument('--meniscus', type=float, default=0.0, help='a water meniscus round the walls, radius m')
-    ap.add_argument('--wet', type=float, nargs=4, help='rain on the speaker: front beads, lip beads, runnels, seed')
+    ap.add_argument('--wet', type=float, nargs='+', help='rain on the speaker: front beads, lip beads, runnels, seed [r_min r_max mm [run_min run_max m [low]]]')
     ap.add_argument('--scrim', type=float, nargs=4, help='a silk on the sun line: T (beam passed) W H (m) D (m out)')
     ap.add_argument('--plant-alpha', nargs='+', default=[], help="Poly Haven plants whose own Alpha map is wired in (their glTF has none)")
     ap.add_argument('--canopy-clearing-at', type=float, nargs=2, default=(0.0, 0.0), help="the gap's centre, world X Y (m)")
