@@ -5288,3 +5288,16 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 18:21 sent: c4 (merge b00945ab, no rebuild, but no sides yet: the flags SHA, then the four talls, the wides, then the sides once
   gated); the speaker lane (the FLAGS next, not the close-ups, as asked at 17:59/18:01/18:03/18:09; c2 and c4 idle on it; its time
   within 10 min). 18:22 GATE SIDE PROXIES launched (wf_90f29ead-0b4; Poison and Ember after, befores as context).
+- 18:21 speaker lane (stamped 18:22): my 17:36-18:09 messages reached it in one batch after A was done; THE FLAGS start now (find
+  the lamps feeding the bottom panel's front edge lamp by lamp on the Dust hero-light and Dust tall crops; a real cutter on that
+  lamp's low edge; a black floor card inside the footprint; the wide's seam; the gentler contact if free; proved on Dust tall, Fog
+  tall, Dust hero-light with the red-aware count, near-white px for Fog, the corner edges as the reference; cardcast and the light
+  checks). ETA ~19:20 (it says by 18:50 whether that holds). The lift-off mass 8.9 kg is right (8.88; its four groups were rounded
+  and left out pads, plug, band and terminals ~0.1 kg); docs 8.9 and 63.7. product.py "4th-order Linkwitz-Riley (LR4) high-pass at
+  28 Hz" on the flags SHA. The flange recommendation after the close-ups.
+- 18:22 c4: merged b00945ab at 3d805120db69f730a789c834d6b906e84398bd93 (product.py: one text string; no rebuild); sides regenerated
+  (7 shots, 2 queues, ~10 min a frame); asked whether to start them while waiting.
+- 18:23 sent: c4 (start the sides queue 01 (Ember, Dust, Acid, Poison, Ice) now; stop between frames if the gate holds; on the
+  flags SHA finish the frame, the four talls first, then the rest); c2 (merge b00945ab, no rebuild; sides Haze and Fog; on the
+  flags SHA, Fog hero-light + the warm re-renders); the speaker lane (A stands; 19:20 fine, word by 18:50; 8.9 kg; LR4; the flange
+  after the close-ups).
