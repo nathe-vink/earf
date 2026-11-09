@@ -4758,3 +4758,31 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   / 2 x 125 W; "Drawn to be made."; product pages with seven swatches and a spec table). Watch: the lamps shown only in Smoke
   (the held color); hello@earf.world bounces (a production blocker, fine for the preview); the spec table lists a cloth-disc cover
   while item 12 (the cover and the caldera) is open.
+- 16:51 brand lane: the invitation's back (eyebrow "The EARF debut · [DATE]"; the listening-room line gone from card and email;
+  the Book's caption "Held for the owner: the date (now [DATE]) and any word of a listening room...") and Mantle made neutral
+  everywhere ("A turntable in cast acrylic. The plinth floats 40 mm over its base."; the base row "Cast acrylic") committed locally
+  as 664ce8f4, unpushed, to go out with the fix list in one push and one publish.
+- 16:52 c2: merged 1bdbf2fc (d82d0542), no conflicts, no model rebuild; --list matches c3 (chunk 3 = Ice, Haze; 4 = Fog); chunk 3
+  from 16:49 (~87 min); lamps worktree ../lamps at e616c1e3 and venv /home/user/lamps-venv (bpy 5.0.1, numpy 1.26.4) ready; the AUDIT
+  check between chunks 3 and 4; nothing rendered there.
+- 16:53 site lane: READY for the owner (the alias and the exact deployment; Vercel cancelled the superseded d826d868); didn't make a
+  share link ("it would make the preview public"); asked. 16:54: holding pushes; ahead of the list: the honest lit lamps slot in per
+  tint when they land ("Shown in Smoke" goes, the unlit pair an extra view); hello@earf.world before production: "Write to us when we
+  open the doors," with no address, or the address as text only: the owner's call (item 36: a mailbox).
+- 16:55 sent site lane: the share link exists (16:51, on that deployment, to 10 Nov 15:51 UTC, unlisted, the token in no pushed
+  file); the owner gets the alias plus a no-sign-in link to the reviewed build after the fix pass; hold r49 pushes.
+- 16:5x the Book's other three lenses launched in parallel (words + build wf_64e0f5e4-908; owner wf_739725d8-d48) beside the first
+  workflow (wf_996beee8-30d, whose cap of 2 would run its lenses in three waves); I merge all five when the first two land.
+- 16:55 biomes lane: THE FOG FINAL at 5400 K (b61474c0c792887ad4af39c08b38044677d27211; fog_b-portrait-1200x1500.jpg; fog-ab-
+  wb5400.jpg): 96 samples, 6.7 GB peak; its own blind gate 4/4 (see-through, seated in the grass, no pool, smooth horn; "the tint
+  reads close to colourless"); crease 1.9 / 2.3; b* medians left edge +10.0 -> +5.0, top +4.1 -> -1.8, panels +8.0 -> +1.5, bottom
+  block +11.5 -> +3.2, sky -3.6 -> -7.1, grass +1.1 -> +0.6; no white speck. Now: the Poison scene save, the trace and passes, the
+  Haze final, the Acid base crops and color proxies.
+- 16:56 FAITALPRO 15PR400-8 VERIFIED (a web agent, 16:48-16:56) against Faital's own 8 ohm datasheet (P/N 03803827, faitalpro.com
+  datasheet id 101060100; drawing 15PR400_drawing_8.pdf; no revision number; local copies in scratchpad/fp15pr400-dl/): all 16
+  figures match (Fs 35, Re 5.1, Qms 6.0, Qes 0.34, Qts 0.32, Vas 248.9 L, Le 0.72 mH, Xmax 5.75 one-way, Bl 16.7, Mms 85.2 g, Sd 857
+  cm2, 99 dB, AES 400 W (800 max), voice coil 77 mm, bolt circle 374 mm). Extras: overall 393 mm, depth 165, 3.6 kg, cut-out 356,
+  flange + gasket 13.1, 8 slots 9.5 x 7.4 at 45°. Open: Xdamage 15.5 mm one-way or peak-to-peak unstated (one-way likelier; the
+  cautious reading +/-7.75 mm). Sent the speaker lane (16:57): mark verified with the source and date; check the cut-out and depth
+  clearance; the 28 Hz LR4 high-pass is mandatory (14.6 mm at 20 Hz without it breaks the cautious reading).
+- 16:5x GATE launched on the Fog final (wf_9ecc9b10-30f; the previous final, the A/B crop and the approved Ice habitat as context).
