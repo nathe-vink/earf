@@ -5895,3 +5895,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   fired a second Dust final; killed after 6 s, nothing written). Now: Fog final (one sun) -> Acid final (#FECC8B).
   19:52 GATE DUST NOPANEL launched, split for speed: founder + photographer (wf_3145e175-58b) and skeptic (wf_9ebef83b-683); if it
   passes by ~20:20 it goes back on the site in the one push.
+- 19:54 GATE NIGHT PROXY 6 complete (wf_c89a6b4d-ebc): 0/3. The skeptic's additions: targets (no horn pixel above L* 90; the X arms'
+  p95 at or below proxy 4's ~10/5/19/35); raise the pendant 5-8 cm (or 5 cm right; render both as horn crops); deepen the wall's paint
+  (a darker material, not less light) so the speaker leads; keep the exposure; clear the fireflies; a tighter bottom crop optional.
+  19:54 sent the Mantle lane the addendum; then proxy 7.
