@@ -251,8 +251,14 @@ def night_set(bpy, spec, mats):
     for md in n.get('models', []):
         # Poly Haven scans (CC0), fetched and cached by the engine's assets.py: furniture that gives the lamp a reason
         try:
+            before = set(bpy.data.materials)
             PH.place(bpy, md['id'], md.get('res', '2k'), location=md['location'], rotation_deg=md.get('rotation_deg', (0, 0, 0)),
                      scale=md.get('scale', 1.0), name=md.get('name'))
+            if md.get('value'):
+                # a darker cloth or finish than the scan's (proxy 6: the armchair's pale fabric took the window's blue)
+                for m_ in set(bpy.data.materials) - before:
+                    if m_.node_tree and any(n.type == 'BSDF_PRINCIPLED' for n in m_.node_tree.nodes):
+                        _scale_base(m_, md['value'])
         except Exception as e:
             print('night_room: model unavailable:', md['id'], e, flush=True)
     rg = n.get('rug')
