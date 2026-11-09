@@ -6154,3 +6154,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   owner's sequencing rule and approved-renders.md (site and brand: tonight's push/republish is the batch for the Tropos fronts lock,
   then no picture changes until the next lock; speaker lane: fronts -> backs round 3 -> close-ups -> wides; lamps: the materials lock
   in its README, then the matched A/B pair for the owner, then the lamp set).
+- 21:12 OWNER: "b for core, assuming we're still using the same materials we would use for the speakers and mantle. Can you republish
+  the site with the latest?" DECIDED: CORE B (the outer ball in the speaker's TruCast tints, one dye per tint; a 3 mm white opal inner
+  ball, the same opal as Hemisphere's diffuser). 21:12 sent the lamps lane the lock (confirm the CAD, BOM, stock and the README's
+  material table in writing; render the lamp set as B; the A/B pair dropped); the site lane: the push goes as planned (the freeze
+  21:25, my "go" once the fronts pass) plus one copy fix (/lighting: "frosted inside" -> "each with a white opal diffuser inside its
+  color"); the brand lane: Core described as B, A/B no longer open. The approved list: the lamps' design locked.

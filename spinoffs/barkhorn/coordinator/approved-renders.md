@@ -8,10 +8,12 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
 
 ## The order of work
 1. LOCK EACH PRODUCT'S DESIGN AND MATERIALS. Tropos: locked (base A, no light; the polished horn; one dye per tint from
-   tints-trucast.json), except Haze's horn pour (walkthrough 132). Lamps: NOT locked (Core A or B is the owner's call; the lamp kit's
-   Ember dye was a stale hand value until 9 Nov, now the speaker's 2423). Mantle: locked as drawn (Strata Float).
+   tints-trucast.json), except Haze's horn pour (walkthrough 132). Lamps: DESIGN LOCKED 9 Nov 21:12 (the owner: Core B, "assuming we're still
+   using the same materials we would use for the speakers and mantle": the outer ball in the speaker's TruCast tints, one dye per tint;
+   a 3 mm white opal inner ball, the same opal as Hemisphere's diffuser); the lamps lane to confirm the CAD, BOM and stock in writing.
+   The lamp kit's Ember dye was a stale hand value until 9 Nov, now the speaker's 2423. Mantle: locked as drawn (Strata Float).
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
-   after A/B. Mantle: the day frame is in.
+   in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
 Scenes (habitats, night pictures) use the locked models and can run alongside; each enters an asset only after it passes.
 
@@ -37,7 +39,7 @@ Scenes (habitats, night pictures) use the locked models and can run alongside; e
 
 ## Lamps
 None approved. The unlit Ember pair: HOLD 0/4 (fixing: the liner, the dye, the surround). The lit set, round 3 proxies: in gate.
-Core A or B: the owner's call (9 Nov 21:06: the dark border he liked comes from B's nested build).
+Core B, decided by the owner 9 Nov 21:12 (the dark border he liked comes from B's nested build). Every lamp picture is re-rendered as B.
 
 ## Mantle
 | Picture | Source | Gate | Used by |
