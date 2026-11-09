@@ -4555,3 +4555,22 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 15:04 OWNER: "Where are we at with everything now that I have tokens again?" (a status question, no decision; logged here.)
   The driver research relaunched (wf_a61bba67-c8e resumed; nothing cached). Plan put to the owner: concept questions first, the
   execution renders (the site roll-out, habitats, site night pictures) paused; critics only on what goes to the owner.
+- 16:19 OWNER: "Yes we need to move faster. I want to see change. Website updates, brand updates, etc" (README 5ed65116, time fix
+  1f107303). Yes to the restart, with visible change first.
+- 16:20 sent (all lanes restarted): SITE (priority 1): a release candidate today from r47-site-next with V2 and HOME_V2 on, the
+  tagline on, only honest pictures (the fix1 tall frames e624e13e/3d0b613f/04d21c5c; other Tropos pictures only if today's speaker,
+  else the slot out; the night stage and wall hidden; every lit lamp picture pulled, unlit shown), a preview URL, the changes
+  against live, three screenshots, a time estimate first; production only on the owner's yes. BRAND (priority 2): the Brand Book
+  second edition to the decisions (tagline, own feet and no light, polished horn A, seven colours, American English, honest pictures
+  or labelled gaps), a link, then the next pieces by visibility. SPEAKER: the roll-out frames the site still needs (assign c3, c4),
+  the bottom-edge sheets with the critics' fixes (and the Ember band's cause shown), item 16, later the pours. C2: the seven rigB
+  backs plus horn-back-acid on the Acid fix. LAMPS: honest lit dome/orb/rows in eight colours for the site, then Core A night,
+  then the finals. BIOMES: resume (Acid, the Poison looks, Fog, Ember proxies, Haze). MANTLE: the Ice night proxy from 8d753685's
+  fixes with its metrics.
+- 16:2x THE DRIVER RESEARCH (wf_a61bba67-c8e, 5 agents, ~73 min, ~1.3 M tokens): 42 claims confirmed, 9 corrected, 8 unverified (all
+  flagged or left out). The chain a pair ~$2,300-2,700 (woofer $410 at the regular $205; B&C DE1085TN-16 ~$1,020 budgeted, no US
+  stockist of the 16 ohm; FA122 $845); the owner's P&G most likely the Superwax Mini (~2 in 3, from price; 15 in paper woofer, 1 in
+  titanium compression driver on a cast-bronze horn, birch ply, Hypex FA123 bridged 250 W to the woofer; bass ~29-31 Hz vendor data
+  with DSP boost vs Tropos ~51 Hz modelled; 116 dB claimed). Upgrades: FA123 +$158 a pair (woofer 75 -> 250 W, +5.2 dB; plate fit and
+  Xmax near 59 Hz to check); Radian 950PB/950BePB (unproven on our horn); room correction ~$900-1,300. Tropos's parked price is $19,000
+  a pair (the Cloud/acrylic line). Shown to the owner with my pick: the FA123 if it fits, the rest kept, then measure the first pair.
