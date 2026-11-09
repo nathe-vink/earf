@@ -6114,3 +6114,15 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   ~21:14. 20:57 sent the PUSH FREEZE (from 21:25 until lifted, ~22:00; commit locally) to the biomes, brand (its stop hook pushes every
   commit: no commits or the hook's push off; the Book's republish is an Artifact publish, fine), lamps and Mantle lanes; the speaker
   lane and the helpers had it at 20:56.
+- 20:57 c3: FOG'S TURN on the neutral ground landed (a688c59e; contact sheet e6932e5a; A-polished-p2-rc2/turn-fog-00..23.png; only
+  set.color #CFDCE4 -> #DFDAD7; 22 min): corners 211,212,207 (target 213,211,207); the horn's saturation 0.09-0.12 (ice blue) ->
+  ~0.02 (neutral, water-clear). 20:58 GATE FOG TURN launched (wf_ee61bc04-411 founder + photographer, wf_db9593d5-640 skeptic). 20:59
+  sent the site lane: pack it locally ahead of the gate (16 px gutter, rest frame 20, the stage fill to the new ground); c3: GO on Ice and
+  Haze (my 20:56 GO had crossed its message).
+- 20:58 c4 (Ember from 20:57, then Dust, by ~21:12; merge 877fbad8) and c2 (Acid ~21:08, Poison ~21:16; merge e06c3cfa; Fog dropped
+  to the speaker lane) on 63d83f47, tag tallr2; hiddencast 27 hidden, 0 in frame on every shot file.
+- 20:58 LAMPS: the mouth's cause found: v3's clear 6 mm liner shell took Ember's dye through the product file's shell|liner|rim rule;
+  now clear (blue mouth/lip 0.29 -> 0.74; Smoke 0.83). And the lamp kit's Ember dye was an old hand value (#CD8553, orange-brown):
+  both lamps now take the speaker's 2423 Ember dye; in the proxy Core reads a red ball, not near-black plum. Next: one proxy with the
+  20:49 points, then the 128-sample pair and the Hemisphere crop, then Core A/B.
+- 20:58 BRAND: the freeze noted (no commits from 21:25; a republish from the working tree is fine, committed after the freeze).
