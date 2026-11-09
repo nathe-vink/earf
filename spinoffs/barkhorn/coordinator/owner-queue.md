@@ -5991,3 +5991,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   ~235-244; the floor <= ~245 in the wall's warm, >=248 under 1 %; Fog's right face back to ~0.8 with a real fill camera-right; keep
   the front's fix; the horn's depth only if free), proofs at half size at 64 samples, c2/c4 free for variants; sent c2, c4, c3: finish
   the render in progress as evidence, then hold for the next SHA (c3 resumes Fog's turn meanwhile).
+- 20:25 GATE TALLFIX PROOFS complete: 3/3 HOLD (the photographer too). Its additions: the pool's top edge runs along the cabinet-top
+  line on the right (a tangent; the gradient ~5x the passed sweep's; "physically honest but reads as uncontrolled spill"); a faint new
+  horizontal glint on the right side face at mid-height (likely the cutter's lit edge: black-wrap it); the right side faces 20-30 %
+  darker (a white fill card camera-right); optional: two narrow strip lights at the sides, out of frame and out of the front's mirror
+  path, for clean edge highlights on the horn rim and cabinet edges. 20:25 sent the speaker lane. c3 (20:24): Ice landed as evidence
+  (0aa1bf1f; the corner clean; it saw the cutter's wedge on the sweep too); Haze killed 1.5 min in; Fog's turn resumed on #DFDAD7
+  (only set.color changed; A-polished-p2-rc2/, ETA ~20:45).
