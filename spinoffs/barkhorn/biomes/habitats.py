@@ -105,7 +105,7 @@ MODIFY = {'haze_b': {'sundisk': {'azimuth': 30.0, 'elevation': 6.0}},
           'fog_b': {'boulder_01': {'position': [2.6, 3.6, -0.12]}},
           # Acid (the coordinator's gate on cc380fab: a streak over the woofer read as a crack in the front panel): no rain,
           # nearer or farther, inside the speaker's outline as the camera sees it (x, y, half width, z low, z high, margin)
-          'acid_b': {'rain': {'outline': [0.0, 0.0, 0.29, 0.0, 1.42, 0.03]}},
+          'acid_b': {'rain': {'outline': [0.022, 0.0, 0.27, 0.0, 1.25, 0.01]}},   # fitted to the horn's edges in the frame
           # Poison (d): the canopy's first explicit hole, whose sunfleck lit the top batt (the sun's line from the box's
           # top passes inside it), moved 1.0 m along the canopy's x, so its fleck falls on the floor 1 m to the right
           'poison_g5': {'canopy': {'holes': [[-15.362, -1.196, 0.36], [-11.625, 4.314, 0.7], [-8.031, 8.121, 0.8], [-5.531, 12.121, 0.7], [-14.125, 5.431, 0.6], [-16.615, 0.204, 0.4], [-16.306, 3.793, 0.1], [-17.438, -2.458, 0.16], [-16.55, -1.614, 0.18]]}}}
