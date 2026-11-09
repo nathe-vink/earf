@@ -1,0 +1,10 @@
+box: speaker x 0.434-0.566 y 0.221-0.770; the spec's x 0.418-0.582 y 0.2-0.78: INSIDE
+zone lower-left   mean 0.013  p99 0.078  ok
+zone lower-right  mean 0.017  p99 0.131  TOO BRIGHT
+zone top-left     mean 0.021  p99 0.037  ok
+zone top-right    mean 0.025  p99 0.058  ok
+floor outside the column (y >= 0.78) p99 0.117; below y 0.88 p99 0.126  TOO BRIGHT
+edges (4 %) mean 0.019 p99 0.089  ok
+edges by side (p99): {'top': 0.062, 'bottom': 0.093, 'left': 0.082, 'right': 0.099}
+dome: L max 249, p90 247, p50 243, share >= 250: 0.0%
+isolated bright pixels (fireflies: over 4x their 3x3 median): 32

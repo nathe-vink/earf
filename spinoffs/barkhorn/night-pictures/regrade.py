@@ -82,6 +82,64 @@ def grade(lin, ev, wb, max_ev, halation):
     return agx(lin, max_ev)
 
 
+def blender_view(exr, ev, wb, out, view='AgX', look='AgX - Base Contrast'):
+    """Blender's own view transform on the saved linear render (as the engine's frame was made: reproduced to 1 level),
+    at exposure `ev`; returns display sRGB 0-1."""
+    import bpy
+    from PIL import Image
+    sc = bpy.context.scene
+    img = bpy.data.images.get(os.path.basename(exr)) or bpy.data.images.load(exr)
+    vs = sc.view_settings; vs.view_transform = view; vs.look = look; vs.exposure = ev
+    vs.use_white_balance = True; vs.white_balance_temperature = wb; vs.white_balance_tint = 0.0
+    sc.display_settings.display_device = 'sRGB'
+    im = sc.render.image_settings; im.file_format = 'PNG'; im.color_depth = '8'
+    img.save_render(out, scene=sc)
+    return np.asarray(Image.open(out).convert('RGB')).astype(np.float64) / 255.0
+
+
+def smooth(x, a, b):
+    t = np.clip((x - a) / (b - a), 0, 1)
+    return t * t * (3 - 2 * t)
+
+
+def regrade_blender(exr, out, ev, wb, shoulder_ev, shoulder_from, shade, shade_ev, halation):
+    """The regrade in Blender's own AgX (the numpy AgX shifted Ice toward violet, 224 deg against 207, and was dropped):
+    - a softer shoulder: above `shoulder_from` of display luminance the frame blends smoothly toward the same render
+      `shoulder_ev` stops darker (so the top 20 % of the range is compressed, monotonically, and nothing new clips);
+    - the shade: inside the box, what is still near white takes the render at `shade_ev` stops, through a feathered mask;
+    - halation: the dome's own light, blurred wide, added faintly in linear light."""
+    from scipy.ndimage import gaussian_filter, binary_dilation
+    tmp = os.path.splitext(out)[0]
+    hi = blender_view(exr, ev, wb, tmp + '.v0.png')
+    lo = blender_view(exr, ev + shoulder_ev, wb, tmp + '.v1.png')
+    Wt = np.array([0.2126, 0.7152, 0.0722])
+    y = hi @ Wt
+    w = smooth(y, shoulder_from, 1.0)[..., None]
+    g = hi * (1 - w) + lo * w
+    H, Wd = g.shape[:2]
+    if shade:
+        x0, y0, x1, y1 = shade
+        sh = blender_view(exr, ev + shade_ev, wb, tmp + '.v2.png')
+        m = np.zeros((H, Wd), bool); m[int(y0 * H):int(y1 * H), int(x0 * Wd):int(x1 * Wd)] = True
+        m &= y > 0.80
+        m = binary_dilation(m, iterations=max(1, int(2 * Wd / 1920)))
+        ws = gaussian_filter(m.astype(np.float64), 1.5 * Wd / 1920)[..., None]
+        g = g * (1 - ws) + sh * ws
+        if halation > 0:
+            def s2l(c):
+                return np.where(c <= 0.04045, c / 12.92, ((c + 0.055) / 1.055) ** 2.4)
+            src = s2l(sh) * m[..., None]
+            k = Wd / 1920
+            glow = sum(wt * np.stack([gaussian_filter(src[..., c], s * k) for c in range(3)], -1)
+                       for wt, s in ((0.6, 8.0), (0.4, 30.0)))
+            lin = s2l(g) + halation * glow
+            g = np.where(lin <= 0.0031308, 12.92 * lin, 1.055 * np.clip(lin, 0, None) ** (1 / 2.4) - 0.055)
+    for f in ('.v0.png', '.v1.png', '.v2.png'):
+        if os.path.exists(tmp + f):
+            os.remove(tmp + f)
+    return np.clip(g, 0, 1)
+
+
 def opt(name, default, cast=float):
     return cast(sys.argv[sys.argv.index(name) + 1]) if name in sys.argv else default
 
@@ -102,6 +160,14 @@ def main():
         return
     exr, out = sys.argv[1], sys.argv[2]
     ev, wb, max_ev, hal = opt('--ev', 4.3), opt('--wb', 3000.0), opt('--max-ev', 6.5), opt('--halation', 0.02)
+    if '--blender' in sys.argv:
+        shade = None
+        if '--shade' in sys.argv:
+            i = sys.argv.index('--shade'); shade = tuple(float(v) for v in sys.argv[i + 1:i + 5])
+        g = regrade_blender(os.path.abspath(exr), os.path.abspath(out), ev, wb, opt('--shoulder-ev', -1.5),
+                            opt('--shoulder-from', 0.80), shade, opt('--shade-ev', -4.0), hal)
+        finish_and_save(g, out)
+        return
     lin = read_exr(exr)
     # the match to Blender's own AgX (Base Contrast) at the same exposure and white balance: three channel gains fitted
     # on proxy 6's frame (median |difference| 3 levels of 255), so the regrade differs from the gated look only in the
@@ -122,6 +188,11 @@ def main():
         m = binary_dilation(m, iterations=max(1, int(2 * Wd / 1920)))
         w = gaussian_filter(m.astype(np.float64), 1.5 * Wd / 1920)[..., None]
         g = g * (1 - w) + lo * w
+    finish_and_save(g, out)
+
+
+def finish_and_save(g, out):
+    from PIL import Image
     raw = os.path.splitext(out)[0] + '.raw.png'
     Image.fromarray((g * 255 + 0.5).clip(0, 255).astype(np.uint8)).save(raw)
     shot = opt('--shot', None, str); eng = opt('--engine', None, str)
@@ -134,7 +205,7 @@ def main():
                 json.load(open(mj)) if os.path.exists(mj) else None)
     else:
         Image.open(raw).save(out)
-    print('regrade:', out, f'ev {ev} wb {wb} max_ev {max_ev} halation {hal}', 'shade' if '--shade' in sys.argv else '')
+    print('regrade:', out, ' '.join(sys.argv[3:]))
 
 
 if __name__ == '__main__':
