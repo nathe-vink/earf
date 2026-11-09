@@ -6135,3 +6135,15 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   B also answers the critics' day finding (A near-black by day; 3/4 called this the clearest case for B); the October renders' hidden
   helper light noted; sent the October row and an A/B pair; asked one question: render a matched, honest A/B pair (day and night) for
   him to choose?
+- 21:08 OWNER: "can you give me an update of where we're at across sessions and we can start committing what's ready? It could be that
+  we're doing too much at once and we need to sequence the work, so the marketing and brand assets use the right product renders,
+  etc." 21:09 answered: the status by product picture and by asset; ready to commit tonight = the site preview and the Book once the
+  fronts pass, plus every picture that passed; agreed the sequence (1 lock each product's design and materials; 2 lock its studio
+  pictures; 3 only then rebuild the site, Book, social and deck from one approved list, one batch per lock; scenes alongside, entering
+  an asset only after passing). 21:10 wrote coordinator/approved-renders.md, the one list every asset draws from (Tropos, habitats,
+  lamps, Mantle; what's pulled and why).
+- 21:07-21:09: Acid (c2 33dfb519) and Ice (c3 e423c505) talls landed on 63d83f47 (the pool gone; Ice's corner clean); Ember earlier
+  (c4 38fcc96d; 0.88 % at 248 or above; smooth sweep). 21:09 GATE TALLS R2 BATCH 1 (Ember, Acid, Ice) launched (wf_1858fa22-31b
+  founder + photographer, wf_ad01e8ce-eb3 skeptic). 21:04 BIOMES: Fog with the Fresnel shadows (aa1ca856; its own gate 4/4; cabinet
+  -0.06 stop, the ground under it -0.07) -> my gate (wf_a249f7ac-65b, photographer + skeptic). 21:07 MANTLE: the proxy-8 sweep met no
+  target (back 0.2-0.4 m brightens the upper creases; 0.8 m throws a scallop on the wall); lowering the rim to 1.10 m (two crops).
