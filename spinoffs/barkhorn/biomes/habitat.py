@@ -50,6 +50,7 @@ SPLIT = [None]                          # --split R G B: the tint's channel spli
 CARDS = [[]]                            # --card white|black W H Z SIDE_DEG: real cards round the speaker, pushed out of frame
 SCRIM = [None]                          # --scrim T W H D: a silk on the sun's line D m out, W x H m, passing T of the beam
 PLANT_ALPHA = [()]                      # --plant-alpha ID...: wire these Poly Haven plants' own Alpha maps into their cards
+CLEARING_AT = [(0.0, 0.0)]              # --canopy-clearing-at X Y: the gap's centre, world m (default over the speaker)
 CLEARING = [None]                       # --canopy-clearing D: a treefall gap D m across over the speaker (world 0, 0)
 CANOPY_OPEN = [None]                    # --canopy-open F: the canopy's gaps cut as real holes, F of it open (ruling 4)
 REAL_SET = [False]                      # --real-set: every set object seen by every ray, casting shadows (ruling 4)
@@ -245,7 +246,8 @@ def canopy_holes(bpy_, open_frac, spec, cell=0.3):
     # fractal (+-rim m), no soft edge (cells cut or kept)
     clr = None
     if CLEARING[0]:
-        px, py = spec.get('position', [0.0, 0.0, 0.0])[:2]; clr = (-px, -py, CLEARING[0] / 2, spec.get('clearing_rim', 1.5))
+        px, py = spec.get('position', [0.0, 0.0, 0.0])[:2]; cx, cy = CLEARING_AT[0]
+        clr = (cx - px, cy - py, CLEARING[0] / 2, spec.get('clearing_rim', 1.5))
     bm = bmesh.new(); open_n = 0
     vs = [[bm.verts.new((-w / 2 + i * cell, -d / 2 + j * cell, 0.0)) for i in range(nx + 1)] for j in range(ny + 1)]
     for j in range(ny):
@@ -656,6 +658,7 @@ def main():
                     help='a real card: white|black, W H (m), centre Z (m), SIDE_DEG off the speaker-camera line')
     ap.add_argument('--scrim', type=float, nargs=4, help='a silk on the sun line: T (beam passed) W H (m) D (m out)')
     ap.add_argument('--plant-alpha', nargs='+', default=[], help="Poly Haven plants whose own Alpha map is wired in (their glTF has none)")
+    ap.add_argument('--canopy-clearing-at', type=float, nargs=2, default=(0.0, 0.0), help="the gap's centre, world X Y (m)")
     ap.add_argument('--canopy-clearing', type=float, help='with --canopy-open: a treefall gap this many m across over the speaker')
     ap.add_argument('--real-set', action='store_true', help='every set object seen by every ray, casting shadows')
     ap.add_argument('--led', type=float, default=1.0, help="scale the amp's power LED (the asset's strength is 6)")
@@ -666,7 +669,7 @@ def main():
     a = ap.parse_args()
     global SURFACE_GLASS
     WELD[0] = not a.no_weld; SURFACE_GLASS = a.surface_glass
-    SINK[0] = a.sink; LED[0] = a.led; REAL_SET[0] = a.real_set; CANOPY_OPEN[0] = a.canopy_open; CLEARING[0] = a.canopy_clearing; PLANT_ALPHA[0] = tuple(a.plant_alpha); SCRIM[0] = a.scrim; CARDS[0] = [(c[0], float(c[1]), float(c[2]), float(c[3]), float(c[4])) for c in a.card]; SPLIT[0] = a.split; GLOSSY_FLAG[0] = a.glossy_flag
+    SINK[0] = a.sink; LED[0] = a.led; REAL_SET[0] = a.real_set; CANOPY_OPEN[0] = a.canopy_open; CLEARING[0] = a.canopy_clearing; CLEARING_AT[0] = tuple(a.canopy_clearing_at); PLANT_ALPHA[0] = tuple(a.plant_alpha); SCRIM[0] = a.scrim; CARDS[0] = [(c[0], float(c[1]), float(c[2]), float(c[3]), float(c[4])) for c in a.card]; SPLIT[0] = a.split; GLOSSY_FLAG[0] = a.glossy_flag
     HORN['close'] = a.horn_close; HORN['rough'] = a.horn_rough; HORN['shadows'] = not a.horn_front
     sh = json.load(open(a.shot))
     scale_lights(sh, {k: float(v) for k, v in (x.split('=', 1) for x in a.light)})
