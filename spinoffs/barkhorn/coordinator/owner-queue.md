@@ -5772,3 +5772,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   <= ~0.06; (2) the card trim; (3) the wide's key 5-10° up, then toward the camera axis (a real flag or graded scrim if a point
   remains). Proofs on Dust and Ember at half size. 19:33 c4, c3: no wides; push the tall in progress, then render the seven talls on
   the fix. The 20:00 freeze CANCELLED (the site's push now ~21:00); a new freeze to be announced ~15 min before it.
+- 19:34 HAZE GATES, 2 of 3 in on each (founder, photographer): base/(a)/(c) HOLD all (wf_6d8712e8-76a) and (a)/(d) HOLD all
+  (wf_8595d630-0e7). Their reading: the horn's colour is the cool sky seen through it (it passes ~2-4 % of red against 54-68 % of
+  blue, so it reads ultramarine ~270° against any neutral ground); the box turns violet only where the warm sun hits the white
+  lining and comes back out; the lane's "5° and 0.35 stop" is measured on the bright rim (the body's gap is ~10° and ~1.0-1.3 stops);
+  (d) matches only by turning the box blue (cobalt, ~272-281°, against Haze's swatch ~290-304°) and the morning goes pale gray. So no
+  light change on the speaker fixes it: the founder judge says the horn's pour question goes to the founder with the strip, and the
+  4 Nov frame stays meanwhile. (In the studio talls the Haze horn and box match, 262-264° vs 256-262°: it is the warm light on the
+  lining that splits them.) Waiting for the skeptics before deciding.
