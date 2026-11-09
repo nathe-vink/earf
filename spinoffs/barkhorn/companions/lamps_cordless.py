@@ -59,6 +59,20 @@ def on_dock(s):
     return s
 
 
+def speaker_deep(tint):
+    """The speaker set's dye for a tint (launch/tints-trucast.json), as the colour it passes through 3 mm at the chart's
+    figure (strata/scene.absorption's fit), in sRGB hex: the studio engine's `deep` at radius 3 mm."""
+    import math
+    e = json.load(open(os.path.join(HERE, 'launch', 'tints-trucast.json')))[tint.title()]
+    W = (0.2126, 0.7152, 0.0722); lo, hi = 0.0, 50.0
+    for _ in range(80):
+        k = (lo + hi) / 2
+        L = 0.92 * sum(w * math.exp(-k * sp * 3.0) for w, sp in zip(W, e['split']))
+        lo, hi = (k, hi) if L > e['cabinet_tt_20mm'] / 100 else (lo, k)
+    srgb = lambda x: 12.92 * x if x <= 0.0031308 else 1.055 * x ** (1 / 2.4) - 0.055
+    return '#' + ''.join(f'{max(0, min(255, round(255 * srgb(math.exp(-k * sp * 3.0))))):02X}' for sp in e['split'])
+
+
 def unlit_real(s, log=print):
     """lamps-unlit with nothing in frame hidden from the camera (the coordinator, 2026-11-09 19:13; launch/shotcast.py):
     - thru_orb and thru_dome, small hidden lamps behind each lamp's glass shining at the camera, cannot leave the frame
@@ -89,10 +103,22 @@ def unlit_real(s, log=print):
         if p.get('module') == 'earf_moon' and p.get('fn') == 'dome':
             p['extra_materials'] = {'clear6': {'preset': 'clear_resin', 'color': '#FFFFFF', 'deep': '#F7F7F5',
                                                'radius': 0.02, 'roughness': 0.04}}
-            p['assign'] = [{'match': 'liner', 'material': 'clear6'}]
+            # the gate's point 5: the collar's top printed as a void (a true metal, mirroring the dark ceiling); the
+            # anodised black as a dielectric of about 3.7 % reflectance (#363638), satin
+            p['extra_materials']['anod_black'] = {'preset': 'satin_paint', 'color': '#363638', 'roughness': 0.45,
+                                                  'specular': 0.5}
+            p['assign'] = [{'match': 'liner', 'material': 'clear6'},
+                           {'match': 'collar|clamp|hub|crown|gland', 'material': 'anod_black'}]
     st['props'].append({'kind': 'kit', 'shape': 'box', 'material': 'paper', 'color': '#DCD4C8',
                         'size': [8.0, 0.03, 3.6], 'position': [0.0, -3.4, 0.0]})
     log('dome liner: clear; a warm paper wall behind the camera at y -3.4')
+    # the gate's point 4: the table's back edge was off level by about 0.45 deg (the camera yawed 5 deg to its target):
+    # the camera faces straight down the set (+y) and the lens shifts sideways instead, so horizontals stay horizontal
+    c = s['camera']; dx = c['target'][0] - c['position'][0]; dy = c['target'][1] - c['position'][1]
+    W, H = s['size']
+    c['shift_x'] = round(dx / dy * c['lens_mm'] / 36.0, 4)          # in sensor widths (sensor_fit HORIZONTAL)
+    c['target'] = [c['position'][0], c['target'][1], c['target'][2]]
+    log(f"camera: no yaw, lens shift x {c['shift_x']}")
     bad = [r for r in SCAST.hidden(s) if r[3] > 0]
     assert not bad, bad
     s['title'] = s['title'] + ', nothing hidden in frame (2026-11-09)'
@@ -143,11 +169,17 @@ def main():
             # the coordinator, 19:19: the same picture with only the tint changed (both lamps), Core's ball at that
             # tint's own scatter depth (lamps_pdp_r35.core_materials), as its lit pictures had it
             import lamps_pdp_r35 as P35
+            deep = speaker_deep(tint)
             for p in u['set']['props']:
                 if p.get('module') == 'earf_moon':
                     p['flavour'] = tint
                     if p.get('fn') == 'orb':
                         p['materials'] = P35.core_materials(tint, p.get('materials'))
+                    # round 3's one dye per tint (the speaker's tints-trucast.json): the chart figure through each
+                    # shell, Hemisphere's 3 mm tint shell and Core's 9 mm ball at a third (the kit's own Ember,
+                    # #CD8553, was a hand value: with the 6 mm shell clear it read copper)
+                    m = p.setdefault('materials', {})
+                    m['body'] = {**m.get('body', {}), 'deep': deep, 'radius': 0.003 if p.get('fn') == 'dome' else 0.009}
             u['title'] = u['title'].replace('Smoke', tint.title()).replace('smoke', tint)
         sname = 'lamps-unlit-real.json' if tint == 'smoke' else f'lamps-unlit-{tint}-real.json'
         u['render']['samples'] = 128

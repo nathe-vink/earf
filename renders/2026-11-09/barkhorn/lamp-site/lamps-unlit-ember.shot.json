@@ -10,7 +10,7 @@
    0.32
   ],
   "target": [
-   0.08,
+   -0.05,
    0.0,
    0.27
   ],
@@ -21,7 +21,8 @@
    0.08,
    0.1,
    0.25
-  ]
+  ],
+  "shift_x": 0.2117
  },
  "set": {
   "kind": "sweep",
@@ -75,7 +76,8 @@
       "radius": 0.002
      },
      "body": {
-      "radius": 0.00375
+      "radius": 0.009,
+      "deep": "#D81724"
      }
     },
     "cable": false
@@ -98,8 +100,53 @@
     "materials": {
      "liner": {
       "glow_color": "#FFDCB8"
+     },
+     "body": {
+      "deep": "#D81724",
+      "radius": 0.003
      }
-    }
+    },
+    "extra_materials": {
+     "clear6": {
+      "preset": "clear_resin",
+      "color": "#FFFFFF",
+      "deep": "#F7F7F5",
+      "radius": 0.02,
+      "roughness": 0.04
+     },
+     "anod_black": {
+      "preset": "satin_paint",
+      "color": "#363638",
+      "roughness": 0.45,
+      "specular": 0.5
+     }
+    },
+    "assign": [
+     {
+      "match": "liner",
+      "material": "clear6"
+     },
+     {
+      "match": "collar|clamp|hub|crown|gland",
+      "material": "anod_black"
+     }
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "paper",
+    "color": "#DCD4C8",
+    "size": [
+     8.0,
+     0.03,
+     3.6
+    ],
+    "position": [
+     0.0,
+     -3.4,
+     0.0
+    ]
    }
   ]
  },
