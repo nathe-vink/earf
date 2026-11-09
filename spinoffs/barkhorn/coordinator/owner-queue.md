@@ -4649,14 +4649,14 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 16:4x GATE TALL ACID v2 (wf_8fdaa10e-d99): SHOW 3/3. The horn h 103 against the cabinet 106-110 (Delta E_ok ~0.015); the
   honey-gold gone; the base edge glow weak (a dim caramel strip, the dye along the bottom plate's edge); renders more olive than the
   fluorescent sheet. ALL SEVEN TALL FRONTS NOW PASS. Site and brand lanes told.
-- 16:5x sent brand lane: Acid passed (drop "check pending"); fix the Type chapter's "British" to American; bar-decks a gap;
+- 16:4x sent brand lane (the message said 16:5x, ahead of the clock): Acid passed (drop "check pending"); fix the Type chapter's "British" to American; bar-decks a gap;
   pack-lamps only if today's unlit Core A and Hemisphere; the eight-band graphics stay (Smoke's band waits on the Smoke answer, one
   line on the Smoke card); hold the publish for the review's fix list (~20-30 min); then the social posts, press sheet (numbers
   traced to r33-speaker-horn's product.py and BOM), the invitation, the deck cover as a proposal.
-- 16:5x REVIEW of Brand Book v19 launched (wf_996beee8-30d: five lenses: decisions, pictures, words and facts, build at 1440/390,
+- 16:4x REVIEW of Brand Book v19 launched (wf_996beee8-30d: five lenses: decisions, pictures, words and facts, build at 1440/390,
   the owner's eye; merge; skeptic verification of blockers and majors; a fix list and an owner summary). The book exported from
   00c2f6e3 into scratchpad/brandbook-v19 (identical to the published page).
-- 16:5x LAMPS GATE launched (wf_a02e1a2a-b5e; four critics + tally) on heroes-proxy, rows-proxy and Core A night (B's night as
+- 16:4x LAMPS GATE launched (wf_a02e1a2a-b5e; four critics + tally) on heroes-proxy, rows-proxy and Core A night (B's night as
   context). My own read: the lit faces pastel (Ember's Core pink; the domes coral, peach, lime, aqua, magenta), likely an
   exposure / view-transform choice. Sent the lamps lane: hold the full-size Hemisphere set until the verdict; meanwhile item 90's
   proxies (Hemisphere Ice at 5700 K, Haze at 4000 K, a per-tint rows proxy), EXRs beside the finals, all eight tints rendered
@@ -4667,6 +4667,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   old frame's dark contact band); a rain streak across the woofer's upper left reads as a scratch (3/3). Recommended 2/3: pull the
   yellow-olive cast out of the storm (sky hue ~60, ground sat ~0.30) so the speaker is the only yellow; tame the near-white puddle
   and the silver rocks. Optional: sparse water beads.
-- 16:5x sent biomes: the Acid verdict and fixes (seat the base on its reflection by real means, proved on a base crop first; rain
+- 16:4x sent biomes (the message said 16:5x, ahead of the clock): the Acid verdict and fixes (seat the base on its reflection by real means, proved on a base crop first; rain
   out of the speaker's outline, re-rendered, no paint-out; the storm toward neutral gray); queue: Fog final, the Poison trace and
   passes, the Haze final, the Acid re-render, then the Poison clearing (if wanted) and the Ember proxies.
+- 16:45 TIME FIX: my 16:4x messages to the site lane (Acid passed), the brand lane, the lamps lane and the biomes lane said
+  "16:5x"; date -u read 16:44-16:45 when they went. The log lines are corrected. Rule kept: date -u before every stamp.
