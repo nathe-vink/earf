@@ -190,11 +190,37 @@ def build(frame, samples, scale):
         # faceted reflector round it, the cut-off from that geometry, not a spread setting. Of the COB's ~575 lm, the
         # liner's 145 lm is its own emission above; the other ~430 lm leave the COB here, and the bore and reflector
         # take what they really take
-        part('out-dome-pendant', 'cob', SC.principled('cob-body', '#2A2A2A', 0.5), c)
+        # COB_DZ (mm, a PROPOSAL for the owner, 2026-11-09): the COB and its carrier lowered down the bore, so its
+        # cut-off widens from the drawn 47 deg (22 up the 46 bore) and the light between the mouth's 46 deg and the new
+        # cut-off falls on the opal liner: a real path to the glow (8.2: 13.3 up the bore, 60 deg)
+        cdz = float(os.environ.get('COB_DZ', '0')) * MM
+        cob_ob = part('out-dome-pendant', 'cob', SC.principled('cob-body', '#2A2A2A', 0.5), c)
+        if cdz and cob_ob is not None:
+            cob_ob.location.z -= cdz
         ld = bpy.data.lights.new(f'cob-{tint}', 'AREA'); ld.shape = 'DISK'; ld.size = 0.011; ld.energy = float(os.environ.get('COB_LM', '430')) * WLM
         ld.color = bb
         ob = bpy.data.objects.new(f'cob-{tint}', ld); bpy.context.scene.collection.objects.link(ob)
-        ob.location = (x, y, rim_z + 0.0815)
+        ob.location = (x, y, rim_z + 0.0815 - cdz)
+        rl = float(os.environ.get('RING_LM', '0'))
+        if rl > 0:
+            # PROPOSAL (2026-11-09, for the owner): a ring of mid-power LEDs, 2700 K, on a band round the hub's outside
+            # (r 32, z 64 to 72 above the rim), facing out onto the opal liner's inside: the glow's own light, a real
+            # part (in the CAD it would be a flex board on the hub, its driver beside the COB's)
+            bm = bmesh.new(); r_, z0r, z1r, n = 0.032, 0.064, 0.072, 64
+            vs = [(bm.verts.new((r_ * math.cos(2 * math.pi * i / n), r_ * math.sin(2 * math.pi * i / n), z0r)),
+                   bm.verts.new((r_ * math.cos(2 * math.pi * i / n), r_ * math.sin(2 * math.pi * i / n), z1r))) for i in range(n)]
+            for i in range(n):
+                a_, b_ = vs[i], vs[(i + 1) % n]
+                bm.faces.new((a_[0], b_[0], b_[1], a_[1]))
+            bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+            me = bpy.data.meshes.new(f'ring-led-{tint}'); bm.to_mesh(me); bm.free()
+            ro = bpy.data.objects.new(f'ring-led-{tint}', me); bpy.context.scene.collection.objects.link(ro); ro.location = c
+            area = 2 * math.pi * r_ * (z1r - z0r)
+            em = bpy.data.materials.new(f'ring-led-em-{tint}'); em.use_nodes = True
+            bsdf = em.node_tree.nodes['Principled BSDF']; bsdf.inputs['Base Color'].default_value = (0.9, 0.9, 0.88, 1)
+            bsdf.inputs['Emission Color'].default_value = (*bb, 1); bsdf.inputs['Emission Strength'].default_value = rl * WLM / area
+            em.cycles.emission_sampling = 'FRONT'
+            me.materials.append(em)
 
     def core(tint, x, floor_z, y=0.0, rot=0.0):
         """Core A as drawn, on its dock, lit, the dock's underside on floor_z at (x, y)."""
