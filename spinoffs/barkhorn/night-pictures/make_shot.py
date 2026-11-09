@@ -163,7 +163,9 @@ def shot(root, tint, lamp_dir, fmt='wide', core=False):
             # the Hemisphere on the speaker's centre line between it and the wall, 0.35 higher than in its own picture so
             # (its rim 1.45 up, its cord cut to reach the ceiling): the wall behind the horn and the cabinet the brightest
             {'blend': os.path.join(lamp_dir, 'hemi-fog-night.blend'), 'offset': [HEMI_A[0], HEMI_A[1], HEMI_A_DZ], 'keep_table': False,
-             'cord_to_ceiling': True, 'canopy': os.path.join(lamp_dir, 'hemi-canopy.stl')},
+             'cord_to_ceiling': True, 'canopy': os.path.join(lamp_dir, 'hemi-canopy.stl'),
+             # the coordinator, 18:13: the Vero SE 10's real emitter, an 11 mm disk at the top of the bore
+             'honest_cob': 0.011},
         ] + ([] if core or not READING else [
             {'blend': os.path.join(lamp_dir, 'hemi-fog-night.blend'), 'offset': [HEMI_READ[0], HEMI_READ[1], HEMI_READ_DZ],
              'keep_table': False, 'cord_to_ceiling': True, 'canopy': os.path.join(lamp_dir, 'hemi-canopy.stl')}])}}
@@ -172,7 +174,8 @@ def shot(root, tint, lamp_dir, fmt='wide', core=False):
     # gate 2: the lamp as the lamps lane's file has it (COB 3.2 W, 2700 K), the brightness from exposure (+2 EV), white
     # balance 1000 K above the lamp as before (a neutral warm white); the finish's contrast eased (red off 0)
     out['finish']['contrast'] = 0.05
-    out['render'].update({'samples': 256, 'view': 'AgX', 'look': 'AgX - Base Contrast', 'exposure': 3.0,
+    # the coordinator, 18:13: more samples for the small source (the honest COB)
+    out['render'].update({'samples': 512, 'view': 'AgX', 'look': 'AgX - Base Contrast', 'exposure': 3.0,
                           # gate 3: white balance near the 2700 K lamp, so Ice's batts keep their red (pale blue-white)
                           'white_balance_k': 3000, 'white_balance_tint': 0.0,
                           # the Core's light reaches the room through its own ball, the Hemisphere's through its liner:

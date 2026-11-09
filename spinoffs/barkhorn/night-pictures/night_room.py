@@ -92,7 +92,7 @@ _ROOM = ('wall', 'floor', 'table', 'leg', 'ceiling', 'fill', 'kicker', 'dusk', '
          'mullion', 'transom', 'sheer')     # the lamps lane's window (26400e7c): its frame, its sheers and its sky lamps
 
 
-def _append_lamp(bpy, blend, offset, keep_table=False, led_up=False, cord_to=None, canopy=None):
+def _append_lamp(bpy, blend, offset, keep_table=False, led_up=False, cord_to=None, canopy=None, honest_cob=None):
     with bpy.data.libraries.load(blend, link=False) as (src, dst):
         dst.objects = list(src.objects)
     got = []
@@ -111,6 +111,21 @@ def _append_lamp(bpy, blend, offset, keep_table=False, led_up=False, cord_to=Non
             # no rotation, which in Blender points it down (-Z), into the dock (flagged to the coordinator, 2026-11-03)
             o.rotation_euler = (math.pi, 0.0, 0.0)
         got.append(o.name)
+    if honest_cob:
+        # the coordinator, 18:13: the Hemisphere's real emitter, not the lamps lane's 17 cm stand-in disk (lamp_pictures
+        # round 6, for a soft bowl shadow). The Vero SE 10's light-emitting surface, a disk of honest_cob metres, at the
+        # top of the 46 bore 22 up from its mouth (crystal.py: just under the COB's face, where the CAD's faceted
+        # reflector cone ends), emitting a full hemisphere: the bore and the reflector make the 46 deg cut-off, not a
+        # spread setting. Its power stays the lamps lane's 3.2 W (0.0065 W a lumen)
+        bpy.context.view_layer.update()
+        cob = next((bpy.data.objects[n] for n in got if n.startswith('cob') and bpy.data.objects[n].type == 'LIGHT'), None)
+        refl = next((bpy.data.objects[n] for n in got if n.startswith('reflector')), None)
+        if cob and refl:
+            zt = max((refl.matrix_world @ v.co).z for v in refl.data.vertices)
+            cob.data.size = honest_cob; cob.data.spread = math.pi
+            cob.location = (cob.location[0], cob.location[1], zt - 0.0005)
+            print(f'night_room: the COB a {honest_cob * 1000:.0f} mm disk at z {zt - 0.0005:.4f} (the bore\'s top), '
+                  f'{cob.data.energy:.2f} W, spread 180 deg', flush=True)
     if cord_to is not None:
         # a pendant's cord is cut to the room (the lamps lane's CAD gives one length): its mesh stretched along z
         # from its bottom so its top meets the ceiling
@@ -264,7 +279,7 @@ def night_set(bpy, spec, mats):
         _box(bpy, f['name'], f['center'], f['size'], _principled(bpy, f['name'], f['color'], f.get('rough', 0.5)))
     for L in n.get('lamps', []):
         got = _append_lamp(bpy, L['blend'], L['offset'], L.get('keep_table', False), L.get('led_up', False),
-                           r['height'] if L.get('cord_to_ceiling') else None, L.get('canopy'))
+                           r['height'] if L.get('cord_to_ceiling') else None, L.get('canopy'), L.get('honest_cob'))
         print('night_room: lamp', os.path.basename(L['blend']), 'objects:', ', '.join(sorted(got)), flush=True)
 
 
