@@ -5547,3 +5547,19 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   - risks: the green at the box's foot can read as a base light, and a pale skull-like object in the litter reads as a pun.
   All three put the final exposure at about +1.5, and +2.35 is out. 18:58 sent biomes these as an addendum: the toe grade from the
   EXR only as a second step after the box is lit, with the cone darker than its surround; the order unchanged.
+- 18:59-19:00 BOOK v21 owner lens (wf_3903be85-9ab) and words + build (wf_7544c85d-927) complete. Owner: 25 of 32 fixed, 7 partly,
+  none undone; "Not as built. After a 30-45 minute pass on the blocker and the four majors, yes: it reads as a clear brand update
+  against live." Phone: the seven fronts fill the first screen (72 %); laptop: a row of 165x206 tiles (20 %), weaker than live's hero.
+  Missing: the lamps and Mantle near the top (39 % down on a laptop). Words: 25 fixed, 4 partly; NEW majors: The record now reads as if
+  the new tagline is retired (and '.,'); the color note says every cabinet is stock sheet (my item 8 wording; Poison and Haze are
+  custom batches); the certificate still prints "THE OWNER'S TO SET". Traced and correct: 1295 mm, about 73 kg (72.6 modeled), 560/428,
+  75 W / 2 x 125 W, 32.3 %/25.8 %, 575 lm. The 64 kg horn-off figure (mine, 17:44: 72.6 less the lift-off parts) is not documented:
+  dropped, as on the site. "A seat at the first Session" for a hundred founders vs six listeners: fixed to "a Session". Build: all 9
+  of its items fixed; NEW: chapter links opened fresh land past the heading (smooth scroll before the font swap); the Mantle press
+  sheet lacks its "in development" note; CLEAR SPACE struck on phones.
+- 19:01 sent the brand lane ONE v22 list of 27 (rc-review/book-v22-punch.md): blocker the Hemisphere press-sheet Smoke picture off
+  (and "Hung low over a table."); majors The record, the color note, the cover at 1024+ (full-width row, 3:5 crop of the empty
+  seamless, 189x315 fronts), 4 + 3 at 561-1023, make_book.py (swap by copying files tonight; fix the script after); re-shoots
+  (certificate, card, hotel, the Tint Library lid lines + Render caption, social.jpg after the swap); the Mantle + lamps pair moved up
+  into Position; the press grid; the words; all "Pictures to come" into one list under Facts. One republish after the four fronts
+  pass my gate (~19:50).
