@@ -4807,3 +4807,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 17:01 sent the speaker lane: the close-up fixes (front with ordinary cards + rigaudit/cardcast; side: block the seam's softbox
   reflection, remove the corner card, lighten the backdrop; satin split per face + a true outer-wall view; re-check satin-outside
   frames since 3 Nov 15:14) after asks A and B and the bottom-edge sheets v2; the turns' pass and notes; an order and times asked.
+- 17:05 GATE ACID BACK + HORN-BACK (wf_1aa80df2-c50, c2 a1322583; 3 critics, 18 min): BACK SHOW 3/3 (see-through; grounded on its
+  feet; no light; horn 98 vs cabinet 104, the same yellow seen deeper; EARF reads at 440 px, better than Ember's; a set with the Ember
+  back: wall 84.6 both); HORN-BACK SHOW 3/3 (the amber mismatch gone: horn 98-100 vs cabinet 100-103; the pod dark olive bottle
+  glass). Optional: a camera-left black flag for all seven backs or none; the amp plate's green status LED off for a strict "nothing
+  on" day shot (Ember too); captions: Acid renders olive (no fluorescence). ALL SEVEN BACKS AND ALL SEVEN HORN-BACKS NOW PASS.
