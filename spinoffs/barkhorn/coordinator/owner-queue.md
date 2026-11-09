@@ -4600,3 +4600,19 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 16:25 my audit of the rigB backs: clean (key 1.3, fill 3.9; one reflect-only card 0.0 %; the six share one rig). Gates launched:
   the six backs (wf_0a6af918-50d) and the Acid habitat (wf_c6da20d8-233). Sent to the lamps lane: Core A as drawn, yes; write the
   render queue so c3 and c4 can split the full-size frames after the proxies pass.
+- 16:28 biomes lane: POISON TONE-MAP DIAGNOSTIC at 6f4a88bb9c7f18afd9e3fa54422dd7aa29914fc1 (proxies-0202/
+  poison-look-ab-base-punchy-basecontrast.jpg): frame/floor/box/upper cabinet sRGB (HSV hue, sat): 51c7eff2 AgX no look +0.75 EV
+  66.5/76.6/31.3/(51,55,24) (68°, 0.56); Punchy 47.0/56.0/18.0/(34,36,13) (65°, 0.64); Base Contrast -0.5 EV 56.1/66.1/25.0/
+  (42,45,19) (67°, 0.58). Not the tone map; the lane reads the pale beige as the interior (the lining under the top band). Asked
+  for the clearing's parameters; Poison held.
+- 16:33 sent (biomes): agreed, not the tone map. But in the studio the site's tall Poison (same asset, white lining) shows the
+  same upper field clean green; under the canopy it is R ~ G, which light through two green walls at ~1.7 % red each can't give.
+  So first a cheap DIAGNOSTIC: (1) a ray trace through three beige pixels (surfaces crossed, mm of green resin, what lights the
+  lining and through which faces or openings); (2) Diffuse/Glossy/Transmission/Volume passes on the speaker crop with each pass's
+  share of R, G, B; (3) the cause: a leak fixed in geometry (copied to the speaker lane if in the asset); a reflection (then no
+  clearing: fix what is mirrored); or honest (then (c)). (c) set: a real treefall gap, cells cut, 1.2 m fractal rim, centred over
+  the speaker (canopy-local 0,-4), 20 m across (~32° half-angle at the 16 m canopy) plus a 30 m proxy; the rest at 25 % as now,
+  the nine holes and the sun unchanged (its beam through the gap lands ~18 m away; never on the cabinet's top or front); no
+  lamps; the mist casts shadows; check the HDRI above ~45° first (leaf canopy = more yellow-green light, tell me before rendering);
+  box median 35-45; hue >= 90°, sat >= 0.55; strip 51c7eff2 | 20 m | 30 m. Queue: Fog final, the trace and passes, the Haze final,
+  then the clearing (if still wanted) and the Ember proxies.
