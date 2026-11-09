@@ -4711,3 +4711,50 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   lane: item 16 noted (T/S being checked from here), and for the side rig SHA say whether c4 must rebuild models (IEC pins, the
   rating plate) and whether any hero-light angle shows the back; the lamps lane: c2 takes all of Core, c3/c4 not free.
 - 16:48 a background check of the FaitalPRO 15PR400-8 T/S figures against the maker's datasheet launched (an agent with web access).
+- 16:46 brand lane: items 1-3 done at 09e764f6 (Acid's "check pending" gone; the Type rule "American, as the site has it: color,
+  gray, aluminum, meter."; bar-decks a gap; pack-lamps a gap too: its Core is a clear polished red ball in a box, not Core A, with a
+  Smoke drum; the Smoke card notes the eight-band graphics keep its band until the owner decides). Social posts at c4896f14 (the
+  tagline over the seven fronts; Dust in the desert "A long, dry afternoon."; the Ice front "Seven colors, Ember to Fog.", all
+  marked Render). Press sheets at 655e2d98: seven colors; the company sheet the seven fronts, Tropos the Ember front; Hemisphere,
+  Core and Mantle labelled gaps; every Tropos figure traced (1293 mm high; 560 wide, product.py; depth 423 / 420; 72.6 kg on its
+  own feet; 15PR400, DE1085TN, FA122 at 2 x 125 W, out-cloud/bom.md; 1 kHz LR4; 51 Hz at -3 dB, ports 38 Hz; about 115 dB at 1 m;
+  the lining 100 mm batts and voile); flagged the Mantle sheet's "floats on its own light... a base that glows at its edge".
+- 16:47 SITE LANE: THE RELEASE CANDIDATE PUSHED. r49-site-rc at 04d9038adff0cc54cfc301b68053fb5cda05c545 (the build d826d868 +
+  screenshots); main untouched. Preview alias https://earf-git-r49-site-rc-nathanielvink-4975s-projects.vercel.app; the deployment
+  earf-1va0s8vc1-nathanielvink-4975s-projects.vercel.app (dpl_BodDupz9Sx6pZrDZM9xvxqCJhnYU), READY at ~16:51 (behind Vercel
+  Authentication). web.py with COPY_NEXT, V2, HOME_V2 and a new RC flag (the build fails if any page loads an old-speaker, lit-lamp
+  or old-Mantle picture); r47-site-next keeps every flag off (90e57331, 557468a5). Its checks: 57 routes at 1440/390 (axe, no
+  sideways scroll, links, no console errors); mobile Lighthouse home 96/96/96, CLS 0. Changes against live (main 856f80d7): the home
+  as a launch film (the tagline over the seven fronts; Tropos with three design figures; "One hangs. One wanders." lamps off;
+  Mantle new by day; "Drawn to be made."; "Write to us."); Tropos pictured only by the new tall frames (no Smoke page); lamps the
+  unlit Smoke pair "Shown in Smoke"; Mantle the new studio frame "Shown in Ember"; the copy (American; one name per thing; horn A
+  polished inside and out; weight "to follow"); real addresses (/tropos, /tropos/{color}, /lighting, /mantle, /colors/{color},
+  /contact); press and journal held; no form, no founder. Its notes: a faint vignette band on some 3:2 desk views; the hero a
+  sheet of seven with gutters; link previews resolve only in production. Told me every push to any lane queues a preview build
+  (one build at a time): my coordinator pushes are now batched.
+- 16:47 biomes lane (stamped 16:47): the Acid plan: seat-only base crops at sink 0.015/0.020/0.025 (0.03 shows the submerged part);
+  the rain kept out of the speaker's outline by a camera-angle test (eb734eee); the storm cast from the sun #E8DC7A: proxies with a
+  neutral sun #E6E3DA, and with tint 0; the puddle and rocks by real means; no beads.
+- 16:48 brand lane: the invitation at 9bcdc739 (the Ice habitat at dusk; seven colors; Smoke off the strips; "A render; on the
+  night, the real thing."), asking about "spring 2027" and "A listening room follows in February and March"; the deck cover as a
+  proposal at 6ea1afd2 (deck untouched). Waiting for the fix list to publish the Book once.
+- 16:48 lamps lane: the Hemisphere set HELD (stopped by PID at its first frame); at d4986f38: item 90 proxies (item90-heroes-proxy:
+  Ice 2700 K mint-aqua / 5700 K sky blue, Haze 2700 K magenta-pink / 4000 K violet; item90-rows-proxy: 2700 K vs per-tint), the
+  switch CCT_MODE=pertint (a PROPOSAL; default as drawn); EXRs beside the finals; Smoke's key 'black'. Its exposure numbers (Ember,
+  0.3 scale): Core x8 -3 EV face 186 / chroma 0.094 (pink-salmon); x16 -4 EV 158 / 0.129; x32 -5 EV 126 / 0.144 (deep Ember but
+  reads lit by the studio, the halo nearly gone). Hemisphere x2 -1 EV 179 / 0.076; x8 -2 EV 159 / 0.090 (the paper whiter, the
+  pool fades). AgX Medium High Contrast; keep AgX and move the studio ratio.
+- 16:50 sent brand lane (stamped 16:5x; date -u read 16:50 just after): the invitation's "spring 2027" -> [DATE] and the listening-
+  room line out (both held for the owner: the date undecided, naming the bar in public open); the Mantle press sheet's light
+  sentence cut to words true for A and C3 ("A turntable in cast acrylic. The plinth floats 40 mm over its base."); LAUNCH-GRID
+  later; batch pushes.
+- 16:51 the RC deployment READY. A share link created on that deployment for the reviewers (and the owner if needed), valid to
+  10 Nov 15:51 UTC (Vercel's get_access_to_vercel_url; anyone with the link can view that deployment until then). Checked: the
+  share cookie opens /, /tropos, /tropos/ember, /lighting, /mantle, /contact (200); x-robots-tag noindex, nofollow; robots.txt.
+- 16:5x THE RC REVIEW launched as three workflows so all five lenses run at once (this container caps a workflow at 2 agents):
+  decisions + pictures (wf_2732ec2b-9c5), words + build (wf_8ba57711-9df), the owner's eye (wf_04126f94-84b); the brief
+  rc-review/brief.md with the team's claimed changes appended. Merge, verification and the fix list follow.
+- 16:5x my own read of the lane's screenshots: a clean, credible change (the tagline over the seven fronts; Tropos's 51 Hz / 115 dB
+  / 2 x 125 W; "Drawn to be made."; product pages with seven swatches and a spec table). Watch: the lamps shown only in Smoke
+  (the held color); hello@earf.world bounces (a production blocker, fine for the preview); the spec table lists a cloth-disc cover
+  while item 12 (the cover and the caldera) is open.
