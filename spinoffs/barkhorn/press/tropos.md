@@ -12,7 +12,7 @@ so it is dressed in white voile. A cloth cover goes on over the woofer.
 | Height | 1295 mm |
 | Width | 560 mm, the cabinet, with the horn flush |
 | Depth | 428 mm overall, 420 mm at the cabinet |
-| Weight | About 73 kg on its own feet, about 64 kg with the horn lifted off (modeled, not weighed) |
+| Weight | About 73 kg on its own feet (modeled, not weighed) |
 | Woofer | FaitalPRO 15PR400, 15-inch, with two ports in the front's lower corners |
 | Horn driver | B&C DE1085TN, 2-inch compression driver |
 | Horn | Formed from the same tinted cast acrylic as its cabinet, a turned acrylic throat; the cabinet's full depth |

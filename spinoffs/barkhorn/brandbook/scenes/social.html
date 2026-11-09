@@ -9,8 +9,8 @@ body { width: 1720px; height: 760px; background: #E7E2DA; display: flex; gap: 20
 .post .w { position: absolute; right: 30px; bottom: 30px; height: 15px }
 /* 1: the seven, each its own studio render */
 .p1 .t { top: 38px; font-size: 50px; color: var(--ink) }
-.p1 .grid { position: absolute; left: 34px; right: 34px; top: 214px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px 10px }
-.p1 figure { margin: 0 }
+.p1 .grid { position: absolute; left: 34px; right: 34px; top: 214px; display: flex; flex-wrap: wrap; justify-content: center; gap: 22px 10px }
+.p1 figure { margin: 0; width: calc((100% - 30px) / 4) }
 .p1 figure img { width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block; border-radius: 2px }
 .p1 figcaption { font-family: var(--mono); font-size: 8.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-top: 4px }
 .p1 .m { left: 34px; bottom: 32px; color: var(--muted) }

@@ -18,7 +18,7 @@ SITE_PICS = ['hero-1200.jpg', 'hero-portrait.jpg', 'lineup-1200.jpg', 'facade-12
             [f'{k}-habitat-1200.jpg' for k in KEYS] + [f'{k}-studio-light-1200.jpg' for k in KEYS]
 BRAND = {'lockup-paper.jpg': 'brand/mark/earf-lockup-render.png', 'lockup-night.jpg': 'brand/mark/earf-lockup-render-night.png',
          'globe-paper.jpg': 'brand/mark/earf-globe-render.png', 'globe-night.jpg': 'brand/mark/earf-globe-render-night.png',
-         'globe-flat.png': 'brand/mark/earf-globe-colour.png', 'wordmark-color.png': 'brand/mark/earf-wordmark-colour.png',
+         'globe-flat.png': 'brand/mark/earf-globe-colour.png', 'wordmark-color.png': 'brand/mark/earf-wordmark-color-mark.png',
          'lockup-black.png': 'brand/mark/earf-lockup-black.png', 'lockup-white.png': 'brand/mark/earf-lockup-white.png',
          'globe-real.jpg': 'brand/real/earf-real-colour.png', 'globe-real-night.jpg': 'brand/real/earf-real-colour-night.png'}
 BAR = {'bar-door.jpg': 'renders/2026-10-22/barkhorn/planet41/finals/door-mother-colour-p3-1200.jpg',
@@ -76,10 +76,12 @@ def main():
     os.makedirs(IMG, exist_ok=True)
     for f in SITE_PICS:
         save(Image.open(os.path.join(SITE, f)), f.replace('-1200', '').replace('-1440', '').replace('-800', ''))
-    for f in [f'icon-{n}-light.webp' for n in ['ember', 'dust', 'acid', 'poison', 'ice', 'haze', 'fog', 'smoke']]:
-        save(Image.open(os.path.join(SITE, f)), f.replace('-light.webp', '.png'), width=256)
+    for n in ['ember', 'dust', 'acid', 'poison', 'ice', 'haze', 'fog', 'smoke']:   # the chips: the brand icons in the Mark values
+        subprocess.run(['rsvg-convert', '-w', '256', '-h', '256', os.path.join(B, 'brand', f'icon-{n}.svg'),
+                        '-o', os.path.join(IMG, f'icon-{n}.png')], check=True)
     for dst, src in BRAND.items():
-        save(Image.open(os.path.join(B, src)), dst, width=1200)
+        save(Image.open(os.path.join(B, src)), dst, width=1600 if dst == 'wordmark-color.png' else 1200)
+    save(Image.open(os.path.join(B, 'brand/mark/earf-lockup-colour.png')), 'lockup-color.png', width=250)   # the header mark
     root = subprocess.run(['git', 'rev-parse', '--show-toplevel'], capture_output=True, text=True, cwd=HERE).stdout.strip()
     for dst, src in BAR.items():
         blob = subprocess.run(['git', 'show', f'origin/r33-planet-world:{src}'], capture_output=True, cwd=root).stdout
