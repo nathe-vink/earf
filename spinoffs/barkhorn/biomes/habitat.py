@@ -47,6 +47,7 @@ SURFACE_GLASS = False                   # --surface-glass: the tint on the faces
 WELD = [True]                           # the asset's split vertices welded so its glass volumes close (--no-weld: off)
 GLOSSY_FLAG = [False]                   # --glossy-flag: the flag and cards seen in reflections only (the earlier trick)
 SPLIT = [None]                          # --split R G B: the tint's channel split, luminance held per part (the shared 9097 fix)
+SCRIM = [None]                          # --scrim T W H D: a silk on the sun's line D m out, W x H m, passing T of the beam
 PLANT_ALPHA = [()]                      # --plant-alpha ID...: wire these Poly Haven plants' own Alpha maps into their cards
 CLEARING = [None]                       # --canopy-clearing D: a treefall gap D m across over the speaker (world 0, 0)
 CANOPY_OPEN = [None]                    # --canopy-open F: the canopy's gaps cut as real holes, F of it open (ruling 4)
@@ -262,6 +263,43 @@ def canopy_holes(bpy_, open_frac, spec, cell=0.3):
     me.materials.append(m); can.data = me
     print(f'canopy holes: {nx} x {ny} cells of {cell} m, {open_n / (nx * ny):.1%} open ({len(holes)} explicit holes cut)'
           + (f', a clearing {2 * clr[2]:.0f} m across at canopy-local ({clr[0]:.1f}, {clr[1]:.1f}), rim +-{clr[3]} m' if clr else ''))
+
+
+def scrim(bpy_, linked, spec):
+    """A photographer's silk: a real cloth on the sun's line between the sun and the speaker, square to the beam,
+    `t` of the direct light passing straight through (the open weave) and the rest scattered on through the cloth
+    (translucent), so the speaker's direct sun drops by about log2(1/t) stops and the sky fill is unchanged. Every ray
+    type, casting shadow; pushed out along the beam until no corner falls in the frame."""
+    import bmesh
+    from mathutils import Vector
+    from bpy_extras.object_utils import world_to_camera_view
+    t, w, h, d = spec
+    sc = bpy_.context.scene; cam = sc.camera
+    sun = next((o for o in sc.objects if o.type == 'LIGHT' and o.data.type == 'SUN' and not o.hide_render), None)
+    if sun is None or cam is None or not linked:
+        print('scrim: no sun'); return
+    z = (sun.matrix_world.to_3x3() @ Vector((0, 0, 1))).normalized()       # toward the sun
+    c0 = Vector((linked[0].location.x, linked[0].location.y, linked[0].location.z + 0.7))
+    bm = bmesh.new(); bmesh.ops.create_grid(bm, x_segments=1, y_segments=1, size=0.5)
+    me = bpy_.data.meshes.new('scrim'); bm.to_mesh(me); bm.free()
+    m = bpy_.data.materials.new('scrim'); m.use_nodes = True; nt = m.node_tree
+    for n in list(nt.nodes):
+        if n.type != 'OUTPUT_MATERIAL': nt.nodes.remove(n)
+    tr = nt.nodes.new('ShaderNodeBsdfTransparent'); tl = nt.nodes.new('ShaderNodeBsdfTranslucent')
+    tl.inputs['Color'].default_value = (0.9, 0.9, 0.9, 1)
+    mx = nt.nodes.new('ShaderNodeMixShader'); mx.inputs['Fac'].default_value = 1.0 - t
+    nt.links.new(tr.outputs[0], mx.inputs[1]); nt.links.new(tl.outputs[0], mx.inputs[2])
+    nt.links.new(mx.outputs[0], next(n for n in nt.nodes if n.type == 'OUTPUT_MATERIAL').inputs['Surface'])
+    me.materials.append(m)
+    f = bpy_.data.objects.new('scrim', me); sc.collection.objects.link(f)
+    f.scale = (w, h, 1.0); f.rotation_euler = z.to_track_quat('Z', 'Y').to_euler()
+    for k in range(40):
+        f.location = c0 + z * (d + 0.25 * k)
+        bpy_.context.view_layer.update()
+        pts = [world_to_camera_view(sc, cam, f.matrix_world @ Vector(v)) for v in ((-.5, -.5, 0), (.5, -.5, 0), (.5, .5, 0), (-.5, .5, 0))]
+        if not any(0 <= p.x <= 1 and 0 <= p.y <= 1 and p.z > 0 for p in pts):
+            break
+    print(f'scrim: {w} x {h} m passing {t} of the beam, {round((f.location - c0).length, 2)} m out on the sun line at {[round(v, 2) for v in f.location]}')
 
 
 def plant_alpha(bpy_, aids, res='1k'):
@@ -530,6 +568,8 @@ def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extr
                         setattr(o, a, True)
                     fixed.append(o.name)
             print('real set: every ray type on for', fixed)
+        if SCRIM[0]:
+            scrim(bpy_, linked, SCRIM[0])
         if PLANT_ALPHA[0]:
             plant_alpha(bpy_, PLANT_ALPHA[0])
         if CANOPY_OPEN[0] is not None:
@@ -560,6 +600,7 @@ def main():
     ap.add_argument('--glossy-flag', action='store_true', help='the flag and side cards in reflections only (before 20:11)')
     ap.add_argument('--split', type=float, nargs=3, help="the tint's channel split, R G B (luminance held per part)")
     ap.add_argument('--canopy-open', type=float, help="the canopy's gaps cut as real holes, this fraction open")
+    ap.add_argument('--scrim', type=float, nargs=4, help='a silk on the sun line: T (beam passed) W H (m) D (m out)')
     ap.add_argument('--plant-alpha', nargs='+', default=[], help="Poly Haven plants whose own Alpha map is wired in (their glTF has none)")
     ap.add_argument('--canopy-clearing', type=float, help='with --canopy-open: a treefall gap this many m across over the speaker')
     ap.add_argument('--real-set', action='store_true', help='every set object seen by every ray, casting shadows')
@@ -571,7 +612,7 @@ def main():
     a = ap.parse_args()
     global SURFACE_GLASS
     WELD[0] = not a.no_weld; SURFACE_GLASS = a.surface_glass
-    SINK[0] = a.sink; LED[0] = a.led; REAL_SET[0] = a.real_set; CANOPY_OPEN[0] = a.canopy_open; CLEARING[0] = a.canopy_clearing; PLANT_ALPHA[0] = tuple(a.plant_alpha); SPLIT[0] = a.split; GLOSSY_FLAG[0] = a.glossy_flag
+    SINK[0] = a.sink; LED[0] = a.led; REAL_SET[0] = a.real_set; CANOPY_OPEN[0] = a.canopy_open; CLEARING[0] = a.canopy_clearing; PLANT_ALPHA[0] = tuple(a.plant_alpha); SCRIM[0] = a.scrim; SPLIT[0] = a.split; GLOSSY_FLAG[0] = a.glossy_flag
     HORN['close'] = a.horn_close; HORN['rough'] = a.horn_rough; HORN['shadows'] = not a.horn_front
     sh = json.load(open(a.shot))
     scale_lights(sh, {k: float(v) for k, v in (x.split('=', 1) for x in a.light)})
