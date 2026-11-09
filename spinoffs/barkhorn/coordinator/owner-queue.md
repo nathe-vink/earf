@@ -4585,3 +4585,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   rig; amp plate Ember; habitats Ice and Dust; Mantle C3e pending the owner's choice) and the not-passed list (all lit lamps; night
   pictures; deck hero/cover/room/row; the horn close-ups; anything with the uplit base, stepped or satin horn, or Smoke); no
   decisions during the pause; the owner's latest calls.
+- 16:2x gates re-launched (the limit killed them on 4 Nov): tall Acid (wf_8fdaa10e-d99 resumed), the re-lit close-ups for item 6
+  (wf_e92326ae-fdc resumed), and a fresh turn gate with the re-rendered Acid sheet (wf_949e8d32-655; Ember, Dust, Acid v2 from
+  c4's 42fa8eee). All three feed the site RC or the owner.
