@@ -5353,3 +5353,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   see the black flag (Fresnel 3.9 %).
 - 18:31 GATE POISON EXPOSURE CHOICE launched (wf_2d4edec1-848; 3 critics; both strips; the Ice habitat as the bar). Sent biomes:
   hold the final for the pick; leave the Fog band (honest shade); the polish pass keeps the flecks, plate edge, diagonal if cheap.
+- 18:32 RC2 REVIEW owner lens in (wf_a3a17c56-f04, 35 min): 14 of 20 earlier owner findings FIXED (eight colors/Smoke, pairing
+  grids, Colors nav, dead links, "1 / 1", blurred seams, "Ember to follow", the triple lamp picture, the menu, the weight, names,
+  tab titles, the share text); no British spellings, "eight", "still to come" or prices. Phone: the tagline over a swipe row of the
+  seven new speakers; laptop: the tagline over all seven in one row, "the best screen in the candidate, plainly better than live".
+  Not yet a step up as a whole on the laptop: the lamps caption centered under nothing; Ice three times in a row on home; the
+  color pages' card cuts off the horn; Mantle letterboxed in a gray 4:5 box; /lighting's headline repeated; Fog's swatch square in
+  .dots-row. Verdict: fold the six majors into the coming push, re-check home at 1440 and one color page, then send tonight. Also:
+  Vercel's preview comment toolbar (a dark round button) shows on every page: tell the owner (no settings change); 8 alts still
+  "cover off"; the 404's header is plain text.
