@@ -4854,3 +4854,20 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 17:2x THE BOTTOM EDGE NOW BLOCKS the site's wides (c4), sides and hero-lights (c3, c2's chunk 3 running). Plan: gate the speaker
   lane's v2 sheets when they land, then put the bottom-edge question to the owner NEXT, ahead of FA123 (which blocks nothing
   visual), with the site preview.
+- 17:19 speaker lane (stamped 17:24, queued 17:18:58): THE FLOOR BAND IS A RENDERER BUG, not the acrylic's edge glow (proved by
+  ray-cast and seven lamp and part tests): its pixels are the floor UNDER the cabinet seen through the 12 mm gap; painting the
+  bottom panel opaque black keeps it; no lamp makes it. The sweep's painted contact shadow (_contact in studio/engine/materials.py)
+  maps each AO term to [1 - strength, 1]; the site rigs use strength 5 and core 10, so the terms go negative where occluded and
+  their product turns positive (up to x36 the floor's color). The room (wood floor, no contact term) has no band. Options (b) satin
+  edge and (c) skirt were answering a bug. Fix (floor each term at 0) in ~15 min; hold wide, side, hero-light and the arc.
+- 17:20 c3: holding hero-light chunk 2 and the arc; the turns (Acid 17-23, Haze, Fog: 55 frames, ~91 min) from 17:20.
+- 17:21 VERIFIED in materials.py (r33-speaker-horn): term() is a clamped Map Range to [1 - s, 1] (To Min -4 at 5, -9 at 10); two
+  negatives multiply positive. My earlier edge-glow account (16:36) was the lane's first, wrong, diagnosis.
+- 17:21 sent the speaker lane: floor each term at 0 (check single-negative regions read as plain dark contact); send the fix SHA to me
+  and straight to c2, c3, c4; prove it on the Dust tall (the passed frame's red strip, which reads as a light at phone size, now on
+  the RC), the Dust hero-light and the Ember wide; the bottom-edge owner question dropped unless something real remains (sheets as a
+  before/after for the record); re-renders: the seven talls first (c2, rc1-fix), say whether the rigB backs need it; then arc 04
+  and the close-ups.
+- 17:21 sent c2: stop hero-light chunk 3; after the fix SHA merge it and re-render the seven talls (rc1-fix), then hero-light 3-4.
+- 17:22 sent c4 and c3: the band is the bug; merge the fix when it comes; after the turns, c4 re-renders wide 01 and runs 02-03 (then
+  the sides), c3 re-renders hero-light 1 and runs 2.
