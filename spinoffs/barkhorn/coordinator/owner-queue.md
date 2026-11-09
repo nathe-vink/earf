@@ -5041,3 +5041,30 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   bar like LED strip in the dome row, Core A night ungrounded; their fixes agree: studio and camera white balance at ~3000-3200 K,
   faces 2-2.5 EV lower (no face pixel at 255), the site Core on Core A's night material, room fill 5 -> ~15-20 %. The fourth
   critic (photometrist) and the tally to come.
+- 17:43 speaker lane: THE FIX PROOFS at 1fcb6c25 (renders/2026-11-09/barkhorn/contact-fix-proofs/: tall-dust, hero-light-dust,
+  wide-ember, before/after at 2x on cb62d1eb): under-cabinet floor p99 against the open floor: Ember wide 250 -> 124 (open 234; the
+  band was all bug, gone); Dust hero-light 244 -> 244 (only white discs round the feet, gone); Dust tall 234 -> 234 (no bug band).
+  What remains is real: Dust's red strip foot to foot (the clear bottom panel's 12.7 mm front edge seen edge-on: hero-light peak
+  238/71/71, ~14 px at 2400 wide, face 203/109/66; tall 144/12/14 against the face 244/138/61); its owner question (a) as built,
+  (b) satin bottom edge, (c) skirt, sheet 962be509. rigB backs: contact 1.0, no core, never negative; horn-back, amp plate, inside
+  and turns have no contact term: none needs re-rendering. Item 16 docs at 12001efd (verified against FaitalPRO P/N 03803827;
+  Xdamage 15.5 read as +/-7.75; the 28 Hz high-pass mandatory); one difference: flange + gasket 13.1 on the sheet against the
+  model's 11.0 rebate (the woofer ~2 mm proud; a 13.1 rebate leaves 6.9 mm of the 20 mm panel for the bonded inserts, 9.0 today);
+  product.py says "4th-order Butterworth", the README and box run LR4. B (arc 04: the edge-on right face mirrors the sweep as a 7 px
+  strip, the handle recess floats): try rotate +22.5 / +17.5, re-proof 03-05, ~25 min from 17:44. A (side rig): a side view at -50
+  sees no IEC pins or rating plate, so no model rebuild.
+- 17:45 brand lane: the dimensions in the Book and the press sheets at a1e162947a6df79547d870952e686cebc08d38b8 (pushed on
+  r47-brand, not republished): 1295 tall; 560 wide, flush; 428 deep overall, 420 at the cabinet; "about 73 kg on its own feet, about
+  64 kg with the horn lifted off (modelled, not weighed)"; no decimal weight on any public line; press PDFs rebuilt (held).
+- 17:4x MEASURED the fixed Ember wide crop: the floor under the bottom panel 1-10 (8-bit) for ~35 px at 1800 wide (x 400-900 of the
+  2x crop), a 2-20 halo ~0.3 m round it, open floor 210-227: blacker and wider than the pocket the critics held (8-12 for 13-18 px;
+  89+ under the talls); the painted contact term (strength 5 / 0.3 m, core 10 / 0.025 m) makes it, not the physics. The seam: a
+  straight edge across the floor at ~x 1650-1800, y 780-790 in c4's pre-fix Ember wide (the sweep's side edge or the floor light's
+  end).
+- 17:49 sent the speaker lane: the wide rig before c4's go ((a) a gentle contact, e.g. rigB's 1.0 no core, target 40-60+ under the
+  front edge, proved on the Ember crop with numbers, rigaudit/cardcast clean; (b) widen the sweep or floor light, or reframe; one
+  SHA, after B and ahead of A); option (e) still asked (black-finished bottom edges beside (a)-(c), luminance, cost, process);
+  order B, wide rig, (e), A, close-ups; item 16: the preset is LR4 at 28 Hz (the box run and Xdamage used it), product.py to say
+  so; the 13.1 rebate: its engineering recommendation first (insert, pull-out at 6.9 vs 9.0 mm, a doubler ring or thinner gasket,
+  2 mm proud in a crop), flush as the default to beat (the owner's flush horn, 1 Nov). Sent the brand lane: received; the press kit
+  stays held.
