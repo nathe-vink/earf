@@ -152,6 +152,7 @@ def phase2(base, horn):
             sh = _final(shots, S31 + f'hero-light-{tint}.json', fl, f'Tropos, the front arc, {tint}, frame {k}', samples=SPIN['samples'], rotate=a)
             shots._siteH_round1(sh)                        # hero-light's fix (shots.py): the card turns with the frame
             shots.honest_lights(sh)
+            shots.realize_hidden(sh)                       # (no object in frame hidden from the camera: 2026-11-09)
             shots.cards_out_of_frame(sh)                   # (the card only where it falls out of this frame)
             sh['size'] = [round(sh['size'][0] * SPIN['scale']), round(sh['size'][1] * SPIN['scale'])]
             sh['render']['crop'] = SPIN['crop']
