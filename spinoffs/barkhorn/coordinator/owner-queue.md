@@ -5253,3 +5253,20 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   (must show, ruling 3). Day: A pale-ice frosted; B a pale core in a deep blue shell (a cyan sun shadow).
 - 18:18 GATE CORE A/B ROUND 16 launched (wf_9459e462-b14; the four lamp critics + tally: room level, exposure, A vs B, the sliver,
   show_now). Sent the lamps lane: hold the finals for the tally; the honest emitter and dome round 3 meanwhile.
+- 18:18 brand lane: BOOK v21 BUILT, not republished (edd46569, 45c6956f on r47-brand; its stop hook pushes every commit): all 32
+  items claimed (seven bands and seven tiles re-shot/re-rendered; "things the air holds" out; the cover led by the seven fronts in
+  one row from 561 px; Fog centered at 390; the 08 swatch gone; zero "the owner", no "critics"/"passed"; the Color note verbatim and
+  three "Still open" entries; COVER rows dropped; design figures; 75 W; the Founding Hundred a proposal; Idea B undated; Mother
+  EARF standing; pack-pair re-rendered with [KG]; the Mantle day frame and the cordless unlit pair (735e7593) added; fix_dims();
+  "Turntable" and "plinth" throughout; typos; plates; chips and wordmark in the Mark values; lockup-color.png 250x74; build fixes).
+  It thought the site's lamps-unlit still shows Core's cord: I checked: r49's lamps-unlit-800.jpg is byte-identical to the cordless
+  copy (md5 052c79bc), its webp matches (mean diff 0.9): the site is right.
+- 18:18 Mantle lane (stamped 18:19): THE HONEST EMITTER in its room at a547f28592af52e83c5cd3c754ce3c3eca659103: an 11 mm disk at the
+  top of the bore (22 mm above the mouth), a full hemisphere, 3.2 W; the lamps lane's exported reflector (steel) and hub cut the
+  cone; COB unseen (0/113); finals at 512 samples. A 960x540 test on proxy 4's hang (cob-test/): cabinet L 24 -> 17, woofer 4-39,
+  lower chamber 12 / 38 (wall 30), the floor pool by the feet mostly gone, every text zone and edge passes (lower-right 0.072),
+  red above 0 42 %, hue 216/208. The pool problem was the 17 cm stand-in; now it's exposure: ~+0.5 EV for a face ~21.
+- 18:20 GATE BOOK v21 REGRESSION launched, five lenses (decisions+pictures wf_d19c3d59-f75, words+build wf_7544c85d-927, owner
+  wf_3903be85-9ab; the punch list, the claims and the v20 findings as inputs; the four fronts pending). 18:21 sent: the brand lane
+  (hold for the reviewers and the fronts; the site's unlit file is the cordless one); the Mantle lane (the gate's non-pool findings
+  plus proxy 4's hang, the honest emitter and ~+0.5 EV into one brief for proxy 6).
