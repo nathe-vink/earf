@@ -5661,3 +5661,15 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   backs rig. 19:16 sent: (c) a normal push now without the talls: RC3 + the amp plate + the turn viewer + the Back view pulled from
   every gallery (banned until re-rendered backs pass); the URL when READY; the seven talls in the next small push (~20:15). Neither an
   API deployment nor an empty commit.
+- 19:17-19:19 VERCEL: the newest deployments are r48-biomes 18:45:23, 18:59:53 and r48-mantle-design 19:14:36; none since, though
+  several branches pushed (RC3 19:07, the helpers' merges 19:12-19:13, mine 19:16). 104 deployments since 15:00 today (the lanes'
+  render and log pushes; mine 18 of them since 16:21). So the site's previews compete with every lane's pushes. I push my log less
+  often from now on (batched). Not touching any Vercel setting.
+- 19:19 sent the lamps lane: the UNLIT PAIR IN EMBER (lamps-unlit with only the tint changed, the audited rig, full quality), ahead of
+  round 3 and Core A/B, so the site and the Book can drop "Shown in Smoke".
+- 19:19 c4: rc1-real tall EMBER landed (3259b355 on 491cf886 / ac9e5568; 6.2 min; hiddencast 27 hidden, 0 in frame). My measurement
+  against the passed 4 Nov Ember: the honest rig is about +0.3 stop BRIGHTER overall (frame mean R 203 -> 220; floor 226 -> 249, near
+  white, nothing clipped in all three channels; wall 209 -> 231; horn R 190 -> 210; upper cabinet R 105 -> 120); the speaker lane's own
+  Dust proxy pair shows the same (floor 226 -> 249, horn 184 -> 209), not "a little less bright". 19:20 asked the speaker lane: is that
+  the moved, grown horn lamp lighting the sweep; what offset restores the passed depth (about -1/3 stop?); re-tone from EXR or
+  re-render. The critics judge the seven as a set first.
