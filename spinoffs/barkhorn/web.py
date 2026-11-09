@@ -189,12 +189,12 @@ TT = dict(name='Mantle', kind='Record player', route='mantle',             # rou
 # section 10); Core charges on a contact dock, a disc of polished black acrylic; Hemisphere's shade has its color on the
 # outside, over clear. COPY_NEXT False keeps today's words everywhere; it goes on with the speaker lane's new picture set,
 # because the pictures on the site still show the old Mantle (a motor pod, clear posts) and the old shade.
-COPY_NEXT = False
+COPY_NEXT = True    # the release candidate (r49-site-rc)
 # round 48: the site audit's no-regret fixes (site_v2.py), and the audit's recommended home order ("launch film"),
 # each off until the owner compares them with today's (the coordinator, 2026-11-03)
-V2 = False
-HOME_V2 = False
-RC = False         # the release candidate (2026-11-09): honest pictures only (site_v2.rc); with V2, HOME_V2 and COPY_NEXT
+V2 = True
+HOME_V2 = True
+RC = True          # the release candidate (2026-11-09): honest pictures only (site_v2.rc); with V2, HOME_V2 and COPY_NEXT
 TT_NEXT = dict(
     # the owner, 2026-11-03 05:11: Mantle's light must shine through the acrylic, not down; it is being redrawn, so
     # until it is shown, no words about light from its base (the coordinator)
