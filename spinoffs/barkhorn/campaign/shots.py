@@ -662,6 +662,23 @@ def site(frame, tint):
         # front unchanged. `back` goes off)
         s['lights']['back']['irradiance'] = 0.0
         s['lights']['back'].pop('power_w', None)
+    if frame == 'front-off-tall':
+        # (the veil, tallr3's gate, 2026-11-09: the lower right face, near-grazing to the lens, mirrored lit floor behind
+        # and right of the speaker: white over the tint 74-78 levels, saturation 0.16 (Poison) to 0.33 (Haze). Geometry
+        # puts the mirror on floor x 0.33-1.03, y -0.1 to 2.4, half of it out of frame. Two real black floor cards
+        # cover that half, cardcast 0 %, and the speaker turns 3 deg toward the lens (the face less edge-on); the back-edge
+        # card turns with it. Crops, lower face rows 800-1060: Haze 0.33 / 78 -> cards 0.55 / 14 -> cards + 3 deg
+        # 0.68 / 13 (+ 6 deg 0.70 / 12); Ember 0.32 / 74 -> cards 0.53 / 12; Poison 0.16 / 74 -> cards 0.39 / 12, dark
+        # there. Left: the lowest fifth mirrors floor beside the speaker that the camera sees, under a horizontal edge
+        # at the near card's mirrored edge (probe: below it the sweep, above it the card))
+        for blk in s['products']:
+            for i in blk['instances']:
+                i['rotate_z'] = i.get('rotate_z', 0) - 3.0
+        for (x0, y0, x1, y1), nm in (((0.55, 0.6, 2.4, 3.0), 'floor card behind-right'),
+                                     ((0.75, -0.3, 2.4, 0.62), 'floor card right')):
+            s.setdefault('set', {}).setdefault('flags', []).append(
+                {'center_m': [round((x0 + x1) / 2, 3), round((y0 + y1) / 2, 3), 0.006], 'size_m': [round(x1 - x0, 3), round(y1 - y0, 3)],
+                 'normal': [0.0, 0.0, 1.0], 'color': '#060606', 'camera': True, 'glossy': True, 'name': nm})
     if frame in ('front-off-tall', 'front-off-wide', 'hero-light', 'side'):
         back_edge_card(s, sides=('back', 'left') if frame == 'side' else ('back',))
     if frame == 'front-off-tall' and 'horn' in s['lights']:
@@ -712,6 +729,16 @@ def site(frame, tint):
         for f in (s.get('set') or {}).get('flags', []):
             if f.get('center_m') == [1.6, 1.8, 0.005]:
                 f['center_m'] = [1.6, 2.05, 0.005]; f['size_m'] = [1.6, 2.9]
+        # (the line again, tallr3, 2026-11-09: it stayed, 65 over 16 on Ember at row 701. Lights off in turn only dimmed
+        # it; the floor flag off brightened everything below it, the upright card off everything above, so it is their
+        # junction. The sweep's cove rises from y 2.7 (depth 5.5 - radius 2.8); the upright card ran on a slant from
+        # (0.41, 3.25) to (3.2, 2.15), half of it standing on the rising cove, and the floor flag at z 0.005 goes under
+        # the cove past y 2.87: a wedge of lit cove between them. The card 0.6 m forward stands wholly on the flat
+        # floor (far end y 2.66), in front of the cove; the line 59 -> 16 on Ember, 56 -> 14 on Haze, field 16 / 14;
+        # still 0 % in frame)
+        for f in (s.get('set') or {}).get('flags', []):
+            if f.get('center_m') == [1.8, 2.7, 1.3]:
+                f['center_m'] = [1.8, 2.1, 1.3]
     if frame in ('front-off-tall', 'side'):
         # (the coordinator's 21:34 ruling, withdrawing specular-only sources: a panel at diffuse 0 shows in the glass and
         # lights nothing, which no real lamp does. scrim 0.25, sheen 0.6 and topline 0.9 go; Dust half size: the veil box
