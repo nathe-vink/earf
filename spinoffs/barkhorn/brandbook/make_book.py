@@ -53,7 +53,8 @@ PINNED = {'room.jpg': ('754e16a9852f364fb2ebe8eb752c10ab6bdc0e23', 'renders/2026
           'honest-back-fog.jpg': ('39bf3f97a3aaa316ced9e9be401a1fad95ff42f0', 'renders/2026-11-04/barkhorn/rollout/A-polished-backrig/site-back-fog.png'),
           'honest-back-acid.jpg': ('a1322583abb1b7447cdab1fc1b7b6f475dad35e0', 'renders/2026-11-04/barkhorn/rollout/A-polished-backrig-acid/site-back-acid.png'),
           'honest-amp-ember.jpg': ('488fbec9ed6764c60893e0a2798a6feba9ad296f', 'renders/2026-11-04/barkhorn/rollout/A-polished-p2-backfix/amp-plate-ember.png'),
-          'honest-horn-ember.jpg': ('bc8f51b541de8bb3bb5c5a89065c9cdc8d3d796b', 'renders/2026-11-04/barkhorn/rollout/A-polished-p2/horn-back-ember.png')}
+          'honest-horn-ember.jpg': ('bc8f51b541de8bb3bb5c5a89065c9cdc8d3d796b', 'renders/2026-11-04/barkhorn/rollout/A-polished-p2/horn-back-ember.png'),
+          'honest-mantle-day.jpg': ('41232b56c60d1980a5ee3de0dddd8344ffb85fee', 'renders/2026-11-03/barkhorn/mantle-r48/a5-day-ember-2423-c3e.png')}
 
 
 def pinned():
@@ -104,7 +105,23 @@ def main():
         shutil.copy(os.path.join(B, src), os.path.join(IMG, dst))
     pinned()
     prune()
+    fix_dims()
     print(len(os.listdir(IMG)), 'pictures in', IMG)
+
+
+def fix_dims():
+    """Write every img's width and height from the file itself (2026-11-09), so lazy images hold their space."""
+    import re
+    p = os.path.join(HERE, 'book', 'index.html'); s = open(p).read()
+    def one(mm):
+        tag, f = mm.group(0), mm.group(1)
+        fp = os.path.join(IMG, f)
+        if not os.path.exists(fp) or not f.lower().endswith(('.jpg', '.png')):
+            return tag
+        w, h = Image.open(fp).size
+        tag = re.sub(r'\s(width|height)="\d+"', '', tag)
+        return tag[:-1] + f' width="{w}" height="{h}">'
+    open(p, 'w').write(re.sub(r'<img src="img/([A-Za-z0-9._-]+)"[^>]*>', one, s))
 
 
 def prune():

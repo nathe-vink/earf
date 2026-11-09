@@ -158,9 +158,9 @@ def shot_plaza(sc):
 def shot_library(sc):
     P.floor_and_wall('#E4DFD7')
     tray = P.mat_birch('tray')
-    order = ['ember', 'dust', 'acid', 'poison', 'ice', 'haze', 'fog', 'smoke']
+    order = ['ember', 'dust', 'acid', 'poison', 'ice', 'haze', 'fog']   # seven; Smoke held (2026-11-09)
     pitch, tw, th, td = 0.034, 0.020, 0.100, 0.100
-    L = pitch * 8 + 0.03
+    L = pitch * 7 + 0.03
     P.box('tray-base', -L / 2, -0.07, 0, L / 2, 0.07, 0.012, tray)
     P.box('tray-slots', -L / 2, -0.07, 0.012, L / 2, 0.07, 0.03, tray)
     P.box('tray-front', -L / 2, -0.07 - 0.012, 0, L / 2, -0.07, 0.04, tray)
