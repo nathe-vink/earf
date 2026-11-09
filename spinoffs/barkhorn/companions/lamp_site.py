@@ -143,7 +143,7 @@ def build(frame, samples, scale):
         tname = COLOURS[tint]; bb = bbt(tint)
         c = (x, y, rim_z); H = 48.2
         if os.environ.get('HEMI_BARE'):   # (flux check: the COB alone, no fitting: the 100 % reference)
-            ld = bpy.data.lights.new(f'cob-{tint}', 'AREA'); ld.shape = 'DISK'; ld.size = 0.011; ld.energy = 430.0 * WLM
+            ld = bpy.data.lights.new(f'cob-{tint}', 'AREA'); ld.shape = 'DISK'; ld.size = 0.011; ld.energy = float(os.environ.get('COB_LM', '430')) * WLM
             ld.color = bb; ob = bpy.data.objects.new(f'cob-{tint}', ld); bpy.context.scene.collection.objects.link(ob)
             ob.location = (x, y, rim_z + 0.0815)
             return
@@ -167,7 +167,7 @@ def build(frame, samples, scale):
         lit = opal(f'opal-lit-{tint}'); nt = lit.node_tree
         # (round 2, the gate: the liner passed all 145 lm; a real opal of about 55 % passes about half outward, the rest
         # back into the shade and out through the mouth)
-        S0 = 145.0 * float(os.environ.get('OPAL_T', '0.55')) * WLM / (2 * 0.041)
+        S0 = float(os.environ.get('LINER_LM', '145')) * float(os.environ.get('OPAL_T', '0.55')) * WLM / (2 * 0.041)   # LINER_LM=0: the liner lit by the COB alone (the photometry audit)
         tc = nt.nodes.new('ShaderNodeTexCoord'); sx = nt.nodes.new('ShaderNodeSeparateXYZ'); nt.links.new(tc.outputs['Object'], sx.inputs[0])
         gz = nt.nodes.new('ShaderNodeMapRange'); gz.clamp = True
         gz.inputs['From Min'].default_value = oc * MM; gz.inputs['From Max'].default_value = 0.075
@@ -191,7 +191,7 @@ def build(frame, samples, scale):
         # liner's 145 lm is its own emission above; the other ~430 lm leave the COB here, and the bore and reflector
         # take what they really take
         part('out-dome-pendant', 'cob', SC.principled('cob-body', '#2A2A2A', 0.5), c)
-        ld = bpy.data.lights.new(f'cob-{tint}', 'AREA'); ld.shape = 'DISK'; ld.size = 0.011; ld.energy = 430.0 * WLM
+        ld = bpy.data.lights.new(f'cob-{tint}', 'AREA'); ld.shape = 'DISK'; ld.size = 0.011; ld.energy = float(os.environ.get('COB_LM', '430')) * WLM
         ld.color = bb
         ob = bpy.data.objects.new(f'cob-{tint}', ld); bpy.context.scene.collection.objects.link(ob)
         ob.location = (x, y, rim_z + 0.0815)
@@ -352,7 +352,7 @@ def build(frame, samples, scale):
         # the flux check: the sweep and studio gone, a 3 x 3 m translucent white sensor 30 mm under the rim, seen from
         # below by an orthographic camera in linear light; flux (W) = mean radiance x pi x area
         for o in list(sc.objects):
-            if o.name in ('sweep', 'key', 'fill'):
+            if o.name in ('sweep', 'key', 'fill', 'kicker'):
                 bpy.data.objects.remove(o, do_unlink=True)
         sc.world.node_tree.nodes['Background'].inputs['Strength'].default_value = 0.0
         sm = bpy.data.materials.new('sensor'); sm.use_nodes = True; nt = sm.node_tree; nt.nodes.clear()
