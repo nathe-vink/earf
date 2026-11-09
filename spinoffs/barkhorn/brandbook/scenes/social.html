@@ -1,42 +1,44 @@
 <!doctype html><meta charset="utf-8"><link rel="stylesheet" href="base.css">
 <style>
-/* three posts at 4:5 (1080 x 1350 at 2x), side by side as a feed shows them; one picture, one line, the mark small */
+/* three posts at 4:5 (1080 x 1350 at 2x), side by side as a feed shows them; one picture, one line, the mark small.
+   Pictures: only renders that passed the critics (the seven tall fronts, rollout A-polished-fix1; the Dust habitat, biomes 26493989). Tropos always whole. */
 body { width: 1720px; height: 760px; background: #E7E2DA; display: flex; gap: 20px; padding: 40px; align-items: center }
 .post { position: relative; width: 540px; height: 675px; overflow: hidden; flex: none; background: #F4F1EC; box-shadow: 0 20px 40px -24px rgba(0,0,0,.4) }
-.post img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover }
 .post .t { position: absolute; left: 34px; right: 34px; font-weight: 600; letter-spacing: -.02em; line-height: 1.02 }
 .post .m { position: absolute; font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase }
 .post .w { position: absolute; right: 30px; bottom: 30px; height: 15px }
-/* 1: the eight */
-.p1 .bg { object-position: 50% 50% }
-.p1 .t { top: 40px; font-size: 54px; color: var(--ink) }
+/* 1: the seven, each its own studio render */
+.p1 .t { top: 38px; font-size: 50px; color: var(--ink) }
+.p1 .grid { position: absolute; left: 34px; right: 34px; top: 214px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px 10px }
+.p1 figure { margin: 0 }
+.p1 figure img { width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block; border-radius: 2px }
+.p1 figcaption { font-family: var(--mono); font-size: 8.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-top: 4px }
 .p1 .m { left: 34px; bottom: 32px; color: var(--muted) }
-/* 2: Poison where it began */
+/* 2: Dust where it began */
+.p2 img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover }
 .p2 .t { top: 64px; font-size: 46px; color: #F4F1EC; text-shadow: 0 1px 30px rgba(0,0,0,.35) }
-.p2 .m { left: 34px; top: 34px; color: rgba(244,241,236,.85) }
+.p2 .m { left: 34px; top: 34px; color: rgba(244,241,236,.9) }
 .p2 .m.b { top: auto; bottom: 34px }
-.p2::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.5), rgba(0,0,0,0) 32%, rgba(0,0,0,0) 75%, rgba(0,0,0,.45)) }
+.p2::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.42), rgba(0,0,0,0) 30%, rgba(0,0,0,0) 78%, rgba(0,0,0,.35)) }
 .p2 > * { z-index: 1 }
-/* 3: the material, close */
-.p3 { background: #F4F1EC }
-.post.p3 img.bg { height: 74%; bottom: auto }
-.p3 .t { top: auto; bottom: 74px; font-size: 34px; color: var(--ink) }
+/* 3: one speaker, whole, framed on paper */
+.p3 img.f { position: absolute; left: 50%; top: 34px; height: 430px; aspect-ratio: 4/5; transform: translateX(-50%); object-fit: cover; border-radius: 2px }
+.p3 .t { bottom: 74px; font-size: 38px; color: var(--ink) }
 .p3 .m { left: 34px; bottom: 34px; color: var(--muted) }
-.sw { position: absolute; left: 34px; top: 34px; display: flex; gap: 6px }
-.sw i { width: 18px; height: 18px; border-radius: 50% }
 </style>
 <body data-w="1720" data-h="760">
-<div class="post p1"><img class="bg" src="../../site/img/hero-portrait.jpg" alt="">
+<div class="post p1">
   <div class="t">A world of sound,<br>in color.</div>
-  <div class="m">Tropos · eight colors, Ember to Smoke</div>
+  <div class="grid"><figure><img src="../book/img/honest-front-ember.jpg" alt=""><figcaption>01 Ember</figcaption></figure><figure><img src="../book/img/honest-front-dust.jpg" alt=""><figcaption>02 Dust</figcaption></figure><figure><img src="../book/img/honest-front-acid.jpg" alt=""><figcaption>03 Acid</figcaption></figure><figure><img src="../book/img/honest-front-poison.jpg" alt=""><figcaption>04 Poison</figcaption></figure><figure><img src="../book/img/honest-front-ice.jpg" alt=""><figcaption>05 Ice</figcaption></figure><figure><img src="../book/img/honest-front-haze.jpg" alt=""><figcaption>06 Haze</figcaption></figure><figure><img src="../book/img/honest-front-fog.jpg" alt=""><figcaption>07 Fog</figcaption></figure></div>
+  <div class="m">Tropos · seven colors · Render</div>
   <img class="w" src="../../brand/mark/earf-wordmark-black.svg" alt=""></div>
-<div class="post p2"><img class="bg" src="../../site/img/green-habitat-portrait.jpg" alt="">
-  <div class="m">04 · Poison</div>
-  <div class="t">Bottle green.<br>Keep out of reach.</div>
-  <div class="m b">Tropos 04 · in its element</div>
+<div class="post p2"><img class="bg" src="../book/img/honest-dust-habitat.jpg" alt="">
+  <div class="m">02 · Dust</div>
+  <div class="t">A long,<br>dry afternoon.</div>
+  <div class="m b">Tropos 02 · where it began · Render</div>
   <img class="w" src="../../brand/mark/earf-wordmark-white.svg" alt=""></div>
-<div class="post p3"><img class="bg" src="../book/img/ice-studio-light.jpg" alt="">
-  <div class="t">Eight colors,<br>Ember to Smoke.</div>
-  <div class="m">Two 20 mm walls, one color, cemented</div>
+<div class="post p3"><img class="f" src="../book/img/honest-front-ice.jpg" alt="">
+  <div class="t">Seven colors,<br>Ember to Fog.</div>
+  <div class="m">05 Ice · tinted cast acrylic, 20 mm · Render</div>
   <img class="w" src="../../brand/mark/earf-wordmark-black.svg" alt=""></div>
 </body>
