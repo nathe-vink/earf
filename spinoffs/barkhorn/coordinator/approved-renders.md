@@ -24,6 +24,11 @@ ASSETS OUT OF DATE (checked 9 Nov 22:33), not to be sent until rebuilt from this
   marked held in their manifests.
 
 ## Tropos
+IN-FRAME AUDIT UNPROVEN (9 Nov 23:10): the speaker lane's cast (shots._frame_rays) built the camera differently from render.py
+(the sensor fitted to the larger side and the lens aimed, where render.py fits it horizontal and shifts a level camera). On portrait
+frames it was 20 % too narrow and pitched wrong: 0cbf23a5's floor cards cast 0 % and showed; two reflect-only back cards stood 4.9 %
+in the tall's frame. Fixed in 0c6acd5d. Every "0 hidden in frame" below is being re-proven against a Blender mask from the scene's
+own camera (all lanes asked 23:10-23:11); a picture with anything hidden in frame is pulled at once.
 Lights audit (9 Nov 21:40, from each shot.json): the turning views, the horn-backs and the amp plate are lit by key, fill and wash
 (area lights) plus background lamps linked to the sweep (flagged background lights); chunks 4 and 05 (06b829ce, 52ad76ba) also carry
 the old glow lamp, tested to make only a noise-level difference. No specular-only source in any of them. The tallr2 fronts carried
@@ -31,7 +36,7 @@ three specular-only panels (scrim, sheen, topline at diffuse 0): withdrawn from 
 lights a real studio could use.
 | Picture | Source (branch @ commit: path) | Gate | Used by |
 |---|---|---|---|
-| Seven fronts ("talls"), honest rig round 2 | helpers r33-rollout-c2/c3/c4 and r33-speaker-horn, renders/2026-11-04/barkhorn/rollout/A-polished-tallr2/site-front-off-tall-<k>.png on 63d83f47 | FAILED 9 Nov 21:24: Ember, Acid, Ice 3/3 NO; Dust 1/3 (21:28); Fog 2/3 SHOW (founder, skeptic; photo NO), kept only as a fallback since the set is re-shot on one rig; Poison, Haze 0/3 (21:31: the lower side face milky, see-through fails). Re-shoot A-polished-glint under way (r33-speaker-horn 4094b6ed + a flag for the lower-side veil) | none until the re-shoot passes; the site and the Book wait for it |
+| Seven fronts ("talls"), honest rig round 2 | helpers r33-rollout-c2/c3/c4 and r33-speaker-horn, renders/2026-11-04/barkhorn/rollout/A-polished-tallr2/site-front-off-tall-<k>.png on 63d83f47 | FAILED 9 Nov 21:24: Ember, Acid, Ice 3/3 NO; Dust 1/3 (21:28); Fog 2/3 SHOW (founder, skeptic; photo NO), kept only as a fallback since the set is re-shot on one rig; Poison, Haze 0/3 (21:31: the lower side face milky, see-through fails). tallr3 FAILED 0/3 (22:39); tallr4 pulled as tests (23:05); next on 0c6acd5d (one floor card truly out of frame, the speaker turned 6°, the hidden back cards dropped), tag tallr5 | none until the re-shoot passes; the site and the Book wait for it |
 | Turning view, Ember, Dust, Acid, Poison, Ice, Haze | r33-rollout-c3 52ad76ba (Ember 00-04); c4 0a0a83bd (Ember 05-23, Dust); c4 42fa8eee (Acid 00-16); c3 66126d53 (Acid 17-23, Haze); c4 eef18db2 (Poison, Ice): renders/2026-11-04/barkhorn/rollout/A-polished-p2*/turn-<k>-NN.png | PASSED (wf_c0448c65-cd3) | site galleries |
 | Turning view, Fog, neutral ground | r33-rollout-c3 a688c59e: A-polished-p2-rc2/turn-fog-00..23.png | PASSED 3/3 (9 Nov 21:11; the stage at the rendered 211,212,207) | site gallery (FOG_TURN on) |
 | Horn from behind, seven | 06b829ce, 52ad76ba, a1322583 (not the failed Acid file), cut 4:5 at x 270-990 | PASSED, audited clean | site galleries; the home's Tropos block (Ember) |
@@ -49,7 +54,8 @@ the old rule are marked; each is re-rendered under the new rule and gated agains
 | Dust, "On rippled sand among desert buttes." | r48-biomes 43c91242: renders/2026-11-03/barkhorn/habitats/dust-portrait-1200x1500-nopanel.jpg | PASSED 3/3 (9 Nov; under the current rules 22:56 the table is within noise but the horn's pod changes: re-render with the horn under the rule queued; this file stays until it passes) | site, Book |
 | Fog, "In the grass on a hillside, in fog at dawn." | r48-biomes aa1ca856: habitats/fog_b-portrait-1200x1500-onesun.jpg (sha256 9f1fa543...; the glass's Fresnel loss in its shadows: the inside a touch dimmer) | PASSED 2/2 (9 Nov 21:21, photo and skeptic; verified 22:56 under the current rules, within noise) | site, Book ("In fog at dawn."), swapping in tonight's push |
 | Acid | r48-biomes 539c3772 | HOLD 1/3 (rain stops at the speaker; dry; dark cabinet) | none |
-| Poison, Ember, Haze | in progress / not started (Haze waits on the horn pour) | | none |
+| Poison | r48-biomes P8 proxy (b60934b7, the horn under the rule) | PROXY PASSED for the final 2/3 (9 Nov 23:08; exposure 0.75 by all three; watch the horn's crease glint at full samples); the final queued after Dust | none |
+| Ember, Haze | not started (Haze waits on the horn pour) | | none |
 
 ## Lamps
 HEMISPHERE AS DRAWN DOES NOT GLOW (lamps lane photometry, 9 Nov 22:22; confirmed in the Mantle lane's scene 22:31): the COB sits at
@@ -58,6 +64,10 @@ added emitter on the liner ('opal-lit'). No lit Hemisphere picture may enter any
 None approved. Hemisphere switched off in Ember (the 4:5 crop): HOLD 0/4 (9 Nov 21:42): honest and clearly off, but the Ember reads
 crimson (a rose reflection over 28-44 % of the face; cool lights on the shell) and the right-rear strip was specular-only. The lit set,
 round 3: HOLD 0/3 (critic 4 out): the pale four read pastel, every Core B orb a milk-glass globe (walkthrough 133), no pools in the row.
+The owner's decision sheets (Hemisphere glow b/a1/a2/off; Core B Ø120 vs Ø90): HOLD from the honesty gate (9 Nov 23:09, critics 3-4):
+tinted front-surface highlights (the shader may carry the tint; checking), two unexplained teal discs on every Hemisphere frame, (a2)'s glow
+4-10x short of its label, the studio fill too high for a night comparison, the Core B cores bleached by the view transform, and the
+captions. Walkthrough 133 and 135 wait for the fixed sheets.
 Core B, decided by the owner 9 Nov 21:12 (the dark border he liked comes from B's nested build). Every lamp picture is re-rendered as B.
 
 ## Mantle
@@ -73,6 +83,7 @@ as-drawn variant (the COB alone: a downlight, the shade dark) follows about 23:5
 |---|---|---|
 | The old talls (img/rc/<k>-tall.*) and wides | a lamp hidden from the camera standing in frame | 9 Nov |
 | 15931e00 talls (tag tallfix) | a hard arched light pool on the backdrop (the grid's hard cone) | 9 Nov 20:25 |
+| tallr4 talls (A-polished-tallr4, rig 0cbf23a5; Ember, Acid, Ice rendered as tests, the rest held) | two real black floor cards in frame at the right edge (rows ~850-1200; the cast's camera bug hid them), and a pale band in the lowest fifth of the right face (~70-80 levels of white under a hard edge at row ~905); the line itself is fixed (+0.8 L against +51.7) and the upper veil cleared (sat 0.65-0.72) | 9 Nov 23:05 |
 | tallr3 talls (A-polished-tallr3, rig 74f17d7c, all seven) | the same line (it was the wedge of rising cove between the upright card's foot and the floor flag, found 22:31; the floor-flag fix had missed it) and the same veil (the lower right face mirroring the lit floor at ~64-73 degrees); critics 0/3 on every color tested; the three reflection-only panels were removed in this round, which is kept | 9 Nov 22:39 |
 | tallr2 talls (A-polished-tallr2, all seven) | a thin white line on the right side face at mid-height (a strip of lit sweep between the floor flag and the slanted upright card), and a milky lower side face below a hard diagonal (the camera-right fill card in its mirror path) | 9 Nov 21:24 |
 | Backs (rigB, img/rc/<k>-back) | lamps hidden from the camera standing in frame | 9 Nov |
