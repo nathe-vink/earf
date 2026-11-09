@@ -5969,3 +5969,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   57 x 2 routes, no sideways scroll 320-1536, Lighthouse 98, CLS 0, flags-off byte-identical.
 - 20:16 BRAND: head 2596a79e pushed, every v22 item and pull in (backs, Dust habitat, lamps-unlit out; two Cycles rigs re-rendered);
   waiting on the fronts. 20:16 sent: the Dust habitat back (the 3/3 no-panel final) in Position's row.
+- 20:18 BRAND: the Dust habitat back in Position (0d6ed87e, pushed; honest-dust-habitat.jpg = 43c91242's no-panel final, pinned);
+  "Dust in its element" out of Pictures in progress; Image direction, social post 2 and the launch grid stay on Ice.
+- 20:18 BIOMES: THE FOG FINAL WITH ONE SUN (cd5aa4e6, r48-biomes; habitats/fog_b-portrait-1200x1500-onesun.jpg, A/B
+  fog-ab-b61474c0-onesun.jpg): the sky turned to 304.2 so its own sun sits at az 110, el 5.8, the lamp there in its colour #FEEA98;
+  the rest as b61474c0; 96 samples; its own gate 4/4. b* shifts: the grass +0.4 -> +5.5 (it catches the low sun, L 31 -> 44), the
+  bottom block +2.6 -> -5.4, the sky -7.1 -> -10.2; the foreground white flecks gone (the engine's alpha). Open polish: the plate's
+  edge line, the horn diagonal. 20:19 GATE FOG ONE-SUN launched (wf_6d36d633-ccf founder + photographer, wf_05304716-6a0 skeptic);
+  sent: the polish held for later; Acid final, then Poison.
