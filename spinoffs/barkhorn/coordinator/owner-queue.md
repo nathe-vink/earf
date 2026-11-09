@@ -6040,3 +6040,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 20:34-20:35 BRAND: Fog's habitat in Position's row (5a9419b7; honest-fog-habitat.jpg = cd5aa4e6's one-sun final, pinned; an auto-fit
   grid, three across at 1440, stacked on a phone, room for Acid as a fourth); 20:34 sent: its caption in the row's pattern; 37ca7ea7:
   "In fog at dawn." + Render, the alt matched.
+- 20:35 BIOMES: THE FOG SHADOW CHECK: every speaker object has visible_shadow on, no light linking; the internals and the horn cast full
+  shadows; but the cabinet glass (base plate included) is transparent to shadow rays by design: habitat.py's glass_shadows mixes the
+  surface by "Is Shadow Ray" into a Transparent BSDF tinted by the wall's own transmission (the caustics stand-in, so a lamp can light
+  inside a tinted box), which for clear Fog is (1,1,1) and omits the real ~4 %-per-face Fresnel loss: the clear box casts no shadow of
+  its own. 20:35 sent: (2), the Fresnel loss in (x 0.92 per wall), Fog re-rendered now (~25 min; cd5aa4e6 the fallback for tonight if
+  it can't land and pass before the push), the rule written into glass_shadows for Dust, Acid, Ice and Poison next round.
