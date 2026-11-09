@@ -4,7 +4,7 @@
 |---|---|---|---|---|---|
 | shell | formed | 1 | Cast acrylic sheet 6 mm, tinted through in the speaker's TruCast code, drape-formed over an aluminium mould, polished both faces | 440 cm3, 170 x 170 x 167 | 1,534.01 |
 | core | formed | 1 | Cast acrylic sheet 3 mm, white opal (Hemisphere's diffuser's), formed over an aluminium core mould | 125 cm3, 130 x 130 x 127 | 1,329.78 |
-| grommet | lathe | 1 | Aluminium 6061 | 50 x 50 x 19 | 46.19 |
+| grommet | lathe | 1 | Aluminium 6061 | 56 x 56 x 19 | 46.52 |
 | base | lathe | 1 | Cast acrylic tube, tinted through | 130 x 130 x 40 | 112.04 |
 | ring | lathe | 1 | Aluminium 6061 | 130 x 130 x 18 | 52.61 |
 | window | lathe | 1 | Cast acrylic tube, tinted through | 40 x 40 x 16 | 45.98 |
@@ -33,7 +33,7 @@
 |---|---|
 | buy | 109 |
 | formed | 2,864 |
-| lathe | 360 |
+| lathe | 361 |
 | mill | 148 |
 | total | 3,481 |
 

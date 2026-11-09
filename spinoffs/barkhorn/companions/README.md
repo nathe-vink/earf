@@ -1722,8 +1722,9 @@ Code: `strata/scene.absorption` (the bpy rigs) and `lamps_cordless.speaker_deep`
     below the outer's, and its Ø40 opening seats on the grommet's top (`renders/2026-11-09/barkhorn/lamp-pictures-ab/core-b-section.png`).
   - The CAD and BOM draw B since 2026-11-09 (`crystal.orb_parts`, `out-orb-table`); A builds from `orb_parts(O_A)`
     and stays in git. The grommet is A's, unchanged (top at z 32.3); the core's outside meets r 20 at z 31.9, so the
-    grommet's top stands 0.4 up into the core's opening (0.2 clear round it), and the core sits 2.6 off the outer wall
-    at its foot, about 14 at its equator.
+    grommet's top stands 0.4 up into the core's opening (0.2 clear round it) and locates it; a shoulder Ø46 x 1 turned
+    on the grommet (round 9's spacer, approved 2026-11-09), its top at z 31.9, carries the core's weight. The core sits
+    2.6 off the outer wall at its foot, about 14 at its equator.
   - The BOM [E]: the outer ball about $34 (A's ball $47), the core about $30 formed on a core mould of about $1,300,
     or about $12 as a stock Ø120 opal sphere if one exists (the option "stock core", in place of the formed core
     [check a supplier]). Mass: outer 523 g, core 149 g, 672 g the two (A's ball 754 g).

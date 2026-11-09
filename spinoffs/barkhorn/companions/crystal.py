@@ -420,6 +420,13 @@ def orb_parts(p=O):
     gz0 = zc - math.sqrt(R ** 2 - (p['port'] / 2) ** 2)
     gz1 = zc - math.sqrt((R - p.get('grommet_wall', t)) ** 2 - (p['port'] / 2) ** 2)
     grommet = cyl('z', (0, 0), p['port'] - 0.4, gz0, gz1) - cyl('z', (0, 0), p['port'] - 6, gz0 - 1, gz1 + 1)
+    if B_:
+        # round 9's spacer, approved 2026-11-09: a shoulder turned on the grommet, Ø46 x 1, its top where the core's
+        # outside meets its Ø40 opening (z 31.9), so the core's foot rests on it; the grommet's top above it stays the
+        # spigot that locates the core (0.2 clear round it). The shoulder's underside clears the outer ball's inside
+        # (0.8 at its edge, r 23)
+        zsh = zcc - math.sqrt(rc ** 2 - (p['port'] / 2) ** 2)
+        grommet = grommet + (cyl('z', (0, 0), p['port'] + 6, zsh - 1.0, zsh) - cyl('z', (0, 0), p['port'] - 6, zsh - 2, zsh + 1))
     hz = 2.5                                                  # the hatch's counterbore
     # the middle: the chassis (the LED's heat spreader, 50 across) under the board and the LED, the window above
     cz0, cz1 = 10.6, 12.2
@@ -517,7 +524,8 @@ def orb_parts(p=O):
             Part('core', core, Machined('acrylic-opal-core', 'formed', setup_usd=1300.0), finish='liner', group='ball',
                  notes=['Core B: the core, a Ø120 ball of 3 mm white opal cast acrylic (R 60 outside, R 57 inside), the '
                         'same opal as Hemisphere\'s diffuser; its centre 12 below the outer ball\'s, its own Ø40 opening '
-                        'at its foot over the window, seated on the grommet\'s top. About 14 from the outer wall at its '
+                        'at its foot over the window, its foot resting on the grommet\'s shoulder (Ø46, its top at z '
+                        '31.9), the grommet\'s top locating it. About 14 from the outer wall at its '
                         'equator. Captive once the outer halves are joined round it; the grommet seals the gap for life. '
                         'Formed: two halves on a core mould (about $1,300 [E]), about $25 to $40 a ball [E]. Or stock: '
                         'a Ø120 x 3 opal acrylic sphere, if one is made [check a supplier], its opening cut to Ø40 '
@@ -538,7 +546,11 @@ def orb_parts(p=O):
              notes=['black anodised aluminium: lines the port, bonded with a two-part MMA adhesive (not cyanoacrylate). '
                     'Review 2026-11-01, to draw with the dock: it grows a Ø38 x 6 spigot under the ball with three 30 deg '
                     'L-slots, into a Ø38.4 socket round the window with three Ø3 stainless pins, so the ball stays '
-                    'captive in a drop and still swaps with a quarter turn (CORE-RECHARGE.md §6)']),
+                    'captive in a drop and still swaps with a quarter turn (CORE-RECHARGE.md §6)'] +
+             (['Core B (round 9\'s spacer, approved 2026-11-09): a shoulder Ø46 x 1 turned on it inside the ball, its '
+               'top at z 31.9, carries the core\'s weight at the rim of the core\'s Ø40 opening; the grommet\'s top, '
+               '0.45 above it, locates the core (0.2 clear round it). The grommet goes into the port from inside before '
+               'the outer halves are joined'] if B_ else [])),
         Part('base', base, Machined('cast-acrylic', 'lathe', setup_usd=80.0), finish='trim', group='base',
              notes=['black cast acrylic, polished, turned from rod: 120 x 30 (round 32f\'s), the cup turned in it; from '
                     'below the hatch\'s counterbore (112), the middle pocket (50) for the chassis, the board and the LED, '
@@ -685,7 +697,7 @@ NOTES_ORB = [
 TOUCHING_DOME = [('suspension', 'gland'), ('suspension', 'canopy'), ('suspension', 'cord'), ('pins', 'ring'), ('rim', 'shell'), ('rim', 'skin'), ('rim', 'liner'), ('cob', 'hub'), ('gland', 'crown'),
                  ('crown', 'hub'), ('clamp', 'collar'), ('gaskets', 'collar'), ('gaskets', 'clamp'), ('gaskets', 'shell'),
                  ('gaskets', 'skin'), ('reflector', 'hub'), ('pins', 'hub'), ('strap', 'canopy'), ('enclosure', 'strap')]
-TOUCHING_ORB = [('grommet', 'shell'), ('window', 'base'), ('seat', 'base'), ('ring', 'base'), ('led', 'board'),
+TOUCHING_ORB = [('grommet', 'shell'), ('grommet', 'core'), ('window', 'base'), ('seat', 'base'), ('ring', 'base'), ('led', 'board'),
                 ('chassis', 'base'), ('ballast', 'chassis'), ('ballast', 'base'), ('cable', 'base'), ('board', 'chassis'),
                 ('foot-ring', 'base'), ('cells', 'holder'), ('hatch', 'base'), ('usb', 'base'), ('cable', 'hatch'),
                 ('led', 'chassis'), ('holder', 'base'), ('holder', 'hatch'), ('ballast', 'hatch'), ('chassis', 'board'),
