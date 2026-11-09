@@ -6174,3 +6174,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   bluish set/sky edge, a sunlit mood; 21:15 agreed its next proxy. BRAND (21:11 question): 21:15 answered: keep Ice, the amp close-up,
   Mantle by day and the HTML mockups (any embedded product picture must be on the list); the Tint Library and crate pair to Pictures
   in progress until gated.
+- 21:13-21:16: ALL SEVEN FRONTS on 63d83f47 (tag tallr2) rendered and pushed before the freeze: Ember c4 38fcc96d, Dust c4 86076eb8,
+  Acid c2 33dfb519, Poison c2 b8e83a52, Ice c3 e423c505, Haze c3 ccce1fd5, Fog r33-speaker-horn 13607beb (each
+  renders/2026-11-04/barkhorn/rollout/A-polished-tallr2/site-front-off-tall-<k>.png, 1000x1250; 0 hidden in frame). GATES: batch 1
+  Ember/Acid/Ice (21:09), batch 2a Dust/Fog (21:15, wf_f6f197ed-6e5 + wf_15954c53-ed7), batch 2b Poison/Haze (21:16, wf_2e7eadb3-29a +
+  wf_c8b6101a-765). 21:17 sent the site lane and the brand lane all seven paths to stage locally while the gates run (no push or
+  republish before my confirmation; a failed front waits for its re-render, never an old one). SITE: the Core B copy in (8ba6ca42;
+  "frosted" 0 times anywhere). BRAND: Core B in the Book and press sheets (60764d2a); the list applied (30e01d63: the Tint Library and
+  crate pair to Pictures in progress; only social.jpg embeds product pictures).
