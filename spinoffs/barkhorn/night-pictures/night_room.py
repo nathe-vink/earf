@@ -50,6 +50,21 @@ def _principled(bpy, name, hexc, rough, spec=0.5):
     return m
 
 
+def _scale_base(m, k):
+    """Multiplies a material's base colour by k (the engine's pbr tint is a COLOR blend, which keeps the texture's
+    lightness: a white fleece stays white; this darkens it as a dyed one would be)."""
+    nt = m.node_tree
+    bs = next(n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED')
+    sock = bs.inputs['Base Color']
+    mul = nt.nodes.new('ShaderNodeMix'); mul.data_type = 'RGBA'; mul.blend_type = 'MULTIPLY'
+    mul.inputs['Factor'].default_value = 1.0; mul.inputs['B'].default_value = (k, k, k, 1.0)
+    if sock.is_linked:
+        nt.links.new(sock.links[0].from_socket, mul.inputs['A'])
+    else:
+        mul.inputs['A'].default_value = sock.default_value
+    nt.links.new(mul.outputs['Result'], sock)
+
+
 def _curtain(bpy, nb, hexc, strength, loc, size, target):
     """The lamps lane's dusk curtain (lamp_pictures.py, round 12): a curtain over a window, lit from behind by the
     evening sky; an emitting plane, brightest at its middle and feathered to its edges, so it reads as cloth lit
@@ -211,6 +226,40 @@ def night_set(bpy, spec, mats):
     w = n.get('window')
     if w and w.get('strength', 0) > 0:
         _curtain(bpy, None, w.get('color', '#9FB2D6'), w['strength'], w['loc'], w['size'], w['target'])
+    for md in n.get('models', []):
+        # Poly Haven scans (CC0), fetched and cached by the engine's assets.py: furniture that gives the lamp a reason
+        try:
+            PH.place(bpy, md['id'], md.get('res', '2k'), location=md['location'], rotation_deg=md.get('rotation_deg', (0, 0, 0)),
+                     scale=md.get('scale', 1.0), name=md.get('name'))
+        except Exception as e:
+            print('night_room: model unavailable:', md['id'], e, flush=True)
+    rg = n.get('rug')
+    if rg:
+        # a wool rug with pile (a Poly Haven fabric, its own bump), a bound edge in a darker tape, 12 mm thick
+        try:
+            rm = PH.pbr(bpy, rg['pbr'], '2k', name='rug', tint=rg.get('tint'), tint_mix=rg.get('tint_mix', 0.0),
+                        bump=rg.get('bump', 1.0), scale=rg.get('tile_m'))
+        except Exception as e:
+            print('night_room: rug texture unavailable, plain:', e, flush=True)
+            rm = _principled(bpy, 'rug', rg.get('tint', '#3A3632'), 0.98, 0.1)
+        if rg.get('value'):
+            _scale_base(rm, rg['value'])
+        bw = rg.get('border_w', 0.04); bm_ = _principled(bpy, 'rug-binding', rg.get('border_color', '#1E1C1A'), 0.9, 0.15)
+        (cx_, cy_), (sx_, sy_), th = rg['center'], rg['size'], 0.012
+        _box(bpy, 'rug', (cx_, cy_, th / 2), (sx_ - 2 * bw, sy_ - 2 * bw, th), rm)
+        for nm_, c_, s_ in (('rug-bind-f', (cx_, cy_ - sy_ / 2 + bw / 2), (sx_, bw)), ('rug-bind-b', (cx_, cy_ + sy_ / 2 - bw / 2), (sx_, bw)),
+                            ('rug-bind-l', (cx_ - sx_ / 2 + bw / 2, cy_), (bw, sy_ - 2 * bw)), ('rug-bind-r', (cx_ + sx_ / 2 - bw / 2, cy_), (bw, sy_ - 2 * bw))):
+            _box(bpy, nm_, (c_[0], c_[1], th / 2 + 0.0005), (s_[0], s_[1], th + 0.001), bm_)
+    ol = n.get('outside_light')
+    if ol:
+        # a light outside the window (a streetlight across the road, far enough to be parallel): it reaches the room
+        # only through the opening and the sheer (ruling 4), a soft cool shape on the floor and the wall
+        ld = bpy.data.lights.new('outside-light', 'SUN'); ld.energy = ol['irradiance']; ld.angle = math.radians(ol.get('angle_deg', 2.0))
+        h = ol.get('color', '#C9D3E6').lstrip('#'); rgb = [int(h[i:i + 2], 16) / 255 for i in (0, 2, 4)]
+        ld.color = [c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4 for c in rgb]
+        ob = bpy.data.objects.new('outside-light', ld); bpy.context.scene.collection.objects.link(ob)
+        from mathutils import Vector
+        ob.rotation_euler = Vector(ol['direction']).normalized().to_track_quat('-Z', 'Y').to_euler()
     for f in n.get('furniture', []):
         _box(bpy, f['name'], f['center'], f['size'], _principled(bpy, f['name'], f['color'], f.get('rough', 0.5)))
     for L in n.get('lamps', []):

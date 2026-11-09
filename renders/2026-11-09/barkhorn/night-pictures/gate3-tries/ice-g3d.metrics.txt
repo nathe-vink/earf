@@ -1,0 +1,12 @@
+cabinet: median L 14, luma 12  (target L >= 25)
+horn: median L 14
+woofer cone and surround: mean RGB [ 3.  6. 11.], L spread (p10-p90) 3-14
+red above 0: 42 % of the speaker (cabinet 51 %, horn 27 %)
+hue: horn 218 deg (median RGB [ 0. 10. 27.]), cabinet 211 deg (median RGB [ 1. 13. 26.])
+box: speaker x 0.434-0.566 y 0.211-0.761; the spec's x 0.418-0.582 y 0.2-0.78: INSIDE
+zone lower-left   mean 0.008  p99 0.029  ok
+zone lower-right  mean 0.037  p99 0.181  TOO BRIGHT
+zone top-left     mean 0.009  p99 0.016  ok
+zone top-right    mean 0.012  p99 0.022  ok
+floor outside the column (y >= 0.78) p99 0.172; below y 0.88 p99 0.178  TOO BRIGHT
+edges (4 %) mean 0.021 p99 0.162  BRIGHT
