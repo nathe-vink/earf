@@ -274,7 +274,9 @@ def main():
         lines = ['#!/bin/bash', f'# {tag}, chunk {k} of {len(chunks)}: one render after another (run it as one tracked task)',
                  'set -e', 'cd "$(git rev-parse --show-toplevel)"', f'mkdir -p {rd}']
         for n in names:
-            lines.append(f'python3 studio/engine/render.py spinoffs/barkhorn/campaign/rollout/{tag}/{n}.json --out {rd}/{n}.png')
+            # --masks on every queued render (the coordinator, 23:20): the mask pass carries the equipment and hidden-object
+            # audit (NAME.equipment.txt, both must read 0 px), so no shot can skip it
+            lines.append(f'python3 studio/engine/render.py spinoffs/barkhorn/campaign/rollout/{tag}/{n}.json --out {rd}/{n}.png --masks')
         open(os.path.join(od, f'queue-{k:02d}.sh'), 'w').write('\n'.join(lines) + '\n')
     md = [f'# Roll-out: base {a.base}, horn {a.horn}', '',
           f'{len(rows)} shots, about {total / 60:.1f} h of rendering in {len(chunks)} chunks. Written by `rollout.py --base {a.base} '

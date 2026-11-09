@@ -146,7 +146,9 @@ def main():
         d = T - C; flat = Vector((d.x, d.y, 0))
         cam.rotation_euler = flat.to_track_quat('-Z', 'Y').to_euler()
         tilt = math.atan2(d.z, flat.length)
-        # Blender's shift is in units of the larger frame dimension
+        # (with sensor_fit HORIZONTAL, Blender's shift is in units of the frame's width, not its larger side, so on a
+        # portrait frame this lands the target a little off where a tilted camera would put it; every approved picture
+        # was framed with it, so it stays: the coordinator, 2026-11-09 23:24. shots._frame_rays follows it exactly)
         cd.shift_y = math.tan(tilt) * cd.lens / cd.sensor_width * (1.0 if W >= H else W / H)
     else:
         cam.rotation_euler = (T - C).to_track_quat('-Z', 'Y').to_euler()
