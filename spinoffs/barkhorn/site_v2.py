@@ -819,7 +819,7 @@ def apply(web, head, rest):
 # web.RC on (with V2, HOME_V2 and COPY_NEXT): every picture of Tropos is today's speaker or is left out; the night
 # stage and the wall hidden until the new night renders pass; every lit lamp picture pulled (their light was faked);
 # Mantle only in its new design.
-RC_TALL = 'renders/2026-11-04/barkhorn/rollout/A-polished-tallr2/site-front-off-tall-{name}.png'   # the fronts lock (2026-11-09 21:17): Ember c4 38fcc96d, Dust c4 86076eb8, Acid c2 33dfb519, Poison c2 b8e83a52, Ice c3 e423c505, Haze c3 ccce1fd5, Fog r33-speaker-horn 13607beb. Before, fix1 (r33-rollout-c3:
+RC_TALL = 'renders/2026-11-04/barkhorn/rollout/A-polished-tallr3/site-front-off-tall-{name}.png'   # the fronts, rig 74f17d7c (2026-11-09 22:23): Ember c4 5aa0943b, Dust c4 0690b93c, Acid c2 b95319d3, Poison c2 766f299d, Ice c3 70e0f9f4, Haze c3 94b4534a, Fog r33-speaker-horn 62bc73a7. Before: tallr2 (failed: a light line on the side), then fix1 (r33-rollout-c3:
 # Ember, Dust, Poison, Ice e624e13e; Haze, Fog 3d0b613f; Acid 04d21c5c (on the Acid horn fix). Smoke held.
 RC_KEYS = ['red', 'orange', 'amber', 'green', 'blue', 'violet', 'ice']
 
