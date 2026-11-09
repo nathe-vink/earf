@@ -181,6 +181,33 @@ def main():
                     m = p.setdefault('materials', {})
                     m['body'] = {**m.get('body', {}), 'deep': deep, 'radius': 0.003 if p.get('fn') == 'dome' else 0.009}
             u['title'] = u['title'].replace('Smoke', tint.title()).replace('smoke', tint)
+        if '--hemi-only' in a_:
+            # the coordinator, 21:38 (the Hemisphere crop's gate): Hemisphere alone, natively 4:5 at 1600 x 2000, the
+            # same camera position and light: Core out of the source; the lens lengthened by the crop's factor
+            # (1600/740) and shifted so the frame is the crop's, its perspective unchanged
+            u['set']['props'] = [p for p in u['set']['props'] if not (p.get('module') == 'earf_moon' and p.get('fn') == 'orb')]
+            c = u['camera']; k = 1600.0 / 740.0
+            c['lens_mm'] = round(c['lens_mm'] * k, 2)
+            c['shift_x'] = round((c['shift_x'] + (1030 - 800) / 1600.0) * k, 4)
+            c['target'] = [c['target'][0], c['target'][1], float(os.environ.get('HEMI_TZ', '0.27'))]
+            c['shift_y'] = round(float(os.environ.get('HEMI_SY', '0.727')), 4)
+            # the focus on the dome (the pair's was Core's: at 184 mm the dome fell out of the depth of field)
+            dome = next(p for p in u['set']['props'] if p.get('module') == 'earf_moon' and p.get('fn') == 'dome')
+            dx_, dy_, dz_ = dome['spots'][0] if isinstance(dome['spots'][0], list) else dome['spots'][0]['position']
+            c['focus'] = [dx_, dy_ - 0.09, dz_ + 0.06]                  # the dome's front face, its crown's height
+            c['fstop'] = round(c.get('fstop', 8.0) * k, 1)              # the crop's depth of field at the longer lens
+            # point 2: no light shows in reflections without lighting the set: the right-rear strip a real light,
+            # diffuse and specular, flagged off the wall (a 30 deg spread)
+            e = u['lights']['edges']; e['diffuse'] = 1.0; e['specular'] = 1.0; e['spread_deg'] = 30.0
+            e['irradiance'] = float(os.environ.get('EDGES_IRR', '1.2'))
+            # point 1: the rose over 36 % of the dome's face was the overhead wash's reflection (the probe: off, 1 %; the
+            # bounce or the key off, unchanged); as a 6 x 0.8 strip, its irradiance on the set held, it covers 12.6 %
+            # and the face holds L* 27 (proxies/probe-*.png)
+            u['lights']['bgwash']['size_m'] = [float(v) for v in os.environ.get('WASH_SIZE', '6,0.8').split(',')]
+            for k_ in os.environ.get('LIGHTS_OFF', '').split(','):       # the probe (point 1): a light switched off
+                if k_ in u['lights']:
+                    u['lights'].pop(k_)
+            tint = tint + '-hemi'
         sname = 'lamps-unlit-real.json' if tint == 'smoke' else f'lamps-unlit-{tint}-real.json'
         u['render']['samples'] = 128
         json.dump(u, open(os.path.join(SHOTS, sname), 'w'), indent=1)
