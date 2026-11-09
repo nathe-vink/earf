@@ -612,7 +612,7 @@ def pages(web):
                 os.rmdir(d)
         left = [os.path.relpath(f, web.SITE) for f in glob.glob(os.path.join(web.SITE, '**', '*'), recursive=True)]
         bad = [f for f in left if re.search(r'(^press/|img/(?:(?:dome|orb)-|lamps-(?:orbs|domes)|lamp-(?:orb|dome)|hero[.-]|facade|room|macro-|turn-|spin/'
-                                            r'|tt-|ga-|icon-smoke-|lamps-unlit|thumb/lamps-unlit|rc/(?:red|orange|amber|green|blue|violet|ice)-back[.-]|rc/ice-habitat|(?:red|orange|amber|green|blue|violet|ice|black)-(?:on|off|studio|back|amp|horn|inside|reel|habitat))|-smoke\.html$)', f)]
+                                            r'|tt-|ga-|icon-smoke-|lamps-unlit|thumb/lamps-unlit|rc/(?:red|orange|amber|green|blue|violet|ice)-back[.-]|(?:red|orange|amber|green|blue|violet|ice|black)-(?:on|off|studio|back|amp|horn|inside|reel|habitat))|-smoke\.html$)', f)]
         assert not bad, ('site_v2: rc deploys', bad[:12])
 
 
@@ -1210,8 +1210,9 @@ def rc_waves(p, web):
     ON_HOLD = 'Hemisphere and Core, switched off. Shown in Smoke, a color on hold.'
     # --- the passed habitats (biomes: Ice 0f619953, Dust 26493989), 4:5
     HAB = {'blue': 'renders/2026-11-03/barkhorn/habitats/ice-portrait-1200x1500.jpg',
-           'orange': 'renders/2026-11-03/barkhorn/habitats/dust-portrait-1200x1500-nopanel.jpg'}   # r48-biomes 43c91242: no panel
-    # Fog (b61474c0) pulled: lit by a second sun (the biomes audit, 2026-11-09); the old Dust (26493989) by a hidden panel
+           'orange': 'renders/2026-11-03/barkhorn/habitats/dust-portrait-1200x1500-nopanel.jpg',   # r48-biomes 43c91242: no panel
+           'ice': 'renders/2026-11-03/barkhorn/habitats/fog_b-portrait-1200x1500-onesun.jpg'}     # r48-biomes cd5aa4e6: one sun
+    # replaced (the biomes audit, 2026-11-09): Dust 26493989 (a hidden panel), Fog b61474c0 (two suns)
     HAB_ALT = {'blue': 'Tropos in Ice, out in the snow at dusk', 'orange': 'Tropos in Dust, on rippled sand among desert buttes',
                'ice': 'Tropos in Fog, standing in the grass on a foggy hillside at dawn'}
     for k, src in HAB.items():
