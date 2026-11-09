@@ -400,7 +400,10 @@ def build(frame, samples, scale):
         bo.location = tuple(float(v) for v in os.environ.get('BOWL_XY', '0.05,0.13').split(',')) + (tz + 0.11,); me.materials.append(bowl_m)   # round 6: in frame
     if night:
         # round 4: a white ceiling at 2.5 m, so the lamp's light that leaves upward comes back into the room, as at home
-        SC.plane('ceiling', (4.3, 4.0), (0.85, 0.0, 2.5), (180, 0, 0), SC.principled('ceiling', '#E8E4DC', 0.9))
+        # (2026-11-09, item 107 pending: every picture inside the 600 mm drawn drop; with the cap's 126 and the canopy's
+        # 50 the rim hangs 776 below the ceiling, so Hemisphere's ceiling is at rim + 0.776; Core's room keeps 2.5 m)
+        ceil_z = (tz + 0.70 + 0.776) if prod == 'hemi' else 2.5
+        SC.plane('ceiling', (4.3, 4.0), (0.85, 0.0, ceil_z), (180, 0, 0), SC.principled('ceiling', '#E8E4DC', 0.9))
         ev = float(os.environ.get('NIGHT_EV', '-8.0' if prod == 'core' else '-3.0'))
         k = 2.0 ** (0.6 - ev)                     # round 9: one evening room for the family, the same fill at each exposure
         # round 14 (the coordinator: the dome must plainly be the room's main light): the room's fill scaled down until the
