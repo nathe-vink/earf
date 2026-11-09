@@ -113,7 +113,9 @@ MODIFY = {'haze_b': {'sundisk': {'azimuth': 30.0, 'elevation': 6.0}},
 FLAG = {'haze_b': (4.0, 3.0)}
 # feet bedding per habitat (m; default 0.012, the cabinet on the ground). Acid stands in a puddle: at 12 mm its bottom sat
 # exactly on the water, and the water reflected a band of sky between the edge and its reflection (the gate: "hovers")
-SINK = {'acid_b': 0.015,   # 3 mm under the water (at 18 mm the submerged part showed through, below the reflection's start)
+SINK = {'acid_b': 0.025,   # at 0.015 a sky-bright strip (8-9 px) showed between the edge and its reflection (the gate on
+                          # cc380fab: "hovers"); the puddle's displacement sits above the ray-cast surface. 0.025 closes it
+                          # (strip peak 82 -> 56 against water 50); at 0.03 the submerged part showed through
         'acid_b_old': 0.03, 'ice': 0.022}   # Ice ~1 cm deeper: light showed under its left front corner in the snow
 # the horn's outside: polished (the owner, 2026-11-03 15:14: "Horn: polished"; satin was 0.25)
 HORN_ROUGH = 0.05
