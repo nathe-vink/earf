@@ -5998,3 +5998,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   path, for clean edge highlights on the horn rim and cabinet edges. 20:25 sent the speaker lane. c3 (20:24): Ice landed as evidence
   (0aa1bf1f; the corner clean; it saw the cutter's wedge on the sweep too); Haze killed 1.5 min in; Fog's turn resumed on #DFDAD7
   (only set.color changed; A-polished-p2-rc2/, ETA ~20:45).
+- 20:24 SITE: the addendum and the lamps decision in at r47-site-next 74652ff0 (local; a first message carried a wrong SHA and time,
+  corrected): the home's Tropos block the Ember horn-back with the gallery's caption and alt; the plate only in the galleries; no
+  "TR-1" anywhere (grepped); the seam checked at DPR 1/2/3 on all 24 frames of Ember and Haze (top rows within 1.6/255, bottom within
+  7); the turn rests on frame 20 (the thumb and placeholder too); the lamps words-only (no lamps-unlit built, banned; a text band; no
+  stage on /lighting or the 14 views; og-lamps not made; the lamp cards on img/rc/og-home.jpg). 20:25 confirmed og-home (remade from
+  the new talls); the talls ~21:15-21:30.
