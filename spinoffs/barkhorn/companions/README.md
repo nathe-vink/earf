@@ -1682,3 +1682,54 @@ In `spinoffs/barkhorn/rfq/`:
   Plastic Domes & Spheres in Santa Fe Springs is the strongest match for both.
 - A custom tint poured at a mill runs to pallet minimums (a 2006 benchmark: 2,500 lb). At 10 to 50 lamps, the tints
   will likely come from a distributor's stock colours or a pallet per tint. Ask Laird and Piedmont first.
+
+## The lamps' materials, locked (2026-11-09)
+
+The owner's sequence (2026-11-09, via the coordinator): materials first, then design, then pictures. This table is the
+reference for every lamp picture from round 3 of the site set on. No hand-matched dye comes back: a stale value (the
+studio kit's Ember `#CD8553`, the old `stack.TINTS` stand-ins) is a bug.
+
+**One dye per tint, the speaker set's.** The source is `launch/tints-trucast.json`, a copy of
+`spinoffs/barkhorn/asset/tints-trucast.json` at r33-speaker-horn ac9e5568 (Acid on its corrected dye, red at 0.85 of
+green). Each TruCast code's chart figure is held at each shell's own thickness, as the speaker holds it at 20 mm for
+the cabinet and 12.7 mm for the horn: 0.92 x luminance(exp(-k x split x t)) = the chart figure.
+- Hemisphere's 3 mm tint shell (R 100-97) passes the chart figure.
+- Core's 9 mm ball, at a third of the loading, passes the same.
+
+Code: `strata/scene.absorption` (the bpy rigs) and `lamps_cordless.speaker_deep` (the studio engine's `deep` at 3 mm).
+
+| Tint | TruCast | Chart TT | Split (R, G, B) | T through the shell (R / G / B) | As a colour | OKLCH of T (L C h) |
+|---|---|---|---|---|---|---|
+| Ember | 2423 Red | 14.1 % | [0.08, 1.0, 0.85] | 0.685 / 0.009 / 0.018 | `#D81724` | 0.56 0.219 26 |
+| Dust | 2422 Orange (amber) | 59.1 % | [0.02, 0.4, 1.0] | 0.973 / 0.583 / 0.259 | `#FCC98B` | 0.87 0.097 71 |
+| Acid | 9097 Fluorescent Yellow | 77.6 % | [0.085, 0.1, 1.0] | 0.900 / 0.883 / 0.288 | `#F3F192` | 0.94 0.118 107 |
+| Poison | 2092 Green | 18.6 % | [1.0, 0.18, 0.8] | 0.001 / 0.282 / 0.004 | `#03910C` | 0.57 0.190 143 |
+| Ice | 2069 Tinted Blue | 57.6 % | [1.0, 0.4, 0.06] | 0.369 / 0.671 / 0.942 | `#A3D6F8` | 0.85 0.071 239 |
+| Haze | 2287 Violet | 13.5 % | [0.5, 1.0, 0.12] | 0.245 / 0.060 / 0.714 | `#8845DC` | 0.55 0.217 299 |
+| Fog | 0000 Clear | 93 % | [1.0, 1.0, 1.0] | 1.000 / 1.000 / 1.000 | `#FFFFFF` | 1.00 0.000 – |
+| Smoke | 2074 Dark Gray | 11.7 % | [1.03, 1.0, 0.97] | 0.121 / 0.128 / 0.136 | `#616467` | 0.50 0.006 – |
+
+**The rest of the acrylic, as drawn:**
+- **Hemisphere v3:**
+  - the 6 mm shell (R 96-90, the CAD's `liner`) is clear (TruCast 0000);
+  - the opal liner (R 89-86, the CAD's `skin`) is the neutral opal, about 0.93 a channel through, about 55 % out;
+  - the rim is the tint at half loading.
+- **Core A:**
+  - the 9 mm ball is tinted at a third of the loading;
+  - its inside face is bead-blasted. The frost's diffuse lobe carries the wall's own tint (`strata/scene.frosted`): no
+    untinted layer, and no light out that never crossed the dye.
+- **Specular Tint is white** on every resin. A tint sits in the volume only.
+
+**The hardware:**
+- Black anodised aluminium (the collar, clamp, hub, crown, gland): a satin black of 3.7 % reflectance. A true metal
+  there mirrors the room and prints as a void.
+- Core's dock: polished black acrylic (`trim`). Its stainless contacts sit under the base.
+
+**The light:**
+- Hemisphere: the Vero SE 10 at 2700 K, about 430 lm at the COB.
+- Core: the drawn warm-dim board at its 2700 K channel, 200 lm at the LED and about 180 lm out of the ball. It was 620
+  lm before round 3: never brighter than the part.
+- One photometric scale throughout: 0.0065 W/lm.
+
+**Under 2700 K, Ice reads cyan, h about 201-214 in the pictures, against its 239 in white light.** That is the light,
+not the dye. The 2700/5700 K board is only a proposal (item 90).
