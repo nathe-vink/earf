@@ -204,6 +204,10 @@ def main():
             # bounce or the key off, unchanged); as a 6 x 0.8 strip, its irradiance on the set held, it covers 12.6 %
             # and the face holds L* 27 (proxies/probe-*.png)
             u['lights']['bgwash']['size_m'] = [float(v) for v in os.environ.get('WASH_SIZE', '6,0.8').split(',')]
+            if os.environ.get('WARM_K'):           # the 21:44 test: the cool sources warmed (key, fill, strip)
+                for k_ in ('key', 'fill', 'edges'):
+                    if k_ in u['lights']:
+                        u['lights'][k_]['color'] = int(os.environ['WARM_K'])
             for k_ in os.environ.get('LIGHTS_OFF', '').split(','):       # the probe (point 1): a light switched off
                 if k_ in u['lights']:
                     u['lights'].pop(k_)
