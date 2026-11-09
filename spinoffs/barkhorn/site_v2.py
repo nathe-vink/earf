@@ -808,6 +808,7 @@ def apply(web, head, rest):
         rc_fixes(p, web)
         rc_waves(p, web)
         rc3(p, web)
+        rc_turn(p, web)
         p.banned = BANNED_RC
     return p.done()
 
@@ -1463,6 +1464,42 @@ def rc3(p, web):
 .sound-still, .mantle-pic { background: none !important }
 .hab-band .foot-note .render, .hero-cap .render { margin-left: 0 }
 """)
+
+
+TURN = {'red': 'A-polished-p2/turn-ember', 'orange': 'A-polished-p2/turn-dust', 'green': 'A-polished-p2-rc1/turn-poison',
+        'blue': 'A-polished-p2-rc1/turn-ice', 'violet': 'A-polished-p2-rc1/turn-haze', 'ice': 'A-polished-p2-rc1/turn-fog'}
+# the seven turns, passed (the coordinator 2026-11-09 18:51): Ember 00-04 r33-rollout-c3 52ad76ba, 05-23 and Dust c4 0a0a83bd;
+# Acid 00-16 c4 42fa8eee, 17-23 c3 66126d53 (A-polished-p2-rc1); Haze, Fog c3 66126d53; Poison, Ice c4 eef18db2
+
+
+def rc_turn(p, web):
+    """The turning horn back in each Tropos gallery: 24 frames at 15 degrees, one 6 x 4 sprite per color (the view
+    web.py already draws), fetched only when its view is opened; one turn on arrival on a desk, none on a phone."""
+    import json, os
+    from PIL import Image
+    R = os.path.join(web.ROOT, 'renders/2026-11-04/barkhorn/rollout/')
+    i = p.rest.index('const D = ') + len('const D = ')
+    j = p.rest.index(', BY = Object', i)
+    D = json.loads(p.rest[i:j])
+    for c in D['clouds']:
+        k = c['k']
+        files = [R + (f'A-polished-p2/turn-acid-{n:02d}.png' if n < 17 else f'A-polished-p2-rc1/turn-acid-{n:02d}.png') if k == 'amber'
+                 else R + f'{TURN[k]}-{n:02d}.png' for n in range(24)]
+        fr = [Image.open(f).convert('RGB') for f in files]
+        w, h = fr[0].size
+        assert all(f.size == (w, h) for f in fr), ('rc_turn: frame sizes', k)
+        sheet = Image.new('RGB', (w * 6, h * 4))
+        for n, f in enumerate(fr):
+            sheet.paste(f, ((n % 6) * w, (n // 6) * h))
+        rel = f'rc/turn-{k}.webp'
+        sheet.save(os.path.join(web.IMG, rel), 'WEBP', quality=72, method=6)
+        fr[0].resize((168, round(168 * h / w))).save(os.path.join(web.IMG, f'rc/turn-{k}-th.webp'), 'WEBP', quality=80)
+        c['views']['turn'] = dict(src=f'img/{rel}', w=w, h=h, th=f'img/rc/turn-{k}-th.webp', **web.ground(rel, (0, 0, w, h)))
+    p.rest = p.rest[:i] + json.dumps(D, separators=(',', ':')) + p.rest[j:]
+    # no words on how to work it (the owner); no turn on arrival on a phone
+    p.sub("role: 'img', 'aria-label': `${c.name}'s horn; drag to spin it`,", "role: 'img', 'aria-label': `${c.name}'s horn, all the way round`,")
+    p.sub("pic.style.backgroundPosition = frameAt(turnFrame); });\n    if (!reduce) {",
+          "pic.style.backgroundPosition = frameAt(turnFrame); });\n    if (!reduce && !matchMedia('(max-width: 860px)').matches) {")
 
 
 BANNED_RC = r'eight colors|to Smoke|Smoke as current'
