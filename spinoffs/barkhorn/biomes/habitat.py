@@ -543,7 +543,9 @@ def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extr
                         continue
                     mm = 0.020 if base == 'bark' else 0.0127
                     c = absn.inputs['Color'].default_value; dens = absn.inputs['Density'].default_value
-                    tr = [math.exp(-(1 - c[i]) * dens * mm) for i in range(3)]
+                    # a caustics stand-in: shadow rays pass the wall tinted by what it transmits, less its two faces'
+                    # Fresnel loss (about 4 % each at IOR 1.49, x 0.92; without it clear glass cast no shadow at all)
+                    tr = [0.92 * math.exp(-(1 - c[i]) * dens * mm) for i in range(3)]
                     if SURFACE_GLASS:
                         # the tint on the faces instead of in a volume: the asset's panels don't close the volume
                         # (rays inside the cabinet stay "in the glass" and the inside reads black whatever the
