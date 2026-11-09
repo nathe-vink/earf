@@ -5314,3 +5314,8 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 18:23 c2: merged b00945ab at 944124c2663a37b0569f5d56d49a3b5223857778 (no rebuild); rc1 sides queue 02 (Haze, Fog) from 18:24,
   ~17 min each. 18:24 c4: queue 01 now stops after Acid (a watcher kills the queue as Poison starts loading); Ember, Dust, Acid to
   land and commit; then hold for the flags SHA (the four talls first).
+- 18:24 biomes: FOG KHAKI BAND passes (diagnostic, not committed; proxy cols 347-467, rows 575-587 = x 520-700, y 862-881 full
+  size; 64 samples, compositing off): Combined linear (0.178, 0.159, 0.094), all Transmission Indirect; Glossy Direct 0 (glossy
+  colour 0.039): not Poison's mirror mechanism; something warm seen through the clear glass (a batt or brace part, the back wall's
+  view of the rock or ground, or the low sun on something). Next: a camera-only ray trace of three band pixels after the Poison
+  +1 EV / +1.6 EV proxies, before the Acid crops.
