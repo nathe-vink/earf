@@ -5077,3 +5077,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 17:50 sent: biomes (the pass; the polish as one optional final pass after its queue, re-gated against this one if done); the
   site lane (Fog's habitat for the Fog color page like Ice and Dust, this push if it costs minutes; the backs check closed: rigB
   backs, horn-backs, amp plate and turns never carried the bug).
+- 17:52 biomes (stamped 17:57, ahead of its queue time 17:52:03): the Fog polish pass (flecks, the khaki-band trace, the plate edge
+  check, the diagonal if cheap) as one commit after the queue. POISON: the first trace (scene.ray_cast through the whole forest)
+  took 50 min on one hemisphere, stopped; trace2 builds a BVH of the render-visible objects within 2.5 m (hidden duplicates such as
+  a 0.1 mm "front-panel" double can't count), running. The first passes render wrote only Combined (compositing replaced the
+  result); reruns with compositing off after trace2. Order: trace2, passes, Haze final, Fog scene save + khaki trace, Acid base
+  crops, Acid colour proxies; one Blender job at a time (a stale queue briefly started a second Haze; killed within 15 s).
