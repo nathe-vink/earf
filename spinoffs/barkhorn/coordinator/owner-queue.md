@@ -5034,3 +5034,10 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   c4 (after the turns and the merge, hold the wides for my go; if none yet, Ember wide alone and wait). 17:44 the brand lane (my
   message said 17:45, ahead of the clock by under a minute): the
   same dimensions for the Book (its 1293, 423 and 72.6), republish held for the regression punch list.
+- 17:45 sent the site lane a correction (my message said 17:48, ahead of the clock: it went at 17:45:58): wave 1's "the seven talls
+  are being re-rendered" and wave 3 item 8 are void; the seven passed talls stand (e624e13e, 3d0b613f, 04d21c5c); Dust's red base line
+  is the bottom panel's real edge glow, not the bug; no caption, no swap. The lamps site gate (wf_a02e1a2a-b5e) so far: critics 1-3
+  HOLD every frame (heroes, rows, Core A Ice night): pastel, red-clipped faces (Ice mint, Haze pink, Dust = Acid peach), a floor
+  bar like LED strip in the dome row, Core A night ungrounded; their fixes agree: studio and camera white balance at ~3000-3200 K,
+  faces 2-2.5 EV lower (no face pixel at 255), the site Core on Core A's night material, room fill 5 -> ~15-20 %. The fourth
+  critic (photometrist) and the tally to come.
