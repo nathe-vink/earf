@@ -648,6 +648,7 @@ def site(frame, tint):
         _siteH_round1(s)
     if frame == 'back':
         _siteB_round1(s)
+        _siteB_round2(s)
     honest_lights(s)
     if frame in ('front-off-tall', 'front-off-wide', 'side'):
         _siteG_round2(s)
@@ -1070,6 +1071,23 @@ def _siteB_round1(s):
     if 'plate-strip' in L:
         L['plate-strip']['irradiance'] = 0.0
     _mirror_card(s)
+    return s
+
+
+def _siteB_round2(s):
+    """The honest backs' gate (the coordinator's critics, 2026-11-04 01:15, wf_dfce1fd6-dc4: Ember, Poison, Haze and Acid
+    held, the dark colours sunk from behind, back face L* 8-12). The fill is the one lamp that meets the back face
+    near its normal (17 deg off; the key 89): x3, 1.3 to 3.9. The key and the sky, which light the sweep but hardly the
+    back, come down to hold it: key x0.5 (2.6 to 1.3), sky 0.7 to 0.3. Proxies (0.5 scale, 32 samples, part masks,
+    c2): back L* Ember 11.5 to 18.6, Haze 9.0 to 15.4; wall 84.4 to 84.8, floor 74 to 79; no clipping; EARF letters
+    on Ember 15.0 on 6.2 to 22.7 on 10.3. Rejected: a brighter or bigger key, a soft side lamp (back +1, sweep up), a
+    lamp over the lid (horn clips 4-5 %, floor 95), a soft lamp on the back's axis (mirrored as glare), real black
+    flags beside the cabinet (a black slab in the set; the side goes black, not coloured). The lid and the side
+    camera-left stay as they are: grazing mirrors of the in-frame floor (the coordinator, 01:48)."""
+    L = s['lights']
+    L['fill']['irradiance'] = 3.9
+    L['key']['irradiance'] = 1.3
+    s['sky']['strength'] = 0.3
     return s
 
 
