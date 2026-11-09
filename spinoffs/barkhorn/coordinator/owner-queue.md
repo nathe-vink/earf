@@ -5507,3 +5507,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   for the left-edge green line, then about +1.5; never +2.35.
 - 18:51 sent the site lane (optional for RC3, else the next push): THE TURN VIEWER back, all seven sets with their sources; webp
   ~40 KB, lazy per color, no autoplay loop on phones, no interaction caption ("Drag to turn" banned), a plain Render tag.
+- 18:51 speaker lane: (c) THE WIDE'S SEAM fixed at f14b24c7 (on 8e5e1da0): ray-cast of c4's pre-fix Ember wide: the edge is the foot
+  of a `sidesheen` panel 2.4 m behind the speaker at strength 0, hidden from the camera, casting no shadow, but mirrored by the glossy
+  floor as a black rectangle; site() now drops any panel at strength 0 ("an unlit panel is no lamp"); tall and side carried it too
+  (it lit nothing; the passed talls' pixels move only where the floor reflected it; not seen in their frames). Proof
+  renders/2026-11-09/barkhorn/wide-seam/. Cardcast clean. The gentler contact not changed. 18:52: my 18:21-18:47 messages reached it
+  in one batch; (a) the side card + (b) the hero-light hidden bounce and flag made real: one SHA by ~19:35; then (d) the arc, (e) the
+  audit table, (f) the close-ups (front ~19:25 -> after; side ~20:10; satin ~21:15).
+- 18:52 sent: c2 (merge f14b24c7, wides Poison, Ice, Haze, Fog, tag rc1-card; hero-lights after the next SHA); c4 (after its talls,
+  merge f14b24c7, wides Ember, Dust, Acid).
