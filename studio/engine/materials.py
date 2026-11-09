@@ -222,7 +222,7 @@ PRESET_DEFAULTS = {
     # inks (a hydrographic film, or tinted resin laid in the mould), `print_strength` of the way from clear to the
     # pattern's colours, `print_scale` its size (> 1 smaller); a stone or a marble too (round 11), its settings changed by
     # `print_params`
-    'clear_resin': dict(color='#FFFFFF', deep='#9A9C96', radius=0.01, roughness=0.16, ior=1.5, milk=0.0, cloud=0.0,
+    'clear_resin': dict(color='#FFFFFF', deep='#9A9C96', radius=0.01, roughness=0.16, ior=1.5, milk=0.0, cloud=0.0, split=None,
                         cloud_m=0.07, vein=None, cloud_edge=(0.42, 0.85), print=None, print_strength=0.7, print_scale=1.0),
     # terrazzo, opaque (round 6, a stone look): chips about `chip` across in a `share` of the cells, each its colour from
     # the palette, in a ground of `color`, honed satin (cast resin, Jesmonite or pressed recycled plastic chips)
@@ -1189,6 +1189,26 @@ def _clear_resin(nt, b, p, normal_in=None):
     c0 = tuple(1.0 - c / D for c in s0) + (1.0,)
     I['Base Color'].default_value = hex_lin(p['color'])
     I['Roughness'].default_value = p['roughness']; I['IOR'].default_value = p['ior']
+    if p.get('split'):
+        # one shell, two finishes (barkhorn's horn, 2026-11-04: satin outside, the air path masked and polished): in the
+        # part's own frame, a point's radial direction from an axis along y at (axis_x, axis_z), against its normal: a
+        # face turned toward the axis (the inner flare) takes `inner`, one turned away (the outside) `outer`
+        sp = p['split']
+        tc = node('ShaderNodeTexCoord')
+        sn = node('ShaderNodeSeparateXYZ'); nt.links.new(tc.outputs['Normal'], sn.inputs[0])
+        if sp.get('mode') == 'updown':
+            # a panel's broad faces (normal up or down) at `faces`, its edges (normal sideways) at `edges`: a shop's
+            # sanded edge on a polished sheet (barkhorn's bottom panel, 2026-11-04)
+            side = math_('LESS_THAN', math_('ABSOLUTE', sn.outputs['Z']), 0.7)        # 1 on an edge
+            lo_, hi_ = sp.get('faces', 0.05), sp.get('edges', 0.4)
+        else:
+            sep = node('ShaderNodeSeparateXYZ'); nt.links.new(tc.outputs['Object'], sep.inputs[0])
+            rx = math_('SUBTRACT', sep.outputs['X'], sp.get('axis_x', 0.0)); rz = math_('SUBTRACT', sep.outputs['Z'], sp.get('axis_z', 0.0))
+            dot = math_('ADD', math_('MULTIPLY', rx, sn.outputs['X']), math_('MULTIPLY', rz, sn.outputs['Z']))
+            side = math_('GREATER_THAN', dot, 0.0)                   # 1 outside, 0 inside
+            lo_, hi_ = sp.get('inner', 0.05), sp.get('outer', 0.25)
+        rough = math_('ADD', lo_, math_('MULTIPLY', side, hi_ - lo_))
+        nt.links.new(rough, I['Roughness'])
     I['Transmission Weight'].default_value = 1.0 - p['milk']
     if p['milk'] > 0:
         I['Subsurface Weight'].default_value = 1.0; I['Subsurface Scale'].default_value = 0.003
