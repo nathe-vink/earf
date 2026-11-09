@@ -6029,3 +6029,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   darker and cooler, the left fog bank a slate band (never paint the warm rim back: it was the second sun). One check (founder): the
   speaker's own cast shadow isn't visible; confirm every speaker object casts shadows. 20:33 sent the biomes lane the check ("shadows
   on" ships it as is); the site lane and the brand lane: prepare Fog's habitat back (cd5aa4e6) locally, confirmation to follow.
+- 20:33 GATE FOG ONE-SUN complete: 3/3 SHOW (the skeptic, wf_05304716-6a0: one sun agrees in every cue; with the sun 5.8° up the
+  speaker's shadow is ~10x its height and lands mostly out of frame on the left; the horn's faint diagonal not an X; label the A/B if it
+  is ever shown). The shadow-setting check stands as a cheap confirmation.
