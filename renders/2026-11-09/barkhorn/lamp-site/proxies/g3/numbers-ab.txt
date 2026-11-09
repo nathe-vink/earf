@@ -1,0 +1,43 @@
+# Round 3 proxies (gate wf_5760aeac-7cd), lamp_site_gate.py GATE_R=3; 0.3 scale, 64 samples
+## Domes, as ordered: studio x1, camera -2 EV (key 2 m)
+dome-red    Ember  L 0.552 paper 0.454 C 0.175 h  24.0 clip 0.000 zero 0.000  h:FAIL C:PASS clip0:PASS face>paper:PASS zero<=10%:PASS
+dome-orange Dust   L 0.722 paper 0.455 C 0.062 h  51.9 clip 0.000 zero 0.000  h:PASS clip0:PASS face>paper:PASS zero<=10%:PASS
+dome-amber  Acid   L 0.752 paper 0.455 C 0.050 h  93.2 clip 0.000 zero 0.000  h:PASS clip0:PASS face>paper:PASS zero<=10%:PASS
+dome-green  Poison L 0.447 paper 0.454 C 0.104 h 158.3 clip 0.000 zero 0.000  h:PASS C:PASS clip0:PASS face>paper:FAIL zero<=10%:PASS
+dome-blue   Ice    L 0.686 paper 0.454 C 0.040 h 205.2 clip 0.000 zero 0.000  h:PASS C:FAIL clip0:PASS face>paper:PASS zero<=10%:PASS
+dome-violet Haze   L 0.475 paper 0.454 C 0.133 h 313.4 clip 0.000 zero 0.000  h:PASS C:PASS clip0:PASS face>paper:PASS zero<=10%:PASS
+dome-ice    Fog    L 0.780 paper 0.455 C 0.012 h  76.8 clip 0.000 zero 0.000  C:PASS clip0:PASS face>paper:PASS zero<=10%:PASS
+  dE red-orange 0.211 PASS
+  dE orange-amber 0.051 FAIL
+  dE amber-green 0.319 PASS
+  dE green-blue 0.252 PASS
+  dE blue-violet 0.259 PASS
+  dE violet-ice 0.335 PASS
+## Orbs (b): as round 2, camera -5 (key 2 m)
+orb-red    Ember  L 0.333 paper 0.371 C 0.134 h  27.9 clip 0.000 zero 0.000  h:PASS C:FAIL clip0:PASS face>paper:FAIL zero<=10%:PASS
+orb-orange Dust   L 0.506 paper 0.372 C 0.094 h  44.0 clip 0.000 zero 0.000  h:PASS clip0:PASS face>paper:PASS zero<=10%:PASS
+orb-amber  Acid   L 0.547 paper 0.372 C 0.069 h  94.1 clip 0.000 zero 0.000  h:PASS clip0:PASS face>paper:PASS zero<=10%:PASS
+orb-green  Poison L 0.216 paper 0.370 C 0.051 h 156.8 clip 0.000 zero 0.000  h:PASS C:FAIL clip0:PASS face>paper:FAIL zero<=10%:PASS
+orb-blue   Ice    L 0.432 paper 0.371 C 0.065 h 215.8 clip 0.000 zero 0.000  h:PASS C:FAIL clip0:PASS face>paper:PASS zero<=10%:PASS
+orb-violet Haze   L 0.241 paper 0.371 C 0.102 h 300.4 clip 0.000 zero 0.000  h:PASS C:PASS clip0:PASS face>paper:FAIL zero<=10%:PASS
+orb-ice    Fog    L 0.611 paper 0.373 C 0.016 h  75.3 clip 0.000 zero 0.000  C:PASS clip0:PASS face>paper:PASS zero<=10%:PASS
+  dE red-orange 0.181 PASS
+  dE orange-amber 0.083 PASS
+  dE amber-green 0.337 PASS
+  dE green-blue 0.225 PASS
+  dE blue-violet 0.224 PASS
+  dE violet-ice 0.387 PASS
+## Orbs (a): camera -5.7, studio unchanged (key 2 m)
+orb-red    Ember  L 0.266 paper 0.294 C 0.108 h  26.0 clip 0.000 zero 0.000  h:PASS C:FAIL clip0:PASS face>paper:FAIL zero<=10%:PASS
+orb-orange Dust   L 0.420 paper 0.295 C 0.087 h  45.9 clip 0.000 zero 0.000  h:PASS clip0:PASS face>paper:PASS zero<=10%:PASS
+orb-amber  Acid   L 0.457 paper 0.295 C 0.065 h  95.3 clip 0.000 zero 0.000  h:PASS clip0:PASS face>paper:PASS zero<=10%:PASS
+orb-green  Poison L 0.161 paper 0.293 C 0.039 h 156.3 clip 0.000 zero 0.000  h:PASS C:FAIL clip0:PASS face>paper:FAIL zero<=10%:PASS
+orb-blue   Ice    L 0.352 paper 0.294 C 0.059 h 216.4 clip 0.000 zero 0.000  h:PASS C:FAIL clip0:PASS face>paper:PASS zero<=10%:PASS
+orb-violet Haze   L 0.184 paper 0.293 C 0.084 h 298.5 clip 0.000 zero 0.000  h:PASS C:FAIL clip0:PASS face>paper:FAIL zero<=10%:PASS
+orb-ice    Fog    L 0.518 paper 0.296 C 0.016 h  75.0 clip 0.000 zero 0.000  C:PASS clip0:PASS face>paper:PASS zero<=10%:PASS
+  dE red-orange 0.159 PASS
+  dE orange-amber 0.076 FAIL
+  dE amber-green 0.302 PASS
+  dE green-blue 0.198 PASS
+  dE blue-violet 0.193 PASS
+  dE violet-ice 0.348 PASS

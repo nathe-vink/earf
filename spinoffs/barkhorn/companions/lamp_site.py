@@ -247,11 +247,12 @@ def build(frame, samples, scale):
     SC.world(color='#C8C4BE', strength=0.02 * K)
     # round 2 (the gate): the studio at 3000 K, and the camera's white point at 3000 K; the lamps stay at 2700 K (spec)
     # round 3 (the gate's polish): a larger, higher key, so the two round highlights (key and fill) read as one soft one:
-    # 2.0 m across (was 1.2), its centre higher and more frontal, its power grown with the square of its distance to
+    # 4.0 m across (was 1.2; at 2 and 3 m the two reflections, the outer face's and the inner wall's, stay apart), higher and more frontal, its power grown with the square of its distance to
     # hold the light at the lamps
     kp = (-1.0, -2.1, 2.6); kd0 = (Vector((-1.4, -1.6, 1.9)) - Vector((0, 0.1, 0.5))).length
     kd = (Vector(kp) - Vector((0, 0.1, 0.5))).length
-    key = SC.area('key', kp, (0, 0, 0), (2.0, 2.0), 60.0 * K * (kd / kd0) ** 2, '#FFF4E8'); key.data.shape = 'ELLIPSE'
+    ks = float(os.environ.get('KEY_SIZE', '4.0'))
+    key = SC.area('key', kp, (0, 0, 0), (ks, ks), 60.0 * K * (kd / kd0) ** 2, '#FFF4E8'); key.data.shape = 'ELLIPSE'
     key.data.color = blackbody(3000)
     key.rotation_euler = (Vector((0, 0.1, 0.5)) - key.location).to_track_quat('-Z', 'Y').to_euler()
     fill = SC.area('fill', (1.8, -1.2, 1.2), (0, 0, 0), (1.6, 1.6), 20.0 * K, '#EEF2F8'); fill.data.shape = 'ELLIPSE'
@@ -259,9 +260,11 @@ def build(frame, samples, scale):
     fill.rotation_euler = (Vector((0, 0.1, 0.4)) - fill.location).to_track_quat('-Z', 'Y').to_euler()
     # round 3 (the gate: 88 % of the dock's pixels at 3 or less): a kicker, low behind and to the right, out of frame
     # (the audit holds it there), that draws the dock's and the cap's edges; real, unlinked, its own reflection honest
-    kick = SC.area('kicker', (0.9, 0.9, 0.35 if kind0 == 'orb' else 0.9), (0, 0, 0), (0.3, 0.6), 6.0 * K, '#FFF4E8')
-    kick.data.color = blackbody(3000)
-    kick.rotation_euler = (Vector((0, 0, 0.05 if kind0 == 'orb' else 0.62)) - kick.location).to_track_quat('-Z', 'Y').to_euler()
+    # (the heroes only: in the wide rows it grazed the sweep's cove, a bright streak, and a narrow beam raked the floor)
+    kick = None if frame.startswith('lamps') else SC.area('kicker', (0.9, 0.9, 0.35 if kind0 == 'orb' else 0.9), (0, 0, 0), (0.3, 0.6), 6.0 * K, '#FFF4E8')
+    if kick:
+        kick.data.color = blackbody(3000)
+        kick.rotation_euler = (Vector((0, 0, 0.05 if kind0 == 'orb' else 0.62)) - kick.location).to_track_quat('-Z', 'Y').to_euler()
 
     # --- the frames ---------------------------------------------------------------------------------------------
     kind, _, tint = frame.partition('-')
@@ -284,7 +287,9 @@ def build(frame, samples, scale):
     elif kind == 'dome':
         W, H = 1600, 2000
         hemisphere(tint, 0.0, 0.50)                    # the rim 500 above the paper: the dome and its pool in one frame
-        cam = ((0.08, -1.25, 0.45), (0.0, 0.0, 0.36), 50.0)
+        # round 3 (the gate: the dome 40-50 % of the card, the pool's front edge inside): higher and closer, looking
+        # down past the dome to the pool's near half-maximum (r 0.38 at the rim's 0.50; launch/HIDDENCAST.md's pool note)
+        cam = tuple(eval(os.environ['DOMECAM'])) if os.environ.get('DOMECAM') else ((0.06, -0.90, 1.20), (0.0, -0.15, 0.385), 58.0)
     elif kind == 'orb':
         W, H = 1600, 2000
         core(tint, 0.0, 0.0)

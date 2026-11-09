@@ -1,0 +1,30 @@
+# Round 3 proxies, variant (c) PROPOSED: key 4 m; domes studio x0.55, camera -2 EV; orbs studio x2.3, camera -3.2 EV (paper held ~0.37, the lamps untouched)
+250:    # 4.0 m across (was 1.2; at 2 and 3 m the two reflections, the outer face's and the inner wall's, stay apart), higher and more frontal, its power grown with the square of its distance to
+254:    ks = float(os.environ.get('KEY_SIZE', '4.0'))
+dome-red    Ember  L 0.539 paper 0.383 C 0.177 h  24.3 clip 0.000 zero 0.000  h:FAIL C:PASS clip0:PASS face>paper:PASS zero<=10%:PASS
+dome-orange Dust   L 0.709 paper 0.383 C 0.062 h  52.9 clip 0.000 zero 0.000  h:PASS clip0:PASS face>paper:PASS zero<=10%:PASS
+dome-amber  Acid   L 0.739 paper 0.384 C 0.052 h  92.5 clip 0.000 zero 0.000  h:PASS clip0:PASS face>paper:PASS zero<=10%:PASS
+dome-green  Poison L 0.438 paper 0.383 C 0.102 h 158.2 clip 0.000 zero 0.000  h:PASS C:PASS clip0:PASS face>paper:PASS zero<=10%:PASS
+dome-blue   Ice    L 0.673 paper 0.383 C 0.038 h 201.0 clip 0.000 zero 0.000  h:PASS C:FAIL clip0:PASS face>paper:PASS zero<=10%:PASS
+dome-violet Haze   L 0.464 paper 0.383 C 0.131 h 315.6 clip 0.000 zero 0.000  h:PASS C:PASS clip0:PASS face>paper:PASS zero<=10%:PASS
+dome-ice    Fog    L 0.766 paper 0.384 C 0.014 h  76.5 clip 0.000 zero 0.000  C:PASS clip0:PASS face>paper:PASS zero<=10%:PASS
+  dE red-orange 0.211 PASS
+  dE orange-amber 0.050 FAIL
+  dE amber-green 0.315 PASS
+  dE green-blue 0.247 PASS
+  dE blue-violet 0.258 PASS
+  dE violet-ice 0.332 PASS
+orb-red    Ember  L 0.509 paper 0.352 C 0.177 h  25.1 clip 0.000 zero 0.000  h:PASS C:PASS clip0:PASS face>paper:PASS zero<=10%:PASS
+orb-orange Dust   L 0.695 paper 0.356 C 0.080 h  43.9 clip 0.000 zero 0.000  h:PASS clip0:PASS face>paper:PASS zero<=10%:PASS
+orb-amber  Acid   L 0.733 paper 0.358 C 0.059 h  92.2 clip 0.000 zero 0.000  h:PASS clip0:PASS face>paper:PASS zero<=10%:PASS
+orb-green  Poison L 0.374 paper 0.351 C 0.088 h 157.9 clip 0.000 zero 0.000  h:PASS C:PASS clip0:PASS face>paper:PASS zero<=10%:PASS
+orb-blue   Ice    L 0.635 paper 0.354 C 0.058 h 213.7 clip 0.000 zero 0.000  h:PASS C:FAIL clip0:PASS face>paper:PASS zero<=10%:PASS
+orb-violet Haze   L 0.404 paper 0.351 C 0.135 h 306.8 clip 0.000 zero 0.000  h:PASS C:PASS clip0:PASS face>paper:PASS zero<=10%:PASS
+orb-ice    Fog    L 0.777 paper 0.360 C 0.013 h  74.7 clip 0.000 zero 0.000  C:PASS clip0:PASS face>paper:PASS zero<=10%:PASS
+  dE red-orange 0.213 PASS
+  dE orange-amber 0.071 FAIL
+  dE amber-green 0.368 PASS
+  dE green-blue 0.272 PASS
+  dE blue-violet 0.276 PASS
+  dE violet-ice 0.400 PASS
+
