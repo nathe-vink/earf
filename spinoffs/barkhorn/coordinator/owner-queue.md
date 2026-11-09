@@ -4574,3 +4574,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   with DSP boost vs Tropos ~51 Hz modelled; 116 dB claimed). Upgrades: FA123 +$158 a pair (woofer 75 -> 250 W, +5.2 dB; plate fit and
   Xmax near 59 Hz to check); Radian 950PB/950BePB (unproven on our horn); room correction ~$900-1,300. Tropos's parked price is $19,000
   a pair (the Cloud/acrylic line). Shown to the owner with my pick: the FA123 if it fits, the rest kept, then measure the first pair.
+- 16:22 site lane: on it; ~75-90 min to a preview URL (15 the fix1 frames to the tall slots; 25 the night stage and wall hidden,
+  lit lamps pulled, old-speaker-only slots dropped; 20 the build with V2, HOME_V2 and COPY_NEXT on, sweep and Lighthouse; 15 the
+  preview branch r49-site-rc (Vercel builds previews from pushed branches; the URL confirmed read-only); 10 screenshots and the
+  change list). main untouched.
