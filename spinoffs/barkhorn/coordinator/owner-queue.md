@@ -4984,3 +4984,16 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   passed pictures only, seven colors, D+n dates, no bar hours, Core/sessions/Mantle "Waits"; its mockup PNG to be redrawn), pushed
   because its repo hook requires every commit pushed before stopping. Holding for the regression punch list.
 - 17:34 sent the brand lane: go on LAUNCH-GRID (its rules) (crossed with its 17:34 message).
+- 17:35 speaker lane: THE BOTTOM-EDGE SHEETS v2 on the fix (962be509; renders/2026-11-09/barkhorn/bottom-edge-v2/: the Ember wide
+  sheet, the Dust hero-light sheet, the Ember wide full frame before/after). Seam (luma >200 beside <60): Ember wide (a) 0, (b) 1,
+  (c) 1, the old bug 464; Dust hero-light (a) 41, (b) 13, (c) 8, the old bug 139; the room (Poison, wood) 0. (d) dropped. Its
+  reading: almost all of the "bottom edge" was the floor bug; Dust hero-light keeps a faint real edge-glow line; its pick (a) as
+  built with (b) as the option. Next: item 4 (the pours) unless told otherwise.
+- 17:3x my look: the Ember wide (a) on the fix is clean (a proper dark contact shadow). The Dust hero-light (a) still shows a
+  saturated red line along the bottom front edge that reads like a lit strip, and (b) looks nearly the same; the seam count
+  (near-white pixels only) misses a saturated red line. Gate launched on the three sheets (wf_7a92dd5b-f68): is (a) clean on Ember;
+  does Dust's line read as light; does (b) matter; is (c) better or worse; a photographic fix (a flag on the light feeding the bottom
+  panel in the hero-light rig) vs an owner question.
+- 17:37 sent the speaker lane (stamped 17:38, ahead of the clock: date -u read 17:37:26 after it went): no owner question until the
+  verdict; priorities: (1) the height and weight answer (the site and the Book wait), (2) arc frame 04, (3) the close-up fixes,
+  (4) the pour re-check; c2 has the talls.
