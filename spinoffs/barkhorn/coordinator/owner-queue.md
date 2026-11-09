@@ -5311,3 +5311,6 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 18:24 sent: the speaker lane (the arc folded into the flags SHA: v-flats, the sweep, the key; proved on 03/05 with 04; the 19:20
   ETA or word by 18:50); c3 (the arc held; push the turns, merge b00945ab, sides Poison and Ice; on the flags SHA hero-light 1-2
   and the arc on my go); c4 (stop queue 01 after Acid; c3 takes Poison and Ice).
+- 18:23 c2: merged b00945ab at 944124c2663a37b0569f5d56d49a3b5223857778 (no rebuild); rc1 sides queue 02 (Haze, Fog) from 18:24,
+  ~17 min each. 18:24 c4: queue 01 now stops after Acid (a watcher kills the queue as Poison starts loading); Ember, Dust, Acid to
+  land and commit; then hold for the flags SHA (the four talls first).
