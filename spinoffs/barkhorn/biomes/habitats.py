@@ -138,7 +138,11 @@ SINK = {'acid_b': 0.05,    # 2026-11-09: 0.025 left the bottom panel's 20 mm fro
         # (earlier: at 0.015 a sky-bright strip (8-9 px) showed between the edge and its reflection (the gate on
                           # cc380fab: "hovers"); the puddle's displacement sits above the ray-cast surface. 0.025 closes it
                           # (strip peak 82 -> 56 against water 50); at 0.03 the submerged part showed through)
-        'acid_b_old': 0.03, 'ice': 0.022}   # Ice ~1 cm deeper: light showed under its left front corner in the snow
+        'acid_b_old': 0.03, 'ice': 0.022,
+        # Dust (the gate on the 2026-11-09 re-render, grounded FAIL, and the passed file the same): a 6-8 px strip of lit
+        # sand between the bottom edge and its shadow; the ripples are displaced at render time above the ray-cast sand.
+        # 0.012 -> 0.028 beds the base into the ripples (crops at 0.02 and 0.028)
+        'dust': 0.028}   # Ice ~1 cm deeper: light showed under its left front corner in the snow
 # the horn's outside: polished (the owner, 2026-11-03 15:14: "Horn: polished"; satin was 0.25)
 HORN_ROUGH = 0.05
 # a tint's channel split from the speaker lane's shared model where it changed after the asset was built (9097, 732a8671)
