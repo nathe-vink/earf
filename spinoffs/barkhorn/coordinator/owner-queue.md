@@ -5593,3 +5593,15 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   backlight. Order: Haze (c) rendering -> Poison hole x2 -> Acid edge -> Acid final.
 - 19:06 sent c3: merge f14b24c7, regenerate the rc1-card wides, render wides Fog then Haze before the rig SHA (~19:35); c2: Poison and
   Ice wides only, then stop (saves about an hour on the seven wides).
+- 19:06 c2: rc1-card wide POISON landed (d6773fe9; 12.4 min); its note for the critics: a sharp white crescent highlight on the horn's
+  lower-left lip, a curved specular streak like a swoosh. Ice wide started 19:06. 19:07 c3: merged f14b24c7 (0fe43e09), rc1-card wide
+  shot files regenerated (card in, sidesheen gone); wide Fog started 19:07 (~29 min), then Haze.
+- 19:06 biomes, HAZE (c) (4ea8fce1, crops in proxies-0202/): the black card does not cool the side columns (309°): they aren't
+  mirroring a warm world; the orange sun (#FFB48C) through violet walls comes out red-violet, and the silk warms them relative to the
+  cool sky fill. Left: a less orange sun, or accept the warm edges as honest, or the pour question. 19:07 GATE HAZE CROPS launched
+  (wf_6d8712e8-76a: 4 Nov | base | (a) | (c), with the clean-glass table). 19:08 sent biomes: queue (d) after the Poison holes: the silk,
+  the sun at ~10° in a 10° sun's real color (~4000-4500 K) with the sky model matched; the final waits for the gate.
+- 19:07 BRAND v22 built and pushed, not republished (577f66a3 + the Tint Library re-render b025cf16): all 26 items reported done
+  (cover 189x315 at 1440x900, 4+3 at 561-1023, make_book.py fixed but not run, the certificate/card/hotel re-shot, the library lid
+  lines gone, the pair in Position, the press grid, "Pictures in progress" under Facts). Waits for the four fronts; then one republish.
+  19:08 sent: the paths about 19:35.
