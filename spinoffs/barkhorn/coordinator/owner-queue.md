@@ -5137,3 +5137,24 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   ~18:35 for c4, the flags by ~19:05, A, close-ups); c3 (after the turns and the merge, hold hero-light 1-2 for the flagged rig;
   the Ice arc may come first if B's proof passes; its turns' ETA asked); c2 (finish chunk 3 Ice/Haze on a7948164, commit, then hold
   Fog; one go for Fog + the warm re-renders on the flagged SHA ~19:05; Ice/Haze gated as they are).
+- 17:53 site lane (before my 17:57): would fold the 17:44-17:50 answers into one more r49 push in ~20 min (now held until the punch list).
+- 17:54 biomes (stamped 17:58, ahead): POISON's beige field is a REFLECTION of the set's `litter` fill (#C8966A, 1.2 x 0.4 m area,
+  az -5, el 2, 1.8 m; unlinked; specular 1.0 since ruling 1): the passes (border render, 64 samples, no denoise, compositing off;
+  the sum = Combined, linear 0.0439/0.0420/0.0136): Glossy Direct 70 % of R, 41 % G, 65 % B off a 6.9 % Fresnel front face seeing a
+  warm (0.74, 0.42, 0.21); green through the resin only 29 % of G. The camera path is honest (~20 mm resin, then the white lining).
+  Tests: (i) litter off, (ii) litter moved to az -40 (a real lamp moved, no multipliers). The Fog khaki band may be fill_l the same way.
+- 17:59 c3: turns 34/55 (Acid 17-23, Haze, Fog) at ~1.15 min a frame; ETA ~18:23; then merge cb62d1eb, push, hold hero-light 1-2.
+- 18:00 c4: rc1 turns Poison and Ice 00-23 at eef18db2c0e5ad420b429a7b0b36ac4e8f6ad64f (17:14-17:58; 48 frames, no errors); merged
+  cb62d1eb at bb9f803ac624842d2b330ac8cfeea7a12d4845ae (no rebuild); Ember wide alone on bb9f803a started (the fallback), then hold.
+- 18:00 sent c4 (Ember wide -> commit, gate; the turns gated with c3's as one set ~18:25) and biomes ((ii) is the honest fix; (i)
+  and (ii) side by side with numbers; the same passes on Fog's khaki band; its stamps).
+- 18:00 GATE BOOK v20 decisions + pictures (wf_d7cd53dd-917, 27 min): the blocker again: the house card, the stationery and the Tint
+  Library show eight tints with Smoke unmarked; majors: dimensions 1293/423/72.6 as settled; "2 x 125 W" on the press sheet; the
+  COVER rows (item 12 open); the custom horn pours as decided (item 15) and no line that renders can't show Acid's fluorescence;
+  Voice's "things the air holds"; the Founding Hundred "Stage 1, now" and "the C-corp is formed first"; Idea B's Vienna dates;
+  Mother EARF "planned"/"would hang" (~200 kg; it can't hang); pack-pair's crates "ABOUT 74 KG"; THE PASSED TALLS' BASE LINE: at
+  phone card size Dust's red line (~6 px, mean 163/20/16 under a 229/130/61 face) reads as a lit strip, Fog's bright white streaks
+  like a light tube, Ice a blue and Haze a violet band (Ember, Acid, Poison dark). I looked at the reviewer's crops: agreed.
+- 18:01 sent the speaker lane: THE FLAGS ON BOTH RIGS (tall and hero-light), proved on Dust tall, Fog tall and Dust hero-light base
+  crops, one SHA, now ahead of the wide rig (whose contact change is optional now; the seam stays); c4 to re-render the flagged
+  talls Dust, Fog, Ice, Haze first. Sent c4 the same.
