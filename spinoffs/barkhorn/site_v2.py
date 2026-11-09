@@ -612,7 +612,7 @@ def pages(web):
                 os.rmdir(d)
         left = [os.path.relpath(f, web.SITE) for f in glob.glob(os.path.join(web.SITE, '**', '*'), recursive=True)]
         bad = [f for f in left if re.search(r'(^press/|img/(?:(?:dome|orb)-|lamps-(?:orbs|domes)|lamp-(?:orb|dome)|hero[.-]|facade|room|macro-|turn-|spin/'
-                                            r'|tt-|ga-|icon-smoke-|(?:red|orange|amber|green|blue|violet|ice|black)-(?:on|off|studio|back|amp|horn|inside|reel|habitat))|-smoke\.html$)', f)]
+                                            r'|tt-|ga-|icon-smoke-|rc/(?:red|orange|amber|green|blue|violet|ice)-back[.-]|(?:red|orange|amber|green|blue|violet|ice|black)-(?:on|off|studio|back|amp|horn|inside|reel|habitat))|-smoke\.html$)', f)]
         assert not bad, ('site_v2: rc deploys', bad[:12])
 
 
@@ -1132,12 +1132,9 @@ def rc_fixes(p, web):
     names = {k: name for k, num, name, *_ in web.CLOUDS}
     # the new pictures (r33-rollout-c2): rigB backs (39bf3f97; Acid a1322583), Acid's horn-back (a1322583), the plate (488fbec9)
     R = 'renders/2026-11-04/barkhorn/rollout/'
-    backs = {k: R + ('A-polished-backrig-acid/site-back-acid.png' if k == 'amber' else f'A-polished-backrig/site-back-{names[k].lower()}.png') for k in RC_KEYS}
-    extra = {}
-    for k, src in backs.items():
-        im = Image.open(os.path.join(web.ROOT, src)).convert('RGB'); rel = f'img/rc/{k}-back.webp'
-        im.save(os.path.join(web.SITE, rel), 'WEBP', quality=82); im.resize((168, 210)).save(os.path.join(web.SITE, f'img/rc/{k}-back-th.webp'), 'WEBP', quality=80)
-        extra.setdefault(k, {})['back'] = {'src': rel, 'w': im.width, 'h': im.height, 'th': f'img/rc/{k}-back-th.webp'}
+    # no Back view: the backs rig carries two lamps hidden from the camera standing in frame (the audit ac9e5568;
+    # the coordinator 2026-11-09 19:16). It comes back when the re-rendered backs pass.
+    extra = {k: {} for k in RC_KEYS}
     for k in RC_KEYS:        # the seven horn-backs: c2 06b829ce (Ember, Dust, Poison), c3 52ad76ba (Ice, Haze, Fog), Acid a1322583
         src = R + ('A-polished-p2-backrig-acid/horn-back-acid.png' if k == 'amber' else f'A-polished-p2/horn-back-{names[k].lower()}.png')
         im = Image.open(os.path.join(web.ROOT, src)).convert('RGB')
@@ -1154,6 +1151,7 @@ def rc_fixes(p, web):
     D['clouds'] = [c for c in D['clouds'] if c['k'] != 'black']          # seven: Smoke is not a current color
     for c in D['clouds']:
         c['views'].update(extra[c['k']])
+        c['views'].pop('back', None)
     smoke_tag = 'Shown in Smoke, still to come'
     for L in D['lamps'].values():
         L['colours'].pop('black', None)
