@@ -5493,3 +5493,7 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   and 108 (for information: the clear bottom panel pipes light to its front edge; the site pictures use a black card behind; my
   pick keep as built). Sent: the lamps lane (on the owner's list; no copy change; every picture inside the 600 mm drawn drop); the
   Mantle lane (the night room's ceiling ~2.25 m so the rim ~1.47 m is honest under both readings; a plausible room if seen).
+- 18:50 lamps lane: every picture inside the 600 mm drawn drop at c3f9ab05bbd84e03f30fbe44aab63a4b2b397aee (lamp_pictures.py: the
+  Hemisphere night ceiling = rim + 0.776 m; Core's room keeps 2.5 m); no copy changes; waiting for the round-2 and Core-room tallies,
+  then the findings, launch/lamp-site-queue.md (the SHA, 18 meshes, the caustics/no-clamp note) and the SHA for c2, then the full
+  Hemisphere site set.
