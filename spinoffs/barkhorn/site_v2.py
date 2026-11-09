@@ -1472,7 +1472,11 @@ TURN = {'red': 'A-polished-p2/turn-ember', 'orange': 'A-polished-p2/turn-dust', 
         'blue': 'A-polished-p2-rc1/turn-ice', 'violet': 'A-polished-p2-rc1/turn-haze'}
 # the turns, passed (the coordinator 2026-11-09 18:51): Ember 00-04 r33-rollout-c3 52ad76ba, 05-23 and Dust c4 0a0a83bd;
 # Acid 00-16 c4 42fa8eee, 17-23 c3 66126d53 (A-polished-p2-rc1); Haze c3 66126d53; Poison, Ice c4 eef18db2.
-# Fog's is out tonight: its pale-blue ground reads as Ice (the RC3.1 review, P3).
+# Fog's first turn read as Ice (its pale-blue ground; the RC3.1 review, P3). Its re-render on a neutral ground
+# (#DFDAD7; r33-rollout-c3 a688c59e, A-polished-p2-rc2) goes in when FOG_TURN is on, once it passes its gate.
+FOG_TURN = False
+if FOG_TURN:
+    TURN['ice'] = 'A-polished-p2-rc2/turn-fog'
 TURN_REST = 20        # three-quarter front: the mouth opens toward you and the cabinet's side shows (the addendum, 3)
 TURN_GUTTER = 16      # px of repeated edge round every tile, so the lossy sprite never bleeds one frame into the next
 
