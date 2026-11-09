@@ -5212,3 +5212,19 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 18:10 GATE LAMPS SITE ROUND 2 launched (wf_5760aeac-7cd; the same four critics + tally; round 1 and the numbers as context). 18:11 sent
   the lamps lane (my message said 18:12, ahead of the clock): received; c2 holds ae16fd21 until it passes; Dust/Acid waits for
   the real chip; the paper at 0.37 unless asked.
+- 18:10 c4: rc1 Ember wide on the floor fix at cf88659f4f5bb3576c33c8fc710b2ca29aacad30 (bb9f803a; 9.8 min; shot.json unchanged from
+  80aa5bb3, only the engine changed): the bright band gone, the base in a plain contact shadow; still: the contact pocket very dark,
+  and a hard edge in the sweep on the right at about the lower third of the speaker's height (the seam). Holding wides 02-03, the
+  sides and the four talls for the speaker lane's SHA; Dust and Acid wides are still the held 80aa5bb3 versions.
+- 18:11 site lane: cf5af9aa READY (earf-bxrrdtdb4, dpl_BhLrwPu21dPjpmXistanrpsaJrZ1; the branch alias moved to it; RC2 unchanged);
+  build notes committed locally as bdad7ba7 (launch/r49/BUILD.md), to go with the punch-list push. Holding.
+- 18:10 Mantle lane: NIGHT PROXY 5 (option b) at 6fc5b7a219f7a8b17612e2955e9720771dc5736f (rendered 17:58-18:10): the pendant
+  raised 0.48 m (rim 1.80), all else identical. P4 / P5: cabinet L 24 / 18; horn 15 / 16; woofer spread 5-60 / 4-34; red above 0
+  49 / 47 %; lower chamber 24 (p90 67) / 16 (p90 44) against the wall's 30 (not glowing in either); floor near the feet p99 112 / 86
+  against walls 20 / 22; lower-right zone 0.156 / 0.126; edges 0.138 / 0.131. AUDIT FLAG on P5: the camera sees the bare COB at 5 of
+  113 points (the mouth above the 1.70 m camera): if B wins, the camera above 1.85 m or the rim under ~1.65 m. The armchair's blue is
+  the streetlight through the sheer (the only light on that side).
+- 18:11 GATE NIGHT PROXIES 4 + 5 launched (wf_d911c754-02f; proxy 3 and the tall Ice as context). 18:12 sent the Mantle lane a
+  question: the audit's cob is a 0.17 m disk, while the Vero SE 10's emitter is ~10 mm and the mouth open (46 deg cut-off): the
+  fitting's model or a stand-in? (the final uses the real size if a stand-in). Sent c4: no gate on Ember wide until the seam fix
+  on the flags SHA; then merge, the four talls, the wides.
