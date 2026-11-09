@@ -5787,3 +5787,16 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   scene error"; expects the pour question for the founder (4 Nov and (c) side by side). 19:36 sent biomes: hold the Haze final and
   stop Haze light proxies; report both materials' definitions (one glass, one density per mm, as in the studio set, where the Haze
   horn and box match 262-264° vs 256-262°); if they match, the pour goes to the founder with 4 Nov | (c) | (d).
+- 19:37 BIOMES material check: NOT one glass. The scene uses the speaker lane's asset from r33 0936e6d unchanged. The cabinet,
+  bark@cloud-violet: absorption colour (0.5013, 0, 0.8805), density 84.96, per mm R/G/B 0.042/0.085/0.010, through 20 mm R 0.43 G 0.18
+  B 0.82 (violet). The horn, horn-formed@cloud-violet: (0.4476, 0, 0.9098), density 510.79, per mm 0.282/0.511/0.046, through 12.7 mm
+  R 0.028 G 0.0015 B 0.56 (cobalt): ~6x denser per mm and bluer, red ~15x rarer at the horn's wall. That is the 270° vs 281°,
+  independent of the light. tints.py (r33-speaker-horn): "the formed horn in its deep lot keeps the site's colour (the deep lot is a
+  custom cast, not a stock code)". So the HAZE HORN's POUR is a founder question: 4 Nov | (c) | (d) and the two definitions; one option,
+  the horn at the cabinet's colour and per-mm density (one glass). Biomes' queue: Dust (3) re-run (the first warm card stood in the
+  speaker's own shadow), Poison (c) (the clearing's sun + a sunlit white card at 35°; in (a) and (b), 9d4f749b, the top band stays black,
+  the white batt's front lit only from the camera side), then the Acid final.
+- 19:39 FOUND: the biomes asset (0936e6d, 3 Nov 07:46) predates the speaker lane's Acid corrections (732a8671 3 Nov 22:13; a290fdc6
+  4 Nov 01:48, both in studio/products/barkhorn-cloud.json). 19:39 sent biomes: before the Acid final, diff all seven tints' cabinet and
+  horn materials against r33-speaker-horn HEAD, rebuild or patch to match, and say whether the passed Ice and Fog finals carry an
+  out-of-date material.
