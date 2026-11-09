@@ -661,8 +661,10 @@ def site(frame, tint):
         # front unchanged. `back` goes off)
         s['lights']['back']['irradiance'] = 0.0
         s['lights']['back'].pop('power_w', None)
-    if frame in ('front-off-tall', 'front-off-wide', 'hero-light'):
-        back_edge_card(s)
+    if frame in ('front-off-tall', 'front-off-wide', 'hero-light', 'side'):
+        back_edge_card(s, sides=('back', 'left') if frame == 'side' else ('back',))
+    if frame in ('front-off-tall', 'front-off-wide', 'hero-light', 'side'):
+        realize_hidden(s)
     # a panel at strength 0 still stands in the set: unseen by the camera and casting no shadow, but in the glossy floor's
     # reflections a black rectangle (the wide's critics, 2026-11-09: a straight, nearly horizontal seam on the floor at
     # x 1650-1800, y 780-790 of 1800 x 1200, darker beyond it; the ray-cast puts it on `sidesheen`'s foot, y 2.4 m behind
@@ -682,7 +684,7 @@ def site(frame, tint):
     return s
 
 
-def back_edge_card(s, gap=0.004, h=0.045):
+def back_edge_card(s, gap=0.004, h=0.045, sides=('back',)):
     """A black card standing on the floor just behind the speaker's bottom panel (the bottom-edge gate, 2026-11-09).
     The panel is clear and runs the cabinet's full depth, polished at both ends: from the front the camera looks into
     its front edge and along it, by total internal reflection, out of its back edge to the bright studio behind, through
@@ -691,16 +693,24 @@ def back_edge_card(s, gap=0.004, h=0.045):
     changed nothing, the background lamps off dimmed it, and a low black card behind the speaker took it to 0. A real
     set object: seen by the camera and in reflections, casting shadows, no link; the cabinet's width, 45 mm tall, 4 mm
     behind the back face, where the speaker hides it from the front."""
+    # `sides`: ('back',) for the front views; the side view (the speaker turned -50) looks into the front edge on a
+    # slant, along the panel toward its left end, and out through the left wall: ('back', 'left') there, the left card
+    # hidden behind the cabinet from that camera
     import math
+    # each card in the speaker's own frame: its centre (x, y), its width, its outward normal (x, y)
+    defs = {'back': ((0.0, 0.2063 + gap), 0.56, (0.0, 1.0)), 'left': ((-0.28 - gap, -0.004), 0.42, (-1.0, 0.0))}
     for blk in s.get('products', []):
         for i in blk['instances']:
             x0, y0, z0 = i.get('position', [0, 0, 0]); r = math.radians(i.get('rotate_z', 0))
-            yb = 0.2063 + gap                                  # the back face, in the speaker's own frame (m)
-            cx, cy = x0 - math.sin(r) * yb, y0 + math.cos(r) * yb
-            s.setdefault('set', {}).setdefault('flags', []).append(
-                {'center_m': [round(cx, 4), round(cy, 4), round(z0 + h / 2, 4)], 'size_m': [0.56, h],
-                 'normal': [round(math.sin(r), 4), round(-math.cos(r), 4), 0.0], 'color': '#050505',
-                 'camera': True, 'glossy': True, 'name': 'back-edge card'})
+            c, sn = math.cos(r), math.sin(r)
+            for side in sides:
+                (px, py), w, (nx, ny) = defs[side]
+                cx, cy = x0 + c * px - sn * py, y0 + sn * px + c * py
+                wx, wy = c * nx - sn * ny, sn * nx + c * ny          # the outward normal, turned; the card faces in
+                s.setdefault('set', {}).setdefault('flags', []).append(
+                    {'center_m': [round(cx, 4), round(cy, 4), round(z0 + h / 2, 4)], 'size_m': [w, h],
+                     'normal': [round(-wx, 4), round(-wy, 4), 0.0], 'color': '#050505',
+                     'camera': True, 'glossy': True, 'name': f'{side}-edge card'})
         break
     return s
 
@@ -879,6 +889,90 @@ def cards_out_of_frame(s, log=None):
         else:
             out.append(f"card at {fl['center_m']} cannot leave the frame inside the studio: removed")
     st['flags'] = keep
+    if log is not None:
+        log.extend(out)
+    return s
+
+
+def _slide_out(s, fl, i0, depth, half_w):
+    """`fl` slid away from the speaker along the line through it, growing to hold its angle, until no part of it is in
+    frame inside the studio (cards_out_of_frame's walk); None if it cannot leave."""
+    cx, cy, cz = fl['center_m']; rx, ry = cx - i0[0], cy - i0[1]
+    for k10 in range(11, 81):
+        k = k10 / 10
+        nc = [round(i0[0] + k * rx, 3), round(i0[1] + k * ry, 3), cz]
+        if nc[1] > depth or abs(nc[0]) > half_w:
+            return None
+        cand = {**fl, 'center_m': nc, 'size_m': [round(fl['size_m'][0] * k, 3), round(fl['size_m'][1] * k, 3)]}
+        if cand['center_m'][2] - cand['size_m'][1] / 2 < -0.5:
+            cand['center_m'][2] = round(cand['size_m'][1] / 2 - 0.5, 3)
+        if not _in_frame(s, cand):
+            return cand
+    return None
+
+
+def realize_hidden(s, log=None):
+    """The coordinator's rule (2026-11-09 18:37): no object in frame hidden from the camera. Every flag and bounce that
+    is not reflect-only becomes a real object, seen by the camera and in reflections and casting shadows; one in frame
+    slides out of it along the line from the speaker, growing to hold its angle (cards_out_of_frame's walk), or goes if
+    it cannot leave the studio or lies on the floor. (A practical's bulb inside its own fitting is the one exception;
+    the site rigs have none.)"""
+    st = s.get('set', {}); out = []
+    i0 = s['products'][0]['instances'][0]['position'] if s.get('products') else [0, 0, 0]
+    depth = st.get('depth', 1e9) - 0.2; half_w = st.get('width', 1e9) / 2 - 0.2
+    for key in ('flags', 'bounces'):
+        keep = []
+        for fl in st.get(key, []) or []:
+            if fl.get('reflect_only') or fl.get('camera'):
+                keep.append(fl); continue
+            fl = {**fl, 'camera': True, 'glossy': True}
+            if not _in_frame(s, fl):
+                keep.append(fl); continue
+            if abs(fl['normal'][2]) > 0.9:
+                out.append(f"{key[:-1]} on the floor at {fl['center_m']}, hidden, in frame: removed"); continue
+            done = _slide_out(s, fl, i0, depth, half_w)
+            if done:
+                out.append(f"{key[:-1]} at {fl['center_m']}, hidden, in frame: made real, moved to {done['center_m']} at "
+                           f"x{round(done['size_m'][0] / fl['size_m'][0], 1)}")
+                keep.append(done)
+            else:
+                out.append(f"{key[:-1]} at {fl['center_m']}, hidden, in frame, cannot leave: removed")
+        if key in st:
+            st[key] = keep
+    # lamps: Cycles hides an area lamp from the camera, and a panel is hidden unless it says otherwise; one lit and in
+    # frame slides out along the line from its target, its size grown to hold its angle there (an irradiance holds;
+    # a lamp given in watts gains k squared; a panel's strength is a radiance and holds)
+    import hiddencast as H
+    for k, L in list((s.get('lights') or {}).items()):
+        if L.get('type') not in ('area', 'panel') or L.get('camera'):
+            continue
+        if not any(float(L.get(x, 0) or 0) > 0 for x in ('irradiance', 'power_w', 'strength')):
+            continue
+        r = H._lamp_rect(L)
+        if not r or not _in_frame(s, r):
+            continue
+        t = L.get('target', H.CENTRE)
+        moved = None
+        for k10 in range(11, 81):
+            f = k10 / 10
+            if 'orbit' in L:
+                cand = {**L, 'orbit': {**L['orbit'], 'distance_m': round(L['orbit'].get('distance_m', 2.0) * f, 3)}}
+            else:
+                p = L['position']
+                cand = {**L, 'position': [round(t[i] + (p[i] - t[i]) * f, 3) for i in range(3)]}
+            sz = L.get('size_m', [0.5, 0.5])
+            cand['size_m'] = [round(x * f, 3) for x in sz] if isinstance(sz, list) else round(sz * f, 3)
+            if 'power_w' in L:
+                cand['power_w'] = round(L['power_w'] * f * f, 3)
+            rc = H._lamp_rect(cand)
+            if rc and not _in_frame(s, rc) and rc['center_m'][1] < depth and abs(rc['center_m'][0]) < half_w:
+                moved = cand; break
+        if moved:
+            s['lights'][k] = moved
+            out.append(f"lamp {k}, hidden, in frame: moved out at x{f}")
+        else:
+            s['lights'].pop(k)
+            out.append(f"lamp {k}, hidden, in frame, cannot leave: removed")
     if log is not None:
         log.extend(out)
     return s
