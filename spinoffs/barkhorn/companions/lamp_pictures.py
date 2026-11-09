@@ -54,6 +54,10 @@ def build(frame, samples, scale):
     import bpy, bmesh
     sys.path.insert(0, os.path.join(HERE, 'strata'))
     import scene as SC
+    # Core's drawn LED (out-orb-table bom since 2026-11-01): 200 lm, about 180 out; B's core emits it from both faces of
+    # its 0.0408 m2 (14.4 W/m2 a side), A's frost the same power on its 0.0633 m2. Until 2026-11-09 it was 44.6, round
+    # 4's 620 lm, three times the part (the coordinator: never brighter than the part)
+    CORE_EMIT0 = '14.4'
     prod, tint, mode, *var = frame.split('-')
     var = var[0] if var else ''
     tname = TINT[tint]
@@ -230,7 +234,7 @@ def build(frame, samples, scale):
                 emn = nt.nodes.new('ShaderNodeEmission'); emn.inputs['Color'].default_value = (*blackbody(cct), 1)
                 gz = nt.nodes.new('ShaderNodeMapRange'); gz.clamp = True
                 gz.inputs['From Min'].default_value = -(ri - 3.0) * MM; gz.inputs['From Max'].default_value = (ri - 3.0) * MM
-                E = float(os.environ.get('CORE_EMIT', '44.6'))
+                E = float(os.environ.get('CORE_EMIT', CORE_EMIT0))
                 gz.inputs['To Min'].default_value = 0.75 * E; gz.inputs['To Max'].default_value = 1.15 * E
                 nt.links.new(sx.outputs['Z'], gz.inputs['Value'])
                 dim = nt.nodes.new('ShaderNodeMath'); dim.operation = 'MULTIPLY'
@@ -275,7 +279,7 @@ def build(frame, samples, scale):
                 ef = ntf.nodes.new('ShaderNodeEmission'); bbf = blackbody(cct)
                 ef.inputs['Color'].default_value = (*(bbf[i] * T9[i] / 0.96 for i in range(3)), 1)
                 # B's core: 0.05 W/m2 a side on 0.0408 m2; the same power on A's 0.0633 m2 frost
-                ef.inputs['Strength'].default_value = float(os.environ.get('CORE_EMIT', '44.6')) * 0.0408 / 0.0633
+                ef.inputs['Strength'].default_value = float(os.environ.get('CORE_EMIT', CORE_EMIT0)) * 0.0408 / 0.0633
                 af = ntf.nodes.new('ShaderNodeAddShader')
                 ntf.links.new(pf.outputs[0], af.inputs[0]); ntf.links.new(ef.outputs[0], af.inputs[1])
                 ntf.links.new(af.outputs[0], outf.inputs['Surface'])
@@ -407,12 +411,14 @@ def build(frame, samples, scale):
         # 50 the rim hangs 776 below the ceiling, so Hemisphere's ceiling is at rim + 0.776; Core's room keeps 2.5 m)
         ceil_z = (tz + 0.70 + 0.776) if prod == 'hemi' else 2.5
         SC.plane('ceiling', (4.3, 4.0), (0.85, 0.0, ceil_z), (180, 0, 0), SC.principled('ceiling', '#E8E4DC', 0.9))
-        ev = float(os.environ.get('NIGHT_EV', '-8.0' if prod == 'core' else '-3.0'))
+        # 2026-11-09 (the Core A/B tally: finals at about 30 % room and +1 EV; Core at its drawn 200 lm, 1.6 EV under
+        # round 4's 620): -8 + 1 + 1.6 = -5.4
+        ev = float(os.environ.get('NIGHT_EV', '-5.4' if prod == 'core' else '-3.0'))
         k = 2.0 ** (0.6 - ev)                     # round 9: one evening room for the family, the same fill at each exposure
         # round 14 (the coordinator: the dome must plainly be the room's main light): the room's fill scaled down until the
         # lamp gives most of the light on the wall near it (measured: lamp only against all lights)
         # (2026-11-09, the gate: Core's room from 5 % to 15-20 %, so the dock and table read; Hemisphere's as gated)
-        rk = float(os.environ.get('ROOM_K', '0.18' if prod == 'core' else '0.05'))
+        rk = float(os.environ.get('ROOM_K', '0.30' if prod == 'core' else '0.05'))   # 2026-11-09: 30 % (the A/B tally)
         k *= rk
         # round 11 (the coordinator's rulings 1 to 3, 2026-11-03: nothing in the room hidden from the glass's
         # reflections or from view through it; no light linking): the night room is a flat, dim evening ambient (no
@@ -463,7 +469,9 @@ def build(frame, samples, scale):
         exposure = ev   # round 4: exposed for the lamp, as a night photograph is
     else:
         SC.world(hdri='kiara_9_dusk', strength=0.35, rotation=200)
-        if prod == 'core' and var == 'nested':
+        if prod == 'core':
+            # 2026-11-09 (the Core A/B tally: A's shadow fell right-front, B's right-back, B's wall a stop darker): ONE
+            # day room for A and B, B's: one sun, one sky, one window
             # round 11 (the coordinator: the core lit, the wall behind it in shade): the same window, its opening the
             # front part of the left wall, and the sun in through it from the front left, onto the ball's face; the
             # wall behind the ball takes no sun (the window wall shades it), as a room by a window does
@@ -482,6 +490,13 @@ def build(frame, samples, scale):
             sb = SC.area('side-back', (-0.45, 0.40, tz + 0.30), (0, 0, 0), (0.18, 0.7), float(os.environ.get('SIDEBACK_W', '0')), '#F2EEE6')
             sb.rotation_euler = (Vector((0.0, 0.0, tz + 0.10)) - sb.location).to_track_quat('-Z', 'Y').to_euler()
         exposure = 0.0
+    if os.environ.get('GLOSSY_HIDE_WINDOW'):
+        # DIAGNOSTIC ONLY, never a final (the Core A/B tally, point 2: is A's crescent the window's reflection?): the
+        # window's opening, its sheer and its light hidden from glossy rays
+        for o_ in bpy.data.objects:
+            if o_.name.startswith(('sheer', 'dusk', 'window', 'mullion', 'transom')):
+                o_.visible_glossy = False
+                print('GLOSSY-HIDDEN', o_.name)
     SC.render_settings(1800, 1200, samples, scale, exposure=exposure,
                        look=os.environ.get('LOOK', 'AgX - Punchy' if prod == 'core' else 'AgX - Medium High Contrast'))   # 2026-11-09: Punchy for Core (the gate)
     bpy.context.scene.cycles.caustics_refractive = True
