@@ -1370,7 +1370,7 @@ def rc3(p, web):
               '<li><a href="#core-ember">Core</a>, a cordless table lamp.</li></ul></div>' + p.rest[m.end():])
     # --- 2. home: the Tropos block shows the amplifier plate (a view the hero doesn't; its rig is clean); the Ice habitat mirrored
     p.sub('<figure class="sound-still"><img src="img/rc/blue-tall.webp" width="1000" height="1250" loading="lazy" alt="Tropos in Ice, its cover off, on a pale seamless">',
-          '<figure class="sound-still"><img src="img/rc/plate.webp" width="1000" height="1250" loading="lazy" alt="Tropos in Ember from behind: the built-in amplifier and its TR-1 rating plate">')   # the plate's rig is clean (the audit ac9e5568)
+          '<figure class="sound-still"><img src="img/rc/plate.webp" width="1000" height="1250" loading="lazy" alt="The built-in amplifier, from behind.">')   # the plate's rig is clean (the audit ac9e5568)
     p.sub('<div class="wrap hab-grid"><figure><img src="img/rc/blue-habitat.webp" width="1200" height="1500" loading="lazy" alt="Tropos in Ice, out in the snow at dusk"></figure>',
           '<div class="wrap hab-grid hab-mirror"><figure><img src="img/rc/blue-habitat.webp" width="1200" height="1500" loading="lazy" alt="' + HAB_ALT['blue'] + '"></figure>')
     p.sub('<p class="beat-line">' + next(line for k, num, name, icon, acr, line, *_ in web.CLOUDS if k == 'blue') + '</p><p class="foot-note"><i class="render">Render</i></p>',
@@ -1472,6 +1472,7 @@ TURN = {'red': 'A-polished-p2/turn-ember', 'orange': 'A-polished-p2/turn-dust', 
 # the turns, passed (the coordinator 2026-11-09 18:51): Ember 00-04 r33-rollout-c3 52ad76ba, 05-23 and Dust c4 0a0a83bd;
 # Acid 00-16 c4 42fa8eee, 17-23 c3 66126d53 (A-polished-p2-rc1); Haze c3 66126d53; Poison, Ice c4 eef18db2.
 # Fog's is out tonight: its pale-blue ground reads as Ice (the RC3.1 review, P3).
+TURN_REST = 20        # three-quarter front: the mouth opens toward you and the cabinet's side shows (the addendum, 3)
 TURN_GUTTER = 16      # px of repeated edge round every tile, so the lossy sprite never bleeds one frame into the next
 
 
@@ -1508,27 +1509,27 @@ def rc_turn(p, web):
             col = edge.crop((G + w - 1, 0, G + w, h + 2 * G)); edge.paste(col.resize((G, h + 2 * G)), (G + w, 0))
             sheet.paste(edge, (x - G, y - G))
         sheet.save(os.path.join(web.IMG, f'rc/turn-{k}.webp'), 'WEBP', quality=72, method=6)
-        fr[0].save(os.path.join(web.IMG, f'rc/turn-{k}-0.webp'), 'WEBP', quality=80)
-        fr[0].resize((168, round(168 * h / w))).save(os.path.join(web.IMG, f'rc/turn-{k}-th.webp'), 'WEBP', quality=80)
+        fr[TURN_REST].save(os.path.join(web.IMG, f'rc/turn-{k}-0.webp'), 'WEBP', quality=80)
+        fr[TURN_REST].resize((168, round(168 * h / w))).save(os.path.join(web.IMG, f'rc/turn-{k}-th.webp'), 'WEBP', quality=80)
         c['views']['turn'] = dict(src=f'img/rc/turn-{k}.webp', still=f'img/rc/turn-{k}-0.webp', w=w, h=h, th=f'img/rc/turn-{k}-th.webp',
                                   **web.ground(f'rc/turn-{k}-0.webp'))
     p.rest = p.rest[:i] + json.dumps(D, separators=(',', ':')) + p.rest[j:]
     w, h = size
     SW, SH = 6 * (w + 2 * G), 4 * (h + 2 * G)
     p.sub("const frameAt = (k) => `${(k % C) * 100 / (C - 1)}% ${Math.floor(k / C) * 100 / (R - 1)}%`;",
-          f"const frameAt = (k) => `${{({G} + (k % C) * {w + 2 * G}) * 100 / {SW - w}}}% ${{({G} + Math.floor(k / C) * {h + 2 * G}) * 100 / {SH - h}}}%`;   // tiles in a {G} px gutter")
+          f"const REST = {TURN_REST}; const frameAt = (k) => `${{({G} + (k % C) * {w + 2 * G}) * 100 / {SW - w}}}% ${{({G} + Math.floor(k / C) * {h + 2 * G}) * 100 / {SH - h}}}%`;   // tiles in a {G} px gutter")
     old = """    pic = el('div', { class: 'fit spin' + (s.edge === 'cut' ? ' cut' : ''), role: 'img', 'aria-label': `${c.name}'s horn; drag to spin it`, style: `background-image:url(${s.src});--ar:${ar}` });
     turnFrame = 0; pic.style.backgroundPosition = frameAt(0);
     draggable(pic, (d, start, base) => { if (start) return turnFrame; turnFrame = ((base - d) % N + N) % N; pic.style.backgroundPosition = frameAt(turnFrame); });
     if (!reduce) { const t0 = performance.now(); (function f(now) { const p = Math.min(1, (now - t0) / 2600); turnFrame = Math.round(p * N) % N;
       pic.style.backgroundPosition = frameAt(turnFrame); if (p < 1) autoTurn = requestAnimationFrame(f); })(t0); }"""
     new = """    pic = el('div', { class: 'fit spin still' + (s.edge === 'cut' ? ' cut' : ''), role: 'img', 'aria-label': `${c.name}'s horn, all the way around`, style: `background-image:url(${s.still});--ar:${ar}` });
-    turnFrame = 0;
+    turnFrame = REST;
     const sheet = new Image(); sheet.src = s.src;           // frame 0 until the sprite is decoded; then one turn (none under reduced motion)
     sheet.decode().catch(() => {}).then(() => { if (!pic.isConnected) return;
-      pic.style.backgroundImage = `url(${s.src})`; pic.style.backgroundPosition = frameAt(0); pic.classList.remove('still');
+      pic.style.backgroundImage = `url(${s.src})`; pic.style.backgroundPosition = frameAt(REST); pic.classList.remove('still');
       draggable(pic, (d, start, base) => { if (start) { cancelAnimationFrame(autoTurn); return turnFrame; } turnFrame = ((base - d) % N + N) % N; pic.style.backgroundPosition = frameAt(turnFrame); });
-      if (!reduce) { const t0 = performance.now(); (function f(now) { const p = Math.min(1, (now - t0) / 2600); turnFrame = Math.round(p * N) % N;
+      if (!reduce) { const t0 = performance.now(); (function f(now) { const p = Math.min(1, (now - t0) / 2600); turnFrame = (REST + Math.round(p * N)) % N;
         pic.style.backgroundPosition = frameAt(turnFrame); if (p < 1 && pic.isConnected) autoTurn = requestAnimationFrame(f); })(t0); } });"""
     p.sub(old, new)
     p.sub("['turn', 'Turning', c => `${c.name}'s horn, all the way round.`],", "['turn', 'Turning', c => `${c.name}'s horn, all the way around.`],")
@@ -1600,12 +1601,13 @@ def rc_lamps(p, web):
 
 
 def rc31(p, web):
-    """The RC3.1 review (the coordinator 2026-11-09 20:06): words, the plate's one alt, the color page's block, Fog's coin."""
-    PLATE = 'Tropos in Ember from behind: the built-in amplifier and its TR-1 rating plate'
-    p.sub("['amp', 'The amplifier', c => `The built-in amplifier, from behind.`]",
-          f"['amp', 'The amplifier', c => '{PLATE}', c => `The built-in amplifier, from behind.`]")
-    p.sub(f'alt="{PLATE}"><figcaption><i class="render">Render</i></figcaption></figure>',
-          f'alt="{PLATE}"><figcaption>The built-in amplifier, from behind. <i class="render">Render</i></figcaption></figure>')
+    """The RC3.1 review (the coordinator 2026-11-09 20:06, addendum 20:08): the home's Tropos block shows the Ember
+    horn-back with the gallery's own words; the color page's block; Fog's coin; Mantle's closing line."""
+    HB = 'The horn from behind: its compression driver, on four bronze posts.'
+    m = re.search(r'<figure class="sound-still"><img [^>]*><figcaption>.*?</figcaption></figure>', p.rest)
+    assert m, 'rc31: the sound still'
+    p.rest = (p.rest[:m.start()] + f'<figure class="sound-still"><img src="img/rc/red-horn-back.webp" width="720" height="900" loading="lazy" alt="{HB}">'
+              f'<figcaption>{HB} <i class="render">Render</i></figcaption></figure>' + p.rest[m.end():])
     p.sub("document.getElementById('c-in').textContent = `In ${c.name}`;", "document.getElementById('c-in').textContent = '';")
     p.sub("turntable: 'See it beside the speakers: <a href=\"#speakers\">Tropos</a>.',", "turntable: 'Pair it with <a href=\"#speakers\">Tropos</a>.',")
     p.css("""
