@@ -172,7 +172,7 @@ def shot_library(sc):
     lid = P.mat_birch('lid', decal=art if os.path.exists(art) else None)
     lb = P.box('lid', -L / 2 - 0.004, 0.16, 0.0, L / 2 + 0.004, 0.172, 0.15, lid, uv_face='-y')
     lb.rotation_euler = (math.radians(-8), 0, 0)
-    P.area('back', (0.15, 1.2, 0.5), (0, 0, 0.07), 0.8, 60, '#FFFFFF')
+    P.area('back', (0.15, 1.2, 1.6), (0, 0, 0.07), 0.8, 90, '#FFFFFF')   # 2026-11-09: raised out of frame (the studio rule: no hidden lamp in frame)
     P.area('key', (-0.9, -0.9, 0.9), (0, 0, 0.05), 0.7, 70)
     P.area('fill', (1.0, -0.6, 0.4), (0, 0, 0.05), 0.8, 18, '#EEF2FA')
     P.camera((0.28, -0.78, 0.36), (0.0, -0.02, 0.055), lens=60, fstop=4)

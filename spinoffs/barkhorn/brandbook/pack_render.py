@@ -445,8 +445,8 @@ def shot_pair(sc):
     area('fill', (3.4, -2.6, 1.4), (0, 0, 0.6), 3.0, 40, '#EEF2FA')
     area('top', (0, 0.5, 4.5), (0, 0, 0), 3.0, 60)
     flag = mat_basic('flag', '#050505', rough=1.0)
-    f = box('flag-wall', -4, 2.2, 2.2, 4, 2.22, 3.4, flag); f.visible_camera = False
-    g = box('flag-partner', -1.9, 0.2, 0.8, -1.3, 0.22, 2.0, flag); g.visible_camera = False   # keeps the key off the partner's face
+    # 2026-11-09, the studio rule (no hidden card in frame): the wall flag sits above the frame, and the partner's flag is gone
+    f = box('flag-wall', -4, 2.2, 2.7, 4, 2.22, 3.9, flag); f.visible_camera = False
     camera((1.8, -7.6, 0.70), (0.5, 0.2, 0.65), lens=66, fstop=4)
 
 
