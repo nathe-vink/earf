@@ -215,7 +215,9 @@ def build(frame, samples, scale):
             Tb = shell_T(tname, 0.5, 3.0)
             sphere(f'ball-{tint}', 80.0, (x, y, zc), thin_shadow(acrylic(f'ball-{tint}', 0.0, tname, 0.5), Tb), hole_below=20.0)
             sphere(f'ball-in-{tint}', 74.0, (x, y, zc), thin_shadow(acrylic(f'ball-in-{tint}', 0.0, tname, 0.5), Tb), inward=True, hole_below=20.0)
-            ri = 60.0; zi = zc - 12.0 * MM
+            # the core's radius (CORE_R; drawn 60): at any size it sits on the grommet, its Ø40 opening's edge at the
+            # grommet's top, 68.15 below the ball's centre (60: 11.6 below, the drawn 12)
+            ri = float(os.environ.get('CORE_R', '60')); zi = zc - (68.15 - math.sqrt(ri ** 2 - 20.0 ** 2)) * MM
             sphere(f'core-{tint}', ri, (x, y, zi), thin_shadow(acrylic(f'core-{tint}', 0.0, 'Clear'), shell_T('Clear', 1.0, 3.0)), hole_below=20.0)
             cm = bpy.data.materials.new(f'core-opal-{tint}'); cm.use_nodes = True; nt = cm.node_tree; nt.nodes.clear()
             o_ = nt.nodes.new('ShaderNodeOutputMaterial'); tr_ = nt.nodes.new('ShaderNodeBsdfTranslucent')
