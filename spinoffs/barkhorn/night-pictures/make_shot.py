@@ -44,7 +44,7 @@ READING = False                  # tried (g3c): a downlight lights the chair und
 # speaker's face, and the pendant over that near end, 0.25 m off the speaker's side and 0.35 m in front of its face;
 # the pool lands on the console's top. Poly Haven modern_wooden_cabinet (CC0), 2.44 x 0.52 x 0.68, a run of sleeves on it
 CONSOLE = (1.72, -0.30)          # its centre: the near end at x 0.52 (0.24 off the speaker's side), its front at y -0.32
-HEMI_A = (0.34, -0.36)           # the pendant: over the console's near end, 0.35 in front of the speaker's face
+HEMI_A = (0.44, -0.36)           # proxy 7: 10 cm right of proxy 6 (horn crops: no horn pixel over L* 90)           # the pendant: over the console's near end, 0.35 in front of the speaker's face
 HEMI_A_DZ = 0.15                 # proxy 6: its rim 1.47 up (0.15 over proxy 4), off the horn's top line in frame
 # gate 2, point 6: the Hemisphere's mouth is open and its COB sits at the rim, so a camera below the rim sees the bare
 # COB (scene_audit: 106 of 113 points from 0.40 m). The camera stands above the rim, at eye height
@@ -155,7 +155,7 @@ def shot(root, tint, lamp_dir, fmt='wide', core=False):
                      if core else _records(),
         # gate 3: the speaker clearly on a wool rug (curly_teddy_natural, CC0: a pile, its own relief), a bound edge,
         # 0.9 m of rug in front of the feet; a nightstand under the pendant and an armchair in shadow at the left edge
-        'rug': None if core else {'pbr': 'curly_teddy_natural', 'tint': '#3A3836', 'tint_mix': 0.9, 'value': 0.014, 'bump': 0.6,
+        'rug': None if core else {'pbr': 'curly_teddy_natural', 'tint': '#3A3836', 'tint_mix': 0.9, 'value': 0.014, 'bump': 0.6, 'matte': True,
                                   'center': [0.0, -1.10], 'size': [3.0, 3.30], 'border_w': 0.035, 'border_color': '#24211E'},
         'models': [] if core else [
             {'id': 'modern_wooden_cabinet', 'location': [CONSOLE[0], CONSOLE[1], 0.0], 'rotation_deg': [0, 0, 0], 'name': 'console'},

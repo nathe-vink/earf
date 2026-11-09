@@ -274,6 +274,14 @@ def night_set(bpy, spec, mats):
             rm = _principled(bpy, 'rug', rg.get('tint', '#3A3632'), 0.98, 0.1)
         if rg.get('value'):
             _scale_base(rm, rg['value'])
+        if rg.get('matte'):
+            # wool is matte (proxy 7: the rug brightened toward the lens, where the lamp's mirror point lies; the floor
+            # profile under the fitting falls off steadily, so it was the fleece texture's gloss, not the light)
+            bsr = next(n_ for n_ in rm.node_tree.nodes if n_.type == 'BSDF_PRINCIPLED')
+            for nm_, v_ in (('Roughness', 0.95), ('Specular IOR Level', 0.15)):
+                for l_ in list(bsr.inputs[nm_].links):
+                    rm.node_tree.links.remove(l_)
+                bsr.inputs[nm_].default_value = v_
         bw = rg.get('border_w', 0.04); bm_ = _principled(bpy, 'rug-binding', rg.get('border_color', '#1E1C1A'), 0.9, 0.15)
         (cx_, cy_), (sx_, sy_), th = rg['center'], rg['size'], 0.012
         _box(bpy, 'rug', (cx_, cy_, th / 2), (sx_ - 2 * bw, sy_ - 2 * bw, th), rm)
