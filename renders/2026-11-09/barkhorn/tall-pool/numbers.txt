@@ -1,0 +1,9 @@
+passed-fog.png     x20 y250-375 [197, 202, 205, 207, 199, 190]  x430 y150-275 [240, 242, 243, 244, 244, 244]  >=248 0.2 %  upper wall 238  floor p95 238  right face (192, 197, 197) V 0.77
+final-fog.png      x20 y250-375 [193, 197, 199, 200, 197, 226]  x430 y150-275 [220, 218, 217, 224, 244, 248]  >=248 2.9 %  upper wall 220  floor p95 238  right face (157, 161, 159) V 0.63
+fog-v3.png         x20 y250-375 [217, 220, 221, 221, 220, 219]  x430 y150-275 [239, 238, 238, 238, 238, 239]  >=248 0.0 %  upper wall 239  floor p95 242  right face (163, 166, 164) V 0.65
+passed-dust.png    x20 y250-375 [197, 202, 205, 206, 199, 190]  x430 y150-275 [240, 242, 243, 243, 244, 244]  >=248 0.1 %  upper wall 238  floor p95 235  right face (190, 77, 26) V 0.75
+dust-v3.png        x20 y250-375 [217, 220, 221, 222, 220, 219]  x430 y150-275 [239, 238, 238, 238, 238, 238]  >=248 0.0 %  upper wall 239  floor p95 240  right face (158, 65, 20) V 0.62
+passed-dust.png        wall 0.77 floor 0.87 horn L* 54 woofer L* 34 front sat 0.70 val 0.71 centre sat 0.77 blue 0.031 bottom sat 0.82
+dust-v3.png            wall 0.86 floor 0.91 horn L* 54 woofer L* 18 front sat 0.82 val 0.54 centre sat 0.84 blue 0.010 bottom sat 0.82
+passed-fog.png         wall 0.77 floor 0.88 horn L* 95 woofer L* 34 front sat 0.03 val 0.73 centre sat 0.03 blue 0.738 bottom sat 0.03
+fog-v3.png             wall 0.86 floor 0.92 horn L* 95 woofer L* 18 front sat 0.03 val 0.56 centre sat 0.03 blue 0.381 bottom sat 0.04
