@@ -5696,3 +5696,13 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   sideways scroll 320-1536; Lighthouse / 98, CLS 0. Vercel has not registered it (newest still 19:14). The lane had offered a
   preview created through the Vercel API; my yes to that was refused by this session's permission check as a deployment, so at
   19:23 I told the lane NOT to: wait for Vercel to pick up the push; the seven-talls push triggers a fresh build anyway.
+- 19:23 CORE A/B TALLY (wf_9459e462-b14): show_now 0/4 on both frames. Lean B 4/4 but provisional: the comparison isn't fair yet.
+  By day B 4/4 (a deep see-through shell, refraction, a caustic shadow); by night A 4/4 (a full glow, no emitter in view). A's frost
+  returns undyed light (by day R 134 vs B's core 53): a physics bug (bead-blast the inner face only, behind the full dye); A's
+  crescent: material or an over-bright window reflection (split 2/2; one diagnostic render settles it); two suns in the day pair;
+  nights at ~30 % room and +1 EV (3/4); B's shell may reflect nothing (check its material); B's sliver: keep, confirm with clamping
+  off, caption it for the founder with the product fix (an opal sleeve at the core's mouth or a recessed LED); Core's lm 560 vs 620
+  and no CCT. 19:25 sent the lamps lane all of it, after round 3.
+- 19:24 RC3.1 REVIEW launched (wf_f888f5ab-097, five lenses) against a LOCAL server of the exact built files of r49-site-rc
+  2490d9d3 (scratchpad/rc3-local; tools/vercel_local.py emulates vercel.json's cleanUrls, the /s/ redirects, the headers and the
+  404), because Vercel hasn't deployed the commit. The deployed copy gets a separate header and picture check before the owner link.
