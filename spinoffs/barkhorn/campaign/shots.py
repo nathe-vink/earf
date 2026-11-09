@@ -791,7 +791,8 @@ def honest_lights(s, log=None):
 
 
 def _frame_rays(s, nx=96, ny=96):
-    """Unit rays through a grid over the camera's frame (lens shift included, padded 3 % past each edge)."""
+    """Unit rays through a grid over the camera's frame (lens shift included, padded 3 % past each edge), or over its
+    render crop where it has one."""
     import numpy as np
     cam = s['camera']; c = np.array(cam['position'], float); f = np.array(cam['target'], float) - c
     f /= np.linalg.norm(f); r = np.cross(f, [0.0, 0.0, 1.0]); r /= np.linalg.norm(r); u = np.cross(r, f)
@@ -799,7 +800,10 @@ def _frame_rays(s, nx=96, ny=96):
     hx, hy = (18.0, 18.0 * H / W) if W >= H else (18.0 * W / H, 18.0)
     sx, sy = cam.get('shift_x', 0.0), cam.get('shift_y', 0.0)
     span = max(hx, hy) * 2
-    xs = np.linspace(-1.03, 1.03, nx); ys = np.linspace(-1.03, 1.03, ny)
+    # a render crop (fractions of the frame from the top left; the arc's) is the frame that is shown (2026-11-09)
+    x0, y0, x1, y1 = ((s.get('render') or {}).get('crop') or [0.0, 0.0, 1.0, 1.0])
+    pad = 0.03
+    xs = np.linspace(2 * x0 - 1 - pad, 2 * x1 - 1 + pad, nx); ys = np.linspace(1 - 2 * y1 - pad, 1 - 2 * y0 + pad, ny)
     X, Y = np.meshgrid(xs, ys)
     px = X * hx + sx * span; py = Y * hy + sy * span                 # mm on the sensor
     d = f[None, None, :] * lens + px[..., None] * r[None, None, :] + py[..., None] * u[None, None, :]
@@ -995,6 +999,49 @@ def realize_hidden(s, log=None):
         else:
             s['lights'].pop(k)
             out.append(f"lamp {k}, hidden, in frame, cannot leave: removed")
+    if log is not None:
+        log.extend(out)
+    return s
+
+
+def arc_rig(s, bg=0.7, key_grow=2.5, off_deg=20.0, flats=False, bg_spread=None, log=None):
+    """The front arc's gate (2026-11-09, wf_a973e665-cb8): 03 and 05's 10 deg side faces read as flat white slabs (Fresnel
+    off a sweep lit well over white), and 05's horn corner mirrored the small high key as crisp streaks.
+    1. Two matte-black v-flats on the floor behind the speaker, `off_deg` either side of the lens axis, where a face at
+       80 deg to the camera sends its reflection; slid out along that line, grown to hold their angle, until out of frame
+       (from about 3.5 m behind the speaker at 20 deg): real, seen by the camera and in reflections, casting shadows.
+    2. The sweep from blown to just white: the background lamps (linked to the sweep alone) at `bg`.
+    3. The key `key_grow` times larger at the same irradiance: a broad soft source for the horn's corner seam to mirror."""
+    import math
+    out = []
+    cam = s['camera']['position']; tgt = s['camera'].get('target', [0, 0, 0.6])
+    i0 = s['products'][0]['instances'][0]['position'] if s.get('products') else [0, 0, 0]
+    ux, uy = tgt[0] - cam[0], tgt[1] - cam[1]; m = math.hypot(ux, uy); ux, uy = ux / m, uy / m
+    st = s.setdefault('set', {}); depth = st.get('depth', 1e9) - 0.2; half_w = st.get('width', 1e9) / 2 - 0.2
+    for side, a in ((('left', off_deg), ('right', -off_deg)) if flats else ()):
+        c, sn = math.cos(math.radians(a)), math.sin(math.radians(a))
+        dx, dy = c * ux - sn * uy, sn * ux + c * uy
+        w, h = 1.2, 2.4
+        fl = {'center_m': [round(i0[0] + 2.0 * dx, 3), round(i0[1] + 2.0 * dy, 3), h / 2], 'size_m': [w, h],
+              'normal': [round(-dx, 4), round(-dy, 4), 0.0], 'color': '#060606', 'camera': True, 'glossy': True,
+              'name': f'v-flat {side}'}
+        done = fl if not _in_frame(s, fl) else _slide_out(s, fl, i0, depth, half_w)
+        if done:
+            done['center_m'][2] = round(done['size_m'][1] / 2, 3)          # standing on the floor
+            st.setdefault('flags', []).append(done)
+            out.append(f"v-flat {side} at {done['center_m']} {done['size_m']}")
+        else:
+            out.append(f"v-flat {side}: cannot stand out of frame inside the studio")
+    for k, L in s['lights'].items():
+        if _set_only(L.get('receivers')) and str(k).startswith('bg'):
+            for x in ('irradiance', 'power_w'):
+                if x in L:
+                    L[x] = round(L[x] * bg, 3)
+            if bg_spread:
+                L['spread_deg'] = bg_spread
+    if 'key' in s['lights']:
+        sz = s['lights']['key'].get('size_m', [1.0, 1.0])
+        s['lights']['key']['size_m'] = [round(v * key_grow, 3) for v in sz] if isinstance(sz, list) else round(sz * key_grow, 3)
     if log is not None:
         log.extend(out)
     return s
