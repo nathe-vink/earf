@@ -4846,3 +4846,11 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   room light allowed only if clearly apart; WB toward 2700-3000 K so the batts read pale blue-white; square the camera, soften the
   lip line and the woofer glints) and the rollout rule (proxy each color, deep tints first; the tall crop after the move). One
   Ice proxy with metrics; I gate it.
+- 17:19 c3: rc1 HERO-LIGHT chunk 1 at 2318a4ccc88a3510bf7f90d087b18ca8b3d7becf (Ember 17.6 min, Dust 18.5 min; 2400x1350); stopped
+  before chunk 2: in Dust a saturated red-orange band along the bottom panel's whole front edge above the feet reads as a lit strip
+  (Ember a dimmer red line). Sent (17:19): the band is the clear bottom panel's edge glow (the owner's bottom-edge question; at its
+  hottest under the hero-light rig); go to the turns now; hero-light chunk 2 held for the owner's answer or a rig change.
+  My look: at half size Dust's cabinet also reads salmon-pink under this rig, against Dust's burnt orange (to gate with the wides).
+- 17:2x THE BOTTOM EDGE NOW BLOCKS the site's wides (c4), sides and hero-lights (c3, c2's chunk 3 running). Plan: gate the speaker
+  lane's v2 sheets when they land, then put the bottom-edge question to the owner NEXT, ahead of FA123 (which blocks nothing
+  visual), with the site preview.
