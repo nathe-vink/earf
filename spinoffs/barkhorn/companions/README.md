@@ -1714,7 +1714,14 @@ Code: `strata/scene.absorption` (the bpy rigs) and `lamps_cordless.speaker_deep`
   - the 6 mm shell (R 96-90, the CAD's `liner`) is clear (TruCast 0000);
   - the opal liner (R 89-86, the CAD's `skin`) is the neutral opal, about 0.93 a channel through, about 55 % out;
   - the rim is the tint at half loading.
-- **Core A:**
+- **Core B, the owner's choice (2026-11-09 21:12, "assuming we're still using the same materials we would use for
+  the speakers and Mantle"):**
+  - the outer ball is 6 mm (R 80-74), polished both faces, in the speaker's code for the tint, the chart figure held
+    at its wall. It keeps the Ø40 port.
+  - the inner ball is the core, Ø120 3 mm white opal (R 60-57), the same opal as Hemisphere's liner. Its centre is 12
+    below the outer's, and its Ø40 opening seats on the grommet's top (`renders/2026-11-09/barkhorn/lamp-pictures-ab/core-b-section.png`).
+  - The CAD and BOM still draw A until they are rebuilt.
+- **Core A (the record):**
   - the 9 mm ball is tinted at a third of the loading;
   - its inside face is bead-blasted. The frost's diffuse lobe carries the wall's own tint (`strata/scene.frosted`): no
     untinted layer, and no light out that never crossed the dye.
