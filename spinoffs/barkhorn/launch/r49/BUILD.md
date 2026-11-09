@@ -17,3 +17,15 @@ Before every rebuild on this branch:
 5. Then commit and push.
 
 The screenshots in this folder are from the first RC and are out of date.
+
+## This build (the Tropos-fronts batch, 2026-11-09)
+
+- 164 files, 8.67 MB (8.27 MiB), as built by `web.py`. (Correction: RC3.1 at 2490d9d3 was 160 files and 8.75 MB, not the
+  7.3 MB an earlier note gave.)
+- The fronts: `renders/2026-11-04/barkhorn/rollout/A-polished-tallr3/` (rig 74f17d7c); `RC_TALL` in `site_v2.py` names
+  each source commit.
+- Tropos's depth, "428 mm overall, 420 mm at the cabinet": from the speaker lane's figures of 2026-11-09 17:37 ("428
+  overall, the amp plate's hardware"), recorded in `owner-queue.md` on `r46-owner-notes`; the speaker lane adds it to
+  r33's README.
+- Vercel deploys about one push per 15 minutes. A push that gets no deployment lost its window: wait for the next one,
+  then push one real follow-up commit.
