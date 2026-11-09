@@ -5344,3 +5344,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   a large floor or sensor plane for each reflector option against 430 lm; (a) fix the geometry if the render loses light, or (b)
   correct the 490 lm figure everywhere if the CAD really loses half; no lamp brighter than the fitting. Core: add the LED face to the
   site rig; the Core nights on the one scale (560 lm = 3.64 W).
+- 18:30 biomes: POISON EXPOSURE at 66c171a15740438821b0e8c96e10e409b354552b (30 m gap, litter at -40): +0.75 / +1.75 / +2.35: frame
+  74.8 / 98.7 / 113.8; floor 85.2 / 110.3 / 126.2; box 20.9 / 31.9 / 41.1 (box per-pixel median 12.0 / 21.7 / 29.7); hue/sat
+  89-0.61 / 91-0.60 / 93-0.58; no clipping. +2.35 meets the box metric but the forest reads as a bright misty morning; it proposes
+  2.35 at 96 samples. FOG KHAKI camera trace: 20.1 mm of front panel, then a bronze post (408,581), or the back wall's white felt
+  (lining-back-e-web, z 0.894; lining-back-h-web behind 10.6 mm of the back rib): the band is that felt in the shadow under the top
+  batt, lit only by light bounced inside the cabinet (bronze posts, woofer, warm-rimmed panels): honest; the front faces' mirrors
+  see the black flag (Fresnel 3.9 %).
+- 18:31 GATE POISON EXPOSURE CHOICE launched (wf_2d4edec1-848; 3 critics; both strips; the Ice habitat as the bar). Sent biomes:
+  hold the final for the pick; leave the Fog band (honest shade); the polish pass keeps the flecks, plate edge, diagonal if cheap.
