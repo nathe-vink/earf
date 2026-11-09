@@ -5687,3 +5687,12 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   light (a physics bug, found by both gates); Core -0.7 EV vs as-is; Hemisphere studio x1 at -2 EV; check the pool's height (C4: the
   pool fits 0.30 m, the picture shows ~0.5 m); framing 40-50 %; rows as two images; a larger key and a kicker. Order: the audit ->
   the unlit Ember pair -> round 3 -> Core A/B.
+- 19:21 BRAND: its two 3D renders re-rendered on fixed rigs and swapped (dea5895e); before/after at
+  spinoffs/barkhorn/brandbook/review/2026-11-09-rig-fix/ (the library's tiles lose a little rim; the crate pair's wall shows the real
+  shadow of the flag now above the frame). 19:22 told it: keep the real shadow; both pairs go to the critics with the fronts.
+- 19:21 SITE (c) pushed: r49-site-rc 2490d9d3 (RC3 + r47-site-next e41a2b8d): the amp plate on the home, the turn viewer, the Back
+  view pulled (galleries now Front, Plate, Horn behind, Turning, plus Out where a habitat passed; the 14 back files deleted;
+  rc/<color>-back banned); build exit 0, 160 files, 8.7 MB (the turn sprites ~1.6 MB, loaded only when opened); 57 x 2 clean; no
+  sideways scroll 320-1536; Lighthouse / 98, CLS 0. Vercel has not registered it (newest still 19:14). The lane had offered a
+  preview created through the Vercel API; my yes to that was refused by this session's permission check as a deployment, so at
+  19:23 I told the lane NOT to: wait for Vercel to pick up the push; the seven-talls push triggers a fresh build anyway.
