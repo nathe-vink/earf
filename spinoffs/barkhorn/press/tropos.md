@@ -9,10 +9,10 @@ so it is dressed in white voile. A cloth cover goes on over the woofer.
 
 | | |
 |---|---|
-| Height | 1293 mm |
+| Height | 1295 mm |
 | Width | 560 mm, the cabinet, with the horn flush |
-| Depth | 423 mm overall, 420 mm at the cabinet |
-| Weight | 72.6 kg on its own feet |
+| Depth | 428 mm overall, 420 mm at the cabinet |
+| Weight | About 73 kg on its own feet, about 64 kg with the horn lifted off (modelled, not weighed) |
 | Woofer | FaitalPRO 15PR400, 15-inch, with two ports in the front's lower corners |
 | Horn driver | B&C DE1085TN, 2-inch compression driver |
 | Horn | Formed from the same tinted cast acrylic as its cabinet, a turned acrylic throat; the cabinet's full depth |
@@ -30,4 +30,4 @@ so it is dressed in white voile. A cloth cover goes on over the woofer.
 
 **Pictures:** only renders that passed the critics: the seven tall fronts, cover off (`brandbook/book/img/honest-front-*.jpg`, roll-out A-polished-fix1: e624e13e, 3d0b613f, Acid 04d21c5c), and the Dust habitat (`honest-dust-habitat.jpg`, 26493989). Always the whole speaker, cover off, never a crop (`images.md`). All renders.
 
-**Every figure above traced on 2026-11-09** to the speaker lane (`r33-speaker-horn`): height (README, feet: 1293), width (`product.py` W=560, the flush horn), depth (README, "423 mm overall, 420 mm at the cabinet"), weight (`rfq/tropos/PARTS-FINAL-DESIGN.md` and `stability/standard-2018.md`: 72.6 kg with horn A on its own feet), drivers and amplifier (`out-cloud/bom.md`), crossover (README: 1 kHz, LR4), bass (README: f3 51 Hz, ports at 38 Hz), loudness (README: 115 to 117 dB at 1 m), inputs (README, the FA122's plate), lining (`out-cloud/bom.md`: 100 mm batts top and bottom; README: voile).
+**Every figure above traced on 2026-11-09** to the speaker lane (`r33-speaker-horn`): height and weight (r33-speaker-horn 1c391c9a, horn A: top 1.2951 m, mass 72.6 kg modelled, given as "about 73"; 1295), width (`product.py` W=560, the flush horn), depth (428 overall with horn A, 420 at the cabinet), drivers and amplifier (`out-cloud/bom.md`), crossover (README: 1 kHz, LR4), bass (README: f3 51 Hz, ports at 38 Hz), loudness (README: 115 to 117 dB at 1 m), inputs (README, the FA122's plate), lining (`out-cloud/bom.md`: 100 mm batts top and bottom; README: voile).

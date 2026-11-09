@@ -39,8 +39,8 @@ SHEETS = [
      'formed over a plug and polished, its driver in a pod whose cap twists off by hand. Above 1 kHz the horn carries the music; below, a 15-inch '
      'woofer takes it, each on its own channel of the amplifier inside. The lining shows through the walls, so it is '
      'dressed in white voile. The name: the troposphere, the air we live in, from the Greek tropos, a turn.',
-     [('Height', '1293 mm'), ('Width', '560 mm, the cabinet, with the horn flush'), ('Depth', '423 mm overall, 420 mm at the cabinet'),
-      ('Weight', '72.6 kg on its own feet'), ('Woofer', 'FaitalPRO 15PR400, 15-inch, two ports in the front’s lower corners'),
+     [('Height', '1295 mm'), ('Width', '560 mm, the cabinet, with the horn flush'), ('Depth', '428 mm overall, 420 mm at the cabinet'),
+      ('Weight', 'About 73 kg on its own feet, about 64 kg with the horn lifted off (modelled, not weighed)'), ('Woofer', 'FaitalPRO 15PR400, 15-inch, two ports in the front’s lower corners'),
       ('Horn driver', 'B&C DE1085TN, 2-inch compression driver'), ('Amplifier', 'Hypex FusionAmp FA122, built in: two channels of 125 W, crossed at 1 kHz in its DSP'),
       ('Bass', 'To about 51 Hz at −3 dB, before the room adds its own; ports tuned to 38 Hz'), ('Loudness', 'Up to about 115 dB at 1 m, each'),
       ('Inputs', 'XLR (and a link out), RCA, AES, S/PDIF coaxial and optical; USB to set it up'),
