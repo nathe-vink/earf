@@ -6010,3 +6010,15 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
   the horn at 3x). The storm reads warm sepia (sky hue 36°/0.18) with the speaker 45°/0.83. 20:27 GATE ACID FINAL launched
   (wf_235309b8-088 founder + photographer, wf_1768128d-15f skeptic). 20:27 sent: Poison on a forest HDRI with a real sun from Poly
   Haven (hdri_sun-matched), not the patch's #A4BFFE; lowest priority.
+- 20:28 BIOMES: Poison sky candidates (Poly Haven, CC0): je_gray_02 (a woodland, the sun low between trunks, az 53.9, el 21.3,
+  #FEF5DE) the pick. 20:28 sent: start the Poison proxies on it now (the (a) framing, the litter, the sunlit bounce); fixes to Acid
+  or Fog first if asked; proxies only.
+- 20:27 c4: the Dust tall on 15931e00 landed as evidence (f7d4116d, 7.4 min); holding.
+- 20:28 MANTLE: ICE NIGHT PROXY 7 (04caf085, r48-mantle-design; renders/2026-11-09/barkhorn/night-pictures/): the pendant 10 cm right
+  (x 0.44); regraded from the linear EXR in Blender's own AgX (a softer shoulder above 65 %, the shade's interior from -4 EV through a
+  feathered mask, 2 % halation; no clamp, dimmer or retouch); exposure +4.6 after a deeper wall paint (0.42); the rug matte (it
+  mirrored the lamp). The dome rolls off (L max 249); horn L* max 90 (3 px over); the X arms (the lit cabinet top in the creases)
+  p95 17/28/25/49 against proxy 4's 8/5/6/13: missed; the floor beside the console over spec. Its question: lower the rim (kills the
+  arms) against the critics' ask to clear the horn's top line. 20:29 GATE NIGHT PROXY 7 launched (wf_21969165-0ce founder +
+  photographer, wf_608263ba-d00 skeptic); sent: try a real matte object on the cabinet top out of view (a felt runner or a sleeve),
+  never the product's finish; what lights the floor beside the console.
