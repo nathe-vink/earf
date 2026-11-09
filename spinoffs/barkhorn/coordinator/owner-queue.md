@@ -5575,3 +5575,9 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 19:02 sent biomes: Haze proxy (c) = silk + a real black card on the sun side at the grazing angle (as Acid), side columns to <= 290°;
   crops of 4 Nov, base, (a), (c) to me for a critics' gate before the final; confirm with the corrected test that no passed final
   (Ice 0f619953, Dust 26493989, Fog, ...) had a card or scrim crossing its frame. Order: sun probe -> Haze (c) -> Poison x2 -> Acid.
+- 19:02 c4 (stamped 19:04, ahead of the clock): rc1-card talls Dust and Fog landed on 92f814b0 (8e5e1da0), commit 8a6e4ed4
+  (renders/2026-11-04/barkhorn/rollout/A-polished-rc1-card/site-front-off-tall-{dust,fog}.png, 1000x1250, 7.2/7.8 min); merged
+  f14b24c7 at bed5d0fc (no rebuild); wides Ember, Dust, Acid rendering (~10 min each). My look at the foot (2x crops, gate-tall-rc1/):
+  Dust's red strip gone, Fog's white streaks gone; whole-frame mean change 0.4/1.4 levels.
+- 19:04 GATE TALLS rc1-card Dust + Fog launched (wf_040e85e8-217): the two talls, before/after foot crops, the passed Ember and Poison
+  as the set. Ice and Haze (c3) gate when they land (~19:20).
