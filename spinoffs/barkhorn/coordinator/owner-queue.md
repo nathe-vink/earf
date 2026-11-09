@@ -4871,3 +4871,27 @@ Budget: keep $50,000, first pair in stocked gray · YC: skip · Close-ups: a few
 - 17:21 sent c2: stop hero-light chunk 3; after the fix SHA merge it and re-render the seven talls (rc1-fix), then hero-light 3-4.
 - 17:21 sent c4 and c3 (the messages said 17:22, ahead of the clock; date -u read 17:21:36 after): the band is the bug; merge the fix when it comes; after the turns, c4 re-renders wide 01 and runs 02-03 (then
   the sides), c3 re-renders hero-light 1 and runs 2.
+- 17:2x GATE FOG FINAL (wf_9ecc9b10-30f): SHOW 1/3, the two holds on the RECORD, not the picture: against the committed 3 Nov 23:44
+  file (b61474c0~1), more than the white balance changed (the lining near-black -> slate gray L* 34-50; the boulder gone, a warm-lit
+  rock at the right edge; the darks lifted), so the lane's A/B credits it all to 5400 K. All three pass every owner test; the edges
+  and horn now colorless (top edge b* +7.0 -> +2.3, horn +3.1 -> -0.7). Residual: a khaki band under the top batt (b* +12 to +17,
+  like Poison's beige field); the dawn warmth gone (an overcast morning). Sent biomes (17:23): the change list and SHA, confirm the
+  colors-F white lining, an A/B from one scene, a Fog pixel in the Poison trace; then I re-gate.
+- 17:2x BOOK REVIEW, the owner's-eye lens (wf_739725d8-d48) landed: first screen all type at 1440 (the first picture at 1,287 px,
+  the fronts as 167x209 thumbnails); the phone header mark in a beige box (the owner's old complaint); "04 POISO" cut; a 22-chapter
+  bar with no contents on a 79-screen page; 26 PENDING boxes, one sentence 24 times, while passed pictures sit unused; more Smoke as
+  an eighth color (ORDER, PAIRS, Session 00, "a ninth tint"); mockups (a corded Core, "LAUNCHING TUESDAY 27 APRIL 2027", "A lamp
+  underneath fills the whole cabinet with color", "Turn Mantle's base up for light"); two "most likely to raise money"; Idea A vs
+  Session 00 costs; process talk and file paths; split units at 390; the footer. Sent the brand lane WAVE 2 (18 items) at 17:24.
+- 17:2x SITE RC REVIEW, words + build lenses (wf_8ba57711-9df) landed: BLOCKERS: eight colors / Smoke as current everywhere
+  (headings, metas, "Color 01 of 8", lamp shades, Smoke routes and cards, Fog's pairing; /#speaker-smoke -> a 404); the held press kit
+  deployed at /press/earf-press-kit.pdf and /press/earf-logos.zip (200, guessable; old content) and the pulled lit lamps and the old
+  hero still served under /img/; Tropos width 625 mm (the old protruding horn; horn A flush, 560) and height 1293 unverified; Mantle's
+  Ember page "Ember to follow."; hello@earf.world bounces (production only). MAJORS: two weights (the old horn's 72/62 kg on /tropos);
+  "2 x 125 W" is the FA122 into 4 ohm (about 75 W into the 8 ohm woofer); dead "The horn"/"the studio" links; crumbs "Speakers"/
+  "Turntable"; record player vs turntable on one page; COVER rows as standard (item 12 open); a wrong alt; Hemisphere pages scroll
+  sideways at 1024-1280; /contact's tab; nav "Colors" goes nowhere; blurred 3:2 fill on lamp/Mantle. Minors: a 1/1 counter, the
+  phone menu indent, Vercel's raw 404, six copy slips. Sent the site lane WAVE 1 (20 items, with the newly passed backs, horn-backs
+  and amp plate for the galleries, and the coming re-rendered talls) at 17:24.
+- 17:25 asked the speaker lane for horn A's CAD height (1293 vs 1.295 m), the total weight with and without horn A (72.6 kg?), and
+  the width wording; answer to me and the site lane at once.
