@@ -89,8 +89,8 @@ as-drawn variant (the COB alone: a downlight, the shade dark) follows about 23:5
 ## Pulled (do not use)
 | Picture | Why | Pulled |
 |---|---|---|
-| Fog habitat aa1ca856 (fog_b-portrait-1200x1500-onesun.jpg) | a camera-hidden 2 x 2 m area lamp `fill_l` in frame (41 px seen by gt_audit, Blender's own camera; the lane's ray cast had read it out); and a fill lamp at all breaks the habitats' one-sun rule (the sun and the sky's own only) | 9 Nov 23:40 |
-| Poison habitat P8 scene (not yet a final) | a camera-hidden 1.2 x 0.4 m area lamp `litter` in frame (15 px); dropped before the final | 9 Nov 23:40 |
+| Fog habitat aa1ca856 (fog_b-portrait-1200x1500-onesun.jpg) | a 2 x 2 m fill EMITTER `fill_l` (hidden from the camera, out of frame) breaks the habitats' rule: the sun and the sky's own are the only emitters, and the caption says "lit by one sun"; a passive reflector would be allowed. (The first report, "in frame", was withdrawn 23:46: the gt_audit hits were the panel seen through the speaker's glass; projected, it lies wholly past the left edge.) Re-render without it, or with a real reflector, queued | 9 Nov 23:40 |
+| Poison habitat P8 scene (not yet a final) | a 1.2 x 0.4 m fill emitter `litter` (out of frame; the in-frame flag withdrawn as for Fog); dropped or replaced by a real reflector before the final | 9 Nov 23:40 |
 | Lamps, round 3's orb-row proxies (lamps-orbs-7, a/, b/, c/) | the 4 m key stood in frame with its back to the camera (22.1 % by the mask), hidden from the camera; never approved, never to be used; the rows' key is now 3 m (0 % in frame) | 9 Nov 23:34 |
 | Horn from behind: Ember, Dust, Poison (06b829ce), Ice, Haze, Fog (52ad76ba) | the camera-hidden 'glow' area lamp (0.7 x 0.32 m at (0, 0.66, 1.12), irradiance 1.6, specular 0) standing in frame beside the horn mouth: 16.1 % by the corrected cast, 61,101 px by the mask on a horn-back; re-render without it queued | 9 Nov 23:27 |
 | Turning view, Ember frames 00-04 (52ad76ba) | the same glow lamp in frame (19.5 % by the corrected cast); Ember's turn held whole until the five are replaced | 9 Nov 23:27 |
