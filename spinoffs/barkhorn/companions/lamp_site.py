@@ -138,6 +138,24 @@ def build(frame, samples, scale):
     refl = SC.principled('reflector', os.environ.get('REFL_COL', '#F2F2F0'), float(os.environ.get('REFL_R', '0.12')), 1.0)
     cap = SC.principled('cap', '#3A3A3E', 0.45, metallic=0.3, bump=(4000.0, 0.15))
 
+    oc_ = (0.93, 0.93, 0.92)                      # the CAD's neutral opal
+    def opal(nm):
+        m = bpy.data.materials.new(nm); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+        o = nt.nodes.new('ShaderNodeOutputMaterial'); tr = nt.nodes.new('ShaderNodeBsdfTranslucent')
+        gl = nt.nodes.new('ShaderNodeBsdfGlossy'); gl.inputs['Roughness'].default_value = 0.08
+        # 2026-11-10 (the coordinator: the opal decides how bright the as-drawn dome reads): the opal at a stocked
+        # grade's datasheet, Perspex GS Opal/White 041, 3 mm (Perspex technical data sheet, section 5, ASTM D1003,
+        # Illuminant C): T 54 %, R 39 %, so A 7 %. Here: a 4 % glossy face, then 60.5 % translucent at 0.93 (T 0.54)
+        # and 39.5 % diffuse at 0.923 (R 0.04 + 0.35). Until now T 0.44, R 0.47, A 0.09 (OPAL=old for that)
+        old_ = os.environ.get('OPAL') == 'old'
+        df = nt.nodes.new('ShaderNodeBsdfDiffuse'); m1 = nt.nodes.new('ShaderNodeMixShader'); m1.inputs[0].default_value = 0.5 if old_ else 0.605
+        m2 = nt.nodes.new('ShaderNodeMixShader'); m2.inputs[0].default_value = 0.06 if old_ else 0.04
+        tr.inputs['Color'].default_value = (*oc_, 1)
+        df.inputs['Color'].default_value = (*(v * 0.97 for v in oc_), 1) if old_ else (0.923, 0.923, 0.915, 1)
+        nt.links.new(df.outputs[0], m1.inputs[1]); nt.links.new(tr.outputs[0], m1.inputs[2])
+        nt.links.new(m1.outputs[0], m2.inputs[1]); nt.links.new(gl.outputs[0], m2.inputs[2]); nt.links.new(m2.outputs[0], o.inputs['Surface'])
+        return m
+
     def hemisphere(tint, x, rim_z, y=0.0):
         """Hemisphere v3 as drawn, lit, its rim's centre at (x, y, rim_z)."""
         tname = COLOURS[tint]; bb = bbt(tint)
@@ -152,23 +170,6 @@ def build(frame, samples, scale):
         sphere(f'tint-in-{tint}', 97.0, c, thin_shadow(acrylic(f'tint-in-{tint}', 0.0, tname), Tt), inward=True, cut=0.0, hole=H)
         sphere(f'clear-{tint}', 96.0, c, thin_shadow(acrylic(f'clear-{tint}', 0.0, 'Clear'), Tc), cut=4.0, hole=H)
         sphere(f'clear-in-{tint}', 90.0, c, thin_shadow(acrylic(f'clear-in-{tint}', 0.0, 'Clear'), Tc), inward=True, cut=4.0, hole=H)
-        oc_ = (0.93, 0.93, 0.92)                      # the CAD's neutral opal
-        def opal(nm):
-            m = bpy.data.materials.new(nm); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
-            o = nt.nodes.new('ShaderNodeOutputMaterial'); tr = nt.nodes.new('ShaderNodeBsdfTranslucent')
-            gl = nt.nodes.new('ShaderNodeBsdfGlossy'); gl.inputs['Roughness'].default_value = 0.08
-            # 2026-11-10 (the coordinator: the opal decides how bright the as-drawn dome reads): the opal at a stocked
-            # grade's datasheet, Perspex GS Opal/White 041, 3 mm (Perspex technical data sheet, section 5, ASTM D1003,
-            # Illuminant C): T 54 %, R 39 %, so A 7 %. Here: a 4 % glossy face, then 60.5 % translucent at 0.93 (T 0.54)
-            # and 39.5 % diffuse at 0.923 (R 0.04 + 0.35). Until now T 0.44, R 0.47, A 0.09 (OPAL=old for that)
-            old_ = os.environ.get('OPAL') == 'old'
-            df = nt.nodes.new('ShaderNodeBsdfDiffuse'); m1 = nt.nodes.new('ShaderNodeMixShader'); m1.inputs[0].default_value = 0.5 if old_ else 0.605
-            m2 = nt.nodes.new('ShaderNodeMixShader'); m2.inputs[0].default_value = 0.06 if old_ else 0.04
-            tr.inputs['Color'].default_value = (*oc_, 1)
-            df.inputs['Color'].default_value = (*(v * 0.97 for v in oc_), 1) if old_ else (0.923, 0.923, 0.915, 1)
-            nt.links.new(df.outputs[0], m1.inputs[1]); nt.links.new(tr.outputs[0], m1.inputs[2])
-            nt.links.new(m1.outputs[0], m2.inputs[1]); nt.links.new(gl.outputs[0], m2.inputs[2]); nt.links.new(m2.outputs[0], o.inputs['Surface'])
-            return m
         oc = 4.0
         lit = opal(f'opal-lit-{tint}'); nt = lit.node_tree
         # (round 2, the gate: the liner passed all 145 lm; a real opal of about 55 % passes about half outward, the rest
@@ -247,49 +248,47 @@ def build(frame, samples, scale):
                                                       # dock underside sits 6.5 below its origin)
         objs = []
         for nm, m in (('dock', black_acrylic), ('base', black_acrylic), ('ring', an), ('seat', SC.principled('si', '#111111', 0.6)),
-                      ('dock-cable', SC.principled('braid', '#121212', 0.75, bump=(1200.0, 0.5))), ('grommet', an)):
+                      ('dock-cable', SC.principled('braid', '#121212', 0.75, bump=(1200.0, 0.5)))) + \
+                     ((('grommet', an),) if os.environ.get('CORE_DESIGN', 'B') != 'B' else ()):
             objs.append(part('out-orb-table', nm, m, (x, y, z0)))
+        # the window over the LED (the CAD's clear acrylic plug, Ø29.6 x 5.7): clear, its shadow rays at its transmission
+        part('out-orb-table', 'window', thin_shadow(acrylic(f'window-{tint}', 0.0, 'Clear'), shell_T('Clear', 1.0, 5.7)), (x, y, z0))
         zc = z0 + 100.45 * MM
         if os.environ.get('CORE_DESIGN', 'B') == 'B':
-            # Core B, the owner's choice (2026-11-09 21:12; README, "The lamps' materials, locked"), as gated in
-            # lamp_pictures.py's `nested`: a 6 mm outer ball in the speaker's dye (half loading a face: the chart figure
-            # through the wall), polished both faces, its Ø40 port; inside, the Ø120 3 mm white opal core, its centre
-            # 12 below, its Ø40 opening on the grommet's top. The core's lit opal face is the light (ruling 3's
-            # exception), brightest at the crown, the printed ring round its opening dimmer
+            # Core B, CONCENTRIC (the owner, 2026-11-10 00:28: "the outer core should be the same depth around the whole
+            # inner core"; the coordinator's 02:24 brief): the 6 mm outer ball in the speaker's dye, polished both faces,
+            # its Ø40 port; the white opal core on the same centre (CORE_R: 60, 65 or 70, the size the owner picks),
+            # ONE scattering face of Perspex GS 041 (T 0.54, R 0.39; two full faces would act as T 0.34), no emission;
+            # the grommet raised to suit: its shoulder where the core's Ø40 opening meets it, a 3 mm spigot above
             Tb = shell_T(tname, 0.5, 3.0)
             sphere(f'ball-{tint}', 80.0, (x, y, zc), thin_shadow(acrylic(f'ball-{tint}', 0.0, tname, 0.5), Tb), hole_below=20.0)
             sphere(f'ball-in-{tint}', 74.0, (x, y, zc), thin_shadow(acrylic(f'ball-in-{tint}', 0.0, tname, 0.5), Tb), inward=True, hole_below=20.0)
-            # the core's radius (CORE_R; drawn 60): at any size it sits on the grommet, its Ø40 opening's edge at the
-            # grommet's top, 68.15 below the ball's centre (60: 11.6 below, the drawn 12)
-            ri = float(os.environ.get('CORE_R', '60')); zi = zc - (68.15 - math.sqrt(ri ** 2 - 20.0 ** 2)) * MM
-            sphere(f'core-{tint}', ri, (x, y, zi), thin_shadow(acrylic(f'core-{tint}', 0.0, 'Clear'), shell_T('Clear', 1.0, 3.0)), hole_below=20.0)
-            cm = bpy.data.materials.new(f'core-opal-{tint}'); cm.use_nodes = True; nt = cm.node_tree; nt.nodes.clear()
-            o_ = nt.nodes.new('ShaderNodeOutputMaterial'); tr_ = nt.nodes.new('ShaderNodeBsdfTranslucent')
-            df_ = nt.nodes.new('ShaderNodeBsdfDiffuse'); m1_ = nt.nodes.new('ShaderNodeMixShader'); m1_.inputs[0].default_value = 0.5
-            tr_.inputs['Color'].default_value = (0.93, 0.93, 0.92, 1); df_.inputs['Color'].default_value = (0.90, 0.90, 0.88, 1)
-            nt.links.new(df_.outputs[0], m1_.inputs[1]); nt.links.new(tr_.outputs[0], m1_.inputs[2])
-            tc_ = nt.nodes.new('ShaderNodeTexCoord'); sx = nt.nodes.new('ShaderNodeSeparateXYZ'); nt.links.new(tc_.outputs['Object'], sx.inputs[0])
-            mr_ = nt.nodes.new('ShaderNodeMapRange'); mr_.clamp = True
-            zd = -math.sqrt((ri - 3.0) ** 2 - 32.0 ** 2) * MM          # the printed ring, Ø64 round the opening
-            mr_.inputs['From Min'].default_value = zd - 0.001; mr_.inputs['From Max'].default_value = zd + 0.006
-            mr_.inputs['To Min'].default_value = 0.6; mr_.inputs['To Max'].default_value = 0.0
-            nt.links.new(sx.outputs['Z'], mr_.inputs['Value'])
-            dk = nt.nodes.new('ShaderNodeBsdfDiffuse'); dk.inputs['Color'].default_value = (0.88, 0.88, 0.86, 1)
-            mx2 = nt.nodes.new('ShaderNodeMixShader')
-            nt.links.new(mr_.outputs['Result'], mx2.inputs[0]); nt.links.new(m1_.outputs[0], mx2.inputs[1]); nt.links.new(dk.outputs[0], mx2.inputs[2])
-            emn = nt.nodes.new('ShaderNodeEmission'); emn.inputs['Color'].default_value = (*bb, 1)
-            E = CORE_LM * CORE_OUT * WLM / (2 * 4 * math.pi * ((ri - 3.0) * MM) ** 2)   # both faces of the core's 0.0408 m2
-            gz = nt.nodes.new('ShaderNodeMapRange'); gz.clamp = True
-            gz.inputs['From Min'].default_value = -(ri - 3.0) * MM; gz.inputs['From Max'].default_value = (ri - 3.0) * MM
-            gz.inputs['To Min'].default_value = 0.75 * E; gz.inputs['To Max'].default_value = 1.15 * E
-            nt.links.new(sx.outputs['Z'], gz.inputs['Value'])
-            inv = nt.nodes.new('ShaderNodeMath'); inv.operation = 'SUBTRACT'; inv.inputs[0].default_value = 1.0
-            nt.links.new(mr_.outputs['Result'], inv.inputs[1])
-            dim = nt.nodes.new('ShaderNodeMath'); dim.operation = 'MULTIPLY'
-            nt.links.new(gz.outputs['Result'], dim.inputs[0]); nt.links.new(inv.outputs[0], dim.inputs[1]); nt.links.new(dim.outputs[0], emn.inputs['Strength'])
-            ad = nt.nodes.new('ShaderNodeAddShader'); nt.links.new(mx2.outputs[0], ad.inputs[0]); nt.links.new(emn.outputs[0], ad.inputs[1])
-            nt.links.new(ad.outputs[0], o_.inputs['Surface']); cm.cycles.emission_sampling = 'FRONT_BACK'
-            sphere(f'core-in-{tint}', ri - 3.0, (x, y, zi), cm, inward=True, hole_below=20.0)
+            ri = float(os.environ.get('CORE_R', '60')); zi = zc - float(os.environ.get('CORE_DZ', '0')) * MM
+            sphere(f'core-{tint}', ri, (x, y, zi), opal(f'core-opal-{tint}'), hole_below=20.0)
+            # the grommet, raised (base frame: its foot at z 23.0; the core's opening meets r 20 at zf)
+            zf = (zi - z0) / MM - math.sqrt(ri ** 2 - 20.0 ** 2)
+            def tube(nm, r_out, r_in, za, zb, mat):
+                bm = bmesh.new(); seg = 96
+                for (ra, rb) in ((r_out, r_out), (r_in, r_in)):
+                    pass
+                prof = [(r_in, za), (r_out, za), (r_out, zb), (r_in, zb)]
+                rings = [[bm.verts.new((rr * MM * math.cos(2 * math.pi * k / seg), rr * MM * math.sin(2 * math.pi * k / seg), zz * MM))
+                          for k in range(seg)] for (rr, zz) in prof]
+                for a_ in range(4):
+                    r0, r1 = rings[a_], rings[(a_ + 1) % 4]
+                    for k in range(seg):
+                        bm.faces.new((r0[k], r0[(k + 1) % seg], r1[(k + 1) % seg], r1[k]))
+                bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+                me = bpy.data.meshes.new(nm); bm.to_mesh(me); bm.free()
+                ob = bpy.data.objects.new(nm, me); bpy.context.scene.collection.objects.link(ob); ob.location = (x, y, z0)
+                me.materials.append(mat)
+                for f_ in me.polygons:
+                    f_.use_smooth = True
+                return ob
+            bore = SC.principled(f'bore-{tint}', '#F2F2F0', 0.12, 1.0)      # machined bright after anodizing (the brief)
+            tube(f'grommet-{tint}', 19.8, 17.0, 23.0, zf + 3.0, an)              # the black anodised tube, its spigot 3 up
+            tube(f'grommet-bore-{tint}', 16.99, 16.98, 23.0, zf + 3.0, bore)     # its bore, bright
+            tube(f'grommet-shoulder-{tint}', 23.0, 19.8, zf - 1.0, zf, an)       # the shoulder, Ø46, under the core's foot
         else:
             # Core A, the record (CORE_DESIGN=A)
             T9 = shell_T(tname, 1 / 3, 9.0)
@@ -303,16 +302,27 @@ def build(frame, samples, scale):
             S = CORE_LM * CORE_OUT * WLM / (2 * 0.0633)
             add_emission(fm, tuple(bb[i] * T9[i] / 0.96 for i in range(3)), S)
             sphere(f'frost-{tint}', 71.0, (x, y, zc), fm, inward=True, hole_below=20.0)
-        # the LED's own face under the window (the CAD's Ø26), as in lamp_pictures: seen through the port where the
-        # line of sight allows; it lights nothing itself (the frost face is the light, ruling 3's exception)
-        bm = bmesh.new(); bmesh.ops.create_circle(bm, cap_ends=True, segments=48, radius=0.013)
-        led = bpy.data.meshes.new(f'led-{tint}'); bm.to_mesh(led); bm.free()
-        lo = bpy.data.objects.new(f'led-{tint}', led); bpy.context.scene.collection.objects.link(lo)
-        lo.location = (x, y, z0 + 0.0147)
-        em = bpy.data.materials.new(f'led-em-{tint}'); em.use_nodes = True
-        b = em.node_tree.nodes['Principled BSDF']; b.inputs['Emission Color'].default_value = (*bb, 1)
-        b.inputs['Emission Strength'].default_value = 8.0
-        led.materials.append(em); lo.visible_diffuse = False
+        if os.environ.get('CORE_DESIGN', 'B') == 'B':
+            # the ONLY emitter (the coordinator, 02:24): the Ø26 LED disc at its face, 200 lm on the one scale (1.306 W),
+            # facing up, visible to every ray type; no emission on the opal
+            ld = bpy.data.lights.new(f'led-{tint}', 'AREA'); ld.shape = 'DISK'; ld.size = 0.026
+            ld.energy = float(os.environ.get('CORE_LM', CORE_LM)) * WLM * (0.0 if os.environ.get('LIGHTS_OFF') else 1.0)
+            ld.color = bb
+            lo = bpy.data.objects.new(f'led-{tint}', ld); bpy.context.scene.collection.objects.link(lo)
+            lo.location = (x, y, z0 + 0.0147)          # area lamps face -Z: turn it over to face up
+            lo.rotation_euler = (math.pi, 0.0, 0.0)
+            lo.visible_camera = lo.visible_glossy = lo.visible_diffuse = lo.visible_transmission = True   # (Blender 5 makes a new lamp camera-hidden)
+        else:
+            # the LED's own face under the window (the CAD's Ø26), as in lamp_pictures: seen through the port where the
+            # line of sight allows; it lights nothing itself (the frost face is the light, ruling 3's exception)
+            bm = bmesh.new(); bmesh.ops.create_circle(bm, cap_ends=True, segments=48, radius=0.013)
+            led = bpy.data.meshes.new(f'led-{tint}'); bm.to_mesh(led); bm.free()
+            lo = bpy.data.objects.new(f'led-{tint}', led); bpy.context.scene.collection.objects.link(lo)
+            lo.location = (x, y, z0 + 0.0147)
+            em = bpy.data.materials.new(f'led-em-{tint}'); em.use_nodes = True
+            b = em.node_tree.nodes['Principled BSDF']; b.inputs['Emission Color'].default_value = (*bb, 1)
+            b.inputs['Emission Strength'].default_value = 8.0
+            led.materials.append(em); lo.visible_diffuse = False
         if rot:
             for o in objs:   # turn the dock's cable away from the camera, about the lamp's axis (the parts' origin)
                 o.rotation_euler[2] = math.radians(rot)
@@ -385,12 +395,13 @@ def build(frame, samples, scale):
     elif kind == 'orb':
         W, H = 1600, 2000
         core(tint, 0.0, 0.0)
-        cam = ((0.10, -0.95, 0.22), (0.0, 0.0, 0.11), 70.0)
+        # ORBCAM: e.g. October's framing (p4-lamp-orb-*, its orb 40 mm up): ((-0.16,-0.62,0.128),(0,0,0.108),75)
+        cam = tuple(eval(os.environ['ORBCAM'])) if os.environ.get('ORBCAM') else ((0.10, -0.95, 0.22), (0.0, 0.0, 0.11), 70.0)
     else:
         raise SystemExit('unknown frame ' + frame)
     SC.render_settings(W, H, samples, scale, exposure=float(os.environ.get('EV', EVD)), look=os.environ.get('LOOK', 'AgX - Punchy'))   # round 2: AgX Punchy (the gate)
     sc = bpy.context.scene
-    sc.cycles.caustics_refractive = True; sc.cycles.sample_clamp_indirect = float(os.environ.get('CLAMP', '0' if kind0 == 'dome' else '20')) * 2.0 ** (-sc.view_settings.exposure)   # a radiance, in display terms   # round 3: the clamp cut the bore reflector's share (78 % out unclamped, 57 % clamped); sc.cycles.blur_glossy = 1.0
+    sc.cycles.caustics_refractive = True; sc.cycles.sample_clamp_indirect = float(os.environ.get('CLAMP', '0' if kind0 in ('dome', 'orb') else '20')) * 2.0 ** (-sc.view_settings.exposure)   # a radiance, in display terms   # round 3: the clamp cut the bore reflector's share (78 % out unclamped, 57 % clamped); sc.cycles.blur_glossy = 1.0
     # round 3 (the coordinator's photometry check): the bore's reflector sends light to the floor by reflection, a
     # reflective caustic; render_settings turns those off, which threw the reflector's share away
     sc.cycles.caustics_reflective = os.environ.get('REFL_CAUSTICS', '1') == '1'
