@@ -112,9 +112,10 @@ RING_NAMES = ['Ember', 'Ice', 'Acid', 'Haze', 'Poison', 'Dust']
 # behind showing through them; each sheet behind a step deeper (`deep`, OKLab lightness, at most three); and each
 # slab's face lies on its disc, its thickness running back (slabs). (`face`, `green`, `dark` and `smoke` are round 25's
 # rule, which the parked idents' player still draws.)
-ACRYLIC = dict(paper=dict(face=0.5, edge=0.0, green=0.8, dark=0.04, smoke=0.10, thick=0.05, side=0.10, sideC=0.15,
+# 2026-11-10: the rim lighter than the face (side -0.08, was 0.10 deeper), as the render's polished edge catches the light
+ACRYLIC = dict(paper=dict(face=0.5, edge=0.0, green=0.8, dark=0.04, smoke=0.10, thick=0.05, side=-0.08, sideC=0.10,
                           lead=0.8, ghost=0.6, deep=0.02),
-               night=dict(face=0.5, edge=0.0, green=0.8, dark=0.04, smoke=0.10, thick=0.05, side=0.10, sideC=0.15,
+               night=dict(face=0.5, edge=0.0, green=0.8, dark=0.04, smoke=0.10, thick=0.05, side=-0.08, sideC=0.10,
                           lead=0.8, ghost=0.6, deep=0.02))
 ATMOS = 4                                               # the meridian facing us (round 25: Poison, green, the land); in
                                                         # the acrylic, the backing. (Round 24b filled the ball in its
@@ -324,10 +325,21 @@ def tubes_body(colours, ground='paper', spin=0.0, w=W_TUBE, T=None):
 THICK = ACRYLIC['paper']['thick']
 
 
-def _slab(g, t):
-    """A ring's disc as a slab t thick (round 27k), its thickness shown as it nears edge on: shown r = t - w / 4 thick (w
-    its oval's width across), so its face (a ring like g) moved r / 2 toward us along its normal and its rim (a polygon,
-    on the near side) r wide; r is t edge on and nothing from w = 4t. Returned as (face, rim)."""
+COIN = True                                              # 2026-11-10: every disc a coin at its full thickness (below)
+
+
+def _slab(g, t, coin=None):
+    """A ring's disc as a slab t thick, returned as (face, rim).
+
+    2026-11-10 (the owner, of the flat colour globe beside the render: "the colors lose their coin shape (some of the
+    circles appear to have a sharp edge instead of a flat edge)"): with COIN every disc is a coin at its full thickness
+    t, as the render is: its face moved t / 2 toward us along its normal, its back t / 2 away, the two ovals joined by
+    straight tangent edges, so the band between them (its rim) is the same thickness all round and a disc's end past
+    the globe is squared off, not a point. The rim's part along the near half of the disc's edge (where that edge lies
+    in front of the globe's middle) is `rim`, on the globe's surface and so nearest; the part along the far half is
+    the face's `far`, at the disc's own depth, behind whatever lies in front of it.
+    (Round 27k to 2026-11-10: the thickness showed only as a disc neared edge on, r = t - w / 4 for an oval w across,
+    nothing from w = 4t, so at rest every disc was its bare oval and its ends came to points.)"""
     n = np.asarray(g['n'], float)
     if t <= 0 or g['r'] <= 0:
         return g, Polygon()
@@ -336,13 +348,29 @@ def _slab(g, t):
     if L < 1e-9:                                         # face on
         return g, Polygon()
     P = g['pts']
-    r = t - float(np.ptp(P[:, :2] @ (m[:2] / L))) / 4
+    coin = COIN if coin is None else coin
+    r = t if coin else t - float(np.ptp(P[:, :2] @ (m[:2] / L))) / 4
     if r <= 0:
         return g, Polygon()
     off = r / 2 * m
     face = dict(g, pts=P + off, d=g['d'] + float(n @ off), c=np.asarray(g['c']) + off)
     hull = MultiPoint(np.vstack([face['pts'][:, :2], P[:, :2] - off[:2]])).convex_hull
-    return face, hull.difference(Polygon(face['pts'][:, :2]).buffer(0))
+    band = hull.difference(Polygon(face['pts'][:, :2]).buffer(0))
+    if not coin or abs(m[2]) < 1e-6:
+        return face, band
+    # the disc's plane, z = al x + be y + k: its edge is in front of the globe's middle where z > 0, a half-plane
+    al, be, k = -m[0] / m[2], -m[1] / m[2], float(m @ np.asarray(g['c'])) / m[2]
+    h = math.hypot(al, be)
+    if h < 1e-12:
+        near = band if k > 0 else Polygon()
+    else:
+        ux, uy = al / h, be / h; c0 = -k / h; big = 4.0
+        px, py, tx, ty = ux * c0, uy * c0, -uy, ux
+        near = band.intersection(Polygon([(px + tx * big, py + ty * big), (px - tx * big, py - ty * big),
+                                          (px - tx * big + ux * big, py - ty * big + uy * big),
+                                          (px + tx * big + ux * big, py + ty * big + uy * big)]))
+    face['far'] = band.difference(near)
+    return face, near
 
 
 def facets(spin=0.0, thick=0.0):
@@ -350,8 +378,17 @@ def facets(spin=0.0, thick=0.0):
     depths differ linearly across the screen, so where one is nearer is a half-plane). Round 27k: with `thick`, each
     disc a slab that thick (_slab); the rim a disc nearly edge on shows lies on the globe's surface, so it shows whole
     and hides what lies under it."""
-    rs, rims = zip(*(_slab(g, thick) for g in rings(spin)))
+    rs, rims = zip(*(_slab(g, thick, coin=False) for g in rings(spin)))   # (the one-ink discs: the rim as before)
     E = [Polygon(g['pts'][:, :2]).buffer(0) for g in rs]
+    if COIN and thick > 0:                               # 2026-11-10: each disc's outline a coin's, its ends squared off
+        for i, g0 in enumerate(rings(spin)):
+            n0 = np.asarray(g0['n'], float); m0 = n0 * (1.0 if n0[2] >= 0 else -1.0)
+            if math.hypot(m0[0], m0[1]) < 1e-9:
+                continue
+            o = thick / 2 * m0[:2]
+            E[i] = unary_union([E[i], MultiPoint(np.vstack([g0['pts'][:, :2] + o, g0['pts'][:, :2] - o])).convex_hull
+                                .difference(Polygon(g0['pts'][:, :2] + o).buffer(0)).intersection(
+                                    Polygon(g0['pts'][:, :2]).buffer(thick))])
     out = []
     for i, gi in enumerate(rs):
         vis, ni = E[i], gi['n']
@@ -618,7 +655,8 @@ def slabs(spin=0.0, h=0.025, n=360):
         g, rim = _slab(g0, 2 * h)
         m = g['n'] * (1.0 if g['n'][2] >= 0 else -1.0)
         oval = Polygon(g['pts'][:, :2]).buffer(0)
-        front = unary_union([oval, rim]) if not rim.is_empty else oval
+        far = g.get('far', Polygon())
+        front = unary_union([oval, far] + ([rim] if not rim.is_empty else []))
         if abs(m[2]) < 1e-6:
             out.append(None if front.is_empty else dict(front=front, oval=oval, swept=front, rim=front, al=0.0,
                                                          be=0.0, gf=0.0, gm=0.0, back_off=[0.0, 0.0], edge=True))
@@ -626,7 +664,7 @@ def slabs(spin=0.0, h=0.025, n=360):
         P, off = g['pts'][:, :2], 2 * h * m[:2]
         back = Polygon(P - off).buffer(0)
         K = float(np.dot(m, g['c']))
-        out.append(dict(front=front, oval=oval, swept=unary_union([oval, back]).convex_hull, rim=rim, al=-m[0] / m[2],
+        out.append(dict(front=front, oval=oval, far=far, swept=unary_union([oval, back]).convex_hull, rim=rim, al=-m[0] / m[2],
                         be=-m[1] / m[2], gf=K / m[2], gm=(K - h) / m[2], back_off=(-off).tolist(), edge=False))
     return out
 
@@ -644,7 +682,8 @@ def acrylic_cells(colours, A, spin=0.0):
         if q is None:
             S.append(None); continue
         off = -np.asarray(q['back_off'])                 # the crescent on the side where the slab's side shows
-        S.append(dict(q, cres=q['oval'].difference(affinity.translate(q['oval'], off[0], off[1]))))
+        cres = q['far'] if COIN else q['oval'].difference(affinity.translate(q['oval'], off[0], off[1]))
+        S.append(dict(q, cres=cres))
     lines = []
     for q in S:
         if q is not None:
