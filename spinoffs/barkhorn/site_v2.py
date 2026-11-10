@@ -612,7 +612,7 @@ def pages(web):
                 os.rmdir(d)
         left = [os.path.relpath(f, web.SITE) for f in glob.glob(os.path.join(web.SITE, '**', '*'), recursive=True)]
         bad = [f for f in left if re.search(r'(^press/|img/(?:(?:dome|orb)-|lamps-(?:orbs|domes)|lamp-(?:orb|dome)|hero[.-]|facade|room|macro-|turn-|spin/'
-                                            r'|tt-|ga-|icon-smoke-|lamps-unlit|thumb/lamps-unlit|rc/(?:red|orange|amber|green|blue|violet|ice)-back[.-]|(?:red|orange|amber|green|blue|violet|ice|black)-(?:on|off|studio|back|amp|horn|inside|reel|habitat))|-smoke\.html$)', f)]
+                                            r'|tt-|ga-|icon-smoke-|rc/ice-habitat|rc/(?:red|orange|green|blue|violet|ice)-horn-back|rc/turn-red|lamps-unlit|thumb/lamps-unlit|rc/(?:red|orange|amber|green|blue|violet|ice)-back[.-]|(?:red|orange|amber|green|blue|violet|ice|black)-(?:on|off|studio|back|amp|horn|inside|reel|habitat))|-smoke\.html$)', f)]
         assert not bad, ('site_v2: rc deploys', bad[:12])
 
 
@@ -819,9 +819,10 @@ def apply(web, head, rest):
 # web.RC on (with V2, HOME_V2 and COPY_NEXT): every picture of Tropos is today's speaker or is left out; the night
 # stage and the wall hidden until the new night renders pass; every lit lamp picture pulled (their light was faked);
 # Mantle only in its new design.
-RC_TALL = 'renders/2026-11-04/barkhorn/rollout/A-polished-tallr3/site-front-off-tall-{name}.png'   # the fronts, rig 74f17d7c (2026-11-09 22:23): Ember c4 5aa0943b, Dust c4 0690b93c, Acid c2 b95319d3, Poison c2 766f299d, Ice c3 70e0f9f4, Haze c3 94b4534a, Fog r33-speaker-horn 62bc73a7. Before: tallr2 (failed: a light line on the side), then fix1 (r33-rollout-c3:
+RC_TALL = 'renders/2026-11-04/barkhorn/rollout/A-polished-tallr6/site-front-off-tall-{name}.png'   # the fronts, rig fa7665dc (2026-11-09 23:46): Ember c4 4fcc28f8, Dust c4 5c837147, Acid c2 7d741bd6, Poison c2 e7ca2e71, Ice c3 48dcfd29, Haze c3 817d2b4f, Fog r33-speaker-horn 4e89a834. Before: tallr3 and tallr2 (failed: a light line on the side), then fix1 (r33-rollout-c3:
 # Ember, Dust, Poison, Ice e624e13e; Haze, Fog 3d0b613f; Acid 04d21c5c (on the Acid horn fix). Smoke held.
 RC_KEYS = ['red', 'orange', 'amber', 'green', 'blue', 'violet', 'ice']
+HORN_BACKS = ['amber']   # the re-audit (the coordinator 2026-11-09 23:28): the other six had a camera-hidden lamp in frame
 
 
 NOT_FOUND = """<!doctype html>
@@ -1138,7 +1139,7 @@ def rc_fixes(p, web):
     # no Back view: the backs rig carries two lamps hidden from the camera standing in frame (the audit ac9e5568;
     # the coordinator 2026-11-09 19:16). It comes back when the re-rendered backs pass.
     extra = {k: {} for k in RC_KEYS}
-    for k in RC_KEYS:        # the seven horn-backs: c2 06b829ce (Ember, Dust, Poison), c3 52ad76ba (Ice, Haze, Fog), Acid a1322583
+    for k in HORN_BACKS:     # Acid a1322583 (backrig); Ember, Dust, Poison 06b829ce and Ice, Haze, Fog 52ad76ba pulled (a hidden lamp in frame)
         src = R + ('A-polished-p2-backrig-acid/horn-back-acid.png' if k == 'amber' else f'A-polished-p2/horn-back-{names[k].lower()}.png')
         im = Image.open(os.path.join(web.ROOT, src)).convert('RGB')
         im.save(os.path.join(web.SITE, f'img/rc/{k}-horn-back.webp'), 'WEBP', quality=82)
@@ -1155,6 +1156,8 @@ def rc_fixes(p, web):
     for c in D['clouds']:
         c['views'].update(extra[c['k']])
         c['views'].pop('back', None)
+        if c['k'] not in HORN_BACKS:
+            c['views'].pop('horn-back', None)
     smoke_tag = 'Shown in Smoke, still to come'
     for L in D['lamps'].values():
         L['colours'].pop('black', None)
@@ -1210,9 +1213,8 @@ def rc_waves(p, web):
     ON_HOLD = 'Hemisphere and Core, switched off. Shown in Smoke, a color on hold.'
     # --- the passed habitats (biomes: Ice 0f619953, Dust 26493989), 4:5
     HAB = {'blue': 'renders/2026-11-03/barkhorn/habitats/ice-portrait-1200x1500.jpg',
-           'orange': 'renders/2026-11-03/barkhorn/habitats/dust-portrait-1200x1500-nopanel.jpg',   # r48-biomes 43c91242: no panel
-           'ice': 'renders/2026-11-03/barkhorn/habitats/fog_b-portrait-1200x1500-onesun.jpg'}     # r48-biomes cd5aa4e6: one sun
-    # replaced (the biomes audit, 2026-11-09): Dust 26493989 (a hidden panel), Fog b61474c0 (two suns)
+           'orange': 'renders/2026-11-03/barkhorn/habitats/dust-portrait-1200x1500-nopanel.jpg'}   # r48-biomes 43c91242: no panel
+    # out (the audits, 2026-11-09): Dust 26493989 (a hidden panel); Fog b61474c0 (two suns), then aa1ca856 (a hidden fill lamp)
     HAB_ALT = {'blue': 'Tropos in Ice, out in the snow at dusk', 'orange': 'Tropos in Dust, on rippled sand among desert buttes',
                'ice': 'Tropos in Fog, standing in the grass on a foggy hillside at dawn'}
     for k, src in HAB.items():
@@ -1388,14 +1390,14 @@ def rc3(p, web):
     # --- 4. galleries: each view at its own ratio for Mantle (3:2, no bands); the horn-backs cut to 4:5
     p.sub("stage.style.background = P.id === 'speaker' ? ground(v) : 'transparent';",
           "stage.style.background = P.id === 'speaker' ? ground(v) : 'transparent'; if (P.id === 'turntable') stage.style.setProperty('aspect-ratio', '3 / 2', 'important'); else stage.style.removeProperty('aspect-ratio');")
-    for k in RC_KEYS:
+    for k in HORN_BACKS:
         src = 'renders/2026-11-04/barkhorn/rollout/' + ('A-polished-p2-backrig-acid/horn-back-acid.png' if k == 'amber' else f'A-polished-p2/horn-back-{names[k].lower()}.png')
         im = Image.open(os.path.join(web.ROOT, src)).convert('RGB').crop((270, 0, 990, 900))
         im.save(os.path.join(web.SITE, f'img/rc/{k}-horn-back.webp'), 'WEBP', quality=82)
         im.resize((168, 210)).save(os.path.join(web.SITE, f'img/rc/{k}-horn-back-th.webp'), 'WEBP', quality=80)
     n = p.rest.count('"w":1200,"h":900,"th":"img/rc/')
     p.rest = re.sub(r'("src":"img/rc/[a-z]+-horn-back\.webp","w":)1200,"h":900', r'\g<1>720,"h":900', p.rest)
-    assert n == 7 and '-horn-back.webp","w":720' in p.rest, ('rc3: horn-backs', n)
+    assert n == len(HORN_BACKS) and '-horn-back.webp","w":720' in p.rest, ('rc3: horn-backs', n)
     # --- 5. words that repeat
     p.sub('<div class="wrap hero-cap"><span>Hi-fi and lighting in cast acrylic.</span><i class="render">Render</i></div>',
           '<div class="wrap hero-cap"><i class="render">Render</i></div>')
@@ -1468,8 +1470,9 @@ def rc3(p, web):
 """)
 
 
-TURN = {'red': 'A-polished-p2/turn-ember', 'orange': 'A-polished-p2/turn-dust', 'green': 'A-polished-p2-rc1/turn-poison',
+TURN = {'orange': 'A-polished-p2/turn-dust', 'green': 'A-polished-p2-rc1/turn-poison',
         'blue': 'A-polished-p2-rc1/turn-ice', 'violet': 'A-polished-p2-rc1/turn-haze'}
+# Ember's turn is held whole: frames 00-04 (52ad76ba) had a hidden lamp in frame (the re-audit, 23:28).
 # the turns, passed (the coordinator 2026-11-09 18:51): Ember 00-04 r33-rollout-c3 52ad76ba, 05-23 and Dust c4 0a0a83bd;
 # Acid 00-16 c4 42fa8eee, 17-23 c3 66126d53 (A-polished-p2-rc1); Haze c3 66126d53; Poison, Ice c4 eef18db2.
 # Fog's first turn read as Ice (its pale-blue ground; the RC3.1 review, P3). Its re-render on a neutral ground
@@ -1608,11 +1611,12 @@ def rc_lamps(p, web):
 def rc31(p, web):
     """The RC3.1 review (the coordinator 2026-11-09 20:06, addendum 20:08): the home's Tropos block shows the Ember
     horn-back with the gallery's own words; the color page's block; Fog's coin; Mantle's closing line."""
-    HB = 'The horn from behind: its compression driver, on four bronze posts.'
-    m = re.search(r'<figure class="sound-still"><img [^>]*><figcaption>.*?</figcaption></figure>', p.rest)
+    # the home's Tropos block: its picture held (Ember's horn-back pulled, the re-audit 23:28); the words stay
+    m = re.search(r'<figure class="sound-still"><img [^>]*><figcaption>.*?</figcaption></figure>\s*', p.rest)
     assert m, 'rc31: the sound still'
-    p.rest = (p.rest[:m.start()] + f'<figure class="sound-still"><img src="img/rc/red-horn-back.webp" width="720" height="900" loading="lazy" alt="{HB}">'
-              f'<figcaption>{HB} <i class="render">Render</i></figcaption></figure>' + p.rest[m.end():])
+    p.rest = p.rest[:m.start()] + p.rest[m.end():]
+    p.sub('<div class="wrap sound-grid">', '<div class="wrap sound-grid no-pic">')
+    p.css(".sound-grid.no-pic { grid-template-columns: minmax(0, 1fr) !important }")
     p.sub("document.getElementById('c-in').textContent = `In ${c.name}`;", "document.getElementById('c-in').textContent = '';")
     p.sub("turntable: 'See it beside the speakers: <a href=\"#speakers\">Tropos</a>.',", "turntable: 'Pair it with <a href=\"#speakers\">Tropos</a>.',")
     p.css("""
