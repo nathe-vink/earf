@@ -1,0 +1,16 @@
+Mantle, v3 as signed (render model at 71d3163e), the owner's questions of 2026-11-10. v3_day.py, one batch, 1800 x 1200.
+Tints: the speakers' current cabinet tints (r33-speaker-horn 9097a8dd, barkhorn-cloud.json 'bark' deep after 25 mm; Smoke
+#A7A7A7 after 27.4 mm, 50 % through 20 mm; Fog's #FFFFFF as #FCFCFC, 98 % after 25 mm, so the volume has some absorption).
+Day (mantle-day-<colour>.png): the Ember final's camera, studio and settings, with two changes for all: the side strip OFF
+(narrowed to 0.03 m at the deck's height it still lit the posts' flank, p95 231; off, 26), and the posts satin black.
+Posts (x 545-580, y 700-760): median 15-17, p95 26-42 in all eight (were about 205). mantle-day-ember-black-bearing.png:
+the VARIANT with the bearing's housing, nut and washer satin black; the parts list stays brass.
+Lit (mantle-lit-<colour>-<which>.png), a dim room (the studio lamps at 0.3 %, a 6 W wall wash, the night world at 35):
+the LED strip is the only emitter, at its real power across both faces: signed, the base's loop, 4.4 W; the proposal,
+the edge-lit deck's groove loop (out-strata-v3 as now in the tree, 8a20b821), 6.0 W. No emitting acrylic.
+Audits, all twelve: emitter check 0 (day) or 1, 'strip', the LED (lit); gt_audit 0 px in frame; scene_audit no hidden mesh.
+The brass part between the front posts and the disc under it: both the bearing (housing, nut, disc spring) mirrored in
+the smoked base's glossy top (every camera ray there lands on the base, its mirror ray on the bearing); the bearing itself
+is hidden behind the deck's front edge at this camera height.
+The satin edge does not glow when the light is on: front-edge median 0 in all three lit frames. Signed, the light pools
+under the base and lights the base's edges amber; in the proposal the loop shows as a red line through the top.
