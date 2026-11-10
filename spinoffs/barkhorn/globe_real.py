@@ -86,6 +86,10 @@ TROPOS_CABINET = {'ember': '#CF0913', 'dust': '#FBBD77', 'acid': '#F1EE7F', 'poi
                   'haze': '#9F61E4'}                     # each after 0.025 m
 TROPOS_HORN = {'ember': '#C50206', 'dust': '#B85010', 'acid': '#A39700', 'poison': '#0E6A06', 'ice': '#0A52B8',
                'haze': '#4512D0'}                        # each after 0.010 m
+TROPOS_LOGO = {'ember': '#CF0913', 'dust': '#F78B34', 'acid': '#E4DE3C', 'poison': '#12AA24', 'ice': '#3C91EB',
+               'haze': '#9F61E4'}                        # the owner, 2026-11-10: "not the same acrylic as the speakers but the
+                                                         # same relative color": TROPOS_CABINET with Dust's and Acid's dye taken
+                                                         # through 2x the 25 mm path and Ice's 2.5x, so each keeps its hue
 TROPOS_DEPTH = {'tropos-cabinet': 0.025, 'tropos-horn': 0.010}
 MARK_DEPTH = 0.02                                        # the globe's: a little deeper, so a face holds its colour on paper
 ORDER = [4, 3, 5, 1, 0, 2]                               # which disc is whole: the meridian facing us, then the others in turn
@@ -382,7 +386,8 @@ def _equator_owns(me):
             f.material_index = swap[f.material_index]
 
 
-def stage(bpy, ground, px, e, samples, env='dim', adaptive=0.01, key=2.0, fill=0.0, shine=(1.0, 1.0), bounces=96):
+def stage(bpy, ground, px, e, samples, env='dim', adaptive=0.01, key=2.0, fill=0.0, shine=(1.0, 1.0), bounces=96,
+          key_at=(-40.0, 40.0)):
     """The camera (earth.py's view, orthographic, the frame 2e radii across), the ground as a backdrop of exactly its
     colour, and the studio seen in the acrylic: a soft key above left, the room round it. `shine` (round 28d): the key's
     and the fill's shares in reflections (lights.lamp_shares). The fill, a broad softbox just beside the camera, was
@@ -410,7 +415,7 @@ def stage(bpy, ground, px, e, samples, env='dim', adaptive=0.01, key=2.0, fill=0
                    'grey': {'kind': 'gradient', 'zenith': '#6E6C68', 'horizon': '#8A8884', 'ground': '#3A3835', 'strength': 1.0},
                    'dark': {'kind': 'gradient', 'zenith': '#2A2927', 'horizon': '#33322F', 'ground': '#1E1D1B', 'strength': 1.0}}[env])
     Lt.area(bpy, 'key', {'type': 'area', 'size_m': [3.2, 2.4], 'target': [0, 0, 0], 'irradiance': key, 'color': '#FFF4E6',
-                         'orbit': {'azimuth_deg': -40, 'elevation_deg': 40, 'distance_m': 6.0}, 'specular': shine[0]},
+                         'orbit': {'azimuth_deg': key_at[0], 'elevation_deg': key_at[1], 'distance_m': 6.0}, 'specular': shine[0]},
             Vector((0, 0, 0)))
     if fill:                                             # a broad softbox beside the camera: translucent acrylic shows its
         Lt.area(bpy, 'fill', {'type': 'area', 'size_m': [5.0, 5.0], 'target': [0, 0, 0], 'irradiance': fill,   # colour by front light
@@ -595,13 +600,15 @@ def main():
     ap.add_argument('--vivid', type=float, nargs=2, metavar=('CHROMA', 'LIFT'),
                     help="the hues the body follows, livelier (round 28e): their chroma times CHROMA, their lightness raised by "
                          "LIFT (OKLCh; 1.4 0.05, or the preset's)")
-    ap.add_argument('--hues', default='mark', choices=['mark', 'tropos-cabinet', 'tropos-horn'],
+    ap.add_argument('--hues', default='mark', choices=['mark', 'tropos-cabinet', 'tropos-horn', 'tropos-logo'],
                     help="translucent: the hues the body follows: the mark's (with --vivid), or the speakers' own as they are "
                          "today (2026-11-10: TROPOS_CABINET, the colour through a cabinet, or TROPOS_HORN), with no lift")
     ap.add_argument('--crossings', default='equator', choices=['equator', 'fused'],
                     help="the equator's edge unbroken where it meets the meridians (round 28d), or both acrylics there (round 28)")
     ap.add_argument('--shine', type=float, nargs=2, default=(0.4, 0.0), metavar=('KEY', 'FILL'),
                     help="the key's and the fill's shares in reflections (round 28d; until then 1 1)")
+    ap.add_argument('--key-at', type=float, nargs=2, default=(-40.0, 40.0), metavar=('AZ', 'EL'),
+                    help="the key's azimuth and elevation in degrees (-40 40)")
     ap.add_argument('--bounces', type=int, default=96, help='how far light runs along a sheet inside it (glossy and transmission bounces)')
     ap.add_argument('--neon', type=float, nargs=2, metavar=('RIM', 'FACE'),
                     help="fluorescent acrylic for dark grounds (round 28c): the rims and the faces give off light at these "
@@ -648,10 +655,10 @@ def main():
         depth = a.depth
     root = build(bpy, tints, not a.slots, depth, a.look, a.scatter, a.clear, tuple(a.neon), a.crossings, a.milk,
                  _body(a.body, _hues(*a.vivid) if a.hues == 'mark' else
-                       dict(TROPOS_CABINET if a.hues == 'tropos-cabinet' else TROPOS_HORN)))
+                       dict({'tropos-cabinet': TROPOS_CABINET, 'tropos-horn': TROPOS_HORN, 'tropos-logo': TROPOS_LOGO}[a.hues])))
     if a.still:
         stage(bpy, a.ground, a.px or 1024, 1 + E.W_LINE / 2, a.samples or 128, a.env, a.adaptive or 0.01, a.key, a.fill,
-              tuple(a.shine), a.bounces)
+              tuple(a.shine), a.bounces, tuple(a.key_at))
         turn(root, a.spin)
         bpy.context.scene.render.filepath = os.path.abspath(a.still)
         bpy.ops.render.render(write_still=True)
