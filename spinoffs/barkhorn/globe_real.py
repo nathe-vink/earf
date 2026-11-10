@@ -603,6 +603,8 @@ def main():
     ap.add_argument('--hues', default='mark', choices=['mark', 'tropos-cabinet', 'tropos-horn', 'tropos-logo'],
                     help="translucent: the hues the body follows: the mark's (with --vivid), or the speakers' own as they are "
                          "today (2026-11-10: TROPOS_CABINET, the colour through a cabinet, or TROPOS_HORN), with no lift")
+    ap.add_argument('--hues-file', help="translucent: each disc's hue from this JSON, {name: hex} or {name: [hex, depth]}, "
+                         "depth the face's exponent (0.65 by default; higher, a denser disc), as globe_match.py writes")
     ap.add_argument('--crossings', default='equator', choices=['equator', 'fused'],
                     help="the equator's edge unbroken where it meets the meridians (round 28d), or both acrylics there (round 28)")
     ap.add_argument('--shine', type=float, nargs=2, default=(0.4, 0.0), metavar=('KEY', 'FILL'),
@@ -653,8 +655,12 @@ def main():
         base = HORN if a.tint.startswith('horn') else ACRYLIC
         tints = base if a.tint in ('cabinet', 'horn') else {k: glow(v, passed=PASS.get(k, '')) for k, v in base.items()}
         depth = a.depth
+    if a.hues_file:                                     # globe_match.py's hues: through-deep, each at its own depth
+        import json
+        hf = {k: (v if isinstance(v, list) else [v, 0.65]) for k, v in json.load(open(a.hues_file)).items()}
+        body = {k: (_root_hex(h, d), h) for k, (h, d) in hf.items()}
     root = build(bpy, tints, not a.slots, depth, a.look, a.scatter, a.clear, tuple(a.neon), a.crossings, a.milk,
-                 _body(a.body, _hues(*a.vivid) if a.hues == 'mark' else
+                 body if a.hues_file else _body(a.body, _hues(*a.vivid) if a.hues == 'mark' else
                        dict({'tropos-cabinet': TROPOS_CABINET, 'tropos-horn': TROPOS_HORN, 'tropos-logo': TROPOS_LOGO}[a.hues])))
     if a.still:
         stage(bpy, a.ground, a.px or 1024, 1 + E.W_LINE / 2, a.samples or 128, a.env, a.adaptive or 0.01, a.key, a.fill,
