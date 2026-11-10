@@ -37,6 +37,10 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    the rest as the cabinets; the brand lane renders it once (A2). Still open: Hemisphere's table light, the Mantle's lighter red and
    posts, the chips. TOKEN ECONOMY from 02:10 (the owner near his weekly limit): no critic panels or research workflows; the coordinator
    checks each picture once; a lane renders only the owner's pick, once; habitats and the Book wait; everything he needs goes in chat.
+   OWNER DECISIONS 10 Nov ~02:50 (in chat): HEMISPHERE = option 3 with the bigger ring, about 1,000 lm on the same driver, about 200 lux
+   under the lamp ("your pick I guess"); a heat test needed. MANTLE = stock Ember, SATIN edge as signed ("I think the satin edge will
+   help with light dispersion"), posts BLACK; the custom pour dropped; its light still open. SAMPLES: yes (chips and thick off-cuts,
+   ~$150-200; the list goes to him for the purchase). Lamps and Mantle lanes briefed: CAD/BOM plus five lamp proofs and one Mantle final.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
