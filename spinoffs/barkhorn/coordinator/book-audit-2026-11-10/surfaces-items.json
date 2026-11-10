@@ -1,0 +1,878 @@
+{
+ "surface": "Stakeholder-facing surfaces other than the Brand Book: the site preview origin/r49-site-rc@738691f0 (spinoffs/barkhorn/site), the live site origin/main@856f80d7, the brand lane origin/r47-brand@069e88f1 (press, launch, brandbook/launch, scenes, proposals, parked packs), the investor deck 3sihYaT4ckNTF6WE7SWR7x version 1793686214-3dc9, the og images and the READMEs. Full table: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/book-current/audit-surfaces/items.json",
+ "items": [
+  {
+   "where": "SITE PREVIEW origin/r49-site-rc@738691f0 spinoffs/barkhorn/site/index.html:989-992, 994; CSS 214-216 (same body, +6 lines, on tropos.html, lighting.html, mantle.html, contact.html, colors/*.html, tropos/*.html)",
+   "text": "The \"Cover off / Cover on\" toggle above the seven Tropos cards (/tropos). The cards hold only the cover-off picture (img.off); pressing \"Cover on\" removes .show-off, which sets .photo .off to opacity 0, so all seven card pictures go blank.",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "Leftover from the covers era: no cover-on picture is on the approved list (coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L65 lists fronts only), and whether Tropos keeps a cloth cover is still open (Book v23 L672 \"Whether Tropos keeps a cloth cover.\"). Owner, 2026-10-31T20:32:59Z: \"I also prefer the product images without the cover on I think.\" A visible control that blanks the page is also a defect.",
+   "rewrite": "Remove the Cover off / Cover on toggle; the cards stay cover off. Bring it back only if the owner keeps the cover and its pictures pass."
+  },
+  {
+   "where": "SITE PREVIEW origin/r49-site-rc@738691f0 spinoffs/barkhorn/site/index.html:1296 (PRODUCTS speaker facts, shown on every /tropos/<color> page) (same body, +6 lines, on tropos.html, lighting.html, mantle.html, contact.html, colors/*.html, tropos/*.html)",
+   "text": "Facts row: Cover, 'A cloth disc, optional (to follow)'",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "An open question presented on a spec list (Book v23 L672 lists the cover as still open). \"(to follow)\" is status, not a fact of the product.",
+   "rewrite": "Drop the Cover row until the owner decides; if he keeps it: \"Cover: a cloth disc, optional\"."
+  },
+  {
+   "where": "SITE PREVIEW origin/r49-site-rc@738691f0 spinoffs/barkhorn/site/index.html:999 (spec \"Horn\") and 1265 (horn-back caption, shown on the Ember, Acid, Poison and Haze pages) (same body, +6 lines, on tropos.html, lighting.html, mantle.html, contact.html, colors/*.html, tropos/*.html)",
+   "text": "\"A smooth horn thermoformed from 10 mm cast acrylic in the speaker's own color, polished inside and out, on four bronze posts\" / \"The horn from behind: its compression driver, on four bronze posts.\"",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current as drawn, but under question: owner, 2026-11-10T00:28:39Z: \"should the rods between the horn and loudspeaker also be black. What made them brass?\"; coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L20-21 \"nothing changes until he answers\". Watch item, not baggage.",
+   "rewrite": "If the owner picks black: \"...polished inside and out, on four black posts\" and \"...its compression driver, on four black posts.\""
+  },
+  {
+   "where": "SITE PREVIEW origin/r49-site-rc@738691f0 spinoffs/barkhorn/site/index.html:1081 (D.tt.facts \"Cartridge\", shown on every #mantle-<color> page) (same body, +6 lines, on tropos.html, lighting.html, mantle.html, contact.html, colors/*.html, tropos/*.html)",
+   "text": "Cartridge: 'A moving-magnet cartridge, to be chosen'",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Open question on a spec list (\"to be chosen\"); the Book v23 L636 carries the same choice as \"(still open)\". Internal status, not a product fact.",
+   "rewrite": "Cartridge: \"Moving magnet\" (and name the model once the owner picks it)."
+  },
+  {
+   "where": "SITE PREVIEW origin/r49-site-rc@738691f0 spinoffs/barkhorn/site/index.html:1008 (Lighting lede) and 1081 (D.lamps.dome facts \"Shade\", \"Light\") (same body, +6 lines, on tropos.html, lighting.html, mantle.html, contact.html, colors/*.html, tropos/*.html)",
+   "text": "\"each with a white opal diffuser inside its color, so the color glows and the source never shows\" / Hemisphere: \"its source shielded inside the hub\"",
+   "visible": true,
+   "verdict": "KEEP_FORWARD",
+   "why": "The glowing shade is the owner's set direction, 2026-11-10T00:28:39Z: \"For hemisphere, it should work like core cut in half. That is, the outer acrylic color should dictate the color of the light that emits, with the exception that downward cast light will be the color of the bulb.\" As drawn it does not glow (coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L17-21, L88-90). Re-check the Light line when the redesign lands.",
+   "rewrite": "After the redesign: Light, \"2700 K, CRI 90; the shade glows in its color, the light below is the bulb's own white\"."
+  },
+  {
+   "where": "SITE PREVIEW origin/r49-site-rc@738691f0 spinoffs/barkhorn/site/index.html:925-931 (opening film: img/globe-turn.webm/.mp4, img/globe-turn-night.*, base64 posters L929), CSS 135-138 + 934 (header globe: base64 still, img/globe-spin-light.webp/.avif); 13 (apple-touch-icon.png, 17 Oct render of the same globe); 404.html:27, 30",
+   "text": "The turning acrylic-globe film that opens the first visit (day and night versions) and the turning globe in every page header.",
+   "visible": true,
+   "verdict": "FIX_UNAPPROVED_PICTURE",
+   "why": "These are the brand lane's globe_real.py renders (site img/globe-turn.mp4 is byte-identical in size, 165,533 B, to r47-brand brand/site/globe-turn.mp4). coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L126-129: they \"fail on three counts (10 Nov 01:03): the key's reflection cut to 40 %, the fill hidden from reflections (diffuse-only), and on night self-emitting acrylic ... They leave the restructured Book (the flat marks stand in) until re-rendered honestly.\" Not on the list; the list rules every public asset (L6).",
+   "rewrite": "Header: the flat globe drawing (as favicon.svg); drop the opening film until an honest re-render passes the gate."
+  },
+  {
+   "where": "SITE PREVIEW origin/r49-site-rc@738691f0 spinoffs/barkhorn/site/img/coins-light.jpg via CSS index.html:156 (\".coin-dot ... 800% 100%\"), used by every color dot (same body, +6 lines, on tropos.html, lighting.html, mantle.html, contact.html, colors/*.html, tropos/*.html)",
+   "text": "The color-dot sprite: eight rendered EARFcoin blanks (site commit 65a05026, 2026-10-20); the site shows cells 0-6, the eighth cell is Smoke.",
+   "visible": true,
+   "verdict": "FIX_UNAPPROVED_PICTURE",
+   "why": "A render not on the approved list, and it carries a Smoke picture: coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L152 \"Every picture in Smoke | Smoke is held\". The 800% sizing keeps the eight-color layout in the CSS.",
+   "rewrite": "Flat dots in the Book's \"Mark\" hexes, or seven re-cut coins after a gate; CSS to 700%."
+  },
+  {
+   "where": "SITE PREVIEW origin/r49-site-rc@738691f0 spinoffs/barkhorn/site/img/rc/*-hero/-card/-tall/-thumb.webp, og-*.jpg (built 1f60d795, 10 Nov 00:03); *-horn-back (red, amber, green, violet); turn-*.webp; plate.webp; blue-habitat.webp",
+   "text": "Every product picture on the preview: the seven tallr6 fronts, the Ember, Acid, Poison and Haze horn-backs, the turning views, the amp plate, and Ice in the snow.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "All on the approved list: coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L65 (tallr6 fronts, PASSED 10 Nov 00:15-00:20), L66-68 (turns, horn-backs), L70 (amp plate), L80 (Ice habitat). Mantle's pulled picture is already out (r49 8b71c329).",
+   "rewrite": ""
+  },
+  {
+   "where": "SITE PREVIEW origin/r49-site-rc@738691f0 spinoffs/barkhorn/site/index.html:956 (Ice band) and 1081 (blue hab_cap/hab_alt) (same body, +6 lines, on tropos.html, lighting.html, mantle.html, contact.html, colors/*.html, tropos/*.html)",
+   "text": "\"Ice. Glacier blue, and in no hurry.\" / \"Out in the snow at dusk.\" / alt \"Tropos in Ice, out in the snow at dusk\"",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Approved picture (coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L80) with its own caption.",
+   "rewrite": ""
+  },
+  {
+   "where": "SITE PREVIEW origin/r49-site-rc@738691f0 spinoffs/barkhorn/site/index.html:964-970 (\"Drawn to be made.\") (same body, +6 lines, on tropos.html, lighting.html, mantle.html, contact.html, colors/*.html, tropos/*.html)",
+   "text": "\"Drawn. Every part of Tropos has its own drawing... / Next, the first pair. Built to the drawings... / Then, measured. In a room, by ear and by microphone. The lamps and Mantle come next, the same way.\"",
+   "visible": true,
+   "verdict": "KEEP_FORWARD",
+   "why": "The path the owner funded: 2026-11-01T12:11:46Z \"Budget: keep $50,000, first pair in stocked gray\" and 2026-11-01T22:55:41Z \"Budget: raise to about $55,000\".",
+   "rewrite": ""
+  },
+  {
+   "where": "SITE PREVIEW origin/r49-site-rc@738691f0 spinoffs/barkhorn/site/index.html:6-7, 16-17 and the 18 page heads (meta description / og:description)",
+   "text": "\"Horn loudspeakers, lamps and a turntable in tinted cast acrylic, in seven colors from Ember to Fog. In development at EARF, not yet for sale.\" (and per-page variants)",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Seven colors, American spelling, plain status (Book v23 L526 \"Plain about the unfinished\").",
+   "rewrite": ""
+  },
+  {
+   "where": "SITE PREVIEW origin/r49-site-rc@738691f0 spinoffs/barkhorn/site/s/*.html (35 share cards: color-, speaker-, core-, hemisphere-, mantle-<color>)",
+   "text": "Share-card titles and descriptions, e.g. \"Core in Ice \u00b7 EARF\" / \"A ball of tinted acrylic sitting low in a black acrylic base. No cord: it goes where the conversation is. Table lamp in Ice. In development, not yet for sale.\"",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "No baggage in the words; Core's line matches Book v23 L372/L635. Note: the 21 Core, Hemisphere and Mantle cards (and /lighting, /mantle, /contact) use og-home.jpg, \"Tropos in seven colors\", because no lamp or Mantle picture is approved yet (coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L89, L134).",
+   "rewrite": ""
+  },
+  {
+   "where": "SITE PREVIEW origin/r49-site-rc@738691f0 spinoffs/barkhorn/site/404.html:3, 30-31",
+   "text": "\"Nothing here.\" with links to Tropos, Lighting, Mantle, Contact.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Clean copy. Its header globe is the base64 still of the globe render flagged above.",
+   "rewrite": ""
+  },
+  {
+   "where": "Cross-surface: Poison (site index.html:946, 994, 1081; s/*-poison.html; img/icon-poison-light.webp skull; press, Book)",
+   "text": "The tint name \"Poison\" and its line \"Bottle green. Keep out of reach.\"",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current name, but under review. Owner, 2026-11-10T00:17:42Z: \"I like the poison name but maybe we should change it to something else that's green, unless we can really nail the biome.\" Watch item for every surface.",
+   "rewrite": ""
+  },
+  {
+   "where": "SITE PREVIEW origin/r49-site-rc@738691f0 spinoffs/barkhorn/site/index.html:1437-1445 (same body, +6 lines, on tropos.html, lighting.html, mantle.html, contact.html, colors/*.html, tropos/*.html)",
+   "text": "// the company a color keeps, by the painter's wheel of six (round 25's idea, made the shop's in round 34): ... Fog and Smoke have no hue: each is the other's complement ... (Smoke: Haze, Ember); HUE6 keyed red/orange/amber/green/blue/violet; relations() special-cases Smoke",
+   "visible": false,
+   "verdict": "ARCHIVE_HISTORY",
+   "why": "Round numbers and the held eighth color in public page source (coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L152 Smoke held). The function only feeds company(), which is never called.",
+   "rewrite": "// the company a color keeps: its complement and its two neighbors; Fog, with no hue, sits with the cool tints"
+  },
+  {
+   "where": "SITE PREVIEW origin/r49-site-rc@738691f0 spinoffs/barkhorn/site/index.html:1469-1483 (same body, +6 lines, on tropos.html, lighting.html, mantle.html, contact.html, colors/*.html, tropos/*.html)",
+   "text": "PAIR lines incl. 'black|ice': 'Clear and smoked: the same acrylic, light and dark.' and the comment \"(the critics: one sentence on every page read as a template)\"; function company()",
+   "visible": false,
+   "verdict": "ARCHIVE_HISTORY",
+   "why": "Dead code (company() has no caller; grep shows only its definition at L1472) that keeps a Smoke pairing and the critics' process note in the source.",
+   "rewrite": "Delete PAIR and company() (or drop the black|ice line and the comment)."
+  },
+  {
+   "where": "SITE PREVIEW origin/r49-site-rc@738691f0 spinoffs/barkhorn/site/index.html:1081 (const D) (same body, +6 lines, on tropos.html, lighting.html, mantle.html, contact.html, colors/*.html, tropos/*.html)",
+   "text": "Data blob: list key \"clouds\"; color keys red/orange/amber/green/blue/violet/ice (Fog keyed \"ice\"); lamps keyed \"dome\" and \"orb\"; per-color \"cover\" (Oxblood, Rust, Ochre, Bottle green, Deep blue, Deep violet, White); per-color \"place\" (Ember \"on a lava field...\", Dust \"on rippled sand in the Southwest...\", Acid \"in acid rain on black lava\", Poison \"on a redwood forest floor, among death caps and a deer's bones\", Haze, Fog); \"view3d\":{}, \"campaign\":[]",
+   "visible": false,
+   "verdict": "ARCHIVE_HISTORY",
+   "why": "Old names in public source: the \"Cloud\" line of rounds 10-19 (spinoffs/barkhorn/README.md L14-16), the dome/orb product names (renamed in round 35, per index.html:1508), the pre-name color keys. The \"place\" strings describe habitats that are pulled, held or unbuilt (coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L80-85: only Ice approved; Dust pulled 10 Nov 00:05, Fog 9 Nov 23:40, Acid held, Ember and Haze not started; Poison per owner 00:17 \"we still haven't nailed that biome\"). \"place\" is never read by the script.",
+   "rewrite": "Drop \"place\", \"cover\", \"view3d\", \"campaign\"; rename keys to ember...fog / hemisphere / core on the next build."
+  },
+  {
+   "where": "SITE PREVIEW origin/r49-site-rc@738691f0 spinoffs/barkhorn/site/image URLs img/rc/red-*, orange-*, amber-*, green-*, blue-*, violet-*, ice-*; og-red/orange/amber/green/blue/violet/ice.jpg",
+   "text": "Public file names use the old color names; Fog's files are \"ice-*\" and Ice's are \"blue-*\" (e.g. og:image for /colors/fog is og-ice.jpg).",
+   "visible": false,
+   "verdict": "ARCHIVE_HISTORY",
+   "why": "Visible to anyone who opens an image or reads a share card's og:image URL; confusing (Fog served as \"ice\"). Pre-name history.",
+   "rewrite": "Rename to ember, dust, acid, poison, ice, haze, fog on the next build."
+  },
+  {
+   "where": "SITE PREVIEW origin/r49-site-rc@738691f0 spinoffs/barkhorn/site/index.html:28, 38, 44, 1506-1510, 1515, 1532-1538 (same body, +6 lines, on tropos.html, lighting.html, mantle.html, contact.html, colors/*.html, tropos/*.html)",
+   "text": "Legacy routes and comments: \"-smoke\" redirect with \"// Smoke: not a current color\"; old #atmosphere, #dome-, #orb-, #turntable- addresses (\"round 35's names: the old #dome-, #orb- and #turntable- addresses are rewritten\"); \"// the British addresses (before 2026-10-31) still answer\" incl. journal-eight-colours",
+   "visible": false,
+   "verdict": "ARCHIVE_HISTORY",
+   "why": "Names and decisions from earlier rounds (Atmosphere, dome, orb, Smoke, British spelling, the eight-colors journal) narrated in public source. The redirects may stay if old links exist; the narration should not.",
+   "rewrite": "// legacy addresses forward to their current pages"
+  },
+  {
+   "where": "SITE PREVIEW origin/r49-site-rc@738691f0 spinoffs/barkhorn/site/index.html JS comments 34, 1084, 1183, 1253, 1344, 1547, 1651, 1660; CSS comments 373-374, 550, 562, 624, 703, 728, 743, 755, 758, 812, 828, 833, 841, 849, 894, 920 (same body, +6 lines, on tropos.html, lighting.html, mantle.html, contact.html, colors/*.html, tropos/*.html)",
+   "text": "e.g. \"round 47: the view's first picture...\", \"a product's page (round 34, the shop)\", \"round 48 (V2): the night stage, to the night spec (r46-owner-notes 65ec7c5f, SITE LANE)\", \"a plain cross-fade between colors (the coordinator, 2026-11-04)\", \"the RC review, wave 1\", \"RC3\", \"RC3.1\", \"(five names and the mark wrapped the header onto two lines at 390)\"",
+   "visible": false,
+   "verdict": "ARCHIVE_HISTORY",
+   "why": "Round, release-candidate, branch, commit and coordinator history in public page source: internal process by the definition.",
+   "rewrite": "Strip to plain descriptive comments (e.g. \"/* the hero */\") or remove."
+  },
+  {
+   "where": "SITE PREVIEW origin/r49-site-rc@738691f0 spinoffs/barkhorn/site/index.html:1255 (same body, +6 lines, on tropos.html, lighting.html, mantle.html, contact.html, colors/*.html, tropos/*.html)",
+   "text": "// cover off before cover on (the owner, 2026-10-31: \"I prefer the product images without the cover on\")",
+   "visible": false,
+   "verdict": "ARCHIVE_HISTORY",
+   "why": "Decision history, with the owner's own words, in public source. Transcript 2026-10-31T20:32:59Z (queued): \"I also prefer the product images without the cover on I think.\"",
+   "rewrite": "Delete the comment."
+  },
+  {
+   "where": "SITE PREVIEW origin/r49-site-rc@738691f0 spinoffs/barkhorn/site/index.html:1091-1151, CSS 271-336, 1649 (lit-from-below run); 1152-1164 (closer, \"% 8\"); 1165-1174 (habitat strip); 1192-1221 (#horns); 1235-1251 (press copy, waitlist \"You're on the list...\"); 1513, 1547-1554 (press, journal, privacy); 1420-1421 (v3sync/v3close); 1285-1290 (\"CAMPAIGN in web.py\"); 1651-1657 (.sound-turn); CSS .draft 127-130, .eight/.tt-eight/.eight-render/.snap-eight 377-400, 786-787, 826, .waitlist 678-684 (same body, +6 lines, on tropos.html, lighting.html, mantle.html, contact.html, colors/*.html, tropos/*.html)",
+   "text": "Dead code for retired features: the uplit \"lit from below\" band, an eight-color picker, the habitats strip, the turning horns, the press page, a waitlist, a journal, a 3D view, a draft banner, eight-in-a-row layouts.",
+   "visible": false,
+   "verdict": "ARCHIVE_HISTORY",
+   "why": "None of these elements exist in the markup, but the source still describes them. The uplight is a rejected direction (owner 2026-11-03T15:11:16Z: \"No light\"); \"% 8\" and .eight are the Smoke-era eight (coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L152).",
+   "rewrite": "Delete the dead blocks."
+  },
+  {
+   "where": "SITE PREVIEW origin/r49-site-rc@738691f0 spinoffs/barkhorn/site/index.html:1256-1284 (SPEAKER_VIEWS, LAMP_VIEWS, TT_VIEWS rows with no picture) (same body, +6 lines, on tropos.html, lighting.html, mantle.html, contact.html, colors/*.html, tropos/*.html)",
+   "text": "Unused captions: 'With its cover on, in ${cover}.'; '${name} at night, before a concrete wall.'; 'Eight Hemispheres hung in a row, lit, one in each color.'; 'Eight Core lamps in a row, lit, in spectrum order.'; 'Hemisphere lit, its ${name} shade glowing beneath a black hub.'; 'Core lit in ${name}, sitting low in its black acrylic base.'; '${D.tt.name}, shown in Ember. ${c.name} to follow.'; 'From behind: the name cut into the back...'",
+   "visible": false,
+   "verdict": "ARCHIVE_HISTORY",
+   "why": "Never shown (no such views in the data), but readable in source: \"Eight...\" is the Smoke era; lit lamps and cover-on views have no approved pictures (coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L89, L146).",
+   "rewrite": "Delete the unused rows; restore each, in seven, when its picture passes."
+  },
+  {
+   "where": "SITE PREVIEW origin/r49-site-rc@738691f0 spinoffs/barkhorn/site/index.html:1317, 1410, 1503, 1555 (same body, +6 lines, on tropos.html, lighting.html, mantle.html, contact.html, colors/*.html, tropos/*.html)",
+   "text": "\"// the bright studio won\", \"/* the pairings wait for pictures in the colors */\", \"/* the pairings wait for pictures */\", \"// Mantle's own addresses, before its page exists\"",
+   "visible": false,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Process and status notes in public source (the last is also stale: mantle.html exists).",
+   "rewrite": "Delete."
+  },
+  {
+   "where": "SITE PREVIEW origin/r49-site-rc@738691f0 spinoffs/barkhorn/site/index.html:1484 and identifiers colourMain, .colour-head, .light-colour (same body, +6 lines, on tropos.html, lighting.html, mantle.html, contact.html, colors/*.html, tropos/*.html)",
+   "text": "\"// a color's page: everything made in it, then its complement and its neighbours\"",
+   "visible": false,
+   "verdict": "ARCHIVE_HISTORY",
+   "why": "British spelling in source; owner's rule, 2026-10-31T19:45:22Z: \"Also it's color im not british\".",
+   "rewrite": "\"neighbors\"; rename the identifiers when convenient."
+  },
+  {
+   "where": "SITE PREVIEW origin/r49-site-rc@738691f0 spinoffs/barkhorn/site/vercel.json",
+   "text": "redirects \"/s/colour-:name\" and \"/s/journal-eight-colours\" -> \"/s/journal-eight-colors\"; git.deploymentEnabled \"r31-*\", \"r32-*\"",
+   "visible": false,
+   "verdict": "ARCHIVE_HISTORY",
+   "why": "Config only (not served as a page), but it keeps the eight-colors journal and British addresses alive; the journal target no longer exists.",
+   "rewrite": "Drop the journal redirect; keep colour->color only if old links exist."
+  },
+  {
+   "where": "SITE PREVIEW origin/r49-site-rc@738691f0 spinoffs/barkhorn/site/favicon.svg <title> and aria-label",
+   "text": "\"EARF globe, black, up to 32 px\"",
+   "visible": false,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "A production note in the file's title (shows as a tooltip when the file is opened).",
+   "rewrite": "\"EARF\""
+  },
+  {
+   "where": "LIVE SITE origin/main@856f80d7 (2026-10-29) spinoffs/barkhorn/site/index.html:6-7, 17-19",
+   "text": "Title \"EARF \u00b7 Tropos\"; description \"Horn loudspeakers, lamps and a record player cast in tinted acrylic, in eight colours from Ember to Smoke.\"; og:image img/hero-1200.jpg (the uplit eight with Smoke).",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "Production still shows the pre-decision brand. Smoke is held (coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L152; Book v23 L324); British spelling (owner 2026-10-31T19:45:22Z: \"it's color im not british\"); the share picture is not on the approved list (L6). The RC fixes all of it once promoted.",
+   "rewrite": "Ship the RC: \"EARF \u00b7 A world of sound, in color.\" / \"...in seven colors from Ember to Fog...\" / og-home.jpg."
+  },
+  {
+   "where": "LIVE SITE origin/main@856f80d7 (2026-10-29) spinoffs/barkhorn/site/index.html:584-596",
+   "text": "Hero \"Something in the air.\" over the eight; \"Tropos is a horn loudspeaker cast in tinted acrylic, in eight colours from Ember to Smoke.\"; \"See the colours\"; alt \"...then the clear Fog and the smoked Smoke...\"",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "Retired tagline: owner 2026-10-31T19:40:04Z \"\"Something in the air\" is a lame tagline\"; 2026-11-02T15:48:15Z \"Tagline: A world of sound, in color.\"; Book v23 L521 retires it. Eight/Smoke and British spelling as above.",
+   "rewrite": "RC hero: \"A world of sound, in color.\" with the seven tallr6 fronts."
+  },
+  {
+   "where": "LIVE SITE origin/main@856f80d7 (2026-10-29) spinoffs/barkhorn/site/index.html:600-606",
+   "text": "\"Mantle A record player in the same eight colours, lit from underneath.\"; \"By colour Eight colours, every line.\"",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "Eight colors; lit Mantle base (the signed Mantle is Strata Float v3 and \"Its light is open\", coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L14-16; owner 2026-11-03T05:11:20Z on its underglow).",
+   "rewrite": "\"Mantle, a turntable in the speakers' acrylic.\" / \"Seven colors, every line.\""
+  },
+  {
+   "where": "LIVE SITE origin/main@856f80d7 (2026-10-29) spinoffs/barkhorn/site/index.html:608-620",
+   "text": "\"Lit from below. Put a light under it. Cast acrylic carries light to its edges, so a lamp underneath fills the whole cabinet with colour.\" with eight uplit pictures and the uplit wall.",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "Rejected direction: owner 2026-11-03T15:11:16Z \"No light\"; coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L10 \"Tropos: locked (base A, no light...)\". Pictures not approved (L6).",
+   "rewrite": "Delete the band."
+  },
+  {
+   "where": "LIVE SITE origin/main@856f80d7 (2026-10-29) spinoffs/barkhorn/site/index.html:622-632",
+   "text": "\"In their element / Each colour, where it began.\" (eight habitats incl. Smoke); \"At home A pair in Poison... Covers on, by a tall window. Each stands 1293 mm tall\".",
+   "visible": true,
+   "verdict": "FIX_UNAPPROVED_PICTURE",
+   "why": "Only Ice's habitat is approved (coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L80); Dust and Fog pulled (L135-136); covers on contradicts the owner (2026-10-31T20:32:59Z); 1293 mm superseded by 1295 mm (RC index.html:999).",
+   "rewrite": "RC Ice band only."
+  },
+  {
+   "where": "LIVE SITE origin/main@856f80d7 (2026-10-29) spinoffs/barkhorn/site/index.html:662-674",
+   "text": "\"Tropos Eight things in the air.\"; \"...20 mm thick and tinted all the way through.\"; Cover on toggle with cloth-cover colors; \"Tropos 08 Smoke Smoked glass, for after dark.\"; \"In the studio Cast in colour, all the way through.\"",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "Owner 2026-10-31T19:45:22Z: \"Color all the way through is dumb.\"; \"Eight things in the air\" retired (Book v23 L521); Smoke held; cover open (Book v23 L672).",
+   "rewrite": "RC: \"Seven colors, Ember to Fog. Each cabinet is 20 mm cast acrylic, tinted through.\""
+  },
+  {
+   "where": "LIVE SITE origin/main@856f80d7 (2026-10-29) spinoffs/barkhorn/site/index.html:683-694",
+   "text": "\"The horn The oldest amplifier is a shape.\"; particulars \"Height 1293 mm Width 625 mm at the horn... Depth 423 mm... About 72 kg; 62 kg with the horn lifted off\"; \"microfibre\"",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "Owner 2026-11-03T05:11:20Z: \"The headline about the oldest amplifier being a shape is silly.\"; figures superseded (RC index.html:999: 1295 mm, 560 mm flush, 428 mm, about 73 kg / 64 kg); British spelling.",
+   "rewrite": "RC particulars."
+  },
+  {
+   "where": "LIVE SITE origin/main@856f80d7 (2026-10-29) spinoffs/barkhorn/site/index.html:701-716",
+   "text": "Lighting \"The same eight, lit from within.\"; Hemisphere \"Hung low over the bar.\"; Core \"Plugged in, it stays put; unplugged, it goes where the conversation is.\"; \"Off, in Smoke. Plugged in or not.\"; Mantle \"A record player... floats 40 mm over a base that glows at its edge. The motor stands apart in a pod of its own\"; \"A record player that floats on its own light.\"; pictures of lit lamps, the eight, Mantle in Fog \"its base glowing\", Mantle in Smoke.",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "Corded Core retired (owner 2026-10-31T20:33:50Z: \"the orb definitely looked better without the cord\"); Smoke held; the bar is a proposal (Book v23 L676); lit Mantle base unsigned (coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L14-16); no lamp or Mantle picture is approved (L89, L134).",
+   "rewrite": "RC lighting and Mantle pages (words only until pictures pass)."
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/press/out/earf-press-kit.pdf (5 pp.), earf-company.pdf, earf-tropos.pdf, earf-hemisphere.pdf, earf-core.pdf, earf-mantle.pdf (built 60764d2a, 9 Nov 21:13); press/make_sheets.py",
+   "text": "Every page header \"PRESS \u00b7 FACT SHEET \u00b7 NOT FOR RELEASE\"; company sheet \"FOUNDER [FOUNDER]\".",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Status markings and a placeholder printed on the stakeholder document itself (press README L3 \"Not for release until the owner says so\"). Stakeholder-facing on release; must be cleaned then.",
+   "rewrite": "Header \"PRESS \u00b7 FACT SHEET\"; fill the founder line or drop it."
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/press/out/earf-press-kit.pdf p.1 + earf-company.pdf (COLORS); press/company.md:13; press/make_sheets.py:31, 100",
+   "text": "\"01 Ember \u00b7 02 Dust \u00b7 03 Acid \u00b7 04 Poison \u00b7 05 Ice \u00b7 06 Haze \u00b7 07 Fog (an eighth, Smoke, held)\"; company.md \"(an eighth, Smoke, held for the owner)\"; make_sheets.py comment \"seven; Smoke held (the owner's call)\"",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "A held, undecided option (Book v23 L672 \"Smoke: an eighth color, or not\") narrated to the press.",
+   "rewrite": "\"Seven, the same in every product, in spectrum order: 01 Ember, 02 Dust, 03 Acid, 04 Poison, 05 Ice, 06 Haze, 07 Fog\""
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/press/out/earf-press-kit.pdf p.1 (PRODUCTS) and p.5 (kicker \"RECORD PLAYER\"), earf-company.pdf, earf-mantle.pdf; press/README.md:15, 20; press/company.md:11-12",
+   "text": "\"Mantle, a record player\"; p.5 headed \"RECORD PLAYER\" above \"A turntable in cast acrylic.\"",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "Disagrees with the site (RC index.html:7, 962, 1017-1018, 1081: \"turntable\") and the Book's boilerplate (v23 L630 \"Mantle, a turntable\"); the word is listed open in Book v23 L672, so the kit should follow the surfaces it quotes.",
+   "rewrite": "\"Mantle, a turntable\"; kicker \"TURNTABLE\""
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/press/README.md:20-21 (long boilerplate)",
+   "text": "\"Mantle is a record player whose plinth floats over a base lit at its edge.\"",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "Describes the unsigned edge-lit edit: coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L14-16 \"Mantle: Strata Float v3 AS SIGNED by the owner 1 Nov ~12:10 ... Everything after it is an unsigned proposal: the 11-03 edge-lit edit (8a20b821)... Its light is open\". Owner 2026-11-03T05:11:20Z on Mantle's underglow.",
+   "rewrite": "\"Mantle is a turntable whose tinted plinth floats 40 mm over a smoked base.\""
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/press/out/earf-press-kit.pdf p.2 + earf-tropos.pdf (COLORS); press/make_sheets.py:47; press/tropos.md:8, 24",
+   "text": "\"All seven; the cover cloth matched to each\"; tropos.md \"A cloth cover goes on over the woofer.\" and the acrylic \u00b7 cover color pairs (oxblood, rust, ochre...)",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "States an open question as settled (Book v23 L672 \"Whether Tropos keeps a cloth cover.\").",
+   "rewrite": "\"Colors: all seven\"; drop the cover sentence and the cover colors."
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/press/tropos.md:24",
+   "text": "\"08 Smoke (smoked dark gray \u00b7 black) is held until the owner decides\"",
+   "visible": false,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Internal decision status in the press source.",
+   "rewrite": "Delete."
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/press/out/earf-press-kit.pdf pp.3-5, earf-hemisphere.pdf, earf-core.pdf, earf-mantle.pdf; press/make_sheets.py:115",
+   "text": "A gray box on each lamp and Mantle sheet: \"PENDING / Hemisphere: a new render / It goes here when it passes the critics.\" (same for Core and Mantle)",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Internal process (the critics' gate) printed on the press sheet.",
+   "rewrite": "Text-only sheets with no box, or one line \"Pictures to follow.\""
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/press/out/earf-press-kit.pdf p.3, earf-hemisphere.pdf; press/hemisphere.md:3",
+   "text": "\"Hung low over the bar.\"",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "The bar is a proposal (Book v23 L374, L676); the site says \"Hung low over a table.\" (RC index.html:1009).",
+   "rewrite": "\"Hung low over a table.\""
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/press/out/earf-press-kit.pdf p.3, earf-hemisphere.pdf; press/hemisphere.md:3, 10",
+   "text": "\"A pendant in the speakers' acrylic, frosted within, so the color glows and the source never shows.\" / \"LIGHT A 575-lumen LED, 2700 K, CRI 90, shielded inside the hub\"",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "The as-drawn Hemisphere, which the owner reopened 2026-11-10T00:28:39Z (\"it should work like core cut in half ... downward cast light will be the color of the bulb\"); coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L17-21. \"Frosted\" is the older layer name (the site says \"opal diffuser\").",
+   "rewrite": "Hold the Light line until the redesign; then \"Its shade glows in its color; the light below is the bulb's own white.\""
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/press/out/earf-press-kit.pdf p.5, earf-mantle.pdf; press/mantle.md:14",
+   "text": "\"CARTRIDGE Ortofon 2M (Blue on the first build; Black is the owner's call)\"",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "An internal decision note on a press sheet.",
+   "rewrite": "\"CARTRIDGE A moving-magnet Ortofon 2M\""
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/press/mantle.md:19",
+   "text": "\"Colors | The same eight\"",
+   "visible": false,
+   "verdict": "FIX_STALE",
+   "why": "Smoke is held; every other line says seven (coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L152; Book v23 L324).",
+   "rewrite": "\"Colors | All seven\""
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/press/out/earf-press-kit.pdf p.1 (7 images) and p.2, earf-company.pdf (7), earf-tropos.pdf (1)",
+   "text": "The embedded Tropos fronts.",
+   "visible": true,
+   "verdict": "FIX_UNAPPROVED_PICTURE",
+   "why": "Pixel-identical to brandbook/book/img/honest-front-*.jpg at 00c2f6e3 (9 Nov 16:35, fronts e624e13e/3d0b613f/04d21c5c; mean abs diff 0.0 vs 11.1 against today's tallr6 Ember), superseded the same evening by tallr2-tallr6. Only tallr6 is approved (coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L65).",
+   "rewrite": "Rebuild the PDFs from today's honest-front-*.jpg (tallr6)."
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/press/tropos.md:31",
+   "text": "\"Pictures: only renders that passed the critics: the seven tall fronts, cover off (... roll-out A-polished-fix1: e624e13e, 3d0b613f, Acid 04d21c5c), and the Dust habitat (honest-dust-habitat.jpg, 26493989).\"",
+   "visible": false,
+   "verdict": "FIX_UNAPPROVED_PICTURE",
+   "why": "fix1 fronts are superseded (only tallr6, coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L65); Dust 26493989 is pulled (L148, \"an 8 x 3 m bounce panel hidden from the camera in frame\"), and the Dust habitat as a whole was pulled 10 Nov 00:05 (L135).",
+   "rewrite": "\"Pictures: the seven tallr6 fronts and Ice in the snow (honest-front-*.jpg, honest-ice-habitat.jpg). All renders.\""
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/press/images.md:7, 18-24, 26, 29-31",
+   "text": "L7 \"The earlier list (the uplit eight, the stepped horn, the lit lamps, the old Mantle and every Smoke picture) is withdrawn.\"; L18-24 honest-back-<color>.jpg (the seven backs); L26 honest-dust-habitat.jpg; L29-31 marks earf-lockup-render.png, earf-lockup-render-night.png, earf-globe-render.png",
+   "visible": false,
+   "verdict": "FIX_UNAPPROVED_PICTURE",
+   "why": "The image list a journalist would be sent: backs are pulled (coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L146) or \"NOT YET\" (L71); Dust habitat pulled (L135); the globe renders fail three counts (L126-129). L7 is withdrawal history.",
+   "rewrite": "List only: honest-front-* (tallr6), honest-ice-habitat.jpg, honest-amp-ember.jpg (beside a whole speaker), and the flat marks."
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/press/hemisphere.md:21; press/core.md:21-23; press/mantle.md:26-27",
+   "text": "Hemisphere: site/img/lamp-dome.jpg, lamps-domes.jpg, lamps-unlit.jpg, dome-<color>.jpg; Core: lamp-orb.jpg, lamps-orbs.jpg, lamps-unlit.jpg ... \"The site's copies still show the cord; don't send those.\"; Mantle: tt-violet-dusk.jpg, tt-amber-studio.jpg, tt-open.jpg, tt-pod.jpg, tt-detail.jpg",
+   "visible": false,
+   "verdict": "FIX_UNAPPROVED_PICTURE",
+   "why": "No lamp or Mantle picture is approved (coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L89 \"None approved\", L134 Mantle pulled 00:46); lamps-orbs and lamps-unlit are pulled (L138, L147). \"dome\", \"orb\", \"tt\", \"violet\", \"amber\" are old names; the corded Core is history.",
+   "rewrite": "\"Pictures: none yet; they follow when they pass.\""
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/press/README.md:3-5, 31-32; press/tropos.md:33; press/mantle.md:17",
+   "text": "\"Brand lane, r47 (2026-10-31)\"; \"from earf.world as built by web.py (its particulars, SPEC, LAMPS, TT)\"; \"the inbox needs mail records before this goes out: launch/launch-readiness.md\"; \"Every figure above traced on 2026-11-09 to the speaker lane (r33-speaker-horn 1c391c9a...)\"; \"(mm; design figures, r48-mantle-design, mantle_strata_v3)\"",
+   "visible": false,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Working notes in the kit's sources (not in the PDFs, except the r48 note, which the PDF drops).",
+   "rewrite": "Keep in an internal notes file, not in the sheets."
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/press/planet-earf.md",
+   "text": "Planet EARF sheet: \"House tint | Smoke\"; \"cast acrylic in the eight tints\"; \"Mother EARF ... hung over a banquette table\"",
+   "visible": false,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Internal by its own header (\"internal: not on the site, not for release\"); also stale (Mother EARF now stands on a plinth, Book v23 L375; Smoke held).",
+   "rewrite": ""
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/press/releases/out/earf-release-march.pdf (built f6e3dc12, 1 Nov)",
+   "text": "\"EARF: hi-fi and light, cast in tinted acrylic, in eight colors\"; \"cast acrylic tinted all the way through ... Ember, Dust, Acid, Poison, Ice, Haze, Fog and Smoke\"; \"First shown in San Francisco on 19 January, during FOG Design+Art week\"; \"The first pair's horn is built up from 22 layers of tinted sheet, stacked and shaped...\"; \"A lamp underneath fills the whole cabinet with color.\"; \"Mantle ... a base that glows at its edge\"; \"[PHOTO 1: the pair lit from below, February 2027.]\"; Kickstarter line; \"R4 proposes a Founders' Edition\"; footer \"DRAFT 2026-10-31\"",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "Every superseded direction in one page: \"Color all the way through is dumb\" (owner 2026-10-31T19:45:22Z); no dates yet (2026-10-31T19:15:54Z \"Let's not focus on picking dates\"); smooth horn A (2026-11-03T03:02:03Z \"Horn: A, smooth\"), polished (15:13:04Z); \"No light\" (15:11:16Z); Smoke held; lit Mantle base unsigned (coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L14-16).",
+   "rewrite": "Rewrite from the RC site and the current press sheets when the debut is set; until then do not circulate."
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/press/releases/RELEASE-MARCH.md:3, 17-22, 31, 37-38, 52-57, 64, 69-71, 78-83",
+   "text": "Same draft in Markdown (partly updated): \"in eight colors ... and Smoke\"; \"Hemisphere ... with a frosted layer between\"; \"Mantle is a record player whose tinted plinth floats 40 mm above a base that glows at its edge\"; \"[OWNER and COUNSEL: ... R4 proposes a Founders' Edition of 8 pairs...]\"; notes for the team incl. \"The stacked horn is retired.\"",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "Release copy meant for the press still carries the eighth color and the lit Mantle base; bracketed internal choices and team notes belong outside the release.",
+   "rewrite": "\"...in seven colors: Ember, Dust, Acid, Poison, Ice, Haze and Fog.\" / \"Mantle is a turntable whose tinted plinth floats 40 mm over a smoked base...\""
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/press/releases/README.md:3, 8",
+   "text": "\"the four products and the eight tints, the horn (the stacked version as a bracketed option)\"",
+   "visible": false,
+   "verdict": "ARCHIVE_HISTORY",
+   "why": "Describes a retired horn option and the eight-color line (owner 2026-11-03T03:02:03Z \"Horn: A, smooth\").",
+   "rewrite": ""
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/press/releases/PITCHES-PRINT.md:24-29, 49, 69-71, 85-91 (emails to Wallpaper*, Monocle, Dwell, Sunset)",
+   "text": "\"hi-fi and light in eight colors of cast acrylic\"; \"in the same eight colors, from Ember to Smoke\"; \"In Smoke, a room goes quiet and dark\"; \"a record player that floats on its own light\"; L9 \"R5 suggests offering it to Dezeen or Wallpaper*\"",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "Email copy a journalist would read: Smoke held, lit Mantle base unsigned (coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L14-16), \"record player\" vs the site's turntable. \"R5\" is internal research numbering.",
+   "rewrite": "\"...in seven colors, from Ember to Fog\" / \"a turntable whose plinth floats over its base\""
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/press/releases/LOCAL-AND-FOG.md:48, 52-53",
+   "text": "Design-press note: \"In San Francisco? A new studio's hi-fi in eight colors\"; \"a horn loudspeaker, two lamps and a record player ... in eight colors\"",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "Eighth color held; debut parked (Book v23 L690).",
+   "rewrite": "\"...in seven colors\" / \"...two lamps and a turntable...\""
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/launch/policies-draft.md:3, 11, 31, 34, 77 and throughout",
+   "text": "\"Dated 2026-10-22\"; \"We make every piece to order, in one of eight colours.\"; \"About 72 kg each; 62 kg with the horn lifted off ... Two speakers, with horns and covers\"; \"Mantle | About 15.5 kg ... Ortofon 2M Black cartridge\"; \"about 72 kg and stands 1293 mm tall\"; colour, labour, authorisation, favour",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "Terms of sale, warranty and returns drafted for counsel and, later, customers. Superseded figures (now about 73 kg / 64 kg, 1295 mm; Mantle about 12.9 kg; cartridge open), the eighth color, an open cover, and British spelling (owner 2026-10-31T19:45:22Z).",
+   "rewrite": "Refresh from the RC particulars in American English before it goes to counsel."
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/launch/held-back.md",
+   "text": "Sustainability section kept \"as it stood\" (owner, 2026-10-25: \"everything about the sustainability of the brand feels lame and cheap until we can deliver on it\"); \"eight colours\", multicolour, depolymerised, centrepiece",
+   "visible": false,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Internal by nature: a holding pen for withdrawn claims.",
+   "rewrite": ""
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/launch/launch-readiness.md:1-3, 174",
+   "text": "Legal readiness research \"Prepared 22 October 2026\"; L174 \"On 29 October the speaker was renamed Tropos ... because Atmosphere is taken in audio\"",
+   "visible": false,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Internal research for counsel; carries the naming history and older figures.",
+   "rewrite": ""
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/brandbook/launch/out/earf-investor-one-pager.pdf + .png (built a5b33810, 2 Nov); brandbook/launch/onepager.html:46-52, 67, 72",
+   "text": "\"EARF makes hi-fi and lighting in cast acrylic, tinted all the way through, in eight colors.\"; \"Mantle A record player that floats on its own light.\"; \"Planet EARF. Financed on its own, $1.0\u20131.6 M\"; ask line \"Tropos prototype pair, on lit plinths\"; pictures site/img/hero-1200.jpg (the uplit eight), red-studio-light-1200.jpg, lamp-dome-800.jpg (lit Hemisphere), lamp-orb.jpg (lit Core), tt-violet-dusk-1200.jpg (old Mantle)",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "Investor-facing. Its HELD note (brandbook/launch/out/HELD.md:5-7, onepager.html:2) cites only the lamp row, but the page also carries \"all the way through\", the eighth color, lit plinths (owner \"No light\" 2026-11-03T15:11:16Z), the lit Mantle base, and five unapproved pictures (coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L6). Planet EARF is a proposal, and its $1.0-1.6 M disagrees with the deck's $2.0 M.",
+   "rewrite": "Rebuild from the deck-cover proposal and the RC copy: seven colors, tallr6 fronts, no lamp or Mantle picture until one passes."
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/brandbook/launch/out/earf-teaser-16x9.mp4, earf-teaser-4x5.mp4 and teaser-*-beat1..7.jpg (built 44f049e6, 2 Nov)",
+   "text": "On-screen type: beat 1 \"Eight colors, Ember to Smoke.\"; beat 2 \"The oldest amplifier is a shape.\"; beat 3 \"Put a light under it.\" over the uplit eight; beat 4 \"02 Dust\" in the Dust habitat; beat 5 \"Light, and a record player, in the same eight.\" over a glowing Mantle base; beat 6 the eight incl. Smoke, \"TROPOS \u00b7 THE EIGHT, EMBER TO SMOKE\"; beat 7 \"Tuesday 19 January 2027\" over the globe render",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "Public film (site, feed, invitation). HELD.md:10-12 cites only beats 3 and 6; beats 1, 2, 4, 5 and 7 carry baggage too: owner 2026-11-03T05:11:20Z (\"the oldest amplifier being a shape is silly\"), \"No light\" (15:11:16Z), Dust habitat pulled (coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L135), globe renders fail (L126-129), dates (2026-10-31T19:15:54Z).",
+   "rewrite": "Re-cut from approved pictures only (seven fronts, Ice in the snow), \"A world of sound, in color.\", no date."
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/brandbook/launch/out/earf-teaser-storyboard.jpg (481097af, 31 Oct)",
+   "text": "An older board than the films: \"Cast in colour, all the way through.\", \"The oldest amplifier is a shape.\", \"Put a light under it.\", \"EIGHT COLOURS, EACH WHERE IT BEGAN\", \"Something in the air.\" over the eight, \"Tuesday 19 January 2027\"",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "Retired tagline (owner 2026-10-31T19:40:04Z), \"all the way through\" and British spelling (19:45:22Z), uplight, eight, dates.",
+   "rewrite": "Rebuild with the re-cut, or delete."
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/brandbook/launch/STORYBOARD.md:15-21, 25-28",
+   "text": "\"Eight colors, Ember to Smoke.\"; \"The eight on a concrete wall (facade.jpg; it shows the retired uplight...)\"; \"01 Ember \u2026 08 Smoke\"; \"Light, and a record player, in the same eight.\"; \"spring 2027\"; \"Why the horn steps.\"",
+   "visible": false,
+   "verdict": "FIX_STALE",
+   "why": "The plan behind the held films; same baggage.",
+   "rewrite": "Rewrite to the seven, no uplight, no date."
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/brandbook/launch/out/launch-grid.png (44f049e6, 2 Nov), grid.json (13176733, 3 Nov), scenes/launch-grid.html:21-55",
+   "text": "Posts: \"One of eight colors\"; \"Eight colors, Ember to Smoke.\"; \"Two 20 mm walls, cemented\"; \"Mantle \u00b7 record player / Floats on its own light.\" (\"a base that glows at its edge\"); \"Tropos \u00b7 the eight\"; \"in any of eight colors\"; pictures hero-portrait.jpg, tt-violet-dusk-1200.jpg, room-portrait.jpg, bar-listening.jpg, lamp-orb.jpg, bar-decks.jpg, ice-studio-light.jpg, green-habitat-portrait.jpg, red-studio-1200.jpg",
+   "visible": true,
+   "verdict": "FIX_UNAPPROVED_PICTURE",
+   "why": "Public feed mockup. HELD.md:8-9 cites posts 2 and 5 only; every picture is off the approved list (coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L6) and the words carry the eighth color and the lit Mantle base (L14-16).",
+   "rewrite": "Rebuild from LAUNCH-GRID.md (already seven) with honest-front-* and honest-ice-habitat only."
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/brandbook/launch/LAUNCH-GRID.md:3, 11, 23-24",
+   "text": "\"Smoke is held for the owner\"; post 7 \"[no line: the horn's line was retired, 2026-11-03]\"; post 8 \"To come: Mantle, when the owner has chosen its design and its picture passes\"",
+   "visible": false,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Planning notes with decision history; \"when the owner has chosen its design\" is stale: Mantle was signed 1 Nov (coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L14). The post copy itself is current.",
+   "rewrite": "Post 8: \"To come: Mantle, when its picture passes.\""
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/brandbook/launch/out/HELD.md:8-9 and LAUNCH-GRID.md:3",
+   "text": "\"Strata Float's light is in the deck, leaving upward through the printed dots as a halo round the platter ... 'Floats on its own light' may stay as words\"",
+   "visible": false,
+   "verdict": "FIX_STALE",
+   "why": "Superseded at 01:05 tonight: coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L14-16 calls v4 \"the lit deck\" an unsigned proposal and Mantle's light open. The note still licenses \"Floats on its own light\" for public posts.",
+   "rewrite": "\"Mantle's light is open; no words or pictures about its light until the owner decides.\""
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/brandbook/launch/reserve.html:48, 53-55, 75-78 (+ out/founding-hundred-reserve.png, f6e3dc12)",
+   "text": "Founding Hundred mockup: nav \"Speakers Lighting Turntable Colors The Founding Hundred\"; \"kept on a register at Planet EARF\"; picture site/img/hero-1200.jpg alt \"The eight Tropos speakers in a row, Ember to Smoke\", caption \"The eight colors of Tropos.\"; color picker 01-08",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "Customer-facing mockup of a proposal (Book v23 L601 \"how first buyers sign up is still open\"): the eighth color, an unapproved picture (coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L152), the bar proposal, the old nav.",
+   "rewrite": "\"The seven colors of Tropos.\" with the seven tallr6 fronts; picker 01-07; drop the Planet EARF register line."
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/brandbook/launch/invite-card.html:42, invite-email.html:23 (+ out/earf-debut-invitation-card.pdf/.png, 664ce8f4, 9 Nov 16:50; out/earf-debut-invitation-email.png)",
+   "text": "\"SEE Mantle, the record player, and the lamps or their cast samples in the seven tints\"; \"AT THE DOOR One coin, one song\"",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "Mostly current (seven colors, the approved Ice habitat). \"Record player\" disagrees with the site's \"turntable\"; the coin is a bar proposal. The debut itself is parked (owner 2026-11-04T01:53:06Z: \"I want to nail the concept first and then execute\").",
+   "rewrite": "\"See Mantle, the turntable, and the lamps...\""
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/brandbook/proposals/deck-cover.html + deck-cover.png",
+   "text": "\"Investor deck \u00b7 [DATE] \u00b7 draft\" / \"A world of sound, in color.\" / \"Hi-fi and light, cast in tinted acrylic. Seven colors, Ember to Fog. San Francisco.\" / 01 Ember ... 07 Fog / \"Renders\" (the seven tallr6 fronts)",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current words and approved pictures (re-shot from tallr6 in f328494d; coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L65). Only \"draft\" and \"[DATE]\" need filling at use.",
+   "rewrite": "\"Investor deck \u00b7 <month> 2026\""
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/brandbook/proposals/README.md:6",
+   "text": "\"the seven tall fronts of roll-out A-polished-tallr6 (2026-11-09; awaiting the critics)\"",
+   "visible": false,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Stale status: tallr6 passed 10 Nov 00:15-00:20 (coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L65).",
+   "rewrite": "\"(passed 10 Nov)\""
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/brandbook/scenes/signage.html:53-54 (+ brandbook/out/signage.png, 75bda357, 1 Nov)",
+   "text": "Planet EARF object tags: \"The pendant over the bar, in Ember.\"; \"Tropos 08 The pair behind the decks, in Smoke. Made to order, in any of eight.\"",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "Smoke and \"eight\" (coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L152). The Book v23 shows the signs as text only (L555-557), so this mockup is not in the Book, but the file exists.",
+   "rewrite": "\"Tropos 05 The pair behind the decks, in Ice. Made to order, in any of seven.\""
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/brandbook/scenes/idea-sessions.html:39, 44 (+ brandbook/out/idea-sessions.png, 31 Oct)",
+   "text": "\"EARF Sessions ... at Planet EARF\"; \"Played back through a pair of Tropos in Smoke.\"; picture assets/bar-listening.jpg",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "Smoke held; the bar render is not on the approved list (coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L6). Book v23 Idea 3 runs without a picture (L607-610).",
+   "rewrite": "\"Played back through a pair of Tropos.\""
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/brandbook/scenes/idea-edition.html:25-30 (+ brandbook/out/idea-edition.png)",
+   "text": "\"Artist edition \u00b7 09 \u00b7 a color study\" / \"A ninth color, made once.\" / \"Tint 09\" / \"The artist names it, from what drifts through the air.\" / \"Edition 1 \u00b7 2027\"",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "\"Ninth\" assumes eight colors; the Book now says \"An edition tint each year, outside the seven\" (v23 L618). \"What drifts through the air\" echoes the retired air line (Book v23 L521).",
+   "rewrite": "\"A color outside the seven, made once.\" / \"Tint E1\""
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/brandbook/scenes/idea-milan.html:22, 24, 36, 43 (+ brandbook/out/idea-milan.png, 2 Nov)",
+   "text": "\"San Francisco \u00b7 the debut Vienna \u00b7 May 2027\"; \"Eight Tropos on the curved wall\"; \"The colors thrown up a wall by the speakers themselves, the picture on the site made real at full size.\"; picture site/img/facade.jpg",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "The uplit facade is the rejected base light (owner 2026-11-03T15:11:16Z \"No light\"); eight; dates (2026-10-31T19:15:54Z). Not in Book v23 (Idea 5 is text only, L614-616).",
+   "rewrite": "Drop the facade line and picture; \"Seven Tropos on the curved wall\"; no dates."
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/brandbook/scenes/idea-plaza.html:29, 54, 60 (+ brandbook/out/idea-plaza.png)",
+   "text": "Mother EARF at city scale, \"edge-lit so the rims draw the globe in light after dark\"; picture assets/globe-night.png (\"the mark's own night render\")",
+   "visible": true,
+   "verdict": "FIX_UNAPPROVED_PICTURE",
+   "why": "The night globe render fails on \"self-emitting acrylic\" (coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L126-129). A proposal (Book v23 L621 \"A proposal\"); not in the Book's picture set.",
+   "rewrite": "Use the flat globe drawing, or leave the idea text-only."
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/brandbook/scenes/card.html:39 (-> Book img/card.jpg)",
+   "text": "The house card's front uses assets/globe-paper.png",
+   "visible": true,
+   "verdict": "FIX_UNAPPROVED_PICTURE",
+   "why": "globe-paper is one of the globe_real.py renders that fail three counts (coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L126-129). The card's words are current (\"Horn loudspeakers, lamps and a turntable, cast in tinted acrylic.\").",
+   "rewrite": "Re-shoot the card with the flat globe (globe-flat) until the render is redone."
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/brandbook/scenes/social.html:17",
+   "text": "/* 2: Dust where it began */ (post 2 now shows honest-ice-habitat.jpg)",
+   "visible": false,
+   "verdict": "ARCHIVE_HISTORY",
+   "why": "Stale comment: the Dust habitat was pulled 10 Nov 00:05 (coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L135); the visible posts are current.",
+   "rewrite": "/* 2: Ice where it began */"
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/brandbook/scenes/plate, stationery, decal-case, decal-core, decal-crate-front(-2), decal-crate-inside, decal-crate-side, decal-drum, decal-label, decal-library-lid, idea-founding, idea-hotel .html",
+   "text": "Mockup words: rating plate (TR-1, marks \"drawn where they go once tested\"), letter, care card, crate and box decals, Founding Hundred certificate, hotel suite card (\"in any of seven colors\").",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Seven colors, current product words; proposals are labeled as proposals on the mockups. Placeholders ([KG], [contact line], [Name]) remain to fill.",
+   "rewrite": ""
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/brandbook/partners/klipsch.html, project.html, ace.html; out/earf-pitch-klipsch.pdf, earf-pitch-pro-ject.pdf, earf-pitch-ace-hotel.pdf (f6e3dc12, 1 Nov)",
+   "text": "Header \"A PROPOSAL FOR KLIPSCH \u00b7 DRAFT \u00b7 CONFIDENTIAL\"; \"in cast acrylic tinted all the way through, in eight colors from Ember to Smoke\"; \"Mantle, a record player whose plinth floats over a base lit at its edge\"; \"our debut in San Francisco on 19 January 2027, in FOG Design+Art week\"; \"Spring 2027 ... May 2027 HIGH END, Vienna\"",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "Partner-facing pitch packs, parked (Book v23 L690 \"Strategic partners: Three letters, to send after the first night\"). Carry \"all the way through\" (owner 2026-10-31T19:45:22Z), Smoke, the lit Mantle base, and dates.",
+   "rewrite": "Rewrite when the debut is set; seven colors, turntable, no lit base."
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/brandbook/money/partner-brief.html (+ out/earf-debut-partner-brief.pdf), PARTNERS.md, founding-terms.html (+ out/earf-founding-hundred-terms-for-counsel.pdf), GALLERY-LETTERS.md, applications/*.md",
+   "text": "Partner brief \"TUESDAY 19 JANUARY 2027 \u00b7 SAN FRANCISCO\", \"tinted all the way through, in eight colors\", \"A drink for each tint, Ember to Smoke\"; PARTNERS.md \"A drink for each of eight colors\"; terms sheet \"in one of eight colors\"; grant applications (Awesome Foundation SF, Emergent Ventures, HIGH END Vienna start-up, IDSA 2027)",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "Funder- and partner-facing drafts, parked (Book v23 L690 \"The money pack\"). Dates, eighth color, \"all the way through\"; PARTNERS.md L3 \"Dates are parked (2026-11-03)\".",
+   "rewrite": "Hold; rewrite from current facts when the owner un-parks it."
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/brandbook/kickstarter/README.md:69-71, 166-167; LAUNCH-PLAN.md:25, 53-57, 85; COPY.md; FILM.md:26; prelaunch.html (+ out/prelaunch-page.png)",
+   "text": "\"Every reward comes in any of the eight tints: Ember, Dust, Acid, Poison, Ice, Haze, Fog and Smoke.\"; \"Founders' Edition ... eight in each tint\"; \"October 2027 Core ships (est.)\"; email \"Eight colors, one of them yours\" / \"Ember to Smoke, cast, lit from behind.\"",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "Backer-facing drafts, parked (Book v23 L690 \"The Kickstarter kit\"); owner 2026-11-04T01:53:06Z: \"I want to nail the concept first and then execute\".",
+   "rewrite": "Hold until un-parked; then seven tints, no ship dates without a basis."
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/brandbook/festival/amsterdam/CONCEPT.md, STATEMENT.md:13, 34, 46, proof.html, concept-length-proof.pdf, CHECKLIST.md",
+   "text": "Artist statement \"a palette of eight colors\"; \"loudspeakers, lamps, a record player\"; \"2027: the first pair...\"; CONCEPT.md L20 \"six discs show six of the eight\"",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "Jury-facing entry, parked (Book v23 L690 \"drafted, not submitted\"). The only parked item with a live external deadline (call closes 7 Dec 2026, README.md L3); worth one question to the owner.",
+   "rewrite": "\"a palette of seven colors\"; \"a turntable\""
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/brandbook/sessions/*.md, brandbook/photo/*.md",
+   "text": "Sessions: \"(Ember, or Smoke; the owner chooses)\", \"Ember or Smoke for the vinyl?\"; Photo: \"One complete pendant in Smoke\", \"The eight-tint problem\", \"Core in Smoke. Prototype.\"",
+   "visible": false,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Internal plans, parked (Book v23 L690 \"Session 00\", \"The pictures\").",
+   "rewrite": ""
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/brandbook/newobjects/page/index.html (+ newobjects/*.md, drawings, renders)",
+   "text": "A page of seven proposed brand objects (Bedrock, Cairn, Ionos, Lithos, Meridian, Moho, Relief): \"from the line's eight\", \"eight bands of the line's tints\", a Smoke chip, \"a stepped stack\"",
+   "visible": true,
+   "verdict": "ARCHIVE_HISTORY",
+   "why": "Unadopted proposals (coordinator/owner-queue.md L147: \"none of the seven new objects reached 7.0 in 3 rounds\"); eight colors.",
+   "rewrite": ""
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/brandbook/IDEAS.md, PACKAGING.md, facts/FACTS.md, facts/CONTRADICTIONS.md, facts/SEQUENCE.md, review/*.md",
+   "text": "Working documents (\"Brand lane, r47, 31 October 2026\"; FACTS.md has 30 lines with eight/Smoke/round references)",
+   "visible": false,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Internal by nature; source material, not something to send.",
+   "rewrite": ""
+  },
+  {
+   "where": "BRAND LANE origin/r47-brand@069e88f1 spinoffs/barkhorn/marks/*.svg (amber, autumn, black, blue, cobalt, eucalyptus, green, ice, lapis, malachite, manzanita, orange, red, striped, turquoise; globe-c2-*, globe-nested-*), marks/wordmark-r18.png, -r19.png, sheet.html; brand/earth-*-r24..r30.png, earth-*-smoke.svg, icon-smoke.svg, globes.html, earth.html, ident.html",
+   "text": "Mark and ident explorations from the Bark/Cloud/Crag era and rounds 18-30, incl. Smoke versions.",
+   "visible": true,
+   "verdict": "ARCHIVE_HISTORY",
+   "why": "History of the identity (spinoffs/barkhorn/README.md L14-16, the old lines and stone/bark colors). Internal by nature; low priority.",
+   "rewrite": ""
+  },
+  {
+   "where": "INVESTOR DECK artifact 3sihYaT4ckNTF6WE7SWR7x, version 1793686214-3dc9 (the list's \"v68\"): project/deck.json sections.s1",
+   "text": "\"What EARF makes: Tropos, Hemisphere, Core and Mantle, in eight colors of cast acrylic\"",
+   "visible": false,
+   "verdict": "FIX_STALE",
+   "why": "For the rebuild only (not fixed here). Eighth color held (coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L152).",
+   "rewrite": "\"...in seven colors of cast acrylic\""
+  },
+  {
+   "where": "INVESTOR DECK artifact 3sihYaT4ckNTF6WE7SWR7x, version 1793686214-3dc9 (the list's \"v68\"): slides/cover.html",
+   "text": "Subtitle \"Hi-fi and light in cast acrylic, in eight colors. From San Francisco.\"; kicker \"November 2026\"; picture \"The eight Tropos speakers on a shallow curve ... each on its lit plinth ... the near-black Smoke\"; notes \"in eight colors\"",
+   "visible": true,
+   "verdict": "FIX_UNAPPROVED_PICTURE",
+   "why": "For the rebuild only (not fixed here). Uplit eight with Smoke: lit plinths (owner \"No light\" 2026-11-03T15:11:16Z), Smoke held; listed in coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L35-36.",
+   "rewrite": "Use brandbook/proposals/deck-cover.png (seven tallr6 fronts)."
+  },
+  {
+   "where": "INVESTOR DECK artifact 3sihYaT4ckNTF6WE7SWR7x, version 1793686214-3dc9 (the list's \"v68\"): slides/line.html",
+   "text": "Room picture: \"deep green stepped horns ... each on a stepped plinth with a warm line of light beneath ... a Mantle record player ... floating on steel posts over a thin line of warm light; a glowing green Core lamp ...; a glowing green Hemisphere\"; label \"Record player \u00b7 Mantle \u00b7 Floats on its own light.\"; notes \"one of the eight colors\", \"Tropos with its stepped horn and its cover off, on its lit plinth\"",
+   "visible": true,
+   "verdict": "FIX_UNAPPROVED_PICTURE",
+   "why": "For the rebuild only (not fixed here). Stepped horn retired (owner 2026-11-03T03:02:03Z \"Horn: A, smooth\"), lit plinth, lit Mantle base (coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L14-16), glowing lamps (L89 \"None approved\").",
+   "rewrite": ""
+  },
+  {
+   "where": "INVESTOR DECK artifact 3sihYaT4ckNTF6WE7SWR7x, version 1793686214-3dc9 (the list's \"v68\"): slides/tropos.html",
+   "text": "\"its horn stepped in 22 layers and flush with the cabinet, on a plinth lit from underneath\"; \"2-inch compression driver on a stepped acrylic horn\"; \"660 \u00d7 670 \u00d7 1336 mm on its lit plinth; about 85 kg\"; stepped-horn picture; notes \"one of eight colors\", \"A smooth formed horn stays an option\", \"the two lit plinths\"",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "For the rebuild only (not fixed here). Horn A smooth and polished (owner 2026-11-03T03:02:03Z, 15:13:04Z \"just go polished\"); no light (15:11:16Z); figures now 1295 mm, about 73 kg on its own feet (Book v23 L681).",
+   "rewrite": ""
+  },
+  {
+   "where": "INVESTOR DECK artifact 3sihYaT4ckNTF6WE7SWR7x, version 1793686214-3dc9 (the list's \"v68\"): slides/home.html",
+   "text": "Picture \"stepped green horns above on bronze posts, each on a stepped plinth\"; notes \"one of the eight tints\", \"the debut in the spring\"",
+   "visible": true,
+   "verdict": "FIX_UNAPPROVED_PICTURE",
+   "why": "For the rebuild only (not fixed here). Stepped horn and plinth retired; not on the approved list (coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L6).",
+   "rewrite": ""
+  },
+  {
+   "where": "INVESTOR DECK artifact 3sihYaT4ckNTF6WE7SWR7x, version 1793686214-3dc9 (the list's \"v68\"): slides/colours.html",
+   "text": "Headline \"Eight colors, Ember to Smoke.\"; \"Ember \u00b7 Dust \u00b7 Acid \u00b7 Poison \u00b7 Ice \u00b7 Haze \u00b7 Fog \u00b7 Smoke.\"; picture of the eight on lit plinths; notes \"The names are things the air holds\", \"each on its lit plinth\"; slide id \"colours\"",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "For the rebuild only (not fixed here). Smoke held; lit plinths; the air theme is retired (Book v23 L521); British id.",
+   "rewrite": "\"Seven colors, Ember to Fog.\" with the tallr6 row"
+  },
+  {
+   "where": "INVESTOR DECK artifact 3sihYaT4ckNTF6WE7SWR7x, version 1793686214-3dc9 (the list's \"v68\"): slides/light.html",
+   "text": "Pictures \"Hemisphere in Ember, lit ... its frosted mouth glowing\" and \"Core in Ember, lit and cordless ... throwing red light\"; notes \"The lamps are drawn back in their first, low profiles\"",
+   "visible": true,
+   "verdict": "FIX_UNAPPROVED_PICTURE",
+   "why": "For the rebuild only (not fixed here). No lamp picture approved; Hemisphere as drawn does not glow (coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L88-91); both lamps reopened by the owner 2026-11-10T00:28:39Z.",
+   "rewrite": ""
+  },
+  {
+   "where": "INVESTOR DECK artifact 3sihYaT4ckNTF6WE7SWR7x, version 1793686214-3dc9 (the list's \"v68\"): slides/mantle.html",
+   "text": "Kicker \"The record player\"; \"A record player that floats on its own light.\"; \"Deck: Cast acrylic on polished steel posts, over a smoked base lit from beneath\"; picture \"a smoked base that glows warm from beneath\"",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "For the rebuild only (not fixed here). Mantle's light is open and its glow unsigned (coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L14-16); owner 2026-11-03T05:11:20Z on the underglow; Mantle picture pulled (L134).",
+   "rewrite": ""
+  },
+  {
+   "where": "INVESTOR DECK artifact 3sihYaT4ckNTF6WE7SWR7x, version 1793686214-3dc9 (the list's \"v68\"): slides/bar.html",
+   "text": "Planet EARF, \"About $2.0 M to open (est.)\"; picture with \"the multicolor acrylic globe hanging over the bar\"; notes \"The picture shows an earlier scheme, with Mother EARF hanging over the bar; she now stands on a plinth\", \"the smaller lantern scheme has no total\"",
+   "visible": true,
+   "verdict": "ARCHIVE_HISTORY",
+   "why": "For the rebuild only (not fixed here). A proposal, not an owner decision (Book v23 L676), told with its own scheme history; $2.0 M disagrees with the one-pager's $1.0-1.6 M.",
+   "rewrite": ""
+  },
+  {
+   "where": "INVESTOR DECK artifact 3sihYaT4ckNTF6WE7SWR7x, version 1793686214-3dc9 (the list's \"v68\"): slides/why.html",
+   "text": "\"FOG Design+Art brings collectible-design galleries ... every January; next on 21\u201324 January 2027.\"",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "For the rebuild only (not fixed here). A market fact, fine as such; just do not tie it to a debut date the owner has not set (2026-10-31T19:15:54Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "INVESTOR DECK artifact 3sihYaT4ckNTF6WE7SWR7x, version 1793686214-3dc9 (the list's \"v68\"): slides/model.html, ask.html",
+   "text": "model notes \"the two lit plinths included\"; ask \"Tropos prototype pair, on lit plinths: parts and shop work $20,700\"; ask notes \"about $2,200 more for the two lit plinths, the stepped rings and the bronze posts\", \"Core's two-layer ball\"",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "For the rebuild only (not fixed here). No plinth light (owner 2026-11-03T15:11:16Z); stepped rings retired. The $55,000 ask itself is the owner's (2026-11-01T22:55:41Z \"raise to about $55,000\").",
+   "rewrite": ""
+  },
+  {
+   "where": "INVESTOR DECK artifact 3sihYaT4ckNTF6WE7SWR7x, version 1793686214-3dc9 (the list's \"v68\"): slides/made.html",
+   "text": "\"The first horns are stacked from stock sheet and machined: no mold.\"; \"The latest changes, Tropos's plinth among them, are still to be added.\"; notes \"Six of the eight cabinets\", \"Tropos's stepped rings, bronze posts and lit plinth\"",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "For the rebuild only (not fixed here). Stacked horn retired (the horn is formed, Book v23 L665); eighth color; lit plinth.",
+   "rewrite": ""
+  },
+  {
+   "where": "INVESTOR DECK artifact 3sihYaT4ckNTF6WE7SWR7x, version 1793686214-3dc9 (the list's \"v68\"): slides/risks.html",
+   "text": "\"seven of the eight horns are custom batches\"; notes \"The stepped, laminated horn stays on file as the alternative\", \"with a satin outside\", \"The review also read the standard's tip test as needing a wider base ...; a closer reading on November 3 found...\"",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "For the rebuild only (not fixed here). Polished, not satin (owner 2026-11-03T15:13:04Z); decision history; the eight.",
+   "rewrite": ""
+  },
+  {
+   "where": "INVESTOR DECK artifact 3sihYaT4ckNTF6WE7SWR7x, version 1793686214-3dc9 (the list's \"v68\"): slides/plan.html, team.html",
+   "text": "plan \"3 Planet EARF Financed on its own, about $2 M (est.)\"; team \"A caster for cast acrylic in eight colors.\", \"A hospitality partner for Planet EARF.\"",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "For the rebuild only (not fixed here). Planet EARF is a proposal (Book v23 L676), FORWARD only if the owner chooses it; \"eight colors\".",
+   "rewrite": ""
+  },
+  {
+   "where": "INVESTOR DECK artifact 3sihYaT4ckNTF6WE7SWR7x, version 1793686214-3dc9 (the list's \"v68\"): slides/close.html",
+   "text": "Picture \"Tropos in Smoke on a city overpass at dusk, come down like a meteor\"; notes \"It still leads with the old headline and older copy, so share it once its update is live.\"",
+   "visible": true,
+   "verdict": "FIX_UNAPPROVED_PICTURE",
+   "why": "For the rebuild only (not fixed here). \"Every picture in Smoke\" is pulled (coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L152); the note is stale internal status.",
+   "rewrite": ""
+  },
+  {
+   "where": "INVESTOR DECK artifact 3sihYaT4ckNTF6WE7SWR7x, version 1793686214-3dc9 (the list's \"v68\"): slides/first.html (not in deck.json order; the type shows such a slide last)",
+   "text": "\"The first pair / Stacked like contour lines.\" with \"Tropos's stacked horn, rendered here in stock Smoke\"; \"Base: A stepped plinth, lit from below\"; notes \"from the stock tints closest to our eight\"",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "For the rebuild only (not fixed here). An orphan slide still shown: stacked horn, Smoke, lit plinth, all retired.",
+   "rewrite": "Delete the slide in the rebuild."
+  },
+  {
+   "where": "INVESTOR DECK artifact 3sihYaT4ckNTF6WE7SWR7x, version 1793686214-3dc9 (the list's \"v68\"): slides/stands.html, market.html",
+   "text": "stands: \"Drawn, reviewed and priced. Not yet built.\" with an AI engineering review; market: vinyl, Miss Blanche, Klipsch x OJAS",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "For the rebuild only (not fixed here). Current state and market facts; stands notes say the horn \"is now held at three points\" (small history, fine to trim).",
+   "rewrite": ""
+  },
+  {
+   "where": "SITE PREVIEW origin/r49-site-rc@738691f0 spinoffs/barkhorn/site/img/rc/og-home.jpg, og-red/orange/amber/green/blue/violet/ice.jpg (1200 x 630)",
+   "text": "Share images: the seven tallr6 fronts (home) or one front per color, on paper.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "No words in any of the eight (checked visually); built from the tallr6 fronts at 1f60d795, approved (coordinator/approved-renders.md (r46-owner-notes@3e41fefc) L65).",
+   "rewrite": ""
+  },
+  {
+   "where": "REPO README.md (root; same on origin/main, r49-site-rc, r47-brand)",
+   "text": "\"# earmilk \u2014 handoff for renders and critic / Floorstanding hi-fi speaker shaped like a half-gallon gable-top milk carton ... Six flavors ... the flavour's colours\"",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Internal by nature, low priority: if the repo were shared, its front page describes a different, earlier project, in British spelling.",
+   "rewrite": ""
+  },
+  {
+   "where": "REPO spinoffs/barkhorn/README.md:1-30 (3,847 lines; origin/main, r49-site-rc, r47-brand)",
+   "text": "\"# barkhorn: EARF's horn speaker, after Friendly Pressure, in bark, acrylic and stone\" / \"The owner's idea of 2026-10-10 was speakers that look like their reference photograph of Friendly Pressure's horns\" / round-by-round history (rounds 4-31: Bark, Cloud, Crag lines, Dogs Barking, eucalyptus, manzanita...)",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Internal by nature, low priority, but sensitive: it names another maker's product as the design reference, and it is the full decision history. Keep the repo private.",
+   "rewrite": ""
+  },
+  {
+   "where": "REPO other READMEs: brandbook/README.md, press/README.md, press/releases/README.md, brandbook/partners|kickstarter|sessions|photo|proposals|festival/amsterdam/README.md (r47-brand); spinoffs/barkhorn/viewer/README.md (r49: \"The site's 3D view (round 47, built and switched off)\"); acoustics/, companions/README.md",
+   "text": "Lane notes: \"Brand lane, r47 (2026-10-31)\", \"per R9\", commit refs, \"round 47\".",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Internal by nature, low priority.",
+   "rewrite": ""
+  },
+  {
+   "where": "REPO commit messages on origin/r49-site-rc and origin/main (e.g. 8b71c329, 856f80d7, f55795df)",
+   "text": "\"Mantle's picture out (the owner: it reads as wood, not acrylic)\"; \"Core weighs about 1.5 kg (round 41's 30 mm base; it said 2.0)\"; \"the speaker is Tropos (the owner: \"sexier and has Greek meaning\")\"",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Visible only if the repo is shared; carries the owner's paraphrased words and round history. Low priority.",
+   "rewrite": ""
+  }
+ ],
+ "summary": "I audited every stakeholder-facing surface except the Brand Book and logged 109 items: 78 visible, 31 only in source. Verdicts: FIX_STALE 41, ARCHIVE_INTERNAL 23, ARCHIVE_HISTORY 16, FIX_UNAPPROVED_PICTURE 15, KEEP_CURRENT 12, KEEP_FORWARD 2. The full table is at /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/book-current/audit-surfaces/items.json.\n\n(1) Site preview (r49-site-rc@738691f0). The visible copy is nearly clean. Fix before it ships:\n- The Cover off / Cover on toggle on /tropos. No cover-on pictures exist, so \"Cover on\" blanks all seven cards, and the cover is still undecided. The fact row \"Cover: a cloth disc, optional (to follow)\" goes with it.\n- The opening globe film, the header globe and the touch icon. They are globe_real renders that failed three honesty counts at 01:03 tonight.\n- The color-dot sprite: a render not on the approved list, and it still holds a Smoke coin.\n- \"To be chosen\" on Mantle's cartridge.\nWatch items: the bronze posts (the owner asked about black at 00:28), Hemisphere's light line (redesign under way) and the name Poison (owner, 00:17).\nThe page source carries the history: \"round 25's idea\", Smoke and \"eight\", the Atmosphere/dome/orb routes, the owner's dated cover quote, RC review waves and commit refs, dead code for the uplight, waitlist and journal, the habitat \"place\" strings, and old color names in public image URLs (Fog's files are named \"ice-*\").\nShare cards, the 404 page and all eight og images are clean. No og image carries words, and all use the approved tallr6 fronts.\n\n(2) Live site (origin/main@856f80d7, production since 29 Oct). This is the worst surface: \"Something in the air.\", eight colours including Smoke in British spelling, \"Put a light under it\", \"Eight things in the air\", \"all the way through\", \"The oldest amplifier is a shape\", a corded Core, a glowing Mantle base, old figures and unapproved pictures. Promoting the fixed preview retires all of it.\n\n(3) Brand lane (r47-brand@069e88f1).\n- The press-kit PDFs embed superseded fronts: pixel-identical to the 9 Nov 16:35 set, not tallr6. They also print \"NOT FOR RELEASE\", \"Smoke, held\", \"record player\", \"PENDING ... passes the critics\", \"Hung low over the bar\", the cover cloth and \"Black is the owner's call\". images.md points to the pulled backs, the pulled Dust habitat and the failed globe renders.\n- The release PDF and the print pitches carry eight colors with Smoke, \"all the way through\", a 19 January date, the stacked horn, a light under the cabinet and a glowing Mantle base.\n- The HELD notes understate the held pieces. The one-pager also has \"all the way through\", eight colors, lit plinths, \"floats on its own light\" and five unapproved pictures. The teaser's beats 1, 2, 4, 5 and 7 carry baggage, not just 3 and 6. All nine launch-grid pictures are unapproved. HELD.md's \"light in the deck\" note went stale at 01:05, when v4 was called unsigned.\n- The deck-cover proposal and most mockups are current. Five mockups are not: signage and idea-sessions (Smoke), idea-edition (\"a ninth color\"), idea-milan (the uplit facade and May 2027), and idea-plaza with the house card (failed globe renders).\n- The parked packs (partners, money, Kickstarter, festival) all carry eight colors or Smoke, \"all the way through\", the lit Mantle base and 2027 dates. The festival entry has a real deadline, 7 Dec 2026.\n\n(4) Investor deck (version 1793686214-3dc9), history listed for the rebuild only:\n- Eight colors and Smoke in the outline and on the cover, colors and team slides.\n- Lit plinths and the stepped or stacked horn, including the orphan \"first\" slide that still shows last.\n- A satin horn and the old 85 kg / 1336 mm figures.\n- \"Record player\" and \"floats on its own light\"; glowing lamps.\n- Planet EARF at $2.0 M (the one-pager says $1.0\u20131.6 M) and the bar picture's earlier scheme.\n- The Smoke meteor picture on the close slide, \"the names are things the air holds\", and the 3 Nov tip-test story.\nReading the deck with the Artifact tool saved copies to the tool's own cache folder (scratchpad/artifact-files/174729ec-...), which is outside my subfolder.\n\n(5) READMEs are internal by nature. The root README describes the earlier \"earmilk\" milk-carton project. spinoffs/barkhorn/README.md opens \"after Friendly Pressure\", naming another maker's speakers as the design reference, so the repo should stay private.\n\nFor the Book auditor: v23 L489 has a caption with no picture (\"Through the wall. The seven from behind...\").\n\napproved-renders.md moved to 3e41fefc during the audit when the Dust, Ice and Fog horn-backs passed at 01:17. Those pictures are not on the preview commit audited here."
+}

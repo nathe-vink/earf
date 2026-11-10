@@ -1,0 +1,2526 @@
+{
+ "surface": "EARF Brand Book as published, artifact version 1794271571-295d (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/book-current/v23/index.html, 700 lines)",
+ "summary": "315 blocks audited. A script confirmed that every visible line and every picture is covered. Six of the items are page-source only. Verdicts: KEEP_CURRENT 156, KEEP_FORWARD 1, FIX_STALE 44, ARCHIVE_INTERNAL 94, ARCHIVE_HISTORY 5, FIX_UNAPPROVED_PICTURE 15. The full table is in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/book-current/audit-book/items.json. The script that builds it is build_items.py in the same folder; it takes every quote from the page itself.\n\nWHAT LEAVES THE STAKEHOLDER BOOK\n- Chapter 10, Big ideas, all of it. These are funding tactics, and the owner deferred execution: \"I want to nail the concept first and then execute\" (2026-11-04T01:53Z).\n- From chapter 12: its frame, the \"Still open\" list and \"Pictures in progress\".\n- Parked, all of it.\n- Every bar item: Planet EARF, Mother EARF, EARFcoin, and the bar's signs, door, tote, wall and screens.\n- The Smoke card and every \"Smoke is held\". Smoke is held only in the render pipeline (2026-11-03T15:17Z); the owner never ruled on it.\n- History: \"second edition (draft)\", \"New in this edition\", \"The record\", \"Choose your weather\" (a retired site section), the Tropos naming date with Atmosphere, and \"predates the proposal\".\n- Process tags: proposal, target, placeholder, for review, to be drawn, to follow, still open.\n\nSTALE FACTS, each with a rewrite in the table\n- Mantle \"its light in the deck\". That is an unsigned proposal; the light of the signed v3 is open (approved-renders.md:14-16). Commit 804cc8aa on origin/r47-brand already fixed this one line for the newer published version, 1794272741-39e1. Every other verdict applies to that version unchanged.\n- Hemisphere \"shielded in the hub\". The owner's direction replaces it: \"it should work like core cut in half\" (2026-11-10T00:28Z). The rewrite carries that direction.\n- The Mantle cartridge \"(still open)\".\n- Hemisphere \"Mains: To follow\".\n- The press sheet's \"Write\" placeholder becomes hello@earf.world.\n- \"prices set at launch\" becomes \"price on request\", tonight's site wording.\n\nPICTURES: 15 fail the approved list\n- Five globe_real.py renders: lockup-paper, lockup-night, globe-paper, globe-real and globe-turn.mp4 (approved-renders.md:126-129).\n- Two idents that were never audited: ident-coin and ident-rise (approved-renders.md:31-33).\n- Eight drawn mockups that are not on the list: card (it also embeds a globe render, which I checked by eye), plate, stationery, three crate decals, idea-founding and idea-hotel.\n- These pass and stay: the seven tallr6 fronts (approved-renders.md:65), the Ice habitat (:80), the Ember amp plate (:70), social.jpg (:30-31), and the flat marks and icons (:128, \"the flat marks stand in\").\n\nTHE ONE QUESTION FOR THE OWNER (ask it on its own): should Planet EARF appear as where EARF is going?\n- For: the bar, Mother EARF and EARFcoin are his own ideas, with his own design picks (README.md:126,131,135; \"same with the bar\", 2026-10-31T19:15Z).\n- Against: naming the bar in public is his open call (FACTS.md:149), and he funded \"$50K: prototypes + debut\" over \"$1.5M with the bar\" (README.md:140).\n- Until he says yes, these blocks are archived as internal.\n\nFORWARD CONTENT IS THIN. Only one block is KEEP_FORWARD: \"Drawn to be made\". Directions the owner set that the rebuilt Book can carry:\n- Hemisphere glowing like Core cut in half, and Core's color at an even depth all round (2026-11-10T00:28Z).\n- Mantle as Strata Float, its picture to come (2026-11-01T12:11Z).\n- The first pair built, then measured, then photographed.\n- The habitats (2026-11-03T03:12Z).\n- A launch film (2026-11-03T04:27Z).\n- His special-edition idea, with things cast in the acrylic and bubbles (2026-10-31T20:35Z), only if he confirms it.\n\nWATCH ITEMS (not baggage)\n- Poison's name: he is weighing a rename (2026-11-10T00:17Z). Six blocks are flagged.\n- The horn posts: he asked whether they should be black (00:28Z). The Book states no finish for them.\n- Color rules at lines 455 and 456 contradict each other.\n\nINVESTOR DECK (3sihYaT4ckNTF6WE7SWR7x, version 1793686214-3dc9). It still carries:\n- \"eight colors\" and \"Eight colors, Ember to Smoke.\"\n- Lit plinths in the cover and colors pictures.\n- The retired line \"The names are things the air holds\".\n- The bar slide: \"About $2.0 M to open\", and Mother EARF \"hanging over the bar\" in an earlier scheme.\n- It is already held for a rebuild (approved-renders.md:34-36).\n\nEVIDENCE KEY\n- approved-renders.md is /home/user/earmilk-site/spinoffs/barkhorn/coordinator/approved-renders.md, re-read at 01:34 UTC with the cited lines checked.\n- README.md is the owner notes on r46-owner-notes, commit 3e41fefc.\n- FACTS.md and make_book.py are under origin/r47-brand:spinoffs/barkhorn/brandbook/.\n- \"site RC\" is origin/r49-site-rc:spinoffs/barkhorn/site/index.html.\n- Transcript times are the owner's own messages, in UTC.",
+ "items": [
+  {
+   "where": "head L2",
+   "text": "EARF Brand Book",
+   "visible": false,
+   "verdict": "KEEP_CURRENT",
+   "why": "The tab title; a plain name.",
+   "rewrite": ""
+  },
+  {
+   "where": "source L8-10",
+   "text": "/* A showroom bound as a book: paper and ink, as earf.world sets them, and the color carried only by the acrylic. One light theme by choice (the site's own: every picture stands on a pale ground), with night bands where the bar and the glow need them. Chapters run down one column; pictures break out to the full width. */",
+   "visible": false,
+   "verdict": "FIX_STALE",
+   "why": "Page-source note names \"the bar\" (Planet EARF, a proposal: FACTS.md:37,149); the source is readable by anyone who opens the page.",
+   "rewrite": "/* A showroom bound as a book: paper and ink, as earf.world sets them, and the color carried only by the acrylic. One light theme (the site's own: every picture stands on a pale ground), with night bands where the glow needs them. Chapters run down one column; pictures break out to the full width. */"
+  },
+  {
+   "where": "source L47-269",
+   "text": "CSS section comments at 47, 59, 65, 66, 95, 139, 148, 163, 185, 195, 208, 219 (\"the header: the mark and the chapters\", \"the cover\", \"the tagline: two lines here, broken after its comma\", \"chapters\", \"naming\", \"identity\", \"color\", \"type\", \"voice\", \"applications\", \"packaging\")",
+   "visible": false,
+   "verdict": "KEEP_CURRENT",
+   "why": "Section labels only; no history or process.",
+   "rewrite": ""
+  },
+  {
+   "where": "source L77-271",
+   "text": "CSS rules named for process: .slab.held and .gap.held (77-83, 132), .cover .new (86-88), .gap placeholders (124-131), .stratum.reserve (133, 145), .prop (232), .tocome (239-241), .inprog (248-249), .parked (267-271)",
+   "visible": false,
+   "verdict": "FIX_STALE",
+   "why": "Dead once their blocks go to the archive; the class names (held, new, reserve, prop, tocome, inprog, parked) read as process to anyone viewing source.",
+   "rewrite": "Delete these rules with the blocks they style."
+  },
+  {
+   "where": "source L320-633",
+   "text": "Picture file names honest-front-<tint>.jpg (320, 426-438, 491, 632, 633), honest-ice-habitat.jpg (354, 492), honest-amp-ember.jpg (493)",
+   "visible": false,
+   "verdict": "FIX_STALE",
+   "why": "\"honest-\" names an internal re-render round and implies earlier pictures were not; it shows in source, in the browser on download, and in the published file list.",
+   "rewrite": "Rename on the next build (make_book.py PINNED keys): tropos-front-<tint>.jpg, tropos-ice-snow.jpg, tropos-amp-ember.jpg."
+  },
+  {
+   "where": "source L494-673",
+   "text": "Blank residue lines where blocks were cut: 494-496, 502, 569, 640, 647-656, 666, 673",
+   "visible": false,
+   "verdict": "FIX_STALE",
+   "why": "Cosmetic: empty gaps that show edits in the source.",
+   "rewrite": "Strip on rebuild."
+  },
+  {
+   "where": "header L309",
+   "text": "[img img/lockup-color.png alt=\"EARF\"]",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Header lockup: Flat mark drawn from SVG (make_book.py:19-23,74); flat marks stand in for the failed renders (approved-renders.md:128). Source brand/mark/earf-lockup-colour.png (make_book.py:74).",
+   "rewrite": ""
+  },
+  {
+   "where": "header L311-312",
+   "text": "Contents Position Names Identity Color Type Images Voice Applications Packaging Ideas Press Facts Parked",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "Links \"Ideas\", \"Facts\" and \"Parked\" lead to chapters that go to the archive.",
+   "rewrite": "Contents \u00b7 Position \u00b7 Names \u00b7 Identity \u00b7 Color \u00b7 Type \u00b7 Images \u00b7 Voice \u00b7 Applications \u00b7 Packaging \u00b7 Press"
+  },
+  {
+   "where": "#cover L319",
+   "text": "EARF \u00b7 San Francisco \u00b7 the brand book, second edition, 9 November 2026 (draft)",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "\"second edition\" points back to an earlier edition and \"(draft)\" is process; the owner (2026-11-10T00:53Z): \"we reference too many previous ideas and concepts\".",
+   "rewrite": "EARF \u00b7 San Francisco \u00b7 the brand book \u00b7 November 2026"
+  },
+  {
+   "where": "#cover L320",
+   "text": "[img img/honest-front-ember.jpg alt=\"Tropos in Ember, whole, cover off, on its own feet on a pale seamless\"] [img img/honest-front-dust.jpg alt=\"Tropos in Dust, whole, cover off, on its own feet on a pale seamless\"] [img img/honest-front-acid.jpg alt=\"Tropos in Acid, whole, cover off, on its own feet on a pale seamless\"] [img img/honest-front-poison.jpg alt=\"Tropos in Poison, whole, cover off, on its own feet on a pale seamless\"] [img img/honest-front-ice.jpg alt=\"Tropos in Ice, whole, cover off, on its own feet on a pale seamless\"] [img img/honest-front-haze.jpg alt=\"Tropos in Haze, whole, cover off, on its own feet on a pale seamless\"] [img img/honest-front-fog.jpg alt=\"Tropos in Fog, whole, cover off, on its own feet on a pale seamless\"] 01 Ember / 02 Dust / 03 Acid / 04 Poison / 05 Ice / 06 Haze / 07 Fog",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Picture check, seven files: Approved: the tallr6 fronts, approved-renders.md:65 (Book listed as user); make_book.py:38-44 pins those commits.",
+   "rewrite": ""
+  },
+  {
+   "where": "#cover L320",
+   "text": "Tropos in the seven, each on its own feet, cover off. Render",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current: owner \"No light\" (2026-11-03T15:11Z: Tropos on its own feet) and \"I also prefer the product images without the cover on\" (2026-10-31T20:32Z); the site keeps a Cover off view (site RC index.html:990).",
+   "rewrite": ""
+  },
+  {
+   "where": "#cover L321",
+   "text": "A world of sound, in color. The EARF brand book.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "The owner's tagline: \"Tagline: A world of sound, in color.\" (2026-11-02T15:48Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#cover L323",
+   "text": "Hi-fi and light, cast in tinted acrylic. This book is how EARF looks, sounds and arrives, so that everything made under the name feels like it came out of one room.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current description of the brand and the book. Optional, for the owner's ask to \"illustrate where it's going\": end \"...came out of one room, and where it is going.\"",
+   "rewrite": ""
+  },
+  {
+   "where": "#cover L324",
+   "text": "New in this edition",
+   "visible": true,
+   "verdict": "ARCHIVE_HISTORY",
+   "why": "A change log against the previous edition: history by definition.",
+   "rewrite": ""
+  },
+  {
+   "where": "#cover L324",
+   "text": "Seven colors, Ember to Fog; Smoke is held.",
+   "visible": true,
+   "verdict": "ARCHIVE_HISTORY",
+   "why": "Change-log line; \"Smoke is held\" is an open item. Smoke \"held\" is an open pipeline status (--hold smoke, 2026-11-03T15:17Z), not an owner ruling; approved-renders.md:152.",
+   "rewrite": ""
+  },
+  {
+   "where": "#cover L324",
+   "text": "Tropos on its own feet, no light in the base, the polished horn.",
+   "visible": true,
+   "verdict": "ARCHIVE_HISTORY",
+   "why": "Change log of the 3 Nov decisions (owner \"No light\", 15:11Z; \"just go polished\", 15:13Z). The facts already stand in the product pages; \"no light in the base\" only reads against the rejected lit base.",
+   "rewrite": ""
+  },
+  {
+   "where": "#cover L324",
+   "text": "Every picture a render; the execution plans parked.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Process note: plans \"parked\".",
+   "rewrite": ""
+  },
+  {
+   "where": "#cover L326-334",
+   "text": "01 Ember 02 Dust 03 Acid 04 Poison 05 Ice 06 Haze 07 Fog",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "The seven tints in order; Tropos locked with the seven (approved-renders.md:10; the coordinator's brief).",
+   "rewrite": ""
+  },
+  {
+   "where": "#contents L339-340",
+   "text": "Contents / 01 Position / 02 The naming system / 03 Identity / 04 Color / 05 Type / 06 Image direction / 07 Voice / 08 Applications / 09 Packaging / 10 Big ideas / 11 Press kit / 12 The facts of record / \u00b7\u00b7 Parked plans",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "Lists \"10 Big ideas\", \"12 The facts of record\" and \"\u00b7\u00b7 Parked plans\", which go to the archive.",
+   "rewrite": "Contents: 01 Position \u00b7 02 The naming system \u00b7 03 Identity \u00b7 04 Color \u00b7 05 Type \u00b7 06 Image direction \u00b7 07 Voice \u00b7 08 Applications \u00b7 09 Packaging \u00b7 10 Press kit"
+  },
+  {
+   "where": "#position L347",
+   "text": "01 \u00b7 Position / One material, cast in color, made to be heard and lit.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Chapter head; current.",
+   "rewrite": ""
+  },
+  {
+   "where": "#position L349",
+   "text": "What EARF is / Hi-fi and lighting in tinted cast acrylic, designed in San Francisco. Tropos, a powered horn loudspeaker, leads. Hemisphere and Core light the room in the same acrylic, and Mantle, a turntable, plays the records. Every piece comes in the same seven tints, so a room can be one color or three.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Matches the line as decided and the site preview (site RC index.html:1007-1018): powered horn speaker, two lamps, a turntable, seven tints.",
+   "rewrite": ""
+  },
+  {
+   "where": "#position L350",
+   "text": "For whom / People who arrange a room around listening and want the system to be the best-looking thing in it. Bars, hotels and restaurants that treat sound as part of the design, and need the room to look as good as it sounds. Collectors of design who would buy a speaker as an object first and discover it is a serious one.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Audience; \"bars, hotels and restaurants\" is the market, not Planet EARF.",
+   "rewrite": ""
+  },
+  {
+   "where": "#position L351",
+   "text": "Why now / Listening bars have spread from Tokyo to most large cities, and the habit has followed people home. Records came back to the living room. Interiors came back to color. And most high-end audio still arrives as a black box or a wood veneer. EARF answers them at once: color you can see through, a horn you can see into, light through the same material.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "\"came back\" is market context, not EARF's own history.",
+   "rewrite": ""
+  },
+  {
+   "where": "#position L354",
+   "text": "[img img/honest-ice-habitat.jpg alt=\"Tropos in Ice standing in snow at dusk, a lit cabin and pines behind\"]",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Picture check: the Ice habitat 0f619953, approved-renders.md:80 (PASSED; Used by \"site ..., Book\"); make_book.py:45.",
+   "rewrite": ""
+  },
+  {
+   "where": "#position L354",
+   "text": "In snow. Tropos in Ice, where its color began. Render",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "\"where its color began\" is history-tense. Habitats are the owner's direction (\"Go on all of the biome work / Make it look amazing\", 2026-11-03T03:12Z).",
+   "rewrite": "In snow. Tropos in Ice, in its element. Render"
+  },
+  {
+   "where": "#position L357",
+   "text": "What the brand holds to",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Eyebrow; current.",
+   "rewrite": ""
+  },
+  {
+   "where": "#position L358",
+   "text": "The material is the message. Twenty millimeters of tinted acrylic carries light to its edges and shows what is inside. Nothing is painted on and nothing is hidden behind a veneer: the lining, the horn's driver, the amplifier's plate all show through the wall, so they are made to be seen.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current: 20 mm walls, the lining, driver and amplifier plate show through (site RC index.html:988).",
+   "rewrite": ""
+  },
+  {
+   "where": "#position L359",
+   "text": "Color is a system, not a range. The seven tints are the same seven in every product and every application, always in the same order, always numbered. A customer chooses a color once and the whole catalog follows.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current brand rule.",
+   "rewrite": ""
+  },
+  {
+   "where": "#position L360",
+   "text": "Engineering first, then the joke. The horn's profile and the cabinet's bass were simulated before any acrylic was cut, and the particulars are published to the millimeter. The wit lives in the names and the lines, never in the figures.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "A method, stated as done work; matches the site (\"worked out by simulation before any acrylic was cut\", site RC index.html:967). Not a previous idea.",
+   "rewrite": ""
+  },
+  {
+   "where": "#names L367",
+   "text": "02 \u00b7 The naming system / Every product is a layer of the Earth.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Chapter head; current.",
+   "rewrite": ""
+  },
+  {
+   "where": "#names L368",
+   "text": "The company is the planet. Each product takes the name of one of its layers, chosen for what the product does in a room. The tints take short, plain names of their own, each with one line that says what the color is like.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current naming concept.",
+   "rewrite": ""
+  },
+  {
+   "where": "#names L370",
+   "text": "Tropos / Powered horn loudspeaker \u00b7 the flagship / From the troposphere, the layer of air we live in, named for the Greek tropos, a turn. The speaker fills the air of a room. Chosen on 29 October 2026 after Atmosphere was found taken in audio; a lawyer's search confirms before filing.",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "\"Chosen on 29 October 2026 after Atmosphere was found taken in audio\" is naming history (the owner went Atmosphere > Troposphere > \"Maybe just 'Tropos'\", README.md:138); \"a lawyer's search confirms before filing\" is an open legal step.",
+   "rewrite": "Tropos \u00b7 Powered horn loudspeaker \u00b7 the flagship \u00b7 From the troposphere, the layer of air we live in, named for the Greek tropos, a turn. The speaker fills the air of a room."
+  },
+  {
+   "where": "#names L371",
+   "text": "Hemisphere / Pendant lamp / Half a globe, hung mouth down. A quarter turn takes its shade off and another puts a new color on.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Matches the site preview's Hemisphere line. The owner's redesign (\"it should work like core cut in half\", 2026-11-10T00:28Z) changes the light, not this line; recheck the quarter turn when the redrawn hub lands (approved-renders.md:101-103).",
+   "rewrite": ""
+  },
+  {
+   "where": "#names L372",
+   "text": "Core / Cordless table lamp / The glowing center. A tinted ball over a white opal inner ball, sitting low in a black base, with no cord.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Core B, the owner's \"b for core\" (2026-11-09T21:11Z); approved-renders.md:10-13,100. His 00:28Z note (the color the same depth all round) fits \"over a white opal inner ball\".",
+   "rewrite": ""
+  },
+  {
+   "where": "#names L373",
+   "text": "Mantle / Turntable / The layer that moves under the crust. A turntable in cast acrylic; the plinth floats 40 mm over its base.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Strata Float v3, the owner's \"Mantle: A\" (2026-11-01T12:11Z; approved-renders.md:14); the 40 mm float is v3 as built (commit 71d3163e) and on the site preview. No Mantle picture is shown (pulled by the owner 2026-11-10T00:41Z: \"It looks cheap\").",
+   "rewrite": ""
+  },
+  {
+   "where": "#names L374",
+   "text": "Planet EARF / A listening bar \u00b7 a proposal / The whole world in one room: every object in it would be for sale, and every one of them swaps tint.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Bar proposal (the Book: \"a proposal\", 374, 676); naming it in public is the owner's open call (FACTS.md:37,149); he funded \"$50K: prototypes + debut\" over \"$1.5M with the bar\" (README.md:140). He set the bar as a direction (2026-10-31T19:15Z: \"same with the bar\"), so it returns as FORWARD on his word.",
+   "rewrite": ""
+  },
+  {
+   "where": "#names L375",
+   "text": "Mother EARF / The globe \u00b7 a brand object / Proposed: the mark made real, six slotted discs of cast acrylic, 1.25 m across, standing on a low plinth in the bar (about 200 kg, too heavy to hang). Whether she is built is still open.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "\"Proposed ... Whether she is built is still open\": a proposal and an open question (the owner picked the globe for the bar, README.md:135, but the bar is not public).",
+   "rewrite": ""
+  },
+  {
+   "where": "#names L376",
+   "text": "Crust \u00b7 Strata \u00b7 Ozone / Held for later \u00b7 proposals / Names kept in reserve for a stand, a rack and an air-moving product, if they come. Each needs a yes and a trademark search first.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "\"Held for later \u00b7 proposals\": reserve names that \"need a yes and a trademark search\" are internal; \"Strata\" also collides with Mantle's design name, Strata Float.",
+   "rewrite": ""
+  },
+  {
+   "where": "#names L379",
+   "text": "The company Always EARF, in capitals, as one word. The site is earf.world. The bar, if it opens, is Planet EARF, and its globe Mother EARF (both proposals).",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "The last sentence is the bar proposal (\"if it opens\", \"both proposals\").",
+   "rewrite": "The company: Always EARF, in capitals, as one word. The site is earf.world."
+  },
+  {
+   "where": "#names L380",
+   "text": "A product One word, a layer or a region of the Earth, a capital letter and nothing more. No model numbers in speech.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current rule.",
+   "rewrite": ""
+  },
+  {
+   "where": "#names L381",
+   "text": "A tint Number and name, in spectrum order: 01 Ember, 02 Dust, 03 Acid, 04 Poison, 05 Ice, 06 Haze, 07 Fog. 08 Smoke is held. A product in a tint is \"Tropos 04,\" or \"Tropos in Poison.\"",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "\"08 Smoke is held.\" keeps an open item on show. Smoke \"held\" is an open pipeline status (--hold smoke, 2026-11-03T15:17Z), not an owner ruling; approved-renders.md:152.",
+   "rewrite": "A tint: Number and name, in spectrum order: 01 Ember, 02 Dust, 03 Acid, 04 Poison, 05 Ice, 06 Haze, 07 Fog. A product in a tint is \"Tropos 04,\" or \"Tropos in Poison.\""
+  },
+  {
+   "where": "#names L382",
+   "text": "A model code Proposed: TR-1, on the plate and the paperwork only. Codes for the lamps and Mantle follow the same pattern when they are certified.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "\"Proposed: TR-1\": no owner ruling; certification not begun (\"when they are certified\").",
+   "rewrite": ""
+  },
+  {
+   "where": "#identity L389",
+   "text": "03 \u00b7 Identity / The acrylic globe, and the name beside it.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Chapter head; current.",
+   "rewrite": ""
+  },
+  {
+   "where": "#identity L390",
+   "text": "Three meridian discs and three parallel rings, slotted together as the proposed Mother EARF would be, each in a tint that mixes where it crosses. The wordmark is cut from the same circles and squares, its R a circle on a stem.",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "\"as the proposed Mother EARF would be\" points to a proposal.",
+   "rewrite": "Three meridian discs and three parallel rings, slotted together, each in a tint that mixes where it crosses. The wordmark is cut from the same circles and squares, its R a circle on a stem."
+  },
+  {
+   "where": "#identity L392",
+   "text": "[img img/lockup-paper.jpg alt=\"The EARF lockup on paper: the color acrylic globe and the black wordmark\"]",
+   "visible": true,
+   "verdict": "FIX_UNAPPROVED_PICTURE",
+   "why": "globe_real.py render: fails three honesty rules and leaves the Book (approved-renders.md:126-129); not on the list. Source brand/mark/earf-lockup-render.png (make_book.py:19).",
+   "rewrite": "Replace with the flat color lockup (brand/mark/earf-lockup-colour.png) on paper."
+  },
+  {
+   "where": "#identity L393",
+   "text": "[img img/lockup-night.jpg alt=\"The EARF lockup at night: the glowing globe and the white wordmark\"]",
+   "visible": true,
+   "verdict": "FIX_UNAPPROVED_PICTURE",
+   "why": "globe_real.py render: fails three honesty rules and leaves the Book (approved-renders.md:126-129); not on the list. Its night version is self-emitting acrylic. Source brand/mark/earf-lockup-render-night.png (make_book.py:19).",
+   "rewrite": "Replace with the flat white lockup (brand/mark/earf-lockup-white.png) on night."
+  },
+  {
+   "where": "#identity L396",
+   "text": "[img img/globe-paper.jpg alt=\"The acrylic globe, rendered, on paper\"]",
+   "visible": true,
+   "verdict": "FIX_UNAPPROVED_PICTURE",
+   "why": "globe_real.py render: fails three honesty rules and leaves the Book (approved-renders.md:126-129); not on the list. Source brand/mark/earf-globe-render.png (make_book.py:20).",
+   "rewrite": "Drop; the flat globe (397) carries the mark until a re-render passes."
+  },
+  {
+   "where": "#identity L396",
+   "text": "The globe, rendered. The mark itself: on the site's header, turning, and on anything printed in color.",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "Describes the failed render; it goes with its picture.",
+   "rewrite": "Delete with its picture."
+  },
+  {
+   "where": "#identity L397",
+   "text": "[img img/globe-flat.png alt=\"The globe drawn flat, its six discs in six of the tints\"]",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Picture check: Flat mark drawn from SVG (make_book.py:19-23,74); flat marks stand in for the failed renders (approved-renders.md:128). Source brand/mark/earf-globe-colour.png.",
+   "rewrite": ""
+  },
+  {
+   "where": "#identity L397",
+   "text": "Drawn flat. For print where a render will not hold: screen printing, embroidery, small sizes in color.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current usage rule.",
+   "rewrite": ""
+  },
+  {
+   "where": "#identity L398",
+   "text": "[img img/globe-real.jpg alt=\"The globe as a real object: its six discs in six of the tints, slotted together\"]",
+   "visible": true,
+   "verdict": "FIX_UNAPPROVED_PICTURE",
+   "why": "globe_real.py render: fails three honesty rules and leaves the Book (approved-renders.md:126-129); not on the list. Source brand/real/earf-real-colour.png (make_book.py:23). The HTML comment \"the object\" goes with it.",
+   "rewrite": "Drop."
+  },
+  {
+   "where": "#identity L398",
+   "text": "As an object. The six discs cut and slotted: proposed for Mother EARF at 1.25 m and the coin's face at 40 mm. Render",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "\"proposed for Mother EARF ... and the coin's face\": both belong to the bar. Bar proposal (the Book: \"a proposal\", 374, 676); naming it in public is the owner's open call (FACTS.md:37,149); he funded \"$50K: prototypes + debut\" over \"$1.5M with the bar\" (README.md:140).",
+   "rewrite": ""
+  },
+  {
+   "where": "#identity L399",
+   "text": "[img img/lockup-black.png alt=\"The lockup in one color, black\"]",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Picture check: Flat mark drawn from SVG (make_book.py:19-23,74); flat marks stand in for the failed renders (approved-renders.md:128). Source brand/mark/earf-lockup-black.png.",
+   "rewrite": ""
+  },
+  {
+   "where": "#identity L399",
+   "text": "One color. Black, white, or any one tint. For etching, engraving, the rating plate and the door.",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "\"the door\" is the bar's door (Planet EARF's signs, 557), a proposal.",
+   "rewrite": "One color. Black, white, or any one tint. For etching, engraving and the rating plate."
+  },
+  {
+   "where": "#identity L402",
+   "text": "The lockup The globe left, 1.5 cap heights across, the wordmark right. The pair never separates except where the globe stands alone (an icon, a coin, the door) or the wordmark does (a plate, a label, a social post's corner).",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "\"a coin, the door\" are EARFcoin and the bar's door, both bar proposals.",
+   "rewrite": "The lockup: The globe left, 1.5 cap heights across, the wordmark right. The pair never separates except where the globe stands alone (an icon) or the wordmark does (a plate, a label, a social post's corner)."
+  },
+  {
+   "where": "#identity L403",
+   "text": "Clear space The height of the E's middle arm on every side, at least. Nothing else enters it, not even another EARF.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current rule.",
+   "rewrite": ""
+  },
+  {
+   "where": "#identity L404",
+   "text": "Small sizes Below 64 px the globe is drawn again, not scaled: separate files at 64, 32 and 16 px keep its lines open.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "True as stated: brand/mark/small/earf-globe-black-16/32/64.svg exist on origin/r47-brand.",
+   "rewrite": ""
+  },
+  {
+   "where": "#identity L405",
+   "text": "On a picture The wordmark alone, black or white, small, in a corner, never over the product. The color globe goes on paper or night, never on a photograph.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current rule.",
+   "rewrite": ""
+  },
+  {
+   "where": "#identity L406",
+   "text": "Never Recolor the globe's discs, outline the wordmark, set it in another face, stretch it, add a shadow or a glow it doesn't have, or put the tints in a gradient.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current rule.",
+   "rewrite": ""
+  },
+  {
+   "where": "#identity L407",
+   "text": "Files Files on request.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current.",
+   "rewrite": ""
+  },
+  {
+   "where": "#identity L410",
+   "text": "[video img/globe-turn.mp4 alt=\"The acrylic globe turning, as in the site's header\"]",
+   "visible": true,
+   "verdict": "FIX_UNAPPROVED_PICTURE",
+   "why": "approved-renders.md:126-127 names globe-turn.mp4 among the globe_real.py renders that fail and leave the Book.",
+   "rewrite": "Drop, or stand in the flat spin (brand/mark/earf-globe-colour-spin.mp4) once it is on the list."
+  },
+  {
+   "where": "#identity L410",
+   "text": "The turn. The globe turning on its axis, as it does in the site's header; the only motion the mark makes at rest.",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "Caption of the failed video; it goes with it.",
+   "rewrite": "Delete with its video (for a flat stand-in: \"The turn. The globe turning on its axis; the only motion the mark makes at rest.\")."
+  },
+  {
+   "where": "#identity L411",
+   "text": "[video img/ident-coin.mp4 alt=\"The coin ident: a coin spins and lands showing the globe\"]",
+   "visible": true,
+   "verdict": "FIX_UNAPPROVED_PICTURE",
+   "why": "Not on the approved list; \"the idents have never had a mask audit\" (approved-renders.md:31-33). Source brand/earth-ident-coin-acrylic-paper.mp4 (make_book.py:95).",
+   "rewrite": "Drop."
+  },
+  {
+   "where": "#identity L411",
+   "text": "The coin. An ident: a coin spins, wobbles and lands face up on the globe. Kept for a launch film and for EARFcoin.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "\"Kept for a launch film and for EARFcoin\": status, and EARFcoin is the bar's ritual. Bar proposal (the Book: \"a proposal\", 374, 676); naming it in public is the owner's open call (FACTS.md:37,149); he funded \"$50K: prototypes + debut\" over \"$1.5M with the bar\" (README.md:140).",
+   "rewrite": ""
+  },
+  {
+   "where": "#identity L412",
+   "text": "[video img/ident-rise.mp4 alt=\"The rise ident: the globe rises over a dark horizon\"]",
+   "visible": true,
+   "verdict": "FIX_UNAPPROVED_PICTURE",
+   "why": "Not on the approved list; never audited (approved-renders.md:31-33); a night acrylic globe, the kind the list fails as self-emitting (approved-renders.md:127-128). Source brand/earth-ident-rise-acrylic-night.mp4.",
+   "rewrite": "Drop."
+  },
+  {
+   "where": "#identity L412",
+   "text": "Earthrise. An ident on night: the globe rises over its own horizon. Parked, for the bar's screens and the end of a film.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "\"Parked, for the bar's screens\": parked plan for the bar proposal.",
+   "rewrite": ""
+  },
+  {
+   "where": "#identity L415",
+   "text": "[img img/wordmark-color.png alt=\"The wordmark in the tints, each letter a different color of acrylic\"] Clear space",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Picture check: Flat mark drawn from SVG (make_book.py:19-23,74); flat marks stand in for the failed renders (approved-renders.md:128). Source brand/mark/earf-wordmark-color-mark.svg.",
+   "rewrite": ""
+  },
+  {
+   "where": "#identity L416",
+   "text": "The wordmark in the tints / For the rare moment when the name itself should carry the color: the opening of a launch film, the spine of a box set, a wall at the bar. Each letter takes one tint, as cut sheets laid over each other would. Used once per surface, never beside the color globe.",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "\"a wall at the bar\" points to the bar proposal. \"a launch film\" stays: the owner chose it for the site (\"Site: 1, launch film.\", 2026-11-03T04:27Z).",
+   "rewrite": "The wordmark in the tints / For the rare moment when the name itself should carry the color: the opening of a launch film, the spine of a box set. Each letter takes one tint, as cut sheets laid over each other would. Used once per surface, never beside the color globe."
+  },
+  {
+   "where": "#color L423",
+   "text": "04 \u00b7 Color / Seven colors, Ember to Fog.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Seven colors: current (approved-renders.md:10; the coordinator's brief: \"seven tints, Smoke held\").",
+   "rewrite": ""
+  },
+  {
+   "where": "#color L424",
+   "text": "The color is in the acrylic, not on it. Each tint has a name, a number, a line and two values: the mark's flat color and the color the acrylic renders as in light. Smoke, the eighth, is held; its card stays, marked.",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "\"Smoke, the eighth, is held; its card stays, marked\" keeps an open item on show. Smoke \"held\" is an open pipeline status (--hold smoke, 2026-11-03T15:17Z), not an owner ruling; approved-renders.md:152.",
+   "rewrite": "The color is in the acrylic, not on it. Each tint has a name, a number, a line and two values: the mark's flat color and the color the acrylic renders as in light."
+  },
+  {
+   "where": "#color L426",
+   "text": "[img img/honest-front-ember.jpg alt=\"Tropos in Ember on a pale seamless\"] [img img/icon-ember.png]",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Picture check (Ember card): Approved: the tallr6 fronts, approved-renders.md:65 (Book listed as user); make_book.py:38-44 pins those commits. The chip is the flat brand icon (make_book.py:69-71, brand/icon-<tint>.svg).",
+   "rewrite": ""
+  },
+  {
+   "where": "#color L426-427",
+   "text": "Ember 01 / The last light of the fire. Render / Acrylic: Deep red \u00b7 TruCast 2423 / Mark: #9B0000 / In light: #920000",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Ember: name, number, line, acrylic and values are current (stock TruCast tints, owner \"I like the darker colors\", 2026-11-01T10:54Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#color L428",
+   "text": "[img img/honest-front-dust.jpg alt=\"Tropos in Dust on a pale seamless\"] [img img/icon-dust.png]",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Picture check (Dust card): Approved: the tallr6 fronts, approved-renders.md:65 (Book listed as user); make_book.py:38-44 pins those commits. The chip is the flat brand icon (make_book.py:69-71, brand/icon-<tint>.svg).",
+   "rewrite": ""
+  },
+  {
+   "where": "#color L428-429",
+   "text": "Dust 02 / A long, dry afternoon. Render / Acrylic: Translucent orange \u00b7 TruCast 2422 / Mark: #E5732A / In light: #E06718",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Dust: name, number, line, acrylic and values are current (stock TruCast tints, owner \"I like the darker colors\", 2026-11-01T10:54Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#color L430",
+   "text": "[img img/honest-front-acid.jpg alt=\"Tropos in Acid on a pale seamless\"] [img img/icon-acid.png]",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Picture check (Acid card): Approved: the tallr6 fronts, approved-renders.md:65 (Book listed as user); make_book.py:38-44 pins those commits. The chip is the flat brand icon (make_book.py:69-71, brand/icon-<tint>.svg).",
+   "rewrite": ""
+  },
+  {
+   "where": "#color L430-431",
+   "text": "Acid 03 / A yellow with an edge. Render / Acrylic: Fluorescent yellow \u00b7 TruCast 9097 / Mark: #E9B320 / In light: #E2AA15",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Acid: name, number, line, acrylic and values are current (stock TruCast tints, owner \"I like the darker colors\", 2026-11-01T10:54Z). Note: the render reads lemon against the golden swatch (an open color check, not a Book claim).",
+   "rewrite": ""
+  },
+  {
+   "where": "#color L432",
+   "text": "[img img/honest-front-poison.jpg alt=\"Tropos in Poison on a pale seamless\"] [img img/icon-poison.png]",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Picture check (Poison card): Approved: the tallr6 fronts, approved-renders.md:65 (Book listed as user); make_book.py:38-44 pins those commits. The chip is the flat brand icon (make_book.py:69-71, brand/icon-<tint>.svg).",
+   "rewrite": ""
+  },
+  {
+   "where": "#color L432-433",
+   "text": "Poison 04 / Bottle green. Keep out of reach. Render / Acrylic: Bottle green \u00b7 a custom batch in 2092's hue / Mark: #376621 / In light: #1C5B02",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Poison: name, number, line, acrylic and values are current (stock TruCast tints, owner \"I like the darker colors\", 2026-11-01T10:54Z). Current name; the owner is weighing a rename (\"maybe we should change it to something else that's green, unless we can really nail the biome\", 2026-11-10T00:17Z). The 2092 custom batch is Colors F (owner 2026-11-01T22:55Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#color L434",
+   "text": "[img img/honest-front-ice.jpg alt=\"Tropos in Ice on a pale seamless\"] [img img/icon-ice.png]",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Picture check (Ice card): Approved: the tallr6 fronts, approved-renders.md:65 (Book listed as user); make_book.py:38-44 pins those commits. The chip is the flat brand icon (make_book.py:69-71, brand/icon-<tint>.svg).",
+   "rewrite": ""
+  },
+  {
+   "where": "#color L434-435",
+   "text": "Ice 05 / Glacier blue, and in no hurry. Render / Acrylic: Tinted blue \u00b7 TruCast 2069 / Mark: #4A90C8 / In light: #2584BE",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Ice: name, number, line, acrylic and values are current (stock TruCast tints, owner \"I like the darker colors\", 2026-11-01T10:54Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#color L436",
+   "text": "[img img/honest-front-haze.jpg alt=\"Tropos in Haze on a pale seamless\"] [img img/icon-haze.png]",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Picture check (Haze card): Approved: the tallr6 fronts, approved-renders.md:65 (Book listed as user); make_book.py:38-44 pins those commits. The chip is the flat brand icon (make_book.py:69-71, brand/icon-<tint>.svg).",
+   "rewrite": ""
+  },
+  {
+   "where": "#color L436-437",
+   "text": "Haze 06 / Dusk, kept indoors. Render / Acrylic: Violet \u00b7 a custom batch in 2287's hue / Mark: #543287 / In light: #44147B",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Haze: name, number, line, acrylic and values are current (stock TruCast tints, owner \"I like the darker colors\", 2026-11-01T10:54Z). \"a custom batch in 2287's hue\" is Colors F (owner 2026-11-01T22:55Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#color L438",
+   "text": "[img img/honest-front-fog.jpg alt=\"Tropos in Fog on a pale seamless\"] [img img/icon-fog.png]",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Picture check (Fog card): Approved: the tallr6 fronts, approved-renders.md:65 (Book listed as user); make_book.py:38-44 pins those commits. The chip is the flat brand icon (make_book.py:69-71, brand/icon-<tint>.svg).",
+   "rewrite": ""
+  },
+  {
+   "where": "#color L438-439",
+   "text": "Fog 07 / Water-clear. Almost not there. Render / Acrylic: Water-clear \u00b7 TruCast 0000 / Mark: #F6F8F8 / In light: #D5DFE0",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Fog: name, number, line, acrylic and values are current (stock TruCast tints, owner \"I like the darker colors\", 2026-11-01T10:54Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#color L440",
+   "text": "[img img/icon-smoke.png] [placeholder box aria-label=\"Held: Smoke\"] Held Smoke is held Seven colors until it is decided. Its values stay here for when it is.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "The \"Held\" placeholder box and the Smoke chip: an open decision kept on show. Smoke \"held\" is an open pipeline status (--hold smoke, 2026-11-03T15:17Z), not an owner ruling; approved-renders.md:152.",
+   "rewrite": ""
+  },
+  {
+   "where": "#color L440-441",
+   "text": "Smoke 08 \u00b7 held / Smoked glass, for after dark. / Acrylic: Smoked dark gray \u00b7 TruCast 2074 / Mark: #34323A / In light: #3A3741",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "The eighth color, \"08 \u00b7 held\": undecided. Smoke \"held\" is an open pipeline status (--hold smoke, 2026-11-03T15:17Z), not an owner ruling; approved-renders.md:152. Its values stay in the archive for when it is decided.",
+   "rewrite": ""
+  },
+  {
+   "where": "#color L443",
+   "text": "The cabinets are 20 mm cast sheet over a white lining: five in their stock TruCast colors, and Poison and Haze in lighter custom batches of their codes' hues (32.3% and 25.8% of light through 20 mm). Each horn takes its cabinet's hue, deep enough that its 10 mm wall reads like the 20 mm one. \"In light\" is each tint's display color; \"Mark\" is the flat color for marks and icons. Both follow the chips once they are measured. Renders can't show Acid's fluorescence, and the deep horns are unproven on real sheet; both wait for the chips.",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "\"Both follow the chips once they are measured\" and \"the deep horns are unproven on real sheet; both wait for the chips\" are internal status (chips not ordered: owner \"Not yet\", 2026-11-04T01:55Z). The rest is current: Colors F (owner 2026-11-01T22:55Z); horns as deep as the cabinet (owner, README.md:135).",
+   "rewrite": "The cabinets are 20 mm cast sheet over a white lining: five in their stock TruCast colors, and Poison and Haze in lighter custom batches of their codes' hues (32.3% and 25.8% of light through 20 mm). Each horn takes its cabinet's hue, deep enough that its 10 mm wall reads like the 20 mm one. \"In light\" is each tint's display color; \"Mark\" is the flat color for marks and icons. Acid is fluorescent: its edges glow brighter than a render can show."
+  },
+  {
+   "where": "#color L444",
+   "text": "The neutrals / Paper and ink carry everything else, so the tints are always the loudest thing on the page. Night is for the bar and for the glow.",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "\"Night is for the bar\" points to the bar proposal.",
+   "rewrite": "The neutrals / Paper and ink carry everything else, so the tints are always the loudest thing on the page. Night is for the glow."
+  },
+  {
+   "where": "#color L446-451",
+   "text": "Page #F4F1EC Paper #ECE8E1 Rule #D6D0C6 Muted #5E5A53 Ink #1C1A18 Night #100F12",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "The six neutrals; current.",
+   "rewrite": ""
+  },
+  {
+   "where": "#color L454",
+   "text": "Order Always the spectrum: Ember, Dust, Acid, Poison, Ice, Haze, Fog. Never alphabetical, never by popularity.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current rule.",
+   "rewrite": ""
+  },
+  {
+   "where": "#color L455",
+   "text": "One at a time A surface carries one tint, or all seven in order. Never two or three picked for a mood.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current rule, but it clashes with \"Pairs\" (456) on two tints together; both date from the first pass (4bd29e7a). Clarify, e.g. \"A printed or digital surface carries one tint, or all seven in order.\"",
+   "rewrite": ""
+  },
+  {
+   "where": "#color L456",
+   "text": "Pairs Where two are shown together, they pair by the painter's wheel: each tint with its complement and its two neighbors; Fog, with no hue, goes with the cool tints.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current product-pairing rule (the deck says pieces \"match, or pair by the color wheel\"); clarify against 455, e.g. \"Where two pieces in different tints share a room, they pair by the painter's wheel...\".",
+   "rewrite": ""
+  },
+  {
+   "where": "#color L457",
+   "text": "No gradients The tints never blend into one another on a printed or digital surface. Where they meet, they overlap, as sheets do.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current rule.",
+   "rewrite": ""
+  },
+  {
+   "where": "#type L464",
+   "text": "05 \u00b7 Type / A grotesque with a little warmth, and a typewriter for the facts.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Chapter head; current.",
+   "rewrite": ""
+  },
+  {
+   "where": "#type L465",
+   "text": "The site's two faces, both free and open: Instrument Sans for everything that speaks, IBM Plex Mono for everything that measures.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current: the site's two faces.",
+   "rewrite": ""
+  },
+  {
+   "where": "#type L467",
+   "text": "Instrument Sans \u00b7 400 to 700 \u00b7 headlines at 600, tight; text at 400",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Specimen note; current.",
+   "rewrite": ""
+  },
+  {
+   "where": "#type L468",
+   "text": "IBM Plex Mono \u00b7 400 and 500 \u00b7 labels, numbers, eyebrows, particulars; capitals with a little tracking",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Specimen note; current.",
+   "rewrite": ""
+  },
+  {
+   "where": "#type L471",
+   "text": "Display \u00b7 600 \u00b7 \u22124.5% A world of sound, in color.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "The owner's tagline (2026-11-02T15:48Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#type L472",
+   "text": "Headline \u00b7 600 \u00b7 \u22123% Bottle green. Keep out of reach.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current name; the owner is weighing a rename (\"maybe we should change it to something else that's green, unless we can really nail the biome\", 2026-11-10T00:17Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#type L473",
+   "text": "Lede \u00b7 400 Twenty millimeters of tinted acrylic shows what is inside: the lining, the driver, the amplifier's plate.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current product fact.",
+   "rewrite": ""
+  },
+  {
+   "where": "#type L474",
+   "text": "Text \u00b7 400 \u00b7 17/1.6 Each cabinet is tinted cast acrylic, 20 mm thick. The lining shows through the walls, so we dressed it in white voile.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current; the site's own sentence (site RC index.html:988).",
+   "rewrite": ""
+  },
+  {
+   "where": "#type L475",
+   "text": "Label \u00b7 Mono 500 \u00b7 +12% Tropos 04 \u00b7 Poison \u00b7 1295 mm",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "1295 mm matches the site preview (site RC index.html:999). Current name; the owner is weighing a rename (\"maybe we should change it to something else that's green, unless we can really nail the biome\", 2026-11-10T00:17Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#type L478",
+   "text": "Sentence case Headlines in sentence case with a period. Capitals only in the mono labels and on hardware.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current rule.",
+   "rewrite": ""
+  },
+  {
+   "where": "#type L479",
+   "text": "Spelling American, as the site has it: color, gray, aluminum, meter. Units in millimeters with a space, 20 mm; figures that are designed, not measured, say \"about.\"",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current: the owner's standing rule (\"it's color im not british\", 2026-10-31T19:45Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#type L480",
+   "text": "On hardware Plex Mono for every engraved or laser-marked word; the wordmark for the name. Nothing else.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current rule.",
+   "rewrite": ""
+  },
+  {
+   "where": "#type L481",
+   "text": "Fallbacks Helvetica Neue, then Arial; Courier New for the mono. Never Inter, never a serif.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current rule.",
+   "rewrite": ""
+  },
+  {
+   "where": "#images L488",
+   "text": "06 \u00b7 Image direction / Light through the material is the subject.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Chapter head; current.",
+   "rewrite": ""
+  },
+  {
+   "where": "#images L489",
+   "text": "Seven kinds of picture, each with one job; three are shown here: the studio, in its element, and up close. Until the first pieces are built, every one is a render and says so; the same rules carry over to the photographs.",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "\"Seven kinds of picture ... three are shown here\" points at four missing kinds (an internal gap). \"Until the first pieces are built ... the same rules carry over to the photographs\" stays: honest status and the way forward.",
+   "rewrite": "Three kinds of picture, each with one job: the studio, in its element, and up close. Until the first pieces are built, every one is a render and says so; the same rules hold for the photographs."
+  },
+  {
+   "where": "#images L489",
+   "text": "Through the wall. The seven from behind: nothing painted on and nothing hidden, the amplifier's plate seen through the acrylic. Render",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "A caption with no picture (its figure was cut, leaving stray closing tags); the seven backs are \"NOT YET\" on the approved list (approved-renders.md:71).",
+   "rewrite": "Delete the caption and the stray </div>, </figure> and </div> tags."
+  },
+  {
+   "where": "#images L491",
+   "text": "[img img/honest-front-ice.jpg alt=\"Tropos in Ice alone on a pale seamless, on its own feet, the horn polished\"]",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Picture check: Approved: the tallr6 fronts, approved-renders.md:65 (Book listed as user); make_book.py:38-44 pins those commits.",
+   "rewrite": ""
+  },
+  {
+   "where": "#images L491",
+   "text": "The studio. One product, a pale seamless, a soft key: the product page and the press. No props. Render",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current rule for studio pictures.",
+   "rewrite": ""
+  },
+  {
+   "where": "#images L492",
+   "text": "[img img/honest-ice-habitat.jpg alt=\"Tropos in Ice standing in snow at dusk, a lit cabin and pines behind\"]",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Picture check: the Ice habitat 0f619953, approved-renders.md:80.",
+   "rewrite": ""
+  },
+  {
+   "where": "#images L492",
+   "text": "In its element. Each tint where it began: real places, real texture, the speaker set into the ground, never floating over it. Render",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "\"Each tint where it began\" is history-tense. The habitats are the owner's direction (2026-11-03T03:12Z).",
+   "rewrite": "In its element. Each tint in its own landscape: real places, real texture, the speaker set into the ground, never floating over it. Render"
+  },
+  {
+   "where": "#images L493",
+   "text": "[img img/honest-amp-ember.jpg alt=\"The amplifier's plate seen through the back of Tropos in Ember, up close\"]",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Picture check: amp plate, Ember, 488fbec9, approved-renders.md:70 (PASSED; VERIFIED by mask); in the Book per approved-renders.md:31; make_book.py:46.",
+   "rewrite": ""
+  },
+  {
+   "where": "#images L493",
+   "text": "Up close. The amplifier's plate through the Ember back. Close-ups only beside the whole speaker, its cover off; the small rating plate's wording here predates the proposal under Applications. Render",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "\"the small rating plate's wording here predates the proposal under Applications\" is version history plus a proposal. The rule itself is the owner's: \"Close-ups: a few, beside the whole speaker\" (2026-11-01T12:11Z).",
+   "rewrite": "Up close. The amplifier's plate through the Ember back. Close-ups only beside the whole speaker, its cover off. Render"
+  },
+  {
+   "where": "#images L499",
+   "text": "Always Light passing through the acrylic. A colored shadow somewhere in the frame. The product's real proportions, from the drawings. A label, \"Render,\" until it is a photograph.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current rule; \"until it is a photograph\" is the way forward.",
+   "rewrite": ""
+  },
+  {
+   "where": "#images L500",
+   "text": "Never Tilt-shift or dioramas. A setting that cannot look real. A product floating over its ground. Props that compete with it. Flare, haze or glow added after the fact.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current rule (the owner on dioramas and tilt-shift, README.md:100); stated as a rule, not as history.",
+   "rewrite": ""
+  },
+  {
+   "where": "#images L501",
+   "text": "Crops 3:2 on the site, 4:5 on phones and posts, 1:1 for the icons. The product never touches the frame's edge, except up close.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current rule.",
+   "rewrite": ""
+  },
+  {
+   "where": "#voice L509",
+   "text": "07 \u00b7 Voice / Cheeky, but reserved.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Chapter head; current.",
+   "rewrite": ""
+  },
+  {
+   "where": "#voice L510",
+   "text": "Say what the thing is and what it does. One line per surface may smile; the rest is exact.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current.",
+   "rewrite": ""
+  },
+  {
+   "where": "#voice L512",
+   "text": "A world of sound, in color. / The tagline",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "The owner's tagline (2026-11-02T15:48Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#voice L513",
+   "text": "Seven colors, Ember to Fog. / Tropos, the seven",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current line for the seven.",
+   "rewrite": ""
+  },
+  {
+   "where": "#voice L514",
+   "text": "Goes where the conversation is. / Core",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current: the site's Core line (site RC index.html:1009).",
+   "rewrite": ""
+  },
+  {
+   "where": "#voice L515",
+   "text": "A turntable in cast acrylic. / Mantle",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current: the site's Mantle line.",
+   "rewrite": ""
+  },
+  {
+   "where": "#voice L516",
+   "text": "Bottle green. Keep out of reach. / 04 Poison",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current name; the owner is weighing a rename (\"maybe we should change it to something else that's green, unless we can really nail the biome\", 2026-11-10T00:17Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#voice L517",
+   "text": "Drawn to be made. / Progress",
+   "visible": true,
+   "verdict": "KEEP_FORWARD",
+   "why": "The site's progress band (site RC index.html:964-969: \"Drawn ... Next, the first pair ... Then, measured\"): where the brand is going, set by the owner's budget for the first pair (2026-11-01T12:11Z and 22:55Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#voice L520",
+   "text": "The tagline, set / \"A world of sound, in color.\" Exactly so: sentence case, a comma after \"sound,\" a period at the end. One line where it fits. Where it needs two, break after the comma and nowhere else: \"A world of sound, / in color.\" On the web, keep each half on one line, so it can only break at the comma.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current rule for the owner's tagline.",
+   "rewrite": ""
+  },
+  {
+   "where": "#voice L521",
+   "text": "The record / \"Something in the air.\" was the headline from the first pictures. It is retired, and so is \"Eight things in the air,\" which kept the phrase alive: don't set either on anything new. The tagline is now \"A world of sound, in color.\" Tropos's line is \"Seven colors, Ember to Fog.\"",
+   "visible": true,
+   "verdict": "ARCHIVE_HISTORY",
+   "why": "Retired headlines and when they ran (\"was the headline from the first pictures\", \"is retired\"; the owner called it \"a lame tagline\", 2026-10-31T19:40Z): pure history.",
+   "rewrite": ""
+  },
+  {
+   "where": "#voice L524",
+   "text": "Exact / Millimeters, kilograms, hertz. \"About\" when a figure is designed and not yet measured. Never a superlative a measurement hasn't earned.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current rule.",
+   "rewrite": ""
+  },
+  {
+   "where": "#voice L525",
+   "text": "Dry / The wit is in the names, the tints' lines and one turn of phrase per surface. No exclamation marks, no puns on \"sound,\" no winking at the reader.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current rule.",
+   "rewrite": ""
+  },
+  {
+   "where": "#voice L526",
+   "text": "Plain about the unfinished / \"In development, not yet for sale.\" \"Every picture here is a render.\" A brand at this stage earns trust by saying what isn't done.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current rule: plain status is a voice principle (the owner: \"everything about the sustainability of the brand feels lame and cheap until we can deliver on it\", README.md:137).",
+   "rewrite": ""
+  },
+  {
+   "where": "#voice L529",
+   "text": "Not this This Because",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Table header.",
+   "rewrite": ""
+  },
+  {
+   "where": "#voice L530",
+   "text": "Eight horned speakers in colored acrylic. Seven colors, Ember to Fog. Never state what the picture already shows.",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "\"Eight horned speakers\" carries the old eight-tint count (Smoke held).",
+   "rewrite": "Not this: Seven horned speakers in colored acrylic. | This: Seven colors, Ember to Fog. | Because: Never state what the picture already shows."
+  },
+  {
+   "where": "#voice L531",
+   "text": "Watch the horns turn as you scroll. (Say nothing. Let it turn.) The words are about the product, never the website.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current rule.",
+   "rewrite": ""
+  },
+  {
+   "where": "#voice L532",
+   "text": "Choose your weather. Each color, where it began. Smoke and Poison aren't weather. Don't force a metaphor past where it fits.",
+   "visible": true,
+   "verdict": "ARCHIVE_HISTORY",
+   "why": "\"Choose your weather\" was a retired site section (the owner: \"On the choose your weather section...\", README.md:111; on neither origin/main nor the site preview); \"Each color, where it began\" and \"Smoke and Poison aren't weather\" lean on that retired concept and on held Smoke.",
+   "rewrite": ""
+  },
+  {
+   "where": "#voice L533",
+   "text": "Sustainably crafted from eco-conscious materials. (Nothing, until it can be shown.) A claim we can't yet deliver reads cheap.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current, and the owner's own view (README.md:137).",
+   "rewrite": ""
+  },
+  {
+   "where": "#voice L534",
+   "text": "Unbeatable value, for a limited time only! Everything is made to order, so we quote rather than list. State the fact and the reason; never chase.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current: the site's own line (site RC index.html:974).",
+   "rewrite": ""
+  },
+  {
+   "where": "#applications L541",
+   "text": "08 \u00b7 Applications / The same room, wherever the name goes.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Chapter head; current.",
+   "rewrite": ""
+  },
+  {
+   "where": "#applications L542",
+   "text": "Drawn mockups for review. Sizes and stocks are proposals; marks and prices stay placeholders until they are earned and set.",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "\"Drawn mockups for review\", \"proposals\" and \"placeholders\" are process language.",
+   "rewrite": "How the name appears on paper, on screen and in the box."
+  },
+  {
+   "where": "#applications L543",
+   "text": "[img img/card.jpg alt=\"Three business cards: the front with the color globe and wordmark, the back with a line and the address, the seven tints along its foot, and a third cut from violet acrylic\"]",
+   "visible": true,
+   "verdict": "FIX_UNAPPROVED_PICTURE",
+   "why": "Absent from the approved list, which holds every picture allowed in public (approved-renders.md:1-6); a drawn mockup, never gated. Its front carries assets/globe-paper.png, a globe render (scenes/card.html), which the list bars (approved-renders.md:126-129).",
+   "rewrite": "Remove until a card mockup with the flat globe passes the gate and joins the list."
+  },
+  {
+   "where": "#applications L544",
+   "text": "The house card / One card for the company, not a person: the front the lockup, the back one line and the address. The tints run along its foot in order, printed on the edge of the stack, so a box of cards is a spectrum. A second card, cut from 1 mm cast acrylic in any tint and engraved, is for the bar and for the people who ask.",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "\"is for the bar\" points to the bar proposal.",
+   "rewrite": "The house card / One card for the company, not a person: the front the lockup, the back one line and the address. The tints run along its foot in order, printed on the edge of the stack, so a box of cards is a spectrum. A second card, cut from 1 mm cast acrylic in any tint and engraved, is for the people who ask."
+  },
+  {
+   "where": "#applications L545",
+   "text": "Size: 89 \u00d7 51 mm",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Card spec; state it as the standard (the \"proposals\" wording of 542 goes).",
+   "rewrite": ""
+  },
+  {
+   "where": "#applications L545",
+   "text": "Stock: Uncoated 600 gsm, letterpress black; edge painted in seven bands",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Card spec; state it as the standard (the \"proposals\" wording of 542 goes).",
+   "rewrite": ""
+  },
+  {
+   "where": "#applications L545",
+   "text": "Acrylic: 1 mm cast, laser-cut and engraved, corners 1 mm",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Card spec; state it as the standard (the \"proposals\" wording of 542 goes).",
+   "rewrite": ""
+  },
+  {
+   "where": "#applications L546",
+   "text": "[img img/plate.jpg alt=\"The rating plate: black anodized aluminum on red acrylic, laser-marked with EARF, Tropos, model, serial, ratings and marks\"]",
+   "visible": true,
+   "verdict": "FIX_UNAPPROVED_PICTURE",
+   "why": "Absent from the approved list, which holds every picture allowed in public (approved-renders.md:1-6); a drawn mockup, never gated. It also shows certification marks that are not held.",
+   "rewrite": "Drop with its section."
+  },
+  {
+   "where": "#applications L547",
+   "text": "The rating plate / Proposed. The marks shown are where they would go once earned: none is held yet. The one place the brand is required by law, so it is the most carefully set. Black anodized aluminum, laser-marked white, two black pan heads, beside the amplifier on the back of every Tropos, whatever its color.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "\"Proposed.\" and \"none is held yet\": a proposal with its status; the wording is an open item (676). Showing marks not yet earned is a compliance risk in front of stakeholders.",
+   "rewrite": ""
+  },
+  {
+   "where": "#applications L548",
+   "text": "Size: 70 \u00d7 40 \u00d7 1 mm / Type: The wordmark, then Plex Mono / Ratings: As on the FA122's own plate / Marks: Drawn where they go; added only once tested",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Rows of the proposed plate; \"As on the FA122's own plate\" and \"added only once tested\" are internal.",
+   "rewrite": ""
+  },
+  {
+   "where": "#applications L549",
+   "text": "[img img/social.jpg alt=\"Three social posts: the seven Tropos in a grid under A world of sound, in color; Tropos in Ice in snow at dusk with Glacier blue, and in no hurry; Tropos in Ice, whole and cover off, with Seven colors, Ember to Fog\"]",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Picture check: on the list, built from the approved fronts and Ice habitat (approved-renders.md:30-31; scenes/social.html uses only those and the flat wordmark; re-shot from tallr6 in f328494d).",
+   "rewrite": ""
+  },
+  {
+   "where": "#applications L550",
+   "text": "Social posts / One picture, one line, the wordmark small in a corner. The line is always the site's, never a caption written for the feed. Three kinds rotate: the seven, a tint in its element, one tint whole in the studio.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current rule.",
+   "rewrite": ""
+  },
+  {
+   "where": "#applications L551",
+   "text": "Format: 4:5, 1080 \u00d7 1350",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current social spec.",
+   "rewrite": ""
+  },
+  {
+   "where": "#applications L551",
+   "text": "Line: Instrument Sans 600, top-left or over sky",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current social spec.",
+   "rewrite": ""
+  },
+  {
+   "where": "#applications L551",
+   "text": "Label: Plex Mono, the tint's number and name",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current social spec.",
+   "rewrite": ""
+  },
+  {
+   "where": "#applications L551",
+   "text": "Never: Stickers, emoji, countdowns",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current social spec.",
+   "rewrite": ""
+  },
+  {
+   "where": "#applications L552",
+   "text": "[img img/stationery.jpg alt=\"A letterhead with the wordmark and the seven tints along its foot, an envelope, a black care card reading Care for cast acrylic, and a cotton tote printed with the globe\"]",
+   "visible": true,
+   "verdict": "FIX_UNAPPROVED_PICTURE",
+   "why": "Absent from the approved list, which holds every picture allowed in public (approved-renders.md:1-6); a drawn mockup, never gated.",
+   "rewrite": "Remove until it passes the gate and joins the list."
+  },
+  {
+   "where": "#applications L553",
+   "text": "Paper, and the card in the box / The letter says what the site says. The care card ships in every box in the site's own words, because the wrong cleaner crazes acrylic for good. The tote is the bar's: the globe in one color on heavy cotton.",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "\"The tote is the bar's\" points to the bar proposal.",
+   "rewrite": "Paper, and the card in the box / The letter says what the site says. The care card ships in every box in the site's own words, because the wrong cleaner crazes acrylic for good. The tote carries the globe in one color on heavy cotton."
+  },
+  {
+   "where": "#applications L554",
+   "text": "Letter: US Letter, letterpress, the tints along its foot",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current paper spec.",
+   "rewrite": ""
+  },
+  {
+   "where": "#applications L554",
+   "text": "Envelope: No. 10, the wordmark and the city only",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current paper spec.",
+   "rewrite": ""
+  },
+  {
+   "where": "#applications L554",
+   "text": "Care card: Black, white print, 4 \u00d7 5.5 in",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current paper spec.",
+   "rewrite": ""
+  },
+  {
+   "where": "#applications L554",
+   "text": "Tote: Heavy natural cotton, one-color screen print",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current paper spec.",
+   "rewrite": ""
+  },
+  {
+   "where": "#applications L556",
+   "text": "Planet EARF's signs / The bar names itself once, quietly, on a side door. Inside, the brand's busiest application is a tag: everything in the room is for sale, so every object wears one, cut from Fog acrylic and hung on a black thread, its tint marked with a dot.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Bar proposal (the Book: \"a proposal\", 374, 676); naming it in public is the owner's open call (FACTS.md:37,149); he funded \"$50K: prototypes + debut\" over \"$1.5M with the bar\" (README.md:140).",
+   "rewrite": ""
+  },
+  {
+   "where": "#applications L557",
+   "text": "Door: Blackened steel, a 280 mm etched disc, unlit / Tag: 90 \u00d7 50 mm Fog acrylic, engraved, filled black / Hours: 6 mm smoked gray stock, glazed to the window; as in the house book / Prices: On request; set at launch",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Rows of the bar's signs; \"as in the house book\" cites an internal document. Bar proposal (the Book: \"a proposal\", 374, 676); naming it in public is the owner's open call (FACTS.md:37,149); he funded \"$50K: prototypes + debut\" over \"$1.5M with the bar\" (README.md:140).",
+   "rewrite": ""
+  },
+  {
+   "where": "#applications L559",
+   "text": "EARFcoin / The brand you can hold. One coin a guest, one song a coin: cast acrylic in the seven tints, 40 mm across, the globe engraved on its back and read through the tint, GOOD FOR ONE SONG around the rim, reeded like money.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "The owner's own idea (\"One idea I had before bed: EARFcoin\", README.md:126) and pick (\"EARFcoin: A, engraved, reeded edge\", README.md:131), but it is the bar's ritual (\"One coin a guest\"), and the bar is not public (FACTS.md:149). It returns with the bar if he names it.",
+   "rewrite": ""
+  },
+  {
+   "where": "#applications L560",
+   "text": "Size: 40 \u00d7 6 mm, about 9 g / Made: Laser-cut, edges polished and reeded, engraved and filled / Ritual: A bowl at the door, a clear column at the decks",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "EARFcoin rows; \"A bowl at the door, a clear column at the decks\" is the bar.",
+   "rewrite": ""
+  },
+  {
+   "where": "#packaging L566",
+   "text": "09 \u00b7 Packaging / Arrives like an instrument. Opens like a gift.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Chapter head; current.",
+   "rewrite": ""
+  },
+  {
+   "where": "#packaging L567",
+   "text": "A speaker of about 73 kg in polished acrylic is a hard thing to ship and an easy thing to scratch. The crate is built so two people can open it and walk the speaker out without lifting it; the lamps come in boxes made of paper dyed the color of the shade inside.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current; \"about 73 kg\" matches the site preview (site RC index.html:999).",
+   "rewrite": ""
+  },
+  {
+   "where": "#packaging L568",
+   "text": "A pair of Tropos, as it arrives. Two upright crates and one horn case, printed in two inks: black and the tint.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current.",
+   "rewrite": ""
+  },
+  {
+   "where": "#packaging L571",
+   "text": "Unlatch Four black over-center latches on the door. No screws, no tools, no crowbar.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current unboxing step.",
+   "rewrite": ""
+  },
+  {
+   "where": "#packaging L572",
+   "text": "Lower The door is hinged at its foot and comes down to the floor as a gentle ramp.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current unboxing step.",
+   "rewrite": ""
+  },
+  {
+   "where": "#packaging L573",
+   "text": "Walk it out The speaker rides out on its birch sled, on felt runners, down the door.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current unboxing step.",
+   "rewrite": ""
+  },
+  {
+   "where": "#packaging L574",
+   "text": "Unsleeve A cotton sleeve in the speaker's tint lifts off from the top. It stays as the dust cover.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current unboxing step.",
+   "rewrite": ""
+  },
+  {
+   "where": "#packaging L575",
+   "text": "Crown it The horn comes out of its own case, lid up, and seats on its posts with one nut.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current unboxing step.",
+   "rewrite": ""
+  },
+  {
+   "where": "#packaging L578",
+   "text": "[img img/decal-crate-front.jpg alt=\"The crate's front: EARF, 01 Ember, The last light of the fire\"] The front. Two inks.",
+   "visible": true,
+   "verdict": "FIX_UNAPPROVED_PICTURE",
+   "why": "Absent from the approved list, which holds every picture allowed in public (approved-renders.md:1-6); a drawn mockup, never gated. Drawn decal (scenes/decal-crate-front.html); its caption goes with it.",
+   "rewrite": "Remove until it passes the gate and joins the list."
+  },
+  {
+   "where": "#packaging L579",
+   "text": "[img img/decal-crate-inside.jpg alt=\"The inside of the door: \"Lower it gently. Walk it out.\" and the five steps\"] Inside the door.",
+   "visible": true,
+   "verdict": "FIX_UNAPPROVED_PICTURE",
+   "why": "Absent from the approved list, which holds every picture allowed in public (approved-renders.md:1-6); a drawn mockup, never gated. Drawn decal (scenes/decal-crate-inside.html); its caption goes with it.",
+   "rewrite": "Remove until it passes the gate and joins the list."
+  },
+  {
+   "where": "#packaging L580",
+   "text": "[img img/decal-crate-side.jpg alt=\"The crate's side: arrows, Stand it up, keep it up, and the handling marks\"] The side: handling marks.",
+   "visible": true,
+   "verdict": "FIX_UNAPPROVED_PICTURE",
+   "why": "Absent from the approved list, which holds every picture allowed in public (approved-renders.md:1-6); a drawn mockup, never gated. Drawn decal (scenes/decal-crate-side.html); its caption goes with it.",
+   "rewrite": "Remove until it passes the gate and joins the list."
+  },
+  {
+   "where": "#packaging L583",
+   "text": "Piece | Outside | Built from | Protects with | Tested to target",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "The \"target\" tag is process.",
+   "rewrite": "Piece | Outside | Built from | Protects with | Tested to"
+  },
+  {
+   "where": "#packaging L585",
+   "text": "Tropos crate, one a speaker | 720 \u00d7 600 \u00d7 1160 mm on two 100 mm skids proposal | 18 mm birch ply, cleated; black steel corners and latches; the door hinged at its foot | Charcoal felt lining; cross-linked polyethylene corner blocks; the sled; the cotton sleeve against scuffs; tilt and shock indicators on two faces | ISTA 3B (freight, less than a truckload), plus a drop and tilt check on the crate",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "The \"proposal\" tag is process; the spec stays.",
+   "rewrite": "Tropos crate, one a speaker | 720 \u00d7 600 \u00d7 1160 mm on two 100 mm skids | (rest unchanged)"
+  },
+  {
+   "where": "#packaging L586",
+   "text": "Horn case, one a pair | 1420 \u00d7 560 \u00d7 460 mm proposal | 18 mm birch ply, a lifting lid, two steel handles | Both horns face up in a cut foam bed, the throats unloaded; the pods' caps packed apart | ISTA 3B, with the crates",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "The \"proposal\" tag is process; \"the driver's pod\" is current site wording (site RC index.html:1264).",
+   "rewrite": "Horn case, one a pair | 1420 \u00d7 560 \u00d7 460 mm | (rest unchanged)"
+  },
+  {
+   "where": "#packaging L587",
+   "text": "Hemisphere drum, one a shade | 260 mm across, 170 mm tall proposal | Through-dyed board in the shade's tint, the globe blind-debossed on the lid; the fitting in a tray below | A molded pulp ring holds the shade by its collar, clear of every wall | ISTA 3A (parcel)",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "The \"proposal\" tag is process. Recheck \"the fitting\" and \"its collar\" when Hemisphere is redrawn (owner, 2026-11-10T00:28Z).",
+   "rewrite": "Hemisphere drum, one a shade | 260 mm across, 170 mm tall | (rest unchanged)"
+  },
+  {
+   "where": "#packaging L588",
+   "text": "Core box | 220 mm cube proposal | Through-dyed board in the ball's tint; a lift-off lid | Molded pulp: the ball on top, the base beneath, and its dock beside it | ISTA 3A (parcel)",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "The \"proposal\" tag is process; the dock is the owner's (\"Core charging: sign the dock\", 2026-11-01T12:11Z).",
+   "rewrite": "Core box | 220 mm cube | (rest unchanged)"
+  },
+  {
+   "where": "#packaging L589",
+   "text": "Mantle crate | To be drawn from Mantle's design figures, about 450 \u00d7 370 \u00d7 199 mm | Birch ply, the lid printed with the tint | Platter and lid packed apart; the plinth on its own foam | ISTA 3A or 3B by weight",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "\"To be drawn from Mantle's design figures\" is process, and the size given is Mantle's own (site preview), not the crate's.",
+   "rewrite": "Mantle crate | Sized to Mantle (about 450 \u00d7 370 \u00d7 199 mm) | Birch ply, the lid printed with the tint | Platter and lid packed apart; the plinth on its own foam | ISTA 3A or 3B by weight"
+  },
+  {
+   "where": "#packaging L592",
+   "text": "Why this raises the odds: one freight claim on a pair can erase the margin on several; a crate two people can open without tools is also a crate a dealer or a hotel can receive without a specialist. And the unboxing is the first piece of content most owners post.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Team rationale: \"Why this raises the odds\", freight claims against margin.",
+   "rewrite": ""
+  },
+  {
+   "where": "#ideas L598",
+   "text": "10 \u00b7 Big ideas / Seven ways to raise the odds.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Funding/sales tactic for the team (599: estimates, placeholders). Execution, deferred by the owner: \"C skip for now I want to nail the concept first and then execute\" (2026-11-04T01:53Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#ideas L599",
+   "text": "Ranked by what each does for funding or sales per dollar. Every cost is an estimate, not a quote; names, dates and prices in the mockups are placeholders.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "\"Ranked by what each does for funding or sales per dollar ... placeholders\": team-facing. Execution, deferred by the owner: \"C skip for now I want to nail the concept first and then execute\" (2026-11-04T01:53Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#ideas L600",
+   "text": "[img img/idea-founding.jpg alt=\"A certificate reading Pair thirty-seven of the first hundred, with its price, reservation and deposit lines, beside a black plate marked Founding 037 of 100\"]",
+   "visible": true,
+   "verdict": "FIX_UNAPPROVED_PICTURE",
+   "why": "Absent from the approved list, which holds every picture allowed in public (approved-renders.md:1-6); a drawn mockup, never gated. A Founding Hundred certificate with price and deposit lines; goes to the archive with its idea.",
+   "rewrite": "Drop with its section."
+  },
+  {
+   "where": "#ideas L601",
+   "text": "Idea 1 \u00b7 the one most likely to raise money / The Founding Hundred",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Funding/sales tactic for the team (599: estimates, placeholders). Execution, deferred by the owner: \"C skip for now I want to nail the concept first and then execute\" (2026-11-04T01:53Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#ideas L601",
+   "text": "The first hundred pairs of Tropos, reserved before the first is built, numbered on both plates and kept on the founders' register. The number is the reward, not a discount.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "The first-run program is the owner's open call (FACTS.md:137-141). Execution, deferred by the owner: \"C skip for now I want to nail the concept first and then execute\" (2026-11-04T01:53Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#ideas L601",
+   "text": "A proposal; how first buyers sign up is still open.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "\"A proposal; how first buyers sign up is still open.\"",
+   "rewrite": ""
+  },
+  {
+   "where": "#ideas L602",
+   "text": "What a buyer gets",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Label of an archived offer list.",
+   "rewrite": ""
+  },
+  {
+   "where": "#ideas L602",
+   "text": "One of the first hundred pairs, in any of the seven tints, made to order",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Founding Hundred benefit; the program is the owner's open call (FACTS.md:137-141).",
+   "rewrite": ""
+  },
+  {
+   "where": "#ideas L602",
+   "text": "FOUNDING 037 / 100 laser-marked on both rating plates",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Founding Hundred benefit; the program is the owner's open call (FACTS.md:137-141).",
+   "rewrite": ""
+  },
+  {
+   "where": "#ideas L602",
+   "text": "A numbered certificate and a place on the founders' register",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Founding Hundred benefit; the program is the owner's open call (FACTS.md:137-141).",
+   "rewrite": ""
+  },
+  {
+   "where": "#ideas L602",
+   "text": "A seat at a Session, and an EARFcoin for life",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Founding Hundred benefit; the program is the owner's open call (FACTS.md:137-141).",
+   "rewrite": ""
+  },
+  {
+   "where": "#ideas L602",
+   "text": "Price: On request; set at launch / Stage 1: A refundable reservation, about $1,000 a pair (lamps $100 to $250); \"planned product; refundable any time\" / Stage 2: After a working prototype: a 30 to 50% deposit with a stated delivery window / Stage 3: The balance before shipping / When: Reservations once terms are written; deposits after a working prototype",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Price, reservation and deposit stages: funding tactics. Execution, deferred by the owner: \"C skip for now I want to nail the concept first and then execute\" (2026-11-04T01:53Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#ideas L603",
+   "text": "Before anything is taken: counsel drafts the terms. The FTC's mail-order rule applies to made-to-order goods (shipping dates with a reasonable basis, delay notices, refunds within seven working days); California asks for the refund policy, legal name and street address before payment (B&P \u00a717538) and voids \"non-refundable deposits\" in consumer sales (Civil Code \u00a71671). Deposits sit in a separate account, spent only on that order; a company is formed first (its form is still open). Amounts are examples.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Legal notes for the team before taking money.",
+   "rewrite": ""
+  },
+  {
+   "where": "#ideas L605",
+   "text": "Idea 2 / The Tint Library / The seven tints as 100 \u00d7 100 \u00d7 20 mm cast tiles in a birch tray, sent to architects and designers who ask.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "The Tint Library: Funding/sales tactic for the team (599: estimates, placeholders). Execution, deferred by the owner: \"C skip for now I want to nail the concept first and then execute\" (2026-11-04T01:53Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#ideas L606",
+   "text": "Cost: About $100 to $250 a kit est. / When: As soon as the sheet is chosen / Why: Designers specify what they can hold, and making the kits fixes the cast colors manufacturing needs.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Cost, timing, rationale for the team.",
+   "rewrite": ""
+  },
+  {
+   "where": "#ideas L608",
+   "text": "Idea 3 \u00b7 the proof / EARF Sessions",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "EARF Sessions: Funding/sales tactic for the team (599: estimates, placeholders). Execution, deferred by the owner: \"C skip for now I want to nail the concept first and then execute\" (2026-11-04T01:53Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#ideas L608",
+   "text": "One album, start to finish, recorded live through the room's own pair in front of six listeners, pressed in the night's tint and numbered. Proof the speakers are serious, in the one form that can't be faked.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Session 00 is the owner's open call (FACTS.md:150).",
+   "rewrite": ""
+  },
+  {
+   "where": "#ideas L609",
+   "text": "What a buyer gets",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Label of an archived offer list.",
+   "rewrite": ""
+  },
+  {
+   "where": "#ideas L609",
+   "text": "A 12-inch LP, 180 g, pressed in the evening's tint, numbered",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Session benefit (open program, FACTS.md:150).",
+   "rewrite": ""
+  },
+  {
+   "where": "#ideas L609",
+   "text": "The jacket with the room on the front, and a download code",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Session benefit (open program, FACTS.md:150).",
+   "rewrite": ""
+  },
+  {
+   "where": "#ideas L609",
+   "text": "First copies to the night's six listeners",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Session benefit (open program, FACTS.md:150).",
+   "rewrite": ""
+  },
+  {
+   "where": "#ideas L609",
+   "text": "Session 00 recorded through the first pair, before the bar exists",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Session benefit; \"before the bar exists\" also points to the bar proposal.",
+   "rewrite": ""
+  },
+  {
+   "where": "#ideas L609",
+   "text": "Price: On request; the budget recommends $50 for a numbered edition of 300 (est.) / Cost: $10,917 for 300 (est.): recording, mixing, mastering, pressing, licenses, the artist's fee for the night and a 10% contingency / Return: At $50, break-even at 257 of the 275 for sale (25 go to the artist). A partner pays for the pressing (about $3,000): at $50, break-even falls to 186, and selling out leaves about $3,771 (est.) / When: Session 00 at the debut; files to the plant within four weeks; records about 14 weeks after / Press: The record goes to the hi-fi press once pressed",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Price, cost, break-even, timing: team-facing estimates.",
+   "rewrite": ""
+  },
+  {
+   "where": "#ideas L610",
+   "text": "Before anything is taken: the artist's agreement and share in writing, and mechanical licenses for any songs the artist didn't write.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Legal notes for the team.",
+   "rewrite": ""
+  },
+  {
+   "where": "#ideas L611",
+   "text": "[img img/idea-hotel.jpg alt=\"A suite drawn in plan with its speakers, turntable and lamps, an acrylic key card numbered 1204, and a card reading This room plays\"]",
+   "visible": true,
+   "verdict": "FIX_UNAPPROVED_PICTURE",
+   "why": "Absent from the approved list, which holds every picture allowed in public (approved-renders.md:1-6); a drawn mockup, never gated. Hotel suite mockup; goes to the archive with its idea.",
+   "rewrite": "Drop with its section."
+  },
+  {
+   "where": "#ideas L612",
+   "text": "Idea 4 / Hotel listening suites / A suite fitted as a complete EARF room in one tint, with records chosen for it; everything for sale at the front desk.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Hotel listening suites: Funding/sales tactic for the team (599: estimates, placeholders). Execution, deferred by the owner: \"C skip for now I want to nail the concept first and then execute\" (2026-11-04T01:53Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#ideas L613",
+   "text": "Cost: Trade-priced kits; one pilot suite est. / When: A season after a signed hotel / Why: A night with the speaker sells it better than a picture; trade revenue that doesn't wait for the bar.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Cost, timing, rationale (\"doesn't wait for the bar\").",
+   "rewrite": ""
+  },
+  {
+   "where": "#ideas L615",
+   "text": "Idea 5 / A debut room / One dark room, the speakers along a curved wall, a Session each night, every piece tagged: first in San Francisco, at the debut; later at the hi-fi trade fairs and in Milan, once there is a batch.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "A debut room: Funding/sales tactic for the team (599: estimates, placeholders). Execution, deferred by the owner: \"C skip for now I want to nail the concept first and then execute\" (2026-11-04T01:53Z). Debut date parked (FACTS.md:59).",
+   "rewrite": ""
+  },
+  {
+   "where": "#ideas L616",
+   "text": "Cost: $4k to $15k in San Francisco; more for the trade fairs est. / When: After the debut is set / Why: Collectors and design press first; dealers and the design world once there is stock to sell.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Cost, timing, rationale.",
+   "rewrite": ""
+  },
+  {
+   "where": "#ideas L618",
+   "text": "Idea 6 / Artist editions / An edition tint each year, outside the seven, chosen and named with a musician or an artist, cast once, numbered, never again; with a Session pressed in the same color.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Artist editions: an agent proposal. The owner's own edition idea is different (\"some special edition with things cast in the acrylic, like the miss blanche chair ... Could also be cool to have some with bubbles\", 2026-10-31T20:35Z); that could come forward if he confirms it.",
+   "rewrite": ""
+  },
+  {
+   "where": "#ideas L619",
+   "text": "Cost: A color batch's minimum, and the artist's share est. / When: After the seven are in production / Why: A waitlist, a premium and the artist's audience.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Cost, timing, rationale.",
+   "rewrite": ""
+  },
+  {
+   "where": "#ideas L621",
+   "text": "Idea 7 / Mother EARF, at city scale / A proposal: the globe at 4 m on a low plinth, for a plaza, a waterfront or a festival.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "\"A proposal\": Mother EARF at 4 m. Execution, deferred by the owner: \"C skip for now I want to nail the concept first and then execute\" (2026-11-04T01:53Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#ideas L622",
+   "text": "Cost: About $150k to $300k at 4 m; far less at 2 m est. / When: 6 to 9 months temporary; 12 to 18 permanent / Why: The mark at the size of a building, and the idea someone else can pay for: a developer, a sponsor, a festival.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Cost, timing, rationale (\"the idea someone else can pay for\").",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L628",
+   "text": "11 \u00b7 Press kit / The facts, and only the facts.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current; renumber to \"10 \u00b7 Press kit\" once chapter 10 goes.",
+   "rewrite": "10 \u00b7 Press kit / The facts, and only the facts."
+  },
+  {
+   "where": "#press L629",
+   "text": "Taken from earf.world's particulars and the project logs, with no invented figure, no quote and no price. The press kit stays held until it is released.",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "\"the project logs\" is an internal source; \"The press kit stays held until it is released\" is status.",
+   "rewrite": "Taken from earf.world's particulars, with no invented figure, no quote and no price."
+  },
+  {
+   "where": "#press L630",
+   "text": "Boilerplate / EARF designs hi-fi and lighting in tinted cast acrylic in San Francisco, in seven colors, Ember to Fog. Its products are named for the layers of the Earth: Tropos, a powered horn loudspeaker; Hemisphere, a pendant; Core, a table lamp; and Mantle, a turntable. earf.world",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current boilerplate; matches the line and the site.",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L632",
+   "text": "[img img/honest-front-ember.jpg alt=\"Tropos in Ember\"] [img img/honest-front-dust.jpg alt=\"Tropos in Dust\"] [img img/honest-front-acid.jpg alt=\"Tropos in Acid\"] [img img/honest-front-poison.jpg alt=\"Tropos in Poison\"] [img img/honest-front-ice.jpg alt=\"Tropos in Ice\"] [img img/honest-front-haze.jpg alt=\"Tropos in Haze\"] [img img/honest-front-fog.jpg alt=\"Tropos in Fog\"]",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Picture check, seven files: Approved: the tallr6 fronts, approved-renders.md:65 (Book listed as user); make_book.py:38-44 pins those commits.",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L632",
+   "text": "The company \u00b7 Render / EARF / Hi-fi and light, cast in tinted acrylic, in seven colors, Ember to Fog.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current.",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L632",
+   "text": "Where: San Francisco",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current.",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L632",
+   "text": "Site: earf.world",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current.",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L632",
+   "text": "Write: A working address, before release",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "\"A working address, before release\" is a placeholder note; the site carries hello@earf.world (origin/main index.html:652; site RC index.html:975).",
+   "rewrite": "Write: hello@earf.world"
+  },
+  {
+   "where": "#press L632",
+   "text": "Products: Tropos, Hemisphere, Core, Mantle",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current.",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L632",
+   "text": "Colors: Seven, the same in every product; an eighth, Smoke, held",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "\"an eighth, Smoke, held\" keeps an open item on show. Smoke \"held\" is an open pipeline status (--hold smoke, 2026-11-03T15:17Z), not an owner ruling; approved-renders.md:152.",
+   "rewrite": "Colors: Seven, the same in every product"
+  },
+  {
+   "where": "#press L632",
+   "text": "Status: In development, not yet for sale; every picture a render",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current, honest status (voice rule 526).",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L632",
+   "text": "Sells: Made to order; prices set at launch",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "Tonight's site says \"Price on request. Each pair is made to order.\" (site RC index.html:999,1055); \"set at launch\" is the older live wording (origin/main index.html:694).",
+   "rewrite": "Sells: Made to order; price on request"
+  },
+  {
+   "where": "#press L633",
+   "text": "[img img/honest-front-ember.jpg alt=\"Tropos in Ember on a pale seamless\"]",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Picture check: Approved: the tallr6 fronts, approved-renders.md:65 (Book listed as user); make_book.py:38-44 pins those commits.",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L633",
+   "text": "Powered horn loudspeaker \u00b7 Render / Tropos / Each cabinet tinted cast acrylic, 20 mm thick; the horn one 10 mm sheet formed over a plug and polished, in the cabinet's hue, deep enough to read like the 20 mm wall; the driver and posts show through it.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current horn: the owner's \"Horn: A, smooth\" (2026-11-03T03:02Z) and \"just go polished\" (15:13Z); FACTS.md:64.",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L633",
+   "text": "Size: 1295 mm tall; 560 wide, the horn flush with the cabinet; 428 deep overall, 420 at the cabinet",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Matches the site preview's particulars (site RC index.html:999).",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L633",
+   "text": "Weight: About 73 kg on its own feet (modeled, not weighed)",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Matches the site preview's particulars (site RC index.html:999).",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L633",
+   "text": "Drivers: FaitalPRO 15PR400 15-inch woofer; B&C DE1085TN 2-inch compression driver",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Matches the site preview's particulars (site RC index.html:999).",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L633",
+   "text": "Power: Hypex FA122 built in, with DSP, crossed at 1 kHz; about 75 W into the 8 \u03a9 woofer",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Matches the site preview's particulars (site RC index.html:999).",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L633",
+   "text": "Bass: To about 51 Hz at \u22123 dB; the ports tuned to 38 Hz",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Matches the site preview's particulars (site RC index.html:999).",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L633",
+   "text": "Loudness: Up to about 115 dB at 1 m, each",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Matches the site preview's particulars (site RC index.html:999).",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L633",
+   "text": "Inputs: XLR (and a link out), RCA, AES, S/PDIF coaxial and optical; USB to set it up",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Matches the site preview's particulars (site RC index.html:999).",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L634",
+   "text": "Pendant lamp / Hemisphere / Hung low over a table. Its shade comes off with a quarter turn.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Matches the site preview. Recheck the quarter turn with the redrawn hub (owner's redesign, 2026-11-10T00:28Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L634",
+   "text": "Size: 200 mm across",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current (site preview).",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L634",
+   "text": "Shade: Three formed layers of cast acrylic: the color outside, a clear shell, an opal inside",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Color outside is the owner's (\"Hemisphere: color outside\", 2026-11-01T12:11Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L634",
+   "text": "Light: A 575-lumen LED, 2700 K, CRI 90, shielded in the hub",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "\"shielded in the hub\" is the as-drawn downlight, which \"does not glow\" (approved-renders.md:88-90) and which the owner's direction replaces: \"it should work like core cut in half ... downward cast light will be the color of the bulb\" (2026-11-10T00:28Z; approved-renders.md:17-21). 575 lm is his own pick (README.md:135).",
+   "rewrite": "Light: A 575-lumen LED, 2700 K, CRI 90, designed so the dome glows in its own color and the light straight down is the bulb's warm white."
+  },
+  {
+   "where": "#press L634",
+   "text": "Fitting: Black anodized aluminum, quarter-turn catch",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current (site preview).",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L634",
+   "text": "Mains: To follow",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "\"To follow\" is a placeholder; the site preview gives \"120 V, dimmable\".",
+   "rewrite": "Mains: 120 V, dimmable"
+  },
+  {
+   "where": "#press L634",
+   "text": "Shades: All seven, sold singly",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current (site preview).",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L635",
+   "text": "Table lamp / Core / A tinted ball over a white opal inner ball, sitting low in a black acrylic base, with no cord.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Core B as decided (owner 2026-11-09T21:11Z). Optional forward clause per the owner's 00:28Z note: \"the color the same depth all round\".",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L635",
+   "text": "Ball: Tinted cast acrylic outside, the same dye as Tropos and Mantle; a 3 mm white opal inner ball, the same opal as Hemisphere's diffuser",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "The lamps' lock (approved-renders.md:11-13, the owner's \"assuming we're still using the same materials\").",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L635",
+   "text": "Size: 160 mm ball, 180 mm tall",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Matches the site preview's Core facts.",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L635",
+   "text": "Weight: About 1.5 kg",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Matches the site preview's Core facts.",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L635",
+   "text": "Light: 2200 to 2700 K, warmer as it dims",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Matches the site preview's Core facts.",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L635",
+   "text": "Control: Touch the ring: tap to switch, hold to dim",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Matches the site preview's Core facts.",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L635",
+   "text": "Power: Cordless: three standard LiFePO4 cells, about five hours a charge; it charges on its dock, a polished black acrylic disc it sits in at any turn",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "The owner's picks: \"Core battery: A, LiFePO4 \u00b7 Core charging: sign the dock\" (2026-11-01T12:11Z); cordless (2026-10-31T20:33Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L635",
+   "text": "Rating: Designed to meet IP44",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Matches the site preview's Core facts.",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L636",
+   "text": "Turntable",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current; the site preview calls Mantle a turntable.",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L636",
+   "text": "In development.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "A status note singling out Mantle (its picture was pulled, 2026-11-10T00:41Z); the company sheet already says every piece is in development.",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L636",
+   "text": "Mantle / A turntable in cast acrylic. The plinth floats 40 mm over its base.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Strata Float v3 (owner \"Mantle: A\", 2026-11-01T12:11Z); matches the site preview.",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L636",
+   "text": "Plinth: 25 mm tinted cast acrylic",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "v3 as built (71d3163e: 25.4 mm deck); site preview.",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L636",
+   "text": "Drive: Belt; Rega's 24 V motor hung beneath the plinth",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current (site preview).",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L636",
+   "text": "Arm \u00b7 cartridge: Rega RB330 \u00b7 Ortofon 2M, Blue or Black (still open)",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "\"Ortofon 2M, Blue or Black (still open)\" is an open question; the site preview says \"A moving-magnet cartridge\".",
+   "rewrite": "Arm \u00b7 cartridge: Rega RB330 \u00b7 a moving-magnet cartridge"
+  },
+  {
+   "where": "#press L636",
+   "text": "Phono: Built in, MM, with a bypass",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current (site preview).",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L636",
+   "text": "Size: About 450 \u00d7 370 \u00d7 199 mm, lid down (design figures)",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "v3 figures (site preview; 71d3163e).",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L636",
+   "text": "Weight: About 12.9 kg with the lid (design figure)",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "v3 as built: \"about 12.9 kg with the lid\" (71d3163e).",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L638",
+   "text": "Every release carries the standing lines: in development and not yet for sale; every picture a render until the first are built; design figures until measured; prices set at launch. Planet EARF has an internal sheet only, since the bar isn't on the site.",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "\"Planet EARF has an internal sheet only, since the bar isn't on the site\" is internal; \"prices set at launch\" is the older wording (see 632 Sells).",
+   "rewrite": "Every release carries the standing lines: in development and not yet for sale; every picture a render until the first are built; design figures until measured; price on request."
+  },
+  {
+   "where": "#press L641",
+   "text": "The pitches, once the kit is released / Four embargoed pitches to the long-lead print titles, each under 150 words and written to its angle: Wallpaper* (offered the one exclusive first look, in print), Monocle (the listening room, and a radio interview), Dwell (a room in one color), Sunset (a West Coast maker). Kinfolk only if it asks.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "A PR plan (\"once the kit is released\"), with target titles and an exclusive. Execution, deferred by the owner: \"C skip for now I want to nail the concept first and then execute\" (2026-11-04T01:53Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#press L642",
+   "text": "A local note, when the debut is set / A local note for the debut (the SF Standard, SFist, Mission Local, KQED Arts; the Chronicle's Datebook and 7x7 by hand) with no pictures, since before the night every picture is a render, and a note asking design editors in town to come and see the room, not to write yet. All drafts, nothing sent.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "\"All drafts, nothing sent\"; tied to the debut, whose date is parked (FACTS.md:59).",
+   "rewrite": ""
+  },
+  {
+   "where": "#facts L659",
+   "text": "12 \u00b7 The facts of record / What this edition takes as settled, and what is still open.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "A decision log (\"this edition\", \"settled\", \"still open\"). Replace with a plain \"At a glance\" list built from the settled facts below, or fold them into the product pages.",
+   "rewrite": ""
+  },
+  {
+   "where": "#facts L660",
+   "text": "As of 9 November 2026. Anything not here is a proposal.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "\"Anything not here is a proposal\": process.",
+   "rewrite": ""
+  },
+  {
+   "where": "#facts L662",
+   "text": "Settled",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "The \"settled\" frame is decision history; the facts under it stay as current statements.",
+   "rewrite": ""
+  },
+  {
+   "where": "#facts L663",
+   "text": "The line: \"A world of sound, in color.\"",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "The owner's tagline (2026-11-02T15:48Z); also at 512 and 520.",
+   "rewrite": ""
+  },
+  {
+   "where": "#facts L664",
+   "text": "Seven colors, Ember to Fog, in that order.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current; also at 423 and 454.",
+   "rewrite": ""
+  },
+  {
+   "where": "#facts L665",
+   "text": "Tropos stands on its own feet, with no light in its base; horn A, smooth and polished, one formed sheet in the cabinet's color.",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "\"horn A\" is an option letter, and \"with no light in its base\" only reads against the rejected lit base. Facts: owner \"No light\" (2026-11-03T15:11Z), \"Horn: A, smooth\" (03:02Z), \"just go polished\" (15:13Z).",
+   "rewrite": "Tropos stands on its own feet; its horn is one formed sheet in the cabinet's color, smooth and polished."
+  },
+  {
+   "where": "#facts L667",
+   "text": "Core is cordless and charges on its dock.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "The owner's picks: cordless (2026-10-31T20:33Z), \"sign the dock\" (2026-11-01T12:11Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#facts L668",
+   "text": "Hemisphere's shade carries its color outside.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "The owner's pick (\"Hemisphere: color outside\", 2026-11-01T12:11Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#facts L668",
+   "text": "Mantle's design is chosen: the tinted plinth floats 40 mm over its base, its light in the deck, none in the base. Its pictures are in progress.",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "\"its light in the deck, none in the base\" states an unsigned proposal: the signed v3's light is open (approved-renders.md:14-16); \"design is chosen\" is decision framing; \"Its pictures are in progress\" is status. origin/r47-brand 804cc8aa already drops the light.",
+   "rewrite": "Mantle is Strata Float: a tinted plinth floating 40 mm over a smoked base on four polished steel posts."
+  },
+  {
+   "where": "#facts L669",
+   "text": "American English. Every picture is labeled \"Render\" until it is a photograph.",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Current rules (owner 2026-10-31T19:45Z; image rule 499).",
+   "rewrite": ""
+  },
+  {
+   "where": "#facts L671",
+   "text": "Still open",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Open questions: internal.",
+   "rewrite": ""
+  },
+  {
+   "where": "#facts L672",
+   "text": "Smoke: an eighth color, or not.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Smoke \"held\" is an open pipeline status (--hold smoke, 2026-11-03T15:17Z), not an owner ruling; approved-renders.md:152.",
+   "rewrite": ""
+  },
+  {
+   "where": "#facts L672",
+   "text": "Whether the horns need custom-poured sheet.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Open supply question (Haze's horn pour, approved-renders.md:10-11).",
+   "rewrite": ""
+  },
+  {
+   "where": "#facts L672",
+   "text": "Whether Tropos keeps a cloth cover.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Open design question.",
+   "rewrite": ""
+  },
+  {
+   "where": "#facts L672",
+   "text": "Mantle's word: record player or turntable.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Open naming question; the site preview already says \"Turntable\".",
+   "rewrite": ""
+  },
+  {
+   "where": "#facts L674",
+   "text": "The rating plate's wording.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Open item (the rating plate is a proposal).",
+   "rewrite": ""
+  },
+  {
+   "where": "#facts L675",
+   "text": "\"Made in San Francisco\": until then, \"designed in.\"",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Open claim; \"designed in\" stays the public wording.",
+   "rewrite": ""
+  },
+  {
+   "where": "#facts L676",
+   "text": "The bar, Planet EARF, and its globe: proposals.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Bar proposal (the Book: \"a proposal\", 374, 676); naming it in public is the owner's open call (FACTS.md:37,149); he funded \"$50K: prototypes + debut\" over \"$1.5M with the bar\" (README.md:140).",
+   "rewrite": ""
+  },
+  {
+   "where": "#facts L677",
+   "text": "The debut's date and every price.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "The debut date is parked (FACTS.md:59); prices are the owner's open call (FACTS.md:135).",
+   "rewrite": ""
+  },
+  {
+   "where": "#facts L678",
+   "text": "A contact address that works; the mockups carry a placeholder until then.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Placeholder status; the site already lists hello@earf.world.",
+   "rewrite": ""
+  },
+  {
+   "where": "#facts L681",
+   "text": "Design figures: 1295 mm tall, 560 mm wide with the horn flush, 428 mm deep overall (420 at the cabinet); about 73 kg (modeled).",
+   "visible": true,
+   "verdict": "KEEP_CURRENT",
+   "why": "Matches the site preview (site RC index.html:999) and the Tropos sheet (633).",
+   "rewrite": ""
+  },
+  {
+   "where": "#facts L682",
+   "text": "Pictures in progress",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Picture to-do list: process.",
+   "rewrite": ""
+  },
+  {
+   "where": "#facts L682",
+   "text": "The seven backs, through the wall.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Picture to-do list: process.",
+   "rewrite": ""
+  },
+  {
+   "where": "#facts L682",
+   "text": "Dust in its element.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Picture to-do list: process.",
+   "rewrite": ""
+  },
+  {
+   "where": "#facts L682",
+   "text": "Fog in its element.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Picture to-do list: process.",
+   "rewrite": ""
+  },
+  {
+   "where": "#facts L682",
+   "text": "A pair at home, covers off, on their own feet.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Picture to-do list: process.",
+   "rewrite": ""
+  },
+  {
+   "where": "#facts L682",
+   "text": "Hemisphere and Core lit.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Picture to-do list: process.",
+   "rewrite": ""
+  },
+  {
+   "where": "#facts L682",
+   "text": "The lamps switched off in one of the seven.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Picture to-do list: process.",
+   "rewrite": ""
+  },
+  {
+   "where": "#facts L682",
+   "text": "Mantle.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Picture to-do list: process.",
+   "rewrite": ""
+  },
+  {
+   "where": "#facts L682",
+   "text": "The signs.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Picture to-do list: process. Also the bar proposal.",
+   "rewrite": ""
+  },
+  {
+   "where": "#facts L682",
+   "text": "The bar's decks and the coin column.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Picture to-do list: process. Also the bar proposal.",
+   "rewrite": ""
+  },
+  {
+   "where": "#facts L682",
+   "text": "The crates and the horn case, as a pair arrives.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Picture to-do list: process.",
+   "rewrite": ""
+  },
+  {
+   "where": "#facts L682",
+   "text": "The crate opened, the speaker on its sled.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Picture to-do list: process.",
+   "rewrite": ""
+  },
+  {
+   "where": "#facts L682",
+   "text": "The shade drums and Core's box.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Picture to-do list: process.",
+   "rewrite": ""
+  },
+  {
+   "where": "#facts L682",
+   "text": "The jacket.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Picture to-do list: process. Also the bar proposal.",
+   "rewrite": ""
+  },
+  {
+   "where": "#facts L682",
+   "text": "The invitation.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Picture to-do list: process. Also the bar proposal.",
+   "rewrite": ""
+  },
+  {
+   "where": "#facts L682",
+   "text": "An edition color on the polished horn.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Picture to-do list: process. Also a proposal (Big ideas).",
+   "rewrite": ""
+  },
+  {
+   "where": "#facts L682",
+   "text": "The Tint Library, seven tiles in a birch tray.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Picture to-do list: process. Also a proposal (Big ideas).",
+   "rewrite": ""
+  },
+  {
+   "where": "#facts L682",
+   "text": "Mother EARF at city scale.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Picture to-do list: process. Also a proposal (Big ideas).",
+   "rewrite": ""
+  },
+  {
+   "where": "#parked L688",
+   "text": "Parked / Parked: execution plans, not updated to this edition's decisions.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Parked execution plans. Execution, deferred by the owner: \"C skip for now I want to nail the concept first and then execute\" (2026-11-04T01:53Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#parked L689",
+   "text": "These plans were drafted before this edition's decisions and still carry the old dates, the eighth color and older pictures. They are left out of this edition so nothing in it reads as current. Each is kept as drafted, to be brought up to date when the concept is settled.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Process and history (\"drafted before this edition's decisions\", \"the old dates, the eighth color and older pictures\").",
+   "rewrite": ""
+  },
+  {
+   "where": "#parked L690",
+   "text": "The pictures The first photographs that aren't renders: the debut night's shoot and a studio day.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Parked plan. Execution, deferred by the owner: \"C skip for now I want to nail the concept first and then execute\" (2026-11-04T01:53Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#parked L690",
+   "text": "Launch In order, each step paying for the next.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Parked plan. Execution, deferred by the owner: \"C skip for now I want to nail the concept first and then execute\" (2026-11-04T01:53Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#parked L690",
+   "text": "The debut and the raise Paper for the first night, and for the first check.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Parked plan. Execution, deferred by the owner: \"C skip for now I want to nail the concept first and then execute\" (2026-11-04T01:53Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#parked L690",
+   "text": "The teaser and the launch grid Twenty-five seconds, then three weeks of posts.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Parked plan. Execution, deferred by the owner: \"C skip for now I want to nail the concept first and then execute\" (2026-11-04T01:53Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#parked L690",
+   "text": "Who's in the room, who writes about it, who reserves The guests, the press, and the first hundred.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Parked plan. Execution, deferred by the owner: \"C skip for now I want to nail the concept first and then execute\" (2026-11-04T01:53Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#parked L690",
+   "text": "The money pack Turning the brand into partners, grants and deposits.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Parked plan. Execution, deferred by the owner: \"C skip for now I want to nail the concept first and then execute\" (2026-11-04T01:53Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#parked L690",
+   "text": "The Kickstarter kit Two lamps, a first run, and no renders.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Parked plan. Execution, deferred by the owner: \"C skip for now I want to nail the concept first and then execute\" (2026-11-04T01:53Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#parked L690",
+   "text": "Session 00 One album, start to finish, on the first night.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Parked plan. Execution, deferred by the owner: \"C skip for now I want to nail the concept first and then execute\" (2026-11-04T01:53Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#parked L690",
+   "text": "Strategic partners Three letters, to send after the first night.",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Parked plan. Execution, deferred by the owner: \"C skip for now I want to nail the concept first and then execute\" (2026-11-04T01:53Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "#parked L690",
+   "text": "Amsterdam Light Festival A globe drawn in light, to enter under the maker's name (drafted, not submitted).",
+   "visible": true,
+   "verdict": "ARCHIVE_INTERNAL",
+   "why": "Parked plan. Execution, deferred by the owner: \"C skip for now I want to nail the concept first and then execute\" (2026-11-04T01:53Z).",
+   "rewrite": ""
+  },
+  {
+   "where": "footer L696",
+   "text": "EARF Brand Book \u00b7 second edition \u00b7 9 November 2026 (draft)",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "\"second edition\" and \"(draft)\": edition history and process.",
+   "rewrite": "EARF Brand Book \u00b7 November 2026"
+  },
+  {
+   "where": "footer L697",
+   "text": "Made from the EARF site, the project record and the bar's house book. Every picture is a render; the mockups are drawn for review, and their sizes and stocks are proposals.",
+   "visible": true,
+   "verdict": "FIX_STALE",
+   "why": "\"the project record and the bar's house book\" are internal sources; \"drawn for review ... proposals\" is process.",
+   "rewrite": "Every picture is a render until the first pieces are built and photographed."
+  }
+ ]
+}
