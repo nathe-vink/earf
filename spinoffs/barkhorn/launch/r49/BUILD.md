@@ -31,3 +31,4 @@ The screenshots in this folder are from the first RC and are out of date.
 - Vercel deploys about one push per 15 minutes. A push that gets no deployment lost its window: wait for the next one,
   then push one real follow-up commit.
 - Pushed 6b72d0aa at 2026-11-10 00:22:05 UTC inside a closed deployment window (the last deployment 00:17:40); this line is the follow-up push for the next window.
+- Pushed c5016e3f at 2026-11-10 01:33:44 UTC; r48-mantle-design's push took that window (01:34:30). This line is the follow-up push for the next one.
