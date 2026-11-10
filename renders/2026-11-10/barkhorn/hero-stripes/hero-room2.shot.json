@@ -1,0 +1,450 @@
+{
+ "title": "Tropos, the eight fanned on wide stripes in a painted room",
+ "size": [
+  1680,
+  700
+ ],
+ "set": {
+  "kind": "sweep",
+  "color": "#CFC8BE",
+  "width": 60.0,
+  "front": 12.0,
+  "depth": 1.7,
+  "radius": 0.003,
+  "height": 4.0,
+  "stripes": [
+   {
+    "x": [
+     -30.0,
+     -3.0
+    ],
+    "color": "#CE5858",
+    "tint": "ember"
+   },
+   {
+    "x": [
+     -3.0,
+     -2.0
+    ],
+    "color": "#E29364",
+    "tint": "dust"
+   },
+   {
+    "x": [
+     -2.0,
+     -1.0
+    ],
+    "color": "#D8D269",
+    "tint": "acid"
+   },
+   {
+    "x": [
+     -1.0,
+     0.0
+    ],
+    "color": "#56A462",
+    "tint": "poison"
+   },
+   {
+    "x": [
+     0.0,
+     1.0
+    ],
+    "color": "#609BD6",
+    "tint": "ice"
+   },
+   {
+    "x": [
+     1.0,
+     2.0
+    ],
+    "color": "#8A5DCD",
+    "tint": "haze"
+   },
+   {
+    "x": [
+     2.0,
+     3.0
+    ],
+    "color": "#CFC8BE",
+    "tint": "fog"
+   },
+   {
+    "x": [
+     3.0,
+     30.0
+    ],
+    "color": "#8E8D8B",
+    "tint": "smoke"
+   }
+  ],
+  "contact": {
+   "strength": 1.2,
+   "distance_m": 0.35,
+   "core_strength": 1.5,
+   "core_distance_m": 0.03
+  }
+ },
+ "camera": {
+  "position": [
+   0.0,
+   -9.9,
+   0.9
+  ],
+  "target": [
+   0.0,
+   0.0,
+   0.75
+  ],
+  "lens_mm": 40.0,
+  "level": true
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#F2F1EF",
+  "horizon": "#EEEDEB",
+  "ground": "#CFCCC8",
+  "strength": 0.6,
+  "visible": false
+ },
+ "render": {
+  "samples": 64,
+  "adaptive": 0.01,
+  "denoise": true,
+  "clamp": 4,
+  "bounces": 16,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.0,
+  "white_balance_k": 5900,
+  "white_balance_tint": 7.0
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 235,
+  "white_out": 238,
+  "contrast": 0.1,
+  "clarity": 0.03,
+  "sharpen": 0.12,
+  "sharpen_px": 0.7
+ },
+ "materials": {
+  "sweep": {
+   "roughness": 0.85,
+   "tooth": 0.25,
+   "mottle": 0.05
+  },
+  "builtin-led": {
+   "glow": 0.0
+  },
+  "builtin-led-brace": {
+   "glow": 0.0
+  },
+  "horn-satin": {
+   "roughness": 0.25
+  }
+ },
+ "lights": {
+  "top": {
+   "type": "area",
+   "size_m": [
+    7.0,
+    3.0
+   ],
+   "position": [
+    0.0,
+    -1.0,
+    3.6
+   ],
+   "target": [
+    0.0,
+    0.2,
+    0.0
+   ],
+   "irradiance": 3.2,
+   "color": "#FFF8F0"
+  },
+  "key": {
+   "type": "area",
+   "size_m": [
+    3.0,
+    3.0
+   ],
+   "position": [
+    -4.5,
+    -4.0,
+    3.4
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.6
+   ],
+   "irradiance": 1.4,
+   "color": "#FFF5E8"
+  }
+ },
+ "products": [
+  {
+   "def": "studio/products/barkhorn-cloud.json",
+   "flavour": "cloud-red",
+   "instances": [
+    {
+     "position": [
+      -3.5,
+      0,
+      0.0
+     ],
+     "rotate_z": -35.0,
+     "flavour": "cloud-red",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      -2.5,
+      0,
+      0.0
+     ],
+     "rotate_z": -25.0,
+     "flavour": "cloud-orange",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      -1.5,
+      0,
+      0.0
+     ],
+     "rotate_z": -15.0,
+     "flavour": "cloud-amber",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      -0.5,
+      0,
+      0.0
+     ],
+     "rotate_z": -5.0,
+     "flavour": "eucalyptus-y2k-green",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      0.5,
+      0,
+      0.0
+     ],
+     "rotate_z": 5.0,
+     "flavour": "cloud-blue",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      1.5,
+      0,
+      0.0
+     ],
+     "rotate_z": 15.0,
+     "flavour": "cloud-violet",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      2.5,
+      0,
+      0.0
+     ],
+     "rotate_z": 25.0,
+     "flavour": "birch-fog-clear",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      3.5,
+      0,
+      0.0
+     ],
+     "rotate_z": 35.0,
+     "flavour": "cloud-black",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    }
+   ],
+   "normals_refine": false
+  },
+  {
+   "def": "studio/products/barkhorn-variants.json",
+   "flavour": "cloud-red",
+   "instances": [
+    {
+     "position": [
+      -3.5,
+      0,
+      0.0
+     ],
+     "rotate_z": -35.0,
+     "flavour": "cloud-red",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      -2.5,
+      0,
+      0.0
+     ],
+     "rotate_z": -25.0,
+     "flavour": "cloud-orange",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      -1.5,
+      0,
+      0.0
+     ],
+     "rotate_z": -15.0,
+     "flavour": "cloud-amber",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      -0.5,
+      0,
+      0.0
+     ],
+     "rotate_z": -5.0,
+     "flavour": "eucalyptus-y2k-green",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      0.5,
+      0,
+      0.0
+     ],
+     "rotate_z": 5.0,
+     "flavour": "cloud-blue",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      1.5,
+      0,
+      0.0
+     ],
+     "rotate_z": 15.0,
+     "flavour": "cloud-violet",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      2.5,
+      0,
+      0.0
+     ],
+     "rotate_z": 25.0,
+     "flavour": "birch-fog-clear",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      3.5,
+      0,
+      0.0
+     ],
+     "rotate_z": 35.0,
+     "flavour": "cloud-black",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    }
+   ],
+   "normals_refine": false
+  }
+ ]
+}

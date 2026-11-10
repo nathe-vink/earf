@@ -1766,3 +1766,34 @@ def hero_room():
     s['render']['exposure'] = 0.0
     s['title'] = 'Tropos, the eight in a painted room on their stripes'
     return s
+
+
+HERO_FAN = [-35.0, -25.0, -15.0, -5.0, 5.0, 15.0, 25.0, 35.0]
+
+
+def hero_room2(fan=HERO_FAN):
+    """The owner on hero-room (2026-11-10 16:25): "wider bands and more space and maybe speakers going from outward facing
+    to middle facing back to outward facing across the spectrum". Bands 1.0 m (= the spacing), the row framed with room:
+    the speakers about 36 % of the height, a third of wall above the horns, about 30 % floor; the wall 1.7 m behind. Each
+    speaker yawed on its own axis, centred on its band, from outward at the ends to straight in the middle (`fan`, Ember
+    to Smoke; negative turns the front toward the frame's left). The low front fill is gone (it lit Haze's white lining
+    and mirrored in Smoke's front): the soft overhead does the work, the key larger and higher, the contact shadow firmer."""
+    s = hero_room()
+    sp = 1.0
+    n = len(HERO_ORDER)
+    for blk in s['products']:
+        for k, i in enumerate(blk['instances']):
+            i['position'] = [round((k - (n - 1) / 2) * sp, 4)] + list(i['position'][1:])
+            i['rotate_z'] = fan[k]
+    for k, st in enumerate(s['set']['stripes']):
+        x = (k - (n - 1) / 2) * sp
+        st['x'] = [-30.0 if k == 0 else round(x - sp / 2, 4), 30.0 if k == n - 1 else round(x + sp / 2, 4)]
+    s['set'].update(depth=1.7, contact={'strength': 1.2, 'distance_m': 0.35, 'core_strength': 1.5, 'core_distance_m': 0.03})
+    s['lights'] = {
+        'top': {'type': 'area', 'size_m': [7.0, 3.0], 'position': [0.0, -1.0, 3.6], 'target': [0.0, 0.2, 0.0],
+                'irradiance': 3.2, 'color': '#FFF8F0'},
+        'key': {'type': 'area', 'size_m': [3.0, 3.0], 'position': [-4.5, -4.0, 3.4], 'target': [0.0, 0.0, 0.6],
+                'irradiance': 1.4, 'color': '#FFF5E8'}}
+    s['camera'] = {'position': [0.0, -9.9, 0.9], 'target': [0.0, 0.0, 0.75], 'lens_mm': 40.0, 'level': True}
+    s['title'] = 'Tropos, the eight fanned on wide stripes in a painted room'
+    return s
