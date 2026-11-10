@@ -2954,7 +2954,7 @@ def favicons():
                           '@media (prefers-color-scheme: dark){path,circle,ellipse,polygon{fill:#F2EFEA}}</style>', 1)
     open(os.path.join(SITE, 'favicon.svg'), 'w').write(svg)
     shutil.copy(os.path.join(BRAND, 'mark', 'small', 'earf-globe-black-32.png'), os.path.join(SITE, 'favicon-32.png'))
-    g = Image.open(os.path.join(BRAND, 'mark', 'earf-globe-colour.png')).convert('RGBA').resize((150, 150), Image.LANCZOS)
+    g = Image.open(os.path.join(BRAND, 'mark', 'earf-globe-tiles.png')).convert('RGBA').resize((150, 150), Image.LANCZOS)
     t = Image.new('RGBA', (180, 180), (242, 239, 234, 255))
     t.alpha_composite(g, (15, 15))
     t.convert('RGB').save(os.path.join(SITE, 'apple-touch-icon.png'))
