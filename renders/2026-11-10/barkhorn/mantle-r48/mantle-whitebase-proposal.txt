@@ -1,0 +1,15 @@
+PROPOSAL, the white base (the coordinator, 2026-11-10 06:06): v3 exactly as signed (the full 25.4 mm tinted plinth,
+satin edges, black posts, the 40 mm float), one change: the base's top lamination in opal (Perspex GS 041, 3.0 mm) over
+9.7 mm of the smoked base, so the float stays 40 mm. v3_day.py --white-base.
+Light: a 2700 K LED strip, 1.46 m at 4.0 W/m = 5.8 W, in a black U-channel (8 x 8 mm) under the deck 20 mm in from its
+edge, outside the base's footprint, its face at 45 deg down and in onto the white. Its face is seen directly by the
+camera at 0 of 252 points in frame. The only emitter is the LED faces ('strip'); none by day. gt 0 px; no hidden mesh.
+Lit frames: the dim room's ambient neutral-warm (the lamps and the world), camera white balance 4000 K.
+Day, against the set (display luma; top back-left / top middle-front / satin front edge):
+  Ember: set 30 / 11 / 6 -> white base 44 / 21 / 20 (back-left RGB 104/12/4 -> 117/27/22)
+  Ice:   set 83 / 17 / 13 -> white base 95 / 26 / 27
+Ugly: lit, the strip's light escapes past the base's corners as two bright pools on the shelf in front; the posts (and
+motor and bearing, where seen) stand as dark silhouettes against the white; the room still reads a little blue (its wall
+is a blue-gray, #3A3D44, under the 4000 K balance).
+Cost, rough: the signed v3 already carries a strip and its adapter (its base loop); this adds the opal lamination
+(about $10) and the channel under the deck (about $10-15) and moves the strip: about +$25-40 a unit.
