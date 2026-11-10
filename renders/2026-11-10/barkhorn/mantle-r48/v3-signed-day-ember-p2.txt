@@ -56,3 +56,17 @@ ember custom 40 (proposal): satin front edge: luma 13, RGB [37.  5.  4.]
 ember custom 40 (proposal): base top: luma 33, RGB [37. 32. 29.]
 
 The sheet (v3-tint-sheet.png): the three side by side, labeled, the proposal in red.
+
+The decision sheet (v3-decision-sheet.png, the coordinator, 01:31): four frames, the same rig, camera and exposure:
+  1. Ember as signed: stock 2423, satin edge (v3-signed-day-ember-p2.png)
+  2. Ember, stock, polished edge (v3-variant-day-ember-polished-edge.png): --edge-frost 0.01 (the edge's roughness 0.01
+     against the satin's 0.35), nothing else changed
+  3. Ember, the custom pour (ember-40, 40.2 % per 1/2 in), polished edge, a PROPOSAL
+     (v3-proposal-day-ember-custom40-polished-edge.png)
+  4. Ice as signed: stock 2069, satin edge (v3-signed-day-ice-p2.png)
+Each: gt_audit 0 emitting materials, every lamp and card out of frame (0 px); scene_audit no hidden mesh, nothing in
+frame. Display luma (top back-left, lit through / top middle-front / front edge):
+  1. 33 / 11 / 9     2. 41 / 16 / 11     3. 82 / 19 / 18     4. 90 / 17 / 21
+v3-edge-satin-vs-polished-2x.png: the front edge at 2x, satin above, polished below. The satin edge is a matte band and
+nothing shows through it; the polished edge mirrors the sweep as a glossy band, and through it and the deck's front the
+float's posts, the bearing and the platter's foot read as red shapes inside the slab: glass.
