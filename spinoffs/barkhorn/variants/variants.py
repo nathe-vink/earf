@@ -199,16 +199,16 @@ def parts(P):
                                        'layer\'s edge polished before bonding']))
     from build123d import Compound
     ps = posts(POSTS)
-    out.append(product.Part('strata-posts', Compound(children=[r for r, _, _ in ps]), product.Machined('bronze', 'lathe', setup_usd=60.0),
-                            finish='brass', group='horn',
-                            notes=['Strata: four ø16 bronze rods (C93200 or C544), threaded M12 at the top into inserts in the horn\'s '
+    out.append(product.Part('strata-posts', Compound(children=[r for r, _, _ in ps]), product.Machined('aluminium', 'lathe', setup_usd=60.0),
+                            finish='post-metal', group='horn',
+                            notes=['Strata: four ø16 rods in aluminium 6061-T6, black anodised (Type II, sealed; the lamps\' satin black: the owner, 2026-11-10, black rods; were bronze C93200 or C544), threaded M12 at the top into inserts in the horn\'s '
                                    'pads, at the four reviewed post positions. The engineering audit (2026-11-01): the front pair\'s feet are '
                                    'turned heads (14 across, 4 thick, on an 8 neck) hooked under keyhole sockets bonded through the top into '
                                    'the front panel\'s edge; the rear pair seated in sleeved sockets, the tie rod in rear post 3 at 2 N m; '
                                    'held at three points, the horn cannot lift (make/engineering-audit.md)']))
-    out.append(product.Part('strata-collars', Compound(children=[c for _, b, t in ps for c in (b, t)]), product.Machined('bronze', 'lathe', setup_usd=40.0),
-                            finish='brass', group='horn',
-                            notes=['Strata: a turned bronze collar on the top plate at each post (ø28 x 8) and one under each pad '
+    out.append(product.Part('strata-collars', Compound(children=[c for _, b, t in ps for c in (b, t)]), product.Machined('aluminium', 'lathe', setup_usd=40.0),
+                            finish='post-metal', group='horn',
+                            notes=['Strata: a turned aluminium collar, black anodised as the rods, on the top plate at each post (ø28 x 8) and one under each pad '
                                    '(ø24 x 6), so the horn reads as mounted, not hovering']))
     # the HF lead's last run, inside the pod (the coordinator, 2026-11-03: the polished horn shows what is inside it): up
     # the cable post's 7 mm bore (rear post 2, product.rod_places), out through the horn's pad into the pod's floor and up

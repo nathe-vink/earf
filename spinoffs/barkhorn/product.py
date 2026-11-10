@@ -1700,7 +1700,7 @@ def fittings(P, places, shell, floor=None):
     rod = cyl('z', (tx, ty), d, z0, zf + 14.0)
     nut = (cyl('z', (tx, ty), 16.0, zf, zf + 1.6) + cyl('z', (tx, ty), 16.0, zf + 1.6, zf + 9.6)) - cyl('z', (tx, ty), d, zf - 1, zf + 11)
     tie = rod.fuse(nut)
-    return [Part('post-sockets', Compound(children=cups), Bought('post-fixings'), finish='brass', group='cabinet',
+    return [Part('post-sockets', Compound(children=cups), Bought('post-fixings'), finish='post-metal', group='cabinet',
                  notes=[f'{len(places)} brass cups, ' + ('bonded with epoxy into' if shell_kind(P) == 'acrylic' else 'knurled to 15 and pressed into')
                         + f' {sd:g} holes {sdep:g} deep in the top, bored {sb:g} '
                         '13 deep on a 2 floor; the cable post\'s floor holed 7 for the HF lead, the tie post\'s 6.5 for the rod']),
@@ -2820,6 +2820,8 @@ PRODUCT = Product(
                   for k, c in enumerate(globe_colours()[0])},
                # round 13: the fittings a photograph shows (through the Cloud's acrylic, most of all)
                'brass': {'preset': 'metal', 'color': '#C9A660', 'roughness': 0.3},
+               # the horn's rods, collars and sockets, black anodised in the lamps' satin black (the owner, 2026-11-10)
+               'post-metal': {'preset': 'satin_paint', 'color': '#18181A', 'roughness': 0.5, 'specular': 0.3},
                'sleeve': {'preset': 'rubber', 'color': '#1B1B1B'},
                'cable': {'preset': 'rubber', 'color': '#141414', 'roughness': 0.5},
                'gland': {'preset': 'plastic', 'color': '#1A1A1A', 'roughness': 0.5},
