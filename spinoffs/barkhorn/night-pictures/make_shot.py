@@ -141,7 +141,9 @@ def shot(root, tint, lamp_dir, fmt='wide', core=False):
         # gate 1: dimmer and near-neutral, so the room is not tinted Ice's blue
         # gate 2: the curtain open, a soft cool fill on the speaker's face from the camera's side (a real opening; the
         # night sky on the lamps' scale: about 30 cd/m2 of blue-hour sky, 0.0065 W a lumen, so about 0.6)
-        'opening': {'y0': -1.9, 'y1': -0.7, 'z0': 0.80, 'z1': 2.10, 'sky_color': '#AEB8C8', 'sky_strength': 0.6,
+        # 2026-11-10 (the coordinator, 00:46): the sky cut to the moon's level, 0.001 (from 0.6, 30 cd/m2 of blue
+        # hour, about 600 x); a near-black left half is the honest night
+        'opening': {'y0': -1.9, 'y1': -0.7, 'z0': 0.80, 'z1': 2.10, 'sky_color': '#AEB8C8', 'sky_strength': 0.001,
                     'curtain': True, 'curtain_open': 0.75},
         # gate 3: the window's cool light as a soft shape on a wall: a streetlight across the road, through the left
         # window's opening and its sheer; proxy 6: cut 1.3 stops (about 1.5 lux, 0.01 W/m2) and about 4000 K, so under the
