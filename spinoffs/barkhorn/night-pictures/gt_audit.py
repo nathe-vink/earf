@@ -7,6 +7,10 @@ scene's real resolution (and border crop, if set) renders the hidden objects the
 A control pass gives every camera-visible object one id with the targets hidden: its pixels prove the camera and the
 counting see the scene (a zero from a blind setup would read as clean). It renders at a quarter of the frame (memory, the
 biomes lane's heavy sets) after the targets' counts are printed.
+--emitters NAME=REASON,...: the emitter check (the coordinator, 2026-11-10 01:06): every material that emits (an
+  Emission node, a Principled emission over 0, a Blackbody or light-path trick feeding one), on any object, camera-visible
+  or not, is listed with its objects; each must be named here with the real light it is (a lamp's opal lit by its own
+  source, a screen, a sky outside a window), or the run FAILS. Lamps (light objects) are real sources and are listed too.
 --null: the null test (the biomes lane, 23:48): every target moved 50 m behind the camera; every count must be 0.
 
 Fixes from the biomes lane (2026-11-09 23:48, their copy on r48-biomes):
@@ -101,6 +105,40 @@ def main():
             if c.z > 0 and 0.0 <= c.x <= 1.0 and 0.0 <= c.y <= 1.0:
                 n += 1
         return n, len(pts)
+    # the emitter check: before anything below changes the materials
+    allowed = {}
+    if '--emitters' in sys.argv:
+        for kv in sys.argv[sys.argv.index('--emitters') + 1].split(','):
+            if '=' in kv:
+                k, v = kv.split('=', 1); allowed[k.strip()] = v.strip()
+    emit = {}
+    for o in sc.objects:
+        if o.hide_render or not hasattr(o.data, 'materials'):
+            continue
+        for sl in o.material_slots:
+            m = sl.material
+            if not m or not m.node_tree:
+                continue
+            for nd in m.node_tree.nodes:
+                e = None
+                if nd.type == 'EMISSION':
+                    st = nd.inputs['Strength']; e = st.is_linked or st.default_value > 0
+                elif nd.type == 'BSDF_PRINCIPLED':
+                    st = nd.inputs['Emission Strength']; col = nd.inputs['Emission Color']
+                    e = (st.is_linked or st.default_value > 0) and (col.is_linked or max(col.default_value[:3]) > 0)
+                if e:
+                    emit.setdefault(m.name, set()).add(o.name)
+    bad = 0
+    for mname, obs in sorted(emit.items()):
+        why = next((v for k, v in allowed.items() if mname.startswith(k)), None)
+        if not why:
+            bad += 1
+        print(f'GT emitter {mname} on {", ".join(sorted(obs)[:6])}{" ..." if len(obs) > 6 else ""}: '
+              + (f'a real light: {why}' if why else 'NOT NAMED AS A REAL LIGHT  <- FAIL'), flush=True)
+    for o in sc.objects:
+        if o.type == 'LIGHT' and not o.hide_render:
+            print(f'GT lamp {o.name}: {o.data.type} {o.data.energy:.4g} W, camera {"visible" if o.visible_camera else "hidden"}', flush=True)
+    print(f'GT emitter check: {len(emit)} emitting material(s), {bad} not named as a real light' + ('  <- FAIL' if bad else ''), flush=True)
     geo = ('MESH', 'CURVE', 'SURFACE', 'META', 'FONT', 'CURVES', 'POINTCLOUD', 'VOLUME')
     objs = [o for o in sc.objects if o.type in geo and not o.hide_render]
     targets = [o for o in objs if not o.visible_camera]
