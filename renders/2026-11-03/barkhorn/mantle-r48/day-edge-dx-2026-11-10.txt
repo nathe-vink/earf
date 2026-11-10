@@ -1,0 +1,28 @@
+Mantle by day (a5-day-ember-2423-c3e.png, 41232b56): why it reads as black and red wood (the coordinator, 2026-11-10 00:46).
+edge_dx.py runs scene.py exactly as render_lantern.sh c3e does, crop x 0.055-0.72 y 0.467-0.60 from the top, 160 samples,
+then changes one thing. day-edge-dx-2026-11-10.png: as is / the edge faces an opaque black dielectric (reflection only) /
+(a void variant: Specular IOR Level 0 does nothing on Principled glass, so it equals as-is).
+
+Which version: out-strata-v5, option C3 (mantle_strata_v5.py, built at 959b335f), a design exploration, unsigned. The owner's
+pick is A, Strata Float v3 (2026-11-01, r46-owner-notes 5b63e05b): its light a COB loop in the base, its plinth tinted 3
+rings / clear 12.7 / tinted 3 rings / clear 5.6, a clear interior.
+
+1. The edge bands (C3's perimeter: the 5.6 skin frame over the 9.5 + 9.5 tinted rings, all polished, slot 1, roughness
+   0.012, no bevel; no paint on the perimeter in C3). The front face's profile at column 600, linear:
+   - G and B stay 0.13-0.14, neutral, top to bottom: the face's reflection (of the pale sweep and its lamps), the same in
+     both bands;
+   - R rises from 0.16 at the top of the face to 0.88 at the bottom: transmission, in the lower band only. Looking in
+     through the lower part, refracted downward, the eye reaches the rings' bare polished undersides (--clear-ring) and
+     sees the bright floor under the overhang through 10-20 mm of Ember. Through the upper part it reaches the rings'
+     inner faces, painted 10 % grey (--ring-white --ring-albedo 0.10), and the field's black backer: dark.
+   So the grey-black upper band is reflection over a dark interior, the red lower band reflection plus the floor's light
+   through the tint. Not paint, not damage: the geometry and the backed field.
+2. The tint, as the render models it (STOCK_HELD ember-2423, #E02B3A after 10 mm), luminous / R G B:
+   5.6 mm 28 % (0.85 0.12 0.17); 10 mm 18 %; 19 mm 12 % (0.57 0.0008 0.0025); 24.6 mm 10 % (0.49 0.0001 0.0004).
+   Beyond about 10 mm Ember passes red only: anything seen through the deck is red on black. Smoke 2074 (the base):
+   12.7 mm about 13 %, 24.6 about 2 %. The chart's own stock figure is darker still: 2423 Red 14.1 % at 1/8 in.
+3. The top: C3's field is backed black from r 105 to the rim (--backed), so nothing under it can show; what reads as
+   the red top by day is the 5.6 skin over that backer, plus a baked emitter: --core-glow 5 makes core_glow_sheet, an
+   emitting sheet 0.3 mm inside the core over the print, red (0.848, 0.124, 0.168), standing for 'the room's light on
+   the print, baked' (render_lantern.sh). It is an emitter that is not a real light; neither audit flags it (it is
+   camera-visible).
