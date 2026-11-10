@@ -505,6 +505,17 @@ def uplit(wpm):
           f'recessed {DEP * 1000:.0f} mm, {length:.2f} m at {wpm} W/m = {P:.1f} W; its face seen directly at {seen} of {tot} points in frame', flush=True)
 
 
+def satin_underside():
+    """The deck's underside bead-blasted satin as its edge (the day win from the light proposals; in the CAD since
+    2026-11-10, when the owner dropped every light): the plinth's downward faces at its lowest z take material index 1."""
+    pl = bpy.data.objects['plinth-L1-stack']; M = pl.matrix_world
+    zb = min((M @ v.co).z for v in pl.data.vertices); n = 0
+    for p in pl.data.polygons:
+        if (M.to_3x3() @ p.normal).normalized().z < -0.9 and abs((M @ p.center).z - zb) < 0.0005:
+            p.material_index = 1; n += 1
+    print(f'v3_day: the plinth underside satin ({n} faces)', flush=True)
+
+
 def lighttable(watts, cct):
     """PROPOSAL (the coordinator, 2026-11-10 16:50), the LIGHT-TABLE BASE: the base keeps its signed outline and smoke; its
     top carries a pocket 15 mm in from its edges, 10 mm deep, islands left round the posts (r 22), the bearing (r 30) and
@@ -617,6 +628,7 @@ def lighttable(watts, cct):
 
 
 def prepare():
+    if '--satin-underside' in mine: satin_underside()
     if '--lighttable' in mine:
         i = mine.index('--lighttable'); lighttable(float(mine[i + 1]), float(mine[i + 2]))
     if '--uplit' in mine:

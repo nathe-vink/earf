@@ -1,4 +1,5 @@
-"""Strata Float v3's rear plate, wiring and earth, rating label and the light's fit (round 48, after the owner picked A;
+"""Strata Float v3's rear plate, wiring and earth, and rating label (round 48, after the owner picked A; no light since
+2026-11-10, the owner: "Forget the lights on mantle", so the light's panel, switch, inlet and adapter are gone;
 the audit's Strata items, ENGINEERING-AUDIT.md on r46-owner-notes). A proposal until the owner signs it. One A3 sheet:
 
     .venv-fab/bin/python spinoffs/barkhorn/companions/mantle-r48/strata_rear.py
@@ -26,7 +27,7 @@ X0, X1 = X.REAR_PLATE['x0'], X.REAR_PLATE['x1']
 ZS = (b0 + b1) / 2
 
 RATING = ['EARF  MANTLE  STRATA FLOAT        SN ________',
-          'PHONO 18 V DC 0.5 A    LIGHT 24 V DC 0.5 A CLASS 2',
+          'PHONO 18 V DC 0.5 A',
           'MOTOR: REGA NEO PSU MK2    USE LISTED SUPPLIES ONLY']
 
 
@@ -112,69 +113,34 @@ def wiring(ax):
         ax.plot([x, 70], [35, 24], color='#3a7d3a', lw=0.6)
     # power, isolated
     box(0, 2, 26, 9, '18 V adapter (Pro-Ject,\nlisted) to 2.1 mm', fc='#f7f7f7')
-    box(30, 2, 34, 9, '24 V 12 W Class 2 adapter to\n2.5 mm, SPST, the strip', fc='#f7f7f7')
     box(100, 2, 30, 9, 'Neo PSU MK2 (Rega)\nto the motor inlet', fc='#f7f7f7')
-    ax.text(82, 6.5, 'both DC jacks insulated', fontsize=FS - 2.5, ha='center', va='center')
-    ax.text(0, -6, 'Rules: one earth point (the post), no loops; the light\'s 24 V and the motor\'s lead never share a ground with signal, and run along the base\'s far\n'
-                   'side from the arm\'s lead (40 or more apart, crossing at right angles); shielded leads, shields earthed at the S2 end only. The two DC jacks are\n'
+    ax.text(63, 6.5, 'the DC jack insulated', fontsize=FS - 2.5, ha='center', va='center')
+    ax.text(0, -6, 'Rules: one earth point (the post), no loops; the S2\'s 18 V and the motor\'s lead never share a ground with signal, and run along the base\'s far\n'
+                   'side from the arm\'s lead (40 or more apart, crossing at right angles); shielded leads, shields earthed at the S2 end only. The DC jack is\n'
                    'insulated from the plate (the S2\'s 0 V reaches the star only through its GND terminal).', fontsize=FS - 2, va='top')
     ax.set_xlim(-4, 134); ax.set_ylim(-22, 80); ax.set_aspect('equal'); ax.axis('off')
 
 
-def light(ax):
-    ax.set_title('D  The light, the deck edge-lit: section through the groove (4:1) and a corner, plan (1:1)', fontsize=FS + 1, loc='left')
-    s = 4.0
-    gi, gw, gd = P['glow_in'], P['glow_w'], P['glow_d']
-    T = 25.4
-    # section: x outward to the deck's edge (at 30), z up from the deck's underside
-    R(ax, 0, 0, s * 30, s * T, fc='#e9c9c9', ec='k')
-    ax.plot([0, s * 30], [s * T / 2] * 2, color='#999', lw=0.4, ls='--')               # the bond line
-    ax.plot([s * 30] * 2, [0, s * T], color='#b06a10', lw=2.2)                        # the satin edge
-    g0, g1 = s * (30 - gi - gw), s * (30 - gi)
-    R(ax, g0, 0, g1, s * gd, fc='white', ec='k')                                       # the groove
-    ax.plot([g0, g1], [s * gd] * 2, color='k', lw=1.6, ls=(0, (1, 1)))                 # its bead-blasted ceiling
-    cx0, cx1 = g0 + 0.2 * s, g1 - 0.2 * s
-    ax.add_patch(Polygon([(cx0, 0.2 * s), (cx0, s * (gd - 0.1)), (cx0 + 0.9 * s, s * (gd - 0.1)), (cx0 + 0.9 * s, 1.1 * s), (cx1 - 0.9 * s, 1.1 * s),
-                          (cx1 - 0.9 * s, s * (gd - 0.1)), (cx1, s * (gd - 0.1)), (cx1, 0.2 * s)], closed=True, fc=BLACK, ec='k', lw=0.5))
-    R(ax, cx0 + 1.0 * s, s * 1.1, cx1 - 1.0 * s, s * 2.1, fc='#f6efd8', ec='k', lw=0.5)
-    mid = (g0 + g1) / 2
-    for dx, dz in ((0, 1), (0.9, 0.6), (-0.9, 0.6), (1.0, 0.25)):
-        ax.annotate('', (mid + dx * s * 9, s * (gd + 1.5 + dz * 9)), (mid, s * (gd + 0.3)), arrowprops=dict(arrowstyle='->', lw=0.5, color='#d43'))
-    ax.annotate('', (s * 33, s * 12), (s * 29.6, s * 12), arrowprops=dict(arrowstyle='->', lw=0.8, color='#b06a10'))
-    ax.text(s * 33.5, s * 12, 'glows: light out\nthrough the satin edge', fontsize=FS - 2, va='center', color='#b06a10')
-    ax.text(-2, s * (T + 2), f'deck, 25.4 (two 12.7, bond line dashed); the groove {gw:g} x {gd:g} from below, {gi:g} in from the edge,\n'
-            'its ceiling bead-blasted (dotted) so the light spreads into the slab', fontsize=FS - 2)
-    ax.text(-2, -3 * s, 'U-channel 7 x 7, black anodized, open face up; the strip 5 mm on its floor, facing up.\n'
-            'Below, only the channel\'s black floor shows: nothing falls on the shelf but a faint spill.', fontsize=FS - 2, va='top')
-    # corner plan
-    ox, oy = s * 46, s * 2
-    W = 40.0
-    R(ax, ox, oy, ox + W * 1.0, oy + W * 1.0, fc=ACR, ec='k')
-    a, w = 12.0, 7.4
-    ax.add_patch(Polygon([(ox + W - a, oy), (ox + W - a, oy + W - a), (ox, oy + W - a), (ox, oy + W - a - w), (ox + W - a - w, oy + W - a - w),
-                          (ox + W - a - w, oy)], closed=True, fc=BLACK, ec='k', lw=0.4))
-    ax.plot([ox + W - a, ox + W - a - w], [oy + W - a, oy + W - a - w], color='w', lw=0.8)
-    ax.plot([ox + W - a - 3.7, ox + W - a - 3.7, ox + W - a - 6], [oy + 2, oy + W - a - 4.5, oy + W - a - 3.7], color='#d43', lw=0.8)
-    ax.text(ox, oy - 3, 'a corner from below\n(in the deck):\nthe channel mitred at 45,\nthe strip\'s runs joined by\na soldered jumper (red):\nCOB strip does not bend\nin its own plane',
-            fontsize=FS - 2, va='top')
-    ax.set_xlim(-6, ox + W + 4); ax.set_ylim(-14 * s, s * 32); ax.set_aspect('equal'); ax.axis('off')
+def nolight(ax):
+    ax.set_title('D  No light (2026-11-10)', fontsize=FS + 1, loc='left')
+    ax.text(0, 0.9, 'The owner: "Forget the lights on mantle." Mantle has no light of any kind: no strip, channel or groove,\n'
+            'no 24 V adapter, no switch or inlet for it on the plate, no light wiring. The base is the signed solid Smoke 2074;\n'
+            'the deck\'s underside is bead-blasted satin as its edge (the day win from the light proposals).\n'
+            'The light\'s fit as drawn until now is in this file\'s history (before 2026-11-10).', fontsize=FS, va='top', transform=ax.transAxes)
+    ax.axis('off')
 
 
 def main():
     fig = plt.figure(figsize=(16.54, 11.69))
     gs = fig.add_gridspec(2, 2, width_ratios=[1.45, 1], height_ratios=[1, 1], left=0.03, right=0.98, top=0.91, bottom=0.17, wspace=0.08, hspace=0.18)
     plate(fig.add_subplot(gs[0, 0])); section(fig.add_subplot(gs[0, 1]))
-    wiring(fig.add_subplot(gs[1, 0])); light(fig.add_subplot(gs[1, 1]))
-    fig.text(0.03, 0.96, 'Mantle: Strata Float v3, rear plate, wiring and earth, rating, the light (round 48)', fontsize=14, weight='bold')
+    wiring(fig.add_subplot(gs[1, 0])); nolight(fig.add_subplot(gs[1, 1]))
+    fig.text(0.03, 0.96, 'Mantle: Strata Float v3, rear plate, wiring and earth, rating (round 48; no light since 2026-11-10)', fontsize=14, weight='bold')
     fig.text(0.03, 0.935, 'mm. A proposal until the owner signs it. The audit\'s Strata items (ENGINEERING-AUDIT.md, r46-owner-notes): no rear panel, no wiring or '
-             'earth drawing, no rating label; an 8 mm strip in a 5 mm slot with 2 mm corners; a 25 W supply. The light moved into the deck on 2026-11-03.', fontsize=FS + 1)
-    cl = P['glow_in'] + P['glow_w'] / 2
-    loop = 2 * ((D['W0'] - 2 * cl) + (D['D0'] - 2 * cl)) / 1000
-    notes = (f'The light: {loop:.2f} m of 5 mm 24 V COB strip at about 4 W/m (5 W/m at most) is about {4 * loop:.1f} W ({5 * loop:.1f} W at most), 0.25 A, on a listed Class 2 / LPS 24 V adapter of 12 W:\n'
-             'under half its rating, and a PS1 circuit under UL 62368-1. No PWM dimmer inside (its FCC Part 15B status was open): one brightness, set by the strip\'s choice,\n'
-             'and an SPST on the plate. If the owner wants it dimmable, a listed Class 2 dimmer in the adapter\'s lead, outside the record player, keeps the plate free of clocked circuits.\n'
-             'First-sample checks: hum and noise at the out in both switch positions, into an outside phono stage, with the light on and off and the motor running (A-weighted, against the S2\'s\n'
-             'own figure); the 2M\'s frequency response in bypass, into 47k, against the stage position (no droop above 10 kHz); continuity and isolation of the two DC jacks from the plate.')
+             'earth drawing, no rating label; an 8 mm strip in a 5 mm slot with 2 mm corners; a 25 W supply. No light since 2026-11-10.', fontsize=FS + 1)
+    notes = (
+             'First-sample checks: hum and noise at the out in both switch positions, into an outside phono stage, with the motor running (A-weighted, against the S2\'s\n'
+             'own figure); the 2M\'s frequency response in bypass, into 47k, against the stage position (no droop above 10 kHz); continuity and isolation of the DC jack from the plate.')
     fig.text(0.03, 0.13, notes, fontsize=FS + 1, va='top', family='DejaVu Sans')
     os.makedirs(OUT, exist_ok=True)
     for ext in ('png', 'pdf'):

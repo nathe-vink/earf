@@ -322,11 +322,15 @@ The owner picked A, Strata Float v3, at about 12:10 UTC (r46-owner-notes 5b63e05
 
 ### The spec as built (`mantle_strata_v3.py`, after 9e72cf70; the site's copy should match this)
 
+Since 2026-11-10 Mantle has **no light** (the owner: "Forget the lights on mantle"). The rows below are updated; the
+light notes above and in sections 12 and 13 are history. See "No light" at the end of section 13.
+
 | | |
 |---|---|
-| deck | two 12.7 mm sheets of stock cast acrylic in the flavor's tint, cemented flush: 25.4 mm, through-tinted, one bond line; 450 x 360, the outer edge satin, the faces glassy |
+| deck | two 12.7 mm sheets of stock cast acrylic in the flavor's tint, cemented flush: 25.4 mm, through-tinted, one bond line; 450 x 360, the outer edge satin, the top glassy, the underside bead-blasted satin (2026-11-10) |
 | float | the deck floats 40 mm over the base on four solid 303 stainless posts, 30 mm across, bonded under the deck; satin black (the owner, 2026-11-10): hot black oxide for stainless, the lamps' #18181A |
-| base | one 12.7 mm sheet of stock Smoke 2074, 380 x 290, 35 mm in from the deck all round; the light's loop under it, falling onto the shelf |
+| base | one 12.7 mm sheet of stock Smoke 2074, 380 x 290, 35 mm in from the deck all round; solid, no light (2026-11-10) |
+| bearing | its visible parts (housing, nut, washer) black to match the posts: brass, black nickel plated, satin (2026-11-10) |
 | lid | 3 mm stock sheet in the flavor's tint, a five-sided box 448 x 358 x 100, on Pro-Ject's friction hinges |
 | size | 450 W x about 370 D (with the hinges) x 94 H to the deck's top, about 199 H with the lid closed |
 | weight | about 12.9 kg with the lid (11.8 without); the supplies are outside it |
@@ -914,6 +918,16 @@ time. By day the room's light on the print is baked the same way, at the strengt
 stop. The scene's face classification had read the meshes' own frame, which is Y-up, as the world's. It is fixed for
 v4's deck and left as it was for the frames already made.
 
+### No light (2026-11-10)
+
+The owner: "Forget the lights on mantle." The coordinator: Mantle has no light of any kind. Out of the model, the CAD
+and the parts list (`mantle_strata_v3.py`, rebuilt into `out-strata-v3/`): the deck's groove, its channel and strip,
+the 24 V adapter, the plate's light switch and 24 V inlet (`strata-rear-hardware-nolight`), and their wiring
+(`strata_rear.py`'s rating and diagram). In: the deck's underside bead-blasted satin (the day win from the light
+proposals) and the bearing's visible parts black. Budget $3,850 signed to $3,767, before the underside's blasting and
+the bearing's plating, which the kit does not price (about +$10-15 and +$15-25, estimates). The final day set, eight
+tints: `renders/2026-11-10/barkhorn/mantle-r48/mantle-final-day-*.png`.
+
 ## Open questions for the owner
 
 1. **A or B,** or B's cover on A's float. *(Answered 2026-11-01: A, Strata Float v3.)*
@@ -929,5 +943,5 @@ v4's deck and left as it was for the frames already made.
 8. **The deck as glass:** in the stock deep tints, Strata's 25.4 deck passes 1.5-3.7 % and reads as a deep colored
    slab. A custom pour for its two sheets only, at about 35-40 % TT per 1/2 in, would make it read as glass (about
    12-15 % through). The owner decides after the color chips are measured (`STOCK-AND-AUDIT.md`, section 2).
-9. **Dimming the light:** none inside now. If it is wanted, use a listed Class 2 dimmer in the adapter's lead,
+9. *(Moot since 2026-11-10: no light.)* **Dimming the light:** none inside now. If it is wanted, use a listed Class 2 dimmer in the adapter's lead,
    outside the record player.

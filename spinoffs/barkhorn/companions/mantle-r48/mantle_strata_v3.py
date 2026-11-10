@@ -22,6 +22,11 @@ ceiling is bead-blasted, so the light spreads into the acrylic, which carries it
 channel closes the groove below, so nothing falls on the shelf but a faint spill, and nothing bright shows. The base
 has no light now; its slot is gone. (A strip on the base's top facing up was tried first: from any normal eye height
 it shows through the float's gap as a bright line.)
+No light (2026-11-10, the owner: "Forget the lights on mantle"; the coordinator: Mantle has no light of any kind): the
+deck's groove, its channel and strip, the adapter, the plate's switch and 24 V inlet, and their wiring are gone. The
+deck as signed, the base the signed solid Smoke 2074, the posts satin black; the deck's underside bead-blasted satin
+(the day win from the light proposals: it scatters the room's light up through the deck); the bearing's visible parts
+(housing, nut, washer) black to match the posts. The light notes above and below are history.
 
 v2's notes follow.
 
@@ -83,8 +88,6 @@ P = dict(
     puck_d=84.0, puck_t=12.0,
     motor_d=184.7, motor_x=64.0, motor_pocket=76.0,
     rpm_motor=300.0,                                  # PROPOSAL until benched: the US Neo at 60 Hz (STOCK-AND-AUDIT.md 3.1)
-    glow_in=10.0, glow_w=7.4, glow_d=7.0,             # the light's groove in the deck's underside: in from its edge, wide, deep
-    frost_d=7.0,                                      # the bead-blasted face, this far up from the deck's underside: the groove's ceiling
     lid_t=3.0, lid_h=100.0, bumper=5.0,
     housing_d=30.0, flange_d=50.0, flange_t=5.0,
     tint_ring=20.0,
@@ -145,11 +148,11 @@ def poutline(P, D, inset, extra=0.0):
 
 
 # the rear plate's hardware (name, x, z, hole, outside d, outside l, inside d, inside l), in the model frame: x across,
-# z up from the shelf, through the plate along y. Upper row: line out, the earth post, the 4PDT, the light's SPST;
-# lower row: the S2's 18 V inlet (2.1 mm), the light's 24 V inlet (2.5 mm, so the two plugs cannot be swapped), the Neo's
+# z up from the shelf, through the plate along y. Upper row: line out, the earth post, the 4PDT; lower row: the S2's
+# 18 V inlet (2.1 mm), the Neo's (no light since 2026-11-10: its SPST and 24 V inlet are gone)
 REAR_HW = [('OUT L', 322, 52, 6.5, 10, 10, 9, 15), ('OUT R', 340, 52, 6.5, 10, 10, 9, 15), ('EARTH', 360, 52, 4.5, 10, 15, 10, 12),
-           ('PHONO / BYPASS', 384, 52, 6.4, 6.4, 16, 13, 14), ('LIGHT', 404, 52, 6.4, 6.4, 14, 8, 10),
-           ('18 V', 322, 37, 8.0, 11, 2, 9, 16), ('24 V', 344, 37, 8.0, 11, 2, 9, 16), ('MOTOR', 370, 37, 12.0, 15, 4, 14, 15)]
+           ('PHONO / BYPASS', 384, 52, 6.4, 6.4, 16, 13, 14),
+           ('18 V', 322, 37, 8.0, 11, 2, 9, 16), ('MOTOR', 370, 37, 12.0, 15, 4, 14, 15)]
 REAR_PLATE = dict(x0=308.0, x1=418.0, screws=(318.0, 408.0))
 
 
@@ -180,11 +183,6 @@ def parts(P):
     cuts += [cyl('z', (M[0] + 42 * math.cos(math.radians(a)), M[1] + 42 * math.sin(math.radians(a))), 4.6, top - 14, top - 5.5)
              for a in (30, 150, 270)]   # the plate's three M3 inserts
     cuts += [cyl('z', p, P['post_d'] + 0.3, z0 - 1, z0 + 2.0) for p in posts]          # the posts' 2 mm bonded seats
-    # the light's groove, routed into the deck's underside 10 in from its edge: one closed loop of straight runs, its
-    # corners squared by the cutter (r1.5 inside); the ceiling bead-blasted
-    gi, gw, gd = P['glow_in'], P['glow_w'], P['glow_d']
-    dloop = lambda a, b, za, zb: prism(poutline(P, D, a), 'z', za, zb) - prism(poutline(P, D, b), 'z', za - 1, zb + 1)
-    cuts += [dloop(gi, gi + gw, z0 - 1, z0 + gd)]
     hx = [m + 80.0, m + D['W0'] - 80.0]
     cuts += [cyl('y', (x + s_ * 10, (z0 + top) / 2), 6.0, m + D['D0'] - 14, m + D['D0'] + 1) for x in hx for s_ in (-1, 1)]
 
@@ -206,11 +204,11 @@ def parts(P):
         else:
             # a plain lamina ('clear' in P: no inlay ring): since the stock line (2026-11-01), the flavor's stock tinted sheet
             out.append(Part(f'plinth-L{i + 1}', s, tint[l['t']], finish='clear', group='plinth', render=False,
-                            notes=['the deck: two 12.7 sheets of the line\'s stock tint in the flavor\'s code (a lighter custom pour is an open question for the owner), cemented flush with ACRIFIX 2R 0190 in a vacuum press: one bond line, at mid-edge; annealed, faces fly-cut, the outline finish-routed as one; the outer edge fine bead-blasted to a satin (round 48\'s duels: a polished thick edge refracts the room in patches, a satin one collects light evenly), the top and bottom faces left glassy'] if i == 0 else []))
+                            notes=['the deck: two 12.7 sheets of the line\'s stock tint in the flavor\'s code (a lighter custom pour is an open question for the owner), cemented flush with ACRIFIX 2R 0190 in a vacuum press: one bond line, at mid-edge; annealed, faces fly-cut, the outline finish-routed as one; the outer edge fine bead-blasted to a satin (round 48\'s duels: a polished thick edge refracts the room in patches, a satin one collects light evenly), the top face left glassy; the underside fine bead-blasted to a satin as the edge (2026-11-10, the day win from the light proposals: it scatters the room\'s light up through the deck; masked round the posts\' seats and the bearing\'s washer)'] if i == 0 else []))
     plinth_one = cut(union(*one), cuts)
     out[0].pieces = {'stack': (plinth_one, 'acrylic-strata')}; out[0].render = True
 
-    # ---- the base: one 9.5 sheet, 35 in from the deck; the light's slot from below; the feet under the posts ----
+    # ---- the base: one 12.7 sheet, 35 in from the deck, solid (no light); the feet under the posts ----
     feet = list(posts)
     # each foot's M8 brass insert in a blind hole drilled up through the base into the bonded post's foot (14 deep)
     bcuts = [cyl('z', f, 8.5, b0 - 1, b1 + 1) for f in feet]        # the feet's studs, clear through
@@ -226,21 +224,9 @@ def parts(P):
     out += [Part('base-L1', base_c, tint[12.7], finish='acrylic', group='base', render=False,
                  pieces={'stack': (base_c, 'acrylic-base')},
                  notes=['the base: one 12.7 sheet of stock Smoke 2074 (Dark Gray) in every flavor (it recedes; the color is the deck\'s), the deck\'s corner radius, 35 in from the deck on all four sides; its outer edge diamond-polished',
-                        'no light in the base since 2026-11-03 (the light is in the deck, cast through the acrylic, not down onto the shelf); two M3 inserts in the back edge for the rear plate',
+                        'solid: no light anywhere in Mantle since 2026-11-10 (the owner); two M3 inserts in the back edge for the rear plate',
                         'four 8.5 holes through it under the posts, for the feet\'s M8 studs into the posts']),]
     out[-1].render = True
-    # the channel in the deck's groove: a U open upward (its floor flush under the deck, two walls), so no light goes down
-    channel = dloop(gi + 0.2, gi + gw - 0.2, z0 + 0.2, z0 + gd - 0.1) - dloop(gi + 1.1, gi + gw - 1.1, z0 + 1.1, z0 + gd + 1)
-    out.append(Part('led-channel', channel, Bought('led-channel'), finish='black', group='plinth',
-                    notes=['black anodized aluminum U-channel 7 x 7 (inside 5.2), straight runs mitred at the corners, bonded into the deck\'s groove open face up (bonded with a silicone, not a methacrylate, so the aluminum can move): its floor is all that shows under the deck, a thin black line; light only goes up into the slab']))
-    cl = gi + gw / 2
-    loop_m = (2 * (D['W0'] - 2 * cl) + 2 * (D['D0'] - 2 * cl)) / 1000
-    strip = dloop(gi + 1.2, gi + 6.2, z0 + 1.1, z0 + 2.1)
-    out.append(Part('led-strip', strip, Bought('led-strip-cob'), finish='ledstrip', group='plinth',
-                    notes=[f'a 5 mm 24 V dotless COB strip, 5 W/m or less (about 4 W/m chosen), on the channel\'s floor facing up into the deck 5 below the groove\'s ceiling, in straight runs of {loop_m * 1000 / 4:.0f} mm on average ({loop_m:.2f} m, about {4 * loop_m:.1f} W), joined at the corners by soldered jumpers: COB strip does not bend in its own plane',
-                           'its lead leaves the groove at the back right and drops 4 to the rear plate under the deck\'s overhang, to the 24 V inlet through the SPST; the light\'s circuit is isolated from signal ground',
-                           f'heat: about {4 * loop_m:.1f} W over {loop_m:.2f} m in acrylic, about 10-15 K over the room at the channel (an estimate; acrylic is good to about 80 C): a thermocouple on the first sample after an hour on']))
-
     # ---- the posts: solid 303 stainless, satin black (hot black oxide, the owner 2026-11-10); bonded into a 2 mm seat under the deck, a tapped M8 x 16 hole from below ----
     for i, p in enumerate(posts):
         out.append(Part(f'post-{i + 1}', cyl('z', p, P['post_d'], b1, z0 + 2.0) - cyl('z', p, 6.8, b1 - 1, b1 + 16), Machined('stainless', 'lathe', stock=(35.0, 35.0, 46.0)),
@@ -333,11 +319,11 @@ def parts(P):
         Part('platter-inserts', pinserts, Bought('platter-inserts'), finish='brass', group='platter'),
         Part('spindle', spindle, Machined('stainless-440c', 'lathe', setup_usd=120.0), finish='steel', group='bearing',
              notes=['as Outcrop\'s: 440C, 58 HRC, ground 10 g5; a vent flat 1.0 x 0.3 along the journals']),
-        Part('bearing-housing', housing, Machined('brass-leadfree', 'lathe'), finish='brass', group='bearing',
-             notes=['as Outcrop\'s: M30 x 1.5, clamped by its nut on a disc spring and a brass washer under the plinth (about 1.5 kN), hanging 20 into the float where its brass shows; 1.0 ml of oil']),
-        Part('bearing-nut', nut, Machined('brass-leadfree', 'lathe'), finish='brass', group='bearing'),
+        Part('bearing-housing', housing, Machined('brass-leadfree', 'lathe'), finish='black', group='bearing',
+             notes=['as Outcrop\'s: M30 x 1.5, clamped by its nut on a disc spring and a brass washer under the plinth (about 1.5 kN), hanging 20 into the float; its visible parts (housing, nut, washer) black (2026-11-10, to match the posts): brass, black nickel plated, satin; 1.0 ml of oil']),
+        Part('bearing-nut', nut, Machined('brass-leadfree', 'lathe'), finish='black', group='bearing'),
         Part('bearing-spring', dspring, Bought('bearing-disc-spring'), finish='steel', group='bearing'),
-        Part('bearing-washer', cwasher, Machined('brass-leadfree', 'lathe'), finish='brass', group='bearing'),
+        Part('bearing-washer', cwasher, Machined('brass-leadfree', 'lathe'), finish='black', group='bearing'),
         Part('bushes', bushes, Bought('bearing-bushes-solid'), finish='brass', group='bearing', inside=True),
         Part('ball', ball, Bought('carbide-ball'), finish='steel', group='bearing', inside=True),
         Part('thrust-plate', plate, Bought('thrust-plate'), finish='steel', group='bearing', inside=True),
@@ -359,9 +345,9 @@ def parts(P):
         Part('phono-pads', felts, Bought('phono-felts'), finish='rubber', group='phono'),
         Part('rear-plate', rplate, Sheet('brass-sheet', 2, face='+y') if 'brass-sheet' in SHEETS else Machined('brass-leadfree', 'cnc-mill'), finish='brass', group='rear',
              notes=['2 mm lead-free brass, brushed, 110 x 47.7, on the base\'s back edge at the back right, 35 in from the deck\'s back edge: two M3 button screws into brass inserts bonded in the edge',
-                    'upper row: line out L and R, the 4 mm earth post (the star), the 4PDT stage / bypass, the light\'s on-off; lower row: 18 V for the phono stage (2.1 mm), 24 V for the light (2.5 mm, so the two plugs cannot be swapped), the Neo\'s motor inlet',
+                    'upper row: line out L and R, the 4 mm earth post (the star), the 4PDT stage / bypass; lower row: 18 V for the phono stage (2.1 mm), the Neo\'s motor inlet (no light since 2026-11-10)',
                     'the rating engraved along its foot and filled black (strata_rear.py has the text and the wiring and earth drawing)']),
-        Part('rear-hardware', rhw, Bought('strata-rear-hardware'), finish='steel', group='rear'),
+        Part('rear-hardware', rhw, Bought('strata-rear-hardware-nolight'), finish='steel', group='rear'),
         Part('hinge-blocks', blocks, Machined('cast-acrylic', 'cnc-mill', stock=(45.0, 15.0, 2 * 29.0)), finish='acrylic', group='lid',
              notes=['two 40 x 9.5 blocks of the color, each with the hinge\'s slot 3.2 x 12 x 18 deep, on two M4 screws into inserts in the plinth\'s back edge (horizontal, in shear)']),
         Part('hinges', hinges, Bought('cover-hinges'), finish='black', group='lid'),
@@ -369,7 +355,6 @@ def parts(P):
                notes=['3 mm stock sheet in the flavor\'s code (1/8 in), cemented as a box with ACRIFIX 2R 0190; 1.1 kg, within the Debut hinges\' rating; outer edges eased R0.5 and polished'] if k == 'lid-top' else [])
           for k, s in lid.items()],
         mark_part,
-        Part('led-adapter', None, Bought('led-adapter-class2')),
         Part('inserts', None, Bought('core-inserts')),
         Part('wiring', None, Bought('core-wiring')),
         Part('neo-psu', None, Bought('rega-neo-psu-mk2')),
@@ -400,14 +385,10 @@ NOTES = [
     'The base: one 12.7 sheet of stock Smoke 2074, 380 x 290, corners R6, 35 in from the deck all round; the deck floats 40 over it.',
     'The float: four solid 303 stainless posts bonded into 2 mm seats under the plinth, held to the base by the feet\'s M8 studs: '
     'rigid. The four feet (stainless on Sorbothane, levelled and locked) locate and level it; no isolation is claimed. For isolation, a platform at 3-5 Hz.',
-    'The light: the deck edge-lit, as a sign is: a 5 mm dotless 24 V COB strip of 5 W/m or less, in straight runs on a black '
-    'U-channel in a 7.4 x 7 groove routed into the deck\'s underside 10 in from its edge, facing up into the slab under a '
-    'bead-blasted ceiling; the light travels in the acrylic and out through its satin edge, not down onto the shelf '
-    '(2026-11-03); a listed Class 2 24 V adapter of 12 W into the '
-    'plate\'s 2.5 mm inlet, an SPST on the plate. No dimmer inside: with no clocked circuit, the record player keeps the '
-    'PS1 path (the audit). The phono stage runs from its own listed adapter.',
+    'No light (2026-11-10, the owner): no strip, channel, groove, adapter, switch or 24 V inlet. The deck\'s underside '
+    'bead-blasted satin as its edge (the day win from the light proposals). The phono stage runs from its own listed adapter.',
     'The rear plate: 2 mm brass on the base\'s back edge, under the deck\'s overhang; line out, earth post (the star earth), '
-    '4PDT stage / bypass, the light\'s switch, the two DC inlets and the Neo\'s; the rating engraved. Wiring and earth: strata_rear.py.',
+    '4PDT stage / bypass, the S2\'s 18 V inlet and the Neo\'s; the rating engraved. Wiring and earth: strata_rear.py.',
     'The motor: Rega 24 V on its plate, screwed hard to a shoulder in a pocket through the plinth as Rega fits it, below it in the float. '
     'The pulley waits for the motor\'s speed measured on the US Neo (300 rpm expected at 60 Hz).',
     'The bearing, platter, arm puck and phono stage as Outcrop\'s (mantle_outcrop.py): a disc spring under the bearing\'s nut, '
@@ -430,19 +411,18 @@ MATERIALS = dict(B.MATERIALS,
                     'acrylic-strata-platter': dict(CLEAR, radius=0.024),
                     'acrylic-base': dict(CLEAR, deep='$base'),
                     'acrylic-lid': dict(CLEAR, radius=0.010),
-                    'etch-tone': {'preset': 'satin_paint', 'color': '$accent', 'roughness': 0.35, 'specular': 0.5}},
-                 ledstrip={'preset': 'satin_paint', 'color': '#EDEAE4', 'roughness': 0.5, 'specular': 0.3})
+                    'etch-tone': {'preset': 'satin_paint', 'color': '$accent', 'roughness': 0.35, 'specular': 0.5}})
 
-# flavors: the line's stock codes (the first is the engine's default). `accent` is the etched mark's tone, `glow` the
-# base's warm loop (one 2700 K strip whatever the tint), `base` the Smoke 2074 base under every flavor
+# flavors: the line's stock codes (the first is the engine's default). `accent` is the etched mark's tone, `glow` is
+# kept only for the engine's variant format (no light since 2026-11-10), `base` the Smoke 2074 base under every flavor
 SMOKE_2074 = '#787B7E'
 STOCK = [('poison-2092', '#0DA41C', '#123A16'), ('ember-2423', '#E02B3A', '#4A0E12'), ('smoke-2074', SMOKE_2074, '#1A1B1C'),
          ('haze-2287', '#9C5DE3', '#2E1A4A'), ('ice-2069', '#B4DEFA', '#24557E')]
 VARIANTS = {k: {'deep': deep, 'accent': acc, 'glow': '#FF8C40', 'base': SMOKE_2074} for k, deep, acc in STOCK}
 
-PRODUCT = Product('mantle-strata-v3', 'Mantle: Strata Float v3 (proposal A)', 'Belt-drive record player, a laminated plinth floating over a lit laminated base',
+PRODUCT = Product('mantle-strata-v3', 'Mantle: Strata Float v3 (proposal A)', 'Belt-drive record player, a tinted deck floating over a smoked base (no light)',
                   params=P, parts=parts, count=1, notes=NOTES, materials=MATERIALS, variants=VARIANTS,
-                  touching=[('plinth-L*', 'plinth-L*'), ('base-L*', 'base-L*'), ('led-strip', 'plinth-L*'), ('post-*', 'plinth-L*'), ('post-*', 'base-L*'), ('foot-studs', 'post-*'), ('foot-studs', 'base-L*'), ('led-channel', 'plinth-L*'), ('led-strip', 'led-channel'), ('rear-plate', 'base-L*'), ('rear-hardware', 'rear-plate'), ('rear-hardware', 'base-L*'), ('phono-pads', 'phono-stage'), ('bushes', 'bearing-housing'), ('bushes', 'spindle'),
+                  touching=[('plinth-L*', 'plinth-L*'), ('base-L*', 'base-L*'), ('post-*', 'plinth-L*'), ('post-*', 'base-L*'), ('foot-studs', 'post-*'), ('foot-studs', 'base-L*'), ('rear-plate', 'base-L*'), ('rear-hardware', 'rear-plate'), ('rear-hardware', 'base-L*'), ('phono-pads', 'phono-stage'), ('bushes', 'bearing-housing'), ('bushes', 'spindle'),
                             ('platter-hub', 'spindle'), ('platter-screws', 'platter*'), ('foot-studs', 'feet'), ('foot-studs', 'base-L*'),
                             ('foot-pads', 'feet'), ('motor-screws', 'motor-plate'), ('motor-screws', 'plinth-L*'), ('motor', 'motor-plate'),
                             ('platter-inserts', 'platter'), ('platter-screws', 'platter-hub'), ('platter-screws', 'platter-inserts'), ('bearing-spring', 'bearing-*'), ('bearing-washer', 'plinth-L*'), ('bearing-spring', 'bearing-washer'),

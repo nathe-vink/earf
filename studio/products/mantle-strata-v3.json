@@ -79,12 +79,6 @@
    "roughness": 0.35,
    "specular": 0.5
   },
-  "ledstrip": {
-   "preset": "satin_paint",
-   "color": "#EDEAE4",
-   "roughness": 0.5,
-   "specular": 0.3
-  },
   "rubber": {
    "preset": "rubber",
    "color": "#161616"
@@ -129,11 +123,11 @@
    "material": "arm"
   },
   {
-   "match": "led-channel|motor|hinges",
+   "match": "bearing-housing|bearing-nut|bearing-washer|motor|hinges",
    "material": "black"
   },
   {
-   "match": "platter-hub|platter-inserts|bearing-housing|bearing-nut|bearing-washer|bushes|rear-plate",
+   "match": "platter-hub|platter-inserts|bushes|rear-plate",
    "material": "brass"
   },
   {
@@ -143,10 +137,6 @@
   {
    "match": "mark",
    "material": "etch-tone"
-  },
-  {
-   "match": "led-strip",
-   "material": "ledstrip"
   },
   {
    "match": "belt|foot-pads|phono-pads",
