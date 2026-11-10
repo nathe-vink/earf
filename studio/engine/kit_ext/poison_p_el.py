@@ -937,3 +937,150 @@ def detile(bpy, name, p, kit):
             n_done += 1
     print(f'detile: {n_done} materials')
     return []
+
+
+def _leaf(bm, base, direction, length, width, droop=0.25, curl=0.15, seg=8):
+    """One leaf: a lanceolate-to-ovate blade from `base` along `direction` (its tip drooping), a thin double-sided strip
+    (two triangles across, `seg` along), the blade's width a sine along its length; curled up a little at its edges."""
+    d = Vector(direction).normalized()
+    side = d.cross(Vector((0, 0, 1)))
+    if side.length < 1e-4:
+        side = Vector((1, 0, 0))
+    side.normalize(); up = side.cross(d).normalized()
+    mid, left, right = [], [], []
+    for i in range(seg + 1):
+        t = i / seg
+        w = width * math.sin(math.pi * min(1.0, t * 1.15)) * (1 - 0.15 * t)
+        c = Vector(base) + d * (length * t) + Vector((0, 0, -droop * length * t * t))
+        mid.append(bm.verts.new(c + up * (0.004 * math.sin(math.pi * t))))
+        left.append(bm.verts.new(c - side * w * 0.5 + up * (curl * w * 0.5)))
+        right.append(bm.verts.new(c + side * w * 0.5 + up * (curl * w * 0.5)))
+    for i in range(seg):
+        bm.faces.new((left[i], left[i + 1], mid[i + 1], mid[i]))
+        bm.faces.new((mid[i], mid[i + 1], right[i + 1], right[i]))
+
+
+def _leaf_mat(bpy, name, color, rough=0.45, trans=0.25):
+    m, _, b = _node_mat(bpy, name)
+    b.inputs['Base Color'].default_value = (*_hex(color), 1); b.inputs['Roughness'].default_value = rough
+    b.inputs['Transmission Weight'].default_value = 0.0
+    if 'Subsurface Weight' in b.inputs:
+        b.inputs['Subsurface Weight'].default_value = trans; b.inputs['Subsurface Radius'].default_value = (0.3, 1.0, 0.2)
+        b.inputs['Subsurface Scale'].default_value = 0.002
+    return m
+
+
+def foxglove(bpy, name, p, kit):
+    """A foxglove (Digitalis purpurea) in flower: a rosette of large soft lanceolate leaves at its foot, a single spire
+    `height` tall (1-1.5 m), its upper `raceme` share hung with tubular bells on one side of the spike, each nodding
+    down and out, `bells` of them, largest low and opening upward to small green-pink buds at the tip. Bells in
+    `color` (purple-pink) with a paler throat; the spire leans `lean` [dx, dy] at its tip; `face` the azimuth (deg,
+    0 = -y) the bells hang toward."""
+    rnd = random.Random(p.get('seed', 5))
+    H = p.get('height', 1.2); lx, ly = p.get('lean', [0.03, 0.0]); face = math.radians(p.get('face', 0.0))
+    fd = Vector((math.sin(face), -math.cos(face), 0.0))
+    stalk, leaves, bells, throats, buds = bmesh.new(), bmesh.new(), bmesh.new(), bmesh.new(), bmesh.new()
+    axis = lambda t: Vector((lx * t * t, ly * t * t, H * t))
+    kit._tube(stalk, [axis(t) for t in (0, 0.3, 0.6, 0.85, 1.0)], [0.009, 0.0075, 0.006, 0.004, 0.0022], 1.0, 0.0, 10, 8)
+    # the rosette and a few stem leaves, smaller up the stem
+    for k in range(p.get('leaves', 11)):
+        a = k * 2.39996 + rnd.uniform(-0.2, 0.2)
+        L = rnd.uniform(0.2, 0.3); dvec = Vector((math.cos(a), math.sin(a), 0.35))
+        _leaf(leaves, (0, 0, 0.02), dvec, L, L * 0.38, droop=0.5, curl=0.2)
+    for k in range(5):
+        t = 0.08 + 0.07 * k; a = k * 2.2 + 1.0; L = 0.16 * (1 - 0.15 * k)
+        _leaf(leaves, axis(t), Vector((math.cos(a), math.sin(a), 0.6)), L, L * 0.35, droop=0.3, curl=0.2)
+    n = p.get('bells', 34); r0 = 1.0 - p.get('raceme', 0.55)
+    for k in range(n):
+        f = k / max(1, n - 1); t = r0 + (0.97 - r0) * f
+        c = axis(t)
+        size = 1.0 - 0.75 * f ** 1.4
+        a = rnd.gauss(0, 0.55)                             # mostly toward `face`, round one side of the spike
+        side = Vector((fd.x * math.cos(a) - fd.y * math.sin(a), fd.x * math.sin(a) + fd.y * math.cos(a), 0.0))
+        if f > 0.82:                                        # buds at the tip: small, closed, pointing up and out
+            q = c + side * 0.008
+            g = bmesh.ops.create_uvsphere(buds, u_segments=8, v_segments=6, radius=0.005 * (1.4 - f))
+            for v in g['verts']:
+                v.co = Vector((v.co.x, v.co.y, v.co.z * 1.6)) + q
+            continue
+        bs_ = p.get('bell', 1.0)
+        Lb = 0.045 * size * bs_; rm = 0.013 * size * bs_; rb = 0.006 * size * bs_
+        # the bell: from its base on the stem (a short pedicel), out and nodding down at 50-70 deg
+        droop = math.radians(rnd.uniform(50, 70))
+        dirn = (side * math.cos(droop) + Vector((0, 0, -math.sin(droop)))).normalized()
+        b0 = c + side * 0.01 * p.get('bell', 1.0)
+        g = bmesh.ops.create_cone(bells, cap_ends=False, cap_tris=False, segments=12, radius1=rb, radius2=rm, depth=Lb)
+        # the throat inside: a slightly smaller cone, paler
+        g2 = bmesh.ops.create_cone(throats, cap_ends=False, cap_tris=False, segments=12, radius1=rb * 0.85, radius2=rm * 0.88, depth=Lb * 0.96)
+        rot = Vector((0, 0, 1)).rotation_difference(dirn).to_matrix()
+        for gg in (g, g2):
+            for v in gg['verts']:
+                co = v.co.copy(); co.z += Lb / 2
+                # the mouth's lower lip a little longer: a foxglove's bell is not round
+                if co.z > Lb * 0.9 and co.dot(side) < 0:
+                    co.z += Lb * 0.06
+                v.co = b0 + rot @ co
+        kit._tube(stalk, [c, c + side * 0.006 + Vector((0, 0, 0.002)), b0], 0.0012, 1.0, 0.0, 6, 3)
+    bell_m, _, bb = _node_mat(bpy, f'{name}-bell')
+    bb.inputs['Base Color'].default_value = (*_hex(p.get('color', '#A8337A')), 1); bb.inputs['Roughness'].default_value = 0.5
+    if 'Subsurface Weight' in bb.inputs:
+        bb.inputs['Subsurface Weight'].default_value = 0.3; bb.inputs['Subsurface Radius'].default_value = (1.0, 0.3, 0.6)
+        bb.inputs['Subsurface Scale'].default_value = 0.003
+    throat_m = _plain(bpy, f'{name}-throat', p.get('throat', '#E2B8CF'), 0.6)
+    bud_m = _plain(bpy, f'{name}-bud', '#7E6A5A', 0.6)
+    leaf_m = _leaf_mat(bpy, f'{name}-leaf', p.get('leaf', '#4C6A2E'), 0.6)
+    stalk_m = _plain(bpy, f'{name}-stalk', '#55693A', 0.6)
+    pos = {'position': p.get('position', [0, 0, 0]), 'rotate': [0, 0, 0]}
+    return [_obj(bpy, f'{name}-stalk', stalk, stalk_m, pos), _obj(bpy, f'{name}-leaves', leaves, leaf_m, pos),
+            _obj(bpy, f'{name}-bells', bells, bell_m, pos), _obj(bpy, f'{name}-throats', throats, throat_m, pos),
+            _obj(bpy, f'{name}-buds', buds, bud_m, pos)]
+
+
+def nightshade(bpy, name, p, kit):
+    """Deadly nightshade (Atropa belladonna) in fruit: a low bushy plant `height` tall of a few branching stems, soft
+    ovate leaves in unequal pairs, and glossy black berries (`berry` radius, about 6 mm) sitting singly in green
+    five-lobed star calyces at the leaf axils, `berries` of them, held a little out from the foliage."""
+    rnd = random.Random(p.get('seed', 6))
+    H = p.get('height', 0.7)
+    stems, leaves, berries, calyx = bmesh.new(), bmesh.new(), bmesh.new(), bmesh.new()
+    tips = []
+    for s in range(p.get('stems', 5)):
+        a = s * 2.4 + rnd.uniform(-0.3, 0.3); spread = rnd.uniform(0.08, 0.22)
+        h = H * rnd.uniform(0.75, 1.0)
+        pts = [Vector((0, 0, 0)), Vector((math.cos(a) * spread * 0.3, math.sin(a) * spread * 0.3, h * 0.4)),
+               Vector((math.cos(a) * spread * 0.8, math.sin(a) * spread * 0.8, h * 0.8)),
+               Vector((math.cos(a) * spread, math.sin(a) * spread, h))]
+        kit._tube(stems, pts, [0.006, 0.005, 0.0035, 0.002], 1.0, 0.0, 8, 6)
+        for k in range(9):
+            t = 0.25 + 0.75 * k / 8
+            seg = min(2, int(t * 3)); f = t * 3 - seg
+            c = pts[seg].lerp(pts[seg + 1], f)
+            b = a + k * 2.1 + rnd.uniform(-0.4, 0.4)
+            L = rnd.uniform(0.07, 0.13) * (1.1 - 0.4 * t)
+            dvec = Vector((math.cos(b), math.sin(b), rnd.uniform(-0.1, 0.35)))
+            _leaf(leaves, c, dvec, L, L * 0.55, droop=0.25, curl=0.1)
+            if k % 2 == 1 or rnd.random() < 0.3:
+                tips.append((c, Vector((math.cos(b + 0.6), math.sin(b + 0.6), -0.2)).normalized()))
+    rnd.shuffle(tips)
+    br = p.get('berry', 0.0062)
+    for c, d in tips[:p.get('berries', 18)]:
+        q = c + d * rnd.uniform(0.02, 0.035)
+        kit._tube(stems, [c, c + d * 0.012 + Vector((0, 0, 0.004)), q + Vector((0, 0, br * 0.6))], 0.0009, 1.0, 0.0, 5, 3)
+        r = br * rnd.uniform(0.85, 1.15)
+        g = bmesh.ops.create_uvsphere(berries, u_segments=14, v_segments=10, radius=r)
+        for v in g['verts']:
+            v.co = Vector((v.co.x, v.co.y, v.co.z * 0.92)) + q
+        # the calyx: five green lobes spread like a star under the berry
+        for j in range(5):
+            th = j * 2 * math.pi / 5 + rnd.uniform(-0.2, 0.2)
+            dv = Vector((math.cos(th), math.sin(th), -0.25))
+            _leaf(calyx, q + Vector((0, 0, -r * 0.55)), dv, r * 1.9, r * 0.9, droop=0.1, curl=0.05, seg=3)
+    berry_m, _, bb = _node_mat(bpy, f'{name}-berry')
+    bb.inputs['Base Color'].default_value = (*_hex('#0B0A0C'), 1); bb.inputs['Roughness'].default_value = 0.08
+    bb.inputs['Coat Weight'].default_value = 0.8; bb.inputs['Coat Roughness'].default_value = 0.03
+    leaf_m = _leaf_mat(bpy, f'{name}-leaf', p.get('leaf', '#3F5A26'), 0.55)
+    cal_m = _plain(bpy, f'{name}-calyx', '#4E6B2A', 0.55)
+    stem_m = _plain(bpy, f'{name}-stem', '#4B5A2E', 0.6)
+    pos = {'position': p.get('position', [0, 0, 0]), 'rotate': [0, 0, p.get('turn', 0.0)]}
+    return [_obj(bpy, f'{name}-stems', stems, stem_m, pos), _obj(bpy, f'{name}-leaves', leaves, leaf_m, pos),
+            _obj(bpy, f'{name}-berries', berries, berry_m, pos), _obj(bpy, f'{name}-calyx', calyx, cal_m, pos)]

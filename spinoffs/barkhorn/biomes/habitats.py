@@ -163,6 +163,32 @@ ADD = {'poison_g5': [dict(_RW, position=[-5.0, 28.2, -0.1], seed=41, turn=40), d
        # Acid (the coordinator, 20:46): splash crowns in the puddle at the speaker's foot, lightly breaking its reflection
        'acid_b': [{'kind': 'kit', 'shape': 'ext', 'module': 'acid_rain_el', 'fn': 'splashes', 'area': [-0.7, -1.6, 0.7, -0.22],
                    'z': -0.11, 'count': 28, 'radius': [0.006, 0.016], 'avoid': [[0.0, 0.0, 0.34]], 'opacity': 0.85, 'seed': 17}]}
+# "Poison garden" (the owner via the coordinator, 2026-11-10 00:20: the forest didn't say poison): true-scale poisonous
+# plants in P8's scene. A loose ring of fly agaric (Amanita muscaria, caps 8-15 cm across, young domed to open flat) round
+# the feet in place of the death caps; foxglove spires (Digitalis purpurea, 1-1.5 m, the bells facing the camera, 18 deg)
+# right and behind; deadly nightshade (Atropa belladonna, glossy black berries) by them. habitats.py --garden
+_FLY = {'kind': 'kit', 'shape': 'ext', 'module': 'poison_b_el', 'fn': 'amanita', 'species': 'muscaria'}
+_FOX = {'kind': 'kit', 'shape': 'ext', 'module': 'poison_p_el', 'fn': 'foxglove', 'face': 18.0}
+_NS = {'kind': 'kit', 'shape': 'ext', 'module': 'poison_p_el', 'fn': 'nightshade'}
+GARDEN = [  # g2: fewer warts (at 65-85 a cap read pink at this distance), a foreground cluster where the death caps stood
+          dict(_FLY, position=[-0.42, -0.30, -0.02], cap=0.07, age='plane', seed=201, warts=28, lean=[-0.01, 0.0]),
+          dict(_FLY, position=[-0.30, -0.47, -0.02], cap=0.05, age='convex', seed=202, warts=26),
+          dict(_FLY, position=[0.10, -0.52, -0.02], cap=0.075, age='plane', seed=204, warts=30, lean=[0.01, -0.01]),
+          dict(_FLY, position=[0.30, -0.42, -0.02], cap=0.045, age='convex', seed=205, warts=22),
+          dict(_FLY, position=[0.44, -0.22, -0.02], cap=0.06, age='plane', seed=206, warts=26),
+          dict(_FLY, position=[-0.50, -0.05, -0.02], cap=0.045, age='convex', seed=208, warts=22),
+          dict(_FLY, position=[-0.30, -1.21, -0.022], cap=0.075, age='plane', seed=211, warts=30, lean=[-0.02, 0.01]),
+          dict(_FLY, position=[-0.05, -1.40, -0.022], cap=0.06, age='convex', seed=212, warts=28),
+          dict(_FLY, position=[-0.20, -1.30, -0.022], cap=0.045, age='young', seed=213, warts=30),
+          dict(_FLY, position=[0.22, -1.15, -0.022], cap=0.07, age='plane', seed=214, warts=28),
+          dict(_FLY, position=[-0.55, -1.45, -0.016], cap=0.055, age='convex', seed=215, warts=26),
+          dict(_FLY, position=[0.05, -1.25, -0.02], cap=0.03, age='button', seed=216),
+          dict(_FOX, position=[0.72, -0.25, -0.01], height=1.25, seed=301, bells=48, bell=1.3, lean=[0.03, -0.02]),
+          dict(_FOX, position=[0.95, 0.30, -0.01], height=1.45, seed=302, bells=52, bell=1.3, lean=[-0.02, 0.0]),
+          dict(_FOX, position=[0.55, 0.60, -0.01], height=1.1, seed=303, bells=42, bell=1.3, lean=[0.02, 0.01]),
+          dict(_FOX, position=[-0.55, 0.45, -0.01], height=1.3, seed=304, bells=48, bell=1.3, lean=[-0.03, 0.0]),
+          dict(_NS, position=[0.62, -0.85, -0.01], height=0.55, seed=401, berries=26, berry=0.007),
+          dict(_NS, position=[1.15, -0.35, -0.01], height=0.65, seed=402, berries=20, berry=0.007, turn=70)]
 CANOPY_OPEN = {'poison_g5': 0.25}
 # rain on the speaker (the coordinator, 20:46): beads on the front and the horn's lip, runnels; a meniscus at the waterline
 # round 3 (the coordinator, 22:21): bigger drops, 3-6 mm, more of them low on the front, longer runnels (r2: 150 at 1.2-4.7 mm,
@@ -195,6 +221,7 @@ def main():
     ap.add_argument('--sink', type=float, help="the feet's bedding, m, in place of the habitat's (tests)")
     ap.add_argument('--scrim', type=float, nargs=4, help='a silk on the sun line: T W H D (tests)')
     ap.add_argument('--meniscus', type=float)
+    ap.add_argument('--garden', action='store_true', help='Poison garden: fly agaric, foxglove, nightshade (GARDEN)')
     ap.add_argument('--berm', type=float, nargs=5, action='append', default=[], help='sand banked against the base: LX LY RX RY H')
     ap.add_argument('--reflector', type=float, nargs=8, action='append', default=[], help='a white board: W H AZ EL DIST TX TY TZ')
     ap.add_argument('--opaque-shadows', action='store_true', help='diagnostics: the glass blocks direct light')
@@ -218,10 +245,11 @@ def main():
         tint, lights = HABITATS[n]
         shot = os.path.join(SHOTS, f'{n}-portrait.json' if a.frame == 'portrait' else f'{n}.json')
         out = os.path.join(a.out, f'{n}-{a.frame}{a.tag}.png')
-        if n in DROP or n in MODIFY or n in ADD:
+        if n in DROP or n in MODIFY or n in ADD or a.garden:
             sh = json.load(open(shot))
+            drop = DROP.get(n, []) + (['amanita'] if a.garden else [])
             sh['set']['props'] = [dict(p, **MODIFY.get(n, {}).get(p.get('fn') or p.get('model'), {})) for p in sh['set']['props']
-                                  if p.get('fn') not in DROP.get(n, [])] + ADD.get(n, [])
+                                  if p.get('fn') not in drop] + ADD.get(n, []) + (GARDEN if a.garden else [])
             shot = out.replace('.png', '.src.json')
             json.dump(sh, open(shot, 'w'), indent=1)
         # horn A on its own M8 feet (base A and its light left out), direct light stopped at the horn
