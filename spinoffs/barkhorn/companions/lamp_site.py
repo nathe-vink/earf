@@ -36,9 +36,10 @@ CORE_OUT = 0.9                                        # out of the ball (the fro
 CCT = int(os.environ.get('LAMP_CCT', '2700'))
 # item 90 (the coordinator's open proposal to the owner, PROPOSAL): each tint at its own colour temperature
 CCT_PER_TINT = {'blue': 5700, 'violet': 4000}         # the rest 2700
-# the LED colour per tint (the owner, 2026-11-10: "some need warm and some need amber"): amber 2200 K for Ember, Dust and
-# Acid; 2700 K for Poison, Fog and Smoke; 3000 K for Ice and Haze. Both lamps; LED_K overrides
-LED_CCT = {'red': 2200, 'orange': 2200, 'amber': 2200, 'green': 2700, 'ice': 2700, 'black': 2700, 'blue': 3000, 'violet': 3000}
+# the LED colour per tint (the owner, 2026-11-10: "some need warm and some need amber"): amber 2200 K for Ember; 2700 K
+# for Dust, Acid (moved from amber 23:50: 2200 K carries almost none of the light their dyes remove, so they read pale),
+# Poison, Fog and Smoke; 3000 K for Ice and Haze. Both lamps; LED_K overrides
+LED_CCT = {'red': 2200, 'orange': 2700, 'amber': 2700, 'green': 2700, 'ice': 2700, 'black': 2700, 'blue': 3000, 'violet': 3000}
 # the site's colour keys (web.py HABITAT) to the tints
 COLOURS = {'red': 'Ember', 'orange': 'Dust', 'amber': 'Acid', 'green': 'Poison', 'blue': 'Ice', 'violet': 'Haze',
            'ice': 'Fog', 'black': 'Smoke dark'}
@@ -566,7 +567,7 @@ def build(frame, samples, scale):
         print('LUX', frame, 'centre r<0.05', round(lux(0, 0.05)), 'r 0.15-0.2', round(lux(0.15, 0.2)), 'r 0.3-0.35', round(lux(0.3, 0.35)), 'albedo', round(rho, 3))
         return
     if kind0 == 'dome' and os.environ.get('HEMI_ENGINE', 'ring') == 'ring':
-        sc.cycles.use_denoising = False   # (option 3: no denoiser on the lamp, the coordinator)
+        sc.cycles.use_denoising = os.environ.get('DENOISE') == '1'   # (option 3: no denoiser on the lamp; DENOISE=1 for the row and Smoke, the coordinator 23:50)
         # path guiding (Cycles' OpenPGL, CPU): the light that reaches the paper through the shade's clear layers is a
         # caustic of 24 small LEDs; guiding samples it better (no clamp, no denoiser: an unbiased estimator still)
         sc.cycles.use_guiding = os.environ.get('GUIDING', '1') == '1'; sc.cycles.use_surface_guiding = True
