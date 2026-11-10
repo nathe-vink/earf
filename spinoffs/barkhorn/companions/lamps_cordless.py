@@ -221,6 +221,8 @@ def main():
             u['lights']['bgwash']['size_m'] = [float(v) for v in os.environ.get('WASH_SIZE2', '6,0.6').split(',')]
             u['lights']['bgwash']['irradiance'] = round(u['lights']['bgwash']['irradiance'] * float(os.environ.get('WASH_K', '1.0')), 3)
             u['set']['color'] = os.environ.get('PAPER', '#EFF1EE')
+            if os.environ.get('HIDE_PARTS'):        # a probe: dome parts left out, to find what shows under the cap
+                dome_['hide'] = os.environ['HIDE_PARTS']
             # 3. the mouth's inside lit from below by the oak (warm): a white card on the table under the lamp, out
             #    of frame, a real neutral bounce, so the white liner reads pale (L* 55-65), well under the wall
             dx_, dy_, dz_ = dome_['spots'][0]
