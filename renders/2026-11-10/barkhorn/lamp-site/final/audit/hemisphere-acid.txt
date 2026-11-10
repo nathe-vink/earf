@@ -1,0 +1,28 @@
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:153: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m = bpy.data.materials.new(nm); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+Timer 'STL Import' took 0.89 ms
+Timer 'STL Import' took 0.53 ms
+Timer 'STL Import' took 0.54 ms
+Timer 'STL Import' took 0.41 ms
+Timer 'STL Import' took 1.03 ms
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:210: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  cm = bpy.data.materials.new(f'collar-{tint}'); cm.use_nodes = True; nt = cm.node_tree
+Timer 'STL Import' took 0.97 ms
+Timer 'STL Import' took 0.42 ms
+Timer 'STL Import' took 0.67 ms
+Timer 'STL Import' took 0.78 ms
+Timer 'STL Import' took 0.89 ms
+Timer 'STL Import' took 0.24 ms
+Timer 'STL Import' took 0.51 ms
+Timer 'STL Import' took 0.44 ms
+Timer 'STL Import' took 0.50 ms
+00:11.019  cycles           | WARNING CUEW initialization failed: Error opening the library
+AUDIT dome-amber hidden [] no-shadow [] lights [('key', 'AREA', 90.308), ('fill', 'AREA', 20.0), ('kicker', 'AREA', 6.0), ('led-amber-0', 'AREA', 0.621), ('led-amber-1', 'AREA', 0.621), ('led-amber-2', 'AREA', 0.621), ('led-amber-3', 'AREA', 0.621), ('led-amber-4', 'AREA', 0.621), ('led-amber-5', 'AREA', 0.621), ('led-amber-6', 'AREA', 0.621), ('led-amber-7', 'AREA', 0.621), ('led-amber-8', 'AREA', 0.621), ('led-amber-9', 'AREA', 0.621), ('led-amber-10', 'AREA', 0.621), ('led-amber-11', 'AREA', 0.621), ('led-amber-12', 'AREA', 0.621), ('led-amber-13', 'AREA', 0.621), ('led-amber-14', 'AREA', 0.621), ('led-amber-15', 'AREA', 0.621), ('led-amber-16', 'AREA', 0.621), ('led-amber-17', 'AREA', 0.621), ('led-amber-18', 'AREA', 0.621), ('led-amber-19', 'AREA', 0.621), ('led-amber-20', 'AREA', 0.621), ('led-amber-21', 'AREA', 0.621), ('led-amber-22', 'AREA', 0.621), ('led-amber-23', 'AREA', 0.621)]
+HIDDENCAST dome-amber: 3 hidden, 0 in frame
+   out         0.0 %  area lamp (ellipse) key
+   out         0.0 %  area lamp (ellipse) fill
+   out         0.0 %  area lamp (rectangle) kicker
+00:11.791  render           | Saved: '/home/user/earf/renders/2026-11-10/barkhorn/lamp-site/final/masks/hemisphere-acid-key.png'
+00:13.460  render           | Saved: '/home/user/earf/renders/2026-11-10/barkhorn/lamp-site/final/masks/hemisphere-acid-fill.png'
+00:15.373  render           | Saved: '/home/user/earf/renders/2026-11-10/barkhorn/lamp-site/final/masks/hemisphere-acid-kicker.png'
+CASTCHECK dome-amber {'key': 0.0, 'fill': 0.0, 'kicker': 0.0}

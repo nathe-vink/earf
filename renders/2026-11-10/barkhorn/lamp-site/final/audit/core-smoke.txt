@@ -1,0 +1,22 @@
+Timer 'STL Import' took 1.45 ms
+Timer 'STL Import' took 3.22 ms
+Timer 'STL Import' took 3.86 ms
+Timer 'STL Import' took 0.61 ms
+Timer 'STL Import' took 0.33 ms
+Timer 'STL Import' took 0.95 ms
+Timer 'STL Import' took 0.61 ms
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:333: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  wm_ = bpy.data.materials.new(f'window-{tint}'); wm_.use_nodes = True; nt_ = wm_.node_tree; nt_.nodes.clear()
+Timer 'STL Import' took 0.31 ms
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:153: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m = bpy.data.materials.new(nm); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+00:05.886  cycles           | WARNING CUEW initialization failed: Error opening the library
+AUDIT orb-black hidden [] no-shadow [] lights [('key', 'AREA', 45.154), ('fill', 'AREA', 10.0), ('kicker', 'AREA', 3.0), ('led-black', 'AREA', 2.5)]
+HIDDENCAST orb-black: 3 hidden, 0 in frame
+   out         0.0 %  area lamp (ellipse) key
+   out         0.0 %  area lamp (ellipse) fill
+   out         0.0 %  area lamp (rectangle) kicker
+00:06.737  render           | Saved: '/home/user/earf/renders/2026-11-10/barkhorn/lamp-site/final/masks/core-smoke-key.png'
+00:08.514  render           | Saved: '/home/user/earf/renders/2026-11-10/barkhorn/lamp-site/final/masks/core-smoke-fill.png'
+00:10.378  render           | Saved: '/home/user/earf/renders/2026-11-10/barkhorn/lamp-site/final/masks/core-smoke-kicker.png'
+CASTCHECK orb-black {'key': 0.0, 'fill': 0.0, 'kicker': 0.0}
