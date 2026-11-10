@@ -125,6 +125,14 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    somewhere between frosted and polished which is good." So the PLINTH STAYS AS SIGNED (clear tinted, satin edges); the frosted
    proposal is stopped. Open: the base and the light. His own question, "should the base just be the same acrylic color as the
    top?", is being rendered: the base in the plinth's tint, by day and with the signed LED loop under the base (Ember, Ice).
+   LAMPS, ALL DECIDED, the owner 10 Nov ~15:25: "For core brightness, it being a glow lamp is fine as it will be in people's faces at
+   tables. Hemisphere is good." So: Core stays a glow lamp (the same LED and battery; the well lined white); Core's base angled;
+   Hemisphere's up-ring design goes to the full colour set; one LED colour per tint (amber 2200 K: Ember, Dust, Acid; warm: Poison,
+   Fog, Smoke at 2700 K, Ice and Haze at 3000 K; Ember and Ice are his, the rest the coordinator's split). Lamps lane briefed: CAD
+   and BOM, then both lamps in all eight tints, each in its own light, plus a row each and Ember's Hemisphere from below.
+   THE HERO: proxy b (r48-biomes 06f61263) works as a group and fails as a place (flat haze, blank sky); the coloured light on the
+   ground is physically small (only the horn passes a full beam), so that idea is dropped. Next, two proxies that reuse the passed
+   scenes: the eight on the Fog hillside against its fog bank, the low sun behind; and the eight in the Ice snowfield.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
