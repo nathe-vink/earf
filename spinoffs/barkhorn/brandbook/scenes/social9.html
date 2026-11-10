@@ -1,0 +1,31 @@
+<!doctype html><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<style>
+/* nine posts at 4:5, as a profile grid shows them; one picture, one line, the mark small. Approved pictures only (2026-11-10):
+   the black-rods fronts (r33-speaker-horn 370de3da), Ice and Fog in their elements (r48-biomes 2904138e), the globe (A3). */
+body { width: 1260px; height: 1530px; background: #E7E2DA; display: grid; grid-template-columns: repeat(3, 400px); gap: 12px; padding: 18px; align-content: start }
+.post { position: relative; width: 400px; height: 500px; overflow: hidden; background: #F4F1EC }
+.post .t { position: absolute; left: 26px; right: 26px; top: 26px; font-weight: 600; letter-spacing: -.02em; line-height: 1.02; font-size: 34px; color: var(--ink); z-index: 1 }
+.post .t.b { top: auto; bottom: 62px; font-size: 30px }
+.post .t.c { top: auto; bottom: 66px; text-align: center; font-size: 34px }
+.post .m { position: absolute; left: 26px; bottom: 24px; font-family: var(--mono); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); z-index: 1 }
+.post .w { position: absolute; right: 24px; bottom: 22px; height: 12px; z-index: 1 }
+.g8 { position: absolute; left: 26px; right: 26px; top: 128px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px }
+.g8 img { width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block }
+.post img.f { position: absolute; left: 50%; top: 20px; height: 330px; aspect-ratio: 4/5; transform: translateX(-50%); object-fit: cover }
+.post.dark img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover }
+.post.dark .t { color: #F4F1EC; text-shadow: 0 1px 24px rgba(0,0,0,.35) }
+.post.dark .m { color: rgba(244,241,236,.9) }
+.post.dark::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.38), rgba(0,0,0,0) 32%, rgba(0,0,0,0) 80%, rgba(0,0,0,.3)) }
+.post.gl { background: #F2EFEA } .post.gl img.gi { position: absolute; left: 50%; top: 40px; width: 330px; transform: translateX(-50%) }
+</style>
+<body data-w="1260" data-h="1530">
+<div class="post"><div class="t">A world of sound,<br>in color.</div><div class="g8"><img src="../book/img/tropos-front-ember.jpg" alt=""><img src="../book/img/tropos-front-dust.jpg" alt=""><img src="../book/img/tropos-front-acid.jpg" alt=""><img src="../book/img/tropos-front-poison.jpg" alt=""><img src="../book/img/tropos-front-ice.jpg" alt=""><img src="../book/img/tropos-front-haze.jpg" alt=""><img src="../book/img/tropos-front-fog.jpg" alt=""><img src="../book/img/tropos-front-smoke.jpg" alt=""></div><div class="m">Tropos · eight colors · Render</div><img class="w" src="../../brand/mark/earf-wordmark-black.svg" alt=""></div>
+<div class="post dark"><img class="bg" src="../book/img/tropos-ice-snow.jpg" alt=""><div class="t">Glacier blue,<br>and in no hurry.</div><div class="m">05 Ice · in snow · Render</div><img class="w" src="../../brand/mark/earf-wordmark-white.svg" alt=""></div>
+<div class="post gl"><img class="gi" src="../../brand/mark/earf-globe-render.png" alt=""><div class="t c">Globe is good.</div><div class="m">EARF · Render</div></div>
+<div class="post"><img class="f" src="../book/img/tropos-front-smoke.jpg" alt=""><div class="t b">Smoked glass,<br>for after dark.</div><div class="m">08 Smoke · Render</div><img class="w" src="../../brand/mark/earf-wordmark-black.svg" alt=""></div>
+<div class="post dark"><img class="bg" src="../book/img/tropos-fog-habitat.jpg" alt=""><div class="t">Water-clear.<br>Almost not there.</div><div class="m">07 Fog · in the mist · Render</div><img class="w" src="../../brand/mark/earf-wordmark-white.svg" alt=""></div>
+<div class="post"><img class="f" src="../book/img/tropos-front-acid.jpg" alt=""><div class="t b">A yellow<br>with an edge.</div><div class="m">03 Acid · Render</div><img class="w" src="../../brand/mark/earf-wordmark-black.svg" alt=""></div>
+<div class="post"><img class="f" src="../book/img/tropos-front-poison.jpg" alt=""><div class="t b">Bottle green.<br>Keep out of reach.</div><div class="m">04 Poison · Render</div><img class="w" src="../../brand/mark/earf-wordmark-black.svg" alt=""></div>
+<div class="post"><img class="f" src="../book/img/tropos-front-haze.jpg" alt=""><div class="t b">Dusk, kept<br>indoors.</div><div class="m">06 Haze · Render</div><img class="w" src="../../brand/mark/earf-wordmark-black.svg" alt=""></div>
+<div class="post"><img class="f" src="../book/img/tropos-front-ember.jpg" alt=""><div class="t b">The last light<br>of the fire.</div><div class="m">01 Ember · Render</div><img class="w" src="../../brand/mark/earf-wordmark-black.svg" alt=""></div>
+</body>

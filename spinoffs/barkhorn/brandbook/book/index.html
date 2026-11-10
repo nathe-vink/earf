@@ -235,6 +235,13 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 footer { padding-block: 56px 72px; font-size: 14.5px }
 footer .in { display: grid; gap: 10px; max-width: var(--wide) }
 footer p { max-width: 76ch }
+.decals { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(10px, 1.6vw, 18px); margin-top: clamp(14px, 2vw, 24px) }
+.decals img, .mocks img, figure.wide img { width: 100%; height: auto; display: block; border-radius: 3px }
+.mocks { margin-top: clamp(14px, 2vw, 24px) }
+figure.wide { margin: 0 auto; max-width: 820px }
+.mockcap { font: 500 11px/1.4 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-top: 12px }
+#bar figure img { width: 100% }
+img.uc { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block }
 </style>
 <script>addEventListener('load', () => document.fonts.ready.then(() => { if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.style.scrollBehavior = 'smooth' }));
 addEventListener('DOMContentLoaded', () => { if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.querySelectorAll('video').forEach(v => { v.removeAttribute('autoplay'); v.pause(); v.controls = true }) })</script>
@@ -244,7 +251,7 @@ addEventListener('DOMContentLoaded', () => { if (matchMedia('(prefers-reduced-mo
     <a class="mark" href="#cover" aria-label="EARF Brand Book, the start"><img src="img/lockup-color.png" alt="EARF" width="500" height="146"></a>
     <nav aria-label="Chapters">
       <a href="#contents">Contents</a><a href="#position">Position</a><a href="#names">Names</a><a href="#identity">Identity</a><a href="#color">Color</a>
-      <a href="#type">Type</a><a href="#images">Images</a><a href="#voice">Voice</a><a href="#applications">Applications</a><a href="#particulars">Particulars</a><a href="#going">Where it's going</a>
+      <a href="#type">Type</a><a href="#images">Images</a><a href="#voice">Voice</a><a href="#applications">Applications</a><a href="#bar">The bar</a><a href="#particulars">Particulars</a><a href="#going">Where it's going</a>
     </nav>
   </div>
 </header>
@@ -254,59 +261,44 @@ addEventListener('DOMContentLoaded', () => { if (matchMedia('(prefers-reduced-mo
     <p class="eyebrow">EARF · San Francisco · the brand book · November 2026</p>
     <div class="hero"><figure><div class="seven"><figure class="t7"><img src="img/tropos-front-ember.jpg" alt="Tropos in Ember, whole, on a pale seamless" width="1000" height="1250"><figcaption>01 Ember</figcaption></figure><figure class="t7"><img src="img/tropos-front-dust.jpg" alt="Tropos in Dust, whole, on a pale seamless" width="1000" height="1250"><figcaption>02 Dust</figcaption></figure><figure class="t7"><img src="img/tropos-front-acid.jpg" alt="Tropos in Acid, whole, on a pale seamless" width="1000" height="1250"><figcaption>03 Acid</figcaption></figure><figure class="t7"><img src="img/tropos-front-poison.jpg" alt="Tropos in Poison, whole, on a pale seamless" width="1000" height="1250"><figcaption>04 Poison</figcaption></figure><figure class="t7"><img src="img/tropos-front-ice.jpg" alt="Tropos in Ice, whole, on a pale seamless" width="1000" height="1250"><figcaption>05 Ice</figcaption></figure><figure class="t7"><img src="img/tropos-front-haze.jpg" alt="Tropos in Haze, whole, on a pale seamless" width="1000" height="1250"><figcaption>06 Haze</figcaption></figure><figure class="t7"><img src="img/tropos-front-fog.jpg" alt="Tropos in Fog, whole, on a pale seamless" width="1000" height="1250"><figcaption>07 Fog</figcaption></figure><figure class="t7"><img src="img/tropos-front-smoke.jpg" alt="Tropos in Smoke, whole, on a pale seamless" width="1000" height="1250"><figcaption>08 Smoke</figcaption></figure></div><figcaption>Tropos in the eight. <span class="render">Render</span></figcaption></figure></div>
     <h1><span class="tag"><span class="tg">A world of sound,</span> <span class="tg">in color.</span></span><span>The EARF brand book.</span></h1>
-    <div class="meta">
-      <p class="lede">Hi-fi and light, cast in tinted acrylic. This book is how EARF looks and sounds, and where it is going, so that everything made under the name feels like it came out of one room.</p>
-    </div>
-    <div class="spectrum" aria-label="The eight tints, Ember to Smoke">
-      <div class="slab" style="--t:#B50404"><span>01<i> Ember</i></span></div>
-      <div class="slab" style="--t:#D35D17"><span>02<i> Dust</i></span></div>
-      <div class="slab ink" style="--t:#C5BC1E"><span>03<i> Acid</i></span></div>
-      <div class="slab" style="--t:#027614"><span>04<i> Poison</i></span></div>
-      <div class="slab" style="--t:#1169C1"><span>05<i> Ice</i></span></div>
-      <div class="slab" style="--t:#500CB4"><span>06<i> Haze</i></span></div>
-      <div class="slab light" style="--t:#F6F8F8"><span>07<i> Fog</i></span></div>
-      <div class="slab" style="--t:#34323A"><span>08<i> Smoke</i></span></div>
-    </div>
+    <div class="meta"><p class="lede">Hi-fi and light, cast in tinted acrylic: how EARF looks and sounds, and where it is going.</p></div>
+    <div class="spectrum" aria-label="The eight tints, the full spectrum"><div class="slab" style="--t:#B50404"><span>01<i> Ember</i></span></div><div class="slab" style="--t:#D35D17"><span>02<i> Dust</i></span></div><div class="slab ink" style="--t:#C5BC1E"><span>03<i> Acid</i></span></div><div class="slab" style="--t:#027614"><span>04<i> Poison</i></span></div><div class="slab" style="--t:#1169C1"><span>05<i> Ice</i></span></div><div class="slab" style="--t:#500CB4"><span>06<i> Haze</i></span></div><div class="slab light" style="--t:#F6F8F8"><span>07<i> Fog</i></span></div><div class="slab" style="--t:#34323A"><span>08<i> Smoke</i></span></div></div>
   </div>
 </section>
 <section class="chap band" id="contents">
   <div class="in">
     <p class="eyebrow">Contents</p>
-    <ol class="toc"><li><a href="#position"><span>01</span>Position</a></li><li><a href="#names"><span>02</span>The naming system</a></li><li><a href="#identity"><span>03</span>Identity</a></li><li><a href="#color"><span>04</span>Color</a></li><li><a href="#type"><span>05</span>Type</a></li><li><a href="#images"><span>06</span>Image direction</a></li><li><a href="#voice"><span>07</span>Voice</a></li><li><a href="#applications"><span>08</span>Applications</a></li><li><a href="#particulars"><span>09</span>Particulars</a></li><li><a href="#going"><span>10</span>Where it's going</a></li></ol>
+    <ol class="toc"><li><a href="#position"><span>01</span>Position</a></li><li><a href="#names"><span>02</span>The naming system</a></li><li><a href="#identity"><span>03</span>Identity</a></li><li><a href="#color"><span>04</span>Color</a></li><li><a href="#type"><span>05</span>Type</a></li><li><a href="#images"><span>06</span>Image direction</a></li><li><a href="#voice"><span>07</span>Voice</a></li><li><a href="#applications"><span>08</span>Applications</a></li><li><a href="#bar"><span>09</span>The bar</a></li><li><a href="#particulars"><span>10</span>Particulars</a></li><li><a href="#going"><span>11</span>Where it's going</a></li></ol>
   </div>
 </section>
 
 <section class="chap band" id="position">
   <div class="in">
-    <div class="head"><p class="no">01 · Position</p><h2>One material, cast in color, made to be heard and lit.</h2></div>
-    <div class="cols">
-      <div><h3>What EARF is</h3><p>Hi-fi and lighting in tinted cast acrylic, designed in San Francisco. Tropos, a powered horn loudspeaker, leads. Hemisphere and Core light the room in the same acrylic, and Mantle, a turntable, plays the records. Every piece comes in the same eight tints, so a room can be one color, two or three.</p></div>
-      <div><h3>For whom</h3><p>People who arrange a room around listening and want the system to be the best-looking thing in it. Bars, hotels and restaurants that treat sound as part of the design, and need the room to look as good as it sounds. Collectors of design who would buy a speaker as an object first and discover it is a serious one.</p></div>
-      <div><h3>Why now</h3><p>Listening bars have spread from Tokyo to many large cities, and the habit has followed people home. Records came back to the living room. Interiors came back to color. And most high-end audio still arrives as a black box or a wood veneer. EARF answers them at once: color you can see through, a horn you can see into, light through the same material.</p></div>
-    </div>
-    <div class="prose">
-      <p class="eyebrow">What the brand holds to</p>
-      <p><b>The material is the message.</b> Twenty millimeters of tinted acrylic carries light to its edges and shows what is inside. Nothing is painted on and nothing is hidden behind a veneer: the lining, the horn's driver, the amplifier's plate all show through the wall, so they are made to be seen.</p>
-      <p><b>Color is a system, not a range.</b> The same eight dyes in every product and every application, always in the same order, always numbered. A customer chooses a color once and the whole catalog follows.</p>
-      <p><b>Engineering first, then the wit.</b> The horn's profile and the cabinet's bass were simulated before any acrylic was cut, and the particulars are published to the millimeter. The wit lives in the names and the lines, never in the figures.</p>
-    </div>
+    <div class="head"><p class="no">01 · Position</p><h2>One material, cast in color, made to be heard and lit.</h2>
+      <p class="lede">Hi-fi and lighting in tinted cast acrylic, designed in San Francisco. Every piece comes in the same eight colors, the full spectrum.</p></div>
+    <ul class="rules">
+      <li><b>The line</b><span>Tropos, a powered horn loudspeaker, leads. Hemisphere and Core light the room; Mantle plays the records.</span></li>
+      <li><b>For whom</b><span>People who arrange a room around listening, and the bars, hotels and restaurants that do.</span></li>
+      <li><b>Why now</b><span>Listening bars, records and color came back. High-end audio is still a black box.</span></li>
+      <li><b>Holds to</b><span>The material is the message. Color is a system, not a range. Engineering first, then the wit.</span></li>
+    </ul>
   </div>
 </section>
 
 <section class="chap band paper" id="names">
   <div class="in">
     <div class="head"><p class="no">02 · The naming system</p><h2>Every product is a part of the Earth.</h2>
-      <p class="lede">The company is the planet. Each product takes the name of one of its layers or regions, chosen for what the product does in a room. The tints take short, plain names of their own, each with one line that says what the color is like.</p></div>
+      <p class="lede">The company is the planet; each product takes the name of one of its layers or regions.</p></div>
     <div class="strata">
-      <div class="stratum"><h3>Tropos</h3><p class="what">Powered horn loudspeaker · the flagship</p><p class="why">From the troposphere, the layer of air we live in, named for the Greek <i>tropos</i>, a turn. The speaker fills the air of a room.</p></div>
-      <div class="stratum"><h3>Hemisphere</h3><p class="what">Pendant lamp</p><p class="why">Half a globe, hung mouth down. It works like Core cut in half: the shade glows its color, and warm light falls below.</p></div>
-      <div class="stratum"><h3>Core</h3><p class="what">Cordless table lamp</p><p class="why">The glowing center. A white inner ball at the middle of a tinted one, with an even band of color all around, and no cord.</p></div>
-      <div class="stratum"><h3>Mantle</h3><p class="what">Turntable</p><p class="why">The layer that moves under the crust. A tinted plinth floats 40&nbsp;mm over its base on four black posts.</p></div>
+      <div class="stratum"><h3>Tropos</h3><p class="what">Powered horn loudspeaker</p><p class="why">The layer of air we live in. It fills a room.</p></div>
+      <div class="stratum"><h3>Hemisphere</h3><p class="what">Pendant lamp</p><p class="why">Half a globe, hung mouth down.</p></div>
+      <div class="stratum"><h3>Core</h3><p class="what">Cordless table lamp</p><p class="why">The glowing center.</p></div>
+      <div class="stratum"><h3>Mantle</h3><p class="what">Turntable</p><p class="why">The layer that moves under the crust.</p></div>
     </div>
     <ul class="rules">
-      <li><b>The company</b><span>Always EARF, in capitals, as one word. The site is earf.world.</span></li>
-      <li><b>A product</b><span>One word, a layer or a region of the Earth, a capital letter and nothing more.</span></li>
-      <li><b>A tint</b><span>Number and name, in spectrum order: 01 Ember, 02 Dust, 03 Acid, 04 Poison, 05 Ice, 06 Haze, 07 Fog, 08 Smoke. A product in a tint is "Tropos 05," or "Tropos in Ice."</span></li>
+      <li><b>The company</b><span>EARF, in capitals, one word. The site is earf.world.</span></li>
+      <li><b>A product</b><span>One word, a capital letter and nothing more.</span></li>
+      <li><b>A tint</b><span>Number and name: 01 Ember to 08 Smoke. "Tropos 05," or "Tropos in Ice."</span></li>
     </ul>
   </div>
 </section>
@@ -314,71 +306,59 @@ addEventListener('DOMContentLoaded', () => { if (matchMedia('(prefers-reduced-mo
 <section class="chap band" id="identity">
   <div class="in">
     <div class="head"><p class="no">03 · Identity</p><h2>The acrylic globe, and the name beside it.</h2>
-      <p class="lede">Three meridian discs and three parallel discs, slotted together, each in one of the speakers' own colors, mixing where they cross. The wordmark is cut from the same circles and squares, its R a circle on a stem.</p></div>
+      <p class="lede">Six discs slotted into a globe, in the speakers' own colors. The wordmark is cut from the same circles and squares.</p></div>
     <div class="two">
       <div class="plate p"><img src="img/lockup-render.jpg" alt="The EARF lockup on paper: the acrylic globe and the black wordmark" loading="lazy" width="1200" height="459"></div>
-      <div class="plate n"><img src="img/lockup-render-night.jpg" alt="The EARF lockup at night: the acrylic globe and the white wordmark" loading="lazy" width="1200" height="459"></div>
+      <div class="plate n"><img src="img/lockup-render-night.jpg" alt="The EARF lockup at night: the glowing acrylic globe and the white wordmark" loading="lazy" width="1200" height="459"></div>
     </div>
     <div class="four">
-      <figure><div class="plate p"><img src="img/globe-render.jpg" alt="The acrylic globe, rendered, on paper" loading="lazy" width="1024" height="1024"></div><figcaption><b>The globe, rendered.</b> The mark itself: on the site's header, turning, and on anything printed in color. <span class="render">Render</span></figcaption></figure>
-      <figure><div class="plate p"><video src="img/globe-turn.mp4" autoplay muted loop playsinline aria-label="The acrylic globe turning on its axis"></video></div><figcaption><b>The turn.</b> The globe turning on its axis, as it does in the site's header. <span class="render">Render</span></figcaption></figure>
-      <figure><div class="plate p"><img src="img/globe-flat.png" alt="The globe drawn flat, its six discs in six of the tints, each a coin with a squared edge" loading="lazy" width="1024" height="1024"></div><figcaption><b>Drawn flat.</b> For print where a render will not hold: screen printing, embroidery, small sizes.</figcaption></figure>
-      <figure><div class="plate k"><img src="img/lockup-black.png" alt="The lockup in one color, black" loading="lazy" width="1200" height="351"></div><figcaption><b>One color.</b> Black, white, or any one tint. For etching and engraving.</figcaption></figure>
+      <figure><div class="plate p"><img src="img/globe-render.jpg" alt="The acrylic globe, rendered, on paper" loading="lazy" width="1024" height="1024"></div><figcaption><b>Rendered.</b> The mark itself. <span class="render">Render</span></figcaption></figure>
+      <figure><div class="plate p"><video src="img/globe-turn.mp4" autoplay muted loop playsinline aria-label="The acrylic globe turning on its axis"></video></div><figcaption><b>The turn.</b> As in the site's header. <span class="render">Render</span></figcaption></figure>
+      <figure><div class="plate p"><img src="img/globe-flat.png" alt="The globe drawn flat: each tile one color, matched to the rendered globe" loading="lazy" width="1024" height="1024"></div><figcaption><b>Flat, in color.</b> Each tile the rendered globe's color.</figcaption></figure>
+      <figure><div class="plate n"><img src="img/globe-flat-night.png" alt="The flat globe for dark grounds" loading="lazy" width="1024" height="1024"></div><figcaption><b>Flat, on dark.</b> For night and screens.</figcaption></figure>
+    </div>
+    <div class="two">
+      <figure><div class="plate p"><img src="img/lockup-flat.png" alt="The flat lockup: the tiled globe and the black wordmark" loading="lazy" width="1200" height="351"></div><figcaption><b>The flat lockup.</b> For print where a render will not hold.</figcaption></figure>
+      <figure><div class="plate k"><img src="img/lockup-black.png" alt="The lockup in one color, black" loading="lazy" width="1200" height="351"></div><figcaption><b>One color.</b> Black, white or one tint, for etching and engraving.</figcaption></figure>
     </div>
     <ul class="rules">
-      <li><b>The lockup</b><span>The globe left, 1.5 cap heights across, the wordmark right. The pair never separates except where the globe stands alone (an icon, a sticker) or the wordmark does (a label, a social post's corner).</span></li>
-      <li><b>The sign-off</b><span>"Globe is good." Under the globe, set small, as a short sign-off: on stickers, the card and social posts. The tagline stays "A world of sound, in color."</span></li>
-      <li><b>Clear space</b><span>The height of the E's middle arm on every side, at least. Nothing else enters it, not even another EARF.</span></li>
-      <li><b>Small sizes</b><span>Below 64&nbsp;px the globe keeps its whole drawing and only its seams widen: separate files at 64, 32 and 16&nbsp;px keep its lines open.</span></li>
-      <li><b>Motion</b><span>The globe turns on its axis. It is the only motion the mark makes.</span></li>
-      <li><b>On a picture</b><span>The wordmark alone, black or white, small, in a corner, never over the product. The color globe goes on paper or night, never on a photograph.</span></li>
-      <li><b>Never</b><span>Recolor the globe's discs, outline the wordmark, set it in another face, stretch it, add a shadow or a glow it doesn't have, or put the tints in a gradient.</span></li>
-      <li><b>Files</b><span>Files on request.</span></li>
+      <li><b>The lockup</b><span>The globe left, 1.5 cap heights across, the wordmark right.</span></li>
+      <li><b>Clear space</b><span>The height of the E's middle arm, on every side.</span></li>
+      <li><b>The sign-off</b><span>"Globe is good." Under the globe, on stickers, the card and social posts.</span></li>
+      <li><b>Motion</b><span>The globe turns on its axis. Nothing else moves.</span></li>
+      <li><b>Small sizes</b><span>Below 64&nbsp;px only the seams widen.</span></li>
+      <li><b>Never</b><span>Recolor, outline, stretch, add a glow, or put the tints in a gradient.</span></li>
     </ul>
-    <div class="two">
-      <div class="clear"><span class="cs">Clear space</span><div class="box"><img src="img/wordmark-color.png" alt="The wordmark in the tints, each letter a different color" loading="lazy" width="1600" height="490"></div></div>
-      <div class="prose" style="align-content:center"><p class="eyebrow">The wordmark in the tints</p><p>For the rare moment when the name itself should carry the color: the first frame of a film, the spine of a box. Each letter takes one tint, as cut sheets laid over each other would. Used once per surface, never beside the color globe.</p></div>
-    </div>
   </div>
 </section>
 
 <section class="chap band paper" id="color">
   <div class="in">
-    <div class="head"><p class="no">04 · Color</p><h2>Eight colors, Ember to Smoke.</h2>
-      <p class="lede">The color is in the acrylic, not on it. Each tint has a name, a number, a line and one value: the color the acrylic reads as in the studio, used flat for the marks and icons.</p></div>
+    <div class="head"><p class="no">04 · Color</p><h2>Eight colors, the full spectrum.</h2>
+      <p class="lede">The color is in the acrylic, not on it. Each tint has a number, a name, a line and one value.</p></div>
     <div class="tints">
-      <div class="tint" style="--t:#B50404"><div class="pic"><img src="img/tropos-front-ember.jpg" alt="Tropos in Ember on a pale seamless" loading="lazy" width="1000" height="1250"><img class="chip" src="img/icon-ember.png" alt="" loading="lazy"></div><h3>Ember <small>01</small></h3><p class="line">The last light of the fire. <span class="render">Render</span></p>
+      <div class="tint" style="--t:#B50404"><div class="pic"><img src="img/tropos-front-ember.jpg" alt="Tropos in Ember on a pale seamless" loading="lazy" width="1000" height="1250"><img class="chip" src="img/icon-ember.png" alt="" loading="lazy"></div><h3>Ember <small>01</small></h3><p class="line">The last light of the fire.</p>
         <dl><dt>Acrylic</dt><dd>Deep red</dd><dt>Color</dt><dd><i style="background:#B50404"></i><code>#B50404</code></dd></dl></div>
-      <div class="tint" style="--t:#D35D17"><div class="pic"><img src="img/tropos-front-dust.jpg" alt="Tropos in Dust on a pale seamless" loading="lazy" width="1000" height="1250"><img class="chip" src="img/icon-dust.png" alt="" loading="lazy"></div><h3>Dust <small>02</small></h3><p class="line">A long, dry afternoon. <span class="render">Render</span></p>
+      <div class="tint" style="--t:#D35D17"><div class="pic"><img src="img/tropos-front-dust.jpg" alt="Tropos in Dust on a pale seamless" loading="lazy" width="1000" height="1250"><img class="chip" src="img/icon-dust.png" alt="" loading="lazy"></div><h3>Dust <small>02</small></h3><p class="line">A long, dry afternoon.</p>
         <dl><dt>Acrylic</dt><dd>Translucent orange</dd><dt>Color</dt><dd><i style="background:#D35D17"></i><code>#D35D17</code></dd></dl></div>
-      <div class="tint" style="--t:#C5BC1E"><div class="pic"><img src="img/tropos-front-acid.jpg" alt="Tropos in Acid on a pale seamless" loading="lazy" width="1000" height="1250"><img class="chip" src="img/icon-acid.png" alt="" loading="lazy"></div><h3>Acid <small>03</small></h3><p class="line">A yellow with an edge. <span class="render">Render</span></p>
+      <div class="tint" style="--t:#C5BC1E"><div class="pic"><img src="img/tropos-front-acid.jpg" alt="Tropos in Acid on a pale seamless" loading="lazy" width="1000" height="1250"><img class="chip" src="img/icon-acid.png" alt="" loading="lazy"></div><h3>Acid <small>03</small></h3><p class="line">A yellow with an edge.</p>
         <dl><dt>Acrylic</dt><dd>Fluorescent yellow</dd><dt>Color</dt><dd><i style="background:#C5BC1E"></i><code>#C5BC1E</code></dd></dl></div>
-      <div class="tint" style="--t:#027614"><div class="pic"><img src="img/tropos-front-poison.jpg" alt="Tropos in Poison on a pale seamless" loading="lazy" width="1000" height="1250"><img class="chip" src="img/icon-poison.png" alt="" loading="lazy"></div><h3>Poison <small>04</small></h3><p class="line">Bottle green. Keep out of reach. <span class="render">Render</span></p>
+      <div class="tint" style="--t:#027614"><div class="pic"><img src="img/tropos-front-poison.jpg" alt="Tropos in Poison on a pale seamless" loading="lazy" width="1000" height="1250"><img class="chip" src="img/icon-poison.png" alt="" loading="lazy"></div><h3>Poison <small>04</small></h3><p class="line">Bottle green. Keep out of reach.</p>
         <dl><dt>Acrylic</dt><dd>Bottle green</dd><dt>Color</dt><dd><i style="background:#027614"></i><code>#027614</code></dd></dl></div>
-      <div class="tint" style="--t:#1169C1"><div class="pic"><img src="img/tropos-front-ice.jpg" alt="Tropos in Ice on a pale seamless" loading="lazy" width="1000" height="1250"><img class="chip" src="img/icon-ice.png" alt="" loading="lazy"></div><h3>Ice <small>05</small></h3><p class="line">Glacier blue, and in no hurry. <span class="render">Render</span></p>
+      <div class="tint" style="--t:#1169C1"><div class="pic"><img src="img/tropos-front-ice.jpg" alt="Tropos in Ice on a pale seamless" loading="lazy" width="1000" height="1250"><img class="chip" src="img/icon-ice.png" alt="" loading="lazy"></div><h3>Ice <small>05</small></h3><p class="line">Glacier blue, and in no hurry.</p>
         <dl><dt>Acrylic</dt><dd>Tinted blue</dd><dt>Color</dt><dd><i style="background:#1169C1"></i><code>#1169C1</code></dd></dl></div>
-      <div class="tint" style="--t:#500CB4"><div class="pic"><img src="img/tropos-front-haze.jpg" alt="Tropos in Haze on a pale seamless" loading="lazy" width="1000" height="1250"><img class="chip" src="img/icon-haze.png" alt="" loading="lazy"></div><h3>Haze <small>06</small></h3><p class="line">Dusk, kept indoors. <span class="render">Render</span></p>
+      <div class="tint" style="--t:#500CB4"><div class="pic"><img src="img/tropos-front-haze.jpg" alt="Tropos in Haze on a pale seamless" loading="lazy" width="1000" height="1250"><img class="chip" src="img/icon-haze.png" alt="" loading="lazy"></div><h3>Haze <small>06</small></h3><p class="line">Dusk, kept indoors.</p>
         <dl><dt>Acrylic</dt><dd>Violet</dd><dt>Color</dt><dd><i style="background:#500CB4"></i><code>#500CB4</code></dd></dl></div>
-      <div class="tint" style="--t:#F6F8F8"><div class="pic"><img src="img/tropos-front-fog.jpg" alt="Tropos in Fog on a pale seamless" loading="lazy" width="1000" height="1250"><img class="chip" src="img/icon-fog.png" alt="" loading="lazy"></div><h3>Fog <small>07</small></h3><p class="line">Water-clear. Almost not there. <span class="render">Render</span></p>
+      <div class="tint" style="--t:#F6F8F8"><div class="pic"><img src="img/tropos-front-fog.jpg" alt="Tropos in Fog on a pale seamless" loading="lazy" width="1000" height="1250"><img class="chip" src="img/icon-fog.png" alt="" loading="lazy"></div><h3>Fog <small>07</small></h3><p class="line">Water-clear. Almost not there.</p>
         <dl><dt>Acrylic</dt><dd>Water-clear</dd><dt>Color</dt><dd><i style="background:#F6F8F8"></i><code>#F6F8F8</code></dd></dl></div>
-      <div class="tint" style="--t:#34323A"><div class="pic"><img src="img/tropos-front-smoke.jpg" alt="Tropos in Smoke on a pale seamless" loading="lazy" width="1000" height="1250"><img class="chip" src="img/icon-smoke.png" alt="" loading="lazy"></div><h3>Smoke <small>08</small></h3><p class="line">Smoked glass, for after dark. <span class="render">Render</span></p>
+      <div class="tint" style="--t:#34323A"><div class="pic"><img src="img/tropos-front-smoke.jpg" alt="Tropos in Smoke on a pale seamless" loading="lazy" width="1000" height="1250"><img class="chip" src="img/icon-smoke.png" alt="" loading="lazy"></div><h3>Smoke <small>08</small></h3><p class="line">Smoked glass, for after dark.</p>
         <dl><dt>Acrylic</dt><dd>Neutral gray</dd><dt>Color</dt><dd><i style="background:#34323A"></i><code>#34323A</code></dd></dl></div>
     </div>
-    <div class="prose"><p class="muted" style="font-size:15px">Each cabinet is 20&nbsp;mm cast acrylic over a white lining; Smoke's lining is black. Each horn is formed in its cabinet's hue, as deep as the cabinet's wall. Acid is fluorescent: its edges glow brighter than a render can show.</p></div>
-    <div class="head" style="margin-top:12px"><p class="eyebrow">The neutrals</p><p class="lede">Paper and ink carry everything else, so the tints are always the loudest thing on the page. Night is for the lamps, lit.</p></div>
-    <div class="neutrals">
-      <div class="neutral"><div class="sw" style="--c:#F4F1EC"></div><b>Page</b><span>#F4F1EC</span></div>
-      <div class="neutral"><div class="sw" style="--c:#ECE8E1"></div><b>Paper</b><span>#ECE8E1</span></div>
-      <div class="neutral"><div class="sw" style="--c:#D6D0C6"></div><b>Rule</b><span>#D6D0C6</span></div>
-      <div class="neutral"><div class="sw" style="--c:#5E5A53"></div><b>Muted</b><span>#5E5A53</span></div>
-      <div class="neutral"><div class="sw" style="--c:#1C1A18"></div><b>Ink</b><span>#1C1A18</span></div>
-      <div class="neutral"><div class="sw" style="--c:#100F12"></div><b>Night</b><span>#100F12</span></div>
-    </div>
     <ul class="rules">
-      <li><b>Order</b><span>Always the spectrum: Ember, Dust, Acid, Poison, Ice, Haze, Fog, Smoke. Never alphabetical, never by popularity.</span></li>
-      <li><b>One at a time</b><span>A printed or digital surface carries one tint, or all eight in order. Never two or three picked for a mood.</span></li>
-      <li><b>Pairs</b><span>A room takes one tint throughout, a tint with its complement, or a tint with its two neighbors. Fog and Smoke, with no hue, go with any of them.</span></li>
-      <li><b>No gradients</b><span>The tints never blend into one another on a printed or digital surface. Where they meet, they overlap, as sheets do.</span></li>
+      <li><b>Order</b><span>Always the spectrum, 01 to 08.</span></li>
+      <li><b>One at a time</b><span>A surface carries one tint, or all eight in order.</span></li>
+      <li><b>Pairs</b><span>A tint with its complement or its two neighbors; Fog and Smoke go with any.</span></li>
+      <li><b>Neutrals</b><span>Page #F4F1EC, ink #1C1A18, night #100F12. The tints are always the loudest thing.</span></li>
     </ul>
   </div>
 </section>
@@ -386,23 +366,14 @@ addEventListener('DOMContentLoaded', () => { if (matchMedia('(prefers-reduced-mo
 <section class="chap band" id="type">
   <div class="in">
     <div class="head"><p class="no">05 · Type</p><h2>A grotesque with a little warmth, and a typewriter for the facts.</h2>
-      <p class="lede">The site's two faces, both free and open: Instrument Sans for everything that speaks, IBM Plex Mono for everything that measures.</p></div>
+      <p class="lede">Instrument Sans for everything that speaks, IBM Plex Mono for everything that measures.</p></div>
     <div class="specimen">
-      <div><div class="aa">Aa</div><p class="muted" style="margin-top:14px">Instrument Sans · 400 to 700 · headlines at 600, tight; text at 400</p></div>
-      <div><div class="mo">20&nbsp;mm</div><p class="muted" style="margin-top:14px">IBM Plex Mono · 400 and 500 · labels, numbers, eyebrows, particulars; capitals with a little tracking</p></div>
-    </div>
-    <div class="scale">
-      <div><span class="k">Display · 600 · −4.5%</span><span style="font-size:clamp(34px,6vw,72px);font-weight:600;letter-spacing:-.045em;line-height:1"><span class="tg">A world of sound,</span> <span class="tg">in color.</span></span></div>
-      <div><span class="k">Headline · 600 · −3%</span><span style="font-size:clamp(28px,3.4vw,40px);font-weight:600;letter-spacing:-.03em;line-height:1.05">Glacier blue, and in no hurry.</span></div>
-      <div><span class="k">Lede · 400</span><span style="font-size:21px;line-height:1.45">Twenty millimeters of tinted acrylic shows what is inside: the lining, the driver, the amplifier's plate.</span></div>
-      <div><span class="k">Text · 400 · 17/1.6</span><span>Each cabinet is tinted cast acrylic, 20&nbsp;mm thick. The lining shows through the walls, so we dressed it in white voile.</span></div>
-      <div><span class="k">Label · Mono 500 · +12%</span><span class="mono" style="font-size:12.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase">Tropos 05 · Ice · 1295&nbsp;mm</span></div>
+      <div><div class="aa">Aa</div><p class="muted" style="margin-top:14px">Instrument Sans · headlines 600, text 400</p></div>
+      <div><div class="mo">20&nbsp;mm</div><p class="muted" style="margin-top:14px">IBM Plex Mono · labels and figures, 500, tracked capitals</p></div>
     </div>
     <ul class="rules">
-      <li><b>Sentence case</b><span>Headlines in sentence case with a period. Capitals only in the mono labels and on hardware.</span></li>
-      <li><b>Spelling</b><span>American, as the site has it: color, gray, aluminum, meter. Units in millimeters with a space, 20&nbsp;mm; figures that are designed, not measured, say "about."</span></li>
-      <li><b>On hardware</b><span>Plex Mono for every engraved or laser-marked word; the wordmark for the name. Nothing else.</span></li>
-      <li><b>Fallbacks</b><span>Helvetica Neue, then Arial; Courier New for the mono. Never Inter, never a serif.</span></li>
+      <li><b>Case</b><span>Sentence case, with a period.</span></li>
+      <li><b>Spelling</b><span>American. 20&nbsp;mm, with a space. "About" for a figure not yet measured.</span></li>
     </ul>
   </div>
 </section>
@@ -410,49 +381,41 @@ addEventListener('DOMContentLoaded', () => { if (matchMedia('(prefers-reduced-mo
 <section class="chap band paper" id="images">
   <div class="in">
     <div class="head"><p class="no">06 · Image direction</p><h2>Light through the material is the subject.</h2>
-      <p class="lede">Three kinds of picture, each with one job: the studio, in its element, and up close. Until the first pieces are built, every one is a render and says so; the same rules hold for the photographs.</p></div>
+      <p class="lede">The studio, in its element, and up close. Every picture is a render until it is a photograph, and says so.</p></div>
     <div class="three">
-      <figure class="tall"><img src="img/tropos-front-ice.jpg" alt="Tropos in Ice alone on a pale seamless, whole, the horn polished" loading="lazy" width="1000" height="1250"><figcaption><b>The studio.</b> One product, a pale seamless, a soft key: the product page and the press. No props. <span class="render">Render</span></figcaption></figure>
-      <figure class="tall"><img src="img/tropos-back-ember.jpg" alt="The horn of Tropos in Ember from behind: the driver and its black rods" loading="lazy" width="1000" height="750"><figcaption><b>Up close.</b> The horn from behind, its driver and black rods. Close-ups run only beside the whole speaker. <span class="render">Render</span></figcaption></figure>
-      <figure class="tall"><img src="img/tropos-amp-ember.jpg" alt="The amplifier's plate seen through the back of Tropos in Ember" loading="lazy" width="600" height="1250"><figcaption><b>Up close.</b> The amplifier's plate through the Ember back. <span class="render">Render</span></figcaption></figure>
+      <figure class="tall"><img src="img/tropos-front-ice.jpg" alt="Tropos in Ice alone on a pale seamless" loading="lazy" width="1000" height="1250"><figcaption><b>The studio.</b> One product, a pale seamless. <span class="render">Render</span></figcaption></figure>
+      <figure class="tall"><img src="img/tropos-ice-snow.jpg" alt="Tropos in Ice standing in snow at dusk, a lit cabin and pines behind" loading="lazy" width="1000" height="1250"><figcaption><b>In its element.</b> Ice, in snow. <span class="render">Render</span></figcaption></figure>
+      <figure class="tall"><img src="img/tropos-fog-habitat.jpg" alt="Tropos in Fog on a grassy hill above the mist" loading="lazy" width="1000" height="1250"><figcaption><b>In its element.</b> Fog, above the mist. <span class="render">Render</span></figcaption></figure>
+    </div>
+    <div class="two" style="margin-top:clamp(14px,2vw,24px)">
+      <figure><img src="img/tropos-back-ember.jpg" alt="The horn of Tropos in Ember from behind: the driver and its black rods" loading="lazy" width="1000" height="750" class="uc"><figcaption><b>Up close.</b> The horn from behind. <span class="render">Render</span></figcaption></figure>
+      <figure><img src="img/tropos-amp-ember.jpg" alt="The amplifier's plate seen through the back of Tropos in Ember" loading="lazy" width="600" height="1250" class="uc" style="object-position:50% 38%"><figcaption><b>Up close.</b> The amplifier through the back. <span class="render">Render</span></figcaption></figure>
     </div>
     <ul class="rules">
-      <li><b>In its element</b><span>Each tint in its own landscape: real places, real texture, the speaker set into the ground, never floating over it.</span></li>
-      <li><b>Always</b><span>Light passing through the acrylic. A colored shadow somewhere in the frame. The product's real proportions, from the drawings. A label, "Render," until it is a photograph.</span></li>
-      <li><b>Never</b><span>Tilt-shift or dioramas. A setting that cannot look real. A product floating over its ground. Props that compete with it. Flare, haze or glow added after the fact.</span></li>
-      <li><b>Crops</b><span>3:2 on the site, 4:5 on phones and posts, 1:1 for the icons. The product never touches the frame's edge, except up close.</span></li>
+      <li><b>Always</b><span>Light through the acrylic, real proportions, the label "Render."</span></li>
+      <li><b>Never</b><span>Dioramas, a product floating over its ground, glow added after.</span></li>
+      <li><b>Close-ups</b><span>Only beside the whole speaker.</span></li>
     </ul>
   </div>
 </section>
 
 <section class="chap band night" id="voice">
   <div class="in">
-    <div class="head"><p class="no" style="color:var(--night-muted)">07 · Voice</p><h2>Cheeky, but reserved.</h2>
-      <p class="lede" style="color:var(--night-muted)">Say what the thing is and what it does. One line per surface may smile; the rest is exact.</p></div>
+    <div class="head"><p class="no" style="color:var(--night-muted)">07 · Voice</p><h2>Wry, but reserved.</h2>
+      <p class="lede" style="color:var(--night-muted)">Say what the thing is and what it does. One line per surface may smile.</p></div>
     <div class="lines">
       <div><q><span class="tg">A world of sound,</span> <span class="tg">in color.</span></q><span>The tagline</span></div>
-      <div><q>Globe is good.</q><span>The sign-off, under the globe</span></div>
-      <div><q>Eight colors, Ember to Smoke.</q><span>Tropos, the eight</span></div>
+      <div><q>Globe is good.</q><span>The sign-off</span></div>
+      <div><q>Eight colors, the full spectrum.</q><span>Tropos</span></div>
       <div><q>Goes where the conversation is.</q><span>Core</span></div>
       <div><q>A turntable in cast acrylic.</q><span>Mantle</span></div>
       <div><q>Drawn to be made.</q><span>The making</span></div>
     </div>
-    <div class="cols pair">
-      <div><h3>The tagline, set</h3><p style="color:var(--night-muted)">"A world of sound, in color." Exactly so: sentence case, a comma after "sound," a period at the end. One line where it fits. Where it needs two, break after the comma and nowhere else: "A world of sound, / in color." On the web, keep each half on one line, so it can only break at the comma.</p></div>
-      <div><h3>The sign-off, set</h3><p style="color:var(--night-muted)">"Globe is good." Three words and a period, under the globe and never in place of the tagline: on a sticker, the card, the end of a social post.</p></div>
-    </div>
-    <div class="cols">
-      <div><h3>Exact</h3><p style="color:var(--night-muted)">Millimeters, kilograms, hertz. "About" when a figure is designed and not yet measured. Never a superlative a measurement hasn't earned.</p></div>
-      <div><h3>Dry</h3><p style="color:var(--night-muted)">The wit is in the names, the tints' lines and one turn of phrase per surface. No exclamation marks, no puns on "sound," no winking at the reader.</p></div>
-      <div><h3>Plain about the unfinished</h3><p style="color:var(--night-muted)">"In development, not yet for sale." "Every picture here is a render." A brand at this stage earns trust by saying what isn't done.</p></div>
-    </div>
     <div class="dodont">
       <div class="hdrow"><span class="hd">Not this</span><span class="hd">This</span><span class="hd">Because</span></div>
-      <div><s>Sound like never before.</s><span>To about 51&nbsp;Hz at −3&nbsp;dB, before the room.</span><span class="why">A figure says more than a superlative.</span></div>
-      <div><s>A revolutionary design.</s><span>Every part of Tropos has its own drawing.</span><span class="why">Say what was done.</span></div>
-      <div><s>A splash of sunshine for your shelf.</s><span>A yellow with an edge.</span><span class="why">The tint's own line, or nothing. Don't force a metaphor past where it fits.</span></div>
-      <div><s>Sustainably crafted from eco-conscious materials.</s><span>(Nothing, until it can be shown.)</span><span class="why">No claim the product can't show yet.</span></div>
-      <div><s>Unbeatable value, for a limited time only!</s><span>Everything is made to order; price on request.</span><span class="why">State the fact and the reason; never chase.</span></div>
+      <div><s>Sound like never before.</s><span>To about 51&nbsp;Hz at −3&nbsp;dB.</span><span class="why">A figure beats a superlative.</span></div>
+      <div><s>Sustainably crafted.</s><span>(Nothing, until it can be shown.)</span><span class="why">No claim the product can't show.</span></div>
+      <div><s>Unbeatable value!</s><span>Made to order; price on request.</span><span class="why">State the fact; never chase.</span></div>
     </div>
   </div>
 </section>
@@ -460,49 +423,56 @@ addEventListener('DOMContentLoaded', () => { if (matchMedia('(prefers-reduced-mo
 <section class="chap band" id="applications">
   <div class="in">
     <div class="head"><p class="no">08 · Applications</p><h2>The same room, wherever the name goes.</h2>
-      <p class="lede">How the name appears on screen and in the box.</p></div>
-    <div class="app"><figure><img src="img/social.jpg" alt="Three social posts: the eight Tropos in a grid under A world of sound, in color; Tropos in Ice, whole, with Glacier blue, and in no hurry; the acrylic globe with Globe is good." loading="lazy" width="1800" height="795"></figure>
-      <div class="txt"><h3>Social posts</h3><p>One picture, one line, the wordmark small in a corner. The line is always the site's, never a caption written for the feed. Three kinds rotate: the eight, one tint whole in the studio, and the globe with its sign-off.</p>
-        <dl><dt>Format</dt><dd>4:5, 1080 × 1350</dd><dt>Line</dt><dd>Instrument Sans 600, top-left, or centered under the globe</dd><dt>Label</dt><dd>Plex Mono, the tint's number and name</dd><dt>Never</dt><dd>Stickers on the picture, emoji, countdowns</dd></dl></div></div>
-    <div class="app nopic">
-      <div class="txt"><h3>Stickers and the card</h3><p>The globe alone, with "Globe is good." set small under it.</p></div></div>
-    <div class="app nopic">
-      <div class="txt"><h3>The card in the box</h3><p>The care card goes in every box, in the site's own words, because the wrong cleaner crazes acrylic for good.</p></div></div>
+      <p class="lede">One picture, one line, the wordmark small in a corner.</p></div>
+    <figure class="wide"><img src="img/social.jpg" alt="Nine social posts in a grid: the eight Tropos, Ice in snow, the globe with Globe is good, Smoke, Fog above the mist, Acid, Poison, Haze and Ember, each with its line" loading="lazy" width="1800" height="2186"><figcaption><b>Social posts.</b> Nine in rotation, each line the site's own. <span class="render">Render</span></figcaption></figure>
+    <div class="two mocks">
+      <figure><img src="img/card.jpg" alt="The house card: the tiled globe and wordmark on the front; the back with earf.world and Globe is good, the eight tints along its foot; and a card in violet acrylic" loading="lazy" width="1800" height="1125"></figure>
+      <figure><img src="img/stationery.jpg" alt="A letter with the eight tints along its foot, an envelope, the care card and a tote with the globe" loading="lazy" width="1800" height="1125"></figure>
+    </div>
+    <div class="decals">
+      <figure><img src="img/decal-crate-front.jpg" alt="The crate's front: EARF, 01 Ember, The last light of the fire" loading="lazy" width="700" height="1087"></figure>
+      <figure><img src="img/decal-crate-inside.jpg" alt="Inside the crate's door: Lower it gently. Walk it out, and five steps" loading="lazy" width="700" height="1087"></figure>
+      <figure><img src="img/decal-crate-side.jpg" alt="The crate's side: Stand it up. Keep it up, and the handling marks" loading="lazy" width="700" height="1332"></figure>
+    </div>
+    <p class="mockcap">Mockups: the card, the paper and the care card, the crate.</p>
+  </div>
+</section>
+
+<section class="chap band night" id="bar">
+  <div class="in">
+    <div class="head"><p class="no" style="color:var(--night-muted)">09 · The bar</p><h2>Planet EARF.</h2>
+      <p class="lede" style="color:var(--night-muted)">A listening bar that is also EARF's showroom, lit amber: everything in the room is for sale, and every piece swaps tint.</p></div>
+    <div class="two">
+      <figure><div class="plate n"><img src="img/globe-render.jpg" alt="Mother EARF: the acrylic globe" loading="lazy" style="border-radius:50%" width="1024" height="1024"></div><figcaption><b>Mother EARF.</b> The globe made in cast acrylic, at the center of the room. <span class="render">Render</span></figcaption></figure>
+      <figure><img src="img/coin.jpg" alt="EARFcoin in the eight tints, the globe engraved on each, Good for one song round the rim" loading="lazy" width="1800" height="1125"><figcaption><b>EARFcoin.</b> One a guest, good for one song. Mockup.</figcaption></figure>
+    </div>
   </div>
 </section>
 
 <section class="chap band paper" id="particulars">
   <div class="in">
-    <div class="head"><p class="no">09 · Particulars</p><h2>The facts, and only the facts.</h2>
-      <p class="lede">From the drawings, with no invented figure, no quotation and no price.</p></div>
-    <div class="boiler"><p class="eyebrow">Boilerplate</p><p>EARF designs hi-fi and lighting in tinted cast acrylic in San Francisco, in eight colors, Ember to Smoke. Its products are named for the Earth's layers and regions: Tropos, a powered horn loudspeaker; Hemisphere, a pendant; Core, a table lamp; and Mantle, a turntable. earf.world</p></div>
+    <div class="head"><p class="no">10 · Particulars</p><h2>The facts, and only the facts.</h2>
+      <p class="lede">From the drawings, with no invented figure and no price.</p></div>
     <div class="sheets">
-      <article class="sheet co"><div class="seven mini"><img src="img/tropos-front-ember.jpg" alt="Tropos in Ember" loading="lazy" width="1000" height="1250"><img src="img/tropos-front-dust.jpg" alt="Tropos in Dust" loading="lazy" width="1000" height="1250"><img src="img/tropos-front-acid.jpg" alt="Tropos in Acid" loading="lazy" width="1000" height="1250"><img src="img/tropos-front-poison.jpg" alt="Tropos in Poison" loading="lazy" width="1000" height="1250"><img src="img/tropos-front-ice.jpg" alt="Tropos in Ice" loading="lazy" width="1000" height="1250"><img src="img/tropos-front-haze.jpg" alt="Tropos in Haze" loading="lazy" width="1000" height="1250"><img src="img/tropos-front-fog.jpg" alt="Tropos in Fog" loading="lazy" width="1000" height="1250"><img src="img/tropos-front-smoke.jpg" alt="Tropos in Smoke" loading="lazy" width="1000" height="1250"></div><div class="sb"><p class="eyebrow">The company · <span class="render">Render</span></p><h3>EARF</h3><p>Hi-fi and light, cast in tinted acrylic, in eight colors, Ember to Smoke.</p><dl><dt>Where</dt><dd>San Francisco</dd><dt>Site</dt><dd>earf.world</dd><dt>Products</dt><dd>Tropos, Hemisphere, Core, Mantle</dd><dt>Colors</dt><dd>Eight, the same in every product</dd><dt>Status</dt><dd>In development, not yet for sale; every picture a render</dd><dt>Sells</dt><dd>Made to order; price on request</dd></dl></div></article>
-      <article class="sheet"><img src="img/tropos-front-ember.jpg" alt="Tropos in Ember on a pale seamless" loading="lazy" style="aspect-ratio:4/5" width="1000" height="1250"><div class="sb"><p class="eyebrow">Powered horn loudspeaker · <span class="render">Render</span></p><h3>Tropos</h3><p>Each cabinet tinted cast acrylic, 20&nbsp;mm thick; the horn one 10&nbsp;mm sheet, formed and polished, in the cabinet's hue, deep enough to read like the 20&nbsp;mm wall. The driver and the horn's black rods show through it.</p><dl><dt>Size</dt><dd>1295&nbsp;mm tall; 560 wide, the horn flush with the cabinet; 428 deep overall, 420 at the cabinet</dd><dt>Weight</dt><dd>About 73&nbsp;kg (modeled, not weighed)</dd><dt>Drivers</dt><dd>FaitalPRO 15PR400 15-inch woofer; B&amp;C DE1085TN 2-inch compression driver</dd><dt>Power</dt><dd>Hypex FA122 built in, with DSP, crossed at 1&nbsp;kHz; about 75&nbsp;W into the 8&nbsp;Ω woofer</dd><dt>Bass</dt><dd>To about 51&nbsp;Hz at −3&nbsp;dB; the ports tuned to 38&nbsp;Hz</dd><dt>Loudness</dt><dd>Up to about 115&nbsp;dB at 1&nbsp;m, each</dd><dt>Inputs</dt><dd>XLR (and a link out), RCA, AES, S/PDIF coaxial and optical; USB to set it up</dd></dl></div></article>
-      <article class="sheet"><div class="sb"><p class="eyebrow">Pendant lamp</p><h3>Hemisphere</h3><p>It works like Core cut in half: the shade glows its color, and warm white light falls below.</p><dl><dt>Shade</dt><dd>Tinted cast acrylic, the color outside</dd><dt>Light</dt><dd>Warm or amber</dd><dt>Colors</dt><dd>The eight</dd></dl></div></article>
-      <article class="sheet"><div class="sb"><p class="eyebrow">Table lamp</p><h3>Core</h3><p>A white inner ball, centered in a tinted one, with an even 10&nbsp;mm band of color all around. No cord: it charges on its dock.</p><dl><dt>Ball</dt><dd>Tinted cast acrylic outside, the same dye as Tropos and Mantle; a white inner ball</dd><dt>Light</dt><dd>Warm or amber</dd><dt>Colors</dt><dd>The eight</dd></dl></div></article>
-      <article class="sheet"><div class="sb"><p class="eyebrow">Turntable</p><h3>Mantle</h3><p>A turntable in cast acrylic. The tinted plinth floats 40&nbsp;mm over its base on four black posts, its edges satin.</p><dl><dt>Plinth</dt><dd>25&nbsp;mm tinted cast acrylic, satin edges</dd><dt>Posts</dt><dd>Four, black</dd><dt>Drive</dt><dd>Belt; Rega's 24&nbsp;V motor hung beneath the plinth</dd><dt>Arm · cartridge</dt><dd>Rega RB330 · a moving-magnet cartridge</dd><dt>Phono</dt><dd>Built in, MM, with a bypass</dd><dt>Size</dt><dd>About 450 × 370 × 199&nbsp;mm, lid down (design figures)</dd></dl></div></article>
+      <article class="sheet co"><div class="seven mini"><img src="img/tropos-front-ember.jpg" alt="Tropos in Ember" loading="lazy" width="1000" height="1250"><img src="img/tropos-front-dust.jpg" alt="Tropos in Dust" loading="lazy" width="1000" height="1250"><img src="img/tropos-front-acid.jpg" alt="Tropos in Acid" loading="lazy" width="1000" height="1250"><img src="img/tropos-front-poison.jpg" alt="Tropos in Poison" loading="lazy" width="1000" height="1250"><img src="img/tropos-front-ice.jpg" alt="Tropos in Ice" loading="lazy" width="1000" height="1250"><img src="img/tropos-front-haze.jpg" alt="Tropos in Haze" loading="lazy" width="1000" height="1250"><img src="img/tropos-front-fog.jpg" alt="Tropos in Fog" loading="lazy" width="1000" height="1250"><img src="img/tropos-front-smoke.jpg" alt="Tropos in Smoke" loading="lazy" width="1000" height="1250"></div><div class="sb"><p class="eyebrow">The company · <span class="render">Render</span></p><h3>EARF</h3><p>Hi-fi and light, cast in tinted acrylic, in eight colors, the full spectrum.</p><dl><dt>Where</dt><dd>San Francisco</dd><dt>Site</dt><dd>earf.world</dd><dt>Products</dt><dd>Tropos, Hemisphere, Core, Mantle</dd><dt>Status</dt><dd>In development, not yet for sale; every picture a render</dd><dt>Sells</dt><dd>Made to order; price on request</dd></dl></div></article>
+      <article class="sheet"><img src="img/tropos-front-ember.jpg" alt="Tropos in Ember on a pale seamless" loading="lazy" style="aspect-ratio:4/5" width="1000" height="1250"><div class="sb"><p class="eyebrow">Powered horn loudspeaker · <span class="render">Render</span></p><h3>Tropos</h3><p>Tinted cast acrylic, 20&nbsp;mm; the horn formed and polished in the cabinet's hue, on black rods.</p><dl><dt>Size</dt><dd>1295&nbsp;mm tall; 560 wide; 428 deep</dd><dt>Weight</dt><dd>About 73&nbsp;kg (modeled)</dd><dt>Drivers</dt><dd>FaitalPRO 15PR400 15-inch woofer; B&amp;C DE1085TN 2-inch compression driver</dd><dt>Power</dt><dd>Hypex FA122 built in, with DSP, crossed at 1&nbsp;kHz</dd><dt>Bass</dt><dd>To about 51&nbsp;Hz at −3&nbsp;dB</dd><dt>Loudness</dt><dd>Up to about 115&nbsp;dB at 1&nbsp;m</dd><dt>Inputs</dt><dd>XLR, RCA, AES, S/PDIF; USB to set it up</dd></dl></div></article>
+      <article class="sheet"><div class="sb"><p class="eyebrow">Pendant lamp</p><h3>Hemisphere</h3><p>Like Core cut in half: the shade glows its color, and warm light falls below.</p><dl><dt>Light</dt><dd>Warm or amber</dd><dt>Colors</dt><dd>The eight</dd></dl></div></article>
+      <article class="sheet"><div class="sb"><p class="eyebrow">Table lamp</p><h3>Core</h3><p>A white inner ball, centered, with an even 10&nbsp;mm band of color all around. No cord: it charges on its dock.</p><dl><dt>Light</dt><dd>Warm or amber</dd><dt>Colors</dt><dd>The eight</dd></dl></div></article>
+      <article class="sheet"><div class="sb"><p class="eyebrow">Turntable</p><h3>Mantle</h3><p>A tinted plinth floats 40&nbsp;mm over its base on four black posts, its edges satin.</p><dl><dt>Drive</dt><dd>Belt; Rega's 24&nbsp;V motor</dd><dt>Arm · cartridge</dt><dd>Rega RB330 · a moving-magnet cartridge</dd><dt>Phono</dt><dd>Built in, MM, with a bypass</dd><dt>Size</dt><dd>About 450 × 370 × 199&nbsp;mm (design figures)</dd></dl></div></article>
     </div>
-    <p class="muted" style="font-size:15px;max-width:76ch">Until the first pieces are built, everything EARF publishes says so: in development and not yet for sale; every picture a render; design figures until measured; price on request.</p>
   </div>
 </section>
 
 <section class="chap band" id="going">
   <div class="in">
-    <div class="head"><p class="no">10 · Where it's going</p><h2>Drawn to be made.</h2>
-      <p class="lede">Every part of Tropos has its own drawing. The horn's profile and the cabinet's bass were worked out by simulation before any acrylic was cut. What comes next:</p></div>
+    <div class="head"><p class="no">11 · Where it's going</p><h2>Drawn to be made.</h2>
+      <p class="lede">Every part of Tropos has its own drawing, worked out by simulation before any acrylic was cut.</p></div>
     <ol class="timeline">
       <li><span class="when">Next</span><h3>The first pair.</h3><p>Built to the drawings, the way every pair will be made.</p></li>
-      <li><span class="when">Then</span><h3>Measured.</h3><p>In a room, by ear and by microphone. Until then, the figures in this book are design figures.</p></li>
-      <li><span class="when">Then</span><h3>Photographed.</h3><p>As each piece is built, photographs replace its renders.</p></li>
-      <li><span class="when">After</span><h3>The lamps and Mantle, the same way.</h3><p>Built to their drawings, measured, then photographed.</p></li>
+      <li><span class="when">Then</span><h3>Measured, then photographed.</h3><p>The figures here are design figures until then.</p></li>
+      <li><span class="when">After</span><h3>The lamps and Mantle.</h3><p>The same way.</p></li>
+      <li><span class="when">And</span><h3>Planet EARF.</h3><p>The bar, with Mother EARF at its center and EARFcoin at the door.</p></li>
     </ol>
-    <div class="cols" style="margin-top:8px">
-      <div><h3>Each tint in its element</h3><p>Every one of the eight in a real landscape of its own: the speaker set into real ground, in real light.</p></div>
-      <div><h3>Color only in the acrylic</h3><p>The hardware is black across the line: the horn's rods, Mantle's posts. The color is the material's alone.</p></div>
-      <div><h3>Warm light, or amber</h3><p>Every lamp comes in warm light or in amber, so it can sit in a living room or a bar.</p></div>
-    </div>
-    <div class="boiler" style="margin-top:12px;max-width:none"><p class="eyebrow">The bar</p><h3 style="font-size:clamp(28px,3.4vw,40px);letter-spacing:-.03em">Planet EARF.</h3><p>A listening bar that is also EARF's showroom: everything in the room is for sale, and every piece swaps tint. It is lit amber. At its center stands Mother EARF, the globe made in cast acrylic. EARFcoin, an acrylic token, one a guest, is good for one song.</p></div>
   </div>
 </section>
 

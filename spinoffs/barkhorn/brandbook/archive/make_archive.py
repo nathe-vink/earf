@@ -11,9 +11,12 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 NOTES = '35b4cf3c9d74279800a72c43fc3c420302a027f8'           # r46-owner-notes, 2026-11-10
 AUDIT = 'spinoffs/barkhorn/coordinator/book-audit-2026-11-10'
 V25 = ('7d6b3d41cfbdf4341c4872a66ea4e37a02417bea', 'spinoffs/barkhorn/brandbook/book/index.html')
+V26 = ('ac7837afd8820670ec3d5507212434ce7fd0a0a2', 'spinoffs/barkhorn/brandbook/book/index.html')   # cut by half in v27
 BOOK_VERSIONS = [('v22', '1794270136-2332', '38 files'), ('v23', '1794271571-295d', 'the audited Book'),
                  ('v24', '1794272741-39e1', 'r47-brand 804cc8aa'), ('v25', '1794275254-44ef', 'r47-brand 7d6b3d41; the idents out'),
-                 ('v26', 'the rebuild of 10 November', 'r47-brand; the current overview and where it is going')]
+                 ('v26', '1794298040-04e8', 'r47-brand ac7837af; the rebuild: the current overview and where it is going'),
+                 ('v27', 'the owner\'s read of v26', 'r47-brand; the text cut by half, the bar its own chapter, the mockups back, '
+                  'the flat mark as tiles, the dark globe and the turn as approved before')]
 
 
 def git(commit, path):
@@ -61,6 +64,8 @@ def main():
     decisions = '\n'.join(ar[i - 6:])
     v25 = git(*V25)
     chap = {cid: text_of(m) for cid, m in re.findall(r'<section class="[^"]*" id="([a-z]+)">(.*?)</section>', v25, flags=re.S)}
+    v26 = git(*V26)
+    chap26 = {cid: text_of(m) for cid, m in re.findall(r'<section class="[^"]*" id="([a-z]+)">(.*?)</section>', v26, flags=re.S)}
     book_rows, nb = rows(book['items'])
     surf_rows, ns = rows(surf['items'])
     arch = section(plan, '## ARCHIVE OUTLINE', '## SURFACE FIXES')
@@ -92,6 +97,9 @@ def main():
                        ('applications', 'Applications, as it stood (the card, the rating plate, the paper, the signs, EARFcoin)'),
                        ('identity', 'Identity, as it stood'), ('color', 'Color, as it stood (Smoke held, the TruCast codes, the In light values)'),
                        ('voice', 'Voice, as it stood'), ('images', 'Image direction, as it stood'), ('position', 'Position, as it stood')])))
+    S.append(('v26', '3b. Book v26 as published, before it was cut by half (10 November)',
+              '<p>The owner on v26: "This might be too much text for someone to get through." Each chapter, verbatim:</p>' +
+              ''.join(f'<h3>{e(c)}</h3><pre>{e(t)}</pre>' for c, t in chap26.items())))
     S.append(('blocks', f'4. Every audited Book block not kept as it stood ({nb} of {len(book["items"])})', book_rows))
     S.append(('surfaces', f'5. Moved out of the other surfaces ({ns} of {len(surf["items"])})',
               '<p>The site preview, the live site, the press kit, launch, social and the deck, each row with its location and reason.</p>' + surf_rows))
