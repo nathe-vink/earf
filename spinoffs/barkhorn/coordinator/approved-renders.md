@@ -49,6 +49,11 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    final (r48-mantle-design cc3c51ba; stock Ember, satin edges, black-oxide posts) NOT YET APPROVED: "Maybe the mantle is too dark.
    It's hard to tell without the backlit example and other colors"; the Mantle lane renders all eight by day and three lit frames
    (real LEDs only), the bearing's brass in black as a labeled variant. The Book audit and plan: coordinator/book-audit-2026-11-10/.
+   THE GLOBE A3 APPROVED by the owner 10 Nov ~03:27 ("Globe is good"): r47-brand 3a1342cc, A3-translucent-matched-colors.png and its
+   .hues.json (measured against the targets: ember, dust, acid, poison within 0.02 OKLab, ice 0.03, haze 0.07 at the gamut edge). The
+   logo's colours are now the speakers': the flat marks and chips take ember #B50404, dust #D35D17, acid #C5BC1E, poison #027614,
+   ice #1169C1, haze #500CB4. The brand lane renders the final mark set and the spin from A3 (honest lights); I check one sheet; then
+   the Book's single rebuild on my go, when the black-rods and Smoke pictures land.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
