@@ -2008,10 +2008,10 @@ SPECTRUM = [('Eight colors, Ember to Smoke.', 'Eight colors, the full spectrum.'
 
 
 def rc_finish(web):
-    """After web.py's favicons and vercel.json: the approved globe's touch icon, the favicon titled EARF, and vercel.json
+    """After web.py's favicons and vercel.json: the favicon titled EARF, and vercel.json
     without the retired journal redirect."""
     import os, json, shutil
-    shutil.copy(os.path.join(web.BRAND, GLOBE_RC, 'apple-touch-icon.png'), os.path.join(web.SITE, 'apple-touch-icon.png'))
+    # the touch icon is web.py's own (favicons(): the flat mark, one shade per color, brand/mark/earf-globe-tiles.png)
     fav = os.path.join(web.SITE, 'favicon.svg'); f = open(fav).read()
     f = re.sub(r'<title>[^<]*</title>', '<title>EARF</title>', f); f = re.sub(r'aria-label="[^"]*"', 'aria-label="EARF"', f, count=1)
     open(fav, 'w').write(f)
