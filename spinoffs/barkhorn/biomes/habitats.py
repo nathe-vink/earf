@@ -26,9 +26,15 @@ HABITATS = {
     'ice':       ('Ice',    {'bounce': 0, 'back': 0, 'throat': 0}),
     'haze_b':    ('Haze',   {'bounce': 0}),
     'fog_b':     ('Fog',    {'bounce': 0}),
+    # the home-page hero (2026-11-10): the eight in the passed Fog and Ice scenes, 3:2, the scenes' own lights only
+    'hero_fog':  ('Fog',    {'bounce': 0}),
+    'hero_ice':  ('Ice',    {'bounce': 0, 'back': 0, 'throat': 0}),
 }
 # shot keys set per habitat (habitat.py --set), and samples where the scene is dark (the satin horn's grain)
 SETS = {
+    # the hero on Fog's hillside: Fog's look (5400 K, its sun's colour), the sky turned 40 deg so its own sun stands three-
+    # quarter behind the group (az 150, el 5.8) and the horns glow against the fog bank; no white board (in a wide frame)
+    'hero_fog': {'render.white_balance_k': 5400, 'sun.azimuth_deg': 150.0, 'sky.rotation_deg': 264.2, 'sun.color': '#FEEA98'},
     # Dust r3 (the coordinator, 2026-11-10 00:05, note 1): the sun 118 -> 124 deg, the sky turned with it (296 -> 290, its own
     # sun stays on the lamp): at 118 the sun through the horn's front wall (the horn under the rule) lit a three-ray fan of
     # glints on the inner flare's creases left of the pod (845 px over the horn-front crop); 121: 102 px, 124: 25 px (max 36)
@@ -124,6 +130,7 @@ MODIFY = {'haze_b': {'sundisk': {'azimuth': 30.0, 'elevation': 6.0}},
           # Fog (the coordinator's gate on 5c0f8509: the clear cabinet read champagne): the brown boulder right behind it,
           # seen through the clear walls, moved aside, so the bright fog bank sits behind the box
           'fog_b': {'boulder_01': {'position': [2.6, 3.6, -0.12]}},
+          'hero_fog': {'boulder_01': {'position': [2.6, 3.6, -0.12]}},
           # Acid: the outline mask (no rain inside the speaker's outline, the gate on cc380fab) kept only in front of the
           # speaker (the coordinator, 20:46: the rain behind shows through the clear horn, as it would; without the mask a
           # near-focus streak 5-9 m out crossed the woofer again, proxy a2). The 2.5-5 m layer, soft, is not masked
@@ -141,7 +148,7 @@ SINK = {'acid_b': 0.05,    # 2026-11-09: 0.025 left the bottom panel's 20 mm fro
         # (earlier: at 0.015 a sky-bright strip (8-9 px) showed between the edge and its reflection (the gate on
                           # cc380fab: "hovers"); the puddle's displacement sits above the ray-cast surface. 0.025 closes it
                           # (strip peak 82 -> 56 against water 50); at 0.03 the submerged part showed through)
-        'acid_b_old': 0.03, 'ice': 0.022,
+        'acid_b_old': 0.03, 'ice': 0.022, 'hero_ice': 0.022,
         # Dust (the gate on the 2026-11-09 re-render, grounded FAIL, and the passed file the same): a 6-8 px strip of lit
         # sand between the bottom edge and its shadow; the ripples are displaced at render time above the ray-cast sand.
         # 0.012 -> 0.028 beds the base into the ripples (crops at 0.02 and 0.028)
