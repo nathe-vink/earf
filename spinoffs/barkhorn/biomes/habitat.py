@@ -745,207 +745,217 @@ def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extr
         objs, part_of = place0(bpy_, pdef, templates, shot_, root_)
         for o in objs:
             o.hide_render = True
-        with bpy_.data.libraries.load(asset, link=not editable) as (s_, d_):
-            d_.collections = [collection]
-        col = d_.collections[0]
-        if col is None:
-            raise SystemExit(f'{collection} is not in {asset}')
-        if stand == 'feet':
-            drop = []
-            for o in list(col.all_objects):
-                if 'base-plinth' in o.name or 'base-uplight' in o.name:   # base A and its light: the base is open
-                    col.objects.unlink(o); drop.append(o)
-            feet(bpy_, col)
-            print('stand: on four feet; left out', [o.name for o in drop])
-        if tt:
-            f = tt_factor(glass_from, tt)
-            done = set()
-            for o in col.all_objects:
-                for sl in getattr(o, 'material_slots', []):
-                    m = sl.material
-                    if not m or m.name in done or not m.name.split('@')[0] in ('bark', 'horn-lot') or not m.node_tree:
-                        continue
-                    done.add(m.name)
-                    for n in m.node_tree.nodes:
-                        if n.type in ('VOLUME_ABSORPTION', 'PRINCIPLED_VOLUME') and 'Density' in n.inputs:
-                            n.inputs['Density'].default_value *= f
-            print(f'glass: {glass_from:.0%} -> {tt:.0%} through 20 mm (absorption x {f:.3f}) on', sorted(done))
-        if WELD[0]:
-            # the asset's panels arrive from glTF with their vertices split at every seam, which leaves each glass
-            # volume open (the speaker lane, 2026-11-03: welded, every panel closes, normals out); weld them
-            import bmesh
-            seen = set(); nw = 0
-            for o in col.all_objects:
-                if o.type != 'MESH' or o.data.name in seen:
-                    continue
-                seen.add(o.data.name)
-                bm = bmesh.new(); bm.from_mesh(o.data)
-                n0 = len(bm.verts)
-                bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=1e-5)
-                if len(bm.verts) < n0:
-                    nw += 1
-                    bm.to_mesh(o.data)
-                    flat = any(sl.material and sl.material.name.split('@')[0] == 'bark' for sl in o.material_slots)
-                    o.data.polygons.foreach_set('use_smooth', [not flat] * len(o.data.polygons))
-                bm.free()
-            print(f'weld: {nw} meshes welded')
-        if HORN['close']:
-            # the horn's shells (throat, waveguide, cap) stay open after the weld (seams 0.6-1.1 m long): a glass volume
-            # with a gap leaks, rays inside stay "in the resin". Fill each hole so the volume closes
-            import bmesh
-            for o in col.all_objects:
-                if o.type == 'MESH' and any(k in o.name for k in ('horn-throat', 'waveguide')):
-                    bm = bmesh.new(); bm.from_mesh(o.data)
-                    bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=1e-4)
-                    r = bmesh.ops.holes_fill(bm, edges=bm.edges, sides=0)
-                    bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
-                    left = sum(1 for e in bm.edges if len(e.link_faces) == 1)
-                    bm.to_mesh(o.data); bm.free()
-                    print('horn close:', o.name, len(r['faces']), 'faces filled,', left, 'open edges left')
-        if HORN['rough'] is not None:
-            for m in {sl.material for o in col.all_objects for sl in getattr(o, 'material_slots', []) if sl.material}:
-                if m.name.split('@')[0] == 'horn-satin' and m.node_tree:
-                    for n in m.node_tree.nodes:
-                        if n.type == 'BSDF_PRINCIPLED':
-                            n.inputs['Roughness'].default_value = HORN['rough']
-            print('horn satin roughness ->', HORN['rough'])
-        if HORN['as_cabinet']:
-            # the horn as the cabinet's glass (the coordinator, 2026-11-10 01:37): the asset's horns carry their own, denser
-            # volume absorption (Dust 9-51x the cabinet's per mm, Poison 3-5x); each horn material takes its cabinet's
-            # Volume Absorption colour and density exactly (same IOR 1.49 already, no coat or sheen); its own wall
-            # thickness then sets how much it tints
-            allm = {sl.material for o in col.all_objects for sl in getattr(o, 'material_slots', []) if sl.material}
-            def absn(m):
-                return next((n for n in m.node_tree.nodes if n.type == 'VOLUME_ABSORPTION' and n.outputs[0].is_linked), None) if m.node_tree else None
-            bark = next((m for m in allm if m.name.split('@')[0] == 'bark' and absn(m)), None)
-            if bark is not None:
-                vb = absn(bark); done = []
-                for m in allm:
-                    if m.name.split('@')[0].startswith('horn-') and absn(m):
-                        vh = absn(m)
-                        vh.inputs['Color'].default_value = tuple(vb.inputs['Color'].default_value)
-                        vh.inputs['Density'].default_value = vb.inputs['Density'].default_value
-                        done.append(m.name)
-                print('horn as the cabinet glass (absorption from', bark.name + '):', sorted(done))
-        if SPLIT[0]:
-            # a tint's channel split changed in the speaker lane's shared model (9097, 732a8671): each acrylic part keeps
-            # its luminous transmission through its own thickness (cabinet 20 mm, horn 12.7 mm), the absorption re-split
-            import math as _m
-            LUMW = (0.2126, 0.7152, 0.0722); sp = SPLIT[0]; mx = max(sp); done = {}
-            for o in col.all_objects:
-                for sl in getattr(o, 'material_slots', []):
-                    m = sl.material
-                    base = m.name.split('@')[0] if m else ''
-                    if not m or not m.node_tree or m.name in done or base not in ('bark', 'horn-formed', 'horn-satin', 'horn-lot'):
-                        continue
-                    absn = next((n for n in m.node_tree.nodes if n.type == 'VOLUME_ABSORPTION'), None)
-                    if absn is None:
-                        continue
-                    t = 0.020 if base == 'bark' else 0.0127
-                    c = absn.inputs['Color'].default_value; D = absn.inputs['Density'].default_value
-                    L0 = sum(w * _m.exp(-(1 - c[i]) * D * t) for i, w in enumerate(LUMW))
-                    lo, hi = 0.0, 5000.0
-                    for _ in range(100):
-                        k = (lo + hi) / 2
-                        L = sum(w * _m.exp(-k * (sp[i] / mx) * t) for i, w in enumerate(LUMW))
-                        lo, hi = (k, hi) if L > L0 else (lo, k)
-                    absn.inputs['Color'].default_value = (*[1 - sp[i] / mx for i in range(3)], 1)
-                    absn.inputs['Density'].default_value = k
-                    done[m.name] = (round(L0, 4), round(k, 1))
-            print('split', sp, '(luminance held):', done)
-        if LED[0] != 1.0:
-            for m in {sl.material for o in col.all_objects for sl in getattr(o, 'material_slots', []) if sl.material}:
-                if m.name.split('@')[0] == 'led-on' and m.node_tree:
-                    for n in m.node_tree.nodes:
-                        if n.type == 'EMISSION':
-                            n.inputs['Strength'].default_value *= LED[0]
-            print('led-on emission x', LED[0])
-        if not HORN['shadows']:
-            # the horn lit from the front (the coordinator, 2026-11-03, Ember): the asset's shadow rays pass the horn
-            # untinted, so a lamp or bright sky behind a backlit satin horn makes it a lampshade, out-shining the
-            # backdrop, the driver and posts as silhouettes. Direct light stops at the horn; its paths still refract
-            done = set()
-            for o in col.all_objects:
-                for sl in getattr(o, 'material_slots', []):
-                    m = sl.material
-                    if not m or not m.node_tree or not m.name.split('@')[0].startswith('horn-') or m.name in done:
-                        continue
-                    nt = m.node_tree
-                    out = next((n for n in nt.nodes if n.type == 'OUTPUT_MATERIAL' and n.is_active_output), None)
-                    bs = next((n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED'), None)
-                    if out is not None and bs is not None:
-                        for l in list(out.inputs['Surface'].links):
-                            nt.links.remove(l)
-                        nt.links.new(bs.outputs[0], out.inputs['Surface'])
-                        done.add(m.name)
-            print('horn: direct light stops at it (no shadow transparency):', sorted(done))
-        if glass_shadows:
-            # light through the glass: Cycles renders without refractive caustics, so no lamp lights anything inside or
-            # behind a clear wall and the inside reads black whatever the tint. Shadow rays pass each acrylic wall
-            # tinted by what that wall transmits (its absorption over its thickness), the rest of the shading untouched
-            done = {}
-            for o in col.all_objects:
-                for sl in getattr(o, 'material_slots', []):
-                    m = sl.material
-                    base = m.name.split('@')[0] if m else ''
-                    if not m or not m.node_tree or base not in ('bark', 'horn-formed', 'horn-satin', 'horn-lot') or m.name in done:
-                        continue
-                    if base.startswith('horn-') and not HORN['shadows']:
-                        continue
-                    nt = m.node_tree
-                    out = next((n for n in nt.nodes if n.type == 'OUTPUT_MATERIAL' and n.is_active_output), None)
-                    absn = next((n for n in nt.nodes if n.type == 'VOLUME_ABSORPTION'), None)
-                    if out is None or absn is None or not out.inputs['Surface'].links:
-                        continue
-                    mm = 0.020 if base == 'bark' else 0.0127
-                    c = absn.inputs['Color'].default_value; dens = absn.inputs['Density'].default_value
-                    # a caustics stand-in: shadow rays pass the wall tinted by what it transmits, less its two faces'
-                    # Fresnel loss (about 4 % each at IOR 1.49, x 0.92; without it clear glass cast no shadow at all)
-                    tr = [0.92 * math.exp(-(1 - c[i]) * dens * mm) for i in range(3)]
-                    if SURFACE_GLASS:
-                        # the tint on the faces instead of in a volume: the asset's panels don't close the volume
-                        # (rays inside the cabinet stay "in the glass" and the inside reads black whatever the
-                        # tint); each face takes the square root of its wall's transmission, two faces a wall
-                        for l in list(out.inputs['Volume'].links):
-                            nt.links.remove(l)
-                        bs = next((n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED'), None)
-                        if bs is not None:
-                            bs.inputs['Base Color'].default_value = (*[math.sqrt(x) for x in tr], 1)
-                    src = out.inputs['Surface'].links[0].from_socket
-                    lp = nt.nodes.new('ShaderNodeLightPath'); tp = nt.nodes.new('ShaderNodeBsdfTransparent')
-                    # per FACE, not per wall: a shadow ray meets the transparency at each face it crosses (two a wall), and
-                    # through the welded volume Cycles applies the absorption itself. So with the volume the faces carry only
-                    # the Fresnel, sqrt(0.92) each; the tint comes once, from the volume (the slab test, 2026-11-09: tr at
-                    # each face plus the volume passed tr^2 x volume, the tint three times). Without a volume (SURFACE_GLASS)
-                    # each face carries sqrt of the whole wall's transmission
-                    face = [math.sqrt(x) for x in tr] if SURFACE_GLASS else [math.sqrt(0.92)] * 3
-                    tp.inputs['Color'].default_value = (*face, 1)
-                    if FRESNEL_ANGLE[0] and not SURFACE_GLASS:
-                        schlick_face(nt, tp, 1.49)
-                    mx = nt.nodes.new('ShaderNodeMixShader')
-                    nt.links.new(lp.outputs['Is Shadow Ray'], mx.inputs[0])
-                    nt.links.new(src, mx.inputs[1]); nt.links.new(tp.outputs[0], mx.inputs[2])
-                    nt.links.new(mx.outputs[0], out.inputs['Surface'])
-                    done[m.name] = [round(x, 3) for x in tr]
-            print('glass shadows:', done)
-        if lining:
-            # the lining's color (colors F: Smoke on black, the others white): the asset, appended, takes it
-            h = lining.lstrip('#'); rgb = [int(h[i:i + 2], 16) / 255 for i in (0, 2, 4)]
-            rgb = [c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4 for c in rgb]
-            done = set()
-            for o in col.all_objects:
-                for sl in getattr(o, 'material_slots', []):
-                    m = sl.material
-                    if m and m.name.split('@')[0] == 'lining' and m.name not in done and m.node_tree:
+        def prep(collection):
+            """Load one tint's collection from the asset and prepare it (the feet, the weld, the glass and horn rules)."""
+            with bpy_.data.libraries.load(asset, link=not editable) as (s_, d_):
+                d_.collections = [collection]
+            col = d_.collections[0]
+            if col is None:
+                raise SystemExit(f'{collection} is not in {asset}')
+            if stand == 'feet':
+                drop = []
+                for o in list(col.all_objects):
+                    if 'base-plinth' in o.name or 'base-uplight' in o.name:   # base A and its light: the base is open
+                        col.objects.unlink(o); drop.append(o)
+                feet(bpy_, col)
+                print('stand: on four feet; left out', [o.name for o in drop])
+            if tt:
+                f = tt_factor(glass_from, tt)
+                done = set()
+                for o in col.all_objects:
+                    for sl in getattr(o, 'material_slots', []):
+                        m = sl.material
+                        if not m or m.name in done or not m.name.split('@')[0] in ('bark', 'horn-lot') or not m.node_tree:
+                            continue
                         done.add(m.name)
                         for n in m.node_tree.nodes:
+                            if n.type in ('VOLUME_ABSORPTION', 'PRINCIPLED_VOLUME') and 'Density' in n.inputs:
+                                n.inputs['Density'].default_value *= f
+                print(f'glass: {glass_from:.0%} -> {tt:.0%} through 20 mm (absorption x {f:.3f}) on', sorted(done))
+            if WELD[0]:
+                # the asset's panels arrive from glTF with their vertices split at every seam, which leaves each glass
+                # volume open (the speaker lane, 2026-11-03: welded, every panel closes, normals out); weld them
+                import bmesh
+                seen = set(); nw = 0
+                for o in col.all_objects:
+                    if o.type != 'MESH' or o.data.name in seen:
+                        continue
+                    seen.add(o.data.name)
+                    bm = bmesh.new(); bm.from_mesh(o.data)
+                    n0 = len(bm.verts)
+                    bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=1e-5)
+                    if len(bm.verts) < n0:
+                        nw += 1
+                        bm.to_mesh(o.data)
+                        flat = any(sl.material and sl.material.name.split('@')[0] == 'bark' for sl in o.material_slots)
+                        o.data.polygons.foreach_set('use_smooth', [not flat] * len(o.data.polygons))
+                    bm.free()
+                print(f'weld: {nw} meshes welded')
+            if HORN['close']:
+                # the horn's shells (throat, waveguide, cap) stay open after the weld (seams 0.6-1.1 m long): a glass volume
+                # with a gap leaks, rays inside stay "in the resin". Fill each hole so the volume closes
+                import bmesh
+                for o in col.all_objects:
+                    if o.type == 'MESH' and any(k in o.name for k in ('horn-throat', 'waveguide')):
+                        bm = bmesh.new(); bm.from_mesh(o.data)
+                        bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=1e-4)
+                        r = bmesh.ops.holes_fill(bm, edges=bm.edges, sides=0)
+                        bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+                        left = sum(1 for e in bm.edges if len(e.link_faces) == 1)
+                        bm.to_mesh(o.data); bm.free()
+                        print('horn close:', o.name, len(r['faces']), 'faces filled,', left, 'open edges left')
+            if HORN['rough'] is not None:
+                for m in {sl.material for o in col.all_objects for sl in getattr(o, 'material_slots', []) if sl.material}:
+                    if m.name.split('@')[0] == 'horn-satin' and m.node_tree:
+                        for n in m.node_tree.nodes:
                             if n.type == 'BSDF_PRINCIPLED':
-                                n.inputs['Base Color'].default_value = (*rgb, 1)
-            print('lining:', lining, sorted(done))
-        if up:
-            uplight(bpy_, col, up)
+                                n.inputs['Roughness'].default_value = HORN['rough']
+                print('horn satin roughness ->', HORN['rough'])
+            if HORN['as_cabinet']:
+                # the horn as the cabinet's glass (the coordinator, 2026-11-10 01:37): the asset's horns carry their own, denser
+                # volume absorption (Dust 9-51x the cabinet's per mm, Poison 3-5x); each horn material takes its cabinet's
+                # Volume Absorption colour and density exactly (same IOR 1.49 already, no coat or sheen); its own wall
+                # thickness then sets how much it tints
+                allm = {sl.material for o in col.all_objects for sl in getattr(o, 'material_slots', []) if sl.material}
+                def absn(m):
+                    return next((n for n in m.node_tree.nodes if n.type == 'VOLUME_ABSORPTION' and n.outputs[0].is_linked), None) if m.node_tree else None
+                bark = next((m for m in allm if m.name.split('@')[0] == 'bark' and absn(m)), None)
+                if bark is not None:
+                    vb = absn(bark); done = []
+                    for m in allm:
+                        if m.name.split('@')[0].startswith('horn-') and absn(m):
+                            vh = absn(m)
+                            vh.inputs['Color'].default_value = tuple(vb.inputs['Color'].default_value)
+                            vh.inputs['Density'].default_value = vb.inputs['Density'].default_value
+                            done.append(m.name)
+                    print('horn as the cabinet glass (absorption from', bark.name + '):', sorted(done))
+            if SPLIT[0]:
+                # a tint's channel split changed in the speaker lane's shared model (9097, 732a8671): each acrylic part keeps
+                # its luminous transmission through its own thickness (cabinet 20 mm, horn 12.7 mm), the absorption re-split
+                import math as _m
+                LUMW = (0.2126, 0.7152, 0.0722); sp = SPLIT[0]; mx = max(sp); done = {}
+                for o in col.all_objects:
+                    for sl in getattr(o, 'material_slots', []):
+                        m = sl.material
+                        base = m.name.split('@')[0] if m else ''
+                        if not m or not m.node_tree or m.name in done or base not in ('bark', 'horn-formed', 'horn-satin', 'horn-lot'):
+                            continue
+                        absn = next((n for n in m.node_tree.nodes if n.type == 'VOLUME_ABSORPTION'), None)
+                        if absn is None:
+                            continue
+                        t = 0.020 if base == 'bark' else 0.0127
+                        c = absn.inputs['Color'].default_value; D = absn.inputs['Density'].default_value
+                        L0 = sum(w * _m.exp(-(1 - c[i]) * D * t) for i, w in enumerate(LUMW))
+                        lo, hi = 0.0, 5000.0
+                        for _ in range(100):
+                            k = (lo + hi) / 2
+                            L = sum(w * _m.exp(-k * (sp[i] / mx) * t) for i, w in enumerate(LUMW))
+                            lo, hi = (k, hi) if L > L0 else (lo, k)
+                        absn.inputs['Color'].default_value = (*[1 - sp[i] / mx for i in range(3)], 1)
+                        absn.inputs['Density'].default_value = k
+                        done[m.name] = (round(L0, 4), round(k, 1))
+                print('split', sp, '(luminance held):', done)
+            if LED[0] != 1.0:
+                for m in {sl.material for o in col.all_objects for sl in getattr(o, 'material_slots', []) if sl.material}:
+                    if m.name.split('@')[0] == 'led-on' and m.node_tree:
+                        for n in m.node_tree.nodes:
+                            if n.type == 'EMISSION':
+                                n.inputs['Strength'].default_value *= LED[0]
+                print('led-on emission x', LED[0])
+            if not HORN['shadows']:
+                # the horn lit from the front (the coordinator, 2026-11-03, Ember): the asset's shadow rays pass the horn
+                # untinted, so a lamp or bright sky behind a backlit satin horn makes it a lampshade, out-shining the
+                # backdrop, the driver and posts as silhouettes. Direct light stops at the horn; its paths still refract
+                done = set()
+                for o in col.all_objects:
+                    for sl in getattr(o, 'material_slots', []):
+                        m = sl.material
+                        if not m or not m.node_tree or not m.name.split('@')[0].startswith('horn-') or m.name in done:
+                            continue
+                        nt = m.node_tree
+                        out = next((n for n in nt.nodes if n.type == 'OUTPUT_MATERIAL' and n.is_active_output), None)
+                        bs = next((n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED'), None)
+                        if out is not None and bs is not None:
+                            for l in list(out.inputs['Surface'].links):
+                                nt.links.remove(l)
+                            nt.links.new(bs.outputs[0], out.inputs['Surface'])
+                            done.add(m.name)
+                print('horn: direct light stops at it (no shadow transparency):', sorted(done))
+            if glass_shadows:
+                # light through the glass: Cycles renders without refractive caustics, so no lamp lights anything inside or
+                # behind a clear wall and the inside reads black whatever the tint. Shadow rays pass each acrylic wall
+                # tinted by what that wall transmits (its absorption over its thickness), the rest of the shading untouched
+                done = {}
+                for o in col.all_objects:
+                    for sl in getattr(o, 'material_slots', []):
+                        m = sl.material
+                        base = m.name.split('@')[0] if m else ''
+                        if not m or not m.node_tree or base not in ('bark', 'horn-formed', 'horn-satin', 'horn-lot') or m.name in done:
+                            continue
+                        if base.startswith('horn-') and not HORN['shadows']:
+                            continue
+                        nt = m.node_tree
+                        out = next((n for n in nt.nodes if n.type == 'OUTPUT_MATERIAL' and n.is_active_output), None)
+                        absn = next((n for n in nt.nodes if n.type == 'VOLUME_ABSORPTION'), None)
+                        if out is None or absn is None or not out.inputs['Surface'].links:
+                            continue
+                        mm = 0.020 if base == 'bark' else 0.0127
+                        c = absn.inputs['Color'].default_value; dens = absn.inputs['Density'].default_value
+                        # a caustics stand-in: shadow rays pass the wall tinted by what it transmits, less its two faces'
+                        # Fresnel loss (about 4 % each at IOR 1.49, x 0.92; without it clear glass cast no shadow at all)
+                        tr = [0.92 * math.exp(-(1 - c[i]) * dens * mm) for i in range(3)]
+                        if SURFACE_GLASS:
+                            # the tint on the faces instead of in a volume: the asset's panels don't close the volume
+                            # (rays inside the cabinet stay "in the glass" and the inside reads black whatever the
+                            # tint); each face takes the square root of its wall's transmission, two faces a wall
+                            for l in list(out.inputs['Volume'].links):
+                                nt.links.remove(l)
+                            bs = next((n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED'), None)
+                            if bs is not None:
+                                bs.inputs['Base Color'].default_value = (*[math.sqrt(x) for x in tr], 1)
+                        src = out.inputs['Surface'].links[0].from_socket
+                        lp = nt.nodes.new('ShaderNodeLightPath'); tp = nt.nodes.new('ShaderNodeBsdfTransparent')
+                        # per FACE, not per wall: a shadow ray meets the transparency at each face it crosses (two a wall), and
+                        # through the welded volume Cycles applies the absorption itself. So with the volume the faces carry only
+                        # the Fresnel, sqrt(0.92) each; the tint comes once, from the volume (the slab test, 2026-11-09: tr at
+                        # each face plus the volume passed tr^2 x volume, the tint three times). Without a volume (SURFACE_GLASS)
+                        # each face carries sqrt of the whole wall's transmission
+                        face = [math.sqrt(x) for x in tr] if SURFACE_GLASS else [math.sqrt(0.92)] * 3
+                        tp.inputs['Color'].default_value = (*face, 1)
+                        if FRESNEL_ANGLE[0] and not SURFACE_GLASS:
+                            schlick_face(nt, tp, 1.49)
+                        mx = nt.nodes.new('ShaderNodeMixShader')
+                        nt.links.new(lp.outputs['Is Shadow Ray'], mx.inputs[0])
+                        nt.links.new(src, mx.inputs[1]); nt.links.new(tp.outputs[0], mx.inputs[2])
+                        nt.links.new(mx.outputs[0], out.inputs['Surface'])
+                        done[m.name] = [round(x, 3) for x in tr]
+                print('glass shadows:', done)
+            if lining:
+                # the lining's color (colors F: Smoke on black, the others white): the asset, appended, takes it
+                h = lining.lstrip('#'); rgb = [int(h[i:i + 2], 16) / 255 for i in (0, 2, 4)]
+                rgb = [c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4 for c in rgb]
+                done = set()
+                for o in col.all_objects:
+                    for sl in getattr(o, 'material_slots', []):
+                        m = sl.material
+                        if m and m.name.split('@')[0] == 'lining' and m.name not in done and m.node_tree:
+                            done.add(m.name)
+                            for n in m.node_tree.nodes:
+                                if n.type == 'BSDF_PRINCIPLED':
+                                    n.inputs['Base Color'].default_value = (*rgb, 1)
+                print('lining:', lining, sorted(done))
+            if up:
+                uplight(bpy_, col, up)
+            return col
+
+        cols = {}
         for inst in shot_['product']['instances']:
-            e = bpy_.data.objects.new(collection, None)
+            # an instance may name its own tint (the hero: eight colours in one scene); each tint's collection prepared once
+            cname = f"Tropos Strata {inst['tint']}" if inst.get('tint') else collection
+            if cname not in cols:
+                cols[cname] = prep(cname)
+            col = cols[cname]
+            e = bpy_.data.objects.new(cname, None)
             e.instance_type = 'COLLECTION'; e.instance_collection = col
             e.location = inst.get('position', (0, 0, 0)); e.rotation_euler = (0, 0, math.radians(inst.get('rotate_z', 0)))
             bpy_.context.scene.collection.objects.link(e)

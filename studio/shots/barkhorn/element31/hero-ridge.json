@@ -1,0 +1,377 @@
+{
+ "title": "Tropos hero: the eight above a sea of cloud at sunrise (3:2)",
+ "size": [
+  1800,
+  1200
+ ],
+ "product": {
+  "def": "studio/products/barkhorn-cloud.json",
+  "flavour": "cloud-black",
+  "instances": [
+   {
+    "tint": "Ember",
+    "flavour": "cloud-red",
+    "position": [
+     -3.15,
+     0.55,
+     0.0
+    ],
+    "rotate_z": 7.57,
+    "hide": [
+     "cloth-disc"
+    ]
+   },
+   {
+    "tint": "Dust",
+    "flavour": "cloud-orange",
+    "position": [
+     -2.25,
+     0.281,
+     0.0
+    ],
+    "rotate_z": 3.98,
+    "hide": [
+     "cloth-disc"
+    ]
+   },
+   {
+    "tint": "Acid",
+    "flavour": "cloud-amber",
+    "position": [
+     -1.35,
+     0.101,
+     0.0
+    ],
+    "rotate_z": 0.12,
+    "hide": [
+     "cloth-disc"
+    ]
+   },
+   {
+    "tint": "Poison",
+    "flavour": "eucalyptus-y2k-green",
+    "position": [
+     -0.45,
+     0.011,
+     0.0
+    ],
+    "rotate_z": -3.94,
+    "hide": [
+     "cloth-disc"
+    ]
+   },
+   {
+    "tint": "Ice",
+    "flavour": "cloud-blue",
+    "position": [
+     0.45,
+     0.011,
+     0.0
+    ],
+    "rotate_z": -8.06,
+    "hide": [
+     "cloth-disc"
+    ]
+   },
+   {
+    "tint": "Haze",
+    "flavour": "cloud-violet",
+    "position": [
+     1.35,
+     0.101,
+     0.0
+    ],
+    "rotate_z": -12.12,
+    "hide": [
+     "cloth-disc"
+    ]
+   },
+   {
+    "tint": "Fog",
+    "flavour": "birch-fog-clear",
+    "position": [
+     2.25,
+     0.281,
+     0.0
+    ],
+    "rotate_z": -15.98,
+    "hide": [
+     "cloth-disc"
+    ]
+   },
+   {
+    "tint": "Smoke",
+    "flavour": "cloud-black",
+    "position": [
+     3.15,
+     0.55,
+     0.0
+    ],
+    "rotate_z": -19.57,
+    "hide": [
+     "cloth-disc"
+    ]
+   }
+  ]
+ },
+ "lights": {},
+ "render": {
+  "samples": 512,
+  "adaptive": 0.02,
+  "denoise": true,
+  "clamp": 10.0,
+  "bounces": 12,
+  "view": "AgX",
+  "exposure": 0.5,
+  "white_balance_k": 7800.0,
+  "white_balance_tint": 10.0,
+  "look": "AgX - Base Contrast"
+ },
+ "camera": {
+  "position": [
+   0.0,
+   -12.5,
+   2.0
+  ],
+  "target": [
+   0.0,
+   0.0,
+   0.75
+  ],
+  "lens_mm": 50.0,
+  "level": true,
+  "fstop": 8.0,
+  "focus": [
+   0.0,
+   0.0,
+   0.7
+  ],
+  "shift_x": 0.0,
+  "shift_y": 0.0,
+  "clip_end_m": 3000.0
+ },
+ "sky": {
+  "kind": "hdri",
+  "polyhaven": "qwantani_sunset_puresky",
+  "rotation_deg": 264.0,
+  "strength": 0.45,
+  "res": "4k",
+  "grade": {
+   "horizon": "#F4B98C",
+   "zenith": "#C9C3CF",
+   "height_deg": 25.0
+  }
+ },
+ "sun": {
+  "azimuth_deg": 150.0,
+  "elevation_deg": 6.0,
+  "irradiance": 24.0,
+  "angle_deg": 0.5,
+  "color": "#FE9E29"
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 240,
+  "white_out": 240,
+  "contrast": 0.12,
+  "clarity": 0.04,
+  "sharpen": 0.25,
+  "sharpen_px": 0.6,
+  "dream": {
+   "bloom": 0.12,
+   "bloom_px": 30,
+   "bloom_threshold": 0.9,
+   "saturation": 0.0,
+   "lift": 0.0,
+   "lift_color": "#000000",
+   "vignette": 0.18
+  }
+ },
+ "haze": {
+  "box_m": [
+   -500.0,
+   -30.0,
+   -60.0,
+   500.0,
+   500.0,
+   400.0
+  ],
+  "density": 0.0008,
+  "anisotropy": 0.6,
+  "color": "#E8DCD0"
+ },
+ "set": {
+  "kind": "stage",
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "acid_rain_el",
+    "fn": "wet_ground",
+    "texture": "dark_rock",
+    "size": [
+     34.0,
+     22.0
+    ],
+    "position": [
+     0.0,
+     -3.5,
+     0.0
+    ],
+    "cells": 1500,
+    "displace": 0.05,
+    "relief": false,
+    "flat": [
+     0.0,
+     0.3,
+     4.2
+    ],
+    "res": "4k",
+    "tex_scale": 1.0,
+    "bump": 2.5,
+    "rough_mul": 1.0,
+    "darken": 0.85,
+    "film": 0.0,
+    "tint": "#2E2924",
+    "tint_mix": 0.45,
+    "film_rough": 0.6,
+    "lumps": [
+     [
+      2.6,
+      0.08,
+      "billow"
+     ],
+     [
+      1.1,
+      0.05,
+      "fbm"
+     ],
+     [
+      0.4,
+      0.02,
+      "ridged"
+     ],
+     [
+      9.0,
+      0.25
+     ]
+    ],
+    "seed": 4
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "acid_rain_el",
+    "fn": "rocks",
+    "models": [
+     "rock_09",
+     "moon_rock_01",
+     "moon_rock_04",
+     "rock_07"
+    ],
+    "count": 34,
+    "area": [
+     -15.0,
+     4.5,
+     15.0,
+     8.5
+    ],
+    "avoid": [
+     [
+      0.0,
+      0.5,
+      4.3
+     ]
+    ],
+    "scale": [
+     0.6,
+     2.2
+    ],
+    "z": -0.1,
+    "seed": 11,
+    "darken": 0.8,
+    "film_rough": 0.7,
+    "tilt_deg": 18.0
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "acid_rain_el",
+    "fn": "rocks",
+    "models": [
+     "rock_09",
+     "moon_rock_04",
+     "rock_07"
+    ],
+    "count": 26,
+    "area": [
+     -15.0,
+     -11.0,
+     15.0,
+     4.0
+    ],
+    "avoid": [
+     [
+      0.0,
+      0.3,
+      4.4
+     ]
+    ],
+    "scale": [
+     0.15,
+     0.6
+    ],
+    "z": -0.05,
+    "seed": 12,
+    "darken": 0.8,
+    "film_rough": 0.7,
+    "tilt_deg": 15.0
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "acid_rain_el",
+    "fn": "ridge",
+    "position": [
+     -60.0,
+     260.0,
+     -45.0
+    ],
+    "width": 900.0,
+    "depth": 90.0,
+    "height": 62.0,
+    "spacing": 130.0,
+    "seed": 41,
+    "jag": 0.9,
+    "darken": 0.9,
+    "film": 0.0,
+    "film_rough": 0.6,
+    "cells": [
+     260,
+     50
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "poison_el",
+    "fn": "mist",
+    "position": [
+     0.0,
+     190.0,
+     -30.0
+    ],
+    "size": [
+     800.0,
+     330.0,
+     24.0
+    ],
+    "density": 0.06,
+    "top": 0.55,
+    "wisp": 7.0,
+    "color": "#FFFFFF",
+    "anisotropy": 0.7
+   }
+  ]
+ }
+}
