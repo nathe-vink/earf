@@ -12,11 +12,23 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    using the same materials we would use for the speakers and mantle": the outer ball in the speaker's TruCast tints, one dye per tint;
    a 3 mm white opal inner ball, the same opal as Hemisphere's diffuser); the lamps lane to confirm the CAD, BOM and stock in writing.
    The lamp kit's Ember dye was a stale hand value until 9 Nov, now the speaker's 2423. Mantle: locked as drawn (Strata Float).
+   REOPENED 10 Nov 00:28 by the owner. Core: the inner opal ball concentric with the outer ("the outer core should be the same depth
+   around the whole inner core like in the original images"). Hemisphere: "it should work like core cut in half": the light through the
+   dome takes the shell's tint and the downward light is the bulb's color, so a source that lights the liner replaces the as-drawn
+   downlight. Tropos: the owner asked whether the horn's posts (bronze in the model) should be black like the lamps' parts; nothing
+   changes until he answers. Every lamp picture waits for the redrawn designs.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
 Scenes (habitats, night pictures) use the locked models and can run alongside; each enters an asset only after it passes.
 
+BUILT FROM THIS LIST (10 Nov):
+- the site preview: r49-site-rc 6291e15b (the RC 6b72d0aa, GO 00:21, plus a build-notes line), Vercel preview deployment
+  dpl_EHt2dLdTfYDSKnH5Nt2TW5f8g6cm (a preview; production untouched); the restore of Ember's turn and three horn-backs follows.
+- the Brand Book v22: artifact WGpswpvvETozjgRAxBuUK3, version 1794270136-2332, built from 069e88f1, 38 files: the seven fronts, the
+  Ice habitat, Mantle by day, the amp plate, social.jpg (made from the fronts and the Ice habitat). Its brand renders (globe_real.py:
+  globe-real, globe-paper, lockup-paper, lockup-night, globe-turn.mp4) and the idents have never had a mask audit: the brand lane
+  audits them (asked 10 Nov 00:38).
 ASSETS OUT OF DATE (checked 9 Nov 22:33), not to be sent until rebuilt from this list:
 - the investor deck (artifact 3sihYaT4ckNTF6WE7SWR7x, v68): lit plinths, the stepped horn, Smoke as an eighth color, glowing
   Hemisphere and Core (light.html, line.html), the uplit eight (cover, colours); rebuilt in step 3.
@@ -49,9 +61,10 @@ lights a real studio could use.
 | Picture | Source (branch @ commit: path) | Gate | Used by |
 |---|---|---|---|
 | Seven fronts ("talls"), tallr6 | rig r33-speaker-horn fa7665dc (the corrected cast; one real floor card out of frame; the speaker turned 6°; bg-left out of frame; 0 px hidden and 0 px equipment by the mask pass on every file): renders/2026-11-04/barkhorn/rollout/A-polished-tallr6/site-front-off-tall-<k>.png: Ember r33-rollout-c4 4fcc28f8, Dust c4 5c837147, Acid c2 7d741bd6, Poison c2 e7ca2e71, Ice c3 48dcfd29, Haze c3 817d2b4f, Fog r33-speaker-horn 4e89a834 | PASSED 10 Nov 00:15-00:20: Dust 3/3, Fog 3/3; Ember, Acid, Ice, Poison, Haze 2/3 (the skeptic: the first three held only on the front-face reflection, settled as the view transform's toe; Poison and Haze on the lower right side face's floor sheen on the dark tints, the two-flag polish (band 41) queued for a later round) | the site (r49-site-rc), the Book v22, social.jpg, the deck-cover proposal |
-| Turning view, Dust, Acid, Poison, Ice, Haze (Ember HELD: its frames 00-04 pulled, see Pulled) | r33-rollout-c3 52ad76ba (Ember 00-04, PULLED); c4 0a0a83bd (Ember 05-23, Dust); c4 42fa8eee (Acid 00-16); c3 66126d53 (Acid 17-23, Haze); c4 eef18db2 (Poison, Ice): renders/2026-11-04/barkhorn/rollout/A-polished-p2*/turn-<k>-NN.png | PASSED (wf_c0448c65-cd3); VERIFIED by mask 9 Nov 23:44 (r33-speaker-horn c7907aca REAUDIT.md: 0 px hidden, 0 px equipment, every group) | site galleries (Ember's turn held whole) |
+| Turning view, Ember, Dust, Acid, Poison, Ice, Haze | r33-rollout-c2 7bb678d6 (Ember 00-04 p2r: no glow lamp, mask 0/0; replaces 52ad76ba's, see Pulled); c4 0a0a83bd (Ember 05-23, Dust); c4 42fa8eee (Acid 00-16); c3 66126d53 (Acid 17-23, Haze); c4 eef18db2 (Poison, Ice): renders/2026-11-04/barkhorn/rollout/A-polished-p2*/turn-<k>-NN.png | PASSED (wf_c0448c65-cd3); VERIFIED by mask 9 Nov 23:44 (r33-speaker-horn c7907aca REAUDIT.md: 0 px hidden, 0 px equipment, every group); Ember 00-04 p2r: the same pictures by both critics, the sequence smooth (wf_33d3f062, 10 Nov 00:31) | site galleries (Ember's turn back with the next site push) |
 | Turning view, Fog, neutral ground | r33-rollout-c3 a688c59e: A-polished-p2-rc2/turn-fog-00..23.png | PASSED 3/3 (9 Nov 21:11; the stage at the rendered 211,212,207); VERIFIED by mask 9 Nov 23:44 (rc2 fog: 0 / 0) | site gallery (FOG_TURN on) |
-| Horn from behind, Acid only | a1322583 (A-polished-p2-backrig-acid), cut 4:5 at x 270-990 | PASSED; VERIFIED by mask 9 Nov 23:44 (its group, backfix/backrig horn-back-acid: 0 / 0) | site galleries (the other six PULLED 23:27, see Pulled) |
+| Horn from behind, Acid, Ember, Poison, Haze | Acid a1322583 (A-polished-p2-backrig-acid); p2r without the glow lamp (16b231a2, mask 0/0): Ember r33-rollout-c4 bebcfdfe, Poison c4 88756c3e, Haze c3 e07a3efb; cut 4:5 at x 270-990 | Acid PASSED, VERIFIED by mask 9 Nov 23:44 (backfix/backrig horn-back-acid: 0 / 0); Ember, Poison, Haze: the same pictures as their passed originals by both critics (wf_33d3f062, 10 Nov 00:31) | site galleries (Ember, Poison, Haze back with the next site push) |
+| Horn from behind, Dust, Ice, Fog (p2r) | Dust c4 4e57271a, Ice c3 d4149891, Fog c3 c5c27dc6 (16b231a2, no glow lamp, mask 0/0) | NOT THE SAME PICTURE (wf_33d3f062, 10 Nov 00:31): Dust 0/2, Fog 0/2, Ice 1/2; without the lamp the cabinet's right edge darkens (Fog dE00 15.3, Dust 8.5, Ice 6.3) and the top bands change; Dust's deep edge shadows got LIGHTER, which removing a light cannot do (the speaker lane checks its settings, 00:37). A full gate as new pictures follows | none |
 | Amp plate, Ember | 488fbec9 (amp-plate-ember) | PASSED; VERIFIED by mask 9 Nov 23:44 (0 / 0) | site galleries ("The built-in amplifier, from behind.") |
 | Backs (rear three-quarter) | r33-speaker-horn e85bd44f (round 3, bright-field glow) | NOT YET: full-size renders and gate pending | none |
 | Wides | r33-speaker-horn 89d95763 (the wide's horn lamp off) | NOT YET: renders and gate pending | none |
@@ -83,6 +96,10 @@ tinted front-surface highlights (the shader may carry the tint; checking), two u
 4-10x short of its label, the studio fill too high for a night comparison, the Core B cores bleached by the view transform, and the
 captions. Walkthrough 133 and 135 wait for the fixed sheets.
 Core B, decided by the owner 9 Nov 21:12 (the dark border he liked comes from B's nested build). Every lamp picture is re-rendered as B.
+10 Nov 00:28, the owner on the lamp pictures: Core's color layer the same depth all round (concentric); Hemisphere works like Core cut
+in half (the dome glows its tint; the light straight down is the bulb's white). That answers walkthrough 135's question in substance;
+the glow sheet, the Core B pair and the lit set are redone after the redesign. The opal is now a real stocked grade: Perspex GS 041
+3 mm opal (T 54 %, R 39 %, A 7 %, ASTM D1003; the model had T 0.44, R 0.47), set in lamp_site.py (lamps lane 07da0ed7, local).
 
 ## Mantle
 | Picture | Source | Gate | Used by |
@@ -91,6 +108,10 @@ Core B, decided by the owner 9 Nov 21:12 (the dark border he liked comes from B'
 Night picture (Ice Tropos under a Hemisphere pendant): proxy 9 seen (c256eb64); the final renders (about 22:50). Its pendant glows
 from the lamp kit's added liner emitter, which the drawing does not have (walkthrough 135), so it cannot pass as it stands; an
 as-drawn variant (the COB alone: a downlight, the shade dark) follows about 23:50. The owner's answer to 135 decides which can ship.
+10 Nov 00:34: the pair HELD (as drawn 1/3, the final 1/3: the room's near-pure-blue fill reads as stylized, not moonlight; the
+final's horn mirrors the glowing dome as an X). Superseded by the owner's Hemisphere direction (00:28): re-rendered with the new
+Hemisphere, an honest moon (full-moon level, slate blue under 2700 K), the walnut at ~10 % albedo (the asset was 2.5 %), no denoiser
+on the lamp (it held the dome 0.8 EV low), and the lamp placed to keep its reflection out of the horn's creases.
 
 ## Pulled (do not use)
 | Picture | Why | Pulled |
