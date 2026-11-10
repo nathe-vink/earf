@@ -612,7 +612,7 @@ def pages(web):
                 os.rmdir(d)
         left = [os.path.relpath(f, web.SITE) for f in glob.glob(os.path.join(web.SITE, '**', '*'), recursive=True)]
         bad = [f for f in left if re.search(r'(^press/|img/(?:(?:dome|orb)-|lamps-(?:orbs|domes)|lamp-(?:orb|dome)|hero[.-]|facade|room|macro-|turn-|spin/'
-                                            r'|tt-|ga-|icon-smoke-|v2/mantle-day|rc/og-mantle|rc/(?:ice|orange)-habitat|rc/(?:orange|blue|ice)-horn-back|lamps-unlit|thumb/lamps-unlit|rc/(?:red|orange|amber|green|blue|violet|ice)-back[.-]|(?:red|orange|amber|green|blue|violet|ice|black)-(?:on|off|studio|back|amp|horn|inside|reel|habitat))|-smoke\.html$)', f)]
+                                            r'|tt-|ga-|icon-smoke-|v2/mantle-day|rc/og-mantle|rc/(?:ice|orange)-habitat|lamps-unlit|thumb/lamps-unlit|rc/(?:red|orange|amber|green|blue|violet|ice)-back[.-]|(?:red|orange|amber|green|blue|violet|ice|black)-(?:on|off|studio|back|amp|horn|inside|reel|habitat))|-smoke\.html$)', f)]
         assert not bad, ('site_v2: rc deploys', bad[:12])
 
 
@@ -823,7 +823,7 @@ def apply(web, head, rest):
 RC_TALL = 'renders/2026-11-04/barkhorn/rollout/A-polished-tallr6/site-front-off-tall-{name}.png'   # the fronts, rig fa7665dc (2026-11-09 23:46): Ember c4 4fcc28f8, Dust c4 5c837147, Acid c2 7d741bd6, Poison c2 e7ca2e71, Ice c3 48dcfd29, Haze c3 817d2b4f, Fog r33-speaker-horn 4e89a834. Before: tallr3 and tallr2 (failed: a light line on the side), then fix1 (r33-rollout-c3:
 # Ember, Dust, Poison, Ice e624e13e; Haze, Fog 3d0b613f; Acid 04d21c5c (on the Acid horn fix). Smoke held.
 RC_KEYS = ['red', 'orange', 'amber', 'green', 'blue', 'violet', 'ice']
-HORN_BACKS = ['amber', 'red', 'green', 'violet']   # restored: Ember, Poison c4 88756c3e and Haze c3 e07a3efb, re-rendered without the lamp (A-polished-p2-p2r), the same pictures as the passed ones (both critics, 2026-11-10 00:35); Dust, Ice, Fog wait for a full check. Before: the re-audit (the coordinator 2026-11-09 23:28): the other six had a camera-hidden lamp in frame
+HORN_BACKS = ['amber', 'red', 'orange', 'green', 'blue', 'violet', 'ice']   # restored: Ember, Poison c4 88756c3e and Haze c3 e07a3efb, re-rendered without the lamp (A-polished-p2-p2r), the same pictures as the passed ones (both critics, 2026-11-10 00:35); Dust c4 4e57271a, Ice c3 d4149891, Fog c3 c5c27dc6 passed 3/3 as new pictures (wf_31b27969, 01:19). Before: the re-audit (the coordinator 2026-11-09 23:28): the other six had a camera-hidden lamp in frame
 
 
 NOT_FOUND = """<!doctype html>
