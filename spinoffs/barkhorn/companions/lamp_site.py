@@ -179,7 +179,7 @@ def build(frame, samples, scale):
             # invented lobe). The ONLY emitters are the 24 LED faces. No thin_shadow, no liner emission, no clamp, no
             # denoiser. The opal one scattering face (its outside, GS 041), a closed solid to the rim: its inside and its
             # edge plain clear acrylic
-            bl = blackbody(3000 if tint in ('blue', 'violet') else 2700)
+            bl = blackbody(int(os.environ.get('LED_K', 0)) or (3000 if tint in ('blue', 'violet') else 2700))   # LED_K: e.g. 2200
             sphere(f'tint-{tint}', 100.0, c, acrylic(f'tint-{tint}', 0.0, tname), cut=0.0, hole=H)
             sphere(f'tint-in-{tint}', 97.0, c, acrylic(f'tint-in-{tint}', 0.0, tname), inward=True, cut=0.0, hole=H)
             sphere(f'clear-{tint}', 96.0, c, acrylic(f'clear-{tint}', 0.0, 'Clear'), cut=4.0, hole=H)
@@ -383,7 +383,8 @@ def build(frame, samples, scale):
             # (2026-11-10, the enclosing sensor: a lamp colour has its LARGEST channel 1, so 2700 K carries luminance 0.52
             # and the lamp gave 52 % of its lumens; the energy now divided by the colour's luminance)
             ld.energy = float(os.environ.get('CORE_LM', CORE_LM)) * WLM / lum(bb) * (0.0 if os.environ.get('LIGHTS_OFF') else 1.0)
-            ld.color = bb
+            ld.color = bb = blackbody(int(os.environ['LED_K'])) if os.environ.get('LED_K') else bb   # LED_K: e.g. 2200 (amber)
+            ld.energy = float(os.environ.get('CORE_LM', CORE_LM)) * WLM / lum(bb) * (0.0 if os.environ.get('LIGHTS_OFF') else 1.0)
             lo = bpy.data.objects.new(f'led-{tint}', ld); bpy.context.scene.collection.objects.link(lo)
             lo.location = (x, y, z0 + 0.0147)          # area lamps face -Z: turn it over to face up
             lo.rotation_euler = (math.pi, 0.0, 0.0)
@@ -565,11 +566,36 @@ def build(frame, samples, scale):
         # caustic of 24 small LEDs; guiding samples it better (no clamp, no denoiser: an unbiased estimator still)
         sc.cycles.use_guiding = os.environ.get('GUIDING', '1') == '1'; sc.cycles.use_surface_guiding = True
     sc.render.filepath = os.environ.get('LAMP_OUT') or os.path.join(OUT, frame + '.png')
-    bpy.ops.render.render(write_still=True)
+    lg = os.environ.get('LIGHTGROUPS')           # a path: the LEDs in their own light group, the rest in 'studio'
+    if lg:
+        vl = sc.view_layers[0]
+        print('LG view layer', vl.name, 'context', bpy.context.view_layer.name, 'scene', sc.name, [s_.name for s_ in bpy.data.scenes])
+        for nm_ in ('lamp', 'studio'):
+            if nm_ not in vl.lightgroups:
+                vl.lightgroups.add(name=nm_)
+        for o in sc.objects:
+            if o.type == 'LIGHT':
+                o.lightgroup = 'lamp' if o.name.startswith('led-') else 'studio'
+            elif o.type == 'MESH':
+                o.lightgroup = 'studio'           # (no emissive meshes; any would be named and counted with the studio)
+        if sc.world:
+            sc.world.lightgroup = 'studio'
+    if lg:
+        # the passes as a 32-bit uncompressed multilayer EXR written by the render itself (scratch, not the repo);
+        # launch/lightcolor.py recolours the lamp's pass. The PNG is then saved from the result
+        out_png = sc.render.filepath; fmt = sc.render.image_settings
+        fmt.media_type = 'MULTI_LAYER_IMAGE'; fmt.file_format = 'OPEN_EXR_MULTILAYER'; fmt.color_depth = '32'; fmt.exr_codec = 'NONE'
+        sc.render.filepath = lg
+        bpy.ops.render.render(write_still=True)
+        fmt.media_type = 'IMAGE'; fmt.file_format = 'PNG'; fmt.color_depth = '8'; fmt.color_mode = 'RGB'
+        sc.render.filepath = out_png
+        bpy.data.images['Render Result'].save_render(out_png, scene=sc)
+    else:
+        bpy.ops.render.render(write_still=True)
     # the scene-linear EXR beside the PNG, so exposure and look can change without a re-render (the coordinator)
     if os.environ.get('EXR', '1') == '1':
         img = bpy.data.images['Render Result']; fmt = sc.render.image_settings
-        fmt.file_format = 'OPEN_EXR'; fmt.color_depth = '16'; fmt.exr_codec = 'DWAA'
+        fmt.media_type = 'IMAGE'; fmt.file_format = 'OPEN_EXR'; fmt.color_depth = '16'; fmt.exr_codec = 'DWAA'
         img.save_render(os.path.splitext(sc.render.filepath)[0] + '.exr', scene=sc)
 
 
