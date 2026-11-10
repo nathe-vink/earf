@@ -41,3 +41,15 @@ The screenshots in this folder are from the first RC and are out of date.
   the touch icon); no night film. The dots are flat chips in the logo's colors.
 - `rc_finish` runs after web.py's favicons and vercel.json: the touch icon, the favicon titled EARF, no journal redirect.
 - Then: Smoke smoked gray; the Ice and Fog habitats back with black rods (r48-biomes 2904138e). 174 files, 8.69 MB.
+
+## The owner's review of the opening and the home (2026-11-10, afternoon)
+
+- 165 files, 8.2 MB. Home: one full-width picture (Ice in the snow at dusk, black rods), the line over its sky, the four
+  products below; no figures (they stay in the Tropos spec) and no row of fronts. `hotspot_hero()` puts a point on it
+  (Tropos in Ice), behind `HOTSPOTS`.
+- The opening: no video and no canvas. `rc_intro` packs 43 of the non-flashing alpha frames (r47-brand 92142eb5, kept in
+  `brand/site/globe-turn-alpha/`: f0078 ... f0119, f0000) into `img/globe-arc.webp` (288 px tiles, 7 x 7, 555 KB). The
+  globe eases into a turn during the hold and lands on f0000; the header shows f0000, still. The site uses no globe film.
+- "Ember to Smoke" reads "the full spectrum" (`SPECTRUM`, applied in `rc_finish`).
+- Pushed 60785c93 with r47-site-next at 2026-11-10 17:38:55 UTC; Vercel took r47-site-next's push for that window.
+  This section is the follow-up push for the next one. Push r49-site-rc on its own.
