@@ -505,7 +505,120 @@ def uplit(wpm):
           f'recessed {DEP * 1000:.0f} mm, {length:.2f} m at {wpm} W/m = {P:.1f} W; its face seen directly at {seen} of {tot} points in frame', flush=True)
 
 
+def lighttable(watts, cct):
+    """PROPOSAL (the coordinator, 2026-11-10 16:50), the LIGHT-TABLE BASE: the base keeps its signed outline and smoke; its
+    top carries a pocket 15 mm in from its edges, 10 mm deep, islands left round the posts (r 22), the bearing (r 30) and
+    the motor (r 32), holding, bottom up: a white reflector (floor and walls), dotless COB strip runs at 12 mm pitch (5 mm
+    wide), 5.2 mm of air, a 2.0 opal diffuser (Perspex 041: T 54 %, R 39 %), and a 2.0 cover of the base's own Smoke 2074,
+    flush with the base's top (a dead front). The plinth as signed plus the satin underside. `watts` over all the runs
+    (both faces of each emitting quad, Cycles' mesh emission), `cct` 2200 or 3000 (the strip's colour)."""
+    import math
+    from mathutils import Vector
+    from bpy_extras.object_utils import world_to_camera_view
+    # the plinth's underside satin (as the uplit proposal)
+    pl = bpy.data.objects['plinth-L1-stack']; M = pl.matrix_world
+    zb = min((M @ v.co).z for v in pl.data.vertices)
+    for p in pl.data.polygons:
+        if (M.to_3x3() @ p.normal).normalized().z < -0.9 and abs((M @ p.center).z - zb) < 0.0005:
+            p.material_index = 1
+    for o in bpy.data.objects:
+        if o.name == 'led-strip':
+            o.hide_render = True                       # the signed loop under the base: replaced by the panel
+    base = bpy.data.objects['base-L1-stack']
+    bx0, bx1, by0, by1, bz1 = 0.045, 0.425, 0.045, 0.335, 0.0287; IN = 0.015; DEP = 0.010
+    px0, px1, py0, py1 = bx0 + IN, bx1 - IN, by0 + IN, by1 - IN; zf = bz1 - DEP
+    islands = [((0.155, 0.085), 0.022), ((0.315, 0.085), 0.022), ((0.155, 0.295), 0.022), ((0.315, 0.295), 0.022),
+               ((0.210, 0.178), 0.030), ((0.074, 0.303), 0.032)]
+    def box(name, x0, x1, y0, y1, z0, z1):
+        bpy.ops.mesh.primitive_cube_add(size=1.0, location=((x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2))
+        b = bpy.context.active_object; b.name = name; b.scale = (x1 - x0, y1 - y0, z1 - z0); bpy.ops.object.transform_apply(scale=True)
+        return b
+    def cyl(name, c, r, z0, z1):
+        bpy.ops.mesh.primitive_cylinder_add(vertices=96, radius=r, depth=z1 - z0, location=(c[0], c[1], (z0 + z1) / 2))
+        o = bpy.context.active_object; o.name = name; return o
+    def boolean(t, c, op):
+        m = t.modifiers.new('b', 'BOOLEAN'); m.operation = op; m.object = c; m.solver = 'EXACT'
+        bpy.context.view_layer.objects.active = t; bpy.ops.object.modifier_apply(modifier=m.name)
+    def pocket_shape(name, z0, z1, grow=0.0):
+        b = box(name, px0 - grow, px1 + grow, py0 - grow, py1 + grow, z0, z1)
+        for c, r in islands:
+            k = cyl('c', c, r - grow, z0 - 0.001, z1 + 0.001); boolean(b, k, 'DIFFERENCE'); bpy.data.objects.remove(k)
+        return b
+    def mat_bsdf(name, build):
+        m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+        o_ = nt.nodes.new('ShaderNodeOutputMaterial'); nt.links.new(build(nt), o_.inputs['Surface']); return m
+    def setmat(o, m):
+        o.data.materials.clear(); o.data.materials.append(m)
+    cut = pocket_shape('cut', zf, bz1 + 0.002); boolean(base, cut, 'DIFFERENCE'); bpy.data.objects.remove(cut)
+    white = mat_bsdf('lt-reflector', lambda nt: (lambda d: (d.inputs['Color'].__setattr__('default_value', (0.92, 0.92, 0.92, 1)), d.outputs[0])[1])(nt.nodes.new('ShaderNodeBsdfDiffuse')))
+    def opal_b(nt):
+        d = nt.nodes.new('ShaderNodeBsdfDiffuse'); d.inputs['Color'].default_value = (0.39, 0.39, 0.39, 1)
+        t = nt.nodes.new('ShaderNodeBsdfTranslucent'); t.inputs['Color'].default_value = (0.54, 0.54, 0.54, 1)
+        a = nt.nodes.new('ShaderNodeAddShader'); nt.links.new(d.outputs[0], a.inputs[0]); nt.links.new(t.outputs[0], a.inputs[1]); return a.outputs[0]
+    opal = mat_bsdf('lt-opal', opal_b)
+    lin = lambda c: c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4
+    sm = [lin(int('787B7E'[i:i + 2], 16) / 255) for i in (0, 2, 4)]; Tc = [x ** (2.0 / 10.0) for x in sm]
+    cover = bpy.data.materials.new('lt-cover'); cover.use_nodes = True; cb = cover.node_tree.nodes['Principled BSDF']
+    cb.inputs['Base Color'].default_value = tuple(t ** 0.5 for t in Tc) + (1,); cb.inputs['Transmission Weight'].default_value = 1.0
+    cb.inputs['IOR'].default_value = 1.49; cb.inputs['Roughness'].default_value = 0.004
+    # the reflector: the pocket's floor and walls, a hair inside the cut
+    fl = pocket_shape('lt-reflector-floor', zf + 0.0001, zf + 0.0004, grow=-0.0002); setmat(fl, white)
+    wl = pocket_shape('lt-reflector-wall', zf + 0.0001, bz1 - 0.0041, grow=-0.0002)
+    inner = pocket_shape('c', zf, bz1, grow=-0.0006); boolean(wl, inner, 'DIFFERENCE'); bpy.data.objects.remove(inner); setmat(wl, white)
+    op = pocket_shape('lt-opal', bz1 - 0.0040, bz1 - 0.0020, grow=-0.0002); setmat(op, opal)
+    cv = pocket_shape('lt-cover', bz1 - 0.0020 + 0.00005, bz1 - 0.00005, grow=-0.0002); setmat(cv, cover)
+    # the strip: dotless COB runs along x at 12 mm pitch on the reflector, cut round the islands (a gap of 3 mm)
+    col = {2200: (1.0, 0.45, 0.15), 3000: (1.0, 0.62, 0.33)}.get(int(cct), (1.0, 0.55, 0.25))
+    led = bpy.data.materials.new('strip'); led.use_nodes = True; lt = led.node_tree; lt.nodes.clear()
+    em = lt.nodes.new('ShaderNodeEmission'); em.inputs['Color'].default_value = col + (1,)
+    lo = lt.nodes.new('ShaderNodeOutputMaterial'); lt.links.new(em.outputs[0], lo.inputs['Surface'])
+    zl = zf + 0.0006; quads = []; y = py0 + 0.006
+    while y < py1 - 0.003:
+        xs = [(px0 + 0.003, px1 - 0.003)]
+        for (c, r) in islands:
+            if abs(y - c[1]) < r + 0.0055:
+                h = math.sqrt(max((r + 0.003) ** 2 - (y - c[1]) ** 2, 0)) + 0.0025
+                nxs = []
+                for a, b in xs:
+                    lo_, hi_ = c[0] - h, c[0] + h
+                    if hi_ <= a or lo_ >= b:
+                        nxs.append((a, b)); continue
+                    if a < lo_: nxs.append((a, lo_))
+                    if hi_ < b: nxs.append((hi_, b))
+                xs = nxs
+        for a, b in xs:
+            if b - a > 0.004:
+                quads.append([(a, y - 0.0025, zl), (b, y - 0.0025, zl), (b, y + 0.0025, zl), (a, y + 0.0025, zl)])
+        y += 0.012
+    me = bpy.data.meshes.new('led-strip-grid')
+    verts = [v for q in quads for v in q]; faces = [(4 * i, 4 * i + 1, 4 * i + 2, 4 * i + 3) for i in range(len(quads))]
+    me.from_pydata(verts, [], faces); me.update()
+    ob = bpy.data.objects.new('led-strip-grid', me); bpy.context.collection.objects.link(ob); ob.data.materials.append(led)
+    A = sum(p.area for p in me.polygons); length = A / 0.005
+    em.inputs['Strength'].default_value = watts / (2 * math.pi * A) if watts > 0 else 0.0
+    sc = bpy.context.scene; sc.cycles.caustics_refractive = True; sc.cycles.caustics_reflective = True
+    # seen? the LED faces and the cover's top, ray-cast from the camera
+    bpy.context.view_layer.update(); dg = bpy.context.evaluated_depsgraph_get(); cam = sc.camera; co = cam.matrix_world.translation
+    def seen_pts(pts):
+        s_ = t_ = 0
+        for pt in pts:
+            f = world_to_camera_view(sc, cam, pt)
+            if not (f.z > 0 and 0 <= f.x <= 1 and 0 <= f.y <= 1):
+                continue
+            t_ += 1; dv = pt - co; dist = dv.length; dv.normalize()
+            ok, loc, *_ = sc.ray_cast(dg, co, dv, distance=dist - 2e-4)
+            s_ += 0 if ok else 1
+        return s_, t_
+    lp = [Vector(((q[0][0] + q[1][0]) / 2 + (q[1][0] - q[0][0]) * k / 10, q[0][1] + 0.0025, zl + 0.0001)) for q in quads for k in range(-4, 5)]
+    cpts = [Vector((x, y_, bz1 + 0.00002)) for x in [px0 + (px1 - px0) * i / 30 for i in range(31)] for y_ in [py0 + (py1 - py0) * j / 20 for j in range(21)]]
+    ls, lt_ = seen_pts(lp); cs, ct = seen_pts(cpts)
+    print(f'v3_day: LIGHT-TABLE base: pocket 15 mm in, 10 deep; {len(quads)} COB runs, {length:.2f} m, {watts:.1f} W, '
+          f'{int(cct)} K; LED faces seen at {ls} of {lt_} points; the panel face (cover top) seen at {cs} of {ct}', flush=True)
+
+
 def prepare():
+    if '--lighttable' in mine:
+        i = mine.index('--lighttable'); lighttable(float(mine[i + 1]), float(mine[i + 2]))
     if '--uplit' in mine:
         uplit(float(mine[mine.index('--uplit') + 1]))
     if '--frosted' in mine:
