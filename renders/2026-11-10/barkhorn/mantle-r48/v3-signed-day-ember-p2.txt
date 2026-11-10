@@ -28,3 +28,20 @@ emits). scene_audit: no mesh hidden from the camera; every lamp out of frame.
 Measured (display, 0-255): the deck's top, middle front, luma 11 (RGB 13/10/10: it mirrors the black card); the top's
 back left, where the strip's light comes through 25.4 mm of Ember, luma 33 (RGB 109/13/4); the satin front edge luma 9
 (RGB 20/5/5); the base's top luma 32. 43 px clipped (the arm's chrome).
+
+Ice (v3-signed-day-ice-p2.png): the same rig, exposure and camera, --colour ice-2069; gt_audit 0 emitting materials,
+every lamp and card out of frame; scene_audit no hidden mesh. The pair, display 0-255:
+ember: top, middle front: luma 11, RGB [13. 10. 10.]
+ember: top, back left: luma 33, RGB [109.  13.   4.]
+ember: satin front edge: luma 9, RGB [20.  5.  5.]
+ember: base top: luma 32, RGB [35. 32. 29.]
+ice: top, middle front: luma 17, RGB [ 9. 17. 28.]
+ice: top, back left: luma 90, RGB [ 28. 102. 164.]
+ice: satin front edge: luma 21, RGB [ 3. 23. 43.]
+ice: base top: luma 34, RGB [34. 33. 43.]
+
+The satin edge (v3-signed-day-edges-2x.png, the front edge at 2x, Ember above, Ice below): at site size the satin outer
+edge reads as a flat, featureless matte band, dark gray with a faint tint, frosted and opaque-looking, in both tints. It
+does not read as damaged, but it does not read as glass either: a satin (bead-blasted or machined) edge scatters, so lit
+from the front it shows its own matte surface, not the tint through it. Lit through from behind it would glow as frosted
+acrylic does. This is the design as signed ('the outer edge satin'), not the light: a polished edge would read as glass.
