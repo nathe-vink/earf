@@ -387,7 +387,7 @@ def _equator_owns(me):
 
 
 def stage(bpy, ground, px, e, samples, env='dim', adaptive=0.01, key=2.0, fill=0.0, shine=(1.0, 1.0), bounces=96,
-          key_at=(-40.0, 40.0)):
+          key_at=(-40.0, 40.0), key_size=(3.2, 2.4)):
     """The camera (earth.py's view, orthographic, the frame 2e radii across), the ground as a backdrop of exactly its
     colour, and the studio seen in the acrylic: a soft key above left, the room round it. `shine` (round 28d): the key's
     and the fill's shares in reflections (lights.lamp_shares). The fill, a broad softbox just beside the camera, was
@@ -414,7 +414,7 @@ def stage(bpy, ground, px, e, samples, env='dim', adaptive=0.01, key=2.0, fill=0
                    'dim': {'kind': 'hdri', 'file': 'studio_small_03_1k', 'strength': 0.25},
                    'grey': {'kind': 'gradient', 'zenith': '#6E6C68', 'horizon': '#8A8884', 'ground': '#3A3835', 'strength': 1.0},
                    'dark': {'kind': 'gradient', 'zenith': '#2A2927', 'horizon': '#33322F', 'ground': '#1E1D1B', 'strength': 1.0}}[env])
-    Lt.area(bpy, 'key', {'type': 'area', 'size_m': [3.2, 2.4], 'target': [0, 0, 0], 'irradiance': key, 'color': '#FFF4E6',
+    Lt.area(bpy, 'key', {'type': 'area', 'size_m': list(key_size), 'target': [0, 0, 0], 'irradiance': key, 'color': '#FFF4E6',
                          'orbit': {'azimuth_deg': key_at[0], 'elevation_deg': key_at[1], 'distance_m': 6.0}, 'specular': shine[0]},
             Vector((0, 0, 0)))
     if fill:                                             # a broad softbox beside the camera: translucent acrylic shows its
@@ -611,6 +611,8 @@ def main():
                     help="the key's and the fill's shares in reflections (round 28d; until then 1 1)")
     ap.add_argument('--key-at', type=float, nargs=2, default=(-40.0, 40.0), metavar=('AZ', 'EL'),
                     help="the key's azimuth and elevation in degrees (-40 40)")
+    ap.add_argument('--key-size', type=float, nargs=2, default=(3.2, 2.4), metavar=('W', 'H'),
+                    help="the key softbox's size in metres (3.2 2.4); bigger, the same light from a softer, dimmer source")
     ap.add_argument('--bounces', type=int, default=96, help='how far light runs along a sheet inside it (glossy and transmission bounces)')
     ap.add_argument('--neon', type=float, nargs=2, metavar=('RIM', 'FACE'),
                     help="fluorescent acrylic for dark grounds (round 28c): the rims and the faces give off light at these "
@@ -664,7 +666,7 @@ def main():
                        dict({'tropos-cabinet': TROPOS_CABINET, 'tropos-horn': TROPOS_HORN, 'tropos-logo': TROPOS_LOGO}[a.hues])))
     if a.still:
         stage(bpy, a.ground, a.px or 1024, 1 + E.W_LINE / 2, a.samples or 128, a.env, a.adaptive or 0.01, a.key, a.fill,
-              tuple(a.shine), a.bounces, tuple(a.key_at))
+              tuple(a.shine), a.bounces, tuple(a.key_at), tuple(a.key_size))
         turn(root, a.spin)
         bpy.context.scene.render.filepath = os.path.abspath(a.still)
         bpy.ops.render.render(write_still=True)
@@ -675,7 +677,7 @@ def main():
         os.makedirs(a.spin_frames, exist_ok=True)
         import mark as K
         stage(bpy, a.ground, a.px or K.SPIN['px'], 1 + 2 * K.SPIN['clear'], a.samples or 24, a.env, a.adaptive or 0.02,
-              a.key, a.fill, tuple(a.shine), a.bounces)
+              a.key, a.fill, tuple(a.shine), a.bounces, tuple(a.key_at), tuple(a.key_size))
         for k in range(a.first, a.last or a.frames):
             t1 = time.time()
             turn(root, K.SPIN['turn'] * k / a.frames)

@@ -186,6 +186,10 @@ LINES = [('Bark', TREE, 'a tree'), ('Cloud', CLOUD, 'a cloud'), ('Crag', STONE, 
 # sheet makes to light through the wall). Was Ember #D2382F, Poison #4F7F3A, Haze #6C4BA3 (Poison and Haze
 # per colors F, 2026-11-01: lighter custom batches, 32.3 % and 25.8 % through 20 mm). Smoke stays #34323A: the method
 # gives #19171F, the ink's own value (#1C1A18), and the acrylic construction (ink outlines over the fills) disappears.
+# 2026-11-10 (the owner approved globe A3, "Globe is good"; the coordinator: "the logo's colors are now the speakers'
+# colors"): the six hued Clouds take the speakers' colours as rendered, each the OKLab midpoint of its horn and its
+# cabinet's richest area in the approved tallr6 fronts (globe_match.TARGET). Were Ember #9B0000, Dust #E5732A, Acid
+# #E9B320, Poison #376621, Ice #4A90C8, Haze #543287. Fog and Smoke unchanged.
 SPEAKERS = [
     ('eucalyptus', 'Bark', '01', 'Eucalyptus', '#9C9A5E'),
     ('autumn', 'Bark', '02', 'Autumn Birch', '#E2A62E'),
@@ -196,12 +200,12 @@ SPEAKERS = [
     # owner chose Ember again, as fitting the line better than a flash of light), Smoke made black
     # ("Smoke was meant to be the black one"; round 10's grey retired), all numbered again in that order; Acid and Haze
     # since round 17, Dust and Ice since round 18
-    ('red', 'Cloud', '01', 'Ember', '#9B0000'),
-    ('orange', 'Cloud', '02', 'Dust', '#E5732A'),
-    ('amber', 'Cloud', '03', 'Acid', '#E9B320'),
-    ('green', 'Cloud', '04', 'Poison', '#376621'),
-    ('blue', 'Cloud', '05', 'Ice', '#4A90C8'),
-    ('violet', 'Cloud', '06', 'Haze', '#543287'),
+    ('red', 'Cloud', '01', 'Ember', '#B50404'),
+    ('orange', 'Cloud', '02', 'Dust', '#D35D17'),
+    ('amber', 'Cloud', '03', 'Acid', '#C5BC1E'),
+    ('green', 'Cloud', '04', 'Poison', '#027614'),
+    ('blue', 'Cloud', '05', 'Ice', '#1169C1'),
+    ('violet', 'Cloud', '06', 'Haze', '#500CB4'),
     ('ice', 'Cloud', '07', 'Fog', '#F6F8F8'),
     ('black', 'Cloud', '08', 'Smoke', '#34323A'),
     ('cobalt', 'Crag', '01', 'Cobalt Marble', '#ECEFF6'),
