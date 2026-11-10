@@ -68,7 +68,7 @@ python3.11 spinoffs/barkhorn/companions/lamp_site.py lamps-domes --samples 256
 
 | Frame | Size | Notes |
 |---|---|---|
-| `orb-<colour>.png` | 1600 x 2000 | Core A lit on its dock, on the paper sweep |
+| `orb-<colour>.png` | 1600 x 2000 | Core B lit on its dock (the concentric Ø140 opal core, 2026-11-10; CORE_DESIGN=A for the record), on the paper sweep |
 | `lamps-orbs.png` | 2400 x 800 | the eight in a row, Ember to Smoke |
 | `dome-<colour>.png` | 1600 x 2000 | Hemisphere lit, its pool on the paper |
 | `lamps-domes.png` | 2400 x 800 | the eight in a row |

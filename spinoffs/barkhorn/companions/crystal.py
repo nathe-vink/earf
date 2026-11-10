@@ -111,11 +111,12 @@ GAP, LT, SKIN = 1.0, 2.5, 3.0          # the liner 1 mm in from the shell, 2.5 t
 
 O = dict(R=80.0, shell=9.0, base=(120.0, 30.0), ring=8.0, rim_r=50.0, port=40.0)    # round 41: 30 again (48 in rounds 35 to 39)
 # Core B, the owner's choice (2026-11-09; launch/core-frost-options.md, round 9): a 6 mm outer ball polished both faces
-# round a Ø120 3 mm white opal core, its centre 12 below the outer's, its Ø40 opening on the grommet's top. The grommet
-# stays as drawn for A's 9 mm wall (its top at z 32.3). O_A is design A (the 9 mm ball frosted inside), the record:
-# orb_parts(O_A) builds it
+# round a 3 mm white opal core. 2026-11-10 (the owner: "the outer core should be the same depth around the whole inner
+# core"): the core Ø140 (R 70 / 67), CONCENTRIC with the outer ball (the drop 0), a 4 mm gap all round, so a 10 mm band
+# of colour (6 mm wall + 4 mm gap); fallback Ø130, a 15 mm band. The grommet raised to suit. O_A is design A (the 9 mm
+# ball frosted inside), the record: orb_parts(O_A) builds it
 O_A = dict(O, design='A')
-O = dict(O, design='B', shell=6.0, core=(60.0, 3.0, 12.0), grommet_wall=9.0)   # core: R outside, wall, drop below
+O = dict(O, design='B', shell=6.0, core=(70.0, 3.0, 0.0), grommet_wall=9.0, flange=52.0)   # core: R outside, wall, drop below
 
 ORB_LIGHT = None                       # set below from the ball's centre
 
@@ -300,7 +301,13 @@ def north_parts(p=N):
     cd, ch = p['cap']
     ri, ro, rz0, rz1 = p['ring']
     pz = p['pin_z']
-    core = cyl('z', (0, 0), od, z0, z1) - cyl('z', (0, 0), bd, z0 - 1, bz) - cyl('z', (0, 0), 28.4, bz, bz + 3)
+    ring_ = p.get('engine') == 'ring'
+    if ring_:
+        # option 3: the hub solid, a Ø16.1 socket 25 deep for the stem from below (bonded and pinned), the wires up it
+        sod, sid = p['stem']
+        core = cyl('z', (0, 0), od, z0, z1) - cyl('z', (0, 0), sod + 0.1, z0 - 1, z0 + 25)
+    else:
+        core = cyl('z', (0, 0), od, z0, z1) - cyl('z', (0, 0), bd, z0 - 1, bz) - cyl('z', (0, 0), 28.4, bz, bz + 3)
     core = core + cyl('z', (0, 0), nd, z1, nz)
     core = core - cyl('z', (0, 0), 10, bz + 3, nz + 1)                                 # the wires
     ring = cyl('z', (0, 0), ro, rz0, rz1) - cyl('z', (0, 0), ri, rz0 - 1, rz1 + 1)
@@ -321,6 +328,23 @@ def north_parts(p=N):
                                   Cone(bd / 2 - 1.1, 9.5, bz - z0 - 1.0, align=al))
     refl = refl & cyl('z', (0, 0), bd - 0.2, z0 + 0.5, bz - 0.5)
     cob = cyl('z', (0, 0), 28, bz, bz + 2)
+    if ring_:
+        # the carrier: black anodised aluminium, Ø56 x 4.5, its underside on the rim plane (z 0), a Ø50.2 pocket 1.6 deep
+        # in its top for the board (1.8 deep: the board 0.2 under the carrier's face), so the LEDs' emitting faces are at
+        # z 4.9 (nothing below the rim)
+        cd_, ct_ = p['carrier']; bd_, bt_ = p['board']
+        carrier = cyl('z', (0, 0), cd_, 0.0, ct_) - cyl('z', (0, 0), bd_ + 0.2, ct_ - bt_ - 0.2, ct_ + 1) - cyl('z', (0, 0), sid, -1, ct_ + 1)
+        board = cyl('z', (0, 0), bd_, ct_ - bt_ - 0.2, ct_ - 0.2) - cyl('z', (0, 0), sod + 0.4, ct_ - bt_ - 1, ct_ + 1)
+        leds = None
+        for k in range(24):
+            a_ = 2 * math.pi * k / 24
+            l_ = box(19 * math.cos(a_) - 1.5, 19 * math.sin(a_) - 1.5, ct_ - 0.2, 19 * math.cos(a_) + 1.5, 19 * math.sin(a_) + 1.5, ct_ + 0.4)
+            leds = l_ if leds is None else leds + l_
+        # the stem: 16/12 aluminium tube, black anodised, from the board's centre up into the hub's socket (the heat path
+        # to the hub; a heat pipe inside it is optional at about 2.5 W of heat)
+        stem = cyl('z', (0, 0), sod, ct_ - bt_ - 0.2, z0 + 24.5) - cyl('z', (0, 0), sid, ct_ - bt_ - 1, z0 + 26)
+        # the crown's inside white: a white Ø80 disc, 1 thick, under the hub (and the collar's flange face painted white)
+        wdisc = cyl('z', (0, 0), p['white_disc'], z0 - 1.0, z0) - cyl('z', (0, 0), sod + 0.4, z0 - 2, z0 + 1)
     crown = cyl('z', (0, 0), sd, sz0, sz1) - cyl('z', (0, 0), nd + 0.2, sz0 - 1, nz) - cyl('z', (0, 0), 10, sz0 - 1, sz1 + 1)
     gland = cyl('z', (0, 0), cd, sz1, sz1 + ch) - cyl('z', (0, 0), 8, sz1 - 1, sz1 + ch + 1)
     z_cord = sz1 + ch
@@ -352,8 +376,24 @@ def north_parts(p=N):
                     'hub (6 of thread in the aluminium, a pre-applied nylon patch, no anaerobic locker); 4.0 of engagement in the '
                     'collar\'s slots']),
         Part('tether', None, Bought('hemi-tether')),
+    ] + ([
+        Part('carrier', carrier, Machined('aluminium', 'lathe'), finish='anodised', group='fixture',
+             notes=['option 3 (2026-11-10): aluminium 6061, black anodised, Ø56 x 4.5, its underside on the rim plane; '
+                    'the board in a Ø50.2 pocket 1.8 deep in its top, so the LEDs\' faces sit 4.9 above the rim plane']),
+        Part('board', board + leds, Bought('hemi-ring-board'), finish='led', group='fixture',
+             notes=['24 mid-power LEDs on a Ø38 circle, facing up, two strings of 12 at about 90 mA: about 1,000 lm '
+                    '[check the datasheet]. Without a lens until a stock side-emitting ring optic with an IES file is '
+                    'named. Heat test needed: the hub about 6 K warmer than today (estimate)']),
+        Part('stem', stem, Machined('aluminium', 'tube'), finish='anodised', group='fixture',
+             notes=['16/12 aluminium tube, black anodised, from the carrier up into the hub\'s socket, bonded and '
+                    'cross-pinned; the wires up its bore; a heat pipe inside it optional (about 2.5 W of heat)']),
+        Part('white-disc', wdisc, Machined('aluminium', 'laser'), finish='white', group='fixture',
+             notes=['a white Ø80 x 1 disc under the hub (white powder coat), and the collar\'s flange face inside painted '
+                    'white: the crown\'s inside white, so the light the shade sends back up returns down']),
+    ] if ring_ else [
         Part('reflector', refl, Bought('north-reflector'), finish='anodised', group='fixture', inside=True),
         Part('cob', cob, Bought('hemi-cob'), finish='led', group='fixture', inside=True),
+    ]) + [
         Part('crown', crown, Machined('aluminium', 'lathe'), finish='anodised', group='fixture',
              notes=['the heat sink (round 41; the fins until then), round 32f\'s low top: 80 across, 11.5 tall over the '
                     'collar, turned from 6061 bar, black anodised (emissivity about 0.85: half its loss is radiation), on '
@@ -369,7 +409,7 @@ def north_parts(p=N):
                     'strap, which carries the load; the driver and the splices are in the steel enclosure']),
         Part('strap', strap, Bought('hemi-canopy-strap'), finish='steel', group='canopy', inside=True),
         Part('enclosure', encl, Bought('hemi-driver-box'), finish='steel', group='canopy', inside=True),
-        Part('driver', driver, Bought('north-driver-575'), finish='steel', group='canopy', inside=True, render=False),   # round 36: 575 lm
+        Part('driver', driver, Bought('north-driver-ring' if ring_ else 'north-driver-575'), finish='steel', group='canopy', inside=True, render=False),   # round 36: 575 lm
         Part('plunger', None, Bought('dome-plunger')),
         Part('listing', None, Bought('moon-listing')),
     ]
@@ -378,7 +418,10 @@ def north_parts(p=N):
 # The owner signed v3 (2026-11-01, r46-owner-notes 5b63e05b: "Hemisphere: color outside"): the main build's shade is
 # a 3 mm stock-tint shell outside, a 6 mm clear structural shell, then the opal. v2 (clear outside, tinted skin) stays
 # as the alternative in dome_pendant_v2.py
-V3 = dict(N, shell=3.0, liner=6.0, skin=3.0, build='v3')
+V3 = dict(N, shell=3.0, liner=6.0, skin=3.0, build='v3',
+          # option 3 (the owner, 2026-11-10: "it should work like core cut in half"): the light at the mouth's centre,
+          # facing up into the shade, on a stem from the hub; the COB, its reflector and holder gone
+          engine='ring', carrier=(56.0, 4.5), board=(50.0, 1.6), stem=(16.0, 12.0), white_disc=80.0)
 
 
 def dome_parts(p=None):
@@ -412,21 +455,25 @@ def orb_parts(p=O):
     frost_r = ball(R - t + 0.3, 0.3, (0, 0, zc)) - port
     core = None
     if B_:
-        # the core: R 60 outside, 3 thick, its centre 12 below the outer's, its own Ø40 opening at its foot over the
-        # window; the grommet's top (A's, z 32.3) stands 0.4 up into the opening (the core's outside meets r 20 at z 31.9)
+        # the core: R 70 outside, 3 thick, concentric (2026-11-10), its own Ø40 opening at its foot over the window; the
+        # core's outside meets r 20 at z 33.4
         rc, tc, dz = p['core']
         zcc = zc - dz
         core = ball(rc, tc, (0, 0, zcc)) - cyl('z', (0, 0), p['port'], zcc - rc - 5, zcc - rc + 25)
     gz0 = zc - math.sqrt(R ** 2 - (p['port'] / 2) ** 2)
     gz1 = zc - math.sqrt((R - p.get('grommet_wall', t)) ** 2 - (p['port'] / 2) ** 2)
+    if B_:
+        # 2026-11-10 (the coordinator's brief, the concentric core): the grommet raised about 1.5 to suit. The core's foot
+        # (where its outside meets its Ø40 opening, zsh = 33.4) rests on a flange, Ø52, turned flat on top and contoured
+        # underneath to R 74, the outer ball's inside: the flange is the axial stop on the outer ball. The tube runs 3
+        # past the core's foot, a spigot inside the core's opening (0.2 clear round it), and the core is bonded on the
+        # spigot's cylinder (about 377 mm2, MMA). The bore is machined bright after anodizing
+        zsh = zcc - math.sqrt(rc ** 2 - (p['port'] / 2) ** 2)
+        gz1 = max(gz1, zsh + 3.0)
+        fl = (cyl('z', (0, 0), p['flange'], gz0, zsh) & (Pos(0, 0, zc) * Sphere(R - t))) - cyl('z', (0, 0), p['port'] - 6, gz0 - 1, zsh + 1)
     grommet = cyl('z', (0, 0), p['port'] - 0.4, gz0, gz1) - cyl('z', (0, 0), p['port'] - 6, gz0 - 1, gz1 + 1)
     if B_:
-        # round 9's spacer, approved 2026-11-09: a shoulder turned on the grommet, Ø46 x 1, its top where the core's
-        # outside meets its Ø40 opening (z 31.9), so the core's foot rests on it; the grommet's top above it stays the
-        # spigot that locates the core (0.2 clear round it). The shoulder's underside clears the outer ball's inside
-        # (0.8 at its edge, r 23)
-        zsh = zcc - math.sqrt(rc ** 2 - (p['port'] / 2) ** 2)
-        grommet = grommet + (cyl('z', (0, 0), p['port'] + 6, zsh - 1.0, zsh) - cyl('z', (0, 0), p['port'] - 6, zsh - 2, zsh + 1))
+        grommet = grommet + fl
     hz = 2.5                                                  # the hatch's counterbore
     # the middle: the chassis (the LED's heat spreader, 50 across) under the board and the LED, the window above
     cz0, cz1 = 10.6, 12.2
@@ -522,13 +569,16 @@ def orb_parts(p=O):
                         'with a polymerising acrylic cement (Acrifix 192 kind), the joint turned and polished; the Ø40 '
                         'port cut at its foot']),
             Part('core', core, Machined('acrylic-opal-core', 'formed', setup_usd=1300.0), finish='liner', group='ball',
-                 notes=['Core B: the core, a Ø120 ball of 3 mm white opal cast acrylic (R 60 outside, R 57 inside), the '
-                        'same opal as Hemisphere\'s diffuser; its centre 12 below the outer ball\'s, its own Ø40 opening '
-                        'at its foot over the window, its foot resting on the grommet\'s shoulder (Ø46, its top at z '
-                        '31.9), the grommet\'s top locating it. About 14 from the outer wall at its '
-                        'equator. Captive once the outer halves are joined round it; the grommet seals the gap for life. '
+                 notes=['Core B: the core, a Ø140 ball of 3 mm white opal cast acrylic, Perspex GS Opal 041 (R 70 outside, '
+                        'R 67 inside), concentric with the outer ball (2026-11-10, the owner: "the same depth around the '
+                        'whole inner core"): a 4 mm gap all round, a 10 mm band of colour. Its own Ø40 opening at its foot '
+                        'over the window, its foot on the grommet\'s flange (its top at z 33.4), bonded on the grommet\'s '
+                        '3 mm spigot (MMA). The former to confirm the 4 mm gap between the balls (±1 mm on both, the two '
+                        'equator seams in one plane); fallback Ø130, a 15 mm band. Captive once the outer halves are '
+                        'joined round it. Assembly: anneal the halves; bond the core on the spigot and cure it with the '
+                        'outer top half off; cement the outer equator dry; drop-test the first sample. '
                         'Formed: two halves on a core mould (about $1,300 [E]), about $25 to $40 a ball [E]. Or stock: '
-                        'a Ø120 x 3 opal acrylic sphere, if one is made [check a supplier], its opening cut to Ø40 '
+                        'a Ø140 x 3 opal acrylic sphere, if one is made [check a supplier], its opening cut to Ø40 '
                         '(the BOM\'s option "stock core")']),
         ]
     else:
@@ -547,9 +597,11 @@ def orb_parts(p=O):
                     'Review 2026-11-01, to draw with the dock: it grows a Ø38 x 6 spigot under the ball with three 30 deg '
                     'L-slots, into a Ø38.4 socket round the window with three Ø3 stainless pins, so the ball stays '
                     'captive in a drop and still swaps with a quarter turn (CORE-RECHARGE.md §6)'] +
-             (['Core B (round 9\'s spacer, approved 2026-11-09): a shoulder Ø46 x 1 turned on it inside the ball, its '
-               'top at z 31.9, carries the core\'s weight at the rim of the core\'s Ø40 opening; the grommet\'s top, '
-               '0.45 above it, locates the core (0.2 clear round it). The grommet goes into the port from inside before '
+             (['Core B (2026-11-10, the concentric core): raised about 1.5 to suit. A flange Ø52 turned on it inside '
+               'the ball, contoured underneath to R 74 to sit on the outer ball\'s inside (the axial stop), flat on top '
+               'at z 33.4 under the core\'s foot; the tube runs 3 past it, a spigot in the core\'s Ø40 opening (0.2 '
+               'clear round it), the core bonded on the spigot\'s cylinder (about 377 mm2, MMA). The bore machined '
+               'bright after anodizing (a reflector up into the core). The grommet goes into the port from inside before '
                'the outer halves are joined'] if B_ else [])),
         Part('base', base, Machined('cast-acrylic', 'lathe', setup_usd=80.0), finish='trim', group='base',
              notes=['black cast acrylic, polished, turned from rod: 120 x 30 (round 32f\'s), the cup turned in it; from '
@@ -639,6 +691,14 @@ ORB_LIGHT = (0.0, 0.0, round(_zc, 1))           # at the centre: 30 below drew a
 ORB_SIZE = dict(ball=2 * _R, height=round(_zc + _R, 1), base=_bd)
 
 NOTES_DOME = [
+    'Option 3 (the owner, 2026-11-10: "it should work like Core cut in half"; the main build): the light sits at the '
+    'mouth\'s centre and faces up into the shade, so the shade glows in its tint and the light cast down is the bulb\'s. '
+    'A Ø50 ring board of 24 mid-power LEDs (two strings of 12 at about 90 mA, about 1,000 lm, about 200 lux under the '
+    'lamp) on a black Ø56 x 4.5 carrier, its underside on the rim plane, the LEDs\' faces about 5 above it; a 16/12 '
+    'black anodised stem up to the hub; the crown\'s inside white (a white Ø80 disc under the hub, the collar\'s flange '
+    'face white); the opal to the rim. The COB, its reflector and holder are gone; the ERP driver, the Class 2 cord, '
+    'the canopy and the UL 1598 path stay. Without a lens until a stock side-emitting ring optic with an IES file is '
+    'named. Heat test needed: the hub about 6 K warmer than today (estimate). The notes below describe the COB build.',
     'Hemisphere (the Dome until round 35; Hemisphere North in rounds 35 to 37): the shade hangs mouth down. Its shades '
     'swap by hand: lift the shade 5 mm, turn it 30 degrees and lower it off. To fit one, line up the three slots, push '
     'up, turn until the plunger clicks, and let go: its weight holds each pin up in its notch, so a knock cannot turn '
@@ -671,8 +731,9 @@ NOTES_ORB = [
     'tall. The ball lifts off: the LED is under a sealed window in the base, so balls swap colour by hand.',
     'Core B, the owner\'s choice (2026-11-09): a ball in a ball. The outer ball is 6 mm tinted cast acrylic, polished '
     'both faces, two halves formed on the existing mould and joined at the equator; the Ø40 port at its foot. Inside it '
-    'the core, a Ø120 ball of 3 mm white opal acrylic (Hemisphere\'s opal), its centre 12 below the outer\'s, its own Ø40 '
-    'opening on the grommet\'s top: the LED lights the opal directly, and the core glows evenly. The core is captive '
+    'the core, a Ø140 ball of 3 mm white opal acrylic (Perspex GS 041, Hemisphere\'s opal), concentric with the outer '
+    'ball (2026-11-10): a 4 mm gap, a 10 mm band of colour all round (fallback Ø130, a 15 mm band). Its own Ø40 '
+    'opening sits on the grommet\'s flange and spigot: the LED lights the opal directly, and the core glows evenly. The core is captive '
     'once the outer halves are joined round it, and the grommet seals the gap for life. Design A (one 9 mm ball frosted '
     'inside) is in git and builds from orb_parts(O_A).',
     'The same materials as the speakers: each tint\'s outer ball is cast in the speaker\'s TruCast code (Ember 2423, Dust '

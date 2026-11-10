@@ -6,14 +6,15 @@ from the camera, from reflections or from view through the acrylic, nothing link
 
 FRAME:
     dome-<colour>   Hemisphere lit, 1600 x 2000 (4:5)          lamps-domes   the eight in a row, 2400 x 800 (3:1)
-    orb-<colour>    Core lit (as drawn: frosted inside), 4:5     lamps-orbs    the eight in a row, 2400 x 800
+    orb-<colour>    Core B lit (the concentric Ø140 opal core, 2026-11-10), 4:5     lamps-orbs    the eight in a row, 2400 x 800
 <colour> is the site's key: red amber? see COLOURS. Output: renders/2026-11-09/barkhorn/lamp-site/FRAME.png.
 Env: LAMP_OUT (output path), STUDIO (scale of every studio light, default 1), AUDIT=1 (the card audit, no render).
 
 The lamps as drawn: Hemisphere v3 (a 3 mm stock tint R 100-97, a 6 mm clear shell R 96-90, the opal liner R 89-86, its
 edge 4 inside the rim, the CAD's rim, collar and hub; the liner the CAD's neutral opal), its Bridgelux Vero SE 10 at
-2700 K; Core A (one 9 mm tinted ball, its inside bead-blasted, the 40 port over the window) on its signed dock, its LED
-at 2700 K (the warm end of its warm-dim range).
+2700 K; Core B (2026-11-10): a 6 mm tinted ball polished both faces round a concentric Ø140 3 mm opal core (GS 041,
+one scattering face), the CAD's raised grommet with its bore bright, the clear window, on its signed dock; lit ONLY by
+its Ø26 LED disc at 200 lm (CORE_DESIGN=A: Core A, the record).
 
 One photometric scale (lamp_pictures.py, round 13): 0.0065 W of Blender power for each lumen.
   Hemisphere: ~575 lm at the COB (crystal.py), 85 % out: ~490 lm down through the mouth (a 0.17 m disc at the mouth,
@@ -165,6 +166,65 @@ def build(frame, samples, scale):
             ld.color = bb; ob = bpy.data.objects.new(f'cob-{tint}', ld); bpy.context.scene.collection.objects.link(ob)
             ob.location = (x, y, rim_z + 0.0815)
             return
+        if os.environ.get('HEMI_ENGINE', 'ring') == 'ring':
+            # OPTION 3 (the owner, 2026-11-10: "it should work like core cut in half ... downward cast light will be the
+            # colour of the bulb"): the CAD's ring board at the mouth's centre facing up, 24 mid-power LEDs, about
+            # 1,000 lm, 2700 K (3000 K for Ice and Haze); BARE (no stock ring optic with an IES file was found: no
+            # invented lobe). The ONLY emitters are the 24 LED faces. No thin_shadow, no liner emission, no clamp, no
+            # denoiser. The opal one scattering face (its outside, GS 041), a closed solid to the rim: its inside and its
+            # edge plain clear acrylic
+            bl = blackbody(3000 if tint in ('blue', 'violet') else 2700)
+            sphere(f'tint-{tint}', 100.0, c, acrylic(f'tint-{tint}', 0.0, tname), cut=0.0, hole=H)
+            sphere(f'tint-in-{tint}', 97.0, c, acrylic(f'tint-in-{tint}', 0.0, tname), inward=True, cut=0.0, hole=H)
+            sphere(f'clear-{tint}', 96.0, c, acrylic(f'clear-{tint}', 0.0, 'Clear'), cut=4.0, hole=H)
+            sphere(f'clear-in-{tint}', 90.0, c, acrylic(f'clear-in-{tint}', 0.0, 'Clear'), inward=True, cut=4.0, hole=H)
+            # the scattering face is the opal's INSIDE (facing the LEDs, so its light is sampled directly; a clear inside
+            # face would block every shadow ray to them and leave only caustic paths); its outside and edge clear
+            clr = acrylic(f'opal-face-{tint}', 0.0, 'Clear')
+            sphere(f'opal-{tint}', 89.0, c, clr, cut=0.0, hole=H)
+            sphere(f'opal-in-{tint}', 86.0, c, opal(f'opal-{tint}'), inward=True, cut=0.0, hole=H)
+            bm = bmesh.new(); n_ = 256
+            ra = [bm.verts.new((0.086 * math.cos(2 * math.pi * k / n_), 0.086 * math.sin(2 * math.pi * k / n_), 0.0)) for k in range(n_)]
+            rb = [bm.verts.new((0.089 * math.cos(2 * math.pi * k / n_), 0.089 * math.sin(2 * math.pi * k / n_), 0.0)) for k in range(n_)]
+            for k in range(n_):
+                bm.faces.new((ra[k], rb[k], rb[(k + 1) % n_], ra[(k + 1) % n_]))
+            for f_ in bm.faces:
+                if f_.normal.z > 0:
+                    f_.normal_flip()
+            me = bpy.data.meshes.new(f'opal-edge-{tint}'); bm.to_mesh(me); bm.free(); me.materials.append(clr)
+            eo = bpy.data.objects.new(f'opal-edge-{tint}', me); bpy.context.scene.collection.objects.link(eo); eo.location = c
+            part('out-dome-pendant', 'rim', acrylic(f'rim-{tint}', 0.6, tname, 0.5), c)
+            for nm in ('clamp', 'crown', 'gland', 'hub'):
+                part('out-dome-pendant', nm, cap, c)
+            white = SC.principled('crown-white', '#EEEEEA', 0.55)
+            # the collar: its flange face inside the shade white (below z 80 in the shade's frame), the rest black
+            cm = bpy.data.materials.new(f'collar-{tint}'); cm.use_nodes = True; nt = cm.node_tree
+            mx = nt.nodes.new('ShaderNodeMixShader'); tc = nt.nodes.new('ShaderNodeTexCoord'); sx = nt.nodes.new('ShaderNodeSeparateXYZ')
+            lt = nt.nodes.new('ShaderNodeMath'); lt.operation = 'LESS_THAN'; lt.inputs[1].default_value = 0.080
+            nt.links.new(tc.outputs['Object'], sx.inputs[0]); nt.links.new(sx.outputs['Z'], lt.inputs[0]); nt.links.new(lt.outputs[0], mx.inputs[0])
+            b1 = nt.nodes.new('ShaderNodeBsdfPrincipled'); b1.inputs['Base Color'].default_value = (0.012, 0.012, 0.013, 1); b1.inputs['Roughness'].default_value = 0.45
+            b2 = nt.nodes.new('ShaderNodeBsdfPrincipled'); b2.inputs['Base Color'].default_value = (0.85, 0.85, 0.82, 1); b2.inputs['Roughness'].default_value = 0.55
+            nt.links.new(b1.outputs[0], mx.inputs[1]); nt.links.new(b2.outputs[0], mx.inputs[2])
+            nt.links.new(mx.outputs[0], nt.nodes['Material Output'].inputs['Surface'])
+            part('out-dome-pendant', 'collar', cm, c)
+            part('out-dome-pendant', 'white-disc', white, c)
+            part('out-dome-pendant', 'ring', SC.principled('peek', '#151515', 0.6), c)
+            part('out-dome-pendant', 'pins', steel, c)
+            part('out-dome-pendant', 'gaskets', SC.principled('silicone', '#111111', 0.7), c)
+            part('out-dome-pendant', 'cord', SC.principled('braid', '#121212', 0.75, bump=(1200.0, 0.5)), c)
+            part('out-dome-pendant', 'carrier', an, c)
+            part('out-dome-pendant', 'stem', an, c)
+            part('out-dome-pendant', 'board', SC.principled('board', '#E6E4DE', 0.5), c)
+            lm = float(os.environ.get('HEMI_LM', '1000')) * (0.0 if os.environ.get('LIGHTS_OFF') else 1.0)
+            for k in range(24):
+                a_ = 2 * math.pi * k / 24
+                ld = bpy.data.lights.new(f'led-{tint}-{k}', 'AREA'); ld.shape = 'SQUARE'; ld.size = 0.0026
+                ld.energy = lm / 24 * WLM; ld.color = bl
+                ob = bpy.data.objects.new(f'led-{tint}-{k}', ld); bpy.context.scene.collection.objects.link(ob)
+                ob.location = (x + 0.019 * math.cos(a_), y + 0.019 * math.sin(a_), rim_z + 0.00492)   # just over the LED's top (4.9)
+                ob.rotation_euler = (math.pi, 0.0, 0.0)                                                 # facing up
+                ob.visible_camera = ob.visible_glossy = ob.visible_diffuse = ob.visible_transmission = True
+            return
         Tt, Tc = shell_T(tname, 1.0, 1.5), shell_T('Clear', 1.0, 3.0)
         sphere(f'tint-{tint}', 100.0, c, thin_shadow(acrylic(f'tint-{tint}', 0.0, tname), Tt), cut=0.0, hole=H)
         sphere(f'tint-in-{tint}', 97.0, c, thin_shadow(acrylic(f'tint-in-{tint}', 0.0, tname), Tt), inward=True, cut=0.0, hole=H)
@@ -249,7 +309,7 @@ def build(frame, samples, scale):
         objs = []
         for nm, m in (('dock', black_acrylic), ('base', black_acrylic), ('ring', an), ('seat', SC.principled('si', '#111111', 0.6)),
                       ('dock-cable', SC.principled('braid', '#121212', 0.75, bump=(1200.0, 0.5)))) + \
-                     ((('grommet', an),) if os.environ.get('CORE_DESIGN', 'B') != 'B' else ()):
+                     (('grommet', an),):   # (B: the CAD's raised grommet, its flange and spigot, 2026-11-10)
             objs.append(part('out-orb-table', nm, m, (x, y, z0)))
         # the window over the LED (the CAD's clear acrylic plug, Ø29.6 x 5.7): clear, its shadow rays at its transmission
         part('out-orb-table', 'window', thin_shadow(acrylic(f'window-{tint}', 0.0, 'Clear'), shell_T('Clear', 1.0, 5.7)), (x, y, z0))
@@ -263,7 +323,7 @@ def build(frame, samples, scale):
             Tb = shell_T(tname, 0.5, 3.0)
             sphere(f'ball-{tint}', 80.0, (x, y, zc), thin_shadow(acrylic(f'ball-{tint}', 0.0, tname, 0.5), Tb), hole_below=20.0)
             sphere(f'ball-in-{tint}', 74.0, (x, y, zc), thin_shadow(acrylic(f'ball-in-{tint}', 0.0, tname, 0.5), Tb), inward=True, hole_below=20.0)
-            ri = float(os.environ.get('CORE_R', '60')); zi = zc - float(os.environ.get('CORE_DZ', '0')) * MM
+            ri = float(os.environ.get('CORE_R', '70')); zi = zc - float(os.environ.get('CORE_DZ', '0')) * MM
             sphere(f'core-{tint}', ri, (x, y, zi), opal(f'core-opal-{tint}'), hole_below=20.0)
             # the grommet, raised (base frame: its foot at z 23.0; the core's opening meets r 20 at zf)
             zf = (zi - z0) / MM - math.sqrt(ri ** 2 - 20.0 ** 2)
@@ -286,9 +346,7 @@ def build(frame, samples, scale):
                     f_.use_smooth = True
                 return ob
             bore = SC.principled(f'bore-{tint}', '#F2F2F0', 0.12, 1.0)      # machined bright after anodizing (the brief)
-            tube(f'grommet-{tint}', 19.8, 17.0, 23.0, zf + 3.0, an)              # the black anodised tube, its spigot 3 up
-            tube(f'grommet-bore-{tint}', 16.99, 16.98, 23.0, zf + 3.0, bore)     # its bore, bright
-            tube(f'grommet-shoulder-{tint}', 23.0, 19.8, zf - 1.0, zf, an)       # the shoulder, Ø46, under the core's foot
+            tube(f'grommet-bore-{tint}', 16.97, 16.95, 23.05, zf + 2.95, bore)   # its bore, bright, a hair inside the CAD's
         else:
             # Core A, the record (CORE_DESIGN=A)
             T9 = shell_T(tname, 1 / 3, 9.0)
@@ -408,6 +466,9 @@ def build(frame, samples, scale):
     vs = sc.view_settings; vs.use_white_balance = True; vs.white_balance_temperature = float(os.environ.get('WB', '3000'))
     vs.white_balance_tint = 0.0
     SC.camera(cam[0], cam[1], lens=cam[2], fstop=8.0)
+    for nm_ in os.environ.get('STUDIO_OFF', '').split(','):   # e.g. the view from straight below: the key, hidden from
+        if nm_ and nm_ in bpy.data.objects:                   # the camera, stands in its frame (hiddencast), so it goes
+            bpy.data.objects.remove(bpy.data.objects[nm_], do_unlink=True)
     if os.environ.get('FLUX'):
         # the flux check: the sweep and studio gone, a 3 x 3 m translucent white sensor 30 mm under the rim, seen from
         # below by an orthographic camera in linear light; flux (W) = mean radiance x pi x area
@@ -448,6 +509,40 @@ def build(frame, samples, scale):
             print('CASTCHECK', frame, {k: round(v * 100, 2) for k, v in mask_check(sc, os.environ['MASK']).items()})
         return
     os.makedirs(OUT, exist_ok=True)
+    if os.environ.get('LUXPROBE'):
+        # the table's lux under the lamp: the studio and the world off, an orthographic camera 0.25 above the paper
+        # looking straight down at a 1 m square of it, linear light; E = pi L / rho (rho the paper's albedo), lux = E / WLM
+        for o in list(sc.objects):
+            if o.name in ('key', 'fill', 'kicker'):
+                bpy.data.objects.remove(o, do_unlink=True)
+        if sc.world:
+            for n_ in sc.world.node_tree.nodes:
+                if n_.type == 'BACKGROUND':
+                    n_.inputs['Strength'].default_value = 0.0
+        cm_ = sc.camera; cm_.location = (0.0, 0.0, 0.25); cm_.rotation_euler = (0.0, 0.0, 0.0)
+        cm_.data.type = 'ORTHO'; cm_.data.ortho_scale = 1.0; cm_.data.dof.use_dof = False
+        sc.render.resolution_x = sc.render.resolution_y = 200; sc.render.resolution_percentage = 100
+        sc.view_settings.view_transform = 'Standard'; sc.view_settings.look = 'None'; sc.view_settings.exposure = 0.0
+        sc.view_settings.use_white_balance = False
+        sc.render.image_settings.file_format = 'OPEN_EXR'; sc.render.filepath = os.environ['LUXPROBE']
+        bpy.ops.render.render(write_still=True)
+        img = bpy.data.images.load(os.environ['LUXPROBE'], check_existing=False); px = img.pixels[:]
+        rho = sum(paper.node_tree.nodes['Principled BSDF'].inputs['Base Color'].default_value[i] * w for i, w in enumerate((0.2126, 0.7152, 0.0722)))
+        def lux(r0, r1):
+            v = []
+            for j in range(200):
+                for i in range(200):
+                    rr = math.hypot((i + 0.5) / 200 - 0.5, (j + 0.5) / 200 - 0.5)
+                    if r0 <= rr < r1:
+                        k = 4 * (j * 200 + i); v.append(0.2126 * px[k] + 0.7152 * px[k + 1] + 0.0722 * px[k + 2])
+            return sum(v) / len(v) * math.pi / rho / WLM
+        print('LUX', frame, 'centre r<0.05', round(lux(0, 0.05)), 'r 0.15-0.2', round(lux(0.15, 0.2)), 'r 0.3-0.35', round(lux(0.3, 0.35)), 'albedo', round(rho, 3))
+        return
+    if kind0 == 'dome' and os.environ.get('HEMI_ENGINE', 'ring') == 'ring':
+        sc.cycles.use_denoising = False   # (option 3: no denoiser on the lamp, the coordinator)
+        # path guiding (Cycles' OpenPGL, CPU): the light that reaches the paper through the shade's clear layers is a
+        # caustic of 24 small LEDs; guiding samples it better (no clamp, no denoiser: an unbiased estimator still)
+        sc.cycles.use_guiding = os.environ.get('GUIDING', '1') == '1'; sc.cycles.use_surface_guiding = True
     sc.render.filepath = os.environ.get('LAMP_OUT') or os.path.join(OUT, frame + '.png')
     bpy.ops.render.render(write_still=True)
     # the scene-linear EXR beside the PNG, so exposure and look can change without a re-render (the coordinator)

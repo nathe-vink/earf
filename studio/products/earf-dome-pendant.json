@@ -53,11 +53,15 @@
    "roughness": 0.04,
    "coat": 1.0,
    "coat_roughness": 0.02
+  },
+  "white": {
+   "preset": "satin_paint",
+   "color": "#888888"
   }
  },
  "assign": [
   {
-   "match": "collar|clamp|hub|pins|reflector|crown|gland|suspension",
+   "match": "collar|clamp|hub|pins|carrier|stem|crown|gland|suspension",
    "material": "anodised"
   },
   {
@@ -69,7 +73,7 @@
    "material": "cord"
   },
   {
-   "match": "cob",
+   "match": "board",
    "material": "led"
   },
   {
@@ -87,6 +91,10 @@
   {
    "match": "ring|canopy",
    "material": "trim"
+  },
+  {
+   "match": "white-disc",
+   "material": "white"
   }
  ],
  "flavours": {

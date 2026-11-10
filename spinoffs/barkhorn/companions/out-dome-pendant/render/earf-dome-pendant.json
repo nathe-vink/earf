@@ -80,21 +80,37 @@
    24.2,
    95.0
   ],
-  "reflector": [
-   -22.4,
-   -22.4,
-   60.5,
-   22.4,
-   22.4,
-   81.5
+  "carrier": [
+   -28.0,
+   -28.0,
+   0.0,
+   28.0,
+   28.0,
+   4.5
   ],
-  "cob": [
-   -14.0,
-   -14.0,
-   82.0,
-   14.0,
-   14.0,
-   84.0
+  "board": [
+   -25.0,
+   -25.0,
+   2.7,
+   25.0,
+   25.0,
+   4.9
+  ],
+  "stem": [
+   -8.0,
+   -8.0,
+   2.7,
+   8.0,
+   8.0,
+   84.5
+  ],
+  "white-disc": [
+   -40.0,
+   -40.0,
+   59.0,
+   40.0,
+   40.0,
+   60.0
   ],
   "crown": [
    -40.0,
@@ -164,8 +180,10 @@
   "hub": "anodised",
   "ring": "trim",
   "pins": "anodised",
-  "reflector": "anodised",
-  "cob": "led",
+  "carrier": "anodised",
+  "board": "led",
+  "stem": "anodised",
+  "white-disc": "white",
   "crown": "anodised",
   "gland": "anodised",
   "cord": "cord",
