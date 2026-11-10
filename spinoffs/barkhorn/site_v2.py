@@ -612,7 +612,7 @@ def pages(web):
                 os.rmdir(d)
         left = [os.path.relpath(f, web.SITE) for f in glob.glob(os.path.join(web.SITE, '**', '*'), recursive=True)]
         bad = [f for f in left if re.search(r'(^press/|img/(?:(?:dome|orb)-|lamps-(?:orbs|domes)|lamp-(?:orb|dome)|hero[.-]|facade|room|macro-|turn-|spin/'
-                                            r'|tt-|ga-|globe-turn-night|coins-|v2/mantle-day|rc/og-mantle|rc/[a-z]+-habitat|lamps-unlit|thumb/lamps-unlit|rc/(?:red|orange|amber|green|blue|violet|ice)-back[.-]|(?:red|orange|amber|green|blue|violet|ice|black)-(?:on|off|studio|back|amp|horn|inside|reel|habitat)))', f)]
+                                            r'|tt-|ga-|globe-turn-night|coins-|v2/mantle-day|rc/og-mantle|rc/(?:red|orange|amber|green|violet|black)-habitat|lamps-unlit|thumb/lamps-unlit|rc/(?:red|orange|amber|green|blue|violet|ice)-back[.-]|(?:red|orange|amber|green|blue|violet|ice|black)-(?:on|off|studio|back|amp|horn|inside|reel|habitat)))', f)]
         assert not bad, ('site_v2: rc deploys', bad[:12])
 
 
@@ -1227,7 +1227,8 @@ def rc_waves(p, web):
     lines = {k: line for k, num, name, icon, acr, line, *_ in web.CLOUDS}
     ON_HOLD = 'Hemisphere and Core, switched off. Shown in Smoke, a color on hold.'
     # --- the passed habitats (biomes: Ice 0f619953, Dust 26493989), 4:5
-    HAB = {}   # out until the black-rods re-renders land (the Ice and Fog pictures show brass rods; the coordinator 2026-11-10)
+    HAB = {'blue': 'renders/2026-11-03/barkhorn/habitats/ice-portrait-1200x1500-blackrods.jpg',     # the black-rods re-renders
+           'ice': 'renders/2026-11-03/barkhorn/habitats/fog_b-portrait-1200x1500-r2-blackrods.jpg'}   # (r48-biomes 2904138e)
     # out (the audits, 2026-11-09/10): Dust 26493989 (a hidden panel), then 43c91242 (it hovers: a lit strip under its
     # front edge); Fog b61474c0 (two suns), then aa1ca856 (a hidden fill lamp)
     HAB_ALT = {'blue': 'Tropos in Ice, out in the snow at dusk', 'orange': 'Tropos in Dust, on rippled sand among desert buttes',
