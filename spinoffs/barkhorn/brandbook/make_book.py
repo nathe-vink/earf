@@ -25,7 +25,7 @@ PINNED = {**{f'tropos-front-{t}.jpg': (RODS, f'{ROLL}/A-polished-tallr7/site-fro
           'tropos-fog-habitat.jpg': (BIOMES, 'renders/2026-11-03/barkhorn/habitats/fog_b-portrait-1200x1500-r2-blackrods.jpg'),
           'tropos-amp-ember.jpg': ('488fbec9ed6764c60893e0a2798a6feba9ad296f', f'{ROLL}/A-polished-p2-backfix/amp-plate-ember.png')}
 CROP = {'tropos-amp-ember.jpg': (0.40, 0.0, 1.0, 1.0)}      # left, top, right, bottom, of the frame
-BRAND = {'globe-render.jpg': 'brand/mark/earf-globe-render.png', 'lockup-render.jpg': 'brand/mark/earf-lockup-render.png',
+BRAND = {'globe-render.jpg': 'brand/mark/earf-globe-render.png', 'globe-render-night.jpg': 'brand/mark/earf-globe-render-night.png', 'lockup-render.jpg': 'brand/mark/earf-lockup-render.png',
          'lockup-render-night.jpg': 'brand/mark/earf-lockup-render-night.png',
          'globe-flat.png': 'brand/mark/earf-globe-tiles.png', 'globe-flat-night.png': 'brand/mark/earf-globe-tiles-night.png',
          'lockup-flat.png': 'brand/mark/earf-lockup-tiles.png', 'lockup-black.png': 'brand/mark/earf-lockup-black.png'}
