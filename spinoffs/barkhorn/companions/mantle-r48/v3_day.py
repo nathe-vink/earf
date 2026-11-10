@@ -58,9 +58,24 @@ def cards():
         print('v3_day: the top scrim lamp off', flush=True)
 
 
+def black_posts():
+    # the owner, 2026-11-10: the posts black, the lamps' satin black (companions/common.py: #18181A, roughness 0.5,
+    # specular 0.3); in the parts list: 303 stainless, hot black oxide for stainless, satin, oiled
+    m = bpy.data.materials.new('post-satin-black'); m.use_nodes = True; b = m.node_tree.nodes['Principled BSDF']
+    c = [int('18181A'[i:i + 2], 16) / 255 for i in (0, 2, 4)]
+    b.inputs['Base Color'].default_value = tuple(x / 12.92 if x <= 0.04045 else ((x + 0.055) / 1.055) ** 2.4 for x in c) + (1,)
+    b.inputs['Roughness'].default_value = 0.5; b.inputs['Specular IOR Level'].default_value = 0.3
+    for o in bpy.data.objects:
+        if o.name.startswith('post-') and o.type == 'MESH':
+            o.data.materials.clear(); o.data.materials.append(m)
+            print('v3_day: satin black', o.name, flush=True)
+
+
 def prepare():
     if '--cards' in mine:
         cards()
+    if '--black-posts' in mine:
+        black_posts()
     for o in bpy.data.objects:
         if o.name.startswith('flag-'):
             o.visible_camera = True

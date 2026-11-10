@@ -1,0 +1,17 @@
+Mantle by day, final (the owner's decisions, 2026-11-10): Strata Float v3 as signed (render model from 71d3163e), stock
+Ember 2423, the light off. 1800 x 1200, 80 samples.
+  python3.11 spinoffs/barkhorn/companions/mantle-r48/v3_day.py OUT.png --cards --black-posts -- dusk --model /home/user/night-work/v3signed/spinoffs/barkhorn/companions/mantle-r48/out-strata-v3 --colour ember-2423 --tint-mode custom --day --strip 0 --core-glow 0 --exposure -2.0 --edge-frost 0.35 --base-tint smoke-2074 --scale 0.75 --samples 80 --paper #7A7570 --pan 0.05 --wear 0 --no-top-bevel
+- Edge: satin on the four outer edge faces only (the plinth's slot 1, roughness 0.35). Top and bottom faces glassy
+  (roughness 0.004; --wear 0 removes the scratch and dust layer that frosted the earlier top; --no-top-bevel). The
+  platter's rim reads as a dark mirrored band on the deck under it; the white ring's own reflection is faint at this
+  grazing angle.
+- Posts: satin black, the lamps' #18181A (roughness 0.5, specular 0.3). Parts: solid 303 stainless kept for the load and
+  the bond, hot black oxide for stainless, satin, oiled (mantle_strata_v3.py's post notes, README section 11). The
+  generated bom.csv carries no part notes, so the finish is not in its line.
+- Lights (all real, out of frame, 0 px): key 1.2 x 0.9 m 140 W; strip 1.6 x 0.18 m 90 W; side 0.9 x 0.10 m 160 W; fill
+  1.0 x 0.6 m 12 W; bg 3.0 x 1.0 m 90 W; spot 12 W; the top scrim lamp off. Cards: card-black-top behind the camera;
+  flag-r and flag-top, camera-visible, out of frame. Emitter check: 0 emitting materials. scene_audit: no mesh hidden
+  from the camera, nothing in frame.
+- The dark glyph is the signed design's mark, a polished recess filled dark ('etch-tone', #101012), on the deck's front
+  edge. The bright speck behind the platter's left is the motor pulley, aluminium, above the deck. Both are real parts;
+  neither was removed.

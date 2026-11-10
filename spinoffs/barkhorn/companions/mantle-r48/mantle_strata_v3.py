@@ -241,10 +241,10 @@ def parts(P):
                            'its lead leaves the groove at the back right and drops 4 to the rear plate under the deck\'s overhang, to the 24 V inlet through the SPST; the light\'s circuit is isolated from signal ground',
                            f'heat: about {4 * loop_m:.1f} W over {loop_m:.2f} m in acrylic, about 10-15 K over the room at the channel (an estimate; acrylic is good to about 80 C): a thermocouple on the first sample after an hour on']))
 
-    # ---- the posts: solid 303 stainless, polished; bonded into a 2 mm seat under the deck, a tapped M8 x 16 hole from below ----
+    # ---- the posts: solid 303 stainless, satin black (hot black oxide, the owner 2026-11-10); bonded into a 2 mm seat under the deck, a tapped M8 x 16 hole from below ----
     for i, p in enumerate(posts):
         out.append(Part(f'post-{i + 1}', cyl('z', p, P['post_d'], b1, z0 + 2.0) - cyl('z', p, 6.8, b1 - 1, b1 + 16), Machined('stainless', 'lathe', stock=(35.0, 35.0, 46.0)),
-                        finish='steel', group='float', notes=['solid 303 stainless 30 x 42, turned, ends faced, polished to a mirror; tapped M8 x 16 from below; bonded 2 mm up into a seat under the deck with a structural methacrylate (Plexus MA310 kind, which bonds acrylic to stainless); the foot\'s stud holds it to the base from below: nothing shows'] if i == 0 else []))
+                        finish='steel', group='float', notes=['solid 303 stainless 30 x 42, turned, ends faced; finished satin black (the owner, 2026-11-10: black posts, the lamps\' satin black #18181A): hot black oxide for stainless, satin, oiled (stainless kept for the load and the bond; black oxide over black chrome for its satin, not mirror, finish); tapped M8 x 16 from below; bonded 2 mm up into a seat under the deck with a structural methacrylate (Plexus MA310 kind, which bonds acrylic to stainless); the foot\'s stud holds it to the base from below: nothing shows'] if i == 0 else []))
 
     # ---- the bearing, platter, hub, spindle (as Outcrop) ----
     hz0 = z0 - 20.0
