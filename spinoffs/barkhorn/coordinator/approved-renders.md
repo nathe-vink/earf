@@ -70,6 +70,18 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    Hemisphere 138-152 lx at 0.5 m against my ~200 estimate; the lamps lane is measuring the flux budget before any re-render.
    THE FLAT MARK: the owner: the discs "lose their coin shape" (pointed tips, tapering rims); the brand lane redraws every flat
    variant as true coins (constant rim, flat ends). The rendered mark set (r47-brand 038f84e1) stands.
+   10 Nov 05:00-08:20: THE FLAT COINS redrawn (r47-brand c19abdba), sent to the owner. THE BLACK-RODS SET LANDED (r33-speaker-horn
+   370de3da: 8 fronts tallr7, 8 horn-backs and 8 x 24 turn frames p2b, Smoke in its gray 50 %; masks 0/0 on all 208; no brass),
+   checked by the coordinator (fronts, backs, four Smoke turn frames) and sent to the owner; it REPLACES the tallr6 and p2r sets on
+   every surface. THE BOOK REBUILT ONCE: v26 (1794298040-04e8) at artifact WGpswpvvETozjgRAxBuUK3, r47-brand ac7837af; the private
+   archive at artifact 4PJY2VA5MFThxbcWbnGusX v1; checked (text scan and one full-page look); no habitats, no Mantle or lamp pictures,
+   no contact line yet. THE SITE BATCH (r49-site-rc) and the black-rods re-renders of the Ice and Fog habitats (r48-biomes) are
+   running. LAMPS r2 (r32-lamps-final f845e797): the rigs' lamp colours had cut every LED to 52-57 % of its lumens (fixed; every
+   older lamp picture carries it); Hemisphere at 1,000 lm gives 229 lm out and 266 lx at 0.5 m; CORE GIVES ONLY 13 lm (Ice) and
+   6.3 lm (Ember): the black well passes 76 of 200 lm and the 6 mm ball a quarter or a tenth; the owner to decide its brightness,
+   the angled base (drawn as a variant; fits) and Hemisphere's go. MANTLE: every tint reads near-black by day (r48-mantle-design
+   268c3d79, e8679ff3); three versions shown: signed, backlit top (c59c6d79), white base (c839eea6, the coordinator's pick); the
+   owner to choose.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
