@@ -228,6 +228,7 @@ def main():
     ap.add_argument('--scrim', type=float, nargs=4, help='a silk on the sun line: T W H D (tests)')
     ap.add_argument('--meniscus', type=float)
     ap.add_argument('--horn-as-cabinet', action='store_true', help="the horn's absorption per mm = the cabinet's")
+    ap.add_argument('--asset', help='the speaker asset .blend, in place of assets/hornA3 (e.g. a rebuilt one)')
     ap.add_argument('--garden', action='store_true', help='Poison garden: fly agaric, foxglove, nightshade (GARDEN)')
     ap.add_argument('--berm', type=float, nargs=5, action='append', default=[], help='sand banked against the base: LX LY RX RY H')
     ap.add_argument('--reflector', type=float, nargs=8, action='append', default=[], help='a white board: W H AZ EL DIST TX TY TZ')
@@ -281,6 +282,7 @@ def main():
             + (['--crop', *map(str, a.crop)] if a.crop else []) \
             + (['--opaque-shadows'] if a.opaque_shadows else []) \
             + (['--horn-as-cabinet'] if a.horn_as_cabinet else []) \
+            + (['--asset', a.asset] if a.asset else []) \
             + [x for r in (a.reflector or REFLECT.get(n, [])) for x in ('--reflector', *map(str, r))] \
             + [x for b in (a.berm or BERM.get(n, [])) for x in ('--berm', *map(str, b))] \
             + (['--meniscus', str(a.meniscus or MENISCUS[n])] if (a.meniscus or n in MENISCUS) else []) \
