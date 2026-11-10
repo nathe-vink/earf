@@ -182,6 +182,25 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    to outward facing across the spectrum". Speaker lane briefed 16:25 for ONE more test: bands about 1.0 m, speakers about
    35-38 % of the frame height with more wall and floor, the row fanned (-35 to +35 degrees, ends turned outward, middle
    straight on), Haze's pale cabinet and Smoke's glare fixed by cutting the front fill.
+   Room test 3 (r33-speaker-horn a4646577, hero-room2.png) shown 16:45: the layout is better, the fronts too dark with the
+   fill cut (Smoke near black); the final needs a soft fill high behind the camera. AWAITING the owner's call on the layout.
+   OPENING REBUILT: brand lane's transparent turn (r47-brand 92142eb5, brand/site/globe-turn-alpha, 120 RGBA frames, 1.5
+   degrees a frame, f0000 = the mark's pose; coordinator checked all frames: no flash, clean edges). Site preview
+   dpl_A6Z8z8RocMe27W8HSJudUpZnSrMa (r49-site-rc 26d93314; code r47-site-next 0ad9565d): a WebP sprite of 43 frames, no
+   video, no canvas; checked frame by frame at 1440 and 390 by the coordinator; link sent 18:06. The lane had removed the
+   header globe's turn without being asked.
+   BOOK v27 PUBLISHED 17:23 (1794331392-54cd, r47-brand 6c3a59be): the owner's v26 list done; checked by the coordinator
+   from the repo copy and the published file list; link sent 17:45. Out: the bar's room picture (old speaker and lamps).
+   MANTLE light tests shown 16:50 and 17:50: one hidden strip lights a band only; a light-table base (r48-mantle-design
+   0d349c63) lights Ice's top evenly but not Ember's, the panel shows through the gap, +$85-135 a unit.
+   OWNER DECISIONS 10 Nov ~23:35 (in chat): "Forget the lights on mantle. Why isn't the globe spinning on the site header
+   anymore? The flat version of the logo can use one shade for each color. What else?"
+   -> MANTLE HAS NO LIGHT. Signed smoked base, black posts, the signed plinth; the coordinator's default adds the satin
+      underside (he can say no; the signed day set 268c3d79/e8679ff3 covers that case); bearing black in every tint (default).
+      Mantle lane briefed 23:40 for the final eight-tint day set and the BOM without the light.
+   -> HEADER GLOBE TURNS AGAIN: site lane told 23:40 to restore it from the alpha frames and push once; the reveal circle
+      stays (the fade is built behind a switch, off).
+   -> FLAT MARK: one flat shade per color (the six logo colors); brand lane briefed 23:40; the Book republishes as v28.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
