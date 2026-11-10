@@ -42,6 +42,10 @@ COLOURS = {'red': 'Ember', 'orange': 'Dust', 'amber': 'Acid', 'green': 'Poison',
 ROW = ['red', 'orange', 'amber', 'green', 'blue', 'violet', 'ice', 'black']        # spectrum order, Ember to Smoke
 
 
+def lum(c):
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]
+
+
 def blackbody(T):
     sys.path.insert(0, HERE)
     import lamp_pictures as LP
@@ -76,6 +80,8 @@ def build(frame, samples, scale):
         return tuple(math.exp(-a * mm / 1000.0) * 0.96 for a in SC.absorption(tint, loading))
 
     def thin_shadow(m, T, T_back=None):
+        if os.environ.get('THIN', '1') == '0':        # (THIN=0: plain glass, the light only by refraction, unbiased)
+            return m
         # round 3 (2026-11-09): T_back, if given, is what a shadow ray meets leaving the shell from inside (Backfacing):
         # Core A's ball passes a studio light's or the sun's light to its frost only through the dye (T9), and the frost
         # face's own light out at 0.96 (its emission already carries T9). At 0.96 both ways, A returned undyed light
@@ -219,7 +225,7 @@ def build(frame, samples, scale):
             for k in range(24):
                 a_ = 2 * math.pi * k / 24
                 ld = bpy.data.lights.new(f'led-{tint}-{k}', 'AREA'); ld.shape = 'SQUARE'; ld.size = 0.0026
-                ld.energy = lm / 24 * WLM; ld.color = bl
+                ld.energy = lm / 24 * WLM / lum(bl); ld.color = bl   # (its lumens at the colour's luminance)
                 ob = bpy.data.objects.new(f'led-{tint}-{k}', ld); bpy.context.scene.collection.objects.link(ob)
                 ob.location = (x + 0.019 * math.cos(a_), y + 0.019 * math.sin(a_), rim_z + 0.00492)   # just over the LED's top (4.9)
                 ob.rotation_euler = (math.pi, 0.0, 0.0)                                                 # facing up
@@ -312,7 +318,17 @@ def build(frame, samples, scale):
                      (('grommet', an),):   # (B: the CAD's raised grommet, its flange and spigot, 2026-11-10)
             objs.append(part('out-orb-table', nm, m, (x, y, z0)))
         # the window over the LED (the CAD's clear acrylic plug, Ø29.6 x 5.7): clear, its shadow rays at its transmission
-        part('out-orb-table', 'window', thin_shadow(acrylic(f'window-{tint}', 0.0, 'Clear'), shell_T('Clear', 1.0, 5.7)), (x, y, z0))
+        # WINDOW: filter (default: a clear filter at its transmission for every ray, no refraction: the enclosing
+        # sensor showed thin_shadow on this solid plug counting the LED's light twice, once by the shadow ray and once
+        # by the refracted caustic, 27 lm against 15.5 with no window), thin, glass (plain: caustics only), none
+        wmode = os.environ.get('WINDOW', 'filter')
+        if wmode != 'none':
+            wm_ = acrylic(f'window-{tint}', 0.0, 'Clear')
+            if wmode == 'filter':
+                wm_ = bpy.data.materials.new(f'window-{tint}'); wm_.use_nodes = True; nt_ = wm_.node_tree; nt_.nodes.clear()
+                tb = nt_.nodes.new('ShaderNodeBsdfTransparent'); tb.inputs['Color'].default_value = (*shell_T('Clear', 1.0, 5.7), 1)
+                nt_.links.new(tb.outputs[0], nt_.nodes.new('ShaderNodeOutputMaterial').inputs['Surface'])
+            part('out-orb-table', 'window', thin_shadow(wm_, shell_T('Clear', 1.0, 5.7)) if wmode == 'thin' else wm_, (x, y, z0))
         zc = z0 + 100.45 * MM
         if os.environ.get('CORE_DESIGN', 'B') == 'B':
             # Core B, CONCENTRIC (the owner, 2026-11-10 00:28: "the outer core should be the same depth around the whole
@@ -364,7 +380,9 @@ def build(frame, samples, scale):
             # the ONLY emitter (the coordinator, 02:24): the Ø26 LED disc at its face, 200 lm on the one scale (1.306 W),
             # facing up, visible to every ray type; no emission on the opal
             ld = bpy.data.lights.new(f'led-{tint}', 'AREA'); ld.shape = 'DISK'; ld.size = 0.026
-            ld.energy = float(os.environ.get('CORE_LM', CORE_LM)) * WLM * (0.0 if os.environ.get('LIGHTS_OFF') else 1.0)
+            # (2026-11-10, the enclosing sensor: a lamp colour has its LARGEST channel 1, so 2700 K carries luminance 0.52
+            # and the lamp gave 52 % of its lumens; the energy now divided by the colour's luminance)
+            ld.energy = float(os.environ.get('CORE_LM', CORE_LM)) * WLM / lum(bb) * (0.0 if os.environ.get('LIGHTS_OFF') else 1.0)
             ld.color = bb
             lo = bpy.data.objects.new(f'led-{tint}', ld); bpy.context.scene.collection.objects.link(lo)
             lo.location = (x, y, z0 + 0.0147)          # area lamps face -Z: turn it over to face up
@@ -463,6 +481,9 @@ def build(frame, samples, scale):
     # round 3 (the coordinator's photometry check): the bore's reflector sends light to the floor by reflection, a
     # reflective caustic; render_settings turns those off, which threw the reflector's share away
     sc.cycles.caustics_reflective = os.environ.get('REFL_CAUSTICS', '1') == '1'
+    # 2026-11-10 (the coordinator: at least 32 of each): render_settings gives 4 diffuse and 8 glossy bounces, short for
+    # the opal cavities (the enclosing sensor: Hemisphere 218 lm out at those, 229 at 64)
+    sc.cycles.max_bounces = 64; sc.cycles.diffuse_bounces = sc.cycles.glossy_bounces = sc.cycles.transmission_bounces = 32
     vs = sc.view_settings; vs.use_white_balance = True; vs.white_balance_temperature = float(os.environ.get('WB', '3000'))
     vs.white_balance_tint = 0.0
     SC.camera(cam[0], cam[1], lens=cam[2], fstop=8.0)
