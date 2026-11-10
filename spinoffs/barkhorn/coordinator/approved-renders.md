@@ -117,6 +117,10 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    the coordinator's proposed split for the rest (to confirm): Dust and Acid amber; Poison, Haze, Fog and Smoke warm. The lamps lane
    gets this with his three open lamp answers (Core's brightness, Core's base, Hemisphere's go), in one brief.
    THE HERO: proxy 1 (r48-biomes d775fdbb) not good enough (a lineup, flat cloud, faint colour on the rock); proxy 2 briefed.
+   CORE'S BASE, the owner 10 Nov ~15:15: "I like the angled base for core". So the angled base is the design: one cone, 67.7 deg
+   from the table, r 60 under the touch ring to r 75 at the dock's foot, the dock carrying the same slope with a hairline joint
+   (lamps lane f845e797, CORE_ANGLED=1 becomes the default at the next CAD/BOM change). Still open for the lamps: Core's
+   brightness and Hemisphere's go.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
