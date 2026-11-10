@@ -106,6 +106,17 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    every rule. Book v27 briefed to the brand lane: the dark globe and the turn as before, the flat mark as coloured tiles, "Wry, but
    reserved.", "Eight colors, the full spectrum.", half the text, nine social posts, the marketing mockups back, a chapter for the
    bar and EARFcoin, the two black-rods habitats.
+   10 Nov ~15:00-15:10, the owner. MANTLE: "Why is the base of mantle white now? For each one should the base just be the same
+   acrylic color as the top? Im also not seeing light pass upward. The top layer should glow as light disperses through it. Maybe we
+   scrap the light idea and let natural light do the work or let people put their own lights there. I think it makes for a really
+   attractive product if done right though. See similar products like brian eno's record player, there's a marantz one, etc." The
+   white base was the coordinator's proposal, not a decision. Clear tinted acrylic cannot glow from within; the Mantle lane renders a
+   "frosted" proposal (plinth and base in one frosted tint; by day unlit, and lit from inside), Ember and Ice.
+   LAMP LIGHT PER TINT: "For the lights, I think some need warm and some need amber. Ice loses its blue with amber, but from below
+   I like ember with amber." So the LED colour is set per tint, not offered twice on every tint: Ember amber and Ice warm are his;
+   the coordinator's proposed split for the rest (to confirm): Dust and Acid amber; Poison, Haze, Fog and Smoke warm. The lamps lane
+   gets this with his three open lamp answers (Core's brightness, Core's base, Hemisphere's go), in one brief.
+   THE HERO: proxy 1 (r48-biomes d775fdbb) not good enough (a lineup, flat cloud, faint colour on the rock); proxy 2 briefed.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
