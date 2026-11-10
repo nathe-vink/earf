@@ -26,7 +26,7 @@ BUILT FROM THIS LIST (10 Nov):
 - the site preview: r49-site-rc 6291e15b (the RC 6b72d0aa, GO 00:21, plus a build-notes line), Vercel preview deployment
   dpl_EHt2dLdTfYDSKnH5Nt2TW5f8g6cm (a preview; production untouched); the restore of Ember's turn and three horn-backs follows.
 - the Brand Book v22: artifact WGpswpvvETozjgRAxBuUK3, version 1794270136-2332, built from 069e88f1, 38 files: the seven fronts, the
-  Ice habitat, Mantle by day, the amp plate, social.jpg (made from the fronts and the Ice habitat). Its brand renders (globe_real.py:
+  Ice habitat, Mantle by day (pulled 00:46; the Book republishes without it), the amp plate, social.jpg (made from the fronts and the Ice habitat). Its brand renders (globe_real.py:
   globe-real, globe-paper, lockup-paper, lockup-night, globe-turn.mp4) and the idents have never had a mask audit: the brand lane
   audits them (asked 10 Nov 00:38).
 ASSETS OUT OF DATE (checked 9 Nov 22:33), not to be sent until rebuilt from this list:
@@ -104,7 +104,7 @@ the glow sheet, the Core B pair and the lit set are redone after the redesign. T
 ## Mantle
 | Picture | Source | Gate | Used by |
 |---|---|---|---|
-| Mantle by day (C3e), shown in Ember | 41232b56 (three files) | PASSED | site (/mantle, the home's Mantle band) |
+| Mantle by day (C3e), shown in Ember | PULLED 10 Nov 00:46 by the owner, see Pulled; the Mantle lane diagnoses and re-shoots | | none |
 Night picture (Ice Tropos under a Hemisphere pendant): proxy 9 seen (c256eb64); the final renders (about 22:50). Its pendant glows
 from the lamp kit's added liner emitter, which the drawing does not have (walkthrough 135), so it cannot pass as it stands; an
 as-drawn variant (the COB alone: a downlight, the shade dark) follows about 23:50. The owner's answer to 135 decides which can ship.
@@ -116,6 +116,7 @@ on the lamp (it held the dome 0.8 EV low), and the lamp placed to keep its refle
 ## Pulled (do not use)
 | Picture | Why | Pulled |
 |---|---|---|
+| Mantle by day 41232b56 (honest-mantle-day.jpg; og-mantle.jpg) | THE OWNER (10 Nov 00:45): "looks kind of fucked up, like black and red wood instead of acrylic with damage on the edges. It looks cheap." At 2x: the plinth's polished front edge splits into a gray-black upper band (likely the backdrop's dark top mirrored) over red, reading as a worn edge; the 25 mm Ember top over the dark smoked base shows nothing through it, so it reads as opaque red lacquer. The critics had passed it; the owner's verdict rules | 10 Nov 00:46 |
 | Dust habitat 43c91242 (dust-portrait-1200x1500-nopanel.jpg) | it hovers at phone size: a lit strip of sand between the front edge and the shadow's start (the biomes lane's gate 23:13; confirmed by all three critics in r2's gate, 10 Nov 00:04); the founder's grounded test | 10 Nov 00:05 |
 | Fog habitat aa1ca856 (fog_b-portrait-1200x1500-onesun.jpg) | a 2 x 2 m fill EMITTER `fill_l` (hidden from the camera, out of frame) breaks the habitats' rule: the sun and the sky's own are the only emitters, and the caption says "lit by one sun"; a passive reflector would be allowed. (The first report, "in frame", was withdrawn 23:46: the gt_audit hits were the panel seen through the speaker's glass; projected, it lies wholly past the left edge.) Re-render without it, or with a real reflector, queued | 9 Nov 23:40 |
 | Poison habitat P8 scene (not yet a final) | a 1.2 x 0.4 m fill emitter `litter` (out of frame; the in-frame flag withdrawn as for Fog); dropped or replaced by a real reflector before the final | 9 Nov 23:40 |
