@@ -27,6 +27,16 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    or a puck below the rim). Rods: asked "Black or brass?" (my pick black). Owned to the owner: my 21:06 "October used the two-layer
    build" (wrong: one ball, a faked glow), my 22:34 ring recommendation ("glows evenly"; it glowed faint, pale teal), and my 22:38
    "Core B carries exactly the drawn LED's light" (an assumption; as drawn about half). Lamps lane briefed ~02:05.
+   OWNER DECISIONS 10 Nov 02:15-02:45 (in chat): RODS BLACK ("Black rods I think"; acrylic rods ruled out as too flexible and brittle):
+   the lamps' satin black #18181A on the posts and sockets, black-anodised 6061 in the parts list (speaker 9ac1ce88, 156c69ad, the asset
+   810bdeed; the rod sizing to re-check for aluminium); every Tropos studio picture re-rendered in one batch on the speaker's container
+   (fronts tallr7, horn-backs and turns p2b). SMOKE = neutral gray, 50 % through 20 mm, black lining (c4 ab9df168 g50: bark 34.7/m,
+   horn 95/m); stock code or custom batch to be settled with chips; Smoke joins the same batch. CORE BAND 10 mm = a Ø140 core, concentric
+   (the former to confirm the 4 mm gap; fallback Ø130, 15 mm). THE GLOBE (logo): not the speakers' acrylic; the speakers' colours at full
+   strength ("The pale colors are not right"): A's look with dust #F78B34, acid #E4DE3C, ice #3C91EB (each cabinet dye taken deeper),
+   the rest as the cabinets; the brand lane renders it once (A2). Still open: Hemisphere's table light, the Mantle's lighter red and
+   posts, the chips. TOKEN ECONOMY from 02:10 (the owner near his weekly limit): no critic panels or research workflows; the coordinator
+   checks each picture once; a lane renders only the owner's pick, once; habitats and the Book wait; everything he needs goes in chat.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
