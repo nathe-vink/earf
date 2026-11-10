@@ -106,6 +106,7 @@ SOLIDS.setdefault('acrylic-trucast-formed', dict(title='Cast acrylic sheet 6 mm,
 SOLIDS.setdefault('acrylic-opal-core', dict(title='Cast acrylic sheet 3 mm, white opal (Hemisphere\'s diffuser\'s), formed '
                                             'over an aluminium core mould', density=1.19, usd_per_cm3=0.18))
 SOLIDS.setdefault('peek', dict(title='PEEK rod, unfilled', density=1.30, usd_per_cm3=0.35))
+SOLIDS.setdefault('ptfe', dict(title='PTFE rod, white (virgin)', density=2.17, usd_per_cm3=0.12))
 
 GAP, LT, SKIN = 1.0, 2.5, 3.0          # the liner 1 mm in from the shell, 2.5 thick; the inner skin 3
 
@@ -116,7 +117,8 @@ O = dict(R=80.0, shell=9.0, base=(120.0, 30.0), ring=8.0, rim_r=50.0, port=40.0)
 # of colour (6 mm wall + 4 mm gap); fallback Ø130, a 15 mm band. The grommet raised to suit. O_A is design A (the 9 mm
 # ball frosted inside), the record: orb_parts(O_A) builds it
 O_A = dict(O, design='A')
-O = dict(O, design='B', shell=6.0, core=(70.0, 3.0, 0.0), grommet_wall=9.0, flange=52.0)   # core: R outside, wall, drop below
+O = dict(O, design='B', shell=6.0, core=(70.0, 3.0, 0.0), grommet_wall=9.0, flange=52.0,   # core: R outside, wall, drop below
+         angled=True, well=True)   # the owner, 2026-11-10: "I like the angled base for core"; the light well white
 
 ORB_LIGHT = None                       # set below from the ball's centre
 
@@ -544,6 +546,14 @@ def orb_parts(p=O):
     else:
         base = eased(bd, 0, bh, 3.0, top=False) - cup - cyl('z', (0, 0), 112.0, -1, hz)
     base = base - cyl('z', (0, 0), 50.4, -1, uz) - cyl('z', (0, 0), 30, uz - 0.1, bh) - bay
+    well = None
+    if p.get('well'):
+        # 2026-11-10 (the coordinator; the enclosing sensor: the black walls round the window took most of the LED's
+        # light, 76 lm of 200 out of the base): the light well lined white, a white PTFE sleeve Ø32/Ø30 x 6 round the
+        # window, from the pocket's roof up to the cup; the base's bore opened to Ø32 for it
+        well_top = zc - math.sqrt((R + 0.5) ** 2 - 16.0 ** 2) - 0.2
+        base = base - cyl('z', (0, 0), 32.0, uz - 0.1, well_top + 1.0)
+        well = cyl('z', (0, 0), 32.0, uz - 0.1, well_top) - cyl('z', (0, 0), 30.0, uz - 1, well_top + 1)
     base = base - (cyl('z', (0, 0), 108.4, -1, z0c + d + 0.6) - cyl('z', (0, 0), 53.6, -2, 31) - _chords(a, L, d, -0.2) -
                    at(uang, box(30, -7.8, -2, 70, 7.8, 31)))
     # the owner signed the contact dock (2026-11-01, r46-owner-notes 5b63e05b): the cable notch is closed; the USB-C
@@ -626,6 +636,10 @@ def orb_parts(p=O):
         Part('ring', ring, Machined('aluminium', 'lathe'), finish='anodised', group='base',
              notes=['aluminium, black anodised, satin, insulated from the chassis: the touch (tap to switch, hold to dim, '
                     '2200 to 2700 K)']),
+    ] + ([Part('well', well, Machined('ptfe', 'lathe'), finish='white', group='base',
+               notes=['the light well (2026-11-10): a white PTFE sleeve, Ø32/Ø30 x 6, pressed into the base\'s bore round the '
+                      'window (the window\'s O-ring seals to it), so the walls round the LED reflect (about 0.95) where '
+                      'the black acrylic absorbed'])] if well is not None else []) + [
         Part('window', window, Machined('cast-acrylic', 'lathe'), finish='window', group='base',
              notes=['a clear acrylic plug, sealed with an O-ring: the LED under it, the base IP44 with the ball off']),
         Part('chassis', chassis, Machined('aluminium', 'mill'), finish='steel', group='base', inside=True,

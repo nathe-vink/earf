@@ -56,6 +56,10 @@
    "coat": 1.0,
    "coat_roughness": 0.02
   },
+  "white": {
+   "preset": "satin_paint",
+   "color": "#888888"
+  },
   "window": {
    "preset": "clear_resin",
    "color": "#FFFFFF",
@@ -96,6 +100,10 @@
   {
    "match": "base|holder|dock",
    "material": "trim"
+  },
+  {
+   "match": "well",
+   "material": "white"
   },
   {
    "match": "window",

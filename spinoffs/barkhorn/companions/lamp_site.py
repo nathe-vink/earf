@@ -36,6 +36,9 @@ CORE_OUT = 0.9                                        # out of the ball (the fro
 CCT = int(os.environ.get('LAMP_CCT', '2700'))
 # item 90 (the coordinator's open proposal to the owner, PROPOSAL): each tint at its own colour temperature
 CCT_PER_TINT = {'blue': 5700, 'violet': 4000}         # the rest 2700
+# the LED colour per tint (the owner, 2026-11-10: "some need warm and some need amber"): amber 2200 K for Ember, Dust and
+# Acid; 2700 K for Poison, Fog and Smoke; 3000 K for Ice and Haze. Both lamps; LED_K overrides
+LED_CCT = {'red': 2200, 'orange': 2200, 'amber': 2200, 'green': 2700, 'ice': 2700, 'black': 2700, 'blue': 3000, 'violet': 3000}
 # the site's colour keys (web.py HABITAT) to the tints
 COLOURS = {'red': 'Ember', 'orange': 'Dust', 'amber': 'Acid', 'green': 'Poison', 'blue': 'Ice', 'violet': 'Haze',
            'ice': 'Fog', 'black': 'Smoke dark'}
@@ -179,7 +182,7 @@ def build(frame, samples, scale):
             # invented lobe). The ONLY emitters are the 24 LED faces. No thin_shadow, no liner emission, no clamp, no
             # denoiser. The opal one scattering face (its outside, GS 041), a closed solid to the rim: its inside and its
             # edge plain clear acrylic
-            bl = blackbody(int(os.environ.get('LED_K', 0)) or (3000 if tint in ('blue', 'violet') else 2700))   # LED_K: e.g. 2200
+            bl = blackbody(int(os.environ.get('LED_K', 0)) or LED_CCT.get(tint, 2700))   # its tint's LED colour
             sphere(f'tint-{tint}', 100.0, c, acrylic(f'tint-{tint}', 0.0, tname), cut=0.0, hole=H)
             sphere(f'tint-in-{tint}', 97.0, c, acrylic(f'tint-in-{tint}', 0.0, tname), inward=True, cut=0.0, hole=H)
             sphere(f'clear-{tint}', 96.0, c, acrylic(f'clear-{tint}', 0.0, 'Clear'), cut=4.0, hole=H)
@@ -316,9 +319,9 @@ def build(frame, samples, scale):
         for nm, m in (('dock', black_acrylic), ('base', black_acrylic), ('ring', an), ('seat', SC.principled('si', '#111111', 0.6)),
                       ('dock-cable', SC.principled('braid', '#121212', 0.75, bump=(1200.0, 0.5)))) + \
                      (('grommet', an),):   # (B: the CAD's raised grommet, its flange and spigot, 2026-11-10)
-            # CORE_ANGLED: the base and dock as one cone (a look for the owner, 2026-11-10; crystal.py, 'angled')
-            fo_ = 'out-orb-table-angled' if os.environ.get('CORE_ANGLED') and nm in ('base', 'dock') else 'out-orb-table'
-            objs.append(part(fo_, nm, m, (x, y, z0)))
+            objs.append(part('out-orb-table', nm, m, (x, y, z0)))   # (the base and dock angled, the owner, 2026-11-10)
+        # the light well, white PTFE round the window (2026-11-10)
+        part('out-orb-table', 'well', SC.principled('ptfe', '#F7F7F5', 0.7), (x, y, z0))
         # the window over the LED (the CAD's clear acrylic plug, Ø29.6 x 5.7): clear, its shadow rays at its transmission
         # WINDOW: filter (default: a clear filter at its transmission for every ray, no refraction: the enclosing
         # sensor showed thin_shadow on this solid plug counting the LED's light twice, once by the shadow ray and once
@@ -385,7 +388,7 @@ def build(frame, samples, scale):
             # (2026-11-10, the enclosing sensor: a lamp colour has its LARGEST channel 1, so 2700 K carries luminance 0.52
             # and the lamp gave 52 % of its lumens; the energy now divided by the colour's luminance)
             ld.energy = float(os.environ.get('CORE_LM', CORE_LM)) * WLM / lum(bb) * (0.0 if os.environ.get('LIGHTS_OFF') else 1.0)
-            ld.color = bb = blackbody(int(os.environ['LED_K'])) if os.environ.get('LED_K') else bb   # LED_K: e.g. 2200 (amber)
+            ld.color = bb = blackbody(int(os.environ.get('LED_K', 0)) or LED_CCT.get(tint, 2700))   # its tint's LED colour
             ld.energy = float(os.environ.get('CORE_LM', CORE_LM)) * WLM / lum(bb) * (0.0 if os.environ.get('LIGHTS_OFF') else 1.0)
             lo = bpy.data.objects.new(f'led-{tint}', ld); bpy.context.scene.collection.objects.link(lo)
             lo.location = (x, y, z0 + 0.0147)          # area lamps face -Z: turn it over to face up
