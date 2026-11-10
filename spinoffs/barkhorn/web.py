@@ -3276,6 +3276,8 @@ def build():
         # plan's daily allowance ran out and main could not deploy (Vercel: "Deployment rate limited")
         'git': {'deploymentEnabled': {'r31-*': False, 'r32-*': False, 'claude/*': False}},
     }, open(os.path.join(SITE, 'vercel.json'), 'w'), indent=2)
+    if RC:                                        # the release candidate's last touches (site_v2.rc_finish)
+        site_v2.rc_finish(sys.modules[__name__])
     n = sum(len(f) for _, _, f in os.walk(SITE))
     kb = int(subprocess.run(['du', '-sk', SITE], capture_output=True, text=True).stdout.split()[0])
     return f'{os.path.relpath(SITE, ROOT)}: {n} files, {kb / 1024:.1f} MB'
