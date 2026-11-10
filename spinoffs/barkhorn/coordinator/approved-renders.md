@@ -157,6 +157,18 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    those frames show a base and a light the product does not have. Everything through rollout.py (tallr4-7, p2b, p2r) reads
    "options: []" and is clean. RULE: any Tropos final runs with TROPOS_BASE=A and an emitter list in its report; no deck-*
    Tropos frame goes into the Book, the site or a deck until it is re-rendered (brand lane told 15:36 for v27).
+   OUTDOOR hero proxies (r48-biomes 4fdaf50b: hero_fog-proxy c1 the hillside above the fog, hero_ice-proxy c2 the snowfield)
+   shown to the owner 15:45: c1 has glowing horns but four near-black cabinets; c2 is flat and at the memory ceiling (drop).
+   The coordinator's pick: the hillside as hero plus the bold stripes as the range picture; no final until the owner picks.
+   OWNER 10 Nov ~16:00 on the stripes: "Did you bring the plinth back in the stripe version? Why? Also I wanted it to look
+   more like a studio shot where it looks more like they are in a room with painted walls and floor". Answer: no, the plinth
+   was the deck scene's default (above), not a decision. Speaker lane briefed 16:01 for ONE test frame: base A, no light; a
+   real room (flat painted wall and floor meeting in a crisp line), eight parallel painted stripes in the bold own-family
+   colors running down the wall and across the floor under each speaker, soft even studio light, camera lower and closer,
+   1680x700 at about 64 samples. The hillside stays on hold.
+   MANTLE same-color base (r48-mantle-design 52541510): by day the plinth reads as with the smoked base; lit from under the
+   base the top stays dark (the loop only outlines the base's edges and pools on the floor). Held for one sheet together
+   with the uplit-plinth frames.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
