@@ -27,7 +27,7 @@
  },
  "set": {
   "kind": "sweep",
-  "color": "#EAE4DA",
+  "color": "#EFF1EE",
   "width": 10.0,
   "front": 6.0,
   "depth": 2.2,
@@ -127,8 +127,8 @@
     "material": "paper",
     "color": "#F2F0EC",
     "size": [
-     0.9,
-     0.9,
+     1.4,
+     1.4,
      0.004
     ],
     "position": [
@@ -150,8 +150,8 @@
   "key": {
    "type": "area",
    "size_m": [
-    0.6,
-    0.3
+    0.3,
+    0.15
    ],
    "orbit": {
     "azimuth_deg": -40,
@@ -189,7 +189,7 @@
    "type": "area",
    "size_m": [
     6.0,
-    0.3
+    0.6
    ],
    "position": [
     0.08,

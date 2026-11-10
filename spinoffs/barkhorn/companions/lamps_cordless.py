@@ -214,12 +214,18 @@ def main():
             dome_.setdefault('materials', {})['liner'] = {**dome_['materials'].get('liner', {}), 'clear': 0.05, 'color': '#F4F2EE'}
             # 4. the arc and key reflections as white glints: the wash strip 6 x 0.3 (was 0.8), the key half its size,
             #    each at the same irradiance on the set (its output held)
-            k_ = u['lights']['key']; k_['size_m'] = [v / 2 for v in k_['size_m']]
+            k_ = u['lights']['key']; k_['size_m'] = [v * float(os.environ.get('KEY_K', '0.25')) for v in k_['size_m']]
+            # the 23:50 gate: the strip's arc a calm sheen, not a line: broader and softer, and its share trimmed (the
+            # lit centre toward the chip's L* 32); the backdrop paper's own colour set so the sweep reads the Tropos
+            # studio white (#EEECE2) under the 4300 K sky, which stays (it cleared the plum)
+            u['lights']['bgwash']['size_m'] = [float(v) for v in os.environ.get('WASH_SIZE2', '6,0.6').split(',')]
+            u['lights']['bgwash']['irradiance'] = round(u['lights']['bgwash']['irradiance'] * float(os.environ.get('WASH_K', '1.0')), 3)
+            u['set']['color'] = os.environ.get('PAPER', '#EFF1EE')
             # 3. the mouth's inside lit from below by the oak (warm): a white card on the table under the lamp, out
             #    of frame, a real neutral bounce, so the white liner reads pale (L* 55-65), well under the wall
             dx_, dy_, dz_ = dome_['spots'][0]
             u['set']['props'].append({'kind': 'kit', 'shape': 'box', 'material': 'paper', 'color': '#F2F0EC',
-                                      'size': [float(os.environ.get('CARD_W', '0.9')), 0.9, 0.004], 'position': [dx_, dy_, 0.04]})
+                                      'size': [float(os.environ.get('CARD_W', '1.4')), 1.4, 0.004], 'position': [dx_, dy_, 0.04]})
             if os.environ.get('WARM_K'):           # the 21:44 test: the cool sources warmed (key, fill, strip)
                 for k_ in ('key', 'fill', 'edges'):
                     if k_ in u['lights']:
