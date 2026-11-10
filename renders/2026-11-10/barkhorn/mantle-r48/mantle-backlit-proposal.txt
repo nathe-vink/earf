@@ -1,0 +1,15 @@
+PROPOSAL, the backlit plinth (the coordinator, 2026-11-10 05:06; the signed v3 stays the design). v3_day.py --backlit.
+Stack (25.4 mm, the outside size kept): 6.0 tinted top (thinned from the full 25.4) / 3.0 opal, Perspex GS 041 (T 54 %,
+R 39 %) / 12.0 tray, lined white / 4.4 tinted floor. A 10 mm tinted frame from the floor to the top's underside, lined
+white inside; the plinth's outer edge (the top's 6 mm and the frame) satin black #18181A, so no pale line shows.
+LEDs: 2700 K strip, 13 runs at 25 mm pitch on the tray floor, 4.9 m at 2.0 W/m = 9.8 W.
+Pass-throughs: white-painted acrylic sleeves from the tray floor to the opal round the bearing (bore r 15.5, sleeve
+r 22), the arm (28.5, 35) and the motor (38, 44); the opal and the strip are cut round them; the posts bond into the
+4.4 floor as before.
+Frames: mantle-{day,lit}-{ember,ice}-backlit-proposal.png, the set's camera; day in the set's studio, light off; lit in
+the dim room, camera white balance 4000 K. Emitters: none by day; lit, only the LED faces ('strip'). gt 0 px; no hidden mesh.
+Render notes: the cut pieces are surface-tinted (each sheet's own transmission), and refractive caustics are on, so the
+opal's light can leave through the top (off, the deck rendered dark over a lit opal).
+Evenness: not fully even. The LED rows show through as faint stripes at their 25 mm pitch (clearest in Ice), and the
+frame's top edge shows small light dashes. A deeper tray (pitch to depth under about 1.5) or a diffuser film under the
+opal would even it.
