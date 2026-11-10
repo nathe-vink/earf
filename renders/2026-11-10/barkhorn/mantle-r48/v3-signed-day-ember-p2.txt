@@ -1,0 +1,30 @@
+Mantle as signed: Strata Float v3, the owner's pick of 2026-11-01 ("Mantle: A"), rebuilt from its render model at
+71d3163ecd76c359f6b56660e896591c49e13443 (out-strata-v3/render, extracted with git archive; not the later edge-lit
+out-strata-v3 in the tree). Ember 2423 stock, by day, the light off. Proxy at the site's 1800 x 1200, 80 samples.
+
+    python3.11 spinoffs/barkhorn/companions/mantle-r48/v3_day.py OUT.png --cards -- dusk --model <71d3163e out-strata-v3>
+      --colour ember-2423 --tint-mode custom --day --strip 0 --core-glow 0 --exposure -2.0 --edge-frost 0.35
+      --base-tint smoke-2074 --scale 0.75 --samples 80 --paper #7A7570 --pan 0.05
+
+The design as built (README section 11 at 71d3163e): the deck two 12.7 mm sheets of the flavour's stock tint, cemented
+flush, 25.4 mm through-tinted, its outer edge satin, its faces glassy; the float 40 mm on four 303 stainless posts; the
+base 12.7 mm Smoke 2074; the base's light loop off by day (--strip 0: its emission 0).
+
+The lights (scene.py's day studio, all real lamps out of frame, gt_audit 0 px each):
+  key    area 1.2 x 0.9 m, 140 W, high front-left, a 32 deg grid (the softbox: the key through its own diffuser)
+  strip  area 1.6 x 0.18 m, 90 W, low behind right (rims the deck; the light through its back half)
+  side   area 0.9 x 0.10 m, 160 W, low left at the deck's height
+  fill   area 1.0 x 0.6 m, 12 W, low right
+  bg     area 3.0 x 1.0 m, 90 W, lighting the sweep behind
+  spot   spot 12 W, behind right (caustics through the acrylic)
+  top    scene.py's top scrim lamp, OFF in p2 (it whitened the glassy top; p1 had it on)
+The cards: flag-r and flag-top (scene.py's black flags, made camera-visible ordinary cards; out of frame) and
+card-black-top, 1.6 x 1.0 m, 2 % black, behind the camera's image plane, 0.35 m above it (out of frame: 0 px).
+No white card: from this camera the ground behind and under the plinth is in frame (a card there measured 47 % of the
+frame), so the white seamless sweep is the white surface behind and below.
+No emitter of any kind: gt_audit's emitter check, 0 emitting materials (v3_day.py also stops the run if any material
+emits). scene_audit: no mesh hidden from the camera; every lamp out of frame.
+
+Measured (display, 0-255): the deck's top, middle front, luma 11 (RGB 13/10/10: it mirrors the black card); the top's
+back left, where the strip's light comes through 25.4 mm of Ember, luma 33 (RGB 109/13/4); the satin front edge luma 9
+(RGB 20/5/5); the base's top luma 32. 43 px clipped (the arm's chrome).
