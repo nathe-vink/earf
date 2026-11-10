@@ -43,8 +43,7 @@ PINNED = {'room.jpg': ('754e16a9852f364fb2ebe8eb752c10ab6bdc0e23', 'renders/2026
           'honest-front-fog.jpg': ('4e89a8340d5de6efbe02286b639d081432db84f1', 'renders/2026-11-04/barkhorn/rollout/A-polished-tallr6/site-front-off-tall-fog.png'),
           'honest-front-acid.jpg': ('7d741bd64b16731318a1fc724dd5453aefefc66b', 'renders/2026-11-04/barkhorn/rollout/A-polished-tallr6/site-front-off-tall-acid.png'),
           'honest-ice-habitat.jpg': ('0f619953f86129dc54183718e2c50419f37ab820', 'renders/2026-11-03/barkhorn/habitats/ice-portrait-1200x1500.jpg'),
-          'honest-amp-ember.jpg': ('488fbec9ed6764c60893e0a2798a6feba9ad296f', 'renders/2026-11-04/barkhorn/rollout/A-polished-p2-backfix/amp-plate-ember.png'),
-          'honest-mantle-day.jpg': ('41232b56c60d1980a5ee3de0dddd8344ffb85fee', 'renders/2026-11-03/barkhorn/mantle-r48/a5-day-ember-2423-c3e.png'),}
+          'honest-amp-ember.jpg': ('488fbec9ed6764c60893e0a2798a6feba9ad296f', 'renders/2026-11-04/barkhorn/rollout/A-polished-p2-backfix/amp-plate-ember.png'),}
 
 
 def pinned():
