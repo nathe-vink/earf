@@ -612,7 +612,7 @@ def pages(web):
                 os.rmdir(d)
         left = [os.path.relpath(f, web.SITE) for f in glob.glob(os.path.join(web.SITE, '**', '*'), recursive=True)]
         bad = [f for f in left if re.search(r'(^press/|img/(?:(?:dome|orb)-|lamps-(?:orbs|domes)|lamp-(?:orb|dome)|hero[.-]|facade|room|macro-|turn-|spin/'
-                                            r'|tt-|ga-|icon-smoke-|rc/(?:ice|orange)-habitat|rc/(?:orange|blue|ice)-horn-back|lamps-unlit|thumb/lamps-unlit|rc/(?:red|orange|amber|green|blue|violet|ice)-back[.-]|(?:red|orange|amber|green|blue|violet|ice|black)-(?:on|off|studio|back|amp|horn|inside|reel|habitat))|-smoke\.html$)', f)]
+                                            r'|tt-|ga-|icon-smoke-|v2/mantle-day|rc/og-mantle|rc/(?:ice|orange)-habitat|rc/(?:orange|blue|ice)-horn-back|lamps-unlit|thumb/lamps-unlit|rc/(?:red|orange|amber|green|blue|violet|ice)-back[.-]|(?:red|orange|amber|green|blue|violet|ice|black)-(?:on|off|studio|back|amp|horn|inside|reel|habitat))|-smoke\.html$)', f)]
         assert not bad, ('site_v2: rc deploys', bad[:12])
 
 
@@ -764,7 +764,7 @@ def addresses(web):
                          lamps_og()[0] if rc else 'img/og/dome-red.jpg', lamps_og()[1] if rc else 'Hemisphere in Ember'),
            '/mantle': ('turntable', 'Mantle · EARF', ('A turntable in cast acrylic. In development.' if rc else
                                                      'A turntable, lit from underneath, in the eight colors. In development.'),
-                       'img/rc/og-mantle.jpg' if rc else 'img/og/tt-red.jpg', 'Mantle in Ember'),
+                       mantle_og()[0] if rc else 'img/og/tt-red.jpg', mantle_og()[1] if rc else 'Mantle in Ember'),
            '/contact': ('contact', 'Contact · EARF', 'Write to us: hello@earf.world. Everything is made to order, so we quote rather than list.',
                         'img/rc/og-home.jpg' if rc else 'img/hero-1200.jpg', 'Tropos in seven colors' if rc else 'The eight Tropos speakers on a curve')}
     for k, num, name, *_ in web.CLOUDS:
@@ -811,6 +811,7 @@ def apply(web, head, rest):
         rc_turn(p, web)
         rc_lamps(p, web)
         rc31(p, web)
+        rc_mantle(p, web)
         p.banned = BANNED_RC
     return p.done()
 
@@ -883,7 +884,7 @@ def rc_cards(web):
         elif kind in ('hemisphere', 'core'):
             set_img(f, *lamps_og())
         elif kind == 'mantle':
-            set_img(f, 'img/rc/og-mantle.jpg', 'Mantle in Ember')
+            set_img(f, *mantle_og())
 
 
 def rc_images(web):
@@ -954,7 +955,8 @@ def rc_images(web):
         og(im, f'img/rc/og-{k}.jpg')
     if LAMPS_PIC:                                   # the lamps' card from their honest picture, or none
         og(Image.open(os.path.join(web.ROOT, LAMPS_PIC)).convert('RGB'), 'img/rc/og-lamps.jpg')
-    og(Image.open(os.path.join(web.ROOT, MANTLE_SRC)).convert('RGB'), 'img/rc/og-mantle.jpg')
+    if MANTLE_PIC:
+        og(Image.open(os.path.join(web.ROOT, MANTLE_SRC)).convert('RGB'), 'img/rc/og-mantle.jpg')
     return spots
 
 
@@ -1625,6 +1627,39 @@ def rc31(p, web):
 .c-tropos { margin-bottom: 72px } @media (max-width: 860px) { .c-tropos { margin-bottom: 52px } }
 .colour-head .coin-big .coin-dot { border-radius: 50% } .colour-head .coin-big .coin-dot[style*="--i:6"] { box-shadow: inset 0 0 0 1px #9A958D }
 """)
+
+
+# Mantle's picture (the owner, 2026-11-10 00:46: "like black and red wood instead of acrylic ... It looks cheap"): out
+# until a new one passes. Words only, as the lamps; its share cards on the home's.
+MANTLE_PIC = False
+
+
+def mantle_og():
+    return ('img/rc/og-mantle.jpg', 'Mantle in Ember') if MANTLE_PIC else ('img/rc/og-home.jpg', 'Tropos in seven colors')
+
+
+def rc_mantle(p, web):
+    import json
+    if MANTLE_PIC:
+        return
+    i = p.rest.index('const D = ') + len('const D = ')
+    j = p.rest.index(', BY = Object', i)
+    D = json.loads(p.rest[i:j])
+    for col in D['tt']['colours'].values():
+        col['views'] = {}; col['card'] = None
+    p.rest = p.rest[:i] + json.dumps(D, separators=(',', ':')) + p.rest[j:]
+    n = len(re.findall(r'<figure class="strip mantle-pic">.*?</figure>', p.rest, re.S))
+    p.rest = re.sub(r'\s*<figure class="strip mantle-pic">.*?</figure>', '', p.rest, flags=re.S)
+    m = len(re.findall(r'<a class="ph mantle-wide"[^>]*><img [^>]*></a>', p.rest))
+    p.rest = re.sub(r'<a class="ph mantle-wide"[^>]*><img [^>]*></a>', '', p.rest)
+    assert n == 1 and m == 1, ('rc_mantle', n, m)
+    p.rest = p.rest.replace('<div class="lamp-duo solo tt-duo"><article class="ptile">', '<div class="lamp-duo solo tt-duo"><article class="ptile no-pic">')
+    if "document.querySelector('#pdp .pdp').classList.toggle('no-pic', !n)" not in p.rest:      # a page with no picture: no gallery
+        p.sub("  showView(shown(c)[0]);",
+              "  { const g = document.querySelector('#pdp .gallery'), n = shown(c).length; g.hidden = !n; document.querySelector('#pdp .pdp').classList.toggle('no-pic', !n); if (n) showView(shown(c)[0]); }")
+        p.css("@media (min-width: 1001px) { .pdp.no-pic { grid-template-columns: minmax(0, 720px) !important } }")
+    p.css(".tt-duo .ptile.no-pic { grid-template-columns: minmax(0, 1fr) !important }")
+    assert 'mantle-day' not in p.rest, 'rc_mantle: the picture is still named'
 
 
 BANNED_RC = r'eight colors|to Smoke|Smoke as current'
