@@ -431,7 +431,7 @@ def uplit(wpm):
         if o.name == 'led-strip':
             o.hide_render = True
     base = bpy.data.objects['base-L1-stack']
-    bx0, bx1, by0, by1, bz1 = 0.045, 0.425, 0.045, 0.335, 0.0287; IN, W, DEP = 0.020, 0.007, 0.005
+    bx0, bx1, by0, by1, bz1 = 0.045, 0.425, 0.045, 0.335, 0.0287; IN, W, DEP = 0.020, 0.007, 0.008   # 5 deep let the camera see the face (4 of 492 points)
     xa, xb, ya, yb = bx0 + IN, bx1 - IN, by0 + IN, by1 - IN
     def box(name, x0, x1, y0, y1, z0, z1):
         bpy.ops.mesh.primitive_cube_add(size=1.0, location=((x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2))
@@ -444,10 +444,15 @@ def uplit(wpm):
     m = base.modifiers.new('b', 'BOOLEAN'); m.operation = 'DIFFERENCE'; m.object = ring; m.solver = 'EXACT'
     bpy.context.view_layer.objects.active = base; bpy.ops.object.modifier_apply(modifier=m.name)
     # the channel lining: the ring groove's walls and floor in black, a hair inside the groove
-    blk = bpy.data.materials.new('ul-channel'); blk.use_nodes = True; bb = blk.node_tree.nodes['Principled BSDF']
-    bb.inputs['Base Color'].default_value = (0.008, 0.008, 0.008, 1); bb.inputs['Roughness'].default_value = 0.6
+    # the channel flocked matte black (a pure diffuse 1 %): a glossy black wall mirrored the bright LED face beside it as
+    # a lit line round the loop (the second test)
+    blk = bpy.data.materials.new('ul-channel'); blk.use_nodes = True; nt_ = blk.node_tree; nt_.nodes.clear()
+    dfs = nt_.nodes.new('ShaderNodeBsdfDiffuse'); dfs.inputs['Color'].default_value = (0.01, 0.01, 0.01, 1)
+    oo = nt_.nodes.new('ShaderNodeOutputMaterial'); nt_.links.new(dfs.outputs[0], oo.inputs['Surface'])
     ring.scale = (1, 1, 1)
-    lin_ = box('ul-channel', xa - W / 2 + 0.0002, xb + W / 2 - 0.0002, ya - W / 2 + 0.0002, yb + W / 2 - 0.0002, bz1 - DEP + 0.0002, bz1 - 0.0002)
+    # (the lining stopping 0.2 under the base's top let light into the smoked acrylic at the groove's rim: a lit line; it
+    # now stands 0.3 proud of the top, a black lip)
+    lin_ = box('ul-channel', xa - W / 2 + 0.0002, xb + W / 2 - 0.0002, ya - W / 2 + 0.0002, yb + W / 2 - 0.0002, bz1 - DEP + 0.0002, bz1 + 0.0003)
     c2 = box('c', xa + W / 2 - 0.0002, xb - W / 2 + 0.0002, ya + W / 2 - 0.0002, yb - W / 2 + 0.0002, bz1 - DEP - 0.001, bz1 + 0.003)
     m = lin_.modifiers.new('b', 'BOOLEAN'); m.operation = 'DIFFERENCE'; m.object = c2; m.solver = 'EXACT'
     bpy.context.view_layer.objects.active = lin_; bpy.ops.object.modifier_apply(modifier=m.name); bpy.data.objects.remove(c2)
@@ -458,6 +463,17 @@ def uplit(wpm):
     m = lin_.modifiers.new('b', 'BOOLEAN'); m.operation = 'DIFFERENCE'; m.object = c3; m.solver = 'EXACT'
     bpy.context.view_layer.objects.active = lin_; bpy.ops.object.modifier_apply(modifier=m.name); bpy.data.objects.remove(c3)
     lin_.data.materials.append(blk); bpy.data.objects.remove(ring)
+    # the base must not glow: light the satin underside sends down enters the smoked base's top and leaves its polished
+    # edges as a lit outline (the first tests). Its outer edge faces painted the posts' satin black
+    bk = bpy.data.materials.get('post-satin-black')
+    if bk is None:
+        black_posts(); bk = bpy.data.materials['post-satin-black']
+    base.data.materials.append(bk); bi = len(base.data.materials) - 1; MB = base.matrix_world; ne = 0
+    for p in base.data.polygons:
+        c = MB @ p.center; nw = (MB.to_3x3() @ p.normal).normalized()
+        if abs(nw.z) < 0.3 and min(c.x - bx0, bx1 - c.x, c.y - by0, by1 - c.y) < 0.0015:
+            p.material_index = bi; ne += 1
+    print(f'v3_day: the base edge black ({ne} faces)', flush=True)
     # the LED face: 5 mm wide on the channel's floor, facing up
     led = bpy.data.materials.new('strip'); led.use_nodes = True; lt = led.node_tree; lt.nodes.clear()
     em = lt.nodes.new('ShaderNodeEmission'); em.inputs['Color'].default_value = (1.0, 0.55, 0.25, 1)
