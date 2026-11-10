@@ -73,19 +73,41 @@ def sweep(bpy, spec, mats):
         a = -math.pi / 2 + (math.pi / 2) * i / n
         prof.append((back - R + R * math.cos(a), R + R * math.sin(a)))
     prof.append((back, H))
-    xs = [-W / 2, W / 2]
-    verts = [(x, y, z) for (y, z) in prof for x in xs]
-    faces = [(2 * i, 2 * i + 1, 2 * i + 3, 2 * i + 2) for i in range(len(prof) - 1)]
-    me = bpy.data.meshes.new('sweep'); me.from_pydata(verts, [], faces)
-    for p in me.polygons: p.use_smooth = True
     ct = spec.get('contact') or {}
-    mat = M.make(bpy, 'sweep', 'sweep', {'color': spec.get('color', '#B9B5AE'), 'contact': ct.get('strength', 0.0),
-                                         'contact_m': ct.get('distance_m', 0.05), 'core': ct.get('core_strength', 0.0),
-                                         'core_m': ct.get('core_distance_m', 0.025), **mats.get('sweep', {})})
-    ob = _obj(bpy, 'sweep', me, mat)
-    if spec.get('cast_shadow') is False:               # the paper casts no shadow: a sun behind the wall reaches the floor
-        ob.visible_shadow = False
-    objs = [ob] + props(bpy, spec, mats)               # round 31: props on a sweep too (the carousel's plinth)
+    # `stripes` (2026-11-10, the site's hero): several seamless papers side by side, edge to edge, each its own colour,
+    # [{"x": [x0, x1], "color": "#..."}, ...] across the sweep's width; the rest of the width in `color`. Each is the same
+    # cove, a real sheet lit only by the studio's lamps; objects sweep-0, sweep-1, ... (receivers "sweep*")
+    spans = [((-W / 2, W / 2), spec.get('color', '#B9B5AE'), 'sweep')]
+    if spec.get('stripes'):
+        st = sorted(spec['stripes'], key=lambda t: t['x'][0])
+        spans, x = [], -W / 2
+        for k, t in enumerate(st):
+            if t['x'][0] > x + 1e-6:
+                spans.append(((x, t['x'][0]), spec.get('color', '#B9B5AE'), f'sweep-out{k}'))
+            spans.append(((t['x'][0], t['x'][1]), t['color'], f'sweep-{k}'))
+            x = t['x'][1]
+        if x < W / 2 - 1e-6:
+            spans.append(((x, W / 2), spec.get('color', '#B9B5AE'), 'sweep-out-end'))
+    objs = []
+    # `stripes_fan` (a camera's y): each stripe's edges fan out from the camera's plane line through x = 0, true widths at
+    # y = 0 (the products' line), so from the camera every edge is one straight line between two speakers, on the floor
+    # in front as on the wall behind. The outer papers take the outer edges' fan too
+    yc = spec.get('stripes_fan')
+    def _x(x, y):
+        return x if yc is None else x * (y - yc) / (0.0 - yc)
+    for (x0, x1), colr, nm in spans:
+        verts = [(_x(x, y), y, z) for (y, z) in prof for x in (x0, x1)]
+        faces = [(2 * i, 2 * i + 1, 2 * i + 3, 2 * i + 2) for i in range(len(prof) - 1)]
+        me = bpy.data.meshes.new(nm); me.from_pydata(verts, [], faces)
+        for p in me.polygons: p.use_smooth = True
+        mat = M.make(bpy, nm, 'sweep', {'color': colr, 'contact': ct.get('strength', 0.0),
+                                        'contact_m': ct.get('distance_m', 0.05), 'core': ct.get('core_strength', 0.0),
+                                        'core_m': ct.get('core_distance_m', 0.025), **mats.get('sweep', {})})
+        ob = _obj(bpy, nm, me, mat)
+        if spec.get('cast_shadow') is False:           # the paper casts no shadow: a sun behind the wall reaches the floor
+            ob.visible_shadow = False
+        objs.append(ob)
+    objs = objs + props(bpy, spec, mats)               # round 31: props on a sweep too (the carousel's plinth)
     cards(bpy, spec)
     return objs
 

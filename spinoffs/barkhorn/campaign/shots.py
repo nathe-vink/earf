@@ -1645,3 +1645,81 @@ if __name__ == '__main__':
     for name, fn in SHOTS.items():
         json.dump(fn(), open(os.path.join(OUT, f'{name}.json'), 'w'), indent=1)
         print(name)
+
+
+# --- the site's home-page hero (the owner, 2026-11-10: "put the speakers in a studio and have stripes of colors as the
+# background and ground behind and under each one that compliments each speakers color") ---------------------------------
+HERO_BRAND = {'ember': '#B50404', 'dust': '#D35D17', 'acid': '#C5BC1E', 'poison': '#027614', 'ice': '#1169C1',
+              'haze': '#500CB4'}
+HERO_ORDER = ['ember', 'dust', 'acid', 'poison', 'ice', 'haze', 'fog', 'smoke']
+HERO_NEUTRAL = {'v1': {'fog': '#F4F3F1', 'smoke': '#CDCCCA', 'out': '#EFEDEA'},
+                'v2': {'fog': '#E2E1DF', 'smoke': '#8E8D8B', 'out': '#D9D6D2'}}
+
+
+def _toward_white(hx, f):
+    """The colour taken `f` of the way to white, in sRGB."""
+    c = [int(hx[i:i + 2], 16) for i in (1, 3, 5)]
+    return '#' + ''.join(f'{round(v + f * (255 - v)):02X}' for v in c)
+
+
+def hero_stripes(variant='v1'):
+    """The eight in a row, Ember to Smoke, each on its own seamless paper stripe in its own colour family, edge to edge
+    as wide as the speakers' spacing (1 m): v1 pale (two thirds of the way to white), v2 bold (one third). The deck row's
+    studio and lamps (its rig, honest), the sweep's lamps on every stripe, 1680 x 700, the top quarter kept clear."""
+    s = SHOTS['deck-row']()
+    f = 2 / 3 if variant == 'v1' else 1 / 3
+    n = len(HERO_ORDER)
+    stripes = []
+    for k, t in enumerate(HERO_ORDER):
+        col = _toward_white(HERO_BRAND[t], f) if t in HERO_BRAND else HERO_NEUTRAL[variant][t]
+        x = (k - (n - 1) / 2) * 1.0
+        stripes.append({'x': [round(x - 0.5, 4), round(x + 0.5, 4)], 'color': col, 'tint': t})
+    s['set']['stripes'] = stripes
+    s['set']['color'] = HERO_NEUTRAL[variant]['out']
+    s['materials']['sweep'] = {k: v for k, v in s['materials'].get('sweep', {}).items() if k != 'color'}   # its roughness kept
+    for L in s['lights'].values():
+        if L.get('receivers') == ['sweep']:
+            L['receivers'] = ['sweep*']
+    # the 21:34 rule: no specular-only panel (the row's front strip, diffuse 0)
+    for k in [k for k, L in s['lights'].items() if L.get('type') == 'panel' and float(L.get('diffuse', 1.0) or 0.0) == 0.0]:
+        s['lights'].pop(k)
+    # (its first proxy, 2026-11-10: the deck row's cove, 11 m deep on a 9 m radius, put each wall stripe far behind and
+    # to the side of its speaker, and the high-key set washed the stripes out; the mask pass ran out of memory on sixteen
+    # copies' refined normals). A tight cove so each wall stripe stands behind its speaker, the set's own lamps lower,
+    # and the normals unrefined (a few tenths of a millimetre, nothing at this size)
+    s['set'].update(depth=2.6, radius=1.0, height=6.0, front=12.0, stripes_fan=-14.0)
+    for L in s['lights'].values():
+        if L.get('receivers') == ['sweep*']:
+            L['irradiance'] = round(float(L.get('irradiance', 1.0)) * (0.55 if float(L.get('irradiance', 1.0)) > 2 else 0.5), 3)
+    s['render']['exposure'] = round((s['render'].get('exposure') or 0.0) - 0.3, 3)
+    # the background lamps stood behind the new wall: in front of it now, above the frame, aimed down the wall
+    for k, x in (('bg-left', -3.0), ('bg-right', 3.0)):
+        if k in s['lights']:
+            s['lights'][k].update(position=[x, 1.2, 3.6], target=[x, 2.6, 1.0])
+    for blk in s['products']:
+        blk['normals_refine'] = False
+    s['size'] = [1680, 700]
+    s['title'] = f'Tropos, the eight on their stripes ({variant})'
+    # the camera 14 m off, a touch above the cabinets' middle; the frame's top quarter above the horns
+    s['camera'].update(position=[0.0, -14.0, 0.85], target=[0.0, 0.0, 0.45], lens_mm=58.0, level=True)
+    realize_hidden(s)
+    return s
+
+
+def hero_centres(s, z=0.55):
+    """Each speaker's centre (its cabinet's middle, `z` m up) in percent of the frame, as the camera projects it
+    (_frame_rays' model: a HORIZONTAL sensor fit, a level camera's shift)."""
+    import math, numpy as np
+    cam = s['camera']; W, H = s['size']; c = np.array(cam['position'], float); t = np.array(cam['target'], float)
+    lens = cam['lens_mm']; sw = cam.get('sensor_mm', 36.0); hx, hy = sw / 2, sw / 2 * H / W
+    d0 = t - c; flat = np.array([d0[0], d0[1], 0.0]); f = flat / np.linalg.norm(flat)
+    sy = cam.get('shift_y', 0.0) + math.tan(math.atan2(d0[2], np.linalg.norm(flat))) * lens / sw * (1.0 if W >= H else W / H)
+    sx = cam.get('shift_x', 0.0)
+    r = np.cross(f, [0.0, 0.0, 1.0]); r /= np.linalg.norm(r); u = np.cross(r, f)
+    out = []
+    for k, i in enumerate(s['products'][0]['instances']):
+        p = np.array([i['position'][0], i['position'][1], z]) - c; zz = p @ f
+        X = ((p @ r) / zz * lens - sx * sw) / hx; Y = ((p @ u) / zz * lens - sy * sw) / hy
+        out.append({'tint': HERO_ORDER[k], 'x': round(float((X + 1) / 2 * 100), 2), 'y': round(float((1 - Y) / 2 * 100), 2),
+                    'color': s['set']['stripes'][k]['color']})
+    return out

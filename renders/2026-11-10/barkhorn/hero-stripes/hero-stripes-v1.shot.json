@@ -1,0 +1,618 @@
+{
+ "title": "Tropos, the eight on their stripes (v1)",
+ "size": [
+  1680,
+  700
+ ],
+ "set": {
+  "kind": "sweep",
+  "color": "#EFEDEA",
+  "width": 52.0,
+  "front": 12.0,
+  "depth": 2.6,
+  "radius": 1.0,
+  "height": 6.0,
+  "contact": {
+   "strength": 0.8,
+   "distance_m": 0.45,
+   "core_strength": 1.0,
+   "core_distance_m": 0.03
+  },
+  "flags": [],
+  "bounces": [
+   {
+    "center_m": [
+     0.0,
+     -1.6,
+     2.6
+    ],
+    "size_m": [
+     9.0,
+     1.4
+    ],
+    "normal": [
+     0.0,
+     0.55,
+     -0.83
+    ],
+    "reflect_only": true
+   }
+  ],
+  "stripes": [
+   {
+    "x": [
+     -4.0,
+     -3.0
+    ],
+    "color": "#E6ABAB",
+    "tint": "ember"
+   },
+   {
+    "x": [
+     -3.0,
+     -2.0
+    ],
+    "color": "#F0C9B2",
+    "tint": "dust"
+   },
+   {
+    "x": [
+     -2.0,
+     -1.0
+    ],
+    "color": "#ECE9B4",
+    "tint": "acid"
+   },
+   {
+    "x": [
+     -1.0,
+     0.0
+    ],
+    "color": "#ABD1B1",
+    "tint": "poison"
+   },
+   {
+    "x": [
+     0.0,
+     1.0
+    ],
+    "color": "#B0CDEA",
+    "tint": "ice"
+   },
+   {
+    "x": [
+     1.0,
+     2.0
+    ],
+    "color": "#C5AEE6",
+    "tint": "haze"
+   },
+   {
+    "x": [
+     2.0,
+     3.0
+    ],
+    "color": "#F4F3F1",
+    "tint": "fog"
+   },
+   {
+    "x": [
+     3.0,
+     4.0
+    ],
+    "color": "#CDCCCA",
+    "tint": "smoke"
+   }
+  ],
+  "stripes_fan": -14.0
+ },
+ "camera": {
+  "position": [
+   0.0,
+   -14.0,
+   0.85
+  ],
+  "target": [
+   0.0,
+   0.0,
+   0.45
+  ],
+  "lens_mm": 58.0,
+  "level": true
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#F2F1EF",
+  "horizon": "#EEEDEB",
+  "ground": "#CFCCC8",
+  "strength": 0.6,
+  "visible": false
+ },
+ "render": {
+  "samples": 64,
+  "adaptive": 0.01,
+  "denoise": true,
+  "clamp": 4,
+  "bounces": 16,
+  "view": "Khronos PBR Neutral",
+  "exposure": -0.3,
+  "white_balance_k": 5900,
+  "white_balance_tint": 7.0
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 235,
+  "white_out": 238,
+  "contrast": 0.1,
+  "clarity": 0.03,
+  "sharpen": 0.12,
+  "sharpen_px": 0.7
+ },
+ "materials": {
+  "sweep": {
+   "roughness": 0.32
+  },
+  "horn-satin": {
+   "roughness": 0.25
+  }
+ },
+ "lights": {
+  "bg-left": {
+   "type": "area",
+   "size_m": [
+    8.0,
+    3.0
+   ],
+   "position": [
+    -3.0,
+    1.2,
+    3.6
+   ],
+   "target": [
+    -3.0,
+    2.6,
+    1.0
+   ],
+   "irradiance": 1.98,
+   "color": "#FFF4E8",
+   "camera": false,
+   "specular": 0.0,
+   "receivers": [
+    "sweep*"
+   ]
+  },
+  "bg-right": {
+   "type": "area",
+   "size_m": [
+    8.0,
+    3.0
+   ],
+   "position": [
+    3.0,
+    1.2,
+    3.6
+   ],
+   "target": [
+    3.0,
+    2.6,
+    1.0
+   ],
+   "irradiance": 1.98,
+   "color": "#FFF4E8",
+   "camera": false,
+   "specular": 0.0,
+   "receivers": [
+    "sweep*"
+   ]
+  },
+  "scrim": {
+   "type": "area",
+   "size_m": [
+    9.0,
+    1.6
+   ],
+   "position": [
+    0.0,
+    0.4,
+    2.8
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.8
+   ],
+   "irradiance": 1.6,
+   "color": "#FFFAF4",
+   "camera": false
+  },
+  "key": {
+   "type": "area",
+   "size_m": [
+    6.0,
+    1.6
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.6
+   ],
+   "irradiance": 4.0,
+   "color": "#FFFAF4",
+   "camera": false,
+   "specular": 1.0,
+   "position": [
+    -1.6,
+    -3.4,
+    3.0
+   ]
+  },
+  "back-top": {
+   "type": "area",
+   "size_m": [
+    9.0,
+    1.2
+   ],
+   "target": [
+    0.0,
+    -0.6,
+    0.0
+   ],
+   "irradiance": 16.0,
+   "color": "#FFF8F0",
+   "camera": false,
+   "position": [
+    0.0,
+    2.209,
+    3.012
+   ]
+  },
+  "sweep-left": {
+   "type": "area",
+   "size_m": [
+    6.0,
+    4.0
+   ],
+   "position": [
+    -4.5,
+    -5.0,
+    4.0
+   ],
+   "target": [
+    -3.5,
+    -2.5,
+    0.0
+   ],
+   "irradiance": 0.6,
+   "color": "#FFFFFF",
+   "receivers": [
+    "sweep*"
+   ]
+  },
+  "sweep-right": {
+   "type": "area",
+   "size_m": [
+    6.0,
+    4.0
+   ],
+   "position": [
+    4.5,
+    -5.0,
+    4.0
+   ],
+   "target": [
+    3.5,
+    -2.5,
+    0.0
+   ],
+   "irradiance": 0.6,
+   "color": "#FFFFFF",
+   "receivers": [
+    "sweep*"
+   ]
+  }
+ },
+ "products": [
+  {
+   "def": "studio/products/barkhorn-cloud.json",
+   "flavour": "cloud-red",
+   "instances": [
+    {
+     "position": [
+      -3.5,
+      0,
+      0.0385
+     ],
+     "rotate_z": -12.0,
+     "flavour": "cloud-red",
+     "hide": [
+      "cloth-disc",
+      "feet-base",
+      "feet-stem",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      -2.5,
+      0,
+      0.0385
+     ],
+     "rotate_z": -12.0,
+     "flavour": "cloud-orange",
+     "hide": [
+      "cloth-disc",
+      "feet-base",
+      "feet-stem",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      -1.5,
+      0,
+      0.0385
+     ],
+     "rotate_z": -12.0,
+     "flavour": "cloud-amber",
+     "hide": [
+      "cloth-disc",
+      "feet-base",
+      "feet-stem",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      -0.5,
+      0,
+      0.0385
+     ],
+     "rotate_z": -12.0,
+     "flavour": "eucalyptus-y2k-green",
+     "hide": [
+      "cloth-disc",
+      "feet-base",
+      "feet-stem",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      0.5,
+      0,
+      0.0385
+     ],
+     "rotate_z": -12.0,
+     "flavour": "cloud-blue",
+     "hide": [
+      "cloth-disc",
+      "feet-base",
+      "feet-stem",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      1.5,
+      0,
+      0.0385
+     ],
+     "rotate_z": -12.0,
+     "flavour": "cloud-violet",
+     "hide": [
+      "cloth-disc",
+      "feet-base",
+      "feet-stem",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      2.5,
+      0,
+      0.0385
+     ],
+     "rotate_z": -12.0,
+     "flavour": "birch-fog-clear",
+     "hide": [
+      "cloth-disc",
+      "feet-base",
+      "feet-stem",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      3.5,
+      0,
+      0.0385
+     ],
+     "rotate_z": -12.0,
+     "flavour": "cloud-black",
+     "hide": [
+      "cloth-disc",
+      "feet-base",
+      "feet-stem",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    }
+   ],
+   "normals_refine": false
+  },
+  {
+   "def": "studio/products/barkhorn-variants.json",
+   "flavour": "cloud-red",
+   "instances": [
+    {
+     "position": [
+      -3.5,
+      0,
+      0.0385
+     ],
+     "rotate_z": -12.0,
+     "flavour": "cloud-red",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": [
+      "Plinth",
+      "Plinth uplight"
+     ]
+    },
+    {
+     "position": [
+      -2.5,
+      0,
+      0.0385
+     ],
+     "rotate_z": -12.0,
+     "flavour": "cloud-orange",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": [
+      "Plinth",
+      "Plinth uplight"
+     ]
+    },
+    {
+     "position": [
+      -1.5,
+      0,
+      0.0385
+     ],
+     "rotate_z": -12.0,
+     "flavour": "cloud-amber",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": [
+      "Plinth",
+      "Plinth uplight"
+     ]
+    },
+    {
+     "position": [
+      -0.5,
+      0,
+      0.0385
+     ],
+     "rotate_z": -12.0,
+     "flavour": "eucalyptus-y2k-green",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": [
+      "Plinth",
+      "Plinth uplight"
+     ]
+    },
+    {
+     "position": [
+      0.5,
+      0,
+      0.0385
+     ],
+     "rotate_z": -12.0,
+     "flavour": "cloud-blue",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": [
+      "Plinth",
+      "Plinth uplight"
+     ]
+    },
+    {
+     "position": [
+      1.5,
+      0,
+      0.0385
+     ],
+     "rotate_z": -12.0,
+     "flavour": "cloud-violet",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": [
+      "Plinth",
+      "Plinth uplight"
+     ]
+    },
+    {
+     "position": [
+      2.5,
+      0,
+      0.0385
+     ],
+     "rotate_z": -12.0,
+     "flavour": "birch-fog-clear",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": [
+      "Plinth",
+      "Plinth uplight"
+     ]
+    },
+    {
+     "position": [
+      3.5,
+      0,
+      0.0385
+     ],
+     "rotate_z": -12.0,
+     "flavour": "cloud-black",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": [
+      "Plinth",
+      "Plinth uplight"
+     ]
+    }
+   ],
+   "normals_refine": false
+  }
+ ]
+}

@@ -1,0 +1,1004 @@
+{
+ "legend": {
+  "1": "world (sky)",
+  "2": "sweep-out0",
+  "3": "waveguide",
+  "4": "sweep-0",
+  "5": "base-plinth-3",
+  "6": "sweep-1",
+  "7": "sweep-2",
+  "8": "sweep-3",
+  "9": "bounce0",
+  "10": "sweep-4",
+  "11": "sweep-5",
+  "12": "lamp scrim over sweep-4",
+  "13": "sweep-6",
+  "14": "sweep-7",
+  "15": "right",
+  "16": "lamp scrim over world (sky)",
+  "17": "lamp key over world (sky)",
+  "18": "sweep-out-end",
+  "19": "base-plinth-1",
+  "20": "grip-right",
+  "21": "top",
+  "22": "horn-throat",
+  "23": "hf-adaptor",
+  "24": "hf-exit",
+  "25": "hf-plug",
+  "26": "hf-motor",
+  "27": "lamp scrim over sweep-out0",
+  "28": "strata-posts",
+  "29": "left",
+  "30": "front-panel",
+  "31": "caldera-1",
+  "32": "caldera-3",
+  "33": "caldera-2",
+  "34": "woofer-frame",
+  "35": "woofer-surround",
+  "36": "woofer-cone",
+  "37": "base-plinth-2",
+  "38": "woofer-screws",
+  "39": "woofer-cap",
+  "40": "bottom",
+  "41": "port-frame-left",
+  "42": "port-left",
+  "43": "lining-back-a-web",
+  "44": "port-right",
+  "45": "land-bottom",
+  "46": "lining-back-f-web",
+  "47": "rib-back-2",
+  "48": "lining-bottom-1-web",
+  "49": "back",
+  "50": "land-left",
+  "51": "rib-back-1",
+  "52": "land-right",
+  "53": "lining-back-d-web",
+  "54": "back-boss-2",
+  "55": "base-plinth-feet"
+ },
+ "step": 2,
+ "parts": {
+  "front-panel": {
+   "pixels": 15132,
+   "seen": [
+    [
+     "world (sky)",
+     0.503
+    ],
+    [
+     "sweep-out0",
+     0.183
+    ],
+    [
+     "sweep-out-end",
+     0.034
+    ],
+    [
+     "sweep-6",
+     0.031
+    ],
+    [
+     "sweep-0",
+     0.029
+    ],
+    [
+     "sweep-1",
+     0.029
+    ]
+   ]
+  },
+  "waveguide": {
+   "pixels": 14480,
+   "seen": [
+    [
+     "waveguide",
+     0.713
+    ],
+    [
+     "world (sky)",
+     0.148
+    ],
+    [
+     "horn-throat",
+     0.035
+    ],
+    [
+     "bounce0",
+     0.028
+    ],
+    [
+     "sweep-out-end",
+     0.013
+    ],
+    [
+     "sweep-6",
+     0.007
+    ]
+   ]
+  },
+  "right": {
+   "pixels": 6784,
+   "seen": [
+    [
+     "sweep-3",
+     0.251
+    ],
+    [
+     "sweep-4",
+     0.208
+    ],
+    [
+     "sweep-2",
+     0.205
+    ],
+    [
+     "world (sky)",
+     0.128
+    ],
+    [
+     "sweep-5",
+     0.08
+    ],
+    [
+     "sweep-6",
+     0.056
+    ]
+   ]
+  },
+  "woofer-cone": {
+   "pixels": 4756,
+   "seen": [
+    [
+     "bounce0",
+     0.208
+    ],
+    [
+     "world (sky)",
+     0.178
+    ],
+    [
+     "woofer-cone",
+     0.062
+    ],
+    [
+     "sweep-6",
+     0.049
+    ],
+    [
+     "sweep-5",
+     0.048
+    ],
+    [
+     "sweep-3",
+     0.045
+    ]
+   ]
+  },
+  "caldera-3": {
+   "pixels": 2756,
+   "seen": [
+    [
+     "world (sky)",
+     0.672
+    ],
+    [
+     "sweep-out0",
+     0.161
+    ],
+    [
+     "sweep-out-end",
+     0.035
+    ],
+    [
+     "front-panel",
+     0.033
+    ],
+    [
+     "caldera-2",
+     0.033
+    ],
+    [
+     "sweep-5",
+     0.023
+    ]
+   ]
+  },
+  "left": {
+   "pixels": 1884,
+   "seen": [
+    [
+     "world (sky)",
+     0.399
+    ],
+    [
+     "front-panel",
+     0.261
+    ],
+    [
+     "sweep-7",
+     0.11
+    ],
+    [
+     "sweep-out0",
+     0.1
+    ],
+    [
+     "sweep-4",
+     0.019
+    ],
+    [
+     "sweep-0",
+     0.017
+    ]
+   ]
+  },
+  "woofer-surround": {
+   "pixels": 1796,
+   "seen": [
+    [
+     "woofer-surround",
+     0.425
+    ],
+    [
+     "world (sky)",
+     0.14
+    ],
+    [
+     "woofer-frame",
+     0.136
+    ],
+    [
+     "lamp key over world (sky)",
+     0.031
+    ],
+    [
+     "sweep-out0",
+     0.029
+    ],
+    [
+     "sweep-0",
+     0.029
+    ]
+   ]
+  },
+  "woofer-frame": {
+   "pixels": 1756,
+   "seen": [
+    [
+     "world (sky)",
+     0.645
+    ],
+    [
+     "woofer-surround",
+     0.148
+    ],
+    [
+     "sweep-out0",
+     0.125
+    ],
+    [
+     "sweep-out-end",
+     0.027
+    ],
+    [
+     "sweep-4",
+     0.016
+    ],
+    [
+     "front-panel",
+     0.014
+    ]
+   ]
+  },
+  "caldera-2": {
+   "pixels": 1484,
+   "seen": [
+    [
+     "world (sky)",
+     0.62
+    ],
+    [
+     "sweep-out0",
+     0.119
+    ],
+    [
+     "caldera-3",
+     0.089
+    ],
+    [
+     "caldera-1",
+     0.062
+    ],
+    [
+     "front-panel",
+     0.046
+    ],
+    [
+     "sweep-out-end",
+     0.024
+    ]
+   ]
+  },
+  "caldera-1": {
+   "pixels": 1340,
+   "seen": [
+    [
+     "world (sky)",
+     0.579
+    ],
+    [
+     "sweep-out0",
+     0.143
+    ],
+    [
+     "front-panel",
+     0.104
+    ],
+    [
+     "caldera-2",
+     0.069
+    ],
+    [
+     "sweep-out-end",
+     0.036
+    ],
+    [
+     "woofer-frame",
+     0.018
+    ]
+   ]
+  },
+  "base-plinth-3": {
+   "pixels": 1168,
+   "seen": [
+    [
+     "sweep-7",
+     0.123
+    ],
+    [
+     "sweep-1",
+     0.123
+    ],
+    [
+     "sweep-3",
+     0.123
+    ],
+    [
+     "sweep-2",
+     0.12
+    ],
+    [
+     "sweep-4",
+     0.12
+    ],
+    [
+     "sweep-5",
+     0.116
+    ]
+   ]
+  },
+  "base-plinth-2": {
+   "pixels": 1092,
+   "seen": [
+    [
+     "base-plinth-1",
+     0.385
+    ],
+    [
+     "sweep-1",
+     0.077
+    ],
+    [
+     "sweep-4",
+     0.07
+    ],
+    [
+     "sweep-5",
+     0.07
+    ],
+    [
+     "sweep-6",
+     0.07
+    ],
+    [
+     "sweep-7",
+     0.07
+    ]
+   ]
+  },
+  "bottom": {
+   "pixels": 912,
+   "seen": [
+    [
+     "base-plinth-1",
+     0.149
+    ],
+    [
+     "front-panel",
+     0.145
+    ],
+    [
+     "sweep-6",
+     0.092
+    ],
+    [
+     "sweep-7",
+     0.092
+    ],
+    [
+     "sweep-5",
+     0.088
+    ],
+    [
+     "sweep-0",
+     0.083
+    ]
+   ]
+  },
+  "top": {
+   "pixels": 796,
+   "seen": [
+    [
+     "world (sky)",
+     1.0
+    ]
+   ]
+  },
+  "port-frame-left": {
+   "pixels": 756,
+   "seen": [
+    [
+     "sweep-out0",
+     0.185
+    ],
+    [
+     "sweep-7",
+     0.106
+    ],
+    [
+     "sweep-1",
+     0.09
+    ],
+    [
+     "port-left",
+     0.09
+    ],
+    [
+     "sweep-3",
+     0.09
+    ],
+    [
+     "sweep-4",
+     0.085
+    ]
+   ]
+  },
+  "port-frame-right": {
+   "pixels": 708,
+   "seen": [
+    [
+     "sweep-out0",
+     0.147
+    ],
+    [
+     "world (sky)",
+     0.113
+    ],
+    [
+     "sweep-2",
+     0.096
+    ],
+    [
+     "sweep-4",
+     0.09
+    ],
+    [
+     "sweep-6",
+     0.079
+    ],
+    [
+     "port-right",
+     0.079
+    ]
+   ]
+  },
+  "woofer-cap": {
+   "pixels": 684,
+   "seen": [
+    [
+     "world (sky)",
+     0.275
+    ],
+    [
+     "bounce0",
+     0.123
+    ],
+    [
+     "woofer-cone",
+     0.076
+    ],
+    [
+     "sweep-3",
+     0.058
+    ],
+    [
+     "sweep-5",
+     0.058
+    ],
+    [
+     "sweep-2",
+     0.053
+    ]
+   ]
+  },
+  "port-left": {
+   "pixels": 400,
+   "seen": [
+    [
+     "lining-back-a-web",
+     0.56
+    ],
+    [
+     "back",
+     0.14
+    ],
+    [
+     "rib-back-1",
+     0.1
+    ],
+    [
+     "land-left",
+     0.05
+    ],
+    [
+     "port-left",
+     0.04
+    ],
+    [
+     "land-bottom",
+     0.04
+    ]
+   ]
+  },
+  "port-right": {
+   "pixels": 348,
+   "seen": [
+    [
+     "lining-back-f-web",
+     0.529
+    ],
+    [
+     "rib-back-2",
+     0.23
+    ],
+    [
+     "land-bottom",
+     0.057
+    ],
+    [
+     "land-right",
+     0.057
+    ],
+    [
+     "port-right",
+     0.034
+    ],
+    [
+     "back",
+     0.034
+    ]
+   ]
+  },
+  "horn-throat": {
+   "pixels": 316,
+   "seen": [
+    [
+     "horn-throat",
+     0.506
+    ],
+    [
+     "hf-adaptor",
+     0.177
+    ],
+    [
+     "hf-exit",
+     0.139
+    ],
+    [
+     "hf-plug",
+     0.139
+    ],
+    [
+     "world (sky)",
+     0.025
+    ],
+    [
+     "hf-motor",
+     0.013
+    ]
+   ]
+  },
+  "base-plinth-1": {
+   "pixels": 224,
+   "seen": [
+    [
+     "base-plinth-2",
+     0.196
+    ],
+    [
+     "left",
+     0.143
+    ],
+    [
+     "right",
+     0.107
+    ],
+    [
+     "sweep-1",
+     0.107
+    ],
+    [
+     "bottom",
+     0.107
+    ],
+    [
+     "sweep-2",
+     0.089
+    ]
+   ]
+  },
+  "lining-back-f-web": {
+   "pixels": 188,
+   "seen": [
+    [
+     "lining-bottom-1-web",
+     0.191
+    ],
+    [
+     "sweep-6",
+     0.17
+    ],
+    [
+     "rib-back-2",
+     0.149
+    ],
+    [
+     "port-right",
+     0.149
+    ],
+    [
+     "sweep-out-end",
+     0.128
+    ],
+    [
+     "sweep-4",
+     0.064
+    ]
+   ]
+  },
+  "lining-back-a-web": {
+   "pixels": 152,
+   "seen": [
+    [
+     "sweep-7",
+     0.263
+    ],
+    [
+     "port-left",
+     0.237
+    ],
+    [
+     "land-left",
+     0.105
+    ],
+    [
+     "sweep-4",
+     0.105
+    ],
+    [
+     "left",
+     0.105
+    ],
+    [
+     "sweep-5",
+     0.105
+    ]
+   ]
+  },
+  "hf-plug": {
+   "pixels": 112,
+   "seen": [
+    [
+     "world (sky)",
+     0.643
+    ],
+    [
+     "hf-adaptor",
+     0.179
+    ],
+    [
+     "horn-throat",
+     0.179
+    ]
+   ]
+  },
+  "strata-posts": {
+   "pixels": 104,
+   "seen": [
+    [
+     "world (sky)",
+     0.769
+    ],
+    [
+     "sweep-out0",
+     0.038
+    ],
+    [
+     "sweep-4",
+     0.038
+    ],
+    [
+     "sweep-0",
+     0.038
+    ],
+    [
+     "sweep-1",
+     0.038
+    ],
+    [
+     "strata-posts",
+     0.038
+    ]
+   ]
+  },
+  "woofer-screws": {
+   "pixels": 100,
+   "seen": [
+    [
+     "caldera-1",
+     0.44
+    ],
+    [
+     "bounce0",
+     0.2
+    ],
+    [
+     "woofer-frame",
+     0.16
+    ],
+    [
+     "world (sky)",
+     0.12
+    ],
+    [
+     "caldera-2",
+     0.08
+    ]
+   ]
+  },
+  "grip-right": {
+   "pixels": 96,
+   "seen": [
+    [
+     "grip-right",
+     0.917
+    ],
+    [
+     "right",
+     0.083
+    ]
+   ]
+  },
+  "base-plinth-feet": {
+   "pixels": 88,
+   "seen": [
+    [
+     "sweep-1",
+     0.182
+    ],
+    [
+     "sweep-0",
+     0.136
+    ],
+    [
+     "sweep-3",
+     0.136
+    ],
+    [
+     "base-plinth-feet",
+     0.091
+    ],
+    [
+     "sweep-2",
+     0.091
+    ],
+    [
+     "sweep-4",
+     0.091
+    ]
+   ]
+  },
+  "port-screws": {
+   "pixels": 80,
+   "seen": [
+    [
+     "sweep-out0",
+     0.3
+    ],
+    [
+     "sweep-6",
+     0.15
+    ],
+    [
+     "sweep-0",
+     0.1
+    ],
+    [
+     "sweep-2",
+     0.1
+    ],
+    [
+     "sweep-3",
+     0.1
+    ],
+    [
+     "sweep-1",
+     0.05
+    ]
+   ]
+  },
+  "land-left": {
+   "pixels": 80,
+   "seen": [
+    [
+     "left",
+     0.8
+    ],
+    [
+     "back",
+     0.2
+    ]
+   ]
+  },
+  "rib-back-2": {
+   "pixels": 72,
+   "seen": [
+    [
+     "lining-bottom-1-web",
+     0.556
+    ],
+    [
+     "port-right",
+     0.278
+    ],
+    [
+     "front-panel",
+     0.111
+    ],
+    [
+     "sweep-6",
+     0.056
+    ]
+   ]
+  },
+  "back": {
+   "pixels": 56,
+   "seen": [
+    [
+     "left",
+     0.286
+    ],
+    [
+     "port-left",
+     0.143
+    ],
+    [
+     "sweep-out-end",
+     0.143
+    ],
+    [
+     "sweep-7",
+     0.143
+    ],
+    [
+     "front-panel",
+     0.143
+    ],
+    [
+     "port-right",
+     0.143
+    ]
+   ]
+  },
+  "lining-back-d-web": {
+   "pixels": 48,
+   "seen": [
+    [
+     "lining-bottom-1-web",
+     1.0
+    ]
+   ]
+  },
+  "land-bottom": {
+   "pixels": 40,
+   "seen": [
+    [
+     "front-panel",
+     0.9
+    ],
+    [
+     "lining-bottom-1-web",
+     0.1
+    ]
+   ]
+  },
+  "rib-back-1": {
+   "pixels": 28,
+   "seen": [
+    [
+     "port-left",
+     0.429
+    ],
+    [
+     "sweep-7",
+     0.286
+    ],
+    [
+     "sweep-6",
+     0.286
+    ]
+   ]
+  },
+  "lining-bottom-1-web": {
+   "pixels": 12,
+   "seen": [
+    [
+     "rib-back-2",
+     1.0
+    ]
+   ]
+  },
+  "horn-pod": {
+   "pixels": 8,
+   "seen": [
+    [
+     "sweep-2",
+     1.0
+    ]
+   ]
+  },
+  "hf-motor": {
+   "pixels": 8,
+   "seen": [
+    [
+     "world (sky)",
+     0.5
+    ],
+    [
+     "hf-plug",
+     0.5
+    ]
+   ]
+  },
+  "land-right": {
+   "pixels": 8,
+   "seen": [
+    [
+     "port-right",
+     0.5
+    ],
+    [
+     "front-panel",
+     0.5
+    ]
+   ]
+  }
+ },
+ "lamps": {
+  "scrim": 0.4622,
+  "key": 8.2833,
+  "back-top": 25.1298,
+  "sweep-left": 0.5813,
+  "sweep-right": 0.5813
+ }
+}
