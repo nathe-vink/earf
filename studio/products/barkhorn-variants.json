@@ -16,6 +16,11 @@
    "color": "#C9A660",
    "roughness": 0.3
   },
+  "post-metal": {
+   "preset": "metal",
+   "color": "#C9A660",
+   "roughness": 0.3
+  },
   "builtin-led": {
    "preset": "frosted",
    "color": "#F4F2EE",
@@ -103,8 +108,12 @@
    "material": "bark"
   },
   {
-   "match": "strata-posts|strata-collars|base-outriggers",
+   "match": "base-outriggers",
    "material": "brass"
+  },
+  {
+   "match": "strata-posts|strata-collars",
+   "material": "post-metal"
   },
   {
    "match": "builtin-floor-led|side-light-led",
