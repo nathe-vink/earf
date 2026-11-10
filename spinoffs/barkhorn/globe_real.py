@@ -387,7 +387,7 @@ def _equator_owns(me):
 
 
 def stage(bpy, ground, px, e, samples, env='dim', adaptive=0.01, key=2.0, fill=0.0, shine=(1.0, 1.0), bounces=96,
-          key_at=(-40.0, 40.0), key_size=(3.2, 2.4)):
+          key_at=(-40.0, 40.0), key_size=(3.2, 2.4), transparent=False):
     """The camera (earth.py's view, orthographic, the frame 2e radii across), the ground as a backdrop of exactly its
     colour, and the studio seen in the acrylic: a soft key above left, the room round it. `shine` (round 28d): the key's
     and the fill's shares in reflections (lights.lamp_shares). The fill, a broad softbox just beside the camera, was
@@ -403,7 +403,9 @@ def stage(bpy, ground, px, e, samples, env='dim', adaptive=0.01, key=2.0, fill=0
     # the ground: a plane far behind, glowing its colour, so the camera and anything seen through the acrylic meet it
     me = bpy.data.meshes.new('ground'); s = 12.0
     me.from_pydata([(-s, 3.0, -s), (s, 3.0, -s), (s, 3.0, s), (-s, 3.0, s)], [], [(0, 1, 2, 3)])
-    gob = bpy.data.objects.new('ground', me); scene.collection.objects.link(gob)
+    gob = bpy.data.objects.new('ground', me)
+    if not transparent:                                  # (2026-11-10, --transparent: no ground, the film clear, RGBA)
+        scene.collection.objects.link(gob)
     m = bpy.data.materials.new('ground'); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
     em = nt.nodes.new('ShaderNodeEmission'); out = nt.nodes.new('ShaderNodeOutputMaterial')
     em.inputs['Color'].default_value = (*_hex_lin(GROUNDS[ground]), 1.0); em.inputs['Strength'].default_value = 1.0
@@ -422,7 +424,7 @@ def stage(bpy, ground, px, e, samples, env='dim', adaptive=0.01, key=2.0, fill=0
                               'color': '#FFF8F0', 'orbit': {'azimuth_deg': 15, 'elevation_deg': 8, 'distance_m': 7.0},
                               'specular': shine[1]}, Vector((0, 0, 0)))
     r = scene.render
-    r.engine = 'CYCLES'; r.resolution_x = r.resolution_y = px; r.resolution_percentage = 100; r.film_transparent = False
+    r.engine = 'CYCLES'; r.resolution_x = r.resolution_y = px; r.resolution_percentage = 100; r.film_transparent = transparent
     cy = scene.cycles
     cy.device = 'CPU'; cy.samples = samples; cy.use_adaptive_sampling = True; cy.adaptive_threshold = adaptive
     cy.use_denoising = True; cy.denoiser = 'OPENIMAGEDENOISE'; cy.denoising_input_passes = 'RGB_ALBEDO_NORMAL'
@@ -432,8 +434,10 @@ def stage(bpy, ground, px, e, samples, env='dim', adaptive=0.01, key=2.0, fill=0
     cy.transparent_max_bounces = 32; cy.volume_bounces = 2
     cy.caustics_reflective = False; cy.caustics_refractive = False; cy.sample_clamp_indirect = 10.0; cy.blur_glossy = 0.5
     vs = scene.view_settings; vs.view_transform = 'Standard'; vs.look = 'None'; vs.exposure = 0.0; vs.gamma = 1.0
-    r.image_settings.file_format = 'PNG'; r.image_settings.color_mode = 'RGB'; r.image_settings.color_depth = '8'
+    r.image_settings.file_format = 'PNG'; r.image_settings.color_mode = 'RGBA' if transparent else 'RGB'; r.image_settings.color_depth = '8'
     r.use_persistent_data = True
+    if transparent:
+        cy.film_transparent_glass = True
 
 
 def encode(frames, out):
@@ -613,6 +617,8 @@ def main():
                     help="the key's azimuth and elevation in degrees (-40 40)")
     ap.add_argument('--key-size', type=float, nargs=2, default=(3.2, 2.4), metavar=('W', 'H'),
                     help="the key softbox's size in metres (3.2 2.4); bigger, the same light from a softer, dimmer source")
+    ap.add_argument('--transparent', action='store_true',
+                    help='no ground plane and a transparent film: RGBA frames, straight alpha (the site cuts nothing)')
     ap.add_argument('--bounces', type=int, default=96, help='how far light runs along a sheet inside it (glossy and transmission bounces)')
     ap.add_argument('--neon', type=float, nargs=2, metavar=('RIM', 'FACE'),
                     help="fluorescent acrylic for dark grounds (round 28c): the rims and the faces give off light at these "
@@ -677,7 +683,7 @@ def main():
         os.makedirs(a.spin_frames, exist_ok=True)
         import mark as K
         stage(bpy, a.ground, a.px or K.SPIN['px'], 1 + 2 * K.SPIN['clear'], a.samples or 24, a.env, a.adaptive or 0.02,
-              a.key, a.fill, tuple(a.shine), a.bounces, tuple(a.key_at), tuple(a.key_size))
+              a.key, a.fill, tuple(a.shine), a.bounces, tuple(a.key_at), tuple(a.key_size), a.transparent)
         for k in range(a.first, a.last or a.frames):
             t1 = time.time()
             turn(root, K.SPIN['turn'] * k / a.frames)
