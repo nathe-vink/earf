@@ -78,6 +78,15 @@ ACRYLIC = {'ember': '#F2A29C', 'dust': '#F2B184', 'acid': '#F2D06B', 'poison': '
 HORN = {'ember': '#C8262B', 'dust': '#E0661C', 'acid': '#F2B705', 'poison': '#4C6A36', 'ice': '#3C86C2',
         'haze': '#5E3F8F'}                               # round 28d: the Clouds' horns, the speakers' own colour (product.py)
 DEPTH, POLISH = 0.025, 0.05                              # their depth (m) and roughness, polished cast acrylic
+# 2026-11-10 (the owner: "both options don't use the colors we now use for the speakers"): Tropos's acrylic as the
+# speaker lane's product.py holds it today (r33-speaker-horn ffdf8e8c: VARIANTS[...]['materials'], colors F), each a clear
+# resin reaching `deep` after `radius` metres. The cabinets (bark): TruCast stock at 20 mm, Poison and Haze the colors F
+# custom batches; the formed horns (horn-formed): FORMED_HORN. Read from that product.py, not picked by hand.
+TROPOS_CABINET = {'ember': '#CF0913', 'dust': '#FBBD77', 'acid': '#F1EE7F', 'poison': '#12AA24', 'ice': '#92CCF7',
+                  'haze': '#9F61E4'}                     # each after 0.025 m
+TROPOS_HORN = {'ember': '#C50206', 'dust': '#B85010', 'acid': '#A39700', 'poison': '#0E6A06', 'ice': '#0A52B8',
+               'haze': '#4512D0'}                        # each after 0.010 m
+TROPOS_DEPTH = {'tropos-cabinet': 0.025, 'tropos-horn': 0.010}
 MARK_DEPTH = 0.02                                        # the globe's: a little deeper, so a face holds its colour on paper
 ORDER = [4, 3, 5, 1, 0, 2]                               # which disc is whole: the meridian facing us, then the others in turn
 GROUNDS = {'paper': E.PAPER, 'night': E.NIGHT}
@@ -566,7 +575,7 @@ def main():
     ap.add_argument('--env', choices=['studio', 'dim', 'grey', 'dark'],
                     help="the room seen in the acrylic: round 28d's plain grey, on paper and on dark, as the studio's softbox "
                          "flashed in each rim turning toward the camera (round 28b: studio)")
-    ap.add_argument('--tint', default='glow', choices=['cabinet', 'glow', 'horn', 'horn-glow'],
+    ap.add_argument('--tint', default='glow', choices=['cabinet', 'glow', 'horn', 'horn-glow', 'tropos-cabinet', 'tropos-horn'],
                     help="glow()'s tints of the cabinets', the cabinets' own, or the horns' (round 28d), raw or through glow()")
     ap.add_argument('--slots', action='store_true', help='the discs slotted through one another, not cemented clear')
     ap.add_argument('--depth', type=float, default=MARK_DEPTH, help='the path (m) after which the acrylic is its tint')
@@ -628,9 +637,13 @@ def main():
     bpy.ops.wm.read_factory_settings(use_empty=True)
     bpy.ops.preferences.addon_enable(module='cycles')
     t0 = time.time()
-    base = HORN if a.tint.startswith('horn') else ACRYLIC
-    root = build(bpy, base if a.tint in ('cabinet', 'horn') else {k: glow(v, passed=PASS.get(k, '')) for k, v in base.items()},
-                 not a.slots, a.depth, a.look, a.scatter, a.clear, tuple(a.neon), a.crossings, a.milk,
+    if a.tint.startswith('tropos'):                     # the speakers' own sheet, as it is: no glow(), its own depth
+        tints, depth = (TROPOS_CABINET if a.tint == 'tropos-cabinet' else TROPOS_HORN), TROPOS_DEPTH[a.tint]
+    else:
+        base = HORN if a.tint.startswith('horn') else ACRYLIC
+        tints = base if a.tint in ('cabinet', 'horn') else {k: glow(v, passed=PASS.get(k, '')) for k, v in base.items()}
+        depth = a.depth
+    root = build(bpy, tints, not a.slots, depth, a.look, a.scatter, a.clear, tuple(a.neon), a.crossings, a.milk,
                  _body(a.body, _hues(*a.vivid)))
     if a.still:
         stage(bpy, a.ground, a.px or 1024, 1 + E.W_LINE / 2, a.samples or 128, a.env, a.adaptive or 0.01, a.key, a.fill,
