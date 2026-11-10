@@ -10,7 +10,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import crystal as C                                                 # noqa: E402
 
 PRODUCT = C.Product('earf-orb-table', 'Core', 'Table lamp in cast acrylic, a crystal ball, plugged in or on its own cells',
-                    params=dict(C.O), parts=lambda P: C.orb_parts(), count=1, materials=C.MATERIALS,
+                    params=dict(C.O), parts=lambda P: C.orb_parts(dict(C.O, angled=True) if os.environ.get('CORE_ANGLED') else C.O), count=1, materials=C.MATERIALS,
                     variants=C.VARIANTS, notes=C.NOTES_ORB, touching=C.TOUCHING_ORB, drawing_prefix='EOT',
                     # the origin on the ball's axis, on the table: the cable (420 back) would move the footprint's centre
                     # (the kit's default origin) 170 behind it; the kit reads an all-zero origin as unset, hence the 1e-6

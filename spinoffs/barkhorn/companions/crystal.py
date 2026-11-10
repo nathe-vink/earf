@@ -529,7 +529,20 @@ def orb_parts(p=O):
     zs = zc - math.sqrt(R ** 2 - 42 ** 2) - 0.3
     seat = cyl('z', (0, 0), 92, zs - 1.5, zs) - cyl('z', (0, 0), 84, zs - 2, zs + 1)
     # the drum: from below, the hatch's counterbore, the middle pocket, the cells' bays, the corners, the ring's groove
-    base = eased(bd, 0, bh, 3.0, top=False) - cup - cyl('z', (0, 0), 112.0, -1, hz)
+    # ANGLED (a look for the owner, 2026-11-10, not the default: "Instead of the vertical edges on core's base I wonder
+    # if angled edges flush with the base would look better"): the base's wall a cone from under the touch ring (r 60
+    # at z 30) down and out along one line through the dock to the dock's outer foot (r 75 at z -6.5), so lamp and
+    # dock read as one cone with a 0.2 hairline at z 1.5; the base keeps its Ø120 x 1.5 boss in the dock's pocket
+    ang_ = p.get('angled', False)
+    def cone_r(z):
+        return 60.0 + 15.0 * (bh - z) / (bh + 6.5)
+    def frustum(za, zb):
+        from build123d import Cone, Pos, Align
+        return Pos(0, 0, za) * Cone(cone_r(za), cone_r(zb), zb - za, align=(Align.CENTER, Align.CENTER, Align.MIN))
+    if ang_:
+        base = (cyl('z', (0, 0), bd, 0, 1.5) + frustum(1.5, bh)) - cup - cyl('z', (0, 0), 112.0, -1, hz)
+    else:
+        base = eased(bd, 0, bh, 3.0, top=False) - cup - cyl('z', (0, 0), 112.0, -1, hz)
     base = base - cyl('z', (0, 0), 50.4, -1, uz) - cyl('z', (0, 0), 30, uz - 0.1, bh) - bay
     base = base - (cyl('z', (0, 0), 108.4, -1, z0c + d + 0.6) - cyl('z', (0, 0), 53.6, -2, 31) - _chords(a, L, d, -0.2) -
                    at(uang, box(30, -7.8, -2, 70, 7.8, 31)))
@@ -551,8 +564,11 @@ def orb_parts(p=O):
     dz0 = -6.5
     contacts = cyl('z', (0, 0), 6.0, -2.0, 1.7) + (cyl('z', (0, 0), 43.0, -2.0, 1.7) - cyl('z', (0, 0), 37.0, -3, 2))
     dock_board = box(-19.0, 46.0, -4.5, 19.0, 69.0, -2.9)
+    db_ = 0.0
+    if p.get('angled', False):        # the slope comes within 0.1 of the board's pocket's outer corners: it moves 2.5 in
+        db_ = 2.5; dock_board = box(-19.0, 46.0 - db_, -4.5, 19.0, 69.0 - db_, -2.9)
     dock_cable = cyl('y', (0, -2.75), 4.0, 74.6, 180.0)
-    dock = (eased(150.0, dz0, 1.5, 1.5) - cyl('z', (0, 0), 122.0, 0, 3) - contacts - box(-20.0, 45.0, -5.0, 20.0, 70.0, -1.0) -
+    dock = ((frustum(dz0, 1.3) if ang_ else eased(150.0, dz0, 1.5, 1.5)) - cyl('z', (0, 0), 122.0, 0, 3) - contacts - box(-20.0, 45.0 - db_, -5.0, 20.0, 70.0 - db_, -1.0) -
             cyl('y', (0, -2.75), 4.2, 60.0, 80.0))
     base = base - (cyl('z', (0, 0), 118, -1, 2) - cyl('z', (0, 0), 114, -2, 3)) - cyl('z', (0, 0), 92.4, zs - 2, zs + 0.01)
     ring = eased(bd, bh, z_top, 2.0, bottom=False) - cup

@@ -316,7 +316,9 @@ def build(frame, samples, scale):
         for nm, m in (('dock', black_acrylic), ('base', black_acrylic), ('ring', an), ('seat', SC.principled('si', '#111111', 0.6)),
                       ('dock-cable', SC.principled('braid', '#121212', 0.75, bump=(1200.0, 0.5)))) + \
                      (('grommet', an),):   # (B: the CAD's raised grommet, its flange and spigot, 2026-11-10)
-            objs.append(part('out-orb-table', nm, m, (x, y, z0)))
+            # CORE_ANGLED: the base and dock as one cone (a look for the owner, 2026-11-10; crystal.py, 'angled')
+            fo_ = 'out-orb-table-angled' if os.environ.get('CORE_ANGLED') and nm in ('base', 'dock') else 'out-orb-table'
+            objs.append(part(fo_, nm, m, (x, y, z0)))
         # the window over the LED (the CAD's clear acrylic plug, Ø29.6 x 5.7): clear, its shadow rays at its transmission
         # WINDOW: filter (default: a clear filter at its transmission for every ray, no refraction: the enclosing
         # sensor showed thin_shadow on this solid plug counting the LED's light twice, once by the shadow ray and once
