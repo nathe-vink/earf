@@ -29,6 +29,10 @@ HABITATS = {
 }
 # shot keys set per habitat (habitat.py --set), and samples where the scene is dark (the satin horn's grain)
 SETS = {
+    # Dust r3 (the coordinator, 2026-11-10 00:05, note 1): the sun 118 -> 124 deg, the sky turned with it (296 -> 290, its own
+    # sun stays on the lamp): at 118 the sun through the horn's front wall (the horn under the rule) lit a three-ray fan of
+    # glints on the inner flare's creases left of the pod (845 px over the horn-front crop); 121: 102 px, 124: 25 px (max 36)
+    'dust': {'sun.azimuth_deg': 124.0, 'sky.rotation_deg': 290.0},
     # the coordinator's gate on Ember (2026-11-03): a three-quarter view so the side panel carries the lava through the
     # red (the right crack's lamp, on that crack, aimed at the speaker), the camera lower so the horn clears the ridge
     # rotate_z: -5 mirrored a lava patch in the side panel's foot (an LED strip); -1 left the polished horn's left wall
@@ -171,6 +175,11 @@ REFLECT = {   # habitat -> [reflector specs] (W H AZ EL DIST TX TY TZ), white bo
     # Fog (b), 2026-11-10: a 2 x 2 m white board where fill_l stood (proxies: no fill left 15 % of the face under 10, the
     # board 5 %; the passed file 4 %). Poison takes none: a board where litter stood shades the floor on the sun's line
     'fog_b': [(2.0, 2.0, -55.0, 15.0, 3.5, 0.0, 0.0, 0.8)]}
+BERM = {   # habitat -> [berm specs] (LX LY RX RY H, the speaker's frame, m)
+    # Dust r3 (the coordinator's 00:05 note 2): sand banked 22 mm against the outside of the left face, its full depth: the
+    # face's lower edge showed open-sand-bright (its 21 % Fresnel mirror of the sunlit sand behind at 73 deg, and the sand
+    # through the bottom panel's edge; blocking the glass's direct light left it unchanged); 2.5 cm took it to 0.33-0.55
+    'dust': [(-0.30, -0.02, 0.05, 0.26, 0.022)]}
 SAMPLES = {'ember': 96, 'poison_g5': 96, 'haze_b': 96, 'fog_b': 96}
 
 
@@ -186,7 +195,9 @@ def main():
     ap.add_argument('--sink', type=float, help="the feet's bedding, m, in place of the habitat's (tests)")
     ap.add_argument('--scrim', type=float, nargs=4, help='a silk on the sun line: T W H D (tests)')
     ap.add_argument('--meniscus', type=float)
+    ap.add_argument('--berm', type=float, nargs=5, action='append', default=[], help='sand banked against the base: LX LY RX RY H')
     ap.add_argument('--reflector', type=float, nargs=8, action='append', default=[], help='a white board: W H AZ EL DIST TX TY TZ')
+    ap.add_argument('--opaque-shadows', action='store_true', help='diagnostics: the glass blocks direct light')
     ap.add_argument('--crop', type=float, nargs=4, help='a region only, fractions X0 Y0 X1 Y1 (tests)')
     # the horn under the shadow rule as the cabinet, the standard for every habitat (the coordinator, 2026-11-09 22:15):
     # --horn-front was Ember's workaround (2026-11-03) for the asset's untinted shadow pass through the horn, from before
@@ -232,7 +243,9 @@ def main():
             + (['--scrim', *map(str, a.scrim)] if a.scrim else []) \
             + (['--wet', *map(str, a.wet or WET[n])] if (a.wet or n in WET) else []) \
             + (['--crop', *map(str, a.crop)] if a.crop else []) \
+            + (['--opaque-shadows'] if a.opaque_shadows else []) \
             + [x for r in (a.reflector or REFLECT.get(n, [])) for x in ('--reflector', *map(str, r))] \
+            + [x for b in (a.berm or BERM.get(n, [])) for x in ('--berm', *map(str, b))] \
             + (['--meniscus', str(a.meniscus or MENISCUS[n])] if (a.meniscus or n in MENISCUS) else []) \
             + [x for c in a.card for x in ('--card', *c)] \
             + [x for d in a.dot for x in ('--dot', *d)]
