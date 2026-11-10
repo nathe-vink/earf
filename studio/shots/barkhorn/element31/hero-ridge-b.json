@@ -1,0 +1,678 @@
+{
+ "title": "Tropos hero b: the eight on stepped granite above a sea of cloud, morning (3:2)",
+ "size": [
+  1800,
+  1200
+ ],
+ "product": {
+  "def": "studio/products/barkhorn-cloud.json",
+  "flavour": "cloud-black",
+  "instances": [
+   {
+    "tint": "Ember",
+    "flavour": "cloud-red",
+    "position": [
+     -2.9,
+     1.0,
+     0.0
+    ],
+    "rotate_z": 13.01,
+    "hide": [
+     "cloth-disc"
+    ]
+   },
+   {
+    "tint": "Dust",
+    "flavour": "cloud-orange",
+    "position": [
+     -2.1,
+     0.3,
+     0.0
+    ],
+    "rotate_z": 9.49,
+    "hide": [
+     "cloth-disc"
+    ]
+   },
+   {
+    "tint": "Acid",
+    "flavour": "cloud-amber",
+    "position": [
+     -1.25,
+     0.85,
+     0.0
+    ],
+    "rotate_z": 3.3,
+    "hide": [
+     "cloth-disc"
+    ]
+   },
+   {
+    "tint": "Poison",
+    "flavour": "eucalyptus-y2k-green",
+    "position": [
+     -0.4,
+     0.0,
+     0.0
+    ],
+    "rotate_z": -1.71,
+    "hide": [
+     "cloth-disc"
+    ]
+   },
+   {
+    "tint": "Ice",
+    "flavour": "cloud-blue",
+    "position": [
+     0.45,
+     0.6,
+     0.0
+    ],
+    "rotate_z": -7.67,
+    "hide": [
+     "cloth-disc"
+    ]
+   },
+   {
+    "tint": "Haze",
+    "flavour": "cloud-violet",
+    "position": [
+     1.3,
+     -0.1,
+     0.0
+    ],
+    "rotate_z": -13.93,
+    "hide": [
+     "cloth-disc"
+    ]
+   },
+   {
+    "tint": "Fog",
+    "flavour": "birch-fog-clear",
+    "position": [
+     2.15,
+     0.75,
+     0.0
+    ],
+    "rotate_z": -18.56,
+    "hide": [
+     "cloth-disc"
+    ]
+   },
+   {
+    "tint": "Smoke",
+    "flavour": "cloud-black",
+    "position": [
+     2.95,
+     0.15,
+     0.0
+    ],
+    "rotate_z": -24.65,
+    "hide": [
+     "cloth-disc"
+    ]
+   }
+  ]
+ },
+ "lights": {},
+ "render": {
+  "samples": 512,
+  "adaptive": 0.02,
+  "denoise": true,
+  "clamp": 10.0,
+  "bounces": 12,
+  "view": "AgX",
+  "exposure": 0.3,
+  "white_balance_k": 6500.0,
+  "white_balance_tint": 0.0,
+  "look": "AgX - Base Contrast"
+ },
+ "camera": {
+  "position": [
+   0.2,
+   -8.0,
+   1.25
+  ],
+  "target": [
+   0.0,
+   0.4,
+   0.8
+  ],
+  "lens_mm": 40.0,
+  "level": true,
+  "fstop": 8.0,
+  "focus": [
+   0.0,
+   0.4,
+   0.8
+  ],
+  "shift_x": 0.0,
+  "shift_y": 0.0,
+  "clip_end_m": 3000.0
+ },
+ "sky": {
+  "kind": "hdri",
+  "polyhaven": "qwantani_morning_puresky",
+  "rotation_deg": 293.9,
+  "strength": 0.45,
+  "res": "4k",
+  "grade": {
+   "horizon": "#E8DCCB",
+   "zenith": "#6F7FA8",
+   "height_deg": 30.0
+  }
+ },
+ "sun": {
+  "azimuth_deg": 120.0,
+  "elevation_deg": 20.2,
+  "irradiance": 30.0,
+  "angle_deg": 0.5,
+  "color": "#FEE9CB"
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 240,
+  "white_out": 240,
+  "contrast": 0.12,
+  "clarity": 0.04,
+  "sharpen": 0.25,
+  "sharpen_px": 0.6,
+  "dream": {
+   "bloom": 0.12,
+   "bloom_px": 30,
+   "bloom_threshold": 0.9,
+   "saturation": 0.0,
+   "lift": 0.0,
+   "lift_color": "#000000",
+   "vignette": 0.18
+  }
+ },
+ "haze": {
+  "box_m": [
+   -500.0,
+   -30.0,
+   -60.0,
+   500.0,
+   500.0,
+   400.0
+  ],
+  "density": 0.0008,
+  "anisotropy": 0.6,
+  "color": "#E8DCD0"
+ },
+ "set": {
+  "kind": "stage",
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "acid_rain_el",
+    "fn": "wet_ground",
+    "texture": "rock_boulder_dry",
+    "size": [
+     34.0,
+     22.0
+    ],
+    "position": [
+     0.0,
+     -3.5,
+     0.0
+    ],
+    "cells": 1500,
+    "displace": 0.05,
+    "relief": false,
+    "flat": [
+     0.0,
+     0.5,
+     4.5
+    ],
+    "res": "2k",
+    "tex_scale": 1.6,
+    "bump": 2.5,
+    "rough_mul": 1.0,
+    "darken": 1.0,
+    "film": 0.0,
+    "tint": "#8E8C88",
+    "tint_mix": 0.35,
+    "film_rough": 0.6,
+    "lumps": [
+     [
+      2.6,
+      0.08,
+      "billow"
+     ],
+     [
+      1.1,
+      0.05,
+      "fbm"
+     ],
+     [
+      0.4,
+      0.02,
+      "ridged"
+     ],
+     [
+      9.0,
+      0.25
+     ]
+    ],
+    "seed": 4
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "pbr",
+    "texture": "rock_boulder_dry",
+    "res": "2k",
+    "tex_scale": 1.3,
+    "tint": "#8E8C88",
+    "tint_mix": 0.3,
+    "bump": 1.4,
+    "ease": 0.04,
+    "position": [
+     -2.85,
+     1.05,
+     -0.05
+    ],
+    "size": [
+     1.05,
+     0.95,
+     0.35
+    ],
+    "rotate": [
+     0,
+     0,
+     7
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "pbr",
+    "texture": "rock_boulder_dry",
+    "res": "2k",
+    "tex_scale": 1.3,
+    "tint": "#8E8C88",
+    "tint_mix": 0.3,
+    "bump": 1.4,
+    "ease": 0.04,
+    "position": [
+     -2.0500000000000003,
+     0.35,
+     -0.05
+    ],
+    "size": [
+     1.05,
+     0.95,
+     0.16999999999999998
+    ],
+    "rotate": [
+     0,
+     0,
+     16
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "pbr",
+    "texture": "rock_boulder_dry",
+    "res": "2k",
+    "tex_scale": 1.3,
+    "tint": "#8E8C88",
+    "tint_mix": 0.3,
+    "bump": 1.4,
+    "ease": 0.04,
+    "position": [
+     -1.2,
+     0.9,
+     -0.05
+    ],
+    "size": [
+     1.05,
+     0.95,
+     0.45
+    ],
+    "rotate": [
+     0,
+     0,
+     25
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "pbr",
+    "texture": "rock_boulder_dry",
+    "res": "2k",
+    "tex_scale": 1.3,
+    "tint": "#8E8C88",
+    "tint_mix": 0.3,
+    "bump": 1.4,
+    "ease": 0.04,
+    "position": [
+     0.5,
+     0.65,
+     -0.05
+    ],
+    "size": [
+     1.05,
+     0.95,
+     0.27
+    ],
+    "rotate": [
+     0,
+     0,
+     16
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "pbr",
+    "texture": "rock_boulder_dry",
+    "res": "2k",
+    "tex_scale": 1.3,
+    "tint": "#8E8C88",
+    "tint_mix": 0.3,
+    "bump": 1.4,
+    "ease": 0.04,
+    "position": [
+     2.1999999999999997,
+     0.8,
+     -0.05
+    ],
+    "size": [
+     1.05,
+     0.95,
+     0.39999999999999997
+    ],
+    "rotate": [
+     0,
+     0,
+     7
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "pbr",
+    "texture": "rock_boulder_dry",
+    "res": "2k",
+    "tex_scale": 1.3,
+    "tint": "#8E8C88",
+    "tint_mix": 0.3,
+    "bump": 1.4,
+    "ease": 0.04,
+    "position": [
+     3.0,
+     0.2,
+     -0.05
+    ],
+    "size": [
+     1.05,
+     0.95,
+     0.2
+    ],
+    "rotate": [
+     0,
+     0,
+     16
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "pbr",
+    "texture": "rock_boulder_dry",
+    "res": "2k",
+    "tex_scale": 1.3,
+    "tint": "#8E8C88",
+    "tint_mix": 0.3,
+    "bump": 1.4,
+    "ease": 0.04,
+    "position": [
+     -4.3,
+     0.7,
+     -0.05
+    ],
+    "size": [
+     1.7,
+     1.4,
+     0.3
+    ],
+    "rotate": [
+     0,
+     0,
+     14
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "pbr",
+    "texture": "rock_boulder_dry",
+    "res": "2k",
+    "tex_scale": 1.3,
+    "tint": "#8E8C88",
+    "tint_mix": 0.3,
+    "bump": 1.4,
+    "ease": 0.04,
+    "position": [
+     4.1,
+     1.2,
+     -0.05
+    ],
+    "size": [
+     1.5,
+     1.2,
+     0.5
+    ],
+    "rotate": [
+     0,
+     0,
+     -10
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "pbr",
+    "texture": "rock_boulder_dry",
+    "res": "2k",
+    "tex_scale": 1.3,
+    "tint": "#8E8C88",
+    "tint_mix": 0.3,
+    "bump": 1.4,
+    "ease": 0.04,
+    "position": [
+     -0.9,
+     1.9,
+     -0.05
+    ],
+    "size": [
+     2.6,
+     1.2,
+     0.55
+    ],
+    "rotate": [
+     0,
+     0,
+     4
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "pbr",
+    "texture": "rock_boulder_dry",
+    "res": "2k",
+    "tex_scale": 1.3,
+    "tint": "#8E8C88",
+    "tint_mix": 0.3,
+    "bump": 1.4,
+    "ease": 0.04,
+    "position": [
+     1.8,
+     2.1,
+     -0.05
+    ],
+    "size": [
+     2.2,
+     1.1,
+     0.48
+    ],
+    "rotate": [
+     0,
+     0,
+     -6
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "acid_rain_el",
+    "fn": "rock",
+    "model": "rock_09",
+    "position": [
+     -6.5,
+     6.6,
+     -0.1
+    ],
+    "rotate": [
+     0,
+     0,
+     40
+    ],
+    "scale": 2.4,
+    "darken": 1.0,
+    "film_rough": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "acid_rain_el",
+    "fn": "rock",
+    "model": "moon_rock_04",
+    "position": [
+     -3.0,
+     7.2,
+     -0.1
+    ],
+    "rotate": [
+     0,
+     0,
+     200
+    ],
+    "scale": 2.0,
+    "darken": 1.0,
+    "film_rough": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "acid_rain_el",
+    "fn": "rock",
+    "model": "rock_07",
+    "position": [
+     0.8,
+     7.4,
+     -0.1
+    ],
+    "rotate": [
+     0,
+     0,
+     300
+    ],
+    "scale": 1.8,
+    "darken": 1.0,
+    "film_rough": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "acid_rain_el",
+    "fn": "rock",
+    "model": "moon_rock_01",
+    "position": [
+     4.0,
+     7.0,
+     -0.1
+    ],
+    "rotate": [
+     0,
+     0,
+     70
+    ],
+    "scale": 2.2,
+    "darken": 1.0,
+    "film_rough": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "acid_rain_el",
+    "fn": "rock",
+    "model": "rock_09",
+    "position": [
+     7.0,
+     6.5,
+     -0.1
+    ],
+    "rotate": [
+     0,
+     0,
+     120
+    ],
+    "scale": 2.6,
+    "darken": 1.0,
+    "film_rough": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "acid_rain_el",
+    "fn": "ridge",
+    "position": [
+     -60.0,
+     240.0,
+     -85.0
+    ],
+    "width": 900.0,
+    "depth": 90.0,
+    "height": 115.0,
+    "spacing": 110.0,
+    "seed": 41,
+    "jag": 0.9,
+    "darken": 0.9,
+    "film": 0.0,
+    "film_rough": 0.6,
+    "cells": [
+     260,
+     50
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "poison_el",
+    "fn": "mist",
+    "position": [
+     0.0,
+     170.0,
+     -75.0
+    ],
+    "size": [
+     900.0,
+     320.0,
+     48.0
+    ],
+    "density": 0.12,
+    "top": 0.15,
+    "wisp": 30.0,
+    "color": "#FFFFFF",
+    "anisotropy": 0.7
+   }
+  ]
+ }
+}
