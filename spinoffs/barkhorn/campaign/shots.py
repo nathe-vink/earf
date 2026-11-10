@@ -1723,3 +1723,46 @@ def hero_centres(s, z=0.55):
         out.append({'tint': HERO_ORDER[k], 'x': round(float((X + 1) / 2 * 100), 2), 'y': round(float((1 - Y) / 2 * 100), 2),
                     'color': s['set']['stripes'][k]['color']})
     return out
+
+
+def hero_room():
+    """The owner on the stripes (2026-11-10 16:01): "more like a studio shot where it looks more like they are in a room
+    with painted walls and floor". Base A, no plinth, no light (TROPOS_BASE=A, options []), black rods. A room, not paper:
+    a flat wall 1.3 m behind the row meeting a flat floor in a crisp corner (a 3 mm radius), matte painted (the paper's
+    tooth and mottle as paint's grain); eight stripes in the room's own frame, parallel, hard-edged, each the same paint on
+    wall and floor to the frame's front edge, the outer two carried past both frame edges; v2's own-family colours, Fog on
+    a soft warm grey. Studio lamps only: a large soft overhead, a soft key high left, a low front fill behind the camera.
+    A 50 mm lens at the cabinets' middle height, 8.3 m off so the end speakers keep a little air: about 54 % of the height."""
+    assert ROLLOUT['base'] == 'A', 'run with TROPOS_BASE=A'
+    s = SHOTS['deck-row']()
+    sp = 0.72
+    n = len(HERO_ORDER)
+    for blk in s['products']:
+        blk['normals_refine'] = False
+        for k, i in enumerate(blk['instances']):
+            i['position'] = [round((k - (n - 1) / 2) * sp, 4)] + list(i['position'][1:])
+            i['rotate_z'] = -10.0
+    cols = {**{t: _toward_white(c, 1 / 3) for t, c in HERO_BRAND.items()}, 'fog': '#CFC8BE', 'smoke': '#8E8D8B'}
+    stripes = []
+    for k, t in enumerate(HERO_ORDER):
+        x = (k - (n - 1) / 2) * sp
+        x0 = -30.0 if k == 0 else x - sp / 2
+        x1 = 30.0 if k == n - 1 else x + sp / 2
+        stripes.append({'x': [round(x0, 4), round(x1, 4)], 'color': cols[t], 'tint': t})
+    s['set'] = {'kind': 'sweep', 'color': '#CFC8BE', 'width': 60.0, 'front': 12.0, 'depth': 1.3, 'radius': 0.003,
+                'height': 4.0, 'stripes': stripes,
+                'contact': {'strength': 0.8, 'distance_m': 0.35, 'core_strength': 1.0, 'core_distance_m': 0.03}}
+    s['materials']['sweep'] = {'roughness': 0.85, 'tooth': 0.25, 'mottle': 0.05}
+    s['lights'] = {
+        'top': {'type': 'area', 'size_m': [5.0, 2.5], 'position': [0.0, -0.8, 3.4], 'target': [0.0, 0.0, 0.0],
+                'irradiance': 3.0, 'color': '#FFF8F0'},
+        'key': {'type': 'area', 'size_m': [2.0, 2.0], 'position': [-3.4, -3.6, 2.4], 'target': [0.0, 0.0, 0.6],
+                'irradiance': 1.6, 'color': '#FFF5E8'},
+        'fill': {'type': 'area', 'size_m': [4.0, 1.2], 'position': [0.0, -10.0, 0.7], 'target': [0.0, 0.0, 0.6],
+                 'irradiance': 1.0, 'color': '#FFF8F0'}}
+    s['camera'] = {'position': [0.0, -8.3, 0.5], 'target': [0.0, 0.0, 0.72], 'lens_mm': 50.0, 'level': True}
+    s['size'] = [1680, 700]
+    s['render']['samples'] = 64
+    s['render']['exposure'] = 0.0
+    s['title'] = 'Tropos, the eight in a painted room on their stripes'
+    return s
