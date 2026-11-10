@@ -72,21 +72,13 @@ def black_posts():
 
 
 def side_fix():
-    # the coordinator, 2026-11-10: the side strip's highlight turned the posts' lit half pale. The strip narrowed from
-    # 0.10 to 0.03 m tall and raised from centre z 0.045 to the deck's middle, aimed level, so it rakes the deck's edge
-    # and passes over the posts under the deck
-    from mathutils import Vector
+    # the coordinator, 2026-11-10: the side strip's highlight turned the posts' lit half pale (about 205). Narrowed to
+    # 0.03 m and raised to the deck's middle it still reached them (its 50 deg spread: post luma p95 231 in a crop); off,
+    # the posts read black (median 14, p95 26). So the side strip is OFF for the set
     o = bpy.data.objects.get('side')
-    if o is None:
-        return
-    pl = [x for x in bpy.data.objects if x.name.startswith('plinth-L1')]
-    zs = [(x.matrix_world @ Vector(c)).z for x in pl for c in x.bound_box]
-    zm = (min(zs) + max(zs)) / 2
-    o.data.size_y = 0.03
-    o.location.z = zm
-    tgt = Vector((o.location.x + 1.0, o.location.y - 0.10, zm))
-    o.rotation_euler = (tgt - o.location).to_track_quat('-Z', 'Y').to_euler()
-    print(f'v3_day: side strip 0.03 m tall at z {zm:.3f}, aimed level', flush=True)
+    if o is not None:
+        o.hide_render = True
+        print('v3_day: side strip off (it lit the posts)', flush=True)
 
 
 def black_bearing():
@@ -113,7 +105,16 @@ def strip_watts(w):
     print(f'v3_day: led-strip {w} W over {A * 1e4:.1f} cm2: radiance {w / (2 * 3.14159265 * max(A, 1e-9)):.1f}', flush=True)
 
 
+def lamps_off(names):
+    for n in names.split(','):
+        o = bpy.data.objects.get(n)
+        if o is not None and o.type == 'LIGHT':
+            o.hide_render = True; print('v3_day: lamp off', n, flush=True)
+
+
 def prepare():
+    if '--lamps-off' in mine:
+        lamps_off(mine[mine.index('--lamps-off') + 1])
     if '--cards' in mine:
         cards()
     if '--black-posts' in mine:
