@@ -62,6 +62,14 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    replacement is open: asked whether "Globe is good." becomes the one line, with a plain descriptor where a description is needed.
    REVERSED by the owner minutes later: "Nevermind keep a world of sound in color". So: the main line STAYS "A world of sound, in
    color." everywhere; "Globe is good." is the sign-off under the globe. Nothing comes off any surface.
+   LAMP LIGHT COLOUR, the owner 10 Nov ~04:50-05:00: "I prefer warm lighting so if you can do not pure white LEDs"; then "in a bar
+   setting I want amber/yellow lighting. We should render with both really so customers can see what they look like." So: every lit
+   lamp picture in two light colours, "warm" (the LEDs as drawn, 2700 K; 3000 K on Ice and Haze) and "amber" (2200 K, CRI 90), at one
+   camera white balance of 4000 K; the amber LED a second option in the BOM (proposal); the bar (Planet EARF) is lit amber.
+   THE LAMP PROOFS (r32-lamps-final 9660d08b) NOT PASSED: Core reads as dark glass (the LED's light probably lost at the window);
+   Hemisphere 138-152 lx at 0.5 m against my ~200 estimate; the lamps lane is measuring the flux budget before any re-render.
+   THE FLAT MARK: the owner: the discs "lose their coin shape" (pointed tips, tapering rims); the brand lane redraws every flat
+   variant as true coins (constant rim, flat ends). The rendered mark set (r47-brand 038f84e1) stands.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
