@@ -1,7 +1,7 @@
 <!doctype html><meta charset="utf-8"><link rel="stylesheet" href="base.css">
 <style>
 /* three posts at 4:5 (1080 x 1350 at 2x), side by side as a feed shows them; one picture, one line, the mark small.
-   Pictures: only renders that passed the critics (the seven tall fronts, rollout A-polished-tallr6, 2026-11-09; the Ice habitat, biomes 0f619953). Tropos always whole. */
+   Pictures: the approved list only (2026-11-10): the eight fronts with black rods (tallr7, r33-speaker-horn 370de3da) and the rendered globe (A3). Tropos always whole. */
 body { width: 1720px; height: 760px; background: #E7E2DA; display: flex; gap: 20px; padding: 40px; align-items: center }
 .post { position: relative; width: 540px; height: 675px; overflow: hidden; flex: none; background: #F4F1EC; box-shadow: 0 20px 40px -24px rgba(0,0,0,.4) }
 .post .t { position: absolute; left: 34px; right: 34px; font-weight: 600; letter-spacing: -.02em; line-height: 1.02 }
@@ -14,13 +14,11 @@ body { width: 1720px; height: 760px; background: #E7E2DA; display: flex; gap: 20
 .p1 figure img { width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block; border-radius: 2px }
 .p1 figcaption { font-family: var(--mono); font-size: 8.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-top: 4px }
 .p1 .m { left: 34px; bottom: 32px; color: var(--muted) }
-/* 2: Dust where it began */
-.p2 img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover }
-.p2 .t { top: 64px; font-size: 46px; color: #F4F1EC; text-shadow: 0 1px 30px rgba(0,0,0,.35) }
-.p2 .m { left: 34px; top: 34px; color: rgba(244,241,236,.9) }
-.p2 .m.b { top: auto; bottom: 34px }
-.p2::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.42), rgba(0,0,0,0) 30%, rgba(0,0,0,0) 78%, rgba(0,0,0,.35)) }
-.p2 > * { z-index: 1 }
+/* 2: the globe and the sign-off (on the globe render's own paper) */
+.post.p2 { background: #F2EFEA }
+.p2 img.g { position: absolute; left: 50%; top: 60px; width: 420px; transform: translateX(-50%) }
+.p2 .t { bottom: 78px; font-size: 44px; color: var(--ink); text-align: center }
+.p2 .m { left: 34px; bottom: 34px; color: var(--muted) }
 /* 3: one speaker, whole, framed on paper */
 .p3 img.f { position: absolute; left: 50%; top: 34px; height: 430px; aspect-ratio: 4/5; transform: translateX(-50%); object-fit: cover; border-radius: 2px }
 .p3 .t { bottom: 74px; font-size: 38px; color: var(--ink) }
@@ -29,16 +27,14 @@ body { width: 1720px; height: 760px; background: #E7E2DA; display: flex; gap: 20
 <body data-w="1720" data-h="760">
 <div class="post p1">
   <div class="t">A world of sound,<br>in color.</div>
-  <div class="grid"><figure><img src="../book/img/honest-front-ember.jpg" alt=""><figcaption>01 Ember</figcaption></figure><figure><img src="../book/img/honest-front-dust.jpg" alt=""><figcaption>02 Dust</figcaption></figure><figure><img src="../book/img/honest-front-acid.jpg" alt=""><figcaption>03 Acid</figcaption></figure><figure><img src="../book/img/honest-front-poison.jpg" alt=""><figcaption>04 Poison</figcaption></figure><figure><img src="../book/img/honest-front-ice.jpg" alt=""><figcaption>05 Ice</figcaption></figure><figure><img src="../book/img/honest-front-haze.jpg" alt=""><figcaption>06 Haze</figcaption></figure><figure><img src="../book/img/honest-front-fog.jpg" alt=""><figcaption>07 Fog</figcaption></figure></div>
-  <div class="m">Tropos · seven colors · Render</div>
+  <div class="grid"><figure><img src="../book/img/tropos-front-ember.jpg" alt=""><figcaption>01 Ember</figcaption></figure><figure><img src="../book/img/tropos-front-dust.jpg" alt=""><figcaption>02 Dust</figcaption></figure><figure><img src="../book/img/tropos-front-acid.jpg" alt=""><figcaption>03 Acid</figcaption></figure><figure><img src="../book/img/tropos-front-poison.jpg" alt=""><figcaption>04 Poison</figcaption></figure><figure><img src="../book/img/tropos-front-ice.jpg" alt=""><figcaption>05 Ice</figcaption></figure><figure><img src="../book/img/tropos-front-haze.jpg" alt=""><figcaption>06 Haze</figcaption></figure><figure><img src="../book/img/tropos-front-fog.jpg" alt=""><figcaption>07 Fog</figcaption></figure><figure><img src="../book/img/tropos-front-smoke.jpg" alt=""><figcaption>08 Smoke</figcaption></figure></div>
+  <div class="m">Tropos · eight colors · Render</div>
   <img class="w" src="../../brand/mark/earf-wordmark-black.svg" alt=""></div>
-<div class="post p2"><img class="bg" src="../book/img/honest-ice-habitat.jpg" alt="">
-  <div class="m">05 · Ice</div>
+<div class="post p3"><img class="f" src="../book/img/tropos-front-ice.jpg" alt="">
   <div class="t">Glacier blue,<br>and in no hurry.</div>
-  <div class="m b">Tropos 05 · where it began · Render</div>
-  <img class="w" src="../../brand/mark/earf-wordmark-white.svg" alt=""></div>
-<div class="post p3"><img class="f" src="../book/img/honest-front-ice.jpg" alt="">
-  <div class="t">Seven colors,<br>Ember to Fog.</div>
   <div class="m">05 Ice · tinted cast acrylic, 20 mm · Render</div>
   <img class="w" src="../../brand/mark/earf-wordmark-black.svg" alt=""></div>
+<div class="post p2"><img class="g" src="../../brand/mark/earf-globe-render.png" alt="">
+  <div class="t">Globe is good.</div>
+  <div class="m">EARF · Render</div></div>
 </body>
