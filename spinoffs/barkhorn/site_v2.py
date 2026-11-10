@@ -1775,13 +1775,15 @@ INTRO_ARC = 'site/globe-turn-alpha'   # brand/: the turn on a transparent ground
 # half a turn, f0000 the still mark's pose. The opening plays the last 42 (63 deg) into f0000, from an image, no video.
 ARC_FROM, ARC_TILE, ARC_COLS = 78, 288, 7
 ARC_CROP = (80, 80, 432, 432)          # the globe and its discs span px 85-426 of 512: the same square for every use
+HDR_TILE = 84                          # the header's 42 px globe, at 2x
+REVEAL = 'circle'                      # 'circle': the cream closes on the header's globe; 'fade': it fades out as the globe flies
 
 
 def rc_intro(p, web):
     """The opening globe from pre-cut frames with real alpha (no video, no canvas): a sprite of the arc f0078 ... f0119, f0000.
     The globe eases into a turn from rest during the hold (45 deg/s at most); as the flight starts a curve that matches its
-    speed carries it on to f0000, which it reaches as it lands; the header shows f0000, still. If the sprite is not ready
-    when the flight starts, the globe flies still. The video, its sources and the canvas keying are gone."""
+    speed carries it on to f0000, which it reaches as it lands; the header rests there, then turns again (the same frames).
+    If the sprite is not ready when the flight starts, the globe flies still. No video, no canvas keying."""
     import io, os, base64
     from PIL import Image
     B = os.path.join(web.BRAND, INTRO_ARC)
@@ -1801,12 +1803,29 @@ def rc_intro(p, web):
     p.rest, n = re.subn(r'(\.brand \.globe \{ width: 42px; height: 42px; flex: none; background: url\()data:image/webp;base64,[A-Za-z0-9+/=]+\)',
                         lambda m: m.group(1) + mark + ')', p.rest)
     assert n == 1, ('rc_intro: the header mark', n)
-    m = re.search(r'html\.globe-live \.brand \.globe \{[^}]*\}\n', p.rest)
-    assert m, 'rc_intro: the turning sprite rule'
-    p.rest = p.rest[:m.start()] + p.rest[m.end():]
+    # the header's turn: the same frames at header size, every other one (60, 3 deg each: half a turn, a seamless loop),
+    # one loop in 4 s as before; it rests on f0000 as the opening lands, then eases back into its turn
+    hs = Image.new('RGBA', (10 * HDR_TILE, 6 * HDR_TILE), (0, 0, 0, 0))
+    for k in range(60):
+        f = Image.open(os.path.join(B, f'f{2 * k:04d}.png')).convert('RGBA').crop(ARC_CROP).resize((HDR_TILE, HDR_TILE), Image.LANCZOS)
+        hs.paste(f, ((k % 10) * HDR_TILE, (k // 10) * HDR_TILE))
+    hs.save(os.path.join(web.IMG, 'globe-spin-light.webp'), quality=80, alpha_quality=90, method=6)
+    hs.save(os.path.join(web.IMG, 'globe-spin-light.avif'), quality=70)
+    assert re.search(r'html\.globe-live \.brand \.globe \{[^}]*\}', p.rest), 'rc_intro: the turning sprite rule'
     m = re.search(r"if \(!reduce\) \(function globeTurn\(now\) \{.*?\}\)\(turn0\);\n", p.rest, re.S)
     assert m, 'rc_intro: the header turn'
-    p.rest = p.rest[:m.start()] + p.rest[m.end():]
+    p.rest = p.rest[:m.start()] + '''const HDR = { t0: document.documentElement.classList.contains('intro') ? Infinity : performance.now() }, EASE_IN = 1000;
+const globeAt0 = () => { globeAt = 0; GLOBES.forEach(g => { g.style.backgroundPosition = '0% 0%'; }); };
+window.__globeLand = () => { HDR.t0 = performance.now() + 700; globeAt0(); };   // the opening lands on f0000: rest there, then turn
+if (!reduce) (function globeTurn(now) {
+  const s = now - HDR.t0, v = 60 / GLOBE_TURN;                        // frames a ms at full pace; the first second eases in
+  const f = s <= 0 ? 0 : s < EASE_IN ? v * s * s / (2 * EASE_IN) : v * (s - EASE_IN / 2);
+  const i = Math.floor(f) % 60;
+  if (i !== globeAt) { globeAt = i; GLOBES.forEach(g => { g.style.backgroundPosition = `${(i % 10) * 100 / 9}% ${Math.floor(i / 10) * 100 / 5}%`; }); }
+  requestAnimationFrame(globeTurn);
+})(performance.now());
+''' + p.rest[m.end():]
+    p.sub("if (film && film.currentTime) setTurn(film.currentTime);", "if (window.__globeLand) __globeLand();", n=2)
     # the flyer: an image, no video
     m = re.search(r'<video muted playsinline loop autoplay[^>]*></video>(?:<canvas[^>]*></canvas>)?</div>', p.rest)
     assert m, 'rc_intro: the film'
@@ -1816,6 +1835,12 @@ def rc_intro(p, web):
     p.rest = p.rest[:m.start()] + p.rest[m.end():]
     p.sub("    flyer.animate([{ transform: 'none' }",
           "    if (window.__turnFly) __turnFly(T);\n    flyer.animate([{ transform: 'none' }")
+    if REVEAL == 'fade':        # the cream fades while the globe flies (no closing circle); the landing waits for the flight
+        p.sub("""      { duration: T, easing, fill: 'forwards' });
+    splash.animate([{ clipPath: `circle(${R}px at ${ax}px ${ay}px)` }, { clipPath: `circle(${b.width / 2}px at ${bx}px ${by}px)` }],
+      { duration: T, easing, fill: 'forwards' }).finished.then(land, done);""",
+              """      { duration: T, easing, fill: 'forwards' }).finished.then(land, done);
+    splash.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 500, easing: 'cubic-bezier(.4, 0, .2, 1)', fill: 'forwards' });""")
     turn = """<script>(function (d, fl) { if (!d.classList.contains('intro') || !fl) return;   // the opening's turn: from rest, into the mark
   const t = fl.querySelector('.turn'), N = %d, C = %d;
   const at = k => { k = Math.max(0, Math.min(N, Math.round(k))); if (k === t._k) return; t._k = k;
