@@ -612,7 +612,7 @@ def pages(web):
                 os.rmdir(d)
         left = [os.path.relpath(f, web.SITE) for f in glob.glob(os.path.join(web.SITE, '**', '*'), recursive=True)]
         bad = [f for f in left if re.search(r'(^press/|img/(?:(?:dome|orb)-|lamps-(?:orbs|domes)|lamp-(?:orb|dome)|hero[.-]|facade|room|macro-|turn-|spin/'
-                                            r'|tt-|ga-|icon-smoke-|rc/(?:ice|orange)-habitat|rc/(?:red|orange|green|blue|violet|ice)-horn-back|rc/turn-red|lamps-unlit|thumb/lamps-unlit|rc/(?:red|orange|amber|green|blue|violet|ice)-back[.-]|(?:red|orange|amber|green|blue|violet|ice|black)-(?:on|off|studio|back|amp|horn|inside|reel|habitat))|-smoke\.html$)', f)]
+                                            r'|tt-|ga-|icon-smoke-|rc/(?:ice|orange)-habitat|rc/(?:orange|blue|ice)-horn-back|lamps-unlit|thumb/lamps-unlit|rc/(?:red|orange|amber|green|blue|violet|ice)-back[.-]|(?:red|orange|amber|green|blue|violet|ice|black)-(?:on|off|studio|back|amp|horn|inside|reel|habitat))|-smoke\.html$)', f)]
         assert not bad, ('site_v2: rc deploys', bad[:12])
 
 
@@ -822,7 +822,7 @@ def apply(web, head, rest):
 RC_TALL = 'renders/2026-11-04/barkhorn/rollout/A-polished-tallr6/site-front-off-tall-{name}.png'   # the fronts, rig fa7665dc (2026-11-09 23:46): Ember c4 4fcc28f8, Dust c4 5c837147, Acid c2 7d741bd6, Poison c2 e7ca2e71, Ice c3 48dcfd29, Haze c3 817d2b4f, Fog r33-speaker-horn 4e89a834. Before: tallr3 and tallr2 (failed: a light line on the side), then fix1 (r33-rollout-c3:
 # Ember, Dust, Poison, Ice e624e13e; Haze, Fog 3d0b613f; Acid 04d21c5c (on the Acid horn fix). Smoke held.
 RC_KEYS = ['red', 'orange', 'amber', 'green', 'blue', 'violet', 'ice']
-HORN_BACKS = ['amber']   # the re-audit (the coordinator 2026-11-09 23:28): the other six had a camera-hidden lamp in frame
+HORN_BACKS = ['amber', 'red', 'green', 'violet']   # restored: Ember, Poison c4 88756c3e and Haze c3 e07a3efb, re-rendered without the lamp (A-polished-p2-p2r), the same pictures as the passed ones (both critics, 2026-11-10 00:35); Dust, Ice, Fog wait for a full check. Before: the re-audit (the coordinator 2026-11-09 23:28): the other six had a camera-hidden lamp in frame
 
 
 NOT_FOUND = """<!doctype html>
@@ -1140,7 +1140,7 @@ def rc_fixes(p, web):
     # the coordinator 2026-11-09 19:16). It comes back when the re-rendered backs pass.
     extra = {k: {} for k in RC_KEYS}
     for k in HORN_BACKS:     # Acid a1322583 (backrig); Ember, Dust, Poison 06b829ce and Ice, Haze, Fog 52ad76ba pulled (a hidden lamp in frame)
-        src = R + ('A-polished-p2-backrig-acid/horn-back-acid.png' if k == 'amber' else f'A-polished-p2/horn-back-{names[k].lower()}.png')
+        src = R + ('A-polished-p2-backrig-acid/horn-back-acid.png' if k == 'amber' else f'A-polished-p2-p2r/horn-back-{names[k].lower()}.png')
         im = Image.open(os.path.join(web.ROOT, src)).convert('RGB')
         im.save(os.path.join(web.SITE, f'img/rc/{k}-horn-back.webp'), 'WEBP', quality=82)
         im.resize((224, 168)).save(os.path.join(web.SITE, f'img/rc/{k}-horn-back-th.webp'), 'WEBP', quality=80)
@@ -1391,7 +1391,7 @@ def rc3(p, web):
     p.sub("stage.style.background = P.id === 'speaker' ? ground(v) : 'transparent';",
           "stage.style.background = P.id === 'speaker' ? ground(v) : 'transparent'; if (P.id === 'turntable') stage.style.setProperty('aspect-ratio', '3 / 2', 'important'); else stage.style.removeProperty('aspect-ratio');")
     for k in HORN_BACKS:
-        src = 'renders/2026-11-04/barkhorn/rollout/' + ('A-polished-p2-backrig-acid/horn-back-acid.png' if k == 'amber' else f'A-polished-p2/horn-back-{names[k].lower()}.png')
+        src = 'renders/2026-11-04/barkhorn/rollout/' + ('A-polished-p2-backrig-acid/horn-back-acid.png' if k == 'amber' else f'A-polished-p2-p2r/horn-back-{names[k].lower()}.png')
         im = Image.open(os.path.join(web.ROOT, src)).convert('RGB').crop((270, 0, 990, 900))
         im.save(os.path.join(web.SITE, f'img/rc/{k}-horn-back.webp'), 'WEBP', quality=82)
         im.resize((168, 210)).save(os.path.join(web.SITE, f'img/rc/{k}-horn-back-th.webp'), 'WEBP', quality=80)
@@ -1470,7 +1470,7 @@ def rc3(p, web):
 """)
 
 
-TURN = {'orange': 'A-polished-p2/turn-dust', 'green': 'A-polished-p2-rc1/turn-poison',
+TURN = {'red': 'A-polished-p2/turn-ember', 'orange': 'A-polished-p2/turn-dust', 'green': 'A-polished-p2-rc1/turn-poison',
         'blue': 'A-polished-p2-rc1/turn-ice', 'violet': 'A-polished-p2-rc1/turn-haze'}
 # Ember's turn is held whole: frames 00-04 (52ad76ba) had a hidden lamp in frame (the re-audit, 23:28).
 # the turns, passed (the coordinator 2026-11-09 18:51): Ember 00-04 r33-rollout-c3 52ad76ba, 05-23 and Dust c4 0a0a83bd;
@@ -1500,6 +1500,7 @@ def rc_turn(p, web):
         if k != 'amber' and k not in TURN:
             continue
         files = [R + (f'A-polished-p2/turn-acid-{n:02d}.png' if n < 17 else f'A-polished-p2-rc1/turn-acid-{n:02d}.png') if k == 'amber'
+                 else R + f'A-polished-p2-p2r/turn-ember-{n:02d}.png' if k == 'red' and n < 5        # 00-04 re-rendered without the lamp (c2 7bb678d6)
                  else R + f'{TURN[k]}-{n:02d}.png' for n in range(24)]
         fr = [Image.open(f).convert('RGB') for f in files]
         w, h = fr[0].size
