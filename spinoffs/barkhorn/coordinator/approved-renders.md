@@ -59,7 +59,7 @@ the old rule are marked; each is re-rendered under the new rule and gated agains
 | Picture | Source | Gate | Used by |
 |---|---|---|---|
 | Ice, "Out in the snow at dusk." | 0f619953 | PASSED (verified 9 Nov 22:56 under the current rules: tint once, the horn under the rule, angle-dependent Fresnel; within noise, the file stays; gt_audit 23:40: no hidden object, no area lamp: sun and sky only) | site (home band, /tropos/ice, /colors/ice), Book |
-| Dust, "On rippled sand among desert buttes." | r48-biomes 43c91242: renders/2026-11-03/barkhorn/habitats/dust-portrait-1200x1500-nopanel.jpg | PASSED 3/3 (9 Nov; under the current rules 22:56 the table is within noise but the horn's pod changes: re-render with the horn under the rule queued; this file stays until it passes). GROUNDED FLAGGED 9 Nov 23:13: the biomes lane's gate on the re-render saw a 6-8 px band of lit sand between the front edge and the shadow's start (no dark contact line; lifted at phone size), and this file's base is identical; a deeper bed in the sand is in test, then the fixed final is gated against this file, "grounded" first | site, Book |
+| Dust, "On rippled sand among desert buttes." | PULLED 10 Nov 00:05, see Pulled; r2 (ec520098) held 1/3 (grounded fixed; a new fan of glints on the horn); r3 queued | | none |
 | Fog, "In the grass on a hillside, in fog at dawn." | PULLED 9 Nov 23:40, see Pulled; a re-render without the fill lamp follows | | none |
 | Acid | r48-biomes 539c3772 | HOLD 1/3 (rain stops at the speaker; dry; dark cabinet) | none |
 | Poison | r48-biomes P8 proxy (b60934b7, the horn under the rule) | PROXY PASSED for the final 2/3 (9 Nov 23:08; exposure 0.75 by all three; watch the horn's crease glint at full samples); the final queued after Dust | none |
@@ -91,6 +91,7 @@ as-drawn variant (the COB alone: a downlight, the shade dark) follows about 23:5
 ## Pulled (do not use)
 | Picture | Why | Pulled |
 |---|---|---|
+| Dust habitat 43c91242 (dust-portrait-1200x1500-nopanel.jpg) | it hovers at phone size: a lit strip of sand between the front edge and the shadow's start (the biomes lane's gate 23:13; confirmed by all three critics in r2's gate, 10 Nov 00:04); the founder's grounded test | 10 Nov 00:05 |
 | Fog habitat aa1ca856 (fog_b-portrait-1200x1500-onesun.jpg) | a 2 x 2 m fill EMITTER `fill_l` (hidden from the camera, out of frame) breaks the habitats' rule: the sun and the sky's own are the only emitters, and the caption says "lit by one sun"; a passive reflector would be allowed. (The first report, "in frame", was withdrawn 23:46: the gt_audit hits were the panel seen through the speaker's glass; projected, it lies wholly past the left edge.) Re-render without it, or with a real reflector, queued | 9 Nov 23:40 |
 | Poison habitat P8 scene (not yet a final) | a 1.2 x 0.4 m fill emitter `litter` (out of frame; the in-frame flag withdrawn as for Fog); dropped or replaced by a real reflector before the final | 9 Nov 23:40 |
 | Lamps, round 3's orb-row proxies (lamps-orbs-7, a/, b/, c/) | the 4 m key stood in frame with its back to the camera (22.1 % by the mask), hidden from the camera; never approved, never to be used; the rows' key is now 3 m (0 % in frame) | 9 Nov 23:34 |
