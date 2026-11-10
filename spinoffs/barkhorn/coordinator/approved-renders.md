@@ -57,6 +57,9 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    TAGLINE, the owner 10 Nov ~03:35: "Globe is good" (his own phrase, "a play on 'god is good'"). The main line stays "A world of
    sound, in color."; "Globe is good." is the short sign-off under the globe (stickers, the card, social posts), and the Book shows
    it that way at the rebuild (his "Yes").
+   THE MAIN LINE RETIRED by the owner 10 Nov ~03:40: "I also don't like a world of sound in color so much anymore. Too on the nose".
+   "A world of sound, in color." comes off the site preview, the Book, the deck and the press pieces at their next batch. Its
+   replacement is open: asked whether "Globe is good." becomes the one line, with a plain descriptor where a description is needed.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
