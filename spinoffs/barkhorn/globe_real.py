@@ -595,6 +595,9 @@ def main():
     ap.add_argument('--vivid', type=float, nargs=2, metavar=('CHROMA', 'LIFT'),
                     help="the hues the body follows, livelier (round 28e): their chroma times CHROMA, their lightness raised by "
                          "LIFT (OKLCh; 1.4 0.05, or the preset's)")
+    ap.add_argument('--hues', default='mark', choices=['mark', 'tropos-cabinet', 'tropos-horn'],
+                    help="translucent: the hues the body follows: the mark's (with --vivid), or the speakers' own as they are "
+                         "today (2026-11-10: TROPOS_CABINET, the colour through a cabinet, or TROPOS_HORN), with no lift")
     ap.add_argument('--crossings', default='equator', choices=['equator', 'fused'],
                     help="the equator's edge unbroken where it meets the meridians (round 28d), or both acrylics there (round 28)")
     ap.add_argument('--shine', type=float, nargs=2, default=(0.4, 0.0), metavar=('KEY', 'FILL'),
@@ -644,7 +647,8 @@ def main():
         tints = base if a.tint in ('cabinet', 'horn') else {k: glow(v, passed=PASS.get(k, '')) for k, v in base.items()}
         depth = a.depth
     root = build(bpy, tints, not a.slots, depth, a.look, a.scatter, a.clear, tuple(a.neon), a.crossings, a.milk,
-                 _body(a.body, _hues(*a.vivid)))
+                 _body(a.body, _hues(*a.vivid) if a.hues == 'mark' else
+                       dict(TROPOS_CABINET if a.hues == 'tropos-cabinet' else TROPOS_HORN)))
     if a.still:
         stage(bpy, a.ground, a.px or 1024, 1 + E.W_LINE / 2, a.samples or 128, a.env, a.adaptive or 0.01, a.key, a.fill,
               tuple(a.shine), a.bounces)
