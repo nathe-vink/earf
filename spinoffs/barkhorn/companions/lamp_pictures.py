@@ -321,10 +321,14 @@ def build(frame, samples, scale):
         nt = opal.node_tree; nt.nodes.clear()
         o = nt.nodes.new('ShaderNodeOutputMaterial'); tr = nt.nodes.new('ShaderNodeBsdfTranslucent')
         gl = nt.nodes.new('ShaderNodeBsdfGlossy'); gl.inputs['Roughness'].default_value = 0.08
-        df = nt.nodes.new('ShaderNodeBsdfDiffuse'); m1 = nt.nodes.new('ShaderNodeMixShader'); m1.inputs[0].default_value = 0.5
-        m2 = nt.nodes.new('ShaderNodeMixShader'); m2.inputs[0].default_value = 0.06
-        oc_ = tuple(float(x) for x in os.environ.get('OPAL', '0.80,0.89,0.98').split(','))   # round 9: a cool-white opal grade (PROPOSAL)
-        for n_, c in ((tr, (*oc_, 1)), (df, (*(v * 0.97 for v in oc_), 1))):
+        # 2026-11-10 (the coordinator: one real opal everywhere): Perspex GS Opal/White 041, 3 mm (T 54 %, R 39 %,
+        # ASTM D1003): a 4 % glossy face, 60.5 % translucent at 0.93, 39.5 % diffuse at 0.923. OPAL=r,g,b keeps the
+        # old 50/50 mix in that colour (round 9's cool-white proposal was 0.80,0.89,0.98)
+        old_ = os.environ.get('OPAL')
+        df = nt.nodes.new('ShaderNodeBsdfDiffuse'); m1 = nt.nodes.new('ShaderNodeMixShader'); m1.inputs[0].default_value = 0.5 if old_ else 0.605
+        m2 = nt.nodes.new('ShaderNodeMixShader'); m2.inputs[0].default_value = 0.06 if old_ else 0.04
+        oc_ = tuple(float(x) for x in old_.split(',')) if old_ else (0.93, 0.93, 0.92)
+        for n_, c in ((tr, (*oc_, 1)), (df, (*(v * 0.97 for v in oc_), 1) if old_ else (0.923, 0.923, 0.915, 1))):
             n_.inputs['Color'].default_value = c
         nt.links.new(df.outputs[0], m1.inputs[1]); nt.links.new(tr.outputs[0], m1.inputs[2])
         nt.links.new(m1.outputs[0], m2.inputs[1]); nt.links.new(gl.outputs[0], m2.inputs[2]); nt.links.new(m2.outputs[0], o.inputs['Surface'])

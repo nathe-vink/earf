@@ -4,7 +4,7 @@
 |---|---|---|---|---|---|
 | shell | formed | 1 | Cast acrylic sheet, tinted through, drape-formed over an aluminium mould | 160 cm3, 210 x 210 x 98 | 1,515.53 |
 | liner | formed | 1 | Cast acrylic sheet, clear (TruCast 0000), drape-formed over an aluminium mould | 265 cm3, 202 x 202 x 89 | 1,519.57 |
-| skin | formed | 1 | Cast acrylic sheet, volume-diffusing (opal), formed over an aluminium mould | 120 cm3, 188 x 188 x 85 | 1,212.95 |
+| skin | formed | 1 | Perspex GS 041 3 mm opal, or equal (T 54%, R 39%, ASTM D1003): cast acrylic sheet, volume-diffusing, formed over an aluminium mould | 120 cm3, 188 x 188 x 85 | 1,212.95 |
 | rim | lathe | 1 | Cast acrylic tube, tinted through | 204 x 204 x 14 | 67.88 |
 | collar | lathe | 1 | Aluminium 6061 | 126 x 126 x 53 | 66.22 |
 | clamp | lathe | 1 | Aluminium 6061 | 126 x 126 x 24 | 54.65 |

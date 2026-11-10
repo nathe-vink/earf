@@ -95,7 +95,7 @@ SOLIDS.setdefault('acrylic-formed', dict(title='Cast acrylic sheet, tinted throu
                                          density=1.19, usd_per_cm3=0.06))
 SOLIDS.setdefault('acrylic-clear-formed', dict(title='Cast acrylic sheet, clear (TruCast 0000), drape-formed over an '
                                                'aluminium mould', density=1.19, usd_per_cm3=0.05))
-SOLIDS.setdefault('acrylic-opal-formed', dict(title='Cast acrylic sheet, volume-diffusing (opal), formed over an aluminium '
+SOLIDS.setdefault('acrylic-opal-formed', dict(title='Perspex GS 041 3 mm opal, or equal (T 54%, R 39%, ASTM D1003): cast acrylic sheet, volume-diffusing, formed over an aluminium '
                                               'mould', density=1.19, usd_per_cm3=0.06))
 # Core B (2026-11-09): the outer ball in the speaker's TruCast code, the chart figure held at its 6 mm wall; the core
 # in Hemisphere's white opal, formed on its own mould (the 3 mm sphere's sheet about 1.8 x its area, and the forming:
@@ -242,7 +242,7 @@ def cover_parts(p=N):
                  notes=['v3, the middle: 6 mm clear cast sheet (TruCast 0000), ' + note_formed + ': the structural shell '
                         '(R 96 to 90), clamped at the crown with the others; a new mould (v2\'s liner mould was R 90)']),
             Part('skin', skin, Machined('acrylic-opal-formed', 'formed', setup_usd=1200.0), finish='liner', group='cover',
-                 notes=['v3, the inside: 3 mm volume-diffusing (opal) cast acrylic, about 70 % transmission, ' +
+                 notes=['v3, the inside: 3 mm volume-diffusing (opal) cast acrylic, Perspex GS 041 or equal (T 54 %, R 39 %, ASTM D1003), ' +
                         note_formed + ', formed into a female mould (R 89 to 86, a new mould), so its seen face keeps '
                         'its gloss; it hides the COB and lights evenly']),
         ]
@@ -256,7 +256,7 @@ def cover_parts(p=N):
                     'seen through 9 of clear, so the shade still glows lit (12 mm of stock tint passes under 0.2 %)']),
         Part('liner', liner, Machined('acrylic-opal-formed', 'formed', setup_usd=1200.0), finish='liner', group='cover',
              inside=True,
-             notes=['the diffuser: 3 mm volume-diffusing (opal) cast acrylic, light-diffusing grade, about 70 % '
+             notes=['the diffuser: 3 mm volume-diffusing (opal) cast acrylic, Perspex GS 041 or equal (T 54 %, R 39 %, ASTM D1003), was about 70 % '
                     'transmission ' + note_formed + '. Opal scatters through its volume, so it diffuses wherever it '
                     'touches the tinted layers (a bead-blasted clear liner goes clear where it is bonded or wetted)']),
         Part('skin', skin, Machined('acrylic-formed', 'formed', setup_usd=1200.0), finish='body', group='cover',
