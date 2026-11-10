@@ -60,6 +60,8 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    THE MAIN LINE RETIRED by the owner 10 Nov ~03:40: "I also don't like a world of sound in color so much anymore. Too on the nose".
    "A world of sound, in color." comes off the site preview, the Book, the deck and the press pieces at their next batch. Its
    replacement is open: asked whether "Globe is good." becomes the one line, with a plain descriptor where a description is needed.
+   REVERSED by the owner minutes later: "Nevermind keep a world of sound in color". So: the main line STAYS "A world of sound, in
+   color." everywhere; "Globe is good." is the sign-off under the globe. Nothing comes off any surface.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
