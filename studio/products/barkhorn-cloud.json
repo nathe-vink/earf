@@ -1954,8 +1954,8 @@
    "horn_cloud": 0.0,
    "materials": {
     "bark": {
-     "deep": "#4B4E51",
-     "radius": 0.025,
+     "deep": "#A7A7A7",
+     "radius": 0.0274,
      "roughness": 0.05,
      "ior": 1.49
     },
@@ -1969,20 +1969,20 @@
      "ior": 1.49
     },
     "horn-formed": {
-     "deep": "#424548",
-     "radius": 0.01,
+     "deep": "#242424",
+     "radius": 0.0425,
      "roughness": 0.05,
      "ior": 1.49
     },
     "horn-satin": {
-     "deep": "#424548",
-     "radius": 0.01,
+     "deep": "#242424",
+     "radius": 0.0425,
      "roughness": 0.05,
      "ior": 1.49
     }
    },
-   "tint": "TruCast 2074 Dark Gray",
-   "horn_formed": "#424548"
+   "tint": "neutral grey, 50 % through 20 mm (the owner, 10 Nov; ideal first, stock code or custom batch to be settled with chips)",
+   "horn_formed": "#242424"
   },
   "birch-fog-clear": {
    "bark": "clear_resin",

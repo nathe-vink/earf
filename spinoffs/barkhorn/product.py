@@ -2754,6 +2754,19 @@ for _f, _v in VARIANTS.items():
         _m['horn-formed'] = {**_m['horn-lot'], 'deep': _d, 'radius': HORN_DEPTH_M, 'roughness': 0.05}
         _m['horn-satin'] = {**_m['horn-formed'], 'roughness': FORMED_HORN_SATIN}
         _v['horn_formed'] = _d
+# Smoke, the owner's pick (2026-11-10, c4's ladder ab9df168, frame g50): a neutral grey at 50 % through 20 mm, the
+# cabinet at 34.7 per m (#A7A7A7 reached in 27.4 mm) and the horn at 95 per m (#242424 in 42.5 mm), its black lining
+# kept. The ideal first: stock code or custom batch to be settled with chips
+SMOKE_G50 = {'bark': {'deep': '#A7A7A7', 'radius': 0.0274}, 'horn': {'deep': '#242424', 'radius': 0.0425}}
+if 'cloud-black' in VARIANTS:
+    _m = VARIANTS['cloud-black']['materials']
+    _m['bark'] = {**_m['bark'], **SMOKE_G50['bark']}
+    for _k in ('horn-formed', 'horn-satin'):
+        if _k in _m:
+            _m[_k] = {**_m[_k], **SMOKE_G50['horn']}
+    VARIANTS['cloud-black']['horn_formed'] = SMOKE_G50['horn']['deep']
+    VARIANTS['cloud-black']['tint'] = ('neutral grey, 50 % through 20 mm (the owner, 10 Nov; ideal first, stock code or '
+                                       'custom batch to be settled with chips)')
 
 PRODUCT = Product(
     'barkhorn', 'barkhorn', 'Two-way horn loudspeaker after Friendly Pressure, in birch bark or eucalyptus bark', params=P, parts=parts,
