@@ -32,3 +32,11 @@ The screenshots in this folder are from the first RC and are out of date.
   then push one real follow-up commit.
 - Pushed 6b72d0aa at 2026-11-10 00:22:05 UTC inside a closed deployment window (the last deployment 00:17:40); this line is the follow-up push for the next window.
 - Pushed c5016e3f at 2026-11-10 01:33:44 UTC; r48-mantle-design's push took that window (01:34:30). This line is the follow-up push for the next one.
+
+## The eight-color batch (2026-11-10, morning)
+
+- 170 files, 8.55 MB. Eight colors with Smoke, in the black-rods set (r33-speaker-horn 370de3da: A-polished-tallr7 fronts,
+  A-polished-p2-p2b horn-backs and turns); the habitats out until black-rods re-renders land.
+- The mark: the approved globe from r47-brand c19abdba, kept in `brand/site-rc/` (film, poster, the header's 60-frame sheet,
+  the touch icon); no night film. The dots are flat chips in the logo's colors.
+- `rc_finish` runs after web.py's favicons and vercel.json: the touch icon, the favicon titled EARF, no journal redirect.

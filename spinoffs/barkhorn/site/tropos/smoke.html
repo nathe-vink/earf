@@ -1,0 +1,1676 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>if (!location.hash) history.replaceState(null, "", location.pathname + "#speaker-smoke")</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tropos in Smoke · EARF</title>
+<meta name="description" content="Smoked glass, for after dark. Tropos 08, a powered horn loudspeaker in smoked black cast acrylic. In development, not yet for sale.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#F4F1EC">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EARF">
+<meta property="og:title" content="Tropos in Smoke · EARF">
+<meta property="og:description" content="Smoked glass, for after dark. Tropos 08, a powered horn loudspeaker in smoked black cast acrylic. In development, not yet for sale.">
+<meta property="og:url" content="https://www.earf.world/tropos/smoke">
+<link rel="canonical" href="https://www.earf.world/tropos/smoke">
+<meta property="og:image" content="https://www.earf.world/img/rc/og-black.jpg">
+<meta property="og:image:alt" content="Tropos in Smoke">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tropos in Smoke · EARF">
+<meta name="twitter:description" content="Smoked glass, for after dark. Tropos 08, a powered horn loudspeaker in smoked black cast acrylic. In development, not yet for sale.">
+<meta name="twitter:image" content="https://www.earf.world/img/rc/og-black.jpg">
+<style>
+/* the base a host would give: no margin, pictures inside their boxes, [hidden] hidden, the phone's insets */
+:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px) }
+body { margin: 0; font: 14px/1.4 system-ui, -apple-system, sans-serif }
+img { max-width: 100% }
+[hidden] { display: none !important }
+</style>
+<base href="/">
+
+<script>function heroIn() {     // the hero's sources, set on home only, so another view's first load doesn't fetch it
+  document.querySelectorAll('.hero-photo [data-srcset]').forEach(e => { e.srcset = e.dataset.srcset; delete e.dataset.srcset; });
+  document.querySelectorAll('.hero-photo img[data-src]').forEach(e => { e.src = e.dataset.src; delete e.dataset.src; }); }</script>
+<script>(function (d, h) {                              
+  const L = {}, m = /^#([a-z]+-[a-z]+)$/.exec(h), add = (href, set, media) => { const l = d.ownerDocument.createElement('link');
+    l.rel = 'preload'; l.as = 'image'; l.fetchPriority = 'high'; if (href) l.href = href; if (set) { l.imageSrcset = set; l.imageSizes = '100vw'; }
+    if (media) l.media = media; d.ownerDocument.head.appendChild(l); };
+  const home = !h || h === '#' || !/^#(speaker|hemisphere|core|mantle|dome|orb|turntable|colou?r|journal|press|privacy|speakers|lighting|turntable|tropos|atmosphere|turn|spec|lamps|record|closer)\b/.test(h);
+  d.dataset.home = home ? '1' : '';
+  if (home) { add('img/rc/red-hero.webp'); add('img/rc/orange-hero.webp'); }
+  else if (m && L[m[1]]) { const [wide, tall] = L[m[1]]; if (tall) { add(tall, null, '(max-width: 700px)'); add(wide, null, '(min-width: 701px)'); } else add(wide); }
+})(document.documentElement, location.hash)</script>
+<script>(function (d) { d.classList.add('opening');      // the opening's choice, made before anything paints: whether it plays, and by day or night
+  if (/^#(speaker|dome|orb|turntable|colou?r)-|^#(speakers|lighting|turntable|tropos|atmosphere|turn|spec|lamps|record|press|journal|privacy)$|^#journal-/.test(location.hash)
+      || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  d.classList.add('intro');
+  if (matchMedia('(prefers-color-scheme: dark)').matches) { d.classList.add('night'); document.querySelector('meta[name="theme-color"]').content = '#100F12'; }
+})(document.documentElement)</script>
+<link rel="preload" href="fonts/instrument-sans-400-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/ibm-plex-mono-400-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/ibm-plex-mono-400-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(fonts/ibm-plex-mono-500-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(fonts/ibm-plex-mono-500-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Instrument Sans';
+  font-style: normal;
+  font-weight: 400 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(fonts/instrument-sans-400-700-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Instrument Sans';
+  font-style: normal;
+  font-weight: 400 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(fonts/instrument-sans-400-700-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}h1.tagline { white-space: nowrap }
+.hero-title h1.tagline { font-size: clamp(18px, min(5vw, calc((100vw - 32px) / 12.69)), 80px) }
+@media (max-width: 860px) { .hero-title h1.tagline { font-size: clamp(18px, min(9.4vw, calc((100vw - 32px) / 12.69)), 44px) } }
+.debut-words h1.tagline { font-size: clamp(18px, min(7vw, calc((100vw - 32px) / 12.69)), 96px) }
+</style>
+</head>
+<body>
+<style>
+/* layout: a showroom in one column of bands; the speakers themselves carry the color, the page stays paper and ink */
+:root {
+  --paper: #ECE8E1; --page: #F4F1EC; --ink: #1C1A18; --muted: #5E5A53; --rule: #D6D0C6; --card-ink: #1A1917;
+  --ring: rgba(0, 0, 0, 0.25); --on-photo: #1C1A18; --veil: rgba(242, 239, 234, 0.82);
+  --blend: multiply;
+  --sans: 'Instrument Sans', 'Helvetica Neue', Arial, sans-serif; --mono: 'IBM Plex Mono', 'Courier New', monospace;
+  --header: 64px;
+}
+:root { color-scheme: light }                     /* one theme by choice: every photograph here stands on a pale ground */
+.only-dark { display: none !important }
+* { box-sizing: border-box }
+body { margin: 0; background: var(--page); color: var(--ink); font-family: var(--sans); font-size: 17px; line-height: 1.55 }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--page) }
+.wrap { max-width: 1240px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px)) }
+.band { padding-block: 72px }
+.band + .band { border-top: 0 }
+section[id] { scroll-margin-top: calc(var(--header) + 16px) }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px }
+.draft { background: var(--ink); color: var(--page); font: 500 13px/1.4 var(--mono); letter-spacing: 0.08em; text-transform: uppercase }
+.draft .wrap { padding-block: 8px; display: flex; flex-wrap: wrap; gap: 4px 16px; justify-content: space-between }
+.draft button { font: inherit; letter-spacing: inherit; text-transform: inherit; color: inherit; background: none; border: 0;
+  padding: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px }
+header.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: color-mix(in srgb, var(--page) 92%, transparent);
+  backdrop-filter: blur(8px); border-bottom: 1px solid var(--rule) }
+header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: var(--header) }
+.brand { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none }
+.brand .globe { width: 42px; height: 42px; flex: none; background: url(data:image/webp;base64,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) center / 100% 100% no-repeat }
+html.globe-live .brand .globe { background-size: 1000% 600%; background-position: 0 0;    /* the turning sprite, after load */
+  background-image: url(img/globe-spin-light.webp);
+  background-image: image-set(url(img/globe-spin-light.avif) type("image/avif"), url(img/globe-spin-light.webp) type("image/webp")) }
+.brand svg { display: block; height: 22px; width: auto }
+nav ul { display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 0; padding: 0; list-style: none }
+nav a { color: var(--ink); text-decoration: none; font-size: 15px; font-weight: 500 }
+nav a:hover, nav a[aria-current="page"] { text-decoration: underline; text-underline-offset: 4px }
+.eyebrow { margin: 0 0 10px; font: 500 13px/1.3 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted) }
+h1 { margin: 0; font-size: clamp(36px, 5.6vw, 72px); line-height: 1.0; font-weight: 600; letter-spacing: -0.03em; text-wrap: balance }
+h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weight: 600; letter-spacing: -0.02em; text-wrap: balance }
+.lede { margin: 16px 0 0; max-width: 46ch; font-size: 19px }
+.head { display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: end; justify-content: space-between; margin-bottom: 32px }
+.head p { margin: 10px 0 0; max-width: 58ch; color: var(--muted) }
+.vh { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0 }   /* a line page's h1, for screen readers: its first band's h2 is the visible title */
+.hint { font: 500 13px/1.4 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted) }
+.btn { display: inline-flex; align-items: center; gap: 8px; font: 500 15px/1 var(--sans); color: var(--ink); background: transparent;
+  border: 1px solid var(--ink); border-radius: 999px; padding: 12px 18px; cursor: pointer; text-decoration: none }
+.btn.solid { background: var(--ink); color: var(--page) }
+.btn:hover { box-shadow: inset 0 0 0 1px var(--ink) }
+.ic { width: 100%; height: 100%; object-fit: contain }
+.coin-dot { width: 22px; height: 22px; flex: none; display: inline-block; background: none calc(var(--i) * 100% / 7) 0 / 800% 100%;
+  mix-blend-mode: var(--blend) }
+
+/* the hero: the eight on their arc; the title on the photograph's paper sky, in its ink whatever the theme */
+.hero { padding-block: 0 28px }
+.hero-pic { position: relative }
+.hero-photo { position: relative; aspect-ratio: 2 / 1; max-width: 100%; background: #F1EDE8; overflow: hidden }
+.hero-photo > picture { display: block; width: 100%; height: 100% }
+.hero-photo img { display: block; width: 100%; height: 100%; object-fit: cover }
+@media (max-width: 700px) { .hero-photo.has-tall { aspect-ratio: 4 / 5 } }
+.hero-title { position: absolute; left: 0; right: 0; top: 0; z-index: 1; color: var(--on-photo); pointer-events: none }
+.hero-title .wrap { padding-block: clamp(18px, 2.6vw, 44px) 0 }
+.hero-title .eyebrow { color: color-mix(in srgb, var(--on-photo) 68%, transparent) }
+.hero-title h1 { font-size: clamp(34px, 5vw, 80px); max-width: none }
+.hero-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px; padding-block: 24px 0 }
+.hero-foot .lede { margin: 0 }
+.hero-foot .status { flex-basis: 100%; margin: 0; color: var(--muted); font-size: 14px }   /* the plain word, once, near the top */
+.acts { display: flex; flex-wrap: wrap; gap: 10px }
+.spot { position: absolute; display: block; border-radius: 10px; color: var(--on-photo); text-decoration: none; z-index: 2 }
+.spot-label { position: absolute; left: 50%; top: calc(100% + 10px); transform: translate(-50%, -6px); display: inline-flex;
+  align-items: center; gap: 8px; padding: 6px 12px 6px 6px; border-radius: 999px; background: var(--veil);
+  backdrop-filter: blur(6px); font-size: 15px; white-space: nowrap; opacity: 0; transition: opacity .2s ease, transform .2s ease;
+  pointer-events: none }
+.spot-label > span:last-child { font: 500 12px/1 var(--mono); letter-spacing: 0.08em; opacity: .7 }
+.spot-ic { width: 26px; height: 26px; display: block }
+.spot:hover .spot-label, .spot:focus-visible .spot-label { opacity: 1; transform: translate(-50%, 0) }
+.spot:focus-visible { outline: 2px solid var(--on-photo); outline-offset: 2px }
+.cast { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 18px; margin: 22px 0 0; padding: 18px 0 0; list-style: none;
+  border-top: 1px solid var(--rule) }
+.cast a { display: inline-flex; align-items: center; gap: 8px; color: var(--ink); text-decoration: none; font-weight: 500; font-size: 15px }
+.cast a:hover { text-decoration: underline; text-underline-offset: 4px }
+@media (max-width: 860px) {
+  .hero-title { position: static; color: var(--ink); pointer-events: auto }
+  .hero-title .wrap { padding-block: 26px 18px }
+  .hero-title .eyebrow { color: var(--muted) }
+  .hero-title h1 { font-size: clamp(32px, 8vw, 44px) }
+  .spot-label { display: none }
+}
+.spot.tall-only { display: none }
+@media (max-width: 700px) { .spot.wide-only { display: none } .hero-photo.has-tall .spot.tall-only { display: block } }
+
+/* the horns turning */
+.horns { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px }
+.horns li { display: grid; gap: 6px }
+.horns a { color: var(--ink); font-size: 15px; font-weight: 500; text-decoration: none }
+.horns a:hover { text-decoration: underline; text-underline-offset: 4px }
+.spin { width: 100%; max-width: 100%; border-radius: 4px; background-size: 600% 400%; background-position: 0 0; background-repeat: no-repeat;
+  cursor: grab; touch-action: pan-y }
+.spin.dragging { cursor: grabbing }
+
+/* the cards */
+.seg { display: inline-flex; border: 1px solid var(--ink); border-radius: 999px; overflow: hidden }
+.seg button { font: 500 14px/1 var(--sans); color: var(--ink); background: transparent; border: 0; padding: 10px 16px; cursor: pointer }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--page) }
+.cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px }
+.card { background: var(--panel); color: var(--card-ink); border-radius: 6px; overflow: hidden; display: grid; grid-template-rows: auto 1fr }
+.photo { position: relative; display: block; aspect-ratio: 900 / 1827; max-width: 100% }
+.photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity .35s ease }
+.photo .off { opacity: 0 }
+.show-off .photo .on { opacity: 0 }
+.show-off .photo .off { opacity: 1 }
+.about { padding: 14px 16px 18px; display: grid; grid-template-rows: auto auto 1fr auto auto; gap: 4px; min-width: 0 }  /* the line takes the slack, so a row's specs and links align */
+.photo { color: var(--card-ink) }
+.about .num { margin: 0; display: flex; align-items: center; gap: 8px; font: 500 12px/1.3 var(--mono); letter-spacing: 0.12em; text-transform: uppercase }
+.about h3.named { display: flex; align-items: center; gap: 0.3em }
+.card-ic { width: 1.15em; height: 1.15em; flex: none; display: block }
+.card .card-ic .only-dark { display: none !important }
+.card .card-ic .only-light { display: block !important }
+.about h3 { margin: 0; font-size: 26px; line-height: 1.1; font-weight: 600; letter-spacing: -0.01em }
+.about .line { margin: 0 0 8px; font-size: 15px }
+.about dl { margin: 0; display: grid; grid-template-columns: auto 1fr; align-content: start; gap: 2px 12px; font-size: 13px; border-top: 1px solid rgba(26, 25, 23, .25); padding-top: 8px }
+.about dt { font: 500 12px/1.5 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; opacity: .82 }
+.about dd { margin: 0 }
+.about .more { margin-top: 10px; align-self: end; justify-self: start; color: var(--card-ink); font-weight: 600; font-size: 15px; text-underline-offset: 4px }
+
+/* a closer look: one color at a time on the studio's dark seamless (a launch page's), picked from the coins below */
+.closer { background: var(--closer, #0B0B0C); color: #F5F3EF; text-align: center }
+.band.closer, .band.closer + .band, .band.lightband, .band.lightband + .band { border-top: 0 }
+.closer .eyebrow { color: #9B978F }
+.closer-head { display: grid; justify-items: center; margin-bottom: 4px }
+.closer-head h2 { max-width: 20ch }
+.closer-stage { position: relative; max-width: 100%; margin: 0 auto;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent), linear-gradient(transparent, #000 7%, #000 93%, transparent);
+  -webkit-mask-composite: source-in; mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent),
+  linear-gradient(transparent, #000 7%, #000 93%, transparent); mask-composite: intersect }
+.closer-stage img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; object-fit: cover; opacity: 0; transition: opacity 520ms ease }
+.closer-stage img.on { opacity: 1 }
+.picker { display: grid; justify-items: center; gap: 12px; margin-top: 6px }
+.dots { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px }
+.dots button { width: 44px; height: 44px; padding: 5px; border: 0; border-radius: 50%; background: transparent; cursor: pointer }
+.dots button[aria-checked="true"] { box-shadow: inset 0 0 0 2px #F5F3EF }
+.dots .coin-dot { width: 100%; height: 100%; display: block; border-radius: 50%; background-image: none; mix-blend-mode: screen }
+.closer .picked { margin: 0; color: #9B978F; font-size: 15px } .closer .picked b { color: #F5F3EF; margin-right: 8px; font-weight: 600 }
+.closer button:focus-visible { outline-color: #F5F3EF }
+.closer.light { color: #1A1917 } .closer.light .eyebrow, .closer.light .picked, .closer.light .lineup figcaption { color: #6B675F }
+.closer.light .picked b { color: #1A1917 } .closer.light button:focus-visible { outline-color: #1A1917 }
+.macros { list-style: none; margin: 40px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; text-align: left }
+.macros figure { margin: 0 } .macros img { width: 100%; height: auto; display: block; max-width: 100% }
+.macros figcaption { font-size: 14px; line-height: 1.4; margin-top: 8px; color: #9B978F } .closer.light .macros figcaption { color: #6B675F }
+@media (max-width: 900px) { .macros { grid-template-columns: repeat(2, minmax(0, 1fr)) } }
+.closer.light .dots .coin-dot { background-image: none; mix-blend-mode: multiply }
+.closer.light .dots button[aria-checked="true"] { box-shadow: inset 0 0 0 2px #1A1917 }
+/* a bright field falls off to gray at its corners: feather the frames into the band */
+.closer.light .closer-stage, .closer.light .lineup img {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent), linear-gradient(180deg, transparent, #000 5%, #000 95%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent), linear-gradient(180deg, transparent, #000 5%, #000 95%, transparent);
+  mask-composite: intersect }
+.lineup { margin: 56px 0 0; display: grid; gap: 12px }
+.lineup img { width: 100%; height: auto; display: block; max-width: 100% }
+.lineup figcaption { color: #9B978F; font-size: 15px }
+@media (max-width: 460px) { .dots { gap: 4px } .dots button { width: 38px; height: 38px; padding: 4px } }
+@media (prefers-reduced-motion: reduce) { .closer-stage img { transition: none } }
+.facade { margin: 0 0 56px }
+.facade img { width: 100%; height: auto; display: block; border-radius: 4px; max-width: 100% }
+/* lit from below: the run pins one room. Scrolling picks the color, a quarter of a screen each, and time plays the change
+   (the lamp goes off, the next comes on: no frame mixes two colors); the color's light spills past the photograph onto
+   the page; only the photograph's slow push follows the scroll itself */
+@property --glow { syntax: '<color>'; inherits: true; initial-value: transparent }
+@property --glow2 { syntax: '<color>'; inherits: true; initial-value: transparent }
+.lightband { --ink: #ECE8E1; background: #0B0C10; color: #ECE8E1; padding-block: 0 clamp(56px, 8vw, 112px) }
+.lightband .eyebrow, .lightband .num { color: #A39E95 }
+.light-head { display: none }
+.light-run { position: relative; height: calc(100svh - var(--header) + 8 * 25svh) }
+.light-stage { position: sticky; top: calc(var(--header) + env(safe-area-inset-top, 0px)); height: calc(100svh - var(--header));
+  display: grid; grid-template-columns: min(58vw, calc(100svh - var(--header))) minmax(0, 1fr); grid-template-rows: 100%;
+  overflow: hidden; isolation: isolate; transition: --glow .9s ease, --glow2 .9s ease }
+.light-stage.dip { transition-duration: .16s }
+.light-glow { position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(ellipse 62vw 80% at calc(min(58vw, 100svh - var(--header)) / 2) 58%, var(--glow), var(--glow2) 40%, transparent 72%) }
+.light-pic { grid-column: 1; position: relative; margin: 0; width: 100%; height: 100%; max-width: 100%;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent), linear-gradient(to bottom, transparent, #000 8%, #000 86%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent), linear-gradient(to bottom, transparent, #000 8%, #000 86%, transparent);
+  mask-composite: intersect }
+.light-pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; scale: var(--push, 1);
+  transition: opacity .16s cubic-bezier(.4, 0, 1, 1) }
+.light-pic img.on { opacity: 1; transition: opacity .56s cubic-bezier(.16, 1, .3, 1) }
+.light-pic.wake img.on { transition-duration: 1.1s }
+.light-text { grid-column: 2; display: flex; flex-direction: column; justify-content: space-between; min-width: 0;
+  padding: clamp(40px, 9vh, 88px) max(16px, calc((100vw - 1240px) / 2 + 16px)) clamp(40px, 9vh, 88px) clamp(24px, 4vw, 56px) }
+.light-intro h2 { font-size: clamp(30px, 3.2vw, 46px) }
+.light-intro p:last-child, .light-head p:last-child { margin: 14px 0 0; color: #A39E95; font-size: 17px; line-height: 1.55; max-width: 34ch }
+.light-colour .num { margin: 0 0 12px; font: 500 13px/1.3 var(--mono); letter-spacing: 0.14em; text-transform: uppercase }
+.light-name { margin: 0; font-size: clamp(56px, 6.6vw, 96px); line-height: .95; font-weight: 600; letter-spacing: -0.035em }
+.light-line { margin: 12px 0 0; color: #A39E95; font-size: 18px; line-height: 1.45; max-width: 30ch; min-height: calc(2 * 1.45em) }
+.light-name, .light-line, .light-colour .num { transition: opacity .42s cubic-bezier(.16, 1, .3, 1), translate .42s cubic-bezier(.16, 1, .3, 1) }
+.light-colour.swap .light-name, .light-colour.swap .light-line, .light-colour.swap .num { opacity: 0; translate: 0 8px; transition-duration: .12s }
+.light-coins { position: relative; display: flex; gap: 4px; margin: 28px 0 0 -7px }
+.light-coins button { width: 44px; height: 44px; padding: 7px; border: 0; border-radius: 50%; background: transparent; color: #ECE8E1; cursor: pointer; flex: none }
+.light-coins .coin-dot { width: 100%; height: 100%; display: block; border-radius: 50%; background-image: none; mix-blend-mode: screen }
+.light-coins .ring { position: absolute; left: 0; top: 0; width: 44px; height: 44px; border-radius: 50%; box-shadow: inset 0 0 0 2px #ECE8E1;
+  translate: calc(var(--at, 0) * 48px) 0; transition: translate .36s cubic-bezier(.2, .8, .2, 1); pointer-events: none }
+.light-coins button:focus-visible { outline: 2px solid #ECE8E1; outline-offset: 2px }
+.lightband .facade { margin: 0; opacity: .15; transition: opacity 1.2s ease;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent) }
+.lightband .facade.seen { opacity: 1 }
+.lightband .facade img { width: 100%; height: auto; display: block; border-radius: 0; max-width: 100% }
+@media (max-width: 860px) {
+  .light-head { display: block; padding-block: 56px 24px }
+  .light-head h2 { font-size: clamp(30px, 8vw, 40px) }
+  .light-intro { display: none }
+  .light-stage { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) }
+  .light-glow { background: radial-gradient(ellipse 90vw 60% at 50% 48%, var(--glow), var(--glow2) 45%, transparent 80%) }
+  .light-pic { grid-column: 1; height: min(125vw, calc(100svh - var(--header) - 200px));
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 7%, #000 84%, transparent); -webkit-mask-composite: source-over;
+    mask-image: linear-gradient(to bottom, transparent, #000 7%, #000 84%, transparent); mask-composite: add }
+  .light-pic img { object-position: 50% 55% }
+  .light-text { grid-column: 1; justify-content: end; padding: 0 max(16px, env(safe-area-inset-right, 0px)) 20px max(16px, env(safe-area-inset-left, 0px)) }
+  .light-colour .num { display: none }
+  .light-name { font-size: 40px; line-height: 1 }
+  .light-line { font-size: 17px; line-height: 1.4; margin-top: 8px; min-height: calc(2 * 1.4em) }
+  .light-coins { margin: 14px 0 0; justify-content: space-between; gap: 0 }
+  .light-coins .ring { translate: calc(var(--at, 0) * (100vw - 32px - 44px) / 7) 0 }
+}
+@media (prefers-reduced-motion: reduce) {
+  .light-run { height: auto } .light-stage { position: relative; top: 0; transition: none }
+  .light-pic img, .light-pic img.on, .light-pic.wake img.on { transition: opacity .15s linear; scale: 1 }
+  .light-name, .light-line, .light-coins .ring { transition: none }
+  .lightband .facade { opacity: 1; transition: none }
+}
+/* the header over the dark band */
+header.top { transition: background-color .3s ease, border-color .3s ease }
+header.top.on-dark { background: rgb(11 12 16 / .92); backdrop-filter: blur(20px); border-bottom-color: rgb(255 255 255 / .06) }
+header.top.on-dark .brand, header.top.on-dark nav a { color: #ECE8E1 }
+
+/* the habitats: one campaign picture at a time, snapping along a strip (the portraits on phones) */
+#habitats { overflow-x: clip }
+#habitats > .wrap { container-type: inline-size }
+.hab-frame { position: relative; --col: min(86cqw, 1080px); --mid: calc(var(--col) / 3); margin-right: calc(50cqw - 50vw) }
+.hab-frame .nav { top: var(--mid); transition: opacity .2s ease }
+.hab-frame .nav.prev { left: 14px } .hab-frame .nav.next { right: auto; left: calc(var(--col) - 58px) }
+.hab-frame .nav[aria-disabled="true"] { opacity: 0; pointer-events: none }
+.habitats { list-style: none; margin: 0; padding: 0 0 6px; display: grid; grid-auto-flow: column; grid-auto-columns: var(--col);
+  gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; padding-right: 96px;
+  -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 96px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 96px), transparent) }
+.habitats::-webkit-scrollbar { display: none }
+.habitats li { scroll-snap-align: start; min-width: 0 }
+.habitats a { display: grid; gap: 10px; color: var(--ink); text-decoration: none; font-size: 15px }
+.habitats a span { color: var(--muted) } .habitats a b { color: var(--ink); font-weight: 600; margin-right: 6px }
+.habitats img { width: 100%; height: auto; display: block; border-radius: 4px }
+.habitats:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px }
+@media (max-width: 700px) { .hab-frame { --col: 84cqw; --mid: calc(var(--col) * 0.625) }
+  .habitats { padding-right: 40px; -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 40px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 40px), transparent) } }
+.room figure { margin: 0; display: grid; gap: 14px }
+.room img { width: 100%; height: auto; display: block; max-width: 100% }
+.room figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 24px; font-size: 15px; color: var(--muted); width: 100% }
+.spec-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 40px; align-items: start }
+.spec dl, .facts { margin: 0; display: grid; grid-template-columns: 150px minmax(0, 1fr); border-top: 2px solid var(--ink) }
+.spec dt, .spec dd, .facts dt, .facts dd { padding: 10px 0; border-bottom: 1px solid var(--rule) }
+.spec dt, .facts dt { font: 500 13px/1.5 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted) }
+.spec dd, .facts dd { margin: 0 }
+.dwg { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px 20px; background: #F7F5F1; border-radius: 4px; padding: 18px; margin: 0; max-width: 620px }
+.dwg img { min-width: 0; width: 0; height: auto; display: block; mix-blend-mode: multiply }
+.dwg figcaption { flex: 1 0 100%; font: 500 12px/1.4 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: #5E5A53 }
+.next { display: grid; gap: 14px }
+.next p { margin: 0; max-width: 60ch; color: var(--muted) }
+
+.lamp-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px }
+.lamp { display: grid; gap: 12px; align-content: start; min-width: 0 }
+.lamp img, .eight img, .lamp-duo img { width: 100%; height: auto; display: block; border-radius: 6px; background: #F1EDE8; max-width: 100% }
+.lamp h3 { margin: 4px 0 0; display: flex; align-items: baseline; gap: 12px; font-size: 26px; line-height: 1.1; font-weight: 600; letter-spacing: -0.01em }
+.lamp h3 small { font: 500 12px/1.3 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted) }
+.lamp .line { margin: 0 0 6px; color: var(--muted); max-width: 52ch }
+.eight { margin: 32px 0 0; display: grid; gap: 12px }
+.lamp-duo { display: grid; grid-template-columns: 15fr 8fr; gap: 24px; margin-top: 24px; align-items: start }   /* 3:2 and 4:5 at one height */
+.lamp-duo figure { margin: 0; display: grid; gap: 10px; min-width: 0 }
+.lamp-duo.solo { grid-template-columns: 8fr 15fr; align-items: center }
+.tt-duo .ptile .ph img { border-radius: 6px }
+.tt-eight { list-style: none; margin: 40px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px 16px }
+.tt-eight a { display: grid; gap: 10px; color: inherit; text-decoration: none; min-width: 0 }
+.tt-eight img { width: 100%; height: auto; display: block; border-radius: 6px; background: #F1EDE8; max-width: 100% }
+.tt-eight a > span { display: flex; align-items: center; gap: 8px; font-size: 15px }
+.tt-eight a:hover > span, .tt-eight a:focus-visible > span { text-decoration: underline; text-underline-offset: 3px }
+.tt-details { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 40px }
+.tt-details figure { margin: 0; display: grid; gap: 10px; min-width: 0 }
+.tt-details img { width: 100%; height: auto; display: block; border-radius: 6px; background: #F1EDE8; max-width: 100% }
+.tt-details figcaption { font-size: 15px; color: var(--muted) }
+@media (max-width: 720px) { .lamp-duo.tt-duo { grid-template-columns: minmax(0, 1fr) } .tt-eight { grid-template-columns: repeat(2, minmax(0, 1fr)) }
+  .tt-details { grid-template-columns: minmax(0, 1fr) } }
+.lamp-note { display: grid; gap: 10px; max-width: 44ch; min-width: 0 }
+.lamp-note h3 { margin: 0; font-size: 22px; letter-spacing: -0.01em }
+.lamp-note p { margin: 0; color: var(--muted) }
+.eight figcaption, .lamp-duo figcaption { font-size: 15px; color: var(--muted) }
+@media (max-width: 720px) { .lamp-pair, .lamp-duo { grid-template-columns: minmax(0, 1fr) } }
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-top: 14px }
+.pair figure { margin: 0; display: grid; gap: 10px }
+.pair img { width: 100%; height: auto; display: block; border-radius: 4px; max-width: 100% }
+.pair figcaption { font-size: 15px; color: var(--muted) } .pair figcaption b { color: var(--ink); font-weight: 600; margin-right: 6px }
+@media (max-width: 720px) { .pair { grid-template-columns: 1fr } }
+.promise { list-style: none; margin: 0; padding: 0; display: grid; gap: 24px }
+.promise li { display: grid; gap: 8px; align-content: start; padding-top: 16px; border-top: 1px solid var(--rule); min-width: 0 }
+.promise b { font-weight: 600; font-size: 18px }
+.promise span { color: var(--muted); line-height: 1.6 }
+.stages { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px }      /* where it stands: three steps in a row */
+@media (max-width: 860px) { .stages { grid-template-columns: minmax(0, 1fr); gap: 24px } }
+.contact { display: grid; gap: 18px }
+.contact .addr { display: flex; flex-wrap: wrap; align-items: center; gap: 12px }
+.contact code { font: 500 clamp(20px, 3vw, 30px)/1.2 var(--mono); user-select: all; word-break: break-all }
+.contact small { color: var(--muted); font-size: 14px }
+.contact small:empty { display: none }
+footer { padding-block: 40px 56px; border-top: 1px solid var(--rule) }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 18px 32px; align-items: center; justify-content: space-between }
+footer p { margin: 0; font: 500 12px/1.5 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted) }
+.foot-nav { display: flex; flex-wrap: wrap; gap: 8px 22px }
+.foot-nav a { font-size: 15px; color: var(--ink); text-underline-offset: 4px }
+
+/* a speaker's page */
+.crumbs { padding-block: 22px 0; font-size: 15px; color: var(--muted) }
+.crumbs a { color: var(--ink); text-underline-offset: 4px }
+.pdp { display: grid; grid-template-columns: minmax(0, 1.62fr) minmax(0, 0.82fr); gap: 40px; align-items: start; padding-block: 18px 64px }
+.gallery { display: grid; gap: 12px; min-width: 0 }
+/* the pictures, one at a time on a stage the photograph's shape (3:2, and 4:5 on phones), each carried to the stage's
+   edges on its own ground: the colors down its sides, or above and below it */
+.frame { position: relative; min-width: 0 }
+.stage { position: relative; aspect-ratio: 3 / 2; width: 100%; max-width: 100%; container-type: size; display: grid; place-items: center;
+  overflow: hidden; border-radius: 6px; background: var(--paper); touch-action: pan-y; -webkit-user-select: none; user-select: none }
+.stage:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px }
+.stage > * { grid-area: 1 / 1; position: relative; z-index: 1 }   /* the picture over its blurred fill, explicitly */
+.stage > .blur { z-index: 0 }
+.stage .fill, .stage .fill img { width: 100%; height: 100%; display: block; object-fit: cover }
+.stage .fit { width: min(100cqw, calc(100cqh * var(--ar))); max-width: 100%; aspect-ratio: var(--ar); height: auto; display: block; border-radius: 0;
+  -webkit-user-drag: none;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent), linear-gradient(transparent, #000 3%, #000 97%, transparent);
+  -webkit-mask-composite: source-in; mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent),
+  linear-gradient(transparent, #000 3%, #000 97%, transparent); mask-composite: intersect }
+.stage .fit.cut { align-self: end;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent), linear-gradient(transparent, #000 3%);
+  mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent), linear-gradient(transparent, #000 3%) }
+.stage .spinner { cursor: grab; touch-action: pan-y } .stage .spinner.dragging { cursor: grabbing }
+.stage .blur { width: 100%; height: 100%; background: center / cover no-repeat; filter: blur(28px) saturate(1.1); transform: scale(1.15) }
+.stage .in { animation: g-in 0.24s ease-out }
+@keyframes g-in { from { opacity: 0 } }
+.stage .tag { position: absolute; z-index: 2; left: 12px; bottom: 12px; font: 500 12px/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--on-photo); background: var(--veil); border-radius: 999px; padding: 7px 10px }
+.nav { position: absolute; top: 50%; translate: 0 -50%; z-index: 2; width: 44px; height: 44px; border-radius: 50%; border: 0; padding: 0;
+  display: grid; place-items: center; color: var(--on-photo); background: var(--veil); cursor: pointer; box-shadow: 0 1px 8px rgba(0, 0, 0, 0.14) }
+.nav.prev { left: 12px } .nav.next { right: 12px }
+.nav svg { width: 18px; height: 18px; display: block }
+.nav:hover { box-shadow: inset 0 0 0 1.5px var(--on-photo), 0 1px 8px rgba(0, 0, 0, 0.14) }
+.nav:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px }
+.count { position: absolute; right: 12px; bottom: 12px; z-index: 2; font: 500 12px/1 var(--mono); letter-spacing: 0.08em; color: var(--on-photo);
+  background: var(--veil); border-radius: 999px; padding: 7px 10px; pointer-events: none }
+
+.thumbs { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(56px, 84px); gap: 8px; overflow-x: auto; scrollbar-width: none;
+  padding: 4px; margin: -4px; position: relative; scroll-snap-type: x proximity }
+.thumbs::-webkit-scrollbar { display: none }
+.thumb { aspect-ratio: 1; border-radius: 4px; border: 1px solid var(--rule); padding: 0; cursor: pointer; background-color: var(--paper);
+  scroll-snap-align: start; opacity: 0.8; transition: opacity 0.15s }
+.thumb:hover, .thumb[aria-selected="true"] { opacity: 1 }
+.thumb[aria-selected="true"] { outline: 2px solid var(--ink); outline-offset: 2px }
+.cap { margin: 0; color: var(--muted); font-size: 15px; max-width: 62ch }
+.buy { position: sticky; top: calc(var(--header) + 24px); display: grid; gap: 18px; min-width: 0; background: var(--page) }
+.buy .num { margin: 0; display: flex; align-items: center; gap: 10px; font: 500 13px/1.3 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted) }
+.buy h1.named { display: flex; align-items: center; gap: 0.3em }
+.buy h1 .pic { width: 1.05em; height: 1.05em; flex: none; display: block }
+.buy h1 { font-size: clamp(40px, 5vw, 64px) }
+.buy .line { margin: 0; font-size: 18px }
+.price { margin: 0; font-size: 20px; font-weight: 600 }
+.price span { font-weight: 400; color: var(--muted); font-size: 16px; white-space: nowrap }   /* the unit wraps whole */
+.swatches { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none }
+.swatches a { display: block; width: 40px; height: 40px; border-radius: 50%; position: relative }
+.swatches a[aria-current="true"] { outline: 2px solid var(--ink); outline-offset: 3px }
+.swatches .coin-dot { width: 100%; height: 100%; display: block }
+.pick { margin: -6px 0 0; font-size: 15px; color: var(--muted) }
+.pick b { color: var(--ink) }
+.acts { display: flex; flex-wrap: wrap; gap: 10px }
+.facts { grid-template-columns: 120px minmax(0, 1fr); font-size: 15px }
+.goes-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 20px; margin: 0 0 14px;
+  border-top: 2px solid var(--ink); padding-top: 14px }
+.goes-head h2 { font-size: 24px }
+.goes-head span { font-size: 14px; color: var(--muted) }
+.goes { display: grid; grid-template-columns: repeat(2, minmax(0, 380px)); gap: 16px }
+.good { margin: 0; display: grid; gap: 8px; align-content: start }
+.good .art { aspect-ratio: 4 / 3; display: grid; place-items: center; border-radius: 6px; background: var(--paper) }
+.good .art svg { width: 78%; height: auto; display: block }
+.good b { font-size: 18px; font-weight: 600 }
+.good .way { font-size: 15px } .good .way i { font-style: normal; color: var(--muted) }
+.good p { margin: 0; font-size: 14px; color: var(--muted); max-width: 40ch }
+.good .chip { display: inline-flex; align-items: center; gap: 7px; font-size: 14px }
+.good .chip .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--c); box-shadow: inset 0 0 0 1px var(--ring); display: inline-block }
+.others { padding-block: 48px 72px }
+.others ul { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none }
+.others a { display: grid; gap: 8px; color: var(--ink); text-decoration: none; font-weight: 500; font-size: 15px }
+.others img { width: 100%; height: auto; aspect-ratio: 900 / 1827; object-fit: cover; border-radius: 4px; display: block; max-width: 100% }
+.others a:hover span { text-decoration: underline; text-underline-offset: 4px }
+
+/* the opening: the acrylic globe large in the middle of a plain ground, turning, flies and shrinks onto the header's
+   globe while the ground, a circle on the globe, closes in behind it. The ground is the render's own paper as its film
+   decodes (#F1ECE7), or on a dark system the night render's black (#100F12), so the film's edge never shows; shown only
+   when the page's first script asks for it */
+.splash, .flyer { display: none }
+html.intro.night { background: #100F12 }                              /* so nothing pale shows before the ground is drawn */
+html.intro .splash { display: block; position: fixed; inset: 0; z-index: 50; background: #F1ECE7 }
+html.intro.night .splash, html.night .flyer video { background: #100F12 }
+html.intro .flyer { --big: min(36vmin, 200px); display: block; position: fixed; z-index: 51; left: 50%; top: 50%;
+  width: var(--big); height: var(--big); margin: calc(var(--big) / -2) 0 0 calc(var(--big) / -2) }
+.flyer video { display: block; width: 100%; height: 100%; object-fit: cover; clip-path: circle(50%); background: #F1ECE7 }
+html.intro .brand .globe { visibility: hidden }                       /* the flying globe lands on it, then hands over */
+.hero-photo img { transition: opacity .5s ease }
+html.opening .hero-photo img { opacity: 0 }
+/* the cursor: a dot where the pointer is and a ring that follows it, opening over anything to press, tinted with the
+   speaker it leads to; the dot takes the color of the text beneath it, so it reads on paper, photographs and the dark */
+.cur { position: fixed; left: 0; top: 0; z-index: 70; pointer-events: none; border-radius: 50%; opacity: 0; transition: opacity .25s ease }
+html.cursor .cur { opacity: 1 }
+html.cursor, html.cursor * { cursor: none !important }
+.cur-dot { width: 6px; height: 6px; margin: -3px 0 0 -3px; background: var(--cur, var(--ink)) }
+.cur-ring { width: 34px; height: 34px; margin: -17px 0 0 -17px;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--cur, var(--ink)) 38%, transparent);
+  transition: width .32s cubic-bezier(.2, .7, .2, 1), height .32s cubic-bezier(.2, .7, .2, 1), margin .32s cubic-bezier(.2, .7, .2, 1),
+    background-color .3s ease, box-shadow .3s ease, opacity .25s ease }
+.cur-ring.on { width: 54px; height: 54px; margin: -27px 0 0 -27px; background: color-mix(in srgb, var(--tint, var(--ink)) 20%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--tint, var(--ink)) 70%, transparent) }
+.cur-ring.drag::before, .cur-ring.drag::after { content: ""; position: absolute; top: 50%; width: 6px; height: 6px; margin-top: -3px;
+  border: solid var(--cur, var(--ink)); border-width: 0 0 1.5px 1.5px }
+.cur-ring.drag::before { left: 8px; transform: rotate(45deg) }
+.cur-ring.drag::after { right: 8px; transform: rotate(-135deg) }
+@media (prefers-reduced-motion: reduce) { html.intro .splash, html.intro .flyer { display: none } html.opening .hero-photo img { opacity: 1 } }
+
+@media (max-width: 1000px) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)) } .spec-grid { grid-template-columns: 1fr }
+  .pdp { grid-template-columns: 1fr } .buy { position: static } .others ul { grid-template-columns: repeat(4, minmax(0, 1fr)) } }
+@media (max-width: 720px) {
+  .horns { grid-template-columns: repeat(2, minmax(0, 1fr)) }
+  nav ul { gap: 4px 14px } nav a { font-size: 14px }
+  .band { padding-block: 52px }
+  .goes { grid-template-columns: 1fr } .good .art { aspect-ratio: 16 / 9 }
+  .brand svg { height: 18px } .brand .globe { width: 36px; height: 36px }
+}
+@media (max-width: 700px) { .stage { aspect-ratio: 4 / 5 } .nav { width: 40px; height: 40px } .nav.prev { left: 8px } .nav.next { right: 8px }
+  .count { right: 8px; bottom: 8px } .stage .tag { left: 8px; bottom: 8px } }
+@media (max-width: 460px) { .cards { gap: 12px } .about h3 { font-size: 21px } .about dl { display: none }
+  .spec dl, .facts { grid-template-columns: minmax(0, 1fr) } .spec dt, .facts dt { padding: 10px 0 0; border-bottom: 0 }
+  .spec dd, .facts dd { padding: 2px 0 10px } .swatches { gap: 6px } .swatches a { width: 36px; height: 36px } }
+/* phones: the pages behind one Menu button (five names and the mark wrapped the header onto two lines at 390) */
+.menu { display: none; font: 500 14px/1 var(--sans); color: var(--ink); background: transparent; border: 1px solid currentColor;
+  border-radius: 999px; padding: 9px 14px; cursor: pointer }
+@media (max-width: 460px) {
+  .menu { display: inline-flex; align-items: center }
+  nav ul { display: none; position: absolute; left: 0; right: 0; top: 100%; flex-direction: column; gap: 0; background: var(--page);
+    padding: 4px max(16px, env(safe-area-inset-right, 0px)) 12px max(16px, env(safe-area-inset-left, 0px)); border-bottom: 1px solid rgb(0 0 0 / .08) }
+  nav.open ul { display: flex }
+  nav ul a { display: block; padding: 12px 0; font-size: 17px }
+  header.top.on-dark nav ul { background: rgb(11 12 16 / .97); border-bottom-color: rgb(255 255 255 / .06) }
+  header.top.on-dark .menu { color: #ECE8E1 }
+}
+
+.lines { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px }
+.tile { position: relative; display: grid; grid-template-rows: auto 1fr; border-radius: 6px; overflow: hidden; background: #F1EDE8;
+  color: var(--ink); text-decoration: none; min-width: 0 }
+.tile img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; display: block; max-width: 100% }
+.tile .t-body { padding: 16px 18px 20px; display: grid; gap: 4px; align-content: start; min-width: 0 }
+.tile .eyebrow { margin: 0 }
+.tile .t-name { font-size: 26px; line-height: 1.1; font-weight: 600; letter-spacing: -0.01em }
+.tile .t-line { color: var(--muted); font-size: 15px }
+.tile .t-go { margin-top: 10px; font-weight: 600; font-size: 15px; text-decoration: underline; text-underline-offset: 4px }
+.tile:hover .t-go { text-decoration-thickness: 2px }
+.tile .soon { position: absolute; top: 12px; left: 12px; z-index: 1; font: 500 12px/1 var(--mono); letter-spacing: 0.1em;
+  text-transform: uppercase; background: var(--veil); backdrop-filter: blur(6px); padding: 7px 10px; border-radius: 999px }
+.shopcol { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none }
+.shopcol a { display: grid; justify-items: center; align-content: start; gap: 6px; color: var(--ink); text-decoration: none;
+  text-align: center; min-width: 0 }
+.shopcol .coin-dot { width: min(72px, 100%); height: auto; aspect-ratio: 1 }
+.shopcol b { font-weight: 600; font-size: 16px; margin-top: 4px }
+.shopcol small { color: var(--muted); font-size: 13px; line-height: 1.35 }
+.shopcol a:hover b { text-decoration: underline; text-underline-offset: 4px }
+.ptiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px }
+.ptiles.one { grid-template-columns: minmax(0, 1fr); max-width: 760px }
+.ptile { display: grid; gap: 12px; align-content: start; min-width: 0 }
+.ptile .ph img { width: 100%; height: auto; display: block; border-radius: 6px; background: #F1EDE8; max-width: 100% }
+.ptile h3 { margin: 4px 0 0; display: flex; align-items: baseline; gap: 12px; font-size: 26px; line-height: 1.1; font-weight: 600;
+  letter-spacing: -0.01em }
+.ptile h3 small { font: 500 12px/1.3 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted) }
+.ptile .line { margin: 0; color: var(--muted); max-width: 52ch }
+.ptile .more { justify-self: start; color: var(--ink); font-weight: 600; font-size: 15px; text-underline-offset: 4px }
+.dots-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none }
+.dots-row a { display: block; width: 28px; height: 28px; border-radius: 50% }
+.dots-row .coin-dot { width: 100%; height: 100%; display: block }
+.concepts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 24px }
+.concept { margin: 0; display: grid; gap: 10px; align-content: start; min-width: 0 }
+.concept img { width: 100%; height: auto; border-radius: 6px; display: block }
+.concept figcaption { font-size: 14px; color: var(--muted) }
+.soon-wrap .acts { margin-top: 24px }
+.colour-head { display: flex; align-items: center; gap: 22px; padding-block: 18px 16px }
+.colour-head .coin-big { width: 96px; height: 96px; flex: none }
+.colour-head .coin-big .coin-dot { width: 100%; height: 100%; display: block }
+.colour-head h1 { font-size: clamp(40px, 5vw, 64px) }
+.colour-head .num { margin: 0 0 6px; font: 500 13px/1.3 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted) }
+.colour-head .line { margin: 8px 0 0; font-size: 18px }
+.company { padding-block: 32px 8px }
+#p-company .company:first-child { padding-top: 56px }
+.company .goes-head span { max-width: 60ch }
+.pgrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px }
+.pcard { position: relative; display: grid; gap: 8px; align-content: start; color: var(--ink); text-decoration: none; min-width: 0 }
+.pcard img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 6px; display: block; background: #F1EDE8;
+  max-width: 100% }
+.pcard b { font-weight: 600; font-size: 17px; line-height: 1.2 }
+.pcard .pc-col { display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--muted) }
+.pcard .pc-col .coin-dot { width: 16px; height: 16px }
+.pcard .tag { position: absolute; left: 8px; top: 8px; font: 500 11px/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase;
+  background: var(--veil); padding: 6px 8px; border-radius: 999px }
+.pcard:hover b { text-decoration: underline; text-underline-offset: 4px }
+.pick-ic { display: inline-block; width: 1.3em; height: 1.3em; vertical-align: -0.3em; margin-left: 6px }
+.pick-ic:empty { display: none }
+.more-line { padding-block: 32px 72px; margin: 0; color: var(--muted) }
+.more-line:empty { padding-block: 0 48px }
+
+
+.ed-head { padding-block: 18px 8px; max-width: 760px }
+.ed-head h1 { font-size: clamp(38px, 5vw, 64px) }
+.ed-band { padding-block: 40px; border-top: 1px solid var(--rule); margin-top: 32px; display: grid; gap: 18px }
+.ed-band h2 { font-size: clamp(24px, 2.6vw, 32px) }
+.ed-note { margin: 0; max-width: 64ch; color: var(--muted) }
+.boiler { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px }
+.boiler p:not(.eyebrow) { margin: 0 0 14px; max-width: 62ch }
+.copied { margin: 0; min-height: 1.5em; color: var(--muted); font-size: 14px }
+.slot p { margin: 0 }
+.tints { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px 24px }
+.tints li { display: grid; grid-template-columns: auto 1fr; gap: 0 10px; align-items: center }
+.tints span:last-child { grid-column: 2; color: var(--muted); font-size: 14px }
+.sheets { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 48px }
+.sheet h3 { margin: 0 0 10px; font-size: 22px; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap }
+.sheet h3 small, .jcard .eyebrow { font: 500 12px/1.3 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted) }
+.sheet dl { margin: 0; display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 6px 16px; font-size: 15px; border-top: 1px solid var(--rule); padding-top: 10px }
+.sheet dt { font: 500 12px/1.6 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted) }
+.sheet dd { margin: 0 }
+.logo-dl { margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px } .logo-dl span { color: var(--muted); font-size: 15px }
+.dl-grid { list-style: none; margin: 8px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px 18px }
+.dl-grid figure { margin: 0 } .dl-grid img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 6px; display: block; background: #F1EDE8 }
+.dl-grid figcaption { margin-top: 8px; font-size: 14px; line-height: 1.45 } .dl-grid a { color: var(--ink); text-underline-offset: 3px; white-space: nowrap }
+.jlist { list-style: none; margin: 32px 0 80px; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px 20px }
+
+.jband { margin: 0 }
+.share-note { margin: 8px 0 0; min-height: 1.4em; font-size: 14px; color: var(--muted); word-break: break-all }
+/* the press page printed (viewer/presskit.mjs makes site/press/earf-press-kit.pdf from it): the words and the
+   particulars, the pictures as a contact sheet, nothing to click */
+@media print {
+  @page { size: A4; margin: 16mm 14mm }
+  body { background: #FFF; font-size: 10.5pt }
+  header.top, footer, .crumbs, .copy-text, .copied, .logo-dl, .flyer, .splash, body::before { display: none !important }
+  #press .ed-head h1 { font-size: 30pt } #press .lede { font-size: 12pt }
+  #press .ed-band { break-inside: auto; padding-block: 14pt; margin-top: 10pt }
+  #press .sheets { grid-template-columns: 1fr 1fr; gap: 14pt 24pt } #press h2, #press .sheet h3 { break-after: avoid }
+  #press .sheet dt, #press .sheet dd { break-inside: avoid } #press .coin-dot { print-color-adjust: exact; -webkit-print-color-adjust: exact }
+  #press .dl-grid { grid-template-columns: repeat(4, 1fr); gap: 8pt } #press .dl-grid li { break-inside: avoid }
+  #press .dl-grid figcaption { font-size: 7.5pt } #press .dl-grid a { text-decoration: none; color: #555 }
+  #press .boiler { grid-template-columns: 1fr; gap: 10pt } #press [aria-labelledby="pr-pics"] { break-before: page }
+}
+.jcard { display: grid; gap: 8px; color: var(--ink); text-decoration: none }
+.jcard img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 6px; display: block; margin-bottom: 6px; background: #F1EDE8 }
+.jcard .eyebrow { margin: 0 } .jcard b { font-size: 22px; line-height: 1.15; font-weight: 600; letter-spacing: -0.01em } .jcard > span:last-child { color: var(--muted) }
+.jcard:hover b { text-decoration: underline; text-underline-offset: 4px }
+.post { max-width: 720px; margin: 0 auto; padding-bottom: 72px }
+.post header { padding-block: 24px 8px } .post h1 { font-size: clamp(36px, 5vw, 58px) }
+.post .stand { margin: 14px 0 28px; font-size: 21px; line-height: 1.4; color: var(--muted) }
+.post-body p { margin: 0 0 1.1em; font-size: 18px; line-height: 1.65 }
+.post-body a, .post-next a, .policy a { color: var(--ink); text-underline-offset: 3px }
+.post-body figure { margin: 32px 0 }
+.post-body img { width: 100%; height: auto; display: block; border-radius: 4px }
+.post-body figcaption { margin-top: 8px; font-size: 14px; color: var(--muted) }
+.post-next { margin: 40px 0 0; padding-top: 18px; border-top: 1px solid var(--rule) }
+.waitlist { margin-top: 28px; padding-top: 28px; border-top: 1px solid var(--rule); display: grid; gap: 12px; max-width: 640px }
+.waitlist h3 { margin: 0; font-size: 24px } .waitlist p { margin: 0 }
+.wl-row { display: flex; flex-wrap: wrap; gap: 10px }
+.wl-row input { flex: 1 1 260px; min-width: 0; font: 400 17px/1.2 var(--sans); padding: 12px 16px; border: 1px solid var(--ink); border-radius: 999px; background: #FFF; color: var(--ink) }
+.waitlist fieldset { border: 0; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 18px }
+.waitlist legend { padding: 0; margin-bottom: 6px; font-size: 15px; color: var(--muted) }
+.waitlist label { font-size: 15px } .waitlist .hp { position: absolute; left: -9999px; width: 1px; height: 1px }
+.wl-note, .wl-status { font-size: 14px; color: var(--muted) } .wl-note a { color: var(--ink) }
+.policy { max-width: 760px; margin: 24px 0 80px; display: grid; gap: 4px 0 }
+.policy dt { margin-top: 18px; font-weight: 600 } .policy dd { margin: 0; color: var(--ink); line-height: 1.6 }
+@media (max-width: 900px) { .sheets, .boiler { grid-template-columns: minmax(0, 1fr) } .tints { grid-template-columns: repeat(2, minmax(0, 1fr)) }
+  .dl-grid, .jlist { grid-template-columns: repeat(2, minmax(0, 1fr)) } }
+@media (max-width: 560px) { .dl-grid, .jlist { grid-template-columns: minmax(0, 1fr) } .sheet dl { grid-template-columns: 96px minmax(0, 1fr) } }
+.more-line a { color: var(--ink); text-underline-offset: 4px }
+@media (max-width: 960px) { .shopcol { grid-template-columns: repeat(4, minmax(0, 1fr)) } .pgrid { grid-template-columns: repeat(2, minmax(0, 1fr)) } }
+@media (max-width: 720px) {
+  .lines { grid-template-columns: minmax(0, 1fr); gap: 12px }
+  .tile { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); grid-template-rows: none }
+  .tile img { height: 100% }
+  .ptiles { grid-template-columns: minmax(0, 1fr) }
+  .colour-head .coin-big { width: 72px; height: 72px }
+}
+@media (prefers-reduced-motion: reduce) { .photo img, .spot-label, .thumb { transition: none } .stage .in { animation: none } }
+</style>
+<style>
+
+:root { --mono: var(--sans); --spec-mono: 'IBM Plex Mono', 'Courier New', monospace; --night: #13110F }
+body { font-size: 18px }
+.facts, .facts dt, .facts dd, .spec dl, .spec dt, .spec dd { font-family: var(--spec-mono) }
+.eyebrow, .num { letter-spacing: 0.02em; text-transform: none }
+p.eyebrow, .t-body .eyebrow { display: none }
+.btn, .btn.solid { background: none !important; border: 0 !important; border-radius: 0 !important; padding: 0 !important; min-height: 44px;
+  color: var(--ink) !important; font: 500 18px/1.3 var(--sans); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px }
+.btn:hover { text-decoration-thickness: 2px }
+#copy, #copy-note { display: none }
+.addr .mail { color: var(--ink); font-size: clamp(22px, 2.4vw, 30px); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 6px }
+main img, main picture, main figure, .tile, .pcard, .stage, .photo, .card, .thumb, .thumb img { border-radius: 0 !important }
+.tile, .pcard, .card { background: none !important; box-shadow: none !important }
+.hab-frame .nav, .gallery .nav { display: none !important }
+.habitats, .habitats.v2 { -webkit-mask-image: none !important; mask-image: none !important }
+.lightband, .debut-top { background: var(--night) !important }
+h1, .hero-title h1 { font-weight: 600; letter-spacing: -0.035em }
+h2 { font-weight: 600; letter-spacing: -0.025em }
+figcaption, .cap, .t-line { font-size: 15px }
+.render { font-style: normal; color: var(--muted); font-size: 13px; letter-spacing: 0.02em; margin-left: 6px }
+.foot-line { font-family: var(--sans) !important; text-transform: none !important; letter-spacing: 0 !important; font-size: 14px !important }
+.top .contact-link { margin-left: 24px }
+.menu { border: 0 !important; border-radius: 0 !important; padding: 10px 0 !important; font: 500 16px/1 var(--sans) !important;
+  text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px }
+
+
+:root { --c-red: #9B0000; --c-orange: #E5732A; --c-amber: #E9B320; --c-green: #376621; --c-blue: #4A90C8; --c-violet: #543287; --c-ice: #F6F8F8; --c-black: #34323A }
+.light-coins .coin-dot { background-image: none !important; mix-blend-mode: normal !important; box-shadow: inset 0 0 0 1px rgb(255 255 255 / .28) }
+.light-coins [data-k="red"] .coin-dot, .light-list .t-red { background: var(--c-red) }
+.light-coins [data-k="orange"] .coin-dot, .light-list .t-orange { background: var(--c-orange) }
+.light-coins [data-k="amber"] .coin-dot, .light-list .t-amber { background: var(--c-amber) }
+.light-coins [data-k="green"] .coin-dot, .light-list .t-green { background: var(--c-green) }
+.light-coins [data-k="blue"] .coin-dot, .light-list .t-blue { background: var(--c-blue) }
+.light-coins [data-k="violet"] .coin-dot, .light-list .t-violet { background: var(--c-violet) }
+.light-coins [data-k="ice"] .coin-dot, .light-list .t-ice { background: var(--c-ice) }
+.light-coins [data-k="black"] .coin-dot, .light-list .t-black { background: var(--c-black) }
+.coin-dot[style*="--i:6"] { box-shadow: inset 0 0 0 1px rgb(0 0 0 / .22) }
+.lightband .coin-dot[style*="--i:6"] { box-shadow: none }
+.light-list .tok { display: inline-block; width: 14px; height: 14px; border-radius: 50%; margin-right: 8px; vertical-align: -1px }
+
+
+.hero { height: calc(100svh - var(--header)); min-height: 520px; padding: 0; display: flex; flex-direction: column; justify-content: center; overflow: hidden }
+.hero-pic { flex: none; width: min(100%, calc((100svh - var(--header) - 56px) * 2)); margin-inline: auto }
+.hero-title .wrap { padding-block: clamp(20px, 5vh, 64px) 0 }
+.hero-cap { width: 100%; display: flex; justify-content: space-between; gap: 16px; padding-block: 14px 0; color: var(--muted); font-size: 14px }
+.hero-cap .render { margin: 0 }
+@media (max-width: 860px) {
+  .hero-pic { width: min(100%, calc((100svh - var(--header) - 56px) * 0.8)) }
+  .hero-title { position: absolute; color: var(--ink) }
+  .hero-title .wrap { padding-block: 22px 0 }
+}
+
+
+html { scroll-snap-type: y proximity; scroll-padding-top: var(--header) }
+
+.light-pic img, .light-pic img.on, .light-pic.wake img.on { transition: opacity .6s ease }
+.lightband { padding: 0; background: #13110F }
+.light-head { display: none !important } .anchor { display: block; height: 0 }
+.light-run { height: calc(100svh - var(--header) + 7 * 20svh) }
+.light-run .snap { position: absolute; left: 0; width: 1px; height: 1px; top: calc(var(--s) * 20svh + 10svh); scroll-snap-align: start }
+.light-stage { display: block; position: sticky; background: #13110F }
+.light-glow { display: none }
+.light-pic { position: absolute; inset: 0 max(0px, calc((100% - (100svh - var(--header)) * 2.4) / 2)); width: auto; overflow: hidden;
+  -webkit-mask-image: none !important; mask-image: none !important; height: 100% !important }
+.light-pic picture { display: contents }
+.light-pic img { object-fit: cover; object-position: 50% 50% }
+.light-text { position: absolute; inset: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto minmax(0, 1fr) auto;
+  padding: clamp(20px, 4vh, 40px) max(16px, env(safe-area-inset-right, 0px), calc((100vw - 1240px) / 2 + 16px)) clamp(20px, 4vh, 40px)
+    max(16px, env(safe-area-inset-left, 0px), calc((100vw - 1240px) / 2 + 16px)); gap: 0 24px; pointer-events: none; background: none }
+.light-intro { grid-column: 1 / -1; grid-row: 1 } .light-kicker { margin: 0; font-size: 18px; font-weight: 500; color: #ECE8E1 }
+.light-colour { grid-column: 1 / -1; grid-row: 3; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 0 24px; pointer-events: auto }
+.light-name { grid-column: 1; font-size: clamp(40px, 4.6vw, 64px) }
+.light-line { grid-column: 1; min-height: 0; color: #CFCBC4 }
+/* desk: no full-width scrim; a soft shadow behind the words and the coins only, the middle of the frame untouched */
+.light-name, .light-line, .light-kicker, .light-intro .render { text-shadow: 0 0 28px rgb(19 17 15 / .6), 0 0 10px rgb(19 17 15 / .5) }
+.light-coins { grid-column: 2; grid-row: 1 / span 2; align-self: end; margin: 0; border-radius: 40px;
+  background: radial-gradient(closest-side, rgb(19 17 15 / .55), rgb(19 17 15 / 0)); padding: 6px 10px }
+.lightband .facade { opacity: 1 !important; height: calc(100svh - var(--header)); position: relative; background: #13110F;
+  -webkit-mask-image: none !important; mask-image: none !important }
+.lightband .facade picture { display: block; width: 100%; height: 100%; max-width: calc((100svh - var(--header)) * 2.4); margin-inline: auto; container-type: size }
+.lightband .facade img { width: 100%; height: 100%; object-fit: contain; object-position: 50% 50%; border-radius: 0 }
+@container (min-aspect-ratio: 17/10) { .lightband .facade img { object-fit: cover } }
+.eight-render { right: max(16px, env(safe-area-inset-right, 0px), calc((100vw - 1240px) / 2 + 16px)) !important }
+.snap-eight { position: absolute; top: 0; scroll-snap-align: start }
+.light-list { display: none; list-style: none; margin: 0;
+  padding: 32px max(16px, env(safe-area-inset-right, 0px), calc((100vw - 1240px) / 2 + 16px)) 72px max(16px, env(safe-area-inset-left, 0px), calc((100vw - 1240px) / 2 + 16px));
+  grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px 24px; color: #ECE8E1 }
+.light-list b { display: block; font-size: 20px } .light-list span { color: #A39E95; font-size: 15px }
+@media (max-width: 860px) { .light-list { grid-template-columns: repeat(2, minmax(0, 1fr)) } }
+@media (max-width: 860px) and (max-aspect-ratio: 4/5) {
+  .light-colour { grid-template-columns: minmax(0, 1fr); margin: 0 calc(-1 * max(16px, env(safe-area-inset-left, 0px))) calc(-1 * clamp(20px, 4vh, 40px));
+    padding: 28px max(16px, env(safe-area-inset-left, 0px)) clamp(20px, 4vh, 40px);
+    background: linear-gradient(to top, rgb(19 17 15 / .82) 55%, rgb(19 17 15 / .45) 85%, rgb(19 17 15 / 0)) }
+  .light-coins { grid-column: 1; grid-row: auto; margin-top: 14px; justify-content: space-between; background: none; padding: 0 }
+  .light-coins .ring { translate: calc(var(--at, 0) * (100vw - 32px - 44px) / 6) 0 }
+  .light-name { font-size: 40px }
+  @container (min-aspect-ratio: 53/100) and (max-aspect-ratio: 81/100) { .lightband .facade img { object-fit: cover } }
+}
+@media (max-width: 860px) and (min-aspect-ratio: 801/1000) {
+  .light-coins { margin: 0; gap: 4px; justify-content: flex-start } .light-coins .ring { translate: calc(var(--at, 0) * 48px) 0 } }
+@media (max-height: 480px) { .light-run { display: none } .light-list { display: grid } }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-snap-type: none }
+  .light-run { display: none }
+  .light-list { display: grid }
+}
+@media print { .light-run { display: none } .light-list { display: grid } }
+
+
+.sound-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 48px; align-items: center }
+.sound-turn { margin: 0; background: #F1EFEB } .sound-turn img { display: block; width: 100%; height: auto }
+.sound-turn figcaption { text-align: right; padding-top: 8px }
+.sound-words h2 { font-size: clamp(34px, 4.2vw, 60px); max-width: 14ch }
+.figures { list-style: none; margin: 40px 0 0; padding: 0; display: grid; gap: 24px }
+.figures b { display: block; font-size: clamp(40px, 4.6vw, 64px); font-weight: 600; letter-spacing: -0.03em; line-height: 1 }
+.figures small { font-size: .45em; font-weight: 500; margin-left: 6px; letter-spacing: 0 }
+.figures span { color: var(--muted); font-size: 16px }
+.foot-note { margin: 28px 0 0; color: var(--muted); font-size: 14px } .foot-note a { color: var(--ink) }
+@media (max-width: 860px) { .sound-grid { grid-template-columns: minmax(0, 1fr); gap: 28px } }
+
+.light-intro { display: flex; justify-content: space-between; align-items: baseline }
+.render.on-dark { color: #A39E95 }
+.eight-render { position: absolute; right: max(16px, calc((100vw - 1240px) / 2 + 16px)); bottom: 14px; z-index: 1 }
+
+
+#p-icon:empty { display: none } aside.buy { min-width: 0 } .pdp-grid, .pdp > .wrap > div { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) }
+.stage .fit { object-fit: contain; max-height: 100%; -webkit-mask-image: none !important; mask-image: none !important }
+.top .contact-link { margin-left: 0 } @media (min-width: 861px) { .top .contact-link { margin-left: 24px } }
+
+
+.beat h2 a { color: inherit; text-decoration: none } .beat h2 a:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px }
+.strip { margin: 32px 0 0 } .strip img { display: block; width: 100%; height: auto } .strip figcaption { padding-top: 12px; color: var(--muted); font-size: 15px }
+.beat-line { color: var(--muted); margin: 8px 0 0 } .mantle-pic { background: #F1EFEB } .mantle-pic figcaption { text-align: right; padding-bottom: 10px } 
+.type-only { min-height: 60svh; display: grid; align-content: center } .type-only h2 { font-size: clamp(48px, 7vw, 104px) }
+.type-only p { color: var(--muted); max-width: 36ch }
+#sound, #habitats, #room, #lamps-beat, #mantle-beat, #progress, #contact { scroll-margin-top: var(--header) }
+
+/* the release candidate */
+.sound-still { margin: 0; background: #F1EFEB } .sound-still img { display: block; width: 100%; height: auto } .sound-still figcaption { text-align: right; padding-top: 8px }
+.seg:has(#cover-off) { display: none }
+.lamps-day img { width: min(100%, 720px); margin-inline: auto }
+
+.pcard img, .pcard .tag { grid-area: 1 / 1 }
+.pcard .tag { position: static !important; align-self: end; justify-self: start; margin: 0 0 8px 8px; z-index: 1 }
+
+
+.hero { justify-content: flex-start; height: auto !important; min-height: 0 !important; padding-bottom: clamp(32px, 6vh, 64px) !important }
+.hero-title .wrap { padding-block: clamp(20px, 4vh, 48px) 0 }
+.hero-pic { width: 100% !important; position: static }
+.hero-title { position: static !important }
+.hero-row { aspect-ratio: auto !important; background: none !important; overflow: visible; margin-top: clamp(16px, 4vh, 48px) }
+.hero-row ul { list-style: none; margin: 0 auto; padding: 0 16px; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 8px }
+.hero-row a { display: grid; gap: 8px; color: var(--ink); text-decoration: none; font-size: 15px }
+.hero-row img { width: 100%; height: auto; aspect-ratio: 72 / 125; object-fit: cover; display: block }
+.hero-row a:hover span { text-decoration: underline; text-underline-offset: 4px }
+@media (max-width: 860px) {
+  .hero { height: auto; min-height: 0 }
+  .hero-row ul { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 62vw; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 8px }
+  .hero-row ul::-webkit-scrollbar { display: none } .hero-row li { scroll-snap-align: start }
+  .hero-row img { max-height: none }
+}
+.sound-words h2 a, .hab-band h2 a { color: inherit; text-decoration: none } .sound-words h2 a:hover, .hab-band h2 a:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px }
+.hab-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 48px; align-items: end }
+.hab-grid figure { margin: 0 } .hab-grid img { display: block; width: 100%; height: auto }
+.hab-grid h2 { font-size: clamp(48px, 7vw, 104px) }
+@media (max-width: 860px) { .hab-grid { grid-template-columns: minmax(0, 1fr); gap: 20px } }
+.c-hab { margin: 28px 0 0; max-width: 520px } .c-hab img { display: block; width: 100%; height: auto } .c-hab figcaption { padding-top: 8px }
+/* galleries: a 4:5 picture column beside the particulars */
+@media (min-width: 1001px) { .pdp { grid-template-columns: minmax(0, 520px) minmax(0, 1fr) !important; justify-content: start } }
+.stage { aspect-ratio: 4 / 5 !important }
+/* /tropos: the cards, the last row centered; on the phone, an odd last card across */
+.cards { display: flex !important; flex-wrap: wrap; justify-content: center }
+.cards > .card { flex: 0 1 calc((100% - 3 * 18px) / 4) }
+@media (max-width: 860px) { .cards > .card { flex-basis: calc((100% - 18px) / 2) } .cards > .card:last-child:nth-child(odd) { flex-basis: 100% } }
+.card .named a { color: inherit; text-decoration: none }
+/* /lighting: the pair once */
+.lamps .ptile { grid-template-columns: minmax(0, 1fr) !important }
+.lamps-pair { grid-template-columns: minmax(0, 560px) minmax(0, 1fr) !important; align-items: end }
+.lamps-pair img { width: 100%; height: auto; display: block }
+@media (max-width: 860px) { .lamps-pair { grid-template-columns: minmax(0, 1fr) !important } }
+/* /mantle: the picture wide */
+.tt-duo { grid-template-columns: minmax(0, 1fr) !important } .tt-duo .ptile { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) !important; align-items: end }
+.mantle-wide img { width: 100%; height: auto; aspect-ratio: 3 / 2 !important; object-fit: cover }
+@media (max-width: 860px) { .tt-duo .ptile { grid-template-columns: minmax(0, 1fr) !important } }
+/* the lamps beat: picture and caption aligned, at most 75vh */
+.lamps-day img { max-height: 75vh; width: auto !important; max-width: 100%; margin: 0 }
+.lamps-day { display: grid; justify-items: start; padding-inline: max(16px, calc((100vw - 1240px) / 2 + 16px)) } .lamps-day figcaption { padding-inline: 0 !important }
+/* Fog's swatch: a circle with a hairline */
+.swatches a, .swatches .coin-dot { border-radius: 50% } .swatches .coin-dot[style*="--i:6"] { box-shadow: inset 0 0 0 1px #9A958D }
+
+
+.lamps-home { margin-top: clamp(20px, 3vw, 36px); display: grid; grid-template-columns: minmax(0, 540px) minmax(0, 1fr); gap: 48px; align-items: end }
+.lamps-home .lamps-day { padding: 0 !important; margin: 0; display: block } .lamps-home .lamps-day img { width: 100% !important; height: auto; max-height: none; display: block }
+.lamps-home figcaption { margin: 0; padding: 8px 0 0 !important; max-width: 540px }
+.lamp-names { list-style: none; margin: 0 0 40px; padding: 0; display: grid; gap: 14px; font-size: clamp(22px, 2.4vw, 32px); letter-spacing: -0.01em }
+.lamp-names a { color: var(--ink); text-underline-offset: 6px; text-decoration-thickness: 1px }
+@media (max-width: 860px) { .lamps-home { grid-template-columns: minmax(0, 1fr); gap: 20px } .lamp-names { margin: 0 } }
+.hab-mirror { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr) } .hab-mirror figure { order: 2 }
+@media (max-width: 860px) { .hab-mirror { grid-template-columns: minmax(0, 1fr) } .hab-mirror figure { order: 0 } }
+.c-tropos { display: grid; grid-template-columns: minmax(0, 520px) minmax(0, 1fr); gap: 40px; align-items: end }
+.c-tropos .ph img { display: block; width: 100%; height: auto }
+.c-tropos h3 { font-size: clamp(28px, 3vw, 40px); margin: 0 0 8px } .c-tropos h3 a { color: inherit; text-decoration: none } .c-tropos h3 a:hover { text-decoration: underline; text-underline-offset: 6px }
+.c-tropos .more { color: var(--ink); text-underline-offset: 4px }
+@media (max-width: 860px) { .c-tropos { grid-template-columns: minmax(0, 1fr); gap: 16px } }
+.c-hab img { aspect-ratio: 4 / 5 }
+.dots-row .coin-dot { border-radius: 50% } .dots-row .coin-dot[style*="--i:6"] { box-shadow: inset 0 0 0 1px #9A958D }
+.hero-row ul { scroll-padding-inline: 16px }
+.sound-still, .mantle-pic { background: none !important }
+.hab-band .foot-note .render, .hero-cap .render { margin-left: 0 }
+
+.stage .spin { background-size: 630.0000% 422.2222% } .stage .spin.still { background-size: 100% 100%; background-position: 0 0 }
+
+.lamps-home.no-pic { grid-template-columns: minmax(0, 1fr) } .lamps-home.no-pic .lamp-names { margin: 0 }
+.lamps-pair { grid-template-columns: minmax(0, 1fr) !important }
+@media (min-width: 1001px) { .pdp.no-pic { grid-template-columns: minmax(0, 720px) !important } }
+.sound-grid.no-pic { grid-template-columns: minmax(0, 1fr) !important }
+
+.c-tropos { margin-bottom: 72px } @media (max-width: 860px) { .c-tropos { margin-bottom: 52px } }
+.colour-head .coin-big .coin-dot { border-radius: 50% } .colour-head .coin-big .coin-dot[style*="--i:6"] { box-shadow: inset 0 0 0 1px #9A958D }
+.tt-duo .ptile.no-pic { grid-template-columns: minmax(0, 1fr) !important }:root { --c-red: #B50404; --c-orange: #D35D17; --c-amber: #C5BC1E; --c-green: #027614; --c-blue: #1169C1; --c-violet: #500CB4; }
+.coin-dot, .coin-big .coin-dot { background-image: none !important; mix-blend-mode: normal !important }
+.coin-dot[style*="--i:0"] { background-color: #B50404 !important }
+.coin-dot[style*="--i:1"] { background-color: #D35D17 !important }
+.coin-dot[style*="--i:2"] { background-color: #C5BC1E !important }
+.coin-dot[style*="--i:3"] { background-color: #027614 !important }
+.coin-dot[style*="--i:4"] { background-color: #1169C1 !important }
+.coin-dot[style*="--i:5"] { background-color: #500CB4 !important }
+.coin-dot[style*="--i:6"] { background-color: #F6F8F8 !important }
+.coin-dot[style*="--i:7"] { background-color: #34323A !important }
+.coin-dot[style*="--i:6"] { box-shadow: inset 0 0 0 1px #9A958D }
+</style>
+
+<div class="splash" aria-hidden="true"></div>
+<div class="flyer" role="progressbar" aria-label="Loading"><video muted playsinline loop autoplay preload="auto" aria-hidden="true" tabindex="-1"></video></div>
+<script>(function (d, v) { if (!d.classList.contains('intro')) return;     // the day's film or the night's, and only that one fetched
+  const night = d.classList.contains('night'), f = 'globe-turn';
+  v.poster = night ? 'data:image/webp;base64,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' : 'data:image/webp;base64,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';
+  v.innerHTML = `<source src="img/${f}.webm" type='video/webm; codecs="vp9"'><source src="img/${f}.mp4" type="video/mp4">`;
+})(document.documentElement, document.querySelector('.flyer video'))</script>
+<noscript><style>html.opening .hero-photo img { opacity: 1 }</style></noscript>
+<header class="top"><div class="wrap">
+  <a class="brand" href="#top" aria-label="EARF, home"><span class="globe" aria-hidden="true"></span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 300" aria-hidden="true"><g fill="currentColor"><path d="M0.0 70.0L0.0 115.0L0.0 185.0L0.0 230.0L0.0 300.0L100.0 300.0L200.0 300.0L200.0 230.0L100.0 230.0L100.0 185.0L175.0 185.0L175.0 115.0L100.0 115.0L100.0 70.0L200.0 70.0L200.0 0.0L100.0 0.0L0.0 0.0L0.0 70.0Z"/><path d="M340.0 300.0L344.2 285.0L405.8 285.0L410.0 300.0L510.0 300.0L425.0 0.0L325.0 0.0L240.0 300.0L340.0 300.0Z M375.0 176.5L385.9 215.0L364.1 215.0L375.0 176.5Z"/><path d="M732.5 89.5L732.4 88.0L732.3 86.5L732.2 84.9L732.1 83.4L731.9 81.9L731.7 80.4L731.5 78.9L731.3 77.4L731.0 75.9L730.7 74.5L730.4 73.0L730.1 71.5L729.7 70.0L729.3 68.6L728.9 67.1L728.5 65.6L728.1 64.2L727.6 62.8L727.1 61.3L726.6 59.9L726.0 58.5L725.5 57.1L724.9 55.7L724.3 54.3L723.6 53.0L723.0 51.6L722.3 50.2L721.6 48.9L720.9 47.6L720.1 46.3L719.3 44.9L718.6 43.7L717.7 42.4L716.9 41.1L716.1 39.9L715.2 38.6L714.3 37.4L713.4 36.2L712.5 35.0L711.5 33.8L710.5 32.7L709.5 31.5L708.5 30.4L707.5 29.3L706.5 28.2L705.4 27.1L704.3 26.0L703.2 25.0L702.1 24.0L701.0 23.0L699.8 22.0L698.7 21.0L697.5 20.0L696.3 19.1L695.1 18.2L693.9 17.3L692.6 16.4L691.4 15.6L690.1 14.8L688.8 13.9L687.6 13.2L686.2 12.4L684.9 11.6L683.6 10.9L682.3 10.2L680.9 9.5L679.5 8.9L678.2 8.2L676.8 7.6L675.4 7.0L674.0 6.5L672.6 5.9L671.2 5.4L669.7 4.9L668.3 4.4L666.9 4.0L665.4 3.6L663.9 3.2L662.5 2.8L661.0 2.4L659.5 2.1L658.0 1.8L656.6 1.5L655.1 1.2L653.6 1.0L652.1 0.8L650.6 0.6L649.1 0.4L647.6 0.3L646.0 0.2L644.5 0.1L643.0 0.0L641.5 0.0L640.0 0.0L540.0 0.0L540.0 300.0L640.0 300.0L640.0 280.2L648.0 300.0L750.0 300.0L695.9 166.2L696.3 165.9L697.5 165.0L698.7 164.0L699.8 163.0L701.0 162.0L702.1 161.0L703.2 160.0L704.3 159.0L705.4 157.9L706.5 156.8L707.5 155.7L708.5 154.6L709.5 153.5L710.5 152.3L711.5 151.2L712.5 150.0L713.4 148.8L714.3 147.6L715.2 146.4L716.1 145.1L716.9 143.9L717.7 142.6L718.6 141.3L719.3 140.1L720.1 138.8L720.9 137.4L721.6 136.1L722.3 134.8L723.0 133.4L723.6 132.0L724.3 130.7L724.9 129.3L725.5 127.9L726.0 126.5L726.6 125.1L727.1 123.7L727.6 122.2L728.1 120.8L728.5 119.4L728.9 117.9L729.3 116.4L729.7 115.0L730.1 113.5L730.4 112.0L730.7 110.5L731.0 109.1L731.3 107.6L731.5 106.1L731.7 104.6L731.9 103.1L732.1 101.6L732.2 100.1L732.3 98.5L732.4 97.0L732.5 95.5L732.5 94.0L732.5 92.5L732.5 91.0L732.5 89.5Z M662.5 93.2L662.5 93.6L662.5 94.0L662.4 94.3L662.4 94.7L662.4 95.1L662.3 95.4L662.3 95.8L662.2 96.2L662.1 96.5L662.1 96.9L662.0 97.3L661.9 97.6L661.8 98.0L661.7 98.3L661.6 98.7L661.5 99.0L661.4 99.4L661.3 99.7L661.2 100.1L661.1 100.4L660.9 100.8L660.8 101.1L660.6 101.4L660.5 101.8L660.3 102.1L660.2 102.5L660.0 102.8L659.8 103.1L659.7 103.4L659.5 103.8L659.3 104.1L659.1 104.4L658.9 104.7L658.7 105.0L658.5 105.3L658.3 105.6L658.1 105.9L657.9 106.2L657.6 106.5L657.4 106.8L657.2 107.1L656.9 107.3L656.7 107.6L656.4 107.9L656.2 108.1L655.9 108.4L655.6 108.7L655.4 108.9L655.1 109.2L654.8 109.4L654.6 109.7L654.3 109.9L654.0 110.1L653.7 110.4L653.4 110.6L653.1 110.8L652.8 111.0L652.5 111.2L652.2 111.4L651.9 111.6L651.6 111.8L651.2 112.0L650.9 112.2L650.6 112.3L650.3 112.5L650.0 112.7L649.6 112.8L649.3 113.0L648.9 113.1L648.6 113.3L648.3 113.4L647.9 113.6L647.6 113.7L647.2 113.8L646.9 113.9L646.5 114.0L646.2 114.1L645.8 114.2L645.5 114.3L645.1 114.4L644.8 114.5L644.4 114.6L644.0 114.6L643.7 114.7L643.3 114.8L642.9 114.8L642.6 114.9L642.2 114.9L641.8 114.9L641.5 115.0L641.1 115.0L640.7 115.0L640.4 115.0L640.0 115.0L640.0 70.0L640.4 70.0L640.7 70.0L641.1 70.0L641.5 70.0L641.8 70.1L642.2 70.1L642.6 70.1L642.9 70.2L643.3 70.2L643.7 70.3L644.0 70.4L644.4 70.4L644.8 70.5L645.1 70.6L645.5 70.7L645.8 70.8L646.2 70.9L646.5 71.0L646.9 71.1L647.2 71.2L647.6 71.3L647.9 71.4L648.3 71.6L648.6 71.7L648.9 71.9L649.3 72.0L649.6 72.2L650.0 72.3L650.3 72.5L650.6 72.7L650.9 72.8L651.2 73.0L651.6 73.2L651.9 73.4L652.2 73.6L652.5 73.8L652.8 74.0L653.1 74.2L653.4 74.4L653.7 74.6L654.0 74.9L654.3 75.1L654.6 75.3L654.8 75.6L655.1 75.8L655.4 76.1L655.6 76.3L655.9 76.6L656.2 76.9L656.4 77.1L656.7 77.4L656.9 77.7L657.2 77.9L657.4 78.2L657.6 78.5L657.9 78.8L658.1 79.1L658.3 79.4L658.5 79.7L658.7 80.0L658.9 80.3L659.1 80.6L659.3 80.9L659.5 81.2L659.7 81.6L659.8 81.9L660.0 82.2L660.2 82.5L660.3 82.9L660.5 83.2L660.6 83.6L660.8 83.9L660.9 84.2L661.1 84.6L661.2 84.9L661.3 85.3L661.4 85.6L661.5 86.0L661.6 86.3L661.7 86.7L661.8 87.0L661.9 87.4L662.0 87.7L662.1 88.1L662.1 88.5L662.2 88.8L662.3 89.2L662.3 89.6L662.4 89.9L662.4 90.3L662.4 90.7L662.5 91.0L662.5 91.4L662.5 91.8L662.5 92.1L662.5 92.5L662.5 92.9L662.5 93.2Z"/><path d="M790.0 0.0L790.0 70.0L790.0 115.0L790.0 185.0L790.0 300.0L890.0 300.0L890.0 185.0L955.0 185.0L955.0 115.0L890.0 115.0L890.0 70.0L980.0 70.0L980.0 0.0L890.0 0.0L790.0 0.0Z"/></g></svg></a>
+  <nav aria-label="Pages" id="nav"><button type="button" class="menu" aria-expanded="false" aria-controls="nav-list">Menu</button><ul id="nav-list">
+    <li><a href="#speakers" data-nav="speakers">Tropos</a></li><li><a href="#lighting" data-nav="lighting">Lighting</a></li>
+    <li><a href="#turntable" data-nav="turntable">Mantle</a></li>
+    <li class="contact-link"><a href="#contact" data-nav="contact">Contact</a></li>
+  </ul></nav>
+</div></header>
+
+<main id="home">
+  <section class="hero" id="top"><i class="anchor" id="colors"></i>
+    <div class="hero-pic">
+      <div class="hero-title"><div class="wrap"><h1 class="tagline">A&nbsp;world&nbsp;of&nbsp;sound,&nbsp;in&nbsp;color.</h1></div></div>
+      <div class="hero-photo hero-row"><ul aria-label="Tropos in eight colors"><li><a href="#speaker-ember"><img data-src="img/rc/red-hero.webp" fetchpriority="high" width="720" height="1250" alt="Tropos in Ember"><span>Ember</span></a></li><li><a href="#speaker-dust"><img data-src="img/rc/orange-hero.webp" fetchpriority="high" width="720" height="1250" alt="Tropos in Dust"><span>Dust</span></a></li><li><a href="#speaker-acid"><img data-src="img/rc/amber-hero.webp" fetchpriority="high" width="720" height="1250" alt="Tropos in Acid"><span>Acid</span></a></li><li><a href="#speaker-poison"><img data-src="img/rc/green-hero.webp" width="720" height="1250" alt="Tropos in Poison"><span>Poison</span></a></li><li><a href="#speaker-ice"><img data-src="img/rc/blue-hero.webp" width="720" height="1250" alt="Tropos in Ice"><span>Ice</span></a></li><li><a href="#speaker-haze"><img data-src="img/rc/violet-hero.webp" width="720" height="1250" alt="Tropos in Haze"><span>Haze</span></a></li><li><a href="#speaker-fog"><img data-src="img/rc/ice-hero.webp" width="720" height="1250" alt="Tropos in Fog"><span>Fog</span></a></li><li><a href="#speaker-smoke"><img data-src="img/rc/black-hero.webp" width="720" height="1250" alt="Tropos in Smoke"><span>Smoke</span></a></li></ul></div>
+      <script>if (document.documentElement.dataset.home) heroIn()</script>
+    </div>
+    <div class="wrap hero-cap"><i class="render">Render</i></div>
+  </section>
+  <section class="band sound" id="sound"><div class="wrap sound-grid no-pic">
+    <div class="sound-words"><h2><a href="#speakers">Tropos.</a></h2><p class="beat-line">A horn speaker in cast acrylic.</p>
+      <ul class="figures"><li><b>51<small>Hz</small></b><span>to about 51 Hz at &minus;3&nbsp;dB, before the room</span></li><li><b>115<small>dB</small></b><span>up to about 115 dB at 1&nbsp;m, each</span></li><li><b>75<small>W</small></b><span>into the woofer, built in, crossed at 1&nbsp;kHz</span></li></ul>
+      <p class="foot-note">Design figures; measured ones follow with the first pair.</p></div>
+  </div></section>
+  <section class="band beat" id="lamps-beat">
+    <div class="wrap"><h2><a href="#lighting">One hangs. One wanders.</a></h2></div>
+    <div class="wrap lamps-home no-pic"><ul class="lamp-names"><li><a href="#hemisphere-ember">Hemisphere</a>, a pendant.</li><li><a href="#core-ember">Core</a>, a cordless table lamp.</li></ul></div>
+  </section>
+  <section class="band beat" id="mantle-beat">
+    <div class="wrap"><h2><a href="#turntable">Mantle.</a></h2><p class="beat-line">A turntable in cast acrylic.</p></div>
+  </section>
+  <section class="band" id="progress"><div class="wrap">
+    <div class="head"><div><h2>Drawn to be made.</h2></div></div>
+    <ol class="promise stages">
+      <li><b>Drawn.</b><span>Every part of Tropos has its own drawing. The horn&rsquo;s profile and the cabinet&rsquo;s bass were worked out by simulation before any acrylic was cut.</span></li>
+      <li><b>Next, the first pair.</b><span>Built to the drawings, the back screwed to the braces. The first pair is made the way every pair will be.</span></li>
+      <li><b>Then, measured.</b><span>In a room, by ear and by microphone. The lamps and Mantle come next, the same way.</span></li>
+    </ol>
+  </div></section>
+  <section class="band" id="contact"><div class="wrap contact">
+    <h2>Write to us.</h2>
+    <p>Everything is made to order, so we quote rather than list. Designers, dealers and press: the same address.</p>
+    <div class="addr"><a class="mail" href="mailto:hello@earf.world"><span id="addr">hello@earf.world</span></a><button type="button" class="btn" id="copy">Copy address</button></div>
+    <small id="copy-note"></small>
+
+  </div></section>
+
+</main>
+
+<main id="line" hidden>
+  <div class="lineview" data-line="speakers">
+    <div class="wrap"><p class="crumbs"><a href="#top">Home</a> / Tropos</p><h1 class="vh">Tropos</h1></div>
+  <section class="band" id="tropos"><div class="wrap">
+    <div class="head">
+      <div><h2>Eight colors, Ember to Smoke.</h2>
+        <p>Each cabinet is 20&nbsp;mm cast acrylic, tinted through. The lining shows through the walls, so we dressed it in white voile.</p></div>
+    </div>
+    <div class="cards show-off" id="cards"><article class="card" style="--panel:#F4EDE5"><a class="photo" href="#speaker-ember" aria-label="Tropos in Ember"><img class="off" src="img/rc/red-card.webp" width="625" height="1250" alt="Tropos in Ember" loading="lazy"></a><div class="about"><p class="num">Tropos 01</p><h3 class="named"><a href="#speaker-ember">Ember</a><span class="card-ic"><img class="ic only-light " src="img/icon-ember-light.webp" alt="" width="256" height="256"></span></h3><p class="line">The last light of the fire.</p><dl><dt>Acrylic</dt><dd>Translucent red</dd></dl></div></article><article class="card" style="--panel:#F4EDE4"><a class="photo" href="#speaker-dust" aria-label="Tropos in Dust"><img class="off" src="img/rc/orange-card.webp" width="625" height="1250" alt="Tropos in Dust" loading="lazy"></a><div class="about"><p class="num">Tropos 02</p><h3 class="named"><a href="#speaker-dust">Dust</a><span class="card-ic"><img class="ic only-light " src="img/icon-dust-light.webp" alt="" width="256" height="256"></span></h3><p class="line">A long, dry afternoon.</p><dl><dt>Acrylic</dt><dd>Translucent orange</dd></dl></div></article><article class="card" style="--panel:#F4EEE4"><a class="photo" href="#speaker-acid" aria-label="Tropos in Acid"><img class="off" src="img/rc/amber-card.webp" width="625" height="1250" alt="Tropos in Acid" loading="lazy"></a><div class="about"><p class="num">Tropos 03</p><h3 class="named"><a href="#speaker-acid">Acid</a><span class="card-ic"><img class="ic only-light " src="img/icon-acid-light.webp" alt="" width="256" height="256"></span></h3><p class="line">A yellow with an edge.</p><dl><dt>Acrylic</dt><dd>Translucent golden yellow</dd></dl></div></article><article class="card" style="--panel:#F2EFE6"><a class="photo" href="#speaker-poison" aria-label="Tropos in Poison"><img class="off" src="img/rc/green-card.webp" width="625" height="1250" alt="Tropos in Poison" loading="lazy"></a><div class="about"><p class="num">Tropos 04</p><h3 class="named"><a href="#speaker-poison">Poison</a><span class="card-ic"><img class="ic only-light " src="img/icon-poison-light.webp" alt="" width="256" height="256"></span></h3><p class="line">Bottle green. Keep out of reach.</p><dl><dt>Acrylic</dt><dd>Translucent bottle green</dd></dl></div></article><article class="card" style="--panel:#F1F0EA"><a class="photo" href="#speaker-ice" aria-label="Tropos in Ice"><img class="off" src="img/rc/blue-card.webp" width="625" height="1250" alt="Tropos in Ice" loading="lazy"></a><div class="about"><p class="num">Tropos 05</p><h3 class="named"><a href="#speaker-ice">Ice</a><span class="card-ic"><img class="ic only-light " src="img/icon-ice-light.webp" alt="" width="256" height="256"></span></h3><p class="line">Glacier blue, and in no hurry.</p><dl><dt>Acrylic</dt><dd>Translucent ice blue</dd></dl></div></article><article class="card" style="--panel:#F2EFE8"><a class="photo" href="#speaker-haze" aria-label="Tropos in Haze"><img class="off" src="img/rc/violet-card.webp" width="625" height="1250" alt="Tropos in Haze" loading="lazy"></a><div class="about"><p class="num">Tropos 06</p><h3 class="named"><a href="#speaker-haze">Haze</a><span class="card-ic"><img class="ic only-light " src="img/icon-haze-light.webp" alt="" width="256" height="256"></span></h3><p class="line">Dusk, kept indoors.</p><dl><dt>Acrylic</dt><dd>Translucent violet</dd></dl></div></article><article class="card" style="--panel:#F0EDE5"><a class="photo" href="#speaker-fog" aria-label="Tropos in Fog"><img class="off" src="img/rc/ice-card.webp" width="625" height="1250" alt="Tropos in Fog" loading="lazy"></a><div class="about"><p class="num">Tropos 07</p><h3 class="named"><a href="#speaker-fog">Fog</a><span class="card-ic"><img class="ic only-light " src="img/icon-fog-light.webp" alt="" width="256" height="256"></span></h3><p class="line">Water-clear. Almost not there.</p><dl><dt>Acrylic</dt><dd>Water-clear</dd></dl></div></article><article class="card" style="--panel:#F2EEE7"><a class="photo" href="#speaker-smoke" aria-label="Tropos in Smoke"><img class="off" src="img/rc/black-card.webp" width="625" height="1250" alt="Tropos in Smoke" loading="lazy"></a><div class="about"><p class="num">Tropos 08</p><h3 class="named"><a href="#speaker-smoke">Smoke</a><span class="card-ic"><img class="ic only-light " src="img/icon-smoke-light.webp" alt="" width="256" height="256"></span></h3><p class="line">Smoked glass, for after dark.</p><dl><dt>Acrylic</dt><dd>Smoked black</dd></dl></div></article></div>
+  </div></section>
+  <section class="band spec" id="spec"><div class="wrap">
+    <div class="head"><div><p class="eyebrow">Details</p><h2>The particulars</h2></div></div>
+    <div class="spec-grid">
+      <dl><dt>Height</dt><dd>1295 mm</dd><dt>Width</dt><dd>560 mm, the horn flush with the cabinet</dd><dt>Depth</dt><dd>428 mm overall, 420 mm at the cabinet</dd><dt>Weight</dt><dd>About 73 kg; about 64 kg with the horn lifted off (modeled)</dd><dt>Woofer</dt><dd>FaitalPRO 15PR400, 15-inch, with two ports in the front&rsquo;s lower corners</dd><dt>Horn driver</dt><dd>B&amp;C DE1085TN, 2-inch compression driver</dd><dt>Horn</dt><dd>A smooth horn thermoformed from 10 mm cast acrylic in the speaker&rsquo;s own color, polished inside and out, on four black posts</dd><dt>Amplifier</dt><dd>Hypex FusionAmp FA122, built in: 125 W a channel into 4 &Omega;, about 75 W into the 8 &Omega; woofer; crossed at 1 kHz in its DSP</dd><dt>Bass</dt><dd>To about 51 Hz at &minus;3 dB, before the room adds its own; the ports tuned to 38 Hz</dd><dt>Loudness</dt><dd>Up to about 115 dB at 1 m, each</dd><dt>Inputs</dt><dd>XLR (and a link out), RCA, AES, S/PDIF coaxial and optical; USB to set it up</dd><dt>Lining</dt><dd>Polyester batts in white voile, 100 mm at the top and the bottom</dd><dt>Price</dt><dd>On request. Each pair is made to order.</dd><dt>Care</dt><dd>Dust with a soft microfiber cloth; wash with water and a drop of mild soap, then dry. No glass cleaner, alcohol or solvents: they craze acrylic. Fine scratches polish out.</dd><dt>Figures</dt><dd>Design figures, from the drawings and their simulation; measured ones follow with the first pair</dd></dl>
+      
+    </div>
+  </div></section>
+  </div>
+  <div class="lineview" data-line="lighting">
+    <div class="wrap"><p class="crumbs"><a href="#top">Home</a> / Lighting</p><h1 class="vh">Lighting</h1></div>
+  <section class="band lamps" id="lamps"><div class="wrap">
+    <div class="head"><div><p class="eyebrow">Lighting</p><h2>Two lamps in the speakers&rsquo; acrylic.</h2>
+      <p>A pendant and a table lamp, each with a white opal diffuser inside its color, so the color glows and the source never shows. Every shade comes off by hand.</p></div></div>
+    <div class="ptiles"><article class="ptile"><div class="pt-body"><h3>Hemisphere<small>Pendant</small></h3><p class="line">Hung low over a table. A quarter turn takes its shade off, and another puts a new color on.</p><ul class="dots-row" aria-label="Colors"><li><a href="#hemisphere-ember" aria-label="Ember" title="Ember"><span class="coin-dot" style="--i:0"></span></a></li><li><a href="#hemisphere-dust" aria-label="Dust" title="Dust"><span class="coin-dot" style="--i:1"></span></a></li><li><a href="#hemisphere-acid" aria-label="Acid" title="Acid"><span class="coin-dot" style="--i:2"></span></a></li><li><a href="#hemisphere-poison" aria-label="Poison" title="Poison"><span class="coin-dot" style="--i:3"></span></a></li><li><a href="#hemisphere-ice" aria-label="Ice" title="Ice"><span class="coin-dot" style="--i:4"></span></a></li><li><a href="#hemisphere-haze" aria-label="Haze" title="Haze"><span class="coin-dot" style="--i:5"></span></a></li><li><a href="#hemisphere-fog" aria-label="Fog" title="Fog"><span class="coin-dot" style="--i:6"></span></a></li><li><a href="#hemisphere-smoke" aria-label="Smoke" title="Smoke"><span class="coin-dot" style="--i:7"></span></a></li></ul><a class="more" href="#hemisphere-ember">See Hemisphere</a></div></article><article class="ptile"><div class="pt-body"><h3>Core<small>Table lamp</small></h3><p class="line">A ball of tinted acrylic sitting low in a black acrylic base. No cord: it goes where the conversation is.</p><ul class="dots-row" aria-label="Colors"><li><a href="#core-ember" aria-label="Ember" title="Ember"><span class="coin-dot" style="--i:0"></span></a></li><li><a href="#core-dust" aria-label="Dust" title="Dust"><span class="coin-dot" style="--i:1"></span></a></li><li><a href="#core-acid" aria-label="Acid" title="Acid"><span class="coin-dot" style="--i:2"></span></a></li><li><a href="#core-poison" aria-label="Poison" title="Poison"><span class="coin-dot" style="--i:3"></span></a></li><li><a href="#core-ice" aria-label="Ice" title="Ice"><span class="coin-dot" style="--i:4"></span></a></li><li><a href="#core-haze" aria-label="Haze" title="Haze"><span class="coin-dot" style="--i:5"></span></a></li><li><a href="#core-fog" aria-label="Fog" title="Fog"><span class="coin-dot" style="--i:6"></span></a></li><li><a href="#core-smoke" aria-label="Smoke" title="Smoke"><span class="coin-dot" style="--i:7"></span></a></li></ul><a class="more" href="#core-ember">See Core</a></div></article></div>
+    
+    <div class="lamp-duo solo lamps-pair"><div class="lamp-note"><h3>Cordless.</h3><p>About five hours a charge at full brightness, longer dimmed. Set it back on its dock, a disc of polished black acrylic, and it charges in two to three hours. When the cells tire, you change the cells, not the lamp.</p></div></div>
+  </div></section>
+  </div>
+  <div class="lineview" data-line="turntable">
+    <div class="wrap"><p class="crumbs"><a href="#top">Home</a> / Mantle</p><h1 class="vh">Mantle</h1></div>
+  <section class="band" id="record"><div class="wrap">
+    <div class="head"><div><h2>Mantle.</h2><p>A turntable in the speakers&rsquo; acrylic. Its tinted plinth floats 40&nbsp;mm over a smoked base on four black posts. The motor is fixed under the plinth, and the phono stage is built in.</p></div></div>
+    <div class="lamp-duo solo tt-duo"><article class="ptile no-pic"><div class="pt-body"><h3>Mantle<small>Turntable</small></h3><ul class="dots-row" aria-label="Colors"><li><a href="#mantle-ember" aria-label="Ember" title="Ember"><span class="coin-dot" style="--i:0"></span></a></li><li><a href="#mantle-dust" aria-label="Dust" title="Dust"><span class="coin-dot" style="--i:1"></span></a></li><li><a href="#mantle-acid" aria-label="Acid" title="Acid"><span class="coin-dot" style="--i:2"></span></a></li><li><a href="#mantle-poison" aria-label="Poison" title="Poison"><span class="coin-dot" style="--i:3"></span></a></li><li><a href="#mantle-ice" aria-label="Ice" title="Ice"><span class="coin-dot" style="--i:4"></span></a></li><li><a href="#mantle-haze" aria-label="Haze" title="Haze"><span class="coin-dot" style="--i:5"></span></a></li><li><a href="#mantle-fog" aria-label="Fog" title="Fog"><span class="coin-dot" style="--i:6"></span></a></li><li><a href="#mantle-smoke" aria-label="Smoke" title="Smoke"><span class="coin-dot" style="--i:7"></span></a></li></ul><a class="more" href="#mantle-ember">See Mantle</a></div></article></div>
+    
+      </div></section>
+  </div>
+</main>
+
+<main id="color" hidden>
+  <div class="wrap">
+    <p class="crumbs"><a href="#top">Home</a> / <span id="c-crumb"></span></p>
+    <div class="colour-head"><span class="coin-big" id="c-coin"></span>
+      <div><p class="num" id="c-num"></p><h1 id="c-name"></h1><p class="line" id="c-line"></p></div></div>
+    <ul class="swatches" id="c-swatches" aria-label="Color"></ul>
+    <figure class="c-hab" id="c-hab" hidden><img alt="" width="1200" height="1500"><figcaption><span id="c-hab-cap"></span> <i class="render">Render</i></figcaption></figure>
+    <section class="company" aria-labelledby="c-in"><div class="goes-head"><h2 id="c-in"></h2><span id="c-in-note"></span></div>
+      <div id="c-products"></div></section>
+    <div id="c-company"></div>
+  </div>
+</main>
+
+<main id="pdp" hidden>
+  <div class="wrap">
+    <p class="crumbs"><a href="#top">Home</a> / <a id="p-line-link" href="#speakers">Speakers</a> / <span id="p-crumb"></span></p>
+    <div class="pdp">
+      <section class="gallery" aria-label="Pictures">
+        <div class="frame">
+          <div class="stage" id="stage" role="tabpanel" aria-labelledby="thumb-0" tabindex="0"></div>
+          <button type="button" class="nav prev" id="g-prev" aria-label="Previous picture"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M11.5 3.5 6 9l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button type="button" class="nav next" id="g-next" aria-label="Next picture"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M6.5 3.5 12 9l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <span class="count" id="g-count" aria-hidden="true"></span>
+        </div>
+        <div class="thumbs" id="thumbs" role="tablist" aria-label="Pictures"></div>
+        <p class="cap" id="cap" aria-live="polite"></p>
+      </section>
+      <aside class="buy" aria-label="This product">
+        <p class="num"><span id="p-num"></span></p>
+        <h1 class="named"><span id="p-name"></span><span class="pic" id="p-icon"></span></h1>
+        <p class="line" id="p-line"></p>
+        <p class="price">Price on request. <span id="p-unit">Each pair is made to order.</span></p>
+        <ul class="swatches" id="swatches" aria-label="Color"></ul>
+        <p class="pick">Color: <b id="p-pick"></b><span class="pick-ic" id="p-pick-ic"></span></p>
+        <div class="acts"><a class="btn solid" id="p-enquire" href="#contact">Ask about a pair</a><button type="button" class="btn" id="p-share">Copy link</button></div>
+        <p class="share-note" id="p-share-note" aria-live="polite"></p>
+        <dl class="facts" id="facts"></dl>
+      </aside>
+    </div>
+    <div id="p-company"></div>
+    <p class="more-line" id="p-more"></p>
+  </div>
+</main>
+
+
+
+
+
+
+
+<footer><div class="wrap">
+  <a class="brand" href="#top" aria-label="EARF, home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 300" aria-hidden="true"><g fill="currentColor"><path d="M0.0 70.0L0.0 115.0L0.0 185.0L0.0 230.0L0.0 300.0L100.0 300.0L200.0 300.0L200.0 230.0L100.0 230.0L100.0 185.0L175.0 185.0L175.0 115.0L100.0 115.0L100.0 70.0L200.0 70.0L200.0 0.0L100.0 0.0L0.0 0.0L0.0 70.0Z"/><path d="M340.0 300.0L344.2 285.0L405.8 285.0L410.0 300.0L510.0 300.0L425.0 0.0L325.0 0.0L240.0 300.0L340.0 300.0Z M375.0 176.5L385.9 215.0L364.1 215.0L375.0 176.5Z"/><path d="M732.5 89.5L732.4 88.0L732.3 86.5L732.2 84.9L732.1 83.4L731.9 81.9L731.7 80.4L731.5 78.9L731.3 77.4L731.0 75.9L730.7 74.5L730.4 73.0L730.1 71.5L729.7 70.0L729.3 68.6L728.9 67.1L728.5 65.6L728.1 64.2L727.6 62.8L727.1 61.3L726.6 59.9L726.0 58.5L725.5 57.1L724.9 55.7L724.3 54.3L723.6 53.0L723.0 51.6L722.3 50.2L721.6 48.9L720.9 47.6L720.1 46.3L719.3 44.9L718.6 43.7L717.7 42.4L716.9 41.1L716.1 39.9L715.2 38.6L714.3 37.4L713.4 36.2L712.5 35.0L711.5 33.8L710.5 32.7L709.5 31.5L708.5 30.4L707.5 29.3L706.5 28.2L705.4 27.1L704.3 26.0L703.2 25.0L702.1 24.0L701.0 23.0L699.8 22.0L698.7 21.0L697.5 20.0L696.3 19.1L695.1 18.2L693.9 17.3L692.6 16.4L691.4 15.6L690.1 14.8L688.8 13.9L687.6 13.2L686.2 12.4L684.9 11.6L683.6 10.9L682.3 10.2L680.9 9.5L679.5 8.9L678.2 8.2L676.8 7.6L675.4 7.0L674.0 6.5L672.6 5.9L671.2 5.4L669.7 4.9L668.3 4.4L666.9 4.0L665.4 3.6L663.9 3.2L662.5 2.8L661.0 2.4L659.5 2.1L658.0 1.8L656.6 1.5L655.1 1.2L653.6 1.0L652.1 0.8L650.6 0.6L649.1 0.4L647.6 0.3L646.0 0.2L644.5 0.1L643.0 0.0L641.5 0.0L640.0 0.0L540.0 0.0L540.0 300.0L640.0 300.0L640.0 280.2L648.0 300.0L750.0 300.0L695.9 166.2L696.3 165.9L697.5 165.0L698.7 164.0L699.8 163.0L701.0 162.0L702.1 161.0L703.2 160.0L704.3 159.0L705.4 157.9L706.5 156.8L707.5 155.7L708.5 154.6L709.5 153.5L710.5 152.3L711.5 151.2L712.5 150.0L713.4 148.8L714.3 147.6L715.2 146.4L716.1 145.1L716.9 143.9L717.7 142.6L718.6 141.3L719.3 140.1L720.1 138.8L720.9 137.4L721.6 136.1L722.3 134.8L723.0 133.4L723.6 132.0L724.3 130.7L724.9 129.3L725.5 127.9L726.0 126.5L726.6 125.1L727.1 123.7L727.6 122.2L728.1 120.8L728.5 119.4L728.9 117.9L729.3 116.4L729.7 115.0L730.1 113.5L730.4 112.0L730.7 110.5L731.0 109.1L731.3 107.6L731.5 106.1L731.7 104.6L731.9 103.1L732.1 101.6L732.2 100.1L732.3 98.5L732.4 97.0L732.5 95.5L732.5 94.0L732.5 92.5L732.5 91.0L732.5 89.5Z M662.5 93.2L662.5 93.6L662.5 94.0L662.4 94.3L662.4 94.7L662.4 95.1L662.3 95.4L662.3 95.8L662.2 96.2L662.1 96.5L662.1 96.9L662.0 97.3L661.9 97.6L661.8 98.0L661.7 98.3L661.6 98.7L661.5 99.0L661.4 99.4L661.3 99.7L661.2 100.1L661.1 100.4L660.9 100.8L660.8 101.1L660.6 101.4L660.5 101.8L660.3 102.1L660.2 102.5L660.0 102.8L659.8 103.1L659.7 103.4L659.5 103.8L659.3 104.1L659.1 104.4L658.9 104.7L658.7 105.0L658.5 105.3L658.3 105.6L658.1 105.9L657.9 106.2L657.6 106.5L657.4 106.8L657.2 107.1L656.9 107.3L656.7 107.6L656.4 107.9L656.2 108.1L655.9 108.4L655.6 108.7L655.4 108.9L655.1 109.2L654.8 109.4L654.6 109.7L654.3 109.9L654.0 110.1L653.7 110.4L653.4 110.6L653.1 110.8L652.8 111.0L652.5 111.2L652.2 111.4L651.9 111.6L651.6 111.8L651.2 112.0L650.9 112.2L650.6 112.3L650.3 112.5L650.0 112.7L649.6 112.8L649.3 113.0L648.9 113.1L648.6 113.3L648.3 113.4L647.9 113.6L647.6 113.7L647.2 113.8L646.9 113.9L646.5 114.0L646.2 114.1L645.8 114.2L645.5 114.3L645.1 114.4L644.8 114.5L644.4 114.6L644.0 114.6L643.7 114.7L643.3 114.8L642.9 114.8L642.6 114.9L642.2 114.9L641.8 114.9L641.5 115.0L641.1 115.0L640.7 115.0L640.4 115.0L640.0 115.0L640.0 70.0L640.4 70.0L640.7 70.0L641.1 70.0L641.5 70.0L641.8 70.1L642.2 70.1L642.6 70.1L642.9 70.2L643.3 70.2L643.7 70.3L644.0 70.4L644.4 70.4L644.8 70.5L645.1 70.6L645.5 70.7L645.8 70.8L646.2 70.9L646.5 71.0L646.9 71.1L647.2 71.2L647.6 71.3L647.9 71.4L648.3 71.6L648.6 71.7L648.9 71.9L649.3 72.0L649.6 72.2L650.0 72.3L650.3 72.5L650.6 72.7L650.9 72.8L651.2 73.0L651.6 73.2L651.9 73.4L652.2 73.6L652.5 73.8L652.8 74.0L653.1 74.2L653.4 74.4L653.7 74.6L654.0 74.9L654.3 75.1L654.6 75.3L654.8 75.6L655.1 75.8L655.4 76.1L655.6 76.3L655.9 76.6L656.2 76.9L656.4 77.1L656.7 77.4L656.9 77.7L657.2 77.9L657.4 78.2L657.6 78.5L657.9 78.8L658.1 79.1L658.3 79.4L658.5 79.7L658.7 80.0L658.9 80.3L659.1 80.6L659.3 80.9L659.5 81.2L659.7 81.6L659.8 81.9L660.0 82.2L660.2 82.5L660.3 82.9L660.5 83.2L660.6 83.6L660.8 83.9L660.9 84.2L661.1 84.6L661.2 84.9L661.3 85.3L661.4 85.6L661.5 86.0L661.6 86.3L661.7 86.7L661.8 87.0L661.9 87.4L662.0 87.7L662.1 88.1L662.1 88.5L662.2 88.8L662.3 89.2L662.3 89.6L662.4 89.9L662.4 90.3L662.4 90.7L662.5 91.0L662.5 91.4L662.5 91.8L662.5 92.1L662.5 92.5L662.5 92.9L662.5 93.2Z"/><path d="M790.0 0.0L790.0 70.0L790.0 115.0L790.0 185.0L790.0 300.0L890.0 300.0L890.0 185.0L955.0 185.0L955.0 115.0L890.0 115.0L890.0 70.0L980.0 70.0L980.0 0.0L890.0 0.0L790.0 0.0Z"/></g></svg></a>
+  <nav class="foot-nav" aria-label="More"><a href="#progress">Drawn to be made</a><a href="#contact">Contact</a></nav>
+  <p class="foot-line">Designed in San Francisco. Pictures are renders until the first pair is built. &copy; 2026 EARF</p>
+</div></footer>
+
+<script>
+const D = {"clouds":[{"k":"red","num":"01","name":"Ember","icon":"ember","tint":"Translucent red","line":"The last light of the fire.","cover":"Oxblood","col":"#9B0000","hue":0,"coin":0,"views":{"off":{"src":"img/rc/red-tall.webp","w":1000,"h":1250,"th":"img/rc/red-thumb.webp","card":{"src":"img/rc/red-card.webp","w":625,"h":1250}},"horn-back":{"src":"img/rc/red-horn-back.webp","w":720,"h":900,"th":"img/rc/red-horn-back-th.webp"},"amp":{"src":"img/rc/plate.webp","w":1000,"h":1250,"th":"img/rc/plate-th.webp"},"turn":{"src":"img/rc/turn-red.webp","still":"img/rc/turn-red-0.webp","w":640,"h":576,"th":"img/rc/turn-red-th.webp","bg":"e0ccc7dfcbc6e1cdc9e1cec9e0cec9dfccc7dfcbc6e0cdc7e0cec9ddccc6e2cfcae2cfca","edge":"cut"}},"place":"on a lava field at blue hour, the crust cracked to its glow"},{"k":"orange","num":"02","name":"Dust","icon":"dust","tint":"Translucent orange","line":"A long, dry afternoon.","cover":"Rust","col":"#E5732A","hue":1,"coin":1,"views":{"off":{"src":"img/rc/orange-tall.webp","w":1000,"h":1250,"th":"img/rc/orange-thumb.webp","card":{"src":"img/rc/orange-card.webp","w":625,"h":1250}},"horn-back":{"src":"img/rc/orange-horn-back.webp","w":720,"h":900,"th":"img/rc/orange-horn-back-th.webp"},"amp":{"src":"img/rc/plate.webp","w":1000,"h":1250,"th":"img/rc/plate-th.webp","tag":"Shown in Ember"},"turn":{"src":"img/rc/turn-orange.webp","still":"img/rc/turn-orange-0.webp","w":640,"h":576,"th":"img/rc/turn-orange-th.webp","bg":"ddd3bedcd2bde0d5c2e0d5c2dfd4c1dfd4c1dcd2bddfd4c1dfd4c1dcd2bfe1d6c2e1d6c2","edge":"cut"}},"place":"on rippled sand in the Southwest at golden hour"},{"k":"amber","num":"03","name":"Acid","icon":"acid","tint":"Translucent golden yellow","line":"A yellow with an edge.","cover":"Ochre","col":"#E9B320","hue":2,"coin":2,"views":{"off":{"src":"img/rc/amber-tall.webp","w":1000,"h":1250,"th":"img/rc/amber-thumb.webp","card":{"src":"img/rc/amber-card.webp","w":625,"h":1250}},"horn-back":{"src":"img/rc/amber-horn-back.webp","w":720,"h":900,"th":"img/rc/amber-horn-back-th.webp"},"amp":{"src":"img/rc/plate.webp","w":1000,"h":1250,"th":"img/rc/plate-th.webp","tag":"Shown in Ember"},"turn":{"src":"img/rc/turn-amber.webp","still":"img/rc/turn-amber-0.webp","w":640,"h":576,"th":"img/rc/turn-amber-th.webp","bg":"ddd7b7ddd7b7dfd9b9dfd9b9ded8b8ded8b8dcd6b6ded8b8ddd8badad6b8e0dabae0daba","edge":"cut"}},"place":"in acid rain on black lava"},{"k":"green","num":"04","name":"Poison","icon":"poison","tint":"Translucent bottle green","line":"Bottle green. Keep out of reach.","cover":"Bottle green","col":"#376621","hue":3,"coin":3,"views":{"off":{"src":"img/rc/green-tall.webp","w":1000,"h":1250,"th":"img/rc/green-thumb.webp","card":{"src":"img/rc/green-card.webp","w":625,"h":1250}},"horn-back":{"src":"img/rc/green-horn-back.webp","w":720,"h":900,"th":"img/rc/green-horn-back-th.webp"},"amp":{"src":"img/rc/plate.webp","w":1000,"h":1250,"th":"img/rc/plate-th.webp","tag":"Shown in Ember"},"turn":{"src":"img/rc/turn-green.webp","still":"img/rc/turn-green-0.webp","w":640,"h":576,"th":"img/rc/turn-green-th.webp","bg":"c8dec9c7ddc8c9dfcac9dfcac8dec9c8dec9c6dcc7c8dec9c8dec9c6dcc7cbe0cbcbe0cb","edge":"cut"}},"place":"on a redwood forest floor, among death caps and a deer's bones"},{"k":"blue","num":"05","name":"Ice","icon":"ice","tint":"Translucent ice blue","line":"Glacier blue, and in no hurry.","cover":"Deep blue","col":"#4A90C8","hue":4,"coin":4,"views":{"off":{"src":"img/rc/blue-tall.webp","w":1000,"h":1250,"th":"img/rc/blue-thumb.webp","card":{"src":"img/rc/blue-card.webp","w":625,"h":1250}},"horn-back":{"src":"img/rc/blue-horn-back.webp","w":720,"h":900,"th":"img/rc/blue-horn-back-th.webp"},"amp":{"src":"img/rc/plate.webp","w":1000,"h":1250,"th":"img/rc/plate-th.webp","tag":"Shown in Ember"},"turn":{"src":"img/rc/turn-blue.webp","still":"img/rc/turn-blue-0.webp","w":640,"h":576,"th":"img/rc/turn-blue-th.webp","bg":"c4dbe5c2dae4c6dde8c6dde8c5dce6c5dce5c2dae4c5dce6c5dce6c2dae4c7dfe7c7dfe7","edge":"cut"}},"place":"in snow country at blue hour"},{"k":"violet","num":"06","name":"Haze","icon":"haze","tint":"Translucent violet","line":"Dusk, kept indoors.","cover":"Deep violet","col":"#543287","hue":5,"coin":5,"views":{"off":{"src":"img/rc/violet-tall.webp","w":1000,"h":1250,"th":"img/rc/violet-thumb.webp","card":{"src":"img/rc/violet-card.webp","w":625,"h":1250}},"horn-back":{"src":"img/rc/violet-horn-back.webp","w":720,"h":900,"th":"img/rc/violet-horn-back-th.webp"},"amp":{"src":"img/rc/plate.webp","w":1000,"h":1250,"th":"img/rc/plate-th.webp","tag":"Shown in Ember"},"turn":{"src":"img/rc/turn-violet.webp","still":"img/rc/turn-violet-0.webp","w":640,"h":576,"th":"img/rc/turn-violet-th.webp","bg":"cdcadfcdc9dfcfcce1cfcce1cdcbe0cecbdfccc8decdcbe0cdcbe0ccc8ded0cde3d0cde3","edge":"cut"}},"place":"before layered hills in evening light"},{"k":"ice","num":"07","name":"Fog","icon":"fog","tint":"Water-clear","line":"Water-clear. Almost not there.","cover":"White","col":"#F6F8F8","hue":null,"coin":6,"views":{"off":{"src":"img/rc/ice-tall.webp","w":1000,"h":1250,"th":"img/rc/ice-thumb.webp","card":{"src":"img/rc/ice-card.webp","w":625,"h":1250}},"horn-back":{"src":"img/rc/ice-horn-back.webp","w":720,"h":900,"th":"img/rc/ice-horn-back-th.webp"},"amp":{"src":"img/rc/plate.webp","w":1000,"h":1250,"th":"img/rc/plate-th.webp","tag":"Shown in Ember"},"turn":{"src":"img/rc/turn-ice.webp","still":"img/rc/turn-ice-0.webp","w":640,"h":576,"th":"img/rc/turn-ice-th.webp","bg":"bdd4dcbbd3ddbfd7dfc0d7dfbed5ddbdd4dcbbd3dbc0d6dfc0d6dfbed3dcc0d7dfc0d7df","edge":"cut"}},"place":"on a headland above the fog at dawn"},{"k":"black","num":"08","name":"Smoke","icon":"smoke","tint":"Smoked black","line":"Smoked glass, for after dark.","cover":"Black","col":"#34323A","hue":null,"coin":7,"views":{"off":{"src":"img/rc/black-tall.webp","w":1000,"h":1250,"th":"img/rc/black-thumb.webp","card":{"src":"img/rc/black-card.webp","w":625,"h":1250}},"horn-back":{"src":"img/rc/black-horn-back.webp","w":720,"h":900,"th":"img/rc/black-horn-back-th.webp"},"amp":{"src":"img/rc/plate.webp","w":1000,"h":1250,"th":"img/rc/plate-th.webp","tag":"Shown in Ember"},"turn":{"src":"img/rc/turn-black.webp","still":"img/rc/turn-black-0.webp","w":640,"h":576,"th":"img/rc/turn-black-th.webp","bg":"cdcfcccbcecbcdd2cecdd2ceccd1cdccd1cdcbcfccccd1cdcdd2cecbd0cdcfd2cecfd2ce","edge":"cut"}},"place":"on a city overpass at dusk, come down like a meteor, the road torn open and burning behind it"}],"hues":["#D2382F","#E5732A","#E9B320","#4F7F3A","#4A90C8","#6C4BA3"],"care":"Dust with a soft microfiber cloth; wash with water and a drop of mild soap, then dry. No glass cleaner, alcohol or solvents: they craze acrylic. Fine scratches polish out.","lamps":{"dome":{"name":"Hemisphere","kind":"Pendant","line":"Hung low over a table. A quarter turn takes its shade off, and another puts a new color on.","facts":[["Size","200 mm across"],["Shade","Cast acrylic in three layers: its color on the outside, over a clear shell and an opal diffuser within"],["Light","2700 K, CRI 90; the dome glows in its own color, and the light straight down is the lamp&rsquo;s own warm white"],["Fitting","Black anodized aluminum, with a quarter-turn catch"],["Hanging","A 600 mm drop as standard, cut to length; a black acrylic canopy 150 mm across"],["Mains","120 V, dimmable"],["Shades","In all eight colors, sold singly"],["Care","A quarter turn takes the shade off to wash: water and a drop of mild soap, then dry. No glass cleaner, alcohol or solvents: they craze acrylic."],["Figures","Design figures; they may change before production"]],"colours":{"red":{"views":{},"card":null},"orange":{"views":{},"card":null},"amber":{"views":{},"card":null},"green":{"views":{},"card":null},"blue":{"views":{},"card":null},"violet":{"views":{},"card":null},"ice":{"views":{},"card":null},"black":{"views":{},"card":null}},"route":"hemisphere"},"orb":{"name":"Core","kind":"Table lamp","line":"A ball of tinted acrylic sitting low in a black acrylic base. No cord: it goes where the conversation is.","facts":[["Size","160 mm ball, 180 mm tall"],["Ball","Tinted cast acrylic, with a white opal ball centered inside it"],["Weight","About 1.5 kg"],["Light","2200 to 2700 K, warmer as it dims"],["Control","Touch the black ring: tap to switch, hold to dim"],["Power","Cordless: about five hours a charge at full brightness, longer dimmed; it charges in two to three hours on its dock, on three standard LiFePO4 cells you can replace yourself"],["Dock","A disc of polished black acrylic, 150 mm across; Core charges by contact, through a stainless post and ring"],["Rating","Designed to meet IP44, for terraces and spilled drinks"],["Shades","In all eight colors, sold singly"],["Care","Dust with a soft microfiber cloth; wash with water and a drop of mild soap, then dry. No glass cleaner, alcohol or solvents: they craze acrylic. Fine scratches polish out."],["Figures","Design figures; they may change before production"]],"colours":{"red":{"views":{},"card":null},"orange":{"views":{},"card":null},"amber":{"views":{},"card":null},"green":{"views":{},"card":null},"blue":{"views":{},"card":null},"violet":{"views":{},"card":null},"ice":{"views":{},"card":null},"black":{"views":{},"card":null}},"route":"core"}},"tt":{"name":"Mantle","kind":"Turntable","route":"mantle","line":"A turntable in cast acrylic.","facts":[["Plinth","Cast acrylic in its color, about 25 mm; it floats 40 mm over the base"],["Posts","Four solid black posts, 30 mm across"],["Base","Smoked cast acrylic, 12.7 mm, set in 35 mm all around"],["Drive","Belt, from Rega&rsquo;s 24 V motor, fixed beneath the plinth"],["Speeds","33 and 45, by a button"],["Arm","Rega RB330"],["Cartridge","A moving-magnet cartridge"],["Phono stage","Built in, for moving-magnet cartridges, with a line out and a switch to bypass it"],["Cover","Cast acrylic in its color, 3 mm, on friction hinges"],["Size","450 wide, about 370 deep with the hinges, about 199 high with the lid down (mm)"],["Weight","About 12.9 kg with the lid"],["Care","Dust with a soft microfiber cloth; wash with water and a drop of mild soap, then dry. No glass cleaner, alcohol or solvents: they craze acrylic. Fine scratches polish out."],["Figures","Design figures; they may change before production"]],"colours":{"red":{"views":{},"card":null},"orange":{"views":{},"card":null},"amber":{"views":{},"card":null},"green":{"views":{},"card":null},"blue":{"views":{},"card":null},"violet":{"views":{},"card":null},"ice":{"views":{},"card":null},"black":{"views":{},"card":null}}},"view3d":{},"campaign":[]}, BY = Object.fromEntries(D.clouds.map(c => [c.k, c]));
+const SLUG = Object.fromEntries(D.clouds.map(c => [c.name.toLowerCase(), c.k])), keyOf = w => SLUG[w] || (BY[w] ? w : null);
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches, TAU = Math.PI * 2;
+
+// own (generous) lazy distance; anything that can wait for the page waits for its load event
+const afterLoad = f => { if (document.readyState === 'complete') f(); else addEventListener('load', f, { once: true }); };
+const lateIO = 'IntersectionObserver' in window && new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { lateIO.unobserve(e.target); show_(e.target); } }), { rootMargin: '600px 0px' });
+const show_ = img => { const pc = img.parentElement; if (pc && pc.tagName === 'PICTURE') pc.querySelectorAll('source[data-srcset]').forEach(s => { s.srcset = s.dataset.srcset; delete s.dataset.srcset; }); if (img.dataset.srcset) { img.srcset = img.dataset.srcset; delete img.dataset.srcset; } if (img.dataset.src) { img.src = img.dataset.src; delete img.dataset.src; } };
+const later = img => { if (lateIO) lateIO.observe(img); else show_(img); };
+document.querySelectorAll('img[data-src]:not(.hero-photo img)').forEach(later);
+// lit from below: scrolling picks the color (a quarter of a screen each) and time plays the change; the coins are a
+// radio group that switch the lamp and move the run to that color; the header darkens over the band
+const run = document.getElementById('light-run');
+if (run) {
+  const stageL = run.querySelector('.light-stage'), fig = run.querySelector('.light-pic'), pics = [...fig.querySelectorAll('img')];
+  const coins = [...run.querySelectorAll('.light-coins button')], group = run.querySelector('.light-coins'), color = run.querySelector('.light-colour');
+  const nameEl = document.getElementById('light-name'), lineEl = document.getElementById('light-line'), numEl = document.getElementById('light-num');
+  const N = pics.length, OFF = 0, ON = reduce ? 150 : 600;
+  let at = -1, want = 0, busy = false, woke = false, quiet = false, quietT = 0, queuedL = false;
+  const glowOf = i => { const b = coins[i], a = 0.30 * +b.dataset.a; return [`rgb(${b.dataset.glow} / ${a.toFixed(3)})`, `rgb(${b.dataset.glow} / ${(a * 0.45).toFixed(3)})`]; };
+  const light = (i, dim) => { const [g1, g2] = glowOf(i); stageL.classList.toggle('dip', dim);
+    stageL.style.setProperty('--glow', dim ? 'transparent' : g1); stageL.style.setProperty('--glow2', dim ? 'transparent' : g2); };
+  const mark = i => { group.style.setProperty('--at', i); coins.forEach((b, j) => { b.setAttribute('aria-checked', String(j === i)); b.tabIndex = j === i ? 0 : -1; }); };
+  function show(i) {                                  // one switch at a time, then straight to the latest
+    want = i; mark(i);
+    if (busy || i === at) return;
+    busy = true; const prev = at; at = i;
+    if (prev >= 0) { pics[prev].classList.remove('on'); light(prev, true); color.classList.add('swap'); }
+    setTimeout(() => {
+      const c = D.clouds[i]; nameEl.textContent = c.name; lineEl.textContent = c.line; numEl.textContent = `Tropos ${c.num}`;
+      color.classList.remove('swap'); pics[i].classList.add('on'); light(i, false);
+      setTimeout(() => { busy = false; if (want !== at) show(want); }, ON);
+    }, prev >= 0 ? OFF : 0);
+  }
+  const pinTop = () => parseFloat(getComputedStyle(stageL).top) || 0;
+  const span = () => Math.max(1, run.offsetHeight - stageL.offsetHeight);
+  const zoneAt = () => { const y = pinTop() - run.getBoundingClientRect().top, s = span();
+    fig.style.setProperty('--push', (1 + 0.06 * Math.min(1, Math.max(0, y / s))).toFixed(4));
+    let i = Math.min(N - 1, Math.max(0, Math.floor(y / (s / N))));
+    if (i !== want) { const edge = (i > want ? i : i + 1) * s / N; if (Math.abs(y - edge) < 16) i = want; }   // a little hysteresis
+    return i; };
+  const tickL = () => { queuedL = false; const i = zoneAt(); if (woke && !quiet && i !== want) show(i); };
+  if (!reduce) {
+    addEventListener('scroll', () => { if (!queuedL) { queuedL = true; requestAnimationFrame(tickL); } }, { passive: true });
+    addEventListener('resize', tickL);
+  }
+  // Ember is lit in the page itself (without script, and under reduced motion); on the moving path the room starts dark
+  // and, when it is well in view, the first lamp comes up slowly
+  if (reduce) { at = 0; light(0, false); woke = true; }
+  else {
+    pics[0].classList.remove('on');
+    new IntersectionObserver((es, ob) => { if (!es.some(e => e.isIntersecting)) return; ob.disconnect(); woke = true;
+      fig.classList.add('wake'); show(zoneAt()); setTimeout(() => fig.classList.remove('wake'), 1300); }, { threshold: 0.35 }).observe(stageL);
+  }
+  const jump = i => { show(i); if (reduce || !woke) return;
+    const r = run.getBoundingClientRect(), s = span(), pinned = r.top <= pinTop() + 1 && r.bottom >= innerHeight - 1;
+    quiet = true; clearTimeout(quietT);
+    scrollTo({ top: scrollY + r.top - pinTop() + (i + 0.5) * s / N, behavior: pinned ? 'instant' : 'smooth' });
+    const done = () => { quiet = false; removeEventListener('scrollend', done); };
+    if (pinned) quietT = setTimeout(done, 80); else { addEventListener('scrollend', done, { once: true }); quietT = setTimeout(done, 1400); } };
+  coins.forEach((b, i) => b.addEventListener('click', () => jump(i)));
+  group.addEventListener('keydown', e => { const k = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
+    const i = k ? (want + k + N) % N : e.key === 'Home' ? 0 : e.key === 'End' ? N - 1 : -1;
+    if (i < 0) return; e.preventDefault(); jump(i); coins[i].focus(); });
+  const fac = document.querySelector('.lightband .facade');
+  if (fac) new IntersectionObserver((es, ob) => { if (es.some(e => e.isIntersecting)) { fac.classList.add('seen'); ob.disconnect(); } }, { threshold: 0.35 }).observe(fac);
+  const band = document.getElementById('light'), bar = document.querySelector('header.top');
+  if (band && bar) { const over = () => { const r = band.getBoundingClientRect(), h = bar.getBoundingClientRect().bottom;
+      bar.classList.toggle('on-dark', r.top <= h + 1 && r.bottom > h); };
+    addEventListener('scroll', over, { passive: true }); over(); }
+}
+// a closer look: the dots pick a color and the pictures cross-fade; the arrow keys step through them, as in a radio group
+const closer = document.getElementById('closer');
+if (closer) {
+  const pics = [...closer.querySelectorAll('.closer-stage img')], dots = [...closer.querySelectorAll('.dots button')];
+  let at = 0;
+  const pick = (i, focus) => { at = i; const c = D.clouds[i];
+    pics.forEach((p, j) => { p.classList.toggle('on', j === i); if (j === i) p.removeAttribute('aria-hidden'); else p.setAttribute('aria-hidden', 'true'); });
+    dots.forEach((d, j) => { d.setAttribute('aria-checked', String(j === i)); d.tabIndex = j === i ? 0 : -1; if (j === i && focus) d.focus(); });
+    document.getElementById('closer-cap').innerHTML = `<b>${c.name}</b> ${c.line}`; };
+  dots.forEach((d, i) => d.addEventListener('click', () => pick(i)));
+  closer.querySelector('.dots').addEventListener('keydown', e => { const k = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: 7, ArrowUp: 7 }[e.key];
+    if (k) { e.preventDefault(); pick((at + k) % 8, true); } });
+}
+// the habitats' strip: the arrows move it a picture at a time
+const hab = document.getElementById('hab');
+if (hab) {
+  const prev = document.getElementById('hab-prev'), next = document.getElementById('hab-next');
+  const step = d => { const li = hab.querySelector('li'); hab.scrollBy({ left: d * (li.offsetWidth + 20), behavior: reduce ? 'auto' : 'smooth' }); };
+  const ends = () => { prev.setAttribute('aria-disabled', String(hab.scrollLeft < 8));
+    next.setAttribute('aria-disabled', String(hab.scrollLeft > hab.scrollWidth - hab.clientWidth - 8)); };
+  prev.addEventListener('click', () => step(-1)); next.addEventListener('click', () => step(1));
+  hab.addEventListener('scroll', ends, { passive: true }); addEventListener('resize', ends); ends();
+}
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const el = (tag, attrs = {}, html = '') => { const e = document.createElement(tag); for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v); e.innerHTML = html; return e; };
+
+// the header's globe keeps turning: a turn every 4 s through its 60 frames, on one clock, which the opening's globe sets
+// as it lands so the turn carries on from the film's own angle; still under reduced motion
+const GLOBES = [...document.querySelectorAll('.brand .globe')], GLOBE_TURN = 4000;
+let turn0 = performance.now(), globeAt = -1;
+const setTurn = sec => { turn0 = performance.now() - (sec * 1000) % GLOBE_TURN; };
+
+const globeLive = () => document.documentElement.classList.add('globe-live');
+if (document.readyState === 'complete') setTimeout(globeLive, 300); else addEventListener('load', () => setTimeout(globeLive, 300), { once: true });
+if (!reduce) (function globeTurn(now) {
+  const i = Math.floor((((now - turn0) % GLOBE_TURN) + GLOBE_TURN) % GLOBE_TURN / GLOBE_TURN * 60) % 60;
+  if (i !== globeAt) { globeAt = i; GLOBES.forEach(g => { g.style.backgroundPosition = `${(i % 10) * 100 / 9}% ${Math.floor(i / 10) * 100 / 5}%`; }); }
+  requestAnimationFrame(globeTurn);
+})(turn0);
+
+// the horns turn once as they cross the screen, a frame every 15 degrees; dragged, they turn by hand
+const TILES = [...document.querySelectorAll('#horns .spin')], N = 24, C = 6, R = 4;
+const lend = t => { if (t.dataset.bg) { t.style.backgroundImage = `url(${t.dataset.bg})`; delete t.dataset.bg; } };
+if ('IntersectionObserver' in window) { const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { lend(e.target); io.unobserve(e.target); } }),
+  { rootMargin: '900px 0px' }); TILES.forEach(t => io.observe(t)); } else TILES.forEach(lend);
+const REST = 20; const frameAt = (k) => `${(16 + (k % C) * 672) * 100 / 3392}% ${(16 + Math.floor(k / C) * 608) * 100 / 1856}%`;   // tiles in a 16 px gutter
+const drag = new Map();
+function turnUpdate() {
+  const vh = innerHeight;
+  for (const t of TILES) {
+    const r = t.getBoundingClientRect();
+    if (r.bottom < -vh || r.top > 2 * vh) continue;
+    const p = reduce ? 0 : Math.min(0.9999, Math.max(0, (vh - r.top) / (vh + r.height)));
+    const k = ((Math.floor(p * N) + (drag.get(t) || 0)) % N + N) % N;
+    if (t._k !== k) { t._k = k; t.style.backgroundPosition = frameAt(k); }
+  }
+}
+let queued = false;
+const ask = () => { if (!queued) { queued = true; requestAnimationFrame(() => { queued = false; turnUpdate(); }); } };
+addEventListener('scroll', ask, { passive: true }); addEventListener('resize', ask);
+function draggable(t, onFrames) {
+  let x0 = null, base = 0;
+  t.addEventListener('pointerdown', e => { x0 = e.clientX; base = onFrames(0, true); t.setPointerCapture(e.pointerId); t.classList.add('dragging'); });
+  t.addEventListener('pointermove', e => { if (x0 !== null) onFrames(Math.round((e.clientX - x0) / 9), false, base); });
+  const end = () => { x0 = null; t.classList.remove('dragging'); };
+  t.addEventListener('pointerup', end); t.addEventListener('pointercancel', end);
+}
+TILES.forEach(t => draggable(t, (d, start, base) => {
+  if (start) return drag.get(t) || 0;
+  drag.set(t, base - d); turnUpdate(); }));
+
+document.getElementById('copy').addEventListener('click', () => {
+  const note = document.getElementById('copy-note'), text = document.getElementById('addr').textContent;
+  const done = () => { note.textContent = 'Copied.'; };
+  const pickText = () => { const r = document.createRange(); r.selectNodeContents(document.getElementById('addr'));
+    const s = getSelection(); s.removeAllRanges(); s.addRange(r); note.textContent = 'Selected.'; };
+  try { navigator.clipboard.writeText(text).then(done, pickText); } catch (e) { pickText(); }
+});
+
+// the press page's paragraphs, copied as text
+document.querySelectorAll('.copy-text').forEach(b => b.addEventListener('click', () => {
+  const t = document.getElementById(b.dataset.copy).textContent, note = b.closest('section').querySelector('.copied');
+  try { navigator.clipboard.writeText(t).then(() => { note.textContent = 'Copied.'; }, () => { note.textContent = 'Select the text to copy it.'; }); }
+  catch (e) { note.textContent = 'Select the text to copy it.'; }
+}));
+// the waitlist (when switched on): sent in the background where the provider allows it, else posted as a form
+const wl = document.getElementById('waitlist');
+if (wl) wl.addEventListener('submit', e => {
+  const st = document.getElementById('wl-status'), em = wl.querySelector('input[type=email]');
+  if (!em.value || !em.checkValidity()) { e.preventDefault(); st.textContent = 'That address doesn’t look right.'; em.focus(); return; }
+  if (wl.website.value || !wl.action) { e.preventDefault(); st.textContent = 'Thank you.'; return; }
+  e.preventDefault(); st.textContent = 'Sending…';
+  fetch(wl.action, { method: 'POST', body: new FormData(wl), mode: 'no-cors' })
+    .then(() => { wl.reset(); st.textContent = 'You’re on the list. We’ll write when there’s something to say.'; },
+          () => { st.textContent = 'That didn’t go through. Try again in a moment.'; });
+});
+
+
+// keys, or the strip of thumbnails), in the color picked; Tropos's open on the photograph in its element
+const SPEAKER_VIEWS = [           
+  ['habitat', 'Out', c => c.hab_alt || `${c.name}, out`, c => c.hab_cap || `${c.name}. ${c.line}`],
+  ['off', 'Front', c => `The 15-inch woofer, the two ports, and the lining showing through the walls.`],
+  ['spin', 'Turn it', c => `${c.name} in the studio; drag across it to turn it.`, c => `In the studio. Drag across it to turn it; every frame is a render.`],
+  ['studio-light', 'In the studio', c => `${c.name} in the studio, on a pale ground.`],
+  ['studio', 'In the studio', c => `${c.name} in the studio, the light coming through its acrylic.`],
+  ['back', 'From behind', c => `From behind: the name cut into the back and filled with color, grips in the sides, the amplifier below.`],
+  ['amp', 'The amplifier', c => `The built-in amplifier, from behind.`],
+  ['horn-side', 'Horn, side', c => `The horn in profile: the flare, the driver's pod, four slim posts.`],
+  ['horn-back', 'Horn, behind', c => `The horn from behind: its compression driver, on four black posts.`],
+  ['inside', 'Inside', c => `Inside, a corner cut away: the woofer's motor, the batts in their voile sleeves, a port.`],
+  ['reel', 'At night', c => `${c.name} at night, before a concrete wall.`],
+  ['turn', 'Turning', c => `${c.name}'s horn, all the way around.`],
+];
+const LAMP_VIEWS = {
+  dome: [['hero', 'Lit', (c, s) => s ? `Hemisphere lit, shown in ${BY[s].name}; its ${c.name} shade is cast in the same way.` : `Hemisphere lit, its ${c.name} shade glowing beneath a black hub.`,
+          (c, s) => s ? `Shown lit in ${BY[s].name}; the ${c.name} shade is cast the same way.` : `Lit, in ${c.name}.`],
+         ['row', 'All eight', () => 'Eight Hemispheres hung in a row, lit, one in each color.'],
+         ['unlit', 'Off', () => 'Hemisphere and Core, switched off.']],
+  orb: [['hero', 'Lit', (c, s) => s ? `Core lit, shown in ${BY[s].name}; its ${c.name} ball is cast in the same way.` : `Core lit in ${c.name}, sitting low in its black acrylic base.`,
+         (c, s) => s ? `Shown lit in ${BY[s].name}; the ${c.name} shade is cast the same way.` : `Lit, in ${c.name}.`],
+        ['row', 'All eight', () => 'Eight Core lamps in a row, lit, in spectrum order.'],
+        ['unlit', 'Off', () => 'Hemisphere and Core, switched off.']],
+};
+const TT_VIEWS = [['studio', 'In the studio', c => c.k === 'red' ? `${D.tt.name} in Ember.` : `${D.tt.name}, shown in Ember. ${c.name} to follow.`],
+                  ['closed', 'Lid down', c => `${D.tt.name} in ${c.name}, its lid down.`],
+                  
+                  ['open', 'Cover open', () => 'Its cover open.'], ['detail', 'Arm and platter', () => 'The arm and the platter.'],
+                  ['pod', 'The motor apart', () => 'The motor, fixed under the plinth.']];
+// the campaign slots (CAMPAIGN in web.py): each one's view placed in its product's list, after the view it names
+for (const c of D.campaign || []) {
+  const list = c.product === 'speaker' ? SPEAKER_VIEWS : LAMP_VIEWS[c.product]; if (!list) continue;
+  const row = [c.view, c.label, x => c.alt.replace('{name}', x.name), x => c.caption.replace('{name}', x.name)];
+  const at = c.after ? list.findIndex(v => v[0] === c.after) + 1 : 0; list.splice(at > 0 || !c.after ? at : list.length, 0, row);
+}
+const PRODUCTS = [
+  { id: 'speaker', line: 'speakers', lineName: 'Tropos', route: 'speaker', kind: 'Horn loudspeaker', name: c => c.name,
+    num: c => `Tropos ${c.num}`, copy: c => c.line, views: k => BY[k].views, VIEWS: SPEAKER_VIEWS,
+    card: k => { const o = BY[k].views.off; return o.tall || o.card || o; }, unit: 'Each pair is made to order.', ask: 'Ask about a pair',
+    facts: c => [['Acrylic', c.tint], ['Cabinet', 'Cast acrylic, 20 mm, tinted through; lined in white'], ['Horn', 'Thermoformed cast acrylic, 10 mm, in the cabinet&rsquo;s color; polished'],
+      ['Drivers', '15-inch woofer; 2-inch compression driver on the horn'],
+      ['Amplifier', 'Hypex FA122, built in: about 75 W into the woofer, crossed at 1 kHz'], ['Bass', 'To about 51 Hz (&minus;3 dB) before the room; to be measured on the first pair'],
+      ['Inputs', 'XLR, RCA, AES, S/PDIF coaxial and optical'], ['Size', '1295 high, 560 wide, 428 deep (mm)'], ['Weight', 'About 73 kg (modeled)'], ['Care', D.care]],
+    title: c => `Tropos in ${c.name}` },
+  ...Object.entries(D.lamps).map(([id, L]) => ({ id, line: 'lighting', lineName: 'Lighting', route: L.route || id, kind: L.kind, name: () => L.name,
+    num: () => `Lighting &middot; ${L.kind}`, copy: () => L.line, views: k => (L.colours[k] || {}).views, VIEWS: LAMP_VIEWS[id],
+    card: k => L.colours[k].card, unit: 'Each is made to order.', ask: 'Ask about it', facts: c => [...L.facts, ['Color', c.name]],
+    title: c => `${L.name} in ${c.name}` })),
+  ...(D.tt ? [{ id: 'turntable', line: 'turntable', lineName: 'Mantle', route: D.tt.route || 'turntable', kind: 'Turntable', name: () => D.tt.name,
+    num: () => 'Mantle', copy: () => D.tt.line, views: k => (D.tt.colours[k] || {}).views, VIEWS: TT_VIEWS,
+    card: k => D.tt.colours[k].card, unit: 'Each is made to order.', ask: 'Ask about it', facts: c => [...D.tt.facts, ['Color', c.name]],
+    title: c => `${D.tt.name} in ${c.name}` }] : []),
+];
+const PBY = Object.fromEntries(PRODUCTS.map(p => [p.route, p]));
+const icons = c => `<img class="ic only-light" src="img/icon-${c.icon}-light.webp" alt="" width="256" height="256">`;
+const stage = document.getElementById('stage'), thumbs = document.getElementById('thumbs'), phone = matchMedia('(max-width: 700px)');
+let P = PRODUCTS[0], cur = null, view = 'habitat', turnFrame = 0, autoTurn = null;
+const vw = () => P.views(cur) || {};
+function src(c, v) { return vw()[v]; }
+const say = (c, v) => P.VIEWS.find(x => x[0] === v)[2](c, (vw()[v] || {}).shown);
+const tell = (c, v) => { const x = P.VIEWS.find(x => x[0] === v); return (x[3] || x[2])(c, (vw()[v] || {}).shown); };   // the caption
+const shown = c => P.VIEWS.map(x => x[0]).filter(v => vw()[v] && !(v === 'studio' && vw()['studio-light']));   // the bright studio won
+// the stage's ground for a picture: its sides' colors when it is narrower than the stage, its top's and bottom's when wider
+// (a close-up has a blurred copy of itself instead, and one cut off at the foot sits on the stage's foot under its top's color)
+function ground(v) {
+  const s = src(BY[cur], v);
+  if (!s || !s.bg || s.edge === 'busy' || s.fill) return '';
+  const c = s.bg.match(/.{6}/g).map(h => '#' + h), stops = cs => cs.map((x, i) => `${x} ${10 + 20 * i}%`).join(', ');
+  if (v === 'habitat') return c[10];
+  return s.w / s.h <= stage.clientWidth / Math.max(1, stage.clientHeight)
+    ? `linear-gradient(${stops(c.slice(0, 5))}) left / 51% 100% no-repeat, linear-gradient(${stops(c.slice(5, 10))}) right / 51% 100% no-repeat`
+    : s.edge === 'cut' ? c[10] : `linear-gradient(${c[10]} 50%, ${c[11]} 50%)`;
+}
+new ResizeObserver(() => { if (cur) stage.style.background = ground(view); }).observe(stage);
+function showView(v, focus) {
+  const c = BY[cur], list = shown(c), i = list.indexOf(v); view = v;
+  const s = src(c, v), ar = (s.w / s.h).toFixed(4);
+  cancelAnimationFrame(autoTurn);
+  let pic;
+  if (v === 'turn') {
+    pic = el('div', { class: 'fit spin still' + (s.edge === 'cut' ? ' cut' : ''), role: 'img', 'aria-label': `${c.name}'s horn, all the way around`, style: `background-image:url(${s.still});--ar:${ar}` });
+    turnFrame = REST;
+    const sheet = new Image(); sheet.src = s.src;           // frame 0 until the sprite is decoded; then one turn (none under reduced motion)
+    sheet.decode().catch(() => {}).then(() => { if (!pic.isConnected) return;
+      pic.style.backgroundImage = `url(${s.src})`; pic.style.backgroundPosition = frameAt(REST); pic.classList.remove('still');
+      draggable(pic, (d, start, base) => { if (start) { cancelAnimationFrame(autoTurn); return turnFrame; } turnFrame = ((base - d) % N + N) % N; pic.style.backgroundPosition = frameAt(turnFrame); });
+      if (!reduce) { const t0 = performance.now(); (function f(now) { const p = Math.min(1, (now - t0) / 2600); turnFrame = (REST + Math.round(p * N)) % N;
+        pic.style.backgroundPosition = frameAt(turnFrame); if (p < 1 && pic.isConnected) autoTurn = requestAnimationFrame(f); })(t0); } });
+  } else if (v === 'spin') {        
+    const fr = i => `${s.base}${String(i).padStart(2, '0')}.webp`, home = s.home ?? 0;
+    pic = el('img', { class: 'fit spinner' + (s.edge === 'cut' ? ' cut' : ''), src: s.src, width: s.w, height: s.h, alt: say(c, v), draggable: 'false', style: `--ar:${ar}` });
+    const frames = Array.from({ length: s.n }, (_, i) => { const im = new Image(); im.decoding = 'async'; im.src = fr(i); return im; });
+    let at = home; const show = i => { at = Math.max(0, Math.min(s.n - 1, Math.round(i))); pic.src = frames[at].src; };
+    // the whole arc across about half the stage; a drag to the right turns its face to the right
+    draggable(pic, (d, start, base) => { if (start) { cancelAnimationFrame(autoTurn); return at; }
+      show(base - d * 9 * (s.n - 1) / Math.max(240, stage.clientWidth * 0.5)); });
+    if (!reduce) Promise.all(frames.map(f => f.decode().catch(() => {}))).then(() => { if (!pic.isConnected) return;
+      const t0 = performance.now(); (function f(now) { const p = Math.min(1, (now - t0) / 3200);   // a sway: left, right, home
+        const k = Math.sin(2 * Math.PI * p); show(home + (k > 0 ? (s.n - 1 - home) : home) * k);
+        if (p < 1 && pic.isConnected) autoTurn = requestAnimationFrame(f); })(t0); });
+  } else if (v === 'habitat' || s.fill) {
+    pic = el('picture', { class: 'fill' }, (s.tall ? `<source media="(max-width: 700px)" srcset="${s.tall.src}" width="${s.tall.w}" height="${s.tall.h}">` : '')
+      + `<img src="${s.src}" width="${s.w}" height="${s.h}" alt="" draggable="false">`);
+    pic.querySelector('img').alt = say(c, v);
+  } else {
+    pic = el('img', { class: 'fit' + (s.edge === 'cut' ? ' cut' : ''), src: s.src, width: s.w, height: s.h, alt: say(c, v), draggable: 'false', style: `--ar:${ar}` });
+  }
+  if (!reduce) pic.classList.add('in');
+  stage.replaceChildren(pic);
+  if (s.edge === 'busy' && v !== 'habitat') stage.prepend(el('div', { class: 'blur', 'aria-hidden': 'true', style: `background-image:url(${s.src})` }));
+  if (v === 'inside' && s.shared && cur !== 'green') stage.appendChild(el('span', { class: 'tag' }, 'Shown in Poison'));
+  if (s.tag) stage.appendChild(el('span', { class: 'tag' }, s.tag));
+  if (s.shown) stage.appendChild(el('span', { class: 'tag' }, `Shown in ${BY[s.shown].name}`));
+  stage.style.background = P.id === 'speaker' ? ground(v) : 'transparent'; if (P.id === 'turntable') stage.style.setProperty('aspect-ratio', '3 / 2', 'important'); else stage.style.removeProperty('aspect-ratio');
+  document.getElementById('cap').textContent = tell(c, v);
+  document.getElementById('g-count').textContent = list.length > 1 ? `${i + 1} / ${list.length} · Render` : 'Render'; thumbs.hidden = list.length < 2;   // labelled on the picture itself
+  thumbs.querySelectorAll('button').forEach(b => { const sel = b.dataset.v === v; b.setAttribute('aria-selected', String(sel)); b.tabIndex = sel ? 0 : -1;
+    if (!sel) return;
+    stage.setAttribute('aria-labelledby', b.id);
+    thumbs.scrollTo({ left: b.offsetLeft - (thumbs.clientWidth - b.offsetWidth) / 2, behavior: reduce ? 'auto' : 'smooth' });
+    if (focus) b.focus({ preventScroll: true }); });
+  afterLoad(() => { for (const n of [list[(i + 1) % list.length], list[(i + list.length - 1) % list.length]]) {   // the neighbors load
+    const t = src(c, n); if (t && n !== 'turn' && n !== 'spin') new Image().src = (phone.matches && t.tall ? t.tall : t).src; } });   // once the page has
+}
+function go(d, focus) { const list = shown(BY[cur]); showView(list[(list.indexOf(view) + d + list.length) % list.length], focus); }
+const MORE = {
+  speaker: 'More on the speaker: <a href="#spec">the particulars</a>.',
+  dome: 'Also in Lighting: <a href="#core-ember">Core</a>, a table lamp in the same eight.',
+  orb: 'Also in Lighting: <a href="#hemisphere-ember">Hemisphere</a>, a pendant in the same eight.',
+  turntable: 'Pair it with <a href="#speakers">Tropos</a>.',
+};
+function renderProduct(Pr, k) {
+  const c = BY[k]; P = Pr; cur = k;
+  document.title = `${P.title(c)} · EARF`;
+  const ll = document.getElementById('p-line-link'); ll.textContent = P.lineName; ll.href = `#${P.line}`;
+  document.getElementById('p-crumb').textContent = P.id === 'speaker' || P.id === 'turntable' ? c.name : P.title(c);
+  document.getElementById('p-num').innerHTML = `${P.num(c)} &middot; In development`;   // the plain word on every product, once
+  document.getElementById('p-name').textContent = P.name(c);
+  document.getElementById('p-line').textContent = P.copy(c);
+  document.getElementById('p-pick').textContent = c.name;
+  document.getElementById('p-icon').innerHTML = P.id === 'speaker' ? icons(c) : '';         // the color's own icon: by the
+  document.getElementById('p-pick-ic').innerHTML = P.id === 'speaker' ? '' : icons(c);     // name it is, else by the color
+  document.getElementById('p-unit').innerHTML = P.unit;
+  document.getElementById('p-enquire').textContent = P.ask;
+  document.getElementById('facts').innerHTML = P.facts(c).map(([a, b]) => `<dt>${a}</dt><dd>${b}</dd>`).join('');
+  document.getElementById('swatches').replaceChildren(...D.clouds.filter(o => P.views(o.k)).map(o => { const li = el('li');
+    li.appendChild(el('a', { href: `#${P.route}-${o.name.toLowerCase()}`, title: o.name, 'aria-label': o.name, ...(o.k === k ? { 'aria-current': 'true' } : {}) },
+      `<span class="coin-dot" style="--i:${o.coin}"></span>`)); return li; }));
+  thumbs.replaceChildren(...shown(c).map((v, i) => { const s = src(c, v), label = P.VIEWS.find(x => x[0] === v)[1];
+    const b = el('button', { type: 'button', role: 'tab', id: `thumb-${i}`, 'data-v': v, 'aria-label': label, 'aria-controls': 'stage',
+      class: 'thumb' + (v === 'turn' ? ' turn' : ''), style: s.th ? `background:url(${s.th}) center / cover no-repeat`
+        : `background:url(${s.src}) ${v === 'turn' ? '0 0 / 600% 400%' : 'center / cover'} no-repeat` });
+    b.addEventListener('click', () => showView(v)); return b; }));
+  { const g = document.querySelector('#pdp .gallery'), n = shown(c).length; g.hidden = !n; document.querySelector('#pdp .pdp').classList.toggle('no-pic', !n); if (n) showView(shown(c)[0]); }                              // Tropos opens on its photograph in its element, the rest on their hero
+  /* the pairings wait for pictures in the colors */
+  document.getElementById('p-more').innerHTML = MORE[P.id] || '';
+  v3sync();
+}
+// "Copy link": the product's own page for link previews (/s/<address>, its card in its color), which forwards here
+document.getElementById('p-share').addEventListener('click', () => {
+  const url = location.hash ? `${location.origin}/s/${location.hash.slice(1)}` : location.href, note = document.getElementById('p-share-note');
+  const say = t => { note.textContent = t; setTimeout(() => { note.textContent = ''; }, 2400); };
+  try { navigator.clipboard.writeText(url).then(() => say('Link copied.'), () => say(url)); } catch (e) { say(url); }
+});
+function v3sync() {}
+function v3close() {}
+document.getElementById('g-prev').addEventListener('click', () => go(-1));
+document.getElementById('g-next').addEventListener('click', () => go(1));
+const keys = (e, focus) => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); go(e.key === 'ArrowRight' ? 1 : -1, focus); }
+  else if (e.key === 'Home' || e.key === 'End') { e.preventDefault(); const l = shown(BY[cur]); showView(l[e.key === 'Home' ? 0 : l.length - 1], focus); }
+};
+thumbs.addEventListener('keydown', e => keys(e, true));
+stage.addEventListener('keydown', e => keys(e, false));
+// a swipe across the stage turns the page; on the turning horn a drag spins it instead
+let sx = null, sy = 0;
+stage.addEventListener('pointerdown', e => { if (view !== 'turn' && view !== 'spin' && e.isPrimary) { sx = e.clientX; sy = e.clientY; } });
+stage.addEventListener('pointerup', e => { if (sx === null) return; const dx = e.clientX - sx, dy = e.clientY - sy; sx = null;
+  if (Math.abs(dx) > 40 && Math.abs(dx) > 1.2 * Math.abs(dy)) go(dx < 0 ? 1 : -1); });
+stage.addEventListener('pointercancel', () => { sx = null; });
+
+
+// complement opposite, its two neighbors, and itself in every line. Fog and Smoke have no hue: each is the other's
+// complement, light against dark, and sits easiest beside the cool tints (Fog: Ice, Haze) or the deep ones (Smoke: Haze, Ember)
+const HUE6 = { red: 0, orange: 1, amber: 2, green: 3, blue: 4, violet: 5 }, AT6 = Object.fromEntries(Object.entries(HUE6).map(([k, h]) => [h, k]));
+function relations(k) {
+  const h = HUE6[k];
+  if (h === undefined) return { comp: [k === 'ice' ? 'black' : 'ice'], ana: k === 'ice' ? ['blue', 'violet'] : ['violet', 'red'], neutral: true };
+  return { comp: [AT6[(h + 3) % 6]], ana: [AT6[(h + 5) % 6], AT6[(h + 1) % 6]], neutral: false };
+}
+function pcard(Pr, k) {
+  const c = BY[k], im = Pr.card(k);
+  const a = el('a', { class: 'pcard', href: `#${Pr.route}-${c.name.toLowerCase()}` },
+    `<img data-src="${im.src}" width="${im.w}" height="${im.h}" alt="">` + (im.shown ? `<span class="tag">Shown in ${BY[im.shown].name}</span>` : im.tag ? `<span class="tag">${im.tag}</span>` : '') +
+    `<b>${Pr.id === 'speaker' ? `Tropos, ${c.name}` : Pr.name(c)}</b>` +
+    `<span class="pc-col"><span class="coin-dot" style="--i:${c.coin}"></span>${Pr.id === 'speaker' ? Pr.kind : `${Pr.kind} in ${c.name}`}</span>`);
+  a.querySelector('img').alt = im.alt || Pr.title(c); later(a.querySelector('img'));
+  return a;
+}
+// a row's cards for some colors: this product in each first, then the other lines' in each, as many as a row holds
+function picks(cols, pid, k, max = 4, others = false) {
+  const line = (PRODUCTS.find(x => x.id === pid) || {}).line;
+  const order = others ? PRODUCTS.filter(x => x.line !== line) : [...PRODUCTS.filter(x => x.id === pid), ...PRODUCTS.filter(x => x.id !== pid)], out = [];
+  for (const Pr of order) for (const c of cols) if (!(Pr.id === pid && c === k) && Pr.views(c)) out.push([Pr, c]);
+  return out.slice(0, max);
+}
+function block(id, title, note, cards) {
+  if (!cards.length) return null;
+  const sec = el('section', { class: 'company', 'aria-labelledby': id });
+  sec.appendChild(el('div', { class: 'goes-head' }, `<h2 id="${id}">${title}</h2><span>${note}</span>`));
+  const g = el('div', { class: 'pgrid' }); cards.forEach(([Pr, c]) => g.appendChild(pcard(Pr, c))); sec.appendChild(g);
+  return sec;
+}
+
+const PAIR = { 'green|red': 'Red and green, minus the Christmas.', 'blue|orange': 'Orange and blue: each looks hotter, or colder, for the other.',
+               'amber|violet': 'Yellow and violet: the sun, and the dusk it leaves.', 'black|ice': 'Clear and smoked: the same acrylic, light and dark.' };
+function company(box, k, pid, mono) {
+  const c = BY[k], r = relations(k), names = cs => cs.map(x => BY[x].name).join(' and '), pair = PAIR[[k, r.comp[0]].sort().join('|')] || '';
+  const out = [
+    block(`${box.id}-comp`, 'Complementary', r.neutral
+      ? `${c.name} has no hue of its own, so it pairs by lightness with ${names(r.comp)}. ${pair}`
+      : `${names(r.comp)}, opposite on the color wheel. ${pair}`, picks(r.comp, pid, k, 4, mono)),
+    block(`${box.id}-ana`, 'Analogous', r.neutral
+      ? `${names(r.ana)}, the tints it sits easiest beside.`
+      : `${names(r.ana)}, either side of it on the wheel.`, picks(r.ana, pid, k, 4, mono))];
+  if (mono) out.unshift(block(`${box.id}-mono`, 'Monochromatic', `${c.name} in the other lines.`, picks([k], pid, k, 4, true)));
+  box.replaceChildren(...out.filter(Boolean));
+}
+// a color's page: everything made in it, then its complement and its neighbors
+function renderColour(k) {
+  const c = BY[k];
+  document.title = `${c.name} · EARF`;
+  document.getElementById('c-crumb').textContent = c.name;
+  document.getElementById('c-num').textContent = `Color ${+c.num} of 8`;
+  document.getElementById('c-name').textContent = c.name;
+  document.getElementById('c-line').textContent = c.line;
+  { const f = document.getElementById('c-hab'); f.hidden = !c.hab; if (c.hab) { const im = f.querySelector('img'); im.src = c.hab; im.alt = c.hab_alt; document.getElementById('c-hab-cap').textContent = c.hab_cap; } }
+  document.getElementById('c-coin').innerHTML = `<span class="coin-dot" style="--i:${c.coin}"></span>`;
+  document.getElementById('c-swatches').replaceChildren(...D.clouds.map(o => { const li = el('li');
+    li.appendChild(el('a', { href: `#color-${o.name.toLowerCase()}`, title: o.name, 'aria-label': o.name, ...(o.k === k ? { 'aria-current': 'true' } : {}) },
+      `<span class="coin-dot" style="--i:${o.coin}"></span>`)); return li; }));
+  document.getElementById('c-in').textContent = '';
+  document.getElementById('c-in-note').textContent = '';
+  { const low = c.name.toLowerCase(), b = el('div', { class: 'c-tropos' },
+    `<a class="ph" href="#speaker-${low}"><img src="img/rc/${k}-tall.webp" width="1000" height="1250" alt="Tropos in ${c.name}"></a>` +
+    `<div><h3><a href="#speaker-${low}">Tropos in ${c.name}</a></h3><a class="more" href="#speaker-${low}">See the speaker</a></div>`);
+  document.getElementById('c-products').replaceChildren(b); }
+  /* the pairings wait for pictures */
+}
+
+// the address: the home page and its sections; a line (#speakers, #lighting, #turntable, the speakers' band
+// #tropos, and the old #atmosphere, #turn, #spec and #lamps on theirs); a color (#color-poison); or a product
+
+// #orb- and #turntable- addresses are rewritten to them)
+const OLD = { dome: 'hemisphere', orb: 'core', turntable: 'mantle' };
+const home = document.getElementById('home'), pdp = document.getElementById('pdp');
+const lineMain = document.getElementById('line'), colourMain = document.getElementById('color'), MAINS = { home, line: lineMain, color: colourMain, pdp };
+['press', 'journal', 'privacy', ...[]].forEach(n => { const m = document.getElementById(n); if (m) MAINS[n] = m; });
+const DARK_TITLE = {};
+const LINE_OF = { speakers: 'speakers', tropos: 'speakers', atmosphere: 'speakers', turn: 'speakers', spec: 'speakers', closer: 'speakers',
+                  lighting: 'lighting', lamps: 'lighting', turntable: 'turntable', record: 'turntable' };
+const LINE_NAME = { speakers: 'Tropos', lighting: 'Lighting', turntable: 'Mantle' };
+const TITLE0 = 'EARF · A world of sound, in color.';
+let last = null;
+const showMain = name => { Object.entries(MAINS).forEach(([n, m]) => { m.hidden = n !== name; }); if (name !== 'pdp' && typeof v3close === 'function') v3close(); };
+// the phones' Menu: opens and closes the pages' list; any page chosen, Escape, or a new address closes it
+const navEl = document.getElementById('nav'), menuBtn = navEl.querySelector('.menu');
+const menuOpen = o => { navEl.classList.toggle('open', o); menuBtn.setAttribute('aria-expanded', String(o)); };
+menuBtn.addEventListener('click', () => menuOpen(!navEl.classList.contains('open')));
+navEl.querySelectorAll('ul a').forEach(a => a.addEventListener('click', () => menuOpen(false)));
+addEventListener('hashchange', () => menuOpen(false));
+addEventListener('keydown', e => { if (e.key === 'Escape' && navEl.classList.contains('open')) { menuOpen(false); menuBtn.focus(); } });
+const navAt = which => document.querySelectorAll('nav a[data-nav]').forEach(a => {
+  if (a.dataset.nav === which) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+function route() {
+  let h = location.hash.slice(1);
+  let m, page;
+  const uk = /^(colour|colours|journal-eight-colours)(-[a-z]+)?$/.exec(h);   // the British addresses (before 2026-10-31) still answer
+  if (uk) { h = h.replace(/^colours?/, x => x === 'colours' ? 'colors' : 'color').replace('eight-colours', 'eight-colors'); history.replaceState(null, '', '#' + h); }
+  const o = /^(dome|orb|turntable)-([a-z]+)$/.exec(h);
+  if (o && PBY[OLD[o[1]]]) { h = `${OLD[o[1]]}-${o[2]}`; history.replaceState(null, '', '#' + h); }
+  if ((m = /^(speaker|hemisphere|core|mantle)-([a-z]+)$/.exec(h)) && PBY[m[1]] && keyOf(m[2]) && PBY[m[1]].views(keyOf(m[2]))) {
+    page = h; showMain('pdp'); renderProduct(PBY[m[1]], keyOf(m[2]));
+    if (!(last || '').startsWith(m[1] + '-')) scrollTo(0, 0);
+    navAt(PBY[m[1]].line);
+  } else if ((m = /^color-([a-z]+)$/.exec(h)) && keyOf(m[1])) {
+    page = h; showMain('color'); renderColour(keyOf(m[1])); scrollTo(0, 0); navAt('colors');
+  } else if (DARK_TITLE[h] && MAINS[h]) {                 // a page built dark, once its flag is on
+    page = h; showMain(h); document.title = `${DARK_TITLE[h]} · EARF`; scrollTo(0, 0); navAt(null);
+  } else if (MAINS.press && h === 'press' || MAINS.privacy && h === 'privacy') {     
+    page = h; showMain(h); document.title = `${h === 'press' ? 'Press' : 'Privacy'} · EARF`; scrollTo(0, 0); navAt(null);
+  } else if (MAINS.journal && (m = /^journal(?:-([a-z0-9-]+))?$/.exec(h)) && (!m[1] || document.getElementById(h))) {   // the journal and its posts
+    page = h; showMain('journal');
+    document.getElementById('journal-index').hidden = !!m[1];
+    MAINS.journal.querySelectorAll('.post').forEach(a => { a.hidden = a.id !== h; });
+    document.title = m[1] ? `${document.getElementById(h).dataset.title} · EARF` : 'Journal · EARF';
+    scrollTo(0, 0); navAt('journal');
+  } else if (LINE_OF[h] || /^(turntable|mantle)-/.test(h)) {         // Mantle's own addresses, before its page exists
+    const L = LINE_OF[h] || 'turntable'; page = 'line-' + L; showMain('line');
+    lineMain.querySelectorAll('.lineview').forEach(v => { v.hidden = v.dataset.line !== L; });
+    document.title = `${LINE_NAME[L]} · EARF`;
+    const target = document.getElementById(h);
+    if (target && !LINE_NAME[h] && !/^(turntable|mantle)-/.test(h)) target.scrollIntoView(); else scrollTo(0, 0);
+    navAt(L); ask();
+  } else {
+    page = 'home'; showMain('home'); document.title = h === 'contact' ? 'Contact · EARF' : TITLE0; heroIn();
+    const target = h && document.getElementById(h);
+    if (target && h !== 'top') target.scrollIntoView(); else if (last !== 'home' || h === 'top') scrollTo(0, 0);
+    navAt(h === 'colors' ? 'colors' : h === 'contact' ? 'contact' : null); ask();
+  }
+  last = page;
+}
+addEventListener('hashchange', route);
+
+// the opening: the acrylic globe turns large in the middle of its ground until the hero's photograph is decoded (at
+// least 0.9 s, so it is seen, and never more than 4.5 s), then flies and shrinks onto the header's globe while the
+// ground, a circle centered on it, closes in behind it; the photograph fades up beneath as it goes, and the header's
+// globe takes over at the film's angle, the flyer fading off it (briefly by day, the same render; longer by night, when
+// the glowing night globe gives way to the day's)
+function opening() {
+  const root = document.documentElement, splash = document.querySelector('.splash'), flyer = document.querySelector('.flyer');
+  const film = flyer && flyer.querySelector('video'), hero = document.querySelector('.hero-photo img');
+  const target = document.querySelector('header.top .brand .globe'), night = root.classList.contains('night');
+  let finished = false, landed = false;
+  const done = () => { if (finished) return; finished = true;
+    if (film && film.currentTime) setTurn(film.currentTime);
+    if (splash) splash.remove(); if (flyer) flyer.remove();
+    if (night) { const tc = document.querySelector('meta[name="theme-color"]'); if (tc) tc.content = '#F4F1EC'; }
+    root.classList.remove('intro', 'night'); if (target) target.style.visibility = '';
+    requestAnimationFrame(() => root.classList.remove('opening')); };
+  const land = () => { if (finished || landed) return; landed = true;   // the ground is behind the globe now, all of it
+    if (film && film.currentTime) setTurn(film.currentTime);
+    target.style.visibility = 'visible'; splash.remove();
+    flyer.animate([{ opacity: 1 }, { opacity: 0 }], { duration: night ? 300 : 120, easing: 'ease-out', fill: 'forwards' }).finished.then(done, done); };
+  if (!root.classList.contains('intro') || !splash || !flyer || !target || !hero || reduce) { done(); return; }
+  if (film && film.play) film.play().catch(() => {});
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  const ready = (hero.decode ? hero.decode() : Promise.resolve()).catch(() => {});
+  Promise.race([Promise.all([ready, wait(900)]), wait(4500)]).then(() => {
+    if (finished) return;
+    const a = flyer.getBoundingClientRect(), b = target.getBoundingClientRect();
+    const ax = a.left + a.width / 2, ay = a.top + a.height / 2, bx = b.left + b.width / 2, by = b.top + b.height / 2;
+    const R = Math.hypot(Math.max(ax, innerWidth - ax), Math.max(ay, innerHeight - ay)) + 2, T = 1000;
+    const easing = 'cubic-bezier(.7, 0, .2, 1)';
+    root.classList.remove('opening');                                 // the photograph fades up as the ground goes
+    if (!flyer.animate || !b.width) { done(); return; }
+    flyer.animate([{ transform: 'none' }, { transform: `translate(${bx - ax}px, ${by - ay}px) scale(${b.width / a.width})` }],
+      { duration: T, easing, fill: 'forwards' });
+    splash.animate([{ clipPath: `circle(${R}px at ${ax}px ${ay}px)` }, { clipPath: `circle(${b.width / 2}px at ${bx}px ${by}px)` }],
+      { duration: T, easing, fill: 'forwards' }).finished.then(land, done);
+    setTimeout(done, T + 800);                                        // in case an animation never reports
+  });
+  setTimeout(done, 7000);                                             // never longer than this
+}
+
+// the cursor, on a mouse: a dot exactly where the pointer is, in the color of the text beneath it, and a ring that follows
+// a beat behind; over anything to press the ring opens, tinted with the speaker it leads to, and over a horn that turns
+// it shows which way it goes
+if (matchMedia('(pointer: fine)').matches && !reduce) {
+  const root = document.documentElement, dot = el('div', { class: 'cur cur-dot', 'aria-hidden': 'true' }), ring = el('div', { class: 'cur cur-ring', 'aria-hidden': 'true' });
+  document.body.append(dot, ring);
+  let x = -99, y = -99, rx = -99, ry = -99, sc = 1, scTo = 1, last = performance.now(), under = null;
+  const speakerOf = a => { const k = a && (a.dataset.k || keyOf((/#(?:speaker|dome|orb|turntable|colou?r)-([a-z]+)/.exec(a.getAttribute('href') || '') || [])[1])); return k && BY[k] ? BY[k].col : null; };
+  addEventListener('pointermove', e => {
+    if (e.pointerType && e.pointerType !== 'mouse') return;
+    x = e.clientX; y = e.clientY; root.classList.add('cursor');
+    if (e.target === under || !e.target.closest) return;
+    under = e.target;
+    const ink = getComputedStyle(under).color, hit = under.closest('a, button, [role="tab"], .spin, #stage, summary, label');
+    root.style.setProperty('--cur', ink);
+    ring.style.setProperty('--tint', speakerOf(hit && (hit.closest('[data-k]') || hit)) || ink);
+    ring.classList.toggle('on', !!hit);
+    ring.classList.toggle('drag', !!(under.closest('.spin') || (under.closest('#stage') && view === 'turn')));
+  }, { passive: true });
+  addEventListener('pointerdown', () => { scTo = 0.84; }); addEventListener('pointerup', () => { scTo = 1; });
+  root.addEventListener('pointerleave', () => root.classList.remove('cursor'));
+  addEventListener('blur', () => root.classList.remove('cursor'));
+  (function tick(now) {
+    const dt = Math.min(0.05, Math.max(0.001, (now - last) / 1000)); last = now;
+    const f = 1 - Math.exp(-dt * 18); rx += (x - rx) * f; ry += (y - ry) * f; sc += (scTo - sc) * (1 - Math.exp(-dt * 26));
+    dot.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+    ring.style.transform = `translate3d(${rx.toFixed(1)}px, ${ry.toFixed(1)}px, 0) scale(${sc.toFixed(3)})`;
+    requestAnimationFrame(tick);
+  })(last);
+}
+
+route();
+turnUpdate();
+opening();
+</script>
+
+<noscript><style>.light-run { display: none } .light-list { display: grid !important }</style></noscript>
+<script>
+
+(() => { const f = document.querySelector('.sound-turn'); if (!f || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const src = f.dataset.frames.split(','), img = f.querySelector('img'); let i = 2, d = 1, t = 0;
+  src.forEach(s => { const x = new Image(); x.decoding = 'async'; f._pre = (f._pre || []).concat(x); x.dataset.s = s; });
+  const step = () => { i += d; if (i >= src.length - 1 || i <= 0) d = -d; img.src = src[i]; };
+  new IntersectionObserver(es => es.forEach(e => { clearInterval(t);
+    if (e.isIntersecting) { f._pre.forEach(x => { if (!x.src) x.src = x.dataset.s; }); t = setInterval(step, 420); } }), { threshold: 0.4 }).observe(f); })();
+</script>
+<script>
+
+(() => { const P = {"speakers": "/tropos", "lighting": "/lighting", "turntable": "/mantle", "contact": "/contact", "speaker-ember": "/tropos/ember", "color-ember": "/colors/ember", "speaker-dust": "/tropos/dust", "color-dust": "/colors/dust", "speaker-acid": "/tropos/acid", "color-acid": "/colors/acid", "speaker-poison": "/tropos/poison", "color-poison": "/colors/poison", "speaker-ice": "/tropos/ice", "color-ice": "/colors/ice", "speaker-haze": "/tropos/haze", "color-haze": "/colors/haze", "speaker-fog": "/tropos/fog", "color-fog": "/colors/fog", "speaker-smoke": "/tropos/smoke", "color-smoke": "/colors/smoke", "top": "/"}, R = Object.fromEntries(Object.entries(P).map(([h, p]) => [p, h]));
+  const clean = () => { const h = location.hash.slice(1); if (P[h] !== undefined) history.replaceState(null, '', P[h]); else if (h && location.pathname !== '/') history.replaceState(null, '', '/#' + h); };
+  const visit = (path, h, push) => { history[push ? 'pushState' : 'replaceState'](null, '', path + '#' + h); dispatchEvent(new HashChangeEvent('hashchange')); clean(); };
+  addEventListener('hashchange', () => setTimeout(clean, 60));
+  document.addEventListener('click', e => { const a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a || e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    const h = a.getAttribute('href').slice(1); e.preventDefault(); visit(P[h] !== undefined ? P[h] : '/', h, true); }, true);
+  // a fragment step fires popstate before its own hashchange: route it, and leave the address alone until that has run
+  addEventListener('popstate', () => { if (location.hash) { const u = location.href; dispatchEvent(new HashChangeEvent('hashchange'));
+      setTimeout(() => { if (location.href === u) clean(); }, 60); }
+    else visit(location.pathname, R[location.pathname.replace(/\/$/, '') || '/'] || '', false); });
+  clean(); })();
+</script>
+</body>
+</html>
