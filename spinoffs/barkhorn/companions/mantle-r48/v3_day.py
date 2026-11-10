@@ -411,7 +411,87 @@ def frosted(load, scat_mm, wpm):
           f'scattering length {scat_mm} mm; LED {length:.2f} m at {wpm} W/m = {P:.1f} W', flush=True)
 
 
+def uplit(wpm):
+    """PROPOSAL (the coordinator, 2026-11-10 15:05, the owner: "the LED should maybe be between the base and the top. It's
+    the top that should light up"): v3 as signed, two changes. 1. The plinth's underside satin, as its edges (slot 1);
+    the top stays glassy. 2. The signed LED loop moved from under the base to the base's top: a loop 20 mm in from the
+    base's edge, recessed flush in a black channel (7 wide, 5 deep) cut into the base, facing straight up across the
+    40 mm gap. Nothing in the gap but the posts; the channel's black walls keep the light out of the base's body.
+    wpm: watts a metre (0 by day)."""
+    import math
+    from mathutils import Vector
+    from bpy_extras.object_utils import world_to_camera_view
+    pl = bpy.data.objects['plinth-L1-stack']; M = pl.matrix_world
+    zb = min((M @ v.co).z for v in pl.data.vertices); n_sat = 0
+    for p in pl.data.polygons:
+        nw = (M.to_3x3() @ p.normal).normalized()
+        if nw.z < -0.9 and abs((M @ p.center).z - zb) < 0.0005:
+            p.material_index = 1; n_sat += 1
+    for o in bpy.data.objects:                       # the signed loop under the base: moved, so off here
+        if o.name == 'led-strip':
+            o.hide_render = True
+    base = bpy.data.objects['base-L1-stack']
+    bx0, bx1, by0, by1, bz1 = 0.045, 0.425, 0.045, 0.335, 0.0287; IN, W, DEP = 0.020, 0.007, 0.005
+    xa, xb, ya, yb = bx0 + IN, bx1 - IN, by0 + IN, by1 - IN
+    def box(name, x0, x1, y0, y1, z0, z1):
+        bpy.ops.mesh.primitive_cube_add(size=1.0, location=((x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2))
+        b = bpy.context.active_object; b.name = name; b.scale = (x1 - x0, y1 - y0, z1 - z0); bpy.ops.object.transform_apply(scale=True)
+        return b
+    ring = box('groove', xa - W / 2, xb + W / 2, ya - W / 2, yb + W / 2, bz1 - DEP, bz1 + 0.002)
+    inner = box('c', xa + W / 2, xb - W / 2, ya + W / 2, yb - W / 2, bz1 - DEP - 0.001, bz1 + 0.003)
+    m = ring.modifiers.new('b', 'BOOLEAN'); m.operation = 'DIFFERENCE'; m.object = inner; m.solver = 'EXACT'
+    bpy.context.view_layer.objects.active = ring; bpy.ops.object.modifier_apply(modifier=m.name); bpy.data.objects.remove(inner)
+    m = base.modifiers.new('b', 'BOOLEAN'); m.operation = 'DIFFERENCE'; m.object = ring; m.solver = 'EXACT'
+    bpy.context.view_layer.objects.active = base; bpy.ops.object.modifier_apply(modifier=m.name)
+    # the channel lining: the ring groove's walls and floor in black, a hair inside the groove
+    blk = bpy.data.materials.new('ul-channel'); blk.use_nodes = True; bb = blk.node_tree.nodes['Principled BSDF']
+    bb.inputs['Base Color'].default_value = (0.008, 0.008, 0.008, 1); bb.inputs['Roughness'].default_value = 0.6
+    ring.scale = (1, 1, 1)
+    lin_ = box('ul-channel', xa - W / 2 + 0.0002, xb + W / 2 - 0.0002, ya - W / 2 + 0.0002, yb + W / 2 - 0.0002, bz1 - DEP + 0.0002, bz1 - 0.0002)
+    c2 = box('c', xa + W / 2 - 0.0002, xb - W / 2 + 0.0002, ya + W / 2 - 0.0002, yb - W / 2 + 0.0002, bz1 - DEP - 0.001, bz1 + 0.003)
+    m = lin_.modifiers.new('b', 'BOOLEAN'); m.operation = 'DIFFERENCE'; m.object = c2; m.solver = 'EXACT'
+    bpy.context.view_layer.objects.active = lin_; bpy.ops.object.modifier_apply(modifier=m.name); bpy.data.objects.remove(c2)
+    c3 = box('c', xa - W / 2 + 0.0006, xb + W / 2 - 0.0006, ya - W / 2 + 0.0006, yb + W / 2 - 0.0006, bz1 - DEP + 0.0006, bz1 + 0.003)
+    c4 = box('c4', xa + W / 2 - 0.0006, xb - W / 2 + 0.0006, ya + W / 2 - 0.0006, yb - W / 2 + 0.0006, bz1 - DEP - 0.001, bz1 + 0.004)
+    m = c3.modifiers.new('b', 'BOOLEAN'); m.operation = 'DIFFERENCE'; m.object = c4; m.solver = 'EXACT'
+    bpy.context.view_layer.objects.active = c3; bpy.ops.object.modifier_apply(modifier=m.name); bpy.data.objects.remove(c4)
+    m = lin_.modifiers.new('b', 'BOOLEAN'); m.operation = 'DIFFERENCE'; m.object = c3; m.solver = 'EXACT'
+    bpy.context.view_layer.objects.active = lin_; bpy.ops.object.modifier_apply(modifier=m.name); bpy.data.objects.remove(c3)
+    lin_.data.materials.append(blk); bpy.data.objects.remove(ring)
+    # the LED face: 5 mm wide on the channel's floor, facing up
+    led = bpy.data.materials.new('strip'); led.use_nodes = True; lt = led.node_tree; lt.nodes.clear()
+    em = lt.nodes.new('ShaderNodeEmission'); em.inputs['Color'].default_value = (1.0, 0.55, 0.25, 1)
+    lo = lt.nodes.new('ShaderNodeOutputMaterial'); lt.links.new(em.outputs[0], lo.inputs['Surface'])
+    z = bz1 - DEP + 0.0008; faces = []; length = 0
+    for i, ((x0, y0), (x1, y1)) in enumerate((((xa, ya), (xb, ya)), ((xb, ya), (xb, yb)), ((xb, yb), (xa, yb)), ((xa, yb), (xa, ya)))):
+        L = math.hypot(x1 - x0, y1 - y0); length += L; h = abs(y1 - y0) < 1e-9
+        vs = [(x0, y0 - 0.0025, z), (x1, y1 - 0.0025, z), (x1, y1 + 0.0025, z), (x0, y0 + 0.0025, z)] if h else \
+             [(x0 - 0.0025, y0, z), (x0 + 0.0025, y0, z), (x1 + 0.0025, y1, z), (x1 - 0.0025, y1, z)]
+        me = bpy.data.meshes.new(f'led-strip-{i}'); me.from_pydata(vs, [], [(0, 1, 2, 3)]); me.update()
+        ob = bpy.data.objects.new(f'led-strip-{i}', me); bpy.context.collection.objects.link(ob); ob.data.materials.append(led); faces.append(ob)
+    A = sum(p.area for o in faces for p in o.data.polygons); P = wpm * length
+    em.inputs['Strength'].default_value = P / (2 * math.pi * A) if P > 0 else 0.0
+    sc = bpy.context.scene; sc.cycles.caustics_refractive = True; sc.cycles.caustics_reflective = True
+    bpy.context.view_layer.update(); dg = bpy.context.evaluated_depsgraph_get(); cam = sc.camera; co = cam.matrix_world.translation
+    seen = tot = 0
+    for o in faces:
+        v = [o.matrix_world @ x.co for x in o.data.vertices]
+        for k in range(41):
+            for j in range(3):
+                pt = v[0].lerp(v[1], k / 40).lerp(v[3].lerp(v[2], k / 40), j / 2) + Vector((0, 0, 0.0001))
+                f = world_to_camera_view(sc, cam, pt)
+                if not (f.z > 0 and 0 <= f.x <= 1 and 0 <= f.y <= 1):
+                    continue
+                tot += 1; dv = pt - co; dist = dv.length; dv.normalize()
+                ok, *_ = sc.ray_cast(dg, co, dv, distance=dist - 2e-4)
+                seen += 0 if ok else 1
+    print(f'v3_day: UPLIT: the plinth underside satin ({n_sat} faces); LED loop on the base top, {IN * 1000:.0f} mm in, '
+          f'recessed {DEP * 1000:.0f} mm, {length:.2f} m at {wpm} W/m = {P:.1f} W; its face seen directly at {seen} of {tot} points in frame', flush=True)
+
+
 def prepare():
+    if '--uplit' in mine:
+        uplit(float(mine[mine.index('--uplit') + 1]))
     if '--frosted' in mine:
         i = mine.index('--frosted'); frosted(float(mine[i + 1]), float(mine[i + 2]), float(mine[i + 3]))
     if '--white-base' in mine:
