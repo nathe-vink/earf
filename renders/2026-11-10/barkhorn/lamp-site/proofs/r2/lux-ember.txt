@@ -1,0 +1,21 @@
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:150: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m = bpy.data.materials.new(nm); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+Timer 'STL Import' took 0.54 ms
+Timer 'STL Import' took 0.62 ms
+Timer 'STL Import' took 0.62 ms
+Timer 'STL Import' took 0.54 ms
+Timer 'STL Import' took 1.33 ms
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:207: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  cm = bpy.data.materials.new(f'collar-{tint}'); cm.use_nodes = True; nt = cm.node_tree
+Timer 'STL Import' took 1.14 ms
+Timer 'STL Import' took 0.44 ms
+Timer 'STL Import' took 0.84 ms
+Timer 'STL Import' took 0.99 ms
+Timer 'STL Import' took 1.02 ms
+Timer 'STL Import' took 0.26 ms
+Timer 'STL Import' took 0.59 ms
+Timer 'STL Import' took 0.47 ms
+Timer 'STL Import' took 0.56 ms
+00:11.709  cycles           | WARNING CUEW initialization failed: Error opening the library
+00:18.549  render           | Saved: '/home/user/earf/renders/2026-11-10/barkhorn/lamp-site/proofs/r2/lux-ember.exr'
+LUX dome-red centre r<0.05 266 r 0.15-0.2 245 r 0.3-0.35 178 albedo 0.812

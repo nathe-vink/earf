@@ -1,0 +1,17 @@
+Timer 'STL Import' took 8.07 ms
+Timer 'STL Import' took 4.41 ms
+Timer 'STL Import' took 3.69 ms
+Timer 'STL Import' took 0.58 ms
+Timer 'STL Import' took 0.37 ms
+Timer 'STL Import' took 0.99 ms
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:328: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  wm_ = bpy.data.materials.new(f'window-{tint}'); wm_.use_nodes = True; nt_ = wm_.node_tree; nt_.nodes.clear()
+Timer 'STL Import' took 0.33 ms
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:150: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m = bpy.data.materials.new(nm); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+00:06.044  cycles           | WARNING CUEW initialization failed: Error opening the library
+AUDIT orb-blue hidden [] no-shadow [] lights [('key', 'AREA', 722.467), ('fill', 'AREA', 160.0), ('kicker', 'AREA', 48.0), ('led-blue', 'AREA', 2.5)]
+HIDDENCAST orb-blue: 3 hidden, 0 in frame
+   out         0.0 %  area lamp (ellipse) key
+   out         0.0 %  area lamp (ellipse) fill
+   out         0.0 %  area lamp (rectangle) kicker

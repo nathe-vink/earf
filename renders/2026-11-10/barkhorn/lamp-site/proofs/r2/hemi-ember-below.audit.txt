@@ -1,0 +1,23 @@
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:150: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m = bpy.data.materials.new(nm); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+Timer 'STL Import' took 0.52 ms
+Timer 'STL Import' took 0.63 ms
+Timer 'STL Import' took 0.63 ms
+Timer 'STL Import' took 0.57 ms
+Timer 'STL Import' took 1.64 ms
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:207: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  cm = bpy.data.materials.new(f'collar-{tint}'); cm.use_nodes = True; nt = cm.node_tree
+Timer 'STL Import' took 1.50 ms
+Timer 'STL Import' took 0.65 ms
+Timer 'STL Import' took 1.12 ms
+Timer 'STL Import' took 1.35 ms
+Timer 'STL Import' took 1.25 ms
+Timer 'STL Import' took 0.33 ms
+Timer 'STL Import' took 0.64 ms
+Timer 'STL Import' took 0.45 ms
+Timer 'STL Import' took 0.66 ms
+00:12.535  cycles           | WARNING CUEW initialization failed: Error opening the library
+AUDIT dome-red hidden [] no-shadow [] lights [('fill', 'AREA', 20.0), ('kicker', 'AREA', 6.0), ('led-red-0', 'AREA', 0.521), ('led-red-1', 'AREA', 0.521), ('led-red-2', 'AREA', 0.521), ('led-red-3', 'AREA', 0.521), ('led-red-4', 'AREA', 0.521), ('led-red-5', 'AREA', 0.521), ('led-red-6', 'AREA', 0.521), ('led-red-7', 'AREA', 0.521), ('led-red-8', 'AREA', 0.521), ('led-red-9', 'AREA', 0.521), ('led-red-10', 'AREA', 0.521), ('led-red-11', 'AREA', 0.521), ('led-red-12', 'AREA', 0.521), ('led-red-13', 'AREA', 0.521), ('led-red-14', 'AREA', 0.521), ('led-red-15', 'AREA', 0.521), ('led-red-16', 'AREA', 0.521), ('led-red-17', 'AREA', 0.521), ('led-red-18', 'AREA', 0.521), ('led-red-19', 'AREA', 0.521), ('led-red-20', 'AREA', 0.521), ('led-red-21', 'AREA', 0.521), ('led-red-22', 'AREA', 0.521), ('led-red-23', 'AREA', 0.521)]
+HIDDENCAST dome-red: 2 hidden, 0 in frame
+   out         0.0 %  area lamp (ellipse) fill
+   out         0.0 %  area lamp (rectangle) kicker
