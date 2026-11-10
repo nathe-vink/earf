@@ -91,6 +91,21 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    better. Needs to be more aspirational." So: the site lane fixes the globe's ground, takes the figures and the row of fronts off
    the home page, leads with the Ice habitat for now and builds a hotspot hero; the biomes lane proposes (in words first) a
    troposphere landscape hero of the eight; the room hero of all four products waits for the Mantle and lamp decisions.
+   HERO: the biomes lane proposed three; the coordinator picked (b), the eight on a ridge above a sea of cloud at sunrise, the low sun
+   through each cabinet laying its colour on the rock (one scene, one sun; a low-res proxy first, then the owner).
+   THE OWNER'S READ OF BOOK v26, 10 Nov ~14:45, verbatim: "Under identity, the globe rendered on dark doesn't work anymore. We need to
+   make the same adjustments we did last time. I don't think we need the globe drawn like it is. We can use the monochromatic globe
+   and color in each tile to match the rendered globe instead as the multi-color option. The turn animation is flashing the reflection
+   abruptly again, making the animation look less smooth. Don't use the term cheeky replace it with something similar. Don't use
+   'ember to smoke,' say the full spectrum or all wavelengths or something like that. I don't get the clear space section. It's not
+   aligned with the other section headers. This might be too much text for someone to get through. I like the social post section.
+   More of those might be good. It looks like you removed some of the images for marketing materials, which I liked. Also the bar and
+   earfcoin seem important to include." RULING THAT FOLLOWS: THE MARK IS AN ILLUSTRATION, NOT A PRODUCT PICTURE; the product-picture
+   light rules (no dimmed reflections, no diffuse-only fill, no emitting acrylic) do NOT bind the globe, its lockups or its turn. The
+   three adjustments the coordinator had removed at 01:03 are restored on the mark by the owner's direction. Product pictures keep
+   every rule. Book v27 briefed to the brand lane: the dark globe and the turn as before, the flat mark as coloured tiles, "Wry, but
+   reserved.", "Eight colors, the full spectrum.", half the text, nine social posts, the marketing mockups back, a chapter for the
+   bar and EARFcoin, the two black-rods habitats.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
