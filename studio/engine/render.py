@@ -103,8 +103,21 @@ def main():
     objs, part_of = [], {}
     globals()['_PART_OF'] = part_of           # the receivers' matcher reads the parts as they are built
     centre = Vector((0, 0, 0.5))
+    # each built model file the scene loads, hashed (2026-11-10, the coordinator: the model files are gitignored and built
+    # in each container, so two renders of one shot file can differ by their builds; the report names the build)
+    model_hash = {}
+    def _hash_file(fp):
+        import hashlib
+        fp = Path(ROOT, fp)
+        if fp.is_file() and str(fp) not in model_hash:
+            model_hash[str(fp.relative_to(ROOT)) if str(fp).startswith(str(ROOT)) else str(fp)] = hashlib.sha256(fp.read_bytes()).hexdigest()[:16]
     for blk in blocks:
         pdef = Pr.load_def(blk['def'], ROOT)
+        _hash_file(pdef['model'])
+        for r_ in pdef.get('normals_from') or []:
+            for v_ in (r_.values() if isinstance(r_, dict) else []):
+                if isinstance(v_, str) and '.' in v_.rsplit('/', 1)[-1]:
+                    _hash_file(v_)
         templates = Pr.import_model(bpy, Path(ROOT, pdef['model']), pdef['origin_mm'], pdef.get('axes', 'gltf'))
         if pdef.get('smooth'):
             Pr.smooth_parts(bpy, templates, pdef['smooth'])
@@ -322,7 +335,7 @@ def main():
     report = {'shot': a.shot, 'image': str(out), 'seconds': {'build': round(t1 - t0, 1), 'render': round(t2 - t1, 1)},
               'samples': int(cy.samples), 'size': [scene.render.resolution_x, scene.render.resolution_y],
               'applied': applied, 'pending': pending, 'sets': a.sets, 'glints': glint_log, 'sun_aim': sun_aim,
-              'flags_crossing_set': flag_cross}
+              'flags_crossing_set': flag_cross, 'model_hash': model_hash}
     tside = Path(a.shot).with_suffix('.tune.json')
     if tside.exists():
         report['tuning'] = json.loads(tside.read_text())
