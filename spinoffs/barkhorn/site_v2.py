@@ -1965,6 +1965,12 @@ def rc_clean(p):
 
 
 
+SPECTRUM = [('Eight colors, Ember to Smoke.', 'Eight colors, the full spectrum.'),
+            ('in eight colors from Ember to Smoke', 'in eight colors, the full spectrum'),
+            ('eight colors, Ember to Smoke', 'eight colors, the full spectrum'),
+            (', Ember to Smoke', ', the full spectrum')]
+
+
 def rc_finish(web):
     """After web.py's favicons and vercel.json: the approved globe's touch icon, the favicon titled EARF, and vercel.json
     without the retired journal redirect."""
@@ -1981,6 +1987,9 @@ def rc_finish(web):
     for f in glob.glob(os.path.join(web.SITE, '**', '*.html'), recursive=True):
         t = open(f).read()
         u = t.replace('Smoked black', 'Smoked gray').replace('smoked black', 'smoked gray')
+        for a, b in SPECTRUM:                 # the eight as the full spectrum, not a run from one to another
+            u = u.replace(a, b)
+        assert not re.search(r'(?i)ember to smoke', u), ('rc_finish: Ember to Smoke', f)
         if u != t:
             open(f, 'w').write(u)
 
