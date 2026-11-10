@@ -1084,3 +1084,63 @@ def nightshade(bpy, name, p, kit):
     pos = {'position': p.get('position', [0, 0, 0]), 'rotate': [0, 0, p.get('turn', 0.0)]}
     return [_obj(bpy, f'{name}-stems', stems, stem_m, pos), _obj(bpy, f'{name}-leaves', leaves, leaf_m, pos),
             _obj(bpy, f'{name}-berries', berries, berry_m, pos), _obj(bpy, f'{name}-calyx', calyx, cal_m, pos)]
+
+
+def baneberry(bpy, name, p, kit):
+    """Red baneberry (Actaea rubra) in fruit, a redwood-forest understory plant and among the most poisonous berries
+    there: a stem `height` tall (0.4-0.8 m) with two or three large ternately compound leaves (toothed leaflets in
+    threes), and at its top, on a bare stalk above them, a raceme of `berries` glossy scarlet berries (`berry` radius,
+    about 4-5 mm) each on a slender red pedicel 1-2 cm long, each with the small black dot of its stigma scar. `lean`
+    [dx, dy] at the tip; `stems` clustered stems (a clump)."""
+    rnd = random.Random(p.get('seed', 8))
+    stalks, leaves, berries, dots = bmesh.new(), bmesh.new(), bmesh.new(), bmesh.new()
+    br = p.get('berry', 0.0048)
+    for s in range(p.get('stems', 1)):
+        H = p.get('height', 0.6) * rnd.uniform(0.8, 1.05)
+        ox, oy = (rnd.uniform(-0.06, 0.06), rnd.uniform(-0.06, 0.06)) if s else (0.0, 0.0)
+        lx, ly = p.get('lean', [0.03, 0.0])
+        lx += rnd.uniform(-0.03, 0.03); ly += rnd.uniform(-0.03, 0.03)
+        ax = lambda t: Vector((ox + lx * t * t, oy + ly * t * t, H * t))
+        kit._tube(stalks, [ax(t) for t in (0, 0.35, 0.7, 1.0)], [0.004, 0.0034, 0.0026, 0.0018], 1.0, 0.0, 8, 6)
+        # the leaves: from about a third and half way up, each a stalk splitting in three, each part three leaflets
+        for k, t in enumerate((0.35, 0.55, 0.62)[:p.get('leaves', 3)]):
+            base = ax(t); a = rnd.uniform(0, 6.28) + k * 2.2
+            for j in range(3):
+                b = a + (j - 1) * 0.7
+                tip = base + Vector((math.cos(b), math.sin(b), 0.1)) * 0.11
+                kit._tube(stalks, [base, (base + tip) / 2 + Vector((0, 0, 0.015)), tip], 0.0014, 1.0, 0.0, 5, 3)
+                for q in range(3):
+                    c = b + (q - 1) * 0.65
+                    L = rnd.uniform(0.06, 0.09)
+                    _leaf(leaves, tip, Vector((math.cos(c), math.sin(c), 0.05)), L, L * 0.62, droop=0.2, curl=0.08)
+        # the raceme: berries on pedicels round the stalk's top 8-12 cm
+        n = p.get('berries', 18)
+        for k in range(n):
+            f = k / max(1, n - 1); t = 1.0 - 0.17 * f
+            c = ax(t)
+            a = k * 2.39996 + rnd.uniform(-0.3, 0.3)
+            L = rnd.uniform(0.012, 0.02)
+            d = Vector((math.cos(a), math.sin(a), rnd.uniform(0.2, 0.6))).normalized()
+            q = c + d * L
+            kit._tube(stalks, [c, c + d * L * 0.5 + Vector((0, 0, 0.002)), q], 0.0008, 1.0, 0.0, 5, 3)
+            r = br * rnd.uniform(0.85, 1.15)
+            g = bmesh.ops.create_uvsphere(berries, u_segments=14, v_segments=10, radius=r)
+            for v in g['verts']:
+                v.co = Vector((v.co.x, v.co.y, v.co.z * 1.08)) + q + d * r * 0.9
+            # the stigma's black dot at the berry's far end
+            g2 = bmesh.ops.create_uvsphere(dots, u_segments=6, v_segments=4, radius=r * 0.22)
+            for v in g2['verts']:
+                v.co = v.co + q + d * r * 1.95
+    berry_m, _, bb = _node_mat(bpy, f'{name}-berry')
+    bb.inputs['Base Color'].default_value = (*_hex(p.get('red', '#C4140C')), 1)
+    bb.inputs['Roughness'].default_value = 0.1; bb.inputs['Coat Weight'].default_value = 0.8
+    bb.inputs['Coat Roughness'].default_value = 0.04
+    if 'Subsurface Weight' in bb.inputs:
+        bb.inputs['Subsurface Weight'].default_value = 0.3; bb.inputs['Subsurface Radius'].default_value = (1.0, 0.15, 0.1)
+        bb.inputs['Subsurface Scale'].default_value = 0.003
+    dot_m = _plain(bpy, f'{name}-dot', '#120E0C', 0.4)
+    stalk_m = _plain(bpy, f'{name}-stalk', p.get('stalk', '#7A3A2A'), 0.55)
+    leaf_m = _leaf_mat(bpy, f'{name}-leaf', p.get('leaf', '#3E5A28'), 0.55)
+    pos = {'position': p.get('position', [0, 0, 0]), 'rotate': [0, 0, p.get('turn', 0.0)]}
+    return [_obj(bpy, f'{name}-stalks', stalks, stalk_m, pos), _obj(bpy, f'{name}-leaves', leaves, leaf_m, pos),
+            _obj(bpy, f'{name}-berries', berries, berry_m, pos), _obj(bpy, f'{name}-dots', dots, dot_m, pos)]

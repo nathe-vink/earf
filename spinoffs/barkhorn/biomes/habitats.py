@@ -163,32 +163,36 @@ ADD = {'poison_g5': [dict(_RW, position=[-5.0, 28.2, -0.1], seed=41, turn=40), d
        # Acid (the coordinator, 20:46): splash crowns in the puddle at the speaker's foot, lightly breaking its reflection
        'acid_b': [{'kind': 'kit', 'shape': 'ext', 'module': 'acid_rain_el', 'fn': 'splashes', 'area': [-0.7, -1.6, 0.7, -0.22],
                    'z': -0.11, 'count': 28, 'radius': [0.006, 0.016], 'avoid': [[0.0, 0.0, 0.34]], 'opacity': 0.85, 'seed': 17}]}
-# "Poison garden" (the owner via the coordinator, 2026-11-10 00:20: the forest didn't say poison): true-scale poisonous
-# plants in P8's scene. A loose ring of fly agaric (Amanita muscaria, caps 8-15 cm across, young domed to open flat) round
-# the feet in place of the death caps; foxglove spires (Digitalis purpurea, 1-1.5 m, the bells facing the camera, 18 deg)
-# right and behind; deadly nightshade (Atropa belladonna, glossy black berries) by them. habitats.py --garden
-_FLY = {'kind': 'kit', 'shape': 'ext', 'module': 'poison_b_el', 'fn': 'amanita', 'species': 'muscaria'}
-_FOX = {'kind': 'kit', 'shape': 'ext', 'module': 'poison_p_el', 'fn': 'foxglove', 'face': 18.0}
-_NS = {'kind': 'kit', 'shape': 'ext', 'module': 'poison_p_el', 'fn': 'nightshade'}
-GARDEN = [  # g2: fewer warts (at 65-85 a cap read pink at this distance), a foreground cluster where the death caps stood
-          dict(_FLY, position=[-0.42, -0.30, -0.02], cap=0.07, age='plane', seed=201, warts=28, lean=[-0.01, 0.0]),
-          dict(_FLY, position=[-0.30, -0.47, -0.02], cap=0.05, age='convex', seed=202, warts=26),
-          dict(_FLY, position=[0.10, -0.52, -0.02], cap=0.075, age='plane', seed=204, warts=30, lean=[0.01, -0.01]),
-          dict(_FLY, position=[0.30, -0.42, -0.02], cap=0.045, age='convex', seed=205, warts=22),
-          dict(_FLY, position=[0.44, -0.22, -0.02], cap=0.06, age='plane', seed=206, warts=26),
-          dict(_FLY, position=[-0.50, -0.05, -0.02], cap=0.045, age='convex', seed=208, warts=22),
-          dict(_FLY, position=[-0.30, -1.21, -0.022], cap=0.075, age='plane', seed=211, warts=30, lean=[-0.02, 0.01]),
-          dict(_FLY, position=[-0.05, -1.40, -0.022], cap=0.06, age='convex', seed=212, warts=28),
-          dict(_FLY, position=[-0.20, -1.30, -0.022], cap=0.045, age='young', seed=213, warts=30),
-          dict(_FLY, position=[0.22, -1.15, -0.022], cap=0.07, age='plane', seed=214, warts=28),
-          dict(_FLY, position=[-0.55, -1.45, -0.016], cap=0.055, age='convex', seed=215, warts=26),
-          dict(_FLY, position=[0.05, -1.25, -0.02], cap=0.03, age='button', seed=216),
-          dict(_FOX, position=[0.72, -0.25, -0.01], height=1.25, seed=301, bells=48, bell=1.3, lean=[0.03, -0.02]),
-          dict(_FOX, position=[0.95, 0.30, -0.01], height=1.45, seed=302, bells=52, bell=1.3, lean=[-0.02, 0.0]),
-          dict(_FOX, position=[0.55, 0.60, -0.01], height=1.1, seed=303, bells=42, bell=1.3, lean=[0.02, 0.01]),
-          dict(_FOX, position=[-0.55, 0.45, -0.01], height=1.3, seed=304, bells=48, bell=1.3, lean=[-0.03, 0.0]),
-          dict(_NS, position=[0.62, -0.85, -0.01], height=0.55, seed=401, berries=26, berry=0.007),
-          dict(_NS, position=[1.15, -0.35, -0.01], height=0.65, seed=402, berries=20, berry=0.007, turn=70)]
+# "Poison garden" g3 (the critics on g2, wf_621c52e9, via the coordinator 01:28): fly agaric the hero, true scarlet (sRGB
+# 195, 25, 15 at its base tone), bold raised warts, every age, in clumps at varied heights with a troop in the near
+# foreground; its host tree in frame (a Douglas-fir: the redwood builder with a furrowed pine bark, no buttress); red
+# baneberry (Actaea rubra, glossy red berries), a true redwood-forest poison; no foxglove, nothing purple, no nightshade;
+# the death caps and the arum (not Californian) out. habitats.py --garden (with GARDEN_SETS: a darker, damper mood)
+_FLY = {'kind': 'kit', 'shape': 'ext', 'module': 'poison_b_el', 'fn': 'amanita', 'species': 'muscaria',
+        'cap_ramp': [[0.15, '#6E0905'], [0.5, '#A3140A'], [0.9, '#C3190F'], [1.2, '#D4421A']], 'wart_size': 1.45, 'wart_rise': 0.7}
+_BANE = {'kind': 'kit', 'shape': 'ext', 'module': 'poison_p_el', 'fn': 'baneberry'}
+_FIR = {'kind': 'kit', 'shape': 'ext', 'module': 'poison_el', 'fn': 'redwood', 'bark': 'pine_bark', 'tint': '#5A4636',
+        'tint_mix': 0.25, 'tex_scale': 0.9, 'bump': 2.2, 'res': '2k', 'flare': 0.18, 'foot': 0.8, 'lobes': 3, 'height': 35.0}
+def _clump(cx, cy, specs, seed):
+    """A clump: (dx, dy, cap, age, extra) offsets in metres round (cx, cy)."""
+    return [dict(_FLY, position=[cx + dx, cy + dy, -0.02], cap=cap, age=age, seed=seed + k, **ex)
+            for k, (dx, dy, cap, age, ex) in enumerate(specs)]
+GARDEN = (_clump(0.30, -2.45, [(0.0, 0.0, 0.09, 'old', {'torn': 0.4, 'lean': [0.02, 0.0]}), (0.13, 0.05, 0.07, 'plane', {}),
+                               (-0.10, 0.08, 0.055, 'convex', {}), (0.06, -0.10, 0.035, 'young', {}),
+                               (-0.05, -0.06, 0.025, 'button', {}), (0.20, -0.06, 0.045, 'convex', {'lean': [0.02, -0.01]})], 500)
+          + _clump(-0.45, -1.45, [(0.0, 0.0, 0.075, 'plane', {}), (0.12, 0.04, 0.05, 'convex', {}),
+                                  (-0.08, 0.06, 0.03, 'young', {}), (0.05, -0.08, 0.022, 'button', {})], 520)
+          + _clump(0.42, -0.45, [(0.0, 0.0, 0.06, 'convex', {}), (0.08, 0.06, 0.04, 'young', {}),
+                                 (-0.06, 0.05, 0.075, 'old', {'torn': 0.3})], 540)
+          + [dict(_FLY, position=[-0.40, -0.30, -0.02], cap=0.05, age='plane', seed=560),
+             dict(_FLY, position=[1.05, -1.6, -0.02], cap=0.045, age='convex', seed=561),
+             dict(_FIR, position=[0.35, 2.9, -0.1], radius=0.42, seed=70, turn=40),
+             dict(_BANE, position=[0.95, -1.05, -0.01], height=0.55, stems=3, berries=20, seed=601, lean=[-0.02, -0.03]),
+             dict(_BANE, position=[-0.85, -0.75, -0.01], height=0.62, stems=2, berries=22, seed=602, lean=[0.03, -0.02]),
+             dict(_BANE, position=[1.25, -0.15, -0.01], height=0.7, stems=2, berries=18, seed=603)])
+GARDEN_DROP = ['amanita', 'arum']
+GARDEN_SETS = {'render.exposure': 0.5, 'set.props.8.density': 0.03}   # deeper shade, a little less golden haze
+
 CANOPY_OPEN = {'poison_g5': 0.25}
 # rain on the speaker (the coordinator, 20:46): beads on the front and the horn's lip, runnels; a meniscus at the waterline
 # round 3 (the coordinator, 22:21): bigger drops, 3-6 mm, more of them low on the front, longer runnels (r2: 150 at 1.2-4.7 mm,
@@ -247,7 +251,7 @@ def main():
         out = os.path.join(a.out, f'{n}-{a.frame}{a.tag}.png')
         if n in DROP or n in MODIFY or n in ADD or a.garden:
             sh = json.load(open(shot))
-            drop = DROP.get(n, []) + (['amanita'] if a.garden else [])
+            drop = DROP.get(n, []) + (GARDEN_DROP if a.garden else [])
             sh['set']['props'] = [dict(p, **MODIFY.get(n, {}).get(p.get('fn') or p.get('model'), {})) for p in sh['set']['props']
                                   if p.get('fn') not in drop] + ADD.get(n, []) + (GARDEN if a.garden else [])
             shot = out.replace('.png', '.src.json')
@@ -259,6 +263,7 @@ def main():
                *(['--horn-front'] if a.horn_front else []), *([] if a.flat_fresnel else ['--fresnel-angle']),
                '--horn-rough', str(HORN_ROUGH)] + [x for k, v in lights.items() for x in ('--light', f'{k}={v}')] \
             + [x for k, v in SETS.get(n, {}).items() for x in ('--set', f'{k}={json.dumps(v)}')] \
+            + [x for k, v in (GARDEN_SETS.items() if a.garden else []) for x in ('--set', f'{k}={json.dumps(v)}')] \
             + [x for kv in a.set for x in ('--set', kv)] \
             + (['--glossy-flag'] if a.glossy_flag else []) \
             + (['--flag', *map(str, FLAG[n])] if n in FLAG else []) \

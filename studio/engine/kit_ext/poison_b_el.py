@@ -156,7 +156,8 @@ def amanita(bpy, name, p, kit):
     of button, young, convex, plane, old, `height` from the ground to the cap's underside, `stem` radius, `lean` [dx,
     dy] at the top, `torn` 0-1 how ragged an old margin is, `warts` how many, `seed`; `wash` the rain's threshold
     (lower washes more of the veil off; 0.15 default), `ragged` how torn the bulb's veil rings are (0.03), `needles`
-    how many conifer needles lie across the cap (0), `orange` an orange-red margin (False).
+    how many conifer needles lie across the cap (0), `orange` an orange-red margin (False); `cap_ramp` [(position, hex)...] overrides the cap's colours; `wart_size` and
+    `wart_rise` scale the warts across and their height (1.0, 0.4).
     Poison G2's death caps, each off by default: `skirt` 'membrane' (the ring a thin skirt hanging from the stem, its
     hem uneven, not a collar); `sac` (the volva a loose membranous sac, torn into lobes; on a button, the egg it
     breaks out of); `tilt` [deg about x, deg about y] (the cap tilted on its stem); `bite` [deg, depth m] (a slug's
@@ -237,12 +238,12 @@ def amanita(bpy, name, p, kit):
             u = rnd.random(); r = (ra + (rb - ra) * u) * wob(th, 0); z = za + (zb - za) * u
             nr, nz = (zb - za), -(rb - ra); L = math.hypot(nr, nz) or 1; nr, nz = nr / L, nz / L
             n = Vector((nr * math.cos(th), nr * math.sin(th), nz))
-            s = R * rnd.uniform(0.03, 0.085) * (1.2 if age == 'button' else 1.0) * (1.25 - 0.55 * (1 - t))
+            s = R * rnd.uniform(0.03, 0.085) * (1.2 if age == 'button' else 1.0) * (1.25 - 0.55 * (1 - t)) * p.get('wart_size', 1.0)
             def wart(bm, s=s):
                 g = bmesh.ops.create_icosphere(bm, subdivisions=1, radius=1.0)
                 for v in g['verts']:
                     j = 1 + 0.35 * rnd.uniform(-1, 1)
-                    v.co = Vector((v.co.x * s * j, v.co.y * s * j * rnd.uniform(0.6, 1.0), max(-0.2, v.co.z) * s * 0.4 * j))
+                    v.co = Vector((v.co.x * s * j, v.co.y * s * j * rnd.uniform(0.6, 1.0), max(-0.2, v.co.z) * s * p.get('wart_rise', 0.4) * j))
             m = Matrix.Translation(Vector((r * math.cos(th), r * math.sin(th), z)) + n * s * 0.1) @ n.to_track_quat('Z', 'Y').to_matrix().to_4x4() @ Matrix.Rotation(rnd.uniform(0, 6.28), 4, 'Z')
             _join(bms['warts'], wart, m)
     # needles fallen across the cap: thin flat slivers lying on its surface, 1.5-2.5 cm long
@@ -375,7 +376,7 @@ def _amanita_mats(bpy, name, sp, R, Hs, orange=False, dull=0.0, matte=False, cap
     nt.links.new(nz.outputs['Fac'], mix.inputs[0]); mix.inputs[1].default_value = 0.35
     nt.links.new(dv.outputs['Value'], mix.inputs[2])
     if sp == 'muscaria':
-        col = _ramp(nt, mix.outputs['Value'], [(0.15, '#3A0101'), (0.5, '#6A0302'), (0.9, '#8A0A03'), (1.2, '#A8300A')] if not orange
+        col = _ramp(nt, mix.outputs['Value'], cap_ramp if cap_ramp else [(0.15, '#3A0101'), (0.5, '#6A0302'), (0.9, '#8A0A03'), (1.2, '#A8300A')] if not orange
                     else [(0.15, '#4A0402'), (0.45, '#7A0803'), (0.8, '#A01C05'), (1.1, '#C4420E')])
         b.inputs['Subsurface Weight'].default_value = 0.12
     else:
