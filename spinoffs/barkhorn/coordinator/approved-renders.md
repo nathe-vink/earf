@@ -41,6 +41,14 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    under the lamp ("your pick I guess"); a heat test needed. MANTLE = stock Ember, SATIN edge as signed ("I think the satin edge will
    help with light dispersion"), posts BLACK; the custom pour dropped; its light still open. SAMPLES: yes (chips and thick off-cuts,
    ~$150-200; the list goes to him for the purchase). Lamps and Mantle lanes briefed: CAD/BOM plus five lamp proofs and one Mantle final.
+   OWNER 10 Nov ~03:00-03:15 (in chat): THE GLOBE A2 REJECTED ("you need to assess each color against the richer speaker colors.
+   That blue is still not as strong or deep, nor are any of the colors"): measured on the tallr6 fronts, the globe AS RENDERED must
+   reach ember #B50404, dust #D35D17, acid #C5BC1E, poison #027614, ice #1169C1, haze #500CB4 (the OKLab midpoint of each horn and its
+   cabinet's richest area); the brand lane renders A3 with a measure-and-correct loop. THE BOOK SHOWS THE BAR (Planet EARF, Mother EARF,
+   EARFcoin as where EARF is going). SMOKE IS INCLUDED: eight colors in the Book and on the site once its pictures land. THE MANTLE
+   final (r48-mantle-design cc3c51ba; stock Ember, satin edges, black-oxide posts) NOT YET APPROVED: "Maybe the mantle is too dark.
+   It's hard to tell without the backlit example and other colors"; the Mantle lane renders all eight by day and three lit frames
+   (real LEDs only), the bearing's brass in black as a labeled variant. The Book audit and plan: coordinator/book-audit-2026-11-10/.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
