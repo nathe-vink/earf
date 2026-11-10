@@ -18,12 +18,13 @@ Before every rebuild on this branch:
 
 The screenshots in this folder are from the first RC and are out of date.
 
-## This build (the Tropos-fronts batch, 2026-11-09)
+## This build (the Tropos-fronts batch, 2026-11-10)
 
-- 164 files, 8.67 MB (8.27 MiB), as built by `web.py`. (Correction: RC3.1 at 2490d9d3 was 160 files and 8.75 MB, not the
-  7.3 MB an earlier note gave.)
-- The fronts: `renders/2026-11-04/barkhorn/rollout/A-polished-tallr3/` (rig 74f17d7c); `RC_TALL` in `site_v2.py` names
-  each source commit.
+- 147 files, 8.10 MB, as built by `web.py`. (Earlier: RC3.1 at 2490d9d3 was 160 files and 8.75 MB, not the 7.3 MB an
+  earlier note gave.)
+- The fronts: `renders/2026-11-04/barkhorn/rollout/A-polished-tallr6/` (rig fa7665dc); `RC_TALL` in `site_v2.py` names
+  each source commit. Out of this build, each until its re-render passes: six of the seven horn-backs (Acid's stays),
+  Ember's turn, the Back views, Fog's habitat, the lamps' picture.
 - Tropos's depth, "428 mm overall, 420 mm at the cabinet": from the speaker lane's figures of 2026-11-09 17:37 ("428
   overall, the amp plate's hardware"), recorded in `owner-queue.md` on `r46-owner-notes`; the speaker lane adds it to
   r33's README.
