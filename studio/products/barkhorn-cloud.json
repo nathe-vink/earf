@@ -38,6 +38,12 @@
    "color": "#C9A660",
    "roughness": 0.3
   },
+  "post-metal": {
+   "preset": "satin_paint",
+   "color": "#18181A",
+   "roughness": 0.5,
+   "specular": 0.3
+  },
   "cable": {
    "preset": "rubber",
    "color": "#141414",
@@ -217,8 +223,12 @@
    "material": "bark"
   },
   {
-   "match": "amp-plate-gold|post-sockets|tie-rod-insert",
+   "match": "amp-plate-gold|tie-rod-insert",
    "material": "brass"
+  },
+  {
+   "match": "post-sockets",
+   "material": "post-metal"
   },
   {
    "match": "lead-hf|lead-woofer|lead-ir",
