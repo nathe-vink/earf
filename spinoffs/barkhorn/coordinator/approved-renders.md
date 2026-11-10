@@ -82,6 +82,15 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    the angled base (drawn as a variant; fits) and Hemisphere's go. MANTLE: every tint reads near-black by day (r48-mantle-design
    268c3d79, e8679ff3); three versions shown: signed, backlit top (c59c6d79), white base (c839eea6, the coordinator's pick); the
    owner to choose.
+   THE OWNER ON THE SITE PREVIEW (dpl_H1erTkHj, r49-site-rc 6e7250d0), 10 Nov ~09:25: "The site needs more work. The initial loading
+   globe has a white background or stroke that peeks through behind it now. The decibel values and such don't make sense on a home
+   page that contains other products. We're not leading with really captivating imagery anymore. The initial photos belong on the
+   speaker detail pages. We need strong hero imagery for the home page, like the speakers placed in a blended biome that represents
+   the troposphere. That's just one idea. Open to others. Might also be cool to lead with an image that shows all of the products
+   together in a room with different color combos. Hovering a product reveals what it is and links to it. Point being, we can do
+   better. Needs to be more aspirational." So: the site lane fixes the globe's ground, takes the figures and the row of fronts off
+   the home page, leads with the Ice habitat for now and builds a hotspot hero; the biomes lane proposes (in words first) a
+   troposphere landscape hero of the eight; the room hero of all four products waits for the Mantle and lamp decisions.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
