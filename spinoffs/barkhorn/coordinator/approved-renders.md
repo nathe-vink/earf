@@ -142,6 +142,21 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    play set design with a spotlight on each speaker." The speaker lane renders two proxies of the studio stripes (each speaker on a
    paper sweep in its OWN colour family, pale and bold; an opposite colour would turn clear tinted acrylic dark). The play-set
    biome is the alternative if the stripes and the two outdoor proxies fall short.
+   STATUS 10 Nov 15:30-15:36 (coordinator): SITE preview dpl_A1s5fi2jbdkHZbXt9mfASmvX1YvK (r49-site-rc a6cf380d; code on
+   r47-site-next 9fcca977): the opening globe's pale edge fixed (the film's ground keyed out per frame; the coordinator measured
+   the ring round the globe = the page color at 1440 and 390), home without the Tropos figures and the row of fronts, the Ice
+   habitat as the interim hero, hotspot_hero() built (one point on), "the full spectrum" wording. Link sent to the owner 15:33.
+   Open: Safari untested; under the hero the home page is text only until the lamp sets and Mantle land; the Ice source is
+   1200 px wide (soft on big screens).
+   HERO stripes proxies (r33-speaker-horn fca7cc7a: hero-stripes-v1 pale, -v2 bold) shown to the owner 15:35; the coordinator's
+   pick is v2 with fixes (camera lower and closer, the color held across the floor, Fog on a soft gray stripe, the end stripes
+   carried out, a phone version of two rows of four). The final waits for the owner's pick of a hero direction.
+   FINDING 15:35 (speaker lane, asked by the coordinator): both proxies carry the PLINTH base and its UPLIGHT (an emitter,
+   glow 20). Cause: frames built outside rollout.py take shots.ROLLOUT['base'] = "plinth" unless TROPOS_BASE is set. The same
+   default is in the DECK frames (deck-row, deck-cover, deck-home, deck-home-portrait). Tropos is locked as base A, NO light, so
+   those frames show a base and a light the product does not have. Everything through rollout.py (tallr4-7, p2b, p2r) reads
+   "options: []" and is clean. RULE: any Tropos final runs with TROPOS_BASE=A and an emitter list in its report; no deck-*
+   Tropos frame goes into the Book, the site or a deck until it is re-rendered (brand lane told 15:36 for v27).
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
