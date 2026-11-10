@@ -343,7 +343,77 @@ def warm_room():
     print('v3_day: the room ambient neutral-warm', flush=True)
 
 
+def frosted(load, scat_mm, wpm):
+    """PROPOSAL (the coordinator, 2026-11-10 14:54; the owner's references are milky, light-dispersing acrylic): the plinth
+    AND the base in one frosted colour, a real scattering volume: the speakers' tint's own dye at `load` of its load
+    (absorption x load) plus a diffuser, a scattering length of `scat_mm`. The surface: a Fresnel-weighted gloss
+    (glossy faces 0.004, the satin edges 0.35) over a non-refracting boundary (inside a milky body refraction is lost after
+    a few millimetres; a refracting boundary would leave the lit interior reachable by caustic paths only). The light: a
+    2700 K strip loop inside the plinth, 25 mm in from its edge, 5 mm over its underside, facing up into the body, in a black
+    channel open upward; wpm watts a metre (0 by day). Nothing emits but the LED faces."""
+    from mathutils import Vector
+    SP = {'sp-ember': '#CF0913', 'sp-ice': '#92CCF7', 'sp-dust': '#FBBD77', 'sp-acid': '#F1EE7F', 'sp-poison': '#12AA24',
+          'sp-haze': '#9F61E4', 'sp-fog': '#FCFCFC', 'sp-smoke': '#ACACAC'}
+    key = args[args.index('--colour') + 1]
+    import math
+    lin = lambda c: c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4
+    sig = [-math.log(max(lin(int(SP[key].lstrip('#')[i:i + 2], 16) / 255), 0.002)) / 0.025 * load for i in (0, 2, 4)]
+    D = max(sig) * 1.0001
+    def frost(name, rough):
+        m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+        out = nt.nodes.new('ShaderNodeOutputMaterial')
+        tr = nt.nodes.new('ShaderNodeBsdfTransparent')
+        gl = nt.nodes.new('ShaderNodeBsdfGlossy'); gl.inputs['Roughness'].default_value = rough
+        fr = nt.nodes.new('ShaderNodeFresnel'); fr.inputs['IOR'].default_value = 1.49
+        mx = nt.nodes.new('ShaderNodeMixShader'); nt.links.new(fr.outputs[0], mx.inputs['Fac'])
+        nt.links.new(tr.outputs[0], mx.inputs[1]); nt.links.new(gl.outputs[0], mx.inputs[2]); nt.links.new(mx.outputs[0], out.inputs['Surface'])
+        sc_ = nt.nodes.new('ShaderNodeVolumeScatter'); sc_.inputs['Density'].default_value = 1000.0 / scat_mm
+        sc_.inputs['Color'].default_value = (1, 1, 1, 1)
+        ab = nt.nodes.new('ShaderNodeVolumeAbsorption'); ab.inputs['Density'].default_value = D
+        ab.inputs['Color'].default_value = tuple(1 - x / D for x in sig) + (1,)
+        ad = nt.nodes.new('ShaderNodeAddShader'); nt.links.new(sc_.outputs[0], ad.inputs[0]); nt.links.new(ab.outputs[0], ad.inputs[1])
+        nt.links.new(ad.outputs[0], out.inputs['Volume'])
+        return m
+    for oname in ('plinth-L1-stack', 'base-L1-stack'):
+        o = bpy.data.objects[oname]
+        for i, sl in enumerate(o.material_slots):
+            sl.link = 'OBJECT'; sl.material = frost(f'frost-{oname[:4]}-{i}', 0.35 if i == 1 else 0.004)
+        if oname == 'base-L1-stack':
+            for sl in o.material_slots:
+                sl.material = frost(f'frost-base', 0.004)
+    # the strip and its channel inside the plinth
+    X0, X1, Y0, Y1, IN, zb = 0.01, 0.46, 0.01, 0.37, 0.025, 0.0687
+    blk = bpy.data.materials.new('fr-channel'); blk.use_nodes = True; bb = blk.node_tree.nodes['Principled BSDF']
+    bb.inputs['Base Color'].default_value = (0.008, 0.008, 0.008, 1); bb.inputs['Roughness'].default_value = 0.6
+    led = bpy.data.materials.new('strip'); led.use_nodes = True; lt = led.node_tree; lt.nodes.clear()
+    em = lt.nodes.new('ShaderNodeEmission'); em.inputs['Color'].default_value = (1.0, 0.55, 0.25, 1)
+    lo = lt.nodes.new('ShaderNodeOutputMaterial'); lt.links.new(em.outputs[0], lo.inputs['Surface'])
+    xa, xb, ya, yb = X0 + IN, X1 - IN, Y0 + IN, Y1 - IN; faces = []; length = 0
+    for i, ((x0, y0), (x1, y1)) in enumerate((((xa, ya), (xb, ya)), ((xb, ya), (xb, yb)), ((xb, yb), (xa, yb)), ((xa, yb), (xa, ya)))):
+        L = math.hypot(x1 - x0, y1 - y0); length += L; cx, cy = (x0 + x1) / 2, (y0 + y1) / 2; horiz = abs(y1 - y0) < 1e-9
+        # the channel: a black U, 7 wide, 5 deep, 0.8 walls, open upward, its floor 1 mm over the plinth's underside
+        for nm, w, h, dz, off in (('floor', 0.007, 0.0008, 0.001, 0.0), ('wall-a', 0.0008, 0.005, 0.001, -0.0035), ('wall-b', 0.0008, 0.005, 0.001, 0.0035)):
+            bpy.ops.mesh.primitive_cube_add(size=1.0, location=(cx + (0 if horiz else off), cy + (off if horiz else 0), zb + dz + h / 2))
+            c = bpy.context.active_object; c.name = f'fr-channel-{nm}-{i}'
+            c.scale = ((L, w, h) if horiz else (w, L, h)); bpy.ops.object.transform_apply(scale=True)
+            c.data.materials.append(blk)
+        # the LED face: 5 mm wide on the channel's floor, facing up
+        z = zb + 0.0019
+        vs = [(x0, y0 - 0.0025, z), (x1, y1 - 0.0025, z), (x1, y1 + 0.0025, z), (x0, y0 + 0.0025, z)] if horiz else \
+             [(x0 - 0.0025, y0, z), (x0 + 0.0025, y0, z), (x1 + 0.0025, y1, z), (x1 - 0.0025, y1, z)]
+        me = bpy.data.meshes.new(f'led-strip-{i}'); me.from_pydata(vs, [], [(0, 1, 2, 3)]); me.update()
+        ob = bpy.data.objects.new(f'led-strip-{i}', me); bpy.context.collection.objects.link(ob); ob.data.materials.append(led); faces.append(ob)
+    A = sum(p.area for o in faces for p in o.data.polygons); P = wpm * length
+    em.inputs['Strength'].default_value = P / (2 * math.pi * A) if P > 0 else 0.0
+    sc = bpy.context.scene.cycles; sc.volume_bounces = 64; sc.max_bounces = 128; sc.transparent_max_bounces = 64
+    T25 = [math.exp(-x * 0.025) for x in sig]
+    print(f'v3_day: FROSTED {key}: dye x {load} (direct T through 25 mm, dye only: {T25[0]:.3f} {T25[1]:.3f} {T25[2]:.3f}), '
+          f'scattering length {scat_mm} mm; LED {length:.2f} m at {wpm} W/m = {P:.1f} W', flush=True)
+
+
 def prepare():
+    if '--frosted' in mine:
+        i = mine.index('--frosted'); frosted(float(mine[i + 1]), float(mine[i + 2]), float(mine[i + 3]))
     if '--white-base' in mine:
         white_base(float(mine[mine.index('--white-base') + 1]))
     if '--warm-room' in mine:
