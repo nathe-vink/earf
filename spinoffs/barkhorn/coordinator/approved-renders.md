@@ -121,6 +121,10 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    from the table, r 60 under the touch ring to r 75 at the dock's foot, the dock carrying the same slope with a hairline joint
    (lamps lane f845e797, CORE_ANGLED=1 becomes the default at the next CAD/BOM change). Still open for the lamps: Core's
    brightness and Hemisphere's go.
+   MANTLE, the owner 10 Nov ~15:20: "No frosted mantle. I like the way the top layers look right now with the satin edges. It's
+   somewhere between frosted and polished which is good." So the PLINTH STAYS AS SIGNED (clear tinted, satin edges); the frosted
+   proposal is stopped. Open: the base and the light. His own question, "should the base just be the same acrylic color as the
+   top?", is being rendered: the base in the plinth's tint, by day and with the signed LED loop under the base (Ember, Ice).
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
