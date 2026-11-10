@@ -45,3 +45,14 @@ edge reads as a flat, featureless matte band, dark gray with a faint tint, frost
 does not read as damaged, but it does not read as glass either: a satin (bead-blasted or machined) edge scatters, so lit
 from the front it shows its own matte surface, not the tint through it. Lit through from behind it would glow as frosted
 acrylic does. This is the design as signed ('the outer edge satin'), not the light: a polished edge would read as glass.
+
+The custom pour (v3-proposal-day-ember-custom40-p2.png, a PROPOSAL, open question 8): the same rig, camera and exposure,
+--colour ember-40 (scene.py's custom batch, Ember 2423's hue poured to 40.2 % luminous per 1/2 in; 22.6 % through the
+25.4 mm deck, against stock Ember's 10.1 % and Ice's 41.5 %). gt_audit 0 emitting materials, every lamp and card out of
+frame; scene_audit no hidden mesh.
+ember custom 40 (proposal): top, middle front: luma 14, RGB [25. 11. 10.]
+ember custom 40 (proposal): top, back left: luma 46, RGB [165.  19.  17.]
+ember custom 40 (proposal): satin front edge: luma 13, RGB [37.  5.  4.]
+ember custom 40 (proposal): base top: luma 33, RGB [37. 32. 29.]
+
+The sheet (v3-tint-sheet.png): the three side by side, labeled, the proposal in red.
