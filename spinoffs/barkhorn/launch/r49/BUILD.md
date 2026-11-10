@@ -40,3 +40,4 @@ The screenshots in this folder are from the first RC and are out of date.
 - The mark: the approved globe from r47-brand c19abdba, kept in `brand/site-rc/` (film, poster, the header's 60-frame sheet,
   the touch icon); no night film. The dots are flat chips in the logo's colors.
 - `rc_finish` runs after web.py's favicons and vercel.json: the touch icon, the favicon titled EARF, no journal redirect.
+- Then: Smoke smoked gray; the Ice and Fog habitats back with black rods (r48-biomes 2904138e). 174 files, 8.69 MB.
