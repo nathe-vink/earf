@@ -169,13 +169,15 @@ ADD = {'poison_g5': [dict(_RW, position=[-5.0, 28.2, -0.1], seed=41, turn=40), d
 # baneberry (Actaea rubra, glossy red berries), a true redwood-forest poison; no foxglove, nothing purple, no nightshade;
 # the death caps and the arum (not Californian) out. habitats.py --garden (with GARDEN_SETS: a darker, damper mood)
 _FLY = {'kind': 'kit', 'shape': 'ext', 'module': 'poison_b_el', 'fn': 'amanita', 'species': 'muscaria',
-        'cap_ramp': [[0.15, '#6E0905'], [0.5, '#A3140A'], [0.9, '#C3190F'], [1.2, '#D4421A']], 'wart_size': 1.45, 'wart_rise': 0.7}
+        'cap_ramp': [[0.15, '#6E0905'], [0.5, '#A3140A'], [0.9, '#C3190F'], [1.2, '#D4421A']], 'wart_size': 1.1, 'wart_rise': 0.6,
+        'rough': 0.5, 'coat': 0.0}   # g4: g3's bold warts (1.45) covered the red and the viscid coat mirrored the haze: caps read pink
+_WARTS = {'button': 80, 'young': 55, 'convex': 45, 'plane': 35, 'old': 25}
 _BANE = {'kind': 'kit', 'shape': 'ext', 'module': 'poison_p_el', 'fn': 'baneberry'}
-_FIR = {'kind': 'kit', 'shape': 'ext', 'module': 'poison_el', 'fn': 'redwood', 'bark': 'pine_bark', 'tint': '#5A4636',
-        'tint_mix': 0.25, 'tex_scale': 0.9, 'bump': 2.2, 'res': '2k', 'flare': 0.18, 'foot': 0.8, 'lobes': 3, 'height': 35.0}
+_FIR = {'kind': 'kit', 'shape': 'ext', 'module': 'poison_el', 'fn': 'redwood', 'bark': 'pine_bark', 'tint': '#3B2A1E',
+        'tint_mix': 0.55, 'tex_scale': 0.9, 'bump': 2.2, 'res': '2k', 'flare': 0.18, 'foot': 0.8, 'lobes': 3, 'height': 35.0}
 def _clump(cx, cy, specs, seed):
     """A clump: (dx, dy, cap, age, extra) offsets in metres round (cx, cy)."""
-    return [dict(_FLY, position=[cx + dx, cy + dy, -0.02], cap=cap, age=age, seed=seed + k, **ex)
+    return [dict(_FLY, position=[cx + dx, cy + dy, -0.02], cap=cap, age=age, seed=seed + k, warts=_WARTS[age], **ex)
             for k, (dx, dy, cap, age, ex) in enumerate(specs)]
 GARDEN = (_clump(0.30, -2.45, [(0.0, 0.0, 0.09, 'old', {'torn': 0.4, 'lean': [0.02, 0.0]}), (0.13, 0.05, 0.07, 'plane', {}),
                                (-0.10, 0.08, 0.055, 'convex', {}), (0.06, -0.10, 0.035, 'young', {}),
@@ -184,14 +186,14 @@ GARDEN = (_clump(0.30, -2.45, [(0.0, 0.0, 0.09, 'old', {'torn': 0.4, 'lean': [0.
                                   (-0.08, 0.06, 0.03, 'young', {}), (0.05, -0.08, 0.022, 'button', {})], 520)
           + _clump(0.42, -0.45, [(0.0, 0.0, 0.06, 'convex', {}), (0.08, 0.06, 0.04, 'young', {}),
                                  (-0.06, 0.05, 0.075, 'old', {'torn': 0.3})], 540)
-          + [dict(_FLY, position=[-0.40, -0.30, -0.02], cap=0.05, age='plane', seed=560),
-             dict(_FLY, position=[1.05, -1.6, -0.02], cap=0.045, age='convex', seed=561),
+          + [dict(_FLY, position=[-0.40, -0.30, -0.02], cap=0.05, age='plane', seed=560, warts=35),
+             dict(_FLY, position=[1.05, -1.6, -0.02], cap=0.045, age='convex', seed=561, warts=45),
              dict(_FIR, position=[0.35, 2.9, -0.1], radius=0.42, seed=70, turn=40),
              dict(_BANE, position=[0.95, -1.05, -0.01], height=0.55, stems=3, berries=20, seed=601, lean=[-0.02, -0.03]),
              dict(_BANE, position=[-0.85, -0.75, -0.01], height=0.62, stems=2, berries=22, seed=602, lean=[0.03, -0.02]),
              dict(_BANE, position=[1.25, -0.15, -0.01], height=0.7, stems=2, berries=18, seed=603)])
 GARDEN_DROP = ['amanita', 'arum']
-GARDEN_SETS = {'render.exposure': 0.5, 'set.props.8.density': 0.03}   # deeper shade, a little less golden haze
+GARDEN_SETS = {'render.exposure': 0.3, 'set.props.8.density': 0.03}   # g4: 0.5 left the frame as bright as P8 (the thinner mist)   # deeper shade, a little less golden haze
 
 CANOPY_OPEN = {'poison_g5': 0.25}
 # rain on the speaker (the coordinator, 20:46): beads on the front and the horn's lip, runnels; a meniscus at the waterline
