@@ -31,3 +31,17 @@ Pulled (the coordinator, 23:28): the six p2 horn-backs approved (Ember, Dust, Po
 turn-ember-00 to -04. The `glow` lamp (0.7 x 0.32 at 0, 0.66, 1.12, irradiance 1.6, specular 0) stood in open frame
 beside the horn. The current rollout code deletes it from phase-2 shots; the replacements re-run phase 2 (tag p2r).
 The tall (tallr6, fa7665dc's rig): hidden 0 px, equipment 0 px.
+
+## The front face's reflection (2026-11-10, the skeptic's physics question)
+
+The lower front face carries about 1 % of floor reflection in the pictures where acrylic gives about 4 %. Settled:
+the material is physical and the display curve removes it.
+- The material (materials._clear_resin, Ember's bark): Principled, transmission 1, IOR 1.49, roughness 0.05, white
+  base, no coat or scaling; the tint is a volume; only shadow rays see a transparent BSDF.
+- `fresnel_plate.py`: a 10 mm plate of it at 39 deg mirroring radiance 1.0 reflects 0.044 linear in G and B (0.040 at
+  25 deg; a clear plate both faces 0.083).
+- The lower front face (rows 950-1045) mirrors open, in-frame floor in front of the base (display 236-244).
+- The view transform, Khronos PBR Neutral, subtracts a black-level offset from all channels when the smallest is low:
+  the same plate reads 0.044 through Standard and 0.012 through it, which is the 23-26 measured on Ember.
+The coordinator (00:22): keep Khronos PBR Neutral, a global tone curve like a camera's profile; AgX stays a look
+question for the owner at the corrected studio re-shoot.
