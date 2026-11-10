@@ -146,7 +146,11 @@ def shot(root, tint, lamp_dir, fmt='wide', core=False):
         # gate 3: the window's cool light as a soft shape on a wall: a streetlight across the road, through the left
         # window's opening and its sheer; proxy 6: cut 1.3 stops (about 1.5 lux, 0.01 W/m2) and about 4000 K, so under the
         # 3000 K balance it reads a faint cool, not blue
-        'outside_light': {'direction': [0.62, 0.62, -0.48], 'irradiance': 0.01, 'angle_deg': 3.0, 'color': '#FFCE9F'},
+        # 2026-11-10 (the coordinator, 00:38; the photometry critics: 0.01 lit the upper walls to dusk, 5-20 lx): full
+        # moonlight, 0.0005 W/m2 (about 0.1 lx), and a moon's colour on this engine's scale: linear (1, 0.57, 0.20),
+        # which under the frame's 3000 K balance reads slate blue, linear R/B about 0.55, G/B about 0.9 (the COB's
+        # (1, 0.423, 0.1) reads warm, R/B 1.95, beside it; #FFCE9F read near-pure blue, R/B 0.19)
+        'outside_light': {'direction': [0.62, 0.62, -0.48], 'irradiance': 0.0005, 'angle_deg': 0.5, 'color': '#FFC67C'},
         # gate 1: a living room. A slim side table (the cube read as a second speaker), a rug's edge, a sofa's arm
         # gate 1: a living room (a slim side table, a rug's edge, a sofa's arm) when the Core is in; the singles'
         # formats keep the speaker's surroundings dark (the text zones), so for them the Core and its table are out
@@ -161,7 +165,9 @@ def shot(root, tint, lamp_dir, fmt='wide', core=False):
         'rug': None if core else {'pbr': 'curly_teddy_natural', 'tint': '#3A3836', 'tint_mix': 0.9, 'value': 0.014, 'bump': 1.0, 'matte': True, 'tile_m': 0.12,
                                   'center': [0.0, -1.10], 'size': [3.8, 3.30], 'border_w': 0.035, 'border_color': '#24211E'},
         'models': [] if core else [
-            {'id': 'modern_wooden_cabinet', 'location': [CONSOLE[0], CONSOLE[1], 0.0], 'rotation_deg': [0, 0, 0], 'name': 'console'},
+            # 2026-11-10 (the coordinator, 00:38): the walnut honest. The asset reflected 2.5 % at the lamp's pool (a
+            # white card beside it, dome_paths.py console-white); oiled walnut is about 10 %, so its base colour x 4
+            {'id': 'modern_wooden_cabinet', 'location': [CONSOLE[0], CONSOLE[1], 0.0], 'rotation_deg': [0, 0, 0], 'name': 'console', 'value': 4.0},
             {'id': 'ArmChair_01', 'location': [CHAIR[0], CHAIR[1], 0.0], 'rotation_deg': [0, 0, -70], 'name': 'armchair', 'value': 0.3}],
         'lamps': ([
             # the Core on the side table: the lamps lane's honest Core at 26400e7c, its opal core the emitter (their
