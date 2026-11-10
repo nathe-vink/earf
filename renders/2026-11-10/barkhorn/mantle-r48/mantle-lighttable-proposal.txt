@@ -1,0 +1,32 @@
+PROPOSAL, the LIGHT-TABLE base (the coordinator, 2026-11-10 16:50). v3 as signed; the base keeps its signed outline and
+Smoke 2074. Its top carries a pocket 15 mm in from its edges, 10 mm deep, with islands left round the four posts (r 22),
+the bearing (r 30) and the motor (r 32). Bottom up: a white reflector (floor and walls, 92 %), dotless COB strip in 43
+runs at 12 mm pitch (5 mm wide, 6.05 m), 5.2 mm of air, a 2 mm opal diffuser (Perspex 041 class: T 54 %, R 39 %), and a
+2 mm cover of the base's own Smoke 2074, flush with the base's top (dead front). The plinth as signed plus the satin
+underside (from the uplit proposal). The signed LED loop under the base is removed. No other change.
+Lit 12.0 W (within the signed 10-15 W supply), Ember 2200 K, Ice 3000 K; by day 0 W. Dim neutral-warm room, WB 4000 K.
+
+Emitters: by day none; lit, one: `strip` (the COB grid). gt: 0 px of hidden lamps; no hidden mesh; emitter check clean.
+LED faces seen directly from the camera: 0 of 387 points. The panel's face (the cover's top) IS seen directly, through
+the 40 mm gap between deck and base: 150 of 651 points on it; in the lit frames it is the brightest surface (luma about
+160 at the front left of the gap in Ember).
+
+Light (calculated from typical datasheet efficacy and the sheet transmissions, not measured in the render):
+  Ember 2200 K, about 80 lm/W: 960 lm from the strip; about 770 out of the opal (reflector recycling, about 0.8);
+  about 510 through the cover (2 mm Smoke 2074 passes about 72 % inside, 66 % with its two surfaces).
+  Ice 3000 K, about 90 lm/W: 1080 / about 860 / about 570 lm.
+  Panel area 0.079 m^2 net of islands: about 2000 cd/m^2 at the cover's face (a light table's brightness; dimmable).
+The smoked cover costs about 34 % of the glow; it does not kill it, so the lit pair is rendered with the cover.
+
+Display luma at the same three points as before (top back-left / top mid-front / top front-right / satin edge / gap):
+  Ember: signed day 30/11/52/6/18; light-table day 46/21/130/20/24; light-table lit 12/0/8/3/3 (uplit lit 14/0/7/1/0)
+  Ice:   light-table lit 19/2/15/13/11 (uplit lit 22/2/12/5/2)
+Those three points sit mostly on the platter's shadow and the deck's back; across the deck's visible front band
+(rows 560-680, a 150 px grid) the lit deck reads: Ice 20-88 (uplit 0-42), Ember 1-22 (uplit 0-16).
+Read: Ice glows across the deck's front and right, evenly enough; Ember stays dim: 25.4 mm of Ember red passes little of
+a 2200 K source, and what passes is deep red (low luma). The panel itself, seen in the gap, outshines the deck.
+By day the base still reads smoked, a shade greyer than signed (the opal under a 2 mm smoke is paler than 12.7 mm solid).
+
+Cost, rough, against signed: 6 m COB instead of the 1.2 m loop +$15-25; opal and smoked cover cut +$15-25; reflector
+film +$3; the CNC pocket with six islands +$20-30; wiring 43 runs +$20-40 (an edge-lit guide panel would cut this);
+satin underside +$10-15. About +$85-135 a unit; the supply stays as signed.
