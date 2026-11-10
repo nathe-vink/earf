@@ -11,7 +11,9 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    tints-trucast.json), except Haze's horn pour (walkthrough 132). Lamps: DESIGN LOCKED 9 Nov 21:12 (the owner: Core B, "assuming we're still
    using the same materials we would use for the speakers and mantle": the outer ball in the speaker's TruCast tints, one dye per tint;
    a 3 mm white opal inner ball, the same opal as Hemisphere's diffuser); the lamps lane to confirm the CAD, BOM and stock in writing.
-   The lamp kit's Ember dye was a stale hand value until 9 Nov, now the speaker's 2423. Mantle: locked as drawn (Strata Float).
+   The lamp kit's Ember dye was a stale hand value until 9 Nov, now the speaker's 2423. Mantle: Strata Float v3 AS SIGNED by the owner 1 Nov ~12:10 ("Mantle: A"; r46-owner-notes 5b63e05b; built 2fddab95..71d3163e).
+   Everything after it is an unsigned proposal: the 11-03 edge-lit edit (8a20b821), v4 the lit deck, v5 option C/C3. Its light is open: v3's
+   COB loop under the base, whose underglow the owner called wrong on 3 Nov.
    REOPENED 10 Nov 00:28 by the owner. Core: the inner opal ball concentric with the outer ("the outer core should be the same depth
    around the whole inner core like in the original images"). Hemisphere: "it should work like core cut in half": the light through the
    dome takes the shell's tint and the downward light is the bulb's color, so a source that lights the liner replaces the as-drawn
@@ -119,10 +121,17 @@ final's horn mirrors the glowing dome as an X). Superseded by the owner's Hemisp
 Hemisphere, an honest moon (full-moon level, slate blue under 2700 K), the walnut at ~10 % albedo (the asset was 2.5 %), no denoiser
 on the lamp (it held the dome 0.8 EV low), and the lamp placed to keep its reflection out of the horn's creases.
 
+THE AUDITS' GAP (10 Nov 01:06): the mask pass and gt_audit flag hidden objects and area lamps, not camera-visible EMITTING MESHES. Every
+lane adds an emitter list to its report (every emitting material or mesh, with the real light it stands for); a frame with an emitter that is
+not a real light source in the product or the set fails. The brand lane's globe_real.py renders (globe-real, globe-paper, lockup-paper,
+lockup-night, globe-turn.mp4) fail on three counts (10 Nov 01:03): the key's reflection cut to 40 %, the fill hidden from reflections
+(diffuse-only), and on night self-emitting acrylic; nothing hidden in frame. They leave the restructured Book (the flat marks stand in) until
+re-rendered honestly.
+
 ## Pulled (do not use)
 | Picture | Why | Pulled |
 |---|---|---|
-| Mantle by day 41232b56 (honest-mantle-day.jpg; og-mantle.jpg) | THE OWNER (10 Nov 00:45): "looks kind of fucked up, like black and red wood instead of acrylic with damage on the edges. It looks cheap." At 2x: the plinth's polished front edge splits into a gray-black upper band (likely the backdrop's dark top mirrored) over red, reading as a worn edge; the 25 mm Ember top over the dark smoked base shows nothing through it, so it reads as opaque red lacquer. The critics had passed it; the owner's verdict rules | 10 Nov 00:46 |
+| Mantle by day 41232b56 (honest-mantle-day.jpg; og-mantle.jpg) | IT SHOWED AN UNSIGNED DESIGN AND A FAKE LIGHT (the Mantle lane, 10 Nov 01:02): it rendered v5 option C3 (out-strata-v5, c3e), not the signed v3; and --core-glow 5 put an emitting red sheet inside the core ("the room's light on the print, baked"), a light no real product or set has, which neither audit flagged because the camera could see it. The split edge is C3's build: the upper face looks onto rings painted 10 % grey and a black backer, the lower onto the bright floor. THE OWNER (10 Nov 00:45): "looks kind of fucked up, like black and red wood instead of acrylic with damage on the edges. It looks cheap." At 2x: the plinth's polished front edge splits into a gray-black upper band (likely the backdrop's dark top mirrored) over red, reading as a worn edge; the 25 mm Ember top over the dark smoked base shows nothing through it, so it reads as opaque red lacquer. The critics had passed it; the owner's verdict rules | 10 Nov 00:46 |
 | Dust habitat 43c91242 (dust-portrait-1200x1500-nopanel.jpg) | it hovers at phone size: a lit strip of sand between the front edge and the shadow's start (the biomes lane's gate 23:13; confirmed by all three critics in r2's gate, 10 Nov 00:04); the founder's grounded test | 10 Nov 00:05 |
 | Fog habitat aa1ca856 (fog_b-portrait-1200x1500-onesun.jpg) | a 2 x 2 m fill EMITTER `fill_l` (hidden from the camera, out of frame) breaks the habitats' rule: the sun and the sky's own are the only emitters, and the caption says "lit by one sun"; a passive reflector would be allowed. (The first report, "in frame", was withdrawn 23:46: the gt_audit hits were the panel seen through the speaker's glass; projected, it lies wholly past the left edge.) Re-render without it, or with a real reflector, queued | 9 Nov 23:40 |
 | Poison habitat P8 scene (not yet a final) | a 1.2 x 0.4 m fill emitter `litter` (out of frame; the in-frame flag withdrawn as for Fog); dropped or replaced by a real reflector before the final | 9 Nov 23:40 |
