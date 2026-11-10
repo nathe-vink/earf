@@ -106,7 +106,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .four { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(12px, 1.6vw, 20px) }
 .full img { width: 100% }
 .motion video { width: 100%; max-width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 4px; background: #F2EFEA; display: block }
-.motion video.wide { aspect-ratio: 16 / 9; object-fit: contain }
+.motion.solo { max-width: 360px }
 .three figure img { aspect-ratio: 3 / 2; object-fit: cover; width: 100% }
 .three figure.tall img { aspect-ratio: 4 / 5 }
 .seven { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: clamp(6px, 1vw, 12px) }
@@ -405,10 +405,8 @@ addEventListener('DOMContentLoaded', () => { if (matchMedia('(prefers-reduced-mo
       <li><b>Never</b><span>Recolor the globe's discs, outline the wordmark, set it in another face, stretch it, add a shadow or a glow it doesn't have, or put the tints in a gradient.</span></li>
       <li><b>Files</b><span>Files on request.</span></li>
     </ul>
-    <div class="three motion">
+    <div class="motion solo">
       <figure><video src="img/globe-turn.mp4" autoplay muted loop playsinline aria-label="The acrylic globe turning, as in the site's header"></video><figcaption><b>The turn.</b> The globe turning on its axis, as it does in the site's header; the only motion the mark makes at rest.</figcaption></figure>
-      <figure><video class="wide" src="img/ident-coin.mp4" autoplay muted loop playsinline aria-label="The coin ident: a coin spins and lands showing the globe"></video><figcaption><b>The coin.</b> An ident: a coin spins, wobbles and lands face up on the globe. Kept for a launch film and for EARFcoin.</figcaption></figure>
-      <figure><video class="wide" src="img/ident-rise.mp4" autoplay muted loop playsinline aria-label="The rise ident: the globe rises over a dark horizon"></video><figcaption><b>Earthrise.</b> An ident on night: the globe rises over its own horizon. Parked, for the bar's screens and the end of a film.</figcaption></figure>
     </div>
     <div class="two">
       <div class="clear"><span class="cs">Clear space</span><div class="box"><img src="img/wordmark-color.png" alt="The wordmark in the tints, each letter a different color of acrylic" loading="lazy" width="1600" height="490"></div></div>

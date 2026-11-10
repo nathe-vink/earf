@@ -90,9 +90,8 @@ def main():
     for f in sorted(os.listdir(kso)) if os.path.isdir(kso) else []:
         if f.endswith('.png'):
             save(Image.open(os.path.join(kso, f)), 'ks-' + f[:-4] + '.jpg', width=1600, q=86)
-    import shutil   # the motion: the site's turning globe and two of the parked idents (round 27)
-    for dst, src in {'globe-turn.mp4': 'site/img/globe-turn.mp4', 'ident-coin.mp4': 'brand/earth-ident-coin-acrylic-paper.mp4',
-                     'ident-rise.mp4': 'brand/earth-ident-rise-acrylic-night.mp4'}.items():
+    import shutil   # the motion: the site's turning globe (the coin and rise idents left the Book, 2026-11-10)
+    for dst, src in {'globe-turn.mp4': 'site/img/globe-turn.mp4'}.items():
         shutil.copy(os.path.join(B, src), os.path.join(IMG, dst))
     pinned()
     prune()
