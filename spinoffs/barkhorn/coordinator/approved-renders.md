@@ -17,7 +17,7 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    REOPENED 10 Nov 00:28 by the owner. Core: the inner opal ball concentric with the outer ("the outer core should be the same depth
    around the whole inner core like in the original images"). Hemisphere: "it should work like core cut in half": the light through the
    dome takes the shell's tint and the downward light is the bulb's color, so a source that lights the liner replaces the as-drawn
-   downlight. Tropos: the owner asked whether the horn's posts (bronze in the model) should be black like the lamps' parts; nothing
+   downlight. Tropos: the owner asked whether the horn's posts (bronze, bare satin, in the parts list; painted brass in the pictures, the model having no bronze colour) should be black like the lamps' parts; nothing
    changes until he answers. Every lamp picture waits for the redrawn designs.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
