@@ -813,7 +813,9 @@ def apply(web, head, rest):
         rc31(p, web)
         rc_mantle(p, web)
         rc_globe(p, web)
+        rc_intro(p, web)
         rc_words(p, web)
+        rc_home(p, web)
         rc_clean(p)
         p.banned = BANNED_RC
     return p.done()
@@ -1767,6 +1769,185 @@ def rc_words(p, web):
     # the coin sheet is gone: flat chips only
     p.rest = p.rest.replace('url(img/coins-light.jpg)', 'none')
     p.rest = p.rest.replace('its complement and its neighbours', 'its complement and its neighbors')
+
+
+INTRO_KEY = True   # the opening's film keyed to real transparency (the film is a square on its own ground, #EDECE5)
+
+
+def rc_intro(p, web):
+    """The opening globe with no ground of its own. The film is opaque, its ground #EDECE5 against the page's #F4F1EC, and
+    the flyer's circle clip only hid the square's corners: the ring of film ground round the globe read as a white edge.
+    The globe's discs reach the frame's edge, so no circular mask fits its outline; instead each decoded frame is drawn
+    into a canvas and its ground taken out with the header sprite's cutout (web.cutout), the ground sampled from the
+    frame's own corners, so it holds whatever color a decoder gives the ground. Before the first frame, the poster cut
+    out the same way; the video plays unseen and still sets the header's angle."""
+    import io, os, base64
+    from PIL import Image
+    if not INTRO_KEY:
+        return
+    import numpy as np
+    po = Image.open(os.path.join(web.IMG, 'globe-turn-poster.webp')).convert('RGB')
+    a = np.asarray(po).astype(int)
+    g = tuple(int(v) for v in np.median(np.concatenate([a[:6, :6], a[:6, -6:], a[-6:, :6], a[-6:, -6:]]).reshape(-1, 3), 0))
+    cut = web.cutout(po, g)
+    buf = io.BytesIO(); cut.save(buf, 'WEBP', quality=85, alpha_quality=90, method=6)
+    uri = 'data:image/webp;base64,' + base64.b64encode(buf.getvalue()).decode()
+    m = re.search(r"  v\.poster = night \? '[^']*' : '[^']*';\n", p.rest)
+    assert m, 'rc_intro: the poster line'
+    p.rest = p.rest[:m.start()] + p.rest[m.end():]                 # the video is never seen: no poster for it
+    p.sub('<video muted playsinline loop autoplay preload="auto" aria-hidden="true" tabindex="-1"></video></div>',
+          '<video muted playsinline loop autoplay preload="auto" aria-hidden="true" tabindex="-1"></video>'
+          '<canvas width="360" height="360" aria-hidden="true"></canvas></div>')
+    key = """<script>(function (d, fl) { if (!d.classList.contains('intro') || !fl) return;   // each frame keyed: the globe, no ground
+  const v = fl.querySelector('video'), cv = fl.querySelector('canvas'), W = cv.width, H = cv.height;
+  let x; try { x = cv.getContext('2d', { willReadFrequently: true }); } catch (e) { return; }
+  let G = null, lim = 0;
+  const ground = a => { const s = [[], [], []];
+    for (const [x0, y0] of [[1, 1], [W - 7, 1], [1, H - 7], [W - 7, H - 7]]) for (let y = y0; y < y0 + 6; y++) for (let i = x0; i < x0 + 6; i++) {
+      const k = (y * W + i) * 4; s[0].push(a[k]); s[1].push(a[k + 1]); s[2].push(a[k + 2]); }
+    return s.map(c => c.sort((p, q) => p - q)[c.length >> 1]); };
+  const key = () => {
+    if (!fl.isConnected) return;
+    if (v.readyState >= 2 && v.videoWidth) {
+      x.drawImage(v, 0, 0, W, H);
+      let im; try { im = x.getImageData(0, 0, W, H); } catch (e) { x.clearRect(0, 0, W, H); return; }
+      const a = im.data; if (!G) G = ground(a);
+      const [r0, g0, b0] = G, u = [1 / Math.max(255 - r0, 1), 1 / Math.max(255 - g0, 1), 1 / Math.max(255 - b0, 1)],
+        dn = [1 / Math.max(r0, 1), 1 / Math.max(g0, 1), 1 / Math.max(b0, 1)], t = 6 / 255;
+      for (let k = 0; k < a.length; k += 4) {
+        const dr = a[k] - r0, dg = a[k + 1] - g0, db = a[k + 2] - b0;
+        const m = Math.max(dr > 0 ? dr * u[0] : -dr * dn[0], dg > 0 ? dg * u[1] : -dg * dn[1], db > 0 ? db * u[2] : -db * dn[2]);
+        const al = m <= t ? 0 : Math.min(1, (m - t) / (1 - t));
+        if (al === 0) { a[k + 3] = 0; continue; }
+        a[k] = r0 + dr / al; a[k + 1] = g0 + dg / al; a[k + 2] = b0 + db / al; a[k + 3] = al * 255; }
+      x.putImageData(im, 0, 0); fl.classList.add('live');
+    }
+    if (v.requestVideoFrameCallback) v.requestVideoFrameCallback(key); else requestAnimationFrame(key); };
+  key();
+})(document.documentElement, document.querySelector('.flyer'))</script>"""
+    i = p.rest.index("<noscript><style>html.opening .hero-photo img { opacity: 1 }</style></noscript>")
+    p.rest = p.rest[:i] + key + '\n' + p.rest[i:]
+    p.css("html.intro .splash { background: var(--page, #F4F1EC) }\n"
+          "html.intro .flyer { background: url(" + uri + ") center / 100% 100% no-repeat }\n"
+          "html.intro .flyer.live { background: none }\n"
+          ".flyer video { position: absolute; inset: 0; opacity: 0; clip-path: none !important; background: none !important; pointer-events: none }\n"
+          ".flyer canvas { display: block; position: relative; width: 100%; height: 100% }\n")
+
+
+HOTSPOTS = True    # the hero's point (Tropos in Ice, to its page); off: the picture alone
+HERO_SRC = 'renders/2026-11-03/barkhorn/habitats/ice-portrait-1200x1500-blackrods.jpg'   # Ice out in the snow at dusk
+HERO_ALT = 'Tropos in Ice, out in the snow at dusk'
+HERO_WIDE = (8 / 5, 0.5, 0.616)    # the desktop crop: aspect, object-position x and y (the speaker whole, its horn to its foot)
+HERO_TALL = (4 / 5, 0.5, 0.5)      # the phone: the whole 4:5 picture
+HERO_POINTS = [(63.8, 59.9, 'Tropos in Ice', '#speaker-ice')]   # x, y in percent of the picture: the woofer's cap
+
+
+def cover_point(x, y, size, crop):
+    """A point of the picture (x, y in percent) where it lands in a box of the crop's aspect, with object-fit: cover and
+    the crop's object-position: the box's percent."""
+    A, px, py = crop
+    w, h = size
+    X, Y = x / 100 * w, y / 100 * h
+    if A > w / h:                                 # fitted to the width: some height cut
+        vh = w / A; top = py * (h - vh)
+        return round(X / w * 100, 2), round((Y - top) / vh * 100, 2)
+    vw = h * A; left = px * (w - vw)
+    return round((X - left) / vw * 100, 2), round(Y / h * 100, 2)
+
+
+def hotspot_hero(img, size, alt, points, wide, tall, srcset=None, attrs=''):
+    """A picture with points on it: (x, y in percent of the picture, label, link) each. The box takes the wide crop's aspect,
+    or the tall one's in a portrait window, so every point's place is fixed in CSS: nothing moves when the picture or a
+    label arrives. Each point is a link with its label as its name (keyboard and screen readers get it as is); the label
+    shows on hover, on keyboard focus and, on a touch screen, on the first tap (the second follows the link)."""
+    pts = []
+    for (x, y, label, href) in points:
+        wx, wy = cover_point(x, y, size, wide); tx, ty = cover_point(x, y, size, tall)
+        side = ' hs-left' if wx > 62 else ''
+        pts.append(f'<a class="hs-pt{side}" href="{href}" style="--x:{wx}%;--y:{wy}%;--tx:{tx}%;--ty:{ty}%">'
+                   f'<span class="hs-dot" aria-hidden="true"></span><span class="hs-label">{label}</span></a>')
+    ss = f' data-srcset="{srcset}" sizes="100vw"' if srcset else ''
+    return (f'<div class="hero-photo hs"{attrs}><img data-src="{img}"{ss} fetchpriority="high" width="{size[0]}" height="{size[1]}" '
+            f'alt="{alt}">' + ''.join(pts) + '</div>')
+
+
+HOTSPOT_CSS = """
+.hs { position: relative; width: 100%; aspect-ratio: var(--hs-a); overflow: hidden; background: #C9CDD6 }
+.hs > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: var(--hs-p) }
+.hs-pt { position: absolute; left: var(--x); top: var(--y); width: 44px; height: 44px; margin: -22px 0 0 -22px; z-index: 2;
+  display: grid; place-items: center; color: #1C1A18; text-decoration: none; -webkit-tap-highlight-color: transparent }
+.hs-dot { width: 18px; height: 18px; border-radius: 50%; background: #FFF; box-shadow: 0 0 0 5px rgb(255 255 255 / .35), 0 1px 6px rgb(0 0 0 / .35);
+  transition: transform .2s ease }
+.hs-label { position: absolute; left: 50%; bottom: calc(100% - 4px); transform: translate(-50%, 4px); white-space: nowrap;
+  padding: 7px 12px; border-radius: 999px; background: #FFF; color: #1C1A18; font-size: 15px; line-height: 1.2;
+  box-shadow: 0 2px 10px rgb(0 0 0 / .2); opacity: 0; pointer-events: none; transition: opacity .18s ease, transform .18s ease }
+.hs-pt:hover .hs-label, .hs-pt:focus-visible .hs-label, .hs-pt.open .hs-label { opacity: 1; transform: translate(-50%, 0) }
+.hs-pt:hover .hs-dot, .hs-pt:focus-visible .hs-dot, .hs-pt.open .hs-dot { transform: scale(1.15) }
+.hs-pt:focus-visible { outline: none }
+.hs-pt:focus-visible .hs-dot { box-shadow: 0 0 0 3px #1C1A18, 0 0 0 6px #FFF }
+@media (prefers-reduced-motion: reduce) { .hs-label, .hs-dot { transition: none } }
+"""
+
+HOTSPOT_JS = """<script>(function () {   // on a touch screen, a point's first tap shows what it is; the second follows it
+  const pts = document.querySelectorAll('.hs-pt'); if (!pts.length) return;
+  const touch = () => matchMedia('(hover: none)').matches;
+  addEventListener('click', e => {     // the window's capture: ahead of the page's router, which yields to a prevented click
+    const a = e.target.closest && e.target.closest('.hs-pt');
+    if (!a || !touch() || a.classList.contains('open')) return;
+    e.preventDefault(); pts.forEach(b => b.classList.toggle('open', b === a)); }, true);
+  document.addEventListener('click', e => { if (!e.target.closest || !e.target.closest('.hs-pt')) pts.forEach(b => b.classList.remove('open')); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') pts.forEach(b => b.classList.remove('open')); });
+})()</script>"""
+
+
+def rc_home(p, web):
+    """The home as the owner asked: one full-width picture, Ice out in the snow at dusk, with the line over its sky; the
+    four products below, a line and a link each. No figures on home (Tropos's page keeps them) and no row of fronts."""
+    import os
+    from PIL import Image
+    src = Image.open(os.path.join(web.ROOT, HERO_SRC)).convert('RGB')
+    size = src.size
+    out = {}
+    for w in (1200, 800):
+        n = f'img/rc/home-ice-{w}.webp'
+        (src if w == size[0] else src.resize((w, round(size[1] * w / size[0])), Image.LANCZOS)).save(
+            os.path.join(web.SITE, n), quality=80, method=6)
+        out[w] = n
+    srcset = f'{out[800]} 800w, {out[1200]} 1200w'
+    m = re.search(r'<div class="hero-photo hero-row">.*?</ul></div>', p.rest, re.S)
+    assert m, 'rc_home: the row of fronts'
+    pic = hotspot_hero(out[1200], size, HERO_ALT, HERO_POINTS if HOTSPOTS else [], HERO_WIDE, HERO_TALL, srcset)
+    p.rest = p.rest[:m.start()] + pic + p.rest[m.end():]
+    p.sub('<section class="hero" id="top">', '<section class="hero hs-hero" id="top">')
+    # on a wide screen the line stands in two, left of the speaker; in a tall one, in one over the sky
+    p.sub('<h1 class="tagline">A&nbsp;world&nbsp;of&nbsp;sound,&nbsp;in&nbsp;color.</h1>',
+          '<h1 class="tagline">A&nbsp;world&nbsp;of&nbsp;sound,<br class="hs-br"> in&nbsp;color.</h1>')
+    # the line over the picture's sky
+    p.css(HOTSPOT_CSS +
+          f".hs-hero .hs {{ --hs-a: {HERO_WIDE[0]:.4f}; --hs-p: {HERO_WIDE[1]*100:.1f}% {HERO_WIDE[2]*100:.1f}% }}\n"
+          f"@media (max-aspect-ratio: 1/1) {{ .hs-hero .hs {{ --hs-a: {HERO_TALL[0]:.4f}; --hs-p: {HERO_TALL[1]*100:.1f}% {HERO_TALL[2]*100:.1f}% }}\n"
+          "  .hs-hero .hs-pt { left: var(--tx); top: var(--ty) } }\n"
+          ".hs-hero { padding: 0 0 clamp(24px, 5vh, 56px) !important; height: auto !important; min-height: 0 !important; display: block !important }\n"
+          ".hs-hero .hero-pic { position: relative !important; width: 100% !important; margin: 0 !important }\n"
+          ".hs-hero .hero-title { position: absolute !important; left: 0; right: 0; top: 0; z-index: 3; pointer-events: none; color: #1C1A18 }\n"
+          ".hs-hero .hero-title .wrap { padding-block: clamp(18px, 3.2vw, 48px) 0 !important }\n"
+          ".hs-hero .hero-photo { margin: 0 !important; max-width: none }\n"
+          ".hs-hero .hero-title h1 { font-size: clamp(34px, 4.3vw, 64px) !important; line-height: 1.04 }\n"
+          "@media (max-aspect-ratio: 1/1) { .hs-hero .hs-br { display: none }\n"
+          "  .hs-hero .hero-title h1 { font-size: clamp(18px, min(9.4vw, calc((100vw - 32px) / 12.69)), 44px) !important }\n"
+          "  .hs-dot { width: 14px; height: 14px; box-shadow: 0 0 0 4px rgb(255 255 255 / .35), 0 1px 5px rgb(0 0 0 / .35) } }\n")
+    # the products: no figures on home
+    m = re.search(r'\s*<ul class="figures">.*?</ul>\s*<p class="foot-note">[^<]*</p>', p.rest, re.S)
+    assert m and p.rest.count('<ul class="figures">') == 1, 'rc_home: the figures'
+    p.rest = p.rest[:m.start()] + p.rest[m.end():]
+    if 'id="ice-band"' in p.rest:                       # the same picture: once, at the top
+        p.section('ice-band')
+    # the first view's picture, fetched first
+    p.sub("if (home) { add('img/rc/red-hero.webp'); add('img/rc/orange-hero.webp'); }",
+          f"if (home) add(null, '{srcset}');", where='head' if "add('img/rc/red-hero.webp')" in p.head else 'rest')
+    i = p.rest.index('</body>') if '</body>' in p.rest else len(p.rest)
+    if HOTSPOTS:
+        p.rest = p.rest[:i] + HOTSPOT_JS + '\n' + p.rest[i:]
 
 
 HISTORY = r'(?:round \d+|\br\d\d[a-z]?\b|\bRC\d?\b|coordinator|the owner|critics?\b|\bcommit\b|\bbranch\b|r\d\d-[a-z]|wave \d|the audit)'
