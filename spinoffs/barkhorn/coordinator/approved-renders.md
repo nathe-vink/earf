@@ -169,6 +169,19 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    MANTLE same-color base (r48-mantle-design 52541510): by day the plinth reads as with the smoked base; lit from under the
    base the top stays dark (the loop only outlines the base's edges and pools on the floor). Held for one sheet together
    with the uplit-plinth frames.
+   OWNER 10 Nov ~16:05 on the site preview a6cf380d: "No the animation looks worse what the hell" (the opening globe). The
+   coordinator had checked the edge, not the motion. Frame-by-frame in Chromium, 6e7250d0 against a6cf380d: the edge is
+   clean; the film's flash on the vertical disc shows at 0.8-1.1 s; the cream reveal circle now sweeps over the dark hero
+   photo; the globe is now painted through a per-frame canvas cutout (untested in Safari; may stutter). Site lane: the
+   reveal, timing and film are unchanged between the builds. FIX IN FLIGHT: the brand lane renders the restored non-flashing
+   turn as straight-alpha RGBA frames on a transparent ground; the site lane rebuilds the opening as a pre-cut sprite (no
+   canvas keying, no video), a slow eased turn settling on the mark's pose, motion verified frame by frame, ONE push.
+   LESSON: only one Vercel share link lives at a time; making a link for another deployment cancelled the owner's link.
+   HERO, painted room test (r33-speaker-horn f6ceca2f, hero-room.png; base A, options [], three soft lamps) shown 16:20.
+   OWNER ~16:23: "Closer but wider bands and more space and maybe speakers going from outward facing to middle facing back
+   to outward facing across the spectrum". Speaker lane briefed 16:25 for ONE more test: bands about 1.0 m, speakers about
+   35-38 % of the frame height with more wall and floor, the row fanned (-35 to +35 degrees, ends turned outward, middle
+   straight on), Haze's pale cabinet and Smoke's glare fixed by cutting the front fill.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
