@@ -157,9 +157,15 @@ def build(frame, samples, scale):
             m = bpy.data.materials.new(nm); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
             o = nt.nodes.new('ShaderNodeOutputMaterial'); tr = nt.nodes.new('ShaderNodeBsdfTranslucent')
             gl = nt.nodes.new('ShaderNodeBsdfGlossy'); gl.inputs['Roughness'].default_value = 0.08
-            df = nt.nodes.new('ShaderNodeBsdfDiffuse'); m1 = nt.nodes.new('ShaderNodeMixShader'); m1.inputs[0].default_value = 0.5
-            m2 = nt.nodes.new('ShaderNodeMixShader'); m2.inputs[0].default_value = 0.06
-            tr.inputs['Color'].default_value = (*oc_, 1); df.inputs['Color'].default_value = (*(v * 0.97 for v in oc_), 1)
+            # 2026-11-10 (the coordinator: the opal decides how bright the as-drawn dome reads): the opal at a stocked
+            # grade's datasheet, Perspex GS Opal/White 041, 3 mm (Perspex technical data sheet, section 5, ASTM D1003,
+            # Illuminant C): T 54 %, R 39 %, so A 7 %. Here: a 4 % glossy face, then 60.5 % translucent at 0.93 (T 0.54)
+            # and 39.5 % diffuse at 0.923 (R 0.04 + 0.35). Until now T 0.44, R 0.47, A 0.09 (OPAL=old for that)
+            old_ = os.environ.get('OPAL') == 'old'
+            df = nt.nodes.new('ShaderNodeBsdfDiffuse'); m1 = nt.nodes.new('ShaderNodeMixShader'); m1.inputs[0].default_value = 0.5 if old_ else 0.605
+            m2 = nt.nodes.new('ShaderNodeMixShader'); m2.inputs[0].default_value = 0.06 if old_ else 0.04
+            tr.inputs['Color'].default_value = (*oc_, 1)
+            df.inputs['Color'].default_value = (*(v * 0.97 for v in oc_), 1) if old_ else (0.923, 0.923, 0.915, 1)
             nt.links.new(df.outputs[0], m1.inputs[1]); nt.links.new(tr.outputs[0], m1.inputs[2])
             nt.links.new(m1.outputs[0], m2.inputs[1]); nt.links.new(gl.outputs[0], m2.inputs[2]); nt.links.new(m2.outputs[0], o.inputs['Surface'])
             return m
