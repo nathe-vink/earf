@@ -2,10 +2,11 @@
 can use the monochromatic globe and color in each tile to match the rendered globe instead as the multi-color
 option").
 
-The one-ink globe's tiles (earth.disc_shapes, seamed, the black mark's own pieces) each filled with one flat colour: the
-median of the rendered globe (globe_real.py, A3) inside that tile, the tile shrunk a little first so its edges and the
-render's rims don't pull the median. The seams are the one-ink mark's. One for light grounds, from the paper render, and
-one for dark grounds, from the night render; and the lockups from each.
+The one-ink globe's tiles (earth.disc_shapes, seamed, the black mark's own pieces), each filled with its disc's one flat
+shade (the owner, on Book v27: "The flat version of the logo can use one shade for each color"): six colors, six shades,
+the logo's full-strength colors (earth.RING). A tile belongs to the disc in front at its middle (earth.facets). On dark
+grounds the same shades, but a shade under 3:1 against night (Ember and Haze) is lifted in OKLab lightness, its hue and
+chroma kept, until it reaches 3:1. (Book v27's first version filled each tile with the render's median there instead.)
 
     .venv-fab/bin/python spinoffs/barkhorn/globe_tiles.py [--paper PNG] [--night PNG]
 
@@ -33,6 +34,35 @@ def tiles():
             if p.geom_type == 'Polygon' and not p.is_empty:
                 out.append((i, p))
     return out
+
+
+def owners(parts):
+    """The disc in front at each tile's middle (earth.facets, the slabs as the one-ink mark draws them)."""
+    vis = E.facets(0.0, E.THICK + E.SEAM)
+    out = []
+    for _, p in parts:
+        q = p.representative_point()
+        hits = [i for i, v in enumerate(vis) if v.contains(q)]
+        out.append(hits[0] if hits else min(range(len(vis)), key=lambda i: vis[i].distance(q)))
+    return out
+
+
+def _Y(h):
+    v = np.array([int(h[i:i + 2], 16) for i in (1, 3, 5)]) / 255
+    v = np.where(v <= 0.04045, v / 12.92, ((v + .055) / 1.055) ** 2.4)
+    return float(v @ [.2126, .7152, .0722])
+
+
+def on_dark(h, ground=None, ratio=3.0):
+    """`h` lifted in OKLab lightness (hue and chroma kept, eased into gamut) until it stands `ratio`:1 against night."""
+    import globe_real as G
+    g = _Y(ground or E.NIGHT)
+    lift = 0.0
+    c = h
+    while (_Y(c) + .05) / (g + .05) < ratio and lift < 0.5:
+        lift += 0.005
+        c = G._vivid_hex(h, 1.0, lift)
+    return c
 
 
 def colours(render, parts, shrink=0.012):
@@ -81,10 +111,12 @@ def main():
     ap.add_argument('--night', default=os.path.join(OUT, 'earf-globe-render-night.png'))
     a = ap.parse_args()
     parts = tiles()
-    rec = {}
-    for tag, render, word in (('', a.paper, E.INK), ('-night', a.night, E.WHITE)):
-        cols = colours(render, parts)
-        rec[tag or 'paper'] = [{'disc': i, 'colour': c} for (i, _), c in zip(parts, cols)]
+    own = owners(parts)
+    dark = {E.RING[i]: on_dark(E.RING[i]) for i in range(6)}
+    rec = {'lifted on dark': {E.RING_NAMES[i]: [E.RING[i], dark[E.RING[i]]] for i in range(6) if dark[E.RING[i]] != E.RING[i]}}
+    for tag, word in (('', E.INK), ('-night', E.WHITE)):
+        cols = [E.RING[o] if not tag else dark[E.RING[o]] for o in own]
+        rec[tag or 'paper'] = [{'disc': E.RING_NAMES[o], 'colour': c} for o, c in zip(own, cols)]
         for f in write(parts, cols, tag, word):
             print(f)
     json.dump(rec, open(os.path.join(OUT, 'tiles.json'), 'w'), indent=1)
