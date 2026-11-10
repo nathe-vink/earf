@@ -78,10 +78,10 @@ the old rule are marked; each is re-rendered under the new rule and gated agains
 | Picture | Source | Gate | Used by |
 |---|---|---|---|
 | Ice, "Out in the snow at dusk." | 0f619953 | PASSED (verified 9 Nov 22:56 under the current rules: tint once, the horn under the rule, angle-dependent Fresnel; within noise, the file stays; gt_audit 23:40: no hidden object, no area lamp: sun and sky only) | site (home band, /tropos/ice, /colors/ice), Book |
-| Dust, "On rippled sand among desert buttes." | PULLED 10 Nov 00:05, see Pulled; r2 (ec520098) held 1/3 (grounded fixed; a new fan of glints on the horn); r3 queued | | none |
+| Dust, "On rippled sand among desert buttes." | PULLED 10 Nov 00:05, see Pulled; r2 (ec520098) held 1/3; r3 (r48-biomes e9efa683) HELD 1/3 (10 Nov 01:36, wf_1788c4d7): grounded at full and phone size, the box clean deep rust-orange, but the horn's mouth reads as a flat pale coral plate (the asset's horn material under check against the cabinet's glass; Poison's horn is ~5.6x denser); the drift a lump that did not hide the left-foot sliver. r4 after Fog and Poison g3 | | none |
 | Fog, "In the grass on a hillside, in fog at dawn." | PULLED 9 Nov 23:40, see Pulled; a re-render without the fill lamp follows | | none |
 | Acid | r48-biomes 539c3772 | HOLD 1/3 (rain stops at the speaker; dry; dark cabinet) | none |
-| Poison | r48-biomes P8 proxy (b60934b7, the horn under the rule) | PROXY PASSED for the final 2/3 (9 Nov 23:08; exposure 0.75 by all three; watch the horn's crease glint at full samples); the final queued after Dust | none |
+| Poison | r48-biomes P8 proxy (b60934b7, the horn under the rule); the garden proxy g2 (8e2cad0a) FAILED 0/3 as a direction (10 Nov 01:27): not poison at phone size, the foxgloves the owner called fake on 20 Oct, mixed botany; g3 (scarlet fly agaric under a Douglas-fir, red baneberry, darker understory, a blind phone-size test first) queued | PROXY PASSED for the final 2/3 (9 Nov 23:08; exposure 0.75 by all three; watch the horn's crease glint at full samples); the final queued after Dust | none |
 | Ember, Haze | not started (Haze waits on the horn pour) | | none |
 
 ## Lamps
