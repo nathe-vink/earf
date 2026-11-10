@@ -19,6 +19,14 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    dome takes the shell's tint and the downward light is the bulb's color, so a source that lights the liner replaces the as-drawn
    downlight. Tropos: the owner asked whether the horn's posts (bronze, bare satin, in the parts list; painted brass in the pictures, the model having no bronze colour) should be black like the lamps' parts; nothing
    changes until he answers. Every lamp picture waits for the redrawn designs.
+   ANSWERED 10 Nov ~02:05 (the page "Lamps and Rods", artifact RMwPzKNYYCmQtCAXuL3Vn1 v1; each answer an investigator and two checkers):
+   Core concentric: the grommet raised (12.0 mm at Ø120), the core bonded on a spigot, the bore bright, lit by the LED only; the SIZE
+   is open (Ø120 20 mm band, ~11 mm of black tube under the core in the hero view; Ø130 ~15; Ø140 ~10, a 4 mm gap): proxies first, then
+   the CAD. Hemisphere option 3: an up-facing LED ring at the mouth's centre under a stock side-emitting lens (its IES file; the rim
+   band at least 2/3 of the middle), a white crown, the opal to z 0; the TABLE LIGHT is open (575 lm ~120 lux; ~1,000 lm ~200 lux;
+   or a puck below the rim). Rods: asked "Black or brass?" (my pick black). Owned to the owner: my 21:06 "October used the two-layer
+   build" (wrong: one ball, a faked glow), my 22:34 ring recommendation ("glows evenly"; it glowed faint, pale teal), and my 22:38
+   "Core B carries exactly the drawn LED's light" (an assumption; as drawn about half). Lamps lane briefed ~02:05.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
@@ -97,7 +105,8 @@ The owner's decision sheets (Hemisphere glow b/a1/a2/off; Core B Ø120 vs Ø90):
 tinted front-surface highlights (the shader may carry the tint; checking), two unexplained teal discs on every Hemisphere frame, (a2)'s glow
 4-10x short of its label, the studio fill too high for a night comparison, the Core B cores bleached by the view transform, and the
 captions. Walkthrough 133 and 135 wait for the fixed sheets.
-Core B, decided by the owner 9 Nov 21:12 (the dark border he liked comes from B's nested build). Every lamp picture is re-rendered as B.
+Core B, decided by the owner 9 Nov 21:12. (Corrected 10 Nov: the dark border he liked in October was the single ball's own wall round a
+glow faked by an emitter and hidden lights; B's nested build gives a real border.) Every lamp picture is re-rendered as B, concentric.
 Hemisphere switched off in Ember, the master 60ad1899: HOLD 0/4 (10 Nov 00:51): the backdrop fixed (dE2000 1.37, still ~1.7 L* light),
 the key glint now white; held for the disc and wire under the cap (all four critics: a fully scattering liner cannot show them; the lane's
 probes call it a reflection in the shells), the overhead strip's arc reading salmon-pink, and the sweep. Waits for the redesigned hub.
