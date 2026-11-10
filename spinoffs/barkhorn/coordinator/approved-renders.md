@@ -96,9 +96,15 @@ tinted front-surface highlights (the shader may carry the tint; checking), two u
 4-10x short of its label, the studio fill too high for a night comparison, the Core B cores bleached by the view transform, and the
 captions. Walkthrough 133 and 135 wait for the fixed sheets.
 Core B, decided by the owner 9 Nov 21:12 (the dark border he liked comes from B's nested build). Every lamp picture is re-rendered as B.
+Hemisphere switched off in Ember, the master 60ad1899: HOLD 0/4 (10 Nov 00:51): the backdrop fixed (dE2000 1.37, still ~1.7 L* light),
+the key glint now white; held for the disc and wire under the cap (all four critics: a fully scattering liner cannot show them; the lane's
+probes call it a reflection in the shells), the overhead strip's arc reading salmon-pink, and the sweep. Waits for the redesigned hub.
 10 Nov 00:28, the owner on the lamp pictures: Core's color layer the same depth all round (concentric); Hemisphere works like Core cut
 in half (the dome glows its tint; the light straight down is the bulb's white). That answers walkthrough 135's question in substance;
-the glow sheet, the Core B pair and the lit set are redone after the redesign. The opal is now a real stocked grade: Perspex GS 041
+the glow sheet, the Core B pair and the lit set are redone after the redesign (the v2 sheets' gate, 10 Nov 00:50, held the
+glow sheet 0/4 and passed the Core B sheet 3/4 as a decision aid with caption fixes; both superseded: the critics measured the core
+about 11 mm low, the gap ~25 mm at the top and ~3 mm at the foot, the owner's "sunken"; and an opal-lit dome reads pale and milky
+teal against the deep shell, which the redesign must weigh). The opal is now a real stocked grade: Perspex GS 041
 3 mm opal (T 54 %, R 39 %, A 7 %, ASTM D1003; the model had T 0.44, R 0.47), set in lamp_site.py (lamps lane 07da0ed7, local).
 
 ## Mantle
