@@ -167,7 +167,10 @@ CANOPY_OPEN = {'poison_g5': 0.25}
 # the 0.38-flat domes of r2-r3, which barely read
 WET = {'acid_b': (260, 60, 3, 1, 3.0, 6.0, 0.3, 0.55, 2.2, 70.0)}
 MENISCUS = {'acid_b': 0.002}
-REFLECT = {}   # habitat -> [reflector specs] (W H AZ EL DIST TX TY TZ), white boards where fill lamps stood
+REFLECT = {   # habitat -> [reflector specs] (W H AZ EL DIST TX TY TZ), white boards where fill lamps stood
+    # Fog (b), 2026-11-10: a 2 x 2 m white board where fill_l stood (proxies: no fill left 15 % of the face under 10, the
+    # board 5 %; the passed file 4 %). Poison takes none: a board where litter stood shades the floor on the sun's line
+    'fog_b': [(2.0, 2.0, -55.0, 15.0, 3.5, 0.0, 0.0, 0.8)]}
 SAMPLES = {'ember': 96, 'poison_g5': 96, 'haze_b': 96, 'fog_b': 96}
 
 
