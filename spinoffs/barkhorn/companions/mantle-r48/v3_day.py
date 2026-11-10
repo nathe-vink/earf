@@ -71,11 +71,59 @@ def black_posts():
             print('v3_day: satin black', o.name, flush=True)
 
 
+def side_fix():
+    # the coordinator, 2026-11-10: the side strip's highlight turned the posts' lit half pale. The strip narrowed from
+    # 0.10 to 0.03 m tall and raised from centre z 0.045 to the deck's middle, aimed level, so it rakes the deck's edge
+    # and passes over the posts under the deck
+    from mathutils import Vector
+    o = bpy.data.objects.get('side')
+    if o is None:
+        return
+    pl = [x for x in bpy.data.objects if x.name.startswith('plinth-L1')]
+    zs = [(x.matrix_world @ Vector(c)).z for x in pl for c in x.bound_box]
+    zm = (min(zs) + max(zs)) / 2
+    o.data.size_y = 0.03
+    o.location.z = zm
+    tgt = Vector((o.location.x + 1.0, o.location.y - 0.10, zm))
+    o.rotation_euler = (tgt - o.location).to_track_quat('-Z', 'Y').to_euler()
+    print(f'v3_day: side strip 0.03 m tall at z {zm:.3f}, aimed level', flush=True)
+
+
+def black_bearing():
+    # VARIANT for the owner: the bearing's visible brass (housing, nut, washer) satin black; the parts list stays brass
+    m = bpy.data.materials.get('post-satin-black')
+    if m is None:
+        black_posts(); m = bpy.data.materials['post-satin-black']
+    for n in ('bearing-housing', 'bearing-nut', 'bearing-washer'):
+        o = bpy.data.objects.get(n)
+        if o is not None:
+            o.data.materials.clear(); o.data.materials.append(m); print('v3_day: satin black', n, flush=True)
+
+
+def strip_watts(w):
+    # the light on: the LED strip (the drawing's light) emits w watts in all, both faces of its mesh (Cycles' mesh
+    # emission is two-sided): radiance = w / (2 pi A)
+    obs = [o for o in bpy.data.objects if o.name.startswith('led-strip') and o.type == 'MESH']
+    A = sum(p.area for o in obs for p in o.data.polygons) * (obs[0].matrix_world.to_3x3().determinant() ** (2 / 3) if obs else 1)
+    for o in obs:
+        for sl in o.material_slots:
+            for nd in sl.material.node_tree.nodes:
+                if nd.type == 'EMISSION':
+                    nd.inputs['Strength'].default_value = w / (2 * 3.14159265 * A)
+    print(f'v3_day: led-strip {w} W over {A * 1e4:.1f} cm2: radiance {w / (2 * 3.14159265 * max(A, 1e-9)):.1f}', flush=True)
+
+
 def prepare():
     if '--cards' in mine:
         cards()
     if '--black-posts' in mine:
         black_posts()
+    if '--side-fix' in mine:
+        side_fix()
+    if '--black-bearing' in mine:
+        black_bearing()
+    if '--strip-watts' in mine:
+        strip_watts(float(mine[mine.index('--strip-watts') + 1]))
     for o in bpy.data.objects:
         if o.name.startswith('flag-'):
             o.visible_camera = True
@@ -86,8 +134,8 @@ def prepare():
         for nd in m.node_tree.nodes:
             if nd.type == 'EMISSION' and (nd.inputs['Strength'].is_linked or nd.inputs['Strength'].default_value > 0):
                 users = [o.name for o in bpy.data.objects if hasattr(o.data, 'materials') and m.name in [s.material.name for s in o.material_slots if s.material]]
-                if users:
-                    raise SystemExit(f'v3_day: {m.name} emits on {users}: no emitter allowed')
+                if users and not all(u.startswith('led-strip') for u in users):
+                    raise SystemExit(f'v3_day: {m.name} emits on {users}: no emitter allowed (the LED strip alone may)')
     bpy.ops.wm.save_as_mainfile(filepath=os.path.splitext(out)[0] + '.blend', copy=True)
 
 

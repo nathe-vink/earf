@@ -43,6 +43,10 @@ def lin(h):
 # passes is the color's `deep` (the speakers' flavours, ../common.py), so a full 12.7 stratum can be tinted and still pass
 # light. A caster pours these to order (round 17's partners); they are not stock.
 CUSTOM = {'ember-custom': '#F2A29C', 'ice-custom': '#B5D9EE', 'haze-custom': '#BEADD8', 'dust-custom': '#F2B184'}
+# the speakers' current cabinet tints (r33-speaker-horn 9097a8dd, studio/products/barkhorn-cloud.json, the 'bark' deep
+# after 25 mm; Smoke's #A7A7A7 is after 27.4 mm, 50 % through 20 mm, here restated after 25 mm), for Mantle (2026-11-10)
+CUSTOM.update({'sp-ember': '#CF0913', 'sp-dust': '#FBBD77', 'sp-acid': '#F1EE7F', 'sp-poison': '#12AA24',
+               'sp-ice': '#92CCF7', 'sp-haze': '#9F61E4', 'sp-fog': '#FFFFFF', 'sp-smoke': '#ACACAC'})
 # the line's stock tints since 2026-11-01 (the owner: "I like the darker colors"; r33-speaker-horn
 # spinoffs/barkhorn/asset/tints-trucast.json): each code's TruCast TT held at its own 1/2 in sheet, given as the color
 # after 10 mm (`strata_horn_deep`, horn_radius_m 0.01)
