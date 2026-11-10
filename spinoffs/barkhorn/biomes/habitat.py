@@ -64,7 +64,7 @@ LED = [1.0]                             # --led F: the amp plate's power LED's e
 SINK = [0.002]                          # --sink M: the feet bedded this far into the ground (ash, sand). The sets' crust and
                                         # ripples are displaced at render time, so the ray cast sees flat ground and can't seat
                                         # the feet in them: habitats.py beds them a full 12 mm, the cabinet on the ground
-HORN = {'close': False, 'rough': None, 'shadows': True}  # --horn-close: fill the horn shells' open seams; --horn-rough R: the satin's roughness (test only)
+HORN = {'close': False, 'rough': None, 'shadows': True, 'as_cabinet': False}  # --horn-close: fill the horn shells' open seams; --horn-rough R: the satin's roughness (test only)
 TT_SURFACE = 0.92                       # the two faces' reflection loss, as tints.py has it
 
 
@@ -738,7 +738,7 @@ def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extr
     import render, product as Pr, lights as Lt
     linked = []
     place0 = Pr.place
-    editable = (stand == 'feet' or tt or up or lining or glass_shadows or HORN['close'] or HORN['rough'] is not None
+    editable = (stand == 'feet' or tt or up or lining or glass_shadows or HORN['close'] or HORN['as_cabinet'] or HORN['rough'] is not None
                 or not HORN['shadows'] or LED[0] != 1.0 or SPLIT[0] or REAL_SET[0])   # else the asset as it is, linked
 
     def place(bpy_, pdef, templates, shot_, root_):
@@ -809,6 +809,24 @@ def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extr
                         if n.type == 'BSDF_PRINCIPLED':
                             n.inputs['Roughness'].default_value = HORN['rough']
             print('horn satin roughness ->', HORN['rough'])
+        if HORN['as_cabinet']:
+            # the horn as the cabinet's glass (the coordinator, 2026-11-10 01:37): the asset's horns carry their own, denser
+            # volume absorption (Dust 9-51x the cabinet's per mm, Poison 3-5x); each horn material takes its cabinet's
+            # Volume Absorption colour and density exactly (same IOR 1.49 already, no coat or sheen); its own wall
+            # thickness then sets how much it tints
+            allm = {sl.material for o in col.all_objects for sl in getattr(o, 'material_slots', []) if sl.material}
+            def absn(m):
+                return next((n for n in m.node_tree.nodes if n.type == 'VOLUME_ABSORPTION' and n.outputs[0].is_linked), None) if m.node_tree else None
+            bark = next((m for m in allm if m.name.split('@')[0] == 'bark' and absn(m)), None)
+            if bark is not None:
+                vb = absn(bark); done = []
+                for m in allm:
+                    if m.name.split('@')[0].startswith('horn-') and absn(m):
+                        vh = absn(m)
+                        vh.inputs['Color'].default_value = tuple(vb.inputs['Color'].default_value)
+                        vh.inputs['Density'].default_value = vb.inputs['Density'].default_value
+                        done.append(m.name)
+                print('horn as the cabinet glass (absorption from', bark.name + '):', sorted(done))
         if SPLIT[0]:
             # a tint's channel split changed in the speaker lane's shared model (9097, 732a8671): each acrylic part keeps
             # its luminous transmission through its own thickness (cabinet 20 mm, horn 12.7 mm), the absorption re-split
@@ -1031,13 +1049,14 @@ def main():
     ap.add_argument('--led', type=float, default=1.0, help="scale the amp's power LED (the asset's strength is 6)")
     ap.add_argument('--sink', type=float, default=0.002, help='bed the feet this far into the ground, m')
     ap.add_argument('--horn-front', action='store_true', help='direct light stops at the horn (no lampshade from behind)')
+    ap.add_argument('--horn-as-cabinet', action='store_true', help="the horn's absorption per mm = the cabinet's")
     ap.add_argument('--horn-close', action='store_true'); ap.add_argument('--horn-rough', type=float)
     ap.add_argument('--flag', type=float, nargs=2, default=(8.0, 6.0), help='the black flag behind the camera, m (0 0: none)')
     a = ap.parse_args()
     global SURFACE_GLASS
     WELD[0] = not a.no_weld; SURFACE_GLASS = a.surface_glass; FRESNEL_ANGLE[0] = a.fresnel_angle
     SINK[0] = a.sink; LED[0] = a.led; REAL_SET[0] = a.real_set; CANOPY_OPEN[0] = a.canopy_open; CLEARING[0] = a.canopy_clearing; CLEARING_AT[0] = tuple(a.canopy_clearing_at); PLANT_ALPHA[0] = tuple(a.plant_alpha); SCRIM[0] = a.scrim; WET[0] = a.wet; REFLECTORS[0] = [tuple(r) for r in a.reflector]; BERMS[0] = [tuple(b) for b in a.berm]; MENISCUS[0] = a.meniscus; DOTS[0] = [tuple(d) for d in a.dot]; CARDS[0] = [(c[0], float(c[1]), float(c[2]), float(c[3]), float(c[4])) for c in a.card]; SPLIT[0] = a.split; GLOSSY_FLAG[0] = a.glossy_flag
-    HORN['close'] = a.horn_close; HORN['rough'] = a.horn_rough; HORN['shadows'] = not a.horn_front
+    HORN['close'] = a.horn_close; HORN['rough'] = a.horn_rough; HORN['shadows'] = not a.horn_front; HORN['as_cabinet'] = a.horn_as_cabinet
     sh = json.load(open(a.shot))
     scale_lights(sh, {k: float(v) for k, v in (x.split('=', 1) for x in a.light)})
     for kv in a.sets:
