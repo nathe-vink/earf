@@ -336,6 +336,7 @@ def main():
         # the scene as it will render, saved first for scene_audit.py (the coordinator's card and rig checks)
         i = args.index('--save-blend'); blend = os.path.abspath(args[i + 1]); del args[i:i + 2]
         real_ops = bpy.ops
+        saved = {'done': False}
 
         class _Render:
             def __getattr__(self, n):
@@ -343,7 +344,11 @@ def main():
                     return getattr(real_ops.render, n)
 
                 def render(*a, **k):
-                    real_ops.wm.save_as_mainfile(filepath=blend, copy=True)
+                    # only before the first render (the beauty pass): the masks and swatch passes that follow change
+                    # materials and hide the lamps, and a later save would keep that state (found 2026-11-10)
+                    if not saved['done']:
+                        saved['done'] = True
+                        real_ops.wm.save_as_mainfile(filepath=blend, copy=True)
                     return real_ops.render.render(*a, **k)
                 return render
 

@@ -1,0 +1,30 @@
+The Hemisphere's dome in the night pair, light path by light path (the coordinator's photometry critics, 2026-11-10 00:13).
+Linear EXR, scenes saved before their beauty pass (night_room.py --save-blend, fixed 2026-11-10 to save only then),
+crop x 0.57-0.66 y 0.22-0.36 at 1920 x 1080, no denoise, no clamp, caustics on (dome_paths.py, dome_paths_read.py).
+
+Dome face (3039 px: the final's dome over 0.5), mean luminance:
+  final, the kit's liner emitter on (1024 samples)                     4.676
+  as drawn (2048)                                                      0.1257
+  as drawn, the opal's diffuse and translucent albedo 0 (gloss kept)   0.0015
+  as drawn, the glass shells without their shadow-ray shortcut         0.1257   (identical: no COB-to-opal path crosses them)
+  as drawn, the COB off                                                0.0019
+The 3840 frames (512 samples, adaptive 0.01, OIDN): final 4.738, as drawn 0.075 (the denoiser pulls the caustic-lit dome
+about 0.8 EV under its unbiased 0.126).
+
+The materials (the lamps lane's hemi-fog-night.blend, 26400e7c): 'opal' has no emission; 'opal-lit' has one, Strength =
+Map Range(object Z, 0.0015-0.075 -> 6.93-16.17), colour (0.80, 0.377, 0.098), unlinked and zeroed by liner_off. No Light
+Path 'Is Camera Ray' in the lamp; every part visible to every ray type. The glass ('clear', 'clear-in', 'tint',
+'tint-in') sends shadow rays through as a Transparent BSDF (Light Path 'Is Shadow Ray').
+
+The kit emitter: mean strength 11.53 over the opal's 0.0402 m2, colour Y 0.446: one face 0.649 W luminance-weighted,
+about 190 lm on the COB's own scale (3.2 W, light colour Y 0.522, for 490 lm). Cycles' mesh emission is two-sided (a
+test plane reads 0.999 from either face), so about 380 lm in all, against the nominal 145: about 2.6 x.
+
+The geometry: the reflector is a cone 20.5 mm deep (r 11 mm at the COB to 22.4 mm at its mouth; the direct cut-off
+atan(22.4/20.5) = 47.5 deg); the opal wraps round it from z -7 mm (r 49-66 mm) to z -79 mm (r 85-88 mm). A direct ray at
+the cut-off lands at r 86 mm at z -79 mm, on the opal's lower inner rim; the aluminium's roughness (0.12) spreads its
+reflections past the cut-off onto the opal (with the reflector matte black, 20 % of the spill is left: lamp-alone/).
+
+The walnut (dome_paths.py console-white, crop 0.60 0.45 0.75 0.53, 512 samples): a white Lambertian card in the
+console's place reads 0.867 on the lit near end, so the irradiance is 2.73 W/m2, about 420 lx at 0.0065 W/lm; the walnut
+there reads 0.0216, an effective reflectance of 2.5 % (oiled walnut is about 8-15 %).
