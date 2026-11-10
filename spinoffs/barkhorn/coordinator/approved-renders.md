@@ -54,6 +54,9 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    logo's colours are now the speakers': the flat marks and chips take ember #B50404, dust #D35D17, acid #C5BC1E, poison #027614,
    ice #1169C1, haze #500CB4. The brand lane renders the final mark set and the spin from A3 (honest lights); I check one sheet; then
    the Book's single rebuild on my go, when the black-rods and Smoke pictures land.
+   TAGLINE, the owner 10 Nov ~03:35: "Globe is good" (his own phrase, "a play on 'god is good'"). The main line stays "A world of
+   sound, in color."; "Globe is good." is the short sign-off under the globe (stickers, the card, social posts), and the Book shows
+   it that way at the rebuild (his "Yes").
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
