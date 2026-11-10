@@ -552,7 +552,7 @@ def pages(web):
         import shutil
         shutil.rmtree(os.path.join(web.IMG, 'v2'))
     for path, (h, title, desc, img, alt) in addresses(web).items():
-        if getattr(web, 'RC', False) and path in ('/tropos/smoke', '/colors/smoke'):     # Smoke is not a current color yet
+        if getattr(web, 'RC', False) and not EIGHT and path in ('/tropos/smoke', '/colors/smoke'):
             f = os.path.join(web.SITE, path.strip('/') + '.html')
             if os.path.exists(f):
                 os.remove(f)
@@ -605,14 +605,14 @@ def pages(web):
             if os.path.isdir(f):
                 continue
             rel = 'img/' + os.path.relpath(f, web.IMG).replace(os.sep, '/')
-            if rel not in used and not any(x.match(rel) for x in pats) or re.search(r'img/icon-smoke-', rel):
+            if rel not in used and not any(x.match(rel) for x in pats) or (not EIGHT and re.search(r'img/icon-smoke-', rel)):
                 os.remove(f)
         for d in sorted(glob.glob(os.path.join(web.IMG, '**', ''), recursive=True), reverse=True):
             if os.path.isdir(d) and not os.listdir(d):
                 os.rmdir(d)
         left = [os.path.relpath(f, web.SITE) for f in glob.glob(os.path.join(web.SITE, '**', '*'), recursive=True)]
         bad = [f for f in left if re.search(r'(^press/|img/(?:(?:dome|orb)-|lamps-(?:orbs|domes)|lamp-(?:orb|dome)|hero[.-]|facade|room|macro-|turn-|spin/'
-                                            r'|tt-|ga-|icon-smoke-|v2/mantle-day|rc/og-mantle|rc/(?:ice|orange)-habitat|lamps-unlit|thumb/lamps-unlit|rc/(?:red|orange|amber|green|blue|violet|ice)-back[.-]|(?:red|orange|amber|green|blue|violet|ice|black)-(?:on|off|studio|back|amp|horn|inside|reel|habitat))|-smoke\.html$)', f)]
+                                            r'|tt-|ga-|globe-turn-night|coins-|v2/mantle-day|rc/og-mantle|rc/[a-z]+-habitat|lamps-unlit|thumb/lamps-unlit|rc/(?:red|orange|amber|green|blue|violet|ice)-back[.-]|(?:red|orange|amber|green|blue|violet|ice|black)-(?:on|off|studio|back|amp|horn|inside|reel|habitat)))', f)]
         assert not bad, ('site_v2: rc deploys', bad[:12])
 
 
@@ -757,18 +757,18 @@ def render_word(p):
 # written: /studio (the progress beat, once it is a page), /journal and /press (held until the owner releases them)
 def addresses(web):
     rc = getattr(web, 'RC', False)
-    out = {'/tropos': ('speakers', 'Tropos · EARF', ('A powered horn loudspeaker in tinted cast acrylic. Seven colors, Ember to Fog. In development, not yet for sale.' if rc else
+    out = {'/tropos': ('speakers', 'Tropos · EARF', ('A powered horn loudspeaker in tinted cast acrylic. Eight colors, Ember to Smoke. In development, not yet for sale.' if rc else
                                                    'A powered horn loudspeaker, cast in tinted acrylic. Eight colors, Ember to Smoke. In development, not yet for sale.'),
                        'img/rc/og-green.jpg' if rc else 'img/og/speaker-green.jpg', 'Tropos in Poison'),
-           '/lighting': ('lighting', 'Lighting · EARF', 'Hemisphere, a pendant, and Core, a cordless table lamp, in the %s colors. In development.' % ('seven' if rc else 'eight'),
+           '/lighting': ('lighting', 'Lighting · EARF', 'Hemisphere, a pendant, and Core, a cordless table lamp, in the eight colors. In development.',
                          lamps_og()[0] if rc else 'img/og/dome-red.jpg', lamps_og()[1] if rc else 'Hemisphere in Ember'),
            '/mantle': ('turntable', 'Mantle · EARF', ('A turntable in cast acrylic. In development.' if rc else
                                                      'A turntable, lit from underneath, in the eight colors. In development.'),
                        mantle_og()[0] if rc else 'img/og/tt-red.jpg', mantle_og()[1] if rc else 'Mantle in Ember'),
            '/contact': ('contact', 'Contact · EARF', 'Write to us: hello@earf.world. Everything is made to order, so we quote rather than list.',
-                        'img/rc/og-home.jpg' if rc else 'img/hero-1200.jpg', 'Tropos in seven colors' if rc else 'The eight Tropos speakers on a curve')}
+                        'img/rc/og-home.jpg' if rc else 'img/hero-1200.jpg', 'Tropos in eight colors' if rc else 'The eight Tropos speakers on a curve')}
     for k, num, name, *_ in web.CLOUDS:
-        if rc and k == 'black':                  # Smoke is not a current color: no address
+        if rc and k == 'black' and not EIGHT:
             continue
         low = name.lower()
         out[f'/tropos/{low}'] = (f'speaker-{low}', None, None, None, None)     # its title, words and card from its /s/ page
@@ -812,6 +812,9 @@ def apply(web, head, rest):
         rc_lamps(p, web)
         rc31(p, web)
         rc_mantle(p, web)
+        rc_globe(p, web)
+        rc_words(p, web)
+        rc_clean(p)
         p.banned = BANNED_RC
     return p.done()
 
@@ -820,10 +823,11 @@ def apply(web, head, rest):
 # web.RC on (with V2, HOME_V2 and COPY_NEXT): every picture of Tropos is today's speaker or is left out; the night
 # stage and the wall hidden until the new night renders pass; every lit lamp picture pulled (their light was faked);
 # Mantle only in its new design.
-RC_TALL = 'renders/2026-11-04/barkhorn/rollout/A-polished-tallr6/site-front-off-tall-{name}.png'   # the fronts, rig fa7665dc (2026-11-09 23:46): Ember c4 4fcc28f8, Dust c4 5c837147, Acid c2 7d741bd6, Poison c2 e7ca2e71, Ice c3 48dcfd29, Haze c3 817d2b4f, Fog r33-speaker-horn 4e89a834. Before: tallr3 and tallr2 (failed: a light line on the side), then fix1 (r33-rollout-c3:
+RC_TALL = 'renders/2026-11-04/barkhorn/rollout/A-polished-tallr7/site-front-off-tall-{name}.png'   # the black-rods set, all eight (r33-speaker-horn 370de3da)
 # Ember, Dust, Poison, Ice e624e13e; Haze, Fog 3d0b613f; Acid 04d21c5c (on the Acid horn fix). Smoke held.
-RC_KEYS = ['red', 'orange', 'amber', 'green', 'blue', 'violet', 'ice']
-HORN_BACKS = ['amber', 'red', 'orange', 'green', 'blue', 'violet', 'ice']   # restored: Ember, Poison c4 88756c3e and Haze c3 e07a3efb, re-rendered without the lamp (A-polished-p2-p2r), the same pictures as the passed ones (both critics, 2026-11-10 00:35); Dust c4 4e57271a, Ice c3 d4149891, Fog c3 c5c27dc6 passed 3/3 as new pictures (wf_31b27969, 01:19). Before: the re-audit (the coordinator 2026-11-09 23:28): the other six had a camera-hidden lamp in frame
+RC_KEYS = ['red', 'orange', 'amber', 'green', 'blue', 'violet', 'ice', 'black']
+EIGHT = True         # Smoke is a current color again (the coordinator, 2026-11-10 07:56)
+HORN_BACKS = list(RC_KEYS)   # all eight, the black-rods set (A-polished-p2-p2b)
 
 
 NOT_FOUND = """<!doctype html>
@@ -864,10 +868,10 @@ def rc_cards(web):
         s = re.sub(r'(<meta property="og:image:alt" content=")[^"]*(")', r'\g<1>' + alt + r'\2', s)
         s = re.sub(r'("image":")[^"]*(")', r'\g<1>' + web.URL + '/' + rel + r'\2', s)
         open(f, 'w').write(s)
-    set_img(os.path.join(web.SITE, 'index.html'), 'img/rc/og-home.jpg', 'Tropos in seven colors, Ember to Fog')
+    set_img(os.path.join(web.SITE, 'index.html'), 'img/rc/og-home.jpg', 'Tropos in eight colors, Ember to Smoke')
     # the home's title and description: seven colors, a turntable
     f = os.path.join(web.SITE, 'index.html'); s = open(f).read()
-    desc = ('Horn loudspeakers, lamps and a turntable in tinted cast acrylic, in seven colors from Ember to Fog. '
+    desc = ('Horn loudspeakers, lamps and a turntable in tinted cast acrylic, in eight colors from Ember to Smoke. '
             'In development at EARF, not yet for sale.')
     s = re.sub(r'<title>[^<]*</title>', '<title>EARF · A world of sound, in color.</title>', s, count=1)
     s = re.sub(r'(<meta (?:name="description"|property="og:description") content=")[^"]*(")', r'\g<1>' + desc + r'\2', s)
@@ -876,11 +880,11 @@ def rc_cards(web):
     for f in glob.glob(os.path.join(web.SITE, 's', '*.html')):
         n = os.path.basename(f)[:-5]
         kind, _, col = n.partition('-')
-        if kind in ('press', 'journal') or col == 'smoke':                # held pages, and Smoke (not a current color)
+        if kind in ('press', 'journal') or (col == 'smoke' and not EIGHT):
             os.remove(f); continue
         if kind in ('speaker', 'color'):
             k = keys.get(col)
-            set_img(f, f'img/rc/og-{k}.jpg' if k in RC_KEYS else 'img/rc/og-home.jpg', f'Tropos in {col.title()}' if k in RC_KEYS else 'Tropos in seven colors')
+            set_img(f, f'img/rc/og-{k}.jpg' if k in RC_KEYS else 'img/rc/og-home.jpg', f'Tropos in {col.title()}' if k in RC_KEYS else 'Tropos in eight colors')
         elif kind in ('hemisphere', 'core'):
             set_img(f, *lamps_og())
         elif kind == 'mantle':
@@ -925,7 +929,8 @@ def rc_images(web):
     spots = {'wide': [], 'tall': []}
     W, H = 2400, 1200
     hero = Image.new('RGB', (W, H), ground)
-    cw = (W - 6 * gap) // 7
+    n = len(RC_KEYS)
+    cw = (W - (n - 1) * gap) // n
     for i, k in enumerate(RC_KEYS):
         c = tile(frames[k], cw)
         left, top = i * (cw + gap), H - c.height
@@ -939,7 +944,7 @@ def rc_images(web):
     for i, k in enumerate(RC_KEYS):
         row, col = divmod(i, 4)
         c = tile(frames[k], tw); th = c.height
-        left = col * (tw + gap) + ((tw + gap) // 2 if row else 0)
+        left = col * (tw + gap) + ((tw + gap) // 2 if row and len(RC_KEYS) % 4 else 0)
         top = PH - 2 * c.height - gap + row * (c.height + gap)
         tall.paste(c, (left, top))
         spots['tall'].append((k, left / PW, top / PH, tw / PW, c.height / PH))
@@ -1142,7 +1147,7 @@ def rc_fixes(p, web):
     # the coordinator 2026-11-09 19:16). It comes back when the re-rendered backs pass.
     extra = {k: {} for k in RC_KEYS}
     for k in HORN_BACKS:     # Acid a1322583 (backrig); Ember, Dust, Poison 06b829ce and Ice, Haze, Fog 52ad76ba pulled (a hidden lamp in frame)
-        src = R + ('A-polished-p2-backrig-acid/horn-back-acid.png' if k == 'amber' else f'A-polished-p2-p2r/horn-back-{names[k].lower()}.png')
+        src = R + f'A-polished-p2-p2b/horn-back-{names[k].lower()}.png'
         im = Image.open(os.path.join(web.ROOT, src)).convert('RGB')
         im.save(os.path.join(web.SITE, f'img/rc/{k}-horn-back.webp'), 'WEBP', quality=82)
         im.resize((224, 168)).save(os.path.join(web.SITE, f'img/rc/{k}-horn-back-th.webp'), 'WEBP', quality=80)
@@ -1154,7 +1159,8 @@ def rc_fixes(p, web):
     i = p.rest.index('const D = ') + len('const D = ')
     j = p.rest.index(', BY = Object', i)
     D = json.loads(p.rest[i:j])
-    D['clouds'] = [c for c in D['clouds'] if c['k'] != 'black']          # seven: Smoke is not a current color
+    if not EIGHT:
+        D['clouds'] = [c for c in D['clouds'] if c['k'] != 'black']
     for c in D['clouds']:
         c['views'].update(extra[c['k']])
         c['views'].pop('back', None)
@@ -1162,12 +1168,15 @@ def rc_fixes(p, web):
             c['views'].pop('horn-back', None)
     smoke_tag = 'Shown in Smoke, still to come'
     for L in D['lamps'].values():
-        L['colours'].pop('black', None)
+        if not EIGHT:
+            L['colours'].pop('black', None)
         for col in L['colours'].values():
             col['views']['unlit'] = dict(col['views']['unlit'], tag=smoke_tag)
             col['card'] = {k: v for k, v in col['card'].items() if k != 'shown'}; col['card']['tag'] = smoke_tag
-        L['facts'] = [[a, b.replace('In all eight colors', 'In all seven colors')] for a, b in L['facts']]
-    D['tt']['colours'].pop('black', None)
+        if not EIGHT:
+            L['facts'] = [[a, b.replace('In all eight colors', 'In all seven colors')] for a, b in L['facts']]
+    if not EIGHT:
+        D['tt']['colours'].pop('black', None)
     D['hues'] = D.get('hues')
     p.rest = p.rest[:i] + json.dumps(D, separators=(',', ':')) + p.rest[j:]
     # the views' words
@@ -1184,20 +1193,24 @@ def rc_fixes(p, web):
           "['studio', 'In the studio', c => c.k === 'red' ? `${D.tt.name} in Ember.` : `${D.tt.name}, shown in Ember. ${c.name} to follow.`],")
     p.rest = p.rest.replace('alt="Mantle in Fog"', 'alt="Mantle in Ember"')
     # Fog has no complement until Smoke is decided; an empty block is not drawn
-    p.sub("comp: [k === 'ice' ? 'black' : 'ice']", "comp: k === 'ice' ? [] : ['ice']")
+    if not EIGHT:
+        p.sub("comp: [k === 'ice' ? 'black' : 'ice']", "comp: k === 'ice' ? [] : ['ice']")
     p.sub("function block(id, title, note, cards) {", "function block(id, title, note, cards) {\n  if (!cards.length) return null;")
     p.sub("  box.replaceChildren(...out);", "  box.replaceChildren(...out.filter(Boolean));")
-    # seven, everywhere
-    p.sub('<h2>Eight colors, Ember to Smoke.</h2>', '<h2>Seven colors, Ember to Fog.</h2>')
-    p.sub('<h2>The same eight, lit from within.</h2>', '<h2>The same seven, lit from within.</h2>')
-    p.rest = p.rest.replace('in the same eight.', 'in the same seven.')
-    p.sub("`Color ${c.num} of 8`", "`Color ${+c.num} of 7`")
-    p.rest = p.rest.replace('In all eight colors, sold singly', 'In all seven colors, sold singly')
-    # the hero spot list, cards and the colors' swatch rows come from D (seven now); the static Smoke rows go
-    p.rest = re.sub(r'<li><a href="#(?:speaker|hemisphere|core|mantle|turntable|color)-smoke"[^>]*>.*?</li>', '', p.rest, flags=re.S)
-    # an old Smoke address goes to its line, not to a page that isn't there
-    p.head = ('<script>(function () { var m = /^#(speaker|dome|orb|hemisphere|core|mantle|turntable|color|colour)-smoke$/.exec(location.hash);'
-              ' if (m) location.replace("/#" + ({ speaker: "speakers", mantle: "turntable", turntable: "turntable", color: "top", colour: "top" }[m[1]] || "lighting")); })()</script>\n') + p.head
+    if EIGHT:
+        p.sub("`Color ${c.num} of 8`", "`Color ${+c.num} of 8`")
+    else:
+        # seven, everywhere
+        p.sub('<h2>Eight colors, Ember to Smoke.</h2>', '<h2>Seven colors, Ember to Fog.</h2>')
+        p.sub('<h2>The same eight, lit from within.</h2>', '<h2>The same seven, lit from within.</h2>')
+        p.rest = p.rest.replace('in the same eight.', 'in the same seven.')
+        p.sub("`Color ${c.num} of 8`", "`Color ${+c.num} of 7`")
+        p.rest = p.rest.replace('In all eight colors, sold singly', 'In all seven colors, sold singly')
+        # the hero spot list, cards and the colors' swatch rows come from D (seven now); the static Smoke rows go
+        p.rest = re.sub(r'<li><a href="#(?:speaker|hemisphere|core|mantle|turntable|color)-smoke"[^>]*>.*?</li>', '', p.rest, flags=re.S)
+        # an old Smoke address goes to its line, not to a page that isn't there
+        p.head = ('<script>(function () { var m = /^#(speaker|dome|orb|hemisphere|core|mantle|turntable|color|colour)-smoke$/.exec(location.hash);'
+                  ' if (m) location.replace("/#" + ({ speaker: "speakers", mantle: "turntable", turntable: "turntable", color: "top", colour: "top" }[m[1]] || "lighting")); })()</script>\n') + p.head
     # 14. no Colors in the nav until /colors is a page
     p.sub('<li class="wide"><a href="#colors" data-nav="colors">Colors</a></li>', '')
     p.css("""
@@ -1214,7 +1227,7 @@ def rc_waves(p, web):
     lines = {k: line for k, num, name, icon, acr, line, *_ in web.CLOUDS}
     ON_HOLD = 'Hemisphere and Core, switched off. Shown in Smoke, a color on hold.'
     # --- the passed habitats (biomes: Ice 0f619953, Dust 26493989), 4:5
-    HAB = {'blue': 'renders/2026-11-03/barkhorn/habitats/ice-portrait-1200x1500.jpg'}
+    HAB = {}   # out until the black-rods re-renders land (the Ice and Fog pictures show brass rods; the coordinator 2026-11-10)
     # out (the audits, 2026-11-09/10): Dust 26493989 (a hidden panel), then 43c91242 (it hovers: a lit strip under its
     # front edge); Fog b61474c0 (two suns), then aa1ca856 (a hidden fill lamp)
     HAB_ALT = {'blue': 'Tropos in Ice, out in the snow at dusk', 'orange': 'Tropos in Dust, on rippled sand among desert buttes',
@@ -1232,7 +1245,7 @@ def rc_waves(p, web):
                   f'alt="Tropos in {names[k]}"><span>{names[k]}</span></a></li>' for i, k in enumerate(RC_KEYS))
     m = re.search(r'<div class="hero-photo has-tall">.*?</div>\n', p.rest, re.S)
     assert m, 'rc_waves: hero'
-    p.rest = p.rest[:m.start()] + f'<div class="hero-photo hero-row"><ul aria-label="Tropos in seven colors">{row}</ul></div>\n' + p.rest[m.end():]
+    p.rest = p.rest[:m.start()] + f'<div class="hero-photo hero-row"><ul aria-label="Tropos in eight colors">{row}</ul></div>\n' + p.rest[m.end():]
     p.sub('<span>Hi-fi and lighting, designed in San Francisco.</span>', '<span>Hi-fi and lighting in cast acrylic.</span>')
     # the preload: the row's first frames, not the old sheet
     where = 'head' if "add('img/rc/hero-portrait.webp'" in p.head else 'rest'
@@ -1280,7 +1293,8 @@ def rc_waves(p, web):
             f'alt="Tropos in Ice, out in the snow at dusk"></figure><div><h2><a href="#color-ice">Ice.</a></h2><p class="beat-line">{lines["blue"]}</p>'
             f'<p class="foot-note"><i class="render">Render</i></p></div></div></section>')
     k0 = p.rest.index('</section>', p.rest.index('<section class="band sound" id="sound">')) + len('</section>')
-    p.rest = p.rest[:k0] + band + p.rest[k0:]
+    if 'blue' in HAB:
+        p.rest = p.rest[:k0] + band + p.rest[k0:]
     p.rest = re.sub(r' The design figures on these pages give way to\s*measured ones\.', '', p.rest)
     p.sub('<a href="#progress">Progress</a>', '<a href="#progress">Drawn to be made</a>')
     # --- one price line
@@ -1295,7 +1309,7 @@ def rc_waves(p, web):
     p.rest = re.sub(r'<a class="more" href="#speaker-[a-z]+">Up close</a>', '', p.rest)
     p.rest = re.sub(r'<h3 class="named">([A-Za-z]+)<span', lambda m: f'<h3 class="named"><a href="#speaker-{m.group(1).lower()}">{m.group(1)}</a><span', p.rest)
     # --- /lighting: the pair once, large; no lit headline
-    p.sub('<h2>The same seven, lit from within.</h2>', '<h2>Two lamps in the speakers&rsquo; acrylic.</h2>')
+    p.sub('<h2>The same %s, lit from within.</h2>' % ('eight' if EIGHT else 'seven'), '<h2>Two lamps in the speakers&rsquo; acrylic.</h2>')
     p.rest = re.sub(r'<a class="ph" href="#(?:hemisphere|core)-ember"><img [^>]*></a>', '', p.rest)
     p.rest = re.sub(r'<div class="lamp-duo solo"><figure><img src="img/lamps-unlit-800\.jpg"[^>]*><figcaption>Off, in Smoke\.</figcaption></figure>',
                     '<div class="lamp-duo solo lamps-pair"><figure><img src="img/lamps-unlit.webp" srcset="img/lamps-unlit-800.jpg 800w, img/lamps-unlit.webp 1600w" '
@@ -1317,7 +1331,7 @@ def rc_waves(p, web):
 .hero-pic { width: 100% !important; position: static }
 .hero-title { position: static !important }
 .hero-row { aspect-ratio: auto !important; background: none !important; overflow: visible; margin-top: clamp(16px, 4vh, 48px) }
-.hero-row ul { list-style: none; margin: 0 auto; padding: 0 16px; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px }
+.hero-row ul { list-style: none; margin: 0 auto; padding: 0 16px; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 8px }
 .hero-row a { display: grid; gap: 8px; color: var(--ink); text-decoration: none; font-size: 15px }
 .hero-row img { width: 100%; height: auto; aspect-ratio: 72 / 125; object-fit: cover; display: block }
 .hero-row a:hover span { text-decoration: underline; text-underline-offset: 4px }
@@ -1336,7 +1350,7 @@ def rc_waves(p, web):
 /* galleries: a 4:5 picture column beside the particulars */
 @media (min-width: 1001px) { .pdp { grid-template-columns: minmax(0, 520px) minmax(0, 1fr) !important; justify-content: start } }
 .stage { aspect-ratio: 4 / 5 !important }
-/* /tropos: seven cards, the last row centered; on the phone, the seventh across */
+/* /tropos: the cards, the last row centered; on the phone, an odd last card across */
 .cards { display: flex !important; flex-wrap: wrap; justify-content: center }
 .cards > .card { flex: 0 1 calc((100% - 3 * 18px) / 4) }
 @media (max-width: 860px) { .cards > .card { flex-basis: calc((100% - 18px) / 2) } .cards > .card:last-child:nth-child(odd) { flex-basis: 100% } }
@@ -1376,10 +1390,11 @@ def rc3(p, web):
     # --- 2. home: the Tropos block shows the amplifier plate (a view the hero doesn't; its rig is clean); the Ice habitat mirrored
     p.sub('<figure class="sound-still"><img src="img/rc/blue-tall.webp" width="1000" height="1250" loading="lazy" alt="Tropos in Ice, its cover off, on a pale seamless">',
           '<figure class="sound-still"><img src="img/rc/plate.webp" width="1000" height="1250" loading="lazy" alt="The built-in amplifier, from behind.">')   # the plate's rig is clean (the audit ac9e5568)
-    p.sub('<div class="wrap hab-grid"><figure><img src="img/rc/blue-habitat.webp" width="1200" height="1500" loading="lazy" alt="Tropos in Ice, out in the snow at dusk"></figure>',
-          '<div class="wrap hab-grid hab-mirror"><figure><img src="img/rc/blue-habitat.webp" width="1200" height="1500" loading="lazy" alt="' + HAB_ALT['blue'] + '"></figure>')
-    p.sub('<p class="beat-line">' + next(line for k, num, name, icon, acr, line, *_ in web.CLOUDS if k == 'blue') + '</p><p class="foot-note"><i class="render">Render</i></p>',
-          '<p class="beat-line">' + next(line for k, num, name, icon, acr, line, *_ in web.CLOUDS if k == 'blue') + '</p><p class="foot-note">' + HAB_CAP['blue'] + ' <i class="render">Render</i></p>')
+    if 'hab-band' in p.rest:
+        p.sub('<div class="wrap hab-grid"><figure><img src="img/rc/blue-habitat.webp" width="1200" height="1500" loading="lazy" alt="Tropos in Ice, out in the snow at dusk"></figure>',
+              '<div class="wrap hab-grid hab-mirror"><figure><img src="img/rc/blue-habitat.webp" width="1200" height="1500" loading="lazy" alt="' + HAB_ALT['blue'] + '"></figure>')
+        p.sub('<p class="beat-line">' + next(line for k, num, name, icon, acr, line, *_ in web.CLOUDS if k == 'blue') + '</p><p class="foot-note"><i class="render">Render</i></p>',
+              '<p class="beat-line">' + next(line for k, num, name, icon, acr, line, *_ in web.CLOUDS if k == 'blue') + '</p><p class="foot-note">' + HAB_CAP['blue'] + ' <i class="render">Render</i></p>')
     # --- 3. a color's page: Tropos in its 4:5 tall frame, two columns, no 1:2 card in a 4:5 box; no "Every line" note
     p.sub("document.getElementById('c-in-note').textContent = `Every line, in ${c.tint.toLowerCase()} acrylic.`;",
           "document.getElementById('c-in-note').textContent = '';")
@@ -1393,7 +1408,7 @@ def rc3(p, web):
     p.sub("stage.style.background = P.id === 'speaker' ? ground(v) : 'transparent';",
           "stage.style.background = P.id === 'speaker' ? ground(v) : 'transparent'; if (P.id === 'turntable') stage.style.setProperty('aspect-ratio', '3 / 2', 'important'); else stage.style.removeProperty('aspect-ratio');")
     for k in HORN_BACKS:
-        src = 'renders/2026-11-04/barkhorn/rollout/' + ('A-polished-p2-backrig-acid/horn-back-acid.png' if k == 'amber' else f'A-polished-p2-p2r/horn-back-{names[k].lower()}.png')
+        src = 'renders/2026-11-04/barkhorn/rollout/' + f'A-polished-p2-p2b/horn-back-{names[k].lower()}.png'
         im = Image.open(os.path.join(web.ROOT, src)).convert('RGB').crop((270, 0, 990, 900))
         im.save(os.path.join(web.SITE, f'img/rc/{k}-horn-back.webp'), 'WEBP', quality=82)
         im.resize((168, 210)).save(os.path.join(web.SITE, f'img/rc/{k}-horn-back-th.webp'), 'WEBP', quality=80)
@@ -1441,10 +1456,11 @@ def rc3(p, web):
     p.sub('Built to the drawings: the cabinet and its horn in the same tinted acrylic,\n        the back screwed to the braces. The first pair is made the way every pair will be.',
           'Built to the drawings, the back screwed to the braces. The first pair is made the way every pair will be.')
     # --- 19. an old Smoke address on a hash change goes where the first load sends it
-    p.sub("function route() {\n  let h = location.hash.slice(1);",
-          "function route() {\n  let h = location.hash.slice(1);\n"
-          "  const sm = /^(speaker|dome|orb|hemisphere|core|mantle|turntable|color|colour)-smoke$/.exec(h);   // Smoke: not a current color\n"
-          "  if (sm) { h = { speaker: 'speakers', mantle: 'turntable', turntable: 'turntable', color: 'top', colour: 'top' }[sm[1]] || 'lighting'; history.replaceState(null, '', '#' + h); }")
+    if not EIGHT:
+        p.sub("function route() {\n  let h = location.hash.slice(1);",
+              "function route() {\n  let h = location.hash.slice(1);\n"
+              "  const sm = /^(speaker|dome|orb|hemisphere|core|mantle|turntable|color|colour)-smoke$/.exec(h);\n"
+              "  if (sm) { h = { speaker: 'speakers', mantle: 'turntable', turntable: 'turntable', color: 'top', colour: 'top' }[sm[1]] || 'lighting'; history.replaceState(null, '', '#' + h); }")
     # --- 21. no dark-only pictures named where nothing dark is shown
     p.rest = p.rest.replace('background-image: url(img/coins-dark.jpg)', 'background-image: none')
     p.rest = re.sub(r'html\.globe-live header\.top\.on-dark \.brand \.globe \{ background-image: url\(img/globe-spin-dark\.webp\);\s*background-image: image-set\([^}]*\}', '', p.rest)
@@ -1472,16 +1488,8 @@ def rc3(p, web):
 """)
 
 
-TURN = {'red': 'A-polished-p2/turn-ember', 'orange': 'A-polished-p2/turn-dust', 'green': 'A-polished-p2-rc1/turn-poison',
-        'blue': 'A-polished-p2-rc1/turn-ice', 'violet': 'A-polished-p2-rc1/turn-haze'}
-# Ember's turn is held whole: frames 00-04 (52ad76ba) had a hidden lamp in frame (the re-audit, 23:28).
-# the turns, passed (the coordinator 2026-11-09 18:51): Ember 00-04 r33-rollout-c3 52ad76ba, 05-23 and Dust c4 0a0a83bd;
-# Acid 00-16 c4 42fa8eee, 17-23 c3 66126d53 (A-polished-p2-rc1); Haze c3 66126d53; Poison, Ice c4 eef18db2.
-# Fog's first turn read as Ice (its pale-blue ground; the RC3.1 review, P3). Its re-render on a neutral ground
-# (#DFDAD7; r33-rollout-c3 a688c59e, A-polished-p2-rc2) goes in when FOG_TURN is on, once it passes its gate.
-FOG_TURN = True
-if FOG_TURN:
-    TURN['ice'] = 'A-polished-p2-rc2/turn-fog'
+TURN = {k: f'A-polished-p2-p2b/turn-{n}' for k, n in zip(RC_KEYS, ['ember', 'dust', 'acid', 'poison', 'ice', 'haze', 'fog', 'smoke'])}
+# the black-rods turns, all eight (r33-speaker-horn 370de3da)
 TURN_REST = 20        # three-quarter front: the mouth opens toward you and the cabinet's side shows (the addendum, 3)
 TURN_GUTTER = 16      # px of repeated edge round every tile, so the lossy sprite never bleeds one frame into the next
 
@@ -1499,11 +1507,9 @@ def rc_turn(p, web):
     size = None
     for c in D['clouds']:
         k = c['k']
-        if k != 'amber' and k not in TURN:
+        if k not in TURN:
             continue
-        files = [R + (f'A-polished-p2/turn-acid-{n:02d}.png' if n < 17 else f'A-polished-p2-rc1/turn-acid-{n:02d}.png') if k == 'amber'
-                 else R + f'A-polished-p2-p2r/turn-ember-{n:02d}.png' if k == 'red' and n < 5        # 00-04 re-rendered without the lamp (c2 7bb678d6)
-                 else R + f'{TURN[k]}-{n:02d}.png' for n in range(24)]
+        files = [R + f'{TURN[k]}-{n:02d}.png' for n in range(24)]
         fr = [Image.open(f).convert('RGB') for f in files]
         w, h = fr[0].size
         assert all(f.size == (w, h) for f in fr) and size in (None, (w, h)), ('rc_turn: frame sizes', k)
@@ -1556,7 +1562,7 @@ LAMPS_PIC = None
 
 def lamps_og():
     """The lamps' share card: their picture's, or the home's while they have none."""
-    return ('img/rc/og-lamps.jpg', 'A Core and a Hemisphere in Ember, switched off') if LAMPS_PIC else ('img/rc/og-home.jpg', 'Tropos in seven colors')
+    return ('img/rc/og-lamps.jpg', 'A Core and a Hemisphere in Ember, switched off') if LAMPS_PIC else ('img/rc/og-home.jpg', 'Tropos in eight colors')
 
 
 def rc_lamps(p, web):
@@ -1635,7 +1641,7 @@ MANTLE_PIC = False
 
 
 def mantle_og():
-    return ('img/rc/og-mantle.jpg', 'Mantle in Ember') if MANTLE_PIC else ('img/rc/og-home.jpg', 'Tropos in seven colors')
+    return ('img/rc/og-mantle.jpg', 'Mantle in Ember') if MANTLE_PIC else ('img/rc/og-home.jpg', 'Tropos in eight colors')
 
 
 def rc_mantle(p, web):
@@ -1662,4 +1668,128 @@ def rc_mantle(p, web):
     assert 'mantle-day' not in p.rest, 'rc_mantle: the picture is still named'
 
 
-BANNED_RC = r'eight colors|to Smoke|Smoke as current'
+GLOBE_RC = 'site-rc'   # brand/site-rc: the owner's approved globe (r47-brand c19abdba): its film and poster, the header's
+# sheet (60 of the film's 120 frames on its ground, 237 236 229) and the touch icon. No night film until an honest one.
+CHIPS = {'red': '#B50404', 'orange': '#D35D17', 'amber': '#C5BC1E', 'green': '#027614', 'blue': '#1169C1', 'violet': '#500CB4'}
+
+
+def rc_globe(p, web):
+    import os, io, base64, shutil
+    from PIL import Image
+    B = os.path.join(web.BRAND, GLOBE_RC)
+    b64 = lambda path: 'data:image/webp;base64,' + base64.b64encode(open(path, 'rb').read()).decode()
+
+    def first(path):
+        with Image.open(path) as sp:
+            buf = io.BytesIO(); sp.crop((0, 0, sp.width // 10, sp.height // 6)).save(buf, 'WEBP', quality=90, method=6)
+        return 'data:image/webp;base64,' + base64.b64encode(buf.getvalue()).decode()
+    img = lambda n: os.path.join(web.IMG, n)
+    old = [first(img('globe-spin-light.webp')), b64(img('globe-turn-poster.webp'))]
+    old_night = b64(img('globe-turn-night-poster.webp')) if os.path.exists(img('globe-turn-night-poster.webp')) else None
+    for n in ('globe-turn.mp4', 'globe-turn.webm', 'globe-turn-poster.webp'):
+        shutil.copy(os.path.join(B, n), img(n))
+    sheet = web.cutout(Image.open(os.path.join(B, 'globe-spin-light.png')).convert('RGB'), (237, 236, 229))
+    sheet = sheet.convert('RGBa').resize((840, 504), Image.LANCZOS).convert('RGBA')
+    sheet.save(img('globe-spin-light.avif'), quality=60)
+    sheet.save(img('globe-spin-light.webp'), quality=70, alpha_quality=80, method=6)
+    for n in ('globe-turn-night.mp4', 'globe-turn-night.webm', 'globe-turn-night-poster.webp'):
+        if os.path.exists(img(n)):
+            os.remove(img(n))
+    new = [first(img('globe-spin-light.webp')), b64(img('globe-turn-poster.webp'))]
+    for a, b in zip(old, new):
+        assert a in p.head or a in p.rest, 'rc_globe: the old inline frame'
+        p.head = p.head.replace(a, b); p.rest = p.rest.replace(a, b)
+    if old_night:
+        p.head = p.head.replace(old_night, new[1]); p.rest = p.rest.replace(old_night, new[1])
+    for where in ('head', 'rest'):
+        txt = getattr(p, where)
+        if "f = night ? 'globe-turn-night' : 'globe-turn';" in txt:
+            setattr(p, where, txt.replace("f = night ? 'globe-turn-night' : 'globe-turn';", "f = 'globe-turn';"))
+    assert 'globe-turn-night' not in p.head + p.rest, 'rc_globe: the night film is still named'
+    # the color dots: flat chips in the logo's colors (Fog and Smoke as the site has them), no sprite
+    hexes = [CHIPS[k] for k in ('red', 'orange', 'amber', 'green', 'blue', 'violet')] + ['#F6F8F8', '#34323A']   # Fog, Smoke: the site's tokens
+    p.css(':root { ' + ' '.join(f'--c-{k}: {CHIPS[k]};' for k in CHIPS) + ' }\n'
+          '.coin-dot, .coin-big .coin-dot { background-image: none !important; mix-blend-mode: normal !important }\n'
+          + '\n'.join(f'.coin-dot[style*="--i:{i}"] {{ background-color: {h} !important }}' for i, h in enumerate(hexes)) + '\n'
+          '.coin-dot[style*="--i:6"] { box-shadow: inset 0 0 0 1px #9A958D }\n')
+    p.rest = p.rest.replace('background-image: url(img/coins-light.jpg)', 'background-image: none')
+
+
+
+def rc_words(p, web):
+    """The audit's visible fixes and the settled facts only (the coordinator 2026-11-10 07:56; book-audit plan.md, SURFACE
+    FIXES): no cover switch; the rods and Mantle's posts black; the lamps' light as settled; no open details."""
+    import json
+    # the cover switch and its fact row go; the cards stay cover off
+    m = re.search(r'\s*<div class="seg" role="group" aria-label="The speakers\' covers">.*?</div>', p.rest, re.S)
+    assert m, 'rc_words: the cover switch'
+    p.rest = p.rest[:m.start()] + p.rest[m.end():]
+    m = re.search(r"\n// the cards' covers\nconst on = document\.getElementById\('cover-on'\).*?cards\.classList\.add\('show-off'\); \}\);", p.rest, re.S)
+    assert m, 'rc_words: the cover script'
+    p.rest = p.rest[:m.start()] + p.rest[m.end():]
+    p.sub("      ['Cover', 'A cloth disc, optional (to follow)'], ", "      ")
+    p.rest = re.sub(r"\n  \['on', 'Cover on', c => `With its cover on, in \$\{c\.cover\.toLowerCase\(\)\}\.`\],", '', p.rest)
+    # the rods are black
+    n = p.rest.count('on four bronze posts')
+    assert n >= 2, ('rc_words: bronze posts', n)
+    p.rest = p.rest.replace('on four bronze posts', 'on four black posts')
+    # the data's facts
+    i = p.rest.index('const D = ') + len('const D = ')
+    j = p.rest.index(', BY = Object', i)
+    D = json.loads(p.rest[i:j])
+    def facts(rows, change, drop=(), add_after=None):
+        out = []
+        for a, b in rows:
+            if a in drop:
+                continue
+            out.append([a, change.get(a, b)])
+            if add_after and a == add_after[0]:
+                out.append(list(add_after[1]))
+        return out
+    D['lamps']['dome']['facts'] = facts(D['lamps']['dome']['facts'], {
+        'Light': '2700 K, CRI 90; the dome glows in its own color, and the light straight down is the lamp&rsquo;s own warm white',
+        'Mains': '120 V, dimmable'})
+    D['lamps']['orb']['facts'] = facts(D['lamps']['orb']['facts'], {},
+        add_after=('Size', ('Ball', 'Tinted cast acrylic, with a white opal ball centered inside it')))
+    D['tt']['facts'] = facts(D['tt']['facts'], {
+        'Posts': 'Four solid black posts, 30 mm across',
+        'Cartridge': 'A moving-magnet cartridge'})
+    p.rest = p.rest[:i] + json.dumps(D, separators=(',', ':')) + p.rest[j:]
+    n = p.rest.count('over a smoked base on four polished steel posts')
+    assert n >= 1, 'rc_words: Mantle lead'
+    p.rest = p.rest.replace('over a smoked base on four polished steel posts', 'over a smoked base on four black posts')
+    assert 'to be chosen' not in p.rest and 'safety listing' not in p.rest and 'stainless steel' not in p.rest, 'rc_words: open details'
+    # the coin sheet is gone: flat chips only
+    p.rest = p.rest.replace('url(img/coins-light.jpg)', 'none')
+    p.rest = p.rest.replace('its complement and its neighbours', 'its complement and its neighbors')
+
+
+HISTORY = r'(?:round \d+|\br\d\d[a-z]?\b|\bRC\d?\b|coordinator|the owner|critics?\b|\bcommit\b|\bbranch\b|r\d\d-[a-z]|wave \d|the audit)'
+
+
+def rc_clean(p):
+    """The page source without its history: comments that narrate rounds, branches, people or reviews go (code stays)."""
+    def strip(t):
+        t = re.sub(r'/\*(?:(?!\*/).)*?' + HISTORY + r'(?:(?!\*/).)*?\*/', '', t, flags=re.S | re.I)
+        t = re.sub(r'(?m)(^|[ \t;{}(),])//[^\n]*?' + HISTORY + r'[^\n]*', lambda m: m.group(1).rstrip(), t, flags=re.I)
+        t = re.sub(r'<!--(?:(?!-->).)*?' + HISTORY + r'(?:(?!-->).)*?-->', '', t, flags=re.S | re.I)
+        return t
+    p.head, p.rest = strip(p.head), strip(p.rest)
+    p.styles = [strip(x) for x in p.styles]
+
+
+
+def rc_finish(web):
+    """After web.py's favicons and vercel.json: the approved globe's touch icon, the favicon titled EARF, and vercel.json
+    without the retired journal redirect."""
+    import os, json, shutil
+    shutil.copy(os.path.join(web.BRAND, GLOBE_RC, 'apple-touch-icon.png'), os.path.join(web.SITE, 'apple-touch-icon.png'))
+    fav = os.path.join(web.SITE, 'favicon.svg'); f = open(fav).read()
+    f = re.sub(r'<title>[^<]*</title>', '<title>EARF</title>', f); f = re.sub(r'aria-label="[^"]*"', 'aria-label="EARF"', f, count=1)
+    open(fav, 'w').write(f)
+    vj = os.path.join(web.SITE, 'vercel.json'); v = json.load(open(vj))
+    v['redirects'] = [r for r in v.get('redirects', []) if 'journal' not in r['source']]
+    json.dump(v, open(vj, 'w'), indent=2)
+
+
+BANNED_RC = r'seven colors|Ember to Fog|Smoke as current|still to come|on hold' if EIGHT else r'eight colors|to Smoke|Smoke as current'
