@@ -1,0 +1,11 @@
+Timer 'STL Import' took 6.29 ms
+Timer 'STL Import' took 3.45 ms
+Timer 'STL Import' took 2.95 ms
+Timer 'STL Import' took 0.50 ms
+Timer 'STL Import' took 0.24 ms
+Timer 'STL Import' took 0.78 ms
+Timer 'STL Import' took 0.25 ms
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:144: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m = bpy.data.materials.new(nm); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+00:06.036  cycles           | WARNING CUEW initialization failed: Error opening the library
+03:21.203  render           | Saved: '/home/user/earf/renders/2026-11-10/barkhorn/lamp-site/proofs/core-ember.png'

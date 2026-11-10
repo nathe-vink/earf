@@ -1,0 +1,11 @@
+Timer 'STL Import' took 6.48 ms
+Timer 'STL Import' took 3.45 ms
+Timer 'STL Import' took 2.88 ms
+Timer 'STL Import' took 0.52 ms
+Timer 'STL Import' took 0.32 ms
+Timer 'STL Import' took 0.81 ms
+Timer 'STL Import' took 0.26 ms
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:144: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m = bpy.data.materials.new(nm); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+00:05.823  cycles           | WARNING CUEW initialization failed: Error opening the library
+03:35.326  render           | Saved: '/home/user/earf/renders/2026-11-10/barkhorn/lamp-site/proofs/core-ice.png'

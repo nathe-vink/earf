@@ -1,0 +1,20 @@
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:144: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m = bpy.data.materials.new(nm); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+Timer 'STL Import' took 0.55 ms
+Timer 'STL Import' took 0.67 ms
+Timer 'STL Import' took 0.68 ms
+Timer 'STL Import' took 0.48 ms
+Timer 'STL Import' took 1.42 ms
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:201: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  cm = bpy.data.materials.new(f'collar-{tint}'); cm.use_nodes = True; nt = cm.node_tree
+Timer 'STL Import' took 1.17 ms
+Timer 'STL Import' took 0.52 ms
+Timer 'STL Import' took 0.94 ms
+Timer 'STL Import' took 1.08 ms
+Timer 'STL Import' took 1.02 ms
+Timer 'STL Import' took 0.29 ms
+Timer 'STL Import' took 0.66 ms
+Timer 'STL Import' took 0.45 ms
+Timer 'STL Import' took 0.62 ms
+00:11.628  cycles           | WARNING CUEW initialization failed: Error opening the library
+26:58.542  render           | Saved: '/home/user/earf/renders/2026-11-10/barkhorn/lamp-site/proofs/hemi-ember.png'

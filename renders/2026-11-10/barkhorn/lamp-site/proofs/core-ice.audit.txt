@@ -1,0 +1,19 @@
+Timer 'STL Import' took 5.68 ms
+Timer 'STL Import' took 3.31 ms
+Timer 'STL Import' took 2.66 ms
+Timer 'STL Import' took 0.57 ms
+Timer 'STL Import' took 0.25 ms
+Timer 'STL Import' took 0.81 ms
+Timer 'STL Import' took 0.24 ms
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:144: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m = bpy.data.materials.new(nm); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+00:05.771  cycles           | WARNING CUEW initialization failed: Error opening the library
+AUDIT orb-blue hidden [] no-shadow [] lights [('key', 'AREA', 722.467), ('fill', 'AREA', 160.0), ('kicker', 'AREA', 48.0), ('led-blue', 'AREA', 1.306)]
+HIDDENCAST orb-blue: 3 hidden, 0 in frame
+   out         0.0 %  area lamp (ellipse) key
+   out         0.0 %  area lamp (ellipse) fill
+   out         0.0 %  area lamp (rectangle) kicker
+00:06.809  render           | Saved: '/home/user/earf/renders/2026-11-10/barkhorn/lamp-site/proofs/masks/core-ice-key.png'
+00:08.839  render           | Saved: '/home/user/earf/renders/2026-11-10/barkhorn/lamp-site/proofs/masks/core-ice-fill.png'
+00:10.974  render           | Saved: '/home/user/earf/renders/2026-11-10/barkhorn/lamp-site/proofs/masks/core-ice-kicker.png'
+CASTCHECK orb-blue {'key': 0.0, 'fill': 0.0, 'kicker': 0.0}
