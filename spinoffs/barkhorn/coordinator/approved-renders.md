@@ -133,6 +133,15 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    THE HERO: proxy b (r48-biomes 06f61263) works as a group and fails as a place (flat haze, blank sky); the coloured light on the
    ground is physically small (only the horn passes a full beam), so that idea is dropped. Next, two proxies that reuse the passed
    scenes: the eight on the Fog hillside against its fog bank, the low sun behind; and the eight in the Ice snowfield.
+   10 Nov ~15:35-15:45, the owner. MANTLE'S LIGHT: "The LED should maybe be between the base and the top ... It's the top that
+   should light up, not the base, though I think that means we have clutter in between them. Open to ideas for better design."
+   Proposal queued with the Mantle lane after the same-colour base: "uplit plinth" (the signed LED loop moved to the base's top
+   face, recessed, facing up; the plinth's underside satin; the gap empty).
+   THE HERO, two more ideas of his: "Why not just put the speakers in a studio and have stripes of colors as the background and
+   ground behind and under each one that compliments each speakers color? Either that or do the over the top blended biome, like a
+   play set design with a spotlight on each speaker." The speaker lane renders two proxies of the studio stripes (each speaker on a
+   paper sweep in its OWN colour family, pale and bold; an opposite colour would turn clear tinted acrylic dark). The play-set
+   biome is the alternative if the stripes and the two outdoor proxies fall short.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
