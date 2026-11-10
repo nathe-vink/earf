@@ -112,7 +112,140 @@ def lamps_off(names):
             o.hide_render = True; print('v3_day: lamp off', n, flush=True)
 
 
+def backlit(wpm):
+    """PROPOSAL (the coordinator, 2026-11-10 05:06): the backlit plinth, on the lamps' principle (colour over white opal,
+    lit from behind). The signed plinth's outline, holes, float and posts kept; its 25.4 mm stack becomes, top down:
+    6.0 tinted top (thinned from the whole 25.4), 3.0 opal (Perspex GS 041: T 54 %, R 39 %), a 12.0 tray lined white with
+    2700 K LED strip runs on its floor at 25 mm pitch, a 4.4 tinted floor. A 10 mm tinted frame closes the edge from the
+    floor to the top's underside, its inner face lined white, so no white line shows and no light reaches the edge.
+    White-painted sleeves round the bearing (r 15.5 to 22), the arm (28.5 to 35) and the motor (38 to 44) holes; the opal
+    and the strips are cut round them. wpm: the strip's watts a metre."""
+    from mathutils import Vector
+    pl = bpy.data.objects['plinth-L1-stack']
+    Z0, Z1 = 0.0687, 0.0941
+    zf, zc, zo = Z0 + 0.0044, Z0 + 0.0044 + 0.012, Z0 + 0.0044 + 0.012 + 0.003     # floor top, cavity top, opal top
+    X0, X1, Y0, Y1, IN = 0.01, 0.46, 0.01, 0.37, 0.010
+    holes = [((0.210, 0.178), 0.0155, 0.022), ((0.405, 0.284), 0.0285, 0.035), ((0.074, 0.303), 0.0380, 0.044)]
+
+    def box(name, x0, x1, y0, y1, z0, z1):
+        bpy.ops.mesh.primitive_cube_add(size=1.0, location=((x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2))
+        b = bpy.context.active_object; b.name = name; b.scale = (x1 - x0, y1 - y0, z1 - z0); bpy.ops.object.transform_apply(scale=True)
+        return b
+
+    def cyl(name, c, r, z0, z1):
+        bpy.ops.mesh.primitive_cylinder_add(vertices=96, radius=r, depth=z1 - z0, location=(c[0], c[1], (z0 + z1) / 2))
+        o = bpy.context.active_object; o.name = name; return o
+
+    def boolean(target, cutter, op):
+        m = target.modifiers.new('b', 'BOOLEAN'); m.operation = op; m.object = cutter; m.solver = 'EXACT'
+        bpy.context.view_layer.objects.active = target; bpy.ops.object.modifier_apply(modifier=m.name)
+
+    def copy(name):
+        o = pl.copy(); o.data = pl.data.copy(); o.name = name; bpy.context.collection.objects.link(o)
+        for md in list(o.modifiers):
+            o.modifiers.remove(md)
+        return o
+
+    def kill(o):
+        bpy.data.objects.remove(o, do_unlink=True)
+
+    def mat(name, build):
+        m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+        out = nt.nodes.new('ShaderNodeOutputMaterial'); nt.links.new(build(nt), out.inputs['Surface']); return m
+
+    white = mat('lining-white', lambda nt: (lambda d: (d.inputs['Color'].default_value.__setitem__(slice(0, 4), (0.85, 0.85, 0.85, 1)), d.outputs[0])[1])(nt.nodes.new('ShaderNodeBsdfDiffuse')))
+
+    def opal_bsdf(nt):
+        d = nt.nodes.new('ShaderNodeBsdfDiffuse'); d.inputs['Color'].default_value = (0.39, 0.39, 0.39, 1)
+        t = nt.nodes.new('ShaderNodeBsdfTranslucent'); t.inputs['Color'].default_value = (0.54, 0.54, 0.54, 1)
+        a = nt.nodes.new('ShaderNodeAddShader'); nt.links.new(d.outputs[0], a.inputs[0]); nt.links.new(t.outputs[0], a.inputs[1])
+        return a.outputs[0]
+    opal = mat('opal-041', opal_bsdf)
+
+    def setmat(o, m):
+        o.data.materials.clear(); o.data.materials.append(m)
+        for p in o.data.polygons:
+            p.material_index = 0
+    # the tinted parts: the signed plinth cut by slabs (they keep its materials, holes and outline)
+    top = copy('bl-top'); c = box('c', X0 - 0.01, X1 + 0.01, Y0 - 0.01, Y1 + 0.01, zo, Z1 + 0.01); boolean(top, c, 'INTERSECT'); kill(c)
+    frame = copy('bl-frame'); c = box('c', X0 - 0.01, X1 + 0.01, Y0 - 0.01, Y1 + 0.01, Z0 - 0.01, zo); boolean(frame, c, 'INTERSECT'); kill(c)
+    c = box('c', X0 + IN, X1 - IN, Y0 + IN, Y1 - IN, zf, zo + 0.001); boolean(frame, c, 'DIFFERENCE'); kill(c)
+    # the floor stays in the frame above (the frame's cut leaves the floor below zf); the opal over the cavity, cut round sleeves
+    op = box('bl-opal', X0 + IN, X1 - IN, Y0 + IN, Y1 - IN, zc, zo)
+    for (cc, r0, r1) in holes:
+        k = cyl('c', cc, r1, zf - 0.001, zo + 0.001); boolean(op, k, 'DIFFERENCE'); kill(k)
+    setmat(op, opal)
+    # white linings: the floor's top, the frame's inner walls, the sleeves (painted white outside)
+    fl = box('bl-floor-lining', X0 + IN, X1 - IN, Y0 + IN, Y1 - IN, zf, zf + 0.0003)
+    for (cc, r0, r1) in holes:
+        k = cyl('c', cc, r1, zf - 0.001, zf + 0.001); boolean(fl, k, 'DIFFERENCE'); kill(k)
+    setmat(fl, white)
+    wl = box('bl-wall-lining', X0 + IN - 0.0003, X1 - IN + 0.0003, Y0 + IN - 0.0003, Y1 - IN + 0.0003, zf, zc)
+    k = box('c', X0 + IN, X1 - IN, Y0 + IN, Y1 - IN, zf - 0.001, zc + 0.001); boolean(wl, k, 'DIFFERENCE'); kill(k); setmat(wl, white)
+    for i, (cc, r0, r1) in enumerate(holes):
+        sl = cyl(f'bl-sleeve-{i}', cc, r1, zf, zo); k = cyl('c', cc, r0, zf - 0.001, zo + 0.001); boolean(sl, k, 'DIFFERENCE'); kill(k); setmat(sl, white)
+    # the LED strip: 5 mm wide runs along x at 25 mm pitch on the floor lining, 1 mm thick, cut round the sleeves
+    led = bpy.data.materials.new('strip'); led.use_nodes = True; nt = led.node_tree; nt.nodes.clear()
+    em = nt.nodes.new('ShaderNodeEmission'); em.inputs['Color'].default_value = (1.0, 0.55, 0.25, 1)
+    o_ = nt.nodes.new('ShaderNodeOutputMaterial'); nt.links.new(em.outputs[0], o_.inputs['Surface'])
+    runs = []; y = Y0 + IN + 0.0125
+    while y < Y1 - IN - 0.006:
+        r = box(f'led-strip-{len(runs)}', X0 + IN + 0.006, X1 - IN - 0.006, y - 0.0025, y + 0.0025, zf + 0.0003, zf + 0.0013)
+        for (cc, r0, r1) in holes:
+            k = cyl('c', cc, r1 + 0.003, zf - 0.001, zf + 0.003); boolean(r, k, 'DIFFERENCE'); kill(k)
+        setmat(r, led); runs.append(r); y += 0.025
+    length = sum(sum(p.area for p in r.data.polygons if abs(p.normal.z) > 0.9 and p.normal.z > 0) / 0.005 for r in runs)
+    P = wpm * length
+    A = sum(p.area for r in runs for p in r.data.polygons)
+    em.inputs['Strength'].default_value = P / (2 * 3.14159265 * A) if P > 0 else 0.0
+    # the cut pieces as surface-tinted acrylic: the plinth's absorbing volume needs a closed solid, and the boolean cuts
+    # left rays 'inside' it (a 6 mm top rendered near black over a lit opal). Each sheet's own transmission instead, per
+    # channel from the colour's 'deep' after 25 mm, split over its two faces (sqrt): the top at 6 mm, the frame at 10 mm
+    SP = {'sp-ember': '#CF0913', 'sp-dust': '#FBBD77', 'sp-acid': '#F1EE7F', 'sp-poison': '#12AA24', 'sp-ice': '#92CCF7',
+          'sp-haze': '#9F61E4', 'sp-fog': '#FCFCFC', 'sp-smoke': '#ACACAC'}
+    key = args[args.index('--colour') + 1]
+    lin = lambda c: c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4
+    deep = [lin(int(SP[key].lstrip('#')[i:i + 2], 16) / 255) for i in (0, 2, 4)]
+
+    def sheet(name, d, rough):
+        T = [max(x, 1e-4) ** (d / 0.025) for x in deep]
+        m = bpy.data.materials.new(name); m.use_nodes = True; b = m.node_tree.nodes['Principled BSDF']
+        b.inputs['Base Color'].default_value = tuple(t ** 0.5 for t in T) + (1,)
+        b.inputs['Transmission Weight'].default_value = 1.0; b.inputs['IOR'].default_value = 1.49
+        b.inputs['Roughness'].default_value = rough
+        print(f'v3_day: {name}: {d * 1000:.1f} mm of {key}, T {T[0]:.3f} {T[1]:.3f} {T[2]:.3f}', flush=True)
+        return m
+    setmat(top, sheet('bl-tint-top', 0.006, 0.004))
+    setmat(frame, sheet('bl-tint-frame', 0.010, 0.35))
+    # the edge closed with a black band: the plinth's outer edge faces (the top's 6 mm and the frame's 19.4 mm) in the
+    # posts' satin black, so the light guided along the top does not leave its rim as a pale line (the first test did)
+    bk = bpy.data.materials.get('post-satin-black')
+    if bk is None:
+        black_posts(); bk = bpy.data.materials['post-satin-black']
+    for o in (top, frame):
+        o.data.materials.append(bk)
+        M = o.matrix_world
+        for p in o.data.polygons:
+            c = M @ p.center; n = (M.to_3x3() @ p.normal).normalized()
+            if abs(n.z) < 0.3 and min(c.x - X0, X1 - c.x, c.y - Y0, Y1 - c.y) < 0.0015:
+                p.material_index = 1
+    # the opal's light leaves through the glass top: Cycles counts that path as a refractive caustic, which the scene
+    # turns off (with it off the deck read 0.008 over a lit opal, on 0.050); on, as the night pictures render
+    sc_ = bpy.context.scene.cycles; sc_.caustics_refractive = True; sc_.caustics_reflective = True
+    pl.hide_render = True; pl.hide_viewport = True
+    for o in (top, frame):
+        o['caustic'] = True
+    print(f'v3_day: BACKLIT plinth: top 6.0 / opal 3.0 / tray 12.0 / floor 4.4 mm; {len(runs)} LED runs, {length:.2f} m at '
+          f'{wpm} W/m = {P:.1f} W', flush=True)
+
+
 def prepare():
+    if '--backlit' in mine:
+        backlit(float(mine[mine.index('--backlit') + 1]))
+    if '--wb' in mine:
+        vs = bpy.context.scene.view_settings; vs.use_white_balance = True
+        vs.white_balance_temperature = float(mine[mine.index('--wb') + 1]); vs.white_balance_tint = 0.0
+        print('v3_day: camera white balance', vs.white_balance_temperature, 'K', flush=True)
     if '--lamps-off' in mine:
         lamps_off(mine[mine.index('--lamps-off') + 1])
     if '--cards' in mine:
