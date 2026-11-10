@@ -239,7 +239,115 @@ def backlit(wpm):
           f'{wpm} W/m = {P:.1f} W', flush=True)
 
 
+def white_base(wpm):
+    """PROPOSAL (the coordinator, 2026-11-10 06:06): v3 as signed, with one change, the base's top lamination in opal
+    (Perspex GS 041, 3.0 mm; the smoked base below it 9.7 mm, so the float stays 40 mm). The light: a 2700 K LED strip
+    in a small black channel under the deck, 20 mm in from its edge (outside the base's footprint), its face at 45 deg,
+    down and in onto the white. Nothing emits but the LED faces. wpm: the strip's watts a metre (0 by day)."""
+    from mathutils import Vector
+    from bpy_extras.object_utils import world_to_camera_view
+    base = bpy.data.objects['base-L1-stack']
+    zb0, zb1 = 0.0160, 0.0287; zs = zb1 - 0.003
+    def box(name, x0, x1, y0, y1, z0, z1):
+        bpy.ops.mesh.primitive_cube_add(size=1.0, location=((x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2))
+        b = bpy.context.active_object; b.name = name; b.scale = (x1 - x0, y1 - y0, z1 - z0); bpy.ops.object.transform_apply(scale=True)
+        return b
+    def boolean(t, c, op):
+        m = t.modifiers.new('b', 'BOOLEAN'); m.operation = op; m.object = c; m.solver = 'EXACT'
+        bpy.context.view_layer.objects.active = t; bpy.ops.object.modifier_apply(modifier=m.name)
+    def copy(name):
+        o = base.copy(); o.data = base.data.copy(); o.name = name; bpy.context.collection.objects.link(o); return o
+    def setmat(o, m):
+        o.data.materials.clear(); o.data.materials.append(m)
+        for p in o.data.polygons: p.material_index = 0
+    lower = copy('wb-base-smoke'); c = box('c', 0, 0.5, 0, 0.4, zb0 - 0.01, zs); boolean(lower, c, 'INTERSECT'); bpy.data.objects.remove(c)
+    opal = copy('wb-base-opal'); c = box('c', 0, 0.5, 0, 0.4, zs, zb1 + 0.01); boolean(opal, c, 'INTERSECT'); bpy.data.objects.remove(c)
+    # the smoked lamination surface-tinted (its own transmission at 9.7 mm: the absorbing volume needs a closed solid)
+    lin = lambda c_: c_ / 12.92 if c_ <= 0.04045 else ((c_ + 0.055) / 1.055) ** 2.4
+    sm = [lin(int('787B7E'[i:i + 2], 16) / 255) for i in (0, 2, 4)]          # Smoke 2074, its colour after 10 mm
+    T = [x ** (9.7 / 10.0) for x in sm]
+    m = bpy.data.materials.new('wb-smoke'); m.use_nodes = True; b = m.node_tree.nodes['Principled BSDF']
+    b.inputs['Base Color'].default_value = tuple(t ** 0.5 for t in T) + (1,); b.inputs['Transmission Weight'].default_value = 1.0
+    b.inputs['IOR'].default_value = 1.49; b.inputs['Roughness'].default_value = 0.004
+    setmat(lower, m)
+    om = bpy.data.materials.new('opal-041'); om.use_nodes = True; nt = om.node_tree; nt.nodes.clear()
+    d = nt.nodes.new('ShaderNodeBsdfDiffuse'); d.inputs['Color'].default_value = (0.39, 0.39, 0.39, 1)
+    t_ = nt.nodes.new('ShaderNodeBsdfTranslucent'); t_.inputs['Color'].default_value = (0.54, 0.54, 0.54, 1)
+    g = nt.nodes.new('ShaderNodeBsdfGlossy'); g.inputs['Roughness'].default_value = 0.05; g.inputs['Color'].default_value = (0.04, 0.04, 0.04, 1)
+    a1 = nt.nodes.new('ShaderNodeAddShader'); a2 = nt.nodes.new('ShaderNodeAddShader'); o_ = nt.nodes.new('ShaderNodeOutputMaterial')
+    nt.links.new(d.outputs[0], a1.inputs[0]); nt.links.new(t_.outputs[0], a1.inputs[1]); nt.links.new(a1.outputs[0], a2.inputs[0])
+    nt.links.new(g.outputs[0], a2.inputs[1]); nt.links.new(a2.outputs[0], o_.inputs['Surface'])
+    setmat(opal, om)
+    base.hide_render = True; base.hide_viewport = True
+    # the channel and the strip, round the deck 20 mm in from its edge
+    zd = 0.0687; X0, X1, Y0, Y1, IN = 0.01, 0.46, 0.01, 0.37, 0.020
+    blk = bpy.data.materials.new('wb-channel'); blk.use_nodes = True; bb = blk.node_tree.nodes['Principled BSDF']
+    bb.inputs['Base Color'].default_value = (0.008, 0.008, 0.008, 1); bb.inputs['Roughness'].default_value = 0.6
+    led = bpy.data.materials.new('strip'); led.use_nodes = True; lt = led.node_tree; lt.nodes.clear()
+    em = lt.nodes.new('ShaderNodeEmission'); em.inputs['Color'].default_value = (1.0, 0.55, 0.25, 1)
+    lo = lt.nodes.new('ShaderNodeOutputMaterial'); lt.links.new(em.outputs[0], lo.inputs['Surface'])
+    xa, xb, ya, yb = X0 + IN, X1 - IN, Y0 + IN, Y1 - IN
+    faces_led = []; length = 0.0
+    sides = [((xa, ya), (xb, ya), Vector((0, 1, 0))), ((xb, ya), (xb, yb), Vector((-1, 0, 0))),
+             ((xb, yb), (xa, yb), Vector((0, -1, 0))), ((xa, yb), (xa, ya), Vector((1, 0, 0)))]
+    for i, (p0, p1, inward) in enumerate(sides):
+        p0 = Vector((*p0, 0)); p1 = Vector((*p1, 0)); L = (p1 - p0).length; length += L
+        mid = (p0 + p1) / 2; along = (p1 - p0).normalized()
+        # the channel: an inverted U, 8 wide x 8 deep, 1 mm walls, its open side down and in; the outer wall full height
+        outer = mid - inward * 0.004
+        def plate(name, centre, w_in, h, z0):
+            bpy.ops.mesh.primitive_cube_add(size=1.0, location=(centre.x, centre.y, z0 + h / 2))
+            o = bpy.context.active_object; o.name = name
+            o.scale = ((L if abs(along.x) > 0.5 else w_in), (w_in if abs(along.x) > 0.5 else L), h)
+            bpy.ops.object.transform_apply(scale=True); setmat(o, blk); return o
+        plate(f'wb-channel-top-{i}', mid, 0.009, 0.001, zd - 0.001)
+        plate(f'wb-channel-wall-{i}', outer, 0.001, 0.008, zd - 0.008)
+        # the LED face: 5 mm wide, 3 mm under the deck, 2 mm in from the outer wall, facing down and in at 45 deg
+        c_ = mid - inward * 0.0015 + Vector((0, 0, zd - 0.004))
+        n = (inward + Vector((0, 0, -1))).normalized(); w = n.cross(along).normalized()
+        vs = [c_ + along * (L / 2) * sa + w * 0.0025 * sb for sa, sb in ((-1, -1), (1, -1), (1, 1), (-1, 1))]
+        me = bpy.data.meshes.new(f'led-strip-{i}'); me.from_pydata([tuple(v) for v in vs], [], [(0, 1, 2, 3)]); me.update()
+        ob = bpy.data.objects.new(f'led-strip-{i}', me); bpy.context.collection.objects.link(ob); setmat(ob, led); faces_led.append(ob)
+    A = sum(p.area for o in faces_led for p in o.data.polygons)
+    P = wpm * length
+    em.inputs['Strength'].default_value = P / (2 * 3.14159265 * A) if P > 0 else 0.0
+    sc = bpy.context.scene; sc.cycles.caustics_refractive = True; sc.cycles.caustics_reflective = True
+    # is the strip, or its channel's open side, seen? its face's points ray-cast from the camera
+    bpy.context.view_layer.update(); dg = bpy.context.evaluated_depsgraph_get(); cam = sc.camera; co = cam.matrix_world.translation
+    seen = tot = 0
+    for o in faces_led:
+        v = [o.matrix_world @ x.co for x in o.data.vertices]
+        for k in range(21):
+            for j in range(3):
+                pt = v[0].lerp(v[1], k / 20).lerp(v[3].lerp(v[2], k / 20), j / 2)
+                f = world_to_camera_view(sc, cam, pt)
+                if not (f.z > 0 and 0 <= f.x <= 1 and 0 <= f.y <= 1):
+                    continue
+                tot += 1; dv = pt - co; dist = dv.length; dv.normalize()
+                ok, *_ = sc.ray_cast(dg, co, dv, distance=dist - 1e-4)
+                seen += 0 if ok else 1
+    print(f'v3_day: WHITE BASE: opal 3.0 over smoke 9.7 mm; LED {length:.2f} m at {wpm} W/m = {P:.1f} W; '
+          f'its face seen directly by the camera at {seen} of {tot} points in frame', flush=True)
+
+
+def warm_room():
+    # the dim room's ambient neutral-warm (the coordinator: the blue one read strongly blue at 4000 K)
+    for o in bpy.data.objects:
+        if o.type == 'LIGHT':
+            o.data.color = (1.0, 0.90, 0.78)
+    w = bpy.context.scene.world
+    if w and w.node_tree:
+        for nd in w.node_tree.nodes:
+            if nd.type == 'BACKGROUND':
+                nd.inputs['Color'].default_value = (0.028, 0.025, 0.021, 1)
+    print('v3_day: the room ambient neutral-warm', flush=True)
+
+
 def prepare():
+    if '--white-base' in mine:
+        white_base(float(mine[mine.index('--white-base') + 1]))
+    if '--warm-room' in mine:
+        warm_room()
     if '--backlit' in mine:
         backlit(float(mine[mine.index('--backlit') + 1]))
     if '--wb' in mine:
