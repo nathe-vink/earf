@@ -53,6 +53,14 @@ def place(bpy, blk, root):
                 for s in o.material_slots:
                     if s.material and any(w in s.material.name.lower() for w in blk.get('forbid', [])) and not o.hide_render:
                         bad.append(f'forbidden material {s.material.name} on {o.name}')
+            # the manifest's black hardware (since r48-mantle-design 941ad388): each of those parts on the satin black
+            for part in man.get('black_hardware', []):
+                hits = [n_ for n_ in got if n_ == part or n_.startswith(part + '.')]
+                if not hits:
+                    bad.append(f'black hardware {part} not found')
+                for n_ in hits:
+                    if not any('satin-black' in m_ for m_ in got[n_]['materials']):
+                        bad.append(f'black hardware {n_} is {got[n_]["materials"]}')
             if bad:
                 raise SystemExit('blendasset: ' + blk['collection'] + ' does not match its manifest: ' + '; '.join(bad[:8]))
             print('blendasset:', blk['collection'], len(want), 'parts match the manifest')
