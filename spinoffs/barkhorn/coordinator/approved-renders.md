@@ -472,6 +472,14 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    skirt, cable through a small polished arch at the back; touch electrode Ø98 behind the lip, TO PROTOTYPE-TEST. BOM:
    mold $1,200 once; base ~$150-200 [E]. The dark foot is the studio light falling off and the contact shadow, not the
    body (the liner is opaque). Speaker lane told 16:50 to use 3e38954b for every Core.
+   16:49 UTC, lamps lane 5cd1ee5648: HEMISPHERE PHOTOMETRY with the Ø95 disc and the closed carrier
+   (`lamp-site/final/photometry.txt`, `photometry-hemisphere.txt`). Total lm out (below / above the rim plane); lux 0.5 m
+   below the rim at the center / r 0.15-0.2 m / r 0.3-0.35 m:
+   Ember 272 (198/75), 345/301/217. Dust 280 (201/79), 351/307/220. Acid 301 (208/94), 352/307/220.
+   Poison 256 (192/64), 345/301/216. Ice 264 (196/68), 350/306/219. Haze 254 (192/63), 346/302/216.
+   Fog 339 (223/116), 352/307/220. Smoke 287 (202/85), 348/304/218.
+   Against the old set: about +17 % out and +29 % at the table's center (Ember 268 -> 345 lx). The site's line becomes
+   "about 350 lux at 0.5 m in every tint" (was ~270).
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
