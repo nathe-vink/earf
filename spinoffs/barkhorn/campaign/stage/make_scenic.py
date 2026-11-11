@@ -142,10 +142,10 @@ def main():
     out, sheet = {}, Image.new('RGB', (N * 8 // 2, N // 2), '#101010')
     for k, (t, hx) in enumerate(TINT.items()):
         ls = layers(t); n = len(ls)
-        vals = [0.22, 0.32, 0.42][:n] if t not in ('fog',) else [0.42, 0.56, 0.68][:n]
+        vals = [0.34, 0.46, 0.58][:n] if t not in ('fog',) else [0.52, 0.64, 0.76][:n]
         if t == 'smoke':
-            vals = [0.16, 0.24, 0.32][:n]
-        sat = 0.0 if t in ('fog', 'smoke') else 0.62
+            vals = [0.24, 0.33, 0.42][:n]
+        sat = 0.0 if t in ('fog', 'smoke') else 0.68
         out[t] = []
         for i, im in enumerate(ls):
             col = _muted(hx, vals[i], sat)

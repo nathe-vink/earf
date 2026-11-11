@@ -2441,7 +2441,7 @@ STAGE2_SCENIC = {'ember': (-0.55, 0.55, 1.25, False), 'dust': (0.5, 0.6, 1.0, Fa
                  'fog': (0.55, 0.6, 0.9, False), 'smoke': (0.45, 0.6, 1.4, True)}
 
 
-def hero_stage2(wash=0.15, haze=0.02):
+def hero_stage2(wash=0.3, haze=0.007):
     s = _cast_base()
     Z, FRONT, BACK = 1.0, -1.2, 3.2
     pose, hemis, risers, pieces = {}, [], [], []
@@ -2479,13 +2479,15 @@ def hero_stage2(wash=0.15, haze=0.02):
     s['sky']['strength'] = 0.0
     s['lights'] = {}
     if wash:   # declared: one stage wash from the house, out of frame, warm, gridded
-        s['lights']['house-wash'] = {'type': 'area', 'size_m': [3.0, 1.5], 'position': [0.0, -8.6, 5.2], 'target': [0.0, 0.5, Z + 1.2],
-                                     'irradiance': wash, 'color': '#FFE4C4', 'spread_deg': 50}
+        s['lights']['house-wash'] = {'type': 'area', 'size_m': [3.0, 1.5], 'position': [0.0, -8.6, 5.2], 'target': [0.0, 0.5, Z + 1.0],
+                                     'irradiance': wash, 'color': '#FFE4C4', 'spread_deg': 34}
     if haze:   # declared: a little stage haze, so each lamp's cone shows
         s['haze'] = {'box_m': [-6.0, FRONT, Z, 6.0, BACK, 8.0], 'density': haze, 'anisotropy': 0.5, 'color': '#FFFFFF'}
-    s['camera'] = {'position': [0.0, -7.4, 0.92], 'target': [0.0, 1.0, 2.9], 'lens_mm': 35.0, 'level': True}
+    # (proof 1: the Cores cut by the frame's foot, the haze lit all over by the wash, the shades blown: a little lower;
+    # the haze thinner, the wash narrower; exposed for the shades)
+    s['camera'] = {'position': [0.0, -7.4, 0.92], 'target': [0.0, 1.0, 2.7], 'lens_mm': 35.0, 'level': True}
     s['size'] = [1920, 880]
-    s['render'].update({'samples': 256, 'denoise': True, 'clamp': 0, 'exposure': 3.0, 'white_balance_k': 3600, 'white_balance_tint': 0.0,
+    s['render'].update({'samples': 256, 'denoise': True, 'clamp': 0, 'exposure': 1.8, 'white_balance_k': 3600, 'white_balance_tint': 0.0,
                         'bounces': 32, 'diffuse_bounces': 12, 'glossy_bounces': 16, 'transmission_bounces': 32, 'volume_bounces': 1,
                         'caustics_refractive': True, 'caustics_reflective': True})
     s.pop('finish', None)
