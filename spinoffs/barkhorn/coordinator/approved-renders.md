@@ -665,6 +665,16 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    audit's saved scenes had grown to 7 GB) and the container restarted, stopping the queue. Nothing wrong was pushed.
    Stale saves deleted (14 GB free); the audit now deletes each saved scene after its checks. Queue restarted 23:48 in
    the same order: Fog pair (~3.5 h), Poison pair, the Acid, Ember and Smoke proxies, Dust's final.
+   23:53 UTC, lamps lane fee3b161ca: THE CORE FINALS with the own-color base B (R12 lip): `core-<tint>.png` x8 and
+   `core-row.png` at the same names, lamp on (studio 0.5, EV -1, 4000 K, paper #9A9A9A, 256 spp), plus new
+   `core-row-day.png` (lamps off, daylight 5000 K). Emitters: the LED faces only; studio lamps hidden from the camera;
+   every audit 0.0 in frame. Coordinator's check (sheet of eight, both rows, the base contact at full size on Ice):
+   the eight singles and `core-row.png` PASS; shown to the owner 23:58. Lit, most bases read near black with color only
+   at the lip (Fog's and Smoke's pale); in daylight the bases read as tinted glass.
+   - `core-row-day.png`: each ball carries two round specular dots that read as pairs of eyes: re-render with the single
+     overhead strip softbox (asked 23:58).
+   - Haze unlit reads deep blue rather than violet (lever: a redder pour): told to the owner, no change unless asked.
+   THESE ARE CORE'S SITE PICTURES (the day row after its re-render).
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
