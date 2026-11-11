@@ -8,7 +8,28 @@
    "in_frame": true
   },
   {
+   "name": "Hemisphere ember",
+   "lumens": 1000,
+   "emitter": "24 LED faces on its ring board",
+   "cct_k": 2200,
+   "in_frame": true
+  },
+  {
    "name": "Hemisphere dust",
+   "lumens": 1000,
+   "emitter": "24 LED faces on its ring board",
+   "cct_k": 4000,
+   "in_frame": true
+  },
+  {
+   "name": "Hemisphere dust",
+   "lumens": 1000,
+   "emitter": "24 LED faces on its ring board",
+   "cct_k": 4000,
+   "in_frame": true
+  },
+  {
+   "name": "Hemisphere acid",
    "lumens": 1000,
    "emitter": "24 LED faces on its ring board",
    "cct_k": 4000,
@@ -29,6 +50,20 @@
    "in_frame": true
   },
   {
+   "name": "Hemisphere poison",
+   "lumens": 1000,
+   "emitter": "24 LED faces on its ring board",
+   "cct_k": 2700,
+   "in_frame": true
+  },
+  {
+   "name": "Hemisphere ice",
+   "lumens": 1000,
+   "emitter": "24 LED faces on its ring board",
+   "cct_k": 4000,
+   "in_frame": true
+  },
+  {
    "name": "Hemisphere ice",
    "lumens": 1000,
    "emitter": "24 LED faces on its ring board",
@@ -43,10 +78,31 @@
    "in_frame": true
   },
   {
+   "name": "Hemisphere haze",
+   "lumens": 1000,
+   "emitter": "24 LED faces on its ring board",
+   "cct_k": 3000,
+   "in_frame": true
+  },
+  {
    "name": "Hemisphere fog",
    "lumens": 1000,
    "emitter": "24 LED faces on its ring board",
    "cct_k": 2700,
+   "in_frame": true
+  },
+  {
+   "name": "Hemisphere fog",
+   "lumens": 1000,
+   "emitter": "24 LED faces on its ring board",
+   "cct_k": 2700,
+   "in_frame": true
+  },
+  {
+   "name": "Hemisphere smoke",
+   "lumens": 1000,
+   "emitter": "24 LED faces on its ring board",
+   "cct_k": 4000,
    "in_frame": true
   },
   {
@@ -133,7 +189,7 @@
    "in_frame": false
   }
  ],
- "lamp_lumens_total": 9600,
+ "lamp_lumens_total": 17600,
  "wash": "declared: one stage wash from the house, out of frame",
  "haze": {
   "declared": true,
