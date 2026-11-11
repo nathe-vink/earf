@@ -142,7 +142,7 @@ def _track():
         out[f'track-horn{k}'] = {'type': 'area', 'size_m': [0.12, 0.12], 'position': [xc + 0.3, 4.4, R.CEIL - 0.05],
                                  'target': [xc, SPK_Y - 0.15, FEET_BAR + 1.12], 'irradiance': round(HORN * TRACK, 3), 'spread_deg': 12,
                                  'color': '#FFE2C0'}
-    out['house'] = {'type': 'area', 'size_m': [3.0, 3.0], 'position': [6.9, 0.2, 2.6], 'target': [6.9, 4.5, 1.0],
+    out['house'] = {'type': 'area', 'size_m': [1.6, 1.6], 'position': [6.9, 0.6, 2.3], 'target': [6.9, 4.5, 1.0],
                     'irradiance': round(HOUSE * TRACK, 3), 'color': '#FFC890'}
     for v in out.values():                                     # (22:32: round heads, so a gloss shows no hard-edged shape)
         v['shape'] = 'DISK'
@@ -215,6 +215,10 @@ def bar_backbar():
                                  'target': [4.0, 5.6, 2.6], 'irradiance': round(0.5 * TRACK, 3), 'color': '#FFC890'}
     # (22:32: the near horn's shape: polished, it shows only what it mirrors; a graduated warm card over the bay's front,
     # seen only in reflections, so the flare carries a soft ramp along its curve)
+    # (22:32: Mantle's Ember shows in its plinth's layered sides: a low head from behind the seat onto its front face)
+    s['lights']['mantle-front'] = {'type': 'area', 'shape': 'DISK', 'size_m': [0.15, 0.15], 'position': [9.7, 3.15, 2.3],
+                                   'target': [MANTLE[0], MANTLE[1] - 0.15, MANTLE[2] + 0.05], 'irradiance': round(2.5 * TRACK, 3),
+                                   'spread_deg': 14, 'color': '#FFD8B0'}
     s['lights']['horn-card'] = {'type': 'panel', 'size_m': [1.4, 0.9], 'position': [8.05, 4.9, R.CEIL - 0.06],
                                 'target': [R.SPK_NICHES[1], SPK_Y - 0.1, FEET_BAR + 1.1], 'strength': 10.0, 'diffuse': 0.0, 'specular': 1.0,
                                 'color': '#FFE2C0', 'ramp': {'axis': 'x', 'at_m': [7.4, 8.05, 8.7], 'values': [0.25, 1.0, 0.25]}}                         # (this view sees that head: the audit, 0.03 %)
