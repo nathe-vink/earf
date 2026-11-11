@@ -242,6 +242,36 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    the Hollywood issue; the orchestra; the class photo). OWNER ~04:15: "2 4 and 5 sound cool". ONE test frame of each,
    briefed 04:20: the Hollywood issue and the orchestra to the speaker lane (hero-hollywood.png, hero-orchestra.png); after
    hours at Planet EARF to the bar lane (r33-planet-world; every product, lit only by the lamps EARF sells, final assets).
+   OWNER 11 Nov ~06:45 on the second passes: "Are you using the right speaker renders for these shots? The horns are
+   looking more satin than the product shots on the site. I like both images, and I like the idea of putting the speakers,
+   lights, and mantle in funny settings as long as the setting looks either real or obviously fake and the products are
+   visible. In the orchestra, the speakers are covered by the stands. Remove the stands and podium. In the Hollywood issue,
+   there's no green and the couch looks terrible. When I say real or obviously fake i mean photorealistic or a make believe
+   setting. Something doing a bad job at looking real is the worst case, like the couch. It's funny that Haze is on its
+   side. Id love to explore more random photoshoots." Then: "I actually like the first passes more than the second."
+   -> RULES FOR THE SERIES: funny settings with the whole family; a setting is photoreal or openly make-believe, never
+      half-real; products fully visible; mood and mischief over tidy and bright; Haze on its side is the running joke.
+   -> HORN: the hero scenes had used the SATIN horn (ROLLOUT['horn'] default). Fixed in r33-speaker-horn 75fbf59d: every
+      hero builder now asserts the approved build (polished horn, base A, the site's render quality). Poly Haven (CC0)
+      models, textures and HDRIs are reachable and in use (CREDITS.md). The family (lamps, Mantle) is embedded.
+   Third passes (75fbf59d, renders/2026-11-11/barkhorn/hero3/) shown 07:20. AFTER HOURS test (r33-planet-world 8a1cf183,
+   audit efbe81f0) FAILED: the dark bar cannot be lit to a readable picture by the lamps alone (blotchy noise at +5.5);
+   parked. The bar lane cannot send messages; its report was read from its transcript.
+   LAMPS FINAL SET: r32-lamps-final 17a9da5e (rig, CAD, BOM 007b4486), full size, neutral gray, the "Go" recipe; checked by
+   the coordinator (rows and sixteen singles); shown 12:15. Core lumens out: Ember 9.0, Dust 12.5, Acid 18.3, Poison 3.0,
+   Ice 6.6, Haze 3.2, Fog 34.6, Smoke 12.9. Hemisphere about 270 lux at 0.5 m in every tint.
+   SITE preview dpl_21cVxXYRDPZVUwqAmvbSXcSQhRHv (r49-site-rc 770743a3): Mantle and lamp finals on the pages; link 12:30.
+   OWNER 11 Nov ~12:35: "The site layout looks bad to me. Not great for a marketing site. Not clear that tropos is
+   clickable. The one hangs one wanders tagline is meh. For the group images, The black triangles in the orchestra bench are
+   odd. The couch is kind of ugly. Not Modern enough or designer enough. It would be cool to have a stage image where each
+   speaker has it's hemisphere as a spotlight above it, some cutout prop near it, like a white cutout cloud on the ground
+   for fog, a cutout of grass for poison, etc, and the spectrum of core at the front of the stage like the old bulbs."
+   -> Orchestra and Hollywood PARKED as sketches. THE STAGE briefed to the speaker lane 12:45 (hero-stage.png: a make-believe
+      theater; each Tropos under its own Hemisphere; a painted cutout per tint after the brand's icons; Core footlights in
+      spectrum order; Mantle at a corner; Haze on its side).
+   -> HOME PAGE to be rebuilt as a marketing page, briefed to the site lane 12:45: hero with two buttons; four product
+      cards that are whole links, Tropos leading; a color picker that swaps all four products' pictures; the two
+      habitats; "One hangs. One wanders." deleted.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
