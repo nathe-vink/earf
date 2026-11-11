@@ -815,6 +815,7 @@ def apply(web, head, rest):
         rc_globe(p, web)
         rc_intro(p, web)
         rc_words(p, web)
+        rc_products(p, web)
         rc_home(p, web)
         rc_clean(p)
         p.banned = BANNED_RC
@@ -2009,6 +2010,95 @@ def rc_home(p, web):
     i = p.rest.index('</body>') if '</body>' in p.rest else len(p.rest)
     if HOTSPOTS:
         p.rest = p.rest[:i] + HOTSPOT_JS + '\n' + p.rest[i:]
+
+
+# The products' own pictures (the coordinator, 2026-11-11 02:55): Mantle final, no light (r48-mantle-design a1240b77), one
+# per color; the lamps lit, per tint, and in rows (r32-lamps-final 42c3276c: half size and interim, names kept for the finals)
+MANTLE_FINAL = 'renders/2026-11-10/barkhorn/mantle-r48/mantle-final-day-{name}.png'
+LAMP_FINAL = 'renders/2026-11-10/barkhorn/lamp-site/final/{f}.png'
+NAMES = dict(zip(RC_KEYS, ['ember', 'dust', 'acid', 'poison', 'ice', 'haze', 'fog', 'smoke']))
+LAMP_LIGHT_TINTS = '2200 K in Ember, 3000 K in Ice and Haze, 2700 K in the others'
+
+
+def rc_products(p, web):
+    import json, os
+    from PIL import Image
+    def save(src, name, width, q=82):
+        im = Image.open(os.path.join(web.ROOT, src)).convert('RGB')
+        if im.width > width:
+            im = im.resize((width, round(im.height * width / im.width)), Image.LANCZOS)
+        im.save(os.path.join(web.IMG, 'rc', name), 'WEBP', quality=q, method=6)
+        return {'src': f'img/rc/{name}', 'w': im.width, 'h': im.height}
+    def views(src, base, width):
+        full = save(src, f'{base}.webp', width)
+        th = save(src, f'{base}-th.webp', 168, 80)
+        card = save(src, f'{base}-800.webp', 800) if width > 800 else dict(full)
+        return dict(full, th=th['src']), card
+    i = p.rest.index('const D = ') + len('const D = ')
+    j = p.rest.index(', BY = Object', i)
+    D = json.loads(p.rest[i:j])
+    # Mantle: its own picture in every color
+    for k, n in NAMES.items():
+        v, card = views(MANTLE_FINAL.format(name=n), f'mantle-{n}', 1600)
+        D['tt']['colours'][k] = {'views': {'studio': v}, 'card': dict(card, alt=f'Mantle in {n.title()}')}
+    # the lamps: each lit in its tint, the eight in a row, Hemisphere from below (Ember)
+    rows = {}
+    for lamp, f in (('dome', 'hemisphere'), ('orb', 'core')):
+        r = save(LAMP_FINAL.format(f=f'{f}-row'), f'{f}-row.webp', 1200)
+        rows[f] = r
+        row_th = save(LAMP_FINAL.format(f=f'{f}-row'), f'{f}-row-th.webp', 168, 80)
+        for k, n in NAMES.items():
+            v, card = views(LAMP_FINAL.format(f=f'{f}-{n}'), f'{f}-{n}', 800)
+            vs = {'hero': v, 'row': dict(r, th=row_th['src'])}
+            if lamp == 'dome' and k == 'red':
+                b, _ = views(LAMP_FINAL.format(f='hemisphere-ember-below'), 'hemisphere-ember-below', 800)
+                vs['below'] = b
+            D['lamps'][lamp]['colours'][k] = {'views': vs, 'card': dict(card, alt=f'{f.title()} lit in {n.title()}')}
+    def fact(L, name, text, after=None):
+        rows_ = L['facts']
+        for row in rows_:
+            if row[0] == name:
+                row[1] = text; return
+        at = next(ix for ix, row in enumerate(rows_) if row[0] == after) + 1
+        rows_.insert(at, [name, text])
+    fact(D['lamps']['dome'], 'Light', 'About 1,000 lm, CRI 90; the dome glows in its own color, and the light straight down is the lamp&rsquo;s own '
+                                      'white: ' + LAMP_LIGHT_TINTS)
+    fact(D['lamps']['orb'], 'Light', 'A glow lamp: about 17 lm out of the ball in Ice, 9 in Ember; ' + LAMP_LIGHT_TINTS)
+    fact(D['lamps']['orb'], 'Base', 'Black acrylic, angled', after='Ball')
+    p.rest = p.rest[:i] + json.dumps(D, separators=(',', ':')) + p.rest[j:]
+    # the views' words: Mantle in its own color; Hemisphere from below
+    p.sub("const TT_VIEWS = [['studio', 'In the studio', c => c.k === 'red' ? `${D.tt.name} in Ember.` : `${D.tt.name}, shown in Ember. ${c.name} to follow.`],",
+          "const TT_VIEWS = [['studio', 'In the studio', c => `${D.tt.name} in ${c.name}.`],")
+    p.sub("         ['row', 'All eight', () => 'Eight Hemispheres hung in a row, lit, one in each color.'],",
+          "         ['row', 'All eight', () => 'Eight Hemispheres hung in a row, lit, one in each color.'],\n"
+          "         ['below', 'From below', () => 'Hemisphere from below, lit: its opal diffuser inside the Ember shade.'],")
+    # the home's lamps: the two rows; the lighting page's too
+    def rows_fig(cls):
+        h, c = rows['hemisphere'], rows['core']
+        return (f'<figure class="lamp-rows {cls}"><a href="#hemisphere-ember"><img src="{h["src"]}" width="{h["w"]}" height="{h["h"]}" loading="lazy" '
+                f'alt="Eight Hemispheres hung in a row, lit, one in each color"></a><a href="#core-ember"><img src="{c["src"]}" width="{c["w"]}" '
+                f'height="{c["h"]}" loading="lazy" alt="Eight Core lamps in a row, lit, one in each color"></a>'
+                f'<figcaption><i class="render">Render</i></figcaption></figure>')
+    p.sub('<div class="wrap lamps-home no-pic"><ul class="lamp-names">', '<div class="wrap lamps-home no-pic">' + rows_fig('home') + '<ul class="lamp-names">')
+    m = re.search(r'(<section class="band lamps" id="lamps"><div class="wrap">.*?</div></div>)(\s*<div class="ptiles">)', p.rest, re.S)
+    assert m, 'rc_products: the lighting page'
+    p.rest = p.rest[:m.end(1)] + rows_fig('page') + p.rest[m.end(1):]
+    # the home's Mantle and its page: Ember
+    e = D['tt']['colours']['red']['views']['studio']
+    pic = (f'<figure class="mantle-pic"><a href="#mantle-ember"><img src="{e["src"]}" width="{e["w"]}" height="{e["h"]}" loading="lazy" '
+           f'alt="Mantle in Ember"></a><figcaption><i class="render">Render</i></figcaption></figure>')
+    p.sub('<div class="wrap"><h2><a href="#turntable">Mantle.</a></h2><p class="beat-line">A turntable in cast acrylic.</p></div>',
+          '<div class="wrap"><h2><a href="#turntable">Mantle.</a></h2><p class="beat-line">A turntable in cast acrylic.</p>' + pic + '</div>')
+    m = re.search(r'(<section class="band" id="record"><div class="wrap">\s*<div class="head">.*?</div></div>)', p.rest, re.S)
+    assert m, 'rc_products: the Mantle page'
+    p.rest = p.rest[:m.end(1)] + pic.replace('class="mantle-pic"', 'class="mantle-pic page"') + p.rest[m.end(1):]
+    p.css("""
+.lamp-rows, .mantle-pic { margin: 28px 0 0; display: grid; gap: 12px; max-width: 1200px }
+.lamp-rows a, .mantle-pic a { display: block } .lamp-rows img, .mantle-pic img { display: block; width: 100%; height: auto }
+.lamp-rows figcaption, .mantle-pic figcaption { color: var(--muted); font-size: 14px; text-align: left !important }
+.lamp-rows.home + .lamp-names { margin-top: 20px }
+.lamp-rows.page, .mantle-pic.page { margin: 0 0 32px }
+""")
 
 
 HISTORY = r'(?:round \d+|\br\d\d[a-z]?\b|\bRC\d?\b|coordinator|the owner|critics?\b|\bcommit\b|\bbranch\b|r\d\d-[a-z]|wave \d|the audit)'
