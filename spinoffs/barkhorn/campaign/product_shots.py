@@ -48,32 +48,68 @@ def p1():
         _asset('round_wooden_table_02', 0.0, 0.0),
         _asset('round_wooden_table_02', -0.75, 1.9),
         _asset('wine_bottles_01', -0.62, 1.95, T, 70.0),
-        shots._family(cores=[('ember', 0.06, 0.02, T, 200.0), ('acid', -0.85, 1.75, T, 200.0)])]
-    s['sky'] = {'kind': 'hdri', 'polyhaven': BAR, 'res': '4k', 'rotation_deg': BAR_ROT, 'strength': 0.10}
+        # (the owner, 16:05: "a weird wire artifact": the dock's own braided USB-C cable, a 105 mm stub in the lamp's
+        # model (dock-cable, crystal.py), pointing at the camera with the lamp turned 200 deg. Turned to 0 its cable
+        # leaves from the back, behind the base, as it would run off to the wall)
+        shots._family(cores=[('ember', 0.06, 0.02, T, 0.0), ('acid', -0.85, 1.75, T, 0.0)])]
+    # (and the ball a stop darker so Ember holds its red: the room twice as bright, the exposure a stop down)
+    s['sky'] = {'kind': 'hdri', 'polyhaven': BAR, 'res': '4k', 'rotation_deg': BAR_ROT, 'strength': 0.20}
     s['camera'] = {'position': [0.22, -1.32, 1.08], 'target': [0.04, 0.0, T + 0.11], 'lens_mm': 85.0, 'level': True,
                    'fstop': 2.0, 'focus': [0.06, 0.02, T + 0.12]}
-    s['render'].update(exposure=1.8, white_balance_k=3400, white_balance_tint=0.0)   # (proofs: 2700 K turned the warm bar blue; at 2.6 the lamps blew to white)
+    s['render'].update(exposure=0.8, white_balance_k=3400, white_balance_tint=0.0)   # (proofs: 2700 K turned the warm bar blue; at 2.6 the lamps blew to white)
     return s
 
 
+HEMI_SCALE = float(os.environ.get('HEMI_SCALE', '1.5'))   # the owner's open question: 1.0, 1.5 or 2.0 (this pass 1.5)
+LAMPS = 'spinoffs/barkhorn/campaign/stage/stage2_props.py'
+
+
+def _pbr(tex, **k):
+    return {'material': 'pbr', 'texture': tex, 'tex_res': '2k', **k}
+
+
 def p2():
-    """The same room, wider: a bar-height round table (round_wooden_table_01, 1.0 m) with three real bar chairs
-    (bar_chair_round_01), three Hemispheres over it in Ember, Dust and Acid hung 0.75 m above it, two Cores on it. Our
-    own floor of real terracotta tiles (the HDRI's floor is at infinity), the room beyond it the HDRI's."""
-    s = _empty([1920, 1080], 'Three Hemispheres over a bar table (warm_bar)')
-    T = 1.005
-    s['set']['props'] = [
-        {'kind': 'kit', 'shape': 'box', 'size': [9.0, 9.0, 0.01], 'position': [0.0, 1.5, -0.01],
-         'material': 'pbr', 'texture': BAR_FLOOR, 'tex_res': '2k', 'gain': 0.9},
-        _asset('round_wooden_table_01', 0.0, 0.0),
-        *[_asset('bar_chair_round_01', 0.95 * __import__('math').sin(a), 0.95 * __import__('math').cos(a) * 0.9, 0.0, -a * 57.3)
-          for a in (-2.3, 2.3, 3.14)],
-        shots._family(hemis=[('ember', -0.38, 0.0, T + 0.75), ('dust', 0.0, 0.2, T + 0.85), ('acid', 0.38, 0.0, T + 0.75)],
-                      cores=[('ember', -0.25, -0.2, T, 200.0), ('acid', 0.3, 0.12, T, 200.0)])]
-    s['sky'] = {'kind': 'hdri', 'polyhaven': BAR, 'res': '4k', 'rotation_deg': BAR_ROT, 'strength': 0.10}
-    s['camera'] = {'position': [0.35, -2.9, 1.5], 'target': [0.0, 0.0, 1.2], 'lens_mm': 40.0, 'level': True,
-                   'fstop': 4.0, 'focus': [0.0, 0.0, 1.2]}
-    s['render'].update(exposure=1.8, white_balance_k=3400, white_balance_tint=0.0)   # (proofs: 2700 K turned the warm bar blue; at 2.6 the lamps blew to white)
+    """A corner of a cool bar of our own (the owner, 16:05: "Red brick, wood, cement textures mostly. No TVs"), built
+    from scanned materials: a red brick wall (red_brick), a brushed concrete floor and counter face (brushed_concrete),
+    a dark wood counter top and back bar (dark_wood), a real table (round_wooden_table_02) and metal stools
+    (metal_stool_01). Three Hemispheres low over the table (scaled HEMI_SCALE), two Cores on it; the Tropos pair at the
+    brick wall either side, Mantle on the back bar. The only light sources in frame are EARF's lamps; the rest is one
+    declared dusk window out of frame to the right, cool and low. No HDRI."""
+    s = shots._cast_base()
+    k = shots.HERO_ORDER.index('ice')                  # the pair in Ice, cool against the red brick
+    for blk in s['products']:
+        i = blk['instances'][k]
+        blk['instances'] = [{**copy.deepcopy(i), 'position': [-1.75, 2.05, 0.0], 'rotate_z': 18.0},
+                            {**copy.deepcopy(i), 'position': [1.45, 2.05, 0.0], 'rotate_z': -18.0}]
+    shots._approved(s, order=['ice', 'ice'])
+    T = 0.746
+    BW = 2.5                                   # the brick wall's face (y)
+    s['set'] = {'kind': 'stage', 'props': [
+        {'kind': 'kit', 'shape': 'box', 'size': [12.0, 10.0, 0.02], 'position': [0.0, -2.0, -0.02], **_pbr('brushed_concrete', gain=0.8)},
+        {'kind': 'kit', 'shape': 'box', 'size': [12.0, 0.25, 4.5], 'position': [0.0, BW + 0.125, -0.02], **_pbr('red_brick', gain=0.9)},
+        # the back bar: a dark wood shelf along the brick, Mantle on it
+        {'kind': 'kit', 'shape': 'box', 'size': [1.6, 0.42, 0.04], 'position': [-0.15, BW - 0.21, 1.12], **_pbr('dark_wood')},
+        # the counter, coming in from the left: a concrete face, a dark wood top
+        {'kind': 'kit', 'shape': 'box', 'size': [0.6, 3.2, 1.04], 'position': [-3.0, 0.4, 0.0], **_pbr('brushed_concrete', gain=0.7)},
+        {'kind': 'kit', 'shape': 'box', 'size': [0.72, 3.3, 0.05], 'position': [-3.0, 0.4, 1.04], **_pbr('dark_wood')},
+        _asset('round_wooden_table_02', 0.0, 0.0),
+        _asset('metal_stool_01', -0.62, 0.25, 0.0, 30.0), _asset('metal_stool_01', 0.6, 0.45, 0.0, -40.0),
+        {'kind': 'kit', 'shape': 'ext', 'path': LAMPS, 'fn': 'lamps', 'hemi_scale': HEMI_SCALE, 'top_z': 3.4,
+         'led_k': shots.LED_K, 'core_load': shots.CORE_LOAD,
+         'hemispheres': [{'tint': shots.KEY[t], 'x': x, 'y': y, 'rim_z': z} for t, x, y, z in
+                         (('ember', -0.34, -0.05, 1.42), ('dust', 0.05, 0.12, 1.55), ('acid', 0.4, -0.08, 1.45))],
+         'cores': [{'tint': shots.KEY[t], 'x': x, 'y': y, 'floor_z': T, 'rot': 0.0} for t, x, y in (('ember', -0.18, -0.12), ('acid', 0.22, 0.1))]}]}
+    s['products'].append(shots._mantle(-0.15, BW - 0.22, 1.16 + 0.001, 0.0, 'smoke-2074'))
+    s['materials'].pop('sweep', None)
+    s['sky'] = {'kind': 'gradient', 'strength': 0.0}
+    s['lights'] = {'dusk-window': {'type': 'area', 'size_m': [1.6, 2.0], 'position': [3.6, 0.6, 1.6], 'target': [0.0, 0.8, 0.9],
+                                   'irradiance': 0.02, 'color': '#9FB3DA'}}
+    s['camera'] = {'position': [0.35, -2.55, 1.22], 'target': [0.0, 0.6, 1.2], 'lens_mm': 40.0, 'level': True,
+                   'fstop': 2.8, 'focus': [0.0, 0.0, 0.95]}
+    s['size'] = [1920, 1080]
+    s['render'] = {**s['render'], **LAMP_RENDER, 'exposure': 2.0, 'white_balance_k': 3600, 'white_balance_tint': 0.0}
+    s.pop('finish', None)
+    s['title'] = f'Three Hemispheres over a table in a brick bar of our own (Hemisphere x{HEMI_SCALE:g})'
     return s
 
 

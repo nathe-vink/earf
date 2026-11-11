@@ -98,6 +98,44 @@ def backdrop(bpy, name, p, kit):
     return [ob]
 
 
+def lamps(bpy, name, p, kit):
+    """The lamps by lamps_final.place (unchanged), the Hemispheres then scaled by `hemi_scale` about each one's rim
+    centre (the shade, its ring of LEDs and their emitting faces together; the lumens unchanged: a bigger shade, the
+    same light), their cords then run up to `top_z`. The Hemisphere's size is the owner's open question (2026-11-11:
+    "double the diameter of the core? Maybe 1.5?"): one factor, so a scene re-renders at 1.0, 1.5 or 2.0."""
+    sys.path.insert(0, os.path.join(ROOT, 'spinoffs', 'barkhorn', 'planet', 'afterhours'))
+    import lamps_final
+    k = float(p.get('hemi_scale', 1.0))
+    before = set(bpy.context.scene.objects)
+    objs = lamps_final.place(bpy, name + '-hemi', {**p, 'cores': []}, kit) if p.get('hemispheres') else []
+    hemi_new = [o for o in bpy.context.scene.objects if o not in before]
+    rims = [Vector((h['x'], h['y'], h['rim_z'])) for h in p.get('hemispheres', [])]
+    if k != 1.0 and rims:
+        bpy.context.view_layer.update()
+        for o in hemi_new:
+            if o.parent is not None and o.parent in hemi_new:
+                continue
+            c = min(rims, key=lambda r: (Vector((o.matrix_world.translation.x, o.matrix_world.translation.y, 0)) - Vector((r.x, r.y, 0))).length)
+            o.location = c + (o.location - c) * k
+            o.scale = o.scale * k
+        bpy.context.view_layer.update()
+    top = p.get('top_z')
+    if top is not None:
+        for o in hemi_new:
+            if o.type == 'MESH' and o.name.split('.')[0] == 'cord':
+                o.data = o.data.copy()
+                mw = o.matrix_world; inv = mw.inverted()
+                zl = (inv @ Vector((mw.translation.x, mw.translation.y, top))).z
+                hi = max(v.co.z for v in o.data.vertices)
+                for v in o.data.vertices:
+                    if v.co.z > hi - 0.002:
+                        v.co.z = zl
+    if p.get('cores'):
+        objs += lamps_final.place(bpy, name + '-core', {**p, 'hemispheres': []}, kit)
+    print('LAMPS hemi_scale', k, 'cords to', top)
+    return objs
+
+
 def pendants(bpy, name, p, kit):
     sys.path.insert(0, os.path.join(ROOT, 'spinoffs', 'barkhorn', 'planet', 'afterhours'))
     import lamps_final
