@@ -1,0 +1,158 @@
+{
+ "emitters": [
+  {
+   "name": "stage0",
+   "kind": "studio area",
+   "where": "out of frame",
+   "position_m": [
+    -2.6,
+    1.0,
+    4.6
+   ],
+   "irradiance": 2.6
+  },
+  {
+   "name": "stage1",
+   "kind": "studio area",
+   "where": "out of frame",
+   "position_m": [
+    0.0,
+    1.0,
+    4.6
+   ],
+   "irradiance": 2.6
+  },
+  {
+   "name": "stage2",
+   "kind": "studio area",
+   "where": "out of frame",
+   "position_m": [
+    2.6,
+    1.0,
+    4.6
+   ],
+   "irradiance": 2.6
+  },
+  {
+   "name": "hall",
+   "kind": "studio area",
+   "where": "out of frame",
+   "position_m": [
+    0.0,
+    -9.0,
+    3.2
+   ],
+   "irradiance": 0.5
+  },
+  {
+   "name": "stageback0",
+   "kind": "studio area",
+   "where": "out of frame",
+   "position_m": [
+    -2.2,
+    2.2,
+    4.8
+   ],
+   "irradiance": 1.6
+  },
+  {
+   "name": "stageback1",
+   "kind": "studio area",
+   "where": "out of frame",
+   "position_m": [
+    2.2,
+    2.2,
+    4.8
+   ],
+   "irradiance": 1.6
+  },
+  {
+   "name": "stageback-c",
+   "kind": "studio area",
+   "where": "out of frame",
+   "position_m": [
+    0.0,
+    2.3,
+    4.8
+   ],
+   "irradiance": 1.8
+  },
+  {
+   "name": "Hemisphere acid",
+   "kind": "practical: its 24 LED faces, ~1000 lm",
+   "where": "in frame",
+   "led_k": 4000
+  },
+  {
+   "name": "Hemisphere ember",
+   "kind": "practical: its 24 LED faces, ~1000 lm",
+   "where": "in frame",
+   "led_k": 2200
+  },
+  {
+   "name": "Hemisphere dust",
+   "kind": "practical: its 24 LED faces, ~1000 lm",
+   "where": "in frame",
+   "led_k": 4000
+  },
+  {
+   "name": "Hemisphere ember",
+   "kind": "practical: its 24 LED faces, ~1000 lm",
+   "where": "in frame",
+   "led_k": 2200
+  },
+  {
+   "name": "Hemisphere fog",
+   "kind": "practical: its 24 LED faces, ~1000 lm",
+   "where": "in frame",
+   "led_k": 2700
+  },
+  {
+   "name": "Core ice",
+   "kind": "practical: its LED disc, 200 lm at the LED",
+   "where": "in frame",
+   "led_k": 4000,
+   "shell_load": 1.5
+  },
+  {
+   "name": "Core poison",
+   "kind": "practical: its LED disc, 200 lm at the LED",
+   "where": "in frame",
+   "led_k": 2700,
+   "shell_load": 0.5
+  },
+  {
+   "name": "Core haze",
+   "kind": "practical: its LED disc, 200 lm at the LED",
+   "where": "in frame",
+   "led_k": 3000,
+   "shell_load": 0.5
+  },
+  {
+   "name": "Core smoke",
+   "kind": "practical: its LED disc, 200 lm at the LED",
+   "where": "in frame",
+   "led_k": 4000,
+   "shell_load": 0.15
+  },
+  {
+   "name": "Core dust",
+   "kind": "practical: its LED disc, 200 lm at the LED",
+   "where": "in frame",
+   "led_k": 4000,
+   "shell_load": 1.5
+  },
+  {
+   "name": "Core ember",
+   "kind": "practical: its LED disc, 200 lm at the LED",
+   "where": "in frame",
+   "led_k": 2200,
+   "shell_load": 0.5
+  }
+ ],
+ "audit": {
+  "hidden": [],
+  "equipment": [],
+  "method": "reaudit.py, the corrected cast (shots._frame_rays)"
+ }
+}

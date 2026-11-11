@@ -1,0 +1,131 @@
+{
+ "frame": [
+  1600,
+  800
+ ],
+ "note": "each speaker's cabinet middle (0.55 m above its base; for Haze, lying, its middle) and each lamp's and Mantle's middle, in percent of the frame, x from the left, y from the top",
+ "speakers": [
+  {
+   "tint": "ember",
+   "x": 50.0,
+   "y": 66.68,
+   "color": null
+  },
+  {
+   "tint": "dust",
+   "x": 36.14,
+   "y": 67.82,
+   "color": null
+  },
+  {
+   "tint": "acid",
+   "x": 63.86,
+   "y": 67.82,
+   "color": null
+  },
+  {
+   "tint": "poison",
+   "x": 42.73,
+   "y": 49.22,
+   "color": null
+  },
+  {
+   "tint": "ice",
+   "x": 57.27,
+   "y": 49.22,
+   "color": null
+  },
+  {
+   "tint": "haze",
+   "x": 20.95,
+   "y": 34.53,
+   "color": null
+  },
+  {
+   "tint": "fog",
+   "x": 79.05,
+   "y": 34.53,
+   "color": null
+  },
+  {
+   "tint": "smoke",
+   "x": 50.0,
+   "y": 34.33,
+   "color": null
+  }
+ ],
+ "family": [
+  {
+   "product": "hemisphere",
+   "tint": "acid",
+   "x": 16.41,
+   "y": 6.48
+  },
+  {
+   "product": "hemisphere",
+   "tint": "ember",
+   "x": 33.2,
+   "y": 6.48
+  },
+  {
+   "product": "hemisphere",
+   "tint": "dust",
+   "x": 50.0,
+   "y": 6.48
+  },
+  {
+   "product": "hemisphere",
+   "tint": "ember",
+   "x": 66.8,
+   "y": 6.48
+  },
+  {
+   "product": "hemisphere",
+   "tint": "fog",
+   "x": 83.59,
+   "y": 6.48
+  },
+  {
+   "product": "core",
+   "tint": "ice",
+   "x": 10.2,
+   "y": 91.2
+  },
+  {
+   "product": "core",
+   "tint": "poison",
+   "x": 22.8,
+   "y": 91.2
+  },
+  {
+   "product": "core",
+   "tint": "haze",
+   "x": 35.41,
+   "y": 91.2
+  },
+  {
+   "product": "core",
+   "tint": "smoke",
+   "x": 48.01,
+   "y": 91.2
+  },
+  {
+   "product": "core",
+   "tint": "dust",
+   "x": 60.61,
+   "y": 91.2
+  },
+  {
+   "product": "core",
+   "tint": "ember",
+   "x": 73.22,
+   "y": 91.2
+  },
+  {
+   "product": "mantle",
+   "flavour": "smoke-2074",
+   "x": 89.74,
+   "y": 81.44
+  }
+ ]
+}

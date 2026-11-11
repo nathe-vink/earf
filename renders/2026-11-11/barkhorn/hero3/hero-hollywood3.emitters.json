@@ -1,0 +1,61 @@
+{
+ "emitters": [
+  {
+   "name": "key",
+   "kind": "studio area",
+   "where": "out of frame",
+   "position_m": [
+    -6.2,
+    -5.4,
+    3.6
+   ],
+   "irradiance": 3.0
+  },
+  {
+   "name": "fill",
+   "kind": "studio area",
+   "where": "out of frame",
+   "position_m": [
+    5.5,
+    -8.5,
+    2.0
+   ],
+   "irradiance": 0.8
+  },
+  {
+   "name": "kicker",
+   "kind": "studio area",
+   "where": "out of frame",
+   "position_m": [
+    2.0,
+    1.6,
+    3.4
+   ],
+   "irradiance": 3.0
+  },
+  {
+   "name": "Hemisphere acid",
+   "kind": "practical: its 24 LED faces, ~1000 lm",
+   "where": "in frame",
+   "led_k": 4000
+  },
+  {
+   "name": "Hemisphere dust",
+   "kind": "practical: its 24 LED faces, ~1000 lm",
+   "where": "in frame",
+   "led_k": 4000
+  },
+  {
+   "name": "Core ember",
+   "kind": "practical: its LED disc, 200 lm at the LED",
+   "where": "in frame",
+   "led_k": 2200,
+   "shell_load": 0.5
+  }
+ ],
+ "audit": {
+  "hidden": [],
+  "equipment": [],
+  "method": "reaudit.py, the corrected cast (shots._frame_rays)"
+ }
+}

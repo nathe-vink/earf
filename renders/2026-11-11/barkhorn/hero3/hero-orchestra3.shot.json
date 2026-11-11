@@ -1,0 +1,1263 @@
+{
+ "title": "Tropos, the orchestra (third pass): the first hall, no stands, the warm light on every player, the family in",
+ "size": [
+  1600,
+  800
+ ],
+ "set": {
+  "kind": "sweep",
+  "color": "#7A4A28",
+  "width": 16.0,
+  "front": 10.0,
+  "depth": 3.6,
+  "radius": 0.04,
+  "height": 6.0,
+  "contact": {
+   "strength": 0.8,
+   "distance_m": 0.3,
+   "core_strength": 1.0,
+   "core_distance_m": 0.03
+  },
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     0.621
+    ],
+    "position": [
+     -2.819,
+     0.026,
+     0.004
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     70
+    ],
+    "material": "pbr",
+    "color": "#5E3A20",
+    "texture": "oak_wood_planks",
+    "tex_res": "2k",
+    "tint": "#4A2A16",
+    "tint_mix": 0.55,
+    "rough_mul": 0.9,
+    "gain": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     0.621
+    ],
+    "position": [
+     -2.487,
+     0.678,
+     0.004
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     56
+    ],
+    "material": "pbr",
+    "color": "#5E3A20",
+    "texture": "oak_wood_planks",
+    "tex_res": "2k",
+    "tint": "#4A2A16",
+    "tint_mix": 0.55,
+    "rough_mul": 0.9,
+    "gain": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     0.621
+    ],
+    "position": [
+     -2.007,
+     1.229,
+     0.004
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     42
+    ],
+    "material": "pbr",
+    "color": "#5E3A20",
+    "texture": "oak_wood_planks",
+    "tex_res": "2k",
+    "tint": "#4A2A16",
+    "tint_mix": 0.55,
+    "rough_mul": 0.9,
+    "gain": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     0.621
+    ],
+    "position": [
+     -1.408,
+     1.649,
+     0.004
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     28
+    ],
+    "material": "pbr",
+    "color": "#5E3A20",
+    "texture": "oak_wood_planks",
+    "tex_res": "2k",
+    "tint": "#4A2A16",
+    "tint_mix": 0.55,
+    "rough_mul": 0.9,
+    "gain": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     0.621
+    ],
+    "position": [
+     -0.726,
+     1.911,
+     0.004
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     14
+    ],
+    "material": "pbr",
+    "color": "#5E3A20",
+    "texture": "oak_wood_planks",
+    "tex_res": "2k",
+    "tint": "#4A2A16",
+    "tint_mix": 0.55,
+    "rough_mul": 0.9,
+    "gain": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     0.621
+    ],
+    "position": [
+     0.0,
+     2.0,
+     0.004
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     0
+    ],
+    "material": "pbr",
+    "color": "#5E3A20",
+    "texture": "oak_wood_planks",
+    "tex_res": "2k",
+    "tint": "#4A2A16",
+    "tint_mix": 0.55,
+    "rough_mul": 0.9,
+    "gain": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     0.621
+    ],
+    "position": [
+     0.726,
+     1.911,
+     0.004
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     -14
+    ],
+    "material": "pbr",
+    "color": "#5E3A20",
+    "texture": "oak_wood_planks",
+    "tex_res": "2k",
+    "tint": "#4A2A16",
+    "tint_mix": 0.55,
+    "rough_mul": 0.9,
+    "gain": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     0.621
+    ],
+    "position": [
+     1.408,
+     1.649,
+     0.004
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     -28
+    ],
+    "material": "pbr",
+    "color": "#5E3A20",
+    "texture": "oak_wood_planks",
+    "tex_res": "2k",
+    "tint": "#4A2A16",
+    "tint_mix": 0.55,
+    "rough_mul": 0.9,
+    "gain": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     0.621
+    ],
+    "position": [
+     2.007,
+     1.229,
+     0.004
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     -42
+    ],
+    "material": "pbr",
+    "color": "#5E3A20",
+    "texture": "oak_wood_planks",
+    "tex_res": "2k",
+    "tint": "#4A2A16",
+    "tint_mix": 0.55,
+    "rough_mul": 0.9,
+    "gain": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     0.621
+    ],
+    "position": [
+     2.487,
+     0.678,
+     0.004
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     -56
+    ],
+    "material": "pbr",
+    "color": "#5E3A20",
+    "texture": "oak_wood_planks",
+    "tex_res": "2k",
+    "tint": "#4A2A16",
+    "tint_mix": 0.55,
+    "rough_mul": 0.9,
+    "gain": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     0.621
+    ],
+    "position": [
+     2.819,
+     0.026,
+     0.004
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     -70
+    ],
+    "material": "pbr",
+    "color": "#5E3A20",
+    "texture": "oak_wood_planks",
+    "tex_res": "2k",
+    "tint": "#4A2A16",
+    "tint_mix": 0.55,
+    "rough_mul": 0.9,
+    "gain": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     1.251
+    ],
+    "position": [
+     -3.665,
+     0.334,
+     0.004
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     70
+    ],
+    "material": "pbr",
+    "color": "#5E3A20",
+    "texture": "oak_wood_planks",
+    "tex_res": "2k",
+    "tint": "#4A2A16",
+    "tint_mix": 0.55,
+    "rough_mul": 0.9,
+    "gain": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     1.251
+    ],
+    "position": [
+     -3.233,
+     1.181,
+     0.004
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     56
+    ],
+    "material": "pbr",
+    "color": "#5E3A20",
+    "texture": "oak_wood_planks",
+    "tex_res": "2k",
+    "tint": "#4A2A16",
+    "tint_mix": 0.55,
+    "rough_mul": 0.9,
+    "gain": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     1.251
+    ],
+    "position": [
+     -2.61,
+     1.898,
+     0.004
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     42
+    ],
+    "material": "pbr",
+    "color": "#5E3A20",
+    "texture": "oak_wood_planks",
+    "tex_res": "2k",
+    "tint": "#4A2A16",
+    "tint_mix": 0.55,
+    "rough_mul": 0.9,
+    "gain": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     1.251
+    ],
+    "position": [
+     -1.831,
+     2.443,
+     0.004
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     28
+    ],
+    "material": "pbr",
+    "color": "#5E3A20",
+    "texture": "oak_wood_planks",
+    "tex_res": "2k",
+    "tint": "#4A2A16",
+    "tint_mix": 0.55,
+    "rough_mul": 0.9,
+    "gain": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     1.251
+    ],
+    "position": [
+     -0.943,
+     2.784,
+     0.004
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     14
+    ],
+    "material": "pbr",
+    "color": "#5E3A20",
+    "texture": "oak_wood_planks",
+    "tex_res": "2k",
+    "tint": "#4A2A16",
+    "tint_mix": 0.55,
+    "rough_mul": 0.9,
+    "gain": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     1.251
+    ],
+    "position": [
+     0.0,
+     2.9,
+     0.004
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     0
+    ],
+    "material": "pbr",
+    "color": "#5E3A20",
+    "texture": "oak_wood_planks",
+    "tex_res": "2k",
+    "tint": "#4A2A16",
+    "tint_mix": 0.55,
+    "rough_mul": 0.9,
+    "gain": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     1.251
+    ],
+    "position": [
+     0.943,
+     2.784,
+     0.004
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     -14
+    ],
+    "material": "pbr",
+    "color": "#5E3A20",
+    "texture": "oak_wood_planks",
+    "tex_res": "2k",
+    "tint": "#4A2A16",
+    "tint_mix": 0.55,
+    "rough_mul": 0.9,
+    "gain": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     1.251
+    ],
+    "position": [
+     1.831,
+     2.443,
+     0.004
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     -28
+    ],
+    "material": "pbr",
+    "color": "#5E3A20",
+    "texture": "oak_wood_planks",
+    "tex_res": "2k",
+    "tint": "#4A2A16",
+    "tint_mix": 0.55,
+    "rough_mul": 0.9,
+    "gain": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     1.251
+    ],
+    "position": [
+     2.61,
+     1.898,
+     0.004
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     -42
+    ],
+    "material": "pbr",
+    "color": "#5E3A20",
+    "texture": "oak_wood_planks",
+    "tex_res": "2k",
+    "tint": "#4A2A16",
+    "tint_mix": 0.55,
+    "rough_mul": 0.9,
+    "gain": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     1.251
+    ],
+    "position": [
+     3.233,
+     1.181,
+     0.004
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     -56
+    ],
+    "material": "pbr",
+    "color": "#5E3A20",
+    "texture": "oak_wood_planks",
+    "tex_res": "2k",
+    "tint": "#4A2A16",
+    "tint_mix": 0.55,
+    "rough_mul": 0.9,
+    "gain": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     1.251
+    ],
+    "position": [
+     3.665,
+     0.334,
+     0.004
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     -70
+    ],
+    "material": "pbr",
+    "color": "#5E3A20",
+    "texture": "oak_wood_planks",
+    "tex_res": "2k",
+    "tint": "#4A2A16",
+    "tint_mix": 0.55,
+    "rough_mul": 0.9,
+    "gain": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     16.0,
+     13.0,
+     0.004
+    ],
+    "position": [
+     0.0,
+     -3.0,
+     0.001
+    ],
+    "material": "pbr",
+    "texture": "old_wooden_floor_01",
+    "tex_res": "2k",
+    "tint": "#5A3418",
+    "tint_mix": 0.5,
+    "rough_mul": 1.0,
+    "gain": 0.55
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     16.0,
+     0.05,
+     6.0
+    ],
+    "position": [
+     0.0,
+     3.5,
+     0.004
+    ],
+    "material": "pbr",
+    "texture": "cherry_veneer",
+    "tex_res": "2k",
+    "tint": "#3A2212",
+    "tint_mix": 0.75,
+    "rough_mul": 0.8,
+    "gain": 0.3
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/planet/afterhours/lamps_final.py",
+    "fn": "place",
+    "led_k": {
+     "red": 2200,
+     "green": 2700,
+     "ice": 2700,
+     "violet": 3000,
+     "orange": 4000,
+     "amber": 4000,
+     "blue": 4000,
+     "black": 4000
+    },
+    "core_load": {
+     "orange": 1.5,
+     "amber": 1.5,
+     "blue": 1.5,
+     "black": 0.15
+    },
+    "hemispheres": [
+     {
+      "tint": "amber",
+      "x": -2.6,
+      "y": 1.0,
+      "rim_z": 2.8
+     },
+     {
+      "tint": "red",
+      "x": -1.3,
+      "y": 1.0,
+      "rim_z": 2.8
+     },
+     {
+      "tint": "orange",
+      "x": 0.0,
+      "y": 1.0,
+      "rim_z": 2.8
+     },
+     {
+      "tint": "red",
+      "x": 1.3,
+      "y": 1.0,
+      "rim_z": 2.8
+     },
+     {
+      "tint": "ice",
+      "x": 2.6,
+      "y": 1.0,
+      "rim_z": 2.8
+     }
+    ],
+    "cores": [
+     {
+      "tint": "blue",
+      "x": -2.4,
+      "y": -0.9,
+      "floor_z": 0.005,
+      "rot": 200.0
+     },
+     {
+      "tint": "green",
+      "x": -1.64,
+      "y": -0.9,
+      "floor_z": 0.005,
+      "rot": 200.0
+     },
+     {
+      "tint": "violet",
+      "x": -0.88,
+      "y": -0.9,
+      "floor_z": 0.005,
+      "rot": 200.0
+     },
+     {
+      "tint": "black",
+      "x": -0.12,
+      "y": -0.9,
+      "floor_z": 0.005,
+      "rot": 200.0
+     },
+     {
+      "tint": "orange",
+      "x": 0.64,
+      "y": -0.9,
+      "floor_z": 0.005,
+      "rot": 200.0
+     },
+     {
+      "tint": "red",
+      "x": 1.4,
+      "y": -0.9,
+      "floor_z": 0.005,
+      "rot": 200.0
+     }
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.62,
+     0.52,
+     0.301
+    ],
+    "position": [
+     2.45,
+     -0.75,
+     0.004
+    ],
+    "material": "pbr",
+    "texture": "oak_wood_planks",
+    "tex_res": "2k",
+    "tint": "#6A3E22",
+    "tint_mix": 0.35,
+    "rough_mul": 0.9,
+    "gain": 1.0
+   }
+  ]
+ },
+ "camera": {
+  "position": [
+   0.0,
+   -7.6,
+   1.9
+  ],
+  "target": [
+   0.0,
+   1.2,
+   1.2
+  ],
+  "lens_mm": 40.0,
+  "level": true
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#F2F1EF",
+  "horizon": "#EEEDEB",
+  "ground": "#CFCCC8",
+  "strength": 0.6,
+  "visible": false
+ },
+ "render": {
+  "samples": 64,
+  "adaptive": 0.01,
+  "denoise": true,
+  "clamp": 8,
+  "bounces": 32,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.0,
+  "white_balance_k": 5900,
+  "white_balance_tint": 7.0,
+  "glossy_bounces": 16,
+  "transmission_bounces": 32
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 235,
+  "white_out": 238,
+  "contrast": 0.1,
+  "clarity": 0.03,
+  "sharpen": 0.12,
+  "sharpen_px": 0.7
+ },
+ "materials": {
+  "builtin-led": {
+   "glow": 0.0
+  },
+  "builtin-led-brace": {
+   "glow": 0.0
+  },
+  "horn-satin": {
+   "roughness": 0.05
+  },
+  "sweep": {
+   "roughness": 0.45,
+   "mottle": 0.25,
+   "mottle_m": 0.25,
+   "tooth": 0.1
+  }
+ },
+ "lights": {
+  "stage0": {
+   "type": "area",
+   "shape": "DISK",
+   "size_m": [
+    0.5,
+    0.5
+   ],
+   "position": [
+    -2.6,
+    1.0,
+    4.6
+   ],
+   "target": [
+    -1.56,
+    1.2,
+    0.6
+   ],
+   "irradiance": 2.6,
+   "spread_deg": 55,
+   "color": "#FFE0B4"
+  },
+  "stage1": {
+   "type": "area",
+   "shape": "DISK",
+   "size_m": [
+    0.5,
+    0.5
+   ],
+   "position": [
+    0.0,
+    1.0,
+    4.6
+   ],
+   "target": [
+    0.0,
+    1.2,
+    0.6
+   ],
+   "irradiance": 2.6,
+   "spread_deg": 55,
+   "color": "#FFE0B4"
+  },
+  "stage2": {
+   "type": "area",
+   "shape": "DISK",
+   "size_m": [
+    0.5,
+    0.5
+   ],
+   "position": [
+    2.6,
+    1.0,
+    4.6
+   ],
+   "target": [
+    1.56,
+    1.2,
+    0.6
+   ],
+   "irradiance": 2.6,
+   "spread_deg": 55,
+   "color": "#FFE0B4"
+  },
+  "hall": {
+   "type": "area",
+   "size_m": [
+    3.0,
+    2.0
+   ],
+   "position": [
+    0.0,
+    -9.0,
+    3.2
+   ],
+   "target": [
+    0.0,
+    1.0,
+    0.8
+   ],
+   "irradiance": 0.5,
+   "color": "#FFF0DC"
+  },
+  "stageback0": {
+   "type": "area",
+   "shape": "DISK",
+   "size_m": [
+    0.5,
+    0.5
+   ],
+   "position": [
+    -2.2,
+    2.2,
+    4.8
+   ],
+   "target": [
+    -2.3100000000000005,
+    2.8,
+    1.8
+   ],
+   "irradiance": 1.6,
+   "spread_deg": 55,
+   "color": "#FFE0B4"
+  },
+  "stageback1": {
+   "type": "area",
+   "shape": "DISK",
+   "size_m": [
+    0.5,
+    0.5
+   ],
+   "position": [
+    2.2,
+    2.2,
+    4.8
+   ],
+   "target": [
+    2.3100000000000005,
+    2.8,
+    1.8
+   ],
+   "irradiance": 1.6,
+   "spread_deg": 55,
+   "color": "#FFE0B4"
+  },
+  "stageback-c": {
+   "type": "area",
+   "shape": "DISK",
+   "size_m": [
+    0.5,
+    0.5
+   ],
+   "position": [
+    0.0,
+    2.3,
+    4.8
+   ],
+   "target": [
+    0.0,
+    2.9,
+    1.8
+   ],
+   "irradiance": 1.8,
+   "spread_deg": 55,
+   "color": "#FFE0B4"
+  }
+ },
+ "products": [
+  {
+   "def": "studio/products/barkhorn-cloud.json",
+   "flavour": "cloud-red",
+   "instances": [
+    {
+     "position": [
+      0.0,
+      1.1,
+      0.005
+     ],
+     "rotate_z": 0,
+     "flavour": "cloud-red",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      -1.05,
+      0.819,
+      0.005
+     ],
+     "rotate_z": 30,
+     "flavour": "cloud-orange",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      1.05,
+      0.819,
+      0.005
+     ],
+     "rotate_z": -30,
+     "flavour": "cloud-amber",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      -0.624,
+      1.934,
+      0.625
+     ],
+     "rotate_z": 12,
+     "flavour": "eucalyptus-y2k-green",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      0.624,
+      1.934,
+      0.625
+     ],
+     "rotate_z": -12,
+     "flavour": "cloud-blue",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      -2.507,
+      1.988,
+      1.255
+     ],
+     "rotate_z": 40,
+     "flavour": "cloud-violet",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      2.507,
+      1.988,
+      1.255
+     ],
+     "rotate_z": -40,
+     "flavour": "birch-fog-clear",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      0.0,
+      2.9,
+      1.255
+     ],
+     "rotate_z": 0,
+     "flavour": "cloud-black",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    }
+   ]
+  },
+  {
+   "def": "studio/products/barkhorn-variants.json",
+   "flavour": "cloud-red",
+   "instances": [
+    {
+     "position": [
+      0.0,
+      1.1,
+      0.005
+     ],
+     "rotate_z": 0,
+     "flavour": "cloud-red",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      -1.05,
+      0.819,
+      0.005
+     ],
+     "rotate_z": 30,
+     "flavour": "cloud-orange",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      1.05,
+      0.819,
+      0.005
+     ],
+     "rotate_z": -30,
+     "flavour": "cloud-amber",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      -0.624,
+      1.934,
+      0.625
+     ],
+     "rotate_z": 12,
+     "flavour": "eucalyptus-y2k-green",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      0.624,
+      1.934,
+      0.625
+     ],
+     "rotate_z": -12,
+     "flavour": "cloud-blue",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      -2.507,
+      1.988,
+      1.255
+     ],
+     "rotate_z": 40,
+     "flavour": "cloud-violet",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      2.507,
+      1.988,
+      1.255
+     ],
+     "rotate_z": -40,
+     "flavour": "birch-fog-clear",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      0.0,
+      2.9,
+      1.255
+     ],
+     "rotate_z": 0,
+     "flavour": "cloud-black",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    }
+   ]
+  },
+  {
+   "def": "studio/products/mantle-strata-v3.json",
+   "flavour": "smoke-2074",
+   "instances": [
+    {
+     "position": [
+      2.45,
+      -0.75,
+      0.306
+     ],
+     "rotate_z": -20.0
+    }
+   ]
+  }
+ ]
+}
