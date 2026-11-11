@@ -98,10 +98,10 @@
    "name": "track-bay0",
    "declared": true,
    "emitter": "area lamp 0.14 x 0.14 m, out of frame",
-   "irradiance_w_m2": 2.9698,
+   "irradiance_w_m2": 9.5459,
    "position_m": [
     5.55,
-    3.9,
+    3.6,
     3.35
    ]
   },
@@ -109,10 +109,10 @@
    "name": "track-bay1",
    "declared": true,
    "emitter": "area lamp 0.14 x 0.14 m, out of frame",
-   "irradiance_w_m2": 2.9698,
+   "irradiance_w_m2": 9.5459,
    "position_m": [
     8.25,
-    3.9,
+    3.6,
     3.35
    ]
   },
@@ -158,7 +158,7 @@
    6.1,
    3.35
   ],
-  "density": 0.012,
+  "density": 0.006,
   "anisotropy": 0.5,
   "color": "#FFFFFF"
  },
