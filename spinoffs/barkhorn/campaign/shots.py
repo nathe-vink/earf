@@ -2309,6 +2309,8 @@ def hero_hollywood3(family=True):
     if family:
         props.append({'kind': 'kit', 'shape': 'asset', 'model': 'side_table_01', 'res': '2k', 'position': [-2.15, -0.15, 0.0]})
         s['products'].append(_mantle(-2.15, -0.15, 0.549, 15.0))
-        props.append(_family(hemis=[('acid', -1.7, 0.2, 2.2), ('dust', 1.4, 0.3, 2.35)], cores=[('ember', -2.45, -0.55, 0.0, 200.0)]))
+        props.append(_family(hemis=[('acid', -1.7, 0.2, 2.05), ('dust', 1.4, 0.3, 2.15)], cores=[('ember', -2.45, -0.55, 0.0, 200.0)]))
+    # (proof 2: the floor at the frame's foot cut the Core and hid the rug, Acid cut at the right: a little lower, a little wider)
+    s['camera'].update(target=[0.15, 0.0, 1.0], lens_mm=55.0)
     s['title'] = 'Tropos, the Hollywood issue (third pass): the first staging on a real sofa, Haze lying down' + (', the family in' if family else '')
     return s
