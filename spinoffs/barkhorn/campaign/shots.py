@@ -2361,9 +2361,10 @@ def hero_stage(wash=0.02):
     gap = lambda a, b: round((xs[a] + xs[b]) / 2, 3)
     place = {'ember': (xs['ember'] - 0.5, 0.62), 'dust': (gap('ember', 'dust'), 0.56), 'acid': (gap('dust', 'acid'), 0.6),
              'poison': (gap('acid', 'poison'), 0.55), 'ice': (gap('poison', 'ice'), 0.6), 'fog': (gap('fog', 'smoke'), 0.56),
-             'smoke': (xs['smoke'] + 0.5, 0.6)}
+             'smoke': (xs['smoke'] + 0.55, 0.6)}
     for t, (x, h) in place.items():
-        cut.append({'key': t, 'x': x, 'y': round(min(ys.values()) - 0.36, 3), 'z': Z, 'height': h, 'yaw': round(-x * 2.0, 1)})
+        # (Smoke's beside it, level with it, so Mantle on the front corner covers nothing: proof 4)
+        cut.append({'key': t, 'x': x, 'y': ys['smoke'] if t == 'smoke' else round(min(ys.values()) - 0.36, 3), 'z': Z, 'height': h, 'yaw': round(-x * 2.0, 1)})
     # Haze lies low and would hide a sun stood behind it: the sun is flown in over it on two wires from the batten, as a
     # theatre flies a piece of scenery (proof 3)
     sun_z, sun_h, sun_y = Z + 0.82, 0.62, BATTEN_Y + 0.06
@@ -2378,25 +2379,25 @@ def hero_stage(wash=0.02):
          **_wood(STAGE_FLOOR, '#7A6048', 0.25, 1.0, 1.0)},                      # one continuous floor of boards
         {'kind': 'kit', 'shape': 'box', 'size': [W + 2, 0.06, 7.0], 'position': [0.0, D1 + 0.03, 0.001],
          'material': 'paper', 'color': '#16244A', 'roughness': 0.9},           # the painted night backdrop
-        {'kind': 'kit', 'shape': 'drape', 'size': [2.4, 4.6], 'position': [-4.65, -1.55, Z + 4.6], 'folds': 13, 'amplitude': 0.09,
+        {'kind': 'kit', 'shape': 'drape', 'size': [2.4, 4.6], 'position': [-5.0, -1.55, Z + 4.6], 'folds': 13, 'amplitude': 0.09,
          'material': 'velvet', 'color': '#7A0E14', 'seed': 3},
-        {'kind': 'kit', 'shape': 'drape', 'size': [2.4, 4.6], 'position': [4.65, -1.55, Z + 4.6], 'folds': 13, 'amplitude': 0.09,
+        {'kind': 'kit', 'shape': 'drape', 'size': [2.4, 4.6], 'position': [5.0, -1.55, Z + 4.6], 'folds': 13, 'amplitude': 0.09,
          'material': 'velvet', 'color': '#7A0E14', 'seed': 5},
         {'kind': 'kit', 'shape': 'drape', 'size': [W + 1.0, 0.95], 'position': [0.0, -1.75, Z + 3.85], 'folds': 34, 'amplitude': 0.05,
          'material': 'velvet', 'color': '#6E0C12', 'seed': 7},
         # the proscenium: black flats outside the curtains and a header above the valance
-        {'kind': 'kit', 'shape': 'box', 'size': [1.4, 0.2, 6.0], 'position': [-6.25, -1.9, 0.0], 'material': 'clay', 'color': '#0C0B0B'},
-        {'kind': 'kit', 'shape': 'box', 'size': [1.4, 0.2, 6.0], 'position': [6.25, -1.9, 0.0], 'material': 'clay', 'color': '#0C0B0B'},
+        {'kind': 'kit', 'shape': 'box', 'size': [1.4, 0.2, 6.0], 'position': [-6.6, -1.9, 0.0], 'material': 'clay', 'color': '#0C0B0B'},
+        {'kind': 'kit', 'shape': 'box', 'size': [1.4, 0.2, 6.0], 'position': [6.6, -1.9, 0.0], 'material': 'clay', 'color': '#0C0B0B'},
         {'kind': 'kit', 'shape': 'box', 'size': [W + 3.0, 0.2, 1.5], 'position': [0.0, -1.9, Z + 3.7], 'material': 'clay', 'color': '#0C0B0B'},
         # the lighting batten the pendants hang from (their canopies 0.776 m over the rim: hemi_mounting.py)
         {'kind': 'kit', 'shape': 'cylinder', 'radius': 0.024, 'height': 8.6, 'position': [-4.3, BATTEN_Y, rim + 0.776 + 0.024], 'rotate': [0.0, 90.0, 0.0],
          'material': 'gloss', 'color': '#0E0E0E'},
-        {'kind': 'kit', 'shape': 'box', 'size': [0.7, 0.55, 0.22], 'position': [4.1, -1.25, Z - 0.001], 'material': 'clay', 'color': '#2A2522'},
+        {'kind': 'kit', 'shape': 'box', 'size': [0.62, 0.5, 0.051], 'position': [3.35, -1.42, Z - 0.001], 'material': 'clay', 'color': '#2A2522'},
         {'kind': 'kit', 'shape': 'ext', 'path': CUTOUTS, 'fn': 'place', 'cutouts': cut},
         *[{'kind': 'kit', 'shape': 'thread', 'a': [xs['haze'] + dx, sun_y + 0.0075, sun_z + sun_h * 0.62], 'b': [xs['haze'] + dx, BATTEN_Y, rim + 0.776],
            'radius': 0.0012, 'material': 'gloss', 'color': '#1A1A1A'} for dx in (-0.2, 0.2)],
         _family(hemis, cores)]
-    s['products'].append(_mantle(4.1, -1.25, Z + 0.22, -25.0))
+    s['products'].append(_mantle(3.35, -1.42, Z + 0.05, -20.0))      # (proof 4: behind the curtain at x 4.1; low, so it hides no cutout)
     s['set'] = {'kind': 'sweep', 'color': '#0E0D0C', 'width': 30.0, 'front': 16.0, 'depth': 4.0, 'radius': 0.05, 'height': 9.0,
                 'contact': {'strength': 0.8, 'distance_m': 0.3, 'core_strength': 1.0, 'core_distance_m': 0.03}, 'props': props}
     s['materials'].pop('sweep', None)
@@ -2408,7 +2409,7 @@ def hero_stage(wash=0.02):
                                      'irradiance': wash, 'color': '#FFE6C8', 'spread_deg': 60}
     s['sky']['strength'] = 0.0                                    # no world light: the lamps (and the wash) only
     # (proof 1: the cast small and low in a dark frame, the curtains barely in: 1.3 m closer, the curtains drawn in)
-    s['camera'] = {'position': [0.0, -10.2, 1.7], 'target': [0.0, 0.0, 2.5], 'lens_mm': 40.0, 'level': True}
+    s['camera'] = {'position': [0.0, -10.2, 1.7], 'target': [0.0, 0.0, 2.5], 'lens_mm': 38.0, 'level': True}
     s['size'] = [1920, 880]
     # the lamp lane's own settings for these lamps (lamp_site.py, afterhours): no clamp, caustics, deep bounces; denoised
     s['render'].update({'samples': 256, 'denoise': True, 'clamp': 0, 'exposure': 6.3, 'white_balance_k': 3200, 'white_balance_tint': 0.0,
