@@ -342,9 +342,12 @@ def build(frame, samples, scale):
             # its Ø40 port; the white opal core on the same centre (CORE_R: 60, 65 or 70, the size the owner picks),
             # ONE scattering face of Perspex GS 041 (T 0.54, R 0.39; two full faces would act as T 0.34), no emission;
             # the grommet raised to suit: its shoulder where the core's Ø40 opening meets it, a 3 mm spigot above
-            Tb = shell_T(tname, 0.5, 3.0)
-            sphere(f'ball-{tint}', 80.0, (x, y, zc), thin_shadow(acrylic(f'ball-{tint}', 0.0, tname, 0.5), Tb), hole_below=20.0)
-            sphere(f'ball-in-{tint}', 74.0, (x, y, zc), thin_shadow(acrylic(f'ball-in-{tint}', 0.0, tname, 0.5), Tb), inward=True, hole_below=20.0)
+            # CORE_LOAD: the outer ball's dye loading (0.5: the chart figure at its 6 mm wall; the speakers' own pour at 6 mm
+            # is about 0.15, since their chart figure is at 20 mm). A test switch (2026-11-11), the default unchanged
+            ld_ = float(os.environ.get('CORE_LOAD', '0.5'))
+            Tb = shell_T(tname, ld_, 3.0)
+            sphere(f'ball-{tint}', 80.0, (x, y, zc), thin_shadow(acrylic(f'ball-{tint}', 0.0, tname, ld_), Tb), hole_below=20.0)
+            sphere(f'ball-in-{tint}', 74.0, (x, y, zc), thin_shadow(acrylic(f'ball-in-{tint}', 0.0, tname, ld_), Tb), inward=True, hole_below=20.0)
             ri = float(os.environ.get('CORE_R', '70')); zi = zc - float(os.environ.get('CORE_DZ', '0')) * MM
             sphere(f'core-{tint}', ri, (x, y, zi), opal(f'core-opal-{tint}'), hole_below=20.0)
             # the grommet, raised (base frame: its foot at z 23.0; the core's opening meets r 20 at zf)
@@ -411,7 +414,7 @@ def build(frame, samples, scale):
                 o.rotation_euler[2] = math.radians(rot)
 
     # --- the set: a pale paper sweep (floor, cove, back) and real studio lights out of frame, unlinked ---------------
-    paper = SC.principled('paper', '#EDE8E1', 0.9)
+    paper = SC.principled('paper', os.environ.get('PAPER', '#EDE8E1'), 0.9)   # PAPER: a test backdrop (2026-11-11)
     bm = bmesh.new(); Wd = 6.0; R = 0.6; yb = 1.0          # the floor to y = yb - R, a cove of radius R, the back at y = yb
     verts = []
     prof = [(-3.0, 0.0), (yb - R, 0.0)] + [(yb - R + R * math.sin(a), R - R * math.cos(a)) for a in [i * math.pi / 2 / 16 for i in range(1, 17)]] + [(yb, 3.0)]
@@ -424,7 +427,7 @@ def build(frame, samples, scale):
         f.smooth = True
     me = bpy.data.meshes.new('sweep'); bm.to_mesh(me); bm.free()
     so = bpy.data.objects.new('sweep', me); bpy.context.scene.collection.objects.link(so); me.materials.append(paper)
-    SC.world(color='#C8C4BE', strength=0.02 * K)
+    SC.world(color=os.environ.get('WORLD', '#C8C4BE'), strength=0.02 * K)
     # round 2 (the gate): the studio at 3000 K, and the camera's white point at 3000 K; the lamps stay at 2700 K (spec)
     # round 3 (the gate's polish): a larger, higher key, so the two round highlights (key and fill) read as one soft one:
     # 4.0 m across (was 1.2; at 2 and 3 m the two reflections, the outer face's and the inner wall's, stay apart), higher and more frontal, its power grown with the square of its distance to
@@ -434,17 +437,17 @@ def build(frame, samples, scale):
     # (2026-11-09, the cast check: at 4 m the key's back stood in the orb row's frame, 24 %; 3 m clears it)
     ks = float(os.environ.get('KEY_SIZE', '3.0' if frame.startswith('lamps-orbs') else '4.0'))
     key = SC.area('key', kp, (0, 0, 0), (ks, ks), 60.0 * K * (kd / kd0) ** 2, '#FFF4E8'); key.data.shape = 'ELLIPSE'
-    key.data.color = blackbody(3000)
+    key.data.color = blackbody(int(os.environ.get('STUDIO_K', '3000')))
     key.rotation_euler = (Vector((0, 0.1, 0.5)) - key.location).to_track_quat('-Z', 'Y').to_euler()
     fill = SC.area('fill', (1.8, -1.2, 1.2), (0, 0, 0), (1.6, 1.6), 20.0 * K, '#EEF2F8'); fill.data.shape = 'ELLIPSE'
-    fill.data.color = blackbody(3000)
+    fill.data.color = blackbody(int(os.environ.get('STUDIO_K', '3000')))
     fill.rotation_euler = (Vector((0, 0.1, 0.4)) - fill.location).to_track_quat('-Z', 'Y').to_euler()
     # round 3 (the gate: 88 % of the dock's pixels at 3 or less): a kicker, low behind and to the right, out of frame
     # (the audit holds it there), that draws the dock's and the cap's edges; real, unlinked, its own reflection honest
     # (the heroes only: in the wide rows it grazed the sweep's cove, a bright streak, and a narrow beam raked the floor)
     kick = None if frame.startswith('lamps') else SC.area('kicker', (0.9, 0.9, 0.35 if kind0 == 'orb' else 0.9), (0, 0, 0), (0.3, 0.6), 6.0 * K, '#FFF4E8')
     if kick:
-        kick.data.color = blackbody(3000)
+        kick.data.color = blackbody(int(os.environ.get('STUDIO_K', '3000')))
         kick.rotation_euler = (Vector((0, 0, 0.05 if kind0 == 'orb' else 0.62)) - kick.location).to_track_quat('-Z', 'Y').to_euler()
 
     for nm_ in os.environ.get('LIGHTS_OFF', '').split(','):      # a probe: a studio light switched off
