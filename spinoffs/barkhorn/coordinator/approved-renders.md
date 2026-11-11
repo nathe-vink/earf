@@ -497,6 +497,22 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    chamfer polished, outer edge satin as signed (base edge diamond-polished as signed); render-only; audits clean.
    Shown to the owner 17:05 with the coordinator's pick: C. OPEN until the owner picks; then the CAD takes the chamfer
    and the eight finals re-render once.
+   17:22 UTC, speaker lane 5394d6bc: THE LISTENING BAR, three test frames in `renders/2026-11-11/barkhorn/product/bar/`:
+   `bar-wide.png`, `bar-pendants.png`, `core-bar-table.png` (64 samples; CREDITS.md, MEASURED.md; builder
+   `campaign/listening_bar.py`). Set: red_brick_03, walnut back bar with bottles, 68 record spines, glassware; fluted
+   walnut bar, dark honed stone top, steel foot rail, polished concrete, four modeled cognac leather stools. Products
+   warm only (Ember, Dust, Acid); lamps r32-lamps-final 3e38954b (own-color Core base), Mantle 941ad388. Emitters
+   7 x 1000 + 3 x 200 lm (wide); declared, out of frame: a warm soffit above and behind the camera and a cool dusk
+   window at the left. AgX Punchy; EV -2.5 (wide, pendants), -4.5 (Core). Lamp colors measured against the lamps lane's
+   finals: Ember and Dust match, saturation never lower, Acid 9-11 degrees toward orange. Audit hidden 0, equipment 0.
+   Shown to the owner 17:26 as tests, NOT approved. Coordinator's check:
+   - core-bar-table: the one to build on (color held, own-color base shows, the bar soft behind); the ball reads as red
+     glass more than a lit lamp (value 0.68 against 0.91).
+   - bar-pendants: the shades hold color across the whole shade (fixed); the set is weak in focus (identical bottles,
+     the fluted front reads as cardboard tubes, rocks glasses read as metal, black squares at the shelf joints).
+   - bar-wide: fails. Reads as a computer model of a bar; Tropos pair and Mantle lost in the dark. Proposed to drop it.
+   LESSON: this set convinces out of focus behind a product and fails when sharp. Bar pictures are close and medium
+   shots with the bar soft behind, not a view of the whole room.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
