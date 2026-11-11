@@ -2422,3 +2422,72 @@ def hero_stage(wash=0.02):
 
 STAGE_FLOOR = 'oak_wood_planks'
 BATTEN_Y = 0.12
+
+
+# --- THE STAGE, second version (the owner, 2026-11-11 14:55: "too elementary and not elevated or proper enough ...
+# purple doesn't have to be sideways ... they also don't have to be positioned at the same depth"): a FINAL candidate.
+# The house: the real theatre HDRIs (theater_01/02, music_hall_01/02) are all shot from the stalls with the stage far off
+# behind a pit; nothing can stand on them. So a designed set, plainly designed: a matte black stage, a painted midnight
+# cloth, a house curtain in dark oxblood velvet, no valance. ---------------------------------------------------------
+STAGE2 = 'spinoffs/barkhorn/campaign/stage/stage2_props.py'
+# tint: (x, y, riser, yaw): three groups, at depths, some on black risers, every one in the clear (a projection of each
+# one's box, its lamp's and the risers' against all nearer: Dust 3 % covered, the rest 0), the outer ones turned in
+STAGE2_CAST = {'ember': (-2.85, 0.25, 0.0, 22.0), 'dust': (-1.95, 1.2, 0.7, 14.0), 'acid': (-1.15, -0.1, 0.0, 6.0),
+               'poison': (-0.4, 0.9, 0.55, 2.0), 'ice': (0.4, 0.15, 0.2, -4.0), 'haze': (1.75, 0.9, 0.45, -10.0),
+               'fog': (2.15, -0.05, 0.0, -16.0), 'smoke': (3.0, 0.8, 0.25, -22.0)}
+# each one's scenic piece: (dx, dy, height, flip) from its speaker, behind and to one side
+STAGE2_SCENIC = {'ember': (-0.55, 0.55, 1.25, False), 'dust': (0.5, 0.6, 1.0, False), 'acid': (0.45, 0.65, 1.0, False),
+                 'poison': (-0.5, 0.55, 1.05, False), 'ice': (0.5, 0.7, 1.2, False), 'haze': (0.0, 0.7, 1.35, False),
+                 'fog': (0.55, 0.6, 0.9, False), 'smoke': (0.45, 0.6, 1.4, True)}
+
+
+def hero_stage2(wash=0.15, haze=0.02):
+    s = _cast_base()
+    Z, FRONT, BACK = 1.0, -1.2, 3.2
+    pose, hemis, risers, pieces = {}, [], [], []
+    for t, (x, y, h, yaw) in STAGE2_CAST.items():
+        pose[t] = (x, y, Z + h, yaw, 0, 0)
+        hemis.append((t, x, y, round(Z + h + 1.283 + 0.5, 3)))              # 0.5 m over its own horn
+        if h:
+            risers.append({'kind': 'kit', 'shape': 'box', 'size': [0.72, 0.6, h + 0.001], 'position': [x, y, Z - 0.001],
+                           'material': 'clay', 'color': '#0A0A0A', 'roughness': 0.7})
+        dx, dy, ht, fl = STAGE2_SCENIC[t]
+        pieces.append({'tint': t, 'x': round(x + dx, 3), 'y': round(y + dy, 3), 'z': Z, 'height': ht, 'yaw': round(yaw * 0.5, 1), 'flip': fl})
+    _pose(s, pose)
+    n = len(HERO_ORDER)
+    cores = [(t, round(-2.45 + 0.7 * k, 3), FRONT + 0.16, Z, 200.0) for k, t in enumerate(HERO_ORDER)]
+    W = 14.0
+    props = [
+        {'kind': 'kit', 'shape': 'box', 'size': [W, BACK - FRONT + 0.2, Z - 0.002], 'position': [0.0, (FRONT + BACK) / 2 + 0.1, 0.001],
+         'material': 'clay', 'color': '#070707'},                                  # the stage's body, its front black
+        {'kind': 'kit', 'shape': 'box', 'size': [W, BACK - FRONT + 0.2, 0.004], 'position': [0.0, (FRONT + BACK) / 2 + 0.1, Z - 0.003],
+         'material': 'clay', 'color': '#0C0C0C', 'roughness': 0.55},              # the floor: matte black, a little sheen
+        {'kind': 'kit', 'shape': 'ext', 'path': STAGE2, 'fn': 'backdrop', 'x0': -8.0, 'x1': 8.0, 'y': BACK + 0.2, 'z0': Z, 'z1': 9.0,
+         'stops': [[0.0, '#1B2850'], [0.22, '#111A38'], [0.55, '#080C1E'], [1.0, '#030409']]},   # a painted midnight cloth
+        *[{'kind': 'kit', 'shape': 'drape', 'size': [2.8, 8.0], 'position': [sx * 4.45, FRONT + 0.2, Z + 8.0], 'folds': 19,
+           'amplitude': 0.11, 'material': 'velvet', 'color': '#3A0B10', 'seed': 11 + k} for k, sx in enumerate((-1, 1))],
+        *[{'kind': 'kit', 'shape': 'box', 'size': [2.0, 0.3, 10.0], 'position': [sx * 6.8, FRONT + 0.05, 0.0], 'material': 'clay', 'color': '#050505'}
+          for sx in (-1, 1)],                                                      # the proscenium's black returns
+        *risers,
+        {'kind': 'kit', 'shape': 'box', 'size': [0.5, 0.42, 0.551], 'position': [-1.9, -0.75, Z - 0.001], 'material': 'clay',
+         'color': '#0A0A0A', 'roughness': 0.6},                                    # Mantle's slim black plinth
+        {'kind': 'kit', 'shape': 'ext', 'path': STAGE2, 'fn': 'scenic', 'pieces': pieces},
+        {**_family(hemis, cores), 'path': STAGE2, 'fn': 'pendants', 'top_z': 9.0}]
+    s['products'].append(_mantle(-1.9, -0.75, Z + 0.55, 15.0))
+    s['set'] = {'kind': 'stage', 'props': props}
+    s['materials'].pop('sweep', None)
+    s['sky']['strength'] = 0.0
+    s['lights'] = {}
+    if wash:   # declared: one stage wash from the house, out of frame, warm, gridded
+        s['lights']['house-wash'] = {'type': 'area', 'size_m': [3.0, 1.5], 'position': [0.0, -8.6, 5.2], 'target': [0.0, 0.5, Z + 1.2],
+                                     'irradiance': wash, 'color': '#FFE4C4', 'spread_deg': 50}
+    if haze:   # declared: a little stage haze, so each lamp's cone shows
+        s['haze'] = {'box_m': [-6.0, FRONT, Z, 6.0, BACK, 8.0], 'density': haze, 'anisotropy': 0.5, 'color': '#FFFFFF'}
+    s['camera'] = {'position': [0.0, -7.4, 0.92], 'target': [0.0, 1.0, 2.9], 'lens_mm': 35.0, 'level': True}
+    s['size'] = [1920, 880]
+    s['render'].update({'samples': 256, 'denoise': True, 'clamp': 0, 'exposure': 3.0, 'white_balance_k': 3600, 'white_balance_tint': 0.0,
+                        'bounces': 32, 'diffuse_bounces': 12, 'glossy_bounces': 16, 'transmission_bounces': 32, 'volume_bounces': 1,
+                        'caustics_refractive': True, 'caustics_reflective': True})
+    s.pop('finish', None)
+    s['title'] = 'Tropos, THE STAGE (second version): a proper house, each one under its own Hemisphere'
+    return s
