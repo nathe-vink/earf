@@ -100,7 +100,8 @@ def p2():
     s['sky'] = {'kind': 'gradient', 'strength': 0.0}
     s['lights'] = {'dusk-window': {'type': 'area', 'size_m': [1.6, 2.0], 'position': [3.2, -0.6, 1.7], 'target': [0.0, 0.6, 1.0],
                                    'irradiance': 0.06, 'color': '#9FB3DA'}}
-    s['camera'] = {'position': [0.28, -2.05, 1.12], 'target': [0.05, 0.4, 1.12], 'lens_mm': 45.0, 'level': True,
+    # (proof 2: the table cut at the foot, the top lamp at the head: a little wider)
+    s['camera'] = {'position': [0.28, -2.05, 1.12], 'target': [0.12, 0.4, 1.08], 'lens_mm': 36.0, 'level': True,
                    'fstop': 2.8, 'focus': [0.0, 0.0, 0.95]}
     s['render'].update(exposure=2.6, white_balance_k=3600, white_balance_tint=0.0)
     return s

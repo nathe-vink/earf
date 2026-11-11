@@ -19,7 +19,7 @@
   "caustics_refractive": true,
   "caustics_reflective": true,
   "view": "Khronos PBR Neutral",
-  "exposure": 1.8,
+  "exposure": 0.8,
   "white_balance_k": 3400,
   "white_balance_tint": 0.0
  },
@@ -80,8 +80,8 @@
    {
     "kind": "kit",
     "shape": "ext",
-    "path": "spinoffs/barkhorn/planet/afterhours/lamps_final.py",
-    "fn": "place",
+    "path": "spinoffs/barkhorn/campaign/stage/stage2_props.py",
+    "fn": "lamps",
     "led_k": {
      "red": 2200,
      "green": 2700,
@@ -98,21 +98,21 @@
      "blue": 1.5,
      "black": 0.15
     },
-    "hemispheres": [],
+    "core_base": null,
     "cores": [
      {
       "tint": "red",
       "x": 0.06,
       "y": 0.02,
       "floor_z": 0.746,
-      "rot": 200.0
+      "rot": 0.0
      },
      {
       "tint": "amber",
       "x": -0.85,
       "y": 1.75,
       "floor_z": 0.746,
-      "rot": 200.0
+      "rot": 0.0
      }
     ]
    }
@@ -123,7 +123,7 @@
   "polyhaven": "warm_bar",
   "res": "4k",
   "rotation_deg": -120.0,
-  "strength": 0.1
+  "strength": 0.2
  },
  "camera": {
   "position": [
