@@ -521,6 +521,22 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    matched to the final), `bar-pendants.png` with depth of field and the set fixed (varied bottles, real-looking
    glasses, finer deeper walnut flutes, no black joint squares), new `mantle-back-bar.png` (Mantle in Ember on the back
    bar, a Hemisphere above it). The wide is dropped unless the owner asks. No owner verdict yet on the bar set itself.
+   17:31 UTC, the owner on the three bar frames: "I like the bar concept but it looks too fake and the speakers are
+   obstructed. Would be cooler if the speakers were built into the shelves like the original bar renders."
+   -> THE BAR CONCEPT STAYS (a classy listening bar). The speaker lane's own set is dropped as too fake.
+   -> "The original bar renders" are the bar lane's Planet EARF bar in the Brand Book (r47-brand
+      `brandbook/assets/bar-smoke.jpg`, `bar-listening.jpg`, `bar-door.jpg`, `bar-decks.jpg`; room builder on
+      r33-planet-world `spinoffs/barkhorn/planet/`, finals in renders/2026-10-31/barkhorn/planet44/): a walnut wall of
+      records with a Tropos set into a tall bay at each side, turntables on the back counter, pendants over a fluted
+      walnut bar. Those pictures carry OLD products (plinth uplight, lidded Mantle, coin tube, ring globe) and lit
+      strips and spots in frame: only the ROOM is reused.
+   -> Speaker lane (17:33, interrupting; round 2 on its own set cancelled): that room, every product from the approved
+      assets, a Tropos pair (Dust) built into the shelf bays with the whole speaker visible above the bar top, Mantle
+      (Ember) on the back counter, Hemispheres over the bar, Cores on it; warm family only; light in pools from declared
+      out-of-frame sources plus the lamps exposed for color; bevels, varied spines and grain, a real lens off axis, depth
+      of field, enough samples. Two test frames: `bar-backbar.png`, `core-bar-table.png`.
+   RULE: when the owner has liked an earlier picture of the same subject, start from that set and that look, and change
+   only what is wrong with it (here: old products, dishonest light). Do not rebuild from a written description.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
