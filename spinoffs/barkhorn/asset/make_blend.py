@@ -153,7 +153,10 @@ def manifest(bpy, objs, path):
                     elif n.type in ('VOLUME_ABSORPTION', 'PRINCIPLED_VOLUME'):
                         e.update({'volume ' + k: val(n, k) for k in ('Color', 'Density')})
                 mats[m.name] = e
-        out[tint] = {'flavour': flavour, 'parts': dict(sorted(parts.items())), 'materials': dict(sorted(mats.items()))}
+        cloud = json.load(open(ROOT / 'studio' / 'products' / 'barkhorn-cloud.json'))
+        lin = {**cloud['materials'].get('lining', {}), **cloud['flavours'][flavour].get('materials', {}).get('lining', {})}
+        out[tint] = {'flavour': flavour, 'lining_color': lin.get('color'),    # (the lining's colour runs through nodes: from its file)
+                     'parts': dict(sorted(parts.items())), 'materials': dict(sorted(mats.items()))}
     json.dump(out, open(path, 'w'), indent=1)
     print('manifest:', path)
 
