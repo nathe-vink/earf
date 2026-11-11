@@ -3,6 +3,7 @@
  "source_commit": "the black-hardware finals (2026-11-11), their frames and model in the same commit",
  "units": "m, z up, the shelf at z 0",
  "build": "no light of any kind; base Smoke 2074 solid; every visible piece of hardware satin black (post-satin-black, #18181A, roughness 0.5; the list in black_hardware), bright only the parts in bright_by_necessity; the deck underside satin; a record on the platter; the lid and hinges present but hidden from render, as in the frames",
+ "edge": "C: a 1 mm even chamfer on the outer edges of the deck and base (in the CAD), the chamfer polished; the deck's outer edge satin, the base's diamond-polished, as signed (the owner, 2026-11-11)",
  "black_hardware": [
   "arm-puck",
   "puck-screw-0",
@@ -418,14 +419,6 @@
      ]
     },
     {
-     "object": "hinges.ember",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "arm.ember"
-     ]
-    },
-    {
      "object": "hs-screw.001.ember",
      "type": "MESH",
      "hidden_render": false,
@@ -471,86 +464,6 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ember"
-     ]
-    },
-    {
-     "object": "lid-back.ember",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.ember",
-      "lid-1.ember",
-      "lid-2.ember",
-      "lid-3.ember",
-      "lid-4.ember",
-      "lid-5.ember",
-      "lid-6.ember",
-      "lid-7.ember",
-      "lid-8.ember"
-     ]
-    },
-    {
-     "object": "lid-front.ember",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.ember",
-      "lid-1.ember",
-      "lid-2.ember",
-      "lid-3.ember",
-      "lid-4.ember",
-      "lid-5.ember",
-      "lid-6.ember",
-      "lid-7.ember",
-      "lid-8.ember"
-     ]
-    },
-    {
-     "object": "lid-left.ember",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.ember",
-      "lid-1.ember",
-      "lid-2.ember",
-      "lid-3.ember",
-      "lid-4.ember",
-      "lid-5.ember",
-      "lid-6.ember",
-      "lid-7.ember",
-      "lid-8.ember"
-     ]
-    },
-    {
-     "object": "lid-right.ember",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.ember",
-      "lid-1.ember",
-      "lid-2.ember",
-      "lid-3.ember",
-      "lid-4.ember",
-      "lid-5.ember",
-      "lid-6.ember",
-      "lid-7.ember",
-      "lid-8.ember"
-     ]
-    },
-    {
-     "object": "lid-top.ember",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.ember",
-      "lid-1.ember",
-      "lid-2.ember",
-      "lid-3.ember",
-      "lid-4.ember",
-      "lid-5.ember",
-      "lid-6.ember",
-      "lid-7.ember",
-      "lid-8.ember"
      ]
     },
     {
@@ -660,7 +573,8 @@
       "plinth-5.ember",
       "plinth-6.ember",
       "plinth-7.ember",
-      "plinth-8.ember"
+      "plinth-8.ember",
+      "plinth-chamfer-polished.ember"
      ]
     },
     {
@@ -2002,6 +1916,34 @@
      },
      "volume_density": 236.13623
     },
+    "plinth-chamfer-polished.ember": {
+     "base_color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "roughness": 0.01,
+     "transmission": 1.0,
+     "ior": 1.49,
+     "metallic": 0.0,
+     "volume_color": {
+      "linked_from": "MIX",
+      "A": [
+       0.99852,
+       0.99924,
+       0.99873,
+       1.0
+      ],
+      "B": [
+       0.9201,
+       0.0001,
+       0.14726,
+       1.0
+      ]
+     },
+     "volume_density": 236.13623
+    },
     "post-satin-black.001.ember": {
      "base_color": [
       0.00913,
@@ -2592,14 +2534,6 @@
      ]
     },
     {
-     "object": "hinges.dust",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "arm.dust"
-     ]
-    },
-    {
      "object": "hs-screw.001.dust",
      "type": "MESH",
      "hidden_render": false,
@@ -2645,86 +2579,6 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.dust"
-     ]
-    },
-    {
-     "object": "lid-back.dust",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.dust",
-      "lid-1.dust",
-      "lid-2.dust",
-      "lid-3.dust",
-      "lid-4.dust",
-      "lid-5.dust",
-      "lid-6.dust",
-      "lid-7.dust",
-      "lid-8.dust"
-     ]
-    },
-    {
-     "object": "lid-front.dust",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.dust",
-      "lid-1.dust",
-      "lid-2.dust",
-      "lid-3.dust",
-      "lid-4.dust",
-      "lid-5.dust",
-      "lid-6.dust",
-      "lid-7.dust",
-      "lid-8.dust"
-     ]
-    },
-    {
-     "object": "lid-left.dust",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.dust",
-      "lid-1.dust",
-      "lid-2.dust",
-      "lid-3.dust",
-      "lid-4.dust",
-      "lid-5.dust",
-      "lid-6.dust",
-      "lid-7.dust",
-      "lid-8.dust"
-     ]
-    },
-    {
-     "object": "lid-right.dust",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.dust",
-      "lid-1.dust",
-      "lid-2.dust",
-      "lid-3.dust",
-      "lid-4.dust",
-      "lid-5.dust",
-      "lid-6.dust",
-      "lid-7.dust",
-      "lid-8.dust"
-     ]
-    },
-    {
-     "object": "lid-top.dust",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.dust",
-      "lid-1.dust",
-      "lid-2.dust",
-      "lid-3.dust",
-      "lid-4.dust",
-      "lid-5.dust",
-      "lid-6.dust",
-      "lid-7.dust",
-      "lid-8.dust"
      ]
     },
     {
@@ -2834,7 +2688,8 @@
       "plinth-5.dust",
       "plinth-6.dust",
       "plinth-7.dust",
-      "plinth-8.dust"
+      "plinth-8.dust",
+      "plinth-chamfer-polished.dust"
      ]
     },
     {
@@ -4176,6 +4031,34 @@
      },
      "volume_density": 67.61642
     },
+    "plinth-chamfer-polished.dust": {
+     "base_color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "roughness": 0.01,
+     "transmission": 1.0,
+     "ior": 1.49,
+     "metallic": 0.0,
+     "volume_color": {
+      "linked_from": "MIX",
+      "A": [
+       0.99482,
+       0.99734,
+       0.99556,
+       1.0
+      ],
+      "B": [
+       0.97873,
+       0.60037,
+       0.0001,
+       1.0
+      ]
+     },
+     "volume_density": 67.61642
+    },
     "post-satin-black.001.dust": {
      "base_color": [
       0.00913,
@@ -4766,14 +4649,6 @@
      ]
     },
     {
-     "object": "hinges.acid",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "arm.acid"
-     ]
-    },
-    {
      "object": "hs-screw.001.acid",
      "type": "MESH",
      "hidden_render": false,
@@ -4819,86 +4694,6 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.acid"
-     ]
-    },
-    {
-     "object": "lid-back.acid",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.acid",
-      "lid-1.acid",
-      "lid-2.acid",
-      "lid-3.acid",
-      "lid-4.acid",
-      "lid-5.acid",
-      "lid-6.acid",
-      "lid-7.acid",
-      "lid-8.acid"
-     ]
-    },
-    {
-     "object": "lid-front.acid",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.acid",
-      "lid-1.acid",
-      "lid-2.acid",
-      "lid-3.acid",
-      "lid-4.acid",
-      "lid-5.acid",
-      "lid-6.acid",
-      "lid-7.acid",
-      "lid-8.acid"
-     ]
-    },
-    {
-     "object": "lid-left.acid",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.acid",
-      "lid-1.acid",
-      "lid-2.acid",
-      "lid-3.acid",
-      "lid-4.acid",
-      "lid-5.acid",
-      "lid-6.acid",
-      "lid-7.acid",
-      "lid-8.acid"
-     ]
-    },
-    {
-     "object": "lid-right.acid",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.acid",
-      "lid-1.acid",
-      "lid-2.acid",
-      "lid-3.acid",
-      "lid-4.acid",
-      "lid-5.acid",
-      "lid-6.acid",
-      "lid-7.acid",
-      "lid-8.acid"
-     ]
-    },
-    {
-     "object": "lid-top.acid",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.acid",
-      "lid-1.acid",
-      "lid-2.acid",
-      "lid-3.acid",
-      "lid-4.acid",
-      "lid-5.acid",
-      "lid-6.acid",
-      "lid-7.acid",
-      "lid-8.acid"
      ]
     },
     {
@@ -5008,7 +4803,8 @@
       "plinth-5.acid",
       "plinth-6.acid",
       "plinth-7.acid",
-      "plinth-8.acid"
+      "plinth-8.acid",
+      "plinth-chamfer-polished.acid"
      ]
     },
     {
@@ -6350,6 +6146,34 @@
      },
      "volume_density": 62.00945
     },
+    "plinth-chamfer-polished.acid": {
+     "base_color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "roughness": 0.01,
+     "transmission": 1.0,
+     "ior": 1.49,
+     "metallic": 0.0,
+     "volume_color": {
+      "linked_from": "MIX",
+      "A": [
+       0.99436,
+       0.9971,
+       0.99516,
+       1.0
+      ],
+      "B": [
+       0.91726,
+       0.89894,
+       0.0001,
+       1.0
+      ]
+     },
+     "volume_density": 62.00945
+    },
     "post-satin-black.001.acid": {
      "base_color": [
       0.00913,
@@ -6940,14 +6764,6 @@
      ]
     },
     {
-     "object": "hinges.poison",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "arm.poison"
-     ]
-    },
-    {
      "object": "hs-screw.001.poison",
      "type": "MESH",
      "hidden_render": false,
@@ -6993,86 +6809,6 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.poison"
-     ]
-    },
-    {
-     "object": "lid-back.poison",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.poison",
-      "lid-1.poison",
-      "lid-2.poison",
-      "lid-3.poison",
-      "lid-4.poison",
-      "lid-5.poison",
-      "lid-6.poison",
-      "lid-7.poison",
-      "lid-8.poison"
-     ]
-    },
-    {
-     "object": "lid-front.poison",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.poison",
-      "lid-1.poison",
-      "lid-2.poison",
-      "lid-3.poison",
-      "lid-4.poison",
-      "lid-5.poison",
-      "lid-6.poison",
-      "lid-7.poison",
-      "lid-8.poison"
-     ]
-    },
-    {
-     "object": "lid-left.poison",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.poison",
-      "lid-1.poison",
-      "lid-2.poison",
-      "lid-3.poison",
-      "lid-4.poison",
-      "lid-5.poison",
-      "lid-6.poison",
-      "lid-7.poison",
-      "lid-8.poison"
-     ]
-    },
-    {
-     "object": "lid-right.poison",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.poison",
-      "lid-1.poison",
-      "lid-2.poison",
-      "lid-3.poison",
-      "lid-4.poison",
-      "lid-5.poison",
-      "lid-6.poison",
-      "lid-7.poison",
-      "lid-8.poison"
-     ]
-    },
-    {
-     "object": "lid-top.poison",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.poison",
-      "lid-1.poison",
-      "lid-2.poison",
-      "lid-3.poison",
-      "lid-4.poison",
-      "lid-5.poison",
-      "lid-6.poison",
-      "lid-7.poison",
-      "lid-8.poison"
      ]
     },
     {
@@ -7182,7 +6918,8 @@
       "plinth-5.poison",
       "plinth-6.poison",
       "plinth-7.poison",
-      "plinth-8.poison"
+      "plinth-8.poison",
+      "plinth-chamfer-polished.poison"
      ]
     },
     {
@@ -8524,6 +8261,34 @@
      },
      "volume_density": 204.33603
     },
+    "plinth-chamfer-polished.poison": {
+     "base_color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "roughness": 0.01,
+     "transmission": 1.0,
+     "ior": 1.49,
+     "metallic": 0.0,
+     "volume_color": {
+      "linked_from": "MIX",
+      "A": [
+       0.99829,
+       0.99912,
+       0.99853,
+       1.0
+      ],
+      "B": [
+       0.0001,
+       0.8216,
+       0.20964,
+       1.0
+      ]
+     },
+     "volume_density": 204.33603
+    },
     "post-satin-black.001.poison": {
      "base_color": [
       0.00913,
@@ -9114,14 +8879,6 @@
      ]
     },
     {
-     "object": "hinges.ice",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "arm.ice"
-     ]
-    },
-    {
      "object": "hs-screw.001.ice",
      "type": "MESH",
      "hidden_render": false,
@@ -9167,86 +8924,6 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ice"
-     ]
-    },
-    {
-     "object": "lid-back.ice",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.ice",
-      "lid-1.ice",
-      "lid-2.ice",
-      "lid-3.ice",
-      "lid-4.ice",
-      "lid-5.ice",
-      "lid-6.ice",
-      "lid-7.ice",
-      "lid-8.ice"
-     ]
-    },
-    {
-     "object": "lid-front.ice",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.ice",
-      "lid-1.ice",
-      "lid-2.ice",
-      "lid-3.ice",
-      "lid-4.ice",
-      "lid-5.ice",
-      "lid-6.ice",
-      "lid-7.ice",
-      "lid-8.ice"
-     ]
-    },
-    {
-     "object": "lid-left.ice",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.ice",
-      "lid-1.ice",
-      "lid-2.ice",
-      "lid-3.ice",
-      "lid-4.ice",
-      "lid-5.ice",
-      "lid-6.ice",
-      "lid-7.ice",
-      "lid-8.ice"
-     ]
-    },
-    {
-     "object": "lid-right.ice",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.ice",
-      "lid-1.ice",
-      "lid-2.ice",
-      "lid-3.ice",
-      "lid-4.ice",
-      "lid-5.ice",
-      "lid-6.ice",
-      "lid-7.ice",
-      "lid-8.ice"
-     ]
-    },
-    {
-     "object": "lid-top.ice",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.ice",
-      "lid-1.ice",
-      "lid-2.ice",
-      "lid-3.ice",
-      "lid-4.ice",
-      "lid-5.ice",
-      "lid-6.ice",
-      "lid-7.ice",
-      "lid-8.ice"
      ]
     },
     {
@@ -9356,7 +9033,8 @@
       "plinth-5.ice",
       "plinth-6.ice",
       "plinth-7.ice",
-      "plinth-8.ice"
+      "plinth-8.ice",
+      "plinth-chamfer-polished.ice"
      ]
     },
     {
@@ -10698,6 +10376,34 @@
      },
      "volume_density": 49.87452
     },
+    "plinth-chamfer-polished.ice": {
+     "base_color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "roughness": 0.01,
+     "transmission": 1.0,
+     "ior": 1.49,
+     "metallic": 0.0,
+     "volume_color": {
+      "linked_from": "MIX",
+      "A": [
+       0.99298,
+       0.99639,
+       0.99398,
+       1.0
+      ],
+      "B": [
+       0.0001,
+       0.59541,
+       0.94189,
+       1.0
+      ]
+     },
+     "volume_density": 49.87452
+    },
     "post-satin-black.001.ice": {
      "base_color": [
       0.00913,
@@ -11288,14 +10994,6 @@
      ]
     },
     {
-     "object": "hinges.haze",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "arm.haze"
-     ]
-    },
-    {
      "object": "hs-screw.001.haze",
      "type": "MESH",
      "hidden_render": false,
@@ -11341,86 +11039,6 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.haze"
-     ]
-    },
-    {
-     "object": "lid-back.haze",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.haze",
-      "lid-1.haze",
-      "lid-2.haze",
-      "lid-3.haze",
-      "lid-4.haze",
-      "lid-5.haze",
-      "lid-6.haze",
-      "lid-7.haze",
-      "lid-8.haze"
-     ]
-    },
-    {
-     "object": "lid-front.haze",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.haze",
-      "lid-1.haze",
-      "lid-2.haze",
-      "lid-3.haze",
-      "lid-4.haze",
-      "lid-5.haze",
-      "lid-6.haze",
-      "lid-7.haze",
-      "lid-8.haze"
-     ]
-    },
-    {
-     "object": "lid-left.haze",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.haze",
-      "lid-1.haze",
-      "lid-2.haze",
-      "lid-3.haze",
-      "lid-4.haze",
-      "lid-5.haze",
-      "lid-6.haze",
-      "lid-7.haze",
-      "lid-8.haze"
-     ]
-    },
-    {
-     "object": "lid-right.haze",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.haze",
-      "lid-1.haze",
-      "lid-2.haze",
-      "lid-3.haze",
-      "lid-4.haze",
-      "lid-5.haze",
-      "lid-6.haze",
-      "lid-7.haze",
-      "lid-8.haze"
-     ]
-    },
-    {
-     "object": "lid-top.haze",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.haze",
-      "lid-1.haze",
-      "lid-2.haze",
-      "lid-3.haze",
-      "lid-4.haze",
-      "lid-5.haze",
-      "lid-6.haze",
-      "lid-7.haze",
-      "lid-8.haze"
      ]
     },
     {
@@ -11530,7 +11148,8 @@
       "plinth-5.haze",
       "plinth-6.haze",
       "plinth-7.haze",
-      "plinth-8.haze"
+      "plinth-8.haze",
+      "plinth-chamfer-polished.haze"
      ]
     },
     {
@@ -12872,6 +12491,34 @@
      },
      "volume_density": 84.97319
     },
+    "plinth-chamfer-polished.haze": {
+     "base_color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "roughness": 0.01,
+     "transmission": 1.0,
+     "ior": 1.49,
+     "metallic": 0.0,
+     "volume_color": {
+      "linked_from": "MIX",
+      "A": [
+       0.99588,
+       0.99788,
+       0.99647,
+       1.0
+      ],
+      "B": [
+       0.50136,
+       0.0001,
+       0.88051,
+       1.0
+      ]
+     },
+     "volume_density": 84.97319
+    },
     "post-satin-black.001.haze": {
      "base_color": [
       0.00913,
@@ -13462,14 +13109,6 @@
      ]
     },
     {
-     "object": "hinges.fog",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "arm.fog"
-     ]
-    },
-    {
      "object": "hs-screw.001.fog",
      "type": "MESH",
      "hidden_render": false,
@@ -13515,86 +13154,6 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.fog"
-     ]
-    },
-    {
-     "object": "lid-back.fog",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.fog",
-      "lid-1.fog",
-      "lid-2.fog",
-      "lid-3.fog",
-      "lid-4.fog",
-      "lid-5.fog",
-      "lid-6.fog",
-      "lid-7.fog",
-      "lid-8.fog"
-     ]
-    },
-    {
-     "object": "lid-front.fog",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.fog",
-      "lid-1.fog",
-      "lid-2.fog",
-      "lid-3.fog",
-      "lid-4.fog",
-      "lid-5.fog",
-      "lid-6.fog",
-      "lid-7.fog",
-      "lid-8.fog"
-     ]
-    },
-    {
-     "object": "lid-left.fog",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.fog",
-      "lid-1.fog",
-      "lid-2.fog",
-      "lid-3.fog",
-      "lid-4.fog",
-      "lid-5.fog",
-      "lid-6.fog",
-      "lid-7.fog",
-      "lid-8.fog"
-     ]
-    },
-    {
-     "object": "lid-right.fog",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.fog",
-      "lid-1.fog",
-      "lid-2.fog",
-      "lid-3.fog",
-      "lid-4.fog",
-      "lid-5.fog",
-      "lid-6.fog",
-      "lid-7.fog",
-      "lid-8.fog"
-     ]
-    },
-    {
-     "object": "lid-top.fog",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.fog",
-      "lid-1.fog",
-      "lid-2.fog",
-      "lid-3.fog",
-      "lid-4.fog",
-      "lid-5.fog",
-      "lid-6.fog",
-      "lid-7.fog",
-      "lid-8.fog"
      ]
     },
     {
@@ -13704,7 +13263,8 @@
       "plinth-5.fog",
       "plinth-6.fog",
       "plinth-7.fog",
-      "plinth-8.fog"
+      "plinth-8.fog",
+      "plinth-chamfer-polished.fog"
      ]
     },
     {
@@ -15046,6 +14606,34 @@
      },
      "volume_density": 1.07665
     },
+    "plinth-chamfer-polished.fog": {
+     "base_color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "roughness": 0.01,
+     "transmission": 1.0,
+     "ior": 1.49,
+     "metallic": 0.0,
+     "volume_color": {
+      "linked_from": "MIX",
+      "A": [
+       0.67492,
+       0.83282,
+       0.72136,
+       1.0
+      ],
+      "B": [
+       0.0001,
+       0.0001,
+       0.0001,
+       1.0
+      ]
+     },
+     "volume_density": 1.07665
+    },
     "post-satin-black.001.fog": {
      "base_color": [
       0.00913,
@@ -15636,14 +15224,6 @@
      ]
     },
     {
-     "object": "hinges.smoke",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "arm.smoke"
-     ]
-    },
-    {
      "object": "hs-screw.001.smoke",
      "type": "MESH",
      "hidden_render": false,
@@ -15689,86 +15269,6 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.smoke"
-     ]
-    },
-    {
-     "object": "lid-back.smoke",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.smoke",
-      "lid-1.smoke",
-      "lid-2.smoke",
-      "lid-3.smoke",
-      "lid-4.smoke",
-      "lid-5.smoke",
-      "lid-6.smoke",
-      "lid-7.smoke",
-      "lid-8.smoke"
-     ]
-    },
-    {
-     "object": "lid-front.smoke",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.smoke",
-      "lid-1.smoke",
-      "lid-2.smoke",
-      "lid-3.smoke",
-      "lid-4.smoke",
-      "lid-5.smoke",
-      "lid-6.smoke",
-      "lid-7.smoke",
-      "lid-8.smoke"
-     ]
-    },
-    {
-     "object": "lid-left.smoke",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.smoke",
-      "lid-1.smoke",
-      "lid-2.smoke",
-      "lid-3.smoke",
-      "lid-4.smoke",
-      "lid-5.smoke",
-      "lid-6.smoke",
-      "lid-7.smoke",
-      "lid-8.smoke"
-     ]
-    },
-    {
-     "object": "lid-right.smoke",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.smoke",
-      "lid-1.smoke",
-      "lid-2.smoke",
-      "lid-3.smoke",
-      "lid-4.smoke",
-      "lid-5.smoke",
-      "lid-6.smoke",
-      "lid-7.smoke",
-      "lid-8.smoke"
-     ]
-    },
-    {
-     "object": "lid-top.smoke",
-     "type": "MESH",
-     "hidden_render": true,
-     "materials": [
-      "lid-0.smoke",
-      "lid-1.smoke",
-      "lid-2.smoke",
-      "lid-3.smoke",
-      "lid-4.smoke",
-      "lid-5.smoke",
-      "lid-6.smoke",
-      "lid-7.smoke",
-      "lid-8.smoke"
      ]
     },
     {
@@ -15878,7 +15378,8 @@
       "plinth-5.smoke",
       "plinth-6.smoke",
       "plinth-7.smoke",
-      "plinth-8.smoke"
+      "plinth-8.smoke",
+      "plinth-chamfer-polished.smoke"
      ]
     },
     {
@@ -17200,6 +16701,34 @@
       1.0
      ],
      "roughness": 0.0,
+     "transmission": 1.0,
+     "ior": 1.49,
+     "metallic": 0.0,
+     "volume_color": {
+      "linked_from": "MIX",
+      "A": [
+       0.99012,
+       0.99492,
+       0.99153,
+       1.0
+      ],
+      "B": [
+       0.0001,
+       0.0001,
+       0.0001,
+       1.0
+      ]
+     },
+     "volume_density": 35.42017
+    },
+    "plinth-chamfer-polished.smoke": {
+     "base_color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "roughness": 0.01,
      "transmission": 1.0,
      "ior": 1.49,
      "metallic": 0.0,

@@ -53,3 +53,9 @@ a part. Readings (back-left / mid-front / front-right):
   haze 48/12/38
   fog 122/25/45
   smoke 52/11/38
+
+EDGE C (the owner, 2026-11-11): the CAD carries a 1 mm even chamfer on the outer edges of the deck and base, polished
+(v3_day.py --edge-c finishes the chamfer faces, 144 on each); the deck's outer edge satin and the base's polished as
+signed; the arm puck's screws countersunk flush in the CAD (the render drew them flush already). All eight re-rendered,
+same rig, camera, samples and names; the lid is now out of the render model (render=False, with the owner).
+Audits, all eight: 0 emitters, gt 0 px, no hidden mesh.
