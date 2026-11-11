@@ -167,7 +167,7 @@ def boutline(P, D, inset=0.0):
 
 
 def parts(P):
-    from build123d import Pos, Rot, Sphere
+    from build123d import Pos, Rot, Sphere, Cone
     D = derived(P)
     S, A, M = D['S'], D['A'], D['M']
     m, top, b0, b1, z0 = P['margin'], D['top'], D['b0'], D['b1'], D['z0']
@@ -276,7 +276,8 @@ def parts(P):
 
     puck = cyl('z', A, pd, top - pt, top) - cyl('z', A, 24.0, top - pt - 1, top + 1)
     for c in puck_screws:
-        puck = puck - cyl('z', c, 5.5, top - pt - 1, top + 1) - cyl('z', c, 10.0, top - 3, top + 1)
+        # countersunk 90 deg for M5 ISO 10642 heads (dk 10), flush with the puck's top (2026-11-11; it was a 10 x 3 counterbore)
+        puck = puck - cyl('z', c, 5.5, top - pt - 1, top + 1) - Pos(c[0], c[1], top - 0.7) * Cone(2.75, 6.15, 3.4)   # r 2.75 at 2.4 down to 5.15 at the top: 90 deg, 10.3 across
     arm, lift, cart = B.arm_solids(P, D)
 
     foot = union(*(union(cyl('z', f, 36.0, 4, 12), cyl('z', f, 30.0, 12, b0 - 0.5)) for f in feet))

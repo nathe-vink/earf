@@ -133,6 +133,38 @@ def black_hardware(probe=None):
     print('v3_day: satin black hardware:', ', '.join(n for n in names if bpy.data.objects.get(n)), flush=True)
 
 
+def chamfer_edges(c=0.001):
+    """OPTION B for the owner (the coordinator, 2026-11-11 16:46): every outer acrylic edge of the deck and the base an
+    even `c` chamfer, the chamfer and the outer edge polished; the faces unchanged."""
+    import bmesh
+    for name in ('plinth-L1-stack', 'base-L1-stack'):
+        o = bpy.data.objects[name]; M = o.matrix_world; R = M.to_3x3()
+        bm = bmesh.new(); bm.from_mesh(o.data)
+        bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=1e-6); bm.faces.ensure_lookup_table()   # the glTF import splits the corners
+        W = [M @ v.co for v in bm.verts]
+        x0, x1 = min(v.x for v in W), max(v.x for v in W); y0, y1 = min(v.y for v in W), max(v.y for v in W)
+        def outer(f):
+            n = (R @ f.normal).normalized(); c_ = M @ f.calc_center_median()
+            return abs(n.z) < 0.3 and min(c_.x - x0, x1 - c_.x, c_.y - y0, y1 - c_.y) < 0.003
+        def flat(f):
+            return abs((R @ f.normal).normalized().z) > 0.9
+        ofaces = [f for f in bm.faces if outer(f)]
+        edges = {e for f in ofaces for e in f.edges if any(flat(g) for g in e.link_faces)}
+        res = bmesh.ops.bevel(bm, geom=list(edges), offset=c, segments=1, affect='EDGES', profile=0.5, clamp_overlap=True)
+        if name == 'plinth-L1-stack':
+            src = o.material_slots[1].material; pol = src.copy(); pol.name = 'plinth-edge-polished'
+            pol.node_tree.nodes['Principled BSDF'].inputs['Roughness'].default_value = 0.01
+            o.data.materials.append(pol); idx = len(o.data.materials) - 1
+        else:
+            idx = 1                                      # the base's outer edge: already diamond-polished (roughness 0.01)
+        bm.faces.ensure_lookup_table()
+        k = 0
+        for f in list(res['faces']) + [f for f in bm.faces if outer(f)]:
+            f.material_index = idx; k += 1
+        bm.to_mesh(o.data); bm.free()
+        print(f'v3_day: CHAMFER {name}: {len(edges)} edges at {c * 1000:.1f} mm, {k} faces polished', flush=True)
+
+
 def strip_watts(w):
     # the light on: the LED strip (the drawing's light) emits w watts in all, both faces of its mesh (Cycles' mesh
     # emission is two-sided): radiance = w / (2 pi A)
@@ -673,6 +705,7 @@ def prepare():
     if '--black-hub' in mine: black_hub()
     if '--probe-hub' in mine: black_hub(probe=True)
     if '--black-hardware' in mine: black_hardware()
+    if '--chamfer' in mine: chamfer_edges()
     if '--probe-hw' in mine: black_hardware(probe=mine[mine.index('--probe-hw') + 1])
     if '--lighttable' in mine:
         i = mine.index('--lighttable'); lighttable(float(mine[i + 1]), float(mine[i + 2]))

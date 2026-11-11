@@ -1,0 +1,8 @@
+Mantle, edge options for the owner (the coordinator, 2026-11-11 16:46), Ice only, the final day set's camera, rig and
+samples, the black-hardware build. A = mantle-final-day-ice.png (941ad388) as it is: sharp edges, the deck's outer
+edge satin as signed. B = the same frame with every outer acrylic edge of the deck and the base chamfered 1 mm,
+even, the chamfer and the outer edge polished (roughness 0.01), the faces unchanged (v3_day.py --chamfer, a render
+proposal; the CAD has no chamfer until the owner picks). B's audits: 0 emitters, gt 0 px, no hidden mesh.
+What B shows: the chamfer reads as a thin bright line along the top and bottom edges, and the polished edge turns
+into a window: it mirrors the room and shows the posts and the hub refracted inside the slab (the patch at the
+corner's front face). The satin edge in A reads as one even block of color. Under the pair: the front-right corner, 2.5x.
