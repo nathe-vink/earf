@@ -55,6 +55,7 @@ BASE_PROFILES = {'B': [(49, 0), (60, 0), (60, 1.5), (71.71, 1.5), (60.0, 30.0), 
 _iC = BASE_PROFILES['C'].index((62.8, 31))
 BASE_LOW = {'A': [(60, 0), (60, 1.5), (71.71, 1.5), (60, 30)], 'B': BASE_PROFILES['B'][1:5], 'C': BASE_PROFILES['C'][1:_iC + 1]}
 BASE_UP = {'B': BASE_PROFILES['B'][4:], 'C': BASE_PROFILES['C'][_iC:]}       # the touch ring (A: the CAD's ring)
+BASE_ALL = [(68.6, -6.5), (75.0, -6.5), (60.0, 30.0), (60.0, 31.0), (59.894, 32.216), (59.578, 33.394), (59.062, 34.5), (58.362, 35.5), (57.5, 36.362), (56.5, 37.062), (55.394, 37.578), (54.216, 37.894), (53.0, 38.0), (50.3, 38.0)]   # B all in its own colour: the skirt to the floor (r 75 at z -6.5), the lip's bullnose
 TINT_LOAD = {'orange': 3.0, 'amber': 3.0, 'blue': 3.0, 'black': 0.3}
 # the site's colour keys (web.py HABITAT) to the tints
 COLOURS = {'red': 'Ember', 'orange': 'Dust', 'amber': 'Acid', 'green': 'Poison', 'blue': 'Ice', 'violet': 'Haze',
@@ -365,7 +366,8 @@ def build(frame, samples, scale):
             me = bpy.data.meshes.new(nm); bm.to_mesh(me); bm.free(); me.materials.append(mat)
             ob_ = bpy.data.objects.new(nm, me); bpy.context.scene.collection.objects.link(ob_); ob_.location = (x, y, z0)
             return ob_
-        own = os.environ.get('BASE_MAT') == 'own'
+        own = os.environ.get('BASE_MAT') in ('own', 'own_all')
+        own_all = os.environ.get('BASE_MAT') == 'own_all'
         if base in BASE_PROFILES or own:
             # base options for the owner (2026-11-11: "the base should look like the base of a crystal ball"; "the same
             # color acrylic for the base ... in satin"): the turned outside as a revolved profile (r, z in mm from the
@@ -373,6 +375,10 @@ def build(frame, samples, scale):
             # own pour (the same loading as the ball's 6 mm wall), satin outside, over a white opal liner that hides the
             # battery, board and contacts; the touch ring stays satin black anodized. Only the outside is seen
             lo_, up_ = BASE_LOW[base], BASE_UP.get(base)
+            if own_all:
+                # B all in its own colour (the coordinator, 2026-11-11 16:37): one skin from the ball's seat down to the
+                # floor, the bullnose lip included, the dock hidden under the skirt, the touch electrode under the skin
+                lo_, up_ = BASE_ALL, None
             if own and base == 'C':
                 # C in its own colour grows 3 mm in radius below the touch ring, so the 6 mm skin and liner clear the
                 # cells' bays (the coordinator, 2026-11-11: "C may grow 3 mm for it")
@@ -390,7 +396,7 @@ def build(frame, samples, scale):
                 revolve(f'base-ring-{base}-{tint}', up_, satin_an)
         for nm, m in tuple(p_ for p_ in (('dock', satin_black), ('base', satin_black), ('ring', satin_an), ('seat', SC.principled('si', '#111111', 0.6)),
                       ('dock-cable', SC.principled('braid', '#121212', 0.75, bump=(1200.0, 0.5)))) + \
-                     (('grommet', an),) if not ((base in BASE_PROFILES or own) and p_[0] in ('base', 'ring') and not (base == 'A' and p_[0] == 'ring'))):
+                     (('grommet', an),) if not (((base in BASE_PROFILES or own) and p_[0] in ('base', 'ring') and not (base == 'A' and p_[0] == 'ring' and not own_all)) or (own_all and p_[0] == 'dock'))):
             objs.append(part('out-orb-table', nm, m, (x, y, z0)))   # (the base and dock angled, the owner, 2026-11-10)
         # the light well, white PTFE round the window (2026-11-10)
         part('out-orb-table', 'well', SC.principled('ptfe', '#F7F7F5', 0.7), (x, y, z0))
