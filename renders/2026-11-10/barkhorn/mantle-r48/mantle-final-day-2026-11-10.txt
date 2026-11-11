@@ -34,3 +34,22 @@ Fog 2580, Dust 2696, Acid 2223, Ice 1775, Haze 99, Ember 26, Poison 0 (all at th
 through the clear lamina). Smoke is unchanged. Audits, the seven: 0 emitters, gt 0 px, no hidden mesh.
 The mid-front reading fell where the hub had shown: Fog 45 -> 25, Acid 24 -> 20, Dust 20 -> 18, Ice 17 -> 16; the
 others are unchanged (back-left and front-right unchanged in all).
+
+BLACK HARDWARE (the coordinator, 2026-11-11 15:40; the owner: "not cheap, even though it's acrylic"): every visible
+piece of hardware satin black, the post-satin-black family (#18181A, roughness 0.5: a soft highlight, no mirror):
+the arm puck and its screws, the feet and studs, the pulley, the platter, motor and puck screws, the disc spring,
+the arm's axle caps, bias and counterweight, the headshell and cartridge screws and washers (v3_day.py
+--black-hardware). Bright by necessity: the spindle (ground 440C; its tip locates the record and a coat would wear),
+the cartridge's cantilever, pins and diamond; the ball and thrust plate are working faces inside the housing, unseen.
+All eight re-rendered, same rig, camera, samples and names; the lid hidden. Audits: 0 emitters, gt 0 px, no hidden mesh.
+The gold patch at the platter's front edge was the brass hub (black since a1240b77); the vertical glints there are
+the record's glossy vinyl seen through the platter's clear lamina (a probe turns the whole patch with the record), not
+a part. Readings (back-left / mid-front / front-right):
+  ember 30/11/37
+  dust 85/18/39
+  acid 110/20/40
+  poison 52/11/38
+  ice 83/16/39
+  haze 48/12/38
+  fog 122/25/45
+  smoke 52/11/38
