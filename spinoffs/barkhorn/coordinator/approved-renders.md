@@ -353,6 +353,24 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    The lane says how the tinted base hides the battery and board (sleeve or lined bore), the wall and pour so it matches the
    shell and does not go dark, whether it picks up the lamp's own light (rendered true), the satin finish by name (finger
    oil), what stays black (touch ring, dock, feet by default), and the price. The metal default waits for that picture.
+   16:15 UTC, lamps lane 7f636280d8: `core-base-options.png` (3 x 3, lit, dim studio), shown to the owner 16:19.
+   - Shapes: A Ø143 x 38 (as now); B the same with a 7 mm bullnose touch ring; C stand Ø129 foot, Ø118.6 waist, Ø126.6 rim,
+     40.8 tall (as narrow as the cells' bays allow; the ball is Ø140). All three hold the cells, board, well and contacts.
+   - Black: bead-blasted acrylic $141; 6061 satin black anodized about the same or less, plus ~345 g (needs liners in the
+     cell bays and an isolated touch ring).
+   - Own color: a 6 mm skin of the shell's pour over a 0.4 mm white opal liner; fine glass-bead blast plus a clear matte
+     anti-fingerprint hardcoat; touch ring and dock stay black; ~$220-260 (estimate). A and B fit; C needs a 3 mm skin or
+     3 mm more width. Honest look with the lamp on in a dim room: the base goes dark (Ice navy, Ember near black), because
+     the lamp's light does not reach the liner.
+   - The lit grid cannot settle it (black shapes are silhouettes; the tint is unlit). Ordered `core-base-options-day.png`:
+     the same grid, lamp off, studio daylight, closer on the base. The pick waits for it. Lane's pick: C in black 6061.
+   Hemisphere, same commit: (a) from below, the three tabs were the collar's bayonet slots; fixed by a Ø95 white disc and a
+   closed carrier. This raises the light (Ember 233.5 -> 272.7 lm out; ~19 % more lux on the table). Coordinator: GO, with
+   the photometry recomputed for all eight tints. (b) cap and gland edges eased, drawn satin black anodized; cord already
+   cloth-braided; canopy now 6061 satin black anodized ($83, was $106 in polished acrylic). Details to do in the batch: hatch
+   screws black and flush, strap screws covered, cord grip turned, the mouth's stacked edge polished with one chamfer.
+   Hemisphere batch: direct x8, under x8, Ember off, Ember rim, the cluster, the row re-rendered. The old three-quarter
+   finals retire when these land.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
