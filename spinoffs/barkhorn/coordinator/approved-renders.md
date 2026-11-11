@@ -546,6 +546,10 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
       brands, no people, no other light source in frame; the products stay the heroes.
    RULE: a setting needs signs of life. Tidy, empty and symmetric reads as a model. Briefs for any place say who was
    just there and what was happening.
+   17:38 UTC, the owner: "Soul to me means lived in. Cozy." -> THE TEST FOR EVERY PLACE THE PRODUCTS ARE SHOWN IN (bar,
+   rooms, combos): lived in and cozy, as well as classy. Speaker lane (17:39): closer and lower camera, warm dark at the
+   edges, small warm pools of light (Core as the lamp you carry to your seat), soft things in view (rug, upholstery,
+   cushions, curtain, a throw, books), less bare concrete and stone, things left where a person would leave them.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
