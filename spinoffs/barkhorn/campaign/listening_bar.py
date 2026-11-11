@@ -180,8 +180,10 @@ def _lamps(hemis, cores, top=4.2):
 
 
 # (test 1: hung at 1.7-1.9 they sat in front of the shelves and were lost: higher, against the brick above them)
-HEMIS = [('ember', -1.5, 0.3, 2.22), ('dust', -1.0, 0.36, 2.38), ('acid', -0.5, 0.28, 2.18), ('ember', 0.0, 0.34, 2.34),
-         ('dust', 0.5, 0.3, 2.2), ('acid', 1.0, 0.36, 2.4), ('ember', 1.5, 0.3, 2.26)]
+# (frames 1, measured: hung at 2.2-2.4 over a standing eye the shades showed their dark closed undersides, value 0.4
+# against the finals' 1.0: hung as a bar hangs them, 0.5-0.7 m over the top, seen from the side)
+HEMIS = [('ember', -1.5, 0.3, 1.62), ('dust', -1.0, 0.36, 1.76), ('acid', -0.5, 0.28, 1.58), ('ember', 0.0, 0.34, 1.72),
+         ('dust', 0.5, 0.3, 1.6), ('acid', 1.0, 0.36, 1.78), ('ember', 1.5, 0.3, 1.66)]
 CORES = [('ember', -1.2, 0.3), ('dust', -0.15, 0.32), ('acid', 1.0, 0.3)]
 # (test 2, measured: the Cores already at the finals' hue and above their saturation, the shades at value 0.3-0.4 against
 # the finals' 1.0: a stop up, toward the Hemisphere's own -2; the room's light halved to hold it)
@@ -222,7 +224,9 @@ def bar_wide():
                                           {**copy.deepcopy(i), 'position': [X1 + 0.75, WALL_Y - 0.5, 0.0], 'rotate_z': -16.0}]})
     s['products'] = pair
     shots._approved(s, order=['ember', 'ember'])
-    s['products'].append(shots._mantle(-0.35, WALL_Y - BACKBAR_D / 2 - 0.02, 0.955 + 0.001, 0.0, tint='dust'))
+    # (frames 1: on the back bar's top Mantle sat below the line over the bar top: on a walnut plinth, the records under it)
+    s['set']['props'].append(box([0.56, 0.42, 0.24], [-0.33, WALL_Y - BACKBAR_D / 2 - 0.02, 0.955], WALNUT, 0.004))
+    s['products'].append(shots._mantle(-0.33, WALL_Y - BACKBAR_D / 2 - 0.02, 0.955 + 0.24 + 0.001, 0.0, tint='dust'))
     s['set']['props'].append(_lamps(HEMIS, CORES))
     # (test 1: from 1.32 m the bar top hid Mantle on the back bar: a standing guest's eye)
     s['camera'] = {'position': [0.0, -4.9, 1.62], 'target': [0.0, 1.0, 1.4], 'lens_mm': 32.0, 'level': True}
@@ -232,8 +236,9 @@ def bar_wide():
 def bar_pendants():
     s = _base([1920, 1080], 'A listening bar: the Hemisphere cluster over the stone')
     s['set']['props'].append(_lamps(HEMIS[1:6], [('ember', -0.45, 0.28), ('acid', 0.42, 0.3)]))
-    s['camera'] = {'position': [0.15, -2.1, 1.34], 'target': [0.1, 0.4, 1.45], 'lens_mm': 50.0, 'level': True,
-                   'fstop': 2.8, 'focus': [0.0, 0.3, 1.3]}
+    # (frames 1: the cluster above the frame: framed on it, the Cores at its foot)
+    s['camera'] = {'position': [0.1, -2.6, 1.48], 'target': [0.0, 0.3, 1.4], 'lens_mm': 45.0, 'level': True,
+                   'fstop': 2.8, 'focus': [0.0, 0.3, 1.4]}
     return s
 
 

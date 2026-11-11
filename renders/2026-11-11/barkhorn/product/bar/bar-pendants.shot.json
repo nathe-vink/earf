@@ -1,0 +1,9565 @@
+{
+ "title": "A listening bar: the Hemisphere cluster over the stone",
+ "size": [
+  1920,
+  1080
+ ],
+ "set": {
+  "kind": "stage",
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     14.0,
+     12.0,
+     0.02
+    ],
+    "position": [
+     0.0,
+     -4.0,
+     -0.02
+    ],
+    "material": "pbr",
+    "texture": "brushed_concrete_03",
+    "tex_res": "2k",
+    "gain": 0.55,
+    "rough_mul": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     14.0,
+     0.3,
+     5.0
+    ],
+    "position": [
+     0.0,
+     2.35,
+     -0.02
+    ],
+    "material": "pbr",
+    "texture": "red_brick_03",
+    "tex_res": "2k",
+    "tint": "#7A4A3C",
+    "tint_mix": 0.25,
+    "gain": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     4.1,
+     0.46,
+     0.92
+    ],
+    "position": [
+     0.0,
+     1.9700000000000002,
+     0.0
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8,
+    "ease": 0.004
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.40599999999999997,
+     0.012,
+     0.8
+    ],
+    "position": [
+     -1.8449999999999998,
+     1.7340000000000002,
+     0.05
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8,
+    "ease": 0.002
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.40599999999999997,
+     0.012,
+     0.8
+    ],
+    "position": [
+     -1.4349999999999998,
+     1.7340000000000002,
+     0.05
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8,
+    "ease": 0.002
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.40599999999999997,
+     0.012,
+     0.8
+    ],
+    "position": [
+     -1.025,
+     1.7340000000000002,
+     0.05
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8,
+    "ease": 0.002
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.40599999999999997,
+     0.012,
+     0.8
+    ],
+    "position": [
+     -0.615,
+     1.7340000000000002,
+     0.05
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8,
+    "ease": 0.002
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.40599999999999997,
+     0.012,
+     0.8
+    ],
+    "position": [
+     -0.20499999999999985,
+     1.7340000000000002,
+     0.05
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8,
+    "ease": 0.002
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.40599999999999997,
+     0.012,
+     0.8
+    ],
+    "position": [
+     0.20500000000000007,
+     1.7340000000000002,
+     0.05
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8,
+    "ease": 0.002
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.40599999999999997,
+     0.012,
+     0.8
+    ],
+    "position": [
+     0.6150000000000002,
+     1.7340000000000002,
+     0.05
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8,
+    "ease": 0.002
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.40599999999999997,
+     0.012,
+     0.8
+    ],
+    "position": [
+     1.025,
+     1.7340000000000002,
+     0.05
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8,
+    "ease": 0.002
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.40599999999999997,
+     0.012,
+     0.8
+    ],
+    "position": [
+     1.435,
+     1.7340000000000002,
+     0.05
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8,
+    "ease": 0.002
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.40599999999999997,
+     0.012,
+     0.8
+    ],
+    "position": [
+     1.8449999999999998,
+     1.7340000000000002,
+     0.05
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8,
+    "ease": 0.002
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     4.14,
+     0.49,
+     0.035
+    ],
+    "position": [
+     0.0,
+     1.9550000000000003,
+     0.92
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8,
+    "ease": 0.006
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     4.0,
+     0.26,
+     0.03
+    ],
+    "position": [
+     0.0,
+     2.0700000000000003,
+     1.34
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8,
+    "ease": 0.003
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     4.0,
+     0.26,
+     0.03
+    ],
+    "position": [
+     0.0,
+     2.0700000000000003,
+     1.72
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8,
+    "ease": 0.003
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     4.0,
+     0.26,
+     0.03
+    ],
+    "position": [
+     0.0,
+     2.0700000000000003,
+     2.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8,
+    "ease": 0.003
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.03,
+     0.26,
+     1.22
+    ],
+    "position": [
+     -2.0,
+     2.0700000000000003,
+     0.955
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8,
+    "ease": 0.003
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.03,
+     0.26,
+     1.22
+    ],
+    "position": [
+     -1.3333333333333335,
+     2.0700000000000003,
+     0.955
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8,
+    "ease": 0.003
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.03,
+     0.26,
+     1.22
+    ],
+    "position": [
+     -0.6666666666666667,
+     2.0700000000000003,
+     0.955
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8,
+    "ease": 0.003
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.03,
+     0.26,
+     1.22
+    ],
+    "position": [
+     0.0,
+     2.0700000000000003,
+     0.955
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8,
+    "ease": 0.003
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.03,
+     0.26,
+     1.22
+    ],
+    "position": [
+     0.6666666666666665,
+     2.0700000000000003,
+     0.955
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8,
+    "ease": 0.003
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.03,
+     0.26,
+     1.22
+    ],
+    "position": [
+     1.3333333333333335,
+     2.0700000000000003,
+     0.955
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8,
+    "ease": 0.003
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.03,
+     0.26,
+     1.22
+    ],
+    "position": [
+     2.0,
+     2.0700000000000003,
+     0.955
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8,
+    "ease": 0.003
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.036,
+      0
+     ],
+     [
+      0.037,
+      0.004
+     ],
+     [
+      0.037,
+      0.19
+     ],
+     [
+      0.03,
+      0.225
+     ],
+     [
+      0.016,
+      0.25
+     ],
+     [
+      0.0135,
+      0.262
+     ],
+     [
+      0.0135,
+      0.3
+     ],
+     [
+      0.0155,
+      0.305
+     ],
+     [
+      0,
+      0.305
+     ]
+    ],
+    "position": [
+     -1.93,
+     2.08,
+     1.37
+    ],
+    "material": "glass",
+    "color": "#1C2620",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0372,
+    "height": 0.075,
+    "position": [
+     -1.93,
+     2.08,
+     1.4400000000000002
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.036,
+      0
+     ],
+     [
+      0.037,
+      0.004
+     ],
+     [
+      0.037,
+      0.19
+     ],
+     [
+      0.03,
+      0.225
+     ],
+     [
+      0.016,
+      0.25
+     ],
+     [
+      0.0135,
+      0.262
+     ],
+     [
+      0.0135,
+      0.3
+     ],
+     [
+      0.0155,
+      0.305
+     ],
+     [
+      0,
+      0.305
+     ]
+    ],
+    "position": [
+     -1.825,
+     2.08,
+     1.37
+    ],
+    "material": "glass",
+    "color": "#5A3510",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0372,
+    "height": 0.075,
+    "position": [
+     -1.825,
+     2.08,
+     1.4400000000000002
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.036,
+      0
+     ],
+     [
+      0.037,
+      0.004
+     ],
+     [
+      0.037,
+      0.19
+     ],
+     [
+      0.03,
+      0.225
+     ],
+     [
+      0.016,
+      0.25
+     ],
+     [
+      0.0135,
+      0.262
+     ],
+     [
+      0.0135,
+      0.3
+     ],
+     [
+      0.0155,
+      0.305
+     ],
+     [
+      0,
+      0.305
+     ]
+    ],
+    "position": [
+     -1.719,
+     2.08,
+     1.37
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0372,
+    "height": 0.075,
+    "position": [
+     -1.719,
+     2.08,
+     1.4400000000000002
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.036,
+      0
+     ],
+     [
+      0.037,
+      0.004
+     ],
+     [
+      0.037,
+      0.19
+     ],
+     [
+      0.03,
+      0.225
+     ],
+     [
+      0.016,
+      0.25
+     ],
+     [
+      0.0135,
+      0.262
+     ],
+     [
+      0.0135,
+      0.3
+     ],
+     [
+      0.0155,
+      0.305
+     ],
+     [
+      0,
+      0.305
+     ]
+    ],
+    "position": [
+     -1.614,
+     2.08,
+     1.37
+    ],
+    "material": "glass",
+    "color": "#1C2620",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0372,
+    "height": 0.075,
+    "position": [
+     -1.614,
+     2.08,
+     1.4400000000000002
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.036,
+      0
+     ],
+     [
+      0.037,
+      0.004
+     ],
+     [
+      0.037,
+      0.19
+     ],
+     [
+      0.03,
+      0.225
+     ],
+     [
+      0.016,
+      0.25
+     ],
+     [
+      0.0135,
+      0.262
+     ],
+     [
+      0.0135,
+      0.3
+     ],
+     [
+      0.0155,
+      0.305
+     ],
+     [
+      0,
+      0.305
+     ]
+    ],
+    "position": [
+     -1.509,
+     2.08,
+     1.37
+    ],
+    "material": "glass",
+    "color": "#5A3510",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0372,
+    "height": 0.075,
+    "position": [
+     -1.509,
+     2.08,
+     1.4400000000000002
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.036,
+      0
+     ],
+     [
+      0.037,
+      0.004
+     ],
+     [
+      0.037,
+      0.19
+     ],
+     [
+      0.03,
+      0.225
+     ],
+     [
+      0.016,
+      0.25
+     ],
+     [
+      0.0135,
+      0.262
+     ],
+     [
+      0.0135,
+      0.3
+     ],
+     [
+      0.0155,
+      0.305
+     ],
+     [
+      0,
+      0.305
+     ]
+    ],
+    "position": [
+     -1.403,
+     2.08,
+     1.37
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0372,
+    "height": 0.075,
+    "position": [
+     -1.403,
+     2.08,
+     1.4400000000000002
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.033,
+      0
+     ],
+     [
+      0.034,
+      0.004
+     ],
+     [
+      0.034,
+      0.22
+     ],
+     [
+      0.018,
+      0.26
+     ],
+     [
+      0.0125,
+      0.285
+     ],
+     [
+      0.0125,
+      0.33
+     ],
+     [
+      0.014,
+      0.335
+     ],
+     [
+      0,
+      0.335
+     ]
+    ],
+    "position": [
+     -1.93,
+     2.08,
+     1.75
+    ],
+    "material": "glass",
+    "color": "#1C2620",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0342,
+    "height": 0.075,
+    "position": [
+     -1.93,
+     2.08,
+     1.82
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.033,
+      0
+     ],
+     [
+      0.034,
+      0.004
+     ],
+     [
+      0.034,
+      0.22
+     ],
+     [
+      0.018,
+      0.26
+     ],
+     [
+      0.0125,
+      0.285
+     ],
+     [
+      0.0125,
+      0.33
+     ],
+     [
+      0.014,
+      0.335
+     ],
+     [
+      0,
+      0.335
+     ]
+    ],
+    "position": [
+     -1.825,
+     2.08,
+     1.75
+    ],
+    "material": "glass",
+    "color": "#5A3510",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0342,
+    "height": 0.075,
+    "position": [
+     -1.825,
+     2.08,
+     1.82
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.033,
+      0
+     ],
+     [
+      0.034,
+      0.004
+     ],
+     [
+      0.034,
+      0.22
+     ],
+     [
+      0.018,
+      0.26
+     ],
+     [
+      0.0125,
+      0.285
+     ],
+     [
+      0.0125,
+      0.33
+     ],
+     [
+      0.014,
+      0.335
+     ],
+     [
+      0,
+      0.335
+     ]
+    ],
+    "position": [
+     -1.719,
+     2.08,
+     1.75
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0342,
+    "height": 0.075,
+    "position": [
+     -1.719,
+     2.08,
+     1.82
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.033,
+      0
+     ],
+     [
+      0.034,
+      0.004
+     ],
+     [
+      0.034,
+      0.22
+     ],
+     [
+      0.018,
+      0.26
+     ],
+     [
+      0.0125,
+      0.285
+     ],
+     [
+      0.0125,
+      0.33
+     ],
+     [
+      0.014,
+      0.335
+     ],
+     [
+      0,
+      0.335
+     ]
+    ],
+    "position": [
+     -1.614,
+     2.08,
+     1.75
+    ],
+    "material": "glass",
+    "color": "#1C2620",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0342,
+    "height": 0.075,
+    "position": [
+     -1.614,
+     2.08,
+     1.82
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.033,
+      0
+     ],
+     [
+      0.034,
+      0.004
+     ],
+     [
+      0.034,
+      0.22
+     ],
+     [
+      0.018,
+      0.26
+     ],
+     [
+      0.0125,
+      0.285
+     ],
+     [
+      0.0125,
+      0.33
+     ],
+     [
+      0.014,
+      0.335
+     ],
+     [
+      0,
+      0.335
+     ]
+    ],
+    "position": [
+     -1.509,
+     2.08,
+     1.75
+    ],
+    "material": "glass",
+    "color": "#5A3510",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0342,
+    "height": 0.075,
+    "position": [
+     -1.509,
+     2.08,
+     1.82
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.033,
+      0
+     ],
+     [
+      0.034,
+      0.004
+     ],
+     [
+      0.034,
+      0.22
+     ],
+     [
+      0.018,
+      0.26
+     ],
+     [
+      0.0125,
+      0.285
+     ],
+     [
+      0.0125,
+      0.33
+     ],
+     [
+      0.014,
+      0.335
+     ],
+     [
+      0,
+      0.335
+     ]
+    ],
+    "position": [
+     -1.403,
+     2.08,
+     1.75
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0342,
+    "height": 0.075,
+    "position": [
+     -1.403,
+     2.08,
+     1.82
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.036,
+      0
+     ],
+     [
+      0.037,
+      0.004
+     ],
+     [
+      0.037,
+      0.19
+     ],
+     [
+      0.03,
+      0.225
+     ],
+     [
+      0.016,
+      0.25
+     ],
+     [
+      0.0135,
+      0.262
+     ],
+     [
+      0.0135,
+      0.3
+     ],
+     [
+      0.0155,
+      0.305
+     ],
+     [
+      0,
+      0.305
+     ]
+    ],
+    "position": [
+     -1.263,
+     2.08,
+     1.37
+    ],
+    "material": "glass",
+    "color": "#5A3510",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0372,
+    "height": 0.075,
+    "position": [
+     -1.263,
+     2.08,
+     1.4400000000000002
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.036,
+      0
+     ],
+     [
+      0.037,
+      0.004
+     ],
+     [
+      0.037,
+      0.19
+     ],
+     [
+      0.03,
+      0.225
+     ],
+     [
+      0.016,
+      0.25
+     ],
+     [
+      0.0135,
+      0.262
+     ],
+     [
+      0.0135,
+      0.3
+     ],
+     [
+      0.0155,
+      0.305
+     ],
+     [
+      0,
+      0.305
+     ]
+    ],
+    "position": [
+     -1.158,
+     2.08,
+     1.37
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0372,
+    "height": 0.075,
+    "position": [
+     -1.158,
+     2.08,
+     1.4400000000000002
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.036,
+      0
+     ],
+     [
+      0.037,
+      0.004
+     ],
+     [
+      0.037,
+      0.19
+     ],
+     [
+      0.03,
+      0.225
+     ],
+     [
+      0.016,
+      0.25
+     ],
+     [
+      0.0135,
+      0.262
+     ],
+     [
+      0.0135,
+      0.3
+     ],
+     [
+      0.0155,
+      0.305
+     ],
+     [
+      0,
+      0.305
+     ]
+    ],
+    "position": [
+     -1.053,
+     2.08,
+     1.37
+    ],
+    "material": "glass",
+    "color": "#1C2620",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0372,
+    "height": 0.075,
+    "position": [
+     -1.053,
+     2.08,
+     1.4400000000000002
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.036,
+      0
+     ],
+     [
+      0.037,
+      0.004
+     ],
+     [
+      0.037,
+      0.19
+     ],
+     [
+      0.03,
+      0.225
+     ],
+     [
+      0.016,
+      0.25
+     ],
+     [
+      0.0135,
+      0.262
+     ],
+     [
+      0.0135,
+      0.3
+     ],
+     [
+      0.0155,
+      0.305
+     ],
+     [
+      0,
+      0.305
+     ]
+    ],
+    "position": [
+     -0.947,
+     2.08,
+     1.37
+    ],
+    "material": "glass",
+    "color": "#5A3510",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0372,
+    "height": 0.075,
+    "position": [
+     -0.947,
+     2.08,
+     1.4400000000000002
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.036,
+      0
+     ],
+     [
+      0.037,
+      0.004
+     ],
+     [
+      0.037,
+      0.19
+     ],
+     [
+      0.03,
+      0.225
+     ],
+     [
+      0.016,
+      0.25
+     ],
+     [
+      0.0135,
+      0.262
+     ],
+     [
+      0.0135,
+      0.3
+     ],
+     [
+      0.0155,
+      0.305
+     ],
+     [
+      0,
+      0.305
+     ]
+    ],
+    "position": [
+     -0.842,
+     2.08,
+     1.37
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0372,
+    "height": 0.075,
+    "position": [
+     -0.842,
+     2.08,
+     1.4400000000000002
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.036,
+      0
+     ],
+     [
+      0.037,
+      0.004
+     ],
+     [
+      0.037,
+      0.19
+     ],
+     [
+      0.03,
+      0.225
+     ],
+     [
+      0.016,
+      0.25
+     ],
+     [
+      0.0135,
+      0.262
+     ],
+     [
+      0.0135,
+      0.3
+     ],
+     [
+      0.0155,
+      0.305
+     ],
+     [
+      0,
+      0.305
+     ]
+    ],
+    "position": [
+     -0.737,
+     2.08,
+     1.37
+    ],
+    "material": "glass",
+    "color": "#1C2620",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0372,
+    "height": 0.075,
+    "position": [
+     -0.737,
+     2.08,
+     1.4400000000000002
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.033,
+      0
+     ],
+     [
+      0.034,
+      0.004
+     ],
+     [
+      0.034,
+      0.22
+     ],
+     [
+      0.018,
+      0.26
+     ],
+     [
+      0.0125,
+      0.285
+     ],
+     [
+      0.0125,
+      0.33
+     ],
+     [
+      0.014,
+      0.335
+     ],
+     [
+      0,
+      0.335
+     ]
+    ],
+    "position": [
+     -1.263,
+     2.08,
+     1.75
+    ],
+    "material": "glass",
+    "color": "#5A3510",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0342,
+    "height": 0.075,
+    "position": [
+     -1.263,
+     2.08,
+     1.82
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.033,
+      0
+     ],
+     [
+      0.034,
+      0.004
+     ],
+     [
+      0.034,
+      0.22
+     ],
+     [
+      0.018,
+      0.26
+     ],
+     [
+      0.0125,
+      0.285
+     ],
+     [
+      0.0125,
+      0.33
+     ],
+     [
+      0.014,
+      0.335
+     ],
+     [
+      0,
+      0.335
+     ]
+    ],
+    "position": [
+     -1.158,
+     2.08,
+     1.75
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0342,
+    "height": 0.075,
+    "position": [
+     -1.158,
+     2.08,
+     1.82
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.033,
+      0
+     ],
+     [
+      0.034,
+      0.004
+     ],
+     [
+      0.034,
+      0.22
+     ],
+     [
+      0.018,
+      0.26
+     ],
+     [
+      0.0125,
+      0.285
+     ],
+     [
+      0.0125,
+      0.33
+     ],
+     [
+      0.014,
+      0.335
+     ],
+     [
+      0,
+      0.335
+     ]
+    ],
+    "position": [
+     -1.053,
+     2.08,
+     1.75
+    ],
+    "material": "glass",
+    "color": "#1C2620",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0342,
+    "height": 0.075,
+    "position": [
+     -1.053,
+     2.08,
+     1.82
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.033,
+      0
+     ],
+     [
+      0.034,
+      0.004
+     ],
+     [
+      0.034,
+      0.22
+     ],
+     [
+      0.018,
+      0.26
+     ],
+     [
+      0.0125,
+      0.285
+     ],
+     [
+      0.0125,
+      0.33
+     ],
+     [
+      0.014,
+      0.335
+     ],
+     [
+      0,
+      0.335
+     ]
+    ],
+    "position": [
+     -0.947,
+     2.08,
+     1.75
+    ],
+    "material": "glass",
+    "color": "#5A3510",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0342,
+    "height": 0.075,
+    "position": [
+     -0.947,
+     2.08,
+     1.82
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.033,
+      0
+     ],
+     [
+      0.034,
+      0.004
+     ],
+     [
+      0.034,
+      0.22
+     ],
+     [
+      0.018,
+      0.26
+     ],
+     [
+      0.0125,
+      0.285
+     ],
+     [
+      0.0125,
+      0.33
+     ],
+     [
+      0.014,
+      0.335
+     ],
+     [
+      0,
+      0.335
+     ]
+    ],
+    "position": [
+     -0.842,
+     2.08,
+     1.75
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0342,
+    "height": 0.075,
+    "position": [
+     -0.842,
+     2.08,
+     1.82
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.033,
+      0
+     ],
+     [
+      0.034,
+      0.004
+     ],
+     [
+      0.034,
+      0.22
+     ],
+     [
+      0.018,
+      0.26
+     ],
+     [
+      0.0125,
+      0.285
+     ],
+     [
+      0.0125,
+      0.33
+     ],
+     [
+      0.014,
+      0.335
+     ],
+     [
+      0,
+      0.335
+     ]
+    ],
+    "position": [
+     -0.737,
+     2.08,
+     1.75
+    ],
+    "material": "glass",
+    "color": "#1C2620",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0342,
+    "height": 0.075,
+    "position": [
+     -0.737,
+     2.08,
+     1.82
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.036,
+      0
+     ],
+     [
+      0.037,
+      0.004
+     ],
+     [
+      0.037,
+      0.19
+     ],
+     [
+      0.03,
+      0.225
+     ],
+     [
+      0.016,
+      0.25
+     ],
+     [
+      0.0135,
+      0.262
+     ],
+     [
+      0.0135,
+      0.3
+     ],
+     [
+      0.0155,
+      0.305
+     ],
+     [
+      0,
+      0.305
+     ]
+    ],
+    "position": [
+     0.737,
+     2.08,
+     1.37
+    ],
+    "material": "glass",
+    "color": "#5A3510",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0372,
+    "height": 0.075,
+    "position": [
+     0.737,
+     2.08,
+     1.4400000000000002
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.036,
+      0
+     ],
+     [
+      0.037,
+      0.004
+     ],
+     [
+      0.037,
+      0.19
+     ],
+     [
+      0.03,
+      0.225
+     ],
+     [
+      0.016,
+      0.25
+     ],
+     [
+      0.0135,
+      0.262
+     ],
+     [
+      0.0135,
+      0.3
+     ],
+     [
+      0.0155,
+      0.305
+     ],
+     [
+      0,
+      0.305
+     ]
+    ],
+    "position": [
+     0.842,
+     2.08,
+     1.37
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0372,
+    "height": 0.075,
+    "position": [
+     0.842,
+     2.08,
+     1.4400000000000002
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.036,
+      0
+     ],
+     [
+      0.037,
+      0.004
+     ],
+     [
+      0.037,
+      0.19
+     ],
+     [
+      0.03,
+      0.225
+     ],
+     [
+      0.016,
+      0.25
+     ],
+     [
+      0.0135,
+      0.262
+     ],
+     [
+      0.0135,
+      0.3
+     ],
+     [
+      0.0155,
+      0.305
+     ],
+     [
+      0,
+      0.305
+     ]
+    ],
+    "position": [
+     0.947,
+     2.08,
+     1.37
+    ],
+    "material": "glass",
+    "color": "#1C2620",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0372,
+    "height": 0.075,
+    "position": [
+     0.947,
+     2.08,
+     1.4400000000000002
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.036,
+      0
+     ],
+     [
+      0.037,
+      0.004
+     ],
+     [
+      0.037,
+      0.19
+     ],
+     [
+      0.03,
+      0.225
+     ],
+     [
+      0.016,
+      0.25
+     ],
+     [
+      0.0135,
+      0.262
+     ],
+     [
+      0.0135,
+      0.3
+     ],
+     [
+      0.0155,
+      0.305
+     ],
+     [
+      0,
+      0.305
+     ]
+    ],
+    "position": [
+     1.053,
+     2.08,
+     1.37
+    ],
+    "material": "glass",
+    "color": "#5A3510",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0372,
+    "height": 0.075,
+    "position": [
+     1.053,
+     2.08,
+     1.4400000000000002
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.036,
+      0
+     ],
+     [
+      0.037,
+      0.004
+     ],
+     [
+      0.037,
+      0.19
+     ],
+     [
+      0.03,
+      0.225
+     ],
+     [
+      0.016,
+      0.25
+     ],
+     [
+      0.0135,
+      0.262
+     ],
+     [
+      0.0135,
+      0.3
+     ],
+     [
+      0.0155,
+      0.305
+     ],
+     [
+      0,
+      0.305
+     ]
+    ],
+    "position": [
+     1.158,
+     2.08,
+     1.37
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0372,
+    "height": 0.075,
+    "position": [
+     1.158,
+     2.08,
+     1.4400000000000002
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.036,
+      0
+     ],
+     [
+      0.037,
+      0.004
+     ],
+     [
+      0.037,
+      0.19
+     ],
+     [
+      0.03,
+      0.225
+     ],
+     [
+      0.016,
+      0.25
+     ],
+     [
+      0.0135,
+      0.262
+     ],
+     [
+      0.0135,
+      0.3
+     ],
+     [
+      0.0155,
+      0.305
+     ],
+     [
+      0,
+      0.305
+     ]
+    ],
+    "position": [
+     1.263,
+     2.08,
+     1.37
+    ],
+    "material": "glass",
+    "color": "#1C2620",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0372,
+    "height": 0.075,
+    "position": [
+     1.263,
+     2.08,
+     1.4400000000000002
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.033,
+      0
+     ],
+     [
+      0.034,
+      0.004
+     ],
+     [
+      0.034,
+      0.22
+     ],
+     [
+      0.018,
+      0.26
+     ],
+     [
+      0.0125,
+      0.285
+     ],
+     [
+      0.0125,
+      0.33
+     ],
+     [
+      0.014,
+      0.335
+     ],
+     [
+      0,
+      0.335
+     ]
+    ],
+    "position": [
+     0.737,
+     2.08,
+     1.75
+    ],
+    "material": "glass",
+    "color": "#5A3510",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0342,
+    "height": 0.075,
+    "position": [
+     0.737,
+     2.08,
+     1.82
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.033,
+      0
+     ],
+     [
+      0.034,
+      0.004
+     ],
+     [
+      0.034,
+      0.22
+     ],
+     [
+      0.018,
+      0.26
+     ],
+     [
+      0.0125,
+      0.285
+     ],
+     [
+      0.0125,
+      0.33
+     ],
+     [
+      0.014,
+      0.335
+     ],
+     [
+      0,
+      0.335
+     ]
+    ],
+    "position": [
+     0.842,
+     2.08,
+     1.75
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0342,
+    "height": 0.075,
+    "position": [
+     0.842,
+     2.08,
+     1.82
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.033,
+      0
+     ],
+     [
+      0.034,
+      0.004
+     ],
+     [
+      0.034,
+      0.22
+     ],
+     [
+      0.018,
+      0.26
+     ],
+     [
+      0.0125,
+      0.285
+     ],
+     [
+      0.0125,
+      0.33
+     ],
+     [
+      0.014,
+      0.335
+     ],
+     [
+      0,
+      0.335
+     ]
+    ],
+    "position": [
+     0.947,
+     2.08,
+     1.75
+    ],
+    "material": "glass",
+    "color": "#1C2620",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0342,
+    "height": 0.075,
+    "position": [
+     0.947,
+     2.08,
+     1.82
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.033,
+      0
+     ],
+     [
+      0.034,
+      0.004
+     ],
+     [
+      0.034,
+      0.22
+     ],
+     [
+      0.018,
+      0.26
+     ],
+     [
+      0.0125,
+      0.285
+     ],
+     [
+      0.0125,
+      0.33
+     ],
+     [
+      0.014,
+      0.335
+     ],
+     [
+      0,
+      0.335
+     ]
+    ],
+    "position": [
+     1.053,
+     2.08,
+     1.75
+    ],
+    "material": "glass",
+    "color": "#5A3510",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0342,
+    "height": 0.075,
+    "position": [
+     1.053,
+     2.08,
+     1.82
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.033,
+      0
+     ],
+     [
+      0.034,
+      0.004
+     ],
+     [
+      0.034,
+      0.22
+     ],
+     [
+      0.018,
+      0.26
+     ],
+     [
+      0.0125,
+      0.285
+     ],
+     [
+      0.0125,
+      0.33
+     ],
+     [
+      0.014,
+      0.335
+     ],
+     [
+      0,
+      0.335
+     ]
+    ],
+    "position": [
+     1.158,
+     2.08,
+     1.75
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0342,
+    "height": 0.075,
+    "position": [
+     1.158,
+     2.08,
+     1.82
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.033,
+      0
+     ],
+     [
+      0.034,
+      0.004
+     ],
+     [
+      0.034,
+      0.22
+     ],
+     [
+      0.018,
+      0.26
+     ],
+     [
+      0.0125,
+      0.285
+     ],
+     [
+      0.0125,
+      0.33
+     ],
+     [
+      0.014,
+      0.335
+     ],
+     [
+      0,
+      0.335
+     ]
+    ],
+    "position": [
+     1.263,
+     2.08,
+     1.75
+    ],
+    "material": "glass",
+    "color": "#1C2620",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0342,
+    "height": 0.075,
+    "position": [
+     1.263,
+     2.08,
+     1.82
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.036,
+      0
+     ],
+     [
+      0.037,
+      0.004
+     ],
+     [
+      0.037,
+      0.19
+     ],
+     [
+      0.03,
+      0.225
+     ],
+     [
+      0.016,
+      0.25
+     ],
+     [
+      0.0135,
+      0.262
+     ],
+     [
+      0.0135,
+      0.3
+     ],
+     [
+      0.0155,
+      0.305
+     ],
+     [
+      0,
+      0.305
+     ]
+    ],
+    "position": [
+     1.403,
+     2.08,
+     1.37
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0372,
+    "height": 0.075,
+    "position": [
+     1.403,
+     2.08,
+     1.4400000000000002
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.036,
+      0
+     ],
+     [
+      0.037,
+      0.004
+     ],
+     [
+      0.037,
+      0.19
+     ],
+     [
+      0.03,
+      0.225
+     ],
+     [
+      0.016,
+      0.25
+     ],
+     [
+      0.0135,
+      0.262
+     ],
+     [
+      0.0135,
+      0.3
+     ],
+     [
+      0.0155,
+      0.305
+     ],
+     [
+      0,
+      0.305
+     ]
+    ],
+    "position": [
+     1.509,
+     2.08,
+     1.37
+    ],
+    "material": "glass",
+    "color": "#1C2620",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0372,
+    "height": 0.075,
+    "position": [
+     1.509,
+     2.08,
+     1.4400000000000002
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.036,
+      0
+     ],
+     [
+      0.037,
+      0.004
+     ],
+     [
+      0.037,
+      0.19
+     ],
+     [
+      0.03,
+      0.225
+     ],
+     [
+      0.016,
+      0.25
+     ],
+     [
+      0.0135,
+      0.262
+     ],
+     [
+      0.0135,
+      0.3
+     ],
+     [
+      0.0155,
+      0.305
+     ],
+     [
+      0,
+      0.305
+     ]
+    ],
+    "position": [
+     1.614,
+     2.08,
+     1.37
+    ],
+    "material": "glass",
+    "color": "#5A3510",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0372,
+    "height": 0.075,
+    "position": [
+     1.614,
+     2.08,
+     1.4400000000000002
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.036,
+      0
+     ],
+     [
+      0.037,
+      0.004
+     ],
+     [
+      0.037,
+      0.19
+     ],
+     [
+      0.03,
+      0.225
+     ],
+     [
+      0.016,
+      0.25
+     ],
+     [
+      0.0135,
+      0.262
+     ],
+     [
+      0.0135,
+      0.3
+     ],
+     [
+      0.0155,
+      0.305
+     ],
+     [
+      0,
+      0.305
+     ]
+    ],
+    "position": [
+     1.719,
+     2.08,
+     1.37
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0372,
+    "height": 0.075,
+    "position": [
+     1.719,
+     2.08,
+     1.4400000000000002
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.036,
+      0
+     ],
+     [
+      0.037,
+      0.004
+     ],
+     [
+      0.037,
+      0.19
+     ],
+     [
+      0.03,
+      0.225
+     ],
+     [
+      0.016,
+      0.25
+     ],
+     [
+      0.0135,
+      0.262
+     ],
+     [
+      0.0135,
+      0.3
+     ],
+     [
+      0.0155,
+      0.305
+     ],
+     [
+      0,
+      0.305
+     ]
+    ],
+    "position": [
+     1.825,
+     2.08,
+     1.37
+    ],
+    "material": "glass",
+    "color": "#1C2620",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0372,
+    "height": 0.075,
+    "position": [
+     1.825,
+     2.08,
+     1.4400000000000002
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.036,
+      0
+     ],
+     [
+      0.037,
+      0.004
+     ],
+     [
+      0.037,
+      0.19
+     ],
+     [
+      0.03,
+      0.225
+     ],
+     [
+      0.016,
+      0.25
+     ],
+     [
+      0.0135,
+      0.262
+     ],
+     [
+      0.0135,
+      0.3
+     ],
+     [
+      0.0155,
+      0.305
+     ],
+     [
+      0,
+      0.305
+     ]
+    ],
+    "position": [
+     1.93,
+     2.08,
+     1.37
+    ],
+    "material": "glass",
+    "color": "#5A3510",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0372,
+    "height": 0.075,
+    "position": [
+     1.93,
+     2.08,
+     1.4400000000000002
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.033,
+      0
+     ],
+     [
+      0.034,
+      0.004
+     ],
+     [
+      0.034,
+      0.22
+     ],
+     [
+      0.018,
+      0.26
+     ],
+     [
+      0.0125,
+      0.285
+     ],
+     [
+      0.0125,
+      0.33
+     ],
+     [
+      0.014,
+      0.335
+     ],
+     [
+      0,
+      0.335
+     ]
+    ],
+    "position": [
+     1.403,
+     2.08,
+     1.75
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0342,
+    "height": 0.075,
+    "position": [
+     1.403,
+     2.08,
+     1.82
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.033,
+      0
+     ],
+     [
+      0.034,
+      0.004
+     ],
+     [
+      0.034,
+      0.22
+     ],
+     [
+      0.018,
+      0.26
+     ],
+     [
+      0.0125,
+      0.285
+     ],
+     [
+      0.0125,
+      0.33
+     ],
+     [
+      0.014,
+      0.335
+     ],
+     [
+      0,
+      0.335
+     ]
+    ],
+    "position": [
+     1.509,
+     2.08,
+     1.75
+    ],
+    "material": "glass",
+    "color": "#1C2620",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0342,
+    "height": 0.075,
+    "position": [
+     1.509,
+     2.08,
+     1.82
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.033,
+      0
+     ],
+     [
+      0.034,
+      0.004
+     ],
+     [
+      0.034,
+      0.22
+     ],
+     [
+      0.018,
+      0.26
+     ],
+     [
+      0.0125,
+      0.285
+     ],
+     [
+      0.0125,
+      0.33
+     ],
+     [
+      0.014,
+      0.335
+     ],
+     [
+      0,
+      0.335
+     ]
+    ],
+    "position": [
+     1.614,
+     2.08,
+     1.75
+    ],
+    "material": "glass",
+    "color": "#5A3510",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0342,
+    "height": 0.075,
+    "position": [
+     1.614,
+     2.08,
+     1.82
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.033,
+      0
+     ],
+     [
+      0.034,
+      0.004
+     ],
+     [
+      0.034,
+      0.22
+     ],
+     [
+      0.018,
+      0.26
+     ],
+     [
+      0.0125,
+      0.285
+     ],
+     [
+      0.0125,
+      0.33
+     ],
+     [
+      0.014,
+      0.335
+     ],
+     [
+      0,
+      0.335
+     ]
+    ],
+    "position": [
+     1.719,
+     2.08,
+     1.75
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0342,
+    "height": 0.075,
+    "position": [
+     1.719,
+     2.08,
+     1.82
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.033,
+      0
+     ],
+     [
+      0.034,
+      0.004
+     ],
+     [
+      0.034,
+      0.22
+     ],
+     [
+      0.018,
+      0.26
+     ],
+     [
+      0.0125,
+      0.285
+     ],
+     [
+      0.0125,
+      0.33
+     ],
+     [
+      0.014,
+      0.335
+     ],
+     [
+      0,
+      0.335
+     ]
+    ],
+    "position": [
+     1.825,
+     2.08,
+     1.75
+    ],
+    "material": "glass",
+    "color": "#1C2620",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0342,
+    "height": 0.075,
+    "position": [
+     1.825,
+     2.08,
+     1.82
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.033,
+      0
+     ],
+     [
+      0.034,
+      0.004
+     ],
+     [
+      0.034,
+      0.22
+     ],
+     [
+      0.018,
+      0.26
+     ],
+     [
+      0.0125,
+      0.285
+     ],
+     [
+      0.0125,
+      0.33
+     ],
+     [
+      0.014,
+      0.335
+     ],
+     [
+      0,
+      0.335
+     ]
+    ],
+    "position": [
+     1.93,
+     2.08,
+     1.75
+    ],
+    "material": "glass",
+    "color": "#5A3510",
+    "segments": 32
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0342,
+    "height": 0.075,
+    "position": [
+     1.93,
+     2.08,
+     1.82
+    ],
+    "material": "paper",
+    "color": "#E6DCC6",
+    "roughness": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     -0.6167,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#6E5A44"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     -0.6,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#262422"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     -0.5833,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#7C6B55"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     -0.5667,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#4A3A2C"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     -0.55,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#5C4C3E"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     -0.5333,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#1E2124"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     -0.5167,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#2B2A28"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     -0.5,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#3B3328"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     -0.4833,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#6E5A44"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     -0.4667,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#262422"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     -0.45,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#7C6B55"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     -0.4333,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#4A3A2C"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     -0.4167,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#5C4C3E"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     -0.4,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#1E2124"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     -0.3833,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#2B2A28"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     -0.3667,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#3B3328"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     -0.35,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#6E5A44"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     -0.3333,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#262422"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     -0.3167,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#7C6B55"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     -0.3,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#4A3A2C"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     -0.2833,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#5C4C3E"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     -0.2667,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#1E2124"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     -0.25,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#2B2A28"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     -0.2333,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#3B3328"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     -0.2167,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#6E5A44"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     -0.2,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#262422"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     -0.1833,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#7C6B55"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     -0.1667,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#4A3A2C"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     -0.15,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#5C4C3E"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     -0.1333,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#1E2124"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     -0.1167,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#2B2A28"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     -0.1,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#3B3328"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     -0.0833,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#6E5A44"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     -0.0667,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#262422"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     0.05,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#1E2124"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     0.0667,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#2B2A28"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     0.0833,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#3B3328"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     0.1,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#6E5A44"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     0.1167,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#262422"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     0.1333,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#7C6B55"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     0.15,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#4A3A2C"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     0.1667,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#5C4C3E"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     0.1833,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#1E2124"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     0.2,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#2B2A28"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     0.2167,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#3B3328"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     0.2333,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#6E5A44"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     0.25,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#262422"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     0.2667,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#7C6B55"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     0.2833,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#4A3A2C"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     0.3,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#5C4C3E"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     0.3167,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#1E2124"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     0.3333,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#2B2A28"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     0.35,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#3B3328"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     0.3667,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#6E5A44"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     0.3833,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#262422"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     0.4,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#7C6B55"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     0.4167,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#4A3A2C"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     0.4333,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#5C4C3E"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     0.45,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#1E2124"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     0.4667,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#2B2A28"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     0.4833,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#3B3328"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     0.5,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#6E5A44"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     0.5167,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#262422"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     0.5333,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#7C6B55"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     0.55,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#4A3A2C"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     0.5667,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#5C4C3E"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     0.5833,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#1E2124"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.006,
+     0.3,
+     0.31
+    ],
+    "position": [
+     0.6,
+     2.0450000000000004,
+     0.955
+    ],
+    "material": "card",
+    "color": "#2B2A28"
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.041,
+      0
+     ],
+     [
+      0.042,
+      0.004
+     ],
+     [
+      0.043,
+      0.092
+     ],
+     [
+      0.0405,
+      0.092
+     ],
+     [
+      0.0395,
+      0.014
+     ],
+     [
+      0,
+      0.014
+     ]
+    ],
+    "position": [
+     -0.577,
+     2.0700000000000003,
+     1.355
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 48
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.041,
+      0
+     ],
+     [
+      0.042,
+      0.004
+     ],
+     [
+      0.043,
+      0.092
+     ],
+     [
+      0.0405,
+      0.092
+     ],
+     [
+      0.0395,
+      0.014
+     ],
+     [
+      0,
+      0.014
+     ]
+    ],
+    "position": [
+     -0.577,
+     2.0700000000000003,
+     1.435
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 48
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.038,
+      0
+     ],
+     [
+      0.039,
+      0.004
+     ],
+     [
+      0.006,
+      0.012
+     ],
+     [
+      0.0045,
+      0.1
+     ],
+     [
+      0.03,
+      0.112
+     ],
+     [
+      0.052,
+      0.128
+     ],
+     [
+      0.055,
+      0.136
+     ],
+     [
+      0.0525,
+      0.136
+     ],
+     [
+      0.049,
+      0.129
+     ],
+     [
+      0.028,
+      0.116
+     ],
+     [
+      0,
+      0.112
+     ]
+    ],
+    "position": [
+     -0.577,
+     2.0700000000000003,
+     1.735
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 48
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.041,
+      0
+     ],
+     [
+      0.042,
+      0.004
+     ],
+     [
+      0.043,
+      0.092
+     ],
+     [
+      0.0405,
+      0.092
+     ],
+     [
+      0.0395,
+      0.014
+     ],
+     [
+      0,
+      0.014
+     ]
+    ],
+    "position": [
+     -0.455,
+     2.0700000000000003,
+     1.355
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 48
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.041,
+      0
+     ],
+     [
+      0.042,
+      0.004
+     ],
+     [
+      0.043,
+      0.092
+     ],
+     [
+      0.0405,
+      0.092
+     ],
+     [
+      0.0395,
+      0.014
+     ],
+     [
+      0,
+      0.014
+     ]
+    ],
+    "position": [
+     -0.455,
+     2.0700000000000003,
+     1.435
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 48
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.038,
+      0
+     ],
+     [
+      0.039,
+      0.004
+     ],
+     [
+      0.006,
+      0.012
+     ],
+     [
+      0.0045,
+      0.1
+     ],
+     [
+      0.03,
+      0.112
+     ],
+     [
+      0.052,
+      0.128
+     ],
+     [
+      0.055,
+      0.136
+     ],
+     [
+      0.0525,
+      0.136
+     ],
+     [
+      0.049,
+      0.129
+     ],
+     [
+      0.028,
+      0.116
+     ],
+     [
+      0,
+      0.112
+     ]
+    ],
+    "position": [
+     -0.455,
+     2.0700000000000003,
+     1.735
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 48
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.041,
+      0
+     ],
+     [
+      0.042,
+      0.004
+     ],
+     [
+      0.043,
+      0.092
+     ],
+     [
+      0.0405,
+      0.092
+     ],
+     [
+      0.0395,
+      0.014
+     ],
+     [
+      0,
+      0.014
+     ]
+    ],
+    "position": [
+     -0.333,
+     2.0700000000000003,
+     1.355
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 48
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.041,
+      0
+     ],
+     [
+      0.042,
+      0.004
+     ],
+     [
+      0.043,
+      0.092
+     ],
+     [
+      0.0405,
+      0.092
+     ],
+     [
+      0.0395,
+      0.014
+     ],
+     [
+      0,
+      0.014
+     ]
+    ],
+    "position": [
+     -0.333,
+     2.0700000000000003,
+     1.435
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 48
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.038,
+      0
+     ],
+     [
+      0.039,
+      0.004
+     ],
+     [
+      0.006,
+      0.012
+     ],
+     [
+      0.0045,
+      0.1
+     ],
+     [
+      0.03,
+      0.112
+     ],
+     [
+      0.052,
+      0.128
+     ],
+     [
+      0.055,
+      0.136
+     ],
+     [
+      0.0525,
+      0.136
+     ],
+     [
+      0.049,
+      0.129
+     ],
+     [
+      0.028,
+      0.116
+     ],
+     [
+      0,
+      0.112
+     ]
+    ],
+    "position": [
+     -0.333,
+     2.0700000000000003,
+     1.735
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 48
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.041,
+      0
+     ],
+     [
+      0.042,
+      0.004
+     ],
+     [
+      0.043,
+      0.092
+     ],
+     [
+      0.0405,
+      0.092
+     ],
+     [
+      0.0395,
+      0.014
+     ],
+     [
+      0,
+      0.014
+     ]
+    ],
+    "position": [
+     -0.212,
+     2.0700000000000003,
+     1.355
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 48
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.041,
+      0
+     ],
+     [
+      0.042,
+      0.004
+     ],
+     [
+      0.043,
+      0.092
+     ],
+     [
+      0.0405,
+      0.092
+     ],
+     [
+      0.0395,
+      0.014
+     ],
+     [
+      0,
+      0.014
+     ]
+    ],
+    "position": [
+     -0.212,
+     2.0700000000000003,
+     1.435
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 48
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.038,
+      0
+     ],
+     [
+      0.039,
+      0.004
+     ],
+     [
+      0.006,
+      0.012
+     ],
+     [
+      0.0045,
+      0.1
+     ],
+     [
+      0.03,
+      0.112
+     ],
+     [
+      0.052,
+      0.128
+     ],
+     [
+      0.055,
+      0.136
+     ],
+     [
+      0.0525,
+      0.136
+     ],
+     [
+      0.049,
+      0.129
+     ],
+     [
+      0.028,
+      0.116
+     ],
+     [
+      0,
+      0.112
+     ]
+    ],
+    "position": [
+     -0.212,
+     2.0700000000000003,
+     1.735
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 48
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.041,
+      0
+     ],
+     [
+      0.042,
+      0.004
+     ],
+     [
+      0.043,
+      0.092
+     ],
+     [
+      0.0405,
+      0.092
+     ],
+     [
+      0.0395,
+      0.014
+     ],
+     [
+      0,
+      0.014
+     ]
+    ],
+    "position": [
+     -0.09,
+     2.0700000000000003,
+     1.355
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 48
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.041,
+      0
+     ],
+     [
+      0.042,
+      0.004
+     ],
+     [
+      0.043,
+      0.092
+     ],
+     [
+      0.0405,
+      0.092
+     ],
+     [
+      0.0395,
+      0.014
+     ],
+     [
+      0,
+      0.014
+     ]
+    ],
+    "position": [
+     -0.09,
+     2.0700000000000003,
+     1.435
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 48
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.038,
+      0
+     ],
+     [
+      0.039,
+      0.004
+     ],
+     [
+      0.006,
+      0.012
+     ],
+     [
+      0.0045,
+      0.1
+     ],
+     [
+      0.03,
+      0.112
+     ],
+     [
+      0.052,
+      0.128
+     ],
+     [
+      0.055,
+      0.136
+     ],
+     [
+      0.0525,
+      0.136
+     ],
+     [
+      0.049,
+      0.129
+     ],
+     [
+      0.028,
+      0.116
+     ],
+     [
+      0,
+      0.112
+     ]
+    ],
+    "position": [
+     -0.09,
+     2.0700000000000003,
+     1.735
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 48
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.041,
+      0
+     ],
+     [
+      0.042,
+      0.004
+     ],
+     [
+      0.043,
+      0.092
+     ],
+     [
+      0.0405,
+      0.092
+     ],
+     [
+      0.0395,
+      0.014
+     ],
+     [
+      0,
+      0.014
+     ]
+    ],
+    "position": [
+     0.09,
+     2.0700000000000003,
+     1.355
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 48
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.041,
+      0
+     ],
+     [
+      0.042,
+      0.004
+     ],
+     [
+      0.043,
+      0.092
+     ],
+     [
+      0.0405,
+      0.092
+     ],
+     [
+      0.0395,
+      0.014
+     ],
+     [
+      0,
+      0.014
+     ]
+    ],
+    "position": [
+     0.09,
+     2.0700000000000003,
+     1.435
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 48
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.038,
+      0
+     ],
+     [
+      0.039,
+      0.004
+     ],
+     [
+      0.006,
+      0.012
+     ],
+     [
+      0.0045,
+      0.1
+     ],
+     [
+      0.03,
+      0.112
+     ],
+     [
+      0.052,
+      0.128
+     ],
+     [
+      0.055,
+      0.136
+     ],
+     [
+      0.0525,
+      0.136
+     ],
+     [
+      0.049,
+      0.129
+     ],
+     [
+      0.028,
+      0.116
+     ],
+     [
+      0,
+      0.112
+     ]
+    ],
+    "position": [
+     0.09,
+     2.0700000000000003,
+     1.735
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 48
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.041,
+      0
+     ],
+     [
+      0.042,
+      0.004
+     ],
+     [
+      0.043,
+      0.092
+     ],
+     [
+      0.0405,
+      0.092
+     ],
+     [
+      0.0395,
+      0.014
+     ],
+     [
+      0,
+      0.014
+     ]
+    ],
+    "position": [
+     0.212,
+     2.0700000000000003,
+     1.355
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 48
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.041,
+      0
+     ],
+     [
+      0.042,
+      0.004
+     ],
+     [
+      0.043,
+      0.092
+     ],
+     [
+      0.0405,
+      0.092
+     ],
+     [
+      0.0395,
+      0.014
+     ],
+     [
+      0,
+      0.014
+     ]
+    ],
+    "position": [
+     0.212,
+     2.0700000000000003,
+     1.435
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 48
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.038,
+      0
+     ],
+     [
+      0.039,
+      0.004
+     ],
+     [
+      0.006,
+      0.012
+     ],
+     [
+      0.0045,
+      0.1
+     ],
+     [
+      0.03,
+      0.112
+     ],
+     [
+      0.052,
+      0.128
+     ],
+     [
+      0.055,
+      0.136
+     ],
+     [
+      0.0525,
+      0.136
+     ],
+     [
+      0.049,
+      0.129
+     ],
+     [
+      0.028,
+      0.116
+     ],
+     [
+      0,
+      0.112
+     ]
+    ],
+    "position": [
+     0.212,
+     2.0700000000000003,
+     1.735
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 48
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.041,
+      0
+     ],
+     [
+      0.042,
+      0.004
+     ],
+     [
+      0.043,
+      0.092
+     ],
+     [
+      0.0405,
+      0.092
+     ],
+     [
+      0.0395,
+      0.014
+     ],
+     [
+      0,
+      0.014
+     ]
+    ],
+    "position": [
+     0.333,
+     2.0700000000000003,
+     1.355
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 48
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.041,
+      0
+     ],
+     [
+      0.042,
+      0.004
+     ],
+     [
+      0.043,
+      0.092
+     ],
+     [
+      0.0405,
+      0.092
+     ],
+     [
+      0.0395,
+      0.014
+     ],
+     [
+      0,
+      0.014
+     ]
+    ],
+    "position": [
+     0.333,
+     2.0700000000000003,
+     1.435
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 48
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.038,
+      0
+     ],
+     [
+      0.039,
+      0.004
+     ],
+     [
+      0.006,
+      0.012
+     ],
+     [
+      0.0045,
+      0.1
+     ],
+     [
+      0.03,
+      0.112
+     ],
+     [
+      0.052,
+      0.128
+     ],
+     [
+      0.055,
+      0.136
+     ],
+     [
+      0.0525,
+      0.136
+     ],
+     [
+      0.049,
+      0.129
+     ],
+     [
+      0.028,
+      0.116
+     ],
+     [
+      0,
+      0.112
+     ]
+    ],
+    "position": [
+     0.333,
+     2.0700000000000003,
+     1.735
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 48
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.041,
+      0
+     ],
+     [
+      0.042,
+      0.004
+     ],
+     [
+      0.043,
+      0.092
+     ],
+     [
+      0.0405,
+      0.092
+     ],
+     [
+      0.0395,
+      0.014
+     ],
+     [
+      0,
+      0.014
+     ]
+    ],
+    "position": [
+     0.455,
+     2.0700000000000003,
+     1.355
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 48
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.041,
+      0
+     ],
+     [
+      0.042,
+      0.004
+     ],
+     [
+      0.043,
+      0.092
+     ],
+     [
+      0.0405,
+      0.092
+     ],
+     [
+      0.0395,
+      0.014
+     ],
+     [
+      0,
+      0.014
+     ]
+    ],
+    "position": [
+     0.455,
+     2.0700000000000003,
+     1.435
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 48
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.038,
+      0
+     ],
+     [
+      0.039,
+      0.004
+     ],
+     [
+      0.006,
+      0.012
+     ],
+     [
+      0.0045,
+      0.1
+     ],
+     [
+      0.03,
+      0.112
+     ],
+     [
+      0.052,
+      0.128
+     ],
+     [
+      0.055,
+      0.136
+     ],
+     [
+      0.0525,
+      0.136
+     ],
+     [
+      0.049,
+      0.129
+     ],
+     [
+      0.028,
+      0.116
+     ],
+     [
+      0,
+      0.112
+     ]
+    ],
+    "position": [
+     0.455,
+     2.0700000000000003,
+     1.735
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 48
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.041,
+      0
+     ],
+     [
+      0.042,
+      0.004
+     ],
+     [
+      0.043,
+      0.092
+     ],
+     [
+      0.0405,
+      0.092
+     ],
+     [
+      0.0395,
+      0.014
+     ],
+     [
+      0,
+      0.014
+     ]
+    ],
+    "position": [
+     0.577,
+     2.0700000000000003,
+     1.355
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 48
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.041,
+      0
+     ],
+     [
+      0.042,
+      0.004
+     ],
+     [
+      0.043,
+      0.092
+     ],
+     [
+      0.0405,
+      0.092
+     ],
+     [
+      0.0395,
+      0.014
+     ],
+     [
+      0,
+      0.014
+     ]
+    ],
+    "position": [
+     0.577,
+     2.0700000000000003,
+     1.435
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 48
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.038,
+      0
+     ],
+     [
+      0.039,
+      0.004
+     ],
+     [
+      0.006,
+      0.012
+     ],
+     [
+      0.0045,
+      0.1
+     ],
+     [
+      0.03,
+      0.112
+     ],
+     [
+      0.052,
+      0.128
+     ],
+     [
+      0.055,
+      0.136
+     ],
+     [
+      0.0525,
+      0.136
+     ],
+     [
+      0.049,
+      0.129
+     ],
+     [
+      0.028,
+      0.116
+     ],
+     [
+      0,
+      0.112
+     ]
+    ],
+    "position": [
+     0.577,
+     2.0700000000000003,
+     1.735
+    ],
+    "material": "glass",
+    "color": "#F4F6F5",
+    "segments": 48
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     3.9,
+     0.62,
+     1.01
+    ],
+    "position": [
+     0.0,
+     0.31,
+     0.0
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -1.9339,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -1.9017,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -1.8694,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -1.8372,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -1.805,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -1.7727,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -1.7405,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -1.7083,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -1.676,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -1.6438,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -1.6116,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -1.5793,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -1.5471,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -1.5149,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -1.4826,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -1.4504,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -1.4182,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -1.386,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -1.3537,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -1.3215,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -1.2893,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -1.257,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -1.2248,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -1.1926,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -1.1603,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -1.1281,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -1.0959,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -1.0636,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -1.0314,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -0.9992,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -0.9669,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -0.9347,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -0.9025,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -0.8702,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -0.838,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -0.8058,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -0.7736,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -0.7413,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -0.7091,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -0.6769,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -0.6446,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -0.6124,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -0.5802,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -0.5479,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -0.5157,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -0.4835,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -0.4512,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -0.419,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -0.3868,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -0.3545,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -0.3223,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -0.2901,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -0.2579,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -0.2256,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -0.1934,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -0.1612,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -0.1289,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -0.0967,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -0.0645,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     -0.0322,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     0.0,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     0.0322,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     0.0645,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     0.0967,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     0.1289,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     0.1612,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     0.1934,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     0.2256,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     0.2579,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     0.2901,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     0.3223,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     0.3545,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     0.3868,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     0.419,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     0.4512,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     0.4835,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     0.5157,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     0.5479,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     0.5802,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     0.6124,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     0.6446,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     0.6769,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     0.7091,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     0.7413,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     0.7736,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     0.8058,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     0.838,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     0.8702,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     0.9025,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     0.9347,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     0.9669,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     0.9992,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     1.0314,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     1.0636,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     1.0959,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     1.1281,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     1.1603,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     1.1926,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     1.2248,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     1.257,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     1.2893,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     1.3215,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     1.3537,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     1.386,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     1.4182,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     1.4504,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     1.4826,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     1.5149,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     1.5471,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     1.5793,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     1.6116,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     1.6438,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     1.676,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     1.7083,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     1.7405,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     1.7727,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     1.805,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     1.8372,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     1.8694,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     1.9017,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.0145,
+    "height": 0.91,
+    "position": [
+     1.9339,
+     -0.002,
+     0.1
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     3.94,
+     0.02,
+     0.1
+    ],
+    "position": [
+     0.0,
+     -0.01,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#0E0E0E",
+    "roughness": 0.6
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     4.0,
+     0.7,
+     0.06
+    ],
+    "position": [
+     0.0,
+     0.29,
+     1.01
+    ],
+    "material": "pbr",
+    "texture": "concrete_floor_01",
+    "tex_res": "2k",
+    "tint": "#262627",
+    "tint_mix": 0.85,
+    "gain": 0.28,
+    "rough_mul": 0.32,
+    "ease": 0.022
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.025,
+    "height": 3.6999999999999997,
+    "position": [
+     -1.8499999999999999,
+     -0.2,
+     0.2
+    ],
+    "material": "clay",
+    "color": "#141415",
+    "roughness": 0.38,
+    "rotate": [
+     0.0,
+     90.0,
+     0.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.012,
+    "height": 0.2,
+    "position": [
+     -1.65,
+     -0.1,
+     0.2
+    ],
+    "material": "clay",
+    "color": "#141415",
+    "roughness": 0.38,
+    "rotate": [
+     90.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.012,
+    "height": 0.2,
+    "position": [
+     -0.75,
+     -0.1,
+     0.2
+    ],
+    "material": "clay",
+    "color": "#141415",
+    "roughness": 0.38,
+    "rotate": [
+     90.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.012,
+    "height": 0.2,
+    "position": [
+     0.75,
+     -0.1,
+     0.2
+    ],
+    "material": "clay",
+    "color": "#141415",
+    "roughness": 0.38,
+    "rotate": [
+     90.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.012,
+    "height": 0.2,
+    "position": [
+     1.65,
+     -0.1,
+     0.2
+    ],
+    "material": "clay",
+    "color": "#141415",
+    "roughness": 0.38,
+    "rotate": [
+     90.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.2,
+    "height": 0.075,
+    "position": [
+     -1.35,
+     -0.55,
+     0.74
+    ],
+    "material": "pbr",
+    "texture": "brown_leather",
+    "tex_res": "2k",
+    "gain": 0.9
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.34,
+     0.045,
+     0.17
+    ],
+    "position": [
+     -1.35,
+     -0.38,
+     0.8
+    ],
+    "material": "pbr",
+    "texture": "brown_leather",
+    "tex_res": "2k",
+    "gain": 0.9,
+    "ease": 0.018,
+    "rotate": [
+     -8.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.011,
+    "height": 0.74,
+    "position": [
+     -1.244,
+     -0.444,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#141415",
+    "roughness": 0.38
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.011,
+    "height": 0.74,
+    "position": [
+     -1.456,
+     -0.444,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#141415",
+    "roughness": 0.38
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.011,
+    "height": 0.74,
+    "position": [
+     -1.456,
+     -0.656,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#141415",
+    "roughness": 0.38
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.011,
+    "height": 0.74,
+    "position": [
+     -1.244,
+     -0.656,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#141415",
+    "roughness": 0.38
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0.155,
+      0.27
+     ],
+     [
+      0.165,
+      0.27
+     ],
+     [
+      0.165,
+      0.285
+     ],
+     [
+      0.155,
+      0.285
+     ],
+     [
+      0.155,
+      0.27
+     ]
+    ],
+    "position": [
+     -1.35,
+     -0.55,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#141415",
+    "segments": 48,
+    "roughness": 0.38
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.2,
+    "height": 0.075,
+    "position": [
+     -0.45,
+     -0.6,
+     0.74
+    ],
+    "material": "pbr",
+    "texture": "brown_leather",
+    "tex_res": "2k",
+    "gain": 0.9
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.34,
+     0.045,
+     0.17
+    ],
+    "position": [
+     -0.45,
+     -0.43,
+     0.8
+    ],
+    "material": "pbr",
+    "texture": "brown_leather",
+    "tex_res": "2k",
+    "gain": 0.9,
+    "ease": 0.018,
+    "rotate": [
+     -8.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.011,
+    "height": 0.74,
+    "position": [
+     -0.344,
+     -0.494,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#141415",
+    "roughness": 0.38
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.011,
+    "height": 0.74,
+    "position": [
+     -0.556,
+     -0.494,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#141415",
+    "roughness": 0.38
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.011,
+    "height": 0.74,
+    "position": [
+     -0.556,
+     -0.706,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#141415",
+    "roughness": 0.38
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.011,
+    "height": 0.74,
+    "position": [
+     -0.344,
+     -0.706,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#141415",
+    "roughness": 0.38
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0.155,
+      0.27
+     ],
+     [
+      0.165,
+      0.27
+     ],
+     [
+      0.165,
+      0.285
+     ],
+     [
+      0.155,
+      0.285
+     ],
+     [
+      0.155,
+      0.27
+     ]
+    ],
+    "position": [
+     -0.45,
+     -0.6,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#141415",
+    "segments": 48,
+    "roughness": 0.38
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.2,
+    "height": 0.075,
+    "position": [
+     0.45,
+     -0.55,
+     0.74
+    ],
+    "material": "pbr",
+    "texture": "brown_leather",
+    "tex_res": "2k",
+    "gain": 0.9
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.34,
+     0.045,
+     0.17
+    ],
+    "position": [
+     0.45,
+     -0.38,
+     0.8
+    ],
+    "material": "pbr",
+    "texture": "brown_leather",
+    "tex_res": "2k",
+    "gain": 0.9,
+    "ease": 0.018,
+    "rotate": [
+     -8.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.011,
+    "height": 0.74,
+    "position": [
+     0.556,
+     -0.444,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#141415",
+    "roughness": 0.38
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.011,
+    "height": 0.74,
+    "position": [
+     0.344,
+     -0.444,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#141415",
+    "roughness": 0.38
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.011,
+    "height": 0.74,
+    "position": [
+     0.344,
+     -0.656,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#141415",
+    "roughness": 0.38
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.011,
+    "height": 0.74,
+    "position": [
+     0.556,
+     -0.656,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#141415",
+    "roughness": 0.38
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0.155,
+      0.27
+     ],
+     [
+      0.165,
+      0.27
+     ],
+     [
+      0.165,
+      0.285
+     ],
+     [
+      0.155,
+      0.285
+     ],
+     [
+      0.155,
+      0.27
+     ]
+    ],
+    "position": [
+     0.45,
+     -0.55,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#141415",
+    "segments": 48,
+    "roughness": 0.38
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.2,
+    "height": 0.075,
+    "position": [
+     1.35,
+     -0.6,
+     0.74
+    ],
+    "material": "pbr",
+    "texture": "brown_leather",
+    "tex_res": "2k",
+    "gain": 0.9
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.34,
+     0.045,
+     0.17
+    ],
+    "position": [
+     1.35,
+     -0.43,
+     0.8
+    ],
+    "material": "pbr",
+    "texture": "brown_leather",
+    "tex_res": "2k",
+    "gain": 0.9,
+    "ease": 0.018,
+    "rotate": [
+     -8.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.011,
+    "height": 0.74,
+    "position": [
+     1.456,
+     -0.494,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#141415",
+    "roughness": 0.38
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.011,
+    "height": 0.74,
+    "position": [
+     1.244,
+     -0.494,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#141415",
+    "roughness": 0.38
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.011,
+    "height": 0.74,
+    "position": [
+     1.244,
+     -0.706,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#141415",
+    "roughness": 0.38
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.011,
+    "height": 0.74,
+    "position": [
+     1.456,
+     -0.706,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#141415",
+    "roughness": 0.38
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0.155,
+      0.27
+     ],
+     [
+      0.165,
+      0.27
+     ],
+     [
+      0.165,
+      0.285
+     ],
+     [
+      0.155,
+      0.285
+     ],
+     [
+      0.155,
+      0.27
+     ]
+    ],
+    "position": [
+     1.35,
+     -0.6,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#141415",
+    "segments": 48,
+    "roughness": 0.38
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.062,
+      0
+     ],
+     [
+      0.066,
+      0.012
+     ],
+     [
+      0.066,
+      0.135
+     ],
+     [
+      0.05,
+      0.175
+     ],
+     [
+      0.022,
+      0.2
+     ],
+     [
+      0.018,
+      0.235
+     ],
+     [
+      0.022,
+      0.245
+     ],
+     [
+      0.0175,
+      0.245
+     ],
+     [
+      0.014,
+      0.236
+     ],
+     [
+      0.018,
+      0.2
+     ],
+     [
+      0.046,
+      0.172
+     ],
+     [
+      0.0615,
+      0.134
+     ],
+     [
+      0.0615,
+      0.016
+     ],
+     [
+      0,
+      0.012
+     ]
+    ],
+    "position": [
+     0.55,
+     0.33,
+     1.07
+    ],
+    "material": "glass",
+    "color": "#F6F7F6",
+    "segments": 64
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.014,
+      0
+     ],
+     [
+      0.014,
+      0.02
+     ],
+     [
+      0.028,
+      0.045
+     ],
+     [
+      0.0,
+      0.075
+     ]
+    ],
+    "position": [
+     0.55,
+     0.33,
+     1.306
+    ],
+    "material": "glass",
+    "color": "#F6F7F6",
+    "segments": 48
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.041,
+      0
+     ],
+     [
+      0.042,
+      0.004
+     ],
+     [
+      0.043,
+      0.092
+     ],
+     [
+      0.0405,
+      0.092
+     ],
+     [
+      0.0395,
+      0.014
+     ],
+     [
+      0,
+      0.014
+     ]
+    ],
+    "position": [
+     0.71,
+     0.24,
+     1.07
+    ],
+    "material": "glass",
+    "color": "#F6F7F6",
+    "segments": 64
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.041,
+      0
+     ],
+     [
+      0.042,
+      0.004
+     ],
+     [
+      0.043,
+      0.092
+     ],
+     [
+      0.0405,
+      0.092
+     ],
+     [
+      0.0395,
+      0.014
+     ],
+     [
+      0,
+      0.014
+     ]
+    ],
+    "position": [
+     0.82,
+     0.31,
+     1.07
+    ],
+    "material": "glass",
+    "color": "#F6F7F6",
+    "segments": 64
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.2,
+     0.14,
+     0.012
+    ],
+    "position": [
+     0.77,
+     0.24,
+     1.07
+    ],
+    "material": "cotton",
+    "color": "#E8E2D6",
+    "ease": 0.004,
+    "rotate": [
+     0.0,
+     0.0,
+     12.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.315,
+     0.315,
+     0.004
+    ],
+    "position": [
+     -0.95,
+     0.33,
+     1.07
+    ],
+    "material": "card",
+    "color": "#2A2826",
+    "rotate": [
+     0.0,
+     0.0,
+     3.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.315,
+     0.315,
+     0.004
+    ],
+    "position": [
+     -0.95,
+     0.33,
+     1.074
+    ],
+    "material": "card",
+    "color": "#7C6B55",
+    "rotate": [
+     0.0,
+     0.0,
+     -2.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.315,
+     0.315,
+     0.004
+    ],
+    "position": [
+     -0.95,
+     0.33,
+     1.078
+    ],
+    "material": "card",
+    "color": "#3B3328",
+    "rotate": [
+     0.0,
+     0.0,
+     6.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.315,
+     0.315,
+     0.004
+    ],
+    "position": [
+     -0.95,
+     0.33,
+     1.082
+    ],
+    "material": "card",
+    "color": "#C9BBA2",
+    "rotate": [
+     0.0,
+     0.0,
+     -4.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/campaign/stage/stage2_props.py",
+    "fn": "lamps",
+    "top_z": 4.2,
+    "led_k": {
+     "red": 2200,
+     "green": 2700,
+     "ice": 2700,
+     "violet": 3000,
+     "orange": 4000,
+     "amber": 4000,
+     "blue": 4000,
+     "black": 4000
+    },
+    "core_load": {
+     "orange": 1.5,
+     "amber": 1.5,
+     "blue": 1.5,
+     "black": 0.15
+    },
+    "hemispheres": [
+     {
+      "tint": "orange",
+      "x": -1.0,
+      "y": 0.36,
+      "rim_z": 2.38
+     },
+     {
+      "tint": "amber",
+      "x": -0.5,
+      "y": 0.28,
+      "rim_z": 2.18
+     },
+     {
+      "tint": "red",
+      "x": 0.0,
+      "y": 0.34,
+      "rim_z": 2.34
+     },
+     {
+      "tint": "orange",
+      "x": 0.5,
+      "y": 0.3,
+      "rim_z": 2.2
+     },
+     {
+      "tint": "amber",
+      "x": 1.0,
+      "y": 0.36,
+      "rim_z": 2.4
+     }
+    ],
+    "cores": [
+     {
+      "tint": "red",
+      "x": -0.45,
+      "y": 0.28,
+      "floor_z": 1.07,
+      "rot": 0.0
+     },
+     {
+      "tint": "amber",
+      "x": 0.42,
+      "y": 0.3,
+      "floor_z": 1.07,
+      "rot": 0.0
+     }
+    ]
+   }
+  ]
+ },
+ "camera": {
+  "position": [
+   0.15,
+   -2.1,
+   1.34
+  ],
+  "target": [
+   0.1,
+   0.4,
+   1.45
+  ],
+  "lens_mm": 50.0,
+  "level": true,
+  "fstop": 2.8,
+  "focus": [
+   0.0,
+   0.3,
+   1.3
+  ]
+ },
+ "sky": {
+  "kind": "gradient",
+  "strength": 0.0
+ },
+ "render": {
+  "samples": 64,
+  "adaptive": 0.01,
+  "denoise": true,
+  "clamp": 0,
+  "bounces": 32,
+  "view": "AgX",
+  "exposure": -2.5,
+  "glossy_bounces": 16,
+  "transmission_bounces": 24,
+  "diffuse_bounces": 8,
+  "caustics_refractive": true,
+  "caustics_reflective": false,
+  "look": "AgX - Punchy"
+ },
+ "materials": {
+  "builtin-led": {
+   "glow": 0.0
+  },
+  "builtin-led-brace": {
+   "glow": 0.0
+  },
+  "horn-satin": {
+   "roughness": 0.05
+  }
+ },
+ "lights": {
+  "soffit": {
+   "type": "area",
+   "size_m": [
+    5.0,
+    1.2
+   ],
+   "position": [
+    0.0,
+    -3.2,
+    3.6
+   ],
+   "target": [
+    0.0,
+    1.4,
+    1.2
+   ],
+   "irradiance": 6.3,
+   "color": "#FFE2C2",
+   "spread_deg": 70
+  },
+  "dusk-window": {
+   "type": "area",
+   "size_m": [
+    2.0,
+    2.4
+   ],
+   "position": [
+    -5.0,
+    -1.0,
+    1.8
+   ],
+   "target": [
+    0.0,
+    1.2,
+    1.1
+   ],
+   "irradiance": 2.1,
+   "color": "#A8B8D8"
+  }
+ },
+ "products": []
+}
