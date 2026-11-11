@@ -558,6 +558,20 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    while the lid is with the owner). Audits: 0 emitters, gt 0 px, no hidden mesh. Coordinator's check (Dust at full
    size, the eight on a sheet): pass. Shown to the owner 18:27. THESE ARE MANTLE'S SITE PICTURES unless the lid answer
    changes the deck. Speaker lane told to take the asset at fa0c3a65.
+   18:32 UTC, speaker lane ecbed710: PLANET EARF BAR, two test frames in
+   `renders/2026-11-11/barkhorn/product/planet-bar/`: `bar-backbar.png`, `core-bar-table.png` (128 samples; builder
+   `campaign/planet_bar.py`, life in `campaign/bar_life/`). Only the room is taken from r33-planet-world (planet_r37 and
+   its plans, unchanged, round 38's bar-smoke parameters, products_only; the old mixer and floating records removed by
+   name). Tropos pair in Dust in the record wall's two bays (whole above the bar top), Mantle in Ember on the bar top
+   (the room has no back counter), six Hemispheres, three Cores, lamps 3e38954b. Life: two whiskies, cloth, citrus,
+   matchbook, newspaper, now-playing sleeve, runner, plant, armchair, books, haze, a RESERVED card in a speaker's bay.
+   Emitters 6 x 1000 + 3 x 200 lm; declared out of frame: five gridded track heads on the wall, three over the bar, a
+   low warm fill, haze. Measured lamp colors match the finals (Core Ember 4.9/0.63/0.92 against 5.0/0.64/0.91).
+   Audit hidden 0, equipment 0. Shown to the owner 18:36 as tests, NOT approved.
+   Coordinator's check, sent back the same minute: the record wall is mostly empty cells (the reference is packed);
+   both speakers cut by the frame, a pendant across one, pendants cropped; the speakers' tops in the dark; Mantle a
+   black shape on a black bar; the now-playing sleeve louder than the products; nothing cozy in frame; Core's base reads
+   as rough dark stone, not satin acrylic.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
