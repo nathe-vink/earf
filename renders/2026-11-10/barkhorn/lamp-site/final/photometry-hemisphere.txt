@@ -1,0 +1,16 @@
+hemisphere ember: ISPHERE dome-red total lm 272.5 above 74.6 below 197.9
+hemisphere ember: LUX dome-red centre r<0.05 345 r 0.15-0.2 301 r 0.3-0.35 217 albedo 0.323
+hemisphere dust: ISPHERE dome-orange total lm 279.7 above 78.5 below 201.2
+hemisphere dust: LUX dome-orange centre r<0.05 351 r 0.15-0.2 307 r 0.3-0.35 220 albedo 0.323
+hemisphere acid: ISPHERE dome-amber total lm 301.3 above 93.5 below 207.9
+hemisphere acid: LUX dome-amber centre r<0.05 352 r 0.15-0.2 307 r 0.3-0.35 220 albedo 0.323
+hemisphere poison: ISPHERE dome-green total lm 256.4 above 64.3 below 192.1
+hemisphere poison: LUX dome-green centre r<0.05 345 r 0.15-0.2 301 r 0.3-0.35 216 albedo 0.323
+hemisphere ice: ISPHERE dome-blue total lm 264.1 above 68.3 below 195.8
+hemisphere ice: LUX dome-blue centre r<0.05 350 r 0.15-0.2 306 r 0.3-0.35 219 albedo 0.323
+hemisphere haze: ISPHERE dome-violet total lm 254.4 above 62.6 below 191.8
+hemisphere haze: LUX dome-violet centre r<0.05 346 r 0.15-0.2 302 r 0.3-0.35 216 albedo 0.323
+hemisphere fog: ISPHERE dome-ice total lm 338.9 above 115.9 below 223.0
+hemisphere fog: LUX dome-ice centre r<0.05 352 r 0.15-0.2 307 r 0.3-0.35 220 albedo 0.323
+hemisphere smoke: ISPHERE dome-black total lm 287.0 above 84.6 below 202.4
+hemisphere smoke: LUX dome-black centre r<0.05 348 r 0.15-0.2 304 r 0.3-0.35 218 albedo 0.323
