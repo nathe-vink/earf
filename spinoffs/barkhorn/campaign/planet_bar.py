@@ -50,7 +50,7 @@ EV, WB = -2.0, 4000          # (20:47: the near Cores pale at -1.5: half a stop 
 TRACK = 3.0                  # the declared track lights' scale (tests 1-4: too dark)
 # (20:47: the bays' pools a stop and a half too strong, aim near 1.6x the wall; the room lifted for the half stop down)
 WALL, BAY, HOUSE = 1.7, 5.5, 0.6
-HORN = 4.0
+HORN = 1.5
 
 
 def _room():
@@ -114,7 +114,7 @@ def _life():
             'ground': '#EFEBE3', 'rough': 0.7}]
     out.append({'kind': 'kit', 'shape': 'ext', 'path': LIFE, 'fn': 'boards', 'boards': bds})
     # (test 2: the room's old DJ station left a mixer and two records floating where the old players stood: out)
-    out.append({'kind': 'kit', 'shape': 'ext', 'path': LIFE, 'fn': 'remove', 'names': ['dj-plinths', 'dj-knobs', 'dj-records', 'dj-labels']})
+    out.append({'kind': 'kit', 'shape': 'ext', 'path': LIFE, 'fn': 'remove', 'names': ['dj-plinths', 'dj-knobs', 'dj-records', 'dj-labels', 'screen-panels', 'screen-boxes', 'screen-frames']})
     # cozy (the owner, 17:39: "Soul to me means lived in. Cozy."): a worn leather armchair at the frame's left, books
     # among the records (cloth spines, stacked and leaning, in cells the records left empty)
     out.append({'kind': 'kit', 'shape': 'asset', 'model': 'ArmChair_01', 'res': '2k', 'position': [5.35, 2.05, 0.0], 'rotate': [0, 0, -120.0]})   # foreground, soft
@@ -135,7 +135,7 @@ def _track():
         # (18:40: the cabinet glows as on the stage picture, the bay's own back and sides darker: strong, narrow, onto the speaker)
         out[f'track-bay{k}'] = {'type': 'area', 'size_m': [0.14, 0.14], 'position': [xc, SPK_Y - 0.45, R.CEIL - 0.05], 'target': [xc, SPK_Y - 0.05, FEET_BAR + 0.7],   # (20:47: steep, from above: the cone in its cabinet's shade
                                 'irradiance': round(BAY * TRACK, 3), 'spread_deg': 14, 'color': '#FFE2C0'}
-    out['track-mantle'] = {'type': 'area', 'size_m': [0.1, 0.1], 'position': [MANTLE[0], MANTLE[1] - 0.9, R.CEIL - 0.05],
+    out['track-mantle'] = {'type': 'area', 'size_m': [0.1, 0.1], 'position': [MANTLE[0] + 0.4, 3.0, R.CEIL - 0.05],
                            'target': [MANTLE[0], MANTLE[1], MANTLE[2]], 'irradiance': round(3.5 * TRACK, 3), 'spread_deg': 18, 'color': '#FFD8B0'}   # (22:32: the Ember plinth's colour)
     # (18:36: the dark warm, not black: a broad low warm fill from the room behind the camera)
     for k, xc in enumerate(R.SPK_NICHES):                     # (22:32: the horn's shape and throat: a head of its own, from the room side)
@@ -212,7 +212,12 @@ def bar_backbar():
                                  'irradiance': round(s['lights']['track-bay0']['irradiance'] * 2.2, 3)}   # (22:32: the far speaker back)
     # (22:32: the top left black, not warm dark: a little declared warm fill there, from out of frame at the left)
     s['lights']['house-left'] = {'type': 'area', 'shape': 'DISK', 'size_m': [2.0, 2.0], 'position': [4.6, 2.2, 3.0],
-                                 'target': [4.0, 5.6, 2.6], 'irradiance': round(0.12 * TRACK, 3), 'color': '#FFC890'}                         # (this view sees that head: the audit, 0.03 %)
+                                 'target': [4.0, 5.6, 2.6], 'irradiance': round(0.5 * TRACK, 3), 'color': '#FFC890'}
+    # (22:32: the near horn's shape: polished, it shows only what it mirrors; a graduated warm card over the bay's front,
+    # seen only in reflections, so the flare carries a soft ramp along its curve)
+    s['lights']['horn-card'] = {'type': 'panel', 'size_m': [1.4, 0.9], 'position': [8.05, 4.9, R.CEIL - 0.06],
+                                'target': [R.SPK_NICHES[1], SPK_Y - 0.1, FEET_BAR + 1.1], 'strength': 10.0, 'diffuse': 0.0, 'specular': 1.0,
+                                'color': '#FFE2C0', 'ramp': {'axis': 'x', 'at_m': [7.4, 8.05, 8.7], 'values': [0.25, 1.0, 0.25]}}                         # (this view sees that head: the audit, 0.03 %)
     for pr in s['set']['props']:                                 # a Core and the drinks on the bar in front of the seat
         if pr.get('fn') == 'lamps':
             # ember by the throw, dust and acid further along; none before Mantle
