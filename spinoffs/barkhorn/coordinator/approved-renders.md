@@ -661,6 +661,10 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    almost lost; the far speaker nearly gone; Mantle's Ember plinth reads black; top left black, not warm dark; in the
    Core close-up a small black square on the bar top in front of the base and a pale blocky reflection in the ball.
    Full size (3200 wide, plus a portrait crop) only after the owner takes the direction.
+   23:47 UTC, biomes lane: SETBACK. The Fog portrait re-render failed at 22:35, two hours in: the disk filled (the
+   audit's saved scenes had grown to 7 GB) and the container restarted, stopping the queue. Nothing wrong was pushed.
+   Stale saves deleted (14 GB free); the audit now deletes each saved scene after its checks. Queue restarted 23:48 in
+   the same order: Fog pair (~3.5 h), Poison pair, the Acid, Ember and Smoke proxies, Dust's final.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
