@@ -9399,6 +9399,28 @@
    },
    {
     "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.56,
+     0.42,
+     0.24
+    ],
+    "position": [
+     -0.33,
+     1.9500000000000002,
+     0.955
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.55,
+    "gain": 0.62,
+    "rough_mul": 0.8,
+    "ease": 0.004
+   },
+   {
+    "kind": "kit",
     "shape": "ext",
     "path": "spinoffs/barkhorn/campaign/stage/stage2_props.py",
     "fn": "lamps",
@@ -9424,43 +9446,43 @@
       "tint": "red",
       "x": -1.5,
       "y": 0.3,
-      "rim_z": 2.22
+      "rim_z": 1.62
      },
      {
       "tint": "orange",
       "x": -1.0,
       "y": 0.36,
-      "rim_z": 2.38
+      "rim_z": 1.76
      },
      {
       "tint": "amber",
       "x": -0.5,
       "y": 0.28,
-      "rim_z": 2.18
+      "rim_z": 1.58
      },
      {
       "tint": "red",
       "x": 0.0,
       "y": 0.34,
-      "rim_z": 2.34
+      "rim_z": 1.72
      },
      {
       "tint": "orange",
       "x": 0.5,
       "y": 0.3,
-      "rim_z": 2.2
+      "rim_z": 1.6
      },
      {
       "tint": "amber",
       "x": 1.0,
       "y": 0.36,
-      "rim_z": 2.4
+      "rim_z": 1.78
      },
      {
       "tint": "red",
       "x": 1.5,
       "y": 0.3,
-      "rim_z": 2.26
+      "rim_z": 1.66
      }
     ],
     "cores": [
@@ -9661,9 +9683,9 @@
    "instances": [
     {
      "position": [
-      -0.35,
+      -0.33,
       1.9500000000000002,
-      0.956
+      1.1959999999999997
      ],
      "rotate_z": 0.0
     }
