@@ -388,6 +388,19 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    16:26 UTC, the owner: "I like B" -> CORE'S BASE SHAPE IS B, the rounded lip (Ø143 x 38, the touch ring turned to a 7 mm
    bullnose). Color still open (satin black, acrylic or metal, against its own color). Lamps lane: B is the default shape
    in the rig and CAD; the daylight picture shrinks to B only (black, Ice, Ember), plus the same three lit.
+   16:33 UTC, lamps lane a87a8160e8: `core-base-options-day.png` (the full 3 x 3, lamp off, declared daylight studio 5000 K
+   on #D6D6D4, no emitters). B's column, day beside lit, shown to the owner 16:37.
+   - Lamp off, the own-color skin matches the ball (the same 6 mm of the same pour over white). Lit, it goes nearly as
+     dark as black: the base gets almost none of the lamp's light.
+   - Coordinator's check: it does not read as a colored base. The lip (the touch ring) and the dock stay black, so the
+     color is a band between two black parts.
+   - The skin for A and B can be drape-formed from the same 6 mm lamp sheet as the ball (a plug mold, ~$800-1,500 once),
+     instead of turned from a custom rod: lane's figure ~$30-50 at volume against $220-260 (asked: skin alone or the
+     whole base?).
+   - Ordered `core-base-b-allcolor.png`: B with the whole base in its own color, lip included, the touch electrode under
+     the skin, the dock out of sight; Ice and Ember, lamp off and on. The color pick waits for it.
+   - Details now in the CAD notes and BOM: Hemisphere's mouth chamfer 1.0 polished, hatch screws black oxide and flush,
+     canopy strap screws black and covered, cord grip a turned satin black gland, the bright bore listed as the exception.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
