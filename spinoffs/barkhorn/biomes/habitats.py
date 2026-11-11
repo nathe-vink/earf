@@ -22,6 +22,7 @@ HABITATS = {
                                                  # (the audit, 2026-11-09: 100 % of the frame); off: the sand bounces for real (-0.1 stop)
     'acid_b':    ('Acid',   {'bounce': 0, 'throat': 0, 'low': 0, 'rim': 0}),   # rim off: the audit (2026-11-09) found the
                                                                              # hidden 1.5 m lamp in 5.4 % of the frame
+    'poison_ivy': ('Poison', {}),   # the owner, 2026-11-11: the speaker in poison ivy (ivy_el.py); sun and sky only
     'poison_g5': ('Poison', {'reflector': 0, 'bounce': 0, 'card': 0, 'litter': 0}),   # litter: a fill lamp (2026-11-09: none)
     'ice':       ('Ice',    {'bounce': 0, 'back': 0, 'throat': 0}),
     'haze_b':    ('Haze',   {'bounce': 0}),
@@ -162,7 +163,7 @@ HORN_ROUGH = 0.05
 # a tint's channel split from the speaker lane's shared model where it changed after the asset was built (9097, 732a8671)
 SPLIT = {'acid_b': (0.085, 0.10, 1.00)}   # the old asset only: the approved asset (0f54ebee) carries it, and the manifest assert refuses it
 # habitats whose sets are made real: every object seen by every ray type, casting shadows (ruling 4)
-REAL_SET = {'poison_g5'}
+REAL_SET = {'poison_g5', 'poison_ivy'}
 # plants whose Poly Haven glTF has no alpha: none needed since the engine's _alpha_maps wires the published map (2026-11-09)
 PLANT_ALPHA = {}
 # set props added per habitat, after the shot's own (so no prop's index moves). Poison: two redwoods deep in the mist
