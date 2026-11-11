@@ -651,6 +651,16 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
      `hemisphere-ember-cap.png` and a true lit rim close-up). Both after the Core finals.
    - Views a lamp page still lacks (lane's list): Hemisphere in a room for scale, the canopy and cord entry, the light
      pool on a table, lamp-off frames for the other tints; Core's touch lip and base close-up, its underside.
+   22:27 UTC, speaker lane e4193df5a: PLANET EARF BAR, round 3 (same two names). Pools steep from above (near cone 0.21,
+   near black; cabinet holds Acid; lit face 1.9x the wall); spines 3-5 mm, mostly mid and dark, ~7 % pale, half with a
+   title line, some rows leaning; bar top dark honed stone (roughness 0.16) with reflections; the room's zinc gone and
+   its brass foot rail satin black; no haze; Mantle on the bar under the near speaker in its own pool; EV -2.0 with
+   more declared fill (Core Ember 5.0/0.67/0.90 against 5.0/0.64/0.91); a rust wool throw folded on the bar; niche
+   felt plain. Audit hidden 0, equipment 0. Shown to the owner 22:32 as tests, NOT approved.
+   Coordinator's check: the first round that reads as a place (lived in, cozy). Small round 4 sent: the near horn
+   almost lost; the far speaker nearly gone; Mantle's Ember plinth reads black; top left black, not warm dark; in the
+   Core close-up a small black square on the bar top in front of the base and a pale blocky reflection in the ball.
+   Full size (3200 wide, plus a portrait crop) only after the owner takes the direction.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
