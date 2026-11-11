@@ -572,6 +572,11 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    both speakers cut by the frame, a pendant across one, pendants cropped; the speakers' tops in the dark; Mantle a
    black shape on a black bar; the now-playing sleeve louder than the products; nothing cozy in frame; Core's base reads
    as rough dark stone, not satin acrylic.
+   18:39 UTC, the owner on bar-backbar: "It's getting there but the speakers are hard to see." -> THE ROOM AND THE
+   BUILT-IN SPEAKERS ARE THE DIRECTION. Speaker lane (18:40): the speakers first: a declared pool on each bay so the
+   cabinet glows as on the stage, the bay darker than the speaker; the pair in ACID (Dust on walnut has no contrast);
+   a three-quarter view from a seat near one end of the bar, the near speaker whole and at least half the frame's
+   height, nothing across it, the far one whole; report each speaker's covered share and brightness against the wall.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
