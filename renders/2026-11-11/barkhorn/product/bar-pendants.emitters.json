@@ -19,6 +19,18 @@
    "in_frame": true
   },
   {
+   "name": "Hemisphere ember",
+   "lumens": 1000,
+   "cct_k": 2200,
+   "in_frame": true
+  },
+  {
+   "name": "Hemisphere dust",
+   "lumens": 1000,
+   "cct_k": 4000,
+   "in_frame": true
+  },
+  {
    "name": "Core ember",
    "lumens": 200,
    "cct_k": 2200,
@@ -33,12 +45,18 @@
    "in_frame": true
   },
   {
-   "name": "the room: Poly Haven HDRI warm_bar (a real bar's own light)",
-   "strength": 0.1,
-   "rotation_deg": -120.0
+   "name": "dusk-window",
+   "emitter": "studio area lamp 1.6 x 2.0 m",
+   "irradiance_w_m2": 0.06,
+   "position_m": [
+    3.2,
+    -0.6,
+    1.7
+   ],
+   "in_frame": false
   }
  ],
- "lamp_lumens_total": 3400,
+ "lamp_lumens_total": 5400,
  "audit": {
   "hidden": [],
   "equipment": [],
