@@ -211,6 +211,9 @@ def bar_backbar():
                                  'target': [R.SPK_NICHES[0], SPK_Y - 0.05, FEET_BAR + 0.95],
                                  'irradiance': round(s['lights']['track-bay0']['irradiance'] * 2.2, 3)}   # (22:32: the far speaker back)
     # (22:32: the top left black, not warm dark: a little declared warm fill there, from out of frame at the left)
+    # (round 4 proof: the smaller house disc washed the throw and the near stone; this frame has no ball to reflect it
+    # clipped, so its round 3 fill: 3 m, nearer the front wall)
+    s['lights']['house'] = {**s['lights']['house'], 'size_m': [3.0, 3.0], 'position': [6.9, 0.2, 2.6]}
     s['lights']['house-left'] = {'type': 'area', 'shape': 'DISK', 'size_m': [2.0, 2.0], 'position': [4.6, 2.2, 3.0],
                                  'target': [4.0, 5.6, 2.6], 'irradiance': round(0.5 * TRACK, 3), 'color': '#FFC890'}
     # (22:32: the near horn's shape: polished, it shows only what it mirrors; a graduated warm card over the bay's front,

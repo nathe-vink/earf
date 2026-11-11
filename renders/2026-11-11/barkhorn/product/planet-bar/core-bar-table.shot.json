@@ -689,20 +689,6 @@
       "ground": "#E9E3D6"
      },
      {
-      "image": "tex/matches.png",
-      "w": 0.04,
-      "h": 0.064,
-      "t": 0.006,
-      "x": 7.05,
-      "y": 3.9499999999999993,
-      "z": 1.07,
-      "rot": [
-       -90.0,
-       0,
-       22.0
-      ]
-     },
-     {
       "image": "tex/newspaper.png",
       "w": 0.29,
       "h": 0.4,
@@ -745,7 +731,10 @@
      "dj-plinths",
      "dj-knobs",
      "dj-records",
-     "dj-labels"
+     "dj-labels",
+     "screen-panels",
+     "screen-boxes",
+     "screen-frames"
     ]
    },
    {
@@ -902,7 +891,8 @@
    ],
    "irradiance": 3.6062,
    "spread_deg": 20,
-   "color": "#FFD2A0"
+   "color": "#FFD2A0",
+   "shape": "DISK"
   },
   "track-wall1": {
    "type": "area",
@@ -922,7 +912,8 @@
    ],
    "irradiance": 3.6062,
    "spread_deg": 20,
-   "color": "#FFD2A0"
+   "color": "#FFD2A0",
+   "shape": "DISK"
   },
   "track-wall2": {
    "type": "area",
@@ -942,7 +933,8 @@
    ],
    "irradiance": 3.6062,
    "spread_deg": 20,
-   "color": "#FFD2A0"
+   "color": "#FFD2A0",
+   "shape": "DISK"
   },
   "track-wall3": {
    "type": "area",
@@ -962,7 +954,8 @@
    ],
    "irradiance": 3.6062,
    "spread_deg": 20,
-   "color": "#FFD2A0"
+   "color": "#FFD2A0",
+   "shape": "DISK"
   },
   "track-wall4": {
    "type": "area",
@@ -982,7 +975,8 @@
    ],
    "irradiance": 3.6062,
    "spread_deg": 20,
-   "color": "#FFD2A0"
+   "color": "#FFD2A0",
+   "shape": "DISK"
   },
   "track-bar0": {
    "type": "area",
@@ -1002,7 +996,8 @@
    ],
    "irradiance": 0.7425,
    "spread_deg": 24,
-   "color": "#FFD2A0"
+   "color": "#FFD2A0",
+   "shape": "DISK"
   },
   "track-bar1": {
    "type": "area",
@@ -1022,7 +1017,8 @@
    ],
    "irradiance": 0.7425,
    "spread_deg": 24,
-   "color": "#FFD2A0"
+   "color": "#FFD2A0",
+   "shape": "DISK"
   },
   "track-bar2": {
    "type": "area",
@@ -1042,7 +1038,8 @@
    ],
    "irradiance": 0.7425,
    "spread_deg": 24,
-   "color": "#FFD2A0"
+   "color": "#FFD2A0",
+   "shape": "DISK"
   },
   "track-bay0": {
    "type": "area",
@@ -1062,7 +1059,8 @@
    ],
    "irradiance": 11.6673,
    "spread_deg": 14,
-   "color": "#FFE2C0"
+   "color": "#FFE2C0",
+   "shape": "DISK"
   },
   "track-bay1": {
    "type": "area",
@@ -1082,7 +1080,8 @@
    ],
    "irradiance": 11.6673,
    "spread_deg": 14,
-   "color": "#FFE2C0"
+   "color": "#FFE2C0",
+   "shape": "DISK"
   },
   "track-mantle": {
    "type": "area",
@@ -1091,8 +1090,8 @@
     0.1
    ],
    "position": [
-    8.5,
-    3.8199999999999994,
+    8.9,
+    3.0,
     3.35
    ],
    "target": [
@@ -1100,20 +1099,63 @@
     4.319999999999999,
     1.071
    ],
-   "irradiance": 4.2426,
+   "irradiance": 7.4246,
    "spread_deg": 18,
-   "color": "#FFD8B0"
+   "color": "#FFD8B0",
+   "shape": "DISK"
+  },
+  "track-horn0": {
+   "type": "area",
+   "size_m": [
+    0.12,
+    0.12
+   ],
+   "position": [
+    5.85,
+    4.4,
+    3.35
+   ],
+   "target": [
+    5.55,
+    5.566199999999999,
+    2.21
+   ],
+   "irradiance": 3.182,
+   "spread_deg": 12,
+   "color": "#FFE2C0",
+   "shape": "DISK"
+  },
+  "track-horn1": {
+   "type": "area",
+   "size_m": [
+    0.12,
+    0.12
+   ],
+   "position": [
+    8.55,
+    4.4,
+    3.35
+   ],
+   "target": [
+    8.25,
+    5.566199999999999,
+    2.21
+   ],
+   "irradiance": 3.182,
+   "spread_deg": 12,
+   "color": "#FFE2C0",
+   "shape": "DISK"
   },
   "house": {
    "type": "area",
    "size_m": [
-    4.0,
-    2.0
+    1.6,
+    1.6
    ],
    "position": [
     6.9,
-    0.2,
-    2.6
+    0.6,
+    2.3
    ],
    "target": [
     6.9,
@@ -1121,7 +1163,8 @@
     1.0
    ],
    "irradiance": 1.2728,
-   "color": "#FFC890"
+   "color": "#FFC890",
+   "shape": "DISK"
   }
  },
  "products": [
