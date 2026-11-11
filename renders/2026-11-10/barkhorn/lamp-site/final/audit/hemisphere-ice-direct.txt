@@ -1,0 +1,28 @@
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:178: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m = bpy.data.materials.new(nm); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+Timer 'STL Import' took 0.63 ms
+Timer 'STL Import' took 0.66 ms
+Timer 'STL Import' took 5.11 ms
+Timer 'STL Import' took 5.19 ms
+Timer 'STL Import' took 1.03 ms
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:236: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  cm = bpy.data.materials.new(f'collar-{tint}'); cm.use_nodes = True; nt = cm.node_tree
+Timer 'STL Import' took 1.00 ms
+Timer 'STL Import' took 0.44 ms
+Timer 'STL Import' took 0.97 ms
+Timer 'STL Import' took 1.12 ms
+Timer 'STL Import' took 0.91 ms
+Timer 'STL Import' took 0.25 ms
+Timer 'STL Import' took 5.02 ms
+Timer 'STL Import' took 0.43 ms
+Timer 'STL Import' took 0.68 ms
+00:11.026  cycles           | WARNING CUEW initialization failed: Error opening the library
+AUDIT dome-blue hidden [] no-shadow [] lights [('key', 'AREA', 90.308), ('fill', 'AREA', 20.0), ('kicker', 'AREA', 6.0), ('led-blue-0', 'AREA', 0.383), ('led-blue-1', 'AREA', 0.383), ('led-blue-2', 'AREA', 0.383), ('led-blue-3', 'AREA', 0.383), ('led-blue-4', 'AREA', 0.383), ('led-blue-5', 'AREA', 0.383), ('led-blue-6', 'AREA', 0.383), ('led-blue-7', 'AREA', 0.383), ('led-blue-8', 'AREA', 0.383), ('led-blue-9', 'AREA', 0.383), ('led-blue-10', 'AREA', 0.383), ('led-blue-11', 'AREA', 0.383), ('led-blue-12', 'AREA', 0.383), ('led-blue-13', 'AREA', 0.383), ('led-blue-14', 'AREA', 0.383), ('led-blue-15', 'AREA', 0.383), ('led-blue-16', 'AREA', 0.383), ('led-blue-17', 'AREA', 0.383), ('led-blue-18', 'AREA', 0.383), ('led-blue-19', 'AREA', 0.383), ('led-blue-20', 'AREA', 0.383), ('led-blue-21', 'AREA', 0.383), ('led-blue-22', 'AREA', 0.383), ('led-blue-23', 'AREA', 0.383)]
+HIDDENCAST dome-blue: 3 hidden, 0 in frame
+   out         0.0 %  area lamp (ellipse) key
+   out         0.0 %  area lamp (ellipse) fill
+   out         0.0 %  area lamp (rectangle) kicker
+00:11.944  render           | Saved: '/home/user/earf/renders/2026-11-10/barkhorn/lamp-site/final/masks/hemisphere-ice-direct-key.png'
+00:13.678  render           | Saved: '/home/user/earf/renders/2026-11-10/barkhorn/lamp-site/final/masks/hemisphere-ice-direct-fill.png'
+00:15.509  render           | Saved: '/home/user/earf/renders/2026-11-10/barkhorn/lamp-site/final/masks/hemisphere-ice-direct-kicker.png'
+CASTCHECK dome-blue {'key': 0.0, 'fill': 0.0, 'kicker': 0.0}

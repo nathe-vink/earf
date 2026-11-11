@@ -1,0 +1,28 @@
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:178: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m = bpy.data.materials.new(nm); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+Timer 'STL Import' took 0.68 ms
+Timer 'STL Import' took 0.59 ms
+Timer 'STL Import' took 4.45 ms
+Timer 'STL Import' took 4.50 ms
+Timer 'STL Import' took 0.96 ms
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:236: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  cm = bpy.data.materials.new(f'collar-{tint}'); cm.use_nodes = True; nt = cm.node_tree
+Timer 'STL Import' took 1.03 ms
+Timer 'STL Import' took 0.41 ms
+Timer 'STL Import' took 0.82 ms
+Timer 'STL Import' took 0.83 ms
+Timer 'STL Import' took 0.98 ms
+Timer 'STL Import' took 0.43 ms
+Timer 'STL Import' took 8.86 ms
+Timer 'STL Import' took 0.53 ms
+Timer 'STL Import' took 0.78 ms
+00:11.262  cycles           | WARNING CUEW initialization failed: Error opening the library
+AUDIT dome-orange hidden [] no-shadow [] lights [('key', 'AREA', 90.308), ('fill', 'AREA', 20.0), ('kicker', 'AREA', 6.0), ('led-orange-0', 'AREA', 0.383), ('led-orange-1', 'AREA', 0.383), ('led-orange-2', 'AREA', 0.383), ('led-orange-3', 'AREA', 0.383), ('led-orange-4', 'AREA', 0.383), ('led-orange-5', 'AREA', 0.383), ('led-orange-6', 'AREA', 0.383), ('led-orange-7', 'AREA', 0.383), ('led-orange-8', 'AREA', 0.383), ('led-orange-9', 'AREA', 0.383), ('led-orange-10', 'AREA', 0.383), ('led-orange-11', 'AREA', 0.383), ('led-orange-12', 'AREA', 0.383), ('led-orange-13', 'AREA', 0.383), ('led-orange-14', 'AREA', 0.383), ('led-orange-15', 'AREA', 0.383), ('led-orange-16', 'AREA', 0.383), ('led-orange-17', 'AREA', 0.383), ('led-orange-18', 'AREA', 0.383), ('led-orange-19', 'AREA', 0.383), ('led-orange-20', 'AREA', 0.383), ('led-orange-21', 'AREA', 0.383), ('led-orange-22', 'AREA', 0.383), ('led-orange-23', 'AREA', 0.383)]
+HIDDENCAST dome-orange: 3 hidden, 0 in frame
+   out         0.0 %  area lamp (ellipse) key
+   out         0.0 %  area lamp (ellipse) fill
+   out         0.0 %  area lamp (rectangle) kicker
+00:12.187  render           | Saved: '/home/user/earf/renders/2026-11-10/barkhorn/lamp-site/final/masks/hemisphere-dust-under-key.png'
+00:14.016  render           | Saved: '/home/user/earf/renders/2026-11-10/barkhorn/lamp-site/final/masks/hemisphere-dust-under-fill.png'
+00:16.138  render           | Saved: '/home/user/earf/renders/2026-11-10/barkhorn/lamp-site/final/masks/hemisphere-dust-under-kicker.png'
+CASTCHECK dome-orange {'key': 0.0, 'fill': 0.0, 'kicker': 0.0}

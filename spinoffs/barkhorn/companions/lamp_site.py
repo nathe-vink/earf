@@ -523,7 +523,7 @@ def build(frame, samples, scale):
     # round 3 (the gate: 88 % of the dock's pixels at 3 or less): a kicker, low behind and to the right, out of frame
     # (the audit holds it there), that draws the dock's and the cap's edges; real, unlinked, its own reflection honest
     # (the heroes only: in the wide rows it grazed the sweep's cove, a bright streak, and a narrow beam raked the floor)
-    kick = None if frame.startswith('lamps') else SC.area('kicker', (0.9, 0.9, 0.35 if kind0 == 'orb' else 0.9), (0, 0, 0), (0.3, 0.6), 6.0 * K, '#FFF4E8')
+    kick = None if frame.startswith(('lamps', 'cluster')) else SC.area('kicker', (0.9, 0.9, 0.35 if kind0 == 'orb' else 0.9), (0, 0, 0), (0.3, 0.6), 6.0 * K, '#FFF4E8')
     if kick:
         kick.data.color = blackbody(int(os.environ.get('STUDIO_K', '3000')))
         kick.rotation_euler = (Vector((0, 0, 0.05 if kind0 == 'orb' else 0.62)) - kick.location).to_track_quat('-Z', 'Y').to_euler()
@@ -553,10 +553,12 @@ def build(frame, samples, scale):
         # hemisphere-cluster (the owner, 2026-11-11: "different colors at variable heights, all clustered together"): all
         # eight hung close in two staggered rows (plan centres 0.24 m or more apart, the shades Ø200: no cord passes through a shade),
         # no two at the same height, neighbours set off by colour; seen a little from below and to one side; 2000 x 2000
+        # (2026-11-11 21:20: neighbours across the rows 0.24 m or more apart in height so no shade stacks on another;
+        # no kicker here: from this camera it sat in frame, a bright wedge at the right edge)
         W, H = 2000, 2000
         for t, (x_, y_, z_) in zip(('red', 'blue', 'amber', 'violet', 'green', 'black', 'orange', 'ice'),
-                                   ((-0.42, 0.12, 0.62), (-0.18, 0.12, 0.80), (0.06, 0.12, 0.55), (0.30, 0.12, 0.74),
-                                    (-0.30, -0.12, 0.44), (-0.06, -0.12, 0.68), (0.18, -0.12, 0.50), (0.42, -0.12, 0.86))):
+                                   ((-0.42, 0.12, 0.84), (-0.18, 0.12, 0.72), (0.06, 0.12, 0.80), (0.30, 0.12, 0.88),
+                                    (-0.30, -0.12, 0.48), (-0.06, -0.12, 0.42), (0.18, -0.12, 0.54), (0.42, -0.12, 0.62))):
             hemisphere(t, x_, z_, y=y_)
         cam = tuple(eval(os.environ['DOMECAM'])) if os.environ.get('DOMECAM') else ((0.30, -1.50, 0.36), (0.0, 0.0, 0.67), 46.0)
     elif frame.startswith('trio-'):

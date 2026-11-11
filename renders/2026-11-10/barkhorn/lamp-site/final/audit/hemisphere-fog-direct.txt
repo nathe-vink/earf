@@ -1,0 +1,28 @@
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:178: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m = bpy.data.materials.new(nm); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+Timer 'STL Import' took 0.72 ms
+Timer 'STL Import' took 0.67 ms
+Timer 'STL Import' took 5.54 ms
+Timer 'STL Import' took 4.91 ms
+Timer 'STL Import' took 1.09 ms
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:236: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  cm = bpy.data.materials.new(f'collar-{tint}'); cm.use_nodes = True; nt = cm.node_tree
+Timer 'STL Import' took 1.14 ms
+Timer 'STL Import' took 0.45 ms
+Timer 'STL Import' took 0.96 ms
+Timer 'STL Import' took 0.92 ms
+Timer 'STL Import' took 0.96 ms
+Timer 'STL Import' took 0.30 ms
+Timer 'STL Import' took 5.45 ms
+Timer 'STL Import' took 0.50 ms
+Timer 'STL Import' took 0.61 ms
+00:11.025  cycles           | WARNING CUEW initialization failed: Error opening the library
+AUDIT dome-ice hidden [] no-shadow [] lights [('key', 'AREA', 90.308), ('fill', 'AREA', 20.0), ('kicker', 'AREA', 6.0), ('led-ice-0', 'AREA', 0.521), ('led-ice-1', 'AREA', 0.521), ('led-ice-2', 'AREA', 0.521), ('led-ice-3', 'AREA', 0.521), ('led-ice-4', 'AREA', 0.521), ('led-ice-5', 'AREA', 0.521), ('led-ice-6', 'AREA', 0.521), ('led-ice-7', 'AREA', 0.521), ('led-ice-8', 'AREA', 0.521), ('led-ice-9', 'AREA', 0.521), ('led-ice-10', 'AREA', 0.521), ('led-ice-11', 'AREA', 0.521), ('led-ice-12', 'AREA', 0.521), ('led-ice-13', 'AREA', 0.521), ('led-ice-14', 'AREA', 0.521), ('led-ice-15', 'AREA', 0.521), ('led-ice-16', 'AREA', 0.521), ('led-ice-17', 'AREA', 0.521), ('led-ice-18', 'AREA', 0.521), ('led-ice-19', 'AREA', 0.521), ('led-ice-20', 'AREA', 0.521), ('led-ice-21', 'AREA', 0.521), ('led-ice-22', 'AREA', 0.521), ('led-ice-23', 'AREA', 0.521)]
+HIDDENCAST dome-ice: 3 hidden, 0 in frame
+   out         0.0 %  area lamp (ellipse) key
+   out         0.0 %  area lamp (ellipse) fill
+   out         0.0 %  area lamp (rectangle) kicker
+00:12.006  render           | Saved: '/home/user/earf/renders/2026-11-10/barkhorn/lamp-site/final/masks/hemisphere-fog-direct-key.png'
+00:13.693  render           | Saved: '/home/user/earf/renders/2026-11-10/barkhorn/lamp-site/final/masks/hemisphere-fog-direct-fill.png'
+00:15.740  render           | Saved: '/home/user/earf/renders/2026-11-10/barkhorn/lamp-site/final/masks/hemisphere-fog-direct-kicker.png'
+CASTCHECK dome-ice {'key': 0.0, 'fill': 0.0, 'kicker': 0.0}
