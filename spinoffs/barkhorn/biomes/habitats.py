@@ -276,7 +276,7 @@ def main():
         # horn A on its own M8 feet (base A and its light left out), direct light stopped at the horn
         cmd = [sys.executable, os.path.join(HERE, 'habitat.py'), shot, tint, '--out', out,
                '--samples', '16' if a.proxy else str(max(a.samples, SAMPLES.get(n, 0))),
-               '--scale', '0.5' if a.proxy else str(a.scale), '--stand', 'feet', '--sink', str(a.sink if a.sink is not None else SINK.get(n, 0.012)),
+               '--scale', '0.5' if a.proxy else str(a.scale), '--stand', 'own' if a.manifest else 'feet', '--sink', str(a.sink if a.sink is not None else SINK.get(n, 0.012)),
                *(['--horn-front'] if a.horn_front else []), *([] if a.flat_fresnel else ['--fresnel-angle']),
                '--horn-rough', str(HORN_ROUGH)] + [x for k, v in lights.items() for x in ('--light', f'{k}={v}')] \
             + [x for k, v in SETS.get(n, {}).items() for x in ('--set', f'{k}={json.dumps(v)}')] \

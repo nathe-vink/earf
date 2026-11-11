@@ -695,43 +695,61 @@ def berms(bpy_, linked, specs):
 
 def assert_approved(col, tint, manifest):
     """The speaker as the approved build (the coordinator, 2026-11-11: as rollout.py's site('front-off-tall', tint)):
-    the prepared collection checked against the speaker lane's per-tint manifest, shape
-    {tint: {"parts": [part names that must be there], "absent": [names that must not be], "bark_sigma_per_mm": [r, g, b],
-    "lining_rgb": [r, g, b] (linear), "horn_roughness": 0.05}}; any key may be left out. Fails the render on a mismatch."""
-    import fnmatch
+    the prepared collection checked against the speaker lane's manifest (r33-speaker-horn 0f54ebee,
+    tropos-strata.manifest.json): every part there with its materials, and every material's Principled values (base
+    colour where it is a value, roughness, metallic, transmission, IOR, emission) and its volume's colour and density.
+    The glass-shadow mix this builder adds sits in front of the Principled and leaves those values alone. Fails the render
+    on any mismatch."""
     spec = manifest.get(tint)
     if spec is None:
         raise SystemExit(f'approved build: no manifest entry for {tint}')
-    parts = {o.name.split(' ')[-1].split('#')[0] for o in col.all_objects}
-    bad = [q for q in spec.get('parts', []) if not any(fnmatch.fnmatch(n, q) for n in parts)]
-    bad += [f'not {q}' for q in spec.get('absent', []) if any(fnmatch.fnmatch(n, q) for n in parts)]
-    mats = {sl.material for o in col.all_objects for sl in getattr(o, 'material_slots', []) if sl.material and sl.material.node_tree}
-    def base(m):
-        return m.name.split('@')[0]
-    if 'bark_sigma_per_mm' in spec:
-        for m in mats:
-            if base(m) == 'bark':
-                v = next((n for n in m.node_tree.nodes if n.type == 'VOLUME_ABSORPTION'), None)
-                got = [(1 - c) * v.inputs['Density'].default_value / 1000 for c in v.inputs['Color'].default_value[:3]] if v else [0, 0, 0]
-                if any(abs(g - w) > 0.02 * max(w, 0.005) + 1e-4 for g, w in zip(got, spec['bark_sigma_per_mm'])):
-                    bad.append(f'{m.name} sigma {[round(g, 5) for g in got]} != {spec["bark_sigma_per_mm"]}')
-    if 'lining_rgb' in spec:
-        for m in mats:
-            if base(m) == 'lining':
-                b = next((n for n in m.node_tree.nodes if n.type == 'BSDF_PRINCIPLED'), None)
-                got = list(b.inputs['Base Color'].default_value[:3]) if b else []
-                if not got or any(abs(g - w) > 0.02 for g, w in zip(got, spec['lining_rgb'])):
-                    bad.append(f'{m.name} lining {[round(g, 3) for g in got]} != {spec["lining_rgb"]}')
-    if 'horn_roughness' in spec:
-        for m in mats:
-            if base(m).startswith('horn-'):
-                b = next((n for n in m.node_tree.nodes if n.type == 'BSDF_PRINCIPLED'), None)
-                if b and abs(b.inputs['Roughness'].default_value - spec['horn_roughness']) > 1e-3:
-                    bad.append(f'{m.name} roughness {b.inputs["Roughness"].default_value:.3f} != {spec["horn_roughness"]}')
-    if bad:
-        raise SystemExit(f'approved build: {tint} FAILS: ' + '; '.join(bad))
-    print(f'approved build: {tint} matches the manifest ({len(spec.get("parts", []))} parts, materials checked)')
+    have = {}
+    for o in col.all_objects:
+        have[o.name.split(' ')[-1].split('#')[0]] = o
+    bad = []
+    keys = ('Base Color', 'Roughness', 'Metallic', 'Transmission Weight', 'IOR', 'Emission Strength')
 
+    def check(m, mname, want):
+        """One material against the manifest's entry for it (its name in this scene may carry a .00n suffix: the
+        engine's hidden copy of the product already holds the plain names)."""
+        if not m.node_tree:
+            return
+        b = next((n for n in m.node_tree.nodes if n.type == 'BSDF_PRINCIPLED'), None)
+        for k in keys:
+            w = want.get(k)
+            if w is None or b is None or b.inputs[k].is_linked:
+                continue
+            g = b.inputs[k].default_value
+            g = list(g)[:3] if hasattr(g, '__len__') else [g]
+            w = w if isinstance(w, list) else [w]
+            if any(abs(x - y) > 1e-3 for x, y in zip(g, w)):
+                bad.append(f'{mname} {k} {[round(x, 4) for x in g]} != {w}')
+        if 'volume Density' in want:
+            v = next((n for n in m.node_tree.nodes if n.type in ('VOLUME_ABSORPTION', 'PRINCIPLED_VOLUME') and n.outputs[0].is_linked), None)
+            if v is None:
+                bad.append(f'{mname} has no volume')
+            else:
+                gd = v.inputs['Density'].default_value; gc = list(v.inputs['Color'].default_value)[:3]
+                if abs(gd - want['volume Density']) > 1e-3 * max(1.0, want['volume Density']) or \
+                        any(abs(x - y) > 1e-3 for x, y in zip(gc, want.get('volume Color', gc))):
+                    bad.append(f'{mname} volume {[round(x, 4) for x in gc]} x {gd:.3f} != {want.get("volume Color")} x {want["volume Density"]}')
+    seen = set()
+    for part, mnames in spec['parts'].items():
+        o = have.get(part)
+        if o is None:
+            bad.append(f'part {part} missing'); continue
+        slots = [sl.material for sl in getattr(o, 'material_slots', []) if sl.material]
+        if len(slots) != len(mnames):
+            bad.append(f'{part}: {len(slots)} materials, the manifest {len(mnames)}'); continue
+        for m, mname in zip(slots, mnames):
+            if (m.name, mname) in seen:
+                continue
+            seen.add((m.name, mname))
+            if mname in spec['materials']:
+                check(m, mname, spec['materials'][mname])
+    if bad:
+        raise SystemExit(f'approved build: {tint} FAILS ({len(bad)}): ' + '; '.join(bad[:12]))
+    print(f'approved build: {tint} matches the manifest ({len(spec["parts"])} parts, {len(spec["materials"])} materials)')
 
 def plant_alpha(bpy_, aids, res='1k'):
     """Some Poly Haven plant glTFs (grass_bermuda_01) carry no alpha at all: the cards render whole, their black,
