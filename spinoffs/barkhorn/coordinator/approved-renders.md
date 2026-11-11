@@ -584,6 +584,14 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    rather than Fog's pale; in the wide the far ridge at the left reads a little like computer terrain; the grass hides
    the base. Shown to the owner 19:59; offered one re-render with the sun moved to light the front, if wanted.
    Next from the lane: six 800x1000 proxies (Dust, Acid, Poison, Haze, Ember, Smoke), then Dust's final.
+   20:01 UTC, the owner: "The grass is flowing in those habitat shots" (read as FLOATING). Confirmed at full size: in the
+   Fog wide (about x 900-2000, y 1400-1600) and the portrait, a dozen grass tufts hang beyond the edge of the ground
+   with fog under them. THE FOG PAIR IS NOT FINAL. The coordinator's check missed it (looked at half size and said "no
+   defect"). Biomes lane (20:03): find the cause, no tuft where the ground under it is not visible, re-render the pair
+   at the same names (a border render of the band is fine if the rest is identical), the sun unchanged; check every
+   other habitat's scatters the same way and add the check to CHECK.md.
+   RULE FOR THE COORDINATOR'S CHECK: every final is looked at in full-size crops along the ground line and every edge
+   where one thing meets another, not only whole at half size.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
