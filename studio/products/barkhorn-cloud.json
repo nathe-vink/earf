@@ -38,6 +38,12 @@
    "color": "#C9A660",
    "roughness": 0.3
   },
+  "post-metal": {
+   "preset": "satin_paint",
+   "color": "#18181A",
+   "roughness": 0.5,
+   "specular": 0.3
+  },
   "cable": {
    "preset": "rubber",
    "color": "#141414",
@@ -217,8 +223,12 @@
    "material": "bark"
   },
   {
-   "match": "amp-plate-gold|post-sockets|tie-rod-insert",
+   "match": "amp-plate-gold|tie-rod-insert",
    "material": "brass"
+  },
+  {
+   "match": "post-sockets",
+   "material": "post-metal"
   },
   {
    "match": "lead-hf|lead-woofer|lead-ir",
@@ -1686,14 +1696,14 @@
    "panel": "#D8D5CD",
    "cloth": "#DCD6C8",
    "cork": "#3B2F28",
-   "disc": "#9A6A12",
+   "disc": "#81720E",
    "horn_preset": "clear_resin",
    "horn": "#FFFFFF",
    "horn_deep": "#DFD710",
    "horn_cloud": 0.0,
    "materials": {
     "bark": {
-     "deep": "#FFEB6C",
+     "deep": "#F1EE7F",
      "radius": 0.025,
      "roughness": 0.05,
      "ior": 1.49
@@ -1715,13 +1725,13 @@
      "cloud": 0.09
     },
     "horn-formed": {
-     "deep": "#B88E00",
+     "deep": "#A39700",
      "radius": 0.01,
      "roughness": 0.05,
      "ior": 1.49
     },
     "horn-satin": {
-     "deep": "#B88E00",
+     "deep": "#A39700",
      "radius": 0.01,
      "roughness": 0.05,
      "ior": 1.49
@@ -1729,8 +1739,8 @@
    },
    "horn_deep_site_hue": "#F2B705",
    "tint": "TruCast 9097 Fluorescent Yellow",
-   "horn_deep_dye": "#FFB101",
-   "horn_formed": "#B88E00"
+   "horn_deep_dye": "#CDC509",
+   "horn_formed": "#A39700"
   },
   "cloud-violet": {
    "bark": "clear_resin",
@@ -1944,8 +1954,8 @@
    "horn_cloud": 0.0,
    "materials": {
     "bark": {
-     "deep": "#4B4E51",
-     "radius": 0.025,
+     "deep": "#A7A7A7",
+     "radius": 0.0274,
      "roughness": 0.05,
      "ior": 1.49
     },
@@ -1959,20 +1969,20 @@
      "ior": 1.49
     },
     "horn-formed": {
-     "deep": "#424548",
-     "radius": 0.01,
+     "deep": "#242424",
+     "radius": 0.0425,
      "roughness": 0.05,
      "ior": 1.49
     },
     "horn-satin": {
-     "deep": "#424548",
-     "radius": 0.01,
+     "deep": "#242424",
+     "radius": 0.0425,
      "roughness": 0.05,
      "ior": 1.49
     }
    },
-   "tint": "TruCast 2074 Dark Gray",
-   "horn_formed": "#424548"
+   "tint": "neutral grey, 50 % through 20 mm (the owner, 10 Nov; ideal first, stock code or custom batch to be settled with chips)",
+   "horn_formed": "#242424"
   },
   "birch-fog-clear": {
    "bark": "clear_resin",

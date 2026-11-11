@@ -1,0 +1,182 @@
+{
+ "_note": "Mantle: Strata Float v3 (proposal A) for the engine, written by studio/fabkit/render.py from the fabrication CAD; part names are the parts' names, materials the parts' finishes.",
+ "model": "spinoffs/barkhorn/companions/mantle-r48/out-strata-v3/render/mantle-strata-v3.glb",
+ "origin_mm": [
+  235.0,
+  194.8,
+  0.0
+ ],
+ "materials": {
+  "acrylic": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "$deep",
+   "radius": 0.01,
+   "roughness": 0.05
+  },
+  "acrylic-base": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "$base",
+   "radius": 0.01,
+   "roughness": 0.05
+  },
+  "acrylic-lid": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "$deep",
+   "radius": 0.01,
+   "roughness": 0.05
+  },
+  "acrylic-strata": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "$deep",
+   "radius": 0.01,
+   "roughness": 0.05
+  },
+  "acrylic-strata-platter": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "$deep",
+   "radius": 0.024,
+   "roughness": 0.05
+  },
+  "aluminium": {
+   "preset": "metal",
+   "color": "#BFC1C2",
+   "roughness": 0.35
+  },
+  "aluminium-dark": {
+   "preset": "metal",
+   "color": "#2A2A2C",
+   "roughness": 0.45
+  },
+  "arm": {
+   "preset": "gunmetal",
+   "color": "#2C2C2E"
+  },
+  "black": {
+   "preset": "satin_paint",
+   "color": "#18181A",
+   "roughness": 0.5,
+   "specular": 0.3
+  },
+  "brass": {
+   "preset": "metal",
+   "color": "#C9A660",
+   "roughness": 0.28
+  },
+  "cartridge": {
+   "preset": "satin_paint",
+   "color": "#0E0E0F",
+   "roughness": 0.35,
+   "specular": 0.5
+  },
+  "etch-tone": {
+   "preset": "satin_paint",
+   "color": "$accent",
+   "roughness": 0.35,
+   "specular": 0.5
+  },
+  "rubber": {
+   "preset": "rubber",
+   "color": "#161616"
+  },
+  "steel": {
+   "preset": "metal",
+   "color": "#CFCFCB",
+   "roughness": 0.18
+  }
+ },
+ "assign": [
+  {
+   "match": "hinge-blocks",
+   "material": "acrylic"
+  },
+  {
+   "match": "base-L1-stack",
+   "material": "acrylic-base"
+  },
+  {
+   "match": "lid-top|lid-front|lid-back|lid-left|lid-right",
+   "material": "acrylic-lid"
+  },
+  {
+   "match": "plinth-L1-stack",
+   "material": "acrylic-strata"
+  },
+  {
+   "match": "platter-disc",
+   "material": "acrylic-strata-platter"
+  },
+  {
+   "match": "motor-plate|pulley|arm-puck",
+   "material": "aluminium"
+  },
+  {
+   "match": "phono-stage",
+   "material": "aluminium-dark"
+  },
+  {
+   "match": "arm",
+   "material": "arm"
+  },
+  {
+   "match": "platter-hub|platter-inserts|bearing-housing|bearing-nut|bearing-washer|motor|hinges",
+   "material": "black"
+  },
+  {
+   "match": "bushes|rear-plate",
+   "material": "brass"
+  },
+  {
+   "match": "cartridge",
+   "material": "cartridge"
+  },
+  {
+   "match": "mark",
+   "material": "etch-tone"
+  },
+  {
+   "match": "belt|foot-pads|phono-pads",
+   "material": "rubber"
+  },
+  {
+   "match": "post-1|post-2|post-3|post-4|platter-screws|spindle|bearing-spring|ball|thrust-plate|motor-screws|feet|foot-studs|rear-hardware",
+   "material": "steel"
+  }
+ ],
+ "flavours": {
+  "poison-2092": {
+   "deep": "#0DA41C",
+   "accent": "#123A16",
+   "glow": "#FF8C40",
+   "base": "#787B7E"
+  },
+  "ember-2423": {
+   "deep": "#E02B3A",
+   "accent": "#4A0E12",
+   "glow": "#FF8C40",
+   "base": "#787B7E"
+  },
+  "smoke-2074": {
+   "deep": "#787B7E",
+   "accent": "#1A1B1C",
+   "glow": "#FF8C40",
+   "base": "#787B7E"
+  },
+  "haze-2287": {
+   "deep": "#9C5DE3",
+   "accent": "#2E1A4A",
+   "glow": "#FF8C40",
+   "base": "#787B7E"
+  },
+  "ice-2069": {
+   "deep": "#B4DEFA",
+   "accent": "#24557E",
+   "glow": "#FF8C40",
+   "base": "#787B7E"
+  }
+ }
+}
