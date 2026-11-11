@@ -183,8 +183,10 @@ def _lamps(hemis, cores, top=4.2):
 HEMIS = [('ember', -1.5, 0.3, 2.22), ('dust', -1.0, 0.36, 2.38), ('acid', -0.5, 0.28, 2.18), ('ember', 0.0, 0.34, 2.34),
          ('dust', 0.5, 0.3, 2.2), ('acid', 1.0, 0.36, 2.4), ('ember', 1.5, 0.3, 2.26)]
 CORES = [('ember', -1.2, 0.3), ('dust', -0.15, 0.32), ('acid', 1.0, 0.3)]
-EV = -3.5            # between the lamps lane's Core (-5) and Hemisphere (-2) (test 1: -4 left the shades dark)
-ROOM = 0.7           # the declared room light's scale
+# (test 2, measured: the Cores already at the finals' hue and above their saturation, the shades at value 0.3-0.4 against
+# the finals' 1.0: a stop up, toward the Hemisphere's own -2; the room's light halved to hold it)
+EV = -2.5
+ROOM = 0.35          # the declared room light's scale
 
 
 def _base(size, title):
@@ -240,7 +242,8 @@ def core_bar_table():
     s['set']['props'].append(_lamps([], [('ember', 0.25, 0.25)]))
     s['camera'] = {'position': [0.4, -0.95, 1.24], 'target': [0.25, 0.25, BAR_H + 0.12], 'lens_mm': 85.0, 'level': True,
                    'fstop': 2.0, 'focus': [0.25, 0.25, BAR_H + 0.12]}
-    s['render']['exposure'] = -5.0              # Core alone: the lamps lane's own exposure for it
+    s['render']['exposure'] = -4.5              # Core alone: near the lamps lane's own -5 (test 2: the ball's value a little low at -4)
+    s['lights'] = {k: {**v, 'irradiance': round(v['irradiance'] * 2 ** (EV + 4.5), 3)} for k, v in s['lights'].items()}
     return s
 
 
