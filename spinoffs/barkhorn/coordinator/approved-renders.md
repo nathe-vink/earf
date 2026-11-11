@@ -417,6 +417,18 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
      gold contacts, foil sticker, white print, colored RCA jacks and LED dots; exposed screw heads (back, plates, port,
      woofer); bright driver terminals seen through the cabinet; the pale quilted lining through the acrylic (all tints
      but Smoke); the remote-kit board visible inside; the rating plate's printed label.
+   16:39 UTC, the owner: "Own color for sure" -> CORE'S BASE IS B IN ITS OWN COLOR (satin). Open only: the band version
+   (black lip and dock) or the whole base in color; `core-base-b-allcolor.png` settles it.
+   16:39 UTC, the owner: "Those bar images have washed out lights, and the setting is more dive bar than classy."
+   -> The brick-and-iron-stool bar is REJECTED. The bar must be classy.
+   -> Speaker lane (16:41, interrupting): a listening bar in a converted brick building: clean even brick, a walnut back
+      bar with ordered bottles, records and glassware, a fluted walnut bar with a honed dark stone top, polished concrete,
+      upholstered leather stools, spare dressing; products in the warm family only (Ember, Dust, Acid: amber light in
+      the bar); lamps exposed for their color (hemisphere-row.png is the reference: color across the whole shade), the
+      room lifted by declared out-of-frame light; no other light in frame. One set, three test frames: `bar-wide.png`
+      (all four products), `bar-pendants.png`, `core-bar-table.png`.
+   RULE: a setting made of the right materials can still be the wrong class of place. Briefs name the class of place
+   (who would drink there, what it costs), not only the materials.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
