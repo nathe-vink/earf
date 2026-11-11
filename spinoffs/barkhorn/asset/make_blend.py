@@ -5,6 +5,8 @@ looks as it does in the studio's renders.
 
     python3.11 spinoffs/barkhorn/asset/make_blend.py [--out spinoffs/barkhorn/asset/tropos.blend]
     python3.11 spinoffs/barkhorn/asset/make_blend.py --design strata --out spinoffs/barkhorn/asset/tropos-strata.blend
+    python3.11 spinoffs/barkhorn/asset/make_blend.py --design site --name 'Tropos Strata' --out spinoffs/barkhorn/asset/tropos-strata.blend \
+        --manifest spinoffs/barkhorn/asset/tropos-strata.manifest.json      (the approved build, since 2026-11-11)
 
 Needs the Cloud's render model, spinoffs/barkhorn/out-cloud/render/barkhorn-cloud.glb (written by the Cloud's
 fabkit build; not in git), and for Strata the proposals' render model too (spinoffs/barkhorn/variants/render_model.py). Each speaker stands at the origin, its feet on z = 0, its front facing -y, in metres;
@@ -66,7 +68,7 @@ def calibrate(pdef, tints):
                              'ior': t['ior']}
 
 
-def load_product(bpy, Pr, path, hide, full, tints=None, options=(), lift=0.0):
+def load_product(bpy, Pr, path, hide, full, tints=None, options=(), lift=0.0, materials=None, flavours=None):
     """One engine file's parts, lightened, placed once per tint with `hide` left out: (objects, part_of)."""
     pdef = Pr.load_def(path, ROOT)
     if tints:
@@ -91,9 +93,69 @@ def load_product(bpy, Pr, path, hide, full, tints=None, options=(), lift=0.0):
             bpy.context.view_layer.objects.active = ob
             bpy.ops.object.modifier_apply(modifier=m.name)
             bpy.context.scene.collection.objects.unlink(ob)
-    shot = {'product': {'def': path, 'instances': [{'position': [0, 0, lift], 'rotate_z': 0, 'flavour': f, 'hide': hide,
-                                                     'options': list(options)} for _, f in TINTS]}}
+    fls = flavours or [f for _, f in TINTS]
+    shot = {'materials': materials or {},
+            'product': {'def': path, 'instances': [{'position': [0, 0, lift], 'rotate_z': 0, 'flavour': f, 'hide': hide,
+                                                     'options': list(options)} for f in fls]}}
     return Pr.place(bpy, pdef, templates, shot, ROOT)
+
+
+def site_blocks():
+    """The approved build (the coordinator, 2026-11-11 15:05): each tint exactly as rollout.py builds the site's tall
+    front, shots.site('front-off-tall', tint) with TROPOS_BASE=A and TROPOS_HORN=polished: base A on its own swivel feet
+    (feet-base, feet-stem), the line's tints and linings (Smoke in its grey 50 %, black lining), the polished horn, the
+    black rods, no plinth and no light. Returns [(product file, hide, options, flavours by TINTS order, materials)], each
+    checked identical across the eight tints but for the flavour."""
+    import os
+    os.environ['TROPOS_BASE'] = 'A'; os.environ['TROPOS_HORN'] = 'polished'
+    sys.path.insert(0, str(ROOT / 'spinoffs' / 'barkhorn' / 'campaign'))
+    import shots
+    assert shots.ROLLOUT == {'base': 'A', 'horn': 'polished'}, shots.ROLLOUT
+    key = {f: t for t, (f, _) in shots.SITE_TINTS.items()}
+    refs = [shots.site('front-off-tall', key[f]) for _, f in TINTS]
+    out = []
+    for b, blk in enumerate(refs[0]['products']):
+        i0 = blk['instances'][0]
+        hide, opts = sorted(i0.get('hide', [])), list(i0.get('options') or [])
+        fls = []
+        for r in refs:
+            bb = r['products'][b]; ii = bb['instances'][0]
+            assert bb['def'] == blk['def'] and sorted(ii.get('hide', [])) == hide and list(ii.get('options') or []) == opts
+            assert r['materials'] == refs[0]['materials'], 'the material overrides differ between tints'
+            fls.append(ii.get('flavour', bb.get('flavour')))
+        out.append((blk['def'], hide, opts, fls, refs[0]['materials']))
+    return out
+
+
+def manifest(bpy, objs, path):
+    """Per tint: its parts and each material's key values, for another lane to assert its scenes against (as
+    shots._approved does): base colour, roughness, metallic, transmission, IOR, and any volume's colour and density."""
+    def val(n, k):
+        i = n.inputs.get(k)
+        if i is None or i.is_linked:
+            return None
+        v = i.default_value
+        return [round(x, 4) for x in v][:3] if hasattr(v, '__len__') else round(float(v), 4)
+    out = {}
+    for i, (tint, flavour) in enumerate(TINTS):
+        parts, mats = {}, {}
+        for o in [o for o in objs if o.get('instance') == i and o.type == 'MESH']:
+            part = o.name.split(f' {tint} ', 1)[-1]
+            parts[part] = sorted({s.material.name for s in o.material_slots if s.material})
+            for s_ in o.material_slots:
+                m = s_.material
+                if not m or m.name in mats or not m.use_nodes:
+                    continue
+                e = {}
+                for n in m.node_tree.nodes:
+                    if n.type == 'BSDF_PRINCIPLED':
+                        e.update({k: val(n, k) for k in ('Base Color', 'Roughness', 'Metallic', 'Transmission Weight', 'IOR', 'Emission Strength')})
+                    elif n.type in ('VOLUME_ABSORPTION', 'PRINCIPLED_VOLUME'):
+                        e.update({'volume ' + k: val(n, k) for k in ('Color', 'Density')})
+                mats[m.name] = e
+        out[tint] = {'flavour': flavour, 'parts': dict(sorted(parts.items())), 'materials': dict(sorted(mats.items()))}
+    json.dump(out, open(path, 'w'), indent=1)
+    print('manifest:', path)
 
 
 GLOW_DAY, GLOW_DUSK = 20.0, 40.0
@@ -129,7 +191,9 @@ def plinth_glow(bpy, objs):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--out', default=str(HERE / 'tropos.blend'))
-    ap.add_argument('--design', default='current', choices=sorted(DESIGNS))
+    ap.add_argument('--design', default='current', choices=sorted(DESIGNS) + ['site'],
+                    help="'site': the approved build, rollout's own site('front-off-tall', tint) (since 2026-11-11)")
+    ap.add_argument('--manifest', default=None, help='write the per-tint parts and materials manifest here (JSON)')
     ap.add_argument('--name', default=None, help='the collections\' prefix (default Tropos, Tropos Strata, or Tropos Strata Stepped)')
     ap.add_argument('--horn', default='smooth', choices=sorted(HORNS), help='Strata\'s horn: smooth (the owner\'s pick, 2026-11-03: "Horn: A, smooth"; polished since 15:14) or stepped (the alternative)')
     ap.add_argument('--full', action='store_true', help='keep every triangle (no LIGHTER)')
@@ -145,7 +209,12 @@ def main():
     a.name = a.name or ('Tropos' if a.design == 'current' else f'Tropos {a.design.title()}'
                         + (' Stepped' if a.horn == 'stepped' else ''))   # the owner's horn (smooth) keeps the plain name
     objs, part_of = [], {}
-    for prod_path, hide in DESIGNS[a.design]:
+    if a.design == 'site':
+        a.name = 'Tropos Strata' if a.name == 'Tropos Site' else a.name
+        for prod_path, hide, opts, fls, mats in site_blocks():
+            o, p = load_product(bpy, Pr, prod_path, hide, a.full, options=opts, materials=mats, flavours=fls)
+            objs += o; part_of.update(p)
+    for prod_path, hide in ([] if a.design == 'site' else DESIGNS[a.design]):
         if a.design != 'current':                 # the smooth horn: its parts shown, the stepped one hidden
             unhide = HORNS[a.horn].get('studio/products/barkhorn-cloud.json', []) if 'cloud' in prod_path else []
             hide = [h for h in hide if h not in unhide] + (HORNS[a.horn].get(prod_path, []) if 'variants' in prod_path else [])
@@ -176,12 +245,14 @@ def main():
         col['tint'] = tint; col['flavour'] = flavour; col['tints'] = a.tints
         col['note'] = (f'{a.name} in {tint} ({flavour}): EARF\'s horn loudspeaker in tinted cast acrylic, 1293 mm tall, '
                        'metres, z up, front -y, feet on z = 0. Materials are Cycles (volume absorption in the acrylic).'
-                     + ('' if a.design == 'current' else f' {a.design.title()} (spinoffs/barkhorn/variants/{a.design.upper()}.md, '
+                     + (' The approved build (rollout.py, site front-off-tall): base A on its swivel feet, the polished horn, '
+                        'black rods, no plinth, no light.' if a.design == 'site' else '')
+                     + ('' if a.design in ('current', 'site') else f' {a.design.title()} (spinoffs/barkhorn/variants/{a.design.upper()}.md, '
                         f'adopted by the owner 2026-11-01) with the {a.horn} horn'
                         + (' (the lead version).' if a.horn == 'stepped' else ' (the option).')))
         col.asset_mark()
         col.asset_data.description = col['note']
-        for t in ['EARF', 'Tropos', tint] + ([a.design.title(), f'{a.horn} horn'] if a.design != 'current' else []):
+        for t in ['EARF', 'Tropos', tint] + ([a.design.title(), f'{a.horn} horn'] if a.design not in ('current', 'site') else ['approved', 'base A']):
             col.asset_data.tags.new(t)
         if i:
             bpy.context.view_layer.layer_collection.children[col.name].exclude = True
@@ -197,6 +268,8 @@ def main():
             except RuntimeError:
                 pass
     plinth_glow(bpy, objs)
+    if a.manifest:
+        manifest(bpy, objs, a.manifest)
     bpy.context.preferences.filepaths.use_file_compression = True
     bpy.context.preferences.filepaths.save_version = 0          # no .blend1 backup beside it
     bpy.ops.wm.save_as_mainfile(filepath=a.out, compress=True)
