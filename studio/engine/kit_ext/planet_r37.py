@@ -47,6 +47,8 @@ def niches(bpy, kit, p, objs):
         strip.box(x0 + t + f + 0.03, yf + 0.04, z1 - t - f - 0.012, x1 - t - f - 0.03, yf + 0.06, z1 - t - f - 0.004)
     objs.append(oak.object(bpy, K.dark_oak(bpy, vertical=True, name='oak-spk-niche'), bevel=0.003))
     objs.append(felt.object(bpy, kit.material(bpy, 'felt', p.get('niche_felt', '#1C1B1A'))))
+    if p.get('products_only'):        # (2026-11-11, after hours: the products' lamps alone; no strip in the room)
+        return
     lamp = strip.object(bpy, K.emitter(bpy, 'spk-niche-strip', '#FF9A50', p.get('spk_niche_strip', 2.0)))
     lamp.visible_camera = False; lamp.visible_glossy = False; objs.append(lamp)
 
@@ -105,27 +107,28 @@ def ginza(bpy, kit, p, objs):
     import math
     C = R.COUNTER
     zt = C['top_z'] - C['top_t']
-    st = K.Mesh('counter-strip')
-    st.box(C['x0'] + 0.45, C['y0'] - C['over'] + 0.006, zt - 0.008, C['x1'] - 0.45, C['y0'] - C['over'] + 0.018, zt - 0.002)
-    lamp = st.object(bpy, K.emitter(bpy, 'counter-strip', '#FFB870', p.get('counter_strip', 3.0)))
-    lamp.visible_camera = False; lamp.visible_glossy = False; objs.append(lamp)
-    # the sconce: a brass back plate and arm, a clear glass chimney round a small warm bulb
-    sx, sz = p.get('sconce_x', 4.30), p.get('sconce_z', 2.42)
-    yw = R.W - 0.02 - R.RECORD_WALL['depth'] - 0.004
-    br = K.Mesh('sconce-brass')
-    K._cyl(br.bm, sx, yw - 0.006, sz, 0.05, 0.012, seg=32, axis='y')
-    K.LK._rod(br.bm, (sx, yw - 0.01, sz), (sx, yw - 0.16, sz), 0.007, 0.007, seg=12)
-    K._cyl(br.bm, sx, yw - 0.16, sz - 0.09, 0.035, 0.012, seg=32)            # the cup the chimney stands in
-    K.LK._rod(br.bm, (sx, yw - 0.16, sz), (sx, yw - 0.16, sz - 0.078), 0.006, 0.006, seg=10)
-    objs.append(br.object(bpy, K.brass(bpy), smooth=True))
-    gl = K.Mesh('sconce-glass')
-    K._lathe(gl.bm, [(0.032, 0.0), (0.034, 0.0), (0.040, 0.06), (0.036, 0.16), (0.033, 0.16), (0.037, 0.06), (0.030, 0.0)],
-             seg=48, z0=sz - 0.078, cx=sx, cy=yw - 0.16)
-    g = gl.object(bpy, K.principled(bpy, 'chimney-glass', '#FFFFFF', rough=0.02, trans=1.0, ior=1.5), smooth=True)
-    g.visible_shadow = False; objs.append(g)
-    bu = K.Mesh('sconce-bulb'); K._cyl(bu.bm, sx, yw - 0.16, sz - 0.02, 0.012, 0.03, seg=24)
-    objs.append(bu.object(bpy, K.emitter(bpy, 'sconce-filament', '#FFB060', p.get('sconce_glow', 6.0)), smooth=True))
-    K._lamp(bpy, 'sconce-lamp', (sx, yw - 0.16, sz + 0.0), p.get('sconce_w', 6.0), 2300)
+    if not p.get('products_only'):    # (2026-11-11, after hours: no counter strip and no sconce in the room)
+        st = K.Mesh('counter-strip')
+        st.box(C['x0'] + 0.45, C['y0'] - C['over'] + 0.006, zt - 0.008, C['x1'] - 0.45, C['y0'] - C['over'] + 0.018, zt - 0.002)
+        lamp = st.object(bpy, K.emitter(bpy, 'counter-strip', '#FFB870', p.get('counter_strip', 3.0)))
+        lamp.visible_camera = False; lamp.visible_glossy = False; objs.append(lamp)
+        # the sconce: a brass back plate and arm, a clear glass chimney round a small warm bulb
+        sx, sz = p.get('sconce_x', 4.30), p.get('sconce_z', 2.42)
+        yw = R.W - 0.02 - R.RECORD_WALL['depth'] - 0.004
+        br = K.Mesh('sconce-brass')
+        K._cyl(br.bm, sx, yw - 0.006, sz, 0.05, 0.012, seg=32, axis='y')
+        K.LK._rod(br.bm, (sx, yw - 0.01, sz), (sx, yw - 0.16, sz), 0.007, 0.007, seg=12)
+        K._cyl(br.bm, sx, yw - 0.16, sz - 0.09, 0.035, 0.012, seg=32)            # the cup the chimney stands in
+        K.LK._rod(br.bm, (sx, yw - 0.16, sz), (sx, yw - 0.16, sz - 0.078), 0.006, 0.006, seg=10)
+        objs.append(br.object(bpy, K.brass(bpy), smooth=True))
+        gl = K.Mesh('sconce-glass')
+        K._lathe(gl.bm, [(0.032, 0.0), (0.034, 0.0), (0.040, 0.06), (0.036, 0.16), (0.033, 0.16), (0.037, 0.06), (0.030, 0.0)],
+                 seg=48, z0=sz - 0.078, cx=sx, cy=yw - 0.16)
+        g = gl.object(bpy, K.principled(bpy, 'chimney-glass', '#FFFFFF', rough=0.02, trans=1.0, ior=1.5), smooth=True)
+        g.visible_shadow = False; objs.append(g)
+        bu = K.Mesh('sconce-bulb'); K._cyl(bu.bm, sx, yw - 0.16, sz - 0.02, 0.012, 0.03, seg=24)
+        objs.append(bu.object(bpy, K.emitter(bpy, 'sconce-filament', '#FFB060', p.get('sconce_glow', 6.0)), smooth=True))
+        K._lamp(bpy, 'sconce-lamp', (sx, yw - 0.16, sz + 0.0), p.get('sconce_w', 6.0), 2300)
     # the card: a small folded tent card by the right deck, its face to the customers. Out since 2026-10-20 (the owner's
     # EARFcoin: a coin per guest, exchanged for a song request; round 38 puts a request column here): `card` to show it
     if p.get('card', False):

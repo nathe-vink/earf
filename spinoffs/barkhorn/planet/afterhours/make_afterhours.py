@@ -53,7 +53,36 @@ GUESTS = [   # (x, y, z, facing deg (0 faces -y; 90 faces +x), tint)
     (7.54, 1.45, 0.0, 115.0, 'haze'), (5.58, 1.45, 0.0, 100.0, 'ice')]          # by the booths and the window wall
 
 
-def shot():
+# the artist's rendering's base (the coordinator, 2026-11-11 13:10: an illustration, labelled "Artist's rendering"; the
+# honest-light rules for product pictures do not bind it). The same scene, made readable: a clear view down the bar,
+# each Tropos under or beside a pendant, and soft light added so the room reads (declared in `ADDED`)
+ARTIST_OUT = os.path.join(ROOT, 'studio', 'shots', 'barkhorn', 'afterhours', 'artist.json')
+ARTIST_GUESTS = [
+    (3.15, 3.45, 0.0, 70.0, 'ember'), (3.15, 5.0, 0.0, 110.0, 'acid'),          # the far pair, by the far pendant
+    (5.55, R.BACKBAR_Y + 0.0662, FEET_BAR, 0.0, 'smoke'), (8.25, R.BACKBAR_Y + 0.0662, FEET_BAR, 0.0, 'fog'),   # the niches
+    (7.85, 3.40, 0.0, 50.0, 'dust'), (5.45, 3.40, 0.0, 65.0, 'poison'),         # under the counter's Ember and Fog pendants
+    (6.56, 1.35, 0.0, 115.0, 'haze'), (4.60, 1.35, 0.0, 100.0, 'ice')]          # beside the booths' pendants
+ADDED = {   # the light added for the illustration (none of it a product's)
+    'room_ambient': {'type': 'area', 'position': [7.5, 3.0, 3.30], 'target': [7.5, 3.0, 0.0], 'size_m': [13.0, 5.0],
+                     'irradiance': 0.25, 'color': 2600, 'camera': False},
+    'bounce_front': {'type': 'area', 'position': [12.7, 2.6, 1.5], 'target': [6.0, 3.8, 1.0], 'size_m': [2.0, 1.2],
+                     'irradiance': 0.15, 'color': 2800, 'camera': False}}
+
+
+def artist():
+    s = shot(ARTIST_GUESTS)
+    s['title'] = "AFTER HOURS AT PLANET EARF: the base for an artist's rendering (illustration; light added, declared)"
+    s['size'] = [2000, 1125]
+    s['lights'] = copy.deepcopy(ADDED)
+    s['set']['props'][0]['products_only'] = True                     # no dead strip, no sconce
+    s['camera'] = {'position': [11.35, 2.30, 1.10], 'target': [2.6, 4.0, 1.30], 'lens_mm': 30, 'level': True,
+                   'fstop': 5.6, 'focus': [7.0, 3.8, 1.2]}
+    s['render'] = {**s['render'], 'samples': 512, 'exposure': 3.0}
+    s['afterhours']['added_light'] = ADDED
+    return s
+
+
+def shot(guests=GUESTS):
     s = json.loads(subprocess.run(['git', 'show', f'{SRC[0]}:{SRC[1]}'], capture_output=True, check=True, cwd=ROOT).stdout)
     s = copy.deepcopy(s)
     s['title'] = 'AFTER HOURS AT PLANET EARF: the bar after closing, lit only by the lamps EARF sells (test, 2026-11-11)'
@@ -77,7 +106,7 @@ def shot():
                  'cores': [{'tint': TINT[t][1], 'x': x, 'y': Y_BAR - 0.17, 'floor_z': TOP, 'rot': 200.0} for x, t in CORES]})
     s['set']['props'] = keep
     prods = []
-    for x, y, z, rz, t in GUESTS:
+    for x, y, z, rz, t in guests:
         prods += tropos([{'position': [x, y, z], 'rotate_z': rz}], TINT[t][0])
     prods.append({'def': 'studio/products/mantle-strata-v3.json', 'flavour': 'smoke-2074',
                   'instances': [{'position': list(MANTLE), 'rotate_z': 0.0}]})
@@ -90,12 +119,14 @@ def shot():
     s['render'] = {**s['render'], 'samples': 64, 'denoise': True, 'clamp': 0, 'exposure': 5.5, 'white_balance_k': 3000,
                    'bounces': 64, 'diffuse_bounces': 32, 'glossy_bounces': 32, 'transmission_bounces': 32,
                    'caustics_refractive': True, 'caustics_reflective': True}
-    s['afterhours'] = {'pendants': PENDANTS, 'booth_pendants': BOOTH_PENDANTS, 'cores': CORES, 'mantle': MANTLE, 'guests': GUESTS, 'led_k': LED_K,
+    s['afterhours'] = {'pendants': PENDANTS, 'booth_pendants': BOOTH_PENDANTS, 'cores': CORES, 'mantle': MANTLE, 'guests': guests, 'led_k': LED_K,
                        'core_load': CORE_LOAD, 'hemisphere_lm': HEMI_LM, 'core_lm_out': CORE_LM_OUT}
     return s
 
 
 if __name__ == '__main__':
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
-    json.dump(shot(), open(OUT, 'w'), indent=1)
-    print(OUT)
+    if '--artist' in sys.argv:
+        json.dump(artist(), open(ARTIST_OUT, 'w'), indent=1); print(ARTIST_OUT)
+    else:
+        json.dump(shot(), open(OUT, 'w'), indent=1); print(OUT)
