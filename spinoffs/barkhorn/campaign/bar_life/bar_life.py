@@ -92,11 +92,18 @@ def fill_records(bpy, name, p, kit):
     rnd = random.Random(p.get('seed', 11))
     dg = bpy.context.evaluated_depsgraph_get()
     cell, y0, depth = p['cell'], p['y'], p['depth']
-    pal = ['#1A1A1A', '#141414', '#26262A', '#E6E0D2', '#D8D0BE', '#C9BFA8', '#9C9488', '#6E6A64', '#3A2E2A', '#8A6E4E',
-           '#B8A27A', '#4A3A30', '#2E3440', '#5A4A3A', '#7A3A2A', '#3A4A3A', '#C8B890', '#1E1E22']
+    # (20:47: real LP spines, not white binders: mostly mid and dark muted colours, a few pale; thin text lines)
+    pal = ['#1A1A1A', '#141414', '#26262A', '#3A2E2A', '#4A3A30', '#2E3440', '#5A4A3A', '#7A3A2A', '#3A4A3A', '#1E1E22',
+           '#5E3A30', '#34404A', '#6A5A3E', '#4E3A44', '#2A3A36', '#7A5A3A', '#5A5A54', '#3A3026', '#6E4A2E', '#44483A',
+           '#8A6E4E', '#9C9488', '#B8A27A', '#D8D0BE']
+    npale = 3                                                         # the last few: the pale ones, seldom
+    ink = ['#C9BFA8', '#D8D0BE', '#8A8478', '#B8A27A']
     cloth = ['#5A2A22', '#2E3A2E', '#6E5A3E', '#3A2E26', '#7A6448', '#2A2A30', '#5E4A36', '#8A3A2A']
     mats = [_plain(bpy, h, 0.62) for h in pal]
     bmats = [_plain(bpy, h, 0.75) for h in cloth]
+    imats = [_plain(bpy, h, 0.6) for h in ink]
+    def spine():
+        return rnd.randrange(len(pal) - npale) if rnd.random() < 0.93 else len(pal) - npale + rnd.randrange(npale)
     bm = bmesh.new(); ib = 0
     def box(x0, y0_, z0, x1, y1, z1, mi):
         g = bmesh.ops.create_cube(bm, size=1.0)
@@ -137,17 +144,28 @@ def fill_records(bpy, name, p, kit):
                 box(xa + 0.01, yf + 0.03, z, xb - 0.01, yf + 0.036, z + 0.315, rnd.randrange(len(pal)))
             if kind == 'vase':
                 extras.append((cx, yb - 0.12, z)); filled += 1; continue
-            fill = rnd.choice([1.0, 1.0, 1.0, 0.95, 0.9, 0.8])
-            s = xa + 0.003
+            fill = rnd.choice([1.0, 1.0, 0.92, 0.85, 0.75, 0.7])
+            lean = rnd.random() < 0.6 and fill < 0.8                 # (20:47: some rows leaning into the gap)
+            s = xa + 0.003; ang = rnd.uniform(6.0, 14.0)
             while s < xa + (xb - xa) * fill - 0.004:
-                t = rnd.choice([0.003, 0.0032, 0.0035, 0.004, 0.0045, 0.006, 0.009]) * rnd.uniform(0.9, 1.1)
-                pull = rnd.uniform(0.02, 0.07) if rnd.random() < 0.04 else 0.0
-                h = 0.315 + rnd.uniform(-0.006, 0.002) - rnd.choice([0, 0, 0, 0, 0.012, 0.03])
-                box(s, yf - pull, z, s + t, yb - pull, z + h, rnd.randrange(len(pal)))
-                s += t + 0.0004
+                t = rnd.choice([0.003, 0.0035, 0.004, 0.004, 0.0045, 0.005]) * rnd.uniform(0.95, 1.05)
+                pull = rnd.uniform(0.02, 0.06) if rnd.random() < 0.03 else 0.0
+                h = 0.315 + rnd.uniform(-0.004, 0.002) - rnd.choice([0, 0, 0, 0, 0, 0.012])
+                v0 = len(bm.verts)
+                mi = spine()
+                box(s, yf - pull, z, s + t, yb - pull, z + h, mi)
+                if rnd.random() < 0.55:                                 # a thin printed line on the spine: the title
+                    tz = z + rnd.uniform(0.08, 0.2); th = rnd.uniform(0.04, 0.1)
+                    box(s + t * 0.25, yf - pull - 0.0004, tz, s + t * 0.75, yf - pull + 0.002, tz + th, len(pal) + len(cloth) + rnd.randrange(len(ink)))
+                if lean:
+                    bm.verts.ensure_lookup_table(); vs = [bm.verts[j] for j in range(v0, len(bm.verts))]
+                    bmesh.ops.rotate(bm, verts=vs, cent=Vector((s + t, 0, z)), matrix=__import__('mathutils').Matrix.Rotation(math.radians(ang), 3, 'Y'))
+                    s += t / math.cos(math.radians(ang)) + 0.0003
+                else:
+                    s += t + 0.0004
             filled += 1
     me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free()
-    for m in mats + bmats:
+    for m in mats + bmats + imats:
         me.materials.append(m)
     ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
     out = [ob]
@@ -172,3 +190,101 @@ def fill_records(bpy, name, p, kit):
         o2.location = (x, y, z); out.append(o2)
     print('RECORDS filled', filled, 'cells')
     return out
+
+
+def _stone(bpy, hx, rough):
+    """A honed dark stone: the colour drifting a little in large soft clouds, low roughness, so it carries soft
+    reflections of what stands on it."""
+    key = f'stone-{hx}-{rough}'
+    m = bpy.data.materials.get(key)
+    if m:
+        return m
+    m = bpy.data.materials.new(key); m.use_nodes = True; nt = m.node_tree
+    b = next(n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED')
+    b.inputs['Roughness'].default_value = rough
+    nz = nt.nodes.new('ShaderNodeTexNoise'); nz.inputs['Scale'].default_value = 3.0; nz.inputs['Detail'].default_value = 4.0
+    ramp = nt.nodes.new('ShaderNodeValToRGB')
+    c = _hex(hx); ramp.color_ramp.elements[0].color = (*[v * 0.8 for v in c], 1.0); ramp.color_ramp.elements[1].color = (*[v * 1.2 for v in c], 1.0)
+    nt.links.new(nz.outputs['Fac'], ramp.inputs['Fac']); nt.links.new(ramp.outputs['Color'], b.inputs['Base Color'])
+    return m
+
+
+def restyle(bpy, name, p, kit):
+    """Swap a reused room's materials by name prefix (the owner, 15:43: no chrome, brass or zinc; the coordinator,
+    20:47: a dark bar top that carries reflections, plain felt): `swap` {prefix: {"kind": "stone"|"plain", "color", "rough",
+    "metal"}}."""
+    made, hit = {}, []
+    for o in bpy.data.objects:
+        if o.type != 'MESH':
+            continue
+        for slot in o.material_slots:
+            if not slot.material:
+                continue
+            for pre, spec in p['swap'].items():
+                if slot.material.name.startswith(pre):
+                    if pre not in made:
+                        if spec.get('kind') == 'stone':
+                            made[pre] = _stone(bpy, spec['color'], spec.get('rough', 0.2))
+                        else:
+                            mm = _plain(bpy, spec['color'], spec.get('rough', 0.9))
+                            b = next(n for n in mm.node_tree.nodes if n.type == 'BSDF_PRINCIPLED')
+                            b.inputs['Metallic'].default_value = spec.get('metal', 0.0)
+                            made[pre] = mm
+                    slot.material = made[pre]; hit.append(o.name)
+                    break
+    print('RESTYLED', sorted(set(hit)))
+    return []
+
+
+def drape(bpy, name, p, kit):
+    """A wool throw left on the bar, folded over its front edge (the coordinator, 20:47: "something soft and warm in
+    frame and readable"): a cloth `w` wide lying `on` metres back from the edge on the top (z `top`), round the edge's
+    radius `r`, then hanging `drop`, with soft folds that grow toward the hem and a hem that is not straight. The edge
+    runs along x at y `edge` (the room side toward -y). Solidified `t` thick, subdivided once, the kit's wool."""
+    import random
+    rnd = random.Random(p.get('seed', 5))
+    x0, w, ye, zt = p['x0'], p['w'], p['edge'], p['top']
+    on, drop, r, t = p.get('on', 0.24), p.get('drop', 0.32), p.get('r', 0.03), p.get('t', 0.007)
+    nu, nv = 48, 64
+    L = on + math.pi * r / 2 + drop
+    folds = [(rnd.uniform(0.07, 0.12), rnd.uniform(0, 6.28), rnd.uniform(0.006, 0.014)) for _ in range(3)]
+    bm = bmesh.new(); grid = []
+    for j in range(nv + 1):
+        v = L * j / nv
+        R_ = r + t * 0.5                                          # the corner's centre (ye + r, zt - r); the cloth's mid-surface
+        if v <= on:
+            y, z, ny, nz = ye + r + (on - v), zt + t * 0.5, 0.0, 1.0
+        elif v <= on + math.pi * r / 2:
+            a = (v - on) / r
+            ny, nz = -math.sin(a), math.cos(a)
+            y, z = ye + r + R_ * ny, zt - r + R_ * nz
+        else:
+            y, z, ny, nz = ye - t * 0.5, zt - r - (v - on - math.pi * r / 2), -1.0, 0.0
+        row = []
+        for i in range(nu + 1):
+            u = w * i / nu
+            grow = max(0.0, v - on) / (L - on)
+            k = grow * 1.75
+            off = sum(A * math.sin(2 * math.pi * u / lam + ph) for lam, ph, A in folds) * k + sum(A for _, _, A in folds) * k
+            if v <= on:                                           # a little slack where it lies
+                off = 0.003 * (1 + math.sin(2 * math.pi * u / 0.19 + 1.0)) * (1 - v / on)
+            hem = 0.0
+            if j == nv:
+                hem = 0.015 * math.sin(2 * math.pi * u / 0.33 + 0.7)
+            px = x0 + u
+            # the folds stand off the surface, never into it
+            py = y + ny * (off + 0.0015)
+            pz = z + nz * (off + 0.0015) + hem
+            row.append(bm.verts.new((px, py, pz)))
+        grid.append(row)
+    for j in range(nv):
+        for i in range(nu):
+            bm.faces.new((grid[j][i], grid[j][i + 1], grid[j + 1][i + 1], grid[j + 1][i]))
+    me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free()
+    for poly in me.polygons:
+        poly.use_smooth = True
+    me.materials.append(kit.material(bpy, 'wool', p.get('color', '#7A4A32')))
+    ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
+    so = ob.modifiers.new('thick', 'SOLIDIFY'); so.thickness = t; so.offset = 0.0
+    ss = ob.modifiers.new('soft', 'SUBSURF'); ss.levels = 1; ss.render_levels = 1
+    return [ob]

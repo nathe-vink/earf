@@ -38,13 +38,18 @@ SPK_Y = R.BACKBAR_Y + 0.0662
 # (test 3, by ray cast: behind the bar is the bartender's aisle, floor to the wall; the original's players stood on the
 # bar top's back half, the DJ station, between the bays: Mantle there, where the room's left player stood)
 DECK_Y = R.COUNTER['y1'] - 0.22
-MANTLE = (R.DJ['x'] - 0.38, DECK_Y, R.COUNTER['top_z'] + 0.001)
+# (20:47: Mantle on the bar between the lens and the near speaker, in its own pool, big enough to read; it sits below
+# the speaker's foot in the frame, so it covers none of it)
+MANTLE = (8.9, Y_BAR + 0.1, R.COUNTER['top_z'] + 0.001)
+MANTLE_RZ = 25.0
 # (18:36: no lamp across a speaker, every shade whole, one over Mantle so it sits in a pool: five, between the bays)
 HEMIS = [('dust', 6.18, -0.02, 1.80), ('ember', 6.54, 0.12, 1.66), ('acid', 6.92, -0.04, 1.86), ('ember', 7.3, 0.08, 1.74),
          ('dust', 7.66, -0.03, 1.82)]
 CORES = [('ember', 6.05, -0.14), ('dust', 7.05, -0.2), ('acid', 7.8, -0.12)]     # (18:36: all three in frame, none before Mantle)
-EV, WB = -1.5, 4000          # the lamps lane's finals: Core -1, Hemisphere -2, white balance 4000 K
+EV, WB = -2.0, 4000          # (20:47: the near Cores pale at -1.5: half a stop down, the room lifted by its declared fill)
 TRACK = 3.0                  # the declared track lights' scale (tests 1-4: too dark)
+# (20:47: the bays' pools a stop and a half too strong, aim near 1.6x the wall; the room lifted for the half stop down)
+WALL, BAY, HOUSE = 2.2, 3.0, 0.12
 
 
 def _room():
@@ -83,25 +88,25 @@ def _life():
                     'material': 'clay', 'color': '#E2861E', 'roughness': 0.45})                                    # a twist of orange
     out += [{'kind': 'kit', 'shape': 'box', 'size': [0.22, 0.13, 0.014], 'position': [7.95, Y_BAR + 0.12, T], 'rotate': [0, 0, -14.0],
              'material': 'cotton', 'color': '#CFC6B4', 'ease': 0.004},                                          # a bar cloth
-            {'kind': 'kit', 'shape': 'asset', 'model': 'wooden_bowl_01', 'res': '2k', 'position': [9.3, Y_BAR + 0.05, T], 'rotate': [0, 0, 30.0]},
-            {'kind': 'kit', 'shape': 'asset', 'model': 'food_lime_01', 'res': '2k', 'position': [9.28, Y_BAR + 0.04, T + 0.03], 'rotate': [0, 20, 0]},
-            {'kind': 'kit', 'shape': 'asset', 'model': 'food_lime_01', 'res': '2k', 'position': [9.34, Y_BAR + 0.08, T + 0.032], 'rotate': [30, 0, 90]},
-            {'kind': 'kit', 'shape': 'asset', 'model': 'lemon', 'res': '2k', 'position': [9.25, Y_BAR + 0.1, T + 0.035], 'rotate': [0, 70, 20]},
+            {'kind': 'kit', 'shape': 'asset', 'model': 'wooden_bowl_01', 'res': '2k', 'position': [6.4, Y_BAR + 0.18, T], 'rotate': [0, 0, 30.0]},
+            {'kind': 'kit', 'shape': 'asset', 'model': 'food_lime_01', 'res': '2k', 'position': [6.38, Y_BAR + 0.17, T + 0.03], 'rotate': [0, 20, 0]},
+            {'kind': 'kit', 'shape': 'asset', 'model': 'food_lime_01', 'res': '2k', 'position': [6.44, Y_BAR + 0.21, T + 0.032], 'rotate': [30, 0, 90]},
+            {'kind': 'kit', 'shape': 'asset', 'model': 'lemon', 'res': '2k', 'position': [6.35, Y_BAR + 0.23, T + 0.035], 'rotate': [0, 70, 20]},
             {'kind': 'kit', 'shape': 'box', 'size': [4.2, 1.6, 0.008], 'position': [6.9, 2.75, 0.001],
              'material': 'pbr', 'texture': 'poly_wool_herringbone', 'tex_res': '2k', 'tint': '#6A4A36', 'tint_mix': 0.55, 'gain': 0.7},   # a runner
             {'kind': 'kit', 'shape': 'asset', 'model': 'potted_plant_02', 'res': '2k', 'position': [8.85, 2.35, 0.0], 'rotate': [0, 0, 40.0]}]
-    out.append({'kind': 'kit', 'shape': 'box', 'size': [0.2, 0.05, 0.022], 'position': [6.86, DECK_Y + 0.09, T],
+    out.append({'kind': 'kit', 'shape': 'box', 'size': [0.2, 0.05, 0.022], 'position': [9.36, MANTLE[1] + 0.22, T], 'rotate': [0, 0, 20.0],
                 'material': 'pbr', 'texture': 'american_walnut_veneer', 'tex_res': '2k', 'tint': '#5A3824', 'tint_mix': 0.5, 'gain': 0.6, 'ease': 0.003})
     bds = [  # the now-playing sleeve on a small walnut stand by Mantle
-           {'image': 'tex/cover-05.png', 'w': 0.18, 'h': 0.18, 'x': 6.86, 'y': DECK_Y + 0.08, 'z': T + 0.022, 'rot': [-14.0, 0, -10.0], 'ground': '#EFEBE3', 'rough': 0.85},
+           {'image': 'tex/cover-05.png', 'w': 0.18, 'h': 0.18, 'x': 9.36, 'y': MANTLE[1] + 0.21, 'z': T + 0.022, 'rot': [-14.0, 0, 20.0], 'ground': '#EFEBE3', 'rough': 0.85},
            # a small stack waiting, on the bar top's back half
-           *[{'image': f'tex/cover-{k:02d}.png', 'w': 0.315, 'h': 0.315, 'x': 7.62 + 0.006 * j, 'y': DECK_Y + 0.16 + 0.004 * j, 'z': T + 0.004 * j,
+           *[{'image': f'tex/cover-{k:02d}.png', 'w': 0.315, 'h': 0.315, 'x': 7.62 + 0.006 * j, 'y': Y_BAR - 0.02 + 0.004 * j, 'z': T + 0.004 * j,
               'rot': [-90.0, 0, [4.0, -6.0, 9.0, -3.0][j]]} for j, k in enumerate((9, 2, 12, 7))],
            # sleeves pulled half out of the wall's cells, their faces turned a little to the room
            *[{'image': f'tex/cover-{k:02d}.png', 'w': 0.315, 'h': 0.315, 'x': x, 'y': R.RECORD_WALL['y'] - 0.14, 'z': z, 'rot': [-4.0, 0, rz],
               'ground': '#E9E3D6'} for k, x, z, rz in ((3, 4.4, 1.565, 70.0), (10, 9.6, 1.925, -64.0), (14, 6.6, 2.285, 58.0))],
-           {'image': 'tex/matches.png', 'w': 0.04, 'h': 0.064, 't': 0.006, 'x': 6.55, 'y': Y_BAR - 0.22, 'z': T, 'rot': [-90.0, 0, 22.0]},
-           {'image': 'tex/newspaper.png', 'w': 0.29, 'h': 0.4, 't': 0.006, 'x': 9.0, 'y': Y_BAR - 0.26, 'z': T, 'rot': [-90.0, 0, -11.0],
+           {'image': 'tex/matches.png', 'w': 0.04, 'h': 0.064, 't': 0.006, 'x': 7.05, 'y': Y_BAR - 0.25, 'z': T, 'rot': [-90.0, 0, 22.0]},
+           {'image': 'tex/newspaper.png', 'w': 0.29, 'h': 0.4, 't': 0.006, 'x': 6.6, 'y': Y_BAR - 0.34, 'z': T, 'rot': [-90.0, 0, -11.0],
             'ground': '#E4E0D6', 'rough': 0.85},
            # the wry detail: the speaker's seat is taken
            {'image': 'tex/reserved.png', 'w': 0.1, 'h': 0.05, 't': 0.002, 'x': 5.55, 'y': SPK_Y - 0.27, 'z': FEET_BAR, 'rot': [-18.0, 0, 0.0],
@@ -121,19 +126,19 @@ def _track():
     out = {}
     for k, x in enumerate((5.0, 6.2, 7.4, 8.6, 9.6)):
         out[f'track-wall{k}'] = {'type': 'area', 'size_m': [0.12, 0.12], 'position': [x, 4.9, R.CEIL - 0.05], 'target': [x + 0.1, R.RECORD_WALL['y'], 1.7],
-                                 'irradiance': round(1.6 * TRACK, 3), 'spread_deg': 28, 'color': '#FFD2A0'}
+                                 'irradiance': round(WALL * TRACK, 3), 'spread_deg': 28, 'color': '#FFD2A0'}
     for k, x in enumerate((5.6, 7.0, 8.4)):
         out[f'track-bar{k}'] = {'type': 'area', 'size_m': [0.12, 0.12], 'position': [x, Y_BAR - 0.6, R.CEIL - 0.05], 'target': [x, Y_BAR, TOP],
                                 'irradiance': round(0.5 * TRACK, 3), 'spread_deg': 24, 'color': '#FFD2A0'}
     for k, xc in enumerate(R.SPK_NICHES):                     # (18:36: a pool on each bay, so the whole speaker reads)
         # (18:40: the cabinet glows as on the stage picture, the bay's own back and sides darker: strong, narrow, onto the speaker)
         out[f'track-bay{k}'] = {'type': 'area', 'size_m': [0.14, 0.14], 'position': [xc, 3.6, R.CEIL - 0.05], 'target': [xc, SPK_Y - 0.1, FEET_BAR + 0.7],
-                                'irradiance': round(4.5 * TRACK, 3), 'spread_deg': 14, 'color': '#FFE2C0'}
+                                'irradiance': round(BAY * TRACK, 3), 'spread_deg': 14, 'color': '#FFE2C0'}
     out['track-mantle'] = {'type': 'area', 'size_m': [0.1, 0.1], 'position': [MANTLE[0], MANTLE[1] - 0.5, R.CEIL - 0.05],
-                           'target': [MANTLE[0], MANTLE[1], MANTLE[2]], 'irradiance': round(0.6 * TRACK, 3), 'spread_deg': 16, 'color': '#FFD8B0'}
+                           'target': [MANTLE[0], MANTLE[1], MANTLE[2]], 'irradiance': round(1.2 * TRACK, 3), 'spread_deg': 18, 'color': '#FFD8B0'}
     # (18:36: the dark warm, not black: a broad low warm fill from the room behind the camera)
     out['house'] = {'type': 'area', 'size_m': [4.0, 2.0], 'position': [6.9, 0.2, 2.6], 'target': [6.9, 4.5, 1.0],
-                    'irradiance': round(0.05 * TRACK, 3), 'color': '#FFC890'}
+                    'irradiance': round(HOUSE * TRACK, 3), 'color': '#FFC890'}
     return out
 
 
@@ -147,12 +152,18 @@ def _base(size, title):
         pair.append({**blk, 'instances': [{**copy.deepcopy(i), 'position': [x, SPK_Y, FEET_BAR], 'rotate_z': 0.0} for x in R.SPK_NICHES]})
     s['products'] = pair
     shots._approved(s, order=['acid', 'acid'])
-    s['products'].append(shots._mantle(*MANTLE, 0.0, tint='ember'))
+    s['products'].append(shots._mantle(*MANTLE, MANTLE_RZ, tint='ember'))
     RW = R.RECORD_WALL
     fill = {'kind': 'kit', 'shape': 'ext', 'path': LIFE, 'fn': 'fill_records', 'x0': RW['x0'], 'x1': RW['x1'], 'z0': RW['z0'], 'z1': RW['z1'],
             'cell': RW['cell'], 'y': RW['y'], 'depth': RW['depth'], 'skip': [[xc - 0.42, xc + 0.42, 0.0, 4.0] for xc in R.SPK_NICHES]}
-    s['set'] = {'kind': 'stage', 'props': [room, fill] + _life()}
-    s['haze'] = {'box_m': [3.2, 0.5, 0.0, 10.6, 6.1, 3.35], 'density': 0.006, 'anisotropy': 0.5, 'color': '#FFFFFF'}   # declared: a little haze in the pools
+    # (the owner, 15:43: no zinc, no brass; 20:47: the bar top dark, low roughness, carrying soft reflections of the
+    # Cores and shades; the niches' felt plain)
+    style = {'kind': 'kit', 'shape': 'ext', 'path': LIFE, 'fn': 'restyle',
+             'swap': {'zinc': {'kind': 'stone', 'color': '#1C1916', 'rough': 0.16},
+                      'brass': {'kind': 'plain', 'color': '#161616', 'rough': 0.45, 'metal': 0.6},
+                      'kit-felt': {'kind': 'plain', 'color': '#1A1918', 'rough': 0.95}}}
+    s['set'] = {'kind': 'stage', 'props': [room, fill] + _life() + [style]}
+    s.pop('haze', None)                                   # (20:47: no visible beams: no haze)
     s['materials'] = {**{k: v for k, v in s.get('materials', {}).items() if k != 'sweep'},
                       **{m: {'glow': 0.0} for m in ('uplight-edge', 'uplight-panel', 'uplight-wash', 'led')}, 'glow': {'strength': 0.0}}
     s['sky'] = {**src['sky'], 'strength': 0.0}
@@ -164,6 +175,9 @@ def _base(size, title):
     s.pop('finish', None)
     s['title'] = title
     return s
+
+
+DRINK_DX = 2.2                                           # the two drinks, just left of Mantle
 
 
 def bar_backbar():
@@ -182,14 +196,19 @@ def bar_backbar():
     s['lights'].pop('track-wall0', None)                         # (this view sees that head: the audit, 0.03 %)
     for pr in s['set']['props']:                                 # a Core and the drinks on the bar in front of the seat
         if pr.get('fn') == 'lamps':
-            pr['cores'] = [{**c, 'x': x, 'y': y} for c, (x, y) in zip(pr['cores'], ((6.95, Y_BAR - 0.08), (8.45, Y_BAR + 0.08), (7.6, Y_BAR - 0.1)))]   # (proof: two cut by the edges)
+            # ember by the throw, dust and acid further along; none before Mantle
+            pr['cores'] = [{**c, 'x': x, 'y': y} for c, (x, y) in zip(pr['cores'], ((7.32, Y_BAR - 0.1), (6.05, Y_BAR - 0.08), (6.95, Y_BAR + 0.15)))]
     for pr in s['set']['props']:
         if pr.get('shape') == 'lathe' and abs(pr['position'][1] - (Y_BAR - 0.16)) < 0.2 and pr['position'][0] < 6.5:
-            pr['position'] = [pr['position'][0] + 3.0, pr['position'][1] - 0.05, pr['position'][2]]
+            pr['position'] = [pr['position'][0] + DRINK_DX, pr['position'][1] - 0.05, pr['position'][2]]
         if pr.get('shape') in ('box', 'tube') and pr.get('material') in ('frosted', 'clay') and pr.get('position', [0])[0] < 6.5 and pr.get('position', [0, 0, 0])[2] > 1.0:
-            pr['position'] = [pr['position'][0] + 3.0, pr['position'][1] - 0.05, pr['position'][2]]
+            pr['position'] = [pr['position'][0] + DRINK_DX, pr['position'][1] - 0.05, pr['position'][2]]
         if pr.get('shape') == 'tube' and pr['points'][0][0] < 6.5:
-            pr['points'] = [[q[0] + 3.0, q[1] - 0.05, q[2]] for q in pr['points']]
+            pr['points'] = [[q[0] + DRINK_DX, q[1] - 0.05, q[2]] for q in pr['points']]
+    # cozy (20:47): a wool throw left on the bar, folded over its front edge by the Ember Core, in the near left
+    s['set']['props'].append({'kind': 'kit', 'shape': 'ext', 'path': LIFE, 'fn': 'drape', 'x0': 7.62, 'w': 0.52,
+                              'edge': R.COUNTER['y0'] - R.COUNTER['over'], 'top': TOP, 'on': 0.22, 'drop': 0.34, 'r': 0.028,
+                              'color': '#7A4A32'})
     return s
 
 
@@ -205,7 +224,7 @@ def core_bar_table():
     s['camera'] = {'position': [7.3, Y_BAR - 1.25, TOP + 0.2], 'target': [7.05, Y_BAR - 0.1, TOP + 0.12], 'lens_mm': 85.0, 'level': True,
                    'fstop': 2.0, 'focus': [7.05, Y_BAR - 0.1, TOP + 0.12]}
     s['render']['exposure'] = -1.0
-    s['lights'] = {k: {**v, 'irradiance': round(v['irradiance'] * 2 ** (EV + 1.0), 4)} for k, v in s['lights'].items()}
+    s['lights'] = {k: {**v, 'irradiance': round(v['irradiance'] * 2 ** (-1.5 + 1.0), 4)} for k, v in s['lights'].items()}   # (its room as approved)
     return s
 
 
