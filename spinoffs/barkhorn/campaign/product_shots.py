@@ -52,7 +52,7 @@ def p1():
     s['sky'] = {'kind': 'hdri', 'polyhaven': BAR, 'res': '4k', 'rotation_deg': BAR_ROT, 'strength': 0.10}
     s['camera'] = {'position': [0.22, -1.32, 1.08], 'target': [0.04, 0.0, T + 0.11], 'lens_mm': 85.0, 'level': True,
                    'fstop': 2.0, 'focus': [0.06, 0.02, T + 0.12]}
-    s['render'].update(exposure=2.6, white_balance_k=3400, white_balance_tint=0.0)   # (proof: 2700 K turned the warm bar blue)
+    s['render'].update(exposure=1.8, white_balance_k=3400, white_balance_tint=0.0)   # (proofs: 2700 K turned the warm bar blue; at 2.6 the lamps blew to white)
     return s
 
 
@@ -73,7 +73,7 @@ def p2():
     s['sky'] = {'kind': 'hdri', 'polyhaven': BAR, 'res': '4k', 'rotation_deg': BAR_ROT, 'strength': 0.10}
     s['camera'] = {'position': [0.35, -2.9, 1.5], 'target': [0.0, 0.0, 1.2], 'lens_mm': 40.0, 'level': True,
                    'fstop': 4.0, 'focus': [0.0, 0.0, 1.2]}
-    s['render'].update(exposure=2.6, white_balance_k=3400, white_balance_tint=0.0)   # (proof: 2700 K turned the warm bar blue)
+    s['render'].update(exposure=1.8, white_balance_k=3400, white_balance_tint=0.0)   # (proofs: 2700 K turned the warm bar blue; at 2.6 the lamps blew to white)
     return s
 
 
@@ -101,7 +101,7 @@ def _combo(tropos_tint, lamp_tint, mantle_flavour, title):
         'kicker': {'type': 'area', 'size_m': [2.0, 1.0], 'position': [0.0, 1.8, 3.7], 'target': [0.0, 0.0, 0.9], 'irradiance': 3.6,
                    'spread_deg': 70, 'color': '#FFFFFF'}}
     # (proof: flat and wide, the family small in a white field: closer, a mid-grey ground, the key lower, the kicker up)
-    s['camera'] = {'position': [0.0, -5.6, 1.2], 'target': [0.0, 0.0, 1.1], 'lens_mm': 50.0, 'level': True}
+    s['camera'] = {'position': [0.0, -6.2, 1.2], 'target': [0.0, 0.0, 1.1], 'lens_mm': 50.0, 'level': True}
     s['size'] = [1800, 1200]
     s['render'].update(samples=96, exposure=0.0, denoise=True, clamp=0, caustics_refractive=True, caustics_reflective=True)
     s.pop('finish', None)
