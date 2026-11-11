@@ -577,6 +577,13 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    cabinet glows as on the stage, the bay darker than the speaker; the pair in ACID (Dust on walnut has no contrast);
    a three-quarter view from a seat near one end of the bar, the near speaker whole and at least half the frame's
    height, nothing across it, the far one whole; report each speaker's covered share and brightness against the wall.
+   19:57 UTC, biomes lane 695718e712: FOG HABITAT, FULL-SIZE PAIR, `renders/2026-11-11/barkhorn/habitats/`
+   `fog-final-wide-3200x2000.jpg` and `fog-final-portrait-2400x3000.jpg`. Sky syferfontein_6d_clear_puresky (Poly
+   Haven), low morning sun; sun and sky only, no emitters. Speaker asserted against asset 0f54ebee; gt_audit clean, both
+   frames. Coordinator's check: no defect. Weak points: the speaker's front is in shade, so the cabinet reads dark
+   rather than Fog's pale; in the wide the far ridge at the left reads a little like computer terrain; the grass hides
+   the base. Shown to the owner 19:59; offered one re-render with the sun moved to light the front, if wanted.
+   Next from the lane: six 800x1000 proxies (Dust, Acid, Poison, Haze, Ember, Smoke), then Dust's final.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
