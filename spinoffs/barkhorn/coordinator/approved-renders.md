@@ -550,6 +550,14 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    rooms, combos): lived in and cozy, as well as classy. Speaker lane (17:39): closer and lower camera, warm dark at the
    edges, small warm pools of light (Core as the lamp you carry to your seat), soft things in view (rug, upholstery,
    cushions, curtain, a throw, books), less bare concrete and stone, things left where a person would leave them.
+   18:24 UTC, Mantle lane fa0c3a6568 (CAD and parts list 3bf3fff1d7): MANTLE WITH EDGE C, THE EIGHT FINALS at the same
+   names (`renders/2026-11-10/barkhorn/mantle-r48/mantle-final-day-<tint>.png`), same rig, camera and samples. CAD: 1 mm
+   even chamfer on the outer top and bottom edges of the deck and base (`edge_chamfer`), polished; the deck's outer edge
+   satin and the base's diamond-polished as signed; puck screws countersunk flush. BOM: `edge-chamfer-pass` $40 [E];
+   budget $3,996. Asset and manifest updated (`edge: C`; 81 objects per tint, lid and hinges out of the render model
+   while the lid is with the owner). Audits: 0 emitters, gt 0 px, no hidden mesh. Coordinator's check (Dust at full
+   size, the eight on a sheet): pass. Shown to the owner 18:27. THESE ARE MANTLE'S SITE PICTURES unless the lid answer
+   changes the deck. Speaker lane told to take the asset at fa0c3a65.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
