@@ -13,3 +13,15 @@ All third-party assets are from Poly Haven, CC0 1.0 (public domain; credited any
 | modern_wooden_cabinet | model | combo-mono-ice, combo-complement-ice-dust | https://polyhaven.com/a/modern_wooden_cabinet |
 
 Our own products: Tropos (this branch, the approved build), Core and Hemisphere (r32-lamps-final ae86581b, via the bar lane's `lamps_final.py`), Mantle Strata Float v3 (r48-mantle-design 450064b8).
+
+## bar-pendants, second version (our own bar, 2026-11-11: no HDRI)
+
+| asset | kind | used for | URL |
+|---|---|---|---|
+| red_brick | texture | the brick wall | https://polyhaven.com/a/red_brick |
+| brushed_concrete | texture | the floor | https://polyhaven.com/a/brushed_concrete |
+| dark_wood | texture | the back bar shelf | https://polyhaven.com/a/dark_wood |
+| round_wooden_table_02 | model | the table | https://polyhaven.com/a/round_wooden_table_02 |
+| metal_stool_01 | model | two stools | https://polyhaven.com/a/metal_stool_01 |
+
+The light: EARF's lamps (five Hemispheres, two Cores) and one declared dusk window out of frame (a cool area lamp, 1.6 x 2 m, 0.06 W/m2). Mantle from r48-mantle-design b5fff814 `mantle-strata.blend`, checked against its manifest. Core from r32-lamps-final 7c359b88 (the satin base). The first version's warm_bar HDRI, round_wooden_table_01, bar_chair_round_01 and terracotta_floor_tiles are no longer used.
