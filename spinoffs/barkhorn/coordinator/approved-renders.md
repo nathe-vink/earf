@@ -635,6 +635,22 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    speaker glows green. Shown to the owner 22:14 as a test. Coordinator: this is the picture; the final pair
    (`poison-final-...`, portrait 2400x3000 and wide 3200x2000) queued right after Fog with two fixes: the horn lighter,
    the near spray in sun so the leaves of three are plain. The owner may still change it before then.
+   22:17 UTC, lamps lane cd703d5618: THE HEMISPHERE VIEWS in `renders/2026-11-10/barkhorn/lamp-site/final/`:
+   `hemisphere-<tint>-direct.png` x8, `hemisphere-<tint>-under.png` x8 (1600x2000), `hemisphere-ember-off.png`,
+   `hemisphere-ember-rim.png`, `hemisphere-cluster.png` (2000x2000), `hemisphere-row.png` re-rendered (Ø95 disc).
+   Emitters: the 24 LED faces per lamp only; studio key and fill (a kicker on single-lamp frames) hidden from the
+   camera; every frame reads 0.0 hidden lamps in frame (the cluster's first pass failed that and was redone without
+   the kicker, heights re-staggered). Coordinator's check (sheets of the eight direct and the eight under, the cluster,
+   off and rim): direct, under, cluster and row PASS; shown to the owner 22:24.
+   - Under views: white inside evenly lit, the LED ring as a thin ring, the stem, no LED face, screw or seam in view.
+     The closed carrier's underside is a BLACK DISC in the middle and reads like a pupil: put to the owner (coordinator
+     proposes satin white). If yes: the eight under views and the cluster re-render.
+   - Pale tints, told to the owner: Acid reads cream, Dust salmon; the only lever is more dye in the lamp sheet.
+   - NOT PASSED: `hemisphere-ember-off.png` (two softbox ovals read as polka dots: re-shoot with one large overhead
+     softbox) and `hemisphere-ember-rim.png` (shows the cap, lost in the dark: replace with a lamp-off cap detail
+     `hemisphere-ember-cap.png` and a true lit rim close-up). Both after the Core finals.
+   - Views a lamp page still lacks (lane's list): Hemisphere in a room for scale, the canopy and cord entry, the light
+     pool on a table, lamp-off frames for the other tints; Core's touch lip and base close-up, its underside.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
