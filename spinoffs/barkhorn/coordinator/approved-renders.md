@@ -466,6 +466,12 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    -> CORE'S BASE: B, THE WHOLE BASE IN ITS OWN COLOR, R12 LIP (coordinator's default after the owner's "Own color for
       sure"; the owner told, may object). Lamps lane: rig and CAD default now; finals (eight, the row, plus
       `core-row-day.png` with the lamps off) after the Hemisphere batch. Asked why the color falls dark at the foot.
+   16:48 UTC, lamps lane 3e38954b67: the own-color base B is the default in CAD, BOM and rig (`lamp_site.py`
+   BASE_MAT=own_all). One 6 mm skin drape-formed from the lamp sheet, seat to floor, R12 bullnose in the same piece, fine
+   bead-blast plus a matte anti-fingerprint hardcoat; 0.5 mm white opal liner; black inner body; dock hidden under the
+   skirt, cable through a small polished arch at the back; touch electrode Ø98 behind the lip, TO PROTOTYPE-TEST. BOM:
+   mold $1,200 once; base ~$150-200 [E]. The dark foot is the studio light falling off and the contact shadow, not the
+   body (the liner is opaque). Speaker lane told 16:50 to use 3e38954b for every Core.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
