@@ -1,11 +1,52 @@
 {
- "title": "Three Hemispheres over a bar table (warm_bar)",
+ "title": "A cluster of Hemispheres over a table in a brick bar of our own",
  "size": [
   1920,
   1080
  ],
- "products": [],
- "lights": {},
+ "products": [
+  {
+   "asset_blend": "studio/assets/cache/mantle/b5fff814/mantle-strata.blend",
+   "manifest": "studio/assets/cache/mantle/b5fff814/mantle-strata.manifest.json",
+   "tint": "smoke",
+   "collection": "Mantle Strata Smoke",
+   "forbid": [
+    "brass"
+   ],
+   "asset_sha": "b5fff81462ea26b256a170927df33850b69ad8d8",
+   "instances": [
+    {
+     "position": [
+      1.25,
+      1.23,
+      1.1235
+     ],
+     "rotate_z": -10.0
+    }
+   ]
+  }
+ ],
+ "lights": {
+  "dusk-window": {
+   "type": "area",
+   "size_m": [
+    1.6,
+    2.0
+   ],
+   "position": [
+    3.2,
+    -0.6,
+    1.7
+   ],
+   "target": [
+    0.0,
+    0.6,
+    1.0
+   ],
+   "irradiance": 0.06,
+   "color": "#9FB3DA"
+  }
+ },
  "materials": {},
  "render": {
   "samples": 96,
@@ -19,8 +60,8 @@
   "caustics_refractive": true,
   "caustics_reflective": true,
   "view": "Khronos PBR Neutral",
-  "exposure": 1.8,
-  "white_balance_k": 3400,
+  "exposure": 2.6,
+  "white_balance_k": 3600,
   "white_balance_tint": 0.0
  },
  "set": {
@@ -30,24 +71,59 @@
     "kind": "kit",
     "shape": "box",
     "size": [
-     9.0,
-     9.0,
-     0.01
+     12.0,
+     10.0,
+     0.02
     ],
     "position": [
      0.0,
-     1.5,
-     -0.01
+     -3.5,
+     -0.02
     ],
     "material": "pbr",
-    "texture": "terracotta_floor_tiles",
+    "texture": "brushed_concrete",
     "tex_res": "2k",
-    "gain": 0.9
+    "gain": 0.75
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     12.0,
+     0.25,
+     4.5
+    ],
+    "position": [
+     0.0,
+     1.575,
+     -0.02
+    ],
+    "material": "pbr",
+    "texture": "red_brick",
+    "tex_res": "2k",
+    "gain": 0.95
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     2.6,
+     0.42,
+     0.045
+    ],
+    "position": [
+     0.55,
+     1.24,
+     1.1
+    ],
+    "material": "pbr",
+    "texture": "dark_wood",
+    "tex_res": "2k"
    },
    {
     "kind": "kit",
     "shape": "asset",
-    "model": "round_wooden_table_01",
+    "model": "round_wooden_table_02",
     "res": "2k",
     "position": [
      0.0,
@@ -64,59 +140,44 @@
    {
     "kind": "kit",
     "shape": "asset",
-    "model": "bar_chair_round_01",
+    "model": "metal_stool_01",
     "res": "2k",
     "position": [
-     -0.7084199515678842,
-     -0.5696659981942496,
+     -0.66,
+     0.22,
      0.0
     ],
     "rotate": [
      0.0,
      0.0,
-     131.79
+     30.0
     ],
     "scale": 1.0
    },
    {
     "kind": "kit",
     "shape": "asset",
-    "model": "bar_chair_round_01",
+    "model": "metal_stool_01",
     "res": "2k",
     "position": [
-     0.7084199515678842,
-     -0.5696659981942496,
+     0.68,
+     0.38,
      0.0
     ],
     "rotate": [
      0.0,
      0.0,
-     -131.79
-    ],
-    "scale": 1.0
-   },
-   {
-    "kind": "kit",
-    "shape": "asset",
-    "model": "bar_chair_round_01",
-    "res": "2k",
-    "position": [
-     0.0015130202706624867,
-     -0.8549989156270462,
-     0.0
-    ],
-    "rotate": [
-     0.0,
-     0.0,
-     -179.922
+     -40.0
     ],
     "scale": 1.0
    },
    {
     "kind": "kit",
     "shape": "ext",
-    "path": "spinoffs/barkhorn/planet/afterhours/lamps_final.py",
-    "fn": "place",
+    "path": "spinoffs/barkhorn/campaign/stage/stage2_props.py",
+    "fn": "lamps",
+    "hemi_scale": 1.0,
+    "top_z": 3.6,
     "led_k": {
      "red": 2200,
      "green": 2700,
@@ -136,67 +197,76 @@
     "hemispheres": [
      {
       "tint": "red",
-      "x": -0.38,
-      "y": 0.0,
-      "rim_z": 1.755
+      "x": -0.26,
+      "y": -0.04,
+      "rim_z": 1.17
      },
      {
       "tint": "orange",
-      "x": 0.0,
-      "y": 0.2,
-      "rim_z": 1.855
+      "x": -0.05,
+      "y": 0.16,
+      "rim_z": 1.33
      },
      {
       "tint": "amber",
-      "x": 0.38,
-      "y": 0.0,
-      "rim_z": 1.755
+      "x": 0.15,
+      "y": -0.09,
+      "rim_z": 1.22
+     },
+     {
+      "tint": "red",
+      "x": 0.32,
+      "y": 0.12,
+      "rim_z": 1.41
+     },
+     {
+      "tint": "orange",
+      "x": 0.04,
+      "y": -0.22,
+      "rim_z": 1.48
      }
     ],
     "cores": [
      {
       "tint": "red",
-      "x": -0.25,
-      "y": -0.2,
-      "floor_z": 1.005,
-      "rot": 200.0
+      "x": -0.17,
+      "y": -0.1,
+      "floor_z": 0.746,
+      "rot": 0.0
      },
      {
       "tint": "amber",
-      "x": 0.3,
-      "y": 0.12,
-      "floor_z": 1.005,
-      "rot": 200.0
+      "x": 0.2,
+      "y": 0.08,
+      "floor_z": 0.746,
+      "rot": 0.0
      }
     ]
    }
   ]
  },
  "sky": {
-  "kind": "hdri",
-  "polyhaven": "warm_bar",
-  "res": "4k",
-  "rotation_deg": -120.0,
-  "strength": 0.1
+  "kind": "gradient",
+  "strength": 0.0
  },
  "camera": {
   "position": [
-   0.35,
-   -2.9,
-   1.5
+   0.28,
+   -2.05,
+   1.12
   ],
   "target": [
-   0.0,
-   0.0,
-   1.2
+   0.12,
+   0.4,
+   1.08
   ],
-  "lens_mm": 40.0,
+  "lens_mm": 36.0,
   "level": true,
-  "fstop": 4.0,
+  "fstop": 2.8,
   "focus": [
    0.0,
    0.0,
-   1.2
+   0.95
   ]
  }
 }
