@@ -1882,3 +1882,64 @@ def hero_shoot():
     s['render'].update(samples=64, exposure=0.0)
     s['title'] = 'Tropos, the shoot: a 1960s fashion studio, the eight as the models'
     return s
+
+
+def hero_shoot2():
+    """The shoot, second pass (the coordinator, 2026-11-11 02:20, after the owner saw the first): the set black and white
+    (op art: the target in alternating warm white and soft black; a spiral would need the paper's unrolled coordinates,
+    which the sweep does not carry), so the only colour is the speakers and what is seen through them; the group opened
+    up, Ember larger and nearer, Smoke seen, at most one small overlap; the gear in frame and readable: a fresnel upper
+    left (the hard key), a white umbrella on its stand at the right (the soft fill, off the fronts' mirror angles), a
+    camera on its tripod soft in the near right; the rim a hard lamp back right, out of frame. 30 mm, a little depth of
+    field on the star."""
+    s = hero_shoot()
+    pose = {'ember': (0.0, -1.1, 0.0, 0.0), 'dust': (-1.15, 0.0, 0.30, -15.0), 'acid': (1.15, 0.05, 0.15, 18.0),
+            'smoke': (0.95, 1.5, 0.60, 6.0), 'poison': (-2.0, 0.8, 0.60, -28.0), 'ice': (2.0, 0.8, 0.45, 28.0),
+            'haze': (-2.6, 1.6, 0.0, -45.0), 'fog': (2.6, 1.6, 0.0, 45.0)}
+    black = {'smoke', 'poison'}
+    for blk in s['products']:
+        for k, i in enumerate(blk['instances']):
+            x, y, h, yaw = pose[HERO_ORDER[k]]
+            base = 0.0385
+            i['position'] = [x, y, round(h + base, 4)]
+            i['rotate_z'] = yaw
+    props = []
+    for t, (x, y, h, yaw) in pose.items():
+        if h > 0:
+            props.append({'kind': 'kit', 'shape': 'cylinder', 'radius': 0.42, 'height': h, 'position': [x, y, 0.0],
+                          'material': 'gloss', 'color': '#151515' if t in black else '#F4F1EA'})
+    fr_head, fr_aim = [-2.15, -0.25, 1.85], [0.0, 0.0, 0.7]
+    props += _stand('fresnel', fr_head[:2], fr_head[2] - 0.12)
+    props.append({'kind': 'kit', 'shape': 'cylinder', 'radius': 0.15, 'height': 0.32, 'position': fr_head,
+                  'rotate': _aim_rot(fr_head, [2 * a - b for a, b in zip(fr_head, fr_aim)]), 'material': 'gloss', 'color': '#161616'})
+    props.append({'kind': 'kit', 'shape': 'cylinder', 'radius': 0.155, 'height': 0.012,
+                  'position': [round(a + 0.01 * (b - a), 3) for a, b in zip(fr_head, fr_aim)],
+                  'rotate': _aim_rot(fr_head, fr_aim), 'material': 'frosted', 'color': '#F2EEE6'})
+    um_head, um_aim = [2.45, -0.4, 1.75], [0.0, -0.2, 0.8]
+    props += _stand('umbrella', um_head[:2], um_head[2] - 0.05)
+    props.append({'kind': 'kit', 'shape': 'cone', 'radius': 0.55, 'radius_top': 0.02, 'height': 0.32, 'position': um_head,
+                  'rotate': _aim_rot(um_head, [2 * a - b for a, b in zip(um_head, um_aim)]), 'material': 'satin', 'color': '#F6F4F0'})
+    props.append({'kind': 'kit', 'shape': 'cylinder', 'radius': 0.008, 'height': 0.75, 'position': um_head,
+                  'rotate': _aim_rot(um_head, um_aim), 'material': 'gloss', 'color': '#141414'})
+    props += _stand('tripod', [0.62, -3.05], 0.52, legs=0.6)
+    props.append({'kind': 'kit', 'shape': 'box', 'size': [0.16, 0.11, 0.12], 'position': [0.62, -3.05, 0.52],
+                  'material': 'gloss', 'color': '#1A1A1A', 'ease': 0.01})
+    props.append({'kind': 'kit', 'shape': 'cylinder', 'radius': 0.035, 'height': 0.09, 'position': [0.62, -3.12, 0.58],
+                  'rotate': [90.0, 0.0, 0.0], 'material': 'gloss', 'color': '#111111'})
+    s['set'].update(props=props, rings={'center': [0.0, 2.6, 0.55], 'width': 0.38, 'colors': ['#F2EDE4', '#1C1B1A']},
+                    color='#F2EDE4')
+    import math
+    def ahead(head, aim, d):
+        v = [b - a for a, b in zip(head, aim)]; L = math.sqrt(sum(c * c for c in v))
+        return [round(a + d * c / L, 3) for a, c in zip(head, v)]
+    s['lights'] = {
+        'fresnel': {'type': 'area', 'shape': 'DISK', 'size_m': [0.22, 0.22], 'position': ahead(fr_head, fr_aim, -0.03),
+                    'target': fr_aim, 'irradiance': 7.5, 'spread_deg': 35, 'color': '#FFF2DE'},
+        'umbrella': {'type': 'area', 'shape': 'DISK', 'size_m': [0.7, 0.7], 'position': ahead(um_head, um_aim, -0.02),
+                     'target': um_aim, 'irradiance': 1.6, 'color': '#FFF8F0'},
+        'rim': {'type': 'area', 'shape': 'DISK', 'size_m': [0.35, 0.35], 'position': [4.3, 2.2, 2.6],
+                'target': [0.0, 0.3, 1.0], 'irradiance': 5.0, 'spread_deg': 30, 'color': '#F4F7FF'}}
+    s['camera'] = {'position': [0.0, -4.2, 0.45], 'target': [0.0, 0.6, 0.95], 'lens_mm': 30.0, 'level': True,
+                   'fstop': 4.0, 'focus': [0.0, -1.1, 0.8]}
+    s['title'] = 'Tropos, the shoot (second pass): op art in black and white, the eight in colour'
+    return s

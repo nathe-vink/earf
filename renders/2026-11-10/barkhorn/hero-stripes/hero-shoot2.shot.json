@@ -1,0 +1,794 @@
+{
+ "title": "Tropos, the shoot (second pass): op art in black and white, the eight in colour",
+ "size": [
+  1600,
+  800
+ ],
+ "set": {
+  "kind": "sweep",
+  "color": "#F2EDE4",
+  "width": 16.0,
+  "front": 8.0,
+  "depth": 2.6,
+  "radius": 1.0,
+  "height": 6.0,
+  "rings": {
+   "center": [
+    0.0,
+    2.6,
+    0.55
+   ],
+   "width": 0.38,
+   "colors": [
+    "#F2EDE4",
+    "#1C1B1A"
+   ]
+  },
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.42,
+    "height": 0.3,
+    "position": [
+     -1.15,
+     0.0,
+     0.0
+    ],
+    "material": "gloss",
+    "color": "#F4F1EA"
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.42,
+    "height": 0.15,
+    "position": [
+     1.15,
+     0.05,
+     0.0
+    ],
+    "material": "gloss",
+    "color": "#F4F1EA"
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.42,
+    "height": 0.6,
+    "position": [
+     0.95,
+     1.5,
+     0.0
+    ],
+    "material": "gloss",
+    "color": "#151515"
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.42,
+    "height": 0.6,
+    "position": [
+     -2.0,
+     0.8,
+     0.0
+    ],
+    "material": "gloss",
+    "color": "#151515"
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.42,
+    "height": 0.45,
+    "position": [
+     2.0,
+     0.8,
+     0.0
+    ],
+    "material": "gloss",
+    "color": "#F4F1EA"
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.016,
+    "height": 1.73,
+    "position": [
+     -2.15,
+     -0.25,
+     0.0
+    ],
+    "material": "gloss",
+    "color": "#141414"
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.012,
+    "height": 0.45,
+    "position": [
+     -2.15,
+     -0.25,
+     0.3
+    ],
+    "rotate": [
+     118.0,
+     0.0,
+     180.0
+    ],
+    "material": "gloss",
+    "color": "#141414"
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.012,
+    "height": 0.45,
+    "position": [
+     -2.15,
+     -0.25,
+     0.3
+    ],
+    "rotate": [
+     118.0,
+     0.0,
+     300.0
+    ],
+    "material": "gloss",
+    "color": "#141414"
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.012,
+    "height": 0.45,
+    "position": [
+     -2.15,
+     -0.25,
+     0.3
+    ],
+    "rotate": [
+     118.0,
+     0.0,
+     420.0
+    ],
+    "material": "gloss",
+    "color": "#141414"
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.15,
+    "height": 0.32,
+    "position": [
+     -2.15,
+     -0.25,
+     1.85
+    ],
+    "rotate": [
+     62.02,
+     0.0,
+     -83.37
+    ],
+    "material": "gloss",
+    "color": "#161616"
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.155,
+    "height": 0.012,
+    "position": [
+     -2.128,
+     -0.247,
+     1.839
+    ],
+    "rotate": [
+     117.98,
+     0.0,
+     96.63
+    ],
+    "material": "frosted",
+    "color": "#F2EEE6"
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.016,
+    "height": 1.7,
+    "position": [
+     2.45,
+     -0.4,
+     0.0
+    ],
+    "material": "gloss",
+    "color": "#141414"
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.012,
+    "height": 0.45,
+    "position": [
+     2.45,
+     -0.4,
+     0.3
+    ],
+    "rotate": [
+     118.0,
+     0.0,
+     180.0
+    ],
+    "material": "gloss",
+    "color": "#141414"
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.012,
+    "height": 0.45,
+    "position": [
+     2.45,
+     -0.4,
+     0.3
+    ],
+    "rotate": [
+     118.0,
+     0.0,
+     300.0
+    ],
+    "material": "gloss",
+    "color": "#141414"
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.012,
+    "height": 0.45,
+    "position": [
+     2.45,
+     -0.4,
+     0.3
+    ],
+    "rotate": [
+     118.0,
+     0.0,
+     420.0
+    ],
+    "material": "gloss",
+    "color": "#141414"
+   },
+   {
+    "kind": "kit",
+    "shape": "cone",
+    "radius": 0.55,
+    "radius_top": 0.02,
+    "height": 0.32,
+    "position": [
+     2.45,
+     -0.4,
+     1.75
+    ],
+    "rotate": [
+     68.87,
+     0.0,
+     85.33
+    ],
+    "material": "satin",
+    "color": "#F6F4F0"
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.008,
+    "height": 0.75,
+    "position": [
+     2.45,
+     -0.4,
+     1.75
+    ],
+    "rotate": [
+     111.13,
+     0.0,
+     -94.67
+    ],
+    "material": "gloss",
+    "color": "#141414"
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.016,
+    "height": 0.52,
+    "position": [
+     0.62,
+     -3.05,
+     0.0
+    ],
+    "material": "gloss",
+    "color": "#141414"
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.012,
+    "height": 0.6,
+    "position": [
+     0.62,
+     -3.05,
+     0.3
+    ],
+    "rotate": [
+     118.0,
+     0.0,
+     180.0
+    ],
+    "material": "gloss",
+    "color": "#141414"
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.012,
+    "height": 0.6,
+    "position": [
+     0.62,
+     -3.05,
+     0.3
+    ],
+    "rotate": [
+     118.0,
+     0.0,
+     300.0
+    ],
+    "material": "gloss",
+    "color": "#141414"
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.012,
+    "height": 0.6,
+    "position": [
+     0.62,
+     -3.05,
+     0.3
+    ],
+    "rotate": [
+     118.0,
+     0.0,
+     420.0
+    ],
+    "material": "gloss",
+    "color": "#141414"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.16,
+     0.11,
+     0.12
+    ],
+    "position": [
+     0.62,
+     -3.05,
+     0.52
+    ],
+    "material": "gloss",
+    "color": "#1A1A1A",
+    "ease": 0.01
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.035,
+    "height": 0.09,
+    "position": [
+     0.62,
+     -3.12,
+     0.58
+    ],
+    "rotate": [
+     90.0,
+     0.0,
+     0.0
+    ],
+    "material": "gloss",
+    "color": "#111111"
+   }
+  ]
+ },
+ "camera": {
+  "position": [
+   0.0,
+   -4.2,
+   0.45
+  ],
+  "target": [
+   0.0,
+   0.6,
+   0.95
+  ],
+  "lens_mm": 30.0,
+  "level": true,
+  "fstop": 4.0,
+  "focus": [
+   0.0,
+   -1.1,
+   0.8
+  ]
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#F2F1EF",
+  "horizon": "#EEEDEB",
+  "ground": "#CFCCC8",
+  "strength": 0.6,
+  "visible": false
+ },
+ "render": {
+  "samples": 64,
+  "adaptive": 0.01,
+  "denoise": true,
+  "clamp": 4,
+  "bounces": 16,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.0,
+  "white_balance_k": 5900,
+  "white_balance_tint": 7.0
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 235,
+  "white_out": 238,
+  "contrast": 0.1,
+  "clarity": 0.03,
+  "sharpen": 0.12,
+  "sharpen_px": 0.7
+ },
+ "materials": {
+  "sweep": {
+   "roughness": 0.85
+  },
+  "builtin-led": {
+   "glow": 0.0
+  },
+  "builtin-led-brace": {
+   "glow": 0.0
+  },
+  "horn-satin": {
+   "roughness": 0.25
+  }
+ },
+ "lights": {
+  "fresnel": {
+   "type": "area",
+   "shape": "DISK",
+   "size_m": [
+    0.22,
+    0.22
+   ],
+   "position": [
+    -2.176,
+    -0.253,
+    1.864
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.7
+   ],
+   "irradiance": 7.5,
+   "spread_deg": 35,
+   "color": "#FFF2DE"
+  },
+  "umbrella": {
+   "type": "area",
+   "shape": "DISK",
+   "size_m": [
+    0.7,
+    0.7
+   ],
+   "position": [
+    2.469,
+    -0.402,
+    1.757
+   ],
+   "target": [
+    0.0,
+    -0.2,
+    0.8
+   ],
+   "irradiance": 1.6,
+   "color": "#FFF8F0"
+  },
+  "rim": {
+   "type": "area",
+   "shape": "DISK",
+   "size_m": [
+    0.35,
+    0.35
+   ],
+   "position": [
+    4.3,
+    2.2,
+    2.6
+   ],
+   "target": [
+    0.0,
+    0.3,
+    1.0
+   ],
+   "irradiance": 5.0,
+   "spread_deg": 30,
+   "color": "#F4F7FF"
+  }
+ },
+ "products": [
+  {
+   "def": "studio/products/barkhorn-cloud.json",
+   "flavour": "cloud-red",
+   "instances": [
+    {
+     "position": [
+      0.0,
+      -1.1,
+      0.0385
+     ],
+     "rotate_z": 0.0,
+     "flavour": "cloud-red",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      -1.15,
+      0.0,
+      0.3385
+     ],
+     "rotate_z": -15.0,
+     "flavour": "cloud-orange",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      1.15,
+      0.05,
+      0.1885
+     ],
+     "rotate_z": 18.0,
+     "flavour": "cloud-amber",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      -2.0,
+      0.8,
+      0.6385
+     ],
+     "rotate_z": -28.0,
+     "flavour": "eucalyptus-y2k-green",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      2.0,
+      0.8,
+      0.4885
+     ],
+     "rotate_z": 28.0,
+     "flavour": "cloud-blue",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      -2.6,
+      1.6,
+      0.0385
+     ],
+     "rotate_z": -45.0,
+     "flavour": "cloud-violet",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      2.6,
+      1.6,
+      0.0385
+     ],
+     "rotate_z": 45.0,
+     "flavour": "birch-fog-clear",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      0.95,
+      1.5,
+      0.6385
+     ],
+     "rotate_z": 6.0,
+     "flavour": "cloud-black",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    }
+   ],
+   "normals_refine": false
+  },
+  {
+   "def": "studio/products/barkhorn-variants.json",
+   "flavour": "cloud-red",
+   "instances": [
+    {
+     "position": [
+      0.0,
+      -1.1,
+      0.0385
+     ],
+     "rotate_z": 0.0,
+     "flavour": "cloud-red",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      -1.15,
+      0.0,
+      0.3385
+     ],
+     "rotate_z": -15.0,
+     "flavour": "cloud-orange",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      1.15,
+      0.05,
+      0.1885
+     ],
+     "rotate_z": 18.0,
+     "flavour": "cloud-amber",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      -2.0,
+      0.8,
+      0.6385
+     ],
+     "rotate_z": -28.0,
+     "flavour": "eucalyptus-y2k-green",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      2.0,
+      0.8,
+      0.4885
+     ],
+     "rotate_z": 28.0,
+     "flavour": "cloud-blue",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      -2.6,
+      1.6,
+      0.0385
+     ],
+     "rotate_z": -45.0,
+     "flavour": "cloud-violet",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      2.6,
+      1.6,
+      0.0385
+     ],
+     "rotate_z": 45.0,
+     "flavour": "birch-fog-clear",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      0.95,
+      1.5,
+      0.6385
+     ],
+     "rotate_z": 6.0,
+     "flavour": "cloud-black",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    }
+   ],
+   "normals_refine": false
+  }
+ ]
+}
