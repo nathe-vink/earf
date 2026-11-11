@@ -1,0 +1,56 @@
+{
+ "emitters": [
+  {
+   "name": "Hemisphere dust",
+   "lumens": 1000,
+   "cct_k": 4000,
+   "in_frame": true
+  },
+  {
+   "name": "Core dust",
+   "lumens": 200,
+   "cct_k": 4000,
+   "shell_load": 1.5,
+   "in_frame": true
+  },
+  {
+   "name": "key",
+   "emitter": "studio area lamp 3.0 x 3.0 m",
+   "irradiance_w_m2": 1.6,
+   "position_m": [
+    -4.2,
+    -4.6,
+    3.6
+   ],
+   "in_frame": false
+  },
+  {
+   "name": "fill",
+   "emitter": "studio area lamp 3.0 x 2.0 m",
+   "irradiance_w_m2": 0.35,
+   "position_m": [
+    4.5,
+    -5.5,
+    1.6
+   ],
+   "in_frame": false
+  },
+  {
+   "name": "kicker",
+   "emitter": "studio area lamp 2.0 x 1.0 m",
+   "irradiance_w_m2": 3.6,
+   "position_m": [
+    0.0,
+    1.8,
+    3.7
+   ],
+   "in_frame": false
+  }
+ ],
+ "lamp_lumens_total": 1200,
+ "audit": {
+  "hidden": [],
+  "equipment": [],
+  "method": "reaudit.py, the corrected cast"
+ }
+}

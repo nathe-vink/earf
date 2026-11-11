@@ -1,0 +1,29 @@
+{
+ "emitters": [
+  {
+   "name": "Core ember",
+   "lumens": 200,
+   "cct_k": 2200,
+   "shell_load": 0.5,
+   "in_frame": true
+  },
+  {
+   "name": "Core acid",
+   "lumens": 200,
+   "cct_k": 4000,
+   "shell_load": 1.5,
+   "in_frame": true
+  },
+  {
+   "name": "the room: Poly Haven HDRI warm_bar (a real bar's own light)",
+   "strength": 0.1,
+   "rotation_deg": -120.0
+  }
+ ],
+ "lamp_lumens_total": 400,
+ "audit": {
+  "hidden": [],
+  "equipment": [],
+  "method": "reaudit.py, the corrected cast"
+ }
+}
