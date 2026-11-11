@@ -67,7 +67,7 @@ def _life():
     """People were just here, and the music is on (the owner, 17:36: "anemic in soul"): two drinks mid-evening with ice
     and a twist, a bar cloth, a bowl of citrus (scanned), a book of matches, a folded newspaper; the now-playing sleeve
     standing by Mantle, a small stack waiting, a few sleeves pulled half out of the wall (invented covers); a worn
-    runner on the concrete, a plant (scanned); and the one wry detail, a RESERVED card at the foot of a speaker's bay.
+    runner on the concrete, a plant (scanned); and the one wry detail, a RESERVED card at the foot of the far speaker's bay.
     Nothing lined up."""
     T, BB = TOP, FEET_BAR - 0.02
     RK = [[0, 0], [0.041, 0], [0.043, 0.006], [0.044, 0.092]]
@@ -104,7 +104,7 @@ def _life():
            {'image': 'tex/newspaper.png', 'w': 0.29, 'h': 0.4, 't': 0.006, 'x': 9.0, 'y': Y_BAR - 0.26, 'z': T, 'rot': [-90.0, 0, -11.0],
             'ground': '#E4E0D6', 'rough': 0.85},
            # the wry detail: the speaker's seat is taken
-           {'image': 'tex/reserved.png', 'w': 0.1, 'h': 0.05, 't': 0.002, 'x': 8.25, 'y': SPK_Y - 0.27, 'z': FEET_BAR, 'rot': [-18.0, 0, 0.0],
+           {'image': 'tex/reserved.png', 'w': 0.1, 'h': 0.05, 't': 0.002, 'x': 5.55, 'y': SPK_Y - 0.27, 'z': FEET_BAR, 'rot': [-18.0, 0, 0.0],
             'ground': '#EFEBE3', 'rough': 0.7}]
     out.append({'kind': 'kit', 'shape': 'ext', 'path': LIFE, 'fn': 'boards', 'boards': bds})
     # (test 2: the room's old DJ station left a mixer and two records floating where the old players stood: out)
@@ -152,7 +152,7 @@ def _base(size, title):
     fill = {'kind': 'kit', 'shape': 'ext', 'path': LIFE, 'fn': 'fill_records', 'x0': RW['x0'], 'x1': RW['x1'], 'z0': RW['z0'], 'z1': RW['z1'],
             'cell': RW['cell'], 'y': RW['y'], 'depth': RW['depth'], 'skip': [[xc - 0.42, xc + 0.42, 0.0, 4.0] for xc in R.SPK_NICHES]}
     s['set'] = {'kind': 'stage', 'props': [room, fill] + _life()}
-    s['haze'] = {'box_m': [3.2, 0.5, 0.0, 10.6, 6.1, 3.35], 'density': 0.012, 'anisotropy': 0.5, 'color': '#FFFFFF'}   # declared: a little haze in the pools
+    s['haze'] = {'box_m': [3.2, 0.5, 0.0, 10.6, 6.1, 3.35], 'density': 0.006, 'anisotropy': 0.5, 'color': '#FFFFFF'}   # declared: a little haze in the pools
     s['materials'] = {**{k: v for k, v in s.get('materials', {}).items() if k != 'sweep'},
                       **{m: {'glow': 0.0} for m in ('uplight-edge', 'uplight-panel', 'uplight-wash', 'led')}, 'glow': {'strength': 0.0}}
     s['sky'] = {**src['sky'], 'strength': 0.0}
@@ -177,12 +177,12 @@ def bar_backbar():
     # (18:40: a three-quarter view from a seat near the bar's right end: the near speaker whole, about two thirds of the
     # frame's height, nothing across it; the wall of records running away to the far speaker, whole; the Hemispheres
     # receding over the bar; a Core and the drinks on the bar in front; Mantle further along under its lamp)
-    s['camera'] = {'position': [9.3, 3.5, 1.42], 'target': [7.2, 5.7, 1.75], 'lens_mm': 24.0, 'level': True,
+    s['camera'] = {'position': [9.3, 3.5, 1.42], 'target': [7.0, 5.7, 1.72], 'lens_mm': 24.0, 'level': True,
                    'fstop': 2.8, 'focus': [8.25, 5.5, 1.7]}
     s['lights'].pop('track-wall0', None)                         # (this view sees that head: the audit, 0.03 %)
     for pr in s['set']['props']:                                 # a Core and the drinks on the bar in front of the seat
         if pr.get('fn') == 'lamps':
-            pr['cores'] = [{**c, 'x': x, 'y': y} for c, (x, y) in zip(pr['cores'], ((6.3, Y_BAR - 0.12), (8.75, Y_BAR - 0.18), (7.6, Y_BAR - 0.1)))]
+            pr['cores'] = [{**c, 'x': x, 'y': y} for c, (x, y) in zip(pr['cores'], ((6.95, Y_BAR - 0.08), (8.45, Y_BAR + 0.08), (7.6, Y_BAR - 0.1)))]   # (proof: two cut by the edges)
     for pr in s['set']['props']:
         if pr.get('shape') == 'lathe' and abs(pr['position'][1] - (Y_BAR - 0.16)) < 0.2 and pr['position'][0] < 6.5:
             pr['position'] = [pr['position'][0] + 3.0, pr['position'][1] - 0.05, pr['position'][2]]
