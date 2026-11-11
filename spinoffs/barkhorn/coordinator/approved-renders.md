@@ -612,6 +612,12 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    of the in-frame grass roots in two patches sit behind a crest (still open, to thin before any Haze final); Dust and
    Poison clean. The Fog pair is re-rendering whole (about 3.5 h, sun unchanged, same names), then the Acid, Ember and
    Smoke proxies, then Dust's final.
+   20:50 UTC, the owner: "Why not put poison in ivy, like poison ivy?" -> POISON'S HABITAT BECOMES THE SPEAKER IN POISON
+   IVY. The old Poison garden is parked. Biomes lane (20:52): real poison ivy (leaves in threes, glossy summer green,
+   climbing by rootlets, and as ground cover), an old garden wall of weathered brick or stone thick with it, shade with
+   sun breaking through; the speaker in front, fully visible, at most a runner or two up one side; sun and sky only;
+   one 800x1000 proxy `poison-ivy-proxy.jpg` first. The coordinator chose real poison ivy over English ivy so the joke
+   is exact; the owner told, may prefer ordinary ivy.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
