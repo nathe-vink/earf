@@ -2331,17 +2331,17 @@ STAGE_Z = 0.9                       # the stage's boards above the stalls' floor
 CUTOUTS = 'spinoffs/barkhorn/campaign/stage/cutout_props.py'
 
 
-def hero_stage(wash=0.0):
+def hero_stage(wash=0.012):
     """A small theatre stage dressed for a school play: red velvet curtains drawn to both sides and a valance, one
     continuous floor of scanned planks (Poly Haven old_planks_02... see STAGE_FLOOR), a flat painted night-blue
     backdrop. The eight in spectrum order in a shallow arc, staggered; over each its own Hemisphere in its own tint,
     0.6 m above the horn, hung from a black batten at the canopy's height; a plywood cutout of its icon beside each
     (cutouts.json); the eight Cores as footlights along the front edge, each below its speaker; Mantle on a low block
     at the front right. Haze lies on its side in its own pool. Lit by the lamps alone; `wash` (W/m2 at the stage) adds
-    one faint stage wash from the house, out of frame."""
+    one faint stage wash from the house, out of frame (on by default: the lamps alone did not carry it)."""
     s = _cast_base()
     Z = STAGE_Z
-    sp, n = 0.95, len(HERO_ORDER)
+    sp, n = 0.9, len(HERO_ORDER)
     pose, cut, hemis, cores = {}, [], [], []
     rim = Z + 1.283 + 0.6
     for k, t in enumerate(HERO_ORDER):
@@ -2359,9 +2359,9 @@ def hero_stage(wash=0.0):
     xs = {t: round((k - (n - 1) / 2) * sp, 3) for k, t in enumerate(HERO_ORDER)}
     ys = {t: pose[t][1] for t in HERO_ORDER}
     gap = lambda a, b: round((xs[a] + xs[b]) / 2, 3)
-    place = {'ember': (xs['ember'] - 0.62, 0.48), 'dust': (gap('ember', 'dust'), 0.46), 'acid': (gap('dust', 'acid'), 0.5),
+    place = {'ember': (xs['ember'] - 0.5, 0.48), 'dust': (gap('ember', 'dust'), 0.46), 'acid': (gap('dust', 'acid'), 0.5),
              'poison': (gap('acid', 'poison'), 0.42), 'ice': (gap('poison', 'ice'), 0.5), 'fog': (gap('haze', 'fog') + 0.1, 0.46),
-             'smoke': (xs['smoke'] + 0.62, 0.5)}
+             'smoke': (xs['smoke'] + 0.5, 0.5)}
     for t, (x, h) in place.items():
         cut.append({'key': t, 'x': x, 'y': round(min(ys.values()) - 0.42, 3), 'z': Z, 'height': h, 'yaw': round(-x * 2.0, 1)})
     cut.append({'key': 'haze', 'x': xs['haze'] + 0.1, 'y': ys['haze'] + 0.35, 'z': Z, 'height': 0.62})
@@ -2375,15 +2375,15 @@ def hero_stage(wash=0.0):
          **_wood(STAGE_FLOOR, '#7A6048', 0.25, 1.0, 0.8)},                      # one continuous floor of boards
         {'kind': 'kit', 'shape': 'box', 'size': [W + 2, 0.06, 7.0], 'position': [0.0, D1 + 0.03, 0.001],
          'material': 'paper', 'color': '#16244A', 'roughness': 0.9},           # the painted night backdrop
-        {'kind': 'kit', 'shape': 'drape', 'size': [2.4, 4.6], 'position': [-4.95, -1.55, Z + 4.6], 'folds': 13, 'amplitude': 0.09,
+        {'kind': 'kit', 'shape': 'drape', 'size': [2.4, 4.6], 'position': [-4.65, -1.55, Z + 4.6], 'folds': 13, 'amplitude': 0.09,
          'material': 'velvet', 'color': '#7A0E14', 'seed': 3},
-        {'kind': 'kit', 'shape': 'drape', 'size': [2.4, 4.6], 'position': [4.95, -1.55, Z + 4.6], 'folds': 13, 'amplitude': 0.09,
+        {'kind': 'kit', 'shape': 'drape', 'size': [2.4, 4.6], 'position': [4.65, -1.55, Z + 4.6], 'folds': 13, 'amplitude': 0.09,
          'material': 'velvet', 'color': '#7A0E14', 'seed': 5},
         {'kind': 'kit', 'shape': 'drape', 'size': [W + 1.0, 0.95], 'position': [0.0, -1.75, Z + 3.85], 'folds': 34, 'amplitude': 0.05,
          'material': 'velvet', 'color': '#6E0C12', 'seed': 7},
         # the proscenium: black flats outside the curtains and a header above the valance
-        {'kind': 'kit', 'shape': 'box', 'size': [1.4, 0.2, 6.0], 'position': [-6.6, -1.9, 0.0], 'material': 'clay', 'color': '#0C0B0B'},
-        {'kind': 'kit', 'shape': 'box', 'size': [1.4, 0.2, 6.0], 'position': [6.6, -1.9, 0.0], 'material': 'clay', 'color': '#0C0B0B'},
+        {'kind': 'kit', 'shape': 'box', 'size': [1.4, 0.2, 6.0], 'position': [-6.25, -1.9, 0.0], 'material': 'clay', 'color': '#0C0B0B'},
+        {'kind': 'kit', 'shape': 'box', 'size': [1.4, 0.2, 6.0], 'position': [6.25, -1.9, 0.0], 'material': 'clay', 'color': '#0C0B0B'},
         {'kind': 'kit', 'shape': 'box', 'size': [W + 3.0, 0.2, 1.5], 'position': [0.0, -1.9, Z + 3.7], 'material': 'clay', 'color': '#0C0B0B'},
         # the lighting batten the pendants hang from (their canopies 0.776 m over the rim: hemi_mounting.py)
         {'kind': 'kit', 'shape': 'cylinder', 'radius': 0.024, 'height': 8.6, 'position': [-4.3, BATTEN_Y, rim + 0.776 + 0.024], 'rotate': [0.0, 90.0, 0.0],
@@ -2397,13 +2397,16 @@ def hero_stage(wash=0.0):
     s['materials'].pop('sweep', None)
     s['lights'] = {}
     if wash:
-        s['lights']['house-wash'] = {'type': 'area', 'size_m': [3.0, 1.5], 'position': [0.0, -9.0, 5.5], 'target': [0.0, 0.0, Z + 0.8],
+        # (proofs 1-2: the lamps alone left the speakers black and no pools on the floor at any clean exposure: the
+        # Hemispheres glow but throw little onto what is 1.9 m below. One faint warm wash from the house, declared)
+        s['lights']['house-wash'] = {'type': 'area', 'size_m': [3.0, 1.5], 'position': [0.0, -9.0, 5.5], 'target': [0.0, 0.0, Z + 1.0],
                                      'irradiance': wash, 'color': '#FFE6C8'}
     s['sky']['strength'] = 0.0                                    # no world light: the lamps (and the wash) only
-    s['camera'] = {'position': [0.0, -11.5, 1.75], 'target': [0.0, 0.0, 2.6], 'lens_mm': 40.0, 'level': True}
+    # (proof 1: the cast small and low in a dark frame, the curtains barely in: 1.3 m closer, the curtains drawn in)
+    s['camera'] = {'position': [0.0, -10.2, 1.7], 'target': [0.0, 0.0, 2.5], 'lens_mm': 40.0, 'level': True}
     s['size'] = [1920, 880]
     # the lamp lane's own settings for these lamps (lamp_site.py, afterhours): no clamp, caustics, deep bounces; denoised
-    s['render'].update({'samples': 256, 'denoise': True, 'clamp': 0, 'exposure': 4.0, 'white_balance_k': 3200, 'white_balance_tint': 0.0,
+    s['render'].update({'samples': 256, 'denoise': True, 'clamp': 0, 'exposure': 6.0, 'white_balance_k': 3200, 'white_balance_tint': 0.0,
                         'bounces': 48, 'diffuse_bounces': 16, 'glossy_bounces': 24, 'transmission_bounces': 32,
                         'caustics_refractive': True, 'caustics_reflective': True})
     s.pop('finish', None)
