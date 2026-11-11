@@ -30,8 +30,8 @@ TINT = {'ember': ('cloud-red', 'red'), 'dust': ('cloud-orange', 'orange'), 'acid
         'fog': ('birch-fog-clear', 'ice'), 'smoke': ('cloud-black', 'black')}       # shots.py SITE_TINTS (370de3da)
 LED_K = {'red': 2200, 'green': 2700, 'ice': 2700, 'violet': 3000, 'orange': 4000, 'amber': 4000, 'blue': 4000, 'black': 4000}
 CORE_LOAD = {'orange': 1.5, 'amber': 1.5, 'blue': 1.5, 'black': 0.15}
-HEMI_LM, CORE_LM_OUT = 1000, {'ember': 23.6, 'dust': 12.5, 'acid': 18.3, 'poison': None, 'ice': 6.6, 'haze': None,
-                               'fog': 34.6, 'smoke': 12.9}   # Core out of the ball (ae86581b lumens.txt; None: not measured)
+HEMI_LM, CORE_LM_OUT = 1000, {'ember': None, 'dust': 12.5, 'acid': 18.3, 'poison': None, 'ice': 6.6, 'haze': None,
+                               'fog': None, 'smoke': 12.9}   # Core out of the ball at the final recipe (ae86581b lumens.txt; None: not measured at it)
 Y_BAR = (R.COUNTER['y0'] + R.COUNTER['y1']) / 2
 TOP = R.COUNTER['top_z']
 
