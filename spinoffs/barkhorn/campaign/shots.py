@@ -2208,7 +2208,7 @@ LAMPS_MODULE = 'spinoffs/barkhorn/planet/afterhours/lamps_final.py'          # t
 MANTLE_DEF = 'studio/products/mantle-strata-v3.json'                         # (the old embed: NEVER again, _approved refuses it)
 # Mantle comes only from r48-mantle-design's approved asset (the coordinator, 2026-11-11 15:40): the engine's own file,
 # written from the CAD's finishes, has steel posts and feet, brass bushes and rear plate, and its lid on
-MANTLE_ASSET_SHA = os.environ.get('MANTLE_ASSET_SHA', '941ad388f32f19f58f9329cb2a70d0c3f6442348')   # all hardware satin black (16:46)
+MANTLE_ASSET_SHA = os.environ.get('MANTLE_ASSET_SHA', 'fa0c3a6568d5bcc2085c742b83900fae0c1c6aad')   # final for now (18:27): edge C, lid out
 MANTLE_ASSET = 'spinoffs/barkhorn/asset/mantle-strata.blend'
 MANTLE_FLAVOUR_TINT = {'smoke-2074': 'smoke', 'ice-2069': 'ice', 'ember-2423': 'ember', 'poison-2092': 'poison', 'haze-2287': 'haze'}
 
