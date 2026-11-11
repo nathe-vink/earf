@@ -385,6 +385,9 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    from the CAD's part finishes, which still say steel posts, feet and screws, brass bushes and rear plate, lid shown; the
    approved look lived only in the Mantle lane's .blend. Mantle lane told 16:27 to make CAD, BOM, engine file, .blend and
    manifest agree. The speaker lane's engine now appends the asset and refuses the old embed.
+   16:26 UTC, the owner: "I like B" -> CORE'S BASE SHAPE IS B, the rounded lip (Ø143 x 38, the touch ring turned to a 7 mm
+   bullnose). Color still open (satin black, acrylic or metal, against its own color). Lamps lane: B is the default shape
+   in the rig and CAD; the daylight picture shrinks to B only (black, Ice, Ember), plus the same three lit.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
