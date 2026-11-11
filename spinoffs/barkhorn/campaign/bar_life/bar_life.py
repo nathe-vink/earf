@@ -68,3 +68,15 @@ def boards(bpy, name, p, kit):
         ob.rotation_euler = Euler([math.radians(a) for a in c.get('rot', [0, 0, 0])], 'XYZ')
         objs.append(ob)
     return objs
+
+
+def remove(bpy, name, p, kit):
+    """Take out of a reused room the objects it built that the picture must not show (by name, exactly or with a
+    .NNN suffix): the old DJ station's mixer and the records that floated where the old players stood."""
+    gone = []
+    for o in list(bpy.data.objects):
+        base = o.name.split('.')[0]
+        if base in p['names']:
+            gone.append(o.name); bpy.data.objects.remove(o, do_unlink=True)
+    print('REMOVED', gone)
+    return []

@@ -101,6 +101,19 @@ def _life():
            {'image': 'tex/reserved.png', 'w': 0.1, 'h': 0.05, 't': 0.002, 'x': 8.25, 'y': R.BACKBAR_Y - 0.12, 'z': BB, 'rot': [-18.0, 0, 0.0],
             'ground': '#EFEBE3', 'rough': 0.7}]
     out.append({'kind': 'kit', 'shape': 'ext', 'path': LIFE, 'fn': 'boards', 'boards': bds})
+    # (test 2: the room's old DJ station left a mixer and two records floating where the old players stood: out)
+    out.append({'kind': 'kit', 'shape': 'ext', 'path': LIFE, 'fn': 'remove', 'names': ['dj-plinths', 'dj-knobs', 'dj-records', 'dj-labels']})
+    # cozy (the owner, 17:39: "Soul to me means lived in. Cozy."): a worn leather armchair at the frame's left, books
+    # among the records (cloth spines, stacked and leaning, in cells the records left empty)
+    out.append({'kind': 'kit', 'shape': 'asset', 'model': 'ArmChair_01', 'res': '2k', 'position': [5.15, 3.05, 0.0], 'rotate': [0, 0, -150.0]})
+    cloth = ['#5A2A22', '#2E3A2E', '#6E5A3E', '#3A2E26', '#7A6448', '#2A2A30', '#5E4A36']
+    cz = [R.RECORD_WALL['z0'] + R.RECORD_WALL['cell'] * k + 0.02 for k in range(5)]
+    for n_, (x, zi, lean) in enumerate(((5.05, 1, 0.0), (6.25, 3, 8.0), (7.95, 0, 0.0), (9.4, 2, -6.0), (4.3, 3, 0.0))):
+        for j in range(5):
+            h = 0.22 + 0.06 * ((j * 7 + n_) % 4) / 3
+            out.append({'kind': 'kit', 'shape': 'box', 'size': [0.028 + 0.01 * ((j + n_) % 3), 0.2, h],
+                        'position': [round(x + j * 0.04, 3), R.RECORD_WALL['y'] + 0.12, cz[zi]], 'rotate': [0, lean, 0],
+                        'material': 'card', 'color': cloth[(j + n_ * 2) % len(cloth)], 'ease': 0.002})
     return out
 
 
@@ -115,7 +128,7 @@ def _track():
         out[f'track-bar{k}'] = {'type': 'area', 'size_m': [0.12, 0.12], 'position': [x, Y_BAR - 0.6, R.CEIL - 0.05], 'target': [x, Y_BAR, TOP],
                                 'irradiance': round(0.5 * TRACK, 3), 'spread_deg': 24, 'color': '#FFD2A0'}
     out['house'] = {'type': 'area', 'size_m': [3.0, 2.0], 'position': [6.9, 0.6, 2.8], 'target': [6.9, 4.5, 1.2],
-                    'irradiance': round(0.05 * TRACK, 3), 'color': '#FFE0C0'}
+                    'irradiance': round(0.02 * TRACK, 3), 'color': '#FFD8B0'}     # (cozy: the room's fill low, its edges warm and dark)
     return out
 
 
@@ -151,8 +164,10 @@ def bar_backbar():
     s = _base([1920, 1080], 'Planet EARF bar: the record wall from a seat at the bar')
     s['set']['props'].append(_lamps(HEMIS, CORES))
     # (test 1: the bays cut by the frame: a seat pulled back, 30 mm, a little off axis)
-    s['camera'] = {'position': [6.62, 2.3, 1.42], 'target': [6.92, 5.6, 1.62], 'lens_mm': 30.0, 'level': True,
-                   'fstop': 4.0, 'focus': [6.9, 4.1, 1.15]}
+    # (17:39 "cozy": closer and lower, from a stool at the bar at a seated eye, the room wrapping round; 26 mm so both
+    # bays stay whole)
+    s['camera'] = {'position': [6.6, 3.05, 1.36], 'target': [6.95, 5.6, 1.55], 'lens_mm': 26.0, 'level': True,
+                   'fstop': 3.2, 'focus': [6.9, 4.15, 1.12]}
     return s
 
 
