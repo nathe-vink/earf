@@ -23,3 +23,14 @@ frames already made; scene.py, about line 813), so the deck's bottom faces fall 
 (material plinth-1, roughness 0.35) in every v3 frame, signed or not. The day-set differences credited to the satin
 underside in the uplit and light-table proposals (Ember top 30/11/52 -> 46/21/130) must have come from their changes to the base,
 not from the underside. A fully glassy underside, as the signed spec reads, has not been rendered.
+
+NO BRASS IN SIGHT (the coordinator, 2026-11-11 00:42; commit 450064b8 for the model and parts list): the platter's
+hub and its six M4 inserts black nickel plated on their brass, as the bearing (the parts keep their drawn material and
+fits); the bushes are inside the housing; the rear plate, hidden under the deck, stays brass. Render: --black-hub.
+Which frames show the hub (a test pair per tint at 1/4 size, the hub flat green against black, the same seed; px
+shifted green): Fog 40, Acid 31, Dust 21, Poison 20, Ice 10, Haze 10, Ember 7, Smoke 1. Re-rendered: all but Smoke,
+same camera, light, settings and file names. Against the previous final frame, px changed over 8 of 255 at full size:
+Fog 2580, Dust 2696, Acid 2223, Ice 1775, Haze 99, Ember 26, Poison 0 (all at the platter's rim, where the hub shows
+through the clear lamina). Smoke is unchanged. Audits, the seven: 0 emitters, gt 0 px, no hidden mesh.
+The mid-front reading fell where the hub had shown: Fog 45 -> 25, Acid 24 -> 20, Dust 20 -> 18, Ice 17 -> 16; the
+others are unchanged (back-left and front-right unchanged in all).
