@@ -13,3 +13,12 @@ Every third-party asset these frames use. All are from Poly Haven and released u
 | cherry_veneer | texture | the orchestra back-wall panelling | https://polyhaven.com/a/cherry_veneer | CC0 1.0 |
 
 Our own products, not third-party: Tropos (this branch's product files, 370de3da), Hemisphere and Core (r32-lamps-final ae86581b, by the lamp lane's own builder through the bar lane's embed `spinoffs/barkhorn/planet/afterhours/lamps_final.py`, r33-planet-world 92db2b2d), Mantle Strata Float v3 (r48-mantle-design 450064b8).
+
+## THE STAGE (hero-stage.png)
+
+| asset | kind | used for | URL | license |
+|---|---|---|---|---|
+| oak_wood_planks | texture | the stage floor | https://polyhaven.com/a/oak_wood_planks | CC0 1.0 |
+| plywood | texture | the cutouts' edges, backs and braces | https://polyhaven.com/a/plywood | CC0 1.0 |
+
+The cutouts' faces are EARF's own tint icons (r47-brand, `spinoffs/barkhorn/brandbook/book/img/icon-<tint>.png`, copied unchanged into `spinoffs/barkhorn/campaign/stage/icons/`); Poison's grass tuft is drawn in their style by `stage/make_cutouts.py`. Curtains, valance, backdrop, proscenium and batten are the studio engine's own kit pieces.
