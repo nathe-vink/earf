@@ -1,0 +1,34 @@
+Timer 'STL Import' took 1.21 ms
+Timer 'STL Import' took 7.16 ms
+Timer 'STL Import' took 3.67 ms
+Timer 'STL Import' took 0.47 ms
+Timer 'STL Import' took 0.24 ms
+Timer 'STL Import' took 0.83 ms
+Timer 'STL Import' took 0.41 ms
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:405: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  wm_ = bpy.data.materials.new(f'window-{tint}'); wm_.use_nodes = True; nt_ = wm_.node_tree; nt_.nodes.clear()
+Timer 'STL Import' took 0.28 ms
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:177: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m = bpy.data.materials.new(nm); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+Timer 'STL Import' took 0.94 ms
+Timer 'STL Import' took 0.42 ms
+Timer 'STL Import' took 0.22 ms
+Timer 'STL Import' took 0.77 ms
+Timer 'STL Import' took 0.41 ms
+Timer 'STL Import' took 0.23 ms
+Timer 'STL Import' took 1.36 ms
+Timer 'STL Import' took 0.48 ms
+Timer 'STL Import' took 0.30 ms
+Timer 'STL Import' took 0.85 ms
+Timer 'STL Import' took 0.44 ms
+Timer 'STL Import' took 0.33 ms
+00:16.199  cycles           | WARNING CUEW initialization failed: Error opening the library
+AUDIT baseopts-red hidden [] no-shadow [] lights [('key', 'AREA', 270.925), ('fill', 'AREA', 60.0), ('kicker', 'AREA', 18.0), ('led-red', 'AREA', 0.0), ('led-red.001', 'AREA', 0.0), ('led-red.002', 'AREA', 0.0)]
+HIDDENCAST baseopts-red: 3 hidden, 0 in frame
+   out         0.0 %  area lamp (ellipse) key
+   out         0.0 %  area lamp (ellipse) fill
+   out         0.0 %  area lamp (rectangle) kicker
+00:17.082  render           | Saved: '/home/user/earf/renders/2026-11-10/barkhorn/lamp-site/final/masks/core-base-options-day-key.png'
+00:18.818  render           | Saved: '/home/user/earf/renders/2026-11-10/barkhorn/lamp-site/final/masks/core-base-options-day-fill.png'
+00:20.458  render           | Saved: '/home/user/earf/renders/2026-11-10/barkhorn/lamp-site/final/masks/core-base-options-day-kicker.png'
+CASTCHECK baseopts-red {'key': 0.0, 'fill': 0.0, 'kicker': 0.0}

@@ -83,7 +83,7 @@ def build(frame, samples, scale):
     def bbt(tint):
         return blackbody(CCT_PER_TINT.get(tint, 2700) if pertint else CCT)
     bb = blackbody(CCT)
-    kind0 = 'dome' if frame.startswith(('lamps-domes', 'trio-')) else 'orb' if frame.startswith(('lamps-orbs', 'baseopts')) else frame.split('-')[0]
+    kind0 = 'dome' if frame.startswith(('lamps-domes', 'trio-', 'cluster')) else 'orb' if frame.startswith(('lamps-orbs', 'baseopts')) else frame.split('-')[0]
     # the studio's brightness and the exposure move together, so the paper holds its tone while the lamp, at its real
     # output, comes out of clipping: a brighter studio, one scale
     # round 3 (the gate, wf_5760aeac-7cd): Hemisphere's studio x1 with the camera at -2 EV (the lamp up 1 EV against the
@@ -227,7 +227,7 @@ def build(frame, samples, scale):
                     f_.normal_flip()
             me = bpy.data.meshes.new(f'opal-edge-{tint}'); bm.to_mesh(me); bm.free(); me.materials.append(clr)
             eo = bpy.data.objects.new(f'opal-edge-{tint}', me); bpy.context.scene.collection.objects.link(eo); eo.location = c
-            part('out-dome-pendant', 'rim', acrylic(f'rim-{tint}', 0.6, tname, 0.5), c)
+            part('out-dome-pendant', 'rim', acrylic(f'rim-{tint}', 0.0, tname, 0.5), c)   # (polished, chamfered: the bar)
             for nm in ('clamp', 'crown', 'gland', 'hub'):
                 part('out-dome-pendant', nm, cap, c)
             white = SC.principled('crown-white', '#EEEEEA', 0.55)
@@ -341,7 +341,7 @@ def build(frame, samples, scale):
         z0 = floor_z + 0.0065                         # the dock's underside on the floor (as lamp_pictures: the CAD's
                                                       # dock underside sits 6.5 below its origin)
         objs = []
-        base = base or os.environ.get('CORE_BASE', 'A')
+        base = base or os.environ.get('CORE_BASE', 'B')   # B, the rounded lip: the owner's pick (2026-11-11)
         def revolve(nm, prof, mat, flip=False, off=0.0):
             # a turned surface: the (r, z) profile in mm (material on its left as it is walked) spun about the axis,
             # its normals outward (flip: inward), the profile moved in by `off` mm
@@ -373,6 +373,11 @@ def build(frame, samples, scale):
             # own pour (the same loading as the ball's 6 mm wall), satin outside, over a white opal liner that hides the
             # battery, board and contacts; the touch ring stays satin black anodized. Only the outside is seen
             lo_, up_ = BASE_LOW[base], BASE_UP.get(base)
+            if own and base == 'C':
+                # C in its own colour grows 3 mm in radius below the touch ring, so the 6 mm skin and liner clear the
+                # cells' bays (the coordinator, 2026-11-11: "C may grow 3 mm for it")
+                lo_ = [(r_ + 3.0 if 0 < i < len(lo_) - 1 else r_, z_) for i, (r_, z_) in enumerate(lo_)]
+                up_ = [(up_[0][0] + 3.0, up_[0][1])] + up_[1:]
             if own:
                 ld_ = float(os.environ.get('CORE_LOAD', 0.5 * TINT_LOAD.get(tint, 1.0)))
                 sk = acrylic(f'base-skin-{tint}', 0.55, tname, ld_)        # satin outside: a fine bead-blast, as rough glass
@@ -533,9 +538,20 @@ def build(frame, samples, scale):
     elif frame.startswith('baseopts'):
         # core-base-options (2026-11-11): three Cores side by side, Ember, bases A, B, C; 2400 x 1000
         W, H = 2400, 1000
-        for b_, x_ in (('A', -0.24), ('B', 0.0), ('C', 0.24)):
+        dx_ = float(os.environ.get('BASE_DX', '0.24'))          # the spacing (the daylight grid: 0.18, closer)
+        for b_, x_ in (('A', -dx_), ('B', 0.0), ('C', dx_)):
             core(tint or 'red', x_, 0.0, base=b_)
         cam = tuple(eval(os.environ['BASECAM'])) if os.environ.get('BASECAM') else ((0.0, -1.10, 0.36), (0.0, 0.0, 0.085), 58.0)
+    elif frame == 'cluster':
+        # hemisphere-cluster (the owner, 2026-11-11: "different colors at variable heights, all clustered together"): all
+        # eight hung close in two staggered rows (plan centres 0.24 m or more apart, the shades Ø200: no cord passes through a shade),
+        # no two at the same height, neighbours set off by colour; seen a little from below and to one side; 2000 x 2000
+        W, H = 2000, 2000
+        for t, (x_, y_, z_) in zip(('red', 'blue', 'amber', 'violet', 'green', 'black', 'orange', 'ice'),
+                                   ((-0.42, 0.12, 0.62), (-0.18, 0.12, 0.80), (0.06, 0.12, 0.55), (0.30, 0.12, 0.74),
+                                    (-0.30, -0.12, 0.44), (-0.06, -0.12, 0.68), (0.18, -0.12, 0.50), (0.42, -0.12, 0.86))):
+            hemisphere(t, x_, z_, y=y_)
+        cam = tuple(eval(os.environ['DOMECAM'])) if os.environ.get('DOMECAM') else ((0.30, -1.50, 0.36), (0.0, 0.0, 0.67), 46.0)
     elif frame.startswith('trio-'):
         # trio-<k1>-<k2>-<k3> (the owner, 2026-11-11: "I like having to pair multiple"): three Hemispheres hung close
         # over a table at slightly different heights, seen a little from below and to one side; 2000 x 1600

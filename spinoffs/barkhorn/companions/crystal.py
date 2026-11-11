@@ -213,6 +213,10 @@ def cover_parts(p=N):
     liner = ball(r_l, p['liner'], (0, 0, 0), cut_below=4) - hole
     skin = ball(r_k, p['skin'], (0, 0, 0), cut_below=0) - hole
     rim = cyl('z', (0, 0), 2 * (r_si - 0.2), 0, 3.8) - cyl('z', (0, 0), 2 * (r_k + 0.2), -1, 5)
+    if p.get('build') == 'v3':
+        # the mouth (2026-11-11, the bar): one even 1.0 x 45 deg chamfer on the rim's two lower edges, polished
+        from build123d import chamfer, Axis
+        rim = chamfer(rim.faces().sort_by(Axis.Z)[0].edges(), 1.0)
     # the collar: a tube through the crown, its flange a spherical seat under the skin (on a 1 mm silicone ring)
     tube = cyl('z', (0, 0), co, cz0, cz1) - cyl('z', (0, 0), ci, cz0 - 1, cz1 + 1)
     flange = _sphere_band(r_ki - 1.0, r_ki - 5.0, ci / 2, fr)
@@ -278,7 +282,9 @@ def cover_parts(p=N):
                     'chart transmission (14 to 93 %) as it is: the one tinted layer']),
     ]) + [
         Part('rim', rim, Machined('cast-acrylic', 'lathe'), finish='body', group='cover',
-             notes=['closes the three layers at the mouth, bonded and polished with them; a press-in ePTFE vent in its '
+             notes=['THE MOUTH (2026-11-11, the bar): the three sheets\' stacked edge and this rim faced together, polished, '
+                    'with one even 1.0 x 45 deg chamfer across all three, so the edge reads as one thick polished lip; '
+                    'closes the three layers at the mouth, bonded and polished with them; a press-in ePTFE vent in its '
                     'face keeps the gaps between the layers at room pressure and dry. PROPOSAL 2026-11-03 (the night '
                     'pictures: a lit polished edge at the mouth pipes the diffuser\'s light out as a bright blue line): '
                     'v3\'s opal ends 4 inside the rim, as the clear shell does, and the rim\'s exposed face is bead-blasted '
@@ -422,7 +428,9 @@ def north_parts(p=N):
         Part('canopy', canopy, Machined('aluminium', 'lathe'), finish='anodised', group='canopy',
              notes=['150 x 50, 6061 turned, SATIN black anodised (2026-11-11, the bar: one hardware finish; was polished '
                     'black acrylic): a cover only (review 2026-11-01), screwed to the steel '
-                    'strap, which carries the load; the driver and the splices are in the steel enclosure']),
+                    'strap, which carries the load; the driver and the splices are in the steel enclosure. The bar '
+                    '(2026-11-11): the strap\'s screws black oxide, under the canopy\'s closed face, none in view; the cord '
+                    'grip where the cord leaves the canopy a turned 6061 gland, satin black anodized, its nut flush']),
         Part('strap', strap, Bought('hemi-canopy-strap'), finish='steel', group='canopy', inside=True),
         Part('enclosure', encl, Bought('hemi-driver-box'), finish='steel', group='canopy', inside=True),
         Part('driver', driver, Bought('north-driver-ring' if ring_ else 'north-driver-575'), finish='steel', group='canopy', inside=True, render=False),   # round 36: 575 lm
@@ -595,7 +603,9 @@ def orb_parts(p=O):
     dock = ((frustum(dz0, 1.3) if ang_ else eased(150.0, dz0, 1.5, 1.5)) - cyl('z', (0, 0), 122.0, 0, 3) - contacts - box(-20.0, 45.0 - db_, -5.0, 20.0, 70.0 - db_, -1.0) -
             cyl('y', (0, -2.75), 4.2, 60.0, 80.0))
     base = base - (cyl('z', (0, 0), 118, -1, 2) - cyl('z', (0, 0), 114, -2, 3)) - cyl('z', (0, 0), 92.4, zs - 2, zs + 0.01)
-    ring = eased(bd, bh, z_top, 2.0, bottom=False) - cup
+    # the owner's pick, 2026-11-11 ("I like B"): the touch ring's top edge turned over in a 7 mm bullnose where it meets
+    # the ball, so the ball nests into it (was 2.0)
+    ring = eased(bd, bh, z_top, 7.0 if p.get('angled', False) else 2.0, bottom=False) - cup
     ring = ring - (cyl('z', (0, 0), 92.4, zs - 2, zs + 0.01) - cyl('z', (0, 0), 83.6, zs - 3, zs + 1))
     base = base - slot - pads
     if B_:
@@ -634,7 +644,8 @@ def orb_parts(p=O):
         ]
     return ball_parts + [
         Part('grommet', grommet, Machined('aluminium', 'lathe'), finish='anodised', group='ball',
-             notes=['black anodised aluminium: lines the port, bonded with a two-part MMA adhesive (not cyanoacrylate). '
+             notes=['BRIGHT BY NECESSITY (the bar\'s exception, 2026-11-11): the bore is machined bright after anodizing, a working '
+                    'reflector for the LED\'s light; the outside satin black. ' + 'black anodised aluminium: lines the port, bonded with a two-part MMA adhesive (not cyanoacrylate). '
                     'Review 2026-11-01, to draw with the dock: it grows a Ø38 x 6 spigot under the ball with three 30 deg '
                     'L-slots, into a Ø38.4 socket round the window with three Ø3 stainless pins, so the ball stays '
                     'captive in a drop and still swaps with a quarter turn (CORE-RECHARGE.md §6)'] +
@@ -652,7 +663,8 @@ def orb_parts(p=O):
                     'below the hatch\'s counterbore (112), the middle pocket (50) for the chassis, the board and the LED, '
                     'the three cells\' bays, the ballast\'s corners and the cable notch']),
         Part('ring', ring, Machined('aluminium', 'lathe'), finish='anodised', group='base',
-             notes=['aluminium, black anodised, satin, insulated from the chassis: the touch (tap to switch, hold to dim, '
+             notes=['aluminium, black anodised, satin, its top edge turned to a 7 mm bullnose the ball nests into (the '
+                    'owner\'s pick B, 2026-11-11), insulated from the chassis: the touch (tap to switch, hold to dim, '
                     '2200 to 2700 K)']),
     ] + ([Part('well', well, Machined('ptfe', 'lathe'), finish='white', group='base',
                notes=['the light well (2026-11-10): a white PTFE sleeve, Ø32/Ø30 x 6, pressed into the base\'s bore round the '
@@ -679,7 +691,8 @@ def orb_parts(p=O):
                     'makes no contact) and a nickel-plated conical - spring Ø12, 1.7 at rest; leads in a milled channel '
                     'to the board, the NTC on one cell; no exposed contact outside the hatch']),
         Part('hatch', hatch, Machined('aluminium', 'mill'), finish='anodised', group='battery',
-             notes=['black anodised aluminium, 2.3 thick, in a counterbore under the base: six captive M3 screws '
+             notes=['black anodised aluminium, 2.3 thick, in a counterbore under the base: six captive M3 screws, BLACK OXIDE, '
+                    'countersunk flush with the hatch (2026-11-11, the bar) '
                     '(Phillips or Torx: commercially available tools; review 2026-11-01: six, was four, tapped into the '
                     'steel ballast corners, not inserts in acrylic, nylon-patched), an O-ring (IP44); a label inside: the '
                     'cells\' type (LiFePO4 18650 only) and how to change them. Under it, to draw with the dock: a 0.5 '
