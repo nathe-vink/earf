@@ -2312,7 +2312,7 @@ def hero_hollywood3(family=True):
               {'kind': 'kit', 'shape': 'box', 'size': [1.8, 0.6, step], 'position': [-0.4, 0.85, 0.0], **_wood('plywood')},
               {'kind': 'kit', 'shape': 'box', 'size': [0.7, 0.6, 0.30], 'position': [2.05, 0.55, 0.0], **_wood('plywood')},
               {'kind': 'kit', 'shape': 'box', 'size': [3.8, 2.6, 0.008], 'position': [0.0, -0.55, 0.001],
-               **{**_wood('quatrefoil_jacquard_fabric', '#6B5A4E', 0.55), 'tex_scale': 0.6}}]
+               **_wood('quatrefoil_jacquard_fabric', '#6B5A4E', 0.3, 1.0, 0.7)}]      # (full 1: muted 0.55 at 0.6 m a tile read flat salmon: its own scale, less tint, a darker stain)
     s['set']['props'] = props
     if family:
         props.append({'kind': 'kit', 'shape': 'asset', 'model': 'side_table_01', 'res': '2k', 'position': [-2.15, -0.15, 0.0]})
