@@ -50,6 +50,7 @@ EV, WB = -2.0, 4000          # (20:47: the near Cores pale at -1.5: half a stop 
 TRACK = 3.0                  # the declared track lights' scale (tests 1-4: too dark)
 # (20:47: the bays' pools a stop and a half too strong, aim near 1.6x the wall; the room lifted for the half stop down)
 WALL, BAY, HOUSE = 1.7, 5.5, 0.6
+HORN = 4.0
 
 
 def _room():
@@ -134,11 +135,17 @@ def _track():
         # (18:40: the cabinet glows as on the stage picture, the bay's own back and sides darker: strong, narrow, onto the speaker)
         out[f'track-bay{k}'] = {'type': 'area', 'size_m': [0.14, 0.14], 'position': [xc, SPK_Y - 0.45, R.CEIL - 0.05], 'target': [xc, SPK_Y - 0.05, FEET_BAR + 0.7],   # (20:47: steep, from above: the cone in its cabinet's shade
                                 'irradiance': round(BAY * TRACK, 3), 'spread_deg': 14, 'color': '#FFE2C0'}
-    out['track-mantle'] = {'type': 'area', 'size_m': [0.1, 0.1], 'position': [MANTLE[0], MANTLE[1] - 0.5, R.CEIL - 0.05],
-                           'target': [MANTLE[0], MANTLE[1], MANTLE[2]], 'irradiance': round(2.0 * TRACK, 3), 'spread_deg': 18, 'color': '#FFD8B0'}
+    out['track-mantle'] = {'type': 'area', 'size_m': [0.1, 0.1], 'position': [MANTLE[0], MANTLE[1] - 0.9, R.CEIL - 0.05],
+                           'target': [MANTLE[0], MANTLE[1], MANTLE[2]], 'irradiance': round(3.5 * TRACK, 3), 'spread_deg': 18, 'color': '#FFD8B0'}   # (22:32: the Ember plinth's colour)
     # (18:36: the dark warm, not black: a broad low warm fill from the room behind the camera)
-    out['house'] = {'type': 'area', 'size_m': [4.0, 2.0], 'position': [6.9, 0.2, 2.6], 'target': [6.9, 4.5, 1.0],
+    for k, xc in enumerate(R.SPK_NICHES):                     # (22:32: the horn's shape and throat: a head of its own, from the room side)
+        out[f'track-horn{k}'] = {'type': 'area', 'size_m': [0.12, 0.12], 'position': [xc + 0.3, 4.4, R.CEIL - 0.05],
+                                 'target': [xc, SPK_Y - 0.15, FEET_BAR + 1.12], 'irradiance': round(HORN * TRACK, 3), 'spread_deg': 12,
+                                 'color': '#FFE2C0'}
+    out['house'] = {'type': 'area', 'size_m': [3.0, 3.0], 'position': [6.9, 0.2, 2.6], 'target': [6.9, 4.5, 1.0],
                     'irradiance': round(HOUSE * TRACK, 3), 'color': '#FFC890'}
+    for v in out.values():                                     # (22:32: round heads, so a gloss shows no hard-edged shape)
+        v['shape'] = 'DISK'
     return out
 
 
@@ -201,7 +208,11 @@ def bar_backbar():
     # (the audit: from this seat the far bay's head sat in the frame's top, 0.033 %: further toward the room, aimed a
     # little higher so its cone stays in the cabinet's shade)
     s['lights']['track-bay0'] = {**s['lights']['track-bay0'], 'position': [R.SPK_NICHES[0], 4.4, R.CEIL - 0.05],
-                                 'target': [R.SPK_NICHES[0], SPK_Y - 0.05, FEET_BAR + 0.95]}                         # (this view sees that head: the audit, 0.03 %)
+                                 'target': [R.SPK_NICHES[0], SPK_Y - 0.05, FEET_BAR + 0.95],
+                                 'irradiance': round(s['lights']['track-bay0']['irradiance'] * 2.2, 3)}   # (22:32: the far speaker back)
+    # (22:32: the top left black, not warm dark: a little declared warm fill there, from out of frame at the left)
+    s['lights']['house-left'] = {'type': 'area', 'shape': 'DISK', 'size_m': [2.0, 2.0], 'position': [4.6, 2.2, 3.0],
+                                 'target': [4.0, 5.6, 2.6], 'irradiance': round(0.12 * TRACK, 3), 'color': '#FFC890'}                         # (this view sees that head: the audit, 0.03 %)
     for pr in s['set']['props']:                                 # a Core and the drinks on the bar in front of the seat
         if pr.get('fn') == 'lamps':
             # ember by the throw, dust and acid further along; none before Mantle
@@ -226,7 +237,7 @@ def core_bar_table():
     # (18:36: the now-playing sleeve out of the close-up; the base given the samples it needs)
     for pr in s['set']['props']:
         if pr.get('fn') == 'boards':
-            pr['boards'] = [b for b in pr['boards'] if 'cover-05' not in b['image']]
+            pr['boards'] = [b for b in pr['boards'] if 'cover-05' not in b['image'] and 'matches' not in b['image']]   # (22:32: the matches, a black square before the base)
     s['render'].update(samples=512, adaptive=0.004)
     s['camera'] = {'position': [7.3, Y_BAR - 1.25, TOP + 0.2], 'target': [7.05, Y_BAR - 0.1, TOP + 0.12], 'lens_mm': 85.0, 'level': True,
                    'fstop': 2.0, 'focus': [7.05, Y_BAR - 0.1, TOP + 0.12]}
