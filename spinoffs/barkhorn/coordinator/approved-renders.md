@@ -625,6 +625,11 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    Shown to the owner 21:58 as a test. Coordinator's check, sent back: the speaker in shade and near black; the leaves
    read as any ivy at this distance (a spray in the near foreground, the plant over the wall's top); too much gravel;
    runners showing as wire; the speaker larger.
+   22:02 UTC, the owner on that test: "It should still be set in nature." -> NO WALL, NOTHING BUILT. Poison's habitat is
+   woodland: big old trunks thick with the climbing vine, the same plant carpeting the forest floor, a mossy log or
+   rock, ferns, deeper woods behind; the speaker in a sunlit gap, fully visible. Biomes lane told 22:03.
+   RULE: every habitat is a place in nature. Nothing man-made in a habitat except the speaker (Ice's distant cabin was
+   in the frame the owner approved on 9 Nov and stays unless he says otherwise).
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
