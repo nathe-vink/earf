@@ -1,0 +1,1215 @@
+{
+ "title": "Tropos, the orchestra: every player a horn",
+ "size": [
+  1600,
+  800
+ ],
+ "set": {
+  "kind": "sweep",
+  "color": "#7A4A28",
+  "width": 16.0,
+  "front": 10.0,
+  "depth": 3.6,
+  "radius": 0.04,
+  "height": 6.0,
+  "contact": {
+   "strength": 0.8,
+   "distance_m": 0.3,
+   "core_strength": 1.0,
+   "core_distance_m": 0.03
+  },
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.012,
+    "height": 0.95,
+    "position": [
+     -0.951,
+     0.134,
+     0.0
+    ],
+    "material": "gloss",
+    "color": "#111111"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.46,
+     0.02,
+     0.32
+    ],
+    "position": [
+     -0.951,
+     0.134,
+     0.88
+    ],
+    "rotate": [
+     -25.0,
+     0.0,
+     40
+    ],
+    "material": "gloss",
+    "color": "#111111"
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.012,
+    "height": 0.95,
+    "position": [
+     0.0,
+     0.48,
+     0.0
+    ],
+    "material": "gloss",
+    "color": "#111111"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.46,
+     0.02,
+     0.32
+    ],
+    "position": [
+     0.0,
+     0.48,
+     0.88
+    ],
+    "rotate": [
+     -25.0,
+     0.0,
+     0
+    ],
+    "material": "gloss",
+    "color": "#111111"
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.012,
+    "height": 0.95,
+    "position": [
+     0.951,
+     0.134,
+     0.0
+    ],
+    "material": "gloss",
+    "color": "#111111"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.46,
+     0.02,
+     0.32
+    ],
+    "position": [
+     0.951,
+     0.134,
+     0.88
+    ],
+    "rotate": [
+     -25.0,
+     0.0,
+     -40
+    ],
+    "material": "gloss",
+    "color": "#111111"
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.012,
+    "height": 0.95,
+    "position": [
+     -0.892,
+     1.207,
+     0.3
+    ],
+    "material": "gloss",
+    "color": "#111111"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.46,
+     0.02,
+     0.32
+    ],
+    "position": [
+     -0.892,
+     1.207,
+     1.18
+    ],
+    "rotate": [
+     -25.0,
+     0.0,
+     22
+    ],
+    "material": "gloss",
+    "color": "#111111"
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.012,
+    "height": 0.95,
+    "position": [
+     0.892,
+     1.207,
+     0.3
+    ],
+    "material": "gloss",
+    "color": "#111111"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.46,
+     0.02,
+     0.32
+    ],
+    "position": [
+     0.892,
+     1.207,
+     1.18
+    ],
+    "rotate": [
+     -25.0,
+     0.0,
+     -22
+    ],
+    "material": "gloss",
+    "color": "#111111"
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.012,
+    "height": 0.95,
+    "position": [
+     -2.438,
+     1.195,
+     0.6
+    ],
+    "material": "gloss",
+    "color": "#111111"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.46,
+     0.02,
+     0.32
+    ],
+    "position": [
+     -2.438,
+     1.195,
+     1.48
+    ],
+    "rotate": [
+     -25.0,
+     0.0,
+     48
+    ],
+    "material": "gloss",
+    "color": "#111111"
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.012,
+    "height": 0.95,
+    "position": [
+     0.0,
+     2.28,
+     0.6
+    ],
+    "material": "gloss",
+    "color": "#111111"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.46,
+     0.02,
+     0.32
+    ],
+    "position": [
+     0.0,
+     2.28,
+     1.48
+    ],
+    "rotate": [
+     -25.0,
+     0.0,
+     0
+    ],
+    "material": "gloss",
+    "color": "#111111"
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.012,
+    "height": 0.95,
+    "position": [
+     2.438,
+     1.195,
+     0.6
+    ],
+    "material": "gloss",
+    "color": "#111111"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.46,
+     0.02,
+     0.32
+    ],
+    "position": [
+     2.438,
+     1.195,
+     1.48
+    ],
+    "rotate": [
+     -25.0,
+     0.0,
+     -48
+    ],
+    "material": "gloss",
+    "color": "#111111"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     0.3
+    ],
+    "position": [
+     -2.819,
+     0.026,
+     0.0
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     70
+    ],
+    "material": "clay",
+    "color": "#5E3A20"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     0.3
+    ],
+    "position": [
+     -2.487,
+     0.678,
+     0.0
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     56
+    ],
+    "material": "clay",
+    "color": "#5E3A20"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     0.3
+    ],
+    "position": [
+     -2.007,
+     1.229,
+     0.0
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     42
+    ],
+    "material": "clay",
+    "color": "#5E3A20"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     0.3
+    ],
+    "position": [
+     -1.408,
+     1.649,
+     0.0
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     28
+    ],
+    "material": "clay",
+    "color": "#5E3A20"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     0.3
+    ],
+    "position": [
+     -0.726,
+     1.911,
+     0.0
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     14
+    ],
+    "material": "clay",
+    "color": "#5E3A20"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     0.3
+    ],
+    "position": [
+     0.0,
+     2.0,
+     0.0
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     0
+    ],
+    "material": "clay",
+    "color": "#5E3A20"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     0.3
+    ],
+    "position": [
+     0.726,
+     1.911,
+     0.0
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     -14
+    ],
+    "material": "clay",
+    "color": "#5E3A20"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     0.3
+    ],
+    "position": [
+     1.408,
+     1.649,
+     0.0
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     -28
+    ],
+    "material": "clay",
+    "color": "#5E3A20"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     0.3
+    ],
+    "position": [
+     2.007,
+     1.229,
+     0.0
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     -42
+    ],
+    "material": "clay",
+    "color": "#5E3A20"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     0.3
+    ],
+    "position": [
+     2.487,
+     0.678,
+     0.0
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     -56
+    ],
+    "material": "clay",
+    "color": "#5E3A20"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     0.3
+    ],
+    "position": [
+     2.819,
+     0.026,
+     0.0
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     -70
+    ],
+    "material": "clay",
+    "color": "#5E3A20"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     0.6
+    ],
+    "position": [
+     -3.665,
+     0.334,
+     0.0
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     70
+    ],
+    "material": "clay",
+    "color": "#5E3A20"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     0.6
+    ],
+    "position": [
+     -3.233,
+     1.181,
+     0.0
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     56
+    ],
+    "material": "clay",
+    "color": "#5E3A20"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     0.6
+    ],
+    "position": [
+     -2.61,
+     1.898,
+     0.0
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     42
+    ],
+    "material": "clay",
+    "color": "#5E3A20"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     0.6
+    ],
+    "position": [
+     -1.831,
+     2.443,
+     0.0
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     28
+    ],
+    "material": "clay",
+    "color": "#5E3A20"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     0.6
+    ],
+    "position": [
+     -0.943,
+     2.784,
+     0.0
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     14
+    ],
+    "material": "clay",
+    "color": "#5E3A20"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     0.6
+    ],
+    "position": [
+     0.0,
+     2.9,
+     0.0
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     0
+    ],
+    "material": "clay",
+    "color": "#5E3A20"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     0.6
+    ],
+    "position": [
+     0.943,
+     2.784,
+     0.0
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     -14
+    ],
+    "material": "clay",
+    "color": "#5E3A20"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     0.6
+    ],
+    "position": [
+     1.831,
+     2.443,
+     0.0
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     -28
+    ],
+    "material": "clay",
+    "color": "#5E3A20"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     0.6
+    ],
+    "position": [
+     2.61,
+     1.898,
+     0.0
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     -42
+    ],
+    "material": "clay",
+    "color": "#5E3A20"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     0.6
+    ],
+    "position": [
+     3.233,
+     1.181,
+     0.0
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     -56
+    ],
+    "material": "clay",
+    "color": "#5E3A20"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.8,
+     1.0,
+     0.6
+    ],
+    "position": [
+     3.665,
+     0.334,
+     0.0
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     -70
+    ],
+    "material": "clay",
+    "color": "#5E3A20"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.7,
+     0.7,
+     0.22
+    ],
+    "position": [
+     0.0,
+     -1.0,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#3A2618"
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.014,
+    "height": 1.1,
+    "position": [
+     0.0,
+     -0.8,
+     0.22
+    ],
+    "material": "gloss",
+    "color": "#111111"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.5,
+     0.02,
+     0.36
+    ],
+    "position": [
+     0.0,
+     -0.8,
+     1.24
+    ],
+    "rotate": [
+     25.0,
+     0.0,
+     0.0
+    ],
+    "material": "gloss",
+    "color": "#111111"
+   }
+  ]
+ },
+ "camera": {
+  "position": [
+   0.0,
+   -7.6,
+   1.55
+  ],
+  "target": [
+   0.0,
+   1.2,
+   0.95
+  ],
+  "lens_mm": 40.0,
+  "level": true
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#F2F1EF",
+  "horizon": "#EEEDEB",
+  "ground": "#CFCCC8",
+  "strength": 0.6,
+  "visible": false
+ },
+ "render": {
+  "samples": 64,
+  "adaptive": 0.01,
+  "denoise": true,
+  "clamp": 4,
+  "bounces": 16,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.0,
+  "white_balance_k": 5900,
+  "white_balance_tint": 7.0
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 235,
+  "white_out": 238,
+  "contrast": 0.1,
+  "clarity": 0.03,
+  "sharpen": 0.12,
+  "sharpen_px": 0.7
+ },
+ "materials": {
+  "builtin-led": {
+   "glow": 0.0
+  },
+  "builtin-led-brace": {
+   "glow": 0.0
+  },
+  "horn-satin": {
+   "roughness": 0.25
+  },
+  "sweep": {
+   "roughness": 0.45,
+   "mottle": 0.25,
+   "mottle_m": 0.25,
+   "tooth": 0.1
+  }
+ },
+ "lights": {
+  "stage0": {
+   "type": "area",
+   "shape": "DISK",
+   "size_m": [
+    0.5,
+    0.5
+   ],
+   "position": [
+    -2.6,
+    1.0,
+    4.6
+   ],
+   "target": [
+    -1.56,
+    1.2,
+    0.6
+   ],
+   "irradiance": 2.6,
+   "spread_deg": 55,
+   "color": "#FFE0B4"
+  },
+  "stage1": {
+   "type": "area",
+   "shape": "DISK",
+   "size_m": [
+    0.5,
+    0.5
+   ],
+   "position": [
+    0.0,
+    1.0,
+    4.6
+   ],
+   "target": [
+    0.0,
+    1.2,
+    0.6
+   ],
+   "irradiance": 2.6,
+   "spread_deg": 55,
+   "color": "#FFE0B4"
+  },
+  "stage2": {
+   "type": "area",
+   "shape": "DISK",
+   "size_m": [
+    0.5,
+    0.5
+   ],
+   "position": [
+    2.6,
+    1.0,
+    4.6
+   ],
+   "target": [
+    1.56,
+    1.2,
+    0.6
+   ],
+   "irradiance": 2.6,
+   "spread_deg": 55,
+   "color": "#FFE0B4"
+  },
+  "hall": {
+   "type": "area",
+   "size_m": [
+    3.0,
+    2.0
+   ],
+   "position": [
+    0.0,
+    -9.0,
+    3.2
+   ],
+   "target": [
+    0.0,
+    1.0,
+    0.8
+   ],
+   "irradiance": 0.5,
+   "color": "#FFF0DC"
+  }
+ },
+ "products": [
+  {
+   "def": "studio/products/barkhorn-cloud.json",
+   "flavour": "cloud-red",
+   "instances": [
+    {
+     "position": [
+      0.0,
+      1.1,
+      0.0
+     ],
+     "rotate_z": 0,
+     "flavour": "cloud-red",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      -1.35,
+      0.609,
+      0.0
+     ],
+     "rotate_z": 40,
+     "flavour": "cloud-orange",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      1.35,
+      0.609,
+      0.0
+     ],
+     "rotate_z": -40,
+     "flavour": "cloud-amber",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      -1.124,
+      1.782,
+      0.3
+     ],
+     "rotate_z": 22,
+     "flavour": "eucalyptus-y2k-green",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      1.124,
+      1.782,
+      0.3
+     ],
+     "rotate_z": -22,
+     "flavour": "cloud-blue",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      -2.898,
+      1.61,
+      0.6
+     ],
+     "rotate_z": 48,
+     "flavour": "cloud-violet",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      2.898,
+      1.61,
+      0.6
+     ],
+     "rotate_z": -48,
+     "flavour": "birch-fog-clear",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      0.0,
+      2.9,
+      0.6
+     ],
+     "rotate_z": 0,
+     "flavour": "cloud-black",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    }
+   ],
+   "normals_refine": false
+  },
+  {
+   "def": "studio/products/barkhorn-variants.json",
+   "flavour": "cloud-red",
+   "instances": [
+    {
+     "position": [
+      0.0,
+      1.1,
+      0.0
+     ],
+     "rotate_z": 0,
+     "flavour": "cloud-red",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      -1.35,
+      0.609,
+      0.0
+     ],
+     "rotate_z": 40,
+     "flavour": "cloud-orange",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      1.35,
+      0.609,
+      0.0
+     ],
+     "rotate_z": -40,
+     "flavour": "cloud-amber",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      -1.124,
+      1.782,
+      0.3
+     ],
+     "rotate_z": 22,
+     "flavour": "eucalyptus-y2k-green",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      1.124,
+      1.782,
+      0.3
+     ],
+     "rotate_z": -22,
+     "flavour": "cloud-blue",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      -2.898,
+      1.61,
+      0.6
+     ],
+     "rotate_z": 48,
+     "flavour": "cloud-violet",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      2.898,
+      1.61,
+      0.6
+     ],
+     "rotate_z": -48,
+     "flavour": "birch-fog-clear",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      0.0,
+      2.9,
+      0.6
+     ],
+     "rotate_z": 0,
+     "flavour": "cloud-black",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    }
+   ],
+   "normals_refine": false
+  }
+ ]
+}

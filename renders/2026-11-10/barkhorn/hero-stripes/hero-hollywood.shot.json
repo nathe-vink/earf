@@ -1,0 +1,544 @@
+{
+ "title": "Tropos, the Hollywood issue: the cast as a gatefold group portrait",
+ "size": [
+  1920,
+  800
+ ],
+ "set": {
+  "kind": "sweep",
+  "color": "#6E6A58",
+  "width": 14.0,
+  "front": 10.0,
+  "depth": 2.0,
+  "radius": 0.6,
+  "height": 5.0,
+  "contact": {
+   "strength": 0.9,
+   "distance_m": 0.3,
+   "core_strength": 1.2,
+   "core_distance_m": 0.03
+  },
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     2.7,
+     0.9,
+     0.42
+    ],
+    "position": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "material": "velvet",
+    "color": "#2E2B29",
+    "ease": 0.04
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     2.7,
+     0.22,
+     0.85
+    ],
+    "position": [
+     0.0,
+     0.45,
+     0.0
+    ],
+    "material": "velvet",
+    "color": "#2E2B29",
+    "ease": 0.05
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.24,
+     0.9,
+     0.62
+    ],
+    "position": [
+     -1.47,
+     0.0,
+     0.0
+    ],
+    "material": "velvet",
+    "color": "#2E2B29",
+    "ease": 0.06
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.24,
+     0.9,
+     0.62
+    ],
+    "position": [
+     1.47,
+     0.0,
+     0.0
+    ],
+    "material": "velvet",
+    "color": "#2E2B29",
+    "ease": 0.06
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     3.0,
+     0.6,
+     0.45
+    ],
+    "position": [
+     0.0,
+     0.85,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#4A443C"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     4.6,
+     3.0,
+     0.012
+    ],
+    "position": [
+     0.0,
+     -0.3,
+     0.0
+    ],
+    "material": "wool",
+    "color": "#5B5046"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.5,
+     0.32,
+     0.2
+    ],
+    "position": [
+     1.6,
+     -0.9,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#8A6A48"
+   },
+   {
+    "kind": "kit",
+    "shape": "drape",
+    "size": [
+     1.6,
+     3.6
+    ],
+    "position": [
+     -2.9,
+     0.9,
+     3.6
+    ],
+    "folds": 9,
+    "amplitude": 0.12,
+    "material": "velvet",
+    "color": "#3B2E29"
+   }
+  ]
+ },
+ "camera": {
+  "position": [
+   0.15,
+   -10.0,
+   1.05
+  ],
+  "target": [
+   0.15,
+   0.0,
+   1.2
+  ],
+  "lens_mm": 60.0,
+  "level": true
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#F2F1EF",
+  "horizon": "#EEEDEB",
+  "ground": "#CFCCC8",
+  "strength": 0.6,
+  "visible": false
+ },
+ "render": {
+  "samples": 64,
+  "adaptive": 0.01,
+  "denoise": true,
+  "clamp": 4,
+  "bounces": 16,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.0,
+  "white_balance_k": 5900,
+  "white_balance_tint": 7.0
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 235,
+  "white_out": 238,
+  "contrast": 0.1,
+  "clarity": 0.03,
+  "sharpen": 0.12,
+  "sharpen_px": 0.7
+ },
+ "materials": {
+  "builtin-led": {
+   "glow": 0.0
+  },
+  "builtin-led-brace": {
+   "glow": 0.0
+  },
+  "horn-satin": {
+   "roughness": 0.25
+  },
+  "sweep": {
+   "roughness": 0.92,
+   "mottle": 0.35,
+   "mottle_m": 0.7,
+   "tooth": 0.2
+  }
+ },
+ "lights": {
+  "key": {
+   "type": "area",
+   "size_m": [
+    4.0,
+    4.0
+   ],
+   "position": [
+    -6.2,
+    -5.4,
+    3.6
+   ],
+   "target": [
+    0.0,
+    0.3,
+    0.9
+   ],
+   "irradiance": 3.0,
+   "color": "#FFF4E6"
+  },
+  "fill": {
+   "type": "area",
+   "size_m": [
+    4.0,
+    3.0
+   ],
+   "position": [
+    5.5,
+    -8.5,
+    2.0
+   ],
+   "target": [
+    0.0,
+    0.2,
+    0.8
+   ],
+   "irradiance": 0.8,
+   "color": "#FFF8F0"
+  },
+  "kicker": {
+   "type": "area",
+   "size_m": [
+    2.5,
+    1.0
+   ],
+   "position": [
+    2.0,
+    1.6,
+    3.4
+   ],
+   "target": [
+    0.0,
+    0.3,
+    1.0
+   ],
+   "irradiance": 3.0,
+   "spread_deg": 70,
+   "color": "#FFF6EA"
+  }
+ },
+ "products": [
+  {
+   "def": "studio/products/barkhorn-cloud.json",
+   "flavour": "cloud-red",
+   "instances": [
+    {
+     "position": [
+      -0.35,
+      0.0,
+      0.42
+     ],
+     "rotate_z": 8.0,
+     "flavour": "cloud-red",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      -0.95,
+      0.02,
+      0.42
+     ],
+     "rotate_z": 14.0,
+     "flavour": "cloud-orange",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      0.95,
+      -0.78,
+      0.0
+     ],
+     "rotate_z": -14.0,
+     "flavour": "cloud-amber",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ],
+     "rotate_x": -9.0
+    },
+    {
+     "position": [
+      -0.85,
+      0.78,
+      0.45
+     ],
+     "rotate_z": 10.0,
+     "flavour": "eucalyptus-y2k-green",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      0.95,
+      0.78,
+      0.45
+     ],
+     "rotate_z": -10.0,
+     "flavour": "cloud-blue",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      0.12,
+      0.05,
+      0.7
+     ],
+     "rotate_z": -4.0,
+     "flavour": "cloud-violet",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ],
+     "rotate_y": 90.0
+    },
+    {
+     "position": [
+      -1.47,
+      0.0,
+      0.62
+     ],
+     "rotate_z": 28.0,
+     "flavour": "birch-fog-clear",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      0.05,
+      0.8,
+      0.45
+     ],
+     "rotate_z": 0.0,
+     "flavour": "cloud-black",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    }
+   ],
+   "normals_refine": false
+  },
+  {
+   "def": "studio/products/barkhorn-variants.json",
+   "flavour": "cloud-red",
+   "instances": [
+    {
+     "position": [
+      -0.35,
+      0.0,
+      0.42
+     ],
+     "rotate_z": 8.0,
+     "flavour": "cloud-red",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      -0.95,
+      0.02,
+      0.42
+     ],
+     "rotate_z": 14.0,
+     "flavour": "cloud-orange",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      0.95,
+      -0.78,
+      0.0
+     ],
+     "rotate_z": -14.0,
+     "flavour": "cloud-amber",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": [],
+     "rotate_x": -9.0
+    },
+    {
+     "position": [
+      -0.85,
+      0.78,
+      0.45
+     ],
+     "rotate_z": 10.0,
+     "flavour": "eucalyptus-y2k-green",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      0.95,
+      0.78,
+      0.45
+     ],
+     "rotate_z": -10.0,
+     "flavour": "cloud-blue",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      0.12,
+      0.05,
+      0.7
+     ],
+     "rotate_z": -4.0,
+     "flavour": "cloud-violet",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": [],
+     "rotate_y": 90.0
+    },
+    {
+     "position": [
+      -1.47,
+      0.0,
+      0.62
+     ],
+     "rotate_z": 28.0,
+     "flavour": "birch-fog-clear",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      0.05,
+      0.8,
+      0.45
+     ],
+     "rotate_z": 0.0,
+     "flavour": "cloud-black",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    }
+   ],
+   "normals_refine": false
+  }
+ ]
+}

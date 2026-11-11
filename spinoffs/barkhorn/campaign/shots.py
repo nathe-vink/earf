@@ -1943,3 +1943,111 @@ def hero_shoot2():
                    'fstop': 4.0, 'focus': [0.0, -1.1, 0.8]}
     s['title'] = 'Tropos, the shoot (second pass): op art in black and white, the eight in colour'
     return s
+
+
+def _cast_base():
+    """The eight, base A, black rods, normals unrefined (a big cast's mask pass): the deck row's products, re-posed by
+    the caller with `_pose`."""
+    assert ROLLOUT['base'] == 'A', 'run with TROPOS_BASE=A'
+    s = SHOTS['deck-row']()
+    for blk in s['products']:
+        blk['normals_refine'] = False
+    s['materials'] = {k: v for k, v in s.get('materials', {}).items() if k != 'sweep'}
+    return s
+
+
+def _pose(s, pose):
+    """pose: tint -> (x, y, z, yaw, tilt_x, tilt_y) for every product block's matching instance."""
+    for blk in s['products']:
+        for k, i in enumerate(blk['instances']):
+            x, y, z, yaw, tx, ty = pose[HERO_ORDER[k]]
+            i['position'] = [x, y, z]; i['rotate_z'] = yaw
+            if tx: i['rotate_x'] = tx
+            if ty: i['rotate_y'] = ty
+
+
+def hero_hollywood():
+    """The owner picked "the Hollywood issue" (2026-11-11 04:20): a gatefold group portrait of the cast as if they were
+    people. A painted canvas backdrop (mottled warm grey-olive), a long velvet sofa in charcoal, a muted rug, a heavy
+    drape at the left, a step behind the sofa; three standing behind it, two seated, Haze reclining along it as the
+    diva, Acid on the floor leaning back on its front, Fog perched on the arm; Ember the star, a little left of centre.
+    Lamps out of frame: a very large soft key from 45 deg left, a soft fill right, a kicker from behind and above."""
+    s = _cast_base()
+    seat, arm, step = 0.42, 0.62, 0.45
+    _pose(s, {'ember': (-0.35, 0.0, seat, 8.0, 0, 0), 'dust': (-0.95, 0.02, seat, 14.0, 0, 0),
+              'haze': (0.12, 0.05, seat + 0.28, -4.0, 0, 90.0), 'acid': (0.95, -0.78, 0.0, -14.0, -9.0, 0),
+              'fog': (-1.47, 0.0, arm, 28.0, 0, 0), 'poison': (-0.85, 0.78, step, 10.0, 0, 0),
+              'smoke': (0.05, 0.80, step, 0.0, 0, 0), 'ice': (0.95, 0.78, step, -10.0, 0, 0)})
+    velvet, dark = 'velvet', '#2E2B29'
+    props = [
+        {'kind': 'kit', 'shape': 'box', 'size': [2.7, 0.9, 0.42], 'position': [0.0, 0.0, 0.0], 'material': velvet, 'color': dark, 'ease': 0.04},
+        {'kind': 'kit', 'shape': 'box', 'size': [2.7, 0.22, 0.85], 'position': [0.0, 0.45, 0.0], 'material': velvet, 'color': dark, 'ease': 0.05},
+        {'kind': 'kit', 'shape': 'box', 'size': [0.24, 0.9, 0.62], 'position': [-1.47, 0.0, 0.0], 'material': velvet, 'color': dark, 'ease': 0.06},
+        {'kind': 'kit', 'shape': 'box', 'size': [0.24, 0.9, 0.62], 'position': [1.47, 0.0, 0.0], 'material': velvet, 'color': dark, 'ease': 0.06},
+        {'kind': 'kit', 'shape': 'box', 'size': [3.0, 0.6, step], 'position': [0.0, 0.85, 0.0], 'material': 'clay', 'color': '#4A443C'},
+        {'kind': 'kit', 'shape': 'box', 'size': [4.6, 3.0, 0.012], 'position': [0.0, -0.3, 0.0], 'material': 'wool', 'color': '#5B5046'},
+        {'kind': 'kit', 'shape': 'box', 'size': [0.5, 0.32, 0.2], 'position': [1.6, -0.9, 0.0], 'material': 'clay', 'color': '#8A6A48'},
+        {'kind': 'kit', 'shape': 'drape', 'size': [1.6, 3.6], 'position': [-2.9, 0.9, 3.6], 'folds': 9, 'amplitude': 0.12,
+         'material': velvet, 'color': '#3B2E29'}]
+    s['set'] = {'kind': 'sweep', 'color': '#6E6A58', 'width': 14.0, 'front': 10.0, 'depth': 2.0, 'radius': 0.6, 'height': 5.0,
+                'contact': {'strength': 0.9, 'distance_m': 0.3, 'core_strength': 1.2, 'core_distance_m': 0.03}, 'props': props}
+    s['materials']['sweep'] = {'roughness': 0.92, 'mottle': 0.35, 'mottle_m': 0.7, 'tooth': 0.2}
+    s['lights'] = {
+        'key': {'type': 'area', 'size_m': [4.0, 4.0], 'position': [-6.2, -5.4, 3.6], 'target': [0.0, 0.3, 0.9],
+                'irradiance': 3.0, 'color': '#FFF4E6'},
+        'fill': {'type': 'area', 'size_m': [4.0, 3.0], 'position': [5.5, -8.5, 2.0], 'target': [0.0, 0.2, 0.8],
+                 'irradiance': 0.8, 'color': '#FFF8F0'},
+        'kicker': {'type': 'area', 'size_m': [2.5, 1.0], 'position': [2.0, 1.6, 3.4], 'target': [0.0, 0.3, 1.0],
+                   'irradiance': 3.0, 'spread_deg': 70, 'color': '#FFF6EA'}}
+    s['camera'] = {'position': [0.15, -10.0, 1.05], 'target': [0.15, 0.0, 1.2], 'lens_mm': 60.0, 'level': True}
+    s['size'] = [1920, 800]
+    s['render'].update(samples=64, exposure=0.0)
+    s['title'] = 'Tropos, the Hollywood issue: the cast as a gatefold group portrait'
+    return s
+
+
+def hero_orchestra():
+    """The owner picked "the orchestra" (2026-11-11 04:20): the official portrait of an orchestra whose every player is
+    a horn. A concert stage: three curved tiers about the conductor's podium, warm wood behind and underfoot, a black
+    music stand before each player; the podium front and centre with its stand, back to the camera. The eight face
+    the podium, by tier, symmetrical. Warm stage lamps above the frame's top; a little fill from the hall."""
+    import math
+    s = _cast_base()
+    P = (0.0, -1.0)
+    tiers = {0: (2.1, 0.0), 1: (3.0, 0.30), 2: (3.9, 0.60)}
+    seats = {'dust': (0, -40), 'ember': (0, 0), 'acid': (0, 40), 'poison': (1, -22), 'ice': (1, 22),
+             'haze': (2, -48), 'smoke': (2, 0), 'fog': (2, 48)}
+    pose, stands = {}, []
+    for t, (tier, th) in seats.items():
+        r, z = tiers[tier]; a = math.radians(th)
+        x, y = P[0] + r * math.sin(a), P[1] + r * math.cos(a)
+        pose[t] = (round(x, 3), round(y, 3), z, -th, 0, 0)
+        sx, sy = P[0] + (r - 0.62) * math.sin(a), P[1] + (r - 0.62) * math.cos(a)
+        stands.append({'kind': 'kit', 'shape': 'cylinder', 'radius': 0.012, 'height': 0.95, 'position': [round(sx, 3), round(sy, 3), z],
+                       'material': 'gloss', 'color': '#111111'})
+        stands.append({'kind': 'kit', 'shape': 'box', 'size': [0.46, 0.02, 0.32], 'position': [round(sx, 3), round(sy, 3), z + 0.88],
+                       'rotate': [-25.0, 0.0, -th], 'material': 'gloss', 'color': '#111111'})
+    _pose(s, pose)
+    props = list(stands)
+    for tier in (1, 2):
+        r, z = tiers[tier]
+        for th in range(-70, 71, 14):
+            a = math.radians(th)
+            props.append({'kind': 'kit', 'shape': 'box', 'size': [0.8, 1.0, z], 'position': [round(P[0] + r * math.sin(a), 3), round(P[1] + r * math.cos(a), 3), 0.0],
+                          'rotate': [0.0, 0.0, -th], 'material': 'clay', 'color': '#5E3A20'})
+    props += [{'kind': 'kit', 'shape': 'box', 'size': [0.7, 0.7, 0.22], 'position': [P[0], P[1], 0.0], 'material': 'clay', 'color': '#3A2618'},
+              {'kind': 'kit', 'shape': 'cylinder', 'radius': 0.014, 'height': 1.1, 'position': [P[0], P[1] + 0.2, 0.22], 'material': 'gloss', 'color': '#111111'},
+              {'kind': 'kit', 'shape': 'box', 'size': [0.5, 0.02, 0.36], 'position': [P[0], P[1] + 0.2, 1.24], 'rotate': [25.0, 0.0, 0.0], 'material': 'gloss', 'color': '#111111'}]
+    s['set'] = {'kind': 'sweep', 'color': '#7A4A28', 'width': 16.0, 'front': 10.0, 'depth': 3.6, 'radius': 0.04, 'height': 6.0,
+                'contact': {'strength': 0.8, 'distance_m': 0.3, 'core_strength': 1.0, 'core_distance_m': 0.03}, 'props': props}
+    s['materials']['sweep'] = {'roughness': 0.45, 'mottle': 0.25, 'mottle_m': 0.25, 'tooth': 0.1}
+    s['lights'] = {f'stage{k}': {'type': 'area', 'shape': 'DISK', 'size_m': [0.5, 0.5], 'position': [x, 1.0, 4.6],
+                                 'target': [x * 0.6, 1.2, 0.6], 'irradiance': 2.6, 'spread_deg': 55, 'color': '#FFE0B4'}
+                   for k, x in enumerate((-2.6, 0.0, 2.6))}
+    s['lights']['hall'] = {'type': 'area', 'size_m': [3.0, 2.0], 'position': [0.0, -9.0, 3.2], 'target': [0.0, 1.0, 0.8],
+                           'irradiance': 0.5, 'color': '#FFF0DC'}
+    s['camera'] = {'position': [0.0, -7.6, 1.55], 'target': [0.0, 1.2, 0.95], 'lens_mm': 40.0, 'level': True}
+    s['size'] = [1600, 800]
+    s['render'].update(samples=64, exposure=0.0)
+    s['title'] = 'Tropos, the orchestra: every player a horn'
+    return s
