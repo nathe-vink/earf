@@ -6,3 +6,8 @@ proposal; the CAD has no chamfer until the owner picks). B's audits: 0 emitters,
 What B shows: the chamfer reads as a thin bright line along the top and bottom edges, and the polished edge turns
 into a window: it mirrors the room and shows the posts and the hub refracted inside the slab (the patch at the
 corner's front face). The satin edge in A reads as one even block of color. Under the pair: the front-right corner, 2.5x.
+
+C (the coordinator, 16:58): the 1 mm even chamfer as in B, the chamfer polished, the outer edge satin as signed (A's
+finish; the base's edge stays diamond-polished as signed). v3_day.py --chamfer-satin; render only; audits 0 emitters,
+gt 0 px, no hidden mesh. mantle-edge-options.png is now three columns, A | B | C, the front-right corner of each below.
+In C the chamfer draws the thin bright line along the edges and the edge stays one calm block of color.

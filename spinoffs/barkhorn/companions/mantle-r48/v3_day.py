@@ -133,7 +133,7 @@ def black_hardware(probe=None):
     print('v3_day: satin black hardware:', ', '.join(n for n in names if bpy.data.objects.get(n)), flush=True)
 
 
-def chamfer_edges(c=0.001):
+def chamfer_edges(c=0.001, edge_polish=True):
     """OPTION B for the owner (the coordinator, 2026-11-11 16:46): every outer acrylic edge of the deck and the base an
     even `c` chamfer, the chamfer and the outer edge polished; the faces unchanged."""
     import bmesh
@@ -159,7 +159,7 @@ def chamfer_edges(c=0.001):
             idx = 1                                      # the base's outer edge: already diamond-polished (roughness 0.01)
         bm.faces.ensure_lookup_table()
         k = 0
-        for f in list(res['faces']) + [f for f in bm.faces if outer(f)]:
+        for f in list(res['faces']) + ([f for f in bm.faces if outer(f)] if edge_polish else []):   # C: the outer edge keeps A's finish
             f.material_index = idx; k += 1
         bm.to_mesh(o.data); bm.free()
         print(f'v3_day: CHAMFER {name}: {len(edges)} edges at {c * 1000:.1f} mm, {k} faces polished', flush=True)
@@ -706,6 +706,7 @@ def prepare():
     if '--probe-hub' in mine: black_hub(probe=True)
     if '--black-hardware' in mine: black_hardware()
     if '--chamfer' in mine: chamfer_edges()
+    if '--chamfer-satin' in mine: chamfer_edges(edge_polish=False)
     if '--probe-hw' in mine: black_hardware(probe=mine[mine.index('--probe-hw') + 1])
     if '--lighttable' in mine:
         i = mine.index('--lighttable'); lighttable(float(mine[i + 1]), float(mine[i + 2]))
