@@ -1,15 +1,15 @@
 {
  "emitters": [
   {
-   "name": "Hemisphere ember",
-   "lumens": 1000,
-   "cct_k": 2200,
-   "in_frame": true
-  },
-  {
    "name": "Hemisphere dust",
    "lumens": 1000,
    "cct_k": 2700,
+   "in_frame": true
+  },
+  {
+   "name": "Hemisphere ember",
+   "lumens": 1000,
+   "cct_k": 2200,
    "in_frame": true
   },
   {
@@ -26,12 +26,6 @@
   },
   {
    "name": "Hemisphere dust",
-   "lumens": 1000,
-   "cct_k": 2700,
-   "in_frame": true
-  },
-  {
-   "name": "Hemisphere acid",
    "lumens": 1000,
    "cct_k": 2700,
    "in_frame": true
@@ -143,18 +137,51 @@
    ]
   },
   {
+   "name": "track-bay0",
+   "declared": true,
+   "emitter": "area lamp 0.14 x 0.14 m, out of frame",
+   "irradiance_w_m2": 4.2,
+   "position_m": [
+    5.55,
+    3.9,
+    3.35
+   ]
+  },
+  {
+   "name": "track-bay1",
+   "declared": true,
+   "emitter": "area lamp 0.14 x 0.14 m, out of frame",
+   "irradiance_w_m2": 4.2,
+   "position_m": [
+    8.25,
+    3.9,
+    3.35
+   ]
+  },
+  {
+   "name": "track-mantle",
+   "declared": true,
+   "emitter": "area lamp 0.1 x 0.1 m, out of frame",
+   "irradiance_w_m2": 1.8,
+   "position_m": [
+    6.5200000000000005,
+    3.83,
+    3.35
+   ]
+  },
+  {
    "name": "house",
    "declared": true,
-   "emitter": "area lamp 3.0 x 2.0 m, out of frame",
-   "irradiance_w_m2": 0.06,
+   "emitter": "area lamp 4.0 x 2.0 m, out of frame",
+   "irradiance_w_m2": 0.15,
    "position_m": [
     6.9,
-    0.6,
-    2.8
+    0.2,
+    2.6
    ]
   }
  ],
- "lamp_lumens_total": 6600,
+ "lamp_lumens_total": 5600,
  "exposure": {
   "view": "AgX",
   "look": "AgX - Punchy",
@@ -177,7 +204,7 @@
   "anisotropy": 0.5,
   "color": "#FFFFFF"
  },
- "mantle": "r48-mantle-design 941ad388 mantle-strata.blend, checked",
+ "mantle": "r48-mantle-design fa0c3a65 mantle-strata.blend, checked",
  "audit": {
   "hidden": [],
   "equipment": [],
