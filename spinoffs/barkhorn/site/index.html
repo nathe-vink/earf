@@ -960,6 +960,76 @@ html.intro .splash { background: var(--page, #F4F1EC) }
 @media (max-aspect-ratio: 1/1) { .hs-hero .hs-br { display: none }
   .hs-hero .hero-title h1 { font-size: clamp(18px, min(9.4vw, calc((100vw - 32px) / 12.69)), 44px) !important }
   .hs-dot { width: 14px; height: 14px; box-shadow: 0 0 0 4px rgb(255 255 255 / .35), 0 1px 5px rgb(0 0 0 / .35) } }
+
+/* the home as a marketing page */
+.mk { padding-block: clamp(64px, 9vw, 128px) 0 } #progress.mk { padding-bottom: clamp(56px, 7vw, 96px) }
+.mk-head h2, #progress h2, #contact h2 { font-size: clamp(34px, 4.6vw, 64px); line-height: 1.02; letter-spacing: -0.035em; margin: 0 0 clamp(24px, 3vw, 40px); max-width: 16ch }
+.mk-wide { width: min(100% - 32px, 1440px); margin-inline: auto }
+.cta-btn { display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 22px; border-radius: 999px; font-size: 16px; font-weight: 600;
+  text-decoration: none; transition: background-color .2s ease, color .2s ease, border-color .2s ease }
+.cta-solid { background: #1C1A18; color: #F4F1EC; border: 2px solid #1C1A18 } .cta-solid:hover { background: #000 }
+.cta-line { background: rgb(244 241 236 / .82); color: #1C1A18; border: 2px solid #1C1A18 } .cta-line:hover { background: #F4F1EC }
+.cta-btn:focus-visible { outline: 3px solid #1C1A18; outline-offset: 3px }
+.hs-hero .hero-more { position: absolute; left: 0; right: 0; z-index: 3;
+  top: calc(clamp(18px, 3.2vw, 48px) + 2 * 1.04 * clamp(34px, 4.3vw, 64px) + clamp(14px, 1.6vw, 24px)) }
+.hero-sub { margin: 0 0 20px; max-width: 30ch; font-size: clamp(17px, 1.5vw, 21px); line-height: 1.35; color: #1C1A18 }
+.hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin: 0 }
+@media (max-aspect-ratio: 1/1) { .hs-hero .hero-more { position: static; padding-top: 20px } .hero-sub { max-width: none } }
+.fam { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px }
+.fam > :nth-child(1) { grid-column: 1 / 3; grid-row: 1 / 3 } .fam > :nth-child(2) { grid-column: 3 / 5; grid-row: 1 }
+.fam > :nth-child(3) { grid-column: 3; grid-row: 2 } .fam > :nth-child(4) { grid-column: 4; grid-row: 2 }
+.fcard { display: flex; flex-direction: column; color: var(--ink); text-decoration: none; background: #EAE6E0; border-radius: 4px; overflow: hidden }
+.fcard:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px }
+.fc-pic, .pk { position: relative; display: block; overflow: hidden }
+.fc-pic img, .pk img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .5s cubic-bezier(.2, .7, .2, 1), opacity .14s linear }
+.fcard:hover .fc-pic img, .fcard:focus-visible .fc-pic img, .pk:hover img, .pk:focus-visible img { transform: scale(1.04) }
+.fc-tropos .fc-pic { flex: 1 1 auto; min-height: 420px } .fc-tropos .fc-pic img { object-position: 50% 55% }
+.fc-mantle .fc-pic, .pk-mantle { aspect-ratio: 3 / 2 }
+.fc-hemisphere .fc-pic, .fc-core .fc-pic, .pk-hemisphere, .pk-core { aspect-ratio: 1 }
+.fc-hemisphere, .pk-hemisphere { background: #2D2520 } .fc-core, .pk-core { background: #1E1E1E }
+.fc-hemisphere, .fc-core { color: #F2EFEA }
+.fc-tag { position: absolute; right: 10px; bottom: 10px; padding: 3px 9px; border-radius: 999px; background: rgb(255 255 255 / .82); color: #1C1A18; font-size: 12px }
+.fc-body { display: grid; gap: 6px; padding: 18px 20px 22px; justify-items: start }
+.fc-kind { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; opacity: .72 }
+.fc-name { margin: 0; font-size: clamp(26px, 2.4vw, 36px); line-height: 1.05; letter-spacing: -0.03em }
+.fc-line { max-width: 34ch; font-size: 16px; line-height: 1.4; opacity: .86 }
+.fc-btn { display: inline-flex; align-items: center; gap: 8px; margin-top: 8px; padding: 9px 16px; border-radius: 999px; border: 2px solid currentColor;
+  font-weight: 600; font-size: 15px; transition: background-color .2s ease, color .2s ease }
+.fc-btn .arr { width: 18px; height: 18px; transition: transform .2s ease }
+.fcard:hover .fc-btn, .fcard:focus-visible .fc-btn { background: var(--ink); color: #F4F1EC; border-color: var(--ink) }
+.fc-hemisphere:hover .fc-btn, .fc-hemisphere:focus-visible .fc-btn, .fc-core:hover .fc-btn, .fc-core:focus-visible .fc-btn { background: #F2EFEA; color: #111; border-color: #F2EFEA }
+.fcard:hover .arr, .fcard:focus-visible .arr { transform: translateX(3px) }
+.pick .pk-tropos { background: #EAE6E0 } .pick .pk-tropos img { object-position: 50% 55% } .pick .pk-mantle { background: #DCD9D4 }
+.pk:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px }
+.tint-pick { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 18px; padding: 0; border: 0 }
+.tint { position: relative; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px 0 10px; border-radius: 999px;
+  border: 2px solid var(--rule); cursor: pointer; font-size: 15px; font-weight: 500; user-select: none }
+.tint input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer }
+.tint .coin-dot { width: 20px; height: 20px; border-radius: 50%; flex: none }
+.tint:hover { border-color: var(--muted) }
+.tint:has(input:checked) { border-color: var(--ink); background: var(--ink); color: #F4F1EC } .tint:has(input:checked) .tn { color: #F4F1EC }
+.tint .tn { color: var(--ink); font-size: 15px }
+.tint:has(input:focus-visible) { outline: 3px solid var(--ink); outline-offset: 3px }
+.tint-line { margin: 0 0 24px; font-size: clamp(18px, 1.6vw, 22px); min-height: 1.4em }
+.mk-cap { margin: 10px 0 0; color: var(--muted); font-size: 14px }
+.places { display: grid; grid-template-columns: 1fr 1fr; gap: 16px }
+.place { display: grid; gap: 10px; color: var(--ink); text-decoration: none }
+.place img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; display: block; transition: transform .5s cubic-bezier(.2, .7, .2, 1) }
+.place { overflow: hidden } .place:hover img, .place:focus-visible img { transform: scale(1.02) }
+.place:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px }
+.pl-cap { font-size: 16px } .pl-cap .render { color: var(--muted); font-size: 14px }
+#progress .promise { max-width: 980px } #contact .wrap > * { max-width: 760px }
+@media (min-width: 900px) { #nav-list a[data-nav] { font-weight: 600 }
+  #nav-list .contact-link a { padding: 8px 16px; border: 2px solid var(--ink); border-radius: 999px }
+  #nav-list .contact-link a:hover { background: var(--ink); color: #F4F1EC } }
+@media (max-width: 760px) {
+  .fam:not(.pick) { grid-template-columns: minmax(0, 1fr) } .fam:not(.pick) > * { grid-column: auto !important; grid-row: auto !important }
+  .fc-tropos .fc-pic { flex: none; aspect-ratio: 4 / 5; min-height: 0 }
+  .pick { grid-template-columns: 1fr 1fr; gap: 10px } .pick > :nth-child(1) { grid-column: 1; grid-row: 1 / 3 }
+  .pick > :nth-child(2) { grid-column: 1 / 3; grid-row: 3 } .pick > :nth-child(3) { grid-column: 2; grid-row: 1 } .pick > :nth-child(4) { grid-column: 2; grid-row: 2 }
+  .places { grid-template-columns: minmax(0, 1fr) }
+}
+@media (prefers-reduced-motion: reduce) { .fc-pic img, .pk img, .place img, .fc-btn, .arr { transition: none !important } }
 </style>
 
 <div class="splash" aria-hidden="true"></div>
@@ -1002,30 +1072,23 @@ html.intro .splash { background: var(--page, #F4F1EC) }
 </div></header>
 
 <main id="home">
-  <section class="hero hs-hero" id="top"><i class="anchor" id="colors"></i>
+  <section class="hero hs-hero" id="top">
     <div class="hero-pic">
       <div class="hero-title"><div class="wrap"><h1 class="tagline">A&nbsp;world&nbsp;of&nbsp;sound,<br class="hs-br"> in&nbsp;color.</h1></div></div>
-      <div class="hero-photo hs"><img data-src="img/rc/home-ice-1200.webp" data-srcset="img/rc/home-ice-800.webp 800w, img/rc/home-ice-1200.webp 1200w" sizes="100vw" fetchpriority="high" width="1200" height="1500" alt="Tropos in Ice, out in the snow at dusk"><a class="hs-pt hs-left" href="#speaker-ice" style="--x:63.8%;--y:58.2%;--tx:63.8%;--ty:59.9%"><span class="hs-dot" aria-hidden="true"></span><span class="hs-label">Tropos in Ice</span></a></div>
+      <div class="hero-photo hs"><img data-src="img/rc/home-ice-1200.webp" data-srcset="img/rc/home-ice-800.webp 800w, img/rc/home-ice-1200.webp 1200w" sizes="100vw" fetchpriority="high" width="1200" height="1500" alt="Tropos in Ice, out in the snow at dusk"><a class="hs-pt hs-left" href="#speaker-ice" style="--x:63.8%;--y:58.2%;--tx:63.8%;--ty:59.9%"><span class="hs-dot" aria-hidden="true"></span><span class="hs-label">Tropos in Ice</span></a></div><div class="hero-more"><div class="wrap"><p class="hero-sub">Horn speakers, lamps and a turntable, cast in tinted acrylic.</p><p class="hero-cta"><a class="cta-btn cta-solid" href="#speakers">Meet Tropos</a> <a class="cta-btn cta-line" href="#colors">See the colors</a></p></div></div>
       <script>if (document.documentElement.dataset.home) heroIn()</script>
     </div>
     <div class="wrap hero-cap"><i class="render">Render</i></div>
   </section>
-  <section class="band sound" id="sound"><div class="wrap sound-grid no-pic">
-    <div class="sound-words"><h2><a href="#speakers">Tropos.</a></h2><p class="beat-line">A horn speaker in cast acrylic.</p></div>
-  </div></section>
-  <section class="band beat" id="lamps-beat">
-    <div class="wrap"><h2><a href="#lighting">One hangs. One wanders.</a></h2></div>
-    <div class="wrap lamps-home no-pic"><figure class="lamp-rows home"><a href="#hemisphere-ember"><img src="img/rc/hemisphere-row.webp" width="2000" height="667" loading="lazy" alt="Eight Hemispheres hung in a row, lit, one in each color"></a><a href="#core-ember"><img src="img/rc/core-row.webp" width="2000" height="667" loading="lazy" alt="Eight Core lamps in a row, lit, one in each color"></a><figcaption><i class="render">Render</i></figcaption></figure><ul class="lamp-names"><li><a href="#hemisphere-ember">Hemisphere</a>, a pendant.</li><li><a href="#core-ember">Core</a>, a cordless table lamp.</li></ul></div>
-  </section>
-  <section class="band beat" id="mantle-beat">
-    <div class="wrap"><h2><a href="#turntable">Mantle.</a></h2><p class="beat-line">A turntable in cast acrylic.</p><figure class="mantle-pic"><a href="#mantle-ember"><img src="img/rc/mantle-ember.webp" width="1600" height="1067" loading="lazy" alt="Mantle in Ember"></a><figcaption><i class="render">Render</i></figcaption></figure></div>
-  </section>
-  <section class="band" id="progress"><div class="wrap">
+  <section class="band mk" id="family"><div class="wrap mk-head"><h2>The family.</h2></div><div class="mk-wide fam"><a class="fcard fc-tropos" href="#speakers"><span class="fc-pic"><img src="img/rc/blue-hero.webp" width="720" height="1250" loading="lazy" alt="Tropos in Ice"><span class="fc-tag">Render</span></span><span class="fc-body"><span class="fc-kind">Horn speaker</span><h3 class="fc-name">Tropos</h3><span class="fc-line">A powered horn loudspeaker in cast acrylic.</span><span class="fc-btn">See Tropos <svg class="arr" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a><a class="fcard fc-mantle" href="#mantle-ember"><span class="fc-pic"><img src="img/rc/mantle-ember.webp" width="1600" height="1067" loading="lazy" alt="Mantle in Ember"><span class="fc-tag">Render</span></span><span class="fc-body"><span class="fc-kind">Turntable</span><h3 class="fc-name">Mantle</h3><span class="fc-line">A turntable on a floating acrylic plinth.</span><span class="fc-btn">See Mantle <svg class="arr" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a><a class="fcard fc-hemisphere" href="#hemisphere-haze"><span class="fc-pic"><img src="img/rc/home-hemisphere-haze.webp" width="800" height="800" loading="lazy" alt="Hemisphere in Haze"><span class="fc-tag">Render</span></span><span class="fc-body"><span class="fc-kind">Pendant</span><h3 class="fc-name">Hemisphere</h3><span class="fc-line">A pendant. Half a globe of light over the table.</span><span class="fc-btn">See Hemisphere <svg class="arr" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a><a class="fcard fc-core" href="#core-poison"><span class="fc-pic"><img src="img/rc/home-core-poison.webp" width="800" height="800" loading="lazy" alt="Core in Poison"><span class="fc-tag">Render</span></span><span class="fc-body"><span class="fc-kind">Table lamp</span><h3 class="fc-name">Core</h3><span class="fc-line">A cordless table lamp. A glow, not a reading light.</span><span class="fc-btn">See Core <svg class="arr" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a></div></section>
+  <section class="band mk" id="colors-band"><i class="anchor" id="colors"></i><div class="wrap mk-head"><h2>Eight colors, the full spectrum.</h2></div><div class="wrap"><fieldset class="tint-pick"><legend class="sr">Choose a color</legend><label class="tint"><input type="radio" name="tint" value="red"><span class="coin-dot" style="--i:0"></span><span class="tn">Ember</span></label><label class="tint"><input type="radio" name="tint" value="orange"><span class="coin-dot" style="--i:1"></span><span class="tn">Dust</span></label><label class="tint"><input type="radio" name="tint" value="amber"><span class="coin-dot" style="--i:2"></span><span class="tn">Acid</span></label><label class="tint"><input type="radio" name="tint" value="green"><span class="coin-dot" style="--i:3"></span><span class="tn">Poison</span></label><label class="tint"><input type="radio" name="tint" value="blue" checked><span class="coin-dot" style="--i:4"></span><span class="tn">Ice</span></label><label class="tint"><input type="radio" name="tint" value="violet"><span class="coin-dot" style="--i:5"></span><span class="tn">Haze</span></label><label class="tint"><input type="radio" name="tint" value="ice"><span class="coin-dot" style="--i:6"></span><span class="tn">Fog</span></label><label class="tint"><input type="radio" name="tint" value="black"><span class="coin-dot" style="--i:7"></span><span class="tn">Smoke</span></label></fieldset><p class="tint-line" aria-live="polite"><b>Ice.</b> <span>Glacier blue, and in no hurry.</span></p></div><div class="mk-wide fam pick"><a class="pk pk-tropos" href="#speaker-ice" data-p="tropos"><img src="img/rc/blue-hero.webp" width="720" height="1250" loading="lazy" alt="Tropos in Ice"></a><a class="pk pk-mantle" href="#mantle-ice" data-p="mantle"><img src="img/rc/mantle-ice.webp" width="1600" height="1067" loading="lazy" alt="Mantle in Ice"></a><a class="pk pk-hemisphere" href="#hemisphere-ice" data-p="hemisphere"><img src="img/rc/home-hemisphere-ice.webp" width="800" height="800" loading="lazy" alt="Hemisphere in Ice"></a><a class="pk pk-core" href="#core-ice" data-p="core"><img src="img/rc/home-core-ice.webp" width="800" height="800" loading="lazy" alt="Core in Ice"></a></div><div class="wrap"><p class="mk-cap"><i class="render">Render</i></p></div></section>
+  <section class="band mk" id="places"><div class="wrap mk-head"><h2>Each color is a place.</h2></div><div class="mk-wide places"><a class="place" href="#color-ice"><img src="img/rc/blue-habitat.webp" width="1200" height="1500" loading="lazy" alt="Tropos in Ice, out in the snow at dusk"><span class="pl-cap">Ice, out in the snow at dusk. <i class="render">Render</i></span></a><a class="place" href="#color-fog"><img src="img/rc/ice-habitat.webp" width="1200" height="1500" loading="lazy" alt="Tropos in Fog, in the grass on a hillside, in fog at dawn"><span class="pl-cap">Fog, on a hillside at dawn. <i class="render">Render</i></span></a></div></section>
+  <section class="band mk" id="progress"><div class="wrap">
     <div class="head"><div><h2>Drawn to be made.</h2></div></div>
     <ol class="promise stages">
-      <li><b>Drawn.</b><span>Every part of Tropos has its own drawing. The horn&rsquo;s profile and the cabinet&rsquo;s bass were worked out by simulation before any acrylic was cut.</span></li>
-      <li><b>Next, the first pair.</b><span>Built to the drawings, the back screwed to the braces. The first pair is made the way every pair will be.</span></li>
-      <li><b>Then, measured.</b><span>In a room, by ear and by microphone. The lamps and Mantle come next, the same way.</span></li>
+      <li><b>Drawn.</b><span>Every part has its own drawing. The horn and the bass were simulated before any acrylic was cut.</span></li>
+      <li><b>Next, the first pair.</b><span>Built to those drawings, the way every pair will be.</span></li>
+      <li><b>Then, measured.</b><span>In a room, by ear and by microphone. The lamps and Mantle follow.</span></li>
     </ol>
   </div></section>
   <section class="band" id="contact"><div class="wrap contact">
@@ -1738,6 +1801,24 @@ opening();
     e.preventDefault(); pts.forEach(b => b.classList.toggle('open', b === a)); }, true);
   document.addEventListener('click', e => { if (!e.target.closest || !e.target.closest('.hs-pt')) pts.forEach(b => b.classList.remove('open')); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') pts.forEach(b => b.classList.remove('open')); });
+})()</script>
+<script>(function () {      // the colors: a radio group; each choice swaps the four pictures and their links
+  const T = {"red":{"name":"Ember","line":"The last light of the fire.","slug":"ember","pics":{"tropos":"img/rc/red-hero.webp","mantle":"img/rc/mantle-ember.webp","hemisphere":"img/rc/home-hemisphere-ember.webp","core":"img/rc/home-core-ember.webp"}},"orange":{"name":"Dust","line":"A long, dry afternoon.","slug":"dust","pics":{"tropos":"img/rc/orange-hero.webp","mantle":"img/rc/mantle-dust.webp","hemisphere":"img/rc/home-hemisphere-dust.webp","core":"img/rc/home-core-dust.webp"}},"amber":{"name":"Acid","line":"A yellow with an edge.","slug":"acid","pics":{"tropos":"img/rc/amber-hero.webp","mantle":"img/rc/mantle-acid.webp","hemisphere":"img/rc/home-hemisphere-acid.webp","core":"img/rc/home-core-acid.webp"}},"green":{"name":"Poison","line":"Bottle green. Keep out of reach.","slug":"poison","pics":{"tropos":"img/rc/green-hero.webp","mantle":"img/rc/mantle-poison.webp","hemisphere":"img/rc/home-hemisphere-poison.webp","core":"img/rc/home-core-poison.webp"}},"blue":{"name":"Ice","line":"Glacier blue, and in no hurry.","slug":"ice","pics":{"tropos":"img/rc/blue-hero.webp","mantle":"img/rc/mantle-ice.webp","hemisphere":"img/rc/home-hemisphere-ice.webp","core":"img/rc/home-core-ice.webp"}},"violet":{"name":"Haze","line":"Dusk, kept indoors.","slug":"haze","pics":{"tropos":"img/rc/violet-hero.webp","mantle":"img/rc/mantle-haze.webp","hemisphere":"img/rc/home-hemisphere-haze.webp","core":"img/rc/home-core-haze.webp"}},"ice":{"name":"Fog","line":"Water-clear. Almost not there.","slug":"fog","pics":{"tropos":"img/rc/ice-hero.webp","mantle":"img/rc/mantle-fog.webp","hemisphere":"img/rc/home-hemisphere-fog.webp","core":"img/rc/home-core-fog.webp"}},"black":{"name":"Smoke","line":"Smoked glass, for after dark.","slug":"smoke","pics":{"tropos":"img/rc/black-hero.webp","mantle":"img/rc/mantle-smoke.webp","hemisphere":"img/rc/home-hemisphere-smoke.webp","core":"img/rc/home-core-smoke.webp"}}}, box = document.querySelector('#colors-band'); if (!box) return;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches, line = box.querySelector('.tint-line');
+  const warm = {}, load = k => warm[k] || (warm[k] = Promise.all(Object.values(T[k].pics).map(s => { const im = new Image(); im.src = s; return im.decode ? im.decode().catch(() => {}) : null; })));
+  const PR = { tropos: ['Tropos', 'speaker'], mantle: ['Mantle', 'mantle'], hemisphere: ['Hemisphere', 'hemisphere'], core: ['Core', 'core'] };
+  let want = 'blue';
+  const show = k => { want = k; const t = T[k];
+    line.innerHTML = `<b>${t.name}.</b> <span>${t.line}</span>`;
+    load(k).then(() => { if (want !== k) return;
+      box.querySelectorAll('.pk').forEach(a => { const f = a.dataset.p, im = a.querySelector('img');
+        a.href = `#${PR[f][1]}-${t.slug}`; im.alt = `${PR[f][0]} in ${t.name}`;
+        if (reduce) { im.src = t.pics[f]; return; }
+        im.style.opacity = 0; setTimeout(() => { im.src = t.pics[f]; im.style.opacity = 1; }, 140); }); }); };
+  box.querySelectorAll('.tint input').forEach(r => {
+    r.addEventListener('change', () => r.checked && show(r.value));
+    const lab = r.closest('label'); ['pointerenter', 'focusin', 'touchstart'].forEach(e => lab.addEventListener(e, () => load(r.value), { passive: true }));
+  });
 })()</script>
 </body>
 </html>
