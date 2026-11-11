@@ -49,7 +49,7 @@ CORES = [('ember', 6.05, -0.14), ('dust', 7.05, -0.2), ('acid', 7.8, -0.12)]    
 EV, WB = -2.0, 4000          # (20:47: the near Cores pale at -1.5: half a stop down, the room lifted by its declared fill)
 TRACK = 3.0                  # the declared track lights' scale (tests 1-4: too dark)
 # (20:47: the bays' pools a stop and a half too strong, aim near 1.6x the wall; the room lifted for the half stop down)
-WALL, BAY, HOUSE = 2.0, 2.6, 0.6
+WALL, BAY, HOUSE = 1.7, 5.5, 0.6
 
 
 def _room():
