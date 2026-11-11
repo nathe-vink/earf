@@ -150,6 +150,11 @@ def build(frame, samples, scale):
         return ob
 
     black_acrylic = SC.principled('black-acrylic', '#0A0A0B', 0.04)
+    # Core's base and dock SATIN (the owner, 2026-11-11: "satin or matte instead of shiny plastic. It looks cheap
+    # otherwise"): black cast acrylic bead-blasted, close to matte, no mirror highlights; the touch ring satin black
+    # anodized to match. CORE_GLOSS=1 for the old polished base
+    satin_black = black_acrylic if os.environ.get('CORE_GLOSS') else SC.principled('satin-black', '#0B0B0C', 0.6)
+    satin_an = an if os.environ.get('CORE_GLOSS') else SC.principled('satin-anodised', '#0C0C0D', 0.5, 1.0)
     an = SC.anodised()
     steel = SC.principled('steel', '#C9C9C6', 0.25, 1.0, bump=(2500.0, 0.6))
     # the bore's reflector: high-reflectance aluminium, faceted (crystal.py): a bright, low-roughness metal
@@ -325,7 +330,7 @@ def build(frame, samples, scale):
         z0 = floor_z + 0.0065                         # the dock's underside on the floor (as lamp_pictures: the CAD's
                                                       # dock underside sits 6.5 below its origin)
         objs = []
-        for nm, m in (('dock', black_acrylic), ('base', black_acrylic), ('ring', an), ('seat', SC.principled('si', '#111111', 0.6)),
+        for nm, m in (('dock', satin_black), ('base', satin_black), ('ring', satin_an), ('seat', SC.principled('si', '#111111', 0.6)),
                       ('dock-cable', SC.principled('braid', '#121212', 0.75, bump=(1200.0, 0.5)))) + \
                      (('grommet', an),):   # (B: the CAD's raised grommet, its flange and spigot, 2026-11-10)
             objs.append(part('out-orb-table', nm, m, (x, y, z0)))   # (the base and dock angled, the owner, 2026-11-10)

@@ -5,7 +5,7 @@
 | shell | formed | 1 | Cast acrylic sheet 6 mm, tinted through in the speaker's TruCast code, drape-formed over an aluminium mould, polished both faces; CUSTOM POURS (2026-11-11): Dust, Acid, Ice at 3x the chart loading, Smoke at the speakers' own pour | 440 cm3, 170 x 170 x 167 | 1,534.01 |
 | core | formed | 1 | Cast acrylic sheet 3 mm, white opal (Hemisphere's diffuser's), formed over an aluminium core mould | 173 cm3, 150 x 150 x 147 | 1,339.27 |
 | grommet | lathe | 1 | Aluminium 6061 | 62 x 62 x 23 | 47.25 |
-| base | lathe | 1 | Cast acrylic tube, tinted through | 153 x 153 x 40 | 122.66 |
+| base | lathe | 1 | Black cast acrylic rod, turned, bead-blasted SATIN close to matte (2026-11-11; OPTION: 6061 turned, satin black anodized) | 153 x 153 x 40 | 141.49 |
 | ring | lathe | 1 | Aluminium 6061 | 130 x 130 x 18 | 52.61 |
 | well | lathe | 1 | PTFE rod, white (virgin) | 42 x 42 x 16 | 48.44 |
 | window | lathe | 1 | Cast acrylic tube, tinted through | 40 x 40 x 16 | 45.98 |
@@ -22,7 +22,7 @@
 | foot-ring | buy | 1 | A silicone foot ring 117 x 114 x 2 (Shore 40, non-slip), and the hatch's O-ring |  | 2.00 |
 | pins | buy | 1 | Mill-Max (to choose) Two gold-plated spring-loaded pins, about 1.5 mm travel, low force (about 0.8 N at 1.0 mm), on the pin board: + on the axis, - at r 20 |  | 3.00 |
 | pinboard | buy | 1 | to make (with the main board) A Ø46 x 1.6 board under the chassis carrying the dock's two pins, wired to the main board's dock input (its ideal diode and PD path) |  | 4.00 |
-| dock | lathe | 1 | Cast acrylic tube, tinted through | 160 x 160 x 18 | 103.23 |
+| dock | lathe | 1 | Black cast acrylic rod, turned, bead-blasted SATIN close to matte (2026-11-11; OPTION: 6061 turned, satin black anodized) | 160 x 160 x 18 | 112.34 |
 | dock-contacts | buy | 1 | to make (a turning shop) 304 stainless, turned and lapped: a post Ø6 (+) and a ring r 18.5 to 21.5 (-), pressed into the dock, 1.7 proud of its pocket |  | 8.00 |
 | dock-board | buy | 1 | to make (a contract PCB house) The dock's board: a USB PD sink asking 9 V (STUSB4500 or CH224K class), a resettable fuse, a load switch that powers the contacts only when it sees the lamp's 47 kOhm sense resistor, a USB-C receptacle at the back edge |  | 6.00 |
 | dock-cable | buy | 1 | any (made to order) A slim black braided-fabric USB-C to USB-C cable, 2 m, 3 A, its plug into the dock's back edge (the dock signed 2026-11-01; the base's notch is closed); the same cable charges the lamp directly at its USB-C under the hatch for travel |  | 6.00 |
@@ -34,9 +34,9 @@
 |---|---|
 | buy | 109 |
 | formed | 2,873 |
-| lathe | 420 |
+| lathe | 448 |
 | mill | 148 |
-| total | 3,550 |
+| total | 3,578 |
 
 
 ## Options (each for 1, on top of the total above)

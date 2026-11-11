@@ -109,6 +109,9 @@ SOLIDS.setdefault('acrylic-opal-core', dict(title='Cast acrylic sheet 3 mm, whit
 SOLIDS.setdefault('acrylic-tint-3-formed', dict(title='Cast acrylic sheet 1/8 in, TruCast stock tint in the line\'s code, '
                                                 'drape-formed; CUSTOM POURS (2026-11-11): Dust, Acid, Ice the same dye at 3x the '
                                                 'stock loading, Smoke at the speakers\' own pour (0.3x)', density=1.19, usd_per_cm3=0.05))
+SOLIDS.setdefault('cast-acrylic-satin', dict(title='Black cast acrylic rod, turned, bead-blasted SATIN close to matte '
+                                             '(2026-11-11; OPTION: 6061 turned, satin black anodized)', density=1.19,
+                                             usd_per_cm3=0.06))
 SOLIDS.setdefault('peek', dict(title='PEEK rod, unfilled', density=1.30, usd_per_cm3=0.35))
 SOLIDS.setdefault('ptfe', dict(title='PTFE rod, white (virgin)', density=2.17, usd_per_cm3=0.12))
 
@@ -636,8 +639,11 @@ def orb_parts(p=O):
                'clear round it), the core bonded on the spigot\'s cylinder (about 377 mm2, MMA). The bore machined '
                'bright after anodizing (a reflector up into the core). The grommet goes into the port from inside before '
                'the outer halves are joined'] if B_ else [])),
-        Part('base', base, Machined('cast-acrylic', 'lathe', setup_usd=80.0), finish='trim', group='base',
-             notes=['black cast acrylic, polished, turned from rod: 120 x 30 (round 32f\'s), the cup turned in it; from '
+        Part('base', base, Machined('cast-acrylic-satin', 'lathe', setup_usd=80.0), finish='trim', group='base',
+             notes=['SATIN (the owner, 2026-11-11: "satin or matte instead of shiny plastic"): black cast acrylic, turned, then '
+                    'bead-blasted to a fine satin close to matte, no mirror highlights (the default until the owner chooses; '
+                    'OPTION: turned 6061, satin black anodized, about +345 g, the touch ring then insulated from it). '
+                    'Turned from rod: 120 x 30 (round 32f\'s), the cup turned in it; from '
                     'below the hatch\'s counterbore (112), the middle pocket (50) for the chassis, the board and the LED, '
                     'the three cells\' bays, the ballast\'s corners and the cable notch']),
         Part('ring', ring, Machined('aluminium', 'lathe'), finish='anodised', group='base',
@@ -681,8 +687,9 @@ def orb_parts(p=O):
              notes=['two gold-plated spring pins, 1.5 travel, about 0.8 N at 1.0: + on the axis, - at r 20; on the pin '
                     'board, through the hatch\'s hole and groove; free, their tips sit 0.7 above the foot\'s face']),
         Part('pinboard', pinboard, Bought('core-pinboard'), finish='steel', group='base', inside=True, render=False),
-        Part('dock', dock, Machined('cast-acrylic', 'lathe', setup_usd=80.0), finish='trim', group='dock',
-             notes=['the contact dock (signed 2026-11-01): Ø150 x 8, polished black cast acrylic, turned; a 1.5 pocket '
+        Part('dock', dock, Machined('cast-acrylic-satin', 'lathe', setup_usd=80.0), finish='trim', group='dock',
+             notes=['the contact dock (signed 2026-11-01): Ø150 x 8, black cast acrylic, turned, bead-blasted SATIN to match the base '
+                    '(2026-11-11; OPTION: 6061 satin black anodized, about +170 g); a 1.5 pocket '
                     'Ø122 the base sits in; the contacts pressed in; a pocket at the back for its board and a channel '
                     'for the cable; silicone dots underneath (CORE-RECHARGE.md)']),
         Part('dock-contacts', contacts, Bought('core-dock-contacts'), finish='steel', group='dock'),
