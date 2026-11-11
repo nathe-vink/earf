@@ -1,0 +1,25 @@
+Mantle, FINAL day set (the coordinator, 23:40 UTC, on the owner's "Forget the lights on mantle"): no light of any kind.
+Model: mantle_strata_v3.py with the light removed (commit 4e2a18ad), rebuilt into out-strata-v3: the deck as signed
+with no groove, the base the signed solid Smoke 2074 (no slot, channel or strip), the posts satin black.
+Render: v3_day.py, the SAME camera, studio light and settings as the day set 268c3d79 / e8679ff3 (the side strip off,
+the cards, exposure -2.0, 1800 x 1200, 80 samples). The proposals' day frames used that same light too.
+For every tint: --black-bearing (housing, nut, washer satin black #18181A) and --satin-underside.
+Audits, all eight: emitter check 0 emitting materials; gt_audit 0 px of hidden lamps in frame; no hidden mesh.
+
+Display luma at the same three points (top back-left / top mid-front / top front-right), signed day set -> final:
+  ember 30/11/52 -> 30/11/52   dust 85/20/55 -> 85/20/55   acid 110/24/56 -> 110/24/57  poison 52/11/52 -> 52/11/52
+  ice   83/17/54 -> 83/17/54   haze 48/12/52 -> 48/12/52   fog  122/45/61 -> 122/45/61  smoke  52/11/52 -> 52/11/52
+
+What changed in frame (Ember, pixel difference against 268c3d79; max 45 of 255, 10.5k px over 8, all on the base):
+the thin line round the base's top edge (the signed loop's channel and strip seen through the smoke) is gone, and the
+bearing's reflection in the base's glossy top is now black, not brass. Nothing else differs at these points.
+The black bearing changes no other part, but brass still shows in one place: the platter's hub, seen through the
+platter's clear middle lamina, plainly in Fog (the other tints not checked for it). The platter's six brass inserts sit
+beside it. The rear plate is brass too but is hidden under the deck's overhang.
+
+A CORRECTION: the satin underside makes no difference here, because the signed day set already rendered the deck's
+underside satin. scene.py's face classification for v3 runs in the mesh's own Y-up frame (kept that way for the
+frames already made; scene.py, about line 813), so the deck's bottom faces fall in the satin edge class
+(material plinth-1, roughness 0.35) in every v3 frame, signed or not. The day-set differences credited to the satin
+underside in the uplit and light-table proposals (Ember top 30/11/52 -> 46/21/130) must have come from their changes to the base,
+not from the underside. A fully glassy underside, as the signed spec reads, has not been rendered.
