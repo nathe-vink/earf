@@ -1666,7 +1666,7 @@ def hero_stripes(variant='v1'):
     """The eight in a row, Ember to Smoke, each on its own seamless paper stripe in its own colour family, edge to edge
     as wide as the speakers' spacing (1 m): v1 pale (two thirds of the way to white), v2 bold (one third). The deck row's
     studio and lamps (its rig, honest), the sweep's lamps on every stripe, 1680 x 700, the top quarter kept clear."""
-    s = SHOTS['deck-row']()
+    s = _approved(SHOTS['deck-row']())
     f = 2 / 3 if variant == 'v1' else 1 / 3
     n = len(HERO_ORDER)
     stripes = []
@@ -1696,8 +1696,6 @@ def hero_stripes(variant='v1'):
     for k, x in (('bg-left', -3.0), ('bg-right', 3.0)):
         if k in s['lights']:
             s['lights'][k].update(position=[x, 1.2, 3.6], target=[x, 2.6, 1.0])
-    for blk in s['products']:
-        blk['normals_refine'] = False
     s['size'] = [1680, 700]
     s['title'] = f'Tropos, the eight on their stripes ({variant})'
     # the camera 14 m off, a touch above the cabinets' middle; the frame's top quarter above the horns
@@ -1734,11 +1732,10 @@ def hero_room():
     a soft warm grey. Studio lamps only: a large soft overhead, a soft key high left, a low front fill behind the camera.
     A 50 mm lens at the cabinets' middle height, 8.3 m off so the end speakers keep a little air: about 54 % of the height."""
     assert ROLLOUT['base'] == 'A', 'run with TROPOS_BASE=A'
-    s = SHOTS['deck-row']()
+    s = _approved(SHOTS['deck-row']())
     sp = 0.72
     n = len(HERO_ORDER)
     for blk in s['products']:
-        blk['normals_refine'] = False
         for k, i in enumerate(blk['instances']):
             i['position'] = [round((k - (n - 1) / 2) * sp, 4)] + list(i['position'][1:])
             i['rotate_z'] = -10.0
@@ -1829,13 +1826,12 @@ def hero_shoot():
     dish on a stand at back right (the rim), each lamp inside its own housing; a broad soft fill behind the camera; a
     camera on its tripod soft in the near right. 26 mm at 0.4 m, 1600 x 800."""
     assert ROLLOUT['base'] == 'A', 'run with TROPOS_BASE=A'
-    s = SHOTS['deck-row']()
+    s = _approved(SHOTS['deck-row']())
     # (tint, x, y, podium height, yaw): the star front and centre, a loose V of mixed depths, heights and angles
     pose = {'ember': (0.0, -0.55, 0.0, 0.0), 'dust': (-0.78, 0.15, 0.30, -18.0), 'acid': (0.80, 0.10, 0.15, 22.0),
             'poison': (-1.55, 0.75, 0.60, -32.0), 'ice': (1.50, 0.80, 0.45, 30.0), 'smoke': (0.30, 1.25, 0.60, 8.0),
             'haze': (-2.30, 1.30, 0.0, -48.0), 'fog': (2.30, 1.30, 0.0, 48.0)}
     for blk in s['products']:
-        blk['normals_refine'] = False
         for k, i in enumerate(blk['instances']):
             x, y, h, yaw = pose[HERO_ORDER[k]]
             i['position'] = [x, y, round(h + i['position'][2], 4)]
@@ -1946,12 +1942,10 @@ def hero_shoot2():
 
 
 def _cast_base():
-    """The eight, base A, black rods, normals unrefined (a big cast's mask pass): the deck row's products, re-posed by
-    the caller with `_pose`."""
+    """The eight as rollout.py builds them (_approved: base A, polished horn, black rods, the site's render settings): the
+    deck row's products, re-posed by the caller with `_pose`."""
     assert ROLLOUT['base'] == 'A', 'run with TROPOS_BASE=A'
-    s = SHOTS['deck-row']()
-    for blk in s['products']:
-        blk['normals_refine'] = False
+    s = _approved(SHOTS['deck-row']())
     s['materials'] = {k: v for k, v in s.get('materials', {}).items() if k != 'sweep'}
     return s
 
@@ -2152,4 +2146,163 @@ def hero_hollywood2():
     s['lights']['kicker'].update(irradiance=4.2, position=[1.0, 2.0, 3.6], target=[0.2, 0.5, 1.1])
     s['camera'] = {'position': [0.25, -11.4, 1.1], 'target': [0.25, 0.0, 1.2], 'lens_mm': 60.0, 'level': True}
     s['title'] = 'Tropos, the Hollywood issue (second pass): a formal cast portrait'
+    return s
+
+
+# --- the third passes (the coordinator, 2026-11-11 06:50 and 07:05; the owner: "I actually like the first passes more
+# than the second"; the horns "more satin than the product shots on the site") -------------------------------------------
+# Why the horns were satin: the hero scenes were built with TROPOS_BASE=A but not TROPOS_HORN, so ROLLOUT['horn'] fell
+# back to 'satin' and strata_lit wrote horn-satin roughness 0.25 (the site's A-polished fronts carry 0.05). The rest of
+# what a scene built outside rollout.py took by default: the deck row's render settings (clamp 4, 16 bounces, no glossy
+# or transmission bounce counts; the site's frames run clamp 8, 32 / 16 / 32, so the polished horn's and the clear
+# shells' highlights were cut), and normals_refine false (the waveguide's facets not refined onto its true surface,
+# which _cast_base set to spare the mask pass's memory). _approved closes all three, and checks every product block
+# against rollout.py's own build of the site's tall front for that tint, so no other default can differ unseen.
+SITE_RENDER_KEYS = ('clamp', 'bounces', 'glossy_bounces', 'transmission_bounces')
+
+
+def _approved(s, order=None):
+    """The eight exactly as rollout.py builds the site's fronts (A-polished, tallr7): base A, polished horn, black rods,
+    the approved tints and linings; the site's render quality. Asserts each instance's product, flavour, hides and
+    options against site('front-off-tall', tint) built the same way."""
+    assert ROLLOUT['base'] == 'A', 'run with TROPOS_BASE=A'
+    order = order or HERO_ORDER
+    mats = s.setdefault('materials', {})
+    mats['horn-satin'] = {**mats.get('horn-satin', {}), 'roughness': 0.05}       # polished, as rollout --horn polished
+    for blk in s['products']:
+        blk.pop('normals_refine', None)
+    keep = ROLLOUT['horn']
+    ROLLOUT['horn'] = 'polished'
+    try:
+        refs = {t: site('front-off-tall', t) for t in set(order)}
+    finally:
+        ROLLOUT['horn'] = keep
+    ref0 = refs[order[0]]
+    s['render'].update({k: ref0['render'][k] for k in SITE_RENDER_KEYS if k in ref0['render']})
+    assert ref0['materials']['horn-satin']['roughness'] == mats['horn-satin']['roughness']
+    sig = lambda b, i: (b['def'], i.get('flavour', b.get('flavour')), tuple(sorted(i.get('hide', []))), tuple(i.get('options') or []),
+                        b.get('normals_refine', True))
+    tropos = [b for b in s['products'] if 'barkhorn' in b['def']]
+    for blk in tropos:
+        for k, i in enumerate(blk['instances']):
+            ref = next(b for b in refs[order[k]]['products'] if b['def'] == blk['def'])
+            assert sig(blk, i) == sig(ref, ref['instances'][0]), (blk['def'], order[k], sig(blk, i), sig(ref, ref['instances'][0]))
+    return s
+
+
+LED_K = {'red': 2200, 'green': 2700, 'ice': 2700, 'violet': 3000, 'orange': 4000, 'amber': 4000, 'blue': 4000, 'black': 4000}
+CORE_LOAD = {'orange': 1.5, 'amber': 1.5, 'blue': 1.5, 'black': 0.15}       # Dust, Acid, Ice at 3x (ae86581b); Smoke light grey
+LAMPS_MODULE = 'spinoffs/barkhorn/planet/afterhours/lamps_final.py'          # the bar lane's embed (r33-planet-world 92db2b2d)
+MANTLE_DEF = 'studio/products/mantle-strata-v3.json'                         # r48-mantle-design 450064b8, unchanged
+KEY = {t: k for t, (_, k) in SITE_TINTS.items()}                             # tint -> the lamps' key (ember -> red)
+
+
+def _family(hemis=(), cores=()):
+    """The lamps as a set prop: Hemisphere [(tint, x, y, rim_z)], Core [(tint, x, y, floor_z, rot)]; lit only by their
+    own LEDs at the lamp lane's lumens (LAMPS_ROOT: a checkout of r32-lamps-final)."""
+    return {'kind': 'kit', 'shape': 'ext', 'path': LAMPS_MODULE, 'fn': 'place', 'led_k': LED_K, 'core_load': CORE_LOAD,
+            'hemispheres': [{'tint': KEY[t], 'x': x, 'y': y, 'rim_z': z} for t, x, y, z in hemis],
+            'cores': [{'tint': KEY[t], 'x': x, 'y': y, 'floor_z': z, 'rot': r} for t, x, y, z, r in cores]}
+
+
+def _mantle(x, y, z, rz=0.0, flavour='smoke-2074'):
+    return {'def': MANTLE_DEF, 'flavour': flavour, 'instances': [{'position': [x, y, z], 'rotate_z': rz}]}
+
+
+def family_centres(s):
+    """hero_centres' projection for the lamps and Mantle: each one's middle in percent of the frame."""
+    import math, numpy as np
+    cam = s['camera']; W, H = s['size']; c = np.array(cam['position'], float); t = np.array(cam['target'], float)
+    lens = cam['lens_mm']; sw = cam.get('sensor_mm', 36.0); hx, hy = sw / 2, sw / 2 * H / W
+    d0 = t - c; flat = np.array([d0[0], d0[1], 0.0]); f = flat / np.linalg.norm(flat)
+    sy = cam.get('shift_y', 0.0) + math.tan(math.atan2(d0[2], np.linalg.norm(flat))) * lens / sw * (1.0 if W >= H else W / H)
+    r = np.cross(f, [0.0, 0.0, 1.0]); r /= np.linalg.norm(r); u = np.cross(r, f)
+
+    def pr(x, y, z):
+        p = np.array([x, y, z]) - c; zz = p @ f
+        X = ((p @ r) / zz * lens) / hx; Y = ((p @ u) / zz * lens - sy * sw) / hy
+        return round(float((X + 1) / 2 * 100), 2), round(float((1 - Y) / 2 * 100), 2)
+    out = []
+    for p in s['set'].get('props', []):
+        if p.get('path') == LAMPS_MODULE:
+            inv = {v: k for k, v in KEY.items()}
+            for h in p['hemispheres']:
+                out.append({'product': 'hemisphere', 'tint': inv[h['tint']], **dict(zip('xy', pr(h['x'], h['y'], h['rim_z'] + 0.1)))})
+            for c_ in p['cores']:
+                out.append({'product': 'core', 'tint': inv[c_['tint']], **dict(zip('xy', pr(c_['x'], c_['y'], c_['floor_z'] + 0.12)))})
+    for b in s['products']:
+        if b['def'] == MANTLE_DEF:
+            x, y, z = b['instances'][0]['position']
+            out.append({'product': 'mantle', 'flavour': b['flavour'], **dict(zip('xy', pr(x, y, z + 0.08)))})
+    return out
+
+
+def _wood(tex, tint=None, mix=0.0, rough=1.0):
+    return {'material': 'pbr', 'texture': tex, 'tex_res': '2k', **({'tint': tint, 'tint_mix': mix} if tint else {}), 'rough_mul': rough}
+
+
+def hero_orchestra3(family=True):
+    """The orchestra, third pass (the owner prefers the first; the coordinator, 07:05): the first pass's hall, light and
+    camera, with no music stands and no podium; the warm light carried onto the back tier so all eight read, Smoke
+    included; the polished horn (_approved); the wood real (Poly Haven scans: old_wooden_floor_01 on the stage floor,
+    oak_wood_planks on the risers, cherry_veneer panelling on the back wall). The family, if in: Hemisphere pendants in a
+    row above the ensemble, Core lamps along the stage's front edge like footlights, Mantle on a low block at the front
+    right corner."""
+    s = _approved(hero_orchestra())
+    F = 0.005                                                     # the stage floor's boards' top (laid 1 mm above the set's floor)
+    props = []
+    for p in s['set']['props']:
+        if p.get('material') == 'gloss':                          # the music stands and the podium's stand
+            continue
+        if p.get('shape') == 'box' and p.get('size') == [0.7, 0.7, 0.22]:   # the podium
+            continue
+        sz = p['size'][:2] + [p['size'][2] + 0.001]               # sunk 1 mm into the boards: no coplanar faces
+        props.append({**p, 'size': sz, 'position': [p['position'][0], p['position'][1], F - 0.001], **_wood('oak_wood_planks', '#6A3E22', 0.35, 0.9)})
+    props.append({'kind': 'kit', 'shape': 'box', 'size': [16.0, 13.0, F - 0.001], 'position': [0.0, -3.0, 0.001], **_wood('old_wooden_floor_01', '#7A4A28', 0.2)})
+    props.append({'kind': 'kit', 'shape': 'box', 'size': [16.0, 0.05, 6.0], 'position': [0.0, 3.5, F - 0.001], **_wood('cherry_veneer', '#5E3A20', 0.45, 0.8)})
+    for blk in s['products']:
+        for i in blk['instances']:
+            i['position'][2] = round(i['position'][2] + F, 4)
+    # the warm light on the back tier too: two more of the same stage lamps, over the back tier, aimed at its players
+    for k, x in enumerate((-2.2, 2.2)):
+        s['lights'][f'stageback{k}'] = {**s['lights']['stage1'], 'position': [x, 2.2, 4.8], 'target': [x * 1.05, 2.8, 1.0], 'irradiance': 2.0}
+    s['lights']['stageback-c'] = {**s['lights']['stage1'], 'position': [0.0, 2.3, 4.8], 'target': [0.0, 2.9, 1.2], 'irradiance': 2.2}
+    if family:
+        hemis = [(t, x, 1.4, 2.55) for t, x in (('acid', -2.6), ('ember', -1.3), ('dust', 0.0), ('ember', 1.3), ('fog', 2.6))]
+        cores = [(t, round(x, 3), -1.55, F, 200.0) for t, x in zip(('ice', 'poison', 'haze', 'smoke', 'dust', 'ember'), [-2.4 + 0.76 * k for k in range(6)])]
+        props.append(_family(hemis, cores))
+        props.append({'kind': 'kit', 'shape': 'box', 'size': [0.62, 0.52, 0.301], 'position': [2.45, -1.0, F - 0.001], **_wood('oak_wood_planks', '#6A3E22', 0.35, 0.9)})
+        s['products'].append(_mantle(2.45, -1.0, F + 0.301, -20.0))
+    s['set']['props'] = props
+    s['title'] = 'Tropos, the orchestra (third pass): the first hall, no stands, the warm light on every player' + (', the family in' if family else '')
+    return s
+
+
+def hero_hollywood3(family=True):
+    """The Hollywood issue, third pass (the owner prefers the first; the coordinator, 07:05): the first pass's staging,
+    backdrop, drape and light; a real scanned sofa (Poly Haven sofa_03, a Victorian tufted leather sofa, 2.73 m, its seat
+    at 0.55 m) for the black box; Haze still lying on its side along the seat (the series' joke); each of the eight
+    readable: the group opened, the back three on a plywood riser 0.9 m high in the gaps, Poison clearly seen; a real
+    muted rug (quatrefoil_jacquard_fabric, muted). The family, if in: Mantle on a real side table (side_table_01) at the
+    left edge, a Core beside it, two Hemisphere pendants hanging in."""
+    s = _approved(hero_hollywood())
+    seat, arm, step = 0.555, 0.835, 0.9
+    _pose(s, {'haze': (-0.93, -0.12, seat + 0.28, 0.0, 0, 90.0),             # on its side along the seat, horn toward Ember
+              'ember': (0.62, -0.14, seat, -6.0, 0, 0),                        # the star, on the seat's right
+              'fog': (-1.17, -0.06, arm, 14.0, 0, 0),                          # perched on the left arm
+              'dust': (1.17, -0.06, arm, -14.0, 0, 0),                         # and the right
+              'acid': (1.55, -1.05, 0.009, -18.0, -9.0, 0),                      # on the floor, leaning back on the front
+              'poison': (-0.72, 0.85, step, 6.0, 0, 0), 'smoke': (-0.05, 0.85, step, 0.0, 0, 0), 'ice': (2.05, 0.55, 0.30, -10.0, 0, 0)})
+    props = [p for p in s['set']['props'] if p.get('shape') == 'drape']
+    props += [{'kind': 'kit', 'shape': 'asset', 'model': 'sofa_03', 'res': '2k', 'position': [0.0, 0.0, 0.0]},
+              {'kind': 'kit', 'shape': 'box', 'size': [1.8, 0.6, step], 'position': [-0.4, 0.85, 0.0], **_wood('plywood')},
+              {'kind': 'kit', 'shape': 'box', 'size': [0.7, 0.6, 0.30], 'position': [2.05, 0.55, 0.0], **_wood('plywood')},
+              {'kind': 'kit', 'shape': 'box', 'size': [3.8, 2.6, 0.008], 'position': [0.0, -0.55, 0.001],
+               **{**_wood('quatrefoil_jacquard_fabric', '#6B5A4E', 0.55), 'tex_scale': 0.6}}]
+    s['set']['props'] = props
+    if family:
+        props.append({'kind': 'kit', 'shape': 'asset', 'model': 'side_table_01', 'res': '2k', 'position': [-2.15, -0.15, 0.0]})
+        s['products'].append(_mantle(-2.15, -0.15, 0.549, 15.0))
+        props.append(_family(hemis=[('acid', -1.7, 0.2, 2.2), ('dust', 1.4, 0.3, 2.35)], cores=[('ember', -2.72, -0.35, 0.0, 200.0)]))
+    s['title'] = 'Tropos, the Hollywood issue (third pass): the first staging on a real sofa, Haze lying down' + (', the family in' if family else '')
     return s

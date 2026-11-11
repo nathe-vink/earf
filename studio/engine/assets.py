@@ -31,7 +31,7 @@ import json, math, os, random, sys, time, urllib.request
 HERE = os.path.dirname(os.path.abspath(__file__))
 CACHE = os.path.join(HERE, '..', 'assets', 'cache')
 API = 'https://api.polyhaven.com'
-UA = {'User-Agent': 'earf-studio-engine/1.0 (product renders; github.com/nathe-vink/earf)'}
+UA = {'User-Agent': 'studio-engine/1.0 (product renders)'}
 KINDS = ('hdris', 'textures', 'models')
 # texture maps by the names Poly Haven gives them, mapped to the short keys this module uses; formats in preference order
 MAPS = {'diff': ('Diffuse', ('jpg', 'png')), 'nor_gl': ('nor_gl', ('jpg', 'png')), 'rough': ('Rough', ('jpg', 'png')),
