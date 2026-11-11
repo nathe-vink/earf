@@ -108,6 +108,31 @@ def black_hub(probe=False):
             o.data.materials.clear(); o.data.materials.append(m); print('v3_day:', m.name, n, flush=True)
 
 
+BLACK_HW = ['arm-puck', 'puck-screw-0', 'puck-screw-1', 'puck-screw-2', 'feet', 'foot-studs', 'pulley', 'platter-screws',
+            'motor-screws', 'bearing-spring', 'rear-hardware', 'arm-axle', 'arm-axle.001', 'arm-bias', 'arm-cw',
+            'hs-screw', 'hs-screw.001', 'hs-washer', 'hs-washer.001', 'cart-screw', 'cart-screw.001']
+BRIGHT = ['spindle', 'ball', 'thrust-plate', 'cart-cantilever', 'cart-pin', 'cart-pin.001', 'cart-pin.002', 'cart-pin.003',
+          'cart-diamond']
+
+
+def black_hardware(probe=None):
+    """Every visible piece of hardware satin black (the coordinator, 2026-11-11 15:40): the post-satin-black family
+    (#18181A, roughness 0.5). BRIGHT keeps the working or bought surfaces. `probe` (a TEST only): those names in green."""
+    m = bpy.data.materials.get('post-satin-black')
+    if m is None:
+        black_posts(); m = bpy.data.materials['post-satin-black']
+    names = BLACK_HW
+    if probe:
+        m = bpy.data.materials.new('probe-green'); m.use_nodes = True
+        m.node_tree.nodes['Principled BSDF'].inputs['Base Color'].default_value = (0.0, 1.0, 0.0, 1.0)
+        names = probe.split(',')
+    for n in names:
+        o = bpy.data.objects.get(n)
+        if o is not None and o.type == 'MESH':
+            o.data.materials.clear(); o.data.materials.append(m)
+    print('v3_day: satin black hardware:', ', '.join(n for n in names if bpy.data.objects.get(n)), flush=True)
+
+
 def strip_watts(w):
     # the light on: the LED strip (the drawing's light) emits w watts in all, both faces of its mesh (Cycles' mesh
     # emission is two-sided): radiance = w / (2 pi A)
@@ -647,6 +672,8 @@ def prepare():
     if '--satin-underside' in mine: satin_underside()
     if '--black-hub' in mine: black_hub()
     if '--probe-hub' in mine: black_hub(probe=True)
+    if '--black-hardware' in mine: black_hardware()
+    if '--probe-hw' in mine: black_hardware(probe=mine[mine.index('--probe-hw') + 1])
     if '--lighttable' in mine:
         i = mine.index('--lighttable'); lighttable(float(mine[i + 1]), float(mine[i + 2]))
     if '--uplit' in mine:

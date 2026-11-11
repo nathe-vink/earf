@@ -27,7 +27,11 @@ deck's groove, its channel and strip, the adapter, the plate's switch and 24 V i
 deck as signed, the base the signed solid Smoke 2074, the posts satin black; the deck's underside bead-blasted satin
 (the day win from the light proposals: it scatters the room's light up through the deck); the bearing's visible parts
 (housing, nut, washer) black to match the posts; and (2026-11-11) the platter's hub and its six inserts black too, so no
-brass shows anywhere (the rear plate, hidden under the deck, stays brass). The light notes above and below are history.
+brass shows anywhere (the rear plate, hidden under the deck, stays brass); and (2026-11-11) every visible piece of
+hardware satin black: the arm puck and the pulley black anodized, the feet hot black oxide, the screws, studs and disc
+spring black oxide, the cartridge's screws and washers black, the arm's counterweight and trim black (to confirm with
+Rega). Bright by necessity: the spindle's tip, the cartridge's cantilever, pins and diamond (and, hidden, the ball and
+thrust plate). The light notes above and below are history.
 
 v2's notes follow.
 
@@ -316,7 +320,7 @@ def parts(P):
              notes=['tinted 3 / clear 12.7 / tinted 5.6 cemented, annealed, turned to 300 x 21 as Outcrop\'s; six blind 5.6 holes from below for bonded brass M4 inserts, the record side unbroken']),
         Part('platter-hub', hub, Machined('brass-leadfree', 'lathe'), finish='black', group='platter',
              notes=['lead-free brass, turned; black nickel plated, satin, as the bearing (2026-11-11: no brass in sight; it shows through the platter\'s clear lamina), the 10 bore masked']),
-        Part('platter-screws', screws, Bought('platter-screws'), finish='steel', group='platter',
+        Part('platter-screws', screws, Bought('platter-screws'), finish='black', group='platter',
              notes=['six M4 x 10 up through the hub\'s flange into the inserts, 0.6 N m, no thread-locker near acrylic']),
         Part('platter-inserts', pinserts, Bought('platter-inserts'), finish='black', group='platter',
              notes=['black nickel plated with the hub (2026-11-11), threads masked or chased after']),
@@ -325,7 +329,7 @@ def parts(P):
         Part('bearing-housing', housing, Machined('brass-leadfree', 'lathe'), finish='black', group='bearing',
              notes=['as Outcrop\'s: M30 x 1.5, clamped by its nut on a disc spring and a brass washer under the plinth (about 1.5 kN), hanging 20 into the float; its visible parts (housing, nut, washer) black (2026-11-10, to match the posts): brass, black nickel plated, satin; 1.0 ml of oil']),
         Part('bearing-nut', nut, Machined('brass-leadfree', 'lathe'), finish='black', group='bearing'),
-        Part('bearing-spring', dspring, Bought('bearing-disc-spring'), finish='steel', group='bearing'),
+        Part('bearing-spring', dspring, Bought('bearing-disc-spring'), finish='black', group='bearing'),
         Part('bearing-washer', cwasher, Machined('brass-leadfree', 'lathe'), finish='black', group='bearing'),
         Part('bushes', bushes, Bought('bearing-bushes-solid'), finish='brass', group='bearing', inside=True),
         Part('ball', ball, Bought('carbide-ball'), finish='steel', group='bearing', inside=True),
@@ -333,17 +337,17 @@ def parts(P):
         Part('motor-plate', mplate, Sheet('aluminium', 3, face='+z'), finish='aluminium', group='motor',
              notes=['3 mm 5052, black anodized, 90 across, hard on the shoulder on three M3 screws into inserts, as Rega fits its motor (no grommets)']),
         Part('motor', motor, Bought('rega-24v-motor'), finish='black', group='motor'),
-        Part('motor-screws', mscrews, Bought('motor-mount-screws'), finish='steel', group='motor'),
-        Part('pulley', pulley, Machined('aluminium', 'lathe'), finish='aluminium', group='motor',
-             notes=[f'belt face {pdia:.2f} at {P["rpm_motor"]:g} rpm: PROPOSAL, not turned until the bench test (STOCK-AND-AUDIT.md 3.1)']),
+        Part('motor-screws', mscrews, Bought('motor-mount-screws'), finish='black', group='motor'),
+        Part('pulley', pulley, Machined('aluminium', 'lathe'), finish='black', group='motor',
+             notes=['black anodized after turning (2026-11-11), the belt face sized for the coat (about 0.02 on the diameter)', f'belt face {pdia:.2f} at {P["rpm_motor"]:g} rpm: PROPOSAL, not turned until the bench test (STOCK-AND-AUDIT.md 3.1)']),
         Part('belt', belt, Bought('flat-belt-core'), finish='rubber', group='platter'),
-        Part('arm-puck', puck, Machined('aluminium', 'lathe'), finish='aluminium', group='arm'),
+        Part('arm-puck', puck, Machined('aluminium', 'lathe'), finish='black', group='arm', notes=['black anodized after turning, satin (2026-11-11: no bright hardware); its three M5 screws black oxide']),
         Part('arm', union(arm, lift), Bought('rega-rb330'), finish='arm', group='arm'),
         Part('cartridge', cart, Bought('ortofon-2m-black'), finish='cartridge', group='arm'),
-        Part('feet', foot, Machined('stainless', 'lathe', stock=(40.0, 40.0, 4 * 18.0)), finish='steel', group='feet',
-             notes=['four, directly under the posts (one grid), turned 303 stainless, 36 x 8 with a 30 neck, on M8 studs through the base into the posts, levelled and locked; Sorbothane under. They locate and level; no isolation is claimed']),
+        Part('feet', foot, Machined('stainless', 'lathe', stock=(40.0, 40.0, 4 * 18.0)), finish='black', group='feet',
+             notes=['four, directly under the posts (one grid), turned 303 stainless, hot black oxide satin with the posts (2026-11-11), 36 x 8 with a 30 neck, on M8 studs through the base into the posts, levelled and locked; Sorbothane under. They locate and level; no isolation is claimed']),
         Part('foot-pads', pads, Bought('foot-sorbothane'), finish='rubber', group='feet'),
-        Part('foot-studs', fstuds, Bought('foot-studs'), finish='steel', group='feet'),
+        Part('foot-studs', fstuds, Bought('foot-studs'), finish='black', group='feet'),
         Part('phono-stage', phono, Bought('phono-box-s2'), finish='aluminium-dark', group='phono'),
         Part('phono-pads', felts, Bought('phono-felts'), finish='rubber', group='phono'),
         Part('rear-plate', rplate, Sheet('brass-sheet', 2, face='+y') if 'brass-sheet' in SHEETS else Machined('brass-leadfree', 'cnc-mill'), finish='brass', group='rear',
@@ -364,6 +368,7 @@ def parts(P):
         Part('bearing-oil', None, Bought('bearing-oil')),
         Part('cement', None, Bought('acrylic-cement-2r')),
         Part('black-plating', None, Bought('black-nickel-plating')),
+        Part('black-hardware', None, Bought('black-hardware-finishes')),
     ]
     return out
 

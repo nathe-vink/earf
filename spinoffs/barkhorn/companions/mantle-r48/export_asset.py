@@ -16,7 +16,7 @@ tmp = []
 for t in TINTS:
     src = os.path.join(F2 if t != 'smoke' else F1, f'mantle-final-day-{t}.blend')
     bpy.ops.wm.open_mainfile(filepath=src)
-    if t == 'smoke':   # its frame was not re-rendered (the hub did not show); the asset carries the final build: the hub black
+    if False:   # since the black hardware (2026-11-11) every tint's frame was re-rendered from the final build
         m = bpy.data.materials['post-satin-black']
         for n in ('platter-hub', 'platter-inserts', 'bushes'):
             o = bpy.data.objects[n]; o.data.materials.clear(); o.data.materials.append(m)
@@ -60,8 +60,18 @@ def val(sock):
     except TypeError: return round(v, 5)
 
 
-man = {'asset': 'mantle-strata.blend', 'source_commit': 'a1240b77 (frames), 450064b8 (model)', 'units': 'm, z up, the shelf at z 0',
-       'build': 'no light of any kind; base Smoke 2074 solid; posts, bearing housing, nut, washer, platter hub, inserts and bushes satin black (post-satin-black, #18181A); the deck underside satin; a record on the platter; the lid and hinges present but hidden from render, as in the frames',
+man = {'asset': 'mantle-strata.blend', 'source_commit': 'the black-hardware finals (2026-11-11), their frames and model in the same commit', 'units': 'm, z up, the shelf at z 0',
+       'build': 'no light of any kind; base Smoke 2074 solid; every visible piece of hardware satin black (post-satin-black, #18181A, roughness 0.5; the list in black_hardware), bright only the parts in bright_by_necessity; the deck underside satin; a record on the platter; the lid and hinges present but hidden from render, as in the frames',
+       'black_hardware': ['arm-puck', 'puck-screw-0', 'puck-screw-1', 'puck-screw-2', 'feet', 'foot-studs', 'pulley',
+                          'platter-screws', 'motor-screws', 'bearing-spring', 'rear-hardware', 'arm-axle', 'arm-axle.001',
+                          'arm-bias', 'arm-cw', 'hs-screw', 'hs-screw.001', 'hs-washer', 'hs-washer.001', 'cart-screw',
+                          'cart-screw.001', 'post-1', 'post-2', 'post-3', 'post-4', 'bearing-housing', 'bearing-nut',
+                          'bearing-washer', 'platter-hub', 'platter-inserts', 'bushes'],
+       'bright_by_necessity': {'spindle': 'hardened, ground 440C; its tip locates the record and a coat would wear off it',
+                               'cart-cantilever': 'the cartridge maker\'s aluminum tube (bought, working)',
+                               'cart-pin': 'gold signal pins (bought, contacts)', 'cart-diamond': 'the stylus',
+                               'ball': 'the bearing\'s carbide ball, a working surface, hidden in the housing',
+                               'thrust-plate': 'the bearing\'s thrust face, working, hidden in the housing'},
        'tints': {}}
 for t, p, src in tmp:
     c = bpy.data.collections[f'Mantle Strata {t.capitalize()}']
@@ -87,6 +97,10 @@ for t, p, src in tmp:
             mats[mn] = e
     man['tints'][t] = {'collection': c.name, 'scene_source': os.path.basename(src), 'parts': parts, 'materials': mats,
                        'emitting_materials': [k for k, v in mats.items() if 'EMISSION' in v]}
+for t in man['tints']:   # the asset checks itself: every black_hardware part in the satin black, no emitter
+    P = {p_['object'].rsplit('.', 1)[0]: p_ for p_ in man['tints'][t]['parts']}
+    bad = [n for n in man['black_hardware'] if n in P and not all(m_.startswith('post-satin-black') for m_ in P[n]['materials'])]
+    assert not bad and not man['tints'][t]['emitting_materials'], (t, bad)
 bpy.ops.file.pack_all()
 os.makedirs(OUT, exist_ok=True)
 bpy.ops.wm.save_as_mainfile(filepath=os.path.join(OUT, 'mantle-strata.blend'), compress=True)

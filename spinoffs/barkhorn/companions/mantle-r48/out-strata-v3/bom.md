@@ -45,13 +45,14 @@
 | bearing-oil | buy | 1 | Turntable bearing oil, 8 ml (a light synthetic oil, ISO VG 32 or as the bush maker says) |  | 15.00 |
 | cement | buy | 1 | Evonik (Röhm) ACRIFIX 2R 0190, two-component polymerising cement for cast acrylic (cures through any tint, unlike the one-part light-curing 1R 0192); Weld-On 40 or 42 is the US equivalent |  | 45.00 |
 | black-plating | buy | 1 | a decorative plating shop Black nickel over bright nickel, satin, on the lead-free brass parts that show: the bearing housing, nut and washer, the platter hub and its six M4 inserts; bores and threads masked |  | 75.00 |
+| black-hardware | buy | 1 | various Every visible piece of hardware satin black: the arm puck and the pulley black anodized (one prototype lot); the feet hot black oxide with the posts; black-oxide alloy steel screws for the platter, puck and motor, black-oxide M8 foot studs, a phosphated black disc spring; black-oxide cartridge screws and black nylon washers; the RB330 counterweight black (a black-finished weight from Rega or the trade, or black oxide on the stock steel one) and its bias and axle trim black anodized |  | 115.00 |
 
 | | USD |
 |---|---|
-| buy | 2,851 |
+| buy | 2,966 |
 | cnc-mill | 47 |
 | cut | 181 |
 | lathe | 763 |
-| total | 3,842 |
+| total | 3,957 |
 
 Budget figures: bought parts from the component library (dated retailer listings), made parts from the kit's stock rates: 25 % offcut on sheet parts, a handling charge a print, and a setup a machined line spread over its pieces. A shop's quote replaces them.

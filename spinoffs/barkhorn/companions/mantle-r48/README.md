@@ -330,6 +330,7 @@ light notes above and in sections 12 and 13 are history. See "No light" at the e
 | deck | two 12.7 mm sheets of stock cast acrylic in the flavor's tint, cemented flush: 25.4 mm, through-tinted, one bond line; 450 x 360, the outer edge satin, the top glassy, the underside bead-blasted satin (2026-11-10) |
 | float | the deck floats 40 mm over the base on four solid 303 stainless posts, 30 mm across, bonded under the deck; satin black (the owner, 2026-11-10): hot black oxide for stainless, the lamps' #18181A |
 | base | one 12.7 mm sheet of stock Smoke 2074, 380 x 290, 35 mm in from the deck all round; solid, no light (2026-11-10) |
+| hardware | every visible piece satin black (2026-11-11): the arm puck and pulley black anodized, the feet hot black oxide, black-oxide screws and studs, the cartridge's screws and washers black, the arm's counterweight and trim black (to confirm with Rega); bright by necessity the spindle's tip and the cartridge's cantilever, pins and diamond; $115 (an estimate), budget $3,957 |
 | bearing, hub | no brass in sight: the bearing's housing, nut and washer (2026-11-10), the platter's hub and its six inserts (2026-11-11) black nickel plated on the brass, satin, to match the posts; the rear plate, hidden under the deck, stays brass |
 | lid | 3 mm stock sheet in the flavor's tint, a five-sided box 448 x 358 x 100, on Pro-Ject's friction hinges |
 | size | 450 W x about 370 D (with the hinges) x 94 H to the deck's top, about 199 H with the lid closed |
