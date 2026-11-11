@@ -49,7 +49,7 @@ CORES = [('ember', 6.05, -0.14), ('dust', 7.05, -0.2), ('acid', 7.8, -0.12)]    
 EV, WB = -2.0, 4000          # (20:47: the near Cores pale at -1.5: half a stop down, the room lifted by its declared fill)
 TRACK = 3.0                  # the declared track lights' scale (tests 1-4: too dark)
 # (20:47: the bays' pools a stop and a half too strong, aim near 1.6x the wall; the room lifted for the half stop down)
-WALL, BAY, HOUSE = 2.6, 1.0, 0.3
+WALL, BAY, HOUSE = 2.0, 1.0, 0.6
 
 
 def _room():
@@ -124,7 +124,7 @@ def _track():
     """Declared, above the frame: a bar's track lights, small gridded heads throwing pools with falloff onto the record
     wall and down onto the bar top; warm."""
     out = {}
-    for k, x in enumerate((4.3, 6.4, 7.3, 9.4, 10.0)):        # (20:47: off the bays, so the speakers take only their own pool)
+    for k, x in enumerate((4.3, 6.2, 7.0, 9.0, 9.8)):        # (20:47: off the bays, so the speakers take only their own pool)
         out[f'track-wall{k}'] = {'type': 'area', 'size_m': [0.12, 0.12], 'position': [x, 4.9, R.CEIL - 0.05], 'target': [x + 0.1, R.RECORD_WALL['y'], 1.7],
                                  'irradiance': round(WALL * TRACK, 3), 'spread_deg': 20, 'color': '#FFD2A0'}
     for k, x in enumerate((5.6, 7.0, 8.4)):
