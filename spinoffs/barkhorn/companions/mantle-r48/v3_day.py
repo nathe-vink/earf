@@ -165,6 +165,27 @@ def chamfer_edges(c=0.001, edge_polish=True):
         print(f'v3_day: CHAMFER {name}: {len(edges)} edges at {c * 1000:.1f} mm, {k} faces polished', flush=True)
 
 
+def chamfer_c_finish():
+    """Edge option C as built (the CAD carries the 1 mm chamfer since 2026-11-11): the chamfer faces polished, the outer
+    edge left as scene.py draws it (the deck satin, the base polished)."""
+    for name in ('plinth-L1-stack', 'base-L1-stack'):
+        o = bpy.data.objects[name]; M = o.matrix_world; R = M.to_3x3()
+        W = [M @ v.co for v in o.data.vertices]
+        x0, x1 = min(v.x for v in W), max(v.x for v in W); y0, y1 = min(v.y for v in W), max(v.y for v in W)
+        if name == 'plinth-L1-stack':
+            pol = o.material_slots[1].material.copy(); pol.name = 'plinth-chamfer-polished'
+            pol.node_tree.nodes['Principled BSDF'].inputs['Roughness'].default_value = 0.01
+            o.data.materials.append(pol); idx = len(o.data.materials) - 1
+        else:
+            idx = 1
+        k = 0
+        for f in o.data.polygons:
+            n = (R @ f.normal).normalized(); c = M @ f.center
+            if 0.5 < abs(n.z) < 0.9 and min(c.x - x0, x1 - c.x, c.y - y0, c.y - y0 if False else y1 - c.y) < 0.003:
+                f.material_index = idx; k += 1
+        print(f'v3_day: edge C: {name}: {k} chamfer faces polished', flush=True)
+
+
 def strip_watts(w):
     # the light on: the LED strip (the drawing's light) emits w watts in all, both faces of its mesh (Cycles' mesh
     # emission is two-sided): radiance = w / (2 pi A)
@@ -707,6 +728,7 @@ def prepare():
     if '--black-hardware' in mine: black_hardware()
     if '--chamfer' in mine: chamfer_edges()
     if '--chamfer-satin' in mine: chamfer_edges(edge_polish=False)
+    if '--edge-c' in mine: chamfer_c_finish()
     if '--probe-hw' in mine: black_hardware(probe=mine[mine.index('--probe-hw') + 1])
     if '--lighttable' in mine:
         i = mine.index('--lighttable'); lighttable(float(mine[i + 1]), float(mine[i + 2]))

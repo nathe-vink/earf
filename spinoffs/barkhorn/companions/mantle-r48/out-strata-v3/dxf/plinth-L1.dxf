@@ -489,7 +489,7 @@ $SKPOLY
   9
 $TDCREATE
  40
-2461356.6979282405
+2461356.7263194444
   9
 $TDUCREATE
  40
@@ -497,7 +497,7 @@ $TDUCREATE
   9
 $TDUPDATE
  40
-2461356.6979282405
+2461356.7263194444
   9
 $TDUUPDATE
  40
@@ -549,7 +549,7 @@ $SPLINESEGS
   9
 $HANDSEED
   5
-45
+47
   9
 $SURFTAB1
  70
@@ -929,11 +929,11 @@ $PSTYLEMODE
   9
 $FINGERPRINTGUID
   2
-{3D420287-F54C-4A91-A0F9-1099D70D575C}
+{A0AF6CB5-70CD-4E8F-B297-7572E3EE306D}
   9
 $VERSIONGUID
   2
-{007376A9-F238-4715-98F9-92ADD3874543}
+{FA7CB226-1134-45CF-81C6-E260500D3824}
   9
 $EXTNAMES
 290
@@ -1323,9 +1323,9 @@ ISM
   0
 CLASS
   1
-ACDBPLACEHOLDER
+LAYOUT
   2
-AcDbPlaceHolder
+AcDbLayout
   3
 ObjectDBX Classes
  90
@@ -1339,9 +1339,9 @@ ObjectDBX Classes
   0
 CLASS
   1
-LAYOUT
+ACDBPLACEHOLDER
   2
-AcDbLayout
+AcDbPlaceHolder
   3
 ObjectDBX Classes
  90
@@ -1675,7 +1675,7 @@ Continuous
   0
 LAYER
   5
-3E
+40
 330
 1
 100
@@ -1797,7 +1797,7 @@ ACAD
   0
 APPID
   5
-42
+44
 330
 3
 100
@@ -1811,7 +1811,7 @@ HATCHBACKGROUNDCOLOR
   0
 APPID
   5
-43
+45
 330
 3
 100
@@ -2517,7 +2517,7 @@ AcDbText
  40
 4.0
   1
-not in this file: the opening at 70, 353 rounded over from the outer face (1 faces, 0 to 0 deg off the sheet)
+not in this file: plane face at z 69.2, 45 deg off the sheet
  11
 2.0
  21
@@ -2547,7 +2547,7 @@ AcDbText
  40
 4.0
   1
-not in this file: the opening at 90, 353 rounded over from the outer face (1 faces, 0 to 0 deg off the sheet)
+not in this file: plane face at z 69.2, 45 deg off the sheet
  11
 2.0
  21
@@ -2577,7 +2577,7 @@ AcDbText
  40
 4.0
   1
-not in this file: the opening at 360, 353 rounded over from the outer face (1 faces, 0 to 0 deg off the sheet)
+not in this file: plane face at z 69.2, 45 deg off the sheet
  11
 2.0
  21
@@ -2607,7 +2607,7 @@ AcDbText
  40
 4.0
   1
-not in this file: the opening at 380, 353 rounded over from the outer face (1 faces, 0 to 0 deg off the sheet)
+not in this file: plane face at z 69.2, 45 deg off the sheet
  11
 2.0
  21
@@ -2617,9 +2617,69 @@ not in this file: the opening at 380, 353 rounded over from the outer face (1 fa
 100
 AcDbText
   0
-LWPOLYLINE
+TEXT
+  5
+3E
+330
+17
+100
+AcDbEntity
+  8
+NOTES
+100
+AcDbText
+ 10
+2.0
+ 20
+-36.0
+ 30
+0.0
+ 40
+4.0
+  1
+not in this file: plane face at z 69.2, 45 deg off the sheet
+ 11
+2.0
+ 21
+-36.0
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
   5
 3F
+330
+17
+100
+AcDbEntity
+  8
+NOTES
+100
+AcDbText
+ 10
+2.0
+ 20
+-43.0
+ 30
+0.0
+ 40
+4.0
+  1
+not in this file: plane face at z 69.2, 45 deg off the sheet
+ 11
+2.0
+ 21
+-43.0
+ 31
+0.0
+100
+AcDbText
+  0
+LWPOLYLINE
+  5
+41
 330
 17
 100
@@ -2695,7 +2755,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-40
+42
 330
 17
 100
@@ -2771,7 +2831,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-41
+43
 330
 17
 100
@@ -3835,7 +3895,7 @@ CREATED_BY_EZDXF
   3
 WRITTEN_BY_EZDXF
 350
-44
+46
   0
 DICTIONARYVAR
   5
@@ -3847,11 +3907,11 @@ DictionaryVariables
 280
 0
   1
-1.4.5 @ 2026-11-11T16:45:01.651605+00:00
+1.4.5 @ 2026-11-11T17:25:54.305772+00:00
   0
 DICTIONARYVAR
   5
-44
+46
 330
 2D
 100
@@ -3859,7 +3919,7 @@ DictionaryVariables
 280
 0
   1
-1.4.5 @ 2026-11-11T16:45:01.653890+00:00
+1.4.5 @ 2026-11-11T17:25:54.308004+00:00
   0
 ENDSEC
   0

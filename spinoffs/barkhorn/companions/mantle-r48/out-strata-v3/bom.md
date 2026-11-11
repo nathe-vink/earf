@@ -3,8 +3,8 @@
 | item | make | qty | what | size | each, USD |
 |---|---|---|---|---|---|
 | plinth-L1 | cut | 1 | 12.7 mm Cell-cast acrylic sheet, stock tint in the line codes (TruCast 2423 Ember, 2092 Poison, 2287 Haze, 2069 Ice, 2074 Smoke), 4 x 8 ft | 450 x 360 | 56.58 |
-| plinth-L2 | cut | 1 | 12.7 mm Cell-cast acrylic sheet, stock tint in the line codes (TruCast 2423 Ember, 2092 Poison, 2287 Haze, 2069 Ice, 2074 Smoke), 4 x 8 ft | 450 x 360 | 56.58 |
-| base-L1 | cut | 1 | 12.7 mm Cell-cast acrylic sheet, stock tint in the line codes (TruCast 2423 Ember, 2092 Poison, 2287 Haze, 2069 Ice, 2074 Smoke), 4 x 8 ft | 380 x 290 | 38.49 |
+| plinth-L2 | cut | 1 | 12.7 mm Cell-cast acrylic sheet, stock tint in the line codes (TruCast 2423 Ember, 2092 Poison, 2287 Haze, 2069 Ice, 2074 Smoke), 4 x 8 ft | 448 x 358 | 56.02 |
+| base-L1 | cut | 1 | 12.7 mm Cell-cast acrylic sheet, stock tint in the line codes (TruCast 2423 Ember, 2092 Poison, 2287 Haze, 2069 Ice, 2074 Smoke), 4 x 8 ft | 378 x 288 | 38.02 |
 | post-1, post-2, post-3, post-4 | lathe | 4 | Stainless steel 304 | 35 x 35 x 46 | 16.69 |
 | platter | lathe | 1 | Cast acrylic tube, tinted through | 310 x 310 x 22 | 169.57 |
 | platter-hub | lathe | 1 | Brass C69300 (Eco Brass, lead-free) or C27450 | 80 x 80 x 27 | 70.92 |
@@ -46,13 +46,14 @@
 | cement | buy | 1 | Evonik (Röhm) ACRIFIX 2R 0190, two-component polymerising cement for cast acrylic (cures through any tint, unlike the one-part light-curing 1R 0192); Weld-On 40 or 42 is the US equivalent |  | 45.00 |
 | black-plating | buy | 1 | a decorative plating shop Black nickel over bright nickel, satin, on the lead-free brass parts that show: the bearing housing, nut and washer, the platter hub and its six M4 inserts, the rear plate (its legends engraved through after plating, filled white); bores and threads masked |  | 75.00 |
 | black-hardware | buy | 1 | various Every visible piece of hardware satin black: the arm puck and the pulley black anodized (one prototype lot); the feet hot black oxide with the posts; black-oxide alloy steel screws for the platter, puck and motor, black-oxide M8 foot studs, a phosphated black disc spring; black-oxide cartridge screws and black nylon washers; the RB330 counterweight black (a black-finished weight from Rega or the trade, or black oxide on the stock steel one) and its bias and axle trim black anodized |  | 115.00 |
+| edge-chamfer | buy | 1 | the acrylic shop Edge option C (the owner, 2026-11-11): a 1 mm even 45 deg chamfer on the outer top and bottom edges of the deck (two edges, about 1.5 m each) and the base (about 1.3 m each), cut with a chamfer cutter on the router after the outline, then flame- or buff-polished; the outer edges stay as signed (the deck satin, the base diamond-polished) |  | 40.00 |
 
 | | USD |
 |---|---|
-| buy | 2,966 |
+| buy | 3,006 |
 | cnc-mill | 47 |
-| cut | 181 |
+| cut | 180 |
 | lathe | 763 |
-| total | 3,957 |
+| total | 3,996 |
 
 Budget figures: bought parts from the component library (dated retailer listings), made parts from the kit's stock rates: 25 % offcut on sheet parts, a handling charge a print, and a setup a machined line spread over its pieces. A shop's quote replaces them.

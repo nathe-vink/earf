@@ -93,6 +93,7 @@ P = dict(
     puck_d=84.0, puck_t=12.0,
     motor_d=184.7, motor_x=64.0, motor_pocket=76.0,
     rpm_motor=300.0,                                  # PROPOSAL until benched: the US Neo at 60 Hz (STOCK-AND-AUDIT.md 3.1)
+    edge_chamfer=1.0,                                 # edge option C (the owner, 2026-11-11): the outer edges of deck and base, 1 mm, polished
     lid_t=3.0, lid_h=100.0, bumper=5.0,
     housing_d=30.0, flange_d=50.0, flange_t=5.0,
     tint_ring=20.0,
@@ -191,6 +192,15 @@ def parts(P):
     hx = [m + 80.0, m + D['W0'] - 80.0]
     cuts += [cyl('y', (x + s_ * 10, (z0 + top) / 2), 6.0, m + D['D0'] - 14, m + D['D0'] + 1) for x in hx for s_ in (-1, 1)]
 
+    def chamf(sol, ends):
+        # edge option C (the owner, 2026-11-11): a 1 mm even chamfer on the outer edges, polished; the edge itself as signed
+        from build123d import chamfer, Axis
+        if not ends:
+            return sol
+        g = sol.edges().group_by(Axis.Z)
+        es = (list(g[0]) if 'bottom' in ends else []) + (list(g[-1]) if 'top' in ends else [])
+        return chamfer(es, length=P['edge_chamfer'])
+
     def cut(s, cs):
         for c in cs:
             s = s - c
@@ -199,8 +209,9 @@ def parts(P):
     out = []
     one = []
     for i, l in enumerate(D['lams']):
-        s = cut(prism(poutline(P, D, l['inset']), 'z', l['z0'], l['z1']), cuts)
-        one.append(prism(poutline(P, D, l['inset']), 'z', l['z0'], l['z1']))
+        ends = (['bottom'] if i == 0 else []) + (['top'] if i == len(D['lams']) - 1 else [])   # the stack's outer edges only
+        s = cut(chamf(prism(poutline(P, D, l['inset']), 'z', l['z0'], l['z1']), ends), cuts)
+        one.append(chamf(prism(poutline(P, D, l['inset']), 'z', l['z0'], l['z1']), ends))
         if l['kind'] == 'tint':
             band = prism(poutline(P, D, l['inset'] + rw), 'z', l['z0'] - 1, l['z1'] + 1)
             out.append(Part(f'plinth-L{i + 1}', s - band, tint[l['t']], finish='acrylic', group='plinth', render=False,
@@ -209,7 +220,7 @@ def parts(P):
         else:
             # a plain lamina ('clear' in P: no inlay ring): since the stock line (2026-11-01), the flavor's stock tinted sheet
             out.append(Part(f'plinth-L{i + 1}', s, tint[l['t']], finish='clear', group='plinth', render=False,
-                            notes=['the deck: two 12.7 sheets of the line\'s stock tint in the flavor\'s code (a lighter custom pour is an open question for the owner), cemented flush with ACRIFIX 2R 0190 in a vacuum press: one bond line, at mid-edge; annealed, faces fly-cut, the outline finish-routed as one; the outer edge fine bead-blasted to a satin (round 48\'s duels: a polished thick edge refracts the room in patches, a satin one collects light evenly), the top face left glassy; the underside fine bead-blasted to a satin as the edge (2026-11-10, the day win from the light proposals: it scatters the room\'s light up through the deck; masked round the posts\' seats and the bearing\'s washer)'] if i == 0 else []))
+                            notes=['the deck: two 12.7 sheets of the line\'s stock tint in the flavor\'s code (a lighter custom pour is an open question for the owner), cemented flush with ACRIFIX 2R 0190 in a vacuum press: one bond line, at mid-edge; annealed, faces fly-cut, the outline finish-routed as one; the outer edges chamfered 1 mm even and the chamfers polished (edge option C, the owner 2026-11-11); the outer edge fine bead-blasted to a satin (round 48\'s duels: a polished thick edge refracts the room in patches, a satin one collects light evenly), the top face left glassy; the underside fine bead-blasted to a satin as the edge (2026-11-10, the day win from the light proposals: it scatters the room\'s light up through the deck; masked round the posts\' seats and the bearing\'s washer)'] if i == 0 else []))
     plinth_one = cut(union(*one), cuts)
     out[0].pieces = {'stack': (plinth_one, 'acrylic-strata')}; out[0].render = True
 
@@ -225,10 +236,10 @@ def parts(P):
     bcuts += [cyl('y', c, 4.6, yb - 10, yb + 0.5) for c in rp_screws]         # brass M3 inserts, bonded into the edge
     RPH = [h[1:] for h in REAR_HW]
     bl0 = D['base'][0]
-    base_c = cut(prism(boutline(P, D), 'z', bl0['z0'], bl0['z1']), bcuts)
+    base_c = cut(chamf(prism(boutline(P, D), 'z', bl0['z0'], bl0['z1']), ['top', 'bottom']), bcuts)
     out += [Part('base-L1', base_c, tint[12.7], finish='acrylic', group='base', render=False,
                  pieces={'stack': (base_c, 'acrylic-base')},
-                 notes=['the base: one 12.7 sheet of stock Smoke 2074 (Dark Gray) in every flavor (it recedes; the color is the deck\'s), the deck\'s corner radius, 35 in from the deck on all four sides; its outer edge diamond-polished',
+                 notes=['the base: one 12.7 sheet of stock Smoke 2074 (Dark Gray) in every flavor (it recedes; the color is the deck\'s), the deck\'s corner radius, 35 in from the deck on all four sides; its outer edge diamond-polished, its outer edges chamfered 1 mm and polished (edge option C, 2026-11-11)',
                         'solid: no light anywhere in Mantle since 2026-11-10 (the owner); two M3 inserts in the back edge for the rear plate',
                         'four 8.5 holes through it under the posts, for the feet\'s M8 studs into the posts']),]
     out[-1].render = True
@@ -371,6 +382,7 @@ def parts(P):
         Part('cement', None, Bought('acrylic-cement-2r')),
         Part('black-plating', None, Bought('black-nickel-plating')),
         Part('black-hardware', None, Bought('black-hardware-finishes')),
+        Part('edge-chamfer', None, Bought('edge-chamfer-pass')),
     ]
     return out
 
