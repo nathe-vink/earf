@@ -371,6 +371,20 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    screws black and flush, strap screws covered, cord grip turned, the mouth's stacked edge polished with one chamfer.
    Hemisphere batch: direct x8, under x8, Ember off, Ember rim, the cluster, the row re-rendered. The old three-quarter
    finals retire when these land.
+   16:24 UTC, speaker lane 928e4727: THE STAGE v2, `renders/2026-11-11/barkhorn/hero3/hero-stage2.png` (1920x880 test).
+   A designed house (the real theater HDRIs are shot from the stalls; nothing can stand on them): black stage, midnight
+   cloth, oxblood curtains. Eight Tropos in three groups at depths, five on risers, Haze upright; a pair of Hemispheres
+   over each; layered cutouts; eight Cores as footlights; Mantle from asset b5fff814 (checked against the manifest by the
+   engine). Emitters: 16 Hemisphere x 1000 lm, 8 Core x 200 lm; declared: one house wash out of frame (~46 lux), stage
+   haze. Audit hidden 0, equipment 0. Shown to the owner 16:27 as a direction, NOT approved.
+   Coordinator's check: Smoke (far right) and Mantle (left riser) too dark to read; the Cores overlap the speakers' feet;
+   curtains barely show and the floor is a dead black band, so it does not yet read as a theater; a yellow-lit riser side
+   between Ember and Acid; denoiser mottling at 256 samples. Hemisphere gives a soft pool, not a beam: no visible cones.
+   Fixes go to the lane with the owner's notes, after its P1/P2 report.
+   WHY THE OLD MANTLE GOT INTO SCENES (speaker lane): the engine file `studio/products/mantle-strata-v3.json` is written
+   from the CAD's part finishes, which still say steel posts, feet and screws, brass bushes and rear plate, lid shown; the
+   approved look lived only in the Mantle lane's .blend. Mantle lane told 16:27 to make CAD, BOM, engine file, .blend and
+   manifest agree. The speaker lane's engine now appends the asset and refuses the old embed.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
