@@ -310,6 +310,24 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
       with the satin base.
    -> Speaker lane queue: stage v2; P1 fix (the stray rod removed, the ball a stop darker, satin base); P2 as our own bar
       (red brick, wood, concrete, no TV, no other lamps, colors held, Hemispheres clustered).
+   11 Nov 15:20-15:40 UTC, the owner:
+   - Core's base: "should look like the base of a crystal ball. We could round the top edges of the base where it meets the
+     core." Lamps lane: satin base and dock pushed (r32-lamps-final 7c359b88e8: #0B0B0C, roughness 0.6; touch ring satin black
+     anodized; BOM line "black cast acrylic, turned, bead-blasted", option 6061 satin black anodized). Next from the lane:
+     `core-base-options.png` (A as now in satin, B rounded lip, C crystal-ball stand) for the owner to pick; Core finals wait
+     for the pick.
+   - "The mantle in the images doesn't look like it has the black accents. They look stainless steel or something." Checked:
+     (a) the combo pictures (speaker lane d8fc4556) carry an OLD Mantle embed: polished posts and feet, a brass-colored block,
+     lid on. Not reusable. (b) the approved asset b5fff814 has black posts, bearing, hub and inserts, but its manifest still
+     has polished steel on the counterweight, feet, studs, spindle, thrust plate and every screw, aluminum on the arm axles,
+     bias and pulley, blasted aluminum on the armboard disc.
+     -> Mantle lane (briefed): every visible piece of hardware satin black (#18181A family, roughness ~0.5), bright only where
+        a bought or working part cannot honestly be black (listed in the manifest as `bright_by_necessity`); the eight finals
+        re-rendered at the same names; asset and manifest updated.
+     -> Speaker lane (briefed): Mantle only from `mantle-strata.blend`, asserted in `shots._approved` (materials match the
+        manifest, no brass, lid hidden). The combos and any hero frame with the old Mantle are not reusable.
+   RULE (third time: plinth, satin horn, old Mantle): a scene may place a product only from that product's approved asset
+   file, and the build must assert it. A lane's word that an embed is "identical" is not a check.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
