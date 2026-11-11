@@ -1,0 +1,158 @@
+{
+ "emitters": [
+  {
+   "name": "Hemisphere ember",
+   "lumens": 1000,
+   "emitter": "24 LED faces on its ring board",
+   "cct_k": 2200,
+   "in_frame": true
+  },
+  {
+   "name": "Hemisphere dust",
+   "lumens": 1000,
+   "emitter": "24 LED faces on its ring board",
+   "cct_k": 4000,
+   "in_frame": true
+  },
+  {
+   "name": "Hemisphere acid",
+   "lumens": 1000,
+   "emitter": "24 LED faces on its ring board",
+   "cct_k": 4000,
+   "in_frame": true
+  },
+  {
+   "name": "Hemisphere poison",
+   "lumens": 1000,
+   "emitter": "24 LED faces on its ring board",
+   "cct_k": 2700,
+   "in_frame": true
+  },
+  {
+   "name": "Hemisphere ice",
+   "lumens": 1000,
+   "emitter": "24 LED faces on its ring board",
+   "cct_k": 4000,
+   "in_frame": true
+  },
+  {
+   "name": "Hemisphere haze",
+   "lumens": 1000,
+   "emitter": "24 LED faces on its ring board",
+   "cct_k": 3000,
+   "in_frame": true
+  },
+  {
+   "name": "Hemisphere fog",
+   "lumens": 1000,
+   "emitter": "24 LED faces on its ring board",
+   "cct_k": 2700,
+   "in_frame": true
+  },
+  {
+   "name": "Hemisphere smoke",
+   "lumens": 1000,
+   "emitter": "24 LED faces on its ring board",
+   "cct_k": 4000,
+   "in_frame": true
+  },
+  {
+   "name": "Core ember",
+   "lumens": 200,
+   "emitter": "its 26 mm LED disc",
+   "cct_k": 2200,
+   "shell_load": 0.5,
+   "in_frame": true
+  },
+  {
+   "name": "Core dust",
+   "lumens": 200,
+   "emitter": "its 26 mm LED disc",
+   "cct_k": 4000,
+   "shell_load": 1.5,
+   "in_frame": true
+  },
+  {
+   "name": "Core acid",
+   "lumens": 200,
+   "emitter": "its 26 mm LED disc",
+   "cct_k": 4000,
+   "shell_load": 1.5,
+   "in_frame": true
+  },
+  {
+   "name": "Core poison",
+   "lumens": 200,
+   "emitter": "its 26 mm LED disc",
+   "cct_k": 2700,
+   "shell_load": 0.5,
+   "in_frame": true
+  },
+  {
+   "name": "Core ice",
+   "lumens": 200,
+   "emitter": "its 26 mm LED disc",
+   "cct_k": 4000,
+   "shell_load": 1.5,
+   "in_frame": true
+  },
+  {
+   "name": "Core haze",
+   "lumens": 200,
+   "emitter": "its 26 mm LED disc",
+   "cct_k": 3000,
+   "shell_load": 0.5,
+   "in_frame": true
+  },
+  {
+   "name": "Core fog",
+   "lumens": 200,
+   "emitter": "its 26 mm LED disc",
+   "cct_k": 2700,
+   "shell_load": 0.5,
+   "in_frame": true
+  },
+  {
+   "name": "Core smoke",
+   "lumens": 200,
+   "emitter": "its 26 mm LED disc",
+   "cct_k": 4000,
+   "shell_load": 0.15,
+   "in_frame": true
+  },
+  {
+   "name": "house-wash",
+   "emitter": "studio area lamp 3.0 x 1.5 m, gridded 34 deg, from the house",
+   "irradiance_w_m2": 0.3,
+   "lux_at_stage_approx": 45.9,
+   "position_m": [
+    0.0,
+    -8.6,
+    5.2
+   ],
+   "in_frame": false
+  }
+ ],
+ "lamp_lumens_total": 9600,
+ "wash": "declared: one stage wash from the house, out of frame",
+ "haze": {
+  "declared": true,
+  "box_m": [
+   -6.0,
+   -1.2,
+   1.0,
+   6.0,
+   3.2,
+   8.0
+  ],
+  "density": 0.007,
+  "anisotropy": 0.5,
+  "color": "#FFFFFF"
+ },
+ "house": "a designed set (the theatre HDRIs put the stage behind a pit, at infinity)",
+ "audit": {
+  "hidden": [],
+  "equipment": [],
+  "method": "reaudit.py, the corrected cast (shots._frame_rays); the wash out of frame; the haze a volume with no surface"
+ }
+}

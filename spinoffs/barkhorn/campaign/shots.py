@@ -2232,7 +2232,7 @@ def family_centres(s):
         return round(float((X + 1) / 2 * 100), 2), round(float((1 - Y) / 2 * 100), 2)
     out = []
     for p in s['set'].get('props', []):
-        if p.get('path') == LAMPS_MODULE:
+        if 'hemispheres' in p:                                 # the lamps' prop (lamps_final, or stage2's pendants)
             inv = {v: k for k, v in KEY.items()}
             for h in p['hemispheres']:
                 out.append({'product': 'hemisphere', 'tint': inv[h['tint']], **dict(zip('xy', pr(h['x'], h['y'], h['rim_z'] + 0.1)))})
