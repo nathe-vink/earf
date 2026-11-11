@@ -49,7 +49,7 @@ CORES = [('ember', 6.05, -0.14), ('dust', 7.05, -0.2), ('acid', 7.8, -0.12)]    
 EV, WB = -2.0, 4000          # (20:47: the near Cores pale at -1.5: half a stop down, the room lifted by its declared fill)
 TRACK = 3.0                  # the declared track lights' scale (tests 1-4: too dark)
 # (20:47: the bays' pools a stop and a half too strong, aim near 1.6x the wall; the room lifted for the half stop down)
-WALL, BAY, HOUSE = 2.0, 1.0, 0.6
+WALL, BAY, HOUSE = 2.0, 2.6, 0.6
 
 
 def _room():
@@ -132,10 +132,10 @@ def _track():
                                 'irradiance': round(0.35 * TRACK, 3), 'spread_deg': 24, 'color': '#FFD2A0'}
     for k, xc in enumerate(R.SPK_NICHES):                     # (18:36: a pool on each bay, so the whole speaker reads)
         # (18:40: the cabinet glows as on the stage picture, the bay's own back and sides darker: strong, narrow, onto the speaker)
-        out[f'track-bay{k}'] = {'type': 'area', 'size_m': [0.14, 0.14], 'position': [xc, 3.6, R.CEIL - 0.05], 'target': [xc, SPK_Y - 0.1, FEET_BAR + 0.7],
+        out[f'track-bay{k}'] = {'type': 'area', 'size_m': [0.14, 0.14], 'position': [xc, SPK_Y - 0.45, R.CEIL - 0.05], 'target': [xc, SPK_Y - 0.05, FEET_BAR + 0.7],   # (20:47: steep, from above: the cone in its cabinet's shade
                                 'irradiance': round(BAY * TRACK, 3), 'spread_deg': 14, 'color': '#FFE2C0'}
     out['track-mantle'] = {'type': 'area', 'size_m': [0.1, 0.1], 'position': [MANTLE[0], MANTLE[1] - 0.5, R.CEIL - 0.05],
-                           'target': [MANTLE[0], MANTLE[1], MANTLE[2]], 'irradiance': round(1.2 * TRACK, 3), 'spread_deg': 18, 'color': '#FFD8B0'}
+                           'target': [MANTLE[0], MANTLE[1], MANTLE[2]], 'irradiance': round(2.0 * TRACK, 3), 'spread_deg': 18, 'color': '#FFD8B0'}
     # (18:36: the dark warm, not black: a broad low warm fill from the room behind the camera)
     out['house'] = {'type': 'area', 'size_m': [4.0, 2.0], 'position': [6.9, 0.2, 2.6], 'target': [6.9, 4.5, 1.0],
                     'irradiance': round(HOUSE * TRACK, 3), 'color': '#FFC890'}
@@ -193,6 +193,10 @@ def bar_backbar():
     # receding over the bar; a Core and the drinks on the bar in front; Mantle further along under its lamp)
     s['camera'] = {'position': [9.3, 3.5, 1.42], 'target': [7.0, 5.7, 1.72], 'lens_mm': 24.0, 'level': True,
                    'fstop': 2.8, 'focus': [8.25, 5.5, 1.7]}
+    for pr in s['set']['props']:                                 # (20:47 proof: the now-playing sleeve at the frame's edge, too big: out)
+        if pr.get('fn') == 'boards':
+            pr['boards'] = [b for b in pr['boards'] if 'cover-05' not in b['image']]
+    s['set']['props'] = [pr for pr in s['set']['props'] if not (pr.get('texture') == 'american_walnut_veneer' and pr.get('size') == [0.2, 0.05, 0.022])]
     s['lights'].pop('track-wall0', None)                         # (this view sees that head: the audit, 0.03 %)
     for pr in s['set']['props']:                                 # a Core and the drinks on the bar in front of the seat
         if pr.get('fn') == 'lamps':
