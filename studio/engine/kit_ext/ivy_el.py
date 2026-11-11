@@ -219,13 +219,16 @@ def ivy(bpy, name, p, kit):
     def clear_at(x, z):
         return any(a <= x <= c and b <= z <= d for a, b, c, d in clear)
 
-    def grow(x, z, heading, r, length, depth):
+    def grow(x, z, heading, r, length, depth, down=False):
         nonlocal n_leaves
         pts, radii = [Vector((x, fy - r - 0.004, z))], [r]
         s = 0.0; step = 0.035; next_node = node * rnd.uniform(0.3, 1.0); side = 1
-        while s < length and z < top - 0.02:
+        while s < length and (z > 0.05 if down else z < top - 0.02):
             heading += rnd.gauss(0, 0.14)
-            heading = max(-1.25, min(1.25, heading * 0.92))                # mostly upward, wandering
+            if down:                                                        # hanging: mostly downward
+                heading = math.pi + max(-0.9, min(0.9, (heading - math.pi) * 0.92))
+            else:
+                heading = max(-1.25, min(1.25, heading * 0.92))            # mostly upward, wandering
             x += math.sin(heading) * step; z += math.cos(heading) * step; s += step
             rr = max(0.0015, r * (1 - 0.7 * s / length))
             pts.append(Vector((x, fy - rr - 0.004 + 0.003 * math.sin(s * 9), z))); radii.append(rr)
@@ -244,9 +247,13 @@ def ivy(bpy, name, p, kit):
                     _tube(sbm, [base, base.lerp(tip, 0.5) + Vector((0, 0, 0.01)), tip], [0.0016, 0.0013, 0.001], sides=4)
                     n_leaves += 1
             if depth < 3 and rnd.random() < p.get('branch', 0.035):
-                grow(x, z, heading + rnd.choice([-1, 1]) * rnd.uniform(0.6, 1.1), rr * 0.8, length * rnd.uniform(0.35, 0.7), depth + 1)
+                grow(x, z, heading + rnd.choice([-1, 1]) * rnd.uniform(0.6, 1.1), rr * 0.8, length * rnd.uniform(0.35, 0.7), depth + 1, down)
         if len(pts) > 1:
             _tube(sbm, pts, radii)
+    for hx, spread, h in p.get('hang', []):                            # spilling over the coping, hanging down the face
+        for k in range(p.get('per_hang', 3)):
+            grow(hx + rnd.uniform(-spread, spread), top - 0.03, math.pi + rnd.gauss(0, 0.25), p.get('stem_r', 0.008) * 0.6,
+                 h * rnd.uniform(0.6, 1.1), 1, down=True)
     for rx, spread, h in p.get('roots', [[0.0, 0.5, 2.0]]):
         for k in range(p.get('per_root', 3)):
             grow(rx + rnd.uniform(-spread, spread), -0.02, rnd.gauss(0, 0.3), p.get('stem_r', 0.008) * rnd.uniform(0.6, 1.2),
@@ -272,7 +279,7 @@ def cover(bpy, name, p, kit):
         if any((cx - a) ** 2 + (cy - b) ** 2 < r * r for a, b, r in avoid) or any(a <= cx <= c and b <= cy <= d for a, b, c, d in keep):
             continue
         hd = rnd.uniform(0, 2 * math.pi)                                    # a runner, a few plants along it
-        run = [Vector((cx, cy, -0.002))]
+        run = [Vector((cx, cy, 0.002))]
         for k in range(rnd.randint(3, 7)):
             hd += rnd.gauss(0, 0.4)
             q = run[-1] + Vector((math.cos(hd), math.sin(hd), 0)) * rnd.uniform(0.06, 0.12)
@@ -286,7 +293,35 @@ def cover(bpy, name, p, kit):
             face = Vector((rnd.uniform(-0.4, 0.4), rnd.uniform(-0.4, 0.4) - 0.3, 1.0))
             _triplet(lbm, uvl, col, rnd, top, d, face, size * rnd.uniform(0.7, 1.3)); n += 1
         if len(run) > 1:
-            _tube(sbm, run, [0.0025] * len(run), sides=5)
-    out = _objects(bpy, name, lbm, sbm, None, dict(p, stem=p.get('stem', '#6E5A2E')))   # green-red petioles
+            _tube(sbm, run, [p.get('runner_r', 0.004)] * len(run), sides=6)
+    out = _objects(bpy, name, lbm, sbm, None, dict(p, stem=p.get('stem', '#5A3B26')))   # brown runners, petioles
     print(f'ivy cover {name}: {n} leaves')
+    return out
+
+
+# --- a spray of the vine close to the lens --------------------------------------------------------------------------
+def spray(bpy, name, p, kit):
+    """One length of the vine near the camera, so the leaves in threes read plainly: from `start` along `heading_deg`
+    (in the ground plane, 0 = +x) for `length` metres, arching up to `rise`, `count` leaves of leaflets `leaf` metres on
+    petioles turned so their faces look toward `face_to` (the camera)."""
+    rnd = random.Random(p.get('seed', 9))
+    st = Vector(p.get('start', [0.0, -2.0, 0.0])); hd = math.radians(p.get('heading_deg', 30.0))
+    L = p.get('length', 0.7); rise = p.get('rise', 0.25); ft = Vector(p.get('face_to', [1.5, -5.6, 0.8]))
+    lbm, uvl, col = _new_leaf_bm(); sbm = bmesh.new()
+    pts = []
+    n = 24
+    for k in range(n + 1):
+        t = k / n
+        pts.append(st + Vector((math.cos(hd), math.sin(hd), 0)) * L * t + Vector((0, 0, rise * math.sin(math.pi * min(1.0, t * 1.3)) + 0.004)))
+    _tube(sbm, pts, [p.get('stem_r', 0.005) * (1 - 0.5 * k / n) for k in range(n + 1)], sides=8)
+    for k in range(p.get('count', 7)):
+        t = (k + 0.5) / p.get('count', 7)
+        base = pts[int(t * n)]
+        to_cam = (ft - base).normalized()
+        out_d = Vector((rnd.uniform(-0.5, 0.5), rnd.uniform(-0.5, 0.5), rnd.uniform(0.4, 0.9))) + to_cam * 0.4
+        face = to_cam + Vector((0, 0, 0.6)) + Vector((rnd.uniform(-0.2, 0.2), rnd.uniform(-0.2, 0.2), 0))
+        tip = _triplet(lbm, uvl, col, rnd, base, out_d, face, p.get('leaf', 0.1) * rnd.uniform(0.85, 1.15))
+        _tube(sbm, [base, base.lerp(tip, 0.5) + Vector((0, 0, 0.015)), tip], [0.0025, 0.002, 0.0014], sides=6)
+    out = _objects(bpy, name, lbm, sbm, None, dict(p, stem=p.get('stem', '#5A3B26')))
+    print(f'ivy spray {name}: {p.get("count", 7)} leaves')
     return out
