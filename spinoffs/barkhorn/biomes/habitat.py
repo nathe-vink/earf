@@ -50,6 +50,7 @@ GLOSSY_FLAG = [False]                   # --glossy-flag: the flag and cards seen
 SPLIT = [None]                          # --split R G B: the tint's channel split, luminance held per part (the shared 9097 fix)
 DOTS = [[]]                             # --dot D SIZE TX TY TZ: a grip's dot, SIZE m, D m out on the sun line from (TX, TY, TZ)
 CARDS = [[]]                            # --card white|black W H Z SIDE_DEG: real cards round the speaker, pushed out of frame
+MANIFEST = [None]                       # --manifest FILE: the approved build per tint (the speaker lane's), asserted
 BERMS = [[]]                            # --berm LX LY RX RY H: sand banked against the base (the speaker's frame)
 REFLECTORS = [[]]                       # --reflector W H AZ EL DIST TX TY TZ: a white board where a fill lamp stood
 MENISCUS = [0.0]                        # --meniscus R: a water meniscus round the cabinet's walls, radius R m
@@ -692,6 +693,46 @@ def berms(bpy_, linked, specs):
         print(f'berm: {rx * 2:.2f} x {ry * 2:.2f} m, {h * 1000:.0f} mm high at {[round(x, 3) for x in c]} on {gob.name} (z {zg:.3f})')
 
 
+def assert_approved(col, tint, manifest):
+    """The speaker as the approved build (the coordinator, 2026-11-11: as rollout.py's site('front-off-tall', tint)):
+    the prepared collection checked against the speaker lane's per-tint manifest, shape
+    {tint: {"parts": [part names that must be there], "absent": [names that must not be], "bark_sigma_per_mm": [r, g, b],
+    "lining_rgb": [r, g, b] (linear), "horn_roughness": 0.05}}; any key may be left out. Fails the render on a mismatch."""
+    import fnmatch
+    spec = manifest.get(tint)
+    if spec is None:
+        raise SystemExit(f'approved build: no manifest entry for {tint}')
+    parts = {o.name.split(' ')[-1].split('#')[0] for o in col.all_objects}
+    bad = [q for q in spec.get('parts', []) if not any(fnmatch.fnmatch(n, q) for n in parts)]
+    bad += [f'not {q}' for q in spec.get('absent', []) if any(fnmatch.fnmatch(n, q) for n in parts)]
+    mats = {sl.material for o in col.all_objects for sl in getattr(o, 'material_slots', []) if sl.material and sl.material.node_tree}
+    def base(m):
+        return m.name.split('@')[0]
+    if 'bark_sigma_per_mm' in spec:
+        for m in mats:
+            if base(m) == 'bark':
+                v = next((n for n in m.node_tree.nodes if n.type == 'VOLUME_ABSORPTION'), None)
+                got = [(1 - c) * v.inputs['Density'].default_value / 1000 for c in v.inputs['Color'].default_value[:3]] if v else [0, 0, 0]
+                if any(abs(g - w) > 0.02 * max(w, 0.005) + 1e-4 for g, w in zip(got, spec['bark_sigma_per_mm'])):
+                    bad.append(f'{m.name} sigma {[round(g, 5) for g in got]} != {spec["bark_sigma_per_mm"]}')
+    if 'lining_rgb' in spec:
+        for m in mats:
+            if base(m) == 'lining':
+                b = next((n for n in m.node_tree.nodes if n.type == 'BSDF_PRINCIPLED'), None)
+                got = list(b.inputs['Base Color'].default_value[:3]) if b else []
+                if not got or any(abs(g - w) > 0.02 for g, w in zip(got, spec['lining_rgb'])):
+                    bad.append(f'{m.name} lining {[round(g, 3) for g in got]} != {spec["lining_rgb"]}')
+    if 'horn_roughness' in spec:
+        for m in mats:
+            if base(m).startswith('horn-'):
+                b = next((n for n in m.node_tree.nodes if n.type == 'BSDF_PRINCIPLED'), None)
+                if b and abs(b.inputs['Roughness'].default_value - spec['horn_roughness']) > 1e-3:
+                    bad.append(f'{m.name} roughness {b.inputs["Roughness"].default_value:.3f} != {spec["horn_roughness"]}')
+    if bad:
+        raise SystemExit(f'approved build: {tint} FAILS: ' + '; '.join(bad))
+    print(f'approved build: {tint} matches the manifest ({len(spec.get("parts", []))} parts, materials checked)')
+
+
 def plant_alpha(bpy_, aids, res='1k'):
     """Some Poly Haven plant glTFs (grass_bermuda_01) carry no alpha at all: the cards render whole, their black,
     semi-glossy surround mirroring the sky as pale flecks (the Fog gate: "litter"). Wire the asset's own Alpha map
@@ -954,6 +995,8 @@ def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extr
             cname = f"Tropos Strata {inst['tint']}" if inst.get('tint') else collection
             if cname not in cols:
                 cols[cname] = prep(cname)
+                if MANIFEST[0] is not None:
+                    assert_approved(cols[cname], cname.split(' ')[-1], MANIFEST[0])
             col = cols[cname]
             e = bpy_.data.objects.new(cname, None)
             e.instance_type = 'COLLECTION'; e.instance_collection = col
@@ -1044,6 +1087,7 @@ def main():
                     help="a grip's dot: SIZE m, D m out on the sun line from the point TX TY TZ")
     ap.add_argument('--card', nargs=5, action='append', default=[], metavar=('KIND', 'W', 'H', 'Z', 'SIDE'),
                     help='a real card: white|black, W H (m), centre Z (m), SIDE_DEG off the speaker-camera line')
+    ap.add_argument('--manifest', help="the approved build's per-tint manifest (JSON), asserted on every instance")
     ap.add_argument('--berm', type=float, nargs=5, action='append', default=[], metavar=('LX', 'LY', 'RX', 'RY', 'H'))
     ap.add_argument('--reflector', type=float, nargs=8, action='append', default=[], metavar=('W', 'H', 'AZ', 'EL', 'DIST', 'TX', 'TY', 'TZ'))
     ap.add_argument('--opaque-shadows', action='store_true', help='the glass blocks direct light (diagnostics only)')
@@ -1065,7 +1109,7 @@ def main():
     a = ap.parse_args()
     global SURFACE_GLASS
     WELD[0] = not a.no_weld; SURFACE_GLASS = a.surface_glass; FRESNEL_ANGLE[0] = a.fresnel_angle
-    SINK[0] = a.sink; LED[0] = a.led; REAL_SET[0] = a.real_set; CANOPY_OPEN[0] = a.canopy_open; CLEARING[0] = a.canopy_clearing; CLEARING_AT[0] = tuple(a.canopy_clearing_at); PLANT_ALPHA[0] = tuple(a.plant_alpha); SCRIM[0] = a.scrim; WET[0] = a.wet; REFLECTORS[0] = [tuple(r) for r in a.reflector]; BERMS[0] = [tuple(b) for b in a.berm]; MENISCUS[0] = a.meniscus; DOTS[0] = [tuple(d) for d in a.dot]; CARDS[0] = [(c[0], float(c[1]), float(c[2]), float(c[3]), float(c[4])) for c in a.card]; SPLIT[0] = a.split; GLOSSY_FLAG[0] = a.glossy_flag
+    SINK[0] = a.sink; LED[0] = a.led; REAL_SET[0] = a.real_set; CANOPY_OPEN[0] = a.canopy_open; CLEARING[0] = a.canopy_clearing; CLEARING_AT[0] = tuple(a.canopy_clearing_at); PLANT_ALPHA[0] = tuple(a.plant_alpha); SCRIM[0] = a.scrim; WET[0] = a.wet; REFLECTORS[0] = [tuple(r) for r in a.reflector]; BERMS[0] = [tuple(b) for b in a.berm]; MANIFEST[0] = json.load(open(a.manifest)) if a.manifest else None; MENISCUS[0] = a.meniscus; DOTS[0] = [tuple(d) for d in a.dot]; CARDS[0] = [(c[0], float(c[1]), float(c[2]), float(c[3]), float(c[4])) for c in a.card]; SPLIT[0] = a.split; GLOSSY_FLAG[0] = a.glossy_flag
     HORN['close'] = a.horn_close; HORN['rough'] = a.horn_rough; HORN['shadows'] = not a.horn_front; HORN['as_cabinet'] = a.horn_as_cabinet
     sh = json.load(open(a.shot))
     scale_lights(sh, {k: float(v) for k, v in (x.split('=', 1) for x in a.light)})

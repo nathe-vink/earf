@@ -28,6 +28,9 @@ HABITATS = {
     'fog_b':     ('Fog',    {'bounce': 0}),
     # the home-page hero (2026-11-10): the eight in the passed Fog and Ice scenes, 3:2, the scenes' own lights only
     'hero_fog':  ('Fog',    {'bounce': 0}),
+    # new designs (2026-11-11, proxies): Ember on a cooled lava field at dusk, no lava light; Smoke on a hillside under overcast
+    'ember_c':   ('Ember',  {'bounce': 0, 'throat': 0, 'low': 0, 'rim': 0}),
+    'smoke_c':   ('Smoke',  {'bounce': 0}),
     'hero_ice':  ('Ice',    {'bounce': 0, 'back': 0, 'throat': 0}),
 }
 # shot keys set per habitat (habitat.py --set), and samples where the scene is dark (the satin horn's grain)
@@ -131,6 +134,7 @@ MODIFY = {'haze_b': {'sundisk': {'azimuth': 30.0, 'elevation': 6.0}},
           # seen through the clear walls, moved aside, so the bright fog bank sits behind the box
           'fog_b': {'boulder_01': {'position': [2.6, 3.6, -0.12]}},
           'hero_fog': {'boulder_01': {'position': [2.6, 3.6, -0.12]}},
+          'smoke_c': {'boulder_01': {'position': [2.6, 3.6, -0.12]}},
           # Acid: the outline mask (no rain inside the speaker's outline, the gate on cc380fab) kept only in front of the
           # speaker (the coordinator, 20:46: the rain behind shows through the clear horn, as it would; without the mask a
           # near-focus streak 5-9 m out crossed the woofer again, proxy a2). The 2.5-5 m layer, soft, is not masked
@@ -218,7 +222,8 @@ BERM = {   # habitat -> [berm specs] (LX LY RX RY H, the speaker's frame, m)
     # Dust r3 (the coordinator's 00:05 note 2): sand banked 22 mm against the outside of the left face, its full depth: the
     # face's lower edge showed open-sand-bright (its 21 % Fresnel mirror of the sunlit sand behind at 73 deg, and the sand
     # through the bottom panel's edge; blocking the glass's direct light left it unchanged); 2.5 cm took it to 0.33-0.55
-    'dust': [(-0.30, -0.02, 0.05, 0.26, 0.022)]}
+    # (removed for r4, the coordinator 11-10: zoomed in it read as a placed lump: (-0.30, -0.02, 0.05, 0.26, 0.022))
+}
 SAMPLES = {'ember': 96, 'poison_g5': 96, 'haze_b': 96, 'fog_b': 96}
 
 
@@ -235,6 +240,7 @@ def main():
     ap.add_argument('--scrim', type=float, nargs=4, help='a silk on the sun line: T W H D (tests)')
     ap.add_argument('--meniscus', type=float)
     ap.add_argument('--horn-as-cabinet', action='store_true', help="the horn's absorption per mm = the cabinet's")
+    ap.add_argument('--manifest', help="the approved build's per-tint manifest, asserted")
     ap.add_argument('--asset', help='the speaker asset .blend, in place of assets/hornA3 (e.g. a rebuilt one)')
     ap.add_argument('--garden', action='store_true', help='Poison garden: fly agaric, foxglove, nightshade (GARDEN)')
     ap.add_argument('--berm', type=float, nargs=5, action='append', default=[], help='sand banked against the base: LX LY RX RY H')
@@ -290,6 +296,7 @@ def main():
             + (['--opaque-shadows'] if a.opaque_shadows else []) \
             + (['--horn-as-cabinet'] if a.horn_as_cabinet else []) \
             + (['--asset', a.asset] if a.asset else []) \
+            + (['--manifest', a.manifest] if a.manifest else []) \
             + [x for r in (a.reflector or REFLECT.get(n, [])) for x in ('--reflector', *map(str, r))] \
             + [x for b in (a.berm or BERM.get(n, [])) for x in ('--berm', *map(str, b))] \
             + (['--meniscus', str(a.meniscus or MENISCUS[n])] if (a.meniscus or n in MENISCUS) else []) \
