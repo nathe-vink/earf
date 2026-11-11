@@ -44,13 +44,14 @@
 | neo-psu | buy | 1 | Rega Neo PSU MK2: DSP-generated drive for Rega's 24 V motor, 33/45 by a button, fine speed trim (0.01 rpm steps) on the back; US 60 Hz 115-120 V version |  | 445.00 |
 | bearing-oil | buy | 1 | Turntable bearing oil, 8 ml (a light synthetic oil, ISO VG 32 or as the bush maker says) |  | 15.00 |
 | cement | buy | 1 | Evonik (Röhm) ACRIFIX 2R 0190, two-component polymerising cement for cast acrylic (cures through any tint, unlike the one-part light-curing 1R 0192); Weld-On 40 or 42 is the US equivalent |  | 45.00 |
+| black-plating | buy | 1 | a decorative plating shop Black nickel over bright nickel, satin, on the lead-free brass parts that show: the bearing housing, nut and washer, the platter hub and its six M4 inserts; bores and threads masked |  | 75.00 |
 
 | | USD |
 |---|---|
-| buy | 2,776 |
+| buy | 2,851 |
 | cnc-mill | 47 |
 | cut | 181 |
 | lathe | 763 |
-| total | 3,767 |
+| total | 3,842 |
 
 Budget figures: bought parts from the component library (dated retailer listings), made parts from the kit's stock rates: 25 % offcut on sheet parts, a handling charge a print, and a setup a machined line spread over its pieces. A shop's quote replaces them.

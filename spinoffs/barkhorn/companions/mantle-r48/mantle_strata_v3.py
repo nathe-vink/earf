@@ -26,7 +26,8 @@ No light (2026-11-10, the owner: "Forget the lights on mantle"; the coordinator:
 deck's groove, its channel and strip, the adapter, the plate's switch and 24 V inlet, and their wiring are gone. The
 deck as signed, the base the signed solid Smoke 2074, the posts satin black; the deck's underside bead-blasted satin
 (the day win from the light proposals: it scatters the room's light up through the deck); the bearing's visible parts
-(housing, nut, washer) black to match the posts. The light notes above and below are history.
+(housing, nut, washer) black to match the posts; and (2026-11-11) the platter's hub and its six inserts black too, so no
+brass shows anywhere (the rear plate, hidden under the deck, stays brass). The light notes above and below are history.
 
 v2's notes follow.
 
@@ -313,10 +314,12 @@ def parts(P):
         Part('platter', platter, Machined('cast-acrylic', 'lathe', stock=(310.0, 310.0, 22.0), setup_usd=80.0), finish='acrylic', group='platter',
              pieces={'disc': (platter, 'acrylic-strata-platter')},
              notes=['tinted 3 / clear 12.7 / tinted 5.6 cemented, annealed, turned to 300 x 21 as Outcrop\'s; six blind 5.6 holes from below for bonded brass M4 inserts, the record side unbroken']),
-        Part('platter-hub', hub, Machined('brass-leadfree', 'lathe'), finish='brass', group='platter'),
+        Part('platter-hub', hub, Machined('brass-leadfree', 'lathe'), finish='black', group='platter',
+             notes=['lead-free brass, turned; black nickel plated, satin, as the bearing (2026-11-11: no brass in sight; it shows through the platter\'s clear lamina), the 10 bore masked']),
         Part('platter-screws', screws, Bought('platter-screws'), finish='steel', group='platter',
              notes=['six M4 x 10 up through the hub\'s flange into the inserts, 0.6 N m, no thread-locker near acrylic']),
-        Part('platter-inserts', pinserts, Bought('platter-inserts'), finish='brass', group='platter'),
+        Part('platter-inserts', pinserts, Bought('platter-inserts'), finish='black', group='platter',
+             notes=['black nickel plated with the hub (2026-11-11), threads masked or chased after']),
         Part('spindle', spindle, Machined('stainless-440c', 'lathe', setup_usd=120.0), finish='steel', group='bearing',
              notes=['as Outcrop\'s: 440C, 58 HRC, ground 10 g5; a vent flat 1.0 x 0.3 along the journals']),
         Part('bearing-housing', housing, Machined('brass-leadfree', 'lathe'), finish='black', group='bearing',
@@ -360,6 +363,7 @@ def parts(P):
         Part('neo-psu', None, Bought('rega-neo-psu-mk2')),
         Part('bearing-oil', None, Bought('bearing-oil')),
         Part('cement', None, Bought('acrylic-cement-2r')),
+        Part('black-plating', None, Bought('black-nickel-plating')),
     ]
     return out
 

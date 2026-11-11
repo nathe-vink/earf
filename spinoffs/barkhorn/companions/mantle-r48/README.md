@@ -330,7 +330,7 @@ light notes above and in sections 12 and 13 are history. See "No light" at the e
 | deck | two 12.7 mm sheets of stock cast acrylic in the flavor's tint, cemented flush: 25.4 mm, through-tinted, one bond line; 450 x 360, the outer edge satin, the top glassy, the underside bead-blasted satin (2026-11-10) |
 | float | the deck floats 40 mm over the base on four solid 303 stainless posts, 30 mm across, bonded under the deck; satin black (the owner, 2026-11-10): hot black oxide for stainless, the lamps' #18181A |
 | base | one 12.7 mm sheet of stock Smoke 2074, 380 x 290, 35 mm in from the deck all round; solid, no light (2026-11-10) |
-| bearing | its visible parts (housing, nut, washer) black to match the posts: brass, black nickel plated, satin (2026-11-10) |
+| bearing, hub | no brass in sight: the bearing's housing, nut and washer (2026-11-10), the platter's hub and its six inserts (2026-11-11) black nickel plated on the brass, satin, to match the posts; the rear plate, hidden under the deck, stays brass |
 | lid | 3 mm stock sheet in the flavor's tint, a five-sided box 448 x 358 x 100, on Pro-Ject's friction hinges |
 | size | 450 W x about 370 D (with the hinges) x 94 H to the deck's top, about 199 H with the lid closed |
 | weight | about 12.9 kg with the lid (11.8 without); the supplies are outside it |
@@ -924,8 +924,9 @@ The owner: "Forget the lights on mantle." The coordinator: Mantle has no light o
 and the parts list (`mantle_strata_v3.py`, rebuilt into `out-strata-v3/`): the deck's groove, its channel and strip,
 the 24 V adapter, the plate's light switch and 24 V inlet (`strata-rear-hardware-nolight`), and their wiring
 (`strata_rear.py`'s rating and diagram). In: the deck's underside bead-blasted satin (the day win from the light
-proposals) and the bearing's visible parts black. Budget $3,850 signed to $3,767, before the underside's blasting and
-the bearing's plating, which the kit does not price (about +$10-15 and +$15-25, estimates). The final day set, eight
+proposals) and the bearing's visible parts black. Budget $3,850 signed to $3,767; with the black nickel
+plating of every brass part that shows (one prototype lot, about $75, an estimate; 2026-11-11) $3,842. The underside's
+blasting is not priced by the kit (about +$10-15, an estimate). The final day set, eight
 tints: `renders/2026-11-10/barkhorn/mantle-r48/mantle-final-day-*.png`.
 
 ## Open questions for the owner

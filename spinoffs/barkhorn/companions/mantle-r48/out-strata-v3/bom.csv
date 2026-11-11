@@ -4,7 +4,7 @@ plinth-L2,cut,1,"12.7 mm Cell-cast acrylic sheet, stock tint in the line codes (
 base-L1,cut,1,"12.7 mm Cell-cast acrylic sheet, stock tint in the line codes (TruCast 2423 Ember, 2092 Poison, 2287 Haze, 2069 Ice, 2074 Smoke), 4 x 8 ft",380 x 290,1661,38.49,acrylic,,,cut file dxf/base-L1.dxf,
 "post-1, post-2, post-3, post-4",lathe,4,Stainless steel 304,35 x 35 x 46,233,16.69,steel,,,step/post-1.step,
 platter,lathe,1,"Cast acrylic tube, tinted through",310 x 310 x 22,1746,169.57,acrylic,,,step/platter.step,
-platter-hub,lathe,1,"Brass C69300 (Eco Brass, lead-free) or C27450",80 x 80 x 27,263,70.92,brass,,,step/platter-hub.step,
+platter-hub,lathe,1,"Brass C69300 (Eco Brass, lead-free) or C27450",80 x 80 x 27,263,70.92,black,,,step/platter-hub.step,
 platter-screws,buy,1,"Six M4 x 10 stainless socket button screws (ISO 7380), up through the hub into the platter's inserts",,,6,,McMaster-Carr kind,2026-11-01,,
 platter-inserts,buy,1,"any (E-Z Lok / Tappex kind) Six M4 brass threaded inserts for bonding into plastics, 5.6 OD x 8, epoxy-bonded into the platter from below (no thread-locker near acrylic)",,,9,,McMaster-Carr kind,2026-11-01,,
 spindle,lathe,1,"Stainless steel 440C, hardened 58 HRC and ground",20 x 20 x 85,39,127.05,steel,,,step/spindle.step,
@@ -41,3 +41,4 @@ wiring,buy,1,"Shielded interconnects inside (the arm's lead to the S2, the S2 to
 neo-psu,buy,1,"Rega Neo PSU MK2: DSP-generated drive for Rega's 24 V motor, 33/45 by a button, fine speed trim (0.01 rpm steps) on the back; US 60 Hz 115-120 V version",,,445,"the speed changes without moving the belt, so the pulley has one diameter; the box stands beside the record player (or under it, on the shelf)",Audio Advisor (US),2026-10-18,https://www.audioadvisor.com/products/rega-neo-psu-mk2-60hz-turntable-psu-power-supply-black,
 bearing-oil,buy,1,"Turntable bearing oil, 8 ml (a light synthetic oil, ISO VG 32 or as the bush maker says)",,,15,,any hi-fi dealer,2026-10-18,,
 cement,buy,1,"Evonik (Röhm) ACRIFIX 2R 0190, two-component polymerising cement for cast acrylic (cures through any tint, unlike the one-part light-curing 1R 0192); Weld-On 40 or 42 is the US equivalent",,,45,,a plastics distributor,2026-10-22,,
+black-plating,buy,1,"a decorative plating shop Black nickel over bright nickel, satin, on the lead-free brass parts that show: the bearing housing, nut and washer, the platter hub and its six M4 inserts; bores and threads masked",,,75,"one prototype lot: a plater's minimum lot charge, about $60-100 (an estimate, no quote); in a production batch about $6-10 a set. Chosen over black oxide on steel or black-anodized aluminum because the parts stay the brass already drawn (no change to their mass or fits)",a local plater (one lot),2026-11-11,,

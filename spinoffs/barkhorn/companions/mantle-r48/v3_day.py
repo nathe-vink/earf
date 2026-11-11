@@ -92,6 +92,22 @@ def black_bearing():
             o.data.materials.clear(); o.data.materials.append(m); print('v3_day: satin black', n, flush=True)
 
 
+def black_hub(probe=False):
+    """No brass in sight (the coordinator, 2026-11-11): the platter's hub, its six inserts and the bushes satin black, as
+    the posts and the bearing. `probe`: a TEST only, never an output: the three in a flat green diffuse, to find the
+    frames where they show (diff against the black render)."""
+    m = bpy.data.materials.get('post-satin-black')
+    if m is None:
+        black_posts(); m = bpy.data.materials['post-satin-black']
+    if probe:
+        m = bpy.data.materials.new('probe-green'); m.use_nodes = True
+        m.node_tree.nodes['Principled BSDF'].inputs['Base Color'].default_value = (0.0, 1.0, 0.0, 1.0)
+    for n in ('platter-hub', 'platter-inserts', 'bushes'):
+        o = bpy.data.objects.get(n)
+        if o is not None:
+            o.data.materials.clear(); o.data.materials.append(m); print('v3_day:', m.name, n, flush=True)
+
+
 def strip_watts(w):
     # the light on: the LED strip (the drawing's light) emits w watts in all, both faces of its mesh (Cycles' mesh
     # emission is two-sided): radiance = w / (2 pi A)
@@ -629,6 +645,8 @@ def lighttable(watts, cct):
 
 def prepare():
     if '--satin-underside' in mine: satin_underside()
+    if '--black-hub' in mine: black_hub()
+    if '--probe-hub' in mine: black_hub(probe=True)
     if '--lighttable' in mine:
         i = mine.index('--lighttable'); lighttable(float(mine[i + 1]), float(mine[i + 2]))
     if '--uplit' in mine:
