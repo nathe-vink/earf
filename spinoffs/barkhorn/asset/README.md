@@ -49,7 +49,22 @@ is about 73 MB and not for git.
 It needs the Cloud's render model, `spinoffs/barkhorn/out-cloud/render/barkhorn-cloud.glb`, which the Cloud's fabkit
 build writes. The model is not in git. A proposal's variant gets its own file beside this one.
 
-## Strata, the leading proposal (`tropos-strata.blend`)
+## The approved build (`tropos-strata.blend`, since 2026-11-11)
+
+`tropos-strata.blend` is now built from the site's own frames: each tint exactly as `rollout.py` builds the site's tall
+front (`shots.site('front-off-tall', tint)` with `TROPOS_BASE=A`, `TROPOS_HORN=polished`): base A on its swivel feet
+(`feet-base`, `feet-stem`), the line's tints and linings (Smoke the neutral grey, 50 % through 20 mm, its lining
+#18181B), the polished horn (0.05), the black rods, no plinth and no light. The collections keep their names (Tropos
+Strata Ember ... Smoke). `tropos-strata.manifest.json` lists, per tint, its parts and each material's key values
+(base colour, roughness, transmission, IOR, the volume's colour and density, the lining's colour), so a scene that
+links it can assert itself against the approved build as `shots._approved` does.
+
+    python3.11 spinoffs/barkhorn/asset/make_blend.py --design site --name 'Tropos Strata' \
+        --out spinoffs/barkhorn/asset/tropos-strata.blend --manifest spinoffs/barkhorn/asset/tropos-strata.manifest.json
+
+The sections below describe the file as it was before (Strata on the lit plinth); `--design strata` still builds that.
+
+## Strata, the leading proposal (`tropos-strata.blend`, until 2026-11-11)
 
 `tropos-strata.blend` is the Strata proposal (`variants/STRATA.md`) in the same eight tints, the same frame and the
 same layout. Its collections are named **Tropos Strata Ember** through **Tropos Strata Smoke**, tagged `Strata` and
