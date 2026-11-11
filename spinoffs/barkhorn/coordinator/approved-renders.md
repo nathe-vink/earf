@@ -220,6 +220,23 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    frames, 240 px tiles). The coordinator matched every captured frame against the alpha frames at 1440 and 390: starts at
    f0000 with no jump, constant pace through the landing. Link sent 01:30. RULE: when the owner asks for a change to an
    asset, swap the asset and keep every behavior he has seen; never redesign motion or layout on the side.
+   HERO, 11 Nov ~02:05, the owner on both painted-room tests: "I'm not sure I love either of those. I was looking for an
+   Austin powers spy who shagged me photoshoot vibe. We need a hero image that's really going to captive people. Something
+   more editorial. We can get creative with it." -> the row is dead. Direction: a 1960s mod fashion shoot with the speakers
+   as the models (the genre, not the film; no people). Two sketches shown (r33-speaker-horn b1eabce6 hero-shoot: a rainbow
+   target, too busy; ce5d24d2 hero-shoot2: black-and-white op art, the only color is the speakers and what shows through
+   them; the coordinator's pick, still too dark and crowded). AWAITING the owner's call between them.
+   LAMPS, 11 Nov ~03:05, the owner: "What do we have to do to get dust acid and ice more colorful, and smoke look more lit
+   (particularly smoke's core) and less brown". Core colour test (r32-lamps-final ae86581b, lamp-site/core-colour-test):
+   a whiter LED alone does little; 3x dye loading in the shell gives true orange, yellow and blue; the lamp model had used
+   2074 dark gray (12.7 %) for Smoke, not the owner's gray. The coordinator's first explanation (thin shells carry too
+   little dye) was wrong and was corrected in chat: the shells already pass what a 20 mm speaker wall does.
+   OWNER DECISION 11 Nov ~03:50: "Go" on the bottom row: Dust, Acid, Ice shells at 3x loading (custom pour for the lamp
+   sheet) with 4000 K LEDs; Smoke = the owner's gray (about 54 % through 6 mm) with a 4000 K LED; Ember 2200 K, Poison and
+   Fog 2700 K, Haze 3000 K; neutral dark gray backdrop for every lamp picture. Lamps lane briefed 03:55 for the FINAL set,
+   full size, framed closer, both lamps in all eight tints, same file names.
+   SITE: Mantle finals (a1240b77) and the interim lamp pictures (42c3276c) sent to the site lane 02:55 to place and ship
+   with its next push.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
