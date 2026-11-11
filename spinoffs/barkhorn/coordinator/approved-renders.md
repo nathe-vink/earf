@@ -436,6 +436,23 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    Coordinator's check at full size: passes (black rods, polished horn, no defect). Lane's weak points: the front reads a
    little flat in the dusk; the feet are sunk in the snow. Shown to the owner 16:44 as the full-size render of the frame
    approved on 9 Nov. Fog pair rendering, then Dust, then the five proxies. Site lane gets the habitats in one batch.
+   16:45 UTC, Mantle lane 941ad388f3 (CAD and parts list in 756e2820, bcd23210): MANTLE, ALL HARDWARE SATIN BLACK.
+   The eight finals re-rendered at the same names (`renders/2026-11-10/barkhorn/mantle-r48/mantle-final-day-<tint>.png`),
+   same rig, camera and samples; emitters none; masks 0 px, no hidden mesh. Checked by the coordinator (Fog at full size,
+   the eight on a sheet): pass. Shown to the owner 16:46.
+   - Black, with the real finish: arm puck and pulley black anodized; feet hot black oxide with the posts; platter, puck
+     and motor screws, M8 studs and nuts black-oxide alloy steel; disc spring phosphated; cartridge screws black oxide,
+     washers black nylon; RB330 counterweight, bias and axle trim black (to confirm with Rega); rear plate black nickel
+     with engraved, white-filled legends; rear jacks black-bodied; motor plate black anodized.
+   - Bright by necessity (in the manifest, with reasons): the spindle (ground 440C, locates the record), the cartridge's
+     cantilever, pins and diamond, the ball and thrust plate (unseen). The asset's exporter asserts both lists.
+   - The Fog "gold patch" was the old brass hub (black since a1240b77); the glints are the vinyl seen through the platter.
+   - BOM +$115 (estimate): $3,842 -> $3,957.
+   - CAD, parts list, engine file, .blend and manifest now agree (the engine file regenerated from the CAD).
+   - Open: (1) edges, sharp and satin as signed, or a 1 mm polished chamfer: `mantle-edge-options.png` ordered (Ice);
+     (2) the lid and its hinge blocks: with the owner (coordinator proposes a lift-off cover, no hinge blocks);
+     (3) RB330 in black depends on Rega; (4) puck screws go countersunk and flush (CAD now, renders with the edge pick).
+   Speaker lane told 16:46 to take the asset at 941ad388. The site gets the eight with the next batch.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
