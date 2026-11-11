@@ -61,7 +61,7 @@
  },
  "assign": [
   {
-   "match": "collar|clamp|hub|pins|carrier|stem|crown|gland|suspension",
+   "match": "collar|clamp|hub|pins|carrier|stem|crown|gland|suspension|canopy",
    "material": "anodised"
   },
   {
@@ -89,7 +89,7 @@
    "material": "steel"
   },
   {
-   "match": "ring|canopy",
+   "match": "ring",
    "material": "trim"
   },
   {

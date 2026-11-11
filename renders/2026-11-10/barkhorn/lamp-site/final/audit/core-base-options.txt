@@ -1,0 +1,34 @@
+Timer 'STL Import' took 1.08 ms
+Timer 'STL Import' took 3.05 ms
+Timer 'STL Import' took 3.15 ms
+Timer 'STL Import' took 0.47 ms
+Timer 'STL Import' took 0.26 ms
+Timer 'STL Import' took 0.79 ms
+Timer 'STL Import' took 0.44 ms
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:400: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  wm_ = bpy.data.materials.new(f'window-{tint}'); wm_.use_nodes = True; nt_ = wm_.node_tree; nt_.nodes.clear()
+Timer 'STL Import' took 0.29 ms
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:177: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m = bpy.data.materials.new(nm); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+Timer 'STL Import' took 0.94 ms
+Timer 'STL Import' took 0.43 ms
+Timer 'STL Import' took 0.22 ms
+Timer 'STL Import' took 0.73 ms
+Timer 'STL Import' took 0.36 ms
+Timer 'STL Import' took 0.22 ms
+Timer 'STL Import' took 1.11 ms
+Timer 'STL Import' took 0.51 ms
+Timer 'STL Import' took 0.33 ms
+Timer 'STL Import' took 0.67 ms
+Timer 'STL Import' took 0.39 ms
+Timer 'STL Import' took 0.24 ms
+00:17.313  cycles           | WARNING CUEW initialization failed: Error opening the library
+AUDIT baseopts-red hidden [] no-shadow [] lights [('key', 'AREA', 270.925), ('fill', 'AREA', 60.0), ('kicker', 'AREA', 18.0), ('led-red', 'AREA', 2.978), ('led-red.001', 'AREA', 2.978), ('led-red.002', 'AREA', 2.978)]
+HIDDENCAST baseopts-red: 3 hidden, 0 in frame
+   out         0.0 %  area lamp (ellipse) key
+   out         0.0 %  area lamp (ellipse) fill
+   out         0.0 %  area lamp (rectangle) kicker
+00:18.124  render           | Saved: '/home/user/earf/renders/2026-11-10/barkhorn/lamp-site/final/masks/core-base-options-key.png'
+00:20.110  render           | Saved: '/home/user/earf/renders/2026-11-10/barkhorn/lamp-site/final/masks/core-base-options-fill.png'
+00:22.123  render           | Saved: '/home/user/earf/renders/2026-11-10/barkhorn/lamp-site/final/masks/core-base-options-kicker.png'
+CASTCHECK baseopts-red {'key': 0.0, 'fill': 0.0, 'kicker': 0.0}

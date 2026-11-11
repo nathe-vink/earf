@@ -344,7 +344,9 @@ def north_parts(p=N):
         # in its top for the board (1.8 deep: the board 0.2 under the carrier's face), so the LEDs' emitting faces are at
         # z 4.9 (nothing below the rim)
         cd_, ct_ = p['carrier']; bd_, bt_ = p['board']
-        carrier = cyl('z', (0, 0), cd_, 0.0, ct_) - cyl('z', (0, 0), bd_ + 0.2, ct_ - bt_ - 0.2, ct_ + 1) - cyl('z', (0, 0), sid, -1, ct_ + 1)
+        # 2026-11-11 (the bar: from below it must look finished): the carrier's underside closed (the stem's bore blind, 1
+        # mm of floor; the wires come up the stem to the board's top) and its edges eased 0.6
+        carrier = eased(cd_, 0.0, ct_, 0.6) - cyl('z', (0, 0), bd_ + 0.2, ct_ - bt_ - 0.2, ct_ + 1) - cyl('z', (0, 0), sid, 1.0, ct_ + 1)
         board = cyl('z', (0, 0), bd_, ct_ - bt_ - 0.2, ct_ - 0.2) - cyl('z', (0, 0), sod + 0.4, ct_ - bt_ - 1, ct_ + 1)
         leds = None
         for k in range(24):
@@ -356,8 +358,10 @@ def north_parts(p=N):
         stem = cyl('z', (0, 0), sod, ct_ - bt_ - 0.2, z0 + 24.5) - cyl('z', (0, 0), sid, ct_ - bt_ - 1, z0 + 26)
         # the crown's inside white: a white Ø80 disc, 1 thick, under the hub (and the collar's flange face painted white)
         wdisc = cyl('z', (0, 0), p['white_disc'], z0 - 1.0, z0) - cyl('z', (0, 0), sod + 0.4, z0 - 2, z0 + 1)
-    crown = cyl('z', (0, 0), sd, sz0, sz1) - cyl('z', (0, 0), nd + 0.2, sz0 - 1, nz) - cyl('z', (0, 0), 10, sz0 - 1, sz1 + 1)
-    gland = cyl('z', (0, 0), cd, sz1, sz1 + ch) - cyl('z', (0, 0), 8, sz1 - 1, sz1 + ch + 1)
+    # 2026-11-11 (the bar: the cap reads as turned parts): the crown and the gland with eased 1.0 edges, so each terrace
+    # catches a soft highlight
+    crown = eased(sd, sz0, sz1, 1.0) - cyl('z', (0, 0), nd + 0.2, sz0 - 1, nz) - cyl('z', (0, 0), 10, sz0 - 1, sz1 + 1)
+    gland = eased(cd, sz1, sz1 + ch, 1.0) - cyl('z', (0, 0), 8, sz1 - 1, sz1 + ch + 1)
     z_cord = sz1 + ch
     cord = cyl('z', (0, 0), 6, z_cord, z_cord + p['drop'])
     zc = z_cord + p['drop']
@@ -399,7 +403,7 @@ def north_parts(p=N):
              notes=['16/12 aluminium tube, black anodised, from the carrier up into the hub\'s socket, bonded and '
                     'cross-pinned; the wires up its bore; a heat pipe inside it optional (about 2.5 W of heat)']),
         Part('white-disc', wdisc, Machined('aluminium', 'laser'), finish='white', group='fixture',
-             notes=['a white Ø80 x 1 disc under the hub (white powder coat), and the collar\'s flange face inside painted '
+             notes=['a white Ø95 x 1 disc under the hub (Ø80 until 2026-11-11: Ø95 hides the collar\'s slots and seams from below) (white powder coat), and the collar\'s flange face inside painted '
                     'white: the crown\'s inside white, so the light the shade sends back up returns down']),
     ] if ring_ else [
         Part('reflector', refl, Bought('north-reflector'), finish='anodised', group='fixture', inside=True),
@@ -410,13 +414,14 @@ def north_parts(p=N):
                     'collar, turned from 6061 bar, black anodised (emissivity about 0.85: half its loss is radiation), on '
                     'the core\'s neck on a thermal pad, 0.5 clear of the PEEK ring and the collar']),
         Part('gland', gland, Machined('aluminium', 'lathe'), finish='anodised', group='fixture',
-             notes=['the cap, 40 x 14: aluminium, black anodised and polished (round 32f\'s was black acrylic: here it '
+             notes=['the cap, 40 x 14: 6061, turned, edges eased 1.0, SATIN black anodised (2026-11-11; was polished) (round 32f\'s was black acrylic: here it '
                     'runs at the hub\'s 49 to 52 C), over the listed cord grip (the strain relief, tested with the '
                     'fixture\'s weight), on two M3 into the crown; part of the heat sink']),
         Part('cord', cord, Bought('hemi-cord'), finish='cord', group='fixture'),
         Part('suspension', susp, Bought('hemi-suspension'), finish='anodised', group='fixture', option='suspension'),
-        Part('canopy', canopy, Machined('cast-acrylic', 'lathe'), finish='trim', group='canopy',
-             notes=['150 x 50, black cast acrylic, polished: a cover only (review 2026-11-01), screwed to the steel '
+        Part('canopy', canopy, Machined('aluminium', 'lathe'), finish='anodised', group='canopy',
+             notes=['150 x 50, 6061 turned, SATIN black anodised (2026-11-11, the bar: one hardware finish; was polished '
+                    'black acrylic): a cover only (review 2026-11-01), screwed to the steel '
                     'strap, which carries the load; the driver and the splices are in the steel enclosure']),
         Part('strap', strap, Bought('hemi-canopy-strap'), finish='steel', group='canopy', inside=True),
         Part('enclosure', encl, Bought('hemi-driver-box'), finish='steel', group='canopy', inside=True),
@@ -432,7 +437,7 @@ def north_parts(p=N):
 V3 = dict(N, shell=3.0, liner=6.0, skin=3.0, build='v3',
           # option 3 (the owner, 2026-11-10: "it should work like core cut in half"): the light at the mouth's centre,
           # facing up into the shade, on a stem from the hub; the COB, its reflector and holder gone
-          engine='ring', carrier=(56.0, 4.5), board=(50.0, 1.6), stem=(16.0, 12.0), white_disc=80.0)
+          engine='ring', carrier=(56.0, 4.5), board=(50.0, 1.6), stem=(16.0, 12.0), white_disc=95.0)   # 2026-11-11: Ø95, hides the collar's slots from below
 
 
 def dome_parts(p=None):
@@ -739,7 +744,7 @@ NOTES_DOME = [
     'mouth\'s centre and faces up into the shade, so the shade glows in its tint and the light cast down is the bulb\'s. '
     'A Ø50 ring board of 24 mid-power LEDs (two strings of 12 at about 90 mA, about 1,000 lm, about 200 lux under the '
     'lamp) on a black Ø56 x 4.5 carrier, its underside on the rim plane, the LEDs\' faces about 5 above it; a 16/12 '
-    'black anodised stem up to the hub; the crown\'s inside white (a white Ø80 disc under the hub, the collar\'s flange '
+    'black anodised stem up to the hub; the crown\'s inside white (a white Ø95 disc under the hub, the collar\'s flange '
     'face white); the opal to the rim. The COB, its reflector and holder are gone; the ERP driver, the Class 2 cord, '
     'the canopy and the UL 1598 path stay. Without a lens until a stock side-emitting ring optic with an IES file is '
     'named. Heat test needed: the hub about 6 K warmer than today (estimate). The notes below describe the COB build.',

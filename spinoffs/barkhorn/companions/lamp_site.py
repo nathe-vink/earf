@@ -46,6 +46,15 @@ LED_CCT.update({'orange': 4000, 'amber': 4000, 'blue': 4000, 'black': 4000})
 # the outer shell's dye loading per tint, as a multiple of the chart figure at the wall (Core's 6 mm at 0.5, Hemisphere's
 # 3 mm at 1): Dust, Acid and Ice a custom pour at 3x; Smoke the speakers' own pour (about 54 % through Core's 6 mm),
 # 0.3x; the rest 1x
+# Core's base options (2026-11-11, for the owner): the turned outside of base and touch ring, (r, z) in mm from the
+# base's foot (the dock's pocket floor). A: the CAD's angled base as drawn. B: the same cone, the top edge turned over in
+# a 7 mm bullnose where it meets the ball (rim at z 38, as now). C: a classic crystal-ball stand, as narrow as the base allows
+# (2026-11-11, the bar: narrower than its ball): a rounded foot ring Ø129, a shallow concave waist Ø118.6 (5 mm outside
+# the cells' bays at r 54.2), a rounded rim Ø126.6 rising to z 40.8 that cradles the ball (meeting it at r 53.6, z 40.6). The ball's place is unchanged
+BASE_PROFILES = {'B': [(49, 0), (60, 0), (60, 1.5), (71.71, 1.5), (60.0, 30.0), (60.0, 31.0), (59.894, 32.216), (59.578, 33.394), (59.062, 34.5), (58.362, 35.5), (57.5, 36.362), (56.5, 37.062), (55.394, 37.578), (54.216, 37.894), (53.0, 38.0), (50.3, 38.0), (49, 38.0)], 'C': [(49, 0), (60, 0), (60, 1.5), (63, 1.5), (64.2, 2.3), (64.6, 3.8), (64.2, 5.3), (63, 6.3), (61.5, 7.8), (60.3, 10), (59.6, 13), (59.3, 16), (59.4, 19), (59.9, 22), (60.8, 25), (61.9, 28), (62.8, 31), (63.3, 34), (63.2, 36.5), (62.4, 38.5), (60.8, 39.9), (58.6, 40.6), (56, 40.8), (53.6, 40.6), (51, 39.5), (49, 39.5)]}
+_iC = BASE_PROFILES['C'].index((62.8, 31))
+BASE_LOW = {'A': [(60, 0), (60, 1.5), (71.71, 1.5), (60, 30)], 'B': BASE_PROFILES['B'][1:5], 'C': BASE_PROFILES['C'][1:_iC + 1]}
+BASE_UP = {'B': BASE_PROFILES['B'][4:], 'C': BASE_PROFILES['C'][_iC:]}       # the touch ring (A: the CAD's ring)
 TINT_LOAD = {'orange': 3.0, 'amber': 3.0, 'blue': 3.0, 'black': 0.3}
 # the site's colour keys (web.py HABITAT) to the tints
 COLOURS = {'red': 'Ember', 'orange': 'Dust', 'amber': 'Acid', 'green': 'Poison', 'blue': 'Ice', 'violet': 'Haze',
@@ -74,7 +83,7 @@ def build(frame, samples, scale):
     def bbt(tint):
         return blackbody(CCT_PER_TINT.get(tint, 2700) if pertint else CCT)
     bb = blackbody(CCT)
-    kind0 = 'dome' if frame.startswith(('lamps-domes', 'trio-')) else 'orb' if frame.startswith('lamps-orbs') else frame.split('-')[0]
+    kind0 = 'dome' if frame.startswith(('lamps-domes', 'trio-')) else 'orb' if frame.startswith(('lamps-orbs', 'baseopts')) else frame.split('-')[0]
     # the studio's brightness and the exposure move together, so the paper holds its tone while the lamp, at its real
     # output, comes out of clipping: a brighter studio, one scale
     # round 3 (the gate, wf_5760aeac-7cd): Hemisphere's studio x1 with the camera at -2 EV (the lamp up 1 EV against the
@@ -159,7 +168,9 @@ def build(frame, samples, scale):
     steel = SC.principled('steel', '#C9C9C6', 0.25, 1.0, bump=(2500.0, 0.6))
     # the bore's reflector: high-reflectance aluminium, faceted (crystal.py): a bright, low-roughness metal
     refl = SC.principled('reflector', os.environ.get('REFL_COL', '#F2F2F0'), float(os.environ.get('REFL_R', '0.12')), 1.0)
-    cap = SC.principled('cap', '#3A3A3E', 0.45, metallic=0.3, bump=(4000.0, 0.15))
+    # 2026-11-11 (the bar: one hardware finish, satin black): the cap's turned parts satin black anodized, a soft
+    # sheen so each eased edge catches a highlight (was a flat dark grey, read as a lump)
+    cap = SC.principled('cap', '#161618', 0.38, metallic=1.0, bump=(4000.0, 0.08))
 
     oc_ = (0.93, 0.93, 0.92)                      # the CAD's neutral opal
     def opal(nm):
@@ -324,15 +335,57 @@ def build(frame, samples, scale):
             em.cycles.emission_sampling = 'FRONT'
             me.materials.append(em)
 
-    def core(tint, x, floor_z, y=0.0, rot=0.0):
+    def core(tint, x, floor_z, y=0.0, rot=0.0, base=None):
         """Core A as drawn, on its dock, lit, the dock's underside on floor_z at (x, y)."""
         tname = COLOURS[tint]; bb = bbt(tint)
         z0 = floor_z + 0.0065                         # the dock's underside on the floor (as lamp_pictures: the CAD's
                                                       # dock underside sits 6.5 below its origin)
         objs = []
-        for nm, m in (('dock', satin_black), ('base', satin_black), ('ring', satin_an), ('seat', SC.principled('si', '#111111', 0.6)),
+        base = base or os.environ.get('CORE_BASE', 'A')
+        def revolve(nm, prof, mat, flip=False, off=0.0):
+            # a turned surface: the (r, z) profile in mm (material on its left as it is walked) spun about the axis,
+            # its normals outward (flip: inward), the profile moved in by `off` mm
+            bm = bmesh.new(); n_ = 192
+            pr = [(max(r_ - off, 0.1), z_) for r_, z_ in prof]
+            rings = [[bm.verts.new((r_ * MM * math.cos(2 * math.pi * k / n_), r_ * MM * math.sin(2 * math.pi * k / n_), z_ * MM))
+                      for k in range(n_)] for r_, z_ in pr]
+            for i in range(len(pr) - 1):
+                dr, dz = pr[i + 1][0] - pr[i][0], pr[i + 1][1] - pr[i][1]
+                if abs(dr) + abs(dz) < 1e-9:
+                    continue
+                o2 = (dz, -dr)                                     # outward in (r, z): the right of the walk
+                for k in range(n_):
+                    k2 = (k + 1) % n_
+                    f_ = bm.faces.new((rings[i][k], rings[i][k2], rings[i + 1][k2], rings[i + 1][k]))
+                    f_.normal_update(); a_ = 2 * math.pi * (k + 0.5) / n_
+                    want = (o2[0] * math.cos(a_), o2[0] * math.sin(a_), o2[1])
+                    if (f_.normal.x * want[0] + f_.normal.y * want[1] + f_.normal.z * want[2] < 0) != flip:
+                        f_.normal_flip()
+                    f_.smooth = True
+            me = bpy.data.meshes.new(nm); bm.to_mesh(me); bm.free(); me.materials.append(mat)
+            ob_ = bpy.data.objects.new(nm, me); bpy.context.scene.collection.objects.link(ob_); ob_.location = (x, y, z0)
+            return ob_
+        own = os.environ.get('BASE_MAT') == 'own'
+        if base in BASE_PROFILES or own:
+            # base options for the owner (2026-11-11: "the base should look like the base of a crystal ball"; "the same
+            # color acrylic for the base ... in satin"): the turned outside as a revolved profile (r, z in mm from the
+            # base's foot). Satin black, or OWN COLOUR: the lower part (below the touch ring) a 6 mm skin of the shell's
+            # own pour (the same loading as the ball's 6 mm wall), satin outside, over a white opal liner that hides the
+            # battery, board and contacts; the touch ring stays satin black anodized. Only the outside is seen
+            lo_, up_ = BASE_LOW[base], BASE_UP.get(base)
+            if own:
+                ld_ = float(os.environ.get('CORE_LOAD', 0.5 * TINT_LOAD.get(tint, 1.0)))
+                sk = acrylic(f'base-skin-{tint}', 0.55, tname, ld_)        # satin outside: a fine bead-blast, as rough glass
+                revolve(f'base-skin-{base}-{tint}', lo_, sk)
+                revolve(f'base-skin-in-{base}-{tint}', lo_, acrylic(f'base-skin-in-{tint}', 0.0, tname, ld_), flip=True, off=6.0)
+                revolve(f'base-liner-{base}-{tint}', lo_, SC.principled('base-liner', '#EDEDEA', 0.8), off=6.4)
+            else:
+                revolve(f'base-{base}-{tint}', lo_, satin_black)
+            if up_:
+                revolve(f'base-ring-{base}-{tint}', up_, satin_an)
+        for nm, m in tuple(p_ for p_ in (('dock', satin_black), ('base', satin_black), ('ring', satin_an), ('seat', SC.principled('si', '#111111', 0.6)),
                       ('dock-cable', SC.principled('braid', '#121212', 0.75, bump=(1200.0, 0.5)))) + \
-                     (('grommet', an),):   # (B: the CAD's raised grommet, its flange and spigot, 2026-11-10)
+                     (('grommet', an),) if not ((base in BASE_PROFILES or own) and p_[0] in ('base', 'ring') and not (base == 'A' and p_[0] == 'ring'))):
             objs.append(part('out-orb-table', nm, m, (x, y, z0)))   # (the base and dock angled, the owner, 2026-11-10)
         # the light well, white PTFE round the window (2026-11-10)
         part('out-orb-table', 'well', SC.principled('ptfe', '#F7F7F5', 0.7), (x, y, z0))
@@ -477,6 +530,12 @@ def build(frame, samples, scale):
         for i, t in enumerate(row):
             hemisphere(t, (i - (len(row) - 1) / 2) * 0.25, 0.45, y=0.0)
         cam = ((0.0, -2.9, 0.47), (0.0, 0.0, 0.45), 50.0)
+    elif frame.startswith('baseopts'):
+        # core-base-options (2026-11-11): three Cores side by side, Ember, bases A, B, C; 2400 x 1000
+        W, H = 2400, 1000
+        for b_, x_ in (('A', -0.24), ('B', 0.0), ('C', 0.24)):
+            core(tint or 'red', x_, 0.0, base=b_)
+        cam = tuple(eval(os.environ['BASECAM'])) if os.environ.get('BASECAM') else ((0.0, -1.10, 0.36), (0.0, 0.0, 0.085), 58.0)
     elif frame.startswith('trio-'):
         # trio-<k1>-<k2>-<k3> (the owner, 2026-11-11: "I like having to pair multiple"): three Hemispheres hung close
         # over a table at slightly different heights, seen a little from below and to one side; 2000 x 1600
