@@ -74,7 +74,7 @@
    "material": "anodised"
   },
   {
-   "match": "shell",
+   "match": "shell|skin",
    "material": "body"
   },
   {
@@ -86,7 +86,7 @@
    "material": "led"
   },
   {
-   "match": "core",
+   "match": "core|liner",
    "material": "liner"
   },
   {

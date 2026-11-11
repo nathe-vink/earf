@@ -125,7 +125,7 @@ O = dict(R=80.0, shell=9.0, base=(120.0, 30.0), ring=8.0, rim_r=50.0, port=40.0)
 # ball frosted inside), the record: orb_parts(O_A) builds it
 O_A = dict(O, design='A')
 O = dict(O, design='B', shell=6.0, core=(70.0, 3.0, 0.0), grommet_wall=9.0, flange=52.0,   # core: R outside, wall, drop below
-         angled=True, well=True)   # the owner, 2026-11-10: "I like the angled base for core"; the light well white
+         angled=True, well=True, own_skin=True)   # own_skin: the owner, 2026-11-11, "Own color for sure"; the owner, 2026-11-10: "I like the angled base for core"; the light well white
 
 ORB_LIGHT = None                       # set below from the ball's centre
 
@@ -563,7 +563,18 @@ def orb_parts(p=O):
     def frustum(za, zb):
         from build123d import Cone, Pos, Align
         return Pos(0, 0, za) * Cone(cone_r(za), cone_r(zb), zb - za, align=(Align.CENTER, Align.CENTER, Align.MIN))
-    if ang_:
+    own_ = p.get('own_skin', False) and ang_
+    if own_:
+        # BASE B IN ITS OWN COLOUR (the owner, 2026-11-11: "Own color for sure"; the coordinator: the whole base, lip
+        # included, option (a)): the outside is one 6 mm skin formed from the shell's own lamp sheet, satin, over a 0.5
+        # white liner, from the ball's seat to the floor (the dock under its skirt); its lip a bullnose R12 (opened from
+        # R7 so 6 mm sheet forms in one piece). Inside it, this black body: the cone 7.2 in from the skin's outside to
+        # z 25, then a Ø98 column to the top; the cells, board, well and contacts as before
+        def frustum_in(za, zb, d):
+            from build123d import Cone, Pos, Align
+            return Pos(0, 0, za) * Cone(cone_r(za) - d, cone_r(zb) - d, zb - za, align=(Align.CENTER, Align.CENTER, Align.MIN))
+        base = (cyl('z', (0, 0), bd, 0, 1.5) + frustum_in(1.5, 25.0, 7.2) + cyl('z', (0, 0), 98.0, 25.0, bh)) - cup - cyl('z', (0, 0), 112.0, -1, hz)
+    elif ang_:
         base = (cyl('z', (0, 0), bd, 0, 1.5) + frustum(1.5, bh)) - cup - cyl('z', (0, 0), 112.0, -1, hz)
     else:
         base = eased(bd, 0, bh, 3.0, top=False) - cup - cyl('z', (0, 0), 112.0, -1, hz)
@@ -598,14 +609,40 @@ def orb_parts(p=O):
     dock_board = box(-19.0, 46.0, -4.5, 19.0, 69.0, -2.9)
     db_ = 0.0
     if p.get('angled', False):        # the slope comes within 0.1 of the board's pocket's outer corners: it moves 2.5 in
-        db_ = 2.5; dock_board = box(-19.0, 46.0 - db_, -4.5, 19.0, 69.0 - db_, -2.9)
+        db_ = 9.0 if p.get('own_skin', False) else 2.5      # (own colour: the dock 7 in, under the skirt: 9 in)
+        dock_board = box(-19.0, 46.0 - db_, -4.5, 19.0, 69.0 - db_, -2.9)
     dock_cable = cyl('y', (0, -2.75), 4.0, 74.6, 180.0)
-    dock = ((frustum(dz0, 1.3) if ang_ else eased(150.0, dz0, 1.5, 1.5)) - cyl('z', (0, 0), 122.0, 0, 3) - contacts - box(-20.0, 45.0 - db_, -5.0, 20.0, 70.0 - db_, -1.0) -
+    if own_:
+        from build123d import Cone, Pos, Align
+        dock_out = Pos(0, 0, dz0) * Cone(cone_r(dz0) - 7.0, cone_r(1.3) - 7.0, 1.3 - dz0, align=(Align.CENTER, Align.CENTER, Align.MIN))
+    dock = ((dock_out if own_ else frustum(dz0, 1.3) if ang_ else eased(150.0, dz0, 1.5, 1.5)) - cyl('z', (0, 0), 122.0, 0, 3) - contacts - box(-20.0, 45.0 - db_, -5.0, 20.0, 70.0 - db_, -1.0) -
             cyl('y', (0, -2.75), 4.2, 60.0, 80.0))
     base = base - (cyl('z', (0, 0), 118, -1, 2) - cyl('z', (0, 0), 114, -2, 3)) - cyl('z', (0, 0), 92.4, zs - 2, zs + 0.01)
     # the owner's pick, 2026-11-11 ("I like B"): the touch ring's top edge turned over in a 7 mm bullnose where it meets
     # the ball, so the ball nests into it (was 2.0)
     ring = eased(bd, bh, z_top, 7.0 if p.get('angled', False) else 2.0, bottom=False) - cup
+    skin = liner = None
+    if own_:
+        # the touch electrode: an aluminium ring Ø98 behind the lip's end, the touch through the 6 mm skin (to
+        # prototype-test; fallback: the lip's skin 3-4 mm over it)
+        ring = eased(98.0, bh, 37.5, 1.0, bottom=False) - cup
+        # the skin and liner, revolved from their (r, z) outlines
+        from build123d import BuildSketch, BuildLine, Polyline, make_face, revolve, Plane, Axis
+        cz_, cr_ = 25.5, 49.85                                  # the lip's centre: R12 outside, R6 inside
+        arc = lambda R: [(cr_ + R * math.cos(math.radians(a)), cz_ + R * math.sin(math.radians(a))) for a in range(0, 91, 6)]
+        out_ = [(cone_r(dz0), dz0)] + arc(12.0)
+        in_ = arc(6.0)[::-1] + [(cone_r(cz_) - 6.5, cz_), (cone_r(dz0) - 6.5, dz0)]
+        def rev(pts):
+            with BuildSketch(Plane.XZ) as sk_:
+                with BuildLine():
+                    Polyline(*pts, close=True)
+                make_face()
+            return revolve(sk_.sketch, Axis.Z)
+        # the cable leaves under the skirt's back through a small arch (Ø9.2), edges polished
+        notch = cyl('y', (0, -2.75), 9.2, 55.0, 90.0)
+        skin = rev(out_ + in_) - notch
+        lin_o = arc(6.0) ; lin_i = arc(5.5)[::-1] + [(cone_r(cz_) - 7.0, cz_), (cone_r(dz0) - 7.0, dz0)]
+        liner = rev([(cone_r(dz0) - 6.5, dz0), (cone_r(cz_) - 6.5, cz_)] + lin_o + lin_i) - notch
     ring = ring - (cyl('z', (0, 0), 92.4, zs - 2, zs + 0.01) - cyl('z', (0, 0), 83.6, zs - 3, zs + 1))
     base = base - slot - pads
     if B_:
@@ -656,14 +693,28 @@ def orb_parts(p=O):
                'bright after anodizing (a reflector up into the core). The grommet goes into the port from inside before '
                'the outer halves are joined'] if B_ else [])),
         Part('base', base, Machined('cast-acrylic-satin', 'lathe', setup_usd=80.0), finish='trim', group='base',
-             notes=['SATIN (the owner, 2026-11-11: "satin or matte instead of shiny plastic"): black cast acrylic, turned, then '
+             notes=['WITH THE BASE IN ITS OWN COLOUR (2026-11-11, the default): this is the hidden inner body, black cast '
+                    'acrylic, turned, 7.2 inside the skin, holding the cells, board, well and contacts. '
+                    'SATIN (the owner, 2026-11-11: "satin or matte instead of shiny plastic"): black cast acrylic, turned, then '
                     'bead-blasted to a fine satin close to matte, no mirror highlights (the default until the owner chooses; '
                     'OPTION: turned 6061, satin black anodized, about +345 g, the touch ring then insulated from it). '
                     'Turned from rod: 120 x 30 (round 32f\'s), the cup turned in it; from '
                     'below the hatch\'s counterbore (112), the middle pocket (50) for the chassis, the board and the LED, '
                     'the three cells\' bays, the ballast\'s corners and the cable notch']),
+    ] + ([Part('skin', skin, Machined('acrylic-trucast-formed', 'formed', setup_usd=1200.0), finish='body', group='base',
+               notes=['BASE B IN ITS OWN COLOUR (the owner, 2026-11-11: "Own color for sure"): one skin drape-formed from the '
+                      'shell\'s own 6 mm lamp sheet (the same pour, so the same colour), from the ball\'s seat to the floor, '
+                      'the lip a bullnose R12 in the same piece (R7 will not form in 6 mm), trimmed, edges polished with an even '
+                      'chamfer, the outside fine glass-bead blasted and sealed with a matte anti-fingerprint hardcoat; bonded '
+                      'to the body. The mould is a one-time cost (setup). The whole base in colour: about $150-200 a lamp '
+                      '[E] (the skin $30-50 at volume, the body $100-120, the liner $8-12, the electrode $10-15)']),
+          Part('liner', liner, Machined('acrylic-opal-core', 'formed'), finish='liner', group='base', inside=True,
+               notes=['a 0.5 white opal liner under the skin, so the colour reads evenly and nothing inside shows'])]
+         if skin is not None else []) + [
         Part('ring', ring, Machined('aluminium', 'lathe'), finish='anodised', group='base',
-             notes=['aluminium, black anodised, satin, its top edge turned to a 7 mm bullnose the ball nests into (the '
+             notes=(['THE TOUCH ELECTRODE (2026-11-11): with the base in its own colour this ring sits behind the skin\'s lip '
+                     '(Ø98), the touch through the 6 mm acrylic: TO PROTOTYPE-TEST (fallback: the lip\'s skin 3-4 mm over '
+                     'it). '] if skin is not None else []) + ['aluminium, black anodised, satin, its top edge turned to a 7 mm bullnose the ball nests into (the '
                     'owner\'s pick B, 2026-11-11), insulated from the chassis: the touch (tap to switch, hold to dim, '
                     '2200 to 2700 K)']),
     ] + ([Part('well', well, Machined('ptfe', 'lathe'), finish='white', group='base',
