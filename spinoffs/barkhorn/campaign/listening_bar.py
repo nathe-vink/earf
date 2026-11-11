@@ -83,12 +83,19 @@ def shell(prof, t=0.0025, base=0.007):
 
 
 def contents(prof, fill, t=0.0025, base=0.007):
-    """What is in it: the inside, up to `fill` (m), a hair inside the glass (no shared faces)."""
-    inner = sorted(([max(r - t - 0.0006, 0.001), z] for r, z in prof if base < z < fill and r > 0), key=lambda p: p[1])
-    if not inner:
+    """What is in it: the inside, up to `fill` (m), a hair inside the glass (no shared faces); the inner radius
+    interpolated along the profile, so any fill height works."""
+    pts = [(r, z) for r, z in prof if not (r == 0 and z > 0)]
+    def r_at(z):
+        for (r0, z0), (r1, z1) in zip(pts, pts[1:]):
+            if z0 <= z <= z1 and z1 > z0:
+                return r0 + (r1 - r0) * (z - z0) / (z1 - z0)
+        return pts[-1][0]
+    zs = sorted({base + 0.0006, fill} | {z for _, z in pts if base < z < fill})
+    if fill <= base + 0.001:
         return None
-    r_top = inner[-1][0]
-    return [[0.0, base + 0.0006], [inner[0][0], base + 0.0006]] + inner + [[r_top, fill], [0.0, fill]]
+    ring = [[max(r_at(z) - t - 0.0006, 0.001), round(z, 5)] for z in zs]
+    return [[0.0, zs[0]]] + ring + [[0.0, fill]]
 
 
 LIQUOR = {'amber': ('resin', '#9A4C10'), 'dark': ('resin', '#2A1406'), 'clear': ('glass', '#F3F1EA'), 'gold': ('resin', '#C08A2A')}
