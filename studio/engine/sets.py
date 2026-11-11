@@ -63,6 +63,29 @@ def haze(bpy, spec):
 
 
 # --- sweep ---------------------------------------------------------------------------------------------------------
+def _rings(mat, r):
+    """A painted target on the paper (2026-11-11, the site's hero): concentric bands `width` m wide by 3D distance from
+    `center` [x, y, z], in `colors` in turn from the centre out; the paper's own roughness and grain kept."""
+    nt = mat.node_tree; b = next(n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED')
+    geo = nt.nodes.new('ShaderNodeNewGeometry')
+    c = nt.nodes.new('ShaderNodeCombineXYZ')
+    for k, v in zip('XYZ', r['center']):
+        c.inputs[k].default_value = v
+    dist = nt.nodes.new('ShaderNodeVectorMath'); dist.operation = 'DISTANCE'
+    nt.links.new(geo.outputs['Position'], dist.inputs[0]); nt.links.new(c.outputs['Vector'], dist.inputs[1])
+    cols = r['colors']; n = len(cols); w = r.get('width', 0.45)
+    div = nt.nodes.new('ShaderNodeMath'); div.operation = 'DIVIDE'; div.inputs[1].default_value = w * n
+    nt.links.new(dist.outputs['Value'], div.inputs[0])
+    fr = nt.nodes.new('ShaderNodeMath'); fr.operation = 'FRACT'; nt.links.new(div.outputs['Value'], fr.inputs[0])
+    ramp = nt.nodes.new('ShaderNodeValToRGB'); cr = ramp.color_ramp; cr.interpolation = 'CONSTANT'
+    while len(cr.elements) < n:
+        cr.elements.new(0.5)
+    for k, el in enumerate(cr.elements):
+        el.position = k / n; el.color = M.hex_lin(cols[k])
+    nt.links.new(fr.outputs['Value'], ramp.inputs['Fac'])
+    nt.links.new(ramp.outputs['Color'], b.inputs['Base Color'])
+
+
 def sweep(bpy, spec, mats):
     """A cove: floor from y = -front to the curve, the curve of `radius`, the wall up to `height`, `width` across."""
     W, front, back = spec.get('width', 8.0), spec.get('front', 6.0), spec.get('depth', 2.0)
@@ -103,6 +126,8 @@ def sweep(bpy, spec, mats):
         mat = M.make(bpy, nm, 'sweep', {'color': colr, 'contact': ct.get('strength', 0.0),
                                         'contact_m': ct.get('distance_m', 0.05), 'core': ct.get('core_strength', 0.0),
                                         'core_m': ct.get('core_distance_m', 0.025), **mats.get('sweep', {})})
+        if spec.get('rings'):
+            _rings(mat, spec['rings'])
         ob = _obj(bpy, nm, me, mat)
         if spec.get('cast_shadow') is False:           # the paper casts no shadow: a sun behind the wall reaches the floor
             ob.visible_shadow = False

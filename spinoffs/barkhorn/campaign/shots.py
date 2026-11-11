@@ -1721,7 +1721,7 @@ def hero_centres(s, z=0.55):
         p = np.array([i['position'][0], i['position'][1], z]) - c; zz = p @ f
         X = ((p @ r) / zz * lens - sx * sw) / hx; Y = ((p @ u) / zz * lens - sy * sw) / hy
         out.append({'tint': HERO_ORDER[k], 'x': round(float((X + 1) / 2 * 100), 2), 'y': round(float((1 - Y) / 2 * 100), 2),
-                    'color': s['set']['stripes'][k]['color']})
+                    'color': (s['set'].get('stripes') or [{}] * (k + 1))[k].get('color')})
     return out
 
 
@@ -1796,4 +1796,89 @@ def hero_room2(fan=HERO_FAN):
                 'irradiance': 1.4, 'color': '#FFF5E8'}}
     s['camera'] = {'position': [0.0, -9.9, 0.9], 'target': [0.0, 0.0, 0.75], 'lens_mm': 40.0, 'level': True}
     s['title'] = 'Tropos, the eight fanned on wide stripes in a painted room'
+    return s
+
+
+def _aim_rot(frm, to):
+    """Euler (deg) turning a kit cylinder's +z axis from `frm` toward `to`."""
+    import math
+    d = [t - f for f, t in zip(frm, to)]; L = math.sqrt(sum(v * v for v in d)); d = [v / L for v in d]
+    return [round(math.degrees(math.acos(max(-1, min(1, d[2])))), 2), 0.0, round(math.degrees(math.atan2(d[0], -d[1])), 2)]
+
+
+def _stand(name, base, head_z, legs=0.45):
+    """A period lamp stand: a column and three splayed legs, black."""
+    import math
+    x, y = base
+    out = [{'kind': 'kit', 'shape': 'cylinder', 'radius': 0.016, 'height': head_z, 'position': [x, y, 0.0],
+            'material': 'gloss', 'color': '#141414'}]
+    for k in range(3):
+        a = math.radians(90 + 120 * k)
+        out.append({'kind': 'kit', 'shape': 'cylinder', 'radius': 0.012, 'height': legs,
+                    'position': [x, y, 0.30], 'rotate': [118.0, 0.0, round(math.degrees(a) + 90, 1)],
+                    'material': 'gloss', 'color': '#141414'})
+    return out
+
+
+def hero_shoot():
+    """The owner (2026-11-11 02:10): "an Austin powers spy who shagged me photoshoot vibe ... more editorial". A 1960s mod
+    fashion shoot, the eight Tropos the models; the genre evoked (a swinging-sixties studio, op-art target, bold colour),
+    no film's set, characters or lettering, no people. A cyclorama painted with one giant target in the six colours and
+    cream (0.45 m bands by 3D distance from a point low on the wall); the group in a loose V, Ember the star front and
+    centre, five on gloss-cream podiums; in frame, a fresnel on a stand at the left (the hard key, high front-left) and a
+    dish on a stand at back right (the rim), each lamp inside its own housing; a broad soft fill behind the camera; a
+    camera on its tripod soft in the near right. 26 mm at 0.4 m, 1600 x 800."""
+    assert ROLLOUT['base'] == 'A', 'run with TROPOS_BASE=A'
+    s = SHOTS['deck-row']()
+    # (tint, x, y, podium height, yaw): the star front and centre, a loose V of mixed depths, heights and angles
+    pose = {'ember': (0.0, -0.55, 0.0, 0.0), 'dust': (-0.78, 0.15, 0.30, -18.0), 'acid': (0.80, 0.10, 0.15, 22.0),
+            'poison': (-1.55, 0.75, 0.60, -32.0), 'ice': (1.50, 0.80, 0.45, 30.0), 'smoke': (0.30, 1.25, 0.60, 8.0),
+            'haze': (-2.30, 1.30, 0.0, -48.0), 'fog': (2.30, 1.30, 0.0, 48.0)}
+    for blk in s['products']:
+        blk['normals_refine'] = False
+        for k, i in enumerate(blk['instances']):
+            x, y, h, yaw = pose[HERO_ORDER[k]]
+            i['position'] = [x, y, round(h + i['position'][2], 4)]
+            i['rotate_z'] = yaw
+    props = []
+    for t, (x, y, h, yaw) in pose.items():
+        if h > 0:
+            props.append({'kind': 'kit', 'shape': 'cylinder', 'radius': 0.42, 'height': h, 'position': [x, y, 0.0],
+                          'material': 'gloss', 'color': '#F1E8D6'})
+    # the fresnel (key), high front-left, and the dish (rim), back right: each lamp in its housing
+    fr_head, fr_aim = [-1.55, -1.45, 2.05], [0.0, 0.3, 0.7]
+    props += _stand('fresnel', fr_head[:2], fr_head[2] - 0.12)
+    props.append({'kind': 'kit', 'shape': 'cylinder', 'radius': 0.14, 'height': 0.30, 'position': fr_head,
+                  'rotate': _aim_rot(fr_head, [2 * a - b for a, b in zip(fr_head, fr_aim)]), 'material': 'gloss', 'color': '#161616'})
+    dish_head, dish_aim = [2.55, 2.05, 1.85], [0.2, 0.4, 0.9]
+    props += _stand('dish', dish_head[:2], dish_head[2] - 0.1)
+    props.append({'kind': 'kit', 'shape': 'lathe', 'profile': [[0.06, 0.0], [0.2, 0.05], [0.33, 0.16], [0.34, 0.17]],
+                  'position': dish_head, 'rotate': _aim_rot(dish_head, dish_aim), 'material': 'gloss', 'color': '#EDEAE4'})
+    # the camera on its tripod, soft in the near right foreground
+    props += _stand('tripod', [1.05, -3.2], 0.82, legs=0.9)
+    props.append({'kind': 'kit', 'shape': 'box', 'size': [0.16, 0.11, 0.12], 'position': [1.05, -3.2, 0.82],
+                  'material': 'gloss', 'color': '#1A1A1A', 'ease': 0.01})
+    props.append({'kind': 'kit', 'shape': 'cylinder', 'radius': 0.035, 'height': 0.09, 'position': [1.05, -3.27, 0.88],
+                  'rotate': [90.0, 0.0, 0.0], 'material': 'gloss', 'color': '#111111'})
+    rings = ['#F2E8D0', '#B50404', '#D35D17', '#C5BC1E', '#027614', '#1169C1', '#500CB4']
+    s['set'] = {'kind': 'sweep', 'color': '#F2E8D0', 'width': 16.0, 'front': 8.0, 'depth': 2.6, 'radius': 1.0,
+                'height': 6.0, 'rings': {'center': [0.0, 2.6, 0.55], 'width': 0.45, 'colors': rings}, 'props': props}
+    s['materials']['sweep'] = {'roughness': 0.85}
+    # the lamps: the fresnel's and the dish's sources sit just inside their housings' mouths (a practical in its
+    # fitting); the fill a broad soft source behind the camera, out of frame
+    import math
+    def ahead(head, aim, d):
+        v = [b - a for a, b in zip(head, aim)]; L = math.sqrt(sum(c * c for c in v))
+        return [round(a + d * c / L, 3) for a, c in zip(head, v)]
+    s['lights'] = {
+        'fresnel': {'type': 'area', 'shape': 'DISK', 'size_m': [0.22, 0.22], 'position': ahead(fr_head, fr_aim, 0.02),
+                    'target': fr_aim, 'irradiance': 7.0, 'spread_deg': 35, 'color': '#FFF2DE'},
+        'dish': {'type': 'area', 'shape': 'DISK', 'size_m': [0.18, 0.18], 'position': ahead(dish_head, dish_aim, 0.12),
+                 'target': dish_aim, 'irradiance': 4.5, 'spread_deg': 60, 'color': '#FFF6EC'},
+        'fill': {'type': 'area', 'size_m': [5.0, 2.5], 'position': [0.0, -6.8, 1.7], 'target': [0.0, 0.3, 0.8],
+                 'irradiance': 1.0, 'color': '#FFF8F0'}}
+    s['camera'] = {'position': [0.0, -4.0, 0.4], 'target': [0.0, 0.6, 1.0], 'lens_mm': 26.0, 'level': True}
+    s['size'] = [1600, 800]
+    s['render'].update(samples=64, exposure=0.0)
+    s['title'] = 'Tropos, the shoot: a 1960s fashion studio, the eight as the models'
     return s
