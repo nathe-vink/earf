@@ -43,7 +43,7 @@ HEMIS = [('ember', 5.25, 0.0, 1.70), ('dust', 5.85, 0.06, 1.82), ('acid', 6.5, -
          ('dust', 7.8, -0.03, 1.72), ('acid', 8.45, 0.04, 1.84)]
 CORES = [('ember', 5.55, -0.12), ('dust', 7.6, -0.18), ('acid', 8.75, -0.1)]     # (test 1: the Dust Core hid Mantle at 6.95)
 EV, WB = -1.5, 4000          # the lamps lane's finals: Core -1, Hemisphere -2, white balance 4000 K
-TRACK = 2.0                  # the declared track lights' scale (test 1: too dark)
+TRACK = 3.0                  # the declared track lights' scale (tests 1-4: too dark)
 
 
 def _room():
