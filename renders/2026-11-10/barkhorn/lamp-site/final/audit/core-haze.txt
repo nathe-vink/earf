@@ -1,22 +1,19 @@
-Timer 'STL Import' took 1.16 ms
-Timer 'STL Import' took 5.32 ms
-Timer 'STL Import' took 3.68 ms
-Timer 'STL Import' took 0.48 ms
-Timer 'STL Import' took 0.22 ms
-Timer 'STL Import' took 0.68 ms
-Timer 'STL Import' took 0.39 ms
-/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:342: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+Timer 'STL Import' took 0.41 ms
+Timer 'STL Import' took 0.23 ms
+Timer 'STL Import' took 0.67 ms
+Timer 'STL Import' took 0.34 ms
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:412: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
   wm_ = bpy.data.materials.new(f'window-{tint}'); wm_.use_nodes = True; nt_ = wm_.node_tree; nt_.nodes.clear()
-Timer 'STL Import' took 0.27 ms
-/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:161: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+Timer 'STL Import' took 0.23 ms
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:178: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
   m = bpy.data.materials.new(nm); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
-00:05.950  cycles           | WARNING CUEW initialization failed: Error opening the library
+00:05.611  cycles           | WARNING CUEW initialization failed: Error opening the library
 AUDIT orb-violet hidden [] no-shadow [] lights [('key', 'AREA', 45.154), ('fill', 'AREA', 10.0), ('kicker', 'AREA', 3.0), ('led-violet', 'AREA', 2.292)]
 HIDDENCAST orb-violet: 3 hidden, 0 in frame
    out         0.0 %  area lamp (ellipse) key
    out         0.0 %  area lamp (ellipse) fill
    out         0.0 %  area lamp (rectangle) kicker
-00:06.873  render           | Saved: '/home/user/earf/renders/2026-11-10/barkhorn/lamp-site/final/masks/core-haze-key.png'
-00:08.714  render           | Saved: '/home/user/earf/renders/2026-11-10/barkhorn/lamp-site/final/masks/core-haze-fill.png'
-00:10.660  render           | Saved: '/home/user/earf/renders/2026-11-10/barkhorn/lamp-site/final/masks/core-haze-kicker.png'
+00:06.576  render           | Saved: '/tmp/claude-0/-home-user-earf/e73bd455-48f8-5f69-9a3b-fa1e22e4e1e9/scratchpad/core-final/masks/core-haze-key.png'
+00:08.217  render           | Saved: '/tmp/claude-0/-home-user-earf/e73bd455-48f8-5f69-9a3b-fa1e22e4e1e9/scratchpad/core-final/masks/core-haze-fill.png'
+00:10.270  render           | Saved: '/tmp/claude-0/-home-user-earf/e73bd455-48f8-5f69-9a3b-fa1e22e4e1e9/scratchpad/core-final/masks/core-haze-kicker.png'
 CASTCHECK orb-violet {'key': 0.0, 'fill': 0.0, 'kicker': 0.0}

@@ -510,13 +510,22 @@ def build(frame, samples, scale):
     # round 3 (the gate's polish): a larger, higher key, so the two round highlights (key and fill) read as one soft one:
     # 4.0 m across (was 1.2; at 2 and 3 m the two reflections, the outer face's and the inner wall's, stay apart), higher and more frontal, its power grown with the square of its distance to
     # hold the light at the lamps
-    kp = (-1.0, -2.1, 2.6); kd0 = (Vector((-1.4, -1.6, 1.9)) - Vector((0, 0.1, 0.5))).length
+    kp = tuple(eval(os.environ['KEY_POS'])) if os.environ.get('KEY_POS') else (-1.0, -2.1, 2.6); kd0 = (Vector((-1.4, -1.6, 1.9)) - Vector((0, 0.1, 0.5))).length
     kd = (Vector(kp) - Vector((0, 0.1, 0.5))).length
     # (2026-11-09, the cast check: at 4 m the key's back stood in the orb row's frame, 24 %; 3 m clears it)
     ks = float(os.environ.get('KEY_SIZE', '3.0' if frame.startswith('lamps-orbs') else '4.0'))
-    key = SC.area('key', kp, (0, 0, 0), (ks, ks), 60.0 * K * (kd / kd0) ** 2, '#FFF4E8'); key.data.shape = 'ELLIPSE'
+    # KEY_STRIP 'w,h' (2026-11-11): the key as a rectangular strip softbox of w x h m at the same power per area as the
+    # round key, for one long highlight along a shell (the Ember off and cap details)
+    kst = os.environ.get('KEY_STRIP')
+    if kst:
+        kw_, kh_ = (float(v) for v in kst.split(','))
+        key = SC.area('key', kp, (0, 0, 0), (kw_, kh_), 60.0 * K * (kd / kd0) ** 2 * (kw_ * kh_) / (3.14159 * ks * ks / 4), '#FFF4E8'); key.data.shape = 'RECTANGLE'
+    else:
+        key = SC.area('key', kp, (0, 0, 0), (ks, ks), 60.0 * K * (kd / kd0) ** 2, '#FFF4E8'); key.data.shape = 'ELLIPSE'
     key.data.color = blackbody(int(os.environ.get('STUDIO_K', '3000')))
-    key.rotation_euler = (Vector((0, 0.1, 0.5)) - key.location).to_track_quat('-Z', 'Y').to_euler()
+    # KEY_AIM (2026-11-11, the coordinator: Ember off, one large overhead softbox, so the shell carries one long soft
+    # highlight, not two ovals): where the key points; default the lamps' middle as before
+    key.rotation_euler = (Vector(tuple(eval(os.environ.get('KEY_AIM', '(0, 0.1, 0.5)')))) - key.location).to_track_quat('-Z', 'Y').to_euler()
     fill = SC.area('fill', (1.8, -1.2, 1.2), (0, 0, 0), (1.6, 1.6), 20.0 * K, '#EEF2F8'); fill.data.shape = 'ELLIPSE'
     fill.data.color = blackbody(int(os.environ.get('STUDIO_K', '3000')))
     fill.rotation_euler = (Vector((0, 0.1, 0.4)) - fill.location).to_track_quat('-Z', 'Y').to_euler()

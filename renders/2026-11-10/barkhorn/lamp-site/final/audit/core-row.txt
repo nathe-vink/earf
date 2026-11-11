@@ -1,76 +1,52 @@
-Timer 'STL Import' took 1.20 ms
-Timer 'STL Import' took 2.49 ms
-Timer 'STL Import' took 2.81 ms
-Timer 'STL Import' took 0.40 ms
-Timer 'STL Import' took 0.28 ms
-Timer 'STL Import' took 0.76 ms
-Timer 'STL Import' took 0.39 ms
-/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:342: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+Timer 'STL Import' took 0.38 ms
+Timer 'STL Import' took 0.23 ms
+Timer 'STL Import' took 0.82 ms
+Timer 'STL Import' took 0.41 ms
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:412: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
   wm_ = bpy.data.materials.new(f'window-{tint}'); wm_.use_nodes = True; nt_ = wm_.node_tree; nt_.nodes.clear()
-Timer 'STL Import' took 0.28 ms
-/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:161: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
-  m = bpy.data.materials.new(nm); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
-Timer 'STL Import' took 1.07 ms
-Timer 'STL Import' took 2.54 ms
-Timer 'STL Import' took 2.80 ms
-Timer 'STL Import' took 0.43 ms
-Timer 'STL Import' took 0.32 ms
-Timer 'STL Import' took 0.72 ms
-Timer 'STL Import' took 0.44 ms
-Timer 'STL Import' took 0.28 ms
-Timer 'STL Import' took 1.06 ms
-Timer 'STL Import' took 2.59 ms
-Timer 'STL Import' took 2.80 ms
-Timer 'STL Import' took 0.46 ms
-Timer 'STL Import' took 0.32 ms
-Timer 'STL Import' took 0.80 ms
-Timer 'STL Import' took 0.48 ms
 Timer 'STL Import' took 0.26 ms
-Timer 'STL Import' took 1.11 ms
-Timer 'STL Import' took 2.72 ms
-Timer 'STL Import' took 2.69 ms
-Timer 'STL Import' took 0.50 ms
-Timer 'STL Import' took 0.31 ms
-Timer 'STL Import' took 0.79 ms
-Timer 'STL Import' took 0.44 ms
-Timer 'STL Import' took 0.29 ms
-Timer 'STL Import' took 1.09 ms
-Timer 'STL Import' took 2.74 ms
-Timer 'STL Import' took 2.89 ms
-Timer 'STL Import' took 0.55 ms
-Timer 'STL Import' took 0.34 ms
-Timer 'STL Import' took 0.84 ms
-Timer 'STL Import' took 0.46 ms
-Timer 'STL Import' took 0.30 ms
-Timer 'STL Import' took 1.13 ms
-Timer 'STL Import' took 2.67 ms
-Timer 'STL Import' took 2.90 ms
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:178: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m = bpy.data.materials.new(nm); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
 Timer 'STL Import' took 0.51 ms
-Timer 'STL Import' took 0.32 ms
+Timer 'STL Import' took 0.31 ms
+Timer 'STL Import' took 0.75 ms
+Timer 'STL Import' took 0.43 ms
+Timer 'STL Import' took 0.23 ms
+Timer 'STL Import' took 0.55 ms
+Timer 'STL Import' took 0.31 ms
+Timer 'STL Import' took 0.87 ms
+Timer 'STL Import' took 0.49 ms
+Timer 'STL Import' took 0.27 ms
+Timer 'STL Import' took 0.48 ms
+Timer 'STL Import' took 0.37 ms
 Timer 'STL Import' took 0.81 ms
 Timer 'STL Import' took 0.45 ms
-Timer 'STL Import' took 0.29 ms
-Timer 'STL Import' took 1.12 ms
-Timer 'STL Import' took 2.56 ms
-Timer 'STL Import' took 2.80 ms
-Timer 'STL Import' took 0.53 ms
-Timer 'STL Import' took 0.36 ms
-Timer 'STL Import' took 0.85 ms
-Timer 'STL Import' took 0.49 ms
 Timer 'STL Import' took 0.31 ms
-Timer 'STL Import' took 1.16 ms
-Timer 'STL Import' took 2.95 ms
-Timer 'STL Import' took 3.04 ms
-Timer 'STL Import' took 0.60 ms
-Timer 'STL Import' took 0.41 ms
+Timer 'STL Import' took 0.63 ms
+Timer 'STL Import' took 0.36 ms
+Timer 'STL Import' took 0.92 ms
+Timer 'STL Import' took 0.57 ms
+Timer 'STL Import' took 0.43 ms
+Timer 'STL Import' took 0.52 ms
+Timer 'STL Import' took 0.38 ms
+Timer 'STL Import' took 0.96 ms
+Timer 'STL Import' took 0.45 ms
+Timer 'STL Import' took 0.38 ms
+Timer 'STL Import' took 0.59 ms
+Timer 'STL Import' took 0.39 ms
+Timer 'STL Import' took 0.93 ms
+Timer 'STL Import' took 0.51 ms
+Timer 'STL Import' took 0.32 ms
+Timer 'STL Import' took 0.55 ms
+Timer 'STL Import' took 0.49 ms
 Timer 'STL Import' took 0.97 ms
-Timer 'STL Import' took 0.56 ms
-Timer 'STL Import' took 0.34 ms
-00:44.827  cycles           | WARNING CUEW initialization failed: Error opening the library
+Timer 'STL Import' took 0.60 ms
+Timer 'STL Import' took 0.32 ms
+00:44.641  cycles           | WARNING CUEW initialization failed: Error opening the library
 AUDIT lamps-orbs hidden [] no-shadow [] lights [('key', 'AREA', 45.154), ('fill', 'AREA', 10.0), ('led-red', 'AREA', 2.978), ('led-orange', 'AREA', 1.836), ('led-amber', 'AREA', 1.836), ('led-green', 'AREA', 2.5), ('led-blue', 'AREA', 1.836), ('led-violet', 'AREA', 2.292), ('led-ice', 'AREA', 2.5), ('led-black', 'AREA', 1.836)]
 HIDDENCAST lamps-orbs: 2 hidden, 0 in frame
    out         0.0 %  area lamp (ellipse) key
    out         0.0 %  area lamp (ellipse) fill
-00:45.733  render           | Saved: '/home/user/earf/renders/2026-11-10/barkhorn/lamp-site/final/masks/core-row-key.png'
-00:47.012  render           | Saved: '/home/user/earf/renders/2026-11-10/barkhorn/lamp-site/final/masks/core-row-fill.png'
+00:46.172  render           | Saved: '/tmp/claude-0/-home-user-earf/e73bd455-48f8-5f69-9a3b-fa1e22e4e1e9/scratchpad/core-final/masks/core-row-key.png'
+00:47.889  render           | Saved: '/tmp/claude-0/-home-user-earf/e73bd455-48f8-5f69-9a3b-fa1e22e4e1e9/scratchpad/core-final/masks/core-row-fill.png'
 CASTCHECK lamps-orbs {'key': 0.0, 'fill': 0.0}

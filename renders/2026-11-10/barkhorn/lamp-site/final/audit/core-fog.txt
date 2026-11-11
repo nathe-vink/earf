@@ -1,22 +1,19 @@
-Timer 'STL Import' took 1.24 ms
-Timer 'STL Import' took 2.60 ms
-Timer 'STL Import' took 2.71 ms
-Timer 'STL Import' took 0.47 ms
-Timer 'STL Import' took 0.29 ms
-Timer 'STL Import' took 0.78 ms
 Timer 'STL Import' took 0.44 ms
-/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:342: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+Timer 'STL Import' took 0.20 ms
+Timer 'STL Import' took 0.76 ms
+Timer 'STL Import' took 0.47 ms
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:412: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
   wm_ = bpy.data.materials.new(f'window-{tint}'); wm_.use_nodes = True; nt_ = wm_.node_tree; nt_.nodes.clear()
-Timer 'STL Import' took 0.25 ms
-/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:161: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+Timer 'STL Import' took 0.24 ms
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:178: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
   m = bpy.data.materials.new(nm); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
-00:05.952  cycles           | WARNING CUEW initialization failed: Error opening the library
+00:05.591  cycles           | WARNING CUEW initialization failed: Error opening the library
 AUDIT orb-ice hidden [] no-shadow [] lights [('key', 'AREA', 45.154), ('fill', 'AREA', 10.0), ('kicker', 'AREA', 3.0), ('led-ice', 'AREA', 2.5)]
 HIDDENCAST orb-ice: 3 hidden, 0 in frame
    out         0.0 %  area lamp (ellipse) key
    out         0.0 %  area lamp (ellipse) fill
    out         0.0 %  area lamp (rectangle) kicker
-00:06.843  render           | Saved: '/home/user/earf/renders/2026-11-10/barkhorn/lamp-site/final/masks/core-fog-key.png'
-00:08.710  render           | Saved: '/home/user/earf/renders/2026-11-10/barkhorn/lamp-site/final/masks/core-fog-fill.png'
-00:10.803  render           | Saved: '/home/user/earf/renders/2026-11-10/barkhorn/lamp-site/final/masks/core-fog-kicker.png'
+00:06.878  render           | Saved: '/tmp/claude-0/-home-user-earf/e73bd455-48f8-5f69-9a3b-fa1e22e4e1e9/scratchpad/core-final/masks/core-fog-key.png'
+00:08.886  render           | Saved: '/tmp/claude-0/-home-user-earf/e73bd455-48f8-5f69-9a3b-fa1e22e4e1e9/scratchpad/core-final/masks/core-fog-fill.png'
+00:11.092  render           | Saved: '/tmp/claude-0/-home-user-earf/e73bd455-48f8-5f69-9a3b-fa1e22e4e1e9/scratchpad/core-final/masks/core-fog-kicker.png'
 CASTCHECK orb-ice {'key': 0.0, 'fill': 0.0, 'kicker': 0.0}
