@@ -2051,3 +2051,105 @@ def hero_orchestra():
     s['render'].update(samples=64, exposure=0.0)
     s['title'] = 'Tropos, the orchestra: every player a horn'
     return s
+
+
+def hero_orchestra2():
+    """The orchestra, second pass (the coordinator, 2026-11-11 06:10): a pale hall (blond maple panelling, risers and
+    floor) lit like a modern concert hall, the back tier as bright as the front; music desks no higher than the
+    cabinets' tops, beside each player; the podium low, its stand short; the sections closer and nearer the camera."""
+    import math
+    s = _cast_base()
+    P = (0.0, -0.8)
+    tiers = {0: (1.75, 0.0), 1: (2.5, 0.28), 2: (3.25, 0.56)}
+    seats = {'dust': (0, -36), 'ember': (0, 0), 'acid': (0, 36), 'poison': (1, -19), 'ice': (1, 19),
+             'haze': (2, -40), 'smoke': (2, 0), 'fog': (2, 40)}
+    pose, props = {}, []
+    for t, (tier, th) in seats.items():
+        r, z = tiers[tier]; a = math.radians(th)
+        x, y = P[0] + r * math.sin(a), P[1] + r * math.cos(a)
+        pose[t] = (round(x, 3), round(y, 3), z, -th, 0, 0)
+        side = 1 if th <= 0 else -1                     # each desk on the player's inner side, toward the centre line
+        tx, ty = math.cos(a), -math.sin(a)              # the tier's tangent at the player
+        sx, sy = x + side * 0.40 * tx - 0.25 * math.sin(a), y + side * 0.40 * ty - 0.25 * math.cos(a)
+        props.append({'kind': 'kit', 'shape': 'cylinder', 'radius': 0.011, 'height': 0.62, 'position': [round(sx, 3), round(sy, 3), z],
+                      'material': 'gloss', 'color': '#111111'})
+        props.append({'kind': 'kit', 'shape': 'box', 'size': [0.40, 0.02, 0.28], 'position': [round(sx, 3), round(sy, 3), z + 0.58],
+                      'rotate': [-25.0, 0.0, -th], 'material': 'gloss', 'color': '#111111'})
+    _pose(s, pose)
+    wood = '#D8C39C'
+    for tier in (1, 2):
+        r, z = tiers[tier]
+        for th in range(-60, 61, 12):
+            a = math.radians(th)
+            props.append({'kind': 'kit', 'shape': 'box', 'size': [0.62, 0.8, z], 'position': [round(P[0] + r * math.sin(a), 3), round(P[1] + r * math.cos(a), 3), 0.0],
+                          'rotate': [0.0, 0.0, -th], 'material': 'clay', 'color': '#E3CFA8'})
+    props += [{'kind': 'kit', 'shape': 'box', 'size': [0.62, 0.62, 0.14], 'position': [P[0], P[1] - 0.2, 0.0], 'material': 'clay', 'color': '#3A2C22'},
+              {'kind': 'kit', 'shape': 'cylinder', 'radius': 0.012, 'height': 0.42, 'position': [P[0] + 0.18, P[1] - 0.02, 0.14], 'material': 'gloss', 'color': '#111111'},
+              {'kind': 'kit', 'shape': 'box', 'size': [0.36, 0.02, 0.24], 'position': [P[0] + 0.18, P[1] - 0.02, 0.54], 'rotate': [25.0, 0.0, 0.0], 'material': 'gloss', 'color': '#111111'}]
+    s['set'] = {'kind': 'sweep', 'color': wood, 'width': 16.0, 'front': 10.0, 'depth': 3.2, 'radius': 0.04, 'height': 6.0,
+                'contact': {'strength': 0.7, 'distance_m': 0.3, 'core_strength': 1.0, 'core_distance_m': 0.03}, 'props': props}
+    s['materials']['sweep'] = {'roughness': 0.5, 'mottle': 0.12, 'mottle_m': 0.3, 'tooth': 0.08}
+    s['lights'] = {f'stage{k}': {'type': 'area', 'size_m': [2.0, 1.2], 'position': [x, 0.6 + 0.8 * abs(k - 1), 4.4],
+                                 'target': [x * 0.7, 1.0, 0.6], 'irradiance': 3.2, 'spread_deg': 75, 'color': '#FFEBD0'}
+                   for k, x in enumerate((-2.4, 0.0, 2.4))}
+    s['lights']['back'] = {'type': 'area', 'size_m': [5.0, 1.0], 'position': [0.0, 1.0, 4.6], 'target': [0.0, 2.3, 0.6],
+                           'irradiance': 2.0, 'color': '#FFEBD0'}
+    s['lights']['hall'] = {'type': 'area', 'size_m': [5.0, 2.5], 'position': [0.0, -9.0, 3.4], 'target': [0.0, 0.8, 0.8],
+                           'irradiance': 1.0, 'color': '#FFF4E6'}
+    s['camera'] = {'position': [0.0, -5.6, 1.45], 'target': [0.0, 1.0, 0.95], 'lens_mm': 40.0, 'level': True}
+    s['size'] = [1600, 800]
+    s['render'].update(samples=64, exposure=0.3)
+    s['title'] = 'Tropos, the orchestra (second pass): a pale hall'
+    return s
+
+
+def _chair(x, y, yaw, seat=0.46, w=0.64, d=0.52, color='#2A1E18'):
+    """An upholstered dark chair: four turned legs, a seat, a tall back with a rail; its back toward +y turned by `yaw`."""
+    import math
+    a = math.radians(yaw); c, sn = math.cos(a), math.sin(a)
+    def at(dx, dy):
+        return [round(x + c * dx - sn * dy, 3), round(y + sn * dx + c * dy, 3)]
+    out = []
+    for dx in (-w / 2 + 0.04, w / 2 - 0.04):
+        for dy in (-d / 2 + 0.04, d / 2 - 0.04):
+            out.append({'kind': 'kit', 'shape': 'cylinder', 'radius': 0.022, 'radius_top': 0.016, 'height': seat,
+                        'position': at(dx, dy) + [0.0], 'material': 'gloss', 'color': color})
+    out.append({'kind': 'kit', 'shape': 'box', 'size': [w, d, 0.07], 'position': at(0, 0) + [seat - 0.02], 'rotate': [0, 0, yaw],
+                'material': 'velvet', 'color': '#3B2A24', 'ease': 0.02})
+    for dx in (-w / 2 + 0.03, w / 2 - 0.03):
+        out.append({'kind': 'kit', 'shape': 'cylinder', 'radius': 0.02, 'height': 0.62, 'position': at(dx, d / 2 - 0.02) + [seat],
+                    'material': 'gloss', 'color': color})
+    out.append({'kind': 'kit', 'shape': 'box', 'size': [w, 0.04, 0.10], 'position': at(0, d / 2 - 0.02) + [seat + 0.56], 'rotate': [0, 0, yaw],
+                'material': 'gloss', 'color': color, 'ease': 0.015})
+    return out
+
+
+def hero_hollywood2():
+    """The Hollywood issue, second pass (the coordinator, 2026-11-11 06:10): no lounging (rigid boxes cannot lounge); a
+    formal cast portrait. Four seated, each on its own dark upholstered chair, angled a little toward the centre; four
+    standing behind on low steps of different heights, in the gaps; a muted rug under the front row, the drape at the
+    left, the painted backdrop as before. The light a little brighter, the kicker making the bodies glow."""
+    s = hero_hollywood()
+    seat = 0.46 + 0.05
+    front = {'dust': (-1.38, 12.0), 'ember': (-0.46, 5.0), 'acid': (0.46, -5.0), 'ice': (1.38, -12.0)}
+    back = {'poison': (-0.92, 0.30), 'haze': (0.0, 0.48), 'smoke': (0.92, 0.30), 'fog': (1.88, 0.15)}
+    pose, props = {}, []
+    for blk in s['products']:                           # the first pass's recline and lean go
+        for i in blk['instances']:
+            i.pop('rotate_x', None); i.pop('rotate_y', None)
+    for t, (x, yaw) in front.items():
+        pose[t] = (x, 0.0, seat, yaw, 0, 0)
+        props += _chair(x, 0.0, yaw)
+    for t, (x, h) in back.items():
+        pose[t] = (x, 0.85, h, 0.0, 0, 0)
+        props.append({'kind': 'kit', 'shape': 'box', 'size': [0.8, 0.62, h], 'position': [x, 0.85, 0.0], 'material': 'clay', 'color': '#4A443C'})
+    _pose(s, pose)
+    props += [p for p in s['set']['props'] if p.get('shape') == 'drape']
+    props.append({'kind': 'kit', 'shape': 'box', 'size': [4.4, 2.2, 0.012], 'position': [0.2, -0.3, 0.0], 'material': 'wool', 'color': '#6A5C50'})
+    s['set']['props'] = props
+    s['lights']['key']['irradiance'] = 3.6
+    s['lights']['fill']['irradiance'] = 1.0
+    s['lights']['kicker'].update(irradiance=4.2, position=[1.0, 2.0, 3.6], target=[0.2, 0.5, 1.1])
+    s['camera'] = {'position': [0.25, -11.4, 1.1], 'target': [0.25, 0.0, 1.2], 'lens_mm': 60.0, 'level': True}
+    s['title'] = 'Tropos, the Hollywood issue (second pass): a formal cast portrait'
+    return s
