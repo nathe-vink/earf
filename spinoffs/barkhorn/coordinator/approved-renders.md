@@ -272,6 +272,24 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    -> HOME PAGE to be rebuilt as a marketing page, briefed to the site lane 12:45: hero with two buttons; four product
       cards that are whole links, Tropos leading; a color picker that swaps all four products' pictures; the two
       habitats; "One hangs. One wanders." deleted.
+   DONE 14:20: the marketing home on preview dpl_47PVHQzCaCGJ8SaSceBygthQew4S (r49-site-rc bc98e783); link sent 14:30.
+   The owner on the accidental bar frame: "kind of looks like a watercolor ... which is cool", "Like an artist's rendering";
+   then on the coordinator's painted style test: "awful. It looks like the burnt edges of a treasure map. Don't do that.
+   Also don't go out of your way to do the artist's rendering. I'd rather have better product shots. Like core on a nice
+   bar table. Bar images. Combo product images for monochrome, complimentary, etc." -> the painted look is DROPPED (bar
+   lane stopped 13:45). PRODUCT SHOTS briefed to the speaker lane 13:45: P1 Core on a real bar table, P2 pendants over a
+   bar table, P3 the family in one tint (Ice), P4 a complementary pair (Ice speakers, Dust lamps and Mantle).
+   THE STAGE test (r33-speaker-horn 3f73168f, hero3/hero-stage.png) shown 14:35. OWNER ~14:45: "For the marketing side
+   remove the plain text render from the body of the site and put a more understated render tag on the images. Or don't
+   use render tags at all and we can specify in a footnote that they are renders. The stage design looks too elementary
+   and not elevated or proper enough. Also purple doesn't have to be sideways there. They also don't have to be positioned
+   at the same depth. We need to start finalizing more images for the website, including the biomes and full lineup heroes."
+   -> SITE: no "Render" tags anywhere in page bodies; the footer's line carries it (site lane, 14:50).
+   -> STAGE v2 (speaker lane, after P1-P4, aimed at a final): a proper theater (a real house HDRI first, else a refined
+      designed set), the cast at different depths, Haze upright, pendants hung low with colors held, layered scenic pieces
+      without the icon outlines, Core footlights.
+   -> BIOMES UN-PARKED (biomes lane, 14:50): finals for all eight tints, portrait 2400x3000 and wide 3200x2000, the
+      approved speaker build asserted, scanned assets and real skies allowed; Ice and Fog again at full size first.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
