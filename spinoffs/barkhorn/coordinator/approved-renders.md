@@ -429,6 +429,13 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
       (all four products), `bar-pendants.png`, `core-bar-table.png`.
    RULE: a setting made of the right materials can still be the wrong class of place. Briefs name the class of place
    (who would drink there, what it costs), not only the materials.
+   16:40 UTC, biomes lane e2ea7e2fa3: ICE HABITAT, FULL-SIZE PAIR, `renders/2026-11-11/barkhorn/habitats/`
+   `ice-final-wide-3200x2000.jpg` and `ice-final-portrait-2400x3000.jpg` (CHECK.md beside them). Sky kiara_9_dusk (Poly
+   Haven); lights: the sky, plus the cabin's own window (a warm point lamp inside the cabin, in frame, far from the
+   speaker, declared). Speaker asserted against asset 0f54ebee (113 parts, 39 materials); gt_audit clean, both frames.
+   Coordinator's check at full size: passes (black rods, polished horn, no defect). Lane's weak points: the front reads a
+   little flat in the dusk; the feet are sunk in the snow. Shown to the owner 16:44 as the full-size render of the frame
+   approved on 9 Nov. Fog pair rendering, then Dust, then the five proxies. Site lane gets the habitats in one batch.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
