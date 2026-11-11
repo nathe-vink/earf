@@ -592,6 +592,17 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    other habitat's scatters the same way and add the check to CHECK.md.
    RULE FOR THE COORDINATOR'S CHECK: every final is looked at in full-size crops along the ground line and every edge
    where one thing meets another, not only whole at half size.
+   20:42 UTC, speaker lane ba15f03e: PLANET EARF BAR, round 2 (`product/planet-bar/bar-backbar.png`,
+   `core-bar-table.png` at 512 samples). A three-quarter view from a seat near the bar's right end (24 mm, eye 1.42 m,
+   f/2.8); the Tropos pair in Acid in the record wall's bays, each in a declared narrow pool, the niche lined darker;
+   near speaker 78 % of the frame's height, covered 0 %, 2.45x the wall's brightness; far speaker 39 %, covered 0.2 %,
+   1.6x. The wall filled (38 cells); five Hemispheres, none across a speaker; three Cores; the sleeve small; Mantle
+   fa0c3a65. Emitters 5 x 1000 + 3 x 200 lm; declared: two bay pools, one on Mantle, three wall heads, three over the
+   bar, a warm fill, haze. Audit hidden 0, equipment 0. Shown to the owner 20:47 as tests, NOT approved.
+   Coordinator's check, sent back: the bay pools about 1.5 stops too strong (the cone reads silver, Acid washes to
+   cream); the spines read as white binders; the bar top a flat pale gray slab; light beams in the haze; Mantle lost;
+   the two nearest Cores pale; nothing cozy readable in frame; speckle on the niche lining. core-bar-table is good
+   apart from the pale bar top.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
