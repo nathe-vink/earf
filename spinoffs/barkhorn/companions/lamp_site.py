@@ -504,7 +504,8 @@ def build(frame, samples, scale):
     sc.cycles.max_bounces = 64; sc.cycles.diffuse_bounces = sc.cycles.glossy_bounces = sc.cycles.transmission_bounces = 32
     vs = sc.view_settings; vs.use_white_balance = True; vs.white_balance_temperature = float(os.environ.get('WB', '3000'))
     vs.white_balance_tint = 0.0
-    SC.camera(cam[0], cam[1], lens=cam[2], fstop=8.0)
+    SC.camera(cam[0], cam[1], lens=cam[2], fstop=float(os.environ.get('FSTOP', '8.0')),   # FSTOP, FOCUS: a detail's shallow focus
+              focus=tuple(eval(os.environ['FOCUS'])) if os.environ.get('FOCUS') else None)
     for nm_ in os.environ.get('STUDIO_OFF', '').split(','):   # e.g. the view from straight below: the key, hidden from
         if nm_ and nm_ in bpy.data.objects:                   # the camera, stands in its frame (hiddencast), so it goes
             bpy.data.objects.remove(bpy.data.objects[nm_], do_unlink=True)
