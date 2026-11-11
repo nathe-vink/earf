@@ -38,29 +38,6 @@ def _empty(size, title):
             'render': dict(LAMP_RENDER), 'set': {'kind': 'stage', 'props': []}}
 
 
-def p1():
-    """Core in Ember on a real bar table (round_wooden_table_02, its top at 0.746 m), close: an 85 mm lens at a seated
-    guest's eye (1.08 m), f/2 on the Core. A second Core (Acid) on the next table along, out of focus, a bottle beside
-    it. The room is warm_bar, dimmed to a bar at night (its own light, the HDRI's strength the only dial)."""
-    s = _empty([1800, 1200], 'Core in Ember on a bar table (warm_bar)')
-    T = 0.746
-    s['set']['props'] = [
-        _asset('round_wooden_table_02', 0.0, 0.0),
-        _asset('round_wooden_table_02', -0.75, 1.9),
-        _asset('wine_bottles_01', -0.62, 1.95, T, 70.0),
-        # (the owner, 16:05: "a weird wire artifact": the dock's own braided USB-C cable, a 105 mm stub in the lamp's
-        # model (dock-cable, crystal.py), pointing at the camera with the lamp turned 200 deg. Turned to 0 its cable
-        # leaves from the back, behind the base, as it would run off to the wall)
-        {'kind': 'kit', 'shape': 'ext', 'path': LAMPS, 'fn': 'lamps', 'led_k': shots.LED_K, 'core_load': shots.CORE_LOAD, 'core_base': CORE_BASE,
-         'cores': [{'tint': shots.KEY[t], 'x': x, 'y': y, 'floor_z': T, 'rot': 0.0} for t, x, y in (('ember', 0.06, 0.02), ('acid', -0.85, 1.75))]}]
-    # (and the ball a stop darker so Ember holds its red: the room twice as bright, the exposure a stop down)
-    s['sky'] = {'kind': 'hdri', 'polyhaven': BAR, 'res': '4k', 'rotation_deg': BAR_ROT, 'strength': 0.20}
-    s['camera'] = {'position': [0.22, -1.32, 1.08], 'target': [0.04, 0.0, T + 0.11], 'lens_mm': 85.0, 'level': True,
-                   'fstop': 2.0, 'focus': [0.06, 0.02, T + 0.12]}
-    s['render'].update(exposure=0.8, white_balance_k=3400, white_balance_tint=0.0)   # (proofs: 2700 K turned the warm bar blue; at 2.6 the lamps blew to white)
-    return s
-
-
 HEMI_SCALE = float(os.environ.get('HEMI_SCALE', '1.0'))   # the owner, 16:15: Hemisphere stays its size, hung in multiples
 CORE_BASE = None    # (the owner, 16:25: Core's base satin black; the lamps lane's own material since r32-lamps-final 7c359b88, so no override)
 LAMPS = 'spinoffs/barkhorn/campaign/stage/stage2_props.py'
@@ -68,6 +45,52 @@ LAMPS = 'spinoffs/barkhorn/campaign/stage/stage2_props.py'
 
 def _pbr(tex, **k):
     return {'material': 'pbr', 'texture': tex, 'tex_res': '2k', **k}
+
+
+BAR_BW = 1.45                         # our bar's brick wall (y)
+BAR_EV_P1, BAR_EV_P2 = -5.0, -4.5     # the lamps lane's: Core -5, Hemisphere -2 (a frame of both: between)
+BAR_ROOM_P1, BAR_ROOM_P2 = 1.0, 1.0   # the declared room light's scale, set so the brick and wood read at that exposure
+
+
+def _bar_set():
+    """Our bar: a red brick wall close behind, a brushed concrete floor, a dark wood back bar on the brick, the round
+    table and two iron stools (Poly Haven scans)."""
+    BW = BAR_BW
+    return [
+        {'kind': 'kit', 'shape': 'box', 'size': [12.0, 10.0, 0.02], 'position': [0.0, -3.5, -0.02], **_pbr('brushed_concrete', gain=0.75)},
+        {'kind': 'kit', 'shape': 'box', 'size': [12.0, 0.25, 4.5], 'position': [0.0, BW + 0.125, -0.02], **_pbr('red_brick', gain=0.95)},
+        {'kind': 'kit', 'shape': 'box', 'size': [2.6, 0.42, 0.045], 'position': [0.55, BW - 0.21, 1.1], **_pbr('dark_wood')},
+        _asset('round_wooden_table_02', 0.0, 0.0),
+        _asset('metal_stool_01', -0.66, 0.22, 0.0, 30.0), _asset('metal_stool_01', 0.68, 0.38, 0.0, -40.0)]
+
+
+def _bar_lights(k=1.0):
+    """The room's declared light, both out of frame: a dusk window to the right (cool) and a doorway to the left (warm,
+    the next room's light), at the lamps' exposure (about 2^7 times the first version's window)."""
+    return {'dusk-window': {'type': 'area', 'size_m': [1.6, 2.0], 'position': [3.2, -0.6, 1.7], 'target': [0.0, 0.6, 1.0],
+                            'irradiance': round(6.0 * k, 3), 'color': '#9FB3DA'},
+            'doorway': {'type': 'area', 'size_m': [1.0, 2.1], 'position': [-3.0, -0.4, 1.05], 'target': [0.0, 0.8, 0.9],
+                        'irradiance': round(3.0 * k, 3), 'color': '#FFD9B0'}}
+
+
+def p1():
+    """Core in Ember on the round table of our own bar (the coordinator, 16:40: "re-shoot it in THIS bar"): close, an
+    85 mm lens at a seated guest's eye, f/2 on the Core, the brick and the back bar soft behind, no other lamp or bright
+    shape in frame, its dock's cable out of the back (the lamp at rot 0). Exposed as the lamps lane exposes Core (AgX,
+    Punchy, -5 EV, no white balance) so the ball holds Ember's red to the centre; the room brought up to it by the
+    declared dusk window and doorway, both out of frame."""
+    s = _empty([1800, 1200], 'Core in Ember on a table in our bar')
+    T = 0.746
+    s['set']['props'] = _bar_set() + [
+        {'kind': 'kit', 'shape': 'ext', 'path': LAMPS, 'fn': 'lamps', 'led_k': shots.LED_K, 'core_load': shots.CORE_LOAD,
+         'cores': [{'tint': 'red', 'x': 0.06, 'y': 0.02, 'floor_z': T, 'rot': 0.0}]}]
+    s['sky'] = {'kind': 'gradient', 'strength': 0.0}
+    s['lights'] = _bar_lights(BAR_ROOM_P1)
+    s['camera'] = {'position': [0.25, -1.30, 1.06], 'target': [0.04, 0.0, T + 0.12], 'lens_mm': 85.0, 'level': True,
+                   'fstop': 2.0, 'focus': [0.06, 0.02, T + 0.12]}
+    s['render'].update(view='AgX', look='AgX - Punchy', exposure=BAR_EV_P1)
+    s['render'].pop('white_balance_k', None)
+    return s
 
 
 def p2():
@@ -81,14 +104,7 @@ def p2():
     nearer, the lamps lower, tighter, the pair dropped.)"""
     s = _empty([1920, 1080], 'A cluster of Hemispheres over a table in a brick bar of our own')
     T = 0.746
-    BW = 1.45                                  # the brick wall's face (y)
-    s['set']['props'] = [
-        {'kind': 'kit', 'shape': 'box', 'size': [12.0, 10.0, 0.02], 'position': [0.0, -3.5, -0.02], **_pbr('brushed_concrete', gain=0.75)},
-        {'kind': 'kit', 'shape': 'box', 'size': [12.0, 0.25, 4.5], 'position': [0.0, BW + 0.125, -0.02], **_pbr('red_brick', gain=0.95)},
-        # the back bar: a long dark wood shelf on the brick, Mantle on it at the right
-        {'kind': 'kit', 'shape': 'box', 'size': [2.6, 0.42, 0.045], 'position': [0.55, BW - 0.21, 1.1], **_pbr('dark_wood')},
-        _asset('round_wooden_table_02', 0.0, 0.0),
-        _asset('metal_stool_01', -0.66, 0.22, 0.0, 30.0), _asset('metal_stool_01', 0.68, 0.38, 0.0, -40.0),
+    s['set']['props'] = _bar_set() + [
         {'kind': 'kit', 'shape': 'ext', 'path': LAMPS, 'fn': 'lamps', 'hemi_scale': HEMI_SCALE, 'top_z': 3.6,
          'led_k': shots.LED_K, 'core_load': shots.CORE_LOAD, **({'core_base': CORE_BASE} if CORE_BASE else {}),
          # a cluster of five over the table, close, at different heights, the lowest 0.42 m over the top
@@ -96,14 +112,15 @@ def p2():
                          (('ember', -0.26, -0.04, 1.17), ('dust', -0.05, 0.16, 1.33), ('acid', 0.15, -0.09, 1.22),
                           ('ember', 0.32, 0.12, 1.41), ('dust', 0.04, -0.22, 1.48))],
          'cores': [{'tint': shots.KEY[t], 'x': x, 'y': y, 'floor_z': T, 'rot': 0.0} for t, x, y in (('ember', -0.17, -0.1), ('acid', 0.2, 0.08))]}]
-    s['products'].append(shots._mantle(1.25, BW - 0.22, 1.1 + 0.0225 + 0.001, -10.0, 'smoke-2074'))
+    # (16:40: Mantle out, lost in the dark: this is a lamps picture)
     s['sky'] = {'kind': 'gradient', 'strength': 0.0}
-    s['lights'] = {'dusk-window': {'type': 'area', 'size_m': [1.6, 2.0], 'position': [3.2, -0.6, 1.7], 'target': [0.0, 0.6, 1.0],
-                                   'irradiance': 0.06, 'color': '#9FB3DA'}}
+    s['lights'] = _bar_lights(BAR_ROOM_P2)
     # (proof 2: the table cut at the foot, the top lamp at the head: a little wider)
     s['camera'] = {'position': [0.28, -2.05, 1.12], 'target': [0.12, 0.4, 1.08], 'lens_mm': 36.0, 'level': True,
                    'fstop': 2.8, 'focus': [0.0, 0.0, 0.95]}
-    s['render'].update(exposure=2.6, white_balance_k=3600, white_balance_tint=0.0)
+    # (16:40: exposed for the lamps, as the lamps lane does: AgX, Punchy, no white balance; the room brought up to it)
+    s['render'].update(view='AgX', look='AgX - Punchy', exposure=BAR_EV_P2)
+    s['render'].pop('white_balance_k', None)
     return s
 
 
