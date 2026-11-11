@@ -1716,7 +1716,15 @@ def hero_centres(s, z=0.55):
     r = np.cross(f, [0.0, 0.0, 1.0]); r /= np.linalg.norm(r); u = np.cross(r, f)
     out = []
     for k, i in enumerate(s['products'][0]['instances']):
-        p = np.array([i['position'][0], i['position'][1], z]) - c; zz = p @ f
+        # (fixed 2026-11-11: measured from the speaker's own base, its riser, seat or step, not the floor; a speaker on
+        # its side (rotate_y +/-90) at its middle, half its 1.28 m height along x)
+        x0, y0, z0 = (list(i['position']) + [0, 0, 0])[:3]
+        ry = i.get('rotate_y', 0)
+        if abs(abs(ry) - 90) < 1:
+            x0 += 0.64 * (1 if ry > 0 else -1); zc = z0
+        else:
+            zc = z0 + z
+        p = np.array([x0, y0, zc]) - c; zz = p @ f
         X = ((p @ r) / zz * lens - sx * sw) / hx; Y = ((p @ u) / zz * lens - sy * sw) / hy
         out.append({'tint': HERO_ORDER[k], 'x': round(float((X + 1) / 2 * 100), 2), 'y': round(float((1 - Y) / 2 * 100), 2),
                     'color': (s['set'].get('stripes') or [{}] * (k + 1))[k].get('color')})
