@@ -817,6 +817,7 @@ def apply(web, head, rest):
         rc_words(p, web)
         rc_products(p, web)
         rc_home(p, web)
+        rc_marketing(p, web)
         rc_clean(p)
         p.banned = BANNED_RC
     return p.done()
@@ -2099,6 +2100,210 @@ def rc_products(p, web):
 .lamp-rows.home + .lamp-names { margin-top: 20px }
 .lamp-rows.page, .mantle-pic.page { margin: 0 0 32px }
 """)
+
+
+# The home as a marketing page (the coordinator 2026-11-11 12:45, the owner: "reads like a document"): the hero with its
+# line and two buttons; the family as four cards, each one link; the colors as a picker; each color a place; then the
+# making and the letter. The opening, the header's globe, the reveal, the hero's picture and the product pages stay.
+FAMILY = [  # (product, route, tint, kind, line)
+    ('Tropos', '#speakers', 'blue', 'Horn speaker', 'A powered horn loudspeaker in cast acrylic.'),
+    ('Mantle', '#mantle-ember', 'red', 'Turntable', 'A turntable on a floating acrylic plinth.'),
+    ('Hemisphere', '#hemisphere-haze', 'violet', 'Pendant', 'A pendant. Half a globe of light over the table.'),
+    ('Core', '#core-poison', 'green', 'Table lamp', 'A cordless table lamp. A glow, not a reading light.'),
+]
+PLACES = [('blue', 'Ice, out in the snow at dusk.'), ('ice', 'Fog, on a hillside at dawn.')]
+ARROW = ('<svg class="arr" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" '
+         'stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>')
+
+
+def lamp_crops(web):
+    """Each lamp cropped square so it fills its card: one frame for all eight tints (the union of their outlines), so a
+    tint changes the color and nothing else. Returns {lamp: (ground hex)}."""
+    import os
+    import numpy as np
+    from PIL import Image
+    grounds = {}
+    for f in ('hemisphere', 'core'):
+        ims = {n: Image.open(os.path.join(web.ROOT, LAMP_FINAL.format(f=f'{f}-{n}'))).convert('RGB') for n in NAMES.values()}
+        W, H = next(iter(ims.values())).size
+        x0, y0, x1, y1 = W, H, 0, 0
+        for im in ims.values():
+            a = np.asarray(im).astype(int)
+            bg = np.median(np.concatenate([a[:40, :40].reshape(-1, 3), a[:40, -40:].reshape(-1, 3), a[-40:, :40].reshape(-1, 3), a[-40:, -40:].reshape(-1, 3)]), 0)
+            m = np.abs(a - bg).max(2) > 28
+            rows, cols = np.nonzero(m.sum(1) > 30)[0], np.nonzero(m.sum(0) > 30)[0]     # thin things (the cable) do not count
+            if len(rows) and len(cols):
+                x0, x1, y0, y1 = min(x0, cols[0]), max(x1, cols[-1]), min(y0, rows[0]), max(y1, rows[-1])
+        cx, cy, side = (x0 + x1) / 2, (y0 + y1) / 2, max(x1 - x0, y1 - y0) * 1.55
+        side = min(side, W, H)
+        L = int(round(min(max(cx - side / 2, 0), W - side))); T = int(round(min(max(cy - side / 2, 0), H - side)))
+        box = (L, T, L + int(side), T + int(side))
+        for n, im in ims.items():
+            c = im.crop(box).resize((800, 800), Image.LANCZOS)
+            c.save(os.path.join(web.IMG, 'rc', f'home-{f}-{n}.webp'), 'WEBP', quality=80, method=6)
+        g = np.asarray(ims['ember'].crop(box)).astype(int)
+        grounds[f] = '#%02X%02X%02X' % tuple(int(v) for v in np.median(np.concatenate([g[:30, :30].reshape(-1, 3), g[-30:, -30:].reshape(-1, 3)]), 0))
+    return grounds
+
+
+def rc_marketing(p, web):
+    import json, os
+    from PIL import Image
+    i = p.rest.index('const D = ') + len('const D = ')
+    j = p.rest.index(', BY = Object', i)
+    D = json.loads(p.rest[i:j])
+    C = {c['k']: c for c in D['clouds']}
+    grounds = lamp_crops(web)
+    size = lambda src: Image.open(os.path.join(web.SITE, src)).size
+    def pics(k):
+        n = NAMES[k]
+        return {'tropos': f'img/rc/{k}-hero.webp', 'mantle': f'img/rc/mantle-{n}.webp',
+                'hemisphere': f'img/rc/home-hemisphere-{n}.webp', 'core': f'img/rc/home-core-{n}.webp'}
+    for k in RC_KEYS:
+        for src in pics(k).values():
+            assert os.path.exists(os.path.join(web.SITE, src)), ('rc_marketing: no picture', src)
+    slug = {'Tropos': 'speaker', 'Mantle': 'mantle', 'Hemisphere': 'hemisphere', 'Core': 'core'}
+    def img(src, alt, cls='', lazy=True):
+        w, h = size(src)
+        return f'<img{" class=" + chr(34) + cls + chr(34) if cls else ""} src="{src}" width="{w}" height="{h}"{" loading=" + chr(34) + "lazy" + chr(34) if lazy else ""} alt="{alt}">'
+    # 1. the hero: its line and two buttons
+    m = re.search(r'(<div class="hero-photo hs">.*?</div>)', p.rest, re.S)
+    assert m, 'rc_marketing: the hero picture'
+    more = ('<div class="hero-more"><div class="wrap"><p class="hero-sub">Horn speakers, lamps and a turntable, cast in tinted acrylic.</p>'
+            '<p class="hero-cta"><a class="cta-btn cta-solid" href="#speakers">Meet Tropos</a> <a class="cta-btn cta-line" href="#colors">See the colors</a></p></div></div>')
+    p.rest = p.rest[:m.end()] + more + p.rest[m.end():]
+    p.sub('<section class="hero hs-hero" id="top"><i class="anchor" id="colors"></i>', '<section class="hero hs-hero" id="top">')
+    # 2. the family
+    def card(name, href, k, kind, line):
+        f = name.lower()
+        src = {'Tropos': f'img/rc/{k}-hero.webp', 'Mantle': f'img/rc/mantle-{NAMES[k]}.webp'}.get(name, f'img/rc/home-{f}-{NAMES[k]}.webp')
+        alt = f'{name} in {C[k]["name"]}'
+        return (f'<a class="fcard fc-{f}" href="{href}"><span class="fc-pic">{img(src, alt)}<span class="fc-tag">Render</span></span>'
+                f'<span class="fc-body"><span class="fc-kind">{kind}</span><h3 class="fc-name">{name}</h3><span class="fc-line">{line}</span>'
+                f'<span class="fc-btn">See {name} {ARROW}</span></span></a>')
+    family = ('<section class="band mk" id="family"><div class="wrap mk-head"><h2>The family.</h2></div>'
+              '<div class="mk-wide fam">' + ''.join(card(*x) for x in FAMILY) + '</div></section>')
+    # 3. the colors
+    tints = ''.join(f'<label class="tint"><input type="radio" name="tint" value="{k}"{" checked" if k == "blue" else ""}>'
+                    f'<span class="coin-dot" style="--i:{C[k]["coin"]}"></span><span class="tn">{C[k]["name"]}</span></label>' for k in RC_KEYS)
+    ice = pics('blue')
+    boxes = ''.join(f'<a class="pk pk-{f}" href="#{slug[name]}-ice" data-p="{f}">{img(ice[f], f"{name} in Ice")}</a>'
+                    for name, f in (('Tropos', 'tropos'), ('Mantle', 'mantle'), ('Hemisphere', 'hemisphere'), ('Core', 'core')))
+    data = {k: {'name': C[k]['name'], 'line': C[k]['line'], 'slug': C[k]['name'].lower(), 'pics': pics(k)} for k in RC_KEYS}
+    colors = ('<section class="band mk" id="colors-band"><i class="anchor" id="colors"></i><div class="wrap mk-head"><h2>Eight colors, the full spectrum.</h2></div>'
+              '<div class="wrap"><fieldset class="tint-pick"><legend class="sr">Choose a color</legend>' + tints + '</fieldset>'
+              f'<p class="tint-line" aria-live="polite"><b>{C["blue"]["name"]}.</b> <span>{C["blue"]["line"]}</span></p></div>'
+              '<div class="mk-wide fam pick">' + boxes + '</div><div class="wrap"><p class="mk-cap"><i class="render">Render</i></p></div></section>')
+    # 4. each color a place
+    places = ''.join(f'<a class="place" href="#color-{C[k]["name"].lower()}">{img(C[k]["hab"], C[k]["hab_alt"])}'
+                     f'<span class="pl-cap">{cap} <i class="render">Render</i></span></a>' for k, cap in PLACES)
+    place = ('<section class="band mk" id="places"><div class="wrap mk-head"><h2>Each color is a place.</h2></div>'
+             '<div class="mk-wide places">' + places + '</div></section>')
+    # the old blocks go: the Tropos words, the lamps' and Mantle's beats
+    for sid in ('sound', 'lamps-beat', 'mantle-beat'):
+        p.section(sid)
+    p.sub('<section class="band" id="progress">', family + '\n  ' + colors + '\n  ' + place + '\n  <section class="band mk" id="progress">')
+    # 5. the making, tightened
+    for a, b in (('<span>Every part of Tropos has its own drawing. The horn&rsquo;s profile and the cabinet&rsquo;s bass were worked out by simulation before any acrylic was cut.</span>',
+                  '<span>Every part has its own drawing. The horn and the bass were simulated before any acrylic was cut.</span>'),
+                 ('<span>Built to the drawings, the back screwed to the braces. The first pair is made the way every pair will be.</span>',
+                  '<span>Built to those drawings, the way every pair will be.</span>'),
+                 ('<span>In a room, by ear and by microphone. The lamps and Mantle come next, the same way.</span>',
+                  '<span>In a room, by ear and by microphone. The lamps and Mantle follow.</span>')):
+        p.sub(a, b)
+    js = """<script>(function () {      // the colors: a radio group; each choice swaps the four pictures and their links
+  const T = %s, box = document.querySelector('#colors-band'); if (!box) return;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches, line = box.querySelector('.tint-line');
+  const warm = {}, load = k => warm[k] || (warm[k] = Promise.all(Object.values(T[k].pics).map(s => { const im = new Image(); im.src = s; return im.decode ? im.decode().catch(() => {}) : null; })));
+  const PR = { tropos: ['Tropos', 'speaker'], mantle: ['Mantle', 'mantle'], hemisphere: ['Hemisphere', 'hemisphere'], core: ['Core', 'core'] };
+  let want = 'blue';
+  const show = k => { want = k; const t = T[k];
+    line.innerHTML = `<b>${t.name}.</b> <span>${t.line}</span>`;
+    load(k).then(() => { if (want !== k) return;
+      box.querySelectorAll('.pk').forEach(a => { const f = a.dataset.p, im = a.querySelector('img');
+        a.href = `#${PR[f][1]}-${t.slug}`; im.alt = `${PR[f][0]} in ${t.name}`;
+        if (reduce) { im.src = t.pics[f]; return; }
+        im.style.opacity = 0; setTimeout(() => { im.src = t.pics[f]; im.style.opacity = 1; }, 140); }); }); };
+  box.querySelectorAll('.tint input').forEach(r => {
+    r.addEventListener('change', () => r.checked && show(r.value));
+    const lab = r.closest('label'); ['pointerenter', 'focusin', 'touchstart'].forEach(e => lab.addEventListener(e, () => load(r.value), { passive: true }));
+  });
+})()</script>""" % json.dumps(data, separators=(',', ':'))
+    i = p.rest.index('</body>') if '</body>' in p.rest else len(p.rest)
+    p.rest = p.rest[:i] + js + '\n' + p.rest[i:]
+    hg, cg = grounds['hemisphere'], grounds['core']
+    p.css(f"""
+/* the home as a marketing page */
+.mk {{ padding-block: clamp(64px, 9vw, 128px) 0 }} #progress.mk {{ padding-bottom: clamp(56px, 7vw, 96px) }}
+.mk-head h2, #progress h2, #contact h2 {{ font-size: clamp(34px, 4.6vw, 64px); line-height: 1.02; letter-spacing: -0.035em; margin: 0 0 clamp(24px, 3vw, 40px); max-width: 16ch }}
+.mk-wide {{ width: min(100% - 32px, 1440px); margin-inline: auto }}
+.cta-btn {{ display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 22px; border-radius: 999px; font-size: 16px; font-weight: 600;
+  text-decoration: none; transition: background-color .2s ease, color .2s ease, border-color .2s ease }}
+.cta-solid {{ background: #1C1A18; color: #F4F1EC; border: 2px solid #1C1A18 }} .cta-solid:hover {{ background: #000 }}
+.cta-line {{ background: rgb(244 241 236 / .82); color: #1C1A18; border: 2px solid #1C1A18 }} .cta-line:hover {{ background: #F4F1EC }}
+.cta-btn:focus-visible {{ outline: 3px solid #1C1A18; outline-offset: 3px }}
+.hs-hero .hero-more {{ position: absolute; left: 0; right: 0; z-index: 3;
+  top: calc(clamp(18px, 3.2vw, 48px) + 2 * 1.04 * clamp(34px, 4.3vw, 64px) + clamp(14px, 1.6vw, 24px)) }}
+.hero-sub {{ margin: 0 0 20px; max-width: 30ch; font-size: clamp(17px, 1.5vw, 21px); line-height: 1.35; color: #1C1A18 }}
+.hero-cta {{ display: flex; flex-wrap: wrap; gap: 12px; margin: 0 }}
+@media (max-aspect-ratio: 1/1) {{ .hs-hero .hero-more {{ position: static; padding-top: 20px }} .hero-sub {{ max-width: none }} }}
+.fam {{ display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px }}
+.fam > :nth-child(1) {{ grid-column: 1 / 3; grid-row: 1 / 3 }} .fam > :nth-child(2) {{ grid-column: 3 / 5; grid-row: 1 }}
+.fam > :nth-child(3) {{ grid-column: 3; grid-row: 2 }} .fam > :nth-child(4) {{ grid-column: 4; grid-row: 2 }}
+.fcard {{ display: flex; flex-direction: column; color: var(--ink); text-decoration: none; background: #EAE6E0; border-radius: 4px; overflow: hidden }}
+.fcard:focus-visible {{ outline: 3px solid var(--ink); outline-offset: 3px }}
+.fc-pic, .pk {{ position: relative; display: block; overflow: hidden }}
+.fc-pic img, .pk img {{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .5s cubic-bezier(.2, .7, .2, 1), opacity .14s linear }}
+.fcard:hover .fc-pic img, .fcard:focus-visible .fc-pic img, .pk:hover img, .pk:focus-visible img {{ transform: scale(1.04) }}
+.fc-tropos .fc-pic {{ flex: 1 1 auto; min-height: 420px }} .fc-tropos .fc-pic img {{ object-position: 50% 55% }}
+.fc-mantle .fc-pic, .pk-mantle {{ aspect-ratio: 3 / 2 }}
+.fc-hemisphere .fc-pic, .fc-core .fc-pic, .pk-hemisphere, .pk-core {{ aspect-ratio: 1 }}
+.fc-hemisphere, .pk-hemisphere {{ background: {hg} }} .fc-core, .pk-core {{ background: {cg} }}
+.fc-hemisphere, .fc-core {{ color: #F2EFEA }}
+.fc-tag {{ position: absolute; right: 10px; bottom: 10px; padding: 3px 9px; border-radius: 999px; background: rgb(255 255 255 / .82); color: #1C1A18; font-size: 12px }}
+.fc-body {{ display: grid; gap: 6px; padding: 18px 20px 22px; justify-items: start }}
+.fc-kind {{ font-size: 12px; letter-spacing: .14em; text-transform: uppercase; opacity: .72 }}
+.fc-name {{ margin: 0; font-size: clamp(26px, 2.4vw, 36px); line-height: 1.05; letter-spacing: -0.03em }}
+.fc-line {{ max-width: 34ch; font-size: 16px; line-height: 1.4; opacity: .86 }}
+.fc-btn {{ display: inline-flex; align-items: center; gap: 8px; margin-top: 8px; padding: 9px 16px; border-radius: 999px; border: 2px solid currentColor;
+  font-weight: 600; font-size: 15px; transition: background-color .2s ease, color .2s ease }}
+.fc-btn .arr {{ width: 18px; height: 18px; transition: transform .2s ease }}
+.fcard:hover .fc-btn, .fcard:focus-visible .fc-btn {{ background: var(--ink); color: #F4F1EC; border-color: var(--ink) }}
+.fc-hemisphere:hover .fc-btn, .fc-hemisphere:focus-visible .fc-btn, .fc-core:hover .fc-btn, .fc-core:focus-visible .fc-btn {{ background: #F2EFEA; color: #111; border-color: #F2EFEA }}
+.fcard:hover .arr, .fcard:focus-visible .arr {{ transform: translateX(3px) }}
+.pick .pk-tropos {{ background: #EAE6E0 }} .pick .pk-tropos img {{ object-position: 50% 55% }} .pick .pk-mantle {{ background: #DCD9D4 }}
+.pk:focus-visible {{ outline: 3px solid var(--ink); outline-offset: 3px }}
+.tint-pick {{ display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 18px; padding: 0; border: 0 }}
+.tint {{ position: relative; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px 0 10px; border-radius: 999px;
+  border: 2px solid var(--rule); cursor: pointer; font-size: 15px; font-weight: 500; user-select: none }}
+.tint input {{ position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer }}
+.tint .coin-dot {{ width: 20px; height: 20px; border-radius: 50%; flex: none }}
+.tint:hover {{ border-color: var(--muted) }}
+.tint:has(input:checked) {{ border-color: var(--ink); background: var(--ink); color: #F4F1EC }} .tint:has(input:checked) .tn {{ color: #F4F1EC }}
+.tint .tn {{ color: var(--ink); font-size: 15px }}
+.tint:has(input:focus-visible) {{ outline: 3px solid var(--ink); outline-offset: 3px }}
+.tint-line {{ margin: 0 0 24px; font-size: clamp(18px, 1.6vw, 22px); min-height: 1.4em }}
+.mk-cap {{ margin: 10px 0 0; color: var(--muted); font-size: 14px }}
+.places {{ display: grid; grid-template-columns: 1fr 1fr; gap: 16px }}
+.place {{ display: grid; gap: 10px; color: var(--ink); text-decoration: none }}
+.place img {{ width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; display: block; transition: transform .5s cubic-bezier(.2, .7, .2, 1) }}
+.place {{ overflow: hidden }} .place:hover img, .place:focus-visible img {{ transform: scale(1.02) }}
+.place:focus-visible {{ outline: 3px solid var(--ink); outline-offset: 3px }}
+.pl-cap {{ font-size: 16px }} .pl-cap .render {{ color: var(--muted); font-size: 14px }}
+#progress .promise {{ max-width: 980px }} #contact .wrap > * {{ max-width: 760px }}
+@media (min-width: 900px) {{ #nav-list a[data-nav] {{ font-weight: 600 }}
+  #nav-list .contact-link a {{ padding: 8px 16px; border: 2px solid var(--ink); border-radius: 999px }}
+  #nav-list .contact-link a:hover {{ background: var(--ink); color: #F4F1EC }} }}
+@media (max-width: 760px) {{
+  .fam:not(.pick) {{ grid-template-columns: minmax(0, 1fr) }} .fam:not(.pick) > * {{ grid-column: auto !important; grid-row: auto !important }}
+  .fc-tropos .fc-pic {{ flex: none; aspect-ratio: 4 / 5; min-height: 0 }}
+  .pick {{ grid-template-columns: 1fr 1fr; gap: 10px }} .pick > :nth-child(1) {{ grid-column: 1; grid-row: 1 / 3 }}
+  .pick > :nth-child(2) {{ grid-column: 1 / 3; grid-row: 3 }} .pick > :nth-child(3) {{ grid-column: 2; grid-row: 1 }} .pick > :nth-child(4) {{ grid-column: 2; grid-row: 2 }}
+  .places {{ grid-template-columns: minmax(0, 1fr) }}
+}}
+@media (prefers-reduced-motion: reduce) {{ .fc-pic img, .pk img, .place img, .fc-btn, .arr {{ transition: none !important }} }}
+""")
+    assert 'One hangs' not in p.rest, 'rc_marketing: the old tagline'
 
 
 HISTORY = r'(?:round \d+|\br\d\d[a-z]?\b|\bRC\d?\b|coordinator|the owner|critics?\b|\bcommit\b|\bbranch\b|r\d\d-[a-z]|wave \d|the audit)'
