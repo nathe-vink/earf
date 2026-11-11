@@ -290,6 +290,26 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
       without the icon outlines, Core footlights.
    -> BIOMES UN-PARKED (biomes lane, 14:50): finals for all eight tints, portrait 2400x3000 and wide 3200x2000, the
       approved speaker build asserted, scanned assets and real skies allowed; Ice and Fog again at full size first.
+   DONE 14:46: no "Render" tags (r49-site-rc 6a108b42, dpl_DkcyiR6RxRH7n2HFoyqBaE9xY3gP); link sent 14:55.
+   APPROVED ASSETS for the other lanes: Tropos r33-speaker-horn 0f54ebee (tropos-strata.blend + manifest: base A with its
+   feet, polished horn, black rods, the approved Smoke); Mantle r48-mantle-design b5fff814 (mantle-strata.blend + manifest,
+   all eight tints). The biomes lane found its habitats stood on stand-in rubber feet and used the old dark Smoke; finals
+   held until 0f54ebee. Biomes state: Ice, Fog approved; Dust design accepted; Acid, Ember, Haze, Poison, Smoke need proxies.
+   PRODUCT TESTS (r33-speaker-horn d8fc4556, renders/2026-11-11/barkhorn/product/) shown 15:40. OWNER ~16:00: "Is there a
+   weird wire artifact on the core bar table? The pendants and cores shot has other lights in the background, which it
+   shouldn't have, and the colors are too washed out. The bar could also be cooler. Red brick, wood, cement textures mostly.
+   No TVs. Should we make the hemispheres bigger? ..." then "Actually nevermind on making hemisphere bigger I like having to
+   pair multiple", and ~16:20: "Would be cool to have a hemisphere shot with the different colors at variable heights, all
+   clustered together. Would also be nice if that core base was satin or matte instead of shiny plastic. It looks cheap
+   otherwise." Also 15:20: "The hemisphere shots need a looking at it directly shot (solo for each color ...), one from
+   underneath but not directly underneath, etc."
+   -> HEMISPHERE KEEPS ITS SIZE; it is shown in MULTIPLES, clustered at different heights.
+   -> CORE'S BASE (and dock) is SATIN BLACK, not gloss: a design change. Default cast black acrylic, bead-blasted; satin
+      black anodized 6061 priced as the option. Core finals re-rendered at the same names.
+   -> Lamps lane queue: Hemisphere direct x8, under x8, Ember off, Ember rim detail; the eight-tint cluster; Core finals
+      with the satin base.
+   -> Speaker lane queue: stage v2; P1 fix (the stray rod removed, the ball a stop darker, satin base); P2 as our own bar
+      (red brick, wood, concrete, no TV, no other lamps, colors held, Hemispheres clustered).
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
