@@ -35,7 +35,10 @@ DARK = {k: 0.0 for k in ('dome_w', 'dome_glow', 'sphere_w', 'sphere_glow', 'disc
 Y_BAR = (R.COUNTER['y0'] + R.COUNTER['y1']) / 2
 TOP = R.COUNTER['top_z']
 SPK_Y = R.BACKBAR_Y + 0.0662
-MANTLE = (6.9, R.BACKBAR_Y - 0.2, FEET_BAR - 0.02)
+# (test 3, by ray cast: behind the bar is the bartender's aisle, floor to the wall; the original's players stood on the
+# bar top's back half, the DJ station, between the bays: Mantle there, where the room's left player stood)
+DECK_Y = R.COUNTER['y1'] - 0.22
+MANTLE = (R.DJ['x'] - 0.38, DECK_Y, R.COUNTER['top_z'] + 0.001)
 HEMIS = [('ember', 5.25, 0.0, 1.70), ('dust', 5.85, 0.06, 1.82), ('acid', 6.5, -0.02, 1.68), ('ember', 7.15, 0.05, 1.78),
          ('dust', 7.8, -0.03, 1.72), ('acid', 8.45, 0.04, 1.84)]
 CORES = [('ember', 5.55, -0.12), ('dust', 7.6, -0.18), ('acid', 8.75, -0.1)]     # (test 1: the Dust Core hid Mantle at 6.95)
@@ -86,10 +89,12 @@ def _life():
             {'kind': 'kit', 'shape': 'box', 'size': [5.8, 0.85, 0.008], 'position': [6.9, R.STOOL_Y - 0.25, 0.001],
              'material': 'pbr', 'texture': 'poly_wool_herringbone', 'tex_res': '2k', 'tint': '#6A4A36', 'tint_mix': 0.55, 'gain': 0.7},   # a runner
             {'kind': 'kit', 'shape': 'asset', 'model': 'potted_plant_02', 'res': '2k', 'position': [10.4, R.STOOL_Y + 0.1, 0.0], 'rotate': [0, 0, 40.0]}]
-    bds = [  # the now-playing sleeve, standing by Mantle, leaning on the wall's foot
-           {'image': 'tex/cover-05.png', 'w': 0.315, 'h': 0.315, 'x': 7.62, 'y': R.BACKBAR_Y - 0.05, 'z': BB, 'rot': [-12.0, 0, -8.0], 'ground': '#EFEBE3'},
-           # a small stack waiting
-           *[{'image': f'tex/cover-{k:02d}.png', 'w': 0.315, 'h': 0.315, 'x': 6.2 + 0.006 * j, 'y': R.BACKBAR_Y - 0.33 + 0.004 * j, 'z': BB + 0.004 * j,
+    out.append({'kind': 'kit', 'shape': 'box', 'size': [0.34, 0.05, 0.022], 'position': [7.2, DECK_Y + 0.06, T],
+                'material': 'pbr', 'texture': 'american_walnut_veneer', 'tex_res': '2k', 'tint': '#5A3824', 'tint_mix': 0.5, 'gain': 0.6, 'ease': 0.003})
+    bds = [  # the now-playing sleeve on a small walnut stand by Mantle
+           {'image': 'tex/cover-05.png', 'w': 0.315, 'h': 0.315, 'x': 7.2, 'y': DECK_Y + 0.05, 'z': T + 0.022, 'rot': [-14.0, 0, -6.0], 'ground': '#EFEBE3'},
+           # a small stack waiting, on the bar top's back half
+           *[{'image': f'tex/cover-{k:02d}.png', 'w': 0.315, 'h': 0.315, 'x': 7.62 + 0.006 * j, 'y': DECK_Y + 0.16 + 0.004 * j, 'z': T + 0.004 * j,
               'rot': [-90.0, 0, [4.0, -6.0, 9.0, -3.0][j]]} for j, k in enumerate((9, 2, 12, 7))],
            # sleeves pulled half out of the wall's cells, their faces turned a little to the room
            *[{'image': f'tex/cover-{k:02d}.png', 'w': 0.315, 'h': 0.315, 'x': x, 'y': R.RECORD_WALL['y'] - 0.14, 'z': z, 'rot': [-4.0, 0, rz],
@@ -98,7 +103,7 @@ def _life():
            {'image': 'tex/newspaper.png', 'w': 0.29, 'h': 0.4, 't': 0.006, 'x': 9.0, 'y': Y_BAR - 0.26, 'z': T, 'rot': [-90.0, 0, -11.0],
             'ground': '#E4E0D6', 'rough': 0.85},
            # the wry detail: the speaker's seat is taken
-           {'image': 'tex/reserved.png', 'w': 0.1, 'h': 0.05, 't': 0.002, 'x': 8.25, 'y': R.BACKBAR_Y - 0.12, 'z': BB, 'rot': [-18.0, 0, 0.0],
+           {'image': 'tex/reserved.png', 'w': 0.1, 'h': 0.05, 't': 0.002, 'x': 8.25, 'y': SPK_Y - 0.27, 'z': FEET_BAR, 'rot': [-18.0, 0, 0.0],
             'ground': '#EFEBE3', 'rough': 0.7}]
     out.append({'kind': 'kit', 'shape': 'ext', 'path': LIFE, 'fn': 'boards', 'boards': bds})
     # (test 2: the room's old DJ station left a mixer and two records floating where the old players stood: out)
@@ -166,8 +171,8 @@ def bar_backbar():
     # (test 1: the bays cut by the frame: a seat pulled back, 30 mm, a little off axis)
     # (17:39 "cozy": closer and lower, from a stool at the bar at a seated eye, the room wrapping round; 26 mm so both
     # bays stay whole)
-    s['camera'] = {'position': [6.6, 3.05, 1.36], 'target': [6.95, 5.6, 1.55], 'lens_mm': 26.0, 'level': True,
-                   'fstop': 3.2, 'focus': [6.9, 4.15, 1.12]}
+    s['camera'] = {'position': [6.75, 2.7, 1.34], 'target': [6.95, 5.6, 1.55], 'lens_mm': 26.0, 'level': True,
+                   'fstop': 3.2, 'focus': [6.7, 4.25, 1.12]}      # (test 3: from 3.05 m the bays were cut: a seat back)
     return s
 
 
