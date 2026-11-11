@@ -15,3 +15,18 @@ Punchy, white balance 4000 K; Core alone at EV -1 (its finals'), the wide at EV 
 All match but the Dust Core in the wide (half a stop under its own exposure: darker and more saturated). What fixed
 Core: the lamps lane's own exposure for it (EV -1 and 4000 K, not -5) and its own LED colours (no 4000 K override for
 Dust and Acid), with the room's declared light low enough that the ball's glow carries it.
+
+## Round 3 (2026-11-11, after the coordinator's 20:47 notes)
+
+Exposure EV -2.0 in the wide (was -1.5); core-bar-table keeps EV -1 and its room as approved.
+
+| what | frame | measured |
+|---|---|---|
+| Core Ember centre (h, s, v) | core-bar-table | 5.0, 0.67, 0.90 (finals 5.0, 0.64, 0.91) |
+| near Tropos, its lit cabinet face against the record wall | bar-backbar | top 0.70, side 0.26, wall 0.25: face 1.9x the wall (round 2's whole-speaker box 2.45x; now 0.7x, the cone near black pulling it down) |
+| near Tropos woofer cone, mean | bar-backbar | 0.21 (grey-white before) |
+| covered by nearer things | bar-backbar | near 1.8 % (Mantle's corner, below its foot), far 0.2 % |
+| audit (reaudit.py) | both | hidden 0, equipment 0 |
+
+Grey levels are the frame's 0-1 luminance on a 1200 px copy (cabinet top, cabinet side, cone, and a patch of the record wall
+between the bays).
