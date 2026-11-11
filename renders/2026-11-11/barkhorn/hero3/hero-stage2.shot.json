@@ -1,0 +1,870 @@
+{
+ "title": "Tropos, THE STAGE (second version): a proper house, each one under its own Hemisphere",
+ "size": [
+  1920,
+  880
+ ],
+ "set": {
+  "kind": "stage",
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     14.0,
+     4.6000000000000005,
+     0.998
+    ],
+    "position": [
+     0.0,
+     1.1,
+     0.001
+    ],
+    "material": "clay",
+    "color": "#070707"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     14.0,
+     4.6000000000000005,
+     0.004
+    ],
+    "position": [
+     0.0,
+     1.1,
+     0.997
+    ],
+    "material": "clay",
+    "color": "#0C0C0C",
+    "roughness": 0.55
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/campaign/stage/stage2_props.py",
+    "fn": "backdrop",
+    "x0": -8.0,
+    "x1": 8.0,
+    "y": 3.4000000000000004,
+    "z0": 1.0,
+    "z1": 9.0,
+    "stops": [
+     [
+      0.0,
+      "#1B2850"
+     ],
+     [
+      0.22,
+      "#111A38"
+     ],
+     [
+      0.55,
+      "#080C1E"
+     ],
+     [
+      1.0,
+      "#030409"
+     ]
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "drape",
+    "size": [
+     2.8,
+     8.0
+    ],
+    "position": [
+     -4.45,
+     -1.0,
+     9.0
+    ],
+    "folds": 19,
+    "amplitude": 0.11,
+    "material": "velvet",
+    "color": "#3A0B10",
+    "seed": 11
+   },
+   {
+    "kind": "kit",
+    "shape": "drape",
+    "size": [
+     2.8,
+     8.0
+    ],
+    "position": [
+     4.45,
+     -1.0,
+     9.0
+    ],
+    "folds": 19,
+    "amplitude": 0.11,
+    "material": "velvet",
+    "color": "#3A0B10",
+    "seed": 12
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     2.0,
+     0.3,
+     10.0
+    ],
+    "position": [
+     -6.8,
+     -1.15,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#050505"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     2.0,
+     0.3,
+     10.0
+    ],
+    "position": [
+     6.8,
+     -1.15,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#050505"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.72,
+     0.6,
+     0.701
+    ],
+    "position": [
+     -1.95,
+     1.2,
+     0.999
+    ],
+    "material": "clay",
+    "color": "#0A0A0A",
+    "roughness": 0.7
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.72,
+     0.6,
+     0.551
+    ],
+    "position": [
+     -0.4,
+     0.9,
+     0.999
+    ],
+    "material": "clay",
+    "color": "#0A0A0A",
+    "roughness": 0.7
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.72,
+     0.6,
+     0.201
+    ],
+    "position": [
+     0.4,
+     0.15,
+     0.999
+    ],
+    "material": "clay",
+    "color": "#0A0A0A",
+    "roughness": 0.7
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.72,
+     0.6,
+     0.451
+    ],
+    "position": [
+     1.75,
+     0.9,
+     0.999
+    ],
+    "material": "clay",
+    "color": "#0A0A0A",
+    "roughness": 0.7
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.72,
+     0.6,
+     0.251
+    ],
+    "position": [
+     3.0,
+     0.8,
+     0.999
+    ],
+    "material": "clay",
+    "color": "#0A0A0A",
+    "roughness": 0.7
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.5,
+     0.42,
+     0.551
+    ],
+    "position": [
+     -1.9,
+     -0.75,
+     0.999
+    ],
+    "material": "clay",
+    "color": "#0A0A0A",
+    "roughness": 0.6
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/campaign/stage/stage2_props.py",
+    "fn": "scenic",
+    "pieces": [
+     {
+      "tint": "ember",
+      "x": -3.4,
+      "y": 0.8,
+      "z": 1.0,
+      "height": 1.25,
+      "yaw": 11.0,
+      "flip": false
+     },
+     {
+      "tint": "dust",
+      "x": -1.45,
+      "y": 1.8,
+      "z": 1.0,
+      "height": 1.0,
+      "yaw": 7.0,
+      "flip": false
+     },
+     {
+      "tint": "acid",
+      "x": -0.7,
+      "y": 0.55,
+      "z": 1.0,
+      "height": 1.0,
+      "yaw": 3.0,
+      "flip": false
+     },
+     {
+      "tint": "poison",
+      "x": -0.9,
+      "y": 1.45,
+      "z": 1.0,
+      "height": 1.05,
+      "yaw": 1.0,
+      "flip": false
+     },
+     {
+      "tint": "ice",
+      "x": 0.9,
+      "y": 0.85,
+      "z": 1.0,
+      "height": 1.2,
+      "yaw": -2.0,
+      "flip": false
+     },
+     {
+      "tint": "haze",
+      "x": 1.75,
+      "y": 1.6,
+      "z": 1.0,
+      "height": 1.35,
+      "yaw": -5.0,
+      "flip": false
+     },
+     {
+      "tint": "fog",
+      "x": 2.7,
+      "y": 0.55,
+      "z": 1.0,
+      "height": 0.9,
+      "yaw": -8.0,
+      "flip": false
+     },
+     {
+      "tint": "smoke",
+      "x": 3.45,
+      "y": 1.4,
+      "z": 1.0,
+      "height": 1.4,
+      "yaw": -11.0,
+      "flip": true
+     }
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/campaign/stage/stage2_props.py",
+    "fn": "pendants",
+    "led_k": {
+     "red": 2200,
+     "green": 2700,
+     "ice": 2700,
+     "violet": 3000,
+     "orange": 4000,
+     "amber": 4000,
+     "blue": 4000,
+     "black": 4000
+    },
+    "core_load": {
+     "orange": 1.5,
+     "amber": 1.5,
+     "blue": 1.5,
+     "black": 0.15
+    },
+    "hemispheres": [
+     {
+      "tint": "red",
+      "x": -2.96,
+      "y": 0.25,
+      "rim_z": 2.733
+     },
+     {
+      "tint": "red",
+      "x": -2.73,
+      "y": 0.33,
+      "rim_z": 2.913
+     },
+     {
+      "tint": "orange",
+      "x": -2.06,
+      "y": 1.2,
+      "rim_z": 3.433
+     },
+     {
+      "tint": "orange",
+      "x": -1.83,
+      "y": 1.28,
+      "rim_z": 3.613
+     },
+     {
+      "tint": "amber",
+      "x": -1.26,
+      "y": -0.1,
+      "rim_z": 2.733
+     },
+     {
+      "tint": "amber",
+      "x": -1.03,
+      "y": -0.02,
+      "rim_z": 2.913
+     },
+     {
+      "tint": "green",
+      "x": -0.51,
+      "y": 0.9,
+      "rim_z": 3.283
+     },
+     {
+      "tint": "green",
+      "x": -0.28,
+      "y": 0.98,
+      "rim_z": 3.463
+     },
+     {
+      "tint": "blue",
+      "x": 0.29,
+      "y": 0.15,
+      "rim_z": 2.933
+     },
+     {
+      "tint": "blue",
+      "x": 0.52,
+      "y": 0.23,
+      "rim_z": 3.113
+     },
+     {
+      "tint": "violet",
+      "x": 1.64,
+      "y": 0.9,
+      "rim_z": 3.183
+     },
+     {
+      "tint": "violet",
+      "x": 1.87,
+      "y": 0.98,
+      "rim_z": 3.363
+     },
+     {
+      "tint": "ice",
+      "x": 2.04,
+      "y": -0.05,
+      "rim_z": 2.733
+     },
+     {
+      "tint": "ice",
+      "x": 2.27,
+      "y": 0.03,
+      "rim_z": 2.913
+     },
+     {
+      "tint": "black",
+      "x": 2.89,
+      "y": 0.8,
+      "rim_z": 2.983
+     },
+     {
+      "tint": "black",
+      "x": 3.12,
+      "y": 0.88,
+      "rim_z": 3.163
+     }
+    ],
+    "cores": [
+     {
+      "tint": "red",
+      "x": -2.45,
+      "y": -1.04,
+      "floor_z": 1.0,
+      "rot": 200.0
+     },
+     {
+      "tint": "orange",
+      "x": -1.75,
+      "y": -1.04,
+      "floor_z": 1.0,
+      "rot": 200.0
+     },
+     {
+      "tint": "amber",
+      "x": -1.05,
+      "y": -1.04,
+      "floor_z": 1.0,
+      "rot": 200.0
+     },
+     {
+      "tint": "green",
+      "x": -0.35,
+      "y": -1.04,
+      "floor_z": 1.0,
+      "rot": 200.0
+     },
+     {
+      "tint": "blue",
+      "x": 0.35,
+      "y": -1.04,
+      "floor_z": 1.0,
+      "rot": 200.0
+     },
+     {
+      "tint": "violet",
+      "x": 1.05,
+      "y": -1.04,
+      "floor_z": 1.0,
+      "rot": 200.0
+     },
+     {
+      "tint": "ice",
+      "x": 1.75,
+      "y": -1.04,
+      "floor_z": 1.0,
+      "rot": 200.0
+     },
+     {
+      "tint": "black",
+      "x": 2.45,
+      "y": -1.04,
+      "floor_z": 1.0,
+      "rot": 200.0
+     }
+    ],
+    "top_z": 9.0
+   }
+  ]
+ },
+ "camera": {
+  "position": [
+   0.0,
+   -7.4,
+   0.92
+  ],
+  "target": [
+   0.0,
+   1.0,
+   2.7
+  ],
+  "lens_mm": 35.0,
+  "level": true
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#F2F1EF",
+  "horizon": "#EEEDEB",
+  "ground": "#CFCCC8",
+  "strength": 0.0,
+  "visible": false
+ },
+ "render": {
+  "samples": 256,
+  "adaptive": 0.01,
+  "denoise": true,
+  "clamp": 0,
+  "bounces": 32,
+  "view": "Khronos PBR Neutral",
+  "exposure": 1.8,
+  "white_balance_k": 3600,
+  "white_balance_tint": 0.0,
+  "glossy_bounces": 16,
+  "transmission_bounces": 32,
+  "diffuse_bounces": 12,
+  "volume_bounces": 1,
+  "caustics_refractive": true,
+  "caustics_reflective": true
+ },
+ "materials": {
+  "builtin-led": {
+   "glow": 0.0
+  },
+  "builtin-led-brace": {
+   "glow": 0.0
+  },
+  "horn-satin": {
+   "roughness": 0.05
+  }
+ },
+ "lights": {
+  "house-wash": {
+   "type": "area",
+   "size_m": [
+    3.0,
+    1.5
+   ],
+   "position": [
+    0.0,
+    -8.6,
+    5.2
+   ],
+   "target": [
+    0.0,
+    0.5,
+    2.0
+   ],
+   "irradiance": 0.3,
+   "color": "#FFE4C4",
+   "spread_deg": 34
+  }
+ },
+ "products": [
+  {
+   "def": "studio/products/barkhorn-cloud.json",
+   "flavour": "cloud-red",
+   "instances": [
+    {
+     "position": [
+      -2.85,
+      0.25,
+      1.0
+     ],
+     "rotate_z": 22.0,
+     "flavour": "cloud-red",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      -1.95,
+      1.2,
+      1.7
+     ],
+     "rotate_z": 14.0,
+     "flavour": "cloud-orange",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      -1.15,
+      -0.1,
+      1.0
+     ],
+     "rotate_z": 6.0,
+     "flavour": "cloud-amber",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      -0.4,
+      0.9,
+      1.55
+     ],
+     "rotate_z": 2.0,
+     "flavour": "eucalyptus-y2k-green",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      0.4,
+      0.15,
+      1.2
+     ],
+     "rotate_z": -4.0,
+     "flavour": "cloud-blue",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      1.75,
+      0.9,
+      1.45
+     ],
+     "rotate_z": -10.0,
+     "flavour": "cloud-violet",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      2.15,
+      -0.05,
+      1.0
+     ],
+     "rotate_z": -16.0,
+     "flavour": "birch-fog-clear",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      3.0,
+      0.8,
+      1.25
+     ],
+     "rotate_z": -22.0,
+     "flavour": "cloud-black",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    }
+   ]
+  },
+  {
+   "def": "studio/products/barkhorn-variants.json",
+   "flavour": "cloud-red",
+   "instances": [
+    {
+     "position": [
+      -2.85,
+      0.25,
+      1.0
+     ],
+     "rotate_z": 22.0,
+     "flavour": "cloud-red",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      -1.95,
+      1.2,
+      1.7
+     ],
+     "rotate_z": 14.0,
+     "flavour": "cloud-orange",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      -1.15,
+      -0.1,
+      1.0
+     ],
+     "rotate_z": 6.0,
+     "flavour": "cloud-amber",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      -0.4,
+      0.9,
+      1.55
+     ],
+     "rotate_z": 2.0,
+     "flavour": "eucalyptus-y2k-green",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      0.4,
+      0.15,
+      1.2
+     ],
+     "rotate_z": -4.0,
+     "flavour": "cloud-blue",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      1.75,
+      0.9,
+      1.45
+     ],
+     "rotate_z": -10.0,
+     "flavour": "cloud-violet",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      2.15,
+      -0.05,
+      1.0
+     ],
+     "rotate_z": -16.0,
+     "flavour": "birch-fog-clear",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      3.0,
+      0.8,
+      1.25
+     ],
+     "rotate_z": -22.0,
+     "flavour": "cloud-black",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    }
+   ]
+  },
+  {
+   "asset_blend": "studio/assets/cache/mantle/b5fff814/mantle-strata.blend",
+   "manifest": "studio/assets/cache/mantle/b5fff814/mantle-strata.manifest.json",
+   "tint": "smoke",
+   "collection": "Mantle Strata Smoke",
+   "forbid": [
+    "brass"
+   ],
+   "asset_sha": "b5fff81462ea26b256a170927df33850b69ad8d8",
+   "instances": [
+    {
+     "position": [
+      -1.9,
+      -0.75,
+      1.55
+     ],
+     "rotate_z": 15.0
+    }
+   ]
+  }
+ ],
+ "haze": {
+  "box_m": [
+   -6.0,
+   -1.2,
+   1.0,
+   6.0,
+   3.2,
+   8.0
+  ],
+  "density": 0.007,
+  "anisotropy": 0.5,
+  "color": "#FFFFFF"
+ }
+}
