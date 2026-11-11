@@ -818,6 +818,7 @@ def apply(web, head, rest):
         rc_products(p, web)
         rc_home(p, web)
         rc_marketing(p, web)
+        rc_norender(p)
         rc_clean(p)
         p.banned = BANNED_RC
     return p.done()
@@ -2306,6 +2307,23 @@ def rc_marketing(p, web):
     assert 'One hangs' not in p.rest, 'rc_marketing: the old tagline'
 
 
+def rc_norender(p):
+    """No "Render" on or under any picture, on every page (the owner, 2026-11-11 14:50): the footer's line is the one
+    statement, plainly readable. Galleries keep "1 / n"."""
+    p.rest = re.sub(r'\s*<div class="wrap hero-cap"><i class="render">Render</i></div>', '', p.rest)
+    p.rest = re.sub(r'<figcaption><i class="render">Render</i></figcaption>', '', p.rest)
+    p.rest = re.sub(r'<div class="wrap"><p class="mk-cap"><i class="render">Render</i></p></div>', '', p.rest)
+    p.rest = re.sub(r'<span class="fc-tag">Render</span>', '', p.rest)
+    p.rest = re.sub(r'\s?<i class="render">Render</i>', '', p.rest)
+    p.sub("document.getElementById('g-count').textContent = list.length > 1 ? `${i + 1} / ${list.length} · Render` : 'Render';",
+          "document.getElementById('g-count').textContent = list.length > 1 ? `${i + 1} / ${list.length}` : ''; document.getElementById('g-count').hidden = list.length < 2;")
+    p.css(".foot-line { font-family: var(--sans) !important; font-weight: 400 !important; font-size: 15px !important; line-height: 1.5 !important; "
+          "letter-spacing: normal !important; text-transform: none !important; color: var(--ink) !important; opacity: 1 !important }\n"
+          "#g-count[hidden] { display: none !important }\n")
+    left = re.findall(r'.{0,60}\bRender\b.{0,30}', re.sub(r'<style\b.*?</style>', '', p.head + p.rest, flags=re.S))
+    assert not left, ('rc_norender: Render left', left[:4])
+
+
 HISTORY = r'(?:round \d+|\br\d\d[a-z]?\b|\bRC\d?\b|coordinator|the owner|critics?\b|\bcommit\b|\bbranch\b|r\d\d-[a-z]|wave \d|the audit)'
 
 
@@ -2342,6 +2360,7 @@ def rc_finish(web):
     import glob
     for f in glob.glob(os.path.join(web.SITE, '**', '*.html'), recursive=True):
         t = open(f).read()
+        assert not re.search(r'\bRender\b', t), ('rc_finish: "Render" on a page', f)     # the footer's line is the one statement
         u = t.replace('Smoked black', 'Smoked gray').replace('smoked black', 'smoked gray')
         for a, b in SPECTRUM:                 # the eight as the full spectrum, not a run from one to another
             u = u.replace(a, b)
