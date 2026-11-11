@@ -2000,7 +2000,7 @@ def hero_hollywood():
     return s
 
 
-def hero_orchestra():
+def hero_orchestra(tiers=None, seats=None, cam_z=1.55):
     """The owner picked "the orchestra" (2026-11-11 04:20): the official portrait of an orchestra whose every player is
     a horn. A concert stage: three curved tiers about the conductor's podium, warm wood behind and underfoot, a black
     music stand before each player; the podium front and centre with its stand, back to the camera. The eight face
@@ -2008,9 +2008,9 @@ def hero_orchestra():
     import math
     s = _cast_base()
     P = (0.0, -1.0)
-    tiers = {0: (2.1, 0.0), 1: (3.0, 0.30), 2: (3.9, 0.60)}
-    seats = {'dust': (0, -40), 'ember': (0, 0), 'acid': (0, 40), 'poison': (1, -22), 'ice': (1, 22),
-             'haze': (2, -48), 'smoke': (2, 0), 'fog': (2, 48)}
+    tiers = tiers or {0: (2.1, 0.0), 1: (3.0, 0.30), 2: (3.9, 0.60)}
+    seats = seats or {'dust': (0, -40), 'ember': (0, 0), 'acid': (0, 40), 'poison': (1, -22), 'ice': (1, 22),
+                      'haze': (2, -48), 'smoke': (2, 0), 'fog': (2, 48)}
     pose, stands = {}, []
     for t, (tier, th) in seats.items():
         r, z = tiers[tier]; a = math.radians(th)
@@ -2040,7 +2040,7 @@ def hero_orchestra():
                    for k, x in enumerate((-2.6, 0.0, 2.6))}
     s['lights']['hall'] = {'type': 'area', 'size_m': [3.0, 2.0], 'position': [0.0, -9.0, 3.2], 'target': [0.0, 1.0, 0.8],
                            'irradiance': 0.5, 'color': '#FFF0DC'}
-    s['camera'] = {'position': [0.0, -7.6, 1.55], 'target': [0.0, 1.2, 0.95], 'lens_mm': 40.0, 'level': True}
+    s['camera'] = {'position': [0.0, -7.6, cam_z], 'target': [0.0, 1.2, 0.95], 'lens_mm': 40.0, 'level': True}
     s['size'] = [1600, 800]
     s['render'].update(samples=64, exposure=0.0)
     s['title'] = 'Tropos, the orchestra: every player a horn'
@@ -2248,7 +2248,12 @@ def hero_orchestra3(family=True):
     oak_wood_planks on the risers, cherry_veneer panelling on the back wall). The family, if in: Hemisphere pendants in a
     row above the ensemble, Core lamps along the stage's front edge like footlights, Mantle on a low block at the front
     right corner."""
-    s = _approved(hero_orchestra())
+    # every player in the clear (a projection of each one's box against those nearer, the first layout's Smoke half
+    # behind Ember): front +/-30 deg, middle +/-12 deg at 0.62 m, back +/-40 deg and centre at 1.25 m (a choir's risers),
+    # the camera 0.35 m higher; Smoke 0 % covered, Poison and Ice 2 %
+    s = _approved(hero_orchestra(tiers={0: (2.1, 0.0), 1: (3.0, 0.62), 2: (3.9, 1.25)},
+                                 seats={'dust': (0, -30), 'ember': (0, 0), 'acid': (0, 30), 'poison': (1, -12), 'ice': (1, 12),
+                                        'haze': (2, -40), 'smoke': (2, 0), 'fog': (2, 40)}, cam_z=1.9))
     F = 0.005                                                     # the stage floor's boards' top (laid 1 mm above the set's floor)
     props = []
     for p in s['set']['props']:
@@ -2257,23 +2262,24 @@ def hero_orchestra3(family=True):
         if p.get('shape') == 'box' and p.get('size') == [0.7, 0.7, 0.22]:   # the podium
             continue
         sz = p['size'][:2] + [p['size'][2] + 0.001]               # sunk 1 mm into the boards: no coplanar faces
-        props.append({**p, 'size': sz, 'position': [p['position'][0], p['position'][1], F - 0.001], **_wood('oak_wood_planks', '#6A3E22', 0.35, 0.9)})
-    props.append({'kind': 'kit', 'shape': 'box', 'size': [16.0, 13.0, F - 0.001], 'position': [0.0, -3.0, 0.001], **_wood('old_wooden_floor_01', '#7A4A28', 0.2)})
-    props.append({'kind': 'kit', 'shape': 'box', 'size': [16.0, 0.05, 6.0], 'position': [0.0, 3.5, F - 0.001], **_wood('cherry_veneer', '#5E3A20', 0.45, 0.8)})
+        props.append({**p, 'size': sz, 'position': [p['position'][0], p['position'][1], F - 0.001], **_wood('oak_wood_planks', '#4A2A16', 0.55, 0.9)})
+    props.append({'kind': 'kit', 'shape': 'box', 'size': [16.0, 13.0, F - 0.001], 'position': [0.0, -3.0, 0.001], **_wood('old_wooden_floor_01', '#5A3418', 0.5)})
+    props.append({'kind': 'kit', 'shape': 'box', 'size': [16.0, 0.05, 6.0], 'position': [0.0, 3.5, F - 0.001], **_wood('cherry_veneer', '#3A2212', 0.75, 0.8)})
     for blk in s['products']:
         for i in blk['instances']:
             i['position'][2] = round(i['position'][2] + F, 4)
     # the warm light on the back tier too: two more of the same stage lamps, over the back tier, aimed at its players
     for k, x in enumerate((-2.2, 2.2)):
-        s['lights'][f'stageback{k}'] = {**s['lights']['stage1'], 'position': [x, 2.2, 4.8], 'target': [x * 1.05, 2.8, 1.0], 'irradiance': 2.0}
-    s['lights']['stageback-c'] = {**s['lights']['stage1'], 'position': [0.0, 2.3, 4.8], 'target': [0.0, 2.9, 1.2], 'irradiance': 2.2}
+        s['lights'][f'stageback{k}'] = {**s['lights']['stage1'], 'position': [x, 2.2, 4.8], 'target': [x * 1.05, 2.8, 1.8], 'irradiance': 1.6}
+    s['lights']['stageback-c'] = {**s['lights']['stage1'], 'position': [0.0, 2.3, 4.8], 'target': [0.0, 2.9, 1.8], 'irradiance': 1.8}
     if family:
-        hemis = [(t, x, 1.4, 2.55) for t, x in (('acid', -2.6), ('ember', -1.3), ('dust', 0.0), ('ember', 1.3), ('fog', 2.6))]
-        cores = [(t, round(x, 3), -1.55, F, 200.0) for t, x in zip(('ice', 'poison', 'haze', 'smoke', 'dust', 'ember'), [-2.4 + 0.76 * k for k in range(6)])]
+        hemis = [(t, x, 1.0, 2.8) for t, x in (('acid', -2.6), ('ember', -1.3), ('dust', 0.0), ('ember', 1.3), ('fog', 2.6))]
+        cores = [(t, round(x, 3), -0.9, F, 200.0) for t, x in zip(('ice', 'poison', 'haze', 'smoke', 'dust', 'ember'), [-2.4 + 0.76 * k for k in range(6)])]
         props.append(_family(hemis, cores))
-        props.append({'kind': 'kit', 'shape': 'box', 'size': [0.62, 0.52, 0.301], 'position': [2.45, -1.0, F - 0.001], **_wood('oak_wood_planks', '#6A3E22', 0.35, 0.9)})
-        s['products'].append(_mantle(2.45, -1.0, F + 0.301, -20.0))
+        props.append({'kind': 'kit', 'shape': 'box', 'size': [0.62, 0.52, 0.301], 'position': [2.45, -0.75, F - 0.001], **_wood('oak_wood_planks', '#6A3E22', 0.35, 0.9)})
+        s['products'].append(_mantle(2.45, -0.75, F + 0.301, -20.0))
     s['set']['props'] = props
+    s['camera']['target'][2] = 1.2                               # the frame's top over the pendants, the footlights' bases in
     s['title'] = 'Tropos, the orchestra (third pass): the first hall, no stands, the warm light on every player' + (', the family in' if family else '')
     return s
 
@@ -2291,7 +2297,7 @@ def hero_hollywood3(family=True):
               'ember': (0.62, -0.14, seat, -6.0, 0, 0),                        # the star, on the seat's right
               'fog': (-1.17, -0.06, arm, 14.0, 0, 0),                          # perched on the left arm
               'dust': (1.17, -0.06, arm, -14.0, 0, 0),                         # and the right
-              'acid': (1.55, -1.05, 0.009, -18.0, -9.0, 0),                      # on the floor, leaning back on the front
+              'acid': (2.4, -0.9, 0.0, -22.0, -9.0, 0),                      # on the floor, leaning back on the front
               'poison': (-0.72, 0.85, step, 6.0, 0, 0), 'smoke': (-0.05, 0.85, step, 0.0, 0, 0), 'ice': (2.05, 0.55, 0.30, -10.0, 0, 0)})
     props = [p for p in s['set']['props'] if p.get('shape') == 'drape']
     props += [{'kind': 'kit', 'shape': 'asset', 'model': 'sofa_03', 'res': '2k', 'position': [0.0, 0.0, 0.0]},
@@ -2303,6 +2309,6 @@ def hero_hollywood3(family=True):
     if family:
         props.append({'kind': 'kit', 'shape': 'asset', 'model': 'side_table_01', 'res': '2k', 'position': [-2.15, -0.15, 0.0]})
         s['products'].append(_mantle(-2.15, -0.15, 0.549, 15.0))
-        props.append(_family(hemis=[('acid', -1.7, 0.2, 2.2), ('dust', 1.4, 0.3, 2.35)], cores=[('ember', -2.72, -0.35, 0.0, 200.0)]))
+        props.append(_family(hemis=[('acid', -1.7, 0.2, 2.2), ('dust', 1.4, 0.3, 2.35)], cores=[('ember', -2.45, -0.55, 0.0, 200.0)]))
     s['title'] = 'Tropos, the Hollywood issue (third pass): the first staging on a real sofa, Haze lying down' + (', the family in' if family else '')
     return s
