@@ -513,6 +513,14 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    - bar-wide: fails. Reads as a computer model of a bar; Tropos pair and Mantle lost in the dark. Proposed to drop it.
    LESSON: this set convinces out of focus behind a product and fails when sharp. Bar pictures are close and medium
    shots with the bar soft behind, not a view of the whole room.
+   17:27 UTC, the owner: "C" -> MANTLE'S EDGES ARE C: a 1 mm even chamfer on the deck's and base's outer edges, the
+   chamfer polished, the outer edge satin as signed. (Taken as the answer to the edge picture, the only A/B/C open.)
+   Mantle lane (17:28): C into the CAD, parts list and BOM; the eight finals re-rendered at the same names with C and the
+   flush puck screws; asset and manifest updated. The lid question is still with the owner.
+   Speaker lane (17:28), bar round 2, close and medium only: `core-bar-table.png` with the ball reading as lit (value
+   matched to the final), `bar-pendants.png` with depth of field and the set fixed (varied bottles, real-looking
+   glasses, finer deeper walnut flutes, no black joint squares), new `mantle-back-bar.png` (Mantle in Ember on the back
+   bar, a Hemisphere above it). The wide is dropped unless the owner asks. No owner verdict yet on the bar set itself.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
