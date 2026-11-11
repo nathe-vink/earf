@@ -2,7 +2,7 @@
 
 | item | make | qty | what | size | each, USD |
 |---|---|---|---|---|---|
-| shell | formed | 1 | Cast acrylic sheet, tinted through, drape-formed over an aluminium mould | 160 cm3, 210 x 210 x 98 | 1,515.53 |
+| shell | formed | 1 | Cast acrylic sheet 1/8 in, TruCast stock tint in the line's code, drape-formed; CUSTOM POURS (2026-11-11): Dust, Acid, Ice the same dye at 3x the stock loading, Smoke at the speakers' own pour (0.3x) | 160 cm3, 210 x 210 x 98 | 1,513.77 |
 | liner | formed | 1 | Cast acrylic sheet, clear (TruCast 0000), drape-formed over an aluminium mould | 265 cm3, 202 x 202 x 89 | 1,519.57 |
 | skin | formed | 1 | Perspex GS 041 3 mm opal, or equal (T 54%, R 39%, ASTM D1003): cast acrylic sheet, volume-diffusing, formed over an aluminium mould | 120 cm3, 188 x 188 x 85 | 1,212.95 |
 | rim | lathe | 1 | Cast acrylic tube, tinted through | 204 x 204 x 14 | 67.88 |
@@ -15,7 +15,7 @@
 | pins | buy | 1 | Three stainless shouldered pins, M3 thread with a Ø4 × 10.5 shoulder, screwed through the PEEK ring into the hub, a pre-applied nylon patch (no anaerobic locker: it crazes acrylic); 4 mm or more of bayonet engagement against a centering land on the hub, radial play 0.2 or less. Secondary retention: a 1 mm stainless safety tether, crimped, from the hub to an eye on the collar, rated well over 10 × the 1.1 kg shade (review, 2026-11-01). Replaces 4 x 8 dowels pressed into the hub, which gave about 2.5 mm of engagement with 2 mm of play and could not span the 10.5 mm pin |  | 6.00 |
 | tether | buy | 1 | Review 2026-11-01: the shade's secondary retention, a 1 mm stainless wire-rope tether (7x7), crimped loops, from an eye screwed into the hub to an eye on the collar, slack in use; rated well over 10 x the 1.1 kg shade |  | 4.00 |
 | carrier | lathe | 1 | Aluminium 6061 | 66 x 66 x 14 | 46.58 |
-| board | buy | 1 | Samsung (or Lumileds / Nichia equivalent, to choose) Hemisphere option 3 (the owner, 2026-11-10: "Core cut in half"): a flat Ø50 aluminium-core ring board, 24 mid-power 3030 LEDs (Samsung LM301H EVO class, CRI 90, 2700 K; 3000 K for Ice and Haze) on a Ø38 circle, facing UP into the shade at the mouth's centre, in two series strings of 12 at about 90 mA each (the ERP driver's 180 mA split two ways by the board's matched strings). Estimates to confirm on the datasheet [check]: about 42 lm a LED at 90 mA, so about 1,000 lm; Vf about 2.75 V, so about 33 V a string (about 31 V hot, low bin): inside the driver's 24-42 V window with about 7 V over its 24 V floor, about 5.9 W of its 7.6 W. Stock side-emitting (batwing) ring optic: none found with a downloadable IES file in one search (2026-11-10); the board is drawn and rendered bare until one is named | THE LED COLOUR PER TINT (the owner, 2026-11-10: "some need warm and some need amber"): amber 2200 K (CRI 90) for Ember; warm 2700 K for Dust, Acid, Poison, Fog and Smoke (Dust and Acid moved from amber, 2026-11-10 23:50: amber washed their tint out); 3000 K for Ice and Haze; the same lumens in every bin. The lens stays open: the board bare. Heat test needed: the hub about 6 K warmer than today (estimate) |  | 14.00 |
+| board | buy | 1 | Samsung (or Lumileds / Nichia equivalent, to choose) Hemisphere option 3 (the owner, 2026-11-10: "Core cut in half"): a flat Ø50 aluminium-core ring board, 24 mid-power 3030 LEDs (Samsung LM301H EVO class, CRI 90, 2700 K; 3000 K for Ice and Haze) on a Ø38 circle, facing UP into the shade at the mouth's centre, in two series strings of 12 at about 90 mA each (the ERP driver's 180 mA split two ways by the board's matched strings). Estimates to confirm on the datasheet [check]: about 42 lm a LED at 90 mA, so about 1,000 lm; Vf about 2.75 V, so about 33 V a string (about 31 V hot, low bin): inside the driver's 24-42 V window with about 7 V over its 24 V floor, about 5.9 W of its 7.6 W. Stock side-emitting (batwing) ring optic: none found with a downloadable IES file in one search (2026-11-10); the board is drawn and rendered bare until one is named | THE LED COLOUR PER TINT (the owner, 2026-11-10: "some need warm and some need amber"): amber 2200 K (CRI 90) for Ember; 2700 K for Poison and Fog; 3000 K for Haze; 4000 K for Dust, Acid, Ice and Smoke (the owner, 2026-11-11, on the Core colour test: a dye removes only what the source carries); the same lumens in every bin. The lens stays open: the board bare. Heat test needed: the hub about 6 K warmer than today (estimate) |  | 14.00 |
 | stem | tube | 1 | Aluminium 6061 | 26 x 26 x 92 | 46.55 |
 | white-disc | laser | 1 | Aluminium 6061 | 90 x 90 x 11 | 47.23 |
 | crown | lathe | 1 | Aluminium 6061 | 90 x 90 x 22 | 49.35 |
@@ -31,11 +31,11 @@
 | | USD |
 |---|---|
 | buy | 83 |
-| formed | 4,248 |
+| formed | 4,246 |
 | laser | 47 |
 | lathe | 605 |
 | tube | 47 |
-| total | 5,030 |
+| total | 5,028 |
 
 No price yet for: UL or Intertek (ETL) Listing the pendant to UL 1598 (and the table lamp's battery and charger to UL 153 / IEC 62368): a one-off cost a design, spread over the first run.
 

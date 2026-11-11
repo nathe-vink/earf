@@ -101,10 +101,14 @@ SOLIDS.setdefault('acrylic-opal-formed', dict(title='Perspex GS 041 3 mm opal, o
 # in Hemisphere's white opal, formed on its own mould (the 3 mm sphere's sheet about 1.8 x its area, and the forming:
 # about $25 to $40 a ball [E], the rate set for about $30)
 SOLIDS.setdefault('acrylic-trucast-formed', dict(title='Cast acrylic sheet 6 mm, tinted through in the speaker\'s TruCast '
-                                                 'code, drape-formed over an aluminium mould, polished both faces',
+                                                 'code, drape-formed over an aluminium mould, polished both faces; CUSTOM POURS (2026-11-11): Dust, '
+                                                 'Acid, Ice at 3x the chart loading, Smoke at the speakers\' own pour',
                                                  density=1.19, usd_per_cm3=0.06))
 SOLIDS.setdefault('acrylic-opal-core', dict(title='Cast acrylic sheet 3 mm, white opal (Hemisphere\'s diffuser\'s), formed '
                                             'over an aluminium core mould', density=1.19, usd_per_cm3=0.18))
+SOLIDS.setdefault('acrylic-tint-3-formed', dict(title='Cast acrylic sheet 1/8 in, TruCast stock tint in the line\'s code, '
+                                                'drape-formed; CUSTOM POURS (2026-11-11): Dust, Acid, Ice the same dye at 3x the '
+                                                'stock loading, Smoke at the speakers\' own pour (0.3x)', density=1.19, usd_per_cm3=0.05))
 SOLIDS.setdefault('peek', dict(title='PEEK rod, unfilled', density=1.30, usd_per_cm3=0.35))
 SOLIDS.setdefault('ptfe', dict(title='PTFE rod, white (virgin)', density=2.17, usd_per_cm3=0.12))
 
@@ -235,9 +239,11 @@ def cover_parts(p=N):
         # new order: a 3 mm stock-tint shell outside (colour unlit), a 6 mm clear shell (the structural one, clamped by
         # the collar with the others), the 3 mm opal inside, seen directly from below; no tinted skin
         layers = [
-            Part('shell', shell, Machined('acrylic-formed', 'formed', setup_usd=1500.0), finish='body', group='cover',
+            Part('shell', shell, Machined('acrylic-tint-3-formed', 'formed', setup_usd=1500.0), finish='body', group='cover',
                  notes=['v3, the outside: 1/8 in (3 mm) stock TruCast in the line\'s code (Ember 2423, Poison 2092, Haze '
-                        '2287, Dust 2422, Acid 9097, Ice 2069, Fog 0000, Smoke 2074), ' + note_formed + '; the one '
+                        '2287, Dust 2422, Acid 9097, Ice 2069, Fog 0000, Smoke 2074), ' + note_formed + '; CUSTOM POURS (the owner, '
+                        '2026-11-11): Dust, Acid and Ice the same dye at 3x the stock sheet\'s loading, Smoke at the '
+                        'speakers\' own pour, 0.3x (about 54 % through 6 mm), not stock 2074; the one '
                         'tinted layer, seen unlit, glowing lit (15 to 20 % at 3 mm for 2423 and 2092). Its mould is v2\'s '
                         'shell mould (the outer face, R 100), the sheet 1/8 in instead of 10 mm']),
             Part('liner', liner, Machined('acrylic-clear-formed', 'formed', setup_usd=1500.0), finish='body',
@@ -590,7 +596,8 @@ def orb_parts(p=O):
                  notes=['Core B (the owner, 2026-11-09): the outer ball, R 80 outside, R 74 inside, polished both faces '
                         '(no frost). Two hemispheres drape-formed from 6 mm (1/4 in) cast sheet in the speaker\'s TruCast '
                         'code for the tint (Ember 2423, Dust 2422, Acid 9097, Poison 2092, Ice 2069, Haze 2287, Fog 0000, '
-                        'Smoke 2074), the chart figure held at the 6 mm wall, on the existing female mould [check with the '
+                        'Smoke 2074), the chart figure held at the 6 mm wall; CUSTOM POURS (the owner, 2026-11-11): Dust, Acid and Ice '
+                        'at 3x that loading, Smoke at the speakers\' own pour (about 54 % through 6 mm), on the existing female mould [check with the '
                         'former: the 6 mm wall must form on the 9 mm wall\'s mould]; joined at the equator round the core '
                         'with a polymerising acrylic cement (Acrifix 192 kind), the joint turned and polished; the Ø40 '
                         'port cut at its foot']),
@@ -770,6 +777,9 @@ NOTES_ORB = [
     '2422, Acid 9097, Poison 2092, Ice 2069, Haze 2287, Fog 0000, Smoke 2074), the chart figure held at the 6 mm wall: a '
     'dosed batch per code, cast to match where stock will not hold it; the chips decide. Haze 2287 may be translucent '
     '(Acme lists it "Violet - Translucent"): Haze is a custom cast for the speaker, and its outer ball would be too.',
+    'Colour (the owner, 2026-11-11, on the Core colour test): both lamps\' shells for Dust, Acid and Ice are custom '
+    'pours of the same dye at 3x the chart loading, and Smoke the speakers\' own pour (about 54 % through Core\'s 6 mm), '
+    'not 2074 dark gray; their LEDs 4000 K. Ember 2200 K, Poison and Fog 2700 K, Haze 3000 K, their shells unchanged.',
     'Cordless (the owner, 2026-10-31): three button-top LiFePO4 18650 cells (Power Sonic PSL-FP-IFR18650EC class, 14.4 Wh) '
     'on bare spring contacts in bays milled round the LED, behind a hatch underneath on four captive screws, the user\'s '
     'to replace with standard cells. It charges on its dock or from USB-C underneath at 9 V (USB PD, the 20 W adapter '

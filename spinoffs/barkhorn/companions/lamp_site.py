@@ -40,6 +40,13 @@ CCT_PER_TINT = {'blue': 5700, 'violet': 4000}         # the rest 2700
 # for Dust, Acid (moved from amber 23:50: 2200 K carries almost none of the light their dyes remove, so they read pale),
 # Poison, Fog and Smoke; 3000 K for Ice and Haze. Both lamps; LED_K overrides
 LED_CCT = {'red': 2200, 'orange': 2700, 'amber': 2700, 'green': 2700, 'ice': 2700, 'black': 2700, 'blue': 3000, 'violet': 3000}
+# 2026-11-11 (the owner, "Go", on the Core colour test ae86581b): 4000 K for Dust, Acid, Ice and Smoke; Ember 2200 K,
+# Poison and Fog 2700 K, Haze 3000 K
+LED_CCT.update({'orange': 4000, 'amber': 4000, 'blue': 4000, 'black': 4000})
+# the outer shell's dye loading per tint, as a multiple of the chart figure at the wall (Core's 6 mm at 0.5, Hemisphere's
+# 3 mm at 1): Dust, Acid and Ice a custom pour at 3x; Smoke the speakers' own pour (about 54 % through Core's 6 mm),
+# 0.3x; the rest 1x
+TINT_LOAD = {'orange': 3.0, 'amber': 3.0, 'blue': 3.0, 'black': 0.3}
 # the site's colour keys (web.py HABITAT) to the tints
 COLOURS = {'red': 'Ember', 'orange': 'Dust', 'amber': 'Acid', 'green': 'Poison', 'blue': 'Ice', 'violet': 'Haze',
            'ice': 'Fog', 'black': 'Smoke dark'}
@@ -184,8 +191,9 @@ def build(frame, samples, scale):
             # denoiser. The opal one scattering face (its outside, GS 041), a closed solid to the rim: its inside and its
             # edge plain clear acrylic
             bl = blackbody(int(os.environ.get('LED_K', 0)) or LED_CCT.get(tint, 2700))   # its tint's LED colour
-            sphere(f'tint-{tint}', 100.0, c, acrylic(f'tint-{tint}', 0.0, tname), cut=0.0, hole=H)
-            sphere(f'tint-in-{tint}', 97.0, c, acrylic(f'tint-in-{tint}', 0.0, tname), inward=True, cut=0.0, hole=H)
+            lt_ = float(os.environ.get('HEMI_LOAD', TINT_LOAD.get(tint, 1.0)))     # the 3 mm shade's loading (2026-11-11)
+            sphere(f'tint-{tint}', 100.0, c, acrylic(f'tint-{tint}', 0.0, tname, lt_), cut=0.0, hole=H)
+            sphere(f'tint-in-{tint}', 97.0, c, acrylic(f'tint-in-{tint}', 0.0, tname, lt_), inward=True, cut=0.0, hole=H)
             sphere(f'clear-{tint}', 96.0, c, acrylic(f'clear-{tint}', 0.0, 'Clear'), cut=4.0, hole=H)
             sphere(f'clear-in-{tint}', 90.0, c, acrylic(f'clear-in-{tint}', 0.0, 'Clear'), inward=True, cut=4.0, hole=H)
             # the scattering face is the opal's INSIDE (facing the LEDs, so its light is sampled directly; a clear inside
@@ -344,7 +352,7 @@ def build(frame, samples, scale):
             # the grommet raised to suit: its shoulder where the core's Ø40 opening meets it, a 3 mm spigot above
             # CORE_LOAD: the outer ball's dye loading (0.5: the chart figure at its 6 mm wall; the speakers' own pour at 6 mm
             # is about 0.15, since their chart figure is at 20 mm). A test switch (2026-11-11), the default unchanged
-            ld_ = float(os.environ.get('CORE_LOAD', '0.5'))
+            ld_ = float(os.environ.get('CORE_LOAD', 0.5 * TINT_LOAD.get(tint, 1.0)))
             Tb = shell_T(tname, ld_, 3.0)
             sphere(f'ball-{tint}', 80.0, (x, y, zc), thin_shadow(acrylic(f'ball-{tint}', 0.0, tname, ld_), Tb), hole_below=20.0)
             sphere(f'ball-in-{tint}', 74.0, (x, y, zc), thin_shadow(acrylic(f'ball-in-{tint}', 0.0, tname, ld_), Tb), inward=True, hole_below=20.0)
