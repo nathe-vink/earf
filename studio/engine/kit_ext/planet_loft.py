@@ -1,0 +1,641 @@
+"""Planet EARF, round 34 (the loft): the den's room in the owner's new palette, as one kit `ext` piece.
+
+    {"kind": "kit", "shape": "ext", "module": "planet_loft", "fn": "room", ...}
+
+The owner, 2026-10-19: lots of cement, wood beams, steel and iron, and a lot of acrylic, but not rainbow and not cheap;
+screens behind large acrylic panels showing "suggestive hands pressed up against fogged glass, the fogged silhouette
+of a woman dancing, alien/foreign objects like the movie arrival"; dimly lit, but not hard to see.
+
+The footprint and the den's builders stay (planet_den.py); this module swaps their materials and adds what is new:
+
+- the shell: board-formed concrete walls (tie holes, pour panels), a polished concrete floor, Douglas fir beams across
+  the room under a fir plank deck;
+- the screens: in reveals cut into the concrete, a 30 mm frosted acrylic panel flush with the wall face and, 100 mm
+  behind it, a glowing image plane (screens.py's images), so the diffusion is the panel's own; a blackened-steel angle
+  round each reveal; and a lightbox of two frosted panels in the shopfront window, the dancer between them;
+- the bar: a fluted concrete front on a blackened-steel kick, a fir top with a clear acrylic band inlaid along its front
+  edge, lit from within; the back-bar in blackened steel against the concrete, clear acrylic shelves with polished,
+  edge-lit fronts, two steel-lined niches with frosted backs for the Fog pair;
+- frosted acrylic pendants; a smoked acrylic partition at the listening room; fir for the joinery, dark leather;
+- the shopfront in blackened steel, the name frosted into the glass.
+
+Acrylic only clear, frosted or smoked: the one speaker in each frame is the only colour.
+"""
+import math, os, random, sys
+
+import bmesh
+from mathutils import Vector
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(HERE)))
+sys.path.insert(0, os.path.join(ROOT, 'spinoffs', 'barkhorn', 'planet', 'loft'))
+sys.path.insert(0, HERE)
+import loft_plan as LP                                               # noqa: E402
+import planet_den as D                                               # noqa: E402
+import screens as SC                                                 # noqa: E402
+
+R = D.R
+lin, principled, emitter, Mesh, _cyl, _lathe = R.lin, R.principled, R.emitter, R.Mesh, R._cyl, R._lathe
+_M = R._M
+P = D.P                                                              # the den's plan (the footprint)
+
+
+# --- materials ---------------------------------------------------------------------------------------------------
+def concrete(bpy, p, name='concrete-wall'):
+    """Board-formed concrete: the scan's tie holes and pour panels, warmed a little, a fine roughness."""
+    if name not in _M:
+        m = D._pbr(bpy, p.get('concrete_tex', 'concrete_wall_008'), tint=p.get('concrete_tint', '#8C857C'),
+                   tint_mix=p.get('concrete_mix', 0.35), rough_mul=1.05, bump=1.4, res='2k')
+        _M[name] = m
+    return _M[name]
+
+
+def floor_mat(bpy, p):
+    """Honed concrete (the lead, 2026-10-19, after every critic named the floor's blotches): the trowelled scan's stains
+    blended well down toward one warm grey, under a soft sealer whose sheen is worn unevenly (no mirror polish, so no
+    hard puddles and less glossy noise for the denoiser to smear)."""
+    if 'floor-polished' in _M:
+        return _M['floor-polished']
+    m = D._pbr(bpy, 'acg:' + p.get('floor_acg', 'Concrete044A'), tint=p.get('floor_tint', '#5E5852'),
+               tint_mix=p.get('floor_mix', 0.7), scale=2.4, res='2K')
+    b = D._bsdf(m); R._set(b, 'Coat Weight', p.get('floor_coat', 0.35))
+    nt = m.node_tree; tc = nt.nodes.new('ShaderNodeTexCoord'); nz = nt.nodes.new('ShaderNodeTexNoise')
+    nz.inputs['Scale'].default_value = 0.7; nz.inputs['Detail'].default_value = 10.0
+    nt.links.new(tc.outputs['Object'], nz.inputs['Vector'])
+    cr = nt.nodes.new('ShaderNodeMapRange'); cr.inputs['To Min'].default_value = 0.30; cr.inputs['To Max'].default_value = 0.50
+    nt.links.new(nz.outputs['Fac'], cr.inputs['Value']); nt.links.new(cr.outputs['Result'], b.inputs['Coat Roughness'])
+    _M['floor-polished'] = m
+    return m
+
+
+def fir(bpy, vertical=False, coat=0.0, coat_rough=0.4, tint=None, mix=None, name=''):
+    """Reclaimed Douglas fir, oiled: a weathered plank scan warmed toward honey; `vertical` runs the grain up."""
+    key = f'fir-{vertical}-{tint}-{mix}'
+    if key not in _M:
+        m = D._pbr(bpy, 'brown_planks_09', rot=(0, 90, 0) if vertical else None, tint=tint or '#6E4A2E',
+                   tint_mix=mix if mix is not None else 0.5, scale=1.0, res='2k')
+        b = D._bsdf(m); R._set(b, 'Coat Weight', 0.25); R._set(b, 'Coat Roughness', 0.45)
+        _M[key] = m
+    return _M[key]
+
+
+STEEL_MIX = 0.55
+
+
+def steel(bpy, aged=True):
+    """Blackened steel: a dark plate scan, metallic, its sheen uneven, a brownish patina."""
+    key = f'steel-black-{STEEL_MIX}'
+    if key not in _M:                  # STEEL_MIX: how far the tint flattens the scan's grunge (Planet r38b: 0.85)
+        m = D._pbr(bpy, 'metal_plate_02', tint='#25221F', tint_mix=STEEL_MIX, rough_mul=0.8, res='2k')
+        b = D._bsdf(m); R._set(b, 'Metallic', 0.75)
+        _M[key] = m
+    return _M[key]
+
+
+def dark_leather(bpy, colour='#2E2420', name='leather-dark'):
+    return D.leather(bpy, colour, name) if False else _leather(bpy, colour, name)
+
+
+def _leather(bpy, colour, name):
+    if name not in _M:
+        m = D._pbr(bpy, 'brown_leather', tint=colour, tint_mix=0.55, scale=0.5, res='2k')
+        b = D._bsdf(m); R._set(b, 'Coat Weight', 0.2); R._set(b, 'Coat Roughness', 0.4); R._set(b, 'Sheen Weight', 0.1)
+        _M[name] = m
+    return _M[name]
+
+
+def wool(bpy, colour='#3A3734', name='wool-charcoal'):
+    if name not in _M:
+        m = D._pbr(bpy, 'velour_velvet', tint=colour, tint_mix=0.9, scale=0.25, res='2k')
+        b = D._bsdf(m); R._set(b, 'Sheen Weight', 0.5); R._set(b, 'Specular IOR Level', 0.2)
+        _M[name] = m
+    return _M[name]
+
+
+def acrylic(bpy, kind='clear', name=None, glow=0.0, glow_col='#FFC890'):
+    """Thick cast acrylic, neutral: 'clear' (water-clear, polished), 'frosted' (rough transmission: what is behind it
+    diffuses, as through a sanded panel) or 'smoked' (a grey-brown tint in the mass). A faint volume absorption gives
+    thick sections their depth; `glow` lights it from within (an edge-lit band)."""
+    name = name or f'acrylic-{kind}-{glow}'
+    if name in _M:
+        return _M[name]
+    col = {'clear': '#FBFCFB', 'frosted': '#F4F2EE', 'smoked': '#5A534D'}[kind]
+    rough = {'clear': 0.0, 'frosted': 0.42, 'smoked': 0.03}[kind]
+    m = principled(bpy, name, col, rough=rough, trans=1.0, ior=1.49, emit=glow_col if glow else None, strength=glow)
+    nt = m.node_tree; out = next(n for n in nt.nodes if n.type == 'OUTPUT_MATERIAL')
+    va = nt.nodes.new('ShaderNodeVolumeAbsorption')
+    va.inputs['Color'].default_value = lin({'clear': '#E9F2EE', 'frosted': '#EEEAE2', 'smoked': '#6E655C'}[kind])
+    va.inputs['Density'].default_value = {'clear': 0.6, 'frosted': 1.5, 'smoked': 9.0}[kind]
+    nt.links.new(va.outputs['Volume'], out.inputs['Volume'])
+    _M[name] = m
+    return m
+
+
+def etch_mat(bpy, p):
+    """Acid-etched glass, as a film on the pane: mostly clear, a warm translucent scatter (lit by the room behind it
+    far more than by the street) and a faint rough sheen."""
+    if 'frost-etch' in _M:
+        return _M['frost-etch']
+    m = bpy.data.materials.new('frost-etch'); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+    out = nt.nodes.new('ShaderNodeOutputMaterial')
+    tp = nt.nodes.new('ShaderNodeBsdfTransparent')
+    tl = nt.nodes.new('ShaderNodeBsdfTranslucent'); tl.inputs['Color'].default_value = lin(p.get('etch_col', '#E8C8A0'))
+    gl = nt.nodes.new('ShaderNodeBsdfGlossy'); gl.inputs['Roughness'].default_value = 0.35
+    m1 = nt.nodes.new('ShaderNodeMixShader'); m1.inputs['Fac'].default_value = p.get('etch_frost', 0.45)
+    nt.links.new(tp.outputs[0], m1.inputs[1]); nt.links.new(tl.outputs[0], m1.inputs[2])
+    m2 = nt.nodes.new('ShaderNodeMixShader'); m2.inputs['Fac'].default_value = 0.05
+    nt.links.new(m1.outputs[0], m2.inputs[1]); nt.links.new(gl.outputs[0], m2.inputs[2])
+    if p.get('etch_glow', 0) > 0:                  # the room's light caught in the etch (street-p8: dark grey without)
+        em = nt.nodes.new('ShaderNodeEmission'); em.inputs['Color'].default_value = lin(p.get('etch_glow_col', '#FF9C55'))   # ~2400 K: under a
+        # 3200 K balance #FFD2A0 read cool blue (street-p9)
+        em.inputs['Strength'].default_value = p['etch_glow']
+        ad = nt.nodes.new('ShaderNodeAddShader')
+        nt.links.new(m2.outputs[0], ad.inputs[0]); nt.links.new(em.outputs[0], ad.inputs[1]); m2 = ad
+    nt.links.new(m2.outputs[0], out.inputs['Surface'])
+    _M['frost-etch'] = m
+    return m
+
+
+def image_mat(bpy, img, strength, tint='#FFBE84'):
+    tint = _SCREEN_TINT.get('tint', tint)
+    """A glowing image plane (a screen): the picture's light, warm-neutral, both faces."""
+    key = f'screen-{img}-{strength}'
+    if key in _M:
+        return _M[key]
+    path = SC.make()[img]
+    m = bpy.data.materials.new(key); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+    out = nt.nodes.new('ShaderNodeOutputMaterial'); em = nt.nodes.new('ShaderNodeEmission')
+    tc = nt.nodes.new('ShaderNodeTexCoord'); tx = nt.nodes.new('ShaderNodeTexImage')
+    tx.image = bpy.data.images.load(path, check_existing=True); tx.extension = 'EXTEND'
+    nt.links.new(tc.outputs['UV'], tx.inputs['Vector'])
+    mul = nt.nodes.new('ShaderNodeMix'); mul.data_type = 'RGBA'; mul.blend_type = 'MULTIPLY'
+    mul.inputs['Factor'].default_value = 1.0; mul.inputs['B'].default_value = lin(tint)
+    nt.links.new(tx.outputs['Color'], mul.inputs['A'])
+    nt.links.new(mul.outputs['Result'], em.inputs['Color']); em.inputs['Strength'].default_value = strength
+    nt.links.new(em.outputs['Emission'], out.inputs['Surface'])
+    _M[key] = m
+    return m
+
+
+def _quad_uv(bpy, name, pts, mat):
+    """One quad with UVs 0..1 (pts in order: u0v0, u1v0, u1v1, u0v1)."""
+    bm = bmesh.new(); vs = [bm.verts.new(p) for p in pts]; f = bm.faces.new(vs); f.normal_update()
+    uv = bm.loops.layers.uv.verify()
+    for lp, c in zip(f.loops, [(0, 0), (1, 0), (1, 1), (0, 1)]):
+        lp[uv].uv = c
+    me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free(); me.materials.append(mat)
+    ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
+    return ob
+
+
+# --- the shell ----------------------------------------------------------------------------------------------------
+def _wall(m, a0, a1, z0, z1, holes, box):
+    """A wall's boxes over a0..a1 x z0..z1 with rectangular holes (a, b, zz0, zz1) left out; `box(a, b, za, zb)`."""
+    cuts = sorted(holes)
+    # columns between the holes, full height; then above and below each hole
+    cur = a0
+    for a, b, h0, h1 in cuts:
+        if a > cur:
+            box(cur, a, z0, z1)
+        box(a, b, z0, h0); box(a, b, h1, z1)
+        cur = b
+    if cur < a1:
+        box(cur, a1, z0, z1)
+
+
+def shell(bpy, kit, p, objs):
+    W, L, H, T = P.W, P.L, P.CEIL, P.WALL_T
+    fl = Mesh('floor'); fl.box(0.0, 0.0, -0.1, L, W, 0.0)
+    objs.append(fl.object(bpy, floor_mat(bpy, p)))
+    cw = Mesh('concrete-walls')
+    holes = {'right': [], 'left': []}
+    for nm, wall, a0, a1, z0, z1, img in LP.SCREENS:
+        if wall in holes:
+            holes[wall].append((a0, a1, z0, z1))
+    _wall(cw, 0.0, L, 0.0, H, holes['right'], lambda a, b, za, zb: cw.box(a, -T, za, b, 0.0, zb))
+    _wall(cw, 0.0, L, 0.0, H, holes['left'], lambda a, b, za, zb: cw.box(a, W, za, b, W + T, zb))
+    cw.box(L, -T, 0.0, L + T, W + T, H)                                       # the back wall
+    objs.append(cw.object(bpy, concrete(bpy, p)))
+    # the ceiling: a fir plank deck, and the beams across the room under it
+    dk = Mesh('ceiling-deck'); dk.box(-0.2, -T, H, L + T, W + T, H + 0.05)
+    objs.append(dk.object(bpy, fir(bpy, tint='#5A3C26', mix=0.45)))
+    bm_ = Mesh('beams')
+    for x in LP.BEAMS_X:
+        if x < L - 0.1:
+            bm_.box(x - LP.BEAM['w'] / 2, 0.0, H - LP.BEAM['d'], x + LP.BEAM['w'] / 2, W, H)
+    objs.append(bm_.object(bpy, fir(bpy), bevel=0.006))
+
+
+_SCREEN_TINT = {}
+
+
+def screens(bpy, kit, p, objs):
+    """Each screen: a 30 mm frosted panel flush with the wall, a glowing image 100 mm behind it, a dark box behind
+    that, a blackened-steel angle round the reveal."""
+    W = P.W; T = LP.SCREEN_T; G = p.get('screen_gap', LP.SCREEN_GAP); F = LP.SCREEN_FRAME
+    fro = acrylic(bpy, 'frosted', 'screen-frosted')
+    next(n for n in fro.node_tree.nodes if n.type == 'BSDF_PRINCIPLED').inputs['Roughness'].default_value = \
+        p.get('screen_rough', 0.42)                                   # finer than the panels' 0.42: the image reads
+    pan = Mesh('screen-panels'); box = Mesh('screen-boxes'); frm = Mesh('screen-frames')
+    for nm, wall, a0, a1, z0, z1, img in LP.SCREENS:
+        st = p.get('screen_glow', 1.5) * p.get(f'screen_{nm}', 1.0)
+        if wall in ('right', 'left'):
+            s = 1 if wall == 'right' else -1                          # the room's side is +y off the right wall
+            yf = 0.0 if wall == 'right' else W                        # the wall's face
+            pan.box(a0, yf - s * T, z0, a1, yf, z1)
+            yi = yf - s * (T + G)
+            # u runs to the viewer's right: -x on the right-hand wall (seen looking -y), +x on the left (looking +y)
+            pts = [(a1, yi, z0), (a0, yi, z0), (a0, yi, z1), (a1, yi, z1)]
+            if wall == 'left':
+                pts = [(a0, yi, z0), (a1, yi, z0), (a1, yi, z1), (a0, yi, z1)]
+            objs.append(_quad_uv(bpy, f'screen-{nm}', pts, image_mat(bpy, img, st)))
+            box.box(a0, yi - s * 0.02, z0, a1, yi - s * 0.01, z1)
+            for (xa, xb, za, zb) in ((a0 - F, a1 + F, z0 - F, z0), (a0 - F, a1 + F, z1, z1 + F), (a0 - F, a0, z0, z1),
+                                     (a1, a1 + F, z0, z1)):
+                frm.box(xa, yf, za, xb, yf + s * 0.006, zb)
+        else:                                                         # the window's lightbox, two-faced
+            B = LP.WINDOW_BOX; x0, x1 = B['x0'], B['x0'] + B['depth']
+            pan.box(x0, a0, z0, x0 + T, a1, z1); pan.box(x1 - T, a0, z0, x1, a1, z1)
+            xm = (x0 + x1) / 2
+            for face, pts in (('street', [(xm - 0.001, a1, z0), (xm - 0.001, a0, z0), (xm - 0.001, a0, z1), (xm - 0.001, a1, z1)]),
+                              ('room', [(xm + 0.001, a0, z0), (xm + 0.001, a1, z0), (xm + 0.001, a1, z1), (xm + 0.001, a0, z1)])):
+                objs.append(_quad_uv(bpy, f'screen-{nm}-{face}', pts, image_mat(bpy, img, st)))
+            for (ya, yb, za, zb) in ((a0 - F, a1 + F, z0 - F, z0), (a0 - F, a1 + F, z1, z1 + F), (a0 - F, a0, z0, z1),
+                                     (a1, a1 + F, z0, z1)):
+                frm.box(x0 - 0.005, ya, za, x1 + 0.005, yb, zb)
+    objs.append(pan.object(bpy, fro))
+    objs.append(box.object(bpy, principled(bpy, 'screen-back', '#0A0A0A', rough=0.9)))
+    objs.append(frm.object(bpy, steel(bpy)))
+
+
+# --- the bar ------------------------------------------------------------------------------------------------------
+def bar(bpy, kit, p, objs):
+    """The den's bar with a fluted concrete front and body, a fir top, a steel kick and footrail, and a clear acrylic
+    band inlaid along the top's front edge, lit from within."""
+    def wal(bpy, vertical=False, **k):
+        return concrete(bpy, p, 'concrete-bar') if vertical else fir(bpy)
+    with _patched(walnut=wal, brass=lambda bpy, aged=True: steel(bpy), leather=lambda bpy, *a, **k: dark_leather(bpy)):
+        D.bar(bpy, kit, p, objs)
+    yF, zt = P.BAR_FRONT, P.BAR_TOP_Z
+    il = Mesh('bar-inlay'); y0 = yF - P.TOP_OVER + LP.INLAY['set']
+    il.box(P.BAR_X0 - 0.06, y0, zt + P.TOP_T - 0.03, P.BAR_X1 + 0.06, y0 + LP.INLAY['w'], zt + P.TOP_T + 0.0008)
+    objs.append(il.object(bpy, acrylic(bpy, 'clear', 'inlay-lit', glow=p.get('inlay_glow', 0.6)), bevel=0.002))
+
+
+def backbar(bpy, kit, p, objs):
+    """Blackened steel against the concrete: a steel base with a fir counter, steel uprights and cornice, clear
+    acrylic shelves with polished, edge-lit fronts, two steel-lined niches with frosted, softly lit backs."""
+    W, y0 = P.W, P.BACKBAR_Y
+    x0, x1 = P.BAR_X0 - 0.30, P.BAR_X1 + 0.30
+    niches = [(nx, nx + nw) for nx, nw in P.NICHES]
+
+    def runs(a, b, gap=0.04):
+        out, cur = [], a
+        for n0, n1 in niches:
+            out.append((cur, n0 - gap)); cur = n1 + gap
+        out.append((cur, b))
+        return out
+    base = Mesh('backbar-base'); tops = Mesh('backbar-top'); up = Mesh('backbar-steel')
+    for a, b in runs(x0, x1):
+        base.box(a, y0 + 0.02, 0.0, b, W, P.BASE_H)
+        tops.box(a - 0.01, y0 - 0.03, P.BASE_H, b + 0.01, W, P.BASE_H + 0.05)
+    objs.append(base.object(bpy, steel(bpy), bevel=0.002))
+    objs.append(tops.object(bpy, fir(bpy), bevel=0.004))
+    bays = [x0]
+    for a, b in runs(x0, x1):
+        nb = max(1, round((b - a) / 1.1))
+        bays += [a + (b - a) * k / nb for k in range(1, nb)] + [b]
+    for xb in bays:
+        up.box(xb - 0.012, y0 + 0.05, P.BASE_H + 0.05, xb + 0.012, W - 0.01, P.BACKBAR_TOP)
+    for n0, n1 in niches:                                              # the niches: steel-lined
+        for xa in (n0 - 0.03, n1):
+            up.box(xa, y0, 0.0, xa + 0.03, W, P.BACKBAR_TOP)
+        up.box(n0 - 0.03, y0, P.NICHE_Z0 + P.NICHE_H, n1 + 0.03, W, P.NICHE_Z0 + P.NICHE_H + 0.03)
+        up.box(n0, y0, 0.0, n1, W, P.NICHE_Z0)
+    up.box(x0 - 0.02, y0 - 0.02, P.BACKBAR_TOP, x1 + 0.02, W, P.BACKBAR_TOP + 0.08)       # the cornice, a steel channel
+    objs.append(up.object(bpy, steel(bpy), bevel=0.0015))
+    # the niches' backs: screens, a frosted panel with an image glowing behind it (the lead: the owner's signature in
+    # the bar's frame, refracted by the Fog speaker's clear acrylic in front of it)
+    nb_ = Mesh('niche-frost')
+    for k, (n0, n1) in enumerate(niches):
+        nb_.box(n0, W - 0.045, P.NICHE_Z0, n1, W - 0.015, P.NICHE_Z0 + P.NICHE_H)
+        img = LP.NICHE_IMAGES[k]; z0, z1 = P.NICHE_Z0 + 0.01, P.NICHE_Z0 + P.NICHE_H - 0.01
+        yi = W - 0.006
+        objs.append(_quad_uv(bpy, f'niche-screen-{k}', [(n0 + 0.01, yi, z0), (n1 - 0.01, yi, z0), (n1 - 0.01, yi, z1),
+                                                        (n0 + 0.01, yi, z1)], image_mat(bpy, img, p.get('niche_glow', 0.6))))
+    objs.append(nb_.object(bpy, acrylic(bpy, 'frosted', 'niche-frosted')))
+    # the shelves: 25 mm clear acrylic, their polished fronts edge-lit (a warm line in the edge)
+    sh = Mesh('backbar-shelves'); ed = Mesh('backbar-shelf-edges')
+    T = LP.ACRYLIC_SHELF_T
+    for z in P.SHELVES_Z:
+        for a, b in runs(x0, x1):
+            sh.box(a + 0.015, y0 + 0.06, z - T, b - 0.015, W - 0.01, z)
+            ed.box(a + 0.015, y0 + 0.058, z - T + 0.004, b - 0.015, y0 + 0.0605, z - 0.004)
+    objs.append(sh.object(bpy, acrylic(bpy, 'clear', 'shelf-clear'), bevel=0.002))
+    objs.append(ed.object(bpy, emitter(bpy, 'shelf-edge', p.get('shelf_color', '#FF9C50'), p.get('shelf_glow', 1.2))))
+    _bottles(bpy, p, objs, runs(x0, x1))
+
+
+def _bottles(bpy, p, objs, runs):
+    W = P.W; rnd = random.Random(34)
+    bodies = R._bottle_meshes(bpy)
+    glass = {}
+    spirits = ['#B5651D', '#C87A2A', '#8E4A1A', '#D49A3A', '#7A3A14', '#E8E4D8', '#5A2A12', '#A0521C', '#EEF0EC']
+    labels = [R.label_mat(bpy, f'label-loft-{i}', c, rnd) for i, c in        # mostly dark and kraft (bar-r3 c2)
+              enumerate(['#2A2420', '#1F2A24', '#3A3633', '#B89A6E', '#8A6A44', '#141414', '#4A2E22', '#D9C9A6',
+                         '#2E3440', '#6E5A3E', '#1A1A1A', '#C8B48E', '#3E2A1E', '#5A5248', '#E6DCC8', '#24201C'])]
+    caps = [principled(bpy, 'cap-black', '#151413', rough=0.4), principled(bpy, 'cap-gold', '#B08A4E', rough=0.3, metal=1.0),
+            principled(bpy, 'cap-wood', '#6A4A30', rough=0.6)]
+    levels = [P.BASE_H + 0.05] + P.SHELVES_Z
+    tops = P.SHELVES_Z + [P.BACKBAR_TOP]
+    for li, z in enumerate(levels):
+        free = tops[li] - LP.ACRYLIC_SHELF_T - z if li < len(P.SHELVES_Z) else P.BACKBAR_TOP - z
+        for a, b in runs:
+            x = a + 0.08
+            while x < b - 0.08:
+                k = rnd.choice(list(bodies)); body, label, cap, r = bodies[k]
+                if x + 2 * r > b - 0.05:
+                    break
+                if rnd.random() < 0.16:
+                    x += rnd.uniform(0.07, 0.16); continue
+                sr, shz = rnd.uniform(0.92, 1.1), rnd.uniform(0.9, 1.1)
+                if 0.36 * shz > free - 0.03:
+                    shz = (free - 0.04) / 0.36
+                cx = x + r * 1.1; cy = W - 0.14 - rnd.uniform(0.0, 0.02) - (0.13 if rnd.random() < 0.4 else 0.0)
+                c = rnd.choice(spirits)
+                if c not in glass:
+                    glass[c] = principled(bpy, f'bottle-glass-loft-{c}', c, rough=0.02, trans=1.0, ior=1.45)
+                rot = rnd.uniform(-0.4, 0.4) - math.pi * 0.15
+                for me, mm in ((body, glass[c]), (label, rnd.choice(labels)), (cap, rnd.choice(caps))):
+                    ob = bpy.data.objects.new(f'{me.name}@loft{li}.{x:.2f}', me)
+                    ob.location = (cx, cy, z); ob.rotation_euler.z = rot; ob.scale = (sr, sr, shz)
+                    bpy.context.scene.collection.objects.link(ob)
+                    if not me.materials:
+                        me.materials.append(mm)
+                    ob.material_slots[0].link = 'OBJECT'; ob.material_slots[0].material = mm
+                    objs.append(ob)
+                x += 2.2 * r * sr + rnd.uniform(0.01, 0.03)
+
+
+# --- small things -------------------------------------------------------------------------------------------------
+def pendants(bpy, kit, p, objs):
+    """Frosted acrylic cylinders over the bar: 180 mm across, 320 tall, 15 mm walls, a steel cap, a cloth cord; the
+    lamp inside lights the tube from within. (The placeholder: with `moon_pendants` the shot hangs EARF Moon here.)"""
+    if p.get('moon_pendants'):
+        return
+    tube = Mesh('pendant-tubes'); cap = Mesh('pendant-caps'); cord = Mesh('pendant-cords'); glow = Mesh('pendant-lamps')
+    y = P.BAR_FRONT + 0.18; zr = P.PENDANT_RIM
+    for x in P.PENDANTS:
+        _lathe(tube.bm, [(0.075, 0.0), (0.09, 0.0), (0.09, 0.32), (0.075, 0.32)], seg=48, z0=zr, cx=x, cy=y)
+        _cyl(cap.bm, x, y, zr + 0.32, 0.092, 0.02, seg=48)
+        _cyl(cord.bm, x, y, zr + 0.34, 0.003, P.CEIL - LP.BEAM['d'] - zr - 0.34, seg=8)
+        _cyl(glow.bm, x, y, zr + 0.18, 0.025, 0.06, seg=16)
+    objs.append(tube.object(bpy, acrylic(bpy, 'frosted', 'pendant-frosted', glow=p.get('pendant_glow', 0.25), glow_col='#FFA45A'), smooth=True))
+    objs.append(cap.object(bpy, steel(bpy), smooth=True))
+    objs.append(cord.object(bpy, principled(bpy, 'cord', '#1A1612', rough=0.7), smooth=True))
+    lamp = glow.object(bpy, emitter(bpy, 'pendant-lamp', '#FFB060', p.get('pendant_lamp', 2.5)), smooth=True)
+    lamp.visible_camera = False                    # the lamp lights the tube; seen through it, it read as a square (bar-r5)
+    lamp.visible_transmission = False              # and seen through the frosted tube it still did (the review bar frame)
+    objs.append(lamp)
+
+
+def partition(bpy, kit, p, objs):
+    """Two smoked acrylic panels in blackened-steel frames either side of the listening room's opening."""
+    X0 = P.LOUNGE_X0 + 0.20; W = P.W; Pt = LP.PARTITION
+    pa = Mesh('partition-acrylic'); fr = Mesh('partition-frames')
+    for ya, yb in ((0.18, 0.18 + Pt['w']), (W - 0.18 - Pt['w'], W - 0.18)):
+        pa.box(X0 - Pt['t'] / 2, ya + 0.03, 0.06, X0 + Pt['t'] / 2, yb - 0.03, Pt['z1'] - 0.03)
+        for (a, b, za, zb) in ((ya, yb, 0.0, 0.06), (ya, yb, Pt['z1'] - 0.03, Pt['z1']), (ya, ya + 0.03, 0.0, Pt['z1']),
+                               (yb - 0.03, yb, 0.0, Pt['z1'])):
+            fr.box(X0 - 0.025, a, za, X0 + 0.025, b, zb)
+    objs.append(pa.object(bpy, acrylic(bpy, 'smoked', 'partition-smoked'), bevel=0.003))
+    objs.append(fr.object(bpy, steel(bpy)))
+
+
+class _patched:
+    """Swap the den's material functions (and plan values) while one of its builders runs."""
+
+    def __init__(self, plan=None, **fns):
+        self.fns = fns; self.plan = plan or {}; self.old = {}; self.oldp = {}
+
+    def __enter__(self):
+        for k, f in self.fns.items():
+            self.old[k] = getattr(D, k); setattr(D, k, f)
+        for k, v in self.plan.items():
+            self.oldp[k] = getattr(P, k); setattr(P, k, v)
+
+    def __exit__(self, *a):
+        for k, f in self.old.items():
+            setattr(D, k, f)
+        for k, v in self.oldp.items():
+            setattr(P, k, v)
+
+
+def patches(p):
+    """The den's builders in the loft's materials: walnut to fir, brass to steel, velvet to wool, the shades and the
+    sign frosted acrylic, the shopfront steel, no café curtains (round 36 shares it)."""
+    return dict(walnut=lambda bpy, vertical=False, **k: fir(bpy, vertical=vertical),
+                brass=lambda bpy, aged=True: steel(bpy),
+                leather=lambda bpy, *a, **k: dark_leather(bpy),
+                velvet=lambda bpy, colour, name: wool(bpy),
+                shade_mat=lambda bpy, p: acrylic(bpy, 'frosted', 'shade-frosted', glow=p.get('shade_glow', 0.4)),
+                storefront_mat=lambda bpy, p: steel(bpy),
+                # the name frosted into the glass: a warm translucent white lit from the room (as transmissive acrylic
+                # the thin strokes refracted into dark stripes, street-p5)
+                # frosted transmission again (street-p6, both critics): the stripes it drew before came from marks.py's
+                # overlapping strokes, which the brand's clean outlines no longer have
+                # street-p7 (both critics): as rough transmission it mirrored the night sky, a cool opaque grey; now
+                # acid etch on a thin film, part clear, part a warm translucent scatter of the room's light behind it
+                sign_mat=lambda bpy, p: etch_mat(bpy, p),
+                _curtain=lambda *a, **k: None)
+
+
+def room(bpy, name, p, kit):
+    objs = []
+    p = {**p, 'lounge_slats': False, 'sleeves_muted': True, 'cafe': False}
+    if p.get('screen_tint'):
+        _SCREEN_TINT['tint'] = p['screen_tint']                  # no café curtains: the room shows (street-r4)
+    shell(bpy, kit, p, objs)
+    screens(bpy, kit, p, objs)
+    wood = patches(p)
+    with _patched(**wood):
+        D.shopfront(bpy, kit, p, objs)
+        bar(bpy, kit, p, objs)
+    booths(bpy, kit, p, objs)                      # the booths in place of the den's banquette (the owner)
+    seats(bpy, kit, p, objs)                       # the stools and chairs after Fyrn, in place of the scanned ones
+    with _patched(**wood):
+        with _patched(plan={'SCONCES_RIGHT': LP.SCONCES_RIGHT, 'SCONCES_LEFT_LOUNGE': LP.SCONCES_LEFT_LOUNGE,
+                            'candle_spots': LP.candle_spots, 'TABLES': LP.TABLES, 'TABLE': LP.TABLE}):
+            D.sconces(bpy, kit, p, objs)
+            if p.get('props', True):
+                D.candles(bpy, kit, p, objs)
+        D.lounge(bpy, kit, p, objs)
+        D.record_wall(bpy, kit, p, objs)
+        if p.get('props', True):
+            with _patched(plan={'TABLES': LP.TABLES, 'TABLE': LP.TABLE}):
+                D.glassware(bpy, kit, p, objs)       # on the booths' tables
+        if p.get('street', True):
+            D.street(bpy, kit, p, objs)
+    backbar(bpy, kit, p, objs)
+    pendants(bpy, kit, p, objs)
+    partition(bpy, kit, p, objs)
+    listen_props(bpy, kit, p, objs)
+    table_lamps(bpy, kit, p, objs)
+    return objs
+
+
+TABLE_LAMP = dict(foot_r=0.065, foot_h=0.012, stem_r=0.006, shade_r=0.070, shade_z0=0.215, shade_h=0.125, wall=0.004,
+                  bulb_z=0.27)       # a cordless bar lamp, 340 mm tall: a steel foot and stem, an open frosted-glass drum
+
+
+def table_lamps(bpy, kit, p, objs):
+    """The table lamps where the den had Bell (the lead, 2026-10-19: no EARF lamp or record player in Planet until the
+    owner picks their second designs): a blackened-steel foot and stem, an open frosted-glass drum lit from inside."""
+    spots = p.get('table_lamps', [])
+    if not spots:
+        return
+    T = TABLE_LAMP; base = Mesh('table-lamp-steel'); shade = Mesh('table-lamp-shades'); bulb = Mesh('table-lamp-bulbs')
+    for x, y, z in spots:
+        _cyl(base.bm, x, y, z, T['foot_r'], T['foot_h'], seg=40)
+        _cyl(base.bm, x, y, z + T['foot_h'], T['stem_r'], T['shade_z0'] + T['shade_h'] - 0.02 - T['foot_h'], seg=12)
+        r0, r1, z0, h = T['shade_r'] - T['wall'], T['shade_r'], z + T['shade_z0'], T['shade_h']
+        _lathe(shade.bm, [(r0, 0.0), (r1, 0.0), (r1, h), (r0, h)], seg=48, z0=z0, cx=x, cy=y)
+        _cyl(bulb.bm, x, y, z + T['bulb_z'] - 0.02, 0.018, 0.04, seg=16)
+    objs.append(base.object(bpy, steel(bpy), smooth=True))
+    sh = shade.object(bpy, acrylic(bpy, 'frosted', 'table-lamp-frosted', glow=p.get('tlamp_glow', 0.35),
+                                   glow_col='#FFB46A'), smooth=True)
+    sh.visible_shadow = False   # frosted glass passes most of the bulb's light; as rough transmission it blocked it all
+    objs.append(sh)             # but caustics, and the review street frame fell from a median of 30 to 6
+    lamp = bulb.object(bpy, emitter(bpy, 'table-lamp-bulb', '#FFB060', p.get('tlamp_bulb', 2.0)), smooth=True)
+    lamp.visible_camera = False                    # as the pendants': the bulb lights the drum, never seen as a shape
+    lamp.visible_transmission = False
+    objs.append(lamp)
+
+
+def listen_props(bpy, kit, p, objs):
+    """By the chair nearest the left-hand Ember speaker: a small blackened-steel side table, a rocks glass with two
+    fingers of whisky, a candle in an amber votive (listening-r1 c5: signs of life)."""
+    x, y = LP.LISTEN_TABLE
+    st = Mesh('listen-table'); _cyl(st.bm, x, y, 0.0, 0.17, 0.012, seg=40); _cyl(st.bm, x, y, 0.012, 0.012, 0.47, seg=12)
+    _cyl(st.bm, x, y, 0.48, 0.20, 0.015, seg=48)
+    objs.append(st.object(bpy, steel(bpy), smooth=True))
+    z = 0.495
+    gl = Mesh('listen-glass'); lq = Mesh('listen-pour')
+    _lathe(gl.bm, [(0, 0), (0.041, 0), (0.0425, 0.09), (0.0385, 0.09), (0.037, 0.016), (0, 0.016)], seg=40, z0=z,
+           cx=x - 0.07, cy=y + 0.05)
+    _cyl(lq.bm, x - 0.07, y + 0.05, z + 0.0165, 0.0366, 0.03, seg=40)
+    objs.append(gl.object(bpy, principled(bpy, 'tumbler-glass', '#FFFFFF', rough=0.01, trans=1.0, ior=1.5), smooth=True))
+    objs.append(lq.object(bpy, principled(bpy, 'pour-den', '#B5601A', rough=0.0, trans=1.0, ior=1.36), smooth=True))
+
+
+# --- the seating (the owner, 2026-10-19: booths along a wall, bar chairs like Fyrn's, every seat facing its table) --
+def _rod(bm, a, b, r0, r1, seg=12):
+    """A tapered round rod from point a (radius r0) to b (r1)."""
+    a, b = Vector(a), Vector(b); d = b - a
+    g = bmesh.ops.create_cone(bm, cap_ends=True, segments=seg, radius1=r0, radius2=r1, depth=d.length)
+    q = d.normalized().to_track_quat('Z', 'Y'); mid = (a + b) / 2
+    for v in g['verts']:
+        v.co = q @ v.co + mid
+
+
+def _arc(bm, cx, cy, r0, r1, a0, a1, z0, z1, seg=18):
+    """A curved band: the ring between radii r0 and r1, from angle a0 to a1 (radians), z0 to z1."""
+    ring = []
+    for i in range(seg + 1):
+        t = a0 + (a1 - a0) * i / seg; c, sn = math.cos(t), math.sin(t)
+        ring.append([bm.verts.new((cx + r * c, cy + r * sn, z)) for r, z in ((r0, z0), (r1, z0), (r1, z1), (r0, z1))])
+    for i in range(seg):
+        for k in range(4):
+            q = [ring[i][k], ring[i][(k + 1) % 4], ring[i + 1][(k + 1) % 4], ring[i + 1][k]]
+            bm.faces.new(q[::-1]).normal_update()
+    bm.faces.new(ring[0]).normal_update(); bm.faces.new(ring[-1][::-1]).normal_update()
+
+
+def aluminium(bpy):
+    """Graphite anodised aluminium: a dark grey metal with a soft, even sheen."""
+    if 'alu-graphite' in _M:
+        return _M['alu-graphite']
+    _M['alu-graphite'] = principled(bpy, 'alu-graphite', '#3B3C3E', rough=0.32, metal=1.0)
+    return _M['alu-graphite']
+
+
+def _seat(wood, alu, x, y, face, S):
+    """One seat of the family: a round walnut seat, four splayed legs on aluminium brackets, a curved low back on two
+    posts behind the sitter (opposite `face`, degrees), and on the bar stool an aluminium footrest."""
+    h, r = S['seat_h'], S['seat_r']; f = math.radians(face)
+    _cyl(wood.bm, x, y, h - 0.038, r, 0.038, seg=40)
+    tops, feet = [], []
+    for k in range(4):
+        t = f + math.radians(45 + 90 * k)
+        tops.append((x + 0.115 * math.cos(t), y + 0.115 * math.sin(t), h - 0.07))
+        feet.append((x + S['foot_r'] * math.cos(t), y + S['foot_r'] * math.sin(t), 0.0))
+        _rod(wood.bm, feet[-1], (tops[-1][0], tops[-1][1], h - 0.038), 0.013, 0.018)
+        _cyl(alu.bm, tops[-1][0], tops[-1][1], h - 0.068, 0.026, 0.03, seg=16)           # the bracket under the seat
+    if S['rest_z']:
+        u = S['rest_z'] / (h - 0.038)
+        pts = [tuple(fe[i] + (tp[i] - fe[i]) * u if i < 2 else S['rest_z'] for i in range(3)) for fe, tp in zip(feet, tops)]
+        for k in range(4):
+            _rod(alu.bm, pts[k], pts[(k + 1) % 4], 0.010, 0.010, seg=10)
+    b = f + math.pi; zb0 = S['top'] - 0.095
+    for da in (-0.62, 0.62):
+        t = b + da
+        _rod(wood.bm, (x + 0.15 * math.cos(t), y + 0.15 * math.sin(t), h - 0.01),
+             (x + 0.178 * math.cos(t), y + 0.178 * math.sin(t), zb0 + 0.02), 0.011, 0.010)
+    _arc(wood.bm, x, y, 0.168, 0.192, b - 0.95, b + 0.95, zb0, S['top'])
+
+
+def seats(bpy, kit, p, objs):
+    """The bar stools and the window table's chairs, after Fyrn: solid walnut and graphite aluminium."""
+    wood = Mesh('stools-walnut'); alu = Mesh('stools-alu')
+    for x, y, face, kind in LP.seats():
+        _seat(wood, alu, x, y, face, LP.STOOL if kind == 'stool' else LP.CHAIR)
+    objs.append(wood.object(bpy, D.walnut(bpy, coat=0.5, coat_rough=0.3, name='-stool'), smooth=True))
+    objs.append(alu.object(bpy, aluminium(bpy), smooth=True))
+
+
+def booths(bpy, kit, p, objs):
+    """Booths along the right-hand wall: deep tan leather benches across the room, channel-tufted high backs capped in
+    fir, a walnut table between each pair on a blackened-steel base; and the round table by the window."""
+    B = LP.BOOTH; T = LP.TABLE; L = B['bench_l']
+    core = Mesh('booth-core'); seat = Mesh('booth-seats'); back = Mesh('booth-backs'); cap = Mesh('booth-caps')
+    kick = Mesh('booth-kicks'); tops = Mesh('booth-tops'); legs = Mesh('booth-bases')
+    half = B['table_w'] / 2 + B['gap']                               # the table's centre to the seat's front
+    walls = set()
+    for cx in LP.BOOTHS_X:
+        for s in (-1, 1):
+            xf = cx + s * half; xb = xf + s * B['seat_d']; xw = xb + s * B['back_t']
+            lo, hi = sorted((xf, xb))
+            kick.box(lo + 0.03, 0.02, 0.0, hi - 0.03, L - 0.04, 0.081)                       # a recessed steel kick
+            core.box(lo, 0.02, 0.08, hi, L, B['seat_h'] - 0.10)
+            seat.box(lo + 0.006, 0.03, B['seat_h'] - 0.10, hi - 0.006, L - 0.01, B['seat_h'])
+            nch = 7
+            for k in range(nch):                                    # the back's channels
+                ya = 0.03 + k * (L - 0.04) / nch
+                back.box(min(xb, xb - s * 0.07), ya + 0.004, B['seat_h'] + 0.02, max(xb, xb - s * 0.07),
+                         ya + (L - 0.04) / nch - 0.004, B['back_h'] - 0.05)
+            walls.add(round(xw - s * B['back_t'] / 2, 4))
+            core.box(min(xb, xw), 0.02, 0.08, max(xb, xw), L, B['back_h'])
+        tops.box(cx - T['w'] / 2, B['table_y0'], T['h'] - 0.03, cx + T['w'] / 2, B['table_y0'] + T['d'], T['h'])
+        _cyl(legs.bm, cx, T['y'], 0.02, 0.035, T['h'] - 0.05, seg=20)
+        legs.box(cx - 0.05, T['y'] - 0.36, 0.0, cx + 0.05, T['y'] + 0.36, 0.02)               # a flat bar foot
+        legs.box(cx - 0.20, T['y'] - 0.03, 0.0, cx + 0.20, T['y'] + 0.03, 0.02)
+        legs.box(cx - 0.25, T['y'] - 0.20, T['h'] - 0.05, cx + 0.25, T['y'] + 0.20, T['h'] - 0.03)   # the top's frame
+    merged = []
+    for xc in sorted(walls):                                         # back to back, two booths share one cap
+        if merged and xc - merged[-1][-1] < 0.1:
+            merged[-1].append(xc)
+        else:
+            merged.append([xc])
+    for xc in [sum(g) / len(g) for g in merged]:                     # each back's fir cap
+        cap.box(xc - B['cap_w'] / 2, 0.02, B['back_h'], xc + B['cap_w'] / 2, L + 0.01, B['back_h'] + B['cap_t'])
+    wx, wy = LP.WINDOW_TABLE
+    _cyl(tops.bm, wx, wy, T['h'] - 0.03, 0.34, 0.03, seg=48)
+    _cyl(legs.bm, wx, wy, 0.02, 0.03, T['h'] - 0.05, seg=20); _cyl(legs.bm, wx, wy, 0.0, 0.22, 0.02, seg=40)
+    tan = _leather(bpy, p.get('booth_leather', B['leather']), 'leather-tan')
+    objs.append(core.object(bpy, principled(bpy, 'booth-core', '#1E1A17', rough=0.8), bevel=0.004))
+    objs.append(seat.object(bpy, tan, bevel=0.035, seg=4))
+    objs.append(back.object(bpy, tan, bevel=0.03, seg=4))
+    objs.append(cap.object(bpy, fir(bpy), bevel=0.004))
+    objs.append(kick.object(bpy, steel(bpy)))
+    objs.append(tops.object(bpy, D.walnut(bpy, coat=0.8, coat_rough=0.18, name='-booth'), bevel=0.005))
+    objs.append(legs.object(bpy, steel(bpy), smooth=True))

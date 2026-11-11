@@ -1,0 +1,100 @@
+"""Planet EARF, round 37: the bar as a showroom (the owner, 2026-10-20, through the lead). Round 36's room
+(r36_plan.py) with these changes; every dimension is a proposal until the owner signs it.
+
+- A neutral, warm room, so any colour works: no saturated zone; concrete, dark oak, blackened steel, zinc, the fluted
+  front; upholstery in deep neutrals (espresso mohair, dark brown leather). The colour comes from the products alone.
+- Four speakers, the same product: the listening pair stays on the altar; a bar pair stands on the floor in two
+  timber-lined, felt-lined niches in the back bar either side of the decks, facing the counter (Ginza's Tannoys).
+- The sink in Smoke (the one fixed piece), glowing warm amber when lit.
+- EARF's record player at the decks: R3 Float (companions/concepts2.py) until the owner picks.
+- Configurations: one parameter, a tint per product group (CONFIGS).
+"""
+from r36_plan import *                                               # noqa: F401,F403
+import r36_plan as _R36
+
+# --- 1. neutral: the zone in deep warm neutrals (the colourway key kept, so the kit reads it as before) -------------
+COLOURWAYS = dict(_R36.COLOURWAYS, neutral=dict(velvet='#2E2019', wall='#4C453E', carpet='#2B2520', felt='#1E1C1A'))
+CHAIR_LEATHER = '#2E1E16'                                            # espresso (was oxblood #3A1411)
+BANQ_COL = '#2B2019'                                                 # espresso mohair
+SINK_DEEP = '#8A888E'                                                # Smoke
+SINK_GLOW = '#FFA24A'                                                # lit, it glows warm amber
+
+# --- 2. the bar pair, raised (the owner, 2026-10-20, with a photo of Ginza Music Bar: "They are elevated at Ginza."):
+# each on a solid built-in ledge in the back bar, its top at counter height, the steel doors running beneath; the
+# cabinet tilted down toward the counter seats on a wedge and toed in toward the counter's middle; the niche starts at
+# the ledge, 1450 clear inside, felt-lined, 100 behind the cabinet and 150 above it. Tilted 8 degrees, not 10: the
+# cabinet (1293 tall) pivots on its base, so its top leans 180 forward; the niche is 680 deep (the briefed 560 plus
+# the lean) and the top still leans 80 past the face frame, as a tilted cabinet does
+# the counter moved 200 toward the banquette (the lead: keep the bartender's aisle a working 0.9 m; move the counter out
+# rather than squeeze the niches): its back edge 4.55, the niches' face at 5.45. Round 36's functions read their own
+# module's COUNTER, so it is set there too (in a round-37 process only)
+COUNTER = dict(_R36.COUNTER, y0=_R36.COUNTER['y0'] - 0.20, y1=_R36.COUNTER['y1'] - 0.20)
+_R36.COUNTER = COUNTER
+SPK_LEDGE = dict(top=1.07)                                           # oak, on the worktop; 72 kg each, with margin
+SPK_NICHE = dict(w=0.70, h=1.45, d=0.62, felt=0.02, wall=0.03, back_gap=0.10, floor=0.02)
+SPK_NICHES = [(round(DJ['x'] - 1.35, 3)), (round(DJ['x'] + 1.35, 3))]   # their centres, x
+SPK_TILT = 6.0                                                       # degrees, the front down (the lead: 6 at 620 deep)
+SPK_AIM = (6.90, 1.20)                                               # toed in toward the counter's middle (about 15 deg)
+LEDGE = dict(x0=3.62, x1=4.72, z=1.95)
+CLOUD_HALF = dict(w=0.280, d=0.2138)                                # the cabinet's half-footprint (its origin_mm)
+
+
+def niche_box(x):
+    """(x0, x1, y_front, y_back, z0, z1) of the niche centred at x (outer faces); it starts at the ledge."""
+    N = SPK_NICHE
+    yb = W - 0.02
+    z0 = SPK_LEDGE['top']
+    return (x - N['w'] / 2 - N['wall'], x + N['w'] / 2 + N['wall'], yb - N['d'], yb, z0, z0 + N['floor'] + N['h'] + N['wall'])
+
+
+def bar_speakers():
+    """The bar pair: on a wedge on the niche floor, 100 behind each cabinet's base, tilted and toed in.
+    (role, x, y, z, rotate_z, tilt_x); z is the cabinet's origin (its base centre), the wedge under it."""
+    import math
+    N = SPK_NICHE
+    y = W - 0.02 - N['wall'] - N['felt'] - N['back_gap'] - CLOUD_HALF['d']
+    z = SPK_LEDGE['top'] + N['floor'] + CLOUD_HALF['d'] * math.sin(math.radians(SPK_TILT)) + 0.004
+    return [('bar', x, round(y, 4), round(z, 4), round(aim(x, y, *SPK_AIM), 2), SPK_TILT) for x in SPK_NICHES]
+
+
+# --- 5. configurations: a tint per product group -------------------------------------------------------------------
+CONFIGS = {
+    'smoke': dict(bar='smoke', listen='smoke', dome='smoke', orb='smoke', tt='smoke'),    # the house configuration
+    'ember': dict(bar='ember', listen='ember', dome='ember', orb='ember', tt='ember'),
+    'ice': dict(bar='ice', listen='ice', dome='ice', orb='ice', tt='ice'),
+    # Mixed (the lead, 2026-10-20: the old Mixed read as Smoke at the bar and as Ember at the altar): in each view the
+    # speakers and the lamps differ; the R3s Fog, water-clear
+    'mixed': dict(bar='ice', listen='ember', dome='dust', orb='acid', tt='fog'),
+}
+SPEAKER_FLAVOUR = {'smoke': 'cloud-black', 'ember': 'cloud-red', 'ice': 'cloud-blue'}
+# the kit's calibrated tints (r31-companions 69a4ba5) by the eight speaker names; Smoke the calibrated 'smoke', not the
+# older warm 'smoked'
+LAMP_FLAVOUR = {'smoke': 'smoke', 'ember': 'ember', 'ice': 'ice', 'dust': 'dust', 'acid': 'acid'}
+LAMP_GLOW = {'smoke': 0.3, 'ember': 0.04, 'ice': 0.3, 'dust': 0.25, 'acid': 0.25}                 # the lead's 1.1 smoked read a blown disc (r37 p1)
+TT_DEF = 'spinoffs/barkhorn/companions/out-concepts2/r3.json'        # R3 Float, until the owner picks
+# the light plinths' colour per tint (the owner: "Lights under the speakers could be cool too")
+PLINTH_COL = {'smoke': '#FFB060', 'ember': '#FF5038', 'ice': '#5AB4FF', 'fog': '#FFB070'}   # fog: a neutral cream read electric blue under the 2700 K balance (as Smoke's lavender did)
+# and its strength per tint: a saturated red clips first (Ember at 1.0 clipped 1387 and 5604 px red-only in a Standard
+# view, r37); Smoke needs the most to read at all
+PLINTH_GAIN = {'smoke': 1.0, 'ember': 0.12, 'ice': 0.35}
+# the light on the speakers per tint (the altar spots, the lamps on the listening pair, the bar pair's spots): Ember at
+# Smoke's levels clipped its red to pink (6040 px red-only in a Standard view, listening, r37)
+SPK_GAIN = {'smoke': 1.0, 'ember': 0.08, 'ice': 0.4}
+# the lamp inside each Dome and Orb per tint: a red cover lit at Smoke's 30 W clipped pink (r37, bar-ember)
+LAMP_GAIN = {'smoke': 1.0, 'ember': 0.3, 'ice': 0.6, 'dust': 0.6, 'acid': 0.6}   # Ember 0.4 then 0.25: the Domes clipped red (1260, 580 px, bar)
+# the lamps' tints and black hardware: the companions' kit (r31-companions 69a4ba5), no local overrides
+
+# --- the sink as smoked glass (the lead, 2026-10-20): no glow; the Cloud's Smoke, polished; a soft bowl 120 deep with a
+# 30 radius at its rim and a visible waste. The slab 160 thick (was 120) to hold the bowl; its top stays at 860
+SINK37 = dict(SINK, t=0.16, D=0.12, bx=0.19, by=0.105, fillet=0.03)
+
+# an exposure trim per tint of the view's hero pair: the Ember red reaches R = 1 in a Standard view off the room's own
+# light (the niche's strip, the felt wash), not only the lamps scaled above (r37: lowering SPK_GAIN 0.15 -> 0.08 moved
+# nothing); half a stop down on its frames
+EXPO_TRIM = {'ember': -0.5}
+# but not on the bar view: there the Domes light the counter, and the bar-ember final at the trim with the Domes at
+# 0.15 read 4.6 (black); the bar's residual red is the Domes' own shells
+EXPO_TRIM_VIEWS = ('listening',)
+
+# round 38 prep: a host stand inside the door for the bowl of EARFcoins (the door at x 1.20, y 0.42-1.48)
+HOST = dict(x=1.62, y=1.95, top=1.02, w=0.36, d=0.30)
