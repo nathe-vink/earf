@@ -197,7 +197,11 @@ def bar_backbar():
         if pr.get('fn') == 'boards':
             pr['boards'] = [b for b in pr['boards'] if 'cover-05' not in b['image']]
     s['set']['props'] = [pr for pr in s['set']['props'] if not (pr.get('texture') == 'american_walnut_veneer' and pr.get('size') == [0.2, 0.05, 0.022])]
-    s['lights'].pop('track-wall0', None)                         # (this view sees that head: the audit, 0.03 %)
+    s['lights'].pop('track-wall0', None)
+    # (the audit: from this seat the far bay's head sat in the frame's top, 0.033 %: further toward the room, aimed a
+    # little higher so its cone stays in the cabinet's shade)
+    s['lights']['track-bay0'] = {**s['lights']['track-bay0'], 'position': [R.SPK_NICHES[0], 4.4, R.CEIL - 0.05],
+                                 'target': [R.SPK_NICHES[0], SPK_Y - 0.05, FEET_BAR + 0.95]}                         # (this view sees that head: the audit, 0.03 %)
     for pr in s['set']['props']:                                 # a Core and the drinks on the bar in front of the seat
         if pr.get('fn') == 'lamps':
             # ember by the throw, dust and acid further along; none before Mantle
