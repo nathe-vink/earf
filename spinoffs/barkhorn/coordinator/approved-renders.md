@@ -237,6 +237,11 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    full size, framed closer, both lamps in all eight tints, same file names.
    SITE: Mantle finals (a1240b77) and the interim lamp pictures (42c3276c) sent to the site lane 02:55 to place and ship
    with its next push.
+   HERO, 11 Nov ~04:05, the owner on the two mod-shoot sketches: "It's a nice exploration but naw. What other types of full
+   cast style shoots can we do?" Six offered in chat (poolside society; after hours at Planet EARF; the crew on a salt flat;
+   the Hollywood issue; the orchestra; the class photo). OWNER ~04:15: "2 4 and 5 sound cool". ONE test frame of each,
+   briefed 04:20: the Hollywood issue and the orchestra to the speaker lane (hero-hollywood.png, hero-orchestra.png); after
+   hours at Planet EARF to the bar lane (r33-planet-world; every product, lit only by the lamps EARF sells, final assets).
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
