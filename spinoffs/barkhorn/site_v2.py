@@ -1773,70 +1773,106 @@ def rc_words(p, web):
 
 INTRO_ARC = 'site/globe-turn-alpha'   # brand/: the turn on a transparent ground (r47-brand 92142eb5): 120 frames, 1.5 deg each,
 # half a turn, a seamless loop at 30 fps (4 s), f0000 the still mark's pose
-ARC_TILE, ARC_COLS = 240, 11           # the opening's sprite: all 120 frames, 11 x 11
+SHEETS, SHEET_COLS, SHEET_ROWS, ARC_TILE = 4, 6, 5, 240   # the opening's frames in order: 4 sheets of 30, 240 px tiles
 ARC_CROP = (80, 80, 432, 432)          # the globe and its discs span px 85-426 of 512: the same square for every use
-HDR_TILE, HDR_COLS = 84, 10            # the header's 42 px globe at 2x: all 120 frames, 10 x 12
+HDR_TILE, HDR_COLS = 84, 10            # the header's own sheet (pages with no opening): 42 px at 2x, all 120, 10 x 12
 GLOBE_LOOP = 4000                      # ms for the 120 frames: the old film's pace, 30 fps
 REVEAL = 'circle'                      # 'circle': the cream closes on the header's globe; 'fade': it fades out as the globe flies
 
-HEADER_TURN = """const GLOBE0 = window.__globe0 ?? performance.now();   // the one clock the opening started
-if (!reduce) (function globeTurn(now) {
-  const i = Math.floor((((now - GLOBE0) % LOOP) + LOOP) % LOOP / LOOP * 120) % 120;
-  if (i !== globeAt) { globeAt = i; GLOBES.forEach(g => { g.style.backgroundPosition = `${(i % COLS) * 100 / (COLS - 1)}% ${Math.floor(i / COLS) * 100 / (ROWS - 1)}%`; }); }
-  requestAnimationFrame(globeTurn);
-})(performance.now());
-"""
+PRELOAD = """  d.classList.add('intro');
+  { const l = document.createElement('link'); l.rel = 'preload'; l.as = 'image'; l.href = 'img/globe-frames-0.webp'; document.head.appendChild(l); }   // not 'high': it would hold back the hero (LCP 1.8 s to 5.1 s), and starts no later"""
 
-FLYER_TURN = """<script>window.__globe0 = performance.now();          // the globe's one clock: the opening and the header turn on it
-(function (d, fl) { if (!d.classList.contains('intro') || !fl || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const t = fl.querySelector('.turn'), C = COLS, R = ROWS, L = LOOP, T0 = window.__globe0;
-  let k0 = -1;
-  const step = now => { if (!fl.isConnected) return;
-    const k = Math.floor((((now - T0) % L) + L) % L / L * 120) % 120;
-    if (k !== k0) { k0 = k; t._k = k; t.style.backgroundPosition = `${(k % C) * 100 / (C - 1)}% ${Math.floor(k / C) * 100 / (R - 1)}%`; }
-    requestAnimationFrame(step); };
-  const im = new Image(); im.src = 'img/globe-arc.webp';
-  (im.decode ? im.decode() : new Promise((r, j) => { im.onload = r; im.onerror = j; })).then(() => {
-    if (!fl.isConnected) return;
-    t.style.backgroundImage = `url(${im.src})`; t.style.backgroundSize = `${C * 100}% ${R * 100}%`; requestAnimationFrame(step); }, () => {});
-})(document.documentElement, document.querySelector('.flyer'))</script>"""
+CLOCK = """<script>(function (w, d) {   // the globe's one clock: it starts as the first frames are drawn and holds while a due frame is missing
+  const L = LOOP, G = w.__globe = { f: 0, t: null, have: () => false,
+    start(now) { if (G.t === null) { G.t = now; G.f = 0; } },
+    at(now) { if (G.t === null) return 0;
+      if (now > G.t) { let nx = G.f + (now - G.t) * 120 / L;
+        for (let j = Math.floor(G.f) + 1; j <= Math.floor(nx); j++) if (!G.have(j % 120)) { nx = j - 1e-6; break; }
+        G.f = nx; G.t = now; }
+      return Math.floor(G.f) % 120; } };
+  const fl = d.querySelector('.flyer');
+  if (!d.documentElement.classList.contains('intro') || !fl || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const t = fl.querySelector('.turn'), N = SHEETS, C = COLS, R = ROWS, PER = C * R, got = [], lay = [];
+  const urls = [...Array(N).keys()].map(i => `img/globe-frames-${i}.webp`);
+  const tile = k => `${(k % PER % C) * 100 / (C - 1)}% ${Math.floor(k % PER / C) * 100 / (R - 1)}%`;
+  G.v = 0; G.have = k => !!got[Math.floor(k / PER)];
+  G.pos = k => lay.map(i => i === Math.floor(k / PER) ? tile(k) : '-9999px -9999px').join(', ');
+  const relayer = () => { G.layers = lay.map(i => `url(${urls[i]})`).join(', '); G.size = lay.map(() => `${C * 100}% ${R * 100}%`).join(', '); G.v++;
+    if (fl.isConnected) { t.style.backgroundImage = G.layers; t.style.backgroundSize = G.size; t.style.backgroundPosition = G.pos(G.at(performance.now())); } };
+  let k0 = -1, v0 = 0;
+  const draw = now => { if (!fl.isConnected) return; const k = G.at(now);
+    if (k !== k0 || G.v !== v0) { k0 = k; v0 = G.v; t._k = k; t.style.backgroundPosition = G.pos(k); } requestAnimationFrame(draw); };
+  const load = i => { if (i >= N) return; const im = new Image(); im.src = urls[i];       // in order, each after the last
+    (im.decode ? im.decode() : new Promise((r, j) => { im.onload = r; im.onerror = j; })).then(() => {
+      got[i] = true; lay.push(i); relayer();
+      if (i === 0) requestAnimationFrame(now => { G.start(now); draw(now); });
+      load(i + 1); }, () => load(i + 1)); };
+  load(0);
+})(window, document)</script>"""
+
+HEADER_TURN = """const G = window.__globe;
+if (!reduce && G) {             // the header on the same clock: the opening's sheets, or (no opening) its own
+  const own = !G.layers && !document.documentElement.classList.contains('intro');
+  let hk = -1, hv = -1;
+  if (own) { const im = new Image(); im.src = 'img/globe-spin-light.webp';
+    (im.decode ? im.decode() : new Promise((r, j) => { im.onload = r; im.onerror = j; })).then(() => {
+      GLOBES.forEach(g => { g.style.backgroundImage = `url(${im.src})`; g.style.backgroundSize = 'HCOLS00% HROWS00%'; });
+      G.have = () => true; requestAnimationFrame(now => G.start(now)); }, () => {}); }
+  (function globeTurn(now) {
+    const k = G.at(now);
+    if (own) { if (k !== hk && G.t !== null) { hk = k; GLOBES.forEach(g => { g.style.backgroundPosition = `${(k % HCOLS) * 100 / (HCOLS - 1)}% ${Math.floor(k / HCOLS) * 100 / (HROWS - 1)}%`; }); } }
+    else if (G.v && (k !== hk || G.v !== hv)) { hk = k; hv = G.v; GLOBES.forEach(g => { g.style.backgroundImage = G.layers; g.style.backgroundSize = G.size; g.style.backgroundPosition = G.pos(k); }); }
+    requestAnimationFrame(globeTurn);
+  })(performance.now());
+}
+"""
 
 
 def rc_intro(p, web):
-    """The opening globe and the header's from pre-cut frames with real alpha (no video, no canvas), on ONE clock: the globe
-    turns from the first moment at the old film's constant pace (120 frames in 4 s), through the hold, the flight and the
-    shrink, and on in the header in the same phase; the flyer and the header draw the same frame from that clock, so the
-    hand-off cannot jump. Until a sprite has loaded, its place shows f0000. The reveal and the flight are as they were."""
+    """The opening globe and the header's from pre-cut frames with real alpha (no video, no canvas), on ONE clock (window.__globe).
+    The clock starts as the opening's first frames are drawn, so the turn begins at f0000, at the old film's constant pace
+    (120 frames in 4 s), through the hold, the flight and the shrink, and on in the header in the same phase. If a frame
+    that is due has not arrived, the last one holds and the clock stops with it; it never jumps. The opening's frames come
+    in 4 sheets of 30, in order, the first preloaded as soon as the opening is chosen; the header draws from the same sheets after the
+    opening. With no opening, the header loads its own small sheet and its clock starts when that is ready."""
     import io, os, base64
     from PIL import Image
     B = os.path.join(web.BRAND, INTRO_ARC)
     frames = [Image.open(os.path.join(B, f'f{k:04d}.png')).convert('RGBA').crop(ARC_CROP) for k in range(120)]
-    def sheet(tile, cols, rows):
-        sh = Image.new('RGBA', (cols * tile, rows * tile), (0, 0, 0, 0))
-        for k, f in enumerate(frames):
-            sh.paste(f.resize((tile, tile), Image.LANCZOS), ((k % cols) * tile, (k // cols) * tile))
-        return sh
-    rows = -(-120 // ARC_COLS)
-    sheet(ARC_TILE, ARC_COLS, rows).save(os.path.join(web.IMG, 'globe-arc.webp'), quality=65, alpha_quality=80, method=6)
+    per = SHEET_COLS * SHEET_ROWS
+    assert per * SHEETS == 120, 'rc_intro: the sheets'
+    for s in range(SHEETS):
+        sh = Image.new('RGBA', (SHEET_COLS * ARC_TILE, SHEET_ROWS * ARC_TILE), (0, 0, 0, 0))
+        for j in range(per):
+            sh.paste(frames[s * per + j].resize((ARC_TILE, ARC_TILE), Image.LANCZOS), ((j % SHEET_COLS) * ARC_TILE, (j // SHEET_COLS) * ARC_TILE))
+        sh.save(os.path.join(web.IMG, f'globe-frames-{s}.webp'), quality=60, alpha_quality=80, method=6)
     hrows = 120 // HDR_COLS
-    hs = sheet(HDR_TILE, HDR_COLS, hrows)
+    hs = Image.new('RGBA', (HDR_COLS * HDR_TILE, hrows * HDR_TILE), (0, 0, 0, 0))
+    for k, f in enumerate(frames):
+        hs.paste(f.resize((HDR_TILE, HDR_TILE), Image.LANCZOS), ((k % HDR_COLS) * HDR_TILE, (k // HDR_COLS) * HDR_TILE))
     hs.save(os.path.join(web.IMG, 'globe-spin-light.webp'), quality=80, alpha_quality=90, method=6)
-    hs.save(os.path.join(web.IMG, 'globe-spin-light.avif'), quality=70)
+    for n in ('globe-spin-light.avif', 'globe-arc.webp'):
+        if os.path.exists(os.path.join(web.IMG, n)):
+            os.remove(os.path.join(web.IMG, n))
     def uri(im, px, q):
         b = io.BytesIO(); im.resize((px, px), Image.LANCZOS).save(b, 'WEBP', quality=q, alpha_quality=90, method=6)
         return 'data:image/webp;base64,' + base64.b64encode(b.getvalue()).decode()
     first, mark = uri(frames[0], 200, 80), uri(frames[0], 126, 88)
-    # the header: f0000 until its sprite loads, then the clock's frame
+    # the header: f0000 until frames arrive, then the clock's frame (set from the script, not the stylesheet)
     p.rest, n = re.subn(r'(\.brand \.globe \{ width: 42px; height: 42px; flex: none; background: url\()data:image/webp;base64,[A-Za-z0-9+/=]+\)',
                         lambda m: m.group(1) + mark + ')', p.rest)
     assert n == 1, ('rc_intro: the header mark', n)
-    p.sub('html.globe-live .brand .globe { background-size: 1000% 600%;',
-          f'html.globe-live .brand .globe {{ background-size: {HDR_COLS * 100}% {hrows * 100}%;')
+    m = re.search(r'html\.globe-live \.brand \.globe \{[^}]*\}\n', p.rest)
+    assert m, 'rc_intro: the turning sprite rule'
+    p.rest = p.rest[:m.start()] + p.rest[m.end():]
     m = re.search(r"if \(!reduce\) \(function globeTurn\(now\) \{.*?\}\)\(turn0\);\n", p.rest, re.S)
     assert m, 'rc_intro: the header turn'
-    js = HEADER_TURN.replace('LOOP', str(GLOBE_LOOP)).replace('COLS', str(HDR_COLS)).replace('ROWS', str(hrows))
+    js = HEADER_TURN.replace('HCOLS', str(HDR_COLS)).replace('HROWS', str(hrows))
     p.rest = p.rest[:m.start()] + js + p.rest[m.end():]
     p.sub("if (film && film.currentTime) setTurn(film.currentTime);", "", n=2)     # one clock: nothing to hand over
+    # the first sheet, asked for as soon as the opening is chosen
+    where = 'head' if "  d.classList.add('intro');" in p.head else 'rest'
+    p.sub("  d.classList.add('intro');", PRELOAD, where=where)
     # the flyer: an image, no video
     m = re.search(r'<video muted playsinline loop autoplay[^>]*></video>(?:<canvas[^>]*></canvas>)?</div>', p.rest)
     assert m, 'rc_intro: the film'
@@ -1850,7 +1886,7 @@ def rc_intro(p, web):
       { duration: T, easing, fill: 'forwards' }).finished.then(land, done);""",
               """      { duration: T, easing, fill: 'forwards' }).finished.then(land, done);
     splash.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 500, easing: 'cubic-bezier(.4, 0, .2, 1)', fill: 'forwards' });""")
-    js = FLYER_TURN.replace('LOOP', str(GLOBE_LOOP)).replace('COLS', str(ARC_COLS)).replace('ROWS', str(rows))
+    js = CLOCK.replace('LOOP', str(GLOBE_LOOP)).replace('SHEETS', str(SHEETS)).replace('COLS', str(SHEET_COLS)).replace('ROWS', str(SHEET_ROWS))
     i = p.rest.index("<noscript><style>html.opening .hero-photo img { opacity: 1 }</style></noscript>")
     p.rest = p.rest[:i] + js + '\n' + p.rest[i:]
     p.css("html.intro .splash { background: var(--page, #F4F1EC) }\n"
