@@ -537,6 +537,15 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
       of field, enough samples. Two test frames: `bar-backbar.png`, `core-bar-table.png`.
    RULE: when the owner has liked an earlier picture of the same subject, start from that set and that look, and change
    only what is wrong with it (here: old products, dishonest light). Do not rebuild from a written description.
+   17:35 UTC, the owner on the same frames: "The chairs are facing the wrong way" (the stools' backs were on the bar
+   side) and "It looks anemic in soul".
+   -> Speaker lane (17:36): every seat faces the bar; the bar must feel lived in and playing: the record turning with
+      the arm down and its invented sleeve standing as "now playing", sleeves half out of the wall, two drinks
+      mid-evening, a stool pulled out, a jacket over a stool, a bar cloth, citrus, matches, a newspaper, worn leather,
+      hand-rubbed wood, a runner, a plant, a little haze in the light pools, one small wry detail. No real album art or
+      brands, no people, no other light source in frame; the products stay the heroes.
+   RULE: a setting needs signs of life. Tidy, empty and symmetric reads as a model. Briefs for any place say who was
+   just there and what was happening.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
