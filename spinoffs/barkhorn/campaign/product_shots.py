@@ -71,50 +71,38 @@ def _pbr(tex, **k):
 
 
 def p2():
-    """A corner of a cool bar of our own (the owner, 16:05: "Red brick, wood, cement textures mostly. No TVs"), built
-    from scanned materials: a red brick wall (red_brick), a brushed concrete floor and counter face (brushed_concrete),
-    a dark wood counter top and back bar (dark_wood), a real table (round_wooden_table_02) and metal stools
-    (metal_stool_01). A cluster of five Hemispheres low over the table, close at different heights, two Cores on it; the Tropos pair at the
-    brick wall either side, Mantle on the back bar. The only light sources in frame are EARF's lamps; the rest is one
-    declared dusk window out of frame to the right, cool and low. No HDRI."""
-    s = shots._cast_base()
-    k = shots.HERO_ORDER.index('ice')                  # the pair in Ice, cool against the red brick
-    for blk in s['products']:
-        i = blk['instances'][k]
-        blk['instances'] = [{**copy.deepcopy(i), 'position': [-1.75, 2.05, 0.0], 'rotate_z': 18.0},
-                            {**copy.deepcopy(i), 'position': [1.45, 2.05, 0.0], 'rotate_z': -18.0}]
-    shots._approved(s, order=['ice', 'ice'])
+    """A corner of a bar of our own (the owner, 16:05: "Red brick, wood, cement textures mostly. No TVs"; 15:43: "classy
+    and refined"), built from scanned materials: a red brick wall (red_brick) close behind, a brushed concrete floor
+    (brushed_concrete), a dark wood back bar along the brick with Mantle on it (dark_wood), a real table
+    (round_wooden_table_02) and two metal stools (metal_stool_01, black iron, leather). A cluster of five Hemispheres
+    low over the table, close, at different heights (the owner, 16:15), at their own size; two Cores on it. The only
+    light sources in frame are EARF's lamps; the rest is one declared dusk window out of frame to the right, cool and
+    low. No HDRI. (Proof 1: too dark, the lamps hung high, the Tropos pair at the frame's edges unreadable: the wall
+    nearer, the lamps lower, tighter, the pair dropped.)"""
+    s = _empty([1920, 1080], 'A cluster of Hemispheres over a table in a brick bar of our own')
     T = 0.746
-    BW = 2.5                                   # the brick wall's face (y)
-    s['set'] = {'kind': 'stage', 'props': [
-        {'kind': 'kit', 'shape': 'box', 'size': [12.0, 10.0, 0.02], 'position': [0.0, -2.0, -0.02], **_pbr('brushed_concrete', gain=0.8)},
-        {'kind': 'kit', 'shape': 'box', 'size': [12.0, 0.25, 4.5], 'position': [0.0, BW + 0.125, -0.02], **_pbr('red_brick', gain=0.9)},
-        # the back bar: a dark wood shelf along the brick, Mantle on it
-        {'kind': 'kit', 'shape': 'box', 'size': [1.6, 0.42, 0.04], 'position': [-0.15, BW - 0.21, 1.12], **_pbr('dark_wood')},
-        # the counter, coming in from the left: a concrete face, a dark wood top
-        {'kind': 'kit', 'shape': 'box', 'size': [0.6, 3.2, 1.04], 'position': [-3.0, 0.4, 0.0], **_pbr('brushed_concrete', gain=0.7)},
-        {'kind': 'kit', 'shape': 'box', 'size': [0.72, 3.3, 0.05], 'position': [-3.0, 0.4, 1.04], **_pbr('dark_wood')},
+    BW = 1.45                                  # the brick wall's face (y)
+    s['set']['props'] = [
+        {'kind': 'kit', 'shape': 'box', 'size': [12.0, 10.0, 0.02], 'position': [0.0, -3.5, -0.02], **_pbr('brushed_concrete', gain=0.75)},
+        {'kind': 'kit', 'shape': 'box', 'size': [12.0, 0.25, 4.5], 'position': [0.0, BW + 0.125, -0.02], **_pbr('red_brick', gain=0.95)},
+        # the back bar: a long dark wood shelf on the brick, Mantle on it at the right
+        {'kind': 'kit', 'shape': 'box', 'size': [2.6, 0.42, 0.045], 'position': [0.55, BW - 0.21, 1.1], **_pbr('dark_wood')},
         _asset('round_wooden_table_02', 0.0, 0.0),
-        _asset('metal_stool_01', -0.62, 0.25, 0.0, 30.0), _asset('metal_stool_01', 0.6, 0.45, 0.0, -40.0),
-        {'kind': 'kit', 'shape': 'ext', 'path': LAMPS, 'fn': 'lamps', 'hemi_scale': HEMI_SCALE, 'top_z': 3.4,
-         'led_k': shots.LED_K, 'core_load': shots.CORE_LOAD,
-         'core_base': CORE_BASE,
-         # a cluster of five over the table, close, at different heights (the owner, 16:15: "I like having to pair multiple")
+        _asset('metal_stool_01', -0.66, 0.22, 0.0, 30.0), _asset('metal_stool_01', 0.68, 0.38, 0.0, -40.0),
+        {'kind': 'kit', 'shape': 'ext', 'path': LAMPS, 'fn': 'lamps', 'hemi_scale': HEMI_SCALE, 'top_z': 3.6,
+         'led_k': shots.LED_K, 'core_load': shots.CORE_LOAD, **({'core_base': CORE_BASE} if CORE_BASE else {}),
+         # a cluster of five over the table, close, at different heights, the lowest 0.42 m over the top
          'hemispheres': [{'tint': shots.KEY[t], 'x': x, 'y': y, 'rim_z': z} for t, x, y, z in
-                         (('ember', -0.30, -0.06, 1.38), ('dust', -0.08, 0.16, 1.58), ('acid', 0.14, -0.10, 1.44),
-                          ('ember', 0.33, 0.12, 1.66), ('dust', 0.02, -0.26, 1.72))],
-         'cores': [{'tint': shots.KEY[t], 'x': x, 'y': y, 'floor_z': T, 'rot': 0.0} for t, x, y in (('ember', -0.18, -0.12), ('acid', 0.22, 0.1))]}]}
-    s['products'].append(shots._mantle(-0.15, BW - 0.22, 1.16 + 0.001, 0.0, 'smoke-2074'))
-    s['materials'].pop('sweep', None)
+                         (('ember', -0.26, -0.04, 1.17), ('dust', -0.05, 0.16, 1.33), ('acid', 0.15, -0.09, 1.22),
+                          ('ember', 0.32, 0.12, 1.41), ('dust', 0.04, -0.22, 1.48))],
+         'cores': [{'tint': shots.KEY[t], 'x': x, 'y': y, 'floor_z': T, 'rot': 0.0} for t, x, y in (('ember', -0.17, -0.1), ('acid', 0.2, 0.08))]}]
+    s['products'].append(shots._mantle(1.25, BW - 0.22, 1.1 + 0.0225 + 0.001, -10.0, 'smoke-2074'))
     s['sky'] = {'kind': 'gradient', 'strength': 0.0}
-    s['lights'] = {'dusk-window': {'type': 'area', 'size_m': [1.6, 2.0], 'position': [3.6, 0.6, 1.6], 'target': [0.0, 0.8, 0.9],
-                                   'irradiance': 0.02, 'color': '#9FB3DA'}}
-    s['camera'] = {'position': [0.35, -2.55, 1.22], 'target': [0.0, 0.6, 1.2], 'lens_mm': 40.0, 'level': True,
+    s['lights'] = {'dusk-window': {'type': 'area', 'size_m': [1.6, 2.0], 'position': [3.2, -0.6, 1.7], 'target': [0.0, 0.6, 1.0],
+                                   'irradiance': 0.06, 'color': '#9FB3DA'}}
+    s['camera'] = {'position': [0.28, -2.05, 1.12], 'target': [0.05, 0.4, 1.12], 'lens_mm': 45.0, 'level': True,
                    'fstop': 2.8, 'focus': [0.0, 0.0, 0.95]}
-    s['size'] = [1920, 1080]
-    s['render'] = {**s['render'], **LAMP_RENDER, 'exposure': 2.0, 'white_balance_k': 3600, 'white_balance_tint': 0.0}
-    s.pop('finish', None)
-    s['title'] = f'Three Hemispheres over a table in a brick bar of our own (five Hemispheres, x{HEMI_SCALE:g})'
+    s['render'].update(exposure=2.6, white_balance_k=3600, white_balance_tint=0.0)
     return s
 
 
