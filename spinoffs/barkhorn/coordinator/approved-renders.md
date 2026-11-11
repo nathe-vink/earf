@@ -630,6 +630,11 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    rock, ferns, deeper woods behind; the speaker in a sunlit gap, fully visible. Biomes lane told 22:03.
    RULE: every habitat is a place in nature. Nothing man-made in a habitat except the speaker (Ice's distant cabin was
    in the frame the owner approved on 9 Nov and stays unless he says otherwise).
+   22:11 UTC, biomes lane 2f43371a61: the WOODLAND `poison-ivy-proxy.jpg` (two ivy-climbed trunks, the plant over the
+   forest floor, ferns, a backlit sun gap; sky mossy_forest; sun and sky only; scatter, gt and manifest clean). The
+   speaker glows green. Shown to the owner 22:14 as a test. Coordinator: this is the picture; the final pair
+   (`poison-final-...`, portrait 2400x3000 and wide 3200x2000) queued right after Fog with two fixes: the horn lighter,
+   the near spray in sun so the leaves of three are plain. The owner may still change it before then.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
