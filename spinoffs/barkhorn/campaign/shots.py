@@ -2237,8 +2237,8 @@ def family_centres(s):
     return out
 
 
-def _wood(tex, tint=None, mix=0.0, rough=1.0):
-    return {'material': 'pbr', 'texture': tex, 'tex_res': '2k', **({'tint': tint, 'tint_mix': mix} if tint else {}), 'rough_mul': rough}
+def _wood(tex, tint=None, mix=0.0, rough=1.0, gain=1.0):
+    return {'material': 'pbr', 'texture': tex, 'tex_res': '2k', **({'tint': tint, 'tint_mix': mix} if tint else {}), 'rough_mul': rough, 'gain': gain}
 
 
 def hero_orchestra3(family=True):
@@ -2262,9 +2262,9 @@ def hero_orchestra3(family=True):
         if p.get('shape') == 'box' and p.get('size') == [0.7, 0.7, 0.22]:   # the podium
             continue
         sz = p['size'][:2] + [p['size'][2] + 0.001]               # sunk 1 mm into the boards: no coplanar faces
-        props.append({**p, 'size': sz, 'position': [p['position'][0], p['position'][1], F - 0.001], **_wood('oak_wood_planks', '#4A2A16', 0.55, 0.9)})
-    props.append({'kind': 'kit', 'shape': 'box', 'size': [16.0, 13.0, F - 0.001], 'position': [0.0, -3.0, 0.001], **_wood('old_wooden_floor_01', '#5A3418', 0.5)})
-    props.append({'kind': 'kit', 'shape': 'box', 'size': [16.0, 0.05, 6.0], 'position': [0.0, 3.5, F - 0.001], **_wood('cherry_veneer', '#3A2212', 0.75, 0.8)})
+        props.append({**p, 'size': sz, 'position': [p['position'][0], p['position'][1], F - 0.001], **_wood('oak_wood_planks', '#4A2A16', 0.55, 0.9, 0.45)})
+    props.append({'kind': 'kit', 'shape': 'box', 'size': [16.0, 13.0, F - 0.001], 'position': [0.0, -3.0, 0.001], **_wood('old_wooden_floor_01', '#5A3418', 0.5, 1.0, 0.55)})
+    props.append({'kind': 'kit', 'shape': 'box', 'size': [16.0, 0.05, 6.0], 'position': [0.0, 3.5, F - 0.001], **_wood('cherry_veneer', '#3A2212', 0.75, 0.8, 0.3)})
     for blk in s['products']:
         for i in blk['instances']:
             i['position'][2] = round(i['position'][2] + F, 4)

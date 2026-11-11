@@ -233,12 +233,12 @@ def _img(bpy, nt, path, colour, x, y):
 
 
 def pbr(bpy, aid, res='2k', scale=None, displace=0.0, tint=None, tint_mix=0.0, rough_mul=1.0, bump=1.0,
-        coords='object', name=None, translucency=0.0, emit=0.0):
+        coords='object', name=None, translucency=0.0, emit=0.0, gain=1.0):
     """A Cycles material from a Poly Haven texture set (or an ambientCG one, its id prefixed 'acg:', e.g. 'acg:Lava004',
     whose emission map glows at `emit`), laid at its real size (`scale` metres a tile overrides it).
     `displace` (metres) lifts the surface by its height map where the mesh is dense enough (Cycles displacement, bump
     beyond); `tint` (hex) blended in by `tint_mix` shifts its colour toward a set's palette; `coords` 'object' (box
-    projection in object space, for ground and rock without UVs) or 'uv'."""
+    projection in object space, for ground and rock without UVs) or 'uv'; `gain` scales the base colour (a stain)."""
     acg = aid.startswith('acg:')
     maps = ambientcg(aid[4:], res.upper()) if acg else texture(aid, res)
     sx = sy = scale if scale else None
@@ -273,6 +273,10 @@ def pbr(bpy, aid, res='2k', scale=None, displace=0.0, tint=None, tint_mix=0.0, r
             c = [((v + 0.055) / 1.055) ** 2.4 if v > 0.04045 else v / 12.92 for v in c]
             mx.inputs['Factor'].default_value = tint_mix; mx.inputs['B'].default_value = (*c, 1.0)
             nt.links.new(col, mx.inputs['A']); col = mx.outputs['Result']
+        if gain != 1.0:                                             # a darker (or lighter) stain of the same scan
+            gm = nt.nodes.new('ShaderNodeMix'); gm.data_type = 'RGBA'; gm.blend_type = 'MULTIPLY'; gm.location = (450, 400)
+            gm.inputs['Factor'].default_value = 1.0; gm.inputs['B'].default_value = (gain, gain, gain, 1.0)
+            nt.links.new(col, gm.inputs['A']); col = gm.outputs['Result']
         nt.links.new(col, bs.inputs['Base Color'])
     if 'rough' in maps:
         r = tex('rough', False, 0)
