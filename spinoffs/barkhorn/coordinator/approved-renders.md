@@ -675,6 +675,13 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
      overhead strip softbox (asked 23:58).
    - Haze unlit reads deep blue rather than violet (lever: a redder pour): told to the owner, no change unless asked.
    THESE ARE CORE'S SITE PICTURES (the day row after its re-render).
+   12 Nov 00:02 UTC: SITE BATCH briefed to the site lane (r49-site-rc, preview only): Mantle's eight (fa0c3a65), Core's
+   eight and the lit row (fee3b161), Hemisphere's eight direct, eight under, the cluster and the row (cd703d56; the old
+   three-quarter finals and ember-below retire), the Ice habitat pair (e2ea7e2f); spec words: Hemisphere ~350 lux at
+   0.5 m and lumens per tint, satin black anodized cap and canopy; Core "Base: its own color, satin"; Mantle black
+   hardware, satin edge with a fine polished bevel, no light, no brass in the text. One push, then ONE share link.
+   Not in this batch: core-row-day (re-rendering), Hemisphere off/cap/rim (re-rendering), the under views' center if
+   the owner wants it white, Fog and Poison habitats, the bar, the hero.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
