@@ -201,6 +201,25 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    -> HEADER GLOBE TURNS AGAIN: site lane told 23:40 to restore it from the alpha frames and push once; the reveal circle
       stays (the fade is built behind a switch, off).
    -> FLAT MARK: one flat shade per color (the six logo colors); brand lane briefed 23:40; the Book republishes as v28.
+   DONE 10 Nov 23:43: BOOK v28 (1794354143-d445, r47-brand bdd274a9): the flat mark in six flat shades (on dark Ember and
+   Haze lifted); checked by the coordinator, shown to the owner 23:57. Site icons follow (apple-touch-icon, favicons()).
+   LAMPS full set (r32-lamps-final 1daf65a5, CAD/BOM de86cde2, lamp-site/final/): rows shown to the owner 23:52. Dust and
+   Acid wash out at 2200 K (the coordinator's split, not the owner's) -> both moved to 2700 K; lamps lane re-renders those
+   four singles and both rows clean (briefed 23:50). Core re-measured with the white-lined well: Ice 16.8 lm, Ember 9.0 lm.
+   MANTLE FINAL (r48-mantle-design): no light (4e2a18ad model/CAD/BOM), final day set 6eea1f08, all visible brass black
+   (450064b8 model/BOM, a1240b77 frames; black nickel on the hub, inserts, bearing housing, nut, washer). CORRECTION from
+   the lane: every v3 Mantle frame, the signed day set included, was rendered with a SATIN underside; a glassy underside was
+   never rendered. The coordinator's "as signed / satin underside" comparison to the owner was wrong and was corrected in
+   chat 00:45; the spec now says satin underside, matching the pictures he approved. BOM $3,850 -> $3,842 (estimates in it).
+   The seven re-rendered frames of a1240b77 were not re-opened by the coordinator (the lane's pixel diff: platter rim only).
+   OWNER 11 Nov ~00:50 on the header globe (62a38bd4): "The globe turning is not as good as before. It should continue
+   spinning from the time it shrinks down in one continuous motion like it did before. How did we mess this up only the
+   colors had to be updated." CAUSE: the coordinator's 16:12 brief invented a new motion (eased turn, settle on the mark's
+   pose, rest) when only the frames had to change. FIXED: one clock, constant 30 frames a second from the first drawn frame
+   through the flight and on in the header (r49-site-rc a2387733, dpl_DkD59NG28vugA1pDCtLbzaH3fP1b; four sheets of 30
+   frames, 240 px tiles). The coordinator matched every captured frame against the alpha frames at 1440 and 390: starts at
+   f0000 with no jump, constant pace through the landing. Link sent 01:30. RULE: when the owner asks for a change to an
+   asset, swap the asset and keep every behavior he has seen; never redesign motion or layout on the side.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
