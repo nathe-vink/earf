@@ -62,7 +62,7 @@ def p1():
 
 
 HEMI_SCALE = float(os.environ.get('HEMI_SCALE', '1.0'))   # the owner, 16:15: Hemisphere stays its size, hung in multiples
-CORE_BASE = {'color': '#0B0B0C', 'roughness': 0.45}         # the owner, 16:25: Core's base and dock satin black (an override until the lamps lane ships it)
+CORE_BASE = None    # (the owner, 16:25: Core's base satin black; the lamps lane's own material since r32-lamps-final 7c359b88, so no override)
 LAMPS = 'spinoffs/barkhorn/campaign/stage/stage2_props.py'
 
 

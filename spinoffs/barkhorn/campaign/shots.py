@@ -2190,7 +2190,11 @@ def _approved(s, order=None):
     assert ref0['materials']['horn-satin']['roughness'] == mats['horn-satin']['roughness']
     sig = lambda b, i: (b['def'], i.get('flavour', b.get('flavour')), tuple(sorted(i.get('hide', []))), tuple(i.get('options') or []),
                         b.get('normals_refine', True))
-    tropos = [b for b in s['products'] if 'barkhorn' in b['def']]
+    for b in s['products']:                       # Mantle only from the approved asset (2026-11-11 15:40)
+        assert b.get('def') != MANTLE_DEF, 'the old Mantle embed (mantle-strata-v3.json): use _mantle(), the approved asset'
+        if b.get('asset_blend') and 'mantle' in b['asset_blend']:
+            assert b.get('asset_sha') == MANTLE_ASSET_SHA and b.get('manifest') and 'brass' in b.get('forbid', []), b
+    tropos = [b for b in s['products'] if 'barkhorn' in b.get('def', '')]
     for blk in tropos:
         for k, i in enumerate(blk['instances']):
             ref = next(b for b in refs[order[k]]['products'] if b['def'] == blk['def'])
@@ -2201,7 +2205,27 @@ def _approved(s, order=None):
 LED_K = {'red': 2200, 'green': 2700, 'ice': 2700, 'violet': 3000, 'orange': 4000, 'amber': 4000, 'blue': 4000, 'black': 4000}
 CORE_LOAD = {'orange': 1.5, 'amber': 1.5, 'blue': 1.5, 'black': 0.15}       # Dust, Acid, Ice at 3x (ae86581b); Smoke light grey
 LAMPS_MODULE = 'spinoffs/barkhorn/planet/afterhours/lamps_final.py'          # the bar lane's embed (r33-planet-world 92db2b2d)
-MANTLE_DEF = 'studio/products/mantle-strata-v3.json'                         # r48-mantle-design 450064b8, unchanged
+MANTLE_DEF = 'studio/products/mantle-strata-v3.json'                         # (the old embed: NEVER again, _approved refuses it)
+# Mantle comes only from r48-mantle-design's approved asset (the coordinator, 2026-11-11 15:40): the engine's own file,
+# written from the CAD's finishes, has steel posts and feet, brass bushes and rear plate, and its lid on
+MANTLE_ASSET_SHA = os.environ.get('MANTLE_ASSET_SHA', 'b5fff81462ea26b256a170927df33850b69ad8d8')
+MANTLE_ASSET = 'spinoffs/barkhorn/asset/mantle-strata.blend'
+MANTLE_FLAVOUR_TINT = {'smoke-2074': 'smoke', 'ice-2069': 'ice', 'ember-2423': 'ember', 'poison-2092': 'poison', 'haze-2287': 'haze'}
+
+
+def _mantle_cache(sha=None):
+    """The approved Mantle asset and its manifest, at a pinned commit, fetched from git into the (gitignored) cache."""
+    import subprocess
+    sha = sha or MANTLE_ASSET_SHA
+    root = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..'))
+    d = os.path.join('studio', 'assets', 'cache', 'mantle', sha[:8])
+    os.makedirs(os.path.join(root, d), exist_ok=True)
+    for f in ('mantle-strata.blend', 'mantle-strata.manifest.json'):
+        fp = os.path.join(root, d, f)
+        if not os.path.exists(fp):
+            data = subprocess.run(['git', 'show', f'{sha}:{MANTLE_ASSET.rsplit("/", 1)[0]}/{f}'], cwd=root, capture_output=True, check=True).stdout
+            open(fp, 'wb').write(data)
+    return os.path.join(d, 'mantle-strata.blend'), os.path.join(d, 'mantle-strata.manifest.json')
 KEY = {t: k for t, (_, k) in SITE_TINTS.items()}                             # tint -> the lamps' key (ember -> red)
 
 
@@ -2213,8 +2237,13 @@ def _family(hemis=(), cores=()):
             'cores': [{'tint': KEY[t], 'x': x, 'y': y, 'floor_z': z, 'rot': r} for t, x, y, z, r in cores]}
 
 
-def _mantle(x, y, z, rz=0.0, flavour='smoke-2074'):
-    return {'def': MANTLE_DEF, 'flavour': flavour, 'instances': [{'position': [x, y, z], 'rotate_z': rz}]}
+def _mantle(x, y, z, rz=0.0, flavour='smoke-2074', tint=None):
+    """Mantle from the approved asset (MANTLE_ASSET at MANTLE_ASSET_SHA), checked against its manifest by the engine
+    (blendasset.py): no brass anywhere, the lid hidden. `tint` by the site's names; `flavour` the old flavours' names."""
+    tint = tint or MANTLE_FLAVOUR_TINT[flavour]
+    blend, man = _mantle_cache()
+    return {'asset_blend': blend, 'manifest': man, 'tint': tint, 'collection': f'Mantle Strata {tint.title()}',
+            'forbid': ['brass'], 'asset_sha': MANTLE_ASSET_SHA, 'instances': [{'position': [x, y, z], 'rotate_z': rz}]}
 
 
 def family_centres(s):
@@ -2239,9 +2268,9 @@ def family_centres(s):
             for c_ in p.get('cores', []):
                 out.append({'product': 'core', 'tint': inv[c_['tint']], **dict(zip('xy', pr(c_['x'], c_['y'], c_['floor_z'] + 0.12)))})
     for b in s['products']:
-        if b['def'] == MANTLE_DEF:
+        if b.get('asset_blend') and 'mantle' in b['asset_blend']:
             x, y, z = b['instances'][0]['position']
-            out.append({'product': 'mantle', 'flavour': b['flavour'], **dict(zip('xy', pr(x, y, z + 0.08)))})
+            out.append({'product': 'mantle', 'tint': b['tint'], **dict(zip('xy', pr(x, y, z + 0.08)))})
     return out
 
 
@@ -2447,7 +2476,10 @@ def hero_stage2(wash=0.3, haze=0.007):
     pose, hemis, risers, pieces = {}, [], [], []
     for t, (x, y, h, yaw) in STAGE2_CAST.items():
         pose[t] = (x, y, Z + h, yaw, 0, 0)
-        hemis.append((t, x, y, round(Z + h + 1.283 + 0.5, 3)))              # 0.5 m over its own horn
+        # a pair over each, close, at different heights (the owner, 16:15: "I like having to pair multiple"); the lower
+        # 0.45 m over its own horn
+        hemis.append((t, round(x - 0.11, 3), y, round(Z + h + 1.283 + 0.45, 3)))
+        hemis.append((t, round(x + 0.12, 3), round(y + 0.08, 3), round(Z + h + 1.283 + 0.63, 3)))
         if h:
             risers.append({'kind': 'kit', 'shape': 'box', 'size': [0.72, 0.6, h + 0.001], 'position': [x, y, Z - 0.001],
                            'material': 'clay', 'color': '#0A0A0A', 'roughness': 0.7})

@@ -112,6 +112,14 @@ def main():
         if fp.is_file() and str(fp) not in model_hash:
             model_hash[str(fp.relative_to(ROOT)) if str(fp).startswith(str(ROOT)) else str(fp)] = hashlib.sha256(fp.read_bytes()).hexdigest()[:16]
     for blk in blocks:
+        if blk.get('asset_blend'):                # a product taken whole from an approved .blend, checked (blendasset.py)
+            import blendasset
+            _hash_file(blk['asset_blend'])
+            o_, p_ = blendasset.place(bpy, blk, ROOT)
+            objs += o_; part_of.update(p_)
+            continue
+        if 'mantle-strata-v3' in blk['def']:     # (2026-11-11 15:40: the CAD-finish Mantle, steel posts, brass, lid on)
+            raise SystemExit('render: the old Mantle embed is not the approved build; Mantle comes from its asset (shots._mantle)')
         pdef = Pr.load_def(blk['def'], ROOT)
         _hash_file(pdef['model'])
         for r_ in pdef.get('normals_from') or []:
