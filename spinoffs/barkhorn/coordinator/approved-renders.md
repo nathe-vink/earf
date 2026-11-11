@@ -453,6 +453,19 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
      (2) the lid and its hinge blocks: with the owner (coordinator proposes a lift-off cover, no hinge blocks);
      (3) RB330 in black depends on Rega; (4) puck screws go countersunk and flush (CAD now, renders with the edge pick).
    Speaker lane told 16:46 to take the asset at 941ad388. The site gets the eight with the next batch.
+   16:43 UTC, lamps lane ef2ff994aa: `core-base-b-allcolor.png` (Ice and Ember, lamp off in daylight and lamp on) and
+   `core-base-b-lit.png` (the band version, lit). Shown to the owner 16:47.
+   - Lamp off: the whole base reads as one colored satin piece matching the ball; clearly better than the band.
+   - Lamp on: the base goes dark; only the lip under the ball catches a thin glow (the ball's own light; nothing added).
+   - Making: the R7 lip cannot be hot-formed from 6 mm cast sheet (needs about R12). (a) open the bullnose to R12, one
+     piece, no joint; (b) a separate turned ring, bonded. Taken: (a).
+   - The touch electrode under 6 mm of acrylic is plausible but UNPROVEN until a prototype; fallback 3-4 mm at the lip.
+   - Price, whole base in color: formed skin $30-50, inner body $100-120, liner $8-12, electrode $10-15: about $150-200,
+     against $141 black; mold once $800-1,500.
+   - All eight tints: Fog reads white, Smoke light silver-gray, Poison and Haze dark like their shells.
+   -> CORE'S BASE: B, THE WHOLE BASE IN ITS OWN COLOR, R12 LIP (coordinator's default after the owner's "Own color for
+      sure"; the owner told, may object). Lamps lane: rig and CAD default now; finals (eight, the row, plus
+      `core-row-day.png` with the lamps off) after the Hemisphere batch. Asked why the color falls dark at the foot.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
