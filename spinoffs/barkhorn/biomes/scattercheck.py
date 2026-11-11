@@ -20,6 +20,8 @@ G = []
 for o in sc.objects:
     if o.type != 'MESH' or o.parent is not None or o.hide_render or o.name.startswith('grass_') or len(o.data.polygons) < 10000:
         continue
+    if any(m.type == 'PARTICLE_SYSTEM' for m in o.modifiers):
+        continue                                                      # a hair emitter is grass, not the ground
     ms = [s.material for s in o.material_slots if s.material and s.material.node_tree]
     if not any(n.type == 'OUTPUT_MATERIAL' and n.inputs['Surface'].is_linked for m in ms for n in m.node_tree.nodes):
         continue
@@ -52,6 +54,56 @@ for o in tufts:
         d = b - cp; L = d.length; d.normalize()
         if any(h[0] is not None and h[3] < L - 0.03 for h in (g.ray_cast(cp, d, L) for g in G)):
             bad['base hidden'] += 1
+# hair grass (Haze): the emitter's vertices against the ground under them, and the share whose root is in frame
+# but hidden behind the ground
+hair = []
+for o in sc.objects:
+    if o.type == 'MESH' and not o.hide_render and any(m.type == 'PARTICLE_SYSTEM' for m in o.modifiers):
+        mw = o.matrix_world; vs = [mw @ v.co for v in o.data.vertices][::max(1, len(o.data.vertices) // 4000)]
+        fl = hid = fr = 0
+        for v in vs:
+            z = down(v.x, v.y)
+            if z is None or v.z - z > 0.02:
+                fl += 1; continue
+            v = Vector((v.x, v.y, z + 0.02))                          # the root's ground, 2 cm up (grazing rays)
+            c = ou.world_to_camera_view(sc, cam, v)
+            if 0 <= c.x <= 1 and 0 <= c.y <= 1 and c.z > 0:
+                fr += 1; d = v - cp; L = d.length; d.normalize()
+                hid += any(h[0] is not None and h[3] < L - 0.05 for h in (g.ray_cast(cp, d, L) for g in G))
+        hair.append(f'{o.name}: {len(vs)} roots sampled, {fl} off the ground, {fr} in frame of which {hid} hidden')
+        bad['hair off ground'] = bad.get('hair off ground', 0) + fl
+        bad['hair root hidden'] = bad.get('hair root hidden', 0) + hid
+# small props (stones, plants, mushrooms, litter): a kit piece's parts grouped (prop53-kit-leaves, -berries ... are
+# one plant); floating if its lowest point is more than 2 cm above the HIGHEST ground under its footprint (a rock on a
+# slope or a brow touches where the ground is highest)
+import re
+groups = {}
+for o in sc.objects:
+    if o.parent is not None or o.hide_render or o.name.startswith('grass_') or o.type not in ('MESH', 'EMPTY'):
+        continue
+    if o.name.startswith(('Tropos', 'foot', 'black-flag', 'reflector', 'camera')):
+        continue
+    obs = [q for q in [o, *o.children_recursive] if q.type == 'MESH' and not q.hide_render]
+    if obs:
+        groups.setdefault(re.sub(r'^(prop\d+-kit)-.*$', r'\1', o.name), []).extend(obs)
+props = []
+for k, obs in groups.items():
+    pts = [q.matrix_world @ Vector(c) for q in obs for c in q.bound_box]
+    x0, x1 = min(p.x for p in pts), max(p.x for p in pts); y0, y1 = min(p.y for p in pts), max(p.y for p in pts)
+    if x1 - x0 > 3.0 or y1 - y0 > 3.0:
+        continue
+    zs = [down(x0 + (x1 - x0) * i / 4, y0 + (y1 - y0) * j / 4) for i in range(5) for j in range(5)]
+    zs = [z for z in zs if z is not None]
+    if not zs:
+        continue
+    gap = min(p.z for p in pts) - max(zs)
+    if gap > 0.02 and abs(max(zs)) < 50:
+        props.append(f'{k} {gap:+.3f} m at {(Vector(((x0 + x1) / 2, (y0 + y1) / 2, max(zs))) - cp).length:.0f} m')
+bad['props floating'] = len(props)
 n = sum(bad.values())
 print(f'SCATTER {label}: {len(tufts)} tufts ({inframe} based in frame) on {len(G)} ground mesh(es): '
       + ('CLEAN' if n == 0 else ', '.join(f'{k} {v}' for k, v in bad.items() if v)))
+for h in hair:
+    print('  hair', h)
+if props:
+    print('  floating props', props[:20])

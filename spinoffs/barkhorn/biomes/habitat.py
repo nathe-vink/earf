@@ -116,6 +116,9 @@ def uplight(bpy_, col, watts=40.0, color=(1.0, 0.9, 0.8)):
 
 
 
+SETTLE_MODELS = ('rock_', 'moon_rock_', 'coast_rocks_', 'boulder_', 'searsia_', 'island_tree_')
+
+
 def land_scatter(bpy_, sink=0.01, edge=0.18, drop=0.04):
     """Every scattered tuft (Poly Haven grass_*, the kit's scatter stands them all at one flat z) stood on the real
     ground under it: the highest of the big surface meshes (the ground patch, the terrain) by a ray down, bedded `sink`.
@@ -127,8 +130,6 @@ def land_scatter(bpy_, sink=0.01, edge=0.18, drop=0.04):
     import bpy_extras.object_utils as ou
     sc = bpy_.context.scene; dg = bpy_.context.evaluated_depsgraph_get()
     tufts = [o for o in sc.objects if o.parent is None and not o.hide_render and o.name.startswith('grass_')]
-    if not tufts:
-        return
     G = []
     for o in sc.objects:
         if o.type != 'MESH' or o.parent is not None or o.hide_render or o.name.startswith('grass_') or len(o.data.polygons) < 10000:
@@ -169,6 +170,28 @@ def land_scatter(bpy_, sink=0.01, edge=0.18, drop=0.04):
                 q.hide_render = True; q.hide_viewport = True
             continue
         moved.append(o.location.z - (z - sink)); o.location.z = z - sink
+    # scanned rocks and shrubs set at a flat z (Acid's and Ember's lava blocks, Haze's far shrubs): a piece whose lowest
+    # point is above the HIGHEST ground under its footprint is lowered onto it, bedded `sink`; never raised
+    settled = []
+    for o in sc.objects:
+        if o.parent is not None or o.hide_render or not o.name.startswith(SETTLE_MODELS):
+            continue
+        obs = [q for q in [o, *o.children_recursive] if q.type == 'MESH' and not q.hide_render]
+        if not obs:
+            continue
+        pts = [q.matrix_world @ Vector(c) for q in obs for c in q.bound_box]
+        x0, x1 = min(p_.x for p_ in pts), max(p_.x for p_ in pts); y0, y1 = min(p_.y for p_ in pts), max(p_.y for p_ in pts)
+        zs = [down(x0 + (x1 - x0) * i / 4, y0 + (y1 - y0) * j / 4) for i in range(5) for j in range(5)]
+        zs = [z for z in zs if z is not None]
+        if not zs:
+            continue
+        gap = min(p_.z for p_ in pts) - max(zs)
+        if gap > 0.0:
+            o.location.z -= gap + sink; settled.append(gap)
+    if settled:
+        print(f'land: {len(settled)} rocks/shrubs lowered onto the ground by up to {max(settled):.3f} m')
+    if not tufts:
+        return
     moved.sort()
     print(f'land: {len(tufts)} tufts on {[n for n, _ in G]}; removed {gone}; the rest moved by '
           f'{moved[0]:+.3f} .. {moved[-1]:+.3f} m (median {moved[len(moved) // 2]:+.3f})' if moved else f'land: removed {gone}')
