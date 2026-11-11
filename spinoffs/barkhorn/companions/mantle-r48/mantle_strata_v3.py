@@ -235,7 +235,7 @@ def parts(P):
     # ---- the posts: solid 303 stainless, satin black (hot black oxide, the owner 2026-11-10); bonded into a 2 mm seat under the deck, a tapped M8 x 16 hole from below ----
     for i, p in enumerate(posts):
         out.append(Part(f'post-{i + 1}', cyl('z', p, P['post_d'], b1, z0 + 2.0) - cyl('z', p, 6.8, b1 - 1, b1 + 16), Machined('stainless', 'lathe', stock=(35.0, 35.0, 46.0)),
-                        finish='steel', group='float', notes=['solid 303 stainless 30 x 42, turned, ends faced; finished satin black (the owner, 2026-11-10: black posts, the lamps\' satin black #18181A): hot black oxide for stainless, satin, oiled (stainless kept for the load and the bond; black oxide over black chrome for its satin, not mirror, finish); tapped M8 x 16 from below; bonded 2 mm up into a seat under the deck with a structural methacrylate (Plexus MA310 kind, which bonds acrylic to stainless); the foot\'s stud holds it to the base from below: nothing shows'] if i == 0 else []))
+                        finish='black', group='float', notes=['solid 303 stainless 30 x 42, turned, ends faced; finished satin black (the owner, 2026-11-10: black posts, the lamps\' satin black #18181A): hot black oxide for stainless, satin, oiled (stainless kept for the load and the bond; black oxide over black chrome for its satin, not mirror, finish); tapped M8 x 16 from below; bonded 2 mm up into a seat under the deck with a structural methacrylate (Plexus MA310 kind, which bonds acrylic to stainless); the foot\'s stud holds it to the base from below: nothing shows'] if i == 0 else []))
 
     # ---- the bearing, platter, hub, spindle (as Outcrop) ----
     hz0 = z0 - 20.0
@@ -331,10 +331,11 @@ def parts(P):
         Part('bearing-nut', nut, Machined('brass-leadfree', 'lathe'), finish='black', group='bearing'),
         Part('bearing-spring', dspring, Bought('bearing-disc-spring'), finish='black', group='bearing'),
         Part('bearing-washer', cwasher, Machined('brass-leadfree', 'lathe'), finish='black', group='bearing'),
-        Part('bushes', bushes, Bought('bearing-bushes-solid'), finish='brass', group='bearing', inside=True),
+        Part('bushes', bushes, Bought('bearing-bushes-solid'), finish='black', group='bearing', inside=True,
+             notes=['bronze, unplated (their bores are the bearing); pressed inside the black housing and never seen: drawn black so no scene shows brass']),
         Part('ball', ball, Bought('carbide-ball'), finish='steel', group='bearing', inside=True),
         Part('thrust-plate', plate, Bought('thrust-plate'), finish='steel', group='bearing', inside=True),
-        Part('motor-plate', mplate, Sheet('aluminium', 3, face='+z'), finish='aluminium', group='motor',
+        Part('motor-plate', mplate, Sheet('aluminium', 3, face='+z'), finish='black', group='motor',
              notes=['3 mm 5052, black anodized, 90 across, hard on the shoulder on three M3 screws into inserts, as Rega fits its motor (no grommets)']),
         Part('motor', motor, Bought('rega-24v-motor'), finish='black', group='motor'),
         Part('motor-screws', mscrews, Bought('motor-mount-screws'), finish='black', group='motor'),
@@ -350,15 +351,15 @@ def parts(P):
         Part('foot-studs', fstuds, Bought('foot-studs'), finish='black', group='feet'),
         Part('phono-stage', phono, Bought('phono-box-s2'), finish='aluminium-dark', group='phono'),
         Part('phono-pads', felts, Bought('phono-felts'), finish='rubber', group='phono'),
-        Part('rear-plate', rplate, Sheet('brass-sheet', 2, face='+y') if 'brass-sheet' in SHEETS else Machined('brass-leadfree', 'cnc-mill'), finish='brass', group='rear',
-             notes=['2 mm lead-free brass, brushed, 110 x 47.7, on the base\'s back edge at the back right, 35 in from the deck\'s back edge: two M3 button screws into brass inserts bonded in the edge',
+        Part('rear-plate', rplate, Sheet('brass-sheet', 2, face='+y') if 'brass-sheet' in SHEETS else Machined('brass-leadfree', 'cnc-mill'), finish='black', group='rear',
+             notes=['2 mm lead-free brass, black nickel plated satin with the bearing\'s lot (2026-11-11), legends and rating laser-engraved through to the brass and filled white, 110 x 47.7, on the base\'s back edge at the back right, 35 in from the deck\'s back edge: two M3 button screws into brass inserts bonded in the edge',
                     'upper row: line out L and R, the 4 mm earth post (the star), the 4PDT stage / bypass; lower row: 18 V for the phono stage (2.1 mm), the Neo\'s motor inlet (no light since 2026-11-10)',
-                    'the rating engraved along its foot and filled black (strata_rear.py has the text and the wiring and earth drawing)']),
-        Part('rear-hardware', rhw, Bought('strata-rear-hardware-nolight'), finish='steel', group='rear'),
+                    'the rating engraved along its foot and filled white (strata_rear.py has the text and the wiring and earth drawing)']),
+        Part('rear-hardware', rhw, Bought('strata-rear-hardware-nolight'), finish='black', group='rear'),
         Part('hinge-blocks', blocks, Machined('cast-acrylic', 'cnc-mill', stock=(45.0, 15.0, 2 * 29.0)), finish='acrylic', group='lid',
              notes=['two 40 x 9.5 blocks of the color, each with the hinge\'s slot 3.2 x 12 x 18 deep, on two M4 screws into inserts in the plinth\'s back edge (horizontal, in shear)']),
-        Part('hinges', hinges, Bought('cover-hinges'), finish='black', group='lid'),
-        *[Part(k, s, Sheet('trucast-tint', 3.0), finish='acrylic-lid', group='lid',
+        Part('hinges', hinges, Bought('cover-hinges'), finish='black', group='lid', render=False),
+        *[Part(k, s, Sheet('trucast-tint', 3.0), finish='acrylic-lid', group='lid', render=False,
                notes=['3 mm stock sheet in the flavor\'s code (1/8 in), cemented as a box with ACRIFIX 2R 0190; 1.1 kg, within the Debut hinges\' rating; outer edges eased R0.5 and polished'] if k == 'lid-top' else [])
           for k, s in lid.items()],
         mark_part,

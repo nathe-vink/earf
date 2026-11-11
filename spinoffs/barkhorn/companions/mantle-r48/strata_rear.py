@@ -20,7 +20,7 @@ P = X.P
 D = X.derived(P)
 OUT = os.path.join(HERE, 'out-strata-v3', 'drawings')
 FS = 7
-BRASS, ACR, STEEL, BLACK = '#f2e3b3', '#cfd3d6', '#c8c8c8', '#2a2a2a'
+BRASS, ACR, STEEL, BLACK = '#3a3a3c', '#cfd3d6', '#c8c8c8', '#2a2a2a'
 b0, b1, z0 = D['b0'], D['b1'], D['z0']
 PZ0, PZ1 = b0 + 1.0, z0 - 4.0
 X0, X1 = X.REAR_PLATE['x0'], X.REAR_PLATE['x1']
@@ -37,7 +37,7 @@ def R(ax, x0, y0, x1, y1, **k):
 
 def plate(ax):
     """Seen from behind, so the model's x runs right to left: u = X1 + X0 - x."""
-    ax.set_title('A  Rear plate, seen from behind (2:1 on the sheet), 2 mm lead-free brass, brushed; legends and rating engraved and filled black',
+    ax.set_title('A  Rear plate, seen from behind (2:1 on the sheet), 2 mm lead-free brass, black nickel satin; legends and rating engraved through and filled white',
                  fontsize=FS + 1, loc='left')
     u = lambda x: X1 + X0 - x
     R(ax, X0, PZ0, X1, PZ1, fc=BRASS, lw=0.9)
@@ -51,10 +51,10 @@ def plate(ax):
     for name, x, z, hole, do, *_ in X.REAR_HW:
         ax.add_patch(Circle((u(x), z), hole / 2, fc='white', ec='k', lw=0.6))
         ax.add_patch(Circle((u(x), z), do / 2, fill=False, ec='#777', lw=0.4, ls=':'))
-        ax.text(u(x), z + (7.5 if z > 45 else -7.5), name, fontsize=FS - 2.5, ha='center', va='center', family='DejaVu Sans')
-        ax.text(u(x), z - (6.2 if z > 45 else -6.2), f'⌀{hole:g}', fontsize=FS - 3, ha='center', va='center', color='#555')
+        ax.text(u(x), z + (7.5 if z > 45 else -7.5), name, fontsize=FS - 2.5, ha='center', va='center', family='DejaVu Sans', color='w')
+        ax.text(u(x), z - (6.2 if z > 45 else -6.2), f'⌀{hole:g}', fontsize=FS - 3, ha='center', va='center', color='#bbb')
     for i, line in enumerate(RATING):
-        ax.text((X0 + X1) / 2, b1 - 2.4 - 3.4 * i, line, fontsize=FS - 3.2, ha='center', va='center', family='DejaVu Sans Mono')
+        ax.text((X0 + X1) / 2, b1 - 2.4 - 3.4 * i, line, fontsize=FS - 3.2, ha='center', va='center', family='DejaVu Sans Mono', color='w')
     # dimensions
     ax.annotate('', (X0, PZ1 + 4), (X1, PZ1 + 4), arrowprops=dict(arrowstyle='<->', lw=0.5))
     ax.text((X0 + X1) / 2, PZ1 + 5.5, f'{X1 - X0:.0f}', fontsize=FS - 1, ha='center')
