@@ -1,0 +1,202 @@
+{
+ "title": "Three Hemispheres over a bar table (warm_bar)",
+ "size": [
+  1920,
+  1080
+ ],
+ "products": [],
+ "lights": {},
+ "materials": {},
+ "render": {
+  "samples": 96,
+  "adaptive": 0.01,
+  "denoise": true,
+  "clamp": 0,
+  "bounces": 48,
+  "diffuse_bounces": 16,
+  "glossy_bounces": 24,
+  "transmission_bounces": 32,
+  "caustics_refractive": true,
+  "caustics_reflective": true,
+  "view": "Khronos PBR Neutral",
+  "exposure": 1.8,
+  "white_balance_k": 3400,
+  "white_balance_tint": 0.0
+ },
+ "set": {
+  "kind": "stage",
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     9.0,
+     9.0,
+     0.01
+    ],
+    "position": [
+     0.0,
+     1.5,
+     -0.01
+    ],
+    "material": "pbr",
+    "texture": "terracotta_floor_tiles",
+    "tex_res": "2k",
+    "gain": 0.9
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "round_wooden_table_01",
+    "res": "2k",
+    "position": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "scale": 1.0
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "bar_chair_round_01",
+    "res": "2k",
+    "position": [
+     -0.7084199515678842,
+     -0.5696659981942496,
+     0.0
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     131.79
+    ],
+    "scale": 1.0
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "bar_chair_round_01",
+    "res": "2k",
+    "position": [
+     0.7084199515678842,
+     -0.5696659981942496,
+     0.0
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     -131.79
+    ],
+    "scale": 1.0
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "bar_chair_round_01",
+    "res": "2k",
+    "position": [
+     0.0015130202706624867,
+     -0.8549989156270462,
+     0.0
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     -179.922
+    ],
+    "scale": 1.0
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/planet/afterhours/lamps_final.py",
+    "fn": "place",
+    "led_k": {
+     "red": 2200,
+     "green": 2700,
+     "ice": 2700,
+     "violet": 3000,
+     "orange": 4000,
+     "amber": 4000,
+     "blue": 4000,
+     "black": 4000
+    },
+    "core_load": {
+     "orange": 1.5,
+     "amber": 1.5,
+     "blue": 1.5,
+     "black": 0.15
+    },
+    "hemispheres": [
+     {
+      "tint": "red",
+      "x": -0.38,
+      "y": 0.0,
+      "rim_z": 1.755
+     },
+     {
+      "tint": "orange",
+      "x": 0.0,
+      "y": 0.2,
+      "rim_z": 1.855
+     },
+     {
+      "tint": "amber",
+      "x": 0.38,
+      "y": 0.0,
+      "rim_z": 1.755
+     }
+    ],
+    "cores": [
+     {
+      "tint": "red",
+      "x": -0.25,
+      "y": -0.2,
+      "floor_z": 1.005,
+      "rot": 200.0
+     },
+     {
+      "tint": "amber",
+      "x": 0.3,
+      "y": 0.12,
+      "floor_z": 1.005,
+      "rot": 200.0
+     }
+    ]
+   }
+  ]
+ },
+ "sky": {
+  "kind": "hdri",
+  "polyhaven": "warm_bar",
+  "res": "4k",
+  "rotation_deg": -120.0,
+  "strength": 0.1
+ },
+ "camera": {
+  "position": [
+   0.35,
+   -2.9,
+   1.5
+  ],
+  "target": [
+   0.0,
+   0.0,
+   1.2
+  ],
+  "lens_mm": 40.0,
+  "level": true,
+  "fstop": 4.0,
+  "focus": [
+   0.0,
+   0.0,
+   1.2
+  ]
+ }
+}
