@@ -348,6 +348,11 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    Found by the coordinator on the lamps (old finals): Hemisphere from below shows three dark tabs, seam circles and an open
    dark center; its cap reads as a flat black lump. Lamps lane to fix both before the new Hemisphere views render.
    Core's base: the coordinator's default is satin black anodized metal if the price is close (the part you touch).
+   Owner, 15:50 UTC: "Could we use the same color acrylic for the base of the core in satin?" -> OPEN. Added to
+   `core-base-options.png` (lamps lane, 15:55): columns A, B, C; rows satin black, own color in Ice, own color in Ember.
+   The lane says how the tinted base hides the battery and board (sleeve or lined bore), the wall and pour so it matches the
+   shell and does not go dark, whether it picks up the lamp's own light (rendered true), the satin finish by name (finger
+   oil), what stays black (touch ring, dock, feet by default), and the price. The metal default waits for that picture.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
