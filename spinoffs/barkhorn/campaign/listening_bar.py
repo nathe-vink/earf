@@ -27,7 +27,7 @@ import shots  # noqa: E402
 
 LAMPS = 'spinoffs/barkhorn/campaign/stage/stage2_props.py'
 WALL_Y, BACKBAR_D, BAR_Y0, BAR_Y1, BAR_H = 2.2, 0.46, 0.0, 0.62, 1.07     # metres
-X0, X1 = -2.3, 2.3                                                        # the bar's run
+X0, X1 = -1.95, 1.95                                                      # the bar's run (test 1: at 2.3 its ends hid the Tropos pair)
 WALNUT = {'material': 'pbr', 'texture': 'american_walnut_veneer', 'tex_res': '2k', 'tint': '#5A3824', 'tint_mix': 0.55, 'gain': 0.62, 'rough_mul': 0.8}
 STONE = {'material': 'pbr', 'texture': 'concrete_floor_01', 'tex_res': '2k', 'tint': '#262627', 'tint_mix': 0.85, 'gain': 0.28, 'rough_mul': 0.32}
 BRICK = {'material': 'pbr', 'texture': 'red_brick_03', 'tex_res': '2k', 'tint': '#7A4A3C', 'tint_mix': 0.25, 'gain': 0.8}
@@ -166,7 +166,7 @@ def room(cx=0.0):
     return [box([14.0, 12.0, 0.02], [0.0, -4.0, -0.02], FLOOR),
             box([14.0, 0.3, 5.0], [0.0, WALL_Y + 0.15, -0.02], BRICK),
             *backbar(), *bar_counter(),
-            *stool(-1.25, -0.55, 0.0), *stool(-0.35, -0.6, 0.0), *stool(0.6, -0.55, 0.0), *stool(1.5, -0.6, 0.0),
+            *stool(-1.35, -0.55, 0.0), *stool(-0.45, -0.6, 0.0), *stool(0.45, -0.55, 0.0), *stool(1.35, -0.6, 0.0),
             *dressing(cx)]
 
 
@@ -179,11 +179,12 @@ def _lamps(hemis, cores, top=4.2):
             'cores': [{'tint': shots.KEY[t], 'x': x, 'y': y, 'floor_z': BAR_H, 'rot': 0.0} for t, x, y in cores]}
 
 
-HEMIS = [('ember', -1.55, 0.3, 1.78), ('dust', -0.95, 0.36, 1.92), ('acid', -0.42, 0.28, 1.72), ('ember', 0.12, 0.34, 1.86),
-         ('dust', 0.66, 0.3, 1.75), ('acid', 1.2, 0.36, 1.9), ('ember', 1.72, 0.3, 1.8)]
+# (test 1: hung at 1.7-1.9 they sat in front of the shelves and were lost: higher, against the brick above them)
+HEMIS = [('ember', -1.5, 0.3, 2.22), ('dust', -1.0, 0.36, 2.38), ('acid', -0.5, 0.28, 2.18), ('ember', 0.0, 0.34, 2.34),
+         ('dust', 0.5, 0.3, 2.2), ('acid', 1.0, 0.36, 2.4), ('ember', 1.5, 0.3, 2.26)]
 CORES = [('ember', -1.2, 0.3), ('dust', -0.15, 0.32), ('acid', 1.0, 0.3)]
-EV = -4.0            # between the lamps lane's Core (-5) and Hemisphere (-2)
-ROOM = 1.0           # the declared room light's scale
+EV = -3.5            # between the lamps lane's Core (-5) and Hemisphere (-2) (test 1: -4 left the shades dark)
+ROOM = 0.7           # the declared room light's scale
 
 
 def _base(size, title):
@@ -215,13 +216,14 @@ def bar_wide():
     pair = []
     for blk in c['products']:
         i = blk['instances'][k]
-        pair.append({**blk, 'instances': [{**copy.deepcopy(i), 'position': [X0 - 0.55, WALL_Y - 0.45, 0.0], 'rotate_z': 14.0},
-                                          {**copy.deepcopy(i), 'position': [X1 + 0.55, WALL_Y - 0.45, 0.0], 'rotate_z': -14.0}]})
+        pair.append({**blk, 'instances': [{**copy.deepcopy(i), 'position': [X0 - 0.75, WALL_Y - 0.5, 0.0], 'rotate_z': 16.0},
+                                          {**copy.deepcopy(i), 'position': [X1 + 0.75, WALL_Y - 0.5, 0.0], 'rotate_z': -16.0}]})
     s['products'] = pair
     shots._approved(s, order=['ember', 'ember'])
     s['products'].append(shots._mantle(-0.35, WALL_Y - BACKBAR_D / 2 - 0.02, 0.955 + 0.001, 0.0, tint='dust'))
     s['set']['props'].append(_lamps(HEMIS, CORES))
-    s['camera'] = {'position': [0.0, -4.7, 1.32], 'target': [0.0, 1.0, 1.3], 'lens_mm': 32.0, 'level': True}
+    # (test 1: from 1.32 m the bar top hid Mantle on the back bar: a standing guest's eye)
+    s['camera'] = {'position': [0.0, -4.9, 1.62], 'target': [0.0, 1.0, 1.4], 'lens_mm': 32.0, 'level': True}
     return s
 
 
