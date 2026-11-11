@@ -216,8 +216,8 @@ def bar_backbar():
     # (22:32: the near horn's shape: polished, it shows only what it mirrors; a graduated warm card over the bay's front,
     # seen only in reflections, so the flare carries a soft ramp along its curve)
     # (22:32: Mantle's Ember shows in its plinth's layered sides: a low head from behind the seat onto its front face)
-    s['lights']['mantle-front'] = {'type': 'area', 'shape': 'DISK', 'size_m': [0.15, 0.15], 'position': [9.7, 3.15, 2.3],
-                                   'target': [MANTLE[0], MANTLE[1] - 0.15, MANTLE[2] + 0.05], 'irradiance': round(2.5 * TRACK, 3),
+    s['lights']['mantle-front'] = {'type': 'area', 'shape': 'DISK', 'size_m': [0.15, 0.15], 'position': [9.7, 3.15, 1.55],
+                                   'target': [MANTLE[0], MANTLE[1] - 0.12, MANTLE[2] + 0.04], 'irradiance': round(5.0 * TRACK, 3),
                                    'spread_deg': 14, 'color': '#FFD8B0'}
     s['lights']['horn-card'] = {'type': 'panel', 'size_m': [1.4, 0.9], 'position': [8.05, 4.9, R.CEIL - 0.06],
                                 'target': [R.SPK_NICHES[1], SPK_Y - 0.1, FEET_BAR + 1.1], 'strength': 10.0, 'diffuse': 0.0, 'specular': 1.0,
