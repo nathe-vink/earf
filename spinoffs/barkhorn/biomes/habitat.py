@@ -53,6 +53,7 @@ CARDS = [[]]                            # --card white|black W H Z SIDE_DEG: rea
 MANIFEST = [None]                       # --manifest FILE: the approved build per tint (the speaker lane's), asserted
 BERMS = [[]]                            # --berm LX LY RX RY H: sand banked against the base (the speaker's frame)
 REFLECTORS = [[]]                       # --reflector W H AZ EL DIST TX TY TZ: a white board where a fill lamp stood
+LAND = [True]                           # scattered tufts landed on the ground and checked against the camera (the coordinator, 2026-11-11)
 MENISCUS = [0.0]                        # --meniscus R: a water meniscus round the cabinet's walls, radius R m
 WET = [None]                            # --wet F L R SEED: rain beads on the front (F) and horn lip (L), R runnels
 SCRIM = [None]                          # --scrim T W H D: a silk on the sun's line D m out, W x H m, passing T of the beam
@@ -113,6 +114,64 @@ def uplight(bpy_, col, watts=40.0, color=(1.0, 0.9, 0.8)):
     col.objects.link(o)                     # an area lamp shines along its -z: turned over, it faces up
     o.rotation_euler = (math.pi, 0, 0)
 
+
+
+def land_scatter(bpy_, sink=0.01, edge=0.18, drop=0.04):
+    """Every scattered tuft (Poly Haven grass_*, the kit's scatter stands them all at one flat z) stood on the real
+    ground under it: the highest of the big surface meshes (the ground patch, the terrain) by a ray down, bedded `sink`.
+    A tuft goes if no ground is under it, if the ground falls away by more than `drop` within `edge` of it (a brow or
+    the patch's edge: it would hang over the void), or if its base is in frame but hidden from the camera behind the
+    ground (its blades would show with no ground under them). The coordinator, 2026-11-11: Fog's tufts floated."""
+    from mathutils import Vector
+    from mathutils.bvhtree import BVHTree
+    import bpy_extras.object_utils as ou
+    sc = bpy_.context.scene; dg = bpy_.context.evaluated_depsgraph_get()
+    tufts = [o for o in sc.objects if o.parent is None and not o.hide_render and o.name.startswith('grass_')]
+    if not tufts:
+        return
+    G = []
+    for o in sc.objects:
+        if o.type != 'MESH' or o.parent is not None or o.hide_render or o.name.startswith('grass_') or len(o.data.polygons) < 10000:
+            continue
+        ms = [s_.material for s_ in o.material_slots if s_.material and s_.material.node_tree]
+        if not any((n.type == 'OUTPUT_MATERIAL' and n.inputs['Surface'].is_linked) for m in ms for n in m.node_tree.nodes):
+            continue
+        bb = [o.matrix_world @ Vector(c) for c in o.bound_box]
+        if max(v.x for v in bb) - min(v.x for v in bb) < 5.0:
+            continue                                                  # a rock, not the ground
+        e = o.evaluated_get(dg); m = e.to_mesh(); mw = o.matrix_world
+        G.append((o.name, BVHTree.FromPolygons([mw @ v.co for v in m.vertices], [q.vertices[:] for q in m.polygons])))
+        e.to_mesh_clear()
+
+    def down(x, y):
+        zs = [h[0].z for h in (g.ray_cast(Vector((x, y, 100.0)), Vector((0, 0, -1))) for _, g in G) if h[0] is not None]
+        return max(zs) if zs else None
+    cam = sc.camera
+    cp = cam.matrix_world.translation if cam else None
+    gone = {'no ground': 0, 'edge': 0, 'base hidden': 0}; moved = []
+    for o in tufts:
+        x, y = o.location.x, o.location.y
+        z = down(x, y)
+        if z is None:
+            why = 'no ground'
+        else:
+            ring = [down(x + dx * edge, y + dy * edge) for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1), (.7, .7), (-.7, .7), (.7, -.7), (-.7, -.7))]
+            why = 'edge' if any(r is None or r < z - drop for r in ring) else None
+            if why is None and cam:
+                b = Vector((x, y, z)); c = ou.world_to_camera_view(sc, cam, b)
+                if -0.05 <= c.x <= 1.05 and -0.05 <= c.y <= 1.05 and c.z > 0:
+                    d = b - cp; L = d.length; d.normalize()
+                    if any((h[0] is not None and h[3] < L - 0.03) for h in (g.ray_cast(cp, d, L) for _, g in G)):
+                        why = 'base hidden'
+        if why:
+            gone[why] += 1
+            for q in [o, *o.children_recursive]:
+                q.hide_render = True; q.hide_viewport = True
+            continue
+        moved.append(o.location.z - (z - sink)); o.location.z = z - sink
+    moved.sort()
+    print(f'land: {len(tufts)} tufts on {[n for n, _ in G]}; removed {gone}; the rest moved by '
+          f'{moved[0]:+.3f} .. {moved[-1]:+.3f} m (median {moved[len(moved) // 2]:+.3f})' if moved else f'land: removed {gone}')
 
 def settle(bpy_, linked, sink=0.002):
     """Stand each speaker on the ground under it: a ray down through each of its feet (the asset's lowest points) onto
@@ -1057,6 +1116,8 @@ def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extr
                         setattr(o, a, True)
                     fixed.append(o.name)
             print('real set: every ray type on for', fixed)
+        if LAND[0]:
+            land_scatter(bpy_)
         if CARDS[0]:
             cards(bpy_, linked, CARDS[0])
         if DOTS[0]:
@@ -1111,6 +1172,7 @@ def main():
     ap.add_argument('--opaque-shadows', action='store_true', help='the glass blocks direct light (diagnostics only)')
     ap.add_argument('--crop', type=float, nargs=4, help='render a region only, fractions X0 Y0 X1 Y1 from the top left (tests)')
     ap.add_argument('--fresnel-angle', action='store_true', help="glass faces pass a shadow ray's 1 - F(theta) (Schlick, n 1.49)")
+    ap.add_argument('--no-land', action='store_true', help='leave scattered tufts at the kit\'s flat z (old renders)')
     ap.add_argument('--meniscus', type=float, default=0.0, help='a water meniscus round the walls, radius m')
     ap.add_argument('--wet', type=float, nargs='+', help='rain on the speaker: front beads, lip beads, runnels, seed [r_min r_max mm [run_min run_max m [low]]]')
     ap.add_argument('--scrim', type=float, nargs=4, help='a silk on the sun line: T (beam passed) W H (m) D (m out)')
@@ -1127,7 +1189,7 @@ def main():
     a = ap.parse_args()
     global SURFACE_GLASS
     WELD[0] = not a.no_weld; SURFACE_GLASS = a.surface_glass; FRESNEL_ANGLE[0] = a.fresnel_angle
-    SINK[0] = a.sink; LED[0] = a.led; REAL_SET[0] = a.real_set; CANOPY_OPEN[0] = a.canopy_open; CLEARING[0] = a.canopy_clearing; CLEARING_AT[0] = tuple(a.canopy_clearing_at); PLANT_ALPHA[0] = tuple(a.plant_alpha); SCRIM[0] = a.scrim; WET[0] = a.wet; REFLECTORS[0] = [tuple(r) for r in a.reflector]; BERMS[0] = [tuple(b) for b in a.berm]; MANIFEST[0] = json.load(open(a.manifest)) if a.manifest else None; MENISCUS[0] = a.meniscus; DOTS[0] = [tuple(d) for d in a.dot]; CARDS[0] = [(c[0], float(c[1]), float(c[2]), float(c[3]), float(c[4])) for c in a.card]; SPLIT[0] = a.split; GLOSSY_FLAG[0] = a.glossy_flag
+    SINK[0] = a.sink; LED[0] = a.led; REAL_SET[0] = a.real_set; CANOPY_OPEN[0] = a.canopy_open; CLEARING[0] = a.canopy_clearing; CLEARING_AT[0] = tuple(a.canopy_clearing_at); PLANT_ALPHA[0] = tuple(a.plant_alpha); SCRIM[0] = a.scrim; WET[0] = a.wet; REFLECTORS[0] = [tuple(r) for r in a.reflector]; BERMS[0] = [tuple(b) for b in a.berm]; MANIFEST[0] = json.load(open(a.manifest)) if a.manifest else None; MENISCUS[0] = a.meniscus; LAND[0] = not a.no_land; DOTS[0] = [tuple(d) for d in a.dot]; CARDS[0] = [(c[0], float(c[1]), float(c[2]), float(c[3]), float(c[4])) for c in a.card]; SPLIT[0] = a.split; GLOSSY_FLAG[0] = a.glossy_flag
     HORN['close'] = a.horn_close; HORN['rough'] = a.horn_rough; HORN['shadows'] = not a.horn_front; HORN['as_cabinet'] = a.horn_as_cabinet
     sh = json.load(open(a.shot))
     scale_lights(sh, {k: float(v) for k, v in (x.split('=', 1) for x in a.light)})

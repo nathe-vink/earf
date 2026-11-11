@@ -160,7 +160,7 @@ SINK = {'acid_b': 0.05,    # 2026-11-09: 0.025 left the bottom panel's 20 mm fro
 # the horn's outside: polished (the owner, 2026-11-03 15:14: "Horn: polished"; satin was 0.25)
 HORN_ROUGH = 0.05
 # a tint's channel split from the speaker lane's shared model where it changed after the asset was built (9097, 732a8671)
-SPLIT = {'acid_b': (0.085, 0.10, 1.00)}
+SPLIT = {'acid_b': (0.085, 0.10, 1.00)}   # the old asset only: the approved asset (0f54ebee) carries it, and the manifest assert refuses it
 # habitats whose sets are made real: every object seen by every ray type, casting shadows (ruling 4)
 REAL_SET = {'poison_g5'}
 # plants whose Poly Haven glTF has no alpha: none needed since the engine's _alpha_maps wires the published map (2026-11-09)
@@ -284,7 +284,7 @@ def main():
             + [x for kv in a.set for x in ('--set', kv)] \
             + (['--glossy-flag'] if a.glossy_flag else []) \
             + (['--flag', *map(str, FLAG[n])] if n in FLAG else []) \
-            + (['--split', *map(str, SPLIT[n])] if n in SPLIT else []) \
+            + (['--split', *map(str, SPLIT[n])] if n in SPLIT and not a.manifest else []) \
             + (['--real-set'] if n in REAL_SET else []) \
             + (['--canopy-open', str(CANOPY_OPEN[n])] if n in CANOPY_OPEN else []) \
             + (['--canopy-clearing', str(a.clearing)] if a.clearing else []) \
