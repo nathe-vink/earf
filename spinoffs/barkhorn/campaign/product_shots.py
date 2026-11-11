@@ -20,7 +20,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import shots  # noqa: E402
 
-BAR = 'warm_bar'                    # a real bar at night (Poly Haven, CC0): its counter about 30 deg left of +y
+BAR = 'warm_bar'                    # a real bar at night (Poly Haven, CC0)
+BAR_ROT = -120.0                    # its counter behind the tables (-135 puts it dead ahead: a test render, 2026-11-11)
 BAR_FLOOR = 'terracotta_floor_tiles'
 # the lamp lane's own settings for these lamps (lamp_site.py; the bar lane's afterhours): no clamp, caustics; denoised
 LAMP_RENDER = {'samples': 96, 'adaptive': 0.01, 'denoise': True, 'clamp': 0, 'bounces': 48, 'diffuse_bounces': 16,
@@ -48,10 +49,10 @@ def p1():
         _asset('round_wooden_table_02', -0.75, 1.9),
         _asset('wine_bottles_01', -0.62, 1.95, T, 70.0),
         shots._family(cores=[('ember', 0.06, 0.02, T, 200.0), ('acid', -0.85, 1.75, T, 200.0)])]
-    s['sky'] = {'kind': 'hdri', 'polyhaven': BAR, 'res': '4k', 'rotation_deg': 0.0, 'strength': 0.10}
+    s['sky'] = {'kind': 'hdri', 'polyhaven': BAR, 'res': '4k', 'rotation_deg': BAR_ROT, 'strength': 0.10}
     s['camera'] = {'position': [0.22, -1.32, 1.08], 'target': [0.04, 0.0, T + 0.11], 'lens_mm': 85.0, 'level': True,
                    'fstop': 2.0, 'focus': [0.06, 0.02, T + 0.12]}
-    s['render'].update(exposure=3.0, white_balance_k=2700, white_balance_tint=0.0)
+    s['render'].update(exposure=2.6, white_balance_k=3400, white_balance_tint=0.0)   # (proof: 2700 K turned the warm bar blue)
     return s
 
 
@@ -69,10 +70,10 @@ def p2():
           for a in (-2.3, 2.3, 3.14)],
         shots._family(hemis=[('ember', -0.38, 0.0, T + 0.75), ('dust', 0.0, 0.2, T + 0.85), ('acid', 0.38, 0.0, T + 0.75)],
                       cores=[('ember', -0.25, -0.2, T, 200.0), ('acid', 0.3, 0.12, T, 200.0)])]
-    s['sky'] = {'kind': 'hdri', 'polyhaven': BAR, 'res': '4k', 'rotation_deg': 0.0, 'strength': 0.10}
-    s['camera'] = {'position': [0.4, -3.6, 1.45], 'target': [0.0, 0.0, 1.25], 'lens_mm': 45.0, 'level': True,
+    s['sky'] = {'kind': 'hdri', 'polyhaven': BAR, 'res': '4k', 'rotation_deg': BAR_ROT, 'strength': 0.10}
+    s['camera'] = {'position': [0.35, -2.9, 1.5], 'target': [0.0, 0.0, 1.2], 'lens_mm': 40.0, 'level': True,
                    'fstop': 4.0, 'focus': [0.0, 0.0, 1.2]}
-    s['render'].update(exposure=3.0, white_balance_k=2700, white_balance_tint=0.0)
+    s['render'].update(exposure=2.6, white_balance_k=3400, white_balance_tint=0.0)   # (proof: 2700 K turned the warm bar blue)
     return s
 
 
@@ -89,17 +90,18 @@ def _combo(tropos_tint, lamp_tint, mantle_flavour, title):
     shots._approved(s, order=[tropos_tint, tropos_tint])
     C = 0.68
     s['products'].append(shots._mantle(0.35, 0.02, C + 0.001, -12.0, mantle_flavour))
-    s['set'] = {'kind': 'sweep', 'color': '#CFCBC4', 'width': 14.0, 'front': 8.0, 'depth': 2.4, 'radius': 1.2, 'height': 5.0,
+    s['set'] = {'kind': 'sweep', 'color': '#8F8A84', 'width': 14.0, 'front': 8.0, 'depth': 2.4, 'radius': 1.2, 'height': 5.0,
                 'contact': {'strength': 0.9, 'distance_m': 0.3, 'core_strength': 1.2, 'core_distance_m': 0.03},
                 'props': [_asset('modern_wooden_cabinet', 0.0, 0.05),
-                          shots._family(hemis=[(lamp_tint, -0.45, 0.05, 2.15)], cores=[(lamp_tint, -0.62, 0.05, C + 0.001, 200.0)])]}
+                          shots._family(hemis=[(lamp_tint, -0.45, 0.05, 1.72)], cores=[(lamp_tint, -0.62, 0.05, C + 0.001, 200.0)])]}
     s['materials']['sweep'] = {'roughness': 0.6}
     s['lights'] = {
-        'key': {'type': 'area', 'size_m': [3.0, 3.0], 'position': [-4.2, -4.6, 3.6], 'target': [0.0, 0.0, 0.8], 'irradiance': 2.2, 'color': '#FFF6EC'},
-        'fill': {'type': 'area', 'size_m': [3.0, 2.0], 'position': [4.5, -5.5, 1.6], 'target': [0.0, 0.0, 0.8], 'irradiance': 0.6, 'color': '#F4F6FF'},
-        'kicker': {'type': 'area', 'size_m': [2.0, 1.0], 'position': [0.0, 1.8, 3.7], 'target': [0.0, 0.0, 0.9], 'irradiance': 2.4,
+        'key': {'type': 'area', 'size_m': [3.0, 3.0], 'position': [-4.2, -4.6, 3.6], 'target': [0.0, 0.0, 0.8], 'irradiance': 1.6, 'color': '#FFF6EC'},
+        'fill': {'type': 'area', 'size_m': [3.0, 2.0], 'position': [4.5, -5.5, 1.6], 'target': [0.0, 0.0, 0.8], 'irradiance': 0.35, 'color': '#F4F6FF'},
+        'kicker': {'type': 'area', 'size_m': [2.0, 1.0], 'position': [0.0, 1.8, 3.7], 'target': [0.0, 0.0, 0.9], 'irradiance': 3.6,
                    'spread_deg': 70, 'color': '#FFFFFF'}}
-    s['camera'] = {'position': [0.0, -7.4, 1.25], 'target': [0.0, 0.0, 1.05], 'lens_mm': 50.0, 'level': True}
+    # (proof: flat and wide, the family small in a white field: closer, a mid-grey ground, the key lower, the kicker up)
+    s['camera'] = {'position': [0.0, -5.6, 1.2], 'target': [0.0, 0.0, 1.1], 'lens_mm': 50.0, 'level': True}
     s['size'] = [1800, 1200]
     s['render'].update(samples=96, exposure=0.0, denoise=True, clamp=0, caustics_refractive=True, caustics_reflective=True)
     s.pop('finish', None)
