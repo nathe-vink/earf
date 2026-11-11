@@ -328,6 +328,26 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
         manifest, no brass, lid hidden). The combos and any hero frame with the old Mantle are not reusable.
    RULE (third time: plinth, satin horn, old Mantle): a scene may place a product only from that product's approved asset
    file, and the build must assert it. A lane's word that an embed is "identical" is not a check.
+   THE BAR (owner, 11 Nov 15:41 UTC): "Everything has to look classy and refined and not cheap, even though it's acrylic."
+   Standing rule for every part and every picture. Finish and detail only: a signed shape or size does not change without
+   the owner; lanes list those instead.
+   1. No gloss black plastic. Black parts are satin (bead-blasted, anodized, black oxide), not dead matte: form must read.
+   2. One hardware finish across the line, satin black. No chrome, polished steel, bare aluminum, brass or zinc. Bright only
+      where a bought or working part cannot be black, and listed.
+   3. Nothing that looks like a leftover of making: clips, tabs, snap fits, exposed screw heads, part lines, glue lines,
+      stickers, loose wire, LED dots, boards. Hidden, or a deliberate detail in the one finish.
+   4. Acrylic is thick, edges polished with a small even chamfer or radius. No thin sheet, no raw sharp edge.
+   5. Shapes read as turned or machined, not molded. No buckets, cups or lumps.
+   6. Cord, cap and ceiling parts are part of the product: cloth-covered cord, cap and canopy in the one finish.
+   7. Pictures: no flat even light, gray void, washed color or CG-looking stand-in furniture. Deep color held in the acrylic,
+      long soft highlights along its edges, darker and richer grounds, real scanned materials. The set looks as expensive as
+      the product. Honesty rules unchanged.
+   Sent 15:43 to the lamps, speaker and Mantle lanes with their batches in hand; each reports what it changed and a list
+   (no work) of what else fails the bar and needs a decision. The coordinator takes those lists to the owner ONCE, so the
+   owner stops finding them one at a time. Biomes, site and brand get the bar with their next brief.
+   Found by the coordinator on the lamps (old finals): Hemisphere from below shows three dark tabs, seam circles and an open
+   dark center; its cap reads as a flat black lump. Lamps lane to fix both before the new Hemisphere views render.
+   Core's base: the coordinator's default is satin black anodized metal if the price is close (the part you touch).
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
