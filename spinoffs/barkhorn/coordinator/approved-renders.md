@@ -493,6 +493,10 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    Puck screws are countersunk M5, flush, in the CAD (the highlights seen were flush heads catching the key light).
    RB330 fallback in the BOM note: refinish the stock counterweight and trim (may void Rega's warranty) or an arm that
    ships black.
+   17:03 UTC, Mantle lane 1563192532: `mantle-edge-options.png` is now A | B | C (2700x1350) with corner crops; C = 1 mm
+   chamfer polished, outer edge satin as signed (base edge diamond-polished as signed); render-only; audits clean.
+   Shown to the owner 17:05 with the coordinator's pick: C. OPEN until the owner picks; then the CAD takes the chamfer
+   and the eight finals re-render once.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
