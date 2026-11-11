@@ -7,7 +7,7 @@ little triangular brace behind. Plainly hand-made: a school play's flats.
 
 `key` is a cutouts.json entry (a tint, or 'poison-sign'); `height` the board's icon box in metres (the board itself is
 the outline inside that box); `stake` (metres) puts the board on a square stake that high instead of a brace; `thick`
-the board's thickness (default 15 mm).
+the board's thickness (default 15 mm); `brace: false` for a flown piece (its wires are the caller's).
 """
 import json, math, os
 import bmesh
@@ -71,7 +71,7 @@ def place(bpy, name, p, kit):
             g = bmesh.ops.create_cube(bm, size=1.0)
             bmesh.ops.scale(bm, vec=Vector((0.022, 0.022, z0 + 0.4 * H)), verts=g['verts'])
             bmesh.ops.translate(bm, vec=Vector((0, t + 0.012, (z0 + 0.4 * H) / 2 - z0)), verts=g['verts'])
-        else:
+        elif c.get('brace', True):
             bh = 0.62 * H; bd = 0.32 * H
             tri = [(0.0, t, 0.0), (0.0, t + bd, 0.0), (0.0, t, bh)]
             vs = [bm.verts.new((x - 0.009, y, z)) for x, y, z in tri]
