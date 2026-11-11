@@ -401,6 +401,22 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
      the skin, the dock out of sight; Ice and Ember, lamp off and on. The color pick waits for it.
    - Details now in the CAD notes and BOM: Hemisphere's mouth chamfer 1.0 polished, hatch screws black oxide and flush,
      canopy strap screws black and covered, cord grip a turned satin black gland, the bright bore listed as the exception.
+   16:35 UTC, speaker lane 670437bd: P1 fix `product/core-bar-table.png` and P2 `product/bar-pendants.png`, shown to the
+   owner 16:40 as tests, NOT approved.
+   - P1's "wire" was the Core dock's own braided USB-C cable (a real part), pointing at the camera; the lamp is turned so
+     it leaves from the back.
+   - P2 is our own bar, no HDRI: Poly Haven red brick, brushed concrete, a dark wood back bar, round_wooden_table_02, two
+     black iron stools with leather; five Hemispheres clustered at heights, two Cores, Mantle on the back bar. Emitters
+     5 x 1000 + 2 x 200 lm; declared: one dusk window out of frame. Audit hidden 0, equipment 0.
+   - Coordinator's check: the set is right; the lamps fail. Shades and Cores read white or pale pink with tint only at
+     the rim (P1's Ember is salmon): the frame is exposed for the room. Sent back: expose for the lamps with the lamps
+     lane's exposure and view transform (measured against its finals), raise the room with declared out-of-frame light,
+     Mantle out of P2, P1 re-shot in this bar, lamps from r32-lamps-final a87a8160 (Core base B; Hemisphere's new
+     underside, cap and mouth).
+   - Tropos against the bar (speaker lane's list, for the owner's one list): polished steel feet-stems; the amp plate's
+     gold contacts, foil sticker, white print, colored RCA jacks and LED dots; exposed screw heads (back, plates, port,
+     woofer); bright driver terminals seen through the cabinet; the pale quilted lining through the acrylic (all tints
+     but Smoke); the remote-kit board visible inside; the rating plate's printed label.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
