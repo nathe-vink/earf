@@ -2232,11 +2232,11 @@ def family_centres(s):
         return round(float((X + 1) / 2 * 100), 2), round(float((1 - Y) / 2 * 100), 2)
     out = []
     for p in s['set'].get('props', []):
-        if 'hemispheres' in p:                                 # the lamps' prop (lamps_final, or stage2's pendants)
+        if 'hemispheres' in p or 'cores' in p:                 # the lamps' prop (lamps_final, or stage2's pendants/lamps)
             inv = {v: k for k, v in KEY.items()}
-            for h in p['hemispheres']:
+            for h in p.get('hemispheres', []):
                 out.append({'product': 'hemisphere', 'tint': inv[h['tint']], **dict(zip('xy', pr(h['x'], h['y'], h['rim_z'] + 0.1)))})
-            for c_ in p['cores']:
+            for c_ in p.get('cores', []):
                 out.append({'product': 'core', 'tint': inv[c_['tint']], **dict(zip('xy', pr(c_['x'], c_['y'], c_['floor_z'] + 0.12)))})
     for b in s['products']:
         if b['def'] == MANTLE_DEF:

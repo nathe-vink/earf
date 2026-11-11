@@ -51,7 +51,8 @@ def p1():
         # (the owner, 16:05: "a weird wire artifact": the dock's own braided USB-C cable, a 105 mm stub in the lamp's
         # model (dock-cable, crystal.py), pointing at the camera with the lamp turned 200 deg. Turned to 0 its cable
         # leaves from the back, behind the base, as it would run off to the wall)
-        shots._family(cores=[('ember', 0.06, 0.02, T, 0.0), ('acid', -0.85, 1.75, T, 0.0)])]
+        {'kind': 'kit', 'shape': 'ext', 'path': LAMPS, 'fn': 'lamps', 'led_k': shots.LED_K, 'core_load': shots.CORE_LOAD, 'core_base': CORE_BASE,
+         'cores': [{'tint': shots.KEY[t], 'x': x, 'y': y, 'floor_z': T, 'rot': 0.0} for t, x, y in (('ember', 0.06, 0.02), ('acid', -0.85, 1.75))]}]
     # (and the ball a stop darker so Ember holds its red: the room twice as bright, the exposure a stop down)
     s['sky'] = {'kind': 'hdri', 'polyhaven': BAR, 'res': '4k', 'rotation_deg': BAR_ROT, 'strength': 0.20}
     s['camera'] = {'position': [0.22, -1.32, 1.08], 'target': [0.04, 0.0, T + 0.11], 'lens_mm': 85.0, 'level': True,
@@ -60,7 +61,8 @@ def p1():
     return s
 
 
-HEMI_SCALE = float(os.environ.get('HEMI_SCALE', '1.5'))   # the owner's open question: 1.0, 1.5 or 2.0 (this pass 1.5)
+HEMI_SCALE = float(os.environ.get('HEMI_SCALE', '1.0'))   # the owner, 16:15: Hemisphere stays its size, hung in multiples
+CORE_BASE = {'color': '#0B0B0C', 'roughness': 0.45}         # the owner, 16:25: Core's base and dock satin black (an override until the lamps lane ships it)
 LAMPS = 'spinoffs/barkhorn/campaign/stage/stage2_props.py'
 
 
@@ -72,7 +74,7 @@ def p2():
     """A corner of a cool bar of our own (the owner, 16:05: "Red brick, wood, cement textures mostly. No TVs"), built
     from scanned materials: a red brick wall (red_brick), a brushed concrete floor and counter face (brushed_concrete),
     a dark wood counter top and back bar (dark_wood), a real table (round_wooden_table_02) and metal stools
-    (metal_stool_01). Three Hemispheres low over the table (scaled HEMI_SCALE), two Cores on it; the Tropos pair at the
+    (metal_stool_01). A cluster of five Hemispheres low over the table, close at different heights, two Cores on it; the Tropos pair at the
     brick wall either side, Mantle on the back bar. The only light sources in frame are EARF's lamps; the rest is one
     declared dusk window out of frame to the right, cool and low. No HDRI."""
     s = shots._cast_base()
@@ -96,8 +98,11 @@ def p2():
         _asset('metal_stool_01', -0.62, 0.25, 0.0, 30.0), _asset('metal_stool_01', 0.6, 0.45, 0.0, -40.0),
         {'kind': 'kit', 'shape': 'ext', 'path': LAMPS, 'fn': 'lamps', 'hemi_scale': HEMI_SCALE, 'top_z': 3.4,
          'led_k': shots.LED_K, 'core_load': shots.CORE_LOAD,
+         'core_base': CORE_BASE,
+         # a cluster of five over the table, close, at different heights (the owner, 16:15: "I like having to pair multiple")
          'hemispheres': [{'tint': shots.KEY[t], 'x': x, 'y': y, 'rim_z': z} for t, x, y, z in
-                         (('ember', -0.34, -0.05, 1.42), ('dust', 0.05, 0.12, 1.55), ('acid', 0.4, -0.08, 1.45))],
+                         (('ember', -0.30, -0.06, 1.38), ('dust', -0.08, 0.16, 1.58), ('acid', 0.14, -0.10, 1.44),
+                          ('ember', 0.33, 0.12, 1.66), ('dust', 0.02, -0.26, 1.72))],
          'cores': [{'tint': shots.KEY[t], 'x': x, 'y': y, 'floor_z': T, 'rot': 0.0} for t, x, y in (('ember', -0.18, -0.12), ('acid', 0.22, 0.1))]}]}
     s['products'].append(shots._mantle(-0.15, BW - 0.22, 1.16 + 0.001, 0.0, 'smoke-2074'))
     s['materials'].pop('sweep', None)
@@ -109,7 +114,7 @@ def p2():
     s['size'] = [1920, 1080]
     s['render'] = {**s['render'], **LAMP_RENDER, 'exposure': 2.0, 'white_balance_k': 3600, 'white_balance_tint': 0.0}
     s.pop('finish', None)
-    s['title'] = f'Three Hemispheres over a table in a brick bar of our own (Hemisphere x{HEMI_SCALE:g})'
+    s['title'] = f'Three Hemispheres over a table in a brick bar of our own (five Hemispheres, x{HEMI_SCALE:g})'
     return s
 
 

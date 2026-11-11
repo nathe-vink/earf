@@ -131,7 +131,19 @@ def lamps(bpy, name, p, kit):
                     if v.co.z > hi - 0.002:
                         v.co.z = zl
     if p.get('cores'):
+        before = set(bpy.context.scene.objects)
         objs += lamps_final.place(bpy, name + '-core', {**p, 'hemispheres': []}, kit)
+        cb = p.get('core_base')
+        if cb:   # (the owner, 2026-11-11 16:25: Core's base satin black, not shiny plastic: until the lamps lane ships it,
+                 # the base and the dock overridden to a satin black here)
+            m = _matte(bpy, 'core-base-satin', cb.get('color', '#0B0B0C'), cb.get('roughness', 0.45))
+            n = 0
+            for o in [o for o in bpy.context.scene.objects if o not in before]:
+                if o.type == 'MESH' and o.name.split('.')[0] in ('dock', 'base'):
+                    for sl in o.material_slots:
+                        sl.material = m
+                    n += 1
+            print('CORE base satin:', n, 'parts')
     print('LAMPS hemi_scale', k, 'cords to', top)
     return objs
 
