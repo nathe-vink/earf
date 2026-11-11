@@ -74,7 +74,7 @@ def build(frame, samples, scale):
     def bbt(tint):
         return blackbody(CCT_PER_TINT.get(tint, 2700) if pertint else CCT)
     bb = blackbody(CCT)
-    kind0 = 'dome' if frame.startswith('lamps-domes') else 'orb' if frame.startswith('lamps-orbs') else frame.split('-')[0]
+    kind0 = 'dome' if frame.startswith(('lamps-domes', 'trio-')) else 'orb' if frame.startswith('lamps-orbs') else frame.split('-')[0]
     # the studio's brightness and the exposure move together, so the paper holds its tone while the lamp, at its real
     # output, comes out of clipping: a brighter studio, one scale
     # round 3 (the gate, wf_5760aeac-7cd): Hemisphere's studio x1 with the camera at -2 EV (the lamp up 1 EV against the
@@ -472,6 +472,14 @@ def build(frame, samples, scale):
         for i, t in enumerate(row):
             hemisphere(t, (i - (len(row) - 1) / 2) * 0.25, 0.45, y=0.0)
         cam = ((0.0, -2.9, 0.47), (0.0, 0.0, 0.45), 50.0)
+    elif frame.startswith('trio-'):
+        # trio-<k1>-<k2>-<k3> (the owner, 2026-11-11: "I like having to pair multiple"): three Hemispheres hung close
+        # over a table at slightly different heights, seen a little from below and to one side; 2000 x 1600
+        W, H = 2000, 1600
+        ks = frame.split('-')[1:4]
+        for t, (x_, z_, y_) in zip(ks, ((-0.235, 0.56, 0.03), (0.0, 0.50, -0.02), (0.235, 0.535, 0.02))):
+            hemisphere(t, x_, z_, y=y_)
+        cam = tuple(eval(os.environ['DOMECAM'])) if os.environ.get('DOMECAM') else ((0.30, -0.82, 0.28), (0.02, 0.0, 0.49), 38.0)
     elif frame.startswith('lamps-orbs'):
         # round 2 (the gate): the camera 15 deg up, so each lamp's glow on the paper is its own; '-7' leaves Smoke out
         W, H = 2400, 800

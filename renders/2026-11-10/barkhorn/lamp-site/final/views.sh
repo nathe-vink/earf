@@ -5,6 +5,7 @@
 #   -direct  level with the middle of the shade, square on, 90 mm, the shade about 60 % of the width
 #   -under   35 deg below the rim's plane, 30 deg round, 60 mm, looking up into the shade
 #   ember-off  the -direct camera, the lamp off, a daylight studio (5000 K, the camera at 5000 K, the studio x4)
+#   trio-ember-dust-acid  three hung together, 2000 x 1600
 #   ember-rim  close on the rim and the black cap, 85 mm at f/2.8, focused on the cap
 # Audits and masks first. Skips what is done; rerun until views-done.txt.
 cd /home/user/earf/spinoffs/barkhorn/companions
@@ -30,4 +31,7 @@ for kv in $T; do k=${kv%%:*}; n=${kv##*:}
 done
 r $D/hemisphere-ember-off.png env LIGHTS_OFF=1 STUDIO=4 STUDIO_K=5000 WB=5000 DOMECAM="$DIR" LAMP_OUT=$D/hemisphere-ember-off.png python3.11 lamp_site.py dome-red --samples 128 --scale 1.0 > /dev/null 2>&1
 r $D/hemisphere-ember-rim.png env FSTOP=2.8 FOCUS='(0.0,-0.045,0.60)' DOMECAM="$RIM" LAMP_OUT=$D/hemisphere-ember-rim.png python3.11 lamp_site.py dome-red --samples 192 --scale 1.0 > /dev/null 2>&1
+# E (the coordinator, 16:15): three hung together at slightly different heights, a little from below and to one side
+r $D/audit/hemisphere-trio-ember-dust-acid.txt aud $D/audit/hemisphere-trio-ember-dust-acid.txt env AUDIT=1 MASK=$D/masks/hemisphere-trio-ember-dust-acid.png python3.11 lamp_site.py trio-red-orange-amber
+r $D/hemisphere-trio-ember-dust-acid.png env LAMP_OUT=$D/hemisphere-trio-ember-dust-acid.png python3.11 lamp_site.py trio-red-orange-amber --samples 128 --scale 1.0 > /dev/null 2>&1
 echo DONE > $D/views-done.txt
