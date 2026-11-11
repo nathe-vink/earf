@@ -1,0 +1,281 @@
+{
+ "title": "Ice and Dust: the Tropos pair in Ice, the lamps in Dust, Mantle in Ember (studio)",
+ "size": [
+  1800,
+  1200
+ ],
+ "set": {
+  "kind": "sweep",
+  "color": "#8F8A84",
+  "width": 14.0,
+  "front": 8.0,
+  "depth": 2.4,
+  "radius": 1.2,
+  "height": 5.0,
+  "contact": {
+   "strength": 0.9,
+   "distance_m": 0.3,
+   "core_strength": 1.2,
+   "core_distance_m": 0.03
+  },
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "modern_wooden_cabinet",
+    "res": "2k",
+    "position": [
+     0.0,
+     0.05,
+     0.0
+    ],
+    "rotate": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "scale": 1.0
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/planet/afterhours/lamps_final.py",
+    "fn": "place",
+    "led_k": {
+     "red": 2200,
+     "green": 2700,
+     "ice": 2700,
+     "violet": 3000,
+     "orange": 4000,
+     "amber": 4000,
+     "blue": 4000,
+     "black": 4000
+    },
+    "core_load": {
+     "orange": 1.5,
+     "amber": 1.5,
+     "blue": 1.5,
+     "black": 0.15
+    },
+    "hemispheres": [
+     {
+      "tint": "orange",
+      "x": -0.45,
+      "y": 0.05,
+      "rim_z": 1.72
+     }
+    ],
+    "cores": [
+     {
+      "tint": "orange",
+      "x": -0.62,
+      "y": 0.05,
+      "floor_z": 0.681,
+      "rot": 200.0
+     }
+    ]
+   }
+  ]
+ },
+ "camera": {
+  "position": [
+   0.0,
+   -6.2,
+   1.2
+  ],
+  "target": [
+   0.0,
+   0.0,
+   1.1
+  ],
+  "lens_mm": 50.0,
+  "level": true
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#F2F1EF",
+  "horizon": "#EEEDEB",
+  "ground": "#CFCCC8",
+  "strength": 0.6,
+  "visible": false
+ },
+ "render": {
+  "samples": 96,
+  "adaptive": 0.01,
+  "denoise": true,
+  "clamp": 0,
+  "bounces": 32,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.0,
+  "white_balance_k": 5900,
+  "white_balance_tint": 7.0,
+  "glossy_bounces": 16,
+  "transmission_bounces": 32,
+  "caustics_refractive": true,
+  "caustics_reflective": true
+ },
+ "materials": {
+  "builtin-led": {
+   "glow": 0.0
+  },
+  "builtin-led-brace": {
+   "glow": 0.0
+  },
+  "horn-satin": {
+   "roughness": 0.05
+  },
+  "sweep": {
+   "roughness": 0.6
+  }
+ },
+ "lights": {
+  "key": {
+   "type": "area",
+   "size_m": [
+    3.0,
+    3.0
+   ],
+   "position": [
+    -4.2,
+    -4.6,
+    3.6
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.8
+   ],
+   "irradiance": 1.6,
+   "color": "#FFF6EC"
+  },
+  "fill": {
+   "type": "area",
+   "size_m": [
+    3.0,
+    2.0
+   ],
+   "position": [
+    4.5,
+    -5.5,
+    1.6
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.8
+   ],
+   "irradiance": 0.35,
+   "color": "#F4F6FF"
+  },
+  "kicker": {
+   "type": "area",
+   "size_m": [
+    2.0,
+    1.0
+   ],
+   "position": [
+    0.0,
+    1.8,
+    3.7
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.9
+   ],
+   "irradiance": 3.6,
+   "spread_deg": 70,
+   "color": "#FFFFFF"
+  }
+ },
+ "products": [
+  {
+   "def": "studio/products/barkhorn-cloud.json",
+   "flavour": "cloud-red",
+   "instances": [
+    {
+     "position": [
+      -1.58,
+      0.0,
+      0.0
+     ],
+     "rotate_z": 12.0,
+     "flavour": "cloud-blue",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      1.58,
+      0.0,
+      0.0
+     ],
+     "rotate_z": -12.0,
+     "flavour": "cloud-blue",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    }
+   ]
+  },
+  {
+   "def": "studio/products/barkhorn-variants.json",
+   "flavour": "cloud-red",
+   "instances": [
+    {
+     "position": [
+      -1.58,
+      0.0,
+      0.0
+     ],
+     "rotate_z": 12.0,
+     "flavour": "cloud-blue",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      1.58,
+      0.0,
+      0.0
+     ],
+     "rotate_z": -12.0,
+     "flavour": "cloud-blue",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    }
+   ]
+  },
+  {
+   "def": "studio/products/mantle-strata-v3.json",
+   "flavour": "ember-2423",
+   "instances": [
+    {
+     "position": [
+      0.35,
+      0.02,
+      0.681
+     ],
+     "rotate_z": -12.0
+    }
+   ]
+  }
+ ]
+}
