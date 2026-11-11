@@ -1,0 +1,138 @@
+{
+ "emitters": [
+  {
+   "name": "Core ember",
+   "lumens": 200,
+   "cct_k": 2200,
+   "in_frame": true
+  },
+  {
+   "name": "track-wall0",
+   "declared": true,
+   "emitter": "area lamp 0.12 x 0.12 m, out of frame",
+   "irradiance_w_m2": 3.3941,
+   "position_m": [
+    5.0,
+    4.9,
+    3.35
+   ]
+  },
+  {
+   "name": "track-wall1",
+   "declared": true,
+   "emitter": "area lamp 0.12 x 0.12 m, out of frame",
+   "irradiance_w_m2": 3.3941,
+   "position_m": [
+    6.2,
+    4.9,
+    3.35
+   ]
+  },
+  {
+   "name": "track-wall2",
+   "declared": true,
+   "emitter": "area lamp 0.12 x 0.12 m, out of frame",
+   "irradiance_w_m2": 3.3941,
+   "position_m": [
+    7.4,
+    4.9,
+    3.35
+   ]
+  },
+  {
+   "name": "track-wall3",
+   "declared": true,
+   "emitter": "area lamp 0.12 x 0.12 m, out of frame",
+   "irradiance_w_m2": 3.3941,
+   "position_m": [
+    8.6,
+    4.9,
+    3.35
+   ]
+  },
+  {
+   "name": "track-wall4",
+   "declared": true,
+   "emitter": "area lamp 0.12 x 0.12 m, out of frame",
+   "irradiance_w_m2": 3.3941,
+   "position_m": [
+    9.6,
+    4.9,
+    3.35
+   ]
+  },
+  {
+   "name": "track-bar0",
+   "declared": true,
+   "emitter": "area lamp 0.12 x 0.12 m, out of frame",
+   "irradiance_w_m2": 1.0607,
+   "position_m": [
+    5.6,
+    3.599999999999999,
+    3.35
+   ]
+  },
+  {
+   "name": "track-bar1",
+   "declared": true,
+   "emitter": "area lamp 0.12 x 0.12 m, out of frame",
+   "irradiance_w_m2": 1.0607,
+   "position_m": [
+    7.0,
+    3.599999999999999,
+    3.35
+   ]
+  },
+  {
+   "name": "track-bar2",
+   "declared": true,
+   "emitter": "area lamp 0.12 x 0.12 m, out of frame",
+   "irradiance_w_m2": 1.0607,
+   "position_m": [
+    8.4,
+    3.599999999999999,
+    3.35
+   ]
+  },
+  {
+   "name": "house",
+   "declared": true,
+   "emitter": "area lamp 3.0 x 2.0 m, out of frame",
+   "irradiance_w_m2": 0.0424,
+   "position_m": [
+    6.9,
+    0.6,
+    2.8
+   ]
+  }
+ ],
+ "lamp_lumens_total": 200,
+ "exposure": {
+  "view": "AgX",
+  "look": "AgX - Punchy",
+  "ev": -1.0,
+  "white_balance": "none"
+ },
+ "lamps": "r32-lamps-final 3e38954b (Core base B in its own colour), its own LED colours",
+ "room": "planet_r37 room (r33-planet-world), its lights and old products off",
+ "haze": {
+  "declared": true,
+  "box_m": [
+   3.2,
+   0.5,
+   0.0,
+   10.6,
+   6.1,
+   3.35
+  ],
+  "density": 0.012,
+  "anisotropy": 0.5,
+  "color": "#FFFFFF"
+ },
+ "mantle": "r48-mantle-design 941ad388 mantle-strata.blend, checked",
+ "audit": {
+  "hidden": [],
+  "equipment": [],
+  "method": "reaudit.py, the corrected cast"
+ }
+}
