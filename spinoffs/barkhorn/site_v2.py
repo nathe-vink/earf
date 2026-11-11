@@ -2013,11 +2013,11 @@ def rc_home(p, web):
 
 
 # The products' own pictures (the coordinator, 2026-11-11 02:55): Mantle final, no light (r48-mantle-design a1240b77), one
-# per color; the lamps lit, per tint, and in rows (r32-lamps-final 42c3276c: half size and interim, names kept for the finals)
+# per color; the lamps lit, per tint, and in rows (r32-lamps-final 17a9da5e, the final set; BOM 007b4486)
 MANTLE_FINAL = 'renders/2026-11-10/barkhorn/mantle-r48/mantle-final-day-{name}.png'
 LAMP_FINAL = 'renders/2026-11-10/barkhorn/lamp-site/final/{f}.png'
 NAMES = dict(zip(RC_KEYS, ['ember', 'dust', 'acid', 'poison', 'ice', 'haze', 'fog', 'smoke']))
-LAMP_LIGHT_TINTS = '2200 K in Ember, 3000 K in Ice and Haze, 2700 K in the others'
+LAMP_LIGHT_TINTS = '2200 K in Ember; 2700 K in Poison and Fog; 3000 K in Haze; 4000 K in Dust, Acid, Ice and Smoke'
 
 
 def rc_products(p, web):
@@ -2044,14 +2044,14 @@ def rc_products(p, web):
     # the lamps: each lit in its tint, the eight in a row, Hemisphere from below (Ember)
     rows = {}
     for lamp, f in (('dome', 'hemisphere'), ('orb', 'core')):
-        r = save(LAMP_FINAL.format(f=f'{f}-row'), f'{f}-row.webp', 1200)
+        r = save(LAMP_FINAL.format(f=f'{f}-row'), f'{f}-row.webp', 2000)
         rows[f] = r
         row_th = save(LAMP_FINAL.format(f=f'{f}-row'), f'{f}-row-th.webp', 168, 80)
         for k, n in NAMES.items():
-            v, card = views(LAMP_FINAL.format(f=f'{f}-{n}'), f'{f}-{n}', 800)
+            v, card = views(LAMP_FINAL.format(f=f'{f}-{n}'), f'{f}-{n}', 1200)
             vs = {'hero': v, 'row': dict(r, th=row_th['src'])}
             if lamp == 'dome' and k == 'red':
-                b, _ = views(LAMP_FINAL.format(f='hemisphere-ember-below'), 'hemisphere-ember-below', 800)
+                b, _ = views(LAMP_FINAL.format(f='hemisphere-ember-below'), 'hemisphere-ember-below', 1200)
                 vs['below'] = b
             D['lamps'][lamp]['colours'][k] = {'views': vs, 'card': dict(card, alt=f'{f.title()} lit in {n.title()}')}
     def fact(L, name, text, after=None):
@@ -2061,9 +2061,9 @@ def rc_products(p, web):
                 row[1] = text; return
         at = next(ix for ix, row in enumerate(rows_) if row[0] == after) + 1
         rows_.insert(at, [name, text])
-    fact(D['lamps']['dome'], 'Light', 'About 1,000 lm, CRI 90; the dome glows in its own color, and the light straight down is the lamp&rsquo;s own '
-                                      'white: ' + LAMP_LIGHT_TINTS)
-    fact(D['lamps']['orb'], 'Light', 'A glow lamp: about 17 lm out of the ball in Ice, 9 in Ember; ' + LAMP_LIGHT_TINTS)
+    fact(D['lamps']['dome'], 'Light', 'About 1,000 lm at the ring, about 270 lux half a meter below, in every tint; CRI 90. The dome glows in '
+                                      'its own color, and the light straight down is the lamp&rsquo;s own white: ' + LAMP_LIGHT_TINTS)
+    fact(D['lamps']['orb'], 'Light', 'A glow, not a reading light: the ball lights in its own color. The LED inside: ' + LAMP_LIGHT_TINTS)
     fact(D['lamps']['orb'], 'Base', 'Black acrylic, angled', after='Ball')
     p.rest = p.rest[:i] + json.dumps(D, separators=(',', ':')) + p.rest[j:]
     # the views' words: Mantle in its own color; Hemisphere from below
