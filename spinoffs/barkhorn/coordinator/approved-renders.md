@@ -603,6 +603,15 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    cream); the spines read as white binders; the bar top a flat pale gray slab; light beams in the haze; Mantle lost;
    the two nearest Cores pale; nothing cozy readable in frame; speckle on the niche lining. core-bar-table is good
    apart from the pale bar top.
+   20:44 UTC, biomes lane (a424fc0e, f9072874): THE FLOATING GRASS, cause and fix. The scene kit stood every scattered
+   thing at one flat height while the ground has relief and a brow: in Fog 962 of 3,090 tufts floated more than 2 cm
+   (up to 12 cm) and 36 overhung the brow. `habitat.py` now lands each tuft on the real ground and removes any near a
+   fall or with its base hidden behind the ground; rocks and shrubs settle onto the ground; `scattercheck.py` audits a
+   saved scene and is a CHECK.md column. Every habitat scene checked: Fog and Smoke (same set) clean after landing;
+   Acid and Ember had 136 lava blocks floating 2-56 cm, clean after settling; Haze's shrubs settled, but about a third
+   of the in-frame grass roots in two patches sit behind a crest (still open, to thin before any Haze final); Dust and
+   Poison clean. The Fog pair is re-rendering whole (about 3.5 h, sun unchanged, same names), then the Acid, Ember and
+   Smoke proxies, then Dust's final.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
