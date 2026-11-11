@@ -14,8 +14,9 @@ own code are added as each final lands.
 | boulder_01 | model | https://polyhaven.com/a/boulder_01 | Fog, Smoke |
 | coast_rocks_05 | model | https://polyhaven.com/a/coast_rocks_05 | Fog, Smoke |
 | mossy_forest | HDRI | https://polyhaven.com/a/mossy_forest | Poison ivy |
-| castle_brick_02_red | texture | https://polyhaven.com/a/castle_brick_02_red | Poison ivy (the wall) |
-| castle_wall_slates | texture | https://polyhaven.com/a/castle_wall_slates | Poison ivy (the coping) |
-| forest_ground_04 | texture | https://polyhaven.com/a/forest_ground_04 | Poison ivy (the ground) |
+| bark_brown_02 | texture | https://polyhaven.com/a/bark_brown_02 | Poison ivy (the trunks) |
+| forest_leaves_02 | texture | https://polyhaven.com/a/forest_leaves_02 | Poison ivy (the forest floor) |
+| fern_02 | model | https://polyhaven.com/a/fern_02 | Poison ivy (ferns at the edges) |
+| castle_brick_02_red, castle_wall_slates, forest_ground_04 | textures | https://polyhaven.com/a/castle_brick_02_red (and the others) | the parked wall version of Poison ivy |
 
 Modelled here, not scanned: the poison ivy itself (studio/engine/kit_ext/ivy_el.py; Poly Haven has no poison ivy).

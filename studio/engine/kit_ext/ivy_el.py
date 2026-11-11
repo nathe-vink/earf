@@ -204,13 +204,43 @@ def _new_leaf_bm():
 
 
 # --- the vine on the wall ------------------------------------------------------------------------------------------
+def _surface(p):
+    """Where the vine climbs, as a map (x, z, off) -> (point, outward normal, tangent along x): the wall's face (the
+    plane y = `face_y`, facing -y; x is x), or with `trunk` {position, radius, height, flare, foot, lobes, seed, turn,
+    face_deg} a trunk built by poison_el.redwood with the same numbers (its lobed, flaring radius recomputed here; x is
+    arc length round it from the angle `face_deg`, 0 = toward -y)."""
+    t = p.get('trunk')
+    if not t:
+        fy = p.get('face_y', 1.0)
+        return lambda x, z, off: (Vector((x, fy - off, z)), Vector((0, -1, 0)), Vector((1, 0, 0)))
+    rnd = random.Random(t.get('seed', 1))
+    R, H = t.get('radius', 0.45), t.get('height', 20.0); fl, foot = t.get('flare', 0.6), t.get('foot', 1.4)
+    lobes, ph = t.get('lobes', 6), rnd.uniform(0, 6.28)
+    cx, cy = t['position'][0], t['position'][1]; turn = math.radians(t.get('turn', 0.0))
+    a0 = math.radians(-90.0 + t.get('face_deg', 0.0))
+
+    def radius(th, z):
+        e_ = math.exp(-max(z, 0.0) / foot)
+        lob = 0.5 + 0.5 * math.cos(lobes * th + ph + 0.5 * math.sin(3 * th + ph))
+        return R * (1.0 - 0.25 * z / H) * (1 + fl * e_ * (0.3 + 0.7 * lob ** 2)) * 1.03       # 1.03: over the fluting
+
+    def at(x, z, off):
+        a = a0 + x / R
+        r = radius(a - turn, z)
+        n = Vector((math.cos(a), math.sin(a), 0.0))
+        return Vector((cx, cy, z)) + n * (r + off), n, Vector((-math.sin(a), math.cos(a), 0.0))
+    return at
+
+
+# --- the vine on the wall or a trunk -------------------------------------------------------------------------------
 def ivy(bpy, name, p, kit):
-    """Vines climbing the wall's face (the plane y = `face_y`, facing -y) from roots along its foot at the x positions
-    `roots` [[x, spread, height], ...]: each wanders up to about `height`, branching, its stems `stem_r` thick at the
-    root thinning upward, held off the brick by rootlets; leaves every `node` metres, `leaf` metres a leaflet, facing out
-    and a little up, kept clear of `clear` boxes [x0, z0, x1, z1] on the face (where the speaker stands before it)."""
+    """Vines climbing a surface (_surface: a wall's face, or a trunk) from roots along its foot at `roots`
+    [[x, spread, height], ...]: each wanders up to about `height`, branching, its stems `stem_r` thick at the root
+    thinning upward, held to the bark or brick by short hairy rootlets; leaves every `node` metres, `leaf` metres a
+    leaflet, facing out and a little up, kept clear of `clear` boxes [x0, z0, x1, z1] in the surface's (x, z); `hang`
+    [[x, spread, length], ...] vines spill down from the top (a wall's coping)."""
     rnd = random.Random(p.get('seed', 1))
-    fy = p.get('face_y', 1.0); node = p.get('node', 0.11); size = p.get('leaf', 0.08)
+    at = _surface(p); node = p.get('node', 0.11); size = p.get('leaf', 0.08)
     clear = p.get('clear', [])
     top = p.get('top', 2.2)
     lbm, uvl, col = _new_leaf_bm(); sbm = bmesh.new(); hbm = bmesh.new()
@@ -221,7 +251,7 @@ def ivy(bpy, name, p, kit):
 
     def grow(x, z, heading, r, length, depth, down=False):
         nonlocal n_leaves
-        pts, radii = [Vector((x, fy - r - 0.004, z))], [r]
+        pts, radii = [at(x, max(z, 0.0), r + 0.004)[0] - Vector((0, 0, 0.03 if z <= 0 else 0))], [r]
         s = 0.0; step = 0.035; next_node = node * rnd.uniform(0.3, 1.0); side = 1
         while s < length and (z > 0.05 if down else z < top - 0.02):
             heading += rnd.gauss(0, 0.14)
@@ -231,18 +261,19 @@ def ivy(bpy, name, p, kit):
                 heading = max(-1.25, min(1.25, heading * 0.92))            # mostly upward, wandering
             x += math.sin(heading) * step; z += math.cos(heading) * step; s += step
             rr = max(0.0015, r * (1 - 0.7 * s / length))
-            pts.append(Vector((x, fy - rr - 0.004 + 0.003 * math.sin(s * 9), z))); radii.append(rr)
-            if rnd.random() < 0.25:                                         # rootlets: short brown hairs to the brick
+            pt, nn, tg = at(x, max(z, 0.0), rr + 0.004 - 0.003 * math.sin(s * 9))
+            pts.append(pt); radii.append(rr)
+            if rnd.random() < 0.3:                                          # rootlets: short brown hairs to the surface
                 for _ in range(2):
-                    a = Vector((x + rnd.uniform(-rr, rr), fy - rr * 0.5, z + rnd.uniform(-0.01, 0.01)))
-                    b = a + Vector((rnd.uniform(-0.012, 0.012), rr * 0.5 + 0.004, rnd.uniform(-0.015, 0.0)))
+                    a = pt + tg * rnd.uniform(-rr, rr) + Vector((0, 0, rnd.uniform(-0.01, 0.01))) - nn * rr * 0.4
+                    b = a - nn * (rr * 0.6 + 0.006) + tg * rnd.uniform(-0.012, 0.012) + Vector((0, 0, rnd.uniform(-0.015, 0.0)))
                     _tube(hbm, [a, b], [0.0006, 0.0003], sides=3)
             if s >= next_node:
                 next_node += node * rnd.uniform(0.7, 1.3); side = -side
                 if not clear_at(x, z):
-                    base = pts[-1] + Vector((0, -rr, 0))
-                    out_d = Vector((side * rnd.uniform(0.3, 0.8), -rnd.uniform(0.6, 1.0), rnd.uniform(0.1, 0.5)))
-                    face = Vector((rnd.uniform(-0.3, 0.3), -1.0, rnd.uniform(0.3, 0.9)))
+                    base = pt + nn * rr
+                    out_d = tg * side * rnd.uniform(0.3, 0.8) + nn * rnd.uniform(0.6, 1.0) + Vector((0, 0, rnd.uniform(0.1, 0.5)))
+                    face = tg * rnd.uniform(-0.3, 0.3) + nn + Vector((0, 0, rnd.uniform(0.3, 0.9)))
                     tip = _triplet(lbm, uvl, col, rnd, base, out_d, face, size * rnd.uniform(0.75, 1.25))
                     _tube(sbm, [base, base.lerp(tip, 0.5) + Vector((0, 0, 0.01)), tip], [0.0016, 0.0013, 0.001], sides=4)
                     n_leaves += 1
@@ -256,7 +287,7 @@ def ivy(bpy, name, p, kit):
                  h * rnd.uniform(0.6, 1.1), 1, down=True)
     for rx, spread, h in p.get('roots', [[0.0, 0.5, 2.0]]):
         for k in range(p.get('per_root', 3)):
-            grow(rx + rnd.uniform(-spread, spread), -0.02, rnd.gauss(0, 0.3), p.get('stem_r', 0.008) * rnd.uniform(0.6, 1.2),
+            grow(rx + rnd.uniform(-spread, spread), 0.0, rnd.gauss(0, 0.3), p.get('stem_r', 0.008) * rnd.uniform(0.6, 1.2),
                  h * rnd.uniform(0.7, 1.15), 0)
     out = _objects(bpy, name, lbm, sbm, hbm, p)
     print(f'ivy {name}: {n_leaves} leaves')
