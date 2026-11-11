@@ -480,6 +480,19 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    Fog 339 (223/116), 352/307/220. Smoke 287 (202/85), 348/304/218.
    Against the old set: about +17 % out and +29 % at the table's center (Ember 268 -> 345 lx). The site's line becomes
    "about 350 lux at 0.5 m in every tint" (was ~270).
+   16:53 UTC, the owner: "What was the outcome of the Pitt and giblin research" -> answered from the 9 Nov result (it had
+   gone out inside a long status message): drivers are good value (chain ~$2,300-2,700 a pair); the owner's pair is most
+   likely Superwax Mini (same recipe; FA123 amp, bass ~30 Hz against our modeled ~51 Hz; ~$10,900 today against our
+   provisional $19,000). STILL OPEN with the owner: switch to the Hypex FA123 (+~$160 a pair, if it fits the back
+   panel)? Which Pitt & Giblin model do they own?
+   16:55 UTC, Mantle lane 8ec97ce6fa: `renders/2026-11-11/barkhorn/mantle-r48/mantle-edge-options.png` (Ice; A as now,
+   B 1 mm chamfer with edge and chamfer polished; render-only). Coordinator's check: B's chamfer line is the refined
+   detail, but B's polished edge becomes a window on the posts and hub; A's satin edge is one calm block of color.
+   Ordered C (chamfer polished, outer edge satin as signed) and a three-column picture; the owner picks from that.
+   Note: the owner chose the satin edge on 10 Nov "to help with light dispersion"; Mantle's light is gone since.
+   Puck screws are countersunk M5, flush, in the CAD (the highlights seen were flush heads catching the key light).
+   RB330 fallback in the BOM note: refinish the stock counterweight and trim (may void Rega's warranty) or an arm that
+   ships black.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
