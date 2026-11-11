@@ -618,6 +618,13 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    sun breaking through; the speaker in front, fully visible, at most a runner or two up one side; sun and sky only;
    one 800x1000 proxy `poison-ivy-proxy.jpg` first. The coordinator chose real poison ivy over English ivy so the joke
    is exact; the owner told, may prefer ordinary ivy.
+   21:55 UTC, biomes lane 7ffd84e488: `renders/2026-11-11/barkhorn/habitats/poison-ivy-proxy.jpg` (800x1000, 16 samples).
+   An old red-brick garden wall (Poly Haven castle_brick_02_red, slate coping) 1.1 m behind the speaker, forest_ground_04,
+   sky mossy_forest, sun and sky only; the ivy is modeled (`kit_ext/ivy_el.py`: vines with rootlets, leaves in threes,
+   about 6,000 on the wall and 1,600 as ground cover), nothing touching the cabinet; gt_audit and scatter check clean.
+   Shown to the owner 21:58 as a test. Coordinator's check, sent back: the speaker in shade and near black; the leaves
+   read as any ivy at this distance (a spray in the near foreground, the plant over the wall's top); too much gravel;
+   runners showing as wire; the speaker larger.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
