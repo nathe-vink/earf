@@ -40,7 +40,7 @@ SPK_Y = R.BACKBAR_Y + 0.0662
 DECK_Y = R.COUNTER['y1'] - 0.22
 # (20:47: Mantle on the bar between the lens and the near speaker, in its own pool, big enough to read; it sits below
 # the speaker's foot in the frame, so it covers none of it)
-MANTLE = (8.9, Y_BAR + 0.1, R.COUNTER['top_z'] + 0.001)
+MANTLE = (8.72, Y_BAR + 0.22, R.COUNTER['top_z'] + 0.001)
 MANTLE_RZ = 25.0
 # (18:36: no lamp across a speaker, every shade whole, one over Mantle so it sits in a pool: five, between the bays)
 HEMIS = [('dust', 6.18, -0.02, 1.80), ('ember', 6.54, 0.12, 1.66), ('acid', 6.92, -0.04, 1.86), ('ember', 7.3, 0.08, 1.74),
@@ -49,7 +49,7 @@ CORES = [('ember', 6.05, -0.14), ('dust', 7.05, -0.2), ('acid', 7.8, -0.12)]    
 EV, WB = -2.0, 4000          # (20:47: the near Cores pale at -1.5: half a stop down, the room lifted by its declared fill)
 TRACK = 3.0                  # the declared track lights' scale (tests 1-4: too dark)
 # (20:47: the bays' pools a stop and a half too strong, aim near 1.6x the wall; the room lifted for the half stop down)
-WALL, BAY, HOUSE = 2.2, 3.0, 0.12
+WALL, BAY, HOUSE = 2.6, 1.3, 0.3
 
 
 def _room():
@@ -86,7 +86,7 @@ def _life():
         out.append({'kind': 'kit', 'shape': 'tube', 'points': [[x + 0.02, y - 0.03, T + 0.096], [x + 0.034, y - 0.012, T + 0.1],
                                                                 [x + 0.03, y + 0.014, T + 0.094]], 'radius': 0.0035,
                     'material': 'clay', 'color': '#E2861E', 'roughness': 0.45})                                    # a twist of orange
-    out += [{'kind': 'kit', 'shape': 'box', 'size': [0.22, 0.13, 0.014], 'position': [7.95, Y_BAR + 0.12, T], 'rotate': [0, 0, -14.0],
+    out += [{'kind': 'kit', 'shape': 'box', 'size': [0.22, 0.13, 0.014], 'position': [6.62, Y_BAR + 0.26, T], 'rotate': [0, 0, -14.0],
              'material': 'cotton', 'color': '#CFC6B4', 'ease': 0.004},                                          # a bar cloth
             {'kind': 'kit', 'shape': 'asset', 'model': 'wooden_bowl_01', 'res': '2k', 'position': [6.4, Y_BAR + 0.18, T], 'rotate': [0, 0, 30.0]},
             {'kind': 'kit', 'shape': 'asset', 'model': 'food_lime_01', 'res': '2k', 'position': [6.38, Y_BAR + 0.17, T + 0.03], 'rotate': [0, 20, 0]},
@@ -95,12 +95,12 @@ def _life():
             {'kind': 'kit', 'shape': 'box', 'size': [4.2, 1.6, 0.008], 'position': [6.9, 2.75, 0.001],
              'material': 'pbr', 'texture': 'poly_wool_herringbone', 'tex_res': '2k', 'tint': '#6A4A36', 'tint_mix': 0.55, 'gain': 0.7},   # a runner
             {'kind': 'kit', 'shape': 'asset', 'model': 'potted_plant_02', 'res': '2k', 'position': [8.85, 2.35, 0.0], 'rotate': [0, 0, 40.0]}]
-    out.append({'kind': 'kit', 'shape': 'box', 'size': [0.2, 0.05, 0.022], 'position': [9.36, MANTLE[1] + 0.22, T], 'rotate': [0, 0, 20.0],
+    out.append({'kind': 'kit', 'shape': 'box', 'size': [0.2, 0.05, 0.022], 'position': [MANTLE[0] + 0.44, MANTLE[1] - 0.04, T], 'rotate': [0, 0, 20.0],
                 'material': 'pbr', 'texture': 'american_walnut_veneer', 'tex_res': '2k', 'tint': '#5A3824', 'tint_mix': 0.5, 'gain': 0.6, 'ease': 0.003})
     bds = [  # the now-playing sleeve on a small walnut stand by Mantle
-           {'image': 'tex/cover-05.png', 'w': 0.18, 'h': 0.18, 'x': 9.36, 'y': MANTLE[1] + 0.21, 'z': T + 0.022, 'rot': [-14.0, 0, 20.0], 'ground': '#EFEBE3', 'rough': 0.85},
+           {'image': 'tex/cover-05.png', 'w': 0.18, 'h': 0.18, 'x': MANTLE[0] + 0.44, 'y': MANTLE[1] - 0.05, 'z': T + 0.022, 'rot': [-14.0, 0, 20.0], 'ground': '#EFEBE3', 'rough': 0.85},
            # a small stack waiting, on the bar top's back half
-           *[{'image': f'tex/cover-{k:02d}.png', 'w': 0.315, 'h': 0.315, 'x': 7.62 + 0.006 * j, 'y': Y_BAR - 0.02 + 0.004 * j, 'z': T + 0.004 * j,
+           *[{'image': f'tex/cover-{k:02d}.png', 'w': 0.315, 'h': 0.315, 'x': 8.0 + 0.006 * j, 'y': Y_BAR + 0.05 + 0.004 * j, 'z': T + 0.004 * j,
               'rot': [-90.0, 0, [4.0, -6.0, 9.0, -3.0][j]]} for j, k in enumerate((9, 2, 12, 7))],
            # sleeves pulled half out of the wall's cells, their faces turned a little to the room
            *[{'image': f'tex/cover-{k:02d}.png', 'w': 0.315, 'h': 0.315, 'x': x, 'y': R.RECORD_WALL['y'] - 0.14, 'z': z, 'rot': [-4.0, 0, rz],
@@ -129,7 +129,7 @@ def _track():
                                  'irradiance': round(WALL * TRACK, 3), 'spread_deg': 28, 'color': '#FFD2A0'}
     for k, x in enumerate((5.6, 7.0, 8.4)):
         out[f'track-bar{k}'] = {'type': 'area', 'size_m': [0.12, 0.12], 'position': [x, Y_BAR - 0.6, R.CEIL - 0.05], 'target': [x, Y_BAR, TOP],
-                                'irradiance': round(0.5 * TRACK, 3), 'spread_deg': 24, 'color': '#FFD2A0'}
+                                'irradiance': round(0.35 * TRACK, 3), 'spread_deg': 24, 'color': '#FFD2A0'}
     for k, xc in enumerate(R.SPK_NICHES):                     # (18:36: a pool on each bay, so the whole speaker reads)
         # (18:40: the cabinet glows as on the stage picture, the bay's own back and sides darker: strong, narrow, onto the speaker)
         out[f'track-bay{k}'] = {'type': 'area', 'size_m': [0.14, 0.14], 'position': [xc, 3.6, R.CEIL - 0.05], 'target': [xc, SPK_Y - 0.1, FEET_BAR + 0.7],
@@ -205,10 +205,9 @@ def bar_backbar():
             pr['position'] = [pr['position'][0] + DRINK_DX, pr['position'][1] - 0.05, pr['position'][2]]
         if pr.get('shape') == 'tube' and pr['points'][0][0] < 6.5:
             pr['points'] = [[q[0] + DRINK_DX, q[1] - 0.05, q[2]] for q in pr['points']]
-    # cozy (20:47): a wool throw left on the bar, folded over its front edge by the Ember Core, in the near left
-    s['set']['props'].append({'kind': 'kit', 'shape': 'ext', 'path': LIFE, 'fn': 'drape', 'x0': 7.62, 'w': 0.52,
-                              'edge': R.COUNTER['y0'] - R.COUNTER['over'], 'top': TOP, 'on': 0.22, 'drop': 0.34, 'r': 0.028,
-                              'color': '#7A4A32'})
+    # cozy (20:47): a wool throw left folded loosely on the bar by the Ember Core, in the near left
+    s['set']['props'].append({'kind': 'kit', 'shape': 'ext', 'path': LIFE, 'fn': 'fold', 'x': 7.86, 'y': Y_BAR - 0.16, 'z': TOP,
+                              'rz': 90.0, 'w': 0.42, 'legs': [0.36, 0.3, 0.22], 'rr': 0.016, 't': 0.01, 'color': '#8A3F22'})
     return s
 
 

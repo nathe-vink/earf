@@ -215,7 +215,7 @@ def restyle(bpy, name, p, kit):
     "metal"}}."""
     made, hit = {}, []
     for o in bpy.data.objects:
-        if o.type != 'MESH':
+        if o.type != 'MESH' or '#' in o.name:                   # the room only, never a product's parts (name#k)
             continue
         for slot in o.material_slots:
             if not slot.material:
@@ -287,4 +287,61 @@ def drape(bpy, name, p, kit):
     ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
     so = ob.modifiers.new('thick', 'SOLIDIFY'); so.thickness = t; so.offset = 0.0
     ss = ob.modifiers.new('soft', 'SUBSURF'); ss.levels = 1; ss.render_levels = 1
+    return [ob]
+
+
+def fold(bpy, name, p, kit):
+    """A wool throw left folded loosely on the bar (the coordinator, 20:47: "something soft and warm in frame and
+    readable"): one cloth `w` wide folded twice (an S, its rolls `rr` round, toward the room), lying at (`x`, `y`, `z`)
+    turned `rz`; soft ripples, a lump where it was dropped. Solidified `t`, subdivided, the kit's wool."""
+    import random
+    rnd = random.Random(p.get('seed', 3))
+    w, t, rr = p['w'], p.get('t', 0.01), p.get('rr', 0.016)
+    legs = p.get('legs', [0.34, 0.3, 0.2])
+    gap = 2 * rr
+    L0, L1, L2 = legs
+    y1 = L0 - L1
+    segs = [L0, math.pi * rr, L1, math.pi * rr, L2]
+    total = sum(segs)
+
+    def at(v):
+        if v <= L0:
+            return (v, t / 2, 0.0, 1.0)
+        v -= L0
+        if v <= math.pi * rr:                                     # the first roll, bulging toward +y
+            a = v / rr
+            return (L0 + rr * math.sin(a), t / 2 + rr - rr * math.cos(a), math.sin(a), -math.cos(a))
+        v -= math.pi * rr
+        if v <= L1:
+            return (L0 - v, t / 2 + gap, 0.0, 1.0)
+        v -= L1
+        if v <= math.pi * rr:                                     # the second, bulging toward -y
+            a = v / rr
+            return (y1 - rr * math.sin(a), t / 2 + gap + rr - rr * math.cos(a), -math.sin(a), -math.cos(a))
+        v -= math.pi * rr
+        return (y1 + v, t / 2 + 2 * gap, 0.0, 1.0)
+    path = [at(total * j / 160) for j in range(161)]
+    bm = bmesh.new(); grid = []
+    nu = 40
+    rip = [(rnd.uniform(0.09, 0.16), rnd.uniform(0, 6.28), rnd.uniform(0.001, 0.0028)) for _ in range(3)]
+    for j, (py, pz, ny, nz) in enumerate(path):
+        row = []
+        for i in range(nu + 1):
+            u = w * i / nu - w / 2
+            off = sum(A * (1 + math.sin(2 * math.pi * (u + 0.3 * py) / lam + ph)) for lam, ph, A in rip)
+            lump = 0.012 * math.exp(-((u - 0.06) ** 2 + (py - 0.12) ** 2) / 0.012)
+            o = (off + (lump if nz > 0.5 and pz > 1.5 * gap else 0.0)) * 0.5 * (1 + nz)   # never down into the bar or a layer
+            row.append(bm.verts.new((u, py + ny * o, pz + nz * o)))
+        grid.append(row)
+    for j in range(len(grid) - 1):
+        for i in range(nu):
+            bm.faces.new((grid[j][i], grid[j][i + 1], grid[j + 1][i + 1], grid[j + 1][i]))
+    me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free()
+    for poly in me.polygons:
+        poly.use_smooth = True
+    me.materials.append(kit.material(bpy, 'wool', p.get('color', '#8A3F22')))
+    ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
+    so = ob.modifiers.new('thick', 'SOLIDIFY'); so.thickness = t; so.offset = 0.0
+    ss = ob.modifiers.new('soft', 'SUBSURF'); ss.levels = 2; ss.render_levels = 2
+    ob.location = (p['x'], p['y'], p['z']); ob.rotation_euler = (0.0, 0.0, math.radians(p.get('rz', 0.0)))
     return [ob]
