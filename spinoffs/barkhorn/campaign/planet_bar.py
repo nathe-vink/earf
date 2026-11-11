@@ -126,8 +126,9 @@ def _track():
         out[f'track-bar{k}'] = {'type': 'area', 'size_m': [0.12, 0.12], 'position': [x, Y_BAR - 0.6, R.CEIL - 0.05], 'target': [x, Y_BAR, TOP],
                                 'irradiance': round(0.5 * TRACK, 3), 'spread_deg': 24, 'color': '#FFD2A0'}
     for k, xc in enumerate(R.SPK_NICHES):                     # (18:36: a pool on each bay, so the whole speaker reads)
-        out[f'track-bay{k}'] = {'type': 'area', 'size_m': [0.14, 0.14], 'position': [xc, 3.9, R.CEIL - 0.05], 'target': [xc, SPK_Y, FEET_BAR + 0.75],
-                                'irradiance': round(1.4 * TRACK, 3), 'spread_deg': 22, 'color': '#FFD8B0'}
+        # (18:40: the cabinet glows as on the stage picture, the bay's own back and sides darker: strong, narrow, onto the speaker)
+        out[f'track-bay{k}'] = {'type': 'area', 'size_m': [0.14, 0.14], 'position': [xc, 3.6, R.CEIL - 0.05], 'target': [xc, SPK_Y - 0.1, FEET_BAR + 0.7],
+                                'irradiance': round(4.5 * TRACK, 3), 'spread_deg': 14, 'color': '#FFE2C0'}
     out['track-mantle'] = {'type': 'area', 'size_m': [0.1, 0.1], 'position': [MANTLE[0], MANTLE[1] - 0.5, R.CEIL - 0.05],
                            'target': [MANTLE[0], MANTLE[1], MANTLE[2]], 'irradiance': round(0.6 * TRACK, 3), 'spread_deg': 16, 'color': '#FFD8B0'}
     # (18:36: the dark warm, not black: a broad low warm fill from the room behind the camera)
@@ -139,13 +140,13 @@ def _track():
 def _base(size, title):
     src, room = _room()
     s = shots._cast_base()
-    k = shots.HERO_ORDER.index('dust')
+    k = shots.HERO_ORDER.index('acid')                  # (18:40: Acid, the lightest of the warm three, reads against walnut)
     pair = []
     for blk in s['products']:
         i = blk['instances'][k]
         pair.append({**blk, 'instances': [{**copy.deepcopy(i), 'position': [x, SPK_Y, FEET_BAR], 'rotate_z': 0.0} for x in R.SPK_NICHES]})
     s['products'] = pair
-    shots._approved(s, order=['dust', 'dust'])
+    shots._approved(s, order=['acid', 'acid'])
     s['products'].append(shots._mantle(*MANTLE, 0.0, tint='ember'))
     RW = R.RECORD_WALL
     fill = {'kind': 'kit', 'shape': 'ext', 'path': LIFE, 'fn': 'fill_records', 'x0': RW['x0'], 'x1': RW['x1'], 'z0': RW['z0'], 'z1': RW['z1'],
@@ -173,9 +174,22 @@ def bar_backbar():
     # (test 1: the bays cut by the frame: a seat pulled back, 30 mm, a little off axis)
     # (17:39 "cozy": closer and lower, from a stool at the bar at a seated eye, the room wrapping round; 26 mm so both
     # bays stay whole)
-    # (18:36: both bays whole with air, every shade whole, all three Cores in: from a lounge seat further back, 24 mm)
-    s['camera'] = {'position': [6.55, 1.55, 1.3], 'target': [6.92, 5.6, 1.72], 'lens_mm': 24.0, 'level': True,
-                   'fstop': 2.8, 'focus': [6.9, 4.2, 1.2]}
+    # (18:40: a three-quarter view from a seat near the bar's right end: the near speaker whole, about two thirds of the
+    # frame's height, nothing across it; the wall of records running away to the far speaker, whole; the Hemispheres
+    # receding over the bar; a Core and the drinks on the bar in front; Mantle further along under its lamp)
+    s['camera'] = {'position': [9.3, 3.5, 1.42], 'target': [7.2, 5.7, 1.75], 'lens_mm': 24.0, 'level': True,
+                   'fstop': 2.8, 'focus': [8.25, 5.5, 1.7]}
+    s['lights'].pop('track-wall0', None)                         # (this view sees that head: the audit, 0.03 %)
+    for pr in s['set']['props']:                                 # a Core and the drinks on the bar in front of the seat
+        if pr.get('fn') == 'lamps':
+            pr['cores'] = [{**c, 'x': x, 'y': y} for c, (x, y) in zip(pr['cores'], ((6.3, Y_BAR - 0.12), (8.75, Y_BAR - 0.18), (7.6, Y_BAR - 0.1)))]
+    for pr in s['set']['props']:
+        if pr.get('shape') == 'lathe' and abs(pr['position'][1] - (Y_BAR - 0.16)) < 0.2 and pr['position'][0] < 6.5:
+            pr['position'] = [pr['position'][0] + 3.0, pr['position'][1] - 0.05, pr['position'][2]]
+        if pr.get('shape') in ('box', 'tube') and pr.get('material') in ('frosted', 'clay') and pr.get('position', [0])[0] < 6.5 and pr.get('position', [0, 0, 0])[2] > 1.0:
+            pr['position'] = [pr['position'][0] + 3.0, pr['position'][1] - 0.05, pr['position'][2]]
+        if pr.get('shape') == 'tube' and pr['points'][0][0] < 6.5:
+            pr['points'] = [[q[0] + 3.0, q[1] - 0.05, q[2]] for q in pr['points']]
     return s
 
 
