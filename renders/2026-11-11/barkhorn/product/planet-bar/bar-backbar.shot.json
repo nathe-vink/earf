@@ -719,7 +719,10 @@
      "dj-plinths",
      "dj-knobs",
      "dj-records",
-     "dj-labels"
+     "dj-labels",
+     "screen-panels",
+     "screen-boxes",
+     "screen-frames"
     ]
    },
    {
@@ -940,7 +943,8 @@
    ],
    "irradiance": 5.1,
    "spread_deg": 20,
-   "color": "#FFD2A0"
+   "color": "#FFD2A0",
+   "shape": "DISK"
   },
   "track-wall2": {
    "type": "area",
@@ -960,7 +964,8 @@
    ],
    "irradiance": 5.1,
    "spread_deg": 20,
-   "color": "#FFD2A0"
+   "color": "#FFD2A0",
+   "shape": "DISK"
   },
   "track-wall3": {
    "type": "area",
@@ -980,7 +985,8 @@
    ],
    "irradiance": 5.1,
    "spread_deg": 20,
-   "color": "#FFD2A0"
+   "color": "#FFD2A0",
+   "shape": "DISK"
   },
   "track-wall4": {
    "type": "area",
@@ -1000,7 +1006,8 @@
    ],
    "irradiance": 5.1,
    "spread_deg": 20,
-   "color": "#FFD2A0"
+   "color": "#FFD2A0",
+   "shape": "DISK"
   },
   "track-bar0": {
    "type": "area",
@@ -1020,7 +1027,8 @@
    ],
    "irradiance": 1.05,
    "spread_deg": 24,
-   "color": "#FFD2A0"
+   "color": "#FFD2A0",
+   "shape": "DISK"
   },
   "track-bar1": {
    "type": "area",
@@ -1040,7 +1048,8 @@
    ],
    "irradiance": 1.05,
    "spread_deg": 24,
-   "color": "#FFD2A0"
+   "color": "#FFD2A0",
+   "shape": "DISK"
   },
   "track-bar2": {
    "type": "area",
@@ -1060,7 +1069,8 @@
    ],
    "irradiance": 1.05,
    "spread_deg": 24,
-   "color": "#FFD2A0"
+   "color": "#FFD2A0",
+   "shape": "DISK"
   },
   "track-bay0": {
    "type": "area",
@@ -1078,9 +1088,10 @@
     5.6662,
     2.04
    ],
-   "irradiance": 16.5,
+   "irradiance": 36.3,
    "spread_deg": 14,
-   "color": "#FFE2C0"
+   "color": "#FFE2C0",
+   "shape": "DISK"
   },
   "track-bay1": {
    "type": "area",
@@ -1100,7 +1111,8 @@
    ],
    "irradiance": 16.5,
    "spread_deg": 14,
-   "color": "#FFE2C0"
+   "color": "#FFE2C0",
+   "shape": "DISK"
   },
   "track-mantle": {
    "type": "area",
@@ -1109,8 +1121,8 @@
     0.1
    ],
    "position": [
-    8.5,
-    3.8199999999999994,
+    8.9,
+    3.0,
     3.35
    ],
    "target": [
@@ -1118,15 +1130,58 @@
     4.319999999999999,
     1.071
    ],
-   "irradiance": 6.0,
+   "irradiance": 10.5,
    "spread_deg": 18,
-   "color": "#FFD8B0"
+   "color": "#FFD8B0",
+   "shape": "DISK"
+  },
+  "track-horn0": {
+   "type": "area",
+   "size_m": [
+    0.12,
+    0.12
+   ],
+   "position": [
+    5.85,
+    4.4,
+    3.35
+   ],
+   "target": [
+    5.55,
+    5.566199999999999,
+    2.21
+   ],
+   "irradiance": 4.5,
+   "spread_deg": 12,
+   "color": "#FFE2C0",
+   "shape": "DISK"
+  },
+  "track-horn1": {
+   "type": "area",
+   "size_m": [
+    0.12,
+    0.12
+   ],
+   "position": [
+    8.55,
+    4.4,
+    3.35
+   ],
+   "target": [
+    8.25,
+    5.566199999999999,
+    2.21
+   ],
+   "irradiance": 4.5,
+   "spread_deg": 12,
+   "color": "#FFE2C0",
+   "shape": "DISK"
   },
   "house": {
    "type": "area",
    "size_m": [
-    4.0,
-    2.0
+    3.0,
+    3.0
    ],
    "position": [
     6.9,
@@ -1139,7 +1194,104 @@
     1.0
    ],
    "irradiance": 1.8,
+   "color": "#FFC890",
+   "shape": "DISK"
+  },
+  "house-left": {
+   "type": "area",
+   "shape": "DISK",
+   "size_m": [
+    2.0,
+    2.0
+   ],
+   "position": [
+    4.6,
+    2.2,
+    3.0
+   ],
+   "target": [
+    4.0,
+    5.6,
+    2.6
+   ],
+   "irradiance": 1.5,
    "color": "#FFC890"
+  },
+  "mantle-front": {
+   "type": "area",
+   "shape": "DISK",
+   "size_m": [
+    0.15,
+    0.15
+   ],
+   "position": [
+    9.7,
+    3.15,
+    1.55
+   ],
+   "target": [
+    8.5,
+    4.199999999999999,
+    1.111
+   ],
+   "irradiance": 15.0,
+   "spread_deg": 14,
+   "color": "#FFD8B0"
+  },
+  "mantle-side": {
+   "type": "area",
+   "shape": "DISK",
+   "size_m": [
+    0.2,
+    0.2
+   ],
+   "position": [
+    9.45,
+    4.25,
+    1.2
+   ],
+   "target": [
+    8.5,
+    4.319999999999999,
+    1.101
+   ],
+   "irradiance": 18.0,
+   "spread_deg": 8,
+   "color": "#FFD8B0"
+  },
+  "horn-card": {
+   "type": "panel",
+   "size_m": [
+    1.4,
+    0.9
+   ],
+   "position": [
+    8.05,
+    4.9,
+    3.34
+   ],
+   "target": [
+    8.25,
+    5.6162,
+    2.1900000000000004
+   ],
+   "strength": 10.0,
+   "diffuse": 0.0,
+   "specular": 1.0,
+   "color": "#FFE2C0",
+   "ramp": {
+    "axis": "x",
+    "at_m": [
+     7.4,
+     8.05,
+     8.7
+    ],
+    "values": [
+     0.25,
+     1.0,
+     0.25
+    ]
+   }
   }
  },
  "products": [

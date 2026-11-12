@@ -30,3 +30,17 @@ Exposure EV -2.0 in the wide (was -1.5); core-bar-table keeps EV -1 and its room
 
 Grey levels are the frame's 0-1 luminance on a 1200 px copy (cabinet top, cabinet side, cone, and a patch of the record wall
 between the bays).
+
+## Round 4 (2026-11-11/12, after the coordinator's 22:32 notes)
+
+| what | frame | measured |
+|---|---|---|
+| Core Ember centre (h, s, v) | core-bar-table | 5.0, 0.67, 0.91 (finals 5.0, 0.64, 0.91) |
+| near Tropos cabinet face against the wall; cone | bar-backbar | face 1.8x the wall; cone 0.20 |
+| audit (reaudit.py) | both | hidden 0, equipment 0 |
+
+The ball's pale rectangle was the house fill's reflection, a 3 m disc cut flat by the ceiling: in core-bar-table it
+is a 1.6 m disc inside the room now (a round soft highlight, as on the lamps lane's own Core). The black square was
+the book of matches, out of that frame. The near horn reads by a graduated warm card over its bay, seen only in
+reflections (declared in the emitters file). Mantle's plinth is clear Ember acrylic in layers: a narrow low head from
+past the frame's right edge passes through it.

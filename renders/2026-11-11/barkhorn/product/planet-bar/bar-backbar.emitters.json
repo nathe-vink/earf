@@ -51,8 +51,9 @@
   {
    "name": "track-wall1",
    "declared": true,
-   "emitter": "area lamp 0.12 x 0.12 m, out of frame",
+   "emitter": "disk area lamp 0.12 x 0.12 m, out of frame",
    "irradiance_w_m2": 5.1,
+   "strength": null,
    "position_m": [
     6.2,
     4.9,
@@ -62,8 +63,9 @@
   {
    "name": "track-wall2",
    "declared": true,
-   "emitter": "area lamp 0.12 x 0.12 m, out of frame",
+   "emitter": "disk area lamp 0.12 x 0.12 m, out of frame",
    "irradiance_w_m2": 5.1,
+   "strength": null,
    "position_m": [
     7.0,
     4.9,
@@ -73,8 +75,9 @@
   {
    "name": "track-wall3",
    "declared": true,
-   "emitter": "area lamp 0.12 x 0.12 m, out of frame",
+   "emitter": "disk area lamp 0.12 x 0.12 m, out of frame",
    "irradiance_w_m2": 5.1,
+   "strength": null,
    "position_m": [
     9.0,
     4.9,
@@ -84,8 +87,9 @@
   {
    "name": "track-wall4",
    "declared": true,
-   "emitter": "area lamp 0.12 x 0.12 m, out of frame",
+   "emitter": "disk area lamp 0.12 x 0.12 m, out of frame",
    "irradiance_w_m2": 5.1,
+   "strength": null,
    "position_m": [
     9.8,
     4.9,
@@ -95,8 +99,9 @@
   {
    "name": "track-bar0",
    "declared": true,
-   "emitter": "area lamp 0.12 x 0.12 m, out of frame",
+   "emitter": "disk area lamp 0.12 x 0.12 m, out of frame",
    "irradiance_w_m2": 1.05,
+   "strength": null,
    "position_m": [
     5.6,
     3.599999999999999,
@@ -106,8 +111,9 @@
   {
    "name": "track-bar1",
    "declared": true,
-   "emitter": "area lamp 0.12 x 0.12 m, out of frame",
+   "emitter": "disk area lamp 0.12 x 0.12 m, out of frame",
    "irradiance_w_m2": 1.05,
+   "strength": null,
    "position_m": [
     7.0,
     3.599999999999999,
@@ -117,8 +123,9 @@
   {
    "name": "track-bar2",
    "declared": true,
-   "emitter": "area lamp 0.12 x 0.12 m, out of frame",
+   "emitter": "disk area lamp 0.12 x 0.12 m, out of frame",
    "irradiance_w_m2": 1.05,
+   "strength": null,
    "position_m": [
     8.4,
     3.599999999999999,
@@ -128,8 +135,9 @@
   {
    "name": "track-bay0",
    "declared": true,
-   "emitter": "area lamp 0.14 x 0.14 m, out of frame",
-   "irradiance_w_m2": 16.5,
+   "emitter": "disk area lamp 0.14 x 0.14 m, out of frame",
+   "irradiance_w_m2": 36.3,
+   "strength": null,
    "position_m": [
     5.55,
     4.4,
@@ -139,8 +147,9 @@
   {
    "name": "track-bay1",
    "declared": true,
-   "emitter": "area lamp 0.14 x 0.14 m, out of frame",
+   "emitter": "disk area lamp 0.14 x 0.14 m, out of frame",
    "irradiance_w_m2": 16.5,
+   "strength": null,
    "position_m": [
     8.25,
     5.2661999999999995,
@@ -150,23 +159,97 @@
   {
    "name": "track-mantle",
    "declared": true,
-   "emitter": "area lamp 0.1 x 0.1 m, out of frame",
-   "irradiance_w_m2": 6.0,
+   "emitter": "disk area lamp 0.1 x 0.1 m, out of frame",
+   "irradiance_w_m2": 10.5,
+   "strength": null,
    "position_m": [
-    8.5,
-    3.8199999999999994,
+    8.9,
+    3.0,
+    3.35
+   ]
+  },
+  {
+   "name": "track-horn0",
+   "declared": true,
+   "emitter": "disk area lamp 0.12 x 0.12 m, out of frame",
+   "irradiance_w_m2": 4.5,
+   "strength": null,
+   "position_m": [
+    5.85,
+    4.4,
+    3.35
+   ]
+  },
+  {
+   "name": "track-horn1",
+   "declared": true,
+   "emitter": "disk area lamp 0.12 x 0.12 m, out of frame",
+   "irradiance_w_m2": 4.5,
+   "strength": null,
+   "position_m": [
+    8.55,
+    4.4,
     3.35
    ]
   },
   {
    "name": "house",
    "declared": true,
-   "emitter": "area lamp 4.0 x 2.0 m, out of frame",
+   "emitter": "disk area lamp 3.0 x 3.0 m, out of frame",
    "irradiance_w_m2": 1.8,
+   "strength": null,
    "position_m": [
     6.9,
     0.2,
     2.6
+   ]
+  },
+  {
+   "name": "house-left",
+   "declared": true,
+   "emitter": "disk area lamp 2.0 x 2.0 m, out of frame",
+   "irradiance_w_m2": 1.5,
+   "strength": null,
+   "position_m": [
+    4.6,
+    2.2,
+    3.0
+   ]
+  },
+  {
+   "name": "mantle-front",
+   "declared": true,
+   "emitter": "disk area lamp 0.15 x 0.15 m, out of frame",
+   "irradiance_w_m2": 15.0,
+   "strength": null,
+   "position_m": [
+    9.7,
+    3.15,
+    1.55
+   ]
+  },
+  {
+   "name": "mantle-side",
+   "declared": true,
+   "emitter": "disk area lamp 0.2 x 0.2 m, out of frame",
+   "irradiance_w_m2": 18.0,
+   "strength": null,
+   "position_m": [
+    9.45,
+    4.25,
+    1.2
+   ]
+  },
+  {
+   "name": "horn-card",
+   "declared": true,
+   "emitter": "graduated reflector card 1.4 x 0.9 m, seen only in reflections, out of frame",
+   "irradiance_w_m2": null,
+   "strength": 10.0,
+   "position_m": [
+    8.05,
+    4.9,
+    3.34
    ]
   }
  ],
