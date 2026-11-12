@@ -224,9 +224,9 @@ def bar_backbar():
                                    'spread_deg': 14, 'color': '#FFD8B0'}
     # (the plinth is clear Ember acrylic in layers: its colour shows where light passes through, so a low head from just
     # past the frame's right edge, through it from the side)
-    s['lights']['mantle-side'] = {'type': 'area', 'shape': 'DISK', 'size_m': [0.2, 0.2], 'position': [9.45, 4.5, 1.3],
+    s['lights']['mantle-side'] = {'type': 'area', 'shape': 'DISK', 'size_m': [0.2, 0.2], 'position': [9.45, 4.25, 1.2],
                                   'target': [MANTLE[0], MANTLE[1], MANTLE[2] + 0.03], 'irradiance': round(6.0 * TRACK, 3),
-                                  'spread_deg': 20, 'color': '#FFD8B0'}
+                                  'spread_deg': 8, 'color': '#FFD8B0'}   # (round 4 full: wider, it carried past Mantle onto the throw)
     s['lights']['horn-card'] = {'type': 'panel', 'size_m': [1.4, 0.9], 'position': [8.05, 4.9, R.CEIL - 0.06],
                                 'target': [R.SPK_NICHES[1], SPK_Y - 0.1, FEET_BAR + 1.1], 'strength': 10.0, 'diffuse': 0.0, 'specular': 1.0,
                                 'color': '#FFE2C0', 'ramp': {'axis': 'x', 'at_m': [7.4, 8.05, 8.7], 'values': [0.25, 1.0, 0.25]}}                         # (this view sees that head: the audit, 0.03 %)
