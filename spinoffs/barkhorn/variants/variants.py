@@ -30,7 +30,9 @@ P['horn']['cast']['formed']['laminated'].update(topo=[r['points'] for r in _topo
 # Strata's posts (the critic: a visible mount): the four reviewed post positions kept, each a ø16 bronze rod with a
 # turned collar on the top plate and one under the horn's pad, in place of the ø10 stainless tubes and their cups
 POSTS = dict(at=[(97.0, 35.0, 929.6), (463.0, 35.0, 929.6), (240.0, 353.0, 998.7), (320.0, 353.0, 998.7)],
-             d=16.0, foot=867.0, top_plate=880.0, base_collar=(28.0, 8.0), top_collar=(24.0, 6.0), into_pad=10.0)
+             d=16.0, foot=867.0, top_plate=880.0, base_collar=(28.0, 8.0), top_collar=(24.0, 6.0), into_pad=10.0,
+             # the detail pass (2026-11-12): the cable post (rear post 3, index 2) bored through 7 for the HF lead, top to foot
+             bore=(2, 7.0))
 # the caldera: rings of stock 1/2 in sheet stacked on the front panel's face round the woofer, the bores stepping out
 # toward the room (a short terraced horn of the woofer's own); centre and face from the Cloud (x 280, z 478; face y 24)
 CALDERA = dict(centre=(280.0, 478.0), face_y=24.0, layer=12.7, od=500.0, ids=(400.0, 427.0, 454.0))   # 13.5 radial steps: the horn's own at the mouth
@@ -154,8 +156,10 @@ def caldera(C):
 
 def posts(Q):
     out = []
-    for x, y, top in Q['at']:
+    for k, (x, y, top) in enumerate(Q['at']):
         rod = Pos(x, y, Q['foot']) * Cylinder(Q['d'] / 2, top - Q['foot'], align=(Align.CENTER, Align.CENTER, Align.MIN))
+        if Q.get('bore') and k == Q['bore'][0]:       # the cable post: a 7 bore its whole length
+            rod = rod - Pos(x, y, Q['foot'] - 1.0) * Cylinder(Q['bore'][1] / 2, top - Q['foot'] + 2.0, align=(Align.CENTER, Align.CENTER, Align.MIN))
         bc = Pos(x, y, Q['top_plate'] + 0.1) * (Cylinder(Q['base_collar'][0] / 2, Q['base_collar'][1], align=(Align.CENTER, Align.CENTER, Align.MIN))
                                                  - Cylinder(Q['d'] / 2 + 0.2, Q['base_collar'][1] + 2, align=(Align.CENTER, Align.CENTER, Align.MIN)))
         pad = top - Q['into_pad']
@@ -201,11 +205,15 @@ def parts(P):
     ps = posts(POSTS)
     out.append(product.Part('strata-posts', Compound(children=[r for r, _, _ in ps]), product.Machined('aluminium', 'lathe', setup_usd=60.0),
                             finish='post-metal', group='horn',
-                            notes=['Strata: four ø16 rods in aluminium 6061-T6, black anodised (Type II, sealed; the lamps\' satin black: the owner, 2026-11-10, black rods; were bronze C93200 or C544), threaded M12 at the top into inserts in the horn\'s '
+                            notes=['Strata: four ø16 rods in aluminium 6061-T6, black anodised (Type II, sealed; the lamps\' satin black: the owner, 2026-11-10, black rods; were bronze C93200 or C544), threaded M12 x 1.25 (fine, for the bore\'s wall) at the top into inserts in the horn\'s '
                                    'pads, at the four reviewed post positions. The engineering audit (2026-11-01): the front pair\'s feet are '
                                    'turned heads (14 across, 4 thick, on an 8 neck) hooked under keyhole sockets bonded through the top into '
                                    'the front panel\'s edge; the rear pair seated in sleeved sockets, the tie rod in rear post 3 at 2 N m; '
-                                   'held at three points, the horn cannot lift (make/engineering-audit.md)']))
+                                   'held at three points, the horn cannot lift (make/engineering-audit.md). The cable post (rear, x 240) is '
+                                   'bored 7 through its length for the HF lead (the detail pass, 2026-11-12): its bending stiffness '
+                                   '96 % of the solid rod\'s (I 3,100 against 3,217 mm4), the wall under the M12 x 1.25 thread\'s root 1.7 (47.6 mm2 there: about 11 kN to yield in 6061-T6, against a horn of about 9 kg on four posts); '
+                                   'the 6 mm sleeved lead fills 73 % of the bore\'s area, pulled from the pod\'s end with its ferrules '
+                                   'before the compartment\'s connector is crimped on']))
     out.append(product.Part('strata-collars', Compound(children=[c for _, b, t in ps for c in (b, t)]), product.Machined('aluminium', 'lathe', setup_usd=40.0),
                             finish='post-metal', group='horn',
                             notes=['Strata: a turned aluminium collar, black anodised as the rods, on the top plate at each post (ø28 x 8) and one under each pad '
@@ -214,10 +222,15 @@ def parts(P):
     # the cable post's 7 mm bore (rear post 2, product.rod_places), out through the horn's pad into the pod's floor and up
     # the pod's back to the driver's terminals; the Cloud's lead-hf carries it inside the cabinet up to the gland
     gx, gy, gtop = POSTS['at'][2]
-    pod_path = [(gx, gy, gtop - 12.0), (gx, gy, gtop + 14.0), (gx, gy + 9.0, 1032.0), (gx + 4.0, 376.0, 1072.0), (245.0, 381.0, 1094.0)]
-    out.append(product.Part('lead-hf-pod', product.tube_along(pod_path, 5.0), product.Bought('hf-pair'), finish='cable', group='horn',
-                            notes=['the HF lead from the cable post\'s bore up through the pad and the pod\'s floor to the driver\'s '
-                                   'terminals, clipped to the pod\'s back wall; seen through a polished horn (asset/README.md)']))
+    # the detail pass (2026-11-12, the coordinator: "nothing loose"): out of the post's bore through the pad and the pod's
+    # floor, then square runs only, in black braid: straight back along the floor to behind the motor, straight up behind
+    # it to the driver's terminals, two clear clips on bonded pads; from the front the driver's motor hides the rise
+    pod_path = [(gx, gy, gtop - 24.0), (gx, gy, 1026.0), (gx, 378.0, 1026.0), (gx, 378.0, 1088.0), (245.0, 381.0, 1094.0)]
+    out.append(product.Part('lead-hf-pod', product.tube_along(pod_path, 6.0), product.Bought('hf-pair'), finish='braid', group='horn',
+                            notes=['the HF lead up the cable post\'s 7 bore from the gland under the top, through the pad\'s bore and the '
+                                   'pod\'s floor; inside the pod, in black braided sleeve, straight back along the floor and straight up '
+                                   'behind the driver\'s motor to its terminals (booted black), held by two clear clips on bonded pads: '
+                                   'about 120 mm in all, the only length outside a post; seen through a polished horn (asset/README.md)']))
     from build123d import Compound as _C
     from build123d import Box
     layers, zp = plinth(PLINTH)

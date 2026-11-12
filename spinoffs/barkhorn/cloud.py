@@ -90,6 +90,28 @@ P['remote'] = True                               # round 36: Hypex's remote kit,
 # centre and `z` up, between the ports, under the cloth disc's edge (z 260) and the first brace (z 200); its board (`pcb`:
 # across, high, thick) in a clear `bracket` (across, deep, high); the fallback window `window` across
 P['ir'] = dict(x=0.0, z=160.0, pcb=(40.0, 22.0, 1.6), bracket=(56.0, 10.0, 36.0), eye=6.0, window=12.0)
+# the detail pass (2026-11-12, the coordinator, under the owner's bar: "classy and refined and not cheap"): finish and
+# detail only, no signed shape or size changes. The ports' square frames and their four screws become round rings (the
+# same 140 across, the same 8 thick, so the tube and its tuning are unchanged) with one polished chamfer, cemented in a
+# round recess; the back's screws flush countersunk heads, black, evenly spaced (5 along the top and the bottom, so the
+# pitch is 125 there against 137 up the sides; it was 167); the feet black, their jam nuts too; the rating plate engraved in the
+# back over the compartment's black flange, no plate and no screws; the woofer's screws black low heads (its slots
+# cannot take a countersink); every lead in black braided sleeve and the terminals booted black; the IR receiver in a
+# black cup in a pocket in the bottom batt (product.ir_receiver)
+P['port']['ring'] = dict(chamfer=1.5)
+P['back'].update(countersunk=(10.0, 2.8), per_end=5)
+P['feet']['black'] = True
+P.update(rating='engraved', woofer_low_heads=True, braid=True)
+P['ir'].update(x=-40.0, z=72.0, bracket=(56.0, 12.0, 36.0), hidden=dict(pocket=(64.0, 44.0, 18.0)))   # x -40: clear of the bottom rib
+DETAIL_MATERIALS = {
+    # black PET braid: a fine weave, matt, a little sheen, so it reads as cloth, not as wet rubber catching the sweep
+    'braid': {'preset': 'rubber', 'color': '#111112', 'roughness': 0.85, 'sheen': 0.35},
+    'black-steel': {'preset': 'black_oxide', 'color': '#1E1E1F', 'roughness': 0.38},       # the feet's stems and nuts, the tie rod
+    'engrave': {'preset': 'satin_paint', 'color': '#8C8C8A', 'roughness': 0.9, 'specular': 0.05},   # frosted acrylic over black
+    'black-acrylic': {'preset': 'satin_paint', 'color': '#0E0E0F', 'roughness': 0.25, 'specular': 0.5},
+    'driver-terminal': {'preset': 'plastic', 'color': '#121212', 'roughness': 0.55},           # booted black
+    'foot': {'preset': 'plastic', 'color': '#161617', 'roughness': 0.5},                       # satin black
+}
 PRODUCT = dataclasses.replace(
     pressed.PRODUCT, name='barkhorn-cloud', params=P,
     kind='Two-way horn loudspeaker after Friendly Pressure, the Cloud: tinted cast acrylic, no wood',
@@ -124,4 +146,5 @@ PRODUCT = dataclasses.replace(
         'own colour, deeper.'],
     touching=pressed.PRODUCT.touching + [('lead-ir', 'cable-glands'),       # the IR cable through its gland (round 36)
                                          ('ir-window', 'front-panel')],      # the fallback insert, bonded through the panel
+    materials={**pressed.PRODUCT.materials, **DETAIL_MATERIALS},
     drawing_prefix='BHC')
