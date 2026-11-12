@@ -341,7 +341,7 @@ def mantle_bar():
     mc = (MANTLE[0] + 0.17 * right[0], MANTLE[1] + 0.17 * right[1])           # (proof: the asset's origin sits left of its middle)
     # (proof: the drinks filled the foreground and the sleeve fell out of frame: the drinks and the stack out, the
     # now-playing sleeve on its stand at Mantle's left, turned to the lens)
-    sx, sy = mc[0] - 0.4 * right[0] - 0.08 * fwd[0], mc[1] - 0.4 * right[1] - 0.08 * fwd[1]
+    sx, sy = mc[0] - 0.33 * right[0] - 0.02 * fwd[0], mc[1] - 0.33 * right[1] - 0.02 * fwd[1]
     stand = {**stand, 'position': [sx, sy, TOP], 'rotate': [0, 0, MANTLE_RZ - 8.0]}
     sleeve = {**sleeve, 'image': 'tex/cover-12.png', 'ground': '#141414', 'x': sx, 'y': sy - 0.01, 'rot': [-14.0, 0, MANTLE_RZ - 8.0]}   # (proof: the pale one glared)
     keep = []
@@ -353,7 +353,7 @@ def mantle_bar():
         keep.append(pr)
     s['set']['props'] = keep + [stand, {'kind': 'kit', 'shape': 'ext', 'path': LIFE, 'fn': 'boards', 'boards': [sleeve]}]
     c = [mc[0] + 0.85 * fwd[0], mc[1] + 0.85 * fwd[1], 1.27]           # (proof: half the frame bar top: lower, closer)
-    s['camera'] = {'position': c, 'target': [mc[0], mc[1], MANTLE[2] + 0.09], 'lens_mm': 55.0, 'level': True,
+    s['camera'] = {'position': c, 'target': [mc[0], mc[1], MANTLE[2] + 0.06], 'lens_mm': 42.0, 'level': True,
                    'fstop': 2.8, 'focus': [mc[0], mc[1], MANTLE[2] + 0.07]}
     return s
 
