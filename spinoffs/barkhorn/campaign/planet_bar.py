@@ -371,7 +371,7 @@ def mantle_bar():
     # Mantle's middle: the asset's origin is its front left corner, 0.46 wide and 0.42 deep
     cen = (MANTLE[0] + 0.23 * right[0] - 0.21 * fwd[0], MANTLE[1] + 0.23 * right[1] - 0.21 * fwd[1])
     # the now-playing sleeve on its stand behind Mantle's left, muted (07:22)
-    sx, sy = cen[0] - 0.42 * right[0] - 0.18 * fwd[0], cen[1] - 0.42 * right[1] - 0.18 * fwd[1]
+    sx, sy = cen[0] + 0.36 * right[0] - 0.30 * fwd[0], cen[1] + 0.36 * right[1] - 0.30 * fwd[1]   # (proofs 7, 8: cut at the frame's left: behind its right)
     stand = {**stand, 'position': [sx, sy, TOP], 'rotate': [0, 0, MANTLE_RZ + 10.0]}
     sleeve = {**sleeve, 'image': 'tex/cover-00.png', 'ground': '#1C1B1A', 'rough': 0.8, 'x': sx, 'y': sy - 0.01, 'rot': [-14.0, 0, MANTLE_RZ + 10.0]}
     keep = []
@@ -386,8 +386,10 @@ def mantle_bar():
     # edge; the Ember Core beside it, not behind; posts black: the low heads on Mantle off, the fills down)
     for pr in s['set']['props']:
         if pr.get('fn') == 'lamps':
-            pr['cores'] = [{'tint': shots.KEY['ember'], 'x': round(cen[0] + 0.42 * right[0] - 0.05 * fwd[0], 3),
-                            'y': round(cen[1] + 0.42 * right[1] - 0.05 * fwd[1], 3), 'floor_z': TOP, 'rot': 0.0}]
+            # (proofs 7, 8: on the right, the side away from the lens, the plinth's edge showed nothing: on its left, the side
+            # the lens sees, close, so its light enters that edge, as the Core beside it does in the portrait)
+            pr['cores'] = [{'tint': shots.KEY['ember'], 'x': round(cen[0] - 0.33 * right[0] - 0.08 * fwd[0], 3),
+                            'y': round(cen[1] - 0.33 * right[1] - 0.08 * fwd[1], 3), 'floor_z': TOP, 'rot': 0.0}]
             pr['hemispheres'] = [h for h in pr['hemispheres'] if h['x'] < 7.4] + [
                 {'tint': shots.KEY['ember'], 'x': round(cen[0], 3), 'y': round(cen[1], 3), 'rim_z': MANTLE_HEMI_Z}]
     for k in ('mantle-front', 'mantle-side', 'track-mantle'):
@@ -401,12 +403,12 @@ def mantle_bar():
     az = math.radians(MANTLE_CAM_AZ)
     d = MANTLE_CAM_D
     c = [cen[0] + d * (math.cos(az) * fwd[0] - math.sin(az) * right[0]), cen[1] + d * (math.cos(az) * fwd[1] - math.sin(az) * right[1]), 1.38]
-    s['camera'] = {'position': [round(v, 4) for v in c], 'target': [cen[0], cen[1], MANTLE[2] + 0.12], 'lens_mm': 45.0, 'level': True,
+    s['camera'] = {'position': [round(v, 4) for v in c], 'target': [cen[0] - 0.12 * right[0], cen[1] - 0.12 * right[1], MANTLE[2] + 0.12], 'lens_mm': 45.0,   # (proof 9: the Core cut at the left) 'level': True,
                    'fstop': 4.0, 'focus': [cen[0], cen[1], MANTLE[2] + 0.1]}
     return s
 
 
-MANTLE_HEMI_Z = 1.62           # the Hemisphere's rim over Mantle (the deck at about 1.23)
+MANTLE_HEMI_Z = 1.50           # the Hemisphere's rim over Mantle (the deck at about 1.23)
 MANTLE_CAM_AZ, MANTLE_CAM_D = 35.0, 1.05
 
 
