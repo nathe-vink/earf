@@ -421,7 +421,7 @@ MANTLE_CAM_AZ, MANTLE_CAM_D = 35.0, 1.05
 
 
 HERO_MANTLE_TINT = 'ember'      # Mantle's tint in the hero: the last Mantle test decides (the coordinator, 22:17)
-HERO_CORES = [('ember', 4.62, -0.12), ('dust', 7.72, -0.16), ('acid', 9.25, -0.1)]   # clear of both bays' lines of sight
+HERO_CORES = [('acid', 5.95, 0.04), ('ember', 6.3, -0.12), ('dust', 7.65, -0.14)]   # (proof 1: 4.62 and 9.25 out of frame)
 
 
 def bar_hero():
@@ -444,8 +444,10 @@ def bar_hero():
     s['lights']['track-mantle'] = {**s['lights']['track-mantle'], 'position': [cx + 0.4, 3.0, R.CEIL - 0.05], 'target': [cx, cy, MANTLE[2]]}
     # the upper left third calm and dark for the headline: no wall head there
     s['lights'].pop('track-wall0', None)
-    # the frame: from a seat across the room, centred between the bays, the eye 1.35 m; the bar top's front edge low
-    s['camera'] = {'position': [6.9, 0.95, 1.35], 'target': [6.9, 5.7, 1.82], 'lens_mm': 30.0, 'level': True,
+    # the frame: from a stool at the bar's middle, centred between the bays (proof 1, from across the room at y 0.95:
+    # everything small, the stools across the foot); the eye 1.6 m, so the Cores and Mantle on the bar stay under the
+    # line to the speakers' feet
+    s['camera'] = {'position': [6.9, 2.5, 1.6], 'target': [6.9, 5.7, 1.72], 'lens_mm': 28.0, 'level': True,
                    'fstop': 5.6, 'focus': [6.9, 5.2, 1.6]}
     return s
 
