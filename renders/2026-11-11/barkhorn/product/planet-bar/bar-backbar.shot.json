@@ -1,8 +1,8 @@
 {
  "title": "Planet EARF bar: the record wall from a seat at the bar",
  "size": [
-  1920,
-  1080
+  3200,
+  1800
  ],
  "set": {
   "kind": "stage",
@@ -882,8 +882,8 @@
   "strength": 0.0
  },
  "render": {
-  "samples": 128,
-  "adaptive": 0.01,
+  "samples": 256,
+  "adaptive": 0.005,
   "denoise": true,
   "clamp": 0,
   "bounces": 24,
