@@ -1765,7 +1765,7 @@ def ir_receiver(P, gland_tip):
         Part('remote-kit', pcb.fuse(eye).fuse(led), Bought('hypex-remote-kit'), qty=0.5, finish='amp', inside=True,
              pieces={'board': (pcb, 'amp'), 'eye': (Compound(children=[eye, led]), 'driver-frame')},
              notes=[f'the kit\'s IR board ({pw:g} x {ph:g}, drawn as a block: confirm on the kit), in the master speaker only, behind the ' +
-                    (f'front panel low between the ports, {x - cx:+g} from the centre and {z:g} up, in its cup (the lining's colour) in the bottom batt\'s pocket; the receiver and the LED facing the ' if ir.get('hidden') else f'front panel low and centred ({z:g} up, between the ports and under the brace), the receiver and the LED facing the ')
+                    (f'front panel low between the ports, {x - cx:+g} from the centre and {z:g} up, in its cup (the lining\'s colour) in the bottom batt\'s pocket; the receiver and the LED facing the ' if ir.get('hidden') else f'front panel low and centred ({z:g} up, between the ports and under the brace), the receiver and the LED facing the ')
                     + 'panel through no window: the panel\'s own tint must pass 940 nm (the prototype\'s test; the fallback is option '
                     '\'IR window, fallback\'); its light pipes and perspex window left out; its 5-pin cable to J15 on the FA122\'s '
                     'input board through the compartment\'s third gland']),
