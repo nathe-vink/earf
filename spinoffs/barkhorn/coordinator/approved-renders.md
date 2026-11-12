@@ -842,6 +842,21 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    push of 09:45:14 (6010a45c) took the build that had come back (deployment 09:45:21). Biomes and speaker lanes told
    09:53 to HOLD ALL PUSHES until the coordinator writes "push" (work and commit locally, report by message). The
    biomes lane already has the convex hilltop in code (595f35a9, 09:29). Speaker lane: no push since 08:03.
+   The lanes' sessions carry a stop hook that tells them to push whenever the repo has uncommitted or unpushed
+   changes (biomes lane, 09:53): that is why a lane pushes at every turn. During a hold the lanes keep new work in
+   their scratchpads and the tree clean.
+   10:10 UTC, site lane: BATCH 2 IS BUILT. r49-site-rc 28579349bd (417a38f2 plus three one-line build notes; no site
+   change), pushed 10:07:34, deployment dpl_3P3hfr3nxZBuEDgZLhUQqwF9WnBv,
+   `https://earf-oz2hzaf5p-nathanielvink-4975s-projects.vercel.app`. Retries 1 (09:36:30) and 2 (09:52:02) did not
+   build; builds came back at 09:25, 09:45 (both taken by biomes pushes) and 10:07 (the site): about one every
+   14-20 minutes. Hold lifted 10:12 ("push"); one push per report from now on.
+   Coordinator's check of the preview (1440 and 390, one look each): home (headline, line and buttons on clear sky
+   from 48 %; "Each color is a place" with Ice and Poison, two across, stacked on a phone), `/lighting` (the dock line
+   reads "Set it back on its dock and it charges in two to three hours"; no "polished black"), `/colors/poison` and
+   `/tropos/poison` (the final Poison portrait, "In the forest, among the ivy."), `/colors/fog` (no hillside),
+   `/#hemisphere-ember` (seven views), `/#core-ember` (three views, base "Its own color, satin"). PASSES. One new share
+   link made 10:12 (expires 13 Nov 09:11 UTC; it replaces the batch 1 link) and sent to the owner in chat only.
+   The white dot on the hero's woofer is the opening's own mark, present in batch 1 as well.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
