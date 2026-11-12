@@ -66,10 +66,18 @@ SETS = {
                # the gate on cc380fab (18:42): the storm neutral, the speaker the only yellow (a grey storm sun, no tint)
                # the lamp in the sky's own sun colour (hdri_sun: #FECC8B; a grey lamp under a warm-sunned sky is two suns' worth
                # of inconsistency, the coordinator 19:45); the white balance tint at 0 stays
-               'sun.color': '#FECC8B', 'render.white_balance_tint': 0.0,
+               'render.white_balance_tint': 0.0,   # (the sun was #FECC8B, the sky's own sun colour, to 2026-11-12)
+               # (the coordinator, 2026-11-12, proxy 797caadd: the horn measured hue 44-45, gold; the approved Acid's lemon
+               # (its volume colour) is about 58. The light near neutral: the sun a pale daylight, the white point at the
+               # sunset sky's warmth, so the horn's centre reads 55-60)
+               'sun.color': '#FFF6EC', 'render.white_balance_k': 4600,
                # the near-white water in the bottom-right corner (L 205): the two dips nearest the camera 0.4 m left and
                # 0.2 m smaller, so that corner is wet rock and the channel under the speaker's reflection stays water
-               'set.props.0.dips': [[0.0, 0.0, 1.1, 0.16], [-0.2, -1.2, 1.2, 0.2], [-0.95, -2.7, 1.3, 0.22],
+               # (the coordinator, 2026-11-12: the speaker on wet rock at the puddle's edge, not in the water, the whole base
+               # and its bottom edge showing; the puddle in front keeps the reflection): the first dip moved 0.95 m forward,
+               # so the ground under the footprint stays above the water (-0.11; -0.09 at the front face) and the water's
+               # edge runs about 0.1 m in front of it
+               'set.props.0.dips': [[0.0, -0.95, 1.1, 0.2], [-0.2, -1.2, 1.2, 0.2], [-0.95, -2.7, 1.3, 0.22],
                                     [-1.25, -4.1, 1.4, 0.22], [-1.1, -5.4, 1.4, 0.2], [2.6, 2.4, 1.6, 0.18]]},   # 28 deg off mirrored a wedge (crease 26.7), 10 deg off 13.7: 4 deg, as Ice
     # the polished horn mirrors the bright sky in one wall as a pale wedge (half an X) when it's turned far from the
     # camera; turned to about 10 deg off the camera's line it reads clean, as Ice's does (front-on gives a symmetric X)
@@ -148,7 +156,8 @@ MODIFY = {'haze_b': {'sundisk': {'azimuth': 30.0, 'elevation': 6.0}},
 FLAG = {'haze_b': (4.0, 3.0), 'poison_ivy': (0.0, 0.0)}   # poison_ivy: no flag or side cards, so the forest's sky reads in the horn (2026-11-11)
 # feet bedding per habitat (m; default 0.012, the cabinet on the ground). Acid stands in a puddle: at 12 mm its bottom sat
 # exactly on the water, and the water reflected a band of sky between the edge and its reflection (the gate: "hovers")
-SINK = {'acid_b': 0.05,    # 2026-11-09: 0.025 left the bottom panel's 20 mm front edge above the water, mirrored as a
+SINK = {'acid_b': 0.025,   # 2026-11-12: on wet rock at the puddle's edge (the displaced rock, as Dust's 0.028); was 0.05 in the water
+        'acid_b_in_water': 0.05,    # 2026-11-09: 0.025 left the bottom panel's 20 mm front edge above the water, mirrored as a
                           # grey band 25-30 px under the cabinet (the trace); at 0.05 the reflection meets the walls
         # (earlier: at 0.015 a sky-bright strip (8-9 px) showed between the edge and its reflection (the gate on
                           # cc380fab: "hovers"); the puddle's displacement sits above the ray-cast surface. 0.025 closes it
@@ -173,7 +182,7 @@ _RW = {"kind": "kit", "shape": "ext", "module": "poison_el", "fn": "redwood", "r
 ADD = {'poison_g5': [dict(_RW, position=[-5.0, 28.2, -0.1], seed=41, turn=40), dict(_RW, position=[-7.0, 32.9, -0.1], seed=42, turn=200),
                       dict(_RW, position=[-3.6, 31.5, -0.1], seed=43, turn=310)],
        # Acid (the coordinator, 20:46): splash crowns in the puddle at the speaker's foot, lightly breaking its reflection
-       'acid_b': [{'kind': 'kit', 'shape': 'ext', 'module': 'acid_rain_el', 'fn': 'splashes', 'area': [-0.7, -1.6, 0.7, -0.22],
+       'acid_b': [{'kind': 'kit', 'shape': 'ext', 'module': 'acid_rain_el', 'fn': 'splashes', 'area': [-0.7, -1.6, 0.7, -0.4],
                    'z': -0.11, 'count': 28, 'radius': [0.006, 0.016], 'avoid': [[0.0, 0.0, 0.34]], 'opacity': 0.85, 'seed': 17}]}
 # "Poison garden" g3 (the critics on g2, wf_621c52e9, via the coordinator 01:28): fly agaric the hero, true scarlet (sRGB
 # 195, 25, 15 at its base tone), bold raised warts, every age, in clumps at varied heights with a troop in the near
@@ -214,11 +223,15 @@ CANOPY_OPEN = {'poison_g5': 0.25}
 # round 4 (the coordinator, 22:45): the drops as spherical caps at water's ~70 deg contact angle on PMMA (h ~ 0.7 r), not
 # the 0.38-flat domes of r2-r3, which barely read
 WET = {'acid_b': (260, 60, 3, 1, 3.0, 6.0, 0.3, 0.55, 2.2, 70.0)}
-MENISCUS = {'acid_b': 0.002}
+MENISCUS = {}   # acid_b's 0.002 waterline meniscus went with the water (2026-11-12: the speaker stands on rock)
 REFLECT = {   # habitat -> [reflector specs] (W H AZ EL DIST TX TY TZ), white boards where fill lamps stood
     # Fog (b), 2026-11-10: a 2 x 2 m white board where fill_l stood (proxies: no fill left 15 % of the face under 10, the
     # board 5 %; the passed file 4 %). Poison takes none: a board where litter stood shades the floor on the sun's line
-    'fog_b': [(2.0, 2.0, -55.0, 15.0, 3.5, 0.0, 0.0, 0.8)]}
+    'fog_b': [(2.0, 2.0, -55.0, 15.0, 3.5, 0.0, 0.0, 0.8)],
+    # Ember (c), the coordinator 2026-11-12: the front read near black (value 0.10, the woofer 0.05) with the dusk sun behind
+    # at az 130; a 2.4 x 1.6 m white board low on the camera's right, out of frame, facing the speaker and the sun, so
+    # the sun's light comes back onto the front. Passive; the sun and the sky stay the only emitters
+    'ember_c': [(2.4, 1.6, 40.0, 6.0, 2.0, 0.0, 0.0, 0.55)]}
 ROLL = {   # habitat -> (feather, wander) m: the ground patch's far edge rolled under the land beyond (habitat.roll_edge)
     # Fog, the coordinator 2026-11-12: the lip was a ruler-straight 10 cm step; roll its last 0.4 m, wandering 10-20 cm
     # then (same day) hummocks: the brow rises and falls 3-8 cm along its length. Smoke shares the set, so the same lip
@@ -252,6 +265,7 @@ def main():
     ap.add_argument('--reflector', type=float, nargs=8, action='append', default=[], help='a white board: W H AZ EL DIST TX TY TZ')
     ap.add_argument('--opaque-shadows', action='store_true', help='diagnostics: the glass blocks direct light')
     ap.add_argument('--crop', type=float, nargs=4, help='a region only, fractions X0 Y0 X1 Y1 (tests)')
+    ap.add_argument('--led', type=float, help="scale the amp's power LED (tests: 0 tells its glow from the sun's)")
     # the horn under the shadow rule as the cabinet, the standard for every habitat (the coordinator, 2026-11-09 22:15):
     # --horn-front was Ember's workaround (2026-11-03) for the asset's untinted shadow pass through the horn, from before
     # the per-face rule; kept only to compare with the files made with it
@@ -298,6 +312,7 @@ def main():
             + (['--scrim', *map(str, a.scrim)] if a.scrim else []) \
             + (['--wet', *map(str, a.wet or WET[n])] if (a.wet or n in WET) else []) \
             + (['--crop', *map(str, a.crop)] if a.crop else []) \
+            + (['--led', str(a.led)] if a.led is not None else []) \
             + (['--opaque-shadows'] if a.opaque_shadows else []) \
             + (['--horn-as-cabinet'] if a.horn_as_cabinet else []) \
             + (['--asset', a.asset] if a.asset else []) \
