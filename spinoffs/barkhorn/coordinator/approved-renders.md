@@ -752,6 +752,19 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    the frame, faint pools: redo as a cluster of five. `mantle-bar.png`: Mantle reads as a black deck on grey-silver
    posts (the owner's objection of 11 Nov): redo with an Ember Core behind it lighting the deck through, posts reading
    black, the bar top dark.
+   07:43 UTC, speaker lane: the dark stone (about 1 % reflectance) cannot show the pendants' pools. Coordinator: keep the
+   stone across the set (the two passed frames stand); let the cluster's light show on what lies under it (open
+   newspaper, linen napkin, citrus, drinks, the Cores' bases).
+   12 Nov 08:00 UTC, biomes lane 7ce3fc47a2: POISON'S FINAL PAIR (option C: the proxy's camera, leaflets spread):
+   `renders/2026-11-11/barkhorn/habitats/poison-final-portrait-2400x3000.jpg`, `poison-final-wide-3200x2000.jpg`. Sun
+   and sky only, no reflector; gt_audit, scatter and manifest clean. Coordinator's check in full-size crops: the leaves
+   of three read on the near spray; the base sits on the litter; the horn accepted as dark green glass. ONE DEFECT:
+   beside the speaker's base the ivy's runners show as thin dead-straight dark lines like wire, and the ground cover's
+   petioles stand like pins. Sent back for one last pass (runners thicker, curved, on the litter under leaves; petioles
+   shorter and arched). NOT yet shown as final.
+   Fog lip, second proxy (ccc7a7bc): the rolled, wandering edge barely shows at this grazing view; the line is still
+   straight. Coordinator: break it with height (low hummocks 3-8 cm along the lip, tufts of mixed height on the roll);
+   one more proxy, still gated. Smoke shares the set and takes the same fix.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
