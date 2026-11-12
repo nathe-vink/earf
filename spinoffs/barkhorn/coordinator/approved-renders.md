@@ -977,6 +977,31 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    the thing to judge); (c) Fog's hilltop under overcast (today's test; too like Fog). Smoke stays on hold.
    Status at 23:30: Fog's portrait rendered, its wide due about 01:30 UTC (one push for the pair); the studio refresh
    and the last Mantle test at the speaker lane; no new site batch since batch 2.
+   OWNER, 12 Nov 23:36 UTC (verbatim): "Smoke was meant to look like an asteroid crashed down and burnt up in the
+   atmosphere. The poison biome is lackluster. Ember doesn't look volcanic anymore from what I've seen. The stage looks
+   too cheap. The bar pictures have been looking good. Black center on hemisphere. I'm having trouble understanding how
+   the hemisphere lighting works based on the renders. Yes build switch."
+   -> SMOKE IS THE ASTEROID STRIKE (the picture live on 1 Nov: a crater, fire and sparks, a black column of smoke).
+      The coordinator's three options are void. Brief: the meteor's smoke trail down the sky, a fresh crater and a
+      gouged trench behind the speaker, a black plume, scorched ground, embers; the Smoke speaker whole in front.
+      Set in open country like the other seven (the coordinator's call; the owner is told and can ask for the road).
+   -> POISON'S PAIR IS NOT FINAL: "lackluster". It stays on the preview until a better one lands. Brief: poison ivy
+      kept; the drama of the 22 Oct picture back (a closer, lower camera, low sun in shafts through mist, the speaker
+      lit so its green glows, darker woods), red-capped toadstools in the ivy.
+   -> EMBER MUST LOOK VOLCANIC: glowing lava, as in the 22 Oct picture. The released Ember pair is CANCELLED.
+   -> RULE CORRECTED (the coordinator's own over-reach, 11-12 Nov: "sun and sky only, nothing that emits" took the
+      lava out of Ember and the fire out of Smoke). A habitat may carry its place's own natural light (lava, fire,
+      embers, a meteor's glow) where it is seen in the frame and listed with the emitters, with sun, sky, mist and
+      declared passive reflectors. Still never: a hidden lamp or emitter, studio equipment, a light that makes the
+      product look lit from within. Nature only stays (the owner's word on Poison, 11 Nov).
+   -> THE STAGE IS DROPPED AS THE LINE'S HERO ("too cheap"). Next try: the hero from the bar (all four products in
+      the room he likes), one small test.
+   -> THE BAR IS THE DIRECTION ("have been looking good"). The pendants final goes to the site; the wide and the Core
+      close-up get their one re-render with every fix; the portrait and the Mantle frame follow.
+   -> HEMISPHERE'S CENTER STAYS BLACK. No re-render. He cannot read from the pictures how it lights: explained in
+      chat; the lamps lane to make a cutaway picture and one picture over a pale table that shows the pool of light.
+   -> THE BUILD SWITCH: YES. `spinoffs/barkhorn/site/vercel.json` gains `r33-*`, `r46-*`, `r47-*`, `r48-*`: false, on
+      each working branch at its next push (this branch now). The site's `r49-*` and main still build.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
