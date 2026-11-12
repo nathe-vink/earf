@@ -765,6 +765,21 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    Fog lip, second proxy (ccc7a7bc): the rolled, wandering edge barely shows at this grazing view; the line is still
    straight. Coordinator: break it with height (low hummocks 3-8 cm along the lip, tufts of mixed height on the roll);
    one more proxy, still gated. Smoke shares the set and takes the same fix.
+   12 Nov 08:47 UTC, biomes lane 316c38a20a: POISON'S PAIR RE-RENDERED at the same names (runners 4-8 mm, brown-green,
+   curved and lying in the litter; petioles 2-9 cm, arched). Coordinator's check at full size (the base in both frames,
+   the trunks' ivy, the ferns and the ground line left and right, the near spray): PASSES. POISON'S HABITAT PAIR IS
+   FINAL; shown to the owner 08:58 UTC; sent to the site lane for batch 2 at 09:00. Known and left: a few 2-4 px bright
+   specks on the sunlit edge of the left trunk's ivy.
+   Same message: Fog and Smoke got the hummocks and mixed-height lip tufts in code (08d8586e); the Fog lip proxy is
+   rendering, the pair stays gated.
+   ACID and EMBER PROXIES (797caaddb4, `renders/2026-11-12/barkhorn/habitats/acid-proxy.jpg`, `ember-proxy.jpg`,
+   800x1000): shown to the owner 08:58 UTC as small tests. Acid (rain on a wet shore): the horn measures hue 44-45
+   against 58 in the approved studio Acid (`tall-acid.png`); the warm sky turns it gold. Fixes sent: light near neutral
+   so the horn's center measures hue 55-60; the speaker on wet rock at the puddle's edge, not in the water; the white
+   speck right of the speaker must be a splash on the ground. Ember (lava rock at dusk, no lava light): the cabinet
+   front is nearly black (value 0.10, woofer 0.05). Fix sent: lift the front to about 0.25-0.35 with a passive
+   reflector or a small turn, nothing that emits; list the emitters and explain the red glow in the cabinet's base.
+   One new proxy each; no finals until the coordinator says so.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
