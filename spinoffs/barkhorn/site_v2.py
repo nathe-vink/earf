@@ -613,7 +613,7 @@ def pages(web):
                 os.rmdir(d)
         left = [os.path.relpath(f, web.SITE) for f in glob.glob(os.path.join(web.SITE, '**', '*'), recursive=True)]
         bad = [f for f in left if re.search(r'(^press/|img/(?:(?:dome|orb)-|lamps-(?:orbs|domes)|lamp-(?:orb|dome)|hero[.-]|facade|room|macro-|turn-|spin/'
-                                            r'|tt-|ga-|globe-turn-night|coins-|v2/mantle-day|rc/og-mantle|rc/(?:red|orange|amber|green|violet|black)-habitat|lamps-unlit|thumb/lamps-unlit|rc/(?:red|orange|amber|green|blue|violet|ice)-back[.-]|(?:red|orange|amber|green|blue|violet|ice|black)-(?:on|off|studio|back|amp|horn|inside|reel|habitat)))', f)]
+                                            r'|tt-|ga-|globe-turn-night|coins-|v2/mantle-day|rc/og-mantle|rc/(?:red|orange|amber|violet|black)-habitat|lamps-unlit|thumb/lamps-unlit|rc/(?:red|orange|amber|green|blue|violet|ice)-back[.-]|(?:red|orange|amber|green|blue|violet|ice|black)-(?:on|off|studio|back|amp|horn|inside|reel|habitat)))', f)]
         assert not bad, ('site_v2: rc deploys', bad[:12])
 
 
@@ -1234,10 +1234,11 @@ def rc_waves(p, web):
     ON_HOLD = 'Hemisphere and Core, switched off. Shown in Smoke, a color on hold.'
     # --- the passed habitats (biomes: Ice 0f619953, Dust 26493989), 4:5
     HAB = {'blue': 'renders/2026-11-11/barkhorn/habitats/ice-final-portrait-2400x3000.jpg',       # the final Ice (r48-biomes e2ea7e2f)
-           'ice': 'renders/2026-11-03/barkhorn/habitats/fog_b-portrait-1200x1500-r2-blackrods.jpg'}   # (r48-biomes 2904138e)
+           'ice': 'renders/2026-11-03/barkhorn/habitats/fog_b-portrait-1200x1500-r2-blackrods.jpg',     # (r48-biomes 2904138e)
+           'green': 'renders/2026-11-11/barkhorn/habitats/poison-final-portrait-2400x3000.jpg'}       # the final Poison (316c38a2)
     # out (the audits, 2026-11-09/10): Dust 26493989 (a hidden panel), then 43c91242 (it hovers: a lit strip under its
     # front edge); Fog b61474c0 (two suns), then aa1ca856 (a hidden fill lamp)
-    HAB_ALT = {'blue': 'Tropos in Ice, out in the snow at dusk', 'orange': 'Tropos in Dust, on rippled sand among desert buttes',
+    HAB_ALT = {'green': 'Tropos in Poison, in a forest among ivy-covered trees', 'blue': 'Tropos in Ice, out in the snow at dusk', 'orange': 'Tropos in Dust, on rippled sand among desert buttes',
                'ice': 'Tropos in Fog, standing in the grass on a foggy hillside at dawn'}
     for k, src in HAB.items():
         im = Image.open(os.path.join(web.ROOT, src)).convert('RGB')
@@ -1386,9 +1387,9 @@ def rc3(p, web):
     import os
     from PIL import Image
     names = {k: name for k, num, name, *_ in web.CLOUDS}
-    HAB_ALT = {'blue': 'Tropos in Ice, out in the snow at dusk', 'orange': 'Tropos in Dust, on rippled sand among desert buttes',
+    HAB_ALT = {'green': 'Tropos in Poison, in a forest among ivy-covered trees', 'blue': 'Tropos in Ice, out in the snow at dusk', 'orange': 'Tropos in Dust, on rippled sand among desert buttes',
                'ice': 'Tropos in Fog, in the grass on a hillside, in fog at dawn'}
-    HAB_CAP = {'blue': 'Out in the snow at dusk.', 'orange': 'On rippled sand among desert buttes.', 'ice': 'In the grass on a hillside, in fog at dawn.'}
+    HAB_CAP = {'green': 'In the forest, among the ivy.', 'blue': 'Out in the snow at dusk.', 'orange': 'On rippled sand among desert buttes.', 'ice': 'In the grass on a hillside, in fog at dawn.'}
     # --- 1. home, the lamps: the picture left, the two lamps' names beside it, one line each, as links
     m = re.search(r'<figure class="strip lamps-day"><img (.*?)><figcaption class="wrap">(.*?)</figcaption></figure>', p.rest, re.S)
     assert m, 'rc3: lamps-day'
@@ -2034,7 +2035,7 @@ MANTLE_FINAL = 'renders/2026-11-10/barkhorn/mantle-r48/mantle-final-day-{name}.p
 LAMP_FINAL = 'renders/2026-11-10/barkhorn/lamp-site/final/{f}.png'
 NAMES = dict(zip(RC_KEYS, ['ember', 'dust', 'acid', 'poison', 'ice', 'haze', 'fog', 'smoke']))
 HEMI_LM = {'red': 272, 'orange': 280, 'amber': 301, 'green': 256, 'blue': 264, 'violet': 254, 'ice': 339, 'black': 287}   # lm out, cd703d56
-CORE_ROW_DAY = None    # 'core-row-day' when its re-render lands: Core's eight by day, switched off
+CORE_ROW_DAY = 'core-row-day'    # Core's eight by day, switched off (r32-lamps-final 01a0b833)
 LAMP_LIGHT_TINTS = '2200 K in Ember; 2700 K in Poison and Fog; 3000 K in Haze; 4000 K in Dust, Acid, Ice and Smoke'
 
 
@@ -2075,6 +2076,9 @@ def rc_products(p, web):
             vs = {'hero': v, 'row': dict(r, th=row_th['src'])}
             if lamp == 'dome':
                 vs['below'], _ = views(LAMP_FINAL.format(f=f'{f}-{n}-under'), f'{f}-{n}-under', 1200)
+                if k == 'red':                # Ember's details (r32-lamps-final 92ff60c3)
+                    for d in ('off', 'cap', 'rim'):
+                        vs[d], _ = views(LAMP_FINAL.format(f=f'hemisphere-ember-{d}'), f'hemisphere-ember-{d}', 1200)
                 vs['cluster'] = cluster
             elif CORE_ROW_DAY:
                 vs['day'] = core_day
@@ -2115,6 +2119,9 @@ def rc_products(p, web):
           "const TT_VIEWS = [['studio', 'In the studio', c => `${D.tt.name} in ${c.name}.`],")
     p.sub("         ['row', 'All eight', () => 'Eight Hemispheres hung in a row, lit, one in each color.'],",
           "         ['below', 'From below', c => `Hemisphere from below, lit: the opal diffuser inside its ${c.name} shade.`],\n"
+          "         ['off', 'Off', () => 'Hemisphere in Ember, switched off.'],\n"
+          "         ['cap', 'The cap', () => 'Its cap, satin black anodized aluminum.'],\n"
+          "         ['rim', 'The rim', () => 'The rim of the Ember shade, lit, with the opal diffuser within.'],\n"
           "         ['cluster', 'In a group', () => 'Eight Hemispheres hung at different heights, one in each color.'],\n"
           "         ['row', 'All eight', () => 'Eight Hemispheres hung in a row, lit, one in each color.'],")
     if CORE_ROW_DAY:
@@ -2159,7 +2166,7 @@ FAMILY = [  # (product, route, tint, kind, line)
     ('Hemisphere', '#hemisphere-haze', 'violet', 'Pendant', 'A pendant. Half a globe of light over the table.'),
     ('Core', '#core-poison', 'green', 'Table lamp', 'A cordless table lamp. A glow, not a reading light.'),
 ]
-PLACES = [('blue', 'Ice, out in the snow at dusk.'), ('ice', 'Fog, on a hillside at dawn.')]
+PLACES = [('blue', 'Ice, out in the snow at dusk.'), ('green', 'Poison, in the forest among the ivy.'), ('ice', 'Fog, on a hillside at dawn.')]
 ARROW = ('<svg class="arr" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" '
          'stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>')
 
@@ -2335,7 +2342,7 @@ def rc_marketing(p, web):
 .tint:has(input:focus-visible) {{ outline: 3px solid var(--ink); outline-offset: 3px }}
 .tint-line {{ margin: 0 0 24px; font-size: clamp(18px, 1.6vw, 22px); min-height: 1.4em }}
 .mk-cap {{ margin: 10px 0 0; color: var(--muted); font-size: 14px }}
-.places {{ display: grid; grid-template-columns: 1fr 1fr; gap: 16px }}
+.places {{ display: grid; grid-template-columns: repeat({min(len(PLACES), 4)}, minmax(0, 1fr)); gap: 16px }}
 .place {{ display: grid; gap: 10px; color: var(--ink); text-decoration: none }}
 .place img {{ width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; display: block; transition: transform .5s cubic-bezier(.2, .7, .2, 1) }}
 .place {{ overflow: hidden }} .place:hover img, .place:focus-visible img {{ transform: scale(1.02) }}
