@@ -263,7 +263,77 @@ def core_bar_table():
     return s
 
 
-SHOTS = {'bar-backbar': bar_backbar, 'core-bar-table': core_bar_table}
+def bar_backbar_full():
+    """bar-backbar at full size (the coordinator, 00:33: 3200 wide, samples enough that the denoiser paints nothing)."""
+    s = bar_backbar()
+    s['size'] = [3200, 1800]
+    s['render'].update(samples=256, adaptive=0.005)
+    return s
+
+
+def core_bar_table_full():
+    s = core_bar_table()
+    s['size'] = [3200, 2133]
+    return s
+
+
+def bar_backbar_portrait():
+    """For phones, its own framing from the same seat (00:33): the near speaker whole in its bay, Mantle and a Core on
+    the bar below it, two Hemispheres at the top (hung higher for this frame, beside the speaker's top, none across it)."""
+    s = bar_backbar()
+    s['title'] = 'Planet EARF bar: the near speaker from a seat at the bar (portrait)'
+    s['size'] = [2400, 3000]
+    s['render'].update(samples=224, adaptive=0.005)
+    for pr in s['set']['props']:
+        if pr.get('fn') == 'lamps':
+            pr['cores'] = [{**c, 'x': 8.85, 'y': 3.92} if c['tint'] == shots.KEY['ember'] else c for c in pr['cores']]
+            pr['hemispheres'] = pr['hemispheres'] + [{'tint': shots.KEY['acid'], 'x': 8.4, 'y': 4.55, 'rim_z': 2.2},
+                                                     {'tint': shots.KEY['ember'], 'x': 7.85, 'y': 4.45, 'rim_z': 2.3}]
+    import math
+    a, e = math.radians(126.0), math.radians(3.0)        # (the audit: at 30 mm the horn card and two heads in the top)
+    c = [9.3, 3.5, 1.42]
+    s['camera'] = {'position': c, 'target': [c[0] + 3 * math.cos(a), c[1] + 3 * math.sin(a), c[2] + 3 * math.tan(e)], 'lens_mm': 35.0,
+                   'level': True, 'fstop': 2.8, 'focus': [8.25, 5.5, 1.7]}
+    return s
+
+
+def bar_pendants():
+    """Test frame (00:33): the Hemispheres over the bar, close to medium, their pools on the dark stone, a Core and the
+    drinks under them, the record wall soft behind."""
+    s = _base([1920, 1280], 'Planet EARF bar: the Hemispheres over the bar')
+    s['set']['props'].append(_lamps(HEMIS, [('ember', 6.75, -0.08), ('dust', 7.45, 0.02)]))
+    for pr in s['set']['props']:
+        if pr.get('fn') == 'boards':
+            pr['boards'] = [b for b in pr['boards'] if 'newspaper' not in b['image'] and 'cover-05' not in b['image']]
+    s['set']['props'] = [pr for pr in s['set']['props'] if not (pr.get('texture') == 'american_walnut_veneer' and pr.get('size') == [0.2, 0.05, 0.022])]
+    s['render'].update(samples=256, adaptive=0.005)
+    s['camera'] = {'position': [6.9, 2.55, 1.5], 'target': [6.9, 4.4, 1.48], 'lens_mm': 35.0, 'level': True,
+                   'fstop': 2.0, 'focus': [6.9, Y_BAR, 1.6]}
+    return s
+
+
+def mantle_bar():
+    """Test frame (00:33): Mantle in Ember on the bar, its record on and its sleeve beside it, close, the near speaker
+    soft behind; the plinth's red glow and the black hardware must read."""
+    s = bar_backbar()
+    s['title'] = 'Planet EARF bar: Mantle on the bar'
+    s['size'] = [1920, 1280]
+    s['render'].update(samples=256, adaptive=0.005)
+    life = _life()
+    stand = next(pr for pr in life if pr.get('texture') == 'american_walnut_veneer' and pr.get('size') == [0.2, 0.05, 0.022])
+    sleeve = next(b for pr in life if pr.get('fn') == 'boards' for b in pr['boards'] if 'cover-05' in b['image'])
+    s['set']['props'].append(stand)
+    s['set']['props'].append({'kind': 'kit', 'shape': 'ext', 'path': LIFE, 'fn': 'boards', 'boards': [sleeve]})
+    import math
+    a = math.radians(MANTLE_RZ)
+    c = [MANTLE[0] + 1.0 * math.sin(a), MANTLE[1] - 1.0 * math.cos(a), 1.4]
+    s['camera'] = {'position': c, 'target': [MANTLE[0], MANTLE[1], MANTLE[2] + 0.07], 'lens_mm': 50.0, 'level': True,
+                   'fstop': 2.8, 'focus': [MANTLE[0], MANTLE[1], MANTLE[2] + 0.07]}
+    return s
+
+
+SHOTS = {'bar-backbar': bar_backbar_full, 'core-bar-table': core_bar_table_full, 'bar-backbar-portrait': bar_backbar_portrait,
+         'bar-pendants': bar_pendants, 'mantle-bar': mantle_bar}
 
 if __name__ == '__main__':
     od = sys.argv[1]
