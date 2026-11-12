@@ -355,8 +355,9 @@ def bar_pendants():
 
 
 def mantle_bar():
-    """Test frame (00:33): Mantle in Ember on the bar, its record on and its sleeve beside it, close, the near speaker
-    soft behind; the plinth's red glow and the black hardware must read."""
+    """Test frame (14:33 notes): Mantle in Ember on the bar seen from a seat, three-quarter, the record and the arm from
+    above; a Hemisphere hung over it lights the deck and makes the Ember plinth's edges glow; an Ember Core beside it;
+    the near speaker soft behind. No declared key: the products light it."""
     s = bar_backbar()
     s['title'] = 'Planet EARF bar: Mantle on the bar'
     s['size'] = [1920, 1280]
@@ -366,14 +367,13 @@ def mantle_bar():
     sleeve = next(b for pr in life if pr.get('fn') == 'boards' for b in pr['boards'] if 'cover-05' in b['image'])
     import math
     a = math.radians(MANTLE_RZ)
-    fwd = (math.sin(a), -math.cos(a)); right = (math.cos(a), math.sin(a))     # Mantle's front, and the camera's right
-    mc = (MANTLE[0] + 0.17 * right[0], MANTLE[1] + 0.17 * right[1])           # (proof: the asset's origin sits left of its middle)
-    # (proof: the drinks filled the foreground and the sleeve fell out of frame: the drinks and the stack out, the
-    # now-playing sleeve on its stand at Mantle's left, turned to the lens)
-    # (07:22: the sleeve muted and smaller: further back at Mantle's left, a dark-ground cover)
-    sx, sy = mc[0] - 0.45 * right[0] - 0.5 * fwd[0], mc[1] - 0.45 * right[1] - 0.5 * fwd[1]
-    stand = {**stand, 'position': [sx, sy, TOP], 'rotate': [0, 0, MANTLE_RZ - 8.0]}
-    sleeve = {**sleeve, 'image': 'tex/cover-00.png', 'ground': '#1C1B1A', 'rough': 0.8, 'x': sx, 'y': sy - 0.01, 'rot': [-14.0, 0, MANTLE_RZ - 8.0]}
+    fwd = (math.sin(a), -math.cos(a)); right = (math.cos(a), math.sin(a))     # Mantle's front, and its right as one faces it
+    # Mantle's middle: the asset's origin is its front left corner, 0.46 wide and 0.42 deep
+    cen = (MANTLE[0] + 0.23 * right[0] - 0.21 * fwd[0], MANTLE[1] + 0.23 * right[1] - 0.21 * fwd[1])
+    # the now-playing sleeve on its stand behind Mantle's left, muted (07:22)
+    sx, sy = cen[0] - 0.42 * right[0] - 0.18 * fwd[0], cen[1] - 0.42 * right[1] - 0.18 * fwd[1]
+    stand = {**stand, 'position': [sx, sy, TOP], 'rotate': [0, 0, MANTLE_RZ + 10.0]}
+    sleeve = {**sleeve, 'image': 'tex/cover-00.png', 'ground': '#1C1B1A', 'rough': 0.8, 'x': sx, 'y': sy - 0.01, 'rot': [-14.0, 0, MANTLE_RZ + 10.0]}
     keep = []
     for pr in s['set']['props']:
         if pr.get('shape') in ('lathe', 'tube') or (pr.get('shape') == 'box' and pr.get('material') == 'frosted'):
@@ -382,35 +382,32 @@ def mantle_bar():
             pr = {**pr, 'boards': [b for b in pr['boards'] if not (b.get('rot', [0])[0] == -90.0 and b['w'] == 0.315)]}   # the stack
         keep.append(pr)
     s['set']['props'] = keep + [stand, {'kind': 'kit', 'shape': 'ext', 'path': LIFE, 'fn': 'boards', 'boards': [sleeve]}]
-    # (07:22: Mantle read as a black deck on grey-silver posts, "they look stainless steel": lit by the products' own
-    # light: an Ember Core close behind it to one side, its glow through the deck and the plinth's edges toward the lens;
-    # the low heads on Mantle off, the room's fills down, so nothing pale for the posts or the stone to mirror)
+    # (14:33: a Hemisphere over Mantle, its light on the deck and through the Ember plinth's edges, as the portrait's left
+    # edge; the Ember Core beside it, not behind; posts black: the low heads on Mantle off, the fills down)
     for pr in s['set']['props']:
         if pr.get('fn') == 'lamps':
-            # (proof: the asset's origin is its front left corner, 0.46 x 0.42 m: at 0.30 behind the front the Core
-            # stood inside it; behind its back right corner now)
-            # (proof 3: beside it the Core lit nothing through the clear plinth, which shows Ember only where the eye looks
-            # through it at a light: right behind it, a little right of centre, the lens at the plinth's height)
-            pr['cores'] = [{'tint': shots.KEY['ember'], 'x': round(mc[0] - 0.55 * fwd[0] + 0.16 * right[0], 3),
-                            'y': round(mc[1] - 0.55 * fwd[1] + 0.16 * right[1], 3), 'floor_z': TOP, 'rot': 0.0}]
+            pr['cores'] = [{'tint': shots.KEY['ember'], 'x': round(cen[0] + 0.42 * right[0] - 0.05 * fwd[0], 3),
+                            'y': round(cen[1] + 0.42 * right[1] - 0.05 * fwd[1], 3), 'floor_z': TOP, 'rot': 0.0}]
+            pr['hemispheres'] = [h for h in pr['hemispheres'] if h['x'] < 7.4] + [
+                {'tint': shots.KEY['ember'], 'x': round(cen[0], 3), 'y': round(cen[1], 3), 'rim_z': MANTLE_HEMI_Z}]
     for k in ('mantle-front', 'mantle-side', 'track-mantle'):
         s['lights'].pop(k, None)
     for k in ('house', 'house-left'):
         s['lights'][k] = {**s['lights'][k], 'irradiance': round(s['lights'][k]['irradiance'] * 0.25, 3)}
-    # (proof: at EV -2 the Core and the deck murky: the Core's own exposure, as core-bar-table, the room's lights a stop
-    # down to match, so only the products come up)
     s['render']['exposure'] = -1.0
     s['lights'] = {k: ({**v, 'irradiance': round(v['irradiance'] * 0.5, 4)} if 'irradiance' in v else {**v, 'strength': v['strength'] * 0.5})
                    for k, v in s['lights'].items()}
-    c = [mc[0] + 0.85 * fwd[0], mc[1] + 0.85 * fwd[1], 1.16]           # (07:22: lower: at the plinth's height, through it to the Core; proof 5: at 1.18 the band went)
-    # (proofs 3-5: lit from behind only, the deck is a silhouette: one soft broad declared light from the lens's side, high
-    # and to the left, out of frame, low enough that the satin black shows a dull sheen, nothing pale for it to mirror)
-    s['lights']['mantle-key'] = {'type': 'area', 'shape': 'DISK', 'size_m': [0.8, 0.8],
-                                 'position': [round(c[0] - 0.5 * right[0], 3), round(c[1] - 0.5 * right[1], 3), 1.9],
-                                 'target': [mc[0] - 0.2 * fwd[0], mc[1] - 0.2 * fwd[1], MANTLE[2] + 0.1], 'irradiance': 2.5, 'color': '#FFD8B0'}   # (proof 6: the deck's edge faint at 1.2)
-    s['camera'] = {'position': c, 'target': [mc[0] - 0.15 * fwd[0], mc[1] - 0.15 * fwd[1], MANTLE[2] + 0.09], 'lens_mm': 42.0, 'level': True,
-                   'fstop': 2.8, 'focus': [mc[0] - 0.2 * fwd[0], mc[1] - 0.2 * fwd[1], MANTLE[2] + 0.07]}
+    # a seat at the bar, three-quarter from Mantle's front left: the eye 1.38 m, 45 mm, Mantle about half the width
+    az = math.radians(MANTLE_CAM_AZ)
+    d = MANTLE_CAM_D
+    c = [cen[0] + d * (math.cos(az) * fwd[0] - math.sin(az) * right[0]), cen[1] + d * (math.cos(az) * fwd[1] - math.sin(az) * right[1]), 1.38]
+    s['camera'] = {'position': [round(v, 4) for v in c], 'target': [cen[0], cen[1], MANTLE[2] + 0.12], 'lens_mm': 45.0, 'level': True,
+                   'fstop': 4.0, 'focus': [cen[0], cen[1], MANTLE[2] + 0.1]}
     return s
+
+
+MANTLE_HEMI_Z = 1.62           # the Hemisphere's rim over Mantle (the deck at about 1.23)
+MANTLE_CAM_AZ, MANTLE_CAM_D = 35.0, 1.05
 
 
 SHOTS = {'bar-backbar': bar_backbar_full, 'core-bar-table': core_bar_table_full, 'bar-backbar-portrait': bar_backbar_portrait,
