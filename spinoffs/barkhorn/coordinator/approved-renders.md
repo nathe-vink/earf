@@ -947,6 +947,18 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    fronts, eight horn-backs, same shot files; the turns later); the bar portrait last (Core dimmed, no cable, Acid
    Mantle if it passes). The passed `bar-backbar` and `core-bar-table` get one re-render with every fix only after the
    owner's yes to the bar.
+   19:50 UTC, biomes lane: the cleaned Tropos is a drop-in (110 parts, 41 materials; no tint material changed) and is
+   adopted for every final not yet started, from the Acid wide preview on; Fog stays on the old asset (0f54ebee). The
+   pale objects on Ember's lava flat were moon-rock scans, swapped for dark lava rocks (c89bc570).
+   22:10 UTC, speaker lane ac342ff0a0: `bar-pendants.png` AT 2400x2400 (two bands blended, no Core cable; audit hidden 0,
+   equipment 0). Coordinator's check (full-size crops of both Cores, the band overlap, colors measured): PASSES AS THE
+   FINAL (Cores 7.4 / 0.90 / 0.71 and 20.4 / 0.83 / 0.69; Ember shade 5.2 / 0.41 / 1.0; Acid shade 52.9 / 0.23 / 0.87). It
+   waits for the owner's yes to the bar before the site.
+   Same push: `mantle-bar-acid-test.png`: Mantle in Acid under the Ember Hemisphere reads olive (deck top 32 / 0.53 /
+   0.33), the front edge black. Lane's reason accepted (red light through yellow acrylic). Last test ordered 22:14:
+   the Hemisphere over Mantle in Acid too; if the top reads lemon (hue 50-60, s 0.40, value 0.40) that frame goes to
+   full size 2400x1600 and Acid is Mantle's tint in the bar; if not, the three-quarter Ember version goes to full
+   size and Mantle stays Ember. No more Mantle tests after it. The studio refresh (16 frames) is rendering.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
