@@ -298,7 +298,7 @@ def bar_backbar_portrait():
         if pr.get('fn') == 'lamps':
             # (07:22: no product the blurred foreground shape: the Ember Core back beside Mantle, whole, base and all,
             # at the bar's back where the stack lay, about 1.5 m from the lens)
-            pr['cores'] = [{**c, 'x': 8.05, 'y': round(Y_BAR + 0.13, 3)} if c['tint'] == shots.KEY['ember'] else c for c in pr['cores']]
+            pr['cores'] = [{**c, 'x': 8.17, 'y': round(Y_BAR + 0.22, 3)} if c['tint'] == shots.KEY['ember'] else c for c in pr['cores']]   # (proof: at 8.05 a glass hid its base)
             pr['hemispheres'] = pr['hemispheres'] + [{'tint': shots.KEY['acid'], 'x': 8.4, 'y': 4.55, 'rim_z': 2.2},
                                                      {'tint': shots.KEY['ember'], 'x': 7.85, 'y': 4.45, 'rim_z': 2.3}]
         if pr.get('fn') == 'boards':                       # the stack, left out of frame
@@ -313,8 +313,8 @@ def bar_backbar_portrait():
     return s
 
 
-PEND_HEMIS = [('acid', 6.60, 0.06, 1.62), ('ember', 6.80, -0.10, 1.47), ('dust', 6.98, 0.14, 1.73), ('ember', 7.16, -0.04, 1.53),
-              ('acid', 7.34, 0.10, 1.66)]
+PEND_HEMIS = [('acid', 6.55, 0.06, 1.59), ('ember', 6.75, -0.10, 1.44), ('dust', 6.93, 0.14, 1.70), ('ember', 7.11, -0.04, 1.50),
+              ('acid', 7.29, 0.10, 1.63)]
 
 
 def bar_pendants():
@@ -335,8 +335,10 @@ def bar_pendants():
     for k in [k for k in s['lights'] if k.startswith('track-bar')]:      # (07:22: the pools faint: the bar's own heads off here)
         s['lights'].pop(k)
     s['lights']['house'] = {**s['lights']['house'], 'irradiance': round(s['lights']['house']['irradiance'] * 0.5, 3)}
-    s['camera'] = {'position': [6.95, 2.45, 1.52], 'target': [6.95, Y_BAR, 1.44], 'lens_mm': 50.0, 'level': True,
-                   'fstop': 2.8, 'focus': [6.95, Y_BAR - 0.05, 1.4]}
+    # (proof: at 50 mm from 1.75 m the far bay stood cut at the edge: from further back, 100 mm, the wall's span between
+    # the bays only, a little above so the bar top shows the pools)
+    s['camera'] = {'position': [6.92, 1.0, 2.1], 'target': [6.92, Y_BAR, 1.5], 'lens_mm': 100.0, 'level': True,
+                   'fstop': 4.0, 'focus': [6.92, Y_BAR - 0.02, 1.4]}
     return s
 
 
@@ -357,9 +359,9 @@ def mantle_bar():
     # (proof: the drinks filled the foreground and the sleeve fell out of frame: the drinks and the stack out, the
     # now-playing sleeve on its stand at Mantle's left, turned to the lens)
     # (07:22: the sleeve muted and smaller: further back at Mantle's left, a dark-ground cover)
-    sx, sy = mc[0] - 0.42 * right[0] - 0.34 * fwd[0], mc[1] - 0.42 * right[1] - 0.34 * fwd[1]
+    sx, sy = mc[0] - 0.45 * right[0] - 0.5 * fwd[0], mc[1] - 0.45 * right[1] - 0.5 * fwd[1]
     stand = {**stand, 'position': [sx, sy, TOP], 'rotate': [0, 0, MANTLE_RZ - 8.0]}
-    sleeve = {**sleeve, 'image': 'tex/cover-14.png', 'ground': '#3A3530', 'rough': 0.8, 'x': sx, 'y': sy - 0.01, 'rot': [-14.0, 0, MANTLE_RZ - 8.0]}
+    sleeve = {**sleeve, 'image': 'tex/cover-00.png', 'ground': '#1C1B1A', 'rough': 0.8, 'x': sx, 'y': sy - 0.01, 'rot': [-14.0, 0, MANTLE_RZ - 8.0]}
     keep = []
     for pr in s['set']['props']:
         if pr.get('shape') in ('lathe', 'tube') or (pr.get('shape') == 'box' and pr.get('material') == 'frosted'):
@@ -373,15 +375,22 @@ def mantle_bar():
     # the low heads on Mantle off, the room's fills down, so nothing pale for the posts or the stone to mirror)
     for pr in s['set']['props']:
         if pr.get('fn') == 'lamps':
-            pr['cores'] = [{'tint': shots.KEY['ember'], 'x': round(mc[0] - 0.30 * fwd[0] + 0.20 * right[0], 3),
-                            'y': round(mc[1] - 0.30 * fwd[1] + 0.20 * right[1], 3), 'floor_z': TOP, 'rot': 0.0}]
+            # (proof: the asset's origin is its front left corner, 0.46 x 0.42 m: at 0.30 behind the front the Core
+            # stood inside it; behind its back right corner now)
+            pr['cores'] = [{'tint': shots.KEY['ember'], 'x': round(mc[0] - 0.56 * fwd[0] + 0.17 * right[0], 3),
+                            'y': round(mc[1] - 0.56 * fwd[1] + 0.17 * right[1], 3), 'floor_z': TOP, 'rot': 0.0}]
     for k in ('mantle-front', 'mantle-side', 'track-mantle'):
         s['lights'].pop(k, None)
     for k in ('house', 'house-left'):
         s['lights'][k] = {**s['lights'][k], 'irradiance': round(s['lights'][k]['irradiance'] * 0.25, 3)}
-    c = [mc[0] + 0.85 * fwd[0], mc[1] + 0.85 * fwd[1], 1.17]           # (07:22: lower)
-    s['camera'] = {'position': c, 'target': [mc[0], mc[1], MANTLE[2] + 0.12], 'lens_mm': 42.0, 'level': True,
-                   'fstop': 2.8, 'focus': [mc[0], mc[1], MANTLE[2] + 0.07]}
+    # (proof: at EV -2 the Core and the deck murky: the Core's own exposure, as core-bar-table, the room's lights a stop
+    # down to match, so only the products come up)
+    s['render']['exposure'] = -1.0
+    s['lights'] = {k: ({**v, 'irradiance': round(v['irradiance'] * 0.5, 4)} if 'irradiance' in v else {**v, 'strength': v['strength'] * 0.5})
+                   for k, v in s['lights'].items()}
+    c = [mc[0] + 0.85 * fwd[0], mc[1] + 0.85 * fwd[1], 1.24]           # (07:22: lower; proof: at 1.17 the deck edge-on)
+    s['camera'] = {'position': c, 'target': [mc[0] - 0.15 * fwd[0], mc[1] - 0.15 * fwd[1], MANTLE[2] + 0.1], 'lens_mm': 42.0, 'level': True,
+                   'fstop': 2.8, 'focus': [mc[0] - 0.2 * fwd[0], mc[1] - 0.2 * fwd[1], MANTLE[2] + 0.07]}
     return s
 
 
