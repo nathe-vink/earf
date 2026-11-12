@@ -489,7 +489,7 @@ $SKPOLY
   9
 $TDCREATE
  40
-2461346.803576389
+2461357.6957175927
   9
 $TDUCREATE
  40
@@ -497,7 +497,7 @@ $TDUCREATE
   9
 $TDUPDATE
  40
-2461346.803576389
+2461357.6957175927
   9
 $TDUUPDATE
  40
@@ -549,7 +549,7 @@ $SPLINESEGS
   9
 $HANDSEED
   5
-45
+4E
   9
 $SURFTAB1
  70
@@ -929,11 +929,11 @@ $PSTYLEMODE
   9
 $FINGERPRINTGUID
   2
-{56B19240-44E1-4FD3-8FCB-EC406E71E11B}
+{A992720F-3C6C-477A-AC32-EA87174D4177}
   9
 $VERSIONGUID
   2
-{95CA1245-197B-4B49-A6AB-65391A6044FD}
+{DED4A3A2-16BB-4830-AB5F-FD011DC330F3}
   9
 $EXTNAMES
 290
@@ -1323,9 +1323,9 @@ ISM
   0
 CLASS
   1
-ACDBPLACEHOLDER
+LAYOUT
   2
-AcDbPlaceHolder
+AcDbLayout
   3
 ObjectDBX Classes
  90
@@ -1339,9 +1339,9 @@ ObjectDBX Classes
   0
 CLASS
   1
-LAYOUT
+ACDBPLACEHOLDER
   2
-AcDbLayout
+AcDbPlaceHolder
   3
 ObjectDBX Classes
  90
@@ -1549,7 +1549,7 @@ LAYER
 100
 AcDbSymbolTable
  70
-6
+9
   0
 LAYER
   5
@@ -1697,6 +1697,78 @@ Continuous
 347
 21
   0
+LAYER
+  5
+3D
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+POCKET_10.5MM
+ 70
+0
+ 62
+3
+  6
+Continuous
+370
+-3
+390
+13
+347
+21
+  0
+LAYER
+  5
+3F
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+POCKET_57.5MM
+ 70
+0
+ 62
+3
+  6
+Continuous
+370
+-3
+390
+13
+347
+21
+  0
+LAYER
+  5
+42
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+POCKET_73.5MM
+ 70
+0
+ 62
+3
+  6
+Continuous
+370
+-3
+390
+13
+347
+21
+  0
 ENDTAB
   0
 TABLE
@@ -1797,7 +1869,7 @@ ACAD
   0
 APPID
   5
-42
+4B
 330
 3
 100
@@ -1811,7 +1883,7 @@ HATCHBACKGROUNDCOLOR
   0
 APPID
   5
-43
+4C
 330
 3
 100
@@ -2481,7 +2553,79 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-3D
+3E
+330
+17
+100
+AcDbEntity
+  8
+POCKET_10.5MM
+100
+AcDbPolyline
+ 90
+5
+ 70
+1
+ 10
+917.5
+ 20
+286.5
+ 10
+917.5
+ 20
+15.0
+ 10
+929.5
+ 20
+15.0
+ 10
+929.5
+ 20
+286.5
+ 10
+917.5
+ 20
+286.5
+  0
+LWPOLYLINE
+  5
+40
+330
+17
+100
+AcDbEntity
+  8
+POCKET_57.5MM
+100
+AcDbPolyline
+ 90
+5
+ 70
+1
+ 10
+917.5
+ 20
+292.5
+ 10
+917.5
+ 20
+286.5
+ 10
+929.5
+ 20
+286.5
+ 10
+929.5
+ 20
+292.5
+ 10
+917.5
+ 20
+292.5
+  0
+LWPOLYLINE
+  5
+41
 330
 17
 100
@@ -2491,13 +2635,13 @@ POCKET_60MM
 100
 AcDbPolyline
  90
-5
+7
  70
 1
  10
 965.0
  20
-310.0
+292.5
  10
 965.0
  20
@@ -2511,13 +2655,57 @@ AcDbPolyline
  20
 310.0
  10
+967.5
+ 20
+310.0
+ 10
+967.5
+ 20
+292.5
+ 10
 965.0
+ 20
+292.5
+  0
+LWPOLYLINE
+  5
+43
+330
+17
+100
+AcDbEntity
+  8
+POCKET_73.5MM
+100
+AcDbPolyline
+ 90
+5
+ 70
+1
+ 10
+903.5
+ 20
+310.0
+ 10
+903.5
+ 20
+292.5
+ 10
+967.5
+ 20
+292.5
+ 10
+967.5
+ 20
+310.0
+ 10
+903.5
  20
 310.0
   0
 TEXT
   5
-3E
+44
 330
 17
 100
@@ -2547,7 +2735,7 @@ AcDbText
   0
 LWPOLYLINE
   5
-3F
+45
 330
 17
 100
@@ -2583,7 +2771,79 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-40
+46
+330
+17
+100
+AcDbEntity
+  8
+POCKET_10.5MM
+100
+AcDbPolyline
+ 90
+5
+ 70
+1
+ 10
+38.5
+ 20
+364.5
+ 10
+310.0
+ 20
+364.5
+ 10
+310.0
+ 20
+376.5
+ 10
+38.5
+ 20
+376.5
+ 10
+38.5
+ 20
+364.5
+  0
+LWPOLYLINE
+  5
+47
+330
+17
+100
+AcDbEntity
+  8
+POCKET_57.5MM
+100
+AcDbPolyline
+ 90
+5
+ 70
+1
+ 10
+32.5
+ 20
+364.5
+ 10
+38.5
+ 20
+364.5
+ 10
+38.5
+ 20
+376.5
+ 10
+32.5
+ 20
+376.5
+ 10
+32.5
+ 20
+364.5
+  0
+LWPOLYLINE
+  5
+48
 330
 17
 100
@@ -2593,33 +2853,77 @@ POCKET_60MM
 100
 AcDbPolyline
  90
+7
+ 70
+1
+ 10
+32.5
+ 20
+412.0
+ 10
+310.0
+ 20
+412.0
+ 10
+310.0
+ 20
+433.0
+ 10
+15.0
+ 20
+433.0
+ 10
+15.0
+ 20
+414.5
+ 10
+32.5
+ 20
+414.5
+ 10
+32.5
+ 20
+412.0
+  0
+LWPOLYLINE
+  5
+49
+330
+17
+100
+AcDbEntity
+  8
+POCKET_73.5MM
+100
+AcDbPolyline
+ 90
 5
  70
 1
  10
 15.0
  20
-412.0
+350.5
  10
-310.0
+32.5
  20
-412.0
+350.5
  10
-310.0
+32.5
  20
-433.0
- 10
-15.0
- 20
-433.0
+414.5
  10
 15.0
  20
-412.0
+414.5
+ 10
+15.0
+ 20
+350.5
   0
 TEXT
   5
-41
+4A
 330
 17
 100
@@ -3637,7 +3941,7 @@ CREATED_BY_EZDXF
   3
 WRITTEN_BY_EZDXF
 350
-44
+4D
   0
 DICTIONARYVAR
   5
@@ -3649,11 +3953,11 @@ DictionaryVariables
 280
 0
   1
-1.4.5 @ 2026-11-01T19:17:09.697731+00:00
+1.4.5 @ 2026-11-12T16:41:50.643351+00:00
   0
 DICTIONARYVAR
   5
-44
+4D
 330
 2D
 100
@@ -3661,7 +3965,7 @@ DictionaryVariables
 280
 0
   1
-1.4.5 @ 2026-11-01T19:17:09.699709+00:00
+1.4.5 @ 2026-11-12T16:41:50.646231+00:00
   0
 ENDSEC
   0

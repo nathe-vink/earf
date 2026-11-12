@@ -14,7 +14,7 @@
 | rib-bottom | cut | 2 | 20 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 305 x 60 | 8.69 |
 | woofer-ring | cut | 2 | 6 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 436 x 436 | 27.09 |
 | port-left, port-right | formed | 4 | Cast acrylic tube, tinted through | 318 cm3, 139 x 225 x 139 | 81.50 |
-| port-frame-left, port-frame-right | cut | 4 | 8 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 140 x 140 | 3.72 |
+| port-frame-left, port-frame-right | cut | 4 | 8 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 137 x 137 | 3.57 |
 | woofer | buy | 2 | FaitalPRO 15PR400-8 15 in woofer (treated paper cone, neodymium, 8 ohm) | 393 frame, 356 cut-out, 165 deep | 194.00 |
 | amp-plate | buy | 2 | Hypex FusionAmp FA122 DSP plate amplifier, 2 x 125 W into 4 ohm | 315 x 120 x 55 plate, 291 x 96 recess | 422.40 |
 | waveguide | formed | 2 | Cast acrylic sheet 10 mm, tinted through in the horn's own heavier dye lot per colour (about 6 to 10 times the cabinet's dye, Ember about 10; matched to a chip we approve; the lot's cost and minimum to confirm with the caster), pressure-formed over a male tool, trimmed and polished (the rate carries the blank, the forming, the trim and the polish) | 2008 cm3, 566 x 248 x 376 | 592.19 |
@@ -34,9 +34,9 @@
 | lead-woofer | buy | 2 | Round-sheathed speaker cable 2 x 1.5 mm2, 1 m |  | 2.00 |
 | cable-glands | buy | 2 | Three M12 nylon cable glands for 3 to 6.5 mm cable, black: two in the amplifier compartment's front, one under the top at the cable post, in an M12 insert for plastics (in acrylic, a thread tapped in the top) |  | 4.00 |
 | remote-kit | buy | 1.0 | Hypex Fusion Remote Kit H08U003549: an IR receiver PCBA with a bi-colour LED, a 5-pin cable 125 cm to J15 on the FA122's input board, two light pipes, a tinted perspex window and screws; in the master speaker only (Hypex: "This set must be used in master devices if the Hypex remote is to be used (remote not included)") |  | 22.00 |
-| ir-bracket | cnc-mill | 1.0 | Cast acrylic, water-clear (untinted) | 66 x 20 x 46 | 37.43 |
+| ir-bracket | cnc-mill | 1.0 | Cast acrylic, black (opaque) | 66 x 22 x 46 | 37.67 |
 | lead-ir | buy | 1.0 | Hypex the Fusion Remote Kit's own 5-pin cable, 125 cm, to J15 on the FA122's input board (counted with the kit) |  | 0.00 |
-| rating-plate | buy | 2 | Rating plate 70 x 40 x 1, black anodised aluminium, laser-marked: the model, the serial number, the ratings, the WEEE bin and the maker's address (round 35: the CE, UKCA and FCC marks only once the speaker has earned them); two M3 screws into inserts |  | 10.00 |
+| rating-plate | buy | 2 | The rating plate's lines laser-engraved 0.1 deep in the back's outer face over the compartment's black flange (the maker, the product, the model and serial number, the ratings, where it was designed, the WEEE bin), on the cabinet shop's laser at the back's last operation: about 3 minutes a back (the detail pass, 2026-11-12: no separate plate, no screws) |  | 4.00 |
 | cap-o-ring | buy | 2 | O-ring for the horn's cap, 182 x 2 mm, EPDM 70 Shore A (round 16: the twist-lock), and a tube of silicone grease |  | 4.00 |
 | post-sockets | buy | 2 | The posts' fittings (the engineering audit, 2026-11-01: make/engineering-audit.md): four M10 x 1 threaded inserts bonded with epoxy into the horn's pads (12 long), in holes drilled through a jig taken off the top's sockets; at the rear, two sockets knurled to 15 and bonded with epoxy into the top and the pad under it (15 long: a 12 bore 13 deep on a 2 floor; the cable post's floor with a 7 hole, the tie post's with a 6.5); at the front, two keyhole sockets, turned and milled bronze, 30 across and 15 deep, bonded with epoxy through the top into the front panel's top edge (the front posts stand over it): a 15 hole that the front post's foot drops into and a 9 slot 10 long toward the back with a 3 lip over a 15 x 4 undercut, so the foot's turned head (14 across, 4 thick, on an 8 neck) hooks under the lip when the horn slides 10 mm back; a PU washer under each lip stops rattles. With the tie rod in rear post 3 tightened, the horn is held at three points and cannot lift: about 150 N up at a front hook and 90 N on the tie under the stability test's push (est.), against several kN for the bonded fittings. Turned to order, a set of eight |  | 90.00 |
 | post-sleeves | buy | 2 | Polyurethane sleeves 12 x 10 x 13, Shore A 90, a pair: pressed into the rear posts' sockets, they centre the posts and stop them buzzing (the front posts' feet sit in their keyhole sockets on PU washers) |  | 8.00 |
@@ -47,9 +47,8 @@
 | land-top, land-bottom | cut | 4 | 20 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 460 x 30 | 6.55 |
 | back-seal | buy | 2 | EPDM cord 4 mm, 60 Shore A, about 2.7 m, its ends vulcanised into a loop for the lands' groove (round 36: in place of the sponge gasket), and a spare |  | 12.00 |
 | back-boss-1, back-boss-2, back-boss-3, back-boss-4 | cnc-mill | 8 | Cast acrylic, tinted through, of the cabinet's own batch (sheet or block, 6 to 70 mm), turned and milled | 46 x 83 x 46 | 18.78 |
-| back-screws | buy | 2 | M5 button heads (ISO 7380, A2 stainless, black: round 16) on black nylon washers, the back to the inserts in its land strips: 16 (M5 x 40 into HDPE, M5 x 30 into plywood); in the Cloud from round 36 22 x M5 x 30, 18 round the edge and 4 into the braces' bosses (the cord seal leaves no gasket under the back) |  | 10.00 |
-| feet | buy | 2 | Levelling feet M8, a 40 mm swivel base on a rubber pad, black, with lock nuts, a set of 4 |  | 18.00 |
-| port-screws | buy | 2 | The ports' fixings: eight black countersunk screws, four through each port's frame into the panel (thread-forming screws for plastics, EJOT PT K40 kind, 4 x 16 in the 20 mm HDPE; M4 x 16 into tapped threads in the 20 mm acrylic; wood screws 4 x 14 in the plywood; round 15: their holes stop 2 short of the panel's back), and a 1 mm closed-cell PE foam gasket under each frame |  | 5.00 |
+| back-screws | buy | 2 | M5 x 30 countersunk socket heads (ISO 10642, A2 stainless, black), no washers, the back to the inserts in its land strips and the braces' bosses: 24, 20 round the edge evenly spaced and 4 into the bosses; each in a 90 degree countersink in the back, the head 0.1 under its face, torqued to 1.5 N m (the detail pass, 2026-11-12; were button heads) |  | 14.00 |
+| feet | buy | 2 | Levelling feet M8, all black: the stem and its M8 jam nut (13 across flats, 5 thick) black oxide, a 40 mm swivel base in black, a satin black NBR pad, a set of 4 (the detail pass, 2026-11-12: no bright metal under the cabinet) |  | 22.00 |
 | top-pad | cut | 2 | 20 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 108 x 28 | 1.44 |
 | lining-bottom-1 | cut | 2 | 100 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 201 x 295 | 1.48 |
 | lining-left-2a, lining-right-2a | cut | 4 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 167 x 479 | 1.00 |
@@ -61,7 +60,7 @@
 | lining-back-c, lining-back-h | cut | 4 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 68 x 101 | 0.09 |
 | lining-back-d | cut | 2 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 239 x 273 | 0.82 |
 | lining-back-e | cut | 2 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 239 x 113 | 0.34 |
-| woofer-fixings | buy | 2 | M6 brass threaded inserts, knurled, bonded with epoxy into 8.5 holes in the acrylic panel, with M6 x 25 button heads (A2-70) tightened to 5 N m, not 15: an A2-70 M6 yields near 9 N m, and the bonded insert is the weaker part (the engineering audit, 2026-11-01: make/engineering-audit.md); a set of 8 (the 15PR400's eight holes on 375) |  | 14.00 |
+| woofer-fixings | buy | 2 | M6 brass threaded inserts, knurled, bonded with epoxy into 8.5 holes in the acrylic panel, with M6 x 25 black ultra-low-head socket screws (a 13 across head 1.8 high, A2 black, wide enough to cover the woofer's slot) tightened to 5 N m; a set of 8 (the 15PR400's eight slots on 374). The detail pass, 2026-11-12: the heads cannot be flush, since the woofer's cast flange has slots, not countersinks |  | 20.00 |
 | hf-fixings | buy | 2 | The 2 in driver's fixings: four M6 x 16 countersunk screws (A2), the driver to its adaptor ring, and four M5 x 16 socket caps with washers, the ring to the brass inserts in the horn's boss, a set |  | 6.00 |
 | cement | buy | 2 | Two-part polymerising acrylic cement for thick cast sheet (ACRIFIX 2R 0190 or Weld-On 40; round 35: not 1R 0192, a one-part cement that cures by light and will not cure through the deep tints), clear, about 0.5 kg a speaker: the corners, the braces, the ribs and the back's land strips |  | 45.00 |
 | gasket | buy | 4 | 1.5 mm closed-cell foam gasket strip, 1 m |  | 5.00 |
@@ -75,7 +74,8 @@
 | hf-capacitor | buy | 2 | 33 uF 100 V polypropylene film capacitor, in series with the driver (a first-order high-pass at about 300 Hz into 16 ohm), clipped on nylon standoffs 3 mm off the compartment's pan (the engineering audit, 2026-11-01: the L-pad is gone; the HF channel is attenuated in the FA122's DSP) |  | 12.00 |
 | mains-cord | buy | 2 | Mains cord set, NEMA 5-15P to IEC 60320 C13, 2 m, 18 AWG SJT, black, UL listed (UL 817) (the engineering audit, 2026-11-01: make/engineering-audit.md): a listed cord is part of the end product's listing |  | 9.00 |
 | loom | buy | 2 | The loom: cable-tie bases every 120, with thread-forming screws for plastics (EJOT PT K30 x 10 kind) in HDPE and on bonded M3 brass inserts with M3 screws in acrylic (round 35: nothing self-tapping into acrylic, which cracks round a formed thread), ties, a polarised 2-way connector (Molex Mini-Fit Jr or Wago 2092 kind) for each lead at the compartment, crimped insulated 6.3 mm receptacles at the woofer, silicone sleeving where the HF lead meets the post's cut ends |  | 18.00 |
-| terminals | buy | 8 | 6.3 mm insulated push-on terminal |  | 0.50 |
+| terminals | buy | 8 | 6.3 mm fully insulated push-on terminal, black nylon boot (the woofer's and the HF driver's terminals capped black) |  | 0.60 |
+| wire-sleeve | buy | 2 | Black braided PET sleeve, expandable, 6 mm (the HF and IR leads, 3 m) and 10 mm (the woofer's lead, 1 m), with black heat-shrink at each end, a speaker |  | 8.00 |
 | back-inserts | buy | 2 | M5 brass threaded inserts, knurled, a set of 22 (16 before round 36), bonded with epoxy into 8 holes 12 deep in the back's acrylic land strips and the braces' four bosses |  | 13.00 |
 | feet-inserts | buy | 2 | M8 brass threaded inserts, knurled, a set of 4, bonded with epoxy into 12.5 holes 15 deep in the acrylic bottom, for the feet |  | 5.00 |
 | mark-back | buy | 2 | Laser etching into the cast acrylic, frosted, about 0.1 deep, from a vector file: as standard (round 24) EARF 140 wide high on the back, the etch filled with the speaker's own colour (a deeper tint of it, wiped in and cured) |  | 25.00 |
@@ -83,13 +83,13 @@
 
 | | USD |
 |---|---|
-| buy | 3,129 |
+| buy | 3,152 |
 | cnc-mill | 1,243 |
-| cut | 2,692 |
+| cut | 2,691 |
 | formed | 1,979 |
 | lathe | 349 |
 | sheet metal | 171 |
-| total | 9,563 |
+| total | 9,586 |
 
 
 ## Options (each for 2, on top of the total above)
