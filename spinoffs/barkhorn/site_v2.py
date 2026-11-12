@@ -2096,6 +2096,7 @@ def rc_products(p, web):
     fact(D['lamps']['orb'], 'Light', 'A glow, not a reading light: the ball lights in its own color. The LED inside: ' + LAMP_LIGHT_TINTS)
     fact(D['lamps']['orb'], 'Base', 'Its own color, satin', after='Ball')
     fact(D['lamps']['orb'], 'Control', 'Touch the ring: tap to switch, hold to dim')
+    D['lamps']['orb']['facts'] = [r for r in D['lamps']['orb']['facts'] if r[0] != 'Dock']   # under the skirt: Power says it charges on its dock
     D['lamps']['orb']['line'] = D['lamps']['orb']['line'].replace('sitting low in a black acrylic base', 'sitting low in a satin base of its own color')
     # Mantle: satin black hardware; satin edges with a fine polished bevel (r48-mantle-design fa0c3a65)
     fact(D['tt'], 'Plinth', 'Cast acrylic in its color, about 25 mm, its edges satin with a fine polished bevel; it floats 40 mm over the base')
@@ -2103,6 +2104,8 @@ def rc_products(p, web):
     fact(D['tt'], 'Hardware', 'Satin black throughout', after='Posts')
     p.rest = p.rest[:i] + json.dumps(D, separators=(',', ':')) + p.rest[j:]
     p.rest = p.rest.replace('A ball of tinted acrylic sitting low in a black acrylic base.', 'A ball of tinted acrylic sitting low in a satin base of its own color.')
+    p.sub('Set it back on its dock, a disc of polished black acrylic, and it charges in two to three hours.',
+          'Set it back on its dock and it charges in two to three hours.')
     p.sub("`Core lit in ${c.name}, sitting low in its black acrylic base.`", "`Core lit in ${c.name}, sitting low in its satin base of the same color.`")
     p.sub("`Hemisphere lit, its ${c.name} shade glowing beneath a black hub.`", "`Hemisphere lit, its ${c.name} shade glowing beneath a satin black cap.`")
     p.sub("facts: c => [...L.facts, ['Color', c.name]],",
@@ -2293,7 +2296,7 @@ def rc_marketing(p, web):
 .hero-sub {{ margin: 0 0 20px; max-width: 30ch; font-size: clamp(17px, 1.5vw, 21px); line-height: 1.35; color: #1C1A18 }}
 .hero-cta {{ display: flex; flex-wrap: wrap; gap: 12px; margin: 0 }}
 @media (max-aspect-ratio: 1/1) {{ .hs-hero .hero-more {{ position: static; padding-top: 20px }} .hero-sub {{ max-width: none }} }}
-@media (min-aspect-ratio: 1/1) {{ .hs-hero .hero-title, .hs-hero .hero-more {{ left: 35% !important; right: 2% !important }}
+@media (min-aspect-ratio: 1/1) {{ .hs-hero .hero-title, .hs-hero .hero-more {{ left: 48% !important; right: 2% !important }}
   .hs-hero .hero-title .wrap, .hs-hero .hero-more .wrap {{ margin: 0 !important; padding-inline: 0 !important; max-width: none !important }} }}
 .fam {{ display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px }}
 .fam > :nth-child(1) {{ grid-column: 1 / 3; grid-row: 1 / 3 }} .fam > :nth-child(2) {{ grid-column: 3 / 5; grid-row: 1 }}
@@ -2412,10 +2415,10 @@ def rc_finish(web):
         for a, b in SPECTRUM:                 # the eight as the full spectrum, not a run from one to another
             u = u.replace(a, b)
         u = u.replace('sitting low in a black acrylic base', 'sitting low in a satin base of its own color')   # Core's base (fee3b161)
-        assert not re.search(r'(?i)black acrylic base|black hub|270 lux|brass', u), ('rc_finish: words the pictures make false', f)
+        assert not re.search(r'(?i)black acrylic base|black hub|270 lux|brass|polished black', u), ('rc_finish: words the pictures make false', f)
         assert not re.search(r'(?i)ember to smoke', u), ('rc_finish: Ember to Smoke', f)
         if u != t:
             open(f, 'w').write(u)
 
 
-BANNED_RC = r'seven colors|Ember to Fog|Smoke as current|still to come|on hold' if EIGHT else r'eight colors|to Smoke|Smoke as current'
+BANNED_RC = r'seven colors|Ember to Fog|Smoke as current|still to come|on hold|polished black' if EIGHT else r'eight colors|to Smoke|Smoke as current'
