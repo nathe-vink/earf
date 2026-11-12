@@ -387,9 +387,10 @@ def mantle_bar():
         if pr.get('fn') == 'lamps':
             # (proof: the asset's origin is its front left corner, 0.46 x 0.42 m: at 0.30 behind the front the Core
             # stood inside it; behind its back right corner now)
-            # (proof 2: behind the platter it showed half a dome: beside the back right corner, close to the plinth's edge)
-            pr['cores'] = [{'tint': shots.KEY['ember'], 'x': round(mc[0] - 0.45 * fwd[0] + 0.40 * right[0], 3),
-                            'y': round(mc[1] - 0.45 * fwd[1] + 0.40 * right[1], 3), 'floor_z': TOP, 'rot': 0.0}]
+            # (proof 3: beside it the Core lit nothing through the clear plinth, which shows Ember only where the eye looks
+            # through it at a light: right behind it, a little right of centre, the lens at the plinth's height)
+            pr['cores'] = [{'tint': shots.KEY['ember'], 'x': round(mc[0] - 0.55 * fwd[0] + 0.16 * right[0], 3),
+                            'y': round(mc[1] - 0.55 * fwd[1] + 0.16 * right[1], 3), 'floor_z': TOP, 'rot': 0.0}]
     for k in ('mantle-front', 'mantle-side', 'track-mantle'):
         s['lights'].pop(k, None)
     for k in ('house', 'house-left'):
@@ -399,8 +400,8 @@ def mantle_bar():
     s['render']['exposure'] = -1.0
     s['lights'] = {k: ({**v, 'irradiance': round(v['irradiance'] * 0.5, 4)} if 'irradiance' in v else {**v, 'strength': v['strength'] * 0.5})
                    for k, v in s['lights'].items()}
-    c = [mc[0] + 0.85 * fwd[0], mc[1] + 0.85 * fwd[1], 1.24]           # (07:22: lower; proof: at 1.17 the deck edge-on)
-    s['camera'] = {'position': c, 'target': [mc[0] - 0.15 * fwd[0], mc[1] - 0.15 * fwd[1], MANTLE[2] + 0.1], 'lens_mm': 42.0, 'level': True,
+    c = [mc[0] + 0.85 * fwd[0], mc[1] + 0.85 * fwd[1], 1.16]           # (07:22: lower: at the plinth's height, through it to the Core)
+    s['camera'] = {'position': c, 'target': [mc[0] - 0.15 * fwd[0], mc[1] - 0.15 * fwd[1], MANTLE[2] + 0.09], 'lens_mm': 42.0, 'level': True,
                    'fstop': 2.8, 'focus': [mc[0] - 0.2 * fwd[0], mc[1] - 0.2 * fwd[1], MANTLE[2] + 0.07]}
     return s
 
