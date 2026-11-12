@@ -109,7 +109,7 @@
     "foot@cloud-red"
    ],
    "feet-stem": [
-    "rod@cloud-red"
+    "black-steel@cloud-red"
    ],
    "front-panel": [
     "bark@cloud-red"
@@ -154,7 +154,7 @@
     "horn-formed@cloud-red"
    ],
    "ir-bracket": [
-    "bark@cloud-red"
+    "black-acrylic@cloud-red"
    ],
    "land-bottom": [
     "bark@cloud-red"
@@ -169,16 +169,16 @@
     "bark@cloud-red"
    ],
    "lead-hf": [
-    "cable@cloud-red"
+    "braid@cloud-red"
    ],
    "lead-hf-pod": [
-    "cable@cloud-red.001"
+    "braid@cloud-red.001"
    ],
    "lead-ir": [
-    "cable@cloud-red"
+    "braid@cloud-red"
    ],
    "lead-woofer": [
-    "cable@cloud-red"
+    "braid@cloud-red"
    ],
    "left": [
     "bark@cloud-red"
@@ -246,17 +246,8 @@
    "port-right": [
     "bark@cloud-red"
    ],
-   "port-screws": [
-    "screw@cloud-red"
-   ],
-   "rating-plate-plate": [
-    "amp@cloud-red"
-   ],
    "rating-plate-print": [
-    "print@cloud-red"
-   ],
-   "rating-plate-screws": [
-    "screw@cloud-red"
+    "engrave@cloud-red"
    ],
    "remote-kit-board": [
     "amp@cloud-red"
@@ -295,7 +286,7 @@
     "brass@cloud-red"
    ],
    "tie-rod-rod": [
-    "rod@cloud-red"
+    "black-steel@cloud-red"
    ],
    "top": [
     "bark@cloud-red"
@@ -428,6 +419,54 @@
     ],
     "volume Density": 236.1126
    },
+   "black-acrylic@cloud-red": {
+    "Base Color": [
+     0.0044,
+     0.0044,
+     0.0048
+    ],
+    "Roughness": 0.25,
+    "Metallic": 0.0,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
+   "black-steel@cloud-red": {
+    "Base Color": [
+     0.013,
+     0.013,
+     0.0137
+    ],
+    "Roughness": null,
+    "Metallic": 0.85,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
+   "braid@cloud-red": {
+    "Base Color": [
+     0.0056,
+     0.0056,
+     0.006
+    ],
+    "Roughness": 0.85,
+    "Metallic": 0.0,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
+   "braid@cloud-red.001": {
+    "Base Color": [
+     0.0056,
+     0.0056,
+     0.006
+    ],
+    "Roughness": 0.85,
+    "Metallic": 0.0,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
    "brass@cloud-red": {
     "Base Color": [
      0.5841,
@@ -436,30 +475,6 @@
     ],
     "Roughness": 0.3,
     "Metallic": 1.0,
-    "Transmission Weight": 0.0,
-    "IOR": 1.5,
-    "Emission Strength": 0.0
-   },
-   "cable@cloud-red": {
-    "Base Color": [
-     0.007,
-     0.007,
-     0.007
-    ],
-    "Roughness": 0.5,
-    "Metallic": 0.0,
-    "Transmission Weight": 0.0,
-    "IOR": 1.5,
-    "Emission Strength": 0.0
-   },
-   "cable@cloud-red.001": {
-    "Base Color": [
-     0.007,
-     0.007,
-     0.007
-    ],
-    "Roughness": 0.5,
-    "Metallic": 0.0,
     "Transmission Weight": 0.0,
     "IOR": 1.5,
     "Emission Strength": 0.0
@@ -598,23 +613,35 @@
    },
    "driver-terminal@cloud-red": {
     "Base Color": [
-     0.6584,
-     0.6584,
-     0.6445
+     0.006,
+     0.006,
+     0.006
     ],
-    "Roughness": 0.15,
-    "Metallic": 1.0,
+    "Roughness": 0.55,
+    "Metallic": 0.0,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
+   "engrave@cloud-red": {
+    "Base Color": [
+     0.2623,
+     0.2623,
+     0.2542
+    ],
+    "Roughness": 0.9,
+    "Metallic": 0.0,
     "Transmission Weight": 0.0,
     "IOR": 1.5,
     "Emission Strength": 0.0
    },
    "foot@cloud-red": {
     "Base Color": [
-     0.0116,
-     0.0116,
-     0.0116
+     0.008,
+     0.008,
+     0.0086
     ],
-    "Roughness": 0.6,
+    "Roughness": 0.5,
     "Metallic": 0.0,
     "Transmission Weight": 0.0,
     "IOR": 1.5,
@@ -921,7 +948,7 @@
     "foot@cloud-orange"
    ],
    "feet-stem": [
-    "rod@cloud-orange"
+    "black-steel@cloud-orange"
    ],
    "front-panel": [
     "bark@cloud-orange"
@@ -966,7 +993,7 @@
     "horn-formed@cloud-orange"
    ],
    "ir-bracket": [
-    "bark@cloud-orange"
+    "black-acrylic@cloud-orange"
    ],
    "land-bottom": [
     "bark@cloud-orange"
@@ -981,16 +1008,16 @@
     "bark@cloud-orange"
    ],
    "lead-hf": [
-    "cable@cloud-orange"
+    "braid@cloud-orange"
    ],
    "lead-hf-pod": [
-    "cable@cloud-orange.001"
+    "braid@cloud-orange.001"
    ],
    "lead-ir": [
-    "cable@cloud-orange"
+    "braid@cloud-orange"
    ],
    "lead-woofer": [
-    "cable@cloud-orange"
+    "braid@cloud-orange"
    ],
    "left": [
     "bark@cloud-orange"
@@ -1058,17 +1085,8 @@
    "port-right": [
     "bark@cloud-orange"
    ],
-   "port-screws": [
-    "screw@cloud-orange"
-   ],
-   "rating-plate-plate": [
-    "amp@cloud-orange"
-   ],
    "rating-plate-print": [
-    "print@cloud-orange"
-   ],
-   "rating-plate-screws": [
-    "screw@cloud-orange"
+    "engrave@cloud-orange"
    ],
    "remote-kit-board": [
     "amp@cloud-orange"
@@ -1107,7 +1125,7 @@
     "brass@cloud-orange"
    ],
    "tie-rod-rod": [
-    "rod@cloud-orange"
+    "black-steel@cloud-orange"
    ],
    "top": [
     "bark@cloud-orange"
@@ -1240,6 +1258,54 @@
     ],
     "volume Density": 67.6097
    },
+   "black-acrylic@cloud-orange": {
+    "Base Color": [
+     0.0044,
+     0.0044,
+     0.0048
+    ],
+    "Roughness": 0.25,
+    "Metallic": 0.0,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
+   "black-steel@cloud-orange": {
+    "Base Color": [
+     0.013,
+     0.013,
+     0.0137
+    ],
+    "Roughness": null,
+    "Metallic": 0.85,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
+   "braid@cloud-orange": {
+    "Base Color": [
+     0.0056,
+     0.0056,
+     0.006
+    ],
+    "Roughness": 0.85,
+    "Metallic": 0.0,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
+   "braid@cloud-orange.001": {
+    "Base Color": [
+     0.0056,
+     0.0056,
+     0.006
+    ],
+    "Roughness": 0.85,
+    "Metallic": 0.0,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
    "brass@cloud-orange": {
     "Base Color": [
      0.5841,
@@ -1248,30 +1314,6 @@
     ],
     "Roughness": 0.3,
     "Metallic": 1.0,
-    "Transmission Weight": 0.0,
-    "IOR": 1.5,
-    "Emission Strength": 0.0
-   },
-   "cable@cloud-orange": {
-    "Base Color": [
-     0.007,
-     0.007,
-     0.007
-    ],
-    "Roughness": 0.5,
-    "Metallic": 0.0,
-    "Transmission Weight": 0.0,
-    "IOR": 1.5,
-    "Emission Strength": 0.0
-   },
-   "cable@cloud-orange.001": {
-    "Base Color": [
-     0.007,
-     0.007,
-     0.007
-    ],
-    "Roughness": 0.5,
-    "Metallic": 0.0,
     "Transmission Weight": 0.0,
     "IOR": 1.5,
     "Emission Strength": 0.0
@@ -1410,23 +1452,35 @@
    },
    "driver-terminal@cloud-orange": {
     "Base Color": [
-     0.6584,
-     0.6584,
-     0.6445
+     0.006,
+     0.006,
+     0.006
     ],
-    "Roughness": 0.15,
-    "Metallic": 1.0,
+    "Roughness": 0.55,
+    "Metallic": 0.0,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
+   "engrave@cloud-orange": {
+    "Base Color": [
+     0.2623,
+     0.2623,
+     0.2542
+    ],
+    "Roughness": 0.9,
+    "Metallic": 0.0,
     "Transmission Weight": 0.0,
     "IOR": 1.5,
     "Emission Strength": 0.0
    },
    "foot@cloud-orange": {
     "Base Color": [
-     0.0116,
-     0.0116,
-     0.0116
+     0.008,
+     0.008,
+     0.0086
     ],
-    "Roughness": 0.6,
+    "Roughness": 0.5,
     "Metallic": 0.0,
     "Transmission Weight": 0.0,
     "IOR": 1.5,
@@ -1733,7 +1787,7 @@
     "foot@cloud-amber"
    ],
    "feet-stem": [
-    "rod@cloud-amber"
+    "black-steel@cloud-amber"
    ],
    "front-panel": [
     "bark@cloud-amber"
@@ -1778,7 +1832,7 @@
     "horn-formed@cloud-amber"
    ],
    "ir-bracket": [
-    "bark@cloud-amber"
+    "black-acrylic@cloud-amber"
    ],
    "land-bottom": [
     "bark@cloud-amber"
@@ -1793,16 +1847,16 @@
     "bark@cloud-amber"
    ],
    "lead-hf": [
-    "cable@cloud-amber"
+    "braid@cloud-amber"
    ],
    "lead-hf-pod": [
-    "cable@cloud-amber.001"
+    "braid@cloud-amber.001"
    ],
    "lead-ir": [
-    "cable@cloud-amber"
+    "braid@cloud-amber"
    ],
    "lead-woofer": [
-    "cable@cloud-amber"
+    "braid@cloud-amber"
    ],
    "left": [
     "bark@cloud-amber"
@@ -1870,17 +1924,8 @@
    "port-right": [
     "bark@cloud-amber"
    ],
-   "port-screws": [
-    "screw@cloud-amber"
-   ],
-   "rating-plate-plate": [
-    "amp@cloud-amber"
-   ],
    "rating-plate-print": [
-    "print@cloud-amber"
-   ],
-   "rating-plate-screws": [
-    "screw@cloud-amber"
+    "engrave@cloud-amber"
    ],
    "remote-kit-board": [
     "amp@cloud-amber"
@@ -1919,7 +1964,7 @@
     "brass@cloud-amber"
    ],
    "tie-rod-rod": [
-    "rod@cloud-amber"
+    "black-steel@cloud-amber"
    ],
    "top": [
     "bark@cloud-amber"
@@ -2052,6 +2097,54 @@
     ],
     "volume Density": 62.0032
    },
+   "black-acrylic@cloud-amber": {
+    "Base Color": [
+     0.0044,
+     0.0044,
+     0.0048
+    ],
+    "Roughness": 0.25,
+    "Metallic": 0.0,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
+   "black-steel@cloud-amber": {
+    "Base Color": [
+     0.013,
+     0.013,
+     0.0137
+    ],
+    "Roughness": null,
+    "Metallic": 0.85,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
+   "braid@cloud-amber": {
+    "Base Color": [
+     0.0056,
+     0.0056,
+     0.006
+    ],
+    "Roughness": 0.85,
+    "Metallic": 0.0,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
+   "braid@cloud-amber.001": {
+    "Base Color": [
+     0.0056,
+     0.0056,
+     0.006
+    ],
+    "Roughness": 0.85,
+    "Metallic": 0.0,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
    "brass@cloud-amber": {
     "Base Color": [
      0.5841,
@@ -2060,30 +2153,6 @@
     ],
     "Roughness": 0.3,
     "Metallic": 1.0,
-    "Transmission Weight": 0.0,
-    "IOR": 1.5,
-    "Emission Strength": 0.0
-   },
-   "cable@cloud-amber": {
-    "Base Color": [
-     0.007,
-     0.007,
-     0.007
-    ],
-    "Roughness": 0.5,
-    "Metallic": 0.0,
-    "Transmission Weight": 0.0,
-    "IOR": 1.5,
-    "Emission Strength": 0.0
-   },
-   "cable@cloud-amber.001": {
-    "Base Color": [
-     0.007,
-     0.007,
-     0.007
-    ],
-    "Roughness": 0.5,
-    "Metallic": 0.0,
     "Transmission Weight": 0.0,
     "IOR": 1.5,
     "Emission Strength": 0.0
@@ -2222,23 +2291,35 @@
    },
    "driver-terminal@cloud-amber": {
     "Base Color": [
-     0.6584,
-     0.6584,
-     0.6445
+     0.006,
+     0.006,
+     0.006
     ],
-    "Roughness": 0.15,
-    "Metallic": 1.0,
+    "Roughness": 0.55,
+    "Metallic": 0.0,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
+   "engrave@cloud-amber": {
+    "Base Color": [
+     0.2623,
+     0.2623,
+     0.2542
+    ],
+    "Roughness": 0.9,
+    "Metallic": 0.0,
     "Transmission Weight": 0.0,
     "IOR": 1.5,
     "Emission Strength": 0.0
    },
    "foot@cloud-amber": {
     "Base Color": [
-     0.0116,
-     0.0116,
-     0.0116
+     0.008,
+     0.008,
+     0.0086
     ],
-    "Roughness": 0.6,
+    "Roughness": 0.5,
     "Metallic": 0.0,
     "Transmission Weight": 0.0,
     "IOR": 1.5,
@@ -2545,7 +2626,7 @@
     "foot@eucalyptus-y2k-green"
    ],
    "feet-stem": [
-    "rod@eucalyptus-y2k-green"
+    "black-steel@eucalyptus-y2k-green"
    ],
    "front-panel": [
     "bark@eucalyptus-y2k-green"
@@ -2590,7 +2671,7 @@
     "horn-formed@eucalyptus-y2k-green"
    ],
    "ir-bracket": [
-    "bark@eucalyptus-y2k-green"
+    "black-acrylic@eucalyptus-y2k-green"
    ],
    "land-bottom": [
     "bark@eucalyptus-y2k-green"
@@ -2605,16 +2686,16 @@
     "bark@eucalyptus-y2k-green"
    ],
    "lead-hf": [
-    "cable@eucalyptus-y2k-green"
+    "braid@eucalyptus-y2k-green"
    ],
    "lead-hf-pod": [
-    "cable@eucalyptus-y2k-green.001"
+    "braid@eucalyptus-y2k-green.001"
    ],
    "lead-ir": [
-    "cable@eucalyptus-y2k-green"
+    "braid@eucalyptus-y2k-green"
    ],
    "lead-woofer": [
-    "cable@eucalyptus-y2k-green"
+    "braid@eucalyptus-y2k-green"
    ],
    "left": [
     "bark@eucalyptus-y2k-green"
@@ -2682,17 +2763,8 @@
    "port-right": [
     "bark@eucalyptus-y2k-green"
    ],
-   "port-screws": [
-    "screw@eucalyptus-y2k-green"
-   ],
-   "rating-plate-plate": [
-    "amp@eucalyptus-y2k-green"
-   ],
    "rating-plate-print": [
-    "print@eucalyptus-y2k-green"
-   ],
-   "rating-plate-screws": [
-    "screw@eucalyptus-y2k-green"
+    "engrave@eucalyptus-y2k-green"
    ],
    "remote-kit-board": [
     "amp@eucalyptus-y2k-green"
@@ -2731,7 +2803,7 @@
     "brass@eucalyptus-y2k-green"
    ],
    "tie-rod-rod": [
-    "rod@eucalyptus-y2k-green"
+    "black-steel@eucalyptus-y2k-green"
    ],
    "top": [
     "bark@eucalyptus-y2k-green"
@@ -2864,6 +2936,54 @@
     ],
     "volume Density": 204.3156
    },
+   "black-acrylic@eucalyptus-y2k-green": {
+    "Base Color": [
+     0.0044,
+     0.0044,
+     0.0048
+    ],
+    "Roughness": 0.25,
+    "Metallic": 0.0,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
+   "black-steel@eucalyptus-y2k-green": {
+    "Base Color": [
+     0.013,
+     0.013,
+     0.0137
+    ],
+    "Roughness": null,
+    "Metallic": 0.85,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
+   "braid@eucalyptus-y2k-green": {
+    "Base Color": [
+     0.0056,
+     0.0056,
+     0.006
+    ],
+    "Roughness": 0.85,
+    "Metallic": 0.0,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
+   "braid@eucalyptus-y2k-green.001": {
+    "Base Color": [
+     0.0056,
+     0.0056,
+     0.006
+    ],
+    "Roughness": 0.85,
+    "Metallic": 0.0,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
    "brass@eucalyptus-y2k-green": {
     "Base Color": [
      0.5841,
@@ -2872,30 +2992,6 @@
     ],
     "Roughness": 0.3,
     "Metallic": 1.0,
-    "Transmission Weight": 0.0,
-    "IOR": 1.5,
-    "Emission Strength": 0.0
-   },
-   "cable@eucalyptus-y2k-green": {
-    "Base Color": [
-     0.007,
-     0.007,
-     0.007
-    ],
-    "Roughness": 0.5,
-    "Metallic": 0.0,
-    "Transmission Weight": 0.0,
-    "IOR": 1.5,
-    "Emission Strength": 0.0
-   },
-   "cable@eucalyptus-y2k-green.001": {
-    "Base Color": [
-     0.007,
-     0.007,
-     0.007
-    ],
-    "Roughness": 0.5,
-    "Metallic": 0.0,
     "Transmission Weight": 0.0,
     "IOR": 1.5,
     "Emission Strength": 0.0
@@ -3034,23 +3130,35 @@
    },
    "driver-terminal@eucalyptus-y2k-green": {
     "Base Color": [
-     0.6584,
-     0.6584,
-     0.6445
+     0.006,
+     0.006,
+     0.006
     ],
-    "Roughness": 0.15,
-    "Metallic": 1.0,
+    "Roughness": 0.55,
+    "Metallic": 0.0,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
+   "engrave@eucalyptus-y2k-green": {
+    "Base Color": [
+     0.2623,
+     0.2623,
+     0.2542
+    ],
+    "Roughness": 0.9,
+    "Metallic": 0.0,
     "Transmission Weight": 0.0,
     "IOR": 1.5,
     "Emission Strength": 0.0
    },
    "foot@eucalyptus-y2k-green": {
     "Base Color": [
-     0.0116,
-     0.0116,
-     0.0116
+     0.008,
+     0.008,
+     0.0086
     ],
-    "Roughness": 0.6,
+    "Roughness": 0.5,
     "Metallic": 0.0,
     "Transmission Weight": 0.0,
     "IOR": 1.5,
@@ -3357,7 +3465,7 @@
     "foot@cloud-blue"
    ],
    "feet-stem": [
-    "rod@cloud-blue"
+    "black-steel@cloud-blue"
    ],
    "front-panel": [
     "bark@cloud-blue"
@@ -3402,7 +3510,7 @@
     "horn-formed@cloud-blue"
    ],
    "ir-bracket": [
-    "bark@cloud-blue"
+    "black-acrylic@cloud-blue"
    ],
    "land-bottom": [
     "bark@cloud-blue"
@@ -3417,16 +3525,16 @@
     "bark@cloud-blue"
    ],
    "lead-hf": [
-    "cable@cloud-blue"
+    "braid@cloud-blue"
    ],
    "lead-hf-pod": [
-    "cable@cloud-blue.001"
+    "braid@cloud-blue.001"
    ],
    "lead-ir": [
-    "cable@cloud-blue"
+    "braid@cloud-blue"
    ],
    "lead-woofer": [
-    "cable@cloud-blue"
+    "braid@cloud-blue"
    ],
    "left": [
     "bark@cloud-blue"
@@ -3494,17 +3602,8 @@
    "port-right": [
     "bark@cloud-blue"
    ],
-   "port-screws": [
-    "screw@cloud-blue"
-   ],
-   "rating-plate-plate": [
-    "amp@cloud-blue"
-   ],
    "rating-plate-print": [
-    "print@cloud-blue"
-   ],
-   "rating-plate-screws": [
-    "screw@cloud-blue"
+    "engrave@cloud-blue"
    ],
    "remote-kit-board": [
     "amp@cloud-blue"
@@ -3543,7 +3642,7 @@
     "brass@cloud-blue"
    ],
    "tie-rod-rod": [
-    "rod@cloud-blue"
+    "black-steel@cloud-blue"
    ],
    "top": [
     "bark@cloud-blue"
@@ -3676,6 +3775,54 @@
     ],
     "volume Density": 49.8695
    },
+   "black-acrylic@cloud-blue": {
+    "Base Color": [
+     0.0044,
+     0.0044,
+     0.0048
+    ],
+    "Roughness": 0.25,
+    "Metallic": 0.0,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
+   "black-steel@cloud-blue": {
+    "Base Color": [
+     0.013,
+     0.013,
+     0.0137
+    ],
+    "Roughness": null,
+    "Metallic": 0.85,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
+   "braid@cloud-blue": {
+    "Base Color": [
+     0.0056,
+     0.0056,
+     0.006
+    ],
+    "Roughness": 0.85,
+    "Metallic": 0.0,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
+   "braid@cloud-blue.001": {
+    "Base Color": [
+     0.0056,
+     0.0056,
+     0.006
+    ],
+    "Roughness": 0.85,
+    "Metallic": 0.0,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
    "brass@cloud-blue": {
     "Base Color": [
      0.5841,
@@ -3684,30 +3831,6 @@
     ],
     "Roughness": 0.3,
     "Metallic": 1.0,
-    "Transmission Weight": 0.0,
-    "IOR": 1.5,
-    "Emission Strength": 0.0
-   },
-   "cable@cloud-blue": {
-    "Base Color": [
-     0.007,
-     0.007,
-     0.007
-    ],
-    "Roughness": 0.5,
-    "Metallic": 0.0,
-    "Transmission Weight": 0.0,
-    "IOR": 1.5,
-    "Emission Strength": 0.0
-   },
-   "cable@cloud-blue.001": {
-    "Base Color": [
-     0.007,
-     0.007,
-     0.007
-    ],
-    "Roughness": 0.5,
-    "Metallic": 0.0,
     "Transmission Weight": 0.0,
     "IOR": 1.5,
     "Emission Strength": 0.0
@@ -3846,23 +3969,35 @@
    },
    "driver-terminal@cloud-blue": {
     "Base Color": [
-     0.6584,
-     0.6584,
-     0.6445
+     0.006,
+     0.006,
+     0.006
     ],
-    "Roughness": 0.15,
-    "Metallic": 1.0,
+    "Roughness": 0.55,
+    "Metallic": 0.0,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
+   "engrave@cloud-blue": {
+    "Base Color": [
+     0.2623,
+     0.2623,
+     0.2542
+    ],
+    "Roughness": 0.9,
+    "Metallic": 0.0,
     "Transmission Weight": 0.0,
     "IOR": 1.5,
     "Emission Strength": 0.0
    },
    "foot@cloud-blue": {
     "Base Color": [
-     0.0116,
-     0.0116,
-     0.0116
+     0.008,
+     0.008,
+     0.0086
     ],
-    "Roughness": 0.6,
+    "Roughness": 0.5,
     "Metallic": 0.0,
     "Transmission Weight": 0.0,
     "IOR": 1.5,
@@ -4169,7 +4304,7 @@
     "foot@cloud-violet"
    ],
    "feet-stem": [
-    "rod@cloud-violet"
+    "black-steel@cloud-violet"
    ],
    "front-panel": [
     "bark@cloud-violet"
@@ -4214,7 +4349,7 @@
     "horn-formed@cloud-violet"
    ],
    "ir-bracket": [
-    "bark@cloud-violet"
+    "black-acrylic@cloud-violet"
    ],
    "land-bottom": [
     "bark@cloud-violet"
@@ -4229,16 +4364,16 @@
     "bark@cloud-violet"
    ],
    "lead-hf": [
-    "cable@cloud-violet"
+    "braid@cloud-violet"
    ],
    "lead-hf-pod": [
-    "cable@cloud-violet.001"
+    "braid@cloud-violet.001"
    ],
    "lead-ir": [
-    "cable@cloud-violet"
+    "braid@cloud-violet"
    ],
    "lead-woofer": [
-    "cable@cloud-violet"
+    "braid@cloud-violet"
    ],
    "left": [
     "bark@cloud-violet"
@@ -4306,17 +4441,8 @@
    "port-right": [
     "bark@cloud-violet"
    ],
-   "port-screws": [
-    "screw@cloud-violet"
-   ],
-   "rating-plate-plate": [
-    "amp@cloud-violet"
-   ],
    "rating-plate-print": [
-    "print@cloud-violet"
-   ],
-   "rating-plate-screws": [
-    "screw@cloud-violet"
+    "engrave@cloud-violet"
    ],
    "remote-kit-board": [
     "amp@cloud-violet"
@@ -4355,7 +4481,7 @@
     "brass@cloud-violet"
    ],
    "tie-rod-rod": [
-    "rod@cloud-violet"
+    "black-steel@cloud-violet"
    ],
    "top": [
     "bark@cloud-violet"
@@ -4488,6 +4614,54 @@
     ],
     "volume Density": 84.9647
    },
+   "black-acrylic@cloud-violet": {
+    "Base Color": [
+     0.0044,
+     0.0044,
+     0.0048
+    ],
+    "Roughness": 0.25,
+    "Metallic": 0.0,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
+   "black-steel@cloud-violet": {
+    "Base Color": [
+     0.013,
+     0.013,
+     0.0137
+    ],
+    "Roughness": null,
+    "Metallic": 0.85,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
+   "braid@cloud-violet": {
+    "Base Color": [
+     0.0056,
+     0.0056,
+     0.006
+    ],
+    "Roughness": 0.85,
+    "Metallic": 0.0,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
+   "braid@cloud-violet.001": {
+    "Base Color": [
+     0.0056,
+     0.0056,
+     0.006
+    ],
+    "Roughness": 0.85,
+    "Metallic": 0.0,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
    "brass@cloud-violet": {
     "Base Color": [
      0.5841,
@@ -4496,30 +4670,6 @@
     ],
     "Roughness": 0.3,
     "Metallic": 1.0,
-    "Transmission Weight": 0.0,
-    "IOR": 1.5,
-    "Emission Strength": 0.0
-   },
-   "cable@cloud-violet": {
-    "Base Color": [
-     0.007,
-     0.007,
-     0.007
-    ],
-    "Roughness": 0.5,
-    "Metallic": 0.0,
-    "Transmission Weight": 0.0,
-    "IOR": 1.5,
-    "Emission Strength": 0.0
-   },
-   "cable@cloud-violet.001": {
-    "Base Color": [
-     0.007,
-     0.007,
-     0.007
-    ],
-    "Roughness": 0.5,
-    "Metallic": 0.0,
     "Transmission Weight": 0.0,
     "IOR": 1.5,
     "Emission Strength": 0.0
@@ -4658,23 +4808,35 @@
    },
    "driver-terminal@cloud-violet": {
     "Base Color": [
-     0.6584,
-     0.6584,
-     0.6445
+     0.006,
+     0.006,
+     0.006
     ],
-    "Roughness": 0.15,
-    "Metallic": 1.0,
+    "Roughness": 0.55,
+    "Metallic": 0.0,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
+   "engrave@cloud-violet": {
+    "Base Color": [
+     0.2623,
+     0.2623,
+     0.2542
+    ],
+    "Roughness": 0.9,
+    "Metallic": 0.0,
     "Transmission Weight": 0.0,
     "IOR": 1.5,
     "Emission Strength": 0.0
    },
    "foot@cloud-violet": {
     "Base Color": [
-     0.0116,
-     0.0116,
-     0.0116
+     0.008,
+     0.008,
+     0.0086
     ],
-    "Roughness": 0.6,
+    "Roughness": 0.5,
     "Metallic": 0.0,
     "Transmission Weight": 0.0,
     "IOR": 1.5,
@@ -4981,7 +5143,7 @@
     "foot@birch-fog-clear"
    ],
    "feet-stem": [
-    "rod@birch-fog-clear"
+    "black-steel@birch-fog-clear"
    ],
    "front-panel": [
     "bark@birch-fog-clear"
@@ -5026,7 +5188,7 @@
     "horn-formed@birch-fog-clear"
    ],
    "ir-bracket": [
-    "bark@birch-fog-clear"
+    "black-acrylic@birch-fog-clear"
    ],
    "land-bottom": [
     "bark@birch-fog-clear"
@@ -5041,16 +5203,16 @@
     "bark@birch-fog-clear"
    ],
    "lead-hf": [
-    "cable@birch-fog-clear"
+    "braid@birch-fog-clear"
    ],
    "lead-hf-pod": [
-    "cable@birch-fog-clear.001"
+    "braid@birch-fog-clear.001"
    ],
    "lead-ir": [
-    "cable@birch-fog-clear"
+    "braid@birch-fog-clear"
    ],
    "lead-woofer": [
-    "cable@birch-fog-clear"
+    "braid@birch-fog-clear"
    ],
    "left": [
     "bark@birch-fog-clear"
@@ -5118,17 +5280,8 @@
    "port-right": [
     "bark@birch-fog-clear"
    ],
-   "port-screws": [
-    "screw@birch-fog-clear"
-   ],
-   "rating-plate-plate": [
-    "amp@birch-fog-clear"
-   ],
    "rating-plate-print": [
-    "print@birch-fog-clear"
-   ],
-   "rating-plate-screws": [
-    "screw@birch-fog-clear"
+    "engrave@birch-fog-clear"
    ],
    "remote-kit-board": [
     "amp@birch-fog-clear"
@@ -5167,7 +5320,7 @@
     "brass@birch-fog-clear"
    ],
    "tie-rod-rod": [
-    "rod@birch-fog-clear"
+    "black-steel@birch-fog-clear"
    ],
    "top": [
     "bark@birch-fog-clear"
@@ -5300,6 +5453,54 @@
     ],
     "volume Density": 0.0
    },
+   "black-acrylic@birch-fog-clear": {
+    "Base Color": [
+     0.0044,
+     0.0044,
+     0.0048
+    ],
+    "Roughness": 0.25,
+    "Metallic": 0.0,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
+   "black-steel@birch-fog-clear": {
+    "Base Color": [
+     0.013,
+     0.013,
+     0.0137
+    ],
+    "Roughness": null,
+    "Metallic": 0.85,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
+   "braid@birch-fog-clear": {
+    "Base Color": [
+     0.0056,
+     0.0056,
+     0.006
+    ],
+    "Roughness": 0.85,
+    "Metallic": 0.0,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
+   "braid@birch-fog-clear.001": {
+    "Base Color": [
+     0.0056,
+     0.0056,
+     0.006
+    ],
+    "Roughness": 0.85,
+    "Metallic": 0.0,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
    "brass@birch-fog-clear": {
     "Base Color": [
      0.5841,
@@ -5308,30 +5509,6 @@
     ],
     "Roughness": 0.3,
     "Metallic": 1.0,
-    "Transmission Weight": 0.0,
-    "IOR": 1.5,
-    "Emission Strength": 0.0
-   },
-   "cable@birch-fog-clear": {
-    "Base Color": [
-     0.007,
-     0.007,
-     0.007
-    ],
-    "Roughness": 0.5,
-    "Metallic": 0.0,
-    "Transmission Weight": 0.0,
-    "IOR": 1.5,
-    "Emission Strength": 0.0
-   },
-   "cable@birch-fog-clear.001": {
-    "Base Color": [
-     0.007,
-     0.007,
-     0.007
-    ],
-    "Roughness": 0.5,
-    "Metallic": 0.0,
     "Transmission Weight": 0.0,
     "IOR": 1.5,
     "Emission Strength": 0.0
@@ -5470,23 +5647,35 @@
    },
    "driver-terminal@birch-fog-clear": {
     "Base Color": [
-     0.6584,
-     0.6584,
-     0.6445
+     0.006,
+     0.006,
+     0.006
     ],
-    "Roughness": 0.15,
-    "Metallic": 1.0,
+    "Roughness": 0.55,
+    "Metallic": 0.0,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
+   "engrave@birch-fog-clear": {
+    "Base Color": [
+     0.2623,
+     0.2623,
+     0.2542
+    ],
+    "Roughness": 0.9,
+    "Metallic": 0.0,
     "Transmission Weight": 0.0,
     "IOR": 1.5,
     "Emission Strength": 0.0
    },
    "foot@birch-fog-clear": {
     "Base Color": [
-     0.0116,
-     0.0116,
-     0.0116
+     0.008,
+     0.008,
+     0.0086
     ],
-    "Roughness": 0.6,
+    "Roughness": 0.5,
     "Metallic": 0.0,
     "Transmission Weight": 0.0,
     "IOR": 1.5,
@@ -5793,7 +5982,7 @@
     "foot@cloud-black"
    ],
    "feet-stem": [
-    "rod@cloud-black"
+    "black-steel@cloud-black"
    ],
    "front-panel": [
     "bark@cloud-black"
@@ -5838,7 +6027,7 @@
     "horn-formed@cloud-black"
    ],
    "ir-bracket": [
-    "bark@cloud-black"
+    "black-acrylic@cloud-black"
    ],
    "land-bottom": [
     "bark@cloud-black"
@@ -5853,16 +6042,16 @@
     "bark@cloud-black"
    ],
    "lead-hf": [
-    "cable@cloud-black"
+    "braid@cloud-black"
    ],
    "lead-hf-pod": [
-    "cable@cloud-black.001"
+    "braid@cloud-black.001"
    ],
    "lead-ir": [
-    "cable@cloud-black"
+    "braid@cloud-black"
    ],
    "lead-woofer": [
-    "cable@cloud-black"
+    "braid@cloud-black"
    ],
    "left": [
     "bark@cloud-black"
@@ -5930,17 +6119,8 @@
    "port-right": [
     "bark@cloud-black"
    ],
-   "port-screws": [
-    "screw@cloud-black"
-   ],
-   "rating-plate-plate": [
-    "amp@cloud-black"
-   ],
    "rating-plate-print": [
-    "print@cloud-black"
-   ],
-   "rating-plate-screws": [
-    "screw@cloud-black"
+    "engrave@cloud-black"
    ],
    "remote-kit-board": [
     "amp@cloud-black"
@@ -5979,7 +6159,7 @@
     "brass@cloud-black"
    ],
    "tie-rod-rod": [
-    "rod@cloud-black"
+    "black-steel@cloud-black"
    ],
    "top": [
     "bark@cloud-black"
@@ -6112,6 +6292,54 @@
     ],
     "volume Density": 34.701
    },
+   "black-acrylic@cloud-black": {
+    "Base Color": [
+     0.0044,
+     0.0044,
+     0.0048
+    ],
+    "Roughness": 0.25,
+    "Metallic": 0.0,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
+   "black-steel@cloud-black": {
+    "Base Color": [
+     0.013,
+     0.013,
+     0.0137
+    ],
+    "Roughness": null,
+    "Metallic": 0.85,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
+   "braid@cloud-black": {
+    "Base Color": [
+     0.0056,
+     0.0056,
+     0.006
+    ],
+    "Roughness": 0.85,
+    "Metallic": 0.0,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
+   "braid@cloud-black.001": {
+    "Base Color": [
+     0.0056,
+     0.0056,
+     0.006
+    ],
+    "Roughness": 0.85,
+    "Metallic": 0.0,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
    "brass@cloud-black": {
     "Base Color": [
      0.5841,
@@ -6120,30 +6348,6 @@
     ],
     "Roughness": 0.3,
     "Metallic": 1.0,
-    "Transmission Weight": 0.0,
-    "IOR": 1.5,
-    "Emission Strength": 0.0
-   },
-   "cable@cloud-black": {
-    "Base Color": [
-     0.007,
-     0.007,
-     0.007
-    ],
-    "Roughness": 0.5,
-    "Metallic": 0.0,
-    "Transmission Weight": 0.0,
-    "IOR": 1.5,
-    "Emission Strength": 0.0
-   },
-   "cable@cloud-black.001": {
-    "Base Color": [
-     0.007,
-     0.007,
-     0.007
-    ],
-    "Roughness": 0.5,
-    "Metallic": 0.0,
     "Transmission Weight": 0.0,
     "IOR": 1.5,
     "Emission Strength": 0.0
@@ -6282,23 +6486,35 @@
    },
    "driver-terminal@cloud-black": {
     "Base Color": [
-     0.6584,
-     0.6584,
-     0.6445
+     0.006,
+     0.006,
+     0.006
     ],
-    "Roughness": 0.15,
-    "Metallic": 1.0,
+    "Roughness": 0.55,
+    "Metallic": 0.0,
+    "Transmission Weight": 0.0,
+    "IOR": 1.5,
+    "Emission Strength": 0.0
+   },
+   "engrave@cloud-black": {
+    "Base Color": [
+     0.2623,
+     0.2623,
+     0.2542
+    ],
+    "Roughness": 0.9,
+    "Metallic": 0.0,
     "Transmission Weight": 0.0,
     "IOR": 1.5,
     "Emission Strength": 0.0
    },
    "foot@cloud-black": {
     "Base Color": [
-     0.0116,
-     0.0116,
-     0.0116
+     0.008,
+     0.008,
+     0.0086
     ],
-    "Roughness": 0.6,
+    "Roughness": 0.5,
     "Metallic": 0.0,
     "Transmission Weight": 0.0,
     "IOR": 1.5,
