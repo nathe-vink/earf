@@ -703,6 +703,12 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    Speaker lane (00:33): full size without waiting (`bar-backbar.png` 3200x1800, `core-bar-table.png` 3200x2133, new
    `bar-backbar-portrait.png` 2400x3000 framed for phones), plus two new tests in the same room (`bar-pendants.png`,
    `mantle-bar.png`); every out-of-frame source and card named in the declared list; contact edges checked in crops.
+   12 Nov 00:43 UTC, lamps lane 92ff60c304: `hemisphere-ember-off.png` (one overhead strip softbox: one long soft arc,
+   no ovals), new `hemisphere-ember-cap.png` (lamp off, daylight, the stepped satin cap, gland and cloth cord),
+   `hemisphere-ember-rim.png` replaced (lamp on, from just below the rim plane), `core-row-day.png` re-rendered with
+   the single strip. Audits 0.0 hidden lamps in frame. Coordinator's check: the three Hemisphere frames PASS, shown to
+   the owner 00:47. `core-row-day.png`: the single arc is right but the row went dark and the bases lost their color;
+   sent back for the first version's brightness without a second highlight.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
