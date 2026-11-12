@@ -959,6 +959,24 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    the Hemisphere over Mantle in Acid too; if the top reads lemon (hue 50-60, s 0.40, value 0.40) that frame goes to
    full size 2400x1600 and Acid is Mantle's tint in the bar; if not, the three-quarter Ember version goes to full
    size and Mantle stays Ember. No more Mantle tests after it. The studio refresh (16 frames) is rendering.
+   23:28 UTC, the owner: "Where are we at with things? And what was the result of the Pitt and Giblin comparison I keep
+   missing it". Answered with the comparison FIRST, from the 9 Nov research (owner-queue 16:2x: 42 claims confirmed, 9
+   corrected, 8 unverified left out): Tropos's chain about $2,300-2,700 a pair (woofers $410, B&C DE1085TN-16 about
+   $1,020, FA122 $845); his pair most likely the Superwax Mini (about 2 in 3, from price): 15 in paper woofer, 1 in
+   titanium compression driver on a cast-bronze horn, birch ply, FA123 bridged 250 W to the woofer, bass 29-31 Hz
+   (vendor, with DSP boost) against our modeled 51 Hz, 116 dB claimed, about $10,900 today against our parked $19,000.
+   Pick: the FA123 if it fits (+$158 a pair, woofer 75 -> 250 W), drivers kept, measure the first pair. Open: his model.
+   SMOKE, THE COORDINATOR'S PICK WITHDRAWN. The owner had already ruled out a forest for Smoke in October ("I just
+   don't think the forest is a good setting for smoke, it's too hazy and forests are just like that in the morning
+   without smoke, and then the fire seems forced"), leaned to black smoke ("Studio take for smoke is cooler"; "it
+   should really be black smoke"), called a canister on a salt flat "so random" and proposed burning cars on a bridge;
+   the burning street was Smoke's picture on the site on 1 Nov (he asked for it to be aligned with the other seven).
+   It cannot stand under nature only, sun and sky only (fire is a light, the street is built). Options put to the
+   owner: (a) the burning street kept as the one exception, re-rendered with today's speaker; (b) a salt flat under a
+   black plume rising from beyond the horizon, no source in sight (the coordinator's pick, one small test, the plume
+   the thing to judge); (c) Fog's hilltop under overcast (today's test; too like Fog). Smoke stays on hold.
+   Status at 23:30: Fog's portrait rendered, its wide due about 01:30 UTC (one push for the pair); the studio refresh
+   and the last Mantle test at the speaker lane; no new site batch since batch 2.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
