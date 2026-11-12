@@ -184,6 +184,16 @@ def _base(size, title):
     return s
 
 
+def _move_drink(pr, dx, dy):
+    """Move one of the two drinks (glass, contents, ice, twist: set at x < 6.5 on the bar top) by dx, dy."""
+    if pr.get('shape') == 'lathe' and abs(pr['position'][1] - (Y_BAR - 0.16)) < 0.2 and pr['position'][0] < 6.5:
+        pr['position'] = [pr['position'][0] + dx, pr['position'][1] + dy, pr['position'][2]]
+    if pr.get('shape') == 'box' and pr.get('material') == 'frosted' and pr['position'][0] < 6.5 and pr['position'][2] > 1.0:
+        pr['position'] = [pr['position'][0] + dx, pr['position'][1] + dy, pr['position'][2]]
+    if pr.get('shape') == 'tube' and pr['points'][0][0] < 6.5:
+        pr['points'] = [[q[0] + dx, q[1] + dy, q[2]] for q in pr['points']]
+
+
 DRINK_DX = 2.0                                           # the two drinks, just left of Mantle
 
 
@@ -300,14 +310,17 @@ def bar_backbar_portrait():
 def bar_pendants():
     """Test frame (00:33): the Hemispheres over the bar, close to medium, their pools on the dark stone, a Core and the
     drinks under them, the record wall soft behind."""
-    s = _base([1920, 1280], 'Planet EARF bar: the Hemispheres over the bar')
-    s['set']['props'].append(_lamps(HEMIS, [('ember', 6.75, -0.08), ('dust', 7.45, 0.02)]))
+    # (proof: from the room side at 35 mm both bays sat cut at the frame's edges: square, 61 mm, the wall's frame
+    # between the bays only; three Hemispheres, two Cores and the drinks under them)
+    s = _base([1920, 1920], 'Planet EARF bar: the Hemispheres over the bar')
+    s['set']['props'].append(_lamps(HEMIS, [('ember', 6.55, -0.08), ('dust', 7.25, 0.02)]))
     for pr in s['set']['props']:
         if pr.get('fn') == 'boards':
-            pr['boards'] = [b for b in pr['boards'] if 'newspaper' not in b['image'] and 'cover-05' not in b['image']]
+            pr['boards'] = [b for b in pr['boards'] if not any(k in b['image'] for k in ('newspaper', 'cover-05', 'matches'))]
+        _move_drink(pr, 0.75, 0.0)
     s['set']['props'] = [pr for pr in s['set']['props'] if not (pr.get('texture') == 'american_walnut_veneer' and pr.get('size') == [0.2, 0.05, 0.022])]
     s['render'].update(samples=256, adaptive=0.005)
-    s['camera'] = {'position': [6.9, 2.55, 1.5], 'target': [6.9, 4.4, 1.48], 'lens_mm': 35.0, 'level': True,
+    s['camera'] = {'position': [6.9, 2.55, 1.55], 'target': [6.92, 4.4, 1.53], 'lens_mm': 61.0, 'level': True,
                    'fstop': 2.0, 'focus': [6.9, Y_BAR, 1.6]}
     return s
 
@@ -322,13 +335,26 @@ def mantle_bar():
     life = _life()
     stand = next(pr for pr in life if pr.get('texture') == 'american_walnut_veneer' and pr.get('size') == [0.2, 0.05, 0.022])
     sleeve = next(b for pr in life if pr.get('fn') == 'boards' for b in pr['boards'] if 'cover-05' in b['image'])
-    s['set']['props'].append(stand)
-    s['set']['props'].append({'kind': 'kit', 'shape': 'ext', 'path': LIFE, 'fn': 'boards', 'boards': [sleeve]})
     import math
     a = math.radians(MANTLE_RZ)
-    c = [MANTLE[0] + 1.0 * math.sin(a), MANTLE[1] - 1.0 * math.cos(a), 1.4]
-    s['camera'] = {'position': c, 'target': [MANTLE[0], MANTLE[1], MANTLE[2] + 0.07], 'lens_mm': 50.0, 'level': True,
-                   'fstop': 2.8, 'focus': [MANTLE[0], MANTLE[1], MANTLE[2] + 0.07]}
+    fwd = (math.sin(a), -math.cos(a)); right = (math.cos(a), math.sin(a))     # Mantle's front, and the camera's right
+    mc = (MANTLE[0] + 0.17 * right[0], MANTLE[1] + 0.17 * right[1])           # (proof: the asset's origin sits left of its middle)
+    # (proof: the drinks filled the foreground and the sleeve fell out of frame: the drinks and the stack out, the
+    # now-playing sleeve on its stand at Mantle's left, turned to the lens)
+    sx, sy = mc[0] - 0.4 * right[0] - 0.08 * fwd[0], mc[1] - 0.4 * right[1] - 0.08 * fwd[1]
+    stand = {**stand, 'position': [sx, sy, TOP], 'rotate': [0, 0, MANTLE_RZ - 8.0]}
+    sleeve = {**sleeve, 'x': sx, 'y': sy - 0.01, 'rot': [-14.0, 0, MANTLE_RZ - 8.0]}
+    keep = []
+    for pr in s['set']['props']:
+        if pr.get('shape') in ('lathe', 'tube') or (pr.get('shape') == 'box' and pr.get('material') == 'frosted'):
+            continue                                               # the drinks
+        if pr.get('fn') == 'boards':
+            pr = {**pr, 'boards': [b for b in pr['boards'] if not (b.get('rot', [0])[0] == -90.0 and b['w'] == 0.315)]}   # the stack
+        keep.append(pr)
+    s['set']['props'] = keep + [stand, {'kind': 'kit', 'shape': 'ext', 'path': LIFE, 'fn': 'boards', 'boards': [sleeve]}]
+    c = [mc[0] + 1.0 * fwd[0], mc[1] + 1.0 * fwd[1], 1.34]
+    s['camera'] = {'position': c, 'target': [mc[0], mc[1], MANTLE[2] + 0.07], 'lens_mm': 50.0, 'level': True,
+                   'fstop': 2.8, 'focus': [mc[0], mc[1], MANTLE[2] + 0.07]}
     return s
 
 
