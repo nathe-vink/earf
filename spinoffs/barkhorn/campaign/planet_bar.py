@@ -412,8 +412,38 @@ MANTLE_HEMI_Z = 1.50           # the Hemisphere's rim over Mantle (the deck at a
 MANTLE_CAM_AZ, MANTLE_CAM_D = 35.0, 1.05
 
 
+HERO_MANTLE_TINT = 'ember'      # Mantle's tint in the hero: the last Mantle test decides (the coordinator, 22:17)
+HERO_CORES = [('ember', 4.62, -0.12), ('dust', 7.72, -0.16), ('acid', 9.25, -0.1)]   # clear of both bays' lines of sight
+
+
+def bar_hero():
+    """The line's hero from the bar (the owner, 23:48: "the bar pictures have been looking good"; the coordinator: one
+    small test, 1600 x 900): the room from its best seat, wide and fairly frontal; both Tropos whole in their bays, Mantle
+    on the bar between them with a record on, the Hemisphere cluster over it, Cores along the bar, the drinks, the
+    newspaper and the citrus; nothing in front of a speaker; a calm darker area in the upper left third for a headline.
+    Lit as the passed frames: the products' own lamps and the declared track heads out of frame."""
+    s = _base([1600, 900], 'Planet EARF bar: the line from the best seat')
+    s['set']['props'].append(_lamps(HEMIS, HERO_CORES))
+    # Mantle between the bays under the cluster (at 8.5 it stood on the bar before the right speaker's feet), a little
+    # turned to the seat so the record reads; the asset's origin is its front left corner, 0.46 wide, 0.42 deep
+    import math
+    rz = 10.0; a = math.radians(rz)
+    fwd = (math.sin(a), -math.cos(a)); right = (math.cos(a), math.sin(a))
+    cx, cy = 6.92, Y_BAR + 0.08
+    ox, oy = cx - 0.23 * right[0] + 0.21 * fwd[0], cy - 0.23 * right[1] + 0.21 * fwd[1]
+    s['products'] = [b for b in s['products'] if 'Mantle' not in b.get('collection', '')] + \
+        [shots._mantle(round(ox, 4), round(oy, 4), MANTLE[2], rz, tint=HERO_MANTLE_TINT)]
+    s['lights']['track-mantle'] = {**s['lights']['track-mantle'], 'position': [cx + 0.4, 3.0, R.CEIL - 0.05], 'target': [cx, cy, MANTLE[2]]}
+    # the upper left third calm and dark for the headline: no wall head there
+    s['lights'].pop('track-wall0', None)
+    # the frame: from a seat across the room, centred between the bays, the eye 1.35 m; the bar top's front edge low
+    s['camera'] = {'position': [6.9, 0.95, 1.35], 'target': [6.9, 5.7, 1.82], 'lens_mm': 30.0, 'level': True,
+                   'fstop': 5.6, 'focus': [6.9, 5.2, 1.6]}
+    return s
+
+
 SHOTS = {'bar-backbar': bar_backbar_full, 'core-bar-table': core_bar_table_full, 'bar-backbar-portrait': bar_backbar_portrait,
-         'bar-pendants': bar_pendants, 'mantle-bar': mantle_bar}
+         'bar-pendants': bar_pendants, 'mantle-bar': mantle_bar, 'bar-hero': bar_hero}
 
 if __name__ == '__main__':
     od = sys.argv[1]
