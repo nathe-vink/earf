@@ -11,16 +11,16 @@
    "preset": "$bark",
    "bevel_mm": 1.0
   },
+  "braid": {
+   "preset": "rubber",
+   "color": "#111112",
+   "roughness": 0.85,
+   "sheen": 0.35
+  },
   "brass": {
    "preset": "metal",
    "color": "#C9A660",
    "roughness": 0.3
-  },
-  "post-metal": {
-   "preset": "satin_paint",
-   "color": "#18181A",
-   "roughness": 0.5,
-   "specular": 0.3
   },
   "builtin-led": {
    "preset": "frosted",
@@ -36,11 +36,6 @@
    "glow": 680.0,
    "glow_color": "#FFCEA6"
   },
-  "cable": {
-   "preset": "rubber",
-   "color": "#141414",
-   "roughness": 0.5
-  },
   "channel": {
    "preset": "plastic",
    "color": "#111111",
@@ -55,8 +50,8 @@
   },
   "foot": {
    "preset": "plastic",
-   "color": "#1C1C1C",
-   "roughness": 0.6
+   "color": "#161617",
+   "roughness": 0.5
   },
   "horn-lot": {
    "preset": "$bark",
@@ -75,6 +70,12 @@
    "sheen": 0.5,
    "subsurface": 0.0,
    "cloud": 0.03
+  },
+  "post-metal": {
+   "preset": "satin_paint",
+   "color": "#18181A",
+   "roughness": 0.5,
+   "specular": 0.3
   },
   "reflector-film": {
    "preset": "plastic",
@@ -109,12 +110,12 @@
    "material": "bark"
   },
   {
-   "match": "base-outriggers",
-   "material": "brass"
+   "match": "lead-hf-pod",
+   "material": "braid"
   },
   {
-   "match": "strata-posts|strata-collars",
-   "material": "post-metal"
+   "match": "base-outriggers",
+   "material": "brass"
   },
   {
    "match": "builtin-floor-led|side-light-led",
@@ -123,10 +124,6 @@
   {
    "match": "builtin-brace-led",
    "material": "builtin-led-brace"
-  },
-  {
-   "match": "lead-hf-pod",
-   "material": "cable"
   },
   {
    "match": "base-uplight-channel|base-uplight-plate|builtin-floor-channel|builtin-brace-channel|side-light-channel|base-lplate-tray",
@@ -151,6 +148,10 @@
   {
    "match": "lining-top-window",
    "material": "lining"
+  },
+  {
+   "match": "strata-posts|strata-collars",
+   "material": "post-metal"
   },
   {
    "match": "floor-film",

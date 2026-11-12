@@ -1,0 +1,143 @@
+{
+ "clashes": [
+  {
+   "a": "horn-topo",
+   "b": "horn-strata",
+   "volume_mm3": 3604032.9
+  },
+  {
+   "a": "horn-topo",
+   "b": "strata-posts",
+   "volume_mm3": 4812.9
+  },
+  {
+   "a": "horn-topo",
+   "b": "strata-collars",
+   "volume_mm3": 1461.6
+  },
+  {
+   "a": "horn-topo-clear",
+   "b": "horn-strata",
+   "volume_mm3": 3000291.9
+  },
+  {
+   "a": "horn-topo-clear",
+   "b": "strata-posts",
+   "volume_mm3": 3946.9
+  },
+  {
+   "a": "horn-topo-clear",
+   "b": "strata-collars",
+   "volume_mm3": 1063.9
+  },
+  {
+   "a": "horn-topo-lines",
+   "b": "horn-strata",
+   "volume_mm3": 209267.3
+  },
+  {
+   "a": "horn-topo-lines",
+   "b": "strata-posts",
+   "volume_mm3": 845.2
+  },
+  {
+   "a": "horn-topo-lines",
+   "b": "strata-collars",
+   "volume_mm3": 391.9
+  }
+ ],
+ "sheets": [
+  {
+   "part": "lining-top-window",
+   "problem": "polyester-batting is not sold 100 mm thick (stock: 25, 50, 75)"
+  }
+ ],
+ "prints": [],
+ "bought": [
+  {
+   "part": "lead-hf-pod",
+   "problem": "'hf-pair' is not in the component library"
+  },
+  {
+   "part": "base-plinth-light",
+   "problem": "'plinth-led' is not in the component library"
+  },
+  {
+   "part": "base-plinth-supply",
+   "problem": "'plinth-supply' is not in the component library"
+  },
+  {
+   "part": "base-plinth-controller",
+   "problem": "'plinth-controller' is not in the component library"
+  },
+  {
+   "part": "base-uplight-edge",
+   "problem": "'uplight-strip' is not in the component library"
+  },
+  {
+   "part": "base-uplight-channel",
+   "problem": "'uplight-channel' is not in the component library"
+  },
+  {
+   "part": "base-uplight-panel",
+   "problem": "'uplight-panel' is not in the component library"
+  },
+  {
+   "part": "base-uplight-plate",
+   "problem": "'uplight-panel' is not in the component library"
+  },
+  {
+   "part": "builtin-floor-led",
+   "problem": "'builtin-strip' is not in the component library"
+  },
+  {
+   "part": "builtin-floor-channel",
+   "problem": "'uplight-channel' is not in the component library"
+  },
+  {
+   "part": "builtin-floor-standoffs",
+   "problem": "'builtin-standoffs' is not in the component library"
+  },
+  {
+   "part": "builtin-brace-led",
+   "problem": "'builtin-strip' is not in the component library"
+  },
+  {
+   "part": "builtin-brace-channel",
+   "problem": "'uplight-channel' is not in the component library"
+  },
+  {
+   "part": "builtin-brace-standoffs",
+   "problem": "'builtin-standoffs' is not in the component library"
+  },
+  {
+   "part": "side-light-led",
+   "problem": "'builtin-strip' is not in the component library"
+  },
+  {
+   "part": "side-light-channel",
+   "problem": "'uplight-channel' is not in the component library"
+  },
+  {
+   "part": "floor-film",
+   "problem": "'reflector-film' is not in the component library"
+  },
+  {
+   "part": "cabinet-wash",
+   "problem": "'cabinet-wash' is not in the component library"
+  },
+  {
+   "part": "base-lplate-feet",
+   "problem": "'levelling-feet' is not in the component library"
+  },
+  {
+   "part": "base-plinth-feet",
+   "problem": "'levelling-feet' is not in the component library"
+  },
+  {
+   "part": "base-outrigger-feet",
+   "problem": "'levelling-feet' is not in the component library"
+  }
+ ],
+ "ok": false
+}

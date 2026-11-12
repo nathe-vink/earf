@@ -1,0 +1,37 @@
+item,kind,qty,what,size,mass_g,usd_each,finish,supplier,price_date,source,option
+horn-topo,cnc-mill,2,"Stock cell-cast acrylic sheet, 1/2 in (12.7 mm), tinted through in a standard colour (2423 Red for Ember; 2064 or 2074 Gray for Smoke), bought by the 48 x 96 sheet with no minimum (AC Plastics, 2423 at $835.80 a sheet, 2026-10-31; research R1), CNC-cut to outlines (the rate carries the sheet and its nesting waste)",1000 x 2746 x 13,16870,1876.1,horn-lot,,,step/horn-topo.step,
+horn-strata,cnc-mill,2,"Stock cell-cast acrylic sheet, 1/2 in (12.7 mm), tinted through in a standard colour (2423 Red for Ember; 2064 or 2074 Gray for Smoke), bought by the 48 x 96 sheet with no minimum (AC Plastics, 2423 at $835.80 a sheet, 2026-10-31; research R1), CNC-cut to outlines (the rate carries the sheet and its nesting waste)",1000 x 1717 x 13,4233,1484.04,horn-lot,,,step/horn-strata.step,
+strata-posts,lathe,2,Aluminium 6061,392 x 344 x 142,197,512.7,post-metal,,,step/strata-posts.step,
+strata-collars,lathe,2,Aluminium 6061,404 x 356 x 118,51,451.08,post-metal,,,step/strata-collars.step,
+lead-hf-pod,buy,2,? hf-pair,,,,,,,,
+caldera-1,cnc-mill,2,"Stock cell-cast acrylic sheet, 1/2 in (12.7 mm), tinted through in a standard colour (2423 Red for Ember; 2064 or 2074 Gray for Smoke), bought by the 48 x 96 sheet with no minimum (AC Plastics, 2423 at $835.80 a sheet, 2026-10-31; research R1), CNC-cut to outlines (the rate carries the sheet and its nesting waste)",510 x 510 x 13,1051,134.1,bark,,,step/caldera-1.step,
+caldera-2,cnc-mill,2,"Stock cell-cast acrylic sheet, 1/2 in (12.7 mm), tinted through in a standard colour (2423 Red for Ember; 2064 or 2074 Gray for Smoke), bought by the 48 x 96 sheet with no minimum (AC Plastics, 2423 at $835.80 a sheet, 2026-10-31; research R1), CNC-cut to outlines (the rate carries the sheet and its nesting waste)",510 x 510 x 13,791,134.1,bark,,,step/caldera-2.step,
+caldera-3,cnc-mill,2,"Stock cell-cast acrylic sheet, 1/2 in (12.7 mm), tinted through in a standard colour (2423 Red for Ember; 2064 or 2074 Gray for Smoke), bought by the 48 x 96 sheet with no minimum (AC Plastics, 2423 at $835.80 a sheet, 2026-10-31; research R1), CNC-cut to outlines (the rate carries the sheet and its nesting waste)",510 x 510 x 13,513,134.1,bark,,,step/caldera-3.step,
+horn-topo-clear,cnc-mill,2,"Stock cell-cast acrylic sheet, 1/2 in (12.7 mm), tinted through in a standard colour (2423 Red for Ember; 2064 or 2074 Gray for Smoke), bought by the 48 x 96 sheet with no minimum (AC Plastics, 2423 at $835.80 a sheet, 2026-10-31; research R1), CNC-cut to outlines (the rate carries the sheet and its nesting waste)",1000 x 2746 x 13,13096,1876.1,clear-cast,,,step/horn-topo-clear.step,Topo Clear
+horn-topo-lines,cnc-mill,2,"Stock cell-cast acrylic sheet, 1/2 in (12.7 mm), tinted through in a standard colour (2423 Red for Ember; 2064 or 2074 Gray for Smoke), bought by the 48 x 96 sheet with no minimum (AC Plastics, 2423 at $835.80 a sheet, 2026-10-31; research R1), CNC-cut to outlines (the rate carries the sheet and its nesting waste)",716 x 278 x 430,3620,2725.35,horn-lot,,,step/horn-topo-lines.step,Topo Clear
+base-plinth-1,cnc-mill,2,"Stock cell-cast acrylic sheet, 1/2 in (12.7 mm), tinted through in a standard colour (2423 Red for Ember; 2064 or 2074 Gray for Smoke), bought by the 48 x 96 sheet with no minimum (AC Plastics, 2423 at $835.80 a sheet, 2026-10-31; research R1), CNC-cut to outlines (the rate carries the sheet and its nesting waste)",610 x 470 x 23,1911,230.24,bark,,,step/base-plinth-1.step,Plinth
+base-plinth-2,cnc-mill,2,"Stock cell-cast acrylic sheet, 1/2 in (12.7 mm), tinted through in a standard colour (2423 Red for Ember; 2064 or 2074 Gray for Smoke), bought by the 48 x 96 sheet with no minimum (AC Plastics, 2423 at $835.80 a sheet, 2026-10-31; research R1), CNC-cut to outlines (the rate carries the sheet and its nesting waste)",640 x 576 x 23,3394,286.04,bark,,,step/base-plinth-2.step,Plinth
+base-plinth-3,cnc-mill,2,"Stock cell-cast acrylic sheet, 1/2 in (12.7 mm), tinted through in a standard colour (2423 Red for Ember; 2064 or 2074 Gray for Smoke), bought by the 48 x 96 sheet with no minimum (AC Plastics, 2423 at $835.80 a sheet, 2026-10-31; research R1), CNC-cut to outlines (the rate carries the sheet and its nesting waste)",670 x 680 x 23,4688,345.26,bark,,,step/base-plinth-3.step,Plinth
+base-plinth-feet,buy,2,? levelling-feet,,,,,,,,Plinth
+base-plinth-light,buy,2,? plinth-led,,,,,,,,Plinth light
+base-plinth-supply,buy,2,? plinth-supply,,,,,,,,Plinth light
+base-plinth-controller,buy,2,? plinth-controller,,,,,,,,Plinth light
+base-uplight-edge,buy,2,? uplight-strip,,,,,,,,Plinth uplight
+base-uplight-channel,buy,2,? uplight-channel,,,,,,,,Plinth uplight
+"base-uplight-panel, base-uplight-plate",buy,4,? uplight-panel,,,,,,,,Plinth uplight
+builtin-floor-led,buy,2,? builtin-strip,,,,,,,,Built-in floor
+builtin-floor-channel,buy,2,? uplight-channel,,,,,,,,Built-in floor
+builtin-floor-standoffs,buy,2,? builtin-standoffs,,,,,,,,Built-in floor
+builtin-brace-led,buy,2,? builtin-strip,,,,,,,,Built-in light
+builtin-brace-channel,buy,2,? uplight-channel,,,,,,,,Built-in light
+builtin-brace-standoffs,buy,2,? builtin-standoffs,,,,,,,,Built-in light
+side-light-led,buy,2,? builtin-strip,,,,,,,,Side light
+side-light-channel,buy,2,? uplight-channel,,,,,,,,Side light
+floor-film,buy,2,? reflector-film,,,,,,,,Floor film
+lining-top-window,cut,2,"100 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content",418 x 295,260,3.08,lining,,,cut file dxf/lining-top-window.dxf,Top window
+cabinet-wash,buy,2,? cabinet-wash,,,,,,,,Cabinet wash
+base-lplate-frame,cnc-mill,2,"Stock cell-cast acrylic sheet, 1/2 in (12.7 mm), tinted through in a standard colour (2423 Red for Ember; 2064 or 2074 Gray for Smoke), bought by the 48 x 96 sheet with no minimum (AC Plastics, 2423 at $835.80 a sheet, 2026-10-31; research R1), CNC-cut to outlines (the rate carries the sheet and its nesting waste)",570 x 430 x 23,1292,201.91,bark,,,step/base-lplate-frame.step,Light plate
+base-lplate-tray,cnc-mill,2,Aluminium 6061,570 x 430 x 35,1514,260.08,channel,,,step/base-lplate-tray.step,Light plate
+base-lplate-feet,buy,2,? levelling-feet,,,,,,,,Light plate
+base-outriggers,cnc-mill,2,"Bronze bar (C93200 bearing bronze or C544), turned",650 x 660 x 30,5067,1609.4,brass,,,step/base-outriggers.step,Outriggers
+base-outrigger-feet,buy,2,? levelling-feet,,,,,,,,Outriggers
