@@ -1013,6 +1013,18 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    What the owner compared against (seen by the coordinator 23:38): Ember of 22 Oct had rivers of glowing lava; Smoke
    of 1 Nov had the crater, fire, sparks and the black column on a road; Poison of 22 Oct had a low, close camera, sun
    shafts and a lit green speaker. The 12 Nov versions lost that.
+   23:50 UTC, biomes lane 2fd95a15cc: the three new scenes are set up on the cleaned Tropos (Ember d: the 22 Oct lava
+   field, its seven lamps removed, the lava meshes the only light besides p6's sun and the sky; Smoke d: the hillside
+   with a crater 2.8 m behind and right of the speaker, the simulated plume with flame as a seen volume, glowing
+   cracks, the furrow, thrown earth, the meteor's trail from the upper left, dusk sky and a low front sun at 6, the
+   near fog, gulls and boulder removed; Poison b: the camera 0.675 of the way in at z 0.55, sun az -168 el 12, mist
+   0.025/m, the forest sky at 0.45, three fly-agaric clumps). Proxies render after the Fog wide and the Acid wide
+   preview, in the order Ember, Smoke, Poison.
+   THE BUILD SWITCH ON THE LANES' BRANCHES IS NOT DONE: the biomes lane's edit of `vercel.json` was refused by its own
+   session's permission check (a deployment setting; its brief says not to change the site). It reverted and tried
+   nothing else, rightly. The coordinator will not press the lanes on it and may not commit on their branches (the
+   standing rule: only r46-owner-notes). Put to the owner: either he allows the coordinator to add that one file change
+   on r48-biomes and r33-speaker-horn, or it is left (with one push per report the picture lanes use few builds).
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
