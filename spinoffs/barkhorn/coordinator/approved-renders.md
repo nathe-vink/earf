@@ -921,6 +921,32 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    ground. Fog's portrait rendering since 18:16 (about 20:00), then the wide (about two hours). Acid: the wide gets its
    own camera and a quarter-scale preview; rock_07.032 dropped; the splashes are ripple rings only. Smoke on hold.
    Speaker lane (status note 19:04, no message): on the Tropos detail pass, its CAD and render chain running.
+   19:45 UTC, speaker lane fd8aa47eb8: THE TROPOS DETAIL PASS (A-H), one push.
+   `renders/2026-11-12/barkhorn/detail-pass/ice-before-after.png` (front three-quarter and full back, before and
+   after, the site's own shot files) and `crop-ports.png`, `crop-horn-back.png`, `crop-feet.png` (2x).
+   - A feet: stem, M8 jam nut and swivel base black oxide, pad satin black. B back: 24 M5 countersunk socket heads,
+     black, 0.1 under the face, evenly spaced; woofer screws black ultra-low heads (13 x 1.8), not flush (the FaitalPRO
+     flange has slots). C ports: round rings Ø140 x 8 with one 1.5 x 45 polished chamfer, bonded into a round recess,
+     no screws; length and tuning unchanged. D the HF lead up the rear cable post's 7 mm bore (M12 x 1.25; stiffness
+     96 % of solid; about 11 kN at the thread root; bore fill 73 %); about 120 mm of black braid behind the driver's
+     motor stays, unseen from the back. E every lead in black braided PET sleeve, terminals booted black, tie rod
+     black; the IR board in a cup in the bottom batt's front face, 40 left of center, its lead in a groove; cup and
+     lead in the lining's color (white; black in Smoke). F the rating engraved gray in the black band under the
+     FA122's plate, every line kept. G the amp plate unchanged, the one bright bought part. H the lining unchanged.
+   - CAD rebuilt (checks ok, 0 clashes), engine files, `tropos-strata.blend` and its manifest from the same build;
+     notes `spinoffs/barkhorn/make/detail-pass.md`. The pair $9,563.29 -> $9,585.73 (+$22.44).
+   - Coordinator's check (the sheet's two halves and the three crops): PASSES (19:47). THE CLEANED ASSET IS THE TROPOS
+     ASSET FOR EVERY NEW RENDER. Shown to the owner 19:48 with two choices: ask Hypex for a plain plate; the pale
+     lining seen from the back. Biomes lane told to use it for the finals not yet started, if it is a drop-in.
+   Same push: `mantle-bar.png` test 2 (three-quarter from a seat, eye 1.38, 45 mm; an Ember Core at Mantle's left; an
+   Ember Hemisphere declared just above the frame; no mantle-key). Record, arm and deck read; Core 5 / 0.70 / 0.88;
+   posts black. The plinth's Ember does not read (top hue 44, value 0.13; front edge 0.02). One more test ordered with
+   MANTLE IN ACID, matching the speakers. The portrait's pale line was the Core dock's braided cable: the bar drops it
+   from here on (`core_cable: False`).
+   Order given 19:47: pendants at 2400x2400; the Acid Mantle test; the STUDIO REFRESH with the cleaned Tropos (eight
+   fronts, eight horn-backs, same shot files; the turns later); the bar portrait last (Core dimmed, no cable, Acid
+   Mantle if it passes). The passed `bar-backbar` and `core-bar-table` get one re-render with every fix only after the
+   owner's yes to the bar.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
