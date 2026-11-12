@@ -838,6 +838,10 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    09:36: site lane told to retry on that rhythm (a no-op push now, check after 3 minutes, again every 15, four tries,
    report the first that builds). 09:38: speaker lane told to push once per report (biomes told at 09:26). The
    coordinator's notes stay local meanwhile (three commits unpushed).
+   09:52 UTC check-in: the site's retry 1 (5a9bf05d, a build note, pushed 09:36) did not build; the biomes lane's code
+   push of 09:45:14 (6010a45c) took the build that had come back (deployment 09:45:21). Biomes and speaker lanes told
+   09:53 to HOLD ALL PUSHES until the coordinator writes "push" (work and commit locally, report by message). The
+   biomes lane already has the convex hilltop in code (595f35a9, 09:29). Speaker lane: no push since 08:03.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
