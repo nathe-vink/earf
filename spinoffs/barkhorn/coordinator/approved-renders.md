@@ -886,6 +886,25 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
      seat (eye 1.30-1.40 m, 40-50 mm), a Hemisphere over it lighting the deck and the plinth's edges, an Ember Core
      beside it, posts black; test size first.
    Order given: pendants at full size and the Mantle test alongside the Tropos detail pass; the portrait last.
+   (Clock: the bar check was sent at 14:26 and shown to the owner at 14:27 by `date -u`, not 14:33 and 14:35.)
+   14:48 UTC, biomes lane 7cc92de7f4: SMOKE, ACID AND EMBER PROXIES (800x1000) in
+   `renders/2026-11-12/barkhorn/habitats/` (`smoke-proxy.jpg`, `acid-proxy.jpg`, `ember-proxy.jpg`). Coordinator's
+   check (each frame, 2x crops, colors measured), sent to the lane 14:50 and shown to the owner 14:51 as small tests:
+   - ACID (rain on a wet shore): PASSES. Saturated hue 59 / 61 / 65 (10th percentile, median, 90th) against 58 in the
+     studio Acid; the speaker at the puddle's edge with its whole base showing. THE ACID PAIR IS RELEASED for final with
+     two fixes: the white dot on the far shore (rock_07.033) removed or dulled (it reads as a lamp); the puddle's
+     splashes, now identical X shapes, made into real splashes or ripple rings.
+   - EMBER (lava rock at dusk): NOT PASSED. The front is still value 0.10 and the cone 0.05 at the coordinator's two
+     boxes (the lane reports 0.21 elsewhere); the passive board does not do it. New light ordered: the low sun in front
+     (behind the camera's left shoulder, about 35 degrees off axis, 4-6 degrees high), the pink dusk sky behind kept
+     (the sky opposite a sunset); the board dropped; targets front 0.28, cone 0.12, hue 4-8, nothing clipped; the white
+     streak on the rock to take the sky's color. One proxy. The lane confirms the base glow is sun through the acrylic
+     (an LED-off test was identical); emitters sun 8.0 and dusk sky 0.13 only.
+   - SMOKE (overcast, Fog's crest): the crest is right, scatter clean, sky only. HELD: it is Fog's hilltop with Fog's
+     rock, and on the site each color is its own place. The owner asked 14:52; the coordinator's pick is a burnt forest
+     with smoke hanging between the trunks (nature only, sun and sky only).
+   - Queue: Fog pair when the root-ray test passes (running on a fresh scene, both cameras), the Acid pair, Dust's
+     final, the Ember proxy where it costs no idle time.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
