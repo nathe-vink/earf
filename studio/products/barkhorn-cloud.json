@@ -33,12 +33,6 @@
    "preset": "$bark",
    "bevel_mm": 1.0
   },
-  "black-acrylic": {
-   "preset": "satin_paint",
-   "color": "#0E0E0F",
-   "roughness": 0.25,
-   "specular": 0.5
-  },
   "black-steel": {
    "preset": "black_oxide",
    "color": "#1E1E1F",
@@ -241,15 +235,11 @@
    "material": "bark"
   },
   {
-   "match": "ir-bracket",
-   "material": "black-acrylic"
-  },
-  {
    "match": "tie-rod-rod|feet-stem",
    "material": "black-steel"
   },
   {
-   "match": "lead-hf|lead-woofer|lead-ir",
+   "match": "lead-hf|lead-woofer",
    "material": "braid"
   },
   {
@@ -345,7 +335,7 @@
    "material": "led-red"
   },
   {
-   "match": "lining-bottom-1-web|lining-left-2a-web|lining-left-2b-web|lining-right-2a-web|lining-right-2b-web|lining-left-3-web|lining-right-3-web|lining-top-3-web|lining-back-a-web|lining-back-b-web|lining-back-c-web|lining-back-d-web|lining-back-e-web|lining-back-f-web|lining-back-g-web|lining-back-h-web",
+   "match": "ir-bracket|lead-ir|lining-bottom-1-web|lining-left-2a-web|lining-left-2b-web|lining-right-2a-web|lining-right-2b-web|lining-left-3-web|lining-right-3-web|lining-top-3-web|lining-back-a-web|lining-back-b-web|lining-back-c-web|lining-back-d-web|lining-back-e-web|lining-back-f-web|lining-back-g-web|lining-back-h-web",
    "material": "lining"
   },
   {

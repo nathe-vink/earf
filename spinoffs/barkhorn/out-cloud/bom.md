@@ -34,7 +34,7 @@
 | lead-woofer | buy | 2 | Round-sheathed speaker cable 2 x 1.5 mm2, 1 m |  | 2.00 |
 | cable-glands | buy | 2 | Three M12 nylon cable glands for 3 to 6.5 mm cable, black: two in the amplifier compartment's front, one under the top at the cable post, in an M12 insert for plastics (in acrylic, a thread tapped in the top) |  | 4.00 |
 | remote-kit | buy | 1.0 | Hypex Fusion Remote Kit H08U003549: an IR receiver PCBA with a bi-colour LED, a 5-pin cable 125 cm to J15 on the FA122's input board, two light pipes, a tinted perspex window and screws; in the master speaker only (Hypex: "This set must be used in master devices if the Hypex remote is to be used (remote not included)") |  | 22.00 |
-| ir-bracket | cnc-mill | 1.0 | Cast acrylic, black (opaque) | 66 x 22 x 46 | 37.67 |
+| ir-bracket | cnc-mill | 1.0 | Cast acrylic, opaque, in the lining's colour (opal white; black in Smoke) | 66 x 22 x 46 | 37.67 |
 | lead-ir | buy | 1.0 | Hypex the Fusion Remote Kit's own 5-pin cable, 125 cm, to J15 on the FA122's input board (counted with the kit) |  | 0.00 |
 | rating-plate | buy | 2 | The rating plate's lines laser-engraved 0.1 deep in the back's outer face over the compartment's black flange (the maker, the product, the model and serial number, the ratings, where it was designed, the WEEE bin), on the cabinet shop's laser at the back's last operation: about 3 minutes a back (the detail pass, 2026-11-12: no separate plate, no screws) |  | 4.00 |
 | cap-o-ring | buy | 2 | O-ring for the horn's cap, 182 x 2 mm, EPDM 70 Shore A (round 16: the twist-lock), and a tube of silicone grease |  | 4.00 |
