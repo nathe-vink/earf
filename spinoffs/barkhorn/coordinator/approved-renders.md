@@ -682,6 +682,17 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    hardware, satin edge with a fine polished bevel, no light, no brass in the text. One push, then ONE share link.
    Not in this batch: core-row-day (re-rendering), Hemisphere off/cap/rim (re-rendering), the under views' center if
    the owner wants it white, Fog and Poison habitats, the bar, the hero.
+   12 Nov 00:22 UTC, site lane: batch 1 is on the preview, deployment dpl_8r8WLBwfsL7LiNECYXF47MLnNebk (READY),
+   earf-1rgltz143-nathanielvink-4975s-projects.vercel.app (r49-site-rc a422d911; sources r47-site-next 6b2b4724, not
+   pushed). Home hero is the Ice habitat (wide on desktop, portrait on phones); family and picker crops rebuilt from the
+   new Core and Hemisphere direct; Mantle's new eight with "Hardware: Satin black throughout" and the bevel; Core's
+   "Its own color, satin"; Hemisphere pages with Lit, From below, In a group, All eight, the new lumen figures and
+   "about 350 lux"; the build asserts no page says black acrylic base, black hub, 270 lux or brass. Lighthouse
+   99/99/99. Share link made by the coordinator 00:23 (expires 12 Nov 23:22 UTC) and sent to the owner in chat only.
+   Coordinator's check (home, lighting, Mantle, Ice color page, Tropos at 1440): pictures load, layout sound. Two small
+   things for the next push: the hero's headline and line overlap the left trees' branches (move the block right, over
+   clear sky); the lighting page still says the dock is "a disc of polished black acrylic" (the dock is hidden under
+   the skirt now, and no gloss black).
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
