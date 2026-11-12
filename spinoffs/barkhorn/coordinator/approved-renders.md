@@ -693,6 +693,16 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    things for the next push: the hero's headline and line overlap the left trees' branches (move the block right, over
    clear sky); the lighting page still says the dock is "a disc of polished black acrylic" (the dock is hidden under
    the skirt now, and no gloss black).
+   12 Nov 00:27 UTC, speaker lane 5f0974df0: PLANET EARF BAR, round 4 (same two names). The near horn reads (a graduated
+   warm card over its bay, out of frame, seen only in reflections; a clear tinted horn in a dark niche shows only what
+   it mirrors); the far speaker's pool back (2.2x the wall); Mantle's Ember plinth lit through from a narrow low head
+   past the right edge, so it glows red under the deck; a declared warm fill at the left; the matchbook out of the
+   Core close-up; the house fill a 1.6 m disc, so the ball's highlight is round and soft (Core 5.0/0.67/0.91 against
+   5.0/0.64/0.91). Audit hidden 0, equipment 0. Coordinator's check: BOTH PASS. Shown to the owner 00:33 as the
+   candidates; the owner has not yet said yes to the bar direction beyond "It's getting there".
+   Speaker lane (00:33): full size without waiting (`bar-backbar.png` 3200x1800, `core-bar-table.png` 3200x2133, new
+   `bar-backbar-portrait.png` 2400x3000 framed for phones), plus two new tests in the same room (`bar-pendants.png`,
+   `mantle-bar.png`); every out-of-frame source and card named in the declared list; contact edges checked in crops.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
