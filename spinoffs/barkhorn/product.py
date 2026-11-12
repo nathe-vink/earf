@@ -386,8 +386,10 @@ def lining(P, plen, ribs):
             if P.get('remote') and ir.get('hidden'):      # the detail pass: the IR receiver's cup sits in a pocket in its front
                 pwk, phk, pdk = ir['hidden']['pocket']; xk, zk = W / 2 + ir['x'], ir['z']
                 under_top.append((xk - pwk / 2, xk + pwk / 2, zk - phk / 2, zk + phk / 2, y0 - 1.0, y0 + pdk))
-                # and a 10 x 10 groove in its underside for the receiver's lead, from the pocket to the batt's back end
-                under_top.append((xk - 17.0, xk - 7.0, T - 1.0, T + 10.0, y0 + pdk - 1.0, ytb + 1.0))
+                # and a 12 x 12 groove in its underside for the receiver's lead, from the pocket to the batt's back end
+                under_top.append((xk - 18.0, xk - 6.0, T - 1.0, T + 11.0, y0 + pdk - 1.0, ytb + 1.0))
+                # and a 12 x 24 channel down its front face, from just above the cup's middle below the pocket, where the lead drops from the cup to the groove
+                under_top.append((xk - 18.0, xk - 6.0, T - 1.0, zk + 6.0, y0 - 1.0, y0 + pdk + 6.0))
         cut = [grown(r) for _, r in ribs]
         stops = [x0, x1, xi0, xi1]
         for px in ports:
@@ -1749,7 +1751,8 @@ def ir_receiver(P, gland_tip):
         # between the bottom batt's end and the back's batts, up that 10 mm gap in front of the back's lower batt (it
         # hides the lead from behind), and forward to the third gland at the compartment's front
         zb = T + 4.0; yg = 344.5; zbox = P['amp_z'] - P['amp_box']['inside'][2] / 2 - P['amp_box']['t'] - P['amp_box']['flange']
-        path = [(x - 12.0, yc, z), (x - 12.0, yc + 8.0, z - 8.0), (x - 12.0, yc + 18.0, zb), (x - 12.0, yg - 8.0, zb),
+        path = [(x - 12.0, yc, z), (x - 12.0, yc + 3.0, z), (x - 12.0, yc + 3.0, zb + 3.0), (x - 12.0, yc + 6.0, zb),
+                (x - 12.0, yg - 8.0, zb),
                 (x - 12.0, yg, zb + 8.0), (x - 12.0, yg, zbox - 16.0), (gland_tip[0], 285.0, zbox - 8.0),
                 (gland_tip[0], 285.0, gland_tip[2] - 20.0), (gland_tip[0], gland_tip[1] - 6.0, gland_tip[2] - 4.0), gland_tip]
     else:
