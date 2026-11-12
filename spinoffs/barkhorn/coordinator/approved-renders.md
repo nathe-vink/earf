@@ -780,6 +780,21 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    front is nearly black (value 0.10, woofer 0.05). Fix sent: lift the front to about 0.25-0.35 with a passive
    reflector or a small turn, nothing that emits; list the emitters and explain the red glow in the cabinet's base.
    One new proxy each; no finals until the coordinator says so.
+   (Clock: the 08:58 and 09:00 stamps above ran about 4 minutes fast; `date -u` read 08:51 before them and 08:59 after.)
+   12 Nov 08:59 UTC: TROPOS DETAIL PASS ordered from the speaker lane as its next job after the bar batch (the lane's
+   list of 11 Nov, checked by the coordinator against front-ice, the full back and the plate close-up; all finish and
+   detail under THE BAR, no signed shape or size):
+   A feet stems, nuts and pads black; B back-panel screws flush countersunk black, woofer screws black and flush; C the
+   ports' square bolted flange becomes a round bonded ring without screws (or stays with flush black screws if service
+   or tuning needs it); D (found by the coordinator) the horn driver's cable hangs loose behind the horn: inside a
+   hollow rear post, or one black cloth-braided cable fixed to a post; E the remote-kit board and wiring out of sight,
+   black sleeve, woofer terminals capped; F the rating text laser-engraved in the amp's black frame, no separate
+   printed plate; G the Hypex plate unchanged and not covered (it sheds heat), listed as the bright bought part; H the
+   lining unchanged.
+   The lane delivers CAD notes, parts list, engine file, asset and manifest agreeing, and ONE Ice before/after (front
+   three-quarter and full back, with 2x crops). No re-render of any set until the coordinator says so. The owner gets
+   that one picture with the two real choices (ask Hypex for a plain plate; the lining's look from the back). Pictures
+   already final (Ice, Poison, the bar's two passing frames) are not re-rendered for these details unless the owner asks.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
