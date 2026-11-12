@@ -40,7 +40,8 @@ class Page:
         said = re.findall(r'\b(?:alt|title|content|aria-label)="([^"]*)"', page)    # words in attributes a visitor meets
         text = re.sub(r'<[^>]+>', ' ', page) + ' '.join(said)
         bad = re.findall(r"(?i)colour|enquir|stockist|microfibre|something in the air|eight things in the air|oldest amplifier"
-                         r"|amplifier(?:&rsquo;|\u2019|')s job|pool of its own light|light pools|light under it|on a light|on lights|lit from below|satin", text)
+                         r"|amplifier(?:&rsquo;|\u2019|')s job|pool of its own light|light pools|light under it|on a light|on lights|lit from below"
+                         r"|horn[^.]{0,60}satin|satin[^.]{0,60}horn", text)     # the horn is polished, not satin; satin elsewhere is settled (2026-11-12)
         assert not bad, ('site_v2: retired words', sorted(set(b.lower() for b in bad)))
         extra = re.findall('(?i)' + self.banned, text) if getattr(self, 'banned', None) else []
         assert not extra, ('site_v2: retired in the candidate', sorted(set(x.lower() for x in extra)))
@@ -1232,7 +1233,7 @@ def rc_waves(p, web):
     lines = {k: line for k, num, name, icon, acr, line, *_ in web.CLOUDS}
     ON_HOLD = 'Hemisphere and Core, switched off. Shown in Smoke, a color on hold.'
     # --- the passed habitats (biomes: Ice 0f619953, Dust 26493989), 4:5
-    HAB = {'blue': 'renders/2026-11-03/barkhorn/habitats/ice-portrait-1200x1500-blackrods.jpg',     # the black-rods re-renders
+    HAB = {'blue': 'renders/2026-11-11/barkhorn/habitats/ice-final-portrait-2400x3000.jpg',       # the final Ice (r48-biomes e2ea7e2f)
            'ice': 'renders/2026-11-03/barkhorn/habitats/fog_b-portrait-1200x1500-r2-blackrods.jpg'}   # (r48-biomes 2904138e)
     # out (the audits, 2026-11-09/10): Dust 26493989 (a hidden panel), then 43c91242 (it hovers: a lit strip under its
     # front edge); Fog b61474c0 (two suns), then aa1ca856 (a hidden fill lamp)
@@ -1240,6 +1241,8 @@ def rc_waves(p, web):
                'ice': 'Tropos in Fog, standing in the grass on a foggy hillside at dawn'}
     for k, src in HAB.items():
         im = Image.open(os.path.join(web.ROOT, src)).convert('RGB')
+        if im.width > 1200:
+            im = im.resize((1200, round(im.height * 1200 / im.width)), Image.LANCZOS)
         im.save(os.path.join(web.SITE, f'img/rc/{k}-habitat.webp'), 'WEBP', quality=82)
         im.resize((168, 210)).save(os.path.join(web.SITE, f'img/rc/{k}-habitat-th.webp'), 'WEBP', quality=80)
     # --- the hero: the seven, each its own picture, in a row (desk) or a swipeable row (phone)
@@ -1899,11 +1902,13 @@ def rc_intro(p, web):
 
 
 HOTSPOTS = True    # the hero's point (Tropos in Ice, to its page); off: the picture alone
-HERO_SRC = 'renders/2026-11-03/barkhorn/habitats/ice-portrait-1200x1500-blackrods.jpg'   # Ice out in the snow at dusk
+HERO_SRC = 'renders/2026-11-11/barkhorn/habitats/ice-final-wide-3200x2000.jpg'       # Ice out in the snow at dusk, the finals:
+HERO_SRC_TALL = 'renders/2026-11-11/barkhorn/habitats/ice-final-portrait-2400x3000.jpg'   # wide on a wide screen, portrait on a phone
 HERO_ALT = 'Tropos in Ice, out in the snow at dusk'
-HERO_WIDE = (8 / 5, 0.5, 0.616)    # the desktop crop: aspect, object-position x and y (the speaker whole, its horn to its foot)
+HERO_WIDE = (8 / 5, 0.5, 0.5)      # the desktop: the whole 8:5 picture
 HERO_TALL = (4 / 5, 0.5, 0.5)      # the phone: the whole 4:5 picture
-HERO_POINTS = [(63.8, 59.9, 'Tropos in Ice', '#speaker-ice')]   # x, y in percent of the picture: the woofer's cap
+HERO_POINTS = [(73.6, 73.7, 'Tropos in Ice', '#speaker-ice')]   # x, y in percent of the wide picture: the woofer's cap
+HERO_POINTS_TALL = [(63.3, 61.1)]                                # the same, in the portrait
 
 
 def cover_point(x, y, size, crop):
@@ -1919,25 +1924,28 @@ def cover_point(x, y, size, crop):
     return round((X - left) / vw * 100, 2), round(Y / h * 100, 2)
 
 
-def hotspot_hero(img, size, alt, points, wide, tall, srcset=None, attrs=''):
+def hotspot_hero(img, size, alt, points, wide, tall, srcset=None, attrs='', tall_set=None, tall_size=None, tall_points=None):
     """A picture with points on it: (x, y in percent of the picture, label, link) each. The box takes the wide crop's aspect,
     or the tall one's in a portrait window, so every point's place is fixed in CSS: nothing moves when the picture or a
     label arrives. Each point is a link with its label as its name (keyboard and screen readers get it as is); the label
     shows on hover, on keyboard focus and, on a touch screen, on the first tap (the second follows the link)."""
     pts = []
     for (x, y, label, href) in points:
-        wx, wy = cover_point(x, y, size, wide); tx, ty = cover_point(x, y, size, tall)
+        wx, wy = cover_point(x, y, size, wide)
+        tx, ty = cover_point(*tall_points[len(pts)], tall_size, tall) if tall_points else cover_point(x, y, size, tall)
         side = ' hs-left' if wx > 62 else ''
         pts.append(f'<a class="hs-pt{side}" href="{href}" style="--x:{wx}%;--y:{wy}%;--tx:{tx}%;--ty:{ty}%">'
                    f'<span class="hs-dot" aria-hidden="true"></span><span class="hs-label">{label}</span></a>')
     ss = f' data-srcset="{srcset}" sizes="100vw"' if srcset else ''
-    return (f'<div class="hero-photo hs"{attrs}><img data-src="{img}"{ss} fetchpriority="high" width="{size[0]}" height="{size[1]}" '
-            f'alt="{alt}">' + ''.join(pts) + '</div>')
+    im = f'<img data-src="{img}"{ss} fetchpriority="high" width="{size[0]}" height="{size[1]}" alt="{alt}">'
+    if tall_set:            # art direction: the portrait on a tall screen
+        im = f'<picture><source media="(max-aspect-ratio: 1/1)" data-srcset="{tall_set}" sizes="100vw">{im}</picture>'
+    return f'<div class="hero-photo hs"{attrs}>' + im + ''.join(pts) + '</div>'
 
 
 HOTSPOT_CSS = """
 .hs { position: relative; width: 100%; aspect-ratio: var(--hs-a); overflow: hidden; background: #C9CDD6 }
-.hs > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: var(--hs-p) }
+.hs img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: var(--hs-p) }
 .hs-pt { position: absolute; left: var(--x); top: var(--y); width: 44px; height: 44px; margin: -22px 0 0 -22px; z-index: 2;
   display: grid; place-items: center; color: #1C1A18; text-decoration: none; -webkit-tap-highlight-color: transparent }
 .hs-dot { width: 18px; height: 18px; border-radius: 50%; background: #FFF; box-shadow: 0 0 0 5px rgb(255 255 255 / .35), 0 1px 6px rgb(0 0 0 / .35);
@@ -1969,18 +1977,23 @@ def rc_home(p, web):
     four products below, a line and a link each. No figures on home (Tropos's page keeps them) and no row of fronts."""
     import os
     from PIL import Image
-    src = Image.open(os.path.join(web.ROOT, HERO_SRC)).convert('RGB')
-    size = src.size
-    out = {}
-    for w in (1200, 800):
-        n = f'img/rc/home-ice-{w}.webp'
-        (src if w == size[0] else src.resize((w, round(size[1] * w / size[0])), Image.LANCZOS)).save(
-            os.path.join(web.SITE, n), quality=80, method=6)
-        out[w] = n
-    srcset = f'{out[800]} 800w, {out[1200]} 1200w'
+    def sizes(path, name, widths):
+        src = Image.open(os.path.join(web.ROOT, path)).convert('RGB')
+        out = {}
+        for w in widths:
+            n = f'img/rc/{name}-{w}.webp'
+            src.resize((w, round(src.height * w / src.width)), Image.LANCZOS).save(os.path.join(web.SITE, n), quality=80, method=6)
+            out[w] = n
+        return out, (widths[-1], round(src.height * widths[-1] / src.width))
+    wide, size = sizes(HERO_SRC, 'home-ice-wide', [1600, 2400])
+    tall, tall_size = sizes(HERO_SRC_TALL, 'home-ice-tall', [800, 1200])
+    srcset = f'{wide[1600]} 1600w, {wide[2400]} 2400w'
+    tall_set = f'{tall[800]} 800w, {tall[1200]} 1200w'
+    out = {1200: wide[1600]}
     m = re.search(r'<div class="hero-photo hero-row">.*?</ul></div>', p.rest, re.S)
     assert m, 'rc_home: the row of fronts'
-    pic = hotspot_hero(out[1200], size, HERO_ALT, HERO_POINTS if HOTSPOTS else [], HERO_WIDE, HERO_TALL, srcset)
+    pic = hotspot_hero(out[1200], size, HERO_ALT, HERO_POINTS if HOTSPOTS else [], HERO_WIDE, HERO_TALL, srcset,
+                       tall_set=tall_set, tall_size=tall_size, tall_points=HERO_POINTS_TALL)
     p.rest = p.rest[:m.start()] + pic + p.rest[m.end():]
     p.sub('<section class="hero" id="top">', '<section class="hero hs-hero" id="top">')
     # on a wide screen the line stands in two, left of the speaker; in a tall one, in one over the sky
@@ -2008,17 +2021,20 @@ def rc_home(p, web):
         p.section('ice-band')
     # the first view's picture, fetched first
     p.sub("if (home) { add('img/rc/red-hero.webp'); add('img/rc/orange-hero.webp'); }",
-          f"if (home) add(null, '{srcset}');", where='head' if "add('img/rc/red-hero.webp')" in p.head else 'rest')
+          f"if (home) {{ add(null, '{srcset}', '(min-aspect-ratio: 1/1)'); add(null, '{tall_set}', '(max-aspect-ratio: 1/1)'); }}", where='head' if "add('img/rc/red-hero.webp')" in p.head else 'rest')
     i = p.rest.index('</body>') if '</body>' in p.rest else len(p.rest)
     if HOTSPOTS:
         p.rest = p.rest[:i] + HOTSPOT_JS + '\n' + p.rest[i:]
 
 
 # The products' own pictures (the coordinator, 2026-11-11 02:55): Mantle final, no light (r48-mantle-design a1240b77), one
-# per color; the lamps lit, per tint, and in rows (r32-lamps-final 17a9da5e, the final set; BOM 007b4486)
+# per color (fa0c3a65: satin black hardware, polished bevels); the lamps lit, per tint, and in rows (r32-lamps-final 17a9da5e;
+# Core's base in its own color fee3b161; Hemisphere direct, from under, in a group cd703d56)
 MANTLE_FINAL = 'renders/2026-11-10/barkhorn/mantle-r48/mantle-final-day-{name}.png'
 LAMP_FINAL = 'renders/2026-11-10/barkhorn/lamp-site/final/{f}.png'
 NAMES = dict(zip(RC_KEYS, ['ember', 'dust', 'acid', 'poison', 'ice', 'haze', 'fog', 'smoke']))
+HEMI_LM = {'red': 272, 'orange': 280, 'amber': 301, 'green': 256, 'blue': 264, 'violet': 254, 'ice': 339, 'black': 287}   # lm out, cd703d56
+CORE_ROW_DAY = None    # 'core-row-day' when its re-render lands: Core's eight by day, switched off
 LAMP_LIGHT_TINTS = '2200 K in Ember; 2700 K in Poison and Fog; 3000 K in Haze; 4000 K in Dust, Acid, Ice and Smoke'
 
 
@@ -2045,16 +2061,23 @@ def rc_products(p, web):
         D['tt']['colours'][k] = {'views': {'studio': v}, 'card': dict(card, alt=f'Mantle in {n.title()}')}
     # the lamps: each lit in its tint, the eight in a row, Hemisphere from below (Ember)
     rows = {}
+    cluster, _ = views(LAMP_FINAL.format(f='hemisphere-cluster'), 'hemisphere-cluster', 1600)
+    if CORE_ROW_DAY:
+        core_day = dict(save(LAMP_FINAL.format(f='core-row-day'), 'core-row-day.webp', 2000),
+                        th=save(LAMP_FINAL.format(f='core-row-day'), 'core-row-day-th.webp', 168, 80)['src'])
     for lamp, f in (('dome', 'hemisphere'), ('orb', 'core')):
         r = save(LAMP_FINAL.format(f=f'{f}-row'), f'{f}-row.webp', 2000)
         rows[f] = r
         row_th = save(LAMP_FINAL.format(f=f'{f}-row'), f'{f}-row-th.webp', 168, 80)
         for k, n in NAMES.items():
-            v, card = views(LAMP_FINAL.format(f=f'{f}-{n}'), f'{f}-{n}', 1200)
+            main = f'{f}-{n}-direct' if lamp == 'dome' else f'{f}-{n}'
+            v, card = views(LAMP_FINAL.format(f=main), f'{f}-{n}', 1200)
             vs = {'hero': v, 'row': dict(r, th=row_th['src'])}
-            if lamp == 'dome' and k == 'red':
-                b, _ = views(LAMP_FINAL.format(f='hemisphere-ember-below'), 'hemisphere-ember-below', 1200)
-                vs['below'] = b
+            if lamp == 'dome':
+                vs['below'], _ = views(LAMP_FINAL.format(f=f'{f}-{n}-under'), f'{f}-{n}-under', 1200)
+                vs['cluster'] = cluster
+            elif CORE_ROW_DAY:
+                vs['day'] = core_day
             D['lamps'][lamp]['colours'][k] = {'views': vs, 'card': dict(card, alt=f'{f.title()} lit in {n.title()}')}
     def fact(L, name, text, after=None):
         rows_ = L['facts']
@@ -2063,17 +2086,38 @@ def rc_products(p, web):
                 row[1] = text; return
         at = next(ix for ix, row in enumerate(rows_) if row[0] == after) + 1
         rows_.insert(at, [name, text])
-    fact(D['lamps']['dome'], 'Light', 'About 1,000 lm at the ring, about 270 lux half a meter below, in every tint; CRI 90. The dome glows in '
-                                      'its own color, and the light straight down is the lamp&rsquo;s own white: ' + LAMP_LIGHT_TINTS)
+    fact(D['lamps']['dome'], 'Light', 'About {lm} lm out of the shade in this color, and about 350 lux on a table half a meter below, in every '
+                                      'color; CRI 90. The dome glows in its own color, and the light straight down is the lamp&rsquo;s own white: '
+                                      + LAMP_LIGHT_TINTS)
+    D['lamps']['dome']['lm'] = HEMI_LM
+    fact(D['lamps']['dome'], 'Fitting', 'Satin black anodized aluminum, with a quarter-turn catch')
+    fact(D['lamps']['dome'], 'Hanging', 'A cloth-braided cord, a 600 mm drop as standard, cut to length; a canopy of satin black anodized '
+                                        'aluminum, 150 mm across')
     fact(D['lamps']['orb'], 'Light', 'A glow, not a reading light: the ball lights in its own color. The LED inside: ' + LAMP_LIGHT_TINTS)
-    fact(D['lamps']['orb'], 'Base', 'Black acrylic, angled', after='Ball')
+    fact(D['lamps']['orb'], 'Base', 'Its own color, satin', after='Ball')
+    fact(D['lamps']['orb'], 'Control', 'Touch the ring: tap to switch, hold to dim')
+    D['lamps']['orb']['line'] = D['lamps']['orb']['line'].replace('sitting low in a black acrylic base', 'sitting low in a satin base of its own color')
+    # Mantle: satin black hardware; satin edges with a fine polished bevel (r48-mantle-design fa0c3a65)
+    fact(D['tt'], 'Plinth', 'Cast acrylic in its color, about 25 mm, its edges satin with a fine polished bevel; it floats 40 mm over the base')
+    fact(D['tt'], 'Posts', 'Four solid posts, 30 mm across, satin black')
+    fact(D['tt'], 'Hardware', 'Satin black throughout', after='Posts')
     p.rest = p.rest[:i] + json.dumps(D, separators=(',', ':')) + p.rest[j:]
+    p.rest = p.rest.replace('A ball of tinted acrylic sitting low in a black acrylic base.', 'A ball of tinted acrylic sitting low in a satin base of its own color.')
+    p.sub("`Core lit in ${c.name}, sitting low in its black acrylic base.`", "`Core lit in ${c.name}, sitting low in its satin base of the same color.`")
+    p.sub("`Hemisphere lit, its ${c.name} shade glowing beneath a black hub.`", "`Hemisphere lit, its ${c.name} shade glowing beneath a satin black cap.`")
+    p.sub("facts: c => [...L.facts, ['Color', c.name]],",
+          "facts: c => [...L.facts.map(f => L.lm && f[1].includes('{lm}') ? [f[0], f[1].replace('{lm}', L.lm[c.k])] : f), ['Color', c.name]],")
     # the views' words: Mantle in its own color; Hemisphere from below
     p.sub("const TT_VIEWS = [['studio', 'In the studio', c => c.k === 'red' ? `${D.tt.name} in Ember.` : `${D.tt.name}, shown in Ember. ${c.name} to follow.`],",
           "const TT_VIEWS = [['studio', 'In the studio', c => `${D.tt.name} in ${c.name}.`],")
     p.sub("         ['row', 'All eight', () => 'Eight Hemispheres hung in a row, lit, one in each color.'],",
-          "         ['row', 'All eight', () => 'Eight Hemispheres hung in a row, lit, one in each color.'],\n"
-          "         ['below', 'From below', () => 'Hemisphere from below, lit: its opal diffuser inside the Ember shade.'],")
+          "         ['below', 'From below', c => `Hemisphere from below, lit: the opal diffuser inside its ${c.name} shade.`],\n"
+          "         ['cluster', 'In a group', () => 'Eight Hemispheres hung at different heights, one in each color.'],\n"
+          "         ['row', 'All eight', () => 'Eight Hemispheres hung in a row, lit, one in each color.'],")
+    if CORE_ROW_DAY:
+        p.sub("        ['row', 'All eight', () => 'Eight Core lamps in a row, lit, in spectrum order.'],",
+              "        ['row', 'All eight', () => 'Eight Core lamps in a row, lit, in spectrum order.'],\n"
+              "        ['day', 'By day', () => 'Eight Core lamps by day, switched off, one in each color.'],")
     # the home's lamps: the two rows; the lighting page's too
     def rows_fig(cls):
         h, c = rows['hemisphere'], rows['core']
@@ -2125,7 +2169,8 @@ def lamp_crops(web):
     from PIL import Image
     grounds = {}
     for f in ('hemisphere', 'core'):
-        ims = {n: Image.open(os.path.join(web.ROOT, LAMP_FINAL.format(f=f'{f}-{n}'))).convert('RGB') for n in NAMES.values()}
+        ims = {n: Image.open(os.path.join(web.ROOT, LAMP_FINAL.format(f=f'{f}-{n}-direct' if f == 'hemisphere' else f'{f}-{n}'))).convert('RGB')
+               for n in NAMES.values()}
         W, H = next(iter(ims.values())).size
         x0, y0, x1, y1 = W, H, 0, 0
         for im in ims.values():
@@ -2248,6 +2293,8 @@ def rc_marketing(p, web):
 .hero-sub {{ margin: 0 0 20px; max-width: 30ch; font-size: clamp(17px, 1.5vw, 21px); line-height: 1.35; color: #1C1A18 }}
 .hero-cta {{ display: flex; flex-wrap: wrap; gap: 12px; margin: 0 }}
 @media (max-aspect-ratio: 1/1) {{ .hs-hero .hero-more {{ position: static; padding-top: 20px }} .hero-sub {{ max-width: none }} }}
+@media (min-aspect-ratio: 1/1) {{ .hs-hero .hero-title, .hs-hero .hero-more {{ left: 35% !important; right: 2% !important }}
+  .hs-hero .hero-title .wrap, .hs-hero .hero-more .wrap {{ margin: 0 !important; padding-inline: 0 !important; max-width: none !important }} }}
 .fam {{ display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px }}
 .fam > :nth-child(1) {{ grid-column: 1 / 3; grid-row: 1 / 3 }} .fam > :nth-child(2) {{ grid-column: 3 / 5; grid-row: 1 }}
 .fam > :nth-child(3) {{ grid-column: 3; grid-row: 2 }} .fam > :nth-child(4) {{ grid-column: 4; grid-row: 2 }}
@@ -2364,6 +2411,8 @@ def rc_finish(web):
         u = t.replace('Smoked black', 'Smoked gray').replace('smoked black', 'smoked gray')
         for a, b in SPECTRUM:                 # the eight as the full spectrum, not a run from one to another
             u = u.replace(a, b)
+        u = u.replace('sitting low in a black acrylic base', 'sitting low in a satin base of its own color')   # Core's base (fee3b161)
+        assert not re.search(r'(?i)black acrylic base|black hub|270 lux|brass', u), ('rc_finish: words the pictures make false', f)
         assert not re.search(r'(?i)ember to smoke', u), ('rc_finish: Ember to Smoke', f)
         if u != t:
             open(f, 'w').write(u)
