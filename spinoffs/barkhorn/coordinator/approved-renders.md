@@ -709,6 +709,11 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    the single strip. Audits 0.0 hidden lamps in frame. Coordinator's check: the three Hemisphere frames PASS, shown to
    the owner 00:47. `core-row-day.png`: the single arc is right but the row went dark and the bases lost their color;
    sent back for the first version's brightness without a second highlight.
+   12 Nov 00:54 UTC, lamps lane 01a0b8330e: `core-row-day.png` pass 2 (one strip arc per ball, the world raised and
+   tinted for 5000 K, paper 0.44 against the first version's 0.45; bases read as tinted glass; audit 0.0). PASS; shown
+   to the owner 00:56. The lamps lane now waits only on the owner's answer about the carrier's underside.
+   LAMPS, READY FOR THE SITE'S BATCH 2: `core-row-day.png` (01a0b833), `hemisphere-ember-off.png`,
+   `hemisphere-ember-cap.png`, `hemisphere-ember-rim.png` (92ff60c3).
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
