@@ -826,6 +826,18 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    away (drop = x^2 / 2R, R about 8 m), the same grass over all of it, so the skyline is grass on real ground; overhang
    test against the extended surface; no bare strip. Smoke takes the same surface before its proxy. One more Fog
    proxy; the pair stays gated. Also rendering at the lane: Acid and Ember proxies with the three fixes (code 7c376ef0).
+   09:32 UTC, site lane: THE RETRY ALSO DID NOT BUILD. r49-site-rc 417a38f270 (sources r47-site-next 5a16fd28de), pushed
+   09:29:37: batch 2 with the Fog hillside out (home: Ice and Poison, two across; `/colors/fog` no habitat figure;
+   `/tropos/fog` no "Out" view; the picture on the lane's do-not-deploy list until Fog's final pair). The lane's saved
+   listing holds exactly 100 deployments from 11 Nov 13:32:28 to 12 Nov 08:59:51: r33-speaker-horn 50, r46-owner-notes
+   24, r48-biomes 12, r48-mantle-design 4, r49-site-rc 3, r33-planet-world 1, six unreadable.
+   THE ALLOWANCE IS THE CAUSE AFTER ALL (the coordinator's 09:25 retraction was premature; the owner told twice). Seen
+   team-wide: built 08:59:51 and 09:25:25 (biomes); not built 09:10:19 and 09:29:37 (site); plan hobby; no other project
+   active. Nothing aged out of a 24-hour window in that gap, so it is not a plain count: it behaves like an allowance
+   that comes back about one build every 14 minutes (100 a day), taken by whichever lane pushes first.
+   09:36: site lane told to retry on that rhythm (a no-op push now, check after 3 minutes, again every 15, four tries,
+   report the first that builds). 09:38: speaker lane told to push once per report (biomes told at 09:26). The
+   coordinator's notes stay local meanwhile (three commits unpushed).
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
