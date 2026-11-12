@@ -795,6 +795,23 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    three-quarter and full back, with 2x crops). No re-render of any set until the coordinator says so. The owner gets
    that one picture with the two real choices (ask Hypex for a plain plate; the lining's look from the back). Pictures
    already final (Ice, Poison, the bar's two passing frames) are not re-rendered for these details unless the owner asks.
+   12 Nov 09:17 UTC, site lane: BATCH 2 PUSHED, NOT BUILT. r49-site-rc edf4dc4667 (sources r47-site-next 519668356c),
+   pushed 09:10:19; Vercel created no deployment for it (checked by the coordinator: none for that commit; the newest
+   deployment is the coordinator's own notes push of 08:59:51). The lane counts 94 deployments since 11 Nov 13:32: the
+   free plan's allowance of about 100 a day is used up, because every push on every working branch builds the site
+   (pictures, proxies, these notes). `spinoffs/barkhorn/site/vercel.json` already switches builds off for `r31-*`,
+   `r32-*` and `claude/*` (f7e72f63, 18 Oct, "only main deploys"); today's branches (r33, r46, r47, r48) are not listed.
+   The live preview stays batch 1 (a422d911, dpl_8r8W...; the owner's link runs to 12 Nov 23:22 UTC).
+   Batch 2's content (verified by the lane at 1440 and 390): the hero's text on clear sky from 48 % of the picture;
+   "Each color is a place" with Ice, Poison and Fog; Core's dock line reworded, the Dock row gone, "polished black"
+   banned in the build; "By day" on every Core page (core-row-day); Hemisphere Ember with Lit, From below, Off, The cap,
+   The rim, In a group, All eight; `/colors/poison` and `/tropos/poison` with the final Poison portrait.
+   Coordinator, 09:28: the Fog place is the older hillside picture (on the site since 10 Nov, `img/rc/ice-habitat.webp`).
+   Its grass floats over the fog along the brow, the defect the owner flagged on 11 Nov. Site lane told to take the Fog
+   place out (home page and Fog's pages) until the new pair is final, push once (that push is also the retry), report
+   whether it built, and give the exact count of deployments in the last 24 hours by branch. The owner asked (09:30)
+   whether to extend the vercel.json list to today's working branches; nothing in that file or in Vercel changes
+   without his yes. Until then the coordinator commits these notes locally and pushes rarely.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
