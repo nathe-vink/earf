@@ -1002,6 +1002,17 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
       chat; the lamps lane to make a cutaway picture and one picture over a pale table that shows the pool of light.
    -> THE BUILD SWITCH: YES. `spinoffs/barkhorn/site/vercel.json` gains `r33-*`, `r46-*`, `r47-*`, `r48-*`: false, on
       each working branch at its next push (this branch now). The site's `r49-*` and main still build.
+   Done 23:41-23:52 UTC: the switch committed on r46-owner-notes (b8a1988383) and VERIFIED (Vercel made no deployment
+   for that push); briefs sent to the biomes lane (the rule corrected; Ember with lava, Smoke as the asteroid strike in
+   open country, Poison with the 22 Oct drama and toadstools; three proxies before Acid and Dust; references are the
+   pictures of 22 Oct and 1 Nov in its own branch), the speaker lane (the bar set to finish with every fix; the stage
+   dropped; one 1600x900 hero test from the bar with both Tropos whole, Mantle, the Hemisphere cluster, Cores, and a
+   calm upper left for the headline), the lamps lane (a labelled cutaway, an in-use picture over a pale oak table at
+   0.5 m, three plain sentences) and the site lane (batch 3 prepared, pushed only on the coordinator's word: the
+   switch, the pendants final, then Fog's pair and the sixteen refreshed Tropos pictures as they pass).
+   What the owner compared against (seen by the coordinator 23:38): Ember of 22 Oct had rivers of glowing lava; Smoke
+   of 1 Nov had the crater, fire, sparks and the black column on a road; Poison of 22 Oct had a low, close camera, sun
+   shafts and a lit green speaker. The 12 Nov versions lost that.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
