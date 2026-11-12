@@ -221,7 +221,8 @@ REFLECT = {   # habitat -> [reflector specs] (W H AZ EL DIST TX TY TZ), white bo
     'fog_b': [(2.0, 2.0, -55.0, 15.0, 3.5, 0.0, 0.0, 0.8)]}
 ROLL = {   # habitat -> (feather, wander) m: the ground patch's far edge rolled under the land beyond (habitat.roll_edge)
     # Fog, the coordinator 2026-11-12: the lip was a ruler-straight 10 cm step; roll its last 0.4 m, wandering 10-20 cm
-    'fog_b': (0.4, 0.1)}
+    # then (same day) hummocks: the brow rises and falls 3-8 cm along its length. Smoke shares the set, so the same lip
+    'fog_b': (0.4, 0.1, 0.03, 0.08), 'smoke_c': (0.4, 0.1, 0.03, 0.08)}
 BERM = {   # habitat -> [berm specs] (LX LY RX RY H, the speaker's frame, m)
     # Dust r3 (the coordinator's 00:05 note 2): sand banked 22 mm against the outside of the left face, its full depth: the
     # face's lower edge showed open-sand-bright (its 21 % Fresnel mirror of the sunlit sand behind at 73 deg, and the sand

@@ -312,7 +312,8 @@ def cover(bpy, name, p, kit):
         if any((cx - a) ** 2 + (cy - b) ** 2 < r * r for a, b, r in avoid) or any(a <= cx <= c and b <= cy <= d for a, b, c, d in keep):
             continue
         hd = rnd.uniform(0, 2 * math.pi)                                    # a runner, a few plants along it
-        run = [Vector((cx, cy, 0.002))]
+        rr = rnd.uniform(*p.get('runner_r', [0.002, 0.004]))                # 4-8 mm thick (the coordinator, 2026-11-12)
+        run = [Vector((cx, cy, 0.0))]
         for k in range(rnd.randint(3, 7)):
             hd += rnd.gauss(0, 0.4)
             q = run[-1] + Vector((math.cos(hd), math.sin(hd), 0)) * rnd.uniform(0.06, 0.12)
@@ -321,13 +322,32 @@ def cover(bpy, name, p, kit):
             run.append(q)
             hgt = rnd.uniform(*p.get('height', [0.06, 0.22]))
             top = q + Vector((rnd.uniform(-0.03, 0.03), rnd.uniform(-0.03, 0.03), hgt))
-            _tube(sbm, [q, q.lerp(top, 0.6) + Vector((0, 0, 0.01)), top], [0.0012, 0.001, 0.0008], sides=4)
             d = Vector((rnd.uniform(-1, 1), rnd.uniform(-1, 1), rnd.uniform(0.05, 0.35)))
             face = Vector((rnd.uniform(-0.4, 0.4), rnd.uniform(-0.4, 0.4) - 0.3, 1.0))
-            _triplet(lbm, uvl, col, rnd, top, d, face, size * rnd.uniform(0.7, 1.3)); n += 1
+            tip = _triplet(lbm, uvl, col, rnd, top, d, face, size * rnd.uniform(0.7, 1.3)); n += 1
+            # the petiole arches from the runner up through `top` and over to the leaflets (a quadratic curve), so it
+            # reaches the leaf and does not stand up alone like a pin
+            b0 = q + Vector((0, 0, rr * 0.5))
+            arc = [b0 * (1 - t) ** 2 + top * (2 * t * (1 - t)) + tip * t * t for t in (0, 0.2, 0.4, 0.6, 0.8, 1.0)]
+            _tube(sbm, arc, [0.0013, 0.0012, 0.0011, 0.001, 0.0009, 0.0008], sides=5)
         if len(run) > 1:
-            _tube(sbm, run, [p.get('runner_r', 0.004)] * len(run), sides=6)
-    out = _objects(bpy, name, lbm, sbm, None, dict(p, stem=p.get('stem', '#5A3B26')))   # brown runners, petioles
+            # curved, not a polyline: smoothed twice (Chaikin) with a sideways wander, lying on the litter (its centre a
+            # little under the ground's z 0, so it sits in the litter instead of on it)
+            pts = run
+            for _ in range(3):
+                sm = [pts[0]]
+                for a_, b_ in zip(pts, pts[1:]):
+                    sm += [a_.lerp(b_, 0.25), a_.lerp(b_, 0.75)]
+                pts = sm + [pts[-1]]
+            out_pts = []
+            for k, pt in enumerate(pts):
+                t = pts[min(k + 1, len(pts) - 1)] - pts[max(k - 1, 0)]
+                nrm = Vector((-t.y, t.x, 0)).normalized() if t.length > 1e-9 else Vector((0, 0, 0))
+                w = 0.012 * math.sin(k * 0.9 + cx * 7) + 0.006 * math.sin(k * 2.3 + cy * 5)
+                out_pts.append(pt + nrm * w + Vector((0, 0, rr * 0.35 + 0.0015 * math.sin(k * 1.7))))
+            m = len(out_pts)
+            _tube(sbm, out_pts, [rr * (1.0 - 0.45 * k / max(m - 1, 1)) for k in range(m)], sides=8)
+    out = _objects(bpy, name, lbm, sbm, None, dict(p, stem=p.get('stem', '#4E4A2C')))   # brown-green runners, petioles
     print(f'ivy cover {name}: {n} leaves')
     return out
 

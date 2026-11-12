@@ -121,13 +121,16 @@ OVERHANG_DROP = 0.15   # a tuft's footprint may fall this much per metre of its 
 SETTLE_MODELS = ('rock_', 'moon_rock_', 'coast_rocks_', 'boulder_', 'searsia_', 'island_tree_')
 
 
-def roll_edge(bpy_, feather, wander, below=0.06, seed=11.0):
+def roll_edge(bpy_, feather, wander, hump_lo=0.0, hump_hi=0.0, below=0.06, seed=11.0):
     """The ground patch's far (+y) edge rolled over and down under the land beyond, as a brow, not a cut (the
     coordinator, 2026-11-12: Fog's lip read as a ruler-straight 10 cm step where the patch met the terrain). The edge
     wanders in by 0 .. 2 x `wander` metres along its length (noise); over the last `feather` metres before it the patch
     eases down (a rounded brow: slow at first) to `below` under the highest other ground beneath it; past it, it stays
     there, under. The patch is the ground mesh whose far edge is nearest the camera's view (the biggest by area at
-    least 5 m across with no particle system), the land beyond every other big surface mesh."""
+    least 5 m across with no particle system), the land beyond every other big surface mesh.
+    With `hump_lo`/`hump_hi` (m) the brow also rises and falls in low hummocks along its length (the coordinator,
+    2026-11-12: the rolled edge still read as a straight line; height breaks it, not depth): a bump of hump_lo .. hump_hi
+    every 0.5-1.2 m, full over the brow and fading out 0.6 m in front of it, added before the roll."""
     from mathutils import Vector, noise
     from mathutils.bvhtree import BVHTree
     sc = bpy_.context.scene; dg = bpy_.context.evaluated_depsgraph_get()
@@ -154,11 +157,16 @@ def roll_edge(bpy_, feather, wander, below=0.06, seed=11.0):
         return max(zs) if zs else None
     mw = patch.matrix_world; mi = mw.inverted(); me = patch.data
     ymax = max((mw @ v.co).y for v in me.vertices)
-    n = 0; lo = 0.0
+    n = 0; lo = 0.0; hmax = [0.0]
     for v in me.vertices:
         p = mw @ v.co
         edge = ymax - wander * (1.0 + 0.75 * noise.noise(Vector((p.x * 0.9, seed, 0.3))) + 0.25 * noise.noise(Vector((p.x * 3.1, seed, 1.7))))
         t = (p.y - (edge - feather)) / feather
+        if hump_hi > 0.0 and t > -0.6 / feather:
+            g = min(1.0, (t + 0.6 / feather) / (0.6 / feather + 0.5)); g = g * g * (3 - 2 * g)
+            amp = hump_lo + (hump_hi - hump_lo) * (0.5 + 0.5 * noise.noise(Vector((p.x * 0.35, seed, 4.1))))
+            bump = max(0.0, 0.5 + 0.9 * noise.noise(Vector((p.x * 1.4, seed, 2.9))) + 0.3 * noise.noise(Vector((p.x * 3.7, seed, 5.3))))
+            p = Vector((p.x, p.y, p.z + amp * min(1.0, bump) * g)); v.co = mi @ p; hmax[0] = max(hmax[0], amp * min(1.0, bump) * g)
         if t <= 0.0:
             continue
         z = under(p.x, p.y)
@@ -169,7 +177,7 @@ def roll_edge(bpy_, feather, wander, below=0.06, seed=11.0):
         v.co = mi @ q; n += 1; lo = min(lo, q.z - p.z)
     me.update()
     print(f'roll: {patch.name} far edge (y {ymax:.2f}) rolled under the land over {feather} m, wandering in by up to '
-          f'{2 * wander:.2f} m; {n} vertices moved, down to {lo:+.3f} m')
+          f'{2 * wander:.2f} m; {n} vertices moved, down to {lo:+.3f} m; hummocks up to {hmax[0]:.3f} m')
 
 
 def land_scatter(bpy_, sink=0.01, edge=0.18, drop=0.04):
@@ -1263,7 +1271,7 @@ def main():
     ap.add_argument('--opaque-shadows', action='store_true', help='the glass blocks direct light (diagnostics only)')
     ap.add_argument('--crop', type=float, nargs=4, help='render a region only, fractions X0 Y0 X1 Y1 from the top left (tests)')
     ap.add_argument('--fresnel-angle', action='store_true', help="glass faces pass a shadow ray's 1 - F(theta) (Schlick, n 1.49)")
-    ap.add_argument('--roll-edge', type=float, nargs=2, default=None, metavar=('FEATHER', 'WANDER'))
+    ap.add_argument('--roll-edge', type=float, nargs='+', default=None, help='FEATHER WANDER [HUMP_LO HUMP_HI]')
     ap.add_argument('--no-land', action='store_true', help='leave scattered tufts at the kit\'s flat z (old renders)')
     ap.add_argument('--meniscus', type=float, default=0.0, help='a water meniscus round the walls, radius m')
     ap.add_argument('--wet', type=float, nargs='+', help='rain on the speaker: front beads, lip beads, runnels, seed [r_min r_max mm [run_min run_max m [low]]]')
