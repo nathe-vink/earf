@@ -721,6 +721,16 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    footprint tested; 212 overhanging tufts flagged and removed), a quick proxy rendering to verify. Coordinator
    (04:16): Poison's final pair first; Fog only after `fog-lip-proxy.jpg` with a full-size crop of the lip is pushed
    and checked; short grass inside the ground if the bare lip looks bald; then the other proxies and Dust.
+   12 Nov 06:10 UTC, biomes lane e3c89c1cb8: `renders/2026-11-12/barkhorn/habitats/fog-lip-proxy.jpg` and crops. The
+   floaters are gone; the lip is a ruler-straight dark line (a 10 cm step where the ground patch meets the terrain).
+   Coordinator (06:15): feather the patch's last 0.4 m so the edge rolls over, let the lip wander 10-20 cm, short tufts
+   on the roll; one more proxy, still gated on the coordinator's look.
+   POISON'S FINAL PAIR rendered but NOT pushed (lane's own check): the horn still black-green (the sun is behind it),
+   the near spray only partly in sun, the leaves of three not plain. Fix: a white reflector board out of frame to the
+   front right, sunlit through its own canopy hole, bouncing into the horn's mouth; the spray's hole widened; the pair
+   re-rendered (about 35 min).
+   RULE, habitats: a passive reflector out of frame is allowed (it adds no light of its own) and is declared in
+   CHECK.md. Nothing that emits.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
