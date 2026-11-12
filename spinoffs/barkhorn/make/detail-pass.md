@@ -16,10 +16,10 @@ brief of 08:59, items A to H).
 | B | **woofer's eight screws** | M6 ISO 7380 button heads, 10.5 x 3.3, black oxide | M6 x 25 black ultra-low heads, 13 across, 1.8 high | **flush is not possible** (see below) |
 | C | **ports' flanges** | 140 square, R10 corners, four black M4 countersunk screws in tapped holes | a round ring 140 across, the same 8 thick, one 1.5 x 45 degree chamfer round its outer front edge, diamond-polished; cemented into a round recess, flush, no screws | the tube, the frame's thickness and so the port's length are unchanged: the tuning is unchanged. The port needs no service: the back comes off for everything inside |
 | D | **the HF lead** | up the Cloud's cable post, then a loose-looking diagonal run in the pod, black rubber, which caught the sweep as two pale lines through the horn | up the cable post's 7 bore its whole length (the Strata rod, rear, x 240); in the pod in black braid, square runs only: back along the floor, up behind the driver's motor to its terminals, two clear clips | numbers below |
-| E | **inside the cabinet** | the IR board on a clear bracket in the open gap under the brace; its lead across the middle; leads in black rubber; the terminals bright | the IR board in a black cup, in a pocket in the bottom batt's front face, 40 left of centre (clear of the bottom rib); its lead in a groove under the batt and up the gap in front of the back's lower batt; every lead in black braided PET sleeve; the woofer's and the HF driver's terminals booted black; the tie rod black | see "Where the eye sees from" |
+| E | **inside the cabinet** | the IR board on a clear bracket in the open gap under the brace; its lead across the middle; leads in black rubber; the terminals bright | the IR board in a cup in the lining's colour, in a pocket in the bottom batt's front face, 40 left of centre (clear of the bottom rib); its lead, sleeved in the same colour, in a groove under the batt and up the gap in front of the back's lower batt; every lead in black braided PET sleeve; the woofer's and the HF driver's terminals booted black; the tie rod black | see "Where the eye sees from" |
 | F | **rating plate** | a 70 x 40 black anodised plate with two screws, printed white | engraved in the back's outer face over the compartment's black flange, in the 19 mm band under the FA122's plate: grey on black, no plate, no screws | every line kept (below) |
 | G | **amp plate** | Hypex's FA122 plate | unchanged and uncovered: it sheds the amplifier's heat | the one bright bought part (its XLR shells, RCAs, labels) |
-| H | **lining** | black voile batts | unchanged, except the bottom batt's pocket and groove for the IR (item E) | |
+| H | **lining** | the polyester batts (white; black in Smoke) | unchanged, except the bottom batt's pocket and groove for the IR (item E) | |
 
 ## A. Feet
 
@@ -101,15 +101,16 @@ a designed part. It is not needed: the lead fits the bore.
 ## E. Inside the cabinet: where the eye sees from
 
 **The IR receiver.** It must see the room through the front panel's tint, so it cannot go behind anything opaque.
-- It now sits in a black cup (12 mm black cast acrylic, closed round and behind the board, two holes for the eye and the
-  LED).
+- It now sits in a cup in the lining's own colour (12 mm opaque cast acrylic: opal white, black in Smoke; closed round
+  and behind the board, two holes for the eye and the LED). A black cup was tried first: against the white batts it read
+  as a black mark low in the front (the first after frame), so the cup and its lead now take the batt's colour.
 - The cup sits in a pocket cut in the front face of the bottom batt, between the ports, 72 up.
 - It is 40 left of centre as you face the front. At the centre the bottom rib is in the way.
 
 From each side of the speaker:
-- **From the front, at any height:** a black face with two small dots, on the batt's black voile, behind the tinted
-  panel.
-- **From the sides:** the side panels show the bottom batt's black end; the cup is inside the pocket.
+- **From the front, at any height:** a face in the batt's colour with two small dots, set into the batt, behind the
+  tinted panel.
+- **From the sides:** the side panels show the bottom batt's end; the cup is inside the pocket.
 - **From behind:** the back's lower batt covers it.
 
 **Its lead.**

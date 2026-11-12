@@ -96,8 +96,8 @@ P['ir'] = dict(x=0.0, z=160.0, pcb=(40.0, 22.0, 1.6), bracket=(56.0, 10.0, 36.0)
 # round recess; the back's screws flush countersunk heads, black, evenly spaced (5 along the top and the bottom, so the
 # pitch is 125 there against 137 up the sides; it was 167); the feet black, their jam nuts too; the rating plate engraved in the
 # back over the compartment's black flange, no plate and no screws; the woofer's screws black low heads (its slots
-# cannot take a countersink); every lead in black braided sleeve and the terminals booted black; the IR receiver in a
-# black cup in a pocket in the bottom batt (product.ir_receiver)
+# cannot take a countersink); every lead in black braided sleeve and the terminals booted black; the IR receiver in a cup
+# in the lining's colour, in a pocket in the bottom batt, its lead sleeved in the same colour (product.ir_receiver)
 P['port']['ring'] = dict(chamfer=1.5)
 P['back'].update(countersunk=(10.0, 2.8), per_end=5)
 P['feet']['black'] = True

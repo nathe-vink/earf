@@ -1733,7 +1733,7 @@ def ir_receiver(P, gland_tip):
     hidden = ir.get('hidden')
     bracket = box(x - bw / 2, y0, z - bh / 2, x + bw / 2, y0 + bt, z + bh / 2) - box(x - pw / 2 - 0.3, y0 - 1, z - ph / 2 - 0.3,
                                                                                      x + pw / 2 + 0.3, y0 + bt - 2.0, z + ph / 2 + 0.3)
-    if hidden:                                         # the detail pass: a black cup, closed behind and round the board, the eye
+    if hidden:                                         # the detail pass: a cup in the lining's colour, closed behind and round the board, the eye
         bracket = box(x - bw / 2, y0, z - bh / 2, x + bw / 2, y0 + bt, z + bh / 2) - box(x - pw / 2 - 0.3, y0 + 2.0, z - ph / 2 - 0.3,
                                                                                          x + pw / 2 + 0.3, y0 + bt - 2.0, z + ph / 2 + 0.3)
         bracket -= cyl('y', (x, z), ir['eye'] + 0.6, y0 - 1, y0 + 2.5)            # and the LED looking out through two holes
@@ -1765,20 +1765,20 @@ def ir_receiver(P, gland_tip):
         Part('remote-kit', pcb.fuse(eye).fuse(led), Bought('hypex-remote-kit'), qty=0.5, finish='amp', inside=True,
              pieces={'board': (pcb, 'amp'), 'eye': (Compound(children=[eye, led]), 'driver-frame')},
              notes=[f'the kit\'s IR board ({pw:g} x {ph:g}, drawn as a block: confirm on the kit), in the master speaker only, behind the ' +
-                    (f'front panel low between the ports, {x - cx:+g} from the centre and {z:g} up, in its black cup in the bottom batt\'s pocket; the receiver and the LED facing the ' if ir.get('hidden') else f'front panel low and centred ({z:g} up, between the ports and under the brace), the receiver and the LED facing the ')
+                    (f'front panel low between the ports, {x - cx:+g} from the centre and {z:g} up, in its cup (the lining's colour) in the bottom batt\'s pocket; the receiver and the LED facing the ' if ir.get('hidden') else f'front panel low and centred ({z:g} up, between the ports and under the brace), the receiver and the LED facing the ')
                     + 'panel through no window: the panel\'s own tint must pass 940 nm (the prototype\'s test; the fallback is option '
                     '\'IR window, fallback\'); its light pipes and perspex window left out; its 5-pin cable to J15 on the FA122\'s '
                     'input board through the compartment\'s third gland']),
-        (Part('ir-bracket', bracket, Machined('black-cast-acrylic', 'cnc-mill', setup_usd=30.0), qty=0.5, finish='black-acrylic', inside=True,
-              notes=[f'the detail pass (2026-11-12): a cup {bw:g} x {bh:g} x {bt:g}, milled from 12 mm black (opaque) cast acrylic, closed round and '
+        (Part('ir-bracket', bracket, Machined('lining-cast-acrylic', 'cnc-mill', setup_usd=30.0), qty=0.5, finish='lining', inside=True,
+              notes=[f'the detail pass (2026-11-12): a cup {bw:g} x {bh:g} x {bt:g}, milled from 12 mm opaque cast acrylic in the lining\'s colour (opal white; black in Smoke), closed round and '
                      'behind the board, two holes in its face for the receiver\'s eye and the LED, a slot behind for the cable; cemented to '
                      f'the front panel\'s back face {z:g} up between the ports, inside a pocket cut in the bottom batt\'s front face, so the '
-                     'batt\'s black voile closes round it: through the front panel the eye sees a black face with two dots, on black']) if hidden else
+                     'batt closes round it: through the front panel the eye sees a face in the batt\'s own colour with two dots']) if hidden else
          Part('ir-bracket', bracket, Machined('clear-cast-acrylic', 'cnc-mill', setup_usd=30.0), qty=0.5, finish='bark', inside=True,
              notes=[f'{bw:g} x {bh:g} x {bt:g}, milled from 10 mm clear cast acrylic, pocketed for the board, cemented to the front '
                     'panel\'s back face; the board held in its pocket by two bonded M2.5 inserts and nylon screws (no screw into the panel)'])),
-        Part('lead-ir', lead, Bought('ir-cable-kit'), qty=0.5, finish='braid' if P.get('braid') else 'cable', inside=True,
-             notes=(['the kit\'s 5-pin cable, 125 cm, in black braided sleeve: from the cup\'s back in a groove under the bottom batt '
+        Part('lead-ir', lead, Bought('ir-cable-kit'), qty=0.5, finish='lining' if hidden else ('braid' if P.get('braid') else 'cable'), inside=True,
+             notes=(['the kit\'s 5-pin cable, 125 cm, in braided sleeve in the lining\'s colour (white; black in Smoke), so it is lost against the batts: from the cup\'s back in a groove under the bottom batt '
                      'along the bottom panel, up the 10 mm gap between the bottom batt\'s end and the back\'s lower batt (which hides it '
                      'from behind), forward under the compartment and up its front (the woofer hides it from the front) through the '
                      'third gland to J15; on screw-mount tie bases'] if hidden else
@@ -1957,7 +1957,7 @@ SOLIDS.setdefault('tooling-board', dict(
 SOLIDS.setdefault('aluminium-5052', dict(title='Aluminium 5052-H32 sheet, 1.5 mm, folded (6061 cracks at tight folds; the size column rounds '
                                          'the blank\'s 1.5 to 2; the engineering audit, 2026-11-01)', density=2.68, usd_per_cm3=0.025))
 SOLIDS.setdefault('clear-cast-acrylic', dict(title='Cast acrylic, water-clear (untinted)', density=1.19, usd_per_cm3=0.04))
-SOLIDS.setdefault('black-cast-acrylic', dict(title='Cast acrylic, black (opaque)', density=1.19, usd_per_cm3=0.04))
+SOLIDS.setdefault('lining-cast-acrylic', dict(title='Cast acrylic, opaque, in the lining\'s colour (opal white; black in Smoke)', density=1.19, usd_per_cm3=0.04))
 SOLIDS.setdefault('cast-acrylic-horn-lot', dict(
     title='Cast acrylic, tinted through in the horn\'s own heavier dye lot (about 6 to 10 times the cabinet\'s dye; 6, 30 and 75 mm), turned '
           'and milled', density=1.19, usd_per_cm3=0.05))
