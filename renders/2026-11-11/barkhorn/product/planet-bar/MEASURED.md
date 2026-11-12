@@ -123,3 +123,18 @@ Mantle's plinth, the median HSV of three patches (hue in degrees, saturation and
 - **The edge stays black** because the camera sees the front edge against the dark under the deck. No light enters it
   from behind or below.
 - Audit (reaudit.py): hidden 0, equipment 0.
+
+## The last Mantle test (the coordinator, 22:17)
+
+mantle-bar-acid-test2 (1920 x 1280): as mantle-bar-acid-test, with the Hemisphere over Mantle in Acid too.
+
+| patch | Acid, Ember pendant | Acid, Acid pendant | the aim |
+|---|---|---|---|
+| deck top, right, under the pendant | 32, 0.53, 0.33 | 32, 0.49, 0.33 | hue 50-60, s 0.40+, v 0.40+ |
+| deck top, left | 53, 0.99, 0.30 | 54, 0.99, 0.30 | |
+| deck front edge | v 0.00 | v 0.00 | (may stay dark) |
+
+- **Not met; nothing moved.** The Hemisphere is an up-lighter: its 24 LEDs face up into the dome. So little of its
+  light falls on the deck below, whatever its tint. The deck's light comes from the room.
+- **Per the coordinator's rule:** Mantle stays Ember in the bar, the portrait included. The Mantle frame is the Ember
+  three-quarter at full size (2400 x 1600).

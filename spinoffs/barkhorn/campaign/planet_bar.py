@@ -408,6 +408,14 @@ def mantle_bar():
     return s
 
 
+
+def mantle_bar_full():
+    """mantle-bar at full size (the coordinator, 22:17: Acid did not read, so the Ember three-quarter at 2400 x 1600)."""
+    s = mantle_bar()
+    s['size'] = [2400, 1600]
+    return s
+
+
 MANTLE_HEMI_Z = 1.50           # the Hemisphere's rim over Mantle (the deck at about 1.23)
 MANTLE_CAM_AZ, MANTLE_CAM_D = 35.0, 1.05
 
@@ -443,7 +451,7 @@ def bar_hero():
 
 
 SHOTS = {'bar-backbar': bar_backbar_full, 'core-bar-table': core_bar_table_full, 'bar-backbar-portrait': bar_backbar_portrait,
-         'bar-pendants': bar_pendants, 'mantle-bar': mantle_bar, 'bar-hero': bar_hero}
+         'bar-pendants': bar_pendants, 'mantle-bar': mantle_bar_full, 'bar-hero': bar_hero}
 
 if __name__ == '__main__':
     od = sys.argv[1]
