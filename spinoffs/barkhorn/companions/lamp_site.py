@@ -505,7 +505,9 @@ def build(frame, samples, scale):
         f.smooth = True
     me = bpy.data.meshes.new('sweep'); bm.to_mesh(me); bm.free()
     so = bpy.data.objects.new('sweep', me); bpy.context.scene.collection.objects.link(so); me.materials.append(paper)
-    SC.world(color=os.environ.get('WORLD', '#C8C4BE'), strength=0.02 * K)
+    # WORLD_STR (2026-11-12, the coordinator: the daylight row's bases back to tinted glass with no second highlight on the
+    # balls): the world's strength, which lights evenly and makes no discrete reflection; default 0.02 x the studio
+    SC.world(color=os.environ.get('WORLD', '#C8C4BE'), strength=float(os.environ.get('WORLD_STR', 0.02 * K)))
     # round 2 (the gate): the studio at 3000 K, and the camera's white point at 3000 K; the lamps stay at 2700 K (spec)
     # round 3 (the gate's polish): a larger, higher key, so the two round highlights (key and fill) read as one soft one:
     # 4.0 m across (was 1.2; at 2 and 3 m the two reflections, the outer face's and the inner wall's, stay apart), higher and more frontal, its power grown with the square of its distance to
