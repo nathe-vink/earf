@@ -116,6 +116,7 @@ def uplight(bpy_, col, watts=40.0, color=(1.0, 0.9, 0.8)):
 
 
 
+OVERHANG_DROP = 0.15   # a tuft's footprint may fall this much per metre of its radius (relief), no more
 SETTLE_MODELS = ('rock_', 'moon_rock_', 'coast_rocks_', 'boulder_', 'searsia_', 'island_tree_')
 
 
@@ -147,9 +148,15 @@ def land_scatter(bpy_, sink=0.01, edge=0.18, drop=0.04):
     def down(x, y):
         zs = [h[0].z for h in (g.ray_cast(Vector((x, y, 100.0)), Vector((0, 0, -1))) for _, g in G) if h[0] is not None]
         return max(zs) if zs else None
+    def footprint(o):
+        # 0.75 of the half-width of the tuft's blades (the outer blade tips are thin and lean)
+        pts = [q.matrix_world @ Vector(c) for q in [o, *o.children_recursive] if q.type == 'MESH' for c in q.bound_box]
+        if not pts:
+            return 0.0
+        return 0.75 * 0.5 * max(max(p_.x for p_ in pts) - min(p_.x for p_ in pts), max(p_.y for p_ in pts) - min(p_.y for p_ in pts))
     cam = sc.camera
     cp = cam.matrix_world.translation if cam else None
-    gone = {'no ground': 0, 'edge': 0, 'base hidden': 0}; moved = []
+    gone = {'no ground': 0, 'edge': 0, 'overhang': 0, 'base hidden': 0}; moved = []
     for o in tufts:
         x, y = o.location.x, o.location.y
         z = down(x, y)
@@ -158,6 +165,13 @@ def land_scatter(bpy_, sink=0.01, edge=0.18, drop=0.04):
         else:
             ring = [down(x + dx * edge, y + dy * edge) for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1), (.7, .7), (-.7, .7), (.7, -.7), (-.7, -.7))]
             why = 'edge' if any(r is None or r < z - drop for r in ring) else None
+            if why is None:
+                # the blades' footprint, not only the root: a wide tuft near a brow hangs its blades over the void
+                # (Fog's lip row, 2026-11-12: rooted 25 cm short of the brow, its blades reached 0.9 m out over the fog)
+                r_ = footprint(o)
+                if r_ > edge:
+                    ring = [down(x + dx * r_, y + dy * r_) for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1), (.7, .7), (-.7, .7), (.7, -.7), (-.7, -.7))]
+                    why = 'overhang' if any(r is None or r < z - max(drop, OVERHANG_DROP * r_) for r in ring) else None
             if why is None and cam:
                 b = Vector((x, y, z)); c = ou.world_to_camera_view(sc, cam, b)
                 if -0.05 <= c.x <= 1.05 and -0.05 <= c.y <= 1.05 and c.z > 0:

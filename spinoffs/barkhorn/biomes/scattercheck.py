@@ -1,6 +1,7 @@
 """Every scattered tuft in a saved scene checked against the ground (the coordinator, 2026-11-11: Fog's tufts floated):
 none floating (base more than 2 cm above the ground under it), none buried past 5 cm, none within 18 cm of a fall of
-4 cm or more (a brow, the patch's edge), none with its base in frame but hidden behind the ground, none with no ground
+4 cm or more (a brow, the patch's edge), none whose blades' footprint (0.75 of its half-width) reaches over a fall of
+more than 4 cm or 15 % of that radius (2026-11-12: Fog's lip row hung its blades over the fog), none with its base in frame but hidden behind the ground, none with no ground
 under it. The ground is every big surface mesh (at least 10k faces and 5 m across), as land_scatter in habitat.py.
 
 usage: python3.11 scattercheck.py SCENE.blend [label]   (prints one line; CLEAN or the counts)
@@ -38,7 +39,15 @@ def down(x, y):
 
 
 cam = sc.camera; cp = cam.matrix_world.translation
-bad = {'no ground': 0, 'floating': 0, 'buried': 0, 'over an edge': 0, 'base hidden': 0}; inframe = 0
+bad = {'no ground': 0, 'floating': 0, 'buried': 0, 'over an edge': 0, 'overhang': 0, 'base hidden': 0}; inframe = 0
+
+
+def footprint(o):
+    pts = [q.matrix_world @ Vector(c) for q in [o, *o.children_recursive] if q.type == 'MESH' for c in q.bound_box]
+    return 0.75 * 0.5 * max(max(p.x for p in pts) - min(p.x for p in pts), max(p.y for p in pts) - min(p.y for p in pts)) if pts else 0.0
+
+
+RING = ((1, 0), (-1, 0), (0, 1), (0, -1), (.7, .7), (-.7, .7), (.7, -.7), (-.7, -.7))
 for o in tufts:
     x, y = o.location.x, o.location.y; z = down(x, y)
     if z is None:
@@ -48,6 +57,10 @@ for o in tufts:
     if any(r is None or r < z - 0.04 for r in (down(x + dx * 0.18, y + dy * 0.18) for dx, dy in
            ((1, 0), (-1, 0), (0, 1), (0, -1), (.7, .7), (-.7, .7), (.7, -.7), (-.7, -.7)))):
         bad['over an edge'] += 1
+    else:
+        r_ = footprint(o)                                             # the blades over a brow (Fog's lip, 2026-11-12)
+        if r_ > 0.18 and any(r is None or r < z - max(0.04, 0.15 * r_) for r in (down(x + dx * r_, y + dy * r_) for dx, dy in RING)):
+            bad['overhang'] += 1
     b = Vector((x, y, z)); c = ou.world_to_camera_view(sc, cam, b)
     if 0 <= c.x <= 1 and 0 <= c.y <= 1 and c.z > 0:
         inframe += 1
