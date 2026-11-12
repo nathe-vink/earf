@@ -377,8 +377,9 @@ def mantle_bar():
         if pr.get('fn') == 'lamps':
             # (proof: the asset's origin is its front left corner, 0.46 x 0.42 m: at 0.30 behind the front the Core
             # stood inside it; behind its back right corner now)
-            pr['cores'] = [{'tint': shots.KEY['ember'], 'x': round(mc[0] - 0.56 * fwd[0] + 0.17 * right[0], 3),
-                            'y': round(mc[1] - 0.56 * fwd[1] + 0.17 * right[1], 3), 'floor_z': TOP, 'rot': 0.0}]
+            # (proof 2: behind the platter it showed half a dome: beside the back right corner, close to the plinth's edge)
+            pr['cores'] = [{'tint': shots.KEY['ember'], 'x': round(mc[0] - 0.45 * fwd[0] + 0.40 * right[0], 3),
+                            'y': round(mc[1] - 0.45 * fwd[1] + 0.40 * right[1], 3), 'floor_z': TOP, 'rot': 0.0}]
     for k in ('mantle-front', 'mantle-side', 'track-mantle'):
         s['lights'].pop(k, None)
     for k in ('house', 'house-left'):
