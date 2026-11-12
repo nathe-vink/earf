@@ -101,3 +101,25 @@ under it is its reflection on the stone in front of the base.
   - the portrait's Core on its base on the stone, and its glasses;
   - the pendants' glasses and props on the stone;
   - Mantle's posts and plinth on the bar top.
+
+## The coordinator's 19:55 batch (2026-11-12)
+
+| frame | size, samples | file |
+|---|---|---|
+| bar-pendants | 2400 x 2400, 256 | 4.2 MB; two bands (rows 0-52 % and 48-100 %), blended over the 96-row overlap (0.75/255 apart); no Core cable |
+| mantle-bar-acid-test | 1920 x 1280, 256 | 1.7 MB: mantle-bar with Mantle in Acid (the Mantle lane's asset, its manifest asserted), nothing else changed |
+
+Mantle's plinth, the median HSV of three patches (hue in degrees, saturation and value 0-1), Ember against Acid:
+
+| patch | mantle-bar (Ember) | mantle-bar-acid-test (Acid) |
+|---|---|---|
+| deck top, right, under the pendant | 19, 0.47, 0.28 | 32, 0.53, 0.33 |
+| deck top, left | 51, 1.00, 0.26 | 53, 0.99, 0.30 |
+| deck front edge | 0, 1.00, 0.00 | 60, 1.00, 0.00 |
+
+- **The aim is not met.** Acid reads olive on the top, not lemon, and the front edge stays black.
+- **Why:** the only light on the deck is the Ember Hemisphere's, a deep red. Through Acid's yellow it comes out olive and
+  dark.
+- **The edge stays black** because the camera sees the front edge against the dark under the deck. No light enters it
+  from behind or below.
+- Audit (reaudit.py): hidden 0, equipment 0.
