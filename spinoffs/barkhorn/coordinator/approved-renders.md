@@ -740,6 +740,18 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    Poison). Call (06:26): try A once with the leaflets spread to 75-90 degrees and smaller; if the horn glows and the
    picture is as good or better, render and push that pair; if not, keep the camera, apply only the leaflet change,
    render and push (C). No further rounds. Review copies shown to the owner 06:27 as not final.
+   06:50 UTC: A tried (two camera candidates): the horn still sits on a dark trunk from each; the lane goes with C (the
+   current camera, leaflets spread), renders and pushes `poison-final-*`.
+   12 Nov 07:14 UTC, speaker lane 76e4b1329: PLANET EARF BAR at full size in `product/planet-bar/`: `bar-backbar.png`
+   3200x1800 (256 samples), `core-bar-table.png` 3200x2133 (512), new `bar-backbar-portrait.png` 2400x3000 (its own
+   framing); tests `bar-pendants.png` 1920x1920, `mantle-bar.png` 1920x1280. DECLARED.md lists every out-of-frame lamp
+   and the horn's reflection card; CREDITS.md; audits hidden 0, equipment 0.
+   Coordinator's check (full-size crops at the speaker's feet and Mantle): `bar-backbar.png` and `core-bar-table.png`
+   PASS as final candidates (the owner has seen them at test size; no yes yet). The portrait shown to the owner 07:22;
+   one fix: the near Core is a blurred, base-less foreground shape. `bar-pendants.png`: three spread lamps, one cut by
+   the frame, faint pools: redo as a cluster of five. `mantle-bar.png`: Mantle reads as a black deck on grey-silver
+   posts (the owner's objection of 11 Nov): redo with an Ember Core behind it lighting the deck through, posts reading
+   black, the bar top dark.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
