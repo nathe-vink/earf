@@ -5,11 +5,19 @@ density `density` per metre carved by noise into wisps and banks (`scale` metres
 the noise left clear, `soft` how gradually it thickens), thinning toward the box's top and its edges (`fade`), its
 colour `color` and its forward scattering `anisotropy` (woodsmoke throws light forward, so a sun behind it makes it
 glow). `rise` stretches the wisps upward, `lean` [dx, dy] shears them as the smoke drifts. `seed` moves the noise.
+
+impact (Smoke E12, the speaker come down burning like a meteor): what the crash leaves on the ground it hit (the ground
+piece's own dents and furrows dig the crater and the trench). The ground's material, the object named by `on`, is
+charred round the crater and along the trench, sooted wider, and glows in its cracks near the crater; and `debris`
+chunks of the crust, broken from the crater and the trench and thrown out, lie round them in the same material. On a
+road (E12r) the surface is cracked instead, radially and in rings round the impact, and dusted with what it threw out.
+
+trail (Smoke E12): the meteor's smoke trail down the sky to the crash, a tube of smoke widening with age.
 """
 import math
 
 import bmesh
-from mathutils import Vector, noise
+from mathutils import Matrix, Vector, noise
 
 
 def woodsmoke(bpy, name, p, kit):
@@ -436,3 +444,292 @@ def ridge(bpy, name, p, kit):
     b.inputs['Roughness'].default_value = 0.95
     me.materials.append(m)
     return [ob]
+
+
+def impact(bpy, name, p, kit):
+    """The crash's marks. `centre` [x, y] the crater's; `char` [inner, outer] radii (m) over which the ground goes from
+    burnt black to its own colour, ragged by noise; `soot` the radius of the fainter fallout round it; `furrow` [x0, y0,
+    x1, y1, half-width] a trench charred along its floor; `glow` the strength of the heat glowing in the crust's cracks
+    within `glow_r` of the centre, in patches where a noise passes `glow_patch` [lo, hi]; `debris` {count, size [min,
+    max] m, spread [inner, outer] m, ahead (degrees, the way the crash was travelling: more is thrown that way), seed}.
+    For a road: `cracks` [inner, outer] radii (m) of cracks running out from the centre and round it, as a hard surface
+    breaks under a blow, `crack_count` of them round it, `crack_width` m wide, cut into the surface by `crack_bump`;
+    `glow_trail` [reach, fade] (with `furrow`): the heat glows along the furrow's floor too, from its (x1, y1) end back
+    over `reach` of its length, fading as the remaining share to the power `fade` (a trail that still smoulders).
+    `dust` [inner, outer] radii of the powder thrown over it, `dust_color`, `dust_mix` at its thickest, in patches
+    `dust_scale` m across. Several objects can take one impact each (a road's slabs): the marks are placed in the world.
+    Returns the debris."""
+    import random
+    ob = bpy.data.objects[p['on']]
+    m = ob.data.materials[0]; nt = m.node_tree; L = nt.links.new
+    bs = next(n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED')
+    cx, cy = p.get('centre', [0.0, 0.0])
+
+    def node(t, **k):
+        n = nt.nodes.new(t)
+        for key, v in k.items():
+            setattr(n, key, v)
+        return n
+
+    def math_(op, a, b=None):
+        n = node('ShaderNodeMath', operation=op)
+        for i, v in enumerate((a, b)):
+            if v is None:
+                continue
+            if isinstance(v, (int, float)):
+                n.inputs[i].default_value = v
+            else:
+                L(v, n.inputs[i])
+        return n.outputs[0]
+
+    def smooth(v, lo, hi):                                          # 0 at lo, 1 at hi (either way round)
+        n = node('ShaderNodeMapRange', interpolation_type='SMOOTHSTEP', clamp=True)
+        n.inputs['From Min'].default_value = lo; n.inputs['From Max'].default_value = hi
+        L(v, n.inputs['Value']); return n.outputs['Result']
+
+    geo = node('ShaderNodeNewGeometry'); xyz = node('ShaderNodeSeparateXYZ'); L(geo.outputs['Position'], xyz.inputs[0])
+    dx = math_('SUBTRACT', xyz.outputs['X'], cx); dy = math_('SUBTRACT', xyz.outputs['Y'], cy)
+    d = math_('SQRT', math_('ADD', math_('MULTIPLY', dx, dx), math_('MULTIPLY', dy, dy)))
+    tc = node('ShaderNodeTexCoord')
+    nz = node('ShaderNodeTexNoise'); nz.inputs['Scale'].default_value = 1.6; nz.inputs['Detail'].default_value = 6.0
+    L(geo.outputs['Position'], nz.inputs['Vector'])
+    jag = math_('MULTIPLY', math_('SUBTRACT', nz.outputs['Fac'], 0.5), p.get('jag', 0.6))
+    dj = math_('ADD', d, jag)
+    r0, r1 = p.get('char', [0.6, 1.4])
+    char = smooth(dj, r1, r0)
+    if p.get('furrow'):
+        x0, y0, x1, y1, hw = p['furrow']
+        ax, ay = x1 - x0, y1 - y0; l2 = ax * ax + ay * ay
+        px = math_('SUBTRACT', xyz.outputs['X'], x0); py = math_('SUBTRACT', xyz.outputs['Y'], y0)
+        t = math_('DIVIDE', math_('ADD', math_('MULTIPLY', px, ax), math_('MULTIPLY', py, ay)), l2)
+        t = math_('MINIMUM', math_('MAXIMUM', t, 0.0), 1.0)
+        qx = math_('SUBTRACT', px, math_('MULTIPLY', t, ax)); qy = math_('SUBTRACT', py, math_('MULTIPLY', t, ay))
+        ds = math_('ADD', math_('SQRT', math_('ADD', math_('MULTIPLY', qx, qx), math_('MULTIPLY', qy, qy))), jag)
+        fw = math_('MULTIPLY', smooth(ds, hw * 1.6, hw * 0.5), math_('ADD', 0.75, math_('MULTIPLY', t, 0.25)))
+        char = math_('MAXIMUM', char, fw)
+        trail = (ds, t, hw)
+    else:
+        trail = None
+    soot = math_('MULTIPLY', smooth(dj, p.get('soot', 3.0), r0), p.get('soot_mix', 0.55))
+    col_in = bs.inputs['Base Color'].links[0].from_socket if bs.inputs['Base Color'].links else None
+
+    def mix(fac, a, hexcol):
+        n = node('ShaderNodeMix', data_type='RGBA'); L(fac, n.inputs['Factor'])
+        if a is not None:
+            L(a, n.inputs[6])
+        n.inputs[7].default_value = kit.M.hex_lin(hexcol)
+        return n.outputs[2]
+    col = mix(soot, col_in, p.get('soot_color', '#4A423B'))
+    if p.get('dust'):                                               # powder thrown out over the road, in patches, on the soot
+        u0, u1 = p['dust']
+        dn = node('ShaderNodeTexNoise'); dn.inputs['Scale'].default_value = 1.0 / p.get('dust_scale', 0.5)
+        dn.inputs['Detail'].default_value = 8.0
+        L(geo.outputs['Position'], dn.inputs['Vector'])
+        dust = math_('MULTIPLY', math_('MULTIPLY', smooth(dj, u1, u0), smooth(dn.outputs['Fac'], 0.4, 0.62)),
+                     p.get('dust_mix', 0.5))
+        col = mix(dust, col, p.get('dust_color', '#6B645C'))
+    col = mix(char, col, p.get('char_color', '#121010'))
+    if p.get('cracks'):
+        # cracks running out from the impact and round it: cells of a Voronoi laid out in angle and log radius, so
+        # they are long radially and their rings spread outward; the same scale on both, so a cell's edge, in either
+        # direction, is its distance there times the radius over the scale, and the width holds in metres
+        c0, c1 = p['cracks']
+        k = p.get('crack_count', 14.0) / (2 * math.pi)
+        dd = math_('MAXIMUM', d, 0.02)
+        wob = node('ShaderNodeTexNoise'); wob.inputs['Scale'].default_value = 3.0; wob.inputs['Detail'].default_value = 4.0
+        L(geo.outputs['Position'], wob.inputs['Vector'])
+        jit = math_('MULTIPLY', math_('SUBTRACT', wob.outputs['Fac'], 0.5), 0.5)
+        u = math_('ADD', math_('MULTIPLY', math_('ARCTAN2', dy, dx), k), jit)
+        v = math_('ADD', math_('MULTIPLY', math_('LOGARITHM', dd, math.e), k), jit)
+        cv = node('ShaderNodeCombineXYZ'); L(u, cv.inputs['X']); L(v, cv.inputs['Y'])
+        cv.inputs['Z'].default_value = p.get('seed', 1) * 3.7
+        vc = node('ShaderNodeTexVoronoi', feature='DISTANCE_TO_EDGE'); L(cv.outputs['Vector'], vc.inputs['Vector'])
+        wd = math_('DIVIDE', math_('MULTIPLY', vc.outputs['Distance'], dd), k)
+        some = node('ShaderNodeTexNoise'); some.inputs['Scale'].default_value = 1.4; some.inputs['Detail'].default_value = 2.0
+        L(geo.outputs['Position'], some.inputs['Vector'])
+        crack = math_('MULTIPLY', smooth(wd, p.get('crack_width', 0.012), 0.0),
+                      math_('MULTIPLY', math_('MULTIPLY', smooth(d, c1, c1 * 0.55), smooth(d, c0 * 0.6, c0)),
+                            smooth(some.outputs['Fac'], 0.36, 0.5)))
+        col = mix(crack, col, p.get('crack_color', '#060505'))
+        if p.get('crack_bump', 0.0):
+            bp = node('ShaderNodeBump', invert=True); bp.inputs['Strength'].default_value = p['crack_bump']
+            bp.inputs['Distance'].default_value = 0.01
+            L(crack, bp.inputs['Height'])
+            if bs.inputs['Normal'].links:
+                L(bs.inputs['Normal'].links[0].from_socket, bp.inputs['Normal'])
+            L(bp.outputs['Normal'], bs.inputs['Normal'])
+    L(col, bs.inputs['Base Color'])
+    if bs.inputs['Roughness'].links:
+        rough = math_('MAXIMUM', bs.inputs['Roughness'].links[0].from_socket, math_('MULTIPLY', char, 0.95))
+        L(rough, bs.inputs['Roughness'])
+    if p.get('glow'):                                               # heat in the cracks of the crust near the crater
+        vo = node('ShaderNodeTexVoronoi', feature='DISTANCE_TO_EDGE'); vo.inputs['Scale'].default_value = 1.0 / 0.11
+        L(geo.outputs['Position'], vo.inputs['Vector'])
+        crack = smooth(vo.outputs['Distance'], 0.045, 0.0)
+        hot = smooth(dj, p.get('glow_r', 0.9), 0.15)
+        if p.get('glow_trail') and trail:                            # and along the furrow it ploughed, cooling with distance
+            ds, t, hw = trail; reach, fade = p['glow_trail']
+            along = math_('POWER', smooth(t, 1.0 - reach, 1.0), fade)
+            hot = math_('MAXIMUM', hot, math_('MULTIPLY', smooth(ds, hw * 0.9, hw * 0.2), along))
+        fl = node('ShaderNodeTexNoise'); fl.inputs['Scale'].default_value = 4.0; fl.inputs['Detail'].default_value = 3.0
+        L(geo.outputs['Position'], fl.inputs['Vector'])
+        lo, hi = p.get('glow_patch', [0.42, 0.62])                   # the higher, the fewer cracks glow
+        e = math_('MULTIPLY', math_('MULTIPLY', crack, hot), smooth(fl.outputs['Fac'], lo, hi))
+        bs.inputs['Emission Color'].default_value = kit.M.hex_lin(p.get('glow_color', '#FF5A14'))
+        L(math_('MULTIPLY', e, p['glow']), bs.inputs['Emission Strength'])
+        # seen, not sampled as a light: a linked strength makes every triangle of the ground a light in Cycles' light
+        # tree, and E12's pan has 14 M of them (its first proofs died at 14 GB); the fire's lamps light the scene
+        m.cycles.emission_sampling = 'NONE'
+    # the debris: crust broken into slabs, thrown out round the crater, most of it the way the crash was going
+    out = []
+    db = p.get('debris')
+    if db:
+        rnd = random.Random(db.get('seed', 1))
+        s0, s1 = db.get('size', [0.04, 0.2]); i0, i1 = db.get('spread', [0.6, 2.4])
+        ahead = math.radians(db.get('ahead', 90.0))
+        bm = bmesh.new()
+        bpy.context.view_layer.update()                               # the ground as built, for the ray casts
+        dg = bpy.context.evaluated_depsgraph_get()
+        for k in range(db.get('count', 80)):
+            a = ahead + rnd.gauss(0.0, 1.0) * (math.pi * 0.45) if rnd.random() < 0.7 else rnd.uniform(0, 2 * math.pi)
+            r = i0 + (i1 - i0) * rnd.random() ** 1.6
+            sz = s0 + (s1 - s0) * rnd.random() ** 2.2 * max(0.3, 1.0 - (r - i0) / (i1 - i0))
+            x, y = cx + math.cos(a) * r, cy + math.sin(a) * r
+            hit, loc, nrm, _, _, _ = bpy.context.scene.ray_cast(dg, Vector((x, y, 2.0)), Vector((0, 0, -1)))
+            z = loc.z if hit else 0.0
+            n = rnd.randint(5, 8)
+            ring = []
+            for i in range(n):
+                t = 2 * math.pi * (i + rnd.uniform(-0.3, 0.3)) / n
+                rr = sz * rnd.uniform(0.55, 1.0)
+                ring.append(bm.verts.new((math.cos(t) * rr, math.sin(t) * rr, 0.0)))
+            f = bm.faces.new(ring)
+            th = sz * rnd.uniform(0.15, 0.3)
+            ex = bmesh.ops.extrude_face_region(bm, geom=[f])
+            top = [g for g in ex['geom'] if isinstance(g, bmesh.types.BMVert)]
+            bmesh.ops.translate(bm, vec=Vector((0, 0, th)), verts=top)
+            verts = ring + top
+            tilt = math.radians(rnd.uniform(5, 40) if r < i0 * 1.6 else rnd.uniform(0, 18))   # heaved up near the rim
+            rot = Matrix.Rotation(tilt, 3, Vector((math.cos(a + 1.3), math.sin(a + 1.3), 0.0))) @ \
+                Matrix.Rotation(rnd.uniform(0, 2 * math.pi), 3, 'Z')
+            bmesh.ops.rotate(bm, verts=verts, cent=Vector((0, 0, 0)), matrix=rot)
+            bmesh.ops.translate(bm, vec=Vector((x, y, z - th * 0.35)), verts=verts)
+        bmesh.ops.recalc_face_normals(bm, faces=bm.faces[:])
+        me = bpy.data.meshes.new(name + '-debris'); bm.to_mesh(me); bm.free()
+        # the ground's material without the cracks' glow: in it the slabs carried the crack web across their faces (E12
+        # p5: "a regular orange web of thin glowing lines" over the rubble, "like a wireframe shader")
+        dm = m.copy()
+        for n in dm.node_tree.nodes:
+            if n.type == 'BSDF_PRINCIPLED':
+                for ln in list(n.inputs['Emission Strength'].links):
+                    dm.node_tree.links.remove(ln)
+                n.inputs['Emission Strength'].default_value = 0.0
+        me.materials.append(dm)
+        d_ob = bpy.data.objects.new(name + '-debris', me); bpy.context.scene.collection.objects.link(d_ob)
+        out.append(d_ob)
+    return out
+
+
+def trail(bpy, name, p, kit):
+    """The way the meteor came down (Smoke E12): its smoke trail across the sky, from `start` (high and far, the oldest
+    smoke) down to `end` (the crash). A tube of smoke `radius` [at the end, at the start] metres, widening as it ages,
+    its line pushed about by the wind (`warp` [amount, scale], both in the tube's local radii) and its smoke lumped by
+    noise (`puff` [amount, scale]), `density` per metre at its core where it is `radius[0]` wide, thinning as it widens
+    by (r0 / r) ** `thin` (1: as dense to look through all along), `color`, scattering forward by `anisotropy`, fading
+    out over the last `fade` of its length toward the start. Cycles steps a procedural volume at a tenth of its
+    object's size, so the tube is cut into boxes about as long as they are wide, each stepped to suit the smoke inside
+    it (`step` scales that); they share one material, which works in world space."""
+    E, S = Vector(p['end']), Vector(p['start'])
+    D = S - E; Ld = D.length; u = D / Ld
+    r0, r1 = p.get('radius', [1.0, 20.0])
+    wa, ws = p.get('warp', [0.6, 0.5])
+    pa, ps = p.get('puff', [0.8, 0.8])
+
+    def rad(t):
+        return r0 + (r1 - r0) * t ** 0.6
+
+    m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+    N = nt.nodes.new; L = nt.links.new
+
+    def math_(op, a, b=None):
+        n = N('ShaderNodeMath'); n.operation = op
+        for i, v in enumerate((a, b)):
+            if v is None:
+                continue
+            if isinstance(v, (int, float)):
+                n.inputs[i].default_value = v
+            else:
+                L(v, n.inputs[i])
+        return n.outputs[0]
+
+    def vec(op, a, b=None, scale=None):
+        n = N('ShaderNodeVectorMath'); n.operation = op
+        for i, v in enumerate((a, b)):
+            if v is None:
+                continue
+            if isinstance(v, (tuple, list, Vector)):
+                n.inputs[i].default_value = tuple(v)
+            else:
+                L(v, n.inputs[i])
+        if scale is not None:
+            if isinstance(scale, (int, float)):
+                n.inputs['Scale'].default_value = scale
+            else:
+                L(scale, n.inputs['Scale'])
+        return n.outputs['Value'] if op in ('DOT_PRODUCT', 'LENGTH', 'DISTANCE') else n.outputs['Vector']
+
+    def smooth(v, lo, hi):                                          # 0 at lo, 1 at hi (either way round)
+        n = N('ShaderNodeMapRange'); n.interpolation_type = 'SMOOTHSTEP'; n.clamp = True
+        n.inputs['From Min'].default_value = lo; n.inputs['From Max'].default_value = hi
+        L(v, n.inputs['Value']); return n.outputs['Result']
+
+    def noise_(v, scale, detail, rough=0.5, seed=0.0):
+        n = N('ShaderNodeTexNoise'); n.noise_dimensions = '4D'
+        n.inputs['Scale'].default_value = scale; n.inputs['Detail'].default_value = detail
+        n.inputs['Roughness'].default_value = rough; n.inputs['W'].default_value = seed
+        L(v, n.inputs['Vector']); return n
+
+    seed = float(p.get('seed', 0))
+    geo = N('ShaderNodeNewGeometry')
+    q = vec('SUBTRACT', geo.outputs['Position'], E)                    # from the crash
+    along = vec('DOT_PRODUCT', q, u)
+    t = math_('MINIMUM', math_('MAXIMUM', math_('DIVIDE', along, Ld), 0.0), 1.0)
+    r = math_('ADD', r0, math_('MULTIPLY', r1 - r0, math_('POWER', t, 0.6)))
+    inv = math_('DIVIDE', 1.0, r)
+    qn = vec('SCALE', q, scale=inv)                                    # in local radii, so the noise grows with the tube
+    w = noise_(qn, ws, 2.0, 0.5, seed)
+    off = vec('SCALE', vec('SUBTRACT', w.outputs['Color'], (0.5, 0.5, 0.5)), scale=math_('MULTIPLY', r, 2.0 * wa))
+    q2 = vec('ADD', q, off)
+    radial = vec('LENGTH', vec('SUBTRACT', q2, vec('SCALE', u, scale=vec('DOT_PRODUCT', q2, u))))
+    core = smooth(math_('DIVIDE', radial, r), 1.0, 0.3)
+    lump = noise_(vec('SCALE', q2, scale=inv), ps, 6.0, 0.55, seed + 3.7)
+    lumpy = math_('MAXIMUM', math_('ADD', 1.0, math_('MULTIPLY', math_('SUBTRACT', lump.outputs['Fac'], 0.5), 4.0 * pa)), 0.0)
+    fade = smooth(t, 1.0, 1.0 - p.get('fade', 0.25))
+    near = smooth(along, -0.5 * r0, 0.5 * r0)                         # cut off at the crash, not a tube past it
+    spread = math_('POWER', math_('MULTIPLY', inv, r0), p.get('thin', 1.0))
+    dens = math_('MULTIPLY', math_('MULTIPLY', math_('MULTIPLY', core, lumpy), math_('MULTIPLY', fade, near)),
+                 math_('MULTIPLY', spread, p.get('density', 1.5)))
+    v = N('ShaderNodeVolumePrincipled')
+    v.inputs['Color'].default_value = kit.M.hex_lin(p.get('color', '#D9D5CF'))
+    v.inputs['Anisotropy'].default_value = p.get('anisotropy', 0.35)
+    L(dens, v.inputs['Density'])
+    out = N('ShaderNodeOutputMaterial'); L(v.outputs['Volume'], out.inputs['Volume'])
+    m.cycles.volume_step_rate = p.get('step', 0.12)
+    # the boxes: each about three local radii long, wide enough for the warp
+    obs, t0, k = [], 0.0, 0
+    rot = u.to_track_quat('X', 'Z')
+    while t0 < 1.0 - 1e-6:
+        t1 = min(1.0, t0 + 3.0 * rad(t0) / Ld)
+        hw = rad(t1) * (1.0 + wa) * 1.15
+        ln = (t1 - t0) * Ld
+        bm = bmesh.new()
+        g = bmesh.ops.create_cube(bm, size=1.0)
+        for vv in g['verts']:
+            vv.co = Vector((vv.co.x * ln, vv.co.y * 2 * hw, vv.co.z * 2 * hw))
+        me = bpy.data.meshes.new(f'{name}-{k}'); bm.to_mesh(me); bm.free()
+        me.materials.append(m)
+        ob = bpy.data.objects.new(f'{name}-{k}', me); bpy.context.scene.collection.objects.link(ob)
+        ob.location = E + u * (Ld * (t0 + t1) / 2)
+        ob.rotation_mode = 'QUATERNION'; ob.rotation_quaternion = rot
+        obs.append(ob); t0 = t1; k += 1
+    return obs

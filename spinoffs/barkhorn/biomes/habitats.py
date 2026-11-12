@@ -33,6 +33,12 @@ HABITATS = {
     'ember_c':   ('Ember',  {'bounce': 0, 'throat': 0, 'low': 0, 'rim': 0}),
     'smoke_c':   ('Smoke',  {'bounce': 0}),
     'hero_ice':  ('Ice',    {'bounce': 0, 'back': 0, 'throat': 0}),
+    # the owner, 2026-11-12 23:45 (via the coordinator): a place may carry its OWN natural light where it is seen in frame
+    # and listed (lava, fire); never a hidden lamp. Ember d: the lava field of 22 Oct with no lamps, lit by its lava and
+    # p6's low sun; Smoke d: the meteor strike in open country, its fire seen; Poison b: closer, low sun through mist
+    'ember_d':   ('Ember',  {}),
+    'smoke_d':   ('Smoke',  {}),
+    'poison_ivy_b': ('Poison', {}),
 }
 # shot keys set per habitat (habitat.py --set), and samples where the scene is dark (the satin horn's grain)
 SETS = {
@@ -160,7 +166,7 @@ MODIFY = {'haze_b': {'sundisk': {'azimuth': 30.0, 'elevation': 6.0}},
           # top passes inside it), moved 1.0 m along the canopy's x, so its fleck falls on the floor 1 m to the right
           'poison_g5': {'canopy': {'holes': [[-15.362, -1.196, 0.36], [-11.625, 4.314, 0.7], [-8.031, 8.121, 0.8], [-5.531, 12.121, 0.7], [-14.125, 5.431, 0.6], [-16.615, 0.204, 0.4], [-16.306, 3.793, 0.1], [-17.438, -2.458, 0.16], [-16.55, -1.614, 0.18]]}}}
 # the black flag behind the camera, per habitat (m; default 8 x 6): Haze's front mirrored it as a dead black upper half
-FLAG = {'haze_b': (4.0, 3.0), 'poison_ivy': (0.0, 0.0)}   # poison_ivy: no flag or side cards, so the forest's sky reads in the horn (2026-11-11)
+FLAG = {'haze_b': (4.0, 3.0), 'poison_ivy': (0.0, 0.0), 'poison_ivy_b': (0.0, 0.0)}   # poison_ivy: no flag or side cards, so the forest's sky reads in the horn (2026-11-11)
 # feet bedding per habitat (m; default 0.012, the cabinet on the ground). Acid stands in a puddle: at 12 mm its bottom sat
 # exactly on the water, and the water reflected a band of sky between the edge and its reflection (the gate: "hovers")
 SINK = {'acid_b': 0.025,   # 2026-11-12: on wet rock at the puddle's edge (the displaced rock, as Dust's 0.028); was 0.05 in the water
@@ -179,7 +185,7 @@ HORN_ROUGH = 0.05
 # a tint's channel split from the speaker lane's shared model where it changed after the asset was built (9097, 732a8671)
 SPLIT = {'acid_b': (0.085, 0.10, 1.00)}   # the old asset only: the approved asset (0f54ebee) carries it, and the manifest assert refuses it
 # habitats whose sets are made real: every object seen by every ray type, casting shadows (ruling 4)
-REAL_SET = {'poison_g5', 'poison_ivy'}
+REAL_SET = {'poison_g5', 'poison_ivy', 'poison_ivy_b'}
 # plants whose Poly Haven glTF has no alpha: none needed since the engine's _alpha_maps wires the published map (2026-11-09)
 PLANT_ALPHA = {}
 # set props added per habitat, after the shot's own (so no prop's index moves). Poison: two redwoods deep in the mist
@@ -253,7 +259,8 @@ ROLL = {   # habitat -> (feather, wander) m: the ground patch's far edge rolled 
     }
 CREST = {   # habitat -> (y0, R, hump_lo, hump_hi): the hilltop falls away past y0 as t^2 / 2R (habitat.crest); the shot
     # carries the ground patch, the terrain's crest and the grass 6 m past y0 (the coordinator, 2026-11-12 09:36)
-    'fog_b': (2.6, 8.0, 0.03, 0.08), 'smoke_c': (2.6, 8.0, 0.03, 0.08)}
+    'fog_b': (2.6, 8.0, 0.03, 0.08), 'smoke_c': (2.6, 8.0, 0.03, 0.08),
+         'smoke_d': (2.6, 8.0, 0.03, 0.08)}
 BERM = {   # habitat -> [berm specs] (LX LY RX RY H, the speaker's frame, m)
     # Dust r3 (the coordinator's 00:05 note 2): sand banked 22 mm against the outside of the left face, its full depth: the
     # face's lower edge showed open-sand-bright (its 21 % Fresnel mirror of the sunlit sand behind at 73 deg, and the sand

@@ -1,15 +1,19 @@
 """A simulated smoke plume as a volume in Cycles (round 31b, Smoke E9: the bridge).
 
 plume: the grids from `plume_sim.py` (`cache`, an .npz path from the repo root) as a box of smoke and flame. The fire's
-centre sits at `position` (x, y; the box's floor at z), the sim's downwind +x turned `rotate_z` degrees, everything
-scaled `scale`. Soot is `color`, scattering forward by `anisotropy`, `density` per metre where the coded soot is
+centre sits at `position` (x, y; the box's floor at z), or with `anchor` 'solid' the first solid's (E12: the speaker the
+flow went round, whose fire is set behind it), the sim's downwind +x turned `rotate_z` degrees, everything scaled
+`scale`. Soot is `color`, scattering forward by `anisotropy`, `density` per metre where the coded soot is
 full; `absorb` darkens what it scatters. The flame glows in black-body colour from `cool` to `hot` kelvin, `strength`
 bright, and heat glows dull red at `heat_glow`. `detail` pushes the lookups about by a fine noise (`detail_scale`
 metres, `detail` in voxels) so the edges tatter below the grid's own size; `edge` [lo, hi] remaps the soot by a
 smoothstep so thin margins drop to clear air and the lobes keep firm outlines; `breakup` varies the soot inside by a noise
 (1 -/+ b); `tongues` cuts the flame's glow into filaments (`tongue_edge` makes them hard-edged). Each noise runs at
 every step of every ray through the box, so their octaves (`detail_octaves`, `breakup_octaves`, `tongue_octaves`) set
-what a render costs: p4's 6/5/6 took 3.4 times p3's single 4-octave noise.
+what a render costs: p4's 6/5/6 took 3.4 times p3's single 4-octave noise. E10 adds two, off by default: `warp` [voxels,
+metres, octaves], a coarser push of the lookups that folds the sim's round lobes into one another; `billow` [amount,
+metres, octaves], a fractal noise added to the soot before `edge` remaps it, so its surface carries lumps on lumps
+(pyroclastic); and `grain` [amount, metres, octaves], a fine texture in the soot.
 
 There is no VDB writer in this container, so the grids reach the shader as an atlas: each horizontal slice of the box
 is one tile of a float image (soot in red, flame in green, heat in blue), and the shader finds the two slices about a
@@ -54,7 +58,8 @@ def _atlas(bpy, path):
     img.colorspace_settings.name = 'Non-Color'
     img.pixels.foreach_set(a.ravel())
     img.pack()
-    info = dict(img=img, NX=NX, NY=NY, NZ=NZ, TX=TX, TY=TY, dx=float(z['dx']), source=[float(v) for v in z['source']])
+    info = dict(img=img, NX=NX, NY=NY, NZ=NZ, TX=TX, TY=TY, dx=float(z['dx']), source=[float(v) for v in z['source']],
+                solids=z['solids'].tolist() if 'solids' in z.files else [])
     _ATLAS[path] = info
     return info
 
@@ -66,18 +71,24 @@ def plume(bpy, name, p, kit):
     sc = p.get('scale', 1.0)
     dx = A['dx'] * sc
     Lx, Ly, Lz = NX * dx, NY * dx, NZ * dx
-    sx, sy = A['source'][0] * sc, A['source'][1] * sc
-    # the box, with the fire's centre at the object's origin
+    cx, cy = A['solids'][0][:2] if p.get('anchor') == 'solid' else A['source'][:2]
+    sx, sy = cx * sc, cy * sc
+    # the box, with the fire's centre (or the solid's) at the object's origin
     bm = bmesh.new()
     g = bmesh.ops.create_cube(bm, size=1.0)
     for v in g['verts']:
         v.co = Vector(((v.co.x + 0.5) * Lx - sx, (v.co.y + 0.5) * Ly - sy, (v.co.z + 0.5) * Lz))
     me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free()
     ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
+    ob['engine_volume'] = True                            # a lamp may see through it (lights.smoke_unblocked)
     px, py = p.get('position', [0.0, 0.0])[:2]
     pz = p.get('position', [0.0, 0.0, 0.0])[2] if len(p.get('position', [])) > 2 else 0.0
     ob.location = Vector((px, py, pz))
     ob.rotation_euler.z = math.radians(p.get('rotate_z', 0.0))
+    # `through_glass` False: the fire and smoke unseen by rays that came through a clear part (E12r: the fire behind
+    # the speaker glowed in its smoked horn like a screen, "a vintage CRT television")
+    if p.get('through_glass') is False:
+        ob.visible_transmission = False
 
     m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
     N = nt.nodes.new
@@ -119,6 +130,21 @@ def plume(bpy, name, p, kit):
         add = N('ShaderNodeVectorMath'); add.operation = 'ADD'
         L(co, add.inputs[0]); L(amp.outputs[0], add.inputs[1])
         co = add.outputs[0]
+    if p.get('warp'):
+        # Smoke E10: a second, coarser push of the lookups, `warp` [voxels, metres, octaves], so the sim's lobes lose
+        # their roundness, fold into one another and shear into streaks (E9's critics: "cotton-ball", "metaball lobes")
+        wa, ws, wo = p['warp']
+        nw = N('ShaderNodeTexNoise'); nw.noise_dimensions = '3D'
+        nw.inputs['Scale'].default_value = 1.0 / ws; nw.inputs['Detail'].default_value = wo
+        nw.inputs['Distortion'].default_value = 0.3
+        L(mp.outputs['Vector'], nw.inputs['Vector'])
+        wof = N('ShaderNodeVectorMath'); wof.operation = 'SUBTRACT'
+        L(nw.outputs['Color'], wof.inputs[0]); wof.inputs[1].default_value = (0.5, 0.5, 0.5)
+        wam = N('ShaderNodeVectorMath'); wam.operation = 'MULTIPLY'
+        L(wof.outputs[0], wam.inputs[0]); wam.inputs[1].default_value = (2 * wa / NX, 2 * wa / NY, 2 * wa / NZ)
+        wad = N('ShaderNodeVectorMath'); wad.operation = 'ADD'
+        L(co, wad.inputs[0]); L(wam.outputs[0], wad.inputs[1])
+        co = wad.outputs[0]
     sep = N('ShaderNodeSeparateXYZ'); L(co, sep.inputs['Vector'])
     gx = math_('MAXIMUM', math_('MINIMUM', sep.outputs['X'], 1.0 - 0.5 / NX), 0.5 / NX)
     gy = math_('MAXIMUM', math_('MINIMUM', sep.outputs['Y'], 1.0 - 0.5 / NY), 0.5 / NY)
@@ -140,6 +166,18 @@ def plume(bpy, name, p, kit):
     L(t, mix.inputs['Factor']); L(looks[0], mix.inputs[6]); L(looks[1], mix.inputs[7])
     rgb = N('ShaderNodeSeparateColor'); L(mix.outputs[2], rgb.inputs['Color'])
     rho, fl, ht = rgb.outputs['Red'], rgb.outputs['Green'], rgb.outputs['Blue']
+    bl = p.get('billow')
+    if bl:
+        # Smoke E10: pyroclastic billows, `billow` [amount, metres, octaves]: the soot pushed up and down by a fractal
+        # noise before the edge's remap, so the surface the remap draws carries lumps on the sim's lumps, down to the
+        # noise's finest octave (E9's lobes were one size and smooth). Gated by the soot itself, so clear air stays clear
+        ba, bs, bo = bl
+        nbl = N('ShaderNodeTexNoise'); nbl.inputs['Scale'].default_value = 1.0 / bs
+        nbl.inputs['Detail'].default_value = bo; nbl.inputs['Roughness'].default_value = 0.58
+        nbl.inputs['Distortion'].default_value = 0.0
+        L(mp.outputs['Vector'], nbl.inputs['Vector'])
+        gate = math_('MINIMUM', math_('DIVIDE', rho, 0.06), 1.0)
+        rho = math_('MAXIMUM', math_('ADD', rho, math_('MULTIPLY', math_('MULTIPLY_ADD', nbl.outputs['Fac'], 2.0 * ba, -ba), gate)), 0.0)
     if p.get('edge'):
         # crisper billows (p4's critics: "mushy, soft edges"): the soot remapped by a smoothstep, so thin margins drop
         # to clear air and the lobes keep firm outlines
@@ -156,6 +194,14 @@ def plume(bpy, name, p, kit):
         nb.inputs['Detail'].default_value = p.get('breakup_octaves', 2.0); nb.inputs['Distortion'].default_value = 0.8
         L(mp.outputs['Vector'], nb.inputs['Vector'])
         dens = math_('MULTIPLY', dens, math_('MAXIMUM', math_('MULTIPLY_ADD', nb.outputs['Fac'], 2.0 * b, 1.0 - b), 0.0))
+    gr = p.get('grain')
+    if gr:
+        # Smoke E10: a fine grain in the soot, `grain` [amount, metres, octaves]: the texture of turbulence on a lit
+        # billow, far below the grid's size
+        ng = N('ShaderNodeTexNoise'); ng.inputs['Scale'].default_value = 1.0 / gr[1]
+        ng.inputs['Detail'].default_value = gr[2] if len(gr) > 2 else 3.0; ng.inputs['Distortion'].default_value = 0.4
+        L(mp.outputs['Vector'], ng.inputs['Vector'])
+        dens = math_('MULTIPLY', dens, math_('MAXIMUM', math_('MULTIPLY_ADD', ng.outputs['Fac'], 2.0 * gr[0], 1.0 - gr[0]), 0.0))
     L(dens, vol.inputs['Density'])
     # the flame: black-body colour by how hot, as bright as it is strong; the heat a dull red glow in the smoke above it
     tk = math_('MULTIPLY_ADD', fl, p.get('hot', 1700.0) - p.get('cool', 1000.0), p.get('cool', 1000.0))
