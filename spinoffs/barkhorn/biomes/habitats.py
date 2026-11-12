@@ -219,6 +219,9 @@ REFLECT = {   # habitat -> [reflector specs] (W H AZ EL DIST TX TY TZ), white bo
     # Fog (b), 2026-11-10: a 2 x 2 m white board where fill_l stood (proxies: no fill left 15 % of the face under 10, the
     # board 5 %; the passed file 4 %). Poison takes none: a board where litter stood shades the floor on the sun's line
     'fog_b': [(2.0, 2.0, -55.0, 15.0, 3.5, 0.0, 0.0, 0.8)]}
+ROLL = {   # habitat -> (feather, wander) m: the ground patch's far edge rolled under the land beyond (habitat.roll_edge)
+    # Fog, the coordinator 2026-11-12: the lip was a ruler-straight 10 cm step; roll its last 0.4 m, wandering 10-20 cm
+    'fog_b': (0.4, 0.1)}
 BERM = {   # habitat -> [berm specs] (LX LY RX RY H, the speaker's frame, m)
     # Dust r3 (the coordinator's 00:05 note 2): sand banked 22 mm against the outside of the left face, its full depth: the
     # face's lower edge showed open-sand-bright (its 21 % Fresnel mirror of the sunlit sand behind at 73 deg, and the sand
@@ -300,6 +303,7 @@ def main():
             + (['--manifest', a.manifest] if a.manifest else []) \
             + [x for r in (a.reflector or REFLECT.get(n, [])) for x in ('--reflector', *map(str, r))] \
             + [x for b in (a.berm or BERM.get(n, [])) for x in ('--berm', *map(str, b))] \
+            + (['--roll-edge', *map(str, ROLL[n])] if n in ROLL else []) \
             + (['--meniscus', str(a.meniscus or MENISCUS[n])] if (a.meniscus or n in MENISCUS) else []) \
             + [x for c in a.card for x in ('--card', *c)] \
             + [x for d in a.dot for x in ('--dot', *d)]

@@ -92,7 +92,7 @@ def _frame(origin, fwd, up):
 
 def _triplet(bm, uvl, col, rnd, base, petiole_dir, face_dir, size):
     """A poison ivy leaf: a petiole from `base` along `petiole_dir`, and at its end three leaflets facing `face_dir`
-    (the terminal on a stalk a fifth of its length, the two laterals at about 60 degrees, smaller, toothed outside).
+    (the terminal on a stalk a fifth of its length, the two laterals at 75-90 degrees, smaller, toothed outside).
     Returns the petiole's end."""
     pl = size * rnd.uniform(0.9, 1.6)
     tip = base + petiole_dir.normalized() * pl
@@ -103,9 +103,11 @@ def _triplet(bm, uvl, col, rnd, base, petiole_dir, face_dir, size):
     T = _frame(tip + fwd * size * 0.2, fwd, up)
     _leaflet(bm, uvl, col, T, size, lw * 0.5, tooth=rnd.choice([0.0, 0.0, 0.15]), side=1)
     for s in (-1, 1):
-        a = math.radians(rnd.uniform(55, 75)) * s
+        # spread wide and kept smaller, so the three read apart (the coordinator, 2026-11-12: at 55-75 degrees and
+        # 0.7-0.85 of the terminal the near spray's leaves overlapped into one shape)
+        a = math.radians(rnd.uniform(75, 90)) * s
         d = Matrix.Rotation(a, 3, up) @ fwd
-        _leaflet(bm, uvl, col, _frame(tip, d, up), size * rnd.uniform(0.7, 0.85), lw * 0.5,
+        _leaflet(bm, uvl, col, _frame(tip, d, up), size * rnd.uniform(0.6, 0.72), lw * 0.5,
                  tooth=rnd.choice([0.0, 0.25, 0.35]), side=-s, fold=0.18, curl=0.06)
     return tip
 
