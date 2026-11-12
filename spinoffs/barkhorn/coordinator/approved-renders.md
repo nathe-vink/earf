@@ -857,6 +857,17 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    `/#hemisphere-ember` (seven views), `/#core-ember` (three views, base "Its own color, satin"). PASSES. One new share
    link made 10:12 (expires 13 Nov 09:11 UTC; it replaces the batch 1 link) and sent to the owner in chat only.
    The white dot on the hero's woofer is the opening's own mark, present in batch 1 as well.
+   12:56 UTC, biomes lane 82e8128203: FOG CREST PROXY (`renders/2026-11-12/barkhorn/habitats/fog-crest-proxy.jpg`,
+   1600x1000, with 2x and 1x skyline crops): the land extended as a convex surface, grassed all over. Scatter clean, no
+   hidden object or area lamp, sun and sky only. The scene build takes about an hour a render. Coordinator's check (the
+   frame, the lane's 2x crop, two 3x crops of the skyline): PASSES. The skyline is grass curving away; no bare strip, no
+   straight edge, no floating tuft. One small tuft left of the right-hand rock (about x 1247, y 742) seems to have a
+   pale band under it: to be explained. THE FOG PAIR IS RELEASED (12:58) for final render after the lane's running
+   proxies, on two conditions: a geometric test first (for every tuft whose root the camera sees, a ray 3 cm below the
+   root must hit ground; failures removed and listed), and no added grass at the speaker's foot. Shown to the owner as
+   a small test 12:58. Smoke, Acid and Ember proxies expected in one push at about 15:00 UTC.
+   Speaker lane (status notes, no message): the bar's portrait rendered in two halves and blended by 12:54; the
+   pendants frame rendering in halves; the Mantle frame next.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
