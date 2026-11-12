@@ -66,7 +66,7 @@ products light themselves: the Hemispheres and Cores by their own LEDs (r32-lamp
 | mantle-side | a small round lamp just past the frame's right edge, at bar height, through Mantle's acrylic plinth; disk 0.2 x 0.2 m | 9.45, 4.25, 1.2 | 18.0 W/m2 at its target |
 | horn-card | a graduated warm card over the near speaker's bay, at the ceiling: no light, seen only in reflections (the horn's flare); rectangle 1.4 x 0.9 m | 8.05, 4.9, 3.34 | 10.0 (peak radiance) |
 
-## bar-pendants.png (1920 x 1920)
+## bar-pendants.png (2400 x 2400)
 
 | name | what | where (m: x along the bar, y toward the wall, z up) | strength |
 |---|---|---|---|
@@ -100,5 +100,8 @@ products light themselves: the Hemispheres and Cores by their own LEDs (r32-lamp
 | house | a broad round warm fill from the room behind the camera; disk 3.0 x 3.0 m | 6.9, 0.2, 2.6 | 0.225 W/m2 at its target |
 | house-left | a broad round warm fill from the room at the left, out of frame; disk 2.0 x 2.0 m | 4.6, 2.2, 3.0 | 0.1875 W/m2 at its target |
 | horn-card | a graduated warm card over the near speaker's bay, at the ceiling: no light, seen only in reflections (the horn's flare); rectangle 1.4 x 0.9 m | 8.05, 4.9, 3.34 | 5.0 (peak radiance) |
-| mantle-key | a soft broad round lamp from the lens's side, high and to the left, out of frame, so Mantle's deck shows its form; disk 0.8 x 0.8 m | 8.56, 3.41, 1.9 | 2.5 W/m2 at its target |
+
+Mantle's light is a product: an Ember Hemisphere hangs over it, rim at 1.50 m (x 8.62, y 4.61), just above the frame's top
+edge, so its own LEDs light the deck and the plinth's edges. The Ember Core beside Mantle is in frame. No 'mantle-key'.
+The pale flat patch under the deck, right of centre, is Mantle's clear acrylic base layer mirroring the record wall.
 
