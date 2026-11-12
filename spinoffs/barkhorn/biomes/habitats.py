@@ -36,6 +36,10 @@ HABITATS = {
 }
 # shot keys set per habitat (habitat.py --set), and samples where the scene is dark (the satin horn's grain)
 SETS = {
+    # Ember (c), the coordinator 2026-11-12 on 7cc92de7: the low sun in FRONT, behind the camera's left shoulder, 35 deg
+    # off the lens axis (the camera sits at az -12 from the speaker: -12 - 35 = -47), 5 deg high, its warm colour kept; the
+    # pink dusk sky behind stays as it is (the sky opposite a sunset). Was az 130, el 11.4, behind the speaker
+    'ember_c': {'sun.azimuth_deg': -47.0, 'sun.elevation_deg': 5.0},
     # the hero on Fog's hillside: Fog's look (5400 K, its sun's colour), the sky turned 40 deg so its own sun stands three-
     # quarter behind the group (az 150, el 5.8) and the horns glow against the fog bank; no white board (in a wide frame)
     'hero_fog': {'render.white_balance_k': 5400, 'sun.azimuth_deg': 150.0, 'sky.rotation_deg': 264.2, 'sun.color': '#FEEA98'},
@@ -181,9 +185,12 @@ _RW = {"kind": "kit", "shape": "ext", "module": "poison_el", "fn": "redwood", "r
        "tint_mix": 0.3, "tex_scale": 1.4, "bump": 1.6}
 ADD = {'poison_g5': [dict(_RW, position=[-5.0, 28.2, -0.1], seed=41, turn=40), dict(_RW, position=[-7.0, 32.9, -0.1], seed=42, turn=200),
                       dict(_RW, position=[-3.6, 31.5, -0.1], seed=43, turn=310)],
-       # Acid (the coordinator, 20:46): splash crowns in the puddle at the speaker's foot, lightly breaking its reflection
-       'acid_b': [{'kind': 'kit', 'shape': 'ext', 'module': 'acid_rain_el', 'fn': 'splashes', 'area': [-0.7, -1.6, 0.7, -0.4],
-                   'z': -0.11, 'count': 28, 'radius': [0.006, 0.016], 'avoid': [[0.0, 0.0, 0.34]], 'opacity': 0.85, 'seed': 17}]}
+       # Acid (the coordinator, 20:46): splash crowns in the puddle at the speaker's foot, lightly breaking its reflection.
+       # Removed 2026-11-12 (the coordinator on 7cc92de7: small identical X shapes; ripple rings only): the puddle's own
+       # impacts keep their rings and the few staged splashes (crown, jet, droplets) by age.
+       # 'acid_b': [{'kind': 'kit', 'shape': 'ext', 'module': 'acid_rain_el', 'fn': 'splashes', 'area': [-0.7, -1.6, 0.7, -0.4],
+       #             'z': -0.11, 'count': 28, 'radius': [0.006, 0.016], 'avoid': [[0.0, 0.0, 0.34]], 'opacity': 0.85, 'seed': 17}],
+       }
 # "Poison garden" g3 (the critics on g2, wf_621c52e9, via the coordinator 01:28): fly agaric the hero, true scarlet (sRGB
 # 195, 25, 15 at its base tone), bold raised warts, every age, in clumps at varied heights with a troop in the near
 # foreground; its host tree in frame (a Douglas-fir: the redwood builder with a furrowed pine bark, no buttress); red
@@ -233,7 +240,9 @@ REFLECT = {   # habitat -> [reflector specs] (W H AZ EL DIST TX TY TZ), white bo
     # sun, so the sun's light comes back onto the front. Passive; the sun and the sky stay the only emitters.
     # (first at az 40: its corner showed top right, frame x 0.96, and the sun grazed it, 90 deg off its face; az -50
     # faces the sun but sits in the speaker's shadow, which the low sun casts toward az -50)
-    'ember_c': [(3.0, 2.0, -70.0, 6.0, 2.2, 0.0, 0.0, 0.55)]}
+    # (removed 2026-11-12, the coordinator on 7cc92de7: front still 0.10, the board not doing it; the sun moved instead)
+    # 'ember_c': [(3.0, 2.0, -70.0, 6.0, 2.2, 0.0, 0.0, 0.55)],
+    }
 ROLL = {   # habitat -> (feather, wander) m: the ground patch's far edge rolled under the land beyond (habitat.roll_edge)
     # Fog, the coordinator 2026-11-12: the lip was a ruler-straight 10 cm step; roll its last 0.4 m, wandering 10-20 cm
     # then (same day) hummocks: the brow rises and falls 3-8 cm along its length. Smoke shares the set, so the same lip

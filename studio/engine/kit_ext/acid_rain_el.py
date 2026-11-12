@@ -622,6 +622,14 @@ def rocks(bpy, name, p, kit):
     made = assets.scatter(bpy, p['models'], p.get('res', '1k'), p.get('count', 20), tuple(p.get('area', [-3, -3, 3, 3])),
                           [tuple(a) for a in p.get('avoid', [])], tuple(p.get('scale', [0.8, 1.2])), p.get('z', 0.0),
                           p.get('seed', 1), True, p.get('tilt_deg', 10.0))
+    # `drop` [[x, y, r], ...]: scattered rocks removed after the scatter, so the rest keep their places (Acid, the
+    # coordinator 2026-11-12: a wet rock on the far shore caught the sun as a white dot that read as a lamp)
+    for dx, dy, dr in p.get('drop', []):
+        for r in [r for r in made if math.hypot(r.location.x - dx, r.location.y - dy) < dr]:
+            print(f'{name}: dropped {r.name} at ({r.location.x:.2f}, {r.location.y:.2f})')
+            for o in [*r.children_recursive, r]:
+                bpy.data.objects.remove(o, do_unlink=True)
+            made.remove(r)
     meshes = [o for r in made for o in r.children_recursive if o.type == 'MESH']
     seen = set()
     for o in meshes:
