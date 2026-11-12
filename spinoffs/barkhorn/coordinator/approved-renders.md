@@ -905,6 +905,22 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
      with smoke hanging between the trunks (nature only, sun and sky only).
    - Queue: Fog pair when the root-ray test passes (running on a fresh scene, both cameras), the Acid pair, Dust's
      final, the Ember proxy where it costs no idle time.
+   14:55 UTC, the owner: "What's needed from me?" Answered with five decisions in order of what they unblock (the stage
+   as the line's hero, with `hero-stage2` re-sent; the pendants picture as the bar's direction; Smoke's place; the
+   Hemisphere's black center white or black; the build switch) and five that can wait (Mantle's lift-off cover, the
+   FA123, his Pitt & Giblin model, more dye in the Acid and Dust lamps, the hello@earf.world mailbox). No answer yet.
+   19:22 UTC, biomes lane e2f3b9ffae: EMBER PROXY p6 (`renders/2026-11-12/barkhorn/habitats/ember-proxy.jpg`): the sun
+   in front, behind the camera's left shoulder (35 degrees off the lens axis, 5 degrees high, irradiance 15, #FFBA8A),
+   no reflector; emitters that sun and the dusk sky at 0.13 only; the rock streak gone. Coordinator's check (the frame;
+   the two boxes): front 0.28, hue 4; cone 0.16; the speaker whole, red in the last sun against the pink dusk sky.
+   PASSES. THE EMBER PAIR IS RELEASED for final after Fog, Acid and Dust, with three notes: the small pale objects on
+   the lava flat out or dark; the horn's sun glint kept unclipped; the wide on its own camera with a quarter-scale
+   preview first. Shown to the owner 19:27 as a small test.
+   Same message: FOG ROOT-RAY TEST PASSED, 0 failures (534 seen roots in the wide, 278 in the portrait; two rays per
+   root; tool `spinoffs/barkhorn/biomes/rootray.py`, cd333171); the pale band under the tuft at 1247, 742 is fog over
+   ground. Fog's portrait rendering since 18:16 (about 20:00), then the wide (about two hours). Acid: the wide gets its
+   own camera and a quarter-scale preview; rock_07.032 dropped; the splashes are ripple rings only. Smoke on hold.
+   Speaker lane (status note 19:04, no message): on the Tropos detail pass, its CAD and render chain running.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
