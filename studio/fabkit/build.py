@@ -74,6 +74,9 @@ def main():
                 export_stl(p.solid, os.path.join(out, 'stl', f'{p.name}.stl'), tolerance=0.02, angular_tolerance=0.1)
         asm = Compound(children=kids); asm.label = P.name
         export_step(asm, os.path.join(out, 'step', f'{P.name}.step'))
+        for k in kids:      # detached again, so the clash booleans work on the parts alone, not each with the whole assembly
+            k.parent = None # (a 102-part build grew past 14 GB in the checks with them attached)
+        del asm
         print(f'  step and stl {time.time() - t0:.0f}s', flush=True)
 
     recs, nests = flats.write(P, geo, out)
