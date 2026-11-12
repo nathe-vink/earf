@@ -39,7 +39,11 @@
     "deploymentEnabled": {
       "r31-*": false,
       "r32-*": false,
-      "claude/*": false
+      "claude/*": false,
+      "r33-*": false,
+      "r46-*": false,
+      "r47-*": false,
+      "r48-*": false
     }
   }
 }

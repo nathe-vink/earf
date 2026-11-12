@@ -3274,7 +3274,8 @@ def build():
         ],
         # only main deploys: round 31's twenty-odd working branches each built a preview on every push, until the
         # plan's daily allowance ran out and main could not deploy (Vercel: "Deployment rate limited")
-        'git': {'deploymentEnabled': {'r31-*': False, 'r32-*': False, 'claude/*': False}},
+        'git': {'deploymentEnabled': {'r31-*': False, 'r32-*': False, 'claude/*': False,
+                                      'r33-*': False, 'r46-*': False, 'r47-*': False, 'r48-*': False}},   # the owner, 2026-11-12: r49-* and main build
     }, open(os.path.join(SITE, 'vercel.json'), 'w'), indent=2)
     if RC:                                        # the release candidate's last touches (site_v2.rc_finish)
         site_v2.rc_finish(sys.modules[__name__])
