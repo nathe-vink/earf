@@ -1,0 +1,28 @@
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:178: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m = bpy.data.materials.new(nm); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+Timer 'STL Import' took 0.57 ms
+Timer 'STL Import' took 0.50 ms
+Timer 'STL Import' took 4.16 ms
+Timer 'STL Import' took 4.37 ms
+Timer 'STL Import' took 1.23 ms
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:236: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  cm = bpy.data.materials.new(f'collar-{tint}'); cm.use_nodes = True; nt = cm.node_tree
+Timer 'STL Import' took 0.95 ms
+Timer 'STL Import' took 0.40 ms
+Timer 'STL Import' took 0.73 ms
+Timer 'STL Import' took 0.85 ms
+Timer 'STL Import' took 1.02 ms
+Timer 'STL Import' took 0.23 ms
+Timer 'STL Import' took 4.95 ms
+Timer 'STL Import' took 0.35 ms
+Timer 'STL Import' took 0.44 ms
+00:10.722  cycles           | WARNING CUEW initialization failed: Error opening the library
+AUDIT dome-red hidden [] no-shadow [] lights [('key', 'AREA', 16.558), ('fill', 'AREA', 160.0), ('kicker', 'AREA', 48.0), ('led-red-0', 'AREA', 0.0), ('led-red-1', 'AREA', 0.0), ('led-red-2', 'AREA', 0.0), ('led-red-3', 'AREA', 0.0), ('led-red-4', 'AREA', 0.0), ('led-red-5', 'AREA', 0.0), ('led-red-6', 'AREA', 0.0), ('led-red-7', 'AREA', 0.0), ('led-red-8', 'AREA', 0.0), ('led-red-9', 'AREA', 0.0), ('led-red-10', 'AREA', 0.0), ('led-red-11', 'AREA', 0.0), ('led-red-12', 'AREA', 0.0), ('led-red-13', 'AREA', 0.0), ('led-red-14', 'AREA', 0.0), ('led-red-15', 'AREA', 0.0), ('led-red-16', 'AREA', 0.0), ('led-red-17', 'AREA', 0.0), ('led-red-18', 'AREA', 0.0), ('led-red-19', 'AREA', 0.0), ('led-red-20', 'AREA', 0.0), ('led-red-21', 'AREA', 0.0), ('led-red-22', 'AREA', 0.0), ('led-red-23', 'AREA', 0.0)]
+HIDDENCAST dome-red: 3 hidden, 0 in frame
+   out         0.0 %  area lamp (rectangle) key
+   out         0.0 %  area lamp (ellipse) fill
+   out         0.0 %  area lamp (rectangle) kicker
+00:11.580  render           | Saved: '/tmp/claude-0/-home-user-earf/e73bd455-48f8-5f69-9a3b-fa1e22e4e1e9/scratchpad/hemi-fix/masks/hemisphere-ember-cap-key.png'
+00:13.321  render           | Saved: '/tmp/claude-0/-home-user-earf/e73bd455-48f8-5f69-9a3b-fa1e22e4e1e9/scratchpad/hemi-fix/masks/hemisphere-ember-cap-fill.png'
+00:15.270  render           | Saved: '/tmp/claude-0/-home-user-earf/e73bd455-48f8-5f69-9a3b-fa1e22e4e1e9/scratchpad/hemi-fix/masks/hemisphere-ember-cap-kicker.png'
+CASTCHECK dome-red {'key': 0.0, 'fill': 0.0, 'kicker': 0.0}
