@@ -1,5 +1,5 @@
 """The skyline test (the coordinator, 2026-11-12, before the Fog finals): for every tuft whose root the camera sees, a
-ray from the camera aimed 3 cm below the root must hit ground, not fog or sky. Grass blades and the speaker on the way
+ray from the camera aimed 3 cm below the root must hit ground (or a rock on it), not fog or sky. Grass blades and the speaker on the way
 are passed through, and so are volume-only boxes (fog, haze: a ray goes into them, not off them); the first other surface must be one of the ground meshes (the big surface meshes, as in
 scattercheck.py). Also: the ray through the image a few pixels under the root's projection, the same rule.
 
@@ -82,6 +82,15 @@ def down(x, y):
     return max(zs) if zs else None
 
 
+def solid(org, d, L):
+    """the ray meets ground (by the ground meshes' own BVH: stepping through grass blades bedded in the ground can step
+    over it) or another solid surface (a rock on the land), not only fog and sky, within L"""
+    if any(g.ray_cast(org, d, L)[0] is not None for g in G):
+        return True
+    nm, dist = first(org, d, L)
+    return nm not in ('SKY', 'grass x40') and dist is not None and dist <= L
+
+
 tufts = [o for o in sc.objects if o.parent is None and not o.hide_render and o.name.startswith('grass_')]
 fr = [cam.matrix_world @ v for v in cam.data.view_frame(scene=sc)]                    # tr, br, bl, tl
 tested = 0; fails = []
@@ -101,14 +110,12 @@ for o in tufts:
     px, py = c.x * W, (1 - c.y) * H
     why = []
     t = Vector((r.x, r.y, zg - 0.03)); d = (t - cp); L = d.length
-    nm, dist = first(cp, d.normalized(), L)
-    if nm == 'SKY' or not is_ground(bpy.data.objects[nm]):
-        why.append(f'3cm-below hit {nm}')
+    if not solid(cp, d.normalized(), L + 0.01):
+        why.append(f'3cm-below: nothing solid (scene: {first(cp, d.normalized(), L)[0]})')
     u, v = c.x, 1 - c.y + 4.0 / H                                     # 4 px under the root in the image
     p = fr[3].lerp(fr[0], u).lerp(fr[2].lerp(fr[1], u), v); d = (p - cp).normalized()
-    nm2, _ = first(cp, d, 5000.0)
-    if nm2 == 'SKY' or not is_ground(bpy.data.objects[nm2]):
-        why.append(f'4px-below hit {nm2}')
+    if not solid(cp, d, L + 0.5):                                     # near the root: far hills seen through fog fail
+        why.append(f'4px-below: nothing solid within 0.5 m of the root (scene: {first(cp, d, 5000.0)[0]})')
     if why:
         fails.append(f'  {o.name} at ({r.x:.2f}, {r.y:.2f}, {r.z:.3f}) px ({px:.0f}, {py:.0f}): ' + '; '.join(why))
 print(f'ROOTRAY {label}: {len(tufts)} tufts, {tested} with a seen root, {len(fails)} fail')

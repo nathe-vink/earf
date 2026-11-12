@@ -39,7 +39,10 @@ SETS = {
     # Ember (c), the coordinator 2026-11-12 on 7cc92de7: the low sun in FRONT, behind the camera's left shoulder, 35 deg
     # off the lens axis (the camera sits at az -12 from the speaker: -12 - 35 = -47), 5 deg high, its warm colour kept; the
     # pink dusk sky behind stays as it is (the sky opposite a sunset). Was az 130, el 11.4, behind the speaker
-    'ember_c': {'sun.azimuth_deg': -47.0, 'sun.elevation_deg': 5.0},
+    # p4 (az -47, irradiance 8, #FEB4A1): front 0.216 at hue 2.4, cone 0.111, nothing clipped; the sun up to 14 (value
+    # goes about as irradiance^(1/2.2): 0.216 -> 0.28 wants x1.75) and a touch more orange, so the front reads 4-8;
+    # p5 at 14: front 0.275 hue 4.6, cone 0.160, nothing clipped; 15
+    'ember_c': {'sun.azimuth_deg': -47.0, 'sun.elevation_deg': 5.0, 'sun.irradiance': 15.0, 'sun.color': '#FFBA8A'},
     # the hero on Fog's hillside: Fog's look (5400 K, its sun's colour), the sky turned 40 deg so its own sun stands three-
     # quarter behind the group (az 150, el 5.8) and the horns glow against the fog bank; no white board (in a wide frame)
     'hero_fog': {'render.white_balance_k': 5400, 'sun.azimuth_deg': 150.0, 'sky.rotation_deg': 264.2, 'sun.color': '#FEEA98'},
