@@ -812,6 +812,20 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    whether it built, and give the exact count of deployments in the last 24 hours by branch. The owner asked (09:30)
    whether to extend the vercel.json list to today's working branches; nothing in that file or in Vercel changes
    without his yes. Until then the coordinator commits these notes locally and pushes rarely.
+   (Clock again: the "09:28" and "09:30" above were about 09:20 and 09:22 by `date -u`.)
+   09:25 UTC: THE ALLOWANCE IS NOT THE (WHOLE) CAUSE. The biomes lane's push of 09:25:17 (b67e865f) got a deployment
+   at 09:25:25; nothing was built for anything pushed between 09:00 and 09:25 (the site's edf4dc46 at 09:10:19). No
+   deployment from 24 hours earlier aged out in that gap (none were made between 07:11 and 12:10 on 11 Nov), so a full
+   allowance does not explain it. Cause unknown (a dropped push event is the simplest reading). The owner told. The
+   site lane's next push (the Fog place out) is the retry.
+   09:25 UTC, biomes lane b67e865f7b: FOG LIP PROXY 3 (hummocks to 6 cm, mixed-height lip tufts, 438 overhanging tufts
+   removed), `renders/2026-11-12/barkhorn/habitats/fog-lip-proxy.jpg` and crops. Coordinator's check (the frame and
+   the 2x crop): nothing floats any more. NOT PASSED: behind the grass a bare dark strip of ground with a nearly
+   straight top edge runs from the left edge to the right rock; it is the end of the land seen edge-on. Sent back with
+   the cause and the fix: the land must not end at the brow; extend it at least 6 m as one convex surface falling
+   away (drop = x^2 / 2R, R about 8 m), the same grass over all of it, so the skyline is grass on real ground; overhang
+   test against the extended surface; no bare strip. Smoke takes the same surface before its proxy. One more Fog
+   proxy; the pair stays gated. Also rendering at the lane: Acid and Ember proxies with the three fixes (code 7c376ef0).
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
