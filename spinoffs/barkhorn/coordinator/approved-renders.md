@@ -731,6 +731,15 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    re-rendered (about 35 min).
    RULE, habitats: a passive reflector out of frame is allowed (it adds no light of its own) and is declared in
    CHECK.md. Nothing that emits.
+   12 Nov 06:21 UTC, biomes lane 448b906593: Poison review copies (`poison-review-portrait.jpg`, `-wide.jpg`,
+   `-horn-crop.jpg`), not finals. The reflector barely changed the horn and landed in the wide's frame (dropped); a
+   sun moved to the right-back lost the dapples (dropped). The horn is dark green glass against two far trunks in
+   shade; ground line and contact edges clean at full size. Lane's options: A camera shifted so the horn sits against
+   the sunlit gap; B sun from the camera's side; C accept the dark horn.
+   Coordinator's check: the pictures are already good (the horn reads as dark green glass with its throat, true to
+   Poison). Call (06:26): try A once with the leaflets spread to 75-90 degrees and smaller; if the horn glows and the
+   picture is as good or better, render and push that pair; if not, keep the camera, apply only the leaflet change,
+   render and push (C). No further rounds. Review copies shown to the owner 06:27 as not final.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
