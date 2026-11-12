@@ -1235,7 +1235,7 @@ def rc_waves(p, web):
     # --- the passed habitats (biomes: Ice 0f619953, Dust 26493989), 4:5
     HAB = {'blue': 'renders/2026-11-11/barkhorn/habitats/ice-final-portrait-2400x3000.jpg',       # the final Ice (r48-biomes e2ea7e2f)
            # Fog's hillside out (the coordinator 2026-11-12 09:28: its grass floats over the fog along the brow) until its final pair
-           'green': 'renders/2026-11-11/barkhorn/habitats/poison-final-portrait-2400x3000.jpg'}       # the final Poison (316c38a2)
+           'green': 'renders/2026-11-11/barkhorn/habitats/poison-final-portrait-2400x3000.jpg'}       # Poison (316c38a2), being remade
     # out (the audits, 2026-11-09/10): Dust 26493989 (a hidden panel), then 43c91242 (it hovers: a lit strip under its
     # front edge); Fog b61474c0 (two suns), then aa1ca856 (a hidden fill lamp)
     HAB_ALT = {'green': 'Tropos in Poison, in a forest among ivy-covered trees', 'blue': 'Tropos in Ice, out in the snow at dusk', 'orange': 'Tropos in Dust, on rippled sand among desert buttes',
@@ -2035,6 +2035,11 @@ MANTLE_FINAL = 'renders/2026-11-10/barkhorn/mantle-r48/mantle-final-day-{name}.p
 LAMP_FINAL = 'renders/2026-11-10/barkhorn/lamp-site/final/{f}.png'
 NAMES = dict(zip(RC_KEYS, ['ember', 'dust', 'acid', 'poison', 'ice', 'haze', 'fog', 'smoke']))
 HEMI_LM = {'red': 272, 'orange': 280, 'amber': 301, 'green': 256, 'blue': 264, 'violet': 254, 'ice': 339, 'black': 287}   # lm out, cd703d56
+# the bar (r33-speaker-horn ac342ff0, approved as a direction 2026-11-12): five Hemispheres over the counter, two Cores on it;
+# on /lighting as the room, and an "At the bar" view for the tints in it. More frames join ROOM as they pass.
+ROOM = [('renders/2026-11-11/barkhorn/product/planet-bar/bar-pendants.png', 'bar-pendants',
+         'Five Hemispheres over a bar in Acid, Ember and Dust, two Cores on the counter, a wall of records behind',
+         {'dome': ['red', 'orange', 'amber'], 'orb': ['red', 'orange']})]
 CORE_ROW_DAY = 'core-row-day'    # Core's eight by day, switched off (r32-lamps-final 01a0b833)
 LAMP_LIGHT_TINTS = '2200 K in Ember; 2700 K in Poison and Fog; 3000 K in Haze; 4000 K in Dust, Acid, Ice and Smoke'
 
@@ -2062,6 +2067,7 @@ def rc_products(p, web):
         D['tt']['colours'][k] = {'views': {'studio': v}, 'card': dict(card, alt=f'Mantle in {n.title()}')}
     # the lamps: each lit in its tint, the eight in a row, Hemisphere from below (Ember)
     rows = {}
+    room = [(views(src, name, 1600)[0], alt, tints) for src, name, alt, tints in ROOM]
     cluster, _ = views(LAMP_FINAL.format(f='hemisphere-cluster'), 'hemisphere-cluster', 1600)
     if CORE_ROW_DAY:
         core_day = dict(save(LAMP_FINAL.format(f='core-row-day'), 'core-row-day.webp', 2000),
@@ -2074,6 +2080,9 @@ def rc_products(p, web):
             main = f'{f}-{n}-direct' if lamp == 'dome' else f'{f}-{n}'
             v, card = views(LAMP_FINAL.format(f=main), f'{f}-{n}', 1200)
             vs = {'hero': v, 'row': dict(r, th=row_th['src'])}
+            for pic, alt, tints in room[:1]:          # the bar, for the tints it shows
+                if k in tints.get(lamp, []):
+                    vs['bar'] = pic
             if lamp == 'dome':
                 vs['below'], _ = views(LAMP_FINAL.format(f=f'{f}-{n}-under'), f'{f}-{n}-under', 1200)
                 if k == 'red':                # Ember's details (r32-lamps-final 92ff60c3)
@@ -2118,12 +2127,16 @@ def rc_products(p, web):
     p.sub("const TT_VIEWS = [['studio', 'In the studio', c => c.k === 'red' ? `${D.tt.name} in Ember.` : `${D.tt.name}, shown in Ember. ${c.name} to follow.`],",
           "const TT_VIEWS = [['studio', 'In the studio', c => `${D.tt.name} in ${c.name}.`],")
     p.sub("         ['row', 'All eight', () => 'Eight Hemispheres hung in a row, lit, one in each color.'],",
+          "         ['bar', 'At the bar', () => 'Five Hemispheres over a bar in Acid, Ember and Dust, two Cores on the counter below.'],\n"
           "         ['below', 'From below', c => `Hemisphere from below, lit: the opal diffuser inside its ${c.name} shade.`],\n"
           "         ['off', 'Off', () => 'Hemisphere in Ember, switched off.'],\n"
           "         ['cap', 'The cap', () => 'Its cap, satin black anodized aluminum.'],\n"
           "         ['rim', 'The rim', () => 'The rim of the Ember shade, lit, with the opal diffuser within.'],\n"
           "         ['cluster', 'In a group', () => 'Eight Hemispheres hung at different heights, one in each color.'],\n"
           "         ['row', 'All eight', () => 'Eight Hemispheres hung in a row, lit, one in each color.'],")
+    p.sub("        ['row', 'All eight', () => 'Eight Core lamps in a row, lit, in spectrum order.'],",
+          "        ['bar', 'At the bar', () => 'Two Cores on a bar counter in Ember and Dust, five Hemispheres over them.'],\n"
+          "        ['row', 'All eight', () => 'Eight Core lamps in a row, lit, in spectrum order.'],")
     if CORE_ROW_DAY:
         p.sub("        ['row', 'All eight', () => 'Eight Core lamps in a row, lit, in spectrum order.'],",
               "        ['row', 'All eight', () => 'Eight Core lamps in a row, lit, in spectrum order.'],\n"
@@ -2138,7 +2151,9 @@ def rc_products(p, web):
     p.sub('<div class="wrap lamps-home no-pic"><ul class="lamp-names">', '<div class="wrap lamps-home no-pic">' + rows_fig('home') + '<ul class="lamp-names">')
     m = re.search(r'(<section class="band lamps" id="lamps"><div class="wrap">.*?</div></div>)(\s*<div class="ptiles">)', p.rest, re.S)
     assert m, 'rc_products: the lighting page'
-    p.rest = p.rest[:m.end(1)] + rows_fig('page') + p.rest[m.end(1):]
+    roomfig = ''.join(f'<figure class="room-pic"><img src="{pic["src"]}" width="{pic["w"]}" height="{pic["h"]}" loading="lazy" alt="{alt}"></figure>'
+                      for pic, alt, _ in room)
+    p.rest = p.rest[:m.end(1)] + '<div class="room">' + roomfig + '</div>' + rows_fig('page') + p.rest[m.end(1):]
     # the home's Mantle and its page: Ember
     e = D['tt']['colours']['red']['views']['studio']
     pic = (f'<figure class="mantle-pic"><a href="#mantle-ember"><img src="{e["src"]}" width="{e["w"]}" height="{e["h"]}" loading="lazy" '
@@ -2154,6 +2169,9 @@ def rc_products(p, web):
 .lamp-rows figcaption, .mantle-pic figcaption { color: var(--muted); font-size: 14px; text-align: left !important }
 .lamp-rows.home + .lamp-names { margin-top: 20px }
 .lamp-rows.page, .mantle-pic.page { margin: 0 0 32px }
+.room { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 16px; margin: 0 0 16px; max-width: 1200px }
+.room-pic { margin: 0 } .room-pic img { display: block; width: 100%; height: auto }
+.room .room-pic:only-child { max-width: 880px }
 """)
 
 
