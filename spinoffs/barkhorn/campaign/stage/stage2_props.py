@@ -144,6 +144,13 @@ def lamps(bpy, name, p, kit):
                         sl.material = m
                     n += 1
             print('CORE base satin:', n, 'parts')
+        if p.get('core_cable') is False:   # (the coordinator, 2026-11-12: on the bar a Core stands off its dock: no dock
+                                           # and no cable in any bar frame; the dock is already under the skirt, the cable goes)
+            gone = [o for o in bpy.context.scene.objects if o not in before and o.type == 'MESH' and o.name.split('.')[0] == 'dock-cable']
+            for o in gone:
+                bpy.data.objects.remove(o, do_unlink=True)
+            objs = [o for o in objs if o not in gone]
+            print('CORE cable removed:', len(gone))
     print('LAMPS hemi_scale', k, 'cords to', top)
     return objs
 
