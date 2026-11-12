@@ -54,3 +54,4 @@ The screenshots in this folder are from the first RC and are out of date.
 - Pushed 60785c93 with r47-site-next at 2026-11-10 17:38:55 UTC; Vercel took r47-site-next's push for that window.
   This section is the follow-up push for the next one. Push r49-site-rc on its own.
 - 2026-11-12T09:36Z: retry 1 of the 417a38f2 build (Vercel's build allowance); no change to the site.
+- 2026-11-12T09:51Z: retry 2 of the 417a38f2 build; no change to the site.
