@@ -868,6 +868,24 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    a small test 12:58. Smoke, Acid and Ember proxies expected in one push at about 15:00 UTC.
    Speaker lane (status notes, no message): the bar's portrait rendered in two halves and blended by 12:54; the
    pendants frame rendering in halves; the Mantle frame next.
+   14:20 UTC, speaker lane de34cd1ead: THE BAR BATCH (one push), `renders/2026-11-11/barkhorn/product/planet-bar/`:
+   `bar-backbar-portrait.png` 2400x3000 (224 samples, two overlapping bands blended, the frame passing the 2-hour task
+   limit), `bar-pendants.png` 1920x1920 test, `mantle-bar.png` 1920x1280 test; audits hidden 0, equipment 0.
+   Coordinator's check (each frame whole; the portrait in full-size crops; lamp colors measured):
+   - `bar-pendants`: PASSES as the direction. Five Hemispheres in a cluster, two Cores, drinks, an open newspaper, a
+     bowl of limes, a sleeve and a napkin on the dark stone, the record wall behind. Ember shades 5 / 0.41 / 1.0 (the
+     lamps lane's `ember-direct.png` 4.9 / 0.46 / 0.99), Dust 16 / 0.36 / 0.96 (15.9 / 0.40 / 0.95), Acid 52 / 0.23 / 0.88
+     (52.3 / 0.26 / 0.86); Cores 7 / 0.90 / 0.72 and 20 / 0.82 / 0.69. To render at 2400x2400, same camera. Shown to
+     the owner 14:35 as a test.
+   - `bar-backbar-portrait`: NOT PASSED. Composition, speaker and bay right. The near Core is washed out (center 7 / 0.13 /
+     1.0, a clipped channel; the passed frames hold about 5 / 0.67 / 0.90): to be dimmed, the level declared, every lamp
+     measured. Mantle's post under the deck reads light gray: must read black. A thin pale straight line behind the
+     Core's base: to be explained (no dock and no cable on the bar). To be rendered LAST, with the Tropos from the
+     detail pass, since it shows the ports, the remote board and its wires at full size.
+   - `mantle-bar`: NOT PASSED. At lens height 1.16 Mantle is an edge-on silhouette. Redo: a three-quarter view from a
+     seat (eye 1.30-1.40 m, 40-50 mm), a Hemisphere over it lighting the deck and the plinth's edges, an Ember Core
+     beside it, posts black; test size first.
+   Order given: pendants at full size and the Mantle test alongside the Tropos detail pass; the portrait last.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
