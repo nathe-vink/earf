@@ -1025,6 +1025,22 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    nothing else, rightly. The coordinator will not press the lanes on it and may not commit on their branches (the
    standing rule: only r46-owner-notes). Put to the owner: either he allows the coordinator to add that one file change
    on r48-biomes and r33-speaker-horn, or it is left (with one push per report the picture lanes use few builds).
+   23:53 UTC, site lane: BATCH 3 PREPARED, NOT PUSHED (r49-site-rc 86eea96240, r47-site-next 05e19bd2f7): the switch
+   in its `vercel.json` (written by `web.py`); `bar-pendants` on `/lighting` as the room picture under the heading (a
+   `.room` block that takes more frames) and as "At the bar", the second view, on Hemisphere in Ember, Dust and Acid
+   and on Core in Ember and Dust (no Acid Core in the frame, so none there: confirmed). It holds the push for the Fog
+   verdict ("push" or "push without Fog").
+   23:56 UTC, speaker lane 3523b66bb: the switch is in ITS `vercel.json` too (its session allowed the edit). So only
+   r48-biomes lacks it. LAST MANTLE TEST NOT MET (an Acid Hemisphere over the Acid Mantle: deck top 32 / 0.49 / 0.33,
+   front edge 0): MANTLE STAYS EMBER in every bar frame; the Mantle frame is the Ember three-quarter at 2400x1600.
+   The lane's reason ("the Hemisphere lights upward, so almost none of its light reaches the deck") is at odds with
+   the site's "about 350 lux on a table half a meter below": the lamps lane is asked (23:59) to settle it with
+   numbers in its Hemisphere report (the share of light down through the mouth and out through the shade; lux at the
+   center, 0.3 m and 0.6 m off center; the same read from the in-use picture's own render). The coordinator's reading:
+   clear tinted acrylic over a dark bar shows no color from above whatever the lamp, having nothing light behind it.
+   The hero test from the bar (`bar_hero`, 1600x900, frontal, both bays whole, Mantle between the bays under the
+   cluster) is rendering; then the rest of the studio refresh (six fronts done, audit 0/0), the Mantle frame,
+   `bar-backbar` and `core-bar-table` with every fix, the portrait last.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
