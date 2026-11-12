@@ -53,6 +53,7 @@ CARDS = [[]]                            # --card white|black W H Z SIDE_DEG: rea
 MANIFEST = [None]                       # --manifest FILE: the approved build per tint (the speaker lane's), asserted
 BERMS = [[]]                            # --berm LX LY RX RY H: sand banked against the base (the speaker's frame)
 REFLECTORS = [[]]                       # --reflector W H AZ EL DIST TX TY TZ: a white board where a fill lamp stood
+CREST = [None]                          # --crest Y0 R [HUMP_LO HUMP_HI]: the hilltop falls away past y0 (crest)
 ROLL = [None]                           # --roll-edge FEATHER WANDER: the ground patch's far edge rolled down under the terrain
 LAND = [True]                           # scattered tufts landed on the ground and checked against the camera (the coordinator, 2026-11-11)
 MENISCUS = [0.0]                        # --meniscus R: a water meniscus round the cabinet's walls, radius R m
@@ -178,6 +179,49 @@ def roll_edge(bpy_, feather, wander, hump_lo=0.0, hump_hi=0.0, below=0.06, seed=
     me.update()
     print(f'roll: {patch.name} far edge (y {ymax:.2f}) rolled under the land over {feather} m, wandering in by up to '
           f'{2 * wander:.2f} m; {n} vertices moved, down to {lo:+.3f} m; hummocks up to {hmax[0]:.3f} m')
+
+
+def crest(bpy_, y0, R, hump_lo=0.0, hump_hi=0.0, seed=11.0):
+    """The hilltop has no end (the coordinator, 2026-11-12 09:36: the lip read as the land's end seen edge-on, a bare
+    strip with a straight top; a real hilltop curves away and its skyline is grass). The ground patch, carried well past
+    `y0` in the shot, falls away beyond it as one smooth convex surface, drop = t^2 / (2 R) at t = y - y0 metres (R 8:
+    0.25 m at 2 m, 1 m at 4 m, 2.25 m at 6 m), so the low camera's skyline falls on grassed ground about a metre past y0
+    and what lies beyond sinks out of sight. With `hump_lo`/`hump_hi` (m) low hummocks ride on it near the skyline. The
+    patch is the smallest big ground mesh (as roll_edge's)."""
+    from mathutils import Vector, noise
+    sc = bpy_.context.scene
+    big = []
+    for o in sc.objects:
+        if o.type != 'MESH' or o.parent is not None or o.hide_render or o.name.startswith('grass_') or len(o.data.polygons) < 10000:
+            continue
+        if any(m.type == 'PARTICLE_SYSTEM' for m in o.modifiers):
+            continue
+        bb = [o.matrix_world @ Vector(c) for c in o.bound_box]
+        dx = max(v.x for v in bb) - min(v.x for v in bb); dy = max(v.y for v in bb) - min(v.y for v in bb)
+        if dx >= 5.0:
+            big.append((dx * dy, o))
+    if not big:
+        print('crest: no ground patch'); return
+    big.sort(key=lambda t: t[0]); patch = big[0][1]
+    mw = patch.matrix_world; mi = mw.inverted(); me = patch.data
+    ymax = max((mw @ v.co).y for v in me.vertices); n = 0; lo = 0.0; hmax = 0.0
+    for v in me.vertices:
+        p = mw @ v.co
+        t = p.y - y0
+        h = 0.0
+        if hump_hi > 0.0 and -0.6 < t < 2.0:
+            g = min(1.0, (t + 0.6) / 0.8); g = g * g * (3 - 2 * g)
+            g *= 1.0 if t < 1.2 else max(0.0, (2.0 - t) / 0.8)
+            amp = hump_lo + (hump_hi - hump_lo) * (0.5 + 0.5 * noise.noise(Vector((p.x * 0.35, seed, 4.1))))
+            bump = max(0.0, 0.5 + 0.9 * noise.noise(Vector((p.x * 1.4, seed, 2.9))) + 0.3 * noise.noise(Vector((p.x * 3.7, seed, 5.3))))
+            h = amp * min(1.0, bump) * g; hmax = max(hmax, h)
+        if t <= 0.0 and h == 0.0:
+            continue
+        dz = h - (t * t / (2.0 * R) if t > 0.0 else 0.0)
+        v.co = mi @ Vector((p.x, p.y, p.z + dz)); n += 1; lo = min(lo, dz)
+    me.update()
+    print(f'crest: {patch.name} falls away past y {y0} (R {R} m, the patch to y {ymax:.2f}, down to {lo:+.2f} m); '
+          f'{n} vertices moved; hummocks up to {hmax:.3f} m')
 
 
 def land_scatter(bpy_, sink=0.01, edge=0.18, drop=0.04):
@@ -1215,6 +1259,8 @@ def run(shot_path, collection, out, samples, scale, asset=ASSET, root=ROOT, extr
             print('real set: every ray type on for', fixed)
         if ROLL[0]:
             roll_edge(bpy_, *ROLL[0])
+        if CREST[0]:
+            crest(bpy_, *CREST[0])
         if LAND[0]:
             land_scatter(bpy_)
         if CARDS[0]:
@@ -1272,6 +1318,7 @@ def main():
     ap.add_argument('--crop', type=float, nargs=4, help='render a region only, fractions X0 Y0 X1 Y1 from the top left (tests)')
     ap.add_argument('--fresnel-angle', action='store_true', help="glass faces pass a shadow ray's 1 - F(theta) (Schlick, n 1.49)")
     ap.add_argument('--roll-edge', type=float, nargs='+', default=None, help='FEATHER WANDER [HUMP_LO HUMP_HI]')
+    ap.add_argument('--crest', type=float, nargs='+', default=None, help='Y0 R [HUMP_LO HUMP_HI]: the hilltop falls away past y0')
     ap.add_argument('--no-land', action='store_true', help='leave scattered tufts at the kit\'s flat z (old renders)')
     ap.add_argument('--meniscus', type=float, default=0.0, help='a water meniscus round the walls, radius m')
     ap.add_argument('--wet', type=float, nargs='+', help='rain on the speaker: front beads, lip beads, runnels, seed [r_min r_max mm [run_min run_max m [low]]]')
@@ -1289,7 +1336,7 @@ def main():
     a = ap.parse_args()
     global SURFACE_GLASS
     WELD[0] = not a.no_weld; SURFACE_GLASS = a.surface_glass; FRESNEL_ANGLE[0] = a.fresnel_angle
-    SINK[0] = a.sink; LED[0] = a.led; REAL_SET[0] = a.real_set; CANOPY_OPEN[0] = a.canopy_open; CLEARING[0] = a.canopy_clearing; CLEARING_AT[0] = tuple(a.canopy_clearing_at); PLANT_ALPHA[0] = tuple(a.plant_alpha); SCRIM[0] = a.scrim; WET[0] = a.wet; REFLECTORS[0] = [tuple(r) for r in a.reflector]; BERMS[0] = [tuple(b) for b in a.berm]; MANIFEST[0] = json.load(open(a.manifest)) if a.manifest else None; MENISCUS[0] = a.meniscus; LAND[0] = not a.no_land; ROLL[0] = tuple(a.roll_edge) if a.roll_edge else None; DOTS[0] = [tuple(d) for d in a.dot]; CARDS[0] = [(c[0], float(c[1]), float(c[2]), float(c[3]), float(c[4])) for c in a.card]; SPLIT[0] = a.split; GLOSSY_FLAG[0] = a.glossy_flag
+    SINK[0] = a.sink; LED[0] = a.led; REAL_SET[0] = a.real_set; CANOPY_OPEN[0] = a.canopy_open; CLEARING[0] = a.canopy_clearing; CLEARING_AT[0] = tuple(a.canopy_clearing_at); PLANT_ALPHA[0] = tuple(a.plant_alpha); SCRIM[0] = a.scrim; WET[0] = a.wet; REFLECTORS[0] = [tuple(r) for r in a.reflector]; BERMS[0] = [tuple(b) for b in a.berm]; MANIFEST[0] = json.load(open(a.manifest)) if a.manifest else None; MENISCUS[0] = a.meniscus; LAND[0] = not a.no_land; ROLL[0] = tuple(a.roll_edge) if a.roll_edge else None; CREST[0] = tuple(a.crest) if a.crest else None; DOTS[0] = [tuple(d) for d in a.dot]; CARDS[0] = [(c[0], float(c[1]), float(c[2]), float(c[3]), float(c[4])) for c in a.card]; SPLIT[0] = a.split; GLOSSY_FLAG[0] = a.glossy_flag
     HORN['close'] = a.horn_close; HORN['rough'] = a.horn_rough; HORN['shadows'] = not a.horn_front; HORN['as_cabinet'] = a.horn_as_cabinet
     sh = json.load(open(a.shot))
     scale_lights(sh, {k: float(v) for k, v in (x.split('=', 1) for x in a.light)})

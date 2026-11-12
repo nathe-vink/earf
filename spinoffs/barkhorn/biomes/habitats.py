@@ -235,7 +235,11 @@ REFLECT = {   # habitat -> [reflector specs] (W H AZ EL DIST TX TY TZ), white bo
 ROLL = {   # habitat -> (feather, wander) m: the ground patch's far edge rolled under the land beyond (habitat.roll_edge)
     # Fog, the coordinator 2026-11-12: the lip was a ruler-straight 10 cm step; roll its last 0.4 m, wandering 10-20 cm
     # then (same day) hummocks: the brow rises and falls 3-8 cm along its length. Smoke shares the set, so the same lip
-    'fog_b': (0.4, 0.1, 0.03, 0.08), 'smoke_c': (0.4, 0.1, 0.03, 0.08)}
+    # (then, 09:36, the roll replaced by CREST: the lip was the land's end seen edge-on)
+    }
+CREST = {   # habitat -> (y0, R, hump_lo, hump_hi): the hilltop falls away past y0 as t^2 / 2R (habitat.crest); the shot
+    # carries the ground patch, the terrain's crest and the grass 6 m past y0 (the coordinator, 2026-11-12 09:36)
+    'fog_b': (2.6, 8.0, 0.03, 0.08), 'smoke_c': (2.6, 8.0, 0.03, 0.08)}
 BERM = {   # habitat -> [berm specs] (LX LY RX RY H, the speaker's frame, m)
     # Dust r3 (the coordinator's 00:05 note 2): sand banked 22 mm against the outside of the left face, its full depth: the
     # face's lower edge showed open-sand-bright (its 21 % Fresnel mirror of the sunlit sand behind at 73 deg, and the sand
@@ -320,6 +324,7 @@ def main():
             + [x for r in (a.reflector or REFLECT.get(n, [])) for x in ('--reflector', *map(str, r))] \
             + [x for b in (a.berm or BERM.get(n, [])) for x in ('--berm', *map(str, b))] \
             + (['--roll-edge', *map(str, ROLL[n])] if n in ROLL else []) \
+            + (['--crest', *map(str, CREST[n])] if n in CREST else []) \
             + (['--meniscus', str(a.meniscus or MENISCUS[n])] if (a.meniscus or n in MENISCUS) else []) \
             + [x for c in a.card for x in ('--card', *c)] \
             + [x for d in a.dot for x in ('--dot', *d)]

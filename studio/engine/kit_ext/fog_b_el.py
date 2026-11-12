@@ -29,8 +29,16 @@ def _headland_h(p, x, y):
     """The headland the speaker stands on: level ground round it, a brow at `brow` metres behind, then a steep fall
     toward the fog; it falls away to the sides beyond `wide`."""
     brow, drop, wide = p.get('brow', 9.0), p.get('drop', 90.0), p.get('wide', 45.0)
+    z = 0.0
+    if p.get('crest'):
+        # a convex crest first (y0, R, length, below): the land falls as t^2 / 2R from y0, kept `below` metres under the
+        # ground patch that lies on it, and the steep fall starts at its end (`brow` then sits at y0 + length)
+        cy, cR, cl, cb = p['crest']
+        tc = min(max(0.0, y - cy), cl)
+        z = -tc * tc / (2.0 * cR) - cb * min(1.0, max(0.0, (y - cy + 0.5) / 0.5))
+        brow = cy + cl
     t = max(0.0, y - brow)
-    z = -drop * (1.0 - math.exp(-(t / p.get('steep', 28.0)) ** 1.6))
+    z += -drop * (1.0 - math.exp(-(t / p.get('steep', 28.0)) ** 1.6))
     u = max(0.0, abs(x) - wide)
     z -= drop * (1.0 - math.exp(-(u / 30.0) ** 1.6))
     return z
