@@ -65,3 +65,25 @@ The owner, 03:00: "Horn: A, smooth, satin outside" (README 468c1058). The plinth
 - **72.6 kg** with horn A on its own feet (`stability/standard-2018.md`; the render models' volumes and the parts list's masses). The formed horn is about 2 kg lighter than the laminated one.
 - **The stepped plinth:** 10.4 kg more.
 - **The slim light plate:** about 5.3 kg more.
+
+## Detail pass (2026-11-12)
+
+Finish and detail only (`make/detail-pass.md`, the coordinator's items A to H): no shape or size changes. From the
+rebuilt parts list (`out-cloud/bom.csv`) against the one before. Estimates.
+
+| line, for the pair | was | now | change |
+|---|---|---|---|
+| feet: stems and jam nuts black oxide, the swivel base black (`levelling-feet-black`) | 2 x $18 | 2 x $22 | +$8 |
+| back screws: 24 M5 countersunk socket heads, black, flush (`back-screws-flush`) | 2 x $10 | 2 x $14 | +$8 |
+| woofer screws: black ultra-low heads with the inserts (`m6-acrylic-inserts-low`) | 2 x $14 | 2 x $20 | +$12 |
+| port rings: round, bonded, one polished chamfer (the frame's cut sheet) | $14.88 | $14.28 | −$0.60 |
+| port screws: none, the rings are bonded | 2 x $5 | — | −$10 |
+| rating: engraved in the back's flange, no plate, no screws (`rating-engraving`) | 2 x $10 | 2 x $4 | −$12 |
+| terminals booted black (`push-on-terminal-black`) | 8 x $0.50 | 8 x $0.60 | +$0.80 |
+| black braided PET sleeve on every lead (`braid-sleeve`) | — | 2 x $8 | +$16 |
+| the IR receiver's cup, black cast acrylic (`ir-bracket`) | $37.43 | $37.67 | +$0.24 |
+| **the pair** | **$9,563.29** | **$9,585.73** | **+$22.44** ($11.22 a speaker) |
+
+- **Machining:** the 24 countersinks on the back's own CNC operation, and the bottom batt's pocket, channel and groove
+  for the IR lead, cut with the batt. Neither adds a set-up.
+- **The amplifier plate (G):** unchanged. It is the one bright bought part.

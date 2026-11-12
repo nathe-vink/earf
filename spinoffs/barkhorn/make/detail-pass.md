@@ -113,7 +113,9 @@ From each side of the speaker:
 - **From behind:** the back's lower batt covers it.
 
 **Its lead.**
-- It runs in a 10 x 10 groove under the bottom batt to the batt's back end.
+- It drops out of the cup's back in a 12 x 24 channel cut down the bottom batt's front face, below the pocket.
+- It runs in a 12 x 12 groove under the bottom batt to the batt's back end (the clash check found the first route, a
+  10 x 10 groove alone, passing through the batt where the lead drops).
 - It rises in the 10 mm gap in front of the back's lower batt, which hides it from behind.
 - It passes forward under the amplifier's compartment and up the compartment's front, where the woofer hides it from the
   front, to the third gland.
