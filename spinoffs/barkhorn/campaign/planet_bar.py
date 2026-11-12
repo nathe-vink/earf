@@ -313,14 +313,14 @@ def bar_pendants():
     # (proof: from the room side at 35 mm both bays sat cut at the frame's edges: square, 61 mm, the wall's frame
     # between the bays only; three Hemispheres, two Cores and the drinks under them)
     s = _base([1920, 1920], 'Planet EARF bar: the Hemispheres over the bar')
-    s['set']['props'].append(_lamps(HEMIS, [('ember', 6.55, -0.08), ('dust', 7.25, 0.02)]))
+    s['set']['props'].append(_lamps(HEMIS, [('ember', 6.62, -0.08), ('dust', 7.25, 0.04)]))   # (proof: both cut by the corners at 6.55, 7.25)
     for pr in s['set']['props']:
         if pr.get('fn') == 'boards':
             pr['boards'] = [b for b in pr['boards'] if not any(k in b['image'] for k in ('newspaper', 'cover-05', 'matches'))]
-        _move_drink(pr, 0.75, 0.0)
+        _move_drink(pr, 0.78, 0.0)
     s['set']['props'] = [pr for pr in s['set']['props'] if not (pr.get('texture') == 'american_walnut_veneer' and pr.get('size') == [0.2, 0.05, 0.022])]
     s['render'].update(samples=256, adaptive=0.005)
-    s['camera'] = {'position': [6.9, 2.55, 1.55], 'target': [6.92, 4.4, 1.53], 'lens_mm': 61.0, 'level': True,
+    s['camera'] = {'position': [6.9, 2.55, 1.6], 'target': [6.92, 4.4, 1.45], 'lens_mm': 58.0, 'level': True,
                    'fstop': 2.0, 'focus': [6.9, Y_BAR, 1.6]}
     return s
 
@@ -343,7 +343,7 @@ def mantle_bar():
     # now-playing sleeve on its stand at Mantle's left, turned to the lens)
     sx, sy = mc[0] - 0.4 * right[0] - 0.08 * fwd[0], mc[1] - 0.4 * right[1] - 0.08 * fwd[1]
     stand = {**stand, 'position': [sx, sy, TOP], 'rotate': [0, 0, MANTLE_RZ - 8.0]}
-    sleeve = {**sleeve, 'x': sx, 'y': sy - 0.01, 'rot': [-14.0, 0, MANTLE_RZ - 8.0]}
+    sleeve = {**sleeve, 'image': 'tex/cover-12.png', 'ground': '#141414', 'x': sx, 'y': sy - 0.01, 'rot': [-14.0, 0, MANTLE_RZ - 8.0]}   # (proof: the pale one glared)
     keep = []
     for pr in s['set']['props']:
         if pr.get('shape') in ('lathe', 'tube') or (pr.get('shape') == 'box' and pr.get('material') == 'frosted'):
@@ -352,8 +352,8 @@ def mantle_bar():
             pr = {**pr, 'boards': [b for b in pr['boards'] if not (b.get('rot', [0])[0] == -90.0 and b['w'] == 0.315)]}   # the stack
         keep.append(pr)
     s['set']['props'] = keep + [stand, {'kind': 'kit', 'shape': 'ext', 'path': LIFE, 'fn': 'boards', 'boards': [sleeve]}]
-    c = [mc[0] + 1.0 * fwd[0], mc[1] + 1.0 * fwd[1], 1.34]
-    s['camera'] = {'position': c, 'target': [mc[0], mc[1], MANTLE[2] + 0.07], 'lens_mm': 50.0, 'level': True,
+    c = [mc[0] + 0.85 * fwd[0], mc[1] + 0.85 * fwd[1], 1.27]           # (proof: half the frame bar top: lower, closer)
+    s['camera'] = {'position': c, 'target': [mc[0], mc[1], MANTLE[2] + 0.09], 'lens_mm': 55.0, 'level': True,
                    'fstop': 2.8, 'focus': [mc[0], mc[1], MANTLE[2] + 0.07]}
     return s
 
