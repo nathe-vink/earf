@@ -44,3 +44,24 @@ is a 1.6 m disc inside the room now (a round soft highlight, as on the lamps lan
 the book of matches, out of that frame. The near horn reads by a graduated warm card over its bay, seen only in
 reflections (declared in the emitters file). Mantle's plinth is clear Ember acrylic in layers: a narrow low head from
 past the frame's right edge passes through it.
+
+## Full size and two test frames (2026-11-12, after the coordinator's 00:33 batch)
+
+| frame | size, samples | file |
+|---|---|---|
+| bar-backbar | 3200 x 1800, 256 (adaptive 0.005) | 4.5 MB, lossless (the opaque alpha dropped) |
+| core-bar-table | 3200 x 2133, 512 | 4.2 MB, lossless |
+| bar-backbar-portrait | 2400 x 3000, 224 | 4.9 MB: lossless was 5.4 MB (zopfli), so the lowest bit of channel values under 24 is dropped (at most 1/255, deep shadows only) |
+| bar-pendants (test) | 1920 x 1920, 256 | 2.7 MB, lossless |
+| mantle-bar (test) | 1920 x 1280, 256 | 1.7 MB, lossless |
+
+| what | frame | measured |
+|---|---|---|
+| Core Ember centre (h, s, v) | core-bar-table | 5.1, 0.59, 0.94 (finals 5.0, 0.64, 0.91; the patch takes in the soft highlight) |
+| near Tropos, whole box against the wall; covered | bar-backbar | 0.79x the wall (the cone near black pulls the box down; round 4's face-only figure 1.8x); covered 1.8 % |
+| audit (reaudit.py) | all five | hidden 0, equipment 0 |
+
+Contact edges, checked in full-size crops: the Tropos feet on the bay floor (wide and portrait), the glasses on the
+stone (wide, portrait, pendants), Mantle's plinth on the stone (wide, mantle-bar), the Core bases (wide, core-bar-table,
+pendants). In the portrait the near Core is close and seen from above: the ball hides its narrower base, and the pink
+under it is its reflection on the stone in front of the base.

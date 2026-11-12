@@ -1,0 +1,230 @@
+{
+ "emitters": [
+  {
+   "name": "Hemisphere dust",
+   "lumens": 1000,
+   "cct_k": 2700,
+   "in_frame": true
+  },
+  {
+   "name": "Hemisphere ember",
+   "lumens": 1000,
+   "cct_k": 2200,
+   "in_frame": true
+  },
+  {
+   "name": "Hemisphere acid",
+   "lumens": 1000,
+   "cct_k": 2700,
+   "in_frame": true
+  },
+  {
+   "name": "Hemisphere ember",
+   "lumens": 1000,
+   "cct_k": 2200,
+   "in_frame": true
+  },
+  {
+   "name": "Hemisphere dust",
+   "lumens": 1000,
+   "cct_k": 2700,
+   "in_frame": true
+  },
+  {
+   "name": "Core ember",
+   "lumens": 200,
+   "cct_k": 2200,
+   "in_frame": true
+  },
+  {
+   "name": "Core dust",
+   "lumens": 200,
+   "cct_k": 2700,
+   "in_frame": true
+  },
+  {
+   "name": "track-wall0",
+   "declared": true,
+   "emitter": "disk area lamp 0.12 x 0.12 m, out of frame",
+   "irradiance_w_m2": 5.1,
+   "strength": null,
+   "position_m": [
+    4.3,
+    4.9,
+    3.35
+   ]
+  },
+  {
+   "name": "track-wall1",
+   "declared": true,
+   "emitter": "disk area lamp 0.12 x 0.12 m, out of frame",
+   "irradiance_w_m2": 5.1,
+   "strength": null,
+   "position_m": [
+    6.2,
+    4.9,
+    3.35
+   ]
+  },
+  {
+   "name": "track-wall2",
+   "declared": true,
+   "emitter": "disk area lamp 0.12 x 0.12 m, out of frame",
+   "irradiance_w_m2": 5.1,
+   "strength": null,
+   "position_m": [
+    7.0,
+    4.9,
+    3.35
+   ]
+  },
+  {
+   "name": "track-wall3",
+   "declared": true,
+   "emitter": "disk area lamp 0.12 x 0.12 m, out of frame",
+   "irradiance_w_m2": 5.1,
+   "strength": null,
+   "position_m": [
+    9.0,
+    4.9,
+    3.35
+   ]
+  },
+  {
+   "name": "track-wall4",
+   "declared": true,
+   "emitter": "disk area lamp 0.12 x 0.12 m, out of frame",
+   "irradiance_w_m2": 5.1,
+   "strength": null,
+   "position_m": [
+    9.8,
+    4.9,
+    3.35
+   ]
+  },
+  {
+   "name": "track-bar0",
+   "declared": true,
+   "emitter": "disk area lamp 0.12 x 0.12 m, out of frame",
+   "irradiance_w_m2": 1.05,
+   "strength": null,
+   "position_m": [
+    5.6,
+    3.599999999999999,
+    3.35
+   ]
+  },
+  {
+   "name": "track-bar1",
+   "declared": true,
+   "emitter": "disk area lamp 0.12 x 0.12 m, out of frame",
+   "irradiance_w_m2": 1.05,
+   "strength": null,
+   "position_m": [
+    7.0,
+    3.599999999999999,
+    3.35
+   ]
+  },
+  {
+   "name": "track-bar2",
+   "declared": true,
+   "emitter": "disk area lamp 0.12 x 0.12 m, out of frame",
+   "irradiance_w_m2": 1.05,
+   "strength": null,
+   "position_m": [
+    8.4,
+    3.599999999999999,
+    3.35
+   ]
+  },
+  {
+   "name": "track-bay0",
+   "declared": true,
+   "emitter": "disk area lamp 0.14 x 0.14 m, out of frame",
+   "irradiance_w_m2": 16.5,
+   "strength": null,
+   "position_m": [
+    5.55,
+    5.2661999999999995,
+    3.35
+   ]
+  },
+  {
+   "name": "track-bay1",
+   "declared": true,
+   "emitter": "disk area lamp 0.14 x 0.14 m, out of frame",
+   "irradiance_w_m2": 16.5,
+   "strength": null,
+   "position_m": [
+    8.25,
+    5.2661999999999995,
+    3.35
+   ]
+  },
+  {
+   "name": "track-mantle",
+   "declared": true,
+   "emitter": "disk area lamp 0.1 x 0.1 m, out of frame",
+   "irradiance_w_m2": 10.5,
+   "strength": null,
+   "position_m": [
+    8.9,
+    3.0,
+    3.35
+   ]
+  },
+  {
+   "name": "track-horn0",
+   "declared": true,
+   "emitter": "disk area lamp 0.12 x 0.12 m, out of frame",
+   "irradiance_w_m2": 4.5,
+   "strength": null,
+   "position_m": [
+    5.85,
+    4.4,
+    3.35
+   ]
+  },
+  {
+   "name": "track-horn1",
+   "declared": true,
+   "emitter": "disk area lamp 0.12 x 0.12 m, out of frame",
+   "irradiance_w_m2": 4.5,
+   "strength": null,
+   "position_m": [
+    8.55,
+    4.4,
+    3.35
+   ]
+  },
+  {
+   "name": "house",
+   "declared": true,
+   "emitter": "disk area lamp 1.6 x 1.6 m, out of frame",
+   "irradiance_w_m2": 1.8,
+   "strength": null,
+   "position_m": [
+    6.9,
+    0.6,
+    2.3
+   ]
+  }
+ ],
+ "lamp_lumens_total": 5400,
+ "exposure": {
+  "view": "AgX",
+  "look": "AgX - Punchy",
+  "ev": -2.0,
+  "white_balance_k": 4000
+ },
+ "lamps": "r32-lamps-final 3e38954b (Core base B in its own colour), its own LED colours",
+ "room": "planet_r37 room (r33-planet-world), its lights and old products off",
+ "haze": "none",
+ "mantle": "r48-mantle-design fa0c3a65 mantle-strata.blend, checked",
+ "audit": {
+  "hidden": [],
+  "equipment": [],
+  "method": "reaudit.py, the corrected cast"
+ }
+}

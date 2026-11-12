@@ -258,13 +258,11 @@
   "view": "AgX",
   "look": "AgX - Punchy",
   "ev": -2.0,
-  "white_balance": "none"
+  "white_balance_k": 4000
  },
  "lamps": "r32-lamps-final 3e38954b (Core base B in its own colour), its own LED colours",
  "room": "planet_r37 room (r33-planet-world), its lights and old products off",
- "haze": {
-  "declared": true
- },
+ "haze": "none",
  "mantle": "r48-mantle-design fa0c3a65 mantle-strata.blend, checked",
  "audit": {
   "hidden": [],
