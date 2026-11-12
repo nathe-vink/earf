@@ -391,8 +391,8 @@ def mantle_bar():
             # stood inside it; behind its back right corner now)
             # (proof 3: beside it the Core lit nothing through the clear plinth, which shows Ember only where the eye looks
             # through it at a light: right behind it, a little right of centre, the lens at the plinth's height)
-            pr['cores'] = [{'tint': shots.KEY['ember'], 'x': round(mc[0] - 0.55 * fwd[0] + 0.16 * right[0], 3),
-                            'y': round(mc[1] - 0.55 * fwd[1] + 0.16 * right[1], 3), 'floor_z': TOP, 'rot': 0.0}]
+            pr['cores'] = [{'tint': shots.KEY['ember'], 'x': round(mc[0] - 0.55 * fwd[0] + 0.08 * right[0], 3),   # (proof 4: centred, the band across the middle)
+                            'y': round(mc[1] - 0.55 * fwd[1] + 0.08 * right[1], 3), 'floor_z': TOP, 'rot': 0.0}]
     for k in ('mantle-front', 'mantle-side', 'track-mantle'):
         s['lights'].pop(k, None)
     for k in ('house', 'house-left'):
@@ -402,7 +402,7 @@ def mantle_bar():
     s['render']['exposure'] = -1.0
     s['lights'] = {k: ({**v, 'irradiance': round(v['irradiance'] * 0.5, 4)} if 'irradiance' in v else {**v, 'strength': v['strength'] * 0.5})
                    for k, v in s['lights'].items()}
-    c = [mc[0] + 0.85 * fwd[0], mc[1] + 0.85 * fwd[1], 1.16]           # (07:22: lower: at the plinth's height, through it to the Core)
+    c = [mc[0] + 0.85 * fwd[0], mc[1] + 0.85 * fwd[1], 1.18]           # (07:22: lower: near the plinth's height, through it to the Core; proof 4: at 1.16, below the record, the deck a silhouette)
     s['camera'] = {'position': c, 'target': [mc[0] - 0.15 * fwd[0], mc[1] - 0.15 * fwd[1], MANTLE[2] + 0.09], 'lens_mm': 42.0, 'level': True,
                    'fstop': 2.8, 'focus': [mc[0] - 0.2 * fwd[0], mc[1] - 0.2 * fwd[1], MANTLE[2] + 0.07]}
     return s
