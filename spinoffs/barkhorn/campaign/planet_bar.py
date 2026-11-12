@@ -407,7 +407,7 @@ def mantle_bar():
     # and to the left, out of frame, low enough that the satin black shows a dull sheen, nothing pale for it to mirror)
     s['lights']['mantle-key'] = {'type': 'area', 'shape': 'DISK', 'size_m': [0.8, 0.8],
                                  'position': [round(c[0] - 0.5 * right[0], 3), round(c[1] - 0.5 * right[1], 3), 1.9],
-                                 'target': [mc[0] - 0.2 * fwd[0], mc[1] - 0.2 * fwd[1], MANTLE[2] + 0.1], 'irradiance': 1.2, 'color': '#FFD8B0'}
+                                 'target': [mc[0] - 0.2 * fwd[0], mc[1] - 0.2 * fwd[1], MANTLE[2] + 0.1], 'irradiance': 2.5, 'color': '#FFD8B0'}   # (proof 6: the deck's edge faint at 1.2)
     s['camera'] = {'position': c, 'target': [mc[0] - 0.15 * fwd[0], mc[1] - 0.15 * fwd[1], MANTLE[2] + 0.09], 'lens_mm': 42.0, 'level': True,
                    'fstop': 2.8, 'focus': [mc[0] - 0.2 * fwd[0], mc[1] - 0.2 * fwd[1], MANTLE[2] + 0.07]}
     return s
