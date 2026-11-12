@@ -318,25 +318,26 @@
     "kind": "kit",
     "shape": "scatter_assets",
     "models": [
-     "grass_medium_02"
+     "grass_bermuda_01",
+     "grass_medium_01"
     ],
-    "count": 50,
+    "count": 420,
     "area": [
      -8.0,
-     2.2,
+     2.05,
      12.0,
-     2.65
+     2.55
     ],
     "avoid": [
      [
       0.6,
       2.4,
-      1.0
+      0.9
      ]
     ],
     "scale": [
-     1.0,
-     1.6
+     0.3,
+     0.6
     ],
     "seed": 5,
     "res": "1k"
