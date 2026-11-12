@@ -336,11 +336,13 @@ def bar_pendants():
     # napkin, a sleeve face up, the cloth, the bowl of citrus, the drinks with their ice)
     s['set']['props'] += [
         {'kind': 'kit', 'shape': 'ext', 'path': LIFE, 'fn': 'boards', 'boards': [
-            {'image': 'tex/newspaper.png', 'w': 0.29, 'h': 0.4, 't': 0.006, 'x': 6.97, 'y': round(Y_BAR + 0.16, 3), 'z': TOP, 'rot': [-90.0, 0, 82.0],
+            # (proof: a flat board's printed face sits at its z, its thickness below: at TOP it was coplanar with the stone
+            # and rendered black, as the matches did in round 4: each one raised by its thickness)
+            {'image': 'tex/newspaper.png', 'w': 0.29, 'h': 0.4, 't': 0.006, 'x': 6.97, 'y': round(Y_BAR + 0.16, 3), 'z': TOP + 0.0065, 'rot': [-90.0, 0, 82.0],
              'ground': '#E4E0D6', 'rough': 0.85},
-            {'image': 'tex/cover-09.png', 'w': 0.315, 'h': 0.315, 't': 0.003, 'x': 6.40, 'y': round(Y_BAR - 0.14, 3), 'z': TOP, 'rot': [-90.0, 0, 8.0],
+            {'image': 'tex/cover-09.png', 'w': 0.315, 'h': 0.315, 't': 0.003, 'x': 6.41, 'y': round(Y_BAR - 0.14, 3), 'z': TOP + 0.0035, 'rot': [-90.0, 0, 0.0],
              'ground': '#E9E3D6', 'rough': 0.7}]},
-        {'kind': 'kit', 'shape': 'ext', 'path': LIFE, 'fn': 'fold', 'x': 7.33, 'y': round(Y_BAR + 0.18, 3), 'z': TOP, 'rz': 75.0,
+        {'kind': 'kit', 'shape': 'ext', 'path': LIFE, 'fn': 'fold', 'x': 7.24, 'y': round(Y_BAR - 0.26, 3), 'z': TOP, 'rz': -15.0,   # (proof: behind the Dust Core: to its front)
          'w': 0.18, 'legs': [0.12, 0.09, 0.06], 'rr': 0.006, 't': 0.004, 'color': '#D8CCB8', 'seed': 5}]
     for k in [k for k in s['lights'] if k.startswith('track-bar')]:      # (07:22: the pools faint: the bar's own heads off here)
         s['lights'].pop(k)
