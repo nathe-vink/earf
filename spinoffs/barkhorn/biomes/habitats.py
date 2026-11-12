@@ -229,9 +229,11 @@ REFLECT = {   # habitat -> [reflector specs] (W H AZ EL DIST TX TY TZ), white bo
     # board 5 %; the passed file 4 %). Poison takes none: a board where litter stood shades the floor on the sun's line
     'fog_b': [(2.0, 2.0, -55.0, 15.0, 3.5, 0.0, 0.0, 0.8)],
     # Ember (c), the coordinator 2026-11-12: the front read near black (value 0.10, the woofer 0.05) with the dusk sun behind
-    # at az 130; a 2.4 x 1.6 m white board low on the camera's right, out of frame, facing the speaker and the sun, so
-    # the sun's light comes back onto the front. Passive; the sun and the sky stay the only emitters
-    'ember_c': [(2.4, 1.6, 40.0, 6.0, 2.0, 0.0, 0.0, 0.55)]}
+    # at az 130; a 3 x 2 m white board low on the camera's left, out of frame, facing the speaker and (20 deg off) the
+    # sun, so the sun's light comes back onto the front. Passive; the sun and the sky stay the only emitters.
+    # (first at az 40: its corner showed top right, frame x 0.96, and the sun grazed it, 90 deg off its face; az -50
+    # faces the sun but sits in the speaker's shadow, which the low sun casts toward az -50)
+    'ember_c': [(3.0, 2.0, -70.0, 6.0, 2.2, 0.0, 0.0, 0.55)]}
 ROLL = {   # habitat -> (feather, wander) m: the ground patch's far edge rolled under the land beyond (habitat.roll_edge)
     # Fog, the coordinator 2026-11-12: the lip was a ruler-straight 10 cm step; roll its last 0.4 m, wandering 10-20 cm
     # then (same day) hummocks: the brow rises and falls 3-8 cm along its length. Smoke shares the set, so the same lip
