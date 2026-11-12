@@ -75,35 +75,30 @@ products light themselves: the Hemispheres and Cores by their own LEDs (r32-lamp
 | track-wall2 | a round ceiling track head, aimed at the record wall; disk 0.12 x 0.12 m | 7.0, 4.9, 3.35 | 5.1 W/m2 at its target |
 | track-wall3 | a round ceiling track head, aimed at the record wall; disk 0.12 x 0.12 m | 9.0, 4.9, 3.35 | 5.1 W/m2 at its target |
 | track-wall4 | a round ceiling track head, aimed at the record wall; disk 0.12 x 0.12 m | 9.8, 4.9, 3.35 | 5.1 W/m2 at its target |
-| track-bar0 | a round ceiling track head, aimed down at the bar top; disk 0.12 x 0.12 m | 5.6, 3.6, 3.35 | 1.05 W/m2 at its target |
-| track-bar1 | a round ceiling track head, aimed down at the bar top; disk 0.12 x 0.12 m | 7.0, 3.6, 3.35 | 1.05 W/m2 at its target |
-| track-bar2 | a round ceiling track head, aimed down at the bar top; disk 0.12 x 0.12 m | 8.4, 3.6, 3.35 | 1.05 W/m2 at its target |
 | track-bay0 | a round ceiling track head in front of a speaker's bay, aimed steeply down at the cabinet; disk 0.14 x 0.14 m | 5.55, 5.27, 3.35 | 16.5 W/m2 at its target |
 | track-bay1 | a round ceiling track head in front of a speaker's bay, aimed steeply down at the cabinet; disk 0.14 x 0.14 m | 8.25, 5.27, 3.35 | 16.5 W/m2 at its target |
 | track-mantle | a round ceiling track head over Mantle; disk 0.1 x 0.1 m | 8.9, 3.0, 3.35 | 10.5 W/m2 at its target |
 | track-horn0 | a round ceiling track head on the room side, aimed at a speaker's horn; disk 0.12 x 0.12 m | 5.85, 4.4, 3.35 | 4.5 W/m2 at its target |
 | track-horn1 | a round ceiling track head on the room side, aimed at a speaker's horn; disk 0.12 x 0.12 m | 8.55, 4.4, 3.35 | 4.5 W/m2 at its target |
-| house | a broad round warm fill from the room behind the camera; disk 1.6 x 1.6 m | 6.9, 0.6, 2.3 | 1.8 W/m2 at its target |
+| house | a broad round warm fill from the room behind the camera; disk 1.6 x 1.6 m | 6.9, 0.6, 2.3 | 0.9 W/m2 at its target |
 
 ## mantle-bar.png (1920 x 1280)
 
 | name | what | where (m: x along the bar, y toward the wall, z up) | strength |
 |---|---|---|---|
-| track-wall1 | a round ceiling track head, aimed at the record wall; disk 0.12 x 0.12 m | 6.2, 4.9, 3.35 | 5.1 W/m2 at its target |
-| track-wall2 | a round ceiling track head, aimed at the record wall; disk 0.12 x 0.12 m | 7.0, 4.9, 3.35 | 5.1 W/m2 at its target |
-| track-wall3 | a round ceiling track head, aimed at the record wall; disk 0.12 x 0.12 m | 9.0, 4.9, 3.35 | 5.1 W/m2 at its target |
-| track-wall4 | a round ceiling track head, aimed at the record wall; disk 0.12 x 0.12 m | 9.8, 4.9, 3.35 | 5.1 W/m2 at its target |
-| track-bar0 | a round ceiling track head, aimed down at the bar top; disk 0.12 x 0.12 m | 5.6, 3.6, 3.35 | 1.05 W/m2 at its target |
-| track-bar1 | a round ceiling track head, aimed down at the bar top; disk 0.12 x 0.12 m | 7.0, 3.6, 3.35 | 1.05 W/m2 at its target |
-| track-bar2 | a round ceiling track head, aimed down at the bar top; disk 0.12 x 0.12 m | 8.4, 3.6, 3.35 | 1.05 W/m2 at its target |
-| track-bay0 | a round ceiling track head in front of a speaker's bay, aimed steeply down at the cabinet; disk 0.14 x 0.14 m | 5.55, 4.4, 3.35 | 36.3 W/m2 at its target |
-| track-bay1 | a round ceiling track head in front of a speaker's bay, aimed steeply down at the cabinet; disk 0.14 x 0.14 m | 8.25, 5.27, 3.35 | 16.5 W/m2 at its target |
-| track-mantle | a round ceiling track head over Mantle; disk 0.1 x 0.1 m | 8.9, 3.0, 3.35 | 10.5 W/m2 at its target |
-| track-horn0 | a round ceiling track head on the room side, aimed at a speaker's horn; disk 0.12 x 0.12 m | 5.85, 4.4, 3.35 | 4.5 W/m2 at its target |
-| track-horn1 | a round ceiling track head on the room side, aimed at a speaker's horn; disk 0.12 x 0.12 m | 8.55, 4.4, 3.35 | 4.5 W/m2 at its target |
-| house | a broad round warm fill from the room behind the camera; disk 3.0 x 3.0 m | 6.9, 0.2, 2.6 | 1.8 W/m2 at its target |
-| house-left | a broad round warm fill from the room at the left, out of frame; disk 2.0 x 2.0 m | 4.6, 2.2, 3.0 | 1.5 W/m2 at its target |
-| mantle-front | a small round lamp low behind the seat, at bar height, aimed at Mantle's front; disk 0.15 x 0.15 m | 9.7, 3.15, 1.55 | 7.5 W/m2 at its target |
-| mantle-side | a small round lamp just past the frame's right edge, at bar height, through Mantle's acrylic plinth; disk 0.2 x 0.2 m | 9.45, 4.25, 1.2 | 18.0 W/m2 at its target |
-| horn-card | a graduated warm card over the near speaker's bay, at the ceiling: no light, seen only in reflections (the horn's flare); rectangle 1.4 x 0.9 m | 8.05, 4.9, 3.34 | 10.0 (peak radiance) |
+| track-wall1 | a round ceiling track head, aimed at the record wall; disk 0.12 x 0.12 m | 6.2, 4.9, 3.35 | 2.55 W/m2 at its target |
+| track-wall2 | a round ceiling track head, aimed at the record wall; disk 0.12 x 0.12 m | 7.0, 4.9, 3.35 | 2.55 W/m2 at its target |
+| track-wall3 | a round ceiling track head, aimed at the record wall; disk 0.12 x 0.12 m | 9.0, 4.9, 3.35 | 2.55 W/m2 at its target |
+| track-wall4 | a round ceiling track head, aimed at the record wall; disk 0.12 x 0.12 m | 9.8, 4.9, 3.35 | 2.55 W/m2 at its target |
+| track-bar0 | a round ceiling track head, aimed down at the bar top; disk 0.12 x 0.12 m | 5.6, 3.6, 3.35 | 0.525 W/m2 at its target |
+| track-bar1 | a round ceiling track head, aimed down at the bar top; disk 0.12 x 0.12 m | 7.0, 3.6, 3.35 | 0.525 W/m2 at its target |
+| track-bar2 | a round ceiling track head, aimed down at the bar top; disk 0.12 x 0.12 m | 8.4, 3.6, 3.35 | 0.525 W/m2 at its target |
+| track-bay0 | a round ceiling track head in front of a speaker's bay, aimed steeply down at the cabinet; disk 0.14 x 0.14 m | 5.55, 4.4, 3.35 | 18.15 W/m2 at its target |
+| track-bay1 | a round ceiling track head in front of a speaker's bay, aimed steeply down at the cabinet; disk 0.14 x 0.14 m | 8.25, 5.27, 3.35 | 8.25 W/m2 at its target |
+| track-horn0 | a round ceiling track head on the room side, aimed at a speaker's horn; disk 0.12 x 0.12 m | 5.85, 4.4, 3.35 | 2.25 W/m2 at its target |
+| track-horn1 | a round ceiling track head on the room side, aimed at a speaker's horn; disk 0.12 x 0.12 m | 8.55, 4.4, 3.35 | 2.25 W/m2 at its target |
+| house | a broad round warm fill from the room behind the camera; disk 3.0 x 3.0 m | 6.9, 0.2, 2.6 | 0.225 W/m2 at its target |
+| house-left | a broad round warm fill from the room at the left, out of frame; disk 2.0 x 2.0 m | 4.6, 2.2, 3.0 | 0.1875 W/m2 at its target |
+| horn-card | a graduated warm card over the near speaker's bay, at the ceiling: no light, seen only in reflections (the horn's flare); rectangle 1.4 x 0.9 m | 8.05, 4.9, 3.34 | 5.0 (peak radiance) |
+| mantle-key | a soft broad round lamp from the lens's side, high and to the left, out of frame, so Mantle's deck shows its form; disk 0.8 x 0.8 m | 8.56, 3.41, 1.9 | 2.5 W/m2 at its target |
 

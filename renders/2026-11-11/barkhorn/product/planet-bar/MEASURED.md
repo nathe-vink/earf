@@ -65,3 +65,39 @@ Contact edges, checked in full-size crops: the Tropos feet on the bay floor (wid
 stone (wide, portrait, pendants), Mantle's plinth on the stone (wide, mantle-bar), the Core bases (wide, core-bar-table,
 pendants). In the portrait the near Core is close and seen from above: the ball hides its narrower base, and the pink
 under it is its reflection on the stone in front of the base.
+
+## The coordinator's 07:22 batch (2026-11-12)
+
+| frame | size, samples | file |
+|---|---|---|
+| bar-backbar-portrait | 2400 x 3000, 224 (adaptive 0.005) | 4.8 MB; rendered in two overlapping bands (rows 0-52 % and 48-100 %, `--crop`, 68 and 69 min) because the whole frame passes the 2-hour task limit; blended linearly over the 120-row overlap (the bands differ there by 0.7/255 on average: noise); the lowest bit of channel values under 24 dropped to stay under 5 MB |
+| bar-pendants | 1920 x 1920, 256 | 2.8 MB; two bands as above (77-row overlap, 0.9/255), lossless |
+| mantle-bar | 1920 x 1280, 256 | 1.6 MB, lossless |
+
+- **bar-backbar-portrait:**
+  - The Ember Core is no longer the blurred foreground shape. It stands beside Mantle (x 8.17, 0.22 behind the bar's
+    front), whole and on its base, in focus at f/5.6.
+  - The glasses in front stay soft.
+- **bar-pendants:**
+  - Five Hemispheres hang in a cluster at staggered heights (1.44 to 1.70 m), each whole in frame with its cap and cord.
+  - Two Cores stand under them, with the drinks, the newspaper open flat, a sleeve face up, a linen napkin and the bowl
+    of citrus.
+  - The stone is unchanged (#1C1916, as the passed frames).
+  - The Hemisphere is an up-lighter: its 24 LEDs face up into the dome. Its pools on dark stone stay faint by design, so
+    the light reads on what lies under it.
+  - The Cores' bases: from this height the balls hide most of them, and the bases read as dark rims under the glow. A
+    lower camera would show them; not re-rendered.
+  - The flat props: a board at the bar top's own height was coplanar with the stone and rendered black. Each is now
+    raised by its thickness. The passed bar-backbar keeps its old matchbook, a black sliver at the throw's edge (not
+    re-rendered: the passed frames stand).
+- **mantle-bar:**
+  - An Ember Core stands just behind Mantle, right of centre and close. The posts read satin black and the bar top dark.
+  - The camera is at 1.16 (42 mm, f/2.8). The sleeve is muted (#1C1B1A ground) and further off.
+  - **Where the eye looks through the clear Ember plinth at the Core, the plinth reads Ember.** Elsewhere the deck
+    reads as a dark form edged by the declared soft key (`mantle-key`, out of frame, high left).
+  - So the deck is not wholly Ember: only the band in front of the Core is.
+- **Audit (reaudit.py):** all five frames read hidden 0, equipment 0.
+- **Contact edges, checked at full size:**
+  - the portrait's Core on its base on the stone, and its glasses;
+  - the pendants' glasses and props on the stone;
+  - Mantle's posts and plinth on the bar top.

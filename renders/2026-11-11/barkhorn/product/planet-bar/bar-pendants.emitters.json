@@ -1,18 +1,6 @@
 {
  "emitters": [
   {
-   "name": "Hemisphere dust",
-   "lumens": 1000,
-   "cct_k": 2700,
-   "in_frame": true
-  },
-  {
-   "name": "Hemisphere ember",
-   "lumens": 1000,
-   "cct_k": 2200,
-   "in_frame": true
-  },
-  {
    "name": "Hemisphere acid",
    "lumens": 1000,
    "cct_k": 2700,
@@ -26,6 +14,18 @@
   },
   {
    "name": "Hemisphere dust",
+   "lumens": 1000,
+   "cct_k": 2700,
+   "in_frame": true
+  },
+  {
+   "name": "Hemisphere ember",
+   "lumens": 1000,
+   "cct_k": 2200,
+   "in_frame": true
+  },
+  {
+   "name": "Hemisphere acid",
    "lumens": 1000,
    "cct_k": 2700,
    "in_frame": true
@@ -103,42 +103,6 @@
    ]
   },
   {
-   "name": "track-bar0",
-   "declared": true,
-   "emitter": "disk area lamp 0.12 x 0.12 m, out of frame",
-   "irradiance_w_m2": 1.05,
-   "strength": null,
-   "position_m": [
-    5.6,
-    3.599999999999999,
-    3.35
-   ]
-  },
-  {
-   "name": "track-bar1",
-   "declared": true,
-   "emitter": "disk area lamp 0.12 x 0.12 m, out of frame",
-   "irradiance_w_m2": 1.05,
-   "strength": null,
-   "position_m": [
-    7.0,
-    3.599999999999999,
-    3.35
-   ]
-  },
-  {
-   "name": "track-bar2",
-   "declared": true,
-   "emitter": "disk area lamp 0.12 x 0.12 m, out of frame",
-   "irradiance_w_m2": 1.05,
-   "strength": null,
-   "position_m": [
-    8.4,
-    3.599999999999999,
-    3.35
-   ]
-  },
-  {
    "name": "track-bay0",
    "declared": true,
    "emitter": "disk area lamp 0.14 x 0.14 m, out of frame",
@@ -202,7 +166,7 @@
    "name": "house",
    "declared": true,
    "emitter": "disk area lamp 1.6 x 1.6 m, out of frame",
-   "irradiance_w_m2": 1.8,
+   "irradiance_w_m2": 0.9,
    "strength": null,
    "position_m": [
     6.9,

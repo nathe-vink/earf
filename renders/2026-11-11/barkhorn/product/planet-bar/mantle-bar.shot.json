@@ -486,22 +486,8 @@
     "cores": [
      {
       "tint": "red",
-      "x": 7.32,
-      "y": 4.1,
-      "floor_z": 1.07,
-      "rot": 0.0
-     },
-     {
-      "tint": "orange",
-      "x": 6.05,
-      "y": 4.119999999999999,
-      "floor_z": 1.07,
-      "rot": 0.0
-     },
-     {
-      "tint": "amber",
-      "x": 6.95,
-      "y": 4.35,
+      "x": 8.567,
+      "y": 4.958,
       "floor_z": 1.07,
       "rot": 0.0
      }
@@ -535,8 +521,8 @@
      0.022
     ],
     "position": [
-     8.297656335337095,
-     4.4463211833810385,
+     8.034924688759387,
+     4.654820780230929,
      1.07
     ],
     "rotate": [
@@ -559,19 +545,19 @@
     "fn": "boards",
     "boards": [
      {
-      "image": "tex/cover-12.png",
+      "image": "tex/cover-00.png",
       "w": 0.18,
       "h": 0.18,
-      "x": 8.297656335337095,
-      "y": 4.436321183381039,
+      "x": 8.034924688759387,
+      "y": 4.644820780230929,
       "z": 1.092,
       "rot": [
        -14.0,
        0,
        17.0
       ],
-      "ground": "#141414",
-      "rough": 0.85
+      "ground": "#1C1B1A",
+      "rough": 0.8
      }
     ]
    }
@@ -581,19 +567,19 @@
   "position": [
    9.013297846275824,
    3.621483485514766,
-   1.27
+   1.16
   ],
   "target": [
-   8.65407232379623,
-   4.391845104495919,
-   1.2309999999999999
+   8.590679584535126,
+   4.527791272551416,
+   1.161
   ],
   "lens_mm": 42.0,
   "level": true,
   "fstop": 2.8,
   "focus": [
-   8.65407232379623,
-   4.391845104495919,
+   8.56954867144809,
+   4.573106661903249,
    1.141
   ]
  },
@@ -611,7 +597,7 @@
   "clamp": 0,
   "bounces": 24,
   "view": "AgX",
-  "exposure": -2.0,
+  "exposure": -1.0,
   "white_balance_k": 4000,
   "white_balance_tint": 0.0,
   "glossy_bounces": 12,
@@ -664,7 +650,7 @@
     5.72,
     1.7
    ],
-   "irradiance": 5.1,
+   "irradiance": 2.55,
    "spread_deg": 20,
    "color": "#FFD2A0",
    "shape": "DISK"
@@ -685,7 +671,7 @@
     5.72,
     1.7
    ],
-   "irradiance": 5.1,
+   "irradiance": 2.55,
    "spread_deg": 20,
    "color": "#FFD2A0",
    "shape": "DISK"
@@ -706,7 +692,7 @@
     5.72,
     1.7
    ],
-   "irradiance": 5.1,
+   "irradiance": 2.55,
    "spread_deg": 20,
    "color": "#FFD2A0",
    "shape": "DISK"
@@ -727,7 +713,7 @@
     5.72,
     1.7
    ],
-   "irradiance": 5.1,
+   "irradiance": 2.55,
    "spread_deg": 20,
    "color": "#FFD2A0",
    "shape": "DISK"
@@ -748,7 +734,7 @@
     4.199999999999999,
     1.07
    ],
-   "irradiance": 1.05,
+   "irradiance": 0.525,
    "spread_deg": 24,
    "color": "#FFD2A0",
    "shape": "DISK"
@@ -769,7 +755,7 @@
     4.199999999999999,
     1.07
    ],
-   "irradiance": 1.05,
+   "irradiance": 0.525,
    "spread_deg": 24,
    "color": "#FFD2A0",
    "shape": "DISK"
@@ -790,7 +776,7 @@
     4.199999999999999,
     1.07
    ],
-   "irradiance": 1.05,
+   "irradiance": 0.525,
    "spread_deg": 24,
    "color": "#FFD2A0",
    "shape": "DISK"
@@ -811,7 +797,7 @@
     5.6662,
     2.04
    ],
-   "irradiance": 36.3,
+   "irradiance": 18.15,
    "spread_deg": 14,
    "color": "#FFE2C0",
    "shape": "DISK"
@@ -832,30 +818,9 @@
     5.6662,
     1.79
    ],
-   "irradiance": 16.5,
+   "irradiance": 8.25,
    "spread_deg": 14,
    "color": "#FFE2C0",
-   "shape": "DISK"
-  },
-  "track-mantle": {
-   "type": "area",
-   "size_m": [
-    0.1,
-    0.1
-   ],
-   "position": [
-    8.9,
-    3.0,
-    3.35
-   ],
-   "target": [
-    8.5,
-    4.319999999999999,
-    1.071
-   ],
-   "irradiance": 10.5,
-   "spread_deg": 18,
-   "color": "#FFD8B0",
    "shape": "DISK"
   },
   "track-horn0": {
@@ -874,7 +839,7 @@
     5.566199999999999,
     2.21
    ],
-   "irradiance": 4.5,
+   "irradiance": 2.25,
    "spread_deg": 12,
    "color": "#FFE2C0",
    "shape": "DISK"
@@ -895,7 +860,7 @@
     5.566199999999999,
     2.21
    ],
-   "irradiance": 4.5,
+   "irradiance": 2.25,
    "spread_deg": 12,
    "color": "#FFE2C0",
    "shape": "DISK"
@@ -916,7 +881,7 @@
     4.5,
     1.0
    ],
-   "irradiance": 1.8,
+   "irradiance": 0.225,
    "color": "#FFC890",
    "shape": "DISK"
   },
@@ -937,50 +902,8 @@
     5.6,
     2.6
    ],
-   "irradiance": 1.5,
+   "irradiance": 0.1875,
    "color": "#FFC890"
-  },
-  "mantle-front": {
-   "type": "area",
-   "shape": "DISK",
-   "size_m": [
-    0.15,
-    0.15
-   ],
-   "position": [
-    9.7,
-    3.15,
-    1.55
-   ],
-   "target": [
-    8.5,
-    4.199999999999999,
-    1.111
-   ],
-   "irradiance": 7.5,
-   "spread_deg": 14,
-   "color": "#FFD8B0"
-  },
-  "mantle-side": {
-   "type": "area",
-   "shape": "DISK",
-   "size_m": [
-    0.2,
-    0.2
-   ],
-   "position": [
-    9.45,
-    4.25,
-    1.2
-   ],
-   "target": [
-    8.5,
-    4.319999999999999,
-    1.101
-   ],
-   "irradiance": 18.0,
-   "spread_deg": 8,
-   "color": "#FFD8B0"
   },
   "horn-card": {
    "type": "panel",
@@ -998,7 +921,7 @@
     5.6162,
     2.1900000000000004
    ],
-   "strength": 10.0,
+   "strength": 5.0,
    "diffuse": 0.0,
    "specular": 1.0,
    "color": "#FFE2C0",
@@ -1015,6 +938,26 @@
      0.25
     ]
    }
+  },
+  "mantle-key": {
+   "type": "area",
+   "shape": "DISK",
+   "size_m": [
+    0.8,
+    0.8
+   ],
+   "position": [
+    8.56,
+    3.41,
+    1.9
+   ],
+   "target": [
+    8.56954867144809,
+    4.573106661903249,
+    1.171
+   ],
+   "irradiance": 2.5,
+   "color": "#FFD8B0"
   }
  },
  "products": [

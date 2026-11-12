@@ -749,73 +749,133 @@
     },
     "hemispheres": [
      {
-      "tint": "orange",
-      "x": 6.18,
-      "y": 4.18,
-      "rim_z": 1.8
+      "tint": "amber",
+      "x": 6.55,
+      "y": 4.26,
+      "rim_z": 1.59
      },
      {
       "tint": "red",
-      "x": 6.54,
-      "y": 4.32,
-      "rim_z": 1.66
+      "x": 6.75,
+      "y": 4.1,
+      "rim_z": 1.44
+     },
+     {
+      "tint": "orange",
+      "x": 6.93,
+      "y": 4.34,
+      "rim_z": 1.7
+     },
+     {
+      "tint": "red",
+      "x": 7.11,
+      "y": 4.16,
+      "rim_z": 1.5
      },
      {
       "tint": "amber",
-      "x": 6.92,
-      "y": 4.16,
-      "rim_z": 1.86
-     },
-     {
-      "tint": "red",
-      "x": 7.3,
-      "y": 4.28,
-      "rim_z": 1.74
-     },
-     {
-      "tint": "orange",
-      "x": 7.66,
-      "y": 4.17,
-      "rim_z": 1.82
+      "x": 7.29,
+      "y": 4.3,
+      "rim_z": 1.63
      }
     ],
     "cores": [
      {
       "tint": "red",
-      "x": 6.62,
-      "y": 4.12,
+      "x": 6.66,
+      "y": 4.08,
       "floor_z": 1.07,
       "rot": 0.0
      },
      {
       "tint": "orange",
-      "x": 7.25,
-      "y": 4.24,
+      "x": 7.26,
+      "y": 4.14,
       "floor_z": 1.07,
       "rot": 0.0
      }
     ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/campaign/bar_life/bar_life.py",
+    "fn": "boards",
+    "boards": [
+     {
+      "image": "tex/newspaper.png",
+      "w": 0.29,
+      "h": 0.4,
+      "t": 0.006,
+      "x": 6.97,
+      "y": 4.36,
+      "z": 1.0765,
+      "rot": [
+       -90.0,
+       0,
+       82.0
+      ],
+      "ground": "#E4E0D6",
+      "rough": 0.85
+     },
+     {
+      "image": "tex/cover-09.png",
+      "w": 0.315,
+      "h": 0.315,
+      "t": 0.003,
+      "x": 6.41,
+      "y": 4.06,
+      "z": 1.0735000000000001,
+      "rot": [
+       -90.0,
+       0,
+       0.0
+      ],
+      "ground": "#E9E3D6",
+      "rough": 0.7
+     }
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/campaign/bar_life/bar_life.py",
+    "fn": "fold",
+    "x": 7.24,
+    "y": 3.94,
+    "z": 1.07,
+    "rz": -15.0,
+    "w": 0.18,
+    "legs": [
+     0.12,
+     0.09,
+     0.06
+    ],
+    "rr": 0.006,
+    "t": 0.004,
+    "color": "#D8CCB8",
+    "seed": 5
    }
   ]
  },
  "camera": {
   "position": [
-   6.9,
-   2.55,
-   1.6
+   6.92,
+   1.0,
+   2.1
   ],
   "target": [
    6.92,
-   4.4,
-   1.45
-  ],
-  "lens_mm": 58.0,
-  "level": true,
-  "fstop": 2.0,
-  "focus": [
-   6.9,
    4.199999999999999,
-   1.6
+   1.5
+  ],
+  "lens_mm": 100.0,
+  "level": true,
+  "fstop": 4.0,
+  "focus": [
+   6.92,
+   4.18,
+   1.4
   ]
  },
  "sky": {
@@ -974,69 +1034,6 @@
    "color": "#FFD2A0",
    "shape": "DISK"
   },
-  "track-bar0": {
-   "type": "area",
-   "size_m": [
-    0.12,
-    0.12
-   ],
-   "position": [
-    5.6,
-    3.599999999999999,
-    3.35
-   ],
-   "target": [
-    5.6,
-    4.199999999999999,
-    1.07
-   ],
-   "irradiance": 1.05,
-   "spread_deg": 24,
-   "color": "#FFD2A0",
-   "shape": "DISK"
-  },
-  "track-bar1": {
-   "type": "area",
-   "size_m": [
-    0.12,
-    0.12
-   ],
-   "position": [
-    7.0,
-    3.599999999999999,
-    3.35
-   ],
-   "target": [
-    7.0,
-    4.199999999999999,
-    1.07
-   ],
-   "irradiance": 1.05,
-   "spread_deg": 24,
-   "color": "#FFD2A0",
-   "shape": "DISK"
-  },
-  "track-bar2": {
-   "type": "area",
-   "size_m": [
-    0.12,
-    0.12
-   ],
-   "position": [
-    8.4,
-    3.599999999999999,
-    3.35
-   ],
-   "target": [
-    8.4,
-    4.199999999999999,
-    1.07
-   ],
-   "irradiance": 1.05,
-   "spread_deg": 24,
-   "color": "#FFD2A0",
-   "shape": "DISK"
-  },
   "track-bay0": {
    "type": "area",
    "size_m": [
@@ -1158,7 +1155,7 @@
     4.5,
     1.0
    ],
-   "irradiance": 1.8,
+   "irradiance": 0.9,
    "color": "#FFC890",
    "shape": "DISK"
   }
