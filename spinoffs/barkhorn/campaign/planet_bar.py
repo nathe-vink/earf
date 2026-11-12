@@ -332,6 +332,16 @@ def bar_pendants():
         _move_drink(pr, 0.78, 0.0)
     s['set']['props'] = [pr for pr in s['set']['props'] if not (pr.get('texture') == 'american_walnut_veneer' and pr.get('size') == [0.2, 0.05, 0.022])]
     s['render'].update(samples=256, adaptive=0.005)
+    # (07:45: the stone stays, so the cluster's light shows on what a bar has under it: the newspaper open flat, a linen
+    # napkin, a sleeve face up, the cloth, the bowl of citrus, the drinks with their ice)
+    s['set']['props'] += [
+        {'kind': 'kit', 'shape': 'ext', 'path': LIFE, 'fn': 'boards', 'boards': [
+            {'image': 'tex/newspaper.png', 'w': 0.29, 'h': 0.4, 't': 0.006, 'x': 6.97, 'y': round(Y_BAR + 0.16, 3), 'z': TOP, 'rot': [-90.0, 0, 82.0],
+             'ground': '#E4E0D6', 'rough': 0.85},
+            {'image': 'tex/cover-09.png', 'w': 0.315, 'h': 0.315, 't': 0.003, 'x': 6.40, 'y': round(Y_BAR - 0.14, 3), 'z': TOP, 'rot': [-90.0, 0, 8.0],
+             'ground': '#E9E3D6', 'rough': 0.7}]},
+        {'kind': 'kit', 'shape': 'ext', 'path': LIFE, 'fn': 'fold', 'x': 7.33, 'y': round(Y_BAR + 0.18, 3), 'z': TOP, 'rz': 75.0,
+         'w': 0.18, 'legs': [0.12, 0.09, 0.06], 'rr': 0.006, 't': 0.004, 'color': '#D8CCB8', 'seed': 5}]
     for k in [k for k in s['lights'] if k.startswith('track-bar')]:      # (07:22: the pools faint: the bar's own heads off here)
         s['lights'].pop(k)
     s['lights']['house'] = {**s['lights']['house'], 'irradiance': round(s['lights']['house']['irradiance'] * 0.5, 3)}
