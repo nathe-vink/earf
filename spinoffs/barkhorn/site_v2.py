@@ -613,7 +613,7 @@ def pages(web):
                 os.rmdir(d)
         left = [os.path.relpath(f, web.SITE) for f in glob.glob(os.path.join(web.SITE, '**', '*'), recursive=True)]
         bad = [f for f in left if re.search(r'(^press/|img/(?:(?:dome|orb)-|lamps-(?:orbs|domes)|lamp-(?:orb|dome)|hero[.-]|facade|room|macro-|turn-|spin/'
-                                            r'|tt-|ga-|globe-turn-night|coins-|v2/mantle-day|rc/og-mantle|rc/(?:red|orange|amber|violet|black)-habitat|lamps-unlit|thumb/lamps-unlit|rc/(?:red|orange|amber|green|blue|violet|ice)-back[.-]|(?:red|orange|amber|green|blue|violet|ice|black)-(?:on|off|studio|back|amp|horn|inside|reel|habitat)))', f)]
+                                            r'|tt-|ga-|globe-turn-night|coins-|v2/mantle-day|rc/og-mantle|rc/(?:red|orange|amber|violet|black|ice)-habitat|lamps-unlit|thumb/lamps-unlit|rc/(?:red|orange|amber|green|blue|violet|ice)-back[.-]|(?:red|orange|amber|green|blue|violet|ice|black)-(?:on|off|studio|back|amp|horn|inside|reel|habitat)))', f)]
         assert not bad, ('site_v2: rc deploys', bad[:12])
 
 
@@ -1234,7 +1234,7 @@ def rc_waves(p, web):
     ON_HOLD = 'Hemisphere and Core, switched off. Shown in Smoke, a color on hold.'
     # --- the passed habitats (biomes: Ice 0f619953, Dust 26493989), 4:5
     HAB = {'blue': 'renders/2026-11-11/barkhorn/habitats/ice-final-portrait-2400x3000.jpg',       # the final Ice (r48-biomes e2ea7e2f)
-           'ice': 'renders/2026-11-03/barkhorn/habitats/fog_b-portrait-1200x1500-r2-blackrods.jpg',     # (r48-biomes 2904138e)
+           # Fog's hillside out (the coordinator 2026-11-12 09:28: its grass floats over the fog along the brow) until its final pair
            'green': 'renders/2026-11-11/barkhorn/habitats/poison-final-portrait-2400x3000.jpg'}       # the final Poison (316c38a2)
     # out (the audits, 2026-11-09/10): Dust 26493989 (a hidden panel), then 43c91242 (it hovers: a lit strip under its
     # front edge); Fog b61474c0 (two suns), then aa1ca856 (a hidden fill lamp)
@@ -2166,7 +2166,7 @@ FAMILY = [  # (product, route, tint, kind, line)
     ('Hemisphere', '#hemisphere-haze', 'violet', 'Pendant', 'A pendant. Half a globe of light over the table.'),
     ('Core', '#core-poison', 'green', 'Table lamp', 'A cordless table lamp. A glow, not a reading light.'),
 ]
-PLACES = [('blue', 'Ice, out in the snow at dusk.'), ('green', 'Poison, in the forest among the ivy.'), ('ice', 'Fog, on a hillside at dawn.')]
+PLACES = [('blue', 'Ice, out in the snow at dusk.'), ('green', 'Poison, in the forest among the ivy.')]   # Fog back with its final pair
 ARROW = ('<svg class="arr" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" '
          'stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>')
 
