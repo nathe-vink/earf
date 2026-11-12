@@ -714,6 +714,13 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    to the owner 00:56. The lamps lane now waits only on the owner's answer about the carrier's underside.
    LAMPS, READY FOR THE SITE'S BATCH 2: `core-row-day.png` (01a0b833), `hemisphere-ember-off.png`,
    `hemisphere-ember-cap.png`, `hemisphere-ember-rim.png` (92ff60c3).
+   12 Nov 04:12 UTC, biomes lane: THE FOG RE-RENDER STILL SHOWS THE FLOATERS; held, not pushed. Real cause (found with
+   camera rays): the lip row of tufts is rooted on the ground 20-30 cm short of the brow, but the tufts are 0.6-0.9 m
+   wide, so their blades reach out over the low fog; the landing pass and the checker tested only 18 cm around each
+   root. The lane had reported the fix clean on the checker's word without measuring the frame. New fix (blade
+   footprint tested; 212 overhanging tufts flagged and removed), a quick proxy rendering to verify. Coordinator
+   (04:16): Poison's final pair first; Fog only after `fog-lip-proxy.jpg` with a full-size crop of the lip is pushed
+   and checked; short grass inside the ground if the bare lip looks bald; then the other proxies and Dust.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
