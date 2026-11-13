@@ -182,7 +182,7 @@ def build(bpy, name, p, kit):
     print('RECORD WALL took over', len(cells), 'cells; removed', gone)
 
     B = Boxes(ncol)
-    mats = _atlas_mats(bpy) + [_plain(bpy, '#E9E5DB', 0.7), _plain(bpy, '#0E0E0E', 0.28)]   # 2 inner sleeve, 3 disc
+    mats = _atlas_mats(bpy) + [_plain(bpy, '#CFC9BA', 0.7), _plain(bpy, '#0E0E0E', 0.28)]   # 2 inner sleeve, 3 disc
     other = []                                               # (kind, xa, xb, z)
     order = sorted(cells); rnd.shuffle(order)
     n_other = max(1, round(len(order) * 0.125)); n_part = round(len(order) / 6); n_flat = round(len(order) / 12)
@@ -258,8 +258,8 @@ def _others(bpy, name, cells, rnd, yf, yb, idx, ncol, eye):
     """The cells that hold something else of a record room, in turn: a 7-inch box and singles, books and magazines,
     storage boxes, a face-out sleeve in front of records."""
     objs = []
-    cloth = ['#5A2A22', '#2E3A2E', '#6E5A3E', '#3A2E26', '#7A6448', '#2A2A30', '#5E4A36', '#8A3A2A', '#D8D0BE', '#1E1E1E']
-    mags = ['#C8102E', '#F2F0EA', '#1F4E9C', '#E2A400', '#141414', '#D9531E', '#2B6E4F']
+    cloth = ['#5A2A22', '#2E3A2E', '#6E5A3E', '#3A2E26', '#7A6448', '#2A2A30', '#5E4A36', '#8A3A2A', '#CFC6B2', '#1E1E1E']
+    mags = ['#C8102E', '#D9D3C4', '#1F4E9C', '#A8801E', '#141414', '#D9531E', '#2B6E4F']
     plain = {}
     def mat(h, r=0.7):
         return plain.setdefault((h, r), _plain(bpy, h, r))
@@ -278,12 +278,12 @@ def _others(bpy, name, cells, rnd, yf, yb, idx, ncol, eye):
         y0 = yf + 0.02
         if kind == 'seven':                                  # a 7-inch box, open top, singles in it; singles beside
             bx = xa + 0.004 if j % 8 < 4 else xb - 0.004 - 0.19
-            box(bx, bx + 0.19, y0 + 0.02, y0 + 0.25, z, z + 0.16, mat(rnd.choice(['#1A1A1A', '#B89A6E', '#E6E1D6']), 0.8))
+            box(bx, bx + 0.19, y0 + 0.02, y0 + 0.25, z, z + 0.16, mat(rnd.choice(['#1A1A1A', '#B89A6E', '#D2CCBE']), 0.8))
             s = (bx + 0.19 + 0.006) if bx < (xa + xb) / 2 else xa + 0.004
             e = xb - 0.004 if bx < (xa + xb) / 2 else bx - 0.006
             while s < e - 0.003:
                 t = rnd.uniform(0.0012, 0.0022)
-                box(s, s + t, y0 + 0.03, y0 + 0.21, z, z + 0.18, mat(rnd.choice(['#EFEDE7', '#141414', '#D9C9A0', '#B3202A', '#1F4E9C', '#E6E3DA'])))
+                box(s, s + t, y0 + 0.03, y0 + 0.21, z, z + 0.18, mat(rnd.choice(['#D6D0C2', '#141414', '#D9C9A0', '#B3202A', '#1F4E9C', '#D4CEBF'])))
                 s += t + rnd.uniform(0.0002, 0.001)
         elif kind == 'books':                                # books, and magazines lying flat on one end
             s = xa + 0.004; e = xb - (0.0 if j % 3 else 0.12)
@@ -299,7 +299,7 @@ def _others(bpy, name, cells, rnd, yf, yb, idx, ncol, eye):
                 box(e + 0.004, xb - 0.004, yb - 0.24, yb - 0.01, zz, zz + t, mat(rnd.choice(mags), 0.35))
                 zz += t
         elif kind == 'boxes':                                # storage boxes with lids, kraft or black
-            c = rnd.choice(['#A8865E', '#141414', '#9C7A52', '#E6E1D6'])
+            c = rnd.choice(['#A8865E', '#141414', '#9C7A52', '#D2CCBE'])
             if rnd.random() < 0.5:
                 box(xa + 0.004, xb - 0.004, y0, yb - 0.01, z, z + 0.26, mat(c, 0.85))
                 box(xa + 0.002, xb - 0.002, y0 - 0.002, yb - 0.008, z + 0.26, z + 0.30, mat(c, 0.8))
@@ -316,11 +316,11 @@ def _others(bpy, name, cells, rnd, yf, yb, idx, ncol, eye):
             from bar_life import boards
             objs += boards(bpy, f'{name}-face{j}', {'boards': [{'image': path, 'w': 0.315, 'h': 0.315, 't': 0.003,
                                                                'x': (xa + xb) / 2, 'y': yf + 0.05, 'z': z, 'rot': [-6.0, 0, 0],
-                                                               'ground': '#E9E3D6', 'rough': 0.6}]}, None)
+                                                               'ground': '#D6CFC0', 'rough': 0.6}]}, None)
             s = xa + 0.003
             while s < xb - 0.006:
                 t = rnd.uniform(0.003, 0.0045)
-                box(s, s + t, yf + 0.09, yb - 0.004, z, z + 0.314, mat(rnd.choice(['#F2F0EA', '#141414', '#E3D6B4', '#1F4E9C', '#B3202A']), 0.6))
+                box(s, s + t, yf + 0.09, yb - 0.004, z, z + 0.314, mat(rnd.choice(['#D9D3C4', '#141414', '#D6C8A6', '#22356F', '#6E1F2B']), 0.6))
                 s += t + 0.0005
     me = bpy.data.meshes.new(f'{name}-other'); bm.to_mesh(me); bm.free()
     for m in used:

@@ -23,14 +23,16 @@ FONTS = ['/usr/share/fonts/opentype/inter/Inter-Bold.otf', '/usr/share/fonts/ope
 FONTS = [f for f in FONTS if os.path.exists(f)]
 
 # (category, share, grounds): the brief's shares; 'thin' are the singles, drawn without type
-CATS = [('white', 0.30, ['#F2F0EA', '#ECE9E1', '#E6E3DA', '#F4F2EE', '#E9E6DF']),
-        ('cream', 0.15, ['#E3D6B4', '#D9C9A0', '#E8DDBE', '#D4C29A', '#DDD0AC']),
+# (the coordinator, 21:22: the whites aged, none above albedo 0.70 and slightly warm; half the printed colours muted
+# or dark, fewer candy primaries)
+CATS = [('white', 0.30, ['#D9D3C4', '#D4CEBF', '#DBD6C9', '#CFC8B7', '#D6D0C1']),
+        ('cream', 0.15, ['#D6C8A6', '#CDBC94', '#D9CCA9', '#C8B68E', '#D2C39E']),
         ('black', 0.22, ['#141414', '#1A1A1A', '#101010', '#1E1D1C', '#181716']),
         ('kraft', 0.05, ['#A8865E', '#9C7A52', '#B39069', '#8F6F4A']),
-        ('colour', 0.28, ['#B3202A', '#1F4E9C', '#E2A400', '#1E7A46', '#D9531E', '#5B2A86', '#00808A', '#7A1F2B',
-                          '#22356F', '#C2185B', '#3E6B2F', '#A0522D', '#0E6E9E', '#8C1C13', '#F0C419', '#2B2B6E'])]
+        ('colour', 0.28, ['#A82630', '#2A5592', '#C99A1E', '#24704A', '#C25A26', '#5B2E80', '#1A7880', '#9A5A30',
+                          '#22356F', '#6E1F2B', '#24452F', '#A8801E', '#6B4426', '#3E4A5C', '#5A2E4A', '#4A5A2A'])]
 INK_DARK = ['#141414', '#1C1C1C', '#2A2420', '#3A1E1A']
-INK_LIGHT = ['#F4F2EC', '#EDE6D4', '#E8D9A8']
+INK_LIGHT = ['#D8D2C4', '#D4CBB4', '#D6C99E']
 
 SYL = ['ka', 'ro', 'mi', 'len', 'dor', 'vas', 'tel', 'ion', 'bra', 'mu', 'sen', 'har', 'lo', 'quin', 'ze', 'pa', 'nor',
        'vel', 'ash', 'tor', 'bel', 'cri', 'fon', 'gal', 'ri', 'sto', 'wen', 'ul', 'mar', 'den', 'pho', 'lis', 'tam', 'oro']
@@ -125,7 +127,7 @@ def spine(k, cat, grounds, rnd):
                     for x in range(WPX):
                         if rnd.random() < 0.85:
                             r, gg, b = px[x, yy]; t = f * rnd.uniform(0.5, 1.2)
-                            px[x, yy] = (int(r + (238 - r) * t), int(gg + (232 - gg) * t), int(b + (220 - b) * t))
+                            px[x, yy] = (int(r + (214 - r) * t), int(gg + (206 - gg) * t), int(b + (188 - b) * t))
     if rnd.random() < 0.05:
         d = ImageDraw.Draw(im); y0 = rnd.choice([rnd.randint(0, 30), LPX - rnd.randint(120, 300)]); L = rnd.randint(60, 260)
         x = rnd.choice([1, WPX - 2])
@@ -140,13 +142,17 @@ def main():
     atlas = Image.new('RGB', (WPX * sum(per.values()), LPX))
     index = {}; col = 0
     grounds = {c: g for c, _, g in CATS}
-    grounds['thin'] = ['#141414', '#151515', '#EFEDE7', '#E9E7E0']
+    grounds['thin'] = ['#141414', '#151515', '#D6D0C2', '#D2CCBE']
     for cat in ('white', 'cream', 'black', 'kraft', 'colour', 'thin'):
         index[cat] = []
         for j in range(per[cat]):
             atlas.paste(spine(col, cat, grounds[cat], rnd), (col * WPX, 0))
             index[cat].append(col); col += 1
-    atlas.save(os.path.join(OUT, 'spines.jpg'), quality=93)
+    import numpy as np
+    a = np.asarray(atlas).astype(np.float32); m = a.max(axis=2, keepdims=True)
+    a = np.where(m > 208.0, a * (208.0 / np.maximum(m, 1.0)), a)        # no spine above albedo 0.70 (208: room for the JPEG's ringing)
+    atlas = Image.fromarray(a.round().astype(np.uint8))
+    atlas.save(os.path.join(OUT, 'spines.jpg'), quality=94, subsampling=0)
     json.dump({'wpx': WPX, 'lpx': LPX, 'n': col, 'index': index,
                'shares': {c: s for c, s, _ in CATS}}, open(os.path.join(OUT, 'spines.json'), 'w'), indent=1)
     print('spines', col, atlas.size, os.path.getsize(os.path.join(OUT, 'spines.jpg')) // 1024, 'KB')
