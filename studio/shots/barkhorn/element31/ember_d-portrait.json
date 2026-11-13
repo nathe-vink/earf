@@ -278,8 +278,20 @@
         14.5
        ],
        [
-        -4.0,
-        16.0
+        -2.5,
+        15.8
+       ]
+      ],
+      "width": 0.5,
+      "depth": 0.2,
+      "bank": 0.6,
+      "lava": "flow"
+     },
+     {
+      "points": [
+       [
+        -12.0,
+        15.4
        ],
        [
         -16.0,
@@ -294,7 +306,7 @@
     ],
     "flow": "acg:Lava001",
     "flow_emit": 40.0,
-    "flow_gain": 2.2,
+    "flow_gain": 1.6,
     "flow_scale": 2.5,
     "molten": "acg:Lava004",
     "molten_emit": 30.0,
