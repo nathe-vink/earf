@@ -181,7 +181,20 @@ def _base(size, title):
                    'view': 'AgX', 'look': 'AgX - Punchy', 'exposure': EV, 'white_balance_k': WB, 'white_balance_tint': 0.0}
     s.pop('finish', None)
     s['title'] = title
+    _raise_flat(s)
     return s
+
+
+def _raise_flat(s):
+    """A flat board's printed face sits at its z with its thickness below it: one lying on the bar top at TOP is coplanar
+    with the stone and renders black (the matchbook in round 4; the hero test's boards, 2026-11-13). Each one raised by its
+    thickness, in every frame built from here on."""
+    for pr in s['set']['props']:
+        if pr.get('fn') == 'boards':
+            for b in pr['boards']:
+                tb = b.get('t', 0.003)
+                if b.get('rot', [0])[0] == -90.0 and abs(b.get('z', 0) - TOP) < tb:
+                    b['z'] = round(TOP + tb + 0.0005, 4)
 
 
 def _move_drink(pr, dx, dy):
