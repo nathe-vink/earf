@@ -1,8 +1,8 @@
 {
  "title": "Planet EARF bar: the line from the best seat",
  "size": [
-  1600,
-  900
+  3200,
+  1800
  ],
  "set": {
   "kind": "stage",
@@ -564,51 +564,10 @@
    },
    {
     "kind": "kit",
-    "shape": "box",
-    "size": [
-     0.2,
-     0.05,
-     0.022
-    ],
-    "position": [
-     8.92,
-     4.539999999999999,
-     1.07
-    ],
-    "rotate": [
-     0,
-     0,
-     20.0
-    ],
-    "material": "pbr",
-    "texture": "american_walnut_veneer",
-    "tex_res": "2k",
-    "tint": "#5A3824",
-    "tint_mix": 0.5,
-    "gain": 0.6,
-    "ease": 0.003
-   },
-   {
-    "kind": "kit",
     "shape": "ext",
     "path": "spinoffs/barkhorn/campaign/bar_life/bar_life.py",
     "fn": "boards",
     "boards": [
-     {
-      "image": "tex/cover-05.png",
-      "w": 0.18,
-      "h": 0.18,
-      "x": 8.92,
-      "y": 4.529999999999999,
-      "z": 1.092,
-      "rot": [
-       -14.0,
-       0,
-       20.0
-      ],
-      "ground": "#EFEBE3",
-      "rough": 0.85
-     },
      {
       "image": "tex/cover-09.png",
       "w": 0.315,
@@ -763,7 +722,9 @@
      "dj-labels",
      "screen-panels",
      "screen-boxes",
-     "screen-frames"
+     "screen-frames",
+     "glasses-r36",
+     "pours-r36"
     ]
    },
    {
@@ -1111,7 +1072,7 @@
     5.6662,
     1.79
    ],
-   "irradiance": 16.5,
+   "irradiance": 2.0,
    "spread_deg": 14,
    "color": "#FFE2C0",
    "shape": "DISK"
@@ -1132,7 +1093,7 @@
     5.6662,
     1.79
    ],
-   "irradiance": 16.5,
+   "irradiance": 0.8,
    "spread_deg": 14,
    "color": "#FFE2C0",
    "shape": "DISK"
