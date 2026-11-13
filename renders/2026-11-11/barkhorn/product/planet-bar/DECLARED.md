@@ -66,7 +66,7 @@ products light themselves: the Hemispheres and Cores by their own LEDs (r32-lamp
 | mantle-side | a small round lamp just past the frame's right edge, at bar height, through Mantle's acrylic plinth; disk 0.2 x 0.2 m | 9.45, 4.25, 1.2 | 18.0 W/m2 at its target |
 | horn-card | a graduated warm card over the near speaker's bay, at the ceiling: no light, seen only in reflections (the horn's flare); rectangle 1.4 x 0.9 m | 8.05, 4.9, 3.34 | 10.0 (peak radiance) |
 
-## bar-pendants.png (1920 x 1920)
+## bar-pendants.png (2400 x 2400)
 
 | name | what | where (m: x along the bar, y toward the wall, z up) | strength |
 |---|---|---|---|

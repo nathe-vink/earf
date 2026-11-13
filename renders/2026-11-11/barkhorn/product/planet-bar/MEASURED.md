@@ -215,3 +215,22 @@ bar-hero (1600 x 900, 128 samples), replacing test 1. The changes:
 - The Cores: a 12 px patch at each ball's centre, with no clipped channel.
 
 **Audit (reaudit.py):** hidden 0, equipment 0.
+
+## bar-backbar re-rendered with every fix (the coordinator, 23:48 item 1b; 2026-11-13)
+
+bar-backbar (3200 x 1800, the same camera; two bands blended over 107 rows, mean difference 0.7/255 in the overlap):
+- **The model:** the cleaned Tropos, with no Core cable.
+- **The flat boards on the bar** (the sleeve stack, the matchbook, the newspaper) are raised by their thickness.
+- **Mantle** is in Ember.
+
+| lamp | h, s, v |
+|---|---|
+| Hemisphere Ember (two) | 4.8, 0.39, 1.00 / 5.4, 0.39, 1.00 |
+| Hemisphere Acid | 51.6, 0.22, 0.89 |
+| Hemisphere Dust (two) | 15.7, 0.35, 0.98 / 15.5, 0.36, 0.97 |
+| Core Ember | 7.8, 0.92, 0.76 |
+| Core Dust | 21.9, 0.90, 0.68 |
+| Core Acid | 51.0, 0.51, 0.71 |
+
+- **How it was measured:** as in the hero test, scaled to the frame.
+- **Audit (reaudit.py):** hidden 0, equipment 0.
