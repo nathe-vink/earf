@@ -1199,6 +1199,18 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    anything bright for a headline centered between the bays. The Mantle frame is nearly there: a small red dot under
    the deck reads as a power LED (Mantle has no light): to be explained and removed by moving the Core or camera, not
    painted out. Order: bar-backbar (rendering), the hero, core-bar-table, the portrait, the Mantle fix, the FA123.
+   05:28 UTC, biomes lane bee884198e: SMOKE d PROXY p2 (`renders/2026-11-12/barkhorn/habitats/smoke-d-proxy-p2.jpg`):
+   the black column, the fire at the left edge and a low warm sun read; the crater, the trench, the sparks and the
+   meteor's trail are out of frame (the lane's own framing error: the crater 16 degrees off an 85 mm lens's axis);
+   grass still in front of the base; front 0.09-0.195, cone 0.326. Emitters: the sun (16), the dusk sky (0.25), the
+   plume's flame (an emissive volume, 400) and two spark scatters; no lamps; gt_audit did not finish.
+   Coordinator's check beside the 1 Nov picture: the mood is right, the story is not in the frame; not shown to the
+   owner. The lane's p3 plan approved (the strike in the left third 12-15 m back, the meteor in from the right, the
+   trench along its path, the ground cleared and charred, the grass lowered on the camera's lane) with five
+   additions: a framing proof without volumes first; the cloud sea and peaks out (not Fog's place); the dark speaker
+   against the pale sky, turned about 20 degrees, front 0.18 or more, the fire rimming its edge; charred ground,
+   thrown earth and embers, nothing in front of the base; the trail readable at a glance. About two hours a try;
+   queued after Ember p2. Poison p2 is rendering, then the Acid wide preview, then Ember p2.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
