@@ -237,15 +237,30 @@ def canopy(bpy, name, p, kit):
     nt.links.new(nz.outputs['Fac'], cut.inputs['Value'])
     fac = cut.outputs['Result']
     # holes: [x, y, r] in the sheet's own plane, open whatever the noise says (a gap placed so the sun reaches a spot)
-    for hx, hy, hr in p.get('holes', []):
+    # a hole's optional 4th value `leafy` (0-1): that much of it stays leaves, in clusters `leaf_gap` m across, so the sun
+    # through it falls as dapples over whatever stands below, not as one clean disc (the seating rules, 2026-11-13: the
+    # place's light pattern crosses the speaker and the ground alike)
+    for h in p.get('holes', []):
+        hx, hy, hr = h[:3]; leafy = h[3] if len(h) > 3 else 0.0
         d = nt.nodes.new('ShaderNodeVectorMath'); d.operation = 'DISTANCE'
         nt.links.new(tc.outputs['Object'], d.inputs[0]); d.inputs[1].default_value = (hx, hy, 0.0)
         ed = nt.nodes.new('ShaderNodeMapRange'); ed.interpolation_type = 'SMOOTHSTEP'
         ed.inputs['From Min'].default_value = hr * 0.6; ed.inputs['From Max'].default_value = hr
         ed.inputs['To Min'].default_value = 1.0; ed.inputs['To Max'].default_value = 0.0
         nt.links.new(d.outputs['Value'], ed.inputs['Value'])
+        hole = ed.outputs['Result']
+        if leafy > 0:
+            lz = nt.nodes.new('ShaderNodeTexNoise'); lz.inputs['Scale'].default_value = 1.0 / p.get('leaf_gap', 0.35)
+            lz.inputs['Detail'].default_value = 4.0; lz.inputs['Roughness'].default_value = 0.55
+            nt.links.new(tc.outputs['Object'], lz.inputs['Vector'])
+            lc = nt.nodes.new('ShaderNodeMapRange')
+            lo2 = 0.5 + p.get('spread', 0.09) * NormalDist().inv_cdf(leafy)
+            lc.inputs['From Min'].default_value = lo2; lc.inputs['From Max'].default_value = lo2 + 0.03
+            nt.links.new(lz.outputs['Fac'], lc.inputs['Value'])
+            ml = nt.nodes.new('ShaderNodeMath'); ml.operation = 'MULTIPLY'
+            nt.links.new(hole, ml.inputs[0]); nt.links.new(lc.outputs['Result'], ml.inputs[1]); hole = ml.outputs['Value']
         mx = nt.nodes.new('ShaderNodeMath'); mx.operation = 'MAXIMUM'
-        nt.links.new(fac, mx.inputs[0]); nt.links.new(ed.outputs['Result'], mx.inputs[1]); fac = mx.outputs['Value']
+        nt.links.new(fac, mx.inputs[0]); nt.links.new(hole, mx.inputs[1]); fac = mx.outputs['Value']
     nt.links.new(fac, mix.inputs['Fac'])
     nt.links.new(dif.outputs['BSDF'], mix.inputs[1]); nt.links.new(tr.outputs['BSDF'], mix.inputs[2])
     nt.links.new(mix.outputs['Shader'], out.inputs['Surface'])

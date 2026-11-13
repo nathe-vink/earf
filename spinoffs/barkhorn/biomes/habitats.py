@@ -181,7 +181,8 @@ FLAG = {'haze_b': (4.0, 3.0), 'poison_ivy': (0.0, 0.0), 'poison_ivy_b': (0.0, 0.
 # smoke_d (2026-11-13): none; at sun el 6 from the camera's side the 8 x 6 m flag shaded the whole foreground (p3 front 0.05)
 # feet bedding per habitat (m; default 0.012, the cabinet on the ground). Acid stands in a puddle: at 12 mm its bottom sat
 # exactly on the water, and the water reflected a band of sky between the edge and its reflection (the gate: "hovers")
-SINK = {'acid_b': 0.025,   # 2026-11-12: on wet rock at the puddle's edge (the displaced rock, as Dust's 0.028); was 0.05 in the water
+SINK = {'poison_ivy_b': 0.02,  'ember_d': 0.018,   # S1: the feet bedded in the crust and its cinders   # 2026-11-13, seating rule S1: the feet press into the litter
+        'acid_b': 0.025,   # 2026-11-12: on wet rock at the puddle's edge (the displaced rock, as Dust's 0.028); was 0.05 in the water
         'acid_b_in_water': 0.05,    # 2026-11-09: 0.025 left the bottom panel's 20 mm front edge above the water, mirrored as a
                           # grey band 25-30 px under the cabinet (the trace); at 0.05 the reflection meets the walls
         # (earlier: at 0.015 a sky-bright strip (8-9 px) showed between the edge and its reflection (the gate on
