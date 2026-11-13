@@ -183,3 +183,35 @@ mantle-bar (2400 x 1600, from the same shot as the 1920 x 1280 frame): Mantle in
 - **How it was measured:** a 12 px patch at the ball's centre.
 - **The Hemispheres:** all five are above the frame. They light the deck but are not seen, so they are not measured here.
 - **Audit (reaudit.py):** hidden 0, equipment 0.
+
+## Hero test 2 (the coordinator, 01:54; 2026-11-13)
+
+bar-hero (1600 x 900, 128 samples), replacing test 1. The changes:
+- **The lens:** 21 mm. The stool is 0.3 m further back (y 2.2). The view is shifted up (level, so the verticals stay):
+  the aim is at z 1.85 instead of 1.55. Both bays are whole and smaller. Their tops sit below the top quarter.
+- **The top band:**
+  - At 21 mm the gap between the ceiling and the bays' tops is about 13 % of the frame. So the band is the dark
+    ceiling's beams and the top row of shelves, not shelves alone.
+  - No light was added.
+  - The two wall heads between the bays now aim at z 1.45 instead of 1.7.
+  - The two bay heads moved forward on the track, from y 5.27 to 4.7, out of frame: with the ceiling in view, the audit
+    found them. Their targets are unchanged.
+  - The top quarter measures a mean of 3.3 of 255 (99th percentile 24.7, max 50.7): no lit spines, no sign.
+- **The newspaper:** replaced by a magazine with a dark cover (cover-08) on the bar, raised by its thickness.
+- **The triangle sleeve:** the one high on the wall moved down to the lowest row (z 1.565).
+
+| lamp | h, s, v | test 1 |
+|---|---|---|
+| Hemisphere Ember (two) | 5.2, 0.36, 1.00 / 5.4, 0.35, 1.00 | 4.9, 0.38, 1.00 / 4.8, 0.37, 1.00 |
+| Hemisphere Acid (two) | 51.6, 0.22, 0.89 / 51.4, 0.21, 0.89 | 51.9, 0.23, 0.88 / 51.8, 0.23, 0.88 |
+| Hemisphere Dust | 14.8, 0.34, 0.98 | 15.3, 0.36, 0.97 |
+| Core Acid | 52.1, 0.64, 0.60 | 52.4, 0.68, 0.59 |
+| Core Ember | 7.4, 0.87, 0.74 | 8.4, 0.95, 0.74 |
+| Core Dust | 19.4, 0.78, 0.72 | 20.5, 0.85, 0.70 |
+
+**How it was measured** (as in test 1):
+- The Hemispheres: the brightest fifth of each lit shade, just under its centre point. The Ember and Dust shades
+  touch white at their hottest pixels, as the passed pendants do.
+- The Cores: a 12 px patch at each ball's centre, with no clipped channel.
+
+**Audit (reaudit.py):** hidden 0, equipment 0.
