@@ -1185,6 +1185,20 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
       coordinator): KEEP IT. It stays on r46-owner-notes and r33-speaker-horn; the site lane puts it back into the
       held batch 4; r48-biomes is left without it (its session refuses the edit and its pushes are few). Nothing in
       the Vercel dashboard, on main or on the live site changes.
+   02:58-03:00 UTC: the speaker lane confirms both decisions (the switch kept; the FA123 queued after the bar set and
+   the hero); the site lane has the switch back in the held batch 4 (r49-site-rc cc9c157745, r47-site-next 3f39e23856).
+   03:39 UTC, speaker lane 06f27a7100 (and c0e7e2a3): THE MANTLE FRAME AT FULL SIZE (`planet-bar/mantle-bar.png`,
+   2400x1600, Mantle in Ember, the cleaned Tropos, no Core cable; Core 5.1 / 0.67 / 0.90; audit hidden 0, equipment 0)
+   and HERO TEST 2 (`planet-bar/bar-hero.png`, 1600x900: 21 mm, the stool 0.3 m further back, the view shifted up
+   with the camera level; the wall heads aimed lower and the bay heads moved forward on the track, out of frame; the
+   top quarter a mean of 3.3/255; a dark-covered magazine for the newspaper; the triangle sleeve moved down).
+   Coordinator's check: hero test 2's framing is right (dark top band, both bays whole), but the speakers are washed
+   (upper lining 57 / 0.29 / 0.75 and 59 / 0.21 / 0.82, 6-9 % of each cabinet clipped, against test 1's 54 / 0.50 / 0.61
+   and 1 %). With the owner's "Do whatever you think is best", THE HERO GOES TO FULL SIZE (3200x1800) with three
+   fixes: the bays back to test 1's level; nothing but shelves cut by the side edges; x 34-67 %, y 5-36 % kept free of
+   anything bright for a headline centered between the bays. The Mantle frame is nearly there: a small red dot under
+   the deck reads as a power LED (Mantle has no light): to be explained and removed by moving the Core or camera, not
+   painted out. Order: bar-backbar (rendering), the hero, core-bar-table, the portrait, the Mantle fix, the FA123.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
