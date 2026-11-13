@@ -1136,6 +1136,15 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    calm dark top quarter for the headline with no lit spines or sign in it, by keeping the pool off those shelves,
    no added light and no darkening in the finish; the bright newspaper swapped or moved. On phones the hero would be
    the tall bar frame. The lane is also told the Hemisphere's measured figures.
+   01:53 UTC, lamps lane 8e07dda48b: `hemisphere-ember-inuse.png` PASS 2 at the same name (four boards of scanned oak,
+   Poly Haven oak_veneer_01; an open book with printed pages; a speckled stoneware cup; Poly Haven dining_chair_02
+   across the table; plaster walls and an oak floor; the lamp, its 0.5 m height, the camera, EV -0.5 and the declared
+   6 W fill unchanged; the far wall left black; lux re-read 333 / 226 / 71).
+   Coordinator's check: PASSES for the site as the explanatory view (the lamp alone over a real table, the pool as
+   measured). Shown to the owner 01:54. The Hemisphere job is closed at the lamps lane.
+   Site lane told 01:54 to PREPARE BATCH 4 without pushing: a "How it lights" block on every Hemisphere page (the
+   cutaway and the lane's three sentences; "shown in Ember" on the other tints), the in-use picture as "Over a
+   table" on Hemisphere in Ember, and the lone bar picture on `/lighting` centered or widened at desktop width.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
