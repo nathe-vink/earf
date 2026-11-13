@@ -171,3 +171,15 @@ bar-hero (1600 x 900, 128 samples):
 **Checks:**
 - Nothing stands in front of either speaker: Mantle and the Cores sit below the line from the eye to the speakers' feet.
 - Audit (reaudit.py): hidden 0, equipment 0.
+
+## The Mantle frame at full size (the coordinator, 22:17 and 23:48; 2026-11-13)
+
+mantle-bar (2400 x 1600, from the same shot as the 1920 x 1280 frame): Mantle in Ember, the cleaned Tropos, no Core cable.
+
+| lamp | h, s, v | the lamps lane's finals |
+|---|---|---|
+| Core Ember (in frame) | 5.1, 0.67, 0.90, no clipped channel | 5.0, 0.64, 0.91 |
+
+- **How it was measured:** a 12 px patch at the ball's centre.
+- **The Hemispheres:** all five are above the frame. They light the deck but are not seen, so they are not measured here.
+- **Audit (reaudit.py):** hidden 0, equipment 0.

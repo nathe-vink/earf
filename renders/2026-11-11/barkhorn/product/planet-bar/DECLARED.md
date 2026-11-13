@@ -82,7 +82,7 @@ products light themselves: the Hemispheres and Cores by their own LEDs (r32-lamp
 | track-horn1 | a round ceiling track head on the room side, aimed at a speaker's horn; disk 0.12 x 0.12 m | 8.55, 4.4, 3.35 | 4.5 W/m2 at its target |
 | house | a broad round warm fill from the room behind the camera; disk 1.6 x 1.6 m | 6.9, 0.6, 2.3 | 0.9 W/m2 at its target |
 
-## mantle-bar.png (1920 x 1280)
+## mantle-bar.png (2400 x 1600)
 
 | name | what | where (m: x along the bar, y toward the wall, z up) | strength |
 |---|---|---|---|
