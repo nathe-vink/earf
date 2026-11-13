@@ -34,7 +34,7 @@
      0.0
     ],
     "displace": 0.02,
-    "relief": 0.12,
+    "relief": 0.2,
     "res": "2k",
     "tint": "#5F5A3A",
     "tint_mix": 0.3,
@@ -722,6 +722,77 @@
     "color": "#FF6A20",
     "emit": 18.0,
     "seed": 48
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "ember_el",
+    "fn": "rubble",
+    "models": [
+     "boulder_01"
+    ],
+    "res": "1k",
+    "z": -0.006,
+    "tilt_deg": 40.0,
+    "albedo": 0.08,
+    "saturation": 0.2,
+    "seed": 31,
+    "count": 40,
+    "area": [
+     -1.0,
+     -0.55,
+     0.6,
+     0.7
+    ],
+    "scale": [
+     0.02,
+     0.05
+    ],
+    "avoid": [
+     [
+      -0.14,
+      0.0,
+      0.24
+     ],
+     [
+      0.14,
+      0.0,
+      0.24
+     ]
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "ember_el",
+    "fn": "rubble",
+    "models": [
+     "boulder_01"
+    ],
+    "res": "1k",
+    "z": -0.006,
+    "tilt_deg": 40.0,
+    "albedo": 0.08,
+    "saturation": 0.2,
+    "seed": 32,
+    "count": 25,
+    "area": [
+     -1.6,
+     -1.6,
+     1.2,
+     1.4
+    ],
+    "scale": [
+     0.03,
+     0.08
+    ],
+    "avoid": [
+     [
+      0.0,
+      0.0,
+      0.45
+     ]
+    ]
    }
   ]
  },
@@ -790,16 +861,16 @@
   }
  },
  "sun": {
-  "azimuth_deg": -35.0,
-  "elevation_deg": 6.0,
-  "irradiance": 20.0,
+  "azimuth_deg": 65.0,
+  "elevation_deg": 8.0,
+  "irradiance": 30.0,
   "angle_deg": 1.0,
   "color": "#FFB07A"
  },
  "haze": {
   "box_m": [
    -80.0,
-   -8.0,
+   -2.0,
    -1.0,
    80.0,
    420.0,
