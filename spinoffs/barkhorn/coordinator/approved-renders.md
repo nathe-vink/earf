@@ -1074,6 +1074,24 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    Hypex is rewritten for the FA123 (seven questions; the bridged load and the drilling drawing first; the plain or
    own-print plate added) and given to him to send (`hypex-letter-fa123.md`, shown in chat). The change waits for his
    confirmation and for Hypex's answer on the bridged load.
+   00:41 UTC, lamps lane feb013934b: HEMISPHERE MADE LEGIBLE, `renders/2026-11-12/barkhorn/lamp-site/legible/`:
+   `hemisphere-ember-cutaway.png` 2000x2000 (a true section of the CAD solids, cut faces capped in each material; 13
+   of the 24 LEDs remain; five labels), `hemisphere-ember-inuse.png` 2400x1600 (the rim 0.5 m over a table in a dim
+   room; the 24 LED faces plus a declared 6 W ceiling panel, about 2 % at the pool), `numbers.txt`.
+   - THE 350 LUX LINE HOLDS: Ember 272 lm out, 198 lm below the rim plane (73 %), 75 lm through the shade (27 %); all
+     eight tints send 66-75 % down. Lux 0.5 m below: 348 at the center, 226 at 0.3 m off, 70 at 0.6 m off (studio
+     probe); 343 / 231 / 71 read from the in-use picture's own table. The speaker lane's "lights upward, almost none
+     reaches the deck" is wrong.
+   - The lane's three sentences (checked against the CAD: LEDs on a Ø38 circle at the center of a Ø56 black carrier,
+     faces 4.9 mm above the rim, facing up): twenty-four LEDs on a ring at the center of the mouth, on a small black
+     disc level with the rim, facing straight up; their light lands on the white diffuser lining the dome, some passes
+     out through the clear shell and the tinted layer so the shade glows in its color, and about three quarters
+     bounces back down out of the open mouth as white light on the table; from below you see an evenly lit white bowl
+     with the small black disc at its center, and no bright point to look into.
+   - Coordinator's check: the cutaway PASSES (for the owner now, and for the site's Hemisphere page with the three
+     sentences). The in-use picture proves the point but is not for the site (the table reads as ribbed card, a blank
+     book, a plain mug, a black void): one more pass ordered (a scanned oak top, real props, the far wall and a chair
+     back just readable, the pool's fall-off as measured). Both shown to the owner 00:42.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
