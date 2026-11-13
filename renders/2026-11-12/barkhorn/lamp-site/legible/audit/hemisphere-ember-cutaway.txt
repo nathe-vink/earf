@@ -1,0 +1,34 @@
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:178: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m = bpy.data.materials.new(nm); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+Timer 'STL Import' took 0.57 ms
+Timer 'STL Import' took 0.55 ms
+Timer 'STL Import' took 4.71 ms
+Timer 'STL Import' took 4.64 ms
+Timer 'STL Import' took 1.14 ms
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:236: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  cm = bpy.data.materials.new(f'collar-{tint}'); cm.use_nodes = True; nt = cm.node_tree
+Timer 'STL Import' took 1.07 ms
+Timer 'STL Import' took 0.44 ms
+Timer 'STL Import' took 0.84 ms
+Timer 'STL Import' took 0.89 ms
+Timer 'STL Import' took 0.98 ms
+Timer 'STL Import' took 0.26 ms
+Timer 'STL Import' took 6.19 ms
+Timer 'STL Import' took 0.50 ms
+Timer 'STL Import' took 0.58 ms
+00:11.307  cycles           | WARNING CUEW initialization failed: Error opening the library
+ANCHOR leds 1044 1204
+ANCHOR diffuser 644 808
+ANCHOR shade 1408 894
+ANCHOR clear 1242 685
+ANCHOR carrier 834 1192
+ANCHOR down 1108 1487
+AUDIT cutaway hidden [] no-shadow [] lights [('key', 'AREA', 90.308), ('fill', 'AREA', 20.0), ('kicker', 'AREA', 6.0), ('led-red-0', 'AREA', 0.621), ('led-red-1', 'AREA', 0.621), ('led-red-2', 'AREA', 0.621), ('led-red-3', 'AREA', 0.621), ('led-red-4', 'AREA', 0.621), ('led-red-5', 'AREA', 0.621), ('led-red-6', 'AREA', 0.621), ('led-red-7', 'AREA', 0.621), ('led-red-8', 'AREA', 0.621), ('led-red-9', 'AREA', 0.621), ('led-red-10', 'AREA', 0.621), ('led-red-11', 'AREA', 0.621), ('led-red-12', 'AREA', 0.621)]
+HIDDENCAST cutaway: 3 hidden, 0 in frame
+   out         0.0 %  area lamp (ellipse) key
+   out         0.0 %  area lamp (ellipse) fill
+   out         0.0 %  area lamp (rectangle) kicker
+00:12.878  render           | Saved: '/home/user/earf/renders/2026-11-12/barkhorn/lamp-site/legible/masks/hemisphere-ember-cutaway-key.png'
+00:15.034  render           | Saved: '/home/user/earf/renders/2026-11-12/barkhorn/lamp-site/legible/masks/hemisphere-ember-cutaway-fill.png'
+00:17.265  render           | Saved: '/home/user/earf/renders/2026-11-12/barkhorn/lamp-site/legible/masks/hemisphere-ember-cutaway-kicker.png'
+CASTCHECK cutaway {'key': 0.0, 'fill': 0.0, 'kicker': 0.0}

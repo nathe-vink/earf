@@ -84,7 +84,7 @@ def build(frame, samples, scale):
     def bbt(tint):
         return blackbody(CCT_PER_TINT.get(tint, 2700) if pertint else CCT)
     bb = blackbody(CCT)
-    kind0 = 'dome' if frame.startswith(('lamps-domes', 'trio-', 'cluster')) else 'orb' if frame.startswith(('lamps-orbs', 'baseopts')) else frame.split('-')[0]
+    kind0 = 'dome' if frame.startswith(('lamps-domes', 'trio-', 'cluster', 'cutaway', 'inuse')) else 'orb' if frame.startswith(('lamps-orbs', 'baseopts')) else frame.split('-')[0]
     # the studio's brightness and the exposure move together, so the paper holds its tone while the lamp, at its real
     # output, comes out of clipping: a brighter studio, one scale
     # round 3 (the gate, wf_5760aeac-7cd): Hemisphere's studio x1 with the camera at -2 EV (the lamp up 1 EV against the
@@ -491,6 +491,107 @@ def build(frame, samples, scale):
             for o in objs:   # turn the dock's cable away from the camera, about the lamp's axis (the parts' origin)
                 o.rotation_euler[2] = math.radians(rot)
 
+    def section(c):
+        """The cutaway (2026-11-12): every part of the lamp cut on the vertical plane y = c.y through its axis, the near
+        half (y < c.y, the camera's side) removed. A closed CAD solid gets its cut faces filled (a true section cap, the
+        part's own material); the shade's three layers are open surfaces (an outer and an inner sphere each), so each
+        layer gets a flat half-annulus cap between its two radii, from its cut to the crown's opening. The cord is left
+        whole. The LEDs in the removed half are removed with it (13 of 24 stay, the two on the plane included)."""
+        cy = c[1]
+        layers = [('tint-red', 'tint-in-red', 100.0, 97.0, 0.0), ('clear-red', 'clear-in-red', 96.0, 90.0, 4.0),
+                  ('opal-red', 'opal-in-red', 89.0, 86.0, 0.0)]
+        shells = {n for l in layers for n in l[:2]} | {'opal-edge-red'}
+        for o in list(bpy.data.objects):
+            if o.type == 'LIGHT' and o.name.startswith('led-') and o.location.y < cy - 1e-6:
+                bpy.data.objects.remove(o, do_unlink=True)
+        for o in list(bpy.data.objects):
+            if o.type != 'MESH' or o.name in ('sweep', 'cord'):
+                continue
+            mi = o.matrix_world.inverted(); co = mi @ Vector((c[0], cy, 0.0)); no = (mi.to_3x3() @ Vector((0, 1, 0))).normalized()
+            bm = bmesh.new(); bm.from_mesh(o.data)
+            if o.name not in shells:
+                bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=1e-4)
+            geom = bm.verts[:] + bm.edges[:] + bm.faces[:]
+            bmesh.ops.bisect_plane(bm, geom=geom, plane_co=co, plane_no=no, clear_inner=True, dist=1e-7)
+            if o.name not in shells:
+                tol = 1e-5 * max(1.0, max((abs(v) for v in co), default=1.0))
+                on = [e for e in bm.edges if e.is_boundary and all(abs((v.co - co).dot(no)) < tol for v in e.verts)]
+                if on:
+                    bmesh.ops.holes_fill(bm, edges=on, sides=0)
+                bmesh.ops.recalc_face_normals(bm, faces=bm.faces[:])
+            bm.to_mesh(o.data); bm.free(); o.data.update()
+        for outer, inner, ro, ri, cut in layers:
+            mat = bpy.data.objects['opal-in-red'].data.materials[0] if outer.startswith('opal') else bpy.data.objects[outer].data.materials[0]
+            bm = bmesh.new(); n_ = 96
+            for sgn in (1.0, -1.0):
+                def arc(r):
+                    a0 = math.asin(cut / r); a1 = math.acos(48.2 / r)
+                    return [a0 + (a1 - a0) * i / n_ for i in range(n_ + 1)]
+                po = [bm.verts.new((sgn * ro * MM * math.cos(a), 0.0, ro * MM * math.sin(a))) for a in arc(ro)]
+                pi_ = [bm.verts.new((sgn * ri * MM * math.cos(a), 0.0, ri * MM * math.sin(a))) for a in arc(ri)]
+                for i in range(n_):
+                    f = bm.faces.new((po[i], po[i + 1], pi_[i + 1], pi_[i]))
+                    f.normal_update()
+                    if f.normal.y > 0:
+                        f.normal_flip()
+            me = bpy.data.meshes.new(outer + '-cap'); bm.to_mesh(me); bm.free(); me.materials.append(mat)
+            ob = bpy.data.objects.new(outer + '-cap', me); bpy.context.scene.collection.objects.link(ob)
+            ob.location = (c[0], cy, c[2])
+
+    def room(tz):
+        """A dim room for the in-use picture (2026-11-12): a 4.4 x 4.6 m box 2.4 m high (floor, ceiling, four walls, all
+        matte), a pale oak table (1.6 x 0.9, its top at tz), a white cup and an open book. Procedural materials only."""
+        wall = SC.principled('wall', '#8A867F', 0.9); floor_ = SC.principled('floor', '#4A3D33', 0.6)
+        ceil = SC.principled('ceiling', '#B9B6B0', 0.95)
+        SC.box_ob('floor', -2.2, -2.6, -0.02, 2.2, 2.0, 0.0, floor_)
+        SC.box_ob('ceiling', -2.2, -2.6, 2.4, 2.2, 2.0, 2.42, ceil)
+        SC.box_ob('wall-back', -2.2, 2.0, 0.0, 2.2, 2.02, 2.4, wall)
+        SC.box_ob('wall-front', -2.2, -2.62, 0.0, 2.2, -2.6, 2.4, wall)
+        SC.box_ob('wall-left', -2.22, -2.6, 0.0, -2.2, 2.0, 2.4, wall)
+        SC.box_ob('wall-right', 2.2, -2.6, 0.0, 2.22, 2.0, 2.4, wall)
+        # pale oak: a wave texture's grain along x, distorted, between two oak tones; oiled (roughness 0.45)
+        oak = bpy.data.materials.new('oak'); oak.use_nodes = True; nt = oak.node_tree
+        bs = nt.nodes['Principled BSDF']; bs.inputs['Roughness'].default_value = 0.45
+        tc = nt.nodes.new('ShaderNodeTexCoord'); mp = nt.nodes.new('ShaderNodeMapping'); mp.inputs['Scale'].default_value = (1.0, 14.0, 1.0)
+        wv = nt.nodes.new('ShaderNodeTexWave'); wv.wave_type = 'BANDS'; wv.bands_direction = 'Y'
+        wv.inputs['Scale'].default_value = 3.0; wv.inputs['Distortion'].default_value = 6.0; wv.inputs['Detail'].default_value = 4.0
+        cr = nt.nodes.new('ShaderNodeValToRGB'); cr.color_ramp.elements[0].color = (*SC.hex_lin('#C8A57A'), 1); cr.color_ramp.elements[1].color = (*SC.hex_lin('#DCC29C'), 1)
+        nt.links.new(tc.outputs['Object'], mp.inputs['Vector']); nt.links.new(mp.outputs['Vector'], wv.inputs['Vector'])
+        nt.links.new(wv.outputs['Fac'], cr.inputs['Fac']); nt.links.new(cr.outputs['Color'], bs.inputs['Base Color'])
+        SC.box_ob('table-top', -0.8, -0.45, tz - 0.03, 0.8, 0.45, tz, oak, bevel=0.003)
+        for lx in (-0.74, 0.70):
+            for ly in (-0.39, 0.35):
+                SC.box_ob(f'table-leg', lx, ly, 0.0, lx + 0.04, ly + 0.04, tz - 0.03, oak)
+        # the cup: a white glazed mug, revolved, 80 across, 90 high, and a handle
+        glaze = SC.principled('glaze', '#F1EFEA', 0.12)
+        prof = [(0.0, 0.0), (0.038, 0.0), (0.040, 0.004), (0.040, 0.090), (0.0365, 0.090), (0.0365, 0.008), (0.0, 0.008)]
+        bm = bmesh.new(); vs = [bm.verts.new((r, 0.0, z)) for r, z in prof]
+        for i in range(len(vs) - 1):
+            bm.edges.new((vs[i], vs[i + 1]))
+        bmesh.ops.spin(bm, geom=bm.verts[:] + bm.edges[:], cent=(0, 0, 0), axis=(0, 0, 1), angle=2 * math.pi, steps=64, use_merge=True)
+        bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=1e-6); bmesh.ops.recalc_face_normals(bm, faces=bm.faces[:])
+        for f in bm.faces:
+            f.smooth = True
+        me = bpy.data.meshes.new('cup'); bm.to_mesh(me); bm.free(); me.materials.append(glaze)
+        cup = bpy.data.objects.new('cup', me); bpy.context.scene.collection.objects.link(cup); cup.location = (0.26, -0.16, tz)
+        bpy.ops.mesh.primitive_torus_add(major_radius=0.024, minor_radius=0.0055, location=(0.26 + 0.044, -0.16, tz + 0.047), rotation=(math.pi / 2, 0, 0))
+        hd = bpy.context.object; hd.name = 'cup-handle'; hd.data.materials.append(glaze); hd.select_set(False)
+        # the book: open, a 230 x 155 page spread on its cloth cover, the two blocks of pages rising slightly from the spine
+        cloth = SC.principled('cloth', '#2F3B4A', 0.85); pages = SC.principled('pages', '#EEE9DE', 0.8)
+        bk = (-0.20, -0.08); rot = math.radians(-14)
+        objs = [SC.box_ob('book-cover', -0.162, -0.118, 0.0, 0.162, 0.118, 0.003, cloth)]
+        for sgn in (-1, 1):   # each block's centre 78 out from the spine, tipped 3 deg so it rises toward the spine
+            ob = SC.box_ob('book-pages', 0.002 * sgn if sgn > 0 else -0.154, -0.112, 0.003, 0.154 if sgn > 0 else -0.002, 0.112, 0.013, pages)
+            ob.rotation_euler = (0.0, math.radians(3.0) * sgn, 0.0); objs.append(ob)
+        for ob in objs:
+            ob.location = (ob.location.x * math.cos(rot) - ob.location.y * math.sin(rot) + bk[0],
+                           ob.location.x * math.sin(rot) + ob.location.y * math.cos(rot) + bk[1], ob.location.z + tz)
+            ob.rotation_euler[2] += rot
+        fw = float(os.environ.get('ROOM_FILL', '0'))
+        if fw > 0:   # declared: a faint warm ceiling panel, as a room's own spill
+            rf = SC.area('room-fill', (-1.2, 1.0, 2.38), (0, 0, 0), (1.2, 1.2), fw, '#FFE8D0')
+            rf.rotation_euler = (math.pi, 0, 0)
+
     # --- the set: a pale paper sweep (floor, cove, back) and real studio lights out of frame, unlinked ---------------
     paper = SC.principled('paper', os.environ.get('PAPER', '#EDE8E1'), 0.9)   # PAPER: a test backdrop (2026-11-11)
     bm = bmesh.new(); Wd = 6.0; R = 0.6; yb = 1.0          # the floor to y = yb - R, a cove of radius R, the back at y = yb
@@ -572,6 +673,27 @@ def build(frame, samples, scale):
                                     (-0.30, -0.12, 0.48), (-0.06, -0.12, 0.42), (0.18, -0.12, 0.54), (0.42, -0.12, 0.62))):
             hemisphere(t, x_, z_, y=y_)
         cam = tuple(eval(os.environ['DOMECAM'])) if os.environ.get('DOMECAM') else ((0.30, -1.50, 0.36), (0.0, 0.0, 0.67), 46.0)
+    elif frame == 'cutaway':
+        # hemisphere-ember-cutaway (the owner, 2026-11-12: "I'm having trouble understanding how the hemisphere lighting
+        # works"): the approved Ember lit, cut in half on the vertical plane through its axis (section() below: the near
+        # half removed, the cut faces capped), three-quarter, on the finals' dark studio ground; 2000 x 2000
+        W, H = 2000, 2000
+        hemisphere('red', 0.0, 0.50)
+        section((0.0, 0.0, 0.50))
+        cam = tuple(eval(os.environ['DOMECAM'])) if os.environ.get('DOMECAM') else ((0.40, -0.33, 0.58), (0.0, 0.01, 0.53), 70.0)
+    elif frame == 'inuse':
+        # hemisphere-ember-inuse (the owner, 2026-11-12): Ember hung with its rim 0.5 m over a pale oak table in a dim room,
+        # seen from a seat, three-quarter, a cup and an open book for scale; 2400 x 1600. The studio gone: the lamp the
+        # only light, plus ROOM_FILL (W, declared, default 0: a faint ceiling panel) if the room would read black
+        W, H = 2400, 1600
+        for o in list(bpy.data.objects):
+            if o.name in ('sweep', 'key', 'fill', 'kicker'):
+                bpy.data.objects.remove(o, do_unlink=True)
+        bpy.context.scene.world.node_tree.nodes['Background'].inputs['Strength'].default_value = 0.0
+        TZ = 0.75
+        room(TZ)
+        hemisphere('red', 0.0, TZ + 0.50)
+        cam = tuple(eval(os.environ['DOMECAM'])) if os.environ.get('DOMECAM') else ((0.80, -1.10, 1.16), (0.0, 0.0, 0.97), 30.0)
     elif frame.startswith('trio-'):
         # trio-<k1>-<k2>-<k3> (the owner, 2026-11-11: "I like having to pair multiple"): three Hemispheres hung close
         # over a table at slightly different heights, seen a little from below and to one side; 2000 x 1600
@@ -614,6 +736,17 @@ def build(frame, samples, scale):
     vs.white_balance_tint = 0.0
     SC.camera(cam[0], cam[1], lens=cam[2], fstop=float(os.environ.get('FSTOP', '8.0')),   # FSTOP, FOCUS: a detail's shallow focus
               focus=tuple(eval(os.environ['FOCUS'])) if os.environ.get('FOCUS') else None)
+    if frame == 'cutaway':
+        # the labels' anchors (mm in the lamp's frame, its rim's centre at z 0.50), projected to pixels for the leader lines
+        from bpy_extras.object_utils import world_to_camera_view
+        bpy.context.view_layer.update()
+        anchors = {'leds': (19.0, 1.5, 5.0), 'diffuser': (-87.5 * math.cos(math.radians(38)), 0.0, 87.5 * math.sin(math.radians(38))),
+                   'shade': (98.5 * math.cos(math.radians(30)), 0.0, 98.5 * math.sin(math.radians(30))),
+                   'clear': (93.0 * math.cos(math.radians(52)), 0.0, 93.0 * math.sin(math.radians(52))),
+                   'carrier': (-24.0, 0.0, 2.0), 'down': (0.0, 30.0, -40.0)}
+        for k_, (ax, ay, az) in anchors.items():
+            u = world_to_camera_view(sc, sc.camera, Vector((ax * MM, ay * MM, 0.50 + az * MM)))
+            print('ANCHOR', k_, round(u.x * W), round((1 - u.y) * H))
     for nm_ in os.environ.get('STUDIO_OFF', '').split(','):   # e.g. the view from straight below: the key, hidden from
         if nm_ and nm_ in bpy.data.objects:                   # the camera, stands in its frame (hiddencast), so it goes
             bpy.data.objects.remove(bpy.data.objects[nm_], do_unlink=True)
@@ -660,15 +793,22 @@ def build(frame, samples, scale):
     if os.environ.get('LUXPROBE'):
         # the table's lux under the lamp: the studio and the world off, an orthographic camera 0.25 above the paper
         # looking straight down at a 1 m square of it, linear light; E = pi L / rho (rho the paper's albedo), lux = E / WLM
+        # 2026-11-12 (the coordinator: lux at the centre, 0.3 and 0.6 m off it): LUX_SPAN widens the square (m), and the
+        # in-use frame is probed on its own table: the room fill, the cup and the book removed, the table's top a grey
+        # card (the paper's #9A9A9A, so its albedo is known); the walls, floor and ceiling stay (their bounce is real)
         for o in list(sc.objects):
-            if o.name in ('key', 'fill', 'kicker'):
+            if o.name in ('key', 'fill', 'kicker', 'room-fill', 'cup', 'cup-handle') or o.name.startswith('book-'):
                 bpy.data.objects.remove(o, do_unlink=True)
+        z0_ = 0.0
+        if frame == 'inuse':
+            z0_ = 0.75; tt_ = bpy.data.objects['table-top']; tt_.data.materials.clear(); tt_.data.materials.append(paper)
         if sc.world:
             for n_ in sc.world.node_tree.nodes:
                 if n_.type == 'BACKGROUND':
                     n_.inputs['Strength'].default_value = 0.0
-        cm_ = sc.camera; cm_.location = (0.0, 0.0, 0.25); cm_.rotation_euler = (0.0, 0.0, 0.0)
-        cm_.data.type = 'ORTHO'; cm_.data.ortho_scale = 1.0; cm_.data.dof.use_dof = False
+        span = float(os.environ.get('LUX_SPAN', '1.0'))
+        cm_ = sc.camera; cm_.location = (0.0, 0.0, z0_ + 0.25); cm_.rotation_euler = (0.0, 0.0, 0.0)
+        cm_.data.type = 'ORTHO'; cm_.data.ortho_scale = span; cm_.data.dof.use_dof = False
         sc.render.resolution_x = sc.render.resolution_y = 200; sc.render.resolution_percentage = 100
         sc.view_settings.view_transform = 'Standard'; sc.view_settings.look = 'None'; sc.view_settings.exposure = 0.0
         sc.view_settings.use_white_balance = False
@@ -680,11 +820,22 @@ def build(frame, samples, scale):
             v = []
             for j in range(200):
                 for i in range(200):
-                    rr = math.hypot((i + 0.5) / 200 - 0.5, (j + 0.5) / 200 - 0.5)
+                    rr = math.hypot((i + 0.5) / 200 - 0.5, (j + 0.5) / 200 - 0.5) * span
                     if r0 <= rr < r1:
                         k = 4 * (j * 200 + i); v.append(0.2126 * px[k] + 0.7152 * px[k + 1] + 0.0722 * px[k + 2])
             return sum(v) / len(v) * math.pi / rho / WLM
+        def spot(x_, y_, h=0.02):   # a 40 mm square at (x, y) m from the lamp's axis
+            v = []
+            for j in range(200):
+                for i in range(200):
+                    xx = ((i + 0.5) / 200 - 0.5) * span; yy = ((j + 0.5) / 200 - 0.5) * span
+                    if abs(xx - x_) <= h and abs(yy - y_) <= h:
+                        k = 4 * (j * 200 + i); v.append(0.2126 * px[k] + 0.7152 * px[k + 1] + 0.0722 * px[k + 2])
+            return sum(v) / len(v) * math.pi / rho / WLM
         print('LUX', frame, 'centre r<0.05', round(lux(0, 0.05)), 'r 0.15-0.2', round(lux(0.15, 0.2)), 'r 0.3-0.35', round(lux(0.3, 0.35)), 'albedo', round(rho, 3))
+        if span >= 1.3:
+            print('LUXPTS', frame, 'centre', round(spot(0, 0)), 'x0.3', round((spot(0.3, 0) + spot(-0.3, 0)) / 2), 'x0.6', round((spot(0.6, 0) + spot(-0.6, 0)) / 2),
+                  'ring r0.28-0.32', round(lux(0.28, 0.32)), 'ring r0.58-0.62', round(lux(0.58, 0.62)) if frame != 'inuse' else '-')
         return
     if kind0 == 'dome' and os.environ.get('HEMI_ENGINE', 'ring') == 'ring':
         sc.cycles.use_denoising = os.environ.get('DENOISE') == '1'   # (option 3: no denoiser on the lamp; DENOISE=1 for the row and Smoke, the coordinator 23:50)

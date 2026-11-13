@@ -1,0 +1,26 @@
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:553: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  oak = bpy.data.materials.new('oak'); oak.use_nodes = True; nt = oak.node_tree
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:178: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m = bpy.data.materials.new(nm); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+Timer 'STL Import' took 0.57 ms
+Timer 'STL Import' took 0.58 ms
+Timer 'STL Import' took 5.13 ms
+Timer 'STL Import' took 4.24 ms
+Timer 'STL Import' took 1.14 ms
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:236: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  cm = bpy.data.materials.new(f'collar-{tint}'); cm.use_nodes = True; nt = cm.node_tree
+Timer 'STL Import' took 0.92 ms
+Timer 'STL Import' took 0.44 ms
+Timer 'STL Import' took 0.77 ms
+Timer 'STL Import' took 0.75 ms
+Timer 'STL Import' took 0.81 ms
+Timer 'STL Import' took 0.21 ms
+Timer 'STL Import' took 4.42 ms
+Timer 'STL Import' took 0.40 ms
+Timer 'STL Import' took 0.49 ms
+00:10.226  cycles           | WARNING CUEW initialization failed: Error opening the library
+AUDIT inuse hidden [] no-shadow [] lights [('room-fill', 'AREA', 6.0), ('led-red-0', 'AREA', 0.621), ('led-red-1', 'AREA', 0.621), ('led-red-2', 'AREA', 0.621), ('led-red-3', 'AREA', 0.621), ('led-red-4', 'AREA', 0.621), ('led-red-5', 'AREA', 0.621), ('led-red-6', 'AREA', 0.621), ('led-red-7', 'AREA', 0.621), ('led-red-8', 'AREA', 0.621), ('led-red-9', 'AREA', 0.621), ('led-red-10', 'AREA', 0.621), ('led-red-11', 'AREA', 0.621), ('led-red-12', 'AREA', 0.621), ('led-red-13', 'AREA', 0.621), ('led-red-14', 'AREA', 0.621), ('led-red-15', 'AREA', 0.621), ('led-red-16', 'AREA', 0.621), ('led-red-17', 'AREA', 0.621), ('led-red-18', 'AREA', 0.621), ('led-red-19', 'AREA', 0.621), ('led-red-20', 'AREA', 0.621), ('led-red-21', 'AREA', 0.621), ('led-red-22', 'AREA', 0.621), ('led-red-23', 'AREA', 0.621)]
+HIDDENCAST inuse: 1 hidden, 0 in frame
+   out         0.0 %  area lamp (rectangle) room-fill
+00:11.239  render           | Saved: '/home/user/earf/renders/2026-11-12/barkhorn/lamp-site/legible/masks/hemisphere-ember-inuse-room-fill.png'
+CASTCHECK inuse {'room-fill': 0.0}

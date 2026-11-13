@@ -1,0 +1,15 @@
+Hemisphere, where its light goes (2026-11-12/13; the coordinator's part D). Ember unless named. One scale (WLM 3.2/490).
+
+Share of the light out (launch/isphere.py, the enclosing sensor, 64 bounces, photometry-hemisphere.txt):
+  Ember   272 lm out: 198 below the rim plane (73 %), 75 above, through the shade (27 %)
+  all eight: 66-75 % below (Fog 66 %, the lightest shade; Haze 75 %); none lights mostly upward
+
+Lux on a table 0.5 m below the rim (LUXPROBE, LUX_SPAN=1.4, 512 samples, 40 mm squares on the lamp's x axis):
+                              centre   0.3 m off   0.6 m off
+  the studio probe (paper)      348        226          70
+  picture B's own table         343        231          71
+  (picture B: the table's top as a grey card of the paper's #9A9A9A, the cup, the book and the room fill removed for
+   the probe; the room's walls, floor and ceiling kept. Rings: r < 0.05 m 342, r 0.15-0.2 m 301, r 0.3-0.35 m 215)
+
+Picture B's lights: the lamp's 24 LED faces, and a declared 6 W ceiling panel (room-fill) for the walls; at the
+pool it adds about 2 % (the table's display value 0.300 with it at 6 W, 0.293 at 2 W). The camera at 4000 K, EV -0.5.
