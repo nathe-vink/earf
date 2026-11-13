@@ -443,7 +443,7 @@ def bar_hero():
     on the bar between them with a record on, the Hemisphere cluster over it, Cores along the bar, the drinks, the
     newspaper and the citrus; nothing in front of a speaker; a calm darker area in the upper left third for a headline.
     Lit as the passed frames: the products' own lamps and the declared track heads out of frame."""
-    s = _base([1600, 900], 'Planet EARF bar: the line from the best seat')
+    s = _base(HERO_SIZE, 'Planet EARF bar: the line from the best seat')
     # (proof 2: the bar's long row hung two shades before the horns: the passed pendants' cluster instead, between the
     # bays, 0.15 higher so Mantle reads under it)
     s['set']['props'].append(_lamps([(t_, x_, dy_, z_ + 0.15) for t_, x_, dy_, z_ in PEND_HEMIS], HERO_CORES))
@@ -476,7 +476,17 @@ def bar_hero():
     for k_ in ('track-bay0', 'track-bay1'):
         if k_ in s['lights']:
             ps = list(s['lights'][k_]['position']); ps[1] = HERO_BAY_HEAD_Y
-            s['lights'][k_] = {**s['lights'][k_], 'position': ps}
+            s['lights'][k_] = {**s['lights'][k_], 'position': ps, 'irradiance': HERO_BAY_IRR}
+    # (the coordinator, 03:46, full size: from 4.7 the heads washed the linings, 6-9 % of each cabinet clipped; lower,
+    # to test 1's level. Nothing but shelves cut by the side edges: the room's own glasses (a coupe at the left edge, a
+    # rocks glass at the right) out, and the now-playing sleeve and its stand, cut by the right edge, out as in the
+    # other frames)
+    for pr in s['set']['props']:
+        if pr.get('fn') == 'remove':
+            pr['names'] = pr['names'] + ['glasses-r36', 'pours-r36']
+        if pr.get('fn') == 'boards':
+            pr['boards'] = [b for b in pr['boards'] if 'cover-05' not in b['image']]
+    s['set']['props'] = [pr for pr in s['set']['props'] if not (pr.get('texture') == 'american_walnut_veneer' and pr.get('size') == [0.2, 0.05, 0.022])]
     # (the coordinator, 01:54, test 2: a calm dark top band for the headline; the newspaper the brightest thing in the
     # picture: a dark-covered magazine in its place; the sleeve pulled out high on the wall, the triangle, down to the
     # lowest row)
@@ -491,11 +501,13 @@ def bar_hero():
     return s
 
 
+HERO_SIZE = [3200, 1800]   # (the coordinator, 03:46: full size; test 2 was 1600 x 900)
 HERO_LENS = 21.0     # (the coordinator, 01:54: option (b), both bays whole and smaller, more wall above them)
 HERO_EYE_Y = 2.2     # (test 2: from 2.5)
 HERO_AIM_Z = 1.85    # (test 2: from 1.55; with 'level' the engine shifts rather than tilts)
 HERO_WALL_AIM_Z = 1.45   # (test 2: from 1.7)
 HERO_BAY_HEAD_Y = 4.7    # (test 2: from 5.27, out of frame)
+HERO_BAY_IRR = 8.0       # (full size: from 16.5, W/m2 at the target)
 
 
 SHOTS = {'bar-backbar': bar_backbar_full, 'core-bar-table': core_bar_table_full, 'bar-backbar-portrait': bar_backbar_portrait,
