@@ -1441,6 +1441,20 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
      S2 AS IT NOW STANDS: the sun 75 to 150 degrees off the camera's axis, chosen per place so that the speaker reads
      first and the shadow shows second: behind (110-150) where the place's own light or the cabinet's transmission
      carries the front (Ember), to the side (75-90) where nothing does (Poison).
+   21:21 UTC, speaker lane 527ad84d: THE NEW RECORD WALL, test crop `planet-bar/walltest/bar-hero-walltest.png`
+   (hero x 0.39-0.94, y 0.38-0.72; 1760x612 at full resolution, 512 samples; the hero's camera and light; audit 0/0;
+   the detail-pass package). `record_wall.py`, spines from an atlas of invented type (`make_spines.py`): 75 cells
+   (48 full, 12 part full with a leaning group, 6 with a flat stack, 9 holding 7-inch boxes, books, storage boxes or
+   face-out sleeves); 65 to 86 records a full cell (mean 77; 4,376 in all); thickness 69.6 % at 3.0-3.4 mm, 15.3 %
+   gatefolds, 10.6 % singles, 4.4 % doubles and boxes; spines 30 % white, 15 % cream, 22 % black, 5 % kraft, 28 %
+   printed colour; worn ends, a third in glossy sleeves, 1 in 10 with the inner sleeve proud.
+   21:22 UTC, coordinator's check at 1x and 2x: it no longer reads as a barcode; PASSED as a wall of real records. Shown
+   to the owner 21:22, before and after. Three tweaks ordered before the full hero: the whites aged (no spine above
+   albedo 0.70, slightly warm); half of the printed colours muted or dark; and the wall brought back to the approved
+   frame's brightness by the wall heads only (crop means: centre wall 61.3 before, 75.2 now, target 55-67; right lit
+   shelves 62.4 before, 96.0 now, target 58-72; the speaker bay 34.2 and 34.3, unchanged). The same crop once more.
+   The hero in full, the Mantle frame and the portrait start only on the coordinator's word, after the owner's yes
+   on the wall; meanwhile the lane does the FA123 batch.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
