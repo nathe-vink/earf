@@ -498,9 +498,12 @@ def bar_hero():
                     b_['z'] = round(TOP + 0.0045, 4)
                 if b_['image'] == 'tex/cover-14.png' and b_['z'] > 2.0:
                     b_['z'] = 1.565
+                if b_['image'] == 'tex/cover-10.png':     # (full size: the face-out sleeve on the wall cut by the right edge: in)
+                    b_['x'] = HERO_COVER10_X
     return s
 
 
+HERO_COVER10_X = 9.35      # (from 9.6)
 HERO_SIZE = [3200, 1800]   # (the coordinator, 03:46: full size; test 2 was 1600 x 900)
 HERO_LENS = 21.0     # (the coordinator, 01:54: option (b), both bays whole and smaller, more wall above them)
 HERO_EYE_Y = 2.2     # (test 2: from 2.5)
