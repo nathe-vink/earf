@@ -108,7 +108,7 @@
        ]
       ],
       "width": 0.055,
-      "depth": 0.09,
+      "depth": 0.12,
       "bank": 0.065
      },
      {
@@ -131,7 +131,7 @@
        ]
       ],
       "width": 0.055,
-      "depth": 0.09,
+      "depth": 0.12,
       "bank": 0.065
      },
      {
@@ -150,7 +150,7 @@
        ]
       ],
       "width": 0.03,
-      "depth": 0.09,
+      "depth": 0.12,
       "bank": 0.036
      },
      {
@@ -173,7 +173,7 @@
        ]
       ],
       "width": 0.035,
-      "depth": 0.09,
+      "depth": 0.12,
       "bank": 0.042
      },
      {
@@ -196,7 +196,7 @@
        ]
       ],
       "width": 0.035,
-      "depth": 0.09,
+      "depth": 0.12,
       "bank": 0.042
      },
      {
@@ -246,7 +246,7 @@
        ]
       ],
       "width": 0.03,
-      "depth": 0.08,
+      "depth": 0.12,
       "bank": 0.04
      },
      {
@@ -265,7 +265,7 @@
        ]
       ],
       "width": 0.03,
-      "depth": 0.08,
+      "depth": 0.12,
       "bank": 0.04
      },
      {
@@ -288,8 +288,35 @@
        ]
       ],
       "width": 0.035,
-      "depth": 0.09,
+      "depth": 0.12,
       "bank": 0.045
+     },
+     {
+      "points": [
+       [
+        -1.2,
+        -1.1
+       ],
+       [
+        -0.55,
+        -0.72
+       ],
+       [
+        0.05,
+        -0.8
+       ],
+       [
+        0.6,
+        -0.62
+       ],
+       [
+        1.25,
+        -0.85
+       ]
+      ],
+      "width": 0.22,
+      "depth": 0.12,
+      "bank": 0.15
      }
     ],
     "lava_below": true,
@@ -301,10 +328,13 @@
     "rock_tint_mix": 0.6,
     "ropes": {
      "dir": 20.0,
-     "wave": 0.11,
+     "wave": 0.12,
      "lobe": 0.6,
      "amp": 0.012,
-     "lobes": 0.07
+     "lobes": 0.07,
+     "bend": 0.6,
+     "jitter": 0.45,
+     "cover": 0.15
     }
    },
    {
@@ -583,7 +613,7 @@
   "bounces": 12,
   "view": "AgX",
   "exposure": 0.0,
-  "white_balance_k": 4800,
+  "white_balance_k": 5400,
   "white_balance_tint": 10,
   "look": "AgX - Base Contrast"
  },
@@ -623,15 +653,15 @@
   "enabled": true,
   "white_in": 240,
   "white_out": 240,
-  "contrast": 0.05,
+  "contrast": 0.12,
   "clarity": 0.04,
   "sharpen": 0.25,
   "sharpen_px": 0.6,
   "dream": {
-   "bloom": 0.18,
+   "bloom": 0.08,
    "bloom_px": 34,
    "bloom_threshold": 0.88,
-   "saturation": 0.0,
+   "saturation": 0.12,
    "lift": 0.0,
    "lift_color": "#000000",
    "vignette": 0.2
@@ -646,9 +676,9 @@
    62.0,
    14.0
   ],
-  "density": 0.003,
+  "density": 0.002,
   "anisotropy": 0.4,
-  "color": "#FFFFFF"
+  "color": "#C8A0A8"
  },
  "sun": {
   "azimuth_deg": 152.0,

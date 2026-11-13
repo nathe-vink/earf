@@ -159,9 +159,12 @@ def terrain(bpy, name, p, kit):
         a = math.radians(rp.get('dir', 0.0))
         u = X * math.cos(a) + Y * math.sin(a)                       # along the flow
         v = -X * math.sin(a) + Y * math.cos(a)
-        bend = 0.25 * _fbm(X, Y, 1.0, 2, 31.0)                      # the ropes arc, as lobes do
-        ropes = np.sin(2 * math.pi * (u + bend + 0.08 * v * v / max(rp.get('lobe', 1.0), 1e-3)) / rp.get('wave', 0.12))
-        patch = np.clip(0.5 + 1.5 * _fbm(X, Y, 1.6, 2, 37.0), 0, 1)
+        bend = rp.get('bend', 0.25) * _fbm(X, Y, 1.0, 2, 31.0)      # the ropes arc, as lobes do
+        # `jitter`: the spacing breathes (0 = even), so the ropes do not read as raked furrows
+        phase = (u + bend + 0.08 * v * v / max(rp.get('lobe', 1.0), 1e-3)) * (1 + rp.get('jitter', 0.0) * _fbm(X, Y, 0.8, 2, 53.0))
+        ropes = np.sin(2 * math.pi * phase / rp.get('wave', 0.12))
+        # `cover`: the share of the skin wrinkled; below 0.5 more of it lies as flat plates
+        patch = np.clip(rp.get('cover', 0.5) + 1.5 * _fbm(X, Y, 1.6, 2, 37.0), 0, 1)
         Z = Z + rp.get('amp', 0.015) * ropes * patch * level
         # lobes: the flow's toes, bulging plates of a few centimetres
         Z = Z + rp.get('lobes', 0.06) * np.clip(_fbm(X, Y, 0.7, 3, 41.0), 0, None) * level
