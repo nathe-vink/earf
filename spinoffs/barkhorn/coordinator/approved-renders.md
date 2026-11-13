@@ -1493,6 +1493,18 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
      holes match the placeholder pattern, which stays marked); the package rebuilt (b98c99dd, 0 clashes, $9,745 the
      pair); the asset rebuilt (b597165b); the drafts with the OPEN mark (887555a0: `make/compliance.md` section 6,
      `make/fa123-preset.md`). Rendering: the front-unchanged proof, the eight horn-backs, "The amplifier".
+   22:16 UTC, 13 Nov: THE OWNER: "Yes to the record wall and the seated look".
+   - THE RECORD WALL (round 2, eb1d976b) IS APPROVED for the whole room.
+   - THE SEATED LOOK IS APPROVED: the seating rules S1-S8 with the finish stand for every habitat. He had been shown
+     Poison s18 (before and after), Ember e10, e14 and e17, and the finish alone on s6.
+   ORDERS (22:15):
+   - Speaker lane: the hero in full first (3200x1800, the wall, the card out, the ring sleeve in frame, the
+     detail-pass package), then the rest of the FA123 batch, the Mantle frame once the dot is solved, the portrait,
+     then bar-backbar and bar-pendants with the wall.
+   - Biomes lane, after Smoke p5: the Poison final pair from s18 (a dapple on the horn's flare), the Ember final
+     pair from e17 (portrait 2400x3000, wide 3200x2000; each raw and finished; the wide first at 1280x800 with the
+     portrait's report); then seated proxies of Acid and Dust, then of Ice and Fog for comparison with their
+     finals. Smoke's final waits for the coordinator's check of p5 and the owner's look. Haze later.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
