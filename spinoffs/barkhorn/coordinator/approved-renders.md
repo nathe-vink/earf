@@ -1273,6 +1273,22 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    foreground); the no-flag frame is Ember if the red stays deep. Acid: overcast, the flag kept and listed. Dust:
    kept only if it shades nothing, and listed. The lane to state what Ice's and Fog's finals and the old Poison final
    carried. Order after Smoke p4: the Acid pair, Dust; the Poison and Ember finals on the coordinator's word.
+   08:28 UTC, biomes lane 324130c41f: Poison s6's audit is clean (no hidden object, no area lamp; the canopy with its
+   holes is a real set above the frame; the sun 22 and the mossy_forest sky 0.25 the only lights; scatter clean).
+   08:37 UTC, biomes lane 458d3498c6 (the rule in e7246d70fe): THE FLAG DEFAULT IS REMOVED from `habitats.py`; a habitat
+   not named in FLAG gets no flag and no cards. A geometry check traced the sun's line against flag and cards.
+   - PASSIVE OBJECTS, NOW DECLARED: Ice's final carried the 8 x 6 m black flag behind the camera and one side card
+     (sky only, no sun lamp: they shaded no sun). Fog's final carried the same flag and card and the declared 2 x 2 m
+     white board (the sun behind the speaker: flag and card clear of it); the Ice and Fog heroes carry the same flag.
+     The old Poison final carried none. Acid: the flag (1.2 m behind the camera, 1.4 m up) and one left card, clear of
+     the sun: kept, listed. Dust: the same, clear of the sun (az 124, el 6): kept, to be listed, its mirror image to
+     be checked on the frame. Smoke d and Ember d: none.
+   - EMBER WITHOUT THE FLAG (`ember-d-try-e4-noflag.jpg`): front 0.346 against 0.335, cone 0.284 against 0.272, the
+     bottom third 0.162 against 0.142, nothing clipped. The flag shaded some near ground, not the speaker; the red
+     stays as deep. THE NO-FLAG FRAME IS EMBER; the dark slab is the 7-degree sun grazing dark rock and wants the
+     cracks and the lit steam, not the flag.
+   - Poison's final notes are staged, not rendered (sun 20, mist 0.02, the three beams behind widened to 0.65 m).
+     Smoke p4 restarted 08:36 with the long thin pale trail, no flag or cards; about 2-3 h; then the Acid pair, Dust.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
