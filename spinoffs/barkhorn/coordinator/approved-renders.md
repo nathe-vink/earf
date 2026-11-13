@@ -1289,6 +1289,28 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
      cracks and the lit steam, not the flag.
    - Poison's final notes are staged, not rendered (sun 20, mist 0.02, the three beams behind widened to 0.65 m).
      Smoke p4 restarted 08:36 with the long thin pale trail, no flag or cards; about 2-3 h; then the Acid pair, Dust.
+   09:02 UTC, speaker lane 1409f6ad0d (source 6b088b91f7; notes `make/fa123.md`, read on the branch by the coordinator):
+   THE FA123 IS IN THE CAD.
+   - Plate 360 x 120, cutout 336 x 96; the compartment 125 x 75 x 365 inside, with its flange z 298.5 to 696.5 (centre
+     497.5; the top unchanged under the upper brace); gasket frame 158 x 398; the badge reads FA123; the IR lead's
+     rise and the lining's keep-out follow the box. Build: checks ok, 0 clashes. Ports re-tuned by about 1 mm (226
+     long). Parts list $9,745 the pair (was $9,586: the amplifiers +$158.40, the aluminium about $1).
+   - The plate's ten-screw pattern is a MARKED PLACEHOLDER until Hypex's drilling drawing arrives.
+   - Correction to the coordinator's 02:45: the engraved rating moves 45 mm lower, not 22.5 (the plate's top stays,
+     its bottom edge drops 45; the band is now z 298.5 to 317.25).
+   - OPEN: the bridged load (the woofer's minimum 5.55 to 5.9 ohm against Hypex's 4 ohm minimum and its 8 ohm
+     recommendation) until Hypex answers. The letter is with the owner, not sent.
+   COORDINATOR'S DECISIONS (09:02):
+   - The render asset stays `tropos-strata.blend` at fd8aa47e for every picture in the queue. The FA123 changes the
+     back only (the plate 45 mm longer, the badge); fronts and sides made from fd8aa47e stay valid.
+   - The asset, the engine files, the plate's print, the eight backs, "The amplifier" picture and the turn frames are
+     rebuilt ONCE, after Hypex has answered on the bridged load, the drilling drawing and the plain plate. Not before.
+     The compliance notes and the preset note may be drafted after the pictures, carrying the OPEN mark.
+   - The site keeps its FA122 lines and pictures until then; text and pictures change together. The lines proposed
+     for then: "Hypex FusionAmp FA123 built in: the woofer on two bridged channels, the horn on its own." and "Up to
+     119 dB at 1 m." (the woofer held to Xmax by the soft clip at 125 W into 8 ohm; +2 dB over the FA122).
+   - Order for the speaker lane: the pictures first (core-bar-table in two bands, the hero's right-edge strip and its
+     report, the Mantle red dot, the portrait last).
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
