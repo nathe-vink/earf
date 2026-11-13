@@ -2041,6 +2041,14 @@ HEMI_LM = {'red': 272, 'orange': 280, 'amber': 301, 'green': 256, 'blue': 264, '
 ROOM = [('renders/2026-11-11/barkhorn/product/planet-bar/bar-pendants.png', 'bar-pendants',
          'Five Hemispheres over a bar in Acid, Ember and Dust, two Cores on the counter, a wall of records behind',
          {'dome': ['red', 'orange', 'amber'], 'orb': ['red', 'orange']})]
+# How Hemisphere lights (r32-lamps-final 8e07dda4): the cutaway with its labels, the words beside it, on every Hemisphere
+# page; the lamp over a table as a view on Ember's
+LIGHTS_DIR = 'renders/2026-11-12/barkhorn/lamp-site/legible/'
+LIGHTS_WORDS = ('Twenty-four LEDs sit on a ring at the center of the shade&rsquo;s mouth, on a small black disc level with the rim, and face '
+                'straight up into the shade. Their light lands on the white diffuser lining the dome: some passes out through the clear '
+                'shell and the tinted outer layer, so the shade glows in its color, and about three quarters bounces back down out of '
+                'the open mouth as white light on the table. From below you see an evenly lit white bowl with the small black disc at '
+                'its center; the LEDs face away from you, so there&rsquo;s no bright point to look into.')
 CORE_ROW_DAY = 'core-row-day'    # Core's eight by day, switched off (r32-lamps-final 01a0b833)
 LAMP_LIGHT_TINTS = '2200 K in Ember; 2700 K in Poison and Fog; 3000 K in Haze; 4000 K in Dust, Acid, Ice and Smoke'
 
@@ -2086,7 +2094,8 @@ def rc_products(p, web):
                     vs['bar'] = pic
             if lamp == 'dome':
                 vs['below'], _ = views(LAMP_FINAL.format(f=f'{f}-{n}-under'), f'{f}-{n}-under', 1200)
-                if k == 'red':                # Ember's details (r32-lamps-final 92ff60c3)
+                if k == 'red':                # Ember's details (r32-lamps-final 92ff60c3), and over a table (8e07dda4)
+                    vs['table'], _ = views(LIGHTS_DIR + 'hemisphere-ember-inuse.png', 'hemisphere-ember-table', 1600)
                     for d in ('off', 'cap', 'rim'):
                         vs[d], _ = views(LAMP_FINAL.format(f=f'hemisphere-ember-{d}'), f'hemisphere-ember-{d}', 1200)
                 vs['cluster'] = cluster
@@ -2130,6 +2139,7 @@ def rc_products(p, web):
     p.sub("         ['row', 'All eight', () => 'Eight Hemispheres hung in a row, lit, one in each color.'],",
           "         ['bar', 'At the bar', () => 'Five Hemispheres over a bar in Acid, Ember and Dust, two Cores on the counter below.'],\n"
           "         ['below', 'From below', c => `Hemisphere from below, lit: the opal diffuser inside its ${c.name} shade.`],\n"
+          "         ['table', 'Over a table', () => 'Hemisphere in Ember, lit, half a meter over an oak table.'],\n"
           "         ['off', 'Off', () => 'Hemisphere in Ember, switched off.'],\n"
           "         ['cap', 'The cap', () => 'Its cap, satin black anodized aluminum.'],\n"
           "         ['rim', 'The rim', () => 'The rim of the Ember shade, lit, with the opal diffuser within.'],\n"
@@ -2155,6 +2165,17 @@ def rc_products(p, web):
     roomfig = ''.join(f'<figure class="room-pic"><img src="{pic["src"]}" width="{pic["w"]}" height="{pic["h"]}" loading="lazy" alt="{alt}"></figure>'
                       for pic, alt, _ in room)
     p.rest = p.rest[:m.end(1)] + '<div class="room">' + roomfig + '</div>' + rows_fig('page') + p.rest[m.end(1):]
+    # How it lights: below the particulars on every Hemisphere page
+    cut = save(LIGHTS_DIR + 'hemisphere-ember-cutaway.png', 'hemisphere-ember-cutaway.webp', 1200, 88)
+    p.sub('    <div id="p-company"></div>',
+          f'    <section class="lights" id="p-lights" aria-labelledby="p-lights-h" hidden><figure><img src="{cut["src"]}" width="{cut["w"]}" '
+          f'height="{cut["h"]}" loading="lazy" alt="Hemisphere in Ember, cut in half: the white diffuser, the clear shell tinted outside, the '
+          f'black center, the LEDs on a ring facing up, and warm white light going down"><figcaption id="p-lights-note"></figcaption></figure>'
+          f'<div><h2 id="p-lights-h">How it lights</h2><p>{LIGHTS_WORDS}</p></div></section>\n    <div id="p-company"></div>')
+    p.sub("page = h; showMain('pdp'); renderProduct(PBY[m[1]], keyOf(m[2]));",
+          "page = h; showMain('pdp'); renderProduct(PBY[m[1]], keyOf(m[2]));\n"
+          "    { const L = document.getElementById('p-lights'); if (L) { L.hidden = m[1] !== 'hemisphere';\n"
+          "      document.getElementById('p-lights-note').textContent = keyOf(m[2]) === 'red' ? '' : 'Shown in Ember.'; } }")
     # the home's Mantle and its page: Ember
     e = D['tt']['colours']['red']['views']['studio']
     pic = (f'<figure class="mantle-pic"><a href="#mantle-ember"><img src="{e["src"]}" width="{e["w"]}" height="{e["h"]}" loading="lazy" '
@@ -2172,7 +2193,13 @@ def rc_products(p, web):
 .lamp-rows.page, .mantle-pic.page { margin: 0 0 32px }
 .room { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 16px; margin: 0 0 16px; max-width: 1200px }
 .room-pic { margin: 0 } .room-pic img { display: block; width: 100%; height: auto }
-.room .room-pic:only-child { max-width: 880px }
+.room .room-pic:only-child { max-width: 880px; width: 100%; margin-inline: auto }
+.lights { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 64px); align-items: center;
+  margin: clamp(48px, 7vw, 96px) 0 0; padding-top: clamp(32px, 4vw, 56px); border-top: 1px solid var(--rule) }
+.lights figure { margin: 0 } .lights img { display: block; width: 100%; height: auto; background: #1B1B1C }
+.lights figcaption { padding-top: 8px; color: var(--muted); font-size: 14px } .lights figcaption:empty { display: none }
+.lights h2 { margin: 0 0 16px; font-size: clamp(28px, 3vw, 40px); letter-spacing: -0.03em } .lights p { margin: 0; max-width: 46ch; font-size: 17px; line-height: 1.55 }
+@media (max-width: 860px) { .lights { grid-template-columns: minmax(0, 1fr) } }
 """)
 
 
