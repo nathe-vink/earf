@@ -1421,6 +1421,26 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    batch. Shown to the owner 21:10.
    The new record wall is in the code (97d067b727, `record_wall.py` and a spine atlas with invented type); the hero's
    test crop with it started 21:07.
+   21:16 UTC, biomes lane 1f999341fd: tests under the corrected S2, proxy size, raw and finished.
+   - `ember-d-seat-e10.jpg` (best of e7-e10): sun 130 off axis, el 10; the shadow toward camera left, 7.3 m, its red
+     rim hard to read on dark rock; ropy relief raked by the sun; cinders sparse, six at the base; two near cracks
+     0.7 to 2.6 m from the base; lit steam behind the horn; haze only from 3 m in front back. Front 0.305, cone 0.143,
+     darkest 1 % speaker 0.082, ground 0.094.
+   - `poison-b-seat-s14.jpg` (best of s11-s14): sun 110-125 off axis, el 40; the side face in sun, the woods dark
+     green; the shadow toward camera left, 1.5 m. Front 0.181, cone 0.090, darkest 1 % speaker 0.008: the front is
+     black. The fern covered 6.7 %.
+   21:18 UTC, coordinator's check:
+   - EMBER e10 IS THE DIRECTION: it reads as a place the speaker stands in. Shown to the owner 21:18, before (e4 without
+     the flag) and after. For e11: a glowing crack nearer in the foreground so the lava's glow reaches the front
+     (cone 0.16 or more, not by haze); the sky deeper toward the top, the lava more saturated, less milk; the ropes
+     less regular.
+   - POISON s14: NOT SHOWN (the front is black). The priorities: (1) the speaker reads (front 0.25 or more, cone 0.16
+     or more, darkest 1 % 0.03 to 0.09); (2) seated; (3) the shadow in frame as far as (1) allows. For s15: the sun
+     from the side, a little in front (75 to 85 off axis, el 35-40), raking the front in dapples; the camera up to
+     0.2 m higher; the nearest 15 % of the frame dark.
+     S2 AS IT NOW STANDS: the sun 75 to 150 degrees off the camera's axis, chosen per place so that the speaker reads
+     first and the shadow shows second: behind (110-150) where the place's own light or the cabinet's transmission
+     carries the front (Ember), to the side (75-90) where nothing does (Poison).
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
