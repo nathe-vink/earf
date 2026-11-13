@@ -136,3 +136,30 @@ stood off 3 mm on nylon spacers.
 **Checks:**
 - FAI E8: a full-scale HF sine with the limiter defeated, with thermocouples on the pod and the boss;
 - the hiss measured at 1 m on the first pair.
+
+## 6. DRAFT (2026-11-13): the FA123 in place of the FA122
+
+> **OPEN until Hypex answers: the bridged load.** Channels 1 and 2 bridged (BTL) drive the 15PR400-8, whose lowest
+> impedance is 5.55 ohm in the model (5.9 on FaitalPRO's sheet): inside Hypex's 4 ohm BTL minimum, under its 8 ohm
+> recommendation. Nothing below is final until Hypex has confirmed it. (`fa123.md`)
+
+What changes in sections 2 to 5 if the FA123 is fitted (the CAD: `product.py`, `out-cloud/`, built 2026-11-13):
+
+- **Section 2, the compartment as the fire enclosure.** The same construction, 45 mm longer: 125 x 75 x 365 inside,
+  z 298.5 to 696.5 with its flange, the gasket frame 158 x 398. Still 1.5 mm 5052, earthed through the amplifier's
+  earth point, the plate the only opening and the plate itself metal. The cutout leaves 14.5 mm to the box's ends and
+  20 mm behind the module, against Hypex's 3 mm to any conductive part. No ventilation, as before.
+- **Heat (the 62368-1 temperature-rise pre-check).** Idle about 11 W against the FA122's 7.5 (the NC100HF's 3.5 W
+  added); at 1/8 of rated power, with the soft clip at 125 W into 8 ohm, about 13 W against 9. Measure the rise at full
+  output, the box sealed, an ambient of 35 C at most (Hypex's limit), as already planned. Hypex's thermal limiter
+  (-6 dB) and shutdown protect the amplifier; the NC100HF has no over-temperature protection of its own, and is rated
+  20 W continuous at 25 C: above the 1 kHz crossover its programme power is a few watts.
+- **Section 4, the certificate.** Ask Hypex for the FA123's CB test certificate and report (IEC 62368-1, with the US
+  national differences) in place of the FA122's. The end product still needs its own listing.
+- **The rating engraving.** The input rating stays 350 W maximum (Hypex gives the same figure for both); the
+  engraving moves 45 mm lower with the plate's lower edge (z 298.5 to 317.25).
+- **Section 5, the HF channel.** The NC100HF swings about the FA122's 22 V in an FA123 (limited by the NC122MP's
+  supply): about 31 W into the DE1085TN-16, within its 140 W. The 33 uF series capacitor stays; no L-pad.
+- **The plate's mount holes.** Ten M4 inserts, five a side, 5 in from the plate's edges and evenly spaced (175, 87.5,
+  0): a PLACEHOLDER drawn from the FA122's rule; a retailer's square-on photograph of the FA123 agrees with it to the
+  photograph's resolution (about 0.5 mm). Confirm against Hypex's drilling drawing before the back is cut.
