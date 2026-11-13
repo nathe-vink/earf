@@ -294,29 +294,29 @@
      {
       "points": [
        [
-        -1.2,
+        -1.6,
+        -1.45
+       ],
+       [
+        -0.8,
+        -1.0
+       ],
+       [
+        0.0,
         -1.1
        ],
        [
-        -0.55,
-        -0.72
+        0.7,
+        -0.95
        ],
        [
-        0.05,
-        -0.8
-       ],
-       [
-        0.6,
-        -0.62
-       ],
-       [
-        1.25,
-        -0.85
+        1.5,
+        -1.2
        ]
       ],
-      "width": 0.22,
+      "width": 0.45,
       "depth": 0.12,
-      "bank": 0.15
+      "bank": 0.2
      }
     ],
     "lava_below": true,
@@ -335,7 +335,8 @@
      "bend": 0.6,
      "jitter": 0.45,
      "cover": 0.15
-    }
+    },
+    "pools": []
    },
    {
     "kind": "kit",
@@ -355,7 +356,7 @@
     "lava": "acg:Lava001",
     "scale": 2.2,
     "strength": 80.0,
-    "gain": 2.6,
+    "gain": 3.4,
     "ripple": 0.012,
     "crust_rough": 0.85,
     "crust_spec": 0.2
@@ -646,7 +647,7 @@
   "kind": "hdri",
   "polyhaven": "qwantani_dusk_2_puresky",
   "rotation_deg": 0.0,
-  "strength": 0.16,
+  "strength": 0.2,
   "res": "4k"
  },
  "finish": {
