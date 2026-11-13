@@ -1241,6 +1241,19 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    - Poison: the sun to the side (about 90 degrees off the lens, 15-20 degrees high), the speaker turned about 30
      degrees toward it; front 0.20 or more, horn 0.40 or more at hue 85-100; a sunlit patch of litter in front as a
      natural bounce; no board; the far trunks with bark, falling off into darker green-gray.
+   06:47 UTC, biomes lane d009a6f1b3 (tries in `renders/2026-11-12/barkhorn/habitats/`):
+   - EMBER e4 (`ember-d-try-e4.jpg`): the river 3-4 m behind and beside, cracks around and one in each near corner,
+     five scanned rocks standing 0.6-1.0 m, sun 8 at az -13 el 7, the dusk sky at 0.08. Front 0.447-0.598, hue 4-5;
+     cone 0.263; horn 0.187; nothing clipped. Emitters: the sun, the sky, the lava surfaces and flows (seen), sparks;
+     no lamps; audit clean. Coordinator's check: volcanic, three-quarter, the rocks' sun faces make the light
+     evident: THE DIRECTION FOR EMBER. Shown to the owner 06:50 as the test; the final is held for his word. For the
+     final: the sky at 0.10-0.12, the lava lighting the steam above it, one more glowing crack low on the left.
+   - POISON s2 (`poison-b-try-s2.jpg`): the sun 90 degrees left at el 17 (#FFF0D0, 11), the speaker turned 30 degrees
+     to it, green-gray haze at half density, no board. Front 0.22-0.23, cone 0.32, horn hue 93.5-97.5 and value
+     0.17-0.22. Coordinator's check: the speaker is right (lit, three-quarter, the green and the cone read, the far
+     trunks have bark), but the drama is gone (no shafts, the woods as bright as the speaker). For s3 and s4: about
+     three quarters of p2's mist with beams through gaps behind and above the speaker, the forest sky about 0.25,
+     the stronger sun for the horn. s3 waits for Smoke p3 to free memory (due about 08:10).
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
