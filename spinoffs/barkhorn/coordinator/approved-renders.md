@@ -1153,6 +1153,24 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    02:02 UTC, lamps lane 3b2690f4b9: `hemisphere-ember-cutaway-phone.png` (1200x1200, the same render, the five labels
    at twice the size, four of them on two lines). Checked at 360 px: every label reads. Sent to the site lane for
    screens of 860 px and down.
+   02:10 UTC, site lane: the phone cutaway is in the held batch 4 (r49-site-rc 18f457e2b3, r47-site-next 5027a7c1dd).
+   02:32 UTC, biomes lane 66e988bce6: EMBER d PROXY (`renders/2026-11-12/barkhorn/habitats/ember-d-proxy.jpg`): the
+   22 Oct lava field (the river about 3 m behind, cracks, steam, sparks, the far cliff), the cleaned Tropos, the shot's
+   seven lamps removed; emitters the sun (15, p6's), the dusk sky (0.15) and the lava surfaces seen in frame (river
+   and cracks 80 x 2.6; far flow 40 x 2.2; far pools 30; near flow 4; 12 sparks). Front 0.729, cone 0.365, nothing
+   clipped in the master.
+   Coordinator's check against the 22 Oct picture: volcanic again, but NOT PASSED: frontal and static, the cabinet
+   glows like a lantern (lava seen through the red box: lit from within in effect, the lane's own doubt), the bottom
+   quarter a cold empty flat. One more proxy ordered: the 22 Oct three-quarter view; nothing bright on the camera's
+   line through the cabinet (the river and hot cracks to the sides and 8-10 m back); p6's low front sun as the key
+   (front 0.30-0.45, the cone apart, hue 4-8); the sun's sheen and a glowing crack or two in the near corners; the horn
+   lit with its highlights. Shown to the owner 02:35 as a test, with the fault named.
+   Same message: Smoke d p1 fell short (front 0.10-0.12, the fire hidden behind the speaker, the trail out of frame,
+   grass at the base); p2 queued (the crater to the speaker's left, the column leaning right, the trail across the
+   upper left, no grass on the line to the base, the sun 6 -> 16). Poison b p1 overshot (62 % of the frame); p2 queued
+   (about 44 %, a lower camera, the near spray off the base, larger toadstools beside and behind, darker woods). The
+   coordinator's "27 %" for the old Poison was the wide's figure; the portrait sat near 40 %. Acid's wide preview ran
+   out of memory with tripled rain and is re-queued at 1.5 times the portrait's count.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
