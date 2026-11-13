@@ -109,10 +109,10 @@ The pale flat patch under the deck, right of centre, is Mantle's clear acrylic b
 
 | name | what | where (m: x along the bar, y toward the wall, z up) | strength |
 |---|---|---|---|
-| track-wall1 | a round ceiling track head, aimed at the record wall; disk 0.12 x 0.12 m | 6.2, 4.9, 3.35 | 5.1 W/m2 at its target |
-| track-wall2 | a round ceiling track head, aimed at the record wall; disk 0.12 x 0.12 m | 7.0, 4.9, 3.35 | 5.1 W/m2 at its target |
-| track-wall3 | a round ceiling track head, aimed at the record wall; disk 0.12 x 0.12 m | 9.0, 4.9, 3.35 | 5.1 W/m2 at its target |
-| track-wall4 | a round ceiling track head, aimed at the record wall; disk 0.12 x 0.12 m | 9.8, 4.9, 3.35 | 5.1 W/m2 at its target |
+| track-wall1 | a round ceiling track head, aimed at the record wall; disk 0.12 x 0.12 m | 6.2, 4.9, 3.35 | 2.448 W/m2 at its target |
+| track-wall2 | a round ceiling track head, aimed at the record wall; disk 0.12 x 0.12 m | 7.0, 4.9, 3.35 | 2.448 W/m2 at its target |
+| track-wall3 | a round ceiling track head, aimed at the record wall; disk 0.12 x 0.12 m | 9.0, 4.9, 3.35 | 1.938 W/m2 at its target |
+| track-wall4 | a round ceiling track head, aimed at the record wall; disk 0.12 x 0.12 m | 9.8, 4.9, 3.35 | 1.938 W/m2 at its target |
 | track-bar0 | a round ceiling track head, aimed down at the bar top; disk 0.12 x 0.12 m | 5.6, 3.6, 3.35 | 1.05 W/m2 at its target |
 | track-bar1 | a round ceiling track head, aimed down at the bar top; disk 0.12 x 0.12 m | 7.0, 3.6, 3.35 | 1.05 W/m2 at its target |
 | track-bar2 | a round ceiling track head, aimed down at the bar top; disk 0.12 x 0.12 m | 8.4, 3.6, 3.35 | 1.05 W/m2 at its target |

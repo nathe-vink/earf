@@ -246,3 +246,20 @@ bar-backbar (3200 x 1800, the same camera; two bands blended over 107 rows, mean
 - The Core (Ember), 12 px patch at its centre: hue 5.0, s 0.59, v 0.94, no clipped channel.
 - Against the frame it replaces: mean difference 1.6 of 255, p99 38; clipped pixels 0.04 % of the frame.
 - Audit: hidden 0, equipment 0.
+
+## The hero in full with the new record wall (2026-11-13)
+
+- 3200 x 1800, 128 samples (as the passed hero), in two bands (0 to 0.53, 0.47 to 1) blended over their 107-row overlap
+  (mean difference there 0.77 of 255). Tropos: the detail-pass package rebuilt from 3896c7e9 (= 6e4ab131's CAD).
+- The wall: `record_wall.py`, round 2 (approved by the owner, 22:15): 75 cells, 48 full (65 to 86 records, mean 77),
+  12 part full, 6 flat stacks, 9 holding other things; 4,376 records; thickness 69.6 / 15.3 / 10.6 / 4.4 %. The hero's
+  wall heads at 0.48 (centre) and 0.38 (right); the bay and horn heads unchanged. The 'reserved' card out of the set;
+  the ring sleeve (cover-10) at x 9.35, inside the frame.
+- The upper linings: left 56.6 / 0.39 / 0.56, right 57.1 / 0.40 / 0.58 (hue, s, v); clipped in each cabinet's box 0.0 %.
+- The lamps: Hemispheres acid 51.4 / 0.21 / 0.89 and 51.6 / 0.22 / 0.89, ember 5.1 / 0.37 / 1.00 and 5.3 / 0.36 / 1.00,
+  dust 15.0 / 0.35 / 0.98; Cores acid 52.5 / 0.64 / 0.60, ember 7.5 / 0.87 / 0.73, dust 20.3 / 0.81 / 0.70.
+- The wall's three means (Rec. 709, the test crop's frame and boxes): centre 60.8, right lit shelves 64.3, the bay 34.1.
+- The side strips (40 px): left mean 2.6, p99 23.4, max 33.4; right mean 46.7, p99 207.6, max 213.2 (it was 51.0 /
+  222.0 with the ring sleeve cut). The right edge now cuts only the lit shelves' records and a pale box in one cell.
+- The headline zone (x 34 to 67 %, y 5 to 36 %): mean 4.9, p99 26.5, max 46.3. The top quarter: mean 2.9.
+- Clipped pixels: 0.15 % of the frame (the Hemispheres' shades). Audit: hidden 0, equipment 0.
