@@ -1222,6 +1222,25 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    the sun to the side-rear with shafts on a diagonal, a declared passive reflector if needed (front 0.20 or more);
    the three-quarter view; a cooler sun (#FFF0D0), the horn at hue 85-100 and value 0.5 or more; one near spray of
    ivy in focus with its leaves in threes; the toadstools kept.
+   06:09 UTC, biomes lane 145c6b4719 (tests in `renders/2026-11-12/barkhorn/habitats/`): the lane iterated on its own.
+   - EMBER: the "lantern" is the sun, not the lava. Front 0.74 at sun 18 with or without the far flow or the near lava
+     surface; 0.60 at sun 8; 0.59 at sun 8 with every lava emission at 0. The low front sun passes through the clear
+     front and fills the red inner panels. At sun 4 (`ember-d-proxy-p6-sun4.jpg`): front 0.33-0.47, cone 0.186,
+     nothing clipped, a dimmer frame that still reads lit from within to the lane's eye.
+   - POISON: with the sun off its back the horn loses its glow (p3: hue 87, value 0.32; front 0.25, the cone not
+     apart); two passive boards both showed in frame or mirrored in the front glass and are withdrawn (p5, p6). The
+     shot holds sun az -150, el 10, 11, #FFF0D0: horn about 0.30, front about 0.12.
+   - Acid's wide preview passed (rain over the frame, the base and puddle in, rock_07 gone, 12.0 GB). Smoke p3 started
+     06:08 with a clay framing proof (63957083).
+   Coordinator's decisions, 06:13 (the lane to iterate up to four tries each and send the best with numbers):
+   - Ember: the box is as bright as the studio Ember in direct light; it reads lit from within only because nothing
+     else shows that sun (at 5 degrees the ground gets a tenth of what an upright face gets). Make the sun evident:
+     sun 8-10 (front 0.45-0.60), three to five standing lava rocks with sun-side faces and long shadows, the speaker's
+     own shadow, the far cliff in the same light; the lava back near (the river 3-4 m behind and beside, cracks
+     around, a glowing crack in each near corner); the three-quarter view kept.
+   - Poison: the sun to the side (about 90 degrees off the lens, 15-20 degrees high), the speaker turned about 30
+     degrees toward it; front 0.20 or more, horn 0.40 or more at hue 85-100; a sunlit patch of litter in front as a
+     natural bounce; no board; the far trunks with bark, falling off into darker green-gray.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
