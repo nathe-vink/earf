@@ -12,3 +12,14 @@ The wall (`campaign/bar_life/record_wall.py`, spines `bar_life/tex/spines.jpg` f
 - Audit: ([], []) (hidden px, equipment px).
 
 After this crop the pale inner-sleeve tops are drawn in every cell (they were only below 1.6 m; the hero's eye is at 2.2).
+
+## Round 2 (the coordinator, 21:22): the whites aged, the colours muted, the wall heads down
+
+- The spines: no spine above albedo 0.70 (the atlas's brightest luminance 0.67, linear), the whites warm; half of the
+  printed colours muted or dark (navy, maroon, forest, mustard, brown, slate), fewer bright primaries.
+- The hero's wall heads only: track-wall1 and 2 (the centre) at 0.48 of before, track-wall3 and 4 (the right) at
+  0.38 (two half-size proofs: 0.6 / 0.45 gave 67.1 / 72.1; 0.48 / 0.38 gave 63.7 / 67.2). The bay heads, the horn
+  heads and the speakers unchanged.
+- Mean luminance (Rec. 709, 0-255) in this crop: **centre wall (x 0-860) 60.8; right lit shelves (x 1360-1760) 64.2;
+  the speaker bay (x 940-1320) 34.2**. Round 1: 75.2, 96.0, 34.3. The approved hero before the new wall: 61.3, 62.4, 34.2.
+- The same wall otherwise (seed 1313): 77 a full cell, the same shares and cells. Audit hidden 0, equipment 0.
