@@ -1145,6 +1145,14 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    Site lane told 01:54 to PREPARE BATCH 4 without pushing: a "How it lights" block on every Hemisphere page (the
    cutaway and the lane's three sentences; "shown in Ember" on the other tints), the in-use picture as "Over a
    table" on Hemisphere in Ember, and the lone bar picture on `/lighting` centered or widened at desktop width.
+   02:00 UTC, site lane: BATCH 4 PREPARED, NOT PUSHED (r49-site-rc ccf302f1c6, r47-site-next 0d04bec579): "How it
+   lights" on every Hemisphere page below the gallery and particulars (the cutaway left, the heading and the three
+   sentences right; stacked on a phone; "Shown in Ember." on the other tints); "Over a table" as the fourth view on
+   Hemisphere in Ember; the bar picture centered on `/lighting`. Confirmed by the coordinator; the push is held for
+   the bar frames, the hero and the habitat pictures.
+   02:02 UTC, lamps lane 3b2690f4b9: `hemisphere-ember-cutaway-phone.png` (1200x1200, the same render, the five labels
+   at twice the size, four of them on two lines). Checked at 360 px: every label reads. Sent to the site lane for
+   screens of 860 px and down.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
