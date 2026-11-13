@@ -108,10 +108,9 @@ def _life():
               'ground': '#E9E3D6'} for k, x, z, rz in ((3, 4.4, 1.565, 70.0), (10, 9.6, 1.925, -64.0), (14, 6.6, 2.285, 58.0))],
            {'image': 'tex/matches.png', 'w': 0.04, 'h': 0.064, 't': 0.006, 'x': 7.05, 'y': Y_BAR - 0.25, 'z': T, 'rot': [-90.0, 0, 22.0]},
            {'image': 'tex/newspaper.png', 'w': 0.29, 'h': 0.4, 't': 0.006, 'x': 6.6, 'y': Y_BAR - 0.34, 'z': T, 'rot': [-90.0, 0, -11.0],
-            'ground': '#E4E0D6', 'rough': 0.85},
-           # the wry detail: the speaker's seat is taken
-           {'image': 'tex/reserved.png', 'w': 0.1, 'h': 0.05, 't': 0.002, 'x': 5.55, 'y': SPK_Y - 0.27, 'z': FEET_BAR, 'rot': [-18.0, 0, 0.0],
-            'ground': '#EFEBE3', 'rough': 0.7}]
+            'ground': '#E4E0D6', 'rough': 0.85}]
+    # (the coordinator, 13 Nov 09:09: the 'reserved' card stood in front of the left speaker's base, in its bay: out of
+    # the set, so it is out of both bays in every frame still to render)
     out.append({'kind': 'kit', 'shape': 'ext', 'path': LIFE, 'fn': 'boards', 'boards': bds})
     # (test 2: the room's old DJ station left a mixer and two records floating where the old players stood: out)
     out.append({'kind': 'kit', 'shape': 'ext', 'path': LIFE, 'fn': 'remove', 'names': ['dj-plinths', 'dj-knobs', 'dj-records', 'dj-labels', 'screen-panels', 'screen-boxes', 'screen-frames']})
