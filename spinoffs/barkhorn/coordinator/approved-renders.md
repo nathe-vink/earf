@@ -1092,6 +1092,16 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
      sentences). The in-use picture proves the point but is not for the site (the table reads as ribbed card, a blank
      book, a plain mug, a black void): one more pass ordered (a scanned oak top, real props, the far wall and a chair
      back just readable, the pool's fall-off as measured). Both shown to the owner 00:42.
+   01:27 UTC, biomes lane 7b7c9c53ac: FOG'S FINAL PAIR, `renders/2026-11-12/barkhorn/habitats/`
+   `fog-final-wide-3200x2000.jpg` and `fog-final-portrait-2400x3000.jpg` (the proxy's camera, sun and sky; 96 samples;
+   Tropos asset 0f54ebee, the one before the detail pass). Emitters: the sun (3.0) and the sky
+   (syferfontein_6d_clear_puresky, 1.0); a declared passive white board 2 x 2 m out of frame; gt_audit clean. Root-ray
+   test 0 failures (534 and 278 seen roots). The container restarted about 00:38; the audit was re-run.
+   Coordinator's check at full size (the wide's skyline in three segments, the portrait's left and right skyline, the
+   speaker's base): PASSES. Grass to the skyline, no bare strip, nothing floating, the board not in frame; the small
+   tuft by the right-hand rock reads as a tuft in mist. FOG'S HABITAT PAIR IS FINAL (13 Nov 01:29); shown to the owner;
+   the site lane told "push" with it: batch 3 = the bar pendants and Fog's pair (Fog back in the places row, on
+   `/colors/fog` and as the "Out" view on `/tropos/fog`), no `vercel.json` change, no amplifier text change.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
