@@ -35,11 +35,11 @@
      0.0
     ],
     "cell": 0.02,
-    "relief": 0.14,
+    "relief": 0.28,
     "flat": [
      0.0,
      0.0,
-     0.6
+     0.45
     ],
     "channels": [
      {
@@ -107,9 +107,9 @@
         0.6
        ]
       ],
-      "width": 0.04,
+      "width": 0.055,
       "depth": 0.09,
-      "bank": 0.048
+      "bank": 0.065
      },
      {
       "points": [
@@ -130,9 +130,9 @@
         0.5
        ]
       ],
-      "width": 0.04,
+      "width": 0.055,
       "depth": 0.09,
-      "bank": 0.048
+      "bank": 0.065
      },
      {
       "points": [
@@ -298,7 +298,14 @@
     "albedo": 0.09,
     "rough_mul": 0.75,
     "rock_tint": "#2A2A2A",
-    "rock_tint_mix": 0.6
+    "rock_tint_mix": 0.6,
+    "ropes": {
+     "dir": 20.0,
+     "wave": 0.11,
+     "lobe": 0.6,
+     "amp": 0.012,
+     "lobes": 0.07
+    }
    },
    {
     "kind": "kit",
@@ -478,33 +485,16 @@
     "module": "ember_el",
     "fn": "steam",
     "box": [
-     -3.6,
-     -3.6,
-     -0.1,
-     -0.9,
-     -0.9,
-     2.2
+     -1.6,
+     0.6,
+     0.0,
+     1.6,
+     2.6,
+     2.4
     ],
-    "density": 2.2,
-    "scale": 0.45,
-    "anisotropy": 0.45
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "ember_el",
-    "fn": "steam",
-    "box": [
-     -1.7,
-     -3.9,
-     -0.05,
-     0.5,
-     -2.9,
-     0.9
-    ],
-    "density": 0.35,
-    "scale": 0.35,
-    "anisotropy": 0.45
+    "density": 0.8,
+    "scale": 0.5,
+    "anisotropy": 0.55
    },
    {
     "kind": "kit",
@@ -515,12 +505,50 @@
      "boulder_01"
     ],
     "res": "1k",
-    "count": 70,
+    "count": 55,
     "area": [
-     -0.8,
-     -0.55,
-     0.8,
-     0.6
+     -3.0,
+     -3.5,
+     3.0,
+     2.5
+    ],
+    "avoid": [
+     [
+      -0.14,
+      0.0,
+      0.24
+     ],
+     [
+      0.14,
+      0.0,
+      0.24
+     ]
+    ],
+    "scale": [
+     0.03,
+     0.09
+    ],
+    "z": -0.006,
+    "seed": 21,
+    "tilt_deg": 35.0,
+    "albedo": 0.16,
+    "saturation": 0.3
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "ember_el",
+    "fn": "rubble",
+    "models": [
+     "boulder_01"
+    ],
+    "res": "1k",
+    "count": 6,
+    "area": [
+     -0.45,
+     -0.42,
+     0.45,
+     0.35
     ],
     "avoid": [
      [
@@ -536,48 +564,10 @@
     ],
     "scale": [
      0.025,
-     0.055
+     0.042
     ],
     "z": -0.006,
-    "seed": 11,
-    "tilt_deg": 35.0,
-    "albedo": 0.16,
-    "saturation": 0.3
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "ember_el",
-    "fn": "rubble",
-    "models": [
-     "boulder_01"
-    ],
-    "res": "1k",
-    "count": 30,
-    "area": [
-     -1.1,
-     -0.05,
-     1.1,
-     0.9
-    ],
-    "avoid": [
-     [
-      -0.14,
-      0.0,
-      0.22
-     ],
-     [
-      0.14,
-      0.0,
-      0.22
-     ]
-    ],
-    "scale": [
-     0.06,
-     0.11
-    ],
-    "z": -0.006,
-    "seed": 12,
+    "seed": 22,
     "tilt_deg": 35.0,
     "albedo": 0.16,
     "saturation": 0.3
@@ -626,7 +616,7 @@
   "kind": "hdri",
   "polyhaven": "qwantani_dusk_2_puresky",
   "rotation_deg": 0.0,
-  "strength": 0.11,
+  "strength": 0.16,
   "res": "4k"
  },
  "finish": {
@@ -650,7 +640,7 @@
  "haze": {
   "box_m": [
    -45.0,
-   -10.0,
+   -3.0,
    -0.5,
    45.0,
    62.0,
@@ -661,10 +651,10 @@
   "color": "#FFFFFF"
  },
  "sun": {
-  "azimuth_deg": -35.0,
-  "elevation_deg": 7.0,
+  "azimuth_deg": 152.0,
+  "elevation_deg": 10.0,
   "irradiance": 10.0,
   "angle_deg": 1.0,
-  "color": "#FFBA8A"
+  "color": "#FFB070"
  }
 }
