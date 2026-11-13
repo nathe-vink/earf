@@ -462,9 +462,23 @@ def bar_hero():
     # the frame: from a stool at the bar's middle, centred between the bays (proof 1, from across the room at y 0.95:
     # everything small, the stools across the foot); the eye 1.6 m, so the Cores and Mantle on the bar stay under the
     # line to the speakers' feet
-    s['camera'] = {'position': [6.9, 2.5, 1.6], 'target': [6.9, 5.7, 1.55], 'lens_mm': 26.0, 'level': True,   # (proof 2: the Cores cut at the foot)
+    s['camera'] = {'position': [6.9, 2.5, 1.6], 'target': [6.9, 5.7, 1.55], 'lens_mm': HERO_LENS, 'level': True,   # (proof 2: the Cores cut at the foot)
                    'fstop': 5.6, 'focus': [6.9, 5.2, 1.6]}
+    # (the coordinator, 01:54, test 2: a calm dark top band for the headline; the newspaper the brightest thing in the
+    # picture: a dark-covered magazine in its place; the sleeve pulled out high on the wall, the triangle, down to the
+    # lowest row)
+    for pr in s['set']['props']:
+        if pr.get('fn') == 'boards':
+            for b_ in pr['boards']:
+                if b_['image'] == 'tex/newspaper.png':
+                    b_.update(image='tex/cover-08.png', w=0.23, h=0.3, t=0.004, ground='#1E1C1A', rough=0.6)
+                    b_['z'] = round(TOP + 0.0045, 4)
+                if b_['image'] == 'tex/cover-14.png' and b_['z'] > 2.0:
+                    b_['z'] = 1.565
     return s
+
+
+HERO_LENS = 21.0     # (the coordinator, 01:54: option (b), both bays whole and smaller, more wall above them)
 
 
 SHOTS = {'bar-backbar': bar_backbar_full, 'core-bar-table': core_bar_table_full, 'bar-backbar-portrait': bar_backbar_portrait,

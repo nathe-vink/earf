@@ -83,8 +83,9 @@ under it is its reflection on the stone in front of the base.
   - Two Cores stand under them, with the drinks, the newspaper open flat, a sleeve face up, a linen napkin and the bowl
     of citrus.
   - The stone is unchanged (#1C1916, as the passed frames).
-  - The Hemisphere is an up-lighter: its 24 LEDs face up into the dome. Its pools on dark stone stay faint by design, so
-    the light reads on what lies under it.
+  - The Hemisphere's pools on the dark stone stay faint, because dark stone returns little. The light reads on what
+    lies under it. (Corrected 2026-11-13: this said the lamp was an up-lighter. The lamps lane measured it: 73 % of its
+    light goes down through the mouth.)
   - The Cores' bases: from this height the balls hide most of them, and the bases read as dark rims under the glow. A
     lower camera would show them; not re-rendered.
   - The flat props: a board at the bar top's own height was coplanar with the stone and rendered black. Each is now
@@ -134,8 +135,12 @@ mantle-bar-acid-test2 (1920 x 1280): as mantle-bar-acid-test, with the Hemispher
 | deck top, left | 53, 0.99, 0.30 | 54, 0.99, 0.30 | |
 | deck front edge | v 0.00 | v 0.00 | (may stay dark) |
 
-- **Not met; nothing moved.** The Hemisphere is an up-lighter: its 24 LEDs face up into the dome. So little of its
-  light falls on the deck below, whatever its tint. The deck's light comes from the room.
+- **Not met; nothing moved.**
+- **Corrected 2026-11-13:** this first said the Hemisphere was an up-lighter. It is not. The lamps lane measured 73 %
+  of its light going down through the mouth: 348 lux at the centre of a table 0.5 m below.
+- **The real reason, per the coordinator:** clear tinted acrylic over a dark bar has nothing light behind it. Light
+  passes through the deck into the dark bar and comes back as little colour, whatever the lamp's tint.
+- The lamps lane's asset is used unmodified here: its emitters are not changed, and `hemi_scale` is 1.0.
 - **Per the coordinator's rule:** Mantle stays Ember in the bar, the portrait included. The Mantle frame is the Ember
   three-quarter at full size (2400 x 1600).
 
