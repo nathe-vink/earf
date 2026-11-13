@@ -1479,6 +1479,20 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    22:05 UTC, coordinator's check: EMBER e17 PASSES (the stream in front lights the woofer with the place's own light;
    the speaker reads; the clipped cores may stay). It is the basis for Ember's final. Shown to the owner 22:05.
    BOTH FINALS (Poison from s18, Ember from e17) WAIT FOR THE OWNER'S YES ON THE SEATED LOOK. Smoke p5 is rendering.
+   22:08 UTC, speaker lane eb1d976b: the wall crop, round 2 (same crop, camera and seed). No spine above albedo 0.70,
+   the whites warm; half of the printed colours muted or dark; the wall heads only (track-wall1 and 2 at 0.48 of
+   before, 3 and 4 at 0.38). Means: centre wall 60.8, right lit shelves 64.2, the speaker bay 34.2 (the coordinator
+   measures the same). Audit 0/0.
+   22:09 UTC, coordinator: THE WALL, ROUND 2, PASSES; it is the wall for the room. Shown to the owner 22:09. The hero in
+   full follows the FA123 batch without another word unless the owner objects first.
+   - THE MANTLE RED DOT, diagnosed by the lane: the clear 13 mm acrylic base layer acts as a light guide (total
+     internal reflection along its 0.32 m depth) and shows a tiny image of something red behind Mantle; not the Core
+     beside it, not a lamp's reflection. Real optics, but a red point on Mantle reads as an indicator light it does
+     not have: it goes, by camera height or azimuth first (crops), then by moving the red source behind. No painting.
+   - FA123 batch so far: the plate's print measured from a square-on photo of the FA123 (c1af6d69; the photo's mount
+     holes match the placeholder pattern, which stays marked); the package rebuilt (b98c99dd, 0 clashes, $9,745 the
+     pair); the asset rebuilt (b597165b); the drafts with the OPEN mark (887555a0: `make/compliance.md` section 6,
+     `make/fa123-preset.md`). Rendering: the front-unchanged proof, the eight horn-backs, "The amplifier".
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
