@@ -471,6 +471,12 @@ def bar_hero():
         if k_ in s['lights']:
             tg = list(s['lights'][k_]['target']); tg[2] = HERO_WALL_AIM_Z
             s['lights'][k_] = {**s['lights'][k_], 'target': tg}
+    # (proof 2: with the view shifted up the ceiling shows at the top from y 4.99 back to the wall, and the two bay
+    # heads at y 5.27 were in frame (the audit): moved forward on the track to y HERO_BAY_HEAD_Y, the same targets)
+    for k_ in ('track-bay0', 'track-bay1'):
+        if k_ in s['lights']:
+            ps = list(s['lights'][k_]['position']); ps[1] = HERO_BAY_HEAD_Y
+            s['lights'][k_] = {**s['lights'][k_], 'position': ps}
     # (the coordinator, 01:54, test 2: a calm dark top band for the headline; the newspaper the brightest thing in the
     # picture: a dark-covered magazine in its place; the sleeve pulled out high on the wall, the triangle, down to the
     # lowest row)
@@ -489,6 +495,7 @@ HERO_LENS = 21.0     # (the coordinator, 01:54: option (b), both bays whole and 
 HERO_EYE_Y = 2.2     # (test 2: from 2.5)
 HERO_AIM_Z = 1.85    # (test 2: from 1.55; with 'level' the engine shifts rather than tilts)
 HERO_WALL_AIM_Z = 1.45   # (test 2: from 1.7)
+HERO_BAY_HEAD_Y = 4.7    # (test 2: from 5.27, out of frame)
 
 
 SHOTS = {'bar-backbar': bar_backbar_full, 'core-bar-table': core_bar_table_full, 'bar-backbar-portrait': bar_backbar_portrait,
