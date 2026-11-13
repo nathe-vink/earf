@@ -1505,6 +1505,23 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
      pair from e17 (portrait 2400x3000, wide 3200x2000; each raw and finished; the wide first at 1280x800 with the
      portrait's report); then seated proxies of Acid and Dust, then of Ice and Fog for comparison with their
      finals. Smoke's final waits for the coordinator's check of p5 and the owner's look. Haze later.
+   23:12 UTC, speaker lane a9c41b7a: THE HERO IN FULL WITH THE APPROVED WALL (`product/planet-bar/bar-hero.png`,
+   3200x1800, 128 samples, two bands; the detail-pass package; the card out; the ring sleeve at x 9.35 inside the
+   frame; audit 0/0). The lane's measures: Hemispheres acid 51.4 / 0.21 / 0.89, ember 5.1 / 0.37 / 1.00, dust 15.0 /
+   0.35 / 0.98; Cores acid 52.5 / 0.64 / 0.60, ember 7.5 / 0.87 / 0.73, dust 20.3 / 0.81 / 0.70; the wall's means
+   60.8 / 64.3 / 34.1; clipped 0.15 % (the shades).
+   23:14 UTC, coordinator's check at full size: PASSED. The linings on the coordinator's patches are unchanged from the
+   approved frame (57.9 / 0.83 / 0.50 and 57.5 / 0.77 / 0.48); the frame mean 21.6 against 21.5; no band seam (the
+   row jump at 827 is in the old frame too); the left strip clean (max 33); the headline zone mean 4.9, p99 26; the
+   wall reads as real records at 1x. One patch ordered after the FA123 batch: a pale box cut by the right edge
+   becomes plain records (that strip only, the same file name). THE HERO IS FINAL but for that patch. Shown to the
+   owner 23:14.
+   - TO THE SITE (23:14): batch 4 released for pushing with the desktop hero (a9c41b7a; the headline centred at the
+     top inside x 34-67 %, y 5-36 %; phones keep their present hero until the tall bar frame arrives) and the final
+     Core close-up (e833b933). Not in the batch: bar-backbar and bar-pendants (being re-rendered with the wall), the
+     habitat finals, the FA123's text and backs. The site lane was asked first whether its held commits survived
+     (disconnected since 03:01).
+   FA123 batch: Ember's and Dust's backs pushed; the six other backs and "The amplifier" rendering.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
