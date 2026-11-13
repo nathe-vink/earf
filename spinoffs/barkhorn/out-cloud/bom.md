@@ -13,10 +13,10 @@
 | rib-top | cut | 2 | 20 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 294 x 60 | 8.38 |
 | rib-bottom | cut | 2 | 20 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 305 x 60 | 8.69 |
 | woofer-ring | cut | 2 | 6 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 436 x 436 | 27.09 |
-| port-left, port-right | formed | 4 | Cast acrylic tube, tinted through | 318 cm3, 139 x 225 x 139 | 81.50 |
+| port-left, port-right | formed | 4 | Cast acrylic tube, tinted through | 320 cm3, 139 x 226 x 139 | 81.57 |
 | port-frame-left, port-frame-right | cut | 4 | 8 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 137 x 137 | 3.57 |
 | woofer | buy | 2 | FaitalPRO 15PR400-8 15 in woofer (treated paper cone, neodymium, 8 ohm) | 393 frame, 356 cut-out, 165 deep | 194.00 |
-| amp-plate | buy | 2 | Hypex FusionAmp FA122 DSP plate amplifier, 2 x 125 W into 4 ohm | 315 x 120 x 55 plate, 291 x 96 recess | 422.40 |
+| amp-plate | buy | 2 | Hypex FusionAmp FA123 DSP plate amplifier: an NC122MP (2 x 125 W into 4 ohm, bridged here to the woofer, 250 W into 8 ohm BTL) and an NC100HF third channel (the horn driver). The bridged load (the woofer's 5.55 to 5.9 ohm minimum against Hypex's 8 ohm recommendation) is OPEN until Hypex answers (make/fa123.md) | 360 x 120 x 55 plate, 336 x 96 recess | 501.60 |
 | waveguide | formed | 2 | Cast acrylic sheet 10 mm, tinted through in the horn's own heavier dye lot per colour (about 6 to 10 times the cabinet's dye, Ember about 10; matched to a chip we approve; the lot's cost and minimum to confirm with the caster), pressure-formed over a male tool, trimmed and polished (the rate carries the blank, the forming, the trim and the polish) | 2008 cm3, 566 x 248 x 376 | 592.19 |
 | horn-throat | cnc-mill | 2 | Cast acrylic, tinted through in the horn's own heavier dye lot (about 6 to 10 times the cabinet's dye; 6, 30 and 75 mm), turned and milled | 210 x 210 x 75 | 370.38 |
 | horn-pod | formed | 2 | Cast acrylic, tinted through in the horn's own heavier dye lot (about 6 to 10 times the cabinet's dye; 6, 30 and 75 mm), turned and milled | 456 cm3, 210 x 136 x 210 | 155.10 |
@@ -28,7 +28,7 @@
 | disc-frame | cut | 2 | 12 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 436 x 436 | 54.18 |
 | cloth-disc | buy | 2 | Acoustically transparent speaker cloth (a knit sold for grilles), about 0.6 x 0.95 m a grille, in the finish's colour |  | 15.00 |
 | cloth-disc-magnets | buy | 2 | The ring's and the disc's magnets: eight 15 x 3 neodymium discs (N42) and four 15 x 3 mild-steel discs, a set: four magnets in the panel and the steel discs in the ring's back hold the ring, four in the disc's frame hold the disc to the same steel (round 13) |  | 10.00 |
-| amp-box | sheet metal | 2 | Aluminium 5052-H32 sheet, 1.5 mm, folded (6061 cracks at tight folds; the size column rounds the blank's 1.5 to 2; the engineering audit, 2026-11-01) | 305 x 500 x 2 | 85.72 |
+| amp-box | sheet metal | 2 | Aluminium 5052-H32 sheet, 1.5 mm, folded (6061 cracks at tight folds; the size column rounds the blank's 1.5 to 2; the engineering audit, 2026-11-01) | 305 x 545 x 2 | 86.23 |
 | amp-box-gasket | buy | 2 | EPDM sponge gasket, 3 mm, cut as a frame 15 wide for the amplifier compartment's flange |  | 6.00 |
 | lead-hf | buy | 2 | HF lead: round silicone-sheathed cable 2 x 0.5 mm2, about 5 across, 1.3 m, ferrules at the pod's end and a two-way lever connector (Wago 221-412 or like) on the driver's own leads, a polarised 2-way connector at the compartment's end |  | 6.00 |
 | lead-woofer | buy | 2 | Round-sheathed speaker cable 2 x 1.5 mm2, 1 m |  | 2.00 |
@@ -58,7 +58,7 @@
 | lining-back-a, lining-back-f | cut | 4 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 68 x 141 | 0.12 |
 | lining-back-b, lining-back-g | cut | 4 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 68 x 463 | 0.40 |
 | lining-back-c, lining-back-h | cut | 4 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 68 x 101 | 0.09 |
-| lining-back-d | cut | 2 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 239 x 273 | 0.82 |
+| lining-back-d | cut | 2 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 239 x 228 | 0.68 |
 | lining-back-e | cut | 2 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 239 x 113 | 0.34 |
 | woofer-fixings | buy | 2 | M6 brass threaded inserts, knurled, bonded with epoxy into 8.5 holes in the acrylic panel, with M6 x 25 black ultra-low-head socket screws (a 13 across head 1.8 high, A2 black, wide enough to cover the woofer's slot) tightened to 5 N m; a set of 8 (the 15PR400's eight slots on 374). The detail pass, 2026-11-12: the heads cannot be flush, since the woofer's cast flange has slots, not countersinks |  | 20.00 |
 | hf-fixings | buy | 2 | The 2 in driver's fixings: four M6 x 16 countersunk screws (A2), the driver to its adaptor ring, and four M5 x 16 socket caps with washers, the ring to the brass inserts in the horn's boss, a set |  | 6.00 |
@@ -83,13 +83,13 @@
 
 | | USD |
 |---|---|
-| buy | 3,152 |
+| buy | 3,310 |
 | cnc-mill | 1,243 |
 | cut | 2,691 |
 | formed | 1,979 |
 | lathe | 349 |
-| sheet metal | 171 |
-| total | 9,586 |
+| sheet metal | 172 |
+| total | 9,745 |
 
 
 ## Options (each for 2, on top of the total above)
