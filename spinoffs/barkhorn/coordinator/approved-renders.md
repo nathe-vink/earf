@@ -1311,6 +1311,20 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
      119 dB at 1 m." (the woofer held to Xmax by the soft clip at 125 W into 8 ohm; +2 dB over the FA122).
    - Order for the speaker lane: the pictures first (core-bar-table in two bands, the hero's right-edge strip and its
      report, the Mantle red dot, the portrait last).
+   09:08 UTC, coordinator's checks at full size (speaker lane, `product/planet-bar/`):
+   - `bar-backbar.png` re-rendered with every fix (e8a0d2469d; 3200x1800; the cleaned Tropos, no Core cable, the flat
+     boards raised, Mantle Ember; audit 0/0): PASSED on crops at the near speaker's foot, Mantle, the Cores, the far
+     speaker, the horn and the glasses. FINAL; to the site with the next batch. Shown to the owner 09:10.
+   - `bar-hero.png` at full size (3896c7e960; 3200x1800): passes but for two things. (a) The ring sleeve is cut by the
+     right edge (right 40 px strip mean 51.7, p99 223); the lane's strip is in work. (b) A "reserved" card
+     (`tex/reserved.png`, x 5.55, y 5.4462) stands in front of the left speaker's base: out of the bay, that patch
+     re-rendered; out of both bays in every frame still to render. Measured by the coordinator: upper lining L 58 /
+     0.83 / 0.50, R 57.5 / 0.76 / 0.48 (limits s 0.45 or more, v 0.65 or less); clipped in the speaker boxes 0.03 %;
+     headline zone (x 34-67 %, y 5-36 %) mean 4.1, p99 28; left 40 px strip max 35. Shown to the owner 09:10 as "two
+     small fixes still coming".
+   - THE TROPOS PACKAGE IN THE BAR SHOTS: `bar-hero.shot.json` places Tropos from `studio/products/barkhorn-cloud.json`,
+     not from an asset file, and 1409f6ad rebuilt that package for the FA123. Every frame still to render builds
+     Tropos from the package as before 6b088b91 (the detail-pass state); each report names the commit.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
