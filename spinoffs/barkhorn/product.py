@@ -1397,7 +1397,7 @@ def amp_plate_pieces(amp, cx, D, az):
     and holes agreeing with the drawing to 0.3), as (u, v) from the plate's middle: u = 60 - x and v = 157.5 - y, x and
     y in from its top left as one faces it (so +u is to one's left: the plate faces the back, +y). Returns {piece:
     (solid, finish)}."""
-    from build123d import Align, Compound, Plane, Text, extrude
+    from build123d import Align, Compound, Location, Plane, Text, extrude
     FONT, BOLD = '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'
     at = lambda u, v: (cx + u, az + v)
     rr = lambda w, h, r, u, v: rounded_rect(w, h, r, cx=cx + u, cy=az + v)
@@ -1444,6 +1444,24 @@ def amp_plate_pieces(amp, cx, D, az):
         MOUNT = [(u, v) for u in (55.0, -55.0) for v in (152.5, 75.0, 0.0, -75.0, -152.5)]
     TORX = [(-22.7, 121.9), (-4.6, 85.2), (-28.8, 82.1), (39.3, 62.2), (-39.0, 62.2), (-17.0, 31.7), (39.3, 0.2), (-39.0, 1.1),
             (3.2, -32.5), (-39.0, -40.0), (39.3, -45.1), (39.2, -100.9), (-39.2, -100.9), (17.7, -129.2)]
+    # the FA123 (2026-11-13): its plate as in a retailer's square-on photograph of it (audiophonics.fr, product 13531;
+    # 2.333 px a mm, the plate's middle from its mount holes): the same print and connectors as the FA122's, the top
+    # block 22.5 higher (it keeps its distance from the top edge), the mains and the marks 22.5 to 24.5 lower, Hypex's
+    # name 24.6 lower, FA123 25.5 lower, and the module's screws in a pattern of their own (FA123_TORX, measured). The
+    # FA122's print is drawn, then each piece moved by its band (fa123_dv); the mount holes and FA123_TORX after it.
+    fa123 = amp.get('badge') == '123'
+    FA123_TORX = [(-22.7, 144.4), (-4.6, 107.7), (-28.8, 104.6), (40.3, 86.2), (1.7, 86.2), (-40.5, 86.2), (40.3, 53.6),
+                  (18.4, 53.6), (-40.5, 53.6), (40.3, 39.6), (-40.5, 39.6), (-17.6, 8.4), (40.3, -24.2), (-40.5, -22.7),
+                  (2.8, -57.4), (40.3, -70.3), (-40.5, -64.9), (39.2, -123.4), (-39.2, -123.4), (17.7, -151.7)]
+
+    def fa123_dv(v):
+        if not fa123:
+            return 0.0
+        return 22.5 if v >= 60 else -24.6 if v >= 0 else -25.5 if v >= -40 else -24.5 if v > -92 else -22.5
+
+    def shift(sol):
+        dz = fa123_dv(sol.bounding_box().center().Z - az)
+        return sol.moved(Location((0, 0, dz))) if dz else sol
     PEM, C14, ROCKER = (-22.9, -129.2), (-13.85, -128.9), (-32.9, -129.55)
 
     # the plate, its holes and slots
@@ -1451,27 +1469,27 @@ def amp_plate_pieces(amp, cx, D, az):
     for u, v in MOUNT:
         plate -= hole(u, v, 4.5, D - 4, D + 1)
     for u, v in VENTS:
-        plate -= slab(rr(16.2, 3.8, 1.9, u, v), D - 4, D + 1)
+        plate -= shift(slab(rr(16.2, 3.8, 1.9, u, v), D - 4, D + 1))
     for u, v, _, _ in XLR:
-        plate -= hole(u, v, 22.0, D - 4, D + 1)
+        plate -= shift(hole(u, v, 22.0, D - 4, D + 1))
     for u, v, _ in RCA:
-        plate -= hole(u, v, 10.0, D - 4, D + 1)
+        plate -= shift(hole(u, v, 10.0, D - 4, D + 1))
     for (w, h), (u, v) in (((9.6, 8.8), OPT), ((7.2, 3.8), USB), ((41.2, 29.8), PEM)):
-        plate -= slab(rr(w, h, 0.8, u, v), D - 4, D + 1)
+        plate -= shift(slab(rr(w, h, 0.8, u, v), D - 4, D + 1))
     for u, v, _ in LEDS:
-        plate -= hole(u, v, 3.2, D - 4, D + 1)
-    plate -= hole(*SELECT, 4.4, D - 4, D + 1)
+        plate -= shift(hole(u, v, 3.2, D - 4, D + 1))
+    plate -= shift(hole(*SELECT, 4.4, D - 4, D + 1))
     module = box(cx - amp['cutout_w'] / 2 + 4, D - amp['depth'], az - amp['cutout_h'] / 2 + 6,
                  cx + amp['cutout_w'] / 2 - 4, D - 3.0, az + amp['cutout_h'] / 2 - 6)
     # behind every opening a pocket in the module, so a connector's insert and pins show and a slot reads dark and deep
     for u, v, _, _ in XLR:
-        module -= hole(u, v, 22.6, D - 16, D - 2.9)
+        module -= shift(hole(u, v, 22.6, D - 16, D - 2.9))
     for u, v, _ in RCA:
-        module -= hole(u, v, 10.6, D - 8, D - 2.9)
+        module -= shift(hole(u, v, 10.6, D - 8, D - 2.9))
     for u, v in VENTS:
-        module -= slab(rr(16.2, 3.8, 1.9, u, v), D - 9, D - 2.9)
+        module -= shift(slab(rr(16.2, 3.8, 1.9, u, v), D - 9, D - 2.9))
     for (w, h), (u, v) in (((9.8, 9.0), OPT), ((7.4, 4.0), USB), ((39.2, 28.0), PEM)):
-        module -= slab(rr(w, h, 0.8, u, v), D - 24, D - 2.9)
+        module -= shift(slab(rr(w, h, 0.8, u, v), D - 24, D - 2.9))
 
     P = {k: [] for k in ('black', 'metal', 'ring', 'gold', 'screws', 'print', 'label', 'ink', 'foil', 'led-on', 'led-green', 'led-red',
                          'rca-white', 'rca-red', 'rca-orange')}
@@ -1488,11 +1506,14 @@ def amp_plate_pieces(amp, cx, D, az):
             s -= slab(hx, top - 0.9, top + 0.1)
         return s
 
-    for u, v in MOUNT:                                 # the plate's ten into the back, M4 pan heads
-        P['screws'].append(pan(u, v, 7.6, D))
-    for u, v in TORX:                                  # the module's, each in a ring of bare metal where it was turned home
-        P['screws'].append(pan(u, v, 5.6, D, 'torx'))
-        P['ring'].append(ring(u, v, 6.6, 0.45, D, 0.06))
+    def heads():
+        for u, v in MOUNT:                             # the plate's ten into the back, M4 pan heads
+            P['screws'].append(pan(u, v, 7.6, D))
+        for u, v in (FA123_TORX if fa123 else TORX):   # the module's, each in a ring of bare metal where it was turned home
+            P['screws'].append(pan(u, v, 5.6, D, 'torx'))
+            P['ring'].append(ring(u, v, 6.6, 0.45, D, 0.06))
+    if not fa123:
+        heads()
 
     PINS = [(-4.8, 2.0), (4.8, 2.0), (0.0, -5.2)]      # an XLR's three, as one faces it, latch up
     for u, v, sex, turn in XLR:
@@ -1624,6 +1645,10 @@ def amp_plate_pieces(amp, cx, D, az):
     P['print'].append(text('100 - 120V~ / 200 - 240V~', -21.0, -149.1, w=35.0))
     P['print'].append(text('350W Max. / 50Hz - 60Hz', -20.9, -152.3, w=31.2))
 
+    if fa123:                                         # each piece to its band on the longer plate, then the heads
+        for k_ in P:
+            P[k_] = [shift(x) for x in P[k_]]
+        heads()
     C = lambda xs: Compound(children=xs)
     out = {'plate': (plate, 'amp'), 'module': (module, 'amp'), 'housings': (C(P['black']), 'gland'),
            'metal': (C(P['metal']), 'rod'), 'gold': (C(P['gold']), 'brass'), 'screws': (C(P['screws']), 'screw'),
