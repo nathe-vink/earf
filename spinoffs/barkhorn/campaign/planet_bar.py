@@ -165,7 +165,6 @@ def _base(size, title):
     # 20:19 brief; it takes over the room's stripes and the old fill's cells)
     fill = {'kind': 'kit', 'shape': 'ext', 'path': RECWALL, 'fn': 'build', 'x0': RW['x0'], 'x1': RW['x1'], 'z0': RW['z0'], 'z1': RW['z1'],
             'cell': RW['cell'], 'y': R.W - 0.02 - RW['depth'], 'back': R.W - 0.02, 'eye_z': 9.9, 'seed': 1313, 'plain': [[18, 1]],   # (23:14: the cell the hero's right edge cut)
-           
             'skip': [[xc - 0.42, xc + 0.42, 0.0, 4.0] for xc in R.SPK_NICHES]}
     # (the owner, 15:43: no zinc, no brass; 20:47: the bar top dark, low roughness, carrying soft reflections of the
     # Cores and shades; the niches' felt plain)
