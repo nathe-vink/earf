@@ -1388,6 +1388,29 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
      until the seating is proven. Tests at proxy size: Poison s7 (s6 with S1-S6), Ember e5 (rocks out, S1-S6),
      then Smoke p5 (p4's layout with S1-S6). Ice and Fog are looked at against the rules once the recipe is proven.
    - Shown to the owner 20:17: the s6 proxy before and after the finish alone, as "the smaller half of the fix".
+   20:40 UTC, biomes lane 55429e5fff (Tropos asset fd8aa47e; finish at the printed settings): SEATING TESTS, proxy
+   size. `poison-b-seat-s10.jpg` (sun 70 off axis, el 34; ivy and litter to the base, a low cover, feet 20 mm in;
+   overlap 1-2 %; front 0.339, cone 0.497; darkest 1 % speaker 0.220, ground 0.212; the shadow behind the speaker,
+   not read). `poison-b-shadow-test.jpg`: the cabinet's shadow on bare litter is green where the sun passes only
+   clear acrylic, gray in the core (lining, woofer, amplifier); the renderer's own transmission, nothing changed.
+   `ember-d-seat-e6.jpg` (rocks out, no flag; sun 57 off axis, el 7; front 0.350, cone 0.301; the shadow 10.5 m back
+   over the lava, not read; the cinders a ring; the slab flat). Each also as `-finish.jpg`.
+   20:44 UTC, coordinator's check: NEITHER SHOWN TO THE OWNER. s10's base is right and kept, but the frame went flat and
+   gray (the sun patch on the foreground, the cabinet black-green, the pale foreground the brightest thing). e6 as
+   the lane says. The shadow test is right and kept.
+   S2 WAS WRONG AND IS CORRECTED, from the owner's old three (22 Oct, 1 Nov), which never read as pasted: the sun
+   stands BEHIND the speaker to one side, so the shadow falls toward the camera onto the ground a low camera sees;
+   the ground in front has relief and is raked by that light; the speaker's colour sits inside the place's palette
+   and is not the brightest thing in frame; things of the place lie over the base; the lit air is behind the
+   speaker, not a veil in front of it.
+     S2 (corrected): the sun 110 to 150 degrees off the camera's axis; the shadow with its tint on ground in frame;
+        front 0.22 or more, cone 0.18 or more, the woofer and ports still reading; the side face in sun.
+     S4 (corrected): lit air behind and beside; in front only so much that the speaker's darkest 1 % stays between
+        0.04 and 0.09.
+   Ordered: Poison s11 (s6's richness; sun from behind right about 125 off axis, el 35-45; the shadow toward the
+   camera on litter; the nearest foreground dark; a fern over one bottom corner) and Ember e7 (sun low behind right
+   about 130, el 8-12; a slab with relief; lava within 2-3 m at the speaker's level; lit steam behind; cinders sparse
+   and uneven). Smoke p5 after both pass.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
