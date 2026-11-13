@@ -1123,6 +1123,19 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    right until more bar frames join it); "At the bar" is the second view on the lamps' pages; the eight Tropos cards
    carry the refreshed fronts. One new share link made 01:46 (expires 14 Nov 00:45 UTC; it replaces the batch 2 link)
    and sent to the owner in chat only.
+   01:48 UTC, speaker lane f82322c764: THE HERO TEST FROM THE BAR,
+   `renders/2026-11-11/barkhorn/product/planet-bar/bar-hero.png` (1600x900; `bar_hero` in `planet_bar.py`). A stool at
+   the bar's middle, eye 1.6 m, 26 mm: both Tropos (Acid) whole in their bays, the pendants' cluster between them,
+   Mantle (Ember) under it with its record, Cores Acid and Ember left and Dust right, drinks, the newspaper, citrus,
+   a sleeve, the matchbook. Mantle moved to x 6.92 and the long row of Hemispheres replaced by the cluster, to keep
+   both speakers clear. Lamps as the passed pendants (Ember 4.9 / 0.38 / 1.00; Acid 51.9 / 0.23 / 0.88; Dust 15.3 /
+   0.36 / 0.97; Cores 52.4 / 0.68 / 0.59, 8.4 / 0.95 / 0.74, 20.5 / 0.85 / 0.70); audit hidden 0, equipment 0. Every flat
+   board on the bar is now raised by its thickness in every bar frame.
+   Coordinator's check: the right idea; all four products read at a glance; Mantle's plinth reads red here. Shown to
+   the owner 01:51 as the first hero test. One more test ordered (not full size until he reacts): the 21 mm lens; a
+   calm dark top quarter for the headline with no lit spines or sign in it, by keeping the pool off those shelves,
+   no added light and no darkening in the finish; the bright newspaper swapped or moved. On phones the hero would be
+   the tall bar frame. The lane is also told the Hemisphere's measured figures.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
