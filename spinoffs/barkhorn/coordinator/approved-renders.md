@@ -1053,6 +1053,27 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
       woofer's power, excursion and thermal limit with two channels bridged and our high-pass; the horn driver on the
       third channel; heat in the compartment; the cost, about +$158 a pair by the 9 Nov note) and report before any CAD
       change. If a check fails the owner decides again. The site's amplifier line changes only after that.
+   00:31 UTC, site lane: the switch is out of batch 3 (r47-site-next 360b4f977b, r49-site-rc e8d2d39194; its
+   `vercel.json` identical to the deployed one); the bar views stay; still holding the push.
+   00:34 UTC, speaker lane aef160ce7: THE FA123 DESK CHECK (`spinoffs/barkhorn/make/fa123.md`,
+   `acoustics/fa123_woofer.py`; sources Hypex's Fusion manual R4 and NC100HF datasheet R8). Nothing fails.
+   - Fit: a small change, not a drop-in. Plate 360 x 120 x 55 (FA122: 315), cutout 336 x 96 (291); the compartment
+     grows 45 mm downward (320 -> 365 inside), nothing else in that band; Hypex's clearances hold; a new insert
+     pattern needs Hypex's drilling drawing (not public; needed for the FA122 too); +0.4 L in 135.6 L, ports unchanged.
+   - Woofer, bridged (the NC122MP, 250 W into 8 ohm): at full swing the cone peaks at 8.1 mm against Xmax 5.75 and
+     Xdamage 15.5. Keep the 28 Hz LR4 high-pass and the soft clip at 125 W into 8 ohm: THE GAIN IS +2.2 dB over the
+     FA122, NOT +5 (maximum about 117 -> 119.6 dB at 1 m at 100 Hz; 116 -> 118 at 63 Hz). The 9 Nov note's "+5.2 dB,
+     75 -> 250 W" overstated it. CAUTION: Hypex's minimum bridged load is 4 ohm and it recommends 8 or more; the
+     15PR400-8's minimum is 5.55-5.9 ohm. Ask Hypex.
+   - Horn driver on the NC100HF: unchanged in practice (about 22 V, 31 W; noise 40 uV maximum). Heat: idle about 11 W
+     against 7.5 W; within Hypex's guidance; the 62368 pre-check still needed. Cost: +$158.40 a pair plus about $2.
+   - If it goes ahead: `cloud.py` and `product.py` (the part, amp_z, the box height, the cutout, the inserts, the
+     gasket), then the parts list, engine files, asset and manifest, the plate model, the engraved rating 22.5 mm
+     lower, compliance notes, the preset, the site's amplifier and bass lines.
+   Coordinator, 00:36: NO CAD CHANGE YET. The owner is told the corrected gain and asked to confirm; the letter to
+   Hypex is rewritten for the FA123 (seven questions; the bridged load and the drilling drawing first; the plain or
+   own-print plate added) and given to him to send (`hypex-letter-fa123.md`, shown in chat). The change waits for his
+   confirmation and for Hypex's answer on the bridged load.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
