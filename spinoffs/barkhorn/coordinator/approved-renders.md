@@ -1343,6 +1343,14 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
      with the OPEN mark. The site's amplifier line changes with those pictures. The loudness line stays as it is
      until Hypex has confirmed the bridged load. The letter is needed before parts are ordered for a real pair
      (the bridged load, the drilling drawing, the certificates), not for pictures or the site.
+   20:05 UTC, the lanes after the restart (both containers had restarted):
+   - Biomes (20:02): Smoke p4 was lost mid-build (its log ends 09:29); restarted 20:02 with the same settings, due
+     about 21:45; then the Acid pair (portrait 2400x3000, wide 3200x2000) and Dust, each pushed as a JPEG the moment
+     it finishes, then audited. Acid and Dust carry their declared flag and one side card.
+   - Speaker (20:05): core-bar-table band a survived (done 09:53; pushed c96b97a4, `planet-bar/bands/`); band b was
+     lost and restarted 20:03 (about 65 min); the hero's two patches had not started. The rebuilt detail-pass
+     package is intact and every frame loads it. Then the hero patches and report, the Mantle red dot, the
+     portrait, then the FA123 batch. Both lanes now set a check-in at each render's expected finish.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
