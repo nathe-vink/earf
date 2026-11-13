@@ -87,12 +87,15 @@ P = dict(
     # faces the least lined and the modes between them, top to bottom, the least damped
     lining=dict(t=50.0, t_top=100.0, t_bottom=100.0, gap=0.5, port_clear=10.0, amp_clear=20.0, min_strip=40.0,
                 stock='polyester-batting', soft=9.0),    # soft: the render's batts' edges rounded, as a sleeved batt's are
-    amp='hypex-fa122', amp_z=520.0,
+    # the FA123 (2026-11-13, the owner's yes, the coordinator's 02:45): channels 1 and 2 bridged to the woofer, channel 3
+    # on the horn driver (make/fa123.md). Its plate is 45 longer (360 x 120, cutout 336 x 96): the compartment grows
+    # 45 downward, its top kept at 696.5 under the upper brace, so its centre goes from 520 to 497.5
+    amp='hypex-fa123', amp_z=497.5,
     # the amplifier's sealed compartment (round 13, the reality check's r2: Hypex asks for one, and the box must stay
     # airtight): 1.5 mm aluminium folded and welded, black anodised, `inside` (across, deep, high) round the module, its
     # `flange` screwed to the back's inner face on a `gasket` of EPDM; the L-pad and the driver's capacitor inside it, the
     # leads out through two cable glands (`gland`: across, long) in its front
-    amp_box=dict(t=1.5, inside=(125.0, 75.0, 320.0), flange=15.0, gasket=3.0, gland=(19.0, 22.0)),
+    amp_box=dict(t=1.5, inside=(125.0, 75.0, 365.0), flange=15.0, gasket=3.0, gland=(19.0, 22.0)),
     hf='bc-de1085tn-16',
     # the waveguide, a rounded rectangle about 640 x 300 with its mouth filling the face (612 x 272), 170 deep, in one of
     # the forms of the 2026-10-11 study: 'shell' (a thin cast shell following its flare, a pod behind round the driver),
@@ -1434,7 +1437,11 @@ def amp_plate_pieces(amp, cx, D, az):
     USB, OPT, SELECT = (-26.5, 110.8), (-28.8, 92.5), (-41.9, 112.0)
     LEDS = [(-34.2, 126.5, 'led-red'), (-34.2, 121.5, 'led-on'), (-34.2, 116.2, 'led-green'), (-34.2, 111.2, 'led-green')]
     VENTS = [(u, v) for v in (139.9, -109.1) for u in (35.4, 17.7, 0.0, -17.7, -35.4)]
-    MOUNT = [(u, v) for u in (55.0, -55.0) for v in (152.5, 75.0, 0.0, -75.0, -152.5)]
+    if amp.get('mount_placeholder'):                  # the FA123 (2026-11-13): PLACEHOLDER until Hypex's drilling drawing
+        e = ph / 2 - 5.0                              # arrives: the FA122's rule (5 in from the edges, five a side) spread
+        MOUNT = [(u, v) for u in (55.0, -55.0) for v in (e, e / 2, 0.0, -e / 2, -e)]   # evenly over the longer plate
+    else:
+        MOUNT = [(u, v) for u in (55.0, -55.0) for v in (152.5, 75.0, 0.0, -75.0, -152.5)]
     TORX = [(-22.7, 121.9), (-4.6, 85.2), (-28.8, 82.1), (39.3, 62.2), (-39.0, 62.2), (-17.0, 31.7), (39.3, 0.2), (-39.0, 1.1),
             (3.2, -32.5), (-39.0, -40.0), (39.3, -45.1), (39.2, -100.9), (-39.2, -100.9), (17.7, -129.2)]
     PEM, C14, ROCKER = (-22.9, -129.2), (-13.85, -128.9), (-32.9, -129.55)
@@ -1587,7 +1594,7 @@ def amp_plate_pieces(amp, cx, D, az):
     P['print'].append(text('electronics', -13.45, 10.9, w=18.9))
     P['print'].append(text('www.hypex.nl', -11.5, 7.9, w=13.8, bold=True))
     P['print'].append(text('FA', 15.9, -17.6, w=13.4, bold=True))
-    for u, dg in ((3.3, '1'), (-7.4, '2'), (-18.1, '2')):
+    for u, dg in zip((3.3, -7.4, -18.1), amp.get('badge', '122')):    # FA122, or the FA123's 1, 2, 3
         P['print'].append(cyl('y', at(u, -17.6), 9.5, D, D + 0.05))
         P['ink'].append(text(dg, u, -17.6, size=6.4, bold=True, y0=D + 0.05))
     # the safety marks (outlines), the caution, the sticker and its blank twin, the ratings
