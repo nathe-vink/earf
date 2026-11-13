@@ -1,0 +1,1320 @@
+{
+ "title": "Planet EARF bar: the line from the best seat",
+ "size": [
+  1600,
+  900
+ ],
+ "set": {
+  "kind": "stage",
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "planet_r37",
+    "fn": "room",
+    "colourway": "neutral",
+    "dome_w": 0.0,
+    "dome_glow": 0.0,
+    "sphere_w": 0.0,
+    "sphere_glow": 0.0,
+    "disc_col": "#FFC890",
+    "disc_glow": 0.0,
+    "disc_lamp": 0.0,
+    "name_glow": 0.0,
+    "niche_strip": 0.0,
+    "sink_glow": 0.0,
+    "screen_glow": 0.0,
+    "screen_tint": "#FFA060",
+    "screen_gap": 0.04,
+    "screen_rough": 0.22,
+    "etch_glow": 0.0,
+    "etch_frost": 0.3,
+    "shade_glow": 0.0,
+    "street": false,
+    "neighbour_plain": true,
+    "flat_glow": 0.0,
+    "flame": 0.0,
+    "windows_lit": 0.0,
+    "counter_strip": 0.0,
+    "sconce_w": 0.0,
+    "spk_niche_strip": 0.0,
+    "zone_life": true,
+    "host_stand": false,
+    "decorrelate": true,
+    "rw_faceout": 0.14,
+    "rw_vary": true,
+    "rw_pull": 0.08,
+    "steel_mix": 0.85,
+    "life_glasses": [],
+    "life_sleeves": [],
+    "plinth_bar": 0.0,
+    "plinth_bar_col": "#FFB060",
+    "plinth_listen": 0.0,
+    "plinth_listen_col": "#FFB060",
+    "orb_cables": [
+     {
+      "position": [
+       4.38,
+       0.9700000000000001,
+       0.74
+      ],
+      "floor": 0.0
+     },
+     {
+      "position": [
+       5.93,
+       0.9700000000000001,
+       0.74
+      ],
+      "floor": 0.0
+     },
+     {
+      "position": [
+       7.48,
+       0.9700000000000001,
+       0.74
+      ],
+      "floor": 0.0
+     },
+     {
+      "position": [
+       9.03,
+       0.9700000000000001,
+       0.74
+      ],
+      "floor": 0.0
+     },
+     {
+      "position": [
+       1.17,
+       4.359999999999999,
+       0.74
+      ],
+      "floor": 0.0
+     },
+     {
+      "position": [
+       13.15,
+       3.05,
+       0.66
+      ],
+      "floor": 0.2
+     },
+     {
+      "position": [
+       14.15,
+       0.5999999999999996,
+       0.66
+      ],
+      "floor": 0.2
+     },
+     {
+      "position": [
+       14.15,
+       5.5,
+       0.66
+      ],
+      "floor": 0.2
+     },
+     {
+      "position": [
+       12.55,
+       1.9999999999999998,
+       0.66
+      ],
+      "floor": 0.2
+     },
+     {
+      "position": [
+       12.55,
+       4.1,
+       0.66
+      ],
+      "floor": 0.2
+     }
+    ],
+    "sink_strip": 0.0,
+    "sink_w": 0.0,
+    "sconce_glow": 0.0,
+    "tropos_feet": true,
+    "products_only": true
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/campaign/bar_life/bar_life.py",
+    "fn": "fill_records",
+    "x0": 3.4,
+    "x1": 10.3,
+    "z0": 1.2,
+    "z1": 3.05,
+    "cell": 0.36,
+    "y": 5.72,
+    "depth": 0.36,
+    "skip": [
+     [
+      5.13,
+      5.97,
+      0.0,
+      4.0
+     ],
+     [
+      7.83,
+      8.67,
+      0.0,
+      4.0
+     ]
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.041,
+      0
+     ],
+     [
+      0.043,
+      0.006
+     ],
+     [
+      0.044,
+      0.092
+     ],
+     [
+      0.040499999999999994,
+      0.092
+     ],
+     [
+      0.0,
+      0.016
+     ]
+    ],
+    "position": [
+     6.12,
+     4.039999999999999,
+     1.07
+    ],
+    "material": "glass",
+    "color": "#F8F8F6",
+    "segments": 64
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0.0,
+      0.0166
+     ],
+     [
+      0.03902325581395348,
+      0.0166
+     ],
+     [
+      0.039353488372093015,
+      0.045
+     ],
+     [
+      0.0,
+      0.045
+     ]
+    ],
+    "position": [
+     6.12,
+     4.039999999999999,
+     1.07
+    ],
+    "material": "resin",
+    "color": "#A65812",
+    "segments": 64
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.026,
+     0.026,
+     0.024
+    ],
+    "position": [
+     6.1080000000000005,
+     4.045999999999999,
+     1.106
+    ],
+    "rotate": [
+     0.0,
+     -6.0,
+     12.0
+    ],
+    "material": "frosted",
+    "color": "#F4F7F8",
+    "ease": 0.004
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.026,
+     0.026,
+     0.024
+    ],
+    "position": [
+     6.13,
+     4.031999999999999,
+     1.112
+    ],
+    "rotate": [
+     8.0,
+     -6.0,
+     -20.0
+    ],
+    "material": "frosted",
+    "color": "#F4F7F8",
+    "ease": 0.004
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "points": [
+     [
+      6.14,
+      4.009999999999999,
+      1.1660000000000001
+     ],
+     [
+      6.154,
+      4.028,
+      1.1700000000000002
+     ],
+     [
+      6.15,
+      4.053999999999999,
+      1.1640000000000001
+     ]
+    ],
+    "radius": 0.0035,
+    "material": "clay",
+    "color": "#E2861E",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.041,
+      0
+     ],
+     [
+      0.043,
+      0.006
+     ],
+     [
+      0.044,
+      0.092
+     ],
+     [
+      0.040499999999999994,
+      0.092
+     ],
+     [
+      0.0,
+      0.016
+     ]
+    ],
+    "position": [
+     6.31,
+     4.18,
+     1.07
+    ],
+    "material": "glass",
+    "color": "#F8F8F6",
+    "segments": 64
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0.0,
+      0.0166
+     ],
+     [
+      0.03902325581395348,
+      0.0166
+     ],
+     [
+      0.03917906976744185,
+      0.03
+     ],
+     [
+      0.0,
+      0.03
+     ]
+    ],
+    "position": [
+     6.31,
+     4.18,
+     1.07
+    ],
+    "material": "resin",
+    "color": "#A65812",
+    "segments": 64
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.026,
+     0.026,
+     0.024
+    ],
+    "position": [
+     6.298,
+     4.186,
+     1.106
+    ],
+    "rotate": [
+     0.0,
+     -6.0,
+     12.0
+    ],
+    "material": "frosted",
+    "color": "#F4F7F8",
+    "ease": 0.004
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.026,
+     0.026,
+     0.024
+    ],
+    "position": [
+     6.319999999999999,
+     4.172,
+     1.112
+    ],
+    "rotate": [
+     8.0,
+     -6.0,
+     -20.0
+    ],
+    "material": "frosted",
+    "color": "#F4F7F8",
+    "ease": 0.004
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "points": [
+     [
+      6.329999999999999,
+      4.1499999999999995,
+      1.1660000000000001
+     ],
+     [
+      6.343999999999999,
+      4.168,
+      1.1700000000000002
+     ],
+     [
+      6.34,
+      4.194,
+      1.1640000000000001
+     ]
+    ],
+    "radius": 0.0035,
+    "material": "clay",
+    "color": "#E2861E",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.22,
+     0.13,
+     0.014
+    ],
+    "position": [
+     6.62,
+     4.459999999999999,
+     1.07
+    ],
+    "rotate": [
+     0,
+     0,
+     -14.0
+    ],
+    "material": "cotton",
+    "color": "#CFC6B4",
+    "ease": 0.004
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "wooden_bowl_01",
+    "res": "2k",
+    "position": [
+     6.4,
+     4.379999999999999,
+     1.07
+    ],
+    "rotate": [
+     0,
+     0,
+     30.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "food_lime_01",
+    "res": "2k",
+    "position": [
+     6.38,
+     4.369999999999999,
+     1.1
+    ],
+    "rotate": [
+     0,
+     20,
+     0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "food_lime_01",
+    "res": "2k",
+    "position": [
+     6.44,
+     4.409999999999999,
+     1.102
+    ],
+    "rotate": [
+     30,
+     0,
+     90
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "lemon",
+    "res": "2k",
+    "position": [
+     6.35,
+     4.43,
+     1.105
+    ],
+    "rotate": [
+     0,
+     70,
+     20
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     4.2,
+     1.6,
+     0.008
+    ],
+    "position": [
+     6.9,
+     2.75,
+     0.001
+    ],
+    "material": "pbr",
+    "texture": "poly_wool_herringbone",
+    "tex_res": "2k",
+    "tint": "#6A4A36",
+    "tint_mix": 0.55,
+    "gain": 0.7
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "potted_plant_02",
+    "res": "2k",
+    "position": [
+     8.85,
+     2.35,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     40.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.2,
+     0.05,
+     0.022
+    ],
+    "position": [
+     8.92,
+     4.539999999999999,
+     1.07
+    ],
+    "rotate": [
+     0,
+     0,
+     20.0
+    ],
+    "material": "pbr",
+    "texture": "american_walnut_veneer",
+    "tex_res": "2k",
+    "tint": "#5A3824",
+    "tint_mix": 0.5,
+    "gain": 0.6,
+    "ease": 0.003
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/campaign/bar_life/bar_life.py",
+    "fn": "boards",
+    "boards": [
+     {
+      "image": "tex/cover-05.png",
+      "w": 0.18,
+      "h": 0.18,
+      "x": 8.92,
+      "y": 4.529999999999999,
+      "z": 1.092,
+      "rot": [
+       -14.0,
+       0,
+       20.0
+      ],
+      "ground": "#EFEBE3",
+      "rough": 0.85
+     },
+     {
+      "image": "tex/cover-09.png",
+      "w": 0.315,
+      "h": 0.315,
+      "x": 8.0,
+      "y": 4.249999999999999,
+      "z": 1.0735,
+      "rot": [
+       -90.0,
+       0,
+       4.0
+      ]
+     },
+     {
+      "image": "tex/cover-02.png",
+      "w": 0.315,
+      "h": 0.315,
+      "x": 8.006,
+      "y": 4.253999999999999,
+      "z": 1.074,
+      "rot": [
+       -90.0,
+       0,
+       -6.0
+      ]
+     },
+     {
+      "image": "tex/cover-12.png",
+      "w": 0.315,
+      "h": 0.315,
+      "x": 8.012,
+      "y": 4.257999999999999,
+      "z": 1.078,
+      "rot": [
+       -90.0,
+       0,
+       9.0
+      ]
+     },
+     {
+      "image": "tex/cover-07.png",
+      "w": 0.315,
+      "h": 0.315,
+      "x": 8.018,
+      "y": 4.261999999999999,
+      "z": 1.082,
+      "rot": [
+       -90.0,
+       0,
+       -3.0
+      ]
+     },
+     {
+      "image": "tex/cover-03.png",
+      "w": 0.315,
+      "h": 0.315,
+      "x": 4.4,
+      "y": 5.58,
+      "z": 1.565,
+      "rot": [
+       -4.0,
+       0,
+       70.0
+      ],
+      "ground": "#E9E3D6"
+     },
+     {
+      "image": "tex/cover-10.png",
+      "w": 0.315,
+      "h": 0.315,
+      "x": 9.6,
+      "y": 5.58,
+      "z": 1.925,
+      "rot": [
+       -4.0,
+       0,
+       -64.0
+      ],
+      "ground": "#E9E3D6"
+     },
+     {
+      "image": "tex/cover-14.png",
+      "w": 0.315,
+      "h": 0.315,
+      "x": 6.6,
+      "y": 5.58,
+      "z": 2.285,
+      "rot": [
+       -4.0,
+       0,
+       58.0
+      ],
+      "ground": "#E9E3D6"
+     },
+     {
+      "image": "tex/matches.png",
+      "w": 0.04,
+      "h": 0.064,
+      "t": 0.006,
+      "x": 7.05,
+      "y": 3.9499999999999993,
+      "z": 1.0765,
+      "rot": [
+       -90.0,
+       0,
+       22.0
+      ]
+     },
+     {
+      "image": "tex/newspaper.png",
+      "w": 0.29,
+      "h": 0.4,
+      "t": 0.006,
+      "x": 6.6,
+      "y": 3.8599999999999994,
+      "z": 1.0765,
+      "rot": [
+       -90.0,
+       0,
+       -11.0
+      ],
+      "ground": "#E4E0D6",
+      "rough": 0.85
+     },
+     {
+      "image": "tex/reserved.png",
+      "w": 0.1,
+      "h": 0.05,
+      "t": 0.002,
+      "x": 5.55,
+      "y": 5.446199999999999,
+      "z": 1.09,
+      "rot": [
+       -18.0,
+       0,
+       0.0
+      ],
+      "ground": "#EFEBE3",
+      "rough": 0.7
+     }
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/campaign/bar_life/bar_life.py",
+    "fn": "remove",
+    "names": [
+     "dj-plinths",
+     "dj-knobs",
+     "dj-records",
+     "dj-labels",
+     "screen-panels",
+     "screen-boxes",
+     "screen-frames"
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "ArmChair_01",
+    "res": "2k",
+    "position": [
+     5.35,
+     2.05,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     -120.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/campaign/bar_life/bar_life.py",
+    "fn": "restyle",
+    "swap": {
+     "zinc": {
+      "kind": "stone",
+      "color": "#1C1916",
+      "rough": 0.16
+     },
+     "brass": {
+      "kind": "plain",
+      "color": "#161616",
+      "rough": 0.45,
+      "metal": 0.6
+     },
+     "kit-felt": {
+      "kind": "plain",
+      "color": "#1A1918",
+      "rough": 0.95
+     }
+    }
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/campaign/stage/stage2_props.py",
+    "fn": "lamps",
+    "top_z": 3.4,
+    "core_load": {
+     "orange": 1.5,
+     "amber": 1.5,
+     "blue": 1.5,
+     "black": 0.15
+    },
+    "core_cable": false,
+    "hemispheres": [
+     {
+      "tint": "amber",
+      "x": 6.55,
+      "y": 4.26,
+      "rim_z": 1.74
+     },
+     {
+      "tint": "red",
+      "x": 6.75,
+      "y": 4.1,
+      "rim_z": 1.5899999999999999
+     },
+     {
+      "tint": "orange",
+      "x": 6.93,
+      "y": 4.34,
+      "rim_z": 1.8499999999999999
+     },
+     {
+      "tint": "red",
+      "x": 7.11,
+      "y": 4.16,
+      "rim_z": 1.65
+     },
+     {
+      "tint": "amber",
+      "x": 7.29,
+      "y": 4.3,
+      "rim_z": 1.7799999999999998
+     }
+    ],
+    "cores": [
+     {
+      "tint": "amber",
+      "x": 5.95,
+      "y": 4.24,
+      "floor_z": 1.07,
+      "rot": 0.0
+     },
+     {
+      "tint": "red",
+      "x": 6.3,
+      "y": 4.08,
+      "floor_z": 1.07,
+      "rot": 0.0
+     },
+     {
+      "tint": "orange",
+      "x": 7.65,
+      "y": 4.06,
+      "floor_z": 1.07,
+      "rot": 0.0
+     }
+    ]
+   }
+  ]
+ },
+ "camera": {
+  "position": [
+   6.9,
+   2.5,
+   1.6
+  ],
+  "target": [
+   6.9,
+   5.7,
+   1.55
+  ],
+  "lens_mm": 26.0,
+  "level": true,
+  "fstop": 5.6,
+  "focus": [
+   6.9,
+   5.2,
+   1.6
+  ]
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#05070C",
+  "horizon": "#141824",
+  "ground": "#08080A",
+  "strength": 0.0
+ },
+ "render": {
+  "samples": 128,
+  "adaptive": 0.01,
+  "denoise": true,
+  "clamp": 0,
+  "bounces": 24,
+  "view": "AgX",
+  "exposure": -2.0,
+  "white_balance_k": 4000,
+  "white_balance_tint": 0.0,
+  "glossy_bounces": 12,
+  "transmission_bounces": 24,
+  "diffuse_bounces": 8,
+  "caustics_refractive": true,
+  "caustics_reflective": false,
+  "look": "AgX - Punchy"
+ },
+ "materials": {
+  "builtin-led": {
+   "glow": 0.0
+  },
+  "builtin-led-brace": {
+   "glow": 0.0
+  },
+  "horn-satin": {
+   "roughness": 0.05
+  },
+  "uplight-edge": {
+   "glow": 0.0
+  },
+  "uplight-panel": {
+   "glow": 0.0
+  },
+  "uplight-wash": {
+   "glow": 0.0
+  },
+  "led": {
+   "glow": 0.0
+  },
+  "glow": {
+   "strength": 0.0
+  }
+ },
+ "lights": {
+  "track-wall1": {
+   "type": "area",
+   "size_m": [
+    0.12,
+    0.12
+   ],
+   "position": [
+    6.2,
+    4.9,
+    3.35
+   ],
+   "target": [
+    6.3,
+    5.72,
+    1.7
+   ],
+   "irradiance": 5.1,
+   "spread_deg": 20,
+   "color": "#FFD2A0",
+   "shape": "DISK"
+  },
+  "track-wall2": {
+   "type": "area",
+   "size_m": [
+    0.12,
+    0.12
+   ],
+   "position": [
+    7.0,
+    4.9,
+    3.35
+   ],
+   "target": [
+    7.1,
+    5.72,
+    1.7
+   ],
+   "irradiance": 5.1,
+   "spread_deg": 20,
+   "color": "#FFD2A0",
+   "shape": "DISK"
+  },
+  "track-wall3": {
+   "type": "area",
+   "size_m": [
+    0.12,
+    0.12
+   ],
+   "position": [
+    9.0,
+    4.9,
+    3.35
+   ],
+   "target": [
+    9.1,
+    5.72,
+    1.7
+   ],
+   "irradiance": 5.1,
+   "spread_deg": 20,
+   "color": "#FFD2A0",
+   "shape": "DISK"
+  },
+  "track-wall4": {
+   "type": "area",
+   "size_m": [
+    0.12,
+    0.12
+   ],
+   "position": [
+    9.8,
+    4.9,
+    3.35
+   ],
+   "target": [
+    9.9,
+    5.72,
+    1.7
+   ],
+   "irradiance": 5.1,
+   "spread_deg": 20,
+   "color": "#FFD2A0",
+   "shape": "DISK"
+  },
+  "track-bar0": {
+   "type": "area",
+   "size_m": [
+    0.12,
+    0.12
+   ],
+   "position": [
+    5.6,
+    3.599999999999999,
+    3.35
+   ],
+   "target": [
+    5.6,
+    4.199999999999999,
+    1.07
+   ],
+   "irradiance": 1.05,
+   "spread_deg": 24,
+   "color": "#FFD2A0",
+   "shape": "DISK"
+  },
+  "track-bar1": {
+   "type": "area",
+   "size_m": [
+    0.12,
+    0.12
+   ],
+   "position": [
+    7.0,
+    3.599999999999999,
+    3.35
+   ],
+   "target": [
+    7.0,
+    4.199999999999999,
+    1.07
+   ],
+   "irradiance": 1.05,
+   "spread_deg": 24,
+   "color": "#FFD2A0",
+   "shape": "DISK"
+  },
+  "track-bar2": {
+   "type": "area",
+   "size_m": [
+    0.12,
+    0.12
+   ],
+   "position": [
+    8.4,
+    3.599999999999999,
+    3.35
+   ],
+   "target": [
+    8.4,
+    4.199999999999999,
+    1.07
+   ],
+   "irradiance": 1.05,
+   "spread_deg": 24,
+   "color": "#FFD2A0",
+   "shape": "DISK"
+  },
+  "track-bay0": {
+   "type": "area",
+   "size_m": [
+    0.14,
+    0.14
+   ],
+   "position": [
+    5.55,
+    5.2661999999999995,
+    3.35
+   ],
+   "target": [
+    5.55,
+    5.6662,
+    1.79
+   ],
+   "irradiance": 16.5,
+   "spread_deg": 14,
+   "color": "#FFE2C0",
+   "shape": "DISK"
+  },
+  "track-bay1": {
+   "type": "area",
+   "size_m": [
+    0.14,
+    0.14
+   ],
+   "position": [
+    8.25,
+    5.2661999999999995,
+    3.35
+   ],
+   "target": [
+    8.25,
+    5.6662,
+    1.79
+   ],
+   "irradiance": 16.5,
+   "spread_deg": 14,
+   "color": "#FFE2C0",
+   "shape": "DISK"
+  },
+  "track-mantle": {
+   "type": "area",
+   "size_m": [
+    0.1,
+    0.1
+   ],
+   "position": [
+    7.32,
+    3.0,
+    3.35
+   ],
+   "target": [
+    6.92,
+    4.279999999999999,
+    1.071
+   ],
+   "irradiance": 10.5,
+   "spread_deg": 18,
+   "color": "#FFD8B0",
+   "shape": "DISK"
+  },
+  "track-horn0": {
+   "type": "area",
+   "size_m": [
+    0.12,
+    0.12
+   ],
+   "position": [
+    5.85,
+    4.4,
+    3.35
+   ],
+   "target": [
+    5.55,
+    5.566199999999999,
+    2.21
+   ],
+   "irradiance": 4.5,
+   "spread_deg": 12,
+   "color": "#FFE2C0",
+   "shape": "DISK"
+  },
+  "track-horn1": {
+   "type": "area",
+   "size_m": [
+    0.12,
+    0.12
+   ],
+   "position": [
+    8.55,
+    4.4,
+    3.35
+   ],
+   "target": [
+    8.25,
+    5.566199999999999,
+    2.21
+   ],
+   "irradiance": 4.5,
+   "spread_deg": 12,
+   "color": "#FFE2C0",
+   "shape": "DISK"
+  },
+  "house": {
+   "type": "area",
+   "size_m": [
+    1.6,
+    1.6
+   ],
+   "position": [
+    6.9,
+    0.6,
+    2.3
+   ],
+   "target": [
+    6.9,
+    4.5,
+    1.0
+   ],
+   "irradiance": 1.8,
+   "color": "#FFC890",
+   "shape": "DISK"
+  }
+ },
+ "products": [
+  {
+   "def": "studio/products/barkhorn-cloud.json",
+   "flavour": "cloud-red",
+   "instances": [
+    {
+     "position": [
+      5.55,
+      5.7162,
+      1.09
+     ],
+     "rotate_z": 0.0,
+     "flavour": "cloud-amber",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      8.25,
+      5.7162,
+      1.09
+     ],
+     "rotate_z": 0.0,
+     "flavour": "cloud-amber",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    }
+   ]
+  },
+  {
+   "def": "studio/products/barkhorn-variants.json",
+   "flavour": "cloud-red",
+   "instances": [
+    {
+     "position": [
+      5.55,
+      5.7162,
+      1.09
+     ],
+     "rotate_z": 0.0,
+     "flavour": "cloud-amber",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      8.25,
+      5.7162,
+      1.09
+     ],
+     "rotate_z": 0.0,
+     "flavour": "cloud-amber",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    }
+   ]
+  },
+  {
+   "asset_blend": "studio/assets/cache/mantle/fa0c3a65/mantle-strata.blend",
+   "manifest": "studio/assets/cache/mantle/fa0c3a65/mantle-strata.manifest.json",
+   "tint": "ember",
+   "collection": "Mantle Strata Ember",
+   "forbid": [
+    "brass"
+   ],
+   "asset_sha": "fa0c3a6568d5bcc2085c742b83900fae0c1c6aad",
+   "instances": [
+    {
+     "position": [
+      6.73,
+      4.0333,
+      1.071
+     ],
+     "rotate_z": 10.0
+    }
+   ]
+  }
+ ]
+}

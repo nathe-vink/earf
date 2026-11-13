@@ -138,3 +138,31 @@ mantle-bar-acid-test2 (1920 x 1280): as mantle-bar-acid-test, with the Hemispher
   light falls on the deck below, whatever its tint. The deck's light comes from the room.
 - **Per the coordinator's rule:** Mantle stays Ember in the bar, the portrait included. The Mantle frame is the Ember
   three-quarter at full size (2400 x 1600).
+
+## The hero test (the coordinator, 23:48; 2026-11-13)
+
+bar-hero (1600 x 900, 128 samples):
+- **The camera:** from a stool at the bar's middle, eye 1.6 m, 26 mm, centred between the bays.
+- **Mantle** is in Ember between the bays, under the passed pendants' cluster, which is raised 0.15.
+- **Three Cores:** Acid and Ember at the left, Dust at the right.
+- **The props:** the drinks, the newspaper, the citrus, a sleeve and the matchbook.
+- **Raised boards:** every flat board on the bar is raised by its thickness. In the first full render the matchbook
+  and a sleeve, coplanar with the stone, rendered black.
+
+| lamp | h, s, v | the passed pendants |
+|---|---|---|
+| Hemisphere Ember (two) | 4.9, 0.38, 1.00 / 4.8, 0.37, 1.00 | 5.2, 0.41, 1.00 |
+| Hemisphere Acid (two) | 51.9, 0.23, 0.88 / 51.8, 0.23, 0.88 | 52.9, 0.23, 0.87 |
+| Hemisphere Dust | 15.3, 0.36, 0.97 | |
+| Core Acid | 52.4, 0.68, 0.59 | |
+| Core Ember | 8.4, 0.95, 0.74 | |
+| Core Dust | 20.5, 0.85, 0.70 | |
+
+**How it was measured:**
+- The Hemispheres: the brightest fifth of each lit shade, just under its centre point (the point itself falls on the
+  black cap).
+- The Cores: a 12 px patch at each ball's centre.
+
+**Checks:**
+- Nothing stands in front of either speaker: Mantle and the Cores sit below the line from the eye to the speakers' feet.
+- Audit (reaudit.py): hidden 0, equipment 0.

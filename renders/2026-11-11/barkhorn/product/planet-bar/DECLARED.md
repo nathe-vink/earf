@@ -105,3 +105,21 @@ Mantle's light is a product: an Ember Hemisphere hangs over it, rim at 1.50 m (x
 edge, so its own LEDs light the deck and the plinth's edges. The Ember Core beside Mantle is in frame. No 'mantle-key'.
 The pale flat patch under the deck, right of centre, is Mantle's clear acrylic base layer mirroring the record wall.
 
+## bar-hero.png (1600 x 900)
+
+| name | what | where (m: x along the bar, y toward the wall, z up) | strength |
+|---|---|---|---|
+| track-wall1 | a round ceiling track head, aimed at the record wall; disk 0.12 x 0.12 m | 6.2, 4.9, 3.35 | 5.1 W/m2 at its target |
+| track-wall2 | a round ceiling track head, aimed at the record wall; disk 0.12 x 0.12 m | 7.0, 4.9, 3.35 | 5.1 W/m2 at its target |
+| track-wall3 | a round ceiling track head, aimed at the record wall; disk 0.12 x 0.12 m | 9.0, 4.9, 3.35 | 5.1 W/m2 at its target |
+| track-wall4 | a round ceiling track head, aimed at the record wall; disk 0.12 x 0.12 m | 9.8, 4.9, 3.35 | 5.1 W/m2 at its target |
+| track-bar0 | a round ceiling track head, aimed down at the bar top; disk 0.12 x 0.12 m | 5.6, 3.6, 3.35 | 1.05 W/m2 at its target |
+| track-bar1 | a round ceiling track head, aimed down at the bar top; disk 0.12 x 0.12 m | 7.0, 3.6, 3.35 | 1.05 W/m2 at its target |
+| track-bar2 | a round ceiling track head, aimed down at the bar top; disk 0.12 x 0.12 m | 8.4, 3.6, 3.35 | 1.05 W/m2 at its target |
+| track-bay0 | a round ceiling track head in front of a speaker's bay, aimed steeply down at the cabinet; disk 0.14 x 0.14 m | 5.55, 5.27, 3.35 | 16.5 W/m2 at its target |
+| track-bay1 | a round ceiling track head in front of a speaker's bay, aimed steeply down at the cabinet; disk 0.14 x 0.14 m | 8.25, 5.27, 3.35 | 16.5 W/m2 at its target |
+| track-mantle | a round ceiling track head over Mantle; disk 0.1 x 0.1 m | 7.32, 3.0, 3.35 | 10.5 W/m2 at its target |
+| track-horn0 | a round ceiling track head on the room side, aimed at a speaker's horn; disk 0.12 x 0.12 m | 5.85, 4.4, 3.35 | 4.5 W/m2 at its target |
+| track-horn1 | a round ceiling track head on the room side, aimed at a speaker's horn; disk 0.12 x 0.12 m | 8.55, 4.4, 3.35 | 4.5 W/m2 at its target |
+| house | a broad round warm fill from the room behind the camera; disk 1.6 x 1.6 m | 6.9, 0.6, 2.3 | 1.8 W/m2 at its target |
+
