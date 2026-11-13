@@ -244,6 +244,9 @@ REFLECT = {   # habitat -> [reflector specs] (W H AZ EL DIST TX TY TZ), white bo
     # Fog (b), 2026-11-10: a 2 x 2 m white board where fill_l stood (proxies: no fill left 15 % of the face under 10, the
     # board 5 %; the passed file 4 %). Poison takes none: a board where litter stood shades the floor on the sun's line
     'fog_b': [(2.0, 2.0, -55.0, 15.0, 3.5, 0.0, 0.0, 0.8)],
+    # Poison (b) p3, the coordinator 2026-11-13: the front in shadow with the sun side-rear; a 1.5 x 1.2 m white board out
+    # of frame right, lit by that sun, facing the speaker. Passive; the sun and the sky stay the only emitters.
+    'poison_ivy_b': [(1.5, 1.2, 60.0, 8.0, 2.5, 0.0, 0.0, 0.5)],
     # Ember (c), the coordinator 2026-11-12: the front read near black (value 0.10, the woofer 0.05) with the dusk sun behind
     # at az 130; a 3 x 2 m white board low on the camera's left, out of frame, facing the speaker and (20 deg off) the
     # sun, so the sun's light comes back onto the front. Passive; the sun and the sky stay the only emitters.
