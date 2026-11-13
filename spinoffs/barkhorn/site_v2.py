@@ -1904,13 +1904,14 @@ def rc_intro(p, web):
 
 
 HOTSPOTS = True    # the hero's point (Tropos in Ice, to its page); off: the picture alone
-HERO_SRC = 'renders/2026-11-11/barkhorn/habitats/ice-final-wide-3200x2000.jpg'       # Ice out in the snow at dusk, the finals:
+HERO_SRC = 'renders/2026-11-11/barkhorn/product/planet-bar/bar-hero.png'           # the bar (r33-speaker-horn a9c41b7a), desktop;
 HERO_SRC_TALL = 'renders/2026-11-11/barkhorn/habitats/ice-final-portrait-2400x3000.jpg'   # wide on a wide screen, portrait on a phone
-HERO_ALT = 'Tropos in Ice, out in the snow at dusk'
-HERO_WIDE = (8 / 5, 0.5, 0.5)      # the desktop: the whole 8:5 picture
+HERO_ALT = 'Two Tropos in Acid at a bar, Hemispheres over the counter, Cores and Mantle on it, a wall of records behind'
+HERO_ALT_TALL = 'Tropos in Ice, out in the snow at dusk'   # the phone keeps Ice until the tall bar frame
+HERO_WIDE = (16 / 9, 0.5, 0.5)     # the desktop: the whole 16:9 picture
 HERO_TALL = (4 / 5, 0.5, 0.5)      # the phone: the whole 4:5 picture
-HERO_POINTS = [(73.6, 73.7, 'Tropos in Ice', '#speaker-ice')]   # x, y in percent of the wide picture: the woofer's cap
-HERO_POINTS_TALL = [(63.3, 61.1)]                                # the same, in the portrait
+HERO_POINTS = [(73.5, 57.7, 'Tropos in Acid', '#speaker-acid')]  # x, y in percent of the wide picture: the right speaker's woofer
+HERO_POINTS_TALL = [(63.3, 61.1, 'Tropos in Ice', '#speaker-ice')]   # the portrait's own point: Ice's woofer
 
 
 def cover_point(x, y, size, crop):
@@ -1926,22 +1927,35 @@ def cover_point(x, y, size, crop):
     return round((X - left) / vw * 100, 2), round(Y / h * 100, 2)
 
 
-def hotspot_hero(img, size, alt, points, wide, tall, srcset=None, attrs='', tall_set=None, tall_size=None, tall_points=None):
+def hotspot_hero(img, size, alt, points, wide, tall, srcset=None, attrs='', tall_set=None, tall_size=None, tall_points=None, tall_alt=None):
     """A picture with points on it: (x, y in percent of the picture, label, link) each. The box takes the wide crop's aspect,
     or the tall one's in a portrait window, so every point's place is fixed in CSS: nothing moves when the picture or a
     label arrives. Each point is a link with its label as its name (keyboard and screen readers get it as is); the label
     shows on hover, on keyboard focus and, on a touch screen, on the first tap (the second follows the link)."""
     pts = []
-    for (x, y, label, href) in points:
-        wx, wy = cover_point(x, y, size, wide)
-        tx, ty = cover_point(*tall_points[len(pts)], tall_size, tall) if tall_points else cover_point(x, y, size, tall)
-        side = ' hs-left' if wx > 62 else ''
-        pts.append(f'<a class="hs-pt{side}" href="{href}" style="--x:{wx}%;--y:{wy}%;--tx:{tx}%;--ty:{ty}%">'
+    def point(x, y, label, href, cls, tx=None, ty=None):
+        side = ' hs-left' if x > 62 else ''
+        tx, ty = (x, y) if tx is None else (tx, ty)
+        pts.append(f'<a class="hs-pt{side}{cls}" href="{href}" style="--x:{x}%;--y:{y}%;--tx:{tx}%;--ty:{ty}%">'
                    f'<span class="hs-dot" aria-hidden="true"></span><span class="hs-label">{label}</span></a>')
+    if tall_points:         # each picture its own points: the wide's on a wide screen, the portrait's on a tall one
+        for (x, y, label, href) in points:
+            point(*cover_point(x, y, size, wide), label, href, ' hs-w')
+        for (x, y, label, href) in tall_points:
+            point(*cover_point(x, y, tall_size, tall), label, href, ' hs-t')
+    else:
+        for (x, y, label, href) in points:
+            wx, wy = cover_point(x, y, size, wide); tx, ty = cover_point(x, y, size, tall)
+            point(wx, wy, label, href, '', tx, ty)
     ss = f' data-srcset="{srcset}" sizes="100vw"' if srcset else ''
     im = f'<img data-src="{img}"{ss} fetchpriority="high" width="{size[0]}" height="{size[1]}" alt="{alt}">'
-    if tall_set:            # art direction: the portrait on a tall screen
+    if tall_set:            # art direction: the portrait on a tall screen, and its own words
         im = f'<picture><source media="(max-aspect-ratio: 1/1)" data-srcset="{tall_set}" sizes="100vw">{im}</picture>'
+        if tall_alt:
+            im = im.replace('<img ', f'<img data-alt-wide="{alt}" data-alt-tall="{tall_alt}" ', 1)
+            im += ("<script>(function (i, q) { const f = () => { i.alt = q.matches ? i.dataset.altTall : i.dataset.altWide; }; f();"
+                   " q.addEventListener && q.addEventListener('change', f); })(document.currentScript.previousElementSibling.querySelector('img'),"
+                   " matchMedia('(max-aspect-ratio: 1/1)'))</script>")
     return f'<div class="hero-photo hs"{attrs}>' + im + ''.join(pts) + '</div>'
 
 
@@ -1995,7 +2009,7 @@ def rc_home(p, web):
     m = re.search(r'<div class="hero-photo hero-row">.*?</ul></div>', p.rest, re.S)
     assert m, 'rc_home: the row of fronts'
     pic = hotspot_hero(out[1200], size, HERO_ALT, HERO_POINTS if HOTSPOTS else [], HERO_WIDE, HERO_TALL, srcset,
-                       tall_set=tall_set, tall_size=tall_size, tall_points=HERO_POINTS_TALL)
+                       tall_set=tall_set, tall_size=tall_size, tall_points=HERO_POINTS_TALL if HOTSPOTS else [], tall_alt=HERO_ALT_TALL)
     p.rest = p.rest[:m.start()] + pic + p.rest[m.end():]
     p.sub('<section class="hero" id="top">', '<section class="hero hs-hero" id="top">')
     # on a wide screen the line stands in two, left of the speaker; in a tall one, in one over the sky
@@ -2040,7 +2054,9 @@ HEMI_LM = {'red': 272, 'orange': 280, 'amber': 301, 'green': 256, 'blue': 264, '
 # on /lighting as the room, and an "At the bar" view for the tints in it. More frames join ROOM as they pass.
 ROOM = [('renders/2026-11-11/barkhorn/product/planet-bar/bar-pendants.png', 'bar-pendants',
          'Five Hemispheres over a bar in Acid, Ember and Dust, two Cores on the counter, a wall of records behind',
-         {'dome': ['red', 'orange', 'amber'], 'orb': ['red', 'orange']})]
+         {'dome': ['red', 'orange', 'amber'], 'orb': ['red', 'orange']}),
+        ('renders/2026-11-11/barkhorn/product/planet-bar/core-bar-table.png', 'core-bar-table',   # the Core close-up, final (e833b933)
+         'Core in Ember on a bar table, lit, a wall of records behind', {'orb': ['red']})]
 # How Hemisphere lights (r32-lamps-final 8e07dda4): the cutaway with its labels, the words beside it, on every Hemisphere
 # page; the lamp over a table as a view on Ember's
 LIGHTS_DIR = 'renders/2026-11-12/barkhorn/lamp-site/legible/'
@@ -2089,7 +2105,7 @@ def rc_products(p, web):
             main = f'{f}-{n}-direct' if lamp == 'dome' else f'{f}-{n}'
             v, card = views(LAMP_FINAL.format(f=main), f'{f}-{n}', 1200)
             vs = {'hero': v, 'row': dict(r, th=row_th['src'])}
-            for pic, alt, tints in room[:1]:          # the bar, for the tints it shows
+            for pic, alt, tints in room:              # the bar, for the tints each frame shows (the later, closer frame wins)
                 if k in tints.get(lamp, []):
                     vs['bar'] = pic
             if lamp == 'dome':
@@ -2146,7 +2162,7 @@ def rc_products(p, web):
           "         ['cluster', 'In a group', () => 'Eight Hemispheres hung at different heights, one in each color.'],\n"
           "         ['row', 'All eight', () => 'Eight Hemispheres hung in a row, lit, one in each color.'],")
     p.sub("        ['row', 'All eight', () => 'Eight Core lamps in a row, lit, in spectrum order.'],",
-          "        ['bar', 'At the bar', () => 'Two Cores on a bar counter in Ember and Dust, five Hemispheres over them.'],\n"
+          "        ['bar', 'At the bar', c => c.k === 'red' ? 'Core in Ember on a bar table, a wall of records behind.' : 'Two Cores on a bar counter in Ember and Dust, five Hemispheres over them.'],\n"
           "        ['row', 'All eight', () => 'Eight Core lamps in a row, lit, in spectrum order.'],")
     if CORE_ROW_DAY:
         p.sub("        ['row', 'All eight', () => 'Eight Core lamps in a row, lit, in spectrum order.'],",
@@ -2197,6 +2213,7 @@ def rc_products(p, web):
 .room { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 16px; margin: 0 0 16px; max-width: 1200px }
 .room-pic { margin: 0 } .room-pic img { display: block; width: 100%; height: auto }
 .room .room-pic:only-child { max-width: 880px; width: 100%; margin-inline: auto }
+.room { align-items: center }
 .lights { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 64px); align-items: center;
   margin: clamp(48px, 7vw, 96px) 0 0; padding-top: clamp(32px, 4vw, 56px); border-top: 1px solid var(--rule) }
 .lights figure { margin: 0 } .lights img { display: block; width: 100%; height: auto; background: #1B1B1C }
@@ -2352,8 +2369,17 @@ def rc_marketing(p, web):
 .hero-sub {{ margin: 0 0 20px; max-width: 30ch; font-size: clamp(17px, 1.5vw, 21px); line-height: 1.35; color: #1C1A18 }}
 .hero-cta {{ display: flex; flex-wrap: wrap; gap: 12px; margin: 0 }}
 @media (max-aspect-ratio: 1/1) {{ .hs-hero .hero-more {{ position: static; padding-top: 20px }} .hero-sub {{ max-width: none }} }}
-@media (min-aspect-ratio: 1/1) {{ .hs-hero .hero-title, .hs-hero .hero-more {{ left: 48% !important; right: 2% !important }}
-  .hs-hero .hero-title .wrap, .hs-hero .hero-more .wrap {{ margin: 0 !important; padding-inline: 0 !important; max-width: none !important }} }}
+@media (min-aspect-ratio: 1/1) {{ .hs-hero .hero-title, .hs-hero .hero-more {{ left: 34% !important; right: 33% !important; text-align: center }}
+  .hs-hero .hero-title .wrap, .hs-hero .hero-more .wrap {{ margin: 0 !important; padding-inline: 0 !important; max-width: none !important }}
+  .hs-hero .hero-title {{ color: #F4F1EC !important }} .hs-hero .hero-title h1 {{ font-size: clamp(28px, 3.3vw, 52px) !important }}
+  .hs-hero .hero-more {{ top: calc(clamp(18px, 3.2vw, 48px) + 2 * 1.04 * clamp(28px, 3.3vw, 52px) + clamp(10px, 1.1vw, 18px)) !important }}
+  .hs-hero .hero-sub {{ color: #E9E4DC; margin: 0 auto 16px; max-width: 32ch; font-size: clamp(14px, 1.15vw, 18px) }}
+  .hs-hero .hero-cta {{ justify-content: center }}
+  .hs-hero .cta-solid {{ background: #F4F1EC; color: #1C1A18; border-color: #F4F1EC }} .hs-hero .cta-solid:hover {{ background: #FFF }}
+  .hs-hero .cta-line {{ background: transparent; color: #F4F1EC; border-color: #F4F1EC }} .hs-hero .cta-line:hover {{ background: rgb(244 241 236 / .12) }}
+  .hs-hero .cta-btn:focus-visible {{ outline-color: #F4F1EC }}
+  .hs-t {{ display: none !important }} }}
+@media (max-aspect-ratio: 1/1) {{ .hs-w {{ display: none !important }} }}
 .fam {{ display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px }}
 .fam > :nth-child(1) {{ grid-column: 1 / 3; grid-row: 1 / 3 }} .fam > :nth-child(2) {{ grid-column: 3 / 5; grid-row: 1 }}
 .fam > :nth-child(3) {{ grid-column: 3; grid-row: 2 }} .fam > :nth-child(4) {{ grid-column: 4; grid-row: 2 }}
