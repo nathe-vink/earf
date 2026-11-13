@@ -467,8 +467,8 @@
      25
     ],
     "scale": 0.5,
-    "albedo": 0.22,
-    "saturation": 0.35
+    "albedo": 0.3,
+    "saturation": 0.5
    },
    {
     "kind": "kit",
@@ -488,8 +488,8 @@
      140
     ],
     "scale": 2.0,
-    "albedo": 0.22,
-    "saturation": 0.35
+    "albedo": 0.3,
+    "saturation": 0.5
    },
    {
     "kind": "kit",
@@ -509,8 +509,8 @@
      200
     ],
     "scale": 0.55,
-    "albedo": 0.22,
-    "saturation": 0.35
+    "albedo": 0.3,
+    "saturation": 0.5
    },
    {
     "kind": "kit",
@@ -530,8 +530,8 @@
      80
     ],
     "scale": 0.45,
-    "albedo": 0.22,
-    "saturation": 0.35
+    "albedo": 0.3,
+    "saturation": 0.5
    },
    {
     "kind": "kit",
@@ -551,8 +551,8 @@
      300
     ],
     "scale": 1.8,
-    "albedo": 0.22,
-    "saturation": 0.35
+    "albedo": 0.3,
+    "saturation": 0.5
    }
   ]
  },
@@ -598,7 +598,7 @@
   "kind": "hdri",
   "polyhaven": "qwantani_dusk_2_puresky",
   "rotation_deg": 0.0,
-  "strength": 0.15,
+  "strength": 0.08,
   "res": "4k"
  },
  "finish": {
@@ -635,7 +635,7 @@
  "sun": {
   "azimuth_deg": -13.0,
   "elevation_deg": 7.0,
-  "irradiance": 8.5,
+  "irradiance": 8.0,
   "angle_deg": 1.0,
   "color": "#FFBA8A"
  }
