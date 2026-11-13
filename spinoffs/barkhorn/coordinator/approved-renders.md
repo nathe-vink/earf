@@ -1111,6 +1111,18 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    screws, no loose lead (in clear Fog a short black braided lead shows behind the horn's driver, as declared).
    THE SIXTEEN REPLACE THE CURRENT FRONTS AND HORN-BACKS ONE FOR ONE. Site lane told 01:35 to take them into batch 3
    (or one more push right after it). The 8 x 24 turn frames stay as they are until ordered.
+   01:45 UTC, site lane: BATCH 3 IS BUILT, in two pushes. Push 1 (the bar and Fog): r49-site-rc f02317038f,
+   dpl_Htp428Tc8C3tME4RihWy3HoMUtDx. Push 2 (the sixteen Tropos pictures; contains push 1): r49-site-rc 58db52d52c,
+   dpl_3o6CBS3ycgfTdemMF357FQmkw8tE, `https://earf-mnr4z9mjo-nathanielvink-4975s-projects.vercel.app` (sources
+   r47-site-next 5ba0ccf289, not pushed). `vercel.json` unchanged; no amplifier text change. Every front-derived file
+   and every horn-back is on the refreshed pictures. Still on an older Tropos: the turn frames; "The amplifier" (the
+   amp-plate picture, shown for every tint); the habitat pictures (Ice, Poison, Fog).
+   Coordinator's check of the preview (1440: home, `/lighting`, `/tropos`, `/colors/fog`, `/tropos/fog`,
+   `/#hemisphere-ember`, `/#core-dust`; 390: home and `/lighting`; one look each): PASSES. The places row shows Ice,
+   Poison and Fog; the bar pendants lead `/lighting` (alone in its row at desktop width, with empty space to its
+   right until more bar frames join it); "At the bar" is the second view on the lamps' pages; the eight Tropos cards
+   carry the refreshed fronts. One new share link made 01:46 (expires 14 Nov 00:45 UTC; it replaces the batch 2 link)
+   and sent to the owner in chat only.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
