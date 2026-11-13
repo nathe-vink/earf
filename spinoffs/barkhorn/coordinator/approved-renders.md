@@ -1254,6 +1254,25 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
      trunks have bark), but the drama is gone (no shafts, the woods as bright as the speaker). For s3 and s4: about
      three quarters of p2's mist with beams through gaps behind and above the speaker, the forest sky about 0.25,
      the stronger sun for the horn. s3 waits for Smoke p3 to free memory (due about 08:10).
+   08:26 UTC, biomes lane 90b5991b1b:
+   - POISON s6 (`poison-b-try-s6.jpg`): the sun through an enlarged canopy with holes (one 1.7 m over the speaker,
+     three for beams behind it, one on the trunk seen through the horn); sun 22, #FFF8EC, az -60, el 40; haze
+     anisotropy 0.3. Front 0.25, cone 0.46, woods 0.21 / 0.12, horn hue 101.7 at value 0.25; 62 clipped pixels (the
+     sun's glint on the horn's lip). Emitters: the sun and the sky; no board, flag or lamp.
+     Coordinator's check: PASSES AS THE DIRECTION (the speaker in a pool of sun under a canopy gap, deep green, dark
+     woods, the toadstools). Shown to the owner 08:33. For the final: the glint cured, the beams a little more
+     visible, the cone's crescent tamed; the horn at 0.25 accepted. The final waits for the coordinator's word.
+   - SMOKE p3 failed (front 0.046; the trail a dense brown jet ending in a blob). Cause found by the lane: a DEFAULT
+     8 x 6 m BLACK FLAG behind the camera and a side card that the habitat script puts into every habitat not
+     listed in FLAG, shading the foreground and the front from the low sun. Never declared in any emitter list. They
+     are in Ember (e4 included), Acid and Dust. p4: no flag or cards, the trail thinner.
+   THE RULE ON FLAGS, CARDS AND BOARDS (coordinator, 08:31): a passive modifier is allowed only if it is out of frame,
+   does not stand between the sun and anything in frame, shows no recognizable shape mirrored in the speaker, and is
+   listed in the report under "passive" with its size and place. No undeclared default: it comes out of the script.
+   Smoke: none. Ember: e4 to be rendered once with no flag and compared (the flag is the suspected cause of the black
+   foreground); the no-flag frame is Ember if the red stays deep. Acid: overcast, the flag kept and listed. Dust:
+   kept only if it shades nothing, and listed. The lane to state what Ice's and Fog's finals and the old Poison final
+   carried. Order after Smoke p4: the Acid pair, Dust; the Poison and Ember finals on the coordinator's word.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
