@@ -2167,10 +2167,13 @@ def rc_products(p, web):
     p.rest = p.rest[:m.end(1)] + '<div class="room">' + roomfig + '</div>' + rows_fig('page') + p.rest[m.end(1):]
     # How it lights: below the particulars on every Hemisphere page
     cut = save(LIGHTS_DIR + 'hemisphere-ember-cutaway.png', 'hemisphere-ember-cutaway.webp', 1200, 88)
+    cut_phone = save(LIGHTS_DIR + 'hemisphere-ember-cutaway-phone.png', 'hemisphere-ember-cutaway-phone.webp', 1200, 88)   # larger labels (3b2690f4)
     p.sub('    <div id="p-company"></div>',
-          f'    <section class="lights" id="p-lights" aria-labelledby="p-lights-h" hidden><figure><img src="{cut["src"]}" width="{cut["w"]}" '
+          f'    <section class="lights" id="p-lights" aria-labelledby="p-lights-h" hidden><figure><picture>'
+          f'<source media="(max-width: 860px)" srcset="{cut_phone["src"]}" width="{cut_phone["w"]}" height="{cut_phone["h"]}">'
+          f'<img src="{cut["src"]}" width="{cut["w"]}" '
           f'height="{cut["h"]}" loading="lazy" alt="Hemisphere in Ember, cut in half: the white diffuser, the clear shell tinted outside, the '
-          f'black center, the LEDs on a ring facing up, and warm white light going down"><figcaption id="p-lights-note"></figcaption></figure>'
+          f'black center, the LEDs on a ring facing up, and warm white light going down"></picture><figcaption id="p-lights-note"></figcaption></figure>'
           f'<div><h2 id="p-lights-h">How it lights</h2><p>{LIGHTS_WORDS}</p></div></section>\n    <div id="p-company"></div>')
     p.sub("page = h; showMain('pdp'); renderProduct(PBY[m[1]], keyOf(m[2]));",
           "page = h; showMain('pdp'); renderProduct(PBY[m[1]], keyOf(m[2]));\n"
