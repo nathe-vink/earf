@@ -1522,6 +1522,16 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
      habitat finals, the FA123's text and backs. The site lane was asked first whether its held commits survived
      (disconnected since 03:01).
    FA123 batch: Ember's and Dust's backs pushed; the six other backs and "The amplifier" rendering.
+   23:32 UTC, site lane: BATCH 4 PUSHED AND READY: r49-site-rc ec3fe64575 (pushed 23:28), dpl_Cwgx6EizeZT1zPmECSFiekddyCEW,
+   `https://earf-9lbwqu0jc-nathanielvink-4975s-projects.vercel.app`. Its held commits had survived (cc9c157745,
+   3f39e23856). It carries: "How it lights", the "Over a table" view and the phone cutaway on the Hemisphere pages;
+   the build switch; the bar hero on desktop (16:9, uncropped; headline, line and buttons centred in light ink
+   inside x 34-67 %, within y 5-36 % at 1280, 1440 and 1920; phones keep Ice); the Core close-up as "At the bar" on
+   Core in Ember and the second frame of the /lighting room. The lane's checks: sweep clean, Lighthouse 99/99/99,
+   layout shift 0. Code on r47-site-next d4563a7f15.
+   23:37 UTC, coordinator's check on the preview (home at 1440 and 390, Hemisphere in Ember, Core in Ember, /lighting):
+   PASSED. One share link made (it expires 14 Nov 22:34 UTC) and sent to the owner in chat only. The site lane may
+   push r47-site-next (it carries the build switch); the coordinator checks that it made no deployment.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
