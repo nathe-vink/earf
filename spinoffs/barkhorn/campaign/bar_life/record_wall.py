@@ -195,10 +195,18 @@ def build(bpy, name, p, kit):
         kinds[c] = 'flat'
     full_counts, shares = [], {'lp': 0, 'gate': 0, 'thin': 0, 'box': 0}
     eye = p.get('eye_z', 1.6)
+    plain = {tuple(c) for c in p.get('plain', [])}      # (the coordinator, 23:14: a cell cut by the hero's edge: plain records)
+    R0 = rnd
     for (i, k) in sorted(cells):
+        rnd = R0
         xa = x0w + i * cell + 0.0115; xb = x0w + (i + 1) * cell - 0.0115; z = z0w + k * cell + 0.0002
         kind = kinds.get((i, k), 'full')
-        if kind == 'other':
+        if kind == 'other' and (i, k) in plain:
+            # records from a stream of its own, so the rest of the wall (and the other cells' contents) is unchanged
+            other.append(None); kind = 'full'; rnd = random.Random(p.get('seed', 1313) * 1000 + i * 10 + k)
+            print('RECORD WALL plain records in cell', (i, k))
+        elif kind == 'other':
+            print('RECORD WALL other cell', (i, k), len(other))
             other.append((xa, xb, z)); continue
         W = xb - xa
         base_y = yf + 0.012 + rnd.uniform(0.0, 0.006)
@@ -240,6 +248,7 @@ def build(bpy, name, p, kit):
                 B.box(xl + t * 0.28, xr - t * 0.28, y0 + 0.004, y1 - 0.004, z + h - 0.003, z + h + 0.0004, mi=2, ang=a, pivot=piv)
         if kind == 'full':
             full_counts.append(len(recs))
+    rnd = R0
     bmesh.ops.recalc_face_normals(B.bm, faces=B.bm.faces[:])
     me = bpy.data.meshes.new(name); B.bm.to_mesh(me); B.bm.free()
     for m in mats:
@@ -247,7 +256,7 @@ def build(bpy, name, p, kit):
     ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
     out = [ob] + _others(bpy, name, other, rnd, yf, yb, idx, ncol, p.get('eye_z', 1.6))
     n = sum(shares.values())
-    STATS.update(cells=len(cells), full=len(full_counts), part=n_part, flat=n_flat, other=len(other),
+    STATS.update(cells=len(cells), full=len(full_counts), part=n_part, flat=n_flat, other=len([c for c in other if c]),
                  per_full=(min(full_counts), round(sum(full_counts) / len(full_counts), 1), max(full_counts)) if full_counts else None,
                  shares={k: round(v / n, 3) for k, v in shares.items()}, records=n)
     print('RECORD WALL', json.dumps(STATS))
@@ -273,7 +282,10 @@ def _others(bpy, name, cells, rnd, yf, yb, idx, ncol, eye):
         for f in {f for v in g['verts'] for f in v.link_faces}:
             f.material_index = used.index(m)
     kinds = ['seven', 'books', 'boxes', 'face']
-    for j, (xa, xb, z) in enumerate(cells):
+    for j, c_ in enumerate(cells):
+        if c_ is None:                                       # a cell made plain records (build's `plain`)
+            continue
+        xa, xb, z = c_
         kind = kinds[j % 4]
         y0 = yf + 0.02
         if kind == 'seven':                                  # a 7-inch box, open top, singles in it; singles beside
