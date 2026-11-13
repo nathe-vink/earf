@@ -1351,6 +1351,43 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
      lost and restarted 20:03 (about 65 min); the hero's two patches had not started. The rebuilt detail-pass
      package is intact and every frame loads it. Then the hero patches and report, the Mantle red dot, the
      portrait, then the FA123 batch. Both lanes now set a check-in at each render's expected finish.
+   20:17 UTC, 13 Nov: THE OWNER on the Ember test (e4 without the flag), the Poison test (s6) and the full-size hero:
+   "The rocks on ember look out of place compared to the environment. Poison is looking better. Overall it seems like
+   the biome shots need some texture over the whole image or something that will make the speaker look like it's a
+   part of the environment. There's probably photography best practices for blending photoshopped objects with an
+   image. Bar hero looks good but the records are obviously fake."
+   - THE HERO'S FRAMING, LIGHT AND PRODUCTS ARE APPROVED. THE RECORD WALL IS NOT: it is rebuilt for the whole room.
+     Coordinator's reading of a 2x crop: 35 to 45 stripes a cell, each 8 to 15 mm (a real cell holds 75 to 95 LPs);
+     flat pastel stripes with white dashes; all dead vertical, one height, one depth; no wear, sleeves, gaps or
+     leaning groups. The spec sent to the speaker lane 20:19 (real thicknesses, heights, depths and leans; spine
+     colours mostly white, cream and black; invented small type; wear; a third in plastic sleeves; 1 cell in 6 part
+     full; 10 to 15 % of cells holding other things). The hero's two patches are cancelled; one test crop of the
+     hero (x 0.39-0.94, y 0.38-0.72) comes first, then the hero in full, the Mantle frame, the portrait, then
+     bar-backbar and bar-pendants once more with the new wall, then the FA123 batch.
+   - THE HABITATS: THE SPEAKER READS AS PASTED IN. Coordinator's reading of s6 and e4: a cleared flat bright pad with
+     nothing touching the base; even front light, the place's light pattern not crossing the speaker, its shadow
+     hidden behind it; nothing of the place in front of it; deeper blacks and sharper edges than anything near it;
+     no camera over the frame.
+   THE SEATING RULES (coordinator, 20:17; every habitat from now on):
+     S1 ground: no cleared pad; the place's ground cover runs up to the base and gathers against it; small things
+        of the place may overlap the bottom rail by up to 3 % of the speaker's height, never ports, woofer or horn.
+     S2 light: the sun from the front side, 45 to 75 degrees off the camera's axis, so the shadow falls on ground in
+        frame and the sun's pattern crosses speaker and ground alike; front 0.30 or more, cone 0.22 or more.
+     S3 the acrylic's shadow carries the tint (the renderer's own transmission; never a lamp or a painted patch).
+     S4 air: some of the place's mist, steam, dust or shafts lies between the camera and the speaker.
+     S5 reflections: the glossy faces show the place.
+     S6 camera: focus on the speaker, one f-stop for everything.
+     S7 finish: one finish over the whole frame, no masks: `spinoffs/barkhorn/coordinator/finish.py` (03af2128c7;
+        lens softness, bloom, a capped veil, vignette, saturation 0.94, grain 0.02); every frame delivered raw and
+        finished; the strength is set by the coordinator for all habitats at once. Tried on the s6 and e4 proxies:
+        the cabinet's hue moves about 1 degree, its saturation -0.04 to -0.06.
+     S8 honest as before (sun, sky and the place's own natural light seen in frame; passives declared; audit 0/0).
+   - EMBER: the three rocks are out; nothing in the frame that a lava field would not have (crust, cinders, ash,
+     steam). POISON: s6 stays the direction.
+   - ORDER FOR THE BIOMES LANE: Smoke p4 stopped; the Acid pair and Dust out of the queue; no final of any habitat
+     until the seating is proven. Tests at proxy size: Poison s7 (s6 with S1-S6), Ember e5 (rocks out, S1-S6),
+     then Smoke p5 (p4's layout with S1-S6). Ice and Fog are looked at against the rules once the recipe is proven.
+   - Shown to the owner 20:17: the s6 proxy before and after the finish alone, as "the smaller half of the fix".
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
