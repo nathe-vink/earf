@@ -1471,6 +1471,14 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    - SMOKE p5 ordered after e15: p4's layout built by the seating rules (ash, cinders and thrown earth against the
      base; the low sun behind to one side or the crater's fire as the side light; lit smoke behind; the speaker
      reading first).
+   22:05 UTC, biomes lane 21da6bf250: `ember-d-seat-e17.jpg` (best of e15-e17; raw and finished): the crack in front
+   widened to a lava stream 0.45 m wide about 1 m out; the lava's gain 3.4, the sky 0.20; front 0.270, cone 0.171;
+   darkest 1 % speaker 0.067, ground 0.047; 297 px clipped on the lava's cores; colour and ropes as e14. Emitters:
+   sun (130 off axis, el 10), sky, the lava with the stream, the sparks; passive none. Poison's final note is staged
+   (the sun patch 0.3 m higher for a dapple on the horn).
+   22:05 UTC, coordinator's check: EMBER e17 PASSES (the stream in front lights the woofer with the place's own light;
+   the speaker reads; the clipped cores may stay). It is the basis for Ember's final. Shown to the owner 22:05.
+   BOTH FINALS (Poison from s18, Ember from e17) WAIT FOR THE OWNER'S YES ON THE SEATED LOOK. Smoke p5 is rendering.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
