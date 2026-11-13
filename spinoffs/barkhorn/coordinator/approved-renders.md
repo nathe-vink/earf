@@ -1041,6 +1041,18 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    The hero test from the bar (`bar_hero`, 1600x900, frontal, both bays whole, Mantle between the bays under the
    cluster) is rendering; then the rest of the studio refresh (six fronts done, audit 0/0), the Mantle frame,
    `bar-backbar` and `core-bar-table` with every fix, the portrait last.
+   OWNER, 13 Nov ~00:25 UTC (verbatim): "Oh for the build switch I thought you meant amp 123 instead of 122".
+   -> HIS "YES BUILD SWITCH" WAS A YES TO THE FA123, NOT TO THE VERCEL BUILD SWITCH. The coordinator's label was
+      unclear and the vercel.json change went in on a yes that was not given: on r46-owner-notes (b8a1988383, pushed)
+      and, at the coordinator's request, on r33-speaker-horn (3523b66bb, pushed) and in the site lane's unpushed batch 3.
+      Main, production and every Vercel dashboard setting are untouched. Stopped at once: the site lane told to take
+      the change out of batch 3; the speaker lane told to leave its pushed change as is and not spread it; the owner
+      told plainly and asked "keep or undo". Nothing more is done to that file until he answers. If "undo": the
+      coordinator reverts its own branch and the speaker lane reverts its own.
+   -> THE FA123: YES (the owner). The speaker lane is to check first (fit of the plate, cutout, depth and holes; the
+      woofer's power, excursion and thermal limit with two channels bridged and our high-pass; the horn driver on the
+      third channel; heat in the compartment; the cost, about +$158 a pair by the 9 Nov note) and report before any CAD
+      change. If a check fails the owner decides again. The site's amplifier line changes only after that.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
