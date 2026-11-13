@@ -1455,6 +1455,22 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    shelves 62.4 before, 96.0 now, target 58-72; the speaker bay 34.2 and 34.3, unchanged). The same crop once more.
    The hero in full, the Mantle frame and the portrait start only on the coordinator's word, after the owner's yes
    on the wall; meanwhile the lane does the FA123 batch.
+   21:49 UTC, biomes lane 6437dd3cb3: proxies, raw and finished.
+   - `poison-b-seat-s18.jpg` (best of s15-s18): sun 80 off axis, el 38, through a 35 %-leafy opening over the speaker
+     and its shadow side; it rakes the front in dapples and lights the side face and top; beams behind; haze from
+     2.5 m in front back; the camera 0.2 m higher. Front 0.251, cone 0.416; darkest 1 % speaker 0.055, ground 0.024;
+     the nearest 15 % of the frame 0.125; the shadow sideways to the right, 1.66 m, a darker band on lit litter.
+   - `ember-d-seat-e14.jpg` (best of e11-e14): white balance 5400 K, contrast 0.12, saturation +0.12, bloom 0.08; a
+     thinner dusk-coloured haze; the ropes broken (about 85 % flat plates); a 0.22 m crack 0.6-0.9 m in front of the
+     base, glowing in frame, but the raised plate's edge hides it from the woofer: front 0.238, cone 0.125.
+   21:50 UTC, coordinator's check:
+   - POISON s18 PASSES: it reads as the speaker standing in the woods, with s6's richness kept. Shown to the owner
+     21:50, before (s6) and after. THE FINAL WAITS FOR THE OWNER'S YES. For the final: a dapple on the horn's flare.
+   - EMBER e14: the colour and the ropes are right. Shown to the owner 21:50 as the richer state of the direction.
+     e15: the plate in front lowered so the crack's glow faces the woofer (cone 0.16 or more, front 0.25 or more).
+   - SMOKE p5 ordered after e15: p4's layout built by the seating rules (ash, cinders and thrown earth against the
+     base; the low sun behind to one side or the crater's fire as the side light; lit smoke behind; the speaker
+     reading first).
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
