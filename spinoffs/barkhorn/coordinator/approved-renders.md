@@ -1211,6 +1211,17 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    against the pale sky, turned about 20 degrees, front 0.18 or more, the fire rimming its edge; charred ground,
    thrown earth and embers, nothing in front of the base; the trail readable at a glance. About two hours a try;
    queued after Ember p2. Poison p2 is rendering, then the Acid wide preview, then Ember p2.
+   05:33 UTC, biomes lane 8901d5e4fd: POISON b PROXY p2 (`renders/2026-11-12/barkhorn/habitats/poison-b-proxy-p2.jpg`):
+   the camera lower and closer (the speaker about 43 % of the frame's height), low sun shafts through mist from
+   behind and right, ivy-dark trunks either side, red toadstools beside and behind the speaker. Horn hue 61-72 and
+   value 0.54-0.59 against the studio Poison's 93 and 0.67-0.75 (the warm sun #FFDCA0 and the haze). Emitters: the sun
+   (5, az -168, el 12) and the mossy_forest sky (0.35); audit and scatter clean.
+   Coordinator's check beside the 22 Oct picture: the drama is back and this is the direction; shown to the owner
+   05:36 as a test. Not yet the picture: milky with mist, the gap behind the speaker blown white, the front in
+   shadow. One more proxy ordered: about half the mist; a dark trunk or deep woods behind the speaker's upper half;
+   the sun to the side-rear with shafts on a diagonal, a declared passive reflector if needed (front 0.20 or more);
+   the three-quarter view; a cooler sun (#FFF0D0), the horn at hue 85-100 and value 0.5 or more; one near spray of
+   ivy in focus with its leaves in threes; the toadstools kept.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
