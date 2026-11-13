@@ -539,53 +539,113 @@ def build(frame, samples, scale):
             ob.location = (c[0], cy, c[2])
 
     def room(tz):
-        """A dim room for the in-use picture (2026-11-12): a 4.4 x 4.6 m box 2.4 m high (floor, ceiling, four walls, all
-        matte), a pale oak table (1.6 x 0.9, its top at tz), a white cup and an open book. Procedural materials only."""
-        wall = SC.principled('wall', '#8A867F', 0.9); floor_ = SC.principled('floor', '#4A3D33', 0.6)
+        """A dim room for the in-use picture (2026-11-12; pass 2 2026-11-13, the coordinator: real oak, a printed book, a
+        stoneware cup, the room placed). A 4.4 m wide room, 2.4 m high, its far wall 0.85 m behind the table; the table
+        (1.6 x 0.9, its top at tz) four boards of a scanned oak (Poly Haven oak_veneer_01, CC0, at its real size, the
+        grain along the boards) with 1.5 mm joints; a chair (Poly Haven dining_chair_02, CC0) across it; the walls a
+        scanned plaster (beige_wall_001) toned warm grey, the floor scanned oak planks. The book is modelled here, its pages
+        printed from lamp-site-meshes/book (text written for this repo); the cup a speckled stoneware, revolved."""
+        sys.path.insert(0, os.path.join(HERE, '..', '..', '..', 'studio', 'engine'))
+        import assets as AS
+        yw = 1.30
+        wallm = AS.pbr(bpy, 'beige_wall_001', '1k', tint='#D3CDC2', tint_mix=0.45, name='wall')
+        floorm = AS.pbr(bpy, 'oak_wood_planks', '1k', name='floor')
         ceil = SC.principled('ceiling', '#B9B6B0', 0.95)
-        SC.box_ob('floor', -2.2, -2.6, -0.02, 2.2, 2.0, 0.0, floor_)
-        SC.box_ob('ceiling', -2.2, -2.6, 2.4, 2.2, 2.0, 2.42, ceil)
-        SC.box_ob('wall-back', -2.2, 2.0, 0.0, 2.2, 2.02, 2.4, wall)
-        SC.box_ob('wall-front', -2.2, -2.62, 0.0, 2.2, -2.6, 2.4, wall)
-        SC.box_ob('wall-left', -2.22, -2.6, 0.0, -2.2, 2.0, 2.4, wall)
-        SC.box_ob('wall-right', 2.2, -2.6, 0.0, 2.22, 2.0, 2.4, wall)
-        # pale oak: a wave texture's grain along x, distorted, between two oak tones; oiled (roughness 0.45)
-        oak = bpy.data.materials.new('oak'); oak.use_nodes = True; nt = oak.node_tree
-        bs = nt.nodes['Principled BSDF']; bs.inputs['Roughness'].default_value = 0.45
-        tc = nt.nodes.new('ShaderNodeTexCoord'); mp = nt.nodes.new('ShaderNodeMapping'); mp.inputs['Scale'].default_value = (1.0, 14.0, 1.0)
-        wv = nt.nodes.new('ShaderNodeTexWave'); wv.wave_type = 'BANDS'; wv.bands_direction = 'Y'
-        wv.inputs['Scale'].default_value = 3.0; wv.inputs['Distortion'].default_value = 6.0; wv.inputs['Detail'].default_value = 4.0
-        cr = nt.nodes.new('ShaderNodeValToRGB'); cr.color_ramp.elements[0].color = (*SC.hex_lin('#C8A57A'), 1); cr.color_ramp.elements[1].color = (*SC.hex_lin('#DCC29C'), 1)
-        nt.links.new(tc.outputs['Object'], mp.inputs['Vector']); nt.links.new(mp.outputs['Vector'], wv.inputs['Vector'])
-        nt.links.new(wv.outputs['Fac'], cr.inputs['Fac']); nt.links.new(cr.outputs['Color'], bs.inputs['Base Color'])
-        SC.box_ob('table-top', -0.8, -0.45, tz - 0.03, 0.8, 0.45, tz, oak, bevel=0.003)
+        SC.box_ob('floor', -2.2, -2.6, -0.02, 2.2, yw, 0.0, floorm)
+        SC.box_ob('ceiling', -2.2, -2.6, 2.4, 2.2, yw, 2.42, ceil)
+        SC.box_ob('wall-back', -2.2, yw, 0.0, 2.2, yw + 0.02, 2.4, wallm)
+        SC.box_ob('wall-front', -2.2, -2.62, 0.0, 2.2, -2.6, 2.4, wallm)
+        SC.box_ob('wall-left', -2.22, -2.6, 0.0, -2.2, yw, 2.4, wallm)
+        SC.box_ob('wall-right', 2.2, -2.6, 0.0, 2.22, yw, 2.4, wallm)
+        # the top: four boards 223.9 wide with 1.5 joints, each its own cut of the scan (the grain turned along x, each
+        # board's mapping shifted so no two repeat), the long edges eased 1.5; oiled (the scan's own roughness)
+        oak0 = AS.pbr(bpy, 'oak_veneer_01', '2k', name='oak')
+        bw = (0.9 - 3 * 0.0015) / 4
+        for k in range(4):
+            m = oak0.copy(); m.name = f'oak-{k}'
+            mp = next(n for n in m.node_tree.nodes if n.type == 'MAPPING')
+            mp.inputs['Rotation'].default_value = (0.0, 0.0, math.pi / 2)
+            mp.inputs['Location'].default_value = (0.37 * k + 0.11, 0.53 * k, 0.0)
+            y0 = -0.45 + k * (bw + 0.0015)
+            SC.box_ob(f'table-top-{k}', -0.8, y0, tz - 0.03, 0.8, y0 + bw, tz, m, bevel=0.0015)
+        apron = oak0.copy(); apron.name = 'oak-apron'
+        SC.box_ob('table-apron', -0.72, -0.37, tz - 0.11, 0.72, 0.37, tz - 0.03, apron)
         for lx in (-0.74, 0.70):
-            for ly in (-0.39, 0.35):
-                SC.box_ob(f'table-leg', lx, ly, 0.0, lx + 0.04, ly + 0.04, tz - 0.03, oak)
-        # the cup: a white glazed mug, revolved, 80 across, 90 high, and a handle
-        glaze = SC.principled('glaze', '#F1EFEA', 0.12)
-        prof = [(0.0, 0.0), (0.038, 0.0), (0.040, 0.004), (0.040, 0.090), (0.0365, 0.090), (0.0365, 0.008), (0.0, 0.008)]
+            for ly in (-0.40, 0.36):
+                SC.box_ob('table-leg', lx, ly, 0.0, lx + 0.04, ly + 0.04, tz - 0.03, apron)
+        # the chair across the table, pushed in under it as a chair is left, its back in the lamp's own spill
+        try:
+            ch = AS.place(bpy, 'dining_chair_02', '1k', location=(-0.02, 0.58, 0.0), rotation_deg=(0, 0, 180), scale=1.0)
+            ch.name = 'chair'
+        except Exception as e:
+            print('CHAIR not placed:', e)
+        # the cup: stoneware, 82 across, 92 high, 4.5 walls, a foot; an oatmeal glaze speckled with iron; coffee in it
+        gl = bpy.data.materials.new('stoneware'); gl.use_nodes = True; nt = gl.node_tree; bs = nt.nodes['Principled BSDF']
+        bs.inputs['Roughness'].default_value = 0.32
+        tc = nt.nodes.new('ShaderNodeTexCoord'); nz = nt.nodes.new('ShaderNodeTexNoise'); nz.inputs['Scale'].default_value = 900.0
+        nz.inputs['Detail'].default_value = 2.0
+        cr = nt.nodes.new('ShaderNodeValToRGB'); cr.color_ramp.interpolation = 'CONSTANT'
+        cr.color_ramp.elements[0].color = (*SC.hex_lin('#5B4A3B'), 1); cr.color_ramp.elements[1].position = 0.30
+        cr.color_ramp.elements[1].color = (*SC.hex_lin('#D2C8B5'), 1)
+        n2 = nt.nodes.new('ShaderNodeTexNoise'); n2.inputs['Scale'].default_value = 40.0
+        mx = nt.nodes.new('ShaderNodeMix'); mx.data_type = 'RGBA'; mx.blend_type = 'MULTIPLY'; mx.inputs['Factor'].default_value = 0.12
+        nt.links.new(tc.outputs['Object'], nz.inputs['Vector']); nt.links.new(nz.outputs['Fac'], cr.inputs['Fac'])
+        nt.links.new(tc.outputs['Object'], n2.inputs['Vector']); nt.links.new(cr.outputs['Color'], mx.inputs['A'])
+        nt.links.new(n2.outputs['Color'], mx.inputs['B']); nt.links.new(mx.outputs['Result'], bs.inputs['Base Color'])
+        prof = [(0.0, 0.003), (0.030, 0.003), (0.032, 0.0), (0.035, 0.0), (0.037, 0.006), (0.041, 0.088), (0.0405, 0.092),
+                (0.0375, 0.092), (0.0365, 0.088), (0.0335, 0.012), (0.0, 0.010)]
         bm = bmesh.new(); vs = [bm.verts.new((r, 0.0, z)) for r, z in prof]
         for i in range(len(vs) - 1):
             bm.edges.new((vs[i], vs[i + 1]))
-        bmesh.ops.spin(bm, geom=bm.verts[:] + bm.edges[:], cent=(0, 0, 0), axis=(0, 0, 1), angle=2 * math.pi, steps=64, use_merge=True)
+        bmesh.ops.spin(bm, geom=bm.verts[:] + bm.edges[:], cent=(0, 0, 0), axis=(0, 0, 1), angle=2 * math.pi, steps=96, use_merge=True)
         bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=1e-6); bmesh.ops.recalc_face_normals(bm, faces=bm.faces[:])
         for f in bm.faces:
             f.smooth = True
-        me = bpy.data.meshes.new('cup'); bm.to_mesh(me); bm.free(); me.materials.append(glaze)
-        cup = bpy.data.objects.new('cup', me); bpy.context.scene.collection.objects.link(cup); cup.location = (0.26, -0.16, tz)
-        bpy.ops.mesh.primitive_torus_add(major_radius=0.024, minor_radius=0.0055, location=(0.26 + 0.044, -0.16, tz + 0.047), rotation=(math.pi / 2, 0, 0))
-        hd = bpy.context.object; hd.name = 'cup-handle'; hd.data.materials.append(glaze); hd.select_set(False)
-        # the book: open, a 230 x 155 page spread on its cloth cover, the two blocks of pages rising slightly from the spine
-        cloth = SC.principled('cloth', '#2F3B4A', 0.85); pages = SC.principled('pages', '#EEE9DE', 0.8)
-        bk = (-0.20, -0.08); rot = math.radians(-14)
-        objs = [SC.box_ob('book-cover', -0.162, -0.118, 0.0, 0.162, 0.118, 0.003, cloth)]
-        for sgn in (-1, 1):   # each block's centre 78 out from the spine, tipped 3 deg so it rises toward the spine
-            ob = SC.box_ob('book-pages', 0.002 * sgn if sgn > 0 else -0.154, -0.112, 0.003, 0.154 if sgn > 0 else -0.002, 0.112, 0.013, pages)
-            ob.rotation_euler = (0.0, math.radians(3.0) * sgn, 0.0); objs.append(ob)
+        me = bpy.data.meshes.new('cup'); bm.to_mesh(me); bm.free(); me.materials.append(gl)
+        cx, cy_ = 0.26, -0.16
+        cup = bpy.data.objects.new('cup', me); bpy.context.scene.collection.objects.link(cup); cup.location = (cx, cy_, tz)
+        bpy.ops.mesh.primitive_torus_add(major_radius=0.023, minor_radius=0.0058, major_segments=64, minor_segments=24,
+                                         location=(cx + 0.046, cy_, tz + 0.050), rotation=(math.pi / 2, 0, 0))
+        hd = bpy.context.object; hd.name = 'cup-handle'; hd.scale = (0.85, 1.22, 1.0); hd.data.materials.append(gl)
+        for f in hd.data.polygons:
+            f.use_smooth = True
+        hd.select_set(False)
+        cof = SC.principled('coffee', '#22150D', 0.04)
+        bpy.ops.mesh.primitive_circle_add(vertices=96, radius=0.0362, fill_type='NGON', location=(cx, cy_, tz + 0.068))
+        co_ = bpy.context.object; co_.name = 'cup-coffee'; co_.data.materials.append(cof); co_.select_set(False)
+        # the book: hardcover, open; cloth boards, a page block each side, the top pages rising from the gutter
+        cloth = SC.principled('cloth', '#2E3A48', 0.85, bump=(3000.0, 0.15))
+        edge = SC.principled('page-edge', '#E8E2D4', 0.8)
+        bk = (-0.20, -0.07); rot = math.radians(-14); objs = []
+        Wp, Hp = 0.150, 0.222
+        for sgn in (-1, 1):
+            objs.append(SC.box_ob('book-board', 0.0015 * sgn if sgn > 0 else -0.162, -0.118, 0.0, 0.162 if sgn > 0 else -0.0015, 0.118, 0.003, cloth))
+            img = bpy.data.images.load(os.path.join(HERE, 'lamp-site-meshes', 'book', 'page-%s.jpg' % ('R' if sgn > 0 else 'L')))
+            pm = bpy.data.materials.new('page-%d' % sgn); pm.use_nodes = True; nt = pm.node_tree; bs = nt.nodes['Principled BSDF']
+            bs.inputs['Roughness'].default_value = 0.75
+            it = nt.nodes.new('ShaderNodeTexImage'); it.image = img; nt.links.new(it.outputs['Color'], bs.inputs['Base Color'])
+            bm = bmesh.new(); uvl = bm.loops.layers.uv.new(); nu, nv = 40, 12
+            grid = []
+            for i in range(nu + 1):
+                d_ = Wp * i / nu
+                z_ = 0.0045 + 0.0105 * (1 - math.exp(-d_ / 0.012)) - 0.006 * (d_ / Wp) ** 2
+                grid.append([bm.verts.new((sgn * (0.002 + d_), -Hp / 2 + Hp * j / nv, z_)) for j in range(nv + 1)])
+            for i in range(nu):
+                for j in range(nv):
+                    q = (grid[i][j], grid[i + 1][j], grid[i + 1][j + 1], grid[i][j + 1])
+                    f = bm.faces.new(q if sgn > 0 else q[::-1]); f.smooth = True
+                    for lp in f.loops:
+                        ii = next(a for a in range(nu + 1) if lp.vert in grid[a]); jj = grid[ii].index(lp.vert)
+                        u_ = ii / nu if sgn > 0 else 1 - ii / nu
+                        lp[uvl].uv = (u_, jj / nv)
+            me = bpy.data.meshes.new('book-pages'); bm.to_mesh(me); bm.free(); me.materials.append(pm); me.materials.append(edge)
+            ob = bpy.data.objects.new('book-pages', me); bpy.context.scene.collection.objects.link(ob)
+            sm = ob.modifiers.new('block', 'SOLIDIFY'); sm.thickness = 0.0095; sm.offset = -1.0; sm.material_offset_rim = 1
+            sm.material_offset = 1
+            objs.append(ob)
         for ob in objs:
-            ob.location = (ob.location.x * math.cos(rot) - ob.location.y * math.sin(rot) + bk[0],
-                           ob.location.x * math.sin(rot) + ob.location.y * math.cos(rot) + bk[1], ob.location.z + tz)
+            lx, ly = ob.location.x, ob.location.y
+            ob.location = (lx * math.cos(rot) - ly * math.sin(rot) + bk[0], lx * math.sin(rot) + ly * math.cos(rot) + bk[1], ob.location.z + tz)
             ob.rotation_euler[2] += rot
         fw = float(os.environ.get('ROOM_FILL', '0'))
         if fw > 0:   # declared: a faint warm ceiling panel, as a room's own spill
@@ -797,11 +857,13 @@ def build(frame, samples, scale):
         # in-use frame is probed on its own table: the room fill, the cup and the book removed, the table's top a grey
         # card (the paper's #9A9A9A, so its albedo is known); the walls, floor and ceiling stay (their bounce is real)
         for o in list(sc.objects):
-            if o.name in ('key', 'fill', 'kicker', 'room-fill', 'cup', 'cup-handle') or o.name.startswith('book-'):
+            if o.name in ('key', 'fill', 'kicker', 'room-fill') or o.name.startswith(('book-', 'cup')):
                 bpy.data.objects.remove(o, do_unlink=True)
         z0_ = 0.0
         if frame == 'inuse':
-            z0_ = 0.75; tt_ = bpy.data.objects['table-top']; tt_.data.materials.clear(); tt_.data.materials.append(paper)
+            z0_ = 0.75
+            for tt_ in [o for o in sc.objects if o.name.startswith('table-top')]:
+                tt_.data.materials.clear(); tt_.data.materials.append(paper)
         if sc.world:
             for n_ in sc.world.node_tree.nodes:
                 if n_.type == 'BACKGROUND':

@@ -13,3 +13,12 @@ Lux on a table 0.5 m below the rim (LUXPROBE, LUX_SPAN=1.4, 512 samples, 40 mm s
 
 Picture B's lights: the lamp's 24 LED faces, and a declared 6 W ceiling panel (room-fill) for the walls; at the
 pool it adds about 2 % (the table's display value 0.300 with it at 6 W, 0.293 at 2 W). The camera at 4000 K, EV -0.5.
+
+Pass 2 of picture B (2026-11-13: scanned oak boards, a printed book, a stoneware cup, a chair pushed in across the
+table; the lamp, height, camera, exposure and the 6 W fill unchanged). The table re-read the same way (a grey card):
+                              centre   0.3 m off   0.6 m off
+  picture B, pass 2             333        226          71
+  (within 3 % of pass 1. The ring r 0.3-0.35 m reads 215 on the near half, as before, and 130 on the far half, where
+   the chair's back stands between the probe's camera and the table: a measuring artifact, not the lamp's light.)
+The far wall, 0.85 m behind the table and 1.3 m from the lamp, stays black at this exposure: the lamp's spill there
+is too faint to register. The fill was not raised.
