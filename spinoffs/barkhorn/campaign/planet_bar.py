@@ -431,7 +431,9 @@ def bar_hero():
     newspaper and the citrus; nothing in front of a speaker; a calm darker area in the upper left third for a headline.
     Lit as the passed frames: the products' own lamps and the declared track heads out of frame."""
     s = _base([1600, 900], 'Planet EARF bar: the line from the best seat')
-    s['set']['props'].append(_lamps(HEMIS, HERO_CORES))
+    # (proof 2: the bar's long row hung two shades before the horns: the passed pendants' cluster instead, between the
+    # bays, 0.15 higher so Mantle reads under it)
+    s['set']['props'].append(_lamps([(t_, x_, dy_, z_ + 0.15) for t_, x_, dy_, z_ in PEND_HEMIS], HERO_CORES))
     # Mantle between the bays under the cluster (at 8.5 it stood on the bar before the right speaker's feet), a little
     # turned to the seat so the record reads; the asset's origin is its front left corner, 0.46 wide, 0.42 deep
     import math
@@ -447,7 +449,7 @@ def bar_hero():
     # the frame: from a stool at the bar's middle, centred between the bays (proof 1, from across the room at y 0.95:
     # everything small, the stools across the foot); the eye 1.6 m, so the Cores and Mantle on the bar stay under the
     # line to the speakers' feet
-    s['camera'] = {'position': [6.9, 2.5, 1.6], 'target': [6.9, 5.7, 1.72], 'lens_mm': 28.0, 'level': True,
+    s['camera'] = {'position': [6.9, 2.5, 1.6], 'target': [6.9, 5.7, 1.55], 'lens_mm': 26.0, 'level': True,   # (proof 2: the Cores cut at the foot)
                    'fstop': 5.6, 'focus': [6.9, 5.2, 1.6]}
     return s
 
