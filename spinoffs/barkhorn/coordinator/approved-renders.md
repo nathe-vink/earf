@@ -1171,6 +1171,20 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    (about 44 %, a lower camera, the near spray off the base, larger toadstools beside and behind, darker woods). The
    coordinator's "27 %" for the old Poison was the wide's figure; the portrait sat near 40 %. Acid's wide preview ran
    out of memory with tripled rain and is re-queued at 1.5 times the portrait's count.
+   OWNER, 13 Nov ~02:40 UTC (verbatim): "are there alternatives to hypex? And what's the Vercel build thing about? Do
+   whatever you think is best."
+   -> Answered in chat. Alternatives to Hypex exist (Pascal, Powersoft, ICEpower or Purifi modules behind our own
+      plate with a separate DSP board, miniDSP's plate amps), from the coordinator's own knowledge, not re-checked
+      for price or stock; none is a turnkey, certified, quiet plate with DSP, digital inputs and a remote the way the
+      FusionAmp is, and a bigger amplifier from anyone buys nothing because the woofer's travel sets the limit.
+      DECISION (left to the coordinator): STAY WITH HYPEX; THE FA123 GOES AHEAD, after the bar set and the hero, the
+      insert pattern a placeholder until Hypex's drawing arrives, the bridged load marked open until Hypex answers.
+      The owner still has to send the letter.
+   -> THE VERCEL BUILD SWITCH explained in plain words (every push by any lane makes Vercel rebuild the site; the free
+      plan allows about 100 a day; the switch tells Vercel to skip the working branches). DECISION (left to the
+      coordinator): KEEP IT. It stays on r46-owner-notes and r33-speaker-horn; the site lane puts it back into the
+      held batch 4; r48-biomes is left without it (its session refuses the edit and its pushes are few). Nothing in
+      the Vercel dashboard, on main or on the live site changes.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
