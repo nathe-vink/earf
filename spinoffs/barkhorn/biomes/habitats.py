@@ -166,7 +166,9 @@ MODIFY = {'haze_b': {'sundisk': {'azimuth': 30.0, 'elevation': 6.0}},
           # top passes inside it), moved 1.0 m along the canopy's x, so its fleck falls on the floor 1 m to the right
           'poison_g5': {'canopy': {'holes': [[-15.362, -1.196, 0.36], [-11.625, 4.314, 0.7], [-8.031, 8.121, 0.8], [-5.531, 12.121, 0.7], [-14.125, 5.431, 0.6], [-16.615, 0.204, 0.4], [-16.306, 3.793, 0.1], [-17.438, -2.458, 0.16], [-16.55, -1.614, 0.18]]}}}
 # the black flag behind the camera, per habitat (m; default 8 x 6): Haze's front mirrored it as a dead black upper half
-FLAG = {'haze_b': (4.0, 3.0), 'poison_ivy': (0.0, 0.0), 'poison_ivy_b': (0.0, 0.0)}   # poison_ivy: no flag or side cards, so the forest's sky reads in the horn (2026-11-11)
+FLAG = {'haze_b': (4.0, 3.0), 'poison_ivy': (0.0, 0.0), 'poison_ivy_b': (0.0, 0.0), 'smoke_d': (0.0, 0.0)}
+# poison_ivy: no flag or side cards, so the forest's sky reads in the horn (2026-11-11)
+# smoke_d (2026-11-13): none; at sun el 6 from the camera's side the 8 x 6 m flag shaded the whole foreground (p3 front 0.05)
 # feet bedding per habitat (m; default 0.012, the cabinet on the ground). Acid stands in a puddle: at 12 mm its bottom sat
 # exactly on the water, and the water reflected a band of sky between the edge and its reflection (the gate: "hovers")
 SINK = {'acid_b': 0.025,   # 2026-11-12: on wet rock at the puddle's edge (the displaced rock, as Dust's 0.028); was 0.05 in the water
