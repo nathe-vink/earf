@@ -1532,6 +1532,16 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    23:37 UTC, coordinator's check on the preview (home at 1440 and 390, Hemisphere in Ember, Core in Ember, /lighting):
    PASSED. One share link made (it expires 14 Nov 22:34 UTC) and sent to the owner in chat only. The site lane may
    push r47-site-next (it carries the build switch); the coordinator checks that it made no deployment.
+   23:37 UTC, site lane: r47-site-next pushed (d4563a7f15). Coordinator, 23:40: Vercel shows no deployment for that
+   commit; the build switch works there.
+   23:59 UTC, biomes lane: ITS CONTAINER WAS STOPPED AGAIN at about 22:06, a minute into Smoke p5's build, and came
+   back at 23:57 when its check-in fired. Nothing rendered in between; nothing lost from the branch (66df213242).
+   Both queues restarted 23:58 with a session-tracked watcher beside them.
+   23:59 UTC, 14 Nov, coordinator: three long renders lost to a stopped container (08:36, 20:02 stopped by order, 22:05).
+   NEW RULES FOR THE BIOMES LANE: (1) the approved finals first: the Poison wide proxy and portrait final, the Ember
+   wide proxy and portrait final, then Smoke p5, then the two wide finals, then the seated proxies of Acid, Dust,
+   Ice and Fog; (2) no render longer than about 40 minutes in one piece: finals in bands, each pushed as it
+   finishes, the session-tracked watcher kept running so the session is never idle under a render.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
