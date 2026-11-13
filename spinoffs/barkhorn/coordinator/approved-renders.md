@@ -1411,6 +1411,16 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    camera on litter; the nearest foreground dark; a fern over one bottom corner) and Ember e7 (sun low behind right
    about 130, el 8-12; a slab with relief; lava within 2-3 m at the speaker's level; lit steam behind; cinders sparse
    and uneven). Smoke p5 after both pass.
+   20:43 UTC, biomes lane 8aa3283d67: the audits of s10 and e6 are clean (sun the only lamp; Ember's emitters the lava
+   and the sparks; the sparks flagged as floating, as before).
+   21:10 UTC, speaker lane e833b93390: `product/planet-bar/core-bar-table.png` re-rendered at 3200x2133, 512 samples, in
+   two bands (band a the detail-pass model, band b the package rebuilt from 3896c7e9; no Tropos in frame; the old
+   record wall far out of focus behind). Coordinator's check at full size: no seam at the join (row-mean jump 0.09
+   against a median of 0.06); pixels at 255: 0.017 %; the ball 4.9 / 0.62 / 0.93 (the lane 5.0 / 0.59 / 0.94; the
+   lamps lane's final 5.0 / 0.64 / 0.91); the base clean on the stone. PASSED, FINAL; to the site with the next
+   batch. Shown to the owner 21:10.
+   The new record wall is in the code (97d067b727, `record_wall.py` and a spine atlas with invented type); the hero's
+   test crop with it started 21:07.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
