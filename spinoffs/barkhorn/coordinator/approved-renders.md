@@ -1102,6 +1102,15 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    tuft by the right-hand rock reads as a tuft in mist. FOG'S HABITAT PAIR IS FINAL (13 Nov 01:29); shown to the owner;
    the site lane told "push" with it: batch 3 = the bar pendants and Fog's pair (Fog back in the places row, on
    `/colors/fog` and as the "Out" view on `/tropos/fog`), no `vercel.json` change, no amplifier text change.
+   01:33 UTC, speaker lane 95fdff0de9: THE STUDIO REFRESH, `renders/2026-11-12/barkhorn/studio-refresh/`: the eight
+   fronts (`site-front-off-tall-<tint>.png`, 1000x1250, 96 samples), the eight horn-backs (`horn-back-<tint>.png`,
+   1200x900, 128 samples), `contact-sheet.png`. The passed shot files (A-polished-tallr7, A-polished-p2-p2b) with the
+   cleaned asset's engine files (fd8aa47e); masks hidden 0, equipment 0 on all sixteen.
+   Coordinator's check (the contact sheet; the Fog and Smoke fronts at full size): PASS. Colors, set and exposure as
+   the passed set; round port rings, the IR eye as a small square in the batt, black posts and low black woofer
+   screws, no loose lead (in clear Fog a short black braided lead shows behind the horn's driver, as declared).
+   THE SIXTEEN REPLACE THE CURRENT FRONTS AND HORN-BACKS ONE FOR ONE. Site lane told 01:35 to take them into batch 3
+   (or one more push right after it). The 8 x 24 turn frames stay as they are until ordered.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
