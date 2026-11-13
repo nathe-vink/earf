@@ -462,8 +462,15 @@ def bar_hero():
     # the frame: from a stool at the bar's middle, centred between the bays (proof 1, from across the room at y 0.95:
     # everything small, the stools across the foot); the eye 1.6 m, so the Cores and Mantle on the bar stay under the
     # line to the speakers' feet
-    s['camera'] = {'position': [6.9, 2.5, 1.6], 'target': [6.9, 5.7, 1.55], 'lens_mm': HERO_LENS, 'level': True,   # (proof 2: the Cores cut at the foot)
+    s['camera'] = {'position': [6.9, HERO_EYE_Y, 1.6], 'target': [6.9, 5.7, HERO_AIM_Z], 'lens_mm': HERO_LENS, 'level': True,   # (proof 2: the Cores cut at the foot)
                    'fstop': 5.6, 'focus': [6.9, 5.2, 1.6]}
+    # (test 2, proof 1: at 21 mm from y 2.5 the bays' tops stood at 14 % from the top, inside the headline's band: the
+    # stool 0.3 back and the view shifted up (level, so the verticals stay), the bays' tops under the top quarter; the
+    # two wall heads between the bays aimed lower, so their pools stay off the upper shelves; no light added)
+    for k_ in ('track-wall1', 'track-wall2'):
+        if k_ in s['lights']:
+            tg = list(s['lights'][k_]['target']); tg[2] = HERO_WALL_AIM_Z
+            s['lights'][k_] = {**s['lights'][k_], 'target': tg}
     # (the coordinator, 01:54, test 2: a calm dark top band for the headline; the newspaper the brightest thing in the
     # picture: a dark-covered magazine in its place; the sleeve pulled out high on the wall, the triangle, down to the
     # lowest row)
@@ -479,6 +486,9 @@ def bar_hero():
 
 
 HERO_LENS = 21.0     # (the coordinator, 01:54: option (b), both bays whole and smaller, more wall above them)
+HERO_EYE_Y = 2.2     # (test 2: from 2.5)
+HERO_AIM_Z = 1.85    # (test 2: from 1.55; with 'level' the engine shifts rather than tilts)
+HERO_WALL_AIM_Z = 1.45   # (test 2: from 1.7)
 
 
 SHOTS = {'bar-backbar': bar_backbar_full, 'core-bar-table': core_bar_table_full, 'bar-backbar-portrait': bar_backbar_portrait,
