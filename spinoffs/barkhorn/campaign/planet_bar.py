@@ -27,6 +27,7 @@ from make_listening import FEET_BAR             # noqa: E402
 import listening_bar as LB                     # noqa: E402  (its turned glass)
 SRC = ('e7149388', 'renders/2026-10-20/barkhorn/planet38/finals-b/bar-smoke.shot.json')
 LIFE = 'spinoffs/barkhorn/campaign/bar_life/bar_life.py'
+RECWALL = 'spinoffs/barkhorn/campaign/bar_life/record_wall.py'
 LAMPS = 'spinoffs/barkhorn/campaign/stage/stage2_props.py'
 DARK = {k: 0.0 for k in ('dome_w', 'dome_glow', 'sphere_w', 'sphere_glow', 'disc_glow', 'disc_lamp', 'name_glow',
                          'niche_strip', 'sink_glow', 'sink_strip', 'sink_w', 'screen_glow', 'etch_glow', 'shade_glow',
@@ -160,8 +161,11 @@ def _base(size, title):
     shots._approved(s, order=['acid', 'acid'])
     s['products'].append(shots._mantle(*MANTLE, MANTLE_RZ, tint='ember'))
     RW = R.RECORD_WALL
-    fill = {'kind': 'kit', 'shape': 'ext', 'path': LIFE, 'fn': 'fill_records', 'x0': RW['x0'], 'x1': RW['x1'], 'z0': RW['z0'], 'z1': RW['z1'],
-            'cell': RW['cell'], 'y': RW['y'], 'depth': RW['depth'], 'skip': [[xc - 0.42, xc + 0.42, 0.0, 4.0] for xc in R.SPK_NICHES]}
+    # (the owner, 13 Nov: "the records are obviously fake": the wall rebuilt, record_wall.py, to the coordinator's
+    # 20:19 brief; it takes over the room's stripes and the old fill's cells)
+    fill = {'kind': 'kit', 'shape': 'ext', 'path': RECWALL, 'fn': 'build', 'x0': RW['x0'], 'x1': RW['x1'], 'z0': RW['z0'], 'z1': RW['z1'],
+            'cell': RW['cell'], 'y': R.W - 0.02 - RW['depth'], 'back': R.W - 0.02, 'eye_z': 1.6, 'seed': 1313,
+            'skip': [[xc - 0.42, xc + 0.42, 0.0, 4.0] for xc in R.SPK_NICHES]}
     # (the owner, 15:43: no zinc, no brass; 20:47: the bar top dark, low roughness, carrying soft reflections of the
     # Cores and shades; the niches' felt plain)
     style = {'kind': 'kit', 'shape': 'ext', 'path': LIFE, 'fn': 'restyle',
