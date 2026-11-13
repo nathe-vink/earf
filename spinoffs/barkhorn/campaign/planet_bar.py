@@ -476,7 +476,7 @@ def bar_hero():
     for k_ in ('track-bay0', 'track-bay1'):
         if k_ in s['lights']:
             ps = list(s['lights'][k_]['position']); ps[1] = HERO_BAY_HEAD_Y
-            s['lights'][k_] = {**s['lights'][k_], 'position': ps, 'irradiance': HERO_BAY_IRR}
+            s['lights'][k_] = {**s['lights'][k_], 'position': ps, 'irradiance': HERO_BAY_IRR[k_]}
     # (the coordinator, 03:46, full size: from 4.7 the heads washed the linings, 6-9 % of each cabinet clipped; lower,
     # to test 1's level. Nothing but shelves cut by the side edges: the room's own glasses (a coupe at the left edge, a
     # rocks glass at the right) out, and the now-playing sleeve and its stand, cut by the right edge, out as in the
@@ -507,7 +507,8 @@ HERO_EYE_Y = 2.2     # (test 2: from 2.5)
 HERO_AIM_Z = 1.85    # (test 2: from 1.55; with 'level' the engine shifts rather than tilts)
 HERO_WALL_AIM_Z = 1.45   # (test 2: from 1.7)
 HERO_BAY_HEAD_Y = 4.7    # (test 2: from 5.27, out of frame)
-HERO_BAY_IRR = 8.0       # (full size: from 16.5, W/m2 at the target)
+HERO_BAY_IRR = {'track-bay0': 2.0, 'track-bay1': 0.8}   # (full size: from 16.5, W/m2 at the target; proofed on crops: 8 still
+#   washed the linings; off, they read 53 / 0.77 / 0.28; the right lining, seen more from the front, takes less for the same look)
 
 
 SHOTS = {'bar-backbar': bar_backbar_full, 'core-bar-table': core_bar_table_full, 'bar-backbar-portrait': bar_backbar_portrait,
