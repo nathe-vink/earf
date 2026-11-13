@@ -829,7 +829,8 @@ def apply(web, head, rest):
 # web.RC on (with V2, HOME_V2 and COPY_NEXT): every picture of Tropos is today's speaker or is left out; the night
 # stage and the wall hidden until the new night renders pass; every lit lamp picture pulled (their light was faked);
 # Mantle only in its new design.
-RC_TALL = 'renders/2026-11-04/barkhorn/rollout/A-polished-tallr7/site-front-off-tall-{name}.png'   # the black-rods set, all eight (r33-speaker-horn 370de3da)
+RC_TALL = 'renders/2026-11-12/barkhorn/studio-refresh/site-front-off-tall-{name}.png'   # the refreshed model, all eight (r33-speaker-horn 95fdff0d)
+HORN_BACK_SRC = 'renders/2026-11-12/barkhorn/studio-refresh/horn-back-{name}.png'       # the same (round port rings, black feet, no loose lead)
 # Ember, Dust, Poison, Ice e624e13e; Haze, Fog 3d0b613f; Acid 04d21c5c (on the Acid horn fix). Smoke held.
 RC_KEYS = ['red', 'orange', 'amber', 'green', 'blue', 'violet', 'ice', 'black']
 EIGHT = True         # Smoke is a current color again (the coordinator, 2026-11-10 07:56)
@@ -1153,7 +1154,7 @@ def rc_fixes(p, web):
     # the coordinator 2026-11-09 19:16). It comes back when the re-rendered backs pass.
     extra = {k: {} for k in RC_KEYS}
     for k in HORN_BACKS:     # Acid a1322583 (backrig); Ember, Dust, Poison 06b829ce and Ice, Haze, Fog 52ad76ba pulled (a hidden lamp in frame)
-        src = R + f'A-polished-p2-p2b/horn-back-{names[k].lower()}.png'
+        src = HORN_BACK_SRC.format(name=names[k].lower())
         im = Image.open(os.path.join(web.ROOT, src)).convert('RGB')
         im.save(os.path.join(web.SITE, f'img/rc/{k}-horn-back.webp'), 'WEBP', quality=82)
         im.resize((224, 168)).save(os.path.join(web.SITE, f'img/rc/{k}-horn-back-th.webp'), 'WEBP', quality=80)
@@ -1418,7 +1419,7 @@ def rc3(p, web):
     p.sub("stage.style.background = P.id === 'speaker' ? ground(v) : 'transparent';",
           "stage.style.background = P.id === 'speaker' ? ground(v) : 'transparent'; if (P.id === 'turntable') stage.style.setProperty('aspect-ratio', '3 / 2', 'important'); else stage.style.removeProperty('aspect-ratio');")
     for k in HORN_BACKS:
-        src = 'renders/2026-11-04/barkhorn/rollout/' + f'A-polished-p2-p2b/horn-back-{names[k].lower()}.png'
+        src = HORN_BACK_SRC.format(name=names[k].lower())
         im = Image.open(os.path.join(web.ROOT, src)).convert('RGB').crop((270, 0, 990, 900))
         im.save(os.path.join(web.SITE, f'img/rc/{k}-horn-back.webp'), 'WEBP', quality=82)
         im.resize((168, 210)).save(os.path.join(web.SITE, f'img/rc/{k}-horn-back-th.webp'), 'WEBP', quality=80)
