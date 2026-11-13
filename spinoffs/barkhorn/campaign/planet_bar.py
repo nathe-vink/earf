@@ -518,7 +518,7 @@ HERO_EYE_Y = 2.2     # (test 2: from 2.5)
 HERO_AIM_Z = 1.85    # (test 2: from 1.55; with 'level' the engine shifts rather than tilts)
 HERO_WALL_AIM_Z = 1.45   # (test 2: from 1.7)
 HERO_BAY_HEAD_Y = 4.7    # (test 2: from 5.27, out of frame)
-HERO_WALL_GAIN = {'track-wall0': 0.6, 'track-wall1': 0.6, 'track-wall2': 0.6, 'track-wall3': 0.45, 'track-wall4': 0.45}
+HERO_WALL_GAIN = {'track-wall0': 0.48, 'track-wall1': 0.48, 'track-wall2': 0.48, 'track-wall3': 0.38, 'track-wall4': 0.38}   # (proof a at 0.6 / 0.45: centre 67.1, right 72.1)
 HERO_BAY_IRR = {'track-bay0': 2.0, 'track-bay1': 0.8}   # (full size: from 16.5, W/m2 at the target; proofed on crops: 8 still
 #   washed the linings; off, they read 53 / 0.77 / 0.28; the right lining, seen more from the front, takes less for the same look)
 
