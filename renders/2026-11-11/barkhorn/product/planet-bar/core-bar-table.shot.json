@@ -600,7 +600,7 @@
       "h": 0.315,
       "x": 8.0,
       "y": 4.249999999999999,
-      "z": 1.07,
+      "z": 1.0735,
       "rot": [
        -90.0,
        0,
@@ -695,7 +695,7 @@
       "t": 0.006,
       "x": 6.6,
       "y": 3.8599999999999994,
-      "z": 1.07,
+      "z": 1.0765,
       "rot": [
        -90.0,
        0,
@@ -703,22 +703,6 @@
       ],
       "ground": "#E4E0D6",
       "rough": 0.85
-     },
-     {
-      "image": "tex/reserved.png",
-      "w": 0.1,
-      "h": 0.05,
-      "t": 0.002,
-      "x": 5.55,
-      "y": 5.446199999999999,
-      "z": 1.09,
-      "rot": [
-       -18.0,
-       0,
-       0.0
-      ],
-      "ground": "#EFEBE3",
-      "rough": 0.7
      }
     ]
    },
@@ -789,6 +773,7 @@
      "blue": 1.5,
      "black": 0.15
     },
+    "core_cable": false,
     "hemispheres": [],
     "cores": [
      {
@@ -1169,7 +1154,7 @@
  },
  "products": [
   {
-   "def": "studio/products/barkhorn-cloud.json",
+   "def": "/tmp/claude-0/-home-user-earf/e9eacb03-86e9-502d-ab9f-ed75453cbf0d/scratchpad/detail-pkg/barkhorn-cloud.json",
    "flavour": "cloud-red",
    "instances": [
     {

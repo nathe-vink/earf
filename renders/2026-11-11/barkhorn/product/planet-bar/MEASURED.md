@@ -234,3 +234,15 @@ bar-backbar (3200 x 1800, the same camera; two bands blended over 107 rows, mean
 
 - **How it was measured:** as in the hero test, scaled to the frame.
 - **Audit (reaudit.py):** hidden 0, equipment 0.
+
+## core-bar-table re-rendered (2026-11-13)
+
+- 3200 x 2133, 512 samples, in two bands (0 to 0.53 and 0.47 to 1; a single frame overran the 2-hour task limit),
+  blended linearly over their 128-row overlap (mean difference there 0.49 of 255, noise).
+- Tropos is not in this frame (an 85 mm lens at f/2 on the Core). Band a imported the detail-pass model; band b the
+  detail-pass package rebuilt from 3896c7e9 (= 6e4ab131's CAD), not the FA123 build.
+- The record wall behind is the room's old one, far out of focus (the coordinator, 20:19: band b carries on); the
+  'reserved' card was outside this frame in both bands.
+- The Core (Ember), 12 px patch at its centre: hue 5.0, s 0.59, v 0.94, no clipped channel.
+- Against the frame it replaces: mean difference 1.6 of 255, p99 38; clipped pixels 0.04 % of the frame.
+- Audit: hidden 0, equipment 0.
