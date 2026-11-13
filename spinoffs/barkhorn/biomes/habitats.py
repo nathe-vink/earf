@@ -246,7 +246,7 @@ REFLECT = {   # habitat -> [reflector specs] (W H AZ EL DIST TX TY TZ), white bo
     'fog_b': [(2.0, 2.0, -55.0, 15.0, 3.5, 0.0, 0.0, 0.8)],
     # Poison (b) p3, the coordinator 2026-11-13: the front in shadow with the sun side-rear; a 1.5 x 1.2 m white board out
     # of frame right, lit by that sun, facing the speaker. Passive; the sun and the sky stay the only emitters.
-    'poison_ivy_b': [(2.0, 1.5, -20.0, 8.0, 2.5, 0.0, 0.0, 0.5)],   # p5: az 60 (p3) sat 70 deg off the front; -20 faces it, lit by the sun behind
+    'poison_ivy_b': [(1.6, 1.4, 45.0, 10.0, 2.2, 0.0, 0.0, 0.5)],   # p6: az 60 (p3) sat 70 deg off the front; az -20 (p5) showed at the frame's left edge and mirrored in the front glass (the mirror line is az -35); az 45 is lit full by the sun at az -150 and is not on that line
     # Ember (c), the coordinator 2026-11-12: the front read near black (value 0.10, the woofer 0.05) with the dusk sun behind
     # at az 130; a 3 x 2 m white board low on the camera's left, out of frame, facing the speaker and (20 deg off) the
     # sun, so the sun's light comes back onto the front. Passive; the sun and the sky stay the only emitters.
