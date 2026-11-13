@@ -166,7 +166,17 @@ MODIFY = {'haze_b': {'sundisk': {'azimuth': 30.0, 'elevation': 6.0}},
           # top passes inside it), moved 1.0 m along the canopy's x, so its fleck falls on the floor 1 m to the right
           'poison_g5': {'canopy': {'holes': [[-15.362, -1.196, 0.36], [-11.625, 4.314, 0.7], [-8.031, 8.121, 0.8], [-5.531, 12.121, 0.7], [-14.125, 5.431, 0.6], [-16.615, 0.204, 0.4], [-16.306, 3.793, 0.1], [-17.438, -2.458, 0.16], [-16.55, -1.614, 0.18]]}}}
 # the black flag behind the camera, per habitat (m; default 8 x 6): Haze's front mirrored it as a dead black upper half
-FLAG = {'haze_b': (4.0, 3.0), 'poison_ivy': (0.0, 0.0), 'poison_ivy_b': (0.0, 0.0), 'smoke_d': (0.0, 0.0)}
+# The coordinator, 2026-11-13 08:36 (the light rule): no default. A habitat not named here gets no flag and no cards. A
+# passive modifier is allowed only out of frame, never between the sun and anything in frame, with no recognizable shape
+# mirrored in the speaker, and listed in the report under "passive" with its size and place. The flag (W x H m) stands
+# 1.2 m behind the camera, 1.4 m up; with it come the side cards (2.6 x 2.4 m), the one on a low sun's side left out.
+# The entries at 8 x 6 were the old default, named so the passed finals rebuild as they were.
+FLAG = {'haze_b': (4.0, 3.0), 'poison_ivy': (0.0, 0.0), 'poison_ivy_b': (0.0, 0.0), 'smoke_d': (0.0, 0.0),
+        'ice': (8.0, 6.0), 'hero_ice': (8.0, 6.0),      # sky only, no sun lamp: shades no sun
+        'fog_b': (8.0, 6.0), 'hero_fog': (8.0, 6.0),    # sun az 110 / 150, behind the speaker: shades nothing (flagsun check)
+        'acid_b': (8.0, 6.0),                           # the coordinator 08:36: overcast, keep, list as passive (sun az 120, el 2.6: clear)
+        'dust': (8.0, 6.0),                             # sun az 124, el 6, behind right: the flag and the card shade nothing (flagsun check)
+        'ember_d': (0.0, 0.0)}                          # the flag shaded the near ground (sun az -13, el 7): the coordinator's no-flag test
 # poison_ivy: no flag or side cards, so the forest's sky reads in the horn (2026-11-11)
 # smoke_d (2026-11-13): none; at sun el 6 from the camera's side the 8 x 6 m flag shaded the whole foreground (p3 front 0.05)
 # feet bedding per habitat (m; default 0.012, the cabinet on the ground). Acid stands in a puddle: at 12 mm its bottom sat
@@ -283,6 +293,7 @@ def main():
     ap.add_argument('--glossy-flag', action='store_true', help='the earlier reflection-only flag and cards (comparison)')
     ap.add_argument('--proxy', action='store_true', help='16 samples at half scale, whatever the habitat')
     ap.add_argument('--frame', choices=['portrait', 'landscape'], default='portrait')
+    ap.add_argument('--flag-size', type=float, nargs=2, help='override the habitat\'s flag, W H m (0 0: none), for a test')
     ap.add_argument('--set', action='append', default=[], help='an extra key=value passed to habitat.py after the habitat\'s own (diagnostics)')
     ap.add_argument('--tag', default='', help='suffix on the output name')
     ap.add_argument('--sink', type=float, help="the feet's bedding, m, in place of the habitat's (tests)")
@@ -333,7 +344,7 @@ def main():
             + [x for k, v in (GARDEN_SETS.items() if a.garden else []) for x in ('--set', f'{k}={json.dumps(v)}')] \
             + [x for kv in a.set for x in ('--set', kv)] \
             + (['--glossy-flag'] if a.glossy_flag else []) \
-            + (['--flag', *map(str, FLAG[n])] if n in FLAG else []) \
+            + ['--flag', *map(str, a.flag_size or FLAG.get(n, (0.0, 0.0)))] \
             + (['--split', *map(str, SPLIT[n])] if n in SPLIT and not a.manifest else []) \
             + (['--real-set'] if n in REAL_SET else []) \
             + (['--canopy-open', str(CANOPY_OPEN[n])] if n in CANOPY_OPEN else []) \
