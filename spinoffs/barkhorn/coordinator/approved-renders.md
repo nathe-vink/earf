@@ -1759,6 +1759,18 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    finished; nothing at 255 after the finish. PASSED: DUST'S TALL PICTURE IS FINAL. Shown to the owner 07:48.
    TO THE SITE (batch 7, part one, prepared and held): the Acid and Dust finals in every tall habitat slot of their
    tints and in the home row (Ember, Dust, Acid, Poison, Ice, Fog); pushed when bar-backbar with the wall joins.
+   07:51 UTC, site lane: batch 7 part one built and held (r49-site-rc 47a6310177): Acid and Dust in their colour pages'
+   habitat figure and the gallery's "Out" view; the home row of six in colour order with captions; two rows of three
+   at 1440, a swipe row with snapping at 390. Approved by the coordinator.
+   07:52 UTC, speaker lane 04c6fb4c5b: `planet-bar/bar-backbar.png` WITH THE APPROVED WALL (3200x1800; the camera,
+   lights and lamps of the passed frame e8a0d246; the FA123 package; audit 0/0). Its frame mean is 36.1 against 32.3:
+   this frame keeps its wall heads as passed, only the hero's were turned down.
+   07:54 UTC, coordinator's check: the wall between the bays 37.7 to 51.4 (p90 133 to 170), the near speaker's bay
+   unchanged (43.3 and 42.9); by eye the near speaker still leads and the wall reads as real records at full size;
+   no seam; at 255: 0.19 % (the shades). PASSED AS IT IS, FINAL; no re-render. Shown to the owner 07:54; to the site
+   with batch 7, which is released for pushing.
+   - bar-pendants: the wall stands right behind the pendants, so there it goes back to the passed frame's level
+     (ac342ff0) by the wall heads only, on half-size proofs, before the frame renders; band a stopped.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
