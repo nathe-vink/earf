@@ -2090,6 +2090,18 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    The biomes lane's next hour: gt_audit changed to skip the ground's evaluated meshes when there are no targets,
    PROVED FIRST on Fog's coverage half (the same result as before), then the coverage halves of Ice and Haze; from
    about 16:30 Smoke's final scene built to a saved .blend, no render before the coordinator's word at 17:00.
+   15:57 UTC, biomes lane. THE STITCH STEP FOUND: stitch.py turned the blended frame to 8 bits by truncation, not
+   rounding, so every row inside an overlap lost up to one level (a step of -0.5 to -1 at the first overlap row).
+   Fixed (np.rint); re-stitching Haze from the same bands gives no step. The same truncation sits in every banded
+   final since this morning: Poison, Ember, Acid, Dust, Ice, Fog, Haze. GT_AUDIT: the proposed change does not apply
+   and was not made: with no targets the audit evaluates no meshes; the memory goes into Cycles syncing the scene
+   for the control pass (the meadow's hair, the snow's displacement, the textures).
+   15:58 UTC, coordinator. THE SEVEN STITCHED FINALS STAY AS THEY ARE: a truncation of at most one level of 255 in
+   the overlap rows, under a grain of about five levels, is a known, measured, invisible flaw; every final's raw
+   bands are kept, and any of the seven that is re-stitched or re-rendered for another reason gets the fixed stitch
+   then. The rounding fix holds for every stitch from now on (Smoke first). The audit tool is not changed: for Ice
+   and Haze the control is run with the hair and the snow particles hidden, at an eighth, said in the CHECK rows;
+   if that dies too, both stay accepted on the light half and the listing.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
