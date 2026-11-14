@@ -1689,6 +1689,19 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    camera and the frame looks at the darker dusk side (the front lit by the sky behind the camera; the low weak sun
    lighting the trail pale gold; the fire as the side light with its shadow of the speaker in frame); and the
    scorch out to 4-5 m with uneven fingers, burnt stubble, ash and smouldering patches.
+   05:02 UTC, biomes lane 2d262631f7: `acid-b-seat-a2.jpg`: the back sun lights the rain and the wet rock; front 0.404,
+   cone 0.179; the darks unchanged at 0.145, because the veil is the front panel mirroring the bright overcast sky,
+   not the haze. Coordinator: keep a2's light; a3 ordered with exposure 0.5 and the Medium High Contrast look over
+   the whole frame; the pick between a2 and a3 by eye.
+   05:42 UTC, biomes lane 8006ac005d: `smoke-e-proxy-e2.jpg` (3 min build plus 35 min render): the sky turned so the
+   violet dusk side is in frame (strength 0.45; the sun at az 25, el 3, irradiance 12, behind the camera to its
+   right); the trail 1.5 % wide from the top at x 58 %; char from 1.5 to about 5 m with ash and smouldering spots;
+   the speaker's left side warm from the fire; front 0.279, cone 0.374; darkest 1 % speaker 0.039, ground 0.071.
+   One fault left: tufts nearer the camera than the clear lane rise 13 % over the cabinet's foot.
+   05:44 UTC, coordinator: SMOKE e2 IS THE DIRECTION: the dusk sky, the thin trail, the column, the fire and the scorch
+   tell the strike, and the speaker reads. SHOWN TO THE OWNER 05:44 as a small test; the final waits for his word (and
+   his answer on open country against the old road). e3 as the check: the clear lane to the camera, and the embers
+   scattered unevenly in clumps instead of rows of even dots.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
