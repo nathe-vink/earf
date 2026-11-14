@@ -1668,6 +1668,27 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    the horn; scorched earth, thrown blocks, embers; a plain to a low horizon; dusk, the fire on the speaker's left
    side, the sky carrying the front. The lane to say what takes the 54 minutes of build (bake the column once; the
    trail a thin tube).
+   04:26 UTC, biomes lane bb2ec96be4: the Smoke layout proof `habitats/layout/smoke-layout-l9.jpg` (320x400, clay, no
+   volumes, 1.4 s). Coordinator: PASSES with the trail made one straight thin line (no elbow) from the crater's
+   right half (30 %, 52 %) to the top edge at x 56-60 %, clear of the horn. p5's 54-minute build was the ground and
+   tufts, the crater block with two debris fields and two volumes, and 6,095 landing tufts.
+   04:29 UTC, speaker lane 2826a237: the portrait's proof A is chosen (Mantle's overhead head at 0.4 in a 10 degree
+   beam, its front and side lamps out of this frame; the near Core 4.8 / 0.78 / 0.83 unclipped; the deck 24.6);
+   the full frame is rendering.
+   04:32 UTC, biomes lane 641219274e: the ACID seated proxy `acid-b-seat-a1.jpg` (800x1000, 4 min): rain over the
+   whole frame, wet rock to the base, the speaker's reflection in the pool in front; front 0.365, cone 0.181;
+   darkest 1 % 0.145 (the rain and haze veil the frame); passive the 8 x 6 m black flag out of frame. Coordinator:
+   close; the reflection carries the seating under overcast; flat and gray. a2 approved: sun el 7 from behind,
+   haze 0.0010, sky 0.10; the darks to 0.06-0.10.
+   04:57 UTC, biomes lane 13f007f4d7: `smoke-e-proxy-e1.jpg` on the new scene Smoke e (ddf3a98d0a; 4 min build plus
+   21 min render): the rim wholly in frame and glowing, flames, the black column lit orange on its near side, the
+   trail from the top edge at x 58 %, a plain to a low horizon; front 0.212, cone 0.398, darkest 1 % 0.071. The
+   lane's faults, fixed for e2 (7db33bf4e8): the trail 5 % wide (now linear with distance, 1.5 %), tufts over the
+   cabinet's corners (the clear zone to 0.7 m and a lane 1.6 x 3 m), blue plastic-looking cinders in front.
+   05:01 UTC, coordinator: e1 READS AS A STRIKE. Two more for e2 or e3: the sky turned so its bright side is behind the
+   camera and the frame looks at the darker dusk side (the front lit by the sky behind the camera; the low weak sun
+   lighting the trail pale gold; the fire as the side light with its shadow of the speaker in frame); and the
+   scorch out to 4-5 m with uneven fingers, burnt stubble, ash and smouldering patches.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
