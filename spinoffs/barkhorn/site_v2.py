@@ -1245,7 +1245,7 @@ def rc_waves(p, web):
         im = Image.open(os.path.join(web.ROOT, src)).convert('RGB')
         if im.width > 1200:
             im = im.resize((1200, round(im.height * 1200 / im.width)), Image.LANCZOS)
-        im.save(os.path.join(web.SITE, f'img/rc/{k}-habitat.webp'), 'WEBP', quality=82)
+        im.save(os.path.join(web.SITE, f'img/rc/{k}-habitat.webp'), 'WEBP', quality=HAB_Q.get(k, 82), method=6 if k in HAB_Q else 4)
         im.resize((168, 210)).save(os.path.join(web.SITE, f'img/rc/{k}-habitat-th.webp'), 'WEBP', quality=80)
     # --- the hero: the seven, each its own picture, in a row (desk) or a swipeable row (phone)
     for k in RC_KEYS:
@@ -1904,13 +1904,15 @@ def rc_intro(p, web):
 
 
 # the seated habitats, 4:5, one per tint as each passes (r48-biomes); Haze (violet) and Smoke (black) still to come
-HAB_SRC = {'violet': 'renders/2026-11-12/barkhorn/habitats/haze-b-final-portrait-finish.jpg',          # the seated Haze final, finished (r48-biomes 7895f4d6)
+HAB_SRC = {'black': 'renders/2026-11-12/barkhorn/habitats/smoke-e-final-portrait-finish.jpg',          # the seated Smoke final, finished (r48-biomes 9599febd)
+           'violet': 'renders/2026-11-12/barkhorn/habitats/haze-b-final-portrait-finish.jpg',          # the seated Haze final, finished (r48-biomes 7895f4d6)
            'blue': 'renders/2026-11-12/barkhorn/habitats/ice-final-portrait-finish.jpg',            # the seated Ice final, finished (r48-biomes 8f4c9fd9)
            'ice': 'renders/2026-11-12/barkhorn/habitats/fog-b-final-portrait-finish.jpg',           # the seated Fog final, finished (r48-biomes ba05aed5)
            'green': 'renders/2026-11-12/barkhorn/habitats/poison-b-final-portrait-2-finish.jpg',     # the final Poison, finished (r48-biomes fe192e62)
            'red': 'renders/2026-11-12/barkhorn/habitats/ember-d-final-portrait-finish.jpg',          # the final Ember, finished (r48-biomes 0db25baf)
            'orange': 'renders/2026-11-12/barkhorn/habitats/dust-final-portrait-finish.jpg',          # the final Dust, finished (r48-biomes fa0c5d78)
            'amber': 'renders/2026-11-12/barkhorn/habitats/acid-b-final-portrait-finish.jpg'}         # the final Acid, finished (r48-biomes e869e99b)
+HAB_Q = {'black': 92}     # Smoke's column: a large smooth dark field (about 20 of 255); 82 blocks it, 90 up holds the grain
 HAB_HELD = 'rc/(?:' + ('|'.join(k for k in ('violet', 'black') if k not in HAB_SRC) or 'none') + ')-habitat'
 
 
