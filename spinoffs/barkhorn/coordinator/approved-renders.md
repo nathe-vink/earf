@@ -2028,6 +2028,23 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    no broken picture; the places row seen: six seated places in one look, Ice with its new caption): PASSED. One
    share link made on this deployment (it expires 15 Nov 13:17 UTC) and sent to the owner in chat only.
    THIS IS NOW THE PREVIEW THE OWNER HOLDS (d1010c7b0f).
+   14:30 UTC, biomes lane 7d9a1418c6 (one CHECK row each). THE ICE FINAL'S AUDIT: the light half complete (no hidden
+   object, no area lamp; lamps the sun and the cabin's interior lamp; emitting the cabin's room; the world
+   kiara_9_dusk at 0.6). The coverage half could not be completed: gt_audit was killed for memory at 1200x1500 and
+   at 600x750 with the flakes hidden; it is the audit's own load of the scene's evaluated ground.
+   HAZE, three tries; the best `haze-b-seat-h3.jpg`: front 0.283, cone 0.100, the speaker's darkest 1 % 0.075, p99.9
+   0.949, 0 clipped (h1, the sun 135 deg behind: black against the light; h2, the haze run to the camera: veiled;
+   h3: the haze kept 3 m back plus a thin box of air at 0.0008/m).
+   14:32 UTC, coordinator. ICE'S AUDIT IS ACCEPTED AS IT STANDS, with no change to gt_audit: the listing finds no
+   object hidden from the camera and no area lamp, so a control render has nothing to reveal; the camera, flag and
+   card are those of the passed Ice, whose full audit covered them; nothing passive was added. ICE IS CLOSED.
+   HAZE h3 seen at full proxy size: the place is right (the hill layers, the sky, the framing); it fails twice: the
+   grass reads as a pelt (one pale cream, even blades, lit to 0.8-0.95, brighter than the hazy hills), and the
+   speaker is dark against the light (Haze's cabinet does not pass enough of a sun behind it: S2's Poison case).
+   h4 ORDERED, up to three tries: the sun to the side (75-85 deg off axis from camera right, el 8-12, warm) so the
+   violet reads and the shadow falls left across the grass; the grass as a dry meadow (albedo 0.35-0.45, mixed
+   straw, ochre and gray-tan, uneven clumps with the ground showing, seed heads; 0.45-0.65 in frame); the air as
+   in h3. Targets: front 0.30 or more, cone 0.12 or more, darkest 1 % 0.04-0.09, p99.9 0.95 or less, 0 clipped.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
