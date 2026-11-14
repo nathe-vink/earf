@@ -1747,6 +1747,18 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
      the Acid raw (same `-finish` name) and uses it for Dust and everything after; the finished Ember, Poison, Ice
      and Fog stay (none clipped). Shown to the owner 07:16 (the coordinator's own run of the new finish on the raw,
      the same script and seed).
+   07:17 UTC, biomes lane e869e99b53: the Acid final's `-finish` re-made with the shoulder (0.0037 % at 255).
+   07:46 UTC, biomes lane fa0c5d78c7: THE DUST TALL FINAL, `habitats/dust-final-portrait.jpg` and `-finish` (2400x3000,
+   64 samples, bands of 1, 9 and 7 min; d2's settings: the sun at 24 from 144 off axis, el 6; the sky at 0.45; dust,
+   haze 0.0008; exposure 0.25, Medium High Contrast; passive the 8 x 6 m black flag out of frame; asset fd8aa47e;
+   the finish with the shoulder). Front 0.401, cone 0.125, darkest 1 % speaker 0.102; 4 px clipped. The audit is
+   complete and clean (the sun the only lamp). Ice's seated proxy was killed for memory during its build; Fog's is
+   building; Ice retries alone.
+   07:48 UTC, coordinator's check at full size: no seam (the row jumps at 974 and 2033 are the horn's top edge and the
+   base, not the joins: the outer thirds are flat); the base bedded in the ripples; the horn's hue 17.5 raw, 18.0
+   finished; nothing at 255 after the finish. PASSED: DUST'S TALL PICTURE IS FINAL. Shown to the owner 07:48.
+   TO THE SITE (batch 7, part one, prepared and held): the Acid and Dust finals in every tall habitat slot of their
+   tints and in the home row (Ember, Dust, Acid, Poison, Ice, Fog); pushed when bar-backbar with the wall joins.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
