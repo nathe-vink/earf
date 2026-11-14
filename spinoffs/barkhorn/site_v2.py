@@ -1908,13 +1908,13 @@ def rc_intro(p, web):
 
 HOTSPOTS = True    # the hero's point (Tropos in Ice, to its page); off: the picture alone
 HERO_SRC = 'renders/2026-11-11/barkhorn/product/planet-bar/bar-hero.png'           # the bar (r33-speaker-horn a9c41b7a), desktop;
-HERO_SRC_TALL = 'renders/2026-11-11/barkhorn/habitats/ice-final-portrait-2400x3000-finish.jpg'   # wide on a wide screen, portrait on a phone
+HERO_SRC_TALL = 'renders/2026-11-11/barkhorn/product/planet-bar/bar-backbar-portrait.png'   # the bar in 4:5 (r33-speaker-horn 41494d42), on a phone
 HERO_ALT = 'Two Tropos in Acid at a bar, Hemispheres over the counter, Cores and Mantle on it, a wall of records behind'
-HERO_ALT_TALL = 'Tropos in Ice, out in the snow at dusk'   # the phone keeps Ice until the tall bar frame
+HERO_ALT_TALL = 'The EARF bar with a Tropos in Acid in its bay, Mantle and a Core in Ember on the bar, record shelves behind'
 HERO_WIDE = (16 / 9, 0.5, 0.5)     # the desktop: the whole 16:9 picture
 HERO_TALL = (4 / 5, 0.5, 0.5)      # the phone: the whole 4:5 picture
 HERO_POINTS = [(73.5, 57.7, 'Tropos in Acid', '#speaker-acid')]  # x, y in percent of the wide picture: the right speaker's woofer
-HERO_POINTS_TALL = [(63.3, 61.1, 'Tropos in Ice', '#speaker-ice')]   # the portrait's own point: Ice's woofer
+HERO_POINTS_TALL = [(66.2, 47.9, 'Tropos in Acid', '#speaker-acid')]   # the portrait's own point: the near Tropos's woofer
 
 
 def cover_point(x, y, size, crop):
@@ -2005,7 +2005,7 @@ def rc_home(p, web):
             out[w] = n
         return out, (widths[-1], round(src.height * widths[-1] / src.width))
     wide, size = sizes(HERO_SRC, 'home-ice-wide', [1600, 2400])
-    tall, tall_size = sizes(HERO_SRC_TALL, 'home-ice-tall', [800, 1200])
+    tall, tall_size = sizes(HERO_SRC_TALL, 'home-bar-tall', [800, 1200])
     srcset = f'{wide[1600]} 1600w, {wide[2400]} 2400w'
     tall_set = f'{tall[800]} 800w, {tall[1200]} 1200w'
     out = {1200: wide[1600]}
@@ -2050,6 +2050,7 @@ def rc_home(p, web):
 # per color (fa0c3a65: satin black hardware, polished bevels); the lamps lit, per tint, and in rows (r32-lamps-final 17a9da5e;
 # Core's base in its own color fee3b161; Hemisphere direct, from under, in a group cd703d56)
 MANTLE_FINAL = 'renders/2026-11-10/barkhorn/mantle-r48/mantle-final-day-{name}.png'
+MANTLE_BAR = 'renders/2026-11-11/barkhorn/product/planet-bar/mantle-bar.png'   # Mantle in Ember at the bar (r33-speaker-horn 8ebd1690)
 LAMP_FINAL = 'renders/2026-11-10/barkhorn/lamp-site/final/{f}.png'
 NAMES = dict(zip(RC_KEYS, ['ember', 'dust', 'acid', 'poison', 'ice', 'haze', 'fog', 'smoke']))
 HEMI_LM = {'red': 272, 'orange': 280, 'amber': 301, 'green': 256, 'blue': 264, 'violet': 254, 'ice': 339, 'black': 287}   # lm out, cd703d56
@@ -2093,6 +2094,7 @@ def rc_products(p, web):
     for k, n in NAMES.items():
         v, card = views(MANTLE_FINAL.format(name=n), f'mantle-{n}', 1600)
         D['tt']['colours'][k] = {'views': {'studio': v}, 'card': dict(card, alt=f'Mantle in {n.title()}')}
+    D['tt']['colours']['red']['views']['bar'], _ = views(MANTLE_BAR, 'mantle-bar', 1600)
     # the lamps: each lit in its tint, the eight in a row, Hemisphere from below (Ember)
     rows = {}
     room = [(views(src, name, 1600)[0], alt, tints) for src, name, alt, tints in ROOM]
@@ -2159,7 +2161,8 @@ def rc_products(p, web):
           "facts: c => [...L.facts.map(f => L.lm && f[1].includes('{lm}') ? [f[0], f[1].replace('{lm}', L.lm[c.k])] : f), ['Color', c.name]],")
     # the views' words: Mantle in its own color; Hemisphere from below
     p.sub("const TT_VIEWS = [['studio', 'In the studio', c => c.k === 'red' ? `${D.tt.name} in Ember.` : `${D.tt.name}, shown in Ember. ${c.name} to follow.`],",
-          "const TT_VIEWS = [['studio', 'In the studio', c => `${D.tt.name} in ${c.name}.`],")
+          "const TT_VIEWS = [['studio', 'In the studio', c => `${D.tt.name} in ${c.name}.`],\n"
+          "                  ['bar', 'At the bar', () => 'Mantle in Ember on the bar with a record on, a Core in Ember beside it, a Tropos and record shelves behind.'],")
     p.sub("         ['row', 'All eight', () => 'Eight Hemispheres hung in a row, lit, one in each color.'],",
           "         ['bar', 'At the bar', () => 'Five Hemispheres over a bar in Acid, Ember and Dust, two Cores on the counter below.'],\n"
           "         ['below', 'From below', c => `Hemisphere from below, lit: the opal diffuser inside its ${c.name} shade.`],\n"
@@ -2376,7 +2379,8 @@ def rc_marketing(p, web):
   top: calc(clamp(18px, 3.2vw, 48px) + 2 * 1.04 * clamp(34px, 4.3vw, 64px) + clamp(14px, 1.6vw, 24px)) }}
 .hero-sub {{ margin: 0 0 20px; max-width: 30ch; font-size: clamp(17px, 1.5vw, 21px); line-height: 1.35; color: #1C1A18 }}
 .hero-cta {{ display: flex; flex-wrap: wrap; gap: 12px; margin: 0 }}
-@media (max-aspect-ratio: 1/1) {{ .hs-hero .hero-more {{ position: static; padding-top: 20px }} .hero-sub {{ max-width: none }} }}
+@media (max-aspect-ratio: 1/1) {{ .hs-hero .hero-more {{ position: static; padding-top: 20px }} .hero-sub {{ max-width: none }}
+  .hs-hero .hero-title {{ position: static !important; color: #1C1A18 !important }} .hs-hero .hero-title .wrap {{ padding-block: 20px 16px !important }} }}
 @media (min-aspect-ratio: 1/1) {{ .hs-hero .hero-title, .hs-hero .hero-more {{ left: 34% !important; right: 33% !important; text-align: center }}
   .hs-hero .hero-title .wrap, .hs-hero .hero-more .wrap {{ margin: 0 !important; padding-inline: 0 !important; max-width: none !important }}
   .hs-hero .hero-title {{ color: #F4F1EC !important }} .hs-hero .hero-title h1 {{ font-size: clamp(28px, 3.3vw, 52px) !important }}
