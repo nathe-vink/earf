@@ -103,7 +103,7 @@
      [
       0.23,
       6.73,
-      2.3
+      4.6
      ],
      [
       0.0,
@@ -190,12 +190,12 @@
      6.73
     ],
     "char": [
-     1.2,
-     3.0
+     1.5,
+     4.3
     ],
-    "jag": 0.8,
-    "soot": 6.0,
-    "soot_mix": 0.75,
+    "jag": 2.2,
+    "soot": 6.5,
+    "soot_mix": 0.8,
     "soot_color": "#1B1A19",
     "furrow": [
      0.9,
@@ -216,10 +216,10 @@
     ],
     "dust": [
      1.4,
-     4.0
+     5.0
     ],
-    "dust_mix": 0.35,
-    "dust_color": "#4A4038",
+    "dust_mix": 0.4,
+    "dust_color": "#5E5954",
     "dust_scale": 0.3,
     "seed": 4
    },
@@ -433,17 +433,17 @@
    {
     "kind": "kit",
     "shape": "scatter",
-    "count": 5,
+    "count": 8,
     "radius": [
      0.003,
      0.008
     ],
     "in": [
-     1.08,
-     6.58,
+     2.58,
+     6.48,
      0.0,
-     1.38,
-     6.88,
+     3.08,
+     6.98,
      0.03
     ],
     "material": "glow",
@@ -454,17 +454,17 @@
    {
     "kind": "kit",
     "shape": "scatter",
-    "count": 5,
+    "count": 8,
     "radius": [
      0.003,
      0.008
     ],
     "in": [
-     0.846,
-     7.223,
+     1.972,
+     8.152,
      0.0,
-     1.146,
-     7.523,
+     2.472,
+     8.652,
      0.03
     ],
     "material": "glow",
@@ -475,17 +475,17 @@
    {
     "kind": "kit",
     "shape": "scatter",
-    "count": 5,
+    "count": 8,
     "radius": [
      0.003,
      0.008
     ],
     "in": [
-     0.254,
-     7.565,
+     0.432,
+     9.041,
      0.0,
-     0.554,
-     7.865,
+     0.932,
+     9.541,
      0.03
     ],
     "material": "glow",
@@ -496,17 +496,17 @@
    {
     "kind": "kit",
     "shape": "scatter",
-    "count": 5,
+    "count": 8,
     "radius": [
      0.003,
      0.008
     ],
     "in": [
-     -0.42,
-     7.446,
+     -1.32,
+     8.732,
      0.0,
-     -0.12,
-     7.746,
+     -0.82,
+     9.232,
      0.03
     ],
     "material": "glow",
@@ -517,17 +517,17 @@
    {
     "kind": "kit",
     "shape": "scatter",
-    "count": 5,
+    "count": 8,
     "radius": [
      0.003,
      0.008
     ],
     "in": [
-     -0.86,
-     6.922,
+     -2.464,
+     7.369,
      0.0,
-     -0.56,
-     7.222,
+     -1.964,
+     7.869,
      0.03
     ],
     "material": "glow",
@@ -538,17 +538,17 @@
    {
     "kind": "kit",
     "shape": "scatter",
-    "count": 5,
+    "count": 8,
     "radius": [
      0.003,
      0.008
     ],
     "in": [
-     -0.86,
-     6.238,
+     -2.464,
+     5.591,
      0.0,
-     -0.56,
-     6.538,
+     -1.964,
+     6.091,
      0.03
     ],
     "material": "glow",
@@ -559,17 +559,17 @@
    {
     "kind": "kit",
     "shape": "scatter",
-    "count": 5,
+    "count": 8,
     "radius": [
      0.003,
      0.008
     ],
     "in": [
-     -0.42,
-     5.714,
+     -1.32,
+     4.228,
      0.0,
-     -0.12,
-     6.014,
+     -0.82,
+     4.728,
      0.03
     ],
     "material": "glow",
@@ -580,17 +580,17 @@
    {
     "kind": "kit",
     "shape": "scatter",
-    "count": 5,
+    "count": 8,
     "radius": [
      0.003,
      0.008
     ],
     "in": [
-     0.254,
-     5.595,
+     0.432,
+     3.919,
      0.0,
-     0.554,
-     5.895,
+     0.932,
+     4.419,
      0.03
     ],
     "material": "glow",
@@ -601,17 +601,17 @@
    {
     "kind": "kit",
     "shape": "scatter",
-    "count": 5,
+    "count": 8,
     "radius": [
      0.003,
      0.008
     ],
     "in": [
-     0.846,
-     5.937,
+     1.972,
+     4.808,
      0.0,
-     1.146,
-     6.237,
+     2.472,
+     5.308,
      0.03
     ],
     "material": "glow",
@@ -734,8 +734,8 @@
  "sky": {
   "kind": "hdri",
   "polyhaven": "qwantani_dusk_2_puresky",
-  "rotation_deg": 283.9,
-  "strength": 0.6,
+  "rotation_deg": 28.9,
+  "strength": 0.45,
   "res": "4k"
  },
  "finish": {
@@ -757,11 +757,11 @@
   }
  },
  "sun": {
-  "azimuth_deg": 65.0,
-  "elevation_deg": 8.0,
-  "irradiance": 30.0,
+  "azimuth_deg": 25.0,
+  "elevation_deg": 3.0,
+  "irradiance": 12.0,
   "angle_deg": 1.0,
-  "color": "#FFB07A"
+  "color": "#FFA060"
  },
  "haze": {
   "box_m": [
