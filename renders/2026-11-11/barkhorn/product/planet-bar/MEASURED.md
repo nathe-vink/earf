@@ -292,3 +292,14 @@ bar-backbar (3200 x 1800, the same camera; two bands blended over 107 rows, mean
   ember 4.9 / 0.43 / 1.00 (its shade, as in every bar frame).
 - Mantle: the deck's edge, the record and its label read; the tonearm's post black (checked at full size).
 - Audit: hidden 0, equipment 0.
+
+## bar-backbar with the approved wall (2026-11-14)
+
+- 3200 x 1800, as passed (e8a0d246), the same camera, lights and lamps; the FA123 package and the approved record wall
+  (round 2; the 'plain' cell (18, 1) included). Two bands blended over 107 rows (mean difference 0.76).
+- The lamps (unchanged from the passed frame): Hemispheres dust 15.7 / 0.35 / 0.98 and 15.5 / 0.36 / 0.97, ember 4.8 /
+  0.39 / 1.00 and 5.4 / 0.39 / 1.00, acid 51.6 / 0.22 / 0.89; Cores ember 7.8 / 0.92 / 0.76, dust 21.8 / 0.90 / 0.68,
+  acid 51.0 / 0.51 / 0.71.
+- The frame's mean luminance (Rec. 709) 36.1, against 32.3 in the passed frame: the new wall's aged whites are lighter
+  than the old dark stripes. The hero's wall heads were turned down for this (0.48 / 0.38); this frame's are as passed.
+- Clipped pixels 0.28 % (the Hemispheres' shades). Audit: hidden 0, equipment 0.

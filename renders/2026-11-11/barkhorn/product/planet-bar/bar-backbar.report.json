@@ -1,9 +1,9 @@
 {
  "shot": "/tmp/claude-0/-home-user-earf/e9eacb03-86e9-502d-ab9f-ed75453cbf0d/scratchpad/planet/json3/bar-backbar.json",
- "image": "/tmp/claude-0/-home-user-earf/e9eacb03-86e9-502d-ab9f-ed75453cbf0d/scratchpad/planet/out/bar-backbar-a.png",
+ "image": "/tmp/claude-0/-home-user-earf/e9eacb03-86e9-502d-ab9f-ed75453cbf0d/scratchpad/planet/out/bar-backbar-b.png",
  "seconds": {
-  "build": 130.9,
-  "render": 3317.9
+  "build": 99.0,
+  "render": 2930.9
  },
  "samples": 256,
  "size": [
@@ -17,7 +17,7 @@
  "sun_aim": null,
  "flags_crossing_set": [],
  "model_hash": {
-  "spinoffs/barkhorn/out-cloud/render/barkhorn-cloud.glb": "3a9aa03221226e99",
+  "spinoffs/barkhorn/out-cloud/render/barkhorn-cloud.glb": "c4b9f50edcf298bc",
   "spinoffs/barkhorn/variants/out/render/barkhorn-variants.glb": "b77a894b8e44c37c",
   "studio/assets/cache/mantle/fa0c3a65/mantle-strata.blend": "b6be569d65b13bc1"
  },
@@ -26,13 +26,13 @@
    "part": "amp-box",
    "centre_px": [
     1165.5,
-    1001.9
+    1012.9
    ],
    "box_px": [
     1129,
     912,
     1202,
-    1089
+    1111
    ],
    "depth_m": 4.343
   },
@@ -40,13 +40,13 @@
    "part": "amp-box-gasket",
    "centre_px": [
     1181.6,
-    1002.5
+    1013.4
    ],
    "box_px": [
     1160,
     914,
     1204,
-    1089
+    1111
    ],
    "depth_m": 4.37
   },
@@ -68,13 +68,13 @@
    "part": "amp-plate-housings",
    "centre_px": [
     1186.7,
-    1004.2
+    1015.2
    ],
    "box_px": [
     1170,
     934,
     1204,
-    1073
+    1095
    ],
    "depth_m": 4.378
   },
@@ -82,13 +82,13 @@
    "part": "amp-plate-ink",
    "centre_px": [
     1192.2,
-    994.8
+    1005.8
    ],
    "box_px": [
     1182,
     936,
     1203,
-    1053
+    1075
    ],
    "depth_m": 4.382
   },
@@ -152,13 +152,13 @@
    "part": "amp-plate-metal",
    "centre_px": [
     1191.9,
-    1002.7
+    1013.7
    ],
    "box_px": [
     1178,
     935,
     1206,
-    1070
+    1091
    ],
    "depth_m": 4.378
   },
@@ -166,13 +166,13 @@
    "part": "amp-plate-module",
    "centre_px": [
     1178.4,
-    1002.3
+    1013.3
    ],
    "box_px": [
     1156,
     932,
     1201,
-    1071
+    1093
    ],
    "depth_m": 4.364
   },
@@ -180,13 +180,13 @@
    "part": "amp-plate-plate",
    "centre_px": [
     1189.9,
-    1002.8
+    1013.7
    ],
    "box_px": [
     1173,
     924,
     1207,
-    1080
+    1101
    ],
    "depth_m": 4.383
   },
@@ -194,13 +194,13 @@
    "part": "amp-plate-print",
    "centre_px": [
     1189.1,
-    1007.0
+    1017.9
    ],
    "box_px": [
     1177,
     935,
     1201,
-    1078
+    1099
    ],
    "depth_m": 4.392
   },
@@ -249,14 +249,14 @@
   "amp-plate-rings#0": {
    "part": "amp-plate-rings",
    "centre_px": [
-    1190.6,
-    1004.6
+    1190.5,
+    1015.5
    ],
    "box_px": [
     1179,
     941,
     1202,
-    1068
+    1089
    ],
    "depth_m": 4.384
   },
@@ -264,13 +264,13 @@
    "part": "amp-plate-screws",
    "centre_px": [
     1191.1,
-    1002.8
+    1013.8
    ],
    "box_px": [
     1175,
     925,
     1208,
-    1079
+    1101
    ],
    "depth_m": 4.385
   },
@@ -278,13 +278,13 @@
    "part": "amp-plate-sticker",
    "centre_px": [
     1194.7,
-    1050.6
+    1072.6
    ],
    "box_px": [
     1191,
-    1047,
+    1069,
     1198,
-    1054
+    1076
    ],
    "depth_m": 4.373
   },
@@ -432,13 +432,13 @@
    "part": "cable-glands",
    "centre_px": [
     1152.1,
-    957.0
+    968.1
    ],
    "box_px": [
     1127,
     841,
     1177,
-    1071
+    1093
    ],
    "depth_m": 4.327
   },
@@ -768,11 +768,11 @@
    "part": "lead-ir",
    "centre_px": [
     1088.7,
-    1156.8
+    1168.1
    ],
    "box_px": [
     1016,
-    1063,
+    1086,
     1158,
     1254
    ],
@@ -781,16 +781,16 @@
   "lead-woofer#0": {
    "part": "lead-woofer",
    "centre_px": [
-    1099.1,
-    1073.3
+    1098.8,
+    1086.9
    ],
    "box_px": [
     1047,
-    1062,
+    1079,
     1150,
-    1084
+    1094
    ],
-   "depth_m": 4.218
+   "depth_m": 4.217
   },
   "left#0": {
    "part": "left",
@@ -852,11 +852,11 @@
    "part": "lining-back-d-web",
    "centre_px": [
     1171.5,
-    1165.3
+    1176.3
    ],
    "box_px": [
     1130,
-    1098,
+    1120,
     1215,
     1235
    ],
@@ -1075,7 +1075,7 @@
   "port-left#0": {
    "part": "port-left",
    "centre_px": [
-    1024.1,
+    1024.4,
     1206.3
    ],
    "box_px": [
@@ -1089,13 +1089,13 @@
   "port-right#0": {
    "part": "port-right",
    "centre_px": [
-    1115.3,
+    1115.5,
     1212.9
    ],
    "box_px": [
     1047,
     1177,
-    1182,
+    1183,
     1251
    ],
    "depth_m": 4.064
@@ -1104,13 +1104,13 @@
    "part": "rating-plate-print",
    "centre_px": [
     1191.2,
-    1083.9
+    1105.8
    ],
    "box_px": [
     1172,
-    1081,
+    1103,
     1211,
-    1087
+    1109
    ],
    "depth_m": 4.383
   },
@@ -1482,13 +1482,13 @@
    "part": "amp-box",
    "centre_px": [
     2475.5,
-    920.9
+    941.0
    ],
    "box_px": [
     2393,
     751,
     2561,
-    1079
+    1119
    ],
    "depth_m": 2.392
   },
@@ -1496,13 +1496,13 @@
    "part": "amp-box-gasket",
    "centre_px": [
     2490.3,
-    922.9
+    942.7
    ],
    "box_px": [
     2422,
     759,
     2562,
-    1079
+    1119
    ],
    "depth_m": 2.418
   },
@@ -1524,13 +1524,13 @@
    "part": "amp-plate-housings",
    "centre_px": [
     2495.0,
-    926.3
+    946.1
    ],
    "box_px": [
     2452,
     797,
     2539,
-    1051
+    1090
    ],
    "depth_m": 2.427
   },
@@ -1538,13 +1538,13 @@
    "part": "amp-plate-ink",
    "centre_px": [
     2502.8,
-    909.5
+    929.3
    ],
    "box_px": [
     2470,
     802,
     2536,
-    1015
+    1054
    ],
    "depth_m": 2.431
   },
@@ -1608,13 +1608,13 @@
    "part": "amp-plate-metal",
    "centre_px": [
     2504.2,
-    923.7
+    943.5
    ],
    "box_px": [
     2469,
     799,
     2540,
-    1045
+    1084
    ],
    "depth_m": 2.427
   },
@@ -1622,13 +1622,13 @@
    "part": "amp-plate-module",
    "centre_px": [
     2487.4,
-    922.5
+    942.4
    ],
    "box_px": [
     2439,
     793,
     2536,
-    1047
+    1086
    ],
    "depth_m": 2.413
   },
@@ -1636,13 +1636,13 @@
    "part": "amp-plate-plate",
    "centre_px": [
     2497.9,
-    923.9
+    943.6
    ],
    "box_px": [
     2446,
     780,
     2552,
-    1063
+    1102
    ],
    "depth_m": 2.432
   },
@@ -1650,13 +1650,13 @@
    "part": "amp-plate-print",
    "centre_px": [
     2492.0,
-    931.7
+    951.4
    ],
    "box_px": [
     2455,
     801,
     2530,
-    1059
+    1098
    ],
    "depth_m": 2.44
   },
@@ -1705,14 +1705,14 @@
   "amp-plate-rings#1": {
    "part": "amp-plate-rings",
    "centre_px": [
-    2498.6,
-    927.2
+    2498.4,
+    946.9
    ],
    "box_px": [
-    2462,
-    811,
-    2536,
-    1041
+    2461,
+    810,
+    2537,
+    1080
    ],
    "depth_m": 2.433
   },
@@ -1720,13 +1720,13 @@
    "part": "amp-plate-screws",
    "centre_px": [
     2499.0,
-    924.0
+    943.8
    ],
    "box_px": [
     2448,
     781,
     2552,
-    1062
+    1100
    ],
    "depth_m": 2.434
   },
@@ -1734,13 +1734,13 @@
    "part": "amp-plate-sticker",
    "centre_px": [
     2511.8,
-    1010.0
+    1049.7
    ],
    "box_px": [
     2500,
-    1004,
+    1043,
     2524,
-    1016
+    1056
    ],
    "depth_m": 2.422
   },
@@ -1888,13 +1888,13 @@
    "part": "cable-glands",
    "centre_px": [
     2459.9,
-    838.7
+    858.9
    ],
    "box_px": [
     2409,
     622,
     2512,
-    1046
+    1086
    ],
    "depth_m": 2.376
   },
@@ -2224,11 +2224,11 @@
    "part": "lead-ir",
    "centre_px": [
     2383.0,
-    1204.0
+    1224.9
    ],
    "box_px": [
     2296,
-    1028,
+    1072,
     2464,
     1391
    ],
@@ -2237,16 +2237,16 @@
   "lead-woofer#1": {
    "part": "lead-woofer",
    "centre_px": [
-    2424.4,
-    1049.4
+    2424.2,
+    1074.6
    ],
    "box_px": [
     2362,
-    1027,
+    1060,
     2483,
-    1070
+    1088
    ],
-   "depth_m": 2.267
+   "depth_m": 2.266
   },
   "left#1": {
    "part": "left",
@@ -2308,11 +2308,11 @@
    "part": "lining-back-d-web",
    "centre_px": [
     2481.1,
-    1217.4
+    1237.4
    ],
    "box_px": [
     2370,
-    1096,
+    1135,
     2599,
     1349
    ],
@@ -2531,12 +2531,12 @@
   "port-left#1": {
    "part": "port-left",
    "centre_px": [
-    2232.2,
-    1293.2
+    2232.4,
+    1293.1
    ],
    "box_px": [
     2128,
-    1229,
+    1228,
     2334,
     1365
    ],
@@ -2545,8 +2545,8 @@
   "port-right#1": {
    "part": "port-right",
    "centre_px": [
-    2552.1,
-    1316.2
+    2552.3,
+    1316.1
    ],
    "box_px": [
     2440,
@@ -2560,13 +2560,13 @@
    "part": "rating-plate-print",
    "centre_px": [
     2500.5,
-    1070.1
+    1109.6
    ],
    "box_px": [
     2438,
-    1064,
+    1105,
     2565,
-    1076
+    1115
    ],
    "depth_m": 2.432
   },
