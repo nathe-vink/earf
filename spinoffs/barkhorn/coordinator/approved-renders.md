@@ -2059,6 +2059,21 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    and the layers still read; otherwise h6), and THE HAZE TALL FINAL STARTS AT ONCE FROM THE PICK (2400x3000, bands,
    raw and finished, both audit halves); the coordinator looks at h7 when the lane's line comes. The Smoke hold
    ends 17:00 UTC; the Haze final is finished first if it is still rendering then.
+   14:51 UTC, shown to the owner in chat: Haze h6, as the 3 Nov place with today's speaker; the final starts on its
+   own unless he objects.
+   14:56 UTC, biomes lane 6ed579b718: `haze-b-seat-h7.jpg` (h6 with the hill haze 0.012). PICKED BY THE RULE: h7 (its
+   far ridges 0.629 against the near hill's 0.563 in the lane's corrected boxes; front 0.322, cone 0.162, darkest
+   0.055, p99.9 0.800; the layers read). The coordinator looked at h6 and h7 side by side at 14:57 and agrees (own
+   boxes, the speaker cut out: far ridge 0.574 against 0.484; in h6 0.556 against 0.470, so the first reading of
+   0.462 had run into the speaker). THE HAZE TALL FINAL STARTED 14:56 (2400x3000, 64 samples, 4 bands; band 1, the
+   sky, pushed 15:01: 4 min, peak 6.0 GB).
+   15:03-15:10 UTC, site lane, on the coordinator's heads-up: Haze and Smoke are prepared on r47-site-next
+   (0dae0e2d10; nothing pushed to r49). The places row follows the passed habitats: seven stand four over three, the
+   three centred (Ember, Dust, Acid, Poison / Ice, Haze, Fog); eight in two rows of four (Smoke last); the phone's
+   swipe row grows; with six the build is byte-identical to r49. WORDS CONFIRMED by the coordinator: 'Haze, in dry
+   grass on hazy hills.' (color page: 'In dry grass on rolling hills, fading into violet haze.') and 'Smoke, where
+   a meteor just came down.' (color page: 'In grassland at dusk, where a meteor has just come down.').
+   Written 15:11 UTC.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
