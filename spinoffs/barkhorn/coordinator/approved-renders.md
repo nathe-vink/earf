@@ -1907,6 +1907,18 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    10:36 UTC, coordinator's check-in: both picture lanes pushed within ten minutes; nothing stalled. Waiting: bar-pendants
    band b and the stitch; the Fog final's bands 2-4, stitch and audit; then Ice with its memory log; the owner's word
    on Smoke (the final starts on its own about 17:00 UTC otherwise).
+   10:44 UTC, biomes lane 3393e5b53c: the Fog final's band 2 of 4 (the horn, the fog bank, the hills; 16 min, 6.7 GB).
+   11:08 UTC, speaker lane 9e8ddccfc1: `planet-bar/bar-pendants.png` RE-RENDERED WITH THE WALL HEADS AT 0.16 (all by one
+   factor; nothing else changed; shades and Cores as passed; at 255: 0.72 %; audit 0/0). Its rebuild of the
+   coordinator's measure reads 8-13 % above the coordinator's. Proofs at 0.25 gave the table 29.6 but the left
+   90th percentile 153, so the 125 limit was kept over the table's 29.
+   11:09 UTC, coordinator's check at full size against ac342ff0 and the dark 15d94cac34 (the coordinator's measure):
+   whole wall 39.6 (dark 26.8, passed 59.6; thirds 58.4 / 45.1 / 17.0); 90th percentile left 121, centre 118; table
+   27.3 (24.7 / 35.3); frame 36.1 (28.7 / 48.3); the lit glass within 2.2 levels of the passed frame; no join; the
+   records read as real at 100 % and the shades lead. PASSED, FINAL (the table at 27.3 accepted: the limit on the
+   white spines counts for more). THE BAR SET IS CLOSED. Shown to the owner in chat. To the site lane: prepare on
+   r47, hold the r49 push for the Fog final (one deployment for both; the word push for the pendants alone if Fog has
+   not come by 13:00 UTC). The speaker lane has no open job.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
