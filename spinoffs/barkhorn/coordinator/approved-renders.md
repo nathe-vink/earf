@@ -2006,6 +2006,20 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    and mood with today's Tropos in Haze (FA123 package), tufts to the base, a low warm sun behind so the cabinet
    glows and its violet shadow falls toward the camera, the hill layers each paler. Order in the lane: the Ice
    final, Haze h1, the Smoke final at 17:00 UTC or on the owner's yes, the Haze final after the coordinator's pass.
+   13:19-14:07 UTC, biomes lane: Haze h1 set up (6a1b1673b5: the low sun behind right at az 120, 135 deg off axis,
+   el 4, the sky and the disk turned to it; no flag). The Ice final in 6 thin bands (3 / 4 / 7 / 10 min for the first
+   four; peak 9.3 GB), stitched at 8f4c9fd9f2: `ice-final-portrait.jpg` and `-finish.jpg` (finish.py v1.1), 2400x3000,
+   64 samples, i7's settings. The audit's light half clean: no hidden object, no area lamp; lamps the sun (30,
+   #FFB872) and the cabin's interior lamp (a 2500 W point inside the cabin); emitting mesh the cabin's lit room behind
+   the window; the world kiara_9_dusk at 0.6. The cabin's lamp and room are the place's own light, seen in frame
+   through the window. The coverage half (killed for memory at 2400x3000) is rerun at 1200x1500 after Haze h1,
+   which started 14:10. (13:40: the coordinator's check-in found nothing stalled.)
+   14:12 UTC, coordinator's check of the Ice final at full size: it equals i7 (mean difference from the proxy
+   0.004-0.013 by sixths of the height); raw p1 0.045, p99.9 0.906, 36 px at 255 raw and none finished; no join (the
+   two flagged row jumps are the cabin's roof edge and the snow ridge at the right); the speaker, the base in its
+   drift, the blue shadow across warm snow and the lit flakes clean at 100 %. PASSED, FINAL on the picture and the
+   light half; the coverage half follows. Shown to the owner in chat. To the site lane with the word PUSH (it
+   replaces the interim Ice; the words may follow the last sun). WITH THIS ALL SIX PLACES IN THE ROW ARE SEATED.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
