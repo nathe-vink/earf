@@ -316,3 +316,18 @@ bar-backbar (3200 x 1800, the same camera; two bands blended over 107 rows, mean
   16.7 / 0.37 / 0.95, ember 5.2 / 0.41 / 1.00 and 4.9 / 0.43 / 1.00; the passed frame's the same to 1.2 degrees of hue.
   The Cores: ember 8.0 / 0.94 / 0.73, dust 21.2 / 0.86 / 0.69 (passed 8.0 / 0.94 / 0.73, 21.0 / 0.85 / 0.69).
 - Clipped pixels 0.72 % (passed 0.71 %). Audit: hidden 0, equipment 0.
+
+## bar-pendants, the room brought back (2026-11-14, the coordinator, 09:34)
+
+The frame at wall heads 0.08 (15d94cac) matched only the cells behind the cluster; the room read 45 % of the passed
+frame's. Re-rendered with the wall heads at **0.16** (all five by one factor), everything else unchanged; two bands over
+143 rows (mean difference 0.61).
+- The coordinator's measure (8-bit luminance, the shades masked; the wall rows 0-1240, its thirds; the table band rows
+  1800-2400), as rebuilt here (`pendroom.py`: it reads about 10 % above the coordinator's on the 0.08 frame and within
+  8 % on the passed one): **the wall 43.9**, thirds 64.0 / 48.9 / 18.0; **the 90th percentile left 131.1, centre 126.3**;
+  **the table band 27.3**; **the whole frame 36.1**. The 0.08 frame on the same measure: 30.3, 94.9, 90.9, 24.7, 28.7; the
+  passed frame: 64.1, 190.6, 169.8, 35.3, 48.3.
+- Half-size proofs at 0.15 / 0.2 / 0.25: the wall 42.5 / 49.1 / 54.5, the left 90th percentile 127 / 142 / 153, the
+  table 26.8 / 28.3 / 29.6. A table band of 29 needs about 0.25, where the bright spines pass the 125 limit.
+- The shades' lit glass and the Cores as in the passed frame (ember Core 8.1 / 0.94 / 0.73, dust 21.2 / 0.86 / 0.69).
+  Clipped 0.72 %. Audit: hidden 0, equipment 0.
