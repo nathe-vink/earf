@@ -21,3 +21,19 @@ FA123's. `front-diff.png`: the two and their difference, 8 x amplified.
   back's lining and the compartment behind it show through (the compartment is 45 longer and the back's lower batt
   shorter by as much), the rest a sparse speckle over the interior where the changed geometry moves the path tracer's
   samples. The outside (the shell, the horn, the posts, the feet, the woofer and its ring) is the same.
+
+## The eight backs
+
+`horn-back-<tint>.png` (contact sheet `contact-backs.jpg`): the passed shot files
+(`renders/2026-11-04/barkhorn/rollout/A-polished-p2-p2b/horn-back-<tint>.shot.json`), unchanged, from the FA123
+package; 1200 x 900, 128 samples, each with `--masks`: **hidden 0 px, equipment 0 px** in all eight. These frames look
+at the horn and the back's top; the amplifier's plate is below them, so they differ from the studio refresh of
+2026-11-12 only inside the clear cabinet.
+
+## "The amplifier"
+
+`macro-amp-dust.png`: the site's "The amplifier" (its `img/macro-amp.jpg` is the 2026-10-18 studio frame), from its
+current shot file `spinoffs/barkhorn/campaign/rollout/A-polished-p2/macro-amp-dust.json`, unchanged, on the FA123
+package: 1600 x 1600, 128 samples, `--masks`: hidden 0, equipment 0. The FA123's plate as in Hypex's product
+photograph: the XLRs, RCAs, USB, optical and the lights at the top, the module's twenty screws, Hypex's name and
+FA123 lower, the marks, the sticker and the mains inlet and switch at the foot; the rating engraved in the band under it.
