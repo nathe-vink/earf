@@ -1732,6 +1732,21 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    Mantle bar frame is the second view on Mantle's Ember page. Coordinator's check 06:31 (home at 390 and 430,
    /mantle): PASSED. One share link made on it (it expires 15 Nov 05:30 UTC) and sent to the owner in chat only.
    THIS IS NOW THE PREVIEW THE OWNER HOLDS (8c5bf5245c).
+   07:14 UTC, biomes lane ce0aa08987: THE ACID TALL FINAL, `habitats/acid-b-final-portrait.jpg` and `-finish` (2400x3000,
+   64 samples, bands of 10, 13 and 13 min; a2's light: the sun at 49 from 132 off axis, el 7, through overcast; the
+   sky at 0.10; rain; haze 0.0010; exposure 0.75, Medium High Contrast; passive the 8 x 6 m black flag out of frame;
+   asset fd8aa47e). Front 0.352, cone 0.127, darkest 1 % speaker 0.110, ground 0.118; 1,310 px clipped (raindrop
+   glints). The audit: no hidden object, no area lamp, the sun the only lamp; its coverage half is rerun at
+   1200x1500 after Dust (memory).
+   07:16 UTC, coordinator's check at full size: no seam (row jumps 0.8 and 5.0, the second on the rock's edge); the base
+   and the reflection hold; the horn's hue 61.1 raw, 61.2 finished; the cone at 0.127 accepted. PASSED: ACID'S TALL
+   PICTURE IS FINAL.
+   - A FAULT OF THE FINISH, FOUND AND CORRECTED: the bloom blew the bright horizon out (0.006 % of pixels at 255 in
+     the raw, 3.24 % after the finish). `finish.py` now has a highlight shoulder (linear values above 0.70 roll off
+     toward 1), on by default: f1a91f5ce4. With it the Acid raw finishes at 0.003 % at 255. The lane re-runs it over
+     the Acid raw (same `-finish` name) and uses it for Dust and everything after; the finished Ember, Poison, Ice
+     and Fog stay (none clipped). Shown to the owner 07:16 (the coordinator's own run of the new finish on the raw,
+     the same script and seed).
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
