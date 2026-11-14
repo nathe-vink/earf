@@ -235,6 +235,10 @@ def land_scatter(bpy_, sink=0.01, edge=0.18, drop=0.04):
     import bpy_extras.object_utils as ou
     sc = bpy_.context.scene; dg = bpy_.context.evaluated_depsgraph_get()
     tufts = [o for o in sc.objects if o.parent is None and not o.hide_render and o.name.startswith('grass_')]
+    if not tufts and not any(o.parent is None and not o.hide_render and o.name.startswith(SETTLE_MODELS) for o in sc.objects):
+        # nothing to land (Ice, 2026-11-14): the ground's BVH below is built from the evaluated meshes as Python lists, and
+        # on Ice's displaced snowfield and far ground it took 10 GB and was killed before the render began
+        return
     G = []
     for o in sc.objects:
         if o.type != 'MESH' or o.parent is not None or o.hide_render or o.name.startswith('grass_') or len(o.data.polygons) < 10000:
