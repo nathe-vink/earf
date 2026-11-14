@@ -830,7 +830,8 @@ def apply(web, head, rest):
 # stage and the wall hidden until the new night renders pass; every lit lamp picture pulled (their light was faked);
 # Mantle only in its new design.
 RC_TALL = 'renders/2026-11-12/barkhorn/studio-refresh/site-front-off-tall-{name}.png'   # the refreshed model, all eight (r33-speaker-horn 95fdff0d)
-HORN_BACK_SRC = 'renders/2026-11-12/barkhorn/studio-refresh/horn-back-{name}.png'       # the same (round port rings, black feet, no loose lead)
+HORN_BACK_SRC = 'renders/2026-11-13/barkhorn/fa123/horn-back-{name}.png'       # the FA123 inside the clear cabinet (r33-speaker-horn e62e1045)
+AMP_SRC = 'renders/2026-11-13/barkhorn/fa123/macro-amp-dust.png'                 # the FA123's plate from behind, in Dust (1600 x 1600)
 # Ember, Dust, Poison, Ice e624e13e; Haze, Fog 3d0b613f; Acid 04d21c5c (on the Acid horn fix). Smoke held.
 RC_KEYS = ['red', 'orange', 'amber', 'green', 'blue', 'violet', 'ice', 'black']
 EIGHT = True         # Smoke is a current color again (the coordinator, 2026-11-10 07:56)
@@ -1159,10 +1160,11 @@ def rc_fixes(p, web):
         im.save(os.path.join(web.SITE, f'img/rc/{k}-horn-back.webp'), 'WEBP', quality=82)
         im.resize((224, 168)).save(os.path.join(web.SITE, f'img/rc/{k}-horn-back-th.webp'), 'WEBP', quality=80)
         extra[k]['horn-back'] = {'src': f'img/rc/{k}-horn-back.webp', 'w': im.width, 'h': im.height, 'th': f'img/rc/{k}-horn-back-th.webp'}
-    im = Image.open(os.path.join(web.ROOT, R + 'A-polished-p2-backfix/amp-plate-ember.png')).convert('RGB')
+    im = Image.open(os.path.join(web.ROOT, AMP_SRC)).convert('RGB')
+    im = im.crop((160, 0, 1440, 1600)).resize((1000, 1250), Image.LANCZOS)        # 4:5, like the gallery's other views
     im.save(os.path.join(web.SITE, 'img/rc/plate.webp'), 'WEBP', quality=82); im.resize((168, 210)).save(os.path.join(web.SITE, 'img/rc/plate-th.webp'), 'WEBP', quality=80)
     for k in RC_KEYS:
-        extra[k]['amp'] = {'src': 'img/rc/plate.webp', 'w': im.width, 'h': im.height, 'th': 'img/rc/plate-th.webp', **({} if k == 'red' else {'tag': 'Shown in Ember'})}
+        extra[k]['amp'] = {'src': 'img/rc/plate.webp', 'w': im.width, 'h': im.height, 'th': 'img/rc/plate-th.webp', **({} if k == 'orange' else {'tag': 'Shown in Dust'})}
     i = p.rest.index('const D = ') + len('const D = ')
     j = p.rest.index(', BY = Object', i)
     D = json.loads(p.rest[i:j])
@@ -2147,6 +2149,11 @@ def rc_products(p, web):
           'Set it back on its dock and it charges in two to three hours.')
     p.sub("`Core lit in ${c.name}, sitting low in its black acrylic base.`", "`Core lit in ${c.name}, sitting low in its satin base of the same color.`")
     p.sub("`Hemisphere lit, its ${c.name} shade glowing beneath a black hub.`", "`Hemisphere lit, its ${c.name} shade glowing beneath a satin black cap.`")
+    # the FA123 (the owner, 2026-11-14; the list approved by the coordinator 00:38): the woofer on two bridged channels
+    p.sub('Hypex FusionAmp FA122, built in: 125 W a channel into 4 &Omega;, about 75 W into the 8 &Omega; woofer; crossed at 1 kHz in its DSP',
+          'Hypex FusionAmp FA123 built in: the woofer on two bridged channels, up to 125 W into its 8 &Omega;; the horn on its own; crossed at 1 kHz in its DSP')
+    p.sub('Hypex FA122, built in: about 75 W into the woofer, crossed at 1 kHz',
+          'Hypex FusionAmp FA123 built in: the woofer on two bridged channels (up to 125 W into 8 &Omega;), the horn on its own; crossed at 1 kHz')
     p.sub("facts: c => [...L.facts, ['Color', c.name]],",
           "facts: c => [...L.facts.map(f => L.lm && f[1].includes('{lm}') ? [f[0], f[1].replace('{lm}', L.lm[c.k])] : f), ['Color', c.name]],")
     # the views' words: Mantle in its own color; Hemisphere from below
@@ -2497,7 +2504,7 @@ def rc_finish(web):
         for a, b in SPECTRUM:                 # the eight as the full spectrum, not a run from one to another
             u = u.replace(a, b)
         u = u.replace('sitting low in a black acrylic base', 'sitting low in a satin base of its own color')   # Core's base (fee3b161)
-        assert not re.search(r'(?i)black acrylic base|black hub|270 lux|brass|polished black', u), ('rc_finish: words the pictures make false', f)
+        assert not re.search(r'(?i)black acrylic base|black hub|270 lux|brass|polished black|FA122|75 W', u), ('rc_finish: words the pictures make false', f)
         assert not re.search(r'(?i)ember to smoke', u), ('rc_finish: Ember to Smoke', f)
         if u != t:
             open(f, 'w').write(u)
