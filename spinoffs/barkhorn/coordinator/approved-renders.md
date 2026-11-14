@@ -1629,6 +1629,17 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    proxies of Acid and Dust, then of Ice and Fog; tall finals on the coordinator's check. The site lane builds and
    pushes the Ice and Fog finish swap (ready on r47-site-next 5249b501c9; the phone hero's Ice included); the share
    link is made on that deployment.
+   02:44 UTC, site lane: the Ice and Fog finish swap pushed and READY: r49-site-rc ee93bcb2f7,
+   dpl_38TaVi76zL5o2Kcdeizkop4sqwoQ, `https://earf-3c1lo48a6-nathanielvink-4975s-projects.vercel.app` (six images
+   changed). Coordinator's check 02:47 (home at 1440 and 390, /colors/ember, /colors/poison): PASSED; the home row
+   "Each color is a place." shows Ember, Ice, Poison and Fog in one look. One share link made on it (it expires
+   15 Nov 01:44 UTC) and sent to the owner in chat only. THIS IS THE PREVIEW THE OWNER HOLDS.
+   02:49 UTC, speaker lane 8ebd1690: THE MANTLE FRAME, `planet-bar/mantle-bar.png` (2400x1600, 256 samples, two bands;
+   the FA123 package, the approved wall; the camera at 1.46; the Core 5.0 / 0.66 / 0.91; audit 0/0). The point on
+   the base's face is gone. Coordinator's check at full size 02:49: frame, Core, wall and join pass; but the tip of
+   the plinth's edge glow, at the corner (about x 1295, y 1312), is a small bright red point that reads as an
+   indicator. Ordered: find the lamp that feeds the corner and move it a few cm (one crop, then the strip, the same
+   file name); the even edge glow may stay. Then the portrait, bar-backbar and bar-pendants.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
