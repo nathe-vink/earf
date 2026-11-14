@@ -1844,6 +1844,22 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    - mantle-bar and the tall bar frame: no re-render either way (the front is proven unchanged by the FA123, mean
      difference 0.12/255); the lane is asked which asset they used, for the record only.
    - the share cards stay (made from the fronts, which have not changed).
+   09:30 UTC, speaker lane 15d94cac34: `planet-bar/bar-pendants.png` WITH THE APPROVED WALL (2400x2400; camera, lamps
+   and set of the passed frame ac342ff0; the FA123 package; the wall heads at 0.08; shades and Cores as passed to
+   within 1.2 deg of hue; at 255: 0.72 % against 0.71 %; audit 0/0). For the record: mantle-bar (8ebd1690), the tall
+   frame (41494d42), bar-backbar and bar-pendants are on the FA123 package (the shot files were switched 00:34); the
+   hero and core-bar-table on the detail-pass package (the fronts are proven unchanged; no re-render). The turn's
+   10 Nov rig is a studio sweep with key, fill and wash area lamps and nothing else in the set (mask pass 0/0 at
+   all 24 angles); the Ember pilot is rendering (640x576, 32 samples, as the present set).
+   09:34 UTC, coordinator's check at full size against ac342ff0: the work is clean (shades, Cores, the records at
+   100 %, no join), but NOT PASSED: THE ROOM IS TOO DARK. With the lit shades masked the whole wall is 26.8 against
+   59.6 (45 %; thirds 38.9/93.9, 30.8/59.6, 11.7/27.6), the table band 24.7 against 35.3 (the glossy top mirrored the
+   lit wall and has lost its sheen; the Cores and glasses stand on plain black), the frame 28.7 against 48.3. The
+   lane's 12.6 against 12.4 holds only for the cells right behind the cluster, which were dark cells in the old
+   wall. The fault is the coordinator's instruction, which named only the wall behind the cluster.
+   ORDERED: one more render, the wall heads only, raised until the whole wall (shades masked) has a mean of 38-42 on
+   a half-size proof (heads near 0.2-0.25 expected), the 90th percentile of the left and centre thirds under 125 so
+   the white spines stay under the red shades; the table band and frame means reported. After the turn pilot.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
