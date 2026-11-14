@@ -107,8 +107,11 @@ SETS = {
     # (the engine's azimuth: 0 toward -y, the camera's side; so 70 was front-right but grazing the front face, which sat
     # in shade (the gate on 620c4bba: a near-black indigo block). 30: on the camera's side, 45 deg off its line, out of
     # frame behind the photographer, the front face lit so light enters the box; the sky and the disk turned with it)
-    'haze_b': {'product.instances.0.rotate_z': -10.0, 'sun.azimuth_deg': 30.0, 'sun.elevation_deg': 6.0,
-               'sky.rotation_deg': 18.8, 'camera.shift_y': -0.13,
+    # Haze h1 (the coordinator, 2026-11-14 13:19: seated by S1-S8): the low sun behind right, 135 deg off the camera's line
+    # (az 120, el 4), warm and weak through the haze; the sky turned so its own sun stands there (qwantani_dusk_2 at 293.9)
+    # (was az 30, el 6, on the camera's side, 45 deg off its line, with the sky at 18.8)
+    'haze_b': {'product.instances.0.rotate_z': -10.0, 'sun.azimuth_deg': 120.0, 'sun.elevation_deg': 4.0,
+               'sky.rotation_deg': 293.9, 'camera.shift_y': -0.13,
                'render.exposure': -0.67},   # +1/3 stop on the shot's -1.0, whole frame (the critics on 1921b6fa: the box at the floor of 20-30)
     # Fog (the coordinator's gate on 45a190d1): the clear polished horn refracted the fog bank's top edge into an X.
     # The camera 0.30 m lower (lens rise 0.06 -> 0.18 keeps the framing) puts the whole horn on plain sky, and it is
@@ -154,7 +157,7 @@ DROP = {'dust': ['tumbleweed'],
         'poison_g5': ['bones']}
 # set props changed per habitat, by fn: Haze's visible sun disk (an emitter in the set) moved with the key to the sun
 # lamp's azimuth and elevation, out of frame, so the light in the picture has one source (the coordinator, 17:29)
-MODIFY = {'haze_b': {'sundisk': {'azimuth': 30.0, 'elevation': 6.0}},
+MODIFY = {'haze_b': {'sundisk': {'azimuth': 120.0, 'elevation': 4.0}},
           # Fog (the coordinator's gate on 5c0f8509: the clear cabinet read champagne): the brown boulder right behind it,
           # seen through the clear walls, moved aside, so the bright fog bank sits behind the box
           'fog_b': {'boulder_01': {'position': [2.6, 3.6, -0.12]}},
@@ -174,7 +177,7 @@ MODIFY = {'haze_b': {'sundisk': {'azimuth': 30.0, 'elevation': 6.0}},
 # mirrored in the speaker, and listed in the report under "passive" with its size and place. The flag (W x H m) stands
 # 1.2 m behind the camera, 1.4 m up; with it come the side cards (2.6 x 2.4 m), the one on a low sun's side left out.
 # The entries at 8 x 6 were the old default, named so the passed finals rebuild as they were.
-FLAG = {'haze_b': (4.0, 3.0), 'poison_ivy': (0.0, 0.0), 'poison_ivy_b': (0.0, 0.0), 'smoke_d': (0.0, 0.0), 'smoke_e': (0.0, 0.0),
+FLAG = {'haze_b': (0.0, 0.0), 'poison_ivy': (0.0, 0.0), 'poison_ivy_b': (0.0, 0.0), 'smoke_d': (0.0, 0.0), 'smoke_e': (0.0, 0.0),
         'ice': (8.0, 6.0), 'hero_ice': (8.0, 6.0),      # sky only, no sun lamp: shades no sun
         'fog_b': (8.0, 6.0), 'hero_fog': (8.0, 6.0),    # sun az 110 / 150, behind the speaker: shades nothing (flagsun check)
         'acid_b': (8.0, 6.0),                           # the coordinator 08:36: overcast, keep, list as passive (sun az 120, el 2.6: clear)
