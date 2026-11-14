@@ -1653,6 +1653,21 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
      declared lamps together; with them off it holds 5.9 / 0.85 / 0.80. The lane turns them down together or narrows
      them onto Mantle; the Core must hold s 0.55 or more with no clipped channel and Mantle must still read; proof
      first.
+   04:17 UTC, speaker lane 3fdfbc85: the portrait renders (2400x3000, two bands; the FA123 package, the approved wall)
+   with Mantle's three declared lamps out of this frame; the near Core then reads 4.9 / 0.77 / 0.84 unclipped; Mantle
+   is lit by the room and the pendants. No Core level was changed.
+   04:19 UTC, biomes lane 35ad932f54: `smoke-d-seat-p5.jpg` (640x800, 48 samples; 54 min build plus 49 min render).
+   The lane's faults: front 0.168; grass tufts 13 % over the cabinet's foot; a cracked, glassy edge on the trail's
+   volume. Sun 80 off axis, el 8; emitters sun, sky, the crater's fire, embers and sparks.
+   04:20 UTC, coordinator's check: NOT SHOWN TO THE OWNER. Beyond the lane's faults THE STORY DOES NOT READ: the crater is
+   out of frame (the fire cut by the left edge), the trail is a broad dusty wedge, the background reads as dunes.
+   Ordered: no p6 as proposed; first a LAYOUT PROOF in minutes (320x400, no volumetrics), then one proxy, then the
+   final in bands. The picture to build: the speaker a little right of centre; the crater behind left, wholly in
+   frame, its rim at x 5-45 %, y 52-62 %, with glow and flames; a dense black column to the top left, its near side
+   lit by the fire; ONE thin trail (1-2 % of the width) from the top edge at x 80 % down to the crater, passing above
+   the horn; scorched earth, thrown blocks, embers; a plain to a low horizon; dusk, the fire on the speaker's left
+   side, the sky carrying the front. The lane to say what takes the 54 minutes of build (bake the column once; the
+   trail a thin tube).
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
