@@ -1887,6 +1887,11 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    THE FOG TALL FINAL IS RELEASED from the saved build with f3a-e35's settings (2400x3000, bands of 40 min or less,
    raw and finished, both audit halves, the flag off the passive list). Order in the lane: Ice i1 (building), then
    the Fog final; the Ice final or an i2 after it. (The message to the lane is stamped 10:17.)
+   10:17 UTC, shown to the owner in chat: (1) the SMOKE asteroid test again, as e3 (fe524b0ce5), with a plain yes or
+   no asked. He was shown e2 at 05:44, wrote twice after it about the site and did not answer, so the question was
+   most likely missed. So that he is not the bottleneck: THE SMOKE FINAL STARTS ON ITS OWN when the biomes lane is
+   free (after the Fog and Ice finals, about 17:00 UTC at the earliest), as open country, unless he says no before
+   then. (2) the Fog pick f3a-e35, for his eye only; its final is already released.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
