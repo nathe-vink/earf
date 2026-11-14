@@ -1860,6 +1860,17 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    ORDERED: one more render, the wall heads only, raised until the whole wall (shades masked) has a mean of 38-42 on
    a half-size proof (heads near 0.2-0.25 expected), the 90th percentile of the left and centre thirds under 125 so
    the white spines stay under the red shades; the table band and frame means reported. After the turn pilot.
+   09:33 UTC, speaker lane 97ab0bff8f: THE TURN PILOT (`renders/2026-11-14/barkhorn/turn/turn-ember-00/06/12/18.png`,
+   the 10 Nov shot files unchanged, 640x576, 32 samples, today's FA123 package; 52-59 s a frame; audit 0/0 each).
+   Two facts the coordinator had wrong: in this rig frame 00 is the side, 06 the back (the engraved EARF), 12 the
+   other side, 18 the front; and the amplifier plate is in no turn frame (the frames hold the horn and the cabinet's
+   top), so the FA123 cannot show there.
+   09:36 UTC, coordinator's check, pixel by pixel against the 10 Nov frames: mean difference 0.06 / 0.15 / 0.11 / 0.02
+   of 255 for frames 00 / 06 / 12 / 18; 0.36 / 0.42 / 0.97 / 0.00 % of pixels differing by more than 12; by eye only
+   a rod collar and small edges. THE FULL RE-RENDER IS CANCELLED: THE 10 NOV TURN (370de3da) STANDS AS THE PASSED
+   TURN for all eight tints (a clean sweep, mask pass 0/0 at all 24 angles, today's model in this framing). The
+   site lane's note that the old plate shows in the back frames was an assumption and is withdrawn; told to both
+   lanes. The speaker lane's queue is now only bar-pendants.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
