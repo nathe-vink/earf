@@ -267,3 +267,14 @@ bar-backbar (3200 x 1800, the same camera; two bands blended over 107 rows, mean
   records (`record_wall.py`'s `plain`, from a stream of its own, the rest of the wall unchanged); only the strip x 0.86
   to 1, y 0.36 to 0.70 re-rendered (128 samples, the same package) and blended in with a 40 px feather on its three
   inner edges (mean difference outside the cell 0.53). The right 40 px strip: mean 46.5, p99 193.9, max 208.0.
+
+## The Mantle frame with the camera at 1.46 (2026-11-14)
+
+- 2400 x 1600, 256 samples, in two bands (0 to 0.53, 0.47 to 1) blended over 95 rows (mean difference 0.78). The FA123
+  package (b597165b's engine files), the approved record wall; the camera's eye 1.46 (was 1.38), its target, lens and
+  azimuth unchanged.
+- The red point (14 Nov: a lamp seen by total internal reflection through the clear base layer, read as an indicator
+  light): crops at 1.38 +/- 4 cm and +/- 2 to 4 degrees kept it; at 1.46 the lone point is gone. What red remains under
+  the deck is the Ember plinth's front edge glowing along its length, brightest where it ends at the corner (red excess
+  about 147 at x 1298, y 1314; the old point was at 1295, 1260, alone on the dark face).
+- The Core (Ember), 12 px at its centre: 5.0 / 0.66 / 0.91, no clipped channel. Audit: hidden 0, equipment 0.
