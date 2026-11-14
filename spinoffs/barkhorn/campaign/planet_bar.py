@@ -340,6 +340,7 @@ def bar_backbar_portrait():
     return s
 
 
+PEND_WALL_GAIN = 0.08
 PEND_HEMIS = [('acid', 6.55, 0.06, 1.59), ('ember', 6.75, -0.10, 1.44), ('dust', 6.93, 0.14, 1.70), ('ember', 7.11, -0.04, 1.50),
               ('acid', 7.29, 0.10, 1.63)]
 
@@ -373,6 +374,11 @@ def bar_pendants():
          'w': 0.18, 'legs': [0.12, 0.09, 0.06], 'rr': 0.006, 't': 0.004, 'color': '#D8CCB8', 'seed': 5}]
     for k in [k for k in s['lights'] if k.startswith('track-bar')]:      # (07:22: the pools faint: the bar's own heads off here)
         s['lights'].pop(k)
+    # (14 Nov, the coordinator: the new wall's pale spines behind the cluster ate the shades' glow: the wall heads only,
+    # back to the passed frame's level (ac342ff0) behind the cluster: half-size proofs at 1.0 / 0.55 / 0.35 / 0.08 / off
+    # gave 40.3 / 32.1 / 26.4 / 12.3 / 3.3 against 12.4)
+    for k in [k for k in s['lights'] if k.startswith('track-wall')]:
+        s['lights'][k] = {**s['lights'][k], 'irradiance': round(s['lights'][k]['irradiance'] * PEND_WALL_GAIN, 3)}
     s['lights']['house'] = {**s['lights']['house'], 'irradiance': round(s['lights']['house']['irradiance'] * 0.5, 3)}
     # (proof: at 50 mm from 1.75 m the far bay stood cut at the edge: from further back, 100 mm, the wall's span between
     # the bays only, a little above so the bar top shows the pools)
