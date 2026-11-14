@@ -1810,7 +1810,7 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    reaches the base (the blades over the foot stand behind it and show through the clear cabinet); the CONE 0.078,
    FAILS 0.14, so the final was not started. Its reading: the sun stands behind, so only the sky on the camera's side
    lights the cone, and Fog's 8 x 6 m black flag stands there (set once to keep the sky out of the front panel).
-   09:16 UTC, coordinator's check at full size (written 09:12): agreed; the woofer is a black disc (my box: mean 0.091,
+   09:12 UTC, coordinator's check at full size (the message to the lane is stamped 09:16, a guessed stamp): agreed; the woofer is a black disc (my box: mean 0.091,
    median 0.074); the rest of the frame holds. DECISION: THE FLAG GOES (a meadow in fog has no black wall behind the
    camera; S5 wants the place in the gloss); the two side cards stay. f3 ordered as one build and two renders:
    a) no flag only; b) no flag and the place's own air thin and uniform between camera and speaker, in the render
