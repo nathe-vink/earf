@@ -191,7 +191,7 @@ SINK = {'poison_ivy_b': 0.02,  'ember_d': 0.018,   # S1: the feet bedded in the 
         # (earlier: at 0.015 a sky-bright strip (8-9 px) showed between the edge and its reflection (the gate on
                           # cc380fab: "hovers"); the puddle's displacement sits above the ray-cast surface. 0.025 closes it
                           # (strip peak 82 -> 56 against water 50); at 0.03 the submerged part showed through)
-        'acid_b_old': 0.03, 'ice': 0.022, 'hero_ice': 0.022,
+        'acid_b_old': 0.03, 'ice': 0.03, 'hero_ice': 0.022,
         # Dust (the gate on the 2026-11-09 re-render, grounded FAIL, and the passed file the same): a 6-8 px strip of lit
         # sand between the bottom edge and its shadow; the ripples are displaced at render time above the ray-cast sand.
         # 0.012 -> 0.028 beds the base into the ripples (crops at 0.02 and 0.028)

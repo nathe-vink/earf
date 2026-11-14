@@ -328,7 +328,7 @@ def _snow_pbr(bpy, name, res='2k', displace=0.03, ripple=0.012, sparkle=1.0):
 def snowfield(bpy, name, p, kit):
     """A snowfield (assets.ground's displaced patch) dressed in the blended snow above; and round the speaker's base
     a drift banked against it (`bank` [cx, cy, w, d, turn_deg, height]), the snow piled up its sides and falling away
-    unevenly, level with the field beyond."""
+    unevenly, level with the field beyond; `windward` [deg, gain] piles it higher on the side the wind comes from."""
     import assets
     ob = assets.ground(bpy, name, 'snow_02', tuple(p.get('size', [26, 26])), p.get('res', '2k'), tuple(p.get('position', [0, 0, 0])),
                        p.get('cells'), 0.0, None, 0.0, None, 1.0, 1.0, None, None)
@@ -367,5 +367,10 @@ def snowfield(bpy, name, p, kit):
                 t = 1.0 - dist / fall
                 # wind from the front: a scoop hollowed under the front face, banked up behind and at the back corners
                 k = 1.0                                                  # a soft drift lapping the base all round
+                if p.get('windward'):
+                    # Ice i1 (the coordinator, 2026-11-14): snow drifted up against the windward side, thinner in its lee;
+                    # `windward` [direction the wind comes from, degrees in the speaker's frame (0 = +x, 90 = +y), gain]
+                    wa, g = p['windward']
+                    k = max(0.25, 1.0 + g * math.cos(math.atan2(ly, lx) - math.radians(wa)))
                 v.co.z += h * k * (t ** 1.6) * (0.75 + 0.5 * noise.noise(Vector((lx * 9.0, ly * 9.0, 1.3))))
     return [ob]
