@@ -1956,6 +1956,13 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    The fix approved in advance: true displacement only within about 3 m of the speaker and bump beyond (or a capped
    dicing), the firs' textures limited, the flakes as instances of a few low-poly meshes; a peak under 9 GB; then
    i1 at once.
+   12:38 UTC, site lane: bar-pendants with the wall and the seated Fog pushed together: r49-site-rc 7dbe25cfbd,
+   dpl_4DP4mLavoz1XhuyyfwDzAuXQBKGj, `https://earf-lr15afmgv-nathanielvink-4975s-projects.vercel.app`, READY (preview
+   only). Four images changed (the pendants picture and thumbnail, the Fog habitat and thumbnail), no markup.
+   12:41 UTC, coordinator's check (/colors/fog and /lighting at 1440, the home's places row at 1440, home and
+   /colors/fog at 390 loaded without a broken picture): PASSED. The seated Fog stands on its color page and in the
+   row of six; the new pendants picture leads /lighting. One share link made on this deployment (it expires
+   15 Nov 11:38 UTC) and sent to the owner in chat only. THIS IS NOW THE PREVIEW THE OWNER HOLDS (7dbe25cfbd).
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
