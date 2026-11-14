@@ -329,9 +329,14 @@ def bar_backbar_portrait():
     # (14 Nov: the near Core washed to s 0.13, v 1.00 by Mantle's three declared lamps together, not by its own LED: at
     # 200 to 5 lm and any dye loading it read the same; the three at 0.15 of their power still left it at s 0.39, and
     # narrowed to 6 degrees they threw a hard streak on the stone. With them out the Core holds about 4.9 / 0.77 / 0.84:
-    # out of this frame, Mantle lit by the room and the pendants)
-    for k in ('track-mantle', 'mantle-front', 'mantle-side'):
+    # Mantle's front and side lamps out of this frame; its overhead head kept at 0.4 in a 10-degree beam, so the deck's
+    # edge and the record read (the coordinator, 04:04): proofs at 0.3 scale, the Core 4.8 / 0.78 / 0.83, the deck's mean
+    # 24.6 (18.5 with all three out); all three at 0.05 left the Core at s 0.55, the limit)
+    for k in ('mantle-front', 'mantle-side'):
         s['lights'].pop(k, None)
+    if 'track-mantle' in s['lights']:
+        s['lights']['track-mantle'] = {**s['lights']['track-mantle'], 'irradiance': round(s['lights']['track-mantle']['irradiance'] * 0.4, 3),
+                                       'spread_deg': 10}
     return s
 
 
