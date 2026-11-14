@@ -263,3 +263,7 @@ bar-backbar (3200 x 1800, the same camera; two bands blended over 107 rows, mean
   222.0 with the ring sleeve cut). The right edge now cuts only the lit shelves' records and a pale box in one cell.
 - The headline zone (x 34 to 67 %, y 5 to 36 %): mean 4.9, p99 26.5, max 46.3. The top quarter: mean 2.9.
 - Clipped pixels: 0.15 % of the frame (the Hemispheres' shades). Audit: hidden 0, equipment 0.
+- Patch (2026-11-14, the coordinator, 23:14): the wall's cell (18, 1), a 7-inch box cut by the right edge, made plain
+  records (`record_wall.py`'s `plain`, from a stream of its own, the rest of the wall unchanged); only the strip x 0.86
+  to 1, y 0.36 to 0.70 re-rendered (128 samples, the same package) and blended in with a 40 px feather on its three
+  inner edges (mean difference outside the cell 0.53). The right 40 px strip: mean 46.5, p99 193.9, max 208.0.
