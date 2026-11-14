@@ -2102,6 +2102,17 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    then. The rounding fix holds for every stitch from now on (Smoke first). The audit tool is not changed: for Ice
    and Haze the control is run with the hair and the snow particles hidden, at an eighth, said in the CHECK rows;
    if that dies too, both stay accepted on the light half and the listing.
+   15:58 UTC, biomes lane: the control with the hair or the flakes hidden had been run and died at both sizes, for
+   Ice and for Haze; stopped as ruled. BOTH STAY ACCEPTED ON THE LIGHT HALF AND THE LISTING; their CHECK rows say
+   what was hidden and that the control died; the audit's renderer is unchanged.
+   15:58 UTC, site lane: the seated Haze pushed: r49-site-rc e1fb8343f6, dpl_FoyKjKp7RTQNVxDBQiUmqZase78m,
+   `https://earf-24teof84j-nathanielvink-4975s-projects.vercel.app`, READY (preview only): the seventh place in the
+   home row (four over three, centred), /colors/haze, the 'Out' view on /tropos/haze, its thumbnail.
+   16:00 UTC, coordinator's check (home at 1440 and 390, /colors/haze at 1440 and 390, /tropos/haze at 1440 loaded
+   with no broken picture; the places row and the Haze color page seen): PASSED: seven places, Ember, Dust, Acid,
+   Poison over Ice, Haze, Fog, each with its caption; Haze's page shows the new picture under 'Dusk, kept indoors.'
+   One share link made on this deployment (it expires 15 Nov 14:59 UTC) and sent to the owner in chat only.
+   THIS IS NOW THE PREVIEW THE OWNER HOLDS (e1fb8343f6).
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
