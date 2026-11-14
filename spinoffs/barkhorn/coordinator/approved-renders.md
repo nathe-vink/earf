@@ -2113,6 +2113,18 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    Poison over Ice, Haze, Fog, each with its caption; Haze's page shows the new picture under 'Dusk, kept indoors.'
    One share link made on this deployment (it expires 15 Nov 14:59 UTC) and sent to the owner in chat only.
    THIS IS NOW THE PREVIEW THE OWNER HOLDS (e1fb8343f6).
+   16:36 UTC, biomes lane: Smoke's final scene built and saved (144 MB, 3 min; e3's settings: the sky turned 28.9 at
+   0.45, the sun az 25, el 3, 12, #FFA060; 2300 tufts landed; the lane behind the speaker cleared to 2.6 m; the
+   embers in uneven clumps of 2 to 16). A time warning: e2's proxy took 35 min at 640x800 and 48 samples, so
+   2400x3000 at 64 samples is near 11 hours; the smoke column and the trail's volumes are the cost.
+   16:37 UTC, coordinator: Smoke's settings: 48 samples as the proxy and the column's volume step rate 1 to 2 (about
+   4 to 5 hours), the step rate proved on band 1 (the sky and the column's top) against e3's same rows; if the
+   column goes blocky or banded, step rate 1 for the bands that hold the column and the trail. The audit's control
+   once, with the tufts hidden at an eighth.
+   17:01 UTC, THE SMOKE HOLD ENDED. The owner was shown the asteroid test at 05:44 (e2) and again at 10:17 (e3) with a
+   plain yes or no, and was told three times that the final starts at 17:00 UTC as open country unless he says no.
+   No word from him since. THE WORD GIVEN TO THE BIOMES LANE: THE SMOKE TALL FINAL STARTS (2400x3000, the settings
+   above, bands of 40 min or less each pushed, the rounding stitch, raw and finished, then the audit).
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
