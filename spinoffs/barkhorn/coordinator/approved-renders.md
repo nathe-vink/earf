@@ -1609,6 +1609,12 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    hue 108.1 raw, 108.9 finished; nothing at 255). It is the final unless the horn band betters it: band 1 ordered
    once more as `-3` with the opening lower on the flare and 0.5 m wide; the coordinator picks. Then Smoke p5 and
    the wide finals.
+   02:34 UTC, coordinator: -3 CANCELLED (the lane found it needs all three bands, about 30 min, since the opening's beam
+   crosses every band). POISON'S TALL PICTURE IS FINAL: `poison-b-final-portrait-2-finish.jpg` (fe192e62a3); the
+   horn reads against the pale mist as in s18, which the owner approved. Shown to the owner 02:34.
+   TO THE SITE (02:34), batch 5 part two, to be pushed: the two seated tall finals as finished (Ember 0db25bafa0, Poison
+   fe192e62a3), wherever the tall habitat picture of those tints is shown; slots needing a wide stay as they are
+   and are listed in the lane's report.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
