@@ -142,15 +142,23 @@
    {
     "kind": "kit",
     "shape": "ext",
-    "path": "spinoffs/barkhorn/campaign/bar_life/bar_life.py",
-    "fn": "fill_records",
+    "path": "spinoffs/barkhorn/campaign/bar_life/record_wall.py",
+    "fn": "build",
     "x0": 3.4,
     "x1": 10.3,
     "z0": 1.2,
     "z1": 3.05,
     "cell": 0.36,
     "y": 5.72,
-    "depth": 0.36,
+    "back": 6.08,
+    "eye_z": 9.9,
+    "seed": 1313,
+    "plain": [
+     [
+      18,
+      1
+     ]
+    ],
     "skip": [
      [
       5.13,
@@ -574,7 +582,7 @@
       "h": 0.315,
       "x": 7.62,
       "y": 4.249999999999999,
-      "z": 1.07,
+      "z": 1.0735,
       "rot": [
        -90.0,
        0,
@@ -669,7 +677,7 @@
       "t": 0.006,
       "x": 7.05,
       "y": 3.9499999999999993,
-      "z": 1.07,
+      "z": 1.0765,
       "rot": [
        -90.0,
        0,
@@ -683,7 +691,7 @@
       "t": 0.006,
       "x": 6.6,
       "y": 3.8599999999999994,
-      "z": 1.07,
+      "z": 1.0765,
       "rot": [
        -90.0,
        0,
@@ -691,22 +699,6 @@
       ],
       "ground": "#E4E0D6",
       "rough": 0.85
-     },
-     {
-      "image": "tex/reserved.png",
-      "w": 0.1,
-      "h": 0.05,
-      "t": 0.002,
-      "x": 5.55,
-      "y": 5.446199999999999,
-      "z": 1.09,
-      "rot": [
-       -18.0,
-       0,
-       0.0
-      ],
-      "ground": "#EFEBE3",
-      "rough": 0.7
      }
     ]
    },
@@ -777,6 +769,7 @@
      "blue": 1.5,
      "black": 0.15
     },
+    "core_cable": false,
     "hemispheres": [
      {
       "tint": "orange",
@@ -1142,8 +1135,8 @@
     4.319999999999999,
     1.071
    ],
-   "irradiance": 10.5,
-   "spread_deg": 18,
+   "irradiance": 4.2,
+   "spread_deg": 10,
    "color": "#FFD8B0",
    "shape": "DISK"
   },
@@ -1228,48 +1221,6 @@
    ],
    "irradiance": 1.5,
    "color": "#FFC890"
-  },
-  "mantle-front": {
-   "type": "area",
-   "shape": "DISK",
-   "size_m": [
-    0.15,
-    0.15
-   ],
-   "position": [
-    9.7,
-    3.15,
-    1.55
-   ],
-   "target": [
-    8.5,
-    4.199999999999999,
-    1.111
-   ],
-   "irradiance": 15.0,
-   "spread_deg": 14,
-   "color": "#FFD8B0"
-  },
-  "mantle-side": {
-   "type": "area",
-   "shape": "DISK",
-   "size_m": [
-    0.2,
-    0.2
-   ],
-   "position": [
-    9.45,
-    4.25,
-    1.2
-   ],
-   "target": [
-    8.5,
-    4.319999999999999,
-    1.101
-   ],
-   "irradiance": 18.0,
-   "spread_deg": 8,
-   "color": "#FFD8B0"
   },
   "horn-card": {
    "type": "panel",

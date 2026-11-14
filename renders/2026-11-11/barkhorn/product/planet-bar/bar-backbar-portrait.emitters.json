@@ -222,7 +222,7 @@
    "name": "track-mantle",
    "declared": true,
    "emitter": "disk area lamp 0.1 x 0.1 m, out of frame",
-   "irradiance_w_m2": 10.5,
+   "irradiance_w_m2": 4.2,
    "strength": null,
    "position_m": [
     8.9,
@@ -276,30 +276,6 @@
     4.6,
     2.2,
     3.0
-   ]
-  },
-  {
-   "name": "mantle-front",
-   "declared": true,
-   "emitter": "disk area lamp 0.15 x 0.15 m, out of frame",
-   "irradiance_w_m2": 15.0,
-   "strength": null,
-   "position_m": [
-    9.7,
-    3.15,
-    1.55
-   ]
-  },
-  {
-   "name": "mantle-side",
-   "declared": true,
-   "emitter": "disk area lamp 0.2 x 0.2 m, out of frame",
-   "irradiance_w_m2": 18.0,
-   "strength": null,
-   "position_m": [
-    9.45,
-    4.25,
-    1.2
    ]
   },
   {

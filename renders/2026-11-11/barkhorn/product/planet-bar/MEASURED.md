@@ -278,3 +278,17 @@ bar-backbar (3200 x 1800, the same camera; two bands blended over 107 rows, mean
   the deck is the Ember plinth's front edge glowing along its length, brightest where it ends at the corner (red excess
   about 147 at x 1298, y 1314; the old point was at 1295, 1260, alone on the dark face).
 - The Core (Ember), 12 px at its centre: 5.0 / 0.66 / 0.91, no clipped channel. Audit: hidden 0, equipment 0.
+
+## The portrait with the approved wall (2026-11-14)
+
+- 2400 x 3000, 224 samples, in two bands (0 to 0.52, 0.48 to 1) blended over 120 rows (mean difference 0.72); the
+  lowest bit of channel values under 24 dropped to stay under 5 MB (4.9 MB), as before. The FA123 package (b597165b's
+  engine files), the approved record wall, the 'reserved' card out, no Core cable.
+- Mantle's lamps in this frame (the coordinator, 04:04: the near Core holds its colour and Mantle still reads): its
+  front and side lamps out; its overhead head at 0.4 (4.2 W/m2) in a 10-degree beam. Proofs (`proofs/`): all three out,
+  the Core 4.9 / 0.77 / 0.84 and the deck darkest; all three at 0.05, the Core at s 0.55; this one, the Core 4.8 / 0.78
+  / 0.83 and the deck and record readable. The Core's own LED and its dye loading unchanged (neither moved it).
+- The lamps: the near Core (Ember) 4.9 / 0.79 / 0.83, no clipped channel; the Hemispheres acid 50.7 / 0.26 / 0.86,
+  ember 4.9 / 0.43 / 1.00 (its shade, as in every bar frame).
+- Mantle: the deck's edge, the record and its label read; the tonearm's post black (checked at full size).
+- Audit: hidden 0, equipment 0.
