@@ -38,6 +38,9 @@ HABITATS = {
     # p6's low sun; Smoke d: the meteor strike in open country, its fire seen; Poison b: closer, low sun through mist
     'ember_d':   ('Ember',  {}),
     'smoke_d':   ('Smoke',  {}),
+    # Smoke e (the coordinator, 2026-11-14 04:27, layout l9 passed): the crater 6.7 m back and wholly in frame, its rim of
+    # thrown earth, the column from it, one thin straight trail from the sky, a plain to a low horizon; sun and sky, the fire
+    'smoke_e':   ('Smoke',  {}),
     'poison_ivy_b': ('Poison', {}),
 }
 # shot keys set per habitat (habitat.py --set), and samples where the scene is dark (the satin horn's grain)
@@ -171,7 +174,7 @@ MODIFY = {'haze_b': {'sundisk': {'azimuth': 30.0, 'elevation': 6.0}},
 # mirrored in the speaker, and listed in the report under "passive" with its size and place. The flag (W x H m) stands
 # 1.2 m behind the camera, 1.4 m up; with it come the side cards (2.6 x 2.4 m), the one on a low sun's side left out.
 # The entries at 8 x 6 were the old default, named so the passed finals rebuild as they were.
-FLAG = {'haze_b': (4.0, 3.0), 'poison_ivy': (0.0, 0.0), 'poison_ivy_b': (0.0, 0.0), 'smoke_d': (0.0, 0.0),
+FLAG = {'haze_b': (4.0, 3.0), 'poison_ivy': (0.0, 0.0), 'poison_ivy_b': (0.0, 0.0), 'smoke_d': (0.0, 0.0), 'smoke_e': (0.0, 0.0),
         'ice': (8.0, 6.0), 'hero_ice': (8.0, 6.0),      # sky only, no sun lamp: shades no sun
         'fog_b': (8.0, 6.0), 'hero_fog': (8.0, 6.0),    # sun az 110 / 150, behind the speaker: shades nothing (flagsun check)
         'acid_b': (8.0, 6.0),                           # the coordinator 08:36: overcast, keep, list as passive (sun az 120, el 2.6: clear)
@@ -270,6 +273,7 @@ REFLECT = {   # habitat -> [reflector specs] (W H AZ EL DIST TX TY TZ), white bo
     # 'ember_c': [(3.0, 2.0, -70.0, 6.0, 2.2, 0.0, 0.0, 0.55)],
     }
 ROLL = {   # habitat -> (feather, wander) m: the ground patch's far edge rolled under the land beyond (habitat.roll_edge)
+    'smoke_e': (1.0, 0.2),   # the patch's far edge (y 20) under the plain beyond
     # Fog, the coordinator 2026-11-12: the lip was a ruler-straight 10 cm step; roll its last 0.4 m, wandering 10-20 cm
     # then (same day) hummocks: the brow rises and falls 3-8 cm along its length. Smoke shares the set, so the same lip
     # (then, 09:36, the roll replaced by CREST: the lip was the land's end seen edge-on)

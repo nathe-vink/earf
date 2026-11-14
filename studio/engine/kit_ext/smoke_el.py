@@ -733,3 +733,56 @@ def trail(bpy, name, p, kit):
         ob.rotation_mode = 'QUATERNION'; ob.rotation_quaternion = rot
         obs.append(ob); t0 = t1; k += 1
     return obs
+
+
+def rim(bpy, name, p, kit):
+    """Smoke e (the coordinator, 2026-11-14): the crater's raised rim of thrown earth, as one disc of ground over the
+    crater: flat at `floor` m inside, rising to a crest `height` m high at `radius` m from `centre` [x, y], falling to
+    `sink` m under the ground at `radius` + `outer` m; the crest wanders by `lumps` [share of the height, metres a lump]
+    and the slopes carry clods of `clods` m. It takes the material of the object named `on` (the ground, whose impact
+    marks are placed in the world, so the char, soot and glow run over it), its UVs that object's planar ones over
+    `ground` [x0, y0, w, h]. `relief` [cx, cy, relief, fx, fy, fr]: the ground patch's centre, relief and flat (as
+    assets.ground lays them), so the disc rides the same undulation and its edge meets the ground. `rings` x `segments`."""
+    cx, cy = p['centre']; R = p.get('radius', 0.75); H = p.get('height', 0.5); out_ = p.get('outer', 0.65)
+    inner = p.get('inner', 0.45); floor = p.get('floor', 0.04); sink = p.get('sink', -0.03)
+    la, ls = p.get('lumps', [0.35, 0.5]); cl = p.get('clods', 0.04)
+    nr, ns = p.get('rings', 60), p.get('segments', 160)
+    gx0, gy0, gw, gh = p.get('ground', [-15.0, -14.0, 30.0, 34.0])
+    rmax = R + out_
+    bm = bmesh.new(); uv = bm.loops.layers.uv.new('UVMap'); rows = []
+    for i in range(nr + 1):
+        r = rmax * (i / nr) ** 0.8; row = []
+        for j in range(ns if i else 1):
+            a = 2 * math.pi * j / ns; x, y = cx + r * math.cos(a), cy + r * math.sin(a)
+            if r < R - inner:
+                z = floor
+            elif r < R:
+                s = (r - (R - inner)) / inner; z = floor + (H - floor) * (s * s * (3 - 2 * s))
+            else:
+                s = min(1.0, (r - R) / out_); z = sink + (H - sink) * (1 - s) ** 1.6
+            crest = 1.0 + la * noise.noise(Vector((math.cos(a) * R / ls, math.sin(a) * R / ls, 2.3)))
+            w = max(0.0, 1 - abs(r - R) / (out_ + inner))
+            z = z * (1 + (crest - 1) * w) + cl * noise.noise(Vector((x / 0.09, y / 0.09, 5.1))) * w
+            if p.get('relief'):
+                gcx, gcy, rel, fx, fy, fr = p['relief']; lx, ly = x - gcx, y - gcy
+                q = min(1.0, max(0.0, (math.hypot(lx - (fx - gcx), ly - (fy - gcy)) - fr) / fr)) if fr > 0 else 1.0
+                z += q * q * (3 - 2 * q) * rel * noise.noise(Vector((lx * 0.35, ly * 0.35, 0.7)))
+            row.append(bm.verts.new((x, y, z)))
+        rows.append(row)
+    for j in range(ns):
+        bm.faces.new((rows[0][0], rows[1][j], rows[1][(j + 1) % ns]))
+    for i in range(1, nr):
+        for j in range(ns):
+            bm.faces.new((rows[i][j], rows[i + 1][j], rows[i + 1][(j + 1) % ns], rows[i][(j + 1) % ns]))
+    for f in bm.faces:
+        for lp in f.loops:
+            co = lp.vert.co; lp[uv].uv = ((co.x - gx0) / gw, (co.y - gy0) / gh)
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces[:])
+    me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free()
+    for poly in me.polygons:
+        poly.use_smooth = True
+    ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
+    src = bpy.data.objects.get(p.get('on', 'prop0-kit'))
+    if src is not None and src.data.materials:
+        me.materials.append(src.data.materials[0])
+    return [ob]

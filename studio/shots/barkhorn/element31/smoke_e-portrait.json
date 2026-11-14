@@ -1,0 +1,778 @@
+{
+ "product": {
+  "def": "studio/products/barkhorn-cloud.json",
+  "flavour": "birch-fog-clear",
+  "instances": [
+   {
+    "flavour": "cloud-black",
+    "position": [
+     0.0,
+     0.0,
+     -0.015
+    ],
+    "rotate_z": 5.0,
+    "hide": [
+     "cloth-disc"
+    ]
+   }
+  ]
+ },
+ "set": {
+  "kind": "stage",
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "ground",
+    "texture": "sparse_grass",
+    "size": [
+     30.0,
+     34.0
+    ],
+    "position": [
+     0.0,
+     3.0,
+     0.0
+    ],
+    "displace": 0.02,
+    "relief": 0.2,
+    "res": "2k",
+    "tint": "#5F5A3A",
+    "tint_mix": 0.3,
+    "cells": 900
+   },
+   {
+    "kind": "kit",
+    "shape": "ground",
+    "texture": "sparse_grass",
+    "size": [
+     6000.0,
+     6000.0
+    ],
+    "position": [
+     0.0,
+     2990.0,
+     -0.06
+    ],
+    "cells": 110,
+    "displace": 0.0,
+    "res": "2k",
+    "tint": "#4E4A36",
+    "tint_mix": 0.5,
+    "flat": false
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "smoke_el",
+    "fn": "ridge",
+    "position": [
+     0.0,
+     2200.0
+    ],
+    "width": 9000.0,
+    "depth": 160.0,
+    "height": [
+     6.0,
+     26.0
+    ],
+    "scale": 500.0,
+    "seed": 3,
+    "color": "#5C5A55",
+    "color2": "#47443F",
+    "cells": [
+     700,
+     8
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "scatter_assets",
+    "models": [
+     "grass_medium_02",
+     "grass_medium_01",
+     "grass_bermuda_01"
+    ],
+    "count": 2300,
+    "area": [
+     -7.0,
+     -11.0,
+     8.0,
+     13.0
+    ],
+    "avoid": [
+     [
+      0.23,
+      6.73,
+      2.3
+     ],
+     [
+      0.0,
+      0.0,
+      0.45
+     ],
+     [
+      -0.13,
+      -0.483,
+      0.55
+     ],
+     [
+      -0.246,
+      -0.918,
+      0.55
+     ],
+     [
+      -0.363,
+      -1.352,
+      0.55
+     ],
+     [
+      -0.479,
+      -1.787,
+      0.55
+     ],
+     [
+      -0.596,
+      -2.222,
+      0.55
+     ]
+    ],
+    "scale": [
+     0.4,
+     1.4
+    ],
+    "seed": 3,
+    "res": "1k"
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "smoke_el",
+    "fn": "rim",
+    "on": "prop0-kit",
+    "centre": [
+     0.23,
+     6.73
+    ],
+    "radius": 0.75,
+    "height": 0.5,
+    "inner": 0.45,
+    "outer": 0.7,
+    "floor": 0.03,
+    "sink": -0.04,
+    "lumps": [
+     0.2,
+     0.45
+    ],
+    "clods": 0.035,
+    "ground": [
+     -15.0,
+     -14.0,
+     30.0,
+     34.0
+    ],
+    "relief": [
+     0.0,
+     3.0,
+     0.2,
+     0.0,
+     0.0,
+     0.9
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "on": "prop0-kit",
+    "module": "smoke_el",
+    "fn": "impact",
+    "centre": [
+     0.23,
+     6.73
+    ],
+    "char": [
+     1.2,
+     3.0
+    ],
+    "jag": 0.8,
+    "soot": 6.0,
+    "soot_mix": 0.75,
+    "soot_color": "#1B1A19",
+    "furrow": [
+     0.9,
+     8.17,
+     0.23,
+     6.73,
+     0.5
+    ],
+    "glow": 26.0,
+    "glow_r": 1.0,
+    "glow_patch": [
+     0.4,
+     0.58
+    ],
+    "glow_trail": [
+     0.6,
+     1.2
+    ],
+    "dust": [
+     1.4,
+     4.0
+    ],
+    "dust_mix": 0.35,
+    "dust_color": "#4A4038",
+    "dust_scale": 0.3,
+    "seed": 4
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "impact",
+    "fn": "debris",
+    "position": [
+     0.23,
+     6.73,
+     0.0
+    ],
+    "rotate_z": 155.0,
+    "y0": -1.8,
+    "y1": 0.0,
+    "count": 60,
+    "reach": 1.0,
+    "forward": 0.6,
+    "ahead": 2.0,
+    "inner": 1.0,
+    "seed": 7,
+    "crumble": 0.35,
+    "size_max": 0.38,
+    "flat": [
+     0.16,
+     0.32
+    ],
+    "size_power": 2.2,
+    "drop": true,
+    "top_value": 0.08,
+    "under_tint": "#3A2E26",
+    "under_value": 0.12,
+    "side_value": 0.08,
+    "dust": 0.3,
+    "dust_color": "#5A4E44",
+    "freeze": true
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "impact",
+    "fn": "debris",
+    "position": [
+     0.23,
+     6.73,
+     0.0
+    ],
+    "rotate_z": 155.0,
+    "y0": -1.8,
+    "y1": 0.0,
+    "count": 800,
+    "reach": 1.0,
+    "forward": 0.6,
+    "ahead": 2.0,
+    "inner": 0.5,
+    "seed": 17,
+    "fine": true,
+    "fine_size": [
+     0.006,
+     0.05
+    ],
+    "drop": true,
+    "under_tint": "#2A221C",
+    "under_value": 0.3,
+    "top_value": 0.12,
+    "dust": 0.2,
+    "freeze": true
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "plume",
+    "fn": "plume",
+    "cache": "renders/2026-10-22/barkhorn/plume/meteor_l.npz",
+    "position": [
+     0.08000000000000002,
+     6.73,
+     0.0
+    ],
+    "rotate_z": 180.0,
+    "density": 8.5,
+    "strength": 400.0,
+    "color": "#4A4440",
+    "anisotropy": 0.4,
+    "cool": 1000.0,
+    "hot": 2600.0,
+    "flame_floor": 0.3,
+    "tongues": 0.9,
+    "tongue_scale": 0.07,
+    "tongue_edge": [
+     0.47,
+     0.57
+    ],
+    "edge": [
+     0.02,
+     0.22
+    ],
+    "detail": 2.5,
+    "detail_scale": 0.1,
+    "detail_octaves": 4.0,
+    "breakup": 0.6,
+    "breakup_scale": 0.35,
+    "breakup_octaves": 2.0,
+    "tongue_octaves": 4.0,
+    "seed": 3,
+    "flame_gamma": 1.5,
+    "through_glass": false
+   },
+   {
+    "kind": "kit",
+    "shape": "scatter",
+    "count": 18,
+    "radius": [
+     0.001,
+     0.0025
+    ],
+    "position": [
+     0.23,
+     6.73,
+     0.7
+    ],
+    "material": "glow",
+    "color": "#FF9A40",
+    "emit": 45.0,
+    "seed": 27,
+    "plume": {
+     "height": 1.6,
+     "spread": [
+      0.3,
+      1.2
+     ],
+     "lean": [
+      0.45,
+      0.2
+     ],
+     "taper": 0.5,
+     "power": 2.5,
+     "streak": 16.0,
+     "swirl": 0.0
+    }
+   },
+   {
+    "kind": "kit",
+    "shape": "scatter",
+    "count": 8,
+    "radius": [
+     0.0009,
+     0.002
+    ],
+    "position": [
+     0.23,
+     6.73,
+     0.7
+    ],
+    "material": "glow",
+    "color": "#FF7A30",
+    "emit": 28.0,
+    "seed": 28,
+    "plume": {
+     "height": 2.6,
+     "spread": [
+      0.3,
+      1.6
+     ],
+     "lean": [
+      0.45,
+      0.2
+     ],
+     "taper": 0.5,
+     "power": 2.0,
+     "streak": 11.0,
+     "swirl": 0.0
+    }
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "smoke_el",
+    "fn": "trail",
+    "end": [
+     0.53,
+     6.73,
+     0.6
+    ],
+    "start": [
+     282.21,
+     850.5,
+     317.29
+    ],
+    "radius": [
+     0.04,
+     2.9
+    ],
+    "density": 19.0,
+    "color": "#EADBC2",
+    "anisotropy": 0.35,
+    "fade": 0.25,
+    "thin": 1.0,
+    "seed": 2,
+    "warp": [
+     0.25,
+     0.5
+    ],
+    "puff": [
+     0.3,
+     0.6
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "scatter",
+    "count": 5,
+    "radius": [
+     0.003,
+     0.008
+    ],
+    "in": [
+     1.08,
+     6.58,
+     0.0,
+     1.38,
+     6.88,
+     0.03
+    ],
+    "material": "glow",
+    "color": "#FF6A20",
+    "emit": 18.0,
+    "seed": 40
+   },
+   {
+    "kind": "kit",
+    "shape": "scatter",
+    "count": 5,
+    "radius": [
+     0.003,
+     0.008
+    ],
+    "in": [
+     0.846,
+     7.223,
+     0.0,
+     1.146,
+     7.523,
+     0.03
+    ],
+    "material": "glow",
+    "color": "#FF6A20",
+    "emit": 18.0,
+    "seed": 41
+   },
+   {
+    "kind": "kit",
+    "shape": "scatter",
+    "count": 5,
+    "radius": [
+     0.003,
+     0.008
+    ],
+    "in": [
+     0.254,
+     7.565,
+     0.0,
+     0.554,
+     7.865,
+     0.03
+    ],
+    "material": "glow",
+    "color": "#FF6A20",
+    "emit": 18.0,
+    "seed": 42
+   },
+   {
+    "kind": "kit",
+    "shape": "scatter",
+    "count": 5,
+    "radius": [
+     0.003,
+     0.008
+    ],
+    "in": [
+     -0.42,
+     7.446,
+     0.0,
+     -0.12,
+     7.746,
+     0.03
+    ],
+    "material": "glow",
+    "color": "#FF6A20",
+    "emit": 18.0,
+    "seed": 43
+   },
+   {
+    "kind": "kit",
+    "shape": "scatter",
+    "count": 5,
+    "radius": [
+     0.003,
+     0.008
+    ],
+    "in": [
+     -0.86,
+     6.922,
+     0.0,
+     -0.56,
+     7.222,
+     0.03
+    ],
+    "material": "glow",
+    "color": "#FF6A20",
+    "emit": 18.0,
+    "seed": 44
+   },
+   {
+    "kind": "kit",
+    "shape": "scatter",
+    "count": 5,
+    "radius": [
+     0.003,
+     0.008
+    ],
+    "in": [
+     -0.86,
+     6.238,
+     0.0,
+     -0.56,
+     6.538,
+     0.03
+    ],
+    "material": "glow",
+    "color": "#FF6A20",
+    "emit": 18.0,
+    "seed": 45
+   },
+   {
+    "kind": "kit",
+    "shape": "scatter",
+    "count": 5,
+    "radius": [
+     0.003,
+     0.008
+    ],
+    "in": [
+     -0.42,
+     5.714,
+     0.0,
+     -0.12,
+     6.014,
+     0.03
+    ],
+    "material": "glow",
+    "color": "#FF6A20",
+    "emit": 18.0,
+    "seed": 46
+   },
+   {
+    "kind": "kit",
+    "shape": "scatter",
+    "count": 5,
+    "radius": [
+     0.003,
+     0.008
+    ],
+    "in": [
+     0.254,
+     5.595,
+     0.0,
+     0.554,
+     5.895,
+     0.03
+    ],
+    "material": "glow",
+    "color": "#FF6A20",
+    "emit": 18.0,
+    "seed": 47
+   },
+   {
+    "kind": "kit",
+    "shape": "scatter",
+    "count": 5,
+    "radius": [
+     0.003,
+     0.008
+    ],
+    "in": [
+     0.846,
+     5.937,
+     0.0,
+     1.146,
+     6.237,
+     0.03
+    ],
+    "material": "glow",
+    "color": "#FF6A20",
+    "emit": 18.0,
+    "seed": 48
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "ember_el",
+    "fn": "rubble",
+    "models": [
+     "boulder_01"
+    ],
+    "res": "1k",
+    "z": -0.006,
+    "tilt_deg": 40.0,
+    "albedo": 0.08,
+    "saturation": 0.2,
+    "seed": 31,
+    "count": 40,
+    "area": [
+     -1.0,
+     -0.55,
+     0.6,
+     0.7
+    ],
+    "scale": [
+     0.02,
+     0.05
+    ],
+    "avoid": [
+     [
+      -0.14,
+      0.0,
+      0.24
+     ],
+     [
+      0.14,
+      0.0,
+      0.24
+     ]
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "ember_el",
+    "fn": "rubble",
+    "models": [
+     "boulder_01"
+    ],
+    "res": "1k",
+    "z": -0.006,
+    "tilt_deg": 40.0,
+    "albedo": 0.08,
+    "saturation": 0.2,
+    "seed": 32,
+    "count": 25,
+    "area": [
+     -1.6,
+     -1.6,
+     1.2,
+     1.4
+    ],
+    "scale": [
+     0.03,
+     0.08
+    ],
+    "avoid": [
+     [
+      0.0,
+      0.0,
+      0.45
+     ]
+    ]
+   }
+  ]
+ },
+ "lights": {},
+ "render": {
+  "samples": 512,
+  "adaptive": 0.02,
+  "denoise": true,
+  "clamp": 10.0,
+  "bounces": 12,
+  "view": "AgX",
+  "exposure": 0.0,
+  "look": "AgX - Base Contrast"
+ },
+ "title": "Smoke proxy d: the meteor strike in open country at dusk; the fire seen, no lamps (e: the layout of 2026-11-14)",
+ "size": [
+  1600,
+  2000
+ ],
+ "camera": {
+  "position": [
+   -1.408,
+   -5.255,
+   0.91
+  ],
+  "target": [
+   0.0,
+   0.0,
+   0.91
+  ],
+  "lens_mm": 85.0,
+  "level": true,
+  "fstop": 5.6,
+  "focus": [
+   0.0,
+   -0.21,
+   0.6
+  ],
+  "shift_x": -0.04,
+  "shift_y": -0.036,
+  "clip_end": 12000.0
+ },
+ "sky": {
+  "kind": "hdri",
+  "polyhaven": "qwantani_dusk_2_puresky",
+  "rotation_deg": 283.9,
+  "strength": 0.4,
+  "res": "4k"
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 240,
+  "white_out": 240,
+  "contrast": 0.1,
+  "clarity": 0.06,
+  "sharpen": 0.25,
+  "sharpen_px": 0.6,
+  "dream": {
+   "bloom": 0.0,
+   "bloom_px": 30,
+   "bloom_threshold": 0.92,
+   "saturation": 0.0,
+   "lift": 0.0,
+   "lift_color": "#000000",
+   "vignette": 0.22
+  }
+ },
+ "sun": {
+  "azimuth_deg": 65.0,
+  "elevation_deg": 8.0,
+  "irradiance": 30.0,
+  "angle_deg": 1.0,
+  "color": "#FFB07A"
+ },
+ "haze": {
+  "box_m": [
+   -80.0,
+   -2.0,
+   -1.0,
+   80.0,
+   420.0,
+   40.0
+  ],
+  "density": 0.0025,
+  "anisotropy": 0.5,
+  "color": "#E8DCD0"
+ }
+}
