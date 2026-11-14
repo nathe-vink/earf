@@ -1236,7 +1236,7 @@ def rc_waves(p, web):
     lines = {k: line for k, num, name, icon, acr, line, *_ in web.CLOUDS}
     ON_HOLD = 'Hemisphere and Core, switched off. Shown in Smoke, a color on hold.'
     # --- the passed habitats (biomes: Ice 0f619953, Dust 26493989), 4:5
-    HAB = {'blue': 'renders/2026-11-11/barkhorn/habitats/ice-final-portrait-2400x3000-finish.jpg',  # the final Ice, finished (r48-biomes 55e5442c)
+    HAB = {'blue': 'renders/2026-11-12/barkhorn/habitats/ice-final-portrait-finish.jpg',            # the seated Ice final, finished (r48-biomes 8f4c9fd9)
            'ice': 'renders/2026-11-12/barkhorn/habitats/fog-b-final-portrait-finish.jpg',           # the seated Fog final, finished (r48-biomes ba05aed5)
            'green': 'renders/2026-11-12/barkhorn/habitats/poison-b-final-portrait-2-finish.jpg',     # the final Poison, finished (r48-biomes fe192e62)
            'red': 'renders/2026-11-12/barkhorn/habitats/ember-d-final-portrait-finish.jpg',          # the final Ember, finished (r48-biomes 0db25baf)
@@ -1244,7 +1244,7 @@ def rc_waves(p, web):
            'amber': 'renders/2026-11-12/barkhorn/habitats/acid-b-final-portrait-finish.jpg'}         # the final Acid, finished (r48-biomes e869e99b)
     # out (the audits, 2026-11-09/10): Dust 26493989 (a hidden panel), then 43c91242 (it hovers: a lit strip under its
     # front edge); Fog b61474c0 (two suns), then aa1ca856 (a hidden fill lamp)
-    HAB_ALT = {'green': 'Tropos in Poison, standing in ivy and leaf litter in a dark forest with dappled sun', 'red': 'Tropos in Ember, standing on a lava field at dusk with glowing streams', 'blue': 'Tropos in Ice, out in the snow at dusk', 'orange': 'Tropos in Dust on rippled desert sand at sunset, mesas in the haze behind', 'amber': 'Tropos in Acid on wet dark rock in the rain, its reflection in a pool in front',
+    HAB_ALT = {'green': 'Tropos in Poison, standing in ivy and leaf litter in a dark forest with dappled sun', 'red': 'Tropos in Ember, standing on a lava field at dusk with glowing streams', 'blue': 'Tropos in Ice, out on the snow in the last sun', 'orange': 'Tropos in Dust on rippled desert sand at sunset, mesas in the haze behind', 'amber': 'Tropos in Acid on wet dark rock in the rain, its reflection in a pool in front',
                'ice': 'Tropos in Fog, standing in the grass on a foggy hillside at dawn'}
     for k, src in HAB.items():
         im = Image.open(os.path.join(web.ROOT, src)).convert('RGB')
@@ -1306,7 +1306,7 @@ def rc_waves(p, web):
     # --- home: "Tropos." links to Tropos; Ice in its element after it; one caveat
     p.sub('<div class="sound-words"><h2>Tropos.</h2>', '<div class="sound-words"><h2><a href="#speakers">Tropos.</a></h2>')
     band = (f'\n  <section class="band beat hab-band" id="ice-band"><div class="wrap hab-grid"><figure><img src="img/rc/blue-habitat.webp" width="1200" height="1500" loading="lazy" '
-            f'alt="Tropos in Ice, out in the snow at dusk"></figure><div><h2><a href="#color-ice">Ice.</a></h2><p class="beat-line">{lines["blue"]}</p>'
+            f'alt="Tropos in Ice, out on the snow in the last sun"></figure><div><h2><a href="#color-ice">Ice.</a></h2><p class="beat-line">{lines["blue"]}</p>'
             f'<p class="foot-note"><i class="render">Render</i></p></div></div></section>')
     k0 = p.rest.index('</section>', p.rest.index('<section class="band sound" id="sound">')) + len('</section>')
     if 'blue' in HAB:
@@ -1393,9 +1393,9 @@ def rc3(p, web):
     import os
     from PIL import Image
     names = {k: name for k, num, name, *_ in web.CLOUDS}
-    HAB_ALT = {'green': 'Tropos in Poison, standing in ivy and leaf litter in a dark forest with dappled sun', 'red': 'Tropos in Ember, standing on a lava field at dusk with glowing streams', 'blue': 'Tropos in Ice, out in the snow at dusk', 'orange': 'Tropos in Dust on rippled desert sand at sunset, mesas in the haze behind', 'amber': 'Tropos in Acid on wet dark rock in the rain, its reflection in a pool in front',
+    HAB_ALT = {'green': 'Tropos in Poison, standing in ivy and leaf litter in a dark forest with dappled sun', 'red': 'Tropos in Ember, standing on a lava field at dusk with glowing streams', 'blue': 'Tropos in Ice, out on the snow in the last sun', 'orange': 'Tropos in Dust on rippled desert sand at sunset, mesas in the haze behind', 'amber': 'Tropos in Acid on wet dark rock in the rain, its reflection in a pool in front',
                'ice': 'Tropos in Fog, in the grass on a hillside, in fog at dawn'}
-    HAB_CAP = {'green': 'In ivy and leaf litter, in a dark forest with dappled sun.', 'red': 'On a lava field at dusk, among glowing streams.', 'blue': 'Out in the snow at dusk.', 'orange': 'On rippled desert sand at sunset, mesas in the haze behind.', 'amber': 'On wet dark rock in the rain, over a pool.', 'ice': 'In the grass on a hillside, in fog at dawn.'}
+    HAB_CAP = {'green': 'In ivy and leaf litter, in a dark forest with dappled sun.', 'red': 'On a lava field at dusk, among glowing streams.', 'blue': 'Out on the snow, in the last sun.', 'orange': 'On rippled desert sand at sunset, mesas in the haze behind.', 'amber': 'On wet dark rock in the rain, over a pool.', 'ice': 'In the grass on a hillside, in fog at dawn.'}
     # --- 1. home, the lamps: the picture left, the two lamps' names beside it, one line each, as links
     m = re.search(r'<figure class="strip lamps-day"><img (.*?)><figcaption class="wrap">(.*?)</figcaption></figure>', p.rest, re.S)
     assert m, 'rc3: lamps-day'
@@ -1407,7 +1407,7 @@ def rc3(p, web):
     p.sub('<figure class="sound-still"><img src="img/rc/blue-tall.webp" width="1000" height="1250" loading="lazy" alt="Tropos in Ice, its cover off, on a pale seamless">',
           '<figure class="sound-still"><img src="img/rc/plate.webp" width="1000" height="1250" loading="lazy" alt="The built-in amplifier, from behind.">')   # the plate's rig is clean (the audit ac9e5568)
     if 'hab-band' in p.rest:
-        p.sub('<div class="wrap hab-grid"><figure><img src="img/rc/blue-habitat.webp" width="1200" height="1500" loading="lazy" alt="Tropos in Ice, out in the snow at dusk"></figure>',
+        p.sub('<div class="wrap hab-grid"><figure><img src="img/rc/blue-habitat.webp" width="1200" height="1500" loading="lazy" alt="Tropos in Ice, out on the snow in the last sun"></figure>',
               '<div class="wrap hab-grid hab-mirror"><figure><img src="img/rc/blue-habitat.webp" width="1200" height="1500" loading="lazy" alt="' + HAB_ALT['blue'] + '"></figure>')
         p.sub('<p class="beat-line">' + next(line for k, num, name, icon, acr, line, *_ in web.CLOUDS if k == 'blue') + '</p><p class="foot-note"><i class="render">Render</i></p>',
               '<p class="beat-line">' + next(line for k, num, name, icon, acr, line, *_ in web.CLOUDS if k == 'blue') + '</p><p class="foot-note">' + HAB_CAP['blue'] + ' <i class="render">Render</i></p>')
@@ -2254,7 +2254,7 @@ FAMILY = [  # (product, route, tint, kind, line)
     ('Core', '#core-poison', 'green', 'Table lamp', 'A cordless table lamp. A glow, not a reading light.'),
 ]
 PLACES = [('red', 'Ember, on a lava field at dusk.'), ('orange', 'Dust, on desert sand at sunset.'), ('amber', 'Acid, on wet rock in the rain.'),
-          ('green', 'Poison, in ivy in a dark forest.'), ('blue', 'Ice, out in the snow at dusk.'), ('ice', 'Fog, on a hillside at dawn.')]
+          ('green', 'Poison, in ivy in a dark forest.'), ('blue', 'Ice, on the snow in the last sun.'), ('ice', 'Fog, on a hillside at dawn.')]
 ARROW = ('<svg class="arr" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" '
          'stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>')
 
