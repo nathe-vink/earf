@@ -2058,7 +2058,7 @@ MANTLE_BAR = 'renders/2026-11-11/barkhorn/product/planet-bar/mantle-bar.png'   #
 LAMP_FINAL = 'renders/2026-11-10/barkhorn/lamp-site/final/{f}.png'
 NAMES = dict(zip(RC_KEYS, ['ember', 'dust', 'acid', 'poison', 'ice', 'haze', 'fog', 'smoke']))
 HEMI_LM = {'red': 272, 'orange': 280, 'amber': 301, 'green': 256, 'blue': 264, 'violet': 254, 'ice': 339, 'black': 287}   # lm out, cd703d56
-# the bar (r33-speaker-horn ac342ff0, approved as a direction 2026-11-12): five Hemispheres over the counter, two Cores on it;
+# the bar (r33-speaker-horn ac342ff0, approved as a direction 2026-11-12; with the new record wall 9e8ddccf): five Hemispheres over the counter, two Cores on it;
 # on /lighting as the room, and an "At the bar" view for the tints in it. More frames join ROOM as they pass.
 ROOM = [('renders/2026-11-11/barkhorn/product/planet-bar/bar-pendants.png', 'bar-pendants',
          'Five Hemispheres over a bar in Acid, Ember and Dust, two Cores on the counter, a wall of records behind',
