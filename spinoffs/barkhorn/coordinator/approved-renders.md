@@ -1919,6 +1919,14 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    white spines counts for more). THE BAR SET IS CLOSED. Shown to the owner in chat. To the site lane: prepare on
    r47, hold the r49 push for the Fog final (one deployment for both; the word push for the pendants alone if Fog has
    not come by 13:00 UTC). The speaker lane has no open job.
+   11:12 UTC, site lane: bar-pendants prepared on r47-site-next (5cecf3670c); it will replace the Hemisphere and Core
+   'At the bar' views, their thumbnails and the /lighting room picture; nothing pushed to r49.
+   11:41 UTC, biomes lane: the Fog final's band 3 of 4 (the speaker, its base, the near grass) has run 57 min, over
+   the 40 min rule (memory steady at 5.5 GB; the grass seen through the clear cabinet is slow at 96 samples); it is
+   left to finish.
+   11:41 UTC, coordinator: agreed; band 4 is rendered as two half-bands, each pushed; if band 3 has not landed by
+   12:20 the lane reports its state before doing anything. The site lane's hold is extended: no push at 13:00; one
+   deployment for bar-pendants and Fog together when Fog has passed (about 13:45 UTC).
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
