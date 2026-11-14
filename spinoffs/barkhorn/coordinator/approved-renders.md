@@ -1785,6 +1785,26 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    6 (front 0.25 or more, cone 0.14 or more accepted behind clear acrylic in backlight); NO cleared ring in a meadow:
    grass to the base at half height within 0.7 m, the blades up to 8 % of the speaker's height here, the ports clear;
    fewer tufts to halve the build. If f2 meets these the tall final follows in bands without another word.
+   08:16 UTC, speaker lane 0ef0de3859: bar-pendants, the wall heads at 0.08: the new wall behind the cluster back at
+   the passed frame's level (12.3 against 12.4), found on half-size proofs as ordered. 08:54, 75f3d4db9f: band a of
+   the frame with the wall pushed; band b follows.
+   08:38 UTC, biomes lane 048e37ccc3: Fog f2 set as ordered: the sun 3 to 6; half the tufts; in the lane to the camera
+   the grass stays but short (three bands, its scale rising with distance), so no blade rises more than 8 % over the
+   base.
+   08:40 UTC, biomes lane f9c3af4ae0: the ACID final's audit: the light half complete (hidden 0 / equipment 0 by the
+   lights); the coverage half killed twice for memory at 1200x1500 with the rain in. Coordinator: rerun the coverage
+   half WITH THE RAIN HIDDEN (the rain is thousands of small things of the place, none of them equipment); the CHECK
+   row says so in words. The final stands meanwhile: its light half is clean and nothing in it changed since the
+   proxy's full audit.
+   08:42 UTC, biomes lane: ICE died for memory again, alone, at 13.45 GB. Coordinator: the lighter build is approved
+   (snowfield cells 1500 to 900), and Ice is seated in the same try rather than rendered twice.
+   08:44 UTC, biomes lane ccfe76717c: Ice i1 set: the drift piled on the windward side up to 9 cm, the feet 30 mm in;
+   a light snowfall in front and behind (900 near flakes, 9,000 far); the sky turned so its low sun stands behind
+   right (az 114, 130 deg off the camera's axis, el 4.2) with a weak sun lamp (3) in the sky's colour; the cabin's
+   window (2500 W at about 72 m, under 2 % of the light on the speaker) is the place's own light, in frame, listed.
+   09:04 UTC, coordinator's check-in: both picture lanes pushed within the hour (speaker 08:54, biomes 08:44); nothing
+   stalled. Waiting: Fog f2, the Acid coverage half, Ice i1, bar-pendants band b; the Smoke final for the owner's
+   yes on e2.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
