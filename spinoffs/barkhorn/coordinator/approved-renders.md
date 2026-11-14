@@ -1892,6 +1892,13 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    most likely missed. So that he is not the bottleneck: THE SMOKE FINAL STARTS ON ITS OWN when the biomes lane is
    free (after the Fog and Ice finals, about 17:00 UTC at the earliest), as open country, unless he says no before
    then. (2) the Fog pick f3a-e35, for his eye only; its final is already released.
+   10:17 UTC, biomes lane: the Fog final will run from the saved build at 2400x3000, 96 samples, in 4 bands of about
+   30 min. ICE i1 DIED FOR MEMORY again (12.71 GB, 2 min in, just after the flag and cards; a second process reading
+   the Fog build may have tipped it); restarted alone.
+   10:18 UTC, coordinator, approved in advance: if Ice dies alone, the Fog final runs first and Ice after it with the
+   lighter build the lane listed (the 220 m ground's cells 440 to 220, the far flakes 9000 to 4000, the firs to 80)
+   and with the process's memory logged after each build step, since it has died three times at the same place;
+   the step the log names is lightened first. If that dies too: stop and send the per-step numbers.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
