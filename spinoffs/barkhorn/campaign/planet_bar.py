@@ -418,7 +418,7 @@ def mantle_bar():
     # a seat at the bar, three-quarter from Mantle's front left: the eye 1.38 m, 45 mm, Mantle about half the width
     az = math.radians(MANTLE_CAM_AZ)
     d = MANTLE_CAM_D
-    c = [cen[0] + d * (math.cos(az) * fwd[0] - math.sin(az) * right[0]), cen[1] + d * (math.cos(az) * fwd[1] - math.sin(az) * right[1]), 1.38]
+    c = [cen[0] + d * (math.cos(az) * fwd[0] - math.sin(az) * right[0]), cen[1] + d * (math.cos(az) * fwd[1] - math.sin(az) * right[1]), MANTLE_CAM_Z]
     s['camera'] = {'position': [round(v, 4) for v in c], 'target': [cen[0] - 0.12 * right[0], cen[1] - 0.12 * right[1], MANTLE[2] + 0.12], 'lens_mm': 45.0,   # (proof 9: the Core cut at the left) 'level': True,
                    'fstop': 4.0, 'focus': [cen[0], cen[1], MANTLE[2] + 0.1]}
     return s
@@ -434,6 +434,9 @@ def mantle_bar_full():
 
 MANTLE_HEMI_Z = 1.50           # the Hemisphere's rim over Mantle (the deck at about 1.23)
 MANTLE_CAM_AZ, MANTLE_CAM_D = 35.0, 1.05
+# (14 Nov: a red point under the deck, a lamp seen through the clear base layer by total internal reflection, read as an
+# indicator light Mantle does not have; crops at 1.38 +/- 4 cm and +/- 2 to 4 degrees kept it; 8 cm higher clears it)
+MANTLE_CAM_Z = 1.46
 
 
 HERO_MANTLE_TINT = 'ember'      # Mantle's tint in the hero: the last Mantle test decides (the coordinator, 22:17)
