@@ -1640,6 +1640,19 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    the plinth's edge glow, at the corner (about x 1295, y 1312), is a small bright red point that reads as an
    indicator. Ordered: find the lamp that feeds the corner and move it a few cm (one crop, then the strip, the same
    file name); the even edge glow may stay. Then the portrait, bar-backbar and bar-pendants.
+   04:03 UTC, speaker lane: THE CORNER TIP CANNOT BE MOVED OUT BY A LAMP. Full-resolution crops (red excess of the tip;
+   the frame reads 147): the Ember Core moved 5 and 15 cm 127 and 133, removed 141 (and the even edge line goes
+   with it, leaving a lone dot); the Hemisphere over Mantle moved or removed 132 to 142; the wall head behind off
+   164; Mantle turned +4 degrees 123, -4 degrees 107. A 40-bounce ray trace: the camera's rays enter the clear Ember
+   base layer at its front corner, run inside it by total internal reflection and leave toward the record wall, a
+   sleeve, the ceiling, the floor, the chairs: the tip is the whole lit room seen through the layer's corner.
+   04:05 UTC, coordinator: ACCEPTED AS REAL OPTICS. THE MANTLE FRAME (8ebd1690) IS FINAL as rendered: the tip is what the
+   real Mantle's clear Ember layer would show in that room, it ends the layer's glowing edge, and at the site's size
+   it is a few pixels. No turn, no further camera search, no material change. Shown to the owner 04:05.
+   - The tall bar frame (portrait): the near Ember Core is washed out (s 0.13, v 1.00, clipped) by Mantle's three
+     declared lamps together; with them off it holds 5.9 / 0.85 / 0.80. The lane turns them down together or narrows
+     them onto Mantle; the Core must hold s 0.55 or more with no clipped channel and Mantle must still read; proof
+     first.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
