@@ -2149,6 +2149,11 @@ def rc_products(p, web):
           'Set it back on its dock and it charges in two to three hours.')
     p.sub("`Core lit in ${c.name}, sitting low in its black acrylic base.`", "`Core lit in ${c.name}, sitting low in its satin base of the same color.`")
     p.sub("`Hemisphere lit, its ${c.name} shade glowing beneath a black hub.`", "`Hemisphere lit, its ${c.name} shade glowing beneath a satin black cap.`")
+    # the FA123 (the owner, 2026-11-14; the list approved by the coordinator 00:38): the woofer on two bridged channels
+    p.sub('Hypex FusionAmp FA122, built in: 125 W a channel into 4 &Omega;, about 75 W into the 8 &Omega; woofer; crossed at 1 kHz in its DSP',
+          'Hypex FusionAmp FA123 built in: the woofer on two bridged channels, up to 125 W into its 8 &Omega;; the horn on its own; crossed at 1 kHz in its DSP')
+    p.sub('Hypex FA122, built in: about 75 W into the woofer, crossed at 1 kHz',
+          'Hypex FusionAmp FA123 built in: the woofer on two bridged channels (up to 125 W into 8 &Omega;), the horn on its own; crossed at 1 kHz')
     p.sub("facts: c => [...L.facts, ['Color', c.name]],",
           "facts: c => [...L.facts.map(f => L.lm && f[1].includes('{lm}') ? [f[0], f[1].replace('{lm}', L.lm[c.k])] : f), ['Color', c.name]],")
     # the views' words: Mantle in its own color; Hemisphere from below
@@ -2499,7 +2504,7 @@ def rc_finish(web):
         for a, b in SPECTRUM:                 # the eight as the full spectrum, not a run from one to another
             u = u.replace(a, b)
         u = u.replace('sitting low in a black acrylic base', 'sitting low in a satin base of its own color')   # Core's base (fee3b161)
-        assert not re.search(r'(?i)black acrylic base|black hub|270 lux|brass|polished black', u), ('rc_finish: words the pictures make false', f)
+        assert not re.search(r'(?i)black acrylic base|black hub|270 lux|brass|polished black|FA122|75 W', u), ('rc_finish: words the pictures make false', f)
         assert not re.search(r'(?i)ember to smoke', u), ('rc_finish: Ember to Smoke', f)
         if u != t:
             open(f, 'w').write(u)
