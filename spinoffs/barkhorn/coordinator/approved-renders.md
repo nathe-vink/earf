@@ -1565,6 +1565,10 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    amplifier, its power or the loudness with its proposed wording, for approval. Facts given: FA123, two bridged
    channels for the woofer and one for the horn; the woofer up to 125 W into 8 ohm (75 W before); the loudness line
    unchanged until Hypex confirms the bridged load. Shown to the owner 00:34.
+   00:36 UTC, speaker lane 856c3e9f8b: `bar-hero.png` patched under the same name: the cell cut by the right edge is
+   plain records; only the strip x 0.86-1, y 0.36-0.70 re-rendered and blended. Coordinator's check 00:36: outside the
+   strip the frame is identical to a9c41b7a (difference 0); the right edge is clean. THE HERO IS FINAL (856c3e9f8b);
+   it replaces a9c41b7a on the site with batch 5.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
