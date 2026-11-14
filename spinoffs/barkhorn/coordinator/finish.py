@@ -6,6 +6,7 @@ Applies, in this order, to the whole picture alike:
   2. bloom           (light from the brightest areas spills a little over what is next to them)
   3. veil            (a lens's veiling glare: 2 % of the frame's average light over everything, capped; one black floor)
   4. vignette        (corners a little darker)
+  4b. shoulder       (highlights above a knee roll off toward white, so the finish never clips what the render did not)
   5. saturation      (a small global trim)
   6. grain           (film-like, strongest in the mid-tones, the same over speaker and scene)
 
@@ -45,7 +46,7 @@ def gauss(a, sigma):
         out = box1d(out, r, 0); out = box1d(out, r, 1)
     return out
 
-def finish(img, strength=1.0, seed=7, grain=True, verbose=True):
+def finish(img, strength=1.0, seed=7, grain=True, verbose=True, shoulder=True):
     a = np.asarray(img.convert('RGB')).astype(np.float32) / 255.0
     H, W = a.shape[:2]
     k = W / 2400.0                      # settings are written for a 2400 px wide final
@@ -71,6 +72,11 @@ def finish(img, strength=1.0, seed=7, grain=True, verbose=True):
     r = np.sqrt(((xx - W/2) / (W/2))**2 + ((yy - H/2) / (H/2))**2) / np.sqrt(2)
     vig = 0.24 * s
     lin = lin * (1 - vig * np.power(r, 2.2))[..., None]
+    # highlight shoulder: the finish must not clip what the render did not; values above the knee roll off toward 1
+    if shoulder:
+        knee = 0.70
+        hi = lin > knee
+        lin = np.where(hi, knee + (1 - knee) * (1 - np.exp(-(lin - knee) / (1 - knee))), lin)
     out = np.power(np.clip(lin, 0, 1), 1/2.2)
     # 5. saturation trim
     sat = 1 - 0.06 * s
@@ -92,7 +98,7 @@ def finish(img, strength=1.0, seed=7, grain=True, verbose=True):
     out = np.clip(out, 0, 1)
     settings = dict(width=W, strength=s, soft_sigma_px=round(float(soft), 2), bloom_gain=bloom_gain,
                     bloom_sigmas_px=(round(18*k, 1), round(70*k, 1)), veil=veil, vignette=vig, saturation=round(sat, 3),
-                    grain_amp=amp, seed=seed)
+                    grain_amp=amp, seed=seed, shoulder=bool(shoulder))
     if verbose: print('finish:', settings)
     return Image.fromarray((out * 255 + 0.5).astype(np.uint8)), settings
 
@@ -102,7 +108,8 @@ if __name__ == '__main__':
     ap.add_argument('--strength', type=float, default=1.0)
     ap.add_argument('--seed', type=int, default=7)
     ap.add_argument('--no-grain', action='store_true')
+    ap.add_argument('--no-shoulder', action='store_true', help='as before 14 Nov: no highlight roll-off')
     o = ap.parse_args()
-    im, _ = finish(Image.open(o.src), o.strength, o.seed, not o.no_grain)
+    im, _ = finish(Image.open(o.src), o.strength, o.seed, not o.no_grain, True, not o.no_shoulder)
     if o.dst.lower().endswith(('.jpg', '.jpeg')): im.save(o.dst, quality=93, subsampling=0)
     else: im.save(o.dst)
