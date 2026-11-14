@@ -1615,6 +1615,20 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    TO THE SITE (02:34), batch 5 part two, to be pushed: the two seated tall finals as finished (Ember 0db25bafa0, Poison
    fe192e62a3), wherever the tall habitat picture of those tints is shown; slots needing a wide stay as they are
    and are listed in the lane's report.
+   02:36 UTC, biomes lane: Poison -2's audit is clean; Smoke p5 started 02:34. 02:37 (55e5442cd7): `finish.py` at
+   strength 1.0 over the four present finals of Ice and Fog, pushed as `-finish` beside the originals (the finish
+   ran on the committed JPEGs). Coordinator's check: same frames, a little grain and darker corners, nothing washed
+   out (Ice p1 29 to 30, Fog p1 11 to 15). They stand on the site until their seated versions exist.
+   02:39 UTC, site lane: BATCH 5 PART TWO PUSHED AND READY: r49-site-rc e43397b896, dpl_JCYD4c5kWt8zjsSjy4A9xuZSfvDD,
+   `https://earf-ikdu8marz-nathanielvink-4975s-projects.vercel.app`. Poison and Ember (the seated finals, resized to
+   1200 wide) are in every tall habitat slot: the colour pages' habitat figure, the gallery's "Out" view on the
+   Tropos pages, and the home row "Each color is a place." (now Ember, Ice, Poison, Fog). NO SLOT ON THE SITE SHOWS
+   A WIDE HABITAT: every habitat slot is tall (4:5).
+   02:40 UTC, coordinator: THE WIDE HABITAT FINALS ARE CANCELLED for now (Poison's and Ember's included); each habitat
+   is one tall picture, 2400x3000; the wide proxies stand as proof. The biomes lane's order after Smoke p5: seated
+   proxies of Acid and Dust, then of Ice and Fog; tall finals on the coordinator's check. The site lane builds and
+   pushes the Ice and Fog finish swap (ready on r47-site-next 5249b501c9; the phone hero's Ice included); the share
+   link is made on that deployment.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
