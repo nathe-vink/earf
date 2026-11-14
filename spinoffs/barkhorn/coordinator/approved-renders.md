@@ -1586,6 +1586,20 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    lines read as approved on /tropos, /tropos/dust and /tropos/ember; loudness unchanged; home and Tropos in Dust
    load. A new share link (it expires 15 Nov 00:02 UTC) sent to the owner in chat only, after the batch 4 link he
    asked for in the meantime. The habitat finals go up as a separate push.
+   01:13 UTC, speaker lane f91a04e98d: THE MANTLE RED DOT IS SOLVED BY CAMERA HEIGHT: six full-resolution crops (FA123
+   package, the approved wall); only the camera 8 cm higher (z 1.46, was 1.38; target, lens and azimuth unchanged)
+   shows no dot; the only red left is the Ember plinth's edge glow already in the passed frame. The Mantle frame
+   (2400x1600, 256 samples, two bands) is rendering.
+   01:59 UTC, biomes lane 0db25bafa0: THE EMBER PORTRAIT FINAL, `habitats/ember-d-final-portrait.jpg` and `-finish`
+   (2400x3000; three bands of 8, 23 and 18 min; Tropos asset fd8aa47e). Sun 130 off axis, el 10; the shadow toward
+   camera left across the ropy slab; front 0.282, cone 0.174; darkest 1 % speaker 0.059, ground 0.043; 2,280 px
+   clipped on the lava's cores; overlap about 1 % (cinders); emitters sun, sky 0.20, the lava with the stream in
+   front, the sparks; passive none; the cliff in uneven masses with its foot in steam. Finish at 2400 px: soft 0.75,
+   bloom 0.45 at 18 and 70 px, veil 0.02, vignette 0.24, saturation 0.94, grain 0.02. Audit running.
+   02:00 UTC, coordinator's check at full size (the frame, the speaker, the base, the lower band join): no seam (row
+   jumps 1.9 and 4.4, the second on the lava's edge); the cabinet's hue 357.8 raw, 356.2 finished; pixels at 255:
+   0.056 %. PASSED. EMBER'S TALL PICTURE IS FINAL (subject to the audit). Shown to the owner 02:00. It goes to the
+   site with Poison's.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
