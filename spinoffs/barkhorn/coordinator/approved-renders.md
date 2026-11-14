@@ -1932,6 +1932,18 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    12:08 UTC, coordinator's check-in: the biomes lane pushed 16 minutes ago and is rendering; the speaker lane is idle
    by design (its last job passed 11:09). Nothing stalled. Waiting: the Fog final's two half-bands, stitch and audit
    (about 13:30), then Ice with its memory log; the owner's word on Smoke.
+   12:27 UTC, biomes lane ba05aed509: THE FOG TALL FINAL `fog-b-final-portrait.jpg` and `-finish.jpg` (finish.py v1.1),
+   2400x3000 from the saved f3 build with f3a-e35's settings, 5 bands (6 / 16 / 69 / 25 / 8 min). The audit's light
+   half clean: no hidden object, no area lamp, the sun (6) the only lamp, no emitting mesh, the world the sky image
+   at 1.0; the flag gone, the side card kept. The coverage half was killed for memory at both sizes; it is rerun
+   with the grass hidden after Ice, which started 12:29 (the lighter build under the memory log).
+   12:32 UTC, coordinator's check at full size: 0 clipped raw and finished (p99.9 0.851 / 0.890); the coordinator's
+   boxes: cone 0.129 mean / 0.107 median, front 0.271, sky 0.741, equal to f3a-e35; the row jumps at all four joins
+   inside their neighbourhoods (no seam); the 800 view, the speaker and the base clean at 100 %. Accepted by eye and
+   noted: the near tufts' blades overlap the lowest fifth of the cabinet, the ports seen through them (more than the
+   8 % set for Fog; it reads as a speaker standing in a meadow; the woofer and horn are clear). PASSED, FINAL on the
+   picture and the light half; the coverage half follows (removing the flag cannot add a hidden object). Shown to
+   the owner in chat. To the site lane with the word PUSH: one deployment with bar-pendants and Fog.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
