@@ -1944,6 +1944,18 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    8 % set for Fog; it reads as a speaker standing in a meadow; the woofer and horn are clear). PASSED, FINAL on the
    picture and the light half; the coverage half follows (removing the flag cannot add a hidden object). Shown to
    the owner in chat. To the site lane with the word PUSH: one deployment with bar-pendants and Fog.
+   12:37 UTC, biomes lane 09c4ab7af8 (CHECK row): THE FOG FINAL'S AUDIT COMPLETE: the coverage half with the grass
+   hidden (55,684 grass objects) at 1200x1500: no hidden object, no area lamp, the control covering the whole frame.
+   Emitters: the sun (6) and the sky; passive: the one side card, out of frame; the flag gone. FOG IS CLOSED.
+   ICE: the lighter build died too (12:32, 13.32 GB, 3 min in); stopped as ruled. The memory log: 1.37 GB after the
+   asset check, 2.98 GB after the whole set is built (ground, snowfield and drift, firs, flakes, cabin, sky, flag and
+   cards), then 2.98 to 13.32 GB with no new log line: the cost is Cycles turning the scene into its own data at
+   render start, not the set. Suspects: the snowfield's displacement (BOTH), the firs' scanned textures, the flakes.
+   12:38 UTC, coordinator: the lane's diagnostic approved (a saved .blend, a fresh process, a render sync with one
+   group off at a time and one control with all on; at the proxy's resolution if the snowfield dices in pixels).
+   The fix approved in advance: true displacement only within about 3 m of the speaker and bump beyond (or a capped
+   dicing), the firs' textures limited, the flakes as instances of a few low-poly meshes; a peak under 9 GB; then
+   i1 at once.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
