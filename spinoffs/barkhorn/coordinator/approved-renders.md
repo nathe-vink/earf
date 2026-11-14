@@ -1702,6 +1702,19 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    tell the strike, and the speaker reads. SHOWN TO THE OWNER 05:44 as a small test; the final waits for his word (and
    his answer on open country against the old road). e3 as the check: the clear lane to the camera, and the embers
    scattered unevenly in clumps instead of rows of even dots.
+   05:47 UTC, biomes lane 89a15784a5: `acid-b-seat-a3.jpg` (exposure 0.5, Medium High Contrast): front 0.334, cone 0.107,
+   darkest 1 % 0.082; the yellow deeper, the wet rock darker and glossier, the woofer near black. Coordinator: a3's
+   depth is the look but the woofer goes too black; THE ACID TALL FINAL IS RELEASED at the middle (a2's light,
+   exposure 0.75, Medium High Contrast; 2400x3000 in bands; a cone of 0.13 or more accepted behind the yellow panel
+   in the rain; the 8 x 6 m flag listed as passive). It renders after Smoke e3 and Dust d1.
+   06:17 UTC, speaker lane 41494d4294: THE TALL BAR FRAME, `planet-bar/bar-backbar-portrait.png` (2400x3000, 224 samples,
+   two bands; the FA123 package, the approved wall, the card out, no cable; Mantle's front and side lamps out of
+   this frame, its overhead head at 0.4 in a 10 degree beam; the near Core 4.9 / 0.79 / 0.83 unclipped; audit 0/0).
+   06:19 UTC, coordinator's check at full size (the frame, the Core, Mantle): the Core holds its red on its base; Mantle's
+   deck edge, record and black tonearm read; the lower layer's glow is even; no seam (row jump 2.6 on content);
+   at 255: 0.17 % (the Ember shade, as in every bar frame). PASSED, FINAL; it is the phone hero. Shown to the owner
+   06:19. TO THE SITE (batch 6, to be pushed): the phone hero (the headline clear of the two pendants in the top 14 %)
+   and the Mantle bar frame (8ebd1690) as "At the bar" on the Mantle page.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
