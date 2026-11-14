@@ -1771,6 +1771,20 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    with batch 7, which is released for pushing.
    - bar-pendants: the wall stands right behind the pendants, so there it goes back to the passed frame's level
      (ac342ff0) by the wall heads only, on half-size proofs, before the frame renders; band a stopped.
+   07:56-08:02 UTC, site lane: batch 7 pushed (r49-site-rc 47a6310177), then with the wide bar frame as "At the bar"
+   in the Tropos in Acid gallery (the site had used only its tall version): r49-site-rc 89f9bb521f,
+   dpl_8JUBnTb5Dj4gzC5csmkYE6svNYXM, `https://earf-1zu0zrbem-nathanielvink-4975s-projects.vercel.app`, READY.
+   Coordinator's check 08:05 (home at 1440 and 390, /colors/acid, /colors/dust, /tropos/acid): PASSED; the home row
+   shows six seated habitats in one look. One share link made on it (it expires 15 Nov 07:03 UTC) and sent to the
+   owner in chat only. THIS IS NOW THE PREVIEW THE OWNER HOLDS (89f9bb521f).
+   08:36 UTC, biomes lane f299a50a6a: the FOG seated proxy `fog-b-seat-f1.jpg` (60 min, 50 of it the build: the crest
+   and 6,135 tufts): the passed scene unchanged (sun 3 from 120 off axis, el 5.8; sky 1.0; passive the 8 x 6 m black
+   flag and two 2.6 x 2.4 m side cards out of frame). Front 0.210, cone 0.069, darkest 1 % 0.027; the grass 14 %
+   over the cabinet's foot.
+   08:38 UTC, coordinator: f1 is the same picture as the present Fog final, and the place holds. f2 ordered: the sun 3 to
+   6 (front 0.25 or more, cone 0.14 or more accepted behind clear acrylic in backlight); NO cleared ring in a meadow:
+   grass to the base at half height within 0.7 m, the blades up to 8 % of the speaker's height here, the ports clear;
+   fewer tufts to halve the build. If f2 meets these the tall final follows in bands without another word.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
