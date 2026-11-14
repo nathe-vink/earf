@@ -2130,6 +2130,11 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    step 2 stays; ten bands at 30-40 min put the end near 23:00 UTC. The coordinator put band 1 beside e3's rows at
    17:42 and agrees. 18:25, band 2 (4d2bd4335b): 38 min.
    18:33 UTC, coordinator's check-in: the lane pushed within ten minutes; nothing stalled; no word from the owner.
+   18:59-21:10 UTC, biomes lane: Smoke's bands 3 (ca968655b0, 38 min), 4 (c35c81fa54, 39 min), 5 (a866c68375, the
+   horn and the crater's flames: 47 min, left to finish past the 40 min line with all cores busy and 11.5 GB) and
+   6 (dd46e6c67b, 43 min). Four bands to go; the end about 00:00 UTC.
+   20:05 and 21:21 UTC, coordinator's check-ins: a band pushed within the hour each time; nothing stalled; no word
+   from the owner.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
