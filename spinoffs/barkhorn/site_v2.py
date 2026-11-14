@@ -1237,7 +1237,7 @@ def rc_waves(p, web):
     ON_HOLD = 'Hemisphere and Core, switched off. Shown in Smoke, a color on hold.'
     # --- the passed habitats (biomes: Ice 0f619953, Dust 26493989), 4:5
     HAB = {'blue': 'renders/2026-11-11/barkhorn/habitats/ice-final-portrait-2400x3000-finish.jpg',  # the final Ice, finished (r48-biomes 55e5442c)
-           'ice': 'renders/2026-11-12/barkhorn/habitats/fog-final-portrait-2400x3000-finish.jpg',   # the final Fog, finished (r48-biomes 55e5442c)
+           'ice': 'renders/2026-11-12/barkhorn/habitats/fog-b-final-portrait-finish.jpg',           # the seated Fog final, finished (r48-biomes ba05aed5)
            'green': 'renders/2026-11-12/barkhorn/habitats/poison-b-final-portrait-2-finish.jpg',     # the final Poison, finished (r48-biomes fe192e62)
            'red': 'renders/2026-11-12/barkhorn/habitats/ember-d-final-portrait-finish.jpg',          # the final Ember, finished (r48-biomes 0db25baf)
            'orange': 'renders/2026-11-12/barkhorn/habitats/dust-final-portrait-finish.jpg',          # the final Dust, finished (r48-biomes fa0c5d78)
