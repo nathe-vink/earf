@@ -613,7 +613,7 @@ def pages(web):
                 os.rmdir(d)
         left = [os.path.relpath(f, web.SITE) for f in glob.glob(os.path.join(web.SITE, '**', '*'), recursive=True)]
         bad = [f for f in left if re.search(r'(^press/|img/(?:(?:dome|orb)-|lamps-(?:orbs|domes)|lamp-(?:orb|dome)|hero[.-]|facade|room|macro-|turn-|spin/'
-                                            r'|tt-|ga-|globe-turn-night|coins-|v2/mantle-day|rc/og-mantle|rc/(?:violet|black)-habitat|lamps-unlit|thumb/lamps-unlit|rc/(?:red|orange|amber|green|blue|violet|ice)-back[.-]|(?:red|orange|amber|green|blue|violet|ice|black)-(?:on|off|studio|back|amp|horn|inside|reel|habitat)))', f)]
+                                            r'|tt-|ga-|globe-turn-night|coins-|v2/mantle-day|rc/og-mantle|' + HAB_HELD + r'|lamps-unlit|thumb/lamps-unlit|rc/(?:red|orange|amber|green|blue|violet|ice)-back[.-]|(?:red|orange|amber|green|blue|violet|ice|black)-(?:on|off|studio|back|amp|horn|inside|reel|habitat)))', f)]
         assert not bad, ('site_v2: rc deploys', bad[:12])
 
 
@@ -1236,15 +1236,10 @@ def rc_waves(p, web):
     lines = {k: line for k, num, name, icon, acr, line, *_ in web.CLOUDS}
     ON_HOLD = 'Hemisphere and Core, switched off. Shown in Smoke, a color on hold.'
     # --- the passed habitats (biomes: Ice 0f619953, Dust 26493989), 4:5
-    HAB = {'blue': 'renders/2026-11-12/barkhorn/habitats/ice-final-portrait-finish.jpg',            # the seated Ice final, finished (r48-biomes 8f4c9fd9)
-           'ice': 'renders/2026-11-12/barkhorn/habitats/fog-b-final-portrait-finish.jpg',           # the seated Fog final, finished (r48-biomes ba05aed5)
-           'green': 'renders/2026-11-12/barkhorn/habitats/poison-b-final-portrait-2-finish.jpg',     # the final Poison, finished (r48-biomes fe192e62)
-           'red': 'renders/2026-11-12/barkhorn/habitats/ember-d-final-portrait-finish.jpg',          # the final Ember, finished (r48-biomes 0db25baf)
-           'orange': 'renders/2026-11-12/barkhorn/habitats/dust-final-portrait-finish.jpg',          # the final Dust, finished (r48-biomes fa0c5d78)
-           'amber': 'renders/2026-11-12/barkhorn/habitats/acid-b-final-portrait-finish.jpg'}         # the final Acid, finished (r48-biomes e869e99b)
+    HAB = dict(HAB_SRC)
     # out (the audits, 2026-11-09/10): Dust 26493989 (a hidden panel), then 43c91242 (it hovers: a lit strip under its
     # front edge); Fog b61474c0 (two suns), then aa1ca856 (a hidden fill lamp)
-    HAB_ALT = {'green': 'Tropos in Poison, standing in ivy and leaf litter in a dark forest with dappled sun', 'red': 'Tropos in Ember, standing on a lava field at dusk with glowing streams', 'blue': 'Tropos in Ice, out on the snow in the last sun', 'orange': 'Tropos in Dust on rippled desert sand at sunset, mesas in the haze behind', 'amber': 'Tropos in Acid on wet dark rock in the rain, its reflection in a pool in front',
+    HAB_ALT = {'violet': 'Tropos in Haze, in dry grass on rolling hills that fade into violet haze, the sun low from the side', 'black': 'Tropos in Smoke, in open grassland at dusk, a meteor just come down behind it: a small crater on fire, a black column of smoke, its trail in the sky', 'green': 'Tropos in Poison, standing in ivy and leaf litter in a dark forest with dappled sun', 'red': 'Tropos in Ember, standing on a lava field at dusk with glowing streams', 'blue': 'Tropos in Ice, out on the snow in the last sun', 'orange': 'Tropos in Dust on rippled desert sand at sunset, mesas in the haze behind', 'amber': 'Tropos in Acid on wet dark rock in the rain, its reflection in a pool in front',
                'ice': 'Tropos in Fog, standing in the grass on a foggy hillside at dawn'}
     for k, src in HAB.items():
         im = Image.open(os.path.join(web.ROOT, src)).convert('RGB')
@@ -1393,9 +1388,9 @@ def rc3(p, web):
     import os
     from PIL import Image
     names = {k: name for k, num, name, *_ in web.CLOUDS}
-    HAB_ALT = {'green': 'Tropos in Poison, standing in ivy and leaf litter in a dark forest with dappled sun', 'red': 'Tropos in Ember, standing on a lava field at dusk with glowing streams', 'blue': 'Tropos in Ice, out on the snow in the last sun', 'orange': 'Tropos in Dust on rippled desert sand at sunset, mesas in the haze behind', 'amber': 'Tropos in Acid on wet dark rock in the rain, its reflection in a pool in front',
+    HAB_ALT = {'violet': 'Tropos in Haze, in dry grass on rolling hills that fade into violet haze, the sun low from the side', 'black': 'Tropos in Smoke, in open grassland at dusk, a meteor just come down behind it: a small crater on fire, a black column of smoke, its trail in the sky', 'green': 'Tropos in Poison, standing in ivy and leaf litter in a dark forest with dappled sun', 'red': 'Tropos in Ember, standing on a lava field at dusk with glowing streams', 'blue': 'Tropos in Ice, out on the snow in the last sun', 'orange': 'Tropos in Dust on rippled desert sand at sunset, mesas in the haze behind', 'amber': 'Tropos in Acid on wet dark rock in the rain, its reflection in a pool in front',
                'ice': 'Tropos in Fog, in the grass on a hillside, in fog at dawn'}
-    HAB_CAP = {'green': 'In ivy and leaf litter, in a dark forest with dappled sun.', 'red': 'On a lava field at dusk, among glowing streams.', 'blue': 'Out on the snow, in the last sun.', 'orange': 'On rippled desert sand at sunset, mesas in the haze behind.', 'amber': 'On wet dark rock in the rain, over a pool.', 'ice': 'In the grass on a hillside, in fog at dawn.'}
+    HAB_CAP = {'violet': 'In dry grass on rolling hills, fading into violet haze.', 'black': 'In grassland at dusk, where a meteor has just come down.', 'green': 'In ivy and leaf litter, in a dark forest with dappled sun.', 'red': 'On a lava field at dusk, among glowing streams.', 'blue': 'Out on the snow, in the last sun.', 'orange': 'On rippled desert sand at sunset, mesas in the haze behind.', 'amber': 'On wet dark rock in the rain, over a pool.', 'ice': 'In the grass on a hillside, in fog at dawn.'}
     # --- 1. home, the lamps: the picture left, the two lamps' names beside it, one line each, as links
     m = re.search(r'<figure class="strip lamps-day"><img (.*?)><figcaption class="wrap">(.*?)</figcaption></figure>', p.rest, re.S)
     assert m, 'rc3: lamps-day'
@@ -1908,6 +1903,17 @@ def rc_intro(p, web):
     assert '__turnFly' not in p.rest and '__globeLand' not in p.rest and 'setTurn(film' not in p.rest, 'rc_intro: the old motion'
 
 
+# the seated habitats, 4:5, one per tint as each passes (r48-biomes); Haze (violet) and Smoke (black) still to come
+HAB_SRC = {'violet': 'renders/2026-11-12/barkhorn/habitats/haze-b-final-portrait-finish.jpg',          # the seated Haze final, finished (r48-biomes 7895f4d6)
+           'blue': 'renders/2026-11-12/barkhorn/habitats/ice-final-portrait-finish.jpg',            # the seated Ice final, finished (r48-biomes 8f4c9fd9)
+           'ice': 'renders/2026-11-12/barkhorn/habitats/fog-b-final-portrait-finish.jpg',           # the seated Fog final, finished (r48-biomes ba05aed5)
+           'green': 'renders/2026-11-12/barkhorn/habitats/poison-b-final-portrait-2-finish.jpg',     # the final Poison, finished (r48-biomes fe192e62)
+           'red': 'renders/2026-11-12/barkhorn/habitats/ember-d-final-portrait-finish.jpg',          # the final Ember, finished (r48-biomes 0db25baf)
+           'orange': 'renders/2026-11-12/barkhorn/habitats/dust-final-portrait-finish.jpg',          # the final Dust, finished (r48-biomes fa0c5d78)
+           'amber': 'renders/2026-11-12/barkhorn/habitats/acid-b-final-portrait-finish.jpg'}         # the final Acid, finished (r48-biomes e869e99b)
+HAB_HELD = 'rc/(?:' + ('|'.join(k for k in ('violet', 'black') if k not in HAB_SRC) or 'none') + ')-habitat'
+
+
 HOTSPOTS = True    # the hero's point (Tropos in Ice, to its page); off: the picture alone
 HERO_SRC = 'renders/2026-11-11/barkhorn/product/planet-bar/bar-hero.png'           # the bar (r33-speaker-horn a9c41b7a), desktop;
 HERO_SRC_TALL = 'renders/2026-11-11/barkhorn/product/planet-bar/bar-backbar-portrait.png'   # the bar in 4:5 (r33-speaker-horn 41494d42), on a phone
@@ -2254,7 +2260,9 @@ FAMILY = [  # (product, route, tint, kind, line)
     ('Core', '#core-poison', 'green', 'Table lamp', 'A cordless table lamp. A glow, not a reading light.'),
 ]
 PLACES = [('red', 'Ember, on a lava field at dusk.'), ('orange', 'Dust, on desert sand at sunset.'), ('amber', 'Acid, on wet rock in the rain.'),
-          ('green', 'Poison, in ivy in a dark forest.'), ('blue', 'Ice, on the snow in the last sun.'), ('ice', 'Fog, on a hillside at dawn.')]
+          ('green', 'Poison, in ivy in a dark forest.'), ('blue', 'Ice, on the snow in the last sun.'),
+          ('violet', 'Haze, in dry grass on hazy hills.'), ('ice', 'Fog, on a hillside at dawn.'), ('black', 'Smoke, where a meteor just came down.')]
+PLACES_SHOWN = [x for x in PLACES if x[0] in HAB_SRC]     # a place shows once its habitat has passed
 ARROW = ('<svg class="arr" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" '
          'stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>')
 
@@ -2340,7 +2348,7 @@ def rc_marketing(p, web):
               '<div class="mk-wide fam pick">' + boxes + '</div><div class="wrap"><p class="mk-cap"><i class="render">Render</i></p></div></section>')
     # 4. each color a place
     places = ''.join(f'<a class="place" href="#color-{C[k]["name"].lower()}">{img(C[k]["hab"], C[k]["hab_alt"])}'
-                     f'<span class="pl-cap">{cap} <i class="render">Render</i></span></a>' for k, cap in PLACES)
+                     f'<span class="pl-cap">{cap} <i class="render">Render</i></span></a>' for k, cap in PLACES_SHOWN)
     place = ('<section class="band mk" id="places"><div class="wrap mk-head"><h2>Each color is a place.</h2></div>'
              '<div class="mk-wide places">' + places + '</div></section>')
     # the old blocks go: the Tropos words, the lamps' and Mantle's beats
@@ -2376,6 +2384,12 @@ def rc_marketing(p, web):
     i = p.rest.index('</body>') if '</body>' in p.rest else len(p.rest)
     p.rest = p.rest[:i] + js + '\n' + p.rest[i:]
     hg, cg = grounds['hemisphere'], grounds['core']
+    n_pl = len(PLACES_SHOWN)       # six: three across; seven: four over three, the three centred; eight: two rows of four
+    if n_pl == 7:
+        PLACES_CSS = ('.places { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 24px 16px }\n'
+                      '.place { grid-column: span 2 } .place:nth-child(5) { grid-column: 2 / span 2 }')
+    else:
+        PLACES_CSS = f'.places {{ display: grid; grid-template-columns: repeat({3 if n_pl in (3, 6) else min(n_pl, 4)}, minmax(0, 1fr)); gap: 24px 16px }}'
     p.css(f"""
 /* the home as a marketing page */
 .mk {{ padding-block: clamp(64px, 9vw, 128px) 0 }} #progress.mk {{ padding-bottom: clamp(56px, 7vw, 96px) }}
@@ -2440,7 +2454,7 @@ def rc_marketing(p, web):
 .tint:has(input:focus-visible) {{ outline: 3px solid var(--ink); outline-offset: 3px }}
 .tint-line {{ margin: 0 0 24px; font-size: clamp(18px, 1.6vw, 22px); min-height: 1.4em }}
 .mk-cap {{ margin: 10px 0 0; color: var(--muted); font-size: 14px }}
-.places {{ display: grid; grid-template-columns: repeat({3 if len(PLACES) in (3, 6) else min(len(PLACES), 4)}, minmax(0, 1fr)); gap: 24px 16px }}
+{PLACES_CSS}
 .place {{ display: grid; gap: 10px; color: var(--ink); text-decoration: none }}
 .place img {{ width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; display: block; transition: transform .5s cubic-bezier(.2, .7, .2, 1) }}
 .place {{ overflow: hidden }} .place:hover img, .place:focus-visible img {{ transform: scale(1.02) }}
