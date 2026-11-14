@@ -1819,6 +1819,9 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    finished. Pass: cone 0.12 or more with its form readable, front 0.25 or more, darkest 1 % 0.04-0.09, 0 clipped;
    the coordinator chooses one by eye, the tall final follows on that word. Order in the lane: the Acid coverage half,
    Fog f3, Ice i1.
+   09:11 UTC, biomes lane 8f88bc259e (CHECK row): the ACID final's audit COMPLETE with the rain hidden for the coverage
+   half (7.2 M streak faces): at 1200x1500 no hidden object, no area lamp, the control render covering the whole frame.
+   Hidden 0 / equipment 0; the Acid tall final (e869e99b53) is clean on both halves. Read by the coordinator 09:13.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
