@@ -2135,6 +2135,28 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    6 (dd46e6c67b, 43 min). Four bands to go; the end about 00:00 UTC.
    20:05 and 21:21 UTC, coordinator's check-ins: a band pushed within the hour each time; nothing stalled; no word
    from the owner.
+   21:48-23:07 UTC, biomes lane: Smoke's bands 7 (dfd60ebd3a, 38 min), 8 (1136c1a6e8, 39 min) and 9 (fefeae1229,
+   39 min). 22:53: the coordinator's check-in found nothing stalled.
+   23:00 UTC, the owner asked 'What's up?'. Told in chat: seven of eight places final and on the preview (the link
+   again), the bar set closed, the turn kept, Smoke started at 17:00 without his yes and still his to stop, and
+   what is open with him (Smoke yes or no; Mantle's dust cover; the Hypex plate and the lining; the hello@earf.world
+   mailbox; going public needs his yes).
+   23:45 UTC, biomes lane 9599febdc3 (CHECK row fc0cf0a696): THE SMOKE TALL FINAL `smoke-e-final-portrait.jpg` and
+   `-finish.jpg` (finish.py v1.1): 2400x3000, 48 samples, the column at step rate 2, 10 bands (37 / 38 / 38 / 39 /
+   47 / 43 / 38 / 39 / 39 / 37 min; peak 12.2 GB), stitched with the rounding fix. Front 0.280, cone 0.367, the
+   speaker's darkest 1 % 0.031. THE AUDIT COMPLETE: no hidden object, no area lamp; the sun (12) the only lamp;
+   emitting: the sparks, the smouldering ember clumps and the plume's flame, all the place's own fire, seen in
+   frame; the control with the 35,322 tuft objects hidden at 1200x1500 covers the whole frame. The scatter check
+   flags three props as floating.
+   23:52 UTC, coordinator's check at full size: it equals e3 (the finished means agree by fifths to 0.002); raw 0 px
+   clipped on all channels, the fire's red at 255 on 0.006 % and none finished; the three sky joins step by 0.1
+   level or less (the rounding fix works); the ground joins sit inside the grass's own texture and show nothing at
+   100 %; the 800 view, the speaker, the base in the grass, the crater, the column and the embers clean. A faint
+   weave seen in the column is the JPEG's 8-px blocks (steps of 0.5 level at block edges against 0.2-0.3 inside),
+   not the volume. PASSED, FINAL; the audit accepted. Shown to the owner in chat as his to say yes or no to. To
+   the site lane with the word PUSH (the eighth place; the dark column's encode to be watched). To the biomes lane:
+   look at the three flagged props at 100 %; from now on each final's stitched raw is also saved as a PNG and
+   finished from it. WITH THIS ALL EIGHT PLACES ARE FINAL.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
