@@ -613,7 +613,7 @@ def pages(web):
                 os.rmdir(d)
         left = [os.path.relpath(f, web.SITE) for f in glob.glob(os.path.join(web.SITE, '**', '*'), recursive=True)]
         bad = [f for f in left if re.search(r'(^press/|img/(?:(?:dome|orb)-|lamps-(?:orbs|domes)|lamp-(?:orb|dome)|hero[.-]|facade|room|macro-|turn-|spin/'
-                                            r'|tt-|ga-|globe-turn-night|coins-|v2/mantle-day|rc/og-mantle|rc/(?:red|orange|amber|violet|black)-habitat|lamps-unlit|thumb/lamps-unlit|rc/(?:red|orange|amber|green|blue|violet|ice)-back[.-]|(?:red|orange|amber|green|blue|violet|ice|black)-(?:on|off|studio|back|amp|horn|inside|reel|habitat)))', f)]
+                                            r'|tt-|ga-|globe-turn-night|coins-|v2/mantle-day|rc/og-mantle|rc/(?:orange|amber|violet|black)-habitat|lamps-unlit|thumb/lamps-unlit|rc/(?:red|orange|amber|green|blue|violet|ice)-back[.-]|(?:red|orange|amber|green|blue|violet|ice|black)-(?:on|off|studio|back|amp|horn|inside|reel|habitat)))', f)]
         assert not bad, ('site_v2: rc deploys', bad[:12])
 
 
@@ -1238,10 +1238,11 @@ def rc_waves(p, web):
     # --- the passed habitats (biomes: Ice 0f619953, Dust 26493989), 4:5
     HAB = {'blue': 'renders/2026-11-11/barkhorn/habitats/ice-final-portrait-2400x3000.jpg',       # the final Ice (r48-biomes e2ea7e2f)
            'ice': 'renders/2026-11-12/barkhorn/habitats/fog-final-portrait-2400x3000.jpg',          # the final Fog (r48-biomes 7b7c9c53)
-           'green': 'renders/2026-11-11/barkhorn/habitats/poison-final-portrait-2400x3000.jpg'}       # Poison (316c38a2), being remade
+           'green': 'renders/2026-11-12/barkhorn/habitats/poison-b-final-portrait-2-finish.jpg',     # the final Poison, finished (r48-biomes fe192e62)
+           'red': 'renders/2026-11-12/barkhorn/habitats/ember-d-final-portrait-finish.jpg'}          # the final Ember, finished (r48-biomes 0db25baf)
     # out (the audits, 2026-11-09/10): Dust 26493989 (a hidden panel), then 43c91242 (it hovers: a lit strip under its
     # front edge); Fog b61474c0 (two suns), then aa1ca856 (a hidden fill lamp)
-    HAB_ALT = {'green': 'Tropos in Poison, in a forest among ivy-covered trees', 'blue': 'Tropos in Ice, out in the snow at dusk', 'orange': 'Tropos in Dust, on rippled sand among desert buttes',
+    HAB_ALT = {'green': 'Tropos in Poison, standing in ivy and leaf litter in a dark forest with dappled sun', 'red': 'Tropos in Ember, standing on a lava field at dusk with glowing streams', 'blue': 'Tropos in Ice, out in the snow at dusk', 'orange': 'Tropos in Dust, on rippled sand among desert buttes',
                'ice': 'Tropos in Fog, standing in the grass on a foggy hillside at dawn'}
     for k, src in HAB.items():
         im = Image.open(os.path.join(web.ROOT, src)).convert('RGB')
@@ -1390,9 +1391,9 @@ def rc3(p, web):
     import os
     from PIL import Image
     names = {k: name for k, num, name, *_ in web.CLOUDS}
-    HAB_ALT = {'green': 'Tropos in Poison, in a forest among ivy-covered trees', 'blue': 'Tropos in Ice, out in the snow at dusk', 'orange': 'Tropos in Dust, on rippled sand among desert buttes',
+    HAB_ALT = {'green': 'Tropos in Poison, standing in ivy and leaf litter in a dark forest with dappled sun', 'red': 'Tropos in Ember, standing on a lava field at dusk with glowing streams', 'blue': 'Tropos in Ice, out in the snow at dusk', 'orange': 'Tropos in Dust, on rippled sand among desert buttes',
                'ice': 'Tropos in Fog, in the grass on a hillside, in fog at dawn'}
-    HAB_CAP = {'green': 'In the forest, among the ivy.', 'blue': 'Out in the snow at dusk.', 'orange': 'On rippled sand among desert buttes.', 'ice': 'In the grass on a hillside, in fog at dawn.'}
+    HAB_CAP = {'green': 'In ivy and leaf litter, in a dark forest with dappled sun.', 'red': 'On a lava field at dusk, among glowing streams.', 'blue': 'Out in the snow at dusk.', 'orange': 'On rippled sand among desert buttes.', 'ice': 'In the grass on a hillside, in fog at dawn.'}
     # --- 1. home, the lamps: the picture left, the two lamps' names beside it, one line each, as links
     m = re.search(r'<figure class="strip lamps-day"><img (.*?)><figcaption class="wrap">(.*?)</figcaption></figure>', p.rest, re.S)
     assert m, 'rc3: lamps-day'
@@ -2239,7 +2240,7 @@ FAMILY = [  # (product, route, tint, kind, line)
     ('Hemisphere', '#hemisphere-haze', 'violet', 'Pendant', 'A pendant. Half a globe of light over the table.'),
     ('Core', '#core-poison', 'green', 'Table lamp', 'A cordless table lamp. A glow, not a reading light.'),
 ]
-PLACES = [('blue', 'Ice, out in the snow at dusk.'), ('green', 'Poison, in the forest among the ivy.'), ('ice', 'Fog, on a hillside at dawn.')]
+PLACES = [('red', 'Ember, on a lava field at dusk.'), ('blue', 'Ice, out in the snow at dusk.'), ('green', 'Poison, in ivy in a dark forest.'), ('ice', 'Fog, on a hillside at dawn.')]
 ARROW = ('<svg class="arr" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" '
          'stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>')
 
