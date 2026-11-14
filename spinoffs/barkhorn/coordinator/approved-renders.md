@@ -2020,6 +2020,14 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    drift, the blue shadow across warm snow and the lit flakes clean at 100 %. PASSED, FINAL on the picture and the
    light half; the coverage half follows. Shown to the owner in chat. To the site lane with the word PUSH (it
    replaces the interim Ice; the words may follow the last sun). WITH THIS ALL SIX PLACES IN THE ROW ARE SEATED.
+   14:16 UTC, site lane: the seated Ice pushed: r49-site-rc d1010c7b0f, dpl_HhZECtvuNJvKruxj2c39BKVPceQj,
+   `https://earf-c6cv5xqd2-nathanielvink-4975s-projects.vercel.app`, READY (preview only). The words follow the
+   picture: 'Ice, on the snow in the last sun.' (home row), 'Out on the snow, in the last sun.' (color page), alt
+   'Tropos in Ice, out on the snow in the last sun'; nothing says 'snow at dusk' now.
+   14:19 UTC, coordinator's check (home at 1440 and 390, /colors/ice at 1440 and 390, /tropos/ice at 1440 loaded with
+   no broken picture; the places row seen: six seated places in one look, Ice with its new caption): PASSED. One
+   share link made on this deployment (it expires 15 Nov 13:17 UTC) and sent to the owner in chat only.
+   THIS IS NOW THE PREVIEW THE OWNER HOLDS (d1010c7b0f).
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
