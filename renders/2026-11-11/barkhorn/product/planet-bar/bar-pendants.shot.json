@@ -142,15 +142,23 @@
    {
     "kind": "kit",
     "shape": "ext",
-    "path": "spinoffs/barkhorn/campaign/bar_life/bar_life.py",
-    "fn": "fill_records",
+    "path": "spinoffs/barkhorn/campaign/bar_life/record_wall.py",
+    "fn": "build",
     "x0": 3.4,
     "x1": 10.3,
     "z0": 1.2,
     "z1": 3.05,
     "cell": 0.36,
     "y": 5.72,
-    "depth": 0.36,
+    "back": 6.08,
+    "eye_z": 9.9,
+    "seed": 1313,
+    "plain": [
+     [
+      18,
+      1
+     ]
+    ],
     "skip": [
      [
       5.13,
@@ -574,7 +582,7 @@
       "h": 0.315,
       "x": 8.0,
       "y": 4.249999999999999,
-      "z": 1.07,
+      "z": 1.0735,
       "rot": [
        -90.0,
        0,
@@ -661,22 +669,6 @@
        58.0
       ],
       "ground": "#E9E3D6"
-     },
-     {
-      "image": "tex/reserved.png",
-      "w": 0.1,
-      "h": 0.05,
-      "t": 0.002,
-      "x": 5.55,
-      "y": 5.446199999999999,
-      "z": 1.09,
-      "rot": [
-       -18.0,
-       0,
-       0.0
-      ],
-      "ground": "#EFEBE3",
-      "rough": 0.7
      }
     ]
    },
@@ -747,6 +739,7 @@
      "blue": 1.5,
      "black": 0.15
     },
+    "core_cable": false,
     "hemispheres": [
      {
       "tint": "amber",
@@ -794,8 +787,7 @@
       "floor_z": 1.07,
       "rot": 0.0
      }
-    ],
-    "core_cable": false
+    ]
    },
    {
     "kind": "kit",
@@ -946,7 +938,7 @@
     5.72,
     1.7
    ],
-   "irradiance": 5.1,
+   "irradiance": 0.408,
    "spread_deg": 20,
    "color": "#FFD2A0",
    "shape": "DISK"
@@ -967,7 +959,7 @@
     5.72,
     1.7
    ],
-   "irradiance": 5.1,
+   "irradiance": 0.408,
    "spread_deg": 20,
    "color": "#FFD2A0",
    "shape": "DISK"
@@ -988,7 +980,7 @@
     5.72,
     1.7
    ],
-   "irradiance": 5.1,
+   "irradiance": 0.408,
    "spread_deg": 20,
    "color": "#FFD2A0",
    "shape": "DISK"
@@ -1009,7 +1001,7 @@
     5.72,
     1.7
    ],
-   "irradiance": 5.1,
+   "irradiance": 0.408,
    "spread_deg": 20,
    "color": "#FFD2A0",
    "shape": "DISK"
@@ -1030,7 +1022,7 @@
     5.72,
     1.7
    ],
-   "irradiance": 5.1,
+   "irradiance": 0.408,
    "spread_deg": 20,
    "color": "#FFD2A0",
    "shape": "DISK"

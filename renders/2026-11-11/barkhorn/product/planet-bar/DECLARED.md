@@ -68,11 +68,11 @@ products light themselves: the Hemispheres and Cores by their own LEDs (r32-lamp
 
 | name | what | where (m: x along the bar, y toward the wall, z up) | strength |
 |---|---|---|---|
-| track-wall0 | a round ceiling track head, aimed at the record wall; disk 0.12 x 0.12 m | 4.3, 4.9, 3.35 | 5.1 W/m2 at its target |
-| track-wall1 | a round ceiling track head, aimed at the record wall; disk 0.12 x 0.12 m | 6.2, 4.9, 3.35 | 5.1 W/m2 at its target |
-| track-wall2 | a round ceiling track head, aimed at the record wall; disk 0.12 x 0.12 m | 7.0, 4.9, 3.35 | 5.1 W/m2 at its target |
-| track-wall3 | a round ceiling track head, aimed at the record wall; disk 0.12 x 0.12 m | 9.0, 4.9, 3.35 | 5.1 W/m2 at its target |
-| track-wall4 | a round ceiling track head, aimed at the record wall; disk 0.12 x 0.12 m | 9.8, 4.9, 3.35 | 5.1 W/m2 at its target |
+| track-wall0 | a round ceiling track head, aimed at the record wall; disk 0.12 x 0.12 m | 4.3, 4.9, 3.35 | 0.408 W/m2 at its target |
+| track-wall1 | a round ceiling track head, aimed at the record wall; disk 0.12 x 0.12 m | 6.2, 4.9, 3.35 | 0.408 W/m2 at its target |
+| track-wall2 | a round ceiling track head, aimed at the record wall; disk 0.12 x 0.12 m | 7.0, 4.9, 3.35 | 0.408 W/m2 at its target |
+| track-wall3 | a round ceiling track head, aimed at the record wall; disk 0.12 x 0.12 m | 9.0, 4.9, 3.35 | 0.408 W/m2 at its target |
+| track-wall4 | a round ceiling track head, aimed at the record wall; disk 0.12 x 0.12 m | 9.8, 4.9, 3.35 | 0.408 W/m2 at its target |
 | track-bay0 | a round ceiling track head in front of a speaker's bay, aimed steeply down at the cabinet; disk 0.14 x 0.14 m | 5.55, 5.27, 3.35 | 16.5 W/m2 at its target |
 | track-bay1 | a round ceiling track head in front of a speaker's bay, aimed steeply down at the cabinet; disk 0.14 x 0.14 m | 8.25, 5.27, 3.35 | 16.5 W/m2 at its target |
 | track-mantle | a round ceiling track head over Mantle; disk 0.1 x 0.1 m | 8.9, 3.0, 3.35 | 10.5 W/m2 at its target |

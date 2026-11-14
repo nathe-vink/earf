@@ -303,3 +303,16 @@ bar-backbar (3200 x 1800, the same camera; two bands blended over 107 rows, mean
 - The frame's mean luminance (Rec. 709) 36.1, against 32.3 in the passed frame: the new wall's aged whites are lighter
   than the old dark stripes. The hero's wall heads were turned down for this (0.48 / 0.38); this frame's are as passed.
 - Clipped pixels 0.28 % (the Hemispheres' shades). Audit: hidden 0, equipment 0.
+
+## bar-pendants with the approved wall (2026-11-14)
+
+- 2400 x 2400 as passed (ac342ff0), the same camera, lamps and set but the wall; two bands blended over 143 rows (mean
+  difference 0.57). The FA123 package; the approved record wall.
+- The wall heads only, at 0.08 (the coordinator, 07:55: the new wall's pale spines would eat the shades' glow). The wall
+  behind the cluster (rows 0 to 50 %, the shades, cords and glow masked out from the passed frame): **12.6**, the passed
+  frame 12.4; with the wall heads as before it read 40.3 (half-size proof). The shelves' wood reads darker than in the
+  passed frame, the spines about as before.
+- The shades, each's lit glass (median of a 120 x 30 px window): acid 52.1 / 0.24 / 0.87 and 50.9 / 0.24 / 0.87, dust
+  16.7 / 0.37 / 0.95, ember 5.2 / 0.41 / 1.00 and 4.9 / 0.43 / 1.00; the passed frame's the same to 1.2 degrees of hue.
+  The Cores: ember 8.0 / 0.94 / 0.73, dust 21.2 / 0.86 / 0.69 (passed 8.0 / 0.94 / 0.73, 21.0 / 0.85 / 0.69).
+- Clipped pixels 0.72 % (passed 0.71 %). Audit: hidden 0, equipment 0.
