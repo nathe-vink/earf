@@ -2052,6 +2052,8 @@ def rc_home(p, web):
 # per color (fa0c3a65: satin black hardware, polished bevels); the lamps lit, per tint, and in rows (r32-lamps-final 17a9da5e;
 # Core's base in its own color fee3b161; Hemisphere direct, from under, in a group cd703d56)
 MANTLE_FINAL = 'renders/2026-11-10/barkhorn/mantle-r48/mantle-final-day-{name}.png'
+TROPOS_BAR = 'renders/2026-11-11/barkhorn/product/planet-bar/bar-backbar.png'   # Tropos in Acid at the bar (r33-speaker-horn 04c6fb4c)
+TROPOS_BAR_ALT = 'Tropos in Acid in the bar\\u2019s bay, a wall of records around it, Hemispheres and Cores over the counter.'
 MANTLE_BAR = 'renders/2026-11-11/barkhorn/product/planet-bar/mantle-bar.png'   # Mantle in Ember at the bar (r33-speaker-horn 8ebd1690)
 LAMP_FINAL = 'renders/2026-11-10/barkhorn/lamp-site/final/{f}.png'
 NAMES = dict(zip(RC_KEYS, ['ember', 'dust', 'acid', 'poison', 'ice', 'haze', 'fog', 'smoke']))
@@ -2097,6 +2099,9 @@ def rc_products(p, web):
         v, card = views(MANTLE_FINAL.format(name=n), f'mantle-{n}', 1600)
         D['tt']['colours'][k] = {'views': {'studio': v}, 'card': dict(card, alt=f'Mantle in {n.title()}')}
     D['tt']['colours']['red']['views']['bar'], _ = views(MANTLE_BAR, 'mantle-bar', 1600)
+    # Tropos in Acid at the bar, the new record wall (r33-speaker-horn 04c6fb4c), after the front
+    acid = next(c for c in D['clouds'] if c['k'] == 'amber')
+    acid['views']['bar'], _ = views(TROPOS_BAR, 'tropos-bar', 1600)
     # the lamps: each lit in its tint, the eight in a row, Hemisphere from below (Ember)
     rows = {}
     room = [(views(src, name, 1600)[0], alt, tints) for src, name, alt, tints in ROOM]
@@ -2149,6 +2154,9 @@ def rc_products(p, web):
     fact(D['tt'], 'Posts', 'Four solid posts, 30 mm across, satin black')
     fact(D['tt'], 'Hardware', 'Satin black throughout', after='Posts')
     p.rest = p.rest[:i] + json.dumps(D, separators=(',', ':')) + p.rest[j:]
+    p.rest, n = re.subn(r"(\n(\s*)\['off', 'Front', [^\n]*\],)", lambda m: m.group(1) + "\n" + m.group(2) + "['bar', 'At the bar', () => '"
+                        + TROPOS_BAR_ALT + "'],", p.rest, count=1)
+    assert n == 1, 'rc_products: the speaker views'
     p.rest = p.rest.replace('A ball of tinted acrylic sitting low in a black acrylic base.', 'A ball of tinted acrylic sitting low in a satin base of its own color.')
     p.sub('Set it back on its dock, a disc of polished black acrylic, and it charges in two to three hours.',
           'Set it back on its dock and it charges in two to three hours.')
