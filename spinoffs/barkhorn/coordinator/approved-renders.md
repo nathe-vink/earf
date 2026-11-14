@@ -1537,11 +1537,34 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    23:59 UTC, biomes lane: ITS CONTAINER WAS STOPPED AGAIN at about 22:06, a minute into Smoke p5's build, and came
    back at 23:57 when its check-in fired. Nothing rendered in between; nothing lost from the branch (66df213242).
    Both queues restarted 23:58 with a session-tracked watcher beside them.
-   23:59 UTC, 14 Nov, coordinator: three long renders lost to a stopped container (08:36, 20:02 stopped by order, 22:05).
+   23:59 UTC, 13 Nov, coordinator: three long renders lost to a stopped container (08:36, 20:02 stopped by order, 22:05).
    NEW RULES FOR THE BIOMES LANE: (1) the approved finals first: the Poison wide proxy and portrait final, the Ember
    wide proxy and portrait final, then Smoke p5, then the two wide finals, then the seated proxies of Acid, Dust,
    Ice and Fog; (2) no render longer than about 40 minutes in one piece: finals in bands, each pushed as it
    finishes, the session-tracked watcher kept running so the session is never idle under a render.
+   14 Nov 00:04 UTC, biomes lane: reordered and banded (the Poison wide proxy, the Poison portrait final in 3 row bands
+   of about 13-15 min, then Ember the same, Smoke p5 at 640x800 in one piece since its scene build alone takes about
+   43 min, the wide finals in bands, the seated proxies after). Bands stitch raw with a linear blend over a 2 %
+   overlap; then the shot's own finish, then `finish.py`, once over the whole frame.
+   00:17 UTC, coordinator: `poison-b-final-wide-proxy.jpg` (a89d078a21, 1280x800, 45 mm) PASSES; the wide final may
+   run, with the bright spot top right (sun through a stray canopy gap onto a far trunk) closed by a 1.0 m block of
+   leaves, a wide-only setting.
+   00:32 UTC, speaker lane e62e1045: THE FA123 BATCH IS DONE, `renders/2026-11-13/barkhorn/fa123/` (README there).
+   - The package (b98c99dd) and the asset `tropos-strata.blend` (b597165b), 0 clashes, $9,745 the pair. The plate's
+     print redrawn from the FA122's with positions measured on a retailer's square-on photograph of the FA123; the
+     ten mount holes stay the marked placeholder (the photograph agrees to about 0.5 mm).
+   - THE FRONT IS UNCHANGED: Ice's site front from each package, same camera and seed: mean difference 0.12 of 255;
+     633 px over 8, all inside the clear cabinet (193 in the side grip's window, the rest speckle). The detail-pass
+     fronts stay valid.
+   - The eight horn-backs re-rendered from their passed shots (audit 0/0 each; the plate is below these frames) and
+     "The amplifier" (`macro-amp-dust.png`, 1600x1600, audit 0/0) showing the FA123's plate with the rating
+     engraved under it.
+   00:34 UTC, coordinator's check: "The amplifier" at full size and the backs' contact sheet PASS. FROM NOW ON EVERY NEW
+   TROPOS PICTURE USES THE FA123 ASSET (b597165b). To the site (batch 5, part one, prepared and not pushed): the
+   amplifier picture, the eight backs, and the amplifier line; the site lane first lists every line naming the
+   amplifier, its power or the loudness with its proposed wording, for approval. Facts given: FA123, two bridged
+   channels for the woofer and one for the horn; the woofer up to 125 W into 8 ohm (75 W before); the loudness line
+   unchanged until Hypex confirms the bridged load. Shown to the owner 00:34.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
