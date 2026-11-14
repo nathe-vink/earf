@@ -1569,6 +1569,23 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    plain records; only the strip x 0.86-1, y 0.36-0.70 re-rendered and blended. Coordinator's check 00:36: outside the
    strip the frame is identical to a9c41b7a (difference 0); the right edge is clean. THE HERO IS FINAL (856c3e9f8b);
    it replaces a9c41b7a on the site with batch 5.
+   00:37-00:44 UTC, site lane: every line naming the amplifier, its power or the loudness listed and approved. Tropos
+   spec: "Hypex FusionAmp FA123 built in: the woofer on two bridged channels, up to 125 W into its 8 Ω; the horn on
+   its own; crossed at 1 kHz in its DSP". Colour pages: the same in short. Loudness unchanged ("Up to about 115 dB
+   at 1 m, each"). "The amplifier" view tagged "Shown in Dust". The build now fails on "FA122" or "75 W".
+   00:41 UTC, biomes lane 1839e118bc: the Poison portrait final, first pass (2400x3000, bands 9/10/8 min, audit clean):
+   the lane's horn note (the whole patch 0.3 m higher) took light off the front: front 0.211, darkest 1 % 0.020.
+   Coordinator's look: darker than s18; NOT SHOWN. Redone as `-2` (da1731771b): s18's patch exactly, plus one 0.35 m
+   opening aimed at the flare. The container restarted a fourth time at 00:38; nothing pushed was lost.
+   00:55 UTC, biomes lane c852d257c7: `ember-d-final-wide-proxy.jpg` (1280x800, 50 mm). Coordinator: PASSES but for
+   the far cliff, whose top read as a row of teeth; broken up for wide and portrait (1d2f6c2ab2: a cliff option
+   `masses`, lower base, a steam bank at its foot; in the portrait only band 2 renders again).
+   00:58 UTC, THE OWNER: "Is the site updated?", then "Can you send the preview link". Batch 5 part one was pushed at
+   once instead of waiting for the habitats: r49-site-rc d23e4de18c, dpl_3kuiFn5wcHQUgVNRLjKVdxyzPx5i,
+   `https://earf-kcaneczpr-nathanielvink-4975s-projects.vercel.app`, READY 01:02. Coordinator's check 01:10: the FA123
+   lines read as approved on /tropos, /tropos/dust and /tropos/ember; loudness unchanged; home and Tropos in Dust
+   load. A new share link (it expires 15 Nov 00:02 UTC) sent to the owner in chat only, after the batch 4 link he
+   asked for in the meantime. The habitat finals go up as a separate push.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
