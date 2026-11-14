@@ -1990,6 +1990,22 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    weaker sky (toward sun 30, sky 0.6, exposure re-balanced): the last sun of the day, for a seen blue shadow,
    raking warm light on the snow's relief and the cabinet glowing by transmission. i5: up to three tries on the
    lane's own; i4 is the fallback; the coordinator chooses once, then the tall final in narrow bands.
+   13:17 UTC, biomes lane 39a2caf913 (one CHECK row for three tries): the last-sun tries; the best is
+   `ice-seat-i7.jpg`: the sun 30 in #FFB872 at 146 deg off axis, el 7; the sky 0.6; exposure -1.1; AgX Medium High
+   Contrast; haze 0.002. Front 0.371, the speaker's darkest 1 % 0.055, the snow by the base 0.547, p99.9 0.980, 0
+   clipped, cone 0.090. i5 (el 4.2, exposure -1.5) too dark; i6 (el 4.2, -1.1) the shadow longer and fainter.
+   13:18 UTC, coordinator's check of i7 at full proxy size: the speaker's shadow reads as a blue band from the base
+   to the lower left across warm-lit snow; the foreground has relief (warm crests, blue hollows); the flakes light
+   up; the blue stands against the warm hill; the sky a pale dusk violet. PICKED: i7; cone 0.090 accepted for Ice
+   (the woofer is the darkest part and reads with its surround); i4 retired. THE ICE TALL FINAL IS RELEASED
+   (2400x3000, i7's settings, thin bands, raw and finished, both audit halves; emitters the sun, the sky and the
+   cabin's window as the place's own light).
+   HAZE: the place exists as the lane's haze_b of 3 Nov (`renders/2026-11-03/barkhorn/habitats/haze_b-portrait-
+   1200x1500.jpg`: dry pale grass on rolling hills fading layer by layer into violet-pink haze; the old model);
+   seen again by the coordinator today. A SEATED PROXY h1 IS ORDERED after the Ice final: the same place, palette
+   and mood with today's Tropos in Haze (FA123 package), tufts to the base, a low warm sun behind so the cabinet
+   glows and its violet shadow falls toward the camera, the hill layers each paler. Order in the lane: the Ice
+   final, Haze h1, the Smoke final at 17:00 UTC or on the owner's yes, the Haze final after the coordinator's pass.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
