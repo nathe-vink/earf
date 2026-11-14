@@ -1822,6 +1822,28 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    09:11 UTC, biomes lane 8f88bc259e (CHECK row): the ACID final's audit COMPLETE with the rain hidden for the coverage
    half (7.2 M streak faces): at 1200x1500 no hidden object, no area lamp, the control render covering the whole frame.
    Hidden 0 / equipment 0; the Acid tall final (e869e99b53) is clean on both halves. Read by the coordinator 09:13.
+   09:14 UTC, biomes lane: Fog f3 started ahead of Ice (Ice i1 stopped 2 min into its build): one build without the
+   flag, saved as a .blend; (b)'s air is a uniform box from 1.8 m behind the camera to 1.5 m past the speaker, its
+   density found on quarter-size tries.
+   09:16 UTC, site lane, asked by the coordinator for the slots on r49 (89f9bb521f) that are not passed finals:
+   1. the Tropos 'Turning' view on all 8 color pages is the black-rods turn of 10 Nov (370de3da, from
+      renders/2026-11-04/barkhorn/rollout/A-polished-p2-p2b): before the detail pass and before the FA123; the old
+      plate shows in its back frames;
+   2. Smoke and Haze have no habitat view; 3. the bar views exist only for the tints that stand in the bar (Mantle:
+      Ember; Core: Ember, Dust; Hemisphere: Ember, Dust, Acid) and Hemisphere's detail views only on Ember's page:
+      by design; 4. code-hidden until pictures exist: the night stage and wall, the room, the old habitats band;
+   5. core-bar-table (e833b93390) was rendered before the wall test and shows the old wall; 6. mantle-bar (8ebd1690)
+      and the tall bar frame (41494d42) were rendered before bar-backbar's note of the FA123 package.
+   09:20 UTC, coordinator's decisions on that list:
+   - THE TURN IS RE-RENDERED by the speaker lane after bar-pendants: the same shot as 370de3da (camera, rig, 24
+     frames, size, names) with today's model (detail-pass package, FA123 asset b597165b). First a pilot of four Ember
+     frames (00, 06, 12, 18) with their audit and time per frame; the full 8 x 24 on the coordinator's word, pushed
+     per tint. (The message to the lane is stamped 09:21, a guessed stamp.)
+   - core-bar-table KEEPS ITS FRAME: seen again at full width, the wall behind the Core is far out of focus and no
+     single record can be told; it is re-rendered only if that frame is redone for another reason.
+   - mantle-bar and the tall bar frame: no re-render either way (the front is proven unchanged by the FA123, mean
+     difference 0.12/255); the lane is asked which asset they used, for the record only.
+   - the share cards stay (made from the fronts, which have not changed).
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
