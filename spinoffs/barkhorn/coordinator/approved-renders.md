@@ -1899,6 +1899,14 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    lighter build the lane listed (the 220 m ground's cells 440 to 220, the far flakes 9000 to 4000, the firs to 80)
    and with the process's memory logged after each build step, since it has died three times at the same place;
    the step the log names is lightened first. If that dies too: stop and send the per-step numbers.
+   10:20 UTC, biomes lane: Ice i1 died alone at the same place (13.45 GB, 2 min in). As set: THE FOG FINAL STARTED
+   10:20 (band 1 of 4, the sky, pushed 10:26 at ccd3020b79: 6 min, 6.6 GB, its mean equal to f3a-e35's same rows);
+   Ice runs after it with the lighter build (a8eb9e23d3) under a memory logger that writes the RSS at each step.
+   09:54-10:32 UTC, speaker lane: bar-pendants' wall heads found at 0.16 on the proof (cdd15d52e4: the whole wall in
+   the coordinator's 38-42, the bright spines' 90th percentile under 125); band a pushed 10:32 (92757457f2).
+   10:36 UTC, coordinator's check-in: both picture lanes pushed within ten minutes; nothing stalled. Waiting: bar-pendants
+   band b and the stitch; the Fog final's bands 2-4, stitch and audit; then Ice with its memory log; the owner's word
+   on Smoke (the final starts on its own about 17:00 UTC otherwise).
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
