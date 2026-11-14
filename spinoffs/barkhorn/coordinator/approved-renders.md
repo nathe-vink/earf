@@ -2074,6 +2074,22 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    grass on hazy hills.' (color page: 'In dry grass on rolling hills, fading into violet haze.') and 'Smoke, where
    a meteor just came down.' (color page: 'In grassland at dusk, where a meteor has just come down.').
    Written 15:11 UTC.
+   15:12 UTC, coordinator's check-in: nothing stalled; the next one is set for 17:00 UTC, when the Smoke hold ends.
+   15:46 UTC, biomes lane 7895f4d664 (CHECK row c1cb7f32e5): THE HAZE TALL FINAL `haze-b-final-portrait.jpg` and
+   `-finish.jpg` (finish.py v1.1), 2400x3000, 64 samples, h7's settings, 4 bands (4 / 10 / 16 / 17 min, peak 6.1 GB).
+   The audit's light half: no hidden object, no area lamp; the sun (24) the only lamp; emitting: the sun's disk, an
+   emitting disk at the sun's place 296 m out, out of frame; the world qwantani_dusk_2 at 0.75; no flag, no cards,
+   no passive. The coverage half was killed for memory at every size (gt_audit's own load, as on Ice).
+   15:53 UTC, coordinator's check at full size: it equals h7 (the quarter means agree to 0.004); raw p1 0.055, p99.9
+   0.820, a glint's px at 255 raw and none finished; the 800 view, the speaker, the shadow and the grass clean at
+   100 % (the near blades soft with the focus). At the join at row 1439/1440 the outer column blocks step by 1-2
+   levels of 255: not visible at normal contrast or under the grain (seen only at 6x contrast); told to the lane
+   for its stitch. PASSED, FINAL. The audit is accepted on the light half and the listing, as Ice's was (no hidden
+   object, no area lamp, no passive; the disk is the sun at the sun's place and is listed as the sun). Shown to the
+   owner in chat. To the site lane with the word PUSH (the seventh place).
+   The biomes lane's next hour: gt_audit changed to skip the ground's evaluated meshes when there are no targets,
+   PROVED FIRST on Fog's coverage half (the same result as before), then the coverage halves of Ice and Haze; from
+   about 16:30 Smoke's final scene built to a saved .blend, no render before the coordinator's word at 17:00.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
