@@ -1805,6 +1805,20 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    09:04 UTC, coordinator's check-in: both picture lanes pushed within the hour (speaker 08:54, biomes 08:44); nothing
    stalled. Waiting: Fog f2, the Acid coverage half, Ice i1, bar-pendants band b; the Smoke final for the owner's
    yes on e2.
+   09:08 UTC, biomes lane e04630a770 (CHECK row f460360f6f): the FOG seated proxy `fog-b-seat-f2.jpg` (25 min, down
+   from 60): front 0.256 (passes), the speaker's darkest 1 % 0.031, the ground's 0.082, 0 px clipped; no tuft in front
+   reaches the base (the blades over the foot stand behind it and show through the clear cabinet); the CONE 0.078,
+   FAILS 0.14, so the final was not started. Its reading: the sun stands behind, so only the sky on the camera's side
+   lights the cone, and Fog's 8 x 6 m black flag stands there (set once to keep the sky out of the front panel).
+   09:16 UTC, coordinator's check at full size (written 09:12): agreed; the woofer is a black disc (my box: mean 0.091,
+   median 0.074); the rest of the frame holds. DECISION: THE FLAG GOES (a meadow in fog has no black wall behind the
+   camera; S5 wants the place in the gloss); the two side cards stay. f3 ordered as one build and two renders:
+   a) no flag only; b) no flag and the place's own air thin and uniform between camera and speaker, in the render
+   (no mist pass, no mask), the speaker's darkest 1 % to 0.05-0.07 (0.031 is under S4's floor and far under the
+   ground's 0.082). Each saved at the present exposure and at +0.35 stop from the same render: four frames, raw and
+   finished. Pass: cone 0.12 or more with its form readable, front 0.25 or more, darkest 1 % 0.04-0.09, 0 clipped;
+   the coordinator chooses one by eye, the tall final follows on that word. Order in the lane: the Acid coverage half,
+   Fog f3, Ice i1.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
