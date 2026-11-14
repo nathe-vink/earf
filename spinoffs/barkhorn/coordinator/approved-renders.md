@@ -1715,6 +1715,23 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    at 255: 0.17 % (the Ember shade, as in every bar frame). PASSED, FINAL; it is the phone hero. Shown to the owner
    06:19. TO THE SITE (batch 6, to be pushed): the phone hero (the headline clear of the two pendants in the top 14 %)
    and the Mantle bar frame (8ebd1690) as "At the bar" on the Mantle page.
+   06:27 UTC, biomes lane fe524b0ce5: `smoke-e-proxy-e3.jpg`: the embers in uneven clumps; front 0.279, cone 0.374,
+   darkest 1 % 0.043. The tufts over the cabinet's foot are not in front: eight stand 0.7 to 2 m BEHIND the speaker
+   and show through the clear cabinet; a lane behind is cleared to 2.6 m for the final. Coordinator: accepted; no
+   further proxy; the Smoke final waits for the owner's word on e2.
+   06:29 UTC, biomes lane 887477f11c: the DUST seated proxy `dust-seat-d1.jpg` (800x1000, 2 min): sun 144 off axis,
+   el 6; the sand's ripples to the base, the feet bedded 28 mm; the shadow long to the left, in frame; front 0.462,
+   cone 0.181; darkest 1 % 0.153 (the woofer behind the panel mirroring the sunset sky); passive the 8 x 6 m black
+   flag out of frame. 06:32 (ae1f236ee9): `dust-seat-d2.jpg` with the Medium High Contrast look and exposure 0.25:
+   front 0.407, cone 0.123, darkest 1 % 0.098; the sand deeper, the ripples firmer.
+   06:33 UTC, coordinator: DUST d2 PASSES by eye; THE DUST TALL FINAL IS RELEASED on it (2400x3000 in bands; a cone of
+   0.12 or more accepted), after the Acid final; then the seated proxies of Ice and Fog.
+   06:29 UTC, site lane: BATCH 6 PUSHED AND READY: r49-site-rc 8c5bf5245c, dpl_FhYxjMokKzUdZax7AhguBpCS4dKw,
+   `https://earf-6ztk85gpp-nathanielvink-4975s-projects.vercel.app`. On phones the headline sits above the picture
+   in dark ink on the page's ground; the phone hero is the tall bar frame with its point on the near Tropos; the
+   Mantle bar frame is the second view on Mantle's Ember page. Coordinator's check 06:31 (home at 390 and 430,
+   /mantle): PASSED. One share link made on it (it expires 15 Nov 05:30 UTC) and sent to the owner in chat only.
+   THIS IS NOW THE PREVIEW THE OWNER HOLDS (8c5bf5245c).
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
