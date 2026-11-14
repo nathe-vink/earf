@@ -340,7 +340,7 @@ def bar_backbar_portrait():
     return s
 
 
-PEND_WALL_GAIN = 0.08
+PEND_WALL_GAIN = 0.16   # (09:34: the whole wall, shades masked, 38-42 on the coordinator's measure; proofs 0.15 / 0.2 / 0.25: 42.5 / 49.1 / 54.5 on mine, about 10 % over theirs)
 PEND_HEMIS = [('acid', 6.55, 0.06, 1.59), ('ember', 6.75, -0.10, 1.44), ('dust', 6.93, 0.14, 1.70), ('ember', 7.11, -0.04, 1.50),
               ('acid', 7.29, 0.10, 1.63)]
 
