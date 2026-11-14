@@ -172,7 +172,11 @@ def terrain(bpy, name, p, kit):
     c = p.get('cliff')
     if c:
         rise = _smooth(c['y0'], c['y0'] + c['rise'], Y + 0.6 * _fbm(X, Y, 3.0, 2, 5.0))
-        zc = rise * (c['height'] + c.get('rough', 0.4) * _fbm(X, Y, 1.2, 5, 9.0))
+        # `masses` [amp, scale]: the height itself varies along the wall, a few larger masses and long low stretches
+        # between (without it the wall is one height and its rough top reads as a row of teeth)
+        ma, ms = c.get("masses", [0.0, 14.0])          # amp, the masses' size in m
+        hgt = c['height'] * np.clip(1 + ma * _fbm(X, Y, ms, 3, 61.0) + 0.5 * ma * np.clip(_fbm(X, Y, ms * 2.0, 2, 67.0), 0, None), 0.25, None)
+        zc = rise * (hgt + c.get('rough', 0.4) * _fbm(X, Y, 1.2, 5, 9.0))
         if c.get('layers'):                                       # stacked flows: ledges and steep risers
             L = c['layers'] * (1 + 0.15 * _fbm(X, Y, 6.0, 2, 11.0))
             k = zc / L
