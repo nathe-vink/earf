@@ -326,6 +326,12 @@ def bar_backbar_portrait():
     # (07:22: the Core sharp as well as the speaker: f/5.6, focused between them, 1.95 m; both in the depth of field)
     s['camera'] = {'position': c, 'target': [c[0] + 3 * math.cos(a), c[1] + 3 * math.sin(a), c[2] + 3 * math.tan(e)], 'lens_mm': 35.0,
                    'level': True, 'fstop': 5.6, 'focus': [8.15, 5.07, 1.45]}
+    # (14 Nov: the near Core washed to s 0.13, v 1.00 by Mantle's three declared lamps together, not by its own LED: at
+    # 200 to 5 lm and any dye loading it read the same; the three at 0.15 of their power still left it at s 0.39, and
+    # narrowed to 6 degrees they threw a hard streak on the stone. With them out the Core holds about 4.9 / 0.77 / 0.84:
+    # out of this frame, Mantle lit by the room and the pendants)
+    for k in ('track-mantle', 'mantle-front', 'mantle-side'):
+        s['lights'].pop(k, None)
     return s
 
 
