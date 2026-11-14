@@ -2125,6 +2125,11 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    plain yes or no, and was told three times that the final starts at 17:00 UTC as open country unless he says no.
    No word from him since. THE WORD GIVEN TO THE BIOMES LANE: THE SMOKE TALL FINAL STARTS (2400x3000, the settings
    above, bands of 40 min or less each pushed, the rounding stitch, raw and finished, then the audit).
+   17:41 UTC, biomes lane 1788fb2d18: Smoke's band 1 of 10 (the sky and the column's top): 37 min, peak 12.2 GB. The
+   column at step rate 2 holds against e3's same rows (the same edge, billows and wisps; no blocks, no banding);
+   step 2 stays; ten bands at 30-40 min put the end near 23:00 UTC. The coordinator put band 1 beside e3's rows at
+   17:42 and agrees. 18:25, band 2 (4d2bd4335b): 38 min.
+   18:33 UTC, coordinator's check-in: the lane pushed within ten minutes; nothing stalled; no word from the owner.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
