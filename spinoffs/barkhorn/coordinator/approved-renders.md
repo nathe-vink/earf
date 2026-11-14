@@ -2045,6 +2045,20 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    violet reads and the shadow falls left across the grass; the grass as a dry meadow (albedo 0.35-0.45, mixed
    straw, ochre and gray-tan, uneven clumps with the ground showing, seed heads; 0.45-0.65 in frame); the air as
    in h3. Targets: front 0.30 or more, cone 0.12 or more, darkest 1 % 0.04-0.09, p99.9 0.95 or less, 0 clipped.
+   14:48 UTC, biomes lane 93aebe09ea (one CHECK row for three tries): the side-sun tries; the best is
+   `haze-b-seat-h6.jpg`: the sun 24 in #FFB48C at az 65 (80 deg off axis, from camera right), el 10, the sky turned
+   so its own sun stands there; exposure -0.8; AgX Medium High Contrast; the hill haze 0.009 from 3 m back, the
+   place's air 0.0008 in front; the grass in mixed straw, root and gray-tan-green strands, clumped, patchy 0.45 so
+   the ground shows. Front 0.321 (violet), cone 0.162, the speaker's darkest 1 % 0.059, p99.9 0.800, 1 px clipped
+   raw (a glint on the horn's rim) and none finished; the shadow seen, falling left; the grass p50 0.596.
+   14:50 UTC, coordinator's check of h6 at full proxy size and the grass at 2x: THIS IS THE PICTURE (the violet reads,
+   the woofer has form, the shadow lies across the grass, the meadow is dry grass on soil). Accepted as they are: no
+   seed heads, no near blurred blades, the bare patch in front. One thing settled by a last try: the far ridge
+   reads 0.462 against the near hill's 0.465, and for Haze the far land should be the paler: h7 = h6 with the hill
+   haze 0.012. The pick is by rule (h7 if its far ridge is 0.03-0.10 above the near hill, the speaker still passes
+   and the layers still read; otherwise h6), and THE HAZE TALL FINAL STARTS AT ONCE FROM THE PICK (2400x3000, bands,
+   raw and finished, both audit halves); the coordinator looks at h7 when the lane's line comes. The Smoke hold
+   ends 17:00 UTC; the Haze final is finished first if it is still rendering then.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
