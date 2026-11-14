@@ -1977,6 +1977,19 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    cone 0.14-0.20, the snow by the base 0.50-0.62 and white (p99.9 0.85 or more), 0 clipped. Up to three 4-minute
    tries on the lane's own; the one that lands comes to the coordinator; then the tall final in narrow bands.
    Smoke stays on hold until 17:00 UTC or the owner's word.
+   13:03 UTC, biomes lane da007c2877 (one CHECK row for three tries): none lands every target; the best is
+   `ice-seat-i4.jpg`: the sun 14 in #FFB872 (about 3200 K) at 146 deg off axis, el 4.2; exposure -1.5; AgX Medium High
+   Contrast; haze 0.009 to 0.002. Front 0.387, the speaker's darkest 1 % 0.063, the snow by the base 0.596, p99.9
+   0.957, 0 clipped; the CONE 0.098 (fails 0.14). i2: 0.595 / 0.300 / 0.271 / 0.740; i3: 0.479 / 0.165 / 0.129 /
+   0.673 (front / cone / darkest / snow). What blocks: the cone falls with the darks (the woofer is the speaker's
+   darkest part); and no shadow reads on the snow in any try: the tinted cabinet passes the low sun, so its shadow
+   is a faint blue tint lost under the sky.
+   13:05 UTC, coordinator's check of i4 at full proxy size: a big step (the blue deep, the speaker leading against the
+   dark hill, the window and the drift reading); still no shadow, and the lower third a plain blue-gray plane.
+   DECIDED: the cone is accepted for Ice at 0.10 or more (i4's depth is kept); the sun goes stronger against a
+   weaker sky (toward sun 30, sky 0.6, exposure re-balanced): the last sun of the day, for a seen blue shadow,
+   raking warm light on the snow's relief and the cabinet glowing by transmission. i5: up to three tries on the
+   lane's own; i4 is the fallback; the coordinator chooses once, then the tall final in narrow bands.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
