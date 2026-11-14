@@ -1871,6 +1871,22 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    TURN for all eight tints (a clean sweep, mask pass 0/0 at all 24 angles, today's model in this framing). The
    site lane's note that the old plate shows in the back frames was an assumption and is withdrawn; told to both
    lanes. The speaker lane's queue is now only bar-pendants.
+   09:36 UTC, site lane: the claim of the old plate in the turn stood only in its message, in no code or manifest;
+   withdrawn. It holds for bar-pendants, then the seated Fog, Ice and Smoke finals.
+   10:14 UTC, biomes lane 163f5a90e3 (one CHECK row): FOG f3, one build without the flag (the side cards kept; build
+   12 min, renders 11 and 15 min), four frames, each raw and finished. Front / cone / the speaker's darkest 1 % /
+   p99.9 / clipped: f3a 0.311 / 0.092 / 0.063 / 0.824 / 0; f3a-e35 0.352 / 0.111 / 0.078 / 0.851 / 0; f3b (the
+   place's air in the render, a uniform box of 0.0008/m from 1.8 m behind the camera to 1.5 m past the speaker)
+   0.323 / 0.120 / 0.094 / 0.824 / 0; f3b-e35 0.365 / 0.142 / 0.114 / 0.851 / 0. Its tries: no density gives a cone
+   of 0.12 with darks of 0.09 or less; the air lifts both together.
+   10:17 UTC, coordinator's check (the four side by side, the speaker at 1.5x, f3a-e35 at full proxy size): without
+   the flag the woofer reads as a woofer in all four (cap, cone, surround), so the cone number's purpose is met.
+   PICKED: f3a-e35 (no flag, no added air, exposure +0.35 stop): the clear air in front is right for a meadow above
+   valley fog and keeps the ground rich; the front 0.352. (b) is softer and paler over the grass and lifts the darks
+   past S4's 0.09. ACCEPTED FOR FOG AS THE EXCEPTION: cone 0.111 (the form reads), the speaker's darkest 1 % 0.078.
+   THE FOG TALL FINAL IS RELEASED from the saved build with f3a-e35's settings (2400x3000, bands of 40 min or less,
+   raw and finished, both audit halves, the flag off the passive list). Order in the lane: Ice i1 (building), then
+   the Fog final; the Ice final or an i2 after it. (The message to the lane is stamped 10:17.)
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
