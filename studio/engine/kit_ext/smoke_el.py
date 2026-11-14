@@ -645,8 +645,10 @@ def trail(bpy, name, p, kit):
     wa, ws = p.get('warp', [0.6, 0.5])
     pa, ps = p.get('puff', [0.8, 0.8])
 
+    gr = p.get('grow', 0.6)                     # the radius along the trail as t ** grow (1: as its distance, a line of one width on screen)
+
     def rad(t):
-        return r0 + (r1 - r0) * t ** 0.6
+        return r0 + (r1 - r0) * t ** gr
 
     m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
     N = nt.nodes.new; L = nt.links.new
@@ -694,7 +696,7 @@ def trail(bpy, name, p, kit):
     q = vec('SUBTRACT', geo.outputs['Position'], E)                    # from the crash
     along = vec('DOT_PRODUCT', q, u)
     t = math_('MINIMUM', math_('MAXIMUM', math_('DIVIDE', along, Ld), 0.0), 1.0)
-    r = math_('ADD', r0, math_('MULTIPLY', r1 - r0, math_('POWER', t, 0.6)))
+    r = math_('ADD', r0, math_('MULTIPLY', r1 - r0, math_('POWER', t, gr)))
     inv = math_('DIVIDE', 1.0, r)
     qn = vec('SCALE', q, scale=inv)                                    # in local radii, so the noise grows with the tube
     w = noise_(qn, ws, 2.0, 0.5, seed)
