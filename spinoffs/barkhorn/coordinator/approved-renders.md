@@ -1600,6 +1600,15 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    jumps 1.9 and 4.4, the second on the lava's edge); the cabinet's hue 357.8 raw, 356.2 finished; pixels at 255:
    0.056 %. PASSED. EMBER'S TALL PICTURE IS FINAL (subject to the audit). Shown to the owner 02:00. It goes to the
    site with Poison's.
+   02:32 UTC, biomes lane fe192e62a3: the Ember portrait's audit is clean (the sun the only lamp; emitters the lava and
+   the sparks). THE POISON PORTRAIT FINAL -2, `habitats/poison-b-final-portrait-2.jpg` and `-finish` (2400x3000; bands
+   9/11/10 min): sun 80 off axis, el 38, through s18's leafy opening plus a 0.35 m clear opening toward the horn;
+   front 0.250, cone 0.408; darkest 1 % speaker 0.055, ground 0.016; 41 px clipped; the shadow sideways to the right
+   over lit litter; emitters sun and sky, passive none. The horn shows only a thin highlight (0.128), no dapple.
+   02:33 UTC, coordinator's check at full size: -2 PASSES (it matches s18; no seam: row jumps 0.7 and 1.8; the cabinet's
+   hue 108.1 raw, 108.9 finished; nothing at 255). It is the final unless the horn band betters it: band 1 ordered
+   once more as `-3` with the opening lower on the flare and 0.5 m wide; the coordinator picks. Then Smoke p5 and
+   the wide finals.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
