@@ -261,6 +261,16 @@ def canopy(bpy, name, p, kit):
             nt.links.new(hole, ml.inputs[0]); nt.links.new(lc.outputs['Result'], ml.inputs[1]); hole = ml.outputs['Value']
         mx = nt.nodes.new('ShaderNodeMath'); mx.operation = 'MAXIMUM'
         nt.links.new(fac, mx.inputs[0]); nt.links.new(hole, mx.inputs[1]); fac = mx.outputs['Value']
+    # blocks: [x, y, r] in the sheet's plane, leaves closed over whatever gap the noise opened there (a random gap whose
+    # sun fell somewhere it pulls the eye, e.g. a bright spot on a far trunk near a corner)
+    for bx, by, br in p.get('blocks', []):
+        d = nt.nodes.new('ShaderNodeVectorMath'); d.operation = 'DISTANCE'
+        nt.links.new(tc.outputs['Object'], d.inputs[0]); d.inputs[1].default_value = (bx, by, 0.0)
+        ed = nt.nodes.new('ShaderNodeMapRange'); ed.interpolation_type = 'SMOOTHSTEP'
+        ed.inputs['From Min'].default_value = br * 0.7; ed.inputs['From Max'].default_value = br
+        nt.links.new(d.outputs['Value'], ed.inputs['Value'])
+        ml = nt.nodes.new('ShaderNodeMath'); ml.operation = 'MULTIPLY'
+        nt.links.new(fac, ml.inputs[0]); nt.links.new(ed.outputs['Result'], ml.inputs[1]); fac = ml.outputs['Value']
     nt.links.new(fac, mix.inputs['Fac'])
     nt.links.new(dif.outputs['BSDF'], mix.inputs[1]); nt.links.new(tr.outputs['BSDF'], mix.inputs[2])
     nt.links.new(mix.outputs['Shader'], out.inputs['Surface'])
