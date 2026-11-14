@@ -1963,6 +1963,20 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    /colors/fog at 390 loaded without a broken picture): PASSED. The seated Fog stands on its color page and in the
    row of six; the new pendants picture leads /lighting. One share link made on this deployment (it expires
    15 Nov 11:38 UTC) and sent to the owner in chat only. THIS IS NOW THE PREVIEW THE OWNER HOLDS (7dbe25cfbd).
+   12:49 UTC, biomes lane: ICE'S MEMORY SOLVED. Every build died before a .blend could be saved, so the lane dumped
+   the Python stack every 4 s: each dump sat in habitat.py land_scatter, which builds a BVH from every big ground
+   mesh (evaluated, displaced, as Python lists) to land tufts and rocks; on Ice's snowfield and 220 m ground that
+   took about 10 GB, and Ice has nothing to land. Fix caa0de7969: land_scatter returns at once when there is nothing
+   to land (identical pictures elsewhere). i1 then ran in 4 min, peak 8.89 GB.
+   `ice-seat-i1.jpg` (54cf55da28, CHECK row 2ed567ae5c): front 0.483, cone 0.249, the speaker's darkest 1 % 0.227
+   (fails), p99.9 0.906, 0 clipped, the snow by the base 0.63.
+   12:51 UTC, coordinator's check at full proxy size: the place holds (the cabin's warm window left, the speaker right,
+   the drift lapping the base, soft flakes); the frame is veiled and flat (nothing darker than 0.158), no key, no
+   shadow. i2 ORDERED: AgX Medium High Contrast, exposure -0.5, the low sun 3 to 10 in the warm of a low sun; the
+   speaker's shadow seen on the snow and carrying the blue. Targets: darkest 1 % 0.05-0.10, front 0.30 or more,
+   cone 0.14-0.20, the snow by the base 0.50-0.62 and white (p99.9 0.85 or more), 0 clipped. Up to three 4-minute
+   tries on the lane's own; the one that lands comes to the coordinator; then the tall final in narrow bands.
+   Smoke stays on hold until 17:00 UTC or the owner's word.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
