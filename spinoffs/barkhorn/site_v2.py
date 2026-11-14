@@ -1236,8 +1236,8 @@ def rc_waves(p, web):
     lines = {k: line for k, num, name, icon, acr, line, *_ in web.CLOUDS}
     ON_HOLD = 'Hemisphere and Core, switched off. Shown in Smoke, a color on hold.'
     # --- the passed habitats (biomes: Ice 0f619953, Dust 26493989), 4:5
-    HAB = {'blue': 'renders/2026-11-11/barkhorn/habitats/ice-final-portrait-2400x3000.jpg',       # the final Ice (r48-biomes e2ea7e2f)
-           'ice': 'renders/2026-11-12/barkhorn/habitats/fog-final-portrait-2400x3000.jpg',          # the final Fog (r48-biomes 7b7c9c53)
+    HAB = {'blue': 'renders/2026-11-11/barkhorn/habitats/ice-final-portrait-2400x3000-finish.jpg',  # the final Ice, finished (r48-biomes 55e5442c)
+           'ice': 'renders/2026-11-12/barkhorn/habitats/fog-final-portrait-2400x3000-finish.jpg',   # the final Fog, finished (r48-biomes 55e5442c)
            'green': 'renders/2026-11-12/barkhorn/habitats/poison-b-final-portrait-2-finish.jpg',     # the final Poison, finished (r48-biomes fe192e62)
            'red': 'renders/2026-11-12/barkhorn/habitats/ember-d-final-portrait-finish.jpg'}          # the final Ember, finished (r48-biomes 0db25baf)
     # out (the audits, 2026-11-09/10): Dust 26493989 (a hidden panel), then 43c91242 (it hovers: a lit strip under its
@@ -1908,7 +1908,7 @@ def rc_intro(p, web):
 
 HOTSPOTS = True    # the hero's point (Tropos in Ice, to its page); off: the picture alone
 HERO_SRC = 'renders/2026-11-11/barkhorn/product/planet-bar/bar-hero.png'           # the bar (r33-speaker-horn a9c41b7a), desktop;
-HERO_SRC_TALL = 'renders/2026-11-11/barkhorn/habitats/ice-final-portrait-2400x3000.jpg'   # wide on a wide screen, portrait on a phone
+HERO_SRC_TALL = 'renders/2026-11-11/barkhorn/habitats/ice-final-portrait-2400x3000-finish.jpg'   # wide on a wide screen, portrait on a phone
 HERO_ALT = 'Two Tropos in Acid at a bar, Hemispheres over the counter, Cores and Mantle on it, a wall of records behind'
 HERO_ALT_TALL = 'Tropos in Ice, out in the snow at dusk'   # the phone keeps Ice until the tall bar frame
 HERO_WIDE = (16 / 9, 0.5, 0.5)     # the desktop: the whole 16:9 picture
