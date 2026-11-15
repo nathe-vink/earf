@@ -2406,6 +2406,14 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    DECISION: mantle-bar gets a region re-render of that box with the current asset, set into the raw frame, same
    name; THE OTHER THREE STAY (measured, not visible). NO BAR OR HERO FRAME SHOWS A SMOKE LAMP OR A LIT FOG LAMP
    (all lamps in them are Ember, Dust or Acid), so the lamp choice touches only the lamps lane's own pictures.
+   19:34 UTC, stall guard: no lane stalled (the biomes lane was reading the strip at 19:31); next check 21:06.
+   19:36 UTC, speaker lane cce235cf4e (r33-speaker-horn): `renders/2026-11-11/barkhorn/product/planet-bar/
+   mantle-bar.png` WITHOUT THE HINGE BLOCK, same name. Method (the lane's change, sound): a plain region render did
+   not reproduce the banded final (up to 50 levels on edges), so the region was rendered twice at the final's
+   settings (256 samples), with the old asset fa0c3a65 and the current 9f8f640b08, and their difference added to
+   the final under a soft mask. CHECKED against the old file: 430 px changed, all inside x 881-934, y 773-797, at
+   most 23 levels, 46 px over 8; no seam at 600 %. PASSES; it goes to the site with the Mantle batch. The shot
+   file still names fa0c3a65 (noted in MEASURED.md).
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
