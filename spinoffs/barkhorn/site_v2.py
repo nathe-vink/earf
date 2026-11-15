@@ -832,6 +832,7 @@ def apply(web, head, rest):
 RC_TALL = 'renders/2026-11-12/barkhorn/studio-refresh/site-front-off-tall-{name}.png'   # the refreshed model, all eight (r33-speaker-horn 95fdff0d)
 HORN_BACK_SRC = 'renders/2026-11-13/barkhorn/fa123/horn-back-{name}.png'       # the FA123 inside the clear cabinet (r33-speaker-horn e62e1045)
 AMP_SRC = 'renders/2026-11-13/barkhorn/fa123/macro-amp-dust.png'                 # the FA123's plate from behind, in Dust (1600 x 1600)
+AMP_TINTS = {}     # {tint key: macro-amp-<name>.png}: each tint's own plate, added as each passes (the owner, 2026-11-15)
 # Ember, Dust, Poison, Ice e624e13e; Haze, Fog 3d0b613f; Acid 04d21c5c (on the Acid horn fix). Smoke held.
 RC_KEYS = ['red', 'orange', 'amber', 'green', 'blue', 'violet', 'ice', 'black']
 EIGHT = True         # Smoke is a current color again (the coordinator, 2026-11-10 07:56)
@@ -1165,6 +1166,10 @@ def rc_fixes(p, web):
     im.save(os.path.join(web.SITE, 'img/rc/plate.webp'), 'WEBP', quality=82); im.resize((168, 210)).save(os.path.join(web.SITE, 'img/rc/plate-th.webp'), 'WEBP', quality=80)
     for k in RC_KEYS:
         extra[k]['amp'] = {'src': 'img/rc/plate.webp', 'w': im.width, 'h': im.height, 'th': 'img/rc/plate-th.webp', **({} if k == 'orange' else {'tag': 'Shown in Dust'})}
+    for k, src in AMP_TINTS.items():          # each tint's own plate as it passes, the same shot and crop; Dust stays the default
+        t = Image.open(os.path.join(web.ROOT, src)).convert('RGB').crop((160, 0, 1440, 1600)).resize((1000, 1250), Image.LANCZOS)
+        t.save(os.path.join(web.SITE, f'img/rc/plate-{k}.webp'), 'WEBP', quality=82); t.resize((168, 210)).save(os.path.join(web.SITE, f'img/rc/plate-{k}-th.webp'), 'WEBP', quality=80)
+        extra[k]['amp'] = {'src': f'img/rc/plate-{k}.webp', 'w': t.width, 'h': t.height, 'th': f'img/rc/plate-{k}-th.webp'}
     i = p.rest.index('const D = ') + len('const D = ')
     j = p.rest.index(', BY = Object', i)
     D = json.loads(p.rest[i:j])
