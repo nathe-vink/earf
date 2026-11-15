@@ -224,7 +224,26 @@ def cover(kind=None):
     out = nt.nodes.new('ShaderNodeOutputMaterial'); mix = nt.nodes.new('ShaderNodeMixShader')
     fr = nt.nodes.new('ShaderNodeFresnel'); fr.inputs['IOR'].default_value = 1.49
     gl = nt.nodes.new('ShaderNodeBsdfGlossy'); gl.inputs['Roughness'].default_value = 0.004
-    tr = nt.nodes.new('ShaderNodeBsdfTransparent'); tr.inputs['Color'].default_value = tuple(math.sqrt(t) for t in T) + (1,)
+    tr = nt.nodes.new('ShaderNodeBsdfTransparent')
+    # the tint per face follows the ray's slant (the coordinator's go, 2026-11-15): inside the sheet a ray travels
+    # thickness / cos(theta_t), theta_t its refracted angle (IOR 1.49), so each face passes T ** (0.5 / cos theta_t);
+    # square on this is sqrt(T) as before
+    lw = nt.nodes.new('ShaderNodeLayerWeight'); lw.inputs['Blend'].default_value = 0.5
+    def mth(op, a_, b_=None):
+        n_ = nt.nodes.new('ShaderNodeMath'); n_.operation = op
+        for k_, v_ in enumerate((a_, b_)):
+            if v_ is None: continue
+            if isinstance(v_, (int, float)): n_.inputs[k_].default_value = v_
+            else: nt.links.new(v_, n_.inputs[k_])
+        return n_.outputs[0]
+    cosi = mth('SUBTRACT', 1.0, lw.outputs['Facing'])
+    sin2 = mth('SUBTRACT', 1.0, mth('MULTIPLY', cosi, cosi))
+    cost = mth('SQRT', mth('SUBTRACT', 1.0, mth('DIVIDE', sin2, 1.49 * 1.49)))
+    ex = mth('DIVIDE', 0.5, cost)
+    cc = nt.nodes.new('ShaderNodeCombineColor')
+    for k_, t_ in enumerate(T):
+        nt.links.new(mth('POWER', max(t_, 1e-6), ex), cc.inputs[k_])
+    nt.links.new(cc.outputs[0], tr.inputs['Color'])
     # both faces reflect as a flat sheet's do: Cycles' Fresnel on a backface is glass-to-air and goes to total internal
     # reflection past 42 deg, which a flat sheet never does (the ray did not bend going in), so the backface gets
     # IOR 1/1.49, which Cycles inverts back to air-to-glass
