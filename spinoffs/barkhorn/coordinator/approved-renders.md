@@ -2176,6 +2176,33 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    HOLDS (d1471bf220). The check-in set for 00:23 was deleted: no lane is working. STILL OPEN WITH THE OWNER: yes or
    no to Smoke (it came onto the preview without his yes); Mantle's lift-off dust cover; the plain Hypex plate and
    the lining; whether lossless masters are kept; the hello@earf.world mailbox; going public needs his yes.
+   15 Nov 00:35 UTC, the owner asked for the link to the new site; given in chat.
+   OWNER, 15 Nov about 05:50 UTC (verbatim): "Smoke biome needs way more work. The speaker looks weird and the asteroid
+   impact isn't obvious. It's odd that the smoke lights look whiter than fog. Yes dust cover on mantle. All of the
+   tropos speakers show dust for the plate shot."
+   Coordinator, 05:56 UTC, what follows from it:
+   -> SMOKE'S HABITAT IS NOT ACCEPTED AND COMES OFF THE PREVIEW (the row back to seven). The fault is the
+      coordinator's brief: the strike small and off to one side, the speaker lit flat from the front by a warm low
+      sun (cone 0.367 above the front's 0.280, the gray cabinet turned brown). His reference is his own picture of
+      1 and 3 Nov (`renders/2026-11-03/barkhorn/smoke-dark/smoke-2064-feet-portrait-1200x1500.jpg`): the strike right
+      behind the speaker, close and big, fire and sparks wrapping it, broken ground and thrown chunks all round, a
+      black column filling the top. NEW BRIEF (scene Smoke f, open country at dusk, nature only): the crater directly
+      behind the speaker with a raised rim and thrown rays, glowing fragments in front, the fire rimming the speaker
+      and glowing through the smoked cabinet, the column filling the top third to half, the meteor's trail a thick
+      streak from an upper corner into the column's base; the speaker smaller and centred, lit by the cool dusk sky
+      in front and the fire behind, neutral dark smoked glass, the woofer the darkest part. A layout proof, cheap
+      proxies, one proper proxy; THE OWNER MUST SAY YES TO THE PROXY BEFORE ANY FINAL (no start on a timer).
+   -> THE SMOKE LAMPS AGAINST FOG: measured on the Lighting page's rows, Hemisphere Fog (230, 215, 200) and Smoke
+      (203, 204, 203); Core Fog (205, 186, 165) and Smoke (160, 161, 160): Smoke is dimmer but neutral white, Fog warm
+      cream. The cause is the owner's pick of 11 Nov (Smoke with a 4000 K LED, Fog with 2700 K). PROPOSED: Smoke at
+      2700 K as Fog; the lamps lane renders one proof pair per lamp beside the present pair; no final before his yes.
+   -> MANTLE GETS THE LIFT-OFF DUST COVER (his yes; the proposal open since 11 Nov: no hinge blocks). The Mantle lane
+      designs it in the CAD (clearances, location, BOM, the cover as its own object) and renders it on Ember in clear
+      and in the deck's tint for him to pick by eye.
+   -> THE AMPLIFIER PICTURE IN EVERY TINT: every Tropos color page shows `macro-amp-dust.png`. The speaker lane renders
+      the other seven (same shot); the site shows each page's own tint.
+   Briefed 05:55-05:56: the site lane (Smoke off now; the three later changes announced), the biomes lane, the lamps
+   lane (session_01VCPNDaozJgar2mVTSvis3A), the speaker lane, the Mantle lane (session_01BAaPTkQRnfd37XJHVyiVJC).
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
