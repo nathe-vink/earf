@@ -2269,6 +2269,24 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    the cabinet's shoulders, with many sparks and warm light on the ground; the ground darker and scorched; front
    0.16 or more if the woofer, flare and edges read; the trail's foot at the column's base; no large rock in the
    air. Cheap tries, then the proper proxy; the owner's yes before any final.
+   08:45-09:59 UTC, biomes lane, Smoke f proxy 2's cheap tries (480x600, 16 samples, about 36 min each). u1 (the sky
+   turned 180 deg so its sun stands behind the camera, strength 0.9; no sun lamp; the ground darker, the char wider;
+   the pit glow and the plume's flame stronger, the plume 1.55; four times the sparks; the trail's end at the
+   column's base; the floating rock was a stale frozen debris piece on the old rim, now rebuilt each time): mean
+   0.294, edge sky 0.559, 0.6 % above 0.8, bottom fifth 0.262, front 0.257, cone 0.202: it reads as dusk and the fire
+   is the brightest thing. u2 (14df8c593f: sky 0.7 with exposure +0.25, the plume 1.75, bigger sparks): mean 0.272,
+   edge sky 0.520, 1.3 %, bottom fifth 0.247, front 0.246, cone 0.193; the fire clears both shoulders, sparks seen.
+   u3 (1935375f8c: sky 0.6 with exposure +0.4, lighter ground, the column a touch thinner).
+   09:59 UTC, coordinator: the mean is the least of the targets and is relaxed to 0.27-0.40; the column is NOT
+   thinned to reach it (density 8.5 unless u3's column still reads solid black); then the proper proxy.
+   08:46 and 10:19: the coordinator's check-ins found nothing stalled.
+   10:26 UTC, speaker lane c1425519c5: 'THE AMPLIFIER' IN ALL EIGHT TINTS, `renders/2026-11-13/barkhorn/fa123/
+   macro-amp-<tint>.png` and `contact-amp.jpg`: the Dust shot file with only the flavour changed, 1600x1600, 128
+   samples, the FA123 package; 26-45 min a frame; hidden 0 / equipment 0 in all; the print reads on the dark tints
+   with no exposure lift (the plate's middle 87.2 / 87.0 / 86.9 in Smoke / Poison / Haze against Dust's 87.4).
+   10:27 UTC, coordinator's check (the eight on the sheet; Smoke measured): the plate and its print read in every
+   tint; the tint colours the cabinet round the plate, not the plate. PASSED, FINAL. To the site lane with the word
+   PUSH: each Tropos color page shows its own tint in 'The amplifier'; the 'Shown in Dust' tag goes.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
