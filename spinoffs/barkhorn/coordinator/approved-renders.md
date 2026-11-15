@@ -2157,6 +2157,25 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    the site lane with the word PUSH (the eighth place; the dark column's encode to be watched). To the biomes lane:
    look at the three flagged props at 100 %; from now on each final's stitched raw is also saved as a PNG and
    finished from it. WITH THIS ALL EIGHT PLACES ARE FINAL.
+   23:56 UTC, biomes lane: the three flagged props named in the CHECK row: two are the sparks (rising 0.7-2.3 m over
+   the fire by design), one an ember clump 5.6 cm over the ground and out of frame; none stands clear of the ground
+   in view. Smoke's bands are lossless PNGs and its finish ran from the stitched PNG; the stitched PNG is 7.0 MB
+   (5.2 MB as lossless WebP), over the repo's rule for PNGs. Coordinator: the rule is kept; nothing over it is
+   committed; the JPEGs stay the committed masters and the lossless frame and bands stay on the lane's container
+   (not durable); the owner is told and decides whether lossless masters are kept anywhere. From now on finals are
+   finished from the stitched PNG and committed as JPEGs.
+   23:59 UTC, site lane: Smoke pushed: r49-site-rc d1471bf220, dpl_tjN4N5k83pGjK4quGd3wvkAc44pk,
+   `https://earf-h5ihp2awd-nathanielvink-4975s-projects.vercel.app`, READY (preview only): the eighth place (two
+   rows of four), /colors/smoke, the 'Out' view on /tropos/smoke, its thumbnail. Smoke alone is encoded at WebP
+   quality 92 (the others stay at 82): at 82 the dark column smears into visible blocks with the contrast
+   stretched; 90 and up keep the grain.
+   00:01 UTC (15 Nov), coordinator's check (home at 1440 and 390, /colors/smoke at 1440 and 390, /tropos/smoke at 1440
+   loaded with no broken picture; the places row and the Smoke color page seen): PASSED: eight places in two rows
+   of four (Ember, Dust, Acid, Poison / Ice, Haze, Fog, Smoke), each with its caption. One share link made on this
+   deployment (it expires 15 Nov 22:59 UTC) and sent to the owner in chat only. THIS IS NOW THE PREVIEW THE OWNER
+   HOLDS (d1471bf220). The check-in set for 00:23 was deleted: no lane is working. STILL OPEN WITH THE OWNER: yes or
+   no to Smoke (it came onto the preview without his yes); Mantle's lift-off dust cover; the plain Hypex plate and
+   the lining; whether lossless masters are kept; the hello@earf.world mailbox; going public needs his yes.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
