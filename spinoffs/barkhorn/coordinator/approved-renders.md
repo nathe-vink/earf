@@ -2296,6 +2296,19 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    its own tint, the caption 'The built-in amplifier, from behind.', no 'Shown in Dust'. PASSED. One share link made
    on this deployment (it expires 16 Nov 09:35 UTC) and sent to the owner in chat only. THIS IS NOW THE PREVIEW THE
    OWNER HOLDS (263dd4e0ae). The owner's point on the plate shot is closed.
+   10:36 UTC, biomes lane: u3 helped neither the fire nor the ground (the ground darker, the column's top left brown-
+   gray, the fire clipped); the proper proxy uses u2's settings exactly (0fba864c87).
+   11:24 UTC, biomes lane dbe60be5b7: `smoke-f-proxy2.jpg` and `-finish.jpg` (640x800, 48 samples, step 2, 47 min,
+   peak 9.9 GB): raw front 0.251, cone 0.190, the speaker's darkest 1 % 0.031, 0 px clipped; finished edge sky 0.519,
+   1.3 % above 0.8, mean 0.272, bottom fifth 0.248.
+   11:27 UTC, coordinator's check at full proxy size and beside the owner's 3 Nov picture (own measure of the finished
+   frame: mean 0.267, edge sky 0.446, bottom fifth 0.251, 1.4 % above 0.8, against his 0.344 / 0.495 / 0.343 /
+   1.7 %): dusk; the fire the brightest thing; the horn framing the flames; the black column with sparks; the
+   speaker readable in front and cut out by the fire. THIS IS THE PICTURE. SHOWN TO THE OWNER in chat with a plain
+   yes or no; NO FINAL before his yes. Two things settled meanwhile by one cheap try, so the final carries them:
+   the trail has an elbow (a near-vertical dark streak, then a pink diagonal) and becomes one straight streak from
+   the corner to the column's base; more thrown clods round the speaker's feet and more of the fire's light on the
+   ground, nearer his picture.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
