@@ -61,6 +61,10 @@ BASE_LOW = {'A': [(60, 0), (60, 1.5), (71.71, 1.5), (60, 30)], 'B': BASE_PROFILE
 BASE_UP = {'B': BASE_PROFILES['B'][4:], 'C': BASE_PROFILES['C'][_iC:]}       # the touch ring (A: the CAD's ring)
 BASE_ALL = [(68.5, -6.5), (75.0, -6.5), (61.849, 25.5), (61.784, 26.754), (61.588, 27.995), (61.263, 29.208), (60.813, 30.381), (60.242, 31.5), (59.558, 32.553), (58.768, 33.53), (57.88, 34.418), (56.903, 35.208), (55.85, 35.892), (54.731, 36.463), (53.558, 36.913), (52.345, 37.238), (51.104, 37.434), (49.85, 37.5)]   # B all in its own colour (the default, 2026-11-11): the skirt to the floor (r 75 at z -6.5), the lip a bullnose R12 (forms in one piece from 6 mm)
 TINT_LOAD = {'orange': 3.0, 'amber': 3.0, 'blue': 3.0, 'black': 0.3}
+# TINT_LOAD_SET 'tint:L,...' (2026-11-15, the coordinator: a choice sheet of Smoke's gray at 0.5x and 0.8x): one tint's dye
+# loading changed, the rest as signed; unset, nothing changes
+for kv_ in filter(None, os.environ.get('TINT_LOAD_SET', '').split(',')):
+    TINT_LOAD[kv_.split(':')[0]] = float(kv_.split(':')[1])
 # the site's colour keys (web.py HABITAT) to the tints
 COLOURS = {'red': 'Ember', 'orange': 'Dust', 'amber': 'Acid', 'green': 'Poison', 'blue': 'Ice', 'violet': 'Haze',
            'ice': 'Fog', 'black': 'Smoke dark'}
