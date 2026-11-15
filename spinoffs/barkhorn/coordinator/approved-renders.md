@@ -2398,6 +2398,14 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    Fog now, Smoke 0.3x, 0.5x, 0.8x, 1.2x) with the glass colors per pair; the Smoke strengths that match when off
    and read gray when lit, shown off and lit; whether the rule holds for the other six tints. No finals, no file
    changes.
+   19:23 UTC, speaker lane (nothing re-rendered): THE HINGE BLOCKS IN THE BAR AND HERO FRAMES (old Mantle asset
+   fa0c3a65; object mask plus with/without crops at 64 samples). mantle-bar: visible, 69 px in the mask, one
+   block's edge by the tonearm base (x 883-930, y 776-783 of 2400x1600), 77 px over 8 levels, at most 60.
+   bar-backbar-portrait (the phone hero): 0 px in the mask, 16 px over 8 levels, at most 14. bar-backbar: at most
+   8 levels. bar-hero (the desktop hero): not measurable above noise. bar-pendants, core-bar-table: out of frame.
+   DECISION: mantle-bar gets a region re-render of that box with the current asset, set into the raw frame, same
+   name; THE OTHER THREE STAY (measured, not visible). NO BAR OR HERO FRAME SHOWS A SMOKE LAMP OR A LIT FOG LAMP
+   (all lamps in them are Ember, Dust or Acid), so the lamp choice touches only the lamps lane's own pictures.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
