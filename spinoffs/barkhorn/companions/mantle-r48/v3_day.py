@@ -215,12 +215,21 @@ def cover(kind=None):
     fr = nt.nodes.new('ShaderNodeFresnel'); fr.inputs['IOR'].default_value = 1.49
     gl = nt.nodes.new('ShaderNodeBsdfGlossy'); gl.inputs['Roughness'].default_value = 0.004
     tr = nt.nodes.new('ShaderNodeBsdfTransparent'); tr.inputs['Color'].default_value = tuple(math.sqrt(t) for t in T) + (1,)
-    nt.links.new(fr.outputs[0], mix.inputs[0]); nt.links.new(tr.outputs[0], mix.inputs[1]); nt.links.new(gl.outputs[0], mix.inputs[2])
+    # both faces reflect as a flat sheet's do: Cycles' Fresnel on a backface is glass-to-air and goes to total internal
+    # reflection past 42 deg, which a flat sheet never does (the ray did not bend going in), so the backface gets
+    # IOR 1/1.49, which Cycles inverts back to air-to-glass
+    frb = nt.nodes.new('ShaderNodeFresnel'); frb.inputs['IOR'].default_value = 1 / 1.49
+    geo = nt.nodes.new('ShaderNodeNewGeometry'); sel = nt.nodes.new('ShaderNodeMix'); sel.data_type = 'FLOAT'
+    nt.links.new(geo.outputs['Backfacing'], sel.inputs['Factor']); nt.links.new(fr.outputs[0], sel.inputs['A']); nt.links.new(frb.outputs[0], sel.inputs['B'])
+    nt.links.new(sel.outputs['Result'], mix.inputs[0]); nt.links.new(tr.outputs[0], mix.inputs[1]); nt.links.new(gl.outputs[0], mix.inputs[2])
     nt.links.new(mix.outputs[0], out.inputs['Surface'])
     Y = 0.2126 * T[0] + 0.7152 * T[1] + 0.0722 * T[2]
     print(f'v3_day: cover sheet {kind}: one 3 mm wall passes RGB {T[0]:.3f} {T[1]:.3f} {T[2]:.3f} (luminance {Y:.3f}) before its two faces\' Fresnel', flush=True)
-    f = bpy.data.materials.new('cover-feet'); f.use_nodes = True; fb = f.node_tree.nodes['Principled BSDF']
-    fb.inputs['Base Color'].default_value = (0.9, 0.9, 0.88, 1); fb.inputs['Roughness'].default_value = 0.25
+    f = bpy.data.materials.new('cover-feet'); f.use_nodes = True; ft = f.node_tree; ft.nodes.clear()   # clear PU domes
+    fo = ft.nodes.new('ShaderNodeOutputMaterial'); fm = ft.nodes.new('ShaderNodeMixShader'); fm.inputs[0].default_value = 0.12
+    ftr = ft.nodes.new('ShaderNodeBsdfTransparent'); ftr.inputs['Color'].default_value = (0.9, 0.9, 0.86, 1)
+    fgl = ft.nodes.new('ShaderNodeBsdfGlossy'); fgl.inputs['Roughness'].default_value = 0.15
+    ft.links.new(ftr.outputs[0], fm.inputs[1]); ft.links.new(fgl.outputs[0], fm.inputs[2]); ft.links.new(fm.outputs[0], fo.inputs['Surface'])
     for o in obs:
         o.data.materials.clear(); o.data.materials.append(f if o.name == 'cover-feet' else m)
     print(f'v3_day: the cover ON, {kind}: ' + ', '.join(o.name for o in obs), flush=True)
