@@ -2540,6 +2540,20 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    reference (plain refraction, 1024 samples) may be clamped too; it is to say whether clamping is on in its off
    and lit rigs, re-run Hemisphere Fog, Core Fog and Core Smoke 0.3x unclamped, bound Core with a measured surface
    reflection, and check one lit cell. THE OWNER'S LAMP DECISION IS HELD ON THOSE NUMBERS; he is told.
+   22:30 UTC, Mantle lane: the reflection measured on black record patches under the cover: Fog 8.2, Ember 5.9
+   (linear x255). Fog label expected 81.9 + 8.2 = 90.1, flat sheet 89.7: passes. Ember expected 31.8 + 5.9 = 37.7,
+   flat sheet 43.7: fails by 6. Cause: the flat sheet applied the 3 mm wall's absorption square on, whatever the
+   ray's angle. GO (22:32) for the angle-dependent tint, T^(1/cos of the refracted angle), IOR 1.49.
+   22:39 UTC, stall guard: Smoke f master 5 bands by 22:36, on pace for about 10:30 UTC 16 Nov; next check 00:10.
+   22:42 UTC, Mantle lane 77fd6301 (the slant tint): ray-cast paths: the camera sees the label through the FRONT
+   wall at 34 degrees; the light enters at 13 (bg), 21 (strip), 27 (fill), 52 (key) degrees. Brackets (bare 96.4 x
+   per-angle Fresnel x slanted tint, light from square on to 52 degrees, plus the reflection): Fog 85.3 to 88.9,
+   rendered 89.6 (0.7 over); Ember 33.9 to 37.0, rendered 41.4 (4.4 over; it was 43.7). The lane's hypothesis for
+   the rest: light bouncing inside the closed box.
+   22:44 UTC, coordinator: ACCEPTED AS IT IS. The fault was a factor of ten; the residual on Ember is about 5
+   display levels on the label, inside what the bracket itself can be trusted to; the coordinator's own rough sum
+   puts the inside bounce at 1 to 2, so the residual stays on record as an open point in the lane's notes. GO to
+   re-render the twelve cover frames with the slant tint, audit, commit, push, one report.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
