@@ -2439,6 +2439,23 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    re-render the eight covers; then a second set for Dust, Acid, Ice, Smoke with the cover's own stronger dye
    loading (-cover-strong) for the owner's choice by eye; say what the parts list's "stock tint 3 mm" means.
    The cover view stays off the site until then; the eight finals and mantle-bar go with the next site push.
+   20:13 UTC, biomes lane a48bc22d67: Smoke f master band 0 in 36.4 min; the lane now expects 13 to 15 hours in all.
+   20:17 UTC, lamps lane fec5197549 (r32-lamps-final, `renders/2026-11-15/barkhorn/lamp-site/off-match/`:
+   off-match.png, smoke-pair.png, tints-off.png, notes.md): BOTH LAMPS OFF IN ONE RIG (the day row's strip and
+   lifted world, 5000 K, EV -1, same camera distance and lens). Body sRGB, Hemisphere | Core: Ember 73,14,13 |
+   63,0,0; Dust 96,29,9 | 95,13,0; Acid 78,70,9 | 71,62,0; Poison 12,33,15 | 1,14,3; Ice 3,43,84 | 0,31,76; Haze
+   31,26,73 | 6,11,64; Fog 101,100,100 | 107,107,106; Smoke 0.3x 58,59,59 | 44,46,47 (0.5x 41 | 22; 0.8x 27 | 7;
+   1.2x 19 | 3; Hemisphere 2.0x 16; Core 0.6x 16). THE CAUSE IS THE BUILD BEHIND THE DYE: Hemisphere has 3 mm
+   tint, 6 mm clear, then an opal modeled as scattering on its inside face only, then the hollow, so room light
+   crosses the dye once and the shade is see-through; Core has its white opal core right behind the wall, so light
+   crosses the dye twice. Dense tints read lighter on Hemisphere; the different rigs made most of the gap in the
+   choice sheet. The lane's Smoke pair (Hemisphere 2.0x, Core 0.6x: off 16 | 16, lit 46,53,56 | 136,138,140, light
+   84 % | 74 %) matches off but not lit. CHECKED: the pictures are sound; the coordinator reads the numbers as
+   Hemisphere 1.2x with Core 0.6x being better balanced (off 20 | 16, lit about 130 | 138), and sees that no dye
+   fixes the character: Fog is a clear dome against a white ball. ASKED THE LANE: what Hemisphere's diffuser really
+   is (a white opal layer, or a clear layer with a frosted face); if a real opal, a test with it modeled as one
+   (off: Fog, Smoke 0.3x, 0.6x, Haze, Poison; lit: Fog, Smoke 0.3x, 0.6x) to see whether the off colors then match
+   at one strength on both lamps. tints-off.png shown to the owner in chat. No proposal to him before the answer.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
