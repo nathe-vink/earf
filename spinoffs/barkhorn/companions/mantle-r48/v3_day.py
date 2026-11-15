@@ -202,6 +202,15 @@ def cover(kind=None):
     # with half the wall's absorption (sqrt(T): the ray crosses two faces a wall). T comes from the deck's own volume
     # absorption (sigma = density x (1 - color), Cycles' Volume Absorption) over 3 mm, times `k` for a stronger loading.
     pl = bpy.data.objects['plinth-L1-stack']; k = 1.0
+    if kind == 'glass':   # the REFERENCE (the coordinator, 2026-11-15): plain refraction, the deck's own glass material at
+        # 3 mm, refractive caustics on; slow to converge, for a long-sampled check cell only
+        m = pl.material_slots[0].material.copy(); m.name = 'cover-glass-ref'
+        bpy.context.scene.cycles.caustics_refractive = True
+        f = bpy.data.materials.new('cover-feet-ref')
+        for o in obs:
+            o.data.materials.clear(); o.data.materials.append(f if o.name == 'cover-feet' else m)
+        print('v3_day: the cover ON as the glass reference (caustics on)', flush=True)
+        return
     if kind.startswith('strong:'):
         k = float(kind.split(':')[1])
     dm = pl.material_slots[0].material; va = [n for n in dm.node_tree.nodes if n.type == 'VOLUME_ABSORPTION'][0]
@@ -779,6 +788,12 @@ def prepare():
     if '--chamfer-satin' in mine: chamfer_edges(edge_polish=False)
     if '--edge-c' in mine: chamfer_c_finish()
     cover(mine[mine.index('--cover') + 1] if '--cover' in mine else None)
+    if '--cell' in mine:   # a check cell: x0 x1 y0 y1 as fractions (y from the bottom), long samples, no denoiser
+        i_ = mine.index('--cell'); r = bpy.context.scene.render; r.use_border = True; r.use_crop_to_border = True
+        r.border_min_x, r.border_max_x, r.border_min_y, r.border_max_y = (float(v) for v in mine[i_ + 1:i_ + 5])
+        sc_ = bpy.context.scene; sc_.cycles.samples = int(mine[i_ + 5]); sc_.cycles.use_denoising = False
+        sc_.cycles.use_adaptive_sampling = False
+        print('v3_day: CHECK CELL', mine[i_ + 1:i_ + 6], flush=True)
     if '--drop' in mine:   # a TEST only, never an output: objects whose names start with these prefixes removed
         pre = tuple(mine[mine.index('--drop') + 1].split(','))
         for o in [o for o in bpy.data.objects if o.name.startswith(pre)]:
