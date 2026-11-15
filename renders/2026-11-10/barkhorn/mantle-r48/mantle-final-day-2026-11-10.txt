@@ -71,3 +71,11 @@ studio's strip lamp seen through the sheet's edge (strip off: 626 red px -> 0), 
 separate panels touched face to face (Cycles renders coplanar contact black; dropping the left wall made the line
 whole). The CAD now gives the render the cemented box as one solid (cover-top-shell); the edge shows no line. Audits:
 0 emitters, gt 0 px, no hidden mesh.
+
+THE COVERS (2026-11-15, the coordinator's go): mantle-final-day-<tint>-cover.png for all eight, the cover drawn as one
+solid, in the deck's own tint at 3 mm, the finals' rig, exposure, camera, samples and size. Audits, all: 0 emitters,
+gt 0 px, no hidden mesh. The seven other finals re-rendered without the hinge blocks (adacfc79); px changed over 8
+levels against the frames with them: Dust 12371, Fog 12324, Ice 6484, Acid 1859, Haze 950, Ember 642, Poison 581,
+Smoke 489 (the blocks at the back, seen through the deck).
+Note: the cover is the deck's tint at 3 mm, so in the light tints (Dust, Acid, Ice, Fog, Smoke) it reads far paler
+than the 25.4 mm deck; in Ember, Poison and Haze it reads clearly colored.
