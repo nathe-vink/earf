@@ -2422,6 +2422,23 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    (overlap 15 rows per side), each pushed to `renders/2026-11-12/barkhorn/habitats/bands/smoke-f-master-bNN.jpg`.
    Estimate revised by the lane to 12 to 14 hours (the fire rows cost about twice the frame's average). The
    coordinator looked at the strip: agrees; the site takes the master's downscale.
+   19:59 UTC, Mantle lane 269576701a (finals in adacfc79aa): 16 frames in `renders/2026-11-10/barkhorn/mantle-r48/`:
+   `mantle-final-day-<tint>.png` (eight, no hinge blocks) and `mantle-final-day-<tint>-cover.png` (eight, the cover
+   as one solid in the deck's compound), 1800x1200, same rig, exposure, camera, samples; audits 0 / 0 on all.
+   20:05 UTC, CHECKED at full size:
+   - THE EIGHT FINALS WITHOUT THE HINGE BLOCKS PASS: against the old files only the band y 486-725 changes (px over
+     8 levels: Dust 12,371, Fog 12,324, Ice 6,484, Acid 1,859, Haze 950, Ember 642, Poison 581, Smoke 489).
+   - THE EIGHT COVERS DO NOT PASS YET. (1) A fault: almost no light reaches what is under the cover. Luminance with
+     against without the cover on the same spots: the record label 0.09 (Fog), 0.05 (Ember), 0.07 (Smoke), 0.08
+     (Dust), although Fog passes 0.88 through two walls; the black counterweight 25 times brighter, the deck top
+     1.4 to 3 times: under the cover everything sits at one flat gray, the top panel's reflection. This holds for
+     the Ember cover picture the owner chose from as well. (2) With the deck's compound at 3 mm the cover is nearly
+     clear in Dust, Acid, Ice, Fog and Smoke (two walls pass 0.79 / 0.84 / 0.79 / 0.88 / 0.74, against Ember 0.38,
+     Poison 0.63, Haze 0.65); the owner chose "tinted" from Ember alone.
+   Order to the Mantle lane: find and fix the light path, prove it on Fog and Ember with the same numbers,
+   re-render the eight covers; then a second set for Dust, Acid, Ice, Smoke with the cover's own stronger dye
+   loading (-cover-strong) for the owner's choice by eye; say what the parts list's "stock tint 3 mm" means.
+   The cover view stays off the site until then; the eight finals and mantle-bar go with the next site push.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
