@@ -2236,6 +2236,20 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    06:13 UTC, coordinator: the proof seen: the proposed pair reads right (Smoke a dimmer warm lamp inside its dark
    shell; in the present pair Smoke is plainly the bluer, whiter one). SHOWN TO THE OWNER in chat with a plain yes
    or no; it reverses his 11 Nov pick for Smoke only. The lamps lane holds until his answer.
+   06:17 UTC, Mantle lane (r48-mantle-design: CAD and BOM 88ff8e019c; pictures and asset c66bf81e70): THE LIFT-OFF
+   COVER. Design: no hinges, no hinge blocks; 3 mm cast sheet, a top and four walls cemented (ACRIFIX 2R), butt
+   joints flame-polished; 448 x 358 x 100 outside, about 1.1 kg; it stands 1 mm in from the deck's outline on four
+   clear polyurethane bumpers under the corners (a 2.2 mm shadow line; no marks); off, it stands on its top on a
+   cloth. Clearances by the CAD: the RB330's counterweight 33 above, 18 right, 23 behind; spindle 57; record 70; it
+   stays inside the deck's footprint. Deck: nothing moved; only the hinge blocks' four M4 inserts are gone. BOM:
+   hinges -$34, hinge blocks -$47, bumpers +$3 (estimate): $3,996 to $3,918 with a tint cover; a clear cover about
+   $12 less. Asset: each tint has a 'Cover' collection, hidden by default, so earlier pictures rebuild without it.
+   Pictures in `renders/2026-11-15/barkhorn/mantle-r48/`: `mantle-cover-clear-ember.png`, `mantle-cover-tint-ember.png`
+   (the finals' rig and camera; 0 emitters, gt 0 px, no hidden mesh). The lane's pick: the tint (cover and deck read
+   as one block of colour; clear lays a gray veil of reflections over the deck; the honest cost: dark glossy tint
+   shows dust and hairlines more than clear).
+   06:18 UTC, coordinator: both seen; both clean. SHOWN TO THE OWNER in chat, clear above tint, for his pick by eye;
+   the coordinator's pick is the tint too. The Mantle lane holds until his answer.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
