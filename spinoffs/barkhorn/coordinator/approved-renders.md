@@ -2223,6 +2223,19 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    06:04 UTC, coordinator's check (home at 1440: seven places; /colors/smoke loads without a habitat): PASSED. One
    share link made on this deployment (it expires 16 Nov 05:02 UTC) and sent to the owner in chat only. THIS IS NOW
    THE PREVIEW THE OWNER HOLDS (776db52065).
+   06:11 UTC, lamps lane b1a172ba57 (r32-lamps-final): THE SMOKE AT 2700 K PROOF,
+   `renders/2026-11-15/barkhorn/lamp-site/smoke-2700/smoke-2700-proof.png` and notes.md: both rows' right ends, the
+   present pair beside Smoke at Fog's 2700 K (the same rig, flux, exposure and 4000 K white balance; Fog pixel-
+   identical in both; no final re-rendered). Lit glass, sRGB: Hemisphere Fog (237, 223, 208), Smoke now (209, 210,
+   210), Smoke at 2700 K (222, 204, 185); Core Fog (212, 192, 172), Smoke now (170, 171, 171), Smoke at 2700 K
+   (188, 163, 136). At 2700 K Smoke is dimmer than Fog and never whiter; it reads slightly warmer than Fog (the gray
+   dye passes a little less blue). If he says yes: the LED table and the two LED lines in components.json, the two
+   BOMs, and about 2 hours of re-rendering at the same names (hemisphere-row, core-row, hemisphere-smoke-direct and
+   -under, core-smoke, hemisphere-cluster, Smoke's photometry); the site's lit, warm and amber cuts re-made; the
+   site's LED string changed.
+   06:13 UTC, coordinator: the proof seen: the proposed pair reads right (Smoke a dimmer warm lamp inside its dark
+   shell; in the present pair Smoke is plainly the bluer, whiter one). SHOWN TO THE OWNER in chat with a plain yes
+   or no; it reverses his 11 Nov pick for Smoke only. The lamps lane holds until his answer.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
