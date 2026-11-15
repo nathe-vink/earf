@@ -37,7 +37,7 @@
     "relief": 0.2,
     "res": "2k",
     "tint": "#3F3B2B",
-    "tint_mix": 0.5,
+    "tint_mix": 0.4,
     "cells": 900
    },
    {
@@ -352,7 +352,7 @@
     ],
     "rotate_z": 180.0,
     "density": 8.5,
-    "strength": 760.0,
+    "strength": 820.0,
     "color": "#4A4440",
     "anisotropy": 0.4,
     "cool": 1000.0,
@@ -378,15 +378,15 @@
     "seed": 3,
     "flame_gamma": 1.5,
     "through_glass": false,
-    "scale": 1.55
+    "scale": 1.75
    },
    {
     "kind": "kit",
     "shape": "scatter",
     "count": 220,
     "radius": [
-     0.001,
-     0.0025
+     0.002,
+     0.005
     ],
     "position": [
      0.3,
@@ -418,8 +418,8 @@
     "shape": "scatter",
     "count": 110,
     "radius": [
-     0.0009,
-     0.002
+     0.0018,
+     0.004
     ],
     "position": [
      0.3,
@@ -828,7 +828,7 @@
   "clamp": 10.0,
   "bounces": 12,
   "view": "AgX",
-  "exposure": 0.0,
+  "exposure": 0.25,
   "look": "AgX - Base Contrast"
  },
  "title": "Smoke f (2026-11-15): the strike right behind the speaker, after the owner's picture; proxy 2 at dusk (the sky's bright side behind the camera)",
@@ -863,7 +863,7 @@
   "kind": "hdri",
   "polyhaven": "qwantani_dusk_2_puresky",
   "rotation_deg": 53.9,
-  "strength": 0.9,
+  "strength": 0.7,
   "res": "4k"
  },
  "finish": {
