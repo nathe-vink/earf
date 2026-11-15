@@ -2358,6 +2358,14 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    acrylic, 448 x 358 x 100 mm, about 1.1 kg. It rests on four small clear bumpers and lifts straight off; no
    hinges." (1.13 kg computed.) Asked: the Mantle lane which other pictures of its own in use show the blocks; the
    speaker lane whether the bar and hero frames (older asset) show them, as a pixel count, no final re-rendered.
+   18:44 UTC, biomes lane b38020220f (shot file 4f05260d66): TRAIL PROOF w1 (`renders/2026-11-12/barkhorn/habitats/
+   smoke-f-trail-w1-finish.jpg`, `smoke-f-trail-v1-vs-w1.jpg`; 480x600, 16 samples): both trail pieces radius x1.3,
+   density x0.7 (about 0.9 of the old optical depth through the middle), puff 0.25 to 0.55, warp 0.15 to 0.35, fade
+   0.25 to 0.35; nothing else. CHECKED beside v1: the change sits in the trail only (5,726 of 6,032 changed pixels
+   in the upper right quarter; finished mean 0.292, edge sky 0.538, bottom fifth 0.247, as v1); the trail wider,
+   softer at its edges, patchier toward the top, still one readable streak. GO GIVEN: THE SMOKE f FINAL AT 1200x1500
+   WITH w1's SETTINGS (samples and estimate from the lane first). The before/after shown to the owner in chat
+   without waiting for an answer; the master at 2400x3000 stays on hold.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
