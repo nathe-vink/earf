@@ -41,6 +41,8 @@ HABITATS = {
     # Smoke e (the coordinator, 2026-11-14 04:27, layout l9 passed): the crater 6.7 m back and wholly in frame, its rim of
     # thrown earth, the column from it, one thin straight trail from the sky, a plain to a low horizon; sun and sky, the fire
     'smoke_e':   ('Smoke',  {}),
+    # Smoke f (the owner, 2026-11-15: 'the asteroid impact isn't obvious'): the strike right behind the speaker after his picture
+    'smoke_f':   ('Smoke',  {}),
     'poison_ivy_b': ('Poison', {}),
 }
 # shot keys set per habitat (habitat.py --set), and samples where the scene is dark (the satin horn's grain)
@@ -177,7 +179,7 @@ MODIFY = {'haze_b': {'sundisk': {'azimuth': 120.0, 'elevation': 4.0}},
 # mirrored in the speaker, and listed in the report under "passive" with its size and place. The flag (W x H m) stands
 # 1.2 m behind the camera, 1.4 m up; with it come the side cards (2.6 x 2.4 m), the one on a low sun's side left out.
 # The entries at 8 x 6 were the old default, named so the passed finals rebuild as they were.
-FLAG = {'haze_b': (0.0, 0.0), 'poison_ivy': (0.0, 0.0), 'poison_ivy_b': (0.0, 0.0), 'smoke_d': (0.0, 0.0), 'smoke_e': (0.0, 0.0),
+FLAG = {'haze_b': (0.0, 0.0), 'poison_ivy': (0.0, 0.0), 'poison_ivy_b': (0.0, 0.0), 'smoke_d': (0.0, 0.0), 'smoke_e': (0.0, 0.0), 'smoke_f': (0.0, 0.0),
         'ice': (8.0, 6.0), 'hero_ice': (8.0, 6.0),      # sky only, no sun lamp: shades no sun
         'fog_b': (8.0, 6.0), 'hero_fog': (8.0, 6.0),    # sun az 110 / 150, behind the speaker: shades nothing (flagsun check)
         'acid_b': (8.0, 6.0),                           # the coordinator 08:36: overcast, keep, list as passive (sun az 120, el 2.6: clear)
