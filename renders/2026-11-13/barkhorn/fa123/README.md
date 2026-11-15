@@ -37,3 +37,24 @@ current shot file `spinoffs/barkhorn/campaign/rollout/A-polished-p2/macro-amp-du
 package: 1600 x 1600, 128 samples, `--masks`: hidden 0, equipment 0. The FA123's plate as in Hypex's product
 photograph: the XLRs, RCAs, USB, optical and the lights at the top, the module's twenty screws, Hypex's name and
 FA123 lower, the marks, the sticker and the mains inlet and switch at the foot; the rating engraved in the band under it.
+
+### In every tint (2026-11-15)
+
+The owner: all the Tropos speakers show Dust for the plate shot. `macro-amp-<tint>.png` for the other seven tints
+(contact sheet `contact-amp.jpg`, 4 x 2): the Dust shot file with only the instance's flavour changed; same rig, size
+(1600 x 1600), samples (128) and FA123 package, each with `--masks`.
+
+| Tint | Minutes | Hidden / equipment px | Plate mean | Print p95 − p5 |
+|---|---|---|---|---|
+| Dust | (2026-11-13) | 0 / 0 | 87.4 | 180 |
+| Ember | 36 | 0 / 0 | 86.8 | 180 |
+| Acid | 40 | 0 / 0 | 87.9 | 180 |
+| Poison | 31 | 0 / 0 | 87.0 | 180 |
+| Ice | 45 | 0 / 0 | 87.2 | 179 |
+| Haze | 40 | 0 / 0 | 86.9 | 180 |
+| Fog | 45 | 0 / 0 | 89.2 | 178 |
+| Smoke | 26 | 0 / 0 | 87.2 | 179 |
+
+Plate mean: the luma of the plate's middle (pixels 720–1060 across, 400–1050 down); print: the spread of the warning
+block under it (760–1060, 1060–1200). The tint colours the cabinet around the plate, not the plate: the dark tints
+(Smoke, Poison, Haze) read like Dust, so none needs an exposure lift.
