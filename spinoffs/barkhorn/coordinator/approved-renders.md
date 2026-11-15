@@ -2385,6 +2385,19 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    levels). SHOWN TO THE OWNER in chat with three ways: (1) darker Smoke (Hemisphere 1.2x, Core 0.8x), the
    coordinator's pick; (2) Fog at 3500 K, Smoke unchanged; (3) leave both. No finals and no file changes before
    his pick. Asked the speaker lane which bar and hero frames show a Smoke lamp or a lit Fog lamp.
+   19:09 UTC, Mantle lane 9f8f640b08: THE THREE DASHES WERE A MODEL FAULT (the strip lamp seen through the cover's
+   top edge, cut by black seams where the cover's separate panels touched face to face); the cemented box is now
+   drawn as one solid; Ember's cover re-rendered. CHECKED beside the first: the far edge is one quiet line, the
+   corners read as one box, nothing else moved (12,171 px over 12 levels, all on edges and corners). GO for the
+   seven covers after the seven hinge-free finals.
+   19:12 UTC, THE OWNER ON THE LAMP SHEET, his words: "I think it's important for off on hemi and core to match
+   colors." A RULE, not yet a pick: the same tint must read as the same color on Hemisphere and Core when both are
+   off. In the sheet they do not (Smoke now: Hemisphere 18,20,21 against Core 60,61,62; Fog 44,46,47 against
+   117,117,116), but the two off rows were shot in different rigs. Order to the lamps lane: why they differ (what
+   stands behind the glass on each; what the rigs add); one off-match picture in ONE rig (Hemisphere over Core:
+   Fog now, Smoke 0.3x, 0.5x, 0.8x, 1.2x) with the glass colors per pair; the Smoke strengths that match when off
+   and read gray when lit, shown off and lit; whether the rule holds for the other six tints. No finals, no file
+   changes.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
