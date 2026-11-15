@@ -832,7 +832,8 @@ def apply(web, head, rest):
 RC_TALL = 'renders/2026-11-12/barkhorn/studio-refresh/site-front-off-tall-{name}.png'   # the refreshed model, all eight (r33-speaker-horn 95fdff0d)
 HORN_BACK_SRC = 'renders/2026-11-13/barkhorn/fa123/horn-back-{name}.png'       # the FA123 inside the clear cabinet (r33-speaker-horn e62e1045)
 AMP_SRC = 'renders/2026-11-13/barkhorn/fa123/macro-amp-dust.png'                 # the FA123's plate from behind, in Dust (1600 x 1600)
-AMP_TINTS = {}     # {tint key: macro-amp-<name>.png}: each tint's own plate, added as each passes (the owner, 2026-11-15)
+AMP_TINTS = {k: f'renders/2026-11-13/barkhorn/fa123/macro-amp-{n}.png' for k, n in   # each tint's own plate (r33-speaker-horn c1425519)
+             zip(['red', 'orange', 'amber', 'green', 'blue', 'violet', 'ice', 'black'], ['ember', 'dust', 'acid', 'poison', 'ice', 'haze', 'fog', 'smoke'])}
 # Ember, Dust, Poison, Ice e624e13e; Haze, Fog 3d0b613f; Acid 04d21c5c (on the Acid horn fix). Smoke held.
 RC_KEYS = ['red', 'orange', 'amber', 'green', 'blue', 'violet', 'ice', 'black']
 EIGHT = True         # Smoke is a current color again (the coordinator, 2026-11-10 07:56)
