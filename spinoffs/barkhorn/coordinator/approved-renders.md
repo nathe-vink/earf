@@ -2322,6 +2322,29 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    THE SMOKE FINAL WILL USE v1's SETTINGS (the shot file at e49ea7328f) ON THE OWNER'S YES ONLY. No lane is working;
    three answers are open with the owner: the Smoke redo (shown 11:27), the Smoke lamp at 2700 K (06:13), Mantle's
    cover clear or tint (06:18).
+   12:13 UTC, biomes lane's estimate for the Smoke f final at 2400x3000: 10 to 11 hours, about 16 row bands.
+   12:14 UTC, v1 SHOWN TO THE OWNER in chat beside proxy 2, with the coordinator's plan: on his yes, render first
+   at the size the site shows (1200x1500), the 2400x3000 master to follow overnight. The 13:20 check-in was deleted
+   (no lane working).
+   15 Nov, read 17:56 UTC, THE OWNER'S ANSWER, his words: "Smoke seems good. I wonder if the trail should be a
+   little more dissipated. No on warm smoke light. It looks light yellow. Tinted mantle cover".
+   18:03 UTC, coordinator, what follows from it (orders sent to the three lanes):
+   - SMOKE f IS APPROVED (v1, the shot file at e49ea7328f) WITH ONE CHANGE: the trail a little more dissipated
+     (softer edges, slightly wider and thinner, breaking into wisps toward its upper end; nothing else changes).
+     Order: one cheap proof of the trail (v1 | new, side by side), checked by the coordinator; on his go the final
+     at 1200x1500 (samples chosen by the lane for the same noise at site size as the other seven; estimate first,
+     wait if over about 4 hours; bands of 40 minutes at most, rounding stitch, finish.py v1.1, audit 0/0, emitter
+     list); the 2400x3000 master only on the coordinator's word after the 1200 final is checked.
+   - SMOKE LAMP AT 2700 K: REFUSED ("It looks light yellow"). Smoke keeps a neutral LED; nothing re-rendered;
+     lamp_site.py, components.json and the BOMs unchanged. His point of 15 Nov ("It's odd that the smoke lights look
+     whiter than fog") is still open. Order: one choice sheet at the rows' rig and exposure (Hemisphere lit, Core
+     lit, and the Smoke shells unlit if cheap): Fog now (2700 K) | Smoke now (gray 0.3x, 4000 K) | Smoke gray 0.5x |
+     Smoke gray 0.8x | Fog at 3500 K, with lit-glass colors, transmission and light out per strength. The owner
+     picks by eye; no finals and no file changes before his pick.
+   - MANTLE'S LIFT-OFF COVER IS CAST IN THE DECK'S TINT; the clear cover is dropped. Order: CAD, BOM ($3,918) and
+     asset to agree; the cover-on picture for the site on the day rig and camera (Ember first for the coordinator's
+     check, the other tints on his go); one spec line for the site.
+   Lanes working: biomes, lamps, Mantle. The site lane gets one message when pictures exist.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
