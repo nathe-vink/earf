@@ -2503,6 +2503,25 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    21:15 UTC, coordinator: the lamps lane's three-line method (long plain-refraction reference; shadow tricks must
    replace refraction, not add to it; the two-way-transmission bound) passed to the Mantle lane, which is to hold
    its flat-sheet fix to it on Fog and Ember before reporting. The owner told of the correction.
+   21:59 UTC, lamps lane aaf1248958 (`.../lamp-site/off-match/`: dye-match.png, tints-off-v2.png, notes-v2.md;
+   lamp_site.py unchanged): ON THE CORRECTED FOOTING (Core's ball by plain refraction). Core's own light is not
+   affected (Fog 64.6 lm in all three variants): CORE'S LIT FRAMES AND PHOTOMETRY STAND. Off, Hemisphere | Core:
+   Ember 73,14,13 | 50,0,0; Dust 96,29,9 | 79,6,0; Acid 78,70,9 | 58,50,0; Poison 12,33,15 | 2,9,3; Ice 3,43,84 |
+   0,23,63; Haze 31,26,73 | 3,7,51; Fog 101,100,100 | 91,91,90; Smoke 58,59,59 | 34,35,36. EVERY TINT READS LIGHTER
+   ON HEMISPHERE, by 20 to 28 levels in its largest channel (Fog 10): one systematic difference of the build, not
+   three misses. Dye matches: SMOKE Hemisphere 1.2x with Core 0.45x: off 19,20,20 | 19,20,21; lit 125,131,134 |
+   154,156,156; light out 86 % | 85 %. Haze Hemisphere 1.6x with Core 0.6x: off within 8, but lit the two drift
+   apart (154,98,194 | 178,124,161). Poison: no match within 6 (Core's green blocks red entirely; Hemisphere's glass
+   reflections hold it near 12). Hemisphere's floor near 15 is real (its four glass faces' reflections). THE OPAL
+   GRADE IS NOT A FIX: a denser grade (1T04 T 30 %, 069 T 9 %) moves Hemisphere's off color by 5 levels at most;
+   that option is closed. Finals showing a lamp off or in daylight: core-row-day.png and core-base-options-day.png
+   (too bright, need the fix); hemisphere-ember-off.png and -cap.png stand.
+   22:05 UTC, CHECKED; SHOWN TO THE OWNER in chat: tints-off-v2 (replacing the earlier one) and the Smoke columns of
+   dye-match, with two questions: (1) Smoke as Hemisphere 1.2x with Core 0.45x, yes or no (lamp pictures only,
+   2 to 3 hours); (2) the other tints: leave them (the coordinator's recommendation: same dye in both lamps, Core a
+   little deeper when off) or match all (a dye recipe per lamp per tint, the lit colors drift apart, Poison cannot
+   match, every lamp picture and the bar and hero frames redone). The lamps lane holds; the Core fix (plain glass,
+   no thin_shadow) goes in with his answer and core-row-day and core-base-options-day are re-rendered once.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
