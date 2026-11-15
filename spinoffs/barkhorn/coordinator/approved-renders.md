@@ -2554,6 +2554,31 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    display levels on the label, inside what the bracket itself can be trusted to; the coordinator's own rough sum
    puts the inside bounce at 1 to 2, so the residual stays on record as an open point in the lane's notes. GO to
    re-render the twelve cover frames with the slant tint, audit, commit, push, one report.
+   22:47 UTC, lamps lane (scratch only, nothing pushed): THE v2 VERDICT DOES NOT HOLD. (1) Clamping is off in its
+   rigs (direct 0, indirect 0). (2) THE REAL BIAS IS FILTER GLOSSY: blur_glossy = 1.0 in studio/strata
+   scene.render_settings, on in every frame; after a diffuse bounce it turns glass refraction rough, and rough
+   glass at that strength loses energy: exactly the path of light reaching a matte surface through glass.
+   Converged, blur on | off: Hemisphere Fog off 101 | 120; Core Fog off by plain refraction 91 | 116; Core Fog
+   today's ball (thin_shadow) 107 | 123; Core Smoke 0.3x 34 | 51. (3) THE BOUND WITH A MEASURED REFLECTION: Core
+   with a black core behind the ball 0.0098 linear; bare core 0.1827; bound 0.0098 + 0.922 x 0.1827 = 0.178. Plain
+   refraction with blur off reads 0.175: PASSES within 2 %. Today's ball with blur off 0.196, 10 % over (the
+   double count, real but smaller). (4) A SECOND FAULT, Hemisphere only: the opal is modeled as a scattering face
+   at the datasheet's T 54 % / R 39 % PLUS a clear refracting face 3 mm outside it, although the datasheet figures
+   already describe the whole sheet; with the blur on the two errors roughly cancelled. Ember Hemisphere, light
+   out total (below / above the rim) and lux at the center / 0.3 m off: as published 272.5 lm (198 / 75), 345 /
+   217 lux; corrected (blur off, the opal acting once) 334.1 lm (224 / 110), 324 / 210 lux. Core Fog light out
+   64.6 lm with the blur, 95.1 without. SO: the site's "about 350 lux" is a little high (about 325), the 73 % down
+   share becomes about 67 %, Hemisphere gives about a quarter more light than published and its shade glows about
+   47 % brighter, Core gives about 47 % more than published; the lit finals may under-show the glow and the
+   pools; the off match and the dye matches must be redone.
+   22:49 UTC, coordinator: GO, scratch only, about 1.5 h: the corrected opal proven on a flat-sheet test against
+   the datasheet (T 54 %, R 39 %); photometry for all eight tints on both lamps, old beside new, the published
+   figures marked; lit cells at the finals' exposure, old beside new, no re-tuning; the off match and the Smoke
+   pair redone; which finals would change and the time. No change to lamp_site.py and no finals before the
+   coordinator's word. THE OWNER'S TWO LAMP ANSWERS STAY ON HOLD. The fourth line (Filter Glossy) passed to the
+   Mantle lane: after its twelve frames, the two reference cells again with the blur off. Known and not reopened:
+   the bar and hero frames and the other lanes' finals were rendered with the same shared setting; they are mood
+   pictures passed by eye; the published lamp figures and the lamps' own pictures come first.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
