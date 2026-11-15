@@ -754,6 +754,11 @@ def prepare():
     if '--chamfer-satin' in mine: chamfer_edges(edge_polish=False)
     if '--edge-c' in mine: chamfer_c_finish()
     cover(mine[mine.index('--cover') + 1] if '--cover' in mine else None)
+    if '--drop' in mine:   # a TEST only, never an output: objects whose names start with these prefixes removed
+        pre = tuple(mine[mine.index('--drop') + 1].split(','))
+        for o in [o for o in bpy.data.objects if o.name.startswith(pre)]:
+            bpy.data.objects.remove(o, do_unlink=True)
+        print('v3_day: TEST drop', pre, flush=True)
     if '--probe-hw' in mine: black_hardware(probe=mine[mine.index('--probe-hw') + 1])
     if '--lighttable' in mine:
         i = mine.index('--lighttable'); lighttable(float(mine[i + 1]), float(mine[i + 2]))

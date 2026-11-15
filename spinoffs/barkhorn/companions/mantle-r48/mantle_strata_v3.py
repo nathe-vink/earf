@@ -369,7 +369,10 @@ def parts(P):
                     'upper row: line out L and R, the 4 mm earth post (the star), the 4PDT stage / bypass; lower row: 18 V for the phono stage (2.1 mm), the Neo\'s motor inlet (no light since 2026-11-10)',
                     'the rating engraved along its foot and filled white (strata_rear.py has the text and the wiring and earth drawing)']),
         Part('rear-hardware', rhw, Bought('strata-rear-hardware-nolight'), finish='black', group='rear'),
-        *[Part(k, s_, Sheet(P['cover_sheet'], 3.0), finish='acrylic-lid', group='cover',
+        *[Part(k, s_, Sheet(P['cover_sheet'], 3.0), finish='acrylic-lid', group='cover', render=(k == 'cover-top'),
+               # the render draws the cemented box as ONE solid (cover-top-shell): separate panels touching face to
+               # face render a black seam in Cycles (it broke the top edge's light line into dashes, 2026-11-15)
+               pieces=({'shell': (union(*lid.values()), 'acrylic-lid')} if k == 'cover-top' else {}),
                notes=['the lift-off cover (2026-11-15): 3 mm cast sheet, ' + ('the deck\'s tint in the flavor\'s code' if P['cover_sheet'] == 'trucast-tint' else 'water-clear') + ', a top and four walls cemented with ACRIFIX 2R 0190 (the walls on the top\'s underside, the corners butt-jointed, the joints flame-polished), 448 x 358 x 100 outside, about 1.1 kg; outer edges eased R0.5 and polished',
                       'inside 442 x 352 x 97: over the deck\'s top it clears the RB330\'s counterweight by about 33 above (66 high), 18 to its right and 23 behind (as posed in the frames), the spindle by 57, the record by 70; the walls stand 1 in from the deck\'s outline, on the flat inside its chamfer',
                       'located by eye to the deck\'s edge and held by the feet\'s grip; off, it stands on its top on a soft cloth (no hanger is supplied)'] if k == 'cover-top' else [])
