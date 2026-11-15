@@ -1,0 +1,40 @@
+Mantle's cover: how it lets light through, and how that was checked (2026-11-15).
+
+THE FAULT. The first covers drew the 3 mm sheet as glass (the deck's own refracting material). This rig renders with
+refractive caustics OFF, so no direct light passed the cover: everything under it was lit by stray bounces only (the
+record label at 0.05-0.10 of its brightness without the cover).
+
+THE MODEL NOW (v3_day.py cover(), commits e5c9e1ca, 25eafd46, 77fd6301). Each face of the cover is a THIN SHEET:
+Fresnel reflection (IOR 1.49, glossy 0.004) over a straight-through Transparent BSDF. It REPLACES refraction, it does
+not add to it: caustics stay off in these frames, and only the Transparent path carries light. The tint per face is
+T ** (0.5 / cos theta_t), T the 3 mm wall's transmission from the deck's own dye (sigma = density x (1 - color) of the
+deck's Volume Absorption) and theta_t the ray's refracted angle (a slanted ray travels thickness / cos theta_t). The
+inside face uses IOR 1/1.49, which Cycles inverts back to air-to-glass (a flat sheet has no total internal reflection).
+
+THE CLAMP. This rig sets sample_clamp_indirect = 8. Light that reaches a surface through refracting glass is indirect
+in Cycles, so a plain-refraction render in this rig is clamped dark: a refraction reference must be run unclamped
+(v3_day.py --cover glass does). Clamped, the reference read Fog 26.7, Ember 10.3; unclamped 77.4 and 29.6 (below).
+
+THE CHECK (the coordinator's method). One cell (the record label and a patch of deck top), 1000-2000 samples, no
+denoiser, no adaptive sampling, the mean of 20 x 20 px, linear luminance x 255:
+                 bare    flat sheet   flat + slant   glass ref (unclamped, under-converged)
+  Fog label      96.4    89.7         89.6           77.4
+  Ember label    96.4    43.7         41.4           29.6
+The reflection measured on black record beside the label: Fog 8.2, Ember 5.9. Ray-cast paths: the camera sees the
+label through the FRONT WALL at 34 deg; the light comes in at 13 deg (bg), 21 (strip), 27 (fill) and 52 (key).
+Bound = bare x per-angle Fresnel x T ** (1 / cos theta_t), the view at 34 deg, the light from square-on to 52 deg,
+plus the reflection: Fog 85.3 .. 88.9, Ember 33.9 .. 37.0. Fog passes (89.6, +0.7). Ember is 4.4 over the top
+(41.4; about 5 display levels).
+OPEN POINT: the Ember residual of 4.4. Hypothesis: light bouncing inside the closed box (the inner faces' reflections
+between the walls, and the red-lit deck under the cover), which the one-pass bound leaves out; the coordinator's rough
+sum puts that at only 1-2, so it is not proven as the whole cause. Accepted by the coordinator (22:44): another round
+costs more than the gap is worth. A converged reference (MNEE shadow caustics, or about 20k samples) would settle it.
+Outside the cover, the floor and the base edge equal the finals within 0.1 level (Fog, Ember, Smoke).
+
+THE STRONG LOADINGS (-cover-strong, for the owner's choice): the cover cast at k times the deck's dye per mm, k set so
+the most-absorbed channel passes 0.634 a wall (the mean of Ember's 0.49 and Haze's 0.78 at 1x):
+  Dust 2.25x (one wall RGB 0.99/0.83/0.63, luminance 0.85)   Acid 2.45x (0.96/0.95/0.63, 0.93)
+  Ice 3.05x (0.63/0.83/0.97, 0.80)                         Smoke 4.30x (0.63/0.63/0.63, 0.63)
+  (at 1x: Ember 0.94/0.49/0.55 lum 0.59, Haze 0.88/0.77/0.97 lum 0.81). Fog's deck is near-water-clear light gray
+  (#FCFCFC after 25 mm), not frosted (only its outer edge is satin): a stronger Fog cover would be a Smoke cover, so
+  Fog stays as it is.
