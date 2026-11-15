@@ -43,6 +43,10 @@ LED_CCT = {'red': 2200, 'orange': 2700, 'amber': 2700, 'green': 2700, 'ice': 270
 # 2026-11-11 (the owner, "Go", on the Core colour test ae86581b): 4000 K for Dust, Acid, Ice and Smoke; Ember 2200 K,
 # Poison and Fog 2700 K, Haze 3000 K
 LED_CCT.update({'orange': 4000, 'amber': 4000, 'blue': 4000, 'black': 4000})
+# LED_CCT_SET 'tint:K,...' (2026-11-15, the coordinator: a proof of Smoke at Fog's 2700 K): one tint's LED changed, the
+# rest as signed; unset, nothing changes
+for kv_ in filter(None, os.environ.get('LED_CCT_SET', '').split(',')):
+    LED_CCT[kv_.split(':')[0]] = int(kv_.split(':')[1])
 # the outer shell's dye loading per tint, as a multiple of the chart figure at the wall (Core's 6 mm at 0.5, Hemisphere's
 # 3 mm at 1): Dust, Acid and Ice a custom pour at 3x; Smoke the speakers' own pour (about 54 % through Core's 6 mm),
 # 0.3x; the rest 1x
@@ -785,6 +789,10 @@ def build(frame, samples, scale):
         raise SystemExit('unknown frame ' + frame)
     SC.render_settings(W, H, samples, scale, exposure=float(os.environ.get('EV', EVD)), look=os.environ.get('LOOK', 'AgX - Punchy'))   # round 2: AgX Punchy (the gate)
     sc = bpy.context.scene
+    if os.environ.get('BORDER'):   # 'x0,x1,y0,y1' fractions (y from the bottom): only that part of the frame, cropped
+        bx0, bx1, by0, by1 = (float(v) for v in os.environ['BORDER'].split(','))
+        sc.render.use_border = sc.render.use_crop_to_border = True
+        sc.render.border_min_x, sc.render.border_max_x, sc.render.border_min_y, sc.render.border_max_y = bx0, bx1, by0, by1
     sc.cycles.caustics_refractive = True; sc.cycles.sample_clamp_indirect = float(os.environ.get('CLAMP', '0' if kind0 in ('dome', 'orb') else '20')) * 2.0 ** (-sc.view_settings.exposure)   # a radiance, in display terms   # round 3: the clamp cut the bore reflector's share (78 % out unclamped, 57 % clamped); sc.cycles.blur_glossy = 1.0
     # round 3 (the coordinator's photometry check): the bore's reflector sends light to the floor by reflection, a
     # reflective caustic; render_settings turns those off, which threw the reflector's share away
