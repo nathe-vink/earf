@@ -21,6 +21,8 @@ for t in TINTS:
         m = bpy.data.materials['post-satin-black']
         for n in ('platter-hub', 'platter-inserts', 'bushes'):
             o = bpy.data.objects[n]; o.data.materials.clear(); o.data.materials.append(m)
+    for n in ('hinge-blocks', 'hinges'):   # gone from the CAD with the lift-off cover (2026-11-15); scenes rendered before it still carry them
+        if bpy.data.objects.get(n): bpy.data.objects.remove(bpy.data.objects[n], do_unlink=True)
     for o in [o for o in bpy.data.objects if STUDIO(o)]:
         bpy.data.objects.remove(o, do_unlink=True)
     col = bpy.data.collections.new(f'Mantle Strata {t.capitalize()}')
