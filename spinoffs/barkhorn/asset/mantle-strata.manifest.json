@@ -2,8 +2,9 @@
  "asset": "mantle-strata.blend",
  "source_commit": "the black-hardware finals (2026-11-11), their frames and model in the same commit",
  "units": "m, z up, the shelf at z 0",
- "build": "no light of any kind; base Smoke 2074 solid; every visible piece of hardware satin black (post-satin-black, #18181A, roughness 0.5; the list in black_hardware), bright only the parts in bright_by_necessity; the deck underside satin; a record on the platter; the lid and hinges present but hidden from render, as in the frames",
+ "build": "no light of any kind; base Smoke 2074 solid; every visible piece of hardware satin black (post-satin-black, #18181A, roughness 0.5; the list in black_hardware), bright only the parts in bright_by_necessity; the deck underside satin; a record on the platter; no lid or hinges: the lift-off cover is in its own collection, off by default",
  "edge": "C: a 1 mm even chamfer on the outer edges of the deck and base (in the CAD), the chamfer polished; the deck's outer edge satin, the base's diamond-polished, as signed (the owner, 2026-11-11)",
+ "cover": "lift-off, 3 mm cast sheet in the deck's tint (the CAD's default; the owner's pick of tint or clear pending), 448 x 358 x 100 on four clear 2.2 mm feet; its objects (cover-*) in the child collection \"Mantle Strata <Tint> Cover\", off in renders by default (collection hide_render): turn it on to show the cover",
  "black_hardware": [
   "arm-puck",
   "puck-screw-0",
@@ -56,7 +57,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-axle.ember",
@@ -64,7 +66,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-base.ember",
@@ -72,7 +75,8 @@
      "hidden_render": false,
      "materials": [
       "arm.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-bias.ember",
@@ -80,7 +84,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-collar.ember",
@@ -88,7 +93,8 @@
      "hidden_render": false,
      "materials": [
       "arm.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-cw-ring.ember",
@@ -96,7 +102,8 @@
      "hidden_render": false,
      "materials": [
       "rubber.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-cw.ember",
@@ -104,7 +111,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-head.ember",
@@ -112,7 +120,8 @@
      "hidden_render": false,
      "materials": [
       "arm.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-lift-tab.ember",
@@ -120,13 +129,15 @@
      "hidden_render": false,
      "materials": [
       "arm.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-pivot.ember",
      "type": "EMPTY",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "arm-puck.ember",
@@ -134,7 +145,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-stub.ember",
@@ -142,7 +154,8 @@
      "hidden_render": false,
      "materials": [
       "arm.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-tube.ember",
@@ -150,7 +163,8 @@
      "hidden_render": false,
      "materials": [
       "arm.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-yoke.ember",
@@ -158,13 +172,15 @@
      "hidden_render": false,
      "materials": [
       "arm.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm.ember",
      "type": "MESH",
      "hidden_render": true,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "ball.ember",
@@ -172,7 +188,8 @@
      "hidden_render": false,
      "materials": [
       "steel.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "base-L1-stack.ember",
@@ -188,7 +205,8 @@
       "base-6.001.ember",
       "base-7.001.ember",
       "base-8.001.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bearing-housing.ember",
@@ -196,7 +214,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bearing-nut.ember",
@@ -204,7 +223,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bearing-spring.ember",
@@ -212,7 +232,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bearing-washer.ember",
@@ -220,7 +241,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "belt.ember",
@@ -228,7 +250,8 @@
      "hidden_render": false,
      "materials": [
       "rubber.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bushes.ember",
@@ -236,7 +259,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-body.ember",
@@ -244,7 +268,8 @@
      "hidden_render": false,
      "materials": [
       "cart.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-cantilever.ember",
@@ -252,7 +277,8 @@
      "hidden_render": false,
      "materials": [
       "alu.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-diamond.ember",
@@ -260,13 +286,15 @@
      "hidden_render": false,
      "materials": [
       "diamond.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-frame.ember",
      "type": "EMPTY",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "cart-mark-2m.ember",
@@ -274,7 +302,8 @@
      "hidden_render": false,
      "materials": [
       "print-gold.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-mark.ember",
@@ -282,7 +311,8 @@
      "hidden_render": false,
      "materials": [
       "print-white.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-pin.001.ember",
@@ -290,7 +320,8 @@
      "hidden_render": false,
      "materials": [
       "gold-pin.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-pin.002.ember",
@@ -298,7 +329,8 @@
      "hidden_render": false,
      "materials": [
       "gold-pin.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-pin.003.ember",
@@ -306,7 +338,8 @@
      "hidden_render": false,
      "materials": [
       "gold-pin.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-pin.ember",
@@ -314,7 +347,8 @@
      "hidden_render": false,
      "materials": [
       "gold-pin.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-screw.001.ember",
@@ -322,7 +356,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-screw.ember",
@@ -330,7 +365,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-stylus.ember",
@@ -338,13 +374,69 @@
      "hidden_render": false,
      "materials": [
       "cart-accent.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cartridge.ember",
      "type": "MESH",
      "hidden_render": true,
-     "materials": []
+     "materials": [],
+     "cover": false
+    },
+    {
+     "object": "cover-back.ember",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.ember"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-feet.ember",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-feet.ember"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-front.ember",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.ember"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-left.ember",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.ember"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-right.ember",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.ember"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-top.ember",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.ember"
+     ],
+     "cover": true
     },
     {
      "object": "cue-bar.ember",
@@ -352,7 +444,8 @@
      "hidden_render": false,
      "materials": [
       "arm.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cue-knob.ember",
@@ -360,7 +453,8 @@
      "hidden_render": false,
      "materials": [
       "arm.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cue-lever.ember",
@@ -368,7 +462,8 @@
      "hidden_render": false,
      "materials": [
       "arm.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cue-post.ember",
@@ -376,7 +471,8 @@
      "hidden_render": false,
      "materials": [
       "arm.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "feet.ember",
@@ -384,7 +480,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "foot-pads.ember",
@@ -392,7 +489,8 @@
      "hidden_render": false,
      "materials": [
       "rubber.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "foot-studs.ember",
@@ -400,7 +498,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hinge-blocks.ember",
@@ -416,7 +515,8 @@
       "lid-6.ember",
       "lid-7.ember",
       "lid-8.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-screw.001.ember",
@@ -424,7 +524,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-screw.ember",
@@ -432,7 +533,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-socket.001.ember",
@@ -440,7 +542,8 @@
      "hidden_render": false,
      "materials": [
       "socket-dark.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-socket.ember",
@@ -448,7 +551,8 @@
      "hidden_render": false,
      "materials": [
       "socket-dark.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-washer.001.ember",
@@ -456,7 +560,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-washer.ember",
@@ -464,13 +569,15 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "mantle-strata-v3.ember",
      "type": "EMPTY",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "mark.ember",
@@ -478,7 +585,8 @@
      "hidden_render": false,
      "materials": [
       "etch-tone.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "motor-plate.ember",
@@ -486,7 +594,8 @@
      "hidden_render": false,
      "materials": [
       "alu-black.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "motor-screws.ember",
@@ -494,7 +603,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "motor.ember",
@@ -502,7 +612,8 @@
      "hidden_render": false,
      "materials": [
       "alu-black.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "phono-pads.ember",
@@ -510,7 +621,8 @@
      "hidden_render": false,
      "materials": [
       "felt.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "phono-stage.ember",
@@ -518,7 +630,8 @@
      "hidden_render": false,
      "materials": [
       "alu-black.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "platter-disc.ember",
@@ -534,7 +647,8 @@
       "platter-6.ember",
       "platter-7.ember",
       "platter-8.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "platter-hub.ember",
@@ -542,7 +656,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "platter-inserts.ember",
@@ -550,7 +665,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "platter-screws.ember",
@@ -558,7 +674,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "plinth-L1-stack.ember",
@@ -575,7 +692,8 @@
       "plinth-7.ember",
       "plinth-8.ember",
       "plinth-chamfer-polished.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "post-1.ember",
@@ -583,7 +701,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.001.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "post-2.ember",
@@ -591,7 +710,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.001.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "post-3.ember",
@@ -599,7 +719,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.001.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "post-4.ember",
@@ -607,7 +728,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.001.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "puck-screw-0.ember",
@@ -615,7 +737,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "puck-screw-1.ember",
@@ -623,7 +746,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "puck-screw-2.ember",
@@ -631,7 +755,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "pulley.ember",
@@ -639,13 +764,15 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "rb330.ember",
      "type": "EMPTY",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "rear-hardware.ember",
@@ -653,13 +780,15 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "rear-plate.ember",
      "type": "MESH",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "record.ember",
@@ -667,7 +796,8 @@
      "hidden_render": false,
      "materials": [
       "vinyl.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "spindle.ember",
@@ -675,7 +805,8 @@
      "hidden_render": false,
      "materials": [
       "steel.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "tag-B.ember",
@@ -683,7 +814,8 @@
      "hidden_render": false,
      "materials": [
       "tag-B.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "tag-G.ember",
@@ -691,7 +823,8 @@
      "hidden_render": false,
      "materials": [
       "tag-G.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "tag-R.ember",
@@ -699,7 +832,8 @@
      "hidden_render": false,
      "materials": [
       "tag-R.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "tag-W.ember",
@@ -707,7 +841,8 @@
      "hidden_render": false,
      "materials": [
       "tag-W.ember"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "thrust-plate.ember",
@@ -715,7 +850,8 @@
      "hidden_render": false,
      "materials": [
       "steel.ember"
-     ]
+     ],
+     "cover": false
     }
    ],
    "materials": {
@@ -1103,6 +1239,49 @@
      ],
      "roughness": 0.4,
      "transmission": 0.0,
+     "ior": 1.5,
+     "metallic": 0.0
+    },
+    "cover-tint.001.ember": {
+     "base_color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "roughness": {
+      "linked_from": "MATH",
+      "Value": 0.004
+     },
+     "transmission": 1.0,
+     "ior": 1.49,
+     "metallic": 0.0,
+     "volume_color": {
+      "linked_from": "MIX",
+      "A": [
+       0.99852,
+       0.99924,
+       0.99873,
+       1.0
+      ],
+      "B": [
+       0.9201,
+       0.0001,
+       0.14726,
+       1.0
+      ]
+     },
+     "volume_density": 236.13623
+    },
+    "cover-feet.ember": {
+     "base_color": [
+      0.9,
+      0.9,
+      0.88,
+      1.0
+     ],
+     "roughness": 0.25,
+     "transmission": 0.8,
      "ior": 1.5,
      "metallic": 0.0
     },
@@ -2171,7 +2350,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-axle.dust",
@@ -2179,7 +2359,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-base.dust",
@@ -2187,7 +2368,8 @@
      "hidden_render": false,
      "materials": [
       "arm.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-bias.dust",
@@ -2195,7 +2377,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-collar.dust",
@@ -2203,7 +2386,8 @@
      "hidden_render": false,
      "materials": [
       "arm.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-cw-ring.dust",
@@ -2211,7 +2395,8 @@
      "hidden_render": false,
      "materials": [
       "rubber.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-cw.dust",
@@ -2219,7 +2404,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-head.dust",
@@ -2227,7 +2413,8 @@
      "hidden_render": false,
      "materials": [
       "arm.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-lift-tab.dust",
@@ -2235,13 +2422,15 @@
      "hidden_render": false,
      "materials": [
       "arm.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-pivot.dust",
      "type": "EMPTY",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "arm-puck.dust",
@@ -2249,7 +2438,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-stub.dust",
@@ -2257,7 +2447,8 @@
      "hidden_render": false,
      "materials": [
       "arm.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-tube.dust",
@@ -2265,7 +2456,8 @@
      "hidden_render": false,
      "materials": [
       "arm.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-yoke.dust",
@@ -2273,13 +2465,15 @@
      "hidden_render": false,
      "materials": [
       "arm.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm.dust",
      "type": "MESH",
      "hidden_render": true,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "ball.dust",
@@ -2287,7 +2481,8 @@
      "hidden_render": false,
      "materials": [
       "steel.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "base-L1-stack.dust",
@@ -2303,7 +2498,8 @@
       "base-6.001.dust",
       "base-7.001.dust",
       "base-8.001.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bearing-housing.dust",
@@ -2311,7 +2507,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bearing-nut.dust",
@@ -2319,7 +2516,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bearing-spring.dust",
@@ -2327,7 +2525,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bearing-washer.dust",
@@ -2335,7 +2534,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "belt.dust",
@@ -2343,7 +2543,8 @@
      "hidden_render": false,
      "materials": [
       "rubber.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bushes.dust",
@@ -2351,7 +2552,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-body.dust",
@@ -2359,7 +2561,8 @@
      "hidden_render": false,
      "materials": [
       "cart.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-cantilever.dust",
@@ -2367,7 +2570,8 @@
      "hidden_render": false,
      "materials": [
       "alu.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-diamond.dust",
@@ -2375,13 +2579,15 @@
      "hidden_render": false,
      "materials": [
       "diamond.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-frame.dust",
      "type": "EMPTY",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "cart-mark-2m.dust",
@@ -2389,7 +2595,8 @@
      "hidden_render": false,
      "materials": [
       "print-gold.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-mark.dust",
@@ -2397,7 +2604,8 @@
      "hidden_render": false,
      "materials": [
       "print-white.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-pin.001.dust",
@@ -2405,7 +2613,8 @@
      "hidden_render": false,
      "materials": [
       "gold-pin.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-pin.002.dust",
@@ -2413,7 +2622,8 @@
      "hidden_render": false,
      "materials": [
       "gold-pin.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-pin.003.dust",
@@ -2421,7 +2631,8 @@
      "hidden_render": false,
      "materials": [
       "gold-pin.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-pin.dust",
@@ -2429,7 +2640,8 @@
      "hidden_render": false,
      "materials": [
       "gold-pin.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-screw.001.dust",
@@ -2437,7 +2649,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-screw.dust",
@@ -2445,7 +2658,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-stylus.dust",
@@ -2453,13 +2667,69 @@
      "hidden_render": false,
      "materials": [
       "cart-accent.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cartridge.dust",
      "type": "MESH",
      "hidden_render": true,
-     "materials": []
+     "materials": [],
+     "cover": false
+    },
+    {
+     "object": "cover-back.dust",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.dust"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-feet.dust",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-feet.dust"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-front.dust",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.dust"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-left.dust",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.dust"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-right.dust",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.dust"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-top.dust",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.dust"
+     ],
+     "cover": true
     },
     {
      "object": "cue-bar.dust",
@@ -2467,7 +2737,8 @@
      "hidden_render": false,
      "materials": [
       "arm.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cue-knob.dust",
@@ -2475,7 +2746,8 @@
      "hidden_render": false,
      "materials": [
       "arm.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cue-lever.dust",
@@ -2483,7 +2755,8 @@
      "hidden_render": false,
      "materials": [
       "arm.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cue-post.dust",
@@ -2491,7 +2764,8 @@
      "hidden_render": false,
      "materials": [
       "arm.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "feet.dust",
@@ -2499,7 +2773,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "foot-pads.dust",
@@ -2507,7 +2782,8 @@
      "hidden_render": false,
      "materials": [
       "rubber.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "foot-studs.dust",
@@ -2515,7 +2791,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hinge-blocks.dust",
@@ -2531,7 +2808,8 @@
       "lid-6.dust",
       "lid-7.dust",
       "lid-8.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-screw.001.dust",
@@ -2539,7 +2817,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-screw.dust",
@@ -2547,7 +2826,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-socket.001.dust",
@@ -2555,7 +2835,8 @@
      "hidden_render": false,
      "materials": [
       "socket-dark.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-socket.dust",
@@ -2563,7 +2844,8 @@
      "hidden_render": false,
      "materials": [
       "socket-dark.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-washer.001.dust",
@@ -2571,7 +2853,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-washer.dust",
@@ -2579,13 +2862,15 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "mantle-strata-v3.dust",
      "type": "EMPTY",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "mark.dust",
@@ -2593,7 +2878,8 @@
      "hidden_render": false,
      "materials": [
       "etch-tone.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "motor-plate.dust",
@@ -2601,7 +2887,8 @@
      "hidden_render": false,
      "materials": [
       "alu-black.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "motor-screws.dust",
@@ -2609,7 +2896,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "motor.dust",
@@ -2617,7 +2905,8 @@
      "hidden_render": false,
      "materials": [
       "alu-black.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "phono-pads.dust",
@@ -2625,7 +2914,8 @@
      "hidden_render": false,
      "materials": [
       "felt.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "phono-stage.dust",
@@ -2633,7 +2923,8 @@
      "hidden_render": false,
      "materials": [
       "alu-black.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "platter-disc.dust",
@@ -2649,7 +2940,8 @@
       "platter-6.dust",
       "platter-7.dust",
       "platter-8.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "platter-hub.dust",
@@ -2657,7 +2949,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "platter-inserts.dust",
@@ -2665,7 +2958,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "platter-screws.dust",
@@ -2673,7 +2967,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "plinth-L1-stack.dust",
@@ -2690,7 +2985,8 @@
       "plinth-7.dust",
       "plinth-8.dust",
       "plinth-chamfer-polished.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "post-1.dust",
@@ -2698,7 +2994,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.001.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "post-2.dust",
@@ -2706,7 +3003,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.001.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "post-3.dust",
@@ -2714,7 +3012,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.001.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "post-4.dust",
@@ -2722,7 +3021,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.001.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "puck-screw-0.dust",
@@ -2730,7 +3030,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "puck-screw-1.dust",
@@ -2738,7 +3039,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "puck-screw-2.dust",
@@ -2746,7 +3048,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "pulley.dust",
@@ -2754,13 +3057,15 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "rb330.dust",
      "type": "EMPTY",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "rear-hardware.dust",
@@ -2768,13 +3073,15 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "rear-plate.dust",
      "type": "MESH",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "record.dust",
@@ -2782,7 +3089,8 @@
      "hidden_render": false,
      "materials": [
       "vinyl.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "spindle.dust",
@@ -2790,7 +3098,8 @@
      "hidden_render": false,
      "materials": [
       "steel.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "tag-B.dust",
@@ -2798,7 +3107,8 @@
      "hidden_render": false,
      "materials": [
       "tag-B.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "tag-G.dust",
@@ -2806,7 +3116,8 @@
      "hidden_render": false,
      "materials": [
       "tag-G.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "tag-R.dust",
@@ -2814,7 +3125,8 @@
      "hidden_render": false,
      "materials": [
       "tag-R.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "tag-W.dust",
@@ -2822,7 +3134,8 @@
      "hidden_render": false,
      "materials": [
       "tag-W.dust"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "thrust-plate.dust",
@@ -2830,7 +3143,8 @@
      "hidden_render": false,
      "materials": [
       "steel.dust"
-     ]
+     ],
+     "cover": false
     }
    ],
    "materials": {
@@ -3218,6 +3532,49 @@
      ],
      "roughness": 0.4,
      "transmission": 0.0,
+     "ior": 1.5,
+     "metallic": 0.0
+    },
+    "cover-tint.001.dust": {
+     "base_color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "roughness": {
+      "linked_from": "MATH",
+      "Value": 0.004
+     },
+     "transmission": 1.0,
+     "ior": 1.49,
+     "metallic": 0.0,
+     "volume_color": {
+      "linked_from": "MIX",
+      "A": [
+       0.99482,
+       0.99734,
+       0.99556,
+       1.0
+      ],
+      "B": [
+       0.97873,
+       0.60037,
+       0.0001,
+       1.0
+      ]
+     },
+     "volume_density": 67.61642
+    },
+    "cover-feet.dust": {
+     "base_color": [
+      0.9,
+      0.9,
+      0.88,
+      1.0
+     ],
+     "roughness": 0.25,
+     "transmission": 0.8,
      "ior": 1.5,
      "metallic": 0.0
     },
@@ -4286,7 +4643,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-axle.acid",
@@ -4294,7 +4652,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-base.acid",
@@ -4302,7 +4661,8 @@
      "hidden_render": false,
      "materials": [
       "arm.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-bias.acid",
@@ -4310,7 +4670,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-collar.acid",
@@ -4318,7 +4679,8 @@
      "hidden_render": false,
      "materials": [
       "arm.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-cw-ring.acid",
@@ -4326,7 +4688,8 @@
      "hidden_render": false,
      "materials": [
       "rubber.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-cw.acid",
@@ -4334,7 +4697,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-head.acid",
@@ -4342,7 +4706,8 @@
      "hidden_render": false,
      "materials": [
       "arm.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-lift-tab.acid",
@@ -4350,13 +4715,15 @@
      "hidden_render": false,
      "materials": [
       "arm.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-pivot.acid",
      "type": "EMPTY",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "arm-puck.acid",
@@ -4364,7 +4731,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-stub.acid",
@@ -4372,7 +4740,8 @@
      "hidden_render": false,
      "materials": [
       "arm.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-tube.acid",
@@ -4380,7 +4749,8 @@
      "hidden_render": false,
      "materials": [
       "arm.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-yoke.acid",
@@ -4388,13 +4758,15 @@
      "hidden_render": false,
      "materials": [
       "arm.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm.acid",
      "type": "MESH",
      "hidden_render": true,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "ball.acid",
@@ -4402,7 +4774,8 @@
      "hidden_render": false,
      "materials": [
       "steel.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "base-L1-stack.acid",
@@ -4418,7 +4791,8 @@
       "base-6.001.acid",
       "base-7.001.acid",
       "base-8.001.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bearing-housing.acid",
@@ -4426,7 +4800,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bearing-nut.acid",
@@ -4434,7 +4809,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bearing-spring.acid",
@@ -4442,7 +4818,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bearing-washer.acid",
@@ -4450,7 +4827,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "belt.acid",
@@ -4458,7 +4836,8 @@
      "hidden_render": false,
      "materials": [
       "rubber.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bushes.acid",
@@ -4466,7 +4845,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-body.acid",
@@ -4474,7 +4854,8 @@
      "hidden_render": false,
      "materials": [
       "cart.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-cantilever.acid",
@@ -4482,7 +4863,8 @@
      "hidden_render": false,
      "materials": [
       "alu.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-diamond.acid",
@@ -4490,13 +4872,15 @@
      "hidden_render": false,
      "materials": [
       "diamond.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-frame.acid",
      "type": "EMPTY",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "cart-mark-2m.acid",
@@ -4504,7 +4888,8 @@
      "hidden_render": false,
      "materials": [
       "print-gold.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-mark.acid",
@@ -4512,7 +4897,8 @@
      "hidden_render": false,
      "materials": [
       "print-white.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-pin.001.acid",
@@ -4520,7 +4906,8 @@
      "hidden_render": false,
      "materials": [
       "gold-pin.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-pin.002.acid",
@@ -4528,7 +4915,8 @@
      "hidden_render": false,
      "materials": [
       "gold-pin.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-pin.003.acid",
@@ -4536,7 +4924,8 @@
      "hidden_render": false,
      "materials": [
       "gold-pin.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-pin.acid",
@@ -4544,7 +4933,8 @@
      "hidden_render": false,
      "materials": [
       "gold-pin.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-screw.001.acid",
@@ -4552,7 +4942,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-screw.acid",
@@ -4560,7 +4951,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-stylus.acid",
@@ -4568,13 +4960,69 @@
      "hidden_render": false,
      "materials": [
       "cart-accent.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cartridge.acid",
      "type": "MESH",
      "hidden_render": true,
-     "materials": []
+     "materials": [],
+     "cover": false
+    },
+    {
+     "object": "cover-back.acid",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.acid"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-feet.acid",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-feet.acid"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-front.acid",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.acid"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-left.acid",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.acid"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-right.acid",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.acid"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-top.acid",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.acid"
+     ],
+     "cover": true
     },
     {
      "object": "cue-bar.acid",
@@ -4582,7 +5030,8 @@
      "hidden_render": false,
      "materials": [
       "arm.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cue-knob.acid",
@@ -4590,7 +5039,8 @@
      "hidden_render": false,
      "materials": [
       "arm.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cue-lever.acid",
@@ -4598,7 +5048,8 @@
      "hidden_render": false,
      "materials": [
       "arm.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cue-post.acid",
@@ -4606,7 +5057,8 @@
      "hidden_render": false,
      "materials": [
       "arm.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "feet.acid",
@@ -4614,7 +5066,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "foot-pads.acid",
@@ -4622,7 +5075,8 @@
      "hidden_render": false,
      "materials": [
       "rubber.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "foot-studs.acid",
@@ -4630,7 +5084,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hinge-blocks.acid",
@@ -4646,7 +5101,8 @@
       "lid-6.acid",
       "lid-7.acid",
       "lid-8.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-screw.001.acid",
@@ -4654,7 +5110,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-screw.acid",
@@ -4662,7 +5119,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-socket.001.acid",
@@ -4670,7 +5128,8 @@
      "hidden_render": false,
      "materials": [
       "socket-dark.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-socket.acid",
@@ -4678,7 +5137,8 @@
      "hidden_render": false,
      "materials": [
       "socket-dark.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-washer.001.acid",
@@ -4686,7 +5146,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-washer.acid",
@@ -4694,13 +5155,15 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "mantle-strata-v3.acid",
      "type": "EMPTY",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "mark.acid",
@@ -4708,7 +5171,8 @@
      "hidden_render": false,
      "materials": [
       "etch-tone.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "motor-plate.acid",
@@ -4716,7 +5180,8 @@
      "hidden_render": false,
      "materials": [
       "alu-black.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "motor-screws.acid",
@@ -4724,7 +5189,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "motor.acid",
@@ -4732,7 +5198,8 @@
      "hidden_render": false,
      "materials": [
       "alu-black.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "phono-pads.acid",
@@ -4740,7 +5207,8 @@
      "hidden_render": false,
      "materials": [
       "felt.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "phono-stage.acid",
@@ -4748,7 +5216,8 @@
      "hidden_render": false,
      "materials": [
       "alu-black.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "platter-disc.acid",
@@ -4764,7 +5233,8 @@
       "platter-6.acid",
       "platter-7.acid",
       "platter-8.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "platter-hub.acid",
@@ -4772,7 +5242,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "platter-inserts.acid",
@@ -4780,7 +5251,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "platter-screws.acid",
@@ -4788,7 +5260,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "plinth-L1-stack.acid",
@@ -4805,7 +5278,8 @@
       "plinth-7.acid",
       "plinth-8.acid",
       "plinth-chamfer-polished.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "post-1.acid",
@@ -4813,7 +5287,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.001.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "post-2.acid",
@@ -4821,7 +5296,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.001.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "post-3.acid",
@@ -4829,7 +5305,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.001.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "post-4.acid",
@@ -4837,7 +5314,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.001.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "puck-screw-0.acid",
@@ -4845,7 +5323,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "puck-screw-1.acid",
@@ -4853,7 +5332,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "puck-screw-2.acid",
@@ -4861,7 +5341,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "pulley.acid",
@@ -4869,13 +5350,15 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "rb330.acid",
      "type": "EMPTY",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "rear-hardware.acid",
@@ -4883,13 +5366,15 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "rear-plate.acid",
      "type": "MESH",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "record.acid",
@@ -4897,7 +5382,8 @@
      "hidden_render": false,
      "materials": [
       "vinyl.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "spindle.acid",
@@ -4905,7 +5391,8 @@
      "hidden_render": false,
      "materials": [
       "steel.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "tag-B.acid",
@@ -4913,7 +5400,8 @@
      "hidden_render": false,
      "materials": [
       "tag-B.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "tag-G.acid",
@@ -4921,7 +5409,8 @@
      "hidden_render": false,
      "materials": [
       "tag-G.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "tag-R.acid",
@@ -4929,7 +5418,8 @@
      "hidden_render": false,
      "materials": [
       "tag-R.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "tag-W.acid",
@@ -4937,7 +5427,8 @@
      "hidden_render": false,
      "materials": [
       "tag-W.acid"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "thrust-plate.acid",
@@ -4945,7 +5436,8 @@
      "hidden_render": false,
      "materials": [
       "steel.acid"
-     ]
+     ],
+     "cover": false
     }
    ],
    "materials": {
@@ -5333,6 +5825,49 @@
      ],
      "roughness": 0.4,
      "transmission": 0.0,
+     "ior": 1.5,
+     "metallic": 0.0
+    },
+    "cover-tint.001.acid": {
+     "base_color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "roughness": {
+      "linked_from": "MATH",
+      "Value": 0.004
+     },
+     "transmission": 1.0,
+     "ior": 1.49,
+     "metallic": 0.0,
+     "volume_color": {
+      "linked_from": "MIX",
+      "A": [
+       0.99436,
+       0.9971,
+       0.99516,
+       1.0
+      ],
+      "B": [
+       0.91726,
+       0.89894,
+       0.0001,
+       1.0
+      ]
+     },
+     "volume_density": 62.00945
+    },
+    "cover-feet.acid": {
+     "base_color": [
+      0.9,
+      0.9,
+      0.88,
+      1.0
+     ],
+     "roughness": 0.25,
+     "transmission": 0.8,
      "ior": 1.5,
      "metallic": 0.0
     },
@@ -6401,7 +6936,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-axle.poison",
@@ -6409,7 +6945,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-base.poison",
@@ -6417,7 +6954,8 @@
      "hidden_render": false,
      "materials": [
       "arm.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-bias.poison",
@@ -6425,7 +6963,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-collar.poison",
@@ -6433,7 +6972,8 @@
      "hidden_render": false,
      "materials": [
       "arm.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-cw-ring.poison",
@@ -6441,7 +6981,8 @@
      "hidden_render": false,
      "materials": [
       "rubber.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-cw.poison",
@@ -6449,7 +6990,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-head.poison",
@@ -6457,7 +6999,8 @@
      "hidden_render": false,
      "materials": [
       "arm.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-lift-tab.poison",
@@ -6465,13 +7008,15 @@
      "hidden_render": false,
      "materials": [
       "arm.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-pivot.poison",
      "type": "EMPTY",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "arm-puck.poison",
@@ -6479,7 +7024,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-stub.poison",
@@ -6487,7 +7033,8 @@
      "hidden_render": false,
      "materials": [
       "arm.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-tube.poison",
@@ -6495,7 +7042,8 @@
      "hidden_render": false,
      "materials": [
       "arm.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-yoke.poison",
@@ -6503,13 +7051,15 @@
      "hidden_render": false,
      "materials": [
       "arm.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm.poison",
      "type": "MESH",
      "hidden_render": true,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "ball.poison",
@@ -6517,7 +7067,8 @@
      "hidden_render": false,
      "materials": [
       "steel.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "base-L1-stack.poison",
@@ -6533,7 +7084,8 @@
       "base-6.001.poison",
       "base-7.001.poison",
       "base-8.001.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bearing-housing.poison",
@@ -6541,7 +7093,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bearing-nut.poison",
@@ -6549,7 +7102,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bearing-spring.poison",
@@ -6557,7 +7111,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bearing-washer.poison",
@@ -6565,7 +7120,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "belt.poison",
@@ -6573,7 +7129,8 @@
      "hidden_render": false,
      "materials": [
       "rubber.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bushes.poison",
@@ -6581,7 +7138,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-body.poison",
@@ -6589,7 +7147,8 @@
      "hidden_render": false,
      "materials": [
       "cart.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-cantilever.poison",
@@ -6597,7 +7156,8 @@
      "hidden_render": false,
      "materials": [
       "alu.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-diamond.poison",
@@ -6605,13 +7165,15 @@
      "hidden_render": false,
      "materials": [
       "diamond.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-frame.poison",
      "type": "EMPTY",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "cart-mark-2m.poison",
@@ -6619,7 +7181,8 @@
      "hidden_render": false,
      "materials": [
       "print-gold.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-mark.poison",
@@ -6627,7 +7190,8 @@
      "hidden_render": false,
      "materials": [
       "print-white.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-pin.001.poison",
@@ -6635,7 +7199,8 @@
      "hidden_render": false,
      "materials": [
       "gold-pin.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-pin.002.poison",
@@ -6643,7 +7208,8 @@
      "hidden_render": false,
      "materials": [
       "gold-pin.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-pin.003.poison",
@@ -6651,7 +7217,8 @@
      "hidden_render": false,
      "materials": [
       "gold-pin.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-pin.poison",
@@ -6659,7 +7226,8 @@
      "hidden_render": false,
      "materials": [
       "gold-pin.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-screw.001.poison",
@@ -6667,7 +7235,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-screw.poison",
@@ -6675,7 +7244,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-stylus.poison",
@@ -6683,13 +7253,69 @@
      "hidden_render": false,
      "materials": [
       "cart-accent.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cartridge.poison",
      "type": "MESH",
      "hidden_render": true,
-     "materials": []
+     "materials": [],
+     "cover": false
+    },
+    {
+     "object": "cover-back.poison",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.poison"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-feet.poison",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-feet.poison"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-front.poison",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.poison"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-left.poison",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.poison"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-right.poison",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.poison"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-top.poison",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.poison"
+     ],
+     "cover": true
     },
     {
      "object": "cue-bar.poison",
@@ -6697,7 +7323,8 @@
      "hidden_render": false,
      "materials": [
       "arm.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cue-knob.poison",
@@ -6705,7 +7332,8 @@
      "hidden_render": false,
      "materials": [
       "arm.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cue-lever.poison",
@@ -6713,7 +7341,8 @@
      "hidden_render": false,
      "materials": [
       "arm.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cue-post.poison",
@@ -6721,7 +7350,8 @@
      "hidden_render": false,
      "materials": [
       "arm.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "feet.poison",
@@ -6729,7 +7359,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "foot-pads.poison",
@@ -6737,7 +7368,8 @@
      "hidden_render": false,
      "materials": [
       "rubber.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "foot-studs.poison",
@@ -6745,7 +7377,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hinge-blocks.poison",
@@ -6761,7 +7394,8 @@
       "lid-6.poison",
       "lid-7.poison",
       "lid-8.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-screw.001.poison",
@@ -6769,7 +7403,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-screw.poison",
@@ -6777,7 +7412,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-socket.001.poison",
@@ -6785,7 +7421,8 @@
      "hidden_render": false,
      "materials": [
       "socket-dark.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-socket.poison",
@@ -6793,7 +7430,8 @@
      "hidden_render": false,
      "materials": [
       "socket-dark.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-washer.001.poison",
@@ -6801,7 +7439,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-washer.poison",
@@ -6809,13 +7448,15 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "mantle-strata-v3.poison",
      "type": "EMPTY",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "mark.poison",
@@ -6823,7 +7464,8 @@
      "hidden_render": false,
      "materials": [
       "etch-tone.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "motor-plate.poison",
@@ -6831,7 +7473,8 @@
      "hidden_render": false,
      "materials": [
       "alu-black.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "motor-screws.poison",
@@ -6839,7 +7482,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "motor.poison",
@@ -6847,7 +7491,8 @@
      "hidden_render": false,
      "materials": [
       "alu-black.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "phono-pads.poison",
@@ -6855,7 +7500,8 @@
      "hidden_render": false,
      "materials": [
       "felt.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "phono-stage.poison",
@@ -6863,7 +7509,8 @@
      "hidden_render": false,
      "materials": [
       "alu-black.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "platter-disc.poison",
@@ -6879,7 +7526,8 @@
       "platter-6.poison",
       "platter-7.poison",
       "platter-8.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "platter-hub.poison",
@@ -6887,7 +7535,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "platter-inserts.poison",
@@ -6895,7 +7544,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "platter-screws.poison",
@@ -6903,7 +7553,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "plinth-L1-stack.poison",
@@ -6920,7 +7571,8 @@
       "plinth-7.poison",
       "plinth-8.poison",
       "plinth-chamfer-polished.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "post-1.poison",
@@ -6928,7 +7580,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.001.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "post-2.poison",
@@ -6936,7 +7589,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.001.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "post-3.poison",
@@ -6944,7 +7598,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.001.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "post-4.poison",
@@ -6952,7 +7607,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.001.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "puck-screw-0.poison",
@@ -6960,7 +7616,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "puck-screw-1.poison",
@@ -6968,7 +7625,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "puck-screw-2.poison",
@@ -6976,7 +7634,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "pulley.poison",
@@ -6984,13 +7643,15 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "rb330.poison",
      "type": "EMPTY",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "rear-hardware.poison",
@@ -6998,13 +7659,15 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "rear-plate.poison",
      "type": "MESH",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "record.poison",
@@ -7012,7 +7675,8 @@
      "hidden_render": false,
      "materials": [
       "vinyl.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "spindle.poison",
@@ -7020,7 +7684,8 @@
      "hidden_render": false,
      "materials": [
       "steel.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "tag-B.poison",
@@ -7028,7 +7693,8 @@
      "hidden_render": false,
      "materials": [
       "tag-B.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "tag-G.poison",
@@ -7036,7 +7702,8 @@
      "hidden_render": false,
      "materials": [
       "tag-G.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "tag-R.poison",
@@ -7044,7 +7711,8 @@
      "hidden_render": false,
      "materials": [
       "tag-R.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "tag-W.poison",
@@ -7052,7 +7720,8 @@
      "hidden_render": false,
      "materials": [
       "tag-W.poison"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "thrust-plate.poison",
@@ -7060,7 +7729,8 @@
      "hidden_render": false,
      "materials": [
       "steel.poison"
-     ]
+     ],
+     "cover": false
     }
    ],
    "materials": {
@@ -7448,6 +8118,49 @@
      ],
      "roughness": 0.4,
      "transmission": 0.0,
+     "ior": 1.5,
+     "metallic": 0.0
+    },
+    "cover-tint.001.poison": {
+     "base_color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "roughness": {
+      "linked_from": "MATH",
+      "Value": 0.004
+     },
+     "transmission": 1.0,
+     "ior": 1.49,
+     "metallic": 0.0,
+     "volume_color": {
+      "linked_from": "MIX",
+      "A": [
+       0.99829,
+       0.99912,
+       0.99853,
+       1.0
+      ],
+      "B": [
+       0.0001,
+       0.8216,
+       0.20964,
+       1.0
+      ]
+     },
+     "volume_density": 204.33603
+    },
+    "cover-feet.poison": {
+     "base_color": [
+      0.9,
+      0.9,
+      0.88,
+      1.0
+     ],
+     "roughness": 0.25,
+     "transmission": 0.8,
      "ior": 1.5,
      "metallic": 0.0
     },
@@ -8516,7 +9229,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-axle.ice",
@@ -8524,7 +9238,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-base.ice",
@@ -8532,7 +9247,8 @@
      "hidden_render": false,
      "materials": [
       "arm.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-bias.ice",
@@ -8540,7 +9256,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-collar.ice",
@@ -8548,7 +9265,8 @@
      "hidden_render": false,
      "materials": [
       "arm.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-cw-ring.ice",
@@ -8556,7 +9274,8 @@
      "hidden_render": false,
      "materials": [
       "rubber.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-cw.ice",
@@ -8564,7 +9283,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-head.ice",
@@ -8572,7 +9292,8 @@
      "hidden_render": false,
      "materials": [
       "arm.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-lift-tab.ice",
@@ -8580,13 +9301,15 @@
      "hidden_render": false,
      "materials": [
       "arm.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-pivot.ice",
      "type": "EMPTY",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "arm-puck.ice",
@@ -8594,7 +9317,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-stub.ice",
@@ -8602,7 +9326,8 @@
      "hidden_render": false,
      "materials": [
       "arm.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-tube.ice",
@@ -8610,7 +9335,8 @@
      "hidden_render": false,
      "materials": [
       "arm.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-yoke.ice",
@@ -8618,13 +9344,15 @@
      "hidden_render": false,
      "materials": [
       "arm.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm.ice",
      "type": "MESH",
      "hidden_render": true,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "ball.ice",
@@ -8632,7 +9360,8 @@
      "hidden_render": false,
      "materials": [
       "steel.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "base-L1-stack.ice",
@@ -8648,7 +9377,8 @@
       "base-6.001.ice",
       "base-7.001.ice",
       "base-8.001.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bearing-housing.ice",
@@ -8656,7 +9386,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bearing-nut.ice",
@@ -8664,7 +9395,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bearing-spring.ice",
@@ -8672,7 +9404,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bearing-washer.ice",
@@ -8680,7 +9413,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "belt.ice",
@@ -8688,7 +9422,8 @@
      "hidden_render": false,
      "materials": [
       "rubber.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bushes.ice",
@@ -8696,7 +9431,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-body.ice",
@@ -8704,7 +9440,8 @@
      "hidden_render": false,
      "materials": [
       "cart.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-cantilever.ice",
@@ -8712,7 +9449,8 @@
      "hidden_render": false,
      "materials": [
       "alu.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-diamond.ice",
@@ -8720,13 +9458,15 @@
      "hidden_render": false,
      "materials": [
       "diamond.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-frame.ice",
      "type": "EMPTY",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "cart-mark-2m.ice",
@@ -8734,7 +9474,8 @@
      "hidden_render": false,
      "materials": [
       "print-gold.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-mark.ice",
@@ -8742,7 +9483,8 @@
      "hidden_render": false,
      "materials": [
       "print-white.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-pin.001.ice",
@@ -8750,7 +9492,8 @@
      "hidden_render": false,
      "materials": [
       "gold-pin.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-pin.002.ice",
@@ -8758,7 +9501,8 @@
      "hidden_render": false,
      "materials": [
       "gold-pin.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-pin.003.ice",
@@ -8766,7 +9510,8 @@
      "hidden_render": false,
      "materials": [
       "gold-pin.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-pin.ice",
@@ -8774,7 +9519,8 @@
      "hidden_render": false,
      "materials": [
       "gold-pin.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-screw.001.ice",
@@ -8782,7 +9528,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-screw.ice",
@@ -8790,7 +9537,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-stylus.ice",
@@ -8798,13 +9546,69 @@
      "hidden_render": false,
      "materials": [
       "cart-accent.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cartridge.ice",
      "type": "MESH",
      "hidden_render": true,
-     "materials": []
+     "materials": [],
+     "cover": false
+    },
+    {
+     "object": "cover-back.ice",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.ice"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-feet.ice",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-feet.ice"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-front.ice",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.ice"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-left.ice",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.ice"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-right.ice",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.ice"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-top.ice",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.ice"
+     ],
+     "cover": true
     },
     {
      "object": "cue-bar.ice",
@@ -8812,7 +9616,8 @@
      "hidden_render": false,
      "materials": [
       "arm.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cue-knob.ice",
@@ -8820,7 +9625,8 @@
      "hidden_render": false,
      "materials": [
       "arm.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cue-lever.ice",
@@ -8828,7 +9634,8 @@
      "hidden_render": false,
      "materials": [
       "arm.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cue-post.ice",
@@ -8836,7 +9643,8 @@
      "hidden_render": false,
      "materials": [
       "arm.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "feet.ice",
@@ -8844,7 +9652,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "foot-pads.ice",
@@ -8852,7 +9661,8 @@
      "hidden_render": false,
      "materials": [
       "rubber.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "foot-studs.ice",
@@ -8860,7 +9670,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hinge-blocks.ice",
@@ -8876,7 +9687,8 @@
       "lid-6.ice",
       "lid-7.ice",
       "lid-8.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-screw.001.ice",
@@ -8884,7 +9696,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-screw.ice",
@@ -8892,7 +9705,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-socket.001.ice",
@@ -8900,7 +9714,8 @@
      "hidden_render": false,
      "materials": [
       "socket-dark.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-socket.ice",
@@ -8908,7 +9723,8 @@
      "hidden_render": false,
      "materials": [
       "socket-dark.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-washer.001.ice",
@@ -8916,7 +9732,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-washer.ice",
@@ -8924,13 +9741,15 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "mantle-strata-v3.ice",
      "type": "EMPTY",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "mark.ice",
@@ -8938,7 +9757,8 @@
      "hidden_render": false,
      "materials": [
       "etch-tone.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "motor-plate.ice",
@@ -8946,7 +9766,8 @@
      "hidden_render": false,
      "materials": [
       "alu-black.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "motor-screws.ice",
@@ -8954,7 +9775,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "motor.ice",
@@ -8962,7 +9784,8 @@
      "hidden_render": false,
      "materials": [
       "alu-black.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "phono-pads.ice",
@@ -8970,7 +9793,8 @@
      "hidden_render": false,
      "materials": [
       "felt.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "phono-stage.ice",
@@ -8978,7 +9802,8 @@
      "hidden_render": false,
      "materials": [
       "alu-black.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "platter-disc.ice",
@@ -8994,7 +9819,8 @@
       "platter-6.ice",
       "platter-7.ice",
       "platter-8.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "platter-hub.ice",
@@ -9002,7 +9828,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "platter-inserts.ice",
@@ -9010,7 +9837,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "platter-screws.ice",
@@ -9018,7 +9846,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "plinth-L1-stack.ice",
@@ -9035,7 +9864,8 @@
       "plinth-7.ice",
       "plinth-8.ice",
       "plinth-chamfer-polished.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "post-1.ice",
@@ -9043,7 +9873,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.001.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "post-2.ice",
@@ -9051,7 +9882,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.001.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "post-3.ice",
@@ -9059,7 +9891,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.001.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "post-4.ice",
@@ -9067,7 +9900,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.001.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "puck-screw-0.ice",
@@ -9075,7 +9909,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "puck-screw-1.ice",
@@ -9083,7 +9918,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "puck-screw-2.ice",
@@ -9091,7 +9927,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "pulley.ice",
@@ -9099,13 +9936,15 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "rb330.ice",
      "type": "EMPTY",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "rear-hardware.ice",
@@ -9113,13 +9952,15 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "rear-plate.ice",
      "type": "MESH",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "record.ice",
@@ -9127,7 +9968,8 @@
      "hidden_render": false,
      "materials": [
       "vinyl.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "spindle.ice",
@@ -9135,7 +9977,8 @@
      "hidden_render": false,
      "materials": [
       "steel.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "tag-B.ice",
@@ -9143,7 +9986,8 @@
      "hidden_render": false,
      "materials": [
       "tag-B.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "tag-G.ice",
@@ -9151,7 +9995,8 @@
      "hidden_render": false,
      "materials": [
       "tag-G.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "tag-R.ice",
@@ -9159,7 +10004,8 @@
      "hidden_render": false,
      "materials": [
       "tag-R.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "tag-W.ice",
@@ -9167,7 +10013,8 @@
      "hidden_render": false,
      "materials": [
       "tag-W.ice"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "thrust-plate.ice",
@@ -9175,7 +10022,8 @@
      "hidden_render": false,
      "materials": [
       "steel.ice"
-     ]
+     ],
+     "cover": false
     }
    ],
    "materials": {
@@ -9563,6 +10411,49 @@
      ],
      "roughness": 0.4,
      "transmission": 0.0,
+     "ior": 1.5,
+     "metallic": 0.0
+    },
+    "cover-tint.001.ice": {
+     "base_color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "roughness": {
+      "linked_from": "MATH",
+      "Value": 0.004
+     },
+     "transmission": 1.0,
+     "ior": 1.49,
+     "metallic": 0.0,
+     "volume_color": {
+      "linked_from": "MIX",
+      "A": [
+       0.99298,
+       0.99639,
+       0.99398,
+       1.0
+      ],
+      "B": [
+       0.0001,
+       0.59541,
+       0.94189,
+       1.0
+      ]
+     },
+     "volume_density": 49.87452
+    },
+    "cover-feet.ice": {
+     "base_color": [
+      0.9,
+      0.9,
+      0.88,
+      1.0
+     ],
+     "roughness": 0.25,
+     "transmission": 0.8,
      "ior": 1.5,
      "metallic": 0.0
     },
@@ -10631,7 +11522,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-axle.haze",
@@ -10639,7 +11531,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-base.haze",
@@ -10647,7 +11540,8 @@
      "hidden_render": false,
      "materials": [
       "arm.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-bias.haze",
@@ -10655,7 +11549,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-collar.haze",
@@ -10663,7 +11558,8 @@
      "hidden_render": false,
      "materials": [
       "arm.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-cw-ring.haze",
@@ -10671,7 +11567,8 @@
      "hidden_render": false,
      "materials": [
       "rubber.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-cw.haze",
@@ -10679,7 +11576,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-head.haze",
@@ -10687,7 +11585,8 @@
      "hidden_render": false,
      "materials": [
       "arm.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-lift-tab.haze",
@@ -10695,13 +11594,15 @@
      "hidden_render": false,
      "materials": [
       "arm.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-pivot.haze",
      "type": "EMPTY",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "arm-puck.haze",
@@ -10709,7 +11610,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-stub.haze",
@@ -10717,7 +11619,8 @@
      "hidden_render": false,
      "materials": [
       "arm.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-tube.haze",
@@ -10725,7 +11628,8 @@
      "hidden_render": false,
      "materials": [
       "arm.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-yoke.haze",
@@ -10733,13 +11637,15 @@
      "hidden_render": false,
      "materials": [
       "arm.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm.haze",
      "type": "MESH",
      "hidden_render": true,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "ball.haze",
@@ -10747,7 +11653,8 @@
      "hidden_render": false,
      "materials": [
       "steel.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "base-L1-stack.haze",
@@ -10763,7 +11670,8 @@
       "base-6.001.haze",
       "base-7.001.haze",
       "base-8.001.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bearing-housing.haze",
@@ -10771,7 +11679,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bearing-nut.haze",
@@ -10779,7 +11688,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bearing-spring.haze",
@@ -10787,7 +11697,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bearing-washer.haze",
@@ -10795,7 +11706,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "belt.haze",
@@ -10803,7 +11715,8 @@
      "hidden_render": false,
      "materials": [
       "rubber.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bushes.haze",
@@ -10811,7 +11724,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-body.haze",
@@ -10819,7 +11733,8 @@
      "hidden_render": false,
      "materials": [
       "cart.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-cantilever.haze",
@@ -10827,7 +11742,8 @@
      "hidden_render": false,
      "materials": [
       "alu.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-diamond.haze",
@@ -10835,13 +11751,15 @@
      "hidden_render": false,
      "materials": [
       "diamond.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-frame.haze",
      "type": "EMPTY",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "cart-mark-2m.haze",
@@ -10849,7 +11767,8 @@
      "hidden_render": false,
      "materials": [
       "print-gold.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-mark.haze",
@@ -10857,7 +11776,8 @@
      "hidden_render": false,
      "materials": [
       "print-white.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-pin.001.haze",
@@ -10865,7 +11785,8 @@
      "hidden_render": false,
      "materials": [
       "gold-pin.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-pin.002.haze",
@@ -10873,7 +11794,8 @@
      "hidden_render": false,
      "materials": [
       "gold-pin.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-pin.003.haze",
@@ -10881,7 +11803,8 @@
      "hidden_render": false,
      "materials": [
       "gold-pin.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-pin.haze",
@@ -10889,7 +11812,8 @@
      "hidden_render": false,
      "materials": [
       "gold-pin.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-screw.001.haze",
@@ -10897,7 +11821,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-screw.haze",
@@ -10905,7 +11830,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-stylus.haze",
@@ -10913,13 +11839,69 @@
      "hidden_render": false,
      "materials": [
       "cart-accent.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cartridge.haze",
      "type": "MESH",
      "hidden_render": true,
-     "materials": []
+     "materials": [],
+     "cover": false
+    },
+    {
+     "object": "cover-back.haze",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.haze"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-feet.haze",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-feet.haze"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-front.haze",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.haze"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-left.haze",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.haze"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-right.haze",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.haze"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-top.haze",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.haze"
+     ],
+     "cover": true
     },
     {
      "object": "cue-bar.haze",
@@ -10927,7 +11909,8 @@
      "hidden_render": false,
      "materials": [
       "arm.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cue-knob.haze",
@@ -10935,7 +11918,8 @@
      "hidden_render": false,
      "materials": [
       "arm.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cue-lever.haze",
@@ -10943,7 +11927,8 @@
      "hidden_render": false,
      "materials": [
       "arm.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cue-post.haze",
@@ -10951,7 +11936,8 @@
      "hidden_render": false,
      "materials": [
       "arm.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "feet.haze",
@@ -10959,7 +11945,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "foot-pads.haze",
@@ -10967,7 +11954,8 @@
      "hidden_render": false,
      "materials": [
       "rubber.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "foot-studs.haze",
@@ -10975,7 +11963,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hinge-blocks.haze",
@@ -10991,7 +11980,8 @@
       "lid-6.haze",
       "lid-7.haze",
       "lid-8.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-screw.001.haze",
@@ -10999,7 +11989,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-screw.haze",
@@ -11007,7 +11998,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-socket.001.haze",
@@ -11015,7 +12007,8 @@
      "hidden_render": false,
      "materials": [
       "socket-dark.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-socket.haze",
@@ -11023,7 +12016,8 @@
      "hidden_render": false,
      "materials": [
       "socket-dark.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-washer.001.haze",
@@ -11031,7 +12025,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-washer.haze",
@@ -11039,13 +12034,15 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "mantle-strata-v3.haze",
      "type": "EMPTY",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "mark.haze",
@@ -11053,7 +12050,8 @@
      "hidden_render": false,
      "materials": [
       "etch-tone.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "motor-plate.haze",
@@ -11061,7 +12059,8 @@
      "hidden_render": false,
      "materials": [
       "alu-black.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "motor-screws.haze",
@@ -11069,7 +12068,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "motor.haze",
@@ -11077,7 +12077,8 @@
      "hidden_render": false,
      "materials": [
       "alu-black.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "phono-pads.haze",
@@ -11085,7 +12086,8 @@
      "hidden_render": false,
      "materials": [
       "felt.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "phono-stage.haze",
@@ -11093,7 +12095,8 @@
      "hidden_render": false,
      "materials": [
       "alu-black.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "platter-disc.haze",
@@ -11109,7 +12112,8 @@
       "platter-6.haze",
       "platter-7.haze",
       "platter-8.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "platter-hub.haze",
@@ -11117,7 +12121,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "platter-inserts.haze",
@@ -11125,7 +12130,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "platter-screws.haze",
@@ -11133,7 +12139,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "plinth-L1-stack.haze",
@@ -11150,7 +12157,8 @@
       "plinth-7.haze",
       "plinth-8.haze",
       "plinth-chamfer-polished.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "post-1.haze",
@@ -11158,7 +12166,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.001.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "post-2.haze",
@@ -11166,7 +12175,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.001.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "post-3.haze",
@@ -11174,7 +12184,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.001.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "post-4.haze",
@@ -11182,7 +12193,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.001.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "puck-screw-0.haze",
@@ -11190,7 +12202,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "puck-screw-1.haze",
@@ -11198,7 +12211,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "puck-screw-2.haze",
@@ -11206,7 +12220,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "pulley.haze",
@@ -11214,13 +12229,15 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "rb330.haze",
      "type": "EMPTY",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "rear-hardware.haze",
@@ -11228,13 +12245,15 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "rear-plate.haze",
      "type": "MESH",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "record.haze",
@@ -11242,7 +12261,8 @@
      "hidden_render": false,
      "materials": [
       "vinyl.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "spindle.haze",
@@ -11250,7 +12270,8 @@
      "hidden_render": false,
      "materials": [
       "steel.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "tag-B.haze",
@@ -11258,7 +12279,8 @@
      "hidden_render": false,
      "materials": [
       "tag-B.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "tag-G.haze",
@@ -11266,7 +12288,8 @@
      "hidden_render": false,
      "materials": [
       "tag-G.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "tag-R.haze",
@@ -11274,7 +12297,8 @@
      "hidden_render": false,
      "materials": [
       "tag-R.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "tag-W.haze",
@@ -11282,7 +12306,8 @@
      "hidden_render": false,
      "materials": [
       "tag-W.haze"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "thrust-plate.haze",
@@ -11290,7 +12315,8 @@
      "hidden_render": false,
      "materials": [
       "steel.haze"
-     ]
+     ],
+     "cover": false
     }
    ],
    "materials": {
@@ -11678,6 +12704,49 @@
      ],
      "roughness": 0.4,
      "transmission": 0.0,
+     "ior": 1.5,
+     "metallic": 0.0
+    },
+    "cover-tint.001.haze": {
+     "base_color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "roughness": {
+      "linked_from": "MATH",
+      "Value": 0.004
+     },
+     "transmission": 1.0,
+     "ior": 1.49,
+     "metallic": 0.0,
+     "volume_color": {
+      "linked_from": "MIX",
+      "A": [
+       0.99588,
+       0.99788,
+       0.99647,
+       1.0
+      ],
+      "B": [
+       0.50136,
+       0.0001,
+       0.88051,
+       1.0
+      ]
+     },
+     "volume_density": 84.97319
+    },
+    "cover-feet.haze": {
+     "base_color": [
+      0.9,
+      0.9,
+      0.88,
+      1.0
+     ],
+     "roughness": 0.25,
+     "transmission": 0.8,
      "ior": 1.5,
      "metallic": 0.0
     },
@@ -12746,7 +13815,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-axle.fog",
@@ -12754,7 +13824,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-base.fog",
@@ -12762,7 +13833,8 @@
      "hidden_render": false,
      "materials": [
       "arm.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-bias.fog",
@@ -12770,7 +13842,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-collar.fog",
@@ -12778,7 +13851,8 @@
      "hidden_render": false,
      "materials": [
       "arm.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-cw-ring.fog",
@@ -12786,7 +13860,8 @@
      "hidden_render": false,
      "materials": [
       "rubber.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-cw.fog",
@@ -12794,7 +13869,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-head.fog",
@@ -12802,7 +13878,8 @@
      "hidden_render": false,
      "materials": [
       "arm.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-lift-tab.fog",
@@ -12810,13 +13887,15 @@
      "hidden_render": false,
      "materials": [
       "arm.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-pivot.fog",
      "type": "EMPTY",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "arm-puck.fog",
@@ -12824,7 +13903,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-stub.fog",
@@ -12832,7 +13912,8 @@
      "hidden_render": false,
      "materials": [
       "arm.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-tube.fog",
@@ -12840,7 +13921,8 @@
      "hidden_render": false,
      "materials": [
       "arm.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-yoke.fog",
@@ -12848,13 +13930,15 @@
      "hidden_render": false,
      "materials": [
       "arm.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm.fog",
      "type": "MESH",
      "hidden_render": true,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "ball.fog",
@@ -12862,7 +13946,8 @@
      "hidden_render": false,
      "materials": [
       "steel.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "base-L1-stack.fog",
@@ -12878,7 +13963,8 @@
       "base-6.001.fog",
       "base-7.001.fog",
       "base-8.001.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bearing-housing.fog",
@@ -12886,7 +13972,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bearing-nut.fog",
@@ -12894,7 +13981,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bearing-spring.fog",
@@ -12902,7 +13990,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bearing-washer.fog",
@@ -12910,7 +13999,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "belt.fog",
@@ -12918,7 +14008,8 @@
      "hidden_render": false,
      "materials": [
       "rubber.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bushes.fog",
@@ -12926,7 +14017,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-body.fog",
@@ -12934,7 +14026,8 @@
      "hidden_render": false,
      "materials": [
       "cart.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-cantilever.fog",
@@ -12942,7 +14035,8 @@
      "hidden_render": false,
      "materials": [
       "alu.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-diamond.fog",
@@ -12950,13 +14044,15 @@
      "hidden_render": false,
      "materials": [
       "diamond.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-frame.fog",
      "type": "EMPTY",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "cart-mark-2m.fog",
@@ -12964,7 +14060,8 @@
      "hidden_render": false,
      "materials": [
       "print-gold.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-mark.fog",
@@ -12972,7 +14069,8 @@
      "hidden_render": false,
      "materials": [
       "print-white.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-pin.001.fog",
@@ -12980,7 +14078,8 @@
      "hidden_render": false,
      "materials": [
       "gold-pin.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-pin.002.fog",
@@ -12988,7 +14087,8 @@
      "hidden_render": false,
      "materials": [
       "gold-pin.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-pin.003.fog",
@@ -12996,7 +14096,8 @@
      "hidden_render": false,
      "materials": [
       "gold-pin.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-pin.fog",
@@ -13004,7 +14105,8 @@
      "hidden_render": false,
      "materials": [
       "gold-pin.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-screw.001.fog",
@@ -13012,7 +14114,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-screw.fog",
@@ -13020,7 +14123,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-stylus.fog",
@@ -13028,13 +14132,69 @@
      "hidden_render": false,
      "materials": [
       "cart-accent.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cartridge.fog",
      "type": "MESH",
      "hidden_render": true,
-     "materials": []
+     "materials": [],
+     "cover": false
+    },
+    {
+     "object": "cover-back.fog",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.fog"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-feet.fog",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-feet.fog"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-front.fog",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.fog"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-left.fog",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.fog"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-right.fog",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.fog"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-top.fog",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.fog"
+     ],
+     "cover": true
     },
     {
      "object": "cue-bar.fog",
@@ -13042,7 +14202,8 @@
      "hidden_render": false,
      "materials": [
       "arm.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cue-knob.fog",
@@ -13050,7 +14211,8 @@
      "hidden_render": false,
      "materials": [
       "arm.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cue-lever.fog",
@@ -13058,7 +14220,8 @@
      "hidden_render": false,
      "materials": [
       "arm.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cue-post.fog",
@@ -13066,7 +14229,8 @@
      "hidden_render": false,
      "materials": [
       "arm.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "feet.fog",
@@ -13074,7 +14238,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "foot-pads.fog",
@@ -13082,7 +14247,8 @@
      "hidden_render": false,
      "materials": [
       "rubber.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "foot-studs.fog",
@@ -13090,7 +14256,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hinge-blocks.fog",
@@ -13106,7 +14273,8 @@
       "lid-6.fog",
       "lid-7.fog",
       "lid-8.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-screw.001.fog",
@@ -13114,7 +14282,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-screw.fog",
@@ -13122,7 +14291,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-socket.001.fog",
@@ -13130,7 +14300,8 @@
      "hidden_render": false,
      "materials": [
       "socket-dark.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-socket.fog",
@@ -13138,7 +14309,8 @@
      "hidden_render": false,
      "materials": [
       "socket-dark.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-washer.001.fog",
@@ -13146,7 +14318,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-washer.fog",
@@ -13154,13 +14327,15 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "mantle-strata-v3.fog",
      "type": "EMPTY",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "mark.fog",
@@ -13168,7 +14343,8 @@
      "hidden_render": false,
      "materials": [
       "etch-tone.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "motor-plate.fog",
@@ -13176,7 +14352,8 @@
      "hidden_render": false,
      "materials": [
       "alu-black.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "motor-screws.fog",
@@ -13184,7 +14361,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "motor.fog",
@@ -13192,7 +14370,8 @@
      "hidden_render": false,
      "materials": [
       "alu-black.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "phono-pads.fog",
@@ -13200,7 +14379,8 @@
      "hidden_render": false,
      "materials": [
       "felt.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "phono-stage.fog",
@@ -13208,7 +14388,8 @@
      "hidden_render": false,
      "materials": [
       "alu-black.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "platter-disc.fog",
@@ -13224,7 +14405,8 @@
       "platter-6.fog",
       "platter-7.fog",
       "platter-8.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "platter-hub.fog",
@@ -13232,7 +14414,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "platter-inserts.fog",
@@ -13240,7 +14423,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "platter-screws.fog",
@@ -13248,7 +14432,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "plinth-L1-stack.fog",
@@ -13265,7 +14450,8 @@
       "plinth-7.fog",
       "plinth-8.fog",
       "plinth-chamfer-polished.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "post-1.fog",
@@ -13273,7 +14459,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.001.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "post-2.fog",
@@ -13281,7 +14468,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.001.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "post-3.fog",
@@ -13289,7 +14477,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.001.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "post-4.fog",
@@ -13297,7 +14486,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.001.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "puck-screw-0.fog",
@@ -13305,7 +14495,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "puck-screw-1.fog",
@@ -13313,7 +14504,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "puck-screw-2.fog",
@@ -13321,7 +14513,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "pulley.fog",
@@ -13329,13 +14522,15 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "rb330.fog",
      "type": "EMPTY",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "rear-hardware.fog",
@@ -13343,13 +14538,15 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "rear-plate.fog",
      "type": "MESH",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "record.fog",
@@ -13357,7 +14554,8 @@
      "hidden_render": false,
      "materials": [
       "vinyl.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "spindle.fog",
@@ -13365,7 +14563,8 @@
      "hidden_render": false,
      "materials": [
       "steel.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "tag-B.fog",
@@ -13373,7 +14572,8 @@
      "hidden_render": false,
      "materials": [
       "tag-B.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "tag-G.fog",
@@ -13381,7 +14581,8 @@
      "hidden_render": false,
      "materials": [
       "tag-G.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "tag-R.fog",
@@ -13389,7 +14590,8 @@
      "hidden_render": false,
      "materials": [
       "tag-R.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "tag-W.fog",
@@ -13397,7 +14599,8 @@
      "hidden_render": false,
      "materials": [
       "tag-W.fog"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "thrust-plate.fog",
@@ -13405,7 +14608,8 @@
      "hidden_render": false,
      "materials": [
       "steel.fog"
-     ]
+     ],
+     "cover": false
     }
    ],
    "materials": {
@@ -13793,6 +14997,49 @@
      ],
      "roughness": 0.4,
      "transmission": 0.0,
+     "ior": 1.5,
+     "metallic": 0.0
+    },
+    "cover-tint.001.fog": {
+     "base_color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "roughness": {
+      "linked_from": "MATH",
+      "Value": 0.004
+     },
+     "transmission": 1.0,
+     "ior": 1.49,
+     "metallic": 0.0,
+     "volume_color": {
+      "linked_from": "MIX",
+      "A": [
+       0.67492,
+       0.83282,
+       0.72136,
+       1.0
+      ],
+      "B": [
+       0.0001,
+       0.0001,
+       0.0001,
+       1.0
+      ]
+     },
+     "volume_density": 1.07665
+    },
+    "cover-feet.fog": {
+     "base_color": [
+      0.9,
+      0.9,
+      0.88,
+      1.0
+     ],
+     "roughness": 0.25,
+     "transmission": 0.8,
      "ior": 1.5,
      "metallic": 0.0
     },
@@ -14861,7 +16108,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-axle.smoke",
@@ -14869,7 +16117,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-base.smoke",
@@ -14877,7 +16126,8 @@
      "hidden_render": false,
      "materials": [
       "arm.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-bias.smoke",
@@ -14885,7 +16135,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-collar.smoke",
@@ -14893,7 +16144,8 @@
      "hidden_render": false,
      "materials": [
       "arm.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-cw-ring.smoke",
@@ -14901,7 +16153,8 @@
      "hidden_render": false,
      "materials": [
       "rubber.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-cw.smoke",
@@ -14909,7 +16162,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-head.smoke",
@@ -14917,7 +16171,8 @@
      "hidden_render": false,
      "materials": [
       "arm.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-lift-tab.smoke",
@@ -14925,13 +16180,15 @@
      "hidden_render": false,
      "materials": [
       "arm.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-pivot.smoke",
      "type": "EMPTY",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "arm-puck.smoke",
@@ -14939,7 +16196,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-stub.smoke",
@@ -14947,7 +16205,8 @@
      "hidden_render": false,
      "materials": [
       "arm.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-tube.smoke",
@@ -14955,7 +16214,8 @@
      "hidden_render": false,
      "materials": [
       "arm.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm-yoke.smoke",
@@ -14963,13 +16223,15 @@
      "hidden_render": false,
      "materials": [
       "arm.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "arm.smoke",
      "type": "MESH",
      "hidden_render": true,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "ball.smoke",
@@ -14977,7 +16239,8 @@
      "hidden_render": false,
      "materials": [
       "steel.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "base-L1-stack.smoke",
@@ -14993,7 +16256,8 @@
       "base-6.001.smoke",
       "base-7.001.smoke",
       "base-8.001.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bearing-housing.smoke",
@@ -15001,7 +16265,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bearing-nut.smoke",
@@ -15009,7 +16274,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bearing-spring.smoke",
@@ -15017,7 +16283,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bearing-washer.smoke",
@@ -15025,7 +16292,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "belt.smoke",
@@ -15033,7 +16301,8 @@
      "hidden_render": false,
      "materials": [
       "rubber.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "bushes.smoke",
@@ -15041,7 +16310,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-body.smoke",
@@ -15049,7 +16319,8 @@
      "hidden_render": false,
      "materials": [
       "cart.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-cantilever.smoke",
@@ -15057,7 +16328,8 @@
      "hidden_render": false,
      "materials": [
       "alu.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-diamond.smoke",
@@ -15065,13 +16337,15 @@
      "hidden_render": false,
      "materials": [
       "diamond.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-frame.smoke",
      "type": "EMPTY",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "cart-mark-2m.smoke",
@@ -15079,7 +16353,8 @@
      "hidden_render": false,
      "materials": [
       "print-gold.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-mark.smoke",
@@ -15087,7 +16362,8 @@
      "hidden_render": false,
      "materials": [
       "print-white.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-pin.001.smoke",
@@ -15095,7 +16371,8 @@
      "hidden_render": false,
      "materials": [
       "gold-pin.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-pin.002.smoke",
@@ -15103,7 +16380,8 @@
      "hidden_render": false,
      "materials": [
       "gold-pin.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-pin.003.smoke",
@@ -15111,7 +16389,8 @@
      "hidden_render": false,
      "materials": [
       "gold-pin.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-pin.smoke",
@@ -15119,7 +16398,8 @@
      "hidden_render": false,
      "materials": [
       "gold-pin.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-screw.001.smoke",
@@ -15127,7 +16407,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-screw.smoke",
@@ -15135,7 +16416,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cart-stylus.smoke",
@@ -15143,13 +16425,69 @@
      "hidden_render": false,
      "materials": [
       "cart-accent.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cartridge.smoke",
      "type": "MESH",
      "hidden_render": true,
-     "materials": []
+     "materials": [],
+     "cover": false
+    },
+    {
+     "object": "cover-back.smoke",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.smoke"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-feet.smoke",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-feet.smoke"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-front.smoke",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.smoke"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-left.smoke",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.smoke"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-right.smoke",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.smoke"
+     ],
+     "cover": true
+    },
+    {
+     "object": "cover-top.smoke",
+     "type": "MESH",
+     "hidden_render": false,
+     "materials": [
+      "cover-tint.001.smoke"
+     ],
+     "cover": true
     },
     {
      "object": "cue-bar.smoke",
@@ -15157,7 +16495,8 @@
      "hidden_render": false,
      "materials": [
       "arm.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cue-knob.smoke",
@@ -15165,7 +16504,8 @@
      "hidden_render": false,
      "materials": [
       "arm.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cue-lever.smoke",
@@ -15173,7 +16513,8 @@
      "hidden_render": false,
      "materials": [
       "arm.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "cue-post.smoke",
@@ -15181,7 +16522,8 @@
      "hidden_render": false,
      "materials": [
       "arm.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "feet.smoke",
@@ -15189,7 +16531,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "foot-pads.smoke",
@@ -15197,7 +16540,8 @@
      "hidden_render": false,
      "materials": [
       "rubber.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "foot-studs.smoke",
@@ -15205,7 +16549,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hinge-blocks.smoke",
@@ -15221,7 +16566,8 @@
       "lid-6.smoke",
       "lid-7.smoke",
       "lid-8.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-screw.001.smoke",
@@ -15229,7 +16575,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-screw.smoke",
@@ -15237,7 +16584,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-socket.001.smoke",
@@ -15245,7 +16593,8 @@
      "hidden_render": false,
      "materials": [
       "socket-dark.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-socket.smoke",
@@ -15253,7 +16602,8 @@
      "hidden_render": false,
      "materials": [
       "socket-dark.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-washer.001.smoke",
@@ -15261,7 +16611,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "hs-washer.smoke",
@@ -15269,13 +16620,15 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "mantle-strata-v3.smoke",
      "type": "EMPTY",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "mark.smoke",
@@ -15283,7 +16636,8 @@
      "hidden_render": false,
      "materials": [
       "etch-tone.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "motor-plate.smoke",
@@ -15291,7 +16645,8 @@
      "hidden_render": false,
      "materials": [
       "alu-black.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "motor-screws.smoke",
@@ -15299,7 +16654,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "motor.smoke",
@@ -15307,7 +16663,8 @@
      "hidden_render": false,
      "materials": [
       "alu-black.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "phono-pads.smoke",
@@ -15315,7 +16672,8 @@
      "hidden_render": false,
      "materials": [
       "felt.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "phono-stage.smoke",
@@ -15323,7 +16681,8 @@
      "hidden_render": false,
      "materials": [
       "alu-black.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "platter-disc.smoke",
@@ -15339,7 +16698,8 @@
       "platter-6.smoke",
       "platter-7.smoke",
       "platter-8.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "platter-hub.smoke",
@@ -15347,7 +16707,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "platter-inserts.smoke",
@@ -15355,7 +16716,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "platter-screws.smoke",
@@ -15363,7 +16725,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "plinth-L1-stack.smoke",
@@ -15380,7 +16743,8 @@
       "plinth-7.smoke",
       "plinth-8.smoke",
       "plinth-chamfer-polished.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "post-1.smoke",
@@ -15388,7 +16752,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.001.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "post-2.smoke",
@@ -15396,7 +16761,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.001.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "post-3.smoke",
@@ -15404,7 +16770,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.001.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "post-4.smoke",
@@ -15412,7 +16779,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.001.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "puck-screw-0.smoke",
@@ -15420,7 +16788,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "puck-screw-1.smoke",
@@ -15428,7 +16797,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "puck-screw-2.smoke",
@@ -15436,7 +16806,8 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "pulley.smoke",
@@ -15444,13 +16815,15 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "rb330.smoke",
      "type": "EMPTY",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "rear-hardware.smoke",
@@ -15458,13 +16831,15 @@
      "hidden_render": false,
      "materials": [
       "post-satin-black.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "rear-plate.smoke",
      "type": "MESH",
      "hidden_render": false,
-     "materials": []
+     "materials": [],
+     "cover": false
     },
     {
      "object": "record.smoke",
@@ -15472,7 +16847,8 @@
      "hidden_render": false,
      "materials": [
       "vinyl.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "spindle.smoke",
@@ -15480,7 +16856,8 @@
      "hidden_render": false,
      "materials": [
       "steel.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "tag-B.smoke",
@@ -15488,7 +16865,8 @@
      "hidden_render": false,
      "materials": [
       "tag-B.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "tag-G.smoke",
@@ -15496,7 +16874,8 @@
      "hidden_render": false,
      "materials": [
       "tag-G.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "tag-R.smoke",
@@ -15504,7 +16883,8 @@
      "hidden_render": false,
      "materials": [
       "tag-R.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "tag-W.smoke",
@@ -15512,7 +16892,8 @@
      "hidden_render": false,
      "materials": [
       "tag-W.smoke"
-     ]
+     ],
+     "cover": false
     },
     {
      "object": "thrust-plate.smoke",
@@ -15520,7 +16901,8 @@
      "hidden_render": false,
      "materials": [
       "steel.smoke"
-     ]
+     ],
+     "cover": false
     }
    ],
    "materials": {
@@ -15908,6 +17290,49 @@
      ],
      "roughness": 0.4,
      "transmission": 0.0,
+     "ior": 1.5,
+     "metallic": 0.0
+    },
+    "cover-tint.001.smoke": {
+     "base_color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "roughness": {
+      "linked_from": "MATH",
+      "Value": 0.004
+     },
+     "transmission": 1.0,
+     "ior": 1.49,
+     "metallic": 0.0,
+     "volume_color": {
+      "linked_from": "MIX",
+      "A": [
+       0.99012,
+       0.99492,
+       0.99153,
+       1.0
+      ],
+      "B": [
+       0.0001,
+       0.0001,
+       0.0001,
+       1.0
+      ]
+     },
+     "volume_density": 35.42017
+    },
+    "cover-feet.smoke": {
+     "base_color": [
+      0.9,
+      0.9,
+      0.88,
+      1.0
+     ],
+     "roughness": 0.25,
+     "transmission": 0.8,
      "ior": 1.5,
      "metallic": 0.0
     },
