@@ -2203,6 +2203,26 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
       the other seven (same shot); the site shows each page's own tint.
    Briefed 05:55-05:56: the site lane (Smoke off now; the three later changes announced), the biomes lane, the lamps
    lane (session_01VCPNDaozJgar2mVTSvis3A), the speaker lane, the Mantle lane (session_01BAaPTkQRnfd37XJHVyiVJC).
+   05:57-05:58 UTC: the lamps lane: Fog and Smoke differ only in the LED colour (2700 K against 4000 K) and the shell
+   (Fog's own dye at 1x; Smoke the speakers' gray dye at 0.3x); lumens, diffuser, exposure and the camera's 4000 K
+   white balance are the same. The site lane: the amp picture stands in one place only, 'The amplifier' view in the
+   Tropos gallery of all eight /tropos/<color> pages (one shared file, tagged 'Shown in Dust' outside Dust); the LED
+   colours are stated in one string, in the 'Light' fact of Hemisphere and of Core.
+   05:59 UTC, biomes lane 14eb8ec97f: Smoke f's layout proof `layout/smoke-f-layout-f2.jpg` (320x400 clay): the speaker
+   centred, 39 % of the height; the camera low, 6.3 m out, lens 85; the crater 4 m straight behind with its rim on
+   both sides; fire on both sides; the column filling the top half, leaning left; the trail from the upper right
+   corner into the column's base; blocks and clods round the crater and in front. Seen by the coordinator beside the
+   owner's 3 Nov picture at 05:59: OK, the scene is started, with three additions: the dark speaker must stand
+   against the fire's glow and the lit lower smoke, not against black; the cool dusk sky reads the front (front
+   0.22 or more, cone below the front); the trail 5 to 6 % of the width at the ground, its lower third glowing.
+   The lane's estimate: about 2.5 to 3 hours to the proper proxy, which goes to the owner.
+   06:02 UTC, site lane: SMOKE'S HABITAT IS OFF: r49-site-rc 776db52065, dpl_HgGZcNkWGMj3wapLuHhRn6Job9X5,
+   `https://earf-l0y0jfjm5-nathanielvink-4975s-projects.vercel.app`, READY (preview only): seven places, four over
+   three; identical to the Haze build but for the removed Smoke files; the eight-place code and words kept. The
+   amp picture per tint is prepared on r47 (32aad89c25).
+   06:04 UTC, coordinator's check (home at 1440: seven places; /colors/smoke loads without a habitat): PASSED. One
+   share link made on this deployment (it expires 16 Nov 05:02 UTC) and sent to the owner in chat only. THIS IS NOW
+   THE PREVIEW THE OWNER HOLDS (776db52065).
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
