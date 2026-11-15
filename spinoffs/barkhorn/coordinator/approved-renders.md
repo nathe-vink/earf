@@ -2287,6 +2287,15 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    10:27 UTC, coordinator's check (the eight on the sheet; Smoke measured): the plate and its print read in every
    tint; the tint colours the cabinet round the plate, not the plate. PASSED, FINAL. To the site lane with the word
    PUSH: each Tropos color page shows its own tint in 'The amplifier'; the 'Shown in Dust' tag goes.
+   10:28 UTC, the eight-tint sheet shown to the owner in chat.
+   10:35 UTC, site lane: pushed: r49-site-rc 263dd4e0ae, dpl_1iQZMwqEGSiYFU1NwYHegPpAthFB,
+   `https://earf-m58evjkeo-nathanielvink-4975s-projects.vercel.app`, READY (preview only): every /tropos/<color>
+   page's 'The amplifier' view and thumbnail use that tint's own plate; 'Shown in Dust' and the shared plate file
+   are gone; nothing else changed (Smoke's habitat still off).
+   10:36 UTC, coordinator's check (/tropos/ember and /tropos/smoke at 1440 with 'The amplifier' opened): each shows
+   its own tint, the caption 'The built-in amplifier, from behind.', no 'Shown in Dust'. PASSED. One share link made
+   on this deployment (it expires 16 Nov 09:35 UTC) and sent to the owner in chat only. THIS IS NOW THE PREVIEW THE
+   OWNER HOLDS (263dd4e0ae). The owner's point on the plate shot is closed.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
