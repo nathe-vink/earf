@@ -2345,6 +2345,19 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
      asset to agree; the cover-on picture for the site on the day rig and camera (Ember first for the coordinator's
      check, the other tints on his go); one spec line for the site.
    Lanes working: biomes, lamps, Mantle. The site lane gets one message when pictures exist.
+   18:14 UTC, Mantle lane 6da73fadba (r48-mantle-design): `renders/2026-11-10/barkhorn/mantle-r48/
+   mantle-final-day-ember-cover.png` (1800x1200; the day rig, exposure, camera and samples of the Ember final; the
+   same render the owner chose from; emitters 0, hidden 0, scene audit 0). CHECKED at full size: passes, with one
+   question open: three bright red dashes with gaps on the cover's far top edge (x 470-640, y 165-195) that can
+   read as three small lights; the lane says what they are before it renders the other covers. THE LANE FOUND THAT
+   THE EIGHT MANTLE FINALS OF 11 NOV STILL SHOW THE HINGE BLOCKS of the dropped hinged lid, faintly, at the back
+   right through the deck (coordinator's measure on Ember: 858 px over 3 levels at x 1485-1537, y 433-727, max 70).
+   Ember is re-rendered without them (same name, same commit); GO given for the seven other finals without the
+   blocks, then the seven covers (about 1 h 40 min by the lane). The asset drops the stale hinge-blocks object.
+   CAD default tint, BOM $3,918. SPEC LINE ACCEPTED: "Lift-off dust cover in the deck's own tint: 3 mm cast
+   acrylic, 448 x 358 x 100 mm, about 1.1 kg. It rests on four small clear bumpers and lifts straight off; no
+   hinges." (1.13 kg computed.) Asked: the Mantle lane which other pictures of its own in use show the blocks; the
+   speaker lane whether the bar and hero frames (older asset) show them, as a pixel count, no final re-rendered.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
