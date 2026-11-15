@@ -2309,6 +2309,19 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    the trail has an elbow (a near-vertical dark streak, then a pink diagonal) and becomes one straight streak from
    the corner to the column's base; more thrown clods round the speaker's feet and more of the fire's light on the
    ground, nearer his picture.
+   11:35 UTC, biomes lane e49ea7328f: THE ELBOW WAS NOT THE TRAIL (one straight 3D tube) but a thin dense sheet of
+   smoke in the plume simulation's cache, projecting where the trail meets the column. A trimmed copy of the cache
+   (`renders/2026-10-22/barkhorn/plume/meteor_l_trim.npz`; the strip faded, 0.3 % of the smoke removed, the original
+   untouched). Base: stones 40 to 60, clods 25 to 40 up to a fist or two, three more ember clumps, pit glow 50.
+   11:50: the coordinator's check-in found nothing stalled.
+   12:12 UTC, biomes lane cc0f03f7a9: `smoke-f-try-v1.jpg` and `-finish.jpg` (480x600, 16 samples, 36 min): the trail
+   one straight streak from the upper right corner into the column's base, pink at its top; more stones and clods
+   on both sides of the base; finished mean 0.293, edge sky 0.560, 1.3 % above 0.8, bottom fifth 0.247; raw front
+   0.246, cone 0.193, 0 clipped.
+   12:13 UTC, coordinator: v1 seen; it holds (own measure: mean 0.288, edge sky 0.527, bottom fifth 0.250, 1.4 %).
+   THE SMOKE FINAL WILL USE v1's SETTINGS (the shot file at e49ea7328f) ON THE OWNER'S YES ONLY. No lane is working;
+   three answers are open with the owner: the Smoke redo (shown 11:27), the Smoke lamp at 2700 K (06:13), Mantle's
+   cover clear or tint (06:18).
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
