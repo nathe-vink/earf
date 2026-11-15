@@ -206,6 +206,7 @@ def cover(kind=None):
         # 3 mm, refractive caustics on; slow to converge, for a long-sampled check cell only
         m = pl.material_slots[0].material.copy(); m.name = 'cover-glass-ref'
         bpy.context.scene.cycles.caustics_refractive = True
+        bpy.context.scene.cycles.blur_glossy = 0.0   # Filter Glossy off: it roughens refraction after a diffuse bounce and loses energy (the lamps lane, 2026-11-15)
         bpy.context.scene.cycles.sample_clamp_indirect = 0.0   # unclamped: light through refracting glass is indirect, and the rig's clamp (8) cut it
         f = bpy.data.materials.new('cover-feet-ref')
         for o in obs:
