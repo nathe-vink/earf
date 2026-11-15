@@ -2522,6 +2522,24 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    little deeper when off) or match all (a dye recipe per lamp per tint, the lit colors drift apart, Poison cannot
    match, every lamp picture and the bar and hero frames redone). The lamps lane holds; the Core fix (plain glass,
    no thin_shadow) goes in with his answer and core-row-day and core-base-options-day are re-rendered once.
+   22:05 UTC, lamps lane: dropping thin_shadow on Core's ball changes the LIT finals by about 0.5 %, under their
+   noise (the lit rows run the studio 24 times weaker; the LED's light reaches paper and base through the opal
+   core, never double counted). So the fix touches only core-row-day.png and core-base-options-day.png.
+   22:28 UTC, Mantle lane (twelve cover frames rendered and audited, NOT committed): held to the reference, the
+   flat-sheet cover reads brighter than plain refraction: Fog label bare 96.4 | flat sheet 89.7 | glass reference
+   77.4; Ember 96.4 | 43.7 | 29.6 (linear x255, 1000-2000 samples, no denoiser). ITS FIRST FINDING: THE STUDIO RIG
+   CLAMPS INDIRECT LIGHT (sample_clamp_indirect 8); light reaching a matte surface through refracting glass is
+   indirect, so a clamped plain-refraction reference is far too dark (Fog 26.7, Ember 10.3); the numbers above are
+   unclamped and still under the no-reflection bound (Fog 0.85 x 96.4 = 82; Ember about 31), so the reference is
+   under-converged (fireflies on the deck top) and the flat sheet sits at the bound plus a modest reflection.
+   Outside the cover the floor and base edge equal the finals within 0.1 level.
+   22:30 UTC, coordinator: (c) THE BOUND IS THE TEST, closed with a measured reflection: a black spot under the
+   cover gives the top panel's reflection; label expected = bound + reflection (rough figures from the first
+   frames: 7 to 10, so Fog about 90, Ember 39 to 44). If the labels land within about 3, the flat sheet stands and
+   the twelve frames are committed; no MNEE, no 20k reference. THE CLAMP PASSED TO THE LAMPS LANE: its deciding
+   reference (plain refraction, 1024 samples) may be clamped too; it is to say whether clamping is on in its off
+   and lit rigs, re-run Hemisphere Fog, Core Fog and Core Smoke 0.3x unclamped, bound Core with a measured surface
+   reflection, and check one lit cell. THE OWNER'S LAMP DECISION IS HELD ON THOSE NUMBERS; he is told.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
