@@ -66,3 +66,8 @@ camera, samples and size; audits 0 emitters, gt 0 px, no hidden mesh.
 mantle-final-day-ember.png re-rendered without the hinge blocks: the eight finals of 2026-11-11 were made from the CAD
 while it still had them (they show at the back right, through the deck: 642 px change in Ember). The other seven
 finals still carry them until they are re-rendered.
+mantle-final-day-ember-cover.png re-rendered (2026-11-15): the three red dashes on the cover's far top edge were the
+studio's strip lamp seen through the sheet's edge (strip off: 626 red px -> 0), broken by black seams where the model's
+separate panels touched face to face (Cycles renders coplanar contact black; dropping the left wall made the line
+whole). The CAD now gives the render the cemented box as one solid (cover-top-shell); the edge shows no line. Audits:
+0 emitters, gt 0 px, no hidden mesh.
