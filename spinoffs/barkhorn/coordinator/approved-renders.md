@@ -2456,6 +2456,20 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    is (a white opal layer, or a clear layer with a frosted face); if a real opal, a test with it modeled as one
    (off: Fog, Smoke 0.3x, 0.6x, Haze, Poison; lit: Fog, Smoke 0.3x, 0.6x) to see whether the off colors then match
    at one strength on both lamps. tints-off.png shown to the owner in chat. No proposal to him before the answer.
+   20:23 UTC, lamps lane (scratch test, nothing pushed): HEMISPHERE'S DIFFUSER IS A REAL WHITE OPAL, Perspex GS 041,
+   3 mm cast, volume-diffusing (T 54 %, R 39 %), the innermost of the shade's three layers (crystal.py part
+   "skin", bom.csv line 4); Core's core is the same sheet formed into a closed ball. The render's one scattering
+   face is a stand-in at the datasheet's totals, and it hides nothing: Hemisphere Fog reads 101 as rendered, 100
+   with the scattering face outside, 110 with the opal alone. The opal is translucent: Core's closed ball is a lit
+   white cavity, Hemisphere's is an open bowl over a dark hollow. SO THE BUILD DECIDES; no dye and no material
+   model makes Hemisphere off look like Core. What would: a denser, whiter opal grade (or a thicker or second
+   layer) in Hemisphere; today 73 % of its light goes down, 27 % through the shade.
+   20:24 UTC, coordinator: a change to Hemisphere's opal would touch every Hemisphere picture, the bar and hero
+   frames included (lit Ember, Dust, Acid pendants), so THE DYE ROUTE COMES FIRST and the opal stays an option the
+   owner is told about with numbers. Order to the lamps lane, scratch cells only: (A) dye matches for Smoke
+   (Hemisphere 1.2x with Core 0.5-0.6x), Haze and Poison, off colors within about 6 levels, one sheet now |
+   matched, off and lit; (B) the opal test with a denser real Perspex grade (off Fog, Haze; lit Fog, Ember; glow
+   and light split); (C) one line each on Ember, Dust, Ice.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
