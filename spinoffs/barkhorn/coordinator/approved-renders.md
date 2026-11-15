@@ -2470,6 +2470,20 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    (Hemisphere 1.2x with Core 0.5-0.6x), Haze and Poison, off colors within about 6 levels, one sheet now |
    matched, off and lit; (B) the opal test with a denser real Perspex grade (off Fog, Haze; lit Fog, Ember; glow
    and light split); (C) one line each on Ember, Dust, Ice.
+   20:47 UTC, lamps lane (stopped partway, scratch only): A RENDER FAULT IN HEMISPHERE'S OFF LOOK. Room light
+   reaching the opal through the shade's four refracting faces (1 mm air gaps) is mostly missed: Hemisphere Fog
+   reads 101 with GS 041 and 100 with Opal 069 (T 9 %) behind the glass, although the bare opals read 110 and 125;
+   with shadow rays passed through the glass at its real transmission (thin_shadow) 128 and 144, which overshoots
+   (behind glass the opal cannot read brighter than bare). So today's off renders show Hemisphere clearer and
+   darker than it is, every Hemisphere off number is uncertain by about 10 to 25 levels (the pairs 2.0x/0.6x and
+   1.2x/0.6x included; Smoke 1.2x with Core 0.5x read 19,20,20 against 22,23,24), and the opal grade cannot be
+   judged off. THE LIT FRAMES ARE NOT AFFECTED (the LEDs light the opal directly). Affected in use:
+   hemisphere-ember-off, -cap, the choice sheet's off row, off-match and tints-off (the last shown to the owner).
+   20:48 UTC, coordinator: GO for a correct reference (the stack as the CAD and parts list have it; MNEE or
+   another method that passes both bounds for Fog and Smoke 0.3x: not darker than today, not brighter than the
+   bare opal times the layers' transmission), Core checked the same way, then A, B and the eight-tint off sheet
+   redone on that footing; the list of finals in use showing a Hemisphere off; three lines on the method for the
+   Mantle lane, whose cover has the same class of fault. The owner told that the off picture he holds is in doubt.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
