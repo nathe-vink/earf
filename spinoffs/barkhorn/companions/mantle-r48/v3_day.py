@@ -188,23 +188,39 @@ def chamfer_c_finish():
 
 def cover(kind=None):
     """The lift-off cover (the owner, 2026-11-15). Without `kind` it is removed, so every earlier frame rebuilds as it was.
-    'tint': 3 mm walls in the deck's own material (its volume tint per metre holds for the thin wall); 'clear':
-    water-clear cast acrylic (TT about 92 %). Its feet: clear polyurethane."""
+    'tint': the deck's own dye per mm at 3 mm; 'strong:<k>': k times that loading; 'clear': water-clear. Its feet:
+    clear polyurethane (drawn as a pale satin, they are 2.2 mm dots)."""
     obs = [o for o in bpy.data.objects if o.name.startswith('cover-')]
     if kind is None:                                   # removed, not hidden: nothing hidden stays in a frame
         for o in obs:
             bpy.data.objects.remove(o, do_unlink=True)
         return
-    pl = bpy.data.objects['plinth-L1-stack']
-    if kind == 'tint':
-        m = pl.material_slots[0].material.copy(); m.name = 'cover-tint'
-    else:
-        m = bpy.data.materials.new('cover-clear'); m.use_nodes = True; b = m.node_tree.nodes['Principled BSDF']
-        b.inputs['Base Color'].default_value = (1, 1, 1, 1); b.inputs['Transmission Weight'].default_value = 1.0
-        b.inputs['Roughness'].default_value = 0.004; b.inputs['IOR'].default_value = 1.49
+    import math
+    # A flat 3 mm sheet as a THIN SHEET (2026-11-15): refractive caustics are off in this rig, so a glass shader lets no
+    # direct light through to what is under the cover. A flat sheet barely bends light (its offset is about 1 mm), so
+    # each face is drawn as Fresnel reflection (IOR 1.49, glossy 0.004) over a straight-through Transparent BSDF tinted
+    # with half the wall's absorption (sqrt(T): the ray crosses two faces a wall). T comes from the deck's own volume
+    # absorption (sigma = density x (1 - color), Cycles' Volume Absorption) over 3 mm, times `k` for a stronger loading.
+    pl = bpy.data.objects['plinth-L1-stack']; k = 1.0
+    if kind.startswith('strong:'):
+        k = float(kind.split(':')[1])
+    dm = pl.material_slots[0].material; va = [n for n in dm.node_tree.nodes if n.type == 'VOLUME_ABSORPTION'][0]
+    dens = va.inputs['Density'].default_value; cs = va.inputs['Color']
+    col = (cs.links[0].from_node.inputs['B'].default_value if cs.is_linked else cs.default_value)[:3]
+    if kind == 'clear':
+        k = 0.0                                         # water-clear: the Fresnel loss only
+    T = [math.exp(-k * dens * (1 - c) * 0.003) for c in col]
+    m = bpy.data.materials.new('cover-' + kind.replace(':', '-')); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+    out = nt.nodes.new('ShaderNodeOutputMaterial'); mix = nt.nodes.new('ShaderNodeMixShader')
+    fr = nt.nodes.new('ShaderNodeFresnel'); fr.inputs['IOR'].default_value = 1.49
+    gl = nt.nodes.new('ShaderNodeBsdfGlossy'); gl.inputs['Roughness'].default_value = 0.004
+    tr = nt.nodes.new('ShaderNodeBsdfTransparent'); tr.inputs['Color'].default_value = tuple(math.sqrt(t) for t in T) + (1,)
+    nt.links.new(fr.outputs[0], mix.inputs[0]); nt.links.new(tr.outputs[0], mix.inputs[1]); nt.links.new(gl.outputs[0], mix.inputs[2])
+    nt.links.new(mix.outputs[0], out.inputs['Surface'])
+    Y = 0.2126 * T[0] + 0.7152 * T[1] + 0.0722 * T[2]
+    print(f'v3_day: cover sheet {kind}: one 3 mm wall passes RGB {T[0]:.3f} {T[1]:.3f} {T[2]:.3f} (luminance {Y:.3f}) before its two faces\' Fresnel', flush=True)
     f = bpy.data.materials.new('cover-feet'); f.use_nodes = True; fb = f.node_tree.nodes['Principled BSDF']
-    fb.inputs['Base Color'].default_value = (0.9, 0.9, 0.88, 1); fb.inputs['Transmission Weight'].default_value = 0.8
-    fb.inputs['Roughness'].default_value = 0.25; fb.inputs['IOR'].default_value = 1.5
+    fb.inputs['Base Color'].default_value = (0.9, 0.9, 0.88, 1); fb.inputs['Roughness'].default_value = 0.25
     for o in obs:
         o.data.materials.clear(); o.data.materials.append(f if o.name == 'cover-feet' else m)
     print(f'v3_day: the cover ON, {kind}: ' + ', '.join(o.name for o in obs), flush=True)
