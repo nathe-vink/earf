@@ -2484,6 +2484,25 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    bare opal times the layers' transmission), Core checked the same way, then A, B and the eight-tint off sheet
    redone on that footing; the list of finals in use showing a Hemisphere off; three lines on the method for the
    Mantle lane, whose cover has the same class of fault. The owner told that the off picture he holds is in doubt.
+   21:06 UTC, stall guard: nothing stalled (Smoke f bands b00, b01 pushed by 20:49; next check 22:38). Mantle lane
+   25eafd4670 (seen in its events): the cover's fault was refractive caustics off in the studio setup; each face
+   of the cover is now a flat 3 mm sheet (glossy reflection plus tinted straight-through transmission); label under
+   the cover Fog 0.10 to 0.79, Ember 0.05 to 0.36; twelve cover frames rendering since 20:24 (eight as designed,
+   four stronger: Dust 2.25x, Acid 2.45x, Ice 3.05x, Smoke 4.30x; Fog left as it is, a near-clear light gray).
+   The parts list names TruCast stock codes for Ember, Poison, Haze, Ice, Smoke; none for Dust, Acid, Fog.
+   21:13 UTC, lamps lane, CORRECTING ITS 20:47 MESSAGE: a converged reference (the same cell at 1024 samples, no
+   denoiser, plain refraction, means) decides it. HEMISPHERE'S OFF RENDERS WERE RIGHT (Fog 101 converged = 101
+   today; the lane's own "fixes" read 126 and 128 because they skip refraction and total internal reflection in
+   the layers). THE FAULT IS ON CORE: its ball lets shadow rays through the glass (thin_shadow) AND traces the
+   refraction, so room light on the opal is counted twice: Core Fog 91 converged against 107 today, Core Smoke
+   0.3x 34 against 45. CORE'S OFF AND DAYLIGHT RENDERS READ ABOUT 11 TO 16 LEVELS TOO BRIGHT: core-row-day.png
+   (a final in use) and Core's off cells in the choice sheet, off-match and tints-off. Hemisphere's daylight finals
+   stand. The layers are nested with real 1 mm air gaps (crystal.py GAP = 1.0; bom.csv line 9). To be measured:
+   whether the double count also inflates Core's LIT numbers (35.2 lm, the pool on its paper). Running: Core's off
+   cells by plain refraction, then the dye matches, the opal answer and tints-off on that footing.
+   21:15 UTC, coordinator: the lamps lane's three-line method (long plain-refraction reference; shadow tricks must
+   replace refraction, not add to it; the two-way-transmission bound) passed to the Mantle lane, which is to hold
+   its flat-sheet fix to it on Fog and Ember before reporting. The owner told of the correction.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
