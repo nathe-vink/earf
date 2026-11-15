@@ -331,3 +331,16 @@ frame's. Re-rendered with the wall heads at **0.16** (all five by one factor), e
   table 26.8 / 28.3 / 29.6. A table band of 29 needs about 0.25, where the bright spines pass the 125 limit.
 - The shades' lit glass and the Cores as in the passed frame (ember Core 8.1 / 0.94 / 0.73, dust 21.2 / 0.86 / 0.69).
   Clipped 0.72 %. Audit: hidden 0, equipment 0.
+
+## mantle-bar: the hinge block removed (2026-11-15)
+
+The frame was rendered with the Mantle asset at fa0c3a65, whose `hinge-blocks` object rendered (69 px in the object
+mask, one block's edge on the deck's back edge by the tonearm base). The owner chose the lift-off cover; the current
+asset (r48-mantle-design 9f8f640b08) has no hinge blocks. The fix, without a re-render: two 300 x 180 px region
+renders (x 740–1040, y 700–880) at the final's own settings (256 samples, the same rig), one with the old asset and
+one with the current one. A crop render does not reproduce the banded final exactly (old crop against the final: up to
+50 levels on edges), but the two crops differ only at the block (50 px above 8 levels, x 885–932, y 776–782; at most
+5 levels elsewhere). So their difference was added to the final under a soft mask grown from it (above 6 levels,
+grown 2 px, blurred 1.5 px). 430 px change, all inside x 881–934, y 773–797; 46 by more than 8 levels, at most 23;
+nothing outside. No seam at 400 or 800 %. The shot file still names fa0c3a65: the frame is that render with the block
+taken out.
