@@ -2366,6 +2366,25 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    softer at its edges, patchier toward the top, still one readable streak. GO GIVEN: THE SMOKE f FINAL AT 1200x1500
    WITH w1's SETTINGS (samples and estimate from the lane first). The before/after shown to the owner in chat
    without waiting for an answer; the master at 2400x3000 stays on hold.
+   18:49 UTC, biomes lane: a 1200x1500 that matches the other finals' noise at site size needs 192 samples, about
+   10 hours, the same as the 2400x3000 master at 48; 96 samples about 5 h; 64 samples about 3.3 h with a risk of
+   blotchy smoke. COORDINATOR'S RULE (18:50): a 64-sample strip of the final (rows 25-35 %) decides. Clean by the
+   lane's numbers and eye: the 1200x1500 at 64 starts at once. Blotchy or in doubt: no 1200 at all; the 2400x3000
+   master at 48 samples with w1's settings starts instead (the hold lifted for that case) and the site takes its
+   downscale. The owner told that the 3-hour estimate was too low.
+   19:01 UTC, lamps lane 8cc70e11b0 (r32-lamps-final): THE SMOKE/FOG CHOICE SHEET
+   `renders/2026-11-15/barkhorn/lamp-site/smoke-choice/smoke-choice-sheet.png` + notes.md (rows: Hemisphere lit, Core
+   lit, Hemisphere off, Core off; the rows' own rig, lumens, diffuser, exposure, 4000 K camera). Lit glass sRGB
+   (Hemisphere | Core): 1 Fog now 2700 K 237,223,208 | 212,192,172; 2 Smoke now 0.3x 209,210,210 | 170,171,171;
+   3 Smoke 0.5x 195,197,197 | 148,150,151; 4 Smoke 0.8x 169,172,174 | 112,117,118; 5 Fog at 3500 K 230,226,221 |
+   202,197,190; 6 Smoke 1.2x (Hemisphere only) 125,131,134. Dye through 3 mm: 0.3x 54 %, 0.5x 36 %, 0.8x 19 %,
+   1.2x 8 %. Light out against today's Smoke: Hemisphere 95 / 90 / 86 % (287 lm today; most of its light leaves
+   by the open mouth), Core 82 / 62 % (35.2 lm today). The lane's finding: a gray lit look and a smoky (not black)
+   off look do not meet at one strength; Core reads gray lit from 0.8x, Hemisphere only at about 1.2x, and from
+   0.8x the Hemisphere shade is black when off. Audits 0 / 0. CHECKED at full size (own samples agree within 3
+   levels). SHOWN TO THE OWNER in chat with three ways: (1) darker Smoke (Hemisphere 1.2x, Core 0.8x), the
+   coordinator's pick; (2) Fog at 3500 K, Smoke unchanged; (3) leave both. No finals and no file changes before
+   his pick. Asked the speaker lane which bar and hero frames show a Smoke lamp or a lit Fog lamp.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
