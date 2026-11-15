@@ -186,6 +186,30 @@ def chamfer_c_finish():
         print(f'v3_day: edge C: {name}: {k} chamfer faces polished', flush=True)
 
 
+def cover(kind=None):
+    """The lift-off cover (the owner, 2026-11-15). Without `kind` it is removed, so every earlier frame rebuilds as it was.
+    'tint': 3 mm walls in the deck's own material (its volume tint per metre holds for the thin wall); 'clear':
+    water-clear cast acrylic (TT about 92 %). Its feet: clear polyurethane."""
+    obs = [o for o in bpy.data.objects if o.name.startswith('cover-')]
+    if kind is None:                                   # removed, not hidden: nothing hidden stays in a frame
+        for o in obs:
+            bpy.data.objects.remove(o, do_unlink=True)
+        return
+    pl = bpy.data.objects['plinth-L1-stack']
+    if kind == 'tint':
+        m = pl.material_slots[0].material.copy(); m.name = 'cover-tint'
+    else:
+        m = bpy.data.materials.new('cover-clear'); m.use_nodes = True; b = m.node_tree.nodes['Principled BSDF']
+        b.inputs['Base Color'].default_value = (1, 1, 1, 1); b.inputs['Transmission Weight'].default_value = 1.0
+        b.inputs['Roughness'].default_value = 0.004; b.inputs['IOR'].default_value = 1.49
+    f = bpy.data.materials.new('cover-feet'); f.use_nodes = True; fb = f.node_tree.nodes['Principled BSDF']
+    fb.inputs['Base Color'].default_value = (0.9, 0.9, 0.88, 1); fb.inputs['Transmission Weight'].default_value = 0.8
+    fb.inputs['Roughness'].default_value = 0.25; fb.inputs['IOR'].default_value = 1.5
+    for o in obs:
+        o.data.materials.clear(); o.data.materials.append(f if o.name == 'cover-feet' else m)
+    print(f'v3_day: the cover ON, {kind}: ' + ', '.join(o.name for o in obs), flush=True)
+
+
 def strip_watts(w):
     # the light on: the LED strip (the drawing's light) emits w watts in all, both faces of its mesh (Cycles' mesh
     # emission is two-sided): radiance = w / (2 pi A)
@@ -729,6 +753,7 @@ def prepare():
     if '--chamfer' in mine: chamfer_edges()
     if '--chamfer-satin' in mine: chamfer_edges(edge_polish=False)
     if '--edge-c' in mine: chamfer_c_finish()
+    cover(mine[mine.index('--cover') + 1] if '--cover' in mine else None)
     if '--probe-hw' in mine: black_hardware(probe=mine[mine.index('--probe-hw') + 1])
     if '--lighttable' in mine:
         i = mine.index('--lighttable'); lighttable(float(mine[i + 1]), float(mine[i + 2]))

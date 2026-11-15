@@ -94,7 +94,8 @@ P = dict(
     motor_d=184.7, motor_x=64.0, motor_pocket=76.0,
     rpm_motor=300.0,                                  # PROPOSAL until benched: the US Neo at 60 Hz (STOCK-AND-AUDIT.md 3.1)
     edge_chamfer=1.0,                                 # edge option C (the owner, 2026-11-11): the outer edges of deck and base, 1 mm, polished
-    lid_t=3.0, lid_h=100.0, bumper=5.0,
+    lid_t=3.0, lid_h=100.0, bumper=2.2,               # the lift-off cover (2026-11-15): 3 mm walls, 100 tall, on 2.2 mm clear feet
+    cover_sheet='trucast-tint',                       # the cover's sheet: 'trucast-tint' (the deck's tint) or 'trucast-clear' (the owner's pick)
     housing_d=30.0, flange_d=50.0, flange_t=5.0,
     tint_ring=20.0,
 )
@@ -189,8 +190,7 @@ def parts(P):
     cuts += [cyl('z', (M[0] + 42 * math.cos(math.radians(a)), M[1] + 42 * math.sin(math.radians(a))), 4.6, top - 14, top - 5.5)
              for a in (30, 150, 270)]   # the plate's three M3 inserts
     cuts += [cyl('z', p, P['post_d'] + 0.3, z0 - 1, z0 + 2.0) for p in posts]          # the posts' 2 mm bonded seats
-    hx = [m + 80.0, m + D['W0'] - 80.0]
-    cuts += [cyl('y', (x + s_ * 10, (z0 + top) / 2), 6.0, m + D['D0'] - 14, m + D['D0'] + 1) for x in hx for s_ in (-1, 1)]
+    # (the hinge blocks' M4 inserts in the deck's back edge are gone with the hinges: the cover lifts off, 2026-11-15)
 
     def chamf(sol, ends):
         # edge option C (the owner, 2026-11-11): a 1 mm even chamfer on the outer edges, polished; the edge itself as signed
@@ -315,16 +315,17 @@ def parts(P):
     mk = Pos(m + 40.0, m + D['D0'] + 0.02, z0 + 3.0) * Rot(0, 0, 180) * Rot(90, 0, 0) * mk
     mark_part = Part('mark', mk, Bought('laser-etch-small'), finish='etch-tone')
 
-    # ---- the lid: 3 mm 2064, a top and four walls cemented, on Pro-Ject's hinges in blocks on the plinth's back ----
+    # ---- the cover (the owner, 2026-11-15: "Yes dust cover on mantle"): LIFT-OFF, no hinges and no hinge blocks. 3 mm
+    # cast sheet, a top and four walls cemented, 448 x 358 x 100 outside, standing 1 in from the deck's outline (on the
+    # flat inside the 1 mm chamfer) on four clear polyurethane feet 2.2 thick under the walls' corners ----
     t, lz0 = P['lid_t'], D['lid_z0']
     lz1 = lz0 + P['lid_h']
     x0, y0, x1, y1 = m + 1, m + 1, m + D['W0'] - 1, m + D['D0'] - 1
     lid = {'lid-top': box(x0, y0, lz1 - t, x1, y1, lz1), 'lid-front': box(x0, y0, lz0, x1, y0 + t, lz1 - t),
            'lid-back': box(x0, y1 - t, lz0, x1, y1, lz1 - t), 'lid-left': box(x0, y0 + t, lz0, x0 + t, y1 - t, lz1 - t),
            'lid-right': box(x1 - t, y0 + t, lz0, x1, y1 - t, lz1 - t)}
-    blocks = union(*(box(x - 20, m + D['D0'], z0 + 2.5, x + 20, m + D['D0'] + 9.5, top - 2.5) for x in hx))
-    hinges = union(*(union(box(x - 15, m + D['D0'], top - 2.5, x + 15, m + D['D0'] + 8, lz0), box(x - 15, y1, lz0, x + 15, m + D['D0'] + 8, lz0 + 22))
-                     for x in hx))
+    lid = {k.replace('lid-', 'cover-'): v for k, v in lid.items()}
+    cfeet = union(*(cyl('z', (x, y), 7.9, top, lz0) for x in (x0 + 6, x1 - 6) for y in (y0 + 6, y1 - 6)))
 
     out += [
         Part('platter', platter, Machined('cast-acrylic', 'lathe', stock=(310.0, 310.0, 22.0), setup_usd=80.0), finish='acrylic', group='platter',
@@ -368,12 +369,13 @@ def parts(P):
                     'upper row: line out L and R, the 4 mm earth post (the star), the 4PDT stage / bypass; lower row: 18 V for the phono stage (2.1 mm), the Neo\'s motor inlet (no light since 2026-11-10)',
                     'the rating engraved along its foot and filled white (strata_rear.py has the text and the wiring and earth drawing)']),
         Part('rear-hardware', rhw, Bought('strata-rear-hardware-nolight'), finish='black', group='rear'),
-        Part('hinge-blocks', blocks, Machined('cast-acrylic', 'cnc-mill', stock=(45.0, 15.0, 2 * 29.0)), finish='acrylic', group='lid',
-             notes=['two 40 x 9.5 blocks of the color, each with the hinge\'s slot 3.2 x 12 x 18 deep, on two M4 screws into inserts in the plinth\'s back edge (horizontal, in shear)']),
-        Part('hinges', hinges, Bought('cover-hinges'), finish='black', group='lid', render=False),
-        *[Part(k, s, Sheet('trucast-tint', 3.0), finish='acrylic-lid', group='lid', render=False,
-               notes=['3 mm stock sheet in the flavor\'s code (1/8 in), cemented as a box with ACRIFIX 2R 0190; 1.1 kg, within the Debut hinges\' rating; outer edges eased R0.5 and polished'] if k == 'lid-top' else [])
-          for k, s in lid.items()],
+        *[Part(k, s_, Sheet(P['cover_sheet'], 3.0), finish='acrylic-lid', group='cover',
+               notes=['the lift-off cover (2026-11-15): 3 mm cast sheet, ' + ('the deck\'s tint in the flavor\'s code' if P['cover_sheet'] == 'trucast-tint' else 'water-clear') + ', a top and four walls cemented with ACRIFIX 2R 0190 (the walls on the top\'s underside, the corners butt-jointed, the joints flame-polished), 448 x 358 x 100 outside, about 1.1 kg; outer edges eased R0.5 and polished',
+                      'inside 442 x 352 x 97: over the deck\'s top it clears the RB330\'s counterweight by about 33 above (66 high), 18 to its right and 23 behind (as posed in the frames), the spindle by 57, the record by 70; the walls stand 1 in from the deck\'s outline, on the flat inside its chamfer',
+                      'located by eye to the deck\'s edge and held by the feet\'s grip; off, it stands on its top on a soft cloth (no hanger is supplied)'] if k == 'cover-top' else [])
+          for k, s_ in lid.items()],
+        Part('cover-feet', cfeet, Bought('cover-bumpers'), finish='clear', group='cover',
+             notes=['four clear polyurethane bumpers 7.9 x 2.2 (3M Bumpon SJ5302 kind) under the walls\' corners: they leave a 2.2 shadow line, never mark the deck, and grip it']),
         mark_part,
         Part('inserts', None, Bought('core-inserts')),
         Part('wiring', None, Bought('core-wiring')),
@@ -416,8 +418,8 @@ NOTES = [
     'The pulley waits for the motor\'s speed measured on the US Neo (300 rpm expected at 60 Hz).',
     'The bearing, platter, arm puck and phono stage as Outcrop\'s (mantle_outcrop.py): a disc spring under the bearing\'s nut, '
     '1.0 ml of oil, a vented 440C spindle; the platter screwed from below into bonded inserts; a 4PDT bypass.',
-    'Before the first sample: with the arm in hand, check its counterweight clears the lid\'s back wall.',
-    'The lid: 3 mm 2064, 1.1 kg, on Pro-Ject\'s friction hinges.',
+    'Before the first sample: with the arm in hand, at rest and at the record\'s lead-in, check its counterweight clears the cover\'s back and right walls (18-23 by the CAD).',
+    'The cover (2026-11-15): lift-off, 3 mm cast sheet cemented as a box, 448 x 358 x 100, about 1.1 kg, on four clear feet 2.2 thick; no hinges, no hinge blocks.',
 ]
 
 # The engine's look (studio/products/mantle-strata-v3.json, written by the build; the room and other lanes drop it into

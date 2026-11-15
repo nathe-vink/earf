@@ -8,6 +8,7 @@ mantle-strata.manifest.json.
 import bpy, sys, os, json, hashlib
 argv = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else sys.argv[1:]
 F2, F1, TMP = argv[0], argv[1], argv[2]
+COVER = argv[3] if len(argv) > 3 else None   # a frame's .blend with the cover on (v3_day.py --cover): its cover-* objects
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.normpath(os.path.join(HERE, '..', '..', 'asset'))
 TINTS = ['ember', 'dust', 'acid', 'poison', 'ice', 'haze', 'fog', 'smoke']
@@ -26,7 +27,16 @@ for t in TINTS:
     bpy.context.scene.collection.children.link(col)
     for o in list(bpy.context.scene.collection.objects):
         col.objects.link(o); bpy.context.scene.collection.objects.unlink(o)
-    for o in col.objects:
+    if COVER:   # the lift-off cover (2026-11-15) as its own collection inside, off in renders by default: earlier pictures rebuild without it
+        with bpy.data.libraries.load(COVER, link=False) as (a_, b_):
+            b_.objects = [n for n in a_.objects if n.startswith('cover-')]
+        cc = bpy.data.collections.new(f'Mantle Strata {t.capitalize()} Cover'); col.children.link(cc); cc.hide_render = True
+        tint_m = bpy.data.objects['plinth-L1-stack'].material_slots[0].material.copy(); tint_m.name = 'cover-tint'
+        for o in b_.objects:
+            cc.objects.link(o); o.hide_render = False
+            if o.name != 'cover-feet':
+                o.data.materials.clear(); o.data.materials.append(tint_m)
+    for o in col.all_objects:
         o.name = f'{o.name}.{t}'
         if o.data is not None and hasattr(o.data, 'name'): o.data.name = f'{o.data.name}.{t}'
     for m in bpy.data.materials:
@@ -61,8 +71,9 @@ def val(sock):
 
 
 man = {'asset': 'mantle-strata.blend', 'source_commit': 'the black-hardware finals (2026-11-11), their frames and model in the same commit', 'units': 'm, z up, the shelf at z 0',
-       'build': 'no light of any kind; base Smoke 2074 solid; every visible piece of hardware satin black (post-satin-black, #18181A, roughness 0.5; the list in black_hardware), bright only the parts in bright_by_necessity; the deck underside satin; a record on the platter; the lid and hinges present but hidden from render, as in the frames',
+       'build': 'no light of any kind; base Smoke 2074 solid; every visible piece of hardware satin black (post-satin-black, #18181A, roughness 0.5; the list in black_hardware), bright only the parts in bright_by_necessity; the deck underside satin; a record on the platter; no lid or hinges: the lift-off cover is in its own collection, off by default',
        'edge': 'C: a 1 mm even chamfer on the outer edges of the deck and base (in the CAD), the chamfer polished; the deck\'s outer edge satin, the base\'s diamond-polished, as signed (the owner, 2026-11-11)',
+       'cover': 'lift-off, 3 mm cast sheet in the deck\'s tint (the CAD\'s default; the owner\'s pick of tint or clear pending), 448 x 358 x 100 on four clear 2.2 mm feet; its objects (cover-*) in the child collection "Mantle Strata <Tint> Cover", off in renders by default (collection hide_render): turn it on to show the cover',
        'black_hardware': ['arm-puck', 'puck-screw-0', 'puck-screw-1', 'puck-screw-2', 'feet', 'foot-studs', 'pulley',
                           'platter-screws', 'motor-screws', 'bearing-spring', 'rear-hardware', 'arm-axle', 'arm-axle.001',
                           'arm-bias', 'arm-cw', 'hs-screw', 'hs-screw.001', 'hs-washer', 'hs-washer.001', 'cart-screw',
@@ -77,9 +88,9 @@ man = {'asset': 'mantle-strata.blend', 'source_commit': 'the black-hardware fina
 for t, p, src in tmp:
     c = bpy.data.collections[f'Mantle Strata {t.capitalize()}']
     parts, mats = [], {}
-    for o in sorted(c.objects, key=lambda o: o.name):
+    for o in sorted(c.all_objects, key=lambda o: o.name):
         ms = [s.material.name for s in o.material_slots if s.material]
-        parts.append({'object': o.name, 'type': o.type, 'hidden_render': o.hide_render, 'materials': ms})
+        parts.append({'object': o.name, 'type': o.type, 'hidden_render': o.hide_render, 'materials': ms, 'cover': o.name.startswith('cover-')})
         for mn in ms:
             if mn in mats: continue
             m = bpy.data.materials[mn]; e = {}

@@ -3,21 +3,21 @@
  "model": "spinoffs/barkhorn/companions/mantle-r48/out-strata-v3/render/mantle-strata-v3.glb",
  "origin_mm": [
   235.0,
-  194.8,
+  190.1,
   0.0
  ],
  "materials": {
-  "acrylic": {
-   "preset": "clear_resin",
-   "color": "#FFFFFF",
-   "deep": "$deep",
-   "radius": 0.01,
-   "roughness": 0.05
-  },
   "acrylic-base": {
    "preset": "clear_resin",
    "color": "#FFFFFF",
    "deep": "$base",
+   "radius": 0.01,
+   "roughness": 0.05
+  },
+  "acrylic-lid": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "$deep",
    "radius": 0.01,
    "roughness": 0.05
   },
@@ -56,6 +56,13 @@
    "roughness": 0.35,
    "specular": 0.5
   },
+  "clear": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "#F4F6F5",
+   "radius": 0.05,
+   "roughness": 0.04
+  },
   "etch-tone": {
    "preset": "satin_paint",
    "color": "$accent",
@@ -74,12 +81,12 @@
  },
  "assign": [
   {
-   "match": "hinge-blocks",
-   "material": "acrylic"
-  },
-  {
    "match": "base-L1-stack",
    "material": "acrylic-base"
+  },
+  {
+   "match": "cover-top|cover-front|cover-back|cover-left|cover-right",
+   "material": "acrylic-lid"
   },
   {
    "match": "plinth-L1-stack",
@@ -104,6 +111,10 @@
   {
    "match": "cartridge",
    "material": "cartridge"
+  },
+  {
+   "match": "cover-feet",
+   "material": "clear"
   },
   {
    "match": "mark",

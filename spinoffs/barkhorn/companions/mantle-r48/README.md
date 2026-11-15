@@ -333,7 +333,7 @@ light notes above and in sections 12 and 13 are history. See "No light" at the e
 | edges | option C (the owner, 2026-11-11): a 1 mm even chamfer on the outer edges of the deck and base, polished; the deck's outer edge satin and the base's diamond-polished as signed; one router pass and a polish, $40 (an estimate), budget $3,996 |
 | hardware | every visible piece satin black (2026-11-11): the arm puck and pulley black anodized, the feet hot black oxide, black-oxide screws and studs, the cartridge's screws and washers black, the arm's counterweight and trim black (to confirm with Rega); bright by necessity the spindle's tip and the cartridge's cantilever, pins and diamond; $115 (an estimate), budget $3,957 |
 | bearing, hub | no brass in sight: the bearing's housing, nut and washer (2026-11-10), the platter's hub and its six inserts (2026-11-11) black nickel plated on the brass, satin, to match the posts; the rear plate, hidden under the deck, stays brass |
-| lid | 3 mm stock sheet in the flavor's tint, a five-sided box 448 x 358 x 100, on Pro-Ject's friction hinges |
+| cover | lift-off (the owner, 2026-11-15), no hinges or hinge blocks: 3 mm cast sheet cemented as a box, 448 x 358 x 100, about 1.1 kg, on four clear polyurethane feet 2.2 thick, 1 in from the deck's outline; clears the arm's counterweight by about 33 above and 18-23 to the side and behind; in the deck's tint or clear (the owner's pick); budget $3,918 with the tint cover (hinges and blocks out, feet in) |
 | size | 450 W x about 370 D (with the hinges) x 94 H to the deck's top, about 199 H with the lid closed |
 | weight | about 12.9 kg with the lid (11.8 without); the supplies are outside it |
 

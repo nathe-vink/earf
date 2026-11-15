@@ -33,11 +33,10 @@
 | phono-pads | buy | 1 | Four 10 mm felt pads under the phono stage |  | 2.00 |
 | rear-plate | cut | 1 | 2 mm Lead-free brass sheet (C26000 / C27450), brushed | 110 x 48 | 2.10 |
 | rear-hardware | buy | 1 | Neutrik / Switchcraft / C&K / CUI kind For Strata v3 with no light (2026-11-10): two black-bodied insulated panel RCA jacks (gold contacts) (1/4 in hole); a black 4 mm earth binding post; a 4PDT signal toggle with gold contacts (C&K 7411 kind); an insulated 2.1 mm DC panel jack (18 V, the S2); the Neo's motor inlet as Rega's kit supplies it (connector UNCONFIRMED); two M3 x 10 black-oxide button screws; shielded leads inside |  | 62.00 |
-| hinge-blocks | cnc-mill | 1 | Cast acrylic tube, tinted through | 45 x 15 x 58 | 46.57 |
-| hinges | buy | 1 | Pro-Ject Replacement dust cover hinge for Debut series (rp-611), two: friction hinges that hold the lid open at any angle, a spring blade clamped to the lid's back wall, the foot in a slot (here a pocket in an acrylic block on the plinth's back edge) |  | 34.00 |
-| lid-top | cut | 1 | 3 mm Cell-cast acrylic sheet, stock tint in the line codes (TruCast 2423 Ember, 2092 Poison, 2287 Haze, 2069 Ice, 2074 Smoke), 4 x 8 ft | 448 x 358 | 13.23 |
-| lid-front, lid-back | cut | 2 | 3 mm Cell-cast acrylic sheet, stock tint in the line codes (TruCast 2423 Ember, 2092 Poison, 2287 Haze, 2069 Ice, 2074 Smoke), 4 x 8 ft | 448 x 97 | 3.59 |
-| lid-left, lid-right | cut | 2 | 3 mm Cell-cast acrylic sheet, stock tint in the line codes (TruCast 2423 Ember, 2092 Poison, 2287 Haze, 2069 Ice, 2074 Smoke), 4 x 8 ft | 352 x 97 | 2.82 |
+| cover-top | cut | 1 | 3 mm Cell-cast acrylic sheet, stock tint in the line codes (TruCast 2423 Ember, 2092 Poison, 2287 Haze, 2069 Ice, 2074 Smoke), 4 x 8 ft | 448 x 358 | 13.23 |
+| cover-front, cover-back | cut | 2 | 3 mm Cell-cast acrylic sheet, stock tint in the line codes (TruCast 2423 Ember, 2092 Poison, 2287 Haze, 2069 Ice, 2074 Smoke), 4 x 8 ft | 448 x 97 | 3.59 |
+| cover-left, cover-right | cut | 2 | 3 mm Cell-cast acrylic sheet, stock tint in the line codes (TruCast 2423 Ember, 2092 Poison, 2287 Haze, 2069 Ice, 2074 Smoke), 4 x 8 ft | 352 x 97 | 2.82 |
+| cover-feet | buy | 1 | 3M Bumpon SJ5302 kind: clear polyurethane hemispherical bumpers 7.9 x 2.2, self-adhesive; four under the cover's corners |  | 3.00 |
 | mark | buy | 1 | Laser etching into the cast acrylic, frosted, about 0.1 deep, from a vector file: EARF 44 wide, the etch filled with the color, deeper |  | 15.00 |
 | inserts | buy | 1 | any (E-Z Lok / Tappex kind) Brass threaded inserts for plastics, epoxy-bonded: 3 M5 (the puck), 4 M3 (the back plate); with M5 x 12 countersunk and M3 x 6 button screws |  | 14.00 |
 | wiring | buy | 1 | Shielded interconnects inside (the arm's lead to the S2, the S2 to the plate), a star earth at the plate's post (arm, bearing housing via an M3 ring tag, S2), two clear cord clips under the deck, a cord grip for the Neo's lead |  | 25.00 |
@@ -50,10 +49,9 @@
 
 | | USD |
 |---|---|
-| buy | 3,006 |
-| cnc-mill | 47 |
+| buy | 2,975 |
 | cut | 180 |
 | lathe | 763 |
-| total | 3,996 |
+| total | 3,918 |
 
 Budget figures: bought parts from the component library (dated retailer listings), made parts from the kit's stock rates: 25 % offcut on sheet parts, a handling charge a print, and a setup a machined line spread over its pieces. A shop's quote replaces them.
