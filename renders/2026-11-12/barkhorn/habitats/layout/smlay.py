@@ -36,7 +36,7 @@ for k, (fx, fh) in enumerate(L['flames']):
     obj('flame', bpy.ops.mesh.primitive_cone_add, (1.0, 0.62, 0.15), radius1=0.18, radius2=0.0, depth=fh, location=(cx + fx, cy - R*0.3, L['rim_h']*0.5 + fh/2))
 import random; rnd = random.Random(3)
 for k in range(L['blocks']):
-    a = rnd.uniform(0, 2*math.pi); d = rnd.uniform(R + 0.5, L['scorch_r'] * 1.4); z = rnd.uniform(0.08, 0.3)
+    a = rnd.uniform(0, 2*math.pi); d = rnd.uniform(R + 0.5, L['scorch_r'] * 1.4); z = rnd.uniform(*L.get('block_size', [0.08, 0.3]))
     o = obj('block', bpy.ops.mesh.primitive_cube_add, (0.28, 0.22, 0.17), location=(cx + d*math.cos(a), cy + d*math.sin(a), z*0.5)); o.scale = (z, z*0.8, z*0.5); o.rotation_euler = (rnd.random(), rnd.random(), rnd.random())
 for (fx, fy) in L['small_fires']:
     obj('fire', bpy.ops.mesh.primitive_cone_add, (1.0, 0.55, 0.12), radius1=0.06, radius2=0, depth=0.18, location=(fx, fy, 0.09))
