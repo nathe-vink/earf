@@ -2250,6 +2250,25 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    shows dust and hairlines more than clear).
    06:18 UTC, coordinator: both seen; both clean. SHOWN TO THE OWNER in chat, clear above tint, for his pick by eye;
    the coordinator's pick is the tint too. The Mantle lane holds until his answer.
+   06:41-07:54 UTC, biomes lane: Smoke f's cheap tries (scratch only). t1 (640x800, 24 samples, 40 min): the story
+   reads at once; the front near black (0.105), the rim a tall coal heap, the embers in rows. t2 (480x600, 16
+   samples; 2295e05d81: the sky 1.2 and exposure +0.3, the rim lower and wider, the embers in small clumps): front
+   0.185, cone 0.144. t3 (the sky 1.6): front 0.217, cone 0.174, darkest 0.051. The big close volumes are slow
+   even coarse (35 min a try).
+   07:01-07:14: the speaker lane pushes 'The amplifier' per tint, about 19 min a frame (Smoke 0e866525c6, Ember
+   8b004686b9). 07:14: the coordinator's check-in found nothing stalled.
+   08:40 UTC, biomes lane 32d692e1e0: `smoke-f-proxy.jpg` and `-finish.jpg` (640x800, 48 samples, step 2, the sky
+   1.7; 45 min, peak 9.9 GB): front 0.227, cone 0.179, the speaker's darkest 1 % 0.055, 0 px clipped.
+   08:44 UTC, coordinator's check at full proxy size beside the owner's 3 Nov picture: THE STORY IS RIGHT (the strike
+   right behind the speaker, the fire through the horn, the column over the top, the trail from the sky). NOT SHOWN
+   TO THE OWNER YET: it is a daylight picture and his is dusk. Finished frames, his against the proxy: mean 0.344
+   against 0.461; the sky at the frame's edges 0.495 against 0.786; pixels above 0.8: 1.7 % against 23 %. The cause:
+   the sky's bright side stands in frame and the whole sky was raised to 1.7 for the front. ORDERED, f-proxy 2: the
+   sky turned so its bright side is behind the camera and its dark side in frame, no sun behind the speaker; edge
+   sky 0.42-0.55, under 4 % of pixels above 0.8, mean 0.32-0.40; the fire the brightest thing and bigger, clear of
+   the cabinet's shoulders, with many sparks and warm light on the ground; the ground darker and scorched; front
+   0.16 or more if the woofer, flare and edges read; the trail's foot at the column's base; no large rock in the
+   air. Cheap tries, then the proper proxy; the owner's yes before any final.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
