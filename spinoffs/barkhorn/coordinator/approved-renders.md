@@ -2414,6 +2414,14 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    the final under a soft mask. CHECKED against the old file: 430 px changed, all inside x 881-934, y 773-797, at
    most 23 levels, 46 px over 8; no seam at 600 %. PASSES; it goes to the site with the Mantle batch. The shot
    file still names fa0c3a65 (noted in MEASURED.md).
+   19:37 UTC, biomes lane 36944e5b8e: THE 64-SAMPLE STRIP (`smoke-f-strip-1200-64spp.jpg`, `-vs-smoke-e.jpg`,
+   `-zoom300.jpg`; 41 min for 10 % of the frame): fine noise 6.0 / 7.5 / 4.4 per 1000 (dark smoke, mid, bright)
+   against Smoke e's 1.1 / 1.1; at 300 % mottled denoiser patches in the dark smoke right of the fire and waxy
+   flame tongues. In doubt, so by the rule: NO 1200 RENDER; THE SMOKE f MASTER STARTED 19:36 UTC: 2400x3000,
+   48 samples, w1's settings (shot file 4f05260d66), one saved build, 22 to 25 row bands of about 34 minutes
+   (overlap 15 rows per side), each pushed to `renders/2026-11-12/barkhorn/habitats/bands/smoke-f-master-bNN.jpg`.
+   Estimate revised by the lane to 12 to 14 hours (the fire rows cost about twice the frame's average). The
+   coordinator looked at the strip: agrees; the site takes the master's downscale.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
