@@ -20,7 +20,10 @@ HV=(WB=4000 STUDIO_K=4000 PAPER='#9A9A9A' WORLD='#BDBDBD' EXR=0 DENOISE=1)
 # behind the lamp as a wash on the back paper (FILL_POS/AIM/W), which the bowl's front cannot see and the ball shows
 # only as a slim edge; the paper held at about 30. -under keeps the approved render (from below the moved fill is in
 # frame, so that view keeps the old placement)
-NH=(KEY_STRIP=3.0,0.5 'KEY_POS=(0.0,-0.5,2.2)' 'KEY_AIM=(0,0,0.55)' 'FILL_POS=(0.0,0.75,2.1)' 'FILL_AIM=(0.0,1.0,0.8)' FILL_W=2.6)
+# Hemisphere (the coordinator, 11:36: the overhead strip read as a slot on the lit picture's shoulder; the bar was the
+# fill's reflection, the wash facing down): no key; the fill faces the back paper square (the shade sees only its dark
+# back), the world (4000 K grey, even) lifting the paper to about 30; the kicker's rim strip stays
+NH=(STUDIO_OFF=key 'FILL_POS=(0.0,0.55,2.1)' 'FILL_AIM=(0.0,1.0,2.1)' FILL_W=0.105 WORLD='#FFD4A5' WORLD_STR=0.82)
 # Core: a ball reflects every lamp in front of or above it, so no key; the fill turned to face the back paper square (the
 # ball sees only its dark back), and the world (a 4000 K grey, even, no discrete reflection) lifting the floor: the
 # paper about 30 top and bottom; the kicker's slim strip on the right edge stays

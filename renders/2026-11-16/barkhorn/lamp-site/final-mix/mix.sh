@@ -28,7 +28,10 @@ H="red:ember amber:acid blue:ice violet:haze"
 # lit glass): the key a 3.0 x 0.5 m strip overhead, the fill a wash on the back paper behind the lamp, the paper about
 # 30 (final/smoke.sh). Every lit view where both stay out of frame: Hemisphere's hero and direct, Core's lit pictures.
 # The under and below views keep the old placement (from below the moved fill is in frame).
-NH=(KEY_STRIP=3.0,0.5 'KEY_POS=(0.0,-0.5,2.2)' 'KEY_AIM=(0,0,0.55)' 'FILL_POS=(0.0,0.75,2.1)' 'FILL_AIM=(0.0,1.0,0.8)' FILL_W=2.6)
+# Hemisphere (the coordinator, 11:36: the overhead strip read as a slot on the lit picture's shoulder; the bar was the
+# fill's reflection, the wash facing down): no key; the fill faces the back paper square (the shade sees only its dark
+# back), the world (4000 K grey, even) lifting the paper to about 30; the kicker's rim strip stays
+NH=(STUDIO_OFF=key 'FILL_POS=(0.0,0.55,2.1)' 'FILL_AIM=(0.0,1.0,2.1)' FILL_W=0.105 WORLD='#FFD4A5' WORLD_STR=0.82)
 NC=(STUDIO_OFF=key 'FILL_POS=(0.0,0.55,1.3)' 'FILL_AIM=(0.0,1.0,1.3)' FILL_W=0.25 WORLD='#FFD4A5' WORLD_STR=0.38)   # Core: final/smoke.sh's
 # Ember at 1.8 (the coordinator: a blotchy cell pattern over the lit bowl in the mix row): more samples for that lamp
 spp() { [ "$1" = red ] && echo $(( $2 * ${RED_X:-3} )) || echo $2; }
