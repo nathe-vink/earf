@@ -2962,6 +2962,10 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    knowing the left edge stays lumpy. Cost on his yes: about 2.5 to 3 h for the region at full size and 48
    samples, 30 min to stitch, finish and audit, then the site's picture and a new link. NOTHING RENDERS UNTIL
    HE CHOOSES; the present final w1 stays on the preview. The lane's render session is stopped.
+   13:58 UTC, stall guard: nothing stalled. Lamps: mix singles still rendering in staging (about 8 frames
+   left, push held until the group is in). Biomes: nothing rendering, waiting for the owner's choice on the
+   trail. Open with the owner: the trail (thinner or as now) and the lamp mix (yes or no). Next check about
+   three hours on.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
