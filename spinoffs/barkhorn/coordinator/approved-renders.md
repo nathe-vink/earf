@@ -2981,6 +2981,23 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    UTC), the Core set and the mix photometry follow. Biomes: nothing rendering. Still open with the owner: the
    trail (thinner or as now) and the lamp mix (yes or no); no message from him since 09:36 UTC. Next check
    about three hours on.
+   19:37 UTC, THE MIX IS COMPLETE IN STAGING AND SPOT-CHECKED (lamps lane's final report 19:32 UTC,
+   r32-lamps-final b7823df5ab, renders/2026-11-16/barkhorn/lamp-site/final-mix/; nothing in final/ was
+   overwritten; recipe mix.sh; LOAD_MIX off by default). Commits: rows 8db63d9331, G1 Hemisphere singles
+   26a347c58d, G2 Ember details and cluster eeec4185f6, G4 mix photometry 44a4caac3a, G3 the Core set
+   b7823df5ab. MIX PHOTOMETRY (photometry-mix.txt): Hemisphere lm, mix against built: Ember 307.3 / 334.1, Acid
+   379.8 / 419.4, Ice 269.8 / 307.5, Haze 258.2 / 280.7, Smoke 260.4 (decided); lux at the center 336 to 346,
+   so "about 340" holds; the eight run 258 to 521 lm; Core Poison 38.1 / 29.8, Smoke 35.1. MY CHECK at full
+   size: core-poison (bright, even green, no discs; today's has discs and a murky band), core-ember (as built,
+   clean), core-row-day (Poison a clearer green, Smoke near black, the rest unchanged), the four pendant heroes
+   (15:28), the cluster. OPEN POINTS SENT TO THE LANE: the staging cluster still shows the two discs on
+   Smoke's dome, so rows AND cluster are rendered once after the owner's answer with a placement that leaves
+   no studio lamp's outline on a lit dome; photometry-mix.txt writes Ember and Haze as "1.8 (3)" although
+   lumens and pictures say denser than built (units to be put right); which staging files do not depend on
+   the mix (the six as-built Core singles at least) so they could be installed on a no as well. SHOWN TO THE
+   OWNER: Core by day today over the mix, and Core in Poison lit today beside the mix. Nothing is installed
+   and nothing goes to the site before his yes or no. The stall guard is cancelled: only his two choices
+   remain (the trail, the mix), and his message wakes this session.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
