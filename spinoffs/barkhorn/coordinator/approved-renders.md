@@ -2736,6 +2736,18 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    - MANTLE'S COVER: THE STRONGER SHEET for Dust (2.25x), Acid (2.45x), Ice (3.05x), Smoke (4.30x); the deck's own
      compound for Ember, Poison, Haze, Fog. The site takes `-cover-strong.png` for those four (r48-mantle-design
      00d873d093 / a90894a958); the Mantle lane brings CAD, parts list, asset and notes to that one story.
+   04:52 UTC, speaker lane (from the scene files, nothing rendered): EVERY ONE OF THE SIX PLANET-BAR FRAMES SHOWS A
+   LIT CORE in Ember, Dust or Acid; none shows Smoke on either lamp. core-bar-table: one Ember Core, the subject
+   (about 1020 px, 32 % of the width); mantle-bar: one Ember Core at about 480 px, coloring Mantle's plinth;
+   bar-backbar-portrait (the phone hero): one Ember Core at about 335 px, the Dust and Acid Cores just out of
+   frame; bar-pendants: Ember and Dust at about 330 px; bar-backbar: Dust, Ember, Acid at 125 to 190 px; bar-hero
+   (the desktop hero): Acid, Ember, Dust at 150 to 165 px. Full re-renders about 9.5 h in all (core-bar-table
+   2 h 10, portrait 2 h 15, backbar 1 h 45, pendants 70 min, mantle-bar 65 min, hero 55 min). The mixed route,
+   about 4.5 h: the old-and-new region difference for hero, backbar, pendants and portrait (honest where the
+   difference falls to noise inside the region's edge; tested per region), full renders for mantle-bar and
+   core-bar-table. The older Core frames of 11 Nov in its folders are superseded.
+   Coordinator: decided per frame once the lamps lane's sheet shows how much the LIT Core changes in Ember, Dust
+   and Acid; where the change is below what shows at a glance, the frame stays, measured and recorded.
    Still one site push, when the Smoke f master is in.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
