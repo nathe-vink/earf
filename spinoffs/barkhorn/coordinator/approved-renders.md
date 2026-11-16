@@ -2628,6 +2628,18 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    clear). One thing to better in the final set: with thin sheets the cover's edges have lost their 3 mm and
    their depth of color; the lane tests, on one Ember cell, the real solid for camera rays with shadow rays
    passed (caustics off, so the light still passes once); the final eight render after his choice.
+   00:41 UTC, Mantle lane 7b7073c423 (`renders/2026-11-16/barkhorn/mantle-r48/cover-solid-test-ember.png` and
+   .txt; v3_day.py `--cover solid` and `solid-strong:k`): THE SOLID COVER TEST ON EMBER. Glass (IOR 1.49) with the
+   deck's Volume Absorption for camera and glossy rays; on shadow rays the slant-tinted thin sheet with the faces'
+   Fresnel loss and no volume; caustics off, the finals' clamp. Label 44.4 (thin sheet 41.4, reference 42.8);
+   black record 6.4 (6.0); no mirror on the inside face. The edges are crisp, 3 mm and BLACK (a ray entering the
+   rim is held along the panel and crosses 100 mm or more of dye). The lane judged that a failure and kept the
+   thin sheet.
+   00:42 UTC, coordinator, seen side by side: THE SOLID IS THE MODEL FOR THE FINALS. The black edges are what the
+   dye does over a long guided path, what the deck's own edges show in every final, and the edges of the picture
+   the owner chose from; the thin sheet's pale edges read as film; the solid's label sits closer to the
+   reference. No scattering added. GO for the four covers that do not depend on the owner's choice (Ember,
+   Poison, Haze, Fog) with --cover solid; Dust, Acid, Ice, Smoke wait for his choice of strength.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
