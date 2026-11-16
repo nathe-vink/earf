@@ -1910,7 +1910,7 @@ def rc_intro(p, web):
 
 
 # the seated habitats, 4:5, one per tint as each passes (r48-biomes); Haze (violet) and Smoke (black) still to come
-HAB_SRC = {# 'black': out (the owner, 2026-11-15: the speaker looks odd and the impact isn't clear); smoke-e 9599febd was the frame
+HAB_SRC = {'black': 'renders/2026-11-12/barkhorn/habitats/smoke-f-final-portrait-finish.jpg',         # the seated Smoke, present final (r48-biomes f0b2dd23); a softer trail to follow
            'violet': 'renders/2026-11-12/barkhorn/habitats/haze-b-final-portrait-finish.jpg',          # the seated Haze final, finished (r48-biomes 7895f4d6)
            'blue': 'renders/2026-11-12/barkhorn/habitats/ice-final-portrait-finish.jpg',            # the seated Ice final, finished (r48-biomes 8f4c9fd9)
            'ice': 'renders/2026-11-12/barkhorn/habitats/fog-b-final-portrait-finish.jpg',           # the seated Fog final, finished (r48-biomes ba05aed5)
@@ -2068,10 +2068,17 @@ def rc_home(p, web):
 MANTLE_FINAL = 'renders/2026-11-10/barkhorn/mantle-r48/mantle-final-day-{name}.png'
 TROPOS_BAR = 'renders/2026-11-11/barkhorn/product/planet-bar/bar-backbar.png'   # Tropos in Acid at the bar (r33-speaker-horn 04c6fb4c)
 TROPOS_BAR_ALT = 'Tropos in Acid in the bar\\u2019s bay, a wall of records around it, Hemispheres and Cores over the counter.'
+MANTLE_COVER = {k: f'renders/2026-11-10/barkhorn/mantle-r48/mantle-final-day-{n}-cover.png' for k, n in   # as each passes (r48-mantle-design 5637cfe9);
+                (('red', 'ember'), ('green', 'poison'), ('violet', 'haze'), ('ice', 'fog'))}                 # a tint without one shows no cover view
+MANTLE_COVER.update({k: f'renders/2026-11-10/barkhorn/mantle-r48/mantle-final-day-{n}-cover-strong.png' for k, n in   # the strong sheet, the owner's pick
+                     (('orange', 'dust'), ('amber', 'acid'), ('blue', 'ice'), ('black', 'smoke'))})                     # (r48-mantle-design 00d873d0)
+MANTLE_COVER_LINE = ('Lift-off dust cover in the deck&rsquo;s own tint: 3 mm cast acrylic, 448 x 358 x 100 mm, about 1.1 kg. '
+                     'It rests on four small clear bumpers and lifts straight off; no hinges.')
 MANTLE_BAR = 'renders/2026-11-11/barkhorn/product/planet-bar/mantle-bar.png'   # Mantle in Ember at the bar (r33-speaker-horn 8ebd1690)
 LAMP_FINAL = 'renders/2026-11-10/barkhorn/lamp-site/final/{f}.png'
 NAMES = dict(zip(RC_KEYS, ['ember', 'dust', 'acid', 'poison', 'ice', 'haze', 'fog', 'smoke']))
-HEMI_LM = {'red': 272, 'orange': 280, 'amber': 301, 'green': 256, 'blue': 264, 'violet': 254, 'ice': 339, 'black': 287}   # lm out, cd703d56
+CORE_LM = {'red': 45, 'orange': 51, 'amber': 63, 'green': 30, 'blue': 39, 'violet': 33, 'ice': 95, 'black': 53}      # lm out of the ball (photometry.txt 3205c545)
+HEMI_LM = {'red': 334, 'orange': 353, 'amber': 419, 'green': 282, 'blue': 308, 'violet': 281, 'ice': 521, 'black': 378}   # lm out, the corrected method (r32-lamps-final 3205c545, photometry.txt)
 # the bar (r33-speaker-horn ac342ff0, approved as a direction 2026-11-12; with the new record wall 9e8ddccf): five Hemispheres over the counter, two Cores on it;
 # on /lighting as the room, and an "At the bar" view for the tints in it. More frames join ROOM as they pass.
 ROOM = [('renders/2026-11-11/barkhorn/product/planet-bar/bar-pendants.png', 'bar-pendants',
@@ -2084,7 +2091,7 @@ ROOM = [('renders/2026-11-11/barkhorn/product/planet-bar/bar-pendants.png', 'bar
 LIGHTS_DIR = 'renders/2026-11-12/barkhorn/lamp-site/legible/'
 LIGHTS_WORDS = ('Twenty-four LEDs sit on a ring at the center of the shade&rsquo;s mouth, on a small black disc level with the rim, and face '
                 'straight up into the shade. Their light lands on the white diffuser lining the dome: some passes out through the clear '
-                'shell and the tinted outer layer, so the shade glows in its color, and about three quarters bounces back down out of '
+                'shell and the tinted outer layer, so the shade glows in its color, and about two thirds of its light comes back down out of '
                 'the open mouth as white light on the table. From below you see an evenly lit white bowl with the small black disc at '
                 'its center; the LEDs face away from you, so there&rsquo;s no bright point to look into.')
 CORE_ROW_DAY = 'core-row-day'    # Core's eight by day, switched off (r32-lamps-final 01a0b833)
@@ -2113,6 +2120,9 @@ def rc_products(p, web):
         v, card = views(MANTLE_FINAL.format(name=n), f'mantle-{n}', 1600)
         D['tt']['colours'][k] = {'views': {'studio': v}, 'card': dict(card, alt=f'Mantle in {n.title()}')}
     D['tt']['colours']['red']['views']['bar'], _ = views(MANTLE_BAR, 'mantle-bar', 1600)
+    for k, n in NAMES.items():                 # with its cover, where that tint's picture has passed
+        if k in MANTLE_COVER:
+            D['tt']['colours'][k]['views']['cover'], _ = views(MANTLE_COVER[k], f'mantle-{n}-cover', 1600)
     # Tropos in Acid at the bar, the new record wall (r33-speaker-horn 04c6fb4c), after the front
     acid = next(c for c in D['clouds'] if c['k'] == 'amber')
     acid['views']['bar'], _ = views(TROPOS_BAR, 'tropos-bar', 1600)
@@ -2151,14 +2161,16 @@ def rc_products(p, web):
                 row[1] = text; return
         at = next(ix for ix, row in enumerate(rows_) if row[0] == after) + 1
         rows_.insert(at, [name, text])
-    fact(D['lamps']['dome'], 'Light', 'About {lm} lm out of the shade in this color, and about 350 lux on a table half a meter below, in every '
+    fact(D['lamps']['dome'], 'Light', 'About {lm} lm out of the shade in this color, and about 340 lux on a table half a meter below, in every '
                                       'color; CRI 90. The dome glows in its own color, and the light straight down is the lamp&rsquo;s own white: '
                                       + LAMP_LIGHT_TINTS)
     D['lamps']['dome']['lm'] = HEMI_LM
+    D['lamps']['orb']['lm'] = CORE_LM
     fact(D['lamps']['dome'], 'Fitting', 'Satin black anodized aluminum, with a quarter-turn catch')
     fact(D['lamps']['dome'], 'Hanging', 'A cloth-braided cord, a 600 mm drop as standard, cut to length; a canopy of satin black anodized '
                                         'aluminum, 150 mm across')
-    fact(D['lamps']['orb'], 'Light', 'A glow, not a reading light: the ball lights in its own color. The LED inside: ' + LAMP_LIGHT_TINTS)
+    fact(D['lamps']['orb'], 'Light', 'A glow, not a reading light: the ball lights in its own color. About {lm} lm out of the ball in this color. '
+                                     'The LED inside: ' + LAMP_LIGHT_TINTS)
     fact(D['lamps']['orb'], 'Base', 'Its own color, satin', after='Ball')
     fact(D['lamps']['orb'], 'Control', 'Touch the ring: tap to switch, hold to dim')
     D['lamps']['orb']['facts'] = [r for r in D['lamps']['orb']['facts'] if r[0] != 'Dock']   # under the skirt: Power says it charges on its dock
@@ -2167,6 +2179,9 @@ def rc_products(p, web):
     fact(D['tt'], 'Plinth', 'Cast acrylic in its color, about 25 mm, its edges satin with a fine polished bevel; it floats 40 mm over the base')
     fact(D['tt'], 'Posts', 'Four solid posts, 30 mm across, satin black')
     fact(D['tt'], 'Hardware', 'Satin black throughout', after='Posts')
+    fact(D['tt'], 'Cover', MANTLE_COVER_LINE)      # the hinged lid is dropped (the coordinator 2026-11-16)
+    fact(D['tt'], 'Size', '450 wide, 360 deep, 161 high to the top of the arm; 196 high with the cover on (mm)')   # r48-mantle-design CAD, 2026-11-16
+    fact(D['tt'], 'Weight', 'About 11.6 kg; about 12.7 kg with the cover')
     p.rest = p.rest[:i] + json.dumps(D, separators=(',', ':')) + p.rest[j:]
     p.rest, n = re.subn(r"(\n(\s*)\['off', 'Front', [^\n]*\],)", lambda m: m.group(1) + "\n" + m.group(2) + "['bar', 'At the bar', () => '"
                         + TROPOS_BAR_ALT + "'],", p.rest, count=1)
@@ -2186,7 +2201,10 @@ def rc_products(p, web):
     # the views' words: Mantle in its own color; Hemisphere from below
     p.sub("const TT_VIEWS = [['studio', 'In the studio', c => c.k === 'red' ? `${D.tt.name} in Ember.` : `${D.tt.name}, shown in Ember. ${c.name} to follow.`],",
           "const TT_VIEWS = [['studio', 'In the studio', c => `${D.tt.name} in ${c.name}.`],\n"
+          "                  ['cover', 'With its cover', c => `${D.tt.name} in ${c.name}, its dust cover on.`],\n"
           "                  ['bar', 'At the bar', () => 'Mantle in Ember on the bar with a record on, a Core in Ember beside it, a Tropos and record shelves behind.'],")
+    p.rest, n = re.subn(r"\n\s*\['closed', 'Lid down', [^\n]*\],", '', p.rest)    # the hinged lid is dropped: no Lid down view
+    assert n == 1, 'rc_products: Lid down'
     p.sub("         ['row', 'All eight', () => 'Eight Hemispheres hung in a row, lit, one in each color.'],",
           "         ['bar', 'At the bar', () => 'Five Hemispheres over a bar in Acid, Ember and Dust, two Cores on the counter below.'],\n"
           "         ['below', 'From below', c => `Hemisphere from below, lit: the opal diffuser inside its ${c.name} shade.`],\n"
@@ -2544,7 +2562,7 @@ def rc_finish(web):
         for a, b in SPECTRUM:                 # the eight as the full spectrum, not a run from one to another
             u = u.replace(a, b)
         u = u.replace('sitting low in a black acrylic base', 'sitting low in a satin base of its own color')   # Core's base (fee3b161)
-        assert not re.search(r'(?i)black acrylic base|black hub|270 lux|brass|polished black|FA122|75 W', u), ('rc_finish: words the pictures make false', f)
+        assert not re.search(r'(?i)black acrylic base|black hub|270 lux|350 lux|three quarters bounces|brass|polished black|FA122|75 W', u), ('rc_finish: words the pictures make false', f)
         assert not re.search(r'(?i)ember to smoke', u), ('rc_finish: Ember to Smoke', f)
         if u != t:
             open(f, 'w').write(u)
