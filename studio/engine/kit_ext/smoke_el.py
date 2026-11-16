@@ -699,7 +699,7 @@ def trail(bpy, name, p, kit):
     r = math_('ADD', r0, math_('MULTIPLY', r1 - r0, math_('POWER', t, gr)))
     inv = math_('DIVIDE', 1.0, r)
     qn = vec('SCALE', q, scale=inv)                                    # in local radii, so the noise grows with the tube
-    w = noise_(qn, ws, 2.0, 0.5, seed)
+    w = noise_(qn, ws, p.get('warp_detail', 2.0), 0.5, seed)          # `warp_detail` 0: one octave, no fine folds at the edge
     off = vec('SCALE', vec('SUBTRACT', w.outputs['Color'], (0.5, 0.5, 0.5)), scale=math_('MULTIPLY', r, 2.0 * wa))
     q2 = vec('ADD', q, off)
     radial = vec('LENGTH', vec('SUBTRACT', q2, vec('SCALE', u, scale=vec('DOT_PRODUCT', q2, u))))
