@@ -2998,6 +2998,16 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    OWNER: Core by day today over the mix, and Core in Poison lit today beside the mix. Nothing is installed
    and nothing goes to the site before his yes or no. The stall guard is cancelled: only his two choices
    remain (the trail, the mix), and his message wakes this session.
+   19:39 UTC, lamps lane's answers (r32-lamps-final d449b1f211, no renders): (1) rows and cluster once after
+   the owner's answer, reflections audited, not only what is in frame. (2) UNITS: every Hemisphere loading is
+   a multiple of the base pour; built Ember 1.0, Acid 3, Ice 3, Haze 1.0; the mix is Ember 1.8, Acid 5, Ice
+   6, Haze 1.8, so all four are denser than built (the "3" for Ember and Haze was the lane's slip, corrected
+   in photometry-mix.txt; Core in chart units, built Poison 1.0, mix 0.6). (3) STAGING FILES THAT DO NOT
+   DEPEND ON THE MIX and may be installed on a yes or a no: core-ember, -dust, -acid, -ice, -haze, -fog,
+   core-smoke (decided 0.6); core-base-b-lit, core-base-b-allcolor, core-base-options (Ember and Ice only,
+   built loadings, lit panels with the new Core placement); hemisphere-smoke (the 1.2x hero, no key; final/
+   has none since the old one was removed). DEPEND ON THE MIX: every other hemisphere-* file, the cluster,
+   core-row, core-row-day, core-poison, hemisphere-row.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
