@@ -2830,7 +2830,24 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    asked for a more dissipated trail. ORDERED: a soft falloff across the trail's radius, proved on a crop (x
    1900-2300, y 150-550), then the trail's region re-rendered in one session and set into the master with a
    feathered border, finish again, the present final kept as -w1. The owner is asleep; the site push waits.
-   Still one site push, when the Smoke f master is in.
+   08:13 UTC, biomes lane 68662f0c00: the trail's crisp edge comes from the shader (density full at 0.3 r to zero
+   at 1.0 r under dense smoke, the lumps clipped hard at zero); new optional parameters edge [outer, inner],
+   edge_gamma, puff_soft; crops then the region in one persistent session.
+   08:36 UTC, lamps lane: its container restarted about 08:34 and killed the renders; relaunched as one queue (the
+   three Smoke singles, then hemisphere-row and core-row, then the rest of the mix staging; ending about 20:00
+   UTC). A first pass of the Smoke singles had left out the recipe's white balance and paper (blue; caught,
+   nothing pushed). The speaker lane builds both lamps from lamp_site.py in a checkout of r32-lamps-final, so the
+   mix "asset" is the LOAD_MIX switch; its own shots.py CORE_LOAD table still has Smoke at the old value.
+   09:22 UTC, stall guard: nothing stalled; next check 10:53.
+   09:36 UTC, THE OWNER: "What's next?" Answered with the order of what comes and the one decision open (the lamp
+   mix). THE SITE PUSH IS NO LONGER HELD FOR ONE DEPLOYMENT: the site lane told to push now what is staged (r47
+   ea0e432ab4), and, since the biomes lane then reported that the trail fix needs 4 to 5 hours in all (each test
+   crop takes about 40 min; the first softer edge made the scallops worse; the trail is very dense, so its
+   visible edge sits in the far tail where the lumps decide the contour; a second try running), to put the
+   PRESENT Smoke f final (f0b2dd23b7) on as the eighth place now, to be swapped when the softer edge lands.
+   09:37 UTC, the Smoke f final SHOWN TO THE OWNER (1200x1500 and a crop of the trail's edge), with the question
+   whether the edge is fine as it is (then the fix is cancelled) or should be softened (3 to 4 more hours).
+   The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
