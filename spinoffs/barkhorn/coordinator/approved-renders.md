@@ -2681,6 +2681,13 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    01:07 UTC, coordinator: GO for Ember, Poison, Haze, Fog with --cover solid at 128 bounces, Fog first so its
    dashed rim can be judged on the full frame at site size. Size and weight sent to the site lane for the two
    lines that still carried the hinged lid's figures.
+   01:13 UTC, Mantle lane 918669d66b: `mantle-final-day-fog-cover.png` with --cover solid --cover-bounces 128
+   (343 s; audit clean; label 0.87 of the bare frame). The README's Strata v3 rows corrected to 450 x 360 x 161
+   (196 with the cover), about 11.6 kg (12.7 with the cover); the 16.1 kg belongs to Outcrop, another design.
+   01:14 UTC, CHECKED at full size and at site size: FOG WITH ITS COVER PASSES. It reads as a real clear acrylic
+   box with its 3 mm edges; the dashes on the top-left rim read as a glint along the edge at site size and stay.
+   SOLID WITH 128 BOUNCES IS THE MODEL FOR ALL EIGHT COVERS. Shown to the owner. Ember, Poison, Haze rendering;
+   Dust, Acid, Ice, Smoke wait for his choice of strength.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
