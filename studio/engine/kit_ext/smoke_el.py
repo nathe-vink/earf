@@ -703,9 +703,21 @@ def trail(bpy, name, p, kit):
     off = vec('SCALE', vec('SUBTRACT', w.outputs['Color'], (0.5, 0.5, 0.5)), scale=math_('MULTIPLY', r, 2.0 * wa))
     q2 = vec('ADD', q, off)
     radial = vec('LENGTH', vec('SUBTRACT', q2, vec('SCALE', u, scale=vec('DOT_PRODUCT', q2, u))))
-    core = smooth(math_('DIVIDE', radial, r), 1.0, 0.3)
+    # the edge (Smoke f, 2026-11-16, the coordinator: w1's trail had a crisp scalloped contour against the soft column):
+    # `edge` [outer, inner] in local radii, density 0 at outer rising to full at inner (default [1.0, 0.3], as before);
+    # `edge_gamma` > 1 lengthens the thin tail; `puff_soft` > 0 rolls the lumps off to zero smoothly (a softplus of that
+    # width) instead of clipping them, so the holes and the edge are not cut along a contour
+    eo, ei = p.get('edge', [1.0, 0.3])
+    core = smooth(math_('DIVIDE', radial, r), eo, ei)
+    if p.get('edge_gamma', 1.0) != 1.0:
+        core = math_('POWER', core, p['edge_gamma'])
     lump = noise_(vec('SCALE', q2, scale=inv), ps, 6.0, 0.55, seed + 3.7)
-    lumpy = math_('MAXIMUM', math_('ADD', 1.0, math_('MULTIPLY', math_('SUBTRACT', lump.outputs['Fac'], 0.5), 4.0 * pa)), 0.0)
+    lin = math_('ADD', 1.0, math_('MULTIPLY', math_('SUBTRACT', lump.outputs['Fac'], 0.5), 4.0 * pa))
+    sw = p.get('puff_soft', 0.0)
+    if sw > 0:      # softplus: sw * ln(1 + exp(lin / sw))
+        lumpy = math_('MULTIPLY', math_('LOGARITHM', math_('ADD', 1.0, math_('EXPONENT', math_('DIVIDE', lin, sw))), math.e), sw)
+    else:
+        lumpy = math_('MAXIMUM', lin, 0.0)
     fade = smooth(t, 1.0, 1.0 - p.get('fade', 0.25))
     near = smooth(along, -0.5 * r0, 0.5 * r0)                         # cut off at the crash, not a tube past it
     spread = math_('POWER', math_('MULTIPLY', inv, r0), p.get('thin', 1.0))
@@ -722,7 +734,7 @@ def trail(bpy, name, p, kit):
     rot = u.to_track_quat('X', 'Z')
     while t0 < 1.0 - 1e-6:
         t1 = min(1.0, t0 + 3.0 * rad(t0) / Ld)
-        hw = rad(t1) * (1.0 + wa) * 1.15
+        hw = rad(t1) * (max(1.0, p.get('edge', [1.0])[0]) + wa) * 1.15
         ln = (t1 - t0) * Ld
         bm = bmesh.new()
         g = bmesh.ops.create_cube(bm, size=1.0)
