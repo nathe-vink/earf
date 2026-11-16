@@ -14,10 +14,11 @@ Poison   |  282.1 (205.4/ 76.7,  73 % down) |  341 /  215 /  68             |  2
 Ice      |  307.5 (213.9/ 93.6,  70 % down) |  345 /  219 /  70             |  38.9 (27.0/11.9)
 Haze     |  280.7 (204.1/ 76.6,  73 % down) |  343 /  216 /  68             |  33.0 (24.0/9.1)
 Fog      |  521.4 (293.1/228.3,  56 % down) |  347 /  220 /  75             |  95.1 (53.3/41.7)
-Smoke    |  377.6 (240.5/137.0,  64 % down) |  346 /  219 /  71             |  52.7 (32.9/19.8)
+Smoke    |  260.4 (196.6/ 63.8,  75 % down) |  345 /  218 /  68             |  35.1 (23.9/11.2)
+  (Smoke, B-SMOKE 2026-11-16, decided: Hemisphere 1.2x, Core 0.6x; was 377.6 / 346 lux / 52.7 at 0.3x, SUPERSEDED)
 
-For the site: Hemisphere about 280 to 520 lm out (Ember 334); "about 340 lux" on a table 0.5 m below (335 to 347);
-about two thirds of its light down (56 % Fog to 73 % Poison and Haze; Ember 67 %). Core 30 to 95 lm out (Ember 44.7).
+For the site: Hemisphere about 260 to 520 lm out (Ember 334); "about 340 lux" on a table 0.5 m below (335 to 347);
+about two thirds of its light down (56 % Fog to 75 % Smoke; Ember 67 %). Core 30 to 95 lm out (Ember 44.7).
 
 The raw lines:
 hemisphere ember: ISPHERE dome-red total lm 334.1 above 109.8 below 224.2
@@ -82,3 +83,9 @@ hemisphere fog: ISPHERE dome-ice total lm 338.9 above 115.9 below 223.0
 hemisphere fog: LUX dome-ice centre r<0.05 352 r 0.15-0.2 307 r 0.3-0.35 220 albedo 0.323
 hemisphere smoke: ISPHERE dome-black total lm 287.0 above 84.6 below 202.4
 hemisphere smoke: LUX dome-black centre r<0.05 348 r 0.15-0.2 304 r 0.3-0.35 218 albedo 0.323
+
+B-SMOKE (2026-11-16): Smoke at Hemisphere 1.2x, Core 0.6x (lamp_site.py's defaults since this commit; smoke.sh):
+hemisphere smoke: ISPHERE dome-black total lm 260.4 above 63.8 below 196.6
+hemisphere smoke: LUXPTS dome-black centre 345 x0.3 218 x0.6 68 ring r0.28-0.32 225 ring r0.58-0.62 73
+core smoke: ISPHERE orb-black total lm 35.1 above 11.2 below 23.9
+(the 0.3x Smoke lines above are SUPERSEDED)

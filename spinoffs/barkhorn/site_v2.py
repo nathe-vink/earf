@@ -2077,8 +2077,8 @@ MANTLE_COVER_LINE = ('Lift-off dust cover in the deck&rsquo;s own tint: 3 mm cas
 MANTLE_BAR = 'renders/2026-11-11/barkhorn/product/planet-bar/mantle-bar.png'   # Mantle in Ember at the bar (r33-speaker-horn 8ebd1690)
 LAMP_FINAL = 'renders/2026-11-10/barkhorn/lamp-site/final/{f}.png'
 NAMES = dict(zip(RC_KEYS, ['ember', 'dust', 'acid', 'poison', 'ice', 'haze', 'fog', 'smoke']))
-CORE_LM = {'red': 45, 'orange': 51, 'amber': 63, 'green': 30, 'blue': 39, 'violet': 33, 'ice': 95, 'black': 53}      # lm out of the ball (photometry.txt 3205c545)
-HEMI_LM = {'red': 334, 'orange': 353, 'amber': 419, 'green': 282, 'blue': 308, 'violet': 281, 'ice': 521, 'black': 378}   # lm out, the corrected method (r32-lamps-final 3205c545, photometry.txt)
+CORE_LM = {'red': 45, 'orange': 51, 'amber': 63, 'green': 30, 'blue': 39, 'violet': 33, 'ice': 95, 'black': 35}      # lm out of the ball (photometry.txt 3205c545)
+HEMI_LM = {'red': 334, 'orange': 353, 'amber': 419, 'green': 282, 'blue': 308, 'violet': 281, 'ice': 521, 'black': 260}   # lm out, the corrected method (r32-lamps-final 3205c545, photometry.txt)
 # the bar (r33-speaker-horn ac342ff0, approved as a direction 2026-11-12; with the new record wall 9e8ddccf): five Hemispheres over the counter, two Cores on it;
 # on /lighting as the room, and an "At the bar" view for the tints in it. More frames join ROOM as they pass.
 ROOM = [('renders/2026-11-11/barkhorn/product/planet-bar/bar-pendants.png', 'bar-pendants',
