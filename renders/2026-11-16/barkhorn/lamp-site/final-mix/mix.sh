@@ -87,7 +87,9 @@ r $D/audit/core-row-day.txt aud $D/audit/core-row-day.txt env "${DAY[@]}" AUDIT=
 r $D/core-row-day.png env "${DAY[@]}" LAMP_OUT=$D/core-row-day.png python3.11 lamp_site.py lamps-orbs --samples 256 --scale 1.0 > /dev/null 2>&1; fit $D/core-row-day.png
 unset ORBCAM
 # core-base-b-lit (base-b-lit.sh)
-BL=(WB=4000 STUDIO_K=4000 PAPER='#9A9A9A' WORLD='#BDBDBD' EXR=0 STUDIO=0.5 EV=-1 CORE_BASE=B 'ORBCAM=((0.06,-0.60,0.16),(0.0,0.0,0.075),70.0)')
+# The lit Core sheets take the Core placement (NC; the coordinator: the new placement for every picture rendered from
+# now on where it leaves the tints' look unchanged): the old key's two discs on every lit ball go, the tints do not move
+BL=(WB=4000 STUDIO_K=4000 PAPER='#9A9A9A' EXR=0 STUDIO=0.5 EV=-1 CORE_BASE=B 'ORBCAM=((0.06,-0.60,0.16),(0.0,0.0,0.075),70.0)' "${NC[@]}")
 mkdir -p $S/blit; r $D/audit/core-base-b-lit.txt aud $D/audit/core-base-b-lit.txt env "${BL[@]}" AUDIT=1 MASK=$D/masks/core-base-b-lit.png python3.11 lamp_site.py orb-red
 r $S/blit/c1.png env "${BL[@]}" LAMP_OUT=$S/blit/c1.png python3.11 lamp_site.py orb-red --samples 192 --scale 0.4 > /dev/null 2>&1
 r $S/blit/c2.png env "${BL[@]}" BASE_MAT=own LAMP_OUT=$S/blit/c2.png python3.11 lamp_site.py orb-blue --samples 192 --scale 0.4 > /dev/null 2>&1
@@ -99,7 +101,7 @@ r $S/blit/c3.png env "${BL[@]}" BASE_MAT=own LAMP_OUT=$S/blit/c3.png python3.11 
 # core-base-b-allcolor (base-b-allcolor.sh)
 mkdir -p $S/allc; AC=(EXR=0 BASE_MAT=own_all 'ORBCAM=((0.0,-0.42,0.17),(0.0,0.0,0.085),58.0)')
 CD=(WB=5000 STUDIO_K=5000 PAPER='#D6D6D4' WORLD='#E0E0E0' STUDIO=3 EV=-2 LIGHTS_OFF=1)
-CL=(WB=4000 STUDIO_K=4000 PAPER='#9A9A9A' WORLD='#BDBDBD' STUDIO=0.5 EV=-1)
+CL=(WB=4000 STUDIO_K=4000 PAPER='#9A9A9A' STUDIO=0.5 EV=-1 "${NC[@]}")
 r $D/audit/core-base-b-allcolor.txt aud $D/audit/core-base-b-allcolor.txt env "${AC[@]}" "${CL[@]}" AUDIT=1 MASK=$D/masks/core-base-b-allcolor.png python3.11 lamp_site.py orb-blue
 r $S/allc/ice-off.png env "${AC[@]}" "${CD[@]}" LAMP_OUT=$S/allc/ice-off.png python3.11 lamp_site.py orb-blue --samples 128 --scale 0.3 > /dev/null 2>&1
 r $S/allc/ice-lit.png env "${AC[@]}" "${CL[@]}" LAMP_OUT=$S/allc/ice-lit.png python3.11 lamp_site.py orb-blue --samples 128 --scale 0.3 > /dev/null 2>&1
@@ -112,7 +114,8 @@ r $S/allc/ember-lit.png env "${AC[@]}" "${CL[@]}" LAMP_OUT=$S/allc/ember-lit.png
   convert l-ice-off.png l-ice-lit.png l-ember-off.png l-ember-lit.png +append -depth 8 -type TrueColor PNG24:$D/core-base-b-allcolor.png )
 # core-base-options (base-options.sh; row 1 BASE_MAT=black as corrected.sh) and its day version (corrected.sh)
 for v in night day; do mkdir -p $S/bo-$v
-  if [ $v = night ]; then BO=(WB=4000 STUDIO_K=4000 PAPER='#9A9A9A' WORLD='#BDBDBD' EXR=0 STUDIO=3 EV=-2); SP=256; F=white; OUT=core-base-options; SUF=''
+  # night: NC scaled to this sheet's STUDIO=3 EV -2; the world lifts the paper back to its 27
+  if [ $v = night ]; then BO=(WB=4000 STUDIO_K=4000 PAPER='#9A9A9A' EXR=0 STUDIO=3 EV=-2 STUDIO_OFF=key 'FILL_POS=(0.0,0.55,1.3)' 'FILL_AIM=(0.0,1.0,1.3)' FILL_W=0.083 WORLD='#FFD4A5' WORLD_STR=2.4); SP=256; F=white; OUT=core-base-options; SUF=''
   else BO=(WB=5000 STUDIO_K=5000 PAPER='#D6D6D4' WORLD='#E0E0E0' EXR=0 STUDIO=3 EV=-2 LIGHTS_OFF=1 BASE_DX=0.19 'BASECAM=((0.0,-0.92,0.30),(0.0,0.0,0.095),58.0)'); SP=128; F=black; OUT=core-base-options-day; SUF=', lamp off'; fi
   r $D/audit/$OUT.txt aud $D/audit/$OUT.txt env "${BO[@]}" BASE_MAT=black AUDIT=1 MASK=$D/masks/$OUT.png python3.11 lamp_site.py baseopts-red
   r $S/bo-$v/row1.png env "${BO[@]}" BASE_MAT=black LAMP_OUT=$S/bo-$v/row1.png python3.11 lamp_site.py baseopts-red --samples $SP --scale 0.6 > /dev/null 2>&1
