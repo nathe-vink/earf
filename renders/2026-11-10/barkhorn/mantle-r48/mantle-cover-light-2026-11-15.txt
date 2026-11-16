@@ -25,10 +25,15 @@ label through the FRONT WALL at 34 deg; the light comes in at 13 deg (bg), 21 (s
 Bound = bare x per-angle Fresnel x T ** (1 / cos theta_t), the view at 34 deg, the light from square-on to 52 deg,
 plus the reflection: Fog 85.3 .. 88.9, Ember 33.9 .. 37.0. Fog passes (89.6, +0.7). Ember is 4.4 over the top
 (41.4; about 5 display levels).
-OPEN POINT: the Ember residual of 4.4. Hypothesis: light bouncing inside the closed box (the inner faces' reflections
-between the walls, and the red-lit deck under the cover), which the one-pass bound leaves out; the coordinator's rough
-sum puts that at only 1-2, so it is not proven as the whole cause. Accepted by the coordinator (22:44): another round
-costs more than the gap is worth. A converged reference (MNEE shadow caustics, or about 20k samples) would settle it.
+THE EMBER RESIDUAL, CLOSED (2026-11-16): the reference re-run by plain refraction with Filter Glossy 0 (blur_glossy;
+1.0 had blurred the refracted paths), the clamp off, caustics on, 2000 samples, no denoiser, the same 20 x 20 px mean:
+  Fog label 92.6 (flat + slant 89.6, +3.0)   Ember label 42.8 (flat + slant 41.4, +1.4)
+  (scene-linear from the EXR, mean of 12 x 12 px: Fog 1.98 against 1.87, x1.06; Ember 0.79 against 0.78, x1.01)
+Both land on the flat sheet within about 3 (Fog at the edge): the old low reference was Filter Glossy, not the sheet.
+The flat sheet holds for light through the wall. Still open, not re-rendered: the reference puts much more on the
+black record beside the label (Fog 67 against 9, Ember 23 against 6; median, so not fireflies) and on the deck at the
+cover's foot. Hypotheses: the wall's second face and light piped along the 3 mm wall, which a one-surface sheet does
+not carry; and the clamp (the flat-sheet cells ran with the finals' indirect clamp of 8, the reference with none).
 Outside the cover, the floor and the base edge equal the finals within 0.1 level (Fog, Ember, Smoke).
 
 THE STRONG LOADINGS (-cover-strong, for the owner's choice): the cover cast at k times the deck's dye per mm, k set so
@@ -38,3 +43,10 @@ the most-absorbed channel passes 0.634 a wall (the mean of Ember's 0.49 and Haze
   (at 1x: Ember 0.94/0.49/0.55 lum 0.59, Haze 0.88/0.77/0.97 lum 0.81). Fog's deck is near-water-clear light gray
   (#FCFCFC after 25 mm), not frosted (only its outer edge is satin): a stronger Fog cover would be a Smoke cover, so
   Fog stays as it is.
+
+THE TWELVE FRAMES (2026-11-16, slant tint, 77fd6301): the record label with the cover over the frame without it (median
+of 20 x 20 px, linear luminance, full frame): Fog 0.94, Acid 0.89, Ice 0.85, Dust 0.84, Smoke 0.80, Haze 0.71,
+Poison 0.67, Ember 0.43; strong: Acid 0.84, Dust 0.73, Ice 0.68, Smoke 0.43. The deck top beside the cover 0.97 .. 1.08.
+The finals' own frames run Blender's default blur_glossy 1.0 with caustics off; nothing in them depends on light
+passing through the deck's acrylic onto a matte surface (the base and posts under the deck and the deck's shadow on
+the floor get no light through it, so that shadow is untinted).
