@@ -2977,6 +2977,10 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    to 121,78,180 (lilac to violet). SHOWN TO THE OWNER as one sheet (today over the mix, four pendants) for
    his yes or no. G2 (Ember details, cutaway, in use, cluster), G3 (the Core set) and G4 (mix photometry)
    follow; one report at the end.
+   17:02 UTC, stall guard: nothing stalled. Lamps: the group 2 cluster render is running (status at 16:59
+   UTC), the Core set and the mix photometry follow. Biomes: nothing rendering. Still open with the owner: the
+   trail (thinner or as now) and the lamp mix (yes or no); no message from him since 09:36 UTC. Next check
+   about three hours on.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
