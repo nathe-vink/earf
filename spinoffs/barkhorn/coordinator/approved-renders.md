@@ -2861,6 +2861,26 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    Smoke lamp pictures and figures (378 lm and 53 lm are the as-built values; the darker pair is 260 and 35),
    and nothing of the lamp mix. One share link made for this deployment (expires 17 Nov 08:44 UTC) and sent to
    the owner in chat only, with the two open questions (the lamp mix; the trail's edge).
+   10:38 UTC, B-SMOKE CHECKED (lamps lane, r32-lamps-final ac6eb67f64, pushed 10:31 UTC): Smoke at Hemisphere 1.2x
+   and Core 0.6x in lamp_site.py (Core has its own table), crystal.py and both BOMs; photometry: Hemisphere
+   260.4 lm (196.6 down / 63.8 up, 75 % down), 345 / 218 / 68 lux; Core 35.1 lm; the 0.3x lines marked
+   superseded; the LOAD_MIX switch (off). Three singles re-rendered (hemisphere-smoke-direct, -under,
+   core-smoke; audits 0.0 in frame; emitters: the LED faces and the declared key, fill, kicker out of frame).
+   MY CHECK at full size: the darker glass is as on the sheet the owner approved (lit bowl 127,133,135, was
+   211,212,212), the under view passes; DIRECT AND CORE FAIL AS PICTURES: the reflections of the round key and
+   fill now stand 10 to 30 levels over the lit glass as two pale flat discs with hard outlines (at 0.3x the
+   glow hid them, about 5 levels). ORDERED: move, reshape, feather, flag or switch off studio lamps so that no
+   studio lamp's reflection with an outline lies on the lit glass (no lamp that lights without reflecting,
+   nothing hidden in frame), camera, exposure, white balance and paper as they are; after core-row, before the
+   mix singles; one report with before|after. The same placement for every single from now on if it leaves
+   the colored tints unchanged. The site's Smoke "Lit" picture is cut from -direct; hemisphere-smoke.png in
+   final/ is an old picture with the old cap that the site does not use (to be marked superseded). SHOWN TO
+   THE OWNER (before | darker, both lamps) with the flaw named. The site keeps the old Smoke lamp pictures
+   until the fixed ones land; the figures (260 lm, 35 lm) go on with them. B-MIX: hemisphere-row (mix) done,
+   core-row rendering; the lane's new end is about 22:00 UTC (restarts cost about 2 h). For the speaker lane,
+   when it next renders: LAMPS_ROOT at ac6eb67f64 or later gives Hemisphere Smoke 1.2x without any switch; its
+   shots.py CORE_LOAD 'black' must go from 0.15 to 0.3 (and 'green' 0.3 for Poison if the mix is a yes); no
+   bar frame holds a Smoke lamp.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
