@@ -2697,6 +2697,26 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    to the owner; to the site lane for the "With its cover" view, staged, no push. So nothing waits on his choice:
    the Mantle lane renders Dust, Acid, Ice, Smoke in both strengths in the same model (-cover.png in the deck's
    own material, -cover-strong.png at 2.25x, 2.45x, 3.05x, 4.30x); the site takes the set he picks.
+   01:32 UTC, site lane r47 376e3bf75f (staged, not pushed): "With its cover" as the second view on Mantle's
+   Ember, Poison, Haze and Fog pages; Mantle's Size and Weight lines; Core's lumens; the Cover line; "Lid down"
+   removed.
+   01:43 UTC, stall guard: Smoke f master 10 bands by 01:39 (rows to 30 %); next check 03:14.
+   02:17 UTC, biomes lane: 11 bands, rows 0 to 30.4 %, each 35 to 38.5 min, peak memory 7.8 to 8.0 GB. THE FIRE ROWS
+   ARE FAR HEAVIER THAN THE STRIP SUGGESTED (727, then 1281, then 1708 min per frame by row 30 %); the queue was
+   restarted once at 01:40 to keep bands under 40 min (bands now aim at 31 min; the overlap 9 rows a side after
+   band 11). REVISED ESTIMATE: about 12 more hours, done about 14:00 to 15:00 UTC, about 19 hours in all. The lane
+   offered to cut (32 samples for the remaining rows, or the 1200 at 64). COORDINATOR: IT RUNS ON AS IT IS (mixed
+   samples would show at the band joins; the 1200 at 64 was judged not clean); no reply needed.
+   02:16 UTC, Mantle lane a90894a958 and 00d873d093: Dust, Acid, Ice, Smoke covers in both strengths in the final
+   model (solid, 128 bounces; 267 to 361 s each; audits clean); corner crops
+   `renders/2026-11-16/barkhorn/mantle-r48/cover-solid-corners-dust-acid-ice-smoke.png`. Label with the cover as
+   a share of the bare frame, own | strong: Dust 0.82 | 0.74, Acid 0.86 | 0.83, Ice 0.82 | 0.70, Smoke 0.78 | 0.46.
+   Edges: in the deck's own material Dust's rim glows red, Acid's amber, Ice's blue (with the glint dashes),
+   Smoke's is black; at the strong loadings Dust stays red, Ice goes deeper blue, Acid and Smoke go dark.
+   02:20 UTC, CHECKED (the sheet of eight, the corner crops, Dust at full size): ALL EIGHT PASS as pictures; both
+   sets are sound. SHOWN TO THE OWNER as the final comparison for his choice of strength, tint by tint if he
+   likes; the earlier thin-sheet comparison is withdrawn. The coordinator's recommendation stands for Smoke and
+   Acid (stronger) and is open for Dust and Ice, whose own-material covers carry the color in their edges.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
