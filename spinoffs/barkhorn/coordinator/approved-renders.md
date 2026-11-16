@@ -2950,6 +2950,18 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    resolution set into the present final at 1200x1500, one sheet present | thinner plus the 100 % edge crop;
    one proof, two at most, about 90 minutes; no region re-render; then the owner chooses. The owner's words on
    the earlier trail were "a little more dissipated".
+   13:31 UTC, THE THINNER-TRAIL LOOK PROOF IS IN AND SHOWN TO THE OWNER (biomes lane, r48-biomes c23508b21c,
+   renders/2026-11-16/barkhorn/habitats/smoke-f-thinner-proof.jpg; one proof, about 1 h; trail density 2.0,
+   the warm trail 2.3, edge [1.4, 0], warp 0.25 with one octave; the trail region at half resolution, 32
+   samples, feathered into the 1200 final over 24 px, raw on both sides). What I see: the thinner trail is
+   paler, wider and more see-through; its right edge against the sky is soft and its lower end dissolves into
+   the column's smoke; its LEFT EDGE IS STILL LUMPY with a few dark specks, as now; it still reads as the
+   meteor's trail with the same line, bends and color. The present trail reads as a solid band. Owner's copy
+   with plain labels: the trail now | thinner trail (proof), site size, with the left edge close up. MY
+   RECOMMENDATION TO HIM: take the thinner trail (closer to his "a little more dissipated", more like smoke),
+   knowing the left edge stays lumpy. Cost on his yes: about 2.5 to 3 h for the region at full size and 48
+   samples, 30 min to stitch, finish and audit, then the site's picture and a new link. NOTHING RENDERS UNTIL
+   HE CHOOSES; the present final w1 stays on the preview. The lane's render session is stopped.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
