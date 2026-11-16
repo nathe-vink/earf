@@ -2579,6 +2579,32 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    Mantle lane: after its twelve frames, the two reference cells again with the blur off. Known and not reopened:
    the bar and hero frames and the other lanes' finals were rendered with the same shared setting; they are mood
    pictures passed by eye; the published lamp figures and the lamps' own pictures come first.
+   15 Nov 23:55 UTC, lamps lane 0b9379eff9 (`renders/2026-11-15/barkhorn/lamp-site/off-match/`: notes-v3.md,
+   lit-correction.png, tints-off-v3.png; lamp_site.py unchanged): THE CORRECTED METHOD: Filter Glossy off,
+   Hemisphere's opal sheet acting once, Core's ball plain glass. PROOF: the GS 041 sheet alone, flat: datasheet
+   T 0.54 / R 0.39; old model 0.655 / 0.559 (returns 1.21 of the light: impossible); corrected 0.538 / 0.352.
+   Core's measured bound met within 2 %. PHOTOMETRY, published > corrected, Hemisphere lm: Ember 272 > 334, Dust
+   280 > 353, Acid 301 > 419, Poison 256 > 282, Ice 264 > 308, Haze 254 > 281, Fog 339 > 521, Smoke 287 > 378; lux
+   at the center 345-352 > 325-334 ("about 350 lux" becomes ABOUT 330 LUX), at 0.3 m 216-220 > 210-215; down
+   share Ember 73 > 67 % (56 % Fog to 73 % Poison, Haze: "about two thirds down"). Core lm, published (already
+   stale) / today's rig > corrected: Ember 9.0 / 33.6 > 44.7, Dust 12.5 / 38.0 > 51.1, Acid 18.3 / 43.5 > 63.2,
+   Poison 3.0 / 23.3 > 29.8, Ice 6.6 / 31.2 > 38.9, Haze 3.2 / 27.3 > 33.0, Fog 34.6 / 64.6 > 95.1, Smoke 12.9 /
+   35.2 > 52.7. THE LIT GLASS IS UNCHANGED within 2 levels at the finals' exposure (Hemisphere Ember 253,153,144 >
+   253,152,143; Core Fog 212,192,172 > 213,193,173): THE APPROVED LIT LOOK HOLDS; only the glow on the paper round
+   Core rises about 20 %. OFF, corrected, Hemisphere | Core: Ember 96,14,10 | 72,0,0; Dust 126,37,6 | 106,16,0;
+   Acid 100,90,10 | 81,72,0; Poison 9,38,15 | 0,15,3; Ice 2,55,108 | 0,36,86; Haze 35,31,94 | 7,13,74; Fog
+   131,130,130 | 117,117,116; Smoke 73,74,75 | 52,53,54: Hemisphere now reads as tint over white, the same hue as
+   Core and 14 to 28 levels lighter. THE SMOKE PAIR: HEMISPHERE 1.2x WITH CORE 0.6x: off 20,20,21 | 17,19,20; lit
+   125,131,134 | 136,138,140; light out 260 lm | 35.1 lm (69 % | 67 % of today's Smoke, corrected). Finals that
+   change visibly: hemisphere-ember-off, -cap, core-row-day, core-base-options-day (about 50 min); the Core lit
+   set by the paper's glow only (about 1 h 50); Hemisphere lit none.
+   00:00 UTC, coordinator: CHECKED (notes and both pictures). GO to the lamps lane: the three fixes into
+   lamp_site.py in one commit; the corrected photometry as the source of truth with the old figures marked
+   superseded; re-render now the off and daylight finals without Smoke (hemisphere-ember-off, -cap,
+   core-base-options-day); HOLD core-row-day, every Smoke picture and the Core lit set for the owner's answers.
+   SHOWN TO THE OWNER: tints-off-v3 and a Smoke today | proposed picture (off and lit), with the two questions
+   asked again on the corrected footing: Smoke as Hemisphere 1.2x with Core 0.6x, yes or no; the other seven tints
+   left as they are (recommended: they are close in every tint) or matched. The earlier pictures are withdrawn.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
