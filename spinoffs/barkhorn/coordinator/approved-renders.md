@@ -2811,6 +2811,25 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    separate table; the Hemisphere asset with the mix exported beside the present one). Installed only on his
    yes. In the mix the Cores in the bar frames do not change (Ember, Dust, Acid Cores stay); only the Ember and
    Acid pendants do, a little.
+   07:51 UTC, stall guard: Smoke f master 23 bands by 07:48 (rows to 75.8 %); the lamps lane's B-mix staging run
+   about 10 to 11 h from 07:50 (LOAD_MIX switch off by default; `.../lamp-site/final-mix/`); next check 09:21.
+   08:08 UTC, biomes lane f0b2dd23b7: SMOKE f FINAL: `renders/2026-11-12/barkhorn/habitats/
+   smoke-f-final-portrait.jpg` and `-finish.jpg` (finish.py v1.1 on the stitched PNG); 2400x3000, 48 samples,
+   step 2, w1's shot file 4f05260d66; 25 bands (b00 to b24, each 39 min or less), 744 min of rendering 19:36 to
+   08:03 UTC, peak 8.95 GB; bands 0 to 14 each paid about 26 min of scene sync, 15 to 24 one persistent session;
+   stitched with rounding. Lane's numbers at 1200: front 0.244, cone 0.189, darkest 1 % 0.024, 0 px at 255;
+   finished mean 0.291, edge sky 0.558, bottom fifth 0.248. gt_audit with the 35,306 tufts hidden for the control:
+   hidden 0, lamps 0; emitters 19, all the place's own fire (the plume's flame, the pit and char glow, the
+   sparks, 14 ember clumps); the world is the sky at 0.7.
+   08:11 UTC, CHECKED at full size (800 view; speaker top, base, fire and trail at 100 %; row steps; raw against
+   finish): own measure of the finish: mean 0.284, edge sky 0.504 (the owner's 3 Nov picture 0.495), bottom
+   fifth 0.236; 78 px at 255; the cabinet's gray 83,60,61 raw to 84,63,63; no join away from the speaker
+   (largest row step 6.4 against a local 5.5); rows 991, 1006, 1565 are the speaker's own edges. EVERYTHING
+   PASSES BUT THE TRAIL'S EDGE: at 100 % and still at site size its left edge is a crisp scalloped contour with a
+   dark fringe (a hard boundary nibbled by the puff noise) beside the soft column: a cut-out, where the owner
+   asked for a more dissipated trail. ORDERED: a soft falloff across the trail's radius, proved on a crop (x
+   1900-2300, y 150-550), then the trail's region re-rendered in one session and set into the master with a
+   feathered border, finish again, the present final kept as -w1. The owner is asleep; the site push waits.
    Still one site push, when the Smoke f master is in.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
