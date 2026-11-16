@@ -1,24 +1,26 @@
 PHOTOMETRY, THE MIX (2026-11-16, B-MIX). A separate table: photometry.txt in final/ stays the lamps as built.
-The mix, recommended to the owner and not yet decided: Hemisphere Ember 1.8, Acid 5, Ice 6, Haze 1.8 (stock 3);
-Core Poison 0.6 (chart loading; built 1.0). Smoke is the approved pair (Hemisphere 1.2x, Core 0.6x; decided,
-so its "built" column is the decided loading). Dust and Fog
+The mix, recommended to the owner and not yet decided. One unit throughout: the dye loading as a multiple of the base
+pour (lamp_site.TINT_LOAD; 1.0 = the base pour, a tint not listed there is at 1.0). Hemisphere: Ember 1.8 (built 1.0),
+Acid 5 (built 3), Ice 6 (built 3), Haze 1.8 (built 1.0); every one of them denser than built. Core in its chart
+loading, the same unit (the ball's own pour is half of it, core_load): Poison 0.6 (built 1.0), lighter than built.
+Smoke is the approved pair (Hemisphere 1.2, Core 0.6; decided, so its built column is the decided loading). Dust and Fog
 as built (their lines are in photometry.txt). Same method and sensors as photometry.txt (the corrected method, one
 scale, WLM 3.2/490; launch/isphere.py; LUXPTS on the table 0.5 m below the rim, paper #9A9A9A). Rendered with LOAD_MIX=1.
 
 Hemisphere
-Tint   | loading (built) | lm out (below/above, down %)    | lux centre / 0.3 m / 0.6 m | built lm
--------|-----------------|---------------------------------|----------------------------|---------
-Ember  |  1.8 (  3)      |  307.3 (213.9/ 93.4, 70 % down) |  336 /  215 /  67         |  334.1
-Acid   |    5 (  3)      |  379.8 (241.7/138.0, 64 % down) |  346 /  220 /  71         |  419.4
-Ice    |    6 (  3)      |  269.8 (200.4/ 69.4, 74 % down) |  345 /  219 /  69         |  307.5
-Haze   |  1.8 (  3)      |  258.2 (196.1/ 62.1, 76 % down) |  343 /  216 /  68         |  280.7
-Smoke  |  1.2 (1.2)      |  260.4 (196.6/ 63.8, 75 % down) |  345 /  218 /  68         |  260.4
+Tint   | loading, x base pour (built) | lm out (below/above, down %)    | lux centre / 0.3 m / 0.6 m | built lm
+-------|------------------------------|---------------------------------|----------------------------|---------
+Ember  |  1.8 (1.0)                   |  307.3 (213.9/ 93.4, 70 % down) |  336 /  215 /  67         |  334.1
+Acid   |    5 (3.0)                   |  379.8 (241.7/138.0, 64 % down) |  346 /  220 /  71         |  419.4
+Ice    |    6 (3.0)                   |  269.8 (200.4/ 69.4, 74 % down) |  345 /  219 /  69         |  307.5
+Haze   |  1.8 (1.0)                   |  258.2 (196.1/ 62.1, 76 % down) |  343 /  216 /  68         |  280.7
+Smoke  |  1.2 (1.2)                   |  260.4 (196.6/ 63.8, 75 % down) |  345 /  218 /  68         |  260.4
 
 Core
-Tint   | loading (built) | lm out (below/above) | built lm
--------|-----------------|----------------------|---------
-Poison | 0.6 (1.0)       |  38.1 (26.3/11.8)    |  29.8
-Smoke  | 0.6 (0.6)       |  35.1 (23.9/11.2)    |  35.1
+Tint   | chart loading (built) | lm out (below/above) | built lm
+-------|-----------------------|----------------------|---------
+Poison | 0.6 (1.0)             |  38.1 (26.3/11.8)    |  29.8
+Smoke  | 0.6 (0.6)             |  35.1 (23.9/11.2)    |  35.1
 
 With the mix, Hemisphere's eight run 258 to 521 lm out (Dust 353.4 and Fog 521.4 as built); the lux on the
 table does not move (the opal sheet sets it). Denser shells send less light up: Ember goes from 33 % to 30 % up.
