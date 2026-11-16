@@ -2847,6 +2847,20 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    PRESENT Smoke f final (f0b2dd23b7) on as the eighth place now, to be swapped when the softer edge lands.
    09:37 UTC, the Smoke f final SHOWN TO THE OWNER (1200x1500 and a crop of the trail's edge), with the question
    whether the edge is fine as it is (then the fix is cancelled) or should be softened (3 to 4 more hours).
+   09:56 UTC, THE SITE PREVIEW IS PUSHED AND CHECKED: site lane, one push, r49 fda669c10b (code r47 dd8a022d23),
+   deployment dpl_6qRkct7rzUyJ6cq8CCKUiFWpXV4G READY. On it: the Smoke f final (f0b2dd23b7) as the eighth place
+   (home, two rows of four; /colors/smoke; the "Out" view of Tropos in Smoke); the eight hinge-free Mantle finals,
+   mantle-bar, "With its cover" on all eight Mantle pages, the Cover, Size and Weight lines; the corrected lamp
+   figures (Hemisphere lm per tint, "about 340 lux", "about two thirds"; Core lm per tint); hemisphere-ember-off
+   and -cap re-cut. MY CHECK at 1280 wide: home, /colors/smoke, /#mantle-ember, /#mantle-smoke,
+   /#hemisphere-ember, /#hemisphere-smoke, /#core-ember, /#core-fog read right, no broken pictures; every view
+   of Tropos in Smoke, Hemisphere in Ember and Smoke, Core in Ember and Smoke opens with its caption; the cover
+   picture on each Mantle page compared with the Mantle lane's files: Dust, Acid, Ice, Smoke are the STRONG
+   covers (mean difference 1.6 to 1.8 levels, against 3.7 to 8.2 for the plain ones), Ember, Poison, Haze, Fog
+   their own (1.7). Product pages are hash routes (/#mantle-ember), not paths. STILL OLD ON THIS PREVIEW: the
+   Smoke lamp pictures and figures (378 lm and 53 lm are the as-built values; the darker pair is 260 and 35),
+   and nothing of the lamp mix. One share link made for this deployment (expires 17 Nov 08:44 UTC) and sent to
+   the owner in chat only, with the two open questions (the lamp mix; the trail's edge).
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
