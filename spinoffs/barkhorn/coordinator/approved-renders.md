@@ -2758,6 +2758,26 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    what a stock 3 mm sheet looks like; a custom cast is priced at the stock rate until quoted). Asset: each tint's
    cover at its chosen loading, off by default; the manifest says how to render it (128 bounces or more,
    refractive caustics off). MANTLE'S COVER IS CLOSED but for the site push.
+   05:18 UTC, biomes lane: 17 bands (rows to 36.3 %). THE SLOWNESS FOUND: every band was a fresh Blender run that
+   spent about 26 of its 35 minutes setting up the volumes; since 04:35 one session with persistent data; band 16
+   took 8.2 min and agrees with band 15 across 18 overlap rows (mean difference 1.09 levels, same mean); same
+   build and settings. REVISED: done about 09:00 to 10:00 UTC.
+   05:41 UTC, lamps lane 0427d8b301 (`renders/2026-11-16/barkhorn/lamp-site/core-match/core-match-sheet.png`,
+   notes.md): STEP A, CORE MATCHED TO HEMISPHERE. Core dye, x the stock pour | Hemisphere off | Core off matched |
+   Core lit today > matched | Core lm: Ember 1 > 0.33 | 96,14,10 | 104,4,6 | 226,84,71 > 232,133,111 | 44.7 > 57.8.
+   Dust 3 > 1.6 | 126,37,6 | 112,41,0 | 215,126,86 > 209,158,125 | 51.1 > 62.2. Acid 3 > 1.35 | 100,90,10 |
+   100,92,1 | 189,178,108 > 196,189,146 | 63.2 > 76.1. Poison 1 > 0.6 | 9,38,15 | 0,38,7 | 0,122,54 > 1,153,66 |
+   29.8 > 38.1. Ice 3 > 1.6 | 2,55,108 | 0,60,99 | 49,144,194 > 124,171,195 | 38.9 > 52.0. Haze 1 > 0.55 |
+   35,31,94 | 41,24,91 | 149,82,153 > 183,132,163 | 33.0 > 42.3. Fog unchanged, 131 | 117 (Core's white core reads
+   about 117 even behind a clear shell). Smoke: Hemisphere 0.3 > 1.2, Core 0.3 > 0.6: 20,20,21 | 17,19,20; Core lit
+   172 > 138; Core 52.7 > 35.1 lm, Hemisphere 378 > 260 lm. Step B would take about 4.5 h.
+   05:42 UTC, CHECKED: the off match holds in every tint (gaps 3 to 14 in one channel). BUT THE LIT CORE CHANGES
+   A GREAT DEAL: the jewel tones become pastels (Ember's green channel 84 to 133, Ice's red 49 to 124). STEP B IS
+   NOT STARTED: the direction of the match is the owner's to choose now that the lit cost shows; the sheet is
+   shown to him with the question. Meanwhile the lamps lane renders the other direction for comparison (A2:
+   Hemisphere denser to meet Core as built; Hemisphere lit today | matched) and does the decided Smoke work
+   (loadings, BOMs, photometry, the three Smoke singles). Rows, cluster and all other pictures held. Fog: the
+   14 levels stay. "Stronger sheet" was Mantle's cover, not the lamps' opal (the lane asked).
    Still one site push, when the Smoke f master is in.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
