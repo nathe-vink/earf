@@ -2895,6 +2895,18 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    10:54 UTC, stall guard: nothing stalled. Biomes: still testing the trail's softer edge (three test crops
    rendering to about 11:40 UTC, then the region re-render of 2.5 to 4 h); lamps: on the disc fix for the two
    Smoke singles. Next check about 90 minutes on.
+   11:36 UTC, THE DISC FIX CHECKED (lamps lane, r32-lamps-final 45ebb67df4, pushed 11:32 UTC; notes and
+   before|after in renders/2026-11-16/barkhorn/lamp-site/discs/). CORE-SMOKE PASSES AND IS FINAL: no key; the
+   fill faces the back paper; a declared even world (4000 K gray, strength 0.38) lifts the floor; the kicker's
+   rim strip kept; ball 121,124,124 as before, paper 28 to 38; audit 0.0 in frame. HEMISPHERE-SMOKE-DIRECT:
+   the bowl is clean (126,132,134 as before), but the key, now the off rig's overhead strip, reflects on the
+   black shoulder as a dim gray bar with rounded ends and a notch from the cord (about x 620-970, y 850-890):
+   at the lit exposure it reads as a slot in the lamp. ONE MORE PASS ORDERED: no key in the Hemisphere's lit
+   pictures (hero and direct), the fill as the wash on the back paper, the kicker for the rim; the same for
+   the mix heroes. hemisphere-smoke-under keeps its approved render (from below the moved fill would be in
+   frame). The lane's test: under the old placement Ice 6 and Acid 5 carry the same two discs; the new one
+   removes them and leaves the color within 4 levels. hemisphere-smoke.png (old cap) removed from final/. The
+   mix singles give Ember's Hemisphere 3x the samples against the blotches.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
