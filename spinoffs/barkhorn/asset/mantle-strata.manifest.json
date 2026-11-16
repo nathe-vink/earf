@@ -4,7 +4,49 @@
  "units": "m, z up, the shelf at z 0",
  "build": "no light of any kind; base Smoke 2074 solid; every visible piece of hardware satin black (post-satin-black, #18181A, roughness 0.5; the list in black_hardware), bright only the parts in bright_by_necessity; the deck underside satin; a record on the platter; no lid or hinges: the lift-off cover is in its own collection, off by default",
  "edge": "C: a 1 mm even chamfer on the outer edges of the deck and base (in the CAD), the chamfer polished; the deck's outer edge satin, the base's diamond-polished, as signed (the owner, 2026-11-11)",
- "cover": "lift-off, 3 mm cast sheet in the deck's tint (the CAD's default; the owner's pick of tint or clear pending), 448 x 358 x 100 on four clear 2.2 mm feet; its objects (cover-*) in the child collection \"Mantle Strata <Tint> Cover\", off in renders by default (collection hide_render): turn it on to show the cover",
+ "cover": "lift-off, 3 mm cell-cast sheet, 448 x 358 x 100 on four clear 2.2 mm feet; per tint (the owner, 2026-11-16, his words: \"stronger sheet\") in cover_by_tint; its objects (cover-*) in the child collection \"Mantle Strata <Tint> Cover\", off in renders by default (collection hide_render): turn it on to show the cover. Its material is the final frames' own: a Glass BSDF (IOR 1.49) with the sheet's Volume Absorption for camera and glossy rays, and on shadow rays the slant-tinted thin sheet with no volume (Light Path, Is Shadow Ray). Render it with glossy and transmission bounces at 128 or more (the polished rims guide light: at 12 they render black) and refractive caustics off, as the finals",
+ "cover_by_tint": {
+  "ember": {
+   "loading_x_deck_dye": 1.0,
+   "sheet": "stock TruCast 2423",
+   "frame": "mantle-final-day-ember-cover.png"
+  },
+  "poison": {
+   "loading_x_deck_dye": 1.0,
+   "sheet": "stock TruCast 2092",
+   "frame": "mantle-final-day-poison-cover.png"
+  },
+  "haze": {
+   "loading_x_deck_dye": 1.0,
+   "sheet": "stock TruCast 2287",
+   "frame": "mantle-final-day-haze-cover.png"
+  },
+  "fog": {
+   "loading_x_deck_dye": 1.0,
+   "sheet": "custom cast",
+   "frame": "mantle-final-day-fog-cover.png"
+  },
+  "dust": {
+   "loading_x_deck_dye": 2.25,
+   "sheet": "custom cast",
+   "frame": "mantle-final-day-dust-cover-strong.png"
+  },
+  "acid": {
+   "loading_x_deck_dye": 2.45,
+   "sheet": "custom cast",
+   "frame": "mantle-final-day-acid-cover-strong.png"
+  },
+  "ice": {
+   "loading_x_deck_dye": 3.05,
+   "sheet": "custom cast",
+   "frame": "mantle-final-day-ice-cover-strong.png"
+  },
+  "smoke": {
+   "loading_x_deck_dye": 4.3,
+   "sheet": "custom cast",
+   "frame": "mantle-final-day-smoke-cover-strong.png"
+  }
+ },
  "black_hardware": [
   "arm-puck",
   "puck-screw-0",
@@ -385,15 +427,6 @@
      "cover": false
     },
     {
-     "object": "cover-back.ember",
-     "type": "MESH",
-     "hidden_render": false,
-     "materials": [
-      "cover-tint.001.ember"
-     ],
-     "cover": true
-    },
-    {
      "object": "cover-feet.ember",
      "type": "MESH",
      "hidden_render": false,
@@ -403,38 +436,11 @@
      "cover": true
     },
     {
-     "object": "cover-front.ember",
+     "object": "cover-top-shell.ember",
      "type": "MESH",
      "hidden_render": false,
      "materials": [
-      "cover-tint.001.ember"
-     ],
-     "cover": true
-    },
-    {
-     "object": "cover-left.ember",
-     "type": "MESH",
-     "hidden_render": false,
-     "materials": [
-      "cover-tint.001.ember"
-     ],
-     "cover": true
-    },
-    {
-     "object": "cover-right.ember",
-     "type": "MESH",
-     "hidden_render": false,
-     "materials": [
-      "cover-tint.001.ember"
-     ],
-     "cover": true
-    },
-    {
-     "object": "cover-top.ember",
-     "type": "MESH",
-     "hidden_render": false,
-     "materials": [
-      "cover-tint.001.ember"
+      "cover-solid-1.00x.ember"
      ],
      "cover": true
     },
@@ -1225,48 +1231,15 @@
      "ior": 1.5,
      "metallic": 0.0
     },
-    "cover-tint.001.ember": {
-     "base_color": [
-      1.0,
-      1.0,
-      1.0,
+    "cover-feet.ember": {},
+    "cover-solid-1.00x.ember": {
+     "volume_color": [
+      0.9201,
+      0.0001,
+      0.14726,
       1.0
      ],
-     "roughness": {
-      "linked_from": "MATH",
-      "Value": 0.004
-     },
-     "transmission": 1.0,
-     "ior": 1.49,
-     "metallic": 0.0,
-     "volume_color": {
-      "linked_from": "MIX",
-      "A": [
-       0.99852,
-       0.99924,
-       0.99873,
-       1.0
-      ],
-      "B": [
-       0.9201,
-       0.0001,
-       0.14726,
-       1.0
-      ]
-     },
      "volume_density": 236.13623
-    },
-    "cover-feet.ember": {
-     "base_color": [
-      0.9,
-      0.9,
-      0.88,
-      1.0
-     ],
-     "roughness": 0.25,
-     "transmission": 0.8,
-     "ior": 1.5,
-     "metallic": 0.0
     },
     "socket-dark.ember": {
      "base_color": [
@@ -2406,15 +2379,6 @@
      "cover": false
     },
     {
-     "object": "cover-back.dust",
-     "type": "MESH",
-     "hidden_render": false,
-     "materials": [
-      "cover-tint.001.dust"
-     ],
-     "cover": true
-    },
-    {
      "object": "cover-feet.dust",
      "type": "MESH",
      "hidden_render": false,
@@ -2424,38 +2388,11 @@
      "cover": true
     },
     {
-     "object": "cover-front.dust",
+     "object": "cover-top-shell.dust",
      "type": "MESH",
      "hidden_render": false,
      "materials": [
-      "cover-tint.001.dust"
-     ],
-     "cover": true
-    },
-    {
-     "object": "cover-left.dust",
-     "type": "MESH",
-     "hidden_render": false,
-     "materials": [
-      "cover-tint.001.dust"
-     ],
-     "cover": true
-    },
-    {
-     "object": "cover-right.dust",
-     "type": "MESH",
-     "hidden_render": false,
-     "materials": [
-      "cover-tint.001.dust"
-     ],
-     "cover": true
-    },
-    {
-     "object": "cover-top.dust",
-     "type": "MESH",
-     "hidden_render": false,
-     "materials": [
-      "cover-tint.001.dust"
+      "cover-solid-2.25x.dust"
      ],
      "cover": true
     },
@@ -3246,48 +3183,15 @@
      "ior": 1.5,
      "metallic": 0.0
     },
-    "cover-tint.001.dust": {
-     "base_color": [
-      1.0,
-      1.0,
-      1.0,
+    "cover-feet.dust": {},
+    "cover-solid-2.25x.dust": {
+     "volume_color": [
+      0.97873,
+      0.60037,
+      0.0001,
       1.0
      ],
-     "roughness": {
-      "linked_from": "MATH",
-      "Value": 0.004
-     },
-     "transmission": 1.0,
-     "ior": 1.49,
-     "metallic": 0.0,
-     "volume_color": {
-      "linked_from": "MIX",
-      "A": [
-       0.99482,
-       0.99734,
-       0.99556,
-       1.0
-      ],
-      "B": [
-       0.97873,
-       0.60037,
-       0.0001,
-       1.0
-      ]
-     },
-     "volume_density": 67.61642
-    },
-    "cover-feet.dust": {
-     "base_color": [
-      0.9,
-      0.9,
-      0.88,
-      1.0
-     ],
-     "roughness": 0.25,
-     "transmission": 0.8,
-     "ior": 1.5,
-     "metallic": 0.0
+     "volume_density": 152.13693
     },
     "socket-dark.dust": {
      "base_color": [
@@ -4427,15 +4331,6 @@
      "cover": false
     },
     {
-     "object": "cover-back.acid",
-     "type": "MESH",
-     "hidden_render": false,
-     "materials": [
-      "cover-tint.001.acid"
-     ],
-     "cover": true
-    },
-    {
      "object": "cover-feet.acid",
      "type": "MESH",
      "hidden_render": false,
@@ -4445,38 +4340,11 @@
      "cover": true
     },
     {
-     "object": "cover-front.acid",
+     "object": "cover-top-shell.acid",
      "type": "MESH",
      "hidden_render": false,
      "materials": [
-      "cover-tint.001.acid"
-     ],
-     "cover": true
-    },
-    {
-     "object": "cover-left.acid",
-     "type": "MESH",
-     "hidden_render": false,
-     "materials": [
-      "cover-tint.001.acid"
-     ],
-     "cover": true
-    },
-    {
-     "object": "cover-right.acid",
-     "type": "MESH",
-     "hidden_render": false,
-     "materials": [
-      "cover-tint.001.acid"
-     ],
-     "cover": true
-    },
-    {
-     "object": "cover-top.acid",
-     "type": "MESH",
-     "hidden_render": false,
-     "materials": [
-      "cover-tint.001.acid"
+      "cover-solid-2.45x.acid"
      ],
      "cover": true
     },
@@ -5267,48 +5135,15 @@
      "ior": 1.5,
      "metallic": 0.0
     },
-    "cover-tint.001.acid": {
-     "base_color": [
-      1.0,
-      1.0,
-      1.0,
+    "cover-feet.acid": {},
+    "cover-solid-2.45x.acid": {
+     "volume_color": [
+      0.91726,
+      0.89894,
+      0.0001,
       1.0
      ],
-     "roughness": {
-      "linked_from": "MATH",
-      "Value": 0.004
-     },
-     "transmission": 1.0,
-     "ior": 1.49,
-     "metallic": 0.0,
-     "volume_color": {
-      "linked_from": "MIX",
-      "A": [
-       0.99436,
-       0.9971,
-       0.99516,
-       1.0
-      ],
-      "B": [
-       0.91726,
-       0.89894,
-       0.0001,
-       1.0
-      ]
-     },
-     "volume_density": 62.00945
-    },
-    "cover-feet.acid": {
-     "base_color": [
-      0.9,
-      0.9,
-      0.88,
-      1.0
-     ],
-     "roughness": 0.25,
-     "transmission": 0.8,
-     "ior": 1.5,
-     "metallic": 0.0
+     "volume_density": 151.92314
     },
     "socket-dark.acid": {
      "base_color": [
@@ -6448,15 +6283,6 @@
      "cover": false
     },
     {
-     "object": "cover-back.poison",
-     "type": "MESH",
-     "hidden_render": false,
-     "materials": [
-      "cover-tint.001.poison"
-     ],
-     "cover": true
-    },
-    {
      "object": "cover-feet.poison",
      "type": "MESH",
      "hidden_render": false,
@@ -6466,38 +6292,11 @@
      "cover": true
     },
     {
-     "object": "cover-front.poison",
+     "object": "cover-top-shell.poison",
      "type": "MESH",
      "hidden_render": false,
      "materials": [
-      "cover-tint.001.poison"
-     ],
-     "cover": true
-    },
-    {
-     "object": "cover-left.poison",
-     "type": "MESH",
-     "hidden_render": false,
-     "materials": [
-      "cover-tint.001.poison"
-     ],
-     "cover": true
-    },
-    {
-     "object": "cover-right.poison",
-     "type": "MESH",
-     "hidden_render": false,
-     "materials": [
-      "cover-tint.001.poison"
-     ],
-     "cover": true
-    },
-    {
-     "object": "cover-top.poison",
-     "type": "MESH",
-     "hidden_render": false,
-     "materials": [
-      "cover-tint.001.poison"
+      "cover-solid-1.00x.poison"
      ],
      "cover": true
     },
@@ -7288,48 +7087,15 @@
      "ior": 1.5,
      "metallic": 0.0
     },
-    "cover-tint.001.poison": {
-     "base_color": [
-      1.0,
-      1.0,
-      1.0,
+    "cover-feet.poison": {},
+    "cover-solid-1.00x.poison": {
+     "volume_color": [
+      0.0001,
+      0.8216,
+      0.20964,
       1.0
      ],
-     "roughness": {
-      "linked_from": "MATH",
-      "Value": 0.004
-     },
-     "transmission": 1.0,
-     "ior": 1.49,
-     "metallic": 0.0,
-     "volume_color": {
-      "linked_from": "MIX",
-      "A": [
-       0.99829,
-       0.99912,
-       0.99853,
-       1.0
-      ],
-      "B": [
-       0.0001,
-       0.8216,
-       0.20964,
-       1.0
-      ]
-     },
      "volume_density": 204.33603
-    },
-    "cover-feet.poison": {
-     "base_color": [
-      0.9,
-      0.9,
-      0.88,
-      1.0
-     ],
-     "roughness": 0.25,
-     "transmission": 0.8,
-     "ior": 1.5,
-     "metallic": 0.0
     },
     "socket-dark.poison": {
      "base_color": [
@@ -8469,15 +8235,6 @@
      "cover": false
     },
     {
-     "object": "cover-back.ice",
-     "type": "MESH",
-     "hidden_render": false,
-     "materials": [
-      "cover-tint.001.ice"
-     ],
-     "cover": true
-    },
-    {
      "object": "cover-feet.ice",
      "type": "MESH",
      "hidden_render": false,
@@ -8487,38 +8244,11 @@
      "cover": true
     },
     {
-     "object": "cover-front.ice",
+     "object": "cover-top-shell.ice",
      "type": "MESH",
      "hidden_render": false,
      "materials": [
-      "cover-tint.001.ice"
-     ],
-     "cover": true
-    },
-    {
-     "object": "cover-left.ice",
-     "type": "MESH",
-     "hidden_render": false,
-     "materials": [
-      "cover-tint.001.ice"
-     ],
-     "cover": true
-    },
-    {
-     "object": "cover-right.ice",
-     "type": "MESH",
-     "hidden_render": false,
-     "materials": [
-      "cover-tint.001.ice"
-     ],
-     "cover": true
-    },
-    {
-     "object": "cover-top.ice",
-     "type": "MESH",
-     "hidden_render": false,
-     "materials": [
-      "cover-tint.001.ice"
+      "cover-solid-3.05x.ice"
      ],
      "cover": true
     },
@@ -9309,48 +9039,15 @@
      "ior": 1.5,
      "metallic": 0.0
     },
-    "cover-tint.001.ice": {
-     "base_color": [
-      1.0,
-      1.0,
-      1.0,
+    "cover-feet.ice": {},
+    "cover-solid-3.05x.ice": {
+     "volume_color": [
+      0.0001,
+      0.59541,
+      0.94189,
       1.0
      ],
-     "roughness": {
-      "linked_from": "MATH",
-      "Value": 0.004
-     },
-     "transmission": 1.0,
-     "ior": 1.49,
-     "metallic": 0.0,
-     "volume_color": {
-      "linked_from": "MIX",
-      "A": [
-       0.99298,
-       0.99639,
-       0.99398,
-       1.0
-      ],
-      "B": [
-       0.0001,
-       0.59541,
-       0.94189,
-       1.0
-      ]
-     },
-     "volume_density": 49.87452
-    },
-    "cover-feet.ice": {
-     "base_color": [
-      0.9,
-      0.9,
-      0.88,
-      1.0
-     ],
-     "roughness": 0.25,
-     "transmission": 0.8,
-     "ior": 1.5,
-     "metallic": 0.0
+     "volume_density": 152.11728
     },
     "socket-dark.ice": {
      "base_color": [
@@ -10490,15 +10187,6 @@
      "cover": false
     },
     {
-     "object": "cover-back.haze",
-     "type": "MESH",
-     "hidden_render": false,
-     "materials": [
-      "cover-tint.001.haze"
-     ],
-     "cover": true
-    },
-    {
      "object": "cover-feet.haze",
      "type": "MESH",
      "hidden_render": false,
@@ -10508,38 +10196,11 @@
      "cover": true
     },
     {
-     "object": "cover-front.haze",
+     "object": "cover-top-shell.haze",
      "type": "MESH",
      "hidden_render": false,
      "materials": [
-      "cover-tint.001.haze"
-     ],
-     "cover": true
-    },
-    {
-     "object": "cover-left.haze",
-     "type": "MESH",
-     "hidden_render": false,
-     "materials": [
-      "cover-tint.001.haze"
-     ],
-     "cover": true
-    },
-    {
-     "object": "cover-right.haze",
-     "type": "MESH",
-     "hidden_render": false,
-     "materials": [
-      "cover-tint.001.haze"
-     ],
-     "cover": true
-    },
-    {
-     "object": "cover-top.haze",
-     "type": "MESH",
-     "hidden_render": false,
-     "materials": [
-      "cover-tint.001.haze"
+      "cover-solid-1.00x.haze"
      ],
      "cover": true
     },
@@ -11330,48 +10991,15 @@
      "ior": 1.5,
      "metallic": 0.0
     },
-    "cover-tint.001.haze": {
-     "base_color": [
-      1.0,
-      1.0,
-      1.0,
+    "cover-feet.haze": {},
+    "cover-solid-1.00x.haze": {
+     "volume_color": [
+      0.50136,
+      0.0001,
+      0.88051,
       1.0
      ],
-     "roughness": {
-      "linked_from": "MATH",
-      "Value": 0.004
-     },
-     "transmission": 1.0,
-     "ior": 1.49,
-     "metallic": 0.0,
-     "volume_color": {
-      "linked_from": "MIX",
-      "A": [
-       0.99588,
-       0.99788,
-       0.99647,
-       1.0
-      ],
-      "B": [
-       0.50136,
-       0.0001,
-       0.88051,
-       1.0
-      ]
-     },
      "volume_density": 84.97319
-    },
-    "cover-feet.haze": {
-     "base_color": [
-      0.9,
-      0.9,
-      0.88,
-      1.0
-     ],
-     "roughness": 0.25,
-     "transmission": 0.8,
-     "ior": 1.5,
-     "metallic": 0.0
     },
     "socket-dark.haze": {
      "base_color": [
@@ -12511,15 +12139,6 @@
      "cover": false
     },
     {
-     "object": "cover-back.fog",
-     "type": "MESH",
-     "hidden_render": false,
-     "materials": [
-      "cover-tint.001.fog"
-     ],
-     "cover": true
-    },
-    {
      "object": "cover-feet.fog",
      "type": "MESH",
      "hidden_render": false,
@@ -12529,38 +12148,11 @@
      "cover": true
     },
     {
-     "object": "cover-front.fog",
+     "object": "cover-top-shell.fog",
      "type": "MESH",
      "hidden_render": false,
      "materials": [
-      "cover-tint.001.fog"
-     ],
-     "cover": true
-    },
-    {
-     "object": "cover-left.fog",
-     "type": "MESH",
-     "hidden_render": false,
-     "materials": [
-      "cover-tint.001.fog"
-     ],
-     "cover": true
-    },
-    {
-     "object": "cover-right.fog",
-     "type": "MESH",
-     "hidden_render": false,
-     "materials": [
-      "cover-tint.001.fog"
-     ],
-     "cover": true
-    },
-    {
-     "object": "cover-top.fog",
-     "type": "MESH",
-     "hidden_render": false,
-     "materials": [
-      "cover-tint.001.fog"
+      "cover-solid-1.00x.fog"
      ],
      "cover": true
     },
@@ -13351,48 +12943,15 @@
      "ior": 1.5,
      "metallic": 0.0
     },
-    "cover-tint.001.fog": {
-     "base_color": [
-      1.0,
-      1.0,
-      1.0,
+    "cover-feet.fog": {},
+    "cover-solid-1.00x.fog": {
+     "volume_color": [
+      0.0001,
+      0.0001,
+      0.0001,
       1.0
      ],
-     "roughness": {
-      "linked_from": "MATH",
-      "Value": 0.004
-     },
-     "transmission": 1.0,
-     "ior": 1.49,
-     "metallic": 0.0,
-     "volume_color": {
-      "linked_from": "MIX",
-      "A": [
-       0.67492,
-       0.83282,
-       0.72136,
-       1.0
-      ],
-      "B": [
-       0.0001,
-       0.0001,
-       0.0001,
-       1.0
-      ]
-     },
      "volume_density": 1.07665
-    },
-    "cover-feet.fog": {
-     "base_color": [
-      0.9,
-      0.9,
-      0.88,
-      1.0
-     ],
-     "roughness": 0.25,
-     "transmission": 0.8,
-     "ior": 1.5,
-     "metallic": 0.0
     },
     "socket-dark.fog": {
      "base_color": [
@@ -14532,15 +14091,6 @@
      "cover": false
     },
     {
-     "object": "cover-back.smoke",
-     "type": "MESH",
-     "hidden_render": false,
-     "materials": [
-      "cover-tint.001.smoke"
-     ],
-     "cover": true
-    },
-    {
      "object": "cover-feet.smoke",
      "type": "MESH",
      "hidden_render": false,
@@ -14550,38 +14100,11 @@
      "cover": true
     },
     {
-     "object": "cover-front.smoke",
+     "object": "cover-top-shell.smoke",
      "type": "MESH",
      "hidden_render": false,
      "materials": [
-      "cover-tint.001.smoke"
-     ],
-     "cover": true
-    },
-    {
-     "object": "cover-left.smoke",
-     "type": "MESH",
-     "hidden_render": false,
-     "materials": [
-      "cover-tint.001.smoke"
-     ],
-     "cover": true
-    },
-    {
-     "object": "cover-right.smoke",
-     "type": "MESH",
-     "hidden_render": false,
-     "materials": [
-      "cover-tint.001.smoke"
-     ],
-     "cover": true
-    },
-    {
-     "object": "cover-top.smoke",
-     "type": "MESH",
-     "hidden_render": false,
-     "materials": [
-      "cover-tint.001.smoke"
+      "cover-solid-4.30x.smoke"
      ],
      "cover": true
     },
@@ -15372,48 +14895,15 @@
      "ior": 1.5,
      "metallic": 0.0
     },
-    "cover-tint.001.smoke": {
-     "base_color": [
-      1.0,
-      1.0,
-      1.0,
+    "cover-feet.smoke": {},
+    "cover-solid-4.30x.smoke": {
+     "volume_color": [
+      0.0001,
+      0.0001,
+      0.0001,
       1.0
      ],
-     "roughness": {
-      "linked_from": "MATH",
-      "Value": 0.004
-     },
-     "transmission": 1.0,
-     "ior": 1.49,
-     "metallic": 0.0,
-     "volume_color": {
-      "linked_from": "MIX",
-      "A": [
-       0.99012,
-       0.99492,
-       0.99153,
-       1.0
-      ],
-      "B": [
-       0.0001,
-       0.0001,
-       0.0001,
-       1.0
-      ]
-     },
-     "volume_density": 35.42017
-    },
-    "cover-feet.smoke": {
-     "base_color": [
-      0.9,
-      0.9,
-      0.88,
-      1.0
-     ],
-     "roughness": 0.25,
-     "transmission": 0.8,
-     "ior": 1.5,
-     "metallic": 0.0
+     "volume_density": 152.30675
     },
     "socket-dark.smoke": {
      "base_color": [

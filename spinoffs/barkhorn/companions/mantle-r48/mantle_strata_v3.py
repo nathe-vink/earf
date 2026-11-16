@@ -95,10 +95,36 @@ P = dict(
     rpm_motor=300.0,                                  # PROPOSAL until benched: the US Neo at 60 Hz (STOCK-AND-AUDIT.md 3.1)
     edge_chamfer=1.0,                                 # edge option C (the owner, 2026-11-11): the outer edges of deck and base, 1 mm, polished
     lid_t=3.0, lid_h=100.0, bumper=2.2,               # the lift-off cover (2026-11-15): 3 mm walls, 100 tall, on 2.2 mm clear feet
-    cover_sheet='trucast-tint',                       # the cover's sheet: 'trucast-tint' (the deck's tint) or 'trucast-clear' (the owner's pick)
+    cover_sheet='cover-cast',                         # the cover's sheet per tint (the owner, 2026-11-16, "stronger sheet"): COVER_BY_TINT
     housing_d=30.0, flange_d=50.0, flange_t=5.0,
     tint_ring=20.0,
 )
+
+
+# THE COVER'S SHEET PER TINT (the owner, 2026-11-16, his words: "stronger sheet"). 3 mm cell-cast: Ember, Poison and
+# Haze in the deck's own compound, the line's stock code at 3 mm; Fog in the deck's own compound, a custom cast (Fog has
+# no stock code); Dust, Acid, Ice and Smoke custom cast at k times the deck's dye per mm, k set so the most-absorbed
+# channel passes 0.634 a wall (renders/2026-11-10/barkhorn/mantle-r48/mantle-cover-light-2026-11-15.txt). One open
+# point: what a stock 3 mm sheet really looks like (the same dye per mm as the 12.7 or not) is settled by the
+# supplier's color chips. export_asset.py and v3_day.py --cover carry the same loadings.
+COVER_BY_TINT = {   # tint: (loading k, stock code or None for a custom cast)
+    'ember': (1.0, '2423'), 'poison': (1.0, '2092'), 'haze': (1.0, '2287'), 'fog': (1.0, None),
+    'dust': (2.25, None), 'acid': (2.45, None), 'ice': (3.05, None), 'smoke': (4.30, None)}
+
+
+def cover_line(t):
+    k, code = COVER_BY_TINT[t]
+    if code:
+        return f'{t.capitalize()}: stock TruCast {code}, the deck\'s own compound'
+    return f'{t.capitalize()}: custom cast, ' + ('the deck\'s own compound' if k == 1.0 else f'{k:.2f}x the deck\'s dye per mm')
+
+
+SHEETS['cover-cast'] = dict(
+    title='Cell-cast acrylic sheet for the cover, per tint (the owner, 2026-11-16, "stronger sheet"): '
+          + '; '.join(cover_line(t) for t in COVER_BY_TINT)
+          + '. Open point: what a stock 3 mm sheet really looks like is settled by the supplier\'s color chips; '
+          'a custom cast is priced at the stock tint rate until quoted, 4 x 8 ft',
+    density=1.19, sheet=(2440.0, 1220.0), usd_per_m2_mm=22.0, thicknesses=(3.0,))
 
 
 def derived(P):
@@ -373,7 +399,7 @@ def parts(P):
                # the render draws the cemented box as ONE solid (cover-top-shell): separate panels touching face to
                # face render a black seam in Cycles (it broke the top edge's light line into dashes, 2026-11-15)
                pieces=({'shell': (union(*lid.values()), 'acrylic-lid')} if k == 'cover-top' else {}),
-               notes=['the lift-off cover (2026-11-15): 3 mm cast sheet, ' + ('the deck\'s tint in the flavor\'s code' if P['cover_sheet'] == 'trucast-tint' else 'water-clear') + ', a top and four walls cemented with ACRIFIX 2R 0190 (the walls on the top\'s underside, the corners butt-jointed, the joints flame-polished), 448 x 358 x 100 outside, about 1.1 kg; outer edges eased R0.5 and polished',
+               notes=['the lift-off cover (2026-11-15): 3 mm cast sheet, ' + ('per tint (the owner, 2026-11-16, "stronger sheet": ' + '; '.join(cover_line(t) for t in COVER_BY_TINT) + ')' if P['cover_sheet'] == 'cover-cast' else 'the deck\'s tint in the flavor\'s code' if P['cover_sheet'] == 'trucast-tint' else 'water-clear') + ', a top and four walls cemented with ACRIFIX 2R 0190 (the walls on the top\'s underside, the corners butt-jointed, the joints flame-polished), 448 x 358 x 100 outside, about 1.1 kg; outer edges eased R0.5 and polished',
                       'inside 442 x 352 x 97: over the deck\'s top it clears the RB330\'s counterweight by about 33 above (66 high), 18 to its right and 23 behind (as posed in the frames), the spindle by 57, the record by 70; the walls stand 1 in from the deck\'s outline, on the flat inside its chamfer',
                       'located by eye to the deck\'s edge and held by the feet\'s grip; off, it stands on its top on a soft cloth (no hanger is supplied)'] if k == 'cover-top' else [])
           for k, s_ in lid.items()],
@@ -423,6 +449,7 @@ NOTES = [
     '1.0 ml of oil, a vented 440C spindle; the platter screwed from below into bonded inserts; a 4PDT bypass.',
     'Before the first sample: with the arm in hand, at rest and at the record\'s lead-in, check its counterweight clears the cover\'s back and right walls (18-23 by the CAD).',
     'The cover (2026-11-15): lift-off, 3 mm cast sheet cemented as a box, 448 x 358 x 100, about 1.1 kg, on four clear feet 2.2 thick; no hinges, no hinge blocks.',
+    'The cover\'s sheet (the owner, 2026-11-16, "stronger sheet"): ' + '; '.join(cover_line(t) for t in COVER_BY_TINT) + '. Open point: what a stock 3 mm sheet really looks like is settled by the supplier\'s color chips.',
 ]
 
 # The engine's look (studio/products/mantle-strata-v3.json, written by the build; the room and other lanes drop it into

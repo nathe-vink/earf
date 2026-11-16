@@ -3,12 +3,24 @@ all eight, taken from the final day set's own scenes (v3_day.py's .blend beside 
 studio stripped (lamps, camera, cards, flags, sweep). Writes spinoffs/barkhorn/asset/mantle-strata.blend and
 mantle-strata.manifest.json.
 
-    python3.11 export_asset.py -- <dir of final2 blends> <dir of final blends (Smoke)> <a scratch dir>
+    python3.11 export_asset.py -- <dir of final2 blends> <dir of final blends (Smoke)> <a scratch dir> [<dirs of the final cover blends, comma-separated>]
 """
 import bpy, sys, os, json, hashlib
 argv = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else sys.argv[1:]
 F2, F1, TMP = argv[0], argv[1], argv[2]
-COVER = argv[3] if len(argv) > 3 else None   # a frame's .blend with the cover on (v3_day.py --cover): its cover-* objects
+COVER = argv[3] if len(argv) > 3 else None   # dirs of the final cover frames' .blends, comma-separated (v3_day.py --cover solid): each tint's cover-* objects with their own material
+# THE COVER PER TINT (the owner, 2026-11-16, "stronger sheet"), as mantle_strata_v3.py's COVER_BY_TINT: loading k and
+# stock code; the strong four come from their -cover-strong frames
+COVER_BY_TINT = {'ember': (1.0, '2423'), 'poison': (1.0, '2092'), 'haze': (1.0, '2287'), 'fog': (1.0, None),
+                 'dust': (2.25, None), 'acid': (2.45, None), 'ice': (3.05, None), 'smoke': (4.30, None)}
+
+
+def cover_blend(t):
+    sx = '-cover-strong' if COVER_BY_TINT[t][0] != 1.0 else '-cover'
+    for d in COVER.split(','):
+        p_ = os.path.join(d, f'mantle-final-day-{t}{sx}.blend')
+        if os.path.exists(p_): return p_
+    raise FileNotFoundError(f'no {t}{sx} frame in {COVER}')
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.normpath(os.path.join(HERE, '..', '..', 'asset'))
 TINTS = ['ember', 'dust', 'acid', 'poison', 'ice', 'haze', 'fog', 'smoke']
@@ -30,14 +42,13 @@ for t in TINTS:
     for o in list(bpy.context.scene.collection.objects):
         col.objects.link(o); bpy.context.scene.collection.objects.unlink(o)
     if COVER:   # the lift-off cover (2026-11-15) as its own collection inside, off in renders by default: earlier pictures rebuild without it
-        with bpy.data.libraries.load(COVER, link=False) as (a_, b_):
-            b_.objects = [n for n in a_.objects if n.startswith('cover-')]
+        with bpy.data.libraries.load(cover_blend(t), link=False) as (a_, b_):   # the cover as rendered in its final frame:
+            b_.objects = [n for n in a_.objects if n.startswith('cover-')]          # solid for camera rays, the sheet for shadows
         cc = bpy.data.collections.new(f'Mantle Strata {t.capitalize()} Cover'); col.children.link(cc); cc.hide_render = True
-        tint_m = bpy.data.objects['plinth-L1-stack'].material_slots[0].material.copy(); tint_m.name = 'cover-tint'
         for o in b_.objects:
             cc.objects.link(o); o.hide_render = False
-            if o.name != 'cover-feet':
-                o.data.materials.clear(); o.data.materials.append(tint_m)
+            if o.name != 'cover-feet':   # named by its sheet, so nobody takes it for the thin-sheet test material
+                o.material_slots[0].material.name = f'cover-solid-{COVER_BY_TINT[t][0]:.2f}x'
     for o in col.all_objects:
         o.name = f'{o.name}.{t}'
         if o.data is not None and hasattr(o.data, 'name'): o.data.name = f'{o.data.name}.{t}'
@@ -75,7 +86,8 @@ def val(sock):
 man = {'asset': 'mantle-strata.blend', 'source_commit': 'the black-hardware finals (2026-11-11), their frames and model in the same commit', 'units': 'm, z up, the shelf at z 0',
        'build': 'no light of any kind; base Smoke 2074 solid; every visible piece of hardware satin black (post-satin-black, #18181A, roughness 0.5; the list in black_hardware), bright only the parts in bright_by_necessity; the deck underside satin; a record on the platter; no lid or hinges: the lift-off cover is in its own collection, off by default',
        'edge': 'C: a 1 mm even chamfer on the outer edges of the deck and base (in the CAD), the chamfer polished; the deck\'s outer edge satin, the base\'s diamond-polished, as signed (the owner, 2026-11-11)',
-       'cover': 'lift-off, 3 mm cast sheet in the deck\'s tint (the CAD\'s default; the owner\'s pick of tint or clear pending), 448 x 358 x 100 on four clear 2.2 mm feet; its objects (cover-*) in the child collection "Mantle Strata <Tint> Cover", off in renders by default (collection hide_render): turn it on to show the cover',
+       'cover': 'lift-off, 3 mm cell-cast sheet, 448 x 358 x 100 on four clear 2.2 mm feet; per tint (the owner, 2026-11-16, his words: "stronger sheet") in cover_by_tint; its objects (cover-*) in the child collection "Mantle Strata <Tint> Cover", off in renders by default (collection hide_render): turn it on to show the cover. Its material is the final frames\' own: a Glass BSDF (IOR 1.49) with the sheet\'s Volume Absorption for camera and glossy rays, and on shadow rays the slant-tinted thin sheet with no volume (Light Path, Is Shadow Ray). Render it with glossy and transmission bounces at 128 or more (the polished rims guide light: at 12 they render black) and refractive caustics off, as the finals',
+       'cover_by_tint': {t_: {'loading_x_deck_dye': k_, 'sheet': (f'stock TruCast {c_}' if c_ else 'custom cast'), 'frame': f'mantle-final-day-{t_}' + ('-cover-strong' if k_ != 1.0 else '-cover') + '.png'} for t_, (k_, c_) in COVER_BY_TINT.items()},
        'black_hardware': ['arm-puck', 'puck-screw-0', 'puck-screw-1', 'puck-screw-2', 'feet', 'foot-studs', 'pulley',
                           'platter-screws', 'motor-screws', 'bearing-spring', 'rear-hardware', 'arm-axle', 'arm-axle.001',
                           'arm-bias', 'arm-cw', 'hs-screw', 'hs-screw.001', 'hs-washer', 'hs-washer.001', 'cart-screw',

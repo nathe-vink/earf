@@ -50,3 +50,12 @@ Poison 0.67, Ember 0.43; strong: Acid 0.84, Dust 0.73, Ice 0.68, Smoke 0.43. The
 The finals' own frames run Blender's default blur_glossy 1.0 with caustics off; nothing in them depends on light
 passing through the deck's acrylic onto a matte surface (the base and posts under the deck and the deck's shadow on
 the floor get no light through it, so that shadow is untinted).
+
+THE OWNER'S CHOICE (2026-11-16), his words: "stronger sheet". The cover is cast at the strong loadings for Dust
+(2.25x), Acid (2.45x), Ice (3.05x) and Smoke (4.30x), and in the deck's own compound for Ember (stock 2423), Poison
+(2092), Haze (2287) and Fog (a custom cast: no stock code). The site's pictures: mantle-final-day-<tint>-cover.png for
+Ember, Poison, Haze and Fog; -cover-strong.png for Dust, Acid, Ice and Smoke. All sixteen cover frames now render the
+cover as the real 3 mm solid (v3_day.py --cover solid / solid-strong:k --cover-bounces 128), not the thin sheet above.
+The CAD (mantle_strata_v3.py COVER_BY_TINT, sheet 'cover-cast'), the parts list (the cover lines) and the asset
+(cover-solid-<k>x per tint, manifest cover_by_tint) carry the same. Open point: what a stock 3 mm sheet really looks
+like is settled by the supplier's color chips.
