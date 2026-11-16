@@ -1,3 +1,63 @@
+PHOTOMETRY, THE CORRECTED METHOD (2026-11-16; lamp_site.py since 9a6a2913: Filter Glossy off, Hemisphere's opal sheet
+acting once, Core's ball plain glass; renders/2026-11-15/barkhorn/lamp-site/off-match/notes-v3.md). The source of truth.
+The lamps as built today: each tint's LED (lamp_site.LED_CCT) and shell (TINT_LOAD), Hemisphere option 3 (24 LEDs, about
+1,000 lm at the LEDs), Core B (200 lm at its LED). One scale, WLM 3.2/490. Light out: launch/isphere.py, the enclosing
+sensor (Hemisphere 64 bounces, 128 spp; Core 256 spp). Lux: the table 0.5 m below Hemisphere's rim, paper #9A9A9A
+(albedo 0.323), 256 spp; centre r < 0.05 m; "0.3 m" and "0.6 m" are 40 mm squares on the lamp's x axis.
+
+Tint     | Hemisphere lm (below/above, down %)  | lux centre / 0.3 m / 0.6 m | Core lm (below/above)
+---------|--------------------------------------|----------------------------|----------------------
+Ember    |  334.1 (224.2/109.8,  67 % down) |  336 /  215 /  68             |  44.7 (29.5/15.3)
+Dust     |  353.4 (230.7/122.7,  65 % down) |  347 /  220 /  71             |  51.1 (33.3/17.8)
+Acid     |  419.4 (255.9/163.5,  61 % down) |  347 /  220 /  72             |  63.2 (37.6/25.6)
+Poison   |  282.1 (205.4/ 76.7,  73 % down) |  341 /  215 /  68             |  29.8 (21.5/8.3)
+Ice      |  307.5 (213.9/ 93.6,  70 % down) |  345 /  219 /  70             |  38.9 (27.0/11.9)
+Haze     |  280.7 (204.1/ 76.6,  73 % down) |  343 /  216 /  68             |  33.0 (24.0/9.1)
+Fog      |  521.4 (293.1/228.3,  56 % down) |  347 /  220 /  75             |  95.1 (53.3/41.7)
+Smoke    |  377.6 (240.5/137.0,  64 % down) |  346 /  219 /  71             |  52.7 (32.9/19.8)
+
+For the site: Hemisphere about 280 to 520 lm out (Ember 334); "about 340 lux" on a table 0.5 m below (335 to 347);
+about two thirds of its light down (56 % Fog to 73 % Poison and Haze; Ember 67 %). Core 30 to 95 lm out (Ember 44.7).
+
+The raw lines:
+hemisphere ember: ISPHERE dome-red total lm 334.1 above 109.8 below 224.2
+hemisphere ember: LUX dome-red centre r<0.05 335 r 0.15-0.2 289 r 0.3-0.35 207 albedo 0.323
+hemisphere ember: LUXPTS dome-red centre 336 x0.3 215 x0.6 68 ring r0.28-0.32 221 ring r0.58-0.62 73
+core ember: ISPHERE orb-red total lm 44.7 above 15.3 below 29.5
+hemisphere dust: ISPHERE dome-orange total lm 353.4 above 122.7 below 230.7
+hemisphere dust: LUX dome-orange centre r<0.05 345 r 0.15-0.2 296 r 0.3-0.35 212 albedo 0.323
+hemisphere dust: LUXPTS dome-orange centre 347 x0.3 220 x0.6 71 ring r0.28-0.32 227 ring r0.58-0.62 75
+core dust: ISPHERE orb-orange total lm 51.1 above 17.8 below 33.3
+hemisphere acid: ISPHERE dome-amber total lm 419.4 above 163.5 below 255.9
+hemisphere acid: LUX dome-amber centre r<0.05 344 r 0.15-0.2 296 r 0.3-0.35 213 albedo 0.323
+hemisphere acid: LUXPTS dome-amber centre 347 x0.3 220 x0.6 72 ring r0.28-0.32 227 ring r0.58-0.62 77
+core acid: ISPHERE orb-amber total lm 63.2 above 25.6 below 37.6
+hemisphere poison: ISPHERE dome-green total lm 282.1 above 76.7 below 205.4
+hemisphere poison: LUX dome-green centre r<0.05 339 r 0.15-0.2 291 r 0.3-0.35 207 albedo 0.323
+hemisphere poison: LUXPTS dome-green centre 341 x0.3 215 x0.6 68 ring r0.28-0.32 222 ring r0.58-0.62 73
+core poison: ISPHERE orb-green total lm 29.8 above 8.3 below 21.5
+hemisphere ice: ISPHERE dome-blue total lm 307.5 above 93.6 below 213.9
+hemisphere ice: LUX dome-blue centre r<0.05 343 r 0.15-0.2 295 r 0.3-0.35 211 albedo 0.323
+hemisphere ice: LUXPTS dome-blue centre 345 x0.3 219 x0.6 70 ring r0.28-0.32 226 ring r0.58-0.62 74
+core ice: ISPHERE orb-blue total lm 38.9 above 11.9 below 27.0
+hemisphere haze: ISPHERE dome-violet total lm 280.7 above 76.6 below 204.1
+hemisphere haze: LUX dome-violet centre r<0.05 341 r 0.15-0.2 292 r 0.3-0.35 208 albedo 0.323
+hemisphere haze: LUXPTS dome-violet centre 343 x0.3 216 x0.6 68 ring r0.28-0.32 223 ring r0.58-0.62 72
+core haze: ISPHERE orb-violet total lm 33.0 above 9.1 below 24.0
+hemisphere fog: ISPHERE dome-ice total lm 521.4 above 228.3 below 293.1
+hemisphere fog: LUX dome-ice centre r<0.05 345 r 0.15-0.2 296 r 0.3-0.35 212 albedo 0.323
+hemisphere fog: LUXPTS dome-ice centre 347 x0.3 220 x0.6 75 ring r0.28-0.32 226 ring r0.58-0.62 78
+core fog: ISPHERE orb-ice total lm 95.1 above 41.7 below 53.3
+hemisphere smoke: ISPHERE dome-black total lm 377.6 above 137.0 below 240.5
+hemisphere smoke: LUX dome-black centre r<0.05 344 r 0.15-0.2 295 r 0.3-0.35 212 albedo 0.323
+hemisphere smoke: LUXPTS dome-black centre 346 x0.3 219 x0.6 71 ring r0.28-0.32 226 ring r0.58-0.62 75
+core smoke: ISPHERE orb-black total lm 52.7 above 19.8 below 32.9
+
+====================================================================================================
+SUPERSEDED 2026-11-16 (the old method: Filter Glossy 1.0, the opal counted twice, Core's ball thin_shadow on refraction).
+Kept for the record; do not quote. The Core lines below were also older than the lamp as built (today's old rig gave
+23 to 65 lm).
+
 core ember: ISPHERE orb-red total lm 9.0 above 5.8 below 3.2
 core dust: ISPHERE orb-orange total lm 12.5 above 7.6 below 4.9
 core acid: ISPHERE orb-amber total lm 18.3 above 11.8 below 6.5
