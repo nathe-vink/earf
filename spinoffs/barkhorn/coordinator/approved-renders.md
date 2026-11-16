@@ -2920,6 +2920,17 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    cluster untouched (they keep the lighter Smoke until the owner decides on the mix), commit r47, push r49,
    one report. The lit placement for every later single: Hemisphere no key, fill on the back paper, kicker
    for the rim; Core no key, fill on the back paper, the even world, kicker. Mix singles restarted with it.
+   12:08 UTC, THE SMOKE LAMPS ARE ON THE PREVIEW AND CHECKED: site lane, r49 93515206ce (code r47 a78414f6ae),
+   deployment dpl_GDb4V4KTV5aDqRSSkuum5c6eNMuo READY; ten files changed (hemisphere-smoke full, 800 and
+   thumbnail; hemisphere-smoke-under full and thumbnail; core-smoke full, 800 and thumbnail; the two color
+   switcher cells), figures Hemisphere Smoke 260 lm and Core Smoke 35 lm. MY CHECK: on /#hemisphere-smoke the
+   "Lit" picture is the final -direct (mean difference 0.49 levels; 3.2 against the one with the bar, 1.5
+   against the one with discs, 9.7 against the old), "From below" the final -under (0.57); on /#core-smoke
+   "Lit" is the final (0.49); the Light lines read "About 260 lm ... about 340 lux" and "About 35 lm"; Ember's
+   pages unchanged (334 lm, 45 lm); the home color switcher's two Smoke lamp cells show the final lamps; no
+   broken pictures. Rows, cluster and core-row-day still show the lighter Smoke (waiting on the owner's yes or
+   no on the mix). One share link made for this deployment (expires 17 Nov 11:03 UTC) and sent to the owner in
+   chat only.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
