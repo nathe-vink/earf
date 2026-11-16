@@ -24,6 +24,18 @@ One photometric scale (lamp_pictures.py, round 13): 0.0065 W of Blender power fo
   620 lm), ~180 lm out of the ball (1.2 W), as the lit frosted face (ruling 3's exception): 9.3 W/m2 on its 0.0633 m2,
   both ways, its colour through the whole 9 mm wall.
 The thin shells pass shadow rays at their own transmission (lamp_pictures.thin_shadow), so the lamps light the set.
+
+THE CORRECTED METHOD (2026-11-16, renders/2026-11-15/barkhorn/lamp-site/off-match/notes-v3.md): three faults found
+while matching the lamps switched off, each checked against a converged reference and a measured bound:
+  1. Filter Glossy off (blur_glossy 0). scene.render_settings set it to 1.0; after a diffuse bounce it roughened glass
+     refraction, and rough glass at that strength loses energy, so every light reaching a matte surface through glass
+     was 30-40 % too dark.
+  2. Hemisphere's opal sheet counted once. The datasheet's T 54 % / R 39 % already describe the whole 3 mm sheet, so
+     its outer face is a pass-through, not a second refracting face. As a flat sheet the old model returned 1.21 of the
+     light that hit it; corrected, T 0.538.
+  3. Core's ball as plain refracting glass. thin_shadow on its faces on top of real refraction counted room light twice.
+RIG_LEGACY=1 restores the old behaviour, for comparison only. The approved lit look is unchanged (the lit glass within
+2 levels); the photometry rose (photometry.txt, corrected).
 """
 import math, os, sys
 
@@ -223,7 +235,11 @@ def build(frame, samples, scale):
             sphere(f'clear-in-{tint}', 90.0, c, acrylic(f'clear-in-{tint}', 0.0, 'Clear'), inward=True, cut=4.0, hole=H)
             # the scattering face is the opal's INSIDE (facing the LEDs, so its light is sampled directly; a clear inside
             # face would block every shadow ray to them and leave only caustic paths); its outside and edge clear
-            clr = acrylic(f'opal-face-{tint}', 0.0, 'Clear')
+            if os.environ.get('RIG_LEGACY'):
+                clr = acrylic(f'opal-face-{tint}', 0.0, 'Clear')
+            else:   # the corrected method (2026-11-16): the sheet's T and R are its whole; its outer face a pass-through
+                clr = bpy.data.materials.new(f'opal-face-{tint}'); clr.use_nodes = True; ntc_ = clr.node_tree; ntc_.nodes.clear()
+                ntc_.links.new(ntc_.nodes.new('ShaderNodeBsdfTransparent').outputs[0], ntc_.nodes.new('ShaderNodeOutputMaterial').inputs['Surface'])
             sphere(f'opal-{tint}', 89.0, c, clr, cut=0.0, hole=H)
             sphere(f'opal-in-{tint}', 86.0, c, opal(f'opal-{tint}'), inward=True, cut=0.0, hole=H)
             bm = bmesh.new(); n_ = 256
@@ -432,8 +448,11 @@ def build(frame, samples, scale):
             # is about 0.15, since their chart figure is at 20 mm). A test switch (2026-11-11), the default unchanged
             ld_ = float(os.environ.get('CORE_LOAD', 0.5 * TINT_LOAD.get(tint, 1.0)))
             Tb = shell_T(tname, ld_, 3.0)
-            sphere(f'ball-{tint}', 80.0, (x, y, zc), thin_shadow(acrylic(f'ball-{tint}', 0.0, tname, ld_), Tb), hole_below=20.0)
-            sphere(f'ball-in-{tint}', 74.0, (x, y, zc), thin_shadow(acrylic(f'ball-in-{tint}', 0.0, tname, ld_), Tb), inward=True, hole_below=20.0)
+            # the corrected method (2026-11-16): the ball as plain refracting glass (thin_shadow on top of refraction counted
+            # room light twice); RIG_LEGACY=1 for the old
+            Wb_ = (lambda m_: thin_shadow(m_, Tb)) if os.environ.get('RIG_LEGACY') else (lambda m_: m_)
+            sphere(f'ball-{tint}', 80.0, (x, y, zc), Wb_(acrylic(f'ball-{tint}', 0.0, tname, ld_)), hole_below=20.0)
+            sphere(f'ball-in-{tint}', 74.0, (x, y, zc), Wb_(acrylic(f'ball-in-{tint}', 0.0, tname, ld_)), inward=True, hole_below=20.0)
             ri = float(os.environ.get('CORE_R', '70')); zi = zc - float(os.environ.get('CORE_DZ', '0')) * MM
             sphere(f'core-{tint}', ri, (x, y, zi), opal(f'core-opal-{tint}'), hole_below=20.0)
             # the grommet, raised (base frame: its foot at z 23.0; the core's opening meets r 20 at zf)
@@ -798,6 +817,8 @@ def build(frame, samples, scale):
         sc.render.use_border = sc.render.use_crop_to_border = True
         sc.render.border_min_x, sc.render.border_max_x, sc.render.border_min_y, sc.render.border_max_y = bx0, bx1, by0, by1
     sc.cycles.caustics_refractive = True; sc.cycles.sample_clamp_indirect = float(os.environ.get('CLAMP', '0' if kind0 in ('dome', 'orb') else '20')) * 2.0 ** (-sc.view_settings.exposure)   # a radiance, in display terms   # round 3: the clamp cut the bore reflector's share (78 % out unclamped, 57 % clamped); sc.cycles.blur_glossy = 1.0
+    # the corrected method (2026-11-16): Filter Glossy off (scene.render_settings sets 1.0, which darkened light through glass)
+    sc.cycles.blur_glossy = 1.0 if os.environ.get('RIG_LEGACY') else float(os.environ.get('BLUR', '0'))
     # round 3 (the coordinator's photometry check): the bore's reflector sends light to the floor by reflection, a
     # reflective caustic; render_settings turns those off, which threw the reflector's share away
     sc.cycles.caustics_reflective = os.environ.get('REFL_CAUSTICS', '1') == '1'
