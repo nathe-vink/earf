@@ -2966,6 +2966,17 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    left, push held until the group is in). Biomes: nothing rendering, waiting for the owner's choice on the
    trail. Open with the owner: the trail (thinner or as now) and the lamp mix (yes or no). Next check about
    three hours on.
+   15:28 UTC, B-MIX G1 SEEN (lamps lane, r32-lamps-final 26a347c58d, pushed 15:24 UTC; staging final-mix/):
+   Hemisphere Ember 1.8, Acid 5, Ice 6, Haze 1.8, each as hero, direct and under, and a Smoke 1.2x hero; hero
+   and direct with the no-key placement, under with the old one; Ember at 3x samples; audits 0 in frame (the
+   Ember hero's audit had been stale and was re-run). MY SPOT CHECK: the four heroes against today's at small
+   size, Ember and Ice at full size: no discs, no bar on the shoulder, Ember's bowl clean (no blotches), paper
+   30 to 31 as today's, nothing clipped; a small pale glint from the kicker at the upper right of each shade
+   reads as a highlight. Bowl means, today to mix: Ember 145,83,70 to 102,64,48; Acid 196,188,130 to
+   200,189,129 (no visible change); Ice 94,158,201 to 51,129,209 (pale blue to deep blue); Haze 177,120,182
+   to 121,78,180 (lilac to violet). SHOWN TO THE OWNER as one sheet (today over the mix, four pendants) for
+   his yes or no. G2 (Ember details, cutaway, in use, cluster), G3 (the Core set) and G4 (mix photometry)
+   follow; one report at the end.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
