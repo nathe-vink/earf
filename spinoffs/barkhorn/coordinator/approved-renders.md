@@ -2794,6 +2794,23 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    pastel. Ordered from the lamps lane, from existing cells: THE MIX sheet (Hemisphere denser for Ember 1.8,
    Acid 5, Ice 6, Haze 1.8; Core lighter for Poison 0.6 and Dust 1.6; Smoke the pair; Fog left), today | mix, off
    and lit, both lamps; then B-SMOKE. The owner gets A2 and the mix in one message with the choice.
+   07:41 UTC, lamps lane aad599b0fc (`renders/2026-11-16/barkhorn/lamp-site/mix/mix-sheet.png`, notes.md,
+   mix-numbers.json): THE MIX, today | mix, off and lit, both lamps. Off gap today > mix and light out: Ember
+   (Hemisphere 1.8) 24 > 13, Hemisphere 334 > 307 lm. Dust (Core 1.6) 21 > 14, Core 51.1 > 62.2 lm. Acid
+   (Hemisphere 5) 19 > 8, 419 > 380 lm. Poison (Core 0.6) 23 > 9, Core 29.8 > 38.1 lm. Ice (Hemisphere 6) 22 > 5,
+   308 > 270 lm. Haze (Hemisphere 1.8) 28 > 10, 281 > 258 lm. Fog left, 14. Smoke 21 > 3, Hemisphere 378 > 260,
+   Core 52.7 > 35.1 lm. Lit: Ember deeper and still clear of Dust; Acid barely moves; Poison brighter, still
+   vivid; Ice and Haze deeper. DUST IS WORSE THAN AS BUILT (Core lit 217,124,86 > 210,157,124, orange toward
+   peach, for only 21 > 14 off, since Core cannot read lighter than about 117). B-SMOKE: Smoke at Hemisphere 1.2x
+   and Core 0.6x in lamp_site.py, the BOM source and both BOMs; Smoke's photometry Hemisphere 260.4 lm (76 %
+   down; 345 / 218 / 68 lux), Core 35.1 lm; hemisphere-smoke-direct rendered, -under and core-smoke rendering.
+   07:48 UTC, CHECKED. THE COORDINATOR'S RECOMMENDATION TO THE OWNER: THE MIX WITH DUST AND FOG LEFT AS BUILT
+   (Hemisphere denser in Ember 1.8, Acid 5, Ice 6, Haze 1.8; Core lighter in Poison 0.6; Smoke the pair). Shown
+   to him in two halves. So the pictures are ready when he answers, the lamps lane PREPARES the mix into a
+   STAGING folder (final-mix/, same names; final/ and the default loadings untouched; the mix photometry as a
+   separate table; the Hemisphere asset with the mix exported beside the present one). Installed only on his
+   yes. In the mix the Cores in the bar frames do not change (Ember, Dust, Acid Cores stay); only the Ember and
+   Acid pendants do, a little.
    Still one site push, when the Smoke f master is in.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
