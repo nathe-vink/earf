@@ -2892,6 +2892,9 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    finals stay (approved that way); order unchanged (disc fix on the two Smoke singles, then the mix singles).
    SHOWN TO THE OWNER: two sheets, today's lamps over the mix, lit, Hemisphere and Core, with the flaws named,
    as evidence for his yes or no on the mix.
+   10:54 UTC, stall guard: nothing stalled. Biomes: still testing the trail's softer edge (three test crops
+   rendering to about 11:40 UTC, then the region re-render of 2.5 to 4 h); lamps: on the disc fix for the two
+   Smoke singles. Next check about 90 minutes on.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
