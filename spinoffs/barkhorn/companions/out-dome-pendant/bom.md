@@ -2,7 +2,7 @@
 
 | item | make | qty | what | size | each, USD |
 |---|---|---|---|---|---|
-| shell | formed | 1 | Cast acrylic sheet 1/8 in, TruCast stock tint in the line's code, drape-formed; CUSTOM POURS (2026-11-11): Dust, Acid, Ice the same dye at 3x the stock loading, Smoke at the speakers' own pour (0.3x) | 160 cm3, 210 x 210 x 98 | 1,513.77 |
+| shell | formed | 1 | Cast acrylic sheet 1/8 in, TruCast stock tint in the line's code, drape-formed; CUSTOM POURS (2026-11-11): Dust, Acid, Ice the same dye at 3x the stock loading; Smoke 1.2x the stock loading (2026-11-16, matched to Core off; was 0.3x) | 160 cm3, 210 x 210 x 98 | 1,513.77 |
 | liner | formed | 1 | Cast acrylic sheet, clear (TruCast 0000), drape-formed over an aluminium mould | 265 cm3, 202 x 202 x 89 | 1,519.57 |
 | skin | formed | 1 | Perspex GS 041 3 mm opal, or equal (T 54%, R 39%, ASTM D1003): cast acrylic sheet, volume-diffusing, formed over an aluminium mould | 120 cm3, 188 x 188 x 85 | 1,212.95 |
 | rim | lathe | 1 | Cast acrylic tube, tinted through | 204 x 204 x 14 | 67.88 |

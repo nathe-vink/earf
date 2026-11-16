@@ -72,11 +72,28 @@ _iC = BASE_PROFILES['C'].index((62.8, 31))
 BASE_LOW = {'A': [(60, 0), (60, 1.5), (71.71, 1.5), (60, 30)], 'B': BASE_PROFILES['B'][1:5], 'C': BASE_PROFILES['C'][1:_iC + 1]}
 BASE_UP = {'B': BASE_PROFILES['B'][4:], 'C': BASE_PROFILES['C'][_iC:]}       # the touch ring (A: the CAD's ring)
 BASE_ALL = [(68.5, -6.5), (75.0, -6.5), (61.849, 25.5), (61.784, 26.754), (61.588, 27.995), (61.263, 29.208), (60.813, 30.381), (60.242, 31.5), (59.558, 32.553), (58.768, 33.53), (57.88, 34.418), (56.903, 35.208), (55.85, 35.892), (54.731, 36.463), (53.558, 36.913), (52.345, 37.238), (51.104, 37.434), (49.85, 37.5)]   # B all in its own colour (the default, 2026-11-11): the skirt to the floor (r 75 at z -6.5), the lip a bullnose R12 (forms in one piece from 6 mm)
-TINT_LOAD = {'orange': 3.0, 'amber': 3.0, 'blue': 3.0, 'black': 0.3}
+TINT_LOAD = {'orange': 3.0, 'amber': 3.0, 'blue': 3.0, 'black': 1.2}
+# Smoke (B-SMOKE, 2026-11-16, decided): Hemisphere 1.2x the stock loading (was 0.3x), Core 0.6x the chart loading (was
+# 0.3x), so the two read the same gray switched off (20,20,21 and 17,19,20). Core's own entries override TINT_LOAD;
+# RIG_LEGACY keeps the old 0.3x for both
+CORE_TINT_LOAD = {'black': 0.6}
+if os.environ.get('RIG_LEGACY'):
+    TINT_LOAD['black'] = 0.3; CORE_TINT_LOAD.pop('black')
 # TINT_LOAD_SET 'tint:L,...' (2026-11-15, the coordinator: a choice sheet of Smoke's gray at 0.5x and 0.8x): one tint's dye
 # loading changed, the rest as signed; unset, nothing changes
 for kv_ in filter(None, os.environ.get('TINT_LOAD_SET', '').split(',')):
-    TINT_LOAD[kv_.split(':')[0]] = float(kv_.split(':')[1])
+    TINT_LOAD[kv_.split(':')[0]] = float(kv_.split(':')[1]); CORE_TINT_LOAD.pop(kv_.split(':')[0], None)
+# LOAD_MIX=1 (2026-11-16, THE MIX as the coordinator recommends it to the owner; OFF by default until he picks):
+# Hemisphere denser in Ember 1.8, Acid 5, Ice 6, Haze 1.8 (Core keeps its loadings); Core lighter in Poison 0.6
+# (Hemisphere keeps 1); Smoke the approved pair (the default); Dust and Fog as built
+HEMI_MIX = {'red': 1.8, 'amber': 5.0, 'blue': 6.0, 'violet': 1.8}
+CORE_MIX = {'green': 0.6}
+if os.environ.get('LOAD_MIX'):
+    for t_, L_ in HEMI_MIX.items():
+        CORE_TINT_LOAD.setdefault(t_, TINT_LOAD.get(t_, 1.0)); TINT_LOAD[t_] = L_
+    CORE_TINT_LOAD.update(CORE_MIX)
+def core_load(t_):
+    return 0.5 * CORE_TINT_LOAD.get(t_, TINT_LOAD.get(t_, 1.0))
 # the site's colour keys (web.py HABITAT) to the tints
 COLOURS = {'red': 'Ember', 'orange': 'Dust', 'amber': 'Acid', 'green': 'Poison', 'blue': 'Ice', 'violet': 'Haze',
            'ice': 'Fog', 'black': 'Smoke dark'}
@@ -410,7 +427,7 @@ def build(frame, samples, scale):
                 lo_ = [(r_ + 3.0 if 0 < i < len(lo_) - 1 else r_, z_) for i, (r_, z_) in enumerate(lo_)]
                 up_ = [(up_[0][0] + 3.0, up_[0][1])] + up_[1:]
             if own:
-                ld_ = float(os.environ.get('CORE_LOAD', 0.5 * TINT_LOAD.get(tint, 1.0)))
+                ld_ = float(os.environ.get('CORE_LOAD', core_load(tint)))
                 sk = acrylic(f'base-skin-{tint}', 0.55, tname, ld_)        # satin outside: a fine bead-blast, as rough glass
                 revolve(f'base-skin-{base}-{tint}', lo_, sk)
                 revolve(f'base-skin-in-{base}-{tint}', lo_, acrylic(f'base-skin-in-{tint}', 0.0, tname, ld_), flip=True, off=6.0)
@@ -446,7 +463,7 @@ def build(frame, samples, scale):
             # the grommet raised to suit: its shoulder where the core's Ø40 opening meets it, a 3 mm spigot above
             # CORE_LOAD: the outer ball's dye loading (0.5: the chart figure at its 6 mm wall; the speakers' own pour at 6 mm
             # is about 0.15, since their chart figure is at 20 mm). A test switch (2026-11-11), the default unchanged
-            ld_ = float(os.environ.get('CORE_LOAD', 0.5 * TINT_LOAD.get(tint, 1.0)))
+            ld_ = float(os.environ.get('CORE_LOAD', core_load(tint)))
             Tb = shell_T(tname, ld_, 3.0)
             # the corrected method (2026-11-16): the ball as plain refracting glass (thin_shadow on top of refraction counted
             # room light twice); RIG_LEGACY=1 for the old

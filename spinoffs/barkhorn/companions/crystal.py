@@ -102,13 +102,13 @@ SOLIDS.setdefault('acrylic-opal-formed', dict(title='Perspex GS 041 3 mm opal, o
 # about $25 to $40 a ball [E], the rate set for about $30)
 SOLIDS.setdefault('acrylic-trucast-formed', dict(title='Cast acrylic sheet 6 mm, tinted through in the speaker\'s TruCast '
                                                  'code, drape-formed over an aluminium mould, polished both faces; CUSTOM POURS (2026-11-11): Dust, '
-                                                 'Acid, Ice at 3x the chart loading, Smoke at the speakers\' own pour',
+                                                 'Acid, Ice at 3x the chart loading; Smoke 0.6x the chart loading (2x the speakers\' own pour; 2026-11-16, matched to Hemisphere off)',
                                                  density=1.19, usd_per_cm3=0.06))
 SOLIDS.setdefault('acrylic-opal-core', dict(title='Cast acrylic sheet 3 mm, white opal (Hemisphere\'s diffuser\'s), formed '
                                             'over an aluminium core mould', density=1.19, usd_per_cm3=0.18))
 SOLIDS.setdefault('acrylic-tint-3-formed', dict(title='Cast acrylic sheet 1/8 in, TruCast stock tint in the line\'s code, '
                                                 'drape-formed; CUSTOM POURS (2026-11-11): Dust, Acid, Ice the same dye at 3x the '
-                                                'stock loading, Smoke at the speakers\' own pour (0.3x)', density=1.19, usd_per_cm3=0.05))
+                                                'stock loading; Smoke 1.2x the stock loading (2026-11-16, matched to Core off; was 0.3x)', density=1.19, usd_per_cm3=0.05))
 SOLIDS.setdefault('cast-acrylic-satin', dict(title='Black cast acrylic rod, turned, bead-blasted SATIN close to matte '
                                              '(2026-11-11; OPTION: 6061 turned, satin black anodized)', density=1.19,
                                              usd_per_cm3=0.06))
@@ -249,8 +249,8 @@ def cover_parts(p=N):
             Part('shell', shell, Machined('acrylic-tint-3-formed', 'formed', setup_usd=1500.0), finish='body', group='cover',
                  notes=['v3, the outside: 1/8 in (3 mm) stock TruCast in the line\'s code (Ember 2423, Poison 2092, Haze '
                         '2287, Dust 2422, Acid 9097, Ice 2069, Fog 0000, Smoke 2074), ' + note_formed + '; CUSTOM POURS (the owner, '
-                        '2026-11-11): Dust, Acid and Ice the same dye at 3x the stock sheet\'s loading, Smoke at the '
-                        'speakers\' own pour, 0.3x (about 54 % through 6 mm), not stock 2074; the one '
+                        '2026-11-11): Dust, Acid and Ice the same dye at 3x the stock sheet\'s loading, Smoke at 1.2x '
+                        'the stock loading (2026-11-16, was 0.3x, the speakers\' own pour; matched to Core switched off), not stock 2074; the one '
                         'tinted layer, seen unlit, glowing lit (15 to 20 % at 3 mm for 2423 and 2092). Its mould is v2\'s '
                         'shell mould (the outer face, R 100), the sheet 1/8 in instead of 10 mm']),
             Part('liner', liner, Machined('acrylic-clear-formed', 'formed', setup_usd=1500.0), finish='body',
@@ -652,7 +652,7 @@ def orb_parts(p=O):
                         '(no frost). Two hemispheres drape-formed from 6 mm (1/4 in) cast sheet in the speaker\'s TruCast '
                         'code for the tint (Ember 2423, Dust 2422, Acid 9097, Poison 2092, Ice 2069, Haze 2287, Fog 0000, '
                         'Smoke 2074), the chart figure held at the 6 mm wall; CUSTOM POURS (the owner, 2026-11-11): Dust, Acid and Ice '
-                        'at 3x that loading, Smoke at the speakers\' own pour (about 54 % through 6 mm), on the existing female mould [check with the '
+                        'at 3x that loading, Smoke at 0.6x the chart loading (2026-11-16, was the speakers\' own pour, 0.3x; matched to Hemisphere switched off), on the existing female mould [check with the '
                         'former: the 6 mm wall must form on the 9 mm wall\'s mould]; joined at the equator round the core '
                         'with a polymerising acrylic cement (Acrifix 192 kind), the joint turned and polished; the Ø40 '
                         'port cut at its foot']),
