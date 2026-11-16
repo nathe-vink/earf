@@ -2931,6 +2931,12 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    broken pictures. Rows, cluster and core-row-day still show the lighter Smoke (waiting on the owner's yes or
    no on the mix). One share link made for this deployment (expires 17 Nov 11:03 UTC) and sent to the owner in
    chat only.
+   12:26 UTC, stall guard: nothing stalled, but the trail's softer edge is still in TESTS after four hours
+   (biomes: test renders 08 and 09 running; last push 11:40 UTC 52b997d2c0, warp_detail). BOUNDED: after 08
+   and 09 no further test; one report with a 100 % sheet (present final | best candidates), a line on each,
+   its recommendation and the region's time; it may start the region re-render if a candidate passes its own
+   check; otherwise it stops and waits, and the present final stays on the preview. Lamps: mix singles
+   rendering in staging. Next check about 90 minutes on.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
