@@ -733,9 +733,14 @@ def build(frame, samples, scale):
     # KEY_AIM (2026-11-11, the coordinator: Ember off, one large overhead softbox, so the shell carries one long soft
     # highlight, not two ovals): where the key points; default the lamps' middle as before
     key.rotation_euler = (Vector(tuple(eval(os.environ.get('KEY_AIM', '(0, 0.1, 0.5)')))) - key.location).to_track_quat('-Z', 'Y').to_euler()
-    fill = SC.area('fill', (1.8, -1.2, 1.2), (0, 0, 0), (1.6, 1.6), 20.0 * K, '#EEF2F8'); fill.data.shape = 'ELLIPSE'
+    # FILL_POS, FILL_AIM, FILL_SIZE, FILL_W (2026-11-16, the coordinator: no studio lamp's reflection with a visible
+    # outline on the lit glass): the fill moved, aimed, sized and scaled (FILL_W x its power), e.g. behind the lamp as a
+    # wash on the back paper, which the bowl's front and the ball (but for a slim edge) cannot reflect; unset, as before
+    fp_ = tuple(eval(os.environ['FILL_POS'])) if os.environ.get('FILL_POS') else (1.8, -1.2, 1.2)
+    fs_ = float(os.environ.get('FILL_SIZE', '1.6'))
+    fill = SC.area('fill', fp_, (0, 0, 0), (fs_, fs_), 20.0 * K * float(os.environ.get('FILL_W', '1')), '#EEF2F8'); fill.data.shape = 'ELLIPSE'
     fill.data.color = blackbody(int(os.environ.get('STUDIO_K', '3000')))
-    fill.rotation_euler = (Vector((0, 0.1, 0.4)) - fill.location).to_track_quat('-Z', 'Y').to_euler()
+    fill.rotation_euler = (Vector(tuple(eval(os.environ.get('FILL_AIM', '(0, 0.1, 0.4)')))) - fill.location).to_track_quat('-Z', 'Y').to_euler()
     # round 3 (the gate: 88 % of the dock's pixels at 3 or less): a kicker, low behind and to the right, out of frame
     # (the audit holds it there), that draws the dock's and the cap's edges; real, unlinked, its own reflection honest
     # (the heroes only: in the wide rows it grazed the sweep's cove, a bright streak, and a narrow beam raked the floor)

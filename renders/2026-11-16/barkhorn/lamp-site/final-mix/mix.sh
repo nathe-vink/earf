@@ -24,15 +24,23 @@ DIR='((0.0,-1.04,0.55),(0.0,0.0,0.55),90.0)'
 UND='((0.287,-0.496,0.10),(0.0,0.0,0.52),60.0)'
 BELOW='((0.0,0.0,0.03),(0.0,0.0,0.5),50.0)'
 H="red:ember amber:acid blue:ice violet:haze"
+# THE PLACEMENT (2026-11-16, the coordinator, after B-SMOKE: no studio lamp's reflection with a visible outline on the
+# lit glass): the key a 3.0 x 0.5 m strip overhead, the fill a wash on the back paper behind the lamp, the paper about
+# 30 (final/smoke.sh). Every lit view where both stay out of frame: Hemisphere's hero and direct, Core's lit pictures.
+# The under and below views keep the old placement (from below the moved fill is in frame).
+NH=(KEY_STRIP=3.0,0.5 'KEY_POS=(0.0,-0.5,2.2)' 'KEY_AIM=(0,0,0.55)' 'FILL_POS=(0.0,0.75,2.1)' 'FILL_AIM=(0.0,1.0,0.8)' FILL_W=2.6)
+NC=(STUDIO_OFF=key 'FILL_POS=(0.0,0.55,1.3)' 'FILL_AIM=(0.0,1.0,1.3)' FILL_W=0.25 WORLD='#FFD4A5' WORLD_STR=0.38)   # Core: final/smoke.sh's
+# Ember at 1.8 (the coordinator: a blotchy cell pattern over the lit bowl in the mix row): more samples for that lamp
+spp() { [ "$1" = red ] && echo $(( $2 * ${RED_X:-3} )) || echo $2; }
 # ---- G1: Hemisphere singles (hero, direct, under) for Ember, Acid, Ice, Haze; the Smoke hero (direct/under: B-SMOKE's)
 for kv in $H black:smoke; do k=${kv%%:*}; n=${kv##*:}
-  r $D/audit/hemisphere-$n.txt aud $D/audit/hemisphere-$n.txt env "${LIT[@]}" DOMECAM="$DCAM" AUDIT=1 MASK=$D/masks/hemisphere-$n.png python3.11 lamp_site.py dome-$k
-  r $D/hemisphere-$n.png env "${LIT[@]}" DOMECAM="$DCAM" DENOISE=1 LAMP_OUT=$D/hemisphere-$n.png python3.11 lamp_site.py dome-$k --samples 192 --scale 1.0 > /dev/null 2>&1; fit $D/hemisphere-$n.png
+  r $D/audit/hemisphere-$n.txt aud $D/audit/hemisphere-$n.txt env "${LIT[@]}" "${NH[@]}" DOMECAM="$DCAM" AUDIT=1 MASK=$D/masks/hemisphere-$n.png python3.11 lamp_site.py dome-$k
+  r $D/hemisphere-$n.png env "${LIT[@]}" "${NH[@]}" DOMECAM="$DCAM" DENOISE=1 LAMP_OUT=$D/hemisphere-$n.png python3.11 lamp_site.py dome-$k --samples $(spp $k 192) --scale 1.0 > /dev/null 2>&1; fit $D/hemisphere-$n.png
   [ $k = black ] && continue
-  r $D/audit/hemisphere-$n-direct.txt aud $D/audit/hemisphere-$n-direct.txt env "${LIT[@]}" DENOISE=1 DOMECAM="$DIR" AUDIT=1 MASK=$D/masks/hemisphere-$n-direct.png python3.11 lamp_site.py dome-$k
-  r $D/hemisphere-$n-direct.png env "${LIT[@]}" DENOISE=1 DOMECAM="$DIR" LAMP_OUT=$D/hemisphere-$n-direct.png python3.11 lamp_site.py dome-$k --samples 128 --scale 1.0 > /dev/null 2>&1; fit $D/hemisphere-$n-direct.png
+  r $D/audit/hemisphere-$n-direct.txt aud $D/audit/hemisphere-$n-direct.txt env "${LIT[@]}" "${NH[@]}" DENOISE=1 DOMECAM="$DIR" AUDIT=1 MASK=$D/masks/hemisphere-$n-direct.png python3.11 lamp_site.py dome-$k
+  r $D/hemisphere-$n-direct.png env "${LIT[@]}" "${NH[@]}" DENOISE=1 DOMECAM="$DIR" LAMP_OUT=$D/hemisphere-$n-direct.png python3.11 lamp_site.py dome-$k --samples $(spp $k 128) --scale 1.0 > /dev/null 2>&1; fit $D/hemisphere-$n-direct.png
   r $D/audit/hemisphere-$n-under.txt aud $D/audit/hemisphere-$n-under.txt env "${LIT[@]}" DENOISE=1 DOMECAM="$UND" AUDIT=1 MASK=$D/masks/hemisphere-$n-under.png python3.11 lamp_site.py dome-$k
-  r $D/hemisphere-$n-under.png env "${LIT[@]}" DENOISE=1 DOMECAM="$UND" LAMP_OUT=$D/hemisphere-$n-under.png python3.11 lamp_site.py dome-$k --samples 128 --scale 1.0 > /dev/null 2>&1; fit $D/hemisphere-$n-under.png
+  r $D/hemisphere-$n-under.png env "${LIT[@]}" DENOISE=1 DOMECAM="$UND" LAMP_OUT=$D/hemisphere-$n-under.png python3.11 lamp_site.py dome-$k --samples $(spp $k 128) --scale 1.0 > /dev/null 2>&1; fit $D/hemisphere-$n-under.png
 done
 echo DONE > $D/G1-done.txt
 # ---- G2: Ember's details, the cutaway and in use, the row, the cluster
@@ -64,8 +72,8 @@ echo DONE > $D/G2-done.txt
 export ORBCAM='((0.09,-0.86,0.21),(0.0,0.0,0.10),70.0)'
 T="red:ember orange:dust amber:acid green:poison blue:ice violet:haze ice:fog black:smoke"
 for kv in $T; do k=${kv%%:*}; n=${kv##*:}
-  r $D/audit/core-$n.txt aud $D/audit/core-$n.txt env "${LIT[@]}" STUDIO=0.5 EV=-1 AUDIT=1 MASK=$D/masks/core-$n.png python3.11 lamp_site.py orb-$k
-  r $D/core-$n.png env "${LIT[@]}" STUDIO=0.5 EV=-1 LAMP_OUT=$D/core-$n.png python3.11 lamp_site.py orb-$k --samples 256 --scale 1.0 > /dev/null 2>&1; fit $D/core-$n.png
+  r $D/audit/core-$n.txt aud $D/audit/core-$n.txt env "${LIT[@]}" "${NC[@]}" STUDIO=0.5 EV=-1 AUDIT=1 MASK=$D/masks/core-$n.png python3.11 lamp_site.py orb-$k
+  r $D/core-$n.png env "${LIT[@]}" "${NC[@]}" STUDIO=0.5 EV=-1 LAMP_OUT=$D/core-$n.png python3.11 lamp_site.py orb-$k --samples 256 --scale 1.0 > /dev/null 2>&1; fit $D/core-$n.png
 done
 r $D/audit/core-row.txt aud $D/audit/core-row.txt env "${LIT[@]}" STUDIO=0.5 EV=-1 AUDIT=1 MASK=$D/masks/core-row.png python3.11 lamp_site.py lamps-orbs
 r $D/core-row.png env "${LIT[@]}" STUDIO=0.5 EV=-1 LAMP_OUT=$D/core-row.png python3.11 lamp_site.py lamps-orbs --samples 256 --scale 1.0 > /dev/null 2>&1; fit $D/core-row.png
