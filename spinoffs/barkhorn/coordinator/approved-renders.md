@@ -2688,6 +2688,15 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    box with its 3 mm edges; the dashes on the top-left rim read as a glint along the edge at site size and stay.
    SOLID WITH 128 BOUNCES IS THE MODEL FOR ALL EIGHT COVERS. Shown to the owner. Ember, Poison, Haze rendering;
    Dust, Acid, Ice, Smoke wait for his choice of strength.
+   01:29 UTC, Mantle lane 5637cfe9df: `mantle-final-day-{ember,poison,haze}-cover.png` (solid, 128 bounces; 295 to
+   313 s each; audits clean); corner crops `renders/2026-11-16/barkhorn/mantle-r48/
+   cover-solid-corners-fog-ember-poison-haze.png`. Label with the cover as a share of the bare frame: Fog 0.87,
+   Ember 0.46, Poison 0.71, Haze 0.70. Edges: Fog gray with the glint dashes, Ember black, Poison near-black green,
+   Haze a deep blue-violet line.
+   01:30 UTC, CHECKED at full size: THE FOUR FINAL COVER PICTURES PASS (Ember, Poison, Haze, Fog) and are shown
+   to the owner; to the site lane for the "With its cover" view, staged, no push. So nothing waits on his choice:
+   the Mantle lane renders Dust, Acid, Ice, Smoke in both strengths in the same model (-cover.png in the deck's
+   own material, -cover-strong.png at 2.25x, 2.45x, 3.05x, 4.30x); the site takes the set he picks.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
