@@ -2605,6 +2605,29 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    SHOWN TO THE OWNER: tints-off-v3 and a Smoke today | proposed picture (off and lit), with the two questions
    asked again on the corrected footing: Smoke as Hemisphere 1.2x with Core 0.6x, yes or no; the other seven tints
    left as they are (recommended: they are close in every tint) or matched. The earlier pictures are withdrawn.
+   16 Nov 00:11 UTC, stall guard: nothing stalled (Smoke f master 7 bands by 23:46; lamp_site.py fix 9a6a2913fa at
+   00:01; Mantle's twelve frames committed 23:53); next check 01:42.
+   16 Nov 00:18 UTC, Mantle lane 54ac11062b (frames), 8d7cd71923 (notes `mantle-cover-light-2026-11-15.txt`),
+   38b1e19bdc (the reference with Filter Glossy off): `renders/2026-11-10/barkhorn/mantle-r48/
+   mantle-final-day-<tint>-cover.png` x8 and `-cover-strong.png` for Dust, Acid, Ice, Smoke; audits 0 / 0 on all
+   twelve. Method: each face a thin sheet, Fresnel reflection over a straight-through transparent pass, tint
+   T^(0.5/cos of the refracted angle) per face; the finals' clamp and caustics-off unchanged. Label with the cover
+   as a share of without: Fog 0.94, Acid 0.89, Ice 0.85, Dust 0.84, Smoke 0.80, Haze 0.71, Poison 0.67, Ember
+   0.43; strong: Acid 0.84, Dust 0.73, Ice 0.68, Smoke 0.43. THE EMBER RESIDUAL IS CLOSED: the plain-refraction
+   reference with Filter Glossy off reads Fog 92.6 against the sheet's 89.6 and Ember 42.8 against 41.4; the old
+   low reference was Filter Glossy. Open in the lane's notes, not chased: the reference shows far more light on the
+   black record and at the cover's foot (lamp reflections the clamp tames; light piped along the wall). The Mantle
+   finals run blur_glossy 1.0 with caustics off; nothing in them depends on light through the deck onto a matte
+   surface (the deck's floor shadow is untinted). Strong loadings (the most-absorbed channel passes 0.634 per
+   wall): Dust 2.25x, Acid 2.45x, Ice 3.05x, Smoke 4.30x; Fog stays (a near-clear light gray). Parts list: stock
+   TruCast codes for Ember 2423, Poison 2092, Haze 2287, Ice 2069, Smoke 2074; Dust, Acid, Fog custom cast;
+   whether 3 mm stock carries the deck sheet's dye per mm is unconfirmed (the color chips settle it).
+   00:21 UTC, CHECKED at full size: the turntable under the cover is lit and readable in every tint; ACCEPTED FOR
+   THE OWNER'S CHOICE and SHOWN TO HIM: the eight covers, and the four pale tints in the deck's own material
+   against the stronger sheet (the coordinator recommends the stronger sheet for Dust, Acid, Ice, Smoke; Fog
+   clear). One thing to better in the final set: with thin sheets the cover's edges have lost their 3 mm and
+   their depth of color; the lane tests, on one Ember cell, the real solid for camera rays with shadow rays
+   passed (caustics off, so the light still passes once); the final eight render after his choice.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
