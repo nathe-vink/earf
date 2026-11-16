@@ -2068,7 +2068,8 @@ def rc_home(p, web):
 MANTLE_FINAL = 'renders/2026-11-10/barkhorn/mantle-r48/mantle-final-day-{name}.png'
 TROPOS_BAR = 'renders/2026-11-11/barkhorn/product/planet-bar/bar-backbar.png'   # Tropos in Acid at the bar (r33-speaker-horn 04c6fb4c)
 TROPOS_BAR_ALT = 'Tropos in Acid in the bar\\u2019s bay, a wall of records around it, Hemispheres and Cores over the counter.'
-MANTLE_COVER = {}   # {tint key: mantle-final-day-<name>-cover.png} as each passes; a tint without one shows no cover view
+MANTLE_COVER = {k: f'renders/2026-11-10/barkhorn/mantle-r48/mantle-final-day-{n}-cover.png' for k, n in   # as each passes (r48-mantle-design 5637cfe9);
+                (('red', 'ember'), ('green', 'poison'), ('violet', 'haze'), ('ice', 'fog'))}                 # a tint without one shows no cover view
 MANTLE_COVER_LINE = ('Lift-off dust cover in the deck&rsquo;s own tint: 3 mm cast acrylic, 448 x 358 x 100 mm, about 1.1 kg. '
                      'It rests on four small clear bumpers and lifts straight off; no hinges.')
 MANTLE_BAR = 'renders/2026-11-11/barkhorn/product/planet-bar/mantle-bar.png'   # Mantle in Ember at the bar (r33-speaker-horn 8ebd1690)
