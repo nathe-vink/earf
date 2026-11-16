@@ -2177,6 +2177,8 @@ def rc_products(p, web):
     fact(D['tt'], 'Posts', 'Four solid posts, 30 mm across, satin black')
     fact(D['tt'], 'Hardware', 'Satin black throughout', after='Posts')
     fact(D['tt'], 'Cover', MANTLE_COVER_LINE)      # the hinged lid is dropped (the coordinator 2026-11-16)
+    fact(D['tt'], 'Size', '450 wide, 360 deep, 161 high to the top of the arm; 196 high with the cover on (mm)')   # r48-mantle-design CAD, 2026-11-16
+    fact(D['tt'], 'Weight', 'About 11.6 kg; about 12.7 kg with the cover')
     p.rest = p.rest[:i] + json.dumps(D, separators=(',', ':')) + p.rest[j:]
     p.rest, n = re.subn(r"(\n(\s*)\['off', 'Front', [^\n]*\],)", lambda m: m.group(1) + "\n" + m.group(2) + "['bar', 'At the bar', () => '"
                         + TROPOS_BAR_ALT + "'],", p.rest, count=1)
