@@ -2074,6 +2074,7 @@ MANTLE_COVER_LINE = ('Lift-off dust cover in the deck&rsquo;s own tint: 3 mm cas
 MANTLE_BAR = 'renders/2026-11-11/barkhorn/product/planet-bar/mantle-bar.png'   # Mantle in Ember at the bar (r33-speaker-horn 8ebd1690)
 LAMP_FINAL = 'renders/2026-11-10/barkhorn/lamp-site/final/{f}.png'
 NAMES = dict(zip(RC_KEYS, ['ember', 'dust', 'acid', 'poison', 'ice', 'haze', 'fog', 'smoke']))
+CORE_LM = {'red': 45, 'orange': 51, 'amber': 63, 'green': 30, 'blue': 39, 'violet': 33, 'ice': 95, 'black': 53}      # lm out of the ball (photometry.txt 3205c545)
 HEMI_LM = {'red': 334, 'orange': 353, 'amber': 419, 'green': 282, 'blue': 308, 'violet': 281, 'ice': 521, 'black': 378}   # lm out, the corrected method (r32-lamps-final 3205c545, photometry.txt)
 # the bar (r33-speaker-horn ac342ff0, approved as a direction 2026-11-12; with the new record wall 9e8ddccf): five Hemispheres over the counter, two Cores on it;
 # on /lighting as the room, and an "At the bar" view for the tints in it. More frames join ROOM as they pass.
@@ -2161,10 +2162,12 @@ def rc_products(p, web):
                                       'color; CRI 90. The dome glows in its own color, and the light straight down is the lamp&rsquo;s own white: '
                                       + LAMP_LIGHT_TINTS)
     D['lamps']['dome']['lm'] = HEMI_LM
+    D['lamps']['orb']['lm'] = CORE_LM
     fact(D['lamps']['dome'], 'Fitting', 'Satin black anodized aluminum, with a quarter-turn catch')
     fact(D['lamps']['dome'], 'Hanging', 'A cloth-braided cord, a 600 mm drop as standard, cut to length; a canopy of satin black anodized '
                                         'aluminum, 150 mm across')
-    fact(D['lamps']['orb'], 'Light', 'A glow, not a reading light: the ball lights in its own color. The LED inside: ' + LAMP_LIGHT_TINTS)
+    fact(D['lamps']['orb'], 'Light', 'A glow, not a reading light: the ball lights in its own color. About {lm} lm out of the ball in this color. '
+                                     'The LED inside: ' + LAMP_LIGHT_TINTS)
     fact(D['lamps']['orb'], 'Base', 'Its own color, satin', after='Ball')
     fact(D['lamps']['orb'], 'Control', 'Touch the ring: tap to switch, hold to dim')
     D['lamps']['orb']['facts'] = [r for r in D['lamps']['orb']['facts'] if r[0] != 'Dock']   # under the skirt: Power says it charges on its dock
@@ -2173,8 +2176,7 @@ def rc_products(p, web):
     fact(D['tt'], 'Plinth', 'Cast acrylic in its color, about 25 mm, its edges satin with a fine polished bevel; it floats 40 mm over the base')
     fact(D['tt'], 'Posts', 'Four solid posts, 30 mm across, satin black')
     fact(D['tt'], 'Hardware', 'Satin black throughout', after='Posts')
-    if MANTLE_COVER:
-        fact(D['tt'], 'Cover', MANTLE_COVER_LINE)
+    fact(D['tt'], 'Cover', MANTLE_COVER_LINE)      # the hinged lid is dropped (the coordinator 2026-11-16)
     p.rest = p.rest[:i] + json.dumps(D, separators=(',', ':')) + p.rest[j:]
     p.rest, n = re.subn(r"(\n(\s*)\['off', 'Front', [^\n]*\],)", lambda m: m.group(1) + "\n" + m.group(2) + "['bar', 'At the bar', () => '"
                         + TROPOS_BAR_ALT + "'],", p.rest, count=1)
@@ -2196,6 +2198,8 @@ def rc_products(p, web):
           "const TT_VIEWS = [['studio', 'In the studio', c => `${D.tt.name} in ${c.name}.`],\n"
           "                  ['cover', 'With its cover', c => `${D.tt.name} in ${c.name}, its dust cover on.`],\n"
           "                  ['bar', 'At the bar', () => 'Mantle in Ember on the bar with a record on, a Core in Ember beside it, a Tropos and record shelves behind.'],")
+    p.rest, n = re.subn(r"\n\s*\['closed', 'Lid down', [^\n]*\],", '', p.rest)    # the hinged lid is dropped: no Lid down view
+    assert n == 1, 'rc_products: Lid down'
     p.sub("         ['row', 'All eight', () => 'Eight Hemispheres hung in a row, lit, one in each color.'],",
           "         ['bar', 'At the bar', () => 'Five Hemispheres over a bar in Acid, Ember and Dust, two Cores on the counter below.'],\n"
           "         ['below', 'From below', c => `Hemisphere from below, lit: the opal diffuser inside its ${c.name} shade.`],\n"
