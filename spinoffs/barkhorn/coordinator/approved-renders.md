@@ -2717,6 +2717,26 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    sets are sound. SHOWN TO THE OWNER as the final comparison for his choice of strength, tint by tint if he
    likes; the earlier thin-sheet comparison is withdrawn. The coordinator's recommendation stands for Smoke and
    Acid (stronger) and is open for Dust and Ice, whose own-material covers carry the color in their edges.
+   03:16 UTC, stall guard: Smoke f master 12 bands by 02:54 (rows to 32.4 %); only that lane working; next check
+   06:17.
+   16 Nov, read 04:48 UTC, THE OWNER'S ANSWERS, his words: "Smoke darker yes, match other lamps, stronger sheet".
+   04:48 UTC, coordinator, what follows from it (orders sent):
+   - SMOKE LAMPS: YES to the darker glass, Hemisphere 1.2x with Core 0.6x.
+   - THE OTHER SEVEN TINTS: MATCH HEMISPHERE AND CORE WHEN OFF (against the coordinator's recommendation to leave
+     them; his choice). The coordinator's way: MOVE CORE, NOT HEMISPHERE. Hemisphere reads lighter than Core in
+     every tint, so Core gets a lighter dye per tint until its off color meets Hemisphere's as built today.
+     Hemisphere's pictures and the pendants in the bar and hero frames then stand; Core gains light; Core's lit
+     glow moves toward Hemisphere's. Order to the lamps lane: Step A, scratch cells: the Core loading per tint
+     (off within about 6 levels where the builds allow; Fog and Poison stated), one sheet (Hemisphere off, Core
+     off matched, Core lit today | matched), the time for Step B; Step B on the coordinator's go: loadings into
+     lamp_site.py, components.json and the BOMs (two recipes per tint), photometry.txt, every Core picture and
+     every Hemisphere picture showing Smoke re-rendered, and the Core asset exported for the speaker lane. Asked
+     the speaker lane which of its frames show a Core (tint, size, time to re-render, or a region difference
+     where the Core's light stays local).
+   - MANTLE'S COVER: THE STRONGER SHEET for Dust (2.25x), Acid (2.45x), Ice (3.05x), Smoke (4.30x); the deck's own
+     compound for Ember, Poison, Haze, Fog. The site takes `-cover-strong.png` for those four (r48-mantle-design
+     00d873d093 / a90894a958); the Mantle lane brings CAD, parts list, asset and notes to that one story.
+   Still one site push, when the Smoke f master is in.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
