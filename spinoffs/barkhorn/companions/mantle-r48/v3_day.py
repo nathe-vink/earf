@@ -826,6 +826,13 @@ def prepare():
     if '--chamfer-satin' in mine: chamfer_edges(edge_polish=False)
     if '--edge-c' in mine: chamfer_c_finish()
     cover(mine[mine.index('--cover') + 1] if '--cover' in mine else None)
+    if '--cover-bounces' in mine:   # the solid cover's polished rims guide light by total internal reflection, and Cycles
+        # counts each reflection as a glossy bounce: at the rig's 12 the path is cut off and the rim renders black
+        # (the coordinator, 2026-11-16); this raises glossy, transmission and the total together
+        n_ = int(mine[mine.index('--cover-bounces') + 1]); c_ = bpy.context.scene.cycles
+        c_.glossy_bounces = n_; c_.transmission_bounces = n_; c_.max_bounces = max(c_.max_bounces, n_)
+        print(f'v3_day: bounces glossy {c_.glossy_bounces} transmission {c_.transmission_bounces} total {c_.max_bounces} '
+              f'diffuse {c_.diffuse_bounces} volume {c_.volume_bounces}', flush=True)
     if '--cell' in mine:   # a check cell: x0 x1 y0 y1 as fractions (y from the bottom), long samples, no denoiser
         i_ = mine.index('--cell'); r = bpy.context.scene.render; r.use_border = True; r.use_crop_to_border = True
         r.border_min_x, r.border_max_x, r.border_min_y, r.border_max_y = (float(v) for v in mine[i_ + 1:i_ + 5])

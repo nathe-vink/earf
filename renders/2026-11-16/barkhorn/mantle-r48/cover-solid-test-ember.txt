@@ -8,3 +8,13 @@ the label cell (1000 samples, no denoiser). Linear luminance x 255, mean of 20 x
 No mirror on the inside face. The edges are crisp and 3 mm, but BLACK, not deep red: a ray that enters the rim is
 held by total internal reflection along the panel and crosses 100+ mm of dye; with caustics off nothing feeds
 light into the slab, and a perfect slab has no scatter to lift it. Kept the thin sheet for the finals.
+
+BOUNCES (2026-11-16, the coordinator's test): v3_day.py --cover-bounces N raises glossy, transmission and the total
+together. cover-solid-bounces-12-128-512.png: the top-left rim, Fog above, Ember below, at 12, 128 and 512.
+  Fog: the vertical edge goes from 0/0/0 at 12 to 123/118/113 at 128 (gray); the top rim at 128 is dashed, light and
+  dark (column minimum median 59, from 29 to 71). 512 is the same as 128 to the pixel level: converged, not cut off.
+  Ember: black at all three (0/0/0; the top rim median 1). Not a cut-off any more (128 = 512) but the dye: one wall
+  passes red 0.945 per 3 mm, so light guided along a 358 to 448 mm panel keeps about e^-7 .. e^-8.5 of its red
+  (under 0.1 %), and green and blue nothing. A perfectly polished Ember rim is black.
+  Nothing else moves: the Ember label cell at 128 reads label 44.4, black record 6.4/6.5, deck 3.1, as at 12;
+  time per cell 86 to 102 s at 12, 128 and 512 alike.
