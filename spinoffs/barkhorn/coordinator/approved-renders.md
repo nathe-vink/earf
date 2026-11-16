@@ -2937,6 +2937,19 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    its recommendation and the region's time; it may start the region re-render if a candidate passes its own
    check; otherwise it stops and waits, and the present final stays on the preview. Lamps: mix singles
    rendering in staging. Next check about 90 minutes on.
+   12:30 UTC, THE TRAIL'S SOFTER EDGE: NO CANDIDATE PASSES (biomes lane, r48-biomes 305017d884, sheet
+   renders/2026-11-16/barkhorn/habitats/smoke-f-edge-tests-100.jpg and -300.jpg; about 4.3 h; the lane has
+   stopped, the present final w1 f0b2dd23b7 stays). Its findings: the scallops are the trail's own surface
+   where its edge is dense; the lumps are not the cause (no lumps scalloped more); finer volume steps change
+   nothing; the warp is the main cause; warp off is the best edge but takes the trail's bends away; one-octave
+   warp is no gain; the wider falloff with faded lumps is worse. The trail is very dense (optical depth about
+   40 through the core), so its visible edge is a thin, nearly hard surface. A soft edge needs much less
+   density where the edge is seen: a look change. I looked at the 300 % sheet: agreed. ORDERED: ONE LOOK PROOF
+   of a thinner trail (density about 2, edge [1.4, 0], warp 0.15, tuned toward: edge soft like the column's,
+   still clearly the meteor's trail at site size, same line, bends and color), the trail region at half
+   resolution set into the present final at 1200x1500, one sheet present | thinner plus the 100 % edge crop;
+   one proof, two at most, about 90 minutes; no region re-render; then the owner chooses. The owner's words on
+   the earlier trail were "a little more dissipated".
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
