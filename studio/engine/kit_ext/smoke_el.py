@@ -706,7 +706,8 @@ def trail(bpy, name, p, kit):
     # the edge (Smoke f, 2026-11-16, the coordinator: w1's trail had a crisp scalloped contour against the soft column):
     # `edge` [outer, inner] in local radii, density 0 at outer rising to full at inner (default [1.0, 0.3], as before);
     # `edge_gamma` > 1 lengthens the thin tail; `puff_soft` > 0 rolls the lumps off to zero smoothly (a softplus of that
-    # width) instead of clipping them, so the holes and the edge are not cut along a contour
+    # width) instead of clipping them, so the holes and the edge are not cut along a contour; `puff_edge` > 0 fades the
+    # lumps out where the core density is below it, so the edge is the smooth falloff, not the lumps' contour
     eo, ei = p.get('edge', [1.0, 0.3])
     core = smooth(math_('DIVIDE', radial, r), eo, ei)
     if p.get('edge_gamma', 1.0) != 1.0:
@@ -718,6 +719,9 @@ def trail(bpy, name, p, kit):
         lumpy = math_('MULTIPLY', math_('LOGARITHM', math_('ADD', 1.0, math_('EXPONENT', math_('DIVIDE', lin, sw))), math.e), sw)
     else:
         lumpy = math_('MAXIMUM', lin, 0.0)
+    pe = p.get('puff_edge', 0.0)
+    if pe > 0:      # the lumps fade out toward the edge (1 where core is 0, full lumps from core = pe): the edge is the smooth falloff
+        lumpy = math_('ADD', 1.0, math_('MULTIPLY', math_('SUBTRACT', lumpy, 1.0), smooth(core, 0.0, pe)))
     fade = smooth(t, 1.0, 1.0 - p.get('fade', 0.25))
     near = smooth(along, -0.5 * r0, 0.5 * r0)                         # cut off at the crash, not a tube past it
     spread = math_('POWER', math_('MULTIPLY', inv, r0), p.get('thin', 1.0))
