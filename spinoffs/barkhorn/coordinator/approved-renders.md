@@ -2907,6 +2907,19 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    frame). The lane's test: under the old placement Ice 6 and Acid 5 carry the same two discs; the new one
    removes them and leaves the color within 4 levels. hemisphere-smoke.png (old cap) removed from final/. The
    mix singles give Ember's Hemisphere 3x the samples against the blotches.
+   11:55 UTC, THE THREE SMOKE LAMP PICTURES ARE FINAL (r32-lamps-final 77cf28de5b, folder
+   renders/2026-11-10/barkhorn/lamp-site/final/): hemisphere-smoke-direct.png (pushed 11:54 UTC: no key; the
+   bar on the shoulder had been the fill's reflection, the wash behind the lamp faced down; the fill now faces
+   the back paper square and a declared 4000 K world lifts the paper; audit 0.0 in frame; emitters: the LED
+   faces, fill, kicker, the world), hemisphere-smoke-under.png (as at ac6eb67f64) and core-smoke.png (as at
+   45ebb67df4). MY CHECK of -direct at full size: bowl clean, 127,132,135 at the center as before, no outline
+   anywhere on it; shoulder plain black (2); cap apart from the paper (0 against 28); rim strip kept; paper 28
+   to 38 as in the 0.3x picture; nothing clipped. SHOWN TO THE OWNER: one sheet, before | final, the three
+   pictures. SITE LANE TOLD: re-cut the three (Hemisphere "Lit" from -direct, "From below", Core "Lit") with
+   the present crops wherever they are used, HEMI_LM Smoke 378 to 260, CORE_LM Smoke 53 to 35, rows and
+   cluster untouched (they keep the lighter Smoke until the owner decides on the mix), commit r47, push r49,
+   one report. The lit placement for every later single: Hemisphere no key, fill on the back paper, kicker
+   for the rim; Core no key, fill on the back paper, the even world, kicker. Mix singles restarted with it.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
