@@ -2660,6 +2660,27 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    corrected light figures from photometry.txt, the two Hemisphere pictures; code only for the Smoke habitat as
    the eighth place and for Mantle's "with its cover" view with the accepted spec line. ONE PUSH when the Smoke f
    master is in.
+   00:49 UTC, Mantle lane 3a3aa5d65b: THE FOG COVER'S EDGES CAME OUT BLACK (27,25,23) where the Fog deck's edge
+   reads about 150. Fog's wall passes 0.997 per 3 mm, so black is not the dye: the rig allows 12 glossy bounces and
+   a ray held inside the 3 mm slab is cut off. THE COORDINATOR'S "BLACK IS WHAT THE DYE DOES" WAS WRONG FOR FOG;
+   the batch stopped; the owner told.
+   00:52 UTC, site lane r47 2f9566fc90 (staged, not pushed): the eight Mantle finals re-cut; mantle-bar; Hemisphere's
+   Light fact with the corrected lumens and "about 340 lux"; "How it lights" now "about two thirds of its light
+   comes back down"; a build guard against the old lines; hemisphere-ember-off and -cap re-cut. The site stated no
+   lumen figure for Core: ADDED on the coordinator's word ("About {lm} lm out of the ball in this color": 45, 51,
+   63, 30, 39, 33, 95, 53). Mantle's Cover fact replaced now with the accepted lift-off line (the old one said
+   "on friction hinges"); the dead "Lid down" label removed.
+   01:05 UTC, Mantle lane a35f700a13 (`cover-solid-bounces-12-128-512.png`; v3_day.py `--cover-bounces N`): at 128
+   bounces Fog's vertical edge reads 123,118,113 and its top rim shows light and dark dashes (the parity of the
+   reflections flips along the rim); 512 equals 128, so it is converged. Ember stays 0,0,0 at every setting: there
+   it IS the dye (red 0.945 per 3 mm; under 0.1 % left after 358 to 448 mm). Label 44.4 and black record 6.4
+   unchanged; the time per cell the same. MANTLE'S SIZE AND WEIGHT from the CAD and parts list: 450 x 360 x 161 mm
+   to the top of the arm (deck top at 94), 196.3 mm with the cover on; made parts 10.27 kg, cover 1.13 kg, bought
+   parts about 0.8 kg estimated plus the phono stage 0.57 kg: ABOUT 11.6 KG, ABOUT 12.7 KG WITH THE COVER. The
+   README's 16.1 kg is stale.
+   01:07 UTC, coordinator: GO for Ember, Poison, Haze, Fog with --cover solid at 128 bounces, Fog first so its
+   dashed rim can be judged on the full frame at site size. Size and weight sent to the site lane for the two
+   lines that still carried the hinged lid's figures.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
