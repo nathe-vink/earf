@@ -2881,6 +2881,17 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    when it next renders: LAMPS_ROOT at ac6eb67f64 or later gives Hemisphere Smoke 1.2x without any switch; its
    shots.py CORE_LOAD 'black' must go from 0.15 to 0.3 (and 'green' 0.3 for Poison if the mix is a yes); no
    bar frame holds a Smoke lamp.
+   10:41 UTC, B-MIX ROWS SEEN (lamps lane, r32-lamps-final 8db63d9331, staging final-mix/: hemisphere-row.png,
+   core-row.png, 2400x800, audits 0.0 in frame). At full size against today's rows: the mix makes the lit
+   Hemispheres in Ice and Haze clearly deeper, Ember and Acid a little, Smoke darker gray; Core's Poison ball
+   brighter and cleaner (today's is dark and mottled), Smoke's darker. FLAWS in the staging rows: the studio
+   lamps' discs on Smoke (and, as in today's approved rows, faintly on every lamp; Poison's Hemisphere most,
+   every Core ball), and a blotchy cell pattern all over Ember's denser Hemisphere bowl (today's Ember has it
+   only along the lower edge). Lane told: no row re-render now; both rows once after the owner's yes or no on
+   the mix, with the decided loadings, the new studio placement and a cleaner Ember; the discs in today's
+   finals stay (approved that way); order unchanged (disc fix on the two Smoke singles, then the mix singles).
+   SHOWN TO THE OWNER: two sheets, today's lamps over the mix, lit, Hemisphere and Core, with the flaws named,
+   as evidence for his yes or no on the mix.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
