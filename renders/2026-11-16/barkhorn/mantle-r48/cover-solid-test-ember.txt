@@ -1,0 +1,10 @@
+COVER AS A SOLID FOR CAMERA RAYS, A SHEET FOR SHADOW RAYS (the coordinator's test, 2026-11-16, Ember, one cell)
+v3_day.py --cover solid (or solid-strong:k): Glass BSDF (IOR 1.49, roughness 0) with the deck's Volume Absorption
+for camera and glossy rays; on shadow rays the slant-tinted thin sheet (Fresnel loss kept) and no volume. Caustics
+off, the finals' clamp. Left column solid, right the thin sheet: top the cover's top-left rim (250 samples), bottom
+the label cell (1000 samples, no denoiser). Linear luminance x 255, mean of 20 x 20 px:
+  label: solid 44.4, thin sheet 41.4, refraction reference 42.8; black record: solid 6.4, thin sheet 6.0
+  (a first try fed the shadow ray the bare Transparent BSDF and lost the faces' Fresnel: label 47.9)
+No mirror on the inside face. The edges are crisp and 3 mm, but BLACK, not deep red: a ray that enters the rim is
+held by total internal reflection along the panel and crosses 100+ mm of dye; with caustics off nothing feeds
+light into the slab, and a perfect slab has no scatter to lift it. Kept the thin sheet for the finals.

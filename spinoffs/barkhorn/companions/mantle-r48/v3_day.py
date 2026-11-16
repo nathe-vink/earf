@@ -213,6 +213,12 @@ def cover(kind=None):
             o.data.materials.clear(); o.data.materials.append(f if o.name == 'cover-feet' else m)
         print('v3_day: the cover ON as the glass reference (caustics on)', flush=True)
         return
+    solid = kind.startswith('solid')   # 'solid' / 'solid-strong:k' (the coordinator, 2026-11-16): the real 3 mm solid for
+    # camera and glossy rays (refraction, the deck's Volume Absorption over the true path, so the edges deepen as the
+    # deck's do) and the slant-tinted thin sheet for SHADOW rays only, with no volume on them; caustics stay off, so
+    # the light still crosses the cover once, by the shadow ray
+    if solid:
+        kind = kind[6:] or 'tint'
     if kind.startswith('strong:'):
         k = float(kind.split(':')[1])
     dm = pl.material_slots[0].material; va = [n for n in dm.node_tree.nodes if n.type == 'VOLUME_ABSORPTION'][0]
@@ -253,6 +259,17 @@ def cover(kind=None):
     nt.links.new(geo.outputs['Backfacing'], sel.inputs['Factor']); nt.links.new(fr.outputs[0], sel.inputs['A']); nt.links.new(frb.outputs[0], sel.inputs['B'])
     nt.links.new(sel.outputs['Result'], mix.inputs[0]); nt.links.new(tr.outputs[0], mix.inputs[1]); nt.links.new(gl.outputs[0], mix.inputs[2])
     nt.links.new(mix.outputs[0], out.inputs['Surface'])
+    if solid:
+        lp = nt.nodes.new('ShaderNodeLightPath'); sw = nt.nodes.new('ShaderNodeMixShader')
+        gs = nt.nodes.new('ShaderNodeBsdfGlass'); gs.inputs['IOR'].default_value = 1.49; gs.inputs['Roughness'].default_value = 0.0
+        nt.links.new(lp.outputs['Is Shadow Ray'], sw.inputs[0]); nt.links.new(gs.outputs[0], sw.inputs[1]); nt.links.new(mix.outputs[0], sw.inputs[2])   # the whole sheet, so a shadow ray keeps the faces' Fresnel loss
+        nt.links.new(sw.outputs[0], out.inputs['Surface'])
+        vab = nt.nodes.new('ShaderNodeVolumeAbsorption'); vab.inputs['Density'].default_value = k * dens
+        vab.inputs['Color'].default_value = (*col, 1.0)
+        vm = nt.nodes.new('ShaderNodeMixShader')       # no volume on shadow rays: input 2 left empty
+        nt.links.new(lp.outputs['Is Shadow Ray'], vm.inputs[0]); nt.links.new(vab.outputs[0], vm.inputs[1])
+        nt.links.new(vm.outputs[0], out.inputs['Volume'])
+        kind = 'solid-' + kind
     Y = 0.2126 * T[0] + 0.7152 * T[1] + 0.0722 * T[2]
     print(f'v3_day: cover sheet {kind}: one 3 mm wall passes RGB {T[0]:.3f} {T[1]:.3f} {T[2]:.3f} (luminance {Y:.3f}) before its two faces\' Fresnel', flush=True)
     f = bpy.data.materials.new('cover-feet'); f.use_nodes = True; ft = f.node_tree; ft.nodes.clear()   # clear PU domes
