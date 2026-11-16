@@ -9,7 +9,9 @@ export LOAD_MIX=1
 D=/home/user/earf/renders/2026-11-16/barkhorn/lamp-site/final-mix
 S=/tmp/claude-0/-home-user-earf/e73bd455-48f8-5f69-9a3b-fa1e22e4e1e9/scratchpad/final-mix; mkdir -p $S $D/audit $D/masks
 L=/home/user/earf/renders/2026-11-12/barkhorn/lamp-site/legible
-r() { [ -s "$1" ] && return 0; shift; "$@"; }
+# BUDGET (s, default 4800): start no new picture after it, so each run ends inside the session's 2 h job limit; rerun to go on
+START=$(date +%s)
+r() { [ -s "$1" ] && return 0; [ $(( $(date +%s) - START )) -gt ${BUDGET:-4800} ] && { echo "BUDGET reached before $1"; exit 3; }; shift; "$@"; }
 aud() { o=$1; shift; "$@" > "$o.tmp" 2>&1; mv "$o.tmp" "$o"; }
 fit() { python3 -c "
 from PIL import Image; import os,sys

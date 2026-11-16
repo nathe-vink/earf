@@ -1,0 +1,28 @@
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:258: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  clr = bpy.data.materials.new(f'opal-face-{tint}'); clr.use_nodes = True; ntc_ = clr.node_tree; ntc_.nodes.clear()
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:215: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m = bpy.data.materials.new(nm); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+Timer 'STL Import' took 0.49 ms
+Timer 'STL Import' took 0.51 ms
+Timer 'STL Import' took 4.44 ms
+Timer 'STL Import' took 4.30 ms
+Timer 'STL Import' took 1.05 ms
+/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:277: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  cm = bpy.data.materials.new(f'collar-{tint}'); cm.use_nodes = True; nt = cm.node_tree
+Timer 'STL Import' took 0.94 ms
+Timer 'STL Import' took 0.36 ms
+Timer 'STL Import' took 0.71 ms
+Timer 'STL Import' took 0.83 ms
+Timer 'STL Import' took 0.83 ms
+Timer 'STL Import' took 0.24 ms
+Timer 'STL Import' took 4.69 ms
+Timer 'STL Import' took 0.57 ms
+Timer 'STL Import' took 0.46 ms
+00:09.661  cycles           | WARNING CUEW initialization failed: Error opening the library
+AUDIT dome-red hidden [] no-shadow [] lights [('fill', 'AREA', 2.1), ('kicker', 'AREA', 6.0), ('led-red-0', 'AREA', 0.621), ('led-red-1', 'AREA', 0.621), ('led-red-2', 'AREA', 0.621), ('led-red-3', 'AREA', 0.621), ('led-red-4', 'AREA', 0.621), ('led-red-5', 'AREA', 0.621), ('led-red-6', 'AREA', 0.621), ('led-red-7', 'AREA', 0.621), ('led-red-8', 'AREA', 0.621), ('led-red-9', 'AREA', 0.621), ('led-red-10', 'AREA', 0.621), ('led-red-11', 'AREA', 0.621), ('led-red-12', 'AREA', 0.621), ('led-red-13', 'AREA', 0.621), ('led-red-14', 'AREA', 0.621), ('led-red-15', 'AREA', 0.621), ('led-red-16', 'AREA', 0.621), ('led-red-17', 'AREA', 0.621), ('led-red-18', 'AREA', 0.621), ('led-red-19', 'AREA', 0.621), ('led-red-20', 'AREA', 0.621), ('led-red-21', 'AREA', 0.621), ('led-red-22', 'AREA', 0.621), ('led-red-23', 'AREA', 0.621)]
+HIDDENCAST dome-red: 2 hidden, 0 in frame
+   out         0.0 %  area lamp (ellipse) fill
+   out         0.0 %  area lamp (rectangle) kicker
+00:10.924  render           | Saved: '/home/user/earf/renders/2026-11-16/barkhorn/lamp-site/final-mix/masks/hemisphere-ember-fill.png'
+00:13.290  render           | Saved: '/home/user/earf/renders/2026-11-16/barkhorn/lamp-site/final-mix/masks/hemisphere-ember-kicker.png'
+CASTCHECK dome-red {'fill': 0.0, 'kicker': 0.0}
