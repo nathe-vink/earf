@@ -2640,6 +2640,26 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    the owner chose from; the thin sheet's pale edges read as film; the solid's label sits closer to the
    reference. No scattering added. GO for the four covers that do not depend on the owner's choice (Ember,
    Poison, Haze, Fog) with --cover solid; Dust, Acid, Ice, Smoke wait for his choice of strength.
+   00:43 UTC, lamps lane: (1) lamp_site.py 9a6a2913fa: the three fixes (Filter Glossy off; Hemisphere's opal outer
+   face a pass-through; Core's ball plain glass), RIG_LEGACY=1 restores the old; checked: Hemisphere Ember 334.1 lm,
+   Core Fog 95.1 lm, legacy 272.5 as published. (2) 3205c54593: THE SOURCE OF TRUTH FOR THE LAMPS' LIGHT FIGURES:
+   `renders/2026-11-10/barkhorn/lamp-site/final/photometry.txt`, measured directly, as built today. Hemisphere lm
+   (down share), lux at the center / 0.3 m / 0.6 m; Core lm: Ember 334 (67 %), 336/215/68; 44.7. Dust 353 (65 %),
+   347/220/71; 51.1. Acid 419 (61 %), 347/220/72; 63.2. Poison 282 (73 %), 341/215/68; 29.8. Ice 308 (70 %),
+   345/219/70; 38.9. Haze 281 (73 %), 343/216/68; 33.0. Fog 521 (56 %), 347/220/75; 95.1. Smoke 378 (64 %),
+   346/219/71; 52.7. The site's lines become "ABOUT 340 LUX" (the earlier "about 330" was a scaled estimate),
+   "about two thirds of its light down", Hemisphere 280 to 520 lm, Core 30 to 95 lm. components.json quotes only
+   the LEDs' own lumens, unchanged. (3) Re-rendered at the same names with the corrected method:
+   hemisphere-ember-off.png, hemisphere-ember-cap.png, core-base-options-day.png (Ember and Ice; its satin-black
+   row set explicitly again); audits 0.0.
+   00:45 UTC, CHECKED old against new at full size: hemisphere-ember-off and -cap pass (the same picture, the shade
+   a touch more open; 6.8 % and 9.8 % of pixels over 8 levels); core-base-options-day passes as a record (the
+   balls a little deeper; a thin bright ring on option A's base under the ball, the key focused by the shell;
+   option B, the base in use, shows none). TO THE SITE LANE, to stage on r47 with no push to r49 before the
+   coordinator's word: the eight Mantle finals without hinge blocks (269576701a), mantle-bar (cce235cf4e), the
+   corrected light figures from photometry.txt, the two Hemisphere pictures; code only for the Smoke habitat as
+   the eighth place and for Mantle's "with its cover" view with the accepted spec line. ONE PUSH when the Smoke f
+   master is in.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
 3. ONLY THEN REBUILD THE ASSETS (site, Book, social, deck) from this list, one batch per lock.
