@@ -2778,6 +2778,22 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    Hemisphere denser to meet Core as built; Hemisphere lit today | matched) and does the decided Smoke work
    (loadings, BOMs, photometry, the three Smoke singles). Rows, cluster and all other pictures held. Fog: the
    14 levels stay. "Stronger sheet" was Mantle's cover, not the lamps' opal (the lane asked).
+   06:18 UTC, stall guard: Smoke f master 18 bands by 05:46 (rows to 41.9 %); next check 07:49.
+   07:07 UTC, lamps lane e5504b6578 (`renders/2026-11-16/barkhorn/lamp-site/hemi-match/hemi-match-sheet.png`,
+   notes.md): A2, THE OTHER DIRECTION: Hemisphere denser to meet Core as built. Hemisphere dye | off Core vs
+   Hemisphere matched | lit glass today > matched | light out (down share): Ember 1 > 1.8 | 72,0,0 vs 71,13,12 |
+   255,165,157 > 253,145,136 | 334 > 307 lm (67 > 70 %). Dust 3 > 9 | 106,16,0 vs 109,15,5 | 249,185,163 >
+   253,149,139 | 353 > 312. Acid 3 > 5 | 81,72,0 vs 83,71,8 | 227,221,178 > 222,213,163 | 419 > 380. Poison 1 > 2.3
+   | 0,15,3 vs 15,17,15 | 15,188,87 > 0,93,40 | 282 > 251. Ice 3 > 6 | 0,36,86 vs 2,34,91 | 144,195,233 >
+   79,153,234 | 308 > 270. Haze 1 > 1.8 | 7,13,74 vs 15,23,73 | 202,150,207 > 141,95,201 | 281 > 258. The lux at
+   the center is unchanged within 2; light out falls 8 to 12 %, almost all up-light. Hemisphere's floor (its glass
+   faces' reflections, 13 to 15 per channel) stops Poison at a neutral near-black and leaves Ember 13 over.
+   07:11 UTC, CHECKED both sheets together: NEITHER DIRECTION IS RIGHT FOR EVERY TINT. Denser Hemisphere deepens Ice
+   and Haze well and barely moves Ember and Acid, but turns Poison black when off and murky lit and lands Dust's
+   lit color on Ember's. Lighter Core is fine for Poison and tolerable for Dust, but turns Ember, Ice and Haze
+   pastel. Ordered from the lamps lane, from existing cells: THE MIX sheet (Hemisphere denser for Ember 1.8,
+   Acid 5, Ice 6, Haze 1.8; Core lighter for Poison 0.6 and Dust 1.6; Smoke the pair; Fog left), today | mix, off
+   and lit, both lamps; then B-SMOKE. The owner gets A2 and the mix in one message with the choice.
    Still one site push, when the Smoke f master is in.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
