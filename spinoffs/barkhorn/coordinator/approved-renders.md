@@ -2748,6 +2748,16 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    core-bar-table. The older Core frames of 11 Nov in its folders are superseded.
    Coordinator: decided per frame once the lamps lane's sheet shows how much the LIT Core changes in Ember, Dust
    and Acid; where the change is below what shows at a glance, the frame stays, measured and recorded.
+   04:53 UTC, site lane r47 ea0e432ab4 (staged, not pushed): "With its cover" on all eight Mantle pages (the strong
+   sheet for Dust, Acid, Ice, Smoke); the lamps' figures live in two tables in the code (HEMI_LM, CORE_LM).
+   04:54 UTC, Mantle lane b64c6bd37b (no renders): CAD, PARTS LIST, ASSET AND NOTES ON THE OWNER'S CHOICE.
+   COVER_BY_TINT in mantle_strata_v3.py (loading and stock code per tint; the cover on its own sheet 'cover-cast';
+   fab package rebuilt, checks ok, 44 lines, $3,918). Parts list: Ember stock TruCast 2423, Poison 2092, Haze 2287
+   in the deck's own compound; Fog custom cast in the deck's own compound; Dust, Acid, Ice, Smoke custom cast at
+   2.25x, 2.45x, 3.05x, 4.30x the deck's dye per mm; the open point stated once (the supplier's color chips settle
+   what a stock 3 mm sheet looks like; a custom cast is priced at the stock rate until quoted). Asset: each tint's
+   cover at its chosen loading, off by default; the manifest says how to render it (128 bounces or more,
+   refractive caustics off). MANTLE'S COVER IS CLOSED but for the site push.
    Still one site push, when the Smoke f master is in.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
