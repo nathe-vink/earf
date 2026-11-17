@@ -3104,6 +3104,14 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    Hemisphere Ice and Core Poison match the installed finals (0.6 to 0.7 levels). Pictures are cached by
    browsers for up to an hour, so a returning visitor may see the old ones that long. Still to come: the copy
    fix, the rows, the cluster and the lit Dust, Poison and Fog pendants.
+   17 Nov 04:29 UTC, THE OWNER: "Forward hello@earf.world to my inbox". Not done yet, and it cannot be done from
+   here alone: the domain (DNS at Vercel, no MX record) needs a forwarding service, and the service treats
+   whoever claims the domain first as its owner, so the MX records must NOT be added before the owner has
+   claimed earf.world in his own account there (otherwise a stranger could claim it and receive the mail).
+   Told him the one step that is his: sign up at a forwarder (my pick: ImprovMX, free: 1 domain, 25 aliases,
+   500 mails a day), add earf.world with his inbox as the destination; then I add the two MX records and
+   the SPF record in Vercel DNS and we test. His inbox address is never put in DNS or in any request from
+   here. Noted for him: a reply from his inbox shows his own address unless "send as" is set up later.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
