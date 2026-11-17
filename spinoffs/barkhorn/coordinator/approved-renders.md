@@ -3277,6 +3277,24 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    row of eight Tropos in the lower half (rows 288 to 539 of 630) under an empty top; to be centered.
    Also seen: the custom cursor's ring (.cur-ring) sits at the page's top-left corner until the first
    mouse move (mouse devices only; phones do not have it).
+   17 Nov 11:12 UTC, THE HOME SHARE CARD IS CENTERED AND LIVE (main e4c4e0265d = the card build alone, r47 953c51d9b3;
+   pushed 11:10 UTC by a plain fast-forward from d4ae55544e; changes: img/rc/og-home.jpg and the generator
+   site_v2.py; vercel.json and every page unchanged; the public site served it from 11:11 UTC). The cause
+   (site lane): the card was cut from a fixed line of a frame whose tiles sit at its foot; it is now cut
+   to the row itself. MY CHECK: 1200 x 630, the same ground (244, 241, 236), the same row of eight Tropos
+   (it matches the old card at a shift of 101 rows, mean difference 1.9 levels, the JPEG), content in rows
+   190 to 438, so 190 px above and 191 below (before: 288 above, 90 below); viewed whole at 100 %: tiles
+   uncut. The file on the newest r49 preview and on www.earf.world equals the checked one (md5); the home
+   page's HTML is byte-identical to before; noindex still sent. Note: the share links of the two older
+   previews answered with Vercel's login page (only the newest preview's link worked), so the card was
+   checked on the newest preview, which carries the same file.
+   THE CURSOR FIX IS NOT LIVE (r49 942f0727c9, r47 f48140250f): in Chromium it does what was asked (my test
+   on its preview at 1440 x 900: hidden at load, shown after a real move, hidden after leaving, shown on
+   return, no errors), but it drops every pointermove whose movementX and movementY are zero, and WebKit
+   has reported 0 there for a mouse on macOS (bug 220194, said fixed in Safari 15.5) and undefined on iOS
+   (bug 248119, fixed in Safari 17); on such a browser the custom cursor would never appear (confirmed on
+   the preview with two dispatched moves that carry no movement values). Sent back 11:10 UTC: show on the
+   first move whose position differs from the remembered one, with a five-point test.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
