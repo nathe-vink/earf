@@ -3093,6 +3093,11 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    one-liners, spec tables, "How it lights", the color taglines and the headings are not touched; one report
    with a before -> after list so the owner can overrule. The build will carry the lamp mix as well. Nothing
    to main.
+   17 Nov 04:23 UTC, A STANDING RULE FROM THE OWNER: "You can put things live as they are ready but ask me if you
+   aren't sure or want to refine your bar for quality." So: each build goes to the public site after my own
+   check of its preview, without asking each time; I ask him when I am not sure a thing is good enough, or
+   when a judgment about quality needs his eye. On that word I moved main to the checked lamp-mix build: a
+   plain fast-forward, 93515206ce..3830c41ce7 (pushed 04:23 UTC); the production build follows by itself.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
