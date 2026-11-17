@@ -3098,6 +3098,12 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    check of its preview, without asking each time; I ask him when I am not sure a thing is good enough, or
    when a judgment about quality needs his eye. On that word I moved main to the checked lamp-mix build: a
    plain fast-forward, 93515206ce..3830c41ce7 (pushed 04:23 UTC); the production build follows by itself.
+   17 Nov 04:26 UTC, THE LAMP MIX IS LIVE AND CHECKED on https://www.earf.world/ (main at 3830c41ce7; the new
+   figures were first served at 04:25 UTC): Hemisphere 307, 353, 380, 282, 270, 258, 521, 260 lm with "about
+   340 lux" on each page, Core 45, 51, 63, 38, 39, 33, 95, 35 lm; the live "Lit" pictures of Hemisphere Ember,
+   Hemisphere Ice and Core Poison match the installed finals (0.6 to 0.7 levels). Pictures are cached by
+   browsers for up to an hour, so a returning visitor may see the old ones that long. Still to come: the copy
+   fix, the rows, the cluster and the lit Dust, Poison and Fog pendants.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
