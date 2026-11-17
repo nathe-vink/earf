@@ -871,15 +871,18 @@ def rc_captions(p):
 
 
 def rc_cursor(p):
-    """The cursor hidden until the mouse truly moves (the page's own synthetic move at load, with no movement, put it in
-    the top-left corner), hidden again when the mouse leaves the window, and the ring set on the pointer when it comes back."""
+    """The cursor hidden until the mouse truly moves: the first move only marks where the pointer is, the next one from
+    another place shows it, with no reliance on movementX/Y (WebKit has reported 0 or none); the page's own move at load put
+    it in the top-left corner, hidden again when the mouse leaves the window, and the ring set on the pointer when it comes back."""
     p.sub("  let x = -99, y = -99, rx = -99, ry = -99, sc = 1, scTo = 1, last = performance.now(), under = null;",
-          "  let x = -99, y = -99, rx = -99, ry = -99, sc = 1, scTo = 1, last = performance.now(), under = null, snap = true;")
+          "  let x = -99, y = -99, rx = -99, ry = -99, sc = 1, scTo = 1, last = performance.now(), under = null, snap = true, snapAt = null;")
     p.sub("    x = e.clientX; y = e.clientY; root.classList.add('cursor');",
-          "    if (snap && !e.movementX && !e.movementY) return;           // not a move: the browser's own at load\n"
-          "    x = e.clientX; y = e.clientY; if (snap) { rx = x; ry = y; snap = false; } root.classList.add('cursor');")
+          "    if (snap) {                    // shown only once the pointer has truly moved: the browser's own move at load stays put\n"
+          "      if (!snapAt) { snapAt = [e.clientX, e.clientY]; return; }\n"
+          "      if (snapAt[0] === e.clientX && snapAt[1] === e.clientY) return; }\n"
+          "    x = e.clientX; y = e.clientY; if (snap) { rx = x; ry = y; snap = false; snapAt = null; } root.classList.add('cursor');")
     p.sub("  root.addEventListener('pointerleave', () => root.classList.remove('cursor'));",
-          "  const away = () => { root.classList.remove('cursor'); snap = true; };\n"
+          "  const away = () => { root.classList.remove('cursor'); snap = true; snapAt = null; };\n"
           "  root.addEventListener('pointerleave', away); document.addEventListener('mouseout', e => { if (!e.relatedTarget) away(); });")
 
 
