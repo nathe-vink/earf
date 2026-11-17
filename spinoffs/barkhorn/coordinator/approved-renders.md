@@ -3187,6 +3187,23 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    UTC): the high sun and the air are built; the first crops showed nothing because the train sits lower than
    its crop window (about rows 500 to 700 at full size); A and B regions rendering at half resolution, about
    an hour, then the sheet. Lamps lane: step 2 still rendering (its session active at 08:44 UTC).
+   17 Nov 09:24 UTC, THE DISTANT TRAIN IS STOPPED (biomes lane, r48-biomes 90da1536cc,
+   renders/2026-11-17/barkhorn/habitats/smoke-f-distant-train-A.jpg; another 2.5 h; no A/B sheet). Built: the
+   scene's sun at azimuth 175, elevation -1, #FFA060, irradiance 10 (about four times the dusk sky's 2.48 on a
+   level surface), light-linked to the train's lit copy, the train split at the earth's shadow top; the air in
+   the train's shader (100 km visibility, scale height 8 km; 65 % of the contrast kept at the near end, 25 %
+   at the far end). It still does not show: the lane's first aim was off (the lens fits the sensor to the
+   width; the vanishing point is at about 1840, 500), the right region shows nothing either, the cause is not
+   isolated (linked light not reaching the volume, or too little contrast), each half-resolution region takes
+   about 40 min, and the clear sky right of the column is small. To go on would take 2 to 2.5 h more for a
+   proof, not certain. WHAT THE WORK DID GIVE: the frame WITHOUT the near trail: the column's flank soft, the
+   sky clean; the scallops came from the near trail. About 12 h have gone into this trail over two days. MY
+   CALL: stop the search; put the choice to the owner: no trail (my recommendation: minutes after impact the
+   low trail is gone, and it reads as real), keep the present trail, or more time on a distant one. SHOWN TO
+   HIM: the trail now | no trail (the lane's half-resolution region, upper right at site size). Meanwhile the
+   lane prepares the no-trail version as a CANDIDATE under new names (both near trail pieces off, sun at 0,
+   everything else as w1, full resolution, 48 samples, feathered into the w1 master, finish.py v1.1, audit);
+   the present final files are not replaced; it goes onto the site only if he chooses it.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
