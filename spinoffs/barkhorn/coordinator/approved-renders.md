@@ -3066,6 +3066,20 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    contact address is still hello@earf.world, which bounces (no MX record): with the owner. The lamp pictures
    on the public site are those of the release candidate (before the mix); the mix pictures follow after my
    check of the next r49 preview.
+   17 Nov 04:20 UTC, THE LAMP MIX IS ON A PREVIEW AND CHECKED, NOT YET PUBLIC. Site lane: r49 3830c41ce7 (code r47
+   0c5dbc708d), deployment dpl_EGHwzcojxm7pppSrfcZqeD9CdRyY READY; 93 site files (72 images, 21 pages with the
+   figures): all eight Core singles and core-row-day; Hemisphere Acid, Ice, Haze "Lit" (from -direct) and "From
+   below"; Hemisphere Ember Lit, From below, Off, Cap, Rim, Over a table, the "How it lights" cutaway and its
+   phone cut; the 16 color-switcher lamp cells; rows, cluster and the lit Dust, Poison, Fog pendants untouched.
+   MY CHECK: fifteen site pictures against the installed finals (r32-lamps-final 5fa6ef9464): mean difference
+   0.5 to 0.9 levels each; the sixteen figures read Hemisphere 307, 353, 380, 282, 270, 258, 521, 260 lm with
+   "about 340 lux" on every page, Core 45, 51, 63, 38, 39, 33, 95, 35 lm; six pendant pictures looked at
+   (clean, no discs, plain shoulders); vercel.json unchanged; main is an ancestor (3 commits). THE MOVE OF MAIN
+   TO 3830c41ce7 WAS REFUSED by this session's permission check (the first move, on the owner's "Yes go
+   public", had gone through). Not retried, no other route tried. Main stays at 93515206ce; the public site
+   shows the lamps as before the mix. ASKED THE OWNER for his word on this update and on whether later
+   checked updates may go live without asking each time. One share link made for the preview (expires 18 Nov
+   03:17 UTC), sent to the owner in chat only.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
