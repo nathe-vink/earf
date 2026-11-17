@@ -3217,6 +3217,10 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    the owner has the choice (no trail / keep the present trail / more time on a distant one) and was shown the
    whole frame, the trail now beside no trail. On his "no trail": site lane swaps the source for the home
    tile, the color page and Tropos's Out view to the candidate's -finish file; preview, check, live.
+   17 Nov 10:16 UTC, stall guard: nothing stalled. Lamps: the cluster is still rendering, the step 2 commit follows
+   (status of 08:45 UTC). Speaker: two of the four bar frames composited, two to go, then install, audits and
+   the report (status of 09:18 UTC). Biomes: nothing rendering; the trail waits for the owner's choice. Next
+   check about 90 minutes on.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
