@@ -1779,12 +1779,14 @@ function opening() {
 if (matchMedia('(pointer: fine)').matches && !reduce) {
   const root = document.documentElement, dot = el('div', { class: 'cur cur-dot', 'aria-hidden': 'true' }), ring = el('div', { class: 'cur cur-ring', 'aria-hidden': 'true' });
   document.body.append(dot, ring);
-  let x = -99, y = -99, rx = -99, ry = -99, sc = 1, scTo = 1, last = performance.now(), under = null, snap = true;
+  let x = -99, y = -99, rx = -99, ry = -99, sc = 1, scTo = 1, last = performance.now(), under = null, snap = true, snapAt = null;
   const speakerOf = a => { const k = a && (a.dataset.k || keyOf((/#(?:speaker|dome|orb|turntable|colou?r)-([a-z]+)/.exec(a.getAttribute('href') || '') || [])[1])); return k && BY[k] ? BY[k].col : null; };
   addEventListener('pointermove', e => {
     if (e.pointerType && e.pointerType !== 'mouse') return;
-    if (snap && !e.movementX && !e.movementY) return;           // not a move: the browser's own at load
-    x = e.clientX; y = e.clientY; if (snap) { rx = x; ry = y; snap = false; } root.classList.add('cursor');
+    if (snap) {                    // shown only once the pointer has truly moved: the browser's own move at load stays put
+      if (!snapAt) { snapAt = [e.clientX, e.clientY]; return; }
+      if (snapAt[0] === e.clientX && snapAt[1] === e.clientY) return; }
+    x = e.clientX; y = e.clientY; if (snap) { rx = x; ry = y; snap = false; snapAt = null; } root.classList.add('cursor');
     if (e.target === under || !e.target.closest) return;
     under = e.target;
     const ink = getComputedStyle(under).color, hit = under.closest('a, button, [role="tab"], .spin, #stage, summary, label');
@@ -1794,7 +1796,7 @@ if (matchMedia('(pointer: fine)').matches && !reduce) {
     ring.classList.toggle('drag', !!(under.closest('.spin') || (under.closest('#stage') && view === 'turn')));
   }, { passive: true });
   addEventListener('pointerdown', () => { scTo = 0.84; }); addEventListener('pointerup', () => { scTo = 1; });
-  const away = () => { root.classList.remove('cursor'); snap = true; };
+  const away = () => { root.classList.remove('cursor'); snap = true; snapAt = null; };
   root.addEventListener('pointerleave', away); document.addEventListener('mouseout', e => { if (!e.relatedTarget) away(); });
   addEventListener('blur', () => root.classList.remove('cursor'));
   (function tick(now) {
