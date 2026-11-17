@@ -698,6 +698,29 @@ def trail(bpy, name, p, kit):
     t = math_('MINIMUM', math_('MAXIMUM', math_('DIVIDE', along, Ld), 0.0), 1.0)
     r = math_('ADD', r0, math_('MULTIPLY', r1 - r0, math_('POWER', t, gr)))
     inv = math_('DIVIDE', 1.0, r)
+    # `shear` [[t, h, v], ...] (Smoke f, 2026-11-17, the owner: "account for time having passed since impact"): the line
+    # moved sideways by the wind since it was laid, piecewise linear in t (kinks where the wind changes with height), h
+    # metres across (u x up) and v metres in the plane (h x u); a sum of ramps, so the same offset in the shader and boxes
+    hd = u.cross(Vector((0.0, 0.0, 1.0))).normalized(); vd = hd.cross(u)
+    sh = sorted(p.get('shear', []))
+    if sh:
+        if sh[0][0] > 0: sh = [[0.0, sh[0][1], sh[0][2]]] + sh
+        if sh[-1][0] < 1: sh = sh + [[1.0, sh[-1][1], sh[-1][2]]]
+        ramps = []                                                    # (t_i, slope change in h, in v)
+        sl = [((b[1] - a[1]) / max(b[0] - a[0], 1e-6), (b[2] - a[2]) / max(b[0] - a[0], 1e-6)) for a, b in zip(sh, sh[1:])]
+        for i, (a, ds) in enumerate(zip(sh, sl)):
+            prev = sl[i - 1] if i else (0.0, 0.0)
+            ramps.append((a[0], ds[0] - prev[0], ds[1] - prev[1]))
+        def shear_at(tt):
+            return hd * sh[0][1] + vd * sh[0][2] + sum(((hd * dh + vd * dv) * max(tt - ti, 0.0) for ti, dh, dv in ramps), Vector((0.0, 0.0, 0.0)))
+        sv = vec('ADD', vec('SCALE', hd, scale=sh[0][1]), vec('SCALE', vd, scale=sh[0][2]))
+        for ti, dh, dv in ramps:
+            ramp = math_('MAXIMUM', math_('SUBTRACT', t, ti), 0.0)
+            sv = vec('ADD', sv, vec('SCALE', vec('ADD', vec('SCALE', hd, scale=dh), vec('SCALE', vd, scale=dv)), scale=ramp))
+        q = vec('SUBTRACT', q, sv)
+    else:
+        def shear_at(tt):
+            return Vector((0.0, 0.0, 0.0))
     qn = vec('SCALE', q, scale=inv)                                    # in local radii, so the noise grows with the tube
     w = noise_(qn, ws, p.get('warp_detail', 2.0), 0.5, seed)          # `warp_detail` 0: one octave, no fine folds at the edge
     off = vec('SCALE', vec('SUBTRACT', w.outputs['Color'], (0.5, 0.5, 0.5)), scale=math_('MULTIPLY', r, 2.0 * wa))
@@ -723,6 +746,8 @@ def trail(bpy, name, p, kit):
     if pe > 0:      # the lumps fade out toward the edge (1 where core is 0, full lumps from core = pe): the edge is the smooth falloff
         lumpy = math_('ADD', 1.0, math_('MULTIPLY', math_('SUBTRACT', lumpy, 1.0), smooth(core, 0.0, pe)))
     fade = smooth(t, 1.0, 1.0 - p.get('fade', 0.25))
+    if p.get('low_fade', 0.0) > 0:                                    # the oldest-looking low end lost into the column and haze
+        fade = math_('MULTIPLY', fade, smooth(t, 0.0, p['low_fade']))
     near = smooth(along, -0.5 * r0, 0.5 * r0)                         # cut off at the crash, not a tube past it
     spread = math_('POWER', math_('MULTIPLY', inv, r0), p.get('thin', 1.0))
     dens = math_('MULTIPLY', math_('MULTIPLY', math_('MULTIPLY', core, lumpy), math_('MULTIPLY', fade, near)),
@@ -738,7 +763,7 @@ def trail(bpy, name, p, kit):
     rot = u.to_track_quat('X', 'Z')
     while t0 < 1.0 - 1e-6:
         t1 = min(1.0, t0 + 3.0 * rad(t0) / Ld)
-        hw = rad(t1) * (max(1.0, p.get('edge', [1.0])[0]) + wa) * 1.15
+        hw = rad(t1) * (max(1.0, p.get('edge', [1.0])[0]) + wa) * 1.15 + (shear_at(t1) - shear_at(t0)).length / 2
         ln = (t1 - t0) * Ld
         bm = bmesh.new()
         g = bmesh.ops.create_cube(bm, size=1.0)
@@ -747,7 +772,7 @@ def trail(bpy, name, p, kit):
         me = bpy.data.meshes.new(f'{name}-{k}'); bm.to_mesh(me); bm.free()
         me.materials.append(m)
         ob = bpy.data.objects.new(f'{name}-{k}', me); bpy.context.scene.collection.objects.link(ob)
-        ob.location = E + u * (Ld * (t0 + t1) / 2)
+        ob.location = E + u * (Ld * (t0 + t1) / 2) + (shear_at(t0) + shear_at(t1)) / 2
         ob.rotation_mode = 'QUATERNION'; ob.rotation_quaternion = rot
         obs.append(ob); t0 = t1; k += 1
     return obs
