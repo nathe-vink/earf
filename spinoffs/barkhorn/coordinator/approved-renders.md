@@ -3043,6 +3043,21 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    Speaker lane told: test the pendants' regions of the six planet-bar frames with the mix (Hemisphere Ember
    1.8 and Acid 5; Dust and the Cores unchanged), no final re-renders, one report with present | mix crops
    and a proposal; CORE_LOAD 'black' and 'green' to 0.3.
+   17 Nov 04:09 UTC, MAIN MOVED: THE SITE GOES PUBLIC. The site lane's push to main was refused by its own session's
+   permission check; it tried no other route and said so. The owner's "Yes go public" was given in this
+   session, so I made the fast-forward from the coordinator's clone, after checking that main was still
+   856f80d70b and an ancestor of the release candidate: a plain push, no force, 856f80d70b..93515206ce (231
+   commits; 93515206ce is the commit behind the preview the owner held, dpl_GDb4V4KTV5aDqRSSkuum5c6eNMuo).
+   Vercel queued the production deployment dpl_Hm6SHyYusbqUo7GEFfBcw6CERGEM from main at once. No Vercel tool
+   was used to deploy or promote, no setting changed, vercel.json untouched (noindex stays). The split from now
+   on: the site lane builds and pushes r49, I check the preview, and I move main by fast-forward.
+   LAMPS LANE, STEP 1 DONE: r32-lamps-final 5fa6ef9464 (pushed 04:06 UTC): the mix installed in final/ (33
+   pictures with audits), the mix as lamp_site.py's default (LOAD_BUILT=1 gives the old loadings), pour lines
+   and both BOMs, photometry.txt's top table the source of truth: Hemisphere lm Ember 307.3, Dust 353.4, Acid
+   379.8, Poison 282.1, Ice 269.8, Haze 258.2, Fog 521.4, Smoke 260.4; lux at the center 336 to 347; 56 to 76 %
+   down; Core lm Ember 44.7, Dust 51.1, Acid 63.2, Poison 38.1, Ice 38.9, Haze 33.0, Fog 95.1, Smoke 35.1.
+   Site lane told to re-cut every site picture whose source changed in that commit and to set the figures, on
+   r47 and r49 only; rows, cluster and the lit Dust, Poison and Fog pendants follow in a second batch.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
