@@ -1972,7 +1972,7 @@ def rc_intro(p, web):
 
 
 # the seated habitats, 4:5, one per tint as each passes (r48-biomes); Haze (violet) and Smoke (black) still to come
-HAB_SRC = {'black': 'renders/2026-11-12/barkhorn/habitats/smoke-f-final-portrait-finish.jpg',         # the seated Smoke, present final (r48-biomes f0b2dd23); a softer trail to follow
+HAB_SRC = {'black': 'renders/2026-11-12/barkhorn/habitats/smoke-f-notrail-portrait-finish.jpg',       # the seated Smoke, no trail (the owner's pick 2026-11-17; r48-biomes 0ffe803a)
            'violet': 'renders/2026-11-12/barkhorn/habitats/haze-b-final-portrait-finish.jpg',          # the seated Haze final, finished (r48-biomes 7895f4d6)
            'blue': 'renders/2026-11-12/barkhorn/habitats/ice-final-portrait-finish.jpg',            # the seated Ice final, finished (r48-biomes 8f4c9fd9)
            'ice': 'renders/2026-11-12/barkhorn/habitats/fog-b-final-portrait-finish.jpg',           # the seated Fog final, finished (r48-biomes ba05aed5)
