@@ -3234,6 +3234,16 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    mirrored in the dark glass; the three direct pictures keep their lit glass within 3 levels of before
    (Dust 230,153,126; Poison 10,167,78; Fog 221,206,190) and their paper at 28 to 31. All pass. Site lane
    told to re-cut everything that comes from these files on r47 and r49, with no text change; one report.
+   17 Nov 10:36 UTC, THE SECOND LAMP BATCH IS LIVE AND CHECKED. Site lane: r49 0e4218930b (code r47 fc527e1e29),
+   preview dpl_5vwBNBCAA4LXhvin6PshoTqdtvEu; 23 images, no text: hemisphere-row, hemisphere-cluster, core-row
+   with thumbnails; the "Lit" pictures of Hemisphere in Dust, Poison and Fog (full, 800, thumbnail); the eight
+   Hemisphere cells of the color switcher (one shared crop, so all eight moved a little; Smoke's cell looked
+   at before and after: the same framing). I checked the preview (six pictures against the finals: 0.6 to 0.8
+   levels; the sixteen figures unchanged; no captions back), moved main by a plain fast-forward
+   780f205296..0e4218930b (10:32 UTC), and checked the public site once it served the new row (10:34 UTC):
+   Hemisphere in Poison "Lit", "All eight" and "In a group", Core's "All eight": all match the finals (0.6 to
+   0.8); figures unchanged. THE LAMP MIX IS NOW COMPLETE ON THE SITE except in the four bar pictures, which
+   the speaker lane is re-rendering at the pendants.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
