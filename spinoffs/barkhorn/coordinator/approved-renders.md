@@ -3221,6 +3221,19 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    (status of 08:45 UTC). Speaker: two of the four bar frames composited, two to go, then install, audits and
    the report (status of 09:18 UTC). Biomes: nothing rendering; the trail waits for the owner's choice. Next
    check about 90 minutes on.
+   17 Nov 10:21 UTC, LAMPS STEP 2 IS FINAL AND CHECKED (lamps lane, r32-lamps-final 5e86d76e62, pushed 10:19 UTC;
+   renders/2026-11-10/barkhorn/lamp-site/final/): hemisphere-row, core-row, hemisphere-cluster with the mix,
+   and hemisphere-dust, -poison, -fog as hero and direct, all on the no-key placement (the fill washes the
+   back paper and faces it; the even world lifts the paper; the cluster uses no studio lamp at all, only the
+   world at 1.0, because its camera looks up). Every picture has the in-frame audit (0) and a new reflection
+   audit (the frame with and without the studio lights visible to glossy rays): pendants' largest patch 0.02
+   to 0.17 % of the frame, which is the kicker's declared rim strip; rows and cluster under 10 px. MY CHECK:
+   the row strips at full size: all eight pendants and all eight balls without discs, Ember's bowl smooth,
+   Poison's discs gone, Ice deep blue, Haze violet, Smoke gray; the colored crescents at dome edges are the
+   neighboring lamps reflected, as before; the cluster's Smoke dome at full size shows only its neighbors
+   mirrored in the dark glass; the three direct pictures keep their lit glass within 3 levels of before
+   (Dust 230,153,126; Poison 10,167,78; Fog 221,206,190) and their paper at 28 to 31. All pass. Site lane
+   told to re-cut everything that comes from these files on r47 and r49, with no text change; one report.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
