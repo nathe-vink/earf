@@ -735,7 +735,7 @@ def trail(bpy, name, p, kit):
     core = smooth(math_('DIVIDE', radial, r), eo, ei)
     if p.get('edge_gamma', 1.0) != 1.0:
         core = math_('POWER', core, p['edge_gamma'])
-    lump = noise_(vec('SCALE', q2, scale=inv), ps, 6.0, 0.55, seed + 3.7)
+    lump = noise_(vec('SCALE', q2, scale=inv), ps, p.get('puff_detail', 6.0), 0.55, seed + 3.7)   # `puff_detail` lower: big soft puffs, no fine curdling
     lin = math_('ADD', 1.0, math_('MULTIPLY', math_('SUBTRACT', lump.outputs['Fac'], 0.5), 4.0 * pa))
     sw = p.get('puff_soft', 0.0)
     if sw > 0:      # softplus: sw * ln(1 + exp(lin / sw))
