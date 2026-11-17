@@ -3161,6 +3161,23 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    away that widens, fades and is lost before the column; the scene's own sun and sky only; kept clear of the
    column if the speckle shows. Proof of two variants (about five minutes old; ten to fifteen), about 90
    minutes, one report with the lane's own verdict; no full render before the owner chooses.
+   17 Nov 06:53 UTC, THE DISTANT TRAIN, FIRST TEST: BUILT BUT INVISIBLE (biomes lane, r48-biomes e2ebb80fcd,
+   renders/2026-11-17/barkhorn/habitats/smoke-f-distant-train-test.jpg; about 55 min; it stopped before the
+   region renders). Built: the near trail off; one real-scale train from 1.6 to 8 km of height, 12 to 60 km
+   away, on a path through the impact at 7.9 degrees elevation and 6.4 degrees right of the view (18 degrees
+   would put the whole path above the frame, which shows only about 10 degrees of elevation); vanishing point
+   at x 2000, y 300; seen nearly end-on, so the streak comes from wind drift (0.15 to 1.3 km, kinks every few
+   km, vertical waves of 150 to 250 m), about 400 px at full size toward the right edge; A about 5 min old
+   (440 m wide low, 180 m high, depth ~0.5), B 10 to 15 min (800/320 m, ~0.3, kinks and drift x1.6). WHY IT
+   DOES NOT SHOW: the scene's sun has irradiance 0, so the train is lit by the sky alone and vanishes against
+   it (even at ten times the density); the haze box ends at 420 m. Also learned: with the near trail removed,
+   the speckle and the scalloped edge are gone; they came from the near trail, not from the column. MY CALL,
+   within the light rule: the place's own sun lights the high train, as it does at dusk when the ground is
+   already in the earth's shadow: the scene's azimuth (175) and color, about one degree below the horizon, a
+   real strength for a sun that low, only above the shadow's top (about 1 to 2.5 km), nothing near touched,
+   declared in the emitter list and audit as "the sun, already set for the ground, lighting only the high
+   train"; the air between accounted for (far end fainter and nearer the sky's color). Then the A/B proof,
+   with the whole frame at site size for one variant; no full render before the owner chooses.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
