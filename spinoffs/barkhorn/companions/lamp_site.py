@@ -751,6 +751,12 @@ def build(frame, samples, scale):
         kick.data.color = blackbody(int(os.environ.get('STUDIO_K', '3000')))
         kick.rotation_euler = (Vector((0, 0, 0.05 if kind0 == 'orb' else 0.62)) - kick.location).to_track_quat('-Z', 'Y').to_euler()
 
+    # STUDIO_NOGLOSS=1 (2026-11-17, the coordinator: audit the reflections, not only what is in frame): the studio lights
+    # hidden from glossy rays only; the difference from the same frame without it is every studio reflection on the glass
+    if os.environ.get('STUDIO_NOGLOSS'):
+        for o_ in (key, fill, kick):
+            if o_ is not None:
+                o_.visible_glossy = False
     for nm_ in os.environ.get('LIGHTS_OFF', '').split(','):      # a probe: a studio light switched off
         if nm_ and nm_ in bpy.data.objects:
             bpy.data.objects.remove(bpy.data.objects[nm_], do_unlink=True)
